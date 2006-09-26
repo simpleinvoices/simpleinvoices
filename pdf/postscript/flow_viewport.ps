@@ -1,0 +1,35 @@
+/flow-viewport-create {            % => Box
+  << >>
+  dup /left 3 index get-left-padding put
+  dup /top 3 index get-top-padding put
+  
+  dup /width
+  3 index /get-width call-method
+  4 index get-padding-left add
+  4 index get-padding-right add
+  put
+
+  dup /height
+  3 index get-height
+  4 index get-padding-top add
+  4 index get-padding-bottom add
+  put
+
+  exch pop                         % => Viewport
+} def
+
+/flow-viewport-get-left {
+  /left get
+} def
+
+/flow-viewport-get-top {
+  /top get
+} def
+
+/flow-viewport-get-height {
+  /height get
+} def
+
+/flow-viewport-get-width {
+  /width get
+} def

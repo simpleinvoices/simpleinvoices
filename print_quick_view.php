@@ -1,0 +1,616 @@
+<?php
+#table
+include('./config/config.php'); 
+include("./lang/$language.inc.php");
+
+#get the invoice id
+$master_invoice_id = $_GET['submit'];
+
+
+#Info from DB print
+$conn = mysql_connect( $db_host, $db_user, $db_password );
+mysql_select_db( $db_name, $conn );
+
+#master invoice id select
+$print_master_invoice_id = 'SELECT * FROM si_invoices WHERE inv_id = ' . $master_invoice_id;
+$result_print_master_invoice_id  = mysql_query($print_master_invoice_id , $conn) or die(mysql_error());
+
+while ($Array_master_invoice = mysql_fetch_array($result_print_master_invoice_id)) {
+                $inv_idField = $Array_master_invoice['inv_id'];
+                $inv_biller_idField = $Array_master_invoice['inv_biller_id'];
+                $inv_customer_idField = $Array_master_invoice['inv_customer_id'];
+                $inv_typeField = $Array_master_invoice['inv_type'];
+                $inv_preferenceField = $Array_master_invoice['inv_preference'];
+		$inv_dateField = date( $config['date_format'], strtotime( $Array_master_invoice['inv_date'] ) );
+                $inv_noteField = $Array_master_invoice['inv_note'];
+
+
+};
+
+/*
+		$inv_it_total_tax_amount = $inv_it_gross_totalField / $inv_it_taxField  ;
+                $inv_dateField = $Array_master_invoice['inv_date'];
+*/
+
+
+#invoice_type query
+
+        $sql_invoice_type = 'SELECT inv_ty_description FROM si_invoice_type WHERE inv_ty_id = ' . $inv_typeField;
+
+        $result_invoice_type = mysql_query($sql_invoice_type, $conn) or die(mysql_error());
+
+        while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
+                $inv_ty_descriptionField = $invoice_typeArray['inv_ty_description'];
+	};
+
+#customer query
+$print_customer = "SELECT * FROM si_customers WHERE c_id = $inv_customer_idField";
+$result_print_customer = mysql_query($print_customer, $conn) or die(mysql_error());
+
+#biller query
+$print_biller = "SELECT * FROM si_biller WHERE b_id = $inv_biller_idField";
+$result_print_biller = mysql_query($print_biller, $conn) or die(mysql_error());
+
+while ($Array = mysql_fetch_array($result_print_customer)) {
+                $c_idField = $Array['c_id'];
+                $c_attentionField = $Array['c_attention'];
+                $c_nameField = $Array['c_name'];
+                $c_street_addressField = $Array['c_street_address'];
+                $c_cityField = $Array['c_city'];
+                $c_stateField = $Array['c_state'];
+                $c_zip_codeField = $Array['c_zip_code'];
+                $c_countryField = $Array['c_country'];
+		$c_phoneField = $Array['c_phone'];
+		$c_faxField = $Array['c_fax'];
+		$c_emailField = $Array['c_email'];
+};
+
+while ($billerArray = mysql_fetch_array($result_print_biller)) {
+                $b_idField = $billerArray['b_id'];
+                $b_nameField = $billerArray['b_name'];
+                $b_street_addressField = $billerArray['b_street_address'];
+                $b_cityField = $billerArray['b_city'];
+                $b_stateField = $billerArray['b_state'];
+                $b_zip_codeField = $billerArray['b_zip_code'];
+                $b_countryField = $billerArray['b_country'];
+                $b_phoneField = $billerArray['b_phone'];
+                $b_mobile_phoneField = $billerArray['b_mobile_phone'];
+                $b_faxField = $billerArray['b_fax'];
+                $b_emailField = $billerArray['b_email'];
+};
+
+
+#preferences query
+$print_preferences = "SELECT * FROM si_preferences where pref_id = $inv_preferenceField ";
+$result_print_preferences  = mysql_query($print_preferences, $conn) or die(mysql_error());
+
+while ($Array_preferences = mysql_fetch_array($result_print_preferences)) {
+                $pref_idField = $Array_preferences['pref_id'];
+                $pref_descriptionField = $Array_preferences['pref_description'];
+                $pref_currency_signField = $Array_preferences['pref_currency_sign'];
+                $pref_inv_headingField = $Array_preferences['pref_inv_heading'];
+                $pref_inv_wordingField = $Array_preferences['pref_inv_wording'];
+                $pref_inv_detail_headingField = $Array_preferences['pref_inv_detail_heading'];
+                $pref_inv_detail_lineField = $Array_preferences['pref_inv_detail_line'];
+                $pref_inv_payment_methodField = $Array_preferences['pref_inv_payment_method'];
+                $pref_inv_payment_line1_nameField = $Array_preferences['pref_inv_payment_line1_name'];
+                $pref_inv_payment_line1_valueField = $Array_preferences['pref_inv_payment_line1_value'];
+                $pref_inv_payment_line2_nameField = $Array_preferences['pref_inv_payment_line2_name'];
+                $pref_inv_payment_line2_valueField = $Array_preferences['pref_inv_payment_line2_value'];
+
+};
+
+
+#system defaults query
+$print_defaults = "SELECT * FROM si_defaults WHERE def_id = 1";
+$result_print_defaults = mysql_query($print_defaults, $conn) or die(mysql_error());
+
+
+while ($Array_defaults = mysql_fetch_array($result_print_defaults) ) {
+                $def_number_line_itemsField = $Array_defaults['def_number_line_items'];
+                $def_inv_templateField = $Array_defaults['def_inv_template'];
+};
+
+
+
+#Accounts - for the invoice - start
+#invoice total calc - start
+        $print_invoice_total ="select sum(inv_it_total) as total from si_invoice_items where inv_it_invoice_id =$inv_idField";
+        $result_print_invoice_total = mysql_query($print_invoice_total, $conn) or die(mysql_error());
+
+        while ($Array = mysql_fetch_array($result_print_invoice_total)) {
+                $invoice_total_Field = $Array['total'];
+#invoice total calc - end
+
+#amount paid calc - start
+        $x1 = "select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) as amount from si_account_payments where ac_inv_id = $inv_idField";
+        $result_x1 = mysql_query($x1, $conn) or die(mysql_error());
+        while ($result_x1Array = mysql_fetch_array($result_x1)) {
+                $invoice_paid_Field = $result_x1Array['amount'];
+#amount paid calc - end
+
+#amount owing calc - start
+        $invoice_owing_Field = $invoice_total_Field - $invoice_paid_Field;
+#amount owing calc - end
+}
+}
+#Accounts - for the invoice - end
+
+
+#Accounts - for the customer - start
+#invoice total calc - start
+        $print_invoice_total_customer ="select IF ( isnull( sum(inv_it_total)) ,  '0', sum(inv_it_total)) as total from si_invoice_items, si_invoices where  si_invoices.inv_customer_id  = $c_idField  and si_invoices.inv_id = si_invoice_items.inv_it_invoice_id";
+        $result_print_invoice_total_customer = mysql_query($print_invoice_total_customer, $conn) or die(mysql_error());
+
+        while ($Array_customer = mysql_fetch_array($result_print_invoice_total_customer)) {
+                $invoice_total_Field_customer = $Array_customer['total'];
+#invoice total calc - end
+
+#amount paid calc - start
+        $x2 = "select  IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount from si_account_payments, si_invoices, si_invoice_items where si_account_payments.ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = $c_idField  and si_invoices.inv_id = si_invoice_items.inv_it_id";
+        $result_x2 = mysql_query($x2, $conn) or die(mysql_error());
+        while ($result_x2Array = mysql_fetch_array($result_x2)) {
+                $invoice_paid_Field_customer = $result_x2Array['amount'];
+#amount paid calc - end
+
+#amount owing calc - start
+        $invoice_owing_Field_customer = $invoice_total_Field_customer - $invoice_paid_Field_customer;
+#amount owing calc - end
+}
+}
+
+        #Invoice Age - number of days - start
+        if ($invoice_owing_Field > 0 ) {
+                $invoice_age_days = (strtotime(date($config['date_format'])) - strtotime($inv_dateField)) / (60 * 60 * 24);
+                /*$invoice_age_days = (strtotime(date("Y-m-d")) - strtotime($inv_dateField)) / (60 * 60 * 24);*/
+                         $invoice_age = "$invoice_age_days days";
+        }
+        else {
+                $invoice_age ="";
+        }
+
+        #Invoice Age - number of days - start
+
+$display_block_top =  "
+	<div id=\"subheader\">
+	<table align=center>
+	<tr>
+		<td class=account colspan=8>Account Info</td><td width=5%></td><td width=5%></td><td class=account colspan=6><a href='customer_details.php?submit=$c_idField&action=view'>Customer acc</a></td>
+	</tr>
+	<tr>
+		<td class=account>Total:</td><td class=account>$pref_currency_signField$invoice_total_Field</td>              
+		<td class=account><a href='manage_payments.php?inv_id=$inv_idField'>Paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field</td>
+		<td class=account>Owing:</td><td class=account><u>$pref_currency_signField$invoice_owing_Field</u></td>
+		<td class=account><a href='text/age.html' class=\"greybox\">Age:</a></td><td class=account nowrap >$invoice_age</td>
+		<td></td><td></td>
+		<td class=account>Total:</td><td class=account>$pref_currency_signField$invoice_total_Field_customer</td>
+		<td class=account><a href='manage_payments.php?c_id=$c_idField'>Paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field_customer</td>
+		<td class=account>Owing:</td><td class=account><u>$pref_currency_signField$invoice_owing_Field_customer</u></td>
+	</tr>
+	</table>
+	</div id=\"subheader\">
+
+
+	<table align=center>
+	<tr>
+		<td colspan=6 align=center><b>$pref_inv_headingField</b></td>
+	</tr>
+        <tr>
+                <td colspan=6><br></td>
+        </tr>
+
+	<tr>
+		<td><b>$b_nameField</b></td><td colspan=5></td>
+	</tr>
+	<tr>
+		<td>$b_street_addressField,</td><td>Ph: $b_phoneField</td><td></td><td><b>$pref_inv_wordingField No.</b></td><td>$inv_idField</td><td></td>
+	</tr>	
+	<tr>
+		<td>$b_cityField,</td><td>Mob.: $b_mobile_phoneField</td><td></td><td><b>$pref_inv_wordingField date</b></td><td colspan=2>$inv_dateField</td>
+	</tr>	
+	<tr>
+		<td>$b_stateField, $b_zip_codeField</td><td>Fax: $b_faxField</td><td colspan=4></td>
+	</tr>	
+	<tr>
+		<td>$b_countryField</td><td>Email: $b_emailField</td>
+	</tr>	
+	<tr>
+		<td colspan=5><br><br></td>
+	</tr>	
+	<tr>
+		<td><i>Customer</i></td><td></td>
+	</tr>	
+
+	<tr>
+		<td colspan=2>$c_nameField</td><td colspan=4></td>
+	</tr>
+	<tr>
+		<td colspan=6 align=left>Attn: $c_attentionField,</td>
+	</tr>
+
+	<tr>
+		<td>$c_street_addressField,</td><td>Ph: $c_phoneField</td><td colspan=4></td>
+	</tr>	
+	<tr>
+		<td>$c_cityField,</td><td>Fax: $c_faxField</td><td colspan=4></td>
+	</tr>	
+	<tr>
+		<td>$c_stateField, $c_zip_codeField</td><td>Email: $c_emailField</td><td colspan=4></td>
+	</tr>	
+	<tr>
+		<td colspan=6>$c_countryField</td>
+	</tr>	
+
+";
+
+#PRINT DETAILS FOR THE TOTAL STYLE INVOICE
+
+if (  $_GET['invoice_style'] === 'Total' ) {
+        #invoice total layout - no quantity
+
+	#get all the details for the total style
+	#items invoice id select
+	$print_master_invoice_items = "SELECT * FROM si_invoice_items WHERE  inv_it_invoice_id =$master_invoice_id";
+	$result_print_master_invoice_items = mysql_query($print_master_invoice_items, $conn) or die(mysql_error());
+
+
+	while ($Array_master_invoice_items = mysql_fetch_array($result_print_master_invoice_items)) {
+                $inv_it_idField = $Array_master_invoice_items['inv_it_id'];
+                $inv_it_invoice_idField = $Array_master_invoice_items['inv_it_invoice_id'];
+                $inv_it_quantityField = $Array_master_invoice_items['inv_it_quantity'];
+                $inv_it_product_idField = $Array_master_invoice_items['inv_it_product_id'];
+                $inv_it_unit_priceField = $Array_master_invoice_items['inv_it_unit_price'];
+                $inv_it_taxField = $Array_master_invoice_items['inv_it_tax'];
+                $inv_it_tax_amountField = $Array_master_invoice_items['inv_it_tax_amount'];
+                $inv_it_gross_totalField = $Array_master_invoice_items['inv_it_gross_total'];
+                $inv_it_descriptionField = $Array_master_invoice_items['inv_it_description'];
+                $inv_it_totalField = $Array_master_invoice_items['inv_it_total'];
+
+	};
+
+	#products query
+	$print_products = "SELECT * FROM si_products WHERE prod_id = $inv_it_product_idField";
+	$result_print_products = mysql_query($print_products, $conn) or die(mysql_error());
+
+
+	while ($Array = mysql_fetch_array($result_print_products)) { 
+                $prod_idField = $Array['prod_id'];
+                $prod_descriptionField = $Array['prod_description'];
+                $prod_unit_priceField = $Array['prod_unit_price'];
+
+	};
+
+	#invoice_total total query
+	$print_invoice_total_total ="select sum(inv_it_total) as total from si_invoice_items where inv_it_invoice_id =$master_invoice_id"; 
+	$result_print_invoice_total_total = mysql_query($print_invoice_total_total, $conn) or die(mysql_error());
+
+
+	while ($Array = mysql_fetch_array($result_print_invoice_total_total)) {
+                $invoice_total_totalField = $Array['total'];
+
+	};
+	#all the details have bee got now print them to screen
+
+	$display_block_details =  "
+
+	        <tr>
+	                <td colspan=6><br><br></td>
+        	</tr>
+	        <tr>
+        	        <td colspan=6><b>Description</b></td>
+	        </tr>
+	        <tr>
+	                <td colspan=6>$inv_it_descriptionField</td>
+        	</tr>
+	        <tr>
+        	        <td colspan=6><br></td>
+	        </tr>
+	        <tr>
+	                <td></td><td><ttd><td></td><td><b>Gross Total</b></td><td><b>Tax</b></td><td><b>TOTAL</b></td>
+        	</tr>
+	        <tr>
+        	        <td></td><td></td><td></td><td>$pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td><u>$pref_currency_signField$inv_it_totalField</u></td>
+	        </tr>
+
+        	<tr>
+                	<td colspan=6><br><br></td>
+	        </tr>
+        	<tr>
+                	<td colspan=6><b>$pref_inv_detail_headingField</b></td>
+	        </tr>
+	";	
+   
+
+     }
+
+#INVOICE ITEMEISED and CONSULTING SECTION
+
+else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'Consulting' ) {
+
+	$display_block_details =  "
+        <tr>
+                <td colspan=6><br><br></td>
+        </tr>
+	";
+	
+	#show column heading for itemised style
+        if ( $_GET['invoice_style'] === 'Itemised' ) {
+		$display_block_details .=  "      
+		<tr>
+		<td colspan=6>
+		<table>
+		<tr>
+        	        <td><b>Qty</b></td><td><b>Description</b></td><td><b>Unit Price</b><td><b>Gross Total</b></td><td><b>Tax</b></td><td><b>TOTAL</b></td>
+	        </tr>";
+	}
+	#show column heading for consulting style
+        else if ( $_GET['invoice_style'] === 'Consulting' ) {
+                $display_block_details .=  "
+		<tr>
+		<td colspan=6>
+		<table>
+                <tr>
+                        <td><b>Qty</b></td><td><b>Item</b></td><td><b>Description</b></td><td><b>Unit Price</b><td><b>Gross Total</b></td><td><b>Tax</b></td><td><b>TOTAL</b></td>
+                </tr>";
+        }
+
+
+
+
+	#INVOIVE_ITEMS SECTION
+	#items invoice id select
+	$print_master_invoice_items = "SELECT * FROM si_invoice_items WHERE  inv_it_invoice_id =$master_invoice_id";
+	$result_print_master_invoice_items = mysql_query($print_master_invoice_items, $conn) or die(mysql_error());
+
+
+	while ($Array_master_invoice_items = mysql_fetch_array($result_print_master_invoice_items)) {
+                $inv_it_idField = $Array_master_invoice_items['inv_it_id'];
+                $inv_it_invoice_idField = $Array_master_invoice_items['inv_it_invoice_id'];
+                $inv_it_quantityField = $Array_master_invoice_items['inv_it_quantity'];
+                $inv_it_product_idField = $Array_master_invoice_items['inv_it_product_id'];
+                $inv_it_unit_priceField = $Array_master_invoice_items['inv_it_unit_price'];
+                $inv_it_taxField = $Array_master_invoice_items['inv_it_tax'];
+                $inv_it_tax_amountField = $Array_master_invoice_items['inv_it_tax_amount'];
+                $inv_it_gross_totalField = $Array_master_invoice_items['inv_it_gross_total'];
+                $inv_it_descriptionField = $Array_master_invoice_items['inv_it_description'];
+                $inv_it_totalField = $Array_master_invoice_items['inv_it_total'];
+	/*
+	};
+	*/
+
+	#products query
+	$print_products = "SELECT * FROM si_products WHERE prod_id = $inv_it_product_idField";
+	$result_print_products = mysql_query($print_products, $conn) or die(mysql_error());
+
+
+	while ($Array = mysql_fetch_array($result_print_products)) { 
+                $prod_idField = $Array['prod_id'];
+                $prod_descriptionField = $Array['prod_description'];
+                $prod_unit_priceField = $Array['prod_unit_price'];
+	/*
+	};
+	*/
+
+	#invoice_total total query
+	$print_invoice_total_total ="select sum(inv_it_total) as total from si_invoice_items where inv_it_invoice_id =$master_invoice_id"; 
+	$result_print_invoice_total_total = mysql_query($print_invoice_total_total, $conn) or die(mysql_error());
+
+
+	while ($Array = mysql_fetch_array($result_print_invoice_total_total)) {
+                $invoice_total_totalField = $Array['total'];
+
+	#invoice total tax
+	$print_invoice_total_tax ="select sum(inv_it_tax_amount) as total_tax from si_invoice_items where inv_it_invoice_id =$master_invoice_id"; 
+	$result_print_invoice_total_tax = mysql_query($print_invoice_total_tax, $conn) or die(mysql_error());
+
+	while ($Array_tax = mysql_fetch_array($result_print_invoice_total_tax)) {
+                $invoice_total_taxField = $Array_tax['total_tax'];
+
+
+	/*
+	};
+	*/	
+
+
+	#calculation for each line item
+	$gross_total_itemised = $prod_unit_priceField * $inv_it_quantityField ;
+	/*
+	$tax_per_item =  $prod_unit_priceField / $inv_it_taxField;
+	$total_tax_per_line = $tax_per_item  * $inv_it_quantityField ;
+	$total_per_line = $gross_total_itemised + $total_tax_per_line ;
+	*/
+
+	#calculation for the Invoice Total
+
+	#MERGE ITEMISED AND CONSULTING HERE
+	#PRINT the line items
+	#show the itemised invoice
+	if ( $_GET['invoice_style'] === 'Itemised' ) {
+
+		$display_block_details .=  "
+	        <tr>
+	                <td>$inv_it_quantityField</td><td>$prod_descriptionField</td><td>$pref_currency_signField$inv_it_unit_priceField</td><td>$pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td>$pref_currency_signField$inv_it_totalField</td>
+	        </tr>
+		";
+	}	
+	#show the consulting invoice 
+	else if ( $_GET['invoice_style'] === 'Consulting' ) {
+		
+	        #item description - only show first 20 characters and add ... to signify theres more text
+	        $max_length = 20;
+	        if (strlen($inv_it_descriptionField) > $max_length ) {
+	                $stripped_item_description = substr($inv_it_descriptionField,0,20);
+	                $stripped_item_description .= "...";
+	        }
+	        else if (strlen($inv_it_descriptionField) <= $max_length ) {
+	                 $stripped_item_description = $inv_it_descriptionField;
+	        }
+
+	        $display_block_details .=  "
+        	<tr>
+	                <td>$inv_it_quantityField</td><td>$prod_descriptionField</td><td>$stripped_item_description</td><td>$pref_currency_signField$inv_it_unit_priceField</td><td>$pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td>$pref_currency_signField$inv_it_totalField</td>
+        	</tr>
+		";
+	}
+
+
+
+
+	};
+	};
+	};
+	};
+
+	#if itemised style show the invoice note field - START
+	if ( $_GET['invoice_style'] === 'Itemised' && !empty($inv_noteField)) {
+                #item description - only show first 20 characters and add ... to signify theres more text
+                $max_length = 20;
+                if (strlen($inv_noteField) > $max_length ) {
+                        $stripped_itemised_note = substr($inv_noteField,0,20);
+                        $stripped_itemised_note .= "...";
+                }
+                else if (strlen($inv_noteField) <= $max_length ) {
+                         $stripped_itemised_note = $inv_noteField;
+                }
+
+
+		$display_block_details .=  "
+			</table>
+			</td></tr>
+			<tr>
+				<td></td>
+			</tr>
+			<tr>
+				<td><i>Note:</i></td>
+			</tr>
+			<tr>
+				<td>$stripped_itemised_note</td>
+			</tr>
+		";
+	}
+	
+	
+	#END - if itemised style show the invoice note field
+
+	$display_block_details .=  "
+	<!--
+        <tr>
+                <td colspan=3 align=left>Totals</td><td>$pref_currency_signField$invoice_total_taxField</td><td><u>$pref_currency_signField$invoice_total_taxField</u></td><td><u>$pref_currency_signField$invoice_total_totalField</u></td>
+
+        </tr>
+	-->
+	<tr>
+		<td colspan=6><br></td>
+	</tr>	
+
+        <tr>
+                <td colspan=3></td><td align=left colspan=2>Total tax included</td><td colspan=2 align=right>$pref_currency_signField$invoice_total_taxField</td>
+        </tr>
+	<tr><td><br></td>
+	</tr>
+        <tr>
+                <td colspan=3></td><td align=left colspan=2><b>$pref_inv_wordingField Amount</b></td><td colspan=2 align=right><u>$pref_currency_signField$invoice_total_totalField</u></td>
+        </tr>
+
+
+	<tr>
+		<td colspan=6><br><br></td>
+	</tr>	
+	<tr>
+		<td colspan=6><b>$pref_inv_detail_headingField</b></td>
+	</tr>
+	";
+}
+#END INVOICE ITEMISED/CONSULTING SECTION
+
+
+
+$display_block_bottom =  "
+        <tr>
+                <td colspan=6><i>$pref_inv_detail_lineField</i></td>
+        </tr>
+	<tr>
+		<td colspan=6>$pref_inv_payment_methodField</td>
+        <tr>
+                <td>$pref_inv_payment_line1_nameField</td><td colspan=5>$pref_inv_payment_line1_valueField</td>
+        </tr>
+        <tr>
+                <td>$pref_inv_payment_line2_nameField</td><td colspan=5>$pref_inv_payment_line2_valueField</td>
+        </tr>
+        </table>
+	<!-- addition close table tag to close invoice itemised/consulting if it has a note -->
+	</table>
+
+";
+
+
+?>
+<html>
+<head>
+<?php include('./include/menu.php'); ?>
+    <script type="text/javascript" src="./include/jquery.js"></script>
+    <script type="text/javascript" src="./include/greybox.js"></script>
+    <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css" media="all"/>
+    <script type="text/javascript">
+      var GB_ANIMATION = true;
+      $(document).ready(function(){
+        $("a.greybox").click(function(){
+          var t = this.title || $(this).text() || this.href;
+           GB_show(t,this.href,470,600);
+          return false;
+        });
+      });
+    </script>
+
+
+<script type="text/javascript" src="niftycube.js"></script>
+<script type="text/javascript">
+window.onload=function(){
+Nifty("div#container");
+Nifty("div#subheader");
+Nifty("div#content,div#nav","same-height small");
+Nifty("div#header,div#footer","small");
+}
+</script>
+
+<title>Simple Invoices
+</title>
+<?php include('./config/config.php'); ?> 
+<body>
+<?php
+$mid->printMenu('hormenu1');
+$mid->printFooter();
+?>
+
+<br>
+<div id="container">
+<div id="header">
+This is a Quick View of <?php echo $pref_inv_wordingField; ?> <?php echo $master_invoice_id; ?>
+<br>
+	<?php 
+	$url_pdf = "$_SERVER[HTTP_HOST]$install_path/invoice_templates/$def_inv_templateField?submit=$inv_idField&action=view&invoice_style=$inv_ty_descriptionField";
+	$url_pdf_encoded = urlencode($url_pdf); 
+	$url_for_pdf = "pdf/html2ps.php?process_mode=single&renderfields=1&renderlinks=1&renderimages=1&scalepoints=1&pixels=$pdf_screen_size&media=$pdf_paper_size&leftmargin=$pdf_left_margin&rightmargin=$pdf_right_margin&topmargin=$pdf_top_margin&bottommargin=$pdf_bottom_margin&transparency_workaround=1&imagequality_workaround=1&output=1&URL=$url_pdf_encoded";
+
+
+	?>
+
+Actions: <a href="invoice_templates/<?php echo $def_inv_templateField; ?>?submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>">Print Preview</a> :: <a href="details_invoice.php?submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>"> Edit</a> :: <a href='process_payment.php?submit=<?php echo $inv_idField;?>&op=pay_selected_invoice'>Process Payment</a> :: <!-- EXPORT TO PDF --><a href='<?php echo $url_for_pdf ;?>'>Export to PDF</a> :: <a href="invoice_templates/<?php echo $def_inv_templateField; ?>?submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>&export=<?php echo $spreadsheet;?>">Export as .<?php echo $spreadsheet;?></a> :: <a href="invoice_templates/<?php echo $def_inv_templateField; ?>?submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>&export=<?php echo $word_processor;?>">Export as .<?php echo $word_processor;?> </a>::  Email  :: Quick Email
+</form>
+<!-- #PDF end -->
+
+</div id="header">
+
+<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
+<?php echo $display_block_top; ?>
+<?php echo $display_block_details; ?>
+<?php echo $display_block_bottom; ?>
+
+<div id="footer"></div>
+</div>
+
+</body>
+</html>
+
+
+

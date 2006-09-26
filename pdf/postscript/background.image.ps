@@ -1,0 +1,152 @@
+/background-image-create {         % => Data-or-/null
+  dup /null eq {                   % => /null
+  } {                              % => Mask Image Init SY SX
+    image-create
+  } ifelse
+} def
+
+/background-image-show {           % => Position Repeat Box Viewport Image
+  dup /null ne {
+% Setup clipping region for padding area
+    gsave
+
+    2 index get-left-padding
+    3 index get-bottom-padding
+    4 index get-right-padding 
+    5 index get-left-padding sub
+    5 index get-top-padding
+    6 index get-bottom-padding sub 
+    rectclip
+
+% Determine the vertical an horizontal offset for the image
+    2 index /get-width call-method
+    3 index get-padding-left add
+    3 index get-padding-right add  % => Position Repeat box viewport Image PaddingWidth
+
+    3 index get-height
+    4 index get-padding-top add
+    4 index get-padding-bottom add % => Position Repeat box viewport Image PaddingWidth PadingHeight
+
+    6 index /x get /percentage get {
+      1 index                      % => Position Repeat box viewport Image PaddingWidth PadingHeight PaddingWidth
+      3 index /SX get px sub       % => Position Repeat box viewport Image PaddingWidth PadingHeight (PaddingWidth-ImageWidth*px)
+      7 index /x get /value get mul 100 div
+    } {
+      6 index /x get /value get
+    } ifelse                       % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset
+
+    7 index /y get /percentage get {
+      1 index                      % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset PaddingHeight
+      4 index /SY get px sub
+      8 index /y get /value get mul 100 div
+    } {
+      7 index /y get /value get
+    } ifelse                       % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+
+% NOTE: px2pt(1) make a scaing factor for PDF output
+% NOTE: background-image is positioned relative to PADDING corner and drawn in the PADDING area!
+    {                              % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+      7 index                      % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset Repeat
+      
+      dup /no-repeat eq {
+        pop
+        
+        1 px                       % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset Scale
+        7 index get-top-padding
+        6 index /SY get px sub
+        1 index sub                % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset Scale Y
+        8 index get-left-padding
+        4 index add                % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset Scale Y X
+        7 index
+        image-show-simple
+        
+        exit
+      } if
+      
+      dup /repeat-x eq {
+        pop
+
+        1 px                       % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset Scale
+        1 index
+        3 index                    % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+                                   %    Scale YOffset XOffset
+        9 index get-right-padding  % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+                                   %    Scale YOffset XOffset TX
+        8 index /SX get px         % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+                                   %    Scale YOffset XOffset TX SX
+        11 index get-top-padding
+        10 index /SY get px sub
+        4 index sub                % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+                                   %    Scale YOffset XOffset TX SX Y
+        12 index get-left-padding
+        4 index add                % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+                                   %    Scale YOffset XOffset TX SX Y X
+        11 index                   % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+                                   %    Scale YOffset XOffset TX SX Y X Image
+        image-show-repeat-x
+        
+        exit
+      } if
+      
+      dup /repeat-y eq {
+        pop
+        
+        1 px                       % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset Scale
+        1 index
+        3 index                    % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+                                   %    Scale YOffset XOffset
+        9 index get-bottom-padding % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+                                   %    Scale YOffset XOffset TX
+        8 index /SY get px         % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+                                   %    Scale YOffset XOffset TX SX
+        11 index get-top-padding
+        10 index /SY get px sub
+        4 index sub                % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+                                   %    Scale YOffset XOffset TX SX Y
+        12 index get-left-padding
+        4 index add                % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+                                   %    Scale YOffset XOffset TX SX Y X
+        11 index                   % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+                                   %    Scale YOffset XOffset TX SX Y X Image
+        image-show-repeat-y
+
+        exit
+      } if
+      
+% /repeat (default)
+      pop
+
+      1 px                         % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+                                   %    Scale
+      1 index 3 index              % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+                                   %    Scale YOffset XOffset
+      9 index get-bottom-padding   % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+                                   %    Scale YOffset XOffset TY
+      10 index get-right-padding   % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+                                   %    Scale YOffset XOffset TY TX
+      9 index /SY get px           % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+                                   %    Scale YOffset XOffset TY TX SY
+      10 index /SX get px          % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+                                   %    Scale YOffset XOffset TY TX SY SX
+      13 index get-top-padding
+      12 index /SY get px sub
+      6 index add                  % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+                                   %    Scale YOffset XOffset TY TX SY SX Y
+      14 index get-left-padding
+      6 index add                  % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+                                   %    Scale YOffset XOffset TY TX SY SX Y X
+      13 index                     % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+                                   %    Scale YOffset XOffset TY TX SY SX Y X
+      image-show-repeat-xy         % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+                                   
+      exit
+    } loop                         % => Position Repeat box viewport Image PaddingWidth PadingHeight XOffset YOffset
+    pop pop pop pop
+
+% return to the previous clipping area
+    grestore
+
+  } if                             % => Position Repeat Box Viewport Image
+
+  pop pop pop pop pop
+} def

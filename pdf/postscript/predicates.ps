@@ -1,0 +1,28 @@
+% $Header: /cvsroot/html2ps/postscript/predicates.ps,v 1.1 2005/12/18 07:21:38 Konstantin Exp $
+
+/is-inline {
+  /display get-css-value
+  dup /-button eq
+  1 index /-checkbox eq or
+  1 index /-image eq or
+  1 index /inline eq or
+  1 index /inline-block eq or
+  1 index /none eq or
+  1 index /-radio eq or
+  1 index /-select eq or
+  1 index /-text eq or
+  exch pop
+} def
+
+/is-whitespace {
+  dup /box-whitespace is-a
+  1 index /box-null is-a or
+  exch pop
+} def
+
+/is-container {
+  dup /box-container is-a
+  1 index /box-generic-inline is-a not and
+  1 index /box-inline is-a or
+  exch pop
+} def

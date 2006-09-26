@@ -1,0 +1,1273 @@
+% Calculate the vertical offset of current box due the 'clear' CSS property
+% 
+% @param $y initial Y coordinate to begin offset from
+% @param $context flow context containing the list of floats to interact with
+% @return updated value of Y coordinate
+%
+/box-generic-apply-clear {         % => Context Y This
+% Check if we need to offset box vertically due the 'clear' property
+  dup /clear get-css-value         % => Context Y This Clear
+  
+  dup /both eq
+  1 index /left eq or {            % => Context Y This Clear
+    3 index context-floats {       % => Context Y This Clear FloatBox
+      dup /float get-css-value     % => Context Y This Clear FloatBox FloatValue
+      /left eq {                   % => Context Y This Clear FloatBox
+% Float vertical margins are never collapsed
+        get-bottom-margin          % => Context Y This Clear FloatBottomMargin
+        2 index get-margin-top     % => Context Y This Clear FloatBottomMargin MarginTop
+        sub                        % => Context Y This Clear Y'
+        3 index min                % => Context Y This Clear Y
+        4 3 roll                   % => Context This Clear Y' Y
+        pop                        % => Context This Clear Y
+        3 1 roll                   % => Context Y This Clear
+      } {                          % => Context Y This Clear FloatBox
+        pop
+      } ifelse
+    } forall
+  } if                             % => Context Y This Clear
+
+  dup /both eq
+  1 index /right eq or {           % => Context Y This Clear
+    3 index context-floats {       % => Context Y This Clear FloatBox
+      dup /float get-css-value     % => Context Y This Clear FloatBox FloatValue
+      /right eq {                  % => Context Y This Clear FloatBox
+% Float vertical margins are never collapsed
+        get-bottom-margin          % => Context Y This Clear FloatBottomMargin
+        2 index get-margin-top     % => Context Y This Clear FloatBottomMargin MarginTop
+        sub                        % => Context Y This Clear Y'
+        3 index min                % => Context Y This Clear Y
+        4 3 roll                   % => Context This Clear Y' Y
+        pop                        % => Context This Clear Y
+        3 1 roll                   % => Context Y This Clear
+      } {                          % => Context Y This Clear FloatBox
+        pop
+      } ifelse
+   } forall
+  } if                             % => Context Y This Clear
+
+  pop pop
+  exch pop                         % => Y
+} def
+
+% Apply 'line-height' CSS property; modifies the default_baseline value 
+% (NOT baseline, as it is calculated - and is overwritten - in the close_line
+% method of container box
+%
+% Note that underline position (or 'descender' in terms of PDFLIB) - 
+% so, simple that space of text box under the baseline - is scaled too
+% when 'line-height' is applied
+%
+/box-generic-apply-line-height {   % => Box
+  dup get-height                   % => Box Height
+
+  1 index /line-height get-css-value
+  dup /Percentage get {            % => Box Height LineHeight
+    /Value get
+    1 index mul 100 div            % => Box Height NewHeight
+  } {
+    /Value get                     % => Box Height NewHeight
+  } ifelse
+
+  1 index
+  3 index get-default-baseline sub % => Box Height NewHeight Under
+
+  2 index 0 gt {
+    1 index 3 index div            % => Box Height NewHeight Under Scale
+  } {
+    0
+  } ifelse                         % => Box Height NewHeight Under Scale
+
+  2 index 5 index put-height       % => Box Height NewHeight Under Scale
+  mul sub                          % => Box Height NewHeight-Under*Scale
+  2 index put-default-baseline     % => Box Height
+
+  pop pop
+} def
+
+/box-generic-check-page-break-after { % => Context Parent This
+  1 index /null ne {
+    dup /page-break-after
+    get-css-value                  % => Context Parent This CSS-pba
+
+    dup /avoid ne
+    1 index /auto ne and {         % => Context Parent This CSS-pba
+      3 index context-get-viewport % => Context Parent This CSS-pba Viewport
+
+      dup flow-viewport-get-top    % => Context Parent This CSS-pba Viewport VTop
+      4 index get-current-y sub    % => Context Parent This CSS-pba Viewport YOfs
+      1 index
+      flow-viewport-get-height div % => Context Parent This CSS-pba Viewport PagesFraction
+      dup ceiling sub              % => Context Parent This CSS-pba Viewport PageFraction
+
+      1 index flow-viewport-get-height
+      mul                          % => Context Parent This CSS-pba Viewport YDelta
+      4 index get-current-y add
+      4 index put-current-y        % => Context Parent This CSS-pba Viewport
+
+      pop
+    } if                           % => Context Parent This CSS-pba
+    
+    pop
+  } if                             % => Context Parent This
+
+  pop pop pop
+} def
+
+/box-generic-collapse-margin { % => Context Parent This    
+% do margin collapsing
+
+% Margin collapsing is done as follows:
+% 1. If previous sibling was an inline element (so, parent line box was not empty),
+% then no collapsing will take part
+% 2. If NO previous element exists at all, then collapse current box top margin
+% with parent's collapsed top margin.
+% 2.1. If parent element was float, no collapsing should be
+% 3. If there's previous block element, collapse current box top margin 
+% with previous elemenent's collapsed bottom margin
+
+% Check if current parent line box contains inline elements only. In this case the only 
+% margin will be current box margin 
+  1 index box-container-line-box-empty not { 
+% Case (1). Previous element was inline element; no collapsing
+    dup get-margin-top           % => Context Parent This MT
+    3 index                      % => Context Parent This MT Context
+    context-push-collapsed-margin
+
+    2 index 2 index box-container-close-line
+
+    1 index get-current-y        % => Context Parent This Y
+    1 index get-margin-top sub   % => Context Parent This Y
+  } {
+% Case (2). No previous block element at all; Collapse with parent margins
+% Case (3). There's a previous block element
+% We can process both cases at once, as context object collapsed margin stack
+% allows us to track collapsed margins value
+
+% Calculate the value to offset current box vertically due margin
+% note that we'll get non-negative value - the value to increate collapsed margin size, 
+% but we must offset box to the bottom
+
+    dup get-margin-top
+    dup                          % => Context Parent This MT MT
+    4 index
+    context-get-collapsed-margin % => Content Parent This MT MT CM
+    min
+    sub                          % => Context Parent This Y
+
+    1 index get-margin-top
+    4 index context-get-collapsed-margin
+    max                          % => Context Parent This Y CM'
+    4 index
+    context-push-collapsed-margin
+                                   % => Context Parent This Y
+
+% Offset parent, if current box is the first child, as we should not get
+% vertical gaps before the first child during margin collapsing
+
+    2 index get-uid             
+    4 index context-container-uid ne
+                                   % => Context Parent This vmargin if_expr
+
+    {                            % => Context Parent This $vmargin
+      dup neg 0 3 index          % => Context Parent This $vmargin -$vmargin 0 This
+      5 index
+      box-container-offset-if-first not {
+                                   % => Context Parent This vmargin
+        2 index get-current-y
+        exch sub
+        2 index put-current-y    
+      } { pop } ifelse           % => Context Parent This
+
+      1 index get-current-y      % => Context Parent This Y
+    } {                          % => Context Parent This $vmargin
+      2 index get-current-y
+      exch sub
+    } ifelse                     % => Context Parent This Y
+  } ifelse
+
+  exch pop
+  exch pop
+  exch pop
+} def
+
+/box-generic-contains-point-margin { % => Y X Box
+  dup get-left-margin rounding-epsilon sub 2 index le
+  1 index get-right-margin rounding-epsilon add 3 index ge and
+  1 index get-top-margin rounding-epsilon add 4 index ge and
+  1 index get-bottom-margin 4 index lt and
+
+  exch pop
+  exch pop
+  exch pop
+} def
+
+/box-generic-create {              % =>
+  <<
+    /AdditionalTextIndent 0
+
+    /Cache << >>
+    
+    /CSS <<
+      /background background-create
+      
+      /border border-create
+
+      /cellpadding 1 px
+      /cellspacing 1 px
+      /clear /none
+      /color 0 0 0 0 color-create
+
+      /display /inline
+      
+      /float       /none
+      /font-size   10 pt
+      /font-family default-font
+
+      /height <<
+        /percentage false
+        /auto true
+        /value 0
+      >>
+
+      /left 0
+      
+      /line-height <<
+        /Percentage true
+        /Value 110
+      >>
+
+      /list-style <<
+        /position /outside
+        /type /disc
+      >>
+
+      /margin <<
+        /left <<
+          /value 0
+          /percentage /null
+          /auto false
+        >>
+        /right <<
+          /value 0
+          /percentage /null
+          /auto false
+        >>
+        /top <<
+          /value 0
+          /percentage /null
+          /auto false
+        >>
+        /bottom <<
+          /value 0
+          /percentage /null
+          /auto false
+        >>
+      >>
+
+      /overflow /visible
+
+      /padding <<
+        /left <<
+          /value 0
+          /percentage /null
+          /auto false
+        >>
+        /right <<
+          /value 0
+          /percentage /null
+          /auto false
+        >>
+        /top <<
+          /value 0
+          /percentage /null
+          /auto false
+        >>
+        /bottom <<
+          /value 0
+          /percentage /null
+          /auto false
+        >>
+      >>
+      /page-break-after /auto
+      /position /static
+      /pseudo-align {text-align-left}
+      /pseudo-nowrap /normal
+      /pseudo-link-destination ()
+      /pseudo-link-target << /type /none >>
+      
+      /text-align   {text-align-left}
+      /text-decoration <<
+        /overline false
+        /underline false
+        /line-through false
+      >>
+      /text-indent <<
+        /Percentage false
+        /Value 0
+      >>
+      /top << /value 0 /percentage false >>
+
+      /vertical-align /baseline
+      /visibility /visible
+
+      /white-space /normal
+    >>
+
+    /CurrentX 0
+    /CurrentY 0
+    
+    /DeferredFloats []
+
+    /HeightConstraint /null /null /null hc-create
+
+    /Methods <<
+    >>
+
+    /Parent /null
+    
+    /Position <<
+      /left   0
+      /top    0
+      /width  0
+      /height 0
+      /baseline 0
+      /default-baseline 0
+    >>
+
+    /UID 0
+
+    /WidthConstraint wc-create-none
+  >>
+
+  dup box-generic-setup-methods
+  dup /box-generic add-type
+} def                              % => Box
+
+/box-generic-calc-auto-width-margins {
+                                   % => Parent This
+  dup /float get-css-value
+  /none ne {
+    2 copy box-generic-calc-auto-width-margins-float
+  } {
+    2 copy box-generic-calc-auto-width-margins-normal
+  } ifelse
+  pop pop
+} def
+
+/box-generic-calc-auto-width-margins-float { % Parent This
+  dup is-margin-auto-left {
+    0 1 index put-margin-left
+  } if
+
+  dup is-margin-auto-right {
+    0 1 index put-margin-right
+  } if
+
+  pop pop
+} def
+
+% 'margin-left' + 'border-left-width' + 'padding-left' + 'width' + 'padding-right' + 'border-right-width' + 'margin-right' = width of containing block
+%
+/box-generic-calc-auto-width-margins-normal {
+                                   % => Parent This
+% If both 'margin-left' and 'margin-right' are 'auto', their used values are equal. 
+% This horizontally centers the element with respect to the edges of the containing block.
+  dup is-margin-auto-left
+  1 index is-margin-auto-right and {
+    1 index /get-width call-method              % => Parent This PW
+    1 index get-full-width         % => Parent This PW W
+    sub 2 div                      % => Parent This M
+
+    dup 2 index put-margin-left
+    dup 2 index put-margin-right   % => Parent This M
+    
+    pop
+  } {                              % => Parent This
+% If there is exactly one value specified as 'auto', its used value follows from the equality.
+    dup is-margin-auto-left {
+      1 index /get-width call-method
+      1 index get-full-width
+      sub
+
+      1 index put-margin-left
+    } if
+
+    dup is-margin-auto-right {
+      1 index /get-width call-method
+      1 index get-full-width
+      sub
+
+      1 index put-margin-right
+    } if
+  } ifelse                         % => Parent This
+
+  pop pop
+} def
+
+/box-generic-calc-percentage-margins {
+                                   % => Parent This
+  dup get-margin-percentage-left   % => Parent This LMP
+  dup /null ne {
+    2 index /get-width call-method              % => Parent This LMP PW
+    mul 100 div                    % => Parent This LM
+    1 index put-margin-left        % => Parent This
+  } {
+    pop
+  } ifelse
+
+  dup get-margin-percentage-right  % => Parent This LMP
+  dup /null ne {
+    2 index /get-width call-method              % => Parent This LMP PW
+    mul 100 div                    % => Parent This LM
+    1 index put-margin-right       % => Parent This
+  } {
+    pop
+  } ifelse                         % => Parent This
+
+  pop pop
+} def
+
+% If the containing block's width depends on this element's width, 
+% then the resulting layout is undefined in CSS 2.1.
+%
+/box-generic-calc-percentage-width {
+                                   % => Context Parent This
+  dup get-width-constraint
+  dup wc-is-fraction               % => Context Parent This WC IsFraction
+  {                                % => Context Parent This WC 
+% Calculate actual width
+    2 index /get-width call-method
+    exch                           % => Context Parent This PW WC
+    2 index /get-width call-method              
+    exch                           % => Context Parent This PW CW WC
+    wc-apply                       % => Context Parent This W
+
+% Check if calculated width is less than minimal width
+% Note that get_min_width will return the width including the extra horizontal space!
+    3 index 2 index
+    /get-min-width call-method     % => Context Parent This W MinW
+
+    2 index get-hor-extra sub      % => Context Parent This W MinW'
+
+    max                            % => Context Parent This W
+
+% Assign calculated width
+    dup 2 index put-width          % => Context Parent This W 
+
+% Remove any width constraint
+    wc-create-constant             % => Context Parent This WC
+    1 index put-width-constraint   % => Context Parent This   
+  } {
+    pop
+  } ifelse
+
+  pop pop pop
+} def
+
+/box-generic-calc-text-indent {    % => Box
+  dup /text-indent get-css-value   % => Box TextIndent
+  dup /Percentage get {            % => Box TextIndent
+    1 index /get-width call-method              % => Box TextIndent W
+    1 index /Value get             % => Box TextIndent W Percent
+    mul 100 div                    % => Box TextIndent TIValue
+  } {                              % => Box TextIndent
+    dup /Value get                 % => Box TextIndent TIValue
+  } ifelse
+  
+  exch pop
+  exch pop
+} def
+
+% Extends the box height to cover the given Y coordinate
+% If box height is already big enough, no changes will be made
+%
+% @param $y_coord Y coordinate should be covered by the box
+%
+/box-generic-extend-height {       % => Y This
+  dup get-height                   % => Y This H
+  1 index get-top                  % => Y This H Top
+  3 index sub                      % => Y This H Top-Y
+  max
+  1 index put-height
+  pop pop
+} def
+
+/box-generic-extend-width {        % => X This
+  dup /get-width call-method       % => X This Width
+  2 index
+  2 index get-left sub             % => X This Width NewWidth
+  max
+  1 index put-width                % => X This
+  pop pop
+} def
+
+% Get the position and size of containing block for current 
+% ABSOLUTE POSITIONED element. It is assumed that this function
+% is called for ABSOLUTE positioned boxes ONLY
+%
+% @return associative array with 'top', 'bottom', 'right' and 'left' 
+% indices in data space describing the position of containing block
+%
+/box-generic-get-containing-block {% => Box
+  dup get-parent                   % => Box Parent
+
+% No containing block at all... 
+% How could we get here?
+  dup /null eq {
+    (Error: No containing block found for absolute-positioned element) print
+    quit
+  } if
+
+% CSS 2.1:
+% If the element has 'position: absolute', the containing block is established by the 
+% nearest ancestor with a 'position' of 'absolute', 'relative' or 'fixed', in the following way:
+% - In the case that the ancestor is inline-level, the containing block depends on 
+%   the 'direction' property of the ancestor:
+%   1. If the 'direction' is 'ltr', the top and left of the containing block are the top and left 
+%      content edges of the first box generated by the ancestor, and the bottom and right are the 
+%      bottom and right content edges of the last box of the ancestor.
+%   2. If the 'direction' is 'rtl', the top and right are the top and right edges of the first
+%      box generated by the ancestor, and the bottom and left are the bottom and left content 
+%      edges of the last box of the ancestor.
+% - Otherwise, the containing block is formed by the padding edge of the ancestor.
+% TODO: inline-level ancestors
+  {                                % => Box Parent
+    dup get-parent                 % => Box Parent Parent2
+    /null eq { exit } if           % => Box Parent
+    dup /position get-css-value
+    /static ne { exit } if         % => Box Parent
+    get-parent                     % => Box Parent2
+  } loop                           % => Box ContainingBox
+
+% Note that initial containg block (containig BODY element) will be formed by BODY margin edge,
+% unlike other blocks which are formed by content edges
+  << >>                            % => Box ContainingBox CB
+  1 index get-parent /null ne {
+% Normal containing block
+    dup /left   3 index get-left   put
+    dup /right  3 index get-right  put
+    dup /top    3 index get-top    put
+    dup /bottom 3 index get-bottom put
+  } {
+% Initial containing block
+    dup /left   3 index get-left-margin   put
+    dup /right  3 index get-right-margin  put
+    dup /top    3 index get-top-margin    put
+    dup /bottom 3 index get-bottom-margin put
+  } ifelse                         % => Box ContainingBox CB
+
+  exch pop
+  exch pop 
+} def
+
+/box-generic-get-expandable-width {% => Box
+  dup get-parent /null ne
+  1 index get-width-constraint
+  /type get /none eq and {
+    get-parent box-generic-get-expandable-width
+  } {
+    /get-width call-method
+  } ifelse
+} def
+
+/box-generic-get-extra-line-left { % => Box
+  pop 0
+} def
+
+/box-generic-get-extra-line-right {% => Box
+  pop 0
+} def
+
+/box-generic-get-real-full-height {
+  get-full-height
+} def
+
+/box-generic-get-width {                       % => Box
+  dup get-parent /null ne {
+    dup get-parent                 % => Box Parent
+    /get-width call-method                      % => Box ParentWidth
+  } {
+    dup /Position get
+    /width get
+  } ifelse
+
+  1 index /Position get
+  /width get                       % => Box ParentWidth Width
+  2 index get-width-constraint     % => Box ParentWidth Width WC
+  dup /apply get exec              % => Box W
+  exch pop
+} def
+
+% Calculate the content upper-left corner position in curent flow
+/box-generic-guess-corner {        % => Parent This
+  1 index get-current-x
+  1 index get-extra-left add
+  1 index put-left
+
+  1 index get-current-y
+  1 index get-extra-top sub
+  1 index put-top
+
+  pop pop
+} def
+
+/box-generic-is-null {
+  pop false
+} def
+
+/box-generic-is-whitespace {
+  pop false
+} def
+
+/box-generic-line-break-allowed {  % => This
+  dup /white-space get-css-value /normal eq
+  1 index /pseudo-nowrap get-css-value /normal eq
+  and                              % => This Flag
+  exch pop
+} def
+
+/box-generic-move-to {             % => Y X This
+  2 index 1 index get-top sub      % => Y X This DY
+  2 index 2 index get-left sub     % => Y X This DY DX
+  2 index
+  /offset call-method              % => Y X This
+  pop pop pop
+} def
+
+/box-generic-offset {              % => DY DX This
+  2 index 1 index get-top add
+  1 index put-top
+
+  1 index 1 index get-left add
+  1 index put-left
+  
+  pop pop pop
+} def
+
+/box-generic-pre-reflow-images {
+  pop
+} def
+
+/box-generic-reflow {              % => Context Parent This
+  pop pop pop                      % =>
+
+  (Unimplemented /reflow method) print
+  quit
+} def                              % =>
+
+/box-generic-reflow-anchors {      % => List Viewport Box
+% make local link anchor
+  dup /pseudo-link-destination
+  get-css-value
+  dup () ne {                      % => List Viewport Box Destination
+    <<
+      /page 
+      3 index get-top bmargin sub
+      real-page-height 
+      
+% NOTE: the coordinate system begins at the bottom of the very first page and directed to the top!
+  
+      div 0.5 add floor neg 2 add % => List Viewport Box Destination << /page <page>
+      
+      /x 5 index get-left         % => List Viewport Box Destination << /page <page> /x <x>
+
+% As in most cases we'll use an empty <a name="..."></a> with fake zero-height whitespace inside,
+% we can determine only the bottom edge of the linked area
+      /y 
+      7 index get-bottom bmargin sub 
+      4 index 1 sub real-page-height mul 
+      add floor bmargin add
+% now add some small vertical offset to make text in linked area visible       
+      20 pt add
+    >>                             % => List Viewport Box Destination Anchor
+    4 index 3 1 roll               % => List Viewport Box List Destination Anchor
+    put                            % => List Viewport Box
+  } {
+    pop
+  } ifelse                         % => List Viewport Box 
+  
+  pop pop pop
+} def
+
+/box-generic-reflow-inline {
+  pop
+} def
+
+/box-generic-setup-methods {       % => Box
+  dup get-box-dict /Methods get    % => Box Methods
+  dup /get-extra-line-left  { box-generic-get-extra-line-left } put
+  dup /get-extra-line-right { box-generic-get-extra-line-right } put
+  dup /get-real-full-height { box-generic-get-real-full-height } put
+  dup /get-width            { box-generic-get-width } put
+  dup /is-null              { box-generic-is-null } put
+  dup /is-whitespace        { box-generic-is-whitespace } put
+  dup /line-break-allowed   { box-generic-line-break-allowed } put
+  dup /offset               { box-generic-offset } put
+  dup /pre-reflow-images    { box-generic-pre-reflow-images } put
+  dup /reflow               { box-generic-reflow } put
+  dup /reflow-inline        { box-generic-reflow-inline } put
+  dup /reflow-anchors       { box-generic-reflow-anchors } put
+  dup /show                 { box-generic-show } put
+  pop pop
+} def
+
+/box-generic-show {                % => Viewport This   
+% make a external/local link using pdfmark operator, if needed  
+  dup /pseudo-link-target
+  get-css-value                    % => Viewport This Linktarget
+  dup /type get /uri eq {
+    [ /Rect [ 4 index get-left        
+              5 index get-bottom        
+              6 index get-right        
+              7 index get-top ]      
+      /Action << /Subtype /URI /URI 8 index /value get >>      
+      /Border [0 0 0]      
+      /Subtype /Link      
+      /ANN pdfmark  
+  } if
+
+  dup /type get /local eq {        % => Viewport This Linktarget
+    2 index exch /value get        % => Viewport This Viewport Linktarget
+    viewport-get-anchor            % => Viewport This AnchorData
+    dup /null ne {
+      [ /Rect [ 4 index get-left        
+                5 index get-bottom        
+                6 index get-right        
+                7 index get-top ]
+        /Page 4 index /page get 
+        /View [ /XYZ null 9 index /y get null ]
+        /Border [0 0 0]      
+        /Subtype /Link      
+        /ANN pdfmark
+    } if
+  } if
+  
+  pop
+   
+  dup
+  2 index
+  2 index get-border
+  border-show
+
+  dup
+  2 index
+  2 index get-background
+  background-show
+
+  setting-debug-box {
+    0 0 0 setrgbcolor
+    0.1 setlinewidth
+    dup get-left  1 index get-top moveto
+    dup get-right 1 index get-top lineto
+    dup get-right 1 index get-bottom lineto
+    dup get-left  1 index get-bottom lineto
+    closepath
+    stroke
+  } if
+
+% Set the text color
+% Note that text color is used not only for text drawing (for example, list item markers 
+% are drawn with text color)
+  dup /color get-css-value
+  color-apply
+
+  pop pop
+} def
+
+% Common
+
+/get-additional-text-indent {
+  /AdditionalTextIndent get
+} def
+
+/get-background {
+  /background get-css-value
+} def
+
+/get-baseline {
+  /Position get
+  /baseline get
+} def
+
+/get-baseline-offset {             % => Box
+  dup get-baseline
+  1 index get-default-baseline sub
+  exch pop
+} def
+
+/get-border {
+  /border get-css-value
+} def
+
+/get-border-bottom {
+  /border get-css-value
+  /bottom get
+} def
+
+/get-border-bottom-width {
+  get-border-bottom
+  edge-get-width
+} def
+
+/get-border-left {
+  /border get-css-value
+  /left get
+} def
+
+/get-border-left-width {
+  get-border-left
+  edge-get-width
+} def
+
+/get-border-right {
+  /border get-css-value
+  /right get
+} def
+
+/get-border-right-width {
+  get-border-right
+  edge-get-width
+} def
+
+/get-border-top {
+  /border get-css-value
+  /top get
+} def
+
+/get-border-top-width {
+  get-border-top
+  edge-get-width
+} def
+
+/get-bottom {
+  dup get-top 
+  1 index get-height sub
+  exch pop
+} def
+
+/get-bottom-border {
+  dup get-bottom-padding
+  1 index get-border-bottom-width
+  sub
+  exch pop
+} def
+
+/get-bottom-margin {
+  dup get-bottom-border
+  1 index get-margin-bottom
+  sub
+  exch pop
+} def
+
+/get-bottom-padding {
+  dup get-bottom
+  1 index get-padding-bottom
+  sub exch pop
+} def
+
+/get-box-dict {} def
+
+% Get the calculated value of a CSS property for this box
+%
+% @param Box reference to a box object
+% @param Name name of a CSS property
+%
+/get-css-value {                   % => Box Name
+  1 index get-box-dict
+  /CSS get                         % => Box Name CSS
+  
+% Check if this value is known 
+  dup 2 index known not {
+    (Value is not known:) print
+    1 index ==
+    quit
+  } if
+
+% Get the value
+  1 index get                     % => Box Name CSSValue
+
+% clear the stack
+  exch pop
+  exch pop
+} def
+
+/get-current-x {
+  /CurrentX get
+} def
+
+/get-current-y {
+  /CurrentY get
+} def
+
+/get-default-baseline {
+  /Position get
+  /default-baseline get
+} def
+
+/get-extra-bottom {
+  dup get-padding-bottom exch 
+  dup get-margin-bottom exch
+  dup get-border-bottom-width exch
+  pop
+  add add
+} def
+
+/get-extra-left {
+  dup get-padding-left exch 
+  dup get-margin-left exch 
+  dup get-border-left-width exch 
+  pop 
+  add add
+} def
+
+/get-extra-right {
+  dup get-padding-right exch 
+  dup get-margin-right exch 
+  dup get-border-right-width exch 
+  pop 
+  add add
+} def
+
+/get-extra-top {
+  dup get-padding-top exch 
+  dup get-margin-top exch
+  dup get-border-top-width exch
+  pop
+  add add
+} def
+
+/get-full-width  { 
+  dup /get-width call-method
+  exch get-hor-extra
+  add
+} def
+
+/get-full-height { 
+  dup get-height 
+  exch get-vert-extra
+  add
+} def
+
+/get-height {                      % => Box
+  dup                              % => Box Box 
+  dup /Position get
+  /height get                      % => Box Box RawHeight
+  1 index get-height-constraint    % => Box Box RawHeight HC
+  hc-apply
+  exch pop                         % => H
+} def
+
+/get-height-constraint {           % => Box
+  /HeightConstraint get
+} def
+
+/get-hor-extra  {                  % => Box
+  dup get-extra-left
+  1 index get-extra-right
+  add
+
+  exch pop
+} def
+
+/get-left {
+  get-box-dict /Position get /left get
+} def
+
+/get-left-border {
+  dup get-left-padding
+  1 index get-border-left-width
+  sub
+  exch pop
+} def
+
+/get-left-padding {
+  dup get-left
+  1 index get-padding-left
+  sub
+  exch pop
+} def
+
+/get-left-margin      {
+  dup get-left-border
+  1 index get-margin-left
+  sub
+  exch pop
+} def
+
+/get-margin-bottom {               % => Box
+  /margin get-css-value
+  /bottom get
+  /value get
+} def
+
+/get-margin-left {                 % => Box
+  /margin get-css-value
+  /left get
+  /value get
+} def
+
+/get-margin-percentage-left {      % => Box
+  /margin get-css-value 
+  /left get
+  /percentage get
+} def
+
+/get-margin-percentage-right {     % => Box
+  /margin get-css-value 
+  /right get
+  /percentage get
+} def
+
+/get-margin-right {                % => Box
+  /margin get-css-value
+  /right get
+  /value get
+} def
+
+/get-margin-top {                  % => Box
+  /margin get-css-value
+  /top get
+  /value get
+} def
+
+/get-padding {                     % => Box
+  /padding get-css-value
+} def
+
+/get-padding-bottom {              % => Box
+  /padding get-css-value
+  /bottom get
+  /value get
+} def
+
+/get-padding-left {                % => Box
+  /padding get-css-value
+  /left get
+  /value get
+} def
+
+/get-padding-right {               % => Box
+  /padding get-css-value
+  /right get
+  /value get
+} def
+
+/get-padding-top {                 % => Box
+  /padding get-css-value
+  /top get
+  /value get
+} def
+
+/get-parent {
+  /Parent get
+} def
+
+/get-right {
+  dup get-left                     % => Box Left
+  1 index /get-width call-method add 
+  exch pop
+} def
+
+/get-right-border {
+  dup get-right-padding
+  1 index get-border-right-width
+  add
+  exch pop
+} def
+
+/get-right-margin {
+  dup get-right-border
+  1 index get-margin-right
+  add
+  exch pop
+} def
+
+/get-right-padding {
+  dup get-right
+  1 index get-padding-right
+  add
+  exch pop
+} def
+
+/get-top {
+  dup /Position get /top get       % => Box top
+  1 index get-baseline-offset sub  % => Box Top'
+  exch pop
+} def
+
+/get-top-border {
+  dup get-top-padding
+  1 index get-border-top-width
+  add
+  exch pop
+} def
+
+/get-top-margin {
+  dup get-top-border
+  1 index get-margin-top
+  add
+  exch pop
+} def
+
+/get-top-padding {
+  dup get-top
+  1 index get-padding-top
+  add
+  exch pop
+} def
+
+/get-uid {                         % => Box
+  get-box-dict
+  /UID get
+} def
+
+/get-vert-extra  {                  % => Box
+  dup get-extra-top
+  1 index get-extra-bottom
+  add
+
+  exch pop
+} def
+
+/get-width-constraint {            % => Box
+  get-box-dict
+  /WidthConstraint get
+} def
+
+/is-margin-auto-left {             % => Box
+  /margin get-css-value
+  /left get
+  /auto get
+} def
+
+/is-margin-auto-right {            % => Box
+  /margin get-css-value
+  /right get
+  /auto get
+} def
+
+/put-additional-text-indent {      % => Value Box
+  exch /AdditionalTextIndent exch put
+} def
+
+/put-baseline {
+  /Position get
+  exch 
+  /baseline
+  exch
+  put
+} def
+
+/put-border {
+  exch /border exch put-css-value 
+} def
+
+/put-content {
+  exch
+  /Content exch                    % => Box /CurrentX Value
+  put
+} def
+
+/put-css-value {                   % => Box Property Value
+  2 index /CSS get                 % => Box Property Value CSS
+  3 1 roll                         % => Box CSS Property Value
+  put pop
+} def
+
+/put-current-x {                   % => Value Box
+  exch
+  /CurrentX exch                   % => Box /CurrentX Value
+  put
+} def
+
+/put-current-y {                   % => Value Box
+  exch
+  /CurrentY exch                   % => Box /CurrentY Value
+  put  
+} def
+
+/put-default-baseline {
+  /Position get
+  exch 
+  /default-baseline
+  exch
+  put
+} def
+
+/put-full-width {                  % => Value Box
+  dup get-hor-extra                % => Value Box HE
+  2 index exch sub                 % => Value Box Value-HE
+  1 index put-width                % => Value Box
+  pop pop
+} def
+
+/put-height {
+  /Position get
+  exch /height exch put
+} def
+
+/put-height-constraint {           % => Value box
+  exch /HeightConstraint exch put
+} def
+
+/put-left {                        % => Value Box
+  get-box-dict
+  /Position get
+  exch /left exch put
+} def
+
+/put-margin-bottom {               % => Value Box
+  /margin get-css-value            % => Value Margins
+  /bottom get                      % => Value MarginsValues
+  exch /value exch put
+} def
+
+/put-margin-left {                 % => Value Box
+  /margin get-css-value            % => Value Margins
+  /left get                        % => Value MarginsValues
+  exch /value exch put
+} def
+
+/put-margin-right {                % => Value Box
+  /margin get-css-value            % => Value Margins
+  /right get                       % => Value MarginsValues
+  exch /value exch put
+} def
+
+/put-margin-top {                  % => Value Box
+  /margin get-css-value            % => Value Margins
+  /top get                         % => Value MarginsValues
+  exch /value exch put
+} def
+
+/put-padding {                     % => Value Box
+  exch /padding exch put-css-value 
+} def
+
+/put-parent {
+  exch /Parent exch put
+} def
+
+/put-top {                         % => Value Box
+  exch
+  1 index get-baseline-offset
+  add exch
+    
+  /Position get
+  exch /top exch put
+} def
+
+/put-uid {
+  exch /UID exch put
+} def
+
+/put-width {
+  /Position get
+  exch /width exch put
+} def
+
+/put-width-constraint {            % => Value Box
+  exch /WidthConstraint exch put
+} def
+

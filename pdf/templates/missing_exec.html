@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>html2ps/html2pdf error message</title>
+<style>
+body {
+  color:#000;
+  background-color:#fff;
+  margin:10px;
+  font-family:arial, helvetica, sans-serif;
+  color:#000;
+  font-size:12px;
+  line-height:18px;
+}
+p,td {
+  color:#000;
+  font-size:12px;
+  line-height:18px;
+  margin-top:3px;
+  vertical-align: top;
+}
+h1 {
+  font-family:arial, helvetica, sans-serif;
+  color:#669;
+  font-size:27px;
+  letter-spacing:-1px;
+  margin-top:12px;
+  margin-bottom:12px;
+}
+tr.odd {
+  background-color: #f0f0f0;
+}
+tr.even {
+  background-color: #ffffff;
+}
+td {
+  padding: 3px;
+}
+</style>
+</head>
+<body>
+<h1>Error</h1>
+<p>
+'exec' function is disabled in your PHP configuration. 
+You will not be able to generate PDF using 
+<b>PDF (Ghostscript, level 1.2)</b>
+or <b>PDF (Ghostscript, level 1.4)</b> output methods, as these output methods 
+require GNU Ghostscript or AFPL Ghoscript executables to be run on your server.
+<p>
+<table>
+<tr class="odd"> 
+<th width="20%">Problem</th><th>Solution</th>
+</tr>
+<tr class="even">
+<td rowspan="2">'exec' function is disabled (please note that it have nothing to do with the PHP <i>safe mode</i>; 
+particular functions can be disabled even when <i>safe mode</i> is OFF).</td>
+<td>Enable 'exec' function in your php.ini (refer your PHP manual or <a href="http://www.php.net">www.php.net</a> for exact instructions)
+</td>
+</tr>
+<tr class="odd">
+<td>Try using output methods not requiring running executables on your server.</td>
+</tr>
+</table>
+</body>
+</html>              

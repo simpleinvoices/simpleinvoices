@@ -1,0 +1,35 @@
+/add-type {                        % => Object Class
+  1 index get-types                % => Object Class Types
+  array-append                     % => Object Types'
+  /Types exch put
+} def
+
+/call-method {                     % => ...Params... Box Method 
+  1 index get-box-dict             % => ...Params... Box Method Dict
+  /Methods get                     % => ...Params... Box Method MethodList
+
+% Check if method have been defined
+  dup 2 index known not {
+    (Method is not known:) print
+    1 index ==
+    quit
+  } if
+  
+  exch get exec                    % => 
+} def
+
+/get-types {
+  dup /Types known {
+    dup /Types get
+  } {
+    []
+  } ifelse
+
+  exch pop
+} def
+
+/is-a {                            % => Object Class
+  1 index get-types                % => Object Class Types
+  exch array-find -1 ne
+  exch pop
+} def

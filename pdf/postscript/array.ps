@@ -1,0 +1,284 @@
+% $Header: /cvsroot/html2ps/postscript/array.ps,v 1.1 2005/12/18 07:21:36 Konstantin Exp $
+
+% Actually, array-append and array-prepend should have names exchanged;
+% nevertheless, I don't want to track down renames all over ps files, so I've decided to
+% keep this as is
+%
+% Prepends item to array
+%
+% @param Item item value
+% @param Array source array
+% @return A copy of source array with Item prepended as a first element
+%
+/array-append { % => Item Array
+  aload length 
+  1 add
+  array astore
+} def
+
+/in-array-find {      % => Array Value Pos
+  2 index length 0 eq {
+    pop pop pop -1
+  } {
+    2 index 0 get     % => Array Value Pos A0
+    2 index eq {      % => Array Value Pos
+      3 1 roll        % => Pos Array Value 
+      pop pop         % => Pos 
+    } {
+      1 add           % => Array Value Pos+1
+      2 index 
+      array-pop-first % => Array Value Pos+1 Array'
+      4 3 roll pop    % => Value Pos+1 Array' 
+      3 1 roll        % => Array' Value Pos+1
+      in-array-find
+    } ifelse
+  } ifelse
+} def
+
+/array-find {   % => Array Value
+  0 in-array-find
+} def
+
+/array-insert { % => Index Value Data
+  aload length  % => Index Value A1 .. AN N
+  1 add         % => Index Value A1 .. AN N+1
+  dup 2 add     % => Index Value A1 .. AN N+1 N+3
+  dup index     % => Index Value A1 .. AN N+1 N+3 Index
+  exch          % => Index Value A1 .. AN N+1 Index N+3 
+  1 sub         % => Index Value A1 .. AN N+1 Index N+2 
+  index         % => Index Value A1 .. AN N+1 Index Value
+  exch          % => Index Value A1 .. AN N+1 Value Index 
+  2 index       % => Index Value A1 .. AN N+1 Value Index N+1
+  1 add         % => Index Value A1 .. AN N+1 Value Index N+2
+  exch sub      % => Index Value A1 .. AN N+1 Value N-Index+2
+  1             % => Index Value A1 .. AN N+1 Value N-Index+2 1
+  roll          % => Index Value A1 .. AINDEX-1 Value AINDEX .. AN N+1
+  array astore  % => Index Value Array
+  3 1 roll      % => Array Index Value 
+  pop pop
+} def           % => Data'
+
+/array-last { % => Array
+  dup length  % => Array Length
+  1 sub       % => Array Length-1
+  get         % => Last
+} def
+
+/array-merge {                     % => A1 A2
+  {                                % => A1 A2[i]
+    exch array-prepend             % => A1'
+  } forall                         % => A1'
+} def
+
+/array-pop-last {   % => Array
+  aload length      % => A1 .. AN N
+  1 sub             % => A1 .. AN N-1
+  exch pop          % => A1 .. AN-1 N-1
+  array astore      % => Array'
+} def
+
+/array-pop-first {  % => Array
+  aload length      % => A1 .. AN N
+  1 sub             % => A1 .. AN N-1
+  array astore      % => A1 Array'
+  exch pop          % => Array'
+} def
+
+% Appends item to array
+%
+% @param Item item value
+% @param Array source array
+% @return A copy of source array with Item appended as a last element
+%
+/array-prepend { % => Item Array
+  aload length   % => Item Item1 .. ItemN N
+  1 add          % => Item Item1 .. ItemN N+1
+  dup 1 add      % => Item Item1 .. ItemN N+1 N+2
+  1 index roll   % => Item1 .. ItemN N+1 Item 
+  exch           % => Item1 .. ItemN Item N+1
+  array astore   % => Array
+} def
+
+/array-remove { % => Array Index(ZeroBased)
+  exch          % => Index Array
+  aload length  % => Index A1 .. AN N
+  1 sub         % => Index A1 .. AN N-1
+  dup 2 add     % => Index A1 .. AN N-1 N+2
+  index         % => Index A1 .. AN N-1 Index
+  1 index       % => Index A1 .. AN N-1 Index N-1
+  2 add         % => Index A1 .. AN N-1 Index N+1
+  exch sub      % => Index A1 .. AN N-1 N-Index+1
+  dup 1 sub     % => Index A1 .. AN N-1 N-Index+1 N-Index
+  roll          % => Index A1 .. AINDEX-1 AINDEX+1 .. AN N-1 AINDEX 
+  pop           % => Index A1 .. AINDEX-1 AINDEX+1 .. AN N-1  
+  array astore  % => Index Array
+  exch pop      % => Array
+} def
+
+% Basic insertions algorithm; we're working with small arrays
+% and these arrays are have "good" natural order of elements, so
+% more complicated algorithms are not needed here
+%
+/array-sort {                      % => Data GtFun
+  []                               % => Data GtFun SortedData
+  array-sort-rec                   % => SortedData
+} def
+
+/array-sort-rec {                  % => Data GtFun SortedData
+  2 index length 0 gt {
+    2 index 2 index
+    array-sort-rec-select-max      % => Data GtFun SortedData Data' MaxValue
+    
+    5 4 roll pop                   % => GtFun SortedData Data' MaxValue
+    2 index array-prepend          % => GtFun SortedData Data' SortedData'
+
+    3 2 roll pop                   % => GtFun Data' SortedData'
+    exch                           % => GtFun SortedData' Data'
+    3 1 roll                       % => Data' GtFun SortedData'
+    array-sort-rec
+  } {
+    exch pop
+    exch pop                       % => SortedData
+  } ifelse
+} def
+
+/array-sort-rec-select-max {       % => Data GtFun
+  1 index 0 get                    % => Data GtFun E0
+  0 1                              % => Data GtFun EMax EMaxIndex ECurIndex
+  array-sort-rec-select-max-rec    % => Data GtFun EMax EMaxIndex 
+  
+% remove element found from source array
+  3 index exch array-remove        % => Data GtFun EMax Data'
+  
+  4 2 roll pop pop                 % => EMax Data
+  exch                             % => Data EMax
+} def
+
+/array-sort-rec-select-max-rec {   % => Data GtFun EMax EMaxIndex ECurIndex
+% Check if we're out of source array bounds
+  4 index length 1 index gt {      % => Data GtFun EMax EMaxIndex ECurIndex
+    4 index 1 index get            % => Data GtFun EMax EMaxIndex ECurIndex ECur
+    3 index                        % => Data GtFun EMax EMaxIndex ECurIndex ECur EMax
+    5 index exec                   % => Data GtFun EMax EMaxIndex ECurIndex ECur>EMax
+    {                              % => Data GtFun EMax EMaxIndex  ECurIndex
+      exch pop dup                 % => Data GtFun EMax EMaxIndex' ECurIndex
+      4 index 1 index get          % => Data GtFun EMax EMaxIndex' ECurIndex EMax'
+      4 3 roll pop                 % => Data GtFun EMaxIndex' ECurIndex EMax'
+      3 1 roll                     % => Data GtFun EMax' EMaxIndex' ECurIndex
+    } if                           % => Data GtFun EMax' EMaxIndex' ECurIndex
+    1 add
+    array-sort-rec-select-max-rec
+  } {
+    pop
+  } ifelse
+} def                              % => Data GtFun EMax EMaxIndex
+
+/expand-to {    % => Size Array
+% if array have no elements - return immediately 
+  dup length 0 eq {
+    []                             % => Size Array Flags []
+  } {
+    dup sum       % => Size Array ASize
+    dup 0 gt {    % => Size Array ASize
+      dup         % => Size Array ASize ASize
+      3 index lt  % => Size Array ASize
+      {           % => Size Array ASize
+        2 index   % => Size Array ASize Size
+        exch div  % => Size Array Size/ASize
+        map-scale % => Size Array'
+        exch pop  % => Array'
+      } {         % => Size Array ASize
+        pop exch  % => Array Size
+        pop       % => Array
+      } ifelse    % => Array
+    } {           % => Size Array ASize
+% No content found in some colspan columns
+      pop                           % => Size Array
+      array-pop-first               
+      array-append                  % => Array
+    } ifelse
+  } ifelse
+} def
+
+/expand-to-with-flags {            % => Size Array Flags
+% if array have no elements - return immediately 
+  1 index length 0 eq {
+    []                             % => Size Array Flags []
+  } {
+% Never decrease exising values
+    1 index sum                    % => Size Array Flags ASum
+    3 index                        % => Size Array Flags ASum Size
+    gt {
+      1 index                      % => Size Array Flags Expanded
+    } {                            % => Size Array Flags
+% Subtract non-modifiable values from target value
+      2 copy {
+        dup not { pop } { pop pop 0 } ifelse
+      } zip-with
+      sum                          % => Size  Array Flags Non-modSum
+      4 3 roll exch sub 3 1 roll   % => Size' Array Flags
+% Check if there's any expandable columns
+      2 copy {                   
+        dup { pop } { pop pop 0 } ifelse
+      } zip-with
+      sum                          % => Size Array Flags ModSum
+
+      dup 0 eq {                   % => Size Array Flags ModSum
+        pop                        % => Size Array Flags 
+        1 index                    % => Size Array Flags Array
+        0 get 3 index add          % => Size Array Flags A0'
+        2 index exch
+        0 exch put                 % => Size Array Flags
+        1 index
+      } {                          % => Size Array Flags ModSum
+% Calculate scale koeff
+        3 index exch div           % => Size Array Flags Koeff
+% Apply scale koeff
+        0 1 4 index length 1 sub { % => Size Array Flags Koeff I
+          2 index 1 index get {
+            3 index
+            1 index get            % => Size Array Flags Koeff I A[i]
+            2 index mul            % => Size Array Flags Koeff I A[i]*Koeff
+            4 index exch
+            2 index exch put       % => Size Array Flags Koeff I 
+          } if
+          pop
+        } for                      % => Size Array Flags Koeff
+        pop                        % => Size Array Flags
+        1 index 
+      } ifelse                     % => Size Array Flags Expanded
+    } ifelse
+  } ifelse                         % => Size Array Flags Expanded
+  
+  exch pop
+  exch pop
+  exch pop
+} def
+
+/in-reduce {     % => A1 .. AN N Fun StartValue
+  2 index 0 gt {
+    4 3 roll     % => A1 .. AN-1 N Fun StartValue AN 
+    2 index exec % => A1 .. AN-1 N Fun (StartValue Fun AN)
+    3 2 roll     % => A1 .. AN-1 Fun (StartValue Fun AN) N
+    1 sub        % => A1 .. AN-1 Fun (StartValue Fun AN) N-1
+    3 1 roll     % => A1 .. AN-1 N-1 Fun (StartValue Fun AN)
+    in-reduce
+  } {            % => N Fun Value
+    3 1 roll     % => Value N Fun 
+    pop pop      % => Value
+  } ifelse
+} def
+
+/reduce {                          % => Fun StartValue Array 
+  aload length                     % => Fun StartValue A1 .. AN N
+  dup 3 add                        % => Fun StartValue A1 .. AN N N+3 
+  1 index 1 add                    % => Fun StartValue A1 .. AN N N+3 N+1
+  roll                             % => A1 .. AN N Fun StartValue
+  in-reduce 
+} def
+
+/sum {     % => Array
+  {add} 0  % => Array {add} 0
+  3 2 roll % => {add} 0 Array 
+  reduce   % => Sum
+} def

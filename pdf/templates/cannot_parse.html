@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>html2ps/html2pdf error message</title>
+<style>
+body {
+  color:#000;
+  background-color:#fff;
+  margin:10px;
+  font-family:arial, helvetica, sans-serif;
+  color:#000;
+  font-size:12px;
+  line-height:18px;
+}
+p,td {
+  color:#000;
+  font-size:12px;
+  line-height:18px;
+  margin-top:3px;
+  vertical-align: top;
+}
+h1 {
+  font-family:arial, helvetica, sans-serif;
+  color:#669;
+  font-size:27px;
+  letter-spacing:-1px;
+  margin-top:12px;
+  margin-bottom:12px;
+}
+tr.odd {
+  background-color: #f0f0f0;
+}
+tr.even {
+  background-color: #ffffff;
+}
+td {
+  padding: 3px;
+}
+</style>
+</head>
+<body>
+<h1>Error</h1>
+<p>Could not parse document you've specified; the code caused critical XML parser error. 
+If you're sure you have valid HTML/XHTML code, please report this behaviour as a bug.
+
+<p>This script makes an attempt to convert your document to valid XHTML code which can be parsed 
+by freely available XML parsers. It is able to detect and fix mismatching tags, malformed attributes
+and unescaped characters having special meanining in HTML. Nevertheless, not all pages 
+displaying in such powerful browsers like IE and FireFox, could be fixed; in such case, please 
+use code <a href="http://validator.w3.org/">validator</a> and fix critical errors.
+
+<p>Rarely, you can face a bug in HTML-to-XHTML conversion routines preventing the valid code to be parsed.
+In this case you can disable this behaviour completely by setting <tt>html2xhtml</tt> parameter 
+(&quot;Do not use conversion, input is valid XHTML&quot;) to  some value. In this case, your code
+ will be passed to XML parser as-is.
+</body>
+</html>              

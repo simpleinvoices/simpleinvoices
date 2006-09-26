@@ -1,0 +1,199 @@
+/box-image-broken-create {         % => 
+  box-image-generic-create
+  dup box-image-broken-setup-methods
+  dup /box-image-broken add-type
+} def
+
+/box-image-broken-setup-methods {
+  dup /Methods get
+  dup /show {box-image-broken-show} put
+  pop pop
+} def
+
+/box-image-broken-show {           % => Viewport This
+  gsave
+  
+  0.1 setlinewidth
+  
+  dup get-left  1 index get-top    moveto
+  dup get-right 1 index get-top    lineto
+  dup get-right 1 index get-bottom lineto
+  dup get-left  1 index get-bottom lineto
+  closepath
+  stroke
+  
+  dup get-left  1 index get-top    moveto
+  dup get-right 1 index get-top    lineto
+  dup get-right 1 index get-bottom lineto
+  dup get-left  1 index get-bottom lineto
+  closepath
+  clip
+
+  % TODO: output ALT attribute
+  
+  grestore
+  pop pop
+} def
+
+/box-image-create {                % => Mask Image Init SY SX
+  image-create
+  box-image-generic-create
+  dup box-image-setup-methods
+  dup /box-image add-type          % => Image Box
+
+  dup /Image 3 index put
+  exch pop
+} def
+
+/box-image-setup-methods {         % => 
+  dup /Methods get
+  dup /show {box-image-show} put
+  pop pop
+} def
+
+/box-image-show {                  % => Viewport Box
+  2 copy box-generic-show
+    
+% Check if "designer" set the height or width of this image to zero; in this there will be no reason 
+% in drawing the image at all
+  dup /get-width call-method 1 lt
+  1 index get-height 1 lt or {
+  } {
+    dup /Image get                 % => Viewport Box Image
+    1 index get-left
+    2 index get-bottom moveto      % => Viewport Box Image
+    1 index /get-width call-method
+    2 index get-height             % => Viewport Box Image W H
+    3 2 roll
+    image-show                     % => Viewport Box 
+  } ifelse                         % => Viewport Box
+  pop pop
+} def
+
+/box-image-generic-create {        % => 
+  box-generic-inline-create
+  dup box-image-generic-setup-methods
+  dup /box-image-generic add-type
+
+  dup /scale /none put
+  dup /src-width  1 put
+  dup /src-height 1 put
+} def
+
+/box-image-generic-get-max-width { % => Context This
+  dup get-full-width
+  exch pop
+  exch pop
+} def
+
+/box-image-generic-get-min-width { % => Context This
+  dup get-full-width
+  exch pop
+  exch pop
+} def
+
+/box-image-generic-get-scale {     % => This
+  /scale get
+} def
+
+/box-image-generic-get-src-height {
+  /src-height get
+} def
+
+/box-image-generic-get-src-width {
+  /src-width get
+} def
+
+/box-image-generic-pre-reflow-images { % => This
+  dup box-image-generic-get-scale  % => This Scale
+  
+  dup /width eq {                  % => This Scale
+    1 index box-image-generic-get-src-width
+    2 index box-image-generic-get-src-height div
+    2 index /get-width
+    call-method mul                % => This Scale Size
+
+    dup 3 index put-height         % => This Scale Size
+    2 index put-default-baseline   % => This Scale                           
+  } if
+
+  dup /height eq {                 % => This Scale
+    1 index box-image-generic-get-src-height
+    2 index box-image-generic-get-src-width div
+    2 index get-height mul         % => This Scale Size
+
+    dup 3 index put-width          % => This Scale Size
+    
+    dup wc-create-constant
+    3 index put-width-constraint   % => This Scale Size
+
+    2 index put-default-baseline   % => This Scale
+  } if
+
+  pop pop
+} def
+
+/box-image-generic-put-scale {     % => Scale This
+  exch                             % => This Scale
+  /scale exch                      % => This /scale Scale
+  put
+} def
+
+/box-image-generic-put-src-height {% => Scale This
+  exch                             % => This Scale
+  /src-height exch                 % => This /src-height Scale
+  put
+} def
+
+/box-image-generic-put-src-width { % => Scale This
+  exch                             % => This Scale
+  /src-width exch                  % => This /src-width Scale
+  put
+} def
+
+/box-image-generic-reflow {        % => Context Parent This
+  dup box-image-generic-pre-reflow-images
+                                   % => Context Parent This
+    
+% Check if we need a line break here
+  2 index
+  2 index
+  2 index
+  /maybe-line-break call-method
+  pop
+
+% set default baseline
+  dup get-default-baseline
+  1 index put-baseline
+
+% append to parent line box
+  dup 2 index
+  box-container-append-line
+
+% Move box to the parent current point
+  1 index
+  1 index
+  box-generic-guess-corner         % => Context Parent This
+
+% Move parent's X coordinate
+  1 index get-current-x
+  1 index get-full-width
+  add
+  2 index put-current-x            % => Context Parent This
+
+% Extend parent height
+  dup get-bottom-margin
+  2 index
+  box-generic-extend-height        % => Context Parent This
+
+  pop pop pop
+} def
+
+/box-image-generic-setup-methods {
+  dup /Methods get
+  dup /get-max-width     { box-image-generic-get-max-width } put
+  dup /get-min-width     { box-image-generic-get-min-width } put
+  dup /pre-reflow-images { box-image-generic-pre-reflow-images } put
+  dup /reflow            { box-image-generic-reflow } put
+  pop pop
+} def

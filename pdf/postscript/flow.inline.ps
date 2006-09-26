@@ -1,0 +1,116 @@
+% $Header: /cvsroot/html2ps/postscript/flow.inline.ps,v 1.1 2005/12/18 07:21:38 Konstantin Exp $
+
+% Check if given point is inside some alredy-layout floating box
+/maybe-line-break-1 {              % => Parent Child
+% Check for right-floating boxes
+% If upper-right corner of this inline box is inside of some float, wrap the line
+  context-floats                   % => Parent Child Floats
+  1 index get-full-width
+  3 index get-current-x add        % => Parent Child Floats X
+  3 index get-current-y            % => Parent Child Floats X Y
+  point-in-floats                  % => Parent Child Float/false
+  false ne                         % => Parent Chils true/false
+  exch pop
+  exch pop
+} def                              % => true/false
+
+/maybe-line-break-2 {              % => Parent Child
+  dup get-full-width
+  2 index get-current-x add        % => Parent Child X
+
+  2 index get-right-internal
+  rounding-epsilon add             % => Parent Child X R
+
+  3 index get-current-x            % => Parent Child X R CX
+  4 index get-left-internal        % => Parent Child X R CX Left          
+
+  gt 3 1 roll gt and               % => Parent Child (X>R)&&(CX>Left)
+
+  exch pop
+  exch pop                         % => true/false
+} def
+
+/maybe-line-break-in {             % => Parent Child
+  2 copy maybe-line-break-1 {
+    pop pop true
+  } {
+    2 copy maybe-line-break-2 {
+      pop pop true
+    } {
+      pop pop false
+    } ifelse
+  } ifelse
+} def
+
+/maybe-line-break {                % => Parent Child
+  2 copy maybe-line-break-in dup { % => Parent Child Break
+% break is needed
+% check if parent line box containg any boxes
+    2 index get-line length 0 eq {
+      1 index get-height
+      3 index get-current-y
+      exch sub                     % => Parent Child Break CY'
+      3 index put-current-y
+    } if                           % => Parent Child Break
+
+    2 index close-line
+  } if                             % => Parent Child Break
+
+  exch pop
+  exch pop                         % => Break
+} def
+
+/line-break-allowed {              % => Box
+  dup get-box-dict /Display get
+  dup /-text ne
+  exch pop
+  exch pop
+} def                              % => true/false
+
+/flow-inline {                     % => Parent Child
+  1 index line-break-allowed {
+    {
+      2 copy maybe-line-break not
+      { exit } if
+    } loop
+  } if
+
+% set default baseline
+  dup get-default-baseline 
+  1 index put-baseline
+
+% Determine the baseline position and height of the text-box using line-height CSS property
+  dup get-box-dict
+  /Display get 
+  /inline-text eq {
+    apply-line-height
+  } if
+
+  dup get-vertical-align exec
+
+  dup 2 index append-line 
+
+  % Determine coordinates of upper-left corner
+  1 index get-current-x
+  2 index get-current-y       % => Parent Child X Y
+  2 index
+  move-to-box                 % => Parent Child
+
+  % ???
+  dup
+  0 1 index get-margin-top 
+  offset-box
+
+  % Offset parent current X value
+  1 index get-current-x            % => Parent Child PCX
+  1 index get-full-width           % => Parent Child PCX CW
+  add                              % => Parent Child PCX+CW
+  2 index put-current-x            % => Parent Child
+
+  % extend parent's height
+  dup get-full-height
+  exch pop
+  extend-height                 % => Parent
+
+  pop
+} def

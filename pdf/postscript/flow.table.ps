@@ -1,0 +1,163 @@
+/flow-table {                      % => Parent Child
+% Calculate margin values if they have been set as a percentage 
+  2 copy
+  calc-percentage-margins
+
+% Calculate width value if it have been set as a percentage
+  2 copy
+  calc-percentage-width
+
+%  dup get-box-dict 
+%  /Parent known {
+%    dup calc-auto-width-margins
+%  } if                             % => Parent Child
+
+% As table width can be deterimined by its contents, we may calculate auto values 
+% only AFTER the contents have been reflown; thus, we'll offset the table 
+% as a whole by a value of left margin AFTER the content reflow
+
+% suppress top/bottom margin for the first block box inside the table cell
+% check if parent of this block is the table cell
+  1 index get-box-dict /Display get
+  /table-cell eq {
+% check if current box is the first child
+    1 index get-content 0 get 1 index eq {
+      0 1 index put-margin-top
+    } if
+% check if current box is the last child
+    1 index get-content array-last 1 index eq {
+      0 1 index put-margin-bottom
+    } if
+  } if
+
+% DO MARGIN COLLAPSING
+  1 index get-line               % => Parent Child Line
+  length                         % => Parent Child LL
+
+  0 gt {                         % => Parent Child 
+    dup get-margin-top
+    context-push-collapsed-margin-top
+
+    dup get-margin-top
+    neg
+  } {
+    1 index get-last             % => Parent Child Last
+% Check if current element if the first child 
+    dup () eq { true } 
+      { 1 index is-container not } ifelse
+    { 
+      pop                          % => Parent Child
+% If parent is a table-cell, suppress top-margin
+      1 index get-display  
+      /table-cell eq {
+        0
+
+        1 index get-margin-top
+        context-push-collapsed-margin-top
+      } {
+% Collapse with parent margins
+        dup get-margin-top         % => Parent Child ChildMT
+        context-get-collapsed-margin-top
+        min                        % => Parent Child min(ChildMT, ParentCMT)
+        1 index get-margin-top     
+        sub
+            
+        1 index get-margin-top
+        context-get-collapsed-margin-top
+        max
+        context-push-collapsed-margin-top
+      } ifelse
+    } {                          % => Parent Child Last
+% Collapse with sibling margins
+      dup get-margin-bottom
+      2 index get-margin-top
+      max
+      context-push-collapsed-margin-top
+
+      get-margin-bottom          % => Parent Child M
+      1 index get-margin-top
+      exch sub 0 max neg      
+    } ifelse
+  } ifelse
+  2 index get-current-y          % => Parent Child M CY
+  add                            % => Parent Child M+CY
+
+% While drawing, we need position of margin edge, not border edge.
+  1 index get-margin-top
+  add                              % => Parent Child DY
+
+% Check if we need to offset box vertically due the 'clear' property
+  apply-clear
+
+% Set the calculated value as the outer edge of this box
+  2 index put-current-y          % => Parent Child
+
+  1 index close-line             % => 
+  dup 2 index append-line 
+
+% Set position of upper-left child corner
+  1 index get-current-x
+  2 index get-current-y       % => Parent Child X Y
+
+  2 index
+  move-to-box                 % => Parent Child
+
+% By default, child block box will fill all available parent width;
+% note that actual width will be smaller because of non-zero padding, border and margins
+  1 index get-width         % => Parent Child PW
+  1 index put-full-width    % => Parent Child
+
+% reflow contents
+  reflow                    % => Parent Child
+
+% Update the collapsed margin value, with current box bottom margin  
+  context-pop-collapsed-margin-top
+  
+  dup get-margin-bottom
+  context-push-collapsed-margin-top
+
+% Calculate margins and/or width is 'auto' values have been specified
+  dup get-box-dict 
+  /Parent known {
+    dup calc-auto-width-margins
+  } if                             % => Parent Child
+
+% if left margin had 'auto' value, we need to offeset the box content by it value,
+% as it changed; if margin had fixed value, we weill not offset content
+  dup get-box-dict
+  /Margin get
+  /Auto get
+  /Left get {
+    dup get-margin-left 0            % => Parent Child LM 0
+    2 index get-table-content        % => Parent Child LM 0 Content
+    {
+        2 index 2 index
+        offset-box
+    } forall
+    pop pop                          % => Parent Child
+  } if
+
+%  dup 
+%  dup get-margin-left
+%  0 offset-box                     % => Parent Child
+
+% we're now interested in last content y, not the bottom border of the containing
+% block, because, due the min-height, bottom border can contain lesser (lower on the page)
+% value than current y
+%  1 index get-bottom-internal
+  1 index get-current-y
+  1 index get-bottom
+  sub 
+
+  2 index exch                  % => Parent Child Parent CH
+  extend-height pop             % => Parent Child
+  
+  1 index get-right-internal
+  2 index put-current-x
+
+% terminate current line box
+  1 index close-line
+
+% clear the stack
+  pop pop
+} def

@@ -1,0 +1,165 @@
+/box-table-row-create {            % =>
+  box-container-create             % => Box
+  dup box-table-row-setup-methods  % => Box
+  dup /box-table-row add-type      % => Box
+} def
+
+/box-table-row-get-baseline {      % => Row
+  { box-table-cell-get-baseline max }
+  0
+  2 index get-content
+  reduce                           % => Row RowBaseline
+  exch pop
+} def
+
+/box-table-row-get-colspans {      % => RowIndex Row
+  [] 0                             % => RowIndex Row Spans I
+  2 index get-content {            % => RowIndex Row Spans I Cell
+    dup box-table-cell-get-colspan
+    1 gt {
+      4 index                      % => RowIndex Row Spans I Cell Row
+      2 index                      % => RowIndex Row Spans I Cell Row Col
+      2 index
+      box-table-cell-get-colspan   % => RowIndex Row Spans I Cell Row Col Size
+      cellspan-create              % => RowIndex Row Spans I Cell Span
+
+      exch pop                     % => RowIndex Row Spans I Span
+      3 2 roll
+      array-prepend
+      exch                         % => RowIndex Row Spans' I 
+    } { pop } ifelse
+ 
+    1 add
+  } forall                         % => RowIndex Row Spans I
+  pop                              % => RowIndex Row Spans
+
+  exch pop
+  exch pop
+} def
+
+/box-table-row-get-rowspans {      % => RowIndex Row
+  [] 0                             % => RowIndex Row Spans I
+  2 index get-content {            % => RowIndex Row Spans I Cell
+    dup box-table-cell-get-rowspan
+    1 gt {
+      4 index                      % => RowIndex Row Spans I Cell Row
+      2 index                      % => RowIndex Row Spans I Cell Row Col
+      2 index
+      box-table-cell-get-rowspan   % => RowIndex Row Spans I Cell Row Col Size
+      cellspan-create              % => RowIndex Row Spans I Cell Span
+
+      exch pop                     % => RowIndex Row Spans I Span
+      3 2 roll
+      array-prepend
+      exch                         % => RowIndex Row Spans' I 
+    } { pop } ifelse
+ 
+    1 add
+  } forall                         % => RowIndex Row Spans I
+  pop                              % => RowIndex Row Spans
+
+  exch pop
+  exch pop
+} def
+
+/box-table-row-get-table-columns-max-widths {
+  2 copy /get-max-width box-table-row-get-table-columns-xxx-widths
+  exch pop
+  exch pop
+} def
+
+/box-table-row-get-table-columns-min-widths {
+  2 copy /get-min-width box-table-row-get-table-columns-xxx-widths
+  exch pop
+  exch pop
+} def
+
+/box-table-row-get-table-columns-xxx-widths { % => Context Row Method
+  []                               % => Context Row Method Widths 
+  2 index get-content {            % => Context Row Method Widths Cell
+    dup box-table-cell-get-colspan 
+    1 gt {                         % => Context Row Method Widths Cell
+      pop 0                        % => Context Row Method Widths 0
+    } {                            % => Context Row Method Widths Cell
+      4 index exch                 % => Context Row Method Widths Context Cell
+      3 index call-method          % => Context Row Method Widths W
+    } ifelse
+
+    exch array-prepend             % => Context Row Method Widths'
+  } forall                         % => Context Row Method Widths'
+    
+  exch pop
+  exch pop
+  exch pop 
+} def
+
+/box-table-row-height {            % => Row
+  0 
+  1 index get-content {            % => Row Height Cell
+    dup box-table-cell-get-rowspan
+    1 le {
+      get-full-height
+      max                          % => Row Height
+    } {
+      pop
+    } ifelse    
+  } forall                         % => Row Height
+  exch pop
+} def
+
+/box-table-row-resize {            % => Top Height Row
+% Do cell vertical-align
+% Calculate row baseline 
+  dup box-table-row-get-baseline   % => Top Height Row Baseline
+
+% Process cells contained in current row
+  1 index get-content {            % => Top Height Row Baseline Cell
+% Offset cell if needed
+    4 index
+    1 index get-top-margin sub
+    0
+    2 index /offset call-method    % => Top Height Row Baseline Cell
+    
+% Vertical-align cell (do not apply to rowspans)
+
+    dup box-table-cell-get-rowspan 1 eq {
+      1 index
+      4 index
+      2 index                      % => Top Height Row Baseline Cell Baseline Height Cell
+      box-table-cell-apply-vertical-align
+                                   % => Top Height Row Baseline Cell
+
+% Expand cell to full row height
+      3 index
+      1 index
+      put-full-height              % => Top Height Row Baseline Cell
+      
+    } if                           % => Top Height Row Baseline Cell
+
+    pop                            % => Top Height Row Baseline 
+  } forall                         % => Top Height Row Baseline
+
+  pop pop pop pop
+} def
+
+/box-table-row-setup-methods {     % => Box
+  dup /Methods get
+  dup /show {box-table-row-show} put
+  pop pop
+} def
+
+% Note that we SHOULD owerride the show method inherited from GenericContainerBox, 
+% as it MAY draw row background in case it was set via CSS rules. As row box 
+% is a "fake" box and will never have reasonable size and/or position in the layout,
+% we should prevent this
+/box-table-row-show {              % => Viewport Box 
+  dup get-content {                % => Viewport Box Element
+    dup /visibility get-css-value
+    /visible eq {
+      2 index 1 index
+      /show call-method
+    } if                           % => Viewport Box Element
+    pop 
+  } forall 
+  pop pop
+} def

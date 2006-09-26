@@ -1,0 +1,74 @@
+/box-whitespace-create {           % =>
+  box-text-create
+
+  dup get-box-dict
+  /Methods get
+  dup /reflow {box-whitespace-reflow} put
+  dup /is-whitespace {box-whitespace-is-whitespace} put
+  pop
+
+  dup /box-whitespace add-type
+
+  ( ) 1 index put-text
+} def
+
+/box-whitespace-is-whitespace {    % => Box
+  pop true
+} def
+
+/box-whitespace-reflow {           % => Context Parent Box
+% Check if there are any boxes in parent's line box
+  1 index                          % => Context Parent Box Parent
+  box-container-line-box-empty {   % => Context Parent Box
+% The very first whitespace in the line box should not affect neither height nor baseline of the line box;
+% because following boxes can be smaller that assumed whitespace height
+% Example: <br>[whitespace]<img height="2" width="2"><br>; whitespace can overextend this line
+    0 1 index put-height    
+    0 1 index put-width
+    0 1 index put-default-baseline
+  } {                              % => Context Parent Box 
+% Duplicate whitespace boxes should not offset further content and affect the line box length
+    1 index
+    get-line                       % => Context Parent Box Line
+    array-last
+    /box-whitespace is-a {         % => Context Parent Box
+      0 1 index put-height    
+      0 1 index put-width
+      0 1 index put-default-baseline
+    } if
+  } ifelse
+    
+% Determine the baseline position and height of the text-box using line-height CSS property
+   dup box-generic-apply-line-height
+    
+% set default baseline
+   dup get-default-baseline
+   1 index put-baseline
+
+% append current box to parent line box
+   dup 2 index
+   box-container-append-line       % => Context Parent This
+
+% Determine coordinates of upper-left _margin_ corner
+   1 index 1 index
+   box-generic-guess-corner        % => Context Parent This
+
+% Offset parent current X coordinate
+   dup get-full-width
+   2 index get-current-x
+   add                             % => Context Parent This CX'
+   2 index put-current-x           % => Context Parent This
+
+% Extends parents height
+   dup get-bottom-margin           % => Context Parent This BM
+   2 index
+   box-generic-extend-height       % => Context Parent This 
+
+% Update the value of current collapsed margin; pure text (non-span)
+% boxes always have zero margin
+
+  2 index context-pop-collapsed-margin
+  0 3 index context-push-collapsed-margin
+
+  pop pop pop
+} def

@@ -1,0 +1,665 @@
+%!PS
+% $Header: /cvsroot/html2ps/postscript/header.ps,v 1.1 2005/12/18 07:21:38 Konstantin Exp $
+/DeviceRGB setcolorspace
+/cm {28.34 mul} def
+/mm {2.834 mul} def
+
+/rounding-epsilon 0.001 def
+
+/default-font /Times-Roman findfont def
+
+% User settings
+##PAGE##
+##PT##
+##PS2PDF##
+##TRANSPARENCY##
+##IMAGEQUALITY##
+/setting-debug-box ##DEBUGBOX## def
+/setting-draw-page-border ##PAGEBORDER## def
+/real-page-height { pageheight tmargin sub bmargin sub } def
+/real-page-width  { pagewidth  lmargin sub rmargin sub } def
+
+% We need to call init page now, unless PS2PDF will incorrecly determine th orientation of the very first PDF page
+initpage
+
+% MAX and MIN functions are build-ins in ghostscript;
+% Adobe distiller (and, well, most other PS interpreters) will require 
+% the definition of MIN and MAX
+currentdict /max known not {
+  /max { 2 copy lt { exch } if pop } def
+} if
+
+currentdict /min known not {
+  /min { 2 copy gt { exch } if pop } def
+} if
+
+/normalize {    % => Array
+  dup sum
+  1 exch div
+  map-scale
+} def
+
+/map-scale {     % => Array Scale
+  /mul  cvx
+  /exch cvx
+  /array-append 
+  cvx            % => Array Scale mul exch array-prepend
+  4 array astore
+  cvx            % => Array {Scale mul array-prepend}
+  []             % => Array {Scale mul array-prepend} []
+  3 2 roll       % => {Scale mul array-prepend} [] Array 
+  reduce
+} def
+
+/reduce-max {
+  {max} 0  % => Array {max} 0
+  3 2 roll % => {max} 0 Array 
+  reduce   % => Max
+} def
+
+/in-zip-with {               % => Data A B Fun
+  1 index length 0 gt {
+    2 index 0 get            % => Data A B Fun A0
+    2 index 0 get            % => Data A B Fun A0 B0 
+    2 index exec             % => Data A B Fun (A0 Fun B0)
+    5 2 roll array-pop-first % => Fun (A0 Fun B0) Data A B'
+    5 1 roll array-pop-first % => B' Fun (A0 Fun B0) Data A' 
+    5 1 roll array-prepend   % => A' B' Fun Data' 
+    4 1 roll                 % => Data' A' B' Fun  
+    in-zip-with
+  } {
+    pop pop pop
+  } ifelse
+} def
+/zip-with {     % => A B Fun
+  [] 4 1 roll   % => [] A B Fun
+  in-zip-with
+} def
+
+/font-underline-thick {           % => <<Font>>
+  dup /FontInfo get
+% some fonts (especially when you're using Adobe Distiller) do not contain /UnderlinePosition. 
+  dup /UnderlineThickness known {
+    /UnderlineThickness get
+  } {
+    pop 1 px
+  } ifelse                        % => <<Font>> UT
+
+  exch /FontMatrix get
+  transform
+  exch pop                        % => UT
+} def
+
+% Table helpers
+/in-array-extend {                % => Left Value Array
+  2 index 0 gt {
+    2 copy                        % => Left Value Array Value Array
+    array-prepend                 % => Left Value Array Array'
+    exch pop                      % => Left Value Array'
+    3 2 roll                      % => Value Array' Left 
+    1 sub                         % => Value Array' Left-1
+    3 1 roll                      % => Left Value Array'  
+    in-array-extend               % => Array'
+  } {
+    3 1 roll                      % => Array Left Value
+    pop pop                       % => Array
+  } ifelse
+} def
+
+/array-extend {                   % => Array Size DefValue
+  2 index length                  % => Array Size DefValue ALen
+  2 index exch sub                % => Array Size DefValue Size-ALen
+  1 index                         % => Array Size DefValue Size-ALen DefValue
+  4 index                         % => Array Size DefValue Size-ALen DefValue Array
+  in-array-extend                 % => Array Size DefValue Array'
+  4 1 roll                        % => Array' Array Size DefValue 
+  pop pop pop                     % => Array'
+} def
+
+% height constraint priority
+/hc-lt {                           % => C1 C2
+  1 index
+  array-last
+  /wc-none cvx eq {
+    pop pop true
+  } { 
+    1 index array-last 
+    /hc-constant cvx eq {
+      dup array-last
+      /wc-none cvx ne
+      exch pop
+      exch pop
+    } {
+      dup array-last
+      /wc-fraction cvx eq
+      exch pop 
+      exch pop
+    } ifelse
+  } ifelse
+} def
+
+% priority: percentage, absolute, no-constraint
+/row-get-height-constraint {       % => Row 
+  {                                % => 
+    get-height-constraint
+    exch
+    array-append
+  }
+  []
+  2 index
+  reduce
+  exch pop                         % => CellHCs
+
+  {
+    2 copy
+    hc-lt {
+      exch pop
+    } {
+      pop
+    } ifelse
+  }
+  {wc-none}
+  2 index
+  reduce
+  exch pop                         % => HCWithMostPriority
+} def
+/table-get-colspans { % => Table
+  get-content         % => Content
+  3 get               % => Colspans
+} def
+/table-get-rowspans { % => Table
+  get-content         % => Content
+  4 get               % => Rowspans
+} def
+/table-put-colspans { % => Colspans Table 
+  get-content         % => Colspans Content
+  3                   % => Colspans Content 3
+  3 2 roll            % => Content 3 Colspans 
+  put                 % => 
+} def
+/table-put-rowspans { % => Rowspans Table 
+  get-content         % => Colspans Content
+  4                   % => Colspans Content 3
+  3 2 roll            % => Content 3 Rowspans 
+  put                 % => 
+} def
+/table-add-colspan {  % => SpanSize CurRow CurColumn Table
+  4 1 roll            % => Table SpanSize CurRow CurColumn 
+  3 array astore      % => Table NewSpan 
+  1 index             % => Table NewSpan Table
+  table-get-colspans  % => Table NewSpan Colspans  
+  array-append        % => Table Colspans'
+  exch
+  table-put-colspans  % => 
+} def
+/table-add-rowspan {  % => SpanSize CurRow CurColumn Table
+  4 1 roll            % => Table SpanSize CurRow CurColumn 
+  3 array astore      % => Table NewSpan 
+  1 index             % => Table NewSpan Table
+  table-get-rowspans  % => Table NewSpan Colspans  
+
+% determine index to place new rowspan to
+  {                   % => ... [CColumn Index] [Sz Row Col]
+    1 index 0 get     % => ... [CColumn Index] [Sz Row Col] CColumn
+    1 index 2 get     % => ... [CColumn Index] [Sz Row Col] CColumn Col
+    ge {
+      pop 
+      dup 1 get       % => ... [CColumn Index] Index
+      1 add
+      1 index exch
+      1 exch put      % => ... [CColumn Index+1]
+    } {
+      pop             % => ... [CColumn Index]
+    } ifelse
+  }
+  2 index 2 get 
+  0 
+  2 array astore      % => Table NewSpan Colspans [CColumn 0]
+  2 index
+
+  reduce              % => Table NewSpan Colspans [CColumn Index]
+
+  1 get               % => Table NewSpan Colspans Index
+  3 1 roll            % => Table Index NewSpan Rowspans 
+  array-insert        % => Table Rowspans'
+
+  exch
+  table-put-rowspans  % => 
+} def
+/replicate-row {  % => Length Length
+  dup 0 gt {
+% make 'fake' cells to pad table row to the desired length
+    box-block-create 
+                  % => Length Length []
+    3 1 roll      % => [] Length Length
+    1 sub         % => [] Length Length-1
+    replicate-row
+  } if
+} def
+/render-background-image-transparent {
+  2 index /Mask get              % => Box ImageDict W H Mask
+  3 index /Samples get           % => Box ImageDict W H Mask Samples
+
+  4 index /XRepeat known
+  {
+    5 index get-width-padded     % => Box ImageDict W H Mask Sample WP
+    4 index px div ceiling cvi   % => Box ImageDict W H Mask Sample HRepeats
+  } {
+    1 
+  } ifelse                       % => Box ImageDict W H Mask Sample HRepeats 
+
+  5 index /YRepeat known
+  {
+    6 index get-height-padded    % => Box ImageDict W H Mask Sample HRepeats HP
+    4 index px div ceiling cvi   % => Box ImageDict W H Mask Sample HRepeats VRepeats
+  } {
+    1 
+  } ifelse                       % => Box ImageDict W H Mask Sample HRepeats VRepeats
+
+  {                              % => Box ImageDict W H Mask Samples HRepeats
+    currentpoint                 % => Box ImageDict W H Mask Samples HRepeats X Y
+    exch pop                     % => Box ImageDict W H Mask Samples HRepeats Y
+    7 index get-left-padded      % => Box ImageDict W H Mask Samples HRepeats Y X
+    exch moveto                  % => Box ImageDict W H Mask Samples HRepeats
+
+    0 4 index px neg rmoveto
+    dup 
+    {                            % => Box ImageDict W H Mask Samples HRepeats
+      5 1 roll                   % => Box ImageDict HRepeats W H Mask Samples 
+      4 copy                     % => Box ImageDict HRepeats W H Mask Samples W H Mask Samples
+      4 2 roll                   % => Box ImageDict HRepeats W H Mask Samples Mask Samples W H 
+      2 copy                     % => Box ImageDict HRepeats W H Mask Samples Mask Samples W H W H
+      6 2 roll px 6 1 roll px 
+      6 1 roll                   % => Box Image Dict HRepeats W H Mask Samples W H W H Mask Samples
+      11 index /Init get 
+      show-transparent-image     % => Box Image Dict HRepeats W H Mask Samples
+      5 4 roll                   % => Box Image Dict W H Mask Samples HRepeats
+
+      4 index px 0 rmoveto
+    } repeat
+  } repeat
+
+  pop pop pop pop pop pop
+} def
+/render-background-image {
+  2 index /Samples get           % => Box ImageDict W H Samples
+
+  3 index /XRepeat known
+  {
+    4 index get-width-padded     % => Box ImageDict W H Sample WP
+    3 index px div ceiling cvi   % => Box ImageDict W H Sample HRepeats
+  } {
+    1 
+  } ifelse                       % => Box ImageDict W H Sample HRepeats 
+
+  4 index /YRepeat known
+  {
+    5 index get-height-padded    % => Box ImageDict W H Sample HRepeats HP
+    3 index px div ceiling cvi   % => Box ImageDict W H Sample HRepeats VRepeats
+  } {
+    1 
+  } ifelse                       % => Box ImageDict W H Sample HRepeats VRepeats
+                                                        
+  {                              % => Box ImageDict W H Samples HRepeats
+    currentpoint                 % => Box ImageDict W H Samples HRepeats X Y
+    exch pop                     % => Box ImageDict W H Samples HRepeats Y
+    6 index get-left-padded      % => Box ImageDict W H Samples HRepeats Y X
+    exch moveto                  % => Box ImageDict W H Samples HRepeats
+
+    0 3 index px neg rmoveto
+    dup 
+    {                            % => Box ImageDict W H Samples HRepeats
+      4 1 roll                   % => Box ImageDict HRepeats W H Samples 
+      3 copy                     % => Box ImageDict HRepeats W H Samples W H Samples
+      3 1 roll                   % => Box ImageDict HRepeats W H Samples Samples W H 
+      2 copy                     % => Box ImageDict HRepeats W H Samples Samples W H W H
+      5 2 roll px 5 1 roll px 
+      5 1 roll                   % => Box Image Dict HRepeats W H Samples W H W H Samples
+      9 index /Init get
+      show-image                 % => Box Image Dict HRepeats W H Samples
+      4 3 roll                   % => Box Image Dict W H Samples HRepeats
+
+      3 index px 0 rmoveto
+    } repeat
+  } repeat
+
+  pop pop pop pop pop 
+} def
+
+% Show absolute positioned boxes layer
+/show-box-absolute {
+  dup is-static not {
+    show-box-force
+  } if
+} def
+
+% Displaying data
+
+/show-text {             % => Text FontSize FontName 
+  findfont
+  exch                   % => Text <Font> FontSize 
+  
+  scalefont              % => Text <Font'>
+  setfont                % => Text 
+  show                   % => 
+} def        
+
+/in-add-table-row {                % => Box
+  dup get-content  % => Box [Cols Rows Content](RawContent)
+  dup 1 get 1 add  % => Box [Cols Rows Content](RawContent) Rows+1
+  1 index exch 
+  1 exch put       % => Box [Cols Rows+1 Content](RawContent)
+  dup 2 get        % => Box [Cols Rows+1 Content](RawContent) Content
+  aload length     % => Box [Cols Rows+1 Content](RawContent) Row1 .. RowN N
+  1 add            % => Box [Cols Rows+1 Content](RawContent) Row1 .. RowN N+1
+  []               % => Box [Cols Rows+1 Content](RawContent) Row1 .. RowN N+1 []
+  exch             % => Box [Cols Rows+1 Content](RawContent) Row1 .. RowN [] N+1
+  array astore     % => Box [Cols Rows+1 Content](RawContent) NewContent
+  2 exch put
+} def
+
+/add-table-row {                   % => Box
+  dup is-table {
+    in-add-table-row
+  } if
+} def
+
+% BOX getters
+/get-real-height { 1 get } def
+/get-parent-height-fraction {     % => Box Fraction
+  1 index get-box-dict
+  /Parent known {
+    1 index get-box-dict /Parent get
+    get-height
+    mul
+    exch pop
+  } {
+% if it is the top-level box, just return its own height
+    pop get-height
+  } ifelse
+} def
+/get-max-height {
+  dup get-box-dict                % => Box HB
+  /Height get
+  dup /MaxPercentage get {
+    /Max get
+    1 index exch
+    get-parent-height-fraction
+  } {
+    /Max get
+  } ifelse
+
+  exch pop
+} def
+
+% Compatibility with old code function;
+% generates old-fashined height-constraint function using min-height data
+/get-color            { get-color-array aload pop } def
+/get-background-color { get-background aload pop } def
+
+% BOX setters
+/put-td-dict           { exch 26 exch put } def
+/put-vertical-align    { exch 25 exch put } def
+/put-local-align       { exch 24 exch put } def
+%/put-valign            { exch 22 exch put } def
+/put-z-index           { exch 21 exch put } def
+/put-background-image-transparent { 
+                                  % => [W H Mask Samples Init] Box
+  get-background-image            % => [W H Mask Samples Init] Dict
+  dup /W 3 index 0 get put        % => [W H Mask Samples Init] Dict(W)
+  dup /H 3 index 1 get put        % => [W H Mask Samples Init] Dict(W H)  
+  dup /Mask 3 index 2 get put     % => [W H Mask Samples Init] Dict(W H Mask)  
+  dup /Samples 3 index 3 get put  % => [W H Mask Samples Init] Dict(W H Mask Samples)
+  dup /Init 3 index 4 get put
+  pop pop
+} def
+/put-background-image {           % => [W H Samples Init] Box
+  get-background-image            % => [W H Samples Init] Dict
+  dup /W 3 index 0 get put        % => [W H Samples Init] Dict(W)
+  dup /H 3 index 1 get put        % => [W H Samples Init] Dict(W H)  
+  dup /Samples 3 index 2 get put  % => [W H Samples Init] Dict(W H Samples)
+  dup /Init 3 index 3 get put
+  pop pop
+} def
+/put-position          { exch 18 exch put } def
+/put-color-array      { exch 14 exch put } def
+/put-text-align       { exch 13 exch put } def
+/put-background       { exch 12 exch put } def
+/put-display   { exch 8 exch put } def
+/put-color            { 4 1 roll 3 array astore exch put-color-array } def
+/put-background-color { 4 1 roll 3 array astore exch put-background } def
+/put-full-width-force {           % => Width Element
+  dup get-hor-extra               % => Width Element Padding+Margin+Border
+  3 2 roll                        % => Element Padding+Margin+Border Width
+  exch sub                        % => Element Width
+  exch                            % => Width Element
+  put-width         
+} def
+/put-full-height {   % => Height Element
+  dup get-vert-extra % => Height Element Padding+Margin+Border
+  3 2 roll           % => Element Padding+Margin+Border Height
+  exch sub           % => Element Height' 
+
+  exch              % => Height'' Element
+  put-height
+} def
+/in-get-table-content {  % => Data Content Rows
+  dup 0 gt {
+    2 copy               % => Data Content Rows Content Rows
+    1 sub get            % => Data Content Rows Row
+    aload length         % => Data Content Rows Cell1 .. CellN N
+    dup 3 add            % => Data Content Rows Cell1 .. CellN N N+4
+    index                % => Data Content Rows Cell1 .. CellN N Data
+    aload length         % => Data Content Rows Cell1 .. CellN N Data1 .. DataM M
+    dup 2 add            % => Data Content Rows Cell1 .. CellN N Data1 .. DataM M M+2
+    dup 1 sub            % => Data Content Rows Cell1 .. CellN N Data1 .. DataM M M+2 M+1
+    roll                 % => Data Content Rows Cell1 .. CellN Data1 .. DataM M N
+    add                  % => Data Content Rows Cell1 .. CellN Data1 .. DataM M+N
+    array astore         % => Data Content Rows NewData
+    4 3 roll pop         % => Content Rows NewData
+    3 1 roll             % => NewData Content Rows 
+    1 sub 
+    in-get-table-content
+  } {
+    pop pop
+  } ifelse
+} def
+/get-table-content {     % => Box
+  dup 
+  get-table-content-rows % => Box Content
+  1 index get-content    % => Box Content RawContent
+  1 get                  % => Box Content Rows
+  []                     % => Box Content Rows []
+  4 3 roll pop           % => Content Rows []
+  3 1 roll               % => [] Content Rows
+  in-get-table-content
+} def
+/get-table-content-rows { % => Box
+  get-content             % => RawContent
+  2 get                   % => Content
+} def
+/get-table-content-column { % => Box ColumnNo
+  exch get-content          % => ColumnNo Content
+  dup 1 get exch            % => ColumnNo RowsNum Content
+  2 get                     % => ColumnNo RowsNum Rows
+  {                         % => ColumnNo RowsNum Row
+    2 index get             % => ColumnNo RowsNum Cell
+    3 1 roll                % => Cell ColumnNo RowsNum 
+  } forall                  % => Cell1 .. CellN ColumnNo N
+  exch pop                  % => Cell1 .. CellN N
+  array astore              % => Column
+} def
+/get-table-content-columns {   % => Box
+  dup get-content              % => Box [Cols Rows Content]
+  0 get 1 sub                  % => Box Cols-1
+  []                           % => Box Cols []
+  in-get-table-content-columns % => ColsList
+} def
+/in-get-table-content-columns {    % => Box ColsIndex ColsList
+  1 index 0 ge {
+    3 1 roll                      % => ColsList Box ColsIndex
+    2 copy                        % => ColsList Box ColsIndex Box ColsIndex
+    get-table-content-column      % => ColsList Box ColsIndex Column
+    4 1 roll                      % => Column ColsList Box ColsIndex 
+    1 sub                         % => Column ColsList Box ColsIndex-1
+    4 2 roll                      % => Box ColsIndex-1 Column ColsList
+    array-append                  % => Box ColsIndex-1 ColsList'
+    in-get-table-content-columns
+  } {
+    3 1 roll 
+    pop pop
+  } ifelse
+} def
+/table-get-cell-content {          % => R C Box
+% One based idices are passed
+  get-table-content-rows          % => R C Rows
+  2 index 1 sub get               % => R C Row
+  1 index 1 sub get               % => R C Cell
+  3 1 roll pop pop                % => Cell
+} def
+
+/rmove-current-point {      % => Box DX DY
+  2 index get-current-y add % => Box DX DY'
+  2 index put-current-y     % => Box' DX
+  1 index get-current-x add % => Box' DX'
+  1 index put-current-x     % => Box'' 
+} def
+/safe-div {                        % => A B
+  dup 0                            % => A B B 0 
+  eq {                             % => A B
+    pop 1                          % => A 1
+  } if
+  div
+} def
+/find-best-column {                % => Width MinWidths MaxWidths
+  dup sum                          % => Width MinWidths MaxWidths MaxWidth
+  3 index                          % => Width MinWidths MaxWidths MaxWidth Width
+  exch safe-div                    % => Width MinWidths MaxWidths Width/MaxWidth(WK)
+
+  3 1 roll                         % => Width WK MinWidths MaxWidths
+  2 copy {safe-div} zip-with       % => Width WK MinWidths MaxWidths [MinI/MaxI]
+  dup reduce-max                   % => Width WK MinWidths MaxWidths [MinI/MaxI] MAX[MinI/MaxI]
+  4 index gt {                     % => Width WK MinWidths MaxWidths [MinI/MaxI]
+    dup reduce-max                 % => Width WK MinWidths MaxWidths [MinI/MaxI] MaxKoeff
+    array-find                     % => Width WK MinWidths MaxWidths MaxKoeffIndex
+    2 index 1 index get            % => Width WK MinWidths MaxWidths MaxKoeffIndex SW
+    6 2 roll                       % => MaxKoeffIndex SW Width WK MinWidths MaxWidths 
+    pop pop pop pop                % => MaxKoeffIndex SW
+  } {                              % => Width WK MinWidths MaxWidths [MinI/MaxI]
+    pop                            % => Width WK MinWidths MaxWidths
+    3 2 roll                       % => Width MinWidths MaxWidths WK 
+
+    1 index 0 get mul              % => Width MinWidths MaxWidths W*WidthKoeff 
+    2 index 0 get                  % => Width MinWidths MaxWidths W*WidthKoeff MinW
+    max                            % => Width MinWidths MaxWidths SelectedWidth
+    0 exch                         % => Width MinWidths MaxWidths 0 SelectedWidth
+    5 2 roll                       % => 0 SelectedWidth Width MinWidths MaxWidths 
+    pop pop pop
+  } ifelse
+} def
+/is-fraction {                    % => WC
+  aload                           % => X ... X WC
+  1 index /wc-fraction eq 
+  2 index /hc-fraction eq or {
+    astore pop true
+  } {
+    astore pop false
+  } ifelse
+} def
+/array-reverse {
+  {
+    exch array-prepend
+  } [] 2 index reduce
+  exch pop
+} def
+/table-normalize-cwc {            % => Box
+  /temp-table-normalize-cwc 1 def
+ 
+  {                               % => ... CVal Val
+    dup is-fraction {             % => ... CVal Val
+      aload pop pop               % => ... CVal Fraction
+      temp-table-normalize-cwc 
+      min                         % => ... CVal Fraction'
+      temp-table-normalize-cwc
+      1 index sub                 % => ... CVal Fraction' Rest
+      /temp-table-normalize-cwc
+      exch def                    % => ... CVal Fraction'
+      /wc-fraction cvx 
+      2 array astore cvx          % => ... CVal WC'      
+    } if
+    exch array-prepend            % => ... CVal
+  } [] 2 index table-get-cwc array-reverse
+
+  reduce                          % => Box CWC'
+
+  exch pop
+} def
+
+/calc-text-indent {                % => Box
+  dup get-box-dict
+  /Text-Indent get 
+  dup /Relative get {              % => Box TIDict
+    /Value get
+    1 index get-width
+    mul
+  } {
+    /Value get
+  } ifelse                         % => Box Indent
+
+% add special offset (for example, if we have marker box with position: inside)
+  1 index get-box-dict
+  /AdditionalTextIndent get
+  add
+  
+  exch pop
+} def
+
+/flow-page-break {                 % => Parent Child
+  1 index get-current-x
+  2 index get-current-y           % => Parent Child X Y
+
+  2 index
+  move-to-box                     % => Parent Child
+
+  1 index get-width               % => Parent Child PW
+  1 index put-full-width          % => Parent Child
+
+% Setup height for the "fake" box
+  1 index get-current-y           % => Parent Child PCY
+
+  bmargin sub
+  real-page-height sub neg
+  real-page-height div
+  ceiling                         % => Parent Child Pages
+  real-page-height mul 
+  neg                             % => Parent Child EndOfLastPage0
+  real-page-height add            % => Parent Child EndOfLastPage
+
+  2 index get-current-y
+  bmargin sub
+  exch sub
+  1 index put-height
+
+% we're now interested in last content y, not the bottom border of the containing
+% block, because, due the min-height, bottom border can contain lesser (lower on the page)
+% value than current y
+%  1 index get-bottom-internal
+  dup get-height
+  2 index exch                  % => Parent Child Parent CH
+  extend-height pop             % => Parent Child
+
+  dup get-top
+  1 index get-height
+  sub
+
+  2 index  
+  put-current-y
+  pop  
+
+  dup get-right-internal
+  1 index put-current-x
+
+  dup close-line
+
+  pop
+} def

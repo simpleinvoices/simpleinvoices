@@ -1,0 +1,246 @@
+% $Header: /cvsroot/html2ps/postscript/box.list-item.ps,v 1.1 2005/12/18 07:21:37 Konstantin Exp $
+
+/box-list-item-height-koeff 0.7 def
+/box-list-item-bullet-size-koeff 0.15 def
+
+/box-list-item-create {
+  box-block-create
+  
+  dup /MarkerImage /null put
+  dup /MarkerString ( ) put
+  
+  dup box-list-item-setup-methods
+  dup /box-list-item add-type
+} def
+
+/box-list-item-get-marker-box-width { % => ListItem
+  dup /list-style get-css-value
+  /type get {                         % => ListItem Type
+    dup /none eq { pop 0 exit } if
+    
+    dup /disc eq
+    1 index /circle eq or
+    1 index /square eq or { pop dup /font-size get-css-value exit } if
+
+    pop
+    
+    dup /font-family get-css-value
+    1 index /font-size get-css-value
+    scalefont
+    setfont
+
+    dup box-list-item-get-string
+    stringwidth pop                   % => ListItem Width
+  } loop                              % => ListItem Width
+  exch pop                            % => Width
+} def
+
+/box-list-item-get-marker-image {
+  /MarkerImage get
+} def
+
+/box-list-item-get-string {
+  /MarkerString get
+} def
+
+/box-list-item-put-marker-image {  % => Image This
+  exch /MarkerImage exch put
+} def
+
+/box-list-item-put-string {
+  exch /MarkerString exch put
+} def
+
+/box-list-item-reflow {            % => Context Parent Box
+% If list-style-position is inside, we'll need to move marker box inside the 
+% list-item box and offset all content by its size;
+  dup /list-style get-css-value /position get
+  /inside eq {
+% Add marker box width to text-indent value
+    dup box-list-item-get-marker-box-width
+    1 index put-additional-text-indent
+  } if
+  
+  3 copy box-block-reflow
+  pop pop pop
+} def
+
+/box-list-item-show {              % => Viewport This
+% Draw generic block box
+  2 copy box-container-show
+
+% Draw marker 
+% Determine the marker box base X coordinate
+  dup get-left                     % => Viewport This MX
+
+% Determine the base Y coordinate of marker box
+  1 index box-container-get-first-data
+  dup /null ne {                   % => Viewport This MX Element
+    dup get-top
+    1 index get-default-baseline sub
+    exch pop        
+  } {                              % => Viewport This MX /null
+    pop
+    1 index get-top
+  } ifelse                         % => Viewport This MX MY
+
+% If list-style-position is inside, we'll need to move marker box inside the 
+% list-item box and offset all content by its size;
+  2 index /list-style get-css-value /position get
+  /inside eq {
+    2 index box-list-item-get-marker-box-width
+    2 index add                    % => Viewport This MX MY MX'
+    3 2 roll pop
+    exch
+  } if
+
+  2 index box-list-item-get-marker-image 
+  /null ne {                       % => Viewport This MX MY 
+    exch 3 index 3 index
+    box-list-item-show-image 
+  } {                              % => Viewport This MX MY 
+    exch
+    3 index 3 index                % => Viewport This MY MX Viewport This
+    dup /list-style get-css-value /type get
+    {
+      dup /none eq   { pop pop pop pop pop exit } if
+      dup /disc eq   { pop box-list-item-show-disc exit } if
+      dup /circle eq { pop box-list-item-show-circle exit } if
+      dup /square eq { pop box-list-item-show-square exit } if
+      pop box-list-item-show-string exit
+    } loop
+  } ifelse                         % => Viewport This
+
+  pop pop
+} def
+
+/box-list-item-setup-methods {     % => Box
+  dup /Methods get
+  dup /reflow {box-list-item-reflow} put
+  dup /show   {box-list-item-show} put
+  pop pop
+} def
+
+/box-list-item-show-circle {       % => MY MX Viewport This
+  dup /color get-css-value
+  color-apply
+
+  0.1 setlinewidth
+  
+  dup /font-size get-css-value
+  2 div neg
+  3 index add                      % => MY MX Viewport This X
+
+  1 index /font-size get-css-value
+  0.4 mul
+  box-list-item-height-koeff mul
+  5 index add                      % => MY MX Viewport This X Y 
+  
+  2 copy newpath moveto
+
+  2 index /font-size get-css-value
+  box-list-item-bullet-size-koeff mul
+                                   % => MY MX Viewport This X Y R
+  
+  0 360 arc closepath stroke
+
+  pop pop pop pop
+} def
+
+/box-list-item-show-disc {         % => MY MX Viewport This
+  dup /color get-css-value
+  color-apply
+
+  dup /font-size get-css-value
+  2 div neg
+  3 index add                      % => MY MX Viewport This X
+
+  1 index /font-size get-css-value
+  0.4 mul
+  box-list-item-height-koeff mul
+  5 index add                      % => MY MX Viewport This X Y 
+
+  2 copy newpath moveto
+  
+  2 index /font-size get-css-value
+  box-list-item-bullet-size-koeff mul
+                                   % => MY MX Viewport This X Y R
+  
+  0 360 arc closepath fill
+  
+  pop pop pop pop
+} def
+
+/box-list-item-show-image {        % => MY MX Viewport This
+  dup box-list-item-get-marker-image
+                                   % => MY MX Viewport This Image
+  3 index
+  5 index moveto                   % => MY MX Viewport This Image
+
+  dup /SX get px
+  1 index /SY get px
+  2 index 
+  image-show                       % => MY MX Viewport This Image
+
+  pop pop pop pop pop
+} def
+
+/box-list-item-show-square {       % => MY MX Viewport This
+  dup /color get-css-value
+  color-apply
+
+  2 index
+  1 index /font-size get-css-value
+  0.512 mul sub
+
+  4 index
+  2 index /font-size get-css-value
+  0.3 mul
+  box-list-item-height-koeff mul add
+
+  2 index /font-size get-css-value 0.25 mul
+  3 index /font-size get-css-value 0.25 mul
+    
+  rectfill
+    
+  pop pop pop pop
+} def
+
+/box-list-item-show-string {       % => MY MX Viewport This
+  box-text-create                  % => MY MX Viewport This TextBox
+  
+  1 index box-list-item-get-string % => MY MX Viewport This TextBox String
+  1 index put-text                 % => MY MX Viewport This TextBox 
+
+  1 index
+  /font-family get-css-value       % => MY MX Viewport This TextBox Font
+  1 index exch
+  /font-family exch put-css-value  % => MY MX Viewport This TextBox 
+
+  1 index
+  /font-size get-css-value         % => MY MX Viewport This TextBox FontSize
+  1 index exch
+  /font-size exch put-css-value    % => MY MX Viewport This TextBox 
+
+  1 index
+  /color get-css-value             % => MY MX Viewport This TextBox Color
+  1 index exch
+  /color exch put-css-value        % => MY MX Viewport This TextBox 
+
+  dup box-text-setup               % => MY MX Viewport This TextBox
+
+  dup get-default-baseline
+  1 index put-baseline
+
+  4 index
+  1 index get-baseline add
+  4 index
+  2 index get-full-width sub       % => MY MX Viewport This TextBox MY MX
+  2 index
+  box-generic-move-to              % => MY MX Viewport This TextBox 
+
+  2 index exch
+  box-text-show                     
+    
+  pop pop pop pop
+} def

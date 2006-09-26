@@ -1,0 +1,96 @@
+% $Header: /cvsroot/html2ps/postscript/flow.block.ps,v 1.1 2005/12/18 07:21:38 Konstantin Exp $
+
+% Shorthand for
+%   $this->_current_x = $context->float_left_x($this->_current_x, $this->_current_y);
+% in PHP
+%
+/offset-x-floats {                % => Box
+  dup get-current-x
+  1 index get-current-y           % => Box X Y
+  float-left-x                    % => Box X 
+  1 index 
+  put-current-x
+  pop
+} def
+
+% Close line subroutine; checks if text justification
+% is needed and applies it to the line-box content
+/close-line-justify {              % => Box
+  dup get-line dup length 1 gt {   % => Box Line
+    pop
+    dup get-text-align             % => Box AlignFunction 
+    1 index exch                   % => Box Box AlignFunction 
+    exec                           % => Box
+  } {
+    dup length 0 gt {
+      0 get                        % => Box L0
+      get-local-align              % => Box LA
+      1 index exch                 % => Box Box LA
+      exec                         % => Box
+    } {
+      pop
+      dup get-text-align          % => Box AlignFunction 
+      1 index exch                % => Box Box AlignFunction 
+      exec                        % => Box
+    } ifelse
+  } ifelse
+} def
+
+/close-line {                      % => Box
+% make line justification
+
+% Note that text-align should not be applied to the block boxes!
+% As block boxes will be alone in the line-box, we can check
+% if the very first box in the line is inline; if not - no justification should be made
+  dup get-line length 0 gt {
+    dup get-line 0 get is-inline {
+      close-line-justify
+    } {
+% Nevertheless, CENTER tag and P/DIV with ALIGN attribute set should affect the 
+% position of non-inline children.
+      dup get-box-dict
+      /PseudoAlign get
+      1 index exch                 % => Box Box PA
+      exec                         % => Box      
+    } ifelse
+  } if
+
+
+  dup get-line                % => Box Line
+  0 exch                      % => Box 0(LH) Line  
+  {                           % => Box LH LineElement
+    get-full-height
+    max
+  } forall                    % => Box LH
+
+  % Clear line 
+  [] 2 index put-line         % => Box LH
+  % Reset X coordinate
+  1 index get-left-internal   % => Box LH LeftI
+  2 index put-current-x       % => Box LH
+  % Extend Y coordinate
+  1 index get-current-y       % => Box LH CY
+  exch sub                    % => Box CY-LH
+  1 index put-current-y       % => Box
+
+  % Reset information about the line baseline
+  0 1 index put-line-baseline
+
+% Line box completed, render the deferred floats
+  dup get-box-dict
+  /Flow get /DeferredFloats get
+  {
+    flow-float
+  } forall
+
+  dup get-box-dict 
+  /Flow get /DeferredFloats [] put  
+
+% modify the current-x value, so that next inline box will not intersect any floating boxes
+  dup offset-x-floats
+  
+% Clear the stack
+  pop
+  /no-justify {false} def
+} def
+

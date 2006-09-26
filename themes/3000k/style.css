@@ -1,0 +1,16 @@
+
+body{background:#F5F5F5 url(images/gb_top.gif) repeat-x;color: #222;text-align: center;
+    font: 85% Tahoma;   margin: 0;      padding: 0;}
+
+
+ul.postnav,ul.postnav li{margin:0;padding:0;list-style-type:none}
+ul.postnav li{float:left;width: 9em;font-size:140%;margin-right: 5px}
+ul.postnav a{display:block;width:9em;padding:5px 0;font: bold 100% Verdana,Arial,sans-serif;
+    text-transform:uppercase;background: #C7FF5A;color: #666;
+    text-decoration:none;text-align:center}
+ul.postnav a:hover{background: #A8E52F;color:#FFF}
+
+/*
+body{background:#F5F5F5 url(images/gb_top.gif) repeat-x;color: #222;text-align: center;
+    font: 85% Tahoma;   margin: 0;      padding: 0;}
+*/

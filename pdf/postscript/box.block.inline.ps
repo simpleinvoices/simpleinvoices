@@ -1,0 +1,57 @@
+% $Header: /cvsroot/html2ps/postscript/box.block.inline.ps,v 1.1 2005/12/18 07:21:36 Konstantin Exp $
+
+/box-inline-block-create {
+  box-container-create
+  dup box-inline-block-setup-methods
+  dup /box-inline-block add-type
+} def
+
+/box-inline-block-reflow {         % => Context Parent Box
+  1 index /null ne {
+% Calculate margin values if they have been set as a percentage
+    2 copy
+    box-generic-calc-percentage-margins
+
+% Calculate width value if it had been set as a percentage
+    3 copy
+    box-generic-calc-percentage-width
+
+% Calculate 'auto' values of width and margins
+    2 copy
+    box-generic-calc-auto-width-margins
+
+% Add current box to the parent's line-box
+    dup 2 index
+    box-container-append-line
+
+    2 copy
+    box-generic-guess-corner
+
+% By default, child block box will fill all available parent width;
+% note that actual width will be smaller because of non-zero padding, border and margins
+    1 index /get-width call-method
+    1 index put-full-width
+  } if
+
+% Reflow content
+
+  2 index 1 index box-container-reflow-content
+
+  1 index /null ne {
+% Extend parent's height to fit current box
+    dup get-bottom-margin
+    2 index box-generic-extend-height
+
+% Offset current x coordinate of parent box
+    dup get-right-margin
+    2 index put-current-x
+  } if
+
+  pop pop pop
+} def
+
+/box-inline-block-setup-methods {
+  dup /Methods get
+  dup /reflow {box-inline-block-reflow} put
+  pop pop
+} def
