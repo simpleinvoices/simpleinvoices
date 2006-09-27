@@ -86,7 +86,7 @@
 ...|Change Log|./inline_changelog.php
 ...|Credits|./inline_credits.php
 ...|License|./inline_license.php
-.|Logout|./logout.php
+#.|Logout|./logout.php
 
 #.|Open Source
 #..|Portals
