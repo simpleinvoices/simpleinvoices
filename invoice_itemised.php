@@ -313,7 +313,7 @@ $mid->printFooter();
 
         while ($num < $dynamic_line_items ) :
                 echo line_items($num);
-                echo "<a/td></tr>";
+                echo "</td></tr>";
                         $num++;
 
                         endwhile;
@@ -343,9 +343,11 @@ $mid->printFooter();
 </div>
 
 <div id="footer">
-<p><input type=submit name="submit" value="Submit invoice">
-<input type=hidden name="invoice_style" value="insert_invoice_itemised">
-*All fields are mandatory</p>
+	<p>
+		<input type=hidden name="max_items" value="<?php echo $num; ?>">
+		<input type=submit name="submit" value="Submit invoice">
+		<input type=hidden name="invoice_style" value="insert_invoice_itemised">
+		*All fields are mandatory</p>
 </div>
 
 </FORM>

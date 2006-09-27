@@ -462,7 +462,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 	};
 
 	#if itemised style show the invoice note field - START
-	if ( $_GET['invoice_style'] === 'Itemised' && !empty($inv_noteField)) {
+	if ( $_GET['invoice_style'] === 'Itemised' OR 'Consulting' && !empty($inv_noteField)) {
                 #item description - only show first 20 characters and add ... to signify theres more text
                 $max_length = 20;
                 if (strlen($inv_noteField) > $max_length ) {
@@ -606,7 +606,12 @@ Actions: <a href="invoice_templates/<?php echo $def_inv_templateField; ?>?submit
 <?php echo $display_block_details; ?>
 <?php echo $display_block_bottom; ?>
 
-<div id="footer"></div>
+<div id="footer">
+	<form>
+		<input type=button value='Cancel'onCLick='history.back()'>
+	</form>
+</div>
+
 </div>
 
 </body>

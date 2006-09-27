@@ -128,13 +128,13 @@ $mid->printFooter();
 <div id="header"></div>
 
 <?php echo $display_block; ?>
-<div id="footer">
-<form>
-<input type=button value='Back'
-onCLick='history.back()'>
-</form>
 
+<div id="footer">
+	<form>
+		<input type=button value='Back' onCLick='history.back()'>
+	</form>
 </div>
+
 </body>
 </html>
 

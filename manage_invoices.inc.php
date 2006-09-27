@@ -126,14 +126,20 @@ while ($newArray = mysql_fetch_array($result)) {
 
 	$display_block .= "
 	<tr class='index_table'>
-	<td class='index_table'><a class='index_table' title='$mi_actions_quick_view_tooltip $invoice_preference_wordingField$inv_idField' href='print_quick_view.php?submit=$inv_idField&action=view&invoice_style=$inv_ty_descriptionField''>$mi_actions_quick_view</a> 
-	<a class='index_table' title='$mi_actions_print_preview_tooltip $invoice_preference_wordingField$inv_idField'  href='invoice_templates/$def_inv_templateField?submit=$inv_idField&action=view&invoice_style=$inv_ty_descriptionField'><img src='themes/$theme/images/printer.gif' height='16' border='0' valign=bottom></img><!-- print --></a>
+	<td class='index_table' nowrap>
+        <!-- Quick View -->
+	<a class='index_table' title='$mi_actions_quick_view_tooltip $invoice_preference_wordingField $inv_idField' href='print_quick_view.php?submit=$inv_idField&action=view&invoice_style=$inv_ty_descriptionField''>$mi_actions_quick_view</a> 
+        <!-- Edit View -->
+	<a class='index_table' title='$mi_actions_edit_view_toolkit $invoice_preference_wordingField $inv_idField' href='details_invoice.php?submit=$inv_idField&action=view&invoice_style=$inv_ty_descriptionField''>$mi_actions_edit_view</a> 
+        <!-- Print View -->
+	<a class='index_table' title='$mi_actions_print_preview_tooltip $invoice_preference_wordingField $inv_idField'  href='invoice_templates/$def_inv_templateField?submit=$inv_idField&action=view&invoice_style=$inv_ty_descriptionField'><img src='themes/$theme/images/printer.gif' height='16' border='0' valign=bottom></img><!-- print --></a>
  
-        <!-- EXPORT TO PDF --><a  title='$mi_actions_export_tooltip $invoice_preference_wordingField$inv_idField $mi_actions_export_pdf_tooltip' class='index_table' href='$url_for_pdf'><img src='themes/$theme/images/pdf.jpg'  height='16' border='0' valign=bottom></img><!-- pdf --></a>
+        <!-- EXPORT TO PDF -->
+	<a  title='$mi_actions_export_tooltip $invoice_preference_wordingField $inv_idField $mi_actions_export_pdf_tooltip' class='index_table' href='$url_for_pdf'><img src='themes/$theme/images/pdf.jpg'  height='16' border='0' valign=bottom></img><!-- pdf --></a>
 
        <!--XLS --><a  title='$mi_actions_export_tooltip $invoice_preference_wordingField$inv_idField $mi_actions_export_xls_tooltip $spreadsheet $mi_actions_format_tooltip' class='index_table' href='invoice_templates/$def_inv_templateField?submit=$inv_idField&action=view&invoice_style=$inv_ty_descriptionField&export=$spreadsheet'><img src='themes/$theme/images/xls.gif'  height='16' border='0' valign=bottom></img><!--$spreadsheet--></a>
-        <!-- DOC --> <a title='$mi_actions_export_tooltip $invoice_preference_wordingField$inv_idField $mi_actions_export_doc_tooltip $word_processor $mi_actions_format_tooltip' class='index_table' href='invoice_templates/$def_inv_templateField?submit=$inv_idField&action=view&invoice_style=$inv_ty_descriptionField&export=$word_processor'><img src='themes/$theme/images/doc.png' height='16' border='0' valign=bottom></img><!--$word_processor--></a>
-        <!-- Payment --><a title='$mi_actions_process_payment $invoice_preference_wordingField$inv_idField' class='index_table' href='process_payment.php?submit=$inv_idField&op=pay_selected_invoice'>$</a>
+        <!-- DOC --> <a title='$mi_actions_export_tooltip $invoice_preference_wordingField $inv_idField $mi_actions_export_doc_tooltip $word_processor $mi_actions_format_tooltip' class='index_table' href='invoice_templates/$def_inv_templateField?submit=$inv_idField&action=view&invoice_style=$inv_ty_descriptionField&export=$word_processor'><img src='themes/$theme/images/doc.png' height='16' border='0' valign=bottom></img><!--$word_processor--></a>
+        <!-- Payment --><a title='$mi_actions_process_payment $invoice_preference_wordingField $inv_idField' class='index_table' href='process_payment.php?submit=$inv_idField&op=pay_selected_invoice'>$</a>
 	</td>
 	<td class='index_table'>$inv_idField</td>
 	<td class='index_table'>$b_nameField</td>

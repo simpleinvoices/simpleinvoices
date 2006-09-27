@@ -11,7 +11,7 @@ $master_invoice_id = $_GET['submit'];
 $conn = mysql_connect( $db_host, $db_user, $db_password );
 mysql_select_db( $db_name, $conn );
 
-#master invoice id select
+#Get the invoice details
 $print_master_invoice_id = 'SELECT * FROM si_invoices WHERE inv_id = ' . $master_invoice_id;
 $result_print_master_invoice_id  = mysql_query($print_master_invoice_id , $conn) or die(mysql_error());
 
@@ -27,29 +27,24 @@ while ($Array_master_invoice = mysql_fetch_array($result_print_master_invoice_id
 
 };
 
+#get all the details from the invoice_items table for this invoice
+#items invoice id select
+$print_master_invoice_items = "SELECT * FROM si_invoice_items WHERE  inv_it_invoice_id =$master_invoice_id";
+$result_print_master_invoice_items = mysql_query($print_master_invoice_items, $conn) or die(mysql_error());
 
-        #get all the details from the invoice_items table for this invoice
-        #items invoice id select
-        $print_master_invoice_items = "SELECT * FROM si_invoice_items WHERE  inv_it_invoice_id =$master_invoice_id";
-        $result_print_master_invoice_items = mysql_query($print_master_invoice_items, $conn) or die(mysql_error());
-
-
-        while ($Array_master_invoice_items = mysql_fetch_array($result_print_master_invoice_items)) {
-                $inv_it_idField = $Array_master_invoice_items['inv_it_id'];
-                $inv_it_invoice_idField = $Array_master_invoice_items['inv_it_invoice_id'];
-                $inv_it_quantityField = $Array_master_invoice_items['inv_it_quantity'];
-                $inv_it_product_idField = $Array_master_invoice_items['inv_it_product_id'];
-                $inv_it_unit_priceField = $Array_master_invoice_items['inv_it_unit_price'];
-                $inv_it_tax_idField = $Array_master_invoice_items['inv_it_tax_id'];
-                $inv_it_taxField = $Array_master_invoice_items['inv_it_tax'];
-                $inv_it_tax_amountField = $Array_master_invoice_items['inv_it_tax_amount'];
-                $inv_it_gross_totalField = $Array_master_invoice_items['inv_it_gross_total'];
-                $inv_it_descriptionField = $Array_master_invoice_items['inv_it_description'];
-                $inv_it_totalField = $Array_master_invoice_items['inv_it_total'];
-
-        };
-
-
+while ($Array_master_invoice_items = mysql_fetch_array($result_print_master_invoice_items)) {
+	$inv_it_idField = $Array_master_invoice_items['inv_it_id'];
+        $inv_it_invoice_idField = $Array_master_invoice_items['inv_it_invoice_id'];
+        $inv_it_quantityField = $Array_master_invoice_items['inv_it_quantity'];
+        $inv_it_product_idField = $Array_master_invoice_items['inv_it_product_id'];
+        $inv_it_unit_priceField = $Array_master_invoice_items['inv_it_unit_price'];
+        $inv_it_tax_idField = $Array_master_invoice_items['inv_it_tax_id'];
+        $inv_it_taxField = $Array_master_invoice_items['inv_it_tax'];
+        $inv_it_tax_amountField = $Array_master_invoice_items['inv_it_tax_amount'];
+        $inv_it_gross_totalField = $Array_master_invoice_items['inv_it_gross_total'];
+        $inv_it_descriptionField = $Array_master_invoice_items['inv_it_description'];
+        $inv_it_totalField = $Array_master_invoice_items['inv_it_total'];
+};
 
 
 /*
@@ -59,161 +54,151 @@ while ($Array_master_invoice = mysql_fetch_array($result_print_master_invoice_id
 
 
 #invoice_type query
+$sql_invoice_type = 'SELECT inv_ty_description FROM si_invoice_type WHERE inv_ty_id = ' . $inv_typeField;
+$result_invoice_type = mysql_query($sql_invoice_type, $conn) or die(mysql_error());
 
-        $sql_invoice_type = 'SELECT inv_ty_description FROM si_invoice_type WHERE inv_ty_id = ' . $inv_typeField;
-
-        $result_invoice_type = mysql_query($sql_invoice_type, $conn) or die(mysql_error());
-
-        while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
-                $inv_ty_descriptionField = $invoice_typeArray['inv_ty_description'];
-	};
+while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
+	$inv_ty_descriptionField = $invoice_typeArray['inv_ty_description'];
+};
 
 
-###CUSTOMER
+#CUSTOMER drop down list - start
+	#customer
+	$sql_customer = "SELECT * FROM si_customers where c_enabled != 0";
+	$result_customer = mysql_query($sql_customer, $conn) or die(mysql_error());
 
-#customer
-$sql_customer = "SELECT * FROM si_customers where c_enabled != 0";
-$result_customer = mysql_query($sql_customer, $conn) or die(mysql_error());
+	#selected customer name query
+	$print_customer = "SELECT * FROM si_customers WHERE c_id = $inv_customer_idField";
+	$result_print_customer = mysql_query($print_customer, $conn) or die(mysql_error());
 
-#default customer name query
-$print_customer = "SELECT * FROM si_customers WHERE c_id = $inv_customer_idField";
-$result_print_customer = mysql_query($print_customer, $conn) or die(mysql_error());
+	while ($Array_customer = mysql_fetch_array($result_print_customer)) {
+	       $c_nameField = $Array_customer['c_name'];
+	}
 
-while ($Array_customer = mysql_fetch_array($result_print_customer)) {
-       $c_nameField = $Array_customer['c_name'];
-}
+	#do the customer selector stuff
 
-#customer selector
+	if (mysql_num_rows($result_customer) == 0) {
+	        //no records
+	        $display_block_customer = "<p><em>Sorry, no biller available, please insert one</em></p>";
 
-if (mysql_num_rows($result_customer) == 0) {
-        //no records
-        $display_block_customer = "<p><em>Sorry, no biller available, please insert one</em></p>";
-
-} else {
-        //has records, so display them
-        $display_block_customer = "
-        <select name=\"select_customer\">
-        <option selected value=\"$def_customerField\" style=\"font-weight: bold\">$c_nameField</option>";
-
-        while ($recs_customer = mysql_fetch_array($result_customer)) {
-                $id_customer = $recs_customer['c_id'];
-                $display_name_customer = $recs_customer['c_name'];
-
-                $display_block_customer .= "<option value=\"$id_customer\">
-                        $display_name_customer</option>";
-        }
-}
+	} else {
+	        //has records, so display them
+	        $display_block_customer = "
+	        <select name=\"select_customer\">
+	        <option selected value=\"$inv_customer_idField\" style=\"font-weight: bold\">$c_nameField</option>";
+	
+	        while ($recs_customer = mysql_fetch_array($result_customer)) {
+	                $id_customer = $recs_customer['c_id'];
+	                $display_name_customer = $recs_customer['c_name'];
+	
+	                $display_block_customer .= "<option value=\"$id_customer\">$display_name_customer</option>";
+	        }
+	}
+#sweet - customer drop down down
+#CUSTOMER drop down list - end
 
 
+#BILLER drop down list -start
+	#biller query
+	$sql_biller = "SELECT * FROM si_biller where b_enabled != 0";
+	$result_biller = mysql_query($sql_biller, $conn) or die(mysql_error());
 
-#######BILLER
-#biller query
-$sql_biller = "SELECT * FROM si_biller where b_enabled != 0";
-$result_biller = mysql_query($sql_biller, $conn) or die(mysql_error());
+	#Get the names of the selected biller -start
+	$sql_biller_default = "SELECT b_name FROM si_biller where b_id = $inv_biller_idField ";
+	$result_biller_default = mysql_query($sql_biller_default , $conn) or die(mysql_error());
 
-#Get the names of the defaults from their id -start
-#default biller name query
-$sql_biller_default = "SELECT b_name FROM si_biller where b_id = $inv_biller_idField ";
-$result_biller_default = mysql_query($sql_biller_default , $conn) or die(mysql_error());
-
-while ($Array = mysql_fetch_array($result_biller_default) ) {
+	while ($Array = mysql_fetch_array($result_biller_default) ) {
                 $sql_biller_defaultField = $Array['b_name'];
-}
+	}
 
-#biller selector
+	# do the biller selector
 
-if (mysql_num_rows($result_biller) == 0) {
-        //no records
-        $display_block_biller = "<p><em>Sorry, no biller available, please insert one</em></p>";
+	if (mysql_num_rows($result_biller) == 0) {
+	        //no records
+	        $display_block_biller = "<p><em>Sorry, no biller available, please insert one</em></p>";
 
-} else {
-        //has records, so display them
-        $display_block_biller = "
-        <select name=\"sel_id\">
-        <option selected value=\"$inv_biller_idField\" style=\"font-weight: bold\">$sql_biller_defaultField</option>";
+	} else {
+	        //has records, so display them
+	        $display_block_biller = "
+	        <select name=\"sel_id\">
+	        <option selected value=\"$inv_biller_idField\" style=\"font-weight: bold\">$sql_biller_defaultField</option>";
 
-        while ($recs = mysql_fetch_array($result_biller)) {
-                $id = $recs['b_id'];
-                $display_name_biller = $recs['b_name'];
+        	while ($recs = mysql_fetch_array($result_biller)) {
+                	$id = $recs['b_id'];
+	                $display_name_biller = $recs['b_name'];
+	
+	                $display_block_biller .= "<option value=\"$id\">$display_name_biller</option>";
+	        }
+	}
+	
+#BILLER drop down list - end
 
-                $display_block_biller .= "<option value=\"$id\">$display_name_biller</option>";
-        }
-}
+#TAX drop down list - start
+	#tax query
+	$sql_tax = "SELECT * FROM si_tax where tax_enabled != 0";
+	$result_tax = mysql_query($sql_tax, $conn) or die(mysql_error());
 
+	#default tax description query
+	$print_tax = "SELECT * FROM si_tax WHERE tax_id = $inv_it_tax_idField";
+	$result_print_tax = mysql_query($print_tax, $conn) or die(mysql_error());
 
-########################
+	while ($Array_tax = mysql_fetch_array($result_print_tax)) {
+	       $tax_descriptionField = $Array_tax['tax_description'];
+	}
 
-##TAX
-#tax query
-$sql_tax = "SELECT * FROM si_tax where tax_enabled != 0";
-$result_tax = mysql_query($sql_tax, $conn) or die(mysql_error());
+	#tax selector
 
-#default tax description query
-$print_tax = "SELECT * FROM si_tax WHERE tax_id = $inv_it_tax_idField";
-$result_print_tax = mysql_query($print_tax, $conn) or die(mysql_error());
+	if (mysql_num_rows($result_tax) == 0) {
+	        //no records
+	        $display_block_tax = "<p><em>Sorry, no tax available, please insert one</em></p>";
 
-while ($Array_tax = mysql_fetch_array($result_print_tax)) {
-       $tax_descriptionField = $Array_tax['tax_description'];
-}
+	} else {
+	        //has records, so display them
+	        $display_block_tax = "
+	        <select name=\"select_tax\">
+	        <option selected value=\"$inv_it_tax_idField\" style=\"font-weight: bold\">$tax_descriptionField</option>";
 
-#tax selector
+        	while ($recs_tax = mysql_fetch_array($result_tax)) {
+	                $id_tax = $recs_tax['tax_id'];
+        	        $display_name_tax = $recs_tax['tax_description'];
+	
+	                $display_block_tax .= "<option value=\"$id_tax\">$display_name_tax</option>";
+	        }
+	}
+#TAX drop down list - end
 
-if (mysql_num_rows($result_tax) == 0) {
-        //no records
-        $display_block_tax = "<p><em>Sorry, no tax available, please insert one</em></p>";
+#PREFERENCE drop down list - start
+	#invoice preference query
+	$sql_preferences = "SELECT * FROM si_preferences where pref_enabled != 0";
+	$result_preferences = mysql_query($sql_preferences, $conn) or die(mysql_error());
 
-} else {
-        //has records, so display them
-        $display_block_tax = "
-        <select name=\"select_tax\">
-        <option selected value=\"$inv_it_tax_idField\" style=\"font-weight: bold\">$tax_descriptionField</option>";
+	#default invoice preference description query
+	$print_inv_preference = "SELECT * FROM si_preferences WHERE pref_id = $inv_preferenceField";
+	$result_inv_preference = mysql_query($print_inv_preference, $conn) or die(mysql_error());
 
-        while ($recs_tax = mysql_fetch_array($result_tax)) {
-                $id_tax = $recs_tax['tax_id'];
-                $display_name_tax = $recs_tax['tax_description'];
+	while ($Array_inv_preference = mysql_fetch_array($result_inv_preference)) {
+	       $pref_descriptionField = $Array_inv_preference['pref_description'];
+	}
 
-                $display_block_tax .= "<option value=\"$id_tax\">$display_name_tax</option>";
-        }
-}
+	#invoice_preference selector
 
+	if (mysql_num_rows($result_preferences) == 0) {
+        	//no records
+	        $display_block_preferences = "<p><em>Sorry, no invoice preferences available, please insert one</em></p>";
 
-####
-
-####Preference selector - start
-#invoice preference query
-$sql_preferences = "SELECT * FROM si_preferences where pref_enabled != 0";
-$result_preferences = mysql_query($sql_preferences, $conn) or die(mysql_error());
-
-
-#default invoice preference description query
-$print_inv_preference = "SELECT * FROM si_preferences WHERE pref_id = $inv_preferenceField";
-$result_inv_preference = mysql_query($print_inv_preference, $conn) or die(mysql_error());
-
-while ($Array_inv_preference = mysql_fetch_array($result_inv_preference)) {
-       $pref_descriptionField = $Array_inv_preference['pref_description'];
-}
-
-#invoice_preference selector
-
-if (mysql_num_rows($result_preferences) == 0) {
-        //no records
-        $display_block_preferences = "<p><em>Sorry, no invoice preferences available, please insert one</em></p>";
-
-} else {
-        //has records, so display them
-        $display_block_preferences = "
-        <select name=\"select_preferences\">
-        <option selected value=\"$inv_preferenceField\" style=\"font-weight: bold\">$pref_descriptionField</option>";
-
-        while ($recs_preferences = mysql_fetch_array($result_preferences)) {
-                $id_preferences = $recs_preferences['pref_id'];
-                $display_name_preferences = $recs_preferences['pref_description'];
-
-                $display_block_preferences .= "<option value=\"$id_preferences\">$display_name_preferences</option>";
-        }
-}
-
-
+	} else {
+	        //has records, so display them
+        	$display_block_preferences = "
+	        <select name=\"select_preferences\">
+	        <option selected value=\"$inv_preferenceField\" style=\"font-weight: bold\">$pref_descriptionField</option>";
+	
+	        while ($recs_preferences = mysql_fetch_array($result_preferences)) {
+	                $id_preferences = $recs_preferences['pref_id'];
+	                $display_name_preferences = $recs_preferences['pref_description'];
+	
+	                $display_block_preferences .= "<option value=\"$id_preferences\">$display_name_preferences</option>";
+	        }
+	}
 ####Preference selector - end
 
 #preferences query
@@ -221,21 +206,12 @@ $print_preferences = "SELECT * FROM si_preferences where pref_id = $inv_preferen
 $result_print_preferences  = mysql_query($print_preferences, $conn) or die(mysql_error());
 
 while ($Array_preferences = mysql_fetch_array($result_print_preferences)) {
-                $pref_idField = $Array_preferences['pref_id'];
                 $pref_descriptionField = $Array_preferences['pref_description'];
                 $pref_currency_signField = $Array_preferences['pref_currency_sign'];
                 $pref_inv_headingField = $Array_preferences['pref_inv_heading'];
                 $pref_inv_wordingField = $Array_preferences['pref_inv_wording'];
-                $pref_inv_detail_headingField = $Array_preferences['pref_inv_detail_heading'];
-                $pref_inv_detail_lineField = $Array_preferences['pref_inv_detail_line'];
-                $pref_inv_payment_methodField = $Array_preferences['pref_inv_payment_method'];
-                $pref_inv_payment_line1_nameField = $Array_preferences['pref_inv_payment_line1_name'];
-                $pref_inv_payment_line1_valueField = $Array_preferences['pref_inv_payment_line1_value'];
-                $pref_inv_payment_line2_nameField = $Array_preferences['pref_inv_payment_line2_name'];
-                $pref_inv_payment_line2_valueField = $Array_preferences['pref_inv_payment_line2_value'];
 
 };
-
 
 #system defaults query
 $print_defaults = "SELECT * FROM si_defaults WHERE def_id = 1";
@@ -247,6 +223,7 @@ while ($Array_defaults = mysql_fetch_array($result_print_defaults) ) {
                 $def_inv_templateField = $Array_defaults['def_inv_template'];
 };
 
+$line = 1;
 
 $display_block_top =  "
 
@@ -256,7 +233,7 @@ $display_block_top =  "
 		<td colspan=6 align=center><b>$pref_inv_headingField</b></td>
 	</tr>
         <tr>
-		<td class='details_screen'>$pref_inv_wordingField No.</td><td><input type=text name=\"invoice_id\" value=$inv_idField size=15></td>
+		<td class='details_screen'>$pref_inv_wordingField No.</td><td><input type=hidden name=\"invoice_id\" value=$inv_idField size=15>$inv_idField</td>
 	</tr>
 	<tr>
 		<td class='details_screen'>$pref_inv_wordingField date</td><td colspan=2>$inv_dateField</td>
@@ -265,7 +242,7 @@ $display_block_top =  "
 		<td class='details_screen'>Biller</td><td>$display_block_biller</td>
 	</tr>
 	<tr>
-		<td class='details_screen'><i>Customer</i></td><td>$display_block_customer</td>
+		<td class='details_screen'>Customer</td><td>$display_block_customer</td>
 	</tr>	
 
 ";
@@ -294,7 +271,8 @@ if (  $_GET['invoice_style'] === 'Total' ) {
                 $inv_it_totalField = $Array_master_invoice_items['inv_it_total'];
 
 	};
-
+	
+	/* - might not need - can delete after testing
 	#products query
 	$print_products = "SELECT * FROM si_products WHERE prod_id = $inv_it_product_idField";
 	$result_print_products = mysql_query($print_products, $conn) or die(mysql_error());
@@ -316,18 +294,18 @@ if (  $_GET['invoice_style'] === 'Total' ) {
                 $invoice_total_totalField = $Array['total'];
 
 	};
+	*/
+
 	#all the details have bee got now print them to screen
 
 	$display_block_details =  "
+		<input type=hidden name=\"invoice_style\" value=\"edit_invoice_total\">
 	        <tr>
-        	        <td colspan=6><b>Description</b></td>
+        	        <td colspan=6 class='details_screen'>Description</td>
 	        </tr>
 	        <tr>
 			<td colspan=6 ><textarea input type=text name=\"i_description\" rows=10 cols=100 WRAP=hard>$inv_it_descriptionField</textarea></td>
         	</tr>
-	        <tr>
-        	        <td colspan=6><br></td>
-	        </tr>
 	        <tr>       	         
 			<td class='details_screen'>Gross Total</td><td><input type=text name='inv_it_gross_total' value='$inv_it_gross_totalField' size=10> </td>
 		</tr>
@@ -346,30 +324,28 @@ if (  $_GET['invoice_style'] === 'Total' ) {
 
 else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'Consulting' ) {
 
-	$display_block_details =  "
-        <tr>
-                <td colspan=6><br><br></td>
-        </tr>
-	";
+	$display_block_details =  "";
 	
 	#show column heading for itemised style
         if ( $_GET['invoice_style'] === 'Itemised' ) {
 		$display_block_details .=  "      
+		<input type=hidden name=\"invoice_style\" value=\"edit_invoice_itemised\">
 		<tr>
 		<td colspan=6>
 		<table>
 		<tr>
-        	        <td><b>Qty</b></td><td><b>Description</b></td><td><b>Unit Price</b><td><b>Gross Total</b></td><td><b>Tax</b></td><td><b>TOTAL</b></td>
+        	        <td class='details_screen'>Qty</td><td class='details_screen'>Description</td>
 	        </tr>";
 	}
 	#show column heading for consulting style
         else if ( $_GET['invoice_style'] === 'Consulting' ) {
                 $display_block_details .=  "
+		<input type=hidden name=\"invoice_style\" value=\"edit_invoice_consulting\">
 		<tr>
 		<td colspan=6>
 		<table>
                 <tr>
-                        <td><b>Qty</b></td><td><b>Item</b></td><td><b>Description</b></td><td><b>Unit Price</b><td><b>Gross Total</b></td><td><b>Tax</b></td><td><b>TOTAL</b></td>
+                        <td class='details_screen'>Qty</td><td class='details_screen'>Item</td>
                 </tr>";
         }
 
@@ -397,7 +373,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 	};
 	*/
 
-	#products query
+	#products query - for the selected product
 	$print_products = "SELECT * FROM si_products WHERE prod_id = $inv_it_product_idField";
 	$result_print_products = mysql_query($print_products, $conn) or die(mysql_error());
 
@@ -405,133 +381,100 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 	while ($Array = mysql_fetch_array($result_print_products)) { 
                 $prod_idField = $Array['prod_id'];
                 $prod_descriptionField = $Array['prod_description'];
-                $prod_unit_priceField = $Array['prod_unit_price'];
-	/*
-	};
-	*/
 
-	#invoice_total total query
-	$print_invoice_total_total ="select sum(inv_it_total) as total from si_invoice_items where inv_it_invoice_id =$master_invoice_id"; 
-	$result_print_invoice_total_total = mysql_query($print_invoice_total_total, $conn) or die(mysql_error());
+	
+	#product query - for all the other ones
+        $sql_products = "SELECT * FROM si_products where prod_enabled != 0";
+        $result_products = mysql_query($sql_products, $conn) or die(mysql_error());
 
+	if (mysql_num_rows($result_products) == 0) {
+	        //no records
+	        $display_block_products = "<p><em>Sorry, no items available, please insert one</em></p>";
 
-	while ($Array = mysql_fetch_array($result_print_invoice_total_total)) {
-                $invoice_total_totalField = $Array['total'];
+	} else {
+	        //has records, so display them
+	        $display_block_products = "
+	        <select name=\"select_products$line\">
+	                <option selected value=\"$prod_idField\" style=\"font-weight: bold\">$prod_descriptionField</option>";
 
-	#invoice total tax
-	$print_invoice_total_tax ="select sum(inv_it_tax_amount) as total_tax from si_invoice_items where inv_it_invoice_id =$master_invoice_id"; 
-	$result_print_invoice_total_tax = mysql_query($print_invoice_total_tax, $conn) or die(mysql_error());
+        	while ($recs_products = mysql_fetch_array($result_products)) {
+	                $id_products = $recs_products['prod_id'];
+	                $display_name_products = $recs_products['prod_description'];
+	
+	                $display_block_products .= "<option value=\"$id_products\">
+	                        $display_name_products</option>";
+	        }
+	        }
+	}
 
-	while ($Array_tax = mysql_fetch_array($result_print_invoice_total_tax)) {
-                $invoice_total_taxField = $Array_tax['total_tax'];
-
-
-	/*
-	};
-	*/	
-
-
-	#calculation for each line item
-	$gross_total_itemised = $prod_unit_priceField * $inv_it_quantityField ;
-	/*
-	$tax_per_item =  $prod_unit_priceField / $inv_it_taxField;
-	$total_tax_per_line = $tax_per_item  * $inv_it_quantityField ;
-	$total_per_line = $gross_total_itemised + $total_tax_per_line ;
-	*/
-
-	#calculation for the Invoice Total
 
 	#MERGE ITEMISED AND CONSULTING HERE
 	#PRINT the line items
 	#show the itemised invoice
 	if ( $_GET['invoice_style'] === 'Itemised' ) {
 
+		
 		$display_block_details .=  "
 	        <tr>
-	                <td>$inv_it_quantityField</td><td>$prod_descriptionField</td><td>$pref_currency_signField$inv_it_unit_priceField</td><td>$pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td>$pref_currency_signField$inv_it_totalField</td>
+			<td><input type=text name='i_quantity$line' value='$inv_it_quantityField' size=10><input type=hidden text name='inv_it_id$line' value='$inv_it_idField' size=10> </td>
+			
+	                <td input type=text name='i_description$line' size=50>$display_block_products</td>
 	        </tr>
 		";
+	
+	$line++;
 	}	
+
 	#show the consulting invoice 
 	else if ( $_GET['invoice_style'] === 'Consulting' ) {
 		
-	        #item description - only show first 20 characters and add ... to signify theres more text
-	        $max_length = 20;
-	        if (strlen($inv_it_descriptionField) > $max_length ) {
-	                $stripped_item_description = substr($inv_it_descriptionField,0,20);
-	                $stripped_item_description .= "...";
-	        }
-	        else if (strlen($inv_it_descriptionField) <= $max_length ) {
-	                 $stripped_item_description = $inv_it_descriptionField;
-	        }
 
 	        $display_block_details .=  "
         	<tr>
-	                <td>$inv_it_quantityField</td><td>$prod_descriptionField</td><td>$stripped_item_description</td><td>$pref_currency_signField$inv_it_unit_priceField</td><td>$pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td>$pref_currency_signField$inv_it_totalField</td>
-        	</tr>
+                        <td><input type=text name='i_quantity$line' value='$inv_it_quantityField' size=10><input type=hidden text name='inv_it_id$line' value='$inv_it_idField' size=10> </td>
+
+                        <td input type=text name='i_description$line' size=50>$display_block_products</td>
+        	</tr> 
+		<tr>
+
+			<td colspan=6 class='details_screen'>Description</td>
+		<tr>
+                        <td colspan=6 ><textarea input type=text name=\"consulting_item_note$line\" rows=5 cols=100 WRAP=hard>$inv_it_descriptionField</textarea></td>
+                </tr>
+
 		";
+
+	$line++;
+
 	}
 
 
 
 
-	};
-	};
-	};
+
 	};
 
 	#if itemised style show the invoice note field - START
-	if ( $_GET['invoice_style'] === 'Itemised' && !empty($inv_noteField)) {
-                #item description - only show first 20 characters and add ... to signify theres more text
-                $max_length = 20;
-                if (strlen($inv_noteField) > $max_length ) {
-                        $stripped_itemised_note = substr($inv_noteField,0,20);
-                        $stripped_itemised_note .= "...";
-                }
-                else if (strlen($inv_noteField) <= $max_length ) {
-                         $stripped_itemised_note = $inv_noteField;
-                }
-
+	if ( $_GET['invoice_style'] === 'Itemised' OR 'Consulting')   {
 
 		$display_block_details .=  "
 			</table>
-			</td></tr>
 			<tr>
-				<td></td>
+				<td colspan=6 class='details_screen'>Note:</td>
 			</tr>
 			<tr>
-				<td><i>Note:</i></td>
+	                        <td colspan=6 ><textarea input type=text name=\"invoice_itemised_note\" rows=10 cols=100 WRAP=hard>$inv_noteField</textarea></td>
 			</tr>
-			<tr>
-				<td>$stripped_itemised_note</td>
-			</tr>
+	                <tr>
+	                         <td class='details_screen'>Tax</td><td>$display_block_tax</td>
+	                </tr>
+	                         <td class='details_screen'>Preference</td><td>$display_block_preferences/td>
+	                </tr>
 		";
 	}
 	
 	
 	#END - if itemised style show the invoice note field
-
-	$display_block_details .=  "
-	<!--
-        <tr>
-                <td colspan=3 align=left>Totals</td><td>$pref_currency_signField$invoice_total_taxField</td><td><u>$pref_currency_signField$invoice_total_taxField</u></td><td><u>$pref_currency_signField$invoice_total_totalField</u></td>
-
-        </tr>
-	-->
-	<tr>
-		<td colspan=6><br></td>
-	</tr>	
-
-        <tr>
-                <td colspan=3></td><td align=left colspan=2>Total tax included</td><td colspan=2 align=right>$pref_currency_signField$invoice_total_taxField</td>
-        </tr>
-	<tr><td><br></td>
-	</tr>
-        <tr>
-                <td colspan=3></td><td align=left colspan=2><b>$pref_inv_wordingField Amount</b></td><td colspan=2 align=right><u>$pref_currency_signField$invoice_total_totalField</u></td>
-        </tr>
-
-	";
 }
 #END INVOICE ITEMISED/CONSULTING SECTION
 
@@ -615,9 +558,11 @@ You are editing <?php echo $pref_inv_wordingField; ?> <?php echo $master_invoice
 <?php echo $display_block_bottom; ?>
 
 <div id="footer">
-<p><input type=submit name="submit" value="Save"><input type=hidden name="invoice_style" value="edit_invoice_total"></p>
-
+	<input type=button value='Cancel'onCLick='history.back()'>
+	<input type=submit name="submit" value="Save">
+	<input type=hidden name="max_items" value="<?php echo $line; ?>">
 </div>
+
 </div>
 </form>
 </body>

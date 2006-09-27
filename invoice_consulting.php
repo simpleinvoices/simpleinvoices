@@ -319,6 +319,14 @@ $mid->printFooter();
 
                         endwhile;
 ?>
+<tr>
+        <td>Notes (optional)</td>
+</tr>
+
+<tr>
+        <td colspan=5 ><textarea input type=text name="invoice_consulting_note" rows=5 cols=80 WRAP=hard></textarea></td>
+</tr>
+
 <tr><td>Tax</td><td input type=text name="inv_it_tax" size=15> <?php echo $display_block_tax; ?></td>
 </tr>
 
@@ -335,9 +343,11 @@ $mid->printFooter();
 </div>
 
 <div id="footer">
-<p><input type=submit name="submit" value="Submit invoice">
-<input type=hidden name="invoice_style" value="insert_invoice_consulting">
-*All fields are mandatory</p>
+	<p>
+		<input type=hidden name="max_items" value="<?php echo $num; ?>">
+		<input type=submit name="submit" value="Submit invoice">
+		<input type=hidden name="invoice_style" value="insert_invoice_consulting">
+		*All fields are mandatory</p>
 </div>
 
 </FORM>
