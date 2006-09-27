@@ -1,7 +1,7 @@
 <?php
 // we must never forget to start the session
 /*
-CREATE TABLE tbl_auth_user (
+CREATE TABLE si_auth_user (
 user_id VARCHAR(10) NOT NULL,
 user_password CHAR(32) NOT NULL,
 
