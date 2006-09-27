@@ -48,7 +48,7 @@ if (isset($_POST['txtUserId']) && isset($_POST['txtPassword'])) {
 <head>
 <title>Basic Login</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-   <link rel="stylesheet" href="./auth/kt-login.css" type="text/css" />
+   <link rel="stylesheet" href="./include/auth/kt-login.css" type="text/css" />
 
 </head>
 
@@ -68,7 +68,7 @@ if ($errorMessage != '') {
 	        <input type="hidden" name="action" value="login" />
 		<input type="hidden" name="cookieverify" value="" />
 		<input type="hidden" name="redirect" value="" />
-		<img src="./auth/ktlogo-topbar-right.png" alt="KnowledgeTree DMS" class="logoimage" height="50" width="252"/><br />
+		<img src="./include/auth/ktlogo-topbar-right.png" alt="KnowledgeTree DMS" class="logoimage" height="50" width="252"/><br />
             
 	        		    <p class="descriptiveText">Please enter your details below to login.</p>
 
