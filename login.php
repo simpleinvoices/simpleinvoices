@@ -10,6 +10,7 @@ PRIMARY KEY (user_id)
 
 INSERT INTO tbl_auth_user (user_id, user_password) VALUES ('theadmin', PASSWORD('chumbawamba'));
 INSERT INTO tbl_auth_user (user_id, user_password) VALUES ('webmaster', PASSWORD('webmistress'));
+INSERT INTO tbl_auth_user (user_id, user_password) VALUES ('admin', PASSWORD('admin'));
 */
 session_start();
 
