@@ -384,9 +384,10 @@ $mid->printFooter();
 <?php echo $display_block; ?>
 
 <div id="footer">
-
-<p><input type=submit name="submit" value="Process Payment"><input type=hidden name="op" value="<?php echo $insert_action_op;?>"></p>
+		<input type=submit name="submit" value="Process Payment">
+		<input type=hidden name="op" value="<?php echo $insert_action_op;?>">
 </div>
+
 </div>
 
 

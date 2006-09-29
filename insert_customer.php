@@ -93,10 +93,10 @@ $mid->printFooter();
 
 
 <div id="footer">
-
-<p><input type=submit name="submit" value="Insert Customer">
-<input type=hidden name="op" value="insert_customer"></p>
+	<input type=submit name="submit" value="Insert Customer">
+	<input type=hidden name="op" value="insert_customer">
 </div>
+
 </div>
 </div>
 </FORM>

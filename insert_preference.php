@@ -116,10 +116,10 @@ $mid->printFooter();
 </div>
 
 <div id="footer">
-
-<p><input type=submit name="submit" value="Insert Preference">
-<input type=hidden name="op" value="insert_preference"></p>
+	<input type=submit name="submit" value="Insert Preference">
+	<input type=hidden name="op" value="insert_preference">
 </div>
+
 </div>
 </FORM>
 </BODY>

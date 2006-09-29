@@ -68,10 +68,10 @@ $mid->printFooter();
 	
 </table>
 </div>
-<div id="footer">
 
-<p><input type=submit name="submit" value="Insert Tax Rate">
-<input type=hidden name="op" value="insert_tax_rate"></p>
+<div id="footer">
+	<input type=submit name="submit" value="Insert Tax Rate">
+	<input type=hidden name="op" value="insert_tax_rate">
 </div>
 
 

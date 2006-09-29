@@ -174,9 +174,7 @@ $mid->printFooter();
 
 </div>
 <div id="footer">
-
-<p><input type=submit name="submit" value="Insert Biller"><input type=hidden name="op" value="insert_biller"></p>
-</div>
+		<input type=submit name="submit" value="Insert Biller"><input type=hidden name="op" value="insert_biller">
 </div>
 
 
