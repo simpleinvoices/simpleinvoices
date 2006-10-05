@@ -242,7 +242,7 @@ if ($_GET[invoice_style] === 'Total') {
         	        <td colspan=6><br></td>
 	        </tr>
 	        <tr>
-	                <td></td><td><td><td></td><td><b>$pp_invoice_gross_total</b></td><td><b>$pp_invoice_tax</b></td><td><b>$pp_invoice_total</b></td>
+	                <td></td><td></td><td></td><td><b>$pp_invoice_gross_total</b></td><td><b>$pp_invoice_tax</b></td><td><b>$pp_invoice_total</b></td>
         	</tr>
 	        <tr>
         	        <td></td><td></td><td></td><td>$pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td><u>$pref_currency_signField$inv_it_totalField</u></td>
