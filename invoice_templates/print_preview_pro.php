@@ -123,7 +123,10 @@ if (!empty($b_co_logoField)) {
 if (empty($b_co_logoField)) {
         $logo_block = "
         <tr>
-                <td colspan=5><IMG src=../logo/_default_blank_logo.png border=0 hspace=0 align=left><hr size=\"1\"><th align=right><span class=\"font1\">$pref_inv_headingField</span></th></td>
+                <td colspan=5><IMG src=../logo/_default_blank_logo.png border=0 hspace=0 align=left><th align=right><span class=\"font1\">$pref_inv_headingField</span></th></td>
+        </tr>
+        <tr>
+                <td colspan=6><hr size=\"1\"></td>
         </tr>
  ";
 }
