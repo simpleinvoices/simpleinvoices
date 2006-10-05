@@ -139,20 +139,20 @@ $display_block_top =  "
 	<table align=center >
 	$logo_block 
 	<tr>
-		<td nowrap class=\"col1 tbl1\" colspan=2 ><b>$b_nameField</b></td><td></td><td class=\"col1 tbl1\" colspan=3 >Invoice Summary</td> 
+		<td nowrap class=\"col1 tbl1\" colspan=2 ><b>$b_nameField</b></td><td></td><td class=\"col1 tbl1\" colspan=3 >$pref_inv_wordingField Summary</td> 
 	</tr>
 	<tr>
-		<td nowrap class=\"tbl1-left\">$b_street_addressField,</td><td class=\"tbl1-right\">Ph: $b_phoneField</td><td></td><td><b>$pref_inv_wordingField $pp_invoice_number</b></td><td>$inv_idField</td><td></td>
+		<td nowrap class=\"tbl1-left\">$b_street_addressField,</td><td class=\"tbl1-right\">Ph: $b_phoneField</td><td></td><td class=\"tbl1-left\"><b>$pref_inv_wordingField $pp_invoice_number</b></td><td>$inv_idField</td><td class=\"tbl1-right\"></td>
 	</tr>	
 	<tr>
-		<td nowrap class=\"tbl1-left\">$b_cityField,</td><td class=\"tbl1-right\">$pp_invoice_mobile: $b_mobile_phoneField</td><td></td><td><b>$pref_inv_wordingField $pp_invoice_date</b></td><td colspan=2>$inv_dateField</td>
+		<td nowrap class=\"tbl1-left\">$b_cityField,</td><td class=\"tbl1-right\">$pp_invoice_mobile: $b_mobile_phoneField</td><td></td><td class=\"tbl1-left tbl1-bottom\"><b>$pref_inv_wordingField $pp_invoice_date</b></td><td class=\"tbl1-right tbl1-bottom\" colspan=2>$inv_dateField</td>
 
 	</tr>	
 	<tr>
-		<td nowrap class=\"tbl1-left\">$b_stateField, $b_zip_codeField</td><td class=\"tbl1-right\">$pp_invoice_fax: $b_faxField</td>
+		<td nowrap class=\"tbl1-left\">$b_stateField, $b_zip_codeField</td><td class=\"tbl1-right\">$pp_invoice_fax: $b_faxField</td><td></td><td colspan=3></td>
 	</tr>	
 	<tr>
-		<td nowrap class=\"tbl1-left tbl1-bottom\">$b_countryField</td><td class=\"tbl1-right tbl1-bottom\">$pp_invoice_email: $b_emailField</td>
+		<td nowrap class=\"tbl1-left tbl1-bottom\">$b_countryField</td><td class=\"tbl1-right tbl1-bottom\">$pp_invoice_email: $b_emailField</td><td colspan=4></td>
 	</tr>	
 	<tr>
 		<td colspan=5><br><br></td>
@@ -235,26 +235,26 @@ if ($_GET[invoice_style] === 'Total') {
 	        <tr>
 	                <td colspan=6><br><br></td>
         	</tr>
-	        <tr>
+	        <tr class=\"tbl1 col1\" >
         	        <td colspan=6><b>$pp_invoice_description</b></td>
 	        </tr>
-	        <tr>
+	        <tr class=\"tbl1-left tbl1-right\">
 	                <td colspan=6>$inv_it_descriptionField</td>
         	</tr>
-	        <tr>
+	        <tr class=\"tbl1-left tbl1-right\">
         	        <td colspan=6><br></td>
 	        </tr>
-	        <tr>
+	        <tr class=\"tbl1-left tbl1-right\">
 	                <td></td><td></td><td></td><td><b>$pp_invoice_gross_total</b></td><td><b>$pp_invoice_tax</b></td><td><b>$pp_invoice_total</b></td>
         	</tr>
-	        <tr>
-        	        <td></td><td></td><td></td><td>$pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td><u>$pref_currency_signField$inv_it_totalField</u></td>
+	        <tr class=\"tbl1-left tbl1-right tbl1-bottom\">
+        	        <td></td><td></td><td width=10%></td><td> $pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td><u>$pref_currency_signField$inv_it_totalField</u></td>
 	        </tr>
 
         	<tr>
                 	<td colspan=6><br><br></td>
 	        </tr>
-        	<tr>
+        	<tr class=\"tbl1 col1\" >
                 	<td colspan=6><b>$pref_inv_detail_headingField</b></td>
 	        </tr>
 	";	
@@ -283,8 +283,8 @@ $display_block_details =  "
         #show column heading for consulting style
         else if ( $_GET['invoice_style'] === 'Consulting' ) {
                 $display_block_details .=  "
-                <tr>
-                        <td><b>$pp_invoice_quantity</b></td><td><b>$pp_invoice_item</b></td><td><b>$pp_invoice_unit_price</b><td><b>$pp_invoice_gross_total</b></td><td><b>$pp_invoice_tax</b></td><td><b>$pp_invoice_total</b></td>
+                <tr class=\"tbl1 col1\">
+                        <td class=\"tbl1\"><b>$pp_invoice_quantity</b></td><td class=\"tbl1\"><b>$pp_invoice_item</b></td><td class=\"tbl1\"><b>$pp_invoice_unit_price</b><td class=\"tbl1\"><b>$pp_invoice_gross_total</b></td><td class=\"tbl1\"><b>$pp_invoice_tax</b></td><td class=\"tbl1\"><b>$pp_invoice_total</b></td>
                 </tr>";
         }
 
@@ -357,9 +357,8 @@ $display_block_details =  "
         if ( $_GET['invoice_style'] === 'Itemised' ) {
 
                 $display_block_details .=  "
-                <tr>
-                        <td>$inv_it_quantityField</td><td>$prod_descriptionField</td><td>$pref_currency_signField$inv_it_unit_priceField</td><td>$pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td>$pref_currency_signField$inv_it_totalField</td>
-                </tr>
+                <tr class=\"tbl1\" >
+                        <td class=\"tbl1\">$inv_it_quantityField</td><td class=\"tbl1\">$prod_descriptionField</td><td class=\"tbl1\">$pref_currency_signField$inv_it_unit_priceField</td><td class=\"tbl1\">$pref_currency_signField$inv_it_gross_totalField</td><td class=\"tbl1\">$pref_currency_signField$inv_it_tax_amountField</td><td class=\"tbl1\">$pref_currency_signField$inv_it_totalField</td>
                 ";
         }
         #show the consulting invoice
@@ -368,12 +367,15 @@ $display_block_details =  "
                 
 
                 $display_block_details .=  "
-                <tr>
-                        <td>$inv_it_quantityField</td><td>$prod_descriptionField</td></tr><tr><td></td><td colspan=6><i>$pp_invoice_description: </i>$inv_it_descriptionField</td></tr><tr><td></td><td></td><td>$pref_currency_signField$inv_it_unit_priceField</td><td>$pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td>$pref_currency_signField$inv_it_totalField</td>
-                </tr>
-		<tr>
-			<td><br></td>
+                <tr class=\"tbl1-left tbl1-right\">
+                        <td>$inv_it_quantityField</td><td>$prod_descriptionField</td>
 		</tr>
+		<tr class=\"tbl1-left tbl1-right\">
+			<td></td><td colspan=6><i>$pp_invoice_description: </i>$inv_it_descriptionField</td>
+		</tr>
+		<tr class=\"tbl1-left tbl1-right tbl1-bottom\">
+			<td></td><td></td><td>$pref_currency_signField$inv_it_unit_priceField</td><td>$pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td>$pref_currency_signField$inv_it_totalField</td>
+                </tr>
                 ";
         }
 	#End merge code here
@@ -386,17 +388,17 @@ $display_block_details =  "
 
 
         #if itemised style show the invoice note field - START
-	if ( $_GET['invoice_style'] === 'Itemised' && !empty($inv_noteField)) {
+	if ( $_GET['invoice_style'] === 'Itemised' OR 'Consulting' && !empty($inv_noteField)) {
 
                 $display_block_details .=  "
                         <tr>
-                                <td></td>
+                                <td class=\"tbl1-left tbl1-right\" colspan=6></td>
                         </tr>
                         <tr>
-                                <td><i>$pp_invoice_note:</i></td>
+                                <td class=\"tbl1-left tbl1-right\" colspan=6 align=left><i>$pp_invoice_note:</i></td>
                         </tr>
                         <tr>
-                                <td colspan=6>$inv_noteField</td>
+                                <td class=\"tbl1-left tbl1-right\" colspan=6>$inv_noteField</td>
                         </tr>
                 ";
         }
@@ -411,16 +413,19 @@ $display_block_details =  "
 
         </tr>
 	-->
-	<tr>
+	<tr class=\"tbl1-left tbl1-right\">
 		<td colspan=6><br></td>
 	</tr>	
 
-        <tr>
-                <td colspan=3></td><td align=left colspan=2>$pp_invoice_total_tax</td><td>$pref_currency_signField$invoice_total_taxField</td>
+        <tr class=\"tbl1-left tbl1-right\">
+                <td colspan=3 ></td><td align=left colspan=2>$pp_invoice_total_tax</td><td>$pref_currency_signField$invoice_total_taxField</td>
         </tr>
-	<tr><td><br></td>
+	<tr class=\"tbl1-left tbl1-right\" >
+		<td>
+			<br>
+		</td>
 	</tr>
-        <tr>
+        <tr class=\"tbl1-left tbl1-right tbl1-bottom\">
                 <td colspan=3></td><td align=left colspan=2><b>$pref_inv_wordingField $pp_invoice_amount</b></td><td><u>$pref_currency_signField$invoice_total_totalField</u></td>
         </tr>
 
@@ -492,6 +497,14 @@ Nifty("div#header,div#footer","small");
 <style type="text/css">
 
 body { background: white; color: black; font-style: normal; font-size: 12pt; font-family: Veranda, San-Serif, Arial; }
+
+table {
+        border-spacing: 0;
+        border-collapse: collapse;
+}
+
+td {margin: 0px;      padding: 0px;}
+tr {margin: 0px;      padding: 0px;}
 
 .col1 { background-color: #EFEFEF; }
 
