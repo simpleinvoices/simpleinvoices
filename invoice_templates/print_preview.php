@@ -139,7 +139,7 @@ $display_block_top =  "
 	<table align=center >
 	$logo_block 
 	<tr>
-		<td nowrap class=\"col1 tbl1\" colspan=2 ><b>$b_nameField</b></td><td></td><td class=\"col1 tbl1\" colspan=3 >$pref_inv_wordingField Summary</td> 
+		<td nowrap class=\"col1 tbl1\" colspan=2 ><b>$b_nameField</b></td><td></td><td class=\"col1 tbl1\" colspan=3 >$pref_inv_wordingField $pp_invoice_summary</td> 
 	</tr>
 	<tr>
 		<td nowrap class=\"tbl1-left\">$b_street_addressField,</td><td class=\"tbl1-right\">Ph: $b_phoneField</td><td></td><td class=\"tbl1-left\"><b>$pref_inv_wordingField $pp_invoice_number</b></td><td>$inv_idField</td><td class=\"tbl1-right\"></td>

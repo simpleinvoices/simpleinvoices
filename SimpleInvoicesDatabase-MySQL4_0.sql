@@ -347,4 +347,5 @@ INSERT INTO `si_tax` (`tax_id`, `tax_description`, `tax_percentage`, `tax_enable
 (3, 'Sales Tax (USA)', 10.00, '1'),
 (4, 'GST (NZ)', 10.00, '1'),
 (5, 'No Tax', 0.00, '1'),
-(6, 'IVA', 20.00, '1');
+(6, 'IVA', 20.00, '1'),
+(7, 'MWSt (DE)', 16.00, '1');

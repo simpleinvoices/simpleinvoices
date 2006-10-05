@@ -176,6 +176,7 @@ $pp_invoice_item ="Item";
 $pp_invoice_note ="Note";
 $pp_invoice_total_tax ="Total tax included";
 $pp_invoice_amount ="Amount";
+$pp_invoice_summary ="Summary";
 
 
 
