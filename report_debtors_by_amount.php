@@ -60,6 +60,8 @@ FROM
 WHERE
         inv_it_invoice_id = si_invoices.inv_id
 GROUP BY
+        inv_id
+ORDER BY
         Owing DESC;
 
 ";
