@@ -9,6 +9,7 @@ $db_password = "";
 /*Select language for Simple Invoices to use*/
 $language = "english_UK";
 #$language = "português_portuguese";
+#$language = "german_deutch";
 
 /*To change the theme, enter the name of the theme folder - defalut is gree*/
 #$theme = "web2";
