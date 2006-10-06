@@ -51,9 +51,9 @@ SELECT
 
         (CASE WHEN datediff(now(),inv_date) <= 14 THEN (select sum(inv_it_total) from si_invoices,si_invoice_items where datediff(now(),inv_date) <= 14 and inv_it_invoice_id = si_invoices.inv_id)
                 WHEN datediff(now(),inv_date) <= 30 THEN (select sum(inv_it_total) from si_invoices,si_invoice_items where datediff(now(),inv_date) <= 30 and datediff(now(),inv_date) > 14 and inv_it_invoice_id = si_invoices.inv_id)
-                WHEN datediff(now(),inv_date) <= 60 THEN (select sum(inv_it_total) from si_invoices,si_invoice_items where datediff(now(),inv_date) <= 60 and datediff(now(),inv_date) > 60)
-                WHEN datediff(now(),inv_date) <= 90 THEN (select sum(inv_it_total) from si_invoices,si_invoice_items where datediff(now(),inv_date) <= 90 and datediff(now(),inv_date) > 90)
-                ELSE (select sum(inv_it_total) from si_invoices,si_invoice_items where datediff(now(),inv_date) > 90)
+                WHEN datediff(now(),inv_date) <= 60 THEN (select sum(inv_it_total) from si_invoices,si_invoice_items where datediff(now(),inv_date) <= 60 and datediff(now(),inv_date) > 30 and inv_it_invoice_id = si_invoices.inv_id)
+                WHEN datediff(now(),inv_date) <= 90 THEN (select sum(inv_it_total) from si_invoices,si_invoice_items where datediff(now(),inv_date) <= 90 and datediff(now(),inv_date) > 60 and inv_it_invoice_id = si_invoices.inv_id)
+                ELSE (select sum(inv_it_total) from si_invoices,si_invoice_items where datediff(now(),inv_date) > 90 and inv_it_invoice_id = si_invoices.inv_id)
         END ) as Total,
 
         (CASE WHEN datediff(now(),inv_date) <= 14 THEN (select sum(ac_amount) from si_account_payments,si_invoices where datediff(now(),inv_date) <= 14 and ac_inv_id = si_invoices.inv_id)
