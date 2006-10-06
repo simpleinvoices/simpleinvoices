@@ -34,6 +34,8 @@ $mi_table_type = "Type";
 $mi_table_date = "Date created";
 $mi_actions_quick_view = "view";
 $mi_actions_quick_view_tooltip = "Quick View of"; 
+$mi_actions_edit_view = "edit";
+$mi_actions_edit_view_toolkit = "Edit";
 $mi_actions_print_preview_tooltip = "Print Preview of";
 $mi_actions_export_tooltip = "Export"; 
 $mi_actions_export_pdf_tooltip = "as PDF format";
@@ -155,17 +157,24 @@ $mpt_actions_view = "View";
 $mpt_actions_edit = "Edit";
 $mpt_actions_new_tax = "Add New Payment Type";
 
-
-
-
-
-
-
-
-
-
-
-
-
+#Print Preview - Invoice layout
+$pp_invoice_number ="No.";
+$pp_invoice_date ="date.";
+$pp_invoice_mobile ="Mob.";
+$pp_invoice_fax ="Fax";
+$pp_invoice_email ="Email";
+$pp_invoice_customer ="Customer";
+$pp_invoice_attention ="Attn.";
+$pp_invoice_phone ="Ph";
+$pp_invoice_description ="Description";
+$pp_invoice_gross_total ="Gross Total";
+$pp_invoice_tax ="Tax";
+$pp_invoice_total ="TOTAL";
+$pp_invoice_unit_price ="Unit Price";
+$pp_invoice_quantity ="Qty";
+$pp_invoice_item ="Item";
+$pp_invoice_note ="Note";
+$pp_invoice_total_tax ="Total tax included";
+$pp_invoice_amount ="Amount";
+$pp_invoice_summary ="Summary";
 ?>
-
