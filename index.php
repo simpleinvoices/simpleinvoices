@@ -30,6 +30,12 @@ include("./lang/$language.inc.php");
                         .on  .mytitle { background-color:#E4EFC7; }
                         .off .mytitle { background-color:#E0E0E0; }
                         .mycontent    { background-color:#F5F5F5; padding:0.1em; border:1px solid #C0C0C0; border-top-width:0; }
+
+			a:link {  text-decoration: none; }
+			a:visited { text-decoration: none; }
+			a:active { text-decoration: none; }
+			a:hover {text-decoration: underline; color:  #ff0000; }
+
                 </style>
 
 </head>
@@ -113,71 +119,61 @@ $mid->printFooter();
                <div id="list2">
 
                 <h2><img src="./images/menu.png"> Shortcut menu</h2>
+
                         <div id="item21">
-
-                                <div class="mytitle">Lorem ipsum dolor sit amet</div>
-
+                                <div class="mytitle">Getting Started</div>
                                 <div class="mycontent">
-
                                         consectetuer adipiscing elit<br/>
-
                                         Sed lorem leo<br/>
-
                                         lorem leo consectetuer adipiscing elit<br/>
-
                                         Sed lorem leo<br/>
-
-                                        rhoncus sit amet
-
                                 </div>
-
                         </div>
-
 
                         <div id="item22">
-
-                                <div class="mytitle">elementum at</div>
-
+                                <div class="mytitle">Create an invoice</div>
                                 <div class="mycontent">
-
-                                        bibendum at, eros<br/>
-
-                                        Cras at mi et tortor egestas vestibulum<br/>
-
-                                        sed Cras at mi vestibulum<br/>
-
-                                        Phasellus sed felis sit amet
-
+                                        <a href="invoice_total.php">Total</a><br/>
+                                        <a href="invoice_itemised.php">Itemised</a><br/>
+                                        <a href="invoice_consulting.php">Consulting</a><br/>
                                 </div>
-
                         </div>
                         <div id="item23">
-
-                                <div class="mytitle">orci dapibus semper.</div>
-
+                                <div class="mytitle">Manage your existing invoices</div>
                                 <div class="mycontent">
-
-                                        Morbi eros massa<br/>
-
-                                        interdum et, vestibulum id, rutrum nec<br/>
-
-                                        bibendum at, eros<br/>
-
-                                        Cras at mi et tortor egestas vestibulum<br/>
-
-                                        Phasellus sed felis sit amet<br/>
-
-                                        Morbi eros massa<br/>
-
-                                        interdum et, vestibulum id, rutrum nec<br/>
-
-                                        Phasellus sem leo
-
+                                        <a href="manage_invoices.php">Manage Invoices</a><br/>
                                 </div>
+                        </div>
 
+                        <div id="item24">
+                                <div class="mytitle">Manage your data</div>
+                                <div class="mycontent">
+                                        <a href="insert_biller.php">Add Biller</a><br/>
+                                        <a href="insert_customer.php">Add Customer</a><br/>
+                                        <a href="insert_product.php">Add Product</a><br/>
+                                </div>
+                        </div>
+                        <div id="item25">
+                                <div class="mytitle">Options</div>
+                                <div class="mycontent">
+                                        <a href="manage_invoices.php">System Defaults</a><br/>
+                                        <a href="manage_invoices.php">Tax Rates</a><br/>
+                                        <a href="manage_invoices.php">Invoice Preferencest</a><br/>
+                                        <a href="manage_invoices.php">Payment Types</a><br/>
+                                        <a href="manage_invoices.php">Database Upgrade Manager</a> <br/>
+                                        <a href="manage_invoices.php">Backup Database</a>
+                                </div>
+                        </div>
+                        <div id="item26">
+                                <div class="mytitle">Help!!</div>
+                                <div class="mycontent">
+                                        Installation<br/>
+                                        Upgrading Simple Invoices<br/>
+                                        Prepare Simple Invoices for uset<br/>
+                                </div>
                         </div>
                 </div>
-
+ 
 
 
 
