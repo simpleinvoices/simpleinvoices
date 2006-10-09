@@ -2,55 +2,31 @@
  * jQuery - New Wave Javascript
  *
  * Copyright (c) 2006 John Resig (jquery.com)
- * Licensed under the MIT License:
- *   http://www.opensource.org/licenses/mit-license.php
+ * Dual licensed under the MIT (MIT-LICENSE.txt) 
+ * and GPL (GPL-LICENSE.txt) licenses.
  *
- * $Date: 2006-07-16 22:08:00 -0400 (Sun, 16 Jul 2006) $
- * $Rev: 152 $
+ * $Date: 2006-08-31 13:26:31 -0400 (Thu, 31 Aug 2006) $
+ * $Rev: 249 $
  */
 
 // Global undefined variable
 window.undefined = window.undefined;
-
-/**
- * Create a new jQuery Object
- * @constructor
- */
 function jQuery(a,c) {
 
 	// Shortcut for document ready (because $(document).each() is silly)
 	if ( a && a.constructor == Function && jQuery.fn.ready )
 		return jQuery(document).ready(a);
 
-	// Make sure t hat a selection was provided
+	// Make sure that a selection was provided
 	a = a || jQuery.context || document;
-
-	/*
- 	 * Handle support for overriding other $() functions. Way too many libraries
- 	 * provide this function to simply ignore it and overwrite it.
- 	 */
-	/*
-	// Check to see if this is a possible collision case
-	if ( jQuery._$ && !c && a.constructor == String && 
-      
-		// Make sure that the expression is a colliding one
-		!/[^a-zA-Z0-9_-]/.test(a) &&
-        
-		// and that there are no elements that match it
-		// (this is the one truly ambiguous case)
-		!document.getElementsByTagName(a).length )
-
-			// Use the default method, in case it works some voodoo
-			return jQuery._$( a );
-	*/
 
 	// Watch for when a jQuery object is passed as the selector
 	if ( a.jquery )
-		return a;
+		return $( jQuery.merge( a, [] ) );
 
 	// Watch for when a jQuery object is passed at the context
 	if ( c && c.jquery )
-		return jQuery(c.get()).find(a);
+		return $( c ).find(a);
 	
 	// If the context is global, return a new object
 	if ( window == this )
@@ -61,99 +37,35 @@ function jQuery(a,c) {
 	if ( m ) a = jQuery.clean( [ m[1] ] );
 
 	// Watch for when an array is passed in
-	this.get( a.constructor == Array || a.length && a[0] != undefined && a[0].nodeType ?
-		// Assume that it's an array of DOM Elements
+	this.get( a.constructor == Array || a.length && !a.nodeType && a[0] != undefined && a[0].nodeType ?
+		// Assume that it is an array of DOM Elements
 		jQuery.merge( a, [] ) :
 
 		// Find the matching elements and save them for later
 		jQuery.find( a, c ) );
 
+  // See if an extra function was provided
 	var fn = arguments[ arguments.length - 1 ];
+	
+	// If so, execute it in context
 	if ( fn && fn.constructor == Function )
 		this.each(fn);
 }
 
 // Map over the $ in case of overwrite
-if ( $ )
+if ( typeof $ != "undefined" )
 	jQuery._$ = $;
 
 // Map the jQuery namespace to the '$' one
 var $ = jQuery;
 
 jQuery.fn = jQuery.prototype = {
-	/**
-	 * The current SVN version of jQuery.
-	 *
-	 * @private
-	 * @property
-	 * @name jquery
-	 * @type String
-	 */
-	jquery: "$Rev: 152 $",
-	
-	/**
-	 * The number of elements currently matched.
-	 *
-	 * @example $("img").length;
-	 * @before <img src="test1.jpg"/> <img src="test2.jpg"/>
-	 * @result 2
-	 *
-	 * @property
-	 * @name length
-	 * @type Number
-	 */
-	
-	/**
-	 * The number of elements currently matched.
-	 *
-	 * @example $("img").size();
-	 * @before <img src="test1.jpg"/> <img src="test2.jpg"/>
-	 * @result 2
-	 *
-	 * @name size
-	 * @type Number
-	 */
+	jquery: "$Rev: 249 $",
+
 	size: function() {
 		return this.length;
 	},
-	
-	/**
-	 * Access all matched elements. This serves as a backwards-compatible
-	 * way of accessing all matched elements (other than the jQuery object
-	 * itself, which is, in fact, an array of elements).
-	 *
-	 * @example $("img").get();
-	 * @before <img src="test1.jpg"/> <img src="test2.jpg"/>
-	 * @result [ <img src="test1.jpg"/> <img src="test2.jpg"/> ]
-	 *
-	 * @name get
-	 * @type Array<Element>
-	 */
-	 
-	/**
-	 * Access a single matched element. <tt>num</tt> is used to access the 
-	 * <tt>num</tt>th element matched.
-	 *
-	 * @example $("img").get(1);
-	 * @before <img src="test1.jpg"/> <img src="test2.jpg"/>
-	 * @result [ <img src="test1.jpg"/> ]
-	 *
-	 * @name get
-	 * @type Element
-	 * @param Number num Access the element in the <tt>num</tt>th position.
-	 */
-	 
-	/**
-	 * Set the jQuery object to an array of elements.
-	 *
-	 * @example $("img").get([ document.body ]);
-	 * @result $("img").get() == [ document.body ]
-	 *
-	 * @private
-	 * @name get
-	 * @type jQuery
-	 * @param Elements elems An array of elements
-	 */
+
 	get: function( num ) {
 		// Watch for when an array (of elements) is passed in
 		if ( num && num.constructor == Array ) {
@@ -173,78 +85,21 @@ jQuery.fn = jQuery.prototype = {
 				// Return just the object
 				this[num];
 	},
-
-	/**
-	 * Execute a function within the context of every matched element.
-	 * This means that every time the passed-in function is executed
-	 * (which is once for every element matched) the 'this' keyword
-	 * points to the specific element.
-	 *
-	 * Additionally, the function, when executed, is passed a single
-	 * argument representing the position of the element in the matched
-	 * set.
-	 *
-	 * @example $("img").each(function(){ this.src = "test.jpg"; });
-	 * @before <img/> <img/>
-	 * @result <img src="test.jpg"/> <img src="test.jpg"/>
-	 *
-	 * @name each
-	 * @type jQuery
-	 * @param Function fn A function to execute
-	 */
 	each: function( fn, args ) {
-		// Iterate through all of the matched elements
-		for ( var i = 0; i < this.length; i++ )
-		
-			// Execute the function within the context of each element
-			fn.apply( this[i], args || [i] );
-		
-		return this;
+		return jQuery.each( this, fn, args );
 	},
-	
-	/**
-	 * Access a property on the first matched element.
-	 * This method makes it easy to retreive a property value
-	 * from the first matched element.
-	 *
-	 * @example $("img").attr("src");
-	 * @before <img src="test.jpg"/>
-	 * @result test.jpg
-	 *
-	 * @name attr
-	 * @type Object
-	 * @param String name The name of the property to access.
-	 */
-	 
-	/**
-	 * Set a hash of key/value object properties to all matched elements.
-	 * This serves as the best way to set a large number of properties
-	 * on all matched elements.
-	 *
-	 * @example $("img").attr({ src: "test.jpg", alt: "Test Image" });
-	 * @before <img/>
-	 * @result <img src="test.jpg" alt="Test Image"/>
-	 *
-	 * @name attr
-	 * @type jQuery
-	 * @param Hash prop A set of key/value pairs to set as object properties.
-	 */
-	 
-	/**
-	 * Set a single property to a value, on all matched elements.
-	 *
-	 * @example $("img").attr("src","test.jpg");
-	 * @before <img/>
-	 * @result <img src="test.jpg"/>
-	 *
-	 * @name attr
-	 * @type jQuery
-	 * @param String key The name of the property to set.
-	 * @param Object value The value to set the property to.
-	 */
+
+	index: function( obj ) {
+		var pos = -1;
+		this.each(function(i){
+			if ( this == obj ) pos = i;
+		});
+		return pos;
+	},
+
 	attr: function( key, value, type ) {
 		// Check to see if we're setting style values
-		return key.constructor != String || value ?
+		return key.constructor != String || value != undefined ?
 			this.each(function(){
 				// See if we're setting a hash of styles
 				if ( value == undefined )
@@ -266,96 +121,22 @@ jQuery.fn = jQuery.prototype = {
 			// Look for the case where we're accessing a style value
 			jQuery[ type || "attr" ]( this[0], key );
 	},
-	
-	/**
-	 * Access a style property on the first matched element.
-	 * This method makes it easy to retreive a style property value
-	 * from the first matched element.
-	 *
-	 * @example $("p").css("red");
-	 * @before <p style="color:red;">Test Paragraph.</p>
-	 * @result red
-	 *
-	 * @name css
-	 * @type Object
-	 * @param String name The name of the property to access.
-	 */
-	 
-	/**
-	 * Set a hash of key/value style properties to all matched elements.
-	 * This serves as the best way to set a large number of style properties
-	 * on all matched elements.
-	 *
-	 * @example $("p").css({ color: "red", background: "blue" });
-	 * @before <p>Test Paragraph.</p>
-	 * @result <p style="color:red; background:blue;">Test Paragraph.</p>
-	 *
-	 * @name css
-	 * @type jQuery
-	 * @param Hash prop A set of key/value pairs to set as style properties.
-	 */
-	 
-	/**
-	 * Set a single style property to a value, on all matched elements.
-	 *
-	 * @example $("p").css("color","red");
-	 * @before <p>Test Paragraph.</p>
-	 * @result <p style="color:red;">Test Paragraph.</p>
-	 *
-	 * @name css
-	 * @type jQuery
-	 * @param String key The name of the property to set.
-	 * @param Object value The value to set the property to.
-	 */
+
 	css: function( key, value ) {
 		return this.attr( key, value, "curCSS" );
 	},
-	
-	/**
-	 * Retreive the text contents of all matched elements. The result is
-	 * a string that contains the combined text contents of all matched
-	 * elements. This method works on both HTML and XML documents.
-	 *
-	 * @example $("p").text();
-	 * @before <p>Test Paragraph.</p>
-	 * @result Test Paragraph.
-	 *
-	 * @name text
-	 * @type String
-	 */
 	text: function(e) {
 		e = e || this;
 		var t = "";
 		for ( var j = 0; j < e.length; j++ ) {
 			var r = e[j].childNodes;
 			for ( var i = 0; i < r.length; i++ )
-				t += r[i].nodeType != 1 ?
-					r[i].nodeValue : jQuery.fn.text([ r[i] ]);
+				if ( r[i].nodeType != 8 )
+					t += r[i].nodeType != 1 ?
+						r[i].nodeValue : jQuery.fn.text([ r[i] ]);
 		}
 		return t;
 	},
-	
-	/**
-	 * Wrap all matched elements with a structure of other elements.
-	 * This wrapping process is most useful for injecting additional
-	 * stucture into a document, without ruining the original semantic
-	 * qualities of a document.
-	 *
-	 * The way that is works is that it goes through the first element argument
-	 * provided and finds the deepest element within the structure - it is that
-	 * element that will en-wrap everything else.
-	 *
-	 * @example $("p").wrap("<div class='wrap'></div>");
-	 * @before <p>Test Paragraph.</p>
-	 * @result <div class='wrap'><p>Test Paragraph.</p></div>
-	 *
-	 * @name wrap
-	 * @type jQuery
-	 * @any String html A string of HTML, that will be created on the fly and wrapped around the target.
-	 * @any Element elem A DOM element that will be wrapped.
-	 * @any Array<Element> elems An array of elements, the first of which will be wrapped.
-	 * @any Object obj Any object, converted to a string, then a text node.
-	 */
 	wrap: function() {
 		// The elements to wrap the target around
 		var a = jQuery.clean(arguments);
@@ -376,163 +157,41 @@ jQuery.fn = jQuery.prototype = {
 			b.appendChild( this );
 		});
 	},
-	
-	/**
-	 * Append any number of elements to the inside of all matched elements.
-	 * This operation is similar to doing an <tt>appendChild</tt> to all the 
-	 * specified elements, adding them into the document.
-	 * 
-	 * @example $("p").append("<b>Hello</b>");
-	 * @before <p>I would like to say: </p>
-	 * @result <p>I would like to say: <b>Hello</b></p>
-	 *
-	 * @name append
-	 * @type jQuery
-	 * @any String html A string of HTML, that will be created on the fly and appended to the target.
-	 * @any Element elem A DOM element that will be appended.
-	 * @any Array<Element> elems An array of elements, all of which will be appended.
-	 * @any Object obj Any object, converted to a string, then a text node.
-	 */
 	append: function() {
 		return this.domManip(arguments, true, 1, function(a){
 			this.appendChild( a );
 		});
 	},
-	
-	/**
-	 * Prepend any number of elements to the inside of all matched elements.
-	 * This operation is the best way to insert a set of elements inside, at the 
-	 * beginning, of all the matched element.
-	 * 
-	 * @example $("p").prepend("<b>Hello</b>");
-	 * @before <p>, how are you?</p>
-	 * @result <p><b>Hello</b>, how are you?</p>
-	 *
-	 * @name prepend
-	 * @type jQuery
-	 * @any String html A string of HTML, that will be created on the fly and prepended to the target.
-	 * @any Element elem A DOM element that will be prepended.
-	 * @any Array<Element> elems An array of elements, all of which will be prepended.
-	 * @any Object obj Any object, converted to a string, then a text node.
-	 */
 	prepend: function() {
 		return this.domManip(arguments, true, -1, function(a){
 			this.insertBefore( a, this.firstChild );
 		});
 	},
-	
-	/**
-	 * Insert any number of elements before each of the matched elements.
-	 * 
-	 * @example $("p").before("<b>Hello</b>");
-	 * @before <p>how are you?</p>
-	 * @result <b>Hello</b><p>how are you?</p>
-	 *
-	 * @name before
-	 * @type jQuery
-	 * @any String html A string of HTML, that will be created on the fly and inserted.
-	 * @any Element elem A DOM element that will beinserted.
-	 * @any Array<Element> elems An array of elements, all of which will be inserted.
-	 * @any Object obj Any object, converted to a string, then a text node.
-	 */
 	before: function() {
 		return this.domManip(arguments, false, 1, function(a){
 			this.parentNode.insertBefore( a, this );
 		});
 	},
-	
-	/**
-	 * Insert any number of elements after each of the matched elements.
-	 * 
-	 * @example $("p").after("<p>I'm doing fine.</p>");
-	 * @before <p>How are you?</p>
-	 * @result <p>How are you?</p><p>I'm doing fine.</p>
-	 *
-	 * @name after
-	 * @type jQuery
-	 * @any String html A string of HTML, that will be created on the fly and inserted.
-	 * @any Element elem A DOM element that will beinserted.
-	 * @any Array<Element> elems An array of elements, all of which will be inserted.
-	 * @any Object obj Any object, converted to a string, then a text node.
-	 */
 	after: function() {
 		return this.domManip(arguments, false, -1, function(a){
 			this.parentNode.insertBefore( a, this.nextSibling );
 		});
 	},
-	
-	/**
-	 * End the most recent 'destructive' operation, reverting the list of matched elements
-	 * back to its previous state. After an end operation, the list of matched elements will 
-	 * revert to the last state of matched elements.
-	 *
-	 * @example $("p").find("span").end();
-	 * @before <p><span>Hello</span>, how are you?</p>
-	 * @result $("p").find("span").end() == [ <p>...</p> ]
-	 *
-	 * @name end
-	 * @type jQuery
-	 */
 	end: function() {
 		return this.get( this.stack.pop() );
 	},
-	
-	/**
-	 * Searches for all elements that match the specified expression.
-	 * This method is the optimal way of finding additional descendant
-	 * elements with which to process.
-	 *
-	 * All searching is done using a jQuery expression. The expression can be 
-	 * written using CSS 1-3 Selector syntax, or basic XPath.
-	 *
-	 * @example $("p").find("span");
-	 * @before <p><span>Hello</span>, how are you?</p>
-	 * @result $("p").find("span") == [ <span>Hello</span> ]
-	 *
-	 * @name find
-	 * @type jQuery
-	 * @param String expr An expression to search with.
-	 */
 	find: function(t) {
 		return this.pushStack( jQuery.map( this, function(a){
 			return jQuery.find(t,a);
 		}), arguments );
 	},
-	
-	/**
-	 * Removes all elements from the set of matched elements that do not 
-	 * match the specified expression. This method is used to narrow down
-	 * the results of a search.
-	 *
-	 * All searching is done using a jQuery expression. The expression
-	 * can be written using CSS 1-3 Selector syntax, or basic XPath.
-	 * 
-	 * @example $("p").filter(".selected")
-	 * @before <p class="selected">Hello</p><p>How are you?</p>
-	 * @result $("p").filter(".selected") == [ <p class="selected">Hello</p> ]
-	 *
-	 * @name filter
-	 * @type jQuery
-	 * @param String expr An expression to search with.
-	 */
 
-	/**
-	 * Removes all elements from the set of matched elements that do not
-	 * match at least one of the expressions passed to the function. This 
-	 * method is used when you want to filter the set of matched elements 
-	 * through more than one expression.
-	 *
-	 * Elements will be retained in the jQuery object if they match at
-	 * least one of the expressions passed.
-	 *
-	 * @example $("p").filter([".selected", ":first"])
-	 * @before <p>Hello</p><p>Hello Again</p><p class="selected">And Again</p>
-	 * @result $("p").filter([".selected", ":first"]) == [ <p>Hello</p>, <p class="selected">And Again</p> ]
-	 *
-	 * @name filter
-	 * @type jQuery
-	 * @param Array<String> exprs A set of expressions to evaluate against
-	 */
+	clone: function(deep) {
+		return this.pushStack( jQuery.map( this, function(a){
+			return a.cloneNode( deep != undefined ? deep : true );
+		}), arguments );
+	},
+
 	filter: function(t) {
 		return this.pushStack(
 			t.constructor == Array &&
@@ -550,106 +209,20 @@ jQuery.fn = jQuery.prototype = {
 
 			jQuery.filter(t,this).r, arguments );
 	},
-	
-	/**
-	 * Removes the specified Element from the set of matched elements. This
-	 * method is used to remove a single Element from a jQuery object.
-	 *
-	 * @example $("p").not( document.getElementById("selected") )
-	 * @before <p>Hello</p><p id="selected">Hello Again</p>
-	 * @result [ <p>Hello</p> ]
-	 *
-	 * @name not
-	 * @type jQuery
-	 * @param Element el An element to remove from the set
-	 */
 
-	/**
-	 * Removes elements matching the specified expression from the set
-	 * of matched elements. This method is used to remove one or more
-	 * elements from a jQuery object.
-	 * 
-	 * @example $("p").not("#selected")
-	 * @before <p>Hello</p><p id="selected">Hello Again</p>
-	 * @result [ <p>Hello</p> ]
-	 *
-	 * @name not
-	 * @type jQuery
-	 * @param String expr An expression with which to remove matching elements
-	 */
 	not: function(t) {
 		return this.pushStack( t.constructor == String ?
 			jQuery.filter(t,this,false).r :
 			jQuery.grep(this,function(a){ return a != t; }), arguments );
 	},
 
-	/**
-	 * Adds the elements matched by the expression to the jQuery object. This
-	 * can be used to concatenate the result sets of two expressions.
-	 *
-	 * @example $("p").add("span")
-	 * @before <p>Hello</p><p><span>Hello Again</span></p>
-	 * @result [ <p>Hello</p>, <span>Hello Again</span> ]
-	 *
-	 * @name add
-	 * @type jQuery
-	 * @param String expr An expression whose matched elements are added
-	 */
-
-	/**
-	 * Adds each of the Elements in the array to the set of matched elements.
-	 * This is used to add a set of Elements to a jQuery object.
-	 *
-	 * @example $("p").add([document.getElementById("a"), document.getElementById("b")])
-	 * @before <p>Hello</p><p><span id="a">Hello Again</span><span id="b">And Again</span></p>
-	 * @result [ <p>Hello</p>, <span id="a">Hello Again</span>, <span id="b">And Again</span> ]
-	 *
-	 * @name add
-	 * @type jQuery
-	 * @param Array<Element> els An array of Elements to add
-	 */
-
-	/**
-	 * Adds a single Element to the set of matched elements. This is used to
-	 * add a single Element to a jQuery object.
-	 *
-	 * @example $("p").add( document.getElementById("a") )
-	 * @before <p>Hello</p><p><span id="a">Hello Again</span></p>
-	 * @result [ <p>Hello</p>, <span id="a">Hello Again</span> ]
-	 *
-	 * @name add
-	 * @type jQuery
-	 * @param Element el An Element to add
-	 */
 	add: function(t) {
 		return this.pushStack( jQuery.merge( this, t.constructor == String ?
 			jQuery.find(t) : t.constructor == Array ? t : [t] ), arguments );
 	},
-	
-	/**
-	 * A wrapper function for each() to be used by append and prepend.
-	 * Handles cases where you're trying to modify the inner contents of
-	 * a table, when you actually need to work with the tbody.
-	 *
-	 * @member jQuery
-	 * @param {String} expr The expression with which to filter
-	 * @type Boolean
-	 */
 	is: function(expr) {
 		return expr ? jQuery.filter(expr,this).r.length > 0 : this.length > 0;
 	},
-	
-	/**
-	 * 
-	 *
-	 * @private
-	 * @name domManip
-	 * @param Array args
-	 * @param Boolean table
-	 * @param Number int
-	 * @param Function fn The function doing the DOM manipulation.
-	 * @type jQuery
-	 */
 	domManip: function(args, table, dir, fn){
 		var clone = this.size() > 1;
 		var a = jQuery.clean(args);
@@ -657,7 +230,7 @@ jQuery.fn = jQuery.prototype = {
 		return this.each(function(){
 			var obj = this;
 			
-			if ( table && this.nodeName == "TABLE" ) {
+			if ( table && this.nodeName == "TABLE" && a[0].nodeName != "THEAD" ) {
 				var tbody = this.getElementsByTagName("tbody");
 
 				if ( !tbody.length ) {
@@ -666,24 +239,13 @@ jQuery.fn = jQuery.prototype = {
 				} else
 					obj = tbody[0];
 			}
-			//alert( obj );
+
 			for ( var i = ( dir < 0 ? a.length - 1 : 0 );
 				i != ( dir < 0 ? dir : a.length ); i += dir ) {
 					fn.apply( obj, [ clone ? a[i].cloneNode(true) : a[i] ] );
-					//alert( fn );
 			}
 		});
 	},
-	
-	/**
-	 * 
-	 *
-	 * @private
-	 * @name pushStack
-	 * @param Array a
-	 * @param Array args
-	 * @type jQuery
-	 */
 	pushStack: function(a,args) {
 		var fn = args && args[args.length-1];
 
@@ -700,429 +262,78 @@ jQuery.fn = jQuery.prototype = {
 		}
 
 		return this;
-	},
-	
-	extend: function(obj,prop) {
-		if ( !prop ) { prop = obj; obj = this; }
-		for ( var i in prop ) obj[i] = prop[i];
-		return obj;
 	}
 };
 
-jQuery.extend = jQuery.fn.extend;
-
-new function() {
-	var b = navigator.userAgent.toLowerCase();
-
-	// Figure out what browser is being used
-	jQuery.browser = {
-		safari: /webkit/.test(b),
-		opera: /opera/.test(b),
-		msie: /msie/.test(b) && !/opera/.test(b),
-		mozilla: /mozilla/.test(b) && !/compatible/.test(b)
-	};
-
-	// Check to see if the W3C box model is being used
-	jQuery.boxModel = !jQuery.browser.msie || document.compatMode == "CSS1Compat";
-
-	var axis = {
-		/**
-		 * Get a set of elements containing the unique parents of the matched
-		 * set of elements.
-		 *
-		 * @example $("p").parent()
-		 * @before <div><p>Hello</p><p>Hello</p></div>
-		 * @result [ <div><p>Hello</p><p>Hello</p></div> ]
-		 *
-		 * @name parent
-		 * @type jQuery
-		 */
-
-		/**
-		 * Get a set of elements containing the unique parents of the matched
-		 * set of elements, and filtered by an expression.
-		 *
-		 * @example $("p").parent(".selected")
-		 * @before <div><p>Hello</p></div><div class="selected"><p>Hello Again</p></div>
-		 * @result [ <div class="selected"><p>Hello Again</p></div> ]
-		 *
-		 * @name parent
-		 * @type jQuery
-		 * @param String expr An expression to filter the parents with
-		 */
-		parent: "a.parentNode",
-
-		/**
-		 * Get a set of elements containing the unique ancestors of the matched
-		 * set of elements.
-		 *
-		 * @example $("span").ancestors()
-		 * @before <html><body><div><p><span>Hello</span></p><span>Hello Again</span></div></body></html>
-		 * @result [ <body>...</body>, <div>...</div>, <p><span>Hello</span></p> ] 
-		 *
-		 * @name ancestors
-		 * @type jQuery
-		 */
-
-		/**
-		 * Get a set of elements containing the unique ancestors of the matched
-		 * set of elements, and filtered by an expression.
-		 *
-		 * @example $("span").ancestors("p")
-		 * @before <html><body><div><p><span>Hello</span></p><span>Hello Again</span></div></body></html>
-		 * @result [ <p><span>Hello</span></p> ] 
-		 *
-		 * @name ancestors
-		 * @type jQuery
-		 * @param String expr An expression to filter the ancestors with
-		 */
-		ancestors: jQuery.parents,
-		
-		/**
-		 * A synonym for ancestors
-		 */
-		parents: jQuery.parents,
-
-		/**
-		 * Get a set of elements containing the unique next siblings of each of the 
-		 * matched set of elements.
-		 * 
-		 * It only returns the very next sibling, not all next siblings.
-		 *
-		 * @example $("p").next()
-		 * @before <p>Hello</p><p>Hello Again</p><div><span>And Again</span></div>
-		 * @result [ <p>Hello Again</p>, <div><span>And Again</span></div> ]
-		 *
-		 * @name next
-		 * @type jQuery
-		 */
-
-		/**
-		 * Get a set of elements containing the unique next siblings of each of the 
-		 * matched set of elements, and filtered by an expression.
-		 * 
-		 * It only returns the very next sibling, not all next siblings.
-		 *
-		 * @example $("p").next(".selected")
-		 * @before <p>Hello</p><p class="selected">Hello Again</p><div><span>And Again</span></div>
-		 * @result [ <p class="selected">Hello Again</p> ]
-		 *
-		 * @name next
-		 * @type jQuery
-		 * @param String expr An expression to filter the next Elements with
-		 */
-		next: "jQuery.sibling(a).next",
-
-		/**
-		 * Get a set of elements containing the unique previous siblings of each of the 
-		 * matched set of elements.
-		 * 
-		 * It only returns the immediately previous sibling, not all previous siblings.
-		 *
-		 * @example $("p").previous()
-		 * @before <p>Hello</p><div><span>Hello Again</span></div><p>And Again</p>
-		 * @result [ <div><span>Hello Again</span></div> ]
-		 *
-		 * @name prev
-		 * @type jQuery
-		 */
-
-		/**
-		 * Get a set of elements containing the unique previous siblings of each of the 
-		 * matched set of elements, and filtered by an expression.
-		 * 
-		 * It only returns the immediately previous sibling, not all previous siblings.
-		 *
-		 * @example $("p").previous("selected")
-		 * @before <div><span>Hello</span></div><p class="selected">Hello Again</p><p>And Again</p>
-		 * @result [ <div><span>Hello</span></div> ]
-		 *
-		 * @name prev
-		 * @type jQuery
-		 * @param String expr An expression to filter the previous Elements with
-		 */
-		prev: "jQuery.sibling(a).prev",
-
-		/**
-		 * Get a set of elements containing all of the unique siblings of each of the 
-		 * matched set of elements.
-		 * 
-		 * @example $("div").siblings()
-		 * @before <p>Hello</p><div><span>Hello Again</span></div><p>And Again</p>
-		 * @result [ <p>Hello</p>, <p>And Again</p> ]
-		 *
-		 * @name siblings
-		 * @type jQuery
-		 */
-
-		/**
-		 * Get a set of elements containing all of the unique siblings of each of the 
-		 * matched set of elements, and filtered by an expression.
-		 *
-		 * @example $("div").siblings("selected")
-		 * @before <div><span>Hello</span></div><p class="selected">Hello Again</p><p>And Again</p>
-		 * @result [ <p class="selected">Hello Again</p> ]
-		 *
-		 * @name siblings
-		 * @type jQuery
-		 * @param String expr An expression to filter the sibling Elements with
-		 */
-		siblings: jQuery.sibling
-	};
-	
-	for ( var i in axis ) new function(){
-		var t = axis[i];
-		jQuery.fn[ i ] = function(a) {
-			var ret = jQuery.map(this,t);
-			if ( a && a.constructor == String )
-				ret = jQuery.filter(a,ret).r;
-			return this.pushStack( ret, arguments );
-		};
-	};
-
-	// appendTo, prependTo, beforeTo, afterTo
-	
-	var to = ["append","prepend","before","after"];
-	
-	for ( var i = 0; i < to.length; i++ ) new function(){
-		var n = to[i];
-		jQuery.fn[ n + "To" ] = function(){
-			var a = arguments;
-			return this.each(function(){
-				for ( var i = 0; i < a.length; i++ )
-					$(a[i])[n]( this );
-			});
-		};
-	};
-	
-	var each = {
-		/**
-		 * Displays each of the set of matched elements if they are hidden.
-		 * 
-		 * @example $("p").show()
-		 * @before <p style="display: none">Hello</p>
-		 * @result [ <p style="display: block">Hello</p> ]
-		 *
-		 * @name show
-		 * @type jQuery
-		 */
-		show: function(){
-			this.style.display = this.oldblock ? this.oldblock : "";
-			if ( jQuery.css(this,"display") == "none" )
-				this.style.display = "block";
-		},
-
-		/**
-		 * Hides each of the set of matched elements if they are shown.
-		 *
-		 * @example $("p").hide()
-		 * @before <p>Hello</p>
-		 * @result [ <p style="display: none">Hello</p> ]
-		 *
-		 * @name hide
-		 * @type jQuery
-		 */
-		hide: function(){
-			this.oldblock = jQuery.css(this,"display");
-			if ( this.oldblock == "none" )
-				this.oldblock = "block";
-			this.style.display = "none";
-		},
-		
-		/**
-		 * Toggles each of the set of matched elements. If they are shown,
-		 * toggle makes them hidden. If they are hidden, toggle
-		 * makes them shown.
-		 *
-		 * @example $("p").toggle()
-		 * @before <p>Hello</p><p style="display: none">Hello Again</p>
-		 * @result [ <p style="display: none">Hello</p>, <p style="display: block">Hello Again</p> ]
-		 *
-		 * @name toggle
-		 * @type jQuery
-		 */
-		toggle: function(){
-			var d = jQuery.css(this,"display");
-			$(this)[ !d || d == "none" ? "show" : "hide" ]();
-		},
-		
-		/**
-		 * Adds the specified class to each of the set of matched elements.
-		 *
-		 * @example ("p").addClass("selected")
-		 * @before <p>Hello</p>
-		 * @result [ <p class="selected">Hello</p> ]
-		 * 
-		 * @name addClass
-		 * @type jQuery
-		 * @param String class A CSS class to add to the elements
-		 */
-		addClass: function(c){
-			jQuery.className.add(this,c);
-		},
-		
-		/**
-		 * The opposite of addClass. Removes the specified class from the
-		 * set of matched elements.
-		 *
-		 * @example ("p").removeClass("selected")
-		 * @before <p class="selected">Hello</p>
-		 * @result [ <p>Hello</p> ]
-		 *
-		 * @name removeClass
-		 * @type jQuery
-		 * @param String class A CSS class to remove from the elements
-		 */
-		removeClass: function(c){
-			jQuery.className.remove(this,c);
-		},
-	
-		/**
-		 * Adds the specified class if it is present. Remove it if it is
-		 * not present.
-		 *
-		 * @example ("p").toggleClass("selected")
-		 * @before <p>Hello</p><p class="selected">Hello Again</p>
-		 * @result [ <p class="selected">Hello</p>, <p>Hello Again</p> ]
-		 *
-		 * @name toggleClass
-		 * @type jQuery
-		 * @param String class A CSS class with which to toggle the elements
-		 */
-		toggleClass: function( c ){
-			jQuery.className[ jQuery.className.has(this,c) ? "remove" : "add" ](this,c);
-		},
-		
-		/**
-		 * TODO: Document
-		 */
-		remove: function(a){
-			if ( !a || jQuery.filter( [this], a ).r )
-				this.parentNode.removeChild( this );
-		},
-	
-		/**
-		 * Removes all child nodes from the set of matched elements.
-		 *
-		 * @example ("p").empty()
-		 * @before <p>Hello, <span>Person</span> <a href="#">and person</a></p>
-		 * @result [ <p></p> ]
-		 *
-		 * @name empty
-		 * @type jQuery
-		 */
-		empty: function(){
-			while ( this.firstChild )
-				this.removeChild( this.firstChild );
-		},
-		
-		/**
-		 * Binds a particular event (like click) to a each of a set of match elements.
-		 *
-		 * @example $("p").bind( "click", function() { alert("Hello"); } )
-		 * @before <p>Hello</p>
-		 * @result [ <p>Hello</p> ]
-		 *
-		 * Cancel a default action and prevent it from bubbling by returning false
-		 * from your function.
-		 *
-		 * @example $("form").bind( "submit", function() { return false; } )
-		 *
-		 * Cancel a default action by using the preventDefault method.
-		 *
-		 * @example $("form").bind( "submit", function() { e.preventDefault(); } )
-		 *
-		 * Stop an event from bubbling by using the stopPropogation method.
-		 *
-		 * @example $("form").bind( "submit", function() { e.stopPropogation(); } )
-		 *
-		 * @name bind
-		 * @type jQuery
-		 * @param String type An event type
-		 * @param Function fn A function to bind to the event on each of the set of matched elements
-		 */
-		bind: function( type, fn ) {
-			if ( fn.constructor == String )
-				fn = new Function("e", ( !fn.indexOf(".") ? "$(this)" : "return " ) + fn);
-			jQuery.event.add( this, type, fn );
-		},
-		
-		/**
-		 * The opposite of bind. Removes a bound event from each of a set of matched
-		 * elements. You must pass the identical function that was used in the original 
-		 * bind method.
-		 *
-		 * @example $("p").unbind( "click", function() { alert("Hello"); } )
-		 * @before <p>Hello</p>
-		 * @result [ <p>Hello</p> ]
-		 *
-		 * @name unbind
-		 * @type jQuery
-		 * @param String type An event type
-		 * @param Function fn A function to unbind from the event on each of the set of matched elements
-		 */
-		unbind: function( type, fn ) {
-			jQuery.event.remove( this, type, fn );
-		},
-		
-		/**
-		 * Trigger a particular event.
-		 *
-		 * @example $("p").trigger("click")
-		 * @before <p>Hello</p>
-		 * @result [ <p>Hello</p> ]
-		 *
-		 * @name trigger
-		 * @type jQuery
-		 * @param String type An event type
-		 */
-		trigger: function( type, data ) {
-			jQuery.event.trigger( type, data, this );
-		}
-	};
-	
-	for ( var i in each ) new function() {
-		var n = each[i];
-		jQuery.fn[ i ] = function() {
-			return this.each( n, arguments );
-		};
-	};
-	
-	var attr = {
-		val: "value",
-		html: "innerHTML",
-		value: null,
-		id: null,
-		title: null,
-		name: null,
-		href: null,
-		src: null,
-		rel: null
-	};
-	
-	for ( var i in attr ) new function() {
-		var n = attr[i] || i;
-		jQuery.fn[ i ] = function(h) {
-			return h == undefined ?
-				this.length ? this[0][n] : null :
-				this.attr( n, h );
-		};
-	};
-
-	var css = "width,height,top,left,position,float,overflow,color,background".split(","); 
-
-	for ( var i in css ) new function() {
-		var n = css[i];
-		jQuery.fn[ i ] = function(h) {
-			return h == undefined ?
-				( this.length ? jQuery.css( this[0], n ) : null ) :
-				this.css( n, h );
-		};
-	};
-
-}
+jQuery.extend = jQuery.fn.extend = function(obj,prop) {
+	if ( !prop ) { prop = obj; obj = this; }
+	for ( var i in prop ) obj[i] = prop[i];
+	return obj;
+};
 
 jQuery.extend({
+	init: function(){
+		jQuery.initDone = true;
+		
+		jQuery.each( jQuery.macros.axis, function(i,n){
+			jQuery.fn[ i ] = function(a) {
+				var ret = jQuery.map(this,n);
+				if ( a && a.constructor == String )
+					ret = jQuery.filter(a,ret).r;
+				return this.pushStack( ret, arguments );
+			};
+		});
+		
+		jQuery.each( jQuery.macros.to, function(i,n){
+			jQuery.fn[ i ] = function(){
+				var a = arguments;
+				return this.each(function(){
+					for ( var j = 0; j < a.length; j++ )
+						$(a[j])[n]( this );
+				});
+			};
+		});
+		
+		jQuery.each( jQuery.macros.each, function(i,n){
+			jQuery.fn[ i ] = function() {
+				return this.each( n, arguments );
+			};
+		});
+
+		jQuery.each( jQuery.macros.filter, function(i,n){
+			jQuery.fn[ n ] = function(num,fn) {
+				return this.filter( ":" + n + "(" + num + ")", fn );
+			};
+		});
+		
+		jQuery.each( jQuery.macros.attr, function(i,n){
+			n = n || i;
+			jQuery.fn[ i ] = function(h) {
+				return h == undefined ?
+					this.length ? this[0][n] : null :
+					this.attr( n, h );
+			};
+		});
+	
+		jQuery.each( jQuery.macros.css, function(i,n){
+			jQuery.fn[ n ] = function(h) {
+				return h == undefined ?
+					( this.length ? jQuery.css( this[0], n ) : null ) :
+					this.css( n, h );
+			};
+		});
+	
+	},
+	each: function( obj, fn, args ) {
+		if ( obj.length == undefined )
+			for ( var i in obj )
+				fn.apply( obj[i], args || [i, obj[i]] );
+		else
+			for ( var i = 0; i < obj.length; i++ )
+				fn.apply( obj[i], args || [i, obj[i]] );
+		return obj;
+	},
+	
 	className: {
 		add: function(o,c){
 			if (jQuery.className.has(o,c)) return;
@@ -1134,16 +345,11 @@ jQuery.extend({
 					new RegExp("(^|\\s*\\b[^-])"+c+"($|\\b(?=[^-]))", "g"), "");
 		},
 		has: function(e,a) {
-			if ( e.className )
+			if ( e.className != undefined )
 				e = e.className;
 			return new RegExp("(^|\\s)" + a + "(\\s|$)").test(e);
 		}
 	},
-	
-	/**
-	 * Swap in/out style options.
-	 * @private
-	 */
 	swap: function(e,o,f) {
 		for ( var i in o ) {
 			e.style["old"+i] = e.style[i];
@@ -1167,64 +373,90 @@ jQuery.extend({
 				if (jQuery.css(e,"display") != "none") {
 					oHeight = e.offsetHeight;
 					oWidth = e.offsetWidth;
-				} else
-					jQuery.swap( e, { visibility: "hidden", position: "absolute", display: "" },
-						function(){
-							oHeight = e.clientHeight;
-							oWidth = e.clientWidth;
-						});
+				} else {
+					e = $(e.cloneNode(true)).css({
+						visibility: "hidden", position: "absolute", display: "block"
+					}).prependTo("body")[0];
+
+					oHeight = e.clientHeight;
+					oWidth = e.clientWidth;
+					
+					e.parentNode.removeChild(e);
+				}
 			});
 	
 			return p == "height" ? oHeight : oWidth;
-		}
+		} else if ( p == "opacity" && jQuery.browser.msie )
+			return parseFloat( jQuery.curCSS(e,"filter").replace(/[^0-9.]/,"") ) || 1;
 
 		return jQuery.curCSS( e, p );
 	},
 
-	curCSS: function(e,p) {
-		var r;
+	curCSS: function(elem, prop, force) {
+		var ret;
 	
-		if (e.style[p])
-			r = e.style[p];
-		else if (e.currentStyle)
-			r = e.currentStyle[p];
-		else if (document.defaultView && document.defaultView.getComputedStyle) {
-			p = p.replace(/([A-Z])/g,"-$1").toLowerCase();
-			var s = document.defaultView.getComputedStyle(e,"");
-			r = s ? s.getPropertyValue(p) : null;
+		if (!force && elem.style[prop]) {
+
+			ret = elem.style[prop];
+
+		} else if (elem.currentStyle) {
+
+			var newProp = prop.replace(/\-(\w)/g,function(m,c){return c.toUpperCase()}); 
+			ret = elem.currentStyle[prop] || elem.currentStyle[newProp];
+
+		} else if (document.defaultView && document.defaultView.getComputedStyle) {
+
+			prop = prop.replace(/([A-Z])/g,"-$1").toLowerCase();
+			var cur = document.defaultView.getComputedStyle(elem, null);
+
+			if ( cur )
+				ret = cur.getPropertyValue(prop);
+			else if ( prop == 'display' )
+				ret = 'none';
+			else
+				jQuery.swap(elem, { display: 'block' }, function() {
+					ret = document.defaultView.getComputedStyle(this,null).getPropertyValue(prop);
+				});
+
 		}
 		
-		return r;
+		return ret;
 	},
 	
 	clean: function(a) {
 		var r = [];
 		for ( var i = 0; i < a.length; i++ ) {
 			if ( a[i].constructor == String ) {
+
+				var table = "";
 	
-				if ( !a[i].indexOf("<tr") ) {
-					var tr = true;
+				if ( !a[i].indexOf("<thead") || !a[i].indexOf("<tbody") ) {
+					table = "thead";
+					a[i] = "<table>" + a[i] + "</table>";
+				} else if ( !a[i].indexOf("<tr") ) {
+					table = "tr";
 					a[i] = "<table>" + a[i] + "</table>";
 				} else if ( !a[i].indexOf("<td") || !a[i].indexOf("<th") ) {
-					var td = true;
+					table = "td";
 					a[i] = "<table><tbody><tr>" + a[i] + "</tr></tbody></table>";
 				}
 	
 				var div = document.createElement("div");
 				div.innerHTML = a[i];
 	
-				if ( tr || td ) {
-					div = div.firstChild.firstChild;
-					if ( td ) div = div.firstChild;
+				if ( table ) {
+					div = div.firstChild;
+					if ( table != "thead" ) div = div.firstChild;
+					if ( table == "td" ) div = div.firstChild;
 				}
 	
 				for ( var j = 0; j < div.childNodes.length; j++ )
 					r.push( div.childNodes[j] );
-			} else if ( a[i].jquery || a[i].length && !a[i].nodeType )
-				for ( var k = 0; k < a[i].length; k++ )
-					r.push( a[i][k] );
-			else if ( a[i] !== null )
-				r.push(	a[i].nodeType ? a[i] : document.createTextNode(a[i].toString()) );
+				} else if ( a[i].jquery || a[i].length && !a[i].nodeType )
+					for ( var k = 0; k < a[i].length; k++ )
+						r.push( a[i][k] );
+				else if ( a[i] !== null )
+					r.push(	a[i].nodeType ? a[i] : document.createTextNode(a[i].toString()) );
 		}
 		return r;
 	},
@@ -1244,6 +476,7 @@ jQuery.extend({
 			odd: "i%2",
 			
 			// Child Checks
+			"nth-child": "jQuery.sibling(a,m[3]).cur",
 			"first-child": "jQuery.sibling(a,0).cur",
 			"last-child": "jQuery.sibling(a,0).last",
 			"only-child": "jQuery.sibling(a).length==1",
@@ -1262,7 +495,8 @@ jQuery.extend({
 			// Form elements
 			enabled: "!a.disabled",
 			disabled: "a.disabled",
-			checked: "a.checked"
+			checked: "a.checked",
+			selected: "a.selected"
 		},
 		".": "jQuery.className.has(a,m[2])",
 		"@": {
@@ -1289,7 +523,6 @@ jQuery.extend({
 			return r;
 		}
 	],
-	
 	find: function( t, context ) {
 		// Make sure that the context is a DOM Element
 		if ( context && context.nodeType == undefined )
@@ -1324,6 +557,8 @@ jQuery.extend({
 			var foundToken = false;
 			
 			for ( var i = 0; i < jQuery.token.length; i += 2 ) {
+				if ( foundToken ) continue;
+
 				var re = new RegExp("^(" + jQuery.token[i] + ")");
 				var m = re.exec(t);
 				
@@ -1360,8 +595,9 @@ jQuery.extend({
 							);
 					}
 				}
-			}
 	
+			}
+
 			if ( t ) {
 				var val = jQuery.filter(t,r);
 				ret = r = val.r;
@@ -1386,28 +622,28 @@ jQuery.extend({
 		return r;
 	},
 	
-	attr: function(o,a,v){
-		if ( a && a.constructor == String ) {
-			var fix = {
-				"for": "htmlFor",
-				"class": "className",
-				"float": "cssFloat"
-			};
-			
-			a = (fix[a] && fix[a].replace && fix[a] || a)
-				.replace(/-([a-z])/ig,function(z,b){
-					return b.toUpperCase();
-				});
-			
-			if ( v != undefined ) {
-				o[a] = v;
-				if ( o.setAttribute && a != "disabled" )
-					o.setAttribute(a,v);
-			}
-			
-			return o[a] || o.getAttribute && o.getAttribute(a) || "";
-		} else
-			return "";
+	attr: function(elem, name, value){
+		var fix = {
+			"for": "htmlFor",
+			"class": "className",
+			"float": "cssFloat",
+			innerHTML: "innerHTML",
+			className: "className",
+			value: "value",
+			disabled: "disabled"
+		};
+
+		if ( fix[name] ) {
+			if ( value != undefined ) elem[fix[name]] = value;
+			return elem[fix[name]];
+		} else if ( elem.getAttribute ) {
+			if ( value != undefined ) elem.setAttribute( name, value );
+			return elem.getAttribute( name, 2 );
+		} else {
+			name = name.replace(/-([a-z])/ig,function(z,b){return b.toUpperCase();});
+			if ( value != undefined ) elem[name] = value;
+			return elem[name];
+		}
 	},
 
 	// The regular expressions that power the parsing engine
@@ -1441,7 +677,7 @@ jQuery.extend({
 					.replace( 'S', "([a-z*_-][a-z0-9_-]*)" )
 
 					// Look for something (optionally) enclosed with quotes
-					.replace( 'Q', " *'?\"?([^'\"]*)'?\"? *" ), "i" );
+					.replace( 'Q', " *'?\"?([^'\"]*?)'?\"? *" ), "i" );
 
 				var m = re.exec( t );
 
@@ -1482,160 +718,99 @@ jQuery.extend({
 		// and the modified expression string (t)
 		return { r: r, t: t };
 	},
-	
-	/**
-	 * Remove the whitespace from the beginning and end of a string.
-	 *
-	 * @private
-	 * @name $.trim
-	 * @type String
-	 * @param String str The string to trim.
-	 */
 	trim: function(t){
 		return t.replace(/^\s+|\s+$/g, "");
 	},
-	
-	/**
-	 * All ancestors of a given element.
-	 *
-	 * @private
-	 * @name $.parents
-	 * @type Array<Element>
-	 * @param Element elem The element to find the ancestors of.
-	 */
-	parents: function(a){
-		var b = [];
-		var c = a.parentNode;
-		while ( c && c != document ) {
-			b.push( c );
-			c = c.parentNode;
+	parents: function( elem ){
+		var matched = [];
+		var cur = elem.parentNode;
+		while ( cur && cur != document ) {
+			matched.push( cur );
+			cur = cur.parentNode;
 		}
-		return b;
+		return matched;
 	},
-	
-	/**
-	 * All elements on a specified axis.
-	 *
-	 * @private
-	 * @name $.sibling
-	 * @type Array
-	 * @param Element elem The element to find all the siblings of (including itself).
-	 */
-	sibling: function(a,n) {
-		var type = [];
-		var tmp = a.parentNode.childNodes;
-		for ( var i = 0; i < tmp.length; i++ ) {
-			if ( tmp[i].nodeType == 1 )
-				type.push( tmp[i] );
-			if ( tmp[i] == a )
-				type.n = type.length - 1;
+	sibling: function(elem, pos, not) {
+		var elems = [];
+
+		var siblings = elem.parentNode.childNodes;
+		for ( var i = 0; i < siblings.length; i++ ) {
+			if ( not === true && siblings[i] == elem ) continue;
+
+			if ( siblings[i].nodeType == 1 )
+				elems.push( siblings[i] );
+			if ( siblings[i] == elem )
+				elems.n = elems.length - 1;
 		}
-		type.last = type.n == type.length - 1;
-		type.cur =
-			n == "even" && type.n % 2 == 0 ||
-			n == "odd" && type.n % 2 ||
-			type[n] == a;
-		type.prev = type[type.n - 1];
-		type.next = type[type.n + 1];
-		return type;
+
+		return jQuery.extend( elems, {
+			last: elems.n == elems.length - 1,
+			cur: pos == "even" && elems.n % 2 == 0 || pos == "odd" && elems.n % 2 || elems[pos] == elem,
+			prev: elems[elems.n - 1],
+			next: elems[elems.n + 1]
+		});
 	},
-	
-	/**
-	 * Merge two arrays together, removing all duplicates.
-	 *
-	 * @private
-	 * @name $.merge
-	 * @type Array
-	 * @param Array a The first array to merge.
-	 * @param Array b The second array to merge.
-	 */
-	merge: function(a,b) {
-		var d = [];
+	merge: function(first, second) {
+		var result = [];
 		
 		// Move b over to the new array (this helps to avoid
 		// StaticNodeList instances)
-		for ( var k = 0; k < b.length; k++ )
-			d[k] = b[k];
+		for ( var k = 0; k < first.length; k++ )
+			result[k] = first[k];
 	
 		// Now check for duplicates between a and b and only
 		// add the unique items
-		for ( var i = 0; i < a.length; i++ ) {
-			var c = true;
+		for ( var i = 0; i < second.length; i++ ) {
+			var noCollision = true;
 			
 			// The collision-checking process
-			for ( var j = 0; j < b.length; j++ )
-				if ( a[i] == b[j] )
-					c = false;
+			for ( var j = 0; j < first.length; j++ )
+				if ( second[i] == first[j] )
+					noCollision = false;
 				
 			// If the item is unique, add it
-			if ( c )
-				d.push( a[i] );
+			if ( noCollision )
+				result.push( second[i] );
 		}
 	
-		return d;
+		return result;
 	},
-	
-	/**
-	 * Remove items that aren't matched in an array. The function passed
-	 * in to this method will be passed two arguments: 'a' (which is the
-	 * array item) and 'i' (which is the index of the item in the array).
-	 *
-	 * @private
-	 * @name $.grep
-	 * @type Array
-	 * @param Array array The Array to find items in.
-	 * @param Function fn The function to process each item against.
-	 * @param Boolean inv Invert the selection - select the opposite of the function.
-	 */
-	grep: function(a,f,s) {
+	grep: function(elems, fn, inv) {
 		// If a string is passed in for the function, make a function
 		// for it (a handy shortcut)
-		if ( f.constructor == String )
-			f = new Function("a","i","return " + f);
+		if ( fn.constructor == String )
+			fn = new Function("a","i","return " + fn);
 			
-		var r = [];
+		var result = [];
 		
 		// Go through the array, only saving the items
 		// that pass the validator function
-		for ( var i = 0; i < a.length; i++ )
-			if ( !s && f(a[i],i) || s && !f(a[i],i) )
-				r.push( a[i] );
+		for ( var i = 0; i < elems.length; i++ )
+			if ( !inv && fn(elems[i],i) || inv && !fn(elems[i],i) )
+				result.push( elems[i] );
 		
-		return r;
+		return result;
 	},
-	
-	/**
-	 * Translate all items in array to another array of items. The translation function
-	 * that is provided to this method is passed one argument: 'a' (the item to be 
-	 * translated). If an array is returned, that array is mapped out and merged into
-	 * the full array. Additionally, returning 'null' or 'undefined' will delete the item
-	 * from the array. Both of these changes imply that the size of the array may not
-	 * be the same size upon completion, as it was when it started.
-	 *
-	 * @private
-	 * @name $.map
-	 * @type Array
-	 * @param Array array The Array to translate.
-	 * @param Function fn The function to process each item against.
-	 */
-	map: function(a,f) {
+	map: function(elems, fn) {
 		// If a string is passed in for the function, make a function
 		// for it (a handy shortcut)
-		if ( f.constructor == String )
-			f = new Function("a","return " + f);
+		if ( fn.constructor == String )
+			fn = new Function("a","return " + fn);
 		
-		var r = [];
+		var result = [];
 		
 		// Go through the array, translating each of the items to their
 		// new value (or values).
-		for ( var i = 0; i < a.length; i++ ) {
-			var t = f(a[i],i);
-			if ( t !== null && t != undefined ) {
-				if ( t.constructor != Array ) t = [t];
-				r = jQuery.merge( t, r );
+		for ( var i = 0; i < elems.length; i++ ) {
+			var val = fn(elems[i],i);
+
+			if ( val !== null && val != undefined ) {
+				if ( val.constructor != Array ) val = [val];
+				result = jQuery.merge( result, val );
 			}
 		}
-		return r;
+
+		return result;
 	},
 	
 	/*
@@ -1724,6 +899,8 @@ jQuery.extend({
 		},
 		
 		handle: function(event) {
+			if ( typeof jQuery == "undefined" ) return;
+
 			event = event || jQuery.event.fix( window.event );
 	
 			// If no correct event was found, fail
@@ -1760,19 +937,133 @@ jQuery.extend({
 	
 	}
 });
+
+new function() {
+	var b = navigator.userAgent.toLowerCase();
+
+	// Figure out what browser is being used
+	jQuery.browser = {
+		safari: /webkit/.test(b),
+		opera: /opera/.test(b),
+		msie: /msie/.test(b) && !/opera/.test(b),
+		mozilla: /mozilla/.test(b) && !/compatible/.test(b)
+	};
+
+	// Check to see if the W3C box model is being used
+	jQuery.boxModel = !jQuery.browser.msie || document.compatMode == "CSS1Compat";
+};
+
+jQuery.macros = {
+	to: {
+		appendTo: "append",
+		prependTo: "prepend",
+		insertBefore: "before",
+		insertAfter: "after"
+	},
+
+	
+	css: "width,height,top,left,position,float,overflow,color,background".split(","),
+
+	filter: [ "eq", "lt", "gt", "contains" ],
+
+	attr: {
+
+		val: "value",
+
+		html: "innerHTML",
+
+		id: null,
+
+		title: null,
+
+		name: null,
+
+		href: null,
+
+		src: null,
+
+		rel: null
+	},
+	
+	axis: {
+
+		parent: "a.parentNode",
+
+		ancestors: jQuery.parents,
+
+		parents: jQuery.parents,
+
+		next: "jQuery.sibling(a).next",
+
+		prev: "jQuery.sibling(a).prev",
+
+		siblings: jQuery.sibling,
+
+		children: "jQuery.sibling(a.firstChild)"
+	},
+
+	each: {
+
+		removeAttr: function( key ) {
+			this.removeAttribute( key );
+		},
+		show: function(){
+			this.style.display = this.oldblock ? this.oldblock : "";
+			if ( jQuery.css(this,"display") == "none" )
+				this.style.display = "block";
+		},
+		hide: function(){
+			this.oldblock = this.oldblock || jQuery.css(this,"display");
+			if ( this.oldblock == "none" )
+				this.oldblock = "block";
+			this.style.display = "none";
+		},
+		toggle: function(){
+			$(this)[ $(this).is(":hidden") ? "show" : "hide" ].apply( $(this), arguments );
+		},
+		addClass: function(c){
+			jQuery.className.add(this,c);
+		},
+		removeClass: function(c){
+			jQuery.className.remove(this,c);
+		},
+		toggleClass: function( c ){
+			jQuery.className[ jQuery.className.has(this,c) ? "remove" : "add" ](this,c);
+		},
+
+		remove: function(a){
+			if ( !a || jQuery.filter( a, [this] ).r )
+				this.parentNode.removeChild( this );
+		},
+		empty: function(){
+			while ( this.firstChild )
+				this.removeChild( this.firstChild );
+		},
+		bind: function( type, fn ) {
+			if ( fn.constructor == String )
+				fn = new Function("e", ( !fn.indexOf(".") ? "$(this)" : "return " ) + fn);
+			jQuery.event.add( this, type, fn );
+		},
+
+		unbind: function( type, fn ) {
+			jQuery.event.remove( this, type, fn );
+		},
+		trigger: function( type, data ) {
+			jQuery.event.trigger( type, data, this );
+		}
+	}
+};
+
+jQuery.init();
 jQuery.fn.extend({
 
 	// We're overriding the old toggle function, so
 	// remember it for later
 	_toggle: jQuery.fn.toggle,
-	
-	/**
-	 * Toggle between two function calls every other click.
-	 */
 	toggle: function(a,b) {
 		// If two functions are passed in, we're
 		// toggling on a click
-		return a && b ? this.click(function(e){
+		return a && b && a.constructor == Function && b.constructor == Function ? this.click(function(e){
 			// Figure out which function to execute
 			this.last = this.last == a ? b : a;
 			
@@ -1784,12 +1075,9 @@ jQuery.fn.extend({
 		}) :
 		
 		// Otherwise, execute the old toggle function
-		this._toggle();
+		this._toggle.apply( this, arguments );
 	},
-	
-	/**
-	 * Toggle between two function calls on mouse over/out.
-	 */
+
 	hover: function(f,g) {
 		
 		// A private function for haandling mouse 'hovering'
@@ -1810,10 +1098,6 @@ jQuery.fn.extend({
 		// Bind the function to the two event listeners
 		return this.mouseover(handleHover).mouseout(handleHover);
 	},
-	
-	/**
-	 * Bind a function to fire when the DOM is ready.
-	 */
 	ready: function(f) {
 		// If the DOM is already ready
 		if ( jQuery.isReady )
@@ -1858,9 +1142,7 @@ jQuery.extend({
 });
 
 new function(){
-	/*
-	 * Bind a number of event-handling functions, dynamically
-	 */
+
 	var e = ("blur,focus,load,resize,scroll,unload,click,dblclick," +
 		"mousedown,mouseup,mousemove,mouseover,mouseout,change,reset,select," + 
 		"submit,keydown,keypress,keyup,error").split(",");
@@ -1897,7 +1179,7 @@ new function(){
 			});
 		};
 			
-	}
+	};
 	
 	// If Mozilla is used
 	if ( jQuery.browser.mozilla || jQuery.browser.opera ) {
@@ -1915,8 +1197,9 @@ new function(){
 		// Use the defer script hack
 		var script = document.getElementById("__ie_init");
 		script.onreadystatechange = function() {
-			if ( this.readyState == "complete" )
-				jQuery.ready();
+			if ( this.readyState != "complete" ) return;
+			this.parentNode.removeChild( this );
+			jQuery.ready();
 		};
 	
 		// Clear from memory
@@ -1938,28 +1221,17 @@ new function(){
 				jQuery.ready();
 			}
 		}, 10);
-	}
-	
+	} 
+
 	// A fallback to window.onload, that will always work
 	jQuery.event.add( window, "load", jQuery.ready );
 	
-}
+};
 jQuery.fn.extend({
 
 	// overwrite the old show method
 	_show: jQuery.fn.show,
-	
-	/**
-	 * The effects module overloads the show method to now allow 
-	 * for a speed to the show operation. What actually happens is 
-	 * that the height, width, and opacity to the matched elements 
-	 * are changed dynamically. The only three current speeds are 
-	 * "slow", "normal", and "fast". For example:
-	 *   $("p").show("slow");
-	 * Note: You should not run the show method on things 
-	 * that are already shown. This can be circumvented by doing this:
-	 *   $("p:hidden").show("slow");
-	 */
+
 	show: function(speed,callback){
 		return speed ? this.animate({
 			height: "show", width: "show", opacity: "show"
@@ -1968,80 +1240,54 @@ jQuery.fn.extend({
 	
 	// Overwrite the old hide method
 	_hide: jQuery.fn.hide,
-	
-	/**
-	 * The hide function behaves very similary to the show function, 
-	 * but is just the opposite.
-	 *   $("p:visible").hide("slow");
-	 */
+
 	hide: function(speed,callback){
 		return speed ? this.animate({
 			height: "hide", width: "hide", opacity: "hide"
 		}, speed, callback) : this._hide();
 	},
-	
-	/**
-	 * This function increases the height and opacity for all matched 
-	 * elements. This is very similar to 'show', but does not change 
-	 * the width - creating a neat sliding effect.
-	 *   $("p:hidden").slideDown("slow");
-	 */
+
 	slideDown: function(speed,callback){
 		return this.animate({height: "show"}, speed, callback);
 	},
-	
-	/**
-	 * Just like slideDown, only it hides all matched elements.
-	 *   $("p:visible").slideUp("slow");
-	 */
+
 	slideUp: function(speed,callback){
 		return this.animate({height: "hide"}, speed, callback);
 	},
-	
-	/**
-	 * Adjusts the opacity of all matched elements from a hidden, 
-	 * to a fully visible, state.
-	 *   $("p:hidden").fadeIn("slow");
-	 */
+
+	slideToggle: function(speed,callback){
+		return this.each(function(){
+			var state = $(this).is(":hidden") ? "show" : "hide";
+			$(this).animate({height: state}, speed, callback);
+		});
+	},
+
 	fadeIn: function(speed,callback){
 		return this.animate({opacity: "show"}, speed, callback);
 	},
-	
-	/**
-	 * Same as fadeIn, but transitions from a visible, to a hidden state.
-	 *   $("p:visible").fadeOut("slow");
-	 */
+
 	fadeOut: function(speed,callback){
 		return this.animate({opacity: "hide"}, speed, callback);
 	},
-	
-	/**
-	 * ...
-	 */
+
 	fadeTo: function(speed,to,callback){
 		return this.animate({opacity: to}, speed, callback);
 	},
-	
-	/**
-	 *
-	 */
 	animate: function(prop,speed,callback) {
 		return this.queue(function(){
-			var i = 0;
+		
+			this.curAnim = prop;
+			
 			for ( var p in prop ) {
-				var e = new jQuery.fx( this, jQuery.speed(speed,callback,i++), p );
+				var e = new jQuery.fx( this, jQuery.speed(speed,callback), p );
 				if ( prop[p].constructor == Number )
 					e.custom( e.cur(), prop[p] );
 				else
-					e[ prop[p] ]();
+					e[ prop[p] ]( prop );
 			}
+			
 		});
 	},
-	
-	/**
-	 *
-	 * @private
-	 */
 	queue: function(type,fn){
 		if ( !fn ) {
 			fn = type;
@@ -2067,15 +1313,34 @@ jQuery.fn.extend({
 jQuery.extend({
 
 	setAuto: function(e,p) {
+		if ( e.notAuto ) return;
+
+		if ( p == "height" && e.scrollHeight != parseInt(jQuery.curCSS(e,p)) ) return;
+		if ( p == "width" && e.scrollWidth != parseInt(jQuery.curCSS(e,p)) ) return;
+
+		// Remember the original height
 		var a = e.style[p];
-		var o = jQuery.css(e,p);
-		e.style[p] = "auto";
-		var n = jQuery.css(e,p);
-		if ( o != n )
+
+		// Figure out the size of the height right now
+		var o = jQuery.curCSS(e,p,1);
+
+		if ( p == "height" && e.scrollHeight != o ||
+			p == "width" && e.scrollWidth != o ) return;
+
+		// Set the height to auto
+		e.style[p] = e.currentStyle ? "" : "auto";
+
+		// See what the size of "auto" is
+		var n = jQuery.curCSS(e,p,1);
+
+		// Revert back to the original size
+		if ( o != n && n != "auto" ) {
 			e.style[p] = a;
+			e.notAuto = true;
+		}
 	},
 	
-	speed: function(s,o,i) {
+	speed: function(s,o) {
 		o = o || {};
 		
 		if ( o.constructor == Function )
@@ -2091,9 +1356,6 @@ jQuery.extend({
 			if ( o.oldComplete && o.oldComplete.constructor == Function )
 				o.oldComplete.apply( this );
 		};
-		
-		if ( i > 0 )
-			o.complete = null;
 	
 		return o;
 	},
@@ -2110,8 +1372,7 @@ jQuery.extend({
 			// Get next function
 			var f = elem.queue[type][0];
 		
-			if ( f )
-				f.apply( elem );
+			if ( f ) f.apply( elem );
 		}
 	},
 
@@ -2128,7 +1389,8 @@ jQuery.extend({
 		// The users options
 		z.o = {
 			duration: options.duration || 400,
-			complete: options.complete
+			complete: options.complete,
+			step: options.step
 		};
 	
 		// The element
@@ -2139,13 +1401,21 @@ jQuery.extend({
 	
 		// Simple function for setting a style value
 		z.a = function(){
+			if ( options.step )
+				options.step.apply( elem, [ z.now ] );
+
 			if ( prop == "opacity" ) {
-				if (z.now == 1) z.now = 0.9999;
+				if (jQuery.browser.mozilla && z.now == 1) z.now = 0.9999;
 				if (window.ActiveXObject)
 					y.filter = "alpha(opacity=" + z.now*100 + ")";
-				y.opacity = z.now;
-			} else
-				y[prop] = z.now+"px";
+				else
+					y.opacity = z.now;
+
+			// My hate for IE will never die
+			} else if ( parseInt(z.now) )
+				y[prop] = parseInt(z.now) + "px";
+				
+			y.display = "block";
 		};
 	
 		// Figure out the maximum number to run to
@@ -2155,7 +1425,8 @@ jQuery.extend({
 	
 		// Get the current size
 		z.cur = function(){
-			return parseFloat( jQuery.curCSS(z.el,prop) ) || z.max();
+			var r = parseFloat( jQuery.curCSS(z.el, prop) );
+			return r && r > -10000 ? r : z.max();
 		};
 	
 		// Start an animation from one number to another
@@ -2170,15 +1441,17 @@ jQuery.extend({
 		};
 	
 		// Simple 'show' function
-		z.show = function(){
+		z.show = function( p ){
 			if ( !z.el.orig ) z.el.orig = {};
 
 			// Remember where we started, so that we can go back to it later
 			z.el.orig[prop] = this.cur();
 
-			if ( !y[prop] ) z.o.auto = true;
-			z.custom(0,z.max());
-			y.display = "block";
+			z.custom( 0, z.el.orig[prop] );
+
+			// Stupid IE, look what you made me do
+			if ( prop != "opacity" )
+				y[prop] = "1px";
 		};
 	
 		// Simple 'hide' function
@@ -2188,17 +1461,19 @@ jQuery.extend({
 			// Remember where we started, so that we can go back to it later
 			z.el.orig[prop] = this.cur();
 
-			z.o.hide = true;	
+			z.o.hide = true;
+
 			// Begin the animation
-			z.custom(z.cur(),0);
+			z.custom(z.el.orig[prop], 0);
 		};
 	
 		// IE has trouble with opacity if it does not have layout
 		if ( jQuery.browser.msie && !z.el.currentStyle.hasLayout )
-			y.zoom = 1;
+			y.zoom = "1";
 	
 		// Remember  the overflow of the element
-		z.oldOverflow = y.overflow;
+		if ( !z.el.oldOverlay )
+			z.el.oldOverflow = jQuery.css( z.el, "overflow" );
 	
 		// Make sure that nothing sneaks out
 		y.overflow = "hidden";
@@ -2211,33 +1486,41 @@ jQuery.extend({
 				// Stop the timer
 				clearInterval(z.timer);
 				z.timer = null;
-	
+
 				z.now = lastNum;
 				z.a();
-	
-				// Reset the overflow
-				y.overflow = z.oldOverflow;
 
-				// If the element was shown, and not using a custom number,
-				// set its height and/or width to auto
-				if ( (prop == "height" || prop == "width") && z.o.auto )
-					jQuery.setAuto( z.el, prop );
-
-				// If a callback was provided, execute it
-				if( z.o.complete && z.o.complete.constructor == Function ) {
+				z.el.curAnim[ prop ] = true;
+				
+				var done = true;
+				for ( var i in z.el.curAnim )
+					if ( z.el.curAnim[i] !== true )
+						done = false;
+						
+				if ( done ) {
+					// Reset the overflow
+					y.overflow = z.el.oldOverflow;
+				
+					// Hide the element if the "hide" operation was done
+					if ( z.o.hide ) 
+						y.display = 'none';
+					
+					// Reset the property, if the item has been hidden
+					if ( z.o.hide ) {
+						for ( var p in z.el.curAnim ) {
+							y[ p ] = z.el.orig[p] + ( p == "opacity" ? "" : "px" );
 	
-					// Yes, this is a weird place for this, but it needs to be executed
-					// only once per cluster of effects.
-					// If the element is, effectively, hidden - hide it
-					if ( z.o.hide ) y.display = "none";
-	
-					// Execute the complete function
-					z.o.complete.apply( z.el );
+							// set its height and/or width to auto
+							if ( p == 'height' || p == 'width' )
+								jQuery.setAuto( z.el, p );
+						}
+					}
 				}
 
-				// Reset the property, if the item has been hidden
-				if ( z.o.hide )
-					y[ prop ] = z.el.orig[ prop ].constructor == Number && prop != "opacity" ? z.el.orig[prop] + "px" : z.el.orig[prop];
+				// If a callback was provided, execute it
+				if( done && z.o.complete && z.o.complete.constructor == Function )
+					// Execute the complete function
+					z.o.complete.apply( z.el );
 			} else {
 				// Figure out where in the animation we are and set the number
 				var p = (t - this.startTime) / z.o.duration;
@@ -2254,15 +1537,15 @@ jQuery.extend({
 // AJAX Plugin
 // Docs Here:
 // http://jquery.com/docs/ajax/
+jQuery.fn.loadIfModified = function( url, params, callback ) {
+	this.load( url, params, callback, 1 );
+};
 
-/**
- * Load HTML from a remote file and inject it into the DOM
- */
-jQuery.fn.load = function( url, params, callback ) {
-	// I overwrote the event plugin's .load
-	// this won't happen again, I hope -John
-	if ( url && url.constructor == Function )
+jQuery.fn.load = function( url, params, callback, ifModified ) {
+	if ( url.constructor == Function )
 		return this.bind("load", url);
+
+	callback = callback || function(){};
 
 	// Default to a GET request
 	var type = "GET";
@@ -2285,28 +1568,29 @@ jQuery.fn.load = function( url, params, callback ) {
 	var self = this;
 	
 	// Request the remote document
-	jQuery.ajax( type, url, params,function(res){
-			
-		// Inject the HTML into all the matched elements
-		self.html(res.responseText).each(function(){
-			// If a callback function was provided
-			if ( callback && callback.constructor == Function )
-				// Execute it within the context of the element
-				callback.apply( self, [res.responseText] );
-		});
+	jQuery.ajax( type, url, params,function(res, status){
 		
-		// Execute all the scripts inside of the newly-injected HTML
-		$("script", self).each(function(){
-			eval( this.text || this.textContent || this.innerHTML || "");
-		});
+		if ( status == "success" || !ifModified && status == "notmodified" ) {
+			// Inject the HTML into all the matched elements
+			self.html(res.responseText).each( callback, [res.responseText, status] );
+			
+			// Execute all the scripts inside of the newly-injected HTML
+			$("script", self).each(function(){
+				if ( this.src )
+					$.getScript( this.src );
+				else
+					eval.call( window, this.text || this.textContent || this.innerHTML || "" );
+			});
+		} else
+			callback.apply( self, [res.responseText, status] );
 
-	});
+	}, ifModified);
 	
 	return this;
 };
 
 // If IE is used, create a wrapper for the XMLHttpRequest object
-if ( jQuery.browser.msie )
+if ( jQuery.browser.msie && typeof XMLHttpRequest == "undefined" )
 	XMLHttpRequest = function(){
 		return new ActiveXObject(
 			navigator.userAgent.indexOf("MSIE 5") >= 0 ?
@@ -2323,43 +1607,49 @@ new function(){
 		jQuery.fn[o] = function(f){
 			return this.bind(o, f);
 		};
-	}
+	};
 };
 
 jQuery.extend({
-
-	/**
-	 * Load a remote page using a GET request
-	 */
-	get: function( url, data, callback, type ) {
+	get: function( url, data, callback, type, ifModified ) {
 		if ( data.constructor == Function ) {
+			type = callback;
 			callback = data;
 			data = null;
 		}
 		
-		if ( data )
-			url += "?" + jQuery.param(data);
+		if ( data ) url += "?" + jQuery.param(data);
 		
 		// Build and start the HTTP Request
-		jQuery.ajax( "GET", url, null, function(r) {
-			if ( callback ) callback( jQuery.httpData(r,type) );
-		});
+		jQuery.ajax( "GET", url, null, function(r, status) {
+			if ( callback ) callback( jQuery.httpData(r,type), status );
+		}, ifModified);
 	},
-	
-	/**
-	 * Load a remote page using a POST request.
-	 */
+
+	getIfModified: function( url, data, callback, type ) {
+		jQuery.get(url, data, callback, type, 1);
+	},
+
+	getScript: function( url, data, callback ) {
+		jQuery.get(url, data, callback, "script");
+	},
 	post: function( url, data, callback, type ) {
 		// Build and start the HTTP Request
-		jQuery.ajax( "POST", url, jQuery.param(data), function(r) {
-			if ( callback ) callback( jQuery.httpData(r,type) );
+		jQuery.ajax( "POST", url, jQuery.param(data), function(r, status) {
+			if ( callback ) callback( jQuery.httpData(r,type), status );
 		});
 	},
 	
-	/**
-	 * A common wrapper for making XMLHttpRequests
-	 */
-	ajax: function( type, url, data, ret ) {
+	// timeout (ms)
+	timeout: 0,
+
+	ajaxTimeout: function(timeout) {
+		jQuery.timeout = timeout;
+	},
+
+	// Last-Modified header cache for next request
+	lastModified: {},
+	ajax: function( type, url, data, ret, ifModified ) {
 		// If only a single argument was passed in,
 		// assume that it is a object of key/value pairs
 		if ( !url ) {
@@ -2374,6 +1664,8 @@ jQuery.extend({
 		// Watch for a new set of requests
 		if ( ! jQuery.active++ )
 			jQuery.event.trigger( "ajaxStart" );
+
+		var requestDone = false;
 	
 		// Create the request object
 		var xml = new XMLHttpRequest();
@@ -2384,23 +1676,36 @@ jQuery.extend({
 		// Set the correct header, if data is being sent
 		if ( data )
 			xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	
+		
+		// Set the If-Modified-Since header, if ifModified mode.
+		if ( ifModified )
+			xml.setRequestHeader("If-Modified-Since",
+				jQuery.lastModified[url] || "Thu, 01 Jan 1970 00:00:00 GMT" );
+		
 		// Set header so calling script knows that it's an XMLHttpRequest
 		xml.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 	
 		// Make sure the browser sends the right content length
 		if ( xml.overrideMimeType )
 			xml.setRequestHeader("Connection", "close");
-	
+		
 		// Wait for a response to come back
-		xml.onreadystatechange = function(){
-			// The transfer is complete and the data is available
-			if ( xml.readyState == 4 ) {
-				// Make sure that the request was successful
-				if ( jQuery.httpSuccess( xml ) ) {
+		var onreadystatechange = function(istimeout){
+			// The transfer is complete and the data is available, or the request timed out
+			if ( xml && (xml.readyState == 4 || istimeout == "timeout") ) {
+				requestDone = true;
+
+				var status = jQuery.httpSuccess( xml ) && istimeout != "timeout" ?
+					ifModified && jQuery.httpNotModified( xml, url ) ? "notmodified" : "success" : "error";
 				
+				// Make sure that the request was successful or notmodified
+				if ( status != "error" ) {
+					// Cache Last-Modified header, if ifModified mode.
+					var modRes = xml.getResponseHeader("Last-Modified");
+					if ( ifModified && modRes ) jQuery.lastModified[url] = modRes;
+					
 					// If a local callback was specified, fire it
-					if ( success ) success( xml );
+					if ( success ) success( xml, status );
 					
 					// Fire the global callback
 					jQuery.event.trigger( "ajaxSuccess" );
@@ -2408,7 +1713,7 @@ jQuery.extend({
 				// Otherwise, the request was not successful
 				} else {
 					// If a local callback was specified, fire it
-					if ( error ) error( xml );
+					if ( error ) error( xml, status );
 					
 					// Fire the global callback
 					jQuery.event.trigger( "ajaxError" );
@@ -2422,14 +1727,31 @@ jQuery.extend({
 					jQuery.event.trigger( "ajaxStop" );
 	
 				// Process result
-				if ( ret ) ret(xml);
-
+				if ( ret ) ret(xml, status);
+				
 				// Stop memory leaks
 				xml.onreadystatechange = function(){};
 				xml = null;
+				
 			}
 		};
-	
+		xml.onreadystatechange = onreadystatechange;
+		
+		// Timeout checker
+		if(jQuery.timeout > 0)
+			setTimeout(function(){
+				// Check to see if the request is still happening
+				if (xml) {
+					// Cancel the request
+					xml.abort();
+
+					if ( !requestDone ) onreadystatechange( "timeout" );
+
+					// Clear from memory
+					xml = null;
+				}
+			}, jQuery.timeout);
+		
 		// Send the data
 		xml.send(data);
 	},
@@ -2440,10 +1762,24 @@ jQuery.extend({
 	// Determines if an XMLHttpRequest was successful or not
 	httpSuccess: function(r) {
 		try {
-			return r.status ?
-				( r.status >= 200 && r.status < 300 ) || r.status == 304 :
-				location.protocol == "file:";
+			return !r.status && location.protocol == "file:" ||
+				( r.status >= 200 && r.status < 300 ) || r.status == 304 ||
+				jQuery.browser.safari && r.status == undefined;
 		} catch(e){}
+
+		return false;
+	},
+
+	// Determines if an XMLHttpRequest returns NotModified
+	httpNotModified: function(xml, url) {
+		try {
+			var xmlRes = xml.getResponseHeader("Last-Modified");
+
+			// Firefox always returns 200. check Last-Modified date
+			return xml.status == 304 || xmlRes == jQuery.lastModified[url] ||
+				jQuery.browser.safari && xml.status == undefined;
+		} catch(e){}
+
 		return false;
 	},
 	
@@ -2452,8 +1788,16 @@ jQuery.extend({
 	// otherwise return plain text.
 	httpData: function(r,type) {
 		var ct = r.getResponseHeader("content-type");
-		var xml = ( !type || type == "xml" ) && ct && ct.indexOf("xml") >= 0;
-		return xml ? r.responseXML : r.responseText;
+		var data = !type && ct && ct.indexOf("xml") >= 0;
+		data = type == "xml" || data ? r.responseXML : r.responseText;
+
+		// If the type is "script", eval it
+		if ( type == "script" ) eval.call( window, data );
+
+		// Get the JavaScript object, if JSON is used.
+		if ( type == "json" ) eval( "data = " + data );
+
+		return data;
 	},
 	
 	// Serialize an array of form elements or a set of
@@ -2463,19 +1807,21 @@ jQuery.extend({
 		
 		// If an array was passed in, assume that it is an array
 		// of form elements
-		if ( a.constructor == Array )
+		if ( a.constructor == Array ) {
 			// Serialize the form elements
 			for ( var i = 0; i < a.length; i++ )
 				s.push( a[i].name + "=" + encodeURIComponent( a[i].value ) );
 			
 		// Otherwise, assume that it's an object of key/value pairs
-		else
+		} else {
 			// Serialize the key/values
 			for ( var j in a )
 				s.push( j + "=" + encodeURIComponent( a[j] ) );
+		}
 		
 		// Return the resulting serialization
 		return s.join("&");
 	}
 
 });
+

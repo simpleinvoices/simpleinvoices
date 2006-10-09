@@ -1,77 +1,193 @@
 <?php
-
-#include('./include/auth/auth.php'); 
+include('./include/menu.php');
 include('./config/config.php'); 
-include("./lang/$language.inc.php"); 
+include("./lang/$language.inc.php");
 
 
-$display_block = "
-<table align=center>
-<tr>
-<td>
-<ul class=\"postnav\">
-
-<li><a href=\"./manage_invoices.php\">$indx_manage_invoices</a></li>
-<ul>
-
-</td>
-</tr>
-</table>
-
-<table align=center>
-<tr>
-<td>
-<ul class=\"postnav\">
-<li><a href=\"./invoice_itemised.php\">$indx_invoice_itemised</a></li>
-<li><a href=\"./invoice_total.php\">$indx_invoice_total</a></li>
-<li><a href=\"./invoice_consulting.php\">$indx_invoice_consulting</a></li>
-</ul>
-</td>
-</tr>
-</table>
-<table align=center>
-<tr>
-<td>
-<ul class=\"postnav\">
-<li><a href=\"./insert_customer.php\">$indx_insert_customer</a></li>
-<li><a href=\"./insert_biller.php\">$indx_insert_biller</a></li>
-<li><a href=\"./insert_product.php\">$indx_insert_product</a></li>
-</ul>
-</td>
-</tr>
-</table>";
 ?>
+
 <html>
 <head>
-<?php include('./include/menu.php'); ?>	
+
+                <title>Simple Invoices</title>
+
+                <script type="text/javascript" src="./include/jquery.js"></script>
+                <script type="text/javascript" src="./include/jquery-accordian.js"></script>
+
+
+                <style type="text/css">
+			/*The CSS code for the mina body of Simple Invoices - start*/
+			body{background:#F5F5F5 url('./themes/<?php echo $theme; ?>/images/gb_top.gif') repeat-x; color: #222; margin: 0;      padding: 0;}
+
+                        #list1 { width:48%;  position:absolute; top:15%; right:1em; }
+                        .title { cursor:pointer; border:1px solid #CCCCCC; margin-top:0.5em; padding:0.1em; }
+                        .on1  .title { background-color:#E4EFC7; }
+                        .off1 .title { background-color:#E0E0E0; }
+                        .content    { background-color:#F5F5F5; padding:0.1em; border:1px solid #C0C0C0; border-top-width:0; }
+
+                        #list2 { width:48%; position:absolute; top:15%; left:1em; }
+                        .mytitle { cursor:pointer; border:1px solid #CCCCCC; margin-top:0.5em; padding:0.1em; }
+                        .on  .mytitle { background-color:#E4EFC7; }
+                        .off .mytitle { background-color:#E0E0E0; }
+                        .mycontent    { background-color:#F5F5F5; padding:0.1em; border:1px solid #C0C0C0; border-top-width:0; }
+                </style>
+
+</head>
+<BODY>
 <?php
 $mid->printMenu('hormenu1');
 $mid->printFooter();
 ?>
-<script type="text/javascript" src="include/doFilter.js"></script>
-
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
-<meta name="generator" content="HAPedit 3.1">
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("ul.postnav a","transparent");
-}
-</script>
-<title>Simple Invoices
-</title>
-</head>
-<body>
-
-<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/style.css">
+<!-- <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css"> -->
 <br>
-<br><br><br><br><Br>
 
 
-<?php echo $display_block; ?>
+                <h1 align=center>Welcome to Simple Invoices</h1>
+                <div id="list1">
+                <h2><img src="./images/reports.png"></img> Quick stats</h2>
+                        <div id="item11">
+
+                                <div class="title">Lorem ipsum dolor sit amet</div>
+
+                                <div class="content">
+
+                                        consectetuer adipiscing elit<br/>
+
+                                        Sed lorem leo<br/>
+
+                                        lorem leo consectetuer adipiscing elit<br/>
+
+                                        Sed lorem leo<br/>
+
+                                        rhoncus sit amet
+
+                                </div>
+                        </div>
+
+                        <div id="item12">
+
+                                <div class="title">elementum at</div>
+
+                                <div class="content">
+
+                                        bibendum at, eros<br/>
+
+                                        Cras at mi et tortor egestas vestibulum<br/>
+
+                                        sed Cras at mi vestibulum<br/>
+
+                                        Phasellus sed felis sit amet
+
+                                </div>
+
+                        </div>
+
+                        <div id="item13">
+
+                                <div class="title">orci dapibus semper.</div>
+
+                                <div class="content">
+
+                                        Morbi eros massa<br/>
+
+                                        interdum et, vestibulum id, rutrum nec<br/>
+
+                                        bibendum at, eros<br/>
+
+                                        Cras at mi et tortor egestas vestibulum<br/>
+
+                                        Phasellus sed felis sit amet<br/>
+
+                                        Morbi eros massa<br/>
+
+                                        interdum et, vestibulum id, rutrum nec<br/>
+
+                                        Phasellus sem leo
+
+                                </div>
+
+                        </div>
+                </div>
 
 
-</body>
-</html>
+               <div id="list2">
+
+                <h2><img src="./images/menu.png"> Shortcut menu</h2>
+                        <div id="item21">
+
+                                <div class="mytitle">Lorem ipsum dolor sit amet</div>
+
+                                <div class="mycontent">
+
+                                        consectetuer adipiscing elit<br/>
+
+                                        Sed lorem leo<br/>
+
+                                        lorem leo consectetuer adipiscing elit<br/>
+
+                                        Sed lorem leo<br/>
+
+                                        rhoncus sit amet
+
+                                </div>
+
+                        </div>
+
+
+                        <div id="item22">
+
+                                <div class="mytitle">elementum at</div>
+
+                                <div class="mycontent">
+
+                                        bibendum at, eros<br/>
+
+                                        Cras at mi et tortor egestas vestibulum<br/>
+
+                                        sed Cras at mi vestibulum<br/>
+
+                                        Phasellus sed felis sit amet
+
+                                </div>
+
+                        </div>
+                        <div id="item23">
+
+                                <div class="mytitle">orci dapibus semper.</div>
+
+                                <div class="mycontent">
+
+                                        Morbi eros massa<br/>
+
+                                        interdum et, vestibulum id, rutrum nec<br/>
+
+                                        bibendum at, eros<br/>
+
+                                        Cras at mi et tortor egestas vestibulum<br/>
+
+                                        Phasellus sed felis sit amet<br/>
+
+                                        Morbi eros massa<br/>
+
+                                        interdum et, vestibulum id, rutrum nec<br/>
+
+                                        Phasellus sem leo
+
+                                </div>
+
+                        </div>
+                </div>
+
+
+
+
+
+</BODY>
+</HTML>
+
+
+
+
+
 
 

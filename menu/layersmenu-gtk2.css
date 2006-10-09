@@ -2,6 +2,7 @@
 	color: black;
 	background-color: #dcdad5;
 	border: 2px outset #cecac1;
+	z-index: 2;
 }
 
 .horbaritem	{
@@ -9,19 +10,23 @@
 	white-space: nowrap;
 	font-family: bitstream vera sans, luxi sans, verdana, geneva, arial, helvetica, sans-serif;
 	font-size: 13px;
+	z-index: 2;
 }
 
 .horbaritem a	{
 	display: block;
 	text-decoration: none;
+	z-index: 2;
 }
 
 .horbaritem a:link	{
+	z-index: 2;
 	color: #000000;
 	text-decoration: none;
 }
 
 .horbaritem a:visited	{
+	z-index: 2;
 	color: #000000;
 	text-decoration: none;
 }
@@ -38,12 +43,14 @@
 }
 
 .verbar	{
+	z-index: 2;
 	color: black;
 	background-color: #dcdad5;
 	border: 2px outset #cecac1;
 }
 
 .submenu	{
+	z-index: 2;
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -51,6 +58,7 @@
 }
 
 .subframe	{
+	z-index: 2;
 	position: relative;
 	display: block;
 	background-color: #dcdad5;
@@ -58,6 +66,7 @@
 }
 
 .item	{
+	z-index: 2;
 	text-align: left;
 	white-space: nowrap;
 	font-family: bitstream vera sans, luxi sans, verdana, geneva, arial, helvetica, sans-serif;
@@ -65,6 +74,7 @@
 }
 
 .item a	{
+	z-index: 2;
 	position: relative;
 	display: block;
 	text-decoration: none;
@@ -106,5 +116,6 @@
 	height: 0;
 	font-size: 1px;
 	line-height: 0;
+	z-index: 2;
 }
 
