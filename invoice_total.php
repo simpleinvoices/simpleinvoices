@@ -283,7 +283,7 @@ $mid->printFooter();
 </div>
 
 <div id="footer">
-<p><input type=submit name="submit" value="Submit Invoice"><input type=hidden name="invoice_style" value="insert_invoice_total"> *All fields are mandatory</p>
+<p><input type=submit name="submit" value="Save Invoice"><input type=hidden name="invoice_style" value="insert_invoice_total"> *All fields are mandatory</p>
 </div>
 </div>
 

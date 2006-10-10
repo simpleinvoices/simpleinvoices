@@ -3,7 +3,21 @@
 <title>Simple Invoices - Read Me</title>
 </head>
 <body>
-	<a href="#installation ">Installation</a><br> <a href="#pdf"> --  PDF</a><br> <a href="#backup"> --  Database backup</a><br> <a href="#upgrading">Upgrading</a><br><a href ="#prepare">Preparing Simple Invoices for use</a><br><a href ="#use">Using Simple Invoices</a><br><a href ="#logos"> -- Biller Logos</a><br><a href ="#templates"> -- Invoice Templates</a><br><a href ="#defaults"> -- System Defaults</a><br><a href ="#export"> -- Export to Excel/Word</a>
+	<a href="#installation ">Installation</a><br> 
+	<a href="#pdf"> --  PDF</a><br> 
+	<a href="#backup"> --  Database backup</a><br> 
+	<a href="#upgrading">Upgrading</a><br>
+	<a href="#prepare">Preparing Simple Invoices for use</a><br>
+	<a href="#use">Using Simple Invoices</a><br>
+	<a href="#logos"> -- Biller Logos</a><br>
+	<a href="#templates"> -- Invoice Templates</a><br>
+	<a href ="#defaults"> -- System Defaults</a><br>
+	<a href ="#export"> -- Export to Excel/Word</a><br>
+	<a href ="#faqs">Frequently Asked Questions (FAQs)</a><br>
+	<a href ="#faqs-what"> -- What is Simple Invoices?</a><br>
+	<a href ="#faqs-need"> -- What do i need to start invoicings?</a><br>
+	<a href ="#faqs-how"> -- How do I create invoices?</a><br>
+	<a href ="#faqs-types"> -- What are the different invoice types?</a><br>
 
 	
 	
@@ -239,10 +253,17 @@ memory_limit = 24M      ; Maximum amount of memory a script may consume (8MB)
 			</ul>		
 			<a name="use"><b>Using Simple Invoices</b></a>
 <ul>
+	<li><b>The basics</b>
+	<br>
+	<br>
+	<ul>
 	<li>Now that Simple Invoices has been installed and setup will all the required information, you can start to do some invoices :)
 	<li>Open Simple Invoices in your browser (http://localhost/simpleinvoices)
 	<li>To create an invoice, in the main page click on the style of invoice you wish to create, Invoice - Total or Invoice - Itemised
-	<ul><li>A Total Invoice is an invoice that - think an invoice from a plumber that lists the actions and then has one price and the tax assocaited <li>An Itemised Invoice is an invoice that list many different items in the same invoice - think a grocery store invoice	
+	<ul>
+		<li>A Total Invoice is an invoice that - think an invoice from a plumber that lists the actions and then has one price and the tax assocaited 
+		<li>An Itemised Invoice is an invoice that list many different items in the same invoice - think a grocery store invoice	
+		<li>A Consulting Invoice is an invoice that is similar to the intemised style except that with each line item there is a detail description of the work performed/product sold - think accounting/legal firms invoices	
 	</ul>
 	<li>Once in the create invoice screen, select a biller, select a customer.
 	<li>If creating a Total Invoice, enter the description of the invoice, the total of the invoice, the tax rate, and the invoice preference and click Submit Invoice
@@ -254,8 +275,11 @@ memory_limit = 24M      ; Maximum amount of memory a script may consume (8MB)
 	<li>Once you created and printed the invoice you can go back to the Manage Invoices screen to view/action of invoices or create more
 	<li>Enjoy :)
 </ul>
+	<br>
 
-			<a name="logos"><b>Biller Logos</b></a>
+			<li><a name="logos"><b>Biller Logos</b></a>
+	<br>
+	<br>
 <ul>
 	<li>Simple Invoices allows for each biller to have their own logo displayed in the Print Preview of their invoices.
 	<li>To add a logo to a biller the first step is to upload your billers logo into the logo folder into Simple Invoices directory on your system
@@ -264,7 +288,10 @@ memory_limit = 24M      ; Maximum amount of memory a script may consume (8MB)
 
 
 </ul>
-			<a name="templates"><b>Invoice Templates</b></a>
+	<br>
+			<li><a name="templates"><b>Invoice Templates</b></a>
+	<br>
+	<br>
 <ul>
 	<li>An Invoice Template is the template that Simple Invoices will use to create the Print Preview of the invoice
 	<li>To choose which Invoice Template your Simple Invoices will use go to the Options menu and select System Defaults
@@ -273,7 +300,10 @@ memory_limit = 24M      ; Maximum amount of memory a script may consume (8MB)
 	<li>Now when you do a Print Preview of an invoice it will use this new Invoice Template
 
 </ul>
-			<a name="defaults"><b>System Defaults</b></a>
+	<br>
+			<li><a name="defaults"><b>System Defaults</b></a>
+	<br>
+	<br>
 <ul>
 	<li>In Simple Invoices its possible to setup defaults of various values that the system will use by default, these default values can be defined in the System Defaults page which is available from the Option menu
 	<li>In the System Defaults page the following values can be set as default:
@@ -287,12 +317,78 @@ memory_limit = 24M      ; Maximum amount of memory a script may consume (8MB)
 		</ul>
 
 </ul>
+	<br>
 
-			<a name="export"><b>Export to Excel/Word/OpenDocument format</b></a>
+			<li><a name="export"><b>Export to Excel/Word/OpenDocument format</b></a>
+	<br>
+	<br>
 <ul>
 		<li>Simple Invoices allows to the export of an invoice from the Quick View to Excel, Word and the Open Document formats
 		<li>The default export formats are set to .xls(Excel) for spreadsheets and .doc(Word) for word processors
 		<li>These defaults can be changed in the config/config.php to be the Open Document formats, .ods for spreadsheets and .odt dor word processors
 		<li>Note: in the config/config.php any file format can be used as long as their associated programs can read a html document
 
+</ul>
+</ul>
+
+
+<a name="faqs"><b>Frequently Asked Questions (FAQs)</b></a>
+<ul>
+                <li><a name="faqs-what"><b>What is Simple Invoices?</b></a><br><br>
+Simple Invoices is a basic invoicing system designed with simplicity and functionality in mind.  Catering for the neds of small organisations and home users.  For more information please refer to the Simple Invoices website <a href="http://www.simpleinvoices.org">http://www.simpleinvoices.org</a>
+			<br>
+			<br>
+		<li><a name="faqs-need"><b>What do I need to start invoicing?</b></a>
+			<br>
+			<br>
+				Once you've got Simple Invoices installed on your system (refer Installation documentation for more info) all you need to do is enter a Biller ( this is normally you or your organisation) details, a Customer (the person your are invoicing).<br>
+				Once these 2 pieces of information have been entered you can now start creating invoices.<br>
+Note: If you are creating invoices based on products sales( ie a computer store) you will also need to enter some products into Simple Invoices
+			<br>
+			<br>
+		<li><a name="faqs-how"><b>How do I create invoices?</b></a>
+			<br>
+			<br>
+			Creating invoices is easy.  Once a biller and customer have been entered into Simple Invoices all you need to do is select .... from the New Invoice menu, fill in the details and click 'Save Invoice'
+<br>
+			<br>		
+		<li><a name="faqs-types"><b>What are the different invoice types?</b></a>
+			<br>
+			<br>In Simple Invoices there are 3 types of invoices available, Total invoices, Itemised invoices and Consulting invoices
+		        <ul>                 
+				<li>A Total Invoice is an invoice that - think an invoice from a plumber that lists the actions and then has one price and the tax assocaited                 
+				<li>An Itemised Invoice is an invoice that list many different items in the same invoice - think a grocery store invoice
+		                <li>A Consulting Invoice is an invoice that is similar to the intemised style except that with each line item there is a detail description of the work performed/product sold - think accounting/legal firms invoices
+        </ul>
+			
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
 </ul>

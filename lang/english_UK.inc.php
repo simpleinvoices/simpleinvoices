@@ -9,9 +9,9 @@ $wording_for_disabledField ="Disabled";
 
 #Index.php - front page
 $indx_manage_invoices = "Manage Invoices";
-$indx_invoice_itemised = "Invoice - Itemised";
-$indx_invoice_total = "Invoice - Total";
-$indx_invoice_consulting = "Invoice - Consulting";
+$indx_invoice_itemised = "Itemised";
+$indx_invoice_total = "Total";
+$indx_invoice_consulting = "Consulting";
 $indx_insert_customer = "Add Customer";
 $indx_insert_biller = "Add Biller";
 $indx_insert_product = "Add Product";

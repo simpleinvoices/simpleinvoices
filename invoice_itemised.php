@@ -345,7 +345,7 @@ $mid->printFooter();
 <div id="footer">
 	<p>
 		<input type=hidden name="max_items" value="<?php echo $num; ?>">
-		<input type=submit name="submit" value="Submit invoice">
+		<input type=submit name="submit" value="Save Invoice">
 		<input type=hidden name="invoice_style" value="insert_invoice_itemised">
 		*All fields are mandatory</p>
 </div>

@@ -12,10 +12,79 @@ include("./lang/$language.inc.php");
                 <title>Simple Invoices</title>
 
                 <script type="text/javascript" src="./include/jquery.js"></script>
+    <script type="text/javascript" src="./include/greybox.js"></script>
+     <script type="text/javascript">
+      var GB_ANIMATION = true;
+      $(document).ready(function(){
+        $("a.greybox").click(function(){
+          var t = this.title || $(this).text() || this.href;
+          GB_show(t,this.href,470,600);
+          return false;
+        });
+      });
+    </script>
+
                 <script type="text/javascript" src="./include/jquery-accordian.js"></script>
 
 
                 <style type="text/css">
+	/* Ajax Alter popup Greybox - start */
+	#GB_overlay {
+	  background-image: url(./images/overlay.png);
+	  position: absolute;
+	  margin: auto;
+	  top: 0;
+	  left: 0;
+	  z-index: 100;
+	  width:  100%;
+	  height: 100%;
+	}
+	
+	* html #GB_overlay {
+	  background-color: #000;
+	  background-color: transparent;
+	  background-image: url(./images/blank.gif);
+	  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="./images/overlay.png", sizingMethod="scale");
+	}
+	
+	#GB_window {
+	  top: 10px;
+	  left: 0px;
+	  position: absolute;
+	  background: #fff;
+	  border: 5px solid #aaa;
+	  overflow: auto;
+	  width: 400px;
+	  height: 400px;
+	  z-index: 150;
+	}
+	
+	#GB_frame {
+	  border: 0;
+	  overflow: auto;
+	  width: 100%;
+	  height: 378px;
+	}
+	
+	#GB_caption {
+	  font: 12px bold helvetica, verdana, sans-serif;
+	  color: #fff;
+	  background: #888;
+	  padding: 2px 0 2px 5px;
+	  margin: 0;
+	  text-align: left;
+	}
+	
+	#GB_window img {
+	  position: absolute;
+	  top: 2px;
+	  right: 5px;
+	  cursor: pointer;
+	  cursor: hand;
+	}
+	/*Greybox - alert popup - end */
+
+
 			/*The CSS code for the mina body of Simple Invoices - start*/
 			body{background:#F5F5F5 url('./themes/<?php echo $theme; ?>/images/gb_top.gif') repeat-x; color: #222; margin: 0;      padding: 0;}
 
@@ -123,10 +192,10 @@ $mid->printFooter();
                         <div id="item21">
                                 <div class="mytitle">Getting Started</div>
                                 <div class="mycontent">
-                                        consectetuer adipiscing elit<br/>
-                                        Sed lorem leo<br/>
-                                        lorem leo consectetuer adipiscing elit<br/>
-                                        Sed lorem leo<br/>
+                                        <a href="./inline_instructions.php#faqs-what">What is Simple Invoices?</a><br/>
+                                        <a href="./inline_instructions.php#faqs-need">What do I need to start invoicing?</a><br/>
+                                        <a href="inline_instructions.php#faqs-how">How do I create invoices?</a><br/>
+                                        <a href="inline_instructions.php#faqs-types">What are the different types of invoices?</a>
                                 </div>
                         </div>
 
@@ -156,20 +225,20 @@ $mid->printFooter();
                         <div id="item25">
                                 <div class="mytitle">Options</div>
                                 <div class="mycontent">
-                                        <a href="manage_invoices.php">System Defaults</a><br/>
-                                        <a href="manage_invoices.php">Tax Rates</a><br/>
-                                        <a href="manage_invoices.php">Invoice Preferencest</a><br/>
-                                        <a href="manage_invoices.php">Payment Types</a><br/>
-                                        <a href="manage_invoices.php">Database Upgrade Manager</a> <br/>
-                                        <a href="manage_invoices.php">Backup Database</a>
+                                        <a href="manage_system_defaults.php">System Defaults</a><br/>
+                                        <a href="manage_tax_rates.php">Tax Rates</a><br/>
+                                        <a href="manage_preferences.php">Invoice Preferencest</a><br/>
+                                        <a href="manage_payment_types.php">Payment Types</a><br/>
+                                        <a href="database_sqlpatches.php">Database Upgrade Manager</a> <br/>
+                                        <a href="backup_database.php">Backup Database</a>
                                 </div>
                         </div>
                         <div id="item26">
                                 <div class="mytitle">Help!!</div>
                                 <div class="mycontent">
-                                        Installation<br/>
-                                        Upgrading Simple Invoices<br/>
-                                        Prepare Simple Invoices for uset<br/>
+                                        <a href="inline_instructions.php#installation">Installation<br/></a>
+                                        <a href="inline_instructions.php#upgrading">Upgrading Simple Invoices<br/></a>
+                                        <a href="inline_instructions.php#use">Prepare Simple Invoices for use<br/></a>
                                 </div>
                         </div>
                 </div>

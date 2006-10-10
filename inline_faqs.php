@@ -3,13 +3,13 @@
 include('./config/config.php');
 
 
-$fp = fopen( "FAQs.html", "r" );
+$fp = fopen( "./text/faqs.html", "r" );
 if(!$fp)
 {
     echo "Couldn't open the data file. Try again later.";
     exit;
 }
-$filename ="FAQs.html";
+$filename ="./text/faqs.html";
 $display_block = fread( $fp, filesize( $filename ) );
 ?>
 
