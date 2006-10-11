@@ -236,26 +236,26 @@ if ($_GET[invoice_style] === 'Total') {
 	                <td colspan=6><br><br></td>
         	</tr>
 	        <tr class=\"tbl1 col1\" >
-        	        <td colspan=6><b>$pp_invoice_description</b></td>
+        	        <td class=\"tbl1 col1 tbl1-right\" colspan=6><b>$pp_invoice_description</b></td>
 	        </tr>
 	        <tr class=\"tbl1-left tbl1-right\">
-	                <td colspan=6>$inv_it_descriptionField</td>
+	                <td class=\"tbl1-left tbl1-right\" colspan=6>$inv_it_descriptionField</td>
         	</tr>
 	        <tr class=\"tbl1-left tbl1-right\">
-        	        <td colspan=6><br></td>
+        	        <td colspan=6 class=\"tbl1-left tbl1-right\"><br></td>
 	        </tr>
 	        <tr class=\"tbl1-left tbl1-right\">
-	                <td></td><td></td><td></td><td><b>$pp_invoice_gross_total</b></td><td><b>$pp_invoice_tax</b></td><td><b>$pp_invoice_total</b></td>
+	                <td class=\"tbl1-left\" ></td><td></td><td></td><td><b>$pp_invoice_gross_total</b></td><td><b>$pp_invoice_tax</b></td><td class=\"tbl1-right\"><b>$pp_invoice_total</b></td>
         	</tr>
 	        <tr class=\"tbl1-left tbl1-right tbl1-bottom\">
-        	        <td></td><td></td><td width=10%></td><td> $pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td><u>$pref_currency_signField$inv_it_totalField</u></td>
+        	        <td class=\"tbl1-left tbl1-bottom\"></td><td class=\"tbl1-bottom\" ></td><td width=10% class=\"tbl1-bottom\"></td><td class=\"tbl1-bottom\"> $pref_currency_signField$inv_it_gross_totalField</td><td class=\"tbl1-bottom\">$pref_currency_signField$inv_it_tax_amountField</td><td class=\"tbl1-bottom tbl1-right\"><u>$pref_currency_signField$inv_it_totalField</u></td>
 	        </tr>
 
         	<tr>
                 	<td colspan=6><br><br></td>
 	        </tr>
         	<tr class=\"tbl1 col1\" >
-                	<td colspan=6><b>$pref_inv_detail_headingField</b></td>
+                	<td  class=\"tbl1 col1\" colspan=6><b>$pref_inv_detail_headingField</b></td>
 	        </tr>
 	";	
    
@@ -368,13 +368,13 @@ $display_block_details =  "
 
                 $display_block_details .=  "
                 <tr class=\"tbl1-left tbl1-right\">
-                        <td>$inv_it_quantityField</td><td>$prod_descriptionField</td>
+                        <td class=\"tbl1-left\" >$inv_it_quantityField</td><td>$prod_descriptionField</td><td class=\"tbl1-right\" colspan=5></td>
 		</tr>
 		<tr class=\"tbl1-left tbl1-right\">
-			<td></td><td colspan=6><i>$pp_invoice_description: </i>$inv_it_descriptionField</td>
+			<td class=\"tbl1-left\"></td><td class=\"tbl1-right\" colspan=6><i>$pp_invoice_description: </i>$inv_it_descriptionField</td>
 		</tr>
 		<tr class=\"tbl1-left tbl1-right tbl1-bottom\">
-			<td></td><td></td><td>$pref_currency_signField$inv_it_unit_priceField</td><td>$pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td>$pref_currency_signField$inv_it_totalField</td>
+			<td class=\"tbl1-left\" ></td><td></td><td>$pref_currency_signField$inv_it_unit_priceField</td><td>$pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td class=\"tbl1-right\" >$pref_currency_signField$inv_it_totalField</td>
                 </tr>
                 ";
         }
@@ -392,13 +392,13 @@ $display_block_details =  "
 
                 $display_block_details .=  "
                         <tr>
-                                <td class=\"tbl1-left tbl1-right\" colspan=6></td>
+                                <td class=\"tbl1-left tbl1-right\" colspan=7></td>
                         </tr>
                         <tr>
-                                <td class=\"tbl1-left tbl1-right\" colspan=6 align=left><i>$pp_invoice_note:</i></td>
+                                <td class=\"tbl1-left tbl1-right\" colspan=7 align=left><i>$pp_invoice_note:</i></td>
                         </tr>
                         <tr>
-                                <td class=\"tbl1-left tbl1-right\" colspan=6>$inv_noteField</td>
+                                <td class=\"tbl1-left tbl1-right\" colspan=7>$inv_noteField</td>
                         </tr>
                 ";
         }
@@ -414,19 +414,19 @@ $display_block_details =  "
         </tr>
 	-->
 	<tr class=\"tbl1-left tbl1-right\">
-		<td colspan=6><br></td>
+		<td class=\"tbl1-left tbl1-right\" colspan=6 ><br></td>
 	</tr>	
 
         <tr class=\"tbl1-left tbl1-right\">
-                <td colspan=3 ></td><td align=left colspan=2>$pp_invoice_total_tax</td><td>$pref_currency_signField$invoice_total_taxField</td>
+                <td class=\"tbl1-left\" colspan=3 ></td><td align=left colspan=2>$pp_invoice_total_tax</td><td class=\"tbl1-right\" >$pref_currency_signField$invoice_total_taxField</td>
         </tr>
 	<tr class=\"tbl1-left tbl1-right\" >
-		<td>
+		<td class=\"tbl1-left tbl1-right\" colspan=6 >
 			<br>
 		</td>
 	</tr>
         <tr class=\"tbl1-left tbl1-right tbl1-bottom\">
-                <td colspan=3></td><td align=left colspan=2><b>$pref_inv_wordingField $pp_invoice_amount</b></td><td><u>$pref_currency_signField$invoice_total_totalField</u></td>
+                <td class=\"tbl1-left tbl1-bottom\" colspan=3></td><td class=\"tbl1-bottom\" align=left colspan=2><b>$pref_inv_wordingField $pp_invoice_amount</b></td><td  class=\"tbl1-bottom tbl1-right\" ><u>$pref_currency_signField$invoice_total_totalField</u></td>
         </tr>
 
 
