@@ -3,13 +3,84 @@ include('./include/menu.php');
 include('./config/config.php'); 
 include("./lang/$language.inc.php");
 
+$conn = mysql_connect( $db_host, $db_user, $db_password );
+mysql_select_db( $db_name, $conn );
+
+
+$sql = "
+SELECT
+        si_customers.c_id as ID,
+        si_customers.c_name as Customer,
+        (select sum(inv_it_total) from si_invoice_items,si_invoices where  si_invoice_items.inv_it_invoice_id = si_invoices.inv_id and si_invoices.inv_customer_id = ID) as Total,
+        (select IF ( isnull(sum(ac_amount)), '0', sum(ac_amount)) from si_account_payments,si_invoices where si_account_payments.ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = ID) as Paid,
+        (select (Total - Paid)) as Owing
+
+FROM
+        si_customers,si_invoices,si_invoice_items
+WHERE
+        si_invoice_items.inv_it_invoice_id = si_invoices.inv_id and si_invoices.inv_customer_id = c_id
+GROUP BY
+        Owing DESC
+LIMIT 1;
+
+";
+
+$result = mysql_query($sql, $conn) or die(mysql_error());
+
+while ($Array = mysql_fetch_array($result)) {
+        $largest_debtor = $Array['Customer'];
+};
+
+$sql2 = "
+SELECT
+        si_customers.c_id as ID,
+        si_customers.c_name as Customer,
+        (select sum(inv_it_total) from si_invoice_items,si_invoices where  si_invoice_items.inv_it_invoice_id = si_invoices.inv_id and si_invoices.inv_customer_id = ID) as Total,
+        (select IF ( isnull(sum(ac_amount)), '0', sum(ac_amount)) from si_account_payments,si_invoices where si_account_payments.ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = ID) as Paid,
+        (select (Total - Paid)) as Owing
+
+FROM
+        si_customers,si_invoices,si_invoice_items
+WHERE
+        si_invoice_items.inv_it_invoice_id = si_invoices.inv_id and si_invoices.inv_customer_id = c_id
+GROUP BY
+        Total DESC
+LIMIT 1;
+
+";
+
+$result2 = mysql_query($sql2, $conn) or die(mysql_error());
+
+while ($Array2 = mysql_fetch_array($result2)) {
+        $top_customer = $Array2['Customer'];
+};
+
+$sql3 = "
+SELECT
+	si_biller.b_name,  
+	sum(si_invoice_items.inv_it_total) as Total 
+FROM 
+	si_biller, si_invoice_items, si_invoices 
+WHERE 
+	si_invoices.inv_biller_id = si_biller.b_id and si_invoices.inv_id = si_invoice_items.inv_it_invoice_id GROUP BY b_name ORDER BY Total DESC LIMIT 1;
+
+";
+
+$result3 = mysql_query($sql3, $conn) or die(mysql_error());
+
+while ($Array3 = mysql_fetch_array($result3)) {
+        $top_biller = $Array3['b_name'];
+};
+
+
+
 
 ?>
 
 <html>
 <head>
 
-                <title>Simple Invoices</title>
+                <title><?php echo $title; ?></title>
 
                 <script type="text/javascript" src="./include/jquery.js"></script>
     <script type="text/javascript" src="./include/greybox.js"></script>
@@ -117,41 +188,26 @@ $mid->printFooter();
 <br>
 
 
-                <h1 align=center>Welcome to Simple Invoices</h1>
+                <h1 align=center><?php echo $indx_welcome; echo $title; ?></h1>
                 <div id="list1">
-                <h2><img src="./images/reports.png"></img> Quick stats</h2>
+                <h2><img src="./images/reports.png"></img><?php echo $indx_stats; ?></h2>
                         <div id="item11">
 
-                                <div class="title">Lorem ipsum dolor sit amet</div>
+                                <div class="title"><?php echo $indx_stats_debtor; ?></div>
 
                                 <div class="content">
-
-                                        consectetuer adipiscing elit<br/>
-
-                                        Sed lorem leo<br/>
-
-                                        lorem leo consectetuer adipiscing elit<br/>
-
-                                        Sed lorem leo<br/>
-
-                                        rhoncus sit amet
-
+			
+				<?php echo $largest_debtor; ?>
                                 </div>
                         </div>
 
                         <div id="item12">
 
-                                <div class="title">elementum at</div>
+                                <div class="title"><?php echo $indx_stats_customer; ?></div>
 
                                 <div class="content">
 
-                                        bibendum at, eros<br/>
-
-                                        Cras at mi et tortor egestas vestibulum<br/>
-
-                                        sed Cras at mi vestibulum<br/>
-
-                                        Phasellus sed felis sit amet
+				<?php echo $top_customer; ?>
 
                                 </div>
 
@@ -159,25 +215,11 @@ $mid->printFooter();
 
                         <div id="item13">
 
-                                <div class="title">orci dapibus semper.</div>
+                                <div class="title"><?php echo $indx_stats_biller; ?></div>
 
                                 <div class="content">
 
-                                        Morbi eros massa<br/>
-
-                                        interdum et, vestibulum id, rutrum nec<br/>
-
-                                        bibendum at, eros<br/>
-
-                                        Cras at mi et tortor egestas vestibulum<br/>
-
-                                        Phasellus sed felis sit amet<br/>
-
-                                        Morbi eros massa<br/>
-
-                                        interdum et, vestibulum id, rutrum nec<br/>
-
-                                        Phasellus sem leo
+				<?php echo $top_biller; ?>
 
                                 </div>
 
@@ -187,58 +229,58 @@ $mid->printFooter();
 
                <div id="list2">
 
-                <h2><img src="./images/menu.png"> Shortcut menu</h2>
+                <h2><img src="./images/menu.png"> <?php echo $indx_shortcut; ?></h2>
 
                         <div id="item21">
-                                <div class="mytitle">Getting Started</div>
+                                <div class="mytitle"><?php echo $indx_getting_started; ?></div>
                                 <div class="mycontent">
-                                        <a href="./inline_instructions.php#faqs-what">What is Simple Invoices?</a><br/>
-                                        <a href="./inline_instructions.php#faqs-need">What do I need to start invoicing?</a><br/>
-                                        <a href="inline_instructions.php#faqs-how">How do I create invoices?</a><br/>
-                                        <a href="inline_instructions.php#faqs-types">What are the different types of invoices?</a>
+                                        <a href="./inline_instructions.php#faqs-what"><?php echo $indx_faqs_what; ?></a><br/>
+                                        <a href="./inline_instructions.php#faqs-need"><?php echo $indx_faqs_need; ?></a><br/>
+                                        <a href="inline_instructions.php#faqs-how"><?php echo $indx_faqs_how; ?></a><br/>
+                                        <a href="inline_instructions.php#faqs-types"><?php echo $indx_faqs_type; ?></a>
                                 </div>
                         </div>
 
                         <div id="item22">
-                                <div class="mytitle">Create an invoice</div>
+                                <div class="mytitle"><?php echo $indx_create_invoice; ?></div>
                                 <div class="mycontent">
-                                        <a href="invoice_total.php">Total</a><br/>
-                                        <a href="invoice_itemised.php">Itemised</a><br/>
-                                        <a href="invoice_consulting.php">Consulting</a><br/>
+                                        <a href="invoice_total.php"><?php echo $indx_invoice_total; ?></a><br/>
+                                        <a href="invoice_itemised.php"><?php echo $indx_invoice_itemised; ?></a><br/>
+                                        <a href="invoice_consulting.php"><?php echo $indx_invoice_consulting; ?></a><br/>
                                 </div>
                         </div>
                         <div id="item23">
-                                <div class="mytitle">Manage your existing invoices</div>
+                                <div class="mytitle"><?php echo $indx_manage_existing_invoice; ?></div>
                                 <div class="mycontent">
-                                        <a href="manage_invoices.php">Manage Invoices</a><br/>
+                                        <a href="manage_invoices.php"><?php echo $indx_manage_invoice; ?></a><br/>
                                 </div>
                         </div>
 
                         <div id="item24">
-                                <div class="mytitle">Manage your data</div>
+                                <div class="mytitle"><?php echo $indx_manage_data; ?></div>
                                 <div class="mycontent">
-                                        <a href="insert_biller.php">Add Biller</a><br/>
-                                        <a href="insert_customer.php">Add Customer</a><br/>
-                                        <a href="insert_product.php">Add Product</a><br/>
+                                        <a href="insert_biller.php"><?php echo $indx_insert_biller; ?></a><br/>
+                                        <a href="insert_customer.php"><?php echo $indx_insert_customer; ?></a><br/>
+                                        <a href="insert_product.php"><?php echo $indx_insert_product; ?></a><br/>
                                 </div>
                         </div>
                         <div id="item25">
-                                <div class="mytitle">Options</div>
+                                <div class="mytitle"><?php echo $indx_options; ?></div>
                                 <div class="mycontent">
-                                        <a href="manage_system_defaults.php">System Defaults</a><br/>
-                                        <a href="manage_tax_rates.php">Tax Rates</a><br/>
-                                        <a href="manage_preferences.php">Invoice Preferencest</a><br/>
-                                        <a href="manage_payment_types.php">Payment Types</a><br/>
-                                        <a href="database_sqlpatches.php">Database Upgrade Manager</a> <br/>
-                                        <a href="backup_database.php">Backup Database</a>
+                                        <a href="manage_system_defaults.php"><?php echo $indx_options_sys_defaults; ?></a><br/>
+                                        <a href="manage_tax_rates.php"><?php echo $indx_options_tax_rates; ?></a><br/>
+                                        <a href="manage_preferences.php"><?php echo $indx_options_inv_pref; ?></a><br/>
+                                        <a href="manage_payment_types.php"><?php echo $indx_options_payment_types; ?></a><br/>
+                                        <a href="database_sqlpatches.php"><?php echo $indx_options_upgrade; ?></a> <br/>
+                                        <a href="backup_database.php"><?php echo $indx_options_backup; ?></a>
                                 </div>
                         </div>
                         <div id="item26">
-                                <div class="mytitle">Help!!</div>
+                                <div class="mytitle"><?php echo $indx_help; ?></div>
                                 <div class="mycontent">
-                                        <a href="inline_instructions.php#installation">Installation<br/></a>
-                                        <a href="inline_instructions.php#upgrading">Upgrading Simple Invoices<br/></a>
-                                        <a href="inline_instructions.php#use">Prepare Simple Invoices for use<br/></a>
+                                        <a href="inline_instructions.php#installation"><?php echo $indx_help_install; ?>Installation<br/></a>
+                                        <a href="inline_instructions.php#upgrading"><?php echo $indx_help_upgrade; ?><br/></a>
+                                        <a href="inline_instructions.php#use"><?php echo $indx_help_prepare; ?><br/></a>
                                 </div>
                         </div>
                 </div>

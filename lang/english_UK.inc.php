@@ -8,16 +8,47 @@ $wording_for_disabledField ="Disabled";
 
 
 #Index.php - front page
-$indx_manage_invoices = "Manage Invoices";
-$indx_invoice_itemised = "Itemised";
-$indx_invoice_total = "Total";
-$indx_invoice_consulting = "Consulting";
+$indx_welcome ="Welcome to ";
+
+$indx_shortcut ="Shortcut menu";
+
+$indx_getting_started ="Getting started";
+$indx_faqs_what ="What is Simple Invoices?";
+$indx_faqs_need ="What do I need to start invoicing?";
+$indx_faqs_how ="How do I create invoices?";
+$indx_faqs_type ="How are the different types of invoices?";
+
+$indx_create_invoice ="Create an invoice";
+$indx_invoice_total ="Total";
+$indx_invoice_itemised ="Itemised";
+$indx_invoice_consulting ="Consulting?";
+
+$indx_manage_existing_invoice ="Manage your existing invoices";
+$indx_manage_invoice ="Manage invoices";
+
+$indx_manage_data ="Manage your data";
 $indx_insert_customer = "Add Customer";
 $indx_insert_biller = "Add Biller";
 $indx_insert_product = "Add Product";
-$indx_manage_customers = "Manage Customers";
-$indx_manage_billers = "Manager Billers";
-$indx_manage_products = "Manage Products";
+
+$indx_options ="Options";
+$indx_options_sys_defaults ="System Defaults";
+$indx_options_tax_rates ="Tax Rates";
+$indx_options_inv_pref ="Invoice Preferences";
+$indx_options_payment_types ="Payment Types";
+$indx_options_upgrade ="Database Upgrade Manager";
+$indx_options_backup ="Backup Database";
+
+$indx_help ="Help!!!";
+$indx_help_install ="Installation";
+$indx_help_upgrade ="Upgrading Simple Invoices";
+$indx_help_prepare ="Prepare Simple Invoices for use";
+
+$indx_stats =" Quick stats";
+$indx_stats_debtor ="Largest debtor";
+$indx_stats_customer ="Top Customer - by amount invoiced";
+$indx_stats_biller ="Top Biller - by amount invoiced";
+
 
 #Manage Invoices
 $mi_page_title = " - Manage Invoices";
