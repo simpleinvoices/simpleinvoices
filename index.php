@@ -244,8 +244,8 @@ $mid->printFooter();
                         <div id="item22">
                                 <div class="mytitle"><?php echo $indx_create_invoice; ?></div>
                                 <div class="mycontent">
-                                        <a href="invoice_total.php"><?php echo $indx_invoice_total; ?></a><br/>
                                         <a href="invoice_itemised.php"><?php echo $indx_invoice_itemised; ?></a><br/>
+                                        <a href="invoice_total.php"><?php echo $indx_invoice_total; ?></a><br/>
                                         <a href="invoice_consulting.php"><?php echo $indx_invoice_consulting; ?></a><br/>
                                 </div>
                         </div>

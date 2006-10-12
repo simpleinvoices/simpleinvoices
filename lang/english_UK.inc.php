@@ -21,7 +21,7 @@ $indx_faqs_type ="How are the different types of invoices?";
 $indx_create_invoice ="Create an invoice";
 $indx_invoice_total ="Total";
 $indx_invoice_itemised ="Itemised";
-$indx_invoice_consulting ="Consulting?";
+$indx_invoice_consulting ="Consulting";
 
 $indx_manage_existing_invoice ="Manage your existing invoices";
 $indx_manage_invoice ="Manage invoices";
