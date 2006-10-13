@@ -374,7 +374,7 @@ $display_block_details =  "
 			<td class=\"tbl1-left\"></td><td class=\"tbl1-right\" colspan=6><i>$pp_invoice_description: </i>$inv_it_descriptionField</td>
 		</tr>
 		<tr class=\"tbl1-left tbl1-right tbl1-bottom\">
-			<td class=\"tbl1-left\" ></td><td></td><td>$pref_currency_signField$inv_it_unit_priceField</td><td>$pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td class=\"tbl1-right\" >$pref_currency_signField$inv_it_totalField</td>
+			<td class=\"tbl1-left tbl1-bottom\" ></td><td class=\"tbl1-bottom\"></td><td class=\"tbl1-bottom\">$pref_currency_signField$inv_it_unit_priceField</td><td class=\"tbl1-bottom\">$pref_currency_signField$inv_it_gross_totalField</td><td class=\"tbl1-bottom \">$pref_currency_signField$inv_it_tax_amountField</td><td colspan=2 class=\"tbl1-right tbl1-bottom\" >$pref_currency_signField$inv_it_totalField</td>
                 </tr>
                 ";
         }
