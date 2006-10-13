@@ -388,7 +388,7 @@ $display_block_details =  "
 
 
         #if itemised style show the invoice note field - START
-	if ( $_GET['invoice_style'] === 'Itemised' OR 'Consulting' && !empty($inv_noteField)) {
+	if ( $_GET['invoice_style'] === 'Itemised' && !empty($inv_noteField) OR 'Consulting' && !empty($inv_noteField)) {
 
                 $display_block_details .=  "
                         <tr>
