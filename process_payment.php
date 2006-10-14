@@ -272,10 +272,10 @@ $(document).ready(function() {
                 <td colspan=6 align=center><b>Process Payment</b></th>
         </tr>
         <tr>
-                <td class='details_screen'>Invoice ID <a href='text/process_payment_inv_id.html' class='greybox'><font color=blue>*</font></a></td><td><input type=text id=\"ac_me\" name=\"ac_inv_id\" /></td>
+                <td class='details_screen'>Invoice ID <a href='./documentation/text/process_payment_inv_id.html' class='greybox'><font color=blue>*</font></a></td><td><input type=text id=\"ac_me\" name=\"ac_inv_id\" /></td>
         </tr>
 	<tr>
-		<td class='details_screen'>Details <a href='text/process_payment_details.html' class='greybox' ><font color=blue>*</font></a></td><td id =\"js_total\"><i>Please select an invoice</i> </td>
+		<td class='details_screen'>Details <a href='./documentation/text/process_payment_details.html' class='greybox' ><font color=blue>*</font></a></td><td id =\"js_total\"><i>Please select an invoice</i> </td>
 	</tr>
         <tr>
                 <td class='details_screen'>Amount</td><td colspan=5><input type=text name=\"ac_amount\" size=25></td>

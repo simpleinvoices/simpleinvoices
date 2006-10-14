@@ -178,7 +178,7 @@ Nifty("div#header,div#footer","small");
 <br>
 <div id="container">
 <?php echo $display_block; ?>
-<div id="footer"><a href="text/wheres_the_edit_button.html" class="greybox">Wheres the Edit button?</a></div>
+<div id="footer"><a href="./documentation/text/wheres_the_edit_button.html" class="greybox">Wheres the Edit button?</a></div>
 </div>
 </div>
 

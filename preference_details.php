@@ -58,46 +58,46 @@ $display_block =  "
   			<td class='details_screen'>Preference ID</td><td>$pref_idField</td>
                 </tr>
 		<tr>	
-			<td class='details_screen'>Description <a href=\"text/inv_pref_description.html\" class=\"greybox\">*</a></td><td>$pref_descriptionField</td>
+			<td class='details_screen'>Description <a href=\"./documentation/text/inv_pref_description.html\" class=\"greybox\">*</a></td><td>$pref_descriptionField</td>
                 </tr>
                 <tr>
-			<td class='details_screen'>Currency sign <a href=\"text/inv_pref_currency_sign.html\" class=\"greybox\">*</a></td><td>$pref_currency_signField</td>
+			<td class='details_screen'>Currency sign <a href=\"./documentation/text/inv_pref_currency_sign.html\" class=\"greybox\">*</a></td><td>$pref_currency_signField</td>
                 </tr>
                 <tr>
-			<td class='details_screen'>Invoice heading <a href=\"text/inv_pref_invoice_heading.html\" class=\"greybox\">*</a></td><td>$pref_inv_headingField</td>
+			<td class='details_screen'>Invoice heading <a href=\"./documentation/text/inv_pref_invoice_heading.html\" class=\"greybox\">*</a></td><td>$pref_inv_headingField</td>
                 </tr>
                 <tr>
-			<td class='details_screen'>Invoice wording <a href=\"text/inv_pref_invoice_wording.html\" class=\"greybox\">*</a></td><td>$pref_inv_wordingField</td>
+			<td class='details_screen'>Invoice wording <a href=\"./documentation/text/inv_pref_invoice_wording.html\" class=\"greybox\">*</a></td><td>$pref_inv_wordingField</td>
                 </tr>
                 <tr>
-			<td class='details_screen'>Invoice detail heading <a href=\"text/inv_pref_invoice_detail_heading.html\" class=\"greybox\">*</a></td><td>$pref_inv_detail_headingField</td>
+			<td class='details_screen'>Invoice detail heading <a href=\"./documentation/text/inv_pref_invoice_detail_heading.html\" class=\"greybox\">*</a></td><td>$pref_inv_detail_headingField</td>
                 </tr>
                 <tr>
-			<td class='details_screen'>Invoice detail line <a href=\"text/inv_pref_invoice_detail_line.html\" class=\"greybox\">*</a></td><td>$pref_inv_detail_lineField</td>
+			<td class='details_screen'>Invoice detail line <a href=\"./documentation/text/inv_pref_invoice_detail_line.html\" class=\"greybox\">*</a></td><td>$pref_inv_detail_lineField</td>
                 </tr>
                 <tr>
-			<td class='details_screen'>Invoice payment method <a href=\"text/inv_pref_invoice_payment_method.html\" class=\"greybox\">*</a></td><td>$pref_inv_payment_methodField</td>
+			<td class='details_screen'>Invoice payment method <a href=\"./documentation/text/inv_pref_invoice_payment_method.html\" class=\"greybox\">*</a></td><td>$pref_inv_payment_methodField</td>
                 </tr>
                 <tr>
-			<td class='details_screen'>Invoice payment line1 name <a href=\"text/inv_pref_payment_line1_name.html\" class=\"greybox\">*</a></td><td>$pref_inv_payment_line1_nameField</td>
+			<td class='details_screen'>Invoice payment line1 name <a href=\"./documentation/text/inv_pref_payment_line1_name.html\" class=\"greybox\">*</a></td><td>$pref_inv_payment_line1_nameField</td>
                 </tr>
                 <tr>
-			<td class='details_screen'>Invoice payment line1 value <a href=\"text/inv_pref_payment_line1_value.html\" class=\"greybox\">*</a></td><td>$pref_inv_payment_line1_valueField</td>
+			<td class='details_screen'>Invoice payment line1 value <a href=\"./documentation/text/inv_pref_payment_line1_value.html\" class=\"greybox\">*</a></td><td>$pref_inv_payment_line1_valueField</td>
                 </tr>
                 <tr>
-			<td class='details_screen'>Invoice payment line2 name <a href=\"text/inv_pref_payment_line2_name.html\" class=\"greybox\">*</a></td><td>$pref_inv_payment_line2_nameField</td>
+			<td class='details_screen'>Invoice payment line2 name <a href=\"./documentation/text/inv_pref_payment_line2_name.html\" class=\"greybox\">*</a></td><td>$pref_inv_payment_line2_nameField</td>
                 </tr>
                 <tr>
-			<td class='details_screen'>Invoice payment line2 value <a href=\"text/inv_pref_payment_line2_value.html\" class=\"greybox\">*</a></td><td>$pref_inv_payment_line2_valueField</td>
+			<td class='details_screen'>Invoice payment line2 value <a href=\"./documentation/text/inv_pref_payment_line2_value.html\" class=\"greybox\">*</a></td><td>$pref_inv_payment_line2_valueField</td>
 		</tr>
 	        <tr>
-        	        <td class='details_screen'>$wording_for_enabledField <a href=\"text/inv_pref_invoice_enabled.html\" class=\"greybox\">*</a></td><td>$wording_for_enabled</td>
+        	        <td class='details_screen'>$wording_for_enabledField <a href=\"./documentation/text/inv_pref_invoice_enabled.html\" class=\"greybox\">*</a></td><td>$wording_for_enabled</td>
 	        </tr>	
 		<tr>
 			<td colspan=2 align=center></td>
 		</tr>
 		<tr>
-			<td colspan=2 align=center><a href=\"text/inv_pref_what_the.html\" class=\"greybox\">Whats all this \"Invoice Preference\" stuff about?</a></td>
+			<td colspan=2 align=center><a href=\"./documentation/text/inv_pref_what_the.html\" class=\"greybox\">Whats all this \"Invoice Preference\" stuff about?</a></td>
 		</tr>
 		</table>
 ";
@@ -127,46 +127,46 @@ $display_block =  "
                         <td class='details_screen'>Preference ID</td><td>$pref_idField</td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Description <a href=\"text/inv_pref_description.html\" class=\"greybox\">*</a></td><td><input type=text name='pref_description' value='$pref_descriptionField' size=50></td>
+                        <td class='details_screen'>Description <a href=\"./documentation/text/inv_pref_description.html\" class=\"greybox\">*</a></td><td><input type=text name='pref_description' value='$pref_descriptionField' size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Currenc sign <a href=\"text/inv_pref_currency_sign.html\" class=\"greybox\">*</a></td><td><input type=text name='pref_currency_sign' value='$pref_currency_signField' size=50></td>
+                        <td class='details_screen'>Currenc sign <a href=\"./documentation/text/inv_pref_currency_sign.html\" class=\"greybox\">*</a></td><td><input type=text name='pref_currency_sign' value='$pref_currency_signField' size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice heading <a href=\"text/inv_pref_invoice_heading.html\" class=\"greybox\">*</a><td><input type=text name='pref_inv_heading' value='$pref_inv_headingField' size=50></td>
+                        <td class='details_screen'>Invoice heading <a href=\"./documentation/text/inv_pref_invoice_heading.html\" class=\"greybox\">*</a><td><input type=text name='pref_inv_heading' value='$pref_inv_headingField' size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice wording <a href=\"text/inv_pref_invoice_wording.html\" class=\"greybox\">*</a></td><td><input type=text name='pref_inv_wording' value='$pref_inv_wordingField' size=50></td>
+                        <td class='details_screen'>Invoice wording <a href=\"./documentation/text/inv_pref_invoice_wording.html\" class=\"greybox\">*</a></td><td><input type=text name='pref_inv_wording' value='$pref_inv_wordingField' size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice detail heading <a href=\"text/inv_pref_invoice_detail_heading.html\" class=\"greybox\">*</a></td><td><input type=text name='pref_inv_detail_heading' value='$pref_inv_detail_headingField' size=50></td>
+                        <td class='details_screen'>Invoice detail heading <a href=\"./documentation/text/inv_pref_invoice_detail_heading.html\" class=\"greybox\">*</a></td><td><input type=text name='pref_inv_detail_heading' value='$pref_inv_detail_headingField' size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice detail line <a href=\"text/inv_pref_invoice_detail_line.html\" class=\"greybox\">*</a></td><td><input type=text name='pref_inv_detail_line' value='$pref_inv_detail_lineField' size=75></td>
+                        <td class='details_screen'>Invoice detail line <a href=\"./documentation/text/inv_pref_invoice_detail_line.html\" class=\"greybox\">*</a></td><td><input type=text name='pref_inv_detail_line' value='$pref_inv_detail_lineField' size=75></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice payment method <a href=\"text/inv_pref_invoice_payment_method.html\" class=\"greybox\">*</a></td><td><input type=text name='pref_inv_payment_method' value='$pref_inv_payment_methodField' size=50></td>
+                        <td class='details_screen'>Invoice payment method <a href=\"./documentation/text/inv_pref_invoice_payment_method.html\" class=\"greybox\">*</a></td><td><input type=text name='pref_inv_payment_method' value='$pref_inv_payment_methodField' size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice payment line1 name <a href=\"text/inv_pref_payment_line1_name.html\" class=\"greybox\">*</a></td><td><input type=text name='pref_inv_payment_line1_name' value='$pref_inv_payment_line1_nameField' size=50></td>
+                        <td class='details_screen'>Invoice payment line1 name <a href=\"./documentation/text/inv_pref_payment_line1_name.html\" class=\"greybox\">*</a></td><td><input type=text name='pref_inv_payment_line1_name' value='$pref_inv_payment_line1_nameField' size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice payment line1 value <a href=\"text/inv_pref_payment_line1_value.html\" class=\"greybox\">*</a></td><td><input type=text name='pref_inv_payment_line1_value' value='$pref_inv_payment_line1_valueField' size=50></td>
+                        <td class='details_screen'>Invoice payment line1 value <a href=\"./documentation/text/inv_pref_payment_line1_value.html\" class=\"greybox\">*</a></td><td><input type=text name='pref_inv_payment_line1_value' value='$pref_inv_payment_line1_valueField' size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice payment line2 name <a href=\"text/inv_pref_payment_line2_name.html\" class=\"greybox\">*</a></td><td><input type=text name='pref_inv_payment_line2_name' value='$pref_inv_payment_line2_nameField' size=50></td>
+                        <td class='details_screen'>Invoice payment line2 name <a href=\"./documentation/text/inv_pref_payment_line2_name.html\" class=\"greybox\">*</a></td><td><input type=text name='pref_inv_payment_line2_name' value='$pref_inv_payment_line2_nameField' size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice payment line2 value <a href=\"text/inv_pref_payment_line2_value.html\" class=\"greybox\">*</a></td><td><input type=text name='pref_inv_payment_line2_value' value='$pref_inv_payment_line2_valueField' size=50></td>
+                        <td class='details_screen'>Invoice payment line2 value <a href=\"./documentation/text/inv_pref_payment_line2_value.html\" class=\"greybox\">*</a></td><td><input type=text name='pref_inv_payment_line2_value' value='$pref_inv_payment_line2_valueField' size=50></td>
                 </tr>
 	        <tr>
-        	        <td class='details_screen'>$wording_for_enabledField <a href=\"text/inv_pref_invoice_enabled.html\" class=\"greybox\">*</a></td><td>$display_block_enabled</td>
+        	        <td class='details_screen'>$wording_for_enabledField <a href=\"./documentation/text/inv_pref_invoice_enabled.html\" class=\"greybox\">*</a></td><td>$display_block_enabled</td>
 	        </tr>
                 <tr>
                         <td colspan=2 align=center></td>
                 </tr>
                 <tr>
-                        <td colspan=2 align=center><a href=\"text/inv_pref_what_the.html\" class=\"greybox\">Whats all this \"Invoice Preference\" stuff about?</a></td>
+                        <td colspan=2 align=center><a href=\"./documentation/text/inv_pref_what_the.html\" class=\"greybox\">Whats all this \"Invoice Preference\" stuff about?</a></td>
                 </tr>
 
                 </table>

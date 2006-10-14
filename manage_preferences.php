@@ -140,7 +140,7 @@ Nifty("div#header,div#footer","small");
 <br>
 <div id="container">
 <?php echo $display_block; ?>
-<div id="footer"><a href="text/inv_pref_what_the.html" class="greybox">Whats all this "Invoice Preference" stuff about?</a></div>
+<div id="footer"><a href="./documentation/text/inv_pref_what_the.html" class="greybox">Whats all this "Invoice Preference" stuff about?</a></div>
 </div>
 </div>
 

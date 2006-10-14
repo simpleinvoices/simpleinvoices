@@ -3,13 +3,13 @@
 include('./config/config.php');
 
 
-$fp = fopen( "gpl.html", "r" );
+$fp = fopen( "./documentation/gpl.html", "r" );
 if(!$fp)
 {
     echo "Couldn't open the data file. Try again later.";
     exit;
 }
-$filename ="gpl.html";
+$filename ="./documentation/gpl.html";
 $display_block = fread( $fp, filesize( $filename ) );
 ?>
 

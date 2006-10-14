@@ -1,15 +1,16 @@
 <?php
 
 include('./config/config.php');
+include("./lang/$language.inc.php");
 
 
-$fp = fopen( "ReadMe.html", "r" );
+$fp = fopen("./documentation/ReadMe.$language.html", "r" );
 if(!$fp)
 {
     echo "Couldn't open the data file. Try again later.";
     exit;
 }
-$filename ="ReadMe.html";
+$filename ="./documentation/ReadMe.$language.html";
 $display_block = fread( $fp, filesize( $filename ) );
 ?>
 

@@ -161,7 +161,7 @@ $mid->printFooter();
 		<td>Email</td><td><input type=text name="b_email" size=25></td>
 	</tr>
 	<tr>
-		<td>Logo file <a href="text/insert_biller_text.html" class="greybox">Note</a></td><td><?php echo $display_block_logo_list;?></td>
+		<td>Logo file <a href="./documentation/text/insert_biller_text.html" class="greybox">Note</a></td><td><?php echo $display_block_logo_list;?></td>
 	</tr>
 	<tr>
 		<td>Invoice footer</td><td><textarea input type=text name="b_co_footer"  rows=4 cols=50></textarea></td>

@@ -3,13 +3,13 @@
 include('./config/config.php');
 
 
-$fp = fopen( "ChangeLog.html", "r" );
+$fp = fopen( "./documentation/ChangeLog.html", "r" );
 if(!$fp)
 {
     echo "Couldn't open the data file. Try again later.";
     exit;
 }
-$filename ="ChangeLog.html";
+$filename ="./documentation/ChangeLog.html";
 $display_block = fread( $fp, filesize( $filename ) );
 ?>
 

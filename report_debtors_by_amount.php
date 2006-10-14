@@ -82,6 +82,6 @@ ORDER BY
 </div>
 </div>
 </div>
-<a href="text/reports_xsl.html" class="greybox"><font color="red">Got "OOOOPS, THERE'S AN ERROR HERE." error?</font></a>
+<a href="./documentation/text/reports_xsl.html" class="greybox"><font color="red">Got "OOOOPS, THERE'S AN ERROR HERE." error?</font></a>
 </body>
 </html>		

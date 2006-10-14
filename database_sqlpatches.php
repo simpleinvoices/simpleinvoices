@@ -231,7 +231,7 @@ else {
 
                 echo "<tr><td align=center><i>Database Upgrade Manager</i><tr><td><br>The list below describes which patches have and have not been applied to the database, the aim is to have them all applied.  If there are patches that have not been applied to the Simple Invoices database, please run the Update database by clicking update </td></tr><tr align=center><td><br><a href='?op=run_updates'>UPDATE</a></td></tr></table><br>
 
-<a href=\"text/text.html\" class=\"greybox\"><font color=\"red\">Warning:</font></a>
+<a href=\"./documentation/text/text.html\" class=\"greybox\"><font color=\"red\">Warning:</font></a>
 ";
 
 		echo "<div id='container'>

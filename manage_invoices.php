@@ -85,7 +85,7 @@ Nifty("div#header,div#footer","small");
 <br>
 <div id="container">
 <?php echo $display_block; ?>
-<div id="footer"><a href="text/manage_invoices.html" class="greybox">Whats all these different columns?</a></div>
+<div id="footer"><a href="./documentation/text/manage_invoices.html" class="greybox">Whats all these different columns?</a></div>
 </div>
 </div>
 
