@@ -2,6 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
+<?php include('./config/config.php'); ?>
 <?php include('./include/menu.php'); ?>
 <script type="text/javascript" src="niftycube.js"></script>
 <script type="text/javascript">
@@ -29,7 +30,6 @@ Nifty("div#header,div#footer","small");
 
 <title><?php echo $title; echo $mi_page_title; ?></title>
 </head>
-<?php include('./config/config.php'); ?>
 <body>
 <?php
 $mid->printMenu('hormenu1');

@@ -1,6 +1,6 @@
 <?php
-include('./include/menu.php');
 include('./config/config.php'); 
+include('./include/menu.php');
 include("./lang/$language.inc.php");
 
 /* validataion code */

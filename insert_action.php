@@ -1317,11 +1317,13 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 <html>
 <head>
 <HEAD>
+<?php include('./config/config.php'); ?>
 <?php include('./include/menu.php'); ?>
+<?php include("./lang/$language.inc.php"); ?>
+
 <?php echo isset( $refresh_total ) ? $refresh_total : '&nbsp'; ?>
 <title>Simple Invoices</title>
 </HEAD>
-<?php include('./config/config.php'); ?>
 
 <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
 <BODY>
