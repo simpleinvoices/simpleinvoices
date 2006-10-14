@@ -183,7 +183,7 @@ $mid->printFooter();
                         <div id="item23">
                                 <div class="mytitle"><?php echo $indx_manage_existing_invoice; ?></div>
                                 <div class="mycontent">
-                                        <a href="manage_invoices.php"><?php echo $indx_manage_invoice; ?></a><br/>
+                                        <a href="manage_invoices.php"><?php echo $indx_manage_invoices; ?></a><br/>
                                 </div>
                         </div>
 

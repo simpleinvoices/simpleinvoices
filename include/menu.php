@@ -16,7 +16,7 @@
  		$mid = new LayersMenu(6, 7, 2, 1);      // Gtk2-like 
  		//$mid->setDownArrowImg('down-arrow.png'); 
  		//$mid->setForwardArrowImg('forward-arrow.png'); 
- 		$mid->setMenuStructureFile('menu/layersmenu-horizontal-1.txt'); 
+ 		$mid->setMenuStructureFile('menu/menu_text.txt'); 
 $mid->setHorizontalMenuTpl('menu/templates/layersmenu-horizontal_menu-full.ihtml'); 
 $mid->setIconsize(16, 16); 
 $mid->parseStructureForMenu('hormenu1'); 

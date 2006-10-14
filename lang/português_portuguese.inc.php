@@ -22,7 +22,7 @@ $indx_invoice_itemised ="Itemised";
 $indx_invoice_consulting ="Consulting?";
 
 $indx_manage_existing_invoice ="Manage your existing invoices";
-$indx_manage_invoice ="Manage invoices";
+$indx_manage_invoices ="Manage invoices";
 
 $indx_manage_data ="Manage your data";
 $indx_insert_customer = "Add Customer";
