@@ -1,5 +1,4 @@
 <?php
-#table
 include('./config/config.php'); 
 include("./include/validation.php");
 include("./lang/$language.inc.php");

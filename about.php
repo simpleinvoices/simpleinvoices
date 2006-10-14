@@ -10,7 +10,7 @@ $display_block ="
 Simple Invoices:
 <br>Version: $version
 <br>Theme: $theme
-<br>Homepage: <a href='http://simpleinvoices.sf.net'>http://simpleinvoices.sf.net</a>
+<br>Homepage: <a href='http://www.simpleinvoices.org'>http://www.simpleinvoices.org</a>
 
 ";
 
