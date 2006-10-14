@@ -79,82 +79,13 @@ while ($Array3 = mysql_fetch_array($result3)) {
 
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
                 <title><?php echo $title; ?></title>
 
                 <script type="text/javascript" src="./include/jquery.js"></script>
-    <script type="text/javascript" src="./include/greybox.js"></script>
-     <script type="text/javascript">
-      var GB_ANIMATION = true;
-      $(document).ready(function(){
-        $("a.greybox").click(function(){
-          var t = this.title || $(this).text() || this.href;
-          GB_show(t,this.href,470,600);
-          return false;
-        });
-      });
-    </script>
-
                 <script type="text/javascript" src="./include/jquery-accordian.js"></script>
-
-
                 <style type="text/css">
-	/* Ajax Alter popup Greybox - start */
-	#GB_overlay {
-	  background-image: url(./images/overlay.png);
-	  position: absolute;
-	  margin: auto;
-	  top: 0;
-	  left: 0;
-	  z-index: 100;
-	  width:  100%;
-	  height: 100%;
-	}
-	
-	* html #GB_overlay {
-	  background-color: #000;
-	  background-color: transparent;
-	  background-image: url(./images/blank.gif);
-	  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="./images/overlay.png", sizingMethod="scale");
-	}
-	
-	#GB_window {
-	  top: 10px;
-	  left: 0px;
-	  position: absolute;
-	  background: #fff;
-	  border: 5px solid #aaa;
-	  overflow: auto;
-	  width: 400px;
-	  height: 400px;
-	  z-index: 150;
-	}
-	
-	#GB_frame {
-	  border: 0;
-	  overflow: auto;
-	  width: 100%;
-	  height: 378px;
-	}
-	
-	#GB_caption {
-	  font: 12px bold helvetica, verdana, sans-serif;
-	  color: #fff;
-	  background: #888;
-	  padding: 2px 0 2px 5px;
-	  margin: 0;
-	  text-align: left;
-	}
-	
-	#GB_window img {
-	  position: absolute;
-	  top: 2px;
-	  right: 5px;
-	  cursor: pointer;
-	  cursor: hand;
-	}
-	/*Greybox - alert popup - end */
-
 
 			/*The CSS code for the mina body of Simple Invoices - start*/
 			body{background:#F5F5F5 url('./themes/<?php echo $theme; ?>/images/gb_top.gif') repeat-x; color: #222; margin: 0;      padding: 0;}
@@ -278,9 +209,9 @@ $mid->printFooter();
                         <div id="item26">
                                 <div class="mytitle"><?php echo $indx_help; ?></div>
                                 <div class="mycontent">
-                                        <a href="inline_instructions.php#installation"><?php echo $indx_help_install; ?>Installation<br/></a>
+                                        <a href="inline_instructions.php#installation"><?php echo $indx_help_install; ?><br/></a>
                                         <a href="inline_instructions.php#upgrading"><?php echo $indx_help_upgrade; ?><br/></a>
-                                        <a href="inline_instructions.php#use"><?php echo $indx_help_prepare; ?><br/></a>
+                                        <a href="inline_instructions.php#prepare"><?php echo $indx_help_prepare; ?><br/></a>
                                 </div>
                         </div>
                 </div>

@@ -47,6 +47,7 @@ if (isset($_POST['txtUserId']) && isset($_POST['txtPassword'])) {
 ?>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Basic Login</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
    <link rel="stylesheet" href="./include/auth/kt-login.css" type="text/css" />

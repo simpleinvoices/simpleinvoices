@@ -293,7 +293,7 @@ else {
 ?>
 <html>
 <head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="text/javascript" src="./include/jquery.js"></script>
     <script type="text/javascript" src="./include/greybox.js"></script>
     <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css" media="all"/>

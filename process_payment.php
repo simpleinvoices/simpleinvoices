@@ -307,6 +307,8 @@ else if ($op === "pay_invoice_batch") {
 
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 <link rel="stylesheet" type="text/css" href="include/jquery-datePicker.css" title="default" media="screen" />
 <script type="text/javascript" src="include/jquery.js"></script>
 <script type="text/javascript" src="include/jquery-dom_creator.js"></script>

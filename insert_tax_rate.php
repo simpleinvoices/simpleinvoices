@@ -1,5 +1,6 @@
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php include('./include/menu.php'); ?>
 <script type="text/javascript" src="niftycube.js"></script>
 <script type="text/javascript">
@@ -11,8 +12,7 @@ Nifty("div#header,div#footer","small");
 }
 </script>
 
-<title> Simple Invoices - Tax rate to add
-</title>
+<title> Simple Invoices - Tax rate to add</title>
 <?php include('./config/config.php'); 
 include("./lang/$language.inc.php");
 include('./include/validation.php');

@@ -547,6 +547,7 @@ $display_block_bottom =  "
 ?>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php include('./include/menu.php'); ?>
     <script type="text/javascript" src="./include/jquery.js"></script>
     <script type="text/javascript" src="./include/greybox.js"></script>

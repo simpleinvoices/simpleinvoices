@@ -448,9 +448,8 @@ header("Expires: 0");
 ?>
 <html>
 <head>
-
-<title>Simple Invoices
-</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Simple Invoices</title>
 <body>
 
 <?php echo $display_block_top; ?>

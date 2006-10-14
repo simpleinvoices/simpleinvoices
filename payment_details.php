@@ -102,6 +102,7 @@ $display_block =  "
 ?>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php include('./include/menu.php'); ?>
 
 <script type="text/javascript" src="niftycube.js"></script>
@@ -112,8 +113,7 @@ Nifty("div#content,div#nav","same-height small");
 Nifty("div#header,div#footer","small");
 }
 </script>
-<title>Simple Invoices - Biller details
-</title>
+<title>Simple Invoices - Biller details</title>
 <?php include('./config/config.php'); ?>
 </head>
 <body>
