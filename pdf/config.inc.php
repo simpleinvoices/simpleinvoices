@@ -96,7 +96,7 @@ define('FPDF_PATH', HTML2PS_DIR.'/fpdf/');
 
 // Note that WRITER_TEMPDIR !REQUIRES! slash (or backslash) on the end (unless you want to get 
 // some files like tempPS_jvckxlvjl in your working directory).
-define('WRITER_TEMPDIR', HTML2PS_DIR.'/temp/');
+define('WRITER_TEMPDIR', HTML2PS_DIR.'/cache/');
 define('WRITER_FILE_PREFIX','PS_');
 
 // number of retries to generate unique filename in case we have had troubles with

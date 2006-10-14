@@ -11,7 +11,7 @@ print($content); die();
 // ouput an empty FPF file
 
 $outfdf  = fdf_create();
-$tmpname = tempnam('../temp',"FDF_");
+$tmpname = tempnam('/cache/',"FDF_");
 fdf_set_status($outfdf, "Thank you!");
 fdf_save($outfdf, $tmpname);
 fdf_close($outfdf);
