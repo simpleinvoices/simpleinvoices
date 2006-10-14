@@ -5,8 +5,6 @@ $title = "Facturas Simples";
 $wording_for_enabledField ="Enabled";
 $wording_for_disabledField ="Disabled";
 
-
-
 #Index.php - front page
 $indx_welcome ="Welcome to ";
 
@@ -38,6 +36,11 @@ $indx_options_inv_pref ="Invoice Preferences";
 $indx_options_payment_types ="Payment Types";
 $indx_options_upgrade ="Database Upgrade Manager";
 $indx_options_backup ="Backup Database";
+
+$indx_help ="Hilfe!!!";
+$indx_help_install ="Installation";
+$indx_help_upgrade ="Aktualisiere Simple Invoices";
+$indx_help_prepare ="Simple Invoices gebrauchsf&auml;hig machen";
 
 $indx_stats =" Quick stats";
 $indx_stats_debtor ="Largest debtor";
@@ -202,4 +205,5 @@ $pp_invoice_note ="Note";
 $pp_invoice_total_tax ="Total tax included";
 $pp_invoice_amount ="Amount";
 $pp_invoice_summary ="Summary";
+
 ?>

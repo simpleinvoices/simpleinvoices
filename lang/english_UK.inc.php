@@ -5,8 +5,6 @@ $title = "Simple Invoices";
 $wording_for_enabledField ="Enabled";
 $wording_for_disabledField ="Disabled";
 
-
-
 #Index.php - front page
 $indx_welcome ="Welcome to ";
 
@@ -48,7 +46,6 @@ $indx_stats =" Quick stats";
 $indx_stats_debtor ="Largest debtor";
 $indx_stats_customer ="Top Customer - by amount invoiced";
 $indx_stats_biller ="Top Biller - by amount invoiced";
-
 
 #Manage Invoices
 $mi_page_title = " - Manage Invoices";
@@ -208,4 +205,5 @@ $pp_invoice_note ="Note";
 $pp_invoice_total_tax ="Total tax included";
 $pp_invoice_amount ="Amount";
 $pp_invoice_summary ="Summary";
+
 ?>
