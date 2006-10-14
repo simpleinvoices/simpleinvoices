@@ -6,7 +6,7 @@ include('./include/menu.php');
 $conn = mysql_connect( $db_host, $db_user, $db_password );
 mysql_select_db( $db_name, $conn );
 
-
+#Largest debtor query - start
 $sql = "
 SELECT
         si_customers.c_id as ID,
@@ -30,6 +30,9 @@ $result = mysql_query($sql, $conn) or die(mysql_error());
 while ($Array = mysql_fetch_array($result)) {
         $largest_debtor = $Array['Customer'];
 };
+#Largest debtor query - end
+
+#Top customer query - start
 
 $sql2 = "
 SELECT
@@ -54,6 +57,9 @@ $result2 = mysql_query($sql2, $conn) or die(mysql_error());
 while ($Array2 = mysql_fetch_array($result2)) {
         $top_customer = $Array2['Customer'];
 };
+#Top customer query - end
+
+#Top biller query - start
 
 $sql3 = "
 SELECT
@@ -71,8 +77,7 @@ $result3 = mysql_query($sql3, $conn) or die(mysql_error());
 while ($Array3 = mysql_fetch_array($result3)) {
         $top_biller = $Array3['b_name'];
 };
-
-
+#Top biller query - start
 
 
 ?>
@@ -87,7 +92,7 @@ while ($Array3 = mysql_fetch_array($result3)) {
                 <script type="text/javascript" src="./include/jquery-accordian.js"></script>
                 <style type="text/css">
 
-			/*The CSS code for the mina body of Simple Invoices - start*/
+			/*The CSS code for the fronta page of Simple Invoices - start*/
 			body{background:#F5F5F5 url('./themes/<?php echo $theme; ?>/images/gb_top.gif') repeat-x; color: #222; margin: 0;      padding: 0;}
 
                         #list1 { width:48%;  position:absolute; top:15%; right:1em; }
@@ -107,6 +112,7 @@ while ($Array3 = mysql_fetch_array($result3)) {
 			a:active { text-decoration: none; }
 			a:hover {text-decoration: underline; color:  #ff0000; }
 
+			/*The CSS code for the fronta page of Simple Invoices - end*/
                 </style>
 
 </head>
@@ -215,17 +221,6 @@ $mid->printFooter();
                                 </div>
                         </div>
                 </div>
- 
-
-
-
 
 </BODY>
 </HTML>
-
-
-
-
-
-
-
