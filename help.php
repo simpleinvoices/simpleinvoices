@@ -8,7 +8,7 @@ $display_block ="
 <br>
 <br>
 For information regarding the setup,installation, and use of Simple Invoices please refer to the Instructions sub-menu in the Option menu. <br>
-<br>For other queries please refer to the Simple Invoices website <a href='http://simpleinvoices.sf.net'>http://simpleinvoices.sf.net</a> and the Simple Invoices google-group at <a href='http://groups.google.com/group/simpleinvoices'>http://groups.google.com/group/simpleinvoices</a>
+<br>For other queries please refer to the Simple Invoices website <a href='http://www.simpleinvoices.org'>http://www.simpleinvoices.org</a> and the Simple Invoices forum at <a href='http://www.simpleinvoices.org/forum'>http://www.simpleinvoices.org/forum</a>
 
 ";
 

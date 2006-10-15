@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="menu/layersmenu-demo.css" type="text/css"></link> 
  		<link rel="stylesheet" href="menu/layersmenu-gtk2.css" type="text/css"></link> 
  		 
  		<script language="JavaScript" type="text/javascript"> 
@@ -16,7 +15,7 @@
  		$mid = new LayersMenu(6, 7, 2, 1);      // Gtk2-like 
  		//$mid->setDownArrowImg('down-arrow.png'); 
  		//$mid->setForwardArrowImg('forward-arrow.png'); 
- 		$mid->setMenuStructureFile("lang/menu_text.$language.txt"); 
+ 		$mid->setMenuStructureFile("lang/$language.menu_text.txt"); 
 $mid->setHorizontalMenuTpl('menu/templates/layersmenu-horizontal_menu-full.ihtml'); 
 $mid->setIconsize(16, 16); 
 $mid->parseStructureForMenu('hormenu1'); 

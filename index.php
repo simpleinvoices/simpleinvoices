@@ -117,11 +117,12 @@ while ($Array3 = mysql_fetch_array($result3)) {
 
 </head>
 <BODY>
+
 <?php
 $mid->printMenu('hormenu1');
 $mid->printFooter();
 ?>
-<!-- <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css"> -->
+
 <br>
 
 

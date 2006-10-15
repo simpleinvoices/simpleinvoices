@@ -37,9 +37,11 @@
 						</ul>
 					<li>For Reports to work your PHP needs:
 						<ul>
-							<li>xsl support
+							<li>xsl support (in PHP5)
+							<li>xslt support (in PHP4)
 						</ul>
 				</ul>
+			<li>The cache/ directory in the Simple Invoices folder must be writeable by all (ie chmod -Rv 777 cache) 
 		</ul>
 	</ul>
 	<ul>
@@ -83,9 +85,10 @@
 					<li>For 'Export to PDF' to work there are two modifcation that needs to be made to your system:
 					<li>The first step is to make the pdf exports directory writeable by the webserver
 						<ul>
-							<li>To do this the pdf/cachce directory in your Simple Invoices folder must be writeable, in unix cd to the Simple Invoices directory (<i>cd /var/www/html/simpleinvoices</i>) and chmod the pdf/cache directory to 777 (<i>chmod -Rv 777 pdf/cache</i>), in windows just browse to the pdf/cache folder and make sure its writeable by all users.
+							<li>To do this the cachce directory in your Simple Invoices folder must be writeable, in unix cd to the Simple Invoices directory (<i>cd /var/www/html/simpleinvoices</i>) and chmod the cache directory to 777 (<i>chmod -Rv 777 cache</i>), in windows just browse to the cache folder and make sure its writeable by all users.
+							<li>We also need to make the pdf fonts directory writeable. To do this in unix chmod the pdf/fpdf directory to 777 (<i>chmod -Rv 777 pdf/fpdf/*</i>), in windows just browse to the fdpf folder(in the pdf folder) and make sure its writeable by all users.
 						</ul>
-					<li><i>gd2</i> Once this pdf/cache folder has been made writeable the next step is to test if version of PHP has GD2 support
+					<li><i>gd2</i> Once this cache folder has been made writeable the next step is to test if version of PHP has GD2 support
 						<ul>
 							<li>GD2 is an extension to PHP which enables PHP to create and manipulate image files in a variety of different image formats
 							<li>To test if your version of PHP has GD2 support open up your internet browser and browse inside Siple Invoice folder to the <a href="phpinfo.php">phpinfo.php</a> file (<i>http://localhost/simpleinvoices/phpinfo.php</i>)

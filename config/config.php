@@ -19,7 +19,7 @@ $theme = "google";
 #$theme = "train101";
 #$theme = "3000k";
 
-$version = "20060920 stable";
+$version = "20061015 stable";
 
 $config['date_format']  = 'Y-m-d'; #International format just the date
 #$config['date_format']  = 'Y-m-d h:m'; #Internalional format date and time 
