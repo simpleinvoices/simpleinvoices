@@ -2,9 +2,9 @@
 .|Rechnungen|./manage_invoices.php
 ..|Rechnungen verwalten|./manage_invoices.php
 ..|---
-..|Neue Rechnung - Einzeln|./invoice_itemised.php
-..|Neue Rechnung - Total|./invoice_total.php
-..|Neue Rechnung - Einzeln+|./invoice_consulting.php
+..|Neue Rechnung - Artikelauflistung|./invoice_itemised.php
+..|Neue Rechnung - Freitext|./invoice_total.php
+..|Neue Rechnung - Detail. Artikelauflistung|./invoice_consulting.php
 .|Kunden|./manage_customers.php
 ..|Kunden anlegen|./insert_customer.php
 ..|---
@@ -70,8 +70,8 @@
 ...|Zahlungseingangsarten verwalten|./manage_payment_types.php
 ...|Zahlungseingangsart anlegen|./insert_payment_type.php
 ..|---
-..|Database Upgrade Manager|./database_sqlpatches.php
-..|Backup Database|./backup_database.php
+..|Datenbank Upgrade-Manager|./database_sqlpatches.php
+..|Datenbank sichern|./backup_database.php
 ..|Sanity check of invoices|./sanity_check.php
 ..|---
 ..|Hilfe|inline_instructions.php
