@@ -206,4 +206,25 @@ $pp_invoice_total_tax ="MWSt (16 %)";
 $pp_invoice_amount ="Rechnungsbetrag";
 $pp_invoice_summary ="Summe";
 
+#New invoice
+$lang_biller = "Biller";
+$lang_customer = "Customer";
+$lang_date= "date";
+$lang_description = "Description";
+$lang_inv = "Invoice";
+$lang_inv_total = " - Total";
+$lang_inv_itemised = " - Itemised";
+$lang_inv_consulting = " - Consulting";
+$lang_inv_pref = "Invoice Preference";
+$lang_item = "Item";
+$lang_gross_total = "Gross Total";
+$lang_mandatory_fields = "All fields are mandatory";
+$lang_notes = "Notes";
+$lang_notes_opt = "Notes (optional)";
+$lang_number_short = "No.";
+$lang_save = "Save";
+$lang_tax = "Tax";
+$lang_quantity = "Quantity";
+$lang_quantity_short = "Qty";
+
 ?>
