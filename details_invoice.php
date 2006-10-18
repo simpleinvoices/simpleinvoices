@@ -64,7 +64,7 @@ while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
 
 #CUSTOMER drop down list - start
 	#customer
-	$sql_customer = "SELECT * FROM si_customers where c_enabled != 0";
+	$sql_customer = "SELECT * FROM si_customers where c_enabled != 0 ORDER BY c_name";
 	$result_customer = mysql_query($sql_customer, $conn) or die(mysql_error());
 
 	#selected customer name query
@@ -79,7 +79,7 @@ while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
 
 	if (mysql_num_rows($result_customer) == 0) {
 	        //no records
-	        $display_block_customer = "<p><em>Sorry, no biller available, please insert one</em></p>";
+	        $display_block_customer = "<p><em>Sorry, no customers available, please insert one</em></p>";
 
 	} else {
 	        //has records, so display them
@@ -100,7 +100,7 @@ while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
 
 #BILLER drop down list -start
 	#biller query
-	$sql_biller = "SELECT * FROM si_biller where b_enabled != 0";
+	$sql_biller = "SELECT * FROM si_biller where b_enabled != 0 ORDER BY b_name";
 	$result_biller = mysql_query($sql_biller, $conn) or die(mysql_error());
 
 	#Get the names of the selected biller -start
@@ -135,7 +135,7 @@ while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
 
 #TAX drop down list - start
 	#tax query
-	$sql_tax = "SELECT * FROM si_tax where tax_enabled != 0";
+	$sql_tax = "SELECT * FROM si_tax where tax_enabled != 0 ORDER BY tax_description";
 	$result_tax = mysql_query($sql_tax, $conn) or die(mysql_error());
 
 	#default tax description query
@@ -169,7 +169,7 @@ while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
 
 #PREFERENCE drop down list - start
 	#invoice preference query
-	$sql_preferences = "SELECT * FROM si_preferences where pref_enabled != 0";
+	$sql_preferences = "SELECT * FROM si_preferences where pref_enabled != 0 ORDER BY pref_description";
 	$result_preferences = mysql_query($sql_preferences, $conn) or die(mysql_error());
 
 	#default invoice preference description query
@@ -384,7 +384,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 
 	
 	#product query - for all the other ones
-        $sql_products = "SELECT * FROM si_products where prod_enabled != 0";
+        $sql_products = "SELECT * FROM si_products where prod_enabled != 0 ORDER BY prod_description";
         $result_products = mysql_query($sql_products, $conn) or die(mysql_error());
 
 	if (mysql_num_rows($result_products) == 0) {

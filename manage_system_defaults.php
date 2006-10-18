@@ -141,7 +141,7 @@ else if ($_GET[submit] == "biller") {
 	}
 	
 	#biller query
-	$sql = "SELECT * FROM si_biller where b_enabled != 0";
+	$sql = "SELECT * FROM si_biller where b_enabled != 0 ORDER BY b_name";
 	$result = mysql_query($sql, $conn) or die(mysql_error());
 
 	#biller selector
@@ -198,7 +198,7 @@ else if ($_GET[submit] == "customer") {
 	}
 
 	#customer
-	$sql_customer = "SELECT * FROM si_customers where c_enabled != 0";
+	$sql_customer = "SELECT * FROM si_customers where c_enabled != 0 ORDER BY c_name";
 	$result_customer = mysql_query($sql_customer, $conn) or die(mysql_error());
 
 
@@ -254,7 +254,7 @@ else if ($_GET[submit] == "tax") {
 
 
 	#tax query
-	$sql_tax = "SELECT * FROM si_tax where tax_enabled != 0";
+	$sql_tax = "SELECT * FROM si_tax where tax_enabled != 0 ORDER BY tax_description";
 	$result_tax = mysql_query($sql_tax, $conn) or die(mysql_error());
 
 
@@ -310,7 +310,7 @@ else if ($_GET[submit] == "inv_preference") {
 
 
 	#invoice preference query
-	$sql_preferences = "SELECT * FROM si_preferences where pref_enabled != 0";
+	$sql_preferences = "SELECT * FROM si_preferences where pref_enabled != 0 ORDER BY pref_description";
 	$result_preferences = mysql_query($sql_preferences, $conn) or die(mysql_error());
 
 
@@ -366,7 +366,7 @@ else if ($_GET[submit] == "def_payment_type") {
 
 
         #payment type query
-        $sql_payment_type = "SELECT * FROM si_payment_types where pt_enabled != 0";
+        $sql_payment_type = "SELECT * FROM si_payment_types where pt_enabled != 0 ORDER BY pt_description";
         $result_payment_type = mysql_query($sql_payment_type, $conn) or die(mysql_error());
 
 

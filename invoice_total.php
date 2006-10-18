@@ -20,20 +20,20 @@ $conn = mysql_connect("$db_host","$db_user","$db_password");
 mysql_select_db("$db_name",$conn);
 
 #biller query
-$sql = "SELECT * FROM si_biller where b_enabled != 0";
+$sql = "SELECT * FROM si_biller where b_enabled != 0 ORDER BY b_name";
 $result = mysql_query($sql, $conn) or die(mysql_error());
 
 #customer
-$sql_customer = "SELECT * FROM si_customers where c_enabled != 0";
+$sql_customer = "SELECT * FROM si_customers where c_enabled != 0 ORDER BY c_name";
 $result_customer = mysql_query($sql_customer, $conn) or die(mysql_error());
 
 
 #tax query
-$sql_tax = "SELECT * FROM si_tax where tax_enabled != 0";
+$sql_tax = "SELECT * FROM si_tax where tax_enabled != 0 ORDER BY tax_description";
 $result_tax = mysql_query($sql_tax, $conn) or die(mysql_error());
 
 #invoice preference query
-$sql_preferences = "SELECT * FROM si_preferences where pref_enabled != 0";
+$sql_preferences = "SELECT * FROM si_preferences where pref_enabled != 0 ORDER BY pref_description";
 $result_preferences = mysql_query($sql_preferences, $conn) or die(mysql_error());
 
 #DEFAULTS

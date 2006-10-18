@@ -94,7 +94,7 @@ while ($billerArray = mysql_fetch_array($result_print_biller)) {
 };
 
 #biller query
-$sql = "SELECT * FROM si_payment_types where pt_enabled != 0";
+$sql = "SELECT * FROM si_payment_types where pt_enabled != 0 ORDER BY pt_description";
 $result = mysql_query($sql, $conn) or die(mysql_error());
 
 
