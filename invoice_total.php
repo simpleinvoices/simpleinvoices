@@ -1,6 +1,6 @@
 <?php
 include('./config/config.php'); 
-
+include("./lang/$language.inc.php");
 include("./include/validation.php");
 
 jsBegin();
@@ -105,7 +105,7 @@ while ($Array_inv_preference = mysql_fetch_array($result_inv_preference)) {
 
 if (mysql_num_rows($result) == 0) {
         //no records
-        $display_block = "<p><em>Sorry, no biller available, please insert one</em></p>";
+        $display_block = "<p><em>$mb_no_invoices</em></p>";
 
 } else {
         //has records, so display them
@@ -127,7 +127,7 @@ if (mysql_num_rows($result) == 0) {
 
 if (mysql_num_rows($result_customer) == 0) {
         //no records
-        $display_block_customer = "<p><em>Sorry, no biller available, please insert one</em></p>";
+        $display_block_customer = "<p><em>$mc_no_invoices</em></p>";
 
 } else {
         //has records, so display them
@@ -150,7 +150,7 @@ if (mysql_num_rows($result_customer) == 0) {
 
 if (mysql_num_rows($result_tax) == 0) {
         //no records
-        $display_block_tax = "<p><em>Sorry, no tax available, please insert one</em></p>";
+        $display_block_tax = "<p><em>$mtr_no_invoices</em></p>";
 
 } else {
         //has records, so display them
@@ -172,7 +172,7 @@ if (mysql_num_rows($result_tax) == 0) {
 
 if (mysql_num_rows($result_preferences) == 0) {
         //no records
-        $display_block_preferences = "<p><em>Sorry, no invoice preferences available, please insert one</em></p>";
+        $display_block_preferences = "<p><em>$mip_no_invoices</em></p>";
 
 } else {
         //has records, so display them
@@ -225,8 +225,7 @@ mode : "textareas",
 });
 </script>
 
-<title>Simple Invoices - Invoice total
-</title>
+<title><?php echo $title; echo " :: "; echo $lang_inv; echo $lang_inv_total; ?></title>
 
 <?php include('./config/config.php'); ?>
 </head>
@@ -247,7 +246,7 @@ $mid->printFooter();
 <table width=100% align=center>
 
 <tr>
-<td colspan=2 align=center><b>Invoice - total</b></th>
+<td colspan=2 align=center><b><?php echo $lang_inv; echo $lang_inv_total; ?></b></th>
 </tr>
 </table>
 
@@ -256,26 +255,26 @@ $mid->printFooter();
 
 <table  align=center>
 <tr>
-<td>Biller Name</th><td input type=text name="biller_block" size=25><?php echo $display_block; ?></td>
+<td><?php echo $mb_table_biller_name; ?></th><td input type=text name="biller_block" size=25><?php echo $display_block; ?></td>
 
 </tr>
 </tr>
 
 <tr>
-<td>Customer Name</th><td input type=text name="customer_block" size=25><?php echo $display_block_customer; ?></td>
+<td><?php echo $mc_table_customer_name; ?></th><td input type=text name="customer_block" size=25><?php echo $display_block_customer; ?></td>
 
 
 
 </tr>
 
 <tr>
-	<td colspan=5>Description</td>
+	<td colspan=5><?php echo $lang_description;?></td>
 </tr>
 <tr>
 	<td colspan=5 ><textarea input type=text name="i_description" rows=10 cols=100 WRAP=hard></textarea></td>
 </tr>
 <tr>
-	<td>Gross Total</td><td>Tax</td><td>Invoice Preference</td>
+	<td><?php echo $lang_gross_total;?></td><td><?php echo $lang_tax;?></td><td><?php echo $lang_inv_pref;?></td>
 </tr>
 <tr>
 	<td><input type=text name="inv_it_gross_total" size=15></td><td input type=text name="inv_it_tax" size=15><?php echo $display_block_tax; ?></td><td input type=text name="inv_preferences" size=25><?php echo $display_block_preferences; ?></td>
@@ -285,7 +284,7 @@ $mid->printFooter();
 </div>
 
 <div id="footer">
-<p><input type=submit name="submit" value="Save Invoice"><input type=hidden name="invoice_style" value="insert_invoice_total"> *All fields are mandatory</p>
+	<input type=submit name="submit" value="<?php echo $lang_save;echo " "; echo $lang_inv;?>"><input type=hidden name="invoice_style" value="insert_invoice_total"> * <?php echo $lang_mandatory_fields;?>
 </div>
 </div>
 

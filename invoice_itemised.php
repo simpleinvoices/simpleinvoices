@@ -1,6 +1,7 @@
 <?php
 
 include('./config/config.php');
+include("./lang/$language.inc.php");
 include("./include/validation.php");
 
 jsBegin();
@@ -95,7 +96,7 @@ while ($Array_inv_preference = mysql_fetch_array($result_inv_preference)) {
 
 if (mysql_num_rows($result) == 0) {
         //no records
-        $display_block = "<p><em>Sorry, no biller available, please insert one</em></p>";
+        $display_block = "<p><em>$mb_no_invoices</em></p>";
 
 } else {
         //has records, so display them
@@ -117,7 +118,7 @@ if (mysql_num_rows($result) == 0) {
 
 if (mysql_num_rows($result_customer) == 0) {
         //no records
-        $display_block_customer = "<p><em>Sorry, no biller available, please insert one</em></p>";
+        $display_block_customer = "<p><em$mc_no_invoices</em></p>";
 
 } else {
         //has records, so display them
@@ -146,7 +147,7 @@ function line_items($line) {
 
 if (mysql_num_rows($result_products) == 0) {
         //no records
-        $display_block_products = "<p><em>Sorry, no items available, please insert one</em></p>";
+        $display_block_products = "<p><em>$mp_no_invoices</em></p>";
 
 } else {
         //has records, so display them
@@ -171,7 +172,7 @@ if (mysql_num_rows($result_products) == 0) {
 
 if (mysql_num_rows($result_tax) == 0) {
         //no records
-        $display_block_tax = "<p><em>Sorry, no tax available, please insert one</em></p>";
+        $display_block_tax = "<p><em>$mtr_no_invoices</em></p>";
 
 } else {
         //has records, so display them
@@ -195,7 +196,7 @@ if (mysql_num_rows($result_tax) == 0) {
 
 if (mysql_num_rows($result_preferences) == 0) {
         //no records
-        $display_block_preferences = "<p><em>Sorry, no invoice preferences available, please insert one</em></p>";
+        $display_block_preferences = "<p><em>$mip_no_invoices</em></p>";
 
 } else {
         //has records, so display them
@@ -251,8 +252,7 @@ mode : "textareas",
 
 </head>
 
-<title>Simple Invoices - Invoice itemised
-</title>
+	<title><?php echo $title; echo " :: "; echo $lang_inv; echo $lang_inv_itemised; ?></title>
 <?php include('./config/config.php'); ?>
 
 <BODY>
@@ -270,7 +270,7 @@ $mid->printFooter();
 
 <table align=center>
 	<tr>
-		<td colspan=2 align=center><b>Invoice - itemised</b></td>
+		<td colspan=2 align=center><b><?php echo $lang_inv; echo $lang_inv_itemised; ?></b></td>
 	</tr>
 
 </table>
@@ -282,7 +282,7 @@ $mid->printFooter();
 
 
 <tr>
-<td>Biller Name</th><td input type=text name="biller_block" size=25><?php echo $display_block; ?></td>
+<td><?php echo $mb_table_biller_name; ?></th><td input type=text name="biller_block" size=25><?php echo $display_block; ?></td>
 
 </tr>
 </tr>
@@ -290,14 +290,14 @@ $mid->printFooter();
 
 
 <tr>
-<td>Customer Name</th><td input type=text name="customer_block" size=25 ><?php echo $display_block_customer; ?></td>
+<td><?php echo $mc_table_customer_name; ?></th><td input type=text name="customer_block" size=25 ><?php echo $display_block_customer; ?></td>
 
 
 
 </tr>
 
 <tr>
-<td>Quantity</td><td>Description</td>
+<td><?php echo $lang_quantity;?></td><td><?php echo $lang_description;?></td>
 </tr>
 <?php
 /* check the def number of line items and do the print and entry field for that number of items */
@@ -320,7 +320,7 @@ $mid->printFooter();
                         endwhile;
 ?>
 <tr>
-        <td>Notes (optional)</td>
+        <td><?php echo $lang_notes_opt;?></td>
 </tr>
 
 <tr>
@@ -328,11 +328,11 @@ $mid->printFooter();
 </tr>
 
 
-<tr><td>Tax</td><td input type=text name="inv_it_tax" size=15> <?php echo $display_block_tax; ?></td>
+<tr><td><?php echo $lang_tax;?></td><td input type=text name="inv_it_tax" size=15> <?php echo $display_block_tax; ?></td>
 </tr>
 
 <tr>
-<td>Invoice Preference</td><td input type=text name="inv_preferences"><?php echo $display_block_preferences; ?></td>
+<td><?php echo $lang_inv_pref;?></td><td input type=text name="inv_preferences"><?php echo $display_block_preferences; ?></td>
 </tr>
 <!--Add more line items while in an itemeised invoice - Get style - has problems- wipes the current values of the existing rows - not good
 <tr>
@@ -344,20 +344,13 @@ $mid->printFooter();
 </div>
 
 <div id="footer">
-	<p>
+	
 		<input type=hidden name="max_items" value="<?php echo $num; ?>">
-		<input type=submit name="submit" value="Save Invoice">
+		<input type=submit name="submit" value="<?php echo $lang_save;echo " "; echo $lang_inv;?>">
 		<input type=hidden name="invoice_style" value="insert_invoice_itemised">
-		*All fields are mandatory</p>
+		* <?php echo $lang_mandatory_fields;?>
 </div>
 
 </FORM>
 </BODY>
 </HTML>
-
-
-
-
-
-
-

@@ -79,11 +79,11 @@ $mi_action_invoice_consulting = "Add new Invoice - Consulting style";
 #Manage Products
 $mp_page_title = " - Manage Products";
 $mp_page_header = "Manage Products";
-$mp_no_invoices = "There are no products in the database";
+$mp_no_invoices = "There are no products in the database, please add one";
 $mp_table_action = "Action";
 $mp_table_product_id = "Product ID";
 $mp_table_product_desc = "Products description";
-$mp_table_unit_price = "Unit price";
+$mp_table_unit_price = "Unit Price";
 $mp_actions_view = "View";
 $mp_actions_edit = "Edit";
 $mp_actions_new_product = "Add New Product";
@@ -91,10 +91,10 @@ $mp_actions_new_product = "Add New Product";
 #Manage Billers
 $mb_page_title = " - Manage Billers";
 $mb_page_header = "Manage Billers";
-$mb_no_invoices = "There are no billers in the database";
+$mb_no_invoices = "There are no billers in the database, please add one";
 $mb_table_action = "Action";
 $mb_table_biller_id = "Biller ID";
-$mb_table_biller_name = "Biller name";
+$mb_table_biller_name = "Biller Name";
 $mb_table_phone = "Phone";
 $mb_table_mobile_phone = "Mobile Phone";
 $mb_table_email = "Email";
@@ -105,10 +105,10 @@ $mb_actions_new_biller = "Add New Biller";
 #Manage Customers
 $mc_page_title = " - Manage Customers";
 $mc_page_header = "Manage Customers";
-$mc_no_invoices = "There are no customers in the database";
+$mc_no_invoices = "There are no customers in the database, please add one";
 $mc_table_action = "Action";
 $mc_table_customer_id = "Customer ID";
-$mc_table_customer_name = "Customer name";
+$mc_table_customer_name = "Customer Name";
 $mc_table_attention = "Attention";
 $mc_table_phone = "Phone";
 $mc_table_email = "Email";
@@ -119,7 +119,7 @@ $mc_actions_new_product = "Add New Customer";
 #Manage Preferences
 $mip_page_title = " - Manage Preferences";
 $mip_page_header = "Manage Preferences";
-$mip_no_invoices = "There are no preferences in the database";
+$mip_no_invoices = "There are no invoice preferences in the database, please add one";
 $mip_table_action = "Action";
 $mip_table_preference_id = "Preference ID";
 $mip_table_description = "Description";
@@ -164,7 +164,7 @@ $map_payments_filtered_customer = "Payments filtered by Customer ID";
 #Manage Tax Rate
 $mtr_page_title = " - Manage Tax Rates";
 $mtr_page_header = "Manage Tax Rates";
-$mtr_no_invoices = "There are no tax rates in the database";
+$mtr_no_invoices = "There are no tax rates in the database, please add one";
 $mtr_table_action = "Action";
 $mtr_table_tax_id = "Tax ID";
 $mtr_table_tac_desc = "Tax description";
@@ -205,5 +205,26 @@ $pp_invoice_note ="Note";
 $pp_invoice_total_tax ="Total tax included";
 $pp_invoice_amount ="Amount";
 $pp_invoice_summary ="Summary";
+
+#New invoice
+$lang_biller = "Biller";
+$lang_customer = "Customer";
+$lang_date= "date";
+$lang_description = "Description";
+$lang_inv = "Invoice";
+$lang_inv_total = " - Total";
+$lang_inv_itemised = " - Itemised";
+$lang_inv_consulting = " - Consulting";
+$lang_inv_pref = "Invoice Preference";
+$lang_item = "Item";
+$lang_gross_total = "Gross Total";
+$lang_mandatory_fields = "All fields are mandatory";
+$lang_notes = "Notes";
+$lang_notes_opt = "Notes (optional)";
+$lang_number_short = "No.";
+$lang_save = "Save";
+$lang_tax = "Tax";
+$lang_quantity = "Quantity";
+$lang_quantity_short = "Qty";
 
 ?>
