@@ -175,17 +175,17 @@ $display_block_top =  "
 	<div id=\"subheader\">
 	<table align=center>
 	<tr>
-		<td class=account colspan=8>Account Info</td><td width=5%></td><td width=5%></td><td class=account colspan=6><a href='customer_details.php?submit=$c_idField&action=view'>Customer acc</a></td>
+		<td class=account colspan=8>$lang_account_info</td><td width=5%></td><td width=5%></td><td class=account colspan=6><a href='customer_details.php?submit=$c_idField&action=view'>$lang_customer_account</a></td>
 	</tr>
 	<tr>
-		<td class=account>Total:</td><td class=account>$pref_currency_signField$invoice_total_Field</td>              
-		<td class=account><a href='manage_payments.php?inv_id=$inv_idField'>Paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field</td>
-		<td class=account>Owing:</td><td class=account><u>$pref_currency_signField$invoice_owing_Field</u></td>
-		<td class=account><a href='text/age.html' class=\"greybox\">Age:</a></td><td class=account nowrap >$invoice_age</td>
+		<td class=account>$lang_total:</td><td class=account>$pref_currency_signField$invoice_total_Field</td>              
+		<td class=account><a href='manage_payments.php?inv_id=$inv_idField'>$lang_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field</td>
+		<td class=account>$lang_owing:</td><td class=account><u>$pref_currency_signField$invoice_owing_Field</u></td>
+		<td class=account><a href='text/age.html' class=\"greybox\">$lang_age:</a></td><td class=account nowrap >$invoice_age</td>
 		<td></td><td></td>
-		<td class=account>Total:</td><td class=account>$pref_currency_signField$invoice_total_Field_customer</td>
-		<td class=account><a href='manage_payments.php?c_id=$c_idField'>Paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field_customer</td>
-		<td class=account>Owing:</td><td class=account><u>$pref_currency_signField$invoice_owing_Field_customer</u></td>
+		<td class=account>$lang_total:</td><td class=account>$pref_currency_signField$invoice_total_Field_customer</td>
+		<td class=account><a href='manage_payments.php?c_id=$c_idField'>$lang_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field_customer</td>
+		<td class=account>$lang_owing:</td><td class=account><u>$pref_currency_signField$invoice_owing_Field_customer</u></td>
 	</tr>
 	</table>
 	</div id=\"subheader\">
@@ -203,29 +203,29 @@ $display_block_top =  "
 		<td><b>$b_nameField</b></td><td colspan=5></td>
 	</tr>
 	<tr>
-		<td>$b_street_addressField,</td><td>Ph: $b_phoneField</td><td></td><td><b>$pref_inv_wordingField No.</b></td><td>$inv_idField</td><td></td>
+		<td>$b_street_addressField,</td><td>$lang_phone_short: $b_phoneField</td><td></td><td><b>$pref_inv_wordingField $lang_number_short</b></td><td>$inv_idField</td><td></td>
 	</tr>	
 	<tr>
-		<td>$b_cityField,</td><td>Mob.: $b_mobile_phoneField</td><td></td><td><b>$pref_inv_wordingField date</b></td><td colspan=2>$inv_dateField</td>
+		<td>$b_cityField,</td><td>$lang_mobile_short: $b_mobile_phoneField</td><td></td><td><b>$pref_inv_wordingField date</b></td><td colspan=2>$inv_dateField</td>
 	</tr>	
 	<tr>
-		<td>$b_stateField, $b_zip_codeField</td><td>Fax: $b_faxField</td><td colspan=4></td>
+		<td>$b_stateField, $b_zip_codeField</td><td>$lang_fax: $b_faxField</td><td colspan=4></td>
 	</tr>	
 	<tr>
-		<td>$b_countryField</td><td>Email: $b_emailField</td>
+		<td>$b_countryField</td><td>$lang_email: $b_emailField</td>
 	</tr>	
 	<tr>
 		<td colspan=5><br><br></td>
 	</tr>	
 	<tr>
-		<td><i>Customer</i></td><td></td>
+		<td><i>$lang_customer</i></td><td></td>
 	</tr>	
 
 	<tr>
 		<td colspan=2>$c_nameField</td><td colspan=4></td>
 	</tr>
 	<tr>
-		<td colspan=6 align=left>Attn: $c_attentionField,</td>
+		<td colspan=6 align=left>$lang_attention_short: $c_attentionField,</td>
 	</tr>
 
 	<tr>
@@ -297,7 +297,7 @@ if (  $_GET['invoice_style'] === 'Total' ) {
 	                <td colspan=6><br><br></td>
         	</tr>
 	        <tr>
-        	        <td colspan=6><b>Description</b></td>
+        	        <td colspan=6><b>$lang_description</b></td>
 	        </tr>
 	        <tr>
 	                <td colspan=6>$inv_it_descriptionField</td>
@@ -306,7 +306,7 @@ if (  $_GET['invoice_style'] === 'Total' ) {
         	        <td colspan=6><br></td>
 	        </tr>
 	        <tr>
-	                <td></td><td><ttd><td></td><td><b>Gross Total</b></td><td><b>Tax</b></td><td><b>TOTAL</b></td>
+	                <td></td><td><td><td></td><td><b>$lang_gross_total</b></td><td><b>$lang_tax</b></td><td><b>$lang_total_uppercase</b></td>
         	</tr>
 	        <tr>
         	        <td></td><td></td><td></td><td>$pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td><u>$pref_currency_signField$inv_it_totalField</u></td>
@@ -340,7 +340,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 		<td colspan=6>
 		<table>
 		<tr>
-        	        <td><b>Qty</b></td><td><b>Description</b></td><td><b>Unit Price</b><td><b>Gross Total</b></td><td><b>Tax</b></td><td><b>TOTAL</b></td>
+        	        <td><b>$lang_quantity_short</b></td><td><b>$lang_description</b></td><td><b>$lang_unit_price</b><td><b>$lang_gross_total</b></td><td><b>$lang_tax</b></td><td><b>$lang_total_uppercase</b></td>
 	        </tr>";
 	}
 	#show column heading for consulting style
@@ -350,7 +350,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 		<td colspan=6>
 		<table>
                 <tr>
-                        <td><b>Qty</b></td><td><b>Item</b></td><td><b>Description</b></td><td><b>Unit Price</b><td><b>Gross Total</b></td><td><b>Tax</b></td><td><b>TOTAL</b></td>
+                        <td><b>$lang_quantity_short</b></td><td><b>$lang_item</b></td><td><b>$lang_description</b></td><td><b>$lang_unit_price</b><td><b>$lang_gross_total</b></td><td><b>$lang_tax</b></td><td><b>$lang_total_uppercase</b></td>
                 </tr>";
         }
 
@@ -481,7 +481,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 				<td></td>
 			</tr>
 			<tr>
-				<td><i>Note:</i></td>
+				<td><i>$lang_notes:</i></td>
 			</tr>
 			<tr>
 				<td>$stripped_itemised_note</td>
@@ -495,7 +495,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 	$display_block_details .=  "
 	<!--
         <tr>
-                <td colspan=3 align=left>Totals</td><td>$pref_currency_signField$invoice_total_taxField</td><td><u>$pref_currency_signField$invoice_total_taxField</u></td><td><u>$pref_currency_signField$invoice_total_totalField</u></td>
+                <td colspan=3 align=left>$lang_totals</td><td>$pref_currency_signField$invoice_total_taxField</td><td><u>$pref_currency_signField$invoice_total_taxField</u></td><td><u>$pref_currency_signField$invoice_total_totalField</u></td>
 
         </tr>
 	-->
@@ -504,12 +504,12 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 	</tr>	
 
         <tr>
-                <td colspan=3></td><td align=left colspan=2>Total tax included</td><td colspan=2 align=right>$pref_currency_signField$invoice_total_taxField</td>
+                <td colspan=3></td><td align=left colspan=2>$lang_total $lang_tax $lang_included</td><td colspan=2 align=right>$pref_currency_signField$invoice_total_taxField</td>
         </tr>
 	<tr><td><br></td>
 	</tr>
         <tr>
-                <td colspan=3></td><td align=left colspan=2><b>$pref_inv_wordingField Amount</b></td><td colspan=2 align=right><u>$pref_currency_signField$invoice_total_totalField</u></td>
+                <td colspan=3></td><td align=left colspan=2><b>$pref_inv_wordingField $lang_amount</b></td><td colspan=2 align=right><u>$pref_currency_signField$invoice_total_totalField</u></td>
         </tr>
 
 
@@ -574,8 +574,7 @@ Nifty("div#header,div#footer","small");
 }
 </script>
 
-<title>Simple Invoices
-</title>
+	<title><?php echo $title; ?></title>
 <?php include('./config/config.php'); ?> 
 <body>
 <?php
@@ -586,7 +585,7 @@ $mid->printFooter();
 <br>
 <div id="container">
 <div id="header">
-This is a Quick View of <?php echo $pref_inv_wordingField; ?> <?php echo $master_invoice_id; ?>
+<?php echo $lang_quick_view_of; echo " "; echo $pref_inv_wordingField; ?> <?php echo $master_invoice_id; ?>
 <br>
 	<?php 
 	$url_pdf = "$_SERVER[HTTP_HOST]$install_path/invoice_templates/$def_inv_templateField?submit=$inv_idField&action=view&invoice_style=$inv_ty_descriptionField";
@@ -595,8 +594,23 @@ This is a Quick View of <?php echo $pref_inv_wordingField; ?> <?php echo $master
 
 
 	?>
-
-Actions: <a href="invoice_templates/<?php echo $def_inv_templateField; ?>?submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>">Print Preview</a> :: <a href="details_invoice.php?submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>"> Edit</a> :: <a href='process_payment.php?submit=<?php echo $inv_idField;?>&op=pay_selected_invoice'>Process Payment</a> :: <!-- EXPORT TO PDF --><a href='<?php echo $url_for_pdf ;?>'>Export to PDF</a> :: <a href="invoice_templates/<?php echo $def_inv_templateField; ?>?submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>&export=<?php echo $spreadsheet;?>">Export as .<?php echo $spreadsheet;?></a> :: <a href="invoice_templates/<?php echo $def_inv_templateField; ?>?submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>&export=<?php echo $word_processor;?>">Export as .<?php echo $word_processor;?> </a>::  Email  :: Quick Email
+<!--Actions heading - start-->
+<?php echo $lang_actions;?>: 
+		<a href="invoice_templates/<?php echo $def_inv_templateField; ?>?submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>"> <?php echo $lang_print_preview;?></a>
+		 :: 
+		<a href="details_invoice.php?submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>"> <?php echo $lang_edit; ?></a>
+		 ::
+		 <a href='process_payment.php?submit=<?php echo $inv_idField;?>&op=pay_selected_invoice'> <?php echo $lang_process_payment; ?> </a>
+		 ::
+		 <!-- EXPORT TO PDF -->
+		<a href='<?php echo $url_for_pdf ;?>'><?php echo $lang_export_pdf;?></a>
+		::
+		<a href="invoice_templates/<?php echo $def_inv_templateField; ?>?submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>&export=<?php echo $spreadsheet;?>"><?php echo $lang_export_as; echo " ."; echo $spreadsheet;?></a>
+		::
+		<a href="invoice_templates/<?php echo $def_inv_templateField; ?>?submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>&export=<?php echo $word_processor;?>"><?php echo $lang_export_as; echo " ."; echo $word_processor;?> </a>
+		:: 
+		<?php echo $lang_email; echo " :: "; echo $lang_email_quick; ?>
+<!--Actions heading - start-->
 </form>
 <!-- #PDF end -->
 
@@ -609,7 +623,7 @@ Actions: <a href="invoice_templates/<?php echo $def_inv_templateField; ?>?submit
 
 <div id="footer">
 	<form>
-		<input type=button value='Cancel'onCLick='history.back()'>
+		<input type=button value='<?php echo $lang_cancel;?>'onCLick='history.back()'>
 	</form>
 </div>
 
@@ -617,6 +631,3 @@ Actions: <a href="invoice_templates/<?php echo $def_inv_templateField; ?>?submit
 
 </body>
 </html>
-
-
-
