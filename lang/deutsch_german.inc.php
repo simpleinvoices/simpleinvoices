@@ -217,6 +217,7 @@ $lang_cancel == "Cancel";
 $lang_customer = "Customer";
 $lang_customer_account = "Customer Account";
 $lang_date= "date";
+$lang_days= "days";
 $lang_description = "Description";
 $lang_edit = "Edit";
 $lang_email = "Email";

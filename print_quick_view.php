@@ -163,7 +163,7 @@ while ($Array_defaults = mysql_fetch_array($result_print_defaults) ) {
         if ($invoice_owing_Field > 0 ) {
                 $invoice_age_days = (strtotime(date($config['date_format'])) - strtotime($inv_dateField)) / (60 * 60 * 24);
                 /*$invoice_age_days = (strtotime(date("Y-m-d")) - strtotime($inv_dateField)) / (60 * 60 * 24);*/
-                         $invoice_age = "$invoice_age_days days";
+                         $invoice_age = "$invoice_age_days $lang_days";
         }
         else {
                 $invoice_age ="";
@@ -181,7 +181,7 @@ $display_block_top =  "
 		<td class=account>$lang_total:</td><td class=account>$pref_currency_signField$invoice_total_Field</td>              
 		<td class=account><a href='manage_payments.php?inv_id=$inv_idField'>$lang_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field</td>
 		<td class=account>$lang_owing:</td><td class=account><u>$pref_currency_signField$invoice_owing_Field</u></td>
-		<td class=account><a href='text/age.html' class=\"greybox\">$lang_age:</a></td><td class=account nowrap >$invoice_age</td>
+		<td class=account><a href='documentation/text/age.html' class=\"greybox\">$lang_age:</a></td><td class=account nowrap >$invoice_age</td>
 		<td></td><td></td>
 		<td class=account>$lang_total:</td><td class=account>$pref_currency_signField$invoice_total_Field_customer</td>
 		<td class=account><a href='manage_payments.php?c_id=$c_idField'>$lang_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field_customer</td>
@@ -306,7 +306,7 @@ if (  $_GET['invoice_style'] === 'Total' ) {
         	        <td colspan=6><br></td>
 	        </tr>
 	        <tr>
-	                <td></td><td><td><td></td><td><b>$lang_gross_total</b></td><td><b>$lang_tax</b></td><td><b>$lang_total_uppercase</b></td>
+	                <td></td><td></td><td></td><td><b>$lang_gross_total</b></td><td><b>$lang_tax</b></td><td><b>$lang_total_uppercase</b></td>
         	</tr>
 	        <tr>
         	        <td></td><td></td><td></td><td>$pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td><u>$pref_currency_signField$inv_it_totalField</u></td>
