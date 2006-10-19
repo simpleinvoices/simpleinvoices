@@ -84,32 +84,32 @@ $display_block =  "
 
 	<table align=center>
 	<tr>
-		<td colspan=7 align=center><i>Customer</i></td>
+		<td colspan=7 align=center><i>$lang_customer</i></td>
 	</tr>	
 	<tr>
 		<td colspan=7 align=center> </td>
 	</tr>	
 	<tr>
-		<td colspan=4 align=center><i>Customer details</i></td><td width=10%></td><td colspan=2 align=center><i>Summary of accounts</i></td>
+		<td colspan=4 align=center><i>$lang_customer $lang_details</i></td><td width=10%></td><td colspan=2 align=center><i>$lang_summary_of_accounts</i></td>
 	</tr>	
 	<tr>
-		<td class='details_screen'>Customer ID </td><td>$c_idField</td><td colspan=2></td><td></td><td class='details_screen'>Total Invoices</td><td>$invoice_total_Field </td>
+		<td class='details_screen'>$lang_customer $lang_id </td><td>$c_idField</td><td colspan=2></td><td></td><td class='details_screen'>$lang_total_invoices</td><td>$invoice_total_Field </td>
 	</tr>
 	<tr>
-		<td class='details_screen'>Customer name </td><td colspan=2>$c_nameField</td><td colspan=2></td><td class='details_screen'>Total Paid</td><td>$invoice_paid_Field </td>
+		<td class='details_screen'>$lang_customer_name </td><td colspan=2>$c_nameField</td><td colspan=2></td><td class='details_screen'>$lang_total_paid</td><td>$invoice_paid_Field </td>
 	</tr>
 	<tr>
-		<td class='details_screen'>Attn </td><td colspan=2>$c_attentionField</td><td colspan=2></td><td class='details_screen'>Total Owing</td><td><u>$invoice_owing_Field</u> </td>
+		<td class='details_screen'>$lang_attention_short</td><td colspan=2>$c_attentionField</td><td colspan=2></td><td class='details_screen'>$lang_total_owing</td><td><u>$invoice_owing_Field</u> </td>
 	</tr>
 	<tr>
-		<td class='details_screen'>Street address</td><td>$c_street_addressField</td><td class='details_screen'>Phone </td><td>$c_phoneField</td>
+		<td class='details_screen'>$lang_street</td><td>$c_street_addressField</td><td class='details_screen'>$lang_phone</td><td>$c_phoneField</td>
 
 	</tr>
 	<tr>
-		<td class='details_screen'>City</td><td>$c_cityField</td><td class='details_screen'>Fax</td><td>$c_faxField</td>
+		<td class='details_screen'>$lang_city</td><td>$c_cityField</td><td class='details_screen'>$lang_fax</td><td>$c_faxField</td>
 	</tr>
 	<tr>
-		<td class='details_screen'> Zip code</td><td>$c_zip_codeField</td><td class='details_screen'>Email</td><td>$c_emailField</td>
+		<td class='details_screen'>$lang_zip</td><td>$c_zip_codeField</td><td class='details_screen'>$lang_email</td><td>$c_emailField</td>
 
 	</tr>
 	<tr>
@@ -132,13 +132,14 @@ $sql = "select * from si_invoices where inv_customer_id =$customer_id  ORDER BY 
 
 $display_block .=  "
 <br>
-Customer invoice listings:";
+$lang_customer $lang_invoice_listings:";
 
 include('./manage_invoices.inc.php'); 
 
 $footer =  "
-
-<div id='footer'><a href='?submit=$c_idField&action=edit'>Edit</a></div>
+<div id='footer'>
+	<a href='?submit=$c_idField&action=edit'>$lang_edit</a>
+</div>
 ";
 
 }
@@ -155,40 +156,40 @@ $display_block =  "
 
         <table align=center>
         <tr>
-                <td colspan=2 align=center><i>Customer</i></td>
+                <td colspan=2 align=center><i>$lang_customer</i></td>
         </tr>
         <tr>
-                <td class='details_screen'>Customer ID </td><td>$c_idField</td>
+                <td class='details_screen'>$lang_ustomer $lang_id</td><td>$c_idField</td>
         </tr>
         <tr>
-                <td class='details_screen'>Customer name </td><td><input type=text name='c_name' value='$c_nameField' size=50></td>
+                <td class='details_screen'>$lang_customer_name</td><td><input type=text name='c_name' value='$c_nameField' size=50></td>
         </tr>
         <tr>
-                <td class='details_screen'>Attn </td><td><input type=text name='c_attention' value='$c_attentionField' size=50></td>
+                <td class='details_screen'>$lang_attention_short</td><td><input type=text name='c_attention' value='$c_attentionField' size=50></td>
         </tr>
         <tr>
-                <td class='details_screen'>Street address</td><td><input type=text name='c_street_address' value='$c_street_addressField' size=50></td>
+                <td class='details_screen'>$lang_street</td><td><input type=text name='c_street_address' value='$c_street_addressField' size=50></td>
         </tr>
         <tr>
-                <td class='details_screen'>City</td><td><input type=text name='c_city' value='$c_cityField' size=50></td>
+                <td class='details_screen'>$lang_city</td><td><input type=text name='c_city' value='$c_cityField' size=50></td>
         </tr>
         <tr>
-                <td class='details_screen'>Zip code</td><td><input type=text name='c_zip_code' value='$c_zip_codeField' size=50></td>
+                <td class='details_screen'>$lang_zip</td><td><input type=text name='c_zip_code' value='$c_zip_codeField' size=50></td>
         </tr>
         <tr>
-                <td class='details_screen'>State</td><td><input type=text name='c_state' value='$c_stateField' size=50></td>
+                <td class='details_screen'>$lang_state</td><td><input type=text name='c_state' value='$c_stateField' size=50></td>
         </tr>
         <tr>
-                <td class='details_screen'>Country</td><td><input type=text name='c_country' value='$c_countryField' size=50></td>
+                <td class='details_screen'>$lang_country</td><td><input type=text name='c_country' value='$c_countryField' size=50></td>
         </tr>
         <tr>
-	        <td class='details_screen'>Phone</td><td><input type=text name='c_phone' value='$c_phoneField' size=50></td>
+	        <td class='details_screen'>$lang_phone</td><td><input type=text name='c_phone' value='$c_phoneField' size=50></td>
         </tr>
         <tr>
-	        <td class='details_screen'>Fax</td><td><input type=text name='c_fax' value='$c_faxField' size=50></td>
+	        <td class='details_screen'>$lang_fax</td><td><input type=text name='c_fax' value='$c_faxField' size=50></td>
         </tr>
         <tr>
-                <td class='details_screen'>Email</td><td><input type=text name='c_email' value='$c_emailField' size=50></td
+                <td class='details_screen'>$lang_email</td><td><input type=text name='c_email' value='$c_emailField' size=50></td
         </tr>
         <tr>
                 <td class='details_screen'>$wording_for_enabledField </td><td>$display_block_enabled</td>
@@ -198,9 +199,8 @@ $display_block =  "
 ";
 
 $footer =  "
-
-<p><input type=submit name='action' value='Cancel'>
-<input type=submit name='action' value='Save Customer'> <input type=hidden name='op' value='edit_customer'></p>
+	<input type=submit name='action' value='Cancel'>
+	<input type=submit name='action' value='$lang_save $lang_customer'> <input type=hidden name='op' value='edit_customer'>
 ";
 
 

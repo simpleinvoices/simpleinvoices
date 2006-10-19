@@ -15,7 +15,7 @@ $number_of_rows = mysql_num_rows($result);
 
 
 if (mysql_num_rows($result) == 0) {
-$display_block = "<P><em>$mc_no_invoices.</em></p>";
+$display_block = "<P><em>$lang_no_invoices.</em></p>";
 }else{
 $display_block = "
 
@@ -24,15 +24,15 @@ $display_block = "
 </div>
 
 <table width=100% align=center  id=large class=\"filterable sortable\">
-<div id=header><b>$mc_page_header</b> :: <a href='insert_customer.php'>$mc_actions_new_product</a></div>
+<div id=header><b>$lang_manage $lang_customers</b> :: <a href='insert_customer.php'>$lang_customer_add</a></div>
 <tr class=\"sortHeader\">
-<th class=\"noFilter\">$mc_table_action</th>
-<th class=\"index_table\">$mc_table_customer_id</th>
-<th class=\"index_table\">$mc_table_customer_name</th>
-<th class=\"index_table\">$mc_table_phone</th>
-<th class=\"index_table\">$mi_table_total</th>
-<th class=\"index_table\">$mi_table_paid</th>
-<th class=\"index_table\">$mi_table_owing</th>
+<th class=\"noFilter\">$lang_actions</th>
+<th class=\"index_table\">$lang_customer $lang_id</th>
+<th class=\"index_table\">$lang_customer_name</th>
+<th class=\"index_table\">$lang_phone</th>
+<th class=\"index_table\">$lang_total</th>
+<th class=\"index_table\">$lang_paid</th>
+<th class=\"index_table\">$lang_owing</th>
 <th class=\"selectFilter index_table\">$wording_for_enabledField &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 </tr>";
 
@@ -82,7 +82,7 @@ while ($Array = mysql_fetch_array($result)) {
 
 	$display_block .= "
 	<tr class='index_table'>
-	<td class='index_table'><a class='index_table' href='customer_details.php?submit=$c_idField&action=view'>$mc_actions_view</a> :: <a class='index_table' href='customer_details.php?submit=$c_idField&action=edit'>$mc_actions_edit</a> </td>
+	<td class='index_table'><a class='index_table' href='customer_details.php?submit=$c_idField&action=view'>$lang_view</a> :: <a class='index_table' href='customer_details.php?submit=$c_idField&action=edit'>$lang_edit</a> </td>
 	<td class='index_table'>$c_idField</td>
 	<td class='index_table'>$c_nameField</td>
 	<td class='index_table'>$c_phoneField</td>
@@ -148,7 +148,7 @@ Nifty("div#header,div#footer","small");
 </script>
 
 
-<title><?php echo $title; echo $mc_page_title; ?></title>
+<title><?php echo $title; echo $lang_manage; echo " "; echo $lang_customers;  ?></title>
 </head>
 <?php include('./config/config.php'); ?>
 <body>

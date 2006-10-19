@@ -186,6 +186,7 @@ $mpt_actions_edit = "Edit";
 $mpt_actions_new_tax = "Add New Payment Type";
 
 #Print Preview - Invoice layout
+/*
 $pp_invoice_number ="No.";
 $pp_invoice_date ="date.";
 $pp_invoice_mobile ="Mob.";
@@ -205,42 +206,58 @@ $pp_invoice_note ="Note";
 $pp_invoice_total_tax ="Total tax included";
 $pp_invoice_amount ="Amount";
 $pp_invoice_summary ="Summary";
+*/
 
-#New invoice
+
+
+#New lang file style $lang followed by the word or description - not grouped by page
 $lang_account_info = "Account Info";
 $lang_actions = "Actions";
+$lang_address = "Address";
 $lang_age = "Age";
 $lang_amount = "Amount";
 $lang_attention_short = "Attn.";
 $lang_biller = "Biller";
 $lang_cancel = "Cancel";
+$lang_city = "City";
+$lang_counrty = "Country";
 $lang_customer = "Customer";
 $lang_customer_account = "Customer Account";
+$lang_customer_add = "Add New Customer";
+$lang_customer_contact = "Customer contact (Attn)";
+$lang_customer_name = "Customer name";
+$lang_customers = "Customers";
 $lang_date= "date";
 $lang_days = "days";
 $lang_description = "Description";
+$lang_details = "details";
 $lang_edit = "Edit";
 $lang_email = "Email";
 $lang_email_quick = "Quick Email";
 $lang_export_as = "Export as";
 $lang_export_pdf = "Export to PDF";
 $lang_fax = "Fax";
+$lang_id = "ID";
 $lang_included = "included";
 $lang_inv = "Invoice";
 $lang_inv_total = " - Total";
 $lang_inv_itemised = " - Itemised";
 $lang_inv_consulting = " - Consulting";
 $lang_inv_pref = "Invoice Preference";
+$lang_invoice_listings = "Invoice listing";
 $lang_item = "Item";
 $lang_gross_total = "Gross Total";
 $lang_mandatory_fields = "All fields are mandatory";
+$lang_manage = "Manage";
 $lang_mobile_short = "Mob.";
 $lang_note = "Note";
 $lang_notes = "Notes";
 $lang_notes_opt = "Notes (optional)";
 $lang_number_short = "No.";
 $lang_owing = "Owing";
+$lang_optional = "optional";
 $lang_paid = "Paid";
+$lang_phone = "Phone";
 $lang_phone_short = "Ph.";
 $lang_telephone_short = "Tel";
 $lang_print_preview = "Print Preview";
@@ -248,16 +265,24 @@ $lang_process_payment = "Process Payment";
 $lang_provision_of = "Provision of";
 $lang_quick_view_of = "This is a Quick View of";
 $lang_save = "Save";
+$lang_state = "State";
+$lang_street = "Street";
 $lang_sub_total = "Sub Total";
 $lang_sum = "Sum";
 $lang_summary = "Summary";
+$lang_summary_of_accounts = "Summary of accounts";
 $lang_tax = "Tax";
 $lang_tax_total = "Total tax included";
 $lang_total = "Total";
 $lang_total_uppercase = "TOTAL";
+$lang_total_invoices = "Total Invoices";
+$lang_total_paid = "Total Paid";
+$lang_total_owing = "Total Owing";
 $lang_totals = "Totals";
 $lang_unit_price = "Unit Price";
+$lang_view = "View";
 $lang_quantity = "Quantity";
 $lang_quantity_short = "Qty";
+$lang_zip = "Zip code";
 
 ?>

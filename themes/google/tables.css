@@ -88,7 +88,7 @@ h2{font-size: 200%;line-height:1;color:#002455 }
 /*The CSS for the round cornered boxes - niftycorners css -(header,subheader and footer are the colour boxes in Simple Invoices -  start*/
 div#container{
     margin: 0 auto;padding:5px;text-align:left;background:#FFF}
-div#header{background: #c3d9fF;PADding: 10px;text-align:center}
+div#header{background: #c3d9fF;Padding: 10px;text-align:center;font-size: 110%; }
 div#subheader{background: #e0ecff;padding: 10px;text-align:center}
 div#content{float:left;padding:10px 0;margin:5px 0;background: #778CCA}
 div#footer{clear:both;background: #b5edbc;padding:5px 0;text-align:center}
