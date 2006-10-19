@@ -139,42 +139,42 @@ $display_block_top =  "
 	<table align=center >
 	$logo_block 
 	<tr>
-		<td nowrap class=\"col1 tbl1\" colspan=2 ><b>$b_nameField</b></td><td></td><td class=\"col1 tbl1\" colspan=3 >$pref_inv_wordingField $pp_invoice_summary</td> 
+		<td nowrap class=\"col1 tbl1\" colspan=2 ><b>$b_nameField</b></td><td></td><td class=\"col1 tbl1\" colspan=3 >$pref_inv_wordingField $lang_summary</td> 
 	</tr>
 	<tr>
-		<td nowrap class=\"tbl1-left\">$b_street_addressField,</td><td class=\"tbl1-right\">Ph: $b_phoneField</td><td></td><td class=\"tbl1-left\"><b>$pref_inv_wordingField $pp_invoice_number</b></td><td>$inv_idField</td><td class=\"tbl1-right\"></td>
+		<td nowrap class=\"tbl1-left\">$b_street_addressField,</td><td class=\"tbl1-right\">$lang_phone_short: $b_phoneField</td><td></td><td class=\"tbl1-left\"><b>$pref_inv_wordingField $lang_number_short</b></td><td>$inv_idField</td><td class=\"tbl1-right\"></td>
 	</tr>	
 	<tr>
-		<td nowrap class=\"tbl1-left\">$b_cityField,</td><td class=\"tbl1-right\">$pp_invoice_mobile: $b_mobile_phoneField</td><td></td><td class=\"tbl1-left tbl1-bottom\"><b>$pref_inv_wordingField $pp_invoice_date</b></td><td class=\"tbl1-right tbl1-bottom\" colspan=2>$inv_dateField</td>
+		<td nowrap class=\"tbl1-left\">$b_cityField,</td><td class=\"tbl1-right\">$lang_mobile_short: $b_mobile_phoneField</td><td></td><td class=\"tbl1-left tbl1-bottom\"><b>$pref_inv_wordingField $lang_date</b></td><td class=\"tbl1-right tbl1-bottom\" colspan=2>$inv_dateField</td>
 
 	</tr>	
 	<tr>
-		<td nowrap class=\"tbl1-left\">$b_stateField, $b_zip_codeField</td><td class=\"tbl1-right\">$pp_invoice_fax: $b_faxField</td><td></td><td colspan=3></td>
+		<td nowrap class=\"tbl1-left\">$b_stateField, $b_zip_codeField</td><td class=\"tbl1-right\">$lang_fax: $b_faxField</td><td></td><td colspan=3></td>
 	</tr>	
 	<tr>
-		<td nowrap class=\"tbl1-left tbl1-bottom\">$b_countryField</td><td class=\"tbl1-right tbl1-bottom\">$pp_invoice_email: $b_emailField</td><td colspan=4></td>
+		<td nowrap class=\"tbl1-left tbl1-bottom\">$b_countryField</td><td class=\"tbl1-right tbl1-bottom\">$lang_email: $b_emailField</td><td colspan=4></td>
 	</tr>	
 	<tr>
 		<td colspan=5><br><br></td>
 	</tr>	
 	<tr>
-		<td colspan=2 class=\"tbl1 col1 tbl1-right\" border=\"1\" cellpadding=\"2\" cellspacing=\"1\"  ><i>$pp_invoice_customer</i></td>
+		<td colspan=2 class=\"tbl1 col1 tbl1-right\" border=\"1\" cellpadding=\"2\" cellspacing=\"1\"  ><i>$lang_customer</i></td>
 	</tr>	
 	<tr>
 		<td colspan=2 class=\"tbl1-left tbl1-right\">$c_nameField</td>
 	</tr>
 	<tr>
-		<td nowrap colspan=2 class=\"tbl1-left tbl1-right\">$pp_invoice_attention: $c_attentionField,</td>
+		<td nowrap colspan=2 class=\"tbl1-left tbl1-right\">$lang_attention_short: $c_attentionField,</td>
 	</tr>
 
 	<tr>
-		<td nowrap class=\"tbl1-left\">$c_street_addressField,</td><td class=\"tbl1-right\">$pp_invoice_phone: $c_phoneField</td><td colspan=4></td>
+		<td nowrap class=\"tbl1-left\">$c_street_addressField,</td><td class=\"tbl1-right\">$lang_phone_short: $c_phoneField</td><td colspan=4></td>
 	</tr>	
 	<tr>
-		<td nowrap class=\"tbl1-left\">$c_cityField,</td><td class=\"tbl1-right\">$pp_invoice_fax: $c_faxField</td><td colspan=4></td>
+		<td nowrap class=\"tbl1-left\">$c_cityField,</td><td class=\"tbl1-right\">$lang_fax: $c_faxField</td><td colspan=4></td>
 	</tr>	
 	<tr>
-		<td nowrap class=\"tbl1-left\">$c_stateField, $c_zip_codeField</td><td class=\"tbl1-right\">$pp_invoice_email: $c_emailField</td>
+		<td nowrap class=\"tbl1-left\">$c_stateField, $c_zip_codeField</td><td class=\"tbl1-right\">$lang_email: $c_emailField</td>
 	</tr>	
 	<tr>
 		<td colspan=2 class=\"tbl1-left tbl1-bottom tbl1-right\">$c_countryField</td>
@@ -236,7 +236,7 @@ if ($_GET[invoice_style] === 'Total') {
 	                <td colspan=6><br><br></td>
         	</tr>
 	        <tr class=\"tbl1 col1\" >
-        	        <td class=\"tbl1 col1 tbl1-right\" colspan=6><b>$pp_invoice_description</b></td>
+        	        <td class=\"tbl1 col1 tbl1-right\" colspan=6><b>$lang_description</b></td>
 	        </tr>
 	        <tr class=\"tbl1-left tbl1-right\">
 	                <td class=\"tbl1-left tbl1-right\" colspan=6>$inv_it_descriptionField</td>
@@ -245,7 +245,7 @@ if ($_GET[invoice_style] === 'Total') {
         	        <td colspan=6 class=\"tbl1-left tbl1-right\"><br></td>
 	        </tr>
 	        <tr class=\"tbl1-left tbl1-right\">
-	                <td class=\"tbl1-left\" ></td><td></td><td></td><td><b>$pp_invoice_gross_total</b></td><td><b>$pp_invoice_tax</b></td><td class=\"tbl1-right\"><b>$pp_invoice_total</b></td>
+	                <td class=\"tbl1-left\" ></td><td></td><td></td><td><b>$lang_gross_total</b></td><td><b>$lang_tax</b></td><td class=\"tbl1-right\"><b>$lang_total_uppercase</b></td>
         	</tr>
 	        <tr class=\"tbl1-left tbl1-right tbl1-bottom\">
         	        <td class=\"tbl1-left tbl1-bottom\"></td><td class=\"tbl1-bottom\" ></td><td width=10% class=\"tbl1-bottom\"></td><td class=\"tbl1-bottom\"> $pref_currency_signField$inv_it_gross_totalField</td><td class=\"tbl1-bottom\">$pref_currency_signField$inv_it_tax_amountField</td><td class=\"tbl1-bottom tbl1-right\"><u>$pref_currency_signField$inv_it_totalField</u></td>
@@ -277,14 +277,14 @@ $display_block_details =  "
         if ( $_GET['invoice_style'] === 'Itemised' ) {
                 $display_block_details .=  "
                 <tr>
-                        <td class=\"tbl1 col1\" ><b>$pp_invoice_quantity</b></td><td class=\"tbl1 col1\" ><b>$pp_invoice_description</b></td><td class=\"tbl1 col1\" ><b>$pp_invoice_unit_price</b><td class=\"tbl1 col1\" ><b>$pp_invoice_gross_total</b></td><td class=\"tbl1 col1\" ><b>$pp_invoice_tax</b></td><td class=\"tbl1 col1\" ><b>$pp_invoice_total</b></td>
+                        <td class=\"tbl1 col1\" ><b>$lang_quantity_short</b></td><td class=\"tbl1 col1\" ><b>$lang_description</b></td><td class=\"tbl1 col1\" ><b>$lang_unit_price</b><td class=\"tbl1 col1\" ><b>$lang_gross_total</b></td><td class=\"tbl1 col1\" ><b>$lang_tax</b></td><td class=\"tbl1 col1\" ><b>$lang_total_uppercase</b></td>
                 </tr>";
         }
         #show column heading for consulting style
         else if ( $_GET['invoice_style'] === 'Consulting' ) {
                 $display_block_details .=  "
                 <tr class=\"tbl1 col1\">
-                        <td class=\"tbl1\"><b>$pp_invoice_quantity</b></td><td class=\"tbl1\"><b>$pp_invoice_item</b></td><td class=\"tbl1\"><b>$pp_invoice_unit_price</b><td class=\"tbl1\"><b>$pp_invoice_gross_total</b></td><td class=\"tbl1\"><b>$pp_invoice_tax</b></td><td class=\"tbl1\"><b>$pp_invoice_total</b></td>
+                        <td class=\"tbl1\"><b>$lang_quantity_short</b></td><td class=\"tbl1\"><b>$lang_item</b></td><td class=\"tbl1\"><b>$lang_unit_price</b><td class=\"tbl1\"><b>$lang_gross_total</b></td><td class=\"tbl1\"><b>$lang_tax</b></td><td class=\"tbl1\"><b>$lang_total_uppercase</b></td>
                 </tr>";
         }
 
@@ -371,7 +371,7 @@ $display_block_details =  "
                         <td class=\"tbl1-left\" >$inv_it_quantityField</td><td>$prod_descriptionField</td><td class=\"tbl1-right\" colspan=5></td>
 		</tr>
 		<tr class=\"tbl1-left tbl1-right\">
-			<td class=\"tbl1-left\"></td><td class=\"tbl1-right\" colspan=6><i>$pp_invoice_description: </i>$inv_it_descriptionField</td>
+			<td class=\"tbl1-left\"></td><td class=\"tbl1-right\" colspan=6><i>$lang_description: </i>$inv_it_descriptionField</td>
 		</tr>
 		<tr class=\"tbl1-left tbl1-right tbl1-bottom\">
 			<td class=\"tbl1-left tbl1-bottom\" ></td><td class=\"tbl1-bottom\"></td><td class=\"tbl1-bottom\">$pref_currency_signField$inv_it_unit_priceField</td><td class=\"tbl1-bottom\">$pref_currency_signField$inv_it_gross_totalField</td><td class=\"tbl1-bottom \">$pref_currency_signField$inv_it_tax_amountField</td><td colspan=2 class=\"tbl1-right tbl1-bottom\" >$pref_currency_signField$inv_it_totalField</td>
@@ -395,7 +395,7 @@ $display_block_details =  "
                                 <td class=\"tbl1-left tbl1-right\" colspan=7></td>
                         </tr>
                         <tr>
-                                <td class=\"tbl1-left tbl1-right\" colspan=7 align=left><i>$pp_invoice_note:</i></td>
+                                <td class=\"tbl1-left tbl1-right\" colspan=7 align=left><i>$lang_note:</i></td>
                         </tr>
                         <tr>
                                 <td class=\"tbl1-left tbl1-right\" colspan=7>$inv_noteField</td>
@@ -418,7 +418,7 @@ $display_block_details =  "
 	</tr>	
 
         <tr class=\"tbl1-left tbl1-right\">
-                <td class=\"tbl1-left\" colspan=3 ></td><td align=left colspan=2>$pp_invoice_total_tax</td><td class=\"tbl1-right\" >$pref_currency_signField$invoice_total_taxField</td>
+                <td class=\"tbl1-left\" colspan=3 ></td><td align=left colspan=2>$lang_tax_total</td><td class=\"tbl1-right\" >$pref_currency_signField$invoice_total_taxField</td>
         </tr>
 	<tr class=\"tbl1-left tbl1-right\" >
 		<td class=\"tbl1-left tbl1-right\" colspan=6 >
@@ -485,8 +485,7 @@ Nifty("div#header,div#footer","small");
 }
 </script>
 
-<title>Simple Invoices
-</title>
+	<title><?php echo $title; ?></title>
 <?php include('../config/config.php'); ?> 
 <body>
 <br>
