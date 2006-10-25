@@ -1,6 +1,6 @@
 <?php
 #table
-include('../include/include_main.php');
+include('../include/include_print.php');
 
 #get the invoice id
 $master_invoice_id = $_GET['submit'];
