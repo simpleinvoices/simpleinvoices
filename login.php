@@ -12,12 +12,14 @@ INSERT INTO tbl_auth_user (user_id, user_password) VALUES ('theadmin', PASSWORD(
 INSERT INTO tbl_auth_user (user_id, user_password) VALUES ('webmaster', PASSWORD('webmistress'));
 INSERT INTO tbl_auth_user (user_id, user_password) VALUES ('admin', PASSWORD('admin'));
 */
+
+include 'config/config.php';
+include "lang/$language.inc.php";
+
 session_start();
 
 $errorMessage = '';
 if (isset($_POST['txtUserId']) && isset($_POST['txtPassword'])) {
-    include 'config/config.php';
-	include("./lang/$language.inc.php");
 
     $conn = mysql_connect( $db_host, $db_user, $db_password);
      mysql_select_db( $db_name, $conn);
@@ -96,11 +98,11 @@ if ($errorMessage != '') {
 
 	</div>
                 <div id="disclaimerbox">
-	    <h2>Login Credentials</h2> <br /><strong>Totally ripped from KnowledgeTree<br />thanks to stb3 for the code 
+	    <h2>Login Credentials</h2> <br /><strong>Annoucement area<br /></strong><br>This is an important annoucement
 	</div>
 	
 	<p class="descriptiveText version">
-	Simple Invoices 20060920<br/>
+	<?php echo $title; echo " "; echo $version; ?><br/>
 	copyleft; 2006 <a href="http://www.simpleinvoices.org/">Simple Invoices</a>. Licensed under the <a href="http://www.fsf.org/gpl.html">GPL</a> 
 	</p>
         
