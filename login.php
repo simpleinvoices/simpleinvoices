@@ -72,7 +72,7 @@ if ($errorMessage != '') {
 	        <input type="hidden" name="action" value="login" />
 		<input type="hidden" name="cookieverify" value="" />
 		<input type="hidden" name="redirect" value="" />
-		<img src="./include/auth/ktlogo-topbar-right.png" alt="KnowledgeTree DMS" class="logoimage" height="50" width="252"/><br />
+		<img src="./logo/simple_invoices_logo.png" alt="KnowledgeTree DMS" class="logoimage"<br />
             
 	        		    <p class="descriptiveText">Please enter your details below to login.</p>
 
