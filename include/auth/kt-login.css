@@ -19,7 +19,7 @@
             margin-left: auto;
             margin-right: auto;
             text-align: left;
-            background: white url(logo.png) bottom right no-repeat;
+            background: white url(../../logo/simple_invoices_emblem.png) bottom right no-repeat;
         }
 
         #loginbox.hasDisclaimer { 
