@@ -1,6 +1,6 @@
 <?php
 
-include('./config/config.php');
+include('./include/include_main.php');
 
 
 $fp = fopen( "./documentation/Credits.html", "r" );

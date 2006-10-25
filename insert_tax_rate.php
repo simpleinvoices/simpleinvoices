@@ -12,10 +12,9 @@ Nifty("div#header,div#footer","small");
 </script>
 
 <title> Simple Invoices - Tax rate to add</title>
-<?php include('./config/config.php'); 
-include("./lang/$language.inc.php");
+<?php 
+include('./include/include_main.php');
 include('./include/validation.php');
-include('./include/menu.php'); 
 
 jsBegin();
 jsFormValidationBegin("frmpost");

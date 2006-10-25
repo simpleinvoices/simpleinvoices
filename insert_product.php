@@ -1,6 +1,5 @@
 <?php 
-include('./config/config.php');
-include("./lang/$language.inc.php");
+include('./include/include_main.php');
 
 #do the product enabled/disblaed drop down
 $display_block_enabled = "<select name=\"prod_enabled\">

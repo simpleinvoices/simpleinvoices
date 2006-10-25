@@ -1,5 +1,5 @@
 <?php
-include('./config/config.php'); 
+include('./include/include_main.php');
 $conn = mysql_connect( $db_host, $db_user, $db_password);
 mysql_select_db( $db_name, $conn);
 

@@ -1,6 +1,6 @@
 <?php
 
-include('./config/config.php');
+include('./include/include_main.php');
 
 
 $fp = fopen( "RoadMap.html", "r" );

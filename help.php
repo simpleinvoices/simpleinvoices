@@ -1,6 +1,5 @@
 <?php
-
-include('./config/config.php');
+include('./include/include_main.php');
 
 $display_block ="
 

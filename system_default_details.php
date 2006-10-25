@@ -1,6 +1,5 @@
 <?php
-#table
-include('./config/config.php'); 
+include("./include/include_main.php");
 
 #get the invoice id
 $customer_id = $_GET[submit];

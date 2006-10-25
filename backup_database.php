@@ -1,8 +1,5 @@
-
-
 <?php
-
-include('./config/config.php');
+include('./include/include_main.php');
 
 
 
@@ -47,7 +44,6 @@ $display_block ="
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?php include('./include/menu.php'); ?>
 <!-- CSS -->
     <script type="text/javascript" src="./include/jquery.js"></script>
     <script type="text/javascript" src="./include/greybox.js"></script>
@@ -78,7 +74,6 @@ Nifty("div#header,div#footer","small");
 </title>
 </head>
 <body>
-<?php include('./config/config.php'); ?>
 <?php
 $mid->printMenu('hormenu1');
 $mid->printFooter();

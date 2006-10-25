@@ -1,7 +1,6 @@
 <?php
 #table
-include('../config/config.php'); 
-include("../lang/$language.inc.php");
+include('../include/include_main.php');
 
 #get the invoice id
 $master_invoice_id = $_GET[submit];

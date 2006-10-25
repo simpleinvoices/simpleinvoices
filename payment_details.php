@@ -1,7 +1,6 @@
 <?php
-include('./config/config.php'); 
+include('./include/include_main.php');
 include("./include/validation.php");
-include("./lang/$language.inc.php");
 
 /*validation code*/
 jsBegin();

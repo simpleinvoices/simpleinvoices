@@ -1,7 +1,6 @@
 <?php
 
-include('./config/config.php');
-include("./lang/$language.inc.php");
+include('./include/include_main.php');
 
 
 $fp = fopen("./documentation/ReadMe.$language.html", "r" );
@@ -31,7 +30,6 @@ Nifty("div#header,div#footer","small");
 
 
 <title>Simple Invoices - Instructions</title>
-<?php include('./config/config.php'); ?>
 <body>
 <?php
 $mid->printMenu('hormenu1');

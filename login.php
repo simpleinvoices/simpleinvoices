@@ -17,6 +17,8 @@ session_start();
 $errorMessage = '';
 if (isset($_POST['txtUserId']) && isset($_POST['txtPassword'])) {
     include 'config/config.php';
+	include("./lang/$language.inc.php");
+
     $conn = mysql_connect( $db_host, $db_user, $db_password);
      mysql_select_db( $db_name, $conn);
 
@@ -48,7 +50,7 @@ if (isset($_POST['txtUserId']) && isset($_POST['txtPassword'])) {
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Basic Login</title>
+<title>Simple Invoices Login</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
    <link rel="stylesheet" href="./include/auth/kt-login.css" type="text/css" />
 

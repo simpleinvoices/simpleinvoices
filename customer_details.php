@@ -1,7 +1,6 @@
 <?php
 #table
-include('./config/config.php'); 
-include("./lang/$language.inc.php");
+include('./include/include_main.php');
 
 /* validataion code */
 include("./include/validation.php");
@@ -239,7 +238,6 @@ $(document).sortStart(function(){
 </script>
 
 
-<?php include('./include/menu.php'); ?>
 <script type="text/javascript" src="niftycube.js"></script>
 <script type="text/javascript">
 window.onload=function(){

@@ -1,7 +1,5 @@
 <?php
-
-include('./config/config.php');
-include('./include/menu.php');
+include('./include/include_main.php');
 include('./include/sql_patches.php');
 
 $mid->printMenu('hormenu1');

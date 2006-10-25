@@ -1,6 +1,6 @@
 <?php
 
-include('./config/config.php');
+include('./include/include_main.php');
 
 
 $fp = fopen( "./documentation/ChangeLog.html", "r" );
@@ -30,7 +30,6 @@ Nifty("div#header,div#footer","small");
 
 <title>Simple Invoices - ChangeLog
 </title>
-<?php include('./config/config.php'); ?>
 <body>
 <?php
 $mid->printMenu('hormenu1');
