@@ -1,7 +1,6 @@
 <html>
 <head>
-<?php include('./config/config.php'); ?>
-<?php include('./include/menu.php'); ?>
+<?php include("./include/include_main.php"); ?>
 <script type="text/javascript" src="niftycube.js"></script>
 <script type="text/javascript">
 window.onload=function(){
