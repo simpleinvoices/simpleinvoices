@@ -208,8 +208,6 @@ $pp_invoice_amount ="Amount";
 $pp_invoice_summary ="Summary";
 */
 
-
-
 #New lang file style $lang followed by the word or description - not grouped by page
 $lang_account_info = "Account Info";
 $lang_actions = "Actions";
