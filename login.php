@@ -8,9 +8,9 @@ user_password CHAR(32) NOT NULL,
 PRIMARY KEY (user_id)
 );
 
-INSERT INTO tbl_auth_user (user_id, user_password) VALUES ('theadmin', PASSWORD('chumbawamba'));
-INSERT INTO tbl_auth_user (user_id, user_password) VALUES ('webmaster', PASSWORD('webmistress'));
-INSERT INTO tbl_auth_user (user_id, user_password) VALUES ('admin', PASSWORD('admin'));
+INSERT INTO si_auth_user (user_id, user_password) VALUES ('guest', PASSWORD('guest'));
+INSERT INTO si_auth_user (user_id, user_password) VALUES ('demo', PASSWORD('demo'));
+INSERT INTO si_auth_user (user_id, user_password) VALUES ('admin', PASSWORD('admin'));
 */
 
 include 'config/config.php';
