@@ -13,6 +13,12 @@ Simple Invoices - Changelog
 		<li>Customer details page revamped to include a tabbed interface for the notes and invoice listing
 		<li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=34&can=2&q=">Issue 34</a> The php include() system has had a cleanup and files can be included in all pages by editing ./include/include_main.php
 		<li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=21&can=2&q=">Issue 21</a> More pages have been made translatable
+                <li>SQL Patches
+                        <ul>
+                                <li>ALTER TABLE `si_customers` ADD `c_notes` TEXT NULL AFTER `c_email`
+				<li>ALTER TABLE `si_biller` ADD `b_notes` TEXT NULL AFTER `b_co_footer`
+				<li>ALTER TABLE `si_products` ADD `prod_notes` TEXT NOT NULL AFTER `prod_unit_price`
+			</ul>
 	</ul>
 </ul>
 <ul><li>2006-10-14
