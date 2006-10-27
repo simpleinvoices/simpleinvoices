@@ -273,10 +273,10 @@ Nifty("div#header,div#footer","small");
 }
 </script>
 
-<link rel="stylesheet" href="tabs.css" type="text/css" media="print, projection, screen" />
+<link rel="stylesheet" href="./include/css/tabs.css" type="text/css" media="print, projection, screen" />
         <!-- Additional IE/Win specific style sheet (Conditional Comments) -->
         <!--[if lte IE 7]>
-        <link rel="stylesheet" href="tabs-ie.css" type="text/css" media="projection, screen" />
+        <link rel="stylesheet" href="./include/css/tabs-ie.css" type="text/css" media="projection, screen" />
         <![endif]-->
         <style type="text/css" media="screen, projection">
             /* just to make this demo look a bit better */

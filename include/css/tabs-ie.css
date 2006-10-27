@@ -1,0 +1,7 @@
+.anchors { /* auto clear */
+    display: inline-block; /* @ IE 7 */
+    _height: 1%; /* @ IE 6 */
+}
+.anchors a {
+    float: left;
+}
