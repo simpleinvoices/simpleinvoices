@@ -86,7 +86,7 @@
 ...|&Auml;nderungshistorie|./inline_changelog.php
 ...|Danksagungen|./inline_credits.php
 ...|Lizenz|./inline_license.php
-#.|Abmelden|./logout.php
+.|Abmelden|./logout.php
 
 #.|Open Source
 #..|Portals

@@ -19,13 +19,13 @@ include "lang/$language.inc.php";
 session_start();
 
 $errorMessage = '';
-if (isset($_POST['txtUserId']) && isset($_POST['txtPassword'])) {
+if (isset($_POST['user']) && isset($_POST['pass'])) {
 
     $conn = mysql_connect( $db_host, $db_user, $db_password);
      mysql_select_db( $db_name, $conn);
 
-    $userId   = $_POST['txtUserId'];
-    $password = $_POST['txtPassword'];
+    $userId   = $_POST['user'];
+    $password = $_POST['pass'];
     
     // check if the user id and password combination exist in database
     $sql = "SELECT user_id 
@@ -80,10 +80,10 @@ if ($errorMessage != '') {
 
 		            
 	        <label for="username">Username</label>
-		<input  name="txtUserId" type="text" id="txtUserId"/>
+		<input  name="user" type="text" id="user"/>
 		
 		<label for="password">Password</label>
-		<input name="txtPassword" type="password" id="txtPassword"/>
+		<input name="pass" type="password" id="pass"/>
 		<!--
 		<label for="language">Language</label>
 		<select id="language" name="language">
@@ -103,7 +103,7 @@ if ($errorMessage != '') {
 	
 	<p class="descriptiveText version">
 	<?php echo $title; echo " "; echo $version; ?><br/>
-	copyleft; 2006 <a href="http://www.simpleinvoices.org/">Simple Invoices</a>. Licensed under the <a href="http://www.fsf.org/gpl.html">GPL</a> 
+	copyleft; 2006 <a href="http://www.simpleinvoices.org/">Simple Invoices</a>. Licensed under the <a href="http://www.gnu.org/licenses/gpl.html">GPL</a> 
 	</p>
         
 

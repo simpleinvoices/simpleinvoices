@@ -166,6 +166,10 @@ $mid->printFooter();
 		<td>Invoice footer</td><td><textarea input type=text name="b_co_footer"  rows=4 cols=50></textarea></td>
 	</tr>
 	<tr>
+                <td><?php echo $lang_notes; ?></td><td><textarea input type=text name='b_notes' rows=8 cols=50></textarea></td>
+	</tr>
+
+	<tr>
 		<td><?php echo $wording_for_enabledField; ?></td><td><?php echo $display_block_enabled;?></td>
 	</tr>
 

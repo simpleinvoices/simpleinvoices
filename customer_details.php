@@ -39,6 +39,7 @@ while ($Array = mysql_fetch_array($result_print_customer) ) {
 		$c_phoneField = $Array['c_phone'];
 		$c_faxField = $Array['c_fax'];
 		$c_emailField = $Array['c_email'];
+		$c_notesField = $Array['c_notes'];
 		$c_enabledField = $Array['c_enabled'];
 
         	if ($c_enabledField == 1) {
@@ -80,11 +81,9 @@ while ($Array = mysql_fetch_array($result_print_customer) ) {
 if ($_GET[action] === 'view') {
 
 $display_block =  "
+	<div id=\"header\"><b>$lang_customer</b> :: <a href='?submit=$c_idField&action=edit'>$lang_edit</a></div>
 
 	<table align=center>
-	<tr>
-		<td colspan=7 align=center><i>$lang_customer</i></td>
-	</tr>	
 	<tr>
 		<td colspan=7 align=center> </td>
 	</tr>	
@@ -131,9 +130,32 @@ $sql = "select * from si_invoices where inv_customer_id =$customer_id  ORDER BY 
 
 $display_block .=  "
 <br>
-$lang_customer $lang_invoice_listings:";
+        <div id=\"container-1\">
+            <ul class=\"anchors\">
+                <li><a href=\"#section-1\">$lang_customer $lang_invoice_listings</a></li>
+                <li><a href=\"#section-2\">Notes</a></li>
+            </ul>
+            <div id=\"section-1\" class=\"fragment\">
+		<h4><u>$lang_invoice_listings</u></h4>
+                <p>
+
+		";
 
 include('./manage_invoices.inc.php'); 
+
+$display_block .=  "
+	    </p>
+            </div>
+            <div id=\"section-2\" class=\"fragment\">
+                <h4><u>$lang_customer $lang_notes</u></h4>
+                <p>
+		$c_notesField	
+		</p>
+            </div>
+        </div>
+";
+
+#include('./manage_invoices.inc.php'); 
 
 $footer =  "
 <div id='footer'>
@@ -152,6 +174,7 @@ $display_block_enabled = "<select name=\"c_enabled\">
 </select>";
 
 $display_block =  "
+	<div id=\"header\"></div>
 
         <table align=center>
         <tr>
@@ -189,6 +212,9 @@ $display_block =  "
         </tr>
         <tr>
                 <td class='details_screen'>$lang_email</td><td><input type=text name='c_email' value='$c_emailField' size=50></td
+        </tr>
+        <tr>
+                <td class='details_screen'>$lang_notes</td><td><textarea input type=text name='c_notes' rows=8 cols=50>$c_notesField</textarea></td>
         </tr>
         <tr>
                 <td class='details_screen'>$wording_for_enabledField </td><td>$display_block_enabled</td>
@@ -246,6 +272,69 @@ Nifty("div#content,div#nav","same-height small");
 Nifty("div#header,div#footer","small");
 }
 </script>
+
+<link rel="stylesheet" href="tabs.css" type="text/css" media="print, projection, screen" />
+        <!-- Additional IE/Win specific style sheet (Conditional Comments) -->
+        <!--[if lte IE 7]>
+        <link rel="stylesheet" href="tabs-ie.css" type="text/css" media="projection, screen" />
+        <![endif]-->
+        <style type="text/css" media="screen, projection">
+            /* just to make this demo look a bit better */
+            h4 {
+                margin: 0;
+                padding: 0;
+            }
+            ul {
+                list-style: none;
+		
+            }
+            body>ul>li {
+                display: inline;
+            }
+            body>ul>li:before {
+                content: ", ";
+            }
+            body>ul>li:first-child:before {
+                content: "";
+            }
+        </style>
+        <!-- Additional IE/Win specific style sheet (Conditional Comments) -->
+        <!--[if lte IE 7]>
+        <style type="text/css" media="screen, projection">
+            body {
+                font-size: 100%; /* resizable fonts */
+            }
+        </style>
+        <![endif]-->
+
+        <script src="./include/jquery.js" type="text/javascript"></script>
+        <!-- script src="jquery.history.js" type="text/javascript"></script -->
+        <script src="./include/jquery-tabs.js" type="text/javascript"></script>
+        <script type="text/javascript">//<![CDATA[
+            $(document).ready(function() {
+                $('#container-1').tabs({fxFade: true, fxSpeed: 'fast'});
+                $('#trigger-tab').after('<p><a href="#" onclick="$(\'#container-1\').triggerTab(3); return false;">Activate third tab</a></p>');
+                $('#custom-tab-by-hash').title('New window').click(function() {
+                    var win = window.open(this.href, '', 'directories,location,menubar,resizable,scrollbars,status,toolbar');
+                    win.focus();
+                });
+            });
+        //]]></script>
+
+<script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
+<script language="javascript" type="text/javascript">
+tinyMCE.init({
+mode : "textareas",
+        theme : "advanced",
+        theme_advanced_buttons1 : "bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright, justifyfull,bullist,numlist,undo,redo",
+        theme_advanced_buttons2 : "",
+        theme_advanced_buttons3 : "",
+        theme_advanced_toolbar_location : "top",
+        theme_advanced_toolbar_align : "left",
+        extended_valid_elements : "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]"
+});
+</script>
+
 <title>Simple Invoices - Customer details
 </title>
 <?php include('./config/config.php'); ?>
@@ -262,7 +351,6 @@ $mid->printFooter();
 
 
 <div id="container">
-<div id="header"></div>
 <?php echo $display_block; ?>
 <div id="footer">
 <?php echo $footer; ?>

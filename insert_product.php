@@ -23,6 +23,21 @@ Nifty("div#header,div#footer","small");
 }
 </script>
 
+<script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
+<script language="javascript" type="text/javascript">
+tinyMCE.init({
+mode : "textareas",
+        theme : "advanced",
+        theme_advanced_buttons1 : "bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright, justifyfull,bullist,numlist,undo,redo",
+        theme_advanced_buttons2 : "",
+        theme_advanced_buttons3 : "",
+        theme_advanced_toolbar_location : "top",
+        theme_advanced_toolbar_align : "left",
+        extended_valid_elements : "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]"
+});
+</script>
+
+
 <title> Simple Invoices - Product to add
 </title>
 
@@ -62,16 +77,18 @@ $mid->printFooter();
 
 <table align=center>
 
-<tr>
-<td>Product Description</td><td><input type=text name="prod_description" size=50></td>
-</tr>
-<tr>
-<td>Product Unit Price</td><td><input type=text name="prod_unit_price" size=25></td>
-</tr>
-<tr>
-<td>Product Enabled</td><td><?php echo $display_block_enabled;?></td>
-</tr>
-<tr>
+	<tr>
+		<td>Product Description</td><td><input type=text name="prod_description" size=50></td>
+	</tr>
+	<tr>
+		<td>Product Unit Price</td><td><input type=text name="prod_unit_price" size=25></td>
+	</tr>
+        <tr>
+                <td><?php echo $lang_notes;?></td><td><textarea input type=text name='prod_notes' rows=8 cols=50><?php echo $prod_notesField;?></textarea></td>
+        </tr>
+	<tr>
+		<td>Product Enabled</td><td><?php echo $display_block_enabled;?></td>
+	</tr>
 
 </table>
 </div>

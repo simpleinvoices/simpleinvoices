@@ -41,6 +41,7 @@ while ($Array = mysql_fetch_array($result_print_biller) ) {
 		$b_emailField = $Array['b_email'];
 		$b_co_logoField = $Array['b_co_logo'];
 		$b_co_footerField = $Array['b_co_footer'];
+		$b_notesField = $Array['b_notes'];
 	        $b_enabledField = $Array['b_enabled'];
 
 	        if ($b_enabledField == 1) {
@@ -91,11 +92,10 @@ $display_block_logo_list .= "</select>";
 if ($_GET[action] == "view") {
 
 $display_block =  "
-	
+        <div id=\"header\"><b>$lang_biller</b> :: <a href='?submit=$b_idField&action=edit'>$lang_edit</a></div>
+
+
 	<table align=center>
-	<tr>
-		<td colspan=2 align=center><i>Biller</i></td>
-	</tr>	
 	<tr>
 		<td class='details_screen'>Biller ID </td><td>$b_idField</td>
 	</tr>
@@ -135,6 +135,9 @@ $display_block =  "
 	<tr>
 		<td class='details_screen'>Invoice Footer</td><td>$b_co_footerField</td>
 	</tr>
+	<tr>
+		<td class='details_screen'>$lang_notes</td><td>$b_notesField</td>
+	</tr>
         <tr>
                 <td class='details_screen'>$wording_for_enabledField</td><td>$wording_for_enabled</td>
         </tr>
@@ -165,10 +168,8 @@ $display_block_enabled = "<select name=\"b_enabled\">
 
 
 $display_block =  "
+        <div id=\"header\"><b>$lang_biller</b> </div>
         <table align=center>
-        <tr>
-                <td colspan=2 align=center><i>Biller</i></td>
-        </tr>
         <tr>
                 <td class='details_screen'>Biller ID </td><td>$b_idField</td>
         </tr>
@@ -203,11 +204,15 @@ $display_block =  "
                 <td class='details_screen'>Email</td><td><input type=text name='b_email' value='$b_emailField' size=50>  </td>
         </tr>
         <tr>
-	        <td class='details_screen'>Logo file <a href='text/insert_biller_text.html' class='greybox'>Note</a></td><td>$display_block_logo_list</td> 
+	        <td class='details_screen'>Logo file <a href='documentation/text/insert_biller_text.html' class='greybox'>Note</a></td><td>$display_block_logo_list</td> 
         </tr>
         <tr>
                 <td class='details_screen'>Invoice footer</td><td><textarea input type=text name='b_co_footer' rows=4 cols=50>$b_co_footerField</textarea></td>
         </tr>
+        <tr>                
+		<td class='details_screen'>$lang_notes</td><td><textarea input type=text name='b_notes' rows=8 cols=50>$b_notesField</textarea></td>
+        </tr>
+
         <tr>
                 <td class='details_screen'>$wording_for_enabledField </td><td>$display_block_enabled</td>
         </tr>
@@ -287,7 +292,6 @@ $mid->printFooter();
 <br>
 <FORM name="frmpost" ACTION="insert_action.php?submit=<?php echo $_GET[submit];?>" METHOD=POST  onsubmit="return frmpost_Validator(this)">
 <div id="container">
-<div id="header"></div>
 
 <?php echo $display_block; ?>
 <div id="footer">

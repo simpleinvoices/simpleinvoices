@@ -1,5 +1,6 @@
 <?php
-include('./include/include_main.php');
+include('./config/config.php');
+
 $conn = mysql_connect( $db_host, $db_user, $db_password);
 mysql_select_db( $db_name, $conn);
 
@@ -21,7 +22,7 @@ extract( $_POST );
 $sql ='INSERT INTO 
 		si_customers 
 	VALUES 
-		("","' . $c_attention . '", "' . $c_name . '", "' . $c_street_address . '", "' . $c_city . '", "' . $c_state . '", "' . $c_zip_code . '", "' . $c_country . '", "' . $c_phone . '", "' . $c_fax . '", "' . $c_email . '", "' . $c_enabled . '")';
+		("","' . $c_attention . '", "' . $c_name . '", "' . $c_street_address . '", "' . $c_city . '", "' . $c_state . '", "' . $c_zip_code . '", "' . $c_country . '", "' . $c_phone . '", "' . $c_fax . '", "' . $c_email . '", "' . $c_notes . '", "' . $c_enabled . '")';
 
 
 if (mysql_query($sql, $conn)) {
@@ -51,6 +52,7 @@ else if ( $op === 'edit_customer' ) {
 				c_phone = '$_POST[c_phone]', 
 				c_fax = '$_POST[c_fax]', 
 				c_email = '$_POST[c_email]', 
+				c_notes = '$_POST[c_notes]', 
 				c_enabled = '$_POST[c_enabled]'  
 			WHERE  
 				c_id = " . $_GET['submit'];
@@ -135,6 +137,7 @@ else if ( $op === 'insert_biller') {
 				'$_POST[b_email]',
 				'$_POST[b_co_logo]',
 				'$_POST[b_co_footer]',
+				'$_POST[b_notes]',
 				'$_POST[b_enabled]'
 			 )";
  	
@@ -167,6 +170,7 @@ else if (  $op === 'edit_biller' ) {
 				b_email = '$_POST[b_email]', 
 				b_co_logo = '$_POST[b_co_logo]', 
 				b_co_footer = '$_POST[b_co_footer]', 
+				b_notes = '$_POST[b_notes]', 
 				b_enabled = '$_POST[b_enabled]'   
 			WHERE  
 				b_id = '$_GET[submit]'";
@@ -201,6 +205,7 @@ $sql = "INSERT into
 			'',
 			'$_POST[prod_description]',
 			'$_POST[prod_unit_price]',
+			'$_POST[prod_notes]',
 			'$_POST[prod_enabled]'
 		)"; 
 
@@ -229,6 +234,7 @@ mysql_select_db("$db_name",$conn);
 			SET 
 				prod_description = '$_POST[prod_description]', 
 				prod_enabled = '$_POST[prod_enabled]', 
+				prod_notes = '$_POST[prod_notes]', 
 				prod_unit_price = '$_POST[prod_unit_price]'
 			WHERE  
 				prod_id = '$_GET[submit]'";

@@ -102,6 +102,20 @@ ADD b_co_footer TEXT";
         $sql_patch_21 = "ALTER TABLE `si_defaults` ADD `def_payment_type` VARCHAR( 25 ) DEFAULT '1'";
         $sql_patch_update_21 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',21,'$sql_patch_name_21',20060909,'')";
 
+
+        $sql_patch_name_22 = "Add note field to customer";
+        $sql_patch_22 = "ALTER TABLE `si_customers` ADD `c_notes` TEXT NULL AFTER `c_email`";
+        $sql_patch_update_22 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',22,'$sql_patch_name_22',20061026,'')";
+
+
+        $sql_patch_name_23 = "Add note field to Biller";
+        $sql_patch_23 = "ALTER TABLE `si_biller` ADD `b_notes` TEXT NULL AFTER `b_co_footer`";
+        $sql_patch_update_23 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',23,'$sql_patch_name_23',20061026,'')";
+
+
+        $sql_patch_name_24 = "Add note field to Products";
+        $sql_patch_24 = "ALTER TABLE `si_products` ADD `prod_notes` TEXT NOT NULL AFTER `prod_unit_price`";
+        $sql_patch_update_24 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',24,'$sql_patch_name_24',20061026,'')";
 /*
 CREATE TABLE `si_accounts` (
 `ac_id` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,

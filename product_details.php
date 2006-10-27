@@ -31,6 +31,7 @@ while ($Array = mysql_fetch_array($result_print_product) ) {
                 $prod_idField = $Array['prod_id'];
                 $prod_descriptionField = $Array['prod_description'];
                 $prod_enabledField = $Array['prod_enabled'];
+                $prod_notesField = $Array['prod_notes'];
                 $prod_unit_priceField = $Array['prod_unit_price'];
 
 	        if ($prod_enabledField == 1) {
@@ -45,22 +46,23 @@ while ($Array = mysql_fetch_array($result_print_product) ) {
 if ($_GET[action] == "view") {
 
 $display_block =  "
+        <div id=\"header\"><b>$lang_products</b> :: <a href='?submit=$prod_idField&action=edit'>$lang_edit</a></div>
 	
 	<table align=center>
 	<tr>
-		<td colspan=2 align=center><i>Product</i></td>
-	</tr>	
-	<tr>
-		<td class='details_screen'>Produtct ID</td><td>$prod_idField</td>
+		<td class='details_screen'>Product ID</td><td>$prod_idField</td>
 	</tr>
 	<tr>
 		<td class='details_screen'>Product description</td><td>$prod_descriptionField</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>Product enabled</td><td>$wording_for_enabled</td>
+		<td class='details_screen'>Unit price</td><td>$prod_unit_priceField</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>Unit price</td><td>$prod_unit_priceField</td>
+		<td class='details_screen'>$lang_notes</td><td>$prod_notesField</td>
+	</tr>
+	<tr>
+		<td class='details_screen'>Product enabled</td><td>$wording_for_enabled</td>
 	</tr>
 	</table>
 ";
@@ -85,11 +87,9 @@ $display_block_enabled = "<select name=\"prod_enabled\">
 </select>";
 
 $display_block =  "
+	<div id=\"header\"><b>$lang_products</b></div>
 
         <table align=center>
-        <tr>
-                <td colspan=2 align=center><i>Product</i></td>
-        </tr>
         <tr>
                 <td class='details_screen'>Produtct ID</td><td>$prod_idField</td>
         </tr>
@@ -97,10 +97,13 @@ $display_block =  "
                 <td class='details_screen'>Product description</td><td><input type=text name='prod_description' value='$prod_descriptionField' size=50></td>
         </tr>
         <tr>
-                <td class='details_screen'>Product enabled</td><td>$display_block_enabled</td>
+                <td class='details_screen'>Unit price</td><td><input type=text name='prod_unit_price' value='$prod_unit_priceField' size=25></td>
         </tr>
         <tr>
-                <td class='details_screen'>Unit price</td><td><input type=text name='prod_unit_price' value='$prod_unit_priceField' size=25></td>
+                <td class='details_screen'>$lang_notes</td><td><textarea input type=text name='prod_notes' rows=8 cols=50>$prod_notesField</textarea></td>
+        </tr> 
+        <tr>
+                <td class='details_screen'>Product enabled</td><td>$display_block_enabled</td>
         </tr>
         </table>
 ";
@@ -127,6 +130,22 @@ Nifty("div#content,div#nav","same-height small");
 Nifty("div#header,div#footer","small");
 }
 </script>
+
+<script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
+<script language="javascript" type="text/javascript">
+tinyMCE.init({
+mode : "textareas",
+        theme : "advanced",
+        theme_advanced_buttons1 : "bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright, justifyfull,bullist,numlist,undo,redo",
+        theme_advanced_buttons2 : "",
+        theme_advanced_buttons3 : "",
+        theme_advanced_toolbar_location : "top",
+        theme_advanced_toolbar_align : "left",
+        extended_valid_elements : "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]"
+});
+</script>
+
+
 <title>Simple Invoices - Customer details</title>
 <?php include('./config/config.php'); ?>
 </head>
@@ -141,7 +160,6 @@ $mid->printFooter();
 <br>
 <FORM name="frmpost" ACTION="insert_action.php?submit=<?php echo $_GET[submit];?>" METHOD=POST onsubmit="return frmpost_Validator(this)">
 <div id="container">
-<div id="header"></div>
 <?php echo $display_block; ?>
 <div id="footer">
 <?php echo $footer; ?>
