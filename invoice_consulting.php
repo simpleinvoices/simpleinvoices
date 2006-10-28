@@ -240,19 +240,7 @@ Nifty("div#header,div#footer","small");
 </script>
 
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
-<script language="javascript" type="text/javascript">
-tinyMCE.init({
-mode : "textareas",
-        theme : "advanced",
-        theme_advanced_buttons1 : "bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright, justifyfull,bullist,numlist,undo,redo",
-        theme_advanced_buttons2 : "",
-        theme_advanced_buttons3 : "",
-        theme_advanced_toolbar_location : "top",
-        theme_advanced_toolbar_align : "left",
-        extended_valid_elements : "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]"
-});
-</script>
-
+<script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 
 </head>
 	<title><?php echo $title; echo " :: "; echo $lang_inv; echo $lang_inv_consulting; ?></title>
