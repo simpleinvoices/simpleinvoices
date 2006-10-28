@@ -6,7 +6,7 @@ include('./include/include_main.php');
 	mysql_select_db("$db_name",$conn);
 
 
-	$print_preferences = "SELECT * FROM si_preferences";
+	$print_preferences = "SELECT * FROM si_preferences ORDER BY pref_description";
 	$result_print_preferences  = mysql_query($print_preferences, $conn) or die(mysql_error());
 
 

@@ -6,7 +6,7 @@ $conn = mysql_connect("$db_host","$db_user","$db_password");
 mysql_select_db("$db_name",$conn);
 
 
-$sql = "select * from si_customers";
+$sql = "select * from si_customers ORDER BY c_name";
 
 $result = mysql_query($sql, $conn) or die(mysql_error());
 $number_of_rows = mysql_num_rows($result);
