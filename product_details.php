@@ -46,7 +46,7 @@ while ($Array = mysql_fetch_array($result_print_product) ) {
 if ($_GET[action] == "view") {
 
 $display_block =  "
-        <div id=\"header\"><b>$lang_products</b> :: <a href='?submit=$prod_idField&action=edit'>$lang_edit</a></div>
+        <div id=\"header\"><b>$LANG_products</b> :: <a href='?submit=$prod_idField&action=edit'>$LANG_edit</a></div>
 	
 	<table align=center>
 	<tr>
@@ -59,7 +59,7 @@ $display_block =  "
 		<td class='details_screen'>Unit price</td><td>$prod_unit_priceField</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>$lang_notes</td><td>$prod_notesField</td>
+		<td class='details_screen'>$LANG_notes</td><td>$prod_notesField</td>
 	</tr>
 	<tr>
 		<td class='details_screen'>Product enabled</td><td>$wording_for_enabled</td>
@@ -87,7 +87,7 @@ $display_block_enabled = "<select name=\"prod_enabled\">
 </select>";
 
 $display_block =  "
-	<div id=\"header\"><b>$lang_products</b></div>
+	<div id=\"header\"><b>$LANG_products</b></div>
 
         <table align=center>
         <tr>
@@ -100,7 +100,7 @@ $display_block =  "
                 <td class='details_screen'>Unit price</td><td><input type=text name='prod_unit_price' value='$prod_unit_priceField' size=25></td>
         </tr>
         <tr>
-                <td class='details_screen'>$lang_notes</td><td><textarea input type=text name='prod_notes' rows=8 cols=50>$prod_notesField</textarea></td>
+                <td class='details_screen'>$LANG_notes</td><td><textarea input type=text name='prod_notes' rows=8 cols=50>$prod_notesField</textarea></td>
         </tr> 
         <tr>
                 <td class='details_screen'>Product enabled</td><td>$display_block_enabled</td>

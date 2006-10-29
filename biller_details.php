@@ -92,7 +92,7 @@ $display_block_logo_list .= "</select>";
 if ($_GET[action] == "view") {
 
 $display_block =  "
-        <div id=\"header\"><b>$lang_biller</b> :: <a href='?submit=$b_idField&action=edit'>$lang_edit</a></div>
+        <div id=\"header\"><b>$LANG_biller</b> :: <a href='?submit=$b_idField&action=edit'>$LANG_edit</a></div>
 
 
 	<table align=center>
@@ -136,7 +136,7 @@ $display_block =  "
 		<td class='details_screen'>Invoice Footer</td><td>$b_co_footerField</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>$lang_notes</td><td>$b_notesField</td>
+		<td class='details_screen'>$LANG_notes</td><td>$b_notesField</td>
 	</tr>
         <tr>
                 <td class='details_screen'>$wording_for_enabledField</td><td>$wording_for_enabled</td>
@@ -168,7 +168,7 @@ $display_block_enabled = "<select name=\"b_enabled\">
 
 
 $display_block =  "
-        <div id=\"header\"><b>$lang_biller</b> </div>
+        <div id=\"header\"><b>$LANG_biller</b> </div>
         <table align=center>
         <tr>
                 <td class='details_screen'>Biller ID </td><td>$b_idField</td>
@@ -210,7 +210,7 @@ $display_block =  "
                 <td class='details_screen'>Invoice footer</td><td><textarea input type=text name='b_co_footer' rows=4 cols=50>$b_co_footerField</textarea></td>
         </tr>
         <tr>                
-		<td class='details_screen'>$lang_notes</td><td><textarea input type=text name='b_notes' rows=8 cols=50>$b_notesField</textarea></td>
+		<td class='details_screen'>$LANG_notes</td><td><textarea input type=text name='b_notes' rows=8 cols=50>$b_notesField</textarea></td>
         </tr>
 
         <tr>

@@ -155,7 +155,7 @@ $mid->printFooter();
 		<td>Invoice footer</td><td><textarea input type=text name="b_co_footer"  rows=4 cols=50></textarea></td>
 	</tr>
 	<tr>
-                <td><?php echo $lang_notes; ?></td><td><textarea input type=text name='b_notes' rows=8 cols=50></textarea></td>
+                <td><?php echo $LANG_notes; ?></td><td><textarea input type=text name='b_notes' rows=8 cols=50></textarea></td>
 	</tr>
 
 	<tr>

@@ -213,7 +213,7 @@ Nifty("div#header,div#footer","small");
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 
-<title><?php echo $title; echo " :: "; echo $lang_inv; echo $lang_inv_total; ?></title>
+<title><?php echo $title; echo " :: "; echo $LANG_inv; echo $LANG_inv_total; ?></title>
 
 <?php include('./config/config.php'); ?>
 </head>
@@ -234,7 +234,7 @@ $mid->printFooter();
 <table width=100% align=center>
 
 <tr>
-<td colspan=2 align=center><b><?php echo $lang_inv; echo $lang_inv_total; ?></b></th>
+<td colspan=2 align=center><b><?php echo $LANG_inv; echo $LANG_inv_total; ?></b></th>
 </tr>
 </table>
 
@@ -256,13 +256,13 @@ $mid->printFooter();
 </tr>
 
 <tr>
-	<td colspan=5><?php echo $lang_description;?></td>
+	<td colspan=5><?php echo $LANG_description;?></td>
 </tr>
 <tr>
 	<td colspan=5 ><textarea input type=text name="i_description" rows=10 cols=100 WRAP=hard></textarea></td>
 </tr>
 <tr>
-	<td><?php echo $lang_gross_total;?></td><td><?php echo $lang_tax;?></td><td><?php echo $lang_inv_pref;?></td>
+	<td><?php echo $LANG_gross_total;?></td><td><?php echo $LANG_tax;?></td><td><?php echo $LANG_inv_pref;?></td>
 </tr>
 <tr>
 	<td><input type=text name="inv_it_gross_total" size=15></td><td input type=text name="inv_it_tax" size=15><?php echo $display_block_tax; ?></td><td input type=text name="inv_preferences" size=25><?php echo $display_block_preferences; ?></td>
@@ -272,7 +272,7 @@ $mid->printFooter();
 </div>
 
 <div id="footer">
-	<input type=submit name="submit" value="<?php echo $lang_save;echo " "; echo $lang_inv;?>"><input type=hidden name="invoice_style" value="insert_invoice_total"> * <?php echo $lang_mandatory_fields;?>
+	<input type=submit name="submit" value="<?php echo $LANG_save;echo " "; echo $LANG_inv;?>"><input type=hidden name="invoice_style" value="insert_invoice_total"> * <?php echo $LANG_mandatory_fields;?>
 </div>
 </div>
 

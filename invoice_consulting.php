@@ -243,7 +243,7 @@ Nifty("div#header,div#footer","small");
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 
 </head>
-	<title><?php echo $title; echo " :: "; echo $lang_inv; echo $lang_inv_consulting; ?></title>
+	<title><?php echo $title; echo " :: "; echo $LANG_inv; echo $LANG_inv_consulting; ?></title>
 <?php include('./config/config.php'); ?>
 <BODY>
 <?php
@@ -259,7 +259,7 @@ $mid->printFooter();
 <div id="header">
 <table align=center>
 <tr>
-<td colspan=2 align=center><b><?php echo $lang_inv; echo $lang_inv_consulting; ?></b></th>
+<td colspan=2 align=center><b><?php echo $LANG_inv; echo $LANG_inv_consulting; ?></b></th>
 </tr>
 </table>
 
@@ -285,7 +285,7 @@ $mid->printFooter();
 </tr>
 
 <tr>
-<td><?php echo $lang_quantity;?></td><td><?php echo $lang_description;?></td>
+<td><?php echo $LANG_quantity;?></td><td><?php echo $LANG_description;?></td>
 </tr>
 <?php
 /* check the def number of line items and do the print and entry field for that number of items */
@@ -308,18 +308,18 @@ $mid->printFooter();
                         endwhile;
 ?>
 <tr>
-        <td><?php echo $lang_notes_opt;?></td>
+        <td><?php echo $LANG_notes_opt;?></td>
 </tr>
 
 <tr>
         <td colspan=5 ><textarea input type=text name="invoice_consulting_note" rows=5 cols=80 WRAP=hard></textarea></td>
 </tr>
 
-<tr><td><?php echo $lang_tax;?></td><td input type=text name="inv_it_tax" size=15> <?php echo $display_block_tax; ?></td>
+<tr><td><?php echo $LANG_tax;?></td><td input type=text name="inv_it_tax" size=15> <?php echo $display_block_tax; ?></td>
 </tr>
 
 <tr>
-<td><?php echo $lang_inv_pref;?></td><td input type=text name="inv_preferences"><?php echo $display_block_preferences; ?></td>
+<td><?php echo $LANG_inv_pref;?></td><td input type=text name="inv_preferences"><?php echo $display_block_preferences; ?></td>
 </tr>
 <!--Add more line items while in an itemeised invoice - Get style - has problems- wipes the current values of the existing rows - not good
 <tr>
@@ -332,9 +332,9 @@ $mid->printFooter();
 
 <div id="footer">
 		<input type=hidden name="max_items" value="<?php echo $num; ?>">
-		<input type=submit name="submit" value="<?php echo $lang_save;echo " "; echo $lang_inv;?>">
+		<input type=submit name="submit" value="<?php echo $LANG_save;echo " "; echo $LANG_inv;?>">
 		<input type=hidden name="invoice_style" value="insert_invoice_consulting">
-		* <?php echo $lang_mandatory_fields;?>
+		* <?php echo $LANG_mandatory_fields;?>
 </div>
 
 </FORM>

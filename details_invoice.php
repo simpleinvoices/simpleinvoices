@@ -232,16 +232,16 @@ $display_block_top =  "
 		<td colspan=6 align=center><b>$pref_inv_headingField</b></td>
 	</tr>
         <tr>
-		<td class='details_screen'>$pref_inv_wordingField $lang_number_short</td><td><input type=hidden name=\"invoice_id\" value=$inv_idField size=15>$inv_idField</td>
+		<td class='details_screen'>$pref_inv_wordingField $LANG_number_short</td><td><input type=hidden name=\"invoice_id\" value=$inv_idField size=15>$inv_idField</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>$pref_inv_wordingField $lang_date</td><td colspan=2>$inv_dateField</td>
+		<td class='details_screen'>$pref_inv_wordingField $LANG_date</td><td colspan=2>$inv_dateField</td>
 	</tr>	
 	<tr>
-		<td class='details_screen'>$lang_biller</td><td>$display_block_biller</td>
+		<td class='details_screen'>$LANG_biller</td><td>$display_block_biller</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>$lang_customer</td><td>$display_block_customer</td>
+		<td class='details_screen'>$LANG_customer</td><td>$display_block_customer</td>
 	</tr>	
 
 ";
@@ -300,19 +300,19 @@ if (  $_GET['invoice_style'] === 'Total' ) {
 	$display_block_details =  "
 		<input type=hidden name=\"invoice_style\" value=\"edit_invoice_total\">
 	        <tr>
-        	        <td colspan=6 class='details_screen'>$lang_description</td>
+        	        <td colspan=6 class='details_screen'>$LANG_description</td>
 	        </tr>
 	        <tr>
 			<td colspan=6 ><textarea input type=text name=\"i_description\" rows=10 cols=100 WRAP=hard>$inv_it_descriptionField</textarea></td>
         	</tr>
 	        <tr>       	         
-			<td class='details_screen'>$lang_gross_total</td><td><input type=text name='inv_it_gross_total' value='$inv_it_gross_totalField' size=10> </td>
+			<td class='details_screen'>$LANG_gross_total</td><td><input type=text name='inv_it_gross_total' value='$inv_it_gross_totalField' size=10> </td>
 		</tr>
 		<tr>
 		<tr>
-			 <td class='details_screen'>$lang_tax</td><td>$display_block_tax</td>
+			 <td class='details_screen'>$LANG_tax</td><td>$display_block_tax</td>
 	        </tr>
-			 <td class='details_screen'>$lang_inv_pref</td><td>$display_block_preferences/td>
+			 <td class='details_screen'>$LANG_inv_pref</td><td>$display_block_preferences/td>
 	        </tr>
 	";	
    
@@ -333,7 +333,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 		<td colspan=6>
 		<table>
 		<tr>
-        	        <td class='details_screen'>$lang_quantity_short</td><td class='details_screen'>$lang_description</td>
+        	        <td class='details_screen'>$LANG_quantity_short</td><td class='details_screen'>$LANG_description</td>
 	        </tr>";
 	}
 	#show column heading for consulting style
@@ -344,7 +344,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 		<td colspan=6>
 		<table>
                 <tr>
-                        <td class='details_screen'>$lang_quantity_short</td><td class='details_screen'>$lang_item</td>
+                        <td class='details_screen'>$LANG_quantity_short</td><td class='details_screen'>$LANG_item</td>
                 </tr>";
         }
 
@@ -436,7 +436,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
         	</tr> 
 		<tr>
 
-			<td colspan=6 class='details_screen'>$lang_description</td>
+			<td colspan=6 class='details_screen'>$LANG_description</td>
 		<tr>
                         <td colspan=6 ><textarea input type=text name=\"consulting_item_note$line\" rows=5 cols=100 WRAP=hard>$inv_it_descriptionField</textarea></td>
                 </tr>
@@ -459,15 +459,15 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 		$display_block_details .=  "
 			</table>
 			<tr>
-				<td colspan=6 class='details_screen'>$lang_note:</td>
+				<td colspan=6 class='details_screen'>$LANG_note:</td>
 			</tr>
 			<tr>
 	                        <td colspan=6 ><textarea input type=text name=\"invoice_itemised_note\" rows=10 cols=100 WRAP=hard>$inv_noteField</textarea></td>
 			</tr>
 	                <tr>
-	                         <td class='details_screen'>$lang_tax</td><td>$display_block_tax</td>
+	                         <td class='details_screen'>$LANG_tax</td><td>$display_block_tax</td>
 	                </tr>
-	                         <td class='details_screen'>$lang_inv_pref</td><td>$display_block_preferences/td>
+	                         <td class='details_screen'>$LANG_inv_pref</td><td>$display_block_preferences/td>
 	                </tr>
 		";
 	}
@@ -545,7 +545,7 @@ You are editing <?php echo $pref_inv_wordingField; ?> <?php echo $master_invoice
 
 <div id="footer">
 	<input type=button value='Cancel'onCLick='history.back()'>
-	<input type=submit name="submit" value="<?php echo $lang_save; ?>">
+	<input type=submit name="submit" value="<?php echo $LANG_save; ?>">
 	<input type=hidden name="max_items" value="<?php echo $line; ?>">
 </div>
 

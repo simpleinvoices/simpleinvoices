@@ -37,7 +37,7 @@ Nifty("div#header,div#footer","small");
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 
 
-<title><?php echo $title; echo " :: "; echo $lang_customer_add; ?></title>
+<title><?php echo $title; echo " :: "; echo $LANG_customer_add; ?></title>
 
 
 </head>
@@ -53,41 +53,41 @@ $mid->printFooter();
 <FORM name="frmpost" ACTION="insert_action.php" METHOD=POST onsubmit="return frmpost_Validator(this)">
 
 <div id="container">
-<div id="header"><b><?php echo $lang_customer_add; ?></b> </div>
+<div id="header"><b><?php echo $LANG_customer_add; ?></b> </div>
 
 <table align=center>
 <tr>
-	<td><?php echo $lang_customer_name; ?></td><td><input type=text name="c_name" size=25></td>
+	<td><?php echo $LANG_customer_name; ?></td><td><input type=text name="c_name" size=25></td>
 </tr>
 </tr>
-	<td><?php echo $lang_customer_contact; ?></th><td><input type=text name="c_attention" size=25></td>
-</tr>
-<tr>
-	<td><?php echo $lang_address; echo ": "; echo $lang_street;?></td><td><input type=text name="c_street_address" size=25></td>
+	<td><?php echo $LANG_customer_contact; ?></th><td><input type=text name="c_attention" size=25></td>
 </tr>
 <tr>
-	<td><?php echo $lang_address; echo ": "; echo $lang_city;?></td><td><input type=text name="c_city" size=25></td>
+	<td><?php echo $LANG_address; echo ": "; echo $LANG_street;?></td><td><input type=text name="c_street_address" size=25></td>
 </tr>
 <tr>
-	<td><?php echo $lang_address; echo ": "; echo $lang_state;?></td><td><input type=text name="c_state" size=25></td>
+	<td><?php echo $LANG_address; echo ": "; echo $LANG_city;?></td><td><input type=text name="c_city" size=25></td>
 </tr>
 <tr>
-	<td><?php echo $lang_address; echo ": "; echo $lang_zip;?></td><td><input type=text name="c_zip_code" size=25></td>
+	<td><?php echo $LANG_address; echo ": "; echo $LANG_state;?></td><td><input type=text name="c_state" size=25></td>
 </tr>
 <tr>
-	<td><?php echo $lang_address; echo ": "; echo $lang_country; echo "("; echo $lang_optional; echo ")";  ?></td><td><input type=text name="c_country" size=75></td>
+	<td><?php echo $LANG_address; echo ": "; echo $LANG_zip;?></td><td><input type=text name="c_zip_code" size=25></td>
 </tr>
 <tr>
-	<td><?php echo $lang_phone; ?></td><td><input type=text name="c_phone" size=25></td>
+	<td><?php echo $LANG_address; echo ": "; echo $LANG_country; echo "("; echo $LANG_optional; echo ")";  ?></td><td><input type=text name="c_country" size=75></td>
 </tr>
 <tr>
-	<td><?php echo $lang_fax; ?></td><td><input type=text name="c_fax" size=25></td>
+	<td><?php echo $LANG_phone; ?></td><td><input type=text name="c_phone" size=25></td>
 </tr>
 <tr>
-	<td><?php echo $lang_email; ?></td><td><input type=text name="c_email" size=25></td>
+	<td><?php echo $LANG_fax; ?></td><td><input type=text name="c_fax" size=25></td>
+</tr>
+<tr>
+	<td><?php echo $LANG_email; ?></td><td><input type=text name="c_email" size=25></td>
 </tr>
 <tr>    
-                <td><?php echo $lang_notes; ?></td><td><textarea input type=text name='c_notes' rows=8 cols=50></textarea></td>
+                <td><?php echo $LANG_notes; ?></td><td><textarea input type=text name='c_notes' rows=8 cols=50></textarea></td>
 </tr>
 <tr>
 <td><?php echo $wording_for_enabledField; ?></td><td><?php echo $display_block_enabled;?></td>

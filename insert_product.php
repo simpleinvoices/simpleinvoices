@@ -72,7 +72,7 @@ $mid->printFooter();
 		<td>Product Unit Price</td><td><input type=text name="prod_unit_price" size=25></td>
 	</tr>
         <tr>
-                <td><?php echo $lang_notes;?></td><td><textarea input type=text name='prod_notes' rows=8 cols=50><?php echo $prod_notesField;?></textarea></td>
+                <td><?php echo $LANG_notes;?></td><td><textarea input type=text name='prod_notes' rows=8 cols=50><?php echo $prod_notesField;?></textarea></td>
         </tr>
 	<tr>
 		<td>Product Enabled</td><td><?php echo $display_block_enabled;?></td>
