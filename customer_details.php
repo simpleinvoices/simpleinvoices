@@ -343,6 +343,7 @@ $mid->printFooter();
 <div id="footer">
 <?php echo $footer; ?>
 </div>
+</form>
 </body>
 </html>
 

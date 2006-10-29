@@ -128,12 +128,12 @@ $mid->printFooter();
 <br>
 
 
-                <h1 align=center><?php echo $indx_welcome; echo $title; ?></h1>
+                <h1 align=center><?php echo $LANG_welcome; echo $title; ?></h1>
                 <div id="list1">
-                <h2><img src="./images/reports.png"></img><?php echo $indx_stats; ?></h2>
+                <h2><img src="./images/reports.png"></img><?php echo $LANG_stats; ?></h2>
                         <div id="item11">
 
-                                <div class="title"><?php echo $indx_stats_debtor; ?></div>
+                                <div class="title"><?php echo $LANG_stats_debtor; ?></div>
 
                                 <div class="content">
 			
@@ -143,7 +143,7 @@ $mid->printFooter();
 
                         <div id="item12">
 
-                                <div class="title"><?php echo $indx_stats_customer; ?></div>
+                                <div class="title"><?php echo $LANG_stats_customer; ?></div>
 
                                 <div class="content">
 
@@ -155,7 +155,7 @@ $mid->printFooter();
 
                         <div id="item13">
 
-                                <div class="title"><?php echo $indx_stats_biller; ?></div>
+                                <div class="title"><?php echo $LANG_stats_biller; ?></div>
 
                                 <div class="content">
 
@@ -169,35 +169,35 @@ $mid->printFooter();
 
                <div id="list2">
 
-                <h2><img src="./images/menu.png"> <?php echo $indx_shortcut; ?></h2>
+                <h2><img src="./images/menu.png"> <?php echo $LANG_shortcut; ?></h2>
 
                         <div id="item21">
-                                <div class="mytitle"><?php echo $indx_getting_started; ?></div>
+                                <div class="mytitle"><?php echo $LANG_getting_started; ?></div>
                                 <div class="mycontent">
-                                        <a href="./inline_instructions.php#faqs-what"><?php echo $indx_faqs_what; ?></a><br/>
-                                        <a href="./inline_instructions.php#faqs-need"><?php echo $indx_faqs_need; ?></a><br/>
-                                        <a href="inline_instructions.php#faqs-how"><?php echo $indx_faqs_how; ?></a><br/>
-                                        <a href="inline_instructions.php#faqs-types"><?php echo $indx_faqs_type; ?></a>
+                                        <a href="./inline_instructions.php#faqs-what"><?php echo $LANG_faqs_what; ?></a><br/>
+                                        <a href="./inline_instructions.php#faqs-need"><?php echo $LANG_faqs_need; ?></a><br/>
+                                        <a href="inline_instructions.php#faqs-how"><?php echo $LANG_faqs_how; ?></a><br/>
+                                        <a href="inline_instructions.php#faqs-types"><?php echo $LANG_faqs_type; ?></a>
                                 </div>
                         </div>
 
                         <div id="item22">
-                                <div class="mytitle"><?php echo $indx_create_invoice; ?></div>
+                                <div class="mytitle"><?php echo $LANG_create_invoice; ?></div>
                                 <div class="mycontent">
-                                        <a href="invoice_itemised.php"><?php echo $indx_invoice_itemised; ?></a><br/>
-                                        <a href="invoice_total.php"><?php echo $indx_invoice_total; ?></a><br/>
-                                        <a href="invoice_consulting.php"><?php echo $indx_invoice_consulting; ?></a><br/>
+                                        <a href="invoice_itemised.php"><?php echo $LANG_itemised; ?></a><br/>
+                                        <a href="invoice_total.php"><?php echo $LANG_total; ?></a><br/>
+                                        <a href="invoice_consulting.php"><?php echo $LANG_consulting; ?></a><br/>
                                 </div>
                         </div>
                         <div id="item23">
-                                <div class="mytitle"><?php echo $indx_manage_existing_invoice; ?></div>
+                                <div class="mytitle"><?php echo $LANG_manage_existing_invoice; ?></div>
                                 <div class="mycontent">
-                                        <a href="manage_invoices.php"><?php echo $indx_manage_invoices; ?></a><br/>
+                                        <a href="manage_invoices.php"><?php echo $LANG_manage_invoices; ?></a><br/>
                                 </div>
                         </div>
 
                         <div id="item24">
-                                <div class="mytitle"><?php echo $indx_manage_data; ?></div>
+                                <div class="mytitle"><?php echo $LANG_manage_data; ?></div>
                                 <div class="mycontent">
                                         <a href="insert_biller.php"><?php echo $indx_insert_biller; ?></a><br/>
                                         <a href="insert_customer.php"><?php echo $indx_insert_customer; ?></a><br/>

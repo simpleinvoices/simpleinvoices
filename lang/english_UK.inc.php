@@ -16,6 +16,7 @@ $LANG_attention_short = "Attn.";
 $LANG_biller = "Biller";
 $LANG_cancel = "Cancel";
 $LANG_city = "City";
+$LANG_consulting = "Consulting";
 $LANG_country = "Country";
 $LANG_customer = "Customer";
 $LANG_customer_account = "Customer Account";
@@ -42,6 +43,7 @@ $LANG_inv_consulting = " - Consulting";
 $LANG_inv_pref = "Invoice Preference";
 $LANG_invoice_listings = "Invoice listing";
 $LANG_item = "Item";
+$LANG_itemised = "Itemised";
 $LANG_gross_total = "Gross Total";
 $LANG_mandatory_fields = "All fields are mandatory";
 $LANG_manage = "Manage";
@@ -82,34 +84,39 @@ $LANG_quantity = "Quantity";
 $LANG_quantity_short = "Qty";
 $LANG_zip = "Zip code";
 
-
-
-
-
-
-
+$LANG_welcome = "Welcome to ";
 
 
 #Index.php - front page
+
 $indx_welcome ="Welcome to ";
 
 $indx_shortcut ="Shortcut menu";
+$LANG_shortcut ="Shortcut menu";
 
 $indx_getting_started ="Getting started";
+$LANG_getting_started ="Getting started";
 $indx_faqs_what ="What is Simple Invoices?";
+$LANG_faqs_what ="What is Simple Invoices?";
 $indx_faqs_need ="What do I need to start invoicing?";
+$LANG_faqs_need ="What do I need to start invoicing?";
 $indx_faqs_how ="How do I create invoices?";
+$LANG_faqs_how ="How do I create invoices?";
 $indx_faqs_type ="What are the different types of invoices?";
+$LANG_faqs_type ="What are the different types of invoices?";
 
-$indx_create_invoice ="Create an invoice";
+$LANG_create_invoice ="Create an invoice";
 $indx_invoice_total ="Total";
 $indx_invoice_itemised ="Itemised";
 $indx_invoice_consulting ="Consulting";
 
 $indx_manage_existing_invoice ="Manage your existing invoices";
+$LANG_manage_existing_invoice ="Manage your existing invoices";
 $indx_manage_invoices ="Manage invoices";
+$LANG_manage_invoices ="Manage invoices";
 
 $indx_manage_data ="Manage your data";
+$LANG_manage_data ="Manage your data";
 $indx_insert_customer = "Add Customer";
 $indx_insert_biller = "Add Biller";
 $indx_insert_product = "Add Product";
@@ -128,9 +135,13 @@ $indx_help_upgrade ="Upgrading Simple Invoices";
 $indx_help_prepare ="Prepare Simple Invoices for use";
 
 $indx_stats =" Quick stats";
+$LANG_stats =" Quick stats";
 $indx_stats_debtor ="Largest debtor";
+$LANG_stats_debtor ="Largest debtor";
 $indx_stats_customer ="Top Customer - by amount invoiced";
+$LANG_stats_customer ="Top Customer - by amount invoiced";
 $indx_stats_biller ="Top Biller - by amount invoiced";
+$LANG_stats_biller ="Top Biller - by amount invoiced";
 
 #Manage Invoices
 $mi_page_title = " - Manage Invoices";
