@@ -490,6 +490,7 @@ $display_block_bottom =  "
 
 ?>
 <html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <head>
 <?php include('./include/menu.php'); ?>
     <script type="text/javascript" src="./include/jquery.js"></script>
