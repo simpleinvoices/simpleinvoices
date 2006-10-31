@@ -200,8 +200,11 @@ $mid->printFooter();
                                 <div class="mytitle"><?php echo $LANG_manage_data; ?></div>
                                 <div class="mycontent">
                                         <a href="insert_biller.php"><?php echo $indx_insert_biller; ?></a><br/>
+                                        <a href="manage_biller.php"><?php echo "Manage Billers" ; ?></a><br/>
                                         <a href="insert_customer.php"><?php echo $indx_insert_customer; ?></a><br/>
+                                        <a href="manage_customers.php"><?php echo "Manage Customers" ; ?></a><br/>
                                         <a href="insert_product.php"><?php echo $indx_insert_product; ?></a><br/>
+                                        <a href="manage_products.php"><?php echo "Manage Products" ; ?></a><br/>
                                 </div>
                         </div>
                         <div id="item25">
