@@ -138,39 +138,39 @@ $display_block_top =  "
 		<td nowrap><b>$b_nameField</b></td><td colspan=7 ></td>
 	</tr>
 	<tr>
-		<td nowrap>$b_street_addressField,</td><td>Ph: $b_phoneField</td><td></td><td><b>$pref_inv_wordingField $lang_number_short</b></td><td>$inv_idField</td><td></td>
+		<td nowrap>$b_street_addressField,</td><td>Ph: $b_phoneField</td><td></td><td><b>$pref_inv_wordingField $LANG_number_short</b></td><td>$inv_idField</td><td></td>
 	</tr>	
 	<tr>
-		<td nowrap>$b_cityField,</td><td>$lang_mobile_short: $b_mobile_phoneField</td><td></td><td><b>$pref_inv_wordingField $lang_date</b></td><td colspan=2>$inv_dateField</td>
+		<td nowrap>$b_cityField,</td><td>$LANG_mobile_short: $b_mobile_phoneField</td><td></td><td><b>$pref_inv_wordingField $LANG_date</b></td><td colspan=2>$inv_dateField</td>
 
 	</tr>	
 	<tr>
-		<td nowrap>$b_stateField, $b_zip_codeField</td><td>$lang_fax: $b_faxField</td>
+		<td nowrap>$b_stateField, $b_zip_codeField</td><td>$LANG_fax: $b_faxField</td>
 	</tr>	
 	<tr>
-		<td nowrap>$b_countryField</td><td>$lang_email: $b_emailField</td>
+		<td nowrap>$b_countryField</td><td>$LANG_email: $b_emailField</td>
 	</tr>	
 	<tr>
 		<td colspan=5><br><br></td>
 	</tr>	
 	<tr>
-		<td><i>$lang_customer</i></td><td></td>
+		<td><i>$LANG_customer</i></td><td></td>
 	</tr>	
 	<tr>
 		<td colspan=2>$c_nameField</td><td colspan=4></td>
 	</tr>
 	<tr>
-		<td nowrap>$lang_attention_short: $c_attentionField,</td>
+		<td nowrap>$LANG_attention_short: $c_attentionField,</td>
 	</tr>
 
 	<tr>
-		<td nowrap>$c_street_addressField,</td><td>$lang_phone_short: $c_phoneField</td><td colspan=4></td>
+		<td nowrap>$c_street_addressField,</td><td>$LANG_phone_short: $c_phoneField</td><td colspan=4></td>
 	</tr>	
 	<tr>
-		<td nowrap>$c_cityField,</td><td>$lang_fax: $c_faxField</td><td colspan=4></td>
+		<td nowrap>$c_cityField,</td><td>$LANG_fax: $c_faxField</td><td colspan=4></td>
 	</tr>	
 	<tr>
-		<td nowrap>$c_stateField, $c_zip_codeField</td><td colspan=3>$lang_email: $c_emailField</td><td></td>
+		<td nowrap>$c_stateField, $c_zip_codeField</td><td colspan=3>$LANG_email: $c_emailField</td><td></td>
 	</tr>	
 	<tr>
 		<td colspan=6>$c_countryField</td>
@@ -232,7 +232,7 @@ if ($_GET[invoice_style] === 'Total') {
 	                <td colspan=6><br><br></td>
         	</tr>
 	        <tr>
-        	        <td colspan=6><b>$lang_description</b></td>
+        	        <td colspan=6><b>$LANG_description</b></td>
 	        </tr>
 	        <tr>
 	                <td colspan=6>$inv_it_descriptionField</td>
@@ -241,7 +241,7 @@ if ($_GET[invoice_style] === 'Total') {
         	        <td colspan=6><br></td>
 	        </tr>
 	        <tr>
-	                <td></td><td></td><td></td><td><b>$lang_gross_total</b></td><td><b>$lang_tax</b></td><td><b>$lang_total_uppercase</b></td>
+	                <td></td><td></td><td></td><td><b>$LANG_gross_total</b></td><td><b>$LANG_tax</b></td><td><b>$LANG_total_uppercase</b></td>
         	</tr>
 	        <tr>
         	        <td></td><td></td><td></td><td>$pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td><u>$pref_currency_signField$inv_it_totalField</u></td>
@@ -273,14 +273,14 @@ $display_block_details =  "
         if ( $_GET['invoice_style'] === 'Itemised' ) {
                 $display_block_details .=  "
                 <tr>
-                        <td><b>$lang_quantity_short</b></td><td><b>$lang_description</b></td><td><b>$lang_unit_price</b><td><b>$lang_gross_total</b></td><td><b>$lang_tax</b></td><td><b>$lang_total_uppercase</b></td>
+                        <td><b>$LANG_quantity_short</b></td><td><b>$LANG_description</b></td><td><b>$LANG_unit_price</b><td><b>$LANG_gross_total</b></td><td><b>$LANG_tax</b></td><td><b>$LANG_total_uppercase</b></td>
                 </tr>";
         }
         #show column heading for consulting style
         else if ( $_GET['invoice_style'] === 'Consulting' ) {
                 $display_block_details .=  "
                 <tr>
-                        <td><b>$lang_quantity_short</b></td><td><b>$lang_items</b></td><td><b>$lang_unit_price</b><td><b>$lang_gross_total</b></td><td><b>$lang_tax</b></td><td><b>$lang_total_uppercase</b></td>
+                        <td><b>$LANG_quantity_short</b></td><td><b>$LANG_items</b></td><td><b>$LANG_unit_price</b><td><b>$LANG_gross_total</b></td><td><b>$LANG_tax</b></td><td><b>$LANG_total_uppercase</b></td>
                 </tr>";
         }
 
@@ -365,7 +365,7 @@ $display_block_details =  "
 
                 $display_block_details .=  "
                 <tr>
-                        <td>$inv_it_quantityField</td><td>$prod_descriptionField</td></tr><tr><td></td><td colspan=6><i>$lang_description: </i>$inv_it_descriptionField</td></tr><tr><td></td><td></td><td>$pref_currency_signField$inv_it_unit_priceField</td><td>$pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td>$pref_currency_signField$inv_it_totalField</td>
+                        <td>$inv_it_quantityField</td><td>$prod_descriptionField</td></tr><tr><td></td><td colspan=6><i>$LANG_description: </i>$inv_it_descriptionField</td></tr><tr><td></td><td></td><td>$pref_currency_signField$inv_it_unit_priceField</td><td>$pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td>$pref_currency_signField$inv_it_totalField</td>
                 </tr>
 		<tr>
 			<td><br></td>
@@ -389,7 +389,7 @@ $display_block_details =  "
                                 <td></td>
                         </tr>
                         <tr>
-                                <td><i>$lang_note:</i></td>
+                                <td><i>$LANG_note:</i></td>
                         </tr>
                         <tr>
                                 <td colspan=6>$inv_noteField</td>
@@ -412,7 +412,7 @@ $display_block_details =  "
 	</tr>	
 
         <tr>
-                <td colspan=3></td><td align=left colspan=2>$lang_tax_total</td><td>$pref_currency_signField$invoice_total_taxField</td>
+                <td colspan=3></td><td align=left colspan=2>$LANG_tax_total</td><td>$pref_currency_signField$invoice_total_taxField</td>
         </tr>
 	<tr><td><br></td>
 	</tr>

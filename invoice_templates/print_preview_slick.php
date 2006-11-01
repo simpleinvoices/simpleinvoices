@@ -171,15 +171,15 @@ $display_block_top =  "
 
 <TABLE width=90% border=0 align=center>
 <tr><th colspan=2 align=center style=font-size:8pt>$pref_inv_headingField</th></tr>
-<tr><td width=50%>$logo_block</td><td width=50% style=font-size:10pt><h2>$b_nameField</h2>$b_street_addressField, $b_cityField, $b_stateField, $b_zip_codeField<br>$lang_telephone_short: $b_phoneField &nbsp; $lang_email: $b_emailField</td></tr>
+<tr><td width=50%>$logo_block</td><td width=50% style=font-size:10pt><h2>$b_nameField</h2>$b_street_addressField, $b_cityField, $b_stateField, $b_zip_codeField<br>$LANG_telephone_short: $b_phoneField &nbsp; $LANG_email: $b_emailField</td></tr>
 </TABLE>
 <br>
 <TABLE width=90% align=center cellspacing=0 cellpadding=0>
-<tr><td width=50%><table border=1 width=90% align=left><tr><td style=font-size:12pt>Attn: $c_attentionField,<br>$c_nameField,<br>$c_street_addressField,<br>$c_cityField,<br>$c_stateField, $c_zip_codeField<br>$c_countryField</td></tr></table></td><td width=50% valign=top><b>$pref_inv_wordingField $lang_number_short  </b>$inv_it_invoice_idField<br>$pref_inv_wordingField $lang_date. $inv_dateField</td></tr>
+<tr><td width=50%><table border=1 width=90% align=left><tr><td style=font-size:12pt>Attn: $c_attentionField,<br>$c_nameField,<br>$c_street_addressField,<br>$c_cityField,<br>$c_stateField, $c_zip_codeField<br>$c_countryField</td></tr></table></td><td width=50% valign=top><b>$pref_inv_wordingField $LANG_number_short  </b>$inv_it_invoice_idField<br>$pref_inv_wordingField $LANG_date. $inv_dateField</td></tr>
 </TABLE>
 <br>
 <TABLE width=90% border=1 align=center cellpadding=4 cellspacing=0>
-<tr><td width=84% style=font-size:10pt> $lang_provision_of:- </td><td width=16% style=font-size:10pt>&nbsp;</td></tr>
+<tr><td width=84% style=font-size:10pt> $LANG_provision_of:- </td><td width=16% style=font-size:10pt>&nbsp;</td></tr>
 </TABLE>
 ";
 
@@ -205,7 +205,7 @@ $blankrow
 
 $blankrow$blankrow$blankrow
 
-<tr><td width=64% style=font-size:10pt>&nbsp;</td><td width=10% align=right style=font-size:10pt>$lang_total</td><td width=10% align=right style=font-size:10pt>$lang_tax</td>
+<tr><td width=64% style=font-size:10pt>&nbsp;</td><td width=10% align=right style=font-size:10pt>$LANG_total</td><td width=10% align=right style=font-size:10pt>$LANG_tax</td>
 <td width=16% align=right style=font-size:10pt><b>&nbsp;</b></td></tr>
 
 <tr><td width=64% style=font-size:10pt>&nbsp;</td><td width=10% align=right style=font-size:10pt>$pref_currency_signField $inv_it_gross_totalField</td><td width=10% align=right style=font-size:10pt>$pref_currency_signField $inv_it_tax_amountField</td>
@@ -216,7 +216,7 @@ $blankrow$blankrow$blankrow
 
 <td width=16% align=right style=font-size:10pt><b>&nbsp</b></td>
 
-<tr><td width=84% style=font-size:10pt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>$pref_inv_wordingField $lang_sum</b></td>
+<tr><td width=84% style=font-size:10pt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>$pref_inv_wordingField $LANG_sum</b></td>
 <td width=16% align=right style=font-size:10pt><b><u>$pref_currency_signField $invoice_total_totalField</u></b></td></tr>
 
 </TABLE>
@@ -242,12 +242,12 @@ $blankrow="<tr><td width=84% ><TABLE width=100% border=0 align=left>
 		$display_block_details =  "
 		<TABLE width=90% border=1 align=center cellpadding=2 cellspacing=0>
 		<tr><td width=84% ><TABLE width=100% border=0 align=left>
-		    <tr><td width=8% style=font-size:10pt><b>$lang_quantity_short</b></td><td width=40% style=font-size:10pt><b>$lang_description</b></td>
-		    <td width=12% align=right style=font-size:10pt><b>$lang_unit_price</b></td>
-		    <td width=15% align=right style=font-size:10pt><b>$lang_sub_total</b></td>
-		    <td width=15% align=right style=font-size:10pt><b>$lang_tax &nbsp;</b></td></tr>
+		    <tr><td width=8% style=font-size:10pt><b>$LANG_quantity_short</b></td><td width=40% style=font-size:10pt><b>$LANG_description</b></td>
+		    <td width=12% align=right style=font-size:10pt><b>$LANG_unit_price</b></td>
+		    <td width=15% align=right style=font-size:10pt><b>$LANG_sub_total</b></td>
+		    <td width=15% align=right style=font-size:10pt><b>$LANG_tax &nbsp;</b></td></tr>
 		    </TABLE></td>
-		<td width=16% align=center style=font-size:10pt><b>$lang_total_uppercase</b></td></tr>";
+		<td width=16% align=center style=font-size:10pt><b>$LANG_total_uppercase</b></td></tr>";
 
         }
         #show column heading for consulting style
@@ -256,12 +256,12 @@ $blankrow="<tr><td width=84% ><TABLE width=100% border=0 align=left>
                 $display_block_details =  "
                 <TABLE width=90% border=1 align=center cellpadding=2 cellspacing=0>
                 <tr><td width=84% ><TABLE width=100% border=0 align=left>
-                    <tr><td width=8% style=font-size:10pt><b>$lang_quantity_short</b></td><td width=40% style=font-size:10pt><b>$lang_item</b></td>
-                    <td width=12% align=right style=font-size:10pt><b>$lang_unit_price</b></td>
-                    <td width=15% align=right style=font-size:10pt><b>$lang_sub_total</b></td>
-                    <td width=15% align=right style=font-size:10pt><b>$lang_tax &nbsp;</b></td></tr>
+                    <tr><td width=8% style=font-size:10pt><b>$LANG_quantity_short</b></td><td width=40% style=font-size:10pt><b>$LANG_item</b></td>
+                    <td width=12% align=right style=font-size:10pt><b>$LANG_unit_price</b></td>
+                    <td width=15% align=right style=font-size:10pt><b>$LANG_sub_total</b></td>
+                    <td width=15% align=right style=font-size:10pt><b>$LANG_tax &nbsp;</b></td></tr>
                     </TABLE></td>
-                <td width=16% align=center style=font-size:10pt><b>$lang_total_uppercase</b></td></tr>";
+                <td width=16% align=center style=font-size:10pt><b>$LANG_total_uppercase</b></td></tr>";
 
         }
 
@@ -362,7 +362,7 @@ $total_per_line = $gross_total_itemised + $total_tax_per_line ;
 			<tr><td width=84% ><TABLE width=100% border=0 align=left>
 			    <tr><td width=8% style=font-size:10pt>$inv_it_quantityField</td>
 			    <td width=40% style=font-size:10pt>$prod_descriptionField</td></tr>
-				<tr><td width=8% ></td><td width=76% colspan=6 style=font-size:10pt align=left><i>$lang_description: </i>$inv_it_descriptionField</td></tr>
+				<tr><td width=8% ></td><td width=76% colspan=6 style=font-size:10pt align=left><i>$LANG_description: </i>$inv_it_descriptionField</td></tr>
 			    <tr>
 				<td width=8%></td>
 				<td width=40%></td>
@@ -388,7 +388,7 @@ $total_per_line = $gross_total_itemised + $total_tax_per_line ;
                 $display_block_details .=  "
                        <tr><td width=84% ><TABLE width=100% border=0 align=left> 
 			<tr>
-                                <td width=84% style=font-size:10pt><i>$lang_note:</i></td><td width=16% align=right valign=bottom style=font-size:10pt></td>
+                                <td width=84% style=font-size:10pt><i>$LANG_note:</i></td><td width=16% align=right valign=bottom style=font-size:10pt></td>
                         </tr>
                         <tr>
                                 <td width=84% style=font-size:10pt>$inv_noteField</td><td width=16% align=right valign=bottom style=font-size:10pt></td>
@@ -409,7 +409,7 @@ $blankrow$blankrow$blankrow$blankrow
 
 <tr><td width=84% ><TABLE width=100% border=0 align=left>
     <tr><td width=8% style=font-size:10pt>&nbsp;</td>
-    <td width=40% style=font-size:10pt><b>$pref_inv_wordingField $lang_sum</b></td>
+    <td width=40% style=font-size:10pt><b>$pref_inv_wordingField $LANG_sum</b></td>
     <td width=12% align=right style=font-size:10pt></td>
     <td width=15% align=right style=font-size:10pt></td>
     <td width=15% align=right style=font-size:10pt><b>$pref_currency_signField $invoice_total_taxField</b></td></tr>
