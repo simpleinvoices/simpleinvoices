@@ -135,7 +135,7 @@ $indx_help_upgrade ="Upgrading Simple Invoices";
 $indx_help_prepare ="Prepare Simple Invoices for use";
 
 $indx_stats =" Quick stats";
-$LANG_stats =" Quick stats";
+$LANG_stats =" Quick reports";
 $indx_stats_debtor ="Largest debtor";
 $LANG_stats_debtor ="Largest debtor";
 $indx_stats_customer ="Top Customer - by amount invoiced";
