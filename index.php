@@ -169,22 +169,30 @@ $display_block ="
 						<td width=10%>
 				                        <a href=\"invoice_itemised.php\">
 								<img src=\"images/itemised.png\"></img>
-								$LANG_itemised
-							</a><br>soem stuff<bt>more stuff
+								$LANG_itemised_style
+							</a>
                                 		</td>		
 						<td width=10%>
 				        		<a href=\"invoice_total.php\">
 								<img src=\"images/total.png\"></img>
-								$LANG_total
+								$LANG_total_style
 							</a>
 						</td>
 						<td width=10%>
 		                                        <a href=\"invoice_consulting.php\">
 								<img src=\"images/consulting.png\"></img>
-								$LANG_consulting
+								$LANG_consulting_style
 							</a>
                 				</td>
+					</tr>
 					<tr>
+						<td colspan=3 align=center>
+                		                        <a href=\"inline_instructions.php#faqs-types\">
+	                                                	<img src=\"images/question.png\"></img>
+								$LANG_faqs_type
+							</a>
+                                		</td>		
+					</tr>
 					</table>
 		                </div>
                         </div>
@@ -236,7 +244,7 @@ $display_block ="
 							</a>
 						</td>
                                                 <td width=10%>
-                                        		<a href=\"manage_biller.php\">
+                                        		<a href=\"manage_billers.php\">
                                                         	<img src=\"images/biller.png\"></img>
 								Manage Billers
 							</a>
@@ -350,33 +358,8 @@ Nifty("div#header,div#footer","small");
 
                 <script type="text/javascript" src="./include/jquery.js"></script>
                 <script type="text/javascript" src="./include/jquery-accordian.js"></script>
-                <style type="text/css">
 
-			/*The CSS code for the fronta page of Simple Invoices - start*/
-			body{background:#F5F5F5 url('./themes/<?php echo $theme; ?>/images/gb_top.gif') repeat-x; color: #222; margin: 0;      padding: 0;}
-
-                        #list1 { width:48%;  position:absolute; top:15%; right:1em; }
-                        .title { cursor:pointer; border:1px solid #CCCCCC; margin-top:0.5em; padding:0.1em; }
-                        .on1  .title { background-color:#E4EFC7; }
-                        .off1 .title { background-color:#E0E0E0; }
-                        /*.content    { background-color:#F5F5F5; padding:0.1em; border:1px solid #C0C0C0; border-top-width:0; }*/
-                        .content    { background-color:#FFF; padding:0.1em; border:1px solid #C0C0C0; border-top-width:0; }
-
-                        #list2 { width:48%; position:absolute; top:15%; left:1em; }
-                        .mytitle { cursor:pointer; border:1px solid #CCCCCC; margin-top:0.5em; padding:0.1em; }
-                        .on  .mytitle { background-color:#E4EFC7; }
-                        .off .mytitle { background-color:#E0E0E0; }
-                        /*.mycontent    { background-color:#F5F5F5; padding:0.1em; border:1px solid #C0C0C0; border-top-width:0; }*/
-                        .mycontent    { background-color:#FFF; padding:0.1em; border:1px solid #C0C0C0; border-top-width:0; }
-
-			a:link {  text-decoration: none; }
-			a:visited { text-decoration: none; }
-			a:active { text-decoration: none; }
-			a:hover {text-decoration: underline; color:  #ff0000; }
-
-			/*The CSS code for the fronta page of Simple Invoices - end*/
-                </style>
-<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
+		<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/index.css">
 
 </head>
 <BODY>
@@ -391,7 +374,7 @@ $mid->printFooter();
 
 <div id="container">
 <div id=header>
-<!--                <h1 align=center><?php echo $LANG_welcome; echo $title; ?></h1>-->
+                <b align=center><?php echo $title; ?></b>
 </div>
 <br>
 <br>
@@ -399,26 +382,7 @@ $mid->printFooter();
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <?php echo $display_block; ?>
-<div id="footer"></div>
 
                 </div>
 
