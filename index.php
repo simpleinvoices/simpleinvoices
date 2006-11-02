@@ -131,22 +131,30 @@ $display_block ="
                                       <table>
                                         <tr>
                                                 <td width=10%>
-	                                                <img src=\"images/question.png\"></img>
-                                        		<a href=\"./inline_instructions.php#faqs-what\">$LANG_faqs_what</a><br/>
+                                        		<a href=\"./inline_instructions.php#faqs-what\">
+								<img src=\"images/question.png\"></img>
+								 $LANG_faqs_what
+							</a>
                                 		</td>		
 						<td width=10%>
-	                                                <img src=\"images/question.png\"></img>
-		                                        <a href=\"./inline_instructions.php#faqs-need\">$LANG_faqs_need</a><br/>
+		                                        <a href=\"./inline_instructions.php#faqs-need\">
+	                                                	<img src=\"images/question.png\"></img>
+								$LANG_faqs_need
+							</a>
                                 		</td>		
 					</tr>
 					<tr>
 						<td width=10%>
-	                                                <img src=\"images/question.png\"></img>
-		                                        <a href=\"inline_instructions.php#faqs-how\">$LANG_faqs_how</a><br/>
+		                                        <a href=\"inline_instructions.php#faqs-how\">
+	                                                	<img src=\"images/question.png\"></img>
+								$LANG_faqs_how
+							</a>
                                 		</td>		
 						<td width=10%>
-	                                                <img src=\"images/question.png\"></img>
-                		                        <a href=\"inline_instructions.php#faqs-types\">$LANG_faqs_type</a>
+                		                        <a href=\"inline_instructions.php#faqs-types\">
+	                                                	<img src=\"images/question.png\"></img>
+								$LANG_faqs_type
+							</a>
                                 		</td>		
 					</tr>
 					</table>
@@ -159,16 +167,22 @@ $display_block ="
 					<table>
 					<tr>
 						<td width=10%>
-							<img src=\"images/itemised.png\"></img>
-				                         <a href=\"invoice_itemised.php\">$LANG_itemised</a><br>soem stuff<bt>more stuff
+				                        <a href=\"invoice_itemised.php\">
+								<img src=\"images/itemised.png\"></img>
+								$LANG_itemised
+							</a><br>soem stuff<bt>more stuff
                                 		</td>		
 						<td width=10%>
-							<img src=\"images/total.png\"></img>
-				        		<a href=\"invoice_total.php\">$LANG_total</a>
+				        		<a href=\"invoice_total.php\">
+								<img src=\"images/total.png\"></img>
+								$LANG_total
+							</a>
 						</td>
 						<td width=10%>
-							<img src=\"images/consulting.png\"></img>
-		                                        <a href=\"invoice_consulting.php\">$LANG_consulting</a>
+		                                        <a href=\"invoice_consulting.php\">
+								<img src=\"images/consulting.png\"></img>
+								$LANG_consulting
+							</a>
                 				</td>
 					<tr>
 					</table>
@@ -180,8 +194,10 @@ $display_block ="
 					<table>
 					<tr>
 						<td width=10% align=center>
-							<img src=\"images/manage.png\"></img>
-                                        <a href=\"manage_invoices.php\">$LANG_manage_invoices</a>
+                                        		<a href=\"manage_invoices.php\">
+								<img src=\"images/manage.png\"></img>
+								$LANG_manage_invoices
+							</a>
 						</td>
 					</tr>
 					</table>
@@ -194,30 +210,42 @@ $display_block ="
 	                                <table>
                                         <tr>
                                                 <td width=10%>
-                                                        <img src=\"images/add.png\"></img>
-		                                        <a href=\"insert_customer.php\">$indx_insert_customer</a><br/>
+		                                        <a href=\"insert_customer.php\">
+                                                        	<img src=\"images/add.png\"></img>
+								$indx_insert_customer
+							</a>
                                                 </td>
                                                 <td width=10%>
-                                                        <img src=\"images/add.png\"></img>
-		                                        <a href=\"insert_biller.php\">$indx_insert_biller</a>
+		                                        <a href=\"insert_biller.php\">
+                                                        	<img src=\"images/add.png\"></img>
+								$indx_insert_biller
+							</a>
 						</td>
                                                 <td width=10%>
-                                                        <img src=\"images/add.png\"></img>
-                                		        <a href=\"insert_product.php\">$indx_insert_product</a><br/>
+                                		        <a href=\"insert_product.php\">
+                                                        	<img src=\"images/add.png\"></img>
+								$indx_insert_product
+							</a>
 						</td>
 					</tr>
 					<tr>
                                                 <td width=10%>
-                                                        <img src=\"images/customers.png\"></img>
-                		                        <a href=\"manage_customers.php\">Manage Customers</a><br/>
+                		                        <a href=\"manage_customers.php\">
+                                                        	<img src=\"images/customers.png\"></img>
+								Manage Customers
+							</a>
 						</td>
                                                 <td width=10%>
-                                                        <img src=\"images/biller.png\"></img>
-                                        		<a href=\"manage_biller.php\">Manage Billers</a><br/>
+                                        		<a href=\"manage_biller.php\">
+                                                        	<img src=\"images/biller.png\"></img>
+								Manage Billers
+							</a>
 						</td>
                                                 <td width=10%>
-                                                        <img src=\"images/products.png\"></img>
-		                                        <a href=\"manage_products.php\">Manage Products</a><br/>
+		                                        <a href=\"manage_products.php\">
+                                                        	<img src=\"images/products.png\"></img>
+								Manage Products
+							</a>
 						</td>
 					</tr>
 					</table>
@@ -229,31 +257,42 @@ $display_block ="
                                       <table>
                                         <tr>
                                                 <td width=10%>
-                                                        <img src=\"images/defaults.png\"></img>
-		                                        <a href=\"manage_system_defaults.php\">$indx_options_sys_defaults</a>
+		                                        <a href=\"system_default_details.php\">
+                                                        	<img src=\"images/defaults.png\"></img>
+								$indx_options_sys_defaults
+							</a>
 						</td>
                                                 <td width=10%>
-                                                        <img src=\"images/tax.png\"></img>
-                		                        <a href=\"manage_tax_rates.php\">$indx_options_tax_rates</a><br/>
+                		                        <a href=\"manage_tax_rates.php\">
+                                                        	<img src=\"images/tax.png\"></img>
+								$indx_options_tax_rates
+							</a>
 						</td>
                                                 <td width=10%>
-                                                        <img src=\"images/preferences.png\"></img>
-						
-		                                        <a href=\"manage_preferences.php\">$indx_options_inv_pref</a><br/>
+		                                        <a href=\"manage_preferences.php\">
+                                                        	<img src=\"images/preferences.png\"></img>
+								$indx_options_inv_pref
+							</a>
 						</td>
 						</tr>
 						<tr>
                                                 <td width=10%>
-                                                        <img src=\"images/payment.png\"></img>
-                                		        <a href=\"manage_payment_types.php\">$indx_options_payment_types</a><br/>
+                                		        <a href=\"manage_payment_types.php\">
+                                                        	<img src=\"images/payment.png\"></img>
+								$indx_options_payment_types
+							</a>
 						</td>
                                                 <td width=10%>
-                                                        <img src=\"images/upgrade.png\"></img>
-                		                        <a href=\"database_sqlpatches.php\">$indx_options_upgrade</a> <br/>
+                		                        <a href=\"database_sqlpatches.php\">
+                                                        	<img src=\"images/upgrade.png\"></img>
+								$indx_options_upgrade
+							</a>
 						</td>
                                                 <td width=10%>
-                                                        <img src=\"images/backup.png\"></img>
-		                                        <a href=\"backup_database.php\">$indx_options_backup</a>
+		                                        <a href=\"backup_database.php\">
+                                                        	<img src=\"images/backup.png\"></img>
+								$indx_options_backup
+							</a>
 						</td>
 					</tr>
 					</table>
@@ -265,18 +304,24 @@ $display_block ="
                                       <table>
                                         <tr>
                                                 <td width=10%>
-                                                        <img src=\"images/help.png\"></img>
-                                        		<a href=\"inline_instructions.php#installation\">$indx_help_install<br/></a>
+                                        		<a href=\"inline_instructions.php#installation\">
+                                                        	<img src=\"images/help.png\"></img>
+								$indx_help_install
+							</a>
 						</td>	
 						<td width=10%>
-                                                        <img src=\"images/help.png\"></img>
-                		                        <a href=\"inline_instructions.php#upgrading\">$indx_help_upgrade<br/></a>
+                		                        <a href=\"inline_instructions.php#upgrading\">
+                                                        	<img src=\"images/help.png\"></img>
+								$indx_help_upgrade
+							</a>
 						</td>	
 					</tr>
 					<tr>
 						<td width=10%>
-                                                        <img src=\"images/help.png\"></img>
-		                                        <a href=\"inline_instructions.php#prepare\">$indx_help_prepare<br/></a>
+		                                        <a href=\"inline_instructions.php#prepare\">
+                                                        	<img src=\"images/help.png\"></img>
+								$indx_help_prepare
+							</a>
 						</td>	
 					</tr>
 					</table>
