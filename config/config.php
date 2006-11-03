@@ -14,7 +14,7 @@ $language = "english_UK";
 /*To change the theme, enter the name of the theme folder - defalut is gree*/
 #$theme = "web2";
 $theme = "google";
-#theme = "jacksonville";
+#$theme = "jacksonville";
 #$theme = "napster";
 #$theme = "train101";
 #$theme = "3000k";
@@ -41,7 +41,7 @@ $install_path = "/simpleinvoices";
 
 #size in pixels (640,800,1024)
 $pdf_screen_size = 800;
-#paper size (letter,legal,Executive,A0Oversize,A0,A1,A2,A3,A4,A5,B5,Folio,A6,A7,A8,A9,A10)
+#paper size (Letter,Legal,Executive,A0Oversize,A0,A1,A2,A3,A4,A5,B5,Folio,A6,A7,A8,A9,A10)
 $pdf_paper_size = A4;
 #left margin of the pdf
 $pdf_left_margin = 15;
