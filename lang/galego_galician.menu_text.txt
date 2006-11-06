@@ -1,0 +1,141 @@
+.|Inicio|./index.php|The main screen
+.|Nova Factura|./manage_invoices.php
+..|Xestionar Facturas|./manage_invoices.php
+..|---
+..|Nova Factura - Estilo desagregado|./invoice_itemised.php
+..|Nova Factura - Estilo Total|./invoice_total.php
+..|Nova Factura - Estilo Analisis|./invoice_consulting.php
+.|Clientes|./manage_customers.php
+..|Engadir Novo Cliente|./insert_customer.php
+..|---
+..|Xestionar Clientes|./manage_customers.php
+.|Produtos|./manage_products.php
+..|Engadir Novo Produto|./insert_product.php
+..|---
+..|Xestionar Produtos|./manage_products.php
+.|Emisores|./manage_billers.php
+..|Novo emisor|./insert_biller.php
+..|---
+..|Xestionar emisores|./manage_billers.php
+.|Aboamentos|./manage_payments.php
+..|Procesar Aboamento|./process_payment.php?op=pay_invoice
+..|---
+..|Xestionar Aboamento|./manage_payments.php
+.|Informes|./index.php
+..|Vendas|./report_sales_total.php
+...|Total Vendas|./report_sales_total.php
+...|..|./report_sales_total.php
+...|..|./report_sales_total.php
+...|..|./report_sales_total.php
+..|Vendas por clientes|./report_sales_customers_total
+...|Total de Vendas por Cliente|./report_sales_customers_total.php
+...|..|./report_sales_customers_total.php
+...|..|./report_sales_customers_total.php
+...|..|./report_sales_customers_total.php
+..|Imposto|./report_tax_total.php
+...|Total de impostos|./report_tax_total.php
+...|..|./report_tax_total.php
+...|..|./report_tax_total.php
+...|..|./report_tax_total.php
+..|Vendas de produto|./report_products_sold_total.php
+...|Produtos vendidos - total|./report_products_sold_total.php
+...|..|./report_products_sold_total.php
+...|..|./report_products_sold_total.php
+...|..|./report_products_sold_total.php
+..|Produtos por cliente|./report_products_sold_by_customer.php
+...|Produtos vendidos - Cliente - Total|./report_products_sold_by_customer.php
+...|..|./report_products_sold_by_customer.php
+...|..|./report_products_sold_by_customer.php
+...|..|./report_products_sold_by_customer.php
+..|Vendas do emisor|./report_biller_total.php
+...|Vendas do emisor - Total|./report_biller_total.php
+...|Vendas do emisor por Cliente - Total|./report_biller_by_customer.php
+...|..|./report_products_sold_by_customer.php
+...|..|./report_products_sold_by_customer.php
+..|Debedores|./report_debtors_by_amount.php
+...|Debedore por contia debida|./report_debtors_by_amount.php
+...|Debedores por periodos de Antiguidade|./report_debtors_by_aging.php
+...|Total debido por cliente|./report_debtors_owing_by_customer.php
+...|Total por per&iacute;odos de antiguidade|./report_debtors_aging_total.php
+.|Opcions|./index.php
+..|Valores por defecto do Sistema|./system_default_details.php
+..|---
+..|Porcentaxes de Impostos|manage_tax_rates.php|
+...|Xestion de Porcentaxes de Impostos|./manage_tax_rates.php
+...|Engadir unha porcentaxe de imposto personalizada|./insert_tax_rate.php
+..|Preferencias de Factura|./manage_preferences.php
+...|Xestionar Preferencias de Factura|./manage_preferences.php
+...|Engadir Novas Preferencias de Factura|./insert_preference.php
+..|Tipos de Aboamento|./manage_payment_types.php
+...|Xestionar Tipos de Aboamento|./manage_payment_types.php
+...|Engadir Novo Tipo de Aboamento|./insert_payment_type.php
+..|---
+..|Xestor de Actualizacion de Base de datos|./database_sqlpatches.php
+..|Copia de Seguridade de Base de Datos|./backup_database.php
+..|Verificaci&oacute;n de Correcci&oacute;n de Facturas|./sanity_check.php
+..|---
+..|Axuda|inline_instructions.php
+...|Instalacion|./inline_instructions.php#installation
+...|Actualizar Facturas Simples|./inline_instructions.php#upgrading
+...|Preparar Facturas Simples para usar|./inline_instructions.php#prepare
+...|Usar Facturas Simples|./inline_instructions.php#use
+...|Preguntas M&aacute;is Frecuentes|./inline_faqs.php
+...|Obter Axuda|help.php
+..|Verbo de|about.php
+...|Verbo de|./about.php
+...|Rexistro de Cambios|./inline_changelog.php
+...|Creditos|./inline_credits.php
+...|Licenza|./inline_license.php
+.|Sair|./logout.php
+
+#.|Open Source
+#..|Portals
+#...|O. S. Devel. Network|http://www.osdn.com/
+#...|Source Forge|http://sourceforge.net/||sourceforge.net_images_favicon.png
+#...|Freshmeat|http://freshmeat.net/||freshmeat.net_favicon.png
+#..|---
+#..|Software for the web...
+#...|The Apache Web Server|http://www.apache.org/
+#...|Scripting languages
+#....|PERL|http://www.perl.org/
+#....|PHP: Hypertext Preprocessor|http://www.php.net/||www.php.net_favicon.png
+#.....|Downloads|http://www.php.net/downloads.php
+#.....|Documentation|http://www.php.net/docs.php
+#.....|FAQ|http://www.php.net/FAQ.php
+#.....|Support|http://www.php.net/support.php
+#.....|Bugs...|http://www.php.net/bugs.php||php-bugs-icon-mini.png
+#.....|Links|http://www.php.net/links.php
+#.....|---
+#.....|PHPLib - PHP Base Library|http://sourceforge.net/projects/phplib/||phplib-logo-mini.png
+#...|---
+#...|Databases
+#....|PostgreSQL|http://www.postgresql.org/
+#....|MySQL|http://www.mysql.com/||www.mysql.com_favicon.png
+#...|---
+#...|Quanta / KDE Web Dev|http://quanta.sourceforge.net/||quanta.png
+#...|The GIMP|http://www.gimp.org/||www.gimp.org_icons_wilber16.png
+#.|Browsers|||mozilla.org_images_mozilla-16.png
+#..|Mozilla|http://www.mozilla.org/|The Mozilla browser|mozilla.org_images_mozilla-16.png|Mozilla
+#..|Epiphany|http://epiphany.mozdev.org/|The web browser of the GNOME Desktop|epiphany-16.png|Epiphany
+##..|Konqueror|http://www.konqueror.org/|The KDE browser|www.kde.org_favicon.png|The_KDE_Desktop_Environment
+#..|Konqueror|http://www.kde.org/|The KDE browser|www.kde.org_favicon.png|The_KDE_Desktop_Environment
+#..|---
+#..|Non free browsers
+#...|Netscape|http://www.netscape.com/|Netscape Communicator|netscape-icon-mini.png|Netscape
+#...|Opera|http://www.opera.com/|||Opera
+#...|Internet Explorer|http://www.microsoft.com/|||Microsoft
+#.|DOM, layers...||Some interesting URLs about the Document Object Model, layers, browsers...
+#..|Document Object Model (DOM)|http://www.w3.org/DOM/|W3C standards about the Document Object Model||DOM
+#..|---
+#..|Netscape 4, layers and forms...|http://www.geocrawler.com/mail/msg.php3?msg_id=4426606&amp;list=119|A Netscape 4 limitation about layers||DOM
+#..|Layers, OS, Applets and Plug-ins|http://www.webreference.com/dhtml/diner/seethru/|Some known problems in using layers with applets and plug-ins||DOM
+#..|Re: Layers &amp; drop-down menu's|http://www.intranetjournal.com/ix/msg/36271.html|||DOM
+#..|---
+#..|About doctype switching...|http://www.evolt.org/article/document_body_doctype_switching_and_more/17/30655/|||DOM
+#..|About the browser window size...|http://www.howtocreate.co.uk/tutorials/index.php?tut=0&amp;part=16|||DOM
+#..|DOM Samples List Page|http://cgi.din.or.jp/~hagi3/JavaScript/Mozilla/SampleList.cgi?fmt=html|||DOM
+#..|Class DOMMouseEvent|http://www-sop.inria.fr/koala/domjuan/javadoc/koala/dom/events/DOMMouseEvent.html|||DOM
+#..|Client Object Cross References|http://devedge.netscape.com/library/xref/2002/client-data/|||DOM
+#..|The DOM Event Model|http://www.brainjar.com/dhtml/events/default4.asp|||DOM
+#..|Opera JS Support|http://www.opera.com/docs/specs/js/|||DOM
+
