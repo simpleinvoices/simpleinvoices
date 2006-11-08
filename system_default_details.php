@@ -121,7 +121,7 @@ Nifty("div#content,div#nav","same-height small");
 Nifty("div#header,div#footer","small");
 }
 </script>
-<title>Simple Invoices - System defautls</title>
+<title>Simple Invoices - System defaults</title>
 <?php include('./config/config.php'); ?>
 </head>
 <body>
@@ -143,6 +143,3 @@ $mid->printFooter();
 </div>
 </body>
 </html>
-
-
-

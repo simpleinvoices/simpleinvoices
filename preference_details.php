@@ -175,8 +175,9 @@ $display_block =  "
 
 $footer =  "
 
-<p><input type=submit name='action' value='Cancel'>
-<input type=submit name='action' value='Save Preference'> <input type=hidden name='op' value='edit_preference'></p>
+<p><input type=submit name='cancel' value='{$LANG_cancel}'>
+<input type=submit name='save_preference' value='{$LANG_save} {$msd_invoice_preference}'>
+<input type=hidden name='op' value='edit_preference'></p>
 ";
 
 
@@ -236,7 +237,3 @@ $mid->printFooter();
 </div>
 </body>
 </html>
-
-
-
-
