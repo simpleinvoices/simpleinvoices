@@ -1,5 +1,5 @@
                         /*The CSS code for the fronta page of Simple Invoices - start*/
-                        body{background:#FFF url('images/gb_top.gif') repeat-x; color: #222; margin: 0;      padding: 0;}
+                        body{background:#FFFFFF url('images/gb_top.gif') repeat-x; color: #222; margin: 0;      padding: 0;}
 
                         #list1 { width:48%;  position:absolute; top:7em; right:1em; }
                         .title { cursor:pointer; border:1px solid #CCCCCC; margin-top:0.5em; padding:0.1em; }

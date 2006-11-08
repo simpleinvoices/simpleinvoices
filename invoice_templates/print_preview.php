@@ -108,6 +108,31 @@ while ($Array_preferences = mysql_fetch_array($result_print_preferences)) {
 
 };
 
+#Accounts - for the invoice - start
+#invoice total calc - start
+        $print_invoice_total ="select sum(inv_it_total) as total from si_invoice_items where inv_it_invoice_id =$inv_idField";
+        $result_print_invoice_total = mysql_query($print_invoice_total, $conn) or die(mysql_error());
+
+        while ($Array = mysql_fetch_array($result_print_invoice_total)) {
+                $invoice_total_Field = $Array['total'];
+#invoice total calc - end
+
+#amount paid calc - start
+        $x1 = "select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) as amount from si_account_payments where ac_inv_id = $inv_idField";
+        $result_x1 = mysql_query($x1, $conn) or die(mysql_error());
+        while ($result_x1Array = mysql_fetch_array($result_x1)) {
+                $invoice_paid_Field = $result_x1Array['amount'];
+#amount paid calc - end
+
+#amount owing calc - start
+        $invoice_owing_Field = $invoice_total_Field - $invoice_paid_Field;
+#amount owing calc - end
+}
+}
+#Accounts - for the invoice - end
+
+
+
 #logo field support - if not logo show nothing else show logo
 
 if (!empty($b_co_logoField)) {
@@ -139,26 +164,25 @@ $display_block_top =  "
 	<table align=center >
 	$logo_block 
 	<tr>
-		<td nowrap class=\"col1 tbl1\" colspan=2 ><b>$b_nameField</b></td><td></td><td class=\"col1 tbl1\" colspan=3 >$pref_inv_wordingField $LANG_summary</td> 
+		<td nowrap class=\"col1 tbl1\" colspan=2 ><b>$b_nameField</b></td><td></td><td class=\"col1 tbl1\" colspan=3 ><b>$pref_inv_wordingField $LANG_summary</b></td> 
 	</tr>
 	<tr>
-		<td nowrap class=\"tbl1-left\">$b_street_addressField,</td><td class=\"tbl1-right\">$LANG_phone_short: $b_phoneField</td><td></td><td class=\"tbl1-left\"><b>$pref_inv_wordingField $LANG_number_short</b></td><td>$inv_idField</td><td class=\"tbl1-right\"></td>
+		<td nowrap class=\"tbl1-left\">$b_street_addressField,</td><td class=\"tbl1-right\">$LANG_phone_short: $b_phoneField</td><td></td><td class=\"tbl1-left\">$pref_inv_wordingField $LANG_number_short:</td><td>$inv_idField</td><td class=\"tbl1-right\"></td>
 	</tr>	
 	<tr>
-		<td nowrap class=\"tbl1-left\">$b_cityField,</td><td class=\"tbl1-right\">$LANG_mobile_short: $b_mobile_phoneField</td><td></td><td class=\"tbl1-left tbl1-bottom\"><b>$pref_inv_wordingField $LANG_date</b></td><td class=\"tbl1-right tbl1-bottom\" colspan=2>$inv_dateField</td>
-
+		<td nowrap class=\"tbl1-left\">$b_cityField,</td><td class=\"tbl1-right\">$LANG_mobile_short: $b_mobile_phoneField</td><td></td><td nowrap class=\"tbl1-left\">$pref_inv_wordingField $LANG_date:</td><td class=\"tbl1-right\" colspan=2>$inv_dateField</td>
 	</tr>	
 	<tr>
-		<td nowrap class=\"tbl1-left\">$b_stateField, $b_zip_codeField</td><td class=\"tbl1-right\">$LANG_fax: $b_faxField</td><td></td><td colspan=3></td>
+		<td nowrap class=\"tbl1-left\">$b_stateField, $b_zip_codeField</td><td class=\"tbl1-right\">$LANG_fax: $b_faxField</td><td></td><td class=\"tbl1-left\" >$LANG_total: </td><td class=\"tbl1-right\"colspan=2>$invoice_total_Field</td>
 	</tr>	
 	<tr>
-		<td nowrap class=\"tbl1-left tbl1-bottom\">$b_countryField</td><td class=\"tbl1-right tbl1-bottom\">$LANG_email: $b_emailField</td><td colspan=4></td>
+		<td nowrap class=\"tbl1-left tbl1-bottom\">$b_countryField</td><td class=\"tbl1-right tbl1-bottom\">$LANG_email: $b_emailField</td><td></td><td class=\"tbl1-left\">$LANG_paid:</td><td class=\"tbl1-right\" colspan=2>$invoice_paid_Field</td>
 	</tr>	
 	<tr>
-		<td colspan=5><br><br></td>
+		<td colspan=3></td><td nowrap class=\"tbl1-left tbl1-bottom\">$LANG_owing:</td><td class=\"tbl1-right tbl1-bottom\" colspan=2>$invoice_owing_Field</td>
 	</tr>	
 	<tr>
-		<td colspan=2 class=\"tbl1 col1 tbl1-right\" border=\"1\" cellpadding=\"2\" cellspacing=\"1\"  ><i>$LANG_customer</i></td>
+		<td colspan=2 class=\"tbl1 col1 tbl1-right\" border=\"1\" cellpadding=\"2\" cellspacing=\"1\"  ><b>$LANG_customer</b></td><td colspan=4></td>
 	</tr>	
 	<tr>
 		<td colspan=2 class=\"tbl1-left tbl1-right\">$c_nameField</td>
