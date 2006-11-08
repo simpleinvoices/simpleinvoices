@@ -309,10 +309,10 @@ Nifty("div#header,div#footer","small");
 
         <script src="./include/jquery.js" type="text/javascript"></script>
         <!-- script src="jquery.history.js" type="text/javascript"></script -->
-        <script src="./include/jquery-tabs.js" type="text/javascript"></script>
+        <script src="./include/jquery.tabs.js" type="text/javascript"></script>
         <script type="text/javascript">//<![CDATA[
             $(document).ready(function() {
-                $('#container-1').tabs({fxFade: true, fxSpeed: 'fast'});
+                $('#container-1').tabs({fxSlide: true, fxFade: true, fxSpeed: 'fast'});
                 $('#trigger-tab').after('<p><a href="#" onclick="$(\'#container-1\').triggerTab(3); return false;">Activate third tab</a></p>');
                 $('#custom-tab-by-hash').title('New window').click(function() {
                     var win = window.open(this.href, '', 'directories,location,menubar,resizable,scrollbars,status,toolbar');

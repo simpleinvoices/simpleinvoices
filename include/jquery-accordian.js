@@ -62,7 +62,7 @@
                                         onClick:function(){simpleLog(this.id + ' clicked')},
                                         onShow:function(){simpleLog(this.id + ' shown'); $(this).removeClass('off1').addClass('on1');},
                                         onHide:function(){simpleLog(this.id + ' hidden'); $(this).removeClass('on1').addClass('off1');},
-                                        showSpeed:250,
+                                        showSpeed:550,
                                         hideSpeed:550
                                 });
 
@@ -72,7 +72,7 @@
 					onClick:function(){simpleLog(this.id + ' clicked')},
 					onShow:function(){simpleLog(this.id + ' shown'); $(this).removeClass('off').addClass('on');},
 					onHide:function(){simpleLog(this.id + ' hidden'); $(this).removeClass('on').addClass('off');},
-					showSpeed:250,
+					showSpeed:550,
 					hideSpeed:550
 				});
 

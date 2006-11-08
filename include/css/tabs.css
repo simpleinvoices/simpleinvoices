@@ -7,7 +7,7 @@ Essential styles to ensure accessibility
         display: none;
     }
 }
-@media print { /* retain accessibility by overriding inline style used by animations... */
+@media print { /* maintain accessibility by overriding inline style used by animations... */
     .fragment {
         display: block !important;
         height: auto !important;
@@ -47,18 +47,18 @@ Some more styles, not important for making tabs work, just for the look of it...
     color: #000;
     text-decoration: none;
 }
-.anchors .selected a {
+.anchors .tabs-selected a {
     padding-bottom: 2px;
     font-weight: bold;
 }
 .anchors a:focus, .anchors a:active {
     outline: none; /* @ Firefox 1.5, remove ugly dotted border */
 }
-.anchors .selected a, .anchors a:hover, .anchors a:focus, .anchors a:active,
+.anchors .tabs-selected a, .anchors a:hover, .anchors a:focus, .anchors a:active,
 .fragment {
-    background: #eaeaea;    
+    background: #eaeaea;
 }
-.anchors .selected a:link, .anchors .selected a:visited { /* @ Opera, use pseudo classes otherwise it confuses cursor... */
+.anchors .tabs-selected a:link, .anchors .tabs-selected a:visited { /* @ Opera, use pseudo classes otherwise it confuses cursor... */
     cursor: text;
 }
 .anchors a:hover, .anchors a:focus, .anchors a:active {
