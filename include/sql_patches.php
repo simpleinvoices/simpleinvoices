@@ -116,6 +116,23 @@ ADD b_co_footer TEXT";
         $sql_patch_name_24 = "Add note field to Products";
         $sql_patch_24 = "ALTER TABLE `si_products` ADD `prod_notes` TEXT NOT NULL AFTER `prod_unit_price`";
         $sql_patch_update_24 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',24,'$sql_patch_name_24',20061026,'')";
+
+ALTER TABLE `si_customers` ADD `c_street_address2` VARCHAR( 50 ) AFTER `c_street_address` ;
+
+ALTER TABLE `si_customers` ADD `c_custom_field1` VARCHAR( 50 ) AFTER `c_notes` ,
+ADD `c_custom_field2` VARCHAR( 50 ) AFTER `c_custom_field1` ,
+ADD `c_custom_field3` VARCHAR( 50 ) AFTER `c_custom_field2` ,
+ADD `c_custom_field4` VARCHAR( 50 ) AFTER `c_custom_field3` ;
+
+ALTER TABLE `si_customers` ADD `c_mobile_phone` VARCHAR( 50 ) AFTER `c_phone` ;
+
+ALTER TABLE `si_biller` ADD `b_street_address2` VARCHAR( 50 ) AFTER `b_street_address` ;
+
+ALTER TABLE `si_biller` ADD `b_custom_field1` VARCHAR( 50 ) AFTER `b_notes` ,
+ADD `b_custom_field2` VARCHAR( 50 ) AFTER `b_custom_field1` ,
+ADD `b_custom_field3` VARCHAR( 50 ) AFTER `b_custom_field2` ,
+ADD `b_custom_field4` VARCHAR( 50 ) AFTER `b_custom_field3` ;
+
 /*
 CREATE TABLE `si_accounts` (
 `ac_id` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,

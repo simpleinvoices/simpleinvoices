@@ -111,6 +111,20 @@ td.details_screen {
 }
 /*td for the details screen - end*/
 
+/*td for the details screen - start*/
+tr.details_screen {
+        border-style: none none none none;
+        background-color: #F5F5F5;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+}
+/*td for the details screen - end*/
+
+
+
+
+
 /*td for the manage screen - start */
 td.index_table {
         border-style: none none none none;

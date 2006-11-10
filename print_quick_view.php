@@ -197,46 +197,94 @@ $display_block_top =  "
                 <td colspan=6><br></td>
         </tr>
 
-	<tr>
-		<td><b>$b_nameField</b></td><td colspan=5></td>
-	</tr>
-	<tr>
-		<td>$b_street_addressField,</td><td>$LANG_phone_short: $b_phoneField</td><td></td><td><b>$pref_inv_wordingField $LANG_number_short</b></td><td>$inv_idField</td><td></td>
-	</tr>	
-	<tr>
-		<td>$b_cityField,</td><td>$LANG_mobile_short: $b_mobile_phoneField</td><td></td><td><b>$pref_inv_wordingField date</b></td><td colspan=2>$inv_dateField</td>
-	</tr>	
-	<tr>
-		<td>$b_stateField, $b_zip_codeField</td><td>$LANG_fax: $b_faxField</td><td colspan=4></td>
-	</tr>	
-	<tr>
-		<td>$b_countryField</td><td>$LANG_email: $b_emailField</td>
-	</tr>	
-	<tr>
-		<td colspan=5><br><br></td>
-	</tr>	
-	<tr>
-		<td><i>$LANG_customer</i></td><td></td>
-	</tr>	
+	<!-- Invoice Summary section -->
 
-	<tr>
-		<td colspan=2>$c_nameField</td><td colspan=4></td>
+	<tr class='details_screen'>
+		<td><b>Invoice Summery</b></td><td colspan=5 align=right><a href='#' onClick=\"$('.summary').toggle();\">Show/Hide details</a></td>
 	</tr>
-	<tr>
-		<td colspan=6 align=left>$LANG_attention_short: $c_attentionField,</td>
+	<tr class='details_screen summary'>
+		<td>$pref_inv_wordingField $LANG_number_short:</td><td colspan=5>$inv_idField</td>
 	</tr>
-
-	<tr>
-		<td>$c_street_addressField,</td><td>Ph: $c_phoneField</td><td colspan=4></td>
+	<tr class='details_screen summary'>
+		<td>$pref_inv_wordingField date:</td><td colspan=5>$inv_dateField</td>
+	</tr>
+	<tr>	
+		<td><br></td>
+	</tr>
+	<!-- Biller section -->
+	<tr class='details_screen'>
+		<td><b>$LANG_biller:</b></td><td colspan=3>$b_nameField</b></td><td colspan=2 align=right><a href='#' onClick=\"$('.biller').toggle();\">Show/Hide details</a></td>
+	</tr>
+	<tr class='details_screen biller'>
+		<td>Street 1:</td><td colspan=5>$b_street_addressField</td>
 	</tr>	
-	<tr>
-		<td>$c_cityField,</td><td>Fax: $c_faxField</td><td colspan=4></td>
+	<tr class='details_screen biller'>
+		<td>Street 2:</td><td colspan=5>$b_street_addressField</td>
 	</tr>	
-	<tr>
-		<td>$c_stateField, $c_zip_codeField</td><td>Email: $c_emailField</td><td colspan=4></td>
+	<tr class='details_screen biller'>
+		<td>$LANG_city:</td><td colspan=3>$b_cityField</td><td>$LANG_phone_short:</td><td>$b_phoneField</td>
 	</tr>	
-	<tr>
-		<td colspan=6>$c_countryField</td>
+	<tr class='details_screen biller'>
+		<td>State, Zip:</td><td colspan=3>$b_stateField, $b_zip_codeField</td><td>$LANG_mobile_short:</td><td>$b_mobile_phoneField</td>
+	</tr>	
+	<tr class='details_screen biller'>
+		<td>$LANG_country:</td><td colspan=3>$b_countryField</td><td>$LANG_fax:</td><td>$b_faxField</td>
+	</tr>	
+	<tr class='details_screen biller'>
+		<td>$LANG_email:</td><td colspan=5>$b_emailField</td>
+	</tr>	
+	<tr class='details_screen biller'>
+		<td>Custom Field 1:</td><td colspan=5>$b_emailField</td>
+	</tr>	
+	<tr class='details_screen biller'>
+		<td>Custom Field 2:</td><td colspan=5 >$b_emailField</td>
+	</tr>	
+	<tr class='details_screen biller'>
+		<td>Custom Field 3:</td><td colspan=5>$b_emailField</td>
+	</tr>	
+	<tr class='details_screen biller'>
+		<td>Custom Field 4:</td><td colspan=5>$b_emailField</td>
+	</tr>	
+	<tr >
+		<td colspan=5><br></td>
+	</tr>	
+	
+	<!-- Customer section -->
+	<tr class='details_screen'
+		<td><b>$LANG_customer:</b></td><td colspan=3>$c_nameField</td><td colspan=2 align=right><a href='#' onClick=\"$('.customer').toggle();\">Show/Hide details</a></td>
+	</tr>	
+	<tr class='details_screen customer'>
+		<td>$LANG_attention_short:</td><td colspan=5 align=left>$c_attentionField,</td>
+	</tr>
+	<tr class='details_screen customer'>
+		<td>Street 1:</td><td colspan=5 align=left>$c_street_addressField</td>
+	</tr>	
+	<tr class='details_screen customer'>
+		<td>Street 2:</td><td colspan=5 align=left>$c_street_addressField</td>
+	</tr>	
+	<tr class='details_screen customer'>
+		<td>City:</td><td colspan=3>$c_cityField</td><td>Ph:</td><td>$c_phoneField</td>
+	</tr>	
+	<tr class='details_screen customer'>
+		<td>State, ZIP:</td><td colspan=3>$c_stateField, $c_zip_codeField</td><td>Fax:</td><td>$c_faxField</td>
+	</tr>	
+	<tr class='details_screen customer'>
+		<td>$LANG_country:</td><td colspan=3>$c_countryField</td><td>Mobile:</td><td>$c_phoneField</td>
+	</tr>	
+	<tr class='details_screen customer'>
+		<td>$LANG_email:<td colspan=5>$c_emailField</td>
+	</tr>	
+	<tr class='details_screen customer'>
+		<td>Custom field 1:</td><td colspan=5>$c_emailField</td>
+	</tr>	
+	<tr class='details_screen customer'>
+		<td>Custom field 2:</td><td colspan=5>$c_emailField</td>
+	</tr>	
+	<tr class='details_screen customer'>
+		<td>Custom field 3:</td><td colspan=5>$c_emailField</td>
+	</tr>	
+	<tr class='details_screen customer'>
+		<td>Custom field 4:</td><td colspan=5>$c_emailField</td>
 	</tr>	
 
 ";
@@ -292,7 +340,7 @@ if (  $_GET['invoice_style'] === 'Total' ) {
 	$display_block_details =  "
 
 	        <tr>
-	                <td colspan=6><br><br></td>
+	                <td colspan=6><br></td>
         	</tr>
 	        <tr>
         	        <td colspan=6><b>$LANG_description</b></td>
@@ -327,7 +375,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 
 	$display_block_details =  "
         <tr>
-                <td colspan=6><br><br></td>
+                <td colspan=6><br></td>
         </tr>
 	";
 	
