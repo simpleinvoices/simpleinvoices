@@ -200,7 +200,7 @@ $display_block_top =  "
 	<!-- Invoice Summary section -->
 
 	<tr class='details_screen'>
-		<td><b>Invoice Summery</b></td><td colspan=5 align=right><a href='#' onClick=\"$('.summary').toggle();\">Show/Hide details</a></td>
+		<td><b>$pref_inv_wordingField $LANG_summary</b></td><td colspan=5 align=right><a href='#' onClick=\"$('.summary').toggle();\">Show/Hide details</a></td>
 	</tr>
 	<tr class='details_screen summary'>
 		<td>$pref_inv_wordingField $LANG_number_short:</td><td colspan=5>$inv_idField</td>
@@ -216,16 +216,16 @@ $display_block_top =  "
 		<td><b>$LANG_biller:</b></td><td colspan=3>$b_nameField</b></td><td colspan=2 align=right><a href='#' onClick=\"$('.biller').toggle();\">Show/Hide details</a></td>
 	</tr>
 	<tr class='details_screen biller'>
-		<td>Street 1:</td><td colspan=5>$b_street_addressField</td>
+		<td>$LANG_street 1:</td><td colspan=5>$b_street_addressField</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td>Street 2:</td><td colspan=5>$b_street_addressField</td>
+		<td>$LANG_street 2:</td><td colspan=5>$b_street_addressField</td>
 	</tr>	
 	<tr class='details_screen biller'>
 		<td>$LANG_city:</td><td colspan=3>$b_cityField</td><td>$LANG_phone_short:</td><td>$b_phoneField</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td>State, Zip:</td><td colspan=3>$b_stateField, $b_zip_codeField</td><td>$LANG_mobile_short:</td><td>$b_mobile_phoneField</td>
+		<td>$LANG_state, Zip:</td><td colspan=3>$b_stateField, $b_zip_codeField</td><td>$LANG_mobile_short:</td><td>$b_mobile_phoneField</td>
 	</tr>	
 	<tr class='details_screen biller'>
 		<td>$LANG_country:</td><td colspan=3>$b_countryField</td><td>$LANG_fax:</td><td>$b_faxField</td>
@@ -257,16 +257,16 @@ $display_block_top =  "
 		<td>$LANG_attention_short:</td><td colspan=5 align=left>$c_attentionField,</td>
 	</tr>
 	<tr class='details_screen customer'>
-		<td>Street 1:</td><td colspan=5 align=left>$c_street_addressField</td>
+		<td>$LANG_street 1:</td><td colspan=5 align=left>$c_street_addressField</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td>Street 2:</td><td colspan=5 align=left>$c_street_addressField</td>
+		<td>$LANG_street 2:</td><td colspan=5 align=left>$c_street_addressField</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td>City:</td><td colspan=3>$c_cityField</td><td>Ph:</td><td>$c_phoneField</td>
+		<td>$LANG_city:</td><td colspan=3>$c_cityField</td><td>Ph:</td><td>$c_phoneField</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td>State, ZIP:</td><td colspan=3>$c_stateField, $c_zip_codeField</td><td>Fax:</td><td>$c_faxField</td>
+		<td>$LANG_state, ZIP:</td><td colspan=3>$c_stateField, $c_zip_codeField</td><td>$LANG_fax:</td><td>$c_faxField</td>
 	</tr>	
 	<tr class='details_screen customer'>
 		<td>$LANG_country:</td><td colspan=3>$c_countryField</td><td>Mobile:</td><td>$c_phoneField</td>
