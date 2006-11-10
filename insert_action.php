@@ -19,17 +19,17 @@ $sql = "INSERT into si_customers values ('','$_POST[c_attention]','$_POST[c_name
 
 extract( $_POST );
 
-$sql ='INSERT INTO 
-		si_customers 
-	VALUES 
+$sql ='INSERT INTO
+		si_customers
+	VALUES
 		("","' . $c_attention . '", "' . $c_name . '", "' . $c_street_address . '", "' . $c_city . '", "' . $c_state . '", "' . $c_zip_code . '", "' . $c_country . '", "' . $c_phone . '", "' . $c_fax . '", "' . $c_email . '", "' . $c_notes . '", "' . $c_enabled . '")';
 
 
 if (mysql_query($sql, $conn)) {
-        $display_block =  "Customer successfully added,<br> you will be redirected back to the Manager Customers page";
+	$display_block =  "Customer successfully added,<br> you will be redirected back to the Manage Customers page";
 } else {
-        $display_block =  "Something went wrong, please try adding the customer again";
-} 
+	$display_block =  "Something went wrong, please try adding the customer again";
+}
 	header( 'refresh: 2; url=manage_customers.php' );
 
 }
@@ -37,54 +37,54 @@ if (mysql_query($sql, $conn)) {
 #edit customer
 else if ( $op === 'edit_customer' ) {
 
-        if ($_POST['action'] === "Save Customer") {
-                $sql = "
-			UPDATE 
-				si_customers 
-			SET 
-				c_name = '$_POST[c_name]', 
+	if (isset($_POST['save_customer'])) {
+		$sql = "
+			UPDATE
+				si_customers
+			SET
+				c_name = '$_POST[c_name]',
 				c_attention = '$_POST[c_attention]',
 				c_street_address = '$_POST[c_street_address]',
 				c_city = '$_POST[c_city]',
 				c_state = '$_POST[c_state]',
 				c_zip_code = '$_POST[c_zip_code]',
-				c_country = '$_POST[c_country]', 
-				c_phone = '$_POST[c_phone]', 
-				c_fax = '$_POST[c_fax]', 
-				c_email = '$_POST[c_email]', 
-				c_notes = '$_POST[c_notes]', 
-				c_enabled = '$_POST[c_enabled]'  
-			WHERE  
+				c_country = '$_POST[c_country]',
+				c_phone = '$_POST[c_phone]',
+				c_fax = '$_POST[c_fax]',
+				c_email = '$_POST[c_email]',
+				c_notes = '$_POST[c_notes]',
+				c_enabled = '$_POST[c_enabled]'
+			WHERE
 				c_id = " . $_GET['submit'];
 
-                if (mysql_query($sql, $conn)) {
-                        $display_block =  "Customer successfully edited, <br> you will be redirected back to the Manage Customers";
-                } else {
-                        $display_block =  "Something went wrong, please try editing the customer again";
-                }
+		if (mysql_query($sql, $conn)) {
+			$display_block =  "Customer successfully edited, <br> you will be redirected back to the Manage Customers";
+		} else {
+			$display_block =  "Something went wrong, please try editing the customer again";
+		}
 
-                header( 'refresh: 2; url=manage_customers.php' );
+		header( 'refresh: 2; url=manage_customers.php' );
 
-                }
+		}
 
-        else if ($_POST['action'] === "Cancel") {
+	else if (isset($_POST['cancel'])) {
 
-                header( 'refresh: 0; url=manage_customers.php' );
-        }
+		header( 'refresh: 0; url=manage_customers.php' );
+	}
 
 
 }
 
 
 #insert - process payment
-#op=pay_selected_invoice means the user came from the print_view or manage_invoces 
-#op=pay_invoice means the user came from the process_paymen page 
+#op=pay_selected_invoice means the user came from the print_view or manage_invoces
+#op=pay_invoice means the user came from the process_paymen page
 
 else if ( $op === 'pay_invoice' OR $op === 'pay_selected_invoice' ) {
 
-	$sql = "INSERT into 
-			si_account_payments 
-		VALUES 
+	$sql = "INSERT into
+			si_account_payments
+		VALUES
 			(	
 				'',
 				'$_POST[ac_inv_id]',
@@ -96,15 +96,15 @@ else if ( $op === 'pay_invoice' OR $op === 'pay_selected_invoice' ) {
 
 	if (mysql_query($sql, $conn)) {
 		if ( $op === 'pay_selected_invoice' ) {
-		        $display_block =  "Payment successfully processed, <br> you will be redirected to the Manage Invoices page";
+			$display_block =  "Payment successfully processed, <br> you will be redirected to the Manage Invoices page";
 		}
 		if ( $op === 'pay_invoice' ) {
-		        $display_block =  "Payment successfully processed, <br> you will be redirected to the Process Payments page";
+			$display_block =  "Payment successfully processed, <br> you will be redirected to the Process Payments page";
 		}
 		
 
 	} else {
-	        $display_block =  "Something went wrong, please try processing the payment again<br>$sql";
+		$display_block =  "Something went wrong, please try processing the payment again<br>$sql";
 	}
 
 	if ( $op === 'pay_selected_invoice' ) {
@@ -120,7 +120,7 @@ else if ( $op === 'pay_invoice' OR $op === 'pay_selected_invoice' ) {
  	
 else if ( $op === 'insert_biller') {
 	
- 	$sql = "INSERT into 
+ 	$sql = "INSERT into
 			si_biller
 		VALUES
 			(
@@ -142,9 +142,9 @@ else if ( $op === 'insert_biller') {
 			 )";
  	
  	if (mysql_query($sql, $conn)) {
- 	        $display_block =  "Biller successfully added, <br> you will be redirected to the Manage Billers page";
+ 		$display_block =  "Biller successfully added, <br> you will be redirected to the Manage Billers page";
  	} else {
- 	        $display_block =  "Something went wrong, please try adding the biller again<br>$sql";
+ 		$display_block =  "Something went wrong, please try adding the biller again<br>$sql";
  	}
  	
  	header( 'refresh: 2; url=manage_billers.php' );
@@ -155,39 +155,39 @@ else if ( $op === 'insert_biller') {
 
 else if (  $op === 'edit_biller' ) {
 
-        if ($_POST[action] == "Save Biller") {
-                $sql = "UPDATE 
-				si_biller 
-			SET 
-				b_name = '$_POST[b_name]', 
-				b_street_address = '$_POST[b_street_address]', 
+	if (isset($_POST['save_biller'])) {
+		$sql = "UPDATE
+				si_biller
+			SET
+				b_name = '$_POST[b_name]',
+				b_street_address = '$_POST[b_street_address]',
 				b_city = '$_POST[b_city]',b_state = '$_POST[b_state]',
 				b_zip_code = '$_POST[b_zip_code]',
-				b_country = '$_POST[b_country]', 
-				b_phone = '$_POST[b_phone]', 
-				b_mobile_phone = '$_POST[b_mobile_phone]', 
-				b_fax = '$_POST[b_fax]', 
-				b_email = '$_POST[b_email]', 
-				b_co_logo = '$_POST[b_co_logo]', 
-				b_co_footer = '$_POST[b_co_footer]', 
-				b_notes = '$_POST[b_notes]', 
-				b_enabled = '$_POST[b_enabled]'   
-			WHERE  
+				b_country = '$_POST[b_country]',
+				b_phone = '$_POST[b_phone]',
+				b_mobile_phone = '$_POST[b_mobile_phone]',
+				b_fax = '$_POST[b_fax]',
+				b_email = '$_POST[b_email]',
+				b_co_logo = '$_POST[b_co_logo]',
+				b_co_footer = '$_POST[b_co_footer]',
+				b_notes = '$_POST[b_notes]',
+				b_enabled = '$_POST[b_enabled]'
+			WHERE
 				b_id = '$_GET[submit]'";
-                if (mysql_query($sql, $conn)) {
-                        $display_block =  "Biller successfully edited, <br> you will be redirected back to the Manage Billers";
-                } else {
-                        $display_block =  "Something went wrong, please try editing the product again";
-                }
+		if (mysql_query($sql, $conn)) {
+			$display_block =  "Biller successfully edited, <br> you will be redirected back to the Manage Billers";
+		} else {
+			$display_block =  "Something went wrong, please try editing the product again";
+		}
 
-                header( 'refresh: 2; url=manage_billers.php' );
+		header( 'refresh: 2; url=manage_billers.php' );
 
-                }
+		}
 
-	else if ($_POST[action] == "Cancel") {
+	else if (isset($_POST['cancel'])) {
 
-                header( 'refresh: 0; url=manage_billers.php' );
-        }
+		header( 'refresh: 0; url=manage_billers.php' );
+	}
 
 
 }
@@ -198,21 +198,21 @@ else if (  $op === 'edit_biller' ) {
 
 else if (  $op === 'insert_product' ) {
 
-$sql = "INSERT into 
-		si_products 
-	VALUES 
+$sql = "INSERT into
+		si_products
+	VALUES
 		(	
 			'',
 			'$_POST[prod_description]',
 			'$_POST[prod_unit_price]',
 			'$_POST[prod_notes]',
 			'$_POST[prod_enabled]'
-		)"; 
+		)";
 
 if (mysql_query($sql, $conn)) {
-        $display_block =  "Product successfully added, <br> you will be redirected to the Manage Products page";
+	$display_block =  "Product successfully added, <br> you will be redirected to the Manage Products page";
 } else {
-        $display_block =  "Something went wrong, please try adding the biller again";
+	$display_block =  "Something went wrong, please try adding the biller again";
 }
 
 header( 'refresh: 2; url=manage_products.php' );
@@ -228,28 +228,28 @@ else if (  $op === 'edit_product' ) {
 $conn = mysql_connect("$db_host","$db_user","$db_password");
 mysql_select_db("$db_name",$conn);
 
-	if ($_POST[action] == "Save Product") {
-		$sql = "UPDATE 
-				si_products 
-			SET 
-				prod_description = '$_POST[prod_description]', 
-				prod_enabled = '$_POST[prod_enabled]', 
-				prod_notes = '$_POST[prod_notes]', 
+	if (isset($_POST['save_product'])) {
+		$sql = "UPDATE
+				si_products
+			SET
+				prod_description = '$_POST[prod_description]',
+				prod_enabled = '$_POST[prod_enabled]',
+				prod_notes = '$_POST[prod_notes]',
 				prod_unit_price = '$_POST[prod_unit_price]'
-			WHERE  
+			WHERE
 				prod_id = '$_GET[submit]'";
 
 		if (mysql_query($sql, $conn)) {
-        		$display_block =  "Product successfully edited, <br> you will be redirected back to the Manage Products";
+			$display_block =  "Product successfully edited, <br> you will be redirected back to the Manage Products";
 		} else {
-        		$display_block =  "Something went wrong, please try editing the product again";
+			$display_block =  "Something went wrong, please try editing the product again";
 		}
 
 		header( 'refresh: 2; url=manage_products.php' );
 
 		}
 
-	else if ($_POST[action] == "Cancel") {
+	else if (isset($_POST['cancel'])) {
 	
 		header( 'refresh: 0; url=manage_products.php' );
 	}
@@ -269,9 +269,9 @@ mysql_select_db("$db_name",$conn);
 $sql = "INSERT INTO si_tax VALUES ('$_POST[tax_description]','$_POST[tax_percentage]')";
 */
 
-$sql = "INSERT into 
-		si_tax 
-	VALUES 
+$sql = "INSERT into
+		si_tax
+	VALUES
 		(	
 			'',
 			'$_POST[tax_description]',
@@ -280,9 +280,9 @@ $sql = "INSERT into
 		)";
 
 if (mysql_query($sql, $conn)) {
-        $display_block =  "Tax rate successfully added, <br> you will be redirected to the Manage Tax Rates page";
+	$display_block =  "Tax rate successfully added, <br> you will be redirected to the Manage Tax Rates page";
 } else {
-        $display_block =  'Something went wrong, please try adding the tax rate again';
+	$display_block =  'Something went wrong, please try adding the tax rate again';
 }
 
 header( 'refresh: 2; url=manage_tax_rates.php' );
@@ -298,30 +298,30 @@ else if (  $op === 'edit_tax_rate' ) {
 $conn = mysql_connect("$db_host","$db_user","$db_password");
 mysql_select_db("$db_name",$conn);
 
-        if ( $_POST['action'] === 'Save Tax Rate' ) {
-                $sql = "UPDATE 
-				si_tax 
-			SET 
-				tax_description = '$_POST[tax_description]', 
+	if (isset($_POST['save_tax_rate'])) {
+		$sql = "UPDATE
+				si_tax
+			SET
+				tax_description = '$_POST[tax_description]',
 				tax_percentage = '$_POST[tax_percentage]',
-				tax_enabled = '$_POST[tax_enabled]'   
-			WHERE  
+				tax_enabled = '$_POST[tax_enabled]'
+			WHERE
 				tax_id = " . $_GET['submit'];
 
-                if (mysql_query($sql, $conn)) {
-                        $display_block =  "Tax Rate successfully edited, <br> you will be redirected back to the Manage Tax Rates";
-                } else {
-                        $display_block =  'Something went wrong, please try editing the tax rate again';
-                }
+		if (mysql_query($sql, $conn)) {
+			$display_block =  "Tax Rate successfully edited, <br> you will be redirected back to the Manage Tax Rates";
+		} else {
+			$display_block =  'Something went wrong, please try editing the tax rate again';
+		}
 
-                header( 'refresh: 2; url=manage_tax_rates.php' );
+		header( 'refresh: 2; url=manage_tax_rates.php' );
 
-                }
+		}
 
-        else if ($_POST[action] == "Cancel") {
+	else if (isset($_POST['cancel'])) {
 
-                header( 'refresh: 0; url=manage_tax_rates.php' );
-        }
+		header( 'refresh: 0; url=manage_tax_rates.php' );
+	}
 }
 
 #insert payment type
@@ -335,9 +335,9 @@ mysql_select_db("$db_name",$conn);
 $sql = "INSERT INTO si_tax VALUES ('$_POST[tax_description]','$_POST[tax_percentage]')";
 */
 
-$sql = "INSERT into 
-		si_payment_types 
-	VALUES 
+$sql = "INSERT into
+		si_payment_types
+	VALUES
 		(	
 			'',
 			'$_POST[pt_description]',
@@ -345,9 +345,9 @@ $sql = "INSERT into
 		)";
 
 if (mysql_query($sql, $conn)) {
-        $display_block =  "Payment Type successfully added, <br> you will be redirected to the Manage Payment Types page";
+	$display_block =  "Payment Type successfully added, <br> you will be redirected to the Manage Payment Types page";
 } else {
-        $display_block =  'Something went wrong, please try adding the tax rate again';
+	$display_block =  'Something went wrong, please try adding the tax rate again';
 }
 
 header( 'refresh: 2; url=manage_payment_types.php' );
@@ -359,41 +359,41 @@ header( 'refresh: 2; url=manage_payment_types.php' );
 
 else if (  $op === 'edit_payment_type' ) {
 
-$conn = mysql_connect("$db_host","$db_user","$db_password");
-mysql_select_db("$db_name",$conn);
+	$conn = mysql_connect("$db_host","$db_user","$db_password");
+	mysql_select_db("$db_name",$conn);
 
-        if ( $_POST['action'] === 'Save Payment Type' ) {
-                $sql = "UPDATE 
-				si_payment_types 
-			SET 
+	if (isset($_POST['save_payment_type'])) {
+		$sql = "UPDATE
+				si_payment_types
+			SET
 				pt_description = '$_POST[pt_description]',
-				pt_enabled = '$_POST[pt_enabled]'  
-			WHERE  
+				pt_enabled = '$_POST[pt_enabled]'
+			WHERE
 				pt_id = " . $_GET['submit'];
 
-                if (mysql_query($sql, $conn)) {
-                        $display_block =  "Payment Type successfully edited, <br> you will be redirected back to the Manage Payment Types";
-                } else {
-                        $display_block =  'Something went wrong, please try editing the tax rate again';
-                }
+		if (mysql_query($sql, $conn)) {
+			$display_block =  "Payment Type successfully edited, <br> you will be redirected back to the Manage Payment Types";
+		} else {
+			$display_block =  'Something went wrong, please try editing the tax rate again';
+		}
 
-                header( 'refresh: 2; url=manage_payment_types.php' );
+		header( 'refresh: 2; url=manage_payment_types.php' );
 
-                }
+		}
 
-        else if ($_POST[action] == "Cancel") {
+	else if (isset($_POST['cancel'])) {
 
-                header( 'refresh: 0; url=manage_payment_types.php' );
-        }
+		header( 'refresh: 0; url=manage_payment_types.php' );
+	}
 }
 
 
 #insert invoice_preference
 if (  $op === 'insert_preference' ) {
 
-$sql = "INSERT into 
-		si_preferences 
-	VALUES 
+$sql = "INSERT into
+		si_preferences
+	VALUES
 		(
 			'',
 			'$_POST[p_description]',
@@ -413,7 +413,7 @@ $sql = "INSERT into
 if (mysql_query($sql, $conn)) {
 $display_block =  "Invoice preference successfully added,<br> you will be redirected to Manage Preferences page";
 } else {
-        $display_block =  'Something went wrong, please try adding the invoice preference again';
+	$display_block =  'Something went wrong, please try adding the invoice preference again';
 }
 
 header( 'refresh: 2; url=manage_preferences.php' );
@@ -424,39 +424,39 @@ header( 'refresh: 2; url=manage_preferences.php' );
 
 else if (  $op === 'edit_preference' ) {
 
-        if (  $_POST['action'] === 'Save Preference' ) {
-                $sql = "UPDATE 
-				si_preferences 
-			SET 
-				pref_description = '$_POST[pref_description]', 
-				pref_currency_sign = '$_POST[pref_currency_sign]', 
-				pref_inv_heading = '$_POST[pref_inv_heading]', 
-				pref_inv_wording = '$_POST[pref_inv_wording]', 
-				pref_inv_detail_heading = '$_POST[pref_inv_detail_heading]', 
-				pref_inv_detail_line = '$_POST[pref_inv_detail_line]', 
-				pref_inv_payment_method = '$_POST[pref_inv_payment_method]', 
-				pref_inv_payment_line1_name = '$_POST[pref_inv_payment_line1_name]', 
-				pref_inv_payment_line1_value = '$_POST[pref_inv_payment_line1_value]', 
+	if (isset($_POST['save_preference'])) {
+		$sql = "UPDATE
+				si_preferences
+			SET
+				pref_description = '$_POST[pref_description]',
+				pref_currency_sign = '$_POST[pref_currency_sign]',
+				pref_inv_heading = '$_POST[pref_inv_heading]',
+				pref_inv_wording = '$_POST[pref_inv_wording]',
+				pref_inv_detail_heading = '$_POST[pref_inv_detail_heading]',
+				pref_inv_detail_line = '$_POST[pref_inv_detail_line]',
+				pref_inv_payment_method = '$_POST[pref_inv_payment_method]',
+				pref_inv_payment_line1_name = '$_POST[pref_inv_payment_line1_name]',
+				pref_inv_payment_line1_value = '$_POST[pref_inv_payment_line1_value]',
 				pref_inv_payment_line2_name = '$_POST[pref_inv_payment_line2_name]',
-				pref_inv_payment_line2_value = '$_POST[pref_inv_payment_line2_value]', 
-				pref_enabled = '$_POST[pref_enabled]'   
-			WHERE  
+				pref_inv_payment_line2_value = '$_POST[pref_inv_payment_line2_value]',
+				pref_enabled = '$_POST[pref_enabled]'
+			WHERE
 				pref_id = '$_GET[submit]'";
 
-                if (mysql_query($sql, $conn)) {
-                        $display_block =  "Invoice Preference successfully edited, <br> you will be redirected back to Manage Invoice Preferences";
-                } else {
-                        $display_block =  "Something went wrong, please try editing the invoice preference again";
-                }
+		if (mysql_query($sql, $conn)) {
+			$display_block =  "Invoice Preference successfully edited, <br> you will be redirected back to Manage Invoice Preferences";
+		} else {
+			$display_block =  "Something went wrong, please try editing the invoice preference again";
+		}
 
-                header( 'refresh: 2; url=manage_preferences.php' );
+		header( 'refresh: 2; url=manage_preferences.php' );
 
-                }
+		}
 
-        else if ($_POST[action] == "Cancel") {
+	else if ($_POST[action] == "Cancel") {
 
-                header( 'refresh: 0; url=manage_preferences.php' );
-        }
+		header( 'refresh: 0; url=manage_preferences.php' );
+	}
 }
 
 
@@ -471,14 +471,14 @@ $result_print_defaults = mysql_query($print_defaults, $conn) or die(mysql_error(
 
 
 while ($Array = mysql_fetch_array($result_print_defaults) ) {
-                $def_idField = $Array['def_id'];
-                $def_customerField = $Array['def_customer'];
-                $def_billerField = $Array['def_biller'];
-                $def_taxField = $Array['def_tax'];
-                $def_inv_preferenceField = $Array['def_inv_preference'];
-                $def_number_line_itemsField = $Array['def_number_line_items'];
-                $def_inv_templateField = $Array['def_inv_template'];
-                $def_payment_typeField = $Array['def_payment_type'];
+		$def_idField = $Array['def_id'];
+		$def_customerField = $Array['def_customer'];
+		$def_billerField = $Array['def_biller'];
+		$def_taxField = $Array['def_tax'];
+		$def_inv_preferenceField = $Array['def_inv_preference'];
+		$def_number_line_itemsField = $Array['def_number_line_items'];
+		$def_inv_templateField = $Array['def_inv_template'];
+		$def_payment_typeField = $Array['def_payment_type'];
 };
 
 $default_biller = $_POST['default_biller'];
@@ -494,9 +494,9 @@ $default_payment_type = $_POST['def_payment_type'];
 
 	if ($_GET[sys_default] == "line_items") {
 	
-		$sql = "REPLACE INTO 
-				si_defaults 
-			VALUES 
+		$sql = "REPLACE INTO
+				si_defaults
+			VALUES
 				(
 					1,
 					$def_billerField,
@@ -509,9 +509,9 @@ $default_payment_type = $_POST['def_payment_type'];
 				)";
 
 		if (mysql_query($sql, $conn)) {
-	        	$display_block =  "System default: Number of line items successfully update,<br> you will be redirected back to System Defaults page";
+			$display_block =  "System default: Number of line items successfully update,<br> you will be redirected back to System Defaults page";
 		} else {
-		        $display_block =  "Something went wrong, please try setting the system defaults again<br><<br>$sql";
+			$display_block =  "Something went wrong, please try setting the system defaults again<br><<br>$sql";
 }
 
 	header( 'refresh: 2; url=system_default_details.php' );
@@ -523,9 +523,9 @@ $default_payment_type = $_POST['def_payment_type'];
 
 	else if ($_GET[sys_default] == "def_inv_template") {
 
-		$sql = "REPLACE INTO 
-				si_defaults 
-			VALUES 
+		$sql = "REPLACE INTO
+				si_defaults
+			VALUES
 				(
 					1,
 					$def_billerField,
@@ -538,9 +538,9 @@ $default_payment_type = $_POST['def_payment_type'];
 				)";
 
 		if (mysql_query($sql, $conn)) {
-	        	$display_block =  "System default: Default invoice template successfully update,<br> you will be redirected back to System Defaults page";
+			$display_block =  "System default: Default invoice template successfully update,<br> you will be redirected back to System Defaults page";
 		} else {
-		        $display_block =  "Something went wrong, please try setting the default invoice template again<br>$_POST[def_inv_template]
+			$display_block =  "Something went wrong, please try setting the default invoice template again<br>$_POST[def_inv_template]
 <br>$sql<br><br>
 <br>(1,$def_customerField,$def_billerField,$def_taxField,$def_inv_preferenceField,$def_number_line_itemsField,$def_inv_template)
  ";
@@ -549,12 +549,12 @@ $default_payment_type = $_POST['def_payment_type'];
 	header( 'refresh: 2; url=system_default_details.php' );
 }
 
-        #UPDATE the default biller field
+	#UPDATE the default biller field
 
-        else if ($_GET[sys_default] == "def_biller") {
+	else if ($_GET[sys_default] == "def_biller") {
 
-                $sql = "REPLACE INTO 
-				si_defaults 
+		$sql = "REPLACE INTO
+				si_defaults
 			VALUES
 				 (
 					1,
@@ -567,25 +567,25 @@ $default_payment_type = $_POST['def_payment_type'];
 					'$def_payment_typeField'
 					)";
 
-                if (mysql_query($sql, $conn)) {
-                        $display_block =  "System default: Default biller successfully updated,<br> you will be redirected back to System Defaults page";
-                } else {
-                        $display_block =  "Something went wrong, please try setting the default biller again<br>$_POST[def_inv_template]
+		if (mysql_query($sql, $conn)) {
+			$display_block =  "System default: Default biller successfully updated,<br> you will be redirected back to System Defaults page";
+		} else {
+			$display_block =  "Something went wrong, please try setting the default biller again<br>$_POST[def_inv_template]
 <br>$sql<br><br>
 <br>(1,$def_customerField,$def_billerField,$def_taxField,$def_inv_preferenceField,$def_number_line_itemsField,$def_inv_template)
  ";
 }
 
-        header( 'refresh: 2; url=system_default_details.php' );
+	header( 'refresh: 2; url=system_default_details.php' );
 }
 
-        #UPDATE the default customer field
+	#UPDATE the default customer field
 
-        else if ($_GET[sys_default] == "def_customer") {
+	else if ($_GET[sys_default] == "def_customer") {
 
-                $sql = "REPLACE INTO 
-				si_defaults 
-			VALUES 
+		$sql = "REPLACE INTO
+				si_defaults
+			VALUES
 				(
 					1,
 					$def_billerField,
@@ -597,26 +597,26 @@ $default_payment_type = $_POST['def_payment_type'];
 					$def_payment_typeField
 				)";
 
-                if (mysql_query($sql, $conn)) {
-                        $display_block =  "System default: Default customer successfully updated,<br> you will be redirected back to System Defaults page";
-                } else {
-                        $display_block =  "Something went wrong, please try setting the default customer again<br>$_POST[def_inv_template]
+		if (mysql_query($sql, $conn)) {
+			$display_block =  "System default: Default customer successfully updated,<br> you will be redirected back to System Defaults page";
+		} else {
+			$display_block =  "Something went wrong, please try setting the default customer again<br>$_POST[def_inv_template]
 <br>$sql<br><br>
 <br>(1,$def_customerField,$def_billerField,$def_taxField,$def_inv_preferenceField,$def_number_line_itemsField,$def_inv_template)
  ";
 }
 
-        header( 'refresh: 2; url=system_default_details.php' );
+	header( 'refresh: 2; url=system_default_details.php' );
 }
 
 
-        #UPDATE the default tax field
+	#UPDATE the default tax field
 
-        else if ($_GET[sys_default] == "def_tax") {
+	else if ($_GET[sys_default] == "def_tax") {
 
-                $sql = "REPLACE INTO 
-				si_defaults 
-			VALUES 
+		$sql = "REPLACE INTO
+				si_defaults
+			VALUES
 				(
 					1,
 					$def_billerField,
@@ -628,26 +628,26 @@ $default_payment_type = $_POST['def_payment_type'];
 					$def_payment_typeField
 				)";
 
-                if (mysql_query($sql, $conn)) {
-                        $display_block =  "System default: Default tax updated,<br> you will be redirected back to System Defaults page";
-                } else {
-                        $display_block =  "Something went wrong, please try setting the default tax again<br>$_POST[def_inv_template]
+		if (mysql_query($sql, $conn)) {
+			$display_block =  "System default: Default tax updated,<br> you will be redirected back to System Defaults page";
+		} else {
+			$display_block =  "Something went wrong, please try setting the default tax again<br>$_POST[def_inv_template]
 <br>$sql<br><br>
 <br>(1,$def_customerField,$def_billerField,$def_taxField,$def_inv_preferenceField,$def_number_line_itemsField,$def_inv_template)
  ";
 }
 
-        header( 'refresh: 2; url=system_default_details.php' );
+	header( 'refresh: 2; url=system_default_details.php' );
 }
 
 
-        #UPDATE the default invoice preference field
+	#UPDATE the default invoice preference field
 
-        else if ($_GET[sys_default] == "def_invoice_preference") {
+	else if ($_GET[sys_default] == "def_invoice_preference") {
 
-                $sql = "REPLACE INTO 
-				si_defaults 
-			VALUES 
+		$sql = "REPLACE INTO
+				si_defaults
+			VALUES
 				(
 					1,
 					$def_billerField,
@@ -659,25 +659,25 @@ $default_payment_type = $_POST['def_payment_type'];
 					'$def_payment_typeField'
 				)";
 
-                if (mysql_query($sql, $conn)) {
-                        $display_block =  "System default: Default invoice preference updated,<br> you will be redirected back to System Defaults page";
-                } else {
-                        $display_block =  "Something went wrong, please try setting the default invoice preference again<br>$_POST[def_inv_template]
+		if (mysql_query($sql, $conn)) {
+			$display_block =  "System default: Default invoice preference updated,<br> you will be redirected back to System Defaults page";
+		} else {
+			$display_block =  "Something went wrong, please try setting the default invoice preference again<br>$_POST[def_inv_template]
 <br>$sql<br><br>
 <br>(1,$def_customerField,$def_billerField,$def_taxField,$def_inv_preferenceField,$def_number_line_itemsField,$def_inv_template)
  ";
 }
 
-        header( 'refresh: 2; url=system_default_details.php' );
+	header( 'refresh: 2; url=system_default_details.php' );
 }
 
-        #UPDATE the default payment_type field
+	#UPDATE the default payment_type field
 
-        else if ($_GET[sys_default] == "def_payment_type") {
+	else if ($_GET[sys_default] == "def_payment_type") {
 
-                $sql = "REPLACE INTO 
+		$sql = "REPLACE INTO
 				si_defaults
-			VALUES 
+			VALUES
 				(
 					1,
 					$def_billerField,
@@ -689,16 +689,16 @@ $default_payment_type = $_POST['def_payment_type'];
 					$default_payment_type
 				)";
 
-                if (mysql_query($sql, $conn)) {
-                        $display_block =  "System default: Default payment_type updated,<br> you will be redirected back to System Defaults page";
-                } else {
-                        $display_block =  "Something went wrong, please try setting the default tax again<br>$_POST[def_inv_template]
+		if (mysql_query($sql, $conn)) {
+			$display_block =  "System default: Default payment_type updated,<br> you will be redirected back to System Defaults page";
+		} else {
+			$display_block =  "Something went wrong, please try setting the default tax again<br>$_POST[def_inv_template]
 <br>$sql<br><br>
 <br>(1,$def_customerField,$def_billerField,$def_taxField,$def_inv_preferenceField,$def_number_line_itemsField,$def_inv_template)
  ";
-}
+	}
 
-        header( 'refresh: 2; url=system_default_details.php' );
+	header( 'refresh: 2; url=system_default_details.php' );
 }
 
 }
@@ -708,9 +708,10 @@ $default_payment_type = $_POST['def_payment_type'];
 #insert invoice_total - start
 else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_invoice_total' ) {
 
-	$sql = "INSERT into 
-			si_invoices 
-		VALUES 
+	$sql = "INSERT into
+			si_invoices (inv_id, inv_biller_id, inv_customer_id, inv_type,
+			inv_preference, inv_date, inv_note)
+		VALUES
 			(
 				'',
 				'$_POST[sel_id]',
@@ -722,10 +723,10 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 			)";
 
 	if (mysql_query($sql)) {
-        	$display_block =  "Processing invoice, <br> you will be redirected Quick View of this invoice";
+		$display_block =  "Processing invoice, <br> you will be redirected Quick View of this invoice";
 	} else {
-        	$display_block =  "Something went wrong, please try adding the invoice again";
-}
+		$display_block =  "Something went wrong, please try adding the invoice again";
+	}
 
 	#get the invoice id from the insert
 	$invoice_id = mysql_insert_id();
@@ -737,9 +738,9 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
-                $tax_idField = $Array_tax['tax_id'];
-                $tax_descriptionField = $Array_tax['tax_description'];
-                $tax_percentageField = $Array_tax['tax_percentage'];
+		$tax_idField = $Array_tax['tax_id'];
+		$tax_descriptionField = $Array_tax['tax_description'];
+		$tax_percentageField = $Array_tax['tax_percentage'];
 
 	};
 
@@ -748,9 +749,9 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 	$total_invoice_total = $total_invoice_total_tax + $_POST[inv_it_gross_total] ;	
 		
 
-	$sql_items = "INSERT into 
-				si_invoice_items 
-			VALUES 
+	$sql_items = "INSERT into
+				si_invoice_items
+			VALUES
 				(
 					'',
 					$invoice_id,
@@ -768,9 +769,9 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 
 
 	if (mysql_query($sql_items)) {
-        	$display_block_items =  "Processing invoice items<br> you will be redirected back to the Quick View of this invoice";
+		$display_block_items =  "Processing invoice items<br> you will be redirected back to the Quick View of this invoice";
 	} else { die(mysql_error());
-}
+	}
 
 	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=print_quick_view.php?submit=$invoice_id&invoice_style=Total>";
 
@@ -783,61 +784,62 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 	$invoice_id = $_POST[invoice_id];
 
 	#update the si_invoices table with customer etc  stuff - start
-        $sql = "UPDATE 
-			si_invoices 
-		SET 
+	$sql = "UPDATE
+			si_invoices
+		SET
 			inv_biller_id = '$_POST[sel_id]',
 			inv_customer_id = '$_POST[select_customer]',
-			inv_preference = '$_POST[select_preferences]' 
-		WHERE 
-			inv_id = $invoice_id"; 
+			inv_preference = '$_POST[select_preferences]'
+		WHERE
+			inv_id = $invoice_id";
 
-        if (mysql_query($sql)) {
-                $display_block =  "Processing invoice, <br> you will be redirected Quick View of this invoice";
-        } else {
-                $display_block =  "Something went wrong, please try adding the invoice again"; }
+	if (mysql_query($sql)) {
+		$display_block =  "Processing invoice, <br> you will be redirected Quick View of this invoice";
+	} else {
+		$display_block =  "Something went wrong, please try adding the invoice again";
+	}
 	
 	#update the si_invoices table with customer etc  stuff - end
 	
-        #tax percentage query -start
-        $print_tax_percentage = "SELECT * FROM si_tax WHERE tax_id ='$_POST[select_tax]'";
-        $result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
+	#tax percentage query -start
+	$print_tax_percentage = "SELECT * FROM si_tax WHERE tax_id ='$_POST[select_tax]'";
+	$result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
 
 
-        while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
-                $tax_idField = $Array_tax['tax_id'];
-                $tax_descriptionField = $Array_tax['tax_description'];
-                $tax_percentageField = $Array_tax['tax_percentage'];
+	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
+		$tax_idField = $Array_tax['tax_id'];
+		$tax_descriptionField = $Array_tax['tax_description'];
+		$tax_percentageField = $Array_tax['tax_percentage'];
 
-        };
+	};
 	#tax info - end	
 	
 	#calcultate the invoice total - start
-        $actual_tax = $tax_percentageField / 100;
-        $total_invoice_total_tax = $_POST[inv_it_gross_total] * $actual_tax ;
-        $total_invoice_total = $total_invoice_total_tax + $_POST[inv_it_gross_total] ;
+	$actual_tax = $tax_percentageField / 100;
+	$total_invoice_total_tax = $_POST[inv_it_gross_total] * $actual_tax ;
+	$total_invoice_total = $total_invoice_total_tax + $_POST[inv_it_gross_total] ;
 	#calcultate the invoice total - end
 
 	#update the si_invoice_items table - which tax,description etc.. - start
-	$sql_items = "UPDATE 
-				si_invoice_items 
-			SET 
-				inv_it_tax_id = '$_POST[select_tax]',  
+	$sql_items = "UPDATE
+				si_invoice_items
+			SET
+				inv_it_tax_id = '$_POST[select_tax]',
 				inv_it_tax = $tax_percentageField,
 				inv_it_tax_amount = $total_invoice_total_tax,
-	                        inv_it_gross_total = '$_POST[inv_it_gross_total]',
+				inv_it_gross_total = '$_POST[inv_it_gross_total]',
 				inv_it_description = '$_POST[i_description]',
-				inv_it_total = $total_invoice_total 
-			WHERE 
-				inv_it_invoice_id = $invoice_id"; 
+				inv_it_total = $total_invoice_total
+			WHERE
+				inv_it_invoice_id = $invoice_id";
 
 
-        if (mysql_query($sql_items)) {
-                $display_block_items =  "Processing invoice items<br> you will be redirected back to the Quick View of this invoice";
-        } else { die(mysql_error());
+	if (mysql_query($sql_items)) {
+		$display_block_items =  "Processing invoice items<br> you will be redirected back to the Quick View of this invoice";
+	} else { die(mysql_error());
 }
 
-        $refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=print_quick_view.php?submit=$invoice_id&invoice_style=Total>";
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=print_quick_view.php?submit=$invoice_id&invoice_style=Total>";
 
 }
 
@@ -849,13 +851,16 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_invoice_itemised' ) {
 
 	$invoice_itemised_note_field = $_POST[invoice_itemised_note];
-	$sql = "INSERT into si_invoices values ('','$_POST[sel_id]','$_POST[select_customer]', 2,'$_POST[select_preferences]',now(),'$invoice_itemised_note_field')";
+	$sql = "INSERT into
+		si_invoices (inv_id, inv_biller_id, inv_customer_id, inv_type,
+		inv_preference, inv_date, inv_note)
+		values ('','$_POST[sel_id]','$_POST[select_customer]', 2,'$_POST[select_preferences]',now(),'$invoice_itemised_note_field')";
 
 	if (mysql_query($sql)) {
-        	$display_block =  "Processing invoice, <br> you will be redirected back to the Quick View of this invoice";
+		$display_block =  "Processing invoice, <br> you will be redirected back to the Quick View of this invoice";
 	} else {
-        	$display_block =  "Something went wrong, please try adding the invoice again";
-}
+		$display_block =  "Something went wrong, please try adding the invoice again";
+	}
 
 	#get the invoice id from the insert
 	$invoice_id = mysql_insert_id();
@@ -867,33 +872,33 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
-                $tax_idField = $Array_tax['tax_id'];
-                $tax_descriptionField = $Array_tax['tax_description'];
-                $tax_percentageField = $Array_tax['tax_percentage'];
+		$tax_idField = $Array_tax['tax_id'];
+		$tax_descriptionField = $Array_tax['tax_description'];
+		$tax_percentageField = $Array_tax['tax_percentage'];
 
 	};
 /*
-        #product info query
-        $print_products_info = "SELECT * FROM si_products WHERE prod_id ='$_POST[select_products]'";
-        $result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
+	#product info query
+	$print_products_info = "SELECT * FROM si_products WHERE prod_id ='$_POST[select_products]'";
+	$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 
 
-        while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
-                $prod_idField = $Array_tax['tax_id'];
-                $prod_descriptionField = $Array_tax['prod_description'];
-                $prod_unit_priceField = $Array_tax['prod_unit_price'];
+	while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
+		$prod_idField = $Array_tax['tax_id'];
+		$prod_descriptionField = $Array_tax['prod_description'];
+		$prod_unit_priceField = $Array_tax['prod_unit_price'];
 
-        };
+	};
 */
 	$num = $_POST[max_items];
-        $items = 0;
-        while ($items < $num) :
- 
+	$items = 0;
+	while ($items < $num) :
+
 	       /* echo "<b>$items</b><br>"; */
-                $qty = $_POST["i_quantity$items"];
-                $product_line_item = $_POST["select_products$items"];
-               /* echo "Qty: $qty<br> "; */
-               /*  echo "Prod ID: $product_line_item<br> "; */
+		$qty = $_POST["i_quantity$items"];
+		$product_line_item = $_POST["select_products$items"];
+	       /* echo "Qty: $qty<br> "; */
+	       /*  echo "Prod ID: $product_line_item<br> "; */
 	
 		
 		#break out of the while if no QUANTITY
@@ -903,16 +908,16 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 		}
 			
 
-	        $print_products_info = "SELECT * FROM si_products WHERE prod_id =$product_line_item";
-       		$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
+		$print_products_info = "SELECT * FROM si_products WHERE prod_id =$product_line_item";
+		$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 
 
-	        while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
-        	        $prod_idField = $Array_tax['tax_id'];
-                	$prod_descriptionField = $Array_tax['prod_description'];
-	                $prod_unit_priceField = $Array_tax['prod_unit_price'];
+		while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
+			$prod_idField = $Array_tax['tax_id'];
+			$prod_descriptionField = $Array_tax['prod_description'];
+			$prod_unit_priceField = $Array_tax['prod_unit_price'];
 
-        	};
+		};
 
 		$actual_tax = $tax_percentageField  / 100 ;
 		$total_invoice_item_tax = $prod_unit_priceField * $actual_tax;
@@ -930,13 +935,13 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 
 		
 		if (mysql_query($sql_items)) {
-        		$display_block_items =  "Processing invoice items<br> you will be redirected back to Quick View of this invoice";
+			$display_block_items =  "Processing invoice items<br> you will be redirected back to Quick View of this invoice";
 		} else { die(mysql_error());
 		}
 		
-                /* echo "$sql_items <br>";  */
+		/* echo "$sql_items <br>";  */
 		$items++ ;
-         endwhile;
+	 endwhile;
 
 
 	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=print_quick_view.php?submit=$invoice_id&invoice_style=Itemised>";
@@ -951,100 +956,100 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 
 else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_invoice_itemised' ) {
 
-        $invoice_id = $_POST[invoice_id];
+	$invoice_id = $_POST[invoice_id];
 
-        #update the si_invoices table with customer etc  stuff - start
-        $sql = "UPDATE
-                        si_invoices
-                SET
-                        inv_biller_id = '$_POST[sel_id]',
-                        inv_customer_id = '$_POST[select_customer]',
-                        inv_preference = '$_POST[select_preferences]',
+	#update the si_invoices table with customer etc  stuff - start
+	$sql = "UPDATE
+			si_invoices
+		SET
+			inv_biller_id = '$_POST[sel_id]',
+			inv_customer_id = '$_POST[select_customer]',
+			inv_preference = '$_POST[select_preferences]',
 			inv_note = '$_POST[invoice_itemised_note]'
-                WHERE
-                        inv_id = $invoice_id";
+		WHERE
+			inv_id = $invoice_id";
 
       if (mysql_query($sql)) {
-                $display_block =  "Processing invoice, <br> you will be redirected back to the Quick View of this invoice";
-        } else {
-                $display_block =  "Something went wrong, please try adding the invoice again";
+		$display_block =  "Processing invoice, <br> you will be redirected back to the Quick View of this invoice";
+	} else {
+		$display_block =  "Something went wrong, please try adding the invoice again";
 }
 
 
 	#$display_block .= "step 2 - 1";
-        #tax percentage query
-        $print_tax_percentage = "SELECT * FROM si_tax WHERE tax_id ='$_POST[select_tax]'";
-        $result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
+	#tax percentage query
+	$print_tax_percentage = "SELECT * FROM si_tax WHERE tax_id ='$_POST[select_tax]'";
+	$result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
 
 
-        while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
-                $tax_idField = $Array_tax['tax_id'];
-                $tax_descriptionField = $Array_tax['tax_description'];
-                $tax_percentageField = $Array_tax['tax_percentage'];
+	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
+		$tax_idField = $Array_tax['tax_id'];
+		$tax_descriptionField = $Array_tax['tax_description'];
+		$tax_percentageField = $Array_tax['tax_percentage'];
 
-        };
+	};
 /*
-        #product info query
-        $print_products_info = "SELECT * FROM si_products WHERE prod_id ='$_POST[select_products]'";
-        $result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
+	#product info query
+	$print_products_info = "SELECT * FROM si_products WHERE prod_id ='$_POST[select_products]'";
+	$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 
 
-        while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
-                $prod_idField = $Array_tax['tax_id'];
-                $prod_descriptionField = $Array_tax['prod_description'];
-                $prod_unit_priceField = $Array_tax['prod_unit_price'];
+	while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
+		$prod_idField = $Array_tax['tax_id'];
+		$prod_descriptionField = $Array_tax['prod_description'];
+		$prod_unit_priceField = $Array_tax['prod_unit_price'];
 
-        };
+	};
 */
 	#$display_block .= "step 2 - 2";
-        $num = $_POST[max_items];
-        $items = 1;
+	$num = $_POST[max_items];
+	$items = 1;
 	$product_id_items = 1;	
-        while ($items < $num) :	
+	while ($items < $num) :	
 
-	$display_block_qty =$_POST["i_quantity$items"];
-	#$display_block .= "step 2 - 3  - qty $display_block_qty!! ";
-               /* echo "<b>$items</b><br>"; */
-                $qty = $_POST["i_quantity$items"];
-                $product_line_item = $_POST["select_products$product_id_items"];
-               /* echo "Qty: $qty<br> "; */
-               /*  echo "Prod ID: $product_line_item<br> "; */
+		$display_block_qty =$_POST["i_quantity$items"];
+		#$display_block .= "step 2 - 3  - qty $display_block_qty!! ";
+	       /* echo "<b>$items</b><br>"; */
+		$qty = $_POST["i_quantity$items"];
+		$product_line_item = $_POST["select_products$product_id_items"];
+	       /* echo "Qty: $qty<br> "; */
+	       /*  echo "Prod ID: $product_line_item<br> "; */
 		
 		#$display_block .= "step 2 - 4 : qty $qty :: PLI=$product_line_item MAX-- $_POST[max_items];";
-                #break out of the while if no QUANTITY
+		#break out of the while if no QUANTITY
 		
-                if (empty($_POST["i_quantity$items"])) {
-                       /*echo "continue"; */
-                       break;
-                }
+		if (empty($_POST["i_quantity$items"])) {
+		       /*echo "continue"; */
+		       break;
+		}
 		
 
-                $print_products_info = "SELECT * FROM si_products WHERE prod_id =$product_line_item";
-                $result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
+		$print_products_info = "SELECT * FROM si_products WHERE prod_id =$product_line_item";
+		$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 		
 		#$display_block .= "step 2 - 5";
 		
-                while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
-                        $prod_idField = $Array_tax['tax_id'];
-                        $prod_descriptionField = $Array_tax['prod_description'];
-                        $prod_unit_priceField = $Array_tax['prod_unit_price'];
+		while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
+			$prod_idField = $Array_tax['tax_id'];
+			$prod_descriptionField = $Array_tax['prod_description'];
+			$prod_unit_priceField = $Array_tax['prod_unit_price'];
 
-                };
-                
+		};
+
 		$actual_tax = $tax_percentageField  / 100 ;
-                $total_invoice_item_tax = $prod_unit_priceField * $actual_tax;
-                $total_invoice_tax_amount = $total_invoice_item_tax * $_POST["i_quantity$items"];
-                $total_invoice_item = $total_invoice_item_tax + $prod_unit_priceField ;
-                $total_invoice_item_total = $total_invoice_item * $_POST["i_quantity$items"];
-                $total_invoice_item_gross = $prod_unit_priceField  * $_POST["i_quantity$items"];
+		$total_invoice_item_tax = $prod_unit_priceField * $actual_tax;
+		$total_invoice_tax_amount = $total_invoice_item_tax * $_POST["i_quantity$items"];
+		$total_invoice_item = $total_invoice_item_tax + $prod_unit_priceField ;
+		$total_invoice_item_total = $total_invoice_item * $_POST["i_quantity$items"];
+		$total_invoice_item_gross = $prod_unit_priceField  * $_POST["i_quantity$items"];
 		
 
 		$invoice_id_item = $_POST["inv_it_id$items"];
 		
 
-		$sql_items = "REPLACE into 
-					si_invoice_items 
-				VALUES 
+		$sql_items = "REPLACE into
+					si_invoice_items
+				VALUES
 					(
 						$invoice_id_item,
 						$invoice_id,
@@ -1060,19 +1065,19 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 					)";
 
 
-                if (mysql_query($sql_items)) {
-                        $display_block_items =  "Processing invoice items<br> you will be redirected back to Quick View of this invoice";
-                } else { die(mysql_error());
-                }
+		if (mysql_query($sql_items)) {
+			$display_block_items =  "Processing invoice items<br> you will be redirected back to Quick View of this invoice";
+		} else { die(mysql_error());
+		}
 
-                /* echo "$sql_items <br>";  */
-                $items++ ;
+		/* echo "$sql_items <br>";  */
+		$items++ ;
 		$product_id_items++;
-         endwhile;
+	 endwhile;
 
 
 
-        $refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=print_quick_view.php?submit=$invoice_id&invoice_style=Itemised>";
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=print_quick_view.php?submit=$invoice_id&invoice_style=Itemised>";
 
 }
 
@@ -1085,12 +1090,16 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 
 else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_invoice_consulting' ) {
 
-	$sql = "INSERT into si_invoices values ('','$_POST[sel_id]','$_POST[select_customer]', 3,'$_POST[select_preferences]',now(),'$_POST[invoice_consulting_note]')";
+	$sql = "INSERT into
+		si_invoices (inv_id, inv_biller_id, inv_customer_id, inv_type,
+		inv_preference, inv_date, inv_note)
+		values
+			('','$_POST[sel_id]','$_POST[select_customer]', 3,'$_POST[select_preferences]',now(),'$_POST[invoice_consulting_note]')";
 
 	if (mysql_query($sql)) {
-        	$display_block =  "Processing invoice, <br> you will be redirected back to the Quick View of this invoice";
+		$display_block =  "Processing invoice, <br> you will be redirected back to the Quick View of this invoice";
 	} else {
-        	$display_block =  "Something went wrong, please try adding the invoice again";
+		$display_block =  "Something went wrong, please try adding the invoice again";
 }
 
 	#get the invoice id from the insert
@@ -1103,35 +1112,35 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
-                $tax_idField = $Array_tax['tax_id'];
-                $tax_descriptionField = $Array_tax['tax_description'];
-                $tax_percentageField = $Array_tax['tax_percentage'];
+		$tax_idField = $Array_tax['tax_id'];
+		$tax_descriptionField = $Array_tax['tax_description'];
+		$tax_percentageField = $Array_tax['tax_percentage'];
 
 	};
 /*
-        #product info query
-        $print_products_info = "SELECT * FROM si_products WHERE prod_id ='$_POST[select_products]'";
-        $result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
+	#product info query
+	$print_products_info = "SELECT * FROM si_products WHERE prod_id ='$_POST[select_products]'";
+	$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 
 
-        while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
-                $prod_idField = $Array_tax['tax_id'];
-                $prod_descriptionField = $Array_tax['prod_description'];
-                $prod_unit_priceField = $Array_tax['prod_unit_price'];
+	while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
+		$prod_idField = $Array_tax['tax_id'];
+		$prod_descriptionField = $Array_tax['prod_description'];
+		$prod_unit_priceField = $Array_tax['prod_unit_price'];
 
-        };
+	};
 */
-        $num = $_GET[num];
-        $items = 0;
-        while ($items < $num) :
- 
+	$num = $_GET[num];
+	$items = 0;
+	while ($items < $num) :
+
 			
 	       /* echo "<b>$items</b><br>"; */
-                $qty = $_POST["i_quantity$items"];
-                $product_line_item = $_POST["select_products$items"];
-                $line_item_description = $_POST["line_item_description$items"];
-               /* echo "Qty: $qty<br> "; */
-               /*  echo "Prod ID: $product_line_item<br> "; */
+		$qty = $_POST["i_quantity$items"];
+		$product_line_item = $_POST["select_products$items"];
+		$line_item_description = $_POST["line_item_description$items"];
+	       /* echo "Qty: $qty<br> "; */
+	       /*  echo "Prod ID: $product_line_item<br> "; */
 	
 		#break out of the while if no QUANTITY
 		if (empty($_POST["i_quantity$items"])) {
@@ -1139,16 +1148,16 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 			break;
 		}
 
-	        $print_products_info = "SELECT * FROM si_products WHERE prod_id =$product_line_item";
+		$print_products_info = "SELECT * FROM si_products WHERE prod_id =$product_line_item";
        		$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 
 
-	        while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
-        	        $prod_idField = $Array_tax['tax_id'];
-                	$prod_descriptionField = $Array_tax['prod_description'];
-	                $prod_unit_priceField = $Array_tax['prod_unit_price'];
+		while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
+			$prod_idField = $Array_tax['tax_id'];
+			$prod_descriptionField = $Array_tax['prod_description'];
+			$prod_unit_priceField = $Array_tax['prod_unit_price'];
 
-        	};
+		};
 
 		$actual_tax = $tax_percentageField  / 100 ;
 		$total_invoice_item_tax = $prod_unit_priceField * $actual_tax;
@@ -1166,13 +1175,13 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 
 		
 		if (mysql_query($sql_items)) {
-        		$display_block_items =  "Processing invoice items<br> you will be redirected back to Quick View of this invoice";
+			$display_block_items =  "Processing invoice items<br> you will be redirected back to Quick View of this invoice";
 		} else { die(mysql_error());
 		}
 		
-                /* echo "$sql_items <br>";  */
+		/* echo "$sql_items <br>";  */
 		$items++ ;
-         endwhile;
+	endwhile;
 
 
 	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=print_quick_view.php?submit=$invoice_id&invoice_style=Consulting>";
@@ -1185,163 +1194,158 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 
 else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_invoice_consulting' ) {
 
-        $invoice_id = $_POST[invoice_id];
+	$invoice_id = $_POST[invoice_id];
 
-        #update the si_invoices table with customer etc  stuff - start
-        $sql = "UPDATE
-                        si_invoices
-                SET
-                        inv_biller_id = '$_POST[sel_id]',
-                        inv_customer_id = '$_POST[select_customer]',
-                        inv_preference = '$_POST[select_preferences]',
-                        inv_note = '$_POST[invoice_itemised_note]'
-                WHERE
-                        inv_id = $invoice_id";
+	#update the si_invoices table with customer etc  stuff - start
+	$sql = "UPDATE
+			si_invoices
+		SET
+			inv_biller_id = '$_POST[sel_id]',
+			inv_customer_id = '$_POST[select_customer]',
+			inv_preference = '$_POST[select_preferences]',
+			inv_note = '$_POST[invoice_itemised_note]'
+		WHERE
+			inv_id = $invoice_id";
 
-      if (mysql_query($sql)) {
-                $display_block =  "Processing invoice, <br> you will be redirected back to the Quick View of this invoice";
-        } else {
-                $display_block =  "Something went wrong, please try adding the invoice again";
+	if (mysql_query($sql)) {
+		$display_block =  "Processing invoice, <br> you will be redirected back to the Quick View of this invoice";
+	} else {
+		$display_block =  "Something went wrong, please try adding the invoice again";
 }
 
 
-        #$display_block .= "step 2 - 1";
-        #tax percentage query
-        $print_tax_percentage = "SELECT * FROM si_tax WHERE tax_id ='$_POST[select_tax]'";
-        $result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
+	#$display_block .= "step 2 - 1";
+	#tax percentage query
+	$print_tax_percentage = "SELECT * FROM si_tax WHERE tax_id ='$_POST[select_tax]'";
+	$result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
 
-        while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
-                $tax_idField = $Array_tax['tax_id'];
-                $tax_descriptionField = $Array_tax['tax_description'];
-                $tax_percentageField = $Array_tax['tax_percentage'];
+	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
+		$tax_idField = $Array_tax['tax_id'];
+		$tax_descriptionField = $Array_tax['tax_description'];
+		$tax_percentageField = $Array_tax['tax_percentage'];
 
-        };
+	};
 /*
-        #product info query
-        $print_products_info = "SELECT * FROM si_products WHERE prod_id ='$_POST[select_products]'";
-        $result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
+	#product info query
+	$print_products_info = "SELECT * FROM si_products WHERE prod_id ='$_POST[select_products]'";
+	$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 
 
-        while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
-                $prod_idField = $Array_tax['tax_id'];
-                $prod_descriptionField = $Array_tax['prod_description'];
-                $prod_unit_priceField = $Array_tax['prod_unit_price'];
+	while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
+		$prod_idField = $Array_tax['tax_id'];
+		$prod_descriptionField = $Array_tax['prod_description'];
+		$prod_unit_priceField = $Array_tax['prod_unit_price'];
 
-        };
+	};
 */
-        #$display_block .= "step 2 - 2";
-        $num = $_POST[max_items];
-        $items = 1;
-        $product_id_items = 1;
-        while ($items < $num) :
+	#$display_block .= "step 2 - 2";
+	$num = $_POST[max_items];
+	$items = 1;
+	$product_id_items = 1;
+	while ($items < $num) :
 	
-        
-        $consulting_item_note = $_POST["consulting_item_note$items"];
+
+	$consulting_item_note = $_POST["consulting_item_note$items"];
 	$display_block_qty =$_POST["i_quantity$items"];
-        #$display_block .= "step 2 - 3  - qty $display_block_qty!! ";
-               /* echo "<b>$items</b><br>"; */
-                $qty = $_POST["i_quantity$items"];
-                $product_line_item = $_POST["select_products$product_id_items"];
+	#$display_block .= "step 2 - 3  - qty $display_block_qty!! ";
+	       /* echo "<b>$items</b><br>"; */
+		$qty = $_POST["i_quantity$items"];
+		$product_line_item = $_POST["select_products$product_id_items"];
 				
-               /* echo "Qty: $qty<br> "; */
-               /*  echo "Prod ID: $product_line_item<br> "; */
+	       /* echo "Qty: $qty<br> "; */
+	       /*  echo "Prod ID: $product_line_item<br> "; */
 
-                #$display_block .= "step 2 - 4 : qty $qty :: PLI=$product_line_item MAX-- $_POST[max_items];";
-                #break out of the while if no QUANTITY
-                if (empty($_POST["i_quantity$items"])) {
-                        /*echo "break"; */
-                       /* break;*/
-                }
+		#$display_block .= "step 2 - 4 : qty $qty :: PLI=$product_line_item MAX-- $_POST[max_items];";
+		#break out of the while if no QUANTITY
+		if (empty($_POST["i_quantity$items"])) {
+			/*echo "break"; */
+		       /* break;*/
+		}
 
-                $print_products_info = "SELECT * FROM si_products WHERE prod_id =$product_line_item";
-                $result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
+		$print_products_info = "SELECT * FROM si_products WHERE prod_id =$product_line_item";
+		$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 
-                #$display_block .= "step 2 - 5  <br> $consulting_item_note ";
+		#$display_block .= "step 2 - 5  <br> $consulting_item_note ";
 
-                while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
-                        $prod_idField = $Array_tax['tax_id'];
-                        $prod_descriptionField = $Array_tax['prod_description'];
-                        $prod_unit_priceField = $Array_tax['prod_unit_price'];
+		while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
+			$prod_idField = $Array_tax['tax_id'];
+			$prod_descriptionField = $Array_tax['prod_description'];
+			$prod_unit_priceField = $Array_tax['prod_unit_price'];
 
-                };
+		};
 
-                $actual_tax = $tax_percentageField  / 100 ;
-                $total_invoice_item_tax = $prod_unit_priceField * $actual_tax;
-                $total_invoice_tax_amount = $total_invoice_item_tax * $_POST["i_quantity$items"];
-                $total_invoice_item = $total_invoice_item_tax + $prod_unit_priceField ;
-                $total_invoice_item_total = $total_invoice_item * $_POST["i_quantity$items"];
-                $total_invoice_item_gross = $prod_unit_priceField  * $_POST["i_quantity$items"];
-
-
-                $invoice_id_item = $_POST["inv_it_id$items"];
-
-                $sql_items = "REPLACE into
-                                        si_invoice_items
-                                VALUES
-                                        (
-                                                $invoice_id_item,
-                                                $invoice_id,
-                                                $qty,
-                                                $product_line_item,
-                                                $prod_unit_priceField,
-                                                '$_POST[select_tax]',
-                                                $tax_percentageField,
-                                                $total_invoice_tax_amount,
-                                                $total_invoice_item_gross,
-                                                '$consulting_item_note',
-                                                $total_invoice_item_total
-                                        )";
+		$actual_tax = $tax_percentageField  / 100 ;
+		$total_invoice_item_tax = $prod_unit_priceField * $actual_tax;
+		$total_invoice_tax_amount = $total_invoice_item_tax * $_POST["i_quantity$items"];
+		$total_invoice_item = $total_invoice_item_tax + $prod_unit_priceField ;
+		$total_invoice_item_total = $total_invoice_item * $_POST["i_quantity$items"];
+		$total_invoice_item_gross = $prod_unit_priceField  * $_POST["i_quantity$items"];
 
 
-                if (mysql_query($sql_items)) {
-                        $display_block_items =  "Processing invoice items<br> you will be redirected back to Quick View of this invoice";
-                } else { die(mysql_error());
-                }
+		$invoice_id_item = $_POST["inv_it_id$items"];
 
-                /* echo "$sql_items <br>";  */
-                $items++ ;
-                $product_id_items++;
-         endwhile;
+		$sql_items = "REPLACE into
+					si_invoice_items
+				VALUES
+					(
+						$invoice_id_item,
+						$invoice_id,
+						$qty,
+						$product_line_item,
+						$prod_unit_priceField,
+						'$_POST[select_tax]',
+						$tax_percentageField,
+						$total_invoice_tax_amount,
+						$total_invoice_item_gross,
+						'$consulting_item_note',
+						$total_invoice_item_total
+					)";
 
 
+		if (mysql_query($sql_items)) {
+			$display_block_items =  "Processing invoice items<br> you will be redirected back to Quick View of this invoice";
+		} else { die(mysql_error());
+		}
 
-        $refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=print_quick_view.php?submit=$invoice_id&invoice_style=Consulting>";
+		/* echo "$sql_items <br>";  */
+		$items++ ;
+		$product_id_items++;
+	 endwhile;
+
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=print_quick_view.php?submit=$invoice_id&invoice_style=Consulting>";
 
 }
-
-
-
-
-
-
-
-
-
 
 ?>
 
 <html>
 <head>
-<HEAD>
-<?php include('./config/config.php'); ?>
-<?php include('./include/menu.php'); ?>
-<?php include("./lang/$language.inc.php"); ?>
-
-<?php echo isset( $refresh_total ) ? $refresh_total : '&nbsp'; ?>
-<title>Simple Invoices</title>
-</HEAD>
-
-<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
-<BODY>
+<head>
 <?php
+
+include('./include/include_main.php');
+
+$refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
+$display_block_items = isset($display_block_items) ? $display_block_items : '&nbsp;';
+echo <<<EOD
+{$refresh_total}
+<title>{$title}</title>
+<link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css">
+</head>
+
+<body>
+
+EOD;
 $mid->printMenu('hormenu1');
 $mid->printFooter();
-?>
+echo <<<EOD
 <br>
 <br>
-<?php echo $display_block; ?>
+{$display_block}
 <br><br>
-<?php echo isset( $display_block_items ) ? $display_block_items : '&nbsp;'; ?>
+{$display_block_items}
 
+EOD;
+?>
 </body>
 </html>
