@@ -596,6 +596,13 @@ $display_block_bottom =  "
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php include('./include/menu.php'); ?>
     <script type="text/javascript" src="./include/jquery.js"></script>
+    <script type="text/javascript">
+	$(document).ready(function() {
+	 // hides the customer and biller details as soon as the DOM is ready (a little sooner that page load)
+	  $('.biller').hide();
+	  $('.customer').hide();
+  	});
+    </script>
     <script type="text/javascript" src="./include/greybox.js"></script>
     <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css" media="all"/>
     <script type="text/javascript">
