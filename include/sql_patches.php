@@ -117,6 +117,17 @@ ADD b_co_footer TEXT";
         $sql_patch_24 = "ALTER TABLE `si_products` ADD `prod_notes` TEXT NOT NULL AFTER `prod_unit_price`";
         $sql_patch_update_24 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',24,'$sql_patch_name_24',20061026,'')";
 
+
+        $sql_patch_name_25 = "";
+        $sql_patch_25 = "";
+        $sql_patch_update_25 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',25,'$sql_patch_name_25',20061111,'')";
+	
+
+        $sql_patch_name_25 = "";
+        $sql_patch_25 = "";
+        $sql_patch_update_25 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',25,'$sql_patch_name_25',20061111,'')";
+
+
 ALTER TABLE `si_customers` ADD `c_street_address2` VARCHAR( 50 ) AFTER `c_street_address` ;
 
 ALTER TABLE `si_customers` ADD `c_custom_field1` VARCHAR( 50 ) AFTER `c_notes` ,
@@ -132,6 +143,42 @@ ALTER TABLE `si_biller` ADD `b_custom_field1` VARCHAR( 50 ) AFTER `b_notes` ,
 ADD `b_custom_field2` VARCHAR( 50 ) AFTER `b_custom_field1` ,
 ADD `b_custom_field3` VARCHAR( 50 ) AFTER `b_custom_field2` ,
 ADD `b_custom_field4` VARCHAR( 50 ) AFTER `b_custom_field3` ;
+
+CREATE TABLE `si_custom_fields` (
+`cf_id` INT NOT NULL AUTO_INCREMENT ,
+`cf_custom_field` VARCHAR( 50 ) NOT NULL ,
+`cf_custom_label` VARCHAR( 50 ) ,
+`cf_display` VARCHAR( 1 ) DEFAULT '1' NOT NULL ,
+PRIMARY KEY ( `cf_id` )
+);
+
+INSERT INTO `si_custom_fields` ( `cf_id` , `cf_custom_field` , `cf_custom_label` , `cf_display` )
+VALUES (
+'', 'biller_cf1', NULL , '0'
+), (
+'', 'biller_cf2', NULL , '0'
+), (
+'', 'biller_cf3', NULL , '0'
+), (
+'', 'biller_cf4', NULL , '0'
+), (
+'', 'customer_cf1', NULL , '0'
+), (
+'', 'customer_cf2', NULL , '0'
+), (
+'', 'customer_cf3', NULL , '0'
+), (
+'', 'customer_cf4', NULL , '0'
+), (
+'', 'product_cf1', NULL , '0'
+), (
+'', 'product_cf2', NULL , '0'
+), (
+'', 'product_cf3', NULL , '0'
+), (
+'', 'product_cf4', NULL , '0'
+);
+
 
 /*
 CREATE TABLE `si_accounts` (
