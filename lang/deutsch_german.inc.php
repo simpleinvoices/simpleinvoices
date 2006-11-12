@@ -19,6 +19,7 @@ $LANG_address_state = "Address: State";
 $LANG_address_street = "Address: Street";
 $LANG_address_zip = "Address: Zip";
 $LANG_age = "Age";
+$LANG_aging = "Aging";
 $LANG_amount = "Amount";
 $LANG_attention_short = "Attn.";
 $LANG_biller = "Biller";

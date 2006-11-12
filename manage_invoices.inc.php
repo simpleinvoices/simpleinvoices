@@ -135,7 +135,7 @@ while ($newArray = mysql_fetch_array($result)) {
 	<!-- Quick View -->
 	<a class="index_table"
 	 title="{$LANG_quick_view_tooltip} {$invoice_preference_wordingField} {$inv_idField}"
-	 href="print_quick_view.php?submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}>{$LANG_view}</a>
+	 href="print_quick_view.php?submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}">{$LANG_view}</a>
 	<!-- Edit View -->
 	<a class="index_table" title="{$LANG_edit_view_tooltip} {$invoice_preference_wordingField} {$inv_idField}"
 	 href="details_invoice.php?submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}">{$LANG_edit}</a> 

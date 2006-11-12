@@ -200,7 +200,7 @@ $display_block_top =  "
 	<!-- Invoice Summary section -->
 
 	<tr class='details_screen'>
-		<td><b>$pref_inv_wordingField $LANG_summary</b></td><td colspan=5 align=right><a href='#' onClick=\"$('.summary').toggle();\">Show/Hide details</a></td>
+		<td><b>$pref_inv_wordingField $LANG_summary:</b></td><td colspan=5 align=right><a href='#' class=\"show-summary\" onClick=\"$('.summary').show();$('.show-summary').hide();\">$LANG_show_details</a><a href='#' class=\"summary\" onClick=\"$('.summary').hide();$('.show-summary').show();\">$LANG_hide_details</a> </td>
 	</tr>
 	<tr class='details_screen summary'>
 		<td>$pref_inv_wordingField $LANG_number_short:</td><td colspan=5>$inv_idField</td>
@@ -213,7 +213,7 @@ $display_block_top =  "
 	</tr>
 	<!-- Biller section -->
 	<tr class='details_screen'>
-		<td><b>$LANG_biller:</b></td><td colspan=3>$b_nameField</b></td><td colspan=2 align=right><a href='#' onClick=\"$('.biller').toggle();\">Show/Hide details</a></td>
+		<td><b>$LANG_biller:</b></td><td colspan=3>$b_nameField</b></td><td colspan=2 align=right><a href='#' class=\"show-biller\" onClick=\"$('.biller').show();$('.show-biller').hide();\">$LANG_show_details</a><a href='#' class=\"biller\" onClick=\"$('.biller').hide();$('.show-biller').show();\">$LANG_hide_details</a></td>
 	</tr>
 	<tr class='details_screen biller'>
 		<td>$LANG_street 1:</td><td colspan=5>$b_street_addressField</td>
@@ -251,7 +251,7 @@ $display_block_top =  "
 	
 	<!-- Customer section -->
 	<tr class='details_screen'
-		<td><b>$LANG_customer:</b></td><td colspan=3>$c_nameField</td><td colspan=2 align=right><a href='#' onClick=\"$('.customer').toggle();\">Show/Hide details</a></td>
+		<td><b>$LANG_customer:</b></td><td colspan=3>$c_nameField</td><td colspan=2 align=right><a href='#' class=\"show-customer\" onClick=\"$('.customer').show(); $('.show-customer').hide(); \">$LANG_show_details</a> <a href='#' class=\"customer\" onClick=\"$('.customer').hide(); $('.show-customer').show();\">$LANG_hide_details</a></td>
 	</tr>	
 	<tr class='details_screen customer'>
 		<td>$LANG_attention_short:</td><td colspan=5 align=left>$c_attentionField,</td>
@@ -599,6 +599,7 @@ $display_block_bottom =  "
     <script type="text/javascript">
 	$(document).ready(function() {
 	 // hides the customer and biller details as soon as the DOM is ready (a little sooner that page load)
+	  $('.show-summary').hide();
 	  $('.biller').hide();
 	  $('.customer').hide();
   	});
