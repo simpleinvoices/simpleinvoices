@@ -15,7 +15,8 @@ define('DEFAULT_USER_AGENT',"Mozilla/5.0 (Windows; U; Windows NT 5.1; rv:1.7) Ge
 define('OUTPUT_DEFAULT_NAME','unnamed');
 
 // Default text encoding to use when no encoding information is available
-define('DEFAULT_ENCODING', 'iso-8859-1');
+define('DEFAULT_ENCODING', 'utf-8');
+//define('DEFAULT_ENCODING', 'iso-8859-1');
 
 /**
  * Postscript-specific configuration options
