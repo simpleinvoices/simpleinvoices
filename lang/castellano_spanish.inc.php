@@ -11,13 +11,15 @@ $LANG_account_info = "Informaci&oacute;n de la Cuenta";
 $LANG_actions = "Acciones";
 $LANG_add_biller = "A&ntilde;adir facturador";
 $LANG_add_new_invoice = "A&ntilde;adir Nueva Factura";
+$LANG_add_new_preference = "A&ntilde;adir Preferencia de Nueva Factura";
+$LANG_add_new_product = "A&ntilde;adir Nuevo Producto";
 $LANG_add_new_tax_rate = "A&ntilde;adir Nuevo Porcentaje de Impuesto";
 $LANG_address = "Direcci&oacute;n";
 $LANG_address_city = "Direcci&oacute;n: Ciudad";
 $LANG_address_country = "Direcci&oacute;n: Pais";
 $LANG_address_state = "Direcci&oacute;n: Estado";
 $LANG_address_street = "Direcci&oacute;n: Calle";
-$LANG_address_zip = "A&ntilde;adirress: Código Postal";
+$LANG_address_zip = "A&ntilde;adirress: C&oacute;digo Postal";
 $LANG_age = "Edad";
 $LANG_aging = "Antig&uuml;edad";
 $LANG_amount = "Cantidad";
@@ -96,12 +98,15 @@ $LANG_logo_file = "Fichero de Logo";
 $LANG_manage = "Gesti&oacute;n";
 $LANG_manage_invoices = "Gestionar Facturas";
 $LANG_manage_payment_types = "Gestionar Tipos de Pago";
+$LANG_manage_preferences = "Gestionar Preferencias";
+$LANG_manage_products = "Gestionar Productos";
 $LANG_manage_tax_rates = "Gestionar Porcentajes de Impuesto";
 $LANG_mandatory_fields = "Todos los campos son obligatorios";
 $LANG_mobile_phone = "Tel&eacute;fono M&oacute;vil";
 $LANG_mobile_short = "M&oacute;v.";
 $LANG_no_invoices = "No hay facturas en la base de datos";
 $LANG_no_payment_types = "Lo siento, no hay tipos de pago disponibles, por favor introduzca uno";
+$LANG_no_preferences = "No hay preferencias de factura en la base de datos, por favor introduzca uno";
 $LANG_no_tax_rates = "No hay porcentajes de impuestos en la base de datos, por facor introduzca uno";
 $LANG_note = "Nota";
 $LANG_notes = "Notas";
@@ -118,6 +123,7 @@ $LANG_payment_type_method = "Tipo/Method de Pago";
 $LANG_payment_type_to_add = "Tipo de Pago a a&ntilde;adir";
 $LANG_phone = "Tel&eacute;fono";
 $LANG_phone_short = "Telf.";
+$LANG_preference_id = "ID de Preferencia";
 $LANG_print_preview = "Imprimir Vista Previa";
 $LANG_print_preview_tooltip = "Vista Previa de";
 $LANG_process_payment = "Procesar Pago";
@@ -253,12 +259,11 @@ $mi_action_invoice_total = "A&ntilde;adir nueva Factura - Estilo Total";
 $mi_action_invoice_itemised = "A&ntilde;adir nueva Factura - Estilo detallado";
 $mi_action_invoice_consulting = "A&ntilde;adir nueva Factura - Estilo anal&iacute;tico";
 
-
 #Gestionar Products
 $mp_page_title = " - Gestionar Productos";
 $mp_page_header = "Gestionar Productos";
 $mp_no_invoices = "No hay productos en la base de datos, por favor introduzca uno";
-$mp_table_action = "Acci&oacute,n";
+$mp_table_action = "Acci&oacute;n";
 $mp_table_product_id = "ID de Producto";
 $mp_table_product_desc = "Descripci&oacute;n";
 $mp_table_unit_price = "Precio Unitario";
@@ -339,6 +344,18 @@ $map_payments_filtered = "Pagos filtrados por ID de Factura";
 $map_payments_filtered_invoice = "Procesar Pago par esta Factura";
 $map_payments_filtered_customer = "Pagos filtrados por ID de Cliente";
 
+#Manage Tax Rate
+$mtr_page_title = " - Manage Tax Rates";
+$mtr_page_header = "Manage Tax Rates";
+$mtr_no_invoices = "There are no tax rates in the database, please add one";
+$mtr_table_action = "Action";
+$mtr_table_tax_id = "Tax ID";
+$mtr_table_tac_desc = "Tax description";
+$mtr_table_percentage = "Tax percentage";
+$mtr_actions_view = "View";
+$mtr_actions_edit = "Edit";
+$mtr_actions_new_tax = "Add New Tax Rate";
+
 #Gestionar Pago Tipos
 $mpt_page_title = " - Gestionar Tipos de Pago";
 $mpt_page_header = "Gestionar Tipos de Pago";
@@ -372,5 +389,6 @@ $pp_invoice_total_tax ="Impuestos totales inclu&iacute;dos";
 $pp_invoice_amount ="Cantidad";
 $pp_invoice_summary ="Resumen";
 */
+
 
 ?>

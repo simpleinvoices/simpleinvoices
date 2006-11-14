@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 #all
 $title = "Facturas Simples";
@@ -11,6 +11,8 @@ $LANG_account_info = "Account Info";
 $LANG_actions = "Actions";
 $LANG_add_biller = "Add biller";
 $LANG_add_new_invoice = "Add New Invoice";
+$LANG_add_new_preference = "Add New Invoice Preference";
+$LANG_add_new_product = "Add New Product";
 $LANG_add_new_tax_rate = "Add New Tax Rate";
 $LANG_address = "Address";
 $LANG_address_city = "Address: City";
@@ -19,6 +21,7 @@ $LANG_address_state = "Address: State";
 $LANG_address_street = "Address: Street";
 $LANG_address_zip = "Address: Zip";
 $LANG_age = "Age";
+$LANG_aging = "Aging";
 $LANG_amount = "Amount";
 $LANG_attention_short = "Attn.";
 $LANG_biller = "Biller";
@@ -58,6 +61,7 @@ $LANG_export_xls_tooltip = "no formato do grade";
 $LANG_fax = "Fax";
 $LANG_format_tooltip = "formato";
 $LANG_gross_total = "Gross Total";
+$LANG_hide_details = "Hide details";
 $LANG_id = "ID";
 $LANG_ie_10_for_10 = "* ie. 10 for 10%";
 $LANG_included = "included";
@@ -94,12 +98,15 @@ $LANG_logo_file = "Logo file";
 $LANG_manage = "Manage";
 $LANG_manage_invoices = "Edite os Facturas";
 $LANG_manage_payment_types = "Manage Payment Types";
+$LANG_manage_preferences = "Edite os Opções";
+$LANG_manage_products = "Edite os Produtos";
 $LANG_manage_tax_rates = "Manage Tax Rates";
 $LANG_mandatory_fields = "All fields are mandatory";
 $LANG_mobile_phone = "Mobile Phone";
 $LANG_mobile_short = "Mob.";
 $LANG_no_invoices = "Não há nenhum factura nos registros";
 $LANG_no_payment_types = "Sorry, no payment types available, please insert one";
+$LANG_no_preferences = "Não há nenhum opção nos registros";
 $LANG_no_tax_rates = "There are no tax rates in the database";
 $LANG_note = "Note";
 $LANG_notes = "Notes";
@@ -116,6 +123,7 @@ $LANG_payment_type_method = "Payment Type/Method";
 $LANG_payment_type_to_add = "Payment type to add";
 $LANG_phone = "Phone";
 $LANG_phone_short = "Ph.";
+$LANG_preference_id = "Número do Opção";
 $LANG_print_preview = "Print Preview";
 $LANG_print_preview_tooltip = "Inspecção Prévia de Cópia de";
 $LANG_process_payment = "Process Payment";
@@ -134,6 +142,7 @@ $LANG_save_payment_type = "Save Payment Type";
 $LANG_save_product = "Save Product";
 $LANG_save_tax_rate = "Save Tax Rate";
 $LANG_select_invoice = "Please select an invoice";
+$LANG_show_details = "Show details";
 $LANG_state = "State";
 $LANG_street = "Street";
 $LANG_sub_total = "Sub Total";
@@ -222,6 +231,34 @@ $LANG_stats_customer ="Top Customer - by amount invoiced";
 $indx_stats_biller ="Top Biller - by amount invoiced";
 $LANG_stats_biller ="Top Biller - by amount invoiced";
 
+#Manage Invoices
+$mi_page_title = " - Edite os Facturas";
+$mi_page_header = "Edite os Facturas";
+$mi_no_invoices = "Não há nenhum factura nos registros";
+$mi_table_action = "Ação";
+$mi_table_id = "Nome";
+$mi_table_biller = "o Pagamento";
+$mi_table_customer = "o Cliente";
+$mi_table_total = "o Total";
+$mi_table_paid = "Paid";
+$mi_table_owing = "Owing";
+$mi_table_type = "o Tipo";
+$mi_table_date = "Data da criação";
+$mi_actions_quick_view = "Inspecção Prévia";
+$mi_actions_quick_view_tooltip = "Inspecção Prévia de"; 
+$mi_actions_edit_view = "edit";
+$mi_actions_edit_view_toolkit = "Edit";
+$mi_actions_print_preview_tooltip = "Inspecção Prévia de Cópia de";
+$mi_actions_export_tooltip = "Exportação"; 
+$mi_actions_export_pdf_tooltip = "no formato do PDF";
+$mi_actions_format_tooltip = "formato";
+$mi_actions_export_xls_tooltip = "no formato do grade";
+$mi_actions_export_doc_tooltip = "to formato do editor de texto";
+$mi_actions_process_payment = "Process payment for";
+$mi_action_invoice_total = "Add new Invoice - Total style";
+$mi_action_invoice_itemised = "Add new Invoice - Itemised style";
+$mi_action_invoice_consulting = "Add new Invoice - Consulting style";
+
 #Manage Products
 $mp_page_title = " - Edite os Produtos";
 $mp_page_header = "Edite os Produtos";
@@ -307,6 +344,17 @@ $map_payments_filtered = "Payments filtered by Invoice ID";
 $map_payments_filtered_invoice = "Process Payment for this Invoice";
 $map_payments_filtered_customer = "Payments filtered by Customer ID";
 
+#Manage Tax Rates
+$mtr_page_title = " - Manage Tax Rates";
+$mtr_page_header = "Manage Tax Rates";
+$mtr_no_invoices = "There are no tax rates in the database, please add one";
+$mtr_table_action = "Action";
+$mtr_table_tax_id = "Tax ID";
+$mtr_table_tac_desc = "Tax description";
+$mtr_table_percentage = "Tax percentage";
+$mtr_actions_view = "View";
+$mtr_actions_edit = "Edit";
+$mtr_actions_new_tax = "Add New Tax Rate";
 
 #Manage Payment Types
 $mpt_page_title = " - Manage Payment Types";
@@ -318,13 +366,6 @@ $mpt_table_pt_description = "Description";
 $mpt_actions_view = "View";
 $mpt_actions_edit = "Edit";
 $mpt_actions_new_tax = "Add New Payment Type";
-
-#Manage Tax Rates
-$mtr_table_action = "Action";
-$mtr_table_tac_desc = "Tax description";
-$mtr_table_percentage = "Tax percentage";
-$mtr_actions_view = "View";
-$mtr_actions_edit = "Edit";
 
 #Print Preview - Invoice layout
 /*

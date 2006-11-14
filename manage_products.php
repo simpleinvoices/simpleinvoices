@@ -1,7 +1,9 @@
+<html>
+<head>
 <?php
 include('./include/include_main.php');
 
-#insert customer
+#manage products
 $conn = mysql_connect("$db_host","$db_user","$db_password");
 mysql_select_db("$db_name",$conn);
 
@@ -13,23 +15,26 @@ $number_of_rows = mysql_num_rows($result);
 
 
 if (mysql_num_rows($result) == 0) {
-$display_block = "<P><em>$mp_no_invoices.</em></p>";
+	$display_block = "<P><em>{$LANG_no_invoices}.</em></p>";
 }else{
-$display_block = "
+	$display_block = <<<EOD
 
-<div id=\"sorting\">
-       <div>Sorting tables, please hold on...</div>
+<div id="sorting">
+	<div>Sorting tables, please hold on...</div>
 </div>
 
-<table width=100% align=center class=\"filterable sortable\" id=large> 
-<div id=header><b>$mp_page_header</b> :: <a href='insert_product.php'>$mp_actions_new_product</a></div>
-<tr class=\"sortHeader\">
-<th class=\"noFilter\">$mp_table_action</th>
-<th class=\" index_table\">$mp_table_product_id</th>
-<th class=\" index_table\">$mp_table_product_desc</th>
-<th class=\" index_table\">$mp_table_unit_price</th>
-<th class=\"selectFilter index_table\">$wording_for_enabledField &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-</tr>";
+<table width="100%" align="center" class="filterable sortable" id="large">
+<div id="header"><b>{$LANG_manage_products}</b> ::
+	<a href="insert_product.php">{$LANG_add_new_product}</a></div>
+<tr class="sortHeader">
+<th class="noFilter">{$LANG_actions}</th>
+<th class="index_table">{$LANG_product_id}</th>
+<th class="index_table">{$LANG_product_description}</th>
+<th class="index_table">{$LANG_product_unit_price}</th>
+<th class="selectFilter index_table">{$wording_for_enabledField} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+</tr>
+
+EOD;
 
 while ($Array = mysql_fetch_array($result)) {
 	$prod_idField = $Array['prod_id'];
@@ -37,38 +42,30 @@ while ($Array = mysql_fetch_array($result)) {
 	$prod_enabledField = $Array['prod_enabled'];
 	$prod_unit_priceField = $Array['prod_unit_price'];
 	
-        if ($prod_enabledField == 1) {
-                $wording_for_enabled = $wording_for_enabledField;
-        } else {
-                $wording_for_enabled = $wording_for_disabledField;
-        }
+	if ($prod_enabledField == 1) {
+		$wording_for_enabled = $wording_for_enabledField;
+	} else {
+		$wording_for_enabled = $wording_for_disabledField;
+	}
 
+	$display_block .= <<<EOD
+	<tr class="index_table">
+	<td class="index_table">
+	<a class="index_table"
+	 href="product_details.php?submit={$prod_idField}&action=view">{$LANG_view}</a> ::
+	<a class="index_table"
+	 href="product_details.php?submit={$prod_idField}&action=edit">{$LANG_edit}</a> </td>
+	<td class="index_table">{$prod_idField}</td>
+	<td class="index_table">{$prod_descriptionField}</td>
+	<td class="index_table">{$prod_unit_priceField}</td>
+	<td class="index_table">{$wording_for_enabled}</td>
+	</tr>
 
-
-	$display_block .= "
-	<tr class='index_table'>
-	<td class='index_table'><a class='index_table' href='product_details.php?submit=$prod_idField&action=view'>$mp_actions_view</a> :: <a class='index_table' href='product_details.php?submit=$prod_idField&action=edit'>$mp_actions_edit</a> </td>
-	<td class='index_table'>$prod_idField</td>
-	<td class='index_table'>$prod_descriptionField</td>
-	<td class='index_table'>$prod_unit_priceField</td>
-	<td class='index_table'>$wording_for_enabled</td>
-	</tr>";
-
-                
-	
-		}
-		
-
-        $display_block .="</table>";
+EOD;
+	}
+	$display_block .= "</table>";
 }
 
-
-
-?>
-<html>
-<head>
-<?php include('./include/menu.php'); ?>
-<?php
 $mid->printMenu('hormenu1');
 $mid->printFooter();
 ?>
@@ -81,21 +78,21 @@ $mid->printFooter();
 
 <script type="text/javascript">
 $(document).ready(function() {
-        $("table#large").tableSorter({
-                sortClassAsc: 'sortUp', // class name for asc sorting action
-                sortClassDesc: 'sortDown', // class name for desc sorting action
-                highlightClass: ['highlight'], // class name for sort column highlighting.
-                //stripingRowClass: ['even','odd'],
-                //alternateRowClass: ['odd','even'],
-                headerClass: 'largeHeaders', // class name for headers (th's)
-                disableHeader: [0], // disable column can be a string / number or array containing string or number.
-                dateFormat: 'dd/mm/yyyy' // set date format for non iso dates default us, in this case override and set uk-format
-        })
+	$("table#large").tableSorter({
+		sortClassAsc: 'sortUp', // class name for asc sorting action
+		sortClassDesc: 'sortDown', // class name for desc sorting action
+		highlightClass: ['highlight'], // class name for sort column highlighting.
+		//stripingRowClass: ['even','odd'],
+		//alternateRowClass: ['odd','even'],
+		headerClass: 'largeHeaders', // class name for headers (th's)
+		disableHeader: [0], // disable column can be a string / number or array containing string or number.
+		dateFormat: 'dd/mm/yyyy' // set date format for non iso dates default us, in this case override and set uk-format
+	})
 });
 $(document).sortStart(function(){
-        $("div#sorting").show();
+	$("div#sorting").show();
 }).sortStop(function(){
-        $("div#sorting").hide();
+	$("div#sorting").hide();
 });
 </script>
 
@@ -109,19 +106,22 @@ Nifty("div#header,div#footer","small");
 }
 </script>
 
+<?php
+echo <<<EOD
+<title>{$title} :: {$LANG_manage_products}</title>
+<link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css">
 
-<title><?php echo $title; echo $mp_page_title; ?></title>
+EOD;
+?>
 </head>
-<?php include('./config/config.php'); ?>
+
 <body>
 
-<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
 <br>
 <div id="container">
 <?php echo $display_block; ?>
 <div id="footer"></div>
 </div>
-</div>
 
 </body>
-
+</html>

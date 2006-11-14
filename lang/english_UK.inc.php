@@ -11,6 +11,8 @@ $LANG_account_info = "Account Info";
 $LANG_actions = "Actions";
 $LANG_add_biller = "Add biller";
 $LANG_add_new_invoice = "Add New Invoice";
+$LANG_add_new_preference = "Add New Invoice Preference";
+$LANG_add_new_product = "Add New Product";
 $LANG_add_new_tax_rate = "Add New Tax Rate";
 $LANG_address = "Address";
 $LANG_address_city = "Address: City";
@@ -96,12 +98,15 @@ $LANG_logo_file = "Logo file";
 $LANG_manage = "Manage";
 $LANG_manage_invoices = "Manage Invoices";
 $LANG_manage_payment_types = "Manage Payment Types";
+$LANG_manage_preferences = "Manage Preferences";
+$LANG_manage_products = "Manage Products";
 $LANG_manage_tax_rates = "Manage Tax Rates";
 $LANG_mandatory_fields = "All fields are mandatory";
 $LANG_mobile_phone = "Mobile Phone";
 $LANG_mobile_short = "Mob.";
 $LANG_no_invoices = "There are no invoices in the database";
 $LANG_no_payment_types = "Sorry, no payment types available, please insert one";
+$LANG_no_preferences = "There are no invoice preferences in the database, please add one";
 $LANG_no_tax_rates = "There are no tax rates in the database, please add one";
 $LANG_note = "Note";
 $LANG_notes = "Notes";
@@ -118,6 +123,7 @@ $LANG_payment_type_method = "Payment Type/Method";
 $LANG_payment_type_to_add = "Payment type to add";
 $LANG_phone = "Phone";
 $LANG_phone_short = "Ph.";
+$LANG_preference_id = "Preference ID";
 $LANG_print_preview = "Print Preview";
 $LANG_print_preview_tooltip = "Print Preview of";
 $LANG_process_payment = "Process Payment";
@@ -253,7 +259,6 @@ $mi_action_invoice_total = "Add new Invoice - Total style";
 $mi_action_invoice_itemised = "Add new Invoice - Itemised style";
 $mi_action_invoice_consulting = "Add new Invoice - Consulting style";
 
-
 #Manage Products
 $mp_page_title = " - Manage Products";
 $mp_page_header = "Manage Products";
@@ -338,6 +343,18 @@ $map_actions_process_payment = "Process Payment";
 $map_payments_filtered = "Payments filtered by Invoice ID";
 $map_payments_filtered_invoice = "Process Payment for this Invoice";
 $map_payments_filtered_customer = "Payments filtered by Customer ID";
+
+#Manage Tax Rate
+$mtr_page_title = " - Manage Tax Rates";
+$mtr_page_header = "Manage Tax Rates";
+$mtr_no_invoices = "There are no tax rates in the database, please add one";
+$mtr_table_action = "Action";
+$mtr_table_tax_id = "Tax ID";
+$mtr_table_tac_desc = "Tax description";
+$mtr_table_percentage = "Tax percentage";
+$mtr_actions_view = "View";
+$mtr_actions_edit = "Edit";
+$mtr_actions_new_tax = "Add New Tax Rate";
 
 #Manage Payment Types
 $mpt_page_title = " - Manage Payment Types";

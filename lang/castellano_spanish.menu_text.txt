@@ -1,4 +1,4 @@
-﻿.|Principal|./index.php|La pantalla principal
+.|Principal|./index.php|La pantalla principal
 .|Nueva Factura|./manage_invoices.php
 ..|Gestionar Facturas|./manage_invoices.php
 ..|---

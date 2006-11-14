@@ -11,6 +11,8 @@ $LANG_account_info = "Tilin tiedot";
 $LANG_actions = "Toiminnot";
 $LANG_add_biller = "Uusi laskuttaja";
 $LANG_add_new_invoice = "Uusi lasku";
+$LANG_add_new_preference = "Lis&auml;&auml; uusi oletuslasku";
+$LANG_add_new_product = "Uusi tuote";
 $LANG_add_new_tax_rate = "Lis&auml;&auml; uusi arvonlis&auml;veroluokka";
 $LANG_address = "Osoite";
 $LANG_address_city = "Postitoimipaikka";
@@ -60,6 +62,7 @@ $LANG_export_xls_tooltip = "taulukkolaskentaan tiedostona";
 $LANG_fax = "URL";
 $LANG_format_tooltip = "muodossa";
 $LANG_gross_total = "Veroton";
+$LANG_hide_details = "Piilota tiedot";
 $LANG_id = "Nro";
 $LANG_ie_10_for_10 = "* esim. 10 tarkoittaa 10 %";
 $LANG_included = "sis&auml;lt&auml;&auml;";
@@ -96,12 +99,15 @@ $LANG_logo_file = "Logotiedosto";
 $LANG_manage = "K&auml;sittele";
 $LANG_manage_invoices = "Laskujen hallinta";
 $LANG_manage_payment_types = "Maksutapojen hallinta";
+$LANG_manage_preferences = "Laskujen oletusten hallinta";
+$LANG_manage_products = "Tuotteiden hallinta";
 $LANG_manage_tax_rates = "Arvonlis&auml;veroluokkien hallinta";
 $LANG_mandatory_fields = "Kaikki kent&auml;t ovat pakollisia";
 $LANG_mobile_phone = "GSM-puhelin";
 $LANG_mobile_short = "GSM";
 $LANG_no_invoices = "Tietokannassa ei ole yht&auml;&auml;n laskua";
 $LANG_no_payment_types = "Tietokannassa ei ole yht&auml;&auml;n maksutapaa, lis&auml;&auml; ainakin yksi";
+$LANG_no_preferences = "Tietokannassa ei ole yht&auml;&auml;n oletuslaskua, lis&auml;&auml; ainakin yksi";
 $LANG_no_tax_rates = "Tietokannassa ei ole ALV-luokkia, lis&auml;&auml; uusia";
 $LANG_note = "Lis&auml;tietoja";
 $LANG_notes = "Lis&auml;tiedot";
@@ -118,6 +124,7 @@ $LANG_payment_type_method = "Maksun laji / maksutapa";
 $LANG_payment_type_to_add = "Lis&auml;tt&auml;v&auml; maksutapa";
 $LANG_phone = "Puhelin";
 $LANG_phone_short = "Puh";
+$LANG_preference_id = "Oletuslaskun numero";
 $LANG_print_preview = "Tulostuksen esikatselu";
 $LANG_print_preview_tooltip = "Tulostuksen esikatselu kohteeseen";
 $LANG_process_payment = "Merkitse maksetuksi";
@@ -136,6 +143,7 @@ $LANG_save_payment_type = "Tallenna maksutapa";
 $LANG_save_product = "Tallenna tuote";
 $LANG_save_tax_rate = "Tallenna ALV-luokka";
 $LANG_select_invoice = "Ole hyv&auml; ja valitse lasku";
+$LANG_show_details = "N&auml;yt&auml; tiedot";
 $LANG_state = "Y-tunnus";
 $LANG_street = "Postiosoite";
 $LANG_sub_total = "V&auml;lisumma";
@@ -242,6 +250,32 @@ $indx_stats_biller ="Ykk&ouml;slaskuttaja - laskutuksen m&auml;&auml;r&auml;n mu
 $LANG_stats_biller ="Ykk&ouml;slaskuttaja - laskutuksen m&auml;&auml;r&auml;n mukaan";
 
 #Manage Invoices
+$mi_page_title = " - Laskujen hallinta";
+$mi_page_header = "Laskujen hallinta";
+$mi_no_invoices = "Tietokannassa ei ole yht&auml;&auml;n laskua";
+$mi_table_action = "Toiminto";
+$mi_table_id = "Laskunro";
+$mi_table_biller = "Laskuttaja";
+$mi_table_customer = "Asiakas";
+$mi_table_total = "Yhteens&auml;";
+$mi_table_paid = "Maksettu";
+$mi_table_owing = "J&auml;ljell&auml;";
+$mi_table_type = "Laji";
+$mi_table_date = "Luotu";
+$mi_actions_quick_view = "n&auml;yt&auml;";
+$mi_actions_quick_view_tooltip = "Pikan&auml;kym&auml; kohteesta"; 
+$mi_actions_edit_view = "muokkaa";
+$mi_actions_edit_view_toolkit = "Muokkaa";
+$mi_actions_print_preview_tooltip = "Tulostuksen esikatselu kohteesta";
+$mi_actions_export_tooltip = "Vie";
+$mi_actions_export_pdf_tooltip = "PDF-muodossa";
+$mi_actions_format_tooltip = "muodossa";
+$mi_actions_export_xls_tooltip = "taulukkolaskentaohjelmaan";
+$mi_actions_export_doc_tooltip = "tekstink&auml;sittelyohjelmaan";
+$mi_actions_process_payment = "Merkitse maksetuksi";
+$mi_action_invoice_total = "Uusi lasku - kokonaissummalla";
+$mi_action_invoice_itemised = "Uusi lasku - yksil&ouml;ityn&auml;";
+$mi_action_invoice_consulting = "Uusi lasku - konsultointia";
 
 #Manage Products
 $mp_page_title = " - Tuotteiden hallinta";
@@ -340,7 +374,6 @@ $mtr_actions_view = "N&auml;yt&auml;";
 $mtr_actions_edit = "Muokkaa";
 $mtr_actions_new_tax = "Uusi arvonlis&auml;veroluokka";
 
-
 #Manage Payment Types
 $mpt_page_title = " - Maksutapojen hallinta";
 $mpt_page_header = "Maksutapojen hallinta";
@@ -374,5 +407,6 @@ $pp_invoice_total_tax ="Josta arvonlis&auml;vero yhteens&auml;";
 $pp_invoice_amount ="Summa";
 $pp_invoice_summary ="Yhteenveto";
 */
+
 
 ?>
