@@ -158,7 +158,7 @@ if (empty($b_co_logoField)) {
 #end logo section
 	
 
-
+#Biller and Invoice Summary section - start
 $display_block_top =  "
 	
 	<table align=center >
@@ -173,13 +173,13 @@ $display_block_top =  "
 		<td nowrap class=\"tbl1-left\">$b_cityField,</td><td class=\"tbl1-right\">$LANG_mobile_short: $b_mobile_phoneField</td><td></td><td nowrap class=\"tbl1-left\">$pref_inv_wordingField $LANG_date:</td><td class=\"tbl1-right\" colspan=2>$inv_dateField</td>
 	</tr>	
 	<tr>
-		<td nowrap class=\"tbl1-left\">$b_stateField, $b_zip_codeField</td><td class=\"tbl1-right\">$LANG_fax: $b_faxField</td><td></td><td class=\"tbl1-left\" >$LANG_total: </td><td class=\"tbl1-right\"colspan=2>$invoice_total_Field</td>
+		<td nowrap class=\"tbl1-left\">$b_stateField, $b_zip_codeField</td><td class=\"tbl1-right\">$LANG_fax: $b_faxField</td><td></td><td class=\"tbl1-left\" >$LANG_total: </td><td class=\"tbl1-right\"colspan=2>$pref_currency_signField$invoice_total_Field</td>
 	</tr>	
 	<tr>
-		<td nowrap class=\"tbl1-left tbl1-bottom\">$b_countryField</td><td class=\"tbl1-right tbl1-bottom\">$LANG_email: $b_emailField</td><td></td><td class=\"tbl1-left\">$LANG_paid:</td><td class=\"tbl1-right\" colspan=2>$invoice_paid_Field</td>
+		<td nowrap class=\"tbl1-left tbl1-bottom\">$b_countryField</td><td class=\"tbl1-right tbl1-bottom\">$LANG_email: $b_emailField</td><td></td><td class=\"tbl1-left\">$LANG_paid:</td><td class=\"tbl1-right\" colspan=2>$pref_currency_signField$invoice_paid_Field</td>
 	</tr>	
 	<tr>
-		<td colspan=3></td><td nowrap class=\"tbl1-left tbl1-bottom\">$LANG_owing:</td><td class=\"tbl1-right tbl1-bottom\" colspan=2>$invoice_owing_Field</td>
+		<td colspan=3></td><td nowrap class=\"tbl1-left tbl1-bottom\">$LANG_owing:</td><td class=\"tbl1-right tbl1-bottom\" colspan=2>$pref_currency_signField$invoice_owing_Field</td>
 	</tr>	
 	<tr>
 		<td colspan=2 class=\"tbl1 col1 tbl1-right\" border=\"1\" cellpadding=\"2\" cellspacing=\"1\"  ><b>$LANG_customer</b></td><td colspan=4></td>

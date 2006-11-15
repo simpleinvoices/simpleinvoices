@@ -39,14 +39,20 @@ while ($Array = mysql_fetch_array($result_print_customer) ) {
 	$c_attentionField = $Array['c_attention'];
 	$c_nameField = $Array['c_name'];
 	$c_street_addressField = $Array['c_street_address'];
+	$c_street_address2Field = $Array['c_street_address2'];
 	$c_cityField = $Array['c_city'];
 	$c_stateField = $Array['c_state'];
 	$c_zip_codeField = $Array['c_zip_code'];
 	$c_countryField = $Array['c_country'];
 	$c_phoneField = $Array['c_phone'];
+	$c_mobile_phoneField = $Array['c_mobile_phone'];
 	$c_faxField = $Array['c_fax'];
 	$c_emailField = $Array['c_email'];
 	$c_notesField = $Array['c_notes'];
+	$c_custom_field1Field = $Array['c_custom_field1'];
+	$c_custom_field2Field = $Array['c_custom_field2'];
+	$c_custom_field3Field = $Array['c_custom_field3'];
+	$c_custom_field4Field = $Array['c_custom_field4'];
 	$c_enabledField = $Array['c_enabled'];
 
 	if ($c_enabledField == 1) {
@@ -110,24 +116,28 @@ if ($_GET['action'] === 'view') {
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_street}</td><td>{$c_street_addressField}</td>
-		<td class="details_screen">{$LANG_phone}</td><td>{$c_phoneField}</td>
+	</tr>
+	<tr>
+		<td class="details_screen">{$LANG_street}2 - CHANGE</td><td>{$c_street_address2Field}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_city}</td><td>{$c_cityField}</td>
-		<td class="details_screen">{$LANG_fax}</td><td>{$c_faxField}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_zip}</td><td>{$c_zip_codeField}</td>
-		<td class="details_screen">{$LANG_email}</td><td>{$c_emailField}</td>
+		<td class="details_screen">{$LANG_phone}</td><td>{$c_phoneField}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_state}</td><td>{$c_stateField}</td>
+		<td class="details_screen">{$LANG_phone} - CHANGE to mobile</td><td>{$c_mobile_phoneField}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_country}</td><td>{$c_countryField}</td>
+		<td class="details_screen">{$LANG_fax}</td><td>{$c_faxField}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$wording_for_enabledField}</td><td>{$wording_for_enabled}</td>
+		<td class="details_screen">{$LANG_email}</td><td>{$c_emailField}</td>
 	</tr>	
 	</table>
 
@@ -140,10 +150,20 @@ $display_block .= <<<EOD
 <br>
 	<div id="container-1">
 		<ul class="anchors">
-			<li><a href="#section-1">{$LANG_customer} {$LANG_invoice_listings}</a></li>
-			<li><a href="#section-2">{$LANG_notes}</a></li>
+			<li><a href="#section-1">Custom Fields</a></li>
+			<li><a href="#section-2">{$LANG_customer} {$LANG_invoice_listings}</a></li>
+			<li><a href="#section-3">{$LANG_notes}</a></li>
 		</ul>
 		<div id="section-1" class="fragment">
+			<h4><u>{$LANG_customer} Custom Fields</u></h4>
+			<p>
+			CUSTOM FIELD 1 - CHANGE : {$c_custom_field1Field}<br>
+			CUSTOM FIELD 2 - CHANGE : {$c_custom_field2Field}<br>
+			CUSTOM FIELD 3 - CHANGE : {$c_custom_field3Field}<br>
+			CUSTOM FIELD 4 - CHANGE : {$c_custom_field4Field}
+			</p>
+		</div>
+		<div id="section-2" class="fragment">
 			<h4><u>{$LANG_invoice_listings}</u></h4>
 			<p>
 
@@ -154,7 +174,7 @@ include('./manage_invoices.inc.php');
 $display_block .= <<<EOD
 			</p>
 		</div>
-		<div id="section-2" class="fragment">
+		<div id="section-3" class="fragment">
 			<h4><u>{$LANG_customer} {$LANG_notes}</u></h4>
 			<p>
 			{$c_notesField}
@@ -206,6 +226,10 @@ $display_block_enabled = "<select name=\"c_enabled\">
 		<td><input type="text" name="c_street_address" value="{$c_street_addressField}" size="50" /></td>
 	</tr>
 	<tr>
+		<td class="details_screen">{$LANG_street} 2 _CHANGE</td>
+		<td><input type="text" name="c_street_address2" value="{$c_street_address2Field}" size="50" /></td>
+	</tr>
+	<tr>
 		<td class="details_screen">{$LANG_city}</td>
 		<td><input type="text" name="c_city" value="{$c_cityField}" size="50" /></td>
 	</tr>
@@ -226,6 +250,10 @@ $display_block_enabled = "<select name=\"c_enabled\">
 		<td><input type="text" name="c_phone" value="{$c_phoneField}" size="50" /></td>
 	</tr>
 	<tr>
+		<td class="details_screen">{$LANG_phone} - MOBILE CHANGE</td>
+		<td><input type="text" name="c_mobile_phone" value="{$c_mobile_phoneField}" size="50" /></td>
+	</tr>
+	<tr>
 		<td class="details_screen">{$LANG_fax}</td>
 		<td><input type="text" name="c_fax" value="{$c_faxField}" size="50" /></td>
 	</tr>
@@ -234,8 +262,24 @@ $display_block_enabled = "<select name=\"c_enabled\">
 		<td><input type="text" name="c_email" value="{$c_emailField}" size="50" /></td
 	</tr>
 	<tr>
+		<td class="details_screen">Custom Field 1 - CHANGE</td>
+		<td><input type="text" name="c_custom_field1" value="{$c_custom_field1Field}" size="50" /></td
+	</tr>
+	<tr>
+		<td class="details_screen">Custom Field 2 - CHANGE</td>
+		<td><input type="text" name="c_custom_field2" value="{$c_custom_field2Field}" size="50" /></td
+	</tr>
+	<tr>
+		<td class="details_screen">Custom Field 3 - CHANGE</td>
+		<td><input type="text" name="c_custom_field3" value="{$c_custom_field3Field}" size="50" /></td
+	</tr>
+	<tr>
+		<td class="details_screen">Custom Field 4 - CHANGE</td>
+		<td><input type="text" name="c_custom_field4" value="{$c_custom_field4Field}" size="50" /></td
+	</tr>
+	<tr>
 		<td class="details_screen">{$LANG_notes}</td>
-		<td><textarea name="c_notes' rows="8" cols="50">{$c_notesField}</textarea></td>
+		<td><textarea name="c_notes" rows="8" cols="50">{$c_notesField}</textarea></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$wording_for_enabledField}</td><td>{$display_block_enabled}</td>
