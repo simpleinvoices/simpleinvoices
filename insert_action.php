@@ -133,6 +133,7 @@ else if ( $op === 'insert_biller') {
 				'',
 				'$_POST[b_name]',
 				'$_POST[b_street_address]',
+				'$_POST[b_street_address2]',
 				'$_POST[b_city]',
 				'$_POST[b_state]',
 				'$_POST[b_zip_code]',
@@ -144,6 +145,10 @@ else if ( $op === 'insert_biller') {
 				'$_POST[b_co_logo]',
 				'$_POST[b_co_footer]',
 				'$_POST[b_notes]',
+				'$_POST[b_custom_field1]',
+				'$_POST[b_custom_field2]',
+				'$_POST[b_custom_field3]',
+				'$_POST[b_custom_field4]',
 				'$_POST[b_enabled]'
 			 )";
  	
@@ -167,6 +172,7 @@ else if (  $op === 'edit_biller' ) {
 			SET
 				b_name = '$_POST[b_name]',
 				b_street_address = '$_POST[b_street_address]',
+				b_street_address2 = '$_POST[b_street_address2]',
 				b_city = '$_POST[b_city]',b_state = '$_POST[b_state]',
 				b_zip_code = '$_POST[b_zip_code]',
 				b_country = '$_POST[b_country]',
@@ -177,6 +183,10 @@ else if (  $op === 'edit_biller' ) {
 				b_co_logo = '$_POST[b_co_logo]',
 				b_co_footer = '$_POST[b_co_footer]',
 				b_notes = '$_POST[b_notes]',
+				b_custom_field1 = '$_POST[b_custom_field1]',
+				b_custom_field2 = '$_POST[b_custom_field2]',
+				b_custom_field3 = '$_POST[b_custom_field3]',
+				b_custom_field4 = '$_POST[b_custom_field4]',
 				b_enabled = '$_POST[b_enabled]'
 			WHERE
 				b_id = '$_GET[submit]'";
@@ -211,6 +221,10 @@ $sql = "INSERT into
 			'',
 			'$_POST[prod_description]',
 			'$_POST[prod_unit_price]',
+			'$_POST[prod_custom_field1]',
+			'$_POST[prod_custom_field2]',
+			'$_POST[prod_custom_field3]',
+			'$_POST[prod_custom_field4]',
 			'$_POST[prod_notes]',
 			'$_POST[prod_enabled]'
 		)";
@@ -241,6 +255,10 @@ mysql_select_db("$db_name",$conn);
 				prod_description = '$_POST[prod_description]',
 				prod_enabled = '$_POST[prod_enabled]',
 				prod_notes = '$_POST[prod_notes]',
+				prod_custom_field1 = '$_POST[prod_custom_field1]',
+				prod_custom_field2 = '$_POST[prod_custom_field2]',
+				prod_custom_field3 = '$_POST[prod_custom_field3]',
+				prod_custom_field4 = '$_POST[prod_custom_field4]',
 				prod_unit_price = '$_POST[prod_unit_price]'
 			WHERE
 				prod_id = '$_GET[submit]'";

@@ -71,6 +71,22 @@ echo <<<EOD
 		<td><input type=text name="prod_unit_price" size=25></td>
 	</tr>
 	<tr>
+		<td>Custom field 1 -CHANGE</td>
+		<td><input type=text name="prod_custom_field1" size=50></td>
+	</tr>
+	<tr>
+		<td>Custom field 2 -CHANGE</td>
+		<td><input type=text name="prod_custom_field2" size=50></td>
+	</tr>
+	<tr>
+		<td>Custom field 3 -CHANGE</td>
+		<td><input type=text name="prod_custom_field3" size=50></td>
+	</tr>
+	<tr>
+		<td>Custom field 4 -CHANGE</td>
+		<td><input type=text name="prod_custom_field4" size=50></td>
+	</tr>
+	<tr>
 		<td>{$LANG_notes}</td>
 		<td><textarea input type=text name='prod_notes' rows=8 cols=50>{$prod_notesField}</textarea></td>
 	</tr>

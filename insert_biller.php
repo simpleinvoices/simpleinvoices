@@ -41,7 +41,7 @@ $display_block_logo_list .= "<option selected value=\"_default_blank_logo.png\" 
 
 foreach ($files as $var)
 {
-	$display_block_logo_list .= "<option>{$var</option>";
+	$display_block_logo_list .= "<option>$var</option>";
 }
 $display_block_logo_list .= "</select>";
 
@@ -109,6 +109,9 @@ echo <<<EOD
 		<td>{$LANG_address_street}</td><td><input type=text name="b_street_address" size=25></td>
 	</tr>
 	<tr>
+		<td>{$LANG_address_street}2-CHANGE</td><td><input type=text name="b_street_address2" size=25></td>
+	</tr>
+	<tr>
 		<td>{$LANG_address_city}</td><td><input type=text name="b_city" size=25></td>
 	</tr>
 	<tr>
@@ -131,6 +134,18 @@ echo <<<EOD
 	</tr>
 	<tr>
 		<td>{$LANG_email}</td><td><input type=text name="b_email" size=25></td>
+	</tr>
+	<tr>
+		<td>Custom field 1 - CHANGE</td><td><input type=text name="b_custom_field1" size=25></td>
+	</tr>
+	<tr>
+		<td>Custom field 2 - CHANGE</td><td><input type=text name="b_custom_field2" size=25></td>
+	</tr>
+	<tr>
+		<td>Custom field 3 - CHANGE</td><td><input type=text name="b_custom_field3" size=25></td>
+	</tr>
+	<tr>
+		<td>Custom field 4 - CHANGE</td><td><input type=text name="b_custom_field4" size=25></td>
 	</tr>
 	<tr>
 		<td>{$LANG_logo_file} <a href="./documentation/text/insert_biller_text.html" class="greybox">{$lang_note}</a></td><td>{$display_block_logo_list}</td>

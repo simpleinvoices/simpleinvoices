@@ -176,8 +176,14 @@ VALUES (
 ), (
 '', 'product_cf3', NULL , '0'
 ), (
-'', 'product_cf4', NULL , '0'
+'', 'prod_custom_field4', NULL , '0'
 );
+
+
+ALTER TABLE `si_products` ADD `prod_custom_field1` VARCHAR( 50 ) AFTER `prod_unit_price` ,
+ADD `prod_custom_field2` VARCHAR( 50 ) AFTER `prod_custom_field1` ,
+ADD `prod_custom_field3` VARCHAR( 50 ) AFTER `prod_custom_field2` ,
+ADD `prod_custom_field4` VARCHAR( 50 ) AFTER `prod_custom_field3` ;
 
 
 /*

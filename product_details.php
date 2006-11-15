@@ -36,6 +36,10 @@ $result_print_product = mysql_query($print_product, $conn) or die(mysql_error())
 while ($Array = mysql_fetch_array($result_print_product) ) {
 	$prod_idField = $Array['prod_id'];
 	$prod_descriptionField = $Array['prod_description'];
+	$prod_custom_field1Field = $Array['prod_custom_field1'];
+	$prod_custom_field2Field = $Array['prod_custom_field2'];
+	$prod_custom_field3Field = $Array['prod_custom_field3'];
+	$prod_custom_field4Field = $Array['prod_custom_field4'];
 	$prod_enabledField = $Array['prod_enabled'];
 	$prod_notesField = $Array['prod_notes'];
 	$prod_unit_priceField = $Array['prod_unit_price'];
@@ -66,6 +70,22 @@ if ($_GET['action'] == "view") {
 	<tr>
 		<td class="details_screen">{$LANG_product_unit_price}</td>
 		<td>{$prod_unit_priceField}</td>
+	</tr>
+	<tr>
+		<td class="details_screen">Custom Field 1 - CHANGE</td>
+		<td>{$prod_custom_field1Field}</td>
+	</tr>
+	<tr>
+		<td class="details_screen">Custom Field 2 - CHANGE</td>
+		<td>{$prod_custom_field2Field}</td>
+	</tr>
+	<tr>
+		<td class="details_screen">Custom Field 3 - CHANGE</td>
+		<td>{$prod_custom_field3Field}</td>
+	</tr>
+	<tr>
+		<td class="details_screen">Custom Field 4 - CHANGE</td>
+		<td>{$prod_custom_field4Field}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_notes}</td><td>{$prod_notesField}</td>
@@ -103,13 +123,27 @@ $display_block = <<<EOD
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_product_description}</td>
-		<td><input type="text" name="prod_description" size="50"
-		 value="{$prod_descriptionField}" /></td>
+		<td><input type="text" name="prod_description" size="50" value="{$prod_descriptionField}" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_product_unit_price}</td>
-		<td><input type="text" name="prod_unit_price" size="25"
-		 value="{$prod_unit_priceField}" /></td>
+		<td><input type="text" name="prod_unit_price" size="25" value="{$prod_unit_priceField}" /></td>
+	</tr>
+	<tr>
+		<td class="details_screen">Custom field 1 - CHANGE</td>
+		<td><input type="text" name="prod_custom_field1" size="50" value="{$prod_custom_field1Field}" /></td>
+	</tr>
+	<tr>
+		<td class="details_screen">Custom field 2 - CHANGE</td>
+		<td><input type="text" name="prod_custom_field2" size="50" value="{$prod_custom_field2Field}" /></td>
+	</tr>
+	<tr>
+		<td class="details_screen">Custom field 3 - CHANGE</td>
+		<td><input type="text" name="prod_custom_field3" size="50" value="{$prod_custom_field3Field}" /></td>
+	</tr>
+	<tr>
+		<td class="details_screen">Custom field 4 - CHANGE</td>
+		<td><input type="text" name="prod_custom_field4" size="50" value="{$prod_custom_field4Field}" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_notes}</td>

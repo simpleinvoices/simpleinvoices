@@ -38,6 +38,7 @@ while ($Array = mysql_fetch_array($result_print_biller) ) {
 		$b_mobile_phoneField = $Array['b_mobile_phone'];
 		$b_nameField = $Array['b_name'];
 		$b_street_addressField = $Array['b_street_address'];
+		$b_street_address2Field = $Array['b_street_address2'];
 		$b_cityField = $Array['b_city'];
 		$b_stateField = $Array['b_state'];
 		$b_zip_codeField = $Array['b_zip_code'];
@@ -48,6 +49,10 @@ while ($Array = mysql_fetch_array($result_print_biller) ) {
 		$b_co_logoField = $Array['b_co_logo'];
 		$b_co_footerField = $Array['b_co_footer'];
 		$b_notesField = $Array['b_notes'];
+		$b_custom_field1Field = $Array['b_custom_field1'];
+		$b_custom_field2Field = $Array['b_custom_field2'];
+		$b_custom_field3Field = $Array['b_custom_field3'];
+		$b_custom_field4Field = $Array['b_custom_field4'];
 		$b_enabledField = $Array['b_enabled'];
 
 		if ($b_enabledField == 1) {
@@ -104,6 +109,9 @@ if ($_GET['action'] == "view") {
 		<td class="details_screen">{$LANG_address_street}</td><td>{$b_street_addressField}</td>
 	</tr>
 	<tr>
+		<td class="details_screen">{$LANG_address_street} 2 - CHANGE</td><td>{$b_street_address2Field}</td>
+	</tr>
+	<tr>
 		<td class="details_screen">{$LANG_city}</td><td>{$b_cityField}</td>
 	</tr>
 	<tr>
@@ -127,6 +135,18 @@ if ($_GET['action'] == "view") {
 	<tr>
 		<td class="details_screen">{$LANG_email}</td><td>{$b_emailField}</td>
 	</tr>	
+	<tr>
+		<td class="details_screen">Custom field 1 - CHANGE</td><td>{$b_custom_field1Field}</td>
+	</tr>
+	<tr>
+		<td class="details_screen">Custom field 2 - CHANGE</td><td>{$b_custom_field2Field}</td>
+	</tr>
+	<tr>
+		<td class="details_screen">Custom field 3 - CHANGE</td><td>{$b_custom_field3Field}</td>
+	</tr>
+	<tr>
+		<td class="details_screen">Custom field 4 - CHANGE</td><td>{$b_custom_field4Field}</td>
+	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_logo_file}</td><td>{$b_co_logoField}</td>
 	</tr>	
@@ -175,6 +195,10 @@ $display_block = <<<EOD
 		<td><input type=text name="b_street_address" value="{$b_street_addressField}" size=50 /></td>
 	</tr>
 	<tr>
+		<td class="details_screen">{$LANG_address_street}2-CHANGE</td>
+		<td><input type=text name="b_street_address2" value="{$b_street_address2Field}" size=50 /></td>
+	</tr>
+	<tr>
 		<td class="details_screen">{$LANG_city}</td>
 		<td><input type=text name="b_city" value="{$b_cityField}" size=50 /></td>
 	</tr>
@@ -205,6 +229,22 @@ $display_block = <<<EOD
 	<tr>
 		<td class="details_screen">{$LANG_email}</td>
 		<td><input type=text name="b_email" value="{$b_emailField}" size=50 /></td>
+	</tr>
+	<tr>
+		<td class="details_screen">Custom field 1 - CHANGE</td>
+		<td><input type=text name="b_custom_field1" value="{$b_custom_field1Field}" size=50 </td>
+	</tr>
+	<tr>
+		<td class="details_screen">Custom field 2 - CHANGE</td>
+		<td><input type=text name="b_custom_field2" value="{$b_custom_field2Field}" size=50 </td>
+	</tr>
+	<tr>
+		<td class="details_screen">Custom field 3 - CHANGE</td>
+		<td><input type=text name="b_custom_field3" value="{$b_custom_field3Field}" size=50 </td>
+	</tr>
+	<tr>
+		<td class="details_screen">Custom field 4 - CHANGE</td>
+		<td><input type=text name="b_custom_field4" value="{$b_custom_field4Field}" size=50 </td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_logo_file}
