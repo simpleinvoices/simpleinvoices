@@ -3,6 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php 
 include('./include/include_main.php');
+#include('./include/functions.php');
 /* validataion code */
 include("./include/validation.php");
 echo <<<EOD
@@ -24,6 +25,12 @@ $display_block_enabled = "<select name=\"prod_enabled\">
 <option value=\"1\" selected>$wording_for_enabledField</option>
 <option value=\"0\">$wording_for_disabledField</option>
 </select>";
+
+#get custom field labels
+$prod_custom_field_label1 = get_custom_field_label(product_cf1);
+$prod_custom_field_label2 = get_custom_field_label(product_cf2);
+$prod_custom_field_label3 = get_custom_field_label(pruduct_cf3);
+$prod_custom_field_label4 = get_custom_field_label(product_cf4);
 
 ?>
 <script type="text/javascript" src="niftycube.js"></script>
@@ -54,7 +61,7 @@ echo <<<EOD
 
 <table align=center>
 	<tr>
-		<th colspan="2" align="center"><b>&nbsp;{$LANG_product_to_add}&nbsp;</b></th>
+		<td colspan="2" align="center"><b>&nbsp;{$LANG_product_to_add}&nbsp;</b></td>
 	</tr>	
 </table>
 
@@ -71,19 +78,19 @@ echo <<<EOD
 		<td><input type=text name="prod_unit_price" size=25></td>
 	</tr>
 	<tr>
-		<td>Custom field 1 -CHANGE</td>
+		<td>{$prod_custom_field_label1}</td>
 		<td><input type=text name="prod_custom_field1" size=50></td>
 	</tr>
 	<tr>
-		<td>Custom field 2 -CHANGE</td>
+		<td>{$prod_custom_field_label2}</td>
 		<td><input type=text name="prod_custom_field2" size=50></td>
 	</tr>
 	<tr>
-		<td>Custom field 3 -CHANGE</td>
+		<td>{$prod_custom_field_label3}</td>
 		<td><input type=text name="prod_custom_field3" size=50></td>
 	</tr>
 	<tr>
-		<td>Custom field 4 -CHANGE</td>
+		<td>{$prod_custom_field_label4}</td>
 		<td><input type=text name="prod_custom_field4" size=50></td>
 	</tr>
 	<tr>

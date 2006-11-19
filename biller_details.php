@@ -90,6 +90,12 @@ $display_block_logo_list .= "</select>";
 
 /*end logo stuff */
 
+#get custom field labels
+$biller_custom_field_label1 = get_custom_field_label(biller_cf1);
+$biller_custom_field_label2 = get_custom_field_label(biller_cf2);
+$biller_custom_field_label3 = get_custom_field_label(biller_cf3);
+$biller_custom_field_label4 = get_custom_field_label(biller_cf4);
+
 
 if ($_GET['action'] == "view") {
 
@@ -136,7 +142,7 @@ if ($_GET['action'] == "view") {
 		<td class="details_screen">{$LANG_email}</td><td>{$b_emailField}</td>
 	</tr>	
 	<tr>
-		<td class="details_screen">Custom field 1 - CHANGE</td><td>{$b_custom_field1Field}</td>
+		<td class="details_screen">{$biller_custom_field_label1}</td><td>{$b_custom_field1Field}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">Custom field 2 - CHANGE</td><td>{$b_custom_field2Field}</td>

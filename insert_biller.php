@@ -53,6 +53,12 @@ $display_block_enabled = "<select name=\"b_enabled\">
 <option value=\"0\">$wording_for_disabledField</option>
 </select>";
 
+#get custom field labels
+$biller_custom_field_label1 = get_custom_field_label(biller_cf1);
+$biller_custom_field_label2 = get_custom_field_label(biller_cf2);
+$biller_custom_field_label3 = get_custom_field_label(biller_cf3);
+$biller_custom_field_label4 = get_custom_field_label(biller_cf4);
+
 ?>
 <script type="text/javascript" src="niftycube.js"></script>
 <script type="text/javascript">
@@ -136,16 +142,16 @@ echo <<<EOD
 		<td>{$LANG_email}</td><td><input type=text name="b_email" size=25></td>
 	</tr>
 	<tr>
-		<td>Custom field 1 - CHANGE</td><td><input type=text name="b_custom_field1" size=25></td>
+		<td>{$biller_custom_field_label1}</td><td><input type=text name="b_custom_field1" size=25></td>
 	</tr>
 	<tr>
-		<td>Custom field 2 - CHANGE</td><td><input type=text name="b_custom_field2" size=25></td>
+		<td>{$biller_custom_field_label2}</td><td><input type=text name="b_custom_field2" size=25></td>
 	</tr>
 	<tr>
-		<td>Custom field 3 - CHANGE</td><td><input type=text name="b_custom_field3" size=25></td>
+		<td>{$biller_custom_field_label3}</td><td><input type=text name="b_custom_field3" size=25></td>
 	</tr>
 	<tr>
-		<td>Custom field 4 - CHANGE</td><td><input type=text name="b_custom_field4" size=25></td>
+		<td>{$biller_custom_field_label4}</td><td><input type=text name="b_custom_field4" size=25></td>
 	</tr>
 	<tr>
 		<td>{$LANG_logo_file} <a href="./documentation/text/insert_biller_text.html" class="greybox">{$lang_note}</a></td><td>{$display_block_logo_list}</td>
