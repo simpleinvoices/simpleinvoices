@@ -38,4 +38,30 @@ function get_custom_field_label($field)
  	return $custom_field_label;
 }
 
+function get_custom_field_name($field)
+        {
+
+        include('./config/config.php');
+        ob_start();
+        include("./lang/$language.inc.php");
+        ob_end_clean();
+        
+	//grab the last character of the field variable
+        $get_cf_letter = $field[0];
+        //grab the last character of the field variable
+        $get_cf_number = $field[strlen($field)-1];
+	
+	if ($get_cf_letter == "b") {
+		$custom_field_name = $LANG_biller;
+	}
+	if ($get_cf_letter == "c") {
+		$custom_field_name = $LANG_customer;
+	}
+	if ($get_cf_letter == "p") {
+		$custom_field_name = $LANG_product;
+	}
+	
+	$custom_field_name .= " :: " . $LANG_custom_field . " $get_cf_number" ;
+        return $custom_field_name;
+}
 ?>

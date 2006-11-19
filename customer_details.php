@@ -84,6 +84,13 @@ while ($Array = mysql_fetch_array($result_print_customer) ) {
 
 }
 
+#get custom field labels
+$customer_custom_field_label1 = get_custom_field_label(customer_cf1);
+$customer_custom_field_label2 = get_custom_field_label(customer_cf2);
+$customer_custom_field_label3 = get_custom_field_label(customer_cf3);
+$customer_custom_field_label4 = get_custom_field_label(customer_cf4);
+
+
 if ($_GET['action'] === 'view') {
 
 	$display_block = <<<EOD
@@ -150,17 +157,17 @@ $display_block .= <<<EOD
 <br>
 	<div id="container-1">
 		<ul class="anchors">
-			<li><a href="#section-1">Custom Fields</a></li>
+			<li><a href="#section-1">{$LANG_custom_fields}</a></li>
 			<li><a href="#section-2">{$LANG_customer} {$LANG_invoice_listings}</a></li>
 			<li><a href="#section-3">{$LANG_notes}</a></li>
 		</ul>
 		<div id="section-1" class="fragment">
-			<h4><u>{$LANG_customer} Custom Fields</u></h4>
+			<h4><u>{$LANG_customer} {$LANG_custom_fields}</u></h4>
 			<p>
-			CUSTOM FIELD 1 - CHANGE : {$c_custom_field1Field}<br>
-			CUSTOM FIELD 2 - CHANGE : {$c_custom_field2Field}<br>
-			CUSTOM FIELD 3 - CHANGE : {$c_custom_field3Field}<br>
-			CUSTOM FIELD 4 - CHANGE : {$c_custom_field4Field}
+			{$customer_custom_field_label1}: {$c_custom_field1Field}<br>
+			{$customer_custom_field_label2}: {$c_custom_field2Field}<br>
+			{$customer_custom_field_label3}: {$c_custom_field3Field}<br>
+			{$customer_custom_field_label4}: {$c_custom_field4Field}
 			</p>
 		</div>
 		<div id="section-2" class="fragment">
@@ -262,19 +269,19 @@ $display_block_enabled = "<select name=\"c_enabled\">
 		<td><input type="text" name="c_email" value="{$c_emailField}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">Custom Field 1 - CHANGE</td>
+		<td class="details_screen">{$customer_custom_field_label1}</td>
 		<td><input type="text" name="c_custom_field1" value="{$c_custom_field1Field}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">Custom Field 2 - CHANGE</td>
+		<td class="details_screen">{$customer_custom_field_label2}</td>
 		<td><input type="text" name="c_custom_field2" value="{$c_custom_field2Field}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">Custom Field 3 - CHANGE</td>
+		<td class="details_screen">{$customer_custom_field_label3}</td>
 		<td><input type="text" name="c_custom_field3" value="{$c_custom_field3Field}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">Custom Field 4 - CHANGE</td>
+		<td class="details_screen">{$customer_custom_field_label4}</td>
 		<td><input type="text" name="c_custom_field4" value="{$c_custom_field4Field}" size="50" /></td
 	</tr>
 	<tr>

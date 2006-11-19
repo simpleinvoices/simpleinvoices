@@ -59,6 +59,7 @@
 ...|Yhteens&auml; er&auml;&auml;ntymisen mukaan|./report_debtors_aging_total.php
 .|Asetukset|./index.php
 ..|J&auml;rjestelm&auml;n asetukset|./system_default_details.php
+..|Custom Fields|./manage_custom_fields.php
 ..|---
 ..|Arvonlis&auml;veroluokat|manage_tax_rates.php|
 ...|K&auml;sittele arvonlis&auml;veroluokkia|./manage_tax_rates.php

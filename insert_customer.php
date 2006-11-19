@@ -22,6 +22,12 @@ $display_block_enabled = "<select name=\"c_enabled\">
 <option value=\"0\">$wording_for_disabledField</option>
 </select>";
 
+#get custom field labels
+$customer_custom_field_label1 = get_custom_field_label(customer_cf1);
+$customer_custom_field_label2 = get_custom_field_label(customer_cf2);
+$customer_custom_field_label3 = get_custom_field_label(customer_cf3);
+$customer_custom_field_label4 = get_custom_field_label(customer_cf4);
+
 ?>
 <script type="text/javascript" src="niftycube.js"></script>
 <script type="text/javascript">
@@ -93,16 +99,16 @@ echo <<<EOD
 	<td class="details_screen">{$LANG_email}</td><td><input type=text name="c_email" size=25></td>
 </tr>
 <tr>
-	<td class="details_screen">Custom Field 1 - (change)</td><td><input type=text name="c_custom_field1" size=25></td>
+	<td class="details_screen">{$customer_custom_field_label1}</td><td><input type=text name="c_custom_field1" size=25></td>
 </tr>
 <tr>
-	<td class="details_screen">Custom Field 2 - (change)</td><td><input type=text name="c_custom_field2" size=25></td>
+	<td class="details_screen">{$customer_custom_field_label2}</td><td><input type=text name="c_custom_field2" size=25></td>
 </tr>
 <tr>
-	<td class="details_screen">Custom Field 3 - (change)</td><td><input type=text name="c_custom_field3" size=25></td>
+	<td class="details_screen">{$customer_custom_field_label3}</td><td><input type=text name="c_custom_field3" size=25></td>
 </tr>
 <tr>
-	<td class="details_screen">Custom Field 4 - (change)</td><td><input type=text name="c_custom_field4" size=25></td>
+	<td class="details_screen">{$customer_custom_field_label4}</td><td><input type=text name="c_custom_field4" size=25></td>
 </tr>
 <tr>    
 	<td class="details_screen">{$LANG_notes}</td><td><textarea name='c_notes' rows=8 cols=50></textarea></td>

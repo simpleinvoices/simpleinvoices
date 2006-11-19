@@ -59,6 +59,7 @@
 ...|Nach Zahlungsdauer|./report_debtors_aging_total.php
 .|Einstellungen|./index.php
 ..|System Voreinstellungen|./system_default_details.php
+..|Custom Fields|./manage_custom_fields.php
 ..|---
 ..|Steuersatz|manage_tax_rates.php|
 ...|Steuers&auml;tze verwalten|./manage_tax_rates.php

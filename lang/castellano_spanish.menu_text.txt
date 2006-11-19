@@ -59,6 +59,7 @@
 ...|Total por per&iacute;odos de Antig&uuml;edad|./report_debtors_aging_total.php
 .|Opciones|./index.php
 ..|Predeterminados del Sistema|./system_default_details.php
+..|Custom Fields|./manage_custom_fields.php
 ..|---
 ..|Tax Rates|manage_tax_rates.php|
 ...|Gestionar Porcentajes de Impuestos|./manage_tax_rates.php

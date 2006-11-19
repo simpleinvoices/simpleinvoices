@@ -59,6 +59,7 @@
 ...|Total by Aging periods|./report_debtors_aging_total.php
 .|Options|./index.php
 ..|System Defaults|./system_default_details.php
+..|Custom Fields|./manage_custom_fields.php
 ..|---
 ..|Tax Rates|manage_tax_rates.php|
 ...|Manage Tax Rates|./manage_tax_rates.php

@@ -59,6 +59,7 @@
 ...|Total por per&iacute;odos de antiguidade|./report_debtors_aging_total.php
 .|Opcions|./index.php
 ..|Valores por defecto do Sistema|./system_default_details.php
+..|Custom Fields|./manage_custom_fields.php
 ..|---
 ..|Porcentaxes de Impostos|manage_tax_rates.php|
 ...|Xestion de Porcentaxes de Impostos|./manage_tax_rates.php

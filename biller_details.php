@@ -145,13 +145,13 @@ if ($_GET['action'] == "view") {
 		<td class="details_screen">{$biller_custom_field_label1}</td><td>{$b_custom_field1Field}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">Custom field 2 - CHANGE</td><td>{$b_custom_field2Field}</td>
+		<td class="details_screen">{$biller_custom_field_label2}</td><td>{$b_custom_field2Field}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">Custom field 3 - CHANGE</td><td>{$b_custom_field3Field}</td>
+		<td class="details_screen">{$biller_custom_field_label3}</td><td>{$b_custom_field3Field}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">Custom field 4 - CHANGE</td><td>{$b_custom_field4Field}</td>
+		<td class="details_screen">{$biller_custom_field_label4}</td><td>{$b_custom_field4Field}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_logo_file}</td><td>{$b_co_logoField}</td>
@@ -237,19 +237,19 @@ $display_block = <<<EOD
 		<td><input type=text name="b_email" value="{$b_emailField}" size=50 /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">Custom field 1 - CHANGE</td>
+		<td class="details_screen">{$biller_custom_field_label1}</td>
 		<td><input type=text name="b_custom_field1" value="{$b_custom_field1Field}" size=50 </td>
 	</tr>
 	<tr>
-		<td class="details_screen">Custom field 2 - CHANGE</td>
+		<td class="details_screen">{$biller_custom_field_label2}</td>
 		<td><input type=text name="b_custom_field2" value="{$b_custom_field2Field}" size=50 </td>
 	</tr>
 	<tr>
-		<td class="details_screen">Custom field 3 - CHANGE</td>
+		<td class="details_screen">{$biller_custom_field_label3}</td>
 		<td><input type=text name="b_custom_field3" value="{$b_custom_field3Field}" size=50 </td>
 	</tr>
 	<tr>
-		<td class="details_screen">Custom field 4 - CHANGE</td>
+		<td class="details_screen">{$biller_custom_field_label4}</td>
 		<td><input type=text name="b_custom_field4" value="{$b_custom_field4Field}" size=50 </td>
 	</tr>
 	<tr>
