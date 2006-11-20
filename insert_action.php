@@ -487,7 +487,7 @@ else if (  $op === 'edit_preference' ) {
 
 
 #update system defaults
-if (  $op == 'update_system_defaults' ) {
+else if (  $op == 'update_system_defaults' ) {
 
 #get defaultsr query
 $print_defaults = "SELECT * FROM si_defaults WHERE def_id = 1";
@@ -727,6 +727,43 @@ $default_payment_type = $_POST['def_payment_type'];
 
 }
 #end system default section
+
+#edit custom field
+
+else if (  $op === 'edit_custom_field' ) {
+
+$conn = mysql_connect("$db_host","$db_user","$db_password");
+mysql_select_db("$db_name",$conn);
+
+        if (isset($_POST['save_custom_field'])) {
+                $sql = "UPDATE
+                                si_custom_fields
+                        SET
+                                cf_custom_label = '$_POST[cf_custom_label]'
+                        WHERE
+                                cf_id = $_GET[submit]";
+
+                if (mysql_query($sql, $conn)) {
+                        $display_block =  "Custom field successfully edited, <br> you will be redirected back to the Manage Products";
+                } else {
+                        $display_block =  "Something went wrong, please try editing the custom field again<br>";
+			$display_block .=  mysql_error();
+                }
+
+                header( 'refresh: 2; url=manage_custom_fields.php' );
+
+                }
+
+        else if (isset($_POST['cancel'])) {
+
+                header( 'refresh: 0; url=manage_custom_fields.php' );
+        }
+
+
+}
+
+
+
 
 
 #insert invoice_total - start

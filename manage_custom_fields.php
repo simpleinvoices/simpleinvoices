@@ -24,23 +24,22 @@ if (mysql_num_rows($result) == 0) {
 </div>
 
 <table width="100%" align="center" class="filterable sortable" id="large">
-<div id="header"><b>{$LANG_manage_products}</b> ::
-	<a href="insert_product.php">{$LANG_add_new_product}</a></div>
+<div id="header"><b>{$LANG_manage_custom_fields}</b></div>
 <tr class="sortHeader">
 <th class="noFilter">{$LANG_actions}</th>
-<th class="index_table">{$LANG_product_id}</th>
-<th class="index_table">{$LANG_product_description}</th>
-<th class="index_table">{$LANG_product_unit_price}</th>
+<th class="index_table">{$LANG_id}</th>
+<th class="index_table">{$LANG_custom_field}</th>
+<th class="index_table">{$LANG_custom_label}</th>
 </tr>
 
 EOD;
 
 while ($Array = mysql_fetch_array($result)) {
 	$cf_idField = $Array['cf_id'];
-	$prod_descriptionField = $Array['cf_custom_field'];
-	$prod_enabledField = $Array['cf_custom_label'];
+	$cf_custom_fieldField = $Array['cf_custom_field'];
+	$cf_custom_labelField = $Array['cf_custom_label'];
 	//get the nice name of the custom field
-	$custom_field_name = get_custom_field_name($prod_descriptionField);
+	$custom_field_name = get_custom_field_name($cf_custom_fieldField);
 
 	$display_block .= <<<EOD
 	<tr class="index_table">
@@ -51,7 +50,7 @@ while ($Array = mysql_fetch_array($result)) {
 	 href="custom_field_details.php?submit={$cf_idField}&action=edit">{$LANG_edit}</a> </td>
 	<td class="index_table">{$cf_idField}</td>
 	<td class="index_table">{$custom_field_name}</td>
-	<td class="index_table">{$prod_enabledField}</td>
+	<td class="index_table">{$cf_custom_labelField}</td>
 	</tr>
 
 EOD;
@@ -101,7 +100,7 @@ Nifty("div#header,div#footer","small");
 
 <?php
 echo <<<EOD
-<title>{$title} :: {$LANG_manage_products}</title>
+<title>{$title} :: {$LANG_manage_custom_fields}</title>
 <link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css">
 
 EOD;

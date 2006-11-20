@@ -4,19 +4,11 @@
 <?php
 #table
 include("./include/include_main.php");
-include("./include/validation.php");
 echo <<<EOD
 <title>{$title} :: {$LANG_customer_details}</title>
 <link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css" />
 
 EOD;
-jsBegin();
-jsFormValidationBegin("frmpost");
-jsValidateRequired("prod_description",$LANG_product_description);
-jsValidateifNum("prod_unit_price",$LANG_product_unit_price);
-jsFormValidationEnd();
-jsEnd();
-
 
 #get the invoice id
 $cf_id = $_GET[submit];
@@ -35,10 +27,10 @@ $result_print_product = mysql_query($print_product, $conn) or die(mysql_error())
 
 while ($Array = mysql_fetch_array($result_print_product) ) {
         $cf_idField = $Array['cf_id'];
-        $prod_descriptionField = $Array['cf_custom_field'];
-        $prod_enabledField = $Array['cf_custom_label'];
+        $cf_custom_fieldField = $Array['cf_custom_field'];
+        $cf_custom_labelField = $Array['cf_custom_label'];
         //get the nice name of the custom field
-        $custom_field_name = get_custom_field_name($prod_descriptionField);
+        $custom_field_name = get_custom_field_name($cf_custom_fieldField);
 
 };
 
@@ -47,24 +39,24 @@ if ($_GET['action'] == "view") {
 
 	$display_block = <<<EOD
 
-	<div id="header"><b>{$LANG_products}</b> ::
+	<div id="header"><b>{$LANG_custom_fields}</b> ::
 	<a href="?submit={$cf_idField}&action=edit">{$LANG_edit}</a></div>
 	
 	<table align="center">
 	<tr>
-		<td class="details_screen">{$LANG_product_id}</td><td>{$cf_idField}</td>
+		<td class="details_screen">{$LANG_id}</td><td>{$cf_idField}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">DB field name - CHANGE</td>
-		<td>{$prod_descriptionField}</td>
+		<td class="details_screen">{$LANG_custom_field_db_field_name}</td>
+		<td>{$cf_custom_fieldField}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">CF name - CHANGE</td>
+		<td class="details_screen">{$LANG_custom_field}</td>
 		<td>{$custom_field_name}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">Custom Label - CHANGE</td>
-		<td>{$prod_enabledField}</td>
+		<td class="details_screen">{$LANG_custom_label}</td>
+		<td>{$cf_custom_labelField}</td>
 	</tr>
 	</table>
 
@@ -79,31 +71,25 @@ EOD;
 
 else if ($_GET['action'] == "edit") {
 
-#do the product enabled/disblaed drop down
-$display_block_enabled = "<select name=\"prod_enabled\">
-<option value=\"$prod_enabledField\" selected style=\"font-weight: bold\">$wording_for_enabled</option>
-<option value=\"1\">$wording_for_enabledField</option>
-<option value=\"0\">$wording_for_disabledField</option>
-</select>";
 
 $display_block = <<<EOD
-	<div id="header"><b>{$LANG_products}</b></div>
+	<div id="header"><b>{$LANG_custom_fields}</b></div>
 
 	<table align="center">
         <tr>
-                <td class="details_screen">{$LANG_product_id}</td><td>{$cf_idField}</td>
+                <td class="details_screen">{$LANG_id}</td><td>{$cf_idField}</td>
         </tr>
         <tr>
-                <td class="details_screen">DB field name - CHANGE</td>
-                <td>{$prod_descriptionField}</td>
+                <td class="details_screen">{$LANG_custom_field_db_field_name}</td>
+                <td>{$cf_custom_fieldField}</td>
         </tr>
         <tr>
-                <td class="details_screen">CF name - CHANGE</td>
+                <td class="details_screen">{$LANG_custom_field}</td>
                 <td>{$custom_field_name}</td>
         </tr>
 	<tr>
-		<td class="details_screen">CF LABEL _ CHANGE</td>
-		<td><input type="text" name="prod_custom_field1" size="50" value="{$prod_enabledField}" /></td>
+		<td class="details_screen">{$LANG_custom_label}</td>
+		<td><input type="text" name="cf_custom_label" size="50" value="{$cf_custom_labelField}" /></td>
 	</tr>
 	</table>
 
@@ -112,8 +98,8 @@ EOD;
 $footer = <<<EOD
 
 <input type="submit" name="cancel" value="{$LANG_cancel}" />
-<input type="submit" name="save_product" value="{$LANG_save_product}" />
-<input type="hidden" name="op" value="edit_product" />
+<input type="submit" name="save_custom_field" value="{$LANG_save_custom_field}" />
+<input type="hidden" name="op" value="edit_custom_field" />
 
 EOD;
 }
