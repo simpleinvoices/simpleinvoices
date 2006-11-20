@@ -72,17 +72,8 @@ Nifty("div#header,div#footer","small");
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 <script type="text/javascript" src="./include/jquery.js"></script>
-<script type="text/javascript" src="./include/greybox.js"></script>
-<script type="text/javascript">
-  var GB_ANIMATION = true;
-  $(document).ready(function(){
-    $("a.greybox").click(function(){
-      var t = this.title || $(this).text() || this.href;
-      GB_show(t,this.href,470,600);
-      return false;
-    });
-  });
-</script>
+    <script type="text/javascript" src="./include/jquery.greybox.js"></script>
+    <script type="text/javascript" src="./include/jquery.greybox.conf.js"></script>
 </head>
 
 <BODY>
@@ -154,7 +145,7 @@ echo <<<EOD
 		<td>{$biller_custom_field_label4}</td><td><input type=text name="b_custom_field4" size=25></td>
 	</tr>
 	<tr>
-		<td>{$LANG_logo_file} <a href="./documentation/text/insert_biller_text.html" class="greybox">{$lang_note}</a></td><td>{$display_block_logo_list}</td>
+		<td>{$LANG_logo_file} <a href="./documentation/text/insert_biller_text.html" class="greybox">{$LANG_note}</a></td><td>{$display_block_logo_list}</td>
 	</tr>
 	<tr>
 		<td>{$LANG_invoice_footer}</td><td><textarea input type=text name="b_co_footer" rows=4 cols=50></textarea></td>

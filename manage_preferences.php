@@ -3,17 +3,8 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <script type="text/javascript" src="./include/jquery.js"></script>
-  <script type="text/javascript" src="./include/greybox.js"></script>
-  <script type="text/javascript">
-  var GB_ANIMATION = true;
-    $(document).ready(function(){
-      $("a.greybox").click(function(){
-        var t = this.title || $(this).text() || this.href;
-  GB_show(t,this.href,470,600);
-        return false;
-      });
-    });
-   </script>
+  <script type="text/javascript" src="./include/jquery.greybox.js"></script>
+  <script type="text/javascript" src="./include/jquery.greybox.conf.js"></script>
 
 <?php
 include('./include/include_main.php');

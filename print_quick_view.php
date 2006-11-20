@@ -604,19 +604,9 @@ $display_block_bottom =  "
 	  $('.customer').hide();
   	});
     </script>
-    <script type="text/javascript" src="./include/greybox.js"></script>
+    <script type="text/javascript" src="./include/jquery.greybox.js"></script>
+    <script type="text/javascript" src="./include/jquery.greybox.conf.js"></script>
     <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css" media="all"/>
-    <script type="text/javascript">
-      var GB_ANIMATION = true;
-      $(document).ready(function(){
-        $("a.greybox").click(function(){
-          var t = this.title || $(this).text() || this.href;
-           GB_show(t,this.href,470,600);
-          return false;
-        });
-      });
-    </script>
-
 
 <script type="text/javascript" src="niftycube.js"></script>
 <script type="text/javascript">

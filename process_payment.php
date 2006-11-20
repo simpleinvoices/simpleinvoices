@@ -323,18 +323,8 @@ echo <<<EOD
 <script type="text/javascript" src="include/jquery-dom_creator.js"></script>
 <script type="text/javascript" src="include/jquery-datePicker.js"></script>
 <script type='text/javascript' src='include/jquery_autocomplete.js'></script>
-
-<script type="text/javascript" src="./include/greybox.js"></script>
-<script type="text/javascript">
-	var GB_ANIMATION = true;
-	$(document).ready(function(){
-		$("a.greybox").click(function(){
-			var t = this.title || $(this).text() || this.href;
-			GB_show(t,this.href,470,600);
-			return false;
-		});
-	});
-</script>
+<script type="text/javascript" src="./include/jquery.greybox.js"></script>
+<script type="text/javascript" src="./include/jquery.greybox.conf.js"></script>
 
 <script type="text/javascript" src="niftycube.js"></script>
 <script type="text/javascript">
