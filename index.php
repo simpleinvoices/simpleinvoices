@@ -357,7 +357,7 @@ Nifty("div#header,div#footer","small");
 </script>
 
                 <script type="text/javascript" src="./include/jquery.js"></script>
-                <script type="text/javascript" src="./include/jquery-accordian.js"></script>
+                <script type="text/javascript" src="./include/jquery.accordian.js"></script>
 
 		<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/index.css">
 

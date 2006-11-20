@@ -317,12 +317,12 @@ else if ($op === "pay_invoice_batch") {
 
 echo <<<EOD
 
-<link rel="stylesheet" type="text/css" href="include/jquery-datePicker.css" title="default" media="screen" />
+<link rel="stylesheet" type="text/css" href="include/jquery.datePicker.css" title="default" media="screen" />
 <link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css" media="all" />
 <script type="text/javascript" src="include/jquery.js"></script>
-<script type="text/javascript" src="include/jquery-dom_creator.js"></script>
-<script type="text/javascript" src="include/jquery-datePicker.js"></script>
-<script type='text/javascript' src='include/jquery_autocomplete.js'></script>
+<script type="text/javascript" src="include/jquery.dom_creator.js"></script>
+<script type="text/javascript" src="include/jquery.datePicker.js"></script>
+<script type='text/javascript' src='include/jquery.autocomplete.js'></script>
 <script type="text/javascript" src="./include/jquery.greybox.js"></script>
 <script type="text/javascript" src="./include/jquery.greybox.conf.js"></script>
 
