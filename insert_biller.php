@@ -133,16 +133,16 @@ echo <<<EOD
 		<td>{$LANG_email}</td><td><input type=text name="b_email" size=25></td>
 	</tr>
 	<tr>
-		<td>{$biller_custom_field_label1}</td><td><input type=text name="b_custom_field1" size=25></td>
+		<td>{$biller_custom_field_label1} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td><td><input type=text name="b_custom_field1" size=25></td>
 	</tr>
 	<tr>
-		<td>{$biller_custom_field_label2}</td><td><input type=text name="b_custom_field2" size=25></td>
+		<td>{$biller_custom_field_label2} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td><td><input type=text name="b_custom_field2" size=25></td>
 	</tr>
 	<tr>
-		<td>{$biller_custom_field_label3}</td><td><input type=text name="b_custom_field3" size=25></td>
+		<td>{$biller_custom_field_label3} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td><td><input type=text name="b_custom_field3" size=25></td>
 	</tr>
 	<tr>
-		<td>{$biller_custom_field_label4}</td><td><input type=text name="b_custom_field4" size=25></td>
+		<td>{$biller_custom_field_label4} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td><td><input type=text name="b_custom_field4" size=25></td>
 	</tr>
 	<tr>
 		<td>{$LANG_logo_file} <a href="./documentation/text/insert_biller_text.html" class="greybox">{$LANG_note}</a></td><td>{$display_block_logo_list}</td>

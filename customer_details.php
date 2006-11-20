@@ -164,10 +164,10 @@ $display_block .= <<<EOD
 		<div id="section-1" class="fragment">
 			<h4><u>{$LANG_customer} {$LANG_custom_fields}</u></h4>
 			<p>
-			{$customer_custom_field_label1}: {$c_custom_field1Field}<br>
-			{$customer_custom_field_label2}: {$c_custom_field2Field}<br>
-			{$customer_custom_field_label3}: {$c_custom_field3Field}<br>
-			{$customer_custom_field_label4}: {$c_custom_field4Field}
+			{$customer_custom_field_label1} <a href="./documentation/text/custom_fields.html" class="greybox">*</a>: {$c_custom_field1Field}<br>
+			{$customer_custom_field_label2} <a href="./documentation/text/custom_fields.html" class="greybox">*</a>: {$c_custom_field2Field}<br>
+			{$customer_custom_field_label3} <a href="./documentation/text/custom_fields.html" class="greybox">*</a>: {$c_custom_field3Field}<br>
+			{$customer_custom_field_label4} <a href="./documentation/text/custom_fields.html" class="greybox">*</a>: {$c_custom_field4Field}
 			</p>
 		</div>
 		<div id="section-2" class="fragment">
@@ -269,19 +269,19 @@ $display_block_enabled = "<select name=\"c_enabled\">
 		<td><input type="text" name="c_email" value="{$c_emailField}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customer_custom_field_label1}</td>
+		<td class="details_screen">{$customer_custom_field_label1} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td>
 		<td><input type="text" name="c_custom_field1" value="{$c_custom_field1Field}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customer_custom_field_label2}</td>
+		<td class="details_screen">{$customer_custom_field_label2} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td>
 		<td><input type="text" name="c_custom_field2" value="{$c_custom_field2Field}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customer_custom_field_label3}</td>
+		<td class="details_screen">{$customer_custom_field_label3} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td>
 		<td><input type="text" name="c_custom_field3" value="{$c_custom_field3Field}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customer_custom_field_label4}</td>
+		<td class="details_screen">{$customer_custom_field_label4} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td>
 		<td><input type="text" name="c_custom_field4" value="{$c_custom_field4Field}" size="50" /></td
 	</tr>
 	<tr>
@@ -308,6 +308,8 @@ EOD;
 <script type="text/javascript" src="include/doFilter.js"></script>
 
 <script type="text/javascript" src="include/jquery.js"></script>
+<script type="text/javascript" src="include/jquery.greybox.js"></script>
+<script type="text/javascript" src="include/jquery.greybox.conf.js"></script>
 <script type="text/javascript" src="include/tablesorter.js"></script>
 
 <script type="text/javascript">

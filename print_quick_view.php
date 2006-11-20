@@ -4,7 +4,6 @@ include("./include/include_main.php");
 #get the invoice id
 $master_invoice_id = $_GET['submit'];
 
-
 #Info from DB print
 $conn = mysql_connect( $db_host, $db_user, $db_password );
 mysql_select_db( $db_name, $conn );
@@ -169,6 +168,21 @@ while ($Array_defaults = mysql_fetch_array($result_print_defaults) ) {
 
         #Invoice Age - number of days - start
 
+
+#get custom field labels for biller
+$biller_custom_field_label1 = get_custom_field_label(biller_cf1);
+$biller_custom_field_label2 = get_custom_field_label(biller_cf2);
+$biller_custom_field_label3 = get_custom_field_label(biller_cf3);
+$biller_custom_field_label4 = get_custom_field_label(biller_cf4);
+#get custom field labels for the customer
+$customer_custom_field_label1 = get_custom_field_label(customer_cf1);
+$customer_custom_field_label2 = get_custom_field_label(customer_cf2);
+$customer_custom_field_label3 = get_custom_field_label(customer_cf3);
+$customer_custom_field_label4 = get_custom_field_label(customer_cf4);
+
+
+#START INVOICE HERE - TOP SECTION
+
 $display_block_top =  "
 	<div id=\"subheader\">
 	<table align=center>
@@ -234,16 +248,16 @@ $display_block_top =  "
 		<td>$LANG_email:</td><td colspan=5>$b_emailField</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td>Custom Field 1:</td><td colspan=5>$b_emailField</td>
+		<td>$biller_custom_field_label1:</td><td colspan=5>$b_emailField</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td>Custom Field 2:</td><td colspan=5 >$b_emailField</td>
+		<td>$biller_custom_field_label2:</td><td colspan=5 >$b_emailField</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td>Custom Field 3:</td><td colspan=5>$b_emailField</td>
+		<td>$biller_custom_field_label3:</td><td colspan=5>$b_emailField</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td>Custom Field 4:</td><td colspan=5>$b_emailField</td>
+		<td>$biller_custom_field_label4:</td><td colspan=5>$b_emailField</td>
 	</tr>	
 	<tr >
 		<td colspan=5><br></td>
@@ -275,16 +289,16 @@ $display_block_top =  "
 		<td>$LANG_email:<td colspan=5>$c_emailField</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td>Custom field 1:</td><td colspan=5>$c_emailField</td>
+		<td>$customer_custom_field_label1:</td><td colspan=5>$c_emailField</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td>Custom field 2:</td><td colspan=5>$c_emailField</td>
+		<td>$customer_custom_field_label2:</td><td colspan=5>$c_emailField</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td>Custom field 3:</td><td colspan=5>$c_emailField</td>
+		<td>$customer_custom_field_label3:</td><td colspan=5>$c_emailField</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td>Custom field 4:</td><td colspan=5>$c_emailField</td>
+		<td>$customer_custom_field_label4:</td><td colspan=5>$c_emailField</td>
 	</tr>	
 
 ";
