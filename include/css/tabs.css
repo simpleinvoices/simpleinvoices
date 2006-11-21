@@ -36,13 +36,16 @@ Some more styles, not important for making tabs work, just for the look of it...
     float: left;
     margin: 0 1px 0 0;
 }
+
+
+
 .anchors a {
+    background: #eaeaea;
     display: block;
     position: relative;
     top: 1px;
-    border: 1px solid #eaeaea;
-    border-bottom: 0;
-    z-index: 2;
+    border: 5px solid #eaeaea;
+     z-index: 2;
     padding: 2px 9px 1px;
     color: #000;
     text-decoration: none;
@@ -54,10 +57,31 @@ Some more styles, not important for making tabs work, just for the look of it...
 .anchors a:focus, .anchors a:active {
     outline: none; /* @ Firefox 1.5, remove ugly dotted border */
 }
-.anchors .tabs-selected a, .anchors a:hover, .anchors a:focus, .anchors a:active,
+.anchors .tabs-selected a, .anchors a:focus, .anchors a:active,
 .fragment {
-    background: #eaeaea;
+    border: 5px;
+    border-color: #d4d4d4 ;
+    border-style: solid ;
+    background: #fff;
 }
+
+.anchors .tabs-selected a, .anchors a:focus, .anchors a:active {
+    border: 5px;
+    border-color: #d4d4d4 ;
+    border-style: solid ;
+    background: #d4d4d4;
+}
+
+
+.anchors a:hover {
+    border: 5px 5px 0px 5px;
+    border-color: #d4d4d4;
+    border-style: solid solid solid solid;
+    background: #f2f2f2;
+}
+
+
+
 .anchors .tabs-selected a:link, .anchors .tabs-selected a:visited { /* @ Opera, use pseudo classes otherwise it confuses cursor... */
     cursor: text;
 }
