@@ -1,10 +1,10 @@
 <?php
 #include('./include/auth/auth.php');
-include('./config/config.php');
-include('./include/functions.php');
+include_once('./config/config.php');
+include_once('./include/functions.php');
 ob_start();
-include("./lang/$language.inc.php");
+include_once("./lang/$language.inc.php");
 ob_end_clean();
-include('./include/menu.php');
+include_once('./include/menu.php');
 
 ?>

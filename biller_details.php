@@ -112,10 +112,10 @@ if ($_GET['action'] == "view") {
 		<td class="details_screen">{$LANG_biller_name}</td><td>{$b_nameField}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_address_street}</td><td>{$b_street_addressField}</td>
+		<td class="details_screen">{$LANG_street}</td><td>{$b_street_addressField}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_address_street} 2 - CHANGE</td><td>{$b_street_address2Field}</td>
+		<td class="details_screen">{$LANG_street2} <a href="./documentation/text/street2.html" class="greybox">*</a></td><td>{$b_street_address2Field}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_city}</td><td>{$b_cityField}</td>
@@ -158,7 +158,7 @@ if ($_GET['action'] == "view") {
 		<td>{$b_custom_field4Field}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_logo_file}</td><td>{$b_co_logoField}</td>
+		<td class="details_screen">{$LANG_logo_file} <a href="documentation/text/insert_biller_text.html" class="greybox">*</a></td><td>{$b_co_logoField}</td>
 	</tr>	
 	<tr>
 		<td class="details_screen">{$LANG_invoice_footer}</td><td>{$b_co_footerField}</td>
@@ -201,11 +201,11 @@ $display_block = <<<EOD
 		<td><input type=text name="b_name" value="{$b_nameField}" size=50 /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_address_street}</td>
+		<td class="details_screen">{$LANG_street}</td>
 		<td><input type=text name="b_street_address" value="{$b_street_addressField}" size=50 /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_address_street}2-CHANGE</td>
+		<td class="details_screen">{$LANG_street2} <a href="./documentation/text/street2.html" class="greybox">*</a></td>
 		<td><input type=text name="b_street_address2" value="{$b_street_address2Field}" size=50 /></td>
 	</tr>
 	<tr>
@@ -258,7 +258,7 @@ $display_block = <<<EOD
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_logo_file}
-		<a href="documentation/text/insert_biller_text.html" class="greybox">{$LANG_note}</a></td>
+		<a href="documentation/text/insert_biller_text.html" class="greybox">*</a></td>
 		<td>{$display_block_logo_list}</td> 
 	</tr>
 	<tr>

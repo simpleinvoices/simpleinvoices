@@ -68,25 +68,25 @@ echo <<<EOD
 	<td class="details_screen">{$LANG_customer_name}</td><td><input type=text name="c_name" size=25></td>
 </tr>
 </tr>
-	<td class="details_screen">{$LANG_customer_contact}</td><td><input type=text name="c_attention" size=25></td>
+	<td class="details_screen">{$LANG_customer_contact} <a href="./documentation/text/customer_contact.html" class="greybox">*</a></td><td><input type=text name="c_attention" size=25></td>
 </tr>
 <tr>
-	<td class="details_screen">{$LANG_address_street}</td><td><input type=text name="c_street_address" size=25></td>
+	<td class="details_screen">{$LANG_street}</td><td><input type=text name="c_street_address" size=25></td>
 </tr>
 <tr>
-	<td class="details_screen">{$LANG_address_street} 2 - CHANGE</td><td><input type=text name="c_street_address2" size=25></td>
+	<td class="details_screen">{$LANG_street2} <a href="./documentation/text/street2.html" class="greybox">*</a></td><td><input type=text name="c_street_address2" size=25></td>
 </tr>
 <tr>
-	<td class="details_screen">{$LANG_address_city}</td><td><input type=text name="c_city" size=25></td>
+	<td class="details_screen">{$LANG_city}</td><td><input type=text name="c_city" size=25></td>
 </tr>
 <tr>
-	<td class="details_screen">{$LANG_address_state}</td><td><input type=text name="c_state" size=25></td>
+	<td class="details_screen">{$LANG_state}</td><td><input type=text name="c_state" size=25></td>
 </tr>
 <tr>
-	<td class="details_screen">{$LANG_address_zip}</td><td><input type=text name="c_zip_code" size=25></td>
+	<td class="details_screen">{$LANG_zip}</td><td><input type=text name="c_zip_code" size=25></td>
 </tr>
 <tr>
-	<td class="details_screen">{$LANG_address_country} ({$LANG_optional})</td><td><input type=text name="c_country" size=50></td>
+	<td class="details_screen">{$LANG_country} ({$LANG_optional})</td><td><input type=text name="c_country" size=50></td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG_phone}</td><td><input type=text name="c_phone" size=25></td>

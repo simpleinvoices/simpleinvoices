@@ -1,4 +1,5 @@
 <?php
+<script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 include("./include/include_main.php");
 
 #get the invoice id
@@ -53,19 +54,27 @@ while ($Array = mysql_fetch_array($result_print_customer)) {
                 $c_attentionField = $Array['c_attention'];
                 $c_nameField = $Array['c_name'];
                 $c_street_addressField = $Array['c_street_address'];
+	        $c_street_address2Field = $Array['c_street_address2'];
                 $c_cityField = $Array['c_city'];
                 $c_stateField = $Array['c_state'];
                 $c_zip_codeField = $Array['c_zip_code'];
                 $c_countryField = $Array['c_country'];
 		$c_phoneField = $Array['c_phone'];
+	        $c_mobile_phoneField = $Array['c_mobile_phone'];
 		$c_faxField = $Array['c_fax'];
 		$c_emailField = $Array['c_email'];
+	        $c_custom_field1Field = $Array['c_custom_field1'];
+       		$c_custom_field2Field = $Array['c_custom_field2'];
+	        $c_custom_field3Field = $Array['c_custom_field3'];
+	        $c_custom_field4Field = $Array['c_custom_field4'];
+
 };
 
 while ($billerArray = mysql_fetch_array($result_print_biller)) {
                 $b_idField = $billerArray['b_id'];
                 $b_nameField = $billerArray['b_name'];
                 $b_street_addressField = $billerArray['b_street_address'];
+                $b_street_address2Field = $billerArray['b_street_address2'];
                 $b_cityField = $billerArray['b_city'];
                 $b_stateField = $billerArray['b_state'];
                 $b_zip_codeField = $billerArray['b_zip_code'];
@@ -74,6 +83,11 @@ while ($billerArray = mysql_fetch_array($result_print_biller)) {
                 $b_mobile_phoneField = $billerArray['b_mobile_phone'];
                 $b_faxField = $billerArray['b_fax'];
                 $b_emailField = $billerArray['b_email'];
+                $b_custom_field1Field = $billerArray['b_custom_field1'];
+                $b_custom_field2Field = $billerArray['b_custom_field2'];
+                $b_custom_field3Field = $billerArray['b_custom_field3'];
+                $b_custom_field4Field = $billerArray['b_custom_field4'];
+
 };
 
 
@@ -230,10 +244,10 @@ $display_block_top =  "
 		<td><b>$LANG_biller:</b></td><td colspan=3>$b_nameField</b></td><td colspan=2 align=right><a href='#' class=\"show-biller\" onClick=\"$('.biller').show();$('.show-biller').hide();\">$LANG_show_details</a><a href='#' class=\"biller\" onClick=\"$('.biller').hide();$('.show-biller').show();\">$LANG_hide_details</a></td>
 	</tr>
 	<tr class='details_screen biller'>
-		<td>$LANG_street 1:</td><td colspan=5>$b_street_addressField</td>
+		<td>$LANG_street:</td><td colspan=5>$b_street_addressField</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td>$LANG_street 2:</td><td colspan=5>$b_street_addressField</td>
+		<td>$LANG_street2:</td><td colspan=5>$b_street_address2Field</td>
 	</tr>	
 	<tr class='details_screen biller'>
 		<td>$LANG_city:</td><td colspan=3>$b_cityField</td><td>$LANG_phone_short:</td><td>$b_phoneField</td>
@@ -248,16 +262,16 @@ $display_block_top =  "
 		<td>$LANG_email:</td><td colspan=5>$b_emailField</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td>$biller_custom_field_label1:</td><td colspan=5>$b_emailField</td>
+		<td>$biller_custom_field_label1:</td><td colspan=5>$b_custom_field1Field</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td>$biller_custom_field_label2:</td><td colspan=5 >$b_emailField</td>
+		<td>$biller_custom_field_label2:</td><td colspan=5>$b_custom_field2Field</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td>$biller_custom_field_label3:</td><td colspan=5>$b_emailField</td>
+		<td>$biller_custom_field_label3:</td><td colspan=5>$b_custom_field3Field</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td>$biller_custom_field_label4:</td><td colspan=5>$b_emailField</td>
+		<td>$biller_custom_field_label4:</td><td colspan=5>$b_custom_field4Field</td>
 	</tr>	
 	<tr >
 		<td colspan=5><br></td>
@@ -271,10 +285,10 @@ $display_block_top =  "
 		<td>$LANG_attention_short:</td><td colspan=5 align=left>$c_attentionField,</td>
 	</tr>
 	<tr class='details_screen customer'>
-		<td>$LANG_street 1:</td><td colspan=5 align=left>$c_street_addressField</td>
+		<td>$LANG_street:</td><td colspan=5 align=left>$c_street_addressField</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td>$LANG_street 2:</td><td colspan=5 align=left>$c_street_addressField</td>
+		<td>$LANG_street2:</td><td colspan=5 align=left>$c_street_address2Field</td>
 	</tr>	
 	<tr class='details_screen customer'>
 		<td>$LANG_city:</td><td colspan=3>$c_cityField</td><td>Ph:</td><td>$c_phoneField</td>
@@ -283,22 +297,22 @@ $display_block_top =  "
 		<td>$LANG_state, ZIP:</td><td colspan=3>$c_stateField, $c_zip_codeField</td><td>$LANG_fax:</td><td>$c_faxField</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td>$LANG_country:</td><td colspan=3>$c_countryField</td><td>Mobile:</td><td>$c_phoneField</td>
+		<td>$LANG_country:</td><td colspan=3>$c_countryField</td><td>Mobile:</td><td>$c_mobile_phoneField</td>
 	</tr>	
 	<tr class='details_screen customer'>
 		<td>$LANG_email:<td colspan=5>$c_emailField</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td>$customer_custom_field_label1:</td><td colspan=5>$c_emailField</td>
+		<td>$customer_custom_field_label1:</td><td colspan=5>$c_custom_field1Field</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td>$customer_custom_field_label2:</td><td colspan=5>$c_emailField</td>
+		<td>$customer_custom_field_label2:</td><td colspan=5>$c_custom_field2Field</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td>$customer_custom_field_label3:</td><td colspan=5>$c_emailField</td>
+		<td>$customer_custom_field_label3:</td><td colspan=5>$c_custom_field3Field</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td>$customer_custom_field_label4:</td><td colspan=5>$c_emailField</td>
+		<td>$customer_custom_field_label4:</td><td colspan=5>$c_custom_field4Field</td>
 	</tr>	
 
 ";

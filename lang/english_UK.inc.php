@@ -15,6 +15,7 @@ $LANG_add_new_preference = "Add New Invoice Preference";
 $LANG_add_new_product = "Add New Product";
 $LANG_add_new_tax_rate = "Add New Tax Rate";
 $LANG_address = "Address";
+#might be able to delete adderss: variable - grep files
 $LANG_address_city = "Address: City";
 $LANG_address_country = "Address: Country";
 $LANG_address_state = "Address: State";
@@ -159,6 +160,7 @@ $LANG_select_invoice = "Please select an invoice";
 $LANG_show_details = "Show details";
 $LANG_state = "State";
 $LANG_street = "Street";
+$LANG_street2 = "Street address 2";
 $LANG_sub_total = "Sub Total";
 $LANG_sum = "Sum";
 $LANG_summary = "Summary";

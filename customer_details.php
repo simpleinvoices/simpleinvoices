@@ -117,7 +117,7 @@ if ($_GET['action'] === 'view') {
 		<td>{$invoice_paid_Field}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_attention_short}</td>
+		<td class="details_screen">{$LANG_attention_short} <a href="documentation/text/customer_contact.html" class="greybox">*</a></td>
 		<td colspan="2">{$c_attentionField}</td><td colspan=2></td>
 		<td class="details_screen">{$LANG_total_owing}</td><td><u>{$invoice_owing_Field}</u></td>
 	</tr>
@@ -125,7 +125,7 @@ if ($_GET['action'] === 'view') {
 		<td class="details_screen">{$LANG_street}</td><td>{$c_street_addressField}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_street}2 - CHANGE</td><td>{$c_street_address2Field}</td>
+		<td class="details_screen">{$LANG_street2} <a href="./documentation/text/street2.html" class="greybox">*</a></td><td>{$c_street_address2Field}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_city}</td><td>{$c_cityField}</td>
@@ -136,7 +136,7 @@ if ($_GET['action'] === 'view') {
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_state}</td><td>{$c_stateField}</td>
-		<td class="details_screen">{$LANG_phone} - CHANGE to mobile</td><td>{$c_mobile_phoneField}</td>
+		<td class="details_screen">{$LANG_mobile_phone}</td><td>{$c_mobile_phoneField}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_country}</td><td>{$c_countryField}</td>
@@ -164,10 +164,20 @@ $display_block .= <<<EOD
 		<div id="section-1" class="fragment">
 			<h4><u>{$LANG_customer} {$LANG_custom_fields}</u></h4>
 			<p>
-			{$customer_custom_field_label1} <a href="./documentation/text/custom_fields.html" class="greybox">*</a>: {$c_custom_field1Field}<br>
-			{$customer_custom_field_label2} <a href="./documentation/text/custom_fields.html" class="greybox">*</a>: {$c_custom_field2Field}<br>
-			{$customer_custom_field_label3} <a href="./documentation/text/custom_fields.html" class="greybox">*</a>: {$c_custom_field3Field}<br>
-			{$customer_custom_field_label4} <a href="./documentation/text/custom_fields.html" class="greybox">*</a>: {$c_custom_field4Field}
+			<table>
+			<tr>
+				<td class="details_screen">{$customer_custom_field_label1} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td><td>{$c_custom_field1Field}</td>
+			</tr>
+			<tr>
+				<td class="details_screen">{$customer_custom_field_label2} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td><td>{$c_custom_field2Field}</td>
+			</tr>
+			<tr>
+				<td class="details_screen">{$customer_custom_field_label3} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td><td>{$c_custom_field3Field}</td>
+			</tr>
+			<tr>
+				<td class="details_screen">{$customer_custom_field_label4} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td><td>{$c_custom_field4Field}</td>
+			</tr>		
+			</table>	
 			</p>
 		</div>
 		<div id="section-2" class="fragment">
@@ -225,7 +235,7 @@ $display_block_enabled = "<select name=\"c_enabled\">
 		<td><input type="text" name="c_name" value="{$c_nameField}" size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_attention_short}</td>
+		<td class="details_screen">{$LANG_attention_short} <a href="documentation/text/customer_contact.html" class="greybox">*</a></td>
 		<td><input type="text" name="c_attention" value="{$c_attentionField}" size="50" /></td>
 	</tr>
 	<tr>
@@ -233,7 +243,7 @@ $display_block_enabled = "<select name=\"c_enabled\">
 		<td><input type="text" name="c_street_address" value="{$c_street_addressField}" size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_street} 2 _CHANGE</td>
+		<td class="details_screen">{$LANG_street2} <a href="./documentation/text/street2.html" class="greybox">*</a></td>
 		<td><input type="text" name="c_street_address2" value="{$c_street_address2Field}" size="50" /></td>
 	</tr>
 	<tr>

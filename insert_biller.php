@@ -103,22 +103,22 @@ echo <<<EOD
 		<td>{$LANG_biller_name}</td><td><input type=text name="b_name" size=25></td>
 	</tr>
 	<tr>
-		<td>{$LANG_address_street}</td><td><input type=text name="b_street_address" size=25></td>
+		<td>{$LANG_street}</td><td><input type=text name="b_street_address" size=25></td>
 	</tr>
 	<tr>
-		<td>{$LANG_address_street}2-CHANGE</td><td><input type=text name="b_street_address2" size=25></td>
+		<td>{$LANG_street2} <a href="./documentation/text/street2.html" class="greybox">*</a></td><td><input type=text name="b_street_address2" size=25></td>
 	</tr>
 	<tr>
-		<td>{$LANG_address_city}</td><td><input type=text name="b_city" size=25></td>
+		<td>{$LANG_city}</td><td><input type=text name="b_city" size=25></td>
 	</tr>
 	<tr>
-		<td>{$LANG_address_state}</td><td><input type=text name="b_state" size=25></td>
+		<td>{$LANG_state}</td><td><input type=text name="b_state" size=25></td>
 	</tr>
 	<tr>
-		<td>{$LANG_address_zip}</td><td><input type=text name="b_zip_code" size=25></td>
+		<td>{$LANG_zip}</td><td><input type=text name="b_zip_code" size=25></td>
 	</tr>
 	<tr>
-		<td>{$LANG_address_country} ({$LANG_optional})</td><td><input type=text name="b_country" size=75></td>
+		<td>{$LANG_country} ({$LANG_optional})</td><td><input type=text name="b_country" size=75></td>
 	</tr>
 	<tr>
 		<td>{$LANG_phone}</td><td><input type=text name="b_phone" size=25></td>
@@ -145,7 +145,7 @@ echo <<<EOD
 		<td>{$biller_custom_field_label4} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td><td><input type=text name="b_custom_field4" size=25></td>
 	</tr>
 	<tr>
-		<td>{$LANG_logo_file} <a href="./documentation/text/insert_biller_text.html" class="greybox">{$LANG_note}</a></td><td>{$display_block_logo_list}</td>
+		<td>{$LANG_logo_file} <a href="./documentation/text/insert_biller_text.html" class="greybox">*</a></td><td>{$display_block_logo_list}</td>
 	</tr>
 	<tr>
 		<td>{$LANG_invoice_footer}</td><td><textarea input type=text name="b_co_footer" rows=4 cols=50></textarea></td>

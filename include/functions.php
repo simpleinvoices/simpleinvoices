@@ -1,5 +1,4 @@
 <?php
-
 include('./config/config.php');
 ob_start();
 include("./lang/$language.inc.php");
@@ -12,7 +11,7 @@ mysql_select_db( $db_name, $conn );
 function get_custom_field_label($field)
         {
 	
-	include('./config/config.php');
+	include("./config/config.php");
 	ob_start();
 	include("./lang/$language.inc.php");
 	ob_end_clean();
