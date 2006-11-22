@@ -244,6 +244,7 @@ else if ($op === "pay_invoice") {
 	left:0;
 }
 .ac_results li {
+	border: 1px solid #000;
 	padding: 2px 5px;
 }
 .ac_loading {
