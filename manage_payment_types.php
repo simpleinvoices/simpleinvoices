@@ -1,5 +1,13 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php
 include('./include/include_main.php');
+echo <<<EOD
+<title>{$title} :: {$LANG_manage_payment_types}</title>
+<link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css">
+
+EOD;
 
 $conn = mysql_connect("$db_host","$db_user","$db_password");
 mysql_select_db("$db_name",$conn);
@@ -12,61 +20,54 @@ $number_of_rows = mysql_num_rows($result);
 
 
 if (mysql_num_rows($result) == 0) {
-$display_block = "<P><em>There are no payment types in the database.</em></p>";
-}else{
-$display_block = "
+	$display_block = "<P><em>{$LANG_no_payment_types}.</em></p>";
+} else {
+	$display_block = <<<EOD
 
-<div id=\"sorting\">
-       <div>Sorting tables, please hold on...</div>
+<div id="sorting">
+	<div>Sorting tables, please hold on...</div>
 </div>
 
-<table width=100% align=center class=\"filterable sortable\" id=large>
-<div id=header><b>$mpt_page_header</b> :: <a href='insert_payment_type.php'>$mpt_actions_new_tax</a></div>
-<tr class=\"sortHeader\">
-<th class=\"noFilter\">$mpt_table_action</th>
-<th class=\"index_table\">$mpt_table_pt_id</th>
-<th class=\"index_table\">$mpt_table_pt_description</th>
-<th class=\"selectFilter index_table\">$wording_for_enabledField &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-</tr>";
+<table width="100%" align="center" class="filterable sortable" id="large">
+<div id="header"><b>{$LANG_manage_payment_types}</b> ::
+<a href="insert_payment_type.php"{$LANG_add_new_payment_type}</a></div>
+<tr class="sortHeader">
+<th class="noFilter">{$LANG_actions}</th>
+<th class="index_table">{$LANG_payment_type_id}</th>
+<th class="index_table">{$LANG_description}</th>
+<th class="selectFilter index_table">{$wording_for_enabledField} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+</tr>
 
-while ($Array = mysql_fetch_array($result)) {
-	$pt_idField = $Array['pt_id'];
-	$pt_descriptionField = $Array['pt_description'];
-	$pt_enabledField = $Array['pt_enabled'];
+EOD;
+
+	while ($Array = mysql_fetch_array($result)) {
+		$pt_idField = $Array['pt_id'];
+		$pt_descriptionField = $Array['pt_description'];
+		$pt_enabledField = $Array['pt_enabled'];
+
+		if ($pt_enabledField == 1) {
+			$wording_for_enabled = $wording_for_enabledField;
+		} else {
+			$wording_for_enabled = $wording_for_disabledField;
+	  }
+
+		$display_block .= <<<EOD
+	<tr class="index_table">
+	<td class="index_table"><a class="index_table"
+	 href="payment_type_details.php?submit={$pt_idField}&action=view">{$LANG_view}</a> ::
+	<a class="index_table"
+	 href="payment_type_details.php?submit={$pt_idField}&action=edit">{$LANG_edit}</a> </td>
+	<td class="index_table">{$pt_idField}</td>
+	<td class="index_table">{$pt_descriptionField}</td>
+	<td class="index_table">{$wording_for_enabled}</td>
+	</tr>
+
+EOD;
 	
-        if ($pt_enabledField == 1) {
-                $wording_for_enabled = $wording_for_enabledField;
-        } else {
-                $wording_for_enabled = $wording_for_disabledField;
-        }
-
-
-
-	$display_block .= "
-	<tr class='index_table'>
-	<td class='index_table'><a class='index_table' href='payment_type_details.php?submit=$pt_idField&action=view'>$mpt_actions_view</a> :: <a class='index_table' href='payment_type_details.php?submit=$pt_idField&action=edit'>$mpt_actions_edit</a> </td>
-	<td class='index_table'>$pt_idField</td>
-	<td class='index_table'>$pt_descriptionField</td>
-	<td class='index_table'>$wording_for_enabled</td>
-	</tr>";
-
-                
-	
-		}
-		
-
-        $display_block .="</table>";
+	}
+	$display_block .= "</table>\n";
 }
 
-
-
-?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-<?php include('./include/menu.php'); ?>
-<?php
 $mid->printMenu('hormenu1');
 $mid->printFooter();
 ?>
@@ -105,14 +106,10 @@ Nifty("div#header,div#footer","small");
 }
 </script>
 
-
-<title>Simple Invoices - Tax
-</title>
 </head>
-<?php include('./config/config.php'); ?>
+
 <body>
 
-<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
 <br>
 <div id="container">
 <?php echo $display_block; ?>
