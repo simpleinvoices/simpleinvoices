@@ -23,10 +23,10 @@ $display_block_enabled = "<select name=\"c_enabled\">
 </select>";
 
 #get custom field labels
-$customer_custom_field_label1 = get_custom_field_label(customer_cf1);
-$customer_custom_field_label2 = get_custom_field_label(customer_cf2);
-$customer_custom_field_label3 = get_custom_field_label(customer_cf3);
-$customer_custom_field_label4 = get_custom_field_label(customer_cf4);
+$customer_custom_field_label1 = get_custom_field_label(customer_cf1,'.');
+$customer_custom_field_label2 = get_custom_field_label(customer_cf2,'.');
+$customer_custom_field_label3 = get_custom_field_label(customer_cf3,'.');
+$customer_custom_field_label4 = get_custom_field_label(customer_cf4,'.');
 
 ?>
 <script type="text/javascript" src="niftycube.js"></script>

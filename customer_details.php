@@ -85,10 +85,10 @@ while ($Array = mysql_fetch_array($result_print_customer) ) {
 }
 
 #get custom field labels
-$customer_custom_field_label1 = get_custom_field_label(customer_cf1);
-$customer_custom_field_label2 = get_custom_field_label(customer_cf2);
-$customer_custom_field_label3 = get_custom_field_label(customer_cf3);
-$customer_custom_field_label4 = get_custom_field_label(customer_cf4);
+$customer_custom_field_label1 = get_custom_field_label(customer_cf1,'.');
+$customer_custom_field_label2 = get_custom_field_label(customer_cf2,'.');
+$customer_custom_field_label3 = get_custom_field_label(customer_cf3,'.');
+$customer_custom_field_label4 = get_custom_field_label(customer_cf4,'.');
 
 
 if ($_GET['action'] === 'view') {
