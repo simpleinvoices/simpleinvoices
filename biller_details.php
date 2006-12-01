@@ -91,10 +91,10 @@ $display_block_logo_list .= "</select>";
 /*end logo stuff */
 
 #get custom field labels
-$biller_custom_field_label1 = get_custom_field_label(biller_cf1);
-$biller_custom_field_label2 = get_custom_field_label(biller_cf2);
-$biller_custom_field_label3 = get_custom_field_label(biller_cf3);
-$biller_custom_field_label4 = get_custom_field_label(biller_cf4);
+$biller_custom_field_label1 = get_custom_field_label(biller_cf1,'.');
+$biller_custom_field_label2 = get_custom_field_label(biller_cf2,'.');
+$biller_custom_field_label3 = get_custom_field_label(biller_cf3,'.');
+$biller_custom_field_label4 = get_custom_field_label(biller_cf4,'.');
 
 
 if ($_GET['action'] == "view") {
@@ -280,9 +280,9 @@ EOD;
 
 $footer = <<<EOD
 
-<p><input type="submit" name="cancel" value="{$LANG_cancel}" />
+<input type="submit" name="cancel" value="{$LANG_cancel}" />
 <input type="submit" name="save_biller" value="{$LANG_save} {$LANG_biller}" />
-<input type="hidden" name="op" value="edit_biller" /></p>
+<input type="hidden" name="op" value="edit_biller" />
 
 EOD;
 

@@ -1,5 +1,4 @@
 <?php
-<script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 include("./include/include_main.php");
 
 #get the invoice id
@@ -184,15 +183,15 @@ while ($Array_defaults = mysql_fetch_array($result_print_defaults) ) {
 
 
 #get custom field labels for biller
-$biller_custom_field_label1 = get_custom_field_label(biller_cf1);
-$biller_custom_field_label2 = get_custom_field_label(biller_cf2);
-$biller_custom_field_label3 = get_custom_field_label(biller_cf3);
-$biller_custom_field_label4 = get_custom_field_label(biller_cf4);
+$biller_custom_field_label1 = get_custom_field_label(biller_cf1,'.');
+$biller_custom_field_label2 = get_custom_field_label(biller_cf2,'.');
+$biller_custom_field_label3 = get_custom_field_label(biller_cf3,'.');
+$biller_custom_field_label4 = get_custom_field_label(biller_cf4,'.');
 #get custom field labels for the customer
-$customer_custom_field_label1 = get_custom_field_label(customer_cf1);
-$customer_custom_field_label2 = get_custom_field_label(customer_cf2);
-$customer_custom_field_label3 = get_custom_field_label(customer_cf3);
-$customer_custom_field_label4 = get_custom_field_label(customer_cf4);
+$customer_custom_field_label1 = get_custom_field_label(customer_cf1,'.');
+$customer_custom_field_label2 = get_custom_field_label(customer_cf2,'.');
+$customer_custom_field_label3 = get_custom_field_label(customer_cf3,'.');
+$customer_custom_field_label4 = get_custom_field_label(customer_cf4,'.');
 
 
 #START INVOICE HERE - TOP SECTION
