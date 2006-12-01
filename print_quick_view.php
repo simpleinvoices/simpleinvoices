@@ -418,9 +418,13 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 		<tr>
 		<td colspan=6>
 		<table>
-		<tr>
-        	        <td><b>$LANG_quantity_short</b></td><td><b>$LANG_description</b></td><td><b>$LANG_unit_price</b><td><b>$LANG_gross_total</b></td><td><b>$LANG_tax</b></td><td><b>$LANG_total_uppercase</b></td>
-	        </tr>";
+                        <tr>
+                                <td colspan=5></td>
+                                <td class='details_screen'><a href='#' align=right class=\"show-itemised\" onClick=\"$('.itemised').show();$('.show-itemised').hide();\">$LANG_show_details</a><a href='#' class=\"itemised\" onClick=\"$('.itemised').hide();$('.show-itemised').show();\">$LANG_hide_details</a> 
+                        <tr>
+			<tr>
+        		        <td><b>$LANG_quantity_short</b></td><td><b>$LANG_description</b></td><td><b>$LANG_unit_price</b><td><b>$LANG_gross_total</b></td><td><b>$LANG_tax</b></td><td><b>$LANG_total_uppercase</b></td>
+		        </tr>";
 	}
 	#show column heading for consulting style
         else if ( $_GET['invoice_style'] === 'Consulting' ) {
@@ -431,9 +435,9 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 			<tr>
 				<td colspan=6></td>
 				<td class='details_screen'><a href='#' align=right class=\"show-consulting\" onClick=\"$('.consulting').show();$('.show-consulting').hide();\">$LANG_show_details</a><a href='#' class=\"consulting\" onClick=\"$('.consulting').hide();$('.show-consulting').show();\">$LANG_hide_details</a> 
-                <tr>
-                        <td><b>$LANG_quantity_short</b></td><td><b>$LANG_item</b></td><td class=show-consulting><b>$LANG_description</b></td><td><b>$LANG_unit_price</b><td><b>$LANG_gross_total</b></td><td><b>$LANG_tax</b></td><td><b>$LANG_total_uppercase</b></td>
-                </tr>";
+        	        <tr>
+               	 	       <td><b>$LANG_quantity_short</b></td><td><b>$LANG_item</b></td><td class=show-consulting><b>$LANG_description</b></td><td><b>$LANG_unit_price</b><td><b>$LANG_gross_total</b></td><td><b>$LANG_tax</b></td><td><b>$LANG_total_uppercase</b></td>
+	                </tr>";
         }
 
 
@@ -518,6 +522,9 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 	        <tr>
 	                <td>$inv_it_quantityField</td><td>$prod_descriptionField</td><td>$pref_currency_signField$inv_it_unit_priceField</td><td>$pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td>$pref_currency_signField$inv_it_totalField</td>
 	        </tr>
+                <tr  class='itemised' >       
+                        <td></td><td colspan=5 class='details_screen'>$prod_custom_field_label1: $prod_custom_field1Field, $prod_custom_field_label2: $prod_custom_field2Field, $prod_custom_field_label3: $prod_custom_field3Field, $prod_custom_field_label4: $prod_custom_field4Field</td>
+                 </tr>
 		";
 	}	
 	#show the consulting invoice 
@@ -659,6 +666,7 @@ $display_block_bottom =  "
 	  $('.biller').hide();
 	  $('.customer').hide();
 	  $('.consulting').hide();
+	  $('.itemised').hide();
 	  $('.notes').hide();
   	});
     </script>
