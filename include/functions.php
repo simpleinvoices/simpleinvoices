@@ -83,10 +83,25 @@ function do_tr($number) {
 		return $new_tr;
 	}
 	
+        if ($number == 4 ) {
+                $new_tr = "</tr><tr>";
+                return $new_tr;
+        }
+
+	
 }
 
-function merge_address($field1,$field2,$field3) {
-        if ($field1 != null OR $field2 != null OR $field3 != null) {
+function merge_address($field1,$field2,$field3,$street1,$street2) {
+        ob_start();
+        include('../config/config.php');
+        include("../lang/$language.inc.php");
+        ob_end_clean();
+
+        if (($field1 != null OR $field2 != null OR $field3 != null) AND ($street1 ==null AND $street2 ==null)) {
+                $ma .=  "<tr><td>$LANG_address:</td><td colspan=3>";
+		$skip_section = 1;
+        }
+        if (($field1 != null OR $field2 != null OR $field3 != null) AND( $skip_section != 1)) {
                 $ma .=  "<tr><td></td><td colspan=3>";
         }
         if ($field1 != null) {
@@ -110,6 +125,7 @@ function merge_address($field1,$field2,$field3) {
         }
 	return $ma;
 }
+
 function print_if_not_null($label,$field) {
         if ($field != null) {
                 $print_if_not_null =  "
@@ -119,5 +135,13 @@ function print_if_not_null($label,$field) {
 		return $print_if_not_null;
         }
 }
+
+function inv_itemised_cf($label,$field) {
+        if ($field != null) {
+                $print_cf =  "<td width=50%>$label: $field</td>";  
+                return $print_cf;
+        }
+}
+
 
 ?>

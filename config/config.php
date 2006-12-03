@@ -6,6 +6,10 @@ $db_name = "simple_invoices";
 $db_user = "root";
 $db_password = "";
 
+/*mysql version. basically if your using a version less than mysql 5 some features will be disabled*/
+#$mysql = 4;
+$mysql = 5;
+
 /*Select language for Simple Invoices to use*/
 #$language = "castellano_spanish";
 #$language = "catala_catalan";

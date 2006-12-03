@@ -259,7 +259,7 @@ $mid->printFooter();
 	<td colspan=5><?php echo $LANG_description;?></td>
 </tr>
 <tr>
-	<td colspan=5 ><textarea input type=text name="i_description" rows=10 cols=100 WRAP=hard></textarea></td>
+	<td colspan=5 ><textarea input type=text name="i_description" rows=10 cols=100 WRAP=nowrap></textarea></td>
 </tr>
 <tr>
 	<td><?php echo $LANG_gross_total;?></td><td><?php echo $LANG_tax;?></td><td><?php echo $LANG_inv_pref;?></td>

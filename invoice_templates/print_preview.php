@@ -1,6 +1,7 @@
 <?php
 #table
 include('../include/include_print.php');
+include("../include/functions.php");
 
 
 #get the invoice id
@@ -63,18 +64,27 @@ while ($Array = mysql_fetch_array($result_print_customer)) {
                 $c_attentionField = $Array['c_attention'];
                 $c_nameField = $Array['c_name'];
                 $c_street_addressField = $Array['c_street_address'];
+                $c_street_address2Field = $Array['c_street_address2'];
                 $c_cityField = $Array['c_city'];
                 $c_stateField = $Array['c_state'];
                 $c_zip_codeField = $Array['c_zip_code'];
                 $c_countryField = $Array['c_country'];
 		$c_phoneField = $Array['c_phone'];
+                $c_mobile_phoneField = $Array['c_mobile_phone'];
 		$c_faxField = $Array['c_fax'];
 		$c_emailField = $Array['c_email'];
+                $c_custom_field1Field = $Array['c_custom_field1'];
+                $c_custom_field2Field = $Array['c_custom_field2'];
+                $c_custom_field3Field = $Array['c_custom_field3'];
+                $c_custom_field4Field = $Array['c_custom_field4'];
+
 };
+
 while ($billerArray = mysql_fetch_array($result_print_biller)) {
                 $b_idField = $billerArray['b_id'];
                 $b_nameField = $billerArray['b_name'];
                 $b_street_addressField = $billerArray['b_street_address'];
+                $b_street_address2Field = $billerArray['b_street_address2'];
                 $b_cityField = $billerArray['b_city'];
                 $b_stateField = $billerArray['b_state'];
                 $b_zip_codeField = $billerArray['b_zip_code'];
@@ -85,6 +95,10 @@ while ($billerArray = mysql_fetch_array($result_print_biller)) {
                 $b_emailField = $billerArray['b_email'];
                 $b_co_logoField = $billerArray['b_co_logo'];
                 $b_co_footerField = $billerArray['b_co_footer'];
+                $b_custom_field1Field = $billerArray['b_custom_field1'];
+                $b_custom_field2Field = $billerArray['b_custom_field2'];
+                $b_custom_field3Field = $billerArray['b_custom_field3'];
+                $b_custom_field4Field = $billerArray['b_custom_field4'];
 };
 
 
@@ -131,6 +145,21 @@ while ($Array_preferences = mysql_fetch_array($result_print_preferences)) {
 }
 #Accounts - for the invoice - end
 
+#get custom field labels for biller
+$biller_custom_field_label1 = get_custom_field_label(biller_cf1,'..');
+$biller_custom_field_label2 = get_custom_field_label(biller_cf2,'..');
+$biller_custom_field_label3 = get_custom_field_label(biller_cf3,'..');
+$biller_custom_field_label4 = get_custom_field_label(biller_cf4,'..');
+#get custom field labels for the customer
+$customer_custom_field_label1 = get_custom_field_label(customer_cf1,'..');
+$customer_custom_field_label2 = get_custom_field_label(customer_cf2,'..');
+$customer_custom_field_label3 = get_custom_field_label(customer_cf3,'..');
+$customer_custom_field_label4 = get_custom_field_label(customer_cf4,'..');
+#product custom fields
+$prod_custom_field_label1 = get_custom_field_label(product_cf1,'..');
+$prod_custom_field_label2 = get_custom_field_label(product_cf2,'..');
+$prod_custom_field_label3 = get_custom_field_label(pruduct_cf3,'..');
+$prod_custom_field_label4 = get_custom_field_label(product_cf4,'..');
 
 
 #logo field support - if not logo show nothing else show logo
@@ -164,7 +193,7 @@ $display_block_top =  "
 	<table align=center >
 	$logo_block 
 	<tr>
-		<td nowrap class=\"col1 tbl1\" colspan=2 ><b>$b_nameField</b></td><td></td><td class=\"col1 tbl1\" colspan=3 ><b>$pref_inv_wordingField $LANG_summary</b></td> 
+		<td nowrap class=\"col1 tbl1\" colspan=2 ><b>$LANG_biller:</b> $b_nameField</td><td></td><td class=\"col1 tbl1\" colspan=3 ><b>$pref_inv_wordingField $LANG_summary</b></td> 
 	</tr>
 	<tr>
 		<td nowrap class=\"tbl1-left\">$b_street_addressField,</td><td class=\"tbl1-right\">$LANG_phone_short: $b_phoneField</td><td></td><td class=\"tbl1-left\">$pref_inv_wordingField $LANG_number_short:</td><td>$inv_idField</td><td class=\"tbl1-right\"></td>
@@ -182,8 +211,86 @@ $display_block_top =  "
 		<td colspan=3></td><td nowrap class=\"tbl1-left tbl1-bottom\">$LANG_owing:</td><td class=\"tbl1-right tbl1-bottom\" colspan=2>$pref_currency_signField$invoice_owing_Field</td>
 	</tr>	
 	<tr>
-		<td colspan=2 class=\"tbl1 col1 tbl1-right\" border=\"1\" cellpadding=\"2\" cellspacing=\"1\"  ><b>$LANG_customer</b></td><td colspan=4></td>
-	</tr>	
+		<td class=\"tbl1 col1\" border=\"1\" cellpadding=\"2\" cellspacing=\"1\"  ><b>$LANG_customer:</b></td><td class=\"tbl1 col1 tbl1-right\" border=\"1\" cellpadding=\"2\" cellspacing=\"1\">$c_nameField</td><td colspan=4></td>
+	</tr>
+";
+
+        if ($c_attentionField != null) {
+                $display_block_top .=  "
+                <tr class='details_screen customer'>
+                        <td>$LANG_attention_short:</td><td colspan=5 align=left>$c_attentionField,</td>
+                </tr>
+                ";
+        }
+        if ($c_street_addressField != null) {
+                $display_block_top .=  "
+                <tr class='details_screen customer'>
+                        <td>$LANG_address:</td><td colspan=5 align=left>$c_street_addressField</td>
+                </tr>   
+                ";
+        }
+        if ($c_street_address2Field != null) {
+                $display_block_top .=  "
+                <tr class='details_screen customer'>";
+                if ($c_street_addressField == null) {
+                $display_block_top .=  "
+                        <td>$LANG_address:</td><td colspan=5 align=left>$c_street_address2Field</td>
+                </tr>   
+                ";
+                }
+                if ($c_street_addressField != null) {
+                $display_block_top .=  "
+                        <td></td><td colspan=5 align=left>$c_street_address2Field</td>
+                </tr>   
+                ";
+                }
+        }
+
+        $display_block_top .=  merge_address($c_cityField, $c_stateField, $c_zip_codeField, $c_street_addressField, $c_street_address2Field);
+
+        /*country field start*/
+         if ($c_countryField != null) {
+                $display_block_top .=  "
+                </tr>
+                <tr>
+                        <td></td><td>$c_countryField</td>
+                </tr>
+                ";
+        }
+        /*country field end*/
+
+
+        /*phone details start*/
+        if ($c_phoneField != null OR $c_phoneField != null OR $c_mobile_phoneField != null) {
+                $display_block_top .=  "<tr>";
+        }
+
+        if ($c_phoneField != null) {
+                $display_block_top .=  "<td>$LANG_phone_short:</td><td>$c_phoneField</td>";
+                $tr_c++;
+        }
+        if ($c_faxField != null) {
+                $display_block_top .=  "<td>$LANG_fax:</td><td>$c_faxField</td>";
+                $tr_c++;
+                $display_block_top .= do_tr($tr_c);
+
+        }
+        if ($c_mobile_phoneField != null) {
+                $display_block_top .=  "<td>$LANG_mobile_short:</td><td>$c_mobile_phoneField</td>";
+                $tr_c++;
+                $display_block_top .= do_tr($tr_c);
+        }
+        /*phone details start*/
+
+        $display_block_top .= print_if_not_null($LANG_email, $c_emailField);
+        $display_block_top .= print_if_not_null($customer_custom_field_label1, $c_custom_field1Field);
+        $display_block_top .= print_if_not_null($customer_custom_field_label2, $c_custom_field2Field);
+        $display_block_top .= print_if_not_null($customer_custom_field_label3, $c_custom_field3Field);
+        $display_block_top .= print_if_not_null($customer_custom_field_label4, $c_custom_field4Field);
+	
+/*
+	$display_block_top .=  "
+
 	<tr>
 		<td colspan=2 class=\"tbl1-left tbl1-right\">$c_nameField</td>
 	</tr>
@@ -205,6 +312,7 @@ $display_block_top =  "
 	</tr>	
 
 ";
+*/
 
 #PRINT DETAILS FOR THE TOTAL STYLE INVOICE
 
@@ -236,11 +344,14 @@ if ($_GET[invoice_style] === 'Total') {
 	$result_print_products = mysql_query($print_products, $conn) or die(mysql_error());
 
 
-	while ($Array = mysql_fetch_array($result_print_products)) { 
-                $prod_idField = $Array['prod_id'];
-                $prod_descriptionField = $Array['prod_description'];
-                $prod_unit_priceField = $Array['prod_unit_price'];
-
+	while ($productArray = mysql_fetch_array($result_print_products)) { 
+                $prod_idField = $productArray['prod_id'];
+                $prod_descriptionField = $productArray['prod_description'];
+                $prod_unit_priceField = $productArray['prod_unit_price'];
+                $prod_custom_field1Field = $productArray['prod_custom_field1'];
+                $prod_custom_field2Field = $productArray['prod_custom_field2'];
+                $prod_custom_field3Field = $productArray['prod_custom_field3'];
+                $prod_custom_field4Field = $productArray['prod_custom_field4'];
 	};
 
 	#invoice_total total query
@@ -301,14 +412,14 @@ $display_block_details =  "
         if ( $_GET['invoice_style'] === 'Itemised' ) {
                 $display_block_details .=  "
                 <tr>
-                        <td class=\"tbl1 col1\" ><b>$LANG_quantity_short</b></td><td class=\"tbl1 col1\" ><b>$LANG_description</b></td><td class=\"tbl1 col1\" ><b>$LANG_unit_price</b><td class=\"tbl1 col1\" ><b>$LANG_gross_total</b></td><td class=\"tbl1 col1\" ><b>$LANG_tax</b></td><td class=\"tbl1 col1\" ><b>$LANG_total_uppercase</b></td>
+                        <td class=\"tbl1 col1\" ><b>$LANG_quantity_short</b></td><td class=\"tbl1 col1\" ><b>$LANG_description</b></td><td class=\"tbl1 col1\" ><b>$LANG_unit_price</b><td class=\"tbl1 col1\" ><b>$LANG_gross_total</b></td><td class=\"tbl1 col1\" ><b>$LANG_tax</b></td><td class=\"tbl1 col1\" align=right><b>$LANG_total_uppercase</b></td>
                 </tr>";
         }
         #show column heading for consulting style
         else if ( $_GET['invoice_style'] === 'Consulting' ) {
                 $display_block_details .=  "
                 <tr class=\"tbl1 col1\">
-                        <td class=\"tbl1\"><b>$LANG_quantity_short</b></td><td class=\"tbl1\"><b>$LANG_item</b></td><td class=\"tbl1\"><b>$LANG_unit_price</b><td class=\"tbl1\"><b>$LANG_gross_total</b></td><td class=\"tbl1\"><b>$LANG_tax</b></td><td class=\"tbl1\"><b>$LANG_total_uppercase</b></td>
+                        <td class=\"tbl1\"><b>$LANG_quantity_short</b></td><td class=\"tbl1\"><b>$LANG_item</b></td><td class=\"tbl1\"><b>$LANG_unit_price</b><td class=\"tbl1\"><b>$LANG_gross_total</b></td><td class=\"tbl1\"><b>$LANG_tax</b></td><td align=right class=\"tbl1\"><b>$LANG_total_uppercase</b></td>
                 </tr>";
         }
 
@@ -338,10 +449,15 @@ $display_block_details =  "
 	$result_print_products = mysql_query($print_products, $conn) or die(mysql_error());
 
 
-	while ($Array = mysql_fetch_array($result_print_products)) { 
-                $prod_idField = $Array['prod_id'];
-                $prod_descriptionField = $Array['prod_description'];
-                $prod_unit_priceField = $Array['prod_unit_price'];
+	while ($productArray = mysql_fetch_array($result_print_products)) { 
+                $prod_idField = $productArray['prod_id'];
+                $prod_descriptionField = $productArray['prod_description'];
+                $prod_unit_priceField = $productArray['prod_unit_price'];
+                $prod_custom_field1Field = $productArray['prod_custom_field1'];
+                $prod_custom_field2Field = $productArray['prod_custom_field2'];
+                $prod_custom_field3Field = $productArray['prod_custom_field3'];
+                $prod_custom_field4Field = $productArray['prod_custom_field4'];
+
 /*
 	};
 */
@@ -383,8 +499,35 @@ $display_block_details =  "
                 $display_block_details .=  "
                 <tr class=\"tbl1\" >
                         <td class=\"tbl1\">$inv_it_quantityField</td><td class=\"tbl1\">$prod_descriptionField</td><td class=\"tbl1\">$pref_currency_signField$inv_it_unit_priceField</td><td class=\"tbl1\">$pref_currency_signField$inv_it_gross_totalField</td><td class=\"tbl1\">$pref_currency_signField$inv_it_tax_amountField</td><td class=\"tbl1\">$pref_currency_signField$inv_it_totalField</td>
+                </tr>
+                <tr>       
+                        <td></td><td colspan=5>
+                                                <table width=100%>
+                                                        <tr>
                 ";
-        }
+                /*Get the custom fields and show them nicely*/
+                $display_block_details .= inv_itemised_cf($prod_custom_field_label1, $prod_custom_field1Field);
+                $inv_it_tr++;
+                $display_block_details .= do_tr($inv_it_tr);
+                $display_block_details .= inv_itemised_cf($prod_custom_field_label2, $prod_custom_field2Field);
+                $inv_it_tr++;
+                $display_block_details .= do_tr($inv_it_tr);
+                $display_block_details .= inv_itemised_cf($prod_custom_field_label3, $prod_custom_field3Field);
+                $inv_it_tr++;
+                $display_block_details .= do_tr($inv_it_tr);
+                $display_block_details .= inv_itemised_cf($prod_custom_field_label4, $prod_custom_field4Field);
+                $inv_it_tr++;
+                $display_block_details .= do_tr($inv_it_tr);
+                $inv_it_tr = 0;
+
+                $display_block_details .=  " 
+                                                        </tr>
+                                                </table>
+                                </td>
+                </tr>
+
+                ";
+	}
         #show the consulting invoice
         else if ( $_GET['invoice_style'] === 'Consulting' ) {
 
@@ -394,11 +537,41 @@ $display_block_details =  "
                 <tr class=\"tbl1-left tbl1-right\">
                         <td class=\"tbl1-left\" >$inv_it_quantityField</td><td>$prod_descriptionField</td><td class=\"tbl1-right\" colspan=5></td>
 		</tr>
-		<tr class=\"tbl1-left tbl1-right\">
-			<td class=\"tbl1-left\"></td><td class=\"tbl1-right\" colspan=6><i>$LANG_description: </i>$inv_it_descriptionField</td>
-		</tr>
+                <tr>       
+                        <td></td><td colspan=6>
+                                                <table width=100%>
+                                                        <tr>
+                ";
+                /*Get the custom fields and show them nicely*/
+                $display_block_details .= inv_itemised_cf($prod_custom_field_label1, $prod_custom_field1Field);
+                $inv_it_tr++;
+                $display_block_details .= do_tr($inv_it_tr);
+                $display_block_details .= inv_itemised_cf($prod_custom_field_label2, $prod_custom_field2Field);
+                $inv_it_tr++;
+                $display_block_details .= do_tr($inv_it_tr);
+                $display_block_details .= inv_itemised_cf($prod_custom_field_label3, $prod_custom_field3Field);
+                $inv_it_tr++;
+                $display_block_details .= do_tr($inv_it_tr);
+                $display_block_details .= inv_itemised_cf($prod_custom_field_label4, $prod_custom_field4Field);
+                $inv_it_tr++;
+                $display_block_details .= do_tr($inv_it_tr);
+                $inv_it_tr = 0;
+                $display_block_details .=  " 
+                                                        </tr>
+                                                </table>
+                                </td>
+                 </tr>";
+
+                if ($inv_it_descriptionField != null) {
+                        $display_block_details .=  "
+                		<tr class=\"tbl1-left tbl1-right\">
+		                        <td class=\"tbl1-left\"></td><td class=\"tbl1-right\" colspan=6><i>$LANG_description: </i>$inv_it_descriptionField</td>
+		                </tr>";
+                }
+
+		$display_block_details .=  "
 		<tr class=\"tbl1-left tbl1-right tbl1-bottom\">
-			<td class=\"tbl1-left tbl1-bottom\" ></td><td class=\"tbl1-bottom\"></td><td class=\"tbl1-bottom\">$pref_currency_signField$inv_it_unit_priceField</td><td class=\"tbl1-bottom\">$pref_currency_signField$inv_it_gross_totalField</td><td class=\"tbl1-bottom \">$pref_currency_signField$inv_it_tax_amountField</td><td colspan=2 class=\"tbl1-right tbl1-bottom\" >$pref_currency_signField$inv_it_totalField</td>
+			<td class=\"tbl1-left tbl1-bottom\" ></td><td class=\"tbl1-bottom\"></td><td class=\"tbl1-bottom\">$pref_currency_signField$inv_it_unit_priceField</td><td class=\"tbl1-bottom\">$pref_currency_signField$inv_it_gross_totalField</td><td class=\"tbl1-bottom \">$pref_currency_signField$inv_it_tax_amountField</td><td align=right colspan=2 class=\"tbl1-right tbl1-bottom\" >$pref_currency_signField$inv_it_totalField</td>
                 </tr>
                 ";
         }
@@ -419,7 +592,7 @@ $display_block_details =  "
                                 <td class=\"tbl1-left tbl1-right\" colspan=7></td>
                         </tr>
                         <tr>
-                                <td class=\"tbl1-left tbl1-right\" colspan=7 align=left><i>$LANG_note:</i></td>
+                                <td class=\"tbl1-left tbl1-right\" colspan=7 align=left><b>$LANG_notes:</b></td>
                         </tr>
                         <tr>
                                 <td class=\"tbl1-left tbl1-right\" colspan=7>$inv_noteField</td>
@@ -442,7 +615,7 @@ $display_block_details =  "
 	</tr>	
 
         <tr class=\"tbl1-left tbl1-right\">
-                <td class=\"tbl1-left\" colspan=3 ></td><td align=left colspan=2>$LANG_tax_total</td><td class=\"tbl1-right\" >$pref_currency_signField$invoice_total_taxField</td>
+                <td class=\"tbl1-left\" colspan=3 ></td><td align=left colspan=2>$LANG_tax_total</td><td align=right class=\"tbl1-right\" >$pref_currency_signField$invoice_total_taxField</td>
         </tr>
 	<tr class=\"tbl1-left tbl1-right\" >
 		<td class=\"tbl1-left tbl1-right\" colspan=6 >
@@ -450,7 +623,7 @@ $display_block_details =  "
 		</td>
 	</tr>
         <tr class=\"tbl1-left tbl1-right tbl1-bottom\">
-                <td class=\"tbl1-left tbl1-bottom\" colspan=3></td><td class=\"tbl1-bottom\" align=left colspan=2><b>$pref_inv_wordingField $pp_invoice_amount</b></td><td  class=\"tbl1-bottom tbl1-right\" ><u>$pref_currency_signField$invoice_total_totalField</u></td>
+                <td class=\"tbl1-left tbl1-bottom\" colspan=3></td><td class=\"tbl1-bottom\" align=left colspan=2><b>$pref_inv_wordingField $LANG_amount</b></td><td  class=\"tbl1-bottom tbl1-right\" align=right><u>$pref_currency_signField$invoice_total_totalField</u></td>
         </tr>
 
 

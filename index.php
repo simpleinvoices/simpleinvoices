@@ -9,77 +9,90 @@ $conn = mysql_connect( $db_host, $db_user, $db_password );
 mysql_select_db( $db_name, $conn );
 
 #Largest debtor query - start
-$sql = "
-SELECT
-        si_customers.c_id as ID,
-        si_customers.c_name as Customer,
-        (select sum(inv_it_total) from si_invoice_items,si_invoices where  si_invoice_items.inv_it_invoice_id = si_invoices.inv_id and si_invoices.inv_customer_id = ID) as Total,
-        (select IF ( isnull(sum(ac_amount)), '0', sum(ac_amount)) from si_account_payments,si_invoices where si_account_payments.ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = ID) as Paid,
-        (select (Total - Paid)) as Owing
+if ($mysql > 4) {
+	$sql = "
+	SELECT	
+	        si_customers.c_id as ID,
+	        si_customers.c_name as Customer,
+	        (select sum(inv_it_total) from si_invoice_items,si_invoices where  si_invoice_items.inv_it_invoice_id = si_invoices.inv_id and si_invoices.inv_customer_id = ID) as Total,
+	        (select IF ( isnull(sum(ac_amount)), '0', sum(ac_amount)) from si_account_payments,si_invoices where si_account_payments.ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = ID) as Paid,
+	        (select (Total - Paid)) as Owing
+	FROM
+	        si_customers,si_invoices,si_invoice_items
+	WHERE
+	        si_invoice_items.inv_it_invoice_id = si_invoices.inv_id and si_invoices.inv_customer_id = c_id
+	GROUP BY
+	        Owing DESC
+	LIMIT 1;
+	";
 
-FROM
-        si_customers,si_invoices,si_invoice_items
-WHERE
-        si_invoice_items.inv_it_invoice_id = si_invoices.inv_id and si_invoices.inv_customer_id = c_id
-GROUP BY
-        Owing DESC
-LIMIT 1;
+	$result = mysql_query($sql, $conn) or die(mysql_error());
 
-";
-
-$result = mysql_query($sql, $conn) or die(mysql_error());
-
-while ($Array = mysql_fetch_array($result)) {
-        $largest_debtor = $Array['Customer'];
-};
+	while ($Array = mysql_fetch_array($result)) {
+       		$largest_debtor = $Array['Customer'];
+	};
+}
 #Largest debtor query - end
 
 #Top customer query - start
 
-$sql2 = "
-SELECT
-        si_customers.c_id as ID,
-        si_customers.c_name as Customer,
-        (select sum(inv_it_total) from si_invoice_items,si_invoices where  si_invoice_items.inv_it_invoice_id = si_invoices.inv_id and si_invoices.inv_customer_id = ID) as Total,
-        (select IF ( isnull(sum(ac_amount)), '0', sum(ac_amount)) from si_account_payments,si_invoices where si_account_payments.ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = ID) as Paid,
-        (select (Total - Paid)) as Owing
+if ($mysql > 4) {
+	$sql2 = "
+	SELECT
+		si_customers.c_id as ID,
+	        si_customers.c_name as Customer,
+       		(select sum(inv_it_total) from si_invoice_items,si_invoices where  si_invoice_items.inv_it_invoice_id = si_invoices.inv_id and si_invoices.inv_customer_id = ID) as Total,
+	        (select IF ( isnull(sum(ac_amount)), '0', sum(ac_amount)) from si_account_payments,si_invoices where si_account_payments.ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = ID) as Paid,
+	        (select (Total - Paid)) as Owing
 
-FROM
-        si_customers,si_invoices,si_invoice_items
-WHERE
-        si_invoice_items.inv_it_invoice_id = si_invoices.inv_id and si_invoices.inv_customer_id = c_id
-GROUP BY
-        Total DESC
-LIMIT 1;
-
+	FROM
+       		si_customers,si_invoices,si_invoice_items
+	WHERE
+	        si_invoice_items.inv_it_invoice_id = si_invoices.inv_id and si_invoices.inv_customer_id = c_id
+	GROUP BY
+	        Total DESC
+	LIMIT 1;
 ";
 
-$result2 = mysql_query($sql2, $conn) or die(mysql_error());
+	$result2 = mysql_query($sql2, $conn) or die(mysql_error());
 
-while ($Array2 = mysql_fetch_array($result2)) {
-        $top_customer = $Array2['Customer'];
-};
+	while ($Array2 = mysql_fetch_array($result2)) {
+        	$top_customer = $Array2['Customer'];
+	};
+}
 #Top customer query - end
 
 #Top biller query - start
+if ($mysql > 4) {
+	
+	$sql3 = "
+	SELECT
+		si_biller.b_name,  
+		sum(si_invoice_items.inv_it_total) as Total 
+	FROM 
+		si_biller, si_invoice_items, si_invoices 
+	WHERE 
+		si_invoices.inv_biller_id = si_biller.b_id and si_invoices.inv_id = si_invoice_items.inv_it_invoice_id GROUP BY b_name ORDER BY Total DESC LIMIT 1;
+	";
 
-$sql3 = "
-SELECT
-	si_biller.b_name,  
-	sum(si_invoice_items.inv_it_total) as Total 
-FROM 
-	si_biller, si_invoice_items, si_invoices 
-WHERE 
-	si_invoices.inv_biller_id = si_biller.b_id and si_invoices.inv_id = si_invoice_items.inv_it_invoice_id GROUP BY b_name ORDER BY Total DESC LIMIT 1;
+	$result3 = mysql_query($sql3, $conn) or die(mysql_error());
 
-";
-
-$result3 = mysql_query($sql3, $conn) or die(mysql_error());
-
-while ($Array3 = mysql_fetch_array($result3)) {
-        $top_biller = $Array3['b_name'];
-};
+	while ($Array3 = mysql_fetch_array($result3)) {
+	        $top_biller = $Array3['b_name'];
+	};
+}
 #Top biller query - start
+
+$display_block_notice .=" <div id=header>";
+
+$display_block_notice .="<b align=center>$title</b>";
+
+if ($mysql < 5) {
+	$display_block_notice .=" :: NOTE: As you are using Mysql 4 some features have been disabled";
+};
+
+$display_block_notice .="</div>";
+
 
 $display_block ="
 
@@ -351,6 +364,7 @@ $display_block ="
 <script type="text/javascript">
 window.onload=function(){
 Nifty("div#container");
+Nifty("div#subheader");
 Nifty("div#content,div#nav","same-height small");
 Nifty("div#header,div#footer","small");
 }
@@ -373,9 +387,7 @@ $mid->printFooter();
 <br>
 
 <div id="container">
-<div id=header>
-                <b align=center><?php echo $title; ?></b>
-</div>
+<?php echo $display_block_notice; ?>
 <br>
 <br>
 <br>

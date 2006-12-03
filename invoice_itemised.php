@@ -311,7 +311,7 @@ $mid->printFooter();
 </tr>
 
 <tr>
-        <td colspan=5 ><textarea input type=text name="invoice_itemised_note" rows=5 cols=70 WRAP=hard></textarea></td>
+        <td colspan=5 ><textarea input type=text name="invoice_itemised_note" rows=5 cols=70 WRAP=nowrap></textarea></td>
 </tr>
 
 

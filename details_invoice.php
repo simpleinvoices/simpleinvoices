@@ -303,7 +303,7 @@ if (  $_GET['invoice_style'] === 'Total' ) {
         	        <td colspan=6 class='details_screen'>$LANG_description</td>
 	        </tr>
 	        <tr>
-			<td colspan=6 ><textarea input type=text name=\"i_description\" rows=10 cols=70 WRAP=hard>$inv_it_descriptionField</textarea></td>
+			<td colspan=6 ><textarea input type=text name=\"i_description\" rows=10 cols=70 WRAP=nowrap>$inv_it_descriptionField</textarea></td>
         	</tr>
 	        <tr>       	         
 			<td class='details_screen'>$LANG_gross_total</td><td><input type=text name='inv_it_gross_total' value='$inv_it_gross_totalField' size=10> </td>
@@ -438,7 +438,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 
 			<td colspan=6 class='details_screen'>$LANG_description</td>
 		<tr>
-                        <td colspan=6 ><textarea input type=text name=\"consulting_item_note$line\" rows=5 cols=70 WRAP=hard>$inv_it_descriptionField</textarea></td>
+                        <td colspan=6 ><textarea input type=text name=\"consulting_item_note$line\" rows=5 cols=70 WRAP=nowrap>$inv_it_descriptionField</textarea></td>
                 </tr>
 
 		";
@@ -462,7 +462,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 				<td colspan=6 class='details_screen'>$LANG_note:</td>
 			</tr>
 			<tr>
-	                        <td colspan=6 ><textarea input type=text name=\"invoice_itemised_note\" rows=10 cols=70 WRAP=hard>$inv_noteField</textarea></td>
+	                        <td colspan=6 ><textarea input type=text name=\"invoice_itemised_note\" rows=10 cols=70 WRAP=nowrap>$inv_noteField</textarea></td>
 			</tr>
 	                <tr>
 	                         <td class='details_screen'>$LANG_tax</td><td>$display_block_tax</td>

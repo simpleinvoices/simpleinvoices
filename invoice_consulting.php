@@ -163,7 +163,7 @@ if (mysql_num_rows($result_products) == 0) {
                 echo "<tr>
                 <td><input type=text name='i_quantity$line' size=5></td><td input type=text name='i_description$line' size=50>$display_block_products</td></tr>
 <tr>
-        <td colspan=5 ><textarea input type=text name='line_item_description$line' rows=3 cols=80 WRAP=hard></textarea></td>
+        <td colspan=5 ><textarea input type=text name='line_item_description$line' rows=3 cols=80 WRAP=nowrap></textarea></td>
 </tr>
 
 ";
@@ -312,7 +312,7 @@ $mid->printFooter();
 </tr>
 
 <tr>
-        <td colspan=5 ><textarea input type=text name="invoice_consulting_note" rows=5 cols=80 WRAP=hard></textarea></td>
+        <td colspan=5 ><textarea input type=text name="invoice_consulting_note" rows=5 cols=80 WRAP=nowrap></textarea></td>
 </tr>
 
 <tr><td><?php echo $LANG_tax;?></td><td input type=text name="inv_it_tax" size=15> <?php echo $display_block_tax; ?></td>
