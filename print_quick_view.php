@@ -418,7 +418,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 		$display_block_details .=  "      
 		<tr>
 		<td colspan=6>
-		<table>
+		<table width=100%>
                         <tr>
                                 <td colspan=5></td>
                                 <td class='details_screen'><a href='#' align=right class=\"show-itemised\" onClick=\"$('.itemised').show();$('.show-itemised').hide();\">$LANG_show_details</a><a href='#' class=\"itemised\" onClick=\"$('.itemised').hide();$('.show-itemised').show();\">$LANG_hide_details</a> 
@@ -432,7 +432,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
                 $display_block_details .=  "
 		<tr>
 		<td colspan=6>
-		<table> 
+		<table width=100%> 
 			<tr>
 				<td colspan=6></td>
 				<td class='details_screen'><a href='#' align=right class=\"show-consulting\" onClick=\"$('.consulting').show();$('.show-consulting').hide();\">$LANG_show_details</a><a href='#' class=\"consulting\" onClick=\"$('.consulting').hide();$('.show-consulting').show();\">$LANG_hide_details</a> 
