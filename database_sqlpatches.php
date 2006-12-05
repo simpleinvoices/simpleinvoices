@@ -185,6 +185,14 @@ if ($_GET[op] == "run_updates") {
 		run_sql_patch(22,$sql_patch_name_22,$sql_patch_22,$sql_patch_update_22);
 		run_sql_patch(23,$sql_patch_name_23,$sql_patch_23,$sql_patch_update_23);
 		run_sql_patch(24,$sql_patch_name_24,$sql_patch_24,$sql_patch_update_24);
+		run_sql_patch(25,$sql_patch_name_25,$sql_patch_25,$sql_patch_update_25);
+		run_sql_patch(26,$sql_patch_name_26,$sql_patch_26,$sql_patch_update_26);
+		run_sql_patch(27,$sql_patch_name_27,$sql_patch_27,$sql_patch_update_27);
+		run_sql_patch(28,$sql_patch_name_28,$sql_patch_28,$sql_patch_update_28);
+		run_sql_patch(29,$sql_patch_name_29,$sql_patch_29,$sql_patch_update_29);
+		run_sql_patch(30,$sql_patch_name_30,$sql_patch_30,$sql_patch_update_30);
+		run_sql_patch(31,$sql_patch_name_31,$sql_patch_31,$sql_patch_update_31);
+		run_sql_patch(32,$sql_patch_name_32,$sql_patch_32,$sql_patch_update_32);
 
 		echo "<tr><td><br>The database patches have now been applied, please go back to the <a href='database_sqlpatches.php'>Database Upgrade Manager page</a> to see what patches have been applied. If all patches have been applied then there is now further action required</td></tr>";
 		echo "
@@ -261,6 +269,14 @@ else {
 	check_sql_patch(22,$sql_patch_name_22);
 	check_sql_patch(23,$sql_patch_name_23);
 	check_sql_patch(24,$sql_patch_name_24);
+	check_sql_patch(25,$sql_patch_name_25);
+	check_sql_patch(26,$sql_patch_name_26);
+	check_sql_patch(27,$sql_patch_name_27);
+	check_sql_patch(28,$sql_patch_name_28);
+	check_sql_patch(29,$sql_patch_name_29);
+	check_sql_patch(30,$sql_patch_name_30);
+	check_sql_patch(31,$sql_patch_name_31);
+	check_sql_patch(32,$sql_patch_name_32);
 
 		echo "
 		</table>

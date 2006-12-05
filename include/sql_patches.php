@@ -117,73 +117,164 @@ ADD b_co_footer TEXT";
         $sql_patch_24 = "ALTER TABLE `si_products` ADD `prod_notes` TEXT NOT NULL AFTER `prod_unit_price`";
         $sql_patch_update_24 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',24,'$sql_patch_name_24',20061026,'')";
 
-
+/*Custom fields patches - start */
         $sql_patch_name_25 = "";
-        $sql_patch_25 = "";
-        $sql_patch_update_25 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',25,'$sql_patch_name_25',20061111,'')";
+        $sql_patch_25 = "ALTER TABLE `si_customers` ADD `c_street_address2` VARCHAR( 50 ) AFTER `c_street_address` ";
+        $sql_patch_update_25 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',25,'$sql_patch_name_25',20061211,'')";
 	
 
+        $sql_patch_name_26 = "";
+        $sql_patch_26 = "
+	ALTER TABLE `si_customers` ADD `c_custom_field1` VARCHAR( 50 ) AFTER `c_notes` ,
+		ADD `c_custom_field2` VARCHAR( 50 ) AFTER `c_custom_field1` ,
+		ADD `c_custom_field3` VARCHAR( 50 ) AFTER `c_custom_field2` ,
+		ADD `c_custom_field4` VARCHAR( 50 ) AFTER `c_custom_field3` ;
+	";
+        $sql_patch_update_26 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',26,'$sql_patch_name_26',20061211,'')";
+
+        $sql_patch_name_27 = "";
+        $sql_patch_27 = "ALTER TABLE `si_customers` ADD `c_mobile_phone` VARCHAR( 50 ) AFTER `c_phone`";
+        $sql_patch_update_27 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',27,'$sql_patch_name_27',20061211,'')";
+
+
+        $sql_patch_name_28 = "";
+        $sql_patch_28 = "ALTER TABLE `si_biller` ADD `b_street_address2` VARCHAR( 50 ) AFTER `b_street_address` ";
+        $sql_patch_update_28 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',28,'$sql_patch_name_28',20061211,'')";
+
+
+        $sql_patch_name_29 = "";
+        $sql_patch_29 = "
+	ALTER TABLE `si_biller` ADD `b_custom_field1` VARCHAR( 50 ) AFTER `b_notes` ,
+		ADD `b_custom_field2` VARCHAR( 50 ) AFTER `b_custom_field1` ,
+		ADD `b_custom_field3` VARCHAR( 50 ) AFTER `b_custom_field2` ,
+		ADD `b_custom_field4` VARCHAR( 50 ) AFTER `b_custom_field3` ;
+	";
+        $sql_patch_update_29 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',29,'$sql_patch_name_29',20061211,'')";
+
+
+        $sql_patch_name_30 = "";
+        $sql_patch_30 = "
+		CREATE TABLE `si_custom_fields` (
+			`cf_id` INT NOT NULL AUTO_INCREMENT ,
+			`cf_custom_field` VARCHAR( 50 ) NOT NULL ,
+			`cf_custom_label` VARCHAR( 50 ) ,
+			`cf_display` VARCHAR( 1 ) DEFAULT '1' NOT NULL ,
+			PRIMARY KEY ( `cf_id` )
+		);
+	";
+        $sql_patch_update_30 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',30,'$sql_patch_name_30',20061211,'')";
+
+
+        $sql_patch_name_31 = "";
+        $sql_patch_31 = "
+	INSERT INTO `si_custom_fields` ( `cf_id` , `cf_custom_field` , `cf_custom_label` , `cf_display` )
+		VALUES (
+		'', 'biller_cf1', NULL , '0'
+		), (
+		'', 'biller_cf2', NULL , '0'
+		), (
+		'', 'biller_cf3', NULL , '0'
+		), (
+		'', 'biller_cf4', NULL , '0'
+		), (
+		'', 'customer_cf1', NULL , '0'
+		), (
+		'', 'customer_cf2', NULL , '0'
+		), (
+		'', 'customer_cf3', NULL , '0'
+		), (
+		'', 'customer_cf4', NULL , '0'
+		), (
+		'', 'product_cf1', NULL , '0'
+		), (
+		'', 'product_cf2', NULL , '0'
+		), (
+		'', 'product_cf3', NULL , '0'
+		), (
+		'', 'prod_custom_field4', NULL , '0'
+	);
+";
+        $sql_patch_update_31 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',31,'$sql_patch_name_31',20061211,'')";
+
+
+        $sql_patch_name_32 = "";
+        $sql_patch_32 = "
+	ALTER TABLE `si_products` ADD `prod_custom_field1` VARCHAR( 50 ) AFTER `prod_unit_price` ,
+		ADD `prod_custom_field2` VARCHAR( 50 ) AFTER `prod_custom_field1` ,
+		ADD `prod_custom_field3` VARCHAR( 50 ) AFTER `prod_custom_field2` ,
+		ADD `prod_custom_field4` VARCHAR( 50 ) AFTER `prod_custom_field3` ;
+	";
+        $sql_patch_update_32 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',32,'$sql_patch_name_32',20061211,'')";
+
+/*
         $sql_patch_name_25 = "";
         $sql_patch_25 = "";
-        $sql_patch_update_25 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',25,'$sql_patch_name_25',20061111,'')";
+        $sql_patch_update_25 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',25,'$sql_patch_name_25',20061211,'')";
+
+*/
 
 
-ALTER TABLE `si_customers` ADD `c_street_address2` VARCHAR( 50 ) AFTER `c_street_address` ;
-
-ALTER TABLE `si_customers` ADD `c_custom_field1` VARCHAR( 50 ) AFTER `c_notes` ,
-ADD `c_custom_field2` VARCHAR( 50 ) AFTER `c_custom_field1` ,
-ADD `c_custom_field3` VARCHAR( 50 ) AFTER `c_custom_field2` ,
-ADD `c_custom_field4` VARCHAR( 50 ) AFTER `c_custom_field3` ;
-
-ALTER TABLE `si_customers` ADD `c_mobile_phone` VARCHAR( 50 ) AFTER `c_phone` ;
-
-ALTER TABLE `si_biller` ADD `b_street_address2` VARCHAR( 50 ) AFTER `b_street_address` ;
-
-ALTER TABLE `si_biller` ADD `b_custom_field1` VARCHAR( 50 ) AFTER `b_notes` ,
-ADD `b_custom_field2` VARCHAR( 50 ) AFTER `b_custom_field1` ,
-ADD `b_custom_field3` VARCHAR( 50 ) AFTER `b_custom_field2` ,
-ADD `b_custom_field4` VARCHAR( 50 ) AFTER `b_custom_field3` ;
-
-CREATE TABLE `si_custom_fields` (
-`cf_id` INT NOT NULL AUTO_INCREMENT ,
-`cf_custom_field` VARCHAR( 50 ) NOT NULL ,
-`cf_custom_label` VARCHAR( 50 ) ,
-`cf_display` VARCHAR( 1 ) DEFAULT '1' NOT NULL ,
-PRIMARY KEY ( `cf_id` )
-);
-
-INSERT INTO `si_custom_fields` ( `cf_id` , `cf_custom_field` , `cf_custom_label` , `cf_display` )
-VALUES (
-'', 'biller_cf1', NULL , '0'
-), (
-'', 'biller_cf2', NULL , '0'
-), (
-'', 'biller_cf3', NULL , '0'
-), (
-'', 'biller_cf4', NULL , '0'
-), (
-'', 'customer_cf1', NULL , '0'
-), (
-'', 'customer_cf2', NULL , '0'
-), (
-'', 'customer_cf3', NULL , '0'
-), (
-'', 'customer_cf4', NULL , '0'
-), (
-'', 'product_cf1', NULL , '0'
-), (
-'', 'product_cf2', NULL , '0'
-), (
-'', 'product_cf3', NULL , '0'
-), (
-'', 'prod_custom_field4', NULL , '0'
-);
 
 
-ALTER TABLE `si_products` ADD `prod_custom_field1` VARCHAR( 50 ) AFTER `prod_unit_price` ,
-ADD `prod_custom_field2` VARCHAR( 50 ) AFTER `prod_custom_field1` ,
-ADD `prod_custom_field3` VARCHAR( 50 ) AFTER `prod_custom_field2` ,
-ADD `prod_custom_field4` VARCHAR( 50 ) AFTER `prod_custom_field3` ;
+
+
+
+#ALTER TABLE `si_customers` ADD `c_street_address2` VARCHAR( 50 ) AFTER `c_street_address` ;
+
+#ALTER TABLE `si_customers` ADD `c_custom_field1` VARCHAR( 50 ) AFTER `c_notes` ,
+#ADD `c_custom_field2` VARCHAR( 50 ) AFTER `c_custom_field1` ,
+#ADD `c_custom_field3` VARCHAR( 50 ) AFTER `c_custom_field2` ,
+#ADD `c_custom_field4` VARCHAR( 50 ) AFTER `c_custom_field3` ;
+
+#ALTER TABLE `si_customers` ADD `c_mobile_phone` VARCHAR( 50 ) AFTER `c_phone` ;
+
+#ALTER TABLE `si_biller` ADD `b_street_address2` VARCHAR( 50 ) AFTER `b_street_address` ;
+
+#ALTER TABLE `si_biller` ADD `b_custom_field1` VARCHAR( 50 ) AFTER `b_notes` ,
+#ADD `b_custom_field2` VARCHAR( 50 ) AFTER `b_custom_field1` ,
+#ADD `b_custom_field3` VARCHAR( 50 ) AFTER `b_custom_field2` ,
+#ADD `b_custom_field4` VARCHAR( 50 ) AFTER `b_custom_field3` ;
+
+#CREATE TABLE `si_custom_fields` (
+#`cf_id` INT NOT NULL AUTO_INCREMENT ,
+#`cf_custom_field` VARCHAR( 50 ) NOT NULL ,
+#`cf_custom_label` VARCHAR( 50 ) ,
+#`cf_display` VARCHAR( 1 ) DEFAULT '1' NOT NULL ,
+#PRIMARY KEY ( `cf_id` )
+#);
+
+#INSERT INTO `si_custom_fields` ( `cf_id` , `cf_custom_field` , `cf_custom_label` , `cf_display` )
+#VALUES (
+#'', 'biller_cf1', NULL , '0'
+#), (
+#'', 'biller_cf2', NULL , '0'
+#), (
+#'', 'biller_cf3', NULL , '0'
+#), (
+#'', 'biller_cf4', NULL , '0'
+#), (
+#'', 'customer_cf1', NULL , '0'
+#), (
+#'', 'customer_cf2', NULL , '0'
+#), (
+#'', 'customer_cf3', NULL , '0'
+#), (
+#'', 'customer_cf4', NULL , '0'
+#), (
+#'', 'product_cf1', NULL , '0'
+#), (
+#'', 'product_cf2', NULL , '0'
+#), (
+#'', 'product_cf3', NULL , '0'
+#), (
+#'', 'prod_custom_field4', NULL , '0'
+#);
+
+
+#ALTER TABLE `si_products` ADD `prod_custom_field1` VARCHAR( 50 ) AFTER `prod_unit_price` ,
+#ADD `prod_custom_field2` VARCHAR( 50 ) AFTER `prod_custom_field1` ,
+#ADD `prod_custom_field3` VARCHAR( 50 ) AFTER `prod_custom_field2` ,
+#ADD `prod_custom_field4` VARCHAR( 50 ) AFTER `prod_custom_field3` ;
 
 
 /*
