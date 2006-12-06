@@ -8,9 +8,9 @@
  		<script language="JavaScript" type="text/javascript" src="menu/include/layersmenu-library.js"></script> 
  		<script language="JavaScript" type="text/javascript" src="menu/include/layersmenu.js"></script> 
  		<?php 
- 		require_once $myDirPath . 'menu/lib/PHPLIB.php'; 
- 		require_once $myDirPath . 'menu/lib/layersmenu-common.inc.php'; 
- 		require_once $myDirPath . 'menu/lib/layersmenu.inc.php'; 
+ 		require_once 'menu/lib/PHPLIB.php'; 
+ 		require_once 'menu/lib/layersmenu-common.inc.php'; 
+ 		require_once 'menu/lib/layersmenu.inc.php'; 
  		//$mid = new LayersMenu(6, 7, 2, 5, 140); 
  		$mid = new LayersMenu(6, 7, 2, 1);      // Gtk2-like 
  		//$mid->setDownArrowImg('down-arrow.png'); 

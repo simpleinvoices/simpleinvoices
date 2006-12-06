@@ -50,7 +50,7 @@ $install_path = "/simpleinvoices";
 #size in pixels (640,800,1024)
 $pdf_screen_size = 800;
 #paper size (Letter,Legal,Executive,A0Oversize,A0,A1,A2,A3,A4,A5,B5,Folio,A6,A7,A8,A9,A10)
-$pdf_paper_size = A4;
+$pdf_paper_size = "A4";
 #left margin of the pdf
 $pdf_left_margin = 15;
 #right margin of the pdf
@@ -60,5 +60,7 @@ $pdf_top_margin = 15;
 #bottom margin of the pdf
 $pdf_bottom_margin = 15;
 
+#Error reporting
+error_reporting(E_ALL);
 
 ?>
