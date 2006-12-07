@@ -58,8 +58,8 @@
 ...|Zahlungseing&auml;unge per Kunde|./report_debtors_owing_by_customer.php
 ...|Nach Zahlungsdauer|./report_debtors_aging_total.php
 .|Einstellungen|./index.php
-..|System Voreinstellungen|./system_default_details.php
-..|Custom Fields|./manage_custom_fields.php
+..|System-Voreinstellungen|./system_default_details.php
+..|Benutzerdefinierte Felder|./manage_custom_fields.php
 ..|---
 ..|Steuersatz|manage_tax_rates.php|
 ...|Steuers&auml;tze verwalten|./manage_tax_rates.php
@@ -73,7 +73,7 @@
 ..|---
 ..|Datenbank Upgrade-Manager|./database_sqlpatches.php
 ..|Datenbank sichern|./backup_database.php
-..|Sanity check of invoices|./sanity_check.php
+..|Konsistenzpr&uuml;fung der Rechnungen|./sanity_check.php
 ..|---
 ..|Hilfe|inline_instructions.php
 ...|Installation|./inline_instructions.php#installation
