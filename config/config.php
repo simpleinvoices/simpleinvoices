@@ -7,8 +7,8 @@ $db_user = "root";
 $db_password = "";
 
 /*mysql version. basically if your using a version less than mysql 5 some features will be disabled*/
-$mysql = 4;
-#$mysql = 5;
+#$mysql = 4;
+$mysql = 5;
 
 /*Select language for Simple Invoices to use*/
 #$language = "castellano_spanish";
@@ -19,15 +19,10 @@ $language = "english_UK";
 #$language = "português_portuguese";
 #$language = "suomi_finnish";
 
-/*To change the theme, enter the name of the theme folder - defalut is gree*/
-#$theme = "web2";
+/*To change the theme, enter the name of the theme folder - defalut is google*/
 $theme = "google";
-#$theme = "jacksonville";
-#$theme = "napster";
-#$theme = "train101";
-#$theme = "3000k";
 
-$version = "20061026 stable";
+$version = "20061209 unstable";
 
 $config['date_format']  = 'Y-m-d'; #International format just the date
 #$config['date_format']  = 'Y-m-d h:m'; #Internalional format date and time 
