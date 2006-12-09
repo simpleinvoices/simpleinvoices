@@ -306,12 +306,12 @@ $display_block_top =  "
 		$tr++;
 		$display_block_top .= do_tr($tr);
         } 
-	/*phone details start*/
-        $display_block_top .= print_if_not_null($LANG_email, $b_emailField);
-        $display_block_top .= print_if_not_null($biller_custom_field_label1, $b_custom_field1Field);
-        $display_block_top .= print_if_not_null($biller_custom_field_label2, $b_custom_field2Field);
-        $display_block_top .= print_if_not_null($biller_custom_field_label3, $b_custom_field3Field);
-        $display_block_top .= print_if_not_null($biller_custom_field_label4, $b_custom_field4Field);
+	/*phone details end*/
+        $display_block_top .= print_if_not_null($LANG_email, $b_emailField,'blank','blank',5);
+        $display_block_top .= print_if_not_null($biller_custom_field_label1, $b_custom_field1Field,'blank','blank',5);
+        $display_block_top .= print_if_not_null($biller_custom_field_label2, $b_custom_field2Field,'blank','blank',5);
+        $display_block_top .= print_if_not_null($biller_custom_field_label3, $b_custom_field3Field,'blank','blank',5);
+        $display_block_top .= print_if_not_null($biller_custom_field_label4, $b_custom_field4Field,'blank','blank',5);
 
 $display_block_top .=  "
 	<tr >
@@ -354,13 +354,12 @@ $display_block_top .=  "
 		}
 	}
 	
-	$customer_merged_address = merge_address($c_cityField, $c_stateField, $c_zip_codeField, $c_street_addressField, $c_street_address2Field);
+	$customer_merged_address = merge_address($c_cityField, $c_stateField, $c_zip_codeField, $c_street_addressField, $c_street_address2Field,'blank','blank',3);
 	$display_block_top .= $customer_merged_address;
 
         /*country field start*/
          if ($c_countryField != null) {
                 $display_block_top .=  "
-                </tr>
                 <tr>
                         <td></td><td>$c_countryField</td>
                 </tr>
@@ -390,11 +389,11 @@ $display_block_top .=  "
         }
         /*phone details start*/
 
-	$display_block_top .= print_if_not_null($LANG_email, $c_emailField);
-	$display_block_top .= print_if_not_null($customer_custom_field_label1, $c_custom_field1Field);
-	$display_block_top .= print_if_not_null($customer_custom_field_label2, $c_custom_field2Field);
-	$display_block_top .= print_if_not_null($customer_custom_field_label3, $c_custom_field3Field);
-	$display_block_top .= print_if_not_null($customer_custom_field_label4, $c_custom_field4Field);
+	$display_block_top .= print_if_not_null($LANG_email, $c_emailField,'blank','blank',5);
+	$display_block_top .= print_if_not_null($customer_custom_field_label1, $c_custom_field1Field,'blank','blank',5);
+	$display_block_top .= print_if_not_null($customer_custom_field_label2, $c_custom_field2Field,'blank','blank',5);
+	$display_block_top .= print_if_not_null($customer_custom_field_label3, $c_custom_field3Field,'blank','blank',5);
+	$display_block_top .= print_if_not_null($customer_custom_field_label4, $c_custom_field4Field,'blank','blank',5);
 /*
         if ($c_emailField != null) {
                 $display_block_top .=  "

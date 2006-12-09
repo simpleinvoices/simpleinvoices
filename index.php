@@ -83,13 +83,45 @@ if ($mysql > 4) {
 }
 #Top biller query - start
 
-$display_block_notice .=" <div id=header>";
+$display_block_notice .=" <div id=\"header\">";
 
 $display_block_notice .="<b align=center>$title</b>";
 
 if ($mysql < 5) {
-	$display_block_notice .=" :: NOTE: As you are using Mysql 4 some features have been disabled";
+	$display_block_notice .=" 
+	</div>
+	<div id=\"subheader\">
+		NOTE: As you are using Mysql 4 some features have been disabled
+	</div id=\"subheader\">
+	";
 };
+
+$display_block_notice .="
+<script type=\"text/javascript\">
+if( $.browser.msie() ) { // defaults to undefined
+	document.write(\"</div><div id='subheader'>NOTE: As you are using MS Internet Explorer, some features of Simple Invoices have been disabled, please use <a href='http://www.getfirefox.com'>Firefox</a> to enable all features</div>\")
+	// Do something... ;
+}
+</script>
+";
+
+$display_block_notice .="
+<script type=\"text/javascript\">
+if( $.browser.konqueror() ) { // defaults to undefined
+        document.write(\"</div><div id='subheader'>NOTE: As you are using Konqueror, some features of Simple Invoices have been disabled, please use <a href='http://www.getfirefox.com'>Firefox</a> to enable all features</div id='subheader'>\")
+}
+</script>
+";
+
+$display_block_notice .="
+<script type=\"text/javascript\">
+if( $.browser.safari() ) { // defaults to undefined
+        document.write(\"</div><div id='subheader'>NOTE: As you are using Safari, some features of Simple Invoices may not work as expected, please use <a href='http://www.getfirefox.com'>Firefox</a> to enable all features</div id='subheader'>\")
+}
+</script>
+";
+
+
 
 $display_block_notice .="</div>";
 
@@ -370,8 +402,9 @@ Nifty("div#header,div#footer","small");
 }
 </script>
 
-                <script type="text/javascript" src="./include/jquery.js"></script>
-                <script type="text/javascript" src="./include/jquery.accordian.js"></script>
+<script type="text/javascript" src="./include/jquery.js"></script>
+<script type="text/javascript" src="./include/jquery.accordian.js"></script>
+<script type="text/javascript" src="./include/jquery.jqbrowser.js"></script>
 
 		<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/index.css">
 
@@ -389,16 +422,8 @@ $mid->printFooter();
 <div id="container">
 <?php echo $display_block_notice; ?>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <?php echo $display_block; ?>
 
-                </div>
-
-</div>
 
 </BODY>
 </HTML>

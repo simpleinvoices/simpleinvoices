@@ -7,8 +7,8 @@ $db_user = "root";
 $db_password = "";
 
 /*mysql version. basically if your using a version less than mysql 5 some features will be disabled*/
-#$mysql = 4;
-$mysql = 5;
+$mysql = 4;
+#$mysql = 5;
 
 /*Select language for Simple Invoices to use*/
 #$language = "castellano_spanish";
@@ -61,6 +61,7 @@ $pdf_top_margin = 15;
 $pdf_bottom_margin = 15;
 
 #Error reporting
-error_reporting(E_ALL);
+#error_reporting(E_ALL);
+#error_reporting(E_ALL & ~E_NOTICE);
 
 ?>

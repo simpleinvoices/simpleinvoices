@@ -1,14 +1,14 @@
                         /*The CSS code for the fronta page of Simple Invoices - start*/
                         body{background:#FFFFFF url('images/gb_top.gif') repeat-x; color: #222; margin: 0;      padding: 0;}
 
-                        #list1 { width:48%;  position:absolute; top:7em; right:1em; }
+                        #list1 { width:49%;  float:right }
                         .title { cursor:pointer; border:1px solid #CCCCCC; margin-top:0.5em; padding:0.1em; }
                         .on1  .title { background-color:#E4EFC7; }
                         .off1 .title { background-color:#E0E0E0; }
                         /*.content    { background-color:#F5F5F5; padding:0.1em; border:1px solid #C0C0C0; border-top-width:0; }*/
                         .content    { background-color:#FFF; padding:0.1em; border:1px solid #C0C0C0; border-top-width:0; }
 
-                        #list2 { width:48%; position:absolute; top:7em; left:1em; }
+                        #list2 { width:49%; float:left; }
                         .mytitle { cursor:pointer; border:1px solid #CCCCCC; margin-top:0.5em; padding:0.1em; }
                         .on  .mytitle { background-color:#E4EFC7; }
                         .off .mytitle { background-color:#E0E0E0; } 
@@ -36,7 +36,7 @@
 
                 /*The CSS for the round cornered boxes - niftycorners css -(header,subheader and footer are the colour boxes in Simple Invoices -  start*/
                 div#container{
-                    margin: 0 auto;padding:5px;text-align:left;background:#FFF}
+                   margin: 0 auto; padding:5px;text-align:left;background:#FFF}
                 div#header{background: #c3d9fF;Padding: 10px;text-align:center;font-size: 110%; }
                 div#subheader{background: #e0ecff;padding: 10px;text-align:center}
                 div#content{float:left;padding:10px 0;margin:5px 0;background: #778CCA}
