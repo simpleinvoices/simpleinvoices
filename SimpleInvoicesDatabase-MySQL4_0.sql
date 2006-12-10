@@ -17,7 +17,7 @@
 -- 
 
 CREATE TABLE `si_account_payments` (
-  `ac_id` int(10) NOT NULL,
+  `ac_id` int(10) NOT NULL auto_increment,
   `ac_inv_id` varchar(10) NOT NULL,
   `ac_amount` double(25,2) NOT NULL,
   `ac_notes` text NOT NULL,
@@ -40,7 +40,7 @@ INSERT INTO `si_account_payments` (`ac_id`, `ac_inv_id`, `ac_amount`, `ac_notes`
 -- 
 
 CREATE TABLE `si_biller` (
-  `b_id` int(10) NOT NULL,
+  `b_id` int(10) NOT NULL auto_increment,
   `b_name` varchar(50) default NULL,
   `b_street_address` varchar(50) default NULL,
   `b_street_address2` varchar(50) default NULL,
@@ -79,7 +79,7 @@ INSERT INTO `si_biller` (`b_id`, `b_name`, `b_street_address`, `b_street_address
 -- 
 
 CREATE TABLE `si_custom_fields` (
-  `cf_id` int(11) NOT NULL,
+  `cf_id` int(11) NOT NULL auto_increment,
   `cf_custom_field` varchar(50) NOT NULL,
   `cf_custom_label` varchar(50) default NULL,
   `cf_display` varchar(1) NOT NULL default '1',
@@ -110,7 +110,7 @@ INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `
 -- 
 
 CREATE TABLE `si_customers` (
-  `c_id` int(10) NOT NULL,
+  `c_id` int(10) NOT NULL auto_increment,
   `c_attention` varchar(50) default NULL,
   `c_name` varchar(50) default NULL,
   `c_street_address` varchar(50) default NULL,
@@ -147,7 +147,7 @@ INSERT INTO `si_customers` (`c_id`, `c_attention`, `c_name`, `c_street_address`,
 -- 
 
 CREATE TABLE `si_defaults` (
-  `def_id` int(10) NOT NULL,
+  `def_id` int(10) NOT NULL auto_increment,
   `def_biller` int(25) default NULL,
   `def_customer` int(25) default NULL,
   `def_tax` int(25) default NULL,
@@ -171,7 +171,7 @@ INSERT INTO `si_defaults` (`def_id`, `def_biller`, `def_customer`, `def_tax`, `d
 -- 
 
 CREATE TABLE `si_invoice_items` (
-  `inv_it_id` int(10) NOT NULL,
+  `inv_it_id` int(10) NOT NULL auto_increment,
   `inv_it_invoice_id` int(10) NOT NULL default '0',
   `inv_it_quantity` float NOT NULL default '0',
   `inv_it_product_id` int(10) default '0',
@@ -211,7 +211,7 @@ INSERT INTO `si_invoice_items` (`inv_it_id`, `inv_it_invoice_id`, `inv_it_quanti
 -- 
 
 CREATE TABLE `si_invoice_type` (
-  `inv_ty_id` int(11) NOT NULL,
+  `inv_ty_id` int(11) NOT NULL auto_increment, 
   `inv_ty_description` varchar(25) NOT NULL default '',
   PRIMARY KEY  (`inv_ty_id`)
 ) TYPE=MyISAM AUTO_INCREMENT=4 ;
@@ -231,7 +231,7 @@ INSERT INTO `si_invoice_type` (`inv_ty_id`, `inv_ty_description`) VALUES (3, 'Co
 -- 
 
 CREATE TABLE `si_invoices` (
-  `inv_id` int(10) NOT NULL,
+  `inv_id` int(10) NOT NULL auto_increment, 
   `inv_biller_id` int(10) NOT NULL default '0',
   `inv_customer_id` int(10) NOT NULL default '0',
   `inv_type` int(10) NOT NULL default '0',
@@ -260,7 +260,7 @@ INSERT INTO `si_invoices` (`inv_id`, `inv_biller_id`, `inv_customer_id`, `inv_ty
 -- 
 
 CREATE TABLE `si_payment_types` (
-  `pt_id` int(10) NOT NULL,
+  `pt_id` int(10) NOT NULL auto_increment,
   `pt_description` varchar(250) NOT NULL,
   `pt_enabled` varchar(1) NOT NULL default '1',
   PRIMARY KEY  (`pt_id`)
@@ -280,7 +280,7 @@ INSERT INTO `si_payment_types` (`pt_id`, `pt_description`, `pt_enabled`) VALUES 
 -- 
 
 CREATE TABLE `si_preferences` (
-  `pref_id` int(11) NOT NULL,
+  `pref_id` int(11) NOT NULL auto_increment,
   `pref_description` varchar(50) default NULL,
   `pref_currency_sign` varchar(50) default NULL,
   `pref_inv_heading` varchar(50) default NULL,
@@ -313,7 +313,7 @@ INSERT INTO `si_preferences` (`pref_id`, `pref_description`, `pref_currency_sign
 -- 
 
 CREATE TABLE `si_products` (
-  `prod_id` int(11) NOT NULL,
+  `prod_id` int(11) NOT NULL auto_increment,
   `prod_description` text NOT NULL,
   `prod_unit_price` decimal(25,2) default NULL,
   `prod_custom_field1` varchar(50) default NULL,
@@ -342,7 +342,7 @@ INSERT INTO `si_products` (`prod_id`, `prod_description`, `prod_unit_price`, `pr
 -- 
 
 CREATE TABLE `si_sql_patchmanager` (
-  `sql_id` int(11) NOT NULL,
+  `sql_id` int(11) NOT NULL auto_increment,
   `sql_patch_ref` varchar(50) NOT NULL default '',
   `sql_patch` varchar(50) NOT NULL default '',
   `sql_release` varchar(25) NOT NULL default '',
@@ -394,7 +394,7 @@ INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_
 -- 
 
 CREATE TABLE `si_tax` (
-  `tax_id` int(11) NOT NULL,
+  `tax_id` int(11) NOT NULL auto_increment,
   `tax_description` varchar(50) default NULL,
   `tax_percentage` decimal(10,2) default NULL,
   `tax_enabled` varchar(1) NOT NULL default '1',
