@@ -144,6 +144,28 @@ VALUES ('','1','Create si_sql_patchmanger table','20060514','$sql_patch_init')";
 
 }
 
+#Max patches applied - start
+$check_patches_sql = "
+        SELECT
+                count(sql_patch_ref) as count
+        FROM 
+                si_sql_patchmanager;
+        ";
+
+        $patches_result = mysql_query($check_patches_sql, $conn) or die(mysql_error());
+
+        while ($Array_patches = mysql_fetch_array($patches_result)) {
+                $max_patches_applied = $Array_patches['count'];
+        };
+
+	if ($max_patches_applied < $patch_count ) {
+		$patches_to_be_applied = $patch_count - $max_patches_applied;
+		$display_note = "<br>
+			<b>Note:</b>You have $patches_to_be_applied patches to be applied
+		";	
+	}
+#Top biller query - start
+
 
 
 
@@ -234,11 +256,11 @@ else {
 
 		echo "<br>
 		<div id='container'>
-		<div id='header'></div>
+		<div id='header'>Database Upgrade Manager $display_note</div>
 		<table align='center'>
 ";
 
-                echo "<tr><td align=center><i>Database Upgrade Manager</i><tr><td><br>The list below describes which patches have and have not been applied to the database, the aim is to have them all applied.  If there are patches that have not been applied to the Simple Invoices database, please run the Update database by clicking update </td></tr><tr align=center><td><br><a href='?op=run_updates'>UPDATE</a></td></tr></table><br>
+                echo "<tr></i><tr><td><br>The list below describes which patches have and have not been applied to the database, the aim is to have them all applied.  If there are patches that have not been applied to the Simple Invoices database, please run the Update database by clicking update </td></tr><tr align=center><td><br><a href='?op=run_updates'>UPDATE</a></td></tr></table><br>
 
 <a href=\"./documentation/text/text.html\" class=\"greybox\"><font color=\"red\">Warning:</font></a>
 ";

@@ -6,15 +6,34 @@ Simple Invoices - Changelog
 </head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<ul><li>2006-12-08
+<ul><li>2006-12-11
 	<ul>
 		<li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=29">Issue 29</a>
 		<li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=31&can=6&q=">Issue 31</a>
+		<li>Custom Fields added to billers, customers, and products
+		<li>Issue with blank fields and commas being displayed on the invoice has been fixed, now only fields which are not null get displayed and the commas appera in the right places
+		<li>Invoice templates updated to enable custom fields and moved to a more css base
+		<li>Language files updated
+		<li>More of Simple Invoices made translatable
+		<li>Manage Custom Fields page added
+		<li>Quick View: updated with show/hide buttons to toggle the amount of info displayed on screen, and alter for the Custom Fields
 		<li>Customer details page tab feature revamped to include an updated style 
 		<li>Index page updated, icons added and layout cleaned up
+		<li>Index page: warning added for MySQL4, IE, Konqueror, and Safari users
+		<li>Index page: warning added to notified if database patches are required to be run
+		<li>Database Upgrade Manager: updated to display the number of patches that need to be displayed
+		<li>Street address 2 field added to customers and billers
+		<li>Mobile phone field added to customers
+		<li>8 sql patches added (number 25 to number 23)
 		<li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=34&can=2&q=">Issue 34</a>
-	</li>
-</li>
+		
+		<li>Known issues with this release:
+			<ul>	
+				<li>PDF Print Preview: The border for the customer and biller details in print_preview.php doesn't show for the telephone fields 
+				<li>Konqueror: Some of the javascript features don't work in Konqueror
+			</ul>
+	</ul>
+</ul>
 <ul><li>2006-10-27
 	<ul>
 		<li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=29">Issue 29</a> fixed: Drop down lists now sorted alphabetically

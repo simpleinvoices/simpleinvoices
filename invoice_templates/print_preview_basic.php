@@ -298,13 +298,13 @@ $display_block_top =  "
 	if ($b_faxField != null) {
                 $display_block_top .=  "<td>$LANG_fax:</td><td>$b_faxField</td>";
 		$tr++;
-		$display_block_top .= do_tr($tr);
+		$display_block_top .= do_tr($tr,'blank-class');
 
         } 
 	if ($b_mobile_phoneField != null) {
                 $display_block_top .=  "<td>$LANG_mobile_short:</td><td>$b_mobile_phoneField</td>";
 		$tr++;
-		$display_block_top .= do_tr($tr);
+		$display_block_top .= do_tr($tr,'blank-class');
         } 
 	/*phone details end*/
         $display_block_top .= print_if_not_null($LANG_email, $b_emailField,'blank','blank',5);
@@ -379,13 +379,13 @@ $display_block_top .=  "
         if ($c_faxField != null) {
                 $display_block_top .=  "<td>$LANG_fax:</td><td>$c_faxField</td>";
                 $tr_c++;
-                $display_block_top .= do_tr($tr_c);
+                $display_block_top .= do_tr($tr_c,'blank-class');
 
         } 
         if ($c_mobile_phoneField != null) {
                 $display_block_top .=  "<td>$LANG_mobile_short:</td><td>$c_mobile_phoneField</td>";
                 $tr_c++;
-                $display_block_top .= do_tr($tr_c);
+                $display_block_top .= do_tr($tr_c,'blank-class');
         }
         /*phone details start*/
 
@@ -632,16 +632,16 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 		/*Get the custom fields and show them nicely*/
 		$display_block_details .= inv_itemised_cf($prod_custom_field_label1, $prod_custom_field1Field);
 		$inv_it_tr++;
-		$display_block_details .= do_tr($inv_it_tr);	
+		$display_block_details .= do_tr($inv_it_tr,'blank-class');	
 		$display_block_details .= inv_itemised_cf($prod_custom_field_label2, $prod_custom_field2Field);
 		$inv_it_tr++;
-		$display_block_details .= do_tr($inv_it_tr);	
+		$display_block_details .= do_tr($inv_it_tr,'blank-class');	
 		$display_block_details .= inv_itemised_cf($prod_custom_field_label3, $prod_custom_field3Field);
 		$inv_it_tr++;
-		$display_block_details .= do_tr($inv_it_tr);	
+		$display_block_details .= do_tr($inv_it_tr,'blank-class');	
 		$display_block_details .= inv_itemised_cf($prod_custom_field_label4, $prod_custom_field4Field);
 		$inv_it_tr++;
-		$display_block_details .= do_tr($inv_it_tr);	
+		$display_block_details .= do_tr($inv_it_tr,'blank-class');	
 		$inv_it_tr = 0;
 
                 $display_block_details .=  " 
@@ -667,16 +667,16 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
                 /*Get the custom fields and show them nicely*/
                 $display_block_details .= inv_itemised_cf($prod_custom_field_label1, $prod_custom_field1Field);
                 $inv_it_tr++;
-                $display_block_details .= do_tr($inv_it_tr);    
+                $display_block_details .= do_tr($inv_it_tr,'blank-class');    
                 $display_block_details .= inv_itemised_cf($prod_custom_field_label2, $prod_custom_field2Field);
                 $inv_it_tr++;
-                $display_block_details .= do_tr($inv_it_tr);    
+                $display_block_details .= do_tr($inv_it_tr,'blank-class');    
                 $display_block_details .= inv_itemised_cf($prod_custom_field_label3, $prod_custom_field3Field);
                 $inv_it_tr++;
-                $display_block_details .= do_tr($inv_it_tr);    
+                $display_block_details .= do_tr($inv_it_tr,'blank-class');    
                 $display_block_details .= inv_itemised_cf($prod_custom_field_label4, $prod_custom_field4Field);
                 $inv_it_tr++;
-                $display_block_details .= do_tr($inv_it_tr);    
+                $display_block_details .= do_tr($inv_it_tr,'blank-class');    
                 $inv_it_tr = 0;
 
                 $display_block_details .=  " 

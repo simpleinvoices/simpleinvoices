@@ -3,6 +3,7 @@
 include('./include/include_main.php'); 
 #include('./config/config.php'); 
 include("./lang/$language.inc.php");
+include('./include/sql_patches.php');
 #include('./include/menu.php');
 
 $conn = mysql_connect( $db_host, $db_user, $db_password );
@@ -83,6 +84,23 @@ if ($mysql > 4) {
 }
 #Top biller query - start
 
+
+#Max patches applied - start
+$sql4 = "
+        SELECT
+                count(sql_patch_ref) as count
+        FROM 
+                si_sql_patchmanager;
+        ";
+
+        $result4 = mysql_query($sql4, $conn) or die(mysql_error());
+
+        while ($Array4 = mysql_fetch_array($result4)) {
+                $max_patches_applied = $Array4['count'];
+        };
+#Top biller query - start
+
+
 $display_block_notice .=" <div id=\"header\">";
 
 $display_block_notice .="<b align=center>$title</b>";
@@ -95,6 +113,16 @@ if ($mysql < 5) {
 	</div id=\"subheader\">
 	";
 };
+
+if ($patch_count > $max_patches_applied) {
+        $display_block_notice .=" 
+        </div>
+        <div id=\"subheader\">
+                NOTE: There are database patches that need to be applied, please select 'Database Upgrade Manager' from the Options menu and follow the instructions
+        </div id=\"subheader\">
+        ";
+};
+
 
 $display_block_notice .="
 <script type=\"text/javascript\">
