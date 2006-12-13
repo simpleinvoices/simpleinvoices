@@ -238,6 +238,14 @@ ADD b_co_footer TEXT";
         $sql_patch_update_32 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',32,'$sql_patch_name_32',20061211,'')";
 	$patch_count++;
 
+        $sql_patch_name_33 = "Alter product custom field 4";
+        $sql_patch_33 = "
+		UPDATE `si_custom_fields` SET `cf_custom_field` = 'product_cf4' WHERE `si_custom_fields`.`cf_id` =12 LIMIT 1 ;
+        ";
+        $sql_patch_update_33 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',33,'$sql_patch_name_33',20061214,'')";
+        $patch_count++;
+
+
 /*
         $sql_patch_name_25 = "";
         $sql_patch_25 = "";

@@ -196,7 +196,7 @@ $customer_custom_field_label4 = get_custom_field_label(customer_cf4,'.');
 #product custom fields
 $prod_custom_field_label1 = get_custom_field_label(product_cf1,'.');
 $prod_custom_field_label2 = get_custom_field_label(product_cf2,'.');
-$prod_custom_field_label3 = get_custom_field_label(pruduct_cf3,'.');
+$prod_custom_field_label3 = get_custom_field_label(product_cf3,'.');
 $prod_custom_field_label4 = get_custom_field_label(product_cf4,'.');
 
 
