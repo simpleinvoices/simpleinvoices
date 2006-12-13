@@ -267,7 +267,7 @@ $display_block_enabled = "<select name=\"c_enabled\">
 		<td><input type="text" name="c_phone" value="{$c_phoneField}" size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_phone} - MOBILE CHANGE</td>
+		<td class="details_screen">{$LANG_mobile_phone}</td>
 		<td><input type="text" name="c_mobile_phone" value="{$c_mobile_phoneField}" size="50" /></td>
 	</tr>
 	<tr>

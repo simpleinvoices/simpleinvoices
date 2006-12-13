@@ -92,7 +92,7 @@ echo <<<EOD
 	<td class="details_screen">{$LANG_phone}</td><td><input type=text name="c_phone" size=25></td>
 </tr>
 <tr>
-	<td class="details_screen">{$LANG_phone} MOBILE _ CHANGE</td><td><input type=text name="c_mobile_phone" size=25></td>
+	<td class="details_screen">{$LANG_mobile_phone}</td><td><input type=text name="c_mobile_phone" size=25></td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG_fax}</td><td><input type=text name="c_fax" size=25></td>
