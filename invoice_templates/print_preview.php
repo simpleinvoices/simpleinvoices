@@ -268,7 +268,11 @@ $display_block_top =  "
         }
         /*country field end*/
 
-        /*phone details start*/
+        /*phone details start */
+	$display_block_top .= print_if_not_null($LANG_phone_short, $b_phoneField,'tbl1-left','tbl1-right',3);
+	$display_block_top .= print_if_not_null($LANG_fax, $b_faxField,'tbl1-left','tbl1-right',3);
+	$display_block_top .= print_if_not_null($LANG_mobile_short, $b_mobile_phoneField,'tbl1-left','tbl1-right',3);
+	/*
         if ($b_phoneField != null OR $b_phoneField != null OR $b_mobile_phoneField != null) {
                 $display_block_top .=  "<tr class='tbl1-left tbl1-right'>";
         }
@@ -288,9 +292,7 @@ $display_block_top =  "
                 $tr_b++;
                 $display_block_top .= do_tr($tr_b,'tbl1-left tbl1-right');
         }
-        /*phone details end*/
-
-
+        phone details end*/
 
         $display_block_top .= print_if_not_null($LANG_email, $b_emailField,'tbl1-left','tbl1-right',3);
         $display_block_top .= print_if_not_null($biller_custom_field_label1, $b_custom_field1Field,'tbl1-left','tbl1-right',3);
@@ -358,6 +360,10 @@ $display_block_top =  "
         /*country field end*/
 
         /*phone details start*/
+	$display_block_top .= print_if_not_null($LANG_phone_short, $c_phoneField,'tbl1-left','tbl1-right',3);
+	$display_block_top .= print_if_not_null($LANG_fax, $c_faxField,'tbl1-left','tbl1-right',3);
+	$display_block_top .= print_if_not_null($LANG_mobile_short, $c_mobile_phoneField,'tbl1-left','tbl1-right',3);
+	/*
         if ($c_phoneField != null OR $c_phoneField != null OR $c_mobile_phoneField != null) {
                 $display_block_top .=  "<tr class=\"tbl1-left tbl1-right\">";
         }
@@ -377,6 +383,7 @@ $display_block_top =  "
                 $tr_c++;
                 $display_block_top .= do_tr($tr_c,'tbl1-left tbl1-right');
         }
+	*/
         /*phone details end*/
 
         $display_block_top .= print_if_not_null($LANG_email, $c_emailField,'tbl1-left','tbl1-right',3);
