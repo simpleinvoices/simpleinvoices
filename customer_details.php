@@ -70,8 +70,22 @@ while ($Array = mysql_fetch_array($result_print_customer) ) {
 #invoice total calc - end
 
 #amount paid calc - start
-		$x1 = "select  IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount from si_account_payments, si_invoices, si_invoice_items where si_account_payments.ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = $c_idField  and si_invoices.inv_id = si_invoice_items.inv_it_invoice_id";
-		//$x1 = "select  IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount from si_account_payments, si_invoices, si_invoice_items where si_account_payments.ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = $c_idField  and si_invoices.inv_id = si_invoice_items.inv_it_id";
+		$x1 = "
+                SELECT      
+                        IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount
+                FROM    
+                        si_account_payments, si_invoices
+                WHERE     
+                        si_account_payments.ac_inv_id = si_invoices.inv_id
+                AND   
+                        si_invoices.inv_customer_id = $c_idField
+		";
+/* old query 
+select  IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount from si_account_payments, si_invoices, si_invoice_items where si_account_payments.ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = $c_idField  and si_invoices.inv_id = si_invoice_items.inv_it_invoice_id"; 
+*/
+/* old query 
+$x1 = "select  IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount from si_account_payments, si_invoices, si_invoice_items where si_account_payments.ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = $c_idField  and si_invoices.inv_id = si_invoice_items.inv_it_id";
+*/
 		$result_x1 = mysql_query($x1, $conn) or die(mysql_error());
 		while ($result_x1Array = mysql_fetch_array($result_x1)) {
 			$invoice_paid_Field = $result_x1Array['amount'];

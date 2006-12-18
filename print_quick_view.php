@@ -158,7 +158,20 @@ while ($Array_defaults = mysql_fetch_array($result_print_defaults) ) {
 #invoice total calc - end
 
 #amount paid calc - start
-        $x2 = "select  IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount from si_account_payments, si_invoices, si_invoice_items where si_account_payments.ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = $c_idField  and si_invoices.inv_id = si_invoice_items.inv_it_invoice_id";
+        $x2 = "
+		SELECT  
+			IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount 
+		FROM 
+			si_account_payments, si_invoices 
+		WHERE 
+			si_account_payments.ac_inv_id = si_invoices.inv_id 
+		AND 
+			si_invoices.inv_customer_id = $c_idField";  	
+
+/* old query 	
+select  IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount from si_account_payments, si_invoices, si_invoice_items where si_account_payments.ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = $c_idField  and si_invoices.inv_id = si_invoice_items.inv_it_invoice_id";
+*/
+
         $result_x2 = mysql_query($x2, $conn) or die(mysql_error());
         while ($result_x2Array = mysql_fetch_array($result_x2)) {
                 $invoice_paid_Field_customer = $result_x2Array['amount'];
