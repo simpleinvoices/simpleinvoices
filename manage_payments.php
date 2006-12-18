@@ -125,7 +125,7 @@ $mid->printFooter();
 
 <script type="text/javascript" src="include/doFilter.js"></script>
 
-<script type="text/javascript" src="include/tablesorter.js"></script>
+<script type="text/javascript" src="include/jquery.tablesorter.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {

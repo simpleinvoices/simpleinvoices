@@ -321,7 +321,7 @@ EOD;
 <script type="text/javascript" src="include/jquery.js"></script>
 <script type="text/javascript" src="include/jquery.greybox.js"></script>
 <script type="text/javascript" src="include/jquery.greybox.conf.js"></script>
-<script type="text/javascript" src="include/tablesorter.js"></script>
+<script type="text/javascript" src="include/jquery.tablesorter.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {

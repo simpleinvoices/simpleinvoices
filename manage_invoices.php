@@ -40,7 +40,7 @@ $mid->printFooter();
 
     <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css" media="all"/>
 
-<script type="text/javascript" src="include/tablesorter.js"></script>
+<script type="text/javascript" src="include/jquery.tablesorter.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
