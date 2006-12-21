@@ -23,7 +23,7 @@ $page_header = <<<EOD
 <a href="invoice_consulting.php">{$LANG_add_new_invoice} - {$LANG_consulting_style}</a>
 
 EOD;
-include('./manage_invoices.inc.php');
+include('./src/invoices/manage.inc.php');
 
 ?>
 <?php include('./include/menu.php'); ?>

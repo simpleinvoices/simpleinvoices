@@ -1,10 +1,10 @@
 .|Home|./index.php|The main screen
-.|New Invoice|./manage_invoices.php
-..|Manage Invoices|./manage_invoices.php
+.|New Invoice|./index.php?section=invoices&view=manage
+..|Manage Invoices|./index.php?section=invoices&view=manage
 ..|---
-..|New Invoice - Itemised style|./invoice_itemised.php
-..|New Invoice - Total style|./invoice_total.php
-..|New Invoice - Consulting style|./invoice_consulting.php
+..|New Invoice - Itemised style|./index.php?section=invoices&view=itemised
+..|New Invoice - Total style|./index.php?section=invoices&view=total
+..|New Invoice - Consulting style|.//index.php?section=invoices&view=consulting
 .|Customers|./manage_customers.php
 ..|Add New Customer|./insert_customer.php
 ..|---
