@@ -64,9 +64,6 @@ while ($invoice_descArray = mysql_fetch_array($result_invoice_desc)) {
 $display_block =  "
 <table align=center>
 	<tr>
-		<td colspan=2 align=center><i>$map_page_header</i></td>
-	</tr>	
-	<tr>
 		<td class='details_screen'>$map_table_payment_id</td><td>$ac_idField</td>
 	</tr>
 	<tr>
@@ -123,7 +120,7 @@ $mid->printFooter();
 <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
 <br>
 <div id="container">
-<div id="header"></div>
+<div id="header"><b><?php echo $map_page_header; ?></div>
 
 <?php echo $display_block; ?>
 
