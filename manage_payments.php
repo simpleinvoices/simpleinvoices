@@ -112,10 +112,10 @@ while ($Array = mysql_fetch_array($result)) {
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <script type="text/javascript" src="./include/jquery.js"></script>
-    <script type="text/javascript" src="./include/jquery.greybox.js"></script>
-    <script type="text/javascript" src="./include/jquery.greybox.conf.js"></script>
+    <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 
     <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/jquery.thickbox.css" media="all"/>
 
 <?php include('./include/menu.php'); ?>
 <?php
@@ -167,7 +167,7 @@ Nifty("div#header,div#footer","small");
 <br>
 <div id="container">
 <?php echo $display_block; ?>
-<div id="footer"><a href="./documentation/text/wheres_the_edit_button.html" class="greybox">Wheres the Edit button?</a></div>
+<div id="footer"><a href="./documentation/text/wheres_the_edit_button.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Payments" class="thickbox">Wheres the Edit button?</a></div>
 </div>
 </div>
 

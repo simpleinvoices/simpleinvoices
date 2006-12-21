@@ -8,6 +8,7 @@ include("./include/validation.php");
 echo <<<EOD
 <title>{$title} :: {$LANG_process_payment}</title>
 <link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css" media="all" />
+<link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css" media="all" />
 
 EOD;
 
@@ -280,12 +281,12 @@ $(document).ready(function() {
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_invoice_id}
-		<a href="./documentation/text/process_payment_inv_id.html" class="greybox"><font color="blue">*</font></a></td>
+		<a href="./documentation/text/process_payment_inv_id.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Process payments" class="thickbox"><font color="blue">*</font></a></td>
 		<td><input type="text" id="ac_me" name="ac_inv_id" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_details}
-		<a href="./documentation/text/process_payment_details.html" class="greybox"><font color="blue">*</font></a></td>
+		<a href="./documentation/text/process_payment_details.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Process payments" class="thickbox"><font color="blue">*</font></a></td>
 		<td id="js_total"><i>{$LANG_select_invoice}</i> </td>
 	</tr>
 	<tr>
@@ -324,8 +325,7 @@ echo <<<EOD
 <script type="text/javascript" src="include/jquery.dom_creator.js"></script>
 <script type="text/javascript" src="include/jquery.datePicker.js"></script>
 <script type='text/javascript' src='include/jquery.autocomplete.js'></script>
-<script type="text/javascript" src="./include/jquery.greybox.js"></script>
-<script type="text/javascript" src="./include/jquery.greybox.conf.js"></script>
+<script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 
 <script type="text/javascript" src="niftycube.js"></script>
 <script type="text/javascript">

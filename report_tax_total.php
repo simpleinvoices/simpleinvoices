@@ -9,11 +9,11 @@ Nifty("div#content,div#nav","same-height small");
 Nifty("div#header,div#footer","small");
 }
 </script>
-<!-- greybox js and css stuff -->
+<!-- thickbox js and css stuff -->
     <script type="text/javascript" src="./include/jquery.js"></script>
-    <script type="text/javascript" src="./include/jquery.greybox.js"></script>
-    <script type="text/javascript" src="./include/jquery.greybox.conf.js"></script>
+    <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
     <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/jquery.thickbox.css" media="all"/>
 
 <title><?php echo $title; echo $mi_page_title; ?></title>
 </head>
@@ -45,7 +45,7 @@ $mid->printFooter();
    $oRpt->setDatabase("$db_name");
    $oRpt->run();
 
-   $error =  "<a href=\"./documentation/text/reports_xsl.html\" class=\"greybox\"><font color=\"red\">Got \"OOOOPS, THERE'S AN ERROR HERE.\" error?</font></a>";
+   $error =  "<a href=\"./documentation/text/reports_xsl.html?keepThis=true&TB_iframe=true&height=300&width=650\" title=\"Info :: Reports\" class=\"thickbox\"><font color=\"red\">Got \"OOOOPS, THERE'S AN ERROR HERE.\" error?</font></a>";
    echo $error;
 ?>
 

@@ -226,7 +226,7 @@ $display_block_top =  "
 		<td class=account>$LANG_total:</td><td class=account>$pref_currency_signField$invoice_total_Field</td>              
 		<td class=account><a href='manage_payments.php?inv_id=$inv_idField'>$LANG_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field</td>
 		<td class=account>$LANG_owing:</td><td class=account><u>$pref_currency_signField$invoice_owing_Field</u></td>
-		<td class=account><a href='documentation/text/age.html' class=\"greybox\">$LANG_age:</a></td><td class=account nowrap >$invoice_age</td>
+		<td class=account><a href='documentation/text/age.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Invoice age" class="thickbox">$LANG_age:</a></td><td class=account nowrap >$invoice_age</td>
 		<td></td><td></td>
 		<td class=account>$LANG_total:</td><td class=account>$pref_currency_signField$invoice_total_Field_customer</td>
 		<td class=account><a href='manage_payments.php?c_id=$c_idField'>$LANG_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field_customer</td>
@@ -705,9 +705,9 @@ $display_block_bottom =  "
 	  $('.notes').hide();
   	});
     </script>
-    <script type="text/javascript" src="./include/jquery.greybox.js"></script>
-    <script type="text/javascript" src="./include/jquery.greybox.conf.js"></script>
+    <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
     <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/jquery.thickbox.css" media="all"/>
 
 <script type="text/javascript" src="niftycube.js"></script>
 <script type="text/javascript">

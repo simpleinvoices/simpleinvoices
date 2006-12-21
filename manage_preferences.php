@@ -3,8 +3,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <script type="text/javascript" src="./include/jquery.js"></script>
-  <script type="text/javascript" src="./include/jquery.greybox.js"></script>
-  <script type="text/javascript" src="./include/jquery.greybox.conf.js"></script>
+  <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 
 <?php
 include('./include/include_main.php');
@@ -12,6 +11,7 @@ include('./include/include_main.php');
 echo <<<EOD
 	<title>{$title} :: {$LANG_manage_preferences}</title>
 	<link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css" media="all" />
 
 EOD;
 
@@ -124,7 +124,7 @@ Nifty("div#header,div#footer","small");
 <br>
 <div id="container">
 <?php echo $display_block; ?>
-<div id="footer"><a href="./documentation/text/inv_pref_what_the.html" class="greybox">What's all this "Invoice Preference" stuff about?</a></div>
+<div id="footer"><a href="./documentation/text/inv_pref_what_the.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Invoice preference" class="thickbox">What's all this "Invoice Preference" stuff about?</a></div>
 </div>
 </div>
 

@@ -8,6 +8,7 @@ include("./include/validation.php");
 echo <<<EOD
 <title>{$title} :: {$LANG_customer_details}</title>
 <link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css" />
+<link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css" />
 
 EOD;
 jsBegin();
@@ -78,19 +79,19 @@ if ($_GET['action'] == "view") {
 		<td>{$prod_unit_priceField}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label1} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td>
+		<td class="details_screen">{$prod_custom_field_label1} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
 		<td>{$prod_custom_field1Field}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label2} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td>
+		<td class="details_screen">{$prod_custom_field_label2} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
 		<td>{$prod_custom_field2Field}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label3} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td>
+		<td class="details_screen">{$prod_custom_field_label3} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
 		<td>{$prod_custom_field3Field}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label4} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td>
+		<td class="details_screen">{$prod_custom_field_label4} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
 		<td>{$prod_custom_field4Field}</td>
 	</tr>
 	<tr>
@@ -136,19 +137,19 @@ $display_block = <<<EOD
 		<td><input type="text" name="prod_unit_price" size="25" value="{$prod_unit_priceField}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label1} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td>
+		<td class="details_screen">{$prod_custom_field_label1} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
 		<td><input type="text" name="prod_custom_field1" size="50" value="{$prod_custom_field1Field}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label2} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td>
+		<td class="details_screen">{$prod_custom_field_label2} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
 		<td><input type="text" name="prod_custom_field2" size="50" value="{$prod_custom_field2Field}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label3} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td>
+		<td class="details_screen">{$prod_custom_field_label3} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
 		<td><input type="text" name="prod_custom_field3" size="50" value="{$prod_custom_field3Field}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label4} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td>
+		<td class="details_screen">{$prod_custom_field_label4} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
 		<td><input type="text" name="prod_custom_field4" size="50" value="{$prod_custom_field4Field}" /></td>
 	</tr>
 	<tr>
@@ -181,8 +182,7 @@ Nifty("div#header,div#footer","small");
 }
 </script>
 <script language="javascript" type="text/javascript" src="include/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="include/jquery.greybox.js"></script>
-<script language="javascript" type="text/javascript" src="include/jquery.greybox.conf.js"></script>
+<script language="javascript" type="text/javascript" src="include/jquery.thickbox.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 </head>

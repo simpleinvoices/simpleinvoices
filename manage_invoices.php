@@ -6,6 +6,7 @@ include('./include/include_main.php');
 echo <<<EOD
 <title>{$title} :: {$LANG_manage_invoices}</title>
 <link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css"> 
+<link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css"> 
 
 EOD;
 #insert customer
@@ -35,8 +36,7 @@ $mid->printFooter();
 <script type="text/javascript" src="include/doFilter.js"></script>
 
 <script type="text/javascript" src="include/jquery.js"></script>
-    <script type="text/javascript" src="./include/jquery.greybox.js"></script>
-    <script type="text/javascript" src="./include/jquery.greybox.conf.js"></script>
+    <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 
     <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css" media="all"/>
 
@@ -78,7 +78,7 @@ Nifty("div#header,div#footer","small");
 <br>
 <div id="container">
 <?php echo $display_block; ?>
-<div id="footer"><a href="./documentation/text/manage_invoices.html" class="greybox">What's all these different columns?</a></div>
+<div id="footer"><a href="./documentation/text/manage_invoices.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Manage invoices" class="thickbox">What's all these different columns?</a></div>
 </div>
 </div>
 
