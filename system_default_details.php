@@ -77,9 +77,6 @@ $display_block =  "
 	
 	<table align=center>
 	<tr>
-		<td colspan=3 align=center><i>System defaults</i></td>
-	</tr>	
-	<tr>
 		<td class='details_screen'><a href='manage_system_defaults.php?submit=biller'>Edit</a></td><td class='details_screen'>Biller</td><td>$b_nameField</td>
 	</tr>
 	<tr>
@@ -133,7 +130,7 @@ $mid->printFooter();
 <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
 <br>
 <div id="container">
-<div id="header"></div>
+<div id="header"><b>System defaults</b></div>
 <?php echo $display_block; ?>
 <div id="footer">
 <!--

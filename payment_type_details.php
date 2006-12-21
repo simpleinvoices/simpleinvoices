@@ -47,9 +47,6 @@ $display_block = <<<EOD
 	
 	<table align="center">
 	<tr>
-		<td colspan="2" align="center"><i>{$LANG_payment_type}</i></td>
-	</tr>	
-	<tr>
 		<td class="details_screen">{$LANG_payment_type_id}</td><td>{$pt_idField}</td>
 	</tr>
 	<tr>
@@ -81,9 +78,6 @@ $display_block = <<<EOD
 
 	<table align=center>
 	<tr>
-		<td colspan="2" align="center"><i>{$LANG_payment_type}</i></td>
-	</tr>
-	<tr>
 		<td class="details_screen">{$LANG_payment_type_id}</td>
 		<td>{$pt_idField}</td>
 	</tr>
@@ -102,9 +96,9 @@ EOD;
 
 $footer = <<<EOD
 
-<p><input type="submit" name="cancel" value="{$LANG_cancel}" />
+<input type="submit" name="cancel" value="{$LANG_cancel}" />
 <input type="submit" name="save_payment_type" value="{$LANG_save_payment_type}" />
-<input type="hidden" name="op" value="edit_payment_type" /></p>
+<input type="hidden" name="op" value="edit_payment_type" />
 
 EOD;
 }
@@ -129,7 +123,7 @@ echo <<<EOD
 <form name="frmpost" action="insert_action.php?submit={$_GET['submit']}"
  method="post" onsubmit="return frmpost_Validator(this)">
 <div id="container">
-<div id="header"></div>
+<div id="header"><b>{$LANG_payment_type}</b></div>
 {$display_block}
 <div id="footer">
 {$footer}
