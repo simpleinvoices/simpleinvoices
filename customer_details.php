@@ -7,6 +7,7 @@ include('./include/include_main.php');
 echo <<<EOD
 <title>{$title} :: {$LANG_customer_details}</title>
 <link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css">
+<link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css">
 
 EOD;
 /* validataion code */
@@ -132,7 +133,7 @@ if ($_GET['action'] === 'view') {
 		<td>{$invoice_paid_Field}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_attention_short} <a href="documentation/text/customer_contact.html" class="greybox">*</a></td>
+		<td class="details_screen">{$LANG_attention_short} <a href="documentation/text/customer_contact.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Customer contact" class="thickbox">*</a></td>
 		<td colspan="2">{$c_attentionField}</td><td colspan=2></td>
 		<td class="details_screen">{$LANG_total_owing}</td><td><u>{$invoice_owing_Field}</u></td>
 	</tr>
@@ -140,7 +141,7 @@ if ($_GET['action'] === 'view') {
 		<td class="details_screen">{$LANG_street}</td><td>{$c_street_addressField}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_street2} <a href="./documentation/text/street2.html" class="greybox">*</a></td><td>{$c_street_address2Field}</td>
+		<td class="details_screen">{$LANG_street2} <a href="./documentation/text/street2.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Street address 2" class="thickbox">*</a></td><td>{$c_street_address2Field}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_city}</td><td>{$c_cityField}</td>
@@ -181,16 +182,16 @@ $display_block .= <<<EOD
 			<p>
 			<table>
 			<tr>
-				<td class="details_screen">{$customer_custom_field_label1} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td><td>{$c_custom_field1Field}</td>
+				<td class="details_screen">{$customer_custom_field_label1} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td><td>{$c_custom_field1Field}</td>
 			</tr>
 			<tr>
-				<td class="details_screen">{$customer_custom_field_label2} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td><td>{$c_custom_field2Field}</td>
+				<td class="details_screen">{$customer_custom_field_label2} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td><td>{$c_custom_field2Field}</td>
 			</tr>
 			<tr>
-				<td class="details_screen">{$customer_custom_field_label3} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td><td>{$c_custom_field3Field}</td>
+				<td class="details_screen">{$customer_custom_field_label3} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td><td>{$c_custom_field3Field}</td>
 			</tr>
 			<tr>
-				<td class="details_screen">{$customer_custom_field_label4} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td><td>{$c_custom_field4Field}</td>
+				<td class="details_screen">{$customer_custom_field_label4} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td><td>{$c_custom_field4Field}</td>
 			</tr>		
 			</table>	
 			</p>
@@ -250,7 +251,7 @@ $display_block_enabled = "<select name=\"c_enabled\">
 		<td><input type="text" name="c_name" value="{$c_nameField}" size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_attention_short} <a href="documentation/text/customer_contact.html" class="greybox">*</a></td>
+		<td class="details_screen">{$LANG_attention_short} <a href="documentation/text/customer_contact.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom contact" class="thickbox">*</a></td>
 		<td><input type="text" name="c_attention" value="{$c_attentionField}" size="50" /></td>
 	</tr>
 	<tr>
@@ -258,7 +259,7 @@ $display_block_enabled = "<select name=\"c_enabled\">
 		<td><input type="text" name="c_street_address" value="{$c_street_addressField}" size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_street2} <a href="./documentation/text/street2.html" class="greybox">*</a></td>
+		<td class="details_screen">{$LANG_street2} <a href="./documentation/text/street2.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Street address 2" class="thickbox">*</a></td>
 		<td><input type="text" name="c_street_address2" value="{$c_street_address2Field}" size="50" /></td>
 	</tr>
 	<tr>
@@ -294,19 +295,19 @@ $display_block_enabled = "<select name=\"c_enabled\">
 		<td><input type="text" name="c_email" value="{$c_emailField}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customer_custom_field_label1} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td>
+		<td class="details_screen">{$customer_custom_field_label1} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
 		<td><input type="text" name="c_custom_field1" value="{$c_custom_field1Field}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customer_custom_field_label2} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td>
+		<td class="details_screen">{$customer_custom_field_label2} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
 		<td><input type="text" name="c_custom_field2" value="{$c_custom_field2Field}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customer_custom_field_label3} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td>
+		<td class="details_screen">{$customer_custom_field_label3} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
 		<td><input type="text" name="c_custom_field3" value="{$c_custom_field3Field}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customer_custom_field_label4} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td>
+		<td class="details_screen">{$customer_custom_field_label4} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
 		<td><input type="text" name="c_custom_field4" value="{$c_custom_field4Field}" size="50" /></td
 	</tr>
 	<tr>
@@ -333,8 +334,7 @@ EOD;
 <script type="text/javascript" src="include/doFilter.js"></script>
 
 <script type="text/javascript" src="include/jquery.js"></script>
-<script type="text/javascript" src="include/jquery.greybox.js"></script>
-<script type="text/javascript" src="include/jquery.greybox.conf.js"></script>
+<script type="text/javascript" src="include/jquery.thickbox.js"></script>
 <script type="text/javascript" src="include/jquery.tablesorter.js"></script>
 
 <script type="text/javascript">

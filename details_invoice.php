@@ -494,10 +494,10 @@ $display_block_bottom =  "
 <head>
 <?php include('./include/menu.php'); ?>
     <script type="text/javascript" src="./include/jquery.js"></script>
-    <script type="text/javascript" src="./include/jquery.greybox.js"></script>
-    <script type="text/javascript" src="./include/jquery.greybox.conf.js"></script>
+    <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 
     <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/jquery.thickbox.css" media="all"/>
 
 <script type="text/javascript" src="niftycube.js"></script>
 <script type="text/javascript">

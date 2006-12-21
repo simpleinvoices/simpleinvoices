@@ -263,7 +263,7 @@ else {
 
                 echo "<tr></i><tr><td><br>The list below describes which patches have and have not been applied to the database, the aim is to have them all applied.  If there are patches that have not been applied to the Simple Invoices database, please run the Update database by clicking update </td></tr><tr align=center><td><br><a href='?op=run_updates'>UPDATE</a></td></tr></table><br>
 
-<a href=\"./documentation/text/text.html\" class=\"greybox\"><font color=\"red\">Warning:</font></a>
+<a href=\"./documentation/text/text.html?keepThis=true&TB_iframe=true&height=300&width=500\" title=\"Info :: Database upgrade warning\" class=\"thickbox\"><font color=\"red\">Warning:</font></a>
 ";
 
 		echo "<div id='container'>
@@ -339,10 +339,10 @@ else {
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="text/javascript" src="./include/jquery.js"></script>
-    <script type="text/javascript" src="./include/jquery.greybox.js"></script>
-    <script type="text/javascript" src="./include/jquery.greybox.conf.js"></script>
+    <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 
     <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/jquery.thickbox.css" media="all"/>
 
 <script type="text/javascript" src="niftycube.js"></script>
 <script type="text/javascript">

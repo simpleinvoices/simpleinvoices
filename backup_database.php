@@ -18,7 +18,7 @@ $display_block ="<br>
 <table align=center><tr><td align=center><i>Database Backup</i><br></td></tr>";
 $display_block .= $oBack->output; 
 $display_block .= "<tr><td><br><br>Your database has now been backed up to the file database_backups/simple_invoices_backup_$today.sql, you can now continue using Simple Invoices as normal</td></tr>
-<tr><td><br><a href=\"./documentation/text/backup_database_fwrite.html\" class=\"greybox\"><font color=\"red\">Got fwrite errors?</a></font></td></tr></table>"; 
+<tr><td><br><a href=\"./documentation/text/backup_database_fwrite.html?keepThis=true&TB_iframe=true&height=300&width=500\" title=\"Info :: Database backup - fwrite\" class=\"thickbox\"><font color=\"red\">Got fwrite errors?</a></font></td></tr></table>"; 
 
 }
 
@@ -29,7 +29,7 @@ $display_block ="
 <tr><td><br><br>To make a backup of your Simple Invoices database click the below link</td></tr>
 <tr><td align=center><br><a href='?op=backup_db'>BACKUP DATABASE NOW</a><br><br><br></td></tr>
 <tr><td>Note: this will backup your database to a file into your database_backups directory</td></tr>
-<tr><td><a href=\"./documentation/text/backup_database.html\" class=\"greybox\"><font color=\"red\">Extra information</font></td></tr></table>
+<tr><td><a href=\"./documentation/text/backup_database.html?keepThis=true&TB_iframe=true&height=300&width=500\" title=\"Info :: Database backup\" class=\"thickbox\"><font color=\"red\">Extra information</font></td></tr></table>
 
 ";
 
@@ -46,10 +46,8 @@ $display_block ="
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- CSS -->
     <script type="text/javascript" src="./include/jquery.js"></script>
-    <script type="text/javascript" src="./include/jquery.greybox.js"></script>
-    <script type="text/javascript" src="./include/jquery.greybox.conf.js"></script>
+    <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css" media="all"/>
 
 <script type="text/javascript" src="niftycube.js"></script>
 <script type="text/javascript">
@@ -71,6 +69,7 @@ $mid->printFooter();
 ?>
 
 <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
+<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/jquery.thickbox.css">
 <br>
 <div id="container">
 <div id="header"></div>

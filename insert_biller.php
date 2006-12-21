@@ -8,6 +8,7 @@ include("./include/validation.php");
 echo <<<EOD
 <title>Simple Invoices :: {$LANG_add_biller}</title>
 <link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css" media="all"/>
+<link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css" media="all"/>
 
 EOD;
 jsBegin();
@@ -72,8 +73,7 @@ Nifty("div#header,div#footer","small");
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 <script type="text/javascript" src="./include/jquery.js"></script>
-    <script type="text/javascript" src="./include/jquery.greybox.js"></script>
-    <script type="text/javascript" src="./include/jquery.greybox.conf.js"></script>
+<script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 </head>
 
 <BODY>
@@ -106,7 +106,7 @@ echo <<<EOD
 		<td>{$LANG_street}</td><td><input type=text name="b_street_address" size=25></td>
 	</tr>
 	<tr>
-		<td>{$LANG_street2} <a href="./documentation/text/street2.html" class="greybox">*</a></td><td><input type=text name="b_street_address2" size=25></td>
+		<td>{$LANG_street2} <a href="./documentation/text/street2.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Street address 2" class="thickbox">*</a></td><td><input type=text name="b_street_address2" size=25></td>
 	</tr>
 	<tr>
 		<td>{$LANG_city}</td><td><input type=text name="b_city" size=25></td>
@@ -133,19 +133,19 @@ echo <<<EOD
 		<td>{$LANG_email}</td><td><input type=text name="b_email" size=25></td>
 	</tr>
 	<tr>
-		<td>{$biller_custom_field_label1} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td><td><input type=text name="b_custom_field1" size=25></td>
+		<td>{$biller_custom_field_label1} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td><td><input type=text name="b_custom_field1" size=25></td>
 	</tr>
 	<tr>
-		<td>{$biller_custom_field_label2} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td><td><input type=text name="b_custom_field2" size=25></td>
+		<td>{$biller_custom_field_label2} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td><td><input type=text name="b_custom_field2" size=25></td>
 	</tr>
 	<tr>
-		<td>{$biller_custom_field_label3} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td><td><input type=text name="b_custom_field3" size=25></td>
+		<td>{$biller_custom_field_label3} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td><td><input type=text name="b_custom_field3" size=25></td>
 	</tr>
 	<tr>
-		<td>{$biller_custom_field_label4} <a href="./documentation/text/custom_fields.html" class="greybox">*</a></td><td><input type=text name="b_custom_field4" size=25></td>
+		<td>{$biller_custom_field_label4} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td><td><input type=text name="b_custom_field4" size=25></td>
 	</tr>
 	<tr>
-		<td>{$LANG_logo_file} <a href="./documentation/text/insert_biller_text.html" class="greybox">*</a></td><td>{$display_block_logo_list}</td>
+		<td>{$LANG_logo_file} <a href="./documentation/text/insert_biller_text.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td><td>{$display_block_logo_list}</td>
 	</tr>
 	<tr>
 		<td>{$LANG_invoice_footer}</td><td><textarea input type=text name="b_co_footer" rows=4 cols=50></textarea></td>
