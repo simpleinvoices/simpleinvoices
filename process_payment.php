@@ -175,10 +175,7 @@ if (mysql_num_rows($result) == 0) {
 if ($op === "pay_selected_invoice") {
 
 	$display_block = <<<EOD
-	<table align="center">
-	<tr>
-		<th colspan="4" align="center"><b>{$LANG_process_payment}</b></th>
-	</tr>
+	<table align="center">	
 	<tr>
 		<td class="details_screen">{$LANG_invoice_id}</td>
 		<td><input type="hidden" name="ac_inv_id" value="{$inv_idField}" />{$inv_idField}</td>
@@ -277,9 +274,6 @@ $(document).ready(function() {
 
 <table align="center">
 	<tr>
-		<th colspan="6" align="center"><b>{$LANG_process_payment}</b></th>
-	</tr>
-	<tr>
 		<td class="details_screen">{$LANG_invoice_id}
 		<a href="./documentation/text/process_payment_inv_id.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Process payments" class="thickbox"><font color="blue">*</font></a></td>
 		<td><input type="text" id="ac_me" name="ac_inv_id" /></td>
@@ -363,8 +357,7 @@ echo <<<EOD
 
 <form name="frmpost" action="insert_action.php" method="post" onsubmit="return frmpost_Validator(this)">
 <div id="container">
-<div id="header">
-</div>
+<div id="header"><b>{$LANG_process_payment}</b></div>
 
 {$display_block}
 

@@ -50,6 +50,7 @@ $LANG_customer_account = "Customer Account";
 $LANG_customer_add = "Add New Customer";
 $LANG_customer_contact = "Customer contact (Attn)";
 $LANG_customer_details = "Customer details";
+$LANG_customer_edit = "Edit Customer";
 $LANG_customer_id = "Customer ID";
 $LANG_customer_name = "Customer name";
 $LANG_customers = "Customers";

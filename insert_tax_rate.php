@@ -44,15 +44,7 @@ echo <<<EOD
 
 <FORM name="frmpost" ACTION="insert_action.php" METHOD=POST onsubmit="return frmpost_Validator(this)">
 <div id="container">
-<div id="header">
-
-<table align=center>
-	<tr>
-		<th colspan=3 align=center><b>&nbsp;{$LANG_tax_rate_to_add}&nbsp;</b></th>
-	</tr>
-</table>
-
-</div id="header">
+<div id="header"><b>{$LANG_tax_rate_to_add}</b></div id="header">
 <div id="subheader">
 
 <table align=center>

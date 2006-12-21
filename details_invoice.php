@@ -229,7 +229,7 @@ $display_block_top =  "
 
 	<table align=center>
 	<tr>
-		<td colspan=6 align=center><b>$pref_inv_headingField</b></td>
+		<td colspan=6 align=center></td>
 	</tr>
         <tr>
 		<td class='details_screen'>$pref_inv_wordingField $LANG_number_short</td><td><input type=hidden name=\"invoice_id\" value=$inv_idField size=15>$inv_idField</td>

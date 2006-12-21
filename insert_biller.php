@@ -88,12 +88,7 @@ echo <<<EOD
 <FORM name="frmpost" ACTION="insert_action.php" METHOD=POST onsubmit="return frmpost_Validator(this)">
 <div id="container">
 
-<div id="header">
-<table align=center>
-	<tr>
-		<th colspan="2" align="center"><b>&nbsp;{$LANG_biller_to_add}&nbsp;</b></th>
-	</tr>
-</table>
+<div id="header"><b>{$LANG_biller_to_add}</b></table>
 
 </div>
 <div id="subheader">

@@ -236,12 +236,9 @@ $display_block_enabled = "<select name=\"c_enabled\">
 </select>";
 
 	$display_block = <<<EOD
-	<div id="header"></div>
+	<div id="header"><b>{$LANG_customer_edit}</b></div>
 
 	<table align="center">
-	<tr>
-		<td colspan="2" align="center"><i>{$LANG_customer}</i></td>
-	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_customer} {$LANG_id}</td>
 		<td>{$c_idField}</td>
