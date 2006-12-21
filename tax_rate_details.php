@@ -109,9 +109,9 @@ EOD;
 
 $footer = <<<EOD
 
-<p><input type="submit" name="cancel" value="{$LANG_cancel}" />
+<input type="submit" name="cancel" value="{$LANG_cancel}" />
 <input type="submit" name="save_tax_rate" value="{$LANG_save_tax_rate}" />
-<input type="hidden" name="op" value="edit_tax_rate" /></p>
+<input type="hidden" name="op" value="edit_tax_rate" />
 
 EOD;
 }
@@ -136,7 +136,7 @@ echo <<<EOD
 <form name="frmpost" action="insert_action.php?submit={$_GET['submit']}"
  method="post" onsubmit="return frmpost_Validator(this)">
 <div id="container">
-<div id="header">{$LANG_tax_rate}</div>
+<div id="header"><b>{$LANG_tax_rate}</b></div>
 {$display_block}
 <div id="footer">
 {$footer}
