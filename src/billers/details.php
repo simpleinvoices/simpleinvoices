@@ -67,7 +67,7 @@ while ($Array = mysql_fetch_array($result_print_biller) ) {
 
 /*drop down list code for invoice logo */
 
-$dirname="logo";
+$dirname="images/logo";
    $ext = array("jpg", "png", "jpeg", "gif");
    $files = array();
    if($handle = opendir($dirname)) {

@@ -157,7 +157,7 @@ $display_block_notice .="</div>";
 $display_block ="
 
                 <div id=\"list1\">
-                <h2><img src=\"./images/reports.png\"></img>$LANG_stats</h2>
+                <h2><img src=\"./images/common/reports.png\"></img>$LANG_stats</h2>
                         <div id=\"item11\">
 
                                 <div class=\"title\">$LANG_stats_debtor</div>
@@ -196,7 +196,7 @@ $display_block ="
 
                <div id=\"list2\">
 
-                <h2><img src=\"./images/menu.png\">$LANG_shortcut</h2>
+                <h2><img src=\"./images/common/menu.png\">$LANG_shortcut</h2>
 
                         <div id=\"item21\">
                                 <div class=\"mytitle\">$LANG_getting_started</div>
@@ -205,13 +205,13 @@ $display_block ="
                                         <tr>
                                                 <td width=10%>
                                         		<a href=\"./inline_instructions.php#faqs-what\">
-								<img src=\"images/question.png\"></img>
+								<img src=\"images/common/question.png\"></img>
 								 $LANG_faqs_what
 							</a>
                                 		</td>		
 						<td width=10%>
 		                                        <a href=\"./inline_instructions.php#faqs-need\">
-	                                                	<img src=\"images/question.png\"></img>
+	                                                	<img src=\"images/common/question.png\"></img>
 								$LANG_faqs_need
 							</a>
                                 		</td>		
@@ -219,13 +219,13 @@ $display_block ="
 					<tr>
 						<td width=10%>
 		                                        <a href=\"inline_instructions.php#faqs-how\">
-	                                                	<img src=\"images/question.png\"></img>
+	                                                	<img src=\"images/common/question.png\"></img>
 								$LANG_faqs_how
 							</a>
                                 		</td>		
 						<td width=10%>
                 		                        <a href=\"inline_instructions.php#faqs-types\">
-	                                                	<img src=\"images/question.png\"></img>
+	                                                	<img src=\"images/common/question.png\"></img>
 								$LANG_faqs_type
 							</a>
                                 		</td>		
@@ -241,19 +241,19 @@ $display_block ="
 					<tr>
 						<td width=10%>
 				                        <a href=\"invoice_itemised.php\">
-								<img src=\"images/itemised.png\"></img>
+								<img src=\"images/common/itemised.png\"></img>
 								$LANG_itemised_style
 							</a>
                                 		</td>		
 						<td width=10%>
 				        		<a href=\"invoice_total.php\">
-								<img src=\"images/total.png\"></img>
+								<img src=\"images/common/total.png\"></img>
 								$LANG_total_style
 							</a>
 						</td>
 						<td width=10%>
 		                                        <a href=\"invoice_consulting.php\">
-								<img src=\"images/consulting.png\"></img>
+								<img src=\"images/common/consulting.png\"></img>
 								$LANG_consulting_style
 							</a>
                 				</td>
@@ -261,7 +261,7 @@ $display_block ="
 					<tr>
 						<td colspan=3 align=center>
                 		                        <a href=\"inline_instructions.php#faqs-types\">
-	                                                	<img src=\"images/question.png\"></img>
+	                                                	<img src=\"images/common/question.png\"></img>
 								$LANG_faqs_type
 							</a>
                                 		</td>		
@@ -276,7 +276,7 @@ $display_block ="
 					<tr>
 						<td width=10% align=center>
                                         		<a href=\"manage_invoices.php\">
-								<img src=\"images/manage.png\"></img>
+								<img src=\"images/common/manage.png\"></img>
 								$LANG_manage_invoices
 							</a>
 						</td>
@@ -292,19 +292,19 @@ $display_block ="
                                         <tr>
                                                 <td width=10%>
 		                                        <a href=\"insert_customer.php\">
-                                                        	<img src=\"images/add.png\"></img>
+                                                        	<img src=\"images/common/add.png\"></img>
 								$indx_insert_customer
 							</a>
                                                 </td>
                                                 <td width=10%>
 		                                        <a href=\"insert_biller.php\">
-                                                        	<img src=\"images/add.png\"></img>
+                                                        	<img src=\"images/common/add.png\"></img>
 								$indx_insert_biller
 							</a>
 						</td>
                                                 <td width=10%>
                                 		        <a href=\"insert_product.php\">
-                                                        	<img src=\"images/add.png\"></img>
+                                                        	<img src=\"images/common/add.png\"></img>
 								$indx_insert_product
 							</a>
 						</td>
@@ -312,19 +312,19 @@ $display_block ="
 					<tr>
                                                 <td width=10%>
                 		                        <a href=\"manage_customers.php\">
-                                                        	<img src=\"images/customers.png\"></img>
+                                                        	<img src=\"images/common/customers.png\"></img>
 								Manage Customers
 							</a>
 						</td>
                                                 <td width=10%>
                                         		<a href=\"manage_billers.php\">
-                                                        	<img src=\"images/biller.png\"></img>
+                                                        	<img src=\"images/common/biller.png\"></img>
 								Manage Billers
 							</a>
 						</td>
                                                 <td width=10%>
 		                                        <a href=\"manage_products.php\">
-                                                        	<img src=\"images/products.png\"></img>
+                                                        	<img src=\"images/common/products.png\"></img>
 								Manage Products
 							</a>
 						</td>
@@ -339,19 +339,19 @@ $display_block ="
                                         <tr>
                                                 <td width=10%>
 		                                        <a href=\"system_default_details.php\">
-                                                        	<img src=\"images/defaults.png\"></img>
+                                                        	<img src=\"images/common/defaults.png\"></img>
 								$indx_options_sys_defaults
 							</a>
 						</td>
                                                 <td width=10%>
                 		                        <a href=\"manage_tax_rates.php\">
-                                                        	<img src=\"images/tax.png\"></img>
+                                                        	<img src=\"images/common/tax.png\"></img>
 								$indx_options_tax_rates
 							</a>
 						</td>
                                                 <td width=10%>
 		                                        <a href=\"manage_preferences.php\">
-                                                        	<img src=\"images/preferences.png\"></img>
+                                                        	<img src=\"images/common/preferences.png\"></img>
 								$indx_options_inv_pref
 							</a>
 						</td>
@@ -359,19 +359,19 @@ $display_block ="
 						<tr>
                                                 <td width=10%>
                                 		        <a href=\"manage_payment_types.php\">
-                                                        	<img src=\"images/payment.png\"></img>
+                                                        	<img src=\"images/common/payment.png\"></img>
 								$indx_options_payment_types
 							</a>
 						</td>
                                                 <td width=10%>
                 		                        <a href=\"database_sqlpatches.php\">
-                                                        	<img src=\"images/upgrade.png\"></img>
+                                                        	<img src=\"images/common/upgrade.png\"></img>
 								$indx_options_upgrade
 							</a>
 						</td>
                                                 <td width=10%>
 		                                        <a href=\"backup_database.php\">
-                                                        	<img src=\"images/backup.png\"></img>
+                                                        	<img src=\"images/common/backup.png\"></img>
 								$indx_options_backup
 							</a>
 						</td>
@@ -386,13 +386,13 @@ $display_block ="
                                         <tr>
                                                 <td width=10%>
                                         		<a href=\"inline_instructions.php#installation\">
-                                                        	<img src=\"images/help.png\"></img>
+                                                        	<img src=\"images/common/help.png\"></img>
 								$indx_help_install
 							</a>
 						</td>	
 						<td width=10%>
                 		                        <a href=\"inline_instructions.php#upgrading\">
-                                                        	<img src=\"images/help.png\"></img>
+                                                        	<img src=\"images/common/help.png\"></img>
 								$indx_help_upgrade
 							</a>
 						</td>	
@@ -400,7 +400,7 @@ $display_block ="
 					<tr>
 						<td width=10%>
 		                                        <a href=\"inline_instructions.php#prepare\">
-                                                        	<img src=\"images/help.png\"></img>
+                                                        	<img src=\"images/common/help.png\"></img>
 								$indx_help_prepare
 							</a>
 						</td>	
