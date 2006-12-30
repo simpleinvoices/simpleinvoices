@@ -1,62 +1,62 @@
 .|Home|./index.php|The main screen
-.|New Invoice|./index.php?section=invoices&view=manage
-..|Manage Invoices|./index.php?section=invoices&view=manage
+.|New Invoice|./index.php?module=invoices&view=manage
+..|Manage Invoices|./index.php?module=invoices&view=manage
 ..|---
-..|New Invoice - Itemised style|./index.php?section=invoices&view=itemised
-..|New Invoice - Total style|./index.php?section=invoices&view=total
-..|New Invoice - Consulting style|./index.php?section=invoices&view=consulting
-.|Customers|./index.php?section=customers&view=manage
-..|Add New Customer|./index.php?section=customers&view=add
+..|New Invoice - Itemised style|./index.php?module=invoices&view=itemised
+..|New Invoice - Total style|./index.php?module=invoices&view=total
+..|New Invoice - Consulting style|./index.php?module=invoices&view=consulting
+.|Customers|./index.php?module=customers&view=manage
+..|Add New Customer|./index.php?module=customers&view=add
 ..|---
-..|Manage Customers|./index.php?section=customers&view=manage
-.|Products|./index.php?section=products&view=manage
-..|Add New Product|./index.php?section=products&view=add
+..|Manage Customers|./index.php?module=customers&view=manage
+.|Products|./index.php?module=products&view=manage
+..|Add New Product|./index.php?module=products&view=add
 ..|---
-..|Manage Products|./index.php?section=products&view=manage
-.|Billers|./index.php?section=billers&view=manage
-..|Add New Biller|./index.php?section=billers&view=add
+..|Manage Products|./index.php?module=products&view=manage
+.|Billers|./index.php?module=billers&view=manage
+..|Add New Biller|./index.php?module=billers&view=add
 ..|---
-..|Manage Billers|./index.php?section=billers&view=manage
-.|Payments|./manage_payments.php
-..|Process Payment|./process_payment.php?op=pay_invoice
+..|Manage Billers|./index.php?module=billers&view=manage
+.|Payments|./index.php?module=payments&view=manage
+..|Process Payment|./index.php?module=payments&view=process.php?op=pay_invoice
 ..|---
-..|Manage Payments|./manage_payments.php
+..|Manage Payments|./index.php?module=payments&view=manage
 .|Reports|./index.php
-..|Sales|./index.php?section=reports&view=report_sales_total
-...|Total Sales|./index.php?section=reports&view=report_sales_total
-...|..|./index.php?section=reports&view=report_sales_total
-...|..|./index.php?section=reports&view=report_sales_total
-...|..|./index.php?section=reports&view=report_sales_total
-..|Sales by customers|./index.php?section=reports&view=report_sales_customers_total
-...|Total Sales by Customer|./index.php?section=reports&view=report_sales_customers_total
-...|..|./index.php?section=reports&view=report_sales_customers_total
-...|..|./index.php?section=reports&view=report_sales_customers_total
-...|..|./index.php?section=reports&view=report_sales_customers_total
-..|Tax|./index.php?section=reports&view=report_tax_total
-...|Taxes total|./index.php?section=reports&view=report_tax_total
-...|..|./index.php?section=reports&view=report_tax_total
-...|..|./index.php?section=reports&view=report_tax_total
-...|..|./index.php?section=reports&view=report_tax_total
-..|Product sales|./index.php?section=reports&view=report_products_sold_total
-...|Products sold - total|./index.php?section=reports&view=report_products_sold_total
-...|..|./index.php?section=reports&view=report_products_sold_total
-...|..|./index.php?section=reports&view=report_products_sold_total
-...|..|./index.php?section=reports&view=report_products_sold_total
-..|Products by customer|./index.php?section=reports&view=report_products_sold_by_customer
-...|Products sold - Customer - Total|./index.php?section=reports&view=report_products_sold_by_customer
-...|..|./index.php?section=reports&view=report_products_sold_by_customer
-...|..|./index.php?section=reports&view=report_products_sold_by_customer
-...|..|./index.php?section=reports&view=report_products_sold_by_customer
-..|Biller sales|./index.php?section=reports&view=report_biller_total
-...|Biller sales - Total|./index.php?section=reports&view=report_biller_total
+..|Sales|./index.php?module=reports&view=report_sales_total
+...|Total Sales|./index.php?module=reports&view=report_sales_total
+...|..|./index.php?module=reports&view=report_sales_total
+...|..|./index.php?module=reports&view=report_sales_total
+...|..|./index.php?module=reports&view=report_sales_total
+..|Sales by customers|./index.php?module=reports&view=report_sales_customers_total
+...|Total Sales by Customer|./index.php?module=reports&view=report_sales_customers_total
+...|..|./index.php?module=reports&view=report_sales_customers_total
+...|..|./index.php?module=reports&view=report_sales_customers_total
+...|..|./index.php?module=reports&view=report_sales_customers_total
+..|Tax|./index.php?module=reports&view=report_tax_total
+...|Taxes total|./index.php?module=reports&view=report_tax_total
+...|..|./index.php?module=reports&view=report_tax_total
+...|..|./index.php?module=reports&view=report_tax_total
+...|..|./index.php?module=reports&view=report_tax_total
+..|Product sales|./index.php?module=reports&view=report_products_sold_total
+...|Products sold - total|./index.php?module=reports&view=report_products_sold_total
+...|..|./index.php?module=reports&view=report_products_sold_total
+...|..|./index.php?module=reports&view=report_products_sold_total
+...|..|./index.php?module=reports&view=report_products_sold_total
+..|Products by customer|./index.php?module=reports&view=report_products_sold_by_customer
+...|Products sold - Customer - Total|./index.php?module=reports&view=report_products_sold_by_customer
+...|..|./index.php?module=reports&view=report_products_sold_by_customer
+...|..|./index.php?module=reports&view=report_products_sold_by_customer
+...|..|./index.php?module=reports&view=report_products_sold_by_customer
+..|Biller sales|./index.php?module=reports&view=report_biller_total
+...|Biller sales - Total|./index.php?module=reports&view=report_biller_total
 ...|Biller sales by Customer - Total|./report_biller_by_customer
-...|..|./index.php?section=reports&view=report_products_sold_by_customer
-...|..|./index.php?section=reports&view=report_products_sold_by_customer
-..|Debtors|./index.php?section=reports&view=report_debtors_by_amount
-...|Debtors by amount owed|./index.php?section=reports&view=report_debtors_by_amount
-...|Debtors by Aging periods|./index.php?section=reports&view=report_debtors_by_aging
-...|Total owed per customer|./index.php?section=reports&view=report_debtors_owing_by_customer
-...|Total by Aging periods|./index.php?section=reports&view=report_debtors_aging_total
+...|..|./index.php?module=reports&view=report_products_sold_by_customer
+...|..|./index.php?module=reports&view=report_products_sold_by_customer
+..|Debtors|./index.php?module=reports&view=report_debtors_by_amount
+...|Debtors by amount owed|./index.php?module=reports&view=report_debtors_by_amount
+...|Debtors by Aging periods|./index.php?module=reports&view=report_debtors_by_aging
+...|Total owed per customer|./index.php?module=reports&view=report_debtors_owing_by_customer
+...|Total by Aging periods|./index.php?module=reports&view=report_debtors_aging_total
 .|Options|./index.php
 ..|System Defaults|./system_default_details.php
 ..|Custom Fields|./manage_custom_fields.php
