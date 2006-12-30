@@ -58,7 +58,7 @@
 ...|Total owed per customer|./index.php?module=reports&view=report_debtors_owing_by_customer
 ...|Total by Aging periods|./index.php?module=reports&view=report_debtors_aging_total
 .|Options|./index.php
-..|System Defaults|./system_default_details.php
+..|System Defaults|./index.php?module=options&view=system_defaults
 ..|Custom Fields|./manage_custom_fields.php
 ..|---
 ..|Tax Rates|manage_tax_rates.php|
