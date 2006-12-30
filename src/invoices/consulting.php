@@ -254,7 +254,7 @@ $mid->printFooter();
 <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
 <br>
 
-<FORM name="frmpost" ACTION="insert_action.php?num=<?php echo $def_number_line_itemsField; ?>" METHOD=POST onsubmit="return frmpost_Validator(this)">
+<FORM name="frmpost" ACTION="index.php?module=invoices&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
 <div id="container">
 <div id="header">
 <table align=center>

@@ -85,7 +85,7 @@ echo <<<EOD
 
 <br>
 
-<FORM name="frmpost" ACTION="insert_action.php" METHOD=POST onsubmit="return frmpost_Validator(this)">
+<FORM name="frmpost" ACTION="index.php?module=billers&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
 <div id="container">
 
 <div id="header"><b>{$LANG_biller_to_add}</b></table>
@@ -159,7 +159,7 @@ echo <<<EOD
 </div>
 <div id="footer">
 	<input type="submit" name="submit" value="{$LANG_insert_biller}" />
-	<input type="hidden" name="op" value="insert_biller" />
+	<input type="hidden" name="action" value="insert_biller" />
 </div>
 
 EOD;

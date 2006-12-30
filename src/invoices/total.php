@@ -226,7 +226,7 @@ $mid->printFooter();
 <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
 
 
-<FORM name="frmpost" ACTION="insert_action.php" METHOD=POST onsubmit="return frmpost_Validator(this)">
+<FORM name="frmpost" ACTION="index.php?module=invoices&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
 <br>
 <div id="container">
 <div id="header">
