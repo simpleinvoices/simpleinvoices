@@ -18,7 +18,7 @@
 ..|---
 ..|Manage Billers|./index.php?module=billers&view=manage
 .|Payments|./index.php?module=payments&view=manage
-..|Process Payment|./index.php?module=payments&view=process&action=pay_invoice
+..|Process Payment|./index.php?module=payments&view=process&case=pay_invoice
 ..|---
 ..|Manage Payments|./index.php?module=payments&view=manage
 .|Reports|./index.php

@@ -10,7 +10,7 @@ $action = !empty( $_POST['action'] ) ? addslashes( $_POST['action'] ) : NULL;
 
 
 #insert invoice_total - start
-else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_invoice_total' ) {
+if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_invoice_total' ) {
 
 	$sql = "INSERT into
 			si_invoices (inv_id, inv_biller_id, inv_customer_id, inv_type,
@@ -77,7 +77,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 	} else { die(mysql_error());
 	}
 
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=print_quick_view.php?submit=$invoice_id&invoice_style=Total>";
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&invoice_style=Total>";
 
 }
 #insert invoice_total - end
@@ -143,7 +143,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 	} else { die(mysql_error());
 }
 
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=print_quick_view.php?submit=$invoice_id&invoice_style=Total>";
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&invoice_style=Total>";
 
 }
 
@@ -248,7 +248,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 	 endwhile;
 
 
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=print_quick_view.php?submit=$invoice_id&invoice_style=Itemised>";
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&invoice_style=Itemised>";
 
 
 }
@@ -381,7 +381,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 
 
 
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=print_quick_view.php?submit=$invoice_id&invoice_style=Itemised>";
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view?submit=$invoice_id&invoice_style=Itemised>";
 
 }
 
@@ -488,7 +488,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 	endwhile;
 
 
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=print_quick_view.php?submit=$invoice_id&invoice_style=Consulting>";
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&invoice_style=Consulting>";
 
 
 }
@@ -616,7 +616,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 		$product_id_items++;
 	 endwhile;
 
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=print_quick_view.php?submit=$invoice_id&invoice_style=Consulting>";
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&invoice_style=Consulting>";
 
 }
 
