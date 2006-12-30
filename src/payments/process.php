@@ -170,9 +170,9 @@ if (mysql_num_rows($result) == 0) {
 
 # Deal with op and add some basic sanity checking
 
-	$op = !empty( $_GET['op'] ) ? addslashes( $_GET['op'] ) : NULL;
+	$action = !empty( $_GET['action'] ) ? addslashes( $_GET['action'] ) : NULL;
 
-if ($op === "pay_selected_invoice") {
+if ($action === "pay_selected_invoice") {
 
 	$display_block = <<<EOD
 	<table align="center">	
@@ -217,7 +217,7 @@ EOD;
 
 }
 /*Code for the when the user want to process a payment and manually enter the invoice id ie, not come from print_preview - come from Process Payment menu item */
-else if ($op === "pay_invoice") {
+else if ($action === "pay_invoice") {
 	$display_block = <<<EOD
 
 <!-- jquery autocomplete sweet stuff - start -->
@@ -308,7 +308,7 @@ EOD;
 	$insert_action_op = "pay_invoice";
 
 }
-else if ($op === "pay_invoice_batch") {
+else if ($action === "pay_invoice_batch") {
 }
 
 echo <<<EOD
