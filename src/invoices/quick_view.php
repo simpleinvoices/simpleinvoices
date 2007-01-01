@@ -220,16 +220,16 @@ $display_block_top =  "
 	<div id=\"subheader\">
 	<table align=center>
 	<tr>
-		<td class=account colspan=8>$LANG_account_info</td><td width=5%></td><td width=5%></td><td class=account colspan=6><a href='customer_details.php?submit=$c_idField&action=view'>$LANG_customer_account</a></td>
+		<td class=account colspan=8>$LANG_account_info</td><td width=5%></td><td width=5%></td><td class=account colspan=6><a href='index.php?module=customers&view=details&submit=$c_idField&action=view'>$LANG_customer_account</a></td>
 	</tr>
 	<tr>
 		<td class=account>$LANG_total:</td><td class=account>$pref_currency_signField$invoice_total_Field</td>              
-		<td class=account><a href='manage_payments.php?inv_id=$inv_idField'>$LANG_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field</td>
+		<td class=account><a href='index.php?module=payments&view=manage&inv_id=$inv_idField'>$LANG_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field</td>
 		<td class=account>$LANG_owing:</td><td class=account><u>$pref_currency_signField$invoice_owing_Field</u></td>
 		<td class=account>$LANG_age <a href='documentation/info_pages/age.html?keepThis=true&TB_iframe=true&height=300&width=500' title='Info :: Invoice age' class='thickbox'>*</a>: </td><td class=account nowrap >$invoice_age</td>
 		<td></td><td></td>
 		<td class=account>$LANG_total:</td><td class=account>$pref_currency_signField$invoice_total_Field_customer</td>
-		<td class=account><a href='manage_payments.php?c_id=$c_idField'>$LANG_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field_customer</td>
+		<td class=account><a href='index.php?module=payments&view=manage&c_id=$c_idField'>$LANG_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field_customer</td>
 		<td class=account>$LANG_owing:</td><td class=account><u>$pref_currency_signField$invoice_owing_Field_customer</u></td>
 	</tr>
 	</table>
@@ -733,7 +733,7 @@ $mid->printFooter();
 <?php echo $LANG_quick_view_of; echo " "; echo $pref_inv_wordingField; ?> <?php echo $master_invoice_id; ?>
 <br>
 	<?php 
-	$url_pdf = "$_SERVER[HTTP_HOST]$install_path/invoice_templates/$def_inv_templateField?submit=$inv_idField&action=view&invoice_style=$inv_ty_descriptionField";
+	$url_pdf = "$_SERVER[HTTP_HOST]$install_path/invoices/templates/$def_inv_templateField.php?submit=$inv_idField&action=view&invoice_style=$inv_ty_descriptionField";
 	$url_pdf_encoded = urlencode($url_pdf); 
 	$url_for_pdf = "pdf/html2ps.php?process_mode=single&renderfields=1&renderlinks=1&renderimages=1&scalepoints=1&pixels=$pdf_screen_size&media=$pdf_paper_size&leftmargin=$pdf_left_margin&rightmargin=$pdf_right_margin&topmargin=$pdf_top_margin&bottommargin=$pdf_bottom_margin&transparency_workaround=1&imagequality_workaround=1&output=1&URL=$url_pdf_encoded";
 
@@ -741,18 +741,18 @@ $mid->printFooter();
 	?>
 <!--Actions heading - start-->
 <?php echo $LANG_actions;?>: 
-		<a href="invoice_templates/<?php echo $def_inv_templateField; ?>?submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>"> <?php echo $LANG_print_preview;?></a>
+		<a href="index.php?module=invoices&view=templates/<?php echo $def_inv_templateField; ?>&submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>"> <?php echo $LANG_print_preview;?></a>
 		 :: 
-		<a href="details_invoice.php?submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>"> <?php echo $LANG_edit; ?></a>
+		<a href="index.php?module=invoicesview=details&submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>"> <?php echo $LANG_edit; ?></a>
 		 ::
-		 <a href='process_payment.php?submit=<?php echo $inv_idField;?>&op=pay_selected_invoice'> <?php echo $LANG_process_payment; ?> </a>
+		 <a href='index.php?module=payments&view=process&submit=<?php echo $inv_idField;?>&op=pay_selected_invoice'> <?php echo $LANG_process_payment; ?> </a>
 		 ::
 		 <!-- EXPORT TO PDF -->
 		<a href='<?php echo $url_for_pdf ;?>'><?php echo $LANG_export_pdf;?></a>
 		::
-		<a href="invoice_templates/<?php echo $def_inv_templateField; ?>?submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>&export=<?php echo $spreadsheet;?>"><?php echo $LANG_export_as; echo " ."; echo $spreadsheet;?></a>
+		<a href="index.php?module=invoices&view=templates/<?php echo $def_inv_templateField; ?>?submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>&export=<?php echo $spreadsheet;?>"><?php echo $LANG_export_as; echo " ."; echo $spreadsheet;?></a>
 		::
-		<a href="invoice_templates/<?php echo $def_inv_templateField; ?>?submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>&export=<?php echo $word_processor;?>"><?php echo $LANG_export_as; echo " ."; echo $word_processor;?> </a>
+		<a href="index.php?module=invoices&view=templates/<?php echo $def_inv_templateField; ?>?submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>&export=<?php echo $word_processor;?>"><?php echo $LANG_export_as; echo " ."; echo $word_processor;?> </a>
 		:: 
 		<?php echo $LANG_email; echo " :: "; echo $LANG_email_quick; ?>
 <!--Actions heading - start-->

@@ -53,10 +53,10 @@ while ($Array = mysql_fetch_array($result_print_product) ) {
 };
 
 #get custom field labels
-$prod_custom_field_label1 = get_custom_field_label(product_cf1,'.');
-$prod_custom_field_label2 = get_custom_field_label(product_cf2,'.');
-$prod_custom_field_label3 = get_custom_field_label(product_cf3,'.');
-$prod_custom_field_label4 = get_custom_field_label(product_cf4,'.');
+$prod_custom_field_label1 = get_custom_field_label(product_cf1);
+$prod_custom_field_label2 = get_custom_field_label(product_cf2);
+$prod_custom_field_label3 = get_custom_field_label(product_cf3);
+$prod_custom_field_label4 = get_custom_field_label(product_cf4);
 
 
 if ($_GET['action'] == "view") {

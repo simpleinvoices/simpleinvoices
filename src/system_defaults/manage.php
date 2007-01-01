@@ -77,25 +77,25 @@ $display_block =  "
 	
 	<table align=center>
 	<tr>
-		<td class='details_screen'><a href='manage_system_defaults.php?submit=biller'>Edit</a></td><td class='details_screen'>Biller</td><td>$b_nameField</td>
+		<td class='details_screen'><a href='index.php?module=system_defaults&view=edit&sumbit=biller'>Edit</a></td><td class='details_screen'>Biller</td><td>$b_nameField</td>
 	</tr>
 	<tr>
-		<td class='details_screen'><a href='manage_system_defaults.php?submit=customer'>Edit</a></td><td class='details_screen'>Customer</td><td>$c_nameField</td>
+		<td class='details_screen'><a href='index.php?module=system_defaults&view=edit&submit=customer'>Edit</a></td><td class='details_screen'>Customer</td><td>$c_nameField</td>
 	</tr>
 	<tr>
-		<td class='details_screen'><a href='manage_system_defaults.php?submit=tax'>Edit</a></td><td class='details_screen'>Tax</td><td>$tax_descriptionField</td>
+		<td class='details_screen'><a href='index.php?module=system_defaults&view=edit&submit=tax'>Edit</a></td><td class='details_screen'>Tax</td><td>$tax_descriptionField</td>
 	</tr>
 	<tr>
-		<td class='details_screen'><a href='manage_system_defaults.php?submit=inv_preference'>Edit</a></td><td class='details_screen'>Invoice preference</td><td>$inv_preferencesField</td>
+		<td class='details_screen'><a href='index.php?module=system_defaults&view=edit&sumbit=inv_preference'>Edit</a></td><td class='details_screen'>Invoice preference</td><td>$inv_preferencesField</td>
 	</tr>
 	<tr>
-		<td class='details_screen'><a href='manage_system_defaults.php?submit=line_items'>Edit</a></td><td class='details_screen'>Default number of line items</td><td>$def_number_line_itemsField</td>
+		<td class='details_screen'><a href='index.php?module=system_defaults&view=edit&submit=line_items'>Edit</a></td><td class='details_screen'>Default number of line items</td><td>$def_number_line_itemsField</td>
 	</tr>
 	<tr>
-		<td class='details_screen'><a href='manage_system_defaults.php?submit=def_inv_template'>Edit</a></td><td class='details_screen'>Default invoice template</td><td>$def_inv_templateField</td>
+		<td class='details_screen'><a href='index.php?module=system_defaults&view=edit&submit=def_inv_template'>Edit</a></td><td class='details_screen'>Default invoice template</td><td>$def_inv_templateField</td>
 	</tr>
 	<tr>
-		<td class='details_screen'><a href='manage_system_defaults.php?submit=def_payment_type'>Edit</a></td><td class='details_screen'>Default payment type</td><td>$payment_type_descriptionField</td>
+		<td class='details_screen'><a href='index.php?module=system_defaults&view=edit&submit=def_payment_type'>Edit</a></td><td class='details_screen'>Default payment type</td><td>$payment_type_descriptionField</td>
 	</tr>
         </table>
 

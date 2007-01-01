@@ -529,7 +529,7 @@ You are editing <?php echo $pref_inv_wordingField; ?> <?php echo $master_invoice
 </div id="header">
 
 <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
-<FORM name="frmpost" ACTION="insert_action.php" METHOD=POST>
+<FORM name="frmpost" ACTION="index.php?module=invoices&view=save" METHOD=POST>
 
 <?php echo $display_block_top; ?>
 <?php echo $display_block_details; ?>

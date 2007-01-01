@@ -135,10 +135,10 @@ while ($newArray = mysql_fetch_array($result)) {
 	<!-- Quick View -->
 	<a class="index_table"
 	 title="{$LANG_quick_view_tooltip} {$invoice_preference_wordingField} {$inv_idField}"
-	 href="index.php?section=invoices&view=quick_view&submit={$inv_idField}&invoice_style={$inv_ty_descriptionField}">{$LANG_view}</a>
+	 href="index.php?module=invoices&view=quick_view&submit={$inv_idField}&invoice_style={$inv_ty_descriptionField}">{$LANG_view}</a>
 	<!-- Edit View -->
 	<a class="index_table" title="{$LANG_edit_view_tooltip} {$invoice_preference_wordingField} {$inv_idField}"
-	 href="details_invoice.php?submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}">{$LANG_edit}</a> 
+	 href="index.php?module=invoices&view=details&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}">{$LANG_edit}</a> 
 	<!-- Print View -->
 	<a class="index_table" title="{$LANG_print_preview_tooltip} {$invoice_preference_wordingField} {$inv_idField}"
 	href="index.php?module=invoices&view=templates/{$def_inv_templateField}&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}">
@@ -157,7 +157,7 @@ while ($newArray = mysql_fetch_array($result)) {
 	 class="index_table" href="index.php?module=invoices&view=templates/{$def_inv_templateField}&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}&export={$word_processor}">
 	 <img src="themes/{$theme}/images/doc.png" height="16" border="0" valign="bottom" /><!-- $word_processor --></a>
   <!-- Payment --><a title="{$LANG_process_payment} {$invoice_preference_wordingField} {$inv_idField}"
-   class="index_table" href="process_payment.php?submit={$inv_idField}&op=pay_selected_invoice">$</a>
+   class="index_table" href="index.php?module=payments&view=process&submit={$inv_idField}&op=pay_selected_invoice">$</a>
 	</td>
 	<td class="index_table">{$inv_idField}</td>
 	<td class="index_table">{$b_nameField}</td>

@@ -101,10 +101,10 @@ $x1 = "select  IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount fr
 }
 
 #get custom field labels
-$customer_custom_field_label1 = get_custom_field_label(customer_cf1,'.');
-$customer_custom_field_label2 = get_custom_field_label(customer_cf2,'.');
-$customer_custom_field_label3 = get_custom_field_label(customer_cf3,'.');
-$customer_custom_field_label4 = get_custom_field_label(customer_cf4,'.');
+$customer_custom_field_label1 = get_custom_field_label(customer_cf1);
+$customer_custom_field_label2 = get_custom_field_label(customer_cf2);
+$customer_custom_field_label3 = get_custom_field_label(customer_cf3);
+$customer_custom_field_label4 = get_custom_field_label(customer_cf4);
 
 
 if ($_GET['action'] === 'view') {
@@ -202,7 +202,7 @@ $display_block .= <<<EOD
 
 EOD;
 
-include('./manage_invoices.inc.php'); 
+include('./src/invoices/manage.inc.php'); 
 
 $display_block .= <<<EOD
 			</p>

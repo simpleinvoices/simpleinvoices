@@ -62,14 +62,15 @@ else if ($_GET[submit] == "def_inv_template") {
 
 	/*drop down list code for invoice template */
 
-	$dirname="invoice_templates";
+	$dirname="src/invoices/templates";
 	   $ext = array("php");
 	   $files = array();
 	   if($handle = opendir($dirname)) {
 	       while(false !== ($file = readdir($handle)))
 	           for($i=0;$i<sizeof($ext);$i++)
 	               if(stristr($file, ".".$ext[$i])) //NOT case sensitive: OK with JpeG, JPG, ecc.
-	                   $files[] = $file;
+			 //strip .php from file name
+	                $files[] = substr($file, 0, -4);
 	       closedir($handle);
 	   }
 
@@ -444,7 +445,7 @@ $mid->printFooter();
 <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
 <br>
 
-<FORM name="frmpost" ACTION="insert_action.php?sys_default=<?php echo $default; ?>" METHOD=POST onsubmit="return frmpost_Validator(this)">
+<FORM name="frmpost" ACTION="index.php?module=system_defaults&view=save&sys_default=<?php echo $default; ?>" METHOD=POST onsubmit="return frmpost_Validator(this)">
 <div id="container">
 <div id="header">
 <table align=center>

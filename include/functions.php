@@ -16,23 +16,13 @@ mysql_select_db( $db_name, $conn );
 *
 * Arguments:
 * field		- The custom field in question
-* dir		- This is just used to get the required files as it specifies folder depth - a total hack and needs to be fixed, basical '.' if in the root dir and '..' if one folder down
 **/
-function get_custom_field_label($field,$dir)         {
-	
-	//this .. $dir stuff is a total hack - needs to be fixed!!!!!!!!!
-	if ($dir == '..') {
-		ob_start();
-		include('../config/config.php');
-		include("../lang/$language.inc.php");
-		ob_end_clean();
-	}
-	else {
-		include('./config/config.php');
-		ob_start();
-		include("./lang/$language.inc.php");
-		ob_end_clean();
-	};
+function get_custom_field_label($field)         {
+
+	include('./config/config.php');
+	ob_start();
+	include("./lang/$language.inc.php");
+	ob_end_clean();
 
 	$conn = mysql_connect( $db_host, $db_user, $db_password );
 	mysql_select_db( $db_name, $conn );

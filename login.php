@@ -8,9 +8,9 @@ user_password CHAR(32) NOT NULL,
 PRIMARY KEY (user_id)
 );
 
-INSERT INTO si_auth_user (user_id, user_password) VALUES ('guest', PASSWORD('guest'));
-INSERT INTO si_auth_user (user_id, user_password) VALUES ('demo', PASSWORD('demo'));
-INSERT INTO si_auth_user (user_id, user_password) VALUES ('admin', PASSWORD('admin'));
+INSERT INTO si_auth_user (user_id, user_password) VALUES ('guest', md5('guest'));
+INSERT INTO si_auth_user (user_id, user_password) VALUES ('demo', md5('demo'));
+INSERT INTO si_auth_user (user_id, user_password) VALUES ('admin', md5('admin'));
 */
 
 include 'config/config.php';
@@ -30,7 +30,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
     // check if the user id and password combination exist in database
     $sql = "SELECT user_id 
             FROM si_auth_user
-            WHERE user_id = '$userId' AND user_password = PASSWORD('$password')";
+            WHERE user_id = '$userId' AND user_password = md5('$password')";
     
     $result = mysql_query($sql, $conn) or die('Query failed. ' . mysql_error()); 
     
