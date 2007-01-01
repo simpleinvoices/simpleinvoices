@@ -197,20 +197,20 @@ select  IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount from si_a
 
 
 #get custom field labels for biller
-$biller_custom_field_label1 = get_custom_field_label(biller_cf1,'.');
-$biller_custom_field_label2 = get_custom_field_label(biller_cf2,'.');
-$biller_custom_field_label3 = get_custom_field_label(biller_cf3,'.');
-$biller_custom_field_label4 = get_custom_field_label(biller_cf4,'.');
+$biller_custom_field_label1 = get_custom_field_label(biller_cf1);
+$biller_custom_field_label2 = get_custom_field_label(biller_cf2);
+$biller_custom_field_label3 = get_custom_field_label(biller_cf3);
+$biller_custom_field_label4 = get_custom_field_label(biller_cf4);
 #get custom field labels for the customer
-$customer_custom_field_label1 = get_custom_field_label(customer_cf1,'.');
-$customer_custom_field_label2 = get_custom_field_label(customer_cf2,'.');
-$customer_custom_field_label3 = get_custom_field_label(customer_cf3,'.');
-$customer_custom_field_label4 = get_custom_field_label(customer_cf4,'.');
+$customer_custom_field_label1 = get_custom_field_label(customer_cf1);
+$customer_custom_field_label2 = get_custom_field_label(customer_cf2);
+$customer_custom_field_label3 = get_custom_field_label(customer_cf3);
+$customer_custom_field_label4 = get_custom_field_label(customer_cf4);
 #product custom fields
-$prod_custom_field_label1 = get_custom_field_label(product_cf1,'.');
-$prod_custom_field_label2 = get_custom_field_label(product_cf2,'.');
-$prod_custom_field_label3 = get_custom_field_label(product_cf3,'.');
-$prod_custom_field_label4 = get_custom_field_label(product_cf4,'.');
+$prod_custom_field_label1 = get_custom_field_label(product_cf1);
+$prod_custom_field_label2 = get_custom_field_label(product_cf2);
+$prod_custom_field_label3 = get_custom_field_label(product_cf3);
+$prod_custom_field_label4 = get_custom_field_label(product_cf4);
 
 
 
