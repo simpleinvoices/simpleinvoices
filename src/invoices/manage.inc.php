@@ -124,7 +124,7 @@ while ($newArray = mysql_fetch_array($result)) {
                 $def_number_line_itemsField = $Array_defaults['def_number_line_items'];
                 $def_inv_templateField = $Array_defaults['def_inv_template'];
 	
-	$url_pdf = "{$_SERVER['HTTP_HOST']}{$install_path}/invoice_templates/{$def_inv_templateField}?submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}";
+	$url_pdf = "{$_SERVER['HTTP_HOST']}{$install_path}/src/invoices/templates/{$def_inv_templateField}?submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}";
 	$url_pdf_encoded = urlencode($url_pdf);
         $url_for_pdf = "pdf/html2ps.php?process_mode=single&renderfields=1&renderlinks=1&renderimages=1&scalepoints=1&pixels={$pdf_screen_size}&media={$pdf_paper_size}&leftmargin={$pdf_left_margin}&rightmargin={$pdf_right_margin}&topmargin={$pdf_top_margin}&bottommargin={$pdf_bottom_margin}&transparency_workaround=1&imagequality_workaround=1&output=1&URL={$url_pdf_encoded}";
 
@@ -141,7 +141,7 @@ while ($newArray = mysql_fetch_array($result)) {
 	 href="details_invoice.php?submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}">{$LANG_edit}</a> 
 	<!-- Print View -->
 	<a class="index_table" title="{$LANG_print_preview_tooltip} {$invoice_preference_wordingField} {$inv_idField}"
-	href="invoice_templates/{$def_inv_templateField}?submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}">
+	href="index.php?module=invoices&view=templates/{$def_inv_templateField}&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}">
 	<img src="themes/{$theme}/images/printer.gif" height="16" border="0" valign="bottom" /><!-- print --></a>
  
 	<!-- EXPORT TO PDF -->
