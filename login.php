@@ -53,12 +53,12 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Simple Invoices Login</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-   <link rel="stylesheet" href="./include/auth/kt-login.css" type="text/css" />
+<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/login.css">
 
 </head>
 
-<body>
+<body class="login" >
+	<div class="Container">
 <?php
 if ($errorMessage != '') {
 ?>
@@ -66,24 +66,39 @@ if ($errorMessage != '') {
 <?php
 }
 ?>
+<div id="Dialog">
+<h1>Simple Invoices</h1>
+<!--
   <div id="loginbox"  class="hasDisclaimer" >
 
         <div id="formbox">
+-->
 
 	    <form action="" method="post" name="frmLogin" id="frmLogin">
 	        <input type="hidden" name="action" value="login" />
 		<input type="hidden" name="cookieverify" value="" />
 		<input type="hidden" name="redirect" value="" />
-		<img src="./logo/simple_invoices_logo.png" alt="KnowledgeTree DMS" class="logoimage"<br />
-            
-	        		    <p class="descriptiveText">Please enter your details below to login.</p>
-
 		            
+  	<dl>
+  		<dt>Username:</dt>
+  		<dd><input name="user" type="text" id="user" /></dd>
+
+  		<dt>Password:</dt>
+  		<dd>
+  		  <input name="pass" type="password" id="pass" />
+  		  <span>(<a href="/login/forgot_password">I forgot my password/username</a>)</span>
+  		</dd>
+
+      		<dd><input type="checkbox" name="remember_me" /> Remember me on this computer</dd>
+                <dd> <input type="submit" value="login" /></dd>
+<!--  		<dd><input type="submit" value="Sign in" /></dd> -->
+<!--
 	        <label for="username">Username</label>
 		<input  name="user" type="text" id="user"/>
-		
+			<BR>
 		<label for="password">Password</label>
 		<input name="pass" type="password" id="pass"/>
+-->
 		<!--
 		<label for="language">Language</label>
 		<select id="language" name="language">
@@ -91,20 +106,18 @@ if ($errorMessage != '') {
 
 				</select>
                	-->
+<!--
 	        <div class="form_actions">
-                    <input type="submit" value="login" />
+                   <dd> <input type="submit" value="login" /></dd>
 		</div>
+-->
+  	</dl>
             </form>
 
 	</div>
                 <div id="disclaimerbox">
-	    <h2>Login Credentials</h2> <br /><strong>Annoucement area<br /></strong><br>This is an important annoucement
+	    <strong>Annoucement area<br /></strong><br>This is an important annoucement
 	</div>
-	
-	<p class="descriptiveText version">
-	<?php echo $title; echo " "; echo $version; ?><br/>
-	copyleft; 2006 <a href="http://www.simpleinvoices.org/">Simple Invoices</a>. Licensed under the <a href="http://www.gnu.org/licenses/gpl.html">GPL</a> 
-	</p>
         
 
     </div>
