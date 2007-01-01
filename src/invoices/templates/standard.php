@@ -1,7 +1,7 @@
 <?php
 #table
-include('../include/include_print.php');
-include("../include/functions.php");
+include('./include/include_print.php');
+include("./include/functions.php");
 
 
 #get the invoice id
@@ -764,7 +764,7 @@ Nifty("div#header,div#footer","small");
 </script>
 
 	<title><?php echo $title; ?></title>
-<?php include('../config/config.php'); ?> 
+<?php include('./config/config.php'); ?> 
 <body>
 <br>
 <div id="container">

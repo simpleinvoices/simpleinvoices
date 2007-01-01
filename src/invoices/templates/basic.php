@@ -782,6 +782,17 @@ $display_block_bottom =  "
 	</div>
 ";
 
+/* The Export code - supports any file extensions - excel/word/open office - what reads html */
+if (isset($_GET['export'])) {
+$file_extension = $_GET['export'];
+header("Content-type: application/octet-stream");
+/*header("Content-type: application/x-msdownload");*/
+header("Content-Disposition: attachment; filename=$pref_inv_headingField$inv_idField.$file_extension");
+header("Pragma: no-cache");
+header("Expires: 0");
+}
+/* End Export code */
+
 
 ?>
 <html>

@@ -150,11 +150,11 @@ while ($newArray = mysql_fetch_array($result)) {
 
 	<!--XLS -->
 	<a title="{$LANG_export_tooltip} {$invoice_preference_wordingField}{$inv_idField} {$LANG_export_xls_tooltip} {$spreadsheet} {$LANG_format_tooltip}"
-	 class="index_table" href="invoice_templates/{$def_inv_templateField}?submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}&export={$spreadsheet}">
+	 class="index_table" href="index.php?module=invoices&view=templates/{$def_inv_templateField}&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}&export={$spreadsheet}">
 	 <img src="themes/{$theme}/images/xls.gif" height="16" border="0" valign="bottom" /><!-- $spreadsheet --></a>
 	<!-- DOC -->
 	<a title="{$LANG_export_tooltip} {$invoice_preference_wordingField} {$inv_idField} {$LANG_export_doc_tooltip} {$word_processor} {$LANG_format_tooltip}"
-	 class="index_table" href="invoice_templates/{$def_inv_templateField}?submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}&export={$word_processor}">
+	 class="index_table" href="index.php?module=invoices&view=templates/{$def_inv_templateField}&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}&export={$word_processor}">
 	 <img src="themes/{$theme}/images/doc.png" height="16" border="0" valign="bottom" /><!-- $word_processor --></a>
   <!-- Payment --><a title="{$LANG_process_payment} {$invoice_preference_wordingField} {$inv_idField}"
    class="index_table" href="process_payment.php?submit={$inv_idField}&op=pay_selected_invoice">$</a>
