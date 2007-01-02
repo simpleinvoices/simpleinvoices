@@ -31,8 +31,8 @@ if (mysql_query($sql, $conn)) {
 } else {
 	$display_block =  "Something went wrong, please try adding the customer again";
 }
-	header( 'refresh: 2; url=manage_customers.php' );
-
+ 	//header( 'refresh: 2; url=manage_customers.php' );
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=customers&view=manage>";
 }
 
 #edit customer
@@ -70,13 +70,15 @@ else if ( $op === 'edit_customer' ) {
 			$display_block =  "Something went wrong, please try editing the customer again";
 		}
 
-		header( 'refresh: 2; url=manage_customers.php' );
+		//header( 'refresh: 2; url=manage_customers.php' );
+		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=customers&view=manage>";
 
 		}
 
 	else if (isset($_POST['cancel'])) {
 
-		header( 'refresh: 0; url=manage_customers.php' );
+		//header( 'refresh: 0; url=manage_customers.php' );
+		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=customers&view=manage>";
 	}
 
 

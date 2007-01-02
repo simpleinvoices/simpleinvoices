@@ -60,7 +60,7 @@ echo <<<EOD
 
 <br>
 
-<FORM name="frmpost" ACTION="insert_action.php" METHOD=POST onsubmit="return frmpost_Validator(this)">
+<FORM name="frmpost" ACTION="index.php?module=customers&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
 
 <div id="container">
 <div id="header"><b>{$LANG_customer_add}</b> </div>

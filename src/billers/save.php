@@ -45,7 +45,8 @@ if ( $action === 'insert_biller') {
  		$display_block =  "Something went wrong, please try adding the biller again<br>$sql";
  	}
  	
- 	header( 'refresh: 2; url=index.php?module=billers&view=manage' );
+ 	//header( 'refresh: 2; url=index.php?module=billers&view=manage' );
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=billers&view=manage>";
  	
 }
 
