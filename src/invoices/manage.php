@@ -1,8 +1,11 @@
+<?php
+include_once('./include/include_main.php');
+?>
+
 <html>
 <head>
 
 <?php
-include('./include/include_main.php');
 echo <<<EOD
 <title>{$title} :: {$LANG_manage_invoices}</title>
 <link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css"> 

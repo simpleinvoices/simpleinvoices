@@ -1,8 +1,10 @@
+<?php 
+include_once('./include/include_main.php');
+?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php 
-include('./include/include_main.php');
 #include('./include/functions.php');
 /* validataion code */
 include("./include/validation.php");
@@ -57,7 +59,7 @@ $mid->printFooter();
 echo <<<EOD
 <br>
 
-<FORM name="frmpost" ACTION="insert_action.php" METHOD=POST onsubmit="return frmpost_Validator(this)">
+<FORM name="frmpost" ACTION="index.php?module=products&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
 
 <div id="container">
 <div id="header">

@@ -1,6 +1,6 @@
 <?php
-include('./include/include_main.php');
-include("./include/validation.php");
+include_once('./include/include_main.php');
+include_once("./include/validation.php");
 
 jsBegin();
 jsFormValidationBegin("frmpost");

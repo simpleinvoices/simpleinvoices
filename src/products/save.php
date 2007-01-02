@@ -1,5 +1,6 @@
 <?php
 include('./config/config.php');
+include("./include/include_main.php");
 
 $conn = mysql_connect( $db_host, $db_user, $db_password);
 mysql_select_db( $db_name, $conn);
@@ -30,7 +31,8 @@ if (mysql_query($sql, $conn)) {
 } else {
 	$display_block =  "Something went wrong, please try adding the customer again";
 }
-	header( 'refresh: 2; url=manage_customers.php' );
+	//header( 'refresh: 2; url=manage_customers.php' );
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&invoice_style=Consulting>";
 
 }
 
@@ -235,8 +237,8 @@ if (mysql_query($sql, $conn)) {
 	$display_block =  "Something went wrong, please try adding the biller again";
 }
 
-header( 'refresh: 2; url=manage_products.php' );
-
+	//header( 'refresh: 2; url=manage_products.php' );
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=products&manage>";
 }
 
 

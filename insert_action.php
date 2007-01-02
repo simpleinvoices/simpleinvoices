@@ -1,4 +1,5 @@
 <?php
+include_once('./include/include_main.php');
 include('./config/config.php');
 
 $conn = mysql_connect( $db_host, $db_user, $db_password);
@@ -1383,8 +1384,6 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 <head>
 <head>
 <?php
-
-include('./include/include_main.php');
 
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 $display_block_items = isset($display_block_items) ? $display_block_items : '&nbsp;';

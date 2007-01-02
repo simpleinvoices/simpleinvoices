@@ -1,9 +1,11 @@
+<?php
+include_once('./include/include_main.php');
+?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php
 #table
-include("./include/include_main.php");
 echo <<<EOD
 <title>{$title} :: {$LANG_customer_details}</title>
 <link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css" />

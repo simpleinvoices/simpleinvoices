@@ -1,8 +1,10 @@
+<?php
+include_once('./include/include_main.php');
+?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php
-include("./include/include_main.php");
 /* validataion code */
 include("./include/validation.php");
 echo <<<EOD
@@ -20,7 +22,7 @@ $sql_max = "SELECT max(inv_id) as max_inv_id FROM si_invoices";
 $result_max = mysql_query($sql_max, $conn) or die(mysql_error());
 
 while ($Array_max = mysql_fetch_array($result_max) ) {
-	$max_invoice_id = $Array_max['max_inv_id'];
+$max_invoice_id = $Array_max['max_inv_id'];
 };
 
 #get max invoice id for validataion - end
@@ -42,21 +44,21 @@ $master_invoice_id = $_GET['submit'];
 
 #master invoice id select
 if (!empty($master_invoice_id)) {
-	$print_master_invoice_id = 'SELECT * FROM si_invoices WHERE inv_id = ' . $master_invoice_id;
+$print_master_invoice_id = 'SELECT * FROM si_invoices WHERE inv_id = ' . $master_invoice_id;
 }
 elseif (empty($master_invoice_id)) {
-	$print_master_invoice_id = 'SELECT * FROM si_invoices';
+$print_master_invoice_id = 'SELECT * FROM si_invoices';
 }
 $result_print_master_invoice_id  = mysql_query($print_master_invoice_id , $conn) or die(mysql_error());
 
 while ($Array_master_invoice = mysql_fetch_array($result_print_master_invoice_id)) {
-	$inv_idField = $Array_master_invoice['inv_id'];
-	$inv_biller_idField = $Array_master_invoice['inv_biller_id'];
-	$inv_customer_idField = $Array_master_invoice['inv_customer_id'];
-	$inv_typeField = $Array_master_invoice['inv_type'];
-	$inv_preferenceField = $Array_master_invoice['inv_preference'];
-	$inv_dateField = date( $config['date_format'], strtotime( $Array_master_invoice['inv_date'] ) );
-	$inv_noteField = $Array_master_invoice['inv_note'];
+$inv_idField = $Array_master_invoice['inv_id'];
+$inv_biller_idField = $Array_master_invoice['inv_biller_id'];
+$inv_customer_idField = $Array_master_invoice['inv_customer_id'];
+$inv_typeField = $Array_master_invoice['inv_type'];
+$inv_preferenceField = $Array_master_invoice['inv_preference'];
+$inv_dateField = date( $config['date_format'], strtotime( $Array_master_invoice['inv_date'] ) );
+$inv_noteField = $Array_master_invoice['inv_note'];
 
 };
 
@@ -65,17 +67,17 @@ $print_customer = "SELECT * FROM si_customers WHERE c_id = $inv_customer_idField
 $result_print_customer = mysql_query($print_customer, $conn) or die(mysql_error());
 
 while ($Array = mysql_fetch_array($result_print_customer)) {
-	$c_idField = $Array['c_id'];
-	$c_attentionField = $Array['c_attention'];
-	$c_nameField = $Array['c_name'];
-	$c_street_addressField = $Array['c_street_address'];
-	$c_cityField = $Array['c_city'];
-	$c_stateField = $Array['c_state'];
-	$c_zip_codeField = $Array['c_zip_code'];
-	$c_countryField = $Array['c_country'];
-	$c_phoneField = $Array['c_phone'];
-	$c_faxField = $Array['c_fax'];
-	$c_emailField = $Array['c_email'];
+$c_idField = $Array['c_id'];
+$c_attentionField = $Array['c_attention'];
+$c_nameField = $Array['c_name'];
+$c_street_addressField = $Array['c_street_address'];
+$c_cityField = $Array['c_city'];
+$c_stateField = $Array['c_state'];
+$c_zip_codeField = $Array['c_zip_code'];
+$c_countryField = $Array['c_country'];
+$c_phoneField = $Array['c_phone'];
+$c_faxField = $Array['c_fax'];
+$c_emailField = $Array['c_email'];
 };
 
 #biller query
@@ -83,17 +85,17 @@ $print_biller = "SELECT * FROM si_biller WHERE b_id = $inv_biller_idField";
 $result_print_biller = mysql_query($print_biller, $conn) or die(mysql_error());
 
 while ($billerArray = mysql_fetch_array($result_print_biller)) {
-	$b_idField = $billerArray['b_id'];
-	$b_nameField = $billerArray['b_name'];
-	$b_street_addressField = $billerArray['b_street_address'];
-	$b_cityField = $billerArray['b_city'];
-	$b_stateField = $billerArray['b_state'];
-	$b_zip_codeField = $billerArray['b_zip_code'];
-	$b_countryField = $billerArray['b_country'];
-	$b_phoneField = $billerArray['b_phone'];
-	$b_mobile_phoneField = $billerArray['b_mobile_phone'];
-	$b_faxField = $billerArray['b_fax'];
-	$b_emailField = $billerArray['b_email'];
+$b_idField = $billerArray['b_id'];
+$b_nameField = $billerArray['b_name'];
+$b_street_addressField = $billerArray['b_street_address'];
+$b_cityField = $billerArray['b_city'];
+$b_stateField = $billerArray['b_state'];
+$b_zip_codeField = $billerArray['b_zip_code'];
+$b_countryField = $billerArray['b_country'];
+$b_phoneField = $billerArray['b_phone'];
+$b_mobile_phoneField = $billerArray['b_mobile_phone'];
+$b_faxField = $billerArray['b_fax'];
+$b_emailField = $billerArray['b_email'];
 };
 
 #biller query
@@ -108,7 +110,7 @@ $sql_defaults = "SELECT * FROM si_defaults";
 $result_defaults = mysql_query($sql_defaults, $conn) or die(mysql_error());
 
 while ($Array_defaults = mysql_fetch_array($result_defaults) ) {
-	$def_payment_typeField = $Array_defaults['def_payment_type'];
+$def_payment_typeField = $Array_defaults['def_payment_type'];
 };
 
 #Get the names of the defaults from their id -start
@@ -117,7 +119,7 @@ $sql_payment_type_default = "SELECT pt_description FROM si_payment_types where p
 $result_payment_type_default = mysql_query($sql_payment_type_default , $conn) or die(mysql_error());
 
 while ($Array = mysql_fetch_array($result_payment_type_default) ) {
-	$sql_payment_type_desciptionField = $Array['pt_description'];
+$sql_payment_type_desciptionField = $Array['pt_description'];
 }
 
 
@@ -125,147 +127,147 @@ while ($Array = mysql_fetch_array($result_payment_type_default) ) {
 #biller selector
 
 if (mysql_num_rows($result) == 0) {
-	//no records
-	$display_block_payment_type = "<p><em>{$LANG_no_payment_types}</em></p>";
+//no records
+$display_block_payment_type = "<p><em>{$LANG_no_payment_types}</em></p>";
 
 } else {
-	//has records, so display them
-	$display_block_payment_type = "
-	<select name=\"ac_payment_type\">
-	<option selected value=\"$def_payment_typeField\" style=\"font-weight: bold\">$sql_payment_type_desciptionField</option>";
+//has records, so display them
+$display_block_payment_type = "
+<select name=\"ac_payment_type\">
+<option selected value=\"$def_payment_typeField\" style=\"font-weight: bold\">$sql_payment_type_desciptionField</option>";
 
-	while ($recs = mysql_fetch_array($result)) {
-		$id = $recs['pt_id'];
-		$display_name = $recs['pt_description'];
+while ($recs = mysql_fetch_array($result)) {
+	$id = $recs['pt_id'];
+	$display_name = $recs['pt_description'];
 
-		$display_block_payment_type .= "<option value=\"$id\">
-			$display_name</option>";
-	}
+	$display_block_payment_type .= "<option value=\"$id\">
+		$display_name</option>";
+}
 }
 
 
 #Accounts - for the invoice - start
 #invoice total calc - start
 
-	$print_invoice_total ="select sum(inv_it_total) as total from si_invoice_items where inv_it_invoice_id =$inv_idField";
-	$result_print_invoice_total = mysql_query($print_invoice_total, $conn) or die(mysql_error());
+$print_invoice_total ="select sum(inv_it_total) as total from si_invoice_items where inv_it_invoice_id =$inv_idField";
+$result_print_invoice_total = mysql_query($print_invoice_total, $conn) or die(mysql_error());
 
-	while ($Array = mysql_fetch_array($result_print_invoice_total)) {
-		$invoice_total_Field = $Array['total'];
+while ($Array = mysql_fetch_array($result_print_invoice_total)) {
+	$invoice_total_Field = $Array['total'];
 #invoice total calc - end
 
 #amount paid calc - start
-		$x1 = "select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) as amount from si_account_payments where ac_inv_id = $inv_idField";
-		$result_x1 = mysql_query($x1, $conn) or die(mysql_error());
-		while ($result_x1Array = mysql_fetch_array($result_x1)) {
-			$invoice_paid_Field = $result_x1Array['amount'];
+	$x1 = "select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) as amount from si_account_payments where ac_inv_id = $inv_idField";
+	$result_x1 = mysql_query($x1, $conn) or die(mysql_error());
+	while ($result_x1Array = mysql_fetch_array($result_x1)) {
+		$invoice_paid_Field = $result_x1Array['amount'];
 #amount paid calc - end
 
 #amount owing calc - start
-			$invoice_owing_Field = $invoice_total_Field - $invoice_paid_Field;
+		$invoice_owing_Field = $invoice_total_Field - $invoice_paid_Field;
 #amount owing calc - end
-		}
 	}
+}
 #Accounts - for the invoice - end
 
 # Deal with op and add some basic sanity checking
 
-	$action = !empty( $_GET['action'] ) ? addslashes( $_GET['action'] ) : NULL;
+$action = !empty( $_GET['action'] ) ? addslashes( $_GET['action'] ) : NULL;
 
 if ($action === "pay_selected_invoice") {
 
-	$display_block = <<<EOD
-	<table align="center">	
-	<tr>
-		<td class="details_screen">{$LANG_invoice_id}</td>
-		<td><input type="hidden" name="ac_inv_id" value="{$inv_idField}" />{$inv_idField}</td>
-		<td class="details_screen">{$LANG_total}</td><td>{$invoice_total_Field}</td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG_biller}</td>
-		<td>{$b_nameField}</td>
-		<td class="details_screen">{$LANG_paid}</td>
-		<td>{$invoice_paid_Field}</td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG_customer}</td>
-		<td>{$c_nameField}</td>
-		<td class="details_screen">{$LANG_owing}</td>
-		<td><u>{$invoice_owing_Field}</u></td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG_amount}</td>
-		<td colspan="5"><input type="text" name="ac_amount" size="25" /></td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG_date_formatted}</td>
-		<td><input type="text" class="date-picker" name="ac_date" id="date1" value="{$today}" /></td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG_payment_type_method}</td>
-		<td>{$display_block_payment_type}</td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG_note}</td>
-		<td colspan="5"><textarea name="ac_notes" rows="5" cols="50"></textarea></td>
-	</tr>
+$display_block = <<<EOD
+<table align="center">	
+<tr>
+	<td class="details_screen">{$LANG_invoice_id}</td>
+	<td><input type="hidden" name="ac_inv_id" value="{$inv_idField}" />{$inv_idField}</td>
+	<td class="details_screen">{$LANG_total}</td><td>{$invoice_total_Field}</td>
+</tr>
+<tr>
+	<td class="details_screen">{$LANG_biller}</td>
+	<td>{$b_nameField}</td>
+	<td class="details_screen">{$LANG_paid}</td>
+	<td>{$invoice_paid_Field}</td>
+</tr>
+<tr>
+	<td class="details_screen">{$LANG_customer}</td>
+	<td>{$c_nameField}</td>
+	<td class="details_screen">{$LANG_owing}</td>
+	<td><u>{$invoice_owing_Field}</u></td>
+</tr>
+<tr>
+	<td class="details_screen">{$LANG_amount}</td>
+	<td colspan="5"><input type="text" name="ac_amount" size="25" /></td>
+</tr>
+<tr>
+	<td class="details_screen">{$LANG_date_formatted}</td>
+	<td><input type="text" class="date-picker" name="ac_date" id="date1" value="{$today}" /></td>
+</tr>
+<tr>
+	<td class="details_screen">{$LANG_payment_type_method}</td>
+	<td>{$display_block_payment_type}</td>
+</tr>
+<tr>
+	<td class="details_screen">{$LANG_note}</td>
+	<td colspan="5"><textarea name="ac_notes" rows="5" cols="50"></textarea></td>
+</tr>
 </table>
 
 EOD;
 
-	$insert_action_op = "pay_selected_invoice";
+$insert_action_op = "pay_selected_invoice";
 
 }
 /*Code for the when the user want to process a payment and manually enter the invoice id ie, not come from print_preview - come from Process Payment menu item */
 else if ($action === "pay_invoice") {
-	$display_block = <<<EOD
+$display_block = <<<EOD
 
 <!-- jquery autocomplete sweet stuff - start -->
 <style type="text/css">
 .ac_wrapper {
-	width: 300px;
-	position: relative;
+width: 300px;
+position: relative;
 }
 .ac_wrapper input {
-	width: 100%;
-	display: block;
+width: 100%;
+display: block;
 }
 .ac_wrapper ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
+list-style: none;
+padding: 0;
+margin: 0;
 }
 .ac_results {
-	background: #ccc;
-	cursor: pointer;
-	position: absolute;
-	left:0;
+background: #ccc;
+cursor: pointer;
+position: absolute;
+left:0;
 }
 .ac_results li {
-	border: 1px solid #000;
-	padding: 2px 5px;
+border: 1px solid #000;
+padding: 2px 5px;
 }
 .ac_loading {
-	background : url('./images/indicator-js.gif') right center no-repeat;
+background : url('./images/indicator-js.gif') right center no-repeat;
 }
 .over {
-	background: yellow;
+background: yellow;
 }
 </style>
 
 <script type="text/javascript">
 function selectItem(li) {
 //	document.frmpost.js_total.value = "That's " + li.extra[0] + " you picked."
-	if (li.extra) {
-		document.getElementById("js_total").innerHTML= " " + li.extra[0] + " "
+if (li.extra) {
+	document.getElementById("js_total").innerHTML= " " + li.extra[0] + " "
 //		alert("That's '" + li.extra[0] + "' you picked.")
-	}
+}
 }
 function formatItem(row) {
-	return row[0] + "<br><i>" + row[1] + "</i>";
+return row[0] + "<br><i>" + row[1] + "</i>";
 }
 $(document).ready(function() {
-	$("#ac_me").autocomplete("auto_complete_search.php", { minChars:1, matchSubset:1, matchContains:1, cacheLength:10, onItemSelect:selectItem, formatItem:formatItem, selectOnly:1 });
+$("#ac_me").autocomplete("auto_complete_search.php", { minChars:1, matchSubset:1, matchContains:1, cacheLength:10, onItemSelect:selectItem, formatItem:formatItem, selectOnly:1 });
 });
 </script>
 
@@ -273,39 +275,39 @@ $(document).ready(function() {
 
 
 <table align="center">
-	<tr>
-		<td class="details_screen">{$LANG_invoice_id}
-		<a href="./documentation/text/process_payment_inv_id.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Process payments" class="thickbox"><font color="blue">*</font></a></td>
-		<td><input type="text" id="ac_me" name="ac_inv_id" /></td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG_details}
-		<a href="./documentation/text/process_payment_details.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Process payments" class="thickbox"><font color="blue">*</font></a></td>
-		<td id="js_total"><i>{$LANG_select_invoice}</i> </td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG_amount}</td>
-		<td colspan="5"><input type="text" name="ac_amount" size="25" /></td>
-	</tr>
-	<tr>
-		<div class="demo-holder">
-			<td class="details_screen">{$LANG_date_formatted}</td>
-			<td><input type="text" class="date-picker" name="ac_date" id="date1" value="{$today}" /></td>
-		</div>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG_payment_type_method}</td>
-		<td>{$display_block_payment_type}</td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG_note}</td>
-		<td colspan="5"><textarea name="ac_notes" rows="5" cols="50"></textarea></td>
-	</tr>
+<tr>
+	<td class="details_screen">{$LANG_invoice_id}
+	<a href="./documentation/text/process_payment_inv_id.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Process payments" class="thickbox"><font color="blue">*</font></a></td>
+	<td><input type="text" id="ac_me" name="ac_inv_id" /></td>
+</tr>
+<tr>
+	<td class="details_screen">{$LANG_details}
+	<a href="./documentation/text/process_payment_details.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Process payments" class="thickbox"><font color="blue">*</font></a></td>
+	<td id="js_total"><i>{$LANG_select_invoice}</i> </td>
+</tr>
+<tr>
+	<td class="details_screen">{$LANG_amount}</td>
+	<td colspan="5"><input type="text" name="ac_amount" size="25" /></td>
+</tr>
+<tr>
+	<div class="demo-holder">
+		<td class="details_screen">{$LANG_date_formatted}</td>
+		<td><input type="text" class="date-picker" name="ac_date" id="date1" value="{$today}" /></td>
+	</div>
+</tr>
+<tr>
+	<td class="details_screen">{$LANG_payment_type_method}</td>
+	<td>{$display_block_payment_type}</td>
+</tr>
+<tr>
+	<td class="details_screen">{$LANG_note}</td>
+	<td colspan="5"><textarea name="ac_notes" rows="5" cols="50"></textarea></td>
+</tr>
 </table>
 
 EOD;
 
-	$insert_action_op = "pay_invoice";
+$insert_action_op = "pay_invoice";
 
 }
 else if ($action === "pay_invoice_batch") {
@@ -335,8 +337,8 @@ Nifty("div#header,div#footer","small");
 $(document).ready(init);
 function init()
 {
-	$.datePicker.setDateFormat('yyyy-mm-dd');
-	$('input#date1').datePicker({startDate:'01/01/1970'});
+$.datePicker.setDateFormat('yyyy-mm-dd');
+$('input#date1').datePicker({startDate:'01/01/1970'});
 }
 </script>
 <!-- *Date selector js* - End -->
