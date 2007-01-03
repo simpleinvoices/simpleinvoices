@@ -1,6 +1,6 @@
 <?php
-include('./config/config.php');
 include("./include/include_main.php");
+include('./config/config.php');
 
 $conn = mysql_connect( $db_host, $db_user, $db_password);
 mysql_select_db( $db_name, $conn);
@@ -36,7 +36,7 @@ if (mysql_query($sql, $conn)) {
 }
 
 	//header( 'refresh: 2; url=manage_products.php' );
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=products&manage>";
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=products&view=manage>";
 }
 
 

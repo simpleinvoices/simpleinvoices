@@ -90,9 +90,9 @@ EOD;
 				$display_block .= <<<EOD
 	<tr class="index_table">
 	<td class="index_table"><a class="index_table"
-	 href="customer_details.php?submit={$c_idField}&action=view">{$LANG_view}</a> ::
+	 href="index.php?module=customers&view=details&submit={$c_idField}&action=view">{$LANG_view}</a> ::
 	<a class="index_table"
-	 href="customer_details.php?submit={$c_idField}&action=edit">{$LANG_edit}</a> </td>
+	 href="index.php?module=customers&view=details&submit={$c_idField}&action=edit">{$LANG_edit}</a> </td>
 	<td class="index_table">{$c_idField}</td>
 	<td class="index_table">{$c_nameField}</td>
 	<td class="index_table">{$c_phoneField}</td>

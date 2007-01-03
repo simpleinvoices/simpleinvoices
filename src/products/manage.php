@@ -28,7 +28,7 @@ if (mysql_num_rows($result) == 0) {
 
 <table width="100%" align="center" class="filterable sortable" id="large">
 <div id="header"><b>{$LANG_manage_products}</b> ::
-	<a href="insert_product.php">{$LANG_add_new_product}</a></div>
+	<a href="index.php?module=products&view=add">{$LANG_add_new_product}</a></div>
 <tr class="sortHeader">
 <th class="noFilter">{$LANG_actions}</th>
 <th class="index_table">{$LANG_product_id}</th>
@@ -55,9 +55,9 @@ while ($Array = mysql_fetch_array($result)) {
 	<tr class="index_table">
 	<td class="index_table">
 	<a class="index_table"
-	 href="product_details.php?submit={$prod_idField}&action=view">{$LANG_view}</a> ::
+	 href="index.php?module=products&view=details&submit={$prod_idField}&action=view">{$LANG_view}</a> ::
 	<a class="index_table"
-	 href="product_details.php?submit={$prod_idField}&action=edit">{$LANG_edit}</a> </td>
+	 href="index.php?module=products&view=details&submit={$prod_idField}&action=edit">{$LANG_edit}</a> </td>
 	<td class="index_table">{$prod_idField}</td>
 	<td class="index_table">{$prod_descriptionField}</td>
 	<td class="index_table">{$prod_unit_priceField}</td>
