@@ -6,21 +6,21 @@
 ..|Nova Factura - Estilo Total|./invoice_total.php
 ..|Nova Factura - Estilo An&aacute;lise|./invoice_consulting.php
 .|Clientes|./manage_customers.php
-..|Engadir Novo Cliente|./insert_customer.php
-..|---
 ..|Xestionar Clientes|./manage_customers.php
+..|---
+..|Engadir Novo Cliente|./insert_customer.php
 .|Produtos|./manage_products.php
-..|Engadir Novo Produto|./insert_product.php
-..|---
 ..|Xestionar Produtos|./manage_products.php
+..|---
+..|Engadir Novo Produto|./insert_product.php
 .|Emisores|./manage_billers.php
-..|Novo emisor|./insert_biller.php
-..|---
 ..|Xestionar emisores|./manage_billers.php
-.|Aboamentos|./manage_payments.php
-..|Procesar Aboamento|./process_payment.php?op=pay_invoice
 ..|---
+..|Novo emisor|./insert_biller.php
+.|Aboamentos|./manage_payments.php
 ..|Xestionar Aboamento|./manage_payments.php
+..|---
+..|Procesar Aboamento|./process_payment.php?op=pay_invoice
 .|Informes|./index.php
 ..|Vendas|./report_sales_total.php
 ...|Total Vendas|./report_sales_total.php

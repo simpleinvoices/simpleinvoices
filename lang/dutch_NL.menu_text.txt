@@ -6,21 +6,21 @@
 ..|Nieuwe factuur - Totaal style|./invoice_total.php
 ..|Nieuwe factuur - Consulting style|./invoice_consulting.php
 .|Klanten|./manage_customers.php
-..|Nieuw klant toevoegen|./insert_customer.php
-..|---
 ..|Klanten beheren|./manage_customers.php
+..|---
+..|Nieuw klant toevoegen|./insert_customer.php
 .|Producten|./manage_products.php
-..|Nieuw product toevoegen|./insert_product.php
-..|---
 ..|Producten beheren|./manage_products.php
+..|---
+..|Nieuw product toevoegen|./insert_product.php
 .|Bedrijven|./manage_billers.php
-..|Nieuw bedrijf toevoegen|./insert_biller.php
-..|---
 ..|Bedrijven beheren|./manage_billers.php
-.|Betalingen|./manage_payments.php
-..|Betalingen verwerken|./process_payment.php?op=pay_invoice
 ..|---
+..|Nieuw bedrijf toevoegen|./insert_biller.php
+.|Betalingen|./manage_payments.php
 ..|Betalingen beheren|./manage_payments.php
+..|---
+..|Betalingen verwerken|./process_payment.php?op=pay_invoice
 .|Rapporten|./index.php
 ..|Verkoop|./report_sales_total.php
 ...|Totale verkoop|./report_sales_total.php

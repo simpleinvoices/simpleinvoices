@@ -6,21 +6,21 @@
 ..|New Invoice - Total style|./invoice_total.php
 ..|New Invoice - Consulting style|./invoice_consulting.php
 .|Customers|./manage_customers.php
-..|Add New Customer|./insert_customer.php
-..|---
 ..|Manage Customers|./manage_customers.php
+..|---
+..|Add New Customer|./insert_customer.php
 .|Products|./manage_products.php
-..|Add New Product|./insert_product.php
-..|---
 ..|Manage Products|./manage_products.php
+..|---
+..|Add New Product|./insert_product.php
 .|Billers|./manage_billers.php
-..|Add New Biller|./insert_biller.php
-..|---
 ..|Manage Billers|./manage_billers.php
-.|Payments|./manage_payments.php
-..|Process Payment|./process_payment.php?op=pay_invoice
 ..|---
+..|Add New Biller|./insert_biller.php
+.|Payments|./manage_payments.php
 ..|Manage Payments|./manage_payments.php
+..|---
+..|Process Payment|./process_payment.php?op=pay_invoice
 .|Reports|./index.php
 ..|Sales|./report_sales_total.php
 ...|Total Sales|./report_sales_total.php

@@ -6,21 +6,21 @@
 ..|New Invoice - Total style|./index.php?module=invoices&view=total
 ..|New Invoice - Consulting style|./index.php?module=invoices&view=consulting
 .|Customers|./index.php?module=customers&view=manage
-..|Add New Customer|./index.php?module=customers&view=add
-..|---
 ..|Manage Customers|./index.php?module=customers&view=manage
+..|---
+..|Add New Customer|./index.php?module=customers&view=add
 .|Products|./index.php?module=products&view=manage
-..|Add New Product|./index.php?module=products&view=add
-..|---
 ..|Manage Products|./index.php?module=products&view=manage
+..|---
+..|Add New Product|./index.php?module=products&view=add
 .|Billers|./index.php?module=billers&view=manage
-..|Add New Biller|./index.php?module=billers&view=add
-..|---
 ..|Manage Billers|./index.php?module=billers&view=manage
-.|Payments|./index.php?module=payments&view=manage
-..|Process Payment|./index.php?module=payments&view=process&case=pay_invoice
 ..|---
+..|Add New Biller|./index.php?module=billers&view=add
+.|Payments|./index.php?module=payments&view=manage
 ..|Manage Payments|./index.php?module=payments&view=manage
+..|---
+..|Process Payment|./index.php?module=payments&view=process&case=pay_invoice
 .|Reports|./index.php
 ..|Sales|./index.php?module=reports&view=report_sales_total
 ...|Total Sales|./index.php?module=reports&view=report_sales_total

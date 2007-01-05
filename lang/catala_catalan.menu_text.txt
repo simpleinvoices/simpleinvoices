@@ -6,21 +6,21 @@
 ..|Nova Factura - Estil Total|./invoice_total.php
 ..|Nova Factura - Estil Consultat|./invoice_consulting.php
 .|Clients|./manage_customers.php
-..|Afegir Client|./insert_customer.php
-..|---
 ..|Gestionar Clients|./manage_customers.php
+..|---
+..|Afegir Client|./insert_customer.php
 .|Productes|./manage_products.php
-..|Afegir Producte|./insert_product.php
-..|---
 ..|Gestionar Productes|./manage_products.php
+..|---
+..|Afegir Producte|./insert_product.php
 .|Facturadors|./manage_billers.php
-..|Afegir Nou Facturador|./insert_biller.php
-..|---
 ..|Gestionar Facturadors|./manage_billers.php
-.|Pagaments|./manage_payments.php
-..|Procés de Pagament|./process_payment.php?op=pay_invoice
 ..|---
+..|Afegir Nou Facturador|./insert_biller.php
+.|Pagaments|./manage_payments.php
 ..|Gestionar Pagaments|./manage_payments.php
+..|---
+..|Procés de Pagament|./process_payment.php?op=pay_invoice
 .|Informes|./index.php
 ..|Vendes|./report_sales_total.php
 ...|Vensdes Totals|./report_sales_total.php

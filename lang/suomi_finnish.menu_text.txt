@@ -6,21 +6,21 @@
 ..|Uusi lasku - Kokonaissummalla|./invoice_total.php
 ..|Uusi lasku - Konsultointia|./invoice_consulting.php
 .|Asiakkaat|./manage_customers.php
-..|Uusi asiakas|./insert_customer.php
-..|---
 ..|K&auml;sittele asiakkaita|./manage_customers.php
+..|---
+..|Uusi asiakas|./insert_customer.php
 .|Tuotteet|./manage_products.php
-..|Uusi tuote|./insert_product.php
-..|---
 ..|K&auml;sittele tuotteita|./manage_products.php
+..|---
+..|Uusi tuote|./insert_product.php
 .|Laskuttajat|./manage_billers.php
-..|Uusi laskuttaja|./insert_biller.php
-..|---
 ..|K&auml;sittele laskuttajia|./manage_billers.php
-.|Maksut|./manage_payments.php
-..|Merkitse maksetuksi|./process_payment.php?op=pay_invoice
 ..|---
+..|Uusi laskuttaja|./insert_biller.php
+.|Maksut|./manage_payments.php
 ..|K&auml;sittele maksuja|./manage_payments.php
+..|---
+..|Merkitse maksetuksi|./process_payment.php?op=pay_invoice
 .|Raportit|./index.php
 ..|Myynnit|./report_sales_total.php
 ...|Myynnit yhteens&auml;|./report_sales_total.php

@@ -10,17 +10,17 @@
 ..|---
 ..|Kunden verwalten|./manage_customers.php
 .|Produkte|./manage_products.php
-..|Produkt anlegen|./insert_product.php
-..|---
 ..|Produkte verwalten|./manage_products.php
+..|---
+..|Produkt anlegen|./insert_product.php
 .|Gl&auml;ubiger|./manage_billers.php
-..|Gl&auml;ubiger anlegen|./insert_biller.php
-..|---
 ..|Gl&auml;ubiger verwalten|./manage_billers.php
-.|Zahlungseingang|./manage_payments.php
-..|Zahlungseingang verbuchen|./process_payment.php?op=pay_invoice
 ..|---
+..|Gl&auml;ubiger anlegen|./insert_biller.php
+.|Zahlungseingang|./manage_payments.php
 ..|Zahlungseing&auml;nge verwalten|./manage_payments.php
+..|---
+..|Zahlungseingang verbuchen|./process_payment.php?op=pay_invoice
 .|Reports|./index.php
 ..|Verk&auml;ufe|./report_sales_total.php
 ...|Verk&auml;ufe - Total|./report_sales_total.php
