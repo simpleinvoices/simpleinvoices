@@ -1,5 +1,5 @@
 .|Inicio|./index.php|The main screen
-.|Nova Factura|./manage_invoices.php
+.|Facturas|./manage_invoices.php
 ..|Xestionar Facturas|./manage_invoices.php
 ..|---
 ..|Nova Factura - Estilo desagregado|./invoice_itemised.php

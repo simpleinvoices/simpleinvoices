@@ -1,5 +1,5 @@
 .|Principal|./index.php|La pantalla principal
-.|Nueva Factura|./manage_invoices.php
+.|Facturas|./manage_invoices.php
 ..|Gestionar Facturas|./manage_invoices.php
 ..|---
 ..|Nueva Factura - Estilo detallado|./invoice_itemised.php

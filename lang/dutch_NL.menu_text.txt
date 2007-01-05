@@ -1,5 +1,5 @@
 .|Home|./index.php|Het hoofdscherm
-.|Nieuwe factuur|./manage_invoices.php
+.|Facturen|./manage_invoices.php
 ..|Facturen beheren|./manage_invoices.php
 ..|---
 ..|Nieuwe factuur - Itemised style|./invoice_itemised.php

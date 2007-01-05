@@ -1,5 +1,5 @@
 .|Etusivu|./index.php|P&auml;&auml;n&auml;ytt&ouml;
-.|Uusi lasku|./manage_invoices.php
+.|Laskuja|./manage_invoices.php
 ..|K&auml;sittele laskuja|./manage_invoices.php
 ..|---
 ..|Uusi lasku - Yksil&ouml;ityn&auml;|./invoice_itemised.php

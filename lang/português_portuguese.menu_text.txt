@@ -1,5 +1,5 @@
 .|Home|./index.php|The main screen
-.|New Invoice|./manage_invoices.php
+.|Invoices|./manage_invoices.php
 ..|Manage Invoices|./manage_invoices.php
 ..|---
 ..|New Invoice - Itemised style|./invoice_itemised.php

@@ -1,5 +1,5 @@
 .|Home|./index.php|The main screen
-.|Nova Factura|./manage_invoices.php
+.|Factures|./manage_invoices.php
 ..|Gestionar Factures|./manage_invoices.php
 ..|---
 ..|Nova Factura - Estil linia|./invoice_itemised.php
