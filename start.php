@@ -204,13 +204,13 @@ $display_block ="
                                       <table>
                                         <tr>
                                                 <td width=10%>
-                                        		<a href=\"index.php?module='documentation/inline_doc'&view=inline_instructions#faqs-what\">
+                                        		<a href=\"index.php?module=documentation/inline_docs&view=inline_instructions#faqs-what\">
 								<img src=\"images/common/question.png\"></img>
 								 $LANG_faqs_what
 							</a>
                                 		</td>		
 						<td width=10%>
-		                                        <a href=\".documentation/inline_docs/inline_instructions.php#faqs-need\">
+		                                        <a href=\"index.php?module=documentation/inline_docs&view=inline_instructions#faqs-need\">
 	                                                	<img src=\"images/common/question.png\"></img>
 								$LANG_faqs_need
 							</a>
@@ -218,13 +218,13 @@ $display_block ="
 					</tr>
 					<tr>
 						<td width=10%>
-		                                        <a href=\"documentation/inline_docsinline_instructions.php#faqs-how\">
+		                                        <a href=\"index.php?module=documentation/inline_docs&view=inline_instructions#faqs-how\">
 	                                                	<img src=\"images/common/question.png\"></img>
 								$LANG_faqs_how
 							</a>
                                 		</td>		
 						<td width=10%>
-                		                        <a href=\"documentation/inline_docsinline_instructions.php#faqs-types\">
+                		                        <a href=\"index.php?module=documentation/inline_docs&view=inline_instructions#faqs-types\">
 	                                                	<img src=\"images/common/question.png\"></img>
 								$LANG_faqs_type
 							</a>
@@ -385,13 +385,13 @@ $display_block ="
                                       <table>
                                         <tr>
                                                 <td width=10%>
-                                        		<a href=\"./documentation/inline_docs/inline_instructions.php#installation\">
+                                        		<a href=\"index.php?module=documentation/inline_docs&view=inline_instructions#installation\">
                                                         	<img src=\"images/common/help.png\"></img>
 								$indx_help_install
 							</a>
 						</td>	
 						<td width=10%>
-                		                        <a href=\"./documentation/inline_docs/inline_instructions.php#upgrading\">
+                		                        <a href=\"index.php?module=documentation/inline_docs&view=inline_instructions#upgrading\">
                                                         	<img src=\"images/common/help.png\"></img>
 								$indx_help_upgrade
 							</a>
@@ -399,7 +399,7 @@ $display_block ="
 					</tr>
 					<tr>
 						<td width=10%>
-		                                        <a href=\"./documentation/inline_docs/inline_instructions.php#prepare\">
+		                                        <a href=\"index.php?module=documentation/inline_docs&view=inline_instructions#prepare\">
                                                         	<img src=\"images/common/help.png\"></img>
 								$indx_help_prepare
 							</a>

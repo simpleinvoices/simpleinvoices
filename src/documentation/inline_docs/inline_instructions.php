@@ -3,13 +3,13 @@
 include('./include/include_main.php');
 
 
-$fp = fopen("./documentation/ReadMe.$language.html", "r" );
+$fp = fopen("./src/documentation/ReadMe.$language.html", "r" );
 if(!$fp)
 {
     echo "Couldn't open the data file. Try again later.";
     exit;
 }
-$filename ="./documentation/ReadMe.$language.html";
+$filename ="./src/documentation/ReadMe.$language.html";
 $display_block = fread( $fp, filesize( $filename ) );
 ?>
 
