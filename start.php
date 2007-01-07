@@ -204,7 +204,7 @@ $display_block ="
                                       <table>
                                         <tr>
                                                 <td width=10%>
-                                        		<a href=\"./documentation/inline_docs/inline_instructions.php#faqs-what\">
+                                        		<a href=\"index.php?module='documentation/inline_doc'&view=inline_instructions#faqs-what\">
 								<img src=\"images/common/question.png\"></img>
 								 $LANG_faqs_what
 							</a>
