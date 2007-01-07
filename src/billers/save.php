@@ -1,17 +1,15 @@
 <?php
-include('./config/config.php');
-
 include('./include/include_main.php'); 
 $conn = mysql_connect( $db_host, $db_user, $db_password);
 mysql_select_db( $db_name, $conn);
 
 # Deal with op and add some basic sanity checking
 
-$action = !empty( $_POST['action'] ) ? addslashes( $_POST['action'] ) : NULL;
+$op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
 
 #insert biller
  	
-if ( $action === 'insert_biller') {
+if ( $op === 'insert_biller') {
 	
  	$sql = "INSERT into
 			si_biller
@@ -52,7 +50,7 @@ if ( $action === 'insert_biller') {
 
 #edit biller
 
-else if (  $action === 'edit_biller' ) {
+else if (  $op === 'edit_biller' ) {
 
 	if (isset($_POST['save_biller'])) {
 		$sql = "UPDATE
@@ -84,17 +82,17 @@ else if (  $action === 'edit_biller' ) {
 			$display_block =  "Something went wrong, please try editing the product again";
 		}
 
-		header( 'refresh: 2; url=index.php?module=billers&view=manage' );
+		$refresh_total =  "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=billers&view=manage>";
 
 		}
 
 	else if (isset($_POST['cancel'])) {
 
-		header( 'refresh: 0; url=index.php?module=billers&view=manage' );
+		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=0;URL=index.php?module=billers&view=manage>";
 	}
 
 
-	header( 'refresh: 2; url=system_default_details.php' );
+$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=billers&view=manage>";
 }
 ?>
 

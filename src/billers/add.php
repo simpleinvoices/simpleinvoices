@@ -161,7 +161,7 @@ echo <<<EOD
 </div>
 <div id="footer">
 	<input type="submit" name="submit" value="{$LANG_insert_biller}" />
-	<input type="hidden" name="action" value="insert_biller" />
+	<input type="hidden" name="op" value="insert_biller" />
 </div>
 
 EOD;

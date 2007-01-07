@@ -23,7 +23,7 @@ $display_block = "
 
 
 <table width=100% class=\"filterable sortable\" id=large align=center>
-<div id=header><b>$mb_page_header</b> :: <a href='insert_biller.php'>$mb_actions_new_biller</a></div>
+<div id=header><b>$mb_page_header</b> :: <a href='index.php?module=billers&view=add'>$mb_actions_new_biller</a></div>
 <tr class=\"sortHeader\">
 <th class=\"noFilter\">$mb_table_action</th>
 <th class=\" index_table\">$mb_table_biller_id</th>
@@ -52,7 +52,7 @@ while ($Array = mysql_fetch_array($result)) {
 
 	$display_block .= "
 	<tr class='index_table'>
-	<td class='index_table'><a class='index_table' href='biller_details.php?submit=$b_idField&action=view'>$mb_actions_view</a> :: <a class='index_table' href='biller_details.php?submit=$b_idField&action=edit'>$mb_actions_edit</a></td>
+	<td class='index_table'><a class='index_table' href='index.php?module=billers&view=details&submit=$b_idField&action=view'>$mb_actions_view</a> :: <a class='index_table' href='index.php?module=billers&view=details&submit=$b_idField&action=edit'>$mb_actions_edit</a></td>
 	<td class='index_table'>$b_idField</td>
 	<td class='index_table'>$b_nameField</td>
 	<td class='index_table'>$b_phoneField</td>

@@ -106,7 +106,7 @@ if ($_GET['action'] == "view") {
 	$display_block = <<<EOD
 
 	<div id="header"><b>{$LANG_biller}</b> ::
-	<a href="?submit={$b_idField}&action=edit">{$LANG_edit}</a></div>
+	<a href="index.php?module=billers&view=details&submit={$b_idField}&action=edit">{$LANG_edit}</a></div>
 
 	<table align="center">
 	<tr>
@@ -318,7 +318,7 @@ $mid->printFooter();
 echo <<<EOD
 
 <br>
-<form name="frmpost" action="insert_action.php?submit={$_GET['submit']}"
+<form name="frmpost" action="index.php?module=billers&view=save&submit={$_GET['submit']}"
  method="post" onsubmit="return frmpost_Validator(this)">
 <div id="container">
 {$display_block}
