@@ -172,9 +172,9 @@ while ($Array = mysql_fetch_array($result_print_invoice_total)) {
 
 # Deal with op and add some basic sanity checking
 
-$action = !empty( $_GET['action'] ) ? addslashes( $_GET['action'] ) : NULL;
+$op = !empty( $_GET['op'] ) ? addslashes( $_GET['op'] ) : NULL;
 
-if ($action === "pay_selected_invoice") {
+if ($op === "pay_selected_invoice") {
 
 $display_block = <<<EOD
 <table align="center">	
@@ -219,7 +219,7 @@ $insert_action_op = "pay_selected_invoice";
 
 }
 /*Code for the when the user want to process a payment and manually enter the invoice id ie, not come from print_preview - come from Process Payment menu item */
-else if ($action === "pay_invoice") {
+else if ($op === "pay_invoice") {
 $display_block = <<<EOD
 
 <!-- jquery autocomplete sweet stuff - start -->
@@ -310,7 +310,7 @@ EOD;
 $insert_action_op = "pay_invoice";
 
 }
-else if ($action === "pay_invoice_batch") {
+else if ($op === "pay_invoice_batch") {
 }
 
 echo <<<EOD
@@ -357,7 +357,7 @@ echo <<<EOD
 
 <br>
 
-<form name="frmpost" action="insert_action.php" method="post" onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=payments&view=save" method="post" onsubmit="return frmpost_Validator(this)">
 <div id="container">
 <div id="header"><b>{$LANG_process_payment}</b></div>
 

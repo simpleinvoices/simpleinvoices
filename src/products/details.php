@@ -167,9 +167,9 @@ EOD;
 
 $footer = <<<EOD
 
-<p><input type="submit" name="cancel" value="{$LANG_cancel}" />
+<input type="submit" name="cancel" value="{$LANG_cancel}" />
 <input type="submit" name="save_product" value="{$LANG_save_product}" />
-<input type="hidden" name="op" value="edit_product" /></p>
+<input type="hidden" name="op" value="edit_product" />
 
 EOD;
 }
@@ -196,8 +196,7 @@ $mid->printFooter();
 echo <<<EOD
 
 <br>
-<FORM name="frmpost" ACTION="index.php?module=products&view=save&submit={$_GET['submit']}"
- METHOD="POST" onsubmit="return frmpost_Validator(this)">
+<FORM name="frmpost" ACTION="index.php?module=products&view=save&submit={$_GET['submit']}" METHOD="POST" onsubmit="return frmpost_Validator(this)">
 <div id="container">
 {$display_block}
 <div id="footer">

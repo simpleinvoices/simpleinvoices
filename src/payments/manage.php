@@ -8,21 +8,21 @@ mysql_select_db( $db_name, $conn );
 #if coming from another page where you want to filter by just one invoice
 if (!empty($_GET[inv_id])) {
 
-	$display_block_header = "<b>$map_payments_filtered $_GET[inv_id]</b> :: <a href='process_payment.php?submit=$_GET[inv_id]&op=pay_selected_invoice'>$map_payments_filtered_invoice</a>";
+	$display_block_header = "<b>$map_payments_filtered $_GET[inv_id]</b> :: <a href='index.php?module=payments&view=process&submit=$_GET[inv_id]&op=pay_selected_invoice'>$map_payments_filtered_invoice</a>";
 
         $sql = "select si_account_payments.*, si_customers.c_name, si_biller.b_name from si_account_payments, si_invoices, si_customers, si_biller  where ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = si_customers.c_id and si_invoices.inv_biller_id = si_biller.b_id and si_account_payments.ac_inv_id='$_GET[inv_id]' ORDER BY si_account_payments.ac_id DESC";
 	}
 #if coming from another page where you want to filter by just one customer
 elseif (!empty($_GET[c_id])) {
 	
-	$display_block_header = "<b>$map_payments_filtered_customer $_GET[c_id]</b> :: <a href='process_payment.php?op=pay_invoice'>$map_actions_process_payment</a>";
+	$display_block_header = "<b>$map_payments_filtered_customer $_GET[c_id]</b> :: <a href='index.php?module=payments&view=process&op=pay_invoice'>$map_actions_process_payment</a>";
 	
         $sql = "select si_account_payments.*, si_customers.c_name, si_biller.b_name from si_account_payments, si_invoices, si_customers, si_biller  where ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = si_customers.c_id and si_invoices.inv_biller_id = si_biller.b_id and si_customers.c_id='$_GET[c_id]' ORDER BY si_account_payments.ac_id DESC ";
         }
 #if you want to show all invoices - no filters
 else {
 
-	$display_block_header = "<b>$map_page_header</b> :: <a href='process_payment.php?op=pay_invoice'>$map_actions_process_payment</a>";
+	$display_block_header = "<b>$map_page_header</b> :: <a href='index.php?module=payments&view=process&op=pay_invoice'>$map_actions_process_payment</a>";
 
 	$sql = "select si_account_payments.*, si_customers.c_name, si_biller.b_name from si_account_payments, si_invoices, si_customers, si_biller  where ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = si_customers.c_id and si_invoices.inv_biller_id = si_biller.b_id ORDER BY si_account_payments.ac_id DESC";
 	}
@@ -88,7 +88,7 @@ while ($Array = mysql_fetch_array($result)) {
 
 	$display_block .= "
 	<tr class='index_table'>
-		<td class='index_table'><a class='index_table' href='payment_details.php?inv_id=$ac_idField'>$map_actions_view</a></td>
+		<td class='index_table'><a class='index_table' href='index.php?module=payments&view=details&inv_id=$ac_idField'>$map_actions_view</a></td>
 		<td class='index_table'>$ac_idField</td>
 		<td class='index_table'>$ac_inv_idField</td>
 		<td class='index_table'>$c_nameField</td>

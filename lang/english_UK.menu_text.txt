@@ -20,7 +20,7 @@
 .|Payments|./index.php?module=payments&view=manage
 ..|Manage Payments|./index.php?module=payments&view=manage
 ..|---
-..|Process Payment|./index.php?module=payments&view=process&case=pay_invoice
+..|Process Payment|./index.php?module=payments&view=process&op=pay_invoice
 .|Reports|./index.php
 ..|Sales|./index.php?module=reports&view=report_sales_total
 ...|Total Sales|./index.php?module=reports&view=report_sales_total
