@@ -246,7 +246,7 @@ $display_block ="
 							</a>
                                 		</td>		
 						<td width=10%>
-				        		<a href=\"index.php?module=invoices&view=total.php\">
+				        		<a href=\"index.php?module=invoices&view=total\">
 								<img src=\"images/common/total.png\"></img>
 								$LANG_total_style
 							</a>
