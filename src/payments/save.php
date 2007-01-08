@@ -115,10 +115,14 @@ else if ( $op === 'pay_invoice' OR $op === 'pay_selected_invoice' ) {
 	}
 
 	if ( $op === 'pay_selected_invoice' ) {
-		header( 'refresh: 2; url=manage_invoices.php' );
+
+		//header( 'refresh: 2; url=manage_invoices.php' );
+		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=payments&view=manage>";
+
 	}
 	else if ( $op === 'pay_invoice' ) {
-		header( 'refresh: 2; url=process_payment.php?op=pay_invoice' );
+		//header( 'refresh: 2; url=process_payment.php?op=pay_invoice' );
+		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=payments&view=manage>";
 	}
 
 }
