@@ -226,7 +226,7 @@ $display_block_top =  "
 		<td class=account>$LANG_total:</td><td class=account>$pref_currency_signField$invoice_total_Field</td>              
 		<td class=account><a href='index.php?module=payments&view=manage&inv_id=$inv_idField'>$LANG_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field</td>
 		<td class=account>$LANG_owing:</td><td class=account><u>$pref_currency_signField$invoice_owing_Field</u></td>
-		<td class=account>$LANG_age <a href='documentation/info_pages/age.html?keepThis=true&TB_iframe=true&height=300&width=500' title='Info :: Invoice age' class='thickbox'>*</a>: </td><td class=account nowrap >$invoice_age</td>
+		<td class=account>$LANG_age<a href='documentation/info_pages/age.html?keepThis=true&TB_iframe=true&height=300&width=500' title='Info :: Invoice age' class='thickbox'>*</a>: </td><td class=account nowrap >$invoice_age</td>
 		<td></td><td></td>
 		<td class=account>$LANG_total:</td><td class=account>$pref_currency_signField$invoice_total_Field_customer</td>
 		<td class=account><a href='index.php?module=payments&view=manage&c_id=$c_idField'>$LANG_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field_customer</td>
