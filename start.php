@@ -252,7 +252,7 @@ $display_block ="
 							</a>
 						</td>
 						<td width=10%>
-		                                        <a href=\"index.php?module=invoices&view=consulting.php\">
+		                                        <a href=\"index.php?module=invoices&view=consulting\">
 								<img src=\"images/common/consulting.png\"></img>
 								$LANG_consulting_style
 							</a>
@@ -260,7 +260,7 @@ $display_block ="
 					</tr>
 					<tr>
 						<td colspan=3 align=center>
-                		                        <a href=\"./documentation/inline_docs/inline_instructions.php#faqs-types\">
+                		                        <a href=\"index.php?module=documentation/inline_docs&view=inline_instructions#faqs-types\">
 	                                                	<img src=\"images/common/question.png\"></img>
 								$LANG_faqs_type
 							</a>
