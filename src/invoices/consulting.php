@@ -264,13 +264,13 @@ $mid->printFooter();
 </table>
 
 </div id="header">
-<div id="subheader">
+<!-- <div id="subheader"> -->
 
 <table align=center>
 
 
 <tr>
-<td><?php echo $mb_table_biller_name; ?></th><td input type=text name="biller_block" size=25><?php echo $display_block; ?></td>
+<td class="details_screen"><?php echo $mb_table_biller_name; ?></th><td input type=text name="biller_block" size=25><?php echo $display_block; ?></td>
 
 </tr>
 </tr>
@@ -278,14 +278,14 @@ $mid->printFooter();
 
 
 <tr>
-<td><?php echo $mc_table_customer_name; ?></th><td input type=text name="customer_block" size=25 ><?php echo $display_block_customer; ?></td>
+<td class="details_screen"><?php echo $mc_table_customer_name; ?></th><td input type=text name="customer_block" size=25 ><?php echo $display_block_customer; ?></td>
 
 
 
 </tr>
 
 <tr>
-<td><?php echo $LANG_quantity;?></td><td><?php echo $LANG_description;?></td>
+<td class="details_screen"><?php echo $LANG_quantity;?></td><td class="details_screen"><?php echo $LANG_description;?></td>
 </tr>
 <?php
 /* check the def number of line items and do the print and entry field for that number of items */
@@ -308,18 +308,19 @@ $mid->printFooter();
                         endwhile;
 ?>
 <tr>
-        <td><?php echo $LANG_notes_opt;?></td>
+        <td colspan=5 class="details_screen"><?php echo $LANG_notes_opt;?></td>
 </tr>
 
 <tr>
         <td colspan=5 ><textarea input type=text name="invoice_consulting_note" rows=5 cols=80 WRAP=nowrap></textarea></td>
 </tr>
 
-<tr><td><?php echo $LANG_tax;?></td><td input type=text name="inv_it_tax" size=15> <?php echo $display_block_tax; ?></td>
+<tr>
+	<td class="details_screen"><?php echo $LANG_tax;?></td><td input type=text name="inv_it_tax" size=15> <?php echo $display_block_tax; ?></td>
 </tr>
 
 <tr>
-<td><?php echo $LANG_inv_pref;?></td><td input type=text name="inv_preferences"><?php echo $display_block_preferences; ?></td>
+	<td class="details_screen"><?php echo $LANG_inv_pref;?></td><td input type=text name="inv_preferences"><?php echo $display_block_preferences; ?></td>
 </tr>
 <!--Add more line items while in an itemeised invoice - Get style - has problems- wipes the current values of the existing rows - not good
 <tr>
@@ -328,7 +329,7 @@ $mid->printFooter();
 </tr>
 -->
 </table>
-</div>
+<!-- </div> -->
 
 <div id="footer">
 		<input type=hidden name="max_items" value="<?php echo $num; ?>">

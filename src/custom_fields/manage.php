@@ -46,10 +46,8 @@ while ($Array = mysql_fetch_array($result)) {
 	$display_block .= <<<EOD
 	<tr class="index_table">
 	<td class="index_table">
-	<a class="index_table"
-	 href="custom_field_details.php?submit={$cf_idField}&action=view">{$LANG_view}</a> ::
-	<a class="index_table"
-	 href="custom_field_details.php?submit={$cf_idField}&action=edit">{$LANG_edit}</a> </td>
+	<a class="index_table" href="index.php?module=custom_fields&view=details&submit={$cf_idField}&action=view">{$LANG_view}</a> ::
+	<a class="index_table" href="index.php?module=custom_fields&view=details&submit={$cf_idField}&action=edit">{$LANG_edit}</a> </td>
 	<td class="index_table">{$cf_idField}</td>
 	<td class="index_table">{$custom_field_name}</td>
 	<td class="index_table">{$cf_custom_labelField}</td>

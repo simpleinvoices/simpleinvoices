@@ -239,37 +239,37 @@ $mid->printFooter();
 </table>
 
 </div id="header">
-<div id="subheader">
+<!-- <div id="subheader"> -->
 
 <table  align=center>
 <tr>
-<td><?php echo $mb_table_biller_name; ?></th><td input type=text name="biller_block" size=25><?php echo $display_block; ?></td>
+<td class="details_screen"><?php echo $mb_table_biller_name; ?></th><td input type=text name="biller_block" size=25><?php echo $display_block; ?></td>
 
 </tr>
 </tr>
 
 <tr>
-<td><?php echo $mc_table_customer_name; ?></th><td input type=text name="customer_block" size=25><?php echo $display_block_customer; ?></td>
+<td class="details_screen"><?php echo $mc_table_customer_name; ?></th><td input type=text name="customer_block" size=25><?php echo $display_block_customer; ?></td>
 
 
 
 </tr>
 
 <tr>
-	<td colspan=5><?php echo $LANG_description;?></td>
+	<td colspan=5 class="details_screen"><?php echo $LANG_description;?></td>
 </tr>
 <tr>
-	<td colspan=5 ><textarea input type=text name="i_description" rows=10 cols=100 WRAP=nowrap></textarea></td>
+	<td colspan=5 class="details_screen" ><textarea input type=text name="i_description" rows=10 cols=100 WRAP=nowrap></textarea></td>
 </tr>
 <tr>
-	<td><?php echo $LANG_gross_total;?></td><td><?php echo $LANG_tax;?></td><td><?php echo $LANG_inv_pref;?></td>
+	<td class="details_screen"><?php echo $LANG_gross_total;?></td><td class="details_screen"><?php echo $LANG_tax;?></td><td class="details_screen"><?php echo $LANG_inv_pref;?></td>
 </tr>
 <tr>
 	<td><input type=text name="inv_it_gross_total" size=15></td><td input type=text name="inv_it_tax" size=15><?php echo $display_block_tax; ?></td><td input type=text name="inv_preferences" size=25><?php echo $display_block_preferences; ?></td>
 
 </tr>
 </table>
-</div>
+<!-- </div> -->
 
 <div id="footer">
 	<input type=submit name="submit" value="<?php echo $LANG_save;echo " "; echo $LANG_inv;?>"><input type=hidden name="invoice_style" value="insert_invoice_total"> * <?php echo $LANG_mandatory_fields;?>

@@ -77,7 +77,7 @@ $display_block =  "
 	
 	<table align=center>
 	<tr>
-		<td class='details_screen'><a href='index.php?module=system_defaults&view=edit&sumbit=biller'>Edit</a></td><td class='details_screen'>Biller</td><td>$b_nameField</td>
+		<td class='details_screen'><a href='index.php?module=system_defaults&view=edit&submit=biller'>Edit</a></td><td class='details_screen'>Biller</td><td>$b_nameField</td>
 	</tr>
 	<tr>
 		<td class='details_screen'><a href='index.php?module=system_defaults&view=edit&submit=customer'>Edit</a></td><td class='details_screen'>Customer</td><td>$c_nameField</td>
@@ -86,7 +86,7 @@ $display_block =  "
 		<td class='details_screen'><a href='index.php?module=system_defaults&view=edit&submit=tax'>Edit</a></td><td class='details_screen'>Tax</td><td>$tax_descriptionField</td>
 	</tr>
 	<tr>
-		<td class='details_screen'><a href='index.php?module=system_defaults&view=edit&sumbit=inv_preference'>Edit</a></td><td class='details_screen'>Invoice preference</td><td>$inv_preferencesField</td>
+		<td class='details_screen'><a href='index.php?module=system_defaults&view=edit&submit=inv_preference'>Edit</a></td><td class='details_screen'>Invoice preference</td><td>$inv_preferencesField</td>
 	</tr>
 	<tr>
 		<td class='details_screen'><a href='index.php?module=system_defaults&view=edit&submit=line_items'>Edit</a></td><td class='details_screen'>Default number of line items</td><td>$def_number_line_itemsField</td>

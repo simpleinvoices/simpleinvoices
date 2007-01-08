@@ -71,43 +71,43 @@ echo <<<EOD
 </table>
 
 </div>
-<div id="subheader">
+<!-- <div id="subheader"> -->
 
 <table align=center>
 	<tr>
-		<td>{$LANG_product_description}</td>
+		<td class="details_screen">{$LANG_product_description}</td>
 		<td><input type=text name="prod_description" size=50></td>
 	</tr>
 	<tr>
-		<td>{$LANG_product_unit_price}</td>
+		<td class="details_screen">{$LANG_product_unit_price}</td>
 		<td><input type=text name="prod_unit_price" size=25></td>
 	</tr>
 	<tr>
-		<td>{$prod_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"">*</a></td>
+		<td class="details_screen">{$prod_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"">*</a></td>
 		<td><input type=text name="prod_custom_field1" size=50></td>
 	</tr>
 	<tr>
-		<td>{$prod_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
+		<td class="details_screen">{$prod_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
 		<td><input type=text name="prod_custom_field2" size=50></td>
 	</tr>
 	<tr>
-		<td>{$prod_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
+		<td class="details_screen">{$prod_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
 		<td><input type=text name="prod_custom_field3" size=50></td>
 	</tr>
 	<tr>
-		<td>{$prod_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
+		<td class="details_screen">{$prod_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
 		<td><input type=text name="prod_custom_field4" size=50></td>
 	</tr>
 	<tr>
-		<td>{$LANG_notes}</td>
+		<td class="details_screen">{$LANG_notes}</td>
 		<td><textarea input type=text name='prod_notes' rows=8 cols=50>{$prod_notesField}</textarea></td>
 	</tr>
 	<tr>
-		<td>{$LANG_product_enabled}</td>
+		<td class="details_screen">{$LANG_product_enabled}</td>
 		<td>{$display_block_enabled}</td>
 	</tr>
 </table>
-</div>
+<!-- </div> -->
 
 <div id="footer">
 	<input type=submit name="submit" value="{$LANG_insert_product}">

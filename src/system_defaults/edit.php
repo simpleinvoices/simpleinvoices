@@ -46,7 +46,7 @@ if ($_GET[submit] == "line_items") {
 		<td><br></td>
 	</tr>
 	<tr>
-		<td>$msd_default_number_items</td>
+		<td class=\"details_screen\">$msd_default_number_items</td>
 		<td><input type=text size=25 name='def_num_line_items' value=$def_number_line_itemsField></td>
 	</tr>
 	<tr>
@@ -117,7 +117,7 @@ else if ($_GET[submit] == "def_inv_template") {
 	</tr>
 	-->
 	<tr>
-		<td>$msd_def_inv_template</td>
+		<td class=\"details_screen\">$msd_def_inv_template <a href='./src/documentation/info_pages/default_invoice_template_text.html?keepThis=true&TB_iframe=true&height=300&width=500' title='Info :: Custom fields' class='thickbox'>*</a></td>
 		<td>$display_block_templates_list</td>
 	</tr>
 	<tr>
@@ -174,7 +174,7 @@ else if ($_GET[submit] == "biller") {
 		<td><br></td>
 	</tr>
 	<tr>
-	<td>$mb_table_biller_name</th><td>$display_block_biller</td>
+		<td class=\"details_screen\">$mb_table_biller_name</th><td>$display_block_biller</td>
 	</tr>
 	<tr>
 		<td><br></td>
@@ -229,7 +229,7 @@ else if ($_GET[submit] == "customer") {
 		<td><br></td>
 	</tr>
 	<tr>
-	<td>$mc_table_customer_name</th><td>$display_block_customer</td>
+		<td class=\"details_screen\">$mc_table_customer_name</th><td>$display_block_customer</td>
 	</tr>
 	<tr>
 		<td><br></td>
@@ -286,7 +286,7 @@ else if ($_GET[submit] == "tax") {
 		<td><br></td>
 	</tr>
 	<tr>
-	<td>$msd_tax</td><td>$display_block_tax</td>
+	<td class=\"details_screen\">$msd_tax</td><td>$display_block_tax</td>
 	</tr>
 	<tr>
 		<td><br></td>
@@ -342,7 +342,7 @@ else if ($_GET[submit] == "inv_preference") {
 		<td><br></td>
 	</tr>
 	<tr>
-		<td>$msd_invoice_preference</td><td>$display_block_preferences</td>
+		<td class=\"details_screen\">$msd_invoice_preference</td><td>$display_block_preferences</td>
 	</tr>
 	<tr>
 		<td><br></td>
@@ -397,7 +397,7 @@ else if ($_GET[submit] == "def_payment_type") {
                 <td><br></td>
         </tr>
         <tr>
-        <td>$msd_payment_type</td><td>$display_block_payment_type</td>
+        <td class=\"details_screen\">$msd_payment_type</td><td>$display_block_payment_type</td>
         </tr>
         <tr>
                 <td><br></td>
@@ -421,6 +421,8 @@ else {
 
 <?php include('./include/menu.php'); ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="./include/jquery.js"></script>
+<script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 
 <script type="text/javascript" src="niftycube.js"></script>
 <script type="text/javascript">
@@ -443,6 +445,7 @@ $mid->printFooter();
 ?>
 
 <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
+<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/jquery.thickbox.css" media="all"/>
 <br>
 
 <FORM name="frmpost" ACTION="index.php?module=system_defaults&view=save&sys_default=<?php echo $default; ?>" METHOD=POST onsubmit="return frmpost_Validator(this)">
@@ -455,7 +458,7 @@ $mid->printFooter();
 </table>
 
 </div id="header">
-<div id="subheader">
+<!-- <div id="subheader"> -->
 
 <table align=center>
 
@@ -466,12 +469,11 @@ $mid->printFooter();
 </tr>
 </tr>
 </table>
-</div>
+<!-- </div> -->
 
 <div id="footer">
-<p><input type=submit name="submit" value="<?php echo $msd_submit_button; ?>">
-<input type=hidden name="op" value="update_system_defaults">
-</p>
+	<input type=submit name="submit" value="<?php echo $msd_submit_button; ?>">
+	<input type=hidden name="op" value="update_system_defaults">
 </div>
 
 </FORM>

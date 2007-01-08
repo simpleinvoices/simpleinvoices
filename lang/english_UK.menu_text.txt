@@ -59,11 +59,11 @@
 ...|Total by Aging periods|./index.php?module=reports&view=report_debtors_aging_total
 .|Options|./index.php
 ..|System Defaults|./index.php?module=system_defaults&view=manage
-..|Custom Fields|./manage_custom_fields.php
+..|Custom Fields|./index.php?module=custom_fields&view=manage
 ..|---
-..|Tax Rates|manage_tax_rates.php|
-...|Manage Tax Rates|./manage_tax_rates.php
-...|Add Custom Tax Rate|./insert_tax_rate.php
+..|Tax Rates|./index.php?module=tax_rates&view=manage
+...|Manage Tax Rates|./index.php?module=tax_rates&view=manage
+...|Add Custom Tax Rate|./index.php?module=tax_rates&view=add
 ..|Invoice Preferences|./manage_preferences.php
 ...|Manage Invoice Preferences|./manage_preferences.php
 ...|Add New Invoice Preferences|./insert_preference.php

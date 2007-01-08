@@ -42,7 +42,7 @@ if ($_GET['action'] == "view") {
 	$display_block = <<<EOD
 
 	<div id="header"><b>{$LANG_custom_fields}</b> ::
-	<a href="?submit={$cf_idField}&action=edit">{$LANG_edit}</a></div>
+	<a href="index.php?module=custom_fields&view=details&submit={$cf_idField}&action=edit">{$LANG_edit}</a></div>
 	
 	<table align="center">
 	<tr>
@@ -66,7 +66,7 @@ EOD;
 
 $footer = <<<EOD
 
-<div id="footer"><a href="?submit={$cf_idField}&action=edit">{$LANG_edit}</a></div>
+<div id="footer"><a href="index.php?module=custom_fields&view=details&submit={$cf_idField}&action=edit">{$LANG_edit}</a></div>
 
 EOD;
 }
@@ -126,7 +126,7 @@ $mid->printFooter();
 echo <<<EOD
 
 <br>
-<FORM name="frmpost" ACTION="insert_action.php?submit={$_GET['submit']}"
+<FORM name="frmpost" ACTION="index.php?module=custom_fields&view=save&submit={$_GET['submit']}"
  METHOD="POST" onsubmit="return frmpost_Validator(this)">
 <div id="container">
 {$display_block}
