@@ -43,6 +43,7 @@ a.date-picker {
 	cursor: pointer;
 	background: url(../images/calendar.png) no-repeat; 
 }
+
 a.date-picker span {
 	margin: 0 0 0 -2000px;
 }
@@ -61,7 +62,7 @@ div.popup-calendar {
 	position: absolute;
 	z-index: 2;
 	top: 0;
-	left: 99px;
+	left: -16px; /* value for IE */
 	padding: 4px;
 	border: 2px solid #000;
 	background: #fff;
@@ -69,17 +70,8 @@ div.popup-calendar {
 	overflow:hidden;
 	width: 163px;
 }
-div.popup-calendar iframe
-{
-	display:none;/*sorry for IE5*/
-	display/**/:block;/*sorry for IE5*/
-	position:absolute;
-	top:0;
-	left:0;
-	z-index:-1;
-	filter:mask();
-	width:3000px;
-	height:3000px;
+html>body div.popup-calendar {
+	left: 99px; /* value for decent browsers */
 }
 div.popup-calendar div.link-close {
 	float: right;
@@ -117,6 +109,9 @@ div.popup-calendar table th, div.popup-calendar table td {
 div.popup-calendar table td.inactive {
 	color: #aaa;
 	padding: 1px 0 0;
+}
+div.popup-calendar table th.weekend, div.popup-calendar table td.weekend {
+	background: #f6f6f6;
 }
 div.popup-calendar table td a {
 	display: block;
