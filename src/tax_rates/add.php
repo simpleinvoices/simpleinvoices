@@ -42,28 +42,28 @@ echo <<<EOD
 
 <br>
 
-<FORM name="frmpost" ACTION="insert_action.php" METHOD=POST onsubmit="return frmpost_Validator(this)">
+<FORM name="frmpost" ACTION="index.php?module=tax_rates&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
 <div id="container">
 <div id="header"><b>{$LANG_tax_rate_to_add}</b></div id="header">
-<div id="subheader">
+<!-- <div id="subheader"> -->
 
 <table align=center>
 	<tr>
-		<td>{$LANG_tax_description}</td>
+		<td class="details_screen">{$LANG_tax_description}</td>
 		<td><input type=text name="tax_description" size=50></td><td></td>
 	</tr>
 	<tr>
-		<td>{$LANG_tax_percentage}</td>
+		<td class="details_screen">{$LANG_tax_percentage}</td>
 		<td><input type=text name="tax_percentage" size=25> %</td>
 		<td>{$LANG_ie_10_for_10}</td>
 	</tr>
 	<tr>
-		<td>{$wording_for_enabledField}</td>
+		<td class="details_screen">{$wording_for_enabledField}</td>
 		<td>{$display_block_enabled}</td><td></td>
 	</tr>
 	
 </table>
-</div>
+<!-- </div> -->
 
 <div id="footer">
 	<input type=submit name="submit" value="{$LANG_insert_tax_rate}">

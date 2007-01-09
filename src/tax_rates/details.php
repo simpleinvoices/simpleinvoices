@@ -53,6 +53,9 @@ if ($_GET['action'] === 'view') {
 
 	$display_block = <<<EOD
 
+        <div id="header"><b>{$LANG_tax_rate}</b> ::
+        <a href="index.php?module=tax_rates&view=details&submit={$tax_idField}&action=edit">{$LANG_edit}</a></div>
+
 	<table align="center">
 	<tr>
 		<td class="details_screen">{$LANG_tax_rate_id}</td><td>{$tax_idField}</td>
@@ -86,6 +89,9 @@ $display_block_enabled = "<select name=\"tax_enabled\">
 </select>";
 
 $display_block = <<<EOD
+
+        <div id="header"><b>{$LANG_tax_rate}</b> ::
+        <a href="index.php?module=tax_rates&view=details&submit={$tax_idField}&action=edit">{$LANG_edit}</a></div>
 
 	<table align="center">
 	<tr>
@@ -136,7 +142,6 @@ echo <<<EOD
 <form name="frmpost" action="index.php?module=tax_rates&view=save&submit={$_GET['submit']}"
  method="post" onsubmit="return frmpost_Validator(this)">
 <div id="container">
-<div id="header"><b>{$LANG_tax_rate}</b></div>
 {$display_block}
 <div id="footer">
 {$footer}

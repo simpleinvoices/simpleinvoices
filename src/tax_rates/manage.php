@@ -30,7 +30,7 @@ if (mysql_num_rows($result) == 0) {
 
 <table width="100%" align="center" class="filterable sortable" id="large">
 	<div id="header"><b>{$LANG_manage_tax_rates}</b> ::
-	<a href="./index.php?module=tax_rate&view=add">{$LANG_add_new_tax_rate}</a></div></th>
+	<a href="./index.php?module=tax_rates&view=add">{$LANG_add_new_tax_rate}</a></div></th>
 <tr class="sortHeader">
 	<th class="noFilter">{$LANG_actions}</th>
 	<th class="index_table">{$LANG_tax_id}</th>
