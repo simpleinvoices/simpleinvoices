@@ -118,7 +118,7 @@ th {
 .largeHeaders {
 	background: 
 		#e9e9da
-		url('../../images/green_arrows.gif')
+		url('../../images/common/green_arrows.gif')
 		no-repeat
 		center right;
 	color: #333;
@@ -130,7 +130,7 @@ th {
 .sortUp {
 	background:
 		#e9e900 
-		url('../../images/green_decending.gif')		
+		url('../../images/common/green_decending.gif')		
 		no-repeat
 		center right;
 }
@@ -139,7 +139,7 @@ th {
 	background:
 		#e9e900 
 
-		url('../../images/green_acending.gif')
+		url('../../images/common/green_acending.gif')
 		no-repeat
 		center right;
 }
