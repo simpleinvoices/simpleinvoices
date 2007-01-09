@@ -57,9 +57,9 @@ EOD;
 		<tr class="index_table">
 		<td class="index_table">
 		<a class="index_table"
-		href="./index.php?module=tax_rate&view=details&submit={$tax_idField}&action=view">{$LANG_view}</a> ::
+		href="./index.php?module=tax_rates&view=details&submit={$tax_idField}&action=view">{$LANG_view}</a> ::
 		<a class="index_table"
-		 href="./index.php?module=tax_rate&view=details&submit={$tax_idField}&action=edit">{$LANG_edit}</a></td>
+		 href="./index.php?module=tax_rates&view=details&submit={$tax_idField}&action=edit">{$LANG_edit}</a></td>
 		<td class="index_table">{$tax_idField}</td>
 		<td class="index_table">{$tax_descriptionField}</td>
 		<td class="index_table">{$tax_percentageField}</td>
