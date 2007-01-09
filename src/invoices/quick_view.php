@@ -141,7 +141,7 @@ while ($Array_defaults = mysql_fetch_array($result_print_defaults) ) {
 #amount paid calc - end
 
 #amount owing calc - start
-        $invoice_owing_Field = $invoice_total_Field - $invoice_paid_Field;
+        $invoice_owing_Field = number_format($invoice_total_Field - $invoice_paid_Field, 2);
 #amount owing calc - end
 }
 }
@@ -178,7 +178,7 @@ select  IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount from si_a
 #amount paid calc - end
 
 #amount owing calc - start
-        $invoice_owing_Field_customer = $invoice_total_Field_customer - $invoice_paid_Field_customer;
+        $invoice_owing_Field_customer = number_format($invoice_total_Field_customer - $invoice_paid_Field_customer,2);
 #amount owing calc - end
 }
 }

@@ -248,7 +248,7 @@ border: 1px solid #000;
 padding: 2px 5px;
 }
 .ac_loading {
-background : url('./images/indicator-js.gif') right center no-repeat;
+background : url('./images/common/indicator-js.gif') right center no-repeat;
 }
 .over {
 background: yellow;

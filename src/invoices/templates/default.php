@@ -139,7 +139,7 @@ while ($Array_preferences = mysql_fetch_array($result_print_preferences)) {
 #amount paid calc - end
 
 #amount owing calc - start
-        $invoice_owing_Field = $invoice_total_Field - $invoice_paid_Field;
+        $invoice_owing_Field = number_format($invoice_total_Field - $invoice_paid_Field,2);
 #amount owing calc - end
 }
 }

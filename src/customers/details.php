@@ -69,7 +69,7 @@ while ($Array = mysql_fetch_array($result_print_customer) ) {
 	$result_print_invoice_total = mysql_query($print_invoice_total, $conn) or die(mysql_error());
 
 	while ($Array = mysql_fetch_array($result_print_invoice_total)) {
-		$invoice_total_Field = $Array['total'];
+		$invoice_total_Field = number_format($Array['total'],2);
 #invoice total calc - end
 
 #amount paid calc - start
@@ -91,11 +91,11 @@ $x1 = "select  IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount fr
 */
 		$result_x1 = mysql_query($x1, $conn) or die(mysql_error());
 		while ($result_x1Array = mysql_fetch_array($result_x1)) {
-			$invoice_paid_Field = $result_x1Array['amount'];
+			$invoice_paid_Field = number_format($result_x1Array['amount'],2);
 #amount paid calc - end
 
 #amount owing calc - start
-			$invoice_owing_Field = $invoice_total_Field - $invoice_paid_Field;
+			$invoice_owing_Field = number_format($invoice_total_Field - $invoice_paid_Field,2);
 #amount owing calc - end
 		}
 	}
