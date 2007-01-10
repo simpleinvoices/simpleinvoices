@@ -67,9 +67,9 @@
 ..|Invoice Preferences|./manage_preferences.php
 ...|Manage Invoice Preferences|./manage_preferences.php
 ...|Add New Invoice Preferences|./insert_preference.php
-..|Payment Types|./manage_payment_types.php
-...|Manage Payment Types|./manage_payment_types.php
-...|Add New Payment Type|./insert_payment_type.php
+..|Payment Types|./index.php?module=payment_types&view=manage
+...|Manage Payment Types|./index.php?module=payment_types&view=manage
+...|Add New Payment Type|./index.php?module=payment_types&view=add
 ..|---
 ..|Database Upgrade Manager|./database_sqlpatches.php
 ..|Backup Database|./backup_database.php

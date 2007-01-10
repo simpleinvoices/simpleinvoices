@@ -60,7 +60,7 @@ $display_block = <<<EOD
 EOD;
 $footer = "
 
-<div id='footer'><a href='?submit={$pt_idField}&action=edit'>{$LANG_edit}</a></div>
+<div id='footer'><a href='index.php?module=payment_types&view=details&submit={$pt_idField}&action=edit'>{$LANG_edit}</a></div>
 ";
 
 }
@@ -120,8 +120,7 @@ $mid->printFooter();
 echo <<<EOD
 
 <br>
-<form name="frmpost" action="insert_action.php?submit={$_GET['submit']}"
- method="post" onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=payment_types&view=save&submit={$_GET['submit']}" method="post" onsubmit="return frmpost_Validator(this)">
 <div id="container">
 <div id="header"><b>{$LANG_payment_type}</b></div>
 {$display_block}

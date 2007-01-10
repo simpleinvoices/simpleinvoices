@@ -29,8 +29,7 @@ if (mysql_num_rows($result) == 0) {
 </div>
 
 <table width="100%" align="center" class="filterable sortable" id="large">
-<div id="header"><b>{$LANG_manage_payment_types}</b> ::
-<a href="insert_payment_type.php"{$LANG_add_new_payment_type}</a></div>
+<div id="header"><b>{$LANG_manage_payment_types}</b> :: <a href="index.php?module=payment_types&view=add">{$LANG_add_new_payment_type}</a></div>
 <tr class="sortHeader">
 <th class="noFilter">{$LANG_actions}</th>
 <th class="index_table">{$LANG_payment_type_id}</th>
@@ -54,9 +53,9 @@ EOD;
 		$display_block .= <<<EOD
 	<tr class="index_table">
 	<td class="index_table"><a class="index_table"
-	 href="payment_type_details.php?submit={$pt_idField}&action=view">{$LANG_view}</a> ::
+	 href="index.php?module=payment_types&view=details&submit={$pt_idField}&action=view">{$LANG_view}</a> ::
 	<a class="index_table"
-	 href="payment_type_details.php?submit={$pt_idField}&action=edit">{$LANG_edit}</a> </td>
+	 href="index.php?module=payment_types&view=details&submit={$pt_idField}&action=edit">{$LANG_edit}</a> </td>
 	<td class="index_table">{$pt_idField}</td>
 	<td class="index_table">{$pt_descriptionField}</td>
 	<td class="index_table">{$wording_for_enabled}</td>
