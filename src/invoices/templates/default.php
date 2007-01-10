@@ -168,7 +168,7 @@ if (!empty($b_co_logoField)) {
 	$logo_block = "
 	<table width=100% align=center>
 	        <tr>
-       		        <td colspan=5><IMG src=../logo/$b_co_logoField border=0 hspace=0 align=left></td><th align=right><span class=\"font1\">$pref_inv_headingField</span></th>
+       		        <td colspan=5><IMG src=./images/logo/$b_co_logoField border=0 hspace=0 align=left></td><th align=right><span class=\"font1\">$pref_inv_headingField</span></th>
 	        </tr>
         	<tr>
                 	<td colspan=6><hr size=\"1\"></td>
@@ -180,7 +180,7 @@ if (empty($b_co_logoField)) {
         $logo_block = "
 	<table width=100% align=center>
         	<tr>
-               		<td colspan=5><IMG src=../logo/_default_blank_logo.png border=0 hspace=0 align=left><th align=right><span class=\"font1\">$pref_inv_headingField</span></th></td>
+               		<td colspan=5><IMG src=./images/logo/_default_blank_logo.png border=0 hspace=0 align=left><th align=right><span class=\"font1\">$pref_inv_headingField</span></th></td>
 	        </tr>
        		<tr>
                		<td colspan=6><hr size=\"1\"></hr></td>

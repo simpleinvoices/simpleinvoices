@@ -743,7 +743,7 @@ $mid->printFooter();
 <?php echo $LANG_actions;?>: 
 		<a href="index.php?module=invoices&view=templates/<?php echo $def_inv_templateField; ?>&submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>"> <?php echo $LANG_print_preview;?></a>
 		 :: 
-		<a href="index.php?module=invoicesview=details&submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>"> <?php echo $LANG_edit; ?></a>
+		<a href="index.php?module=invoices&view=details&submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>"> <?php echo $LANG_edit; ?></a>
 		 ::
 		 <a href='index.php?module=payments&view=process&submit=<?php echo $inv_idField;?>&op=pay_selected_invoice'> <?php echo $LANG_process_payment; ?> </a>
 		 ::
