@@ -35,12 +35,12 @@ $mid->printFooter();
 include('./config/config.php');
 
    // include the PHPReports classes on the PHP path! configure your path here
-   include "./reports/PHPReportMaker.php";
+   include "./src/reports/PHPReportMaker.php";
 
    $sSQL = "select sum(inv_it_total) from si_invoice_items";
    $oRpt = new PHPReportMaker();
 
-   $oRpt->setXML("reports/report_sales_total.xml");
+   $oRpt->setXML("src/reports/xml/report_sales_total.xml");
    $oRpt->setUser("$db_user");
    $oRpt->setPassword("$db_password");
    $oRpt->setConnection("$db_host");

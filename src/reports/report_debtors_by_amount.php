@@ -35,7 +35,7 @@ $mid->printFooter();
 include('./config/config.php');
 
    // include the PHPReports classes on the PHP path! configure your path here
-   include "./reports/PHPReportMaker.php";
+   include "./src/reports/PHPReportMaker.php";
 
    $sSQL = "
 
@@ -59,7 +59,7 @@ ORDER BY
 ";
    $oRpt = new PHPReportMaker();
 
-   $oRpt->setXML("reports/report_debtors_by_amount.xml");
+   $oRpt->setXML("src/reports/xml/report_debtors_by_amount.xml");
    $oRpt->setUser("$db_user");
    $oRpt->setPassword("$db_password");
    $oRpt->setConnection("$db_host");

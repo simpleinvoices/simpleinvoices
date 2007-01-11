@@ -26,15 +26,15 @@
 		// PHPReports installation hiding in one of them
 		foreach ($aPaths as $sPath)
 		{
-			if (file_exists($sPath . "/reports/PHPReportMaker.php"))
+			if (file_exists($sPath . "/src/reports/PHPReportMaker.php"))
 			{
-				ini_set('include_path', ini_get('include_path').$ipsep.$sPath."/reports");
-				return $sPath . "/reports";
+				ini_set('include_path', ini_get('include_path').$ipsep.$sPath."/src/reports");
+				return $sPath . "/src/reports";
 			}
-			else if (file_exists($sPath . "/reports/PHPReportMaker.php"))
+			else if (file_exists($sPath . "/src/reports/PHPReportMaker.php"))
 			{
-				ini_set('include_path', ini_get('include_path').$ipsep.$sPath."/reports");
-				return $sPath . "/reports";
+				ini_set('include_path', ini_get('include_path').$ipsep.$sPath."/src/reports");
+				return $sPath . "/src/reports";
 			}
 		}
 

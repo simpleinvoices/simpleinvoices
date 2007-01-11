@@ -39,7 +39,7 @@ include('./config/config.php');
    $sSQL = "select  si_biller.b_name,  sum(si_invoice_items.inv_it_total) from si_biller, si_invoice_items, si_invoices where si_invoices.inv_biller_id = si_biller.b_id and si_invoices.inv_id = si_invoice_items.inv_it_invoice_id GROUP BY b_name";
    $oRpt = new PHPReportMaker();
 
-   $oRpt->setXML("./src/reports/report_biller_total.xml");
+   $oRpt->setXML("./src/reports/xml/report_biller_total.xml");
    $oRpt->setUser("$db_user");
    $oRpt->setPassword("$db_password");
    $oRpt->setConnection("$db_host");
