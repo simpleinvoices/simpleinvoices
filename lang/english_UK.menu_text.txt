@@ -64,16 +64,16 @@
 ..|Tax Rates|./index.php?module=tax_rates&view=manage
 ...|Manage Tax Rates|./index.php?module=tax_rates&view=manage
 ...|Add Custom Tax Rate|./index.php?module=tax_rates&view=add
-..|Invoice Preferences|./manage_preferences.php
-...|Manage Invoice Preferences|./manage_preferences.php
-...|Add New Invoice Preferences|./insert_preference.php
+..|Invoice Preferences|.index.php?module=preferences&view=manage
+...|Manage Invoice Preferences|./index.php?module=preferences&view=manage
+...|Add New Invoice Preferences|./index.php?module=preferences&view=add
 ..|Payment Types|./index.php?module=payment_types&view=manage
 ...|Manage Payment Types|./index.php?module=payment_types&view=manage
 ...|Add New Payment Type|./index.php?module=payment_types&view=add
 ..|---
-..|Database Upgrade Manager|./database_sqlpatches.php
-..|Backup Database|./backup_database.php
-..|Sanity check of invoices|./sanity_check.php
+..|Database Upgrade Manager|./index.php?module=options&view=database_sqlpatches
+..|Backup Database|./index.php?module=options&view=backup_database
+..|Sanity check of invoices|./index.php?module=options&view=sanity_check
 ..|---
 ..|Help|inline_instructions.php
 ...|Installation|./inline_instructions.php#installation

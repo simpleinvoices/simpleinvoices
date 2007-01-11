@@ -1,3 +1,6 @@
+<?php
+include('./include/include_main.php');
+?>
 <html>
 <head>
 
@@ -6,7 +9,6 @@
   <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 
 <?php
-include('./include/include_main.php');
 
 echo <<<EOD
 	<title>{$title} :: {$LANG_manage_preferences}</title>
@@ -34,7 +36,7 @@ EOD;
 
 	<table width="100%" align="center" class="filterable sortable" id="large">
 	<div id="header"><b>{$LANG_manage_preferences}</b> ::
-	<a href="insert_preference.php">{$LANG_add_new_preference}</a></div>
+	<a href="index.php?module=preferences&view=add">{$LANG_add_new_preference}</a></div>
 	<tr class="sortHeader">
 	<th class="noFilter">{$LANG_action}</th>
 	<th class="index_table">{$LANG_preference_id}</th>
@@ -68,9 +70,9 @@ EOD;
  		<tr class="index_table">
 		<td class="index_table">
 		<a class="index_table"
-		href="preference_details.php?submit={$pref_idField}&action=view">{$LANG_view}</a> ::
+		href="index.php?module=preferences&view=details&submit={$pref_idField}&action=view">{$LANG_view}</a> ::
 		<a class="index_table"
-		href="preference_details.php?submit={$pref_idField}&action=edit">{$LANG_edit}</a> </td>
+		href="index.php?module=preferences&view=details&submit={$pref_idField}&action=edit">{$LANG_edit}</a> </td>
 		<td class="index_table">{$pref_idField}</td>
 		<td class="index_table">{$pref_descriptionField}</td>
 		<td class="index_table">{$wording_for_enabled}</td>

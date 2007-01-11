@@ -48,11 +48,9 @@ while ($Array_preferences = mysql_fetch_array($result_print_preferences)) {
 if (  $_GET['action'] === 'view' ) {
 
 $display_block =  "
+	<div id=\"header\"<b>Preference :: <a href='index.php?module=preferences&view=details&submit=$pref_idField&action=edit'>Edit</a></b></div>
 	
 	<table align=center>
-	<tr>
-		<td colspan=2 align=center><i>Preference</i></td>
-	</tr>	
 		<tr>
   			<td class='details_screen'>Preference ID</td><td>$pref_idField</td>
                 </tr>
@@ -103,7 +101,7 @@ $display_block =  "
 
 $footer =  "
 
-<div id='footer'><a href='?submit=$pref_idField&action=edit'>Edit</a></div>
+<div id='footer'><a href='index.php?module=preferences&view=details&submit=$pref_idField&action=edit'>Edit</a></div>
 ";
 
 }
@@ -118,10 +116,8 @@ $display_block_enabled = "<select name=\"pref_enabled\">
 </select>";
 
 $display_block =  "
+<div id=\"header\"><b>Preferences</b></div>
         <table align=center>
-        <tr>
-                <td colspan=2 align=center><i>Preference</i></td>
-        </tr>
                 <tr>
                         <td class='details_screen'>Preference ID</td><td>$pref_idField</td>
                 </tr>
@@ -175,9 +171,9 @@ $display_block =  "
 
 $footer =  "
 
-<p><input type=submit name='cancel' value='{$LANG_cancel}'>
+<input type=submit name='action' value='{$LANG_cancel}'>
 <input type=submit name='save_preference' value='{$LANG_save} {$msd_invoice_preference}'>
-<input type=hidden name='op' value='edit_preference'></p>
+<input type=hidden name='op' value='edit_preference'>
 ";
 
 
@@ -219,9 +215,8 @@ $mid->printFooter();
 
 <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
 <br>
-<form name="frmpost" action="insert_action.php?submit=<?php echo $_GET['submit'];?>" method="post" onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=preferences&view=save&submit=<?php echo $_GET['submit'];?>" method="post" onsubmit="return frmpost_Validator(this)">
 <div id="container">
-<div id="header"></div>
 <?php echo $display_block; ?>
 <div id="footer">
 <?php echo $footer; ?>
