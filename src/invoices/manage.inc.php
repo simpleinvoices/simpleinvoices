@@ -13,10 +13,10 @@ if (mysql_num_rows($result) == 0) {
 	<div>Sorting tables, please hold on...</div>
 </div>
 
-<table width="100%" align="center" id="large" class="sortable filterable">
+<table width="85%" align="center" id="large" class="sortable filterable">
 <div id="header">{$page_header}</div>
 <tr class="sortHeader">
-<th class="noFilter">{$LANG_actions}</th>
+<th class="noFilter" width=25px>{$LANG_actions}</th>
 <th class="index_table">{$LANG_id} &nbsp;</th>
 <th class="selectFilter index_table">{$LANG_biller}</th>
 <th class="selectFilter index_table">{$LANG_customer}</th>
@@ -124,7 +124,7 @@ while ($newArray = mysql_fetch_array($result)) {
                 $def_number_line_itemsField = $Array_defaults['def_number_line_items'];
                 $def_inv_templateField = $Array_defaults['def_inv_template'];
 	
-	$url_pdf = "{$_SERVER['HTTP_HOST']}{$install_path}/src/invoices/templates/{$def_inv_templateField}?submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}";
+	$url_pdf = "{$_SERVER['HTTP_HOST']}{$install_path}/index.php?module=invoices&view=templates/{$def_inv_templateField}&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}";
 	$url_pdf_encoded = urlencode($url_pdf);
         $url_for_pdf = "pdf/html2ps.php?process_mode=single&renderfields=1&renderlinks=1&renderimages=1&scalepoints=1&pixels={$pdf_screen_size}&media={$pdf_paper_size}&leftmargin={$pdf_left_margin}&rightmargin={$pdf_right_margin}&topmargin={$pdf_top_margin}&bottommargin={$pdf_bottom_margin}&transparency_workaround=1&imagequality_workaround=1&output=1&URL={$url_pdf_encoded}";
 
@@ -135,10 +135,10 @@ while ($newArray = mysql_fetch_array($result)) {
 	<!-- Quick View -->
 	<a class="index_table"
 	 title="{$LANG_quick_view_tooltip} {$invoice_preference_wordingField} {$inv_idField}"
-	 href="index.php?module=invoices&view=quick_view&submit={$inv_idField}&invoice_style={$inv_ty_descriptionField}">{$LANG_view}</a>
+	 href="index.php?module=invoices&view=quick_view&submit={$inv_idField}&invoice_style={$inv_ty_descriptionField}">V </a>
 	<!-- Edit View -->
 	<a class="index_table" title="{$LANG_edit_view_tooltip} {$invoice_preference_wordingField} {$inv_idField}"
-	 href="index.php?module=invoices&view=details&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}">{$LANG_edit}</a> 
+	 href="index.php?module=invoices&view=details&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}">E </a> 
 	<!-- Print View -->
 	<a class="index_table" title="{$LANG_print_preview_tooltip} {$invoice_preference_wordingField} {$inv_idField}"
 	href="index.php?module=invoices&view=templates/{$def_inv_templateField}&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}">
@@ -150,12 +150,14 @@ while ($newArray = mysql_fetch_array($result)) {
 
 	<!--XLS -->
 	<a title="{$LANG_export_tooltip} {$invoice_preference_wordingField}{$inv_idField} {$LANG_export_xls_tooltip} {$spreadsheet} {$LANG_format_tooltip}"
-	 class="index_table" href="index.php?module=invoices&view=templates/{$def_inv_templateField}&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}&export={$spreadsheet}">
+	 class="index_table" href="index.php?module=invoices&view=templates/simple&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}&export={$spreadsheet}">
 	 <img src="themes/{$theme}/images/xls.gif" height="16" border="0" valign="bottom" /><!-- $spreadsheet --></a>
+	<!-- was href="index.php?module=invoices&view=templates/{$def_inv_templateField} now using simple template-->
 	<!-- DOC -->
 	<a title="{$LANG_export_tooltip} {$invoice_preference_wordingField} {$inv_idField} {$LANG_export_doc_tooltip} {$word_processor} {$LANG_format_tooltip}"
-	 class="index_table" href="index.php?module=invoices&view=templates/{$def_inv_templateField}&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}&export={$word_processor}">
+	 class="index_table" href="index.php?module=invoices&view=templates/simple&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}&export={$word_processor}">
 	 <img src="themes/{$theme}/images/doc.png" height="16" border="0" valign="bottom" /><!-- $word_processor --></a>
+       <!-- was href="index.php?module=invoices&view=templates/{$def_inv_templateField} now using the simple template-->
   <!-- Payment --><a title="{$LANG_process_payment} {$invoice_preference_wordingField} {$inv_idField}"
    class="index_table" href="index.php?module=payments&view=process&submit={$inv_idField}&op=pay_selected_invoice">$</a>
 	</td>

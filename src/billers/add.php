@@ -8,10 +8,11 @@ include_once('./include/include_main.php');
 /* validataion code */
 include("./include/validation.php");
 echo <<<EOD
-<title>Simple Invoices :: {$LANG_add_biller}</title>
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css" media="all"/>
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css" media="all"/>
-
+<link rel="stylesheet" type="text/css" href="header1.css" media="all"/>
+<link rel="stylesheet" type="text/css" href="header2.css" media="all"/>
+<link rel="stylesheet" type="text/css" href="screen.css" media="all"/>
+<link rel="stylesheet" type="text/css" href="print.css" media="print"/>
+<link rel="stylesheet" type="text/css" href="blue.css" media="screen"/>
 EOD;
 jsBegin();
 jsFormValidationBegin("frmpost");
@@ -63,39 +64,26 @@ $biller_custom_field_label3 = get_custom_field_label(biller_cf3);
 $biller_custom_field_label4 = get_custom_field_label(biller_cf4);
 
 ?>
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#subheader");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 <script type="text/javascript" src="./include/jquery.js"></script>
 <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
+<!--[if gte IE 5.5]>
+<script language="JavaScript" src="dhtml.js" type="text/JavaScript"></script>
+<![endif]-->
 </head>
 
 <BODY>
 
 <?php
-$mid->printMenu('hormenu1');
-$mid->printFooter();
+
+
 echo <<<EOD
-
-<br>
-
 <FORM name="frmpost" ACTION="index.php?module=billers&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
-<div id="container">
-
-<div id="header"><b>{$LANG_biller_to_add}</b></table>
-
-</div>
-<!-- <div id="subheader"> -->
-
-<table align="center">
+	Add biller :: <a href=""><b>{$LANG_biller_to_add}</b></a>
+    <hr></hr>
+      <div id="browser">
+<table align="center" >
 	<tr>
 		<td class="details_screen">{$LANG_biller_name}</td><td><input type=text name="b_name" size=25></td>
 	</tr>
@@ -155,14 +143,30 @@ echo <<<EOD
 		<td class="details_screen">{$wording_for_enabledField}</td><td>{$display_block_enabled}</td>
 	</tr>
 
+
+	</div>
+	</div>
+
+        </div>
+	</tbody>
 </table>
 
-
-<!-- </div> -->
+<hr></hr>
 <div id="footer">
 	<input type="submit" name="submit" value="{$LANG_insert_biller}" />
 	<input type="hidden" name="op" value="insert_biller" />
+
+	</div>
+        </div>
+    
+	 </div>
+
+
+  <div class="bottom"> </div>
 </div>
+
+    </div>
+  </div>
 
 EOD;
 ?>

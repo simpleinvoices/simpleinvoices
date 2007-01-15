@@ -49,7 +49,7 @@
 ...|..|./index.php?module=reports&view=report_products_sold_by_customer
 ..|Biller sales|./index.php?module=reports&view=report_biller_total
 ...|Biller sales - Total|./index.php?module=reports&view=report_biller_total
-...|Biller sales by Customer - Total|./report_biller_by_customer
+...|Biller sales by Customer - Total|./index.php?module=reports&view=report_biller_by_customer
 ...|..|./index.php?module=reports&view=report_products_sold_by_customer
 ...|..|./index.php?module=reports&view=report_products_sold_by_customer
 ..|Debtors|./index.php?module=reports&view=report_debtors_by_amount

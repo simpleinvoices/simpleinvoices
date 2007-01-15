@@ -421,14 +421,6 @@ $display_block ="
 
                 <title><?php echo $title; ?></title>
 <script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#subheader");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
 
 <script type="text/javascript" src="./include/jquery.js"></script>
 <script type="text/javascript" src="./include/jquery.accordian.js"></script>
@@ -438,12 +430,9 @@ Nifty("div#header,div#footer","small");
 
 </head>
 <BODY>
-
-<?php
-$mid->printMenu('hormenu1');
-$mid->printFooter();
-?>
-
+   <hr></hr>
+       <div id="browser">
+ <table align="center" >
 
 <br>
 

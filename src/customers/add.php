@@ -31,40 +31,23 @@ $customer_custom_field_label3 = get_custom_field_label(customer_cf3);
 $customer_custom_field_label4 = get_custom_field_label(customer_cf4);
 
 ?>
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
 
 <script language="javascript" type="text/javascript" src="include/jquery.js"></script>
 <script language="javascript" type="text/javascript" src="include/jquery.thickbox.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 <?php
+
 echo <<<EOD
-<title>{$title} :: {$LANG_customer_add}</title>
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css">
+
 <link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css">
 </head>
 <BODY>
 
-EOD;
-$mid->printMenu('hormenu1');
-$mid->printFooter();
-
-echo <<<EOD
-
-<br>
-
 <FORM name="frmpost" ACTION="index.php?module=customers&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
-
-<div id="container">
-<div id="header"><b>{$LANG_customer_add}</b> </div>
-
+<div id="top"><b>{$LANG_customer_add}</b> </div>
+ <hr></hr>
+       <div id="browser">
 <table align=center>
 <tr>
 	<td class="details_screen">{$LANG_customer_name}</td><td><input type=text name="c_name" size=25></td>
@@ -122,13 +105,15 @@ echo <<<EOD
 </tr>
 
 </table>
-
+<hr></hr>
 <div id="footer">
 	<input type=submit name="submit" value="{$LANG_insert_customer}">
 	<input type=hidden name="op" value="insert_customer">
-</div>
+</div id="footer">
 
 EOD;
+include("footer.inc.php");
+
 ?>
 </div>
 </div>

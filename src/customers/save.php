@@ -1391,18 +1391,14 @@ include('./include/include_main.php');
 
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 $display_block_items = isset($display_block_items) ? $display_block_items : '&nbsp;';
+
 echo <<<EOD
 {$refresh_total}
-<title>{$title}</title>
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css">
 </head>
 
 <body>
+<div id="browser">
 
-EOD;
-$mid->printMenu('hormenu1');
-$mid->printFooter();
-echo <<<EOD
 <br>
 <br>
 {$display_block}
@@ -1410,6 +1406,7 @@ echo <<<EOD
 {$display_block_items}
 
 EOD;
+include("footer.inc.php");
 ?>
 </body>
 </html>

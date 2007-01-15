@@ -7,8 +7,7 @@ include_once('./include/include_main.php');
 <?php
 #table
 echo <<<EOD
-<title>{$title} :: {$LANG_customer_details}</title>
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css">
+
 <link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css">
 
 EOD;
@@ -112,8 +111,11 @@ $customer_custom_field_label4 = get_custom_field_label(customer_cf4);
 if ($_GET['action'] === 'view') {
 
 	$display_block = <<<EOD
-	<div id="header"><b>{$LANG_customer}</b> ::
-	<a href="index.php?module=customers&view=details&submit={$c_idField}&action=edit">{$LANG_edit}</a></div>
+	<div id="top"><b>{$LANG_customer}</b> ::
+	<a href="index.php?module=customers&view=details&submit={$c_idField}&action=edit">{$LANG_edit}</a>
+	</div>
+	<hr></hr>
+        <div id="browser">
 
 	<table align="center">
 	<tr>
@@ -222,10 +224,12 @@ EOD;
 #include('./manage_invoices.inc.php'); 
 
 $footer = <<<EOD
+<hr></hr>
 <div id="footer">
 	<a href="index.php?module=customers&view=details&submit={$c_idField}&action=edit">{$LANG_edit}</a>
 </div>
-
+</div>
+</div>
 EOD;
 }
 
@@ -238,7 +242,9 @@ $display_block_enabled = "<select name=\"c_enabled\">
 </select>";
 
 	$display_block = <<<EOD
-	<div id="header"><b>{$LANG_customer_edit}</b></div>
+	<div id="top"><b>{$LANG_customer_edit}</b></div>
+	 <hr></hr>
+        <div id="browser">
 
 	<table align="center">
 	<tr>
@@ -322,10 +328,13 @@ $display_block_enabled = "<select name=\"c_enabled\">
 EOD;
 
 $footer = <<<EOD
+
+	<hr></hr>
 	<input type="submit" name="cancel" value="{$LANG_cancel}" />
 	<input type="submit" name="save_customer" value="{$LANG_save} {$LANG_customer}" />
 	<input type="hidden" name="op" value="edit_customer" />
-
+	</div>
+	</div>
 EOD;
 }
 
@@ -356,15 +365,6 @@ $(document).sortStart(function(){
 });
 </script>
 
-
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
 
 <link rel="stylesheet" href="./include/css/tabs.css" type="text/css" media="print, projection, screen" />
 	<!-- Additional IE/Win specific style sheet (Conditional Comments) -->
@@ -419,12 +419,12 @@ Nifty("div#header,div#footer","small");
 
 </head>
 <body>
+
+
 <?php
-$mid->printMenu('hormenu1');
-$mid->printFooter();
+
 echo <<<EOD
 
-<br>
 <form name="frmpost" action="index.php?module=customers&view=save&submit={$_GET['submit']}" method="post" onsubmit="return frmpost_Validator(this)">
 
 <div id="container">
@@ -433,6 +433,9 @@ echo <<<EOD
 {$footer}
 
 EOD;
+
+include("footer.inc.php");
+
 ?>
 </div>
 </div>

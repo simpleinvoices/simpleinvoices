@@ -27,7 +27,7 @@ else {
 $display_block ="
 <table align=center><tr><td align=center><i>Database Backup</i></td></tr>
 <tr><td><br><br>To make a backup of your Simple Invoices database click the below link</td></tr>
-<tr><td align=center><br><a href='?op=backup_db'>BACKUP DATABASE NOW</a><br><br><br></td></tr>
+<tr><td align=center><br><a href='index.php?module=options&view=backup_database&op=backup_db'>BACKUP DATABASE NOW</a><br><br><br></td></tr>
 <tr><td>Note: this will backup your database to a file into your database_backups directory</td></tr>
 <tr><td><a href=\"./documentation/text/backup_database.html?keepThis=true&TB_iframe=true&height=300&width=500\" title=\"Info :: Database backup\" class=\"thickbox\"><font color=\"red\">Extra information</font></td></tr></table>
 

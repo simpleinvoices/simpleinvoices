@@ -8,11 +8,9 @@ include("./include/include_main.php")
 #table
 include("./include/validation.php");
 echo <<<EOD
-<title>{$title} :: {$LANG_customer_details}</title>
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css" />
 <link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css" />
-
 EOD;
+
 jsBegin();
 jsFormValidationBegin("frmpost");
 jsValidateRequired("prod_description",$LANG_product_description);
@@ -64,10 +62,12 @@ $prod_custom_field_label4 = get_custom_field_label(product_cf4);
 if ($_GET['action'] == "view") {
 
 	$display_block = <<<EOD
+	<div id="top"><b>{$LANG_products}</b> ::
+	<a href="index.php?module=products&view=details&submit={$prod_idField}&action=edit">{$LANG_edit}</a>
+	</div>
+ 	<hr></hr>
+       <div id="browser"	
 
-	<div id="header"><b>{$LANG_products}</b> ::
-	<a href="index.php?module=products&view=details&submit={$prod_idField}&action=edit">{$LANG_edit}</a></div>
-	
 	<table align="center">
 	<tr>
 		<td class="details_screen">{$LANG_product_id}</td><td>{$prod_idField}</td>
@@ -108,10 +108,11 @@ if ($_GET['action'] == "view") {
 EOD;
 
 $footer = <<<EOD
-
+<hr></hr>
 <div id="footer"><a href="index.php?module=products&view=details&submit={$prod_idField}&action=edit">{$LANG_edit}</a></div>
 
 EOD;
+
 }
 
 else if ($_GET['action'] == "edit") {
@@ -124,7 +125,9 @@ $display_block_enabled = "<select name=\"prod_enabled\">
 </select>";
 
 $display_block = <<<EOD
-	<div id="header"><b>{$LANG_products}</b></div>
+	<div id="top"><b>{$LANG_products}</b></div>
+	<hr></hr>
+        <div id="browser"
 
 	<table align="center">
 	<tr>
@@ -166,7 +169,7 @@ $display_block = <<<EOD
 EOD;
 
 $footer = <<<EOD
-
+<hr></hr>
 <input type="submit" name="cancel" value="{$LANG_cancel}" />
 <input type="submit" name="save_product" value="{$LANG_save_product}" />
 <input type="hidden" name="op" value="edit_product" />
@@ -175,14 +178,6 @@ EOD;
 }
 
 ?>
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
 <script language="javascript" type="text/javascript" src="include/jquery.js"></script>
 <script language="javascript" type="text/javascript" src="include/jquery.thickbox.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
@@ -191,8 +186,7 @@ Nifty("div#header,div#footer","small");
 <body>
 
 <?php
-$mid->printMenu('hormenu1');
-$mid->printFooter();
+
 echo <<<EOD
 
 <br>
@@ -201,8 +195,10 @@ echo <<<EOD
 {$display_block}
 <div id="footer">
 {$footer}
-
+</div>
+</div>
 EOD;
+include("footer.inc.php");
 ?>
 </div>
 </div>

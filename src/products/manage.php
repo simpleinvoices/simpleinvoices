@@ -22,13 +22,16 @@ if (mysql_num_rows($result) == 0) {
 }else{
 	$display_block = <<<EOD
 
+<div id="top"><b>{$LANG_manage_products}</b> ::
+	<a href="index.php?module=products&view=add">{$LANG_add_new_product}</a></div>
+ <hr></hr>
+       <div id="browser"
+
 <div id="sorting">
 	<div>Sorting tables, please hold on...</div>
 </div>
 
 <table width="100%" align="center" class="filterable sortable" id="large">
-<div id="header"><b>{$LANG_manage_products}</b> ::
-	<a href="index.php?module=products&view=add">{$LANG_add_new_product}</a></div>
 <tr class="sortHeader">
 <th class="noFilter">{$LANG_actions}</th>
 <th class="index_table">{$LANG_product_id}</th>
@@ -69,8 +72,6 @@ EOD;
 	$display_block .= "</table>";
 }
 
-$mid->printMenu('hormenu1');
-$mid->printFooter();
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -78,44 +79,8 @@ $mid->printFooter();
 
 <script type="text/javascript" src="include/jquery.js"></script>
 <script type="text/javascript" src="include/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="include/jquery.tablesorter.conf.js"></script>
 
-<script type="text/javascript">
-$(document).ready(function() {
-	$("table#large").tableSorter({
-		sortClassAsc: 'sortUp', // class name for asc sorting action
-		sortClassDesc: 'sortDown', // class name for desc sorting action
-		highlightClass: ['highlight'], // class name for sort column highlighting.
-		//stripingRowClass: ['even','odd'],
-		//alternateRowClass: ['odd','even'],
-		headerClass: 'largeHeaders', // class name for headers (th's)
-		disableHeader: [0], // disable column can be a string / number or array containing string or number.
-		dateFormat: 'dd/mm/yyyy' // set date format for non iso dates default us, in this case override and set uk-format
-	})
-});
-$(document).sortStart(function(){
-	$("div#sorting").show();
-}).sortStop(function(){
-	$("div#sorting").hide();
-});
-</script>
-
-
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
-
-<?php
-echo <<<EOD
-<title>{$title} :: {$LANG_manage_products}</title>
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css">
-
-EOD;
-?>
 </head>
 
 <body>
@@ -123,8 +88,12 @@ EOD;
 <br>
 <div id="container">
 <?php echo $display_block; ?>
-<div id="footer"></div>
+
 </div>
+
+<?php
+include("footer.inc.php");
+?>
 
 </body>
 </html>

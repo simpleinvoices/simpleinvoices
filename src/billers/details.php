@@ -8,8 +8,6 @@ include_once('./include/include_main.php');
 #table
 include("./include/validation.php");
 echo <<<EOD
-<title>{$title} :: {$LANG_biller_details}</title>
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css">
 <link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css" media="all"/>
 
 
@@ -104,9 +102,10 @@ $biller_custom_field_label4 = get_custom_field_label(biller_cf4);
 if ($_GET['action'] == "view") {
 
 	$display_block = <<<EOD
-
-	<div id="header"><b>{$LANG_biller}</b> ::
+	<div id="top"><b>{$LANG_biller}</b> ::
 	<a href="index.php?module=billers&view=details&submit={$b_idField}&action=edit">{$LANG_edit}</a></div>
+ <hr></hr>
+       <div id="browser">
 
 	<table align="center">
 	<tr>
@@ -178,7 +177,7 @@ if ($_GET['action'] == "view") {
 EOD;
 
 $footer = <<<EOD
-
+<hr></hr>
 <div id="footer"><a href="?submit={$b_idField}&action=edit">{$LANG_edit}</a></div>
 
 EOD;
@@ -195,7 +194,10 @@ $display_block_enabled = "<select name=\"b_enabled\">
 </select>";
 
 $display_block = <<<EOD
-	<div id="header"><b>{$LANG_biller}</b></div>
+
+	<div id="top"><b>{$LANG_biller}</b></div>
+ <hr></hr>
+       <div id="browser">
 	<table align="center">
 	<tr>
 		<td class="details_screen">{$LANG_biller_id}</td><td>{$b_idField}</td>
@@ -278,34 +280,22 @@ $display_block = <<<EOD
 		<td>{$display_block_enabled}</td>
 	</tr>
 	</table>
-</div>
 
 EOD;
 
 $footer = <<<EOD
-
+<hr></hr>
 <input type="submit" name="cancel" value="{$LANG_cancel}" />
 <input type="submit" name="save_biller" value="{$LANG_save} {$LANG_biller}" />
 <input type="hidden" name="op" value="edit_biller" />
 
 EOD;
-
 }
 
 ?>
     <script type="text/javascript" src="./include/jquery.js"></script>
     <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css" media="all"/>
-
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 </head>
@@ -313,19 +303,15 @@ Nifty("div#header,div#footer","small");
 <body>
 
 <?php
-$mid->printMenu('hormenu1');
-$mid->printFooter();
+
 echo <<<EOD
 
-<br>
-<form name="frmpost" action="index.php?module=billers&view=save&submit={$_GET['submit']}"
- method="post" onsubmit="return frmpost_Validator(this)">
-<div id="container">
+<form name="frmpost" action="index.php?module=billers&view=save&submit={$_GET['submit']}" method="post" onsubmit="return frmpost_Validator(this)">
 {$display_block}
-<div id="footer">
 {$footer}
 
 EOD;
+include("footer.inc.php");
 ?>
 </div>
 </div>

@@ -4,16 +4,16 @@ include_once('./include/include_main.php');
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 <?php 
 #include('./include/functions.php');
 /* validataion code */
 include("./include/validation.php");
-echo <<<EOD
-<title>Simple Invoices :: {$LANG_product_to_add}</title>
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css">
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css">
 
+echo <<<EOD
+<link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css">
 EOD;
+
 jsBegin();
 jsFormValidationBegin("frmpost");
 jsValidateRequired("prod_description",$LANG_product_description);
@@ -34,44 +34,23 @@ $prod_custom_field_label1 = get_custom_field_label(product_cf1);
 $prod_custom_field_label2 = get_custom_field_label(product_cf2);
 $prod_custom_field_label3 = get_custom_field_label(product_cf3);
 $prod_custom_field_label4 = get_custom_field_label(product_cf4);
-
 ?>
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#subheader");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
+
 <script language="javascript" type="text/javascript" src="include/jquery.js"></script>
 <script language="javascript" type="text/javascript" src="include/jquery.thickbox.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 </head>
-
 <BODY>
 
 <?php
-$mid->printMenu('hormenu1');
-$mid->printFooter();
 echo <<<EOD
-<br>
 
 <FORM name="frmpost" ACTION="index.php?module=products&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
 
-<div id="container">
-<div id="header">
-
-<table align=center>
-	<tr>
-		<td colspan="2" align="center"><b>&nbsp;{$LANG_product_to_add}&nbsp;</b></td>
-	</tr>	
-</table>
-
-</div>
-<!-- <div id="subheader"> -->
+<div id="top"><b>&nbsp;{$LANG_product_to_add}&nbsp;</b></div>
+ <hr></hr>
+       <div id="browser">
 
 <table align=center>
 	<tr>
@@ -108,13 +87,13 @@ echo <<<EOD
 	</tr>
 </table>
 <!-- </div> -->
-
+<hr></hr>
 <div id="footer">
 	<input type=submit name="submit" value="{$LANG_insert_product}">
 	<input type=hidden name="op" value="insert_product">
 </div>
-
 EOD;
+include("footer.inc.php");
 ?>
 
 </div>

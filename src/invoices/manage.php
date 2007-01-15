@@ -8,7 +8,6 @@ include_once('./include/include_main.php');
 <?php
 echo <<<EOD
 <title>{$title} :: {$LANG_manage_invoices}</title>
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css"> 
 <link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css"> 
 
 EOD;
@@ -29,20 +28,12 @@ EOD;
 include('./src/invoices/manage.inc.php');
 
 ?>
-<?php include('./include/menu.php'); ?>
 
-<?php
-$mid->printMenu('hormenu1');
-$mid->printFooter();
-?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript" src="include/doFilter.js"></script>
 
 <script type="text/javascript" src="include/jquery.js"></script>
-    <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css" media="all"/>
-
+<script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 <script type="text/javascript" src="include/jquery.tablesorter.js"></script>
 
 <script type="text/javascript">
@@ -65,14 +56,6 @@ $(document).sortStart(function(){
 });
 </script>	
 
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
 
 </head>
 

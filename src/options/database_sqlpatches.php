@@ -217,7 +217,7 @@ if ($_GET[op] == "run_updates") {
 		run_sql_patch(32,$sql_patch_name_32,$sql_patch_32,$sql_patch_update_32);
 		run_sql_patch(33,$sql_patch_name_33,$sql_patch_33,$sql_patch_update_33);
 
-		echo "<tr><td><br>The database patches have now been applied, please go back to the <a href='database_sqlpatches.php'>Database Upgrade Manager page</a> to see what patches have been applied. If all patches have been applied then there is now further action required</td></tr>";
+		echo "<tr><td><br>The database patches have now been applied, please go back to the <a href='index.php?module=options&view=database_sqlpatches'>Database Upgrade Manager page</a> to see what patches have been applied. If all patches have been applied then there is now further action required</td></tr>";
 		echo "
 		</table>
 		</div>
@@ -236,7 +236,7 @@ if ($_GET[op] == "run_updates") {
 	echo "<br><br><tr><td>Step 1 - This is the first time Database Updates has been run</td></tr><br>";
 		initialise_sql_patch();
 		
-		echo "<tr><td><br>Now that the Database upgrade table has been initialised, please go back to the Database Upgrade Manger page by clicking <a href='database_sqlpatches.php'>HERE</a> to run the remaining patches</td></tr>";
+		echo "<tr><td><br>Now that the Database upgrade table has been initialised, please go back to the Database Upgrade Manger page by clicking <a href='index.php?module=options&view=database_sqlpatches'>HERE</a> to run the remaining patches</td></tr>";
 		echo "
 		</table>
 		</div>
@@ -261,7 +261,7 @@ else {
 		<table align='center'>
 ";
 
-                echo "<tr></i><tr><td><br>The list below describes which patches have and have not been applied to the database, the aim is to have them all applied.  If there are patches that have not been applied to the Simple Invoices database, please run the Update database by clicking update </td></tr><tr align=center><td><br><a href='?op=run_updates'>UPDATE</a></td></tr></table><br>
+                echo "<tr></i><tr><td><br>The list below describes which patches have and have not been applied to the database, the aim is to have them all applied.  If there are patches that have not been applied to the Simple Invoices database, please run the Update database by clicking update </td></tr><tr align=center><td><br><a href='index.php?module=options&view=database_sqlpatches&op=run_updates'>UPDATE</a></td></tr></table><br>
 
 <a href=\"./documentation/text/text.html?keepThis=true&TB_iframe=true&height=300&width=500\" title=\"Info :: Database upgrade warning\" class=\"thickbox\"><font color=\"red\">Warning:</font></a>
 ";
@@ -321,7 +321,7 @@ else {
 		<table align='center'>
 ";
 
-                echo "<tr><td><br>This is the first time that the Database Upgrade process is to be run.  The first step in the process is to Initialse the database upgrade table. To do this click the Initialise database button<br><br><a href='?op=run_updates'>INITIALISE DATABASE UPGRADE</a></td></tr>";
+                echo "<tr><td><br>This is the first time that the Database Upgrade process is to be run.  The first step in the process is to Initialse the database upgrade table. To do this click the Initialise database button<br><br><a href='index.php?module=options&view=database_sqlpatches&op=run_updates'>INITIALISE DATABASE UPGRADE</a></td></tr>";
 
 
 		echo "
