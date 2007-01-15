@@ -1,0 +1,27 @@
+body { background: #fff; }
+
+div#Header { display: none; }
+
+.Left { width: auto; }
+
+body.chat .Left { margin-top: 50px; }
+
+div#Sidebar div.participants,
+div#Sidebar div#guest_access,
+div#Sidebar div.files,
+div.Right { display : none ;}
+
+div#Sidebar div#Title {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+body.transcript p.adjacent_transcripts { display: none; }
+
+div#Sidebar div#Title h2#topic { display: none ; }
+
+.print_only { display: inline; }
+
+body.transcript h1.date { font-size: 24px; }
+
