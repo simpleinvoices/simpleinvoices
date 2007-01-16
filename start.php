@@ -101,9 +101,9 @@ $sql4 = "
 #Top biller query - start
 
 
-$display_block_notice .=" <div id=\"header\">";
+$display_block_notice .=" <div id=\"top\">";
 
-$display_block_notice .="<b align=center>$title</b>";
+$display_block_notice .="<b align=center>$title</b><hr></hr>";
 
 if ($mysql < 5) {
 	$display_block_notice .=" 
@@ -408,7 +408,6 @@ $display_block ="
 					</table>
                                 </div>
                         </div>
-                        </div>
 
 ";
 
@@ -420,27 +419,22 @@ $display_block ="
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
                 <title><?php echo $title; ?></title>
-<script type="text/javascript" src="niftycube.js"></script>
 
 <script type="text/javascript" src="./include/jquery.js"></script>
 <script type="text/javascript" src="./include/jquery.accordian.js"></script>
 <script type="text/javascript" src="./include/jquery.jqbrowser.js"></script>
-
 		<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/index.css">
-
 </head>
 <BODY>
-   <hr></hr>
        <div id="browser">
- <table align="center" >
+<!-- <table align="center" >-->
 
-<br>
 
-<div id="container">
 <?php echo $display_block_notice; ?>
 <br>
 <?php echo $display_block; ?>
-
-
+<!--
+<?php include("footer.inc.php"); ?>
+-->
 </BODY>
 </HTML>

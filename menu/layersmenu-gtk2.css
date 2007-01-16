@@ -1,7 +1,7 @@
 .horbar	{
 	color: black;
-	background-color: #dcdad5;
-	border: 2px outset #cecac1;
+	background-color: #036;
+	border: 0px outset #cecac1;
 	z-index: 2;
 }
 
@@ -46,7 +46,7 @@
 	z-index: 2;
 	color: black;
 	background-color: #dcdad5;
-	border: 2px outset #cecac1;
+	border: 1px outset #cecac1;
 }
 
 .submenu	{
@@ -62,10 +62,12 @@
 	position: relative;
 	display: block;
 	background-color: #dcdad5;
-	border: 2px outset #cecac1;
+	border: 1px outset #cecac1;
 }
 
 .item	{
+
+	background-color: #fff;
 	z-index: 2;
 	text-align: left;
 	white-space: nowrap;
@@ -110,9 +112,9 @@
 
 .separator	{
 	background-color: #ff0000;
-	border-top: 1px solid #9e9a91;
-	border-bottom: 1px solid #ffffff;
-	margin: 2px 0px 2px 1px;	/* top right bottom left */
+	border-top: 0px solid #9e9a91;
+	border-bottom: 0px solid #ffffff;
+	margin: 0;	/* top right bottom left */
 	height: 0;
 	font-size: 1px;
 	line-height: 0;

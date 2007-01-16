@@ -643,3 +643,67 @@ body.admin textarea {
 }
 
 
+
+table.sortable {
+        border-spacing: 0;
+        border: 1px solid #fff;
+        border-collapse: collapse;
+}
+table.sortable th, table.sortable td {
+        text-align: left;
+        padding: 0px 0px 0px 0px;
+        border: 1px solid #fff;
+}
+td.sortable:hover {
+        background-color: #ffff00;
+        color: #ff0000;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+}
+
+
+
+table.sortable th {
+                padding: 2px;
+
+
+                border-bottom: 1px solid #CBC7B8;
+
+                text-align: left;
+border-right: 1px solid #D6D2C2;
+                font-weight: normal;
+
+}
+table.sortable td {
+        border: 1px solid #fff;
+}
+table.sortable tr.odd td {
+        background-color: #F5F5F5;
+}
+table.sortable tr.even td {
+        background-color: #fff;
+}
+table.sortable tr.sortBottom td {
+        border-top: 0px none #666;
+        background-color: #ccc;
+}
+.flt {
+        background-image:url(img/filter.gif) ;
+        background-repeat:no-repeat ;
+}
+
+.flt_s {
+        background-image:url(img/filter.gif) ;
+        background-repeat:no-repeat ;
+}
+
+
+.style1 {
+        font-family: monospace;
+        color: #00CCFF;
+        font-size: small;
+}
+.style2 {color: #FF0000}
+/*doFitler -end*/
+
