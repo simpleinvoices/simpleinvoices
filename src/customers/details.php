@@ -226,7 +226,6 @@ $footer = <<<EOD
 <hr></hr>
 	<a href="index.php?module=customers&view=details&submit={$c_idField}&action=edit">{$LANG_edit}</a>
 </div>
-</div>
 EOD;
 }
 
