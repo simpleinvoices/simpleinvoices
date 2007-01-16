@@ -13,7 +13,7 @@ if (mysql_num_rows($result) == 0) {
 	<div>Sorting tables, please hold on...</div>
 </div>
 
-<div id="top">{$page_header}</div>
+{$page_header}
 
 <table width="85%" align="center" id="large" class="sortable filterable">
 <tr class="sortHeader">

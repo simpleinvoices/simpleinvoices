@@ -26,7 +26,7 @@ if (mysql_num_rows($result) == 0) {
 	<div>Sorting tables, please hold on...</div>
 </div>
 
-<div id="top"><b>{$LANG_manage_customers}</b> :: <a href="insert_customer.php">{$LANG_customer_add}</a></div>
+<b>{$LANG_manage_customers}</b> :: <a href="insert_customer.php">{$LANG_customer_add}</a>
 <hr></hr>
 <div id="browser">
 
@@ -116,8 +116,6 @@ EOD;
 </head>
 <body>
 
-<br>
-<div id="container">
 <?php 
 
 echo $display_block;
@@ -130,7 +128,6 @@ include('footer.inc.php');
 
 ?>
 
-</div>
 </div>
 
 </body>
