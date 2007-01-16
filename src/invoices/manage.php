@@ -43,7 +43,6 @@ include('./src/invoices/manage.inc.php');
 
 <body>
 
-<br>
 <?php echo $display_block; ?>
 
 <div id="footer"><a href="./documentation/text/manage_invoices.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Manage invoices" class="thickbox">What's all these different columns?</a>

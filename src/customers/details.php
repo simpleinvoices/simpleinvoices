@@ -111,9 +111,7 @@ $customer_custom_field_label4 = get_custom_field_label(customer_cf4);
 if ($_GET['action'] === 'view') {
 
 	$display_block = <<<EOD
-	<div id="top"><b>{$LANG_customer}</b> ::
-	<a href="index.php?module=customers&view=details&submit={$c_idField}&action=edit">{$LANG_edit}</a>
-	</div>
+	<b>{$LANG_customer}</b> :: <a href="index.php?module=customers&view=details&submit={$c_idField}&action=edit">{$LANG_edit}</a>
 	<hr></hr>
         <div id="browser">
 
@@ -224,10 +222,9 @@ EOD;
 #include('./manage_invoices.inc.php'); 
 
 $footer = <<<EOD
-<hr></hr>
-<div id="footer">
-	<a href="index.php?module=customers&view=details&submit={$c_idField}&action=edit">{$LANG_edit}</a>
 </div>
+<hr></hr>
+	<a href="index.php?module=customers&view=details&submit={$c_idField}&action=edit">{$LANG_edit}</a>
 </div>
 </div>
 EOD;

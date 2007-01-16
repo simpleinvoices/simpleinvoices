@@ -22,8 +22,8 @@ if (mysql_num_rows($result) == 0) {
 }else{
 	$display_block = <<<EOD
 
-<div id="top"><b>{$LANG_manage_products}</b> ::
-	<a href="index.php?module=products&view=add">{$LANG_add_new_product}</a></div>
+<b>{$LANG_manage_products}</b> :: <a href="index.php?module=products&view=add">{$LANG_add_new_product}</a>
+
  <hr></hr>
        <div id="browser"
 
@@ -85,11 +85,8 @@ EOD;
 
 <body>
 
-<br>
-<div id="container">
 <?php echo $display_block; ?>
 
-</div>
 
 <?php
 include("footer.inc.php");

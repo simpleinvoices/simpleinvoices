@@ -26,7 +26,7 @@ if (mysql_num_rows($result) == 0) {
 	<div>Sorting tables, please hold on...</div>
 </div>
 
-<b>{$LANG_manage_customers}</b> :: <a href="insert_customer.php">{$LANG_customer_add}</a>
+<b>{$LANG_manage_customers}</b> :: <a href="index.php?module=customers&view=add">{$LANG_customer_add}</a>
 <hr></hr>
 <div id="browser">
 
@@ -119,10 +119,6 @@ EOD;
 <?php 
 
 echo $display_block;
-
-echo <<<EOD
-</div>
-EOD;
 
 include('footer.inc.php');
 

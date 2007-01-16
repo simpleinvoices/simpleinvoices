@@ -106,10 +106,8 @@ echo <<<EOD
 
 </table>
 <hr></hr>
-<div id="footer">
 	<input type=submit name="submit" value="{$LANG_insert_customer}">
 	<input type=hidden name="op" value="insert_customer">
-</div id="footer">
 
 EOD;
 include("footer.inc.php");
