@@ -19,11 +19,13 @@ mysql_select_db("$db_name",$conn);
 $sql = "select * from si_invoices ORDER BY inv_id desc";
 
 $page_header = <<<EOD
+<div id="top">
 <b>{$LANG_manage_invoices}</b> ::
 <a href="index.php?module=invoices&view=total">{$LANG_add_new_invoice} - {$LANG_total_style}</a> ::
 <a href="index.php?module=invoices&view=itemised">{$LANG_add_new_invoice} - {$LANG_itemised_style}</a> ::
 <a href="index.php?module=invoices&view=consulting">{$LANG_add_new_invoice} - {$LANG_consulting_style}</a>
-
+</div>
+<hr></hr>
 EOD;
 include('./src/invoices/manage.inc.php');
 
@@ -44,12 +46,11 @@ include('./src/invoices/manage.inc.php');
 <body>
 
 <br>
-<div id="container">
 <?php echo $display_block; ?>
-<div id="footer"><a href="./documentation/text/manage_invoices.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Manage invoices" class="thickbox">What's all these different columns?</a></div>
-</div>
-</div>
 
+<div id="footer"><a href="./documentation/text/manage_invoices.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Manage invoices" class="thickbox">What's all these different columns?</a>
+
+<?php include("footer.inc.php"); ?>
 </div>
 
 </body>

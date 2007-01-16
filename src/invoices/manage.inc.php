@@ -13,8 +13,9 @@ if (mysql_num_rows($result) == 0) {
 	<div>Sorting tables, please hold on...</div>
 </div>
 
+<div id="top">{$page_header}</div>
+
 <table width="85%" align="center" id="large" class="sortable filterable">
-<div id="header">{$page_header}</div>
 <tr class="sortHeader">
 <th class="noFilter" width=25px>{$LANG_actions}</th>
 <th class="index_table">{$LANG_id} &nbsp;</th>
