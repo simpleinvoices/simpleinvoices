@@ -37,18 +37,15 @@ include('./src/invoices/manage.inc.php');
 <script type="text/javascript" src="include/jquery.tablesorter.js"></script>
 <script type="text/javascript" src="include/jquery.tablesorter.conf.js"></script>
 
-
-
 </head>
 
 <body>
 
 <?php echo $display_block; ?>
 
-<div id="footer"><a href="./documentation/text/manage_invoices.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Manage invoices" class="thickbox">What's all these different columns?</a>
-
+<a href="./documentation/text/manage_invoices.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Manage invoices" class="thickbox">What's all these different columns?</a>
+<div>
 <?php include("footer.inc.php"); ?>
-</div>
 
 </body>
 </html>

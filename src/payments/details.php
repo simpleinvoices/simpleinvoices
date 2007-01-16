@@ -98,38 +98,20 @@ $display_block =  "
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?php include('./include/menu.php'); ?>
-
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
 <title>Simple Invoices - Payment details</title>
 <?php include('./config/config.php'); ?>
 </head>
 <body>
-<?php
-$mid->printMenu('hormenu1');
-$mid->printFooter();
-?>
-
-<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
-<br>
-<div id="container">
-<div id="header"><b><?php echo $map_page_header; ?></div>
+<?php echo $map_page_header; ?>
+<hr></hr>
+<div id="browser">
 
 <?php echo $display_block; ?>
-
-<div id="footer">
+<hr></hr>
 	<form>
 		<input type=button value='Back' onCLick='history.back()'>
 	</form>
-</div>
-
+<?php include("footer.inc.php"); ?>
 </body>
 </html>
 

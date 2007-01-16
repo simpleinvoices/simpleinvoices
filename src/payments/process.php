@@ -9,7 +9,6 @@ include_once('./include/include_main.php');
 include("./include/validation.php");
 echo <<<EOD
 <title>{$title} :: {$LANG_process_payment}</title>
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css" media="all" />
 <link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css" media="all" />
 
 EOD;
@@ -316,21 +315,11 @@ else if ($op === "pay_invoice_batch") {
 echo <<<EOD
 
 <link rel="stylesheet" type="text/css" href="include/jquery.datePicker.css" title="default" media="screen" />
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css" media="all" />
 <script type="text/javascript" src="include/jquery.js"></script>
 <script type="text/javascript" src="include/jquery.dom_creator.js"></script>
 <script type="text/javascript" src="include/jquery.datePicker.js"></script>
 <script type='text/javascript' src='include/jquery.autocomplete.js'></script>
 <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
-
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
 
 <!-- *Date selector js* - Start -->
 <script type="text/javascript">
@@ -350,11 +339,6 @@ $('input#date1').datePicker({startDate:'01/01/1970'});
 
 <body>
 
-EOD;
-$mid->printMenu('hormenu1');
-$mid->printFooter();
-echo <<<EOD
-
 <br>
 
 <form name="frmpost" action="index.php?module=payments&view=save" method="post" onsubmit="return frmpost_Validator(this)">
@@ -373,5 +357,6 @@ EOD;
 </div>
 
 </form>
+<?php include("footer.inc.php"); ?>
 </body>
 </html>

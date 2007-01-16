@@ -40,12 +40,13 @@ $display_block = "
        <div>Sorting tables, please hold on...</div>
 </div>
 
-
+$display_block_header
+<hr></hr>
+ <div id='browser'>
 <table width=100% class=\"filterable sortable\" id=large align=center>
-<div id=header>$display_block_header</div>
 <tr class=\"sortHeader\">
 <th class=\"noFilter\">$map_table_action</th>
-<th class=\" index_table\">$map_table_payment_id</th>
+<th class=\"index_table\">$map_table_payment_id</th>
 <th class=\"index_table\">$map_table_payment_invoice_id</th>
 <th class=\"selectFilter index_table\">$map_table_customer</th>
 <th class=\"selectFilter index_table\">$map_table_biller</th>
@@ -114,48 +115,13 @@ while ($Array = mysql_fetch_array($result)) {
     <script type="text/javascript" src="./include/jquery.js"></script>
     <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/jquery.thickbox.css" media="all"/>
 
-<?php include('./include/menu.php'); ?>
-<?php
-$mid->printMenu('hormenu1');
-$mid->printFooter();
-?>
 
 <script type="text/javascript" src="include/doFilter.js"></script>
 
 <script type="text/javascript" src="include/jquery.tablesorter.js"></script>
-
-<script type="text/javascript">
-$(document).ready(function() {
-        $("table#large").tableSorter({
-                sortClassAsc: 'sortUp', // class name for asc sorting action
-                sortClassDesc: 'sortDown', // class name for desc sorting action
-                highlightClass: ['highlight'], // class name for sort column highlighting.
-                //stripingRowClass: ['even','odd'],
-                //alternateRowClass: ['odd','even'],
-                headerClass: 'largeHeaders', // class name for headers (th's)
-                disableHeader: [0], // disable column can be a string / number or array containing string or number.
-                dateFormat: 'dd/mm/yyyy' // set date format for non iso dates default us, in this case override and set uk-format
-        })
-});
-$(document).sortStart(function(){
-        $("div#sorting").show();
-}).sortStop(function(){
-        $("div#sorting").hide();
-});
-</script>
-
-
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
+<script type="text/javascript" src="include/jquery.tablesorter.conf.js"></script>
 
 
 <title><?php echo $title; echo $map_page_title;?></title>
@@ -163,13 +129,10 @@ Nifty("div#header,div#footer","small");
 <?php include('./config/config.php'); ?>
 <body>
 
-<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
 <br>
-<div id="container">
 <?php echo $display_block; ?>
-<div id="footer"><a href="./documentation/text/wheres_the_edit_button.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Payments" class="thickbox">Wheres the Edit button?</a></div>
-</div>
-</div>
+<a href="./documentation/text/wheres_the_edit_button.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Payments" class="thickbox">Wheres the Edit button?</a>
+<?php include("footer.inc.php"); ?>
 
 </body>
 

@@ -228,17 +228,6 @@ if (mysql_num_rows($result_preferences) == 0) {
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<?php include('./include/menu.php'); ?>
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#subheader");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
-
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 
@@ -246,25 +235,13 @@ Nifty("div#header,div#footer","small");
 	<title><?php echo $title; echo " :: "; echo $LANG_inv; echo $LANG_inv_consulting; ?></title>
 <?php include('./config/config.php'); ?>
 <BODY>
-<?php
-$mid->printMenu('hormenu1');
-$mid->printFooter();
-?>
-
-<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
-<br>
 
 <FORM name="frmpost" ACTION="index.php?module=invoices&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
-<div id="container">
-<div id="header">
-<table align=center>
-<tr>
-<td colspan=2 align=center><b><?php echo $LANG_inv; echo $LANG_inv_consulting; ?></b></th>
-</tr>
-</table>
 
-</div id="header">
-<!-- <div id="subheader"> -->
+<b><?php echo $LANG_inv; echo $LANG_inv_consulting; ?></b>
+<hr></hr>
+      <div id="browser">
+
 
 <table align=center>
 
@@ -331,14 +308,14 @@ $mid->printFooter();
 </table>
 <!-- </div> -->
 
-<div id="footer">
+<hr></hr>
 		<input type=hidden name="max_items" value="<?php echo $num; ?>">
 		<input type=submit name="submit" value="<?php echo $LANG_save;echo " "; echo $LANG_inv;?>">
 		<input type=hidden name="invoice_style" value="insert_invoice_consulting">
 		* <?php echo $LANG_mandatory_fields;?>
-</div>
 
 </FORM>
+<?php include("footer.inc.php"); ?>
 </BODY>
 </HTML>
 

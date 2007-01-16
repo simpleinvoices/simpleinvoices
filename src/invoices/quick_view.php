@@ -217,7 +217,6 @@ $prod_custom_field_label4 = get_custom_field_label(product_cf4);
 #START INVOICE HERE - TOP SECTION
 
 $display_block_top =  "
-	<div id=\"subheader\">
 	<table align=center>
 	<tr>
 		<td class=account colspan=8>$LANG_account_info</td><td width=5%></td><td width=5%></td><td class=account colspan=6><a href='index.php?module=customers&view=details&submit=$c_idField&action=view'>$LANG_customer_account</a></td>
@@ -233,7 +232,6 @@ $display_block_top =  "
 		<td class=account>$LANG_owing:</td><td class=account><u>$pref_currency_signField$invoice_owing_Field_customer</u></td>
 	</tr>
 	</table>
-	</div id=\"subheader\">
 
 
 	<table align=center>
@@ -692,7 +690,6 @@ $display_block_bottom =  "
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?php include('./include/menu.php'); ?>
     <script type="text/javascript" src="./include/jquery.js"></script>
     <script type="text/javascript">
 	$(document).ready(function() {
@@ -706,30 +703,13 @@ $display_block_bottom =  "
   	});
     </script>
     <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
-    <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/jquery.thickbox.css" media="all"/>
 
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#subheader");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
 
 	<title><?php echo $title; ?></title>
 <?php include('./config/config.php'); ?> 
 <body>
-<?php
-$mid->printMenu('hormenu1');
-$mid->printFooter();
-?>
-
-<br>
-<div id="container">
-<div id="header">
+      <div id="browser">
 <?php echo $LANG_quick_view_of; echo " "; echo $pref_inv_wordingField; ?> <?php echo $master_invoice_id; ?>
 <br>
 	<?php 
@@ -756,23 +736,21 @@ $mid->printFooter();
 		:: 
 		<?php echo $LANG_email; echo " :: "; echo $LANG_email_quick; ?>
 <!--Actions heading - start-->
+<hr></hr>
 </form>
 <!-- #PDF end -->
 
-</div id="header">
 
-<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
 <?php echo $display_block_top; ?>
+<hr></hr>
 <?php echo $display_block_details; ?>
 <?php echo $display_block_bottom; ?>
 
-<div id="footer">
+<hr></hr>
 	<form>
 		<input type=button value='<?php echo $LANG_cancel;?>'onCLick='history.back()'>
 	</form>
-</div>
 
-</div>
-
+<?php include("footer.inc.php"); ?>
 </body>
 </html>
