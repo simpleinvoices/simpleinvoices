@@ -23,6 +23,7 @@ echo <<<EOD
   <li><a href="index.php?module=invoices&view=manage">Invoices +</a>
 	<ul>
 		<li><a href="index.php?module=invoices&view=manage">Manage Invoices</a></li>
+		<li></li>
 		<li><a href="index.php?module=invoices&view=total">New Invoice - Total</a></li>
 		<li><a href="index.php?module=invoices&view=itemised">New Invoice - Itemised</a></li>
 		<li><a href="index.php?module=invoices&view=consulting">New Invoice - Consulting</a></li>
@@ -98,33 +99,66 @@ echo <<<EOD
 
 <li><a href="#">Options +</a>
     <ul>
-	<li><a href="./index.php?module=system_defaults&view=manage">System Defaults</a></li>
-	<li><a href="./index.php?module=custom_fields&view=manage">Custom Fields</a></li>
-         <li><a href="./index.php?module=tax_rates&view=manage">Tax Rates +</a>
-         <ul>
-           <li><a href="./index.php?module=tax_rates&view=manage">Manage Tax Rates</a></li>
-           <li><a href="./index.php?module=tax_rates&view=add">Add Custom Tax Rate</a></li>
-          </ul>
+	<li>
+		<a href="./index.php?module=system_defaults&view=manage">System Defaults</a>
+	</li>
+	<li>
+		<a href="./index.php?module=custom_fields&view=manage">Custom Fields</a>
+	</li>
+	<li></li>
+        <li>
+		<a href="./index.php?module=tax_rates&view=manage">Tax Rates +</a>
+		<ul>
+			 <li>
+				<a href="./index.php?module=tax_rates&view=manage">Manage Tax Rates</a>
+			 </li>
+		         <li>
+				<a href="./index.php?module=tax_rates&view=add">Add Custom Tax Rate</a>
+			</li>
+	        </ul>
         </li>
-         <li><a href="./index.php?module=preferences&view=manage">Invoice Preferences +</a>
-         <ul>
-           <li><a href="./index.php?module=preferences&view=manage">Manage Invoice Preferences</a></li>
-           <li><a href="./index.php?module=preferences&view=add">Add New Invoice Preferences</a></li>
-          </ul>
+        <li>
+		<a href="./index.php?module=preferences&view=manage">Invoice Preferences +</a>
+		<ul>
+			<li>
+				<a href="./index.php?module=preferences&view=manage">Manage Invoice Preferences</a>
+			</li>
+		        <li>
+				<a href="./index.php?module=preferences&view=add">Add New Invoice Preferences</a>
+			</li>
+	        </ul>
         </li>
-         <li><a href="./index.php?module=payment_types&view=manage">Payment Types +</a>
-         <ul>
-           <li><a href="./index.php?module=payment_types&view=manage">Manage ayment Types</a></li>
-           <li><a href="./index.php?module=payment_types&view=add">Add New Payment Types</a></li>
-          </ul>
+        <li>
+		<a href="./index.php?module=payment_types&view=manage">Payment Types +</a>
+         	<ul>
+			<li>
+				<a href="./index.php?module=payment_types&view=manage">Manage ayment Types</a>
+			</li>
+		        <li>
+				<a href="./index.php?module=payment_types&view=add">Add New Payment Types</a>
+			</li>
+          	</ul>
         </li>
-         <li><a href="./index.php?module=options&view=database_sqlpatches">Database Upgrade Manager</a><li>
-         <li><a href="./index.php?module=options&view=backup_database">Backup Database</a><li>
-         <li><a href="./index.php?module=options&view=sanity_check">Sanity check of invoices</a><li>
-         <li><a href="index.php?module=documentation/inline_docs&view=inline_instructions">Help +</a>
-         <ul>
-           <li><a href="index.php?module=documentation/inline_docs&view=inline_instructions#installation">Installation</a></li>
-           <li><a href="index.php?module=documentation/inline_docs&view=inline_instructions#upgrading">Upgrading Simple Invoices</a></li>
+	<li></li>
+	<li>
+		<a href="./index.php?module=options&view=database_sqlpatches">Database Upgrade Manager</a>
+	</li>
+        <li>
+		<a href="./index.php?module=options&view=backup_database">Backup Database</a>
+	</li>
+        <li>
+		<a href="./index.php?module=options&view=sanity_check">Sanity check of invoices</a>
+	</li>
+	<li></li>
+        <li>
+		<a href="index.php?module=documentation/inline_docs&view=inline_instructions">Help +</a>
+         	<ul>
+			<li>
+				<a href="index.php?module=documentation/inline_docs&view=inline_instructions#installation">Installation</a>
+			</li>
+			<li>
+				<a href="index.php?module=documentation/inline_docs&view=inline_instructions#upgrading">Upgrading Simple Invoices</a>
+			</li>
            <li><a href="index.php?module=documentation/inline_docs&view=inline_instructions#prepare">Prepare Simple Invoices for use</a></li>
            <li><a href="index.php?module=documentation/inline_docs&view=inline_instructions#use">Using Simple Invoices</a></li>
            <li><a href="index.php?module=documentation/inline_docs&view=inline_instructions#faqs">Frequently Asked Questions</a></li>
