@@ -51,8 +51,8 @@ if ($_GET['action'] === 'view') {
 
 	$display_block = <<<EOD
 
-        <b>{$LANG_tax_rate}</b> ::
-        <a href="index.php?module=tax_rates&view=details&submit={$tax_idField}&action=edit">{$LANG_edit}</a>
+        <b>{$LANG_tax_rate} ::
+        <a href="index.php?module=tax_rates&view=details&submit={$tax_idField}&action=edit">{$LANG_edit}</a></b>
 
 	<hr></hr>
       	<div id="browser">
@@ -71,6 +71,7 @@ if ($_GET['action'] === 'view') {
 		<td class="details_screen">{$wording_for_enabledField}</td><td>{$wording_for_enabled}</td>
 	</tr>
 	</table>
+	<hr></hr>
 
 EOD;
 $footer = "
@@ -113,7 +114,7 @@ $display_block = <<<EOD
 		<td class="details_screen">{$wording_for_enabledField} </td><td>{$display_block_enabled}</td>
 	</tr>
 	</table>
-
+	<hr></hr>
 EOD;
 
 $footer = <<<EOD

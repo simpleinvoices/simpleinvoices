@@ -31,6 +31,7 @@ $LANG_amount = "Amount";//1
 $LANG_attention_short = "Attn.";//1
 $LANG_biller = "Biller";//1
 $LANG_biller_details = "Biller details";//1
+$LANG_biller_edit = "Edit Biller";//1
 $LANG_biller_id = "Biller ID";//1
 $LANG_biller_name = "Biller Name";//1
 $LANG_biller_to_add = "Biller to add";//1

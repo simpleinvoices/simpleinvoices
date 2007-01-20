@@ -98,7 +98,6 @@ $refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=biller
 
 <html>
 <head>
-<head>
 <?php
 
 include('./include/include_main.php');
@@ -107,23 +106,22 @@ $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 $display_block_items = isset($display_block_items) ? $display_block_items : '&nbsp;';
 echo <<<EOD
 {$refresh_total}
-<title>{$title}</title>
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css">
 </head>
 
 <body>
 
 EOD;
-$mid->printMenu('hormenu1');
-$mid->printFooter();
+
 echo <<<EOD
 <br>
 <br>
+<div class="browser">
 {$display_block}
 <br><br>
 {$display_block_items}
 
 EOD;
+include("footer.inc.php");
 ?>
 </body>
 </html>

@@ -71,10 +71,7 @@ EOD;
 <script type="text/javascript" src="include/jquery.tablesorter.conf.js"></script>
 
 </head>
-
 <body>
-
-<br>
 
 <?php 
 	echo $display_block;

@@ -16,7 +16,7 @@ if (mysql_num_rows($result) == 0) {
 $display_block = "<P><em>$mb_no_invoices.</em></p>";
 }else{
 $display_block = "
-<div id=top<b>$mb_page_header</b> :: <a href='index.php?module=billers&view=add'>$mb_actions_new_biller</a></div>
+<b>$mb_page_header :: <a href='index.php?module=billers&view=add'>$mb_actions_new_biller</a></b>
  <hr></hr>
        <div id='browser'>
 
@@ -34,7 +34,7 @@ $display_block = "
 <th class=\"index_table\">$mb_table_phone</th>
 <th class=\"index_table\">$mb_table_mobile_phone</th>
 <th class=\"index_table\">$mb_table_email</th>
-<th class=\"selectFilter index_table\">$wording_for_enabledField &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; </th>
+<th class=\"noFilter index_table\">$wording_for_enabledField</th>
 </tr>";
 
 while ($Array = mysql_fetch_array($result)) {
@@ -90,17 +90,9 @@ while ($Array = mysql_fetch_array($result)) {
 </head>
 <body>
 
-<div id="container">
-<?php echo $display_block; 
-
-echo <<<EOD
-</div>
-EOD;
-include("footer.inc.php");
+<?php 
+	echo $display_block; 
+	include("footer.inc.php");
 ?>
-<div id="footer"></div>
-</div>
-</div>
-
 </body>
-
+</html>

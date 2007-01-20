@@ -22,7 +22,7 @@ if (mysql_num_rows($result) == 0) {
 }else{
 	$display_block = <<<EOD
 
-<b>{$LANG_manage_products}</b> :: <a href="index.php?module=products&view=add">{$LANG_add_new_product}</a>
+<b>{$LANG_manage_products} :: <a href="index.php?module=products&view=add">{$LANG_add_new_product}</a></b>
 
  <hr></hr>
        <div id="browser"
@@ -37,7 +37,7 @@ if (mysql_num_rows($result) == 0) {
 <th class="index_table">{$LANG_product_id}</th>
 <th class="index_table">{$LANG_product_description}</th>
 <th class="index_table">{$LANG_product_unit_price}</th>
-<th class="selectFilter index_table">{$wording_for_enabledField} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th class="noFilter index_table">{$wording_for_enabledField}</th>
 </tr>
 
 EOD;

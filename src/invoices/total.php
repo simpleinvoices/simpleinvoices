@@ -247,6 +247,7 @@ if (mysql_num_rows($result_preferences) == 0) {
 </tr>
 </table>
 <!-- </div> -->
+<hr></hr>
 	<input type=submit name="submit" value="<?php echo $LANG_save;echo " "; echo $LANG_inv;?>"><input type=hidden name="invoice_style" value="insert_invoice_total"> * <?php echo $LANG_mandatory_fields;?>
 
 <?php include("footer.inc.php"); ?>

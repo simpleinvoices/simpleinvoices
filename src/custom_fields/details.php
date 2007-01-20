@@ -36,8 +36,8 @@ if ($_GET['action'] == "view") {
 
 	$display_block = <<<EOD
 
-	<b>{$LANG_custom_fields}</b> ::
-	<a href="index.php?module=custom_fields&view=details&submit={$cf_idField}&action=edit">{$LANG_edit}</a>
+	<b>{$LANG_custom_fields} ::
+	<a href="index.php?module=custom_fields&view=details&submit={$cf_idField}&action=edit">{$LANG_edit}</a></b>
 	<hr></hr>
         <div id="browser">
 
@@ -60,7 +60,7 @@ if ($_GET['action'] == "view") {
 		<td>{$cf_custom_labelField}</td>
 	</tr>
 	</table>
-
+	<hr></hr>
 EOD;
 
 $footer = <<<EOD
@@ -98,7 +98,7 @@ $display_block = <<<EOD
 		<td><input type="text" name="cf_custom_label" size="50" value="{$cf_custom_labelField}" /></td>
 	</tr>
 	</table>
-
+	<hr></hr>
 EOD;
 
 $footer = <<<EOD

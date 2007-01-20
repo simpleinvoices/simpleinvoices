@@ -113,7 +113,7 @@ echo <<<EOD
 				<a href="./index.php?module=tax_rates&view=manage">Manage Tax Rates</a>
 			 </li>
 		         <li>
-				<a href="./index.php?module=tax_rates&view=add">Add Custom Tax Rate</a>
+				<a href="./index.php?module=tax_rates&view=add">Add Tax Rate</a>
 			</li>
 	        </ul>
         </li>

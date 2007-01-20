@@ -150,7 +150,7 @@ echo <<<EOD
         </div>
 	</tbody>
 </table>
-
+<hr></hr>
 	<input type="submit" name="submit" value="{$LANG_insert_biller}" />
 	<input type="hidden" name="op" value="insert_biller" />
 EOD;

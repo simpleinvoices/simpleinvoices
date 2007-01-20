@@ -29,8 +29,6 @@ $display_block_enabled = "<select name=\"tax_enabled\">
 
 echo <<<EOD
 
-<br>
-
 <FORM name="frmpost" ACTION="index.php?module=tax_rates&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
 
 <b>{$LANG_tax_rate_to_add}</b>
@@ -56,8 +54,7 @@ echo <<<EOD
 	</tr>
 	
 </table>
-<!-- </div> -->
-
+	<hr></hr>
 	<input type=submit name="submit" value="{$LANG_insert_tax_rate}">
 	<input type=hidden name="op" value="insert_tax_rate">
 

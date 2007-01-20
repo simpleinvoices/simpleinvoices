@@ -62,8 +62,8 @@ $prod_custom_field_label4 = get_custom_field_label(product_cf4);
 if ($_GET['action'] == "view") {
 
 	$display_block = <<<EOD
-	<b>{$LANG_products}</b> ::
-	<a href="index.php?module=products&view=details&submit={$prod_idField}&action=edit">{$LANG_edit}</a>
+	<b>{$LANG_products} ::
+	<a href="index.php?module=products&view=details&submit={$prod_idField}&action=edit">{$LANG_edit}</a></b>
 	
  	<hr></hr>
        <div id="browser"	

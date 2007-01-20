@@ -102,7 +102,7 @@ $display_block =  "
 <?php include('./config/config.php'); ?>
 </head>
 <body>
-<?php echo $map_page_header; ?>
+<b><?php echo $map_page_header; ?></b>
 <hr></hr>
 <div id="browser">
 

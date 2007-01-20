@@ -105,6 +105,7 @@ echo <<<EOD
 </tr>
 
 </table>
+<hr></hr>
 	<input type=submit name="submit" value="{$LANG_insert_customer}">
 	<input type=hidden name="op" value="insert_customer">
 

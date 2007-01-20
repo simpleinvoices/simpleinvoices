@@ -88,10 +88,8 @@ echo <<<EOD
 </table>
 <!-- </div> -->
 <hr></hr>
-<div id="footer">
 	<input type=submit name="submit" value="{$LANG_insert_product}">
 	<input type=hidden name="op" value="insert_product">
-</div>
 EOD;
 include("footer.inc.php");
 ?>

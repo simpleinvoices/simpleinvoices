@@ -15,14 +15,14 @@ if (!empty($_GET[inv_id])) {
 #if coming from another page where you want to filter by just one customer
 elseif (!empty($_GET[c_id])) {
 	
-	$display_block_header = "<b>$map_payments_filtered_customer $_GET[c_id]</b> :: <a href='index.php?module=payments&view=process&op=pay_invoice'>$map_actions_process_payment</a>";
+	$display_block_header = "<b>$map_payments_filtered_customer $_GET[c_id] :: <a href='index.php?module=payments&view=process&op=pay_invoice'>$map_actions_process_payment</a></b>";
 	
         $sql = "select si_account_payments.*, si_customers.c_name, si_biller.b_name from si_account_payments, si_invoices, si_customers, si_biller  where ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = si_customers.c_id and si_invoices.inv_biller_id = si_biller.b_id and si_customers.c_id='$_GET[c_id]' ORDER BY si_account_payments.ac_id DESC ";
         }
 #if you want to show all invoices - no filters
 else {
 
-	$display_block_header = "<b>$map_page_header</b> :: <a href='index.php?module=payments&view=process&op=pay_invoice'>$map_actions_process_payment</a>";
+	$display_block_header = "<b>$map_page_header :: <a href='index.php?module=payments&view=process&op=pay_invoice'>$map_actions_process_payment</a></b>";
 
 	$sql = "select si_account_payments.*, si_customers.c_name, si_biller.b_name from si_account_payments, si_invoices, si_customers, si_biller  where ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = si_customers.c_id and si_invoices.inv_biller_id = si_biller.b_id ORDER BY si_account_payments.ac_id DESC";
 	}
@@ -53,7 +53,7 @@ $display_block_header
 <th class=\"index_table\">$map_table_amount</th>
 <th class=\"index_table\">$map_table_notes</th>
 <th class=\"selectFilter index_table\">$map_table_payment_type</th>
-<th class=\"index_table\">$map_table_date</th>
+<th class=\"noFilter index_table\">$map_table_date</th>
 </tr>";
 
 while ($Array = mysql_fetch_array($result)) {
@@ -124,14 +124,13 @@ while ($Array = mysql_fetch_array($result)) {
 <script type="text/javascript" src="include/jquery.tablesorter.conf.js"></script>
 
 
-<title><?php echo $title; echo $map_page_title;?></title>
 </head>
 <?php include('./config/config.php'); ?>
 <body>
 
 <?php echo $display_block; ?>
 
-<a href="./documentation/text/wheres_the_edit_button.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Payments" class="thickbox">Wheres the Edit button?</a>
+<a href="./documentation/text/wheres_the_edit_button.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Payments" class="thickbox"><img src="./images/common/help-small.png"></img>Wheres the Edit button?</a>
 
 <?php include("footer.inc.php"); ?>
 
