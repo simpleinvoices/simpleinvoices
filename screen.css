@@ -11,8 +11,12 @@ body {
 
 body, .dialog {
 	font-family: "Lucida Grande", verdana, arial, helvetica, sans-serif;
-  font-size: 14px;
+	font-size: 14px;
 	color: #333;
+}
+
+#left {
+	text-align: left;
 }
 
 /* Make sure the table cells show the right font */
@@ -230,6 +234,10 @@ h1.admin {
 }
 
 h2 { font-size: 18px; margin: 0 0 15px 0; font-family: helvetica; }
+
+a img {
+        border: 0;
+}
 
 a.image:link, a.image:visited, a.image:hover {
 	background: none;
@@ -706,4 +714,26 @@ table.sortable tr.sortBottom td {
 }
 .style2 {color: #FF0000}
 /*doFitler -end*/
+
+
+/*Accordian css - start*/
+                        #list1 { width:49%;  float:right }
+                        .title { cursor:pointer; border:1px solid #CCCCCC; margin-top:0.5em; padding:0.1em; }
+                        .on1  .title { background-color:#E4EFC7; }
+                        .off1 .title { background-color:#E0E0E0; }
+                        /*.content    { background-color:#F5F5F5; padding:0.1em; border:1px solid #C0C0C0; border-top-width:0; }*/
+                        .content    { background-color:#FFF; padding:0.1em; border:1px solid #C0C0C0; border-top-width:0; }
+
+                        #list2 { width:49%; float:left; }
+                        .mytitle { cursor:pointer; border:1px solid #CCCCCC; margin-top:0.5em; padding:0.1em; }
+                        .on  .mytitle { background-color:#E4EFC7; }
+                        .off .mytitle { background-color:#E0E0E0; }
+                        /*.mycontent    { background-color:#F5F5F5; padding:0.1em; border:1px solid #C0C0C0; border-top-width:0; }*/
+                        .mycontent    { background-color:#FFF; padding:0.1em; border:1px solid #C0C0C0; border-top-width:0; }
+                        a:link {  text-decoration: none; }
+                        a:visited { text-decoration: none; }
+                        a:active { text-decoration: none; }
+/*Accordian css - end*/
+
+
 

@@ -492,59 +492,33 @@ $display_block_bottom =  "
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <head>
-<?php include('./include/menu.php'); ?>
     <script type="text/javascript" src="./include/jquery.js"></script>
     <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/jquery.thickbox.css" media="all"/>
 
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#subheader");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
 
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 
-	<title><?php echo $title;?></title>
 <?php include('./config/config.php'); ?> 
 <body>
-<?php
-$mid->printMenu('hormenu1');
-$mid->printFooter();
-?>
+<b>You are editing <?php echo $pref_inv_wordingField; ?> <?php echo $master_invoice_id; ?></b>
 
-<br>
-<div id="container">
-<div id="header">
-You are editing <?php echo $pref_inv_wordingField; ?> <?php echo $master_invoice_id; ?>
-<br>
+ <hr></hr>
+       <div id="browser">
 
-</div id="header">
-
-<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
 <FORM name="frmpost" ACTION="index.php?module=invoices&view=save" METHOD=POST>
 
 <?php echo $display_block_top; ?>
 <?php echo $display_block_details; ?>
 <?php echo $display_block_bottom; ?>
 
-<div id="footer">
+<hr></hr>
 	<input type=button value='Cancel'onCLick='history.back()'>
 	<input type=submit name="submit" value="<?php echo $LANG_save; ?>">
 	<input type=hidden name="max_items" value="<?php echo $line; ?>">
-</div>
-
-</div>
+<?php include("footer.inc.php");?>
 </form>
 </body>
 </html>
-
-
-

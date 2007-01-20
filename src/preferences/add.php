@@ -29,45 +29,22 @@ echo <<<EOD
     <script type="text/javascript" src="./include/jquery.js"></script>
     <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css" media="all"/>
 
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#subheader");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
-
-<title>Simple Invoices :: {$LANG_add_invoice_preference}
-</title>
 </head>
 <BODY>
 
 EOD;
-$mid->printMenu('hormenu1');
-$mid->printFooter();
-echo <<<EOD
 
-<br>
+echo <<<EOD
 
 <FORM name="frmpost" ACTION="index.php?module=preferences&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
 
+<b>{$LANG_invoice_preference_to_add}</b>
 
-<div id="container">
-<div id="header">
+<hr></hr>
+<div id="browser">
 
-<table align=center>
-	<tr>
-		<td colspan=2 align=center><b>{$LANG_invoice_preference_to_add}</b></td>
-	</tr>	
-</table>
-
-</div id="header">
-<!-- <div id="subheader"> -->
 
 <table align=center>
 <tr>
@@ -130,14 +107,13 @@ echo <<<EOD
 </table>
 <!-- </div> -->
 
-<div id="footer">
 	<input type=submit name="submit" value="{$LANG_insert_preference}">
 	<input type=hidden name="op" value="insert_preference">
-</div>
 
 EOD;
+
+include("footer.inc.php");
 ?>
-</div>
 </FORM>
 </BODY>
 </HTML>

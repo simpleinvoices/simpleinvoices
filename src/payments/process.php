@@ -221,57 +221,6 @@ $insert_action_op = "pay_selected_invoice";
 else if ($op === "pay_invoice") {
 $display_block = <<<EOD
 
-<!-- jquery autocomplete sweet stuff - start -->
-<style type="text/css">
-.ac_wrapper {
-width: 300px;
-position: relative;
-}
-.ac_wrapper input {
-width: 100%;
-display: block;
-}
-.ac_wrapper ul {
-list-style: none;
-padding: 0;
-margin: 0;
-}
-.ac_results {
-background: #ccc;
-cursor: pointer;
-position: absolute;
-left:0;
-}
-.ac_results li {
-border: 1px solid #000;
-padding: 2px 5px;
-}
-.ac_loading {
-background : url('./images/common/indicator-js.gif') right center no-repeat;
-}
-.over {
-background: yellow;
-}
-</style>
-
-<script type="text/javascript">
-function selectItem(li) {
-//	document.frmpost.js_total.value = "That's " + li.extra[0] + " you picked."
-if (li.extra) {
-	document.getElementById("js_total").innerHTML= " " + li.extra[0] + " "
-//		alert("That's '" + li.extra[0] + "' you picked.")
-}
-}
-function formatItem(row) {
-return row[0] + "<br><i>" + row[1] + "</i>";
-}
-$(document).ready(function() {
-$("#ac_me").autocomplete("auto_complete_search.php", { minChars:1, matchSubset:1, matchContains:1, cacheLength:10, onItemSelect:selectItem, formatItem:formatItem, selectOnly:1 });
-});
-</script>
-
-<!-- jquery autocomplete sweet stuff - end -->
-
 
 <table align="center">
 <tr>
@@ -315,22 +264,15 @@ else if ($op === "pay_invoice_batch") {
 echo <<<EOD
 
 <link rel="stylesheet" type="text/css" href="include/jquery.datePicker.css" title="default" media="screen" />
+<link rel="stylesheet" type="text/css" href="include/jquery.autocomplete.css" title="default" media="screen" />
+
 <script type="text/javascript" src="include/jquery.js"></script>
 <script type="text/javascript" src="include/jquery.dom_creator.js"></script>
 <script type="text/javascript" src="include/jquery.datePicker.js"></script>
+<script type="text/javascript" src="include/jquery.datePicker.conf.js"></script>
 <script type='text/javascript' src='include/jquery.autocomplete.js'></script>
+<script type='text/javascript' src='include/jquery.autocomplete.conf.js'></script>
 <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
-
-<!-- *Date selector js* - Start -->
-<script type="text/javascript">
-$(document).ready(init);
-function init()
-{
-$.datePicker.setDateFormat('ymd','-');
-$('input#date1').datePicker({startDate:'01/01/1970'});
-}
-</script>
-<!-- *Date selector js* - End -->
 
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
@@ -339,22 +281,17 @@ $('input#date1').datePicker({startDate:'01/01/1970'});
 
 <body>
 
-<br>
-
 <form name="frmpost" action="index.php?module=payments&view=save" method="post" onsubmit="return frmpost_Validator(this)">
-<div id="container">
-<div id="header"><b>{$LANG_process_payment}</b></div>
+<b>{$LANG_process_payment}</b>
+ <hr></hr>
+       <div id="browser">
 
 {$display_block}
 
-<div id="footer">
 	<input type=submit name="process_payment" value="{$LANG_process_payment}">
 	<input type=hidden name="op" value="{$insert_action_op}">
-</div>
-
 EOD;
 ?>
-</div>
 
 </form>
 <?php include("footer.inc.php"); ?>

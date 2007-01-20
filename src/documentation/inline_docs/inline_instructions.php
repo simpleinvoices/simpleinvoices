@@ -18,32 +18,14 @@ $display_block = fread( $fp, filesize( $filename ) );
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<?php include('./include/menu.php'); ?>
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
-
-
-<title>Simple Invoices - Instructions</title>
 <body>
-<?php
-$mid->printMenu('hormenu1');
-$mid->printFooter();
+<b>Documentation</b>
+ <hr></hr>
+       <div id="left">
+<?php 
+	echo $display_block;
+	fclose( $fp ); 
+	include("footer.inc.php");	
 ?>
-
-<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
-<br>
-<div id="container">
-<div id=header></div>
-<?php echo $display_block; ?>
-<div id="footer"></div>
-</div>
-</div>
-<?php fclose( $fp ); ?>
 </body>
 

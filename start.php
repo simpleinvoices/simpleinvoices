@@ -103,7 +103,7 @@ $sql4 = "
 
 $display_block_notice .=" <div id=\"top\">";
 
-$display_block_notice .="<b align=center>$title</b><hr></hr>";
+$display_block_notice .="<b align=center>$title</b><hr></hr><div id=\"left\">";
 
 if ($mysql < 5) {
 	$display_block_notice .=" 
@@ -155,7 +155,6 @@ $display_block_notice .="</div>";
 
 
 $display_block ="
-
                 <div id=\"list1\">
                 <h2><img src=\"./images/common/reports.png\"></img>$LANG_stats</h2>
                         <div id=\"item11\">
@@ -407,8 +406,8 @@ $display_block ="
 					</tr>
 					</table>
                                 </div>
+                                </div>
                         </div>
-
 ";
 
 
@@ -423,18 +422,22 @@ $display_block ="
 <script type="text/javascript" src="./include/jquery.js"></script>
 <script type="text/javascript" src="./include/jquery.accordian.js"></script>
 <script type="text/javascript" src="./include/jquery.jqbrowser.js"></script>
-		<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/index.css">
 </head>
 <BODY>
-       <div id="browser">
 <!-- <table align="center" >-->
 
-
 <?php echo $display_block_notice; ?>
-<br>
-<?php echo $display_block; ?>
-<!--
-<?php include("footer.inc.php"); ?>
--->
+<?php 
+	echo $display_block;
+
+?>
+<br><br><br><br>
+<br><br><br><br>
+<br><br><br><br>
+<br><br><br><br>
+<br><br><br><br>
+<?php 
+	include("footer.inc.php");
+?>
 </BODY>
 </HTML>

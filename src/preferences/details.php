@@ -1,5 +1,4 @@
 <?php
-#table
 include("./include/include_main.php");
 include('./include/validation.php');
 
@@ -48,7 +47,11 @@ while ($Array_preferences = mysql_fetch_array($result_print_preferences)) {
 if (  $_GET['action'] === 'view' ) {
 
 $display_block =  "
-	<div id=\"header\"<b>Preference :: <a href='index.php?module=preferences&view=details&submit=$pref_idField&action=edit'>Edit</a></b></div>
+
+	<b>Preference :: <a href='index.php?module=preferences&view=details&submit=$pref_idField&action=edit'>Edit</a></b>
+	<hr></hr>
+        <div id=\"browser\">
+
 	
 	<table align=center>
 		<tr>
@@ -101,7 +104,7 @@ $display_block =  "
 
 $footer =  "
 
-<div id='footer'><a href='index.php?module=preferences&view=details&submit=$pref_idField&action=edit'>Edit</a></div>
+<a href='index.php?module=preferences&view=details&submit=$pref_idField&action=edit'>Edit</a>
 ";
 
 }
@@ -116,7 +119,10 @@ $display_block_enabled = "<select name=\"pref_enabled\">
 </select>";
 
 $display_block =  "
-<div id=\"header\"><b>Preferences</b></div>
+	<b>Preferences</b>
+	<hr></hr>
+        <div id=\"browser\">
+
         <table align=center>
                 <tr>
                         <td class='details_screen'>Preference ID</td><td>$pref_idField</td>
@@ -187,40 +193,22 @@ $footer =  "
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<?php include('./include/menu.php'); ?>
 
     <script type="text/javascript" src="./include/jquery.js"></script>
     <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/jquery.thickbox.css" media="all"/>
 
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
-<title>Simple Invoices - Preference details
-</title>
 <?php include('./config/config.php'); ?>
 </head>
 <body>
-<?php
-$mid->printMenu('hormenu1');
-$mid->printFooter();
-?>
 
-<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
-<br>
 <form name="frmpost" action="index.php?module=preferences&view=save&submit=<?php echo $_GET['submit'];?>" method="post" onsubmit="return frmpost_Validator(this)">
-<div id="container">
-<?php echo $display_block; ?>
-<div id="footer">
-<?php echo $footer; ?>
-</div>
-</div>
+
+<?php 
+	echo $display_block;
+	echo $footer; 
+	
+	include("footer.inc.php");
+?>
 </body>
 </html>

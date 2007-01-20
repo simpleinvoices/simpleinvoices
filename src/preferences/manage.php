@@ -11,10 +11,7 @@ include('./include/include_main.php');
 <?php
 
 echo <<<EOD
-	<title>{$title} :: {$LANG_manage_preferences}</title>
-	<link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css" media="all" />
-
 EOD;
 
 	#select preferences
@@ -33,10 +30,15 @@ EOD;
 	<div id="sorting">
 		<div>Sorting tables, please hold on...</div>
 	</div>
+	
+	<b>{$LANG_manage_preferences}</b> ::
+	<a href="index.php?module=preferences&view=add">{$LANG_add_new_preference}</a>
+
+	<hr></hr>
+       	<div id="browser">
+
 
 	<table width="100%" align="center" class="filterable sortable" id="large">
-	<div id="header"><b>{$LANG_manage_preferences}</b> ::
-	<a href="index.php?module=preferences&view=add">{$LANG_add_new_preference}</a></div>
 	<tr class="sortHeader">
 	<th class="noFilter">{$LANG_action}</th>
 	<th class="index_table">{$LANG_preference_id}</th>
@@ -83,52 +85,22 @@ EOD;
 		$display_block .= "</table>";
 	} // if
 
-$mid->printMenu('hormenu1');
-$mid->printFooter();
 
 ?>
 <script type="text/javascript" src="include/doFilter.js"></script>
 
 <script type="text/javascript" src="./include/jquery.tablesorter.js"></script>
-
-<script type="text/javascript">
-$(document).ready(function() {
-        $("table#large").tableSorter({
-                sortClassAsc: 'sortUp', // class name for asc sorting action
-                sortClassDesc: 'sortDown', // class name for desc sorting action
-                highlightClass: ['highlight'], // class name for sort column highlighting.
-                //stripingRowClass: ['even','odd'],
-                //alternateRowClass: ['odd','even'],
-                headerClass: 'largeHeaders', // class name for headers (th's)
-                disableHeader: [0], // disable column can be a string / number or array containing string or number.
-                dateFormat: 'dd/mm/yyyy' // set date format for non iso dates default us, in this case override and set uk-format
-        })
-});
-$(document).sortStart(function(){
-        $("div#sorting").show();
-}).sortStop(function(){
-        $("div#sorting").hide();
-});
-</script>
-
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
+<script type="text/javascript" src="./include/jquery.tablesorter.conf.js"></script>
 </head>
 
 <body>
 
-<br>
-<div id="container">
+
 <?php echo $display_block; ?>
-<div id="footer"><a href="./documentation/text/inv_pref_what_the.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Invoice preference" class="thickbox">What's all this "Invoice Preference" stuff about?</a></div>
-</div>
-</div>
+
+<a href="./documentation/text/inv_pref_what_the.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Invoice preference" class="thickbox">What's all this "Invoice Preference" stuff about?</a>
+
+<?php include("footer.inc.php"); ?>
 
 </body>
 </html>

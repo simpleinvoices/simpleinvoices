@@ -4,21 +4,8 @@ include_once('./include/include_main.php');
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-	window.onload=function(){
-	Nifty("div#container");
-	Nifty("div#subheader");
-	Nifty("div#content,div#nav","same-height small");
-	Nifty("div#header,div#footer","small");
-}
-</script>
-
-<title> Simple Invoices - Tax rate to add</title>
 </head>
 <?php 
-include('./include/include_main.php');
 include('./include/validation.php');
 
 jsBegin();
@@ -32,31 +19,16 @@ $display_block_enabled = "<select name=\"pt_enabled\">
 <option value=\"1\" selected>$wording_for_enabledField</option>
 <option value=\"0\">$wording_for_disabledField</option>
 </select>";
-
-
 ?>
 
 <BODY>
-<?php
-$mid->printMenu('hormenu1');
-$mid->printFooter();
-?>
 
-<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
-<br>
 
 <FORM name="frmpost" ACTION="index.php?module=payment_types&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
-<div id="container">
-<div id="header">
-
-<table align=center>
-	<tr>
-		<td colspan=3 align=center><b>Payment type to add</b></th>
-	</tr>
-</table>
-
-</div id="header">
-<!-- <div id="subheader"> -->
+		
+<b>Payment type to add</b>
+ <hr></hr>
+       <div id="browser">
 
 <table align=center>
 	<tr>
@@ -67,20 +39,12 @@ $mid->printFooter();
 	</tr>
 	
 </table>
-<!-- </div> -->
-<div id="footer">
+
 	<input type=submit name="submit" value="Insert Payment Type">
 	<input type=hidden name="op" value="insert_payment_type">
-</div>
 
+<?php include("footer.inc.php");?>
 
 </FORM>
 </BODY>
 </HTML>
-
-
-
-
-
-
-

@@ -1,14 +1,13 @@
+<?php
+include('./include/include_main.php');
+?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php 
-include('./include/include_main.php');
-include('./include/validation.php');
-echo <<<EOD
-<title>Simple Invoices :: {$LANG_tax_rate_to_add}</title>
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css">
 
-EOD;
+include('./include/validation.php');
+
 jsBegin();
 jsFormValidationBegin("frmpost");
 jsValidateRequired("tax_description",$LANG_tax_description);
@@ -23,28 +22,22 @@ $display_block_enabled = "<select name=\"tax_enabled\">
 </select>";
 
 ?>
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#subheader");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
 </head>
 
 <BODY>
 <?php
-$mid->printMenu('hormenu1');
-$mid->printFooter();
+
 echo <<<EOD
 
 <br>
 
 <FORM name="frmpost" ACTION="index.php?module=tax_rates&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
-<div id="container">
-<div id="header"><b>{$LANG_tax_rate_to_add}</b></div id="header">
+
+<b>{$LANG_tax_rate_to_add}</b>
+
+ <hr></hr>
+       <div id="browser">
+
 <!-- <div id="subheader"> -->
 
 <table align=center>
@@ -65,12 +58,12 @@ echo <<<EOD
 </table>
 <!-- </div> -->
 
-<div id="footer">
 	<input type=submit name="submit" value="{$LANG_insert_tax_rate}">
 	<input type=hidden name="op" value="insert_tax_rate">
-</div>
+
 
 EOD;
+include("footer.inc.php");
 ?>
 
 </FORM>

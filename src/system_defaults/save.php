@@ -61,7 +61,8 @@ $default_payment_type = $_POST['def_payment_type'];
 			$display_block =  "Something went wrong, please try setting the system defaults again<br><<br>$sql";
 }
 
-	header( 'refresh: 2; url=index.php?module=system_defaults&view=manage' );
+	//header( 'refresh: 2; url=index.php?module=system_defaults&view=manage' );
+        $refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=system_defaults&view=manage>";
 }
 
 
@@ -93,7 +94,8 @@ $default_payment_type = $_POST['def_payment_type'];
  ";
 }
 
-	header( 'refresh: 2; url=index.php?module=system_defaults&view=manage' );
+	//header( 'refresh: 2; url=index.php?module=system_defaults&view=manage' );
+        $refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=system_defaults&view=manage>";
 }
 
 	#UPDATE the default biller field
@@ -123,7 +125,8 @@ $default_payment_type = $_POST['def_payment_type'];
  ";
 }
 
-	header( 'refresh: 2; url=index.php?module=system_defaults&view=manage' );
+	//header( 'refresh: 2; url=index.php?module=system_defaults&view=manage' );
+        $refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=system_defaults&view=manage>";
 }
 
 	#UPDATE the default customer field
@@ -153,7 +156,8 @@ $default_payment_type = $_POST['def_payment_type'];
  ";
 }
 
-	header( 'refresh: 2; url=index.php?module=system_defaults&view=manage' );
+	//header( 'refresh: 2; url=index.php?module=system_defaults&view=manage' );
+        $refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=system_defaults&view=manage>";
 }
 
 
@@ -184,7 +188,8 @@ $default_payment_type = $_POST['def_payment_type'];
  ";
 }
 
-	header( 'refresh: 2; url=index.php?module=system_defaults&view=manage' );
+	//header( 'refresh: 2; url=index.php?module=system_defaults&view=manage' );
+        $refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=system_defaults&view=manage>";
 }
 
 
@@ -215,7 +220,8 @@ $default_payment_type = $_POST['def_payment_type'];
  ";
 }
 
-	header( 'refresh: 2; url=index.php?module=system_defaults&view=manage' );
+	//header( 'refresh: 2; url=index.php?module=system_defaults&view=manage' );
+        $refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=system_defaults&view=manage>";
 }
 
 	#UPDATE the default payment_type field
@@ -245,7 +251,8 @@ $default_payment_type = $_POST['def_payment_type'];
  ";
 	}
 
-	header( 'refresh: 2; url=index.php?module=system_defaults&view=manage' );
+	//header( 'refresh: 2; url=index.php?module=system_defaults&view=manage' );
+        $refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=system_defaults&view=manage>";
 }
 
 }
@@ -264,24 +271,20 @@ $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 $display_block_items = isset($display_block_items) ? $display_block_items : '&nbsp;';
 echo <<<EOD
 {$refresh_total}
-<title>{$title}</title>
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css">
 </head>
 
 <body>
 
-EOD;
-$mid->printMenu('hormenu1');
-$mid->printFooter();
-echo <<<EOD
 <br>
-<br>
+       <div id="browser">
+
 {$display_block}
 <br><br>
 {$display_block_items}
 
 EOD;
 ?>
+<?php include("footer.inc.php"); ?>
 </body>
 </html>
 

@@ -5,6 +5,5 @@ include_once('./include/functions.php');
 ob_start();
 include_once("./lang/$language.inc.php");
 ob_end_clean();
-include_once('./include/menu.php');
 
 ?>

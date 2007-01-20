@@ -1,15 +1,13 @@
+<?php
+include("./include/include_main.php");
+?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php
 #table
-include("./include/include_main.php");
 include('./include/validation.php');
-echo <<<EOD
-<title>{$title} :: {$LANG_tax_rate_details}</title>
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css">
 
-EOD;
 jsBegin();
 jsFormValidationBegin("frmpost");
 jsValidateRequired("tax_description",$LANG_tax_description);
@@ -53,8 +51,11 @@ if ($_GET['action'] === 'view') {
 
 	$display_block = <<<EOD
 
-        <div id="header"><b>{$LANG_tax_rate}</b> ::
-        <a href="index.php?module=tax_rates&view=details&submit={$tax_idField}&action=edit">{$LANG_edit}</a></div>
+        <b>{$LANG_tax_rate}</b> ::
+        <a href="index.php?module=tax_rates&view=details&submit={$tax_idField}&action=edit">{$LANG_edit}</a>
+
+	<hr></hr>
+      	<div id="browser">
 
 	<table align="center">
 	<tr>
@@ -74,7 +75,8 @@ if ($_GET['action'] === 'view') {
 EOD;
 $footer = "
 
-<div id='footer'><a href='index.php?module=tax_rates?view=details&submit={$tax_idField}&action=edit'>{$LANG_edit}</a></div>
+<a href='index.php?module=tax_rates&view=details&submit={$tax_idField}&action=edit'>{$LANG_edit}</a>
+
 ";
 
 }
@@ -90,8 +92,10 @@ $display_block_enabled = "<select name=\"tax_enabled\">
 
 $display_block = <<<EOD
 
-        <div id="header"><b>{$LANG_tax_rate}</b> ::
-        <a href="index.php?module=tax_rates&view=details&submit={$tax_idField}&action=edit">{$LANG_edit}</a></div>
+        <b>{$LANG_tax_rate}</b> 
+
+	<hr></hr>
+        <div id="browser">
 
 	<table align="center">
 	<tr>
@@ -103,8 +107,7 @@ $display_block = <<<EOD
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_tax_percentage}</td>
-		<td><input type="text" name="tax_percentage" value="{$tax_percentageField}" size="10" />
-		%</td>
+		<td><input type="text" name="tax_percentage" value="{$tax_percentageField}" size="10" />%</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$wording_for_enabledField} </td><td>{$display_block_enabled}</td>
@@ -123,33 +126,24 @@ EOD;
 }
 
 ?>
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
 </head>
 <body>
 <?php
-$mid->printMenu('hormenu1');
-$mid->printFooter();
+
 echo <<<EOD
 
-<br>
 <form name="frmpost" action="index.php?module=tax_rates&view=save&submit={$_GET['submit']}"
  method="post" onsubmit="return frmpost_Validator(this)">
-<div id="container">
+
 {$display_block}
-<div id="footer">
+
 {$footer}
 
 EOD;
+
+include("footer.inc.php");
+
 ?>
-</div>
-</div>
 </form>
 </body>
 </html>

@@ -62,8 +62,8 @@
                                         onClick:function(){simpleLog(this.id + ' clicked')},
                                         onShow:function(){simpleLog(this.id + ' shown'); $(this).removeClass('off1').addClass('on1');},
                                         onHide:function(){simpleLog(this.id + ' hidden'); $(this).removeClass('on1').addClass('off1');},
-                                        showSpeed:550,
-                                        hideSpeed:550
+                                        showSpeed:250,
+                                        hideSpeed:250
                                 });
 
 				$.accordian('#list2 > div', '#item22', {

@@ -2,8 +2,6 @@
 include('./include/include_main.php');
 include('./include/sql_patches.php');
 
-$mid->printMenu('hormenu1');
-$mid->printFooter();
 
 #insert customer
 $conn = mysql_connect("$db_host","$db_user","$db_password");
@@ -178,9 +176,9 @@ if ($_GET[op] == "run_updates") {
 
 
 
-		echo "<br>
-		<div id='container'>
-		<div id='header'></div>
+		echo "
+		<div id=\"browser\">
+
 		<table align='center'>";
 
 		run_sql_patch(1,$sql_patch_name_1,$sql_patch_1,$sql_patch_update_1);
@@ -220,17 +218,14 @@ if ($_GET[op] == "run_updates") {
 		echo "<tr><td><br>The database patches have now been applied, please go back to the <a href='index.php?module=options&view=database_sqlpatches'>Database Upgrade Manager page</a> to see what patches have been applied. If all patches have been applied then there is now further action required</td></tr>";
 		echo "
 		</table>
-		</div>
-		<div id='footer'></div>
 ";
 
 
 	} else {
 
 
-		echo "<br>
-		<div id='container'>
-		<div id='header'></div>
+		echo "
+		<div id='browser'>
 		<table align='center'>
 		";
 	echo "<br><br><tr><td>Step 1 - This is the first time Database Updates has been run</td></tr><br>";
@@ -240,7 +235,6 @@ if ($_GET[op] == "run_updates") {
 		echo "
 		</table>
 		</div>
-		<div id='footer'></div>
 ";
 
 	}
@@ -255,9 +249,11 @@ else {
 	if(mysql_num_rows(mysql_query("SHOW TABLES LIKE '".$table."'"))==1) {
 
 
-		echo "<br>
-		<div id='container'>
-		<div id='header'>Database Upgrade Manager $display_note</div>
+		echo "
+		Database Upgrade Manager $display_note
+		<hr></hr>
+		<div id=\"browser\">
+
 		<table align='center'>
 ";
 
@@ -266,7 +262,7 @@ else {
 <a href=\"./documentation/text/text.html?keepThis=true&TB_iframe=true&height=300&width=500\" title=\"Info :: Database upgrade warning\" class=\"thickbox\"><font color=\"red\">Warning:</font></a>
 ";
 
-		echo "<div id='container'>
+		echo "
 		<table align='center'>";
 	check_sql_patch(1,$sql_patch_name_1);
 	check_sql_patch(2,$sql_patch_name_2);
@@ -304,8 +300,6 @@ else {
 
 		echo "
 		</table>
-		</div>
-		<div id='footer'></div>
 ";
 
 	}
@@ -315,9 +309,7 @@ else {
 
 		echo "
 
-		<br>
-		<div id='container'>
-		<div id='header'>
+		<div id='browser'>
 		<table align='center'>
 ";
 
@@ -326,8 +318,6 @@ else {
 
 		echo "
 		</table>
-		</div>
-		<div id='footer'></div>
 ";
 	}
 
@@ -340,26 +330,12 @@ else {
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="text/javascript" src="./include/jquery.js"></script>
     <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/jquery.thickbox.css" media="all"/>
 
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
-
-<title>Simple Invoices - Upgrade database
-</title>
 </head>
 <body>
 <?php include('./config/config.php'); ?>
 
-<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
 
 
 <br><br>
@@ -368,8 +344,6 @@ Nifty("div#header,div#footer","small");
 
 
 
-
-
-
-
+<?php include("footer.inc.php"); ?>
 </body>
+</html>

@@ -1,15 +1,13 @@
+<?php
+include("./include/include_main.php");
+?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php
 
-include("./include/include_main.php");
 include("./include/validation.php");
-echo <<<EOD
-<title>{$title} :: {$LANG_payment_type_details}</title>
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css">
 
-EOD;
 jsBegin();
 jsFormValidationBegin("frmpost");
 jsValidateRequired("pt_description",$LANG_payment_type_description);
@@ -60,7 +58,7 @@ $display_block = <<<EOD
 EOD;
 $footer = "
 
-<div id='footer'><a href='index.php?module=payment_types&view=details&submit={$pt_idField}&action=edit'>{$LANG_edit}</a></div>
+<a href='index.php?module=payment_types&view=details&submit={$pt_idField}&action=edit'>{$LANG_edit}</a>
 ";
 
 }
@@ -104,32 +102,25 @@ EOD;
 }
 
 ?>
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
 </head>
+
 <body>
 <?php
-$mid->printMenu('hormenu1');
-$mid->printFooter();
+
 echo <<<EOD
 
-<br>
 <form name="frmpost" action="index.php?module=payment_types&view=save&submit={$_GET['submit']}" method="post" onsubmit="return frmpost_Validator(this)">
-<div id="container">
-<div id="header"><b>{$LANG_payment_type}</b></div>
-{$display_block}
-<div id="footer">
-{$footer}
 
+<b>{$LANG_payment_type}</b>
+ <hr></hr>
+       <div id="browser">
+
+{$display_block}
+
+{$footer}
 EOD;
+
+include("footer.inc.php");
 ?>
-</div>
-</div>
 </body>
 </html>

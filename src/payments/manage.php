@@ -129,10 +129,11 @@ while ($Array = mysql_fetch_array($result)) {
 <?php include('./config/config.php'); ?>
 <body>
 
-<br>
 <?php echo $display_block; ?>
+
 <a href="./documentation/text/wheres_the_edit_button.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Payments" class="thickbox">Wheres the Edit button?</a>
+
 <?php include("footer.inc.php"); ?>
 
 </body>
-
+</html>

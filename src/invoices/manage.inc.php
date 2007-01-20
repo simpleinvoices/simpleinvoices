@@ -18,7 +18,7 @@ if (mysql_num_rows($result) == 0) {
 <table align="center" id="large" class="sortable filterable">
 <tr class="sortHeader">
 <th class="noFilter" >{$LANG_actions}</th>
-<th class="index_table">{$LANG_id} &nbsp;</th>
+<th class="noFilter">{$LANG_id} &nbsp;</th>
 <th class="selectFilter index_table">{$LANG_biller}</th>
 <th class="selectFilter index_table">{$LANG_customer}</th>
 <th class="noFilter">{$LANG_total}</th>

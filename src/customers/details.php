@@ -212,7 +212,10 @@ $display_block .= <<<EOD
 		<div id="section-3" class="fragment">
 			<h4><u>{$LANG_customer} {$LANG_notes}</u></h4>
 			<p>
+			
+			<div id="left">
 			{$c_notesField}
+			</div>
 			</p>
 		</div>
 	</div>

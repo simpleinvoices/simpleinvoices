@@ -419,46 +419,23 @@ else {
 <html>
 <head>
 
-<?php include('./include/menu.php'); ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript" src="./include/jquery.js"></script>
 <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#subheader");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
-
 </head>
-<title><?php echo $title; echo $msd_page_title; ?></title>
 <?php include('./config/config.php'); ?>
 
 <BODY>
-<?php
-$mid->printMenu('hormenu1');
-$mid->printFooter();
-?>
 
-<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
 <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/jquery.thickbox.css" media="all"/>
-<br>
 
 <FORM name="frmpost" ACTION="index.php?module=system_defaults&view=save&sys_default=<?php echo $default; ?>" METHOD=POST onsubmit="return frmpost_Validator(this)">
-<div id="container">
-<div id="header">
-<table align=center>
-	<tr>
-		<td colspan=2 align=center><b><?php echo $msd_heading; ?></b></th>
-	</tr>
-</table>
 
-</div id="header">
-<!-- <div id="subheader"> -->
+		<b><?php echo $msd_heading; ?></b>
+ <hr></hr>
+       <div id="browser">
+
 
 <table align=center>
 
@@ -471,10 +448,10 @@ $mid->printFooter();
 </table>
 <!-- </div> -->
 
-<div id="footer">
 	<input type=submit name="submit" value="<?php echo $msd_submit_button; ?>">
 	<input type=hidden name="op" value="update_system_defaults">
-</div>
+
+<?php include("footer.inc.php"); ?>
 
 </FORM>
 </BODY>

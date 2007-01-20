@@ -3,11 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php
 include('./include/include_main.php');
-echo <<<EOD
-<title>{$title} :: {$LANG_manage_tax_rates}</title>
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css" />
 
-EOD;
 #insert customer
 $conn = mysql_connect("$db_host","$db_user","$db_password");
 mysql_select_db("$db_name",$conn);
@@ -24,13 +20,17 @@ if (mysql_num_rows($result) == 0) {
 }else{
 	$display_block = <<<EOD
 
+	<b>{$LANG_manage_tax_rates}</b> ::
+	<a href="./index.php?module=tax_rates&view=add">{$LANG_add_new_tax_rate}</a>
+ <hr></hr>
+
 <div id="sorting">
 	<div>Sorting tables, please hold on...</div>
 </div>
 
+       <div id="browser">
+
 <table width="100%" align="center" class="filterable sortable" id="large">
-	<div id="header"><b>{$LANG_manage_tax_rates}</b> ::
-	<a href="./index.php?module=tax_rates&view=add">{$LANG_add_new_tax_rate}</a></div></th>
 <tr class="sortHeader">
 	<th class="noFilter">{$LANG_actions}</th>
 	<th class="index_table">{$LANG_tax_id}</th>
@@ -73,52 +73,20 @@ EOD;
 }
 
 
-$mid->printMenu('hormenu1');
-$mid->printFooter();
 ?>
 <script type="text/javascript" src="include/doFilter.js"></script>
 
 <script type="text/javascript" src="include/jquery.js"></script>
 <script type="text/javascript" src="include/jquery.tablesorter.js"></script>
-
-<script type="text/javascript">
-$(document).ready(function() {
-	$("table#large").tableSorter({
-		sortClassAsc: 'sortUp', // class name for asc sorting action
-		sortClassDesc: 'sortDown', // class name for desc sorting action
-		highlightClass: ['highlight'], // class name for sort column highlighting.
-		//stripingRowClass: ['even','odd'],
-		//alternateRowClass: ['odd','even'],
-		headerClass: 'largeHeaders', // class name for headers (th's)
-		disableHeader: [0], // disable column can be a string / number or array containing string or number.
-		dateFormat: 'dd/mm/yyyy' // set date format for non iso dates default us, in this case override and set uk-format
-	})
-});
-$(document).sortStart(function(){
-	$("div#sorting").show();
-}).sortStop(function(){
-	$("div#sorting").hide();
-});
-</script>
-
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
+<script type="text/javascript" src="include/jquery.tablesorter.conf.js"></script>
 </head>
 
 <body>
 
-<br>
-<div id="container">
-<?php echo $display_block; ?>
-<div id="footer"></div>
-</div>
-</div>
+<?php 
+	echo $display_block; 
+	include("footer.inc.php");	
+?>
 
 </body>
 </html>

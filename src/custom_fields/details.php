@@ -6,11 +6,6 @@ include_once('./include/include_main.php');
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php
 #table
-echo <<<EOD
-<title>{$title} :: {$LANG_customer_details}</title>
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/tables.css" />
-
-EOD;
 
 #get the invoice id
 $cf_id = $_GET[submit];
@@ -41,8 +36,12 @@ if ($_GET['action'] == "view") {
 
 	$display_block = <<<EOD
 
-	<div id="header"><b>{$LANG_custom_fields}</b> ::
-	<a href="index.php?module=custom_fields&view=details&submit={$cf_idField}&action=edit">{$LANG_edit}</a></div>
+	<b>{$LANG_custom_fields}</b> ::
+	<a href="index.php?module=custom_fields&view=details&submit={$cf_idField}&action=edit">{$LANG_edit}</a>
+	<hr></hr>
+        <div id="browser">
+
+
 	
 	<table align="center">
 	<tr>
@@ -66,7 +65,7 @@ EOD;
 
 $footer = <<<EOD
 
-<div id="footer"><a href="index.php?module=custom_fields&view=details&submit={$cf_idField}&action=edit">{$LANG_edit}</a></div>
+<a href="index.php?module=custom_fields&view=details&submit={$cf_idField}&action=edit">{$LANG_edit}</a>
 
 EOD;
 }
@@ -75,7 +74,12 @@ else if ($_GET['action'] == "edit") {
 
 
 $display_block = <<<EOD
-	<div id="header"><b>{$LANG_custom_fields}</b></div>
+
+
+	<b>{$LANG_custom_fields}</b>
+
+	<hr></hr>
+        <div id="browser">
 
 	<table align="center">
         <tr>
@@ -107,33 +111,24 @@ EOD;
 }
 
 ?>
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
+
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 </head>
 <body>
 
 <?php
-$mid->printMenu('hormenu1');
-$mid->printFooter();
 echo <<<EOD
 
 <br>
 <FORM name="frmpost" ACTION="index.php?module=custom_fields&view=save&submit={$_GET['submit']}"
  METHOD="POST" onsubmit="return frmpost_Validator(this)">
-<div id="container">
+
 {$display_block}
-<div id="footer">
 {$footer}
 
 EOD;
+include("footer.inc.php");
 ?>
 </div>
 </div>
