@@ -31,8 +31,8 @@ EOD;
 		<div>Sorting tables, please hold on...</div>
 	</div>
 	
-	<b>{$LANG_manage_preferences}</b> ::
-	<a href="index.php?module=preferences&view=add">{$LANG_add_new_preference}</a>
+	<b>{$LANG_manage_preferences} ::
+	<a href="index.php?module=preferences&view=add">{$LANG_add_new_preference}</a></b>
 
 	<hr></hr>
        	<div id="browser">
@@ -43,7 +43,7 @@ EOD;
 	<th class="noFilter">{$LANG_action}</th>
 	<th class="index_table">{$LANG_preference_id}</th>
 	<th class="index_table">{$LANG_description}</th>
-	<th class="selectFilter index_table">{$wording_for_enabledField} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+	<th class="noFilter index_table">{$wording_for_enabledField}</th>
 	</tr>
 
 EOD;
@@ -98,7 +98,7 @@ EOD;
 
 <?php echo $display_block; ?>
 
-<a href="./documentation/text/inv_pref_what_the.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Invoice preference" class="thickbox">What's all this "Invoice Preference" stuff about?</a>
+<a href="./documentation/info_pages/inv_pref_what_the.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Invoice preference" class="thickbox"><img src="./images/common/help-small.png"></img> What's all this "Invoice Preference" stuff about?</a>
 
 <?php include("footer.inc.php"); ?>
 

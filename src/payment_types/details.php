@@ -43,6 +43,10 @@ if ($_GET['action'] === 'view') {
 
 $display_block = <<<EOD
 	
+	<b>{$LANG_payment_type}</b>
+	<hr></hr>
+       	<div id="browser">
+
 	<table align="center">
 	<tr>
 		<td class="details_screen">{$LANG_payment_type_id}</td><td>{$pt_idField}</td>
@@ -54,7 +58,7 @@ $display_block = <<<EOD
 		<td class="details_screen">{$wording_for_enabledField}</td><td>{$wording_for_enabled}</td>
 	</tr>
 	</table>
-
+	<hr></hr>
 EOD;
 $footer = "
 
@@ -74,6 +78,10 @@ $display_block_enabled = "<select name=\"pt_enabled\">
 
 $display_block = <<<EOD
 
+	<b>{$LANG_payment_type_edit}</b>
+	<hr></hr>
+       	<div id="browser">
+
 	<table align=center>
 	<tr>
 		<td class="details_screen">{$LANG_payment_type_id}</td>
@@ -89,7 +97,7 @@ $display_block = <<<EOD
 		<td>{$display_block_enabled}</td>
 	</tr>
 	</table>
-
+	<hr></hr>
 EOD;
 
 $footer = <<<EOD
@@ -111,9 +119,6 @@ echo <<<EOD
 
 <form name="frmpost" action="index.php?module=payment_types&view=save&submit={$_GET['submit']}" method="post" onsubmit="return frmpost_Validator(this)">
 
-<b>{$LANG_payment_type}</b>
- <hr></hr>
-       <div id="browser">
 
 {$display_block}
 

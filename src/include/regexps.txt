@@ -1,0 +1,3 @@
+:%s/ion\/text/ion\/info_pages/g
+
+%s/>*</><img src=\".\/images\/common\/help-small.png\"><\/img></g

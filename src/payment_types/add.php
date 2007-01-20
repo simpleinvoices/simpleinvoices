@@ -39,7 +39,7 @@ $display_block_enabled = "<select name=\"pt_enabled\">
 	</tr>
 	
 </table>
-
+	<hr></hr>
 	<input type=submit name="submit" value="Insert Payment Type">
 	<input type=hidden name="op" value="insert_payment_type">
 

@@ -250,7 +250,7 @@ else {
 
 
 		echo "
-		Database Upgrade Manager $display_note
+		<b>Database Upgrade Manager</b> $display_note
 		<hr></hr>
 		<div id=\"browser\">
 
@@ -259,7 +259,7 @@ else {
 
                 echo "<tr></i><tr><td><br>The list below describes which patches have and have not been applied to the database, the aim is to have them all applied.  If there are patches that have not been applied to the Simple Invoices database, please run the Update database by clicking update </td></tr><tr align=center><td><br><a href='index.php?module=options&view=database_sqlpatches&op=run_updates'>UPDATE</a></td></tr></table><br>
 
-<a href=\"./documentation/text/text.html?keepThis=true&TB_iframe=true&height=300&width=500\" title=\"Info :: Database upgrade warning\" class=\"thickbox\"><font color=\"red\">Warning:</font></a>
+<a href=\"./documentation/info_pages/text.html?keepThis=true&TB_iframe=true&height=300&width=500\" title=\"Info :: Database upgrade warning\" class=\"thickbox\"><font color=\"red\"><img src=\"./images/common/important.png\"></img>Warning:</font></a>
 ";
 
 		echo "

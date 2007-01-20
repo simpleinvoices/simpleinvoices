@@ -137,6 +137,7 @@ $LANG_paid = "Paid";//1
 $LANG_payment_type = "Payment Type";//1
 $LANG_payment_type_description = "Payment type description";//1
 $LANG_payment_type_details = "Payment Type Details";//1
+$LANG_payment_type_edit = "Edit Payment Type";//1
 $LANG_payment_type_id = "Payment Type ID";//1
 $LANG_payment_type_method = "Payment Type/Method";//1
 $LANG_payment_type_to_add = "Payment type to add";//1

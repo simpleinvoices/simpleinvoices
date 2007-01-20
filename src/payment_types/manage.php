@@ -25,7 +25,7 @@ if (mysql_num_rows($result) == 0) {
 	<div>Sorting tables, please hold on...</div>
 </div>
 
-<b>{$LANG_manage_payment_types}</b> :: <a href="index.php?module=payment_types&view=add">{$LANG_add_new_payment_type}</a>
+<b>{$LANG_manage_payment_types} :: <a href="index.php?module=payment_types&view=add">{$LANG_add_new_payment_type}</a></b>
 
 <hr></hr>
        <div id="browser">
@@ -35,7 +35,7 @@ if (mysql_num_rows($result) == 0) {
 <th class="noFilter">{$LANG_actions}</th>
 <th class="index_table">{$LANG_payment_type_id}</th>
 <th class="index_table">{$LANG_description}</th>
-<th class="selectFilter index_table">{$wording_for_enabledField} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th class="noFilter index_table">{$wording_for_enabledField}</th>
 </tr>
 
 EOD;

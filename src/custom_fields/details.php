@@ -120,7 +120,6 @@ EOD;
 <?php
 echo <<<EOD
 
-<br>
 <FORM name="frmpost" ACTION="index.php?module=custom_fields&view=save&submit={$_GET['submit']}"
  METHOD="POST" onsubmit="return frmpost_Validator(this)">
 
