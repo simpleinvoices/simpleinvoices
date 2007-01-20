@@ -45,7 +45,7 @@ $mid->printFooter();
    $oRpt->setDatabase("$db_name");
    $oRpt->run();
 
-   $error =  "<a href=\"./documentation/text/reports_xsl.html?keepThis=true&TB_iframe=true&height=300&width=650\" title=\"Info :: Reports\" class=\"thickbox\"><font color=\"red\">Got \"OOOOPS, THERE'S AN ERROR HERE.\" error?</font></a>";
+   $error =  "<a href=\"./documentation/info_pages/reports_xsl.html?keepThis=true&TB_iframe=true&height=300&width=650\" title=\"Info :: Reports\" class=\"thickbox\"><font color=\"red\">Got \"OOOOPS, THERE'S AN ERROR HERE.\" error?</font></a>";
    echo $error;
 ?>
 

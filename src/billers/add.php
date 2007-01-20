@@ -91,7 +91,7 @@ echo <<<EOD
 		<td class="details_screen">{$LANG_street}</td><td><input type=text name="b_street_address" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_street2} <a href="./documentation/text/street2.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Street address 2" class="thickbox"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="b_street_address2" size=25></td>
+		<td class="details_screen">{$LANG_street2} <a href="./documentation/info_pages/street2.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Street address 2" class="thickbox"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="b_street_address2" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_city}</td><td><input type=text name="b_city" size=25></td>
@@ -118,19 +118,19 @@ echo <<<EOD
 		<td class="details_screen">{$LANG_email}</td><td><input type=text name="b_email" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$biller_custom_field_label1} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="b_custom_field1" size=25></td>
+		<td class="details_screen">{$biller_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="b_custom_field1" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$biller_custom_field_label2} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="b_custom_field2" size=25></td>
+		<td class="details_screen">{$biller_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="b_custom_field2" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$biller_custom_field_label3} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="b_custom_field3" size=25></td>
+		<td class="details_screen">{$biller_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="b_custom_field3" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$biller_custom_field_label4} <a href="./documentation/text/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="b_custom_field4" size=25></td>
+		<td class="details_screen">{$biller_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="b_custom_field4" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_logo_file} <a href="./documentation/text/insert_biller_text.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td><td>{$display_block_logo_list}</td>
+		<td class="details_screen">{$LANG_logo_file} <a href="./documentation/info_pages/insert_biller_text.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td><td>{$display_block_logo_list}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_invoice_footer}</td><td><textarea input type=text name="b_co_footer" rows=4 cols=50></textarea></td>

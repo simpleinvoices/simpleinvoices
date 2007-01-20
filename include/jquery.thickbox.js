@@ -35,7 +35,7 @@ function TB_show(caption, url, imageGroup) {//function called when the user clic
  		
 		TB_overlaySize();
 		
-		$("body").append("<div id='TB_load'><img src='images/loadingAnimation.gif' /></div>");
+		$("body").append("<div id='TB_load'><img src='images/common/add.gif' /></div>");
 		TB_load_position();
 		
 		

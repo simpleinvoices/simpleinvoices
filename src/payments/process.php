@@ -225,12 +225,12 @@ $display_block = <<<EOD
 <table align="center">
 <tr>
 	<td class="details_screen">{$LANG_invoice_id}
-	<a href="./documentation/text/process_payment_inv_id.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Process payments" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
+	<a href="./documentation/info_pages/process_payment_inv_id.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Process payments" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
 	<td><input type="text" id="ac_me" name="ac_inv_id" /></td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG_details}
-	<a href="./documentation/text/process_payment_details.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Process payments" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
+	<a href="./documentation/info_pages/process_payment_details.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Process payments" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
 	<td id="js_total"><i>{$LANG_select_invoice}</i> </td>
 </tr>
 <tr>

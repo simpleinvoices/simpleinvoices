@@ -3,13 +3,13 @@
 include('./include/include_main.php');
 
 
-$fp = fopen( "./documentation/text/faqs.html", "r" );
+$fp = fopen( "./documentation/info_pages/faqs.html", "r" );
 if(!$fp)
 {
     echo "Couldn't open the data file. Try again later.";
     exit;
 }
-$filename ="./documentation/text/faqs.html";
+$filename ="./documentation/info_pages/faqs.html";
 $display_block = fread( $fp, filesize( $filename ) );
 ?>
 

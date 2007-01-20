@@ -130,7 +130,7 @@ while ($Array = mysql_fetch_array($result)) {
 
 <?php echo $display_block; ?>
 
-<a href="./documentation/text/wheres_the_edit_button.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Payments" class="thickbox"><img src="./images/common/help-small.png"></img>Wheres the Edit button?</a>
+<a href="./documentation/info_pages/wheres_the_edit_button.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Payments" class="thickbox"><img src="./images/common/help-small.png"></img>Wheres the Edit button?</a>
 
 <?php include("footer.inc.php"); ?>
 
