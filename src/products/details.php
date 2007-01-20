@@ -62,9 +62,9 @@ $prod_custom_field_label4 = get_custom_field_label(product_cf4);
 if ($_GET['action'] == "view") {
 
 	$display_block = <<<EOD
-	<div id="top"><b>{$LANG_products}</b> ::
+	<b>{$LANG_products}</b> ::
 	<a href="index.php?module=products&view=details&submit={$prod_idField}&action=edit">{$LANG_edit}</a>
-	</div>
+	
  	<hr></hr>
        <div id="browser"	
 
@@ -81,19 +81,19 @@ if ($_GET['action'] == "view") {
 		<td>{$prod_unit_priceField}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
+		<td class="details_screen">{$prod_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
 		<td>{$prod_custom_field1Field}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
+		<td class="details_screen">{$prod_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
 		<td>{$prod_custom_field2Field}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
+		<td class="details_screen">{$prod_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
 		<td>{$prod_custom_field3Field}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
+		<td class="details_screen">{$prod_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
 		<td>{$prod_custom_field4Field}</td>
 	</tr>
 	<tr>
@@ -109,7 +109,7 @@ EOD;
 
 $footer = <<<EOD
 <hr></hr>
-<div id="footer"><a href="index.php?module=products&view=details&submit={$prod_idField}&action=edit">{$LANG_edit}</a></div>
+<a href="index.php?module=products&view=details&submit={$prod_idField}&action=edit">{$LANG_edit}</a>
 
 EOD;
 
@@ -125,7 +125,7 @@ $display_block_enabled = "<select name=\"prod_enabled\">
 </select>";
 
 $display_block = <<<EOD
-	<div id="top"><b>{$LANG_products}</b></div>
+	<b>{$LANG_product_edit}</b>
 	<hr></hr>
         <div id="browser"
 
@@ -142,19 +142,19 @@ $display_block = <<<EOD
 		<td><input type="text" name="prod_unit_price" size="25" value="{$prod_unit_priceField}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
+		<td class="details_screen">{$prod_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type="text" name="prod_custom_field1" size="50" value="{$prod_custom_field1Field}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
+		<td class="details_screen">{$prod_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type="text" name="prod_custom_field2" size="50" value="{$prod_custom_field2Field}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
+		<td class="details_screen">{$prod_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type="text" name="prod_custom_field3" size="50" value="{$prod_custom_field3Field}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
+		<td class="details_screen">{$prod_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type="text" name="prod_custom_field4" size="50" value="{$prod_custom_field4Field}" /></td>
 	</tr>
 	<tr>
@@ -189,14 +189,9 @@ EOD;
 
 echo <<<EOD
 
-<br>
 <FORM name="frmpost" ACTION="index.php?module=products&view=save&submit={$_GET['submit']}" METHOD="POST" onsubmit="return frmpost_Validator(this)">
-<div id="container">
 {$display_block}
-<div id="footer">
 {$footer}
-</div>
-</div>
 EOD;
 include("footer.inc.php");
 ?>

@@ -111,7 +111,7 @@ $customer_custom_field_label4 = get_custom_field_label(customer_cf4);
 if ($_GET['action'] === 'view') {
 
 	$display_block = <<<EOD
-	<b>{$LANG_customer}</b> :: <a href="index.php?module=customers&view=details&submit={$c_idField}&action=edit">{$LANG_edit}</a>
+	<b>{$LANG_customer} :: <a href="index.php?module=customers&view=details&submit={$c_idField}&action=edit">{$LANG_edit}</a></b>
 	<hr></hr>
         <div id="browser">
 
@@ -135,7 +135,7 @@ if ($_GET['action'] === 'view') {
 		<td>{$invoice_paid_Field}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_attention_short} <a href="documentation/info_pages/customer_contact.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Customer contact" class="thickbox">*</a></td>
+		<td class="details_screen">{$LANG_attention_short} <a href="documentation/info_pages/customer_contact.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Customer contact" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
 		<td colspan="2">{$c_attentionField}</td><td colspan=2></td>
 		<td class="details_screen">{$LANG_total_owing}</td><td><u>{$invoice_owing_Field}</u></td>
 	</tr>
@@ -143,7 +143,7 @@ if ($_GET['action'] === 'view') {
 		<td class="details_screen">{$LANG_street}</td><td>{$c_street_addressField}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_street2} <a href="./documentation/info_pages/street2.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Street address 2" class="thickbox">*</a></td><td>{$c_street_address2Field}</td>
+		<td class="details_screen">{$LANG_street2} <a href="./documentation/info_pages/street2.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Street address 2" class="thickbox"><img src="./images/common/help-small.png"></img></a></td><td>{$c_street_address2Field}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_city}</td><td>{$c_cityField}</td>
@@ -184,16 +184,16 @@ $display_block .= <<<EOD
 			<p>
 			<table>
 			<tr>
-				<td class="details_screen">{$customer_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td><td>{$c_custom_field1Field}</td>
+				<td class="details_screen">{$customer_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td><td>{$c_custom_field1Field}</td>
 			</tr>
 			<tr>
-				<td class="details_screen">{$customer_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td><td>{$c_custom_field2Field}</td>
+				<td class="details_screen">{$customer_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td><td>{$c_custom_field2Field}</td>
 			</tr>
 			<tr>
-				<td class="details_screen">{$customer_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td><td>{$c_custom_field3Field}</td>
+				<td class="details_screen">{$customer_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td><td>{$c_custom_field3Field}</td>
 			</tr>
 			<tr>
-				<td class="details_screen">{$customer_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td><td>{$c_custom_field4Field}</td>
+				<td class="details_screen">{$customer_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td><td>{$c_custom_field4Field}</td>
 			</tr>		
 			</table>	
 			</p>
@@ -225,10 +225,8 @@ EOD;
 #include('./manage_invoices.inc.php'); 
 
 $footer = <<<EOD
-</div>
 <hr></hr>
 	<a href="index.php?module=customers&view=details&submit={$c_idField}&action=edit">{$LANG_edit}</a>
-</div>
 EOD;
 }
 
@@ -255,7 +253,7 @@ $display_block_enabled = "<select name=\"c_enabled\">
 		<td><input type="text" name="c_name" value="{$c_nameField}" size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_attention_short} <a href="documentation/info_pages/customer_contact.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom contact" class="thickbox">*</a></td>
+		<td class="details_screen">{$LANG_attention_short} <a href="documentation/info_pages/customer_contact.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom contact" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type="text" name="c_attention" value="{$c_attentionField}" size="50" /></td>
 	</tr>
 	<tr>
@@ -263,7 +261,7 @@ $display_block_enabled = "<select name=\"c_enabled\">
 		<td><input type="text" name="c_street_address" value="{$c_street_addressField}" size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_street2} <a href="./documentation/info_pages/street2.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Street address 2" class="thickbox">*</a></td>
+		<td class="details_screen">{$LANG_street2} <a href="./documentation/info_pages/street2.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Street address 2" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type="text" name="c_street_address2" value="{$c_street_address2Field}" size="50" /></td>
 	</tr>
 	<tr>
@@ -299,19 +297,19 @@ $display_block_enabled = "<select name=\"c_enabled\">
 		<td><input type="text" name="c_email" value="{$c_emailField}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customer_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
+		<td class="details_screen">{$customer_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type="text" name="c_custom_field1" value="{$c_custom_field1Field}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customer_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
+		<td class="details_screen">{$customer_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type="text" name="c_custom_field2" value="{$c_custom_field2Field}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customer_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
+		<td class="details_screen">{$customer_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type="text" name="c_custom_field3" value="{$c_custom_field3Field}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customer_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox">*</a></td>
+		<td class="details_screen">{$customer_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type="text" name="c_custom_field4" value="{$c_custom_field4Field}" size="50" /></td
 	</tr>
 	<tr>
@@ -332,8 +330,6 @@ $footer = <<<EOD
 	<input type="submit" name="cancel" value="{$LANG_cancel}" />
 	<input type="submit" name="save_customer" value="{$LANG_save} {$LANG_customer}" />
 	<input type="hidden" name="op" value="edit_customer" />
-	</div>
-	</div>
 EOD;
 }
 
@@ -343,27 +339,7 @@ EOD;
 <script type="text/javascript" src="include/jquery.js"></script>
 <script type="text/javascript" src="include/jquery.thickbox.js"></script>
 <script type="text/javascript" src="include/jquery.tablesorter.js"></script>
-
-<script type="text/javascript">
-$(document).ready(function() {
-	$("table#large").tableSorter({
-		sortClassAsc: 'sortUp', // class name for asc sorting action
-		sortClassDesc: 'sortDown', // class name for desc sorting action
-		highlightClass: ['highlight'], // class name for sort column highlighting.
-		//stripingRowClass: ['even','odd'],
-	       //alternateRowClass: ['odd','even'],
-		headerClass: 'largeHeaders', // class name for headers (th's)
-		disableHeader: [0], // disable column can be a string / number or array containing string or number.
-		dateFormat: 'dd/mm/yyyy' // set date format for non iso dates default us, in this case override and set uk-format
-	})
-});
-$(document).sortStart(function(){
-	$("div#sorting").show();
-}).sortStop(function(){
-	$("div#sorting").hide();
-});
-</script>
-
+<script type="text/javascript" src="include/jquery.tablesorter.conf.js"></script>
 
 <link rel="stylesheet" href="./include/css/tabs.css" type="text/css" media="print, projection, screen" />
 	<!-- Additional IE/Win specific style sheet (Conditional Comments) -->
@@ -425,19 +401,13 @@ $(document).sortStart(function(){
 echo <<<EOD
 
 <form name="frmpost" action="index.php?module=customers&view=save&submit={$_GET['submit']}" method="post" onsubmit="return frmpost_Validator(this)">
-
-<div id="container">
 {$display_block}
-<div id="footer">
 {$footer}
-
 EOD;
-
-include("footer.inc.php");
-
 ?>
-</div>
-</div>
+<?php 
+	include("footer.inc.php");
+?>
 </form>
 </body>
 </html>

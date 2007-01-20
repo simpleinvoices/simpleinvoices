@@ -136,10 +136,14 @@ while ($newArray = mysql_fetch_array($result)) {
 	<!-- Quick View -->
 	<a class="index_table"
 	 title="{$LANG_quick_view_tooltip} {$invoice_preference_wordingField} {$inv_idField}"
-	 href="index.php?module=invoices&view=quick_view&submit={$inv_idField}&invoice_style={$inv_ty_descriptionField}">V </a>
+	 href="index.php?module=invoices&view=quick_view&submit={$inv_idField}&invoice_style={$inv_ty_descriptionField}">
+		<img src="images/common/view.png" height="16" border="0" valign="bottom" /><!-- print --></a>
+	</a>
 	<!-- Edit View -->
 	<a class="index_table" title="{$LANG_edit_view_tooltip} {$invoice_preference_wordingField} {$inv_idField}"
-	 href="index.php?module=invoices&view=details&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}">E </a> 
+	 href="index.php?module=invoices&view=details&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}">
+		<img src="images/common/edit.png" height="16" border="0" valign="bottom" /><!-- print --></a>
+	</a> 
 	<!-- Print View -->
 	<a class="index_table" title="{$LANG_print_preview_tooltip} {$invoice_preference_wordingField} {$inv_idField}"
 	href="index.php?module=invoices&view=templates/{$def_inv_templateField}&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}">

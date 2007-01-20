@@ -148,6 +148,7 @@ $LANG_process_payment = "Process Payment";//1
 $LANG_process_payment_for = "Process Payment for";//1
 $LANG_product = "Product";//1
 $LANG_product_description = "Product Description";//1
+$LANG_product_edit = "Edit Product";//1
 $LANG_product_enabled = "Product Enabled";//1
 $LANG_product_id = "Product ID";//1
 $LANG_product_to_add = "Product to add";//1
