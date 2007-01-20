@@ -12,8 +12,7 @@ Nifty("div#header,div#footer","small");
 <!-- thickbox js and css stuff -->
     <script type="text/javascript" src="./include/jquery.js"></script>
     <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
-    <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css" media="all"/>
-    <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/jquery.thickbox.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="src/includes/css/jquery.thickbox.css" media="all"/>
 
 <title><?php echo $title; echo $mi_page_title; ?></title>
 </head>

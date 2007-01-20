@@ -11,7 +11,7 @@ include_once('./include/include_main.php');
 include("./include/validation.php");
 
 echo <<<EOD
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css">
+<link rel="stylesheet" type="text/css" href="./src/includes/css/jquery.thickbox.css">
 EOD;
 
 jsBegin();

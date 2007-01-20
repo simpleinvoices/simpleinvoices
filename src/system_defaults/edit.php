@@ -428,7 +428,7 @@ else {
 
 <BODY>
 
-<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/jquery.thickbox.css" media="all"/>
+<link rel="stylesheet" type="text/css" href="src/includes/css/jquery.thickbox.css" media="all"/>
 
 <FORM name="frmpost" ACTION="index.php?module=system_defaults&view=save&sys_default=<?php echo $default; ?>" METHOD=POST onsubmit="return frmpost_Validator(this)">
 
