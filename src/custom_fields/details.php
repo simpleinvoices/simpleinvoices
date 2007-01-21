@@ -127,10 +127,6 @@ echo <<<EOD
 {$footer}
 
 EOD;
-include("footer.inc.php");
 ?>
-</div>
-</div>
 </form>
-</body>
-</html>
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

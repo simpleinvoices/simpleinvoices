@@ -1,8 +1,10 @@
+<?php
+	include('./include/include_main.php');
+?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php
-include('./include/include_main.php');
 
 #insert customer
 $conn = mysql_connect("$db_host","$db_user","$db_password");
@@ -85,8 +87,5 @@ EOD;
 
 <?php 
 	echo $display_block; 
-	include("footer.inc.php");	
 ?>
-
-</body>
-</html>
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

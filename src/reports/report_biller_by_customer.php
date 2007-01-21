@@ -7,14 +7,16 @@
     <script type="text/javascript" src="./include/jquery.js"></script>
     <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="src/includes/css/jquery.thickbox.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="src/include/css/jquery.thickbox.css" media="all"/>
 
 
 </head>
 <body>
 
+<b>Sales by Customer - Group by Customer - Total</b>
+<hr></hr>
+<div class=container>
 
-<div id=left>
 <?php
    // include the PHPReports classes on the PHP path! configure your path here
    include "src/reports/PHPReportMaker.php";
@@ -35,9 +37,7 @@
 
 
 ?>
-	
+<div id="footer"></div>
+<hr></hr>	
 <a href="./documentation/info_pages/reports_xsl.html?keepThis=true&TB_iframe=true&height=300&width=650" title="Info :: Reports" class="thickbox"><font color="red">Got "OOOOPS, THERE'S AN ERROR HERE." error?</font></a>
-<?php include("footer.inc.php"); ?>
-</body>
-</html>
-		
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

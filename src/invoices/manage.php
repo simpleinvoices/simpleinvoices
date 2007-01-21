@@ -8,7 +8,7 @@ include_once('./include/include_main.php');
 <?php
 echo <<<EOD
 <title>{$title} :: {$LANG_manage_invoices}</title>
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css"> 
+<link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css"> 
 
 EOD;
 #insert customer
@@ -45,7 +45,4 @@ include('./src/invoices/manage.inc.php');
 
 <a href="./documentation/info_pages/manage_invoices.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Manage invoices" class="thickbox"><img src="./images/common/help-small.png"></img> What's all these different columns?</a>
 <div>
-<?php include("footer.inc.php"); ?>
-
-</body>
-</html>
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

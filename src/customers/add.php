@@ -40,7 +40,7 @@ $customer_custom_field_label4 = get_custom_field_label(customer_cf4);
 
 echo <<<EOD
 
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css">
+<link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css">
 </head>
 <BODY>
 
@@ -110,11 +110,6 @@ echo <<<EOD
 	<input type=hidden name="op" value="insert_customer">
 
 EOD;
-include("footer.inc.php");
 
 ?>
-</div>
-</div>
-</FORM>
-</BODY>
-</HTML>
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

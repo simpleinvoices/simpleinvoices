@@ -117,7 +117,7 @@ else if ($_GET[submit] == "def_inv_template") {
 	</tr>
 	-->
 	<tr>
-		<td class=\"details_screen\">$msd_def_inv_template <a href='./src/documentation/info_pages/default_invoice_template_text.html?keepThis=true&TB_iframe=true&height=300&width=500' title='Info :: Custom fields' class='thickbox'>*</a></td>
+		<td class=\"details_screen\">$msd_def_inv_template <a href='./src/documentation/info_pages/default_invoice_template_text.html?keepThis=true&TB_iframe=true&height=300&width=500' title='Info :: Custom fields' class='thickbox'><img src=\"images/common/help-small.png\"></img></a></td>
 		<td>$display_block_templates_list</td>
 	</tr>
 	<tr>
@@ -428,7 +428,7 @@ else {
 
 <BODY>
 
-<link rel="stylesheet" type="text/css" href="src/includes/css/jquery.thickbox.css" media="all"/>
+<link rel="stylesheet" type="text/css" href="src/include/css/jquery.thickbox.css" media="all"/>
 
 <FORM name="frmpost" ACTION="index.php?module=system_defaults&view=save&sys_default=<?php echo $default; ?>" METHOD=POST onsubmit="return frmpost_Validator(this)">
 
@@ -451,15 +451,5 @@ else {
 	<input type=submit name="submit" value="<?php echo $msd_submit_button; ?>">
 	<input type=hidden name="op" value="update_system_defaults">
 
-<?php include("footer.inc.php"); ?>
-
 </FORM>
-</BODY>
-</HTML>
-
-
-
-
-
-
-
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

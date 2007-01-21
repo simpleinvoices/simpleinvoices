@@ -29,7 +29,7 @@ echo <<<EOD
     <script type="text/javascript" src="./include/jquery.js"></script>
     <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="all"/>
 
 </head>
 <BODY>
@@ -111,9 +111,6 @@ echo <<<EOD
 	<input type=hidden name="op" value="insert_preference">
 
 EOD;
-
-include("footer.inc.php");
 ?>
 </FORM>
-</BODY>
-</HTML>
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

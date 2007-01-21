@@ -495,7 +495,7 @@ $display_block_bottom =  "
     <script type="text/javascript" src="./include/jquery.js"></script>
     <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/jquery.thickbox.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="all"/>
 
 
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
@@ -518,7 +518,5 @@ $display_block_bottom =  "
 	<input type=button value='Cancel'onCLick='history.back()'>
 	<input type=submit name="submit" value="<?php echo $LANG_save; ?>">
 	<input type=hidden name="max_items" value="<?php echo $line; ?>">
-<?php include("footer.inc.php");?>
 </form>
-</body>
-</html>
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

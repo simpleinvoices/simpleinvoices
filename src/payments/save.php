@@ -1409,7 +1409,5 @@ echo <<<EOD
 {$display_block_items}
 
 EOD;
-include("footer.inc.php");
 ?>
-</body>
-</html>
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

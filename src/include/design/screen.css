@@ -73,7 +73,7 @@ tr.index_table:hover {
 .largeHeaders {
         background:
                 #e9e9da
-                url('../../images/common/green_arrows.gif')
+                url('../../../images/common/green_arrows.gif')
                 no-repeat
                 center right;
         color: #333;
@@ -85,7 +85,7 @@ tr.index_table:hover {
 .sortUp {
         background:
                 #e9e900
-                url('../../images/common/green_decending.gif')
+                url('../../../images/common/green_decending.gif')
                 no-repeat
                 center right;
 }
@@ -94,7 +94,7 @@ tr.index_table:hover {
         background:
                 #e9e900
 
-                url('../../images/common/green_acending.gif')
+                url('../../../images/common/green_acending.gif')
                 no-repeat
                 center right;
 }
@@ -133,7 +133,7 @@ th {
 .largeHeaders {
         background: 
                 #e9e9da
-                url('../../images/common/green_arrows.gif')
+                url('../../../images/common/green_arrows.gif')
                 no-repeat
                 center right;
         color: #333;
@@ -145,7 +145,7 @@ th {
 .sortUp {
         background:
                 #e9e900
-                url('../../images/common/green_decending.gif')
+                url('../../../images/common/green_decending.gif')
                 no-repeat
                 center right;
 }
@@ -154,7 +154,7 @@ th {
         background:
                 #e9e900
 
-                url('../../images/common/green_acending.gif')
+                url('../../../images/common/green_acending.gif')
                 no-repeat
                 center right;
 }
@@ -499,7 +499,7 @@ FOR PROPORTIONAL WIDTH
 .Left .col,
 .Full .col {
   padding: 10px 30px 20px 20px;
-  background: #fff url(right-bg.gif) right repeat-y;
+  background: #fff url(../../../images/common/right-bg.gif) right repeat-y;
 }
 
 .Left .col .showhide {
@@ -508,7 +508,7 @@ FOR PROPORTIONAL WIDTH
 
 .Full .bottom,
 .Left .bottom {
-  background: url(bottom-bg.gif) top right no-repeat;
+  background: url(../../../images/common/bottom-bg.gif) top right no-repeat;
   font-size: 8px;
   margin-bottom: 20px;
 }

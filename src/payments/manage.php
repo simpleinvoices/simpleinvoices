@@ -115,7 +115,7 @@ while ($Array = mysql_fetch_array($result)) {
     <script type="text/javascript" src="./include/jquery.js"></script>
     <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/jquery.thickbox.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="all"/>
 
 
 <script type="text/javascript" src="include/doFilter.js"></script>
@@ -131,8 +131,4 @@ while ($Array = mysql_fetch_array($result)) {
 <?php echo $display_block; ?>
 
 <a href="./documentation/info_pages/wheres_the_edit_button.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Payments" class="thickbox"><img src="./images/common/help-small.png"></img>Wheres the Edit button?</a>
-
-<?php include("footer.inc.php"); ?>
-
-</body>
-</html>
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

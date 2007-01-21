@@ -147,21 +147,21 @@ while ($newArray = mysql_fetch_array($result)) {
 	<!-- Print View -->
 	<a class="index_table" title="{$LANG_print_preview_tooltip} {$invoice_preference_wordingField} {$inv_idField}"
 	href="index.php?module=invoices&view=templates/{$def_inv_templateField}&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}">
-	<img src="themes/{$theme}/images/printer.gif" height="16" border="0" valign="bottom" /><!-- print --></a>
+	<img src="images/common/printer.gif" height="16" border="0" valign="bottom" /><!-- print --></a>
  
 	<!-- EXPORT TO PDF -->
 	<a title="{$LANG_export_tooltip} {$invoice_preference_wordingField} {$inv_idField} {$LANG_export_pdf_tooltip}"
-	class="index_table" href="{$url_for_pdf}"><img src="themes/{$theme}/images/pdf.jpg" height="16" border="0" valign="bottom" /><!-- pdf --></a>
+	class="index_table" href="{$url_for_pdf}"><img src="images/common/pdf.jpg" height="16" border="0" valign="bottom" /><!-- pdf --></a>
 
 	<!--XLS -->
 	<a title="{$LANG_export_tooltip} {$invoice_preference_wordingField}{$inv_idField} {$LANG_export_xls_tooltip} {$spreadsheet} {$LANG_format_tooltip}"
 	 class="index_table" href="index.php?module=invoices&view=templates/simple&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}&export={$spreadsheet}">
-	 <img src="themes/{$theme}/images/xls.gif" height="16" border="0" valign="bottom" /><!-- $spreadsheet --></a>
+	 <img src="images/common/xls.gif" height="16" border="0" valign="bottom" /><!-- $spreadsheet --></a>
 	<!-- was href="index.php?module=invoices&view=templates/{$def_inv_templateField} now using simple template-->
 	<!-- DOC -->
 	<a title="{$LANG_export_tooltip} {$invoice_preference_wordingField} {$inv_idField} {$LANG_export_doc_tooltip} {$word_processor} {$LANG_format_tooltip}"
 	 class="index_table" href="index.php?module=invoices&view=templates/simple&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}&export={$word_processor}">
-	 <img src="themes/{$theme}/images/doc.png" height="16" border="0" valign="bottom" /><!-- $word_processor --></a>
+	 <img src="images/common/doc.png" height="16" border="0" valign="bottom" /><!-- $word_processor --></a>
        <!-- was href="index.php?module=invoices&view=templates/{$def_inv_templateField} now using the simple template-->
   <!-- Payment --><a title="{$LANG_process_payment} {$invoice_preference_wordingField} {$inv_idField}"
    class="index_table" href="index.php?module=payments&view=process&submit={$inv_idField}&op=pay_selected_invoice">$</a>

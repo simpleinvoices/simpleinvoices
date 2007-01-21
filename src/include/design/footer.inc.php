@@ -9,6 +9,7 @@ echo <<<EOD
    </div class="Full">
    </div id="Container">
    </div id="Wrapper">
+   </BODY>
+   </HTML>
 EOD;
-
 ?>

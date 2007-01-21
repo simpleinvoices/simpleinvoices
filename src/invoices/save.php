@@ -644,9 +644,5 @@ echo <<<EOD
 {$display_block}
 <br><br>
 {$display_block_items}
-
 EOD;
-include("footer.inc.php");
 ?>
-</body>
-</html>

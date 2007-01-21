@@ -330,20 +330,10 @@ else {
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="text/javascript" src="./include/jquery.js"></script>
     <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
-    <link rel="stylesheet" type="text/css" href="./src/includes/css/jquery.thickbox.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="all"/>
 
 </head>
 <body>
 <?php include('./config/config.php'); ?>
-
-
-
 <br><br>
-
-
-
-
-
-<?php include("footer.inc.php"); ?>
-</body>
-</html>
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

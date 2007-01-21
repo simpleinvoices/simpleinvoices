@@ -198,7 +198,7 @@ $footer =  "
 
     <script type="text/javascript" src="./include/jquery.js"></script>
     <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
-    <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/jquery.thickbox.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="all"/>
 
 <?php include('./config/config.php'); ?>
 </head>
@@ -209,8 +209,5 @@ $footer =  "
 <?php 
 	echo $display_block;
 	echo $footer; 
-	
-	include("footer.inc.php");
 ?>
-</body>
-</html>
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

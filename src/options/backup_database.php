@@ -57,13 +57,9 @@ $display_block ="
 
 </head>
 <body>
-<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/jquery.thickbox.css">
+<link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css">
 
 <?php 
 	echo $display_block; 
-
-	include("footer.inc.php");
 ?>
-
-</body>
-
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

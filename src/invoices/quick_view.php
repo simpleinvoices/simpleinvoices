@@ -703,7 +703,7 @@ $display_block_bottom =  "
   	});
     </script>
     <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
-    <link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/jquery.thickbox.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="all"/>
 
 
 	<title><?php echo $title; ?></title>
@@ -750,7 +750,4 @@ $display_block_bottom =  "
 	<form>
 		<input type=button value='<?php echo $LANG_cancel;?>'onCLick='history.back()'>
 	</form>
-
-<?php include("footer.inc.php"); ?>
-</body>
-</html>
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

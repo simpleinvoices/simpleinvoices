@@ -122,7 +122,4 @@ $display_block =  "
 <!--
 <a href="manage_system_defaults.php">Edit</a>
 -->
-<?php include("footer.inc.php"); ?>
-
-</body>
-</html>
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

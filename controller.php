@@ -19,14 +19,16 @@ if (($module == "invoices" ) AND (strstr($view,"templates"))) {
  *the below if grabs the requested folder and file based on the $_GET info in the url 
  */
 else if (($module != null ) AND ($view != null)) {
-        include("header.inc.php");
+        include("./src/include/design/header.inc.php");
         include("./src/$module/$view.php");
+        include("./src/include/design/footer.inc.php");
 }
 
 /*If all else fals show the start.php page */
 else {
-        include("header.inc.php");
+        include("./src/include/design/header.inc.php");
         include("start.php");
+        include("./src/include/design/footer.inc.php");
 }
 
 ?>

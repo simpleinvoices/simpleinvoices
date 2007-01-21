@@ -8,9 +8,7 @@ include_once('./include/include_main.php');
 /* validataion code */
 include("./include/validation.php");
 echo <<<EOD
-<title>{$title} :: {$LANG_process_payment}</title>
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css" media="all" />
-
+<link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="all" />
 EOD;
 
 $conn = mysql_connect($db_host, $db_user, $db_password);
@@ -287,13 +285,11 @@ echo <<<EOD
        <div id="browser">
 
 {$display_block}
-
+<hr></hr>
 	<input type=submit name="process_payment" value="{$LANG_process_payment}">
 	<input type=hidden name="op" value="{$insert_action_op}">
 EOD;
 ?>
 
 </form>
-<?php include("footer.inc.php"); ?>
-</body>
-</html>
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

@@ -11,7 +11,7 @@ include_once('./include/include_main.php');
 include("./include/validation.php");
 
 echo <<<EOD
-<link rel="stylesheet" type="text/css" href="./src/includes/css/jquery.thickbox.css">
+<link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css">
 EOD;
 
 jsBegin();
@@ -91,10 +91,6 @@ echo <<<EOD
 	<input type=submit name="submit" value="{$LANG_insert_product}">
 	<input type=hidden name="op" value="insert_product">
 EOD;
-include("footer.inc.php");
 ?>
-
-</div>
 </FORM>
-</BODY>
-</HTML>
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

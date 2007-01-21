@@ -25,8 +25,5 @@ $display_block = fread( $fp, filesize( $filename ) );
 <?php 
 	echo $display_block; 
 	fclose( $fp ); 
-	include("footer.inc.php");
 ?>
-
-</body>
-</html>
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

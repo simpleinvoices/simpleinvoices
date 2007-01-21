@@ -1,6 +1,6 @@
 <?php
-include('./config/config.php');
 include('./include/include_main.php');
+include('./config/config.php');
 
 $conn = mysql_connect( $db_host, $db_user, $db_password);
 mysql_select_db( $db_name, $conn);
@@ -1406,7 +1406,5 @@ echo <<<EOD
 {$display_block_items}
 
 EOD;
-include("footer.inc.php");
 ?>
-</body>
-</html>
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

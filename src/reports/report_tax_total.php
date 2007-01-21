@@ -1,31 +1,13 @@
+<?php include("./include/include_main.php"); ?>
 <html>
 <head>
-<?php include("./include/include_main.php"); ?>
-<script type="text/javascript" src="niftycube.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-Nifty("div#container");
-Nifty("div#content,div#nav","same-height small");
-Nifty("div#header,div#footer","small");
-}
-</script>
-<!-- thickbox js and css stuff -->
     <script type="text/javascript" src="./include/jquery.js"></script>
     <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
-    <link rel="stylesheet" type="text/css" href="src/includes/css/jquery.thickbox.css" media="all"/>
-
-<title><?php echo $title; echo $mi_page_title; ?></title>
 </head>
 <body>
-<?php
-$mid->printMenu('hormenu1');
-$mid->printFooter();
-?>
-
-<link rel="stylesheet" type="text/css" href="./themes/<?php echo $theme; ?>/tables.css">
-<br>
+<b>Taxes in total</b>
+<hr></hr>
 <div id="container">
-<div id=header></div id=header>
 
 <?php
    // include the PHPReports classes on the PHP path! configure your path here
@@ -43,16 +25,7 @@ $mid->printFooter();
    $oRpt->setSQL($sSQL);
    $oRpt->setDatabase("$db_name");
    $oRpt->run();
-
-   $error =  "<a href=\"./documentation/info_pages/reports_xsl.html?keepThis=true&TB_iframe=true&height=300&width=650\" title=\"Info :: Reports\" class=\"thickbox\"><font color=\"red\">Got \"OOOOPS, THERE'S AN ERROR HERE.\" error?</font></a>";
-   echo $error;
 ?>
-
 <div id="footer"></div>
-</div>
-</div>
-</div>
-</body>
-</html>
-
-			
+<hr></hr>
+ <a href="./documentation/info_pages/reports_xsl.html?keepThis=true&TB_iframe=true&height=300&width=650" title="Info :: Reports" class="thickbox"><font color="red">Got "OOOOPS, THERE'S AN ERROR HERE." error?</font></a>

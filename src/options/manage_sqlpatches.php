@@ -63,17 +63,9 @@ Nifty("div#header,div#footer","small");
 </script>
 
 
-<title>Simple Invoices - Manage billers
-</title>
-<?php include('./include/menu.php'); ?>
 <?php include('./config/config.php'); ?>
 <body>
-<?php
-$mid->printMenu('hormenu1');
-$mid->printFooter();
-?>
 
-<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/tables.css">
 <br>
 <div id="container">
 <?php echo $display_block; ?>

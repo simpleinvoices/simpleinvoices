@@ -436,8 +436,4 @@ $display_block ="
 <br><br><br><br>
 <br><br><br><br>
 <br><br><br><br>
-<?php 
-	include("footer.inc.php");
-?>
-</BODY>
-</HTML>
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

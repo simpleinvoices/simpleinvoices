@@ -60,9 +60,6 @@ echo <<<EOD
 
 
 EOD;
-include("footer.inc.php");
 ?>
-
 </FORM>
-</BODY>
-</HTML>
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

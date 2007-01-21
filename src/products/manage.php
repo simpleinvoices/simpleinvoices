@@ -86,11 +86,4 @@ EOD;
 <body>
 
 <?php echo $display_block; ?>
-
-
-<?php
-include("footer.inc.php");
-?>
-
-</body>
-</html>
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

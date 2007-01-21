@@ -11,7 +11,7 @@ include('./include/include_main.php');
 <?php
 
 echo <<<EOD
-	<link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="all" />
 EOD;
 
 	#select preferences
@@ -99,8 +99,4 @@ EOD;
 <?php echo $display_block; ?>
 
 <a href="./documentation/info_pages/inv_pref_what_the.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Invoice preference" class="thickbox"><img src="./images/common/help-small.png"></img> What's all this "Invoice Preference" stuff about?</a>
-
-<?php include("footer.inc.php"); ?>
-
-</body>
-</html>
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

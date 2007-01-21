@@ -111,8 +111,4 @@ $display_block =  "
 	<form>
 		<input type=button value='Back' onCLick='history.back()'>
 	</form>
-<?php include("footer.inc.php"); ?>
-</body>
-</html>
-
-
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

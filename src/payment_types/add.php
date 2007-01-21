@@ -42,9 +42,5 @@ $display_block_enabled = "<select name=\"pt_enabled\">
 	<hr></hr>
 	<input type=submit name="submit" value="Insert Payment Type">
 	<input type=hidden name="op" value="insert_payment_type">
-
-<?php include("footer.inc.php");?>
-
 </FORM>
-</BODY>
-</HTML>
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

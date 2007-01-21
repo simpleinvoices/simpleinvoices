@@ -8,7 +8,7 @@ include_once('./include/include_main.php');
 #table
 echo <<<EOD
 
-<link rel="stylesheet" type="text/css" href="themes/{$theme}/jquery.thickbox.css">
+<link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css">
 
 EOD;
 /* validataion code */
@@ -405,9 +405,5 @@ echo <<<EOD
 {$footer}
 EOD;
 ?>
-<?php 
-	include("footer.inc.php");
-?>
 </form>
-</body>
-</html>
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

@@ -8,12 +8,7 @@ include_once('./include/include_main.php');
 /* validataion code */
 include("./include/validation.php");
 echo <<<EOD
-<link rel="stylesheet" type="text/css" href="header1.css" media="all"/>
-<link rel="stylesheet" type="text/css" href="header2.css" media="all"/>
-<link rel="stylesheet" type="text/css" href="screen.css" media="all"/>
-<link rel="stylesheet" type="text/css" href="print.css" media="print"/>
-<link rel="stylesheet" type="text/css" href="blue.css" media="screen"/>
-<link rel="stylesheet" type="text/css" href="./src/includes/css/jquery.thickbox.css" media="screen"/>
+<link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="screen"/>
 EOD;
 jsBegin();
 jsFormValidationBegin("frmpost");
@@ -155,9 +150,7 @@ echo <<<EOD
 	<input type="submit" name="submit" value="{$LANG_insert_biller}" />
 	<input type="hidden" name="op" value="insert_biller" />
 EOD;
-include("footer.inc.php");
 ?>
 
 </FORM>
-</BODY>
-</HTML>
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

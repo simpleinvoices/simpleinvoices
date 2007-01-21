@@ -314,13 +314,4 @@ if (mysql_num_rows($result_preferences) == 0) {
 		* <?php echo $LANG_mandatory_fields;?>
 
 </FORM>
-<?php include("footer.inc.php"); ?>
-</BODY>
-</HTML>
-
-
-
-
-
-
-
+<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->
