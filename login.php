@@ -53,7 +53,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Simple Invoices Login</title>
-<link rel="stylesheet" type="text/css" href="themes/<?php echo $theme; ?>/login.css">
+<link rel="stylesheet" type="text/css" href="src/include/css/login.css">
 
 </head>
 
