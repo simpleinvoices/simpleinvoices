@@ -101,25 +101,19 @@ $sql4 = "
 #Top biller query - start
 
 
-$display_block_notice .=" <div id=\"top\">";
+$display_block_notice .="<div>";
 
-$display_block_notice .="<b align=center>$title</b><hr></hr><div id=\"left\">";
+$display_block_notice .="<b align=center>$title</b><hr></hr>";
 
 if ($mysql < 5) {
 	$display_block_notice .=" 
-	</div>
-	<div id=\"subheader\">
 		NOTE: As you are using Mysql 4 some features have been disabled
-	</div id=\"subheader\">
 	";
 };
 
 if ($patch_count > $max_patches_applied) {
         $display_block_notice .=" 
-        </div>
-        <div id=\"subheader\">
                 NOTE: There are database patches that need to be applied, please select 'Database Upgrade Manager' from the Options menu and follow the instructions
-        </div id=\"subheader\">
         ";
 };
 
@@ -127,7 +121,8 @@ if ($patch_count > $max_patches_applied) {
 $display_block_notice .="
 <script type=\"text/javascript\">
 if( $.browser.msie() ) { // defaults to undefined
-	document.write(\"</div><div id='subheader'>NOTE: As you are using MS Internet Explorer, some features of Simple Invoices have been disabled, please use <a href='http://www.getfirefox.com'>Firefox</a> to enable all features</div>\")
+	document.write(\"
+		NOTE: As you are using MS Internet Explorer, some features of Simple Invoices have been disabled, please use <a href='http://www.getfirefox.com'>Firefox</a> to enable all features\")
 	// Do something... ;
 }
 </script>
@@ -136,7 +131,8 @@ if( $.browser.msie() ) { // defaults to undefined
 $display_block_notice .="
 <script type=\"text/javascript\">
 if( $.browser.konqueror() ) { // defaults to undefined
-        document.write(\"</div><div id='subheader'>NOTE: As you are using Konqueror, some features of Simple Invoices have been disabled, please use <a href='http://www.getfirefox.com'>Firefox</a> to enable all features</div id='subheader'>\")
+        document.write(\"
+		NOTE: As you are using Konqueror, some features of Simple Invoices have been disabled, please use <a href='http://www.getfirefox.com'>Firefox</a> to enable all features\")
 }
 </script>
 ";
@@ -144,14 +140,15 @@ if( $.browser.konqueror() ) { // defaults to undefined
 $display_block_notice .="
 <script type=\"text/javascript\">
 if( $.browser.safari() ) { // defaults to undefined
-        document.write(\"</div><div id='subheader'>NOTE: As you are using Safari, some features of Simple Invoices may not work as expected, please use <a href='http://www.getfirefox.com'>Firefox</a> to enable all features</div id='subheader'>\")
+        document.write(\"
+		NOTE: As you are using Safari, some features of Simple Invoices may not work as expected, please use <a href='http://www.getfirefox.com'>Firefox</a> to enable all features\")
 }
 </script>
 ";
 
 
 
-$display_block_notice .="</div>";
+$display_block_notice .="";
 
 
 $display_block ="

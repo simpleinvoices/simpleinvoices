@@ -2,11 +2,11 @@
 include_once('./include/include_main.php');
 echo <<<EOD
 <title>Simple Invoices</title>
-<link rel="stylesheet" type="text/css" href="./src/include/design/header1.css" media="all"/>
-<link rel="stylesheet" type="text/css" href="./src/include/design/header2.css" media="all"/>
-<link rel="stylesheet" type="text/css" href="./src/include/design/screen.css" media="all"/>
-<link rel="stylesheet" type="text/css" href="./src/include/design/print.css" media="print"/>
-<link rel="stylesheet" type="text/css" href="./src/include/design/blue.css" media="screen"/>
+<link rel="stylesheet" type="text/css" href="./src/include/css/header1.css" media="all"/>
+<link rel="stylesheet" type="text/css" href="./src/include/css/header2.css" media="all"/>
+<link rel="stylesheet" type="text/css" href="./src/include/css/screen.css" media="all"/>
+<link rel="stylesheet" type="text/css" href="./src/include/css/print.css" media="print"/>
+<link rel="stylesheet" type="text/css" href="./src/include/css/blue.css" media="screen"/>
 <!--[if gte IE 5.5]>
 <script language="JavaScript" src="./src/include/js/dhtml.js" type="text/JavaScript"></script>
 <![endif]-->
