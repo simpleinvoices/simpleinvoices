@@ -107,7 +107,7 @@ $display_block_notice .="<b align=center>$title</b><hr></hr>";
 
 if ($mysql < 5) {
 	$display_block_notice .=" 
-		NOTE: As you are using Mysql 4 some features have been disabled
+		NOTE <a href='./documentation/info_pages/mysql4.html?keepThis=true&TB_iframe=true&height=300&width=500' title='Info :: MySQL 4' class='thickbox'><img src='./images/common/help-small.png'></img></a> : As you are using Mysql 4 some features have been disabled
 	";
 };
 
@@ -417,8 +417,11 @@ $display_block ="
                 <title><?php echo $title; ?></title>
 
 <script type="text/javascript" src="./include/jquery.js"></script>
+<script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 <script type="text/javascript" src="./include/jquery.accordian.js"></script>
 <script type="text/javascript" src="./include/jquery.jqbrowser.js"></script>
+<link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="screen"/>
+
 </head>
 <BODY>
 <!-- <table align="center" >-->
