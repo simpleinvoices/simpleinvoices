@@ -251,13 +251,6 @@ ADD b_co_footer TEXT";
         $sql_patch_25 = "";
         $sql_patch_update_25 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',25,'$sql_patch_name_25',20061211,'')";
 
-*/
-
-
-
-
-
-
 
 #ALTER TABLE `si_customers` ADD `c_street_address2` VARCHAR( 50 ) AFTER `c_street_address` ;
 
