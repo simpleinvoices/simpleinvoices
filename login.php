@@ -67,6 +67,13 @@ if ($errorMessage != '') {
 }
 ?>
 <div id="Dialog">
+
+        <div align=center id="disclaimerbox">
+	    <img src="./images/common/important.png"></img>
+	    <strong>Annoucement<br /></strong><br>This is an important annoucement
+		<hr></hr>
+	</div>
+
 <h1>Simple Invoices</h1>
 <!--
   <div id="loginbox"  class="hasDisclaimer" >
@@ -86,7 +93,7 @@ if ($errorMessage != '') {
   		<dt>Password:</dt>
   		<dd>
   		  <input name="pass" type="password" id="pass" />
-  		  <span>(<a href="/login/forgot_password">I forgot my password/username</a>)</span>
+  		  <span>(<a href="login.php">I forgot my password/username</a>)</span>
   		</dd>
 
       		<dd><input type="checkbox" name="remember_me" /> Remember me on this computer</dd>
@@ -114,9 +121,6 @@ if ($errorMessage != '') {
   	</dl>
             </form>
 
-	</div>
-                <div id="disclaimerbox">
-	    <strong>Annoucement area<br /></strong><br>This is an important annoucement
 	</div>
         
 
