@@ -8,12 +8,21 @@ Simple Invoices - Changelog
 
 <ul><li>2007-01-26
 	<ul>
-		<li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=">Issue </a>File structure and urls system modified
-		<li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=">Issue</a>Invoice templates names changed and system modified
-		<li>New user interface added
+		<li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=">Issue 68</a>File structure modified
+		<li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=">Issue 69</a>Controller script added and urls system modified
+		<li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=">Issue 70</a>Invoice templates names changed and system modified
+		<li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=63">Issue 63</a>MySQL password format changed to MD5
+		<li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=63">Issue 66</a>New user interface added
+		<li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=64">Issue 64</a>Authentification: Headers already sent drama resolved
 		<li>Manage Invoices: some unneeded filters removed
 		<li>Jquery greybox replace with Jquery thickbox as the ajax popup window javascript
 		<li>Menus structure modification - Manage then Add
+		<li>Numbers - all formatted to 2 decimal places
+		<li>SQL Patches
+			<ul>
+				<li> UPDATE `si_custom_fields` SET `cf_custom_field` = 'product_cf4' WHERE `si_custom_fields`.`cf_id` =12 LIMIT 1 ;
+				<li>UPDATE `si_defaults` SET `def_inv_template` = 'standard' WHERE `def_id` =1 LIMIT 1;
+			</ul>
 	</ul>
 </ul>
 

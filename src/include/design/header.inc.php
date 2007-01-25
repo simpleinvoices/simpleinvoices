@@ -35,7 +35,7 @@ echo <<<EOD
 		<li><a href="index.php?module=customers&view=add">{$LANG_add_customer}</a></li>
 	</ul>
  </li>
-  <li><a href="index.php?module=products&view=manage">{$LANG_products}Products +</a>
+  <li><a href="index.php?module=products&view=manage">{$LANG_products} +</a>
 	<ul>
 		<li><a href="index.php?module=products&view=manage">{$LANG_manage_products}</a></li>
 		<li><a href="index.php?module=products&view=add">{$LANG_add_product}</a></li>

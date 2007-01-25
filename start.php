@@ -107,17 +107,17 @@ $display_block_notice .="<b align=center>$title</b><hr></hr>";
 
 if ($mysql < 5) {
 	$display_block_notice .=" 
-		NOTE <a href='./documentation/info_pages/mysql4.html?keepThis=true&TB_iframe=true&height=300&width=500' title='Info :: MySQL 4' class='thickbox'><img src='./images/common/help-small.png'></img></a> : As you are using Mysql 4 some features have been disabled
+		NOTE <a href='./documentation/info_pages/mysql4.html?keepThis=true&TB_iframe=true&height=300&width=500' title='Info :: MySQL 4' class='thickbox'><img src='./images/common/help-small.png'></img></a> : As you are using Mysql 4 some features have been disabled<br>
 	";
 };
 
 if ($patch_count > $max_patches_applied) {
         $display_block_notice .=" 
-                NOTE: There are database patches that need to be applied, please select 'Database Upgrade Manager' from the Options menu and follow the instructions
+                NOTE <a href='./documentation/info_pages/database_patches.html?keepThis=true&TB_iframe=true&height=300&width=500' title='Info :: Database patches to be applied' class='thickbox'><img src='./images/common/help-small.png'></img></a> :   There are database patches that need to be applied, please select <a href=\"./index.php?module=options&view=database_sqlpatches \">'Database Upgrade Manager'</a> from the Options menu and follow the instructions<br>
         ";
 };
 
-
+/*
 $display_block_notice .="
 <script type=\"text/javascript\">
 if( $.browser.msie() ) { // defaults to undefined
@@ -146,7 +146,7 @@ if( $.browser.safari() ) { // defaults to undefined
 </script>
 ";
 
-
+*/
 
 $display_block_notice .="";
 
@@ -419,7 +419,7 @@ $display_block ="
 <script type="text/javascript" src="./include/jquery.js"></script>
 <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 <script type="text/javascript" src="./include/jquery.accordian.js"></script>
-<script type="text/javascript" src="./include/jquery.jqbrowser.js"></script>
+<!--<script type="text/javascript" src="./include/jquery.jqbrowser.js"></script>-->
 <link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="screen"/>
 
 </head>

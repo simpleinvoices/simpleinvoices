@@ -245,70 +245,12 @@ ADD b_co_footer TEXT";
         $sql_patch_update_33 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',33,'$sql_patch_name_33',20061214,'')";
         $patch_count++;
 
-
-/*
-        $sql_patch_name_25 = "";
-        $sql_patch_25 = "";
-        $sql_patch_update_25 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',25,'$sql_patch_name_25',20061211,'')";
-
-
-#ALTER TABLE `si_customers` ADD `c_street_address2` VARCHAR( 50 ) AFTER `c_street_address` ;
-
-#ALTER TABLE `si_customers` ADD `c_custom_field1` VARCHAR( 50 ) AFTER `c_notes` ,
-#ADD `c_custom_field2` VARCHAR( 50 ) AFTER `c_custom_field1` ,
-#ADD `c_custom_field3` VARCHAR( 50 ) AFTER `c_custom_field2` ,
-#ADD `c_custom_field4` VARCHAR( 50 ) AFTER `c_custom_field3` ;
-
-#ALTER TABLE `si_customers` ADD `c_mobile_phone` VARCHAR( 50 ) AFTER `c_phone` ;
-
-#ALTER TABLE `si_biller` ADD `b_street_address2` VARCHAR( 50 ) AFTER `b_street_address` ;
-
-#ALTER TABLE `si_biller` ADD `b_custom_field1` VARCHAR( 50 ) AFTER `b_notes` ,
-#ADD `b_custom_field2` VARCHAR( 50 ) AFTER `b_custom_field1` ,
-#ADD `b_custom_field3` VARCHAR( 50 ) AFTER `b_custom_field2` ,
-#ADD `b_custom_field4` VARCHAR( 50 ) AFTER `b_custom_field3` ;
-
-#CREATE TABLE `si_custom_fields` (
-#`cf_id` INT NOT NULL AUTO_INCREMENT ,
-#`cf_custom_field` VARCHAR( 50 ) NOT NULL ,
-#`cf_custom_label` VARCHAR( 50 ) ,
-#`cf_display` VARCHAR( 1 ) DEFAULT '1' NOT NULL ,
-#PRIMARY KEY ( `cf_id` )
-#);
-
-#INSERT INTO `si_custom_fields` ( `cf_id` , `cf_custom_field` , `cf_custom_label` , `cf_display` )
-#VALUES (
-#'', 'biller_cf1', NULL , '0'
-#), (
-#'', 'biller_cf2', NULL , '0'
-#), (
-#'', 'biller_cf3', NULL , '0'
-#), (
-#'', 'biller_cf4', NULL , '0'
-#), (
-#'', 'customer_cf1', NULL , '0'
-#), (
-#'', 'customer_cf2', NULL , '0'
-#), (
-#'', 'customer_cf3', NULL , '0'
-#), (
-#'', 'customer_cf4', NULL , '0'
-#), (
-#'', 'product_cf1', NULL , '0'
-#), (
-#'', 'product_cf2', NULL , '0'
-#), (
-#'', 'product_cf3', NULL , '0'
-#), (
-#'', 'prod_custom_field4', NULL , '0'
-#);
-
-
-#ALTER TABLE `si_products` ADD `prod_custom_field1` VARCHAR( 50 ) AFTER `prod_unit_price` ,
-#ADD `prod_custom_field2` VARCHAR( 50 ) AFTER `prod_custom_field1` ,
-#ADD `prod_custom_field3` VARCHAR( 50 ) AFTER `prod_custom_field2` ,
-#ADD `prod_custom_field4` VARCHAR( 50 ) AFTER `prod_custom_field3` ;
-
+        $sql_patch_name_34 = "Reset invoice template to default - refer Issue 70";
+        $sql_patch_34 = "
+		UPDATE `si_defaults` SET `def_inv_template` = 'default' WHERE `def_id` =1 LIMIT 1 ;
+        ";
+        $sql_patch_update_34 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',34,'$sql_patch_name_34',20070125,'')";
+        $patch_count++;
 
 /*
 CREATE TABLE `si_accounts` (

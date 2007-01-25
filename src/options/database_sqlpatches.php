@@ -214,6 +214,7 @@ if ($_GET[op] == "run_updates") {
 		run_sql_patch(31,$sql_patch_name_31,$sql_patch_31,$sql_patch_update_31);
 		run_sql_patch(32,$sql_patch_name_32,$sql_patch_32,$sql_patch_update_32);
 		run_sql_patch(33,$sql_patch_name_33,$sql_patch_33,$sql_patch_update_33);
+		run_sql_patch(34,$sql_patch_name_34,$sql_patch_34,$sql_patch_update_34);
 
 		echo "<tr><td><br>The database patches have now been applied, please go back to the <a href='index.php?module=options&view=database_sqlpatches'>Database Upgrade Manager page</a> to see what patches have been applied. If all patches have been applied then there is now further action required</td></tr>";
 		echo "
@@ -297,6 +298,7 @@ else {
 	check_sql_patch(31,$sql_patch_name_31);
 	check_sql_patch(32,$sql_patch_name_32);
 	check_sql_patch(33,$sql_patch_name_33);
+	check_sql_patch(34,$sql_patch_name_34);
 
 		echo "
 		</table>
