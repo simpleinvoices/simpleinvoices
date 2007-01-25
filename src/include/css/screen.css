@@ -103,6 +103,9 @@ tr.index_table:hover {
 
 td { font-family: "Lucida Grande", verdana, arial, helvetica, sans-serif; }
 
+td.columnleft {
+	border-left:5px solid #EEEEEE;
+}
 
 td.details_screen {
          border-style: none none none none;

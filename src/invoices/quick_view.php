@@ -219,15 +219,15 @@ $prod_custom_field_label4 = get_custom_field_label(product_cf4);
 $display_block_top =  "
 	<table align=center>
 	<tr>
-		<td class=account colspan=8>$LANG_account_info</td><td width=5%></td><td width=5%></td><td class=account colspan=6><a href='index.php?module=customers&view=details&submit=$c_idField&action=view'>$LANG_customer_account</a></td>
+		<td class=account colspan=8>$LANG_account_info</td><td width=5%></td><td class=\"columnleft\" width=5%></td><td class=\"account\" colspan=6><a href='index.php?module=customers&view=details&submit=$c_idField&action=view'>$LANG_customer_account</a></td>
 	</tr>
 	<tr>
 		<td class=account>$LANG_total:</td><td class=account>$pref_currency_signField$invoice_total_Field</td>              
 		<td class=account><a href='index.php?module=payments&view=manage&inv_id=$inv_idField'>$LANG_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field</td>
 		<td class=account>$LANG_owing:</td><td class=account><u>$pref_currency_signField$invoice_owing_Field</u></td>
 		<td class=account>$LANG_age<a href='documentation/info_pages/age.html?keepThis=true&TB_iframe=true&height=300&width=500' title='Info :: Invoice age' class='thickbox'><img src=\"./images/common/help-small.png\"></img></a>: </td><td class=account nowrap >$invoice_age</td>
-		<td></td><td></td>
-		<td class=account>$LANG_total:</td><td class=account>$pref_currency_signField$invoice_total_Field_customer</td>
+		<td></td><td class=\"columnleft\"></td>
+		<td class=\"account\">$LANG_total:</td><td class=account>$pref_currency_signField$invoice_total_Field_customer</td>
 		<td class=account><a href='index.php?module=payments&view=manage&c_id=$c_idField'>$LANG_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field_customer</td>
 		<td class=account>$LANG_owing:</td><td class=account><u>$pref_currency_signField$invoice_owing_Field_customer</u></td>
 	</tr>
@@ -236,7 +236,7 @@ $display_block_top =  "
 
 	<table align=center>
 	<tr>
-		<td colspan=6 align=center><b>$pref_inv_headingField</b></td>
+		<td colspan=6  align=center><b>$pref_inv_headingField</b></td>
 	</tr>
         <tr>
                 <td colspan=6><br></td>
