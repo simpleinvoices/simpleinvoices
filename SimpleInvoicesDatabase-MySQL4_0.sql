@@ -101,7 +101,7 @@ INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `
 INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`) VALUES (9, 'product_cf1', NULL, '0');
 INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`) VALUES (10, 'product_cf2', NULL, '0');
 INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`) VALUES (11, 'product_cf3', NULL, '0');
-INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`) VALUES (12, 'prod_custom_field4', NULL, '0');
+INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`) VALUES (12, 'product_cf4', NULL, '0');
 
 -- --------------------------------------------------------
 
@@ -153,7 +153,7 @@ CREATE TABLE `si_defaults` (
   `def_tax` int(25) default NULL,
   `def_inv_preference` int(25) default NULL,
   `def_number_line_items` int(25) NOT NULL default '0',
-  `def_inv_template` varchar(50) NOT NULL default 'print_preview.php',
+  `def_inv_template` varchar(50) NOT NULL default 'default',
   `def_payment_type` varchar(25) default '1',
   PRIMARY KEY  (`def_id`)
 ) TYPE=MyISAM AUTO_INCREMENT=3 ;
