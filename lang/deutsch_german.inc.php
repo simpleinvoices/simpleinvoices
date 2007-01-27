@@ -1,4 +1,5 @@
 <?php
+
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
 regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
@@ -10,14 +11,20 @@ $wording_for_disabledField ="Deaktiviert";//1
 
 
 #New lang file style $lang followed by the word or description - not grouped by page
+$LANG_about = "About";//0
 $LANG_account_info = "Konto-Information";//1
 $LANG_actions = "Aktion";//1
 $LANG_add_biller = "Gl&auml;//1ubiger hinzuf&uuml;//1gen";//1
+$LANG_add_customer = "Add Customer";//0
+$LANG_add_invoice_preference = "Add Invoice Preference";//0
 $LANG_add_new_invoice = "Neue Rechnung";//1
 $LANG_add_new_payment_type = "Neue Zahlungseingangsart anlegen";//1
 $LANG_add_new_preference = "Neue Rechnungsborgabe anlegen";//1
 $LANG_add_new_product = "Neues Produkt anlegen";//1
 $LANG_add_new_tax_rate = "Steuersatz anlegen";//1
+$LANG_add_tax_rate = "Add Tax Rate";//0
+$LANG_add_payment_type = "Add Payment Type";//0
+$LANG_add_product = "Add Product";//0
 $LANG_address = "Adresse";//1
 #might be able to delete adderss: variable - grep files
 $LANG_address_city = "Stadt";//1
@@ -29,16 +36,24 @@ $LANG_age = "Alter";//1
 $LANG_aging = "RE-Alter";//1
 $LANG_amount = "Betrag";//1
 $LANG_attention_short = "Acht.";//1
+$LANG_backup_database = "Backup Database";//0
 $LANG_biller = "Gl&auml;//1ubiger";//1
 $LANG_biller_details = "Gl&auml;//1ubigerdetails";//1
+$LANG_biller_edit = "Edit Biller";//0
 $LANG_biller_id = "Gl&auml;//1ubiger ID";//1
 $LANG_biller_name = "Gl&auml;//1ubigername";//1
 $LANG_biller_to_add = "Gl&auml;//1ubiger hinzuf&uuml;//1gen";//1
+$LANG_biller_sales = "Biller sales";//0
+$LANG_biller_sales_total = "Biller sales - Total";//0
+$LANG_biller_sales_by_customer_totals = "Biller sales by Customer - Totals"; //0
+$LANG_billers = "Billers";//0
 $LANG_cancel = "Abbrechen";//1
+$LANG_change_log = "Change Log";//0
 $LANG_city = "Stadt";//1
 $LANG_consulting = "Detail. Postenaufl.";//1
 $LANG_consulting_style = "Detail. Postenaufl.";//1
 $LANG_country = "Land";//1
+$LANG_credits = "Credits";//0
 $LANG_currency_sign = "W&auml;//1hrungszeichen";//1
 $LANG_custom_field1 = "Benutzerdefiniertes Feld 1";//1
 $LANG_custom_field2 = "Benutzerdefiniertes Feld 2";//1
