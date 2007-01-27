@@ -283,6 +283,9 @@ $LANG_stats_customer ="Top Customer - by amount invoiced";//1
 $LANG_stats_biller ="Top Biller - by amount invoiced";//1
 
 /* Dont translate anything below here */
+
+
+
 #Manage Invoices
 $mi_page_title = " - Manage Invoices";//1
 $mi_page_header = "Manage Invoices";//1
