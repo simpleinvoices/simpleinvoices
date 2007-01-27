@@ -251,6 +251,9 @@ $LANG_stats_customer ="Beste klant - totaal gefactureerd";//1
 $indx_stats_biller ="Top bedrijf - totaal gefactureerd";//1
 $LANG_stats_biller ="Top bedrijf - totaal gefactureerd";//1
 
+/* Dont translate anything below here */
+
+
 #Facturen beheren
 $mi_page_title = " - Beheer facturen";//1
 $mi_page_header = "Beheer facturen";//1

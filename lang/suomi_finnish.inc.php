@@ -270,6 +270,8 @@ $LANG_stats_customer ="Ykk&ouml;//1sasiakas - laskutuksen m&auml;//1&auml;//1r&a
 $indx_stats_biller ="Ykk&ouml;//1slaskuttaja - laskutuksen m&auml;//1&auml;//1r&auml;//1n mukaan";//1
 $LANG_stats_biller ="Ykk&ouml;//1slaskuttaja - laskutuksen m&auml;//1&auml;//1r&auml;//1n mukaan";//1
 
+/* Dont translate anything below here */
+
 #Manage Invoices
 $mi_page_title = " - Laskujen hallinta";//1
 $mi_page_header = "Laskujen hallinta";//1

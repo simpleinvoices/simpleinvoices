@@ -269,6 +269,8 @@ $LANG_stats_customer ="Top Kunde - nach Rechnungssumme";//1
 $indx_stats_biller ="Top Gl&auml;//1ubiger - nach Rechnungssumme";//1
 $LANG_stats_biller ="Top Gl&auml;//1ubiger - nach Rechnungssumme";//1
 
+/* Dont translate anything below here */
+
 #Manage Invoices
 $mi_page_title = " - Rechnungen verwalten";//1
 $mi_page_header = "Rechnungen verwalten";//1

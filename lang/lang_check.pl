@@ -4,7 +4,6 @@
 
 @langs= (
 	"castellano_spanish.inc.php",
-	"castellano_spanish.menu_text.txt",
 	"catala_catalan.inc.php",
 	"deutsch_german.inc.php",
 	"english_UK.inc.php",

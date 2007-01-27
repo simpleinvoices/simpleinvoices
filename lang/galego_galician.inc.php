@@ -269,6 +269,9 @@ $LANG_stats_customer ="Gran Cliente - por cantidade facturada";//1
 $indx_stats_biller ="Gran Emisor - por cantidade facturada";//1
 $LANG_stats_biller ="Gran Emisor - por cantidade facturada";//1
 
+/* Dont translate anything below here */
+
+
 #Manage Invoices
 $mi_page_title = " - Xestionar Facturas";//1
 $mi_page_header = "Xesti&oacute;//1n de Facturas";//1
