@@ -257,6 +257,7 @@ $LANG_zip = "C&oacute;//1digo postal";//1
 
 #Index.php - front page
 
+
 $LANG_shortcut ="Men&uacute;//1 de atajos";//1
 
 $LANG_getting_started ="Para empezar";//1
@@ -271,6 +272,11 @@ $LANG_manage_existing_invoice ="Gestionar sus facturas actuales";//1
 $LANG_manage_invoices ="Gestionar facturas";//1
 
 $LANG_manage_data ="Gestionar sus datos";//1
+$LANG_insert_customer = "Add Customer";//0
+$LANG_insert_biller = "Add Biller";//0
+$LANG_insert_product = "Add Product";//0
+
+$LANG_options ="Options";//0
 
 $LANG_stats ="Informes r&aacute;//1pidos";//1
 $LANG_stats_debtor ="El mayor deudor";//1
@@ -278,6 +284,9 @@ $LANG_stats_customer ="Mayor Cliente - por cantidad facturada";//1
 $LANG_stats_biller ="Mayor Facturador - por cantidad facturada";//1
 
 /* Dont translate anything below here */
+
+
+
 #Gestionar Facturas
 $mi_page_title = " - Gestionar Facturas";//1
 $mi_page_header = "Gestionar Facturas";//1

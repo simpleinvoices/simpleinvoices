@@ -267,6 +267,7 @@ $LANG_faqs_how ="Como crear facturass?";//1
 $LANG_faqs_type ="Como son os distintos tipos de facturas?";//1
 
 $LANG_create_invoice ="Crear unha factura";//1
+
 $LANG_manage_existing_invoice ="Xesti&oacute;//1n de facturas existentes";//1
 $LANG_manage_invoices ="Xestionar facturas";//1
 

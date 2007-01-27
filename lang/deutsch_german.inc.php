@@ -267,6 +267,7 @@ $LANG_faqs_how ="Wie erstellt man Rechnungen?";//1
 $LANG_faqs_type ="Was ist der Unterschied zwischen den verschiedenen Rechnungstypen?";//1
 
 $LANG_create_invoice ="Rechnung erstellen";//1
+
 $LANG_manage_existing_invoice ="Bestehende Rechnungen verwalten";//1
 $LANG_manage_invoices ="Rechnungen verwalten";//1
 

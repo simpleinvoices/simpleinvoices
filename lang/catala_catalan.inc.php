@@ -257,6 +257,7 @@ $LANG_zip = "Codi Postal";//1
 
 #Index.php - front page
 
+
 $LANG_shortcut ="Drecera a menu";//1
 
 $LANG_getting_started ="Comen&ccedil;//1a";//1
@@ -266,9 +267,6 @@ $LANG_faqs_how ="Com es creen factures?";//1
 $LANG_faqs_type ="Quants tipus diferents hi ha de factures?";//1
 
 $LANG_create_invoice ="Crear una factura";//1
-$LANG_invoice_total ="Total";//0
-$LANG_invoice_itemised ="Itemised";//0
-$LANG_invoice_consulting ="Consulting";//0
 
 $LANG_manage_existing_invoice ="Gestionar les teves factures";//1
 $LANG_manage_invoices ="Gestionar Factures";//1
