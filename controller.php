@@ -1,7 +1,10 @@
 <?php
 
 $module = $_GET['module'];
+
 $view = $_GET['view'];
+
+
 $action = $_GET['case'];
 
 
@@ -24,8 +27,20 @@ if (($module == "invoices" ) AND (strstr($view,"templates"))) {
 /*$module = the folder in src and view = the file in the requested folder
  *the below if grabs the requested folder and file based on the $_GET info in the url 
  */
+
 else if (($module != null ) AND ($view != null)) {
 	
+	/*Check the $module for validitity - make sure no ones hacking the url */
+	if (!ereg("^[a-z_/]+$",$module)) { 
+        	die("Invalid module requested");
+	}
+
+	/*Check the $view for validitity - make sure no ones hacking the url */
+	if (!ereg("^[a-z_]+$",$view)) {
+	        die("Invalid view requested");
+	}
+
+	/*Check to make sure that the requested files exist*/
 	if (file_exists("./src/$module/$view.php")) {
 	        include("./src/include/design/header.inc.php");
 	        include("./src/$module/$view.php");
