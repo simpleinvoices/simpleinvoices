@@ -289,19 +289,19 @@ $display_block ="
                                                 <td width=10%>
 		                                        <a href=\"index.php?module=customers&view=add\">
                                                         	<img src=\"images/common/add.png\"></img>
-								$indx_insert_customer
+								$LANG_insert_customer
 							</a>
                                                 </td>
                                                 <td width=10%>
 		                                        <a href=\"index.php?module=billers&view=add\">
                                                         	<img src=\"images/common/add.png\"></img>
-								$indx_insert_biller
+								$LANG_insert_biller
 							</a>
 						</td>
                                                 <td width=10%>
                                 		        <a href=\"index.php?module=products&view=add\">
                                                         	<img src=\"images/common/add.png\"></img>
-								$indx_insert_product
+								$LANG_insert_product
 							</a>
 						</td>
 					</tr>
@@ -329,26 +329,26 @@ $display_block ="
                                 </div>
                         </div>
                         <div id=\"item25\">
-                                <div class=\"mytitle\">$indx_options</div>
+                                <div class=\"mytitle\">$LANG_options</div>
                                 <div class=\"mycontent\">
                                       <table>
                                         <tr>
                                                 <td width=10%>
 		                                        <a href=\"index.php?module=system_defaults&view=manage\">
                                                         	<img src=\"images/common/defaults.png\"></img>
-								$indx_options_sys_defaults
+								$LANG_system_defaults
 							</a>
 						</td>
                                                 <td width=10%>
                 		                        <a href=\"index.php?module=tax_rates&view=manage\">
                                                         	<img src=\"images/common/tax.png\"></img>
-								$indx_options_tax_rates
+								$LANG_tax_rates
 							</a>
 						</td>
                                                 <td width=10%>
 		                                        <a href=\"index.php?module=preferences&view=manage\">
                                                         	<img src=\"images/common/preferences.png\"></img>
-								$indx_options_inv_pref
+								$LANG_invoice_preferences
 							</a>
 						</td>
 						</tr>
@@ -356,19 +356,19 @@ $display_block ="
                                                 <td width=10%>
                                 		        <a href=\"index.php?module=payment_types&view=manage\">
                                                         	<img src=\"images/common/payment.png\"></img>
-								$indx_options_payment_types
+								$LANG_payment_types
 							</a>
 						</td>
                                                 <td width=10%>
                 		                        <a href=\"database_sqlpatches.php\">
                                                         	<img src=\"images/common/upgrade.png\"></img>
-								$indx_options_upgrade
+								$LANG_database_upgrade_manager
 							</a>
 						</td>
                                                 <td width=10%>
 		                                        <a href=\"backup_database.php\">
                                                         	<img src=\"images/common/backup.png\"></img>
-								$indx_options_backup
+								$LANG_backup_database
 							</a>
 						</td>
 					</tr>
@@ -376,20 +376,20 @@ $display_block ="
                                 </div>
                         </div>
                         <div id=\"item26\">
-                                <div class=\"mytitle\">$indx_help</div>
+                                <div class=\"mytitle\">$LANG_help</div>
                                 <div class=\"mycontent\">
                                       <table>
                                         <tr>
                                                 <td width=10%>
                                         		<a href=\"index.php?module=documentation/inline_docs&view=inline_instructions#installation\">
                                                         	<img src=\"images/common/help.png\"></img>
-								$indx_help_install
+								$LANG_installation
 							</a>
 						</td>	
 						<td width=10%>
                 		                        <a href=\"index.php?module=documentation/inline_docs&view=inline_instructions#upgrading\">
                                                         	<img src=\"images/common/help.png\"></img>
-								$indx_help_upgrade
+								$LANG_upgrading_simple_invoices
 							</a>
 						</td>	
 					</tr>
@@ -397,7 +397,7 @@ $display_block ="
 						<td width=10%>
 		                                        <a href=\"index.php?module=documentation/inline_docs&view=inline_instructions#prepare\">
                                                         	<img src=\"images/common/help.png\"></img>
-								$indx_help_prepare
+								$LANG_prepare_simple_invoices
 							</a>
 						</td>	
 					</tr>

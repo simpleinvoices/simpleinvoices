@@ -180,7 +180,7 @@ if ($_GET[op] == "run_updates") {
 		<div id=\"browser\">
 
 		<table align='center'>";
-
+		
 		run_sql_patch(1,$sql_patch_name_1,$sql_patch_1,$sql_patch_update_1);
 		run_sql_patch(2,$sql_patch_name_2,$sql_patch_2,$sql_patch_update_2);
 		run_sql_patch(3,$sql_patch_name_3,$sql_patch_3,$sql_patch_update_3);
@@ -263,8 +263,20 @@ else {
 <a href=\"./documentation/info_pages/text.html?keepThis=true&TB_iframe=true&height=300&width=500\" title=\"Info :: Database upgrade warning\" class=\"thickbox\"><font color=\"red\"><img src=\"./images/common/important.png\"></img>Warning:</font></a>
 ";
 
+/*
+		while  ($i <= $patch_count) {
+			echo $i;
+			$i++;
+		}
+*/
 		echo "
 		<table align='center'>";
+                while  ($i <= $patch_count) {
+			check_sql_patch($i,$sql_patch_name_.$i);
+                        $i++;
+                }
+
+
 	check_sql_patch(1,$sql_patch_name_1);
 	check_sql_patch(2,$sql_patch_name_2);
 	check_sql_patch(3,$sql_patch_name_3);

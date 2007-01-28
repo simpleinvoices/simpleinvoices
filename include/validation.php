@@ -131,6 +131,15 @@ function jsValidateRequired($sName,$sLabel) {
     echo "  }\n";
 }
 
+function jsValidateifNumZero($sName,$sLabel){
+	echo "if(theForm.".$sName.".value == '0')\n";
+	echo "{\n";
+	echo "    alert(\"".$sLabel." can't be zero.\");\n";
+    echo "    theForm.".$sName.".focus();\n";
+    echo "    return (false);\n";
+	echo "}\n";
+}
+
 function jsValidateifNum($sName,$sLabel){
 	echo "if(!(/[-+]?[0-9]*\.?[0-9]+/).test(theForm.".$sName.".value))\n";
 	echo "{\n";
