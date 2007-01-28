@@ -181,40 +181,18 @@ if ($_GET[op] == "run_updates") {
 
 		<table align='center'>";
 		
+                $r = 1;
+		/*get count of sql patches and run the check_sql_patch for each patch*/
+                while  ($r <= $patch_count) {
+                        check_sql_patch($r,"$sql_patch_name_"."$r","$sql_patch_"."$r","$sql_patch_update_"."$r");
+                        $r++;
+                }
+
+/*
 		run_sql_patch(1,$sql_patch_name_1,$sql_patch_1,$sql_patch_update_1);
 		run_sql_patch(2,$sql_patch_name_2,$sql_patch_2,$sql_patch_update_2);
-		run_sql_patch(3,$sql_patch_name_3,$sql_patch_3,$sql_patch_update_3);
-		run_sql_patch(4,$sql_patch_name_4,$sql_patch_4,$sql_patch_update_4);
-		run_sql_patch(5,$sql_patch_name_5,$sql_patch_5,$sql_patch_update_5);
-		run_sql_patch(6,$sql_patch_name_6,$sql_patch_6,$sql_patch_update_6);
-		run_sql_patch(7,$sql_patch_name_7,$sql_patch_7,$sql_patch_update_7);
-		run_sql_patch(8,$sql_patch_name_8,$sql_patch_8,$sql_patch_update_8);
-		run_sql_patch(9,$sql_patch_name_9,$sql_patch_9,$sql_patch_update_9);
-		run_sql_patch(10,$sql_patch_name_10,$sql_patch_10,$sql_patch_update_10);
-		run_sql_patch(11,$sql_patch_name_11,$sql_patch_11,$sql_patch_update_11);
-		run_sql_patch(12,$sql_patch_name_12,$sql_patch_12,$sql_patch_update_12);
-		run_sql_patch(13,$sql_patch_name_13,$sql_patch_13,$sql_patch_update_13);
-		run_sql_patch(14,$sql_patch_name_14,$sql_patch_14,$sql_patch_update_14);
-		run_sql_patch(15,$sql_patch_name_15,$sql_patch_15,$sql_patch_update_15);
-		run_sql_patch(16,$sql_patch_name_16,$sql_patch_16,$sql_patch_update_16);
-		run_sql_patch(17,$sql_patch_name_17,$sql_patch_17,$sql_patch_update_17);
-		run_sql_patch(18,$sql_patch_name_18,$sql_patch_18,$sql_patch_update_18);
-		run_sql_patch(19,$sql_patch_name_19,$sql_patch_19,$sql_patch_update_19);
-		run_sql_patch(20,$sql_patch_name_20,$sql_patch_20,$sql_patch_update_20);
-		run_sql_patch(21,$sql_patch_name_21,$sql_patch_21,$sql_patch_update_21);
-		run_sql_patch(22,$sql_patch_name_22,$sql_patch_22,$sql_patch_update_22);
-		run_sql_patch(23,$sql_patch_name_23,$sql_patch_23,$sql_patch_update_23);
-		run_sql_patch(24,$sql_patch_name_24,$sql_patch_24,$sql_patch_update_24);
-		run_sql_patch(25,$sql_patch_name_25,$sql_patch_25,$sql_patch_update_25);
-		run_sql_patch(26,$sql_patch_name_26,$sql_patch_26,$sql_patch_update_26);
-		run_sql_patch(27,$sql_patch_name_27,$sql_patch_27,$sql_patch_update_27);
-		run_sql_patch(28,$sql_patch_name_28,$sql_patch_28,$sql_patch_update_28);
-		run_sql_patch(29,$sql_patch_name_29,$sql_patch_29,$sql_patch_update_29);
-		run_sql_patch(30,$sql_patch_name_30,$sql_patch_30,$sql_patch_update_30);
-		run_sql_patch(31,$sql_patch_name_31,$sql_patch_31,$sql_patch_update_31);
-		run_sql_patch(32,$sql_patch_name_32,$sql_patch_32,$sql_patch_update_32);
-		run_sql_patch(33,$sql_patch_name_33,$sql_patch_33,$sql_patch_update_33);
-		run_sql_patch(34,$sql_patch_name_34,$sql_patch_34,$sql_patch_update_34);
+		...
+*/
 
 		echo "<tr><td><br>The database patches have now been applied, please go back to the <a href='index.php?module=options&view=database_sqlpatches'>Database Upgrade Manager page</a> to see what patches have been applied. If all patches have been applied then there is now further action required</td></tr>";
 		echo "
@@ -263,58 +241,20 @@ else {
 <a href=\"./documentation/info_pages/text.html?keepThis=true&TB_iframe=true&height=300&width=500\" title=\"Info :: Database upgrade warning\" class=\"thickbox\"><font color=\"red\"><img src=\"./images/common/important.png\"></img>Warning:</font></a>
 ";
 
-/*
-		while  ($i <= $patch_count) {
-			echo $i;
-			$i++;
-		}
-*/
-		echo "
-		<table align='center'>";
-                while  ($i <= $patch_count) {
-			check_sql_patch($i,$sql_patch_name_.$i);
-                        $i++;
+		echo "<table align='center'>";
+
+		$p = 1;
+                while  ($p <= $patch_count) {
+			check_sql_patch($p,"$sql_patch_name_"."$p");
+                        $p++;
                 }
 
-
+/*
 	check_sql_patch(1,$sql_patch_name_1);
 	check_sql_patch(2,$sql_patch_name_2);
-	check_sql_patch(3,$sql_patch_name_3);
-	check_sql_patch(4,$sql_patch_name_4);
-	check_sql_patch(5,$sql_patch_name_5);
-	check_sql_patch(6,$sql_patch_name_6);
-	check_sql_patch(7,$sql_patch_name_7);
-	check_sql_patch(8,$sql_patch_name_8);
-	check_sql_patch(9,$sql_patch_name_9);
-	check_sql_patch(10,$sql_patch_name_10);
-	check_sql_patch(11,$sql_patch_name_11);
-	check_sql_patch(12,$sql_patch_name_12);
-	check_sql_patch(13,$sql_patch_name_13);
-	check_sql_patch(14,$sql_patch_name_14);
-	check_sql_patch(15,$sql_patch_name_15);
-	check_sql_patch(16,$sql_patch_name_16);
-	check_sql_patch(17,$sql_patch_name_17);
-	check_sql_patch(18,$sql_patch_name_18);
-	check_sql_patch(19,$sql_patch_name_19);
-	check_sql_patch(20,$sql_patch_name_20);
-	check_sql_patch(21,$sql_patch_name_21);
-	check_sql_patch(22,$sql_patch_name_22);
-	check_sql_patch(23,$sql_patch_name_23);
-	check_sql_patch(24,$sql_patch_name_24);
-	check_sql_patch(25,$sql_patch_name_25);
-	check_sql_patch(26,$sql_patch_name_26);
-	check_sql_patch(27,$sql_patch_name_27);
-	check_sql_patch(28,$sql_patch_name_28);
-	check_sql_patch(29,$sql_patch_name_29);
-	check_sql_patch(30,$sql_patch_name_30);
-	check_sql_patch(31,$sql_patch_name_31);
-	check_sql_patch(32,$sql_patch_name_32);
-	check_sql_patch(33,$sql_patch_name_33);
-	check_sql_patch(34,$sql_patch_name_34);
-
-		echo "
-		</table>
-";
+	....
+*/
+		echo "</table>";
 
 	}
 	else {

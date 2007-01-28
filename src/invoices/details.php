@@ -243,6 +243,10 @@ $display_block_top =  "
 	<tr>
 		<td class='details_screen'>$LANG_customer</td><td>$display_block_customer</td>
 	</tr>	
+	<tr>
+	        <td class=\"details_screen\">$LANG_date_formatted</td>
+        	<td><input type=\"text\" class=\"date-picker\" name=\"ac_date\" id=\"date1\" value='$inv_dateField'></input></td>
+	</tr>
 
 ";
 
@@ -492,14 +496,18 @@ $display_block_bottom =  "
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <head>
-    <script type="text/javascript" src="./include/jquery.js"></script>
-    <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
+	<script type="text/javascript" src="./include/jquery.js"></script>
+	<script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="all"/>
+	<script type="text/javascript" src="include/jquery.dom_creator.js"></script>
+	<script type="text/javascript" src="include/jquery.datePicker.js"></script>
+	<script type="text/javascript" src="include/jquery.datePicker.conf.js"></script>
 
+	<link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="all"/>
+	<link rel="stylesheet" type="text/css" href="include/jquery.datePicker.css" title="default" media="screen" />
 
-<script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
-<script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
+	<script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
+	<script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 
 <?php include('./config/config.php'); ?> 
 <body>
