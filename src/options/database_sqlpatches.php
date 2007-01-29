@@ -184,7 +184,7 @@ if ($_GET[op] == "run_updates") {
                 $r = 1;
 		/*get count of sql patches and run the check_sql_patch for each patch*/
                 while  ($r <= $patch_count) {
-                        check_sql_patch($r,"$sql_patch_name_"."$r","$sql_patch_"."$r","$sql_patch_update_"."$r");
+                        run_sql_patch($r,$sql_patch_name_.$r,$sql_patch_.$r,$sql_patch_update_.$r);
                         $r++;
                 }
 
@@ -245,7 +245,7 @@ else {
 
 		$p = 1;
                 while  ($p <= $patch_count) {
-			check_sql_patch($p,"$sql_patch_name_"."$p");
+			check_sql_patch($p,$sql_patch_name_.$p);
                         $p++;
                 }
 

@@ -245,7 +245,7 @@ ADD b_co_footer TEXT";
         $sql_patch_update_33 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',33,'$sql_patch_name_33',20061214,'')";
         $patch_count++;
 
-        $sql_patch_name_34 = "Reset invoice template to default - refer Issue 70";
+        $sql_patch_name_34 = "Reset invoice template to default refer Issue 70";
         $sql_patch_34 = "
 		UPDATE `si_defaults` SET `def_inv_template` = 'default' WHERE `def_id` =1 LIMIT 1 ;
         ";
