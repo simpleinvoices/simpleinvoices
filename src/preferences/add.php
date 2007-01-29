@@ -24,7 +24,6 @@ $display_block_enabled = "<select name=\"pref_enabled\">
 
 ?>
 
-<?php include('./include/menu.php');
 echo <<<EOD
     <script type="text/javascript" src="./include/jquery.js"></script>
     <script type="text/javascript" src="./include/jquery.thickbox.js"></script>

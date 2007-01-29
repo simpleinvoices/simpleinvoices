@@ -200,7 +200,6 @@ if (mysql_num_rows($result_preferences) == 0) {
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<?php include('./include/menu.php'); ?>
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 
