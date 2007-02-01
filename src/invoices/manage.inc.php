@@ -15,15 +15,15 @@ if (mysql_num_rows($result) == 0) {
 
 {$page_header}
 
-<table align="center" id="large" class="sortable filterable">
+<table align="center" id="large" class="sortable filterable manage">
 <tr class="sortHeader">
-<th class="noFilter" >{$LANG_actions}</th>
-<th class="noFilter">{$LANG_id} &nbsp;</th>
+<th class="noFilter" >{$LANG_actions} </th>
+<th class="noFilter">{$LANG_id}</th>
 <th class="selectFilter index_table">{$LANG_biller}</th>
 <th class="selectFilter index_table">{$LANG_customer}</th>
-<th class="noFilter">{$LANG_total}</th>
-<th class="noFilter">{$LANG_paid}</th>
-<th class="noFilter">{$LANG_owing}</th>
+<th class="index_table">{$LANG_total}</th>
+<th class="index_table">{$LANG_paid}</th>
+<th class="index_table">{$LANG_owing}</th>
 <th class="selectFilter index_table">{$LANG_aging}</th>
 <th class="noFilter">{$LANG_invoice_type}</th>
 <th class="noFilter">{$LANG_date_created}</th>

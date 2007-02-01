@@ -19,6 +19,9 @@ body, .dialog {
 	text-align: left;
 }
 
+table.manage {
+	font-size: 11px;
+}
 /* Make sure the table cells show the right font */
 /* Tablesorter table styling - start*/
 .odd {
