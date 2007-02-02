@@ -112,14 +112,14 @@ while ($Array_preferences = mysql_fetch_array($result_print_preferences)) {
 if (!empty($b_co_logoField)) {
 	$logo_block = "
         <tr>
-                <td colspan=6><IMG src=../logo/$b_co_logoField border=0 hspace=0 align=right></td>
+                <td colspan=6><IMG src=../images/logo/$b_co_logoField border=0 hspace=0 align=right></td>
         </tr>
  ";
 }
 if (empty($b_co_logoField)) {
         $logo_block = "
         <tr>
-                <td colspan=6><IMG src=../logo/_default_blank_logo.png border=0 hspace=0 align=right></td>
+                <td colspan=6><IMG src=../images/logo/_default_blank_logo.png border=0 hspace=0 align=right></td>
         </tr>
  ";
 }

@@ -274,11 +274,11 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 		WHERE
 			inv_id = $invoice_id";
 
-      if (mysql_query($sql)) {
+	if (mysql_query($sql)) {
 		$display_block =  "Processing invoice, <br> you will be redirected back to the Quick View of this invoice";
 	} else {
 		$display_block =  "Something went wrong, please try adding the invoice again";
-}
+	}
 
 
 	#$display_block .= "step 2 - 1";
@@ -395,11 +395,29 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 
 else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_invoice_consulting' ) {
 
-	$sql = "INSERT into
-		si_invoices (inv_id, inv_biller_id, inv_customer_id, inv_type,
-		inv_preference, inv_date, inv_note)
+	$sql = "INSERT 
+			into
+		si_invoices 
+			(
+			inv_id, 
+			inv_biller_id, 
+			inv_customer_id, 
+			inv_type,
+			inv_preference, 
+			inv_date, 
+			inv_note
+			)
 		values
-			('','$_POST[sel_id]','$_POST[select_customer]', 3,'$_POST[select_preferences]',now(),'$_POST[invoice_consulting_note]')";
+			(
+			'',
+			'$_POST[sel_id]',
+			'$_POST[select_customer]',
+			 3,
+			'$_POST[select_preferences]',
+			now(),
+			'$_POST[invoice_consulting_note]'
+			)
+		";
 
 	if (mysql_query($sql)) {
 		$display_block =  "Processing invoice, <br> you will be redirected back to the Quick View of this invoice";
@@ -435,7 +453,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 
 	};
 */
-	$num = $_GET[num];
+	$num = $_POST[max_items];
 	$items = 0;
 	while ($items < $num) :
 

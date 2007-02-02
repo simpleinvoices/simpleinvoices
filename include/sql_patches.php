@@ -1,4 +1,6 @@
 <?php
+	$patch_count = 0;
+
 	$sql_patch_name_1 = "Create si_sql_patchmanger table";
         $sql_patch_1 = "CREATE TABLE si_sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 50 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) TYPE = MYISAM)";
         $sql_patch_update_1 = "INSERT INTO si_sql_patchmanager

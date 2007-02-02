@@ -22,7 +22,7 @@ $language = "english_UK";
 /*To change the theme, enter the name of the theme folder - defalut is google*/
 $theme = "google";
 
-$version = "20070125 stable";
+$version = "20070202 stable";
 
 $config['date_format']  = 'Y-m-d'; #International format just the date
 #$config['date_format']  = 'Y-m-d h:m'; #Internalional format date and time 
