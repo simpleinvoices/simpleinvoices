@@ -228,6 +228,14 @@ if (mysql_num_rows($result_preferences) == 0) {
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 
+<link rel="stylesheet" type="text/css" href="include/jquery.datePicker.css" title="default" media="screen" />
+
+<script type="text/javascript" src="include/jquery.js"></script>
+<script type="text/javascript" src="include/jquery.dom_creator.js"></script>
+<script type="text/javascript" src="include/jquery.datePicker.js"></script>
+<script type="text/javascript" src="include/jquery.datePicker.conf.js"></script>
+
+
 </head>
 
 	<title><?php echo $title; echo " :: "; echo $LANG_inv; echo $LANG_inv_itemised; ?></title>
@@ -246,18 +254,27 @@ if (mysql_num_rows($result_preferences) == 0) {
 
 
 <tr>
-<td class="details_screen"><?php echo $mb_table_biller_name; ?></th><td input type=text name="biller_block" size=25><?php echo $display_block; ?></td>
-
+	<td class="details_screen">
+		<?php echo $mb_table_biller_name; ?>
+	</td>
+	<td input type=text name="biller_block" size=25>
+		<?php echo $display_block; ?>
+	</td>
 </tr>
 </tr>
-
-
-
 <tr>
-<td class="details_screen"><?php echo $mc_table_customer_name; ?></th><td input type=text name="customer_block" size=25 ><?php echo $display_block_customer; ?></td>
-
-
-
+	<td class="details_screen">
+		<?php echo $mc_table_customer_name; ?>
+	</td>
+	<td input type=text name="customer_block" size=25 >
+		<?php echo $display_block_customer; ?>
+	</td>
+</tr>
+<tr>
+        <td class="details_screen"><?php echo $LANG_date_formatted; ?></td>
+        <td>
+                        <input type="text" class="date-picker" name="select_date" id="date1" value='<?php echo $today = date("Y-m-d"); ?>'></input>
+        </td>
 </tr>
 
 <tr>

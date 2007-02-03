@@ -19,6 +19,7 @@ while ($Array_master_invoice = mysql_fetch_array($result_print_master_invoice_id
                 $inv_typeField = $Array_master_invoice['inv_type'];
                 $inv_preferenceField = $Array_master_invoice['inv_preference'];
 		$inv_dateField = date( $config['date_format'], strtotime( $Array_master_invoice['inv_date'] ) );
+		$calc_dateField = date('Y-m-d', strtotime( $Array_master_invoice['inv_date'] ) );
                 $inv_noteField = $Array_master_invoice['inv_note'];
 
 
@@ -185,7 +186,7 @@ select  IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount from si_a
 
         #Invoice Age - number of days - start
         if ($invoice_owing_Field > 0 ) {
-                $invoice_age_days = (strtotime(date($config['date_format'])) - strtotime($inv_dateField)) / (60 * 60 * 24);
+                $invoice_age_days = (strtotime(date('Y-m-d')) - strtotime($calc_dateField)) / (60 * 60 * 24);
                 /*$invoice_age_days = (strtotime(date("Y-m-d")) - strtotime($inv_dateField)) / (60 * 60 * 24);*/
                          $invoice_age = "$invoice_age_days $LANG_days";
         }

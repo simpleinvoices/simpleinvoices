@@ -13,9 +13,16 @@ $action = !empty( $_POST['action'] ) ? addslashes( $_POST['action'] ) : NULL;
 #insert invoice_total - start
 if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_invoice_total' ) {
 
-	$sql = "INSERT into
-			si_invoices (inv_id, inv_biller_id, inv_customer_id, inv_type,
-			inv_preference, inv_date, inv_note)
+	$sql = "INSERT 
+			into
+		si_invoices (
+			inv_id, 
+			inv_biller_id, 
+			inv_customer_id, 
+			inv_type,
+			inv_preference, 
+			inv_date, 
+			inv_note)
 		VALUES
 			(
 				'',
@@ -23,7 +30,7 @@ if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_inv
 				'$_POST[select_customer]',
 				'1',
 				'$_POST[select_preferences]',
-				now(),
+				'$_POST[select_date]',
 				'$_POST[invoice_total_note]'
 			)";
 
@@ -94,14 +101,15 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 		SET
 			inv_biller_id = '$_POST[sel_id]',
 			inv_customer_id = '$_POST[select_customer]',
-			inv_preference = '$_POST[select_preferences]'
+			inv_preference = '$_POST[select_preferences]',
+			inv_date = '$_POST[select_date]'
 		WHERE
 			inv_id = $invoice_id";
 
 	if (mysql_query($sql)) {
 		$display_block =  "Processing invoice, <br> you will be redirected Quick View of this invoice";
 	} else {
-		$display_block =  "Something went wrong, please try adding the invoice again";
+		$display_block =  "Something went wrong, please try adding the invoice again<br><br>$sql";
 	}
 	
 	#update the si_invoices table with customer etc  stuff - end
@@ -156,15 +164,31 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_invoice_itemised' ) {
 
 	$invoice_itemised_note_field = $_POST[invoice_itemised_note];
-	$sql = "INSERT into
-		si_invoices (inv_id, inv_biller_id, inv_customer_id, inv_type,
-		inv_preference, inv_date, inv_note)
-		values ('','$_POST[sel_id]','$_POST[select_customer]', 2,'$_POST[select_preferences]',now(),'$invoice_itemised_note_field')";
+	$sql = "INSERT 
+			into
+		si_invoices (
+			inv_id, 
+			inv_biller_id, 
+			inv_customer_id, 	
+			inv_type,
+			inv_preference, 
+			inv_date, 
+			inv_note
+		)
+		VALUES (
+			'',
+			'$_POST[sel_id]',
+			'$_POST[select_customer]',
+			2,
+			'$_POST[select_preferences]',
+			'$_POST[select_date]',
+			'$invoice_itemised_note_field'
+		)";
 
 	if (mysql_query($sql)) {
 		$display_block =  "Processing invoice, <br> you will be redirected back to the Quick View of this invoice";
 	} else {
-		$display_block =  "Something went wrong, please try adding the invoice again";
+		$display_block =  "Something went wrong, please try adding the invoice again <br><br>$sql";
 	}
 
 	#get the invoice id from the insert
@@ -270,6 +294,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 			inv_biller_id = '$_POST[sel_id]',
 			inv_customer_id = '$_POST[select_customer]',
 			inv_preference = '$_POST[select_preferences]',
+			inv_date = '$_POST[select_date]',
 			inv_note = '$_POST[invoice_itemised_note]'
 		WHERE
 			inv_id = $invoice_id";
@@ -414,7 +439,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 			'$_POST[select_customer]',
 			 3,
 			'$_POST[select_preferences]',
-			now(),
+			'$_POST[select_date]',
 			'$_POST[invoice_consulting_note]'
 			)
 		";
@@ -526,6 +551,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 			inv_biller_id = '$_POST[sel_id]',
 			inv_customer_id = '$_POST[select_customer]',
 			inv_preference = '$_POST[select_preferences]',
+			inv_date = '$_POST[select_date]',
 			inv_note = '$_POST[invoice_itemised_note]'
 		WHERE
 			inv_id = $invoice_id";

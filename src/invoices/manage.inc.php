@@ -37,6 +37,7 @@ while ($newArray = mysql_fetch_array($result)) {
 	$inv_customer_idField = $newArray['inv_customer_id'];
 	$inv_typeField = $newArray['inv_type'];
 	$inv_preferenceField = $newArray['inv_preference'];
+	$calc_dateField = date( 'Y-m-d', strtotime( $newArray['inv_date'] ) );
 	$inv_dateField = date( $config['date_format'], strtotime( $newArray['inv_date'] ) );
 	$inv_noteField = $newArray['inv_note'];
 
@@ -61,13 +62,13 @@ while ($newArray = mysql_fetch_array($result)) {
 		$inv_ty_descriptionField = $invoice_typeArray['inv_ty_description'];
 
 
-#invoice total calc - start
+#invoice total total - start
 	$print_invoice_total ="select sum(inv_it_total) as total from si_invoice_items where inv_it_invoice_id =$inv_idField";
 	$result_print_invoice_total = mysql_query($print_invoice_total, $conn) or die(mysql_error());
 
 	while ($Array = mysql_fetch_array($result_print_invoice_total)) {
                 $invoice_total_Field = $Array['total'];
-#invoice total calc - end
+#invoice total total - end
 
 #amount paid calc - start
 	$x1 = "select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) as amount from si_account_payments where ac_inv_id = $inv_idField";
@@ -82,8 +83,8 @@ while ($newArray = mysql_fetch_array($result)) {
 
 	#Overdue - number of days - start
 	if ($invoice_owing_Field > 0 ) {
-		echo "<!-- ", strtotime(date($config['date_format'])), ' ', strtotime($inv_dateField), " -->\n";
-		$overdue_days = (strtotime(date($config['date_format'])) - strtotime($inv_dateField)) / (60 * 60 * 24);
+		echo "<!-- ", strtotime(date( 'Y-m-d')), ' ', strtotime($inv_dateField), " -->\n";
+		$overdue_days = (strtotime(date('Y-m-d')) - strtotime($calc_dateField)) / (60 * 60 * 24);
 		if ($overdue_days == 0) {
 			$overdue = "";
 		}

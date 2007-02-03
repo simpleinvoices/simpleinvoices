@@ -20,7 +20,10 @@ while ($Array_master_invoice = mysql_fetch_array($result_print_master_invoice_id
                 $inv_customer_idField = $Array_master_invoice['inv_customer_id'];
                 $inv_typeField = $Array_master_invoice['inv_type'];
                 $inv_preferenceField = $Array_master_invoice['inv_preference'];
-		$inv_dateField = date( $config['date_format'], strtotime( $Array_master_invoice['inv_date'] ) );
+		$inv_dateField = date( 'Y-m-d', strtotime( $Array_master_invoice['inv_date'] ) );
+		/*
+		$inv_dateField = $Array_master_invoice['inv_date'];
+		*/
                 $inv_noteField = $Array_master_invoice['inv_note'];
 
 
@@ -234,19 +237,21 @@ $display_block_top =  "
         <tr>
 		<td class='details_screen'>$pref_inv_wordingField $LANG_number_short</td><td><input type=hidden name=\"invoice_id\" value=$inv_idField size=15>$inv_idField</td>
 	</tr>
+	<!--	
 	<tr>
 		<td class='details_screen'>$pref_inv_wordingField $LANG_date</td><td colspan=2>$inv_dateField</td>
 	</tr>	
+	-->
+	<tr>
+	        <td class=\"details_screen\">$LANG_date_formatted</td>
+        	<td><input type=\"text\" class=\"date-picker\" name=\"select_date\" id=\"date1\" value='$inv_dateField'></input></td>
+	</tr>
 	<tr>
 		<td class='details_screen'>$LANG_biller</td><td>$display_block_biller</td>
 	</tr>
 	<tr>
 		<td class='details_screen'>$LANG_customer</td><td>$display_block_customer</td>
 	</tr>	
-	<tr>
-	        <td class=\"details_screen\">$LANG_date_formatted</td>
-        	<td><input type=\"text\" class=\"date-picker\" name=\"ac_date\" id=\"date1\" value='$inv_dateField'></input></td>
-	</tr>
 
 ";
 

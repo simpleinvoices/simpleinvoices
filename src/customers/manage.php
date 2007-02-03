@@ -66,15 +66,32 @@ EOD;
 		}
 
 #invoice total calc - start
+		$print_invoice_total = "select IF ( isnull( sum(inv_it_total)) ,  '0', sum(inv_it_total)) as total from si_invoice_items, si_invoices where  si_invoices.inv_customer_id  = $c_idField  and si_invoices.inv_id = si_invoice_items.inv_it_invoice_id";
+
+		/*
 		$print_invoice_total ="select IF ( isnull( sum(inv_it_total)) ,  '0', sum(inv_it_total)) as total from si_invoice_items, si_invoices where  si_invoices.inv_customer_id  = $c_idField  and si_invoices.inv_id = si_invoice_items.inv_it_invoice_id";
+		*/
 		$result_print_invoice_total = mysql_query($print_invoice_total, $conn) or die(mysql_error());
 
 		while ($Array = mysql_fetch_array($result_print_invoice_total)) {
-			$invoice_total_Field = number_format($Array['total'],2);
+			$invoice_total_Field = number_format($Array['total'],2);	
 #invoice total calc - end
 
 #amount paid calc - start
-			$x1 = "select  IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount from si_account_payments, si_invoices, si_invoice_items where si_account_payments.ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = $c_idField  and si_invoices.inv_id = si_invoice_items.inv_it_invoice_id";
+			$x1 = "
+	                SELECT      
+     		                 IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount
+       	         	FROM    
+                        	si_account_payments, si_invoices
+	                WHERE      
+        	                si_account_payments.ac_inv_id = si_invoices.inv_id
+               		AND   
+                        	si_invoices.inv_customer_id = $c_idField
+			";
+
+/* second attempt
+select  IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount from si_account_payments, si_invoices, si_invoice_items where si_account_payments.ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = $c_idField  and si_invoices.inv_id = si_invoice_items.inv_it_invoice_id";
+*/
 			//$x1 = "select  IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount from si_account_payments, si_invoices, si_invoice_items where si_account_payments.ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = $c_idField  and si_invoices.inv_id = si_invoice_items.inv_it_id";
 			$result_x1 = mysql_query($x1, $conn) or die(mysql_error());
 			while ($result_x1Array = mysql_fetch_array($result_x1)) {
