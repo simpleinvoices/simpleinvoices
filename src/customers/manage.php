@@ -66,7 +66,16 @@ EOD;
 		}
 
 #invoice total calc - start
-		$print_invoice_total = "select IF ( isnull( sum(inv_it_total)) ,  '0', sum(inv_it_total)) as total from si_invoice_items, si_invoices where  si_invoices.inv_customer_id  = $c_idField  and si_invoices.inv_id = si_invoice_items.inv_it_invoice_id";
+		$print_invoice_total = "
+		SELECT 
+			IF ( isnull( sum(inv_it_total)) ,  '0', sum(inv_it_total)) as total 
+		FROM 
+			si_invoice_items, si_invoices 
+		WHERE  
+			si_invoices.inv_customer_id  = $c_idField  
+		AND 
+			si_invoices.inv_id = si_invoice_items.inv_it_invoice_id
+		";
 
 		/*
 		$print_invoice_total ="select IF ( isnull( sum(inv_it_total)) ,  '0', sum(inv_it_total)) as total from si_invoice_items, si_invoices where  si_invoices.inv_customer_id  = $c_idField  and si_invoices.inv_id = si_invoice_items.inv_it_invoice_id";
@@ -74,7 +83,8 @@ EOD;
 		$result_print_invoice_total = mysql_query($print_invoice_total, $conn) or die(mysql_error());
 
 		while ($Array = mysql_fetch_array($result_print_invoice_total)) {
-			$invoice_total_Field = number_format($Array['total'],2);	
+			$invoice_total_Field = $Array['total'];	
+			$invoice_total_Field_formatted = number_format($Array['total'],2);	
 #invoice total calc - end
 
 #amount paid calc - start
@@ -95,7 +105,8 @@ select  IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount from si_a
 			//$x1 = "select  IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount from si_account_payments, si_invoices, si_invoice_items where si_account_payments.ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = $c_idField  and si_invoices.inv_id = si_invoice_items.inv_it_id";
 			$result_x1 = mysql_query($x1, $conn) or die(mysql_error());
 			while ($result_x1Array = mysql_fetch_array($result_x1)) {
-				$invoice_paid_Field = number_format($result_x1Array['amount'],2);
+				$invoice_paid_Field = $result_x1Array['amount'];
+				$invoice_paid_Field_formatted = number_format($result_x1Array['amount'],2);
 #amount paid calc - end
 
 #amount owing calc - start
@@ -111,8 +122,8 @@ select  IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount from si_a
 	<td class="index_table">{$c_idField}</td>
 	<td class="index_table">{$c_nameField}</td>
 	<td class="index_table">{$c_phoneField}</td>
-	<td class="index_table">{$invoice_total_Field}</td>
-	<td class="index_table">{$invoice_paid_Field}</td>
+	<td class="index_table">{$invoice_total_Field_formatted}</td>
+	<td class="index_table">{$invoice_paid_Field_formatted}</td>
 	<td class="index_table">{$invoice_owing_Field}</td>
 	<td class="index_table">{$wording_for_enabled}</td>
 	</tr>

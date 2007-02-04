@@ -68,7 +68,8 @@ while ($Array = mysql_fetch_array($result_print_customer) ) {
 	$result_print_invoice_total = mysql_query($print_invoice_total, $conn) or die(mysql_error());
 
 	while ($Array = mysql_fetch_array($result_print_invoice_total)) {
-		$invoice_total_Field = number_format($Array['total'],2);
+		$invoice_total_Field = $Array['total'];
+		$invoice_total_Field_formatted = number_format($Array['total'],2);
 #invoice total calc - end
 
 #amount paid calc - start
@@ -90,7 +91,8 @@ $x1 = "select  IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount fr
 */
 		$result_x1 = mysql_query($x1, $conn) or die(mysql_error());
 		while ($result_x1Array = mysql_fetch_array($result_x1)) {
-			$invoice_paid_Field = number_format($result_x1Array['amount'],2);
+			$invoice_paid_Field = $result_x1Array['amount'];
+			$invoice_paid_Field_formatted = number_format($result_x1Array['amount'],2);
 #amount paid calc - end
 
 #amount owing calc - start
@@ -127,12 +129,12 @@ if ($_GET['action'] === 'view') {
 	<tr>
 		<td class="details_screen">{$LANG_customer} {$LANG_id}</td>
 		<td>{$c_idField}</td><td colspan="2"></td><td></td>
-		<td class="details_screen">{$LANG_total_invoices}</td><td>{$invoice_total_Field}</td>
+		<td class="details_screen">{$LANG_total_invoices}</td><td>{$invoice_total_Field_formatted}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_customer_name}</td><td colspan="2">{$c_nameField}</td>
 		<td colspan="2"></td><td class="details_screen">{$LANG_total_paid}</td>
-		<td>{$invoice_paid_Field}</td>
+		<td>{$invoice_paid_Field_formatted}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_attention_short} <a href="documentation/info_pages/customer_contact.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Customer contact" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>

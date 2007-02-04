@@ -151,7 +151,16 @@ while ($Array_defaults = mysql_fetch_array($result_print_defaults) ) {
 
 #Accounts - for the customer - start
 #invoice total calc - start
-        $print_invoice_total_customer ="select IF ( isnull( sum(inv_it_total)) ,  '0', sum(inv_it_total)) as total from si_invoice_items, si_invoices where  si_invoices.inv_customer_id  = $c_idField  and si_invoices.inv_id = si_invoice_items.inv_it_invoice_id";
+        $print_invoice_total_customer ="
+		SELECT
+			IF ( isnull( sum(inv_it_total)) ,  '0', sum(inv_it_total)) as total 
+		FROM
+			si_invoice_items, si_invoices 
+		WHERE  
+			si_invoices.inv_customer_id  = $c_idField  
+		AND 
+			si_invoices.inv_id = si_invoice_items.inv_it_invoice_id
+		";
         $result_print_invoice_total_customer = mysql_query($print_invoice_total_customer, $conn) or die(mysql_error());
 
         while ($Array_customer = mysql_fetch_array($result_print_invoice_total_customer)) {
