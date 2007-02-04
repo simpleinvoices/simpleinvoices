@@ -116,6 +116,7 @@ $LANG_inv_consulting = " - Consulting";//1
 $LANG_inv_itemised = " - Itemised";//1
 $LANG_inv_pref = "Invoice Preference";//1
 $LANG_inv_total = " - Total";//1
+$LANG_invoice = "Invoice";//1
 $LANG_invoice_detail_heading = "Invoice detail heading";//1
 $LANG_invoice_detail_line = "Invoice detail line";//1
 $LANG_invoice_footer = "Invoice footer";//1

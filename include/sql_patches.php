@@ -254,6 +254,34 @@ ADD b_co_footer TEXT";
         $sql_patch_update_34 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',34,'$sql_patch_name_34',20070125,'')";
         $patch_count++;
 
+
+        $sql_patch_name_35 = "Adding data to the custom fields table for invoices";
+        $sql_patch_35 = "
+        INSERT INTO `si_custom_fields` ( `cf_id` , `cf_custom_field` , `cf_custom_label` , `cf_display` )
+                VALUES (
+                '', 'invoice_cf1', NULL , '0'
+                ), (
+                '', 'invoice_cf2', NULL , '0'
+                ), (
+                '', 'invoice_cf3', NULL , '0'
+                ), (
+                '', 'invoice_cf4', NULL , '0'             
+	        );
+	";
+        $sql_patch_update_35 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',35,'$sql_patch_name_35',20070204,'')";
+        $patch_count++;
+
+        $sql_patch_name_36 = "Adding custom fields to the invoices table";
+        $sql_patch_36 = "
+        ALTER TABLE `si_invoices` ADD `invoice_custom_field1` VARCHAR( 50 ) AFTER `inv_note` ,
+                ADD `invoice_custom_field2` VARCHAR( 50 ) AFTER `invoice_custom_field1` ,
+                ADD `invoice_custom_field3` VARCHAR( 50 ) AFTER `invoice_custom_field2` ,
+                ADD `invoice_custom_field4` VARCHAR( 50 ) AFTER `invoice_custom_field3` ;
+        ";
+        $sql_patch_update_36 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',36,'$sql_patch_name_36',20070204,'')";
+        $patch_count++;
+
+
 /*
 CREATE TABLE `si_accounts` (
 `ac_id` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,

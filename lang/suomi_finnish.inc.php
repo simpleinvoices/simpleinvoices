@@ -123,6 +123,7 @@ $LANG_inv_consulting = " - konsultointia";//1
 $LANG_inv_itemised = " - yksil&ouml;//1ityn&auml;";//1
 $LANG_inv_pref = "Laskun oletustiedot";//1
 $LANG_inv_total = " - kokonaissummalla";//1
+$LANG_invoice = "Lasku";//1
 $LANG_invoice_detail_heading = "Laskun alaotsikko";//1
 $LANG_invoice_detail_line = "Laskun lis&auml;tietorivi";//1
 $LANG_invoice_footer = "Laskun alatunniste";//1

@@ -121,6 +121,7 @@ $LANG_inv_consulting = " - Detail. Artikelaufl.";//1
 $LANG_inv_itemised = " - Artikelaufl.";//1
 $LANG_inv_pref = "Rechnungseinstellung";//1
 $LANG_inv_total = " - Freitext";//1
+$LANG_invoice = "Rechnung";//1
 $LANG_invoice_detail_heading = "Rechnungsdetails-Text";//1
 $LANG_invoice_detail_line = "Rechnungsdetails-Zeile";//1
 $LANG_invoice_footer = "Fusszeile der Rechnung";//1

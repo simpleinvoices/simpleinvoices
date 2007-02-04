@@ -121,6 +121,7 @@ $LANG_inv_consulting = " - Anal&iacute;//1tico";//1
 $LANG_inv_itemised = " - Detallado";//1
 $LANG_inv_pref = "Factura Preference";//1
 $LANG_inv_total = " - Total";//0
+$LANG_invoice = "Factura";//1
 $LANG_invoice_detail_heading = "Detalle de cabecera de Factura ";//1
 $LANG_invoice_detail_line = "Linea de detalle de Factura";//1
 $LANG_invoice_footer = "Pi&eacute;//1 de Factura";//1

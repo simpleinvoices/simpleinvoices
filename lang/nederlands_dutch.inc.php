@@ -121,6 +121,7 @@ $LANG_inv_consulting = " - Informatief";//1
 $LANG_inv_itemised = " - Gedetailleerd";//1
 $LANG_inv_pref = "Factuur instelling";//1
 $LANG_inv_total = " - Totaal";//1
+$LANG_invoice = "Factuur";//1
 $LANG_invoice_detail_heading = "Factuur detail kop";//1
 $LANG_invoice_detail_line = "Factuur detail regel";//1
 $LANG_invoice_footer = "Factuur voet";//1

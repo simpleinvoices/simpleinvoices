@@ -121,6 +121,7 @@ $LANG_inv_consulting = " - Consulting";//0
 $LANG_inv_itemised = " - Itemised";//0
 $LANG_inv_pref = "Invoice Preference";//0
 $LANG_inv_total = " - Total";//0
+$LANG_invoice = "Factira";//1
 $LANG_invoice_detail_heading = "Invoice detail heading";//0
 $LANG_invoice_detail_line = "Invoice detail line";//0
 $LANG_invoice_footer = "Invoice footer";//0

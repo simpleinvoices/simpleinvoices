@@ -78,6 +78,9 @@ function get_custom_field_name($field)
 	if ($get_cf_letter == "c") {
 		$custom_field_name = $LANG_customer;
 	}
+	if ($get_cf_letter == "i") {
+		$custom_field_name = $LANG_invoice;
+	}
 	if ($get_cf_letter == "p") {
 		$custom_field_name = $LANG_product;
 	}
