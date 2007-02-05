@@ -306,6 +306,17 @@ $.tableSorter.parsers.generic = {
 	},
 	sorter: $.tableSorter.sorters.generic
 };
+
+$.tableSorter.parsers.english = {
+        id: 'english',
+        is: function(s) {
+                return s.match(/[.,]+/);
+        },
+	format: function(s) {
+		return parseFloat(s.replace(/[^0-9.]/g,''));
+	},
+        sorter: $.tableSorter.sorters.numeric
+};
 $.tableSorter.parsers.currency = {
 	id: 'currency',
 	is: function(s) {
@@ -336,6 +347,9 @@ $.tableSorter.parsers.decimal = {
 	},
 	sorter: $.tableSorter.sorters.numeric
 };
+
+
+
 $.tableSorter.parsers.ipAddress = {
 	id: 'ipAddress',
 	is: function(s) {
@@ -408,6 +422,7 @@ $.tableSorter.parsers.time = {
 $.tableSorter.analyzer.add($.tableSorter.parsers.currency);
 $.tableSorter.analyzer.add($.tableSorter.parsers.numeric);
 $.tableSorter.analyzer.add($.tableSorter.parsers.decimal);
+$.tableSorter.analyzer.add($.tableSorter.parsers.english);
 $.tableSorter.analyzer.add($.tableSorter.parsers.isoDate);
 $.tableSorter.analyzer.add($.tableSorter.parsers.shortDate);
 $.tableSorter.analyzer.add($.tableSorter.parsers.ipAddress);

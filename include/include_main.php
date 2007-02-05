@@ -1,5 +1,5 @@
 <?php
-#include('./include/auth/auth.php');
+include('./include/auth/auth.php');
 include_once('./config/config.php');
 include_once('./include/functions.php');
 ob_start();
