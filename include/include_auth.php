@@ -1,6 +1,6 @@
 <?php
 
-//To turn authentification on uncomment the line below
+//To turn authentification on uncomment (remove the /* and */) the lines below
 
 /*
 if ($_GET['location'] == 'pdf' ) {
@@ -10,7 +10,6 @@ else {
 	include('./include/auth/auth.php');
 }
 */
-
 
 
 ?>

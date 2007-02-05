@@ -669,7 +669,6 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 
 <html>
 <head>
-<head>
 <?php
 
 include('./include/include_main.php');
