@@ -303,8 +303,7 @@ $.tableSorter.parsers.englishNumber = {
 		return s.match(/^\s*[£$]?\s*\d{1,3}(\,\d{1,3})+(\.\d{2})?\s*$/);
 	},
 	format: function(s) {
-		//return parseFloat(s);
-		return parseFloat(s).replace(/[^0-9.]/g,''));
+		return parseFloat(s.replace(/[^0-9.]/g,''));
 	},
 	sorter: $.tableSorter.sorters.numeric
 };
