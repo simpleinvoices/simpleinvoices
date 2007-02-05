@@ -1,4 +1,7 @@
 <?php
+
+include('../include/include_auth.php');
+
 // $Header: /cvsroot/html2ps/html2ps.php,v 1.153 2006/04/12 15:17:21 Konstantin Exp $
 
 // Works only with safe mode off; in safe mode it generates a warning message
