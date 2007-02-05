@@ -1,5 +1,5 @@
 /*
- *
+r	*
  * Copyright (c) 2006 Christian Bach (http://motherrussia.polyester.se)
  * Licensed under the MIT License:
  * http://www.opensource.org/licenses/mit-license.php
@@ -296,6 +296,28 @@ $.tableSorter.sorters.generic = function(a,b) {
 $.tableSorter.sorters.numeric = function(a,b) { 
 	return a[1]-b[1];
 };
+
+$.tableSorter.parsers.englishNumber = {
+	id: 'englishNumber',
+	is: function(s) {
+		return s.match(/^\s*[£$]?\s*\d{1,3}(\,\d{1,3})+(\.\d{2})?\s*$/);
+	},
+	format: function(s) {
+		//return parseFloat(s);
+		return parseFloat(s).replace(/[^0-9.]/g,''));
+	},
+	sorter: $.tableSorter.sorters.numeric
+};
+$.tableSorter.parsers.englishNumberShort = {
+	id: 'englishNumberShort',
+	is: function(s) {
+		return s.match(/^\d+[.+]/);
+	},
+	format: function(s) {
+		return parseFloat(s.replace(/[^0-9.]/g,''));
+	},
+	sorter: $.tableSorter.sorters.numeric
+};
 $.tableSorter.parsers.generic = {
 	id: 'generic',
 	is: function(s) {
@@ -305,17 +327,6 @@ $.tableSorter.parsers.generic = {
 		return s.toLowerCase();
 	},
 	sorter: $.tableSorter.sorters.generic
-};
-
-$.tableSorter.parsers.english = {
-        id: 'english',
-        is: function(s) {
-                return s.match(/[.,]+/);
-        },
-	format: function(s) {
-		return parseFloat(s.replace(/[^0-9.]/g,''));
-	},
-        sorter: $.tableSorter.sorters.numeric
 };
 $.tableSorter.parsers.currency = {
 	id: 'currency',
@@ -347,9 +358,6 @@ $.tableSorter.parsers.decimal = {
 	},
 	sorter: $.tableSorter.sorters.numeric
 };
-
-
-
 $.tableSorter.parsers.ipAddress = {
 	id: 'ipAddress',
 	is: function(s) {
@@ -419,10 +427,11 @@ $.tableSorter.parsers.time = {
     sorter: $.tableSorter.sorters.numeric
 }; 
 // add parsers
+$.tableSorter.analyzer.add($.tableSorter.parsers.englishNumber);
+$.tableSorter.analyzer.add($.tableSorter.parsers.englishNumberShort);
 $.tableSorter.analyzer.add($.tableSorter.parsers.currency);
 $.tableSorter.analyzer.add($.tableSorter.parsers.numeric);
 $.tableSorter.analyzer.add($.tableSorter.parsers.decimal);
-$.tableSorter.analyzer.add($.tableSorter.parsers.english);
 $.tableSorter.analyzer.add($.tableSorter.parsers.isoDate);
 $.tableSorter.analyzer.add($.tableSorter.parsers.shortDate);
 $.tableSorter.analyzer.add($.tableSorter.parsers.ipAddress);
