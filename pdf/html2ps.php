@@ -1,6 +1,29 @@
 <?php
 
 include('../include/include_auth.php');
+/*
+session_start();
+
+// is the one accessing this page logged in or not?
+if (!isset($_SESSION['db_is_logged_in']) || $_SESSION['db_is_logged_in'] !== true) {
+
+        if ($_GET['location'] == 'pdf' ) {
+                // not logged in, and coming from the pdf converter move to login page
+                header('Location: ../login.php');
+                exit;
+        }
+
+        else if ($_GET['location'] !== 'pdf' ) {
+                // not logged in, move to login page
+                header('Location: login.php');
+                exit;
+        }
+
+        else {};
+
+}
+
+*/
 
 // $Header: /cvsroot/html2ps/html2ps.php,v 1.153 2006/04/12 15:17:21 Konstantin Exp $
 

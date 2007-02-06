@@ -16,6 +16,12 @@ if (($section != null ) AND ($view != null) AND ($case != null)) {
 
 /*dont include the header is requested file is an invoice template - for print preview etc.. header is not needed */
 if (($module == "invoices" ) AND (strstr($view,"templates"))) {
+	/*Check the $view for validitity - make sure no ones hacking the url */
+	/*
+	if (!ereg("^[a-z_/]+$",$view)) {
+	        die("Invalid view requested");
+	}
+	*/
 	if (file_exists("./src/$module/$view.php")) {
 	        include("./src/$module/$view.php");
 	}
