@@ -88,7 +88,7 @@ while ($newArray = mysql_fetch_array($result)) {
 		echo "<!-- ", strtotime(date( 'Y-m-d')), ' ', strtotime($inv_dateField), " -->\n";
 		$overdue_days = (strtotime(date('Y-m-d')) - strtotime($calc_dateField)) / (60 * 60 * 24);
 		if ($overdue_days == 0) {
-			$overdue = "";
+			$overdue = "0-14";
 		}
 		elseif ($overdue_days <=14 ) {
 			$overdue = "0-14";

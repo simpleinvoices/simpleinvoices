@@ -46,7 +46,7 @@ while ($Array = mysql_fetch_array($result)) {
 	$prod_idField = $Array['prod_id'];
 	$prod_descriptionField = $Array['prod_description'];
 	$prod_enabledField = $Array['prod_enabled'];
-	$prod_unit_priceField = $Array['prod_unit_price'];
+	$prod_unit_priceField = number_format($Array['prod_unit_price'],2);
 	
 	if ($prod_enabledField == 1) {
 		$wording_for_enabled = $wording_for_enabledField;

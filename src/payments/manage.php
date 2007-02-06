@@ -59,7 +59,7 @@ $display_block_header
 while ($Array = mysql_fetch_array($result)) {
 	$ac_idField = $Array['ac_id'];
 	$ac_inv_idField = $Array['ac_inv_id'];
-	$ac_amountField = $Array['ac_amount'];
+	$ac_amountField = number_format($Array['ac_amount'],2);
 	$ac_notesField = $Array['ac_notes'];
 	$ac_payment_typeField = $Array['ac_payment_type'];
 	$ac_dateField =  date( $config['date_format'], strtotime( $Array['ac_date'] ) ); 

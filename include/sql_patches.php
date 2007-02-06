@@ -273,7 +273,7 @@ ADD b_co_footer TEXT";
 
         $sql_patch_name_36 = "Adding custom fields to the invoices table";
         $sql_patch_36 = "
-        ALTER TABLE `si_invoices` ADD `invoice_custom_field1` VARCHAR( 50 ) AFTER `inv_note` ,
+        ALTER TABLE `si_invoices` ADD `invoice_custom_field1` VARCHAR( 50 ) AFTER `inv_date` ,
                 ADD `invoice_custom_field2` VARCHAR( 50 ) AFTER `invoice_custom_field1` ,
                 ADD `invoice_custom_field3` VARCHAR( 50 ) AFTER `invoice_custom_field2` ,
                 ADD `invoice_custom_field4` VARCHAR( 50 ) AFTER `invoice_custom_field3` ;

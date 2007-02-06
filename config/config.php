@@ -22,13 +22,13 @@ $language = "english_UK";
 /*To change the theme, enter the name of the theme folder - defalut is google*/
 $theme = "google";
 
-$version = "20070202 stable";
+$version = "20070206 stable";
 
-#$config['date_format']  = 'Y-m-d'; #International format just the date
+$config['date_format']  = 'Y-m-d'; #International format just the date
 #$config['date_format']  = 'Y-m-d h:m'; #Internalional format date and time 
 #$config['date_format']  = 'm-d-Y'; #US format just date 
 #$config['date_format']  = 'm-d-Y h:m'; #US format with date and time
-$config['date_format']  = 'd-m-Y'; #UK format just date 
+#$config['date_format']  = 'd-m-Y'; #UK format just date 
 #$config['date_format']  = 'd-m-Y h:m'; #UK format with date and time
 
 #Export to excel/word/openoffice etc. config
