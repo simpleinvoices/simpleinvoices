@@ -25,11 +25,6 @@ while ($Array_master_invoice = mysql_fetch_array($result_print_master_invoice_id
 
 };
 
-/*
-		$inv_it_total_tax_amount = $inv_it_gross_totalField / $inv_it_taxField  ;
-                $inv_dateField = $Array_master_invoice['inv_date'];
-*/
-
 
 #invoice_type query
 
@@ -126,72 +121,36 @@ while ($Array_defaults = mysql_fetch_array($result_print_defaults) ) {
 
 
 #Accounts - for the invoice - start
-#invoice total calc - start
-        $print_invoice_total ="select sum(inv_it_total) as total from si_invoice_items where inv_it_invoice_id =$inv_idField";
-        $result_print_invoice_total = mysql_query($print_invoice_total, $conn) or die(mysql_error());
-
-        while ($Array = mysql_fetch_array($result_print_invoice_total)) {
-                $invoice_total_Field = $Array['total'];
-#invoice total calc - end
+#invoice total total - start
+	$invoice_total_Field = calc_invoice_total($inv_idField);
+	$invoice_total_Field_format = number_format($invoice_total_Field,2);
+#invoice total total - end
 
 #amount paid calc - start
-        $x1 = "select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) as amount from si_account_payments where ac_inv_id = $inv_idField";
-        $result_x1 = mysql_query($x1, $conn) or die(mysql_error());
-        while ($result_x1Array = mysql_fetch_array($result_x1)) {
-                $invoice_paid_Field = $result_x1Array['amount'];
+	$invoice_paid_Field = calc_invoice_paid($inv_idField);
+	$invoice_paid_Field_format = number_format($invoice_paid_Field,2);
 #amount paid calc - end
 
 #amount owing calc - start
-        $invoice_owing_Field = number_format($invoice_total_Field - $invoice_paid_Field, 2);
+	$invoice_owing_Field = number_format($invoice_total_Field - $invoice_paid_Field,2);
 #amount owing calc - end
-}
-}
-#Accounts - for the invoice - end
+#Acounts - for invoce - end
 
 
 #Accounts - for the customer - start
 #invoice total calc - start
-        $print_invoice_total_customer ="
-		SELECT
-			IF ( isnull( sum(inv_it_total)) ,  '0', sum(inv_it_total)) as total 
-		FROM
-			si_invoice_items, si_invoices 
-		WHERE  
-			si_invoices.inv_customer_id  = $c_idField  
-		AND 
-			si_invoices.inv_id = si_invoice_items.inv_it_invoice_id
-		";
-        $result_print_invoice_total_customer = mysql_query($print_invoice_total_customer, $conn) or die(mysql_error());
-
-        while ($Array_customer = mysql_fetch_array($result_print_invoice_total_customer)) {
-                $invoice_total_Field_customer = $Array_customer['total'];
+	$invoice_total_Field_customer = calc_customer_total($c_idField);
+	$invoice_total_Field_customer_format = number_format($invoice_total_Field_customer,2);
 #invoice total calc - end
 
 #amount paid calc - start
-        $x2 = "
-		SELECT  
-			IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount 
-		FROM 
-			si_account_payments, si_invoices 
-		WHERE 
-			si_account_payments.ac_inv_id = si_invoices.inv_id 
-		AND 
-			si_invoices.inv_customer_id = $c_idField";  	
-
-/* old query 	
-select  IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount from si_account_payments, si_invoices, si_invoice_items where si_account_payments.ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = $c_idField  and si_invoices.inv_id = si_invoice_items.inv_it_invoice_id";
-*/
-
-        $result_x2 = mysql_query($x2, $conn) or die(mysql_error());
-        while ($result_x2Array = mysql_fetch_array($result_x2)) {
-                $invoice_paid_Field_customer = $result_x2Array['amount'];
+   	$invoice_paid_Field_customer = calc_customer_paid($c_idField);
+        $invoice_paid_Field_customer_format = number_format($invoice_paid_Field_customer,2);
 #amount paid calc - end
 
 #amount owing calc - start
         $invoice_owing_Field_customer = number_format($invoice_total_Field_customer - $invoice_paid_Field_customer,2);
 #amount owing calc - end
-}
-}
 
         #Invoice Age - number of days - start
         if ($invoice_owing_Field > 0 ) {
@@ -232,13 +191,13 @@ $display_block_top =  "
 		<td class=account colspan=8>$LANG_account_info</td><td width=5%></td><td class=\"columnleft\" width=5%></td><td class=\"account\" colspan=6><a href='index.php?module=customers&view=details&submit=$c_idField&action=view'>$LANG_customer_account</a></td>
 	</tr>
 	<tr>
-		<td class=account>$LANG_total:</td><td class=account>$pref_currency_signField$invoice_total_Field</td>              
-		<td class=account><a href='index.php?module=payments&view=manage&inv_id=$inv_idField'>$LANG_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field</td>
+		<td class=account>$LANG_total:</td><td class=account>$pref_currency_signField$invoice_total_Field_format</td>
+		<td class=account><a href='index.php?module=payments&view=manage&inv_id=$inv_idField'>$LANG_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field_format</td>
 		<td class=account>$LANG_owing:</td><td class=account><u>$pref_currency_signField$invoice_owing_Field</u></td>
 		<td class=account>$LANG_age<a href='documentation/info_pages/age.html?keepThis=true&TB_iframe=true&height=300&width=500' title='Info :: Invoice age' class='thickbox'><img src=\"./images/common/help-small.png\"></img></a>: </td><td class=account nowrap >$invoice_age</td>
 		<td></td><td class=\"columnleft\"></td>
-		<td class=\"account\">$LANG_total:</td><td class=account>$pref_currency_signField$invoice_total_Field_customer</td>
-		<td class=account><a href='index.php?module=payments&view=manage&c_id=$c_idField'>$LANG_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field_customer</td>
+		<td class=\"account\">$LANG_total:</td><td class=account>$pref_currency_signField$invoice_total_Field_customer_format</td>
+		<td class=account><a href='index.php?module=payments&view=manage&c_id=$c_idField'>$LANG_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field_customer_format</td>
 		<td class=account>$LANG_owing:</td><td class=account><u>$pref_currency_signField$invoice_owing_Field_customer</u></td>
 	</tr>
 	</table>
@@ -362,10 +321,10 @@ if (  $_GET['invoice_style'] === 'Total' ) {
                 $inv_it_product_idField = $Array_master_invoice_items['inv_it_product_id'];
                 $inv_it_unit_priceField = $Array_master_invoice_items['inv_it_unit_price'];
                 $inv_it_taxField = $Array_master_invoice_items['inv_it_tax'];
-                $inv_it_tax_amountField = $Array_master_invoice_items['inv_it_tax_amount'];
-                $inv_it_gross_totalField = $Array_master_invoice_items['inv_it_gross_total'];
+                $inv_it_tax_amountField = number_format($Array_master_invoice_items['inv_it_tax_amount'],2);
+                $inv_it_gross_totalField = number_format($Array_master_invoice_items['inv_it_gross_total'],2);
                 $inv_it_descriptionField = $Array_master_invoice_items['inv_it_description'];
-                $inv_it_totalField = $Array_master_invoice_items['inv_it_total'];
+                $inv_it_totalField = number_format($Array_master_invoice_items['inv_it_total'],2);
 
 	};
 
@@ -382,14 +341,8 @@ if (  $_GET['invoice_style'] === 'Total' ) {
 	};
 
 	#invoice_total total query
-	$print_invoice_total_total ="select sum(inv_it_total) as total from si_invoice_items where inv_it_invoice_id =$master_invoice_id"; 
-	$result_print_invoice_total_total = mysql_query($print_invoice_total_total, $conn) or die(mysql_error());
-
-
-	while ($Array = mysql_fetch_array($result_print_invoice_total_total)) {
-                $invoice_total_totalField = $Array['total'];
-
-	};
+	$invoice_total_totalField = calc_invoice_total($master_invoice_id);
+	$invoice_total_totalField_formatted = number_format($invoice_total_totalField,2);
 	#all the details have bee got now print them to screen
 
 	$display_block_details =  "
@@ -477,11 +430,15 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
                 $inv_it_quantityField = $Array_master_invoice_items['inv_it_quantity'];
                 $inv_it_product_idField = $Array_master_invoice_items['inv_it_product_id'];
                 $inv_it_unit_priceField = $Array_master_invoice_items['inv_it_unit_price'];
+                $inv_it_unit_priceField_formatted = number_format($Array_master_invoice_items['inv_it_unit_price'],2);
                 $inv_it_taxField = $Array_master_invoice_items['inv_it_tax'];
                 $inv_it_tax_amountField = $Array_master_invoice_items['inv_it_tax_amount'];
+                $inv_it_tax_amountField_formatted = number_format($Array_master_invoice_items['inv_it_tax_amount'],2);
                 $inv_it_gross_totalField = $Array_master_invoice_items['inv_it_gross_total'];
+                $inv_it_gross_totalField_formatted = number_format($Array_master_invoice_items['inv_it_gross_total'],2);
                 $inv_it_descriptionField = $Array_master_invoice_items['inv_it_description'];
                 $inv_it_totalField = $Array_master_invoice_items['inv_it_total'];
+                $inv_it_totalField_formatted = number_format($Array_master_invoice_items['inv_it_total'],2);
 	/*
 	};
 	*/
@@ -500,38 +457,14 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 	        $prod_custom_field3Field = $Array['prod_custom_field3'];
        		$prod_custom_field4Field = $Array['prod_custom_field4'];
 
-	/*
-	};
-	*/
+	$invoice_total_totalField = calc_invoice_total($master_invoice_id);
+	$invoice_total_totalField_formatted = number_format($invoice_total_totalField,2);
 
-	#invoice_total total query
-	$print_invoice_total_total ="select sum(inv_it_total) as total from si_invoice_items where inv_it_invoice_id =$master_invoice_id"; 
-	$result_print_invoice_total_total = mysql_query($print_invoice_total_total, $conn) or die(mysql_error());
-
-
-	while ($Array = mysql_fetch_array($result_print_invoice_total_total)) {
-                $invoice_total_totalField = $Array['total'];
-
-	#invoice total tax
-	$print_invoice_total_tax ="select sum(inv_it_tax_amount) as total_tax from si_invoice_items where inv_it_invoice_id =$master_invoice_id"; 
-	$result_print_invoice_total_tax = mysql_query($print_invoice_total_tax, $conn) or die(mysql_error());
-
-	while ($Array_tax = mysql_fetch_array($result_print_invoice_total_tax)) {
-                $invoice_total_taxField = $Array_tax['total_tax'];
-
-
-	/*
-	};
-	*/	
-
+	$invoice_total_taxField = calc_invoice_tax($master_invoice_id);
+	$invoice_total_taxField_formatted = number_format($invoice_total_taxField,2);
 
 	#calculation for each line item
 	$gross_total_itemised = $prod_unit_priceField * $inv_it_quantityField ;
-	/*
-	$tax_per_item =  $prod_unit_priceField / $inv_it_taxField;
-	$total_tax_per_line = $tax_per_item  * $inv_it_quantityField ;
-	$total_per_line = $gross_total_itemised + $total_tax_per_line ;
-	*/
 
 	#calculation for the Invoice Total
 
@@ -542,7 +475,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 
 		$display_block_details .=  "
 	        <tr>
-	                <td>$inv_it_quantityField</td><td>$prod_descriptionField</td><td>$pref_currency_signField$inv_it_unit_priceField</td><td>$pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td>$pref_currency_signField$inv_it_totalField</td>
+	                <td>$inv_it_quantityField</td><td>$prod_descriptionField</td><td>$pref_currency_signField$inv_it_unit_priceField_formatted</td><td>$pref_currency_signField$inv_it_gross_totalField_formatted</td><td>$pref_currency_signField$inv_it_tax_amountField_formatted</td><td>$pref_currency_signField$inv_it_totalField_formatted</td>
 	        </tr>
                 <tr  class='itemised' >       
                         <td></td>
@@ -574,7 +507,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 
 	        $display_block_details .=  "
         	<tr>
-	                <td>$inv_it_quantityField</td><td>$prod_descriptionField</td><td class='show-consulting'>$stripped_item_description</td><td class='consulting'></td><td>$pref_currency_signField$inv_it_unit_priceField</td><td>$pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td align=right>$pref_currency_signField$inv_it_totalField</td>
+	                <td>$inv_it_quantityField</td><td>$prod_descriptionField</td><td class='show-consulting'>$stripped_item_description</td><td class='consulting'></td><td>$pref_currency_signField$inv_it_unit_priceField_formatted</td><td>$pref_currency_signField$inv_it_gross_totalField_formatted</td><td>$pref_currency_signField$inv_it_tax_amountField_formatted</td><td align=right>$pref_currency_signField$inv_it_totalField_formatted</td>
 		</tr>
 		<tr  class='consulting' >	
                         <td></td>
@@ -602,8 +535,6 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 
 
 
-	};
-	};
 	};
 	};
 
@@ -645,23 +576,17 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 	#END - if itemised style show the invoice note field
 
 	$display_block_details .=  "
-	<!--
-        <tr>
-                <td colspan=3 align=left>$LANG_totals</td><td>$pref_currency_signField$invoice_total_taxField</td><td><u>$pref_currency_signField$invoice_total_taxField</u></td><td><u>$pref_currency_signField$invoice_total_totalField</u></td>
-
-        </tr>
-	-->
 	<tr>
 		<td colspan=6><br></td>
 	</tr>	
 
         <tr>
-                <td colspan=3></td><td align=left colspan=2>$LANG_total $LANG_tax $LANG_included</td><td colspan=2 align=right>$pref_currency_signField$invoice_total_taxField</td>
+                <td colspan=3></td><td align=left colspan=2>$LANG_total $LANG_tax $LANG_included</td><td colspan=2 align=right>$pref_currency_signField$invoice_total_taxField_formatted</td>
         </tr>
 	<tr><td><br></td>
 	</tr>
         <tr>
-                <td colspan=3></td><td align=left colspan=2><b>$pref_inv_wordingField $LANG_amount</b></td><td colspan=2 align=right><u>$pref_currency_signField$invoice_total_totalField</u></td>
+                <td colspan=3></td><td align=left colspan=2><b>$pref_inv_wordingField $LANG_amount</b></td><td colspan=2 align=right><u>$pref_currency_signField$invoice_total_totalField_formatted</u></td>
         </tr>
 
 

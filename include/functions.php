@@ -204,5 +204,130 @@ function inv_itemised_cf($label,$field) {
         }
 }
 
+function calc_invoice_total($inv_idField) {
+
+	include('./config/config.php');
+	ob_start();
+	include("./lang/$language.inc.php");
+	ob_end_clean();
+
+	$conn = mysql_connect( $db_host, $db_user, $db_password );
+	mysql_select_db( $db_name, $conn );
+
+
+#invoice total total - start
+	$print_invoice_total ="select sum(inv_it_total) as total from si_invoice_items where inv_it_invoice_id =$inv_idField";
+	$result_print_invoice_total = mysql_query($print_invoice_total, $conn) or die(mysql_error());
+
+	while ($Array = mysql_fetch_array($result_print_invoice_total)) {
+                $invoice_total_Field = $Array['total'];
+#invoice total total - end
+	
+	}
+	return $invoice_total_Field;
+}
+
+function calc_invoice_paid($inv_idField) {
+
+	include('./config/config.php');
+	ob_start();
+	include("./lang/$language.inc.php");
+	ob_end_clean();
+
+	$conn = mysql_connect( $db_host, $db_user, $db_password );
+	mysql_select_db( $db_name, $conn );
+
+#amount paid calc - start
+	$x1 = "select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) as amount from si_account_payments where ac_inv_id = $inv_idField";
+	$result_x1 = mysql_query($x1, $conn) or die(mysql_error());
+	while ($result_x1Array = mysql_fetch_array($result_x1)) {
+		$invoice_paid_Field = $result_x1Array['amount'];
+		$invoice_paid_Field_format = number_format($result_x1Array['amount'],2);
+#amount paid calc - end
+	return $invoice_paid_Field;
+	}
+}
+
+function calc_customer_total($c_idField) {
+
+	include('./config/config.php');
+	ob_start();
+	include("./lang/$language.inc.php");
+	ob_end_clean();
+
+	$conn = mysql_connect( $db_host, $db_user, $db_password );
+	mysql_select_db( $db_name, $conn );
+
+
+#invoice total calc - start
+        $print_invoice_total_customer ="
+		SELECT
+			IF ( isnull( sum(inv_it_total)) ,  '0', sum(inv_it_total)) as total 
+		FROM
+			si_invoice_items, si_invoices 
+		WHERE  
+			si_invoices.inv_customer_id  = $c_idField  
+		AND 
+			si_invoices.inv_id = si_invoice_items.inv_it_invoice_id
+		";
+        $result_print_invoice_total_customer = mysql_query($print_invoice_total_customer, $conn) or die(mysql_error());
+
+        while ($Array_customer = mysql_fetch_array($result_print_invoice_total_customer)) {
+                $invoice_total_Field_customer = $Array_customer['total'];
+#invoice total calc - end
+	}
+	return $invoice_total_Field_customer;
+}
+
+function calc_customer_paid($c_idField) {
+
+	include('./config/config.php');
+	ob_start();
+	include("./lang/$language.inc.php");
+	ob_end_clean();
+
+	$conn = mysql_connect( $db_host, $db_user, $db_password );
+	mysql_select_db( $db_name, $conn );
+
+
+#amount paid calc - start
+        $x2 = "
+		SELECT  
+			IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount 
+		FROM 
+			si_account_payments, si_invoices 
+		WHERE 
+			si_account_payments.ac_inv_id = si_invoices.inv_id 
+		AND 
+			si_invoices.inv_customer_id = $c_idField";  	
+
+        $result_x2 = mysql_query($x2, $conn) or die(mysql_error());
+        while ($result_x2Array = mysql_fetch_array($result_x2)) {
+                $invoice_paid_Field_customer = $result_x2Array['amount'];
+	}
+	return $invoice_paid_Field_customer;
+}
+
+
+
+function calc_invoice_tax($master_invoice_id) {
+
+	include('./config/config.php');
+	ob_start();
+	include("./lang/$language.inc.php");
+	ob_end_clean();
+
+	$conn = mysql_connect( $db_host, $db_user, $db_password );
+	mysql_select_db( $db_name, $conn );
+
+	#invoice total tax
+	$print_invoice_total_tax ="select sum(inv_it_tax_amount) as total_tax from si_invoice_items where inv_it_invoice_id =$master_invoice_id"; 
+	$result_print_invoice_total_tax = mysql_query($print_invoice_total_tax, $conn) or die(mysql_error());
+
+	while ($Array_tax = mysql_fetch_array($result_print_invoice_total_tax)) {
+                $invoice_total_taxField = $Array_tax['total_tax'];
+	}
+	return $invoice_total_taxField;
+}
 
 ?>

@@ -144,26 +144,19 @@ while ($recs = mysql_fetch_array($result)) {
 
 #Accounts - for the invoice - start
 #invoice total calc - start
-
-$print_invoice_total ="select sum(inv_it_total) as total from si_invoice_items where inv_it_invoice_id =$inv_idField";
-$result_print_invoice_total = mysql_query($print_invoice_total, $conn) or die(mysql_error());
-
-while ($Array = mysql_fetch_array($result_print_invoice_total)) {
-	$invoice_total_Field = $Array['total'];
+	$invoice_total_Field = calc_invoice_total($inv_idField);
+	$invoice_total_Field_formatted = number_format($invoice_total_Field,2);
 #invoice total calc - end
 
 #amount paid calc - start
-	$x1 = "select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) as amount from si_account_payments where ac_inv_id = $inv_idField";
-	$result_x1 = mysql_query($x1, $conn) or die(mysql_error());
-	while ($result_x1Array = mysql_fetch_array($result_x1)) {
-		$invoice_paid_Field = $result_x1Array['amount'];
+		$invoice_paid_Field = calc_invoice_paid($inv_idField);
+		$invoice_paid_Field_formatted = number_format($invoice_paid_Field,2);
 #amount paid calc - end
 
 #amount owing calc - start
 		$invoice_owing_Field = $invoice_total_Field - $invoice_paid_Field;
+		$invoice_owing_Field_formatted = number_format($invoice_total_Field - $invoice_paid_Field,2);
 #amount owing calc - end
-	}
-}
 #Accounts - for the invoice - end
 
 # Deal with op and add some basic sanity checking
@@ -177,19 +170,19 @@ $display_block = <<<EOD
 <tr>
 	<td class="details_screen">{$LANG_invoice_id}</td>
 	<td><input type="hidden" name="ac_inv_id" value="{$inv_idField}" />{$inv_idField}</td>
-	<td class="details_screen">{$LANG_total}</td><td>{$invoice_total_Field}</td>
+	<td class="details_screen">{$LANG_total}</td><td>{$invoice_total_Field_formatted}</td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG_biller}</td>
 	<td>{$b_nameField}</td>
 	<td class="details_screen">{$LANG_paid}</td>
-	<td>{$invoice_paid_Field}</td>
+	<td>{$invoice_paid_Field_formatted}</td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG_customer}</td>
 	<td>{$c_nameField}</td>
 	<td class="details_screen">{$LANG_owing}</td>
-	<td><u>{$invoice_owing_Field}</u></td>
+	<td><u>{$invoice_owing_Field_formatted}</u></td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG_amount}</td>
