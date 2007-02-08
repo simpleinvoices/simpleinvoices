@@ -30,16 +30,46 @@ include('./src/invoices/manage.inc.php');
 ?>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="text/javascript" src="include/doFilter.js"></script>
+
+
 
 <script type="text/javascript" src="include/jquery.js"></script>
 <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
+
+<!--
+<script type="text/javascript" src="include/doFilter.js"></script>
 <script type="text/javascript" src="include/jquery.tablesorter.js"></script>
 <script type="text/javascript" src="include/jquery.tablesorter.conf.js"></script>
+-->
 
+<? 
+require "lgplus/php/chklang.php";
+require "lgplus/php/settings.php";
+?>
+
+<script src="lgplus/js/rico.js" type="text/javascript"></script>
+<script type='text/javascript'>
+Rico.loadModule('LiveGrid');
+Rico.loadModule('LiveGridMenu');
+
+<?
+setStyle();
+setLang();
+?>
+
+Rico.onLoad( function() {
+  var opts = {  
+    <? GridSettingsScript(); ?>,
+    columnSpecs   : ['specQty']
+  };
+  var menuopts = <? GridSettingsMenu(); ?>;
+  new Rico.LiveGrid ('ex1', new Rico.GridMenu(menuopts), new Rico.Buffer.Base($('ex1').tBodies[0]), opts);
+});
+</script>
 </head>
 
 <body>
+
 
 <?php echo $display_block; ?>
 
