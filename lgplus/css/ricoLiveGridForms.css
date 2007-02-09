@@ -1,0 +1,57 @@
+/* ricoLiveGridForms */
+
+span.ricoSaveMsg {
+  background-color:yellow;
+}
+
+span.ricoSessionTimer {
+  background-color:black;
+  color:white;
+}
+
+div.ricoLG_editDiv, div.ricoLG_editResponseDiv {
+  color:#000; background:#E8ECF3;
+  overflow:auto;
+  padding:8px;
+  border: 1px solid navy;
+  position:absolute;
+  font-size: 10pt;
+  z-index:300;
+  top:0px;
+  left:0px;
+}
+
+form .ricoEditLabel, form .ricoEditLabelWithHelp {
+  font-weight: bold;
+  text-align: left;
+  padding-right: 1em;
+}
+
+form .ricoEditLabelWithHelp {
+  color: navy;
+}
+
+form {
+  margin:0px;
+}
+
+.tabHeader {
+  padding-left: 8px;
+  cursor: pointer;
+}
+
+div.ricoLG_editDiv .tabContent, div.ricoLG_editDiv .noTabContent {
+  color:#000; background:#CFD4E6;
+  overflow: hidden;
+  padding: 4px;
+  white-space:nowrap;
+}
+
+div.ricoLG_editDiv .noTabContent {
+  float:left;  /* required by IE7 */
+}
+
+span.ricoLookup {
+  display:none;
+}
+

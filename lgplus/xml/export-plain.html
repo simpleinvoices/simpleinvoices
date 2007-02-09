@@ -1,0 +1,28 @@
+<html>
+<head>
+<title>Export</title>
+<SCRIPT TYPE="text/javascript">
+function getdata() {
+  if (!window.opener || window.opener.closed) {
+    alert('Error! Parent window is closed');
+    return;
+  }
+  var divID=window.location.search;
+  if (divID.length<2) {
+    alert('Error! Invalid id');
+    return;
+  }
+  divID=divID.substring(1);
+  var oDiv=window.opener.document.getElementById(divID);
+  if (!oDiv) {
+    alert('Error! Can not find \"'+divID+'\"');
+    return;
+  }
+  document.body.innerHTML=oDiv.innerHTML;
+}
+window.onload=getdata;
+</SCRIPT>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,395 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="de-ch">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Free PHP Yahoo Weather Class</title>
+</head>
+
+<body bgcolor="#F4F4F4">
+
+<div style="border: 4px solid #CC3300; background-color: #808080">
+  <p align="center"><b><font face="Arial" size="7" color="#FFFFFF">Free PHP 
+  Yahoo Weather Class!</font><u><font face="Arial" size="5"><br>
+&nbsp;</font></u></b></div>
+<p><b><font color="#CC3300" face="Arial">1) WHAT IT IS?!</font></b></p>
+<div style="border: 5px solid #CC3300; padding-left: 4; padding-right: 4; padding-top: 1; padding-bottom: 1; background-color: #808080">
+  <font size="2" face="Arial"><b><font color="#FFFFFF">This class delivers you 
+  the weather data from </font><a href="http://weather.yahoo.com">
+  <font color="#FFFFFF">http://weather.yahoo.com</font></a><font color="#FFFFFF">! 
+  It uses the free RSS stream from yahoo. The class is very easy to use. Also an 
+  automatically caching is integrated. So the rss has not to be loaded every hit 
+  to the page! You can define the cache lifetime by your self. Enjoy it!!!</font></b></font></div>
+<p><font face="Arial"><font color="#CC3300"><b>2</b></font><b><font color="#CC3300">) 
+DEMO</font></b></font></p>
+<div style="border: 4px solid #CC3300">
+  <p align="center"><b><font face="Arial" size="2">The demo is available by 
+  clicking on the following link! This test script shows you all attributes, 
+  that the class delivers!</font></b></p>
+  <p align="center"><b><font face="Arial" color="#CC3300">
+  <a target="_blank" href="http://www.voegeli.li/development/class.yahoo.weather/weather.test.php">
+  <font color="#CC3300">
+  http://www.voegeli.li/development/class.yahoo.weather/weather.test.php</font></a> 
+  (new window)<br>
+&nbsp;</font></b></div>
+<p><font color="#CC3300" face="Arial"><b>3) DOWNLOAD</b></font></p>
+<div style="border: 4px solid #CC3300">
+  <p align="center"><b><font face="Arial" size="2">Download the file from one of 
+  the following locations:</font></b></p>
+  <p align="center"><b><font face="Arial">
+  <a target="_blank" href="http://www.voegeli.li/development/class.yahoo.weather/class.yahoo.weather.rar">
+  <font color="#CC3300">
+  http://www.voegeli.li/development/class.yahoo.weather/class.yahoo.weather.rar</font></a></font></b><br>
+&nbsp;</div>
+<p><font color="#CC3300" face="Arial"><b>4) USAGE EXAMPLE (VERY EASY)</b></font></p>
+<div style="border: 4px solid #CC3300">
+  <font face="Arial" size="2"><b>Take a look at the following using example! 
+  This is taken from the test script, which is included in the download archive. 
+  If you want t know more about attributes and methods, read the following 
+  points.<br>
+&nbsp;</b></font><div style="background-color: #F4F4F4">
+    <b><font face="Courier New" size="2"><br>
+    include(&quot;class.xml.parser.php&quot;);<br>
+    include(&quot;class.weather.php&quot;);<br>
+    <br>
+    $weather_chile = new weather(&quot;CIXX0020&quot;, 3600, &quot;C&quot;); // LocationCode, 
+    seconds cachelifetime, TempUnit (F or C)<br>
+    <br>
+    $weather_chile-&gt;parsecached(); <br>
+    <br>
+&nbsp;</font></b></div>
+</div>
+<p><font color="#CC3300" face="Arial"><b>5) METHODS</b></font></p>
+<p><b><font face="Arial" size="2">The following methods are provided by the 
+class.</font></b></p>
+<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber1">
+  <tr>
+    <td width="50%" bgcolor="#808080"><b>
+    <font face="Arial" size="2" color="#FFFFFF">&nbsp;Method</font></b></td>
+    <td width="50%" bgcolor="#808080"><b>
+    <font face="Arial" size="2" color="#FFFFFF">Description</font></b></td>
+  </tr>
+  <tr>
+    <td width="50%"><b><font face="Arial" size="2">Constructor Method:</font></b><p>
+    <b><font face="Arial" size="2">object = new weather(</font><font face="Courier New" size="2">&quot;CIXX0020&quot;, 
+    3600, &quot;C&quot;</font><font face="Arial" size="2">);</font></b></p>
+    <p>&nbsp;</td>
+    <td width="50%"><b><font face="Arial" size="2"><br>
+    This is the constructor method, automatically called, when you make the 
+    instance. There are 3 Parameters you have to pass:</font></b><ul>
+      <li><font face="Courier New" size="2"><b>&quot;CIXX0020&quot; = Location Code from 
+      weather.Yahoo.com</b></font></li>
+      <li><b><font face="Courier New" size="2">(Go to weather.yahoo.com, search 
+      in the browser for location, click on location link and look in the 
+      browsers URL field for the Code Param (at the end!)</font></b></li>
+      <li><b><font face="Courier New" size="2">3600 = 3600 seconds (1 hour) 
+      lifetime of the cache object. By using method parsecached() this defines, 
+      when the RSS has to be automatically reparsed from RSS (If not needed pass 
+      &quot;0&quot;)</font></b></li>
+      <li><b><font face="Courier New" size="2">&quot;C&quot; = Celsius. This is the unir, 
+      in which the temperature should be taken (&quot;F&quot; = Fahrenheit / &quot;C&quot; = 
+      Celsius)</font></b></li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%"><b><font face="Arial" size="2">&nbsp;parse()</font></b></td>
+    <td width="50%"><b><font face="Arial" size="2"><br>
+    This method parses the weather data from RSS every call!!! That means every 
+    time, when you call this method, the weather data are refreshed from the RSS 
+    from weather.yahoo.com. This may be very slow (needs every hit a connection 
+    to the Yahoo server!). <br>
+    <font color="#CC3300"><u>NOT</u> </font><font color="#CC3300">RECOMMENDED</font><br>
+&nbsp;</font></b></td>
+  </tr>
+  <tr>
+    <td width="50%"><b><font face="Arial" size="2">&nbsp;parsecached()</font></b></td>
+    <td width="50%"><b><font face="Arial" size="2"><br>
+    This method parses the RSS only if needed! That means it looks on your local 
+    server, if there's a valid object cache file (named like the location code). 
+    If there is no cached version, it automatically parses the object from RSS 
+    weather.yahoo.com, writes the object with a specified lifetime down to your 
+    local server! Very enhanced! Very usefull and VERY FAST!! <br>
+    <font color="#CC3300">RECOMMENDED!!!<br>
+&nbsp;</font></font></b></td>
+  </tr>
+</table>
+<p><font color="#CC3300" face="Arial"><b>6) ATTRIBUTES</b></font></p>
+<p><b><font face="Arial" size="2">Here is the complete list of the class 
+attributes with a description:</font></b></p>
+<table border="1" cellpadding="3" style="border-collapse: collapse; width: 639" bordercolor="#000000">
+  <colgroup>
+    <col width="80" style="width:60pt">
+  </colgroup>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; width: 172; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="locationtext " bgcolor="#808080">
+    <b><font color="#FFFFFF">Attribute</font></b></td>
+    <td height="17" style="height: 12.75pt; width: 463; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="locationtext " bgcolor="#808080">
+    <b><font color="#FFFFFF">Description</font></b></td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; width: 172; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="locationtext ">
+    locationtext&nbsp;</td>
+    <td height="17" style="height: 12.75pt; width: 463; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="locationtext ">
+    (unused)</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" width="172">
+    locationcode</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" width="463">
+    The location code from weather.yahoo.com</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="allurl       " width="172">
+    allurl&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="allurl       " width="463">
+    RSS URL (full)</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="title        " width="172">
+    title&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="title        " width="463">
+    Text from Yahoo (<font face="Arial" size="2"><b>Yahoo! Weather - Santiago, 
+    CI)</b></font></td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="city         " width="172">
+    city&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="city         " width="463">
+    City (Santiago)</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="sunrise      " width="172">
+    sunrise&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="sunrise      " width="463">
+    Time of sunrise</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="sunset       " width="172">
+    sunset&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="sunset       " width="463">
+    Time of sunset</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="yahoolink    " width="172">
+    yahoolink&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="yahoolink    " width="463">
+    Link to the actual forecast details on weather.yahoo.com</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="acttext      " width="172">
+    acttext&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="acttext      " width="463">
+    Actual Situation: Text</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="acttemp      " width="172">
+    acttemp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="acttemp      " width="463">
+    Actual Situation: Temperature</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="acttime      " width="172">
+    acttime&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="acttime      " width="463">
+    Actual Situation: Time of measure</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="imageurl     " width="172">
+    imageurl&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="imageurl     " width="463">
+    Actual Situation: Logo from yahoo</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" width="172">
+    actcode</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" width="463">
+    Actual Situation: Weather code (see testscript images!)</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_day    " width="172">
+    fore_day1_day&nbsp; <b>(DAY1)</b>&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_day    " width="463">
+    Forecast: Day (&quot;Wed&quot;, &quot;Thu&quot;...)</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_date    " width="172">
+    fore_day1_date&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_date    " width="463">
+    Forecast: Date</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_tlow  " width="172">
+    fore_day1_tlow&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_tlow  " width="463">
+    Forecast: Temp low (night)</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_thigh   " width="172">
+    fore_day1_thigh&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_thigh   " width="463">
+    Forecast: Temp high (day)</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_text    " width="172">
+    fore_day1_text&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_text    " width="463">
+    Forecast: Text</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_imgcode " width="172">
+    fore_day1_imgcode&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_imgcode " width="463">
+    Forecast: Weather code (see testscript images!)</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day2_day    " width="172">
+    fore_day2_day&nbsp;&nbsp;<b>(DAY2)</b>&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_day    " width="463">
+    Forecast: Day (&quot;Wed&quot;, &quot;Thu&quot;...)</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day2_date    " width="172">
+    fore_day2_date&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_date    " width="463">
+    Forecast: Date</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day2_tlow   " width="172">
+    fore_day2_tlow&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_tlow  " width="463">
+    Forecast: Temp low (night)</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day2_thigh   " width="172">
+    fore_day2_thigh&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_thigh   " width="463">
+    Forecast: Temp high (day)</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day2_text    " width="172">
+    fore_day2_text&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_text    " width="463">
+    Forecast: Text</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day2_imgcode " width="172">
+    fore_day2_imgcode&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_imgcode " width="463">
+    Forecast: Weather code (see testscript images!)</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day3_day     " width="172">
+    fore_day3_day&nbsp;&nbsp;<b>(DAY3)</b>&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_day    " width="463">
+    Forecast: Day (&quot;Wed&quot;, &quot;Thu&quot;...)</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day3_date    " width="172">
+    fore_day3_date&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_date    " width="463">
+    Forecast: Date</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day3_tlow    " width="172">
+    fore_day3_tlow&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_tlow  " width="463">
+    Forecast: Temp low (night)</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day3_thigh   " width="172">
+    fore_day3_thigh&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_thigh   " width="463">
+    Forecast: Temp high (day)</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day3_text    " width="172">
+    fore_day3_text&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_text    " width="463">
+    Forecast: Text</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day3_imgcode " width="172">
+    fore_day3_imgcode&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_imgcode " width="463">
+    Forecast: Weather code (see testscript images!)</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day4_day     " width="172">
+    fore_day4_day&nbsp;&nbsp;<b>(DAY4)</b>&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_day    " width="463">
+    Forecast: Day (&quot;Wed&quot;, &quot;Thu&quot;...)</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day4_date    " width="172">
+    fore_day4_date&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_date    " width="463">
+    Forecast: Date</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day4_tlow    " width="172">
+    fore_day4_tlow&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_tlow  " width="463">
+    Forecast: Temp low (night)</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day4_thigh  " width="172">
+    fore_day4_thigh&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_thigh   " width="463">
+    Forecast: Temp high (day)</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day4_text    " width="172">
+    fore_day4_text&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_text    " width="463">
+    Forecast: Text</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day4_imgcode " width="172">
+    fore_day4_imgcode&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_imgcode " width="463">
+    Forecast: Weather code (see testscript images!)</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day5_day    " width="172">
+    fore_day5_day&nbsp;&nbsp;<b>(DAY5)</b>&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_day    " width="463">
+    Forecast: Day (&quot;Wed&quot;, &quot;Thu&quot;...)</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day5_date   " width="172">
+    fore_day5_date&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_date    " width="463">
+    Forecast: Date</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day5_tlow   " width="172">
+    fore_day5_tlow&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_tlow  " width="463">
+    Forecast: Temp low (night)</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day5_thigh   " width="172">
+    fore_day5_thigh&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_thigh   " width="463">
+    Forecast: Temp high (day)</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day5_text    " width="172">
+    fore_day5_text&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_text    " width="463">
+    Forecast: Text</td>
+  </tr>
+  <tr height="17" style="height:12.75pt">
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day5_imgcode " width="172">
+    fore_day5_imgcode&nbsp;</td>
+    <td height="17" style="height: 12.75pt; color: windowtext; font-size: 10.0pt; font-weight: 400; font-style: normal; text-decoration: none; font-family: Arial; text-align: general; vertical-align: bottom; white-space: nowrap; border: medium none; padding-left: 1px; padding-right: 1px; padding-top: 1px" x:str="fore_day1_imgcode " width="463">
+    Forecast: Weather code (see testscript images!)</td>
+  </tr>
+</table>
+
+</body>
+
+</html>

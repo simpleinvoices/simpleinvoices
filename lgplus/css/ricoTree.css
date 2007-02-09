@@ -1,0 +1,38 @@
+/* ricoTree */
+
+div.ricoTreeContainer {
+  background-color:#cedebd;
+  padding:4px;
+  border:1px solid black;
+}
+
+div.ricoTree {
+  border:thin inset;
+  overflow:auto;
+  background-color:#FFF;
+}
+
+div.ricoTree p, div.ricoTree a {
+  margin:0px;
+  padding-left:0.3em;
+  white-space:nowrap;
+}
+
+div.ricoTree a {
+  cursor:pointer;
+  text-decoration:none;
+}
+
+div.ricoTree a:hover {
+  background-color:#EEE;
+}
+
+div.ricoTree img {
+  margin:0px;
+  padding:0px;
+  display:block;
+}
+
+div.ricoTree * {
+  font-size:8pt;
+}

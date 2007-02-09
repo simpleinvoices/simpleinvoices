@@ -15,18 +15,20 @@ if (mysql_num_rows($result) == 0) {
 
 {$page_header}
 
-<table align="center" id="ex1" class="ricoLiveGrid manage">
+<table align="center" id="ex1" class="ricoLiveGrid manage" style='width:98%;'>
 <colgroup>
-<col style='width:100px;' />
-<col  />
+<col style='width:15%;' />
+<col style='width:5%;' />
 <col style='width:10%;' />
 <col style='width:10%;' />
 <col style='width:10%;' />
+<!--
 <col style='width:10%;' />
+-->
 <col style='width:10%;' />
+<col style='width:5%;' />
+<col style='width:5%;' />
 <col style='width:10%;' />
-<col />
-<col  />
 </colgroup>
 <thead>
 <tr class="sortHeader">
@@ -35,7 +37,9 @@ if (mysql_num_rows($result) == 0) {
 <th class="selectFilter index_table">{$LANG_biller}</th>
 <th class="selectFilter index_table">{$LANG_customer}</th>
 <th class="noFilter">{$LANG_total}</th>
+<!--
 <th class="noFilter">{$LANG_paid}</th>
+-->
 <th class="noFilter">{$LANG_owing}</th>
 <th class="selectFilter index_table">{$LANG_aging}</th>
 <th class="noFilter">{$LANG_invoice_type}</th>
@@ -178,7 +182,9 @@ while ($newArray = mysql_fetch_array($result)) {
 	<td class="index_table">{$b_nameField}</td>
 	<td class="index_table">{$c_nameField}</td>
 	<td class="index_table">{$invoice_total_Field}</td>
+	<!--
 	<td class="index_table">{$invoice_paid_Field_format}</td>
+	-->
 	<td class="index_table">{$invoice_owing_Field}</td>
 	<td class="index_table">{$overdue}</td>
 	<td class="index_table">{$invoice_preference_wordingField}</td>

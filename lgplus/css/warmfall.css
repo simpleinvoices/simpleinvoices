@@ -1,0 +1,63 @@
+/* -------------------------------------------------------
+Based on warm fall table design
+Author: Mya Leigh
+Theme: A Warm, Fall Table - Easy to Read
+URL: http://www.myaleigh.com 
+ ------------------------------------------------------- */
+.ricoLG_table {
+	border-top: 1px solid #84785e;
+	border-right: 1px solid #84785e;
+}
+
+tr.ricoLG_hdg .ricoLG_cell, tr.ricoLG_hdg th, tr.ricoLG_hdg td {  /* td/th required for IE */
+	background-color: #a24116 !important;
+  color: #ffffff !important;  
+}
+
+.ricoLG_table th, .ricoLG_table td {
+	border-left: 1px solid #84785e;
+}
+
+.ricoLG_bottom div.ricoLG_cell, .ricoLG_top th, .ricoLG_top td {
+  border-bottom: 1px solid #84785e;
+}
+
+tr.ricoLG_hdg .ricoLG_cell {
+	background-color: #a24116;
+  border: 0;
+  color: #ffffff;  
+	padding: .75em;
+  font: "Verdana", Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+div.ricoLG_outerDiv a:visited, div.ricoLG_outerDiv a:link, div.ricoLG_outerDiv a:active {
+	color: #101011;
+	text-decoration: none;
+}
+
+div.ricoLG_outerDiv a:hover {
+	text-decoration: underline;
+}
+
+div.ricoLG_outerDiv tbody a:visited {
+	color:#444;
+}
+
+.ricoLG_oddRow {
+	background-color: #fffce1;
+	color: #101011;
+}
+
+.ricoLG_selection {
+	background-color: #a24116;
+	color: #ffffff;
+}
+	
+caption {
+	text-align: left;
+	font-size: 100%;
+	padding: .75em;
+	color: #000;
+}
+

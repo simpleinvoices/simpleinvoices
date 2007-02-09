@@ -60,7 +60,15 @@ setLang();
 Rico.onLoad( function() {
   var opts = {  
     <? GridSettingsScript(); ?>,
-    columnSpecs   : ['specQty']
+    columnSpecs   : [ 
+	,
+	{ type:'number', decPlaces:0, ClassName:'alignleft' },
+	,
+	,
+	{ type:'number', decPlaces:2, ClassName:'alignleft' },
+	{ type:'number', decPlaces:2, ClassName:'alignleft' }
+
+ ]
   };
   var menuopts = <? GridSettingsMenu(); ?>;
   new Rico.LiveGrid ('ex1', new Rico.GridMenu(menuopts), new Rico.Buffer.Base($('ex1').tBodies[0]), opts);

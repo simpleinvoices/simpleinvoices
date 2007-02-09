@@ -1,0 +1,29 @@
+tr.ricoLG_hdg .ricoLG_cell, tr.ricoLG_hdg th, tr.ricoLG_hdg td {  /* td/th required for IE */
+  background-color:#e0e0c0 !important;
+	vertical-align:middle;
+}
+
+tr.ricoLG_hdg div.ricoLG_cell {
+	border-top: 1px solid #F0F0E8;
+}
+
+.ricoLG_bottom div.ricoLG_cell, .ricoLG_top th, .ricoLG_top td {
+	border-bottom: 1px solid #D8d0c0;;
+}
+
+.ricoLG_table th, .ricoLG_table td {
+	border-left: 1px solid #F0F0E8;
+	border-right: 1px solid #D8d0c0;
+}
+
+div.ricoMenu, div.ricoMenu div.ricoMenuHeading, div.ricoMenu .ricoSubMenu, div.ricoMenuSafari, div.ricoMenuSafari div.ricoMenuHeading, div.ricoMenuSafari .ricoSubMenu {
+  background-color:#f0f0e0;
+	border-top: 1px solid #F0F0E8;
+	border-left: 1px solid #F0F0E8;
+	border-bottom: 1px solid #D8d0c0;;
+	border-right: 1px solid #D8d0c0;
+}
+.ricoLG_table {
+  border-style:none;
+}
+.ricoLG_selection { background-color: #e0e0c0; }

@@ -1,0 +1,95 @@
+/* ricoMenu */
+
+div.ricoMenu, div.ricoMenuSafari {
+position: absolute;
+z-index: 100;
+border:1px solid #666;
+padding:2px;
+cursor:default;
+visibility: hidden;
+}
+
+div.ricoMenu, div.ricoMenu div.ricoMenuHeading, div.ricoMenu a {
+background-color:menu;
+color: menutext;
+text-decoration: none;
+font-family:tahoma,arial,helvetica,sans-serif;
+font-size: 8pt;
+display:block;
+}
+
+div.ricoMenuSafari, div.ricoMenuSafari div.ricoMenuHeading, div.ricoMenuSafari a {
+background-color:#EDEDED;
+text-decoration: none;
+font-family:tahoma,arial,helvetica,sans-serif;
+font-size: 8pt;
+display:block;
+}
+
+div.ricoMenu div.ricoMenuHeading{
+padding: 1px 0px;
+font-weight:bold;
+}
+
+div.ricoMenuSafari div.ricoMenuHeading{
+padding: 1px 0px;
+color: black;
+display: block;
+font-weight:bold;
+}
+
+div.ricoMenu .enabled {
+position: relative;
+}
+
+div.ricoMenuSafari .enabled {
+color: black;
+}
+
+div.ricoMenu .enabled, div.ricoMenu .enabled-hover, div.ricoMenuSafari .enabled, div.ricoMenuSafari .enabled-hover, div.ricoMenu .disabled, div.ricoMenuSafari .disabled {
+padding-left: 1em;
+padding-top:0.1em;
+padding-bottom:0.1em;
+z-index: 101;
+}
+
+div.ricoMenu .disabled, div.ricoMenuSafari .disabled {
+color: #999;
+}
+
+div.ricoMenu hr{
+height:1px;
+margin:1px;
+border:0;
+color: menu;
+background-color: menu;
+}
+
+div.ricoMenu .enabled-hover, div.ricoMenu .ricoSubMenuOpen {
+   background-color: Highlight;
+   color:            HighlightText;
+}
+
+div.ricoMenuSafari .enabled-hover, div.ricoMenuSafari .ricoSubMenuOpen {
+   background-color: #1657B8;
+   color:            white;
+}
+
+div.ricoMenu .ricoSubMenu, div.ricoMenu .ricoSubMenuOpen, div.ricoMenuSafari .ricoSubMenu, div.ricoMenuSafari .ricoSubMenuOpen {
+padding: 1px 0px;
+display: block;
+font-weight:bold;
+z-index: 101;
+position: relative;
+}
+
+div.ricoMenu div.ricoMenuBreak, div.ricoMenuSafari div.ricoMenuBreak {
+height:1px;
+margin:3px 0 3px 0;
+padding:0;
+background-color: #AAA;
+width:100%;
+line-height:5px;
+overflow:hidden;
+}
+

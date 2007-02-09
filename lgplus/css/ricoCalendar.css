@@ -1,0 +1,112 @@
+/* ricoCalendar */
+
+div.ricoCalContainer, div.ricoTreeContainer {
+  position:absolute;
+  z-index:9999;
+  font-size:8pt;
+  left:0px;
+  top:0px;
+}
+
+table.ricoCalTab {
+  border:1px solid #666666;
+}
+
+table.ricoCalTab thead a {
+  border:1px solid #D4D0C8;
+  text-decoration: none;
+  color:black;
+}
+
+table.ricoCalTab thead img {
+  border:none;
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+}
+
+table.ricoCalTab thead a:hover {
+  border:1px solid #666666;
+  cursor:pointer;
+}
+
+table.ricoCalTab thead td {
+  background-color: #D4D0C8;
+  font-weight: bold;
+  text-align:center;
+  padding: 2px;
+}
+
+table.ricoCalTab tfoot td {
+  color:#FFF;
+  text-align:center;
+  background-color: #666666;
+  padding: 2px;
+}
+
+table.ricoCalTab tfoot span {
+  text-decoration: underline;
+  cursor:pointer;
+}
+
+table.ricoCalTab tbody {
+  background-color: white;
+}
+
+tr.ricoCalDayNames td {
+  font-weight: bold;
+  padding: 0px 2px 0px 2px;
+  text-align:right;
+}
+
+td.ricoCal0, td.ricoCal1, td.ricoCal2, td.ricoCal3, td.ricoCal4, td.ricoCal5, td.ricoCal6, td.ricoCalToday, td.ricoCalEmpty {
+  text-decoration:none;
+  text-align:right;
+  width:3em;
+}
+
+/* Monday-Friday */
+td.ricoCal1, td.ricoCal2, td.ricoCal3, td.ricoCal4, td.ricoCal5 {
+  cursor:pointer;
+  color:black;
+}
+
+/* Sunday, Saturday */
+td.ricoCal0, td.ricoCal6 {
+  cursor:pointer;
+  color:#999;
+}
+
+td.ricoCalToday {
+  cursor:pointer;
+  color:red;
+  font-weight:bold;
+}
+
+td.ricoCalWeekNum {
+  background-color: #D4D0C8;
+  color:black;
+  text-align:center;
+}
+
+.ricoCalMenu {
+  position:absolute;
+  background-color: #FEE;
+  border-bottom:1px solid #666666;
+  border-right:1px solid #666666;
+}
+
+.ricoCalMenu td {
+  border-top:1px solid #666666;
+  border-left:1px solid #666666;
+}
+
+.ricoCalMenu a {
+  display:block;
+  text-decoration:none;
+  color:black;
+  cursor:pointer;
+}
+
+.ricoCalMenu a:hover {
+  background-color: #FCC;
+}
