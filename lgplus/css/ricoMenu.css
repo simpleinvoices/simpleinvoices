@@ -2,7 +2,7 @@
 
 div.ricoMenu, div.ricoMenuSafari {
 position: absolute;
-z-index: 100;
+z-index: 1;
 border:1px solid #666;
 padding:2px;
 cursor:default;
@@ -50,7 +50,7 @@ div.ricoMenu .enabled, div.ricoMenu .enabled-hover, div.ricoMenuSafari .enabled,
 padding-left: 1em;
 padding-top:0.1em;
 padding-bottom:0.1em;
-z-index: 101;
+z-index: 1;
 }
 
 div.ricoMenu .disabled, div.ricoMenuSafari .disabled {
@@ -79,7 +79,7 @@ div.ricoMenu .ricoSubMenu, div.ricoMenu .ricoSubMenuOpen, div.ricoMenuSafari .ri
 padding: 1px 0px;
 display: block;
 font-weight:bold;
-z-index: 101;
+z-index: 1;
 position: relative;
 }
 

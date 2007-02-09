@@ -31,7 +31,16 @@ if (mysql_num_rows($result) == 0) {
 	<div>Sorting tables, please hold on...</div>
 </div>
 
-<table width="100%" align="center" class="filterable sortable" id="large">
+<table width="100%" align="center" class="ricoLiveGrid" id="rico_product" width="97%">
+<colgroup>
+<col style='width:10%;' />
+<col style='width:10%;' />
+<col style='width:40%;' />
+<col style='width:20%;' />
+<col style='width:10%;' />
+<col style='width:10%;' />
+</colgroup>
+<thead>
 <tr class="sortHeader">
 <th class="noFilter">{$LANG_actions}</th>
 <th class="index_table">{$LANG_product_id}</th>
@@ -39,7 +48,7 @@ if (mysql_num_rows($result) == 0) {
 <th class="index_table">{$LANG_product_unit_price}</th>
 <th class="noFilter index_table">{$wording_for_enabledField}</th>
 </tr>
-
+</thead>
 EOD;
 
 while ($Array = mysql_fetch_array($result)) {
@@ -75,11 +84,38 @@ EOD;
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<script type="text/javascript" src="include/doFilter.js"></script>
 
 <script type="text/javascript" src="include/jquery.js"></script>
-<script type="text/javascript" src="include/jquery.tablesorter.js"></script>
-<script type="text/javascript" src="include/jquery.tablesorter.conf.js"></script>
+
+<? 
+require "lgplus/php/chklang.php";
+require "lgplus/php/settings.php";
+?>
+
+<script src="lgplus/js/rico.js" type="text/javascript"></script>
+<script type='text/javascript'>
+Rico.loadModule('LiveGrid');
+Rico.loadModule('LiveGridMenu');
+
+<?
+setStyle();
+setLang();
+?>
+
+Rico.onLoad( function() {
+  var opts = {  
+    <? GridSettingsScript(); ?>,
+    columnSpecs   : [ 
+	,
+	{ type:'number', decPlaces:0, ClassName:'alignleft' },
+	,
+	{ type:'number', decPlaces:2, ClassName:'alignleft' }
+ ]
+  };
+  var menuopts = <? GridSettingsMenu(); ?>;
+  new Rico.LiveGrid ('rico_product', new Rico.GridMenu(menuopts), new Rico.Buffer.Base($('rico_product').tBodies[0]), opts);
+});
+</script>
 
 </head>
 

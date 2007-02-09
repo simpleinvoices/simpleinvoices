@@ -36,12 +36,6 @@ include('./src/invoices/manage.inc.php');
 <script type="text/javascript" src="include/jquery.js"></script>
 <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 
-<!--
-<script type="text/javascript" src="include/doFilter.js"></script>
-<script type="text/javascript" src="include/jquery.tablesorter.js"></script>
-<script type="text/javascript" src="include/jquery.tablesorter.conf.js"></script>
--->
-
 <? 
 require "lgplus/php/chklang.php";
 require "lgplus/php/settings.php";

@@ -31,18 +31,31 @@ if (mysql_num_rows($result) == 0) {
 <div id="browser">
 
 
-<table width="100%" align="center" id="large" class="filterable sortable">
+<table width="97%" align="center" id="rico_customer" class="ricoLiveGrid">
+<colgroup>
+<col style='width:10%;' />
+<col style='width:5%;' />
+<col style='width:25%;' />
+<col style='width:15%;' />
+<col style='width:15%;' />
+<col style='width:15%;' />
+</colgroup>
+<thead>
 <tr class="sortHeader">
 <th class="noFilter">{$LANG_actions}</th>
 <th class="index_table">{$LANG_customer_id}</th>
 <th class="index_table">{$LANG_customer_name}</th>
+<!--
 <th class="index_table">{$LANG_phone}</th>
+-->
 <th class="index_table">{$LANG_total}</th>
+<!--
 <th class="index_table">{$LANG_paid}</th>
+-->
 <th class="index_table">{$LANG_owing}</th>
 <th class="noFilter index_table">{$wording_for_enabledField}</th>
 </tr>
-
+</thead>
 EOD;
 
 	while ($Array = mysql_fetch_array($result)) {
@@ -76,7 +89,8 @@ EOD;
 #amount paid calc - end
 
 #amount owing calc - start
-	$invoice_owing_Field = number_format($invoice_total_Field - $invoice_paid_Field,2);
+	$invoice_owing_Field = $invoice_total_Field - $invoice_paid_Field;
+	$invoice_owing_Field_format = number_format($invoice_total_Field - $invoice_paid_Field,2);
 #amount owing calc - end
 
 				$display_block .= <<<EOD
@@ -87,9 +101,13 @@ EOD;
 	 href="index.php?module=customers&view=details&submit={$c_idField}&action=edit">{$LANG_edit}</a> </td>
 	<td class="index_table">{$c_idField}</td>
 	<td class="index_table">{$c_nameField}</td>
+	<!--
 	<td class="index_table">{$c_phoneField}</td>
-	<td class="index_table">{$invoice_total_Field_format}</td>
-	<td class="index_table">{$invoice_paid_Field_format}</td>
+	-->
+	<td class="index_table">{$invoice_total_Field}</td>
+	<!--
+	<td class="index_table">{$invoice_paid_Field}</td>
+	-->
 	<td class="index_table">{$invoice_owing_Field}</td>
 	<td class="index_table">{$wording_for_enabled}</td>
 	</tr>
@@ -100,10 +118,39 @@ EOD;
 }
 ?>
 
-<script type="text/javascript" src="include/doFilter.js"></script>
 <script type="text/javascript" src="include/jquery.js"></script>
-<script type="text/javascript" src="include/jquery.tablesorter.js"></script>
-<script type="text/javascript" src="include/jquery.tablesorter.conf.js"></script>
+
+
+<? 
+require "lgplus/php/chklang.php";
+require "lgplus/php/settings.php";
+?>
+
+<script src="lgplus/js/rico.js" type="text/javascript"></script>
+<script type='text/javascript'>
+Rico.loadModule('LiveGrid');
+Rico.loadModule('LiveGridMenu');
+
+<?
+setStyle();
+setLang();
+?>
+
+Rico.onLoad( function() {
+  var opts = {  
+    <? GridSettingsScript(); ?>,
+    columnSpecs   : [ 
+	,
+	{ type:'number', decPlaces:0, ClassName:'alignleft' },
+	,
+	{ type:'number', decPlaces:2, ClassName:'alignleft' },
+	{ type:'number', decPlaces:2, ClassName:'alignleft' }
+ ]
+  };
+  var menuopts = <? GridSettingsMenu(); ?>;
+  new Rico.LiveGrid ('rico_customer', new Rico.GridMenu(menuopts), new Rico.Buffer.Base($('rico_customer').tBodies[0]), opts);
+});
+</script>
 
 </head>
 <body>

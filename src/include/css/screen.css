@@ -132,7 +132,7 @@ td.details_screen {
 }
 
 /*sortable table css */
-th {
+th.sortable {
         background-color: #e9e9da;
 }
 /* table styling */

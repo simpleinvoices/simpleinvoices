@@ -99,7 +99,7 @@ div.ricoLG_cell {
 
 div.ricoLG_messageDiv {
   position:absolute;
-  z-index:200;
+  z-index:2;
   border:1px solid green;
   background-color:white;
   font-weight:bold;
