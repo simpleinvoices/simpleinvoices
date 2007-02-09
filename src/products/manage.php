@@ -31,7 +31,7 @@ if (mysql_num_rows($result) == 0) {
 	<div>Sorting tables, please hold on...</div>
 </div>
 
-<table width="100%" align="center" class="ricoLiveGrid" id="rico_product" width="97%">
+<table width="97%" align="center" class="ricoLiveGrid" id="rico_product">
 <colgroup>
 <col style='width:10%;' />
 <col style='width:10%;' />
@@ -55,7 +55,7 @@ while ($Array = mysql_fetch_array($result)) {
 	$prod_idField = $Array['prod_id'];
 	$prod_descriptionField = $Array['prod_description'];
 	$prod_enabledField = $Array['prod_enabled'];
-	$prod_unit_priceField = number_format($Array['prod_unit_price'],2);
+	$prod_unit_priceField = $Array['prod_unit_price'];
 	
 	if ($prod_enabledField == 1) {
 		$wording_for_enabled = $wording_for_enabledField;

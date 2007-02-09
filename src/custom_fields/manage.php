@@ -29,14 +29,21 @@ if (mysql_num_rows($result) == 0) {
  <hr></hr>
        <div id="browser">
 
-<table width="100%" align="center" class="filterable sortable" id="large">
+<table width="97%" align="center" class="ricoLiveGrid" id="rico_custom_fields">
+<colgroup>
+<col style='width:10%;' />
+<col style='width:10%;' />
+<col style='width:40%;' />
+<col style='width:40%;' />
+</colgroup>
+<thead>
 <tr class="sortHeader">
 <th class="noFilter">{$LANG_actions}</th>
 <th class="index_table">{$LANG_id}</th>
 <th class="index_table">{$LANG_custom_field}</th>
 <th class="index_table">{$LANG_custom_label}</th>
 </tr>
-
+</thead>
 EOD;
 
 while ($Array = mysql_fetch_array($result)) {
@@ -63,13 +70,36 @@ EOD;
 
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-<script type="text/javascript" src="include/doFilter.js"></script>
-
 <script type="text/javascript" src="include/jquery.js"></script>
-<script type="text/javascript" src="include/jquery.tablesorter.js"></script>
-<script type="text/javascript" src="include/jquery.tablesorter.conf.js"></script>
 
+
+<? 
+require "lgplus/php/chklang.php";
+require "lgplus/php/settings.php";
+?>
+
+<script src="lgplus/js/rico.js" type="text/javascript"></script>
+<script type='text/javascript'>
+Rico.loadModule('LiveGrid');
+Rico.loadModule('LiveGridMenu');
+
+<?
+setStyle();
+setLang();
+?>
+
+Rico.onLoad( function() {
+  var opts = {  
+    <? GridSettingsScript(); ?>,
+    columnSpecs   : [ 
+	,
+	{ type:'number', decPlaces:0, ClassName:'alignleft' }
+ ]
+  };
+  var menuopts = <? GridSettingsMenu(); ?>;
+  new Rico.LiveGrid ('rico_custom_fields', new Rico.GridMenu(menuopts), new Rico.Buffer.Base($('rico_custom_fields').tBodies[0]), opts);
+});
+</script>
 </head>
 <body>
 

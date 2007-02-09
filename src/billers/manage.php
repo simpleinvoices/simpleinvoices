@@ -26,16 +26,32 @@ $display_block = "
 </div>
 
 
-<table width=100% class=\"filterable sortable\" id=large align=center>
+<table width=\"97%\" class=\"ricoLiveGrid\" id=\"rico_biller\" align=\"center\">
+<colgroup>
+<col style='width:15%;' />
+<col style='width:10%;' />
+<col style='width:40%;' />
+<!--
+<col style='width:10%;' />
+<col style='width:10%;' />
+-->
+<col style='width:25%;' />
+<col style='width:10%;' />
+</colgroup>
+<thead>
 <tr class=\"sortHeader\">
 <th class=\"noFilter\">$mb_table_action</th>
 <th class=\" index_table\">$mb_table_biller_id</th>
 <th class=\"index_table\">$mb_table_biller_name</th>
+<!--
 <th class=\"index_table\">$mb_table_phone</th>
 <th class=\"index_table\">$mb_table_mobile_phone</th>
+-->
 <th class=\"index_table\">$mb_table_email</th>
 <th class=\"noFilter index_table\">$wording_for_enabledField</th>
-</tr>";
+</tr>
+</thead>
+";
 
 while ($Array = mysql_fetch_array($result)) {
 	$b_idField = $Array['b_id'];
@@ -58,16 +74,17 @@ while ($Array = mysql_fetch_array($result)) {
 	<td class='index_table'><a class='index_table' href='index.php?module=billers&view=details&submit=$b_idField&action=view'>$mb_actions_view</a> :: <a class='index_table' href='index.php?module=billers&view=details&submit=$b_idField&action=edit'>$mb_actions_edit</a></td>
 	<td class='index_table'>$b_idField</td>
 	<td class='index_table'>$b_nameField</td>
+	<!--
 	<td class='index_table'>$b_phoneField</td>
 	<td class='index_table'>$b_mobile_phoneField</td>
+	-->
 	<td class='index_table'>$b_emailField</td>
 	<td class='index_table'>$wording_for_enabled</td>
 	</tr>";
 
                 
 	
-		}
-		
+		}	
 
         $display_block .="</table>";
 }
@@ -80,13 +97,40 @@ while ($Array = mysql_fetch_array($result)) {
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="text/javascript" src="include/doFilter.js"></script>
 
 <script type="text/javascript" src="include/jquery.js"></script>
-<script type="text/javascript" src="include/jquery.tablesorter.js"></script>
-<script type="text/javascript" src="include/jquery.tablesorter.conf.js"></script>
 
 <?php include('./config/config.php'); ?>
+
+
+<? 
+require "lgplus/php/chklang.php";
+require "lgplus/php/settings.php";
+?>
+
+<script src="lgplus/js/rico.js" type="text/javascript"></script>
+<script type='text/javascript'>
+Rico.loadModule('LiveGrid');
+Rico.loadModule('LiveGridMenu');
+
+<?
+setStyle();
+setLang();
+?>
+
+Rico.onLoad( function() {
+  var opts = {  
+    <? GridSettingsScript(); ?>,
+    columnSpecs   : [ 
+	,
+	{ type:'number', decPlaces:0, ClassName:'alignleft' }
+ ]
+  };
+  var menuopts = <? GridSettingsMenu(); ?>;
+  new Rico.LiveGrid ('rico_biller', new Rico.GridMenu(menuopts), new Rico.Buffer.Base($('rico_biller').tBodies[0]), opts);
+});
+</script>
+
 </head>
 <body>
 

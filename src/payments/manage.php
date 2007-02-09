@@ -44,6 +44,21 @@ $display_block_header
 <hr></hr>
  <div id='browser'>
 <table width=100% class=\"filterable sortable\" id=large align=center>
+
+<table width=\"97%\" align=\"center\" class=\"ricoLiveGrid\" id=\"rico_payment\" >
+<colgroup>
+<col style='width:10%;' />
+<col style='width:10%;' />
+<col style='width:10%;' />
+<col style='width:10%;' />
+<col style='width:10%;' />
+<col style='width:10%;' />
+<col style='width:10%;' />
+<col style='width:10%;' />
+<col style='width:10%;' />
+</colgroup>
+<thead>
+
 <tr class=\"sortHeader\">
 <th class=\"noFilter\">$map_table_action</th>
 <th class=\"index_table\">$map_table_payment_id</th>
@@ -54,12 +69,14 @@ $display_block_header
 <th class=\"index_table\">$map_table_notes</th>
 <th class=\"selectFilter index_table\">$map_table_payment_type</th>
 <th class=\"noFilter index_table\">$map_table_date</th>
-</tr>";
+</tr>
+</thead>
+";
 
 while ($Array = mysql_fetch_array($result)) {
 	$ac_idField = $Array['ac_id'];
 	$ac_inv_idField = $Array['ac_inv_id'];
-	$ac_amountField = number_format($Array['ac_amount'],2);
+	$ac_amountField = ($Array['ac_amount']);
 	$ac_notesField = $Array['ac_notes'];
 	$ac_payment_typeField = $Array['ac_payment_type'];
 	$ac_dateField =  date( $config['date_format'], strtotime( $Array['ac_date'] ) ); 
@@ -117,12 +134,37 @@ while ($Array = mysql_fetch_array($result)) {
 
     <link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="all"/>
 
+<? 
+require "lgplus/php/chklang.php";
+require "lgplus/php/settings.php";
+?>
 
-<script type="text/javascript" src="include/doFilter.js"></script>
+<script src="lgplus/js/rico.js" type="text/javascript"></script>
+<script type='text/javascript'>
+Rico.loadModule('LiveGrid');
+Rico.loadModule('LiveGridMenu');
 
-<script type="text/javascript" src="include/jquery.tablesorter.js"></script>
-<script type="text/javascript" src="include/jquery.tablesorter.conf.js"></script>
+<?
+setStyle();
+setLang();
+?>
 
+Rico.onLoad( function() {
+  var opts = {  
+    <? GridSettingsScript(); ?>,
+    columnSpecs   : [ 
+	,
+	{ type:'number', decPlaces:0, ClassName:'alignleft' },
+	{ type:'number', decPlaces:0, ClassName:'alignleft' },
+	,
+	,
+	{ type:'number', decPlaces:2, ClassName:'alignleft' }
+ ]
+  };
+  var menuopts = <? GridSettingsMenu(); ?>;
+  new Rico.LiveGrid ('rico_payment', new Rico.GridMenu(menuopts), new Rico.Buffer.Base($('rico_payment').tBodies[0]), opts);
+});
+</script>
 
 </head>
 <?php include('./config/config.php'); ?>
