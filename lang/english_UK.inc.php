@@ -270,7 +270,7 @@ $LANG_faqs_type ="What are the different types of invoices?";//1
 $LANG_create_invoice ="Create an invoice";//1
 
 $LANG_manage_existing_invoice ="Manage your existing invoices";//1
-$LANG_manage_invoices ="Manage invoices";//1
+$LANG_manage_invoices ="Manage Invoices";//1
 
 $LANG_manage_data ="Manage your data";//1
 $LANG_insert_customer = "Add Customer";//1

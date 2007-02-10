@@ -36,9 +36,6 @@ $display_block = "<P><em>$map_no_invoices.</em></p>";
 }else{
 $display_block = "
 
-<div id=\"sorting\">
-       <div>Sorting tables, please hold on...</div>
-</div>
 
 $display_block_header
 <hr></hr>

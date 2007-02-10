@@ -28,7 +28,6 @@ if (mysql_num_rows($result) == 0) {
        <div id="browser"
 
 <div id="sorting">
-	<div>Sorting tables, please hold on...</div>
 </div>
 
 <table width="97%" align="center" class="ricoLiveGrid" id="rico_product">

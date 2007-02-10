@@ -21,10 +21,6 @@ if (mysql_num_rows($result) == 0) {
 } else {
 	$display_block = <<<EOD
 
-<div id="sorting">
-	<div>Sorting tables, please hold on...</div>
-</div>
-
 <b>{$LANG_manage_payment_types} :: <a href="index.php?module=payment_types&view=add">{$LANG_add_new_payment_type}</a></b>
 
 <hr></hr>

@@ -21,9 +21,6 @@ if (mysql_num_rows($result) == 0) {
 }else{
 	$display_block = <<<EOD
 
-<div id="sorting">
-	<div>Sorting tables, please hold on...</div>
-</div>
 
 <b>{$LANG_manage_custom_fields}</b>
  <hr></hr>

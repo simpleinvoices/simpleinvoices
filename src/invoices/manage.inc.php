@@ -9,10 +9,6 @@ if (mysql_num_rows($result) == 0) {
 }else{
 	$display_block .= <<<EOD
 
-<div id="sorting">
-	<div>Sorting tables, please hold on...</div>
-</div>
-
 {$page_header}
 
 <table align="center" id="ex1" class="ricoLiveGrid " style='width:95%;'>

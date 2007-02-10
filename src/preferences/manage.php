@@ -27,10 +27,6 @@ EOD;
 	} else {
 		$display_block = <<<EOD
 
-	<div id="sorting">
-		<div>Sorting tables, please hold on...</div>
-	</div>
-	
 	<b>{$LANG_manage_preferences} ::
 	<a href="index.php?module=preferences&view=add">{$LANG_add_new_preference}</a></b>
 

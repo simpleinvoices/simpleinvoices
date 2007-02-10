@@ -26,10 +26,6 @@ if (mysql_num_rows($result) == 0) {
 	<a href="./index.php?module=tax_rates&view=add">{$LANG_add_new_tax_rate}</a></b>
  <hr></hr>
 
-<div id="sorting">
-	<div>Sorting tables, please hold on...</div>
-</div>
-
        <div id="browser">
 
 <table width="97%" align="center" class="ricoLiveGrid" id="rico_tax_rates">

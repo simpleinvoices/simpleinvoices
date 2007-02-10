@@ -21,11 +21,6 @@ $display_block = "
        <div id='browser'>
 
 
-<div id=\"sorting\">
-       <div>Sorting tables, please hold on...</div>
-</div>
-
-
 <table width=\"97%\" class=\"ricoLiveGrid\" id=\"rico_biller\" align=\"center\">
 <colgroup>
 <col style='width:15%;' />
