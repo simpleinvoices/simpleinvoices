@@ -309,19 +309,19 @@ $display_block ="
                                                 <td width=10%>
                 		                        <a href=\"index.php?module=customers&view=manage\">
                                                         	<img src=\"images/common/customers.png\"></img>
-								Manage Customers
+								$LANG_manage_customers
 							</a>
 						</td>
                                                 <td width=10%>
                                         		<a href=\"index.php?module=billers&view=manage\">
                                                         	<img src=\"images/common/biller.png\"></img>
-								Manage Billers
+								$LANG_manage_billers
 							</a>
 						</td>
                                                 <td width=10%>
 		                                        <a href=\"index.php?module=products&view=manage\">
                                                         	<img src=\"images/common/products.png\"></img>
-								Manage Products
+								$LANG_manage_products
 							</a>
 						</td>
 					</tr>
