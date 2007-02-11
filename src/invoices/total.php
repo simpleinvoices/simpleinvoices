@@ -86,15 +86,11 @@ while ($Array_inv_preference = mysql_fetch_array($result_inv_preference)) {
 
 #DEFAULTS - END
 
-
-
-
-
-
-
-
-
-
+#get custom field labels
+$invoice_custom_field_label1 = get_custom_field_label(invoice_cf1);
+$invoice_custom_field_label2 = get_custom_field_label(invoice_cf2);
+$invoice_custom_field_label3 = get_custom_field_label(invoice_cf3);
+$invoice_custom_field_label4 = get_custom_field_label(invoice_cf4);
 
 
 
@@ -257,6 +253,39 @@ if (mysql_num_rows($result_preferences) == 0) {
 	<td><input type=text name="inv_it_gross_total" size=15></td><td input type=text name="inv_it_tax" size=15><?php echo $display_block_tax; ?></td><td input type=text name="inv_preferences" size=25><?php echo $display_block_preferences; ?></td>
 
 </tr>
+<tr>
+	<td class="details_screen">
+		<?php echo $invoice_custom_field_label1; ?><a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a>
+	</td>
+	<td>
+		<input type=text name="i_custom_field" size=25>
+	</td>
+</tr>
+<tr>
+	<td class="details_screen">
+		<?php echo $invoice_custom_field_label2; ?><a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a>
+	</td>
+	<td>
+		<input type=text name="i_custom_field2" size=25>
+	</td>
+</tr>
+<tr>
+	<td class="details_screen">
+		<?php echo $invoice_custom_field_label3; ?><a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a>
+	</td>
+	<td>
+		<input type=text name="i_custom_field3" size=25>
+	</td>
+</tr>
+<tr>
+	<td class="details_screen">
+		<?php echo $invoice_custom_field_label4; ?><a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a>
+	</td>
+	<td>
+		<input type=text name="i_custom_field4" size=25>
+	</td>
+</tr>
+
 </table>
 <!-- </div> -->
 <hr></hr>

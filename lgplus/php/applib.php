@@ -1,7 +1,7 @@
 <?
 require "dbClass2.php";
 $appName="Northwind";
-$appDB="northwind";
+$appDB="simple_invoices";
 
 function CreateDbClass() {
   $GLOBALS['oDB']= new dbClass();

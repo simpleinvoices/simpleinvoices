@@ -143,27 +143,29 @@ function line_items($line) {
         $sql_products = "SELECT * FROM si_products where prod_enabled != 0 ORDER BY prod_description";
         $result_products = mysql_query($sql_products, $conn) or die(mysql_error());
 
-if (mysql_num_rows($result_products) == 0) {
-        //no records
-        $display_block_products = "<p><em>$mp_no_invoices</em></p>";
+	if (mysql_num_rows($result_products) == 0) {
+	        //no records
+	        $display_block_products = "<p><em>$mp_no_invoices</em></p>";
 
-} else {
-        //has records, so display them
-        $display_block_products = "
-        <select name=\"select_products$line\">
-        <option value=\"\"></option>";
+	} else {
+	        //has records, so display them
+	        $display_block_products = "
+	        <select name=\"select_products$line\">
+	        <option value=\"\"></option>";
 
-        while ($recs_products = mysql_fetch_array($result_products)) {
-                $id_products = $recs_products['prod_id'];
-                $display_name_products = $recs_products['prod_description'];
+        	while ($recs_products = mysql_fetch_array($result_products)) {
+    	               $id_products = $recs_products['prod_id'];
+       		       $display_name_products = $recs_products['prod_description'];
 
-                $display_block_products .= "<option value=\"$id_products\">
-                        $display_name_products</option>";
-        }
-        }
+	                $display_block_products .= "<option value=\"$id_products\">
+        	                $display_name_products</option>";
+	        }
+	        }
                 echo "<tr>
-                <td><input type=text name='i_quantity$line' size=5></td><td input type=text name='i_description$line' size=50>$display_block_products</td></tr>
-<tr>
+                <td><input type=text name='i_quantity$line' size=5></td><td input type=text name='i_description$line' size=50>$display_block_products </td><td>
+<a href='#' class=\"show-text$line\" onClick=\"$('.text$line').show();$('.show-text$line').hide();\">$LANG_show_details Show note</a><a href='#' class=\"text\" onClick=\"$('.text$line').hide();$('.show-text$line').show();\">$LANG_hide_details Hide note</a>
+ </td></tr>
+<tr class=\"text$line\">
         <td colspan=5 ><textarea input type=text name='line_item_description$line' rows=3 cols=80 WRAP=nowrap></textarea></td>
 </tr>
 
@@ -238,6 +240,13 @@ if (mysql_num_rows($result_preferences) == 0) {
 <script type="text/javascript" src="include/jquery.dom_creator.js"></script>
 <script type="text/javascript" src="include/jquery.datePicker.js"></script>
 <script type="text/javascript" src="include/jquery.datePicker.conf.js"></script>
+
+    <script type="text/javascript">
+	$(document).ready(function() {
+	 // hides the customer and biller details as soon as the DOM is ready (a little sooner that page load)
+	  $('.hide').hide();
+  	});
+    </script>
 
 
 </head>

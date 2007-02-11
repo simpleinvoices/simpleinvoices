@@ -7,8 +7,10 @@ if (!isset ($_SESSION)) session_start();
 <title>Rico LiveGrid Plus-Example 3</title>
 
 <? 
-$sqltext="select OrderID,CustomerID,ShipName,ShipCity,ShipCountry,OrderDate,ShippedDate from nworders";
+$sqltext="SELECT b_id,b_name,b_email,(CASE WHEN b_enabled = 1 THEN 'Enabled' WHEN b_enabled = 0 THEN 'Disabled'	ELSE '??' END) as b_enabled FROM si_biller";
+
 $_SESSION['ex3']=$sqltext;
+require "applib.php";
 require "chklang.php";
 require "settings.php";
 ?>
@@ -29,7 +31,9 @@ Rico.onLoad( function() {
   var opts = {  
     frozenColumns : 1,
     canFilterDefault: false,
-    columnSpecs   : [,,,,,{type:'date'},{type:'date'}],
+// columnSpecs   : [,{type:'control',control:new Rico.TableColumn.link('ex2.php?id={0}','_blank')},,]
+// columnSpecs   : [,,,]
+
     headingRow    : 1
   };
   var menuopts = <? GridSettingsMenu(); ?>;
@@ -74,34 +78,19 @@ Frozen columns would normally be set to 2 for this grid, but feel free to try ot
 <col style='width:10%;' >
 <col style='width:20%;'>
 <col style='width:20%;' >
-<col style='width:20%' >
-<col style='width:10%'>
-<col style='width:10%'>
 </colgroup>
 <thead>
-  <tr>
-	  <th class='ricoFrozen'>ID</th>
-	  <th>ID</th>
-	  <th colspan='3'>Shipment</th>
-	  <th colspan='2'>Date</th>
-  </tr>
   <tr id='ex3_main'>
-	  <th class='ricoFrozen'>Order</th>
-	  <th>Customer</th>
-	  <th>Name</th>
-	  <th>City</th>
-	  <th>Country</th>
-	  <th>Order</th>
-	  <th>Ship</th>
+	  <th class='ricoFrozen'>b_id</th>
+	  <th>b_name</th>
+	  <th>b_email</th>
+	  <th>b_enabled</th>
   </tr>
   <tr class='dataInput'>
 	  <th class='ricoFrozen'><input type='text' onkeyup='keyfilter(this,0)' size='5'></th>
 	  <th><input type='text' onkeyup='keyfilter(this,1)' size='5'></th>
 	  <th><input type='text' onkeyup='keyfilter(this,2)'></th>
 	  <th><input type='text' onkeyup='keyfilter(this,3)'></th>
-	  <th><input type='text' onkeyup='keyfilter(this,4)'></th>
-	  <th>&nbsp;</th>
-	  <th>&nbsp;</th>
   </tr>
 </thead>
 </table>
