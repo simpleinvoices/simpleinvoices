@@ -11,7 +11,7 @@ if (mysql_num_rows($result) == 0) {
 
 {$page_header}
 
-<table align="center" id="ex1" class="ricoLiveGrid " style='width:95%;'>
+<table align="center" id="ex1" class="ricoLiveGrid manage" style='width:95%;'>
 <colgroup>
 <col style='width:15%;' />
 <col style='width:5%;' />
