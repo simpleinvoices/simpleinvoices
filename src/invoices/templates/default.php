@@ -124,25 +124,18 @@ while ($Array_preferences = mysql_fetch_array($result_print_preferences)) {
 
 #Accounts - for the invoice - start
 #invoice total calc - start
-        $print_invoice_total ="select sum(inv_it_total) as total from si_invoice_items where inv_it_invoice_id =$inv_idField";
-        $result_print_invoice_total = mysql_query($print_invoice_total, $conn) or die(mysql_error());
-
-        while ($Array = mysql_fetch_array($result_print_invoice_total)) {
-                $invoice_total_Field = $Array['total'];
+	$invoice_total_Field = calc_invoice_total($inv_idField);
+	$invoice_total_Field_format = number_format($invoice_total_Field,2);
 #invoice total calc - end
 
 #amount paid calc - start
-        $x1 = "select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) as amount from si_account_payments where ac_inv_id = $inv_idField";
-        $result_x1 = mysql_query($x1, $conn) or die(mysql_error());
-        while ($result_x1Array = mysql_fetch_array($result_x1)) {
-		$invoice_paid_Field = number_format($result_x1Array['amount'],2);
+	$invoice_paid_Field = calc_invoice_paid($inv_idField);
+	$invoice_paid_Field_format = number_format($invoice_paid_Field,2);
 #amount paid calc - end
 
 #amount owing calc - start
         $invoice_owing_Field = number_format($invoice_total_Field - $invoice_paid_Field,2);
 #amount owing calc - end
-}
-}
 #Accounts - for the invoice - end
 
 #get custom field labels for biller
@@ -211,10 +204,10 @@ $display_block_top =  "
                 <td nowrap class=\"tbl1-left\">$pref_inv_wordingField $LANG_date:</td><td class=\"tbl1-right\" colspan=3>$inv_dateField</td>
         </tr>   
         <tr>
-                <td class=\"tbl1-left\" >$LANG_total: </td><td class=\"tbl1-right\" colspan=3>$pref_currency_signField$invoice_total_Field</td>
+                <td class=\"tbl1-left\" >$LANG_total: </td><td class=\"tbl1-right\" colspan=3>$pref_currency_signField$invoice_total_Field_format</td>
         </tr>   
         <tr>
-                <td class=\"tbl1-left\">$LANG_paid:</td><td class=\"tbl1-right\" colspan=3 >$pref_currency_signField$invoice_paid_Field</td>
+                <td class=\"tbl1-left\">$LANG_paid:</td><td class=\"tbl1-right\" colspan=3 >$pref_currency_signField$invoice_paid_Field_format</td>
         </tr>   
         <tr>
                 <td nowrap class=\"tbl1-left tbl1-bottom\">$LANG_owing:</td><td class=\"tbl1-right tbl1-bottom\" colspan=3 >$pref_currency_signField$invoice_owing_Field</td>
@@ -413,13 +406,18 @@ if ($_GET[invoice_style] === 'Total') {
                 $inv_it_idField = $Array_master_invoice_items['inv_it_id'];
                 $inv_it_invoice_idField = $Array_master_invoice_items['inv_it_invoice_id'];
                 $inv_it_quantityField = $Array_master_invoice_items['inv_it_quantity'];
+                $inv_it_quantityField_formatted = number_format($Array_master_invoice_items['inv_it_quantity'],2);
                 $inv_it_product_idField = $Array_master_invoice_items['inv_it_product_id'];
                 $inv_it_unit_priceField = $Array_master_invoice_items['inv_it_unit_price'];
+                $inv_it_unit_priceField_formatted = number_format($Array_master_invoice_items['inv_it_unit_price'],2);
                 $inv_it_taxField = $Array_master_invoice_items['inv_it_tax'];
                 $inv_it_tax_amountField = $Array_master_invoice_items['inv_it_tax_amount'];
+                $inv_it_tax_amountField_formatted = number_format($Array_master_invoice_items['inv_it_tax_amount'],2);
                 $inv_it_gross_totalField = $Array_master_invoice_items['inv_it_gross_total'];
+                $inv_it_gross_totalField_formatted = number_format($Array_master_invoice_items['inv_it_gross_total'],2);
                 $inv_it_descriptionField = $Array_master_invoice_items['inv_it_description'];
                 $inv_it_totalField = $Array_master_invoice_items['inv_it_total'];
+                $inv_it_totalField_formatted = number_format($Array_master_invoice_items['inv_it_total'],2);
 
 	};
 
@@ -445,6 +443,7 @@ if ($_GET[invoice_style] === 'Total') {
 
 	while ($Array = mysql_fetch_array($result_print_invoice_total_total)) {
                 $invoice_total_totalField = $Array['total'];
+                $invoice_total_totalField_formatted = number_format($Array['total'],2);
 
 	};
 	#all the details have bee got now print them to screen
@@ -467,7 +466,7 @@ if ($_GET[invoice_style] === 'Total') {
 	                <td class=\"tbl1-left\" width=50%><td align=right><b>$LANG_gross_total</b></td><td align=right><b>$LANG_tax</b></td><td class=\"tbl1-right\" align=right><b>$LANG_total_uppercase</b></td>
         	</tr>
 	        <tr class=\"tbl1-left tbl1-right tbl1-bottom\">
-        	        <td class=\"tbl1-left tbl1-bottom\" width=50%></td></td><td class=\"tbl1-bottom\" align=right> $pref_currency_signField$inv_it_gross_totalField</td><td class=\"tbl1-bottom\" align=right>$pref_currency_signField$inv_it_tax_amountField</td><td class=\"tbl1-bottom tbl1-right\" align=right><u>$pref_currency_signField$inv_it_totalField</u></td>
+        	        <td class=\"tbl1-left tbl1-bottom\" width=50%></td></td><td class=\"tbl1-bottom\" align=right> $pref_currency_signField$inv_it_gross_totalField_formatted</td><td class=\"tbl1-bottom\" align=right>$pref_currency_signField$inv_it_tax_amountField_formatted</td><td class=\"tbl1-bottom tbl1-right\" align=right><u>$pref_currency_signField$inv_it_totalField_formatted</u></td>
 	        </tr>
         	<tr>
                 	<td colspan=6><br><br></td>
@@ -518,13 +517,18 @@ $display_block_details =  "
                 $inv_it_idField = $Array_master_invoice_items['inv_it_id'];
                 $inv_it_invoice_idField = $Array_master_invoice_items['inv_it_invoice_id'];
                 $inv_it_quantityField = $Array_master_invoice_items['inv_it_quantity'];
+                $inv_it_quantityField_formatted = number_format($Array_master_invoice_items['inv_it_quantity'],2);
                 $inv_it_product_idField = $Array_master_invoice_items['inv_it_product_id'];
                 $inv_it_unit_priceField = $Array_master_invoice_items['inv_it_unit_price'];
+                $inv_it_unit_priceField_formatted = number_format($Array_master_invoice_items['inv_it_unit_price'],2);
                 $inv_it_taxField = $Array_master_invoice_items['inv_it_tax'];
                 $inv_it_tax_amountField = $Array_master_invoice_items['inv_it_tax_amount'];
+                $inv_it_tax_amountField_formatted = number_format($Array_master_invoice_items['inv_it_tax_amount'],2);
                 $inv_it_gross_totalField = $Array_master_invoice_items['inv_it_gross_total'];
+                $inv_it_gross_totalField_formatted = number_format($Array_master_invoice_items['inv_it_gross_total'],2);
                 $inv_it_descriptionField = $Array_master_invoice_items['inv_it_description'];
                 $inv_it_totalField = $Array_master_invoice_items['inv_it_total'];
+                $inv_it_totalField_formatted = number_format($Array_master_invoice_items['inv_it_total'],2);
 /*
 	};
 */
@@ -552,6 +556,7 @@ $display_block_details =  "
 
 	while ($Array = mysql_fetch_array($result_print_invoice_total_total)) {
                 $invoice_total_totalField = $Array['total'];
+                $invoice_total_totalField_formatted = number_format($Array['total'],2);
 
 	#invoice total tax
 	$print_invoice_total_tax ="select sum(inv_it_tax_amount) as total_tax from si_invoice_items where inv_it_invoice_id =$master_invoice_id"; 
@@ -559,6 +564,7 @@ $display_block_details =  "
 
 	while ($Array_tax = mysql_fetch_array($result_print_invoice_total_tax)) {
                 $invoice_total_taxField = $Array_tax['total_tax'];
+                $invoice_total_taxField_formatted = number_format($Array_tax['total_tax'],2);
 
 
 /*
@@ -582,7 +588,7 @@ $display_block_details =  "
 
                 $display_block_details .=  "
                 <tr class=\"tbl1\" >
-                        <td class=\"tbl1\">$inv_it_quantityField</td><td class=\"tbl1\">$prod_descriptionField</td><td class=\"tbl1\">$pref_currency_signField$inv_it_unit_priceField</td><td class=\"tbl1\">$pref_currency_signField$inv_it_gross_totalField</td><td class=\"tbl1\">$pref_currency_signField$inv_it_tax_amountField</td><td class=\"tbl1\">$pref_currency_signField$inv_it_totalField</td>
+                        <td class=\"tbl1\">$inv_it_quantityField_formatted</td><td class=\"tbl1\">$prod_descriptionField</td><td class=\"tbl1\">$pref_currency_signField$inv_it_unit_priceField_formatted</td><td class=\"tbl1\">$pref_currency_signField$inv_it_gross_totalField_formatted</td><td class=\"tbl1\">$pref_currency_signField$inv_it_tax_amountField_formatted</td><td class=\"tbl1\">$pref_currency_signField$inv_it_totalField_formatted</td>
                 </tr>
                 <tr>       
                         <td class='tbl1-left'></td><td class='tbl1-right' colspan=5>
@@ -619,7 +625,7 @@ $display_block_details =  "
 
                 $display_block_details .=  "
                 <tr class=\"tbl1-left tbl1-right\">
-                        <td class=\"tbl1-left\" >$inv_it_quantityField</td><td>$prod_descriptionField</td><td class=\"tbl1-right\" colspan=5></td>
+                        <td class=\"tbl1-left\" >$inv_it_quantityField_formatted</td><td>$prod_descriptionField</td><td class=\"tbl1-right\" colspan=5></td>
 		</tr>
                 <tr>       
                         <td class=\"tbl1-left\"></td><td class=\"tbl1-right\" colspan=6>
@@ -655,7 +661,7 @@ $display_block_details =  "
 
 		$display_block_details .=  "
 		<tr class=\"tbl1-left tbl1-right tbl1-bottom\">
-			<td class=\"tbl1-left tbl1-bottom\" ></td><td class=\"tbl1-bottom\"></td><td class=\"tbl1-bottom\">$pref_currency_signField$inv_it_unit_priceField</td><td class=\"tbl1-bottom\">$pref_currency_signField$inv_it_gross_totalField</td><td class=\"tbl1-bottom \">$pref_currency_signField$inv_it_tax_amountField</td><td align=right colspan=2 class=\"tbl1-right tbl1-bottom\" >$pref_currency_signField$inv_it_totalField</td>
+			<td class=\"tbl1-left tbl1-bottom\" ></td><td class=\"tbl1-bottom\"></td><td class=\"tbl1-bottom\">$pref_currency_signField$inv_it_unit_priceField_formatted</td><td class=\"tbl1-bottom\">$pref_currency_signField$inv_it_gross_totalField_formatted</td><td class=\"tbl1-bottom \">$pref_currency_signField$inv_it_tax_amountField_formatted</td><td align=right colspan=2 class=\"tbl1-right tbl1-bottom\" >$pref_currency_signField$inv_it_totalField_formatted</td>
                 </tr>
                 ";
         }
@@ -692,7 +698,7 @@ $display_block_details =  "
 		<td class=\"tbl1-left tbl1-right\" colspan=6 ><br></td>
 	</tr>	
         <tr class=\"tbl1-left tbl1-right\">
-                <td class=\"tbl1-left\" colspan=3 ></td><td align=left colspan=2>$LANG_tax_total</td><td align=right class=\"tbl1-right\" >$pref_currency_signField$invoice_total_taxField</td>
+                <td class=\"tbl1-left\" colspan=3 ></td><td align=left colspan=2>$LANG_tax_total</td><td align=right class=\"tbl1-right\" >$pref_currency_signField$invoice_total_taxField_formatted</td>
         </tr>
 	<tr class=\"tbl1-left tbl1-right\" >
 		<td class=\"tbl1-left tbl1-right\" colspan=6 >
@@ -700,7 +706,7 @@ $display_block_details =  "
 		</td>
 	</tr>
         <tr class=\"tbl1-left tbl1-right tbl1-bottom\">
-                <td class=\"tbl1-left tbl1-bottom\" colspan=3></td><td class=\"tbl1-bottom\" align=left colspan=2><b>$pref_inv_wordingField $LANG_amount</b></td><td  class=\"tbl1-bottom tbl1-right\" align=right><u>$pref_currency_signField$invoice_total_totalField</u></td>
+                <td class=\"tbl1-left tbl1-bottom\" colspan=3></td><td class=\"tbl1-bottom\" align=left colspan=2><b>$pref_inv_wordingField $LANG_amount</b></td><td  class=\"tbl1-bottom tbl1-right\" align=right><u>$pref_currency_signField$invoice_total_totalField_formatted</u></td>
         </tr>
 
 

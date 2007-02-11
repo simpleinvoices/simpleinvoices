@@ -85,7 +85,8 @@ while ($newArray = mysql_fetch_array($result)) {
 #amount paid calc - end
 
 #amount owing calc - start
-	$invoice_owing_Field = number_format($invoice_total_Field - $invoice_paid_Field,2);
+	$invoice_owing_Field = $invoice_total_Field - $invoice_paid_Field;
+	$invoice_owing_Field_format = number_format($invoice_total_Field - $invoice_paid_Field,2);
 #amount owing calc - end
 
 	#Overdue - number of days - start

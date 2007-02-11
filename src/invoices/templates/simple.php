@@ -127,11 +127,8 @@ while ($Array_defaults = mysql_fetch_array($result_print_defaults) ) {
 
 #Accounts - for the invoice - start
 #invoice total calc - start
-        $print_invoice_total ="select sum(inv_it_total) as total from si_invoice_items where inv_it_invoice_id =$inv_idField";
-        $result_print_invoice_total = mysql_query($print_invoice_total, $conn) or die(mysql_error());
-
-        while ($Array = mysql_fetch_array($result_print_invoice_total)) {
-                $invoice_total_Field = $Array['total'];
+	$invoice_total_Field = calc_invoice_total($inv_idField);
+	$invoice_total_Field_formatted = number_format($invoice_total_Field,2);
 #invoice total calc - end
 
 #amount paid calc - start
