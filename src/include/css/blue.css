@@ -1,6 +1,8 @@
 div#Header {
  /* background: url(../gb_top.giff) top repeat-y*/
- *background: #036;
+	background: #036;
+	position:relative;
+	z-index:100;
 }
 
 #Tabs a:link,
