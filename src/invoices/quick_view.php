@@ -220,7 +220,7 @@ $display_block_top =  "
 		<td>$pref_inv_wordingField $LANG_number_short:</td><td colspan=5>$inv_idField</td>
 	</tr>
 	<tr class='details_screen summary'>
-		<td>$pref_inv_wordingField date:</td><td colspan=5>$inv_dateField</td>
+		<td>$pref_inv_wordingField $LANG_date:</td><td colspan=5>$inv_dateField</td>
 	</tr>
 	<tr>	
 		<td><br></td>

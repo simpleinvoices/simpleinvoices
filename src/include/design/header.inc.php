@@ -8,6 +8,7 @@ echo <<<EOD
 <link rel="stylesheet" type="text/css" href="./src/include/css/print.css" media="print"/>
 <link rel="stylesheet" type="text/css" href="./src/include/css/blue.css" media="screen"/>
 <!--[if gte IE 5.5]>
+<link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
 <script language="JavaScript" src="./src/include/js/dhtml.js" type="text/JavaScript"></script>
 <![endif]-->
 EOD;
@@ -29,7 +30,7 @@ echo <<<EOD
 		<li><a href="index.php?module=invoices&view=consulting">{$LANG_new_invoice_consulting}</a></li>
 	</ul>
  </li>
-  <li><a href="index.php?module=customer&view=manage">{$LANG_customers} +</a>
+  <li><a href="index.php?module=customers&view=manage">{$LANG_customers} +</a>
 	<ul>
 		<li><a href="index.php?module=customers&view=manage">{$LANG_manage_customers}</a></li>
 		<li><a href="index.php?module=customers&view=add">{$LANG_add_customer}</a></li>
