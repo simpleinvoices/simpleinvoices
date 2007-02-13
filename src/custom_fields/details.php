@@ -78,7 +78,6 @@ $display_block = <<<EOD
 	<b>{$LANG_custom_fields}</b>
 
 	<hr></hr>
-        <div id="browser">
 
 	<table align="center">
         <tr>

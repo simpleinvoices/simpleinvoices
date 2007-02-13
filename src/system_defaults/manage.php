@@ -116,7 +116,6 @@ $display_block =  "
 
 <b>System defaults</b>
     <hr></hr>
-      <div id="browser">
 
 <?php echo $display_block; ?>
 <!--
