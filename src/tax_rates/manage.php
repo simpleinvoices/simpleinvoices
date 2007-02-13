@@ -28,7 +28,12 @@ if (mysql_num_rows($result) == 0) {
 
        <div id="browser">
 
-<table width="97%" align="center" class="ricoLiveGrid" id="rico_tax_rates">
+<!-- IE hack so that the table fits on the pages -->
+<!--[if gte IE 5.5]>
+<link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
+<![endif]-->
+
+<table align="center" class="ricoLiveGrid" id="rico_tax_rates">
 <colgroup>
 <col style='width:10%;' />
 <col style='width:10%;' />

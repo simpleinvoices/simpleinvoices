@@ -20,8 +20,13 @@ $display_block = "
  <hr></hr>
        <div id='browser'>
 
+<!-- IE hack so that the table fits on the pages -->
+<!--[if gte IE 5.5]>
+<link rel=\"stylesheet\" type=\"text/css\" href=\"./src/include/css/iehacks.css\" media=\"all\"/>
+<![endif]-->
 
-<table width=\"97%\" class=\"ricoLiveGrid\" id=\"rico_biller\" align=\"center\">
+
+<table class=\"ricoLiveGrid\" id=\"rico_biller\" align=\"center\">
 <colgroup>
 <col style='width:15%;' />
 <col style='width:10%;' />

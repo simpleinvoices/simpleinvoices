@@ -1,8 +1,14 @@
-/*Accordian css - start*/
-                        #list1 {
-                                width:45%;
-                         }
-                        #list2 {
-                                width:45%;
-                         }
+/*IE Accordian hack*/
+#list1 {
+	width:45%;
+}
+#list2 {
+        width:45%;
+}
+
+/*IE rico live grid table with set hack*/
+table.ricoLiveGrid {
+  width:90%;
+}
+
 

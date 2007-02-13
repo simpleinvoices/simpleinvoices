@@ -30,7 +30,12 @@ if (mysql_num_rows($result) == 0) {
 <div id="sorting">
 </div>
 
-<table width="97%" align="center" class="ricoLiveGrid" id="rico_product">
+<!-- IE hack so that the table fits on the pages -->
+<!--[if gte IE 5.5]>
+<link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
+<![endif]-->
+
+<table align="center" class="ricoLiveGrid" id="rico_product">
 <colgroup>
 <col style='width:10%;' />
 <col style='width:10%;' />

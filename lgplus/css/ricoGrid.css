@@ -1,3 +1,9 @@
+/*table with set*/
+table.ricoLiveGrid {
+  width:97%;
+}
+
+
 div.ricoLG_outerDiv {
   position:relative;
   /*border:thin solid blue;  /* for debugging */
