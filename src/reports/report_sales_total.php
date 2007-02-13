@@ -33,6 +33,7 @@ include('./config/config.php');
    $oRpt->setDatabase("$db_name");
    $oRpt->run();
 ?>
+</div>
 <div id="footer"></div>
 <hr></hr>
 

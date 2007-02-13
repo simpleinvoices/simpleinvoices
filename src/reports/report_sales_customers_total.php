@@ -33,6 +33,7 @@
    $oRpt->run();
 ?>
 	
+</div>
 
 <div id="footer"></div>
 <hr></hr>

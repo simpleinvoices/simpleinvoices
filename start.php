@@ -431,6 +431,7 @@ $display_block ="
 	echo $display_block;
 
 ?>
+</div>
 <br><br><br><br>
 <br><br><br><br>
 <br><br><br><br>

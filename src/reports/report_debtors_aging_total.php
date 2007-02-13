@@ -70,6 +70,7 @@ GROUP BY
    $oRpt->run();
 ?>
 
+</div>
 <div id="footer"></div>
 <hr></hr>
 <a href="./documentation/info_pages/reports_xsl.html?keepThis=true&TB_iframe=true&height=300&width=650" title="Info :: Reports" class="thickbox"><font color="red">Got "OOOOPS, THERE'S AN ERROR HERE." error?</font></a>
