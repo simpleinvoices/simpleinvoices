@@ -50,7 +50,6 @@ echo <<<EOD
 
 <div id="top"><b>&nbsp;{$LANG_product_to_add}&nbsp;</b></div>
  <hr></hr>
-       <div id="browser">
 
 <table align=center>
 	<tr>

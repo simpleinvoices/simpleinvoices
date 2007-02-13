@@ -274,7 +274,6 @@ echo <<<EOD
 <form name="frmpost" action="index.php?module=payments&view=save" method="post" onsubmit="return frmpost_Validator(this)">
 <b>{$LANG_process_payment}</b>
  <hr></hr>
-       <div id="browser">
 
 {$display_block}
 <hr></hr>

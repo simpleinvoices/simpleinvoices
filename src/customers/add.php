@@ -47,7 +47,6 @@ echo <<<EOD
 <FORM name="frmpost" ACTION="index.php?module=customers&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
 <div id="top"><b>{$LANG_customer_add}</b> </div>
  <hr></hr>
-       <div id="browser">
 <table align=center>
 <tr>
 	<td class="details_screen">{$LANG_customer_name}</td><td><input type=text name="c_name" size=25></td>

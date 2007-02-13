@@ -66,7 +66,6 @@ if ($_GET['action'] == "view") {
 	<a href="index.php?module=products&view=details&submit={$prod_idField}&action=edit">{$LANG_edit}</a></b>
 	
  	<hr></hr>
-       <div id="browser"	
 
 	<table align="center">
 	<tr>
@@ -127,7 +126,6 @@ $display_block_enabled = "<select name=\"prod_enabled\">
 $display_block = <<<EOD
 	<b>{$LANG_product_edit}</b>
 	<hr></hr>
-        <div id="browser"
 
 	<table align="center">
 	<tr>

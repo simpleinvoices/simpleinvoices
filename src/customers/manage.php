@@ -25,7 +25,6 @@ if (mysql_num_rows($result) == 0) {
 
 <b>{$LANG_manage_customers} :: <a href="index.php?module=customers&view=add">{$LANG_customer_add}</a></b>
 <hr></hr>
-<div id="browser">
 
 <!-- IE hack so that the table fits on the pages -->
 <!--[if gte IE 5.5]>

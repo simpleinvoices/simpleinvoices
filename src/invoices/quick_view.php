@@ -644,7 +644,6 @@ $display_block_bottom =  "
 	<title><?php echo $title; ?></title>
 <?php include('./config/config.php'); ?> 
 <body>
-      <div id="browser">
 <?php echo $LANG_quick_view_of; echo " "; echo $pref_inv_wordingField; ?> <?php echo $master_invoice_id; ?>
 <br>
 	<?php 

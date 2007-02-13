@@ -24,4 +24,5 @@ For information regarding the setup,installation, and use of Simple Invoices ple
 <?php 
 	echo $display_block; 
 ?>
+</div>
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

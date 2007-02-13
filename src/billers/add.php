@@ -78,7 +78,6 @@ echo <<<EOD
 <FORM name="frmpost" ACTION="index.php?module=billers&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
 <b>{$LANG_biller_to_add}</b>
     <hr></hr>
-      <div id="browser">
 <table align="center" >
 	<tr>
 		<td class="details_screen">{$LANG_biller_name}</td><td><input type=text name="b_name" size=25></td>

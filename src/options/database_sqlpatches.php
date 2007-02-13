@@ -177,7 +177,6 @@ if ($_GET[op] == "run_updates") {
 
 
 		echo "
-		<div id=\"browser\">
 		<table align='center'>
 		";
 /*
@@ -238,7 +237,6 @@ if ($_GET[op] == "run_updates") {
 
 
 		echo "
-		<div id='browser'>
 		<table align='center'>
 		";
 	echo "<br><br><tr><td>Step 1 - This is the first time Database Updates has been run</td></tr><br>";
@@ -265,7 +263,6 @@ else {
 		echo "
 		<b>Database Upgrade Manager</b> $display_note
 		<hr></hr>
-		<div id=\"browser\">
 
 		<table align='center'>
 ";
@@ -297,7 +294,6 @@ else {
 
 		echo "
 
-		<div id='browser'>
 		<table align='center'>
 ";
 

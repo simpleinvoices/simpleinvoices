@@ -45,7 +45,6 @@ $display_block = <<<EOD
 	
 	<b>{$LANG_payment_type}</b>
 	<hr></hr>
-       	<div id="browser">
 
 	<table align="center">
 	<tr>
@@ -80,7 +79,6 @@ $display_block = <<<EOD
 
 	<b>{$LANG_payment_type_edit}</b>
 	<hr></hr>
-       	<div id="browser">
 
 	<table align=center>
 	<tr>

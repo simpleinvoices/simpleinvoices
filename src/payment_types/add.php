@@ -28,7 +28,6 @@ $display_block_enabled = "<select name=\"pt_enabled\">
 		
 <b>Payment type to add</b>
  <hr></hr>
-       <div id="browser">
 
 <table align=center>
 	<tr>

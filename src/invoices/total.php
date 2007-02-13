@@ -217,7 +217,6 @@ if (mysql_num_rows($result_preferences) == 0) {
 
 <td colspan=2 align=center><b><?php echo $LANG_inv; echo $LANG_inv_total; ?></b></th>
 <hr></hr>
-      <div id="browser">
 
 
 <table  align=center>

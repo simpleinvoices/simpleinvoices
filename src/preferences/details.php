@@ -50,7 +50,6 @@ $display_block =  "
 
 	<b>Preference :: <a href='index.php?module=preferences&view=details&submit=$pref_idField&action=edit'>Edit</a></b>
 	<hr></hr>
-        <div id=\"browser\">
 
 	
 	<table align=center>
@@ -122,7 +121,6 @@ $display_block_enabled = "<select name=\"pref_enabled\">
 $display_block =  "
 	<b>Preferences</b>
 	<hr></hr>
-        <div id=\"browser\">
 
         <table align=center>
                 <tr>

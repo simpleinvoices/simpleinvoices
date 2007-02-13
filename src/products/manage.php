@@ -25,10 +25,6 @@ if (mysql_num_rows($result) == 0) {
 <b>{$LANG_manage_products} :: <a href="index.php?module=products&view=add">{$LANG_add_new_product}</a></b>
 
  <hr></hr>
-       <div id="browser"
-
-<div id="sorting">
-</div>
 
 <!-- IE hack so that the table fits on the pages -->
 <!--[if gte IE 5.5]>

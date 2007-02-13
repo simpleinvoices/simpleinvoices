@@ -681,7 +681,6 @@ echo <<<EOD
 </head>
 
 <body>
-      <div id="browser">
 
 <br>
 {$display_block}

@@ -34,9 +34,6 @@ echo <<<EOD
 <b>{$LANG_tax_rate_to_add}</b>
 
  <hr></hr>
-       <div id="browser">
-
-<!-- <div id="subheader"> -->
 
 <table align=center>
 	<tr>

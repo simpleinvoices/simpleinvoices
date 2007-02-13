@@ -100,7 +100,6 @@ echo <<<EOD
 </head>
 
 <body>
-       <div id="browser"
 EOD;
 
 echo <<<EOD

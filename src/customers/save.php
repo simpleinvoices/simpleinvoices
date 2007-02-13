@@ -1397,7 +1397,6 @@ echo <<<EOD
 </head>
 
 <body>
-<div id="browser">
 
 <br>
 <br>

@@ -104,7 +104,6 @@ $display_block =  "
 <body>
 <b><?php echo $map_page_header; ?></b>
 <hr></hr>
-<div id="browser">
 
 <?php echo $display_block; ?>
 <hr></hr>

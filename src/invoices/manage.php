@@ -76,5 +76,4 @@ Rico.onLoad( function() {
 <?php echo $display_block; ?>
 
 <a href="./documentation/info_pages/manage_invoices.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Manage invoices" class="thickbox"><img src="./images/common/help-small.png"></img> What's all these different columns?</a>
-<div>
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

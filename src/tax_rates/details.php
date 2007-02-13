@@ -55,7 +55,6 @@ if ($_GET['action'] === 'view') {
         <a href="index.php?module=tax_rates&view=details&submit={$tax_idField}&action=edit">{$LANG_edit}</a></b>
 
 	<hr></hr>
-      	<div id="browser">
 
 	<table align="center">
 	<tr>
@@ -96,7 +95,6 @@ $display_block = <<<EOD
         <b>{$LANG_tax_rate}</b> 
 
 	<hr></hr>
-        <div id="browser">
 
 	<table align="center">
 	<tr>

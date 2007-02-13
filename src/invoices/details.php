@@ -519,7 +519,6 @@ $display_block_bottom =  "
 <b>You are editing <?php echo $pref_inv_wordingField; ?> <?php echo $master_invoice_id; ?></b>
 
  <hr></hr>
-       <div id="browser">
 
 <FORM name="frmpost" ACTION="index.php?module=invoices&view=save" METHOD=POST>
 

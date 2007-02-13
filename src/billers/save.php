@@ -115,7 +115,6 @@ EOD;
 echo <<<EOD
 <br>
 <br>
-<div class="browser">
 {$display_block}
 <br><br>
 {$display_block_items}

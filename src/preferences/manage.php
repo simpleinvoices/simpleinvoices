@@ -31,7 +31,6 @@ EOD;
 	<a href="index.php?module=preferences&view=add">{$LANG_add_new_preference}</a></b>
 
 	<hr></hr>
-       	<div id="browser">
 	
 	<!-- IE hack so that the table fits on the pages -->
 	<!--[if gte IE 5.5]>

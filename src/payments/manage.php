@@ -39,7 +39,6 @@ $display_block = "
 
 $display_block_header
 <hr></hr>
- <div id='browser'>
 
 <!-- IE hack so that the table fits on the pages -->
 <!--[if gte IE 5.5]>
@@ -51,8 +50,8 @@ $display_block_header
 <col style='width:10%;' />
 <col style='width:10%;' />
 <col style='width:10%;' />
-<col style='width:10%;' />
-<col style='width:10%;' />
+<col style='width:15%;' />
+<col style='width:15%;' />
 <col style='width:10%;' />
 <col style='width:10%;' />
 <col style='width:10%;' />

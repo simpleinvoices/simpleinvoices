@@ -39,7 +39,6 @@ if ($_GET['action'] == "view") {
 	<b>{$LANG_custom_fields} ::
 	<a href="index.php?module=custom_fields&view=details&submit={$cf_idField}&action=edit">{$LANG_edit}</a></b>
 	<hr></hr>
-        <div id="browser">
 
 
 	

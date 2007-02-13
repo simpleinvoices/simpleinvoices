@@ -1,7 +1,7 @@
 <?php
 
 echo <<<EOD
-   </div id="browser">
+ <!--  </div id="browser"> -->
    </div class="col">
 
    <div class="bottom"> </div>

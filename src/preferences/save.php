@@ -106,7 +106,6 @@ EOD;
 echo <<<EOD
 <br>
 <br>
-       <div id="browser">
 
 {$display_block}
 <br><br>

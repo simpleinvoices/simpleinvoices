@@ -247,7 +247,6 @@ if (mysql_num_rows($result_preferences) == 0) {
 
 <b><?php echo $LANG_inv; echo $LANG_inv_itemised; ?></b>
 <hr></hr>
-      <div id="browser">
 
 
 <table align=center>

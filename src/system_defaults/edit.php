@@ -434,7 +434,6 @@ else {
 
 		<b><?php echo $msd_heading; ?></b>
  <hr></hr>
-       <div id="browser">
 
 
 <table align=center>

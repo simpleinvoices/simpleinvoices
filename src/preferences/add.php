@@ -42,7 +42,6 @@ echo <<<EOD
 <b>{$LANG_invoice_preference_to_add}</b>
 
 <hr></hr>
-<div id="browser">
 
 
 <table align=center>

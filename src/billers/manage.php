@@ -18,7 +18,6 @@ $display_block = "<P><em>$mb_no_invoices.</em></p>";
 $display_block = "
 <b>$mb_page_header :: <a href='index.php?module=billers&view=add'>$mb_actions_new_biller</a></b>
  <hr></hr>
-       <div id='browser'>
 
 <!-- IE hack so that the table fits on the pages -->
 <!--[if gte IE 5.5]>

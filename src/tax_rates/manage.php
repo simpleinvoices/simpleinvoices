@@ -26,7 +26,6 @@ if (mysql_num_rows($result) == 0) {
 	<a href="./index.php?module=tax_rates&view=add">{$LANG_add_new_tax_rate}</a></b>
  <hr></hr>
 
-       <div id="browser">
 
 <!-- IE hack so that the table fits on the pages -->
 <!--[if gte IE 5.5]>

@@ -13,7 +13,6 @@ $display_block ="
 <b>Database Backup</b>
 
 <hr></hr>
-       <div id=\"browser\">
 
 <table align=center>";
 
@@ -30,8 +29,6 @@ $display_block ="
 
 <b>Database Backup</b>
  <hr></hr>
-       <div id=\"browser\">
-
 <table align=center>
 <tr><td><br><br>To make a backup of your Simple Invoices database click the below link</td></tr>
 <tr><td align=center><br><a href='index.php?module=options&view=backup_database&op=backup_db'>BACKUP DATABASE NOW</a><br><br><br></td></tr>

@@ -24,7 +24,6 @@ if (mysql_num_rows($result) == 0) {
 <b>{$LANG_manage_payment_types} :: <a href="index.php?module=payment_types&view=add">{$LANG_add_new_payment_type}</a></b>
 
 <hr></hr>
-       <div id="browser">
 
 <!-- IE hack so that the table fits on the pages -->
 <!--[if gte IE 5.5]>
