@@ -9,7 +9,6 @@ include_once('./include/include_main.php');
 echo <<<EOD
 <title>{$title} :: {$LANG_manage_invoices}</title>
 <link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css"> 
-
 EOD;
 #insert customer
 $conn = mysql_connect("$db_host","$db_user","$db_password");
@@ -32,10 +31,8 @@ include('./src/invoices/manage.inc.php');
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 
-
 <script type="text/javascript" src="include/jquery.js"></script>
 <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
-
 <? 
 require "lgplus/php/chklang.php";
 require "lgplus/php/settings.php";

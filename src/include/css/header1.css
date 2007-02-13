@@ -131,7 +131,7 @@ ul#navmenu li.iehover a {
 ul#navmenu li:hover li a,
 ul#navmenu li.iehover li a {
   font: normal 10px/22px Verdana, Arial, Helvetica, sans-serif;
-  z-index:1000;
+  z-index:1;
   float: none;
  /* background: #EEE;*/
   background: #dcdad5;
@@ -143,7 +143,7 @@ ul#navmenu li:hover li a:hover,
 ul#navmenu li:hover li:hover a,
 ul#navmenu li.iehover li a:hover,
 ul#navmenu li.iehover li.iehover a {
-z-index:1000;
+z-index:1;
 /*  background: #dcdad5;*/
   background: #999;
   color: #FFF;
@@ -152,7 +152,7 @@ z-index:1000;
 /* 3rd Menu */
 ul#navmenu li:hover li:hover li a,
 ul#navmenu li.iehover li.iehover li a {
-z-index:2000;
+z-index:2;
   /*background: #EEE;*/
   background: #dcdad5;
   color: #000;
@@ -163,7 +163,7 @@ ul#navmenu li:hover li:hover li a:hover,
 ul#navmenu li:hover li:hover li:hover a,
 ul#navmenu li.iehover li.iehover li a:hover,
 ul#navmenu li.iehover li.iehover li.iehover a {
-  z-index:2000;
+  z-index:2;
   background: #999;
   color: #FFF;
 }
@@ -184,7 +184,7 @@ ul#navmenu li.iehover li.iehover li.iehover li a:hover {
 
 ul#navmenu ul ul,
 ul#navmenu ul ul ul {
-  z-index:2000;
+  z-index:2;
   display: none;
   position: absolute;
   top: 5;
