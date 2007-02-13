@@ -195,7 +195,6 @@ $display_block = <<<EOD
 
 	<b>{$LANG_biller_edit}</b>
  <hr></hr>
-       <div id="browser">
 	<table align="center">
 	<tr>
 		<td class="details_screen">{$LANG_biller_id}</td><td>{$b_idField}</td>

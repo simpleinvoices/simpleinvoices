@@ -218,7 +218,6 @@ $display_block_enabled = "<select name=\"c_enabled\">
 	$display_block = <<<EOD
 	<div id="top"><b>{$LANG_customer_edit}</b></div>
 	 <hr></hr>
-        <div id="browser">
 
 	<table align="center">
 	<tr>
