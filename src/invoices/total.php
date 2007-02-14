@@ -92,7 +92,10 @@ $invoice_custom_field_label2 = get_custom_field_label(invoice_cf2);
 $invoice_custom_field_label3 = get_custom_field_label(invoice_cf3);
 $invoice_custom_field_label4 = get_custom_field_label(invoice_cf4);
 
-
+$show_custom_field_1 = show_custom_field(invoice_cf1);
+$show_custom_field_2 = show_custom_field(invoice_cf2);
+$show_custom_field_3 = show_custom_field(invoice_cf3);
+$show_custom_field_4 = show_custom_field(invoice_cf4);
 
 
 
@@ -200,12 +203,35 @@ if (mysql_num_rows($result_preferences) == 0) {
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 
 <link rel="stylesheet" type="text/css" href="include/jquery.datePicker.css" title="default" media="screen" />
+<link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="screen"/>
 
 <script type="text/javascript" src="include/jquery.js"></script>
 <script type="text/javascript" src="include/jquery.dom_creator.js"></script>
 <script type="text/javascript" src="include/jquery.datePicker.js"></script>
 <script type="text/javascript" src="include/jquery.datePicker.conf.js"></script>
+<script type="text/javascript" src="./include/jquery.thickbox.js"></script>
+<!--
+//prep for open rico 
+<script>
+  var cssPath ="themes/"
+</script>
+<link href="themes/default.css" rel="stylesheet" type="text/css" >	 </link> 
+<link href="themes/alert.css" rel="stylesheet" type="text/css" >	 </link>
+<link href="themes/alphacube.css" rel="stylesheet" type="text/css" >	 </link>
 
+<script type="text/javascript" src="javascripts/prototype.js"> </script>
+<script type="text/javascript" src="javascripts/window.js"> </script>
+<script type="text/javascript" src="javascripts/debug.js"> </script>
+<script type="text/javascript" src="javascripts/effects.js"> </script>
+<script type="text/javascript">
+
+	function openDialog(id) {
+
+Dialog.alert("Test of alert panel, check out debug window after closing it", {windowParameters: {width:300, height:100}, okLabel: "close", ok:function(win) {debug("validate alert panel"); return true;}}); 
+
+  }
+</script>
+-->
 <title><?php echo $title; echo " :: "; echo $LANG_inv; echo $LANG_inv_total; ?></title>
 
 <?php include('./config/config.php'); ?>
@@ -245,6 +271,12 @@ if (mysql_num_rows($result_preferences) == 0) {
 <tr>
 	<td colspan=5 class="details_screen" ><textarea input type=text name="i_description" rows=10 cols=100 WRAP=nowrap></textarea></td>
 </tr>
+<?php 
+	echo $show_custom_field_1;
+	echo $show_custom_field_2;
+	echo $show_custom_field_3;
+	echo $show_custom_field_4;
+?>
 <tr>
 	<td class="details_screen"><?php echo $LANG_gross_total;?></td><td class="details_screen"><?php echo $LANG_tax;?></td><td class="details_screen"><?php echo $LANG_inv_pref;?></td>
 </tr>
@@ -252,40 +284,11 @@ if (mysql_num_rows($result_preferences) == 0) {
 	<td><input type=text name="inv_it_gross_total" size=15></td><td input type=text name="inv_it_tax" size=15><?php echo $display_block_tax; ?></td><td input type=text name="inv_preferences" size=25><?php echo $display_block_preferences; ?></td>
 
 </tr>
-<tr>
-	<td class="details_screen">
-		<?php echo $invoice_custom_field_label1; ?><a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a>
-	</td>
-	<td>
-		<input type=text name="i_custom_field" size=25>
-	</td>
-</tr>
-<tr>
-	<td class="details_screen">
-		<?php echo $invoice_custom_field_label2; ?><a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a>
-	</td>
-	<td>
-		<input type=text name="i_custom_field2" size=25>
-	</td>
-</tr>
-<tr>
-	<td class="details_screen">
-		<?php echo $invoice_custom_field_label3; ?><a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a>
-	</td>
-	<td>
-		<input type=text name="i_custom_field3" size=25>
-	</td>
-</tr>
-<tr>
-	<td class="details_screen">
-		<?php echo $invoice_custom_field_label4; ?><a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a>
-	</td>
-	<td>
-		<input type=text name="i_custom_field4" size=25>
-	</td>
-</tr>
-
 </table>
+<!--
+//prototype window test
+<a href="#" onclick="openDialog();">TEST</a>
+-->
 <!-- </div> -->
 <hr></hr>
 	<input type=submit name="submit" value="<?php echo $LANG_save;echo " "; echo $LANG_inv;?>"><input type=hidden name="invoice_style" value="insert_invoice_total"> * <?php echo $LANG_mandatory_fields;?>

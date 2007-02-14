@@ -163,9 +163,9 @@ function line_items($line) {
 	        }
                 echo "<tr>
                 <td><input type=text name='i_quantity$line' size=5></td><td input type=text name='i_description$line' size=50>$display_block_products </td><td>
-<a href='#' class=\"show-text$line\" onClick=\"$('.text$line').show();$('.show-text$line').hide();\">$LANG_show_details Show note</a><a href='#' class=\"text\" onClick=\"$('.text$line').hide();$('.show-text$line').show();\">$LANG_hide_details Hide note</a>
+<a href='#' class=\"show-text$line\" onClick=\"$('.text$line').show();$('.show-text$line').hide();\">$LANG_show_details Show note</a><a href='#' class=\"text hide\" onClick=\"$('.text$line').hide();$('.show-text$line').show();\">$LANG_hide_details Hide note</a>
  </td></tr>
-<tr class=\"text$line\">
+<tr class=\"text$line hide\">
         <td colspan=5 ><textarea input type=text name='line_item_description$line' rows=3 cols=80 WRAP=nowrap></textarea></td>
 </tr>
 

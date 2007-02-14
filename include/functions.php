@@ -330,4 +330,33 @@ function calc_invoice_tax($master_invoice_id) {
 	return $invoice_total_taxField;
 }
 
+function show_custom_field($custom_field) {
+
+	include('./config/config.php');
+
+	$conn = mysql_connect( $db_host, $db_user, $db_password );
+	mysql_select_db( $db_name, $conn );
+
+	#invoice total tax
+	$get_custom_label ="select cf_custom_label from si_custom_fields where cf_custom_field = '$custom_field'"; 
+	$result_get_custom_label = mysql_query($get_custom_label, $conn) or die(mysql_error());
+
+	while ($Array_cl = mysql_fetch_array($result_get_custom_label)) {
+                $custom_label_value = $Array_cl['cf_custom_label'];
+	}
+	if ($custom_label_value != null) {
+	
+		$display_block ="
+			<tr>
+				<td class=\"details_screen\">$custom_label_value <a href=\"./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500\" title=\"Info :: Custom fields\" class=\"thickbox\"><img src=\"./images/common/help-small.png\"></img></a>
+				</td>
+				<td>
+					<input type=text name=\"i_custom_field\" size=25>
+				</td>
+			</tr>
+			";
+	}
+	return $display_block;
+}
+
 ?>
