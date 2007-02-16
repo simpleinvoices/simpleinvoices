@@ -6,7 +6,489 @@
  * Licensed under the MIT License:
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * $LastChangedDate: 2006-11-26 17:52:59 +0000 (Sun, 26 Nov 2006) $
- * $Rev: 33 $
+ * $LastChangedDate: 2007-02-13 11:32:41 +0000 (Tue, 13 Feb 2007) $
+ * $Rev: 1334 $
  */
-eval(function(p,a,c,k,e,d){e=function(c){return(c<a?"":e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('4.x=8(){9(1s.2p==M){1s.2p={2E:8(){}}}3 1C=[\'2F\',\'2G\',\'3p\',\'2H\',\'3q\',\'2I\',\'3X\',\'3a\',\'2M\',\'2N\',\'32\',\'35\'];3 1B=[\'2P\',\'2Q\',\'2Z\',\'3f\',\'2T\',\'2U\',\'3U\'];3 R={p:\'2V\',n:\'2W\',c:\'2X\',b:\'30 14\'};3 19=\'1H\';3 y="/";3 K;3 A;3 F;3 S;3 v;3 1E=8(2r){3 s=\'0\'+2r;h s.31(s.1j-2)};3 15=8(L){2n(19){Q\'1O\':u=L.1q(y);h t r(u[0],13(u[1])-1,u[2]);Q\'1H\':u=L.1q(y);h t r(u[2],13(u[1])-1,13(u[0]));Q\'2k\':1P:3 1D=1D?1D:[2,1,0];u=L.1q(y);h t r(u[2],13(u[0])-1,13(u[1]))}};3 1o=8(d){3 1d=d.f();3 18=1E(d.g()+1);3 1b=1E(d.Y());2n(19){Q\'1O\':h 1d+y+18+y+1b;Q\'1H\':h 1b+y+18+y+1d;Q\'2k\':1P:h 18+y+1b+y+1d}};3 V=8(L){3 O=t r();9(L==M){d=t r(O.f(),O.g(),1)}E{d=L;d.2a(1)}9((d.g()<A.g()&&d.f()==A.f())||d.f()<A.f()){d=t r(A.f(),A.g(),1)}E 9((d.g()>F.g()&&d.f()==F.f())||d.f()>F.f()){d=t r(F.f(),F.g(),1)}3 P=4("<l>").o(\'m\',\'C-B\');3 1i=1c;3 25=A.Y();3 1m=\'\';9(!(d.g()==A.g()&&d.f()==A.f())){1i=G;3 2C=t r(d.f(),d.g()-1,1);3 2h=4("<a>").U(\'W:;\').J(R.p).16(8(){4.x.1r(2C,k);h G});1m=4("<l>").o(\'m\',\'1p-3w\').J(\'&38;\').j(2h)}3 1n=1c;3 28=F.Y();1y=\'\';9(!(d.g()==F.g()&&d.f()==F.f())){1n=G;3 1T=t r(d.f(),d.g()+1,1);3 1U=4("<a>").U(\'W:;\').J(R.n).16(8(){4.x.1r(1T,k);h G});1y=4("<l>").o(\'m\',\'1p-3b\').J(\'&3c;\').3d(1U)}3 1V=4("<a>").o(\'U\',\'W:;\').J(R.c).16(8(){4.x.2i()});P.j(4("<l>").o(\'m\',\'1p-3e\').j(1V),4("<3g>").J(1C[d.g()]+\' \'+d.f()));3 1f=4("<20>");21(3 i=K;i<K+7;i++){3 I=i%7;3 17=1B[I];1f.j(4("<3h>").o({\'3i\':\'3j\',\'3k\':17,\'1l\':17,\'m\':(I==0||I==6?\'22\':\'I\')}).J(17.3m(0,1)))}3 1v=4("<3n>");3 24=(t r(d.f(),d.g()+1,0)).Y();3 q=K-d.3o();9(q>0)q-=7;3 2f=(t r()).Y();3 2e=d.g()==O.g()&&d.f()==O.f();3 w=0;1W(w++<6){3 1w=4("<20>");21(3 i=0;i<7;i++){3 I=(K+i)%7;3 Z={\'m\':(I==0||I==6?\'22 \':\'I \')};9(q<0||q>=24){N=\' \'}E 9(1i&&q<25-1){N=q+1;Z[\'m\']+=\'29\'}E 9(1n&&q>28-1){N=q+1;Z[\'m\']+=\'29\'}E{d.2a(q+1);3 1h=1o(d);N=4("<a>").o({\'U\':\'W:;\',\'2c\':1h}).J(q+1).16(8(e){4.x.26(4.o(k,\'2c\'),k);h G})[0];9(S&&S==1h){4(N).o(\'m\',\'3s\')}}9(2e&&q+1==2f){Z[\'m\']+=\'O\'}1w.j(4("<3u>").o(Z).j(N));q++}1v.j(1w)}P.j(4("<3y>").o(\'3z\',2).j("<2l>").3B("2l").j(1f).1Z().j(1v.3E())).j(1m).j(1y);9(4.1M.1N){3 1G=[\'<1G m="3G" 3H="-1" \',\'3I="1u:1I; 3J:3L;\',\'3M: 0;\',\'3N:0;\',\'z-3O:-1; 3P:3Q(3R=\\\'0\\\');\',\'3S:2z;\',\'3T:2z"/>\'].3V(\'\');P.j(1g.3W(1G))}P.1Y({\'1u\':\'1I\'});h P[0]};3 10=8(c){4(\'l.C-B a\',v).1A();4(\'l.C-B\',v).23();4(\'l.C-B\',v).2D();v.j(c)};3 T=8(){4(\'l.C-B a\',v).1A();4(\'l.C-B\',v).23();4(\'l.C-B\',v).1Y({\'1u\':\'2L\'});4(1g).1A(\'1X\',1k);2O v;v=2R};3 2S=8(e){3 1L=e.2u?e.2u:(e.2w?e.2w:0);9(1L==27){T()}h G};3 1k=8(e){3 1x=4.1M.1N?1s.33.34:e.1x;3 1Q=4(1x).X(\'l.C-B\');9(1Q.36(0).37!=\'14-1e-2B\'){T()}};h{1K:8(){h R.b},2q:8(){9(v){T()}k.39();3 D=4(\'D\',4(k).X(\'D\'))[0];A=D.1F;F=D.11;K=D.K;v=4(k).X(\'l.C-B\');3 d=4(D).2b();9(d!=\'\'){9(1o(15(d))==d){S=d;10(V(15(d)))}E{S=G;10(V())}}E{S=G;10(V())}4(1g).3l(\'1X\',1k)},1r:8(d,e){10(V(d))},26:8(d,H){3r=d;3 $1t=4(\'D\',4(H).X(\'D\'));$1t.2b(d);$1t.3t(\'3v\');T(H)},2i:8(){T(k)},1R:8(i){i.2j=1c},2A:8(i){h i.2j!=M},3A:8(2m,1z){19=2m.2o();y=1z?1z:"/"},3K:8(2s,2v,2y){1B=2s;1C=2v;R=2y},2x:8(i,w){9(w==M)w={};9(w.1J==M){i.1F=t r()}E{i.1F=15(w.1J)}9(w.2t==M){i.11=t r();i.11.2J(i.11.f()+5)}E{i.11=15(w.2t)};i.K=w.1S==M?0:w.1S}}}();4.2g.X=8(s){3 H=k;1W(1c){9(4(s,H).1j>0){h(H)}H=H.1Z();9(H[0].1j==0){h G}}};4.2g.x=8(a){k.3x(8(){9(k.3F.2o()!=\'D\')h;4.x.2x(k,a);9(!4.x.2A(k)){3 1a=4.x.1K();3 12;9(a&&a.2Y){12=4(k).o({\'m\':\'14-1e\',\'1l\':1a})}E{12=4("<a>").o({\'U\':\'W:;\',\'m\':\'14-1e\',\'1l\':1a}).j("<2d>"+1a+"</2d>")}4(k).3C(\'<l m="14-1e-2B"></l>\').2K(4("<l>").o({\'m\':\'C-B\'})).3D(12);12.16(4.x.2q);4.x.1R(k)}})};',62,246,'|||var|jQuery||||function|if||||||getFullYear|getMonth|return||append|this|div|class||attr||curDay|Date||new|dParts|_openCal||datePicker|dateSeparator||_firstDate|calendar|popup|input|else|_lastDate|false|ele|weekday|html|_firstDayOfWeek|dIn|undefined|dayStr|today|jCalDiv|case|navLinks|_selectedDate|_closeDatePicker|href|_getCalendarDiv|javascript|findClosestParent|getDate|atts|_draw|_endDate|calBut|Number|date|_strToDate|click|day|dM|dateFormat|chooseDate|dD|true|dY|picker|headRow|document|dStr|firstMonth|length|_checkMouse|title|prevLinkDiv|finalMonth|_dateToStr|link|split|changeMonth|window|theInput|display|tBody|thisRow|target|nextLinkDiv|separator|unbind|days|months|parts|_zeroPad|_startDate|iframe|dmy|block|startDate|getChooseDateStr|key|browser|msie|ymd|default|cp|setInited|firstDayOfWeek|nextMonth|nextLink|closeLink|while|mousedown|css|parent|tr|for|weekend|empty|lastDay|firstDate|selectDate||lastDate|inactive|setDate|val|rel|span|thisMonth|todayDate|fn|prevLink|closeCalendar|_inited|mdy|thead|format|switch|toLowerCase|console|show|num|aDays|endDate|keyCode|aMonths|which|setDateWindow|aNavLinks|3000px|isInited|holder|lastMonth|remove|log|January|February|April|June|setFullYear|before|none|September|October|delete|Sunday|Monday|null|_handleKeys|Thursday|Friday|Prev|Next|Close|inputClick|Tuesday|Choose|substring|November|event|srcElement|December|get|className|lt|blur|August|next|gt|prepend|close|Wednesday|h3|th|scope|col|abbr|bind|substr|tbody|getDay|March|May|selectedDate|selected|trigger|td|change|prev|each|table|cellspacing|setDateFormat|find|wrap|after|children|nodeName|bgiframe|tabindex|style|position|setLanguageStrings|absolute|top|left|index|filter|Alpha|Opacity|width|height|Saturday|join|createElement|July'.split('|'),0,{}))
+
+jQuery.datePicker = function()
+{
+	// so that firebug console.log statements don't break IE
+	if (window.console == undefined) { window.console = {log:function(){}}; }
+
+	var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+	var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+	var navLinks = {p:'Prev', n:'Next', c:'Close', b:'Choose date'};
+	var dateFormat = 'dmy';
+	var dateSeparator = "/";
+	var _drawingMonth = false;
+	var _firstDayOfWeek;
+	var _firstDate;
+	var _lastDate;
+
+	var _selectedDate;
+	var _openCal;
+
+	var _zeroPad = function(num) {
+		var s = '0'+num;
+		return s.substring(s.length-2)
+		//return ('0'+num).substring(-2); // doesn't work on IE :(
+	};
+	var _strToDate = function(dIn)
+	{
+		switch (dateFormat) {
+			case 'ymd':
+				dParts = dIn.split(dateSeparator);
+				return new Date(dParts[0], Number(dParts[1])-1, dParts[2]);
+			case 'dmy':
+				dParts = dIn.split(dateSeparator);
+				return new Date(dParts[2], Number(dParts[1])-1, Number(dParts[0]));
+			case 'dmmy':
+				dParts = dIn.split(dateSeparator);
+				for (var m=0; m<12; m++) {
+					if (dParts[1].toLowerCase() == months[m].substr(0,3).toLowerCase())  {
+						return new Date(Number(dParts[2]), m, Number(dParts[0]));
+					}
+				}
+				return undefined;
+			case 'mdy':
+			default:
+				var parts = parts ? parts : [2, 1, 0];
+				dParts = dIn.split(dateSeparator);
+				return new Date(dParts[2], Number(dParts[0])-1, Number(dParts[1]));
+		}
+	};
+	var _dateToStr = function(d)
+	{
+		var dY = d.getFullYear();
+		var dM = _zeroPad(d.getMonth()+1);
+		var dD = _zeroPad(d.getDate());
+		switch (dateFormat) {
+			case 'ymd':
+				return dY + dateSeparator + dM + dateSeparator + dD;
+			case 'dmy':
+				return dD + dateSeparator + dM + dateSeparator + dY;
+			case 'dmmy':
+				return dD + dateSeparator + months[d.getMonth()].substr(0,3) + dateSeparator + dY;
+			case 'mdy':
+			default:
+				return dM + dateSeparator + dD + dateSeparator + dY;
+		}
+	};
+
+	var _getCalendarDiv = function(dIn)
+	{
+		var today = new Date();
+		if (dIn == undefined) {
+			// start from this month.
+			d = new Date(today.getFullYear(), today.getMonth(), 1);
+		} else {
+			// start from the passed in date
+			d = dIn;
+			d.setDate(1);
+		}
+		// check that date is within allowed limits:
+		if ((d.getMonth() < _firstDate.getMonth() && d.getFullYear() == _firstDate.getFullYear()) || d.getFullYear() < _firstDate.getFullYear()) {
+			d = new Date(_firstDate.getFullYear(), _firstDate.getMonth(), 1);;
+		} else if ((d.getMonth() > _lastDate.getMonth() && d.getFullYear() == _lastDate.getFullYear()) || d.getFullYear() > _lastDate.getFullYear()) {
+			d = new Date(_lastDate.getFullYear(), _lastDate.getMonth(), 1);;
+		}
+
+		var jCalDiv = jQuery("<div>").attr('class','popup-calendar');
+		var firstMonth = true;
+		var firstDate = _firstDate.getDate();
+
+		// create prev and next links
+		var prevLinkDiv = '';
+		if (!(d.getMonth() == _firstDate.getMonth() && d.getFullYear() == _firstDate.getFullYear())) {
+			// not in first display month so show a previous link
+			firstMonth = false;
+			var lastMonth = d.getMonth() == 0 ? new Date(d.getFullYear()-1, 11, 1) : new Date(d.getFullYear(), d.getMonth()-1, 1);
+			var prevLink = jQuery("<a>").attr('href', 'javascript:;').html(navLinks.p).click(function()
+			{
+				jQuery.datePicker.changeMonth(lastMonth, this);
+				return false;
+			});
+			prevLinkDiv = jQuery("<div>").attr('class','link-prev').html('&lt;').append(prevLink);
+		}
+
+		var finalMonth = true;
+		var lastDate = _lastDate.getDate();
+		nextLinkDiv = '';
+		if (!(d.getMonth() == _lastDate.getMonth() && d.getFullYear() == _lastDate.getFullYear())) {
+			// in the last month - no next link
+			finalMonth = false;
+			var nextMonth = new Date(d.getFullYear(), d.getMonth()+1, 1);
+			var nextLink = jQuery("<a>").attr('href', 'javascript:;').html(navLinks.n).click(function()
+			{
+				jQuery.datePicker.changeMonth(nextMonth, this);
+				return false;
+			});
+			nextLinkDiv = jQuery("<div>").attr('class','link-next').html('&gt;').prepend(nextLink);
+		}
+
+		var closeLink = jQuery("<a>").attr('href','javascript:;').html(navLinks.c).click(function()
+		{
+			jQuery.datePicker.closeCalendar();
+		});
+
+		jCalDiv.append(
+			jQuery("<div>").attr('class', 'link-close').append(closeLink),
+			jQuery("<h3>").html(months[d.getMonth()] + ' ' + d.getFullYear())
+		);
+		var headRow = jQuery("<tr>");
+		for (var i=_firstDayOfWeek; i<_firstDayOfWeek+7; i++) {
+			var weekday = i%7;
+			var day = days[weekday];
+			headRow.append(
+				jQuery("<th>").attr({'scope':'col', 'abbr':day, 'title':day, 'class':(weekday == 0 || weekday == 6 ? 'weekend' : 'weekday')}).html(day.substr(0, 1))
+			);
+		}
+
+		var tBody = jQuery("<tbody>");
+
+		var lastDay = (new Date(d.getFullYear(), d.getMonth()+1, 0)).getDate();
+		var curDay = _firstDayOfWeek - d.getDay();
+		if (curDay > 0) curDay -= 7;
+
+		var todayDate = (new Date()).getDate();
+		var thisMonth = d.getMonth() == today.getMonth() && d.getFullYear() == today.getFullYear();
+
+		var w = 0;
+		while (w++<6) {
+			var thisRow = jQuery("<tr>");
+			for (var i=0; i<7; i++) {
+				var weekday = (_firstDayOfWeek + i) % 7;
+				var atts = {'class':(weekday == 0 || weekday == 6 ? 'weekend ' : 'weekday ')};
+
+				if (curDay < 0 || curDay >= lastDay) {
+					dayStr = ' ';
+				} else if (firstMonth && curDay < firstDate-1) {
+					dayStr = curDay+1;
+					atts['class'] += 'inactive';
+				} else if (finalMonth && curDay > lastDate-1) {
+					dayStr = curDay+1;
+					atts['class'] += 'inactive';
+				} else {
+					d.setDate(curDay+1);
+					var dStr = _dateToStr(d);
+					dayStr = jQuery("<a>").attr({'href':'javascript:;', 'rel':dStr}).html(curDay+1).click(function(e)
+					{
+						jQuery.datePicker.selectDate(jQuery.attr(this, 'rel'), this);
+						return false;
+					})[0];
+					if (_selectedDate && _selectedDate==dStr) {
+						jQuery(dayStr).attr('class','selected');
+					}
+				}
+
+				if (thisMonth && curDay+1 == todayDate) {
+					atts['class'] += 'today';
+				}
+				thisRow.append(jQuery("<td>").attr(atts).append(dayStr));
+				curDay++;
+			}
+			tBody.append(thisRow);
+		}
+
+		jCalDiv.append(
+			jQuery("<table>").attr('cellspacing',2).append("<thead>")
+			.find("thead").append(headRow).parent().append(tBody.children())
+		).append(prevLinkDiv).append(nextLinkDiv);
+
+		if (jQuery.browser.msie) {
+
+			// we put a styled iframe behind the calendar so HTML SELECT elements don't show through
+			var iframe = [	'<iframe class="bgiframe" tabindex="-1" ',
+		 					'style="display:block; position:absolute;',
+							'top: 0;',
+							'left:0;',
+							'z-index:-1; filter:Alpha(Opacity=\'0\');',
+							'width:3000px;',
+							'height:3000px"/>'].join('');
+			jCalDiv.append(document.createElement(iframe));
+		}
+		jCalDiv.css({'display':'block'});
+		return jCalDiv[0];
+	};
+	var _draw = function(c)
+	{
+		// explicitly empty the calendar before removing it to reduce the (MASSIVE!) memory leak in IE
+		// still not perfect but a lot better!
+		// Strangely if you chain the methods it reacts differently - when chained opening the calendar on
+		// IE uses a bunch of memory and pressing next/prev doubles this memory. When you close the calendar
+		// the memory is freed. If they aren't chained then pressing next or previous doesn't double the used
+		// memory so only one chunk of memory is used when you open the calendar (which is also freed when you
+		// close the calendar).
+		jQuery('div.popup-calendar a', _openCal[0]).unbind();
+		jQuery('div.popup-calendar', _openCal[0]).empty();
+		jQuery('div.popup-calendar', _openCal[0]).remove();
+		_openCal.append(c);
+	};
+	var _closeDatePicker = function()
+	{
+		jQuery('div.popup-calendar a', _openCal).unbind();
+		jQuery('div.popup-calendar', _openCal).empty();
+		jQuery('div.popup-calendar', _openCal).css({'display':'none'});
+
+		/*
+		if (jQuery.browser.msie) {
+			_openCal.unbind('keypress', _handleKeys);
+		} else {
+			jQuery(window).unbind('keypress', _handleKeys);
+		}
+		*/
+		jQuery(document).unbind('mousedown', _checkMouse);
+		delete _openCal;
+		_openCal = null;
+	};
+	var _handleKeys = function(e)
+	{
+		var key = e.keyCode ? e.keyCode : (e.which ? e.which: 0);
+		//console.log('KEY!! ' + key);
+		if (key == 27) {
+			_closeDatePicker();
+		}
+		return false;
+	};
+	var _checkMouse = function(e)
+	{
+		if (!_drawingMonth) {
+			var target = jQuery.browser.msie ? window.event.srcElement : e.target;
+			var cp = jQuery(target).findClosestParent('div.popup-calendar');
+			if (cp.get(0).className != 'date-picker-holder') {
+				_closeDatePicker();
+			}
+		}
+	};
+
+	return {
+		getChooseDateStr: function()
+		{
+			return navLinks.b;
+		},
+		show: function()
+		{
+			if (_openCal) {
+				_closeDatePicker();
+			}
+			this.blur();
+			var input = jQuery('input', jQuery(this).findClosestParent('input')[0])[0];
+			
+			_firstDate = input._startDate;
+			_lastDate = input._endDate;
+			_firstDayOfWeek = input._firstDayOfWeek;
+			_openCal = jQuery(this).findClosestParent('div.popup-calendar');
+			
+			var d = jQuery(input).val();
+			if (d != '') {
+				if (_dateToStr(_strToDate(d)) == d) {
+					_selectedDate = d;
+					_draw(_getCalendarDiv(_strToDate(d)));
+				} else {
+					// invalid date in the input field - just default to this month
+					_selectedDate = false;
+					_draw(_getCalendarDiv());
+				}
+			} else {
+				_selectedDate = false;
+				_draw(_getCalendarDiv());
+			}
+			/*
+			if (jQuery.browser == "msie") {
+				_openCal.bind('keypress', _handleKeys);
+			} else {
+				jQuery(window).bind('keypress', _handleKeys);
+			}
+			*/
+			jQuery(document).bind('mousedown', _checkMouse);
+		},
+		changeMonth: function(d, e)
+		{
+			_drawingMonth = true;
+			_draw(_getCalendarDiv(d));
+			_drawingMonth = false;
+		},
+		selectDate: function(d, ele)
+		{
+			selectedDate = d;
+			var $theInput = jQuery('input', jQuery(ele).findClosestParent('input')[0]);
+			$theInput.val(d);
+			$theInput.trigger('change');
+			_closeDatePicker(ele);
+		},
+		closeCalendar: function()
+		{
+			_closeDatePicker(this);
+		},
+		setInited: function(i)
+		{
+			i._inited = true;
+		},
+		isInited: function(i)
+		{
+			return i._inited != undefined;
+		},
+		setDateFormat: function(format,separator)
+		{
+			// set's the format that selected dates are returned in.
+			// options are 'dmy' (european), 'mdy' (americian) and 'ymd' (unicode)
+			dateFormat = format.toLowerCase();
+			dateSeparator = separator?separator:"/";
+		},
+		/**
+		* Function: setLanguageStrings
+		*
+		* Allows you to localise the calendar by passing in relevant text for the english strings in the plugin.
+		*
+		* Arguments:
+		* days		-	Array, e.g. ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+		* months	-	Array, e.g. ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+		* navLinks	-	Object, e.g. {p:'Prev', n:'Next', c:'Close', b:'Choose date'}
+		**/
+		setLanguageStrings: function(aDays, aMonths, aNavLinks)
+		{
+			days = aDays;
+			months = aMonths;
+			navLinks = aNavLinks;
+		},
+		/**
+		* Function: setDateWindow
+		*
+		* Used internally to set the start and end dates for a given date select
+		*
+		* Arguments:
+		* i			-	The id of the INPUT element this date window is for
+		* w			-	The date window - an object containing startDate and endDate properties
+		*				each in the current format as set in a call to setDateFormat (or in the
+		*				default format dmy if setDateFormat hasn't been called).
+		*				e.g. {startDate:'01/03/2006', endDate:'11/04/2006}
+		**/
+		setDateWindow: function(i, w)
+		{
+			if (w == undefined) w = {};
+			if (w.startDate == undefined) {
+				i._startDate = new Date();
+			} else {
+				i._startDate = _strToDate(w.startDate);
+			}
+			if (w.endDate == undefined) {
+				i._endDate = new Date();
+				i._endDate.setFullYear(i._endDate.getFullYear()+5);
+			} else {
+				i._endDate = _strToDate(w.endDate);
+			};
+			i._firstDayOfWeek = w.firstDayOfWeek == undefined ? 0 : w.firstDayOfWeek;
+		}
+	};
+}();
+jQuery.fn.findClosestParent = function(s)
+{
+	var ele = this;
+	while (true) {
+		if (jQuery(s, ele[0]).length > 0) {
+			return (ele);
+		}
+		ele = ele.parent();
+		if(ele[0].length == 0) {
+			return false;
+		}
+	}
+};
+jQuery.fn.datePicker = function(a)
+{
+	this.each(function() {
+		if(this.nodeName.toLowerCase() != 'input') return;
+		jQuery.datePicker.setDateWindow(this, a);
+		if (!jQuery.datePicker.isInited(this)) {
+			var chooseDate = jQuery.datePicker.getChooseDateStr();
+			var calBut;
+			if(a && a.inputClick){
+				calBut = jQuery(this).attr('title', chooseDate).addClass('date-picker');
+			}
+			else {
+				calBut = jQuery("<a>").attr({'href':'javascript:;',
+'class':'date-picker', 'title':chooseDate})
+				.append("<span>" + chooseDate + "</span>");
+			}
+			jQuery(this).wrap(
+				'<div class="date-picker-holder"></div>'
+			).before(
+				jQuery("<div>").attr({'class':'popup-calendar'})
+			).after(
+				calBut
+			);
+			calBut.bind('click', jQuery.datePicker.show);
+			jQuery.datePicker.setInited(this);
+		}
+	});
+	return this;
+};
+/*
+<!-- Generated calendar HTML looks like this - style with CSS -->
+<div class="popup-calendar">
+	<div class="link-close"><a href="#">Close</a></div>
+	<h3>July 2006</h3>
+	<table cellspacing="2">
+		<thead>
+			<tr>
+				<th scope="col" abbr="Monday" title="Monday" class="weekday">M</th>
+				<th scope="col" abbr="Tuesday" title="Tuesday" class="weekday">T</th>
+				<th scope="col" abbr="Wednesday" title="Wednesday" class="weekday">W</th>
+				<th scope="col" abbr="Thursday" title="Thursday" class="weekday">T</th>
+				<th scope="col" abbr="Friday" title="Friday" class="weekday">F</th>
+				<th scope="col" abbr="Saturday" title="Saturday" class="weekday">S</th>
+				<th scope="col" abbr="Sunday" title="Sunday" class="weekday">S</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="weekday">&nbsp;</td>
+				<td class="weekday">&nbsp;</td>
+				<td class="weekday">&nbsp;</td>
+				<td class="inactive weekday">1</td>
+				<td class="inactive weekday">2</td>
+				<td class="inactive weekend">3</td>
+				<td class="inactive weekend">4</td>
+			</tr>
+			<tr>
+				<td class="inactive weekday">5</td>
+				<td class="inactive weekday">6</td>
+				<td class="inactive weekday">7</td>
+				<td class="today weekday"><a href="#">8</a></td>
+				<td class="weekday"><a href="#">9</a></td>
+				<td class="weekend"><a href="#">10</a></td>
+				<td class="weekend"><a href="#">11</a></td>
+			</tr>
+			<tr>
+				<td class="weekday"><a href="#">12</a></td>
+				<td class="weekday"><a href="#">13</a></td>
+				<td class="weekday"><a href="#">14</a></td>
+				<td class="weekday"><a href="#">15</a></td>
+				<td class="weekday"><a href="#">16</a></td>
+				<td class="weekend"><a href="#">17</a></td>
+				<td class="weekend"><a href="#" class="selected">18</a></td>
+			</tr>
+			<tr>
+				<td class="weekday"><a href="#">19</a></td>
+				<td class="weekday"><a href="#">20</a></td>
+				<td class="weekday"><a href="#">21</a></td>
+				<td class="weekday"><a href="#">22</a></td>
+				<td class="weekday"><a href="#">23</a></td>
+				<td class="weekend"><a href="#">24</a></td>
+				<td class="weekend"><a href="#">25</a></td>
+			</tr>
+			<tr>
+				<td class="weekday"><a href="#">26</a></td>
+				<td class="weekday"><a href="#">27</a></td>
+				<td class="weekday"><a href="#">28</a></td>
+				<td class="weekday"><a href="#">29</a></td>
+				<td class="weekday"><a href="#">30</a></td>
+				<td class="weekend">&nbsp;</td>
+				<td class="weekend">&nbsp;</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="link-prev"><a href="#">Prev</a></div>
+	<div class="link-next"><a href="#">Next</a></div>
+</div>
+*/

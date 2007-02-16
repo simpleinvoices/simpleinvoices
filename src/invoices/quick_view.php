@@ -180,7 +180,16 @@ $prod_custom_field_label1 = get_custom_field_label(product_cf1);
 $prod_custom_field_label2 = get_custom_field_label(product_cf2);
 $prod_custom_field_label3 = get_custom_field_label(product_cf3);
 $prod_custom_field_label4 = get_custom_field_label(product_cf4);
+#get invoice custom fields
+$invoice_custom_field_label1 = get_custom_field_label(invoice_cf1);
+$invoice_custom_field_label2 = get_custom_field_label(invoice_cf2);
+$invoice_custom_field_label3 = get_custom_field_label(invoice_cf3);
+$invoice_custom_field_label4 = get_custom_field_label(invoice_cf4);
 
+$show_custom_field_1 = show_custom_field(invoice_cf1);
+$show_custom_field_2 = show_custom_field(invoice_cf2);
+$show_custom_field_3 = show_custom_field(invoice_cf3);
+$show_custom_field_4 = show_custom_field(invoice_cf4);
 
 
 #START INVOICE HERE - TOP SECTION
@@ -222,6 +231,10 @@ $display_block_top =  "
 	<tr class='details_screen summary'>
 		<td>$pref_inv_wordingField $LANG_date:</td><td colspan=5>$inv_dateField</td>
 	</tr>
+	$show_custom_field_1 
+	$show_custom_field_2 
+	$show_custom_field_3 
+	$show_custom_field_4
 	<tr>	
 		<td><br></td>
 	</tr>

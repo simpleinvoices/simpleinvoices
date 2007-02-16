@@ -25,6 +25,10 @@ while ($Array_master_invoice = mysql_fetch_array($result_print_master_invoice_id
 		$inv_dateField = $Array_master_invoice['inv_date'];
 		*/
                 $inv_noteField = $Array_master_invoice['inv_note'];
+                $inv_custom_field1Field = $Array_master_invoice['invoice_custom_field1'];
+                $inv_custom_field2Field = $Array_master_invoice['invoice_custom_field2'];
+                $inv_custom_field3Field = $Array_master_invoice['invoice_custom_field3'];
+                $inv_custom_field4Field = $Array_master_invoice['invoice_custom_field4'];
 
 
 };
@@ -227,6 +231,17 @@ while ($Array_defaults = mysql_fetch_array($result_print_defaults) ) {
 
 $line = 1;
 
+
+#get custom field labels
+$invoice_custom_field_label1 = get_custom_field_label(invoice_cf1);
+$invoice_custom_field_label2 = get_custom_field_label(invoice_cf2);
+$invoice_custom_field_label3 = get_custom_field_label(invoice_cf3);
+$invoice_custom_field_label4 = get_custom_field_label(invoice_cf4);
+
+$show_custom_field_1 = show_custom_field(invoice_cf1,$inv_custom_field1Field,write,'',details_screen,'');
+$show_custom_field_2 = show_custom_field(invoice_cf2,$inv_custom_field2Field,write,'',details_screen,'');
+$show_custom_field_3 = show_custom_field(invoice_cf3,$inv_custom_field3Field,write,'',details_screen,'');
+$show_custom_field_4 = show_custom_field(invoice_cf4,$inv_custom_field4Field,write,'',details_screen,'');
 $display_block_top =  "
 
 
@@ -314,6 +329,11 @@ if (  $_GET['invoice_style'] === 'Total' ) {
 	        <tr>
 			<td colspan=6 ><textarea input type=text name=\"i_description\" rows=10 cols=70 WRAP=nowrap>$inv_it_descriptionField</textarea></td>
         	</tr>
+
+	 $show_custom_field_1
+	 $show_custom_field_2
+	 $show_custom_field_3
+	 $show_custom_field_4
 	        <tr>       	         
 			<td class='details_screen'>$LANG_gross_total</td><td><input type=text name='inv_it_gross_total' value='$inv_it_gross_totalField' size=10> </td>
 		</tr>
@@ -467,6 +487,10 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 
 		$display_block_details .=  "
 			</table>
+			$show_custom_field_1
+			$show_custom_field_2
+			$show_custom_field_3
+			$show_custom_field_4
 			<tr>
 				<td colspan=6 class='details_screen'>$LANG_note:</td>
 			</tr>

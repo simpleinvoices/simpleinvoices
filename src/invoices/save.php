@@ -22,16 +22,25 @@ if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_inv
 			inv_type,
 			inv_preference, 
 			inv_date, 
-			inv_note)
+			inv_note,
+			invoice_custom_field1,
+			invoice_custom_field2,
+			invoice_custom_field3,
+			invoice_custom_field4
+		)
 		VALUES
-			(
-				'',
-				'$_POST[sel_id]',
-				'$_POST[select_customer]',
-				'1',
-				'$_POST[select_preferences]',
-				'$_POST[select_date]',
-				'$_POST[invoice_total_note]'
+		(
+			'',
+			'$_POST[sel_id]',
+			'$_POST[select_customer]',
+			'1',
+			'$_POST[select_preferences]',
+			'$_POST[select_date]',
+			'$_POST[invoice_total_note]',
+			'$_POST[i_custom_field1]',
+			'$_POST[i_custom_field2]',
+			'$_POST[i_custom_field3]',
+			'$_POST[i_custom_field4]'
 			)";
 
 	if (mysql_query($sql)) {
@@ -102,7 +111,11 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 			inv_biller_id = '$_POST[sel_id]',
 			inv_customer_id = '$_POST[select_customer]',
 			inv_preference = '$_POST[select_preferences]',
-			inv_date = '$_POST[select_date]'
+			inv_date = '$_POST[select_date]',
+			invoice_custom_field1 = '$_POST[i_custom_field1]',
+			invoice_custom_field2 = '$_POST[i_custom_field2]',
+			invoice_custom_field3 = '$_POST[i_custom_field3]',
+			invoice_custom_field4 = '$_POST[i_custom_field4]'
 		WHERE
 			inv_id = $invoice_id";
 
@@ -173,7 +186,11 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 			inv_type,
 			inv_preference, 
 			inv_date, 
-			inv_note
+			inv_note,
+			invoice_custom_field1,
+			invoice_custom_field2,
+			invoice_custom_field3, 
+			invoice_custom_field4
 		)
 		VALUES (
 			'',
@@ -182,7 +199,11 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 			2,
 			'$_POST[select_preferences]',
 			'$_POST[select_date]',
-			'$invoice_itemised_note_field'
+			'$invoice_itemised_note_field',
+			'$_POST[i_custom_field1]',
+			'$_POST[i_custom_field2]',
+			'$_POST[i_custom_field3]',
+			'$_POST[i_custom_field4]'
 		)";
 
 	if (mysql_query($sql)) {
@@ -295,7 +316,11 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 			inv_customer_id = '$_POST[select_customer]',
 			inv_preference = '$_POST[select_preferences]',
 			inv_date = '$_POST[select_date]',
-			inv_note = '$_POST[invoice_itemised_note]'
+			inv_note = '$_POST[invoice_itemised_note]',
+			invoice_custom_field1 = '$_POST[i_custom_field1]',
+			invoice_custom_field2 = '$_POST[i_custom_field2]',
+			invoice_custom_field3 = '$_POST[i_custom_field3]',
+			invoice_custom_field4 = '$_POST[i_custom_field4]'
 		WHERE
 			inv_id = $invoice_id";
 
@@ -430,7 +455,11 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 			inv_type,
 			inv_preference, 
 			inv_date, 
-			inv_note
+			inv_note,
+			invoice_custom_field1,
+			invoice_custom_field2,
+			invoice_custom_field3,
+			invoice_custom_field4
 			)
 		values
 			(
@@ -440,7 +469,11 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 			 3,
 			'$_POST[select_preferences]',
 			'$_POST[select_date]',
-			'$_POST[invoice_consulting_note]'
+			'$_POST[invoice_consulting_note]',
+			'$_POST[i_custom_field1]',
+			'$_POST[i_custom_field2]',
+			'$_POST[i_custom_field3]',
+			'$_POST[i_custom_field4]'
 			)
 		";
 
@@ -552,7 +585,11 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 			inv_customer_id = '$_POST[select_customer]',
 			inv_preference = '$_POST[select_preferences]',
 			inv_date = '$_POST[select_date]',
-			inv_note = '$_POST[invoice_itemised_note]'
+			inv_note = '$_POST[invoice_itemised_note]',
+			invoice_custom_field1 = '$_POST[i_custom_field1]',
+			invoice_custom_field2 = '$_POST[i_custom_field2]',
+			invoice_custom_field3 = '$_POST[i_custom_field3]',
+			invoice_custom_field4 = '$_POST[i_custom_field4]'
 		WHERE
 			inv_id = $invoice_id";
 

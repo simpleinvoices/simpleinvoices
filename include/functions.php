@@ -1,13 +1,18 @@
 <?php
-/*
-include('./config/config.php');
-ob_start();
-include("./lang/$language.inc.php");
-ob_end_clean();
 
-$conn = mysql_connect( $db_host, $db_user, $db_password );
-mysql_select_db( $db_name, $conn );
-*/
+/*
+* Script: functions.php
+*	Contain all the functions used in Simple Invoices
+*
+* Authors:
+*	- Justin Kelly
+*
+* License:
+*	GNU GPL2 or above
+*
+* Date last edited:
+*	Fri Feb 16 21:48:02 EST 2007
+**/
 
 /**
 * Function: get_custom_field_label
@@ -310,6 +315,14 @@ function calc_customer_paid($c_idField) {
 
 
 
+/**
+* Function: calc_invoice_tax
+* 
+* Calculates the total tax for a given invoices
+*
+* Arguments:
+* invoice_id		- The name of the field, ie. Custom Field 1, etc..
+**/
 function calc_invoice_tax($master_invoice_id) {
 
 	include('./config/config.php');
@@ -330,14 +343,37 @@ function calc_invoice_tax($master_invoice_id) {
 	return $invoice_total_taxField;
 }
 
-function show_custom_field($custom_field) {
+
+/**
+* Function: show_custom_field
+* 
+* If a custom field has been defined then show it in the add,edit, or view invoice screen
+*
+* Parameters:
+* custom_field		- the db name of the custom field ie invoice_cf1
+* custom_field_value	- the value of this custom field for a given invoice
+* permission		- the permission level - ie. in a print view its gets a read level, in an edit or add screen its write leve
+* css_class_tr		- the css class the the table row (tr)
+* css_class1		- the css class of the first td
+* css_class2		- the css class of the second td
+*
+* Returns:
+* Depending on the permission passed, either a formatted input box and the label of the custom field or a table row and data
+**/
+
+function show_custom_field($custom_field,$custom_field_value,$permission,$css_class_tr,$css_class1,$css_class2) {
+	
+	/*
+	*get the last character of the $custom field - used to set the name of the field
+	*/
+	$custom_field_number =  substr($custom_field, -1, 1);
 
 	include('./config/config.php');
 
 	$conn = mysql_connect( $db_host, $db_user, $db_password );
 	mysql_select_db( $db_name, $conn );
 
-	#invoice total tax
+	#get the label for the custom field
 	$get_custom_label ="select cf_custom_label from si_custom_fields where cf_custom_field = '$custom_field'"; 
 	$result_get_custom_label = mysql_query($get_custom_label, $conn) or die(mysql_error());
 
@@ -345,16 +381,32 @@ function show_custom_field($custom_field) {
                 $custom_label_value = $Array_cl['cf_custom_label'];
 	}
 	if ($custom_label_value != null) {
-	
-		$display_block ="
+		
+		if ($permission == "read") {
+			$display_block ="
 			<tr>
-				<td class=\"details_screen\">$custom_label_value <a href=\"./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500\" title=\"Info :: Custom fields\" class=\"thickbox\"><img src=\"./images/common/help-small.png\"></img></a>
+				<td class=\"details_screen\">
+					$custom_label_value
 				</td>
 				<td>
-					<input type=text name=\"i_custom_field\" size=25>
+					$custom_field_value
 				</td>
 			</tr>
 			";
+		}
+
+		else if ($permission == "write") {
+
+		$display_block ="
+			<tr>
+				<td class=\"$css_class1\">$custom_label_value <a href=\"./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500\" title=\"Info :: Custom fields\" class=\"thickbox\"><img src=\"./images/common/help-small.png\"></img></a>
+				</td>
+				<td>
+					<input type=text name=\"i_custom_field$custom_field_number\" value=\"$custom_field_value\"size=25></input>
+				</td>
+			</tr>
+			";
+		}
 	}
 	return $display_block;
 }
