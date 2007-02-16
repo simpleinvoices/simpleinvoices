@@ -21,7 +21,10 @@ while ($Array_master_invoice = mysql_fetch_array($result_print_master_invoice_id
 		$inv_dateField = date( $config['date_format'], strtotime( $Array_master_invoice['inv_date'] ) );
 		$calc_dateField = date('Y-m-d', strtotime( $Array_master_invoice['inv_date'] ) );
                 $inv_noteField = $Array_master_invoice['inv_note'];
-
+                $inv_custom_field1Field = $Array_master_invoice['invoice_custom_field1'];
+                $inv_custom_field2Field = $Array_master_invoice['invoice_custom_field2'];
+                $inv_custom_field3Field = $Array_master_invoice['invoice_custom_field3'];
+                $inv_custom_field4Field = $Array_master_invoice['invoice_custom_field4'];
 
 };
 
@@ -186,10 +189,10 @@ $invoice_custom_field_label2 = get_custom_field_label(invoice_cf2);
 $invoice_custom_field_label3 = get_custom_field_label(invoice_cf3);
 $invoice_custom_field_label4 = get_custom_field_label(invoice_cf4);
 
-$show_custom_field_1 = show_custom_field(invoice_cf1);
-$show_custom_field_2 = show_custom_field(invoice_cf2);
-$show_custom_field_3 = show_custom_field(invoice_cf3);
-$show_custom_field_4 = show_custom_field(invoice_cf4);
+$show_custom_field_1 = show_custom_field(invoice_cf1,$inv_custom_field1Field,read,'',details_screen,'');
+$show_custom_field_2 = show_custom_field(invoice_cf2,$inv_custom_field2Field,read,'',details_screen,'');
+$show_custom_field_3 = show_custom_field(invoice_cf3,$inv_custom_field3Field,read,'',details_screen,'');
+$show_custom_field_4 = show_custom_field(invoice_cf4,$inv_custom_field4Field,read,'',details_screen,'');
 
 
 #START INVOICE HERE - TOP SECTION
