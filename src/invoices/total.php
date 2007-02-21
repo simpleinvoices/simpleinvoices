@@ -258,6 +258,7 @@ Dialog.alert("Test of alert panel, check out debug window after closing it", {wi
         <td>
 			<input type="text" class="date-picker" name="select_date" id="date1" value='<?php echo $today = date("Y-m-d"); ?>'></input>
 	</td>
+	<td align=right><a href="./documentation/info_pages/invoice_custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Invoice Custom Fields" class="thickbox">want more fields<img src="./images/common/help-small.png"></img><a/></td>
 </tr>
 
 
@@ -287,6 +288,6 @@ Dialog.alert("Test of alert panel, check out debug window after closing it", {wi
 -->
 <!-- </div> -->
 <hr></hr>
-	<input type=submit name="submit" value="<?php echo $LANG_save;echo " "; echo $LANG_inv;?>"><input type=hidden name="invoice_style" value="insert_invoice_total"> * <?php echo $LANG_mandatory_fields;?>
+	<input type=submit name="submit" value="<?php echo $LANG_save;echo " "; echo $LANG_inv;?>"><input type=hidden name="invoice_style" value="insert_invoice_total">
 </FORM>
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

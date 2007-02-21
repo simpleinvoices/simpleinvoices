@@ -314,7 +314,7 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,
 ?>
 
 <tr>
-        <td colspan=5 class="details_screen"><?php echo $LANG_notes_opt;?></td>
+        <td colspan=5 class="details_screen"><?php echo $LANG_notes;?></td>
 </tr>
 
 <tr>
@@ -340,7 +340,6 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,
 		<input type=hidden name="max_items" value="<?php echo $num; ?>">
 		<input type=submit name="submit" value="<?php echo $LANG_save;echo " "; echo $LANG_inv;?>">
 		<input type=hidden name="invoice_style" value="insert_invoice_itemised">
-		* <?php echo $LANG_mandatory_fields;?>
 
 </FORM>
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->
