@@ -25,6 +25,10 @@ while ($Array_master_invoice = mysql_fetch_array($result_print_master_invoice_id
                 $inv_preferenceField = $Array_master_invoice['inv_preference'];
                 $inv_dateField = date( $config['date_format'], strtotime( $Array_master_invoice['inv_date'] ) );
                 $inv_noteField = $Array_master_invoice['inv_note'];
+                $inv_custom_field1Field = $Array_master_invoice['invoice_custom_field1'];
+                $inv_custom_field2Field = $Array_master_invoice['invoice_custom_field2'];
+                $inv_custom_field3Field = $Array_master_invoice['invoice_custom_field3'];
+                $inv_custom_field4Field = $Array_master_invoice['invoice_custom_field4'];
 
 };
 
@@ -154,6 +158,12 @@ $prod_custom_field_label2 = get_custom_field_label(product_cf2);
 $prod_custom_field_label3 = get_custom_field_label(product_cf3);
 $prod_custom_field_label4 = get_custom_field_label(product_cf4);
 
+#get invoice custom fields
+$show_custom_field_1 = show_custom_field(invoice_cf1,$inv_custom_field1Field,read,'','tbl1-left','tbl1-right',3,':');
+$show_custom_field_2 = show_custom_field(invoice_cf2,$inv_custom_field2Field,read,'','tbl1-left','tbl1-right',3,':');
+$show_custom_field_3 = show_custom_field(invoice_cf3,$inv_custom_field3Field,read,'','tbl1-left','tbl1-right',3,':');
+$show_custom_field_4 = show_custom_field(invoice_cf4,$inv_custom_field4Field,read,'','tbl1-left','tbl1-right',3,':');
+
 
 #logo field support - if not logo show nothing else show logo
 
@@ -203,6 +213,12 @@ $display_block_top =  "
         <tr>
                 <td nowrap class=\"tbl1-left\">$pref_inv_wordingField $LANG_date:</td><td class=\"tbl1-right\" colspan=3>$inv_dateField</td>
         </tr>   
+	<!-- Show the Invoice Custom Fields is valid -->
+	$show_custom_field_1 
+	$show_custom_field_2 
+	$show_custom_field_3 
+	$show_custom_field_4
+
         <tr>
                 <td class=\"tbl1-left\" >$LANG_total: </td><td class=\"tbl1-right\" colspan=3>$pref_currency_signField$invoice_total_Field_format</td>
         </tr>   
@@ -212,6 +228,8 @@ $display_block_top =  "
         <tr>
                 <td nowrap class=\"tbl1-left tbl1-bottom\">$LANG_owing:</td><td class=\"tbl1-right tbl1-bottom\" colspan=3 >$pref_currency_signField$invoice_owing_Field</td>
         </tr>   
+
+
 	</table>
 	<!-- Summary - end -->
 ";

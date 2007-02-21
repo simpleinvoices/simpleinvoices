@@ -347,7 +347,7 @@ function calc_invoice_tax($master_invoice_id) {
 /**
 * Function: show_custom_field
 * 
-* If a custom field has been defined then show it in the add,edit, or view invoice screen
+* If a custom field has been defined then show it in the add,edit, or view invoice screen - This is used for the Invoice Custom Fields - may be used for the others as wll based on the situation
 *
 * Parameters:
 * custom_field		- the db name of the custom field ie invoice_cf1
@@ -356,12 +356,14 @@ function calc_invoice_tax($master_invoice_id) {
 * css_class_tr		- the css class the the table row (tr)
 * css_class1		- the css class of the first td
 * css_class2		- the css class of the second td
+* td_col_span		- the column span of the right td
+* seperator		- used in the print view ie. adding a : between the 2 values
 *
 * Returns:
 * Depending on the permission passed, either a formatted input box and the label of the custom field or a table row and data
 **/
 
-function show_custom_field($custom_field,$custom_field_value,$permission,$css_class_tr,$css_class1,$css_class2) {
+function show_custom_field($custom_field,$custom_field_value,$permission,$css_class_tr,$css_class1,$css_class2,$td_col_span,$seperator) {
 	
 	/*
 	*get the last character of the $custom field - used to set the name of the field
@@ -384,11 +386,11 @@ function show_custom_field($custom_field,$custom_field_value,$permission,$css_cl
 		
 		if ($permission == "read") {
 			$display_block ="
-			<tr>
-				<td class=\"details_screen\">
-					$custom_label_value
+			<tr class=\"$css_class_tr\" >
+				<td class=\"$css_class1\">
+					$custom_label_value$seperator
 				</td>
-				<td>
+				<td class=\"$css_class2\" colspan=\"$td_col_span\" >
 					$custom_field_value
 				</td>
 			</tr>

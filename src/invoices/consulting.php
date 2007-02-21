@@ -223,15 +223,11 @@ if (mysql_num_rows($result_preferences) == 0) {
 
 
 #get custom field labels
-$invoice_custom_field_label1 = get_custom_field_label(invoice_cf1);
-$invoice_custom_field_label2 = get_custom_field_label(invoice_cf2);
-$invoice_custom_field_label3 = get_custom_field_label(invoice_cf3);
-$invoice_custom_field_label4 = get_custom_field_label(invoice_cf4);
 
-$show_custom_field_1 = show_custom_field(invoice_cf1,'',write,'',details_screen,'');
-$show_custom_field_2 = show_custom_field(invoice_cf2,'',write,'',details_screen,'');
-$show_custom_field_3 = show_custom_field(invoice_cf3,'',write,'',details_screen,'');
-$show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,'');
+$show_custom_field_1 = show_custom_field(invoice_cf1,'',write,'',details_screen,'','','');
+$show_custom_field_2 = show_custom_field(invoice_cf2,'',write,'',details_screen,'','','');
+$show_custom_field_3 = show_custom_field(invoice_cf3,'',write,'',details_screen,'','','');
+$show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,'','','');
 
 
 ?>

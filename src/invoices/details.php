@@ -233,15 +233,11 @@ $line = 1;
 
 
 #get custom field labels
-$invoice_custom_field_label1 = get_custom_field_label(invoice_cf1);
-$invoice_custom_field_label2 = get_custom_field_label(invoice_cf2);
-$invoice_custom_field_label3 = get_custom_field_label(invoice_cf3);
-$invoice_custom_field_label4 = get_custom_field_label(invoice_cf4);
 
-$show_custom_field_1 = show_custom_field(invoice_cf1,$inv_custom_field1Field,write,'',details_screen,'');
-$show_custom_field_2 = show_custom_field(invoice_cf2,$inv_custom_field2Field,write,'',details_screen,'');
-$show_custom_field_3 = show_custom_field(invoice_cf3,$inv_custom_field3Field,write,'',details_screen,'');
-$show_custom_field_4 = show_custom_field(invoice_cf4,$inv_custom_field4Field,write,'',details_screen,'');
+$show_custom_field_1 = show_custom_field(invoice_cf1,$inv_custom_field1Field,write,'',details_screen,'','','');
+$show_custom_field_2 = show_custom_field(invoice_cf2,$inv_custom_field2Field,write,'',details_screen,'','','');
+$show_custom_field_3 = show_custom_field(invoice_cf3,$inv_custom_field3Field,write,'',details_screen,'','','');
+$show_custom_field_4 = show_custom_field(invoice_cf4,$inv_custom_field4Field,write,'',details_screen,'','','');
 $display_block_top =  "
 
 
