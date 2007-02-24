@@ -257,6 +257,7 @@ $LANG_using_simple_invoices = "Using Simple Invoices";//0
 $LANG_view = "Bekijk";//1
 $LANG_quantity = "Aantal";//1
 $LANG_quantity_short = "Aantal";//1
+$LANG_want_more_fields = "want more fields";//0
 $LANG_welcome = "Welkom bij ";//1
 $LANG_zip = "Postcode";//1
 

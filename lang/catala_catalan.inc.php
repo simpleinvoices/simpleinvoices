@@ -257,6 +257,7 @@ $LANG_using_simple_invoices = "Using Simple Invoices";//0
 $LANG_view = "Veure";//1
 $LANG_quantity = "Quantitat";//1
 $LANG_quantity_short = "Qtat";//1
+$LANG_want_more_fields = "want more fields";//0
 $LANG_welcome ="Benvingut a ";//1
 $LANG_zip = "Codi Postal";//1
 

@@ -257,6 +257,7 @@ $LANG_using_simple_invoices = "Using Simple Invoices";//0
 $LANG_view = "Vista";//1
 $LANG_quantity = "Cantidad";//1
 $LANG_quantity_short = "Cant";//1
+$LANG_want_more_fields = "want more fields";//0
 $LANG_welcome = "Bienvenido a ";//1
 $LANG_zip = "C&oacute;//1digo postal";//1
 

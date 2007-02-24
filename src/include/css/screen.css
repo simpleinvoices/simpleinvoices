@@ -5,7 +5,7 @@ PAGE BODY
 body {
 	margin: 0 auto;
 	padding: 0;
-  background: #e5e5e5;
+	background: #e5e5e5;
 	text-align: center;
 }
 
@@ -21,6 +21,9 @@ body, .dialog {
 
 table.manage {
 	font-size: 12px;
+}
+td.account {
+	font-size: 14px;
 }
 /* Make sure the table cells show the right font */
 /* Tablesorter table styling - start*/
@@ -344,9 +347,11 @@ table { border-collapse: collapse;
 tr {
 border: 1px solid #fff;
 }
+
 td {
 border: 1px solid #fff;
 }
+
 	/*  Work around IE/Win code size bug - courtesy Jesper, waffle.wootest.net  */
 
 * html code	{

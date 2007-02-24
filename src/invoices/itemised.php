@@ -235,12 +235,13 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 
 <link rel="stylesheet" type="text/css" href="include/jquery.datePicker.css" title="default" media="screen" />
+<link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="screen"/>
 
 <script type="text/javascript" src="include/jquery.js"></script>
 <script type="text/javascript" src="include/jquery.dom_creator.js"></script>
 <script type="text/javascript" src="include/jquery.datePicker.js"></script>
 <script type="text/javascript" src="include/jquery.datePicker.conf.js"></script>
-
+<script type="text/javascript" src="include/jquery.thickbox.js"></script>
 
 </head>
 
@@ -265,7 +266,6 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,
 	<td input type=text name="biller_block" size=25>
 		<?php echo $display_block; ?>
 	</td>
-</tr>
 </tr>
 <tr>
 	<td class="details_screen">
@@ -314,19 +314,24 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,
 ?>
 
 <tr>
-        <td colspan=5 class="details_screen"><?php echo $LANG_notes;?></td>
+        <td colspan=2 class="details_screen"><?php echo $LANG_notes;?></td>
 </tr>
 
 <tr>
-        <td colspan=5><textarea input type=text name="invoice_itemised_note" rows=5 cols=70 WRAP=nowrap></textarea></td>
+        <td colspan=2><textarea input type=text name="invoice_itemised_note" rows=5 cols=70 WRAP=nowrap></textarea></td>
 </tr>
-
 
 <tr><td class="details_screen"><?php echo $LANG_tax;?></td><td input type=text name="inv_it_tax" size=15> <?php echo $display_block_tax; ?></td>
 </tr>
 
 <tr>
 <td class="details_screen"><?php echo $LANG_inv_pref;?></td><td input type=text name="inv_preferences"><?php echo $display_block_preferences; ?></td>
+</tr>	
+<tr>
+	<td align=left>
+		<a href="./documentation/info_pages/invoice_custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Invoice Custom Fields" class="thickbox"><?php echo $LANG_want_more_fields; ?><img src="./images/common/help-small.png"></img></a>
+
+	</td>
 </tr>
 <!--Add more line items while in an itemeised invoice - Get style - has problems- wipes the current values of the existing rows - not good
 <tr>

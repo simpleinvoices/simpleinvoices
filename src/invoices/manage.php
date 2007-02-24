@@ -32,7 +32,10 @@ include('./src/invoices/manage.inc.php');
 
 
 <script type="text/javascript" src="include/jquery.js"></script>
-<script type="text/javascript" src="./include/jquery.thickbox.js"></script>
+
+<script type="text/javascript" src="./src/include/js/ibox.js"></script>
+<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
+
 <? 
 require "lgplus/php/chklang.php";
 require "lgplus/php/settings.php";
@@ -71,6 +74,5 @@ Rico.onLoad( function() {
 
 
 <?php echo $display_block; ?>
-
-<a href="./documentation/info_pages/manage_invoices.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Manage invoices" class="thickbox"><img src="./images/common/help-small.png"></img> What's all these different columns?</a>
+<a href="./documentation/info_pages/manage_invoices.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img> What's all these different columns?</a>
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

@@ -259,6 +259,7 @@ $LANG_using_simple_invoices = "Using Simple Invoices";//0
 $LANG_view = "N&auml;yt&auml;";//1
 $LANG_quantity = "M&auml;&auml;r&auml;";//1
 $LANG_quantity_short = "M&auml;&auml;r&auml;";//1
+$LANG_want_more_fields = "want more fields";//0
 $LANG_welcome ="Tervetuloa ohjelmaan ";//1
 $LANG_zip = "Postinro";//1
 
