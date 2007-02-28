@@ -205,7 +205,10 @@ if (mysql_num_rows($result_preferences) == 0) {
 <script type="text/javascript" src="include/jquery.dom_creator.js"></script>
 <script type="text/javascript" src="include/jquery.datePicker.js"></script>
 <script type="text/javascript" src="include/jquery.datePicker.conf.js"></script>
-<script type="text/javascript" src="./include/jquery.thickbox.js"></script>
+
+<script type="text/javascript" src="./src/include/js/ibox.js"></script>
+<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
+
 <!--
 //prep for open rico 
 <script>
@@ -282,7 +285,7 @@ Dialog.alert("Test of alert panel, check out debug window after closing it", {wi
 </tr>
 <tr>
 	<td align=left>
-		<a href="./documentation/info_pages/invoice_custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Invoice Custom Fields" class="thickbox"><?php echo $LANG_want_more_fields; ?><img src="./images/common/help-small.png"></img></a>
+		<a href="./documentation/info_pages/invoice_custom_fields.html" rel="ibox&height=400"><?php echo $LANG_want_more_fields; ?><img src="./images/common/help-small.png"></img></a>
 	</td>
 </tr>
 </table>

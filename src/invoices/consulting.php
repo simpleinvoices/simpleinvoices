@@ -242,13 +242,14 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 
 <link rel="stylesheet" type="text/css" href="include/jquery.datePicker.css" title="default" media="screen" />
-<link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="screen"/>
+<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
 
 <script type="text/javascript" src="include/jquery.js"></script>
 <script type="text/javascript" src="include/jquery.dom_creator.js"></script>
 <script type="text/javascript" src="include/jquery.datePicker.js"></script>
 <script type="text/javascript" src="include/jquery.datePicker.conf.js"></script>
-<script type="text/javascript" src="include/jquery.thickbox.js"></script>
+<script type="text/javascript" src="./src/include/js/ibox.js"></script>
+
 
     <script type="text/javascript">
 	$(document).ready(function() {
@@ -341,7 +342,7 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,
 </tr>
 <tr>
 	<td align=left colspan=2> 
-		<a href="./documentation/info_pages/invoice_custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Invoice Custom Fields" class="thickbox"><?php echo $LANG_want_more_fields; ?><img src="./images/common/help-small.png"></img></a>
+		<a href="./documentation/info_pages/invoice_custom_fields.html" rel="ibox&height=400"><?php echo $LANG_want_more_fields; ?><img src="./images/common/help-small.png"></img></a>
 
 	</td>
 	
