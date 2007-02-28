@@ -2,7 +2,7 @@
 <REPORT>
 	<TITLE>Sales Report</TITLE>
    <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
-   <CSS>phpreports.css</CSS>
+ <!--  <CSS>phpreports.css</CSS>  -->
    <PAGE BORDER="1" SIZE="2500" CELLSPACING="0" CELLPADDING="5" WIDTH="500">
       <HEADER>
          <ROW>
