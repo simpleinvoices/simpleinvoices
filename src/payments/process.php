@@ -4,12 +4,12 @@ include_once('./include/include_main.php');
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="./src/include/js/ibox.js"></script>
+<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
+
 <?php
 /* validataion code */
 include("./include/validation.php");
-echo <<<EOD
-<link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="all" />
-EOD;
 
 $conn = mysql_connect($db_host, $db_user, $db_password);
 mysql_select_db("$db_name",$conn);
@@ -186,7 +186,7 @@ $display_block = <<<EOD
 </tr>
 <tr>
 	<td class="details_screen">{$LANG_amount}</td>
-	<td colspan="5"><input type="text" name="ac_amount" size="25" value="{$invoice_owing_Field}" /><a href="./documentation/info_pages/process_payment_auto_amount.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Process Payment Auto Amount" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
+	<td colspan="5"><input type="text" name="ac_amount" size="25" value="{$invoice_owing_Field}" /><a href="./documentation/info_pages/process_payment_auto_amount.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG_date_formatted}</td>
@@ -215,12 +215,12 @@ $display_block = <<<EOD
 <table align="center">
 <tr>
 	<td class="details_screen">{$LANG_invoice_id}
-	<a href="./documentation/info_pages/process_payment_inv_id.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Process payments" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
+	<a href="./documentation/info_pages/process_payment_inv_id.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
 	<td><input type="text" id="ac_me" name="ac_inv_id" /></td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG_details}
-	<a href="./documentation/info_pages/process_payment_details.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Process payments" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
+	<a href="./documentation/info_pages/process_payment_details.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
 	<td id="js_total"><i>{$LANG_select_invoice}</i> </td>
 </tr>
 <tr>
@@ -262,7 +262,6 @@ echo <<<EOD
 <script type="text/javascript" src="include/jquery.datePicker.conf.js"></script>
 <script type='text/javascript' src='include/jquery.autocomplete.js'></script>
 <script type='text/javascript' src='include/jquery.autocomplete.conf.js'></script>
-<script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>

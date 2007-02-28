@@ -4,14 +4,13 @@ include_once('./include/include_main.php');
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="./src/include/js/ibox.js"></script>
+<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
+
 <?php
 #table
 include("./include/validation.php");
-echo <<<EOD
-<link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="all"/>
 
-
-EOD;
 /*validation code*/
 jsBegin();
 jsFormValidationBegin("frmpost");
@@ -116,7 +115,7 @@ if ($_GET['action'] == "view") {
 		<td class="details_screen">{$LANG_street}</td><td>{$b_street_addressField}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_street2} <a href="./documentation/info_pages/street2.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Street address 2" class="thickbox"><img src="./images/common/help-small.png"></img></a></td><td>{$b_street_address2Field}</td>
+		<td class="details_screen">{$LANG_street2} <a href="./documentation/info_pages/street2.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td>{$b_street_address2Field}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_city}</td><td>{$b_cityField}</td>
@@ -143,23 +142,23 @@ if ($_GET['action'] == "view") {
 		<td class="details_screen">{$LANG_email}</td><td>{$b_emailField}</td>
 	</tr>	
 	<tr>
-		<td class="details_screen">{$biller_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$biller_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
 		<td>{$b_custom_field1Field}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$biller_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$biller_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
 		<td>{$b_custom_field2Field}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$biller_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$biller_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
 		<td>{$b_custom_field3Field}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$biller_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$biller_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
 		<td>{$b_custom_field4Field}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_logo_file} <a href="documentation/info_pages/insert_biller_text.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Logo file" class="thickbox"><img src="./images/common/help-small.png"></img></a></td><td>{$b_co_logoField}</td>
+		<td class="details_screen">{$LANG_logo_file} <a href="documentation/info_pages/insert_biller_text.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td>{$b_co_logoField}</td>
 	</tr>	
 	<tr>
 		<td class="details_screen">{$LANG_invoice_footer}</td><td>{$b_co_footerField}</td>
@@ -208,7 +207,7 @@ $display_block = <<<EOD
 		<td><input type=text name="b_street_address" value="{$b_street_addressField}" size=50 /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_street2} <a href="./documentation/info_pages/street2.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Street address 2" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$LANG_street2} <a href="./documentation/info_pages/street2.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="b_street_address2" value="{$b_street_address2Field}" size=50 /></td>
 	</tr>
 	<tr>
@@ -244,24 +243,24 @@ $display_block = <<<EOD
 		<td><input type=text name="b_email" value="{$b_emailField}" size=50 /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$biller_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$biller_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="b_custom_field1" value="{$b_custom_field1Field}" size=50 </td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$biller_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$biller_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="b_custom_field2" value="{$b_custom_field2Field}" size=50 </td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$biller_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$biller_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="b_custom_field3" value="{$b_custom_field3Field}" size=50 </td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$biller_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Custom fields" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$biller_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="b_custom_field4" value="{$b_custom_field4Field}" size=50 </td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_logo_file}
-		<a href="documentation/info_pages/insert_biller_text.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Logo file" class="thickbox"><img src="./images/common/help-small.png"></img></a></td>
+		<a href="documentation/info_pages/insert_biller_text.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
 		<td>{$display_block_logo_list}</td> 
 	</tr>
 	<tr>
@@ -291,7 +290,6 @@ EOD;
 
 ?>
     <script type="text/javascript" src="./include/jquery.js"></script>
-    <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
