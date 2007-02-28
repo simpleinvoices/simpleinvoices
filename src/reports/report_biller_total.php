@@ -3,10 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- thickbox js and css stuff -->
-    <script type="text/javascript" src="./include/jquery.js"></script>
-    <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="src/include/css/jquery.thickbox.css" media="all"/>
+<script type="text/javascript" src="./src/include/js/ibox.js"></script>
+<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
 
 </head>
 <body>
@@ -36,5 +34,5 @@ include('./config/config.php');
 
 <div id="footer"></div>
 <hr></hr>
-<a href="./documentation/info_pages/reports_xsl.html?keepThis=true&TB_iframe=true&height=300&width=650" title="Info :: Reports" class="thickbox"><font color="red">Did you get an "OOOOPS, THERE'S AN ERROR HERE." error?</font></a>
+<a href="./documentation/info_pages/reports_xsl.html" rel="ibox&height=400"><font color="red">Did you get an "OOOOPS, THERE'S AN ERROR HERE." error?</font></a>
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

@@ -1,8 +1,8 @@
 <?php include("./include/include_main.php"); ?>
 <html>
 <head>
-    <script type="text/javascript" src="./include/jquery.js"></script>
-    <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
+<script type="text/javascript" src="./src/include/js/ibox.js"></script>
+<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
 </head>
 <body>
 <b>Taxes in total</b>
@@ -29,4 +29,4 @@
 </div>
 <div id="footer"></div>
 <hr></hr>
- <a href="./documentation/info_pages/reports_xsl.html?keepThis=true&TB_iframe=true&height=300&width=650" title="Info :: Reports" class="thickbox"><font color="red">Did you get an "OOOOPS, THERE'S AN ERROR HERE." error?</font></a>
+ <a href="./documentation/info_pages/reports_xsl.html" rel="ibox&height=400"><font color="red">Did you get an "OOOOPS, THERE'S AN ERROR HERE." error?</font></a>
