@@ -166,11 +166,17 @@ EOD;
 	        }
                 echo <<< EOD
                 <tr>
-                <td><input type=text name='i_quantity$line' size=5></td><td input type=text name='i_description$line' size=50>$display_block_products </td><td>
-<a href='#' class="show-text$line" onClick="$('.text$line').show();$('.show-text$line').hide();">$LANG_show_details Show note</a><a href='#' class="text hide" onClick="$('.text$line').hide();$('.show-text$line').show();">$LANG_hide_details Hide note</a>
- </td></tr>
+                <td>
+			<input type=text name='i_quantity$line' size=5></td><td input type=text name='i_description$line' size=50>$display_block_products 
+		</td>
+		<!--
+		<td>
+			<a href='#' class="show-text$line" onClick="$('.text$line').show();$('.show-text$line').hide();">$LANG_show_details Show note</a><a href='#' class="text hide" onClick="$('.text$line').hide();$('.show-text$line').show();">$LANG_hide_details Hide note</a>
+		</td>
+		-->
+		</tr>
 <tr class="text$line hide">
-        <td colspan=5 ><textarea input type=text name='line_item_description$line' rows=3 cols=80 WRAP=nowrap></textarea></td>
+        <td colspan=2 ><textarea input type=text name='line_item_description$line' rows=3 cols=80 WRAP=nowrap></textarea></td>
 </tr>
 EOD;
 }
@@ -259,14 +265,14 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,
 <script type="text/javascript" src="include/jquery.datePicker.conf.js"></script>
 <script type="text/javascript" src="./src/include/js/ibox.js"></script>
 
-
+<!--
     <script type="text/javascript">
 	$(document).ready(function() {
 	 // hides the customer and biller details as soon as the DOM is ready (a little sooner that page load)
 	  $('.hide').hide();
   	});
     </script>
-
+-->
 
 </head>
 	<title><?php echo $title; echo " :: "; echo $LANG_inv; echo $LANG_inv_consulting; ?></title>
@@ -304,7 +310,12 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,
 
 
 <tr>
-<td class="details_screen"><?php echo $LANG_quantity;?></td><td class="details_screen"><?php echo $LANG_description;?></td>
+	<td class="details_screen">
+		<?php echo $LANG_quantity;?>
+	</td>
+	<td class="details_screen">
+		<?php echo $LANG_description;?>
+	</td>
 </tr>
 <?php
 /* check the def number of line items and do the print and entry field for that number of items */
@@ -335,11 +346,11 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,
 	echo $show_custom_field_4;
 ?>
 <tr>
-        <td colspan=5 class="details_screen"><?php echo $LANG_notes;?></td>
+        <td colspan=2 class="details_screen"><?php echo $LANG_notes;?></td>
 </tr>
 
 <tr>
-        <td colspan=5 ><textarea input type=text name="invoice_consulting_note" rows=5 cols=80 WRAP=nowrap></textarea></td>
+        <td colspan=2 ><textarea input type=text name="invoice_consulting_note" rows=5 cols=80 WRAP=nowrap></textarea></td>
 </tr>
 
 <tr>
