@@ -522,13 +522,11 @@ $display_block_bottom =  "
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <head>
 	<script type="text/javascript" src="./include/jquery.js"></script>
-	<script type="text/javascript" src="./include/jquery.thickbox.js"></script>
 
 	<script type="text/javascript" src="include/jquery.dom_creator.js"></script>
 	<script type="text/javascript" src="include/jquery.datePicker.js"></script>
 	<script type="text/javascript" src="include/jquery.datePicker.conf.js"></script>
 
-	<link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="include/jquery.datePicker.css" title="default" media="screen" />
 
 	<script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>

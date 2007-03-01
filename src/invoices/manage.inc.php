@@ -30,20 +30,20 @@ if (mysql_num_rows($result) == 0) {
 <col style='width:5%;' />
 <col style='width:10%;' />
 </colgroup>
-<thead>
+<thead > 
 <tr class="sortHeader">
-<th class="noFilter" >{$LANG_actions} </th>
-<th class="noFilter">{$LANG_id}</th>
-<th class="selectFilter index_table">{$LANG_biller}</th>
-<th class="selectFilter index_table">{$LANG_customer}</th>
-<th class="noFilter">{$LANG_total}</th>
+<th class="noFilter sortable" >{$LANG_actions} </th>
+<th class="noFilter sortable">{$LANG_id}</th>
+<th class="selectFilter index_table sortable">{$LANG_biller}</th>
+<th class="selectFilter index_table sortable">{$LANG_customer}</th>
+<th class="noFilter sortable">{$LANG_total}</th>
 <!--
 <th class="noFilter">{$LANG_paid}</th>
 -->
-<th class="noFilter">{$LANG_owing}</th>
-<th class="selectFilter index_table">{$LANG_aging}</th>
-<th class="noFilter">{$LANG_invoice_type}</th>
-<th class="noFilter">{$LANG_date_created}</th>
+<th class="noFilter sortable">{$LANG_owing}</th>
+<th class="selectFilter index_table sortable">{$LANG_aging}</th>
+<th class="noFilter sortable">{$LANG_invoice_type}</th>
+<th class="noFilter sortable">{$LANG_date_created}</th>
 </tr>
 </thead>
 EOD;

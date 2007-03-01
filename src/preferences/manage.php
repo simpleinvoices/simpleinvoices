@@ -10,9 +10,6 @@ include('./include/include_main.php');
 
 <?php
 
-echo <<<EOD
-	<link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="all" />
-EOD;
 
 	#select preferences
 	$conn = mysql_connect("$db_host","$db_user","$db_password");

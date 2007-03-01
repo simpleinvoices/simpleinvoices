@@ -235,7 +235,6 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 
 <link rel="stylesheet" type="text/css" href="include/jquery.datePicker.css" title="default" media="screen" />
-<link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="screen"/>
 
 <script type="text/javascript" src="include/jquery.js"></script>
 <script type="text/javascript" src="include/jquery.dom_creator.js"></script>

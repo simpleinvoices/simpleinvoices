@@ -202,7 +202,7 @@ $display_block_top =  "
 		<td class=account>$LANG_total:</td><td class=account>$pref_currency_signField$invoice_total_Field_format</td>
 		<td class=account><a href='index.php?module=payments&view=manage&inv_id=$inv_idField'>$LANG_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field_format</td>
 		<td class=account>$LANG_owing:</td><td class=account><u>$pref_currency_signField$invoice_owing_Field</u></td>
-		<td class=account>$LANG_age<a href='documentation/info_pages/age.html' rel='ibox&height=400'><img src=\"./images/common/help-small.png\"></img></a>: </td><td class=account nowrap >$invoice_age</td>
+		<td class=account>$LANG_age:</td><td class=account nowrap >$invoice_age <a href='documentation/info_pages/age.html' rel='ibox&height=400'><img src=\"./images/common/help-small.png\"></img></a></td>
 		<td></td><td class=\"columnleft\"></td>
 		<td class=\"account\">$LANG_total:</td><td class=account>$pref_currency_signField$invoice_total_Field_customer_format</td>
 		<td class=account><a href='index.php?module=payments&view=manage&c_id=$c_idField'>$LANG_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field_customer_format</td>
