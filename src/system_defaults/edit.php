@@ -117,7 +117,7 @@ else if ($_GET[submit] == "def_inv_template") {
 	</tr>
 	-->
 	<tr>
-		<td class=\"details_screen\">$msd_def_inv_template <a href='./src/documentation/info_pages/default_invoice_template_text.html?keepThis=true&TB_iframe=true&height=300&width=500' title='Info :: Custom fields' class='thickbox'><img src=\"images/common/help-small.png\"></img></a></td>
+		<td class=\"details_screen\">$msd_def_inv_template <a href='./src/documentation/info_pages/default_invoice_template_text.html' rel='ibox&height=400'><img src=\"images/common/help-small.png\"></img></a></td>
 		<td>$display_block_templates_list</td>
 	</tr>
 	<tr>
@@ -420,15 +420,17 @@ else {
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="text/javascript" src="./include/jquery.js"></script>
-<script type="text/javascript" src="./include/jquery.thickbox.js"></script>
+
+<!-- <script type="text/javascript" src="./include/jquery.js"></script> -->
+
+<script type="text/javascript" src="./src/include/js/ibox.js"></script>
+<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
+
 
 </head>
 <?php include('./config/config.php'); ?>
 
 <BODY>
-
-<link rel="stylesheet" type="text/css" href="src/include/css/jquery.thickbox.css" media="all"/>
 
 <FORM name="frmpost" ACTION="index.php?module=system_defaults&view=save&sys_default=<?php echo $default; ?>" METHOD=POST onsubmit="return frmpost_Validator(this)">
 

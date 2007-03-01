@@ -5,8 +5,8 @@ include('./include/include_main.php');
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <script type="text/javascript" src="./include/jquery.js"></script>
-  <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
+<script type="text/javascript" src="./src/include/js/ibox.js"></script>
+<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
 
 <?php
 
@@ -130,5 +130,5 @@ Rico.onLoad( function() {
 
 <?php echo $display_block; ?>
 
-<a href="./documentation/info_pages/inv_pref_what_the.html?keepThis=true&TB_iframe=true&height=300&width=500" title="Info :: Invoice preference" class="thickbox"><img src="./images/common/help-small.png"></img> What's all this "Invoice Preference" stuff about?</a>
+<a href="./documentation/info_pages/inv_pref_what_the.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img> What's all this "Invoice Preference" stuff about?</a>
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

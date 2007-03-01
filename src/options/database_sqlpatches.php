@@ -269,7 +269,7 @@ else {
 
                 echo "<tr></i><tr><td><br>The list below describes which patches have and have not been applied to the database, the aim is to have them all applied.  If there are patches that have not been applied to the Simple Invoices database, please run the Update database by clicking update </td></tr><tr align=center><td><br><a href='index.php?module=options&view=database_sqlpatches&op=run_updates'>UPDATE</a></td></tr></table><br>
 
-<a href=\"./documentation/info_pages/text.html?keepThis=true&TB_iframe=true&height=300&width=500\" title=\"Info :: Database upgrade warning\" class=\"thickbox\"><font color=\"red\"><img src=\"./images/common/important.png\"></img>Warning:</font></a>
+<a href=\"./documentation/info_pages/text.html\" rel=\"ibox&height=400\"><font color=\"red\"><img src=\"./images/common/important.png\"></img>Warning:</font></a>
 ";
 
 		echo "<table align='center'>";
@@ -313,8 +313,9 @@ else {
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="text/javascript" src="./include/jquery.js"></script>
-    <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
-    <link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="all"/>
+<script type="text/javascript" src="./src/include/js/ibox.js"></script>
+<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
+
 
 </head>
 <body>
