@@ -3,7 +3,7 @@ For more info & download: http://www.ibegin.com/blog/p_ibox.html
 Created for iBegin.com - local search done right
 MIT Licensed Style
 *********************************************************/
-var indicator_img_path = "/images/indicator.gif";
+var indicator_img_path = "./images/common/ibox_indicator.gif";
 var indicator_img_html = "<img name=\"ibox_indicator\" src=\""+indicator_img_path+"\" alt=\"Loading...\" style=\"width:128px;height:128px;\"/>"; // don't remove the name
 
 var opacity_level = 8; // how transparent our overlay bg is
