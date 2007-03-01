@@ -202,7 +202,7 @@ $display_block_top =  "
 		<td class=account>$LANG_total:</td><td class=account>$pref_currency_signField$invoice_total_Field_format</td>
 		<td class=account><a href='index.php?module=payments&view=manage&inv_id=$inv_idField'>$LANG_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field_format</td>
 		<td class=account>$LANG_owing:</td><td class=account><u>$pref_currency_signField$invoice_owing_Field</u></td>
-		<td class=account>$LANG_age<a href='documentation/info_pages/age.html?keepThis=true&TB_iframe=true&height=300&width=500' title='Info :: Invoice age' class='thickbox'><img src=\"./images/common/help-small.png\"></img></a>: </td><td class=account nowrap >$invoice_age</td>
+		<td class=account>$LANG_age<a href='documentation/info_pages/age.html' rel='ibox&height=400'><img src=\"./images/common/help-small.png\"></img></a>: </td><td class=account nowrap >$invoice_age</td>
 		<td></td><td class=\"columnleft\"></td>
 		<td class=\"account\">$LANG_total:</td><td class=account>$pref_currency_signField$invoice_total_Field_customer_format</td>
 		<td class=account><a href='index.php?module=payments&view=manage&c_id=$c_idField'>$LANG_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field_customer_format</td>
@@ -649,8 +649,8 @@ $display_block_bottom =  "
 	  $('.notes').hide();
   	});
     </script>
-    <script type="text/javascript" src="./include/jquery.thickbox.js"></script>
-    <link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css" media="all"/>
+    <script type="text/javascript" src="./src/include/js/ibox.js"></script>
+    <link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
 
 
 	<title><?php echo $title; ?></title>

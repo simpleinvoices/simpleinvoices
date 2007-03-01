@@ -8,7 +8,6 @@ include_once('./include/include_main.php');
 <?php
 echo <<<EOD
 <title>{$title} :: {$LANG_manage_invoices}</title>
-<link rel="stylesheet" type="text/css" href="./src/include/css/jquery.thickbox.css"> 
 EOD;
 #insert customer
 $conn = mysql_connect("$db_host","$db_user","$db_password");
