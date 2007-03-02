@@ -83,7 +83,6 @@ while ($Array_inv_preference = mysql_fetch_array($result_inv_preference)) {
 #default biller name query
 
 
-
 #biller selector
 
 if (mysql_num_rows($result) == 0) {
