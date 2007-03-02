@@ -37,6 +37,7 @@ $spreadsheet = "xls"; #MS Excel format
 $word_processor = "doc"; #MS Word format
 #$word_processor = "odt"; #Open Document Format text
 
+
 #PDF configs
 #installation path relative to document root of webserver 
 $install_path = "/simpleinvoices";

@@ -108,6 +108,8 @@ EOD;
         }
 }
 
+
+
 #customer selector
 
 if (mysql_num_rows($result_customer) == 0) {
