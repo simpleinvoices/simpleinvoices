@@ -9,7 +9,8 @@
 	"english_UK.inc.php",
 	"galego_galician.inc.php",
 	"nederlands_dutch.inc.php",
-	"português_portuguese.inc.php",
+	"portugues_portuguese.inc.php",
+	"romana_romanian.inc.php",
 	"suomi_finnish.inc.php",
 );
 print "

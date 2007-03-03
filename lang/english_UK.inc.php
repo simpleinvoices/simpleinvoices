@@ -1,5 +1,10 @@
 <?php
 
+/*
+@author: Justin Kelly
+@last edited: 2007-03-04
+*/
+
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
 regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
@@ -99,6 +104,7 @@ $LANG_format_tooltip = "format";//1
 $LANG_get_help = "Get Help";//1
 $LANG_gross_total = "Gross";//1
 $LANG_help = "Help";//1
+$LANG_help_manage_invoices = "Whts with all these different columns?";//1
 $LANG_hide_details = "Hide details";//1
 $LANG_home = "Home";//1
 $LANG_id = "ID";//1
@@ -286,8 +292,6 @@ $LANG_stats_customer ="Top Customer - by amount invoiced";//1
 $LANG_stats_biller ="Top Biller - by amount invoiced";//1
 
 /* Dont translate anything below here */
-
-
 
 #Manage Invoices
 $mi_page_title = " - Manage Invoices";//1
