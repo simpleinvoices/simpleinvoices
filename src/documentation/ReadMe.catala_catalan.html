@@ -1,0 +1,383 @@
+<html>
+<head>
+<title>Simple Invoices - Leame</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<body>
+	<a href="#installation ">Instalaci&oacute;n</a><br> 
+	<a href="#pdf"> --  PDF</a><br> 
+	<a href="#backup"> --  Resguardar (Backup) de la Base de Datos</a><br> 
+	<a href="#upgrading">Actualizaci&oacute;n</a><br>
+	<a href="#prepare">Preparar Simple Invoices para su uso</a><br>
+	<a href="#use">Usando Simple Invoices</a><br>
+	<a href="#logos"> -- Logos de Facturadores</a><br>
+	<a href="#templates"> -- Plantillas de Facturas</a><br>
+	<a href ="#defaults"> -- Par&aacute;metros por Defecto del Sistema</a><br>
+	<a href ="#export"> -- Exportar a Excel/Word</a><br>
+	<a href ="#faqs">Preguntas Frecuentes (FAQ's)</a><br>
+	<a href ="#faqs-what"> -- &iquest;Qu&eacute; es Simple Invoices?</a><br>
+	<a href ="#faqs-need"> -- &iquest;Qu&eacute; necesito para empezar a facturar?</a><br>
+	<a href ="#faqs-how"> -- &iquest;C&oacute;mo creo facturas?</a><br>
+	<a href ="#faqs-types"> -- &iquest;Cu&aacute;les son los diferentes tipos de facturas?</a><br>
+
+	
+	
+	<br><br><a name="installlation"><b>Instalaci&oacute;n	</b></a>
+	<ul>
+		<li>Requerimientos:
+		<ul>
+			<li>Apache 
+			<li>MySQL
+			<li>PHP
+				<ul>
+					<li>Para exportar a PDF se necesita tener configurado PHP con:
+						<ul>
+							<li>Soporte para GD2
+							<li>El archivo php.ini tiene que ser editado para permitir un uso m&aacute;ximo de memoria de 24M
+						</ul>
+					<li>Para que los reportes funcionen se necesita configurar PHP con:
+						<ul>
+							<li>Soporte XSL (en PHP5)
+							<li>Soporte XSLT (en PHP4)
+						</ul>
+				</ul>
+			<li>El directorio "cache/" dentro del directorio principal de Simple Invoices debe tener permisos de escritura para todos los usuarios (Ej. chmod -Rv 777 cache)  
+		</ul>
+	</ul>
+	<ul>
+		<li>Recomendado:
+		<ul><li>phpMyAdmin <a href="http://phpmyadmin.sf.net">http://phpmyadmin.sf.net</a>
+		</ul>
+	</ul>
+	<ul>
+		<li>&iquest;No tienes instalado algunos de los requerimientos?
+		<ul>
+			<li>Windows: La manera m&aacute;s f&aacute;cil de instalar todo el software requerido en Windows es descargar e instalar "WAMP5" desde <a href="http://www.wampserver.com/en">http://www.wampserver.com/en</a> .WAMP es Apache, MySQL, PHP para Windows en un solo paquete simple de instalar.
+			<li>Mac: La manera m&aacute;s f&aacute;cil de instalar todo el software requerido en Mac es descargar e instalar "MAMP5" desde <a href="http://www.mamp.info/">http://www.mamp.info/</a> .MAMP es Apache, MySQL, PHP para MacOs en un solo paquete simple de instalar.
+			<li>Linux: simplemente haz lo que siempre haces con tu distribuci&oacute;n para instalar software (Ej. rpm, apt-get, etc).
+		</ul>
+	</ul>
+	<ul>
+		<li>Instalaci&oacute;n de Simple Invoices
+		  <ul>
+			<li>Una vez que se ha instalado todo el software requerido y que el mismo funciona correctamente, descarga la &uacute;ltima versi&oacute;n de Simple Invoices desde http://simpleinvoices.sf.net
+			<li>Extrae el contenido de simple_invoices_yyyymmdd.zip al directorio simpleinvoices en la ra&iacute;z del servidor web (Ej. /var/www en Debian)
+			<li>Cree la base de datos simple_invoices en tu servidor de bases de datos.  Recomendamos usar phpMyAdmin para gestionar y crear las nuevas bases de datos.
+			<li>Una vez que la base ha sido creada, ejecutar el archivo SimpleInvoicesDatabase.sql para crear las tablas de la base y rellenarlas con los datos de ejemplo.
+			  <ul>
+			    <li>En phpMyAdmin abre la base simple_invoices reci&eacute;n creada y ve a la pesta&ntilde;a  SQL
+			    <li>Sube el archivo  SimpleInvoicesDatabase.sql haciendo clic en "Localizaci&oacute;n del archivo de texto&quot; 
+			    <li>Nota: los usuarios de MySQL 4.0, deben usar el archivo SimpleInvoicesDatabase-MySQL4_0.sql en lugar del mencionado SimpleInvoicesDatabase.sql
+				<li>Nota: SimpleInvoicesDatabase.sql funciona correctamente a partir de la versi&oacute;n MySQL 4.1.
+			</ul>
+		  <li>Ahora que la base de datos ha sido creada y los archivos &quot;instalados&quot; en la ra&iacute;z del servidor web, necesita configurar el archivo de configuraci&oacute;n de SimpleInvoice para poder usarlo.
+			<ul>
+			  <li>Abra el archivo de configuraci&oacute;n de Simple Invoices, el cual es config.php (y se encuentra en el directorio /config) con su editor favorito.
+			  <li>Realice las siguientes modificaciones:
+			    <ul>
+			      <li>$db_host corresponde al nombre del servidor de base de datos (normalmente "localhost"), 
+			<li>$db_name corresponde al nombre de la base de datos (normalmente "simple_invoices"), 
+			<li>$db_user corresponde al nombre de usuario para la base de datos especificada en $db_name,
+			<li>$db_password corresponde a la contrase&ntilde;a del usuario especificado en $db_user.
+			</ul>
+		</ul>
+		<li>Una vez realizadas estas modificaciones, la parte b&aacute;sica del sistema Simple Invoices ha sido configurada. Sin embargo, todav&iacute;a hay que relaizar un par de modificaciones al sistema para permitir la exportaci&oacute;n a PDF y la creaci&oacute;n de backups de las bases de datos.
+	      <ul>
+				<li><a name="pdf">Exportaci&oacute;n a PDF</a>
+				  <ul>
+					<li>Para que funcione la 'Exportaci&oacute;n a PDF' hay 2 modificaciones que deben realizarse en el sistema:
+					<li>El primer paso es dar permisos de escritura a los directorios usados por el sistema para exportar los archivos pdf
+<ul>
+							<li>Para hacer esto el directorio cache dentro del directorio de Simple Invoices debe tener permisos de escritura. En sistemas *inx,  se debe hacer cd al directorio de Simple Invoices (<i>cd /var/www/html/simpleinvoices</i>) y  chmod<em>ear</em> el directorio cache tipo 777 (<i>chmod -Rv 777 cache</i>). En Windows ir con el explorador hasta la carpeta cache y otorgarle permisos de escritura para todos los usuarios.
+                  <li>Tambi&eacute;n se debe dar permisos de escritura al directorio que tiene las fuentes pdf. Para realizar esto en *nix chmod<em>ear</em> el directorio pdf/fpdf tipo 777 (<i>chmod -Rv 777 pdf/fpdf/*</i>). En Windows ir con el explorador a la carpeta fdpf/folder(dentro de la carpeta pdf) y otorgarle permisos de escritura para todos los usuarios.
+				  </ul>
+					<li><i>GD2:</i> una vez que se otorgaron los permisos de escritura a las carpetas antes mencionadas, se debe verificar si PHP est&aacute; configurado para soportar GD2.
+<ul>
+							<li>GD2 es una extensi&oacute;n de PHP que le permite crear y manipular archivos tipo imagen de una variedad diversa de formatos.
+					  <li>Para verificar si tu versi&oacute;n de PHP soporta GD2, abre tu navegador de internet y buscar el archivo phpinfo.php dentro del directorio de Simple Invoices  (<i>Ej. http://localhost/simpleinvoices/phpinfo.php</i>)
+				      <li>Una vez que el archivo phpinfo.php se abre, busque la secci&oacute;n  'gd' y verifique los valores indicados para 'GD Support' y 'GD Version'. Si PHP est&aacute; configurado para soportar GD2, estos valores deber&iacute;an ser similares a:
+                        <pre>
+	gd
+GD Support 	enabled
+GD Version 	2.0 or higher
+</pre>	
+					<li>Si tu PHP no soporta GD2, debes buscar en la gu&iacute;a de tu sistema operativo para saber c&oacute;mo habilitar esta opci&oacute;n. En Debian/Ubuntu simplemente instala el paquete  <i>php-gd</i> con apt-get o tu herramienta de instalaci&oacute;n favorita.
+				  </ul>						
+					<li>Una vez confirmado que tu PHP soporta GD2 debes verificar que tu php.ini permite la creaci&oacute;n de pdf.
+						<ul>
+							<li>Para verificar esto abre el navegador de internet y ve al directorio <a href="pdf">pdf/</a> (<i>http://localhost/simpleinvoices/pdf</i>)
+							<li>La p&aacute;gina 'html2ps/pdf demo' se usa para verificar si tu sistema es capaz de generar archivos pdf.
+							<li>En el &aacute;rea 'Source', el campo 'Single URL' esta puesto por defecto a www.google.com. Si estas conectado a Internet simplemente deja este campo como est&aacute;, pero si no est&aacute;s conectado cambia el link a una pagina web v&aacute;lida dentro de tu sistema y haz clic en el bot&oacute;n 'Convert File'.
+							<li>Si todo va bien, un archivo pdf de la pagina de inicio de Google tiene que haber sido creada y mostrada en el visualizador pdf.
+							<li>Si no se cre&oacute; ning&uacute;n pdf y ocurri&oacute; el error detallado a continuaci&oacute;n, esto significa que debes modificar tu php.ini
+							  de la siguiente manera:
+							  <pre>
+Fatal error: Allowed memory size of 8388608 bytes exhausted (tried to allocate 4864 bytes) 
+in /var/www/simpleinvoices/pdf/filter.data.html2xhtml.class.php on line 8
+</pre>
+						    <i>php.ini</i>
+				          </li>
+						</ul>
+				    <ul>
+						<li>Para encontrar donde est&aacute; almacenado tu php.ini debes fijarte nuevamente en el archivo <a href"phpinfo.php">phpinfo.php</a>  (<i>http://localhost/simpleinvoices/phpinfo.php</i>) y buscar en la secci&oacute;n 'Configuration File (php.ini) Path' cu&aacute;l es la ruta (path) indicada.
+						<li>Abre el  archivo php.ini con tu editor preferido y modifica la variable  'memory_limit':
+							<ul>
+								<li>Busca la l&iacute;nea  'memory_limit =' (ver a continuaci&oacute;n) y modifica este valor de 8M (por defecto) a 24M (un valor m&aacute;s grande no es recomendado) 							 
+
+                                  <pre>
+;;;;;;;;;;;;;;;;;;;
+; Resource Limits ;
+;;;;;;;;;;;;;;;;;;;
+
+max_execution_time = 90     ; Maximum execution time of each script, in seconds
+max_input_time = 60 ; Maximum amount of time each script may spend parsing request data
+memory_limit = 8M      ; Maximum amount of memory a script may consume (8MB)
+</pre>
+								<li>El php.ini modificado debe quedar de la siguiente manera:
+								  <pre>
+;;;;;;;;;;;;;;;;;;;
+; Resource Limits ;
+;;;;;;;;;;;;;;;;;;;
+
+max_execution_time = 90     ; Maximum execution time of each script, in seconds
+max_input_time = 60 ; Maximum amount of time each script may spend parsing request data
+memory_limit = 24M      ; Maximum amount of memory a script may consume (8MB)
+</pre>
+							  <li>Para que este cambio surta efecto debes reiniciar el servidor apache. En RedHat  <i>sudo /etc/init.d/httpd reload</i> o en Ubuntu/Debian <i>sudo /etc/init.d/apache2 reload</i>. Si no est&aacute;s seguro de como reiniciar correctamente el servidor apache o te encuentras en Windows, simplemente reinicia el sistema.
+						  </ul>
+					  </ul>
+				  </ul>
+		  </ul>
+			<ul>
+				<li><a name="backup">Resguardo de la Base de Datos de Simple</a>
+<ul>
+                                     		 <li>Para que funcione  el 'Resguardo de la Base de Datos de Simple Invoices' el primer paso es otorgar permisos de escritura al directorio database_backups (el cual se encuentra dentro del directorio de Simple Invoices, que tiene permisos de escritura para el servidor web).
+                               	     <li>Para hacer esto en un sistema *nix debes hacer 'cd' al directorio de Simple Invoices (<i>ej. cd /var/www/simpleinvoices</i>) y chmod<em>ear</em> el directorio database_backups a tipo 777 (<i>ej. chmod -Rv 777 database_backups</i>). En Windows simplemente navega hasta la carpeta database_backups y asegurarte que tiene permisos de escritura para todos los usuarios.
+                  </ul>
+			</ul>
+		<li>Finalizado esto, todo se encuentra configurado. Simple Invoice est&aacute; listo para ser usado.
+		<li>Abre tu navegador de Internet, ve a http://localhost/simpleinvoices (puedes reemplazar localhost por el nombre de dominio o la ip del servidor) y empieza a usar Simple Invoices 
+		<li>La instalaci&oacute;n ha finalizado! 
+		</ul>
+	</ul>
+</ul>
+<a name="upgrading"><b>Actualizar Simple Invoices de una versi&oacute;n anterior</b></a>
+<ul>
+	<li>para actualizar Simple Invoices de una versi&oacute;n anterior, el primer paso es descargar la versi&oacute;n actualizada de Simple Invoices de nuestro <a href="http://simpleinvoices.sf.net">website</a>
+	<li>El pr&oacute;ximo paso es hacer un resguardo (backup o copia) del archivo config.php el cual est&aacute; ubicado en el directorio config.
+	<li>Una vez que este archivo ha sido resguardado, extrae el contenido del archivo Simple Invoices descargado al directorio ra&iacute;z del servidor web. 
+	<li>Copia los detalles del archivo config.php resguardado al nuevo archivo config.php (db_host, $db_name, $db_user and $db_password) 
+	<li>Ya casi est&aacute; terminada la actualizaci&oacute;n. Como &uacute;ltimo paso debes abrir Simple Invoices en tu navegador e ir al men&uacute; Opciones y a la opci&oacute;n de Gestor de Actualizaciones de Base de Datos.
+	  <ul>
+	    <li>La primera vez que el Gestor de Actualizaciones de Base de Datos se ejecuta 
+	      <ul>
+	        <li> Se mostrar&aacute; una pantalla preguntado si se quiere Inicializar la actualizaci&oacute;n de Base de Datos.
+	        <li>Hacer clic en Inicializar Actualizaci&oacute;n de base de Datos (INITIALISE DATABASE UPGRADE) para comenzar el proceso de actualizaci&oacute;n.
+	        <li>Una vez completada esta tarea, el sistema preguntar&aacute; si desea volver a la p&aacute;gina inicial del Gestor de Actualizaciones desde donde puedes ejecutar los restantes parches.
+	        <li>Ve al Gestor de Actualizaciones de Base de Datos haciendo clic en el bot&oacute;n Aqu&iacute;.
+	        <li>Una vez que te encuentras en la pantalla inicial Gestor de Actualizaciones de Base de Datos, este mostrar&aacute; un listado de todos los parches que han sido ejecutados y todos los pendientes de ejecuci&oacute;n. Si todos los parches han sido ejecutados, entonces el proceso de actualizaci&oacute;n esta completo y puedes usar Simple Invoices  normalmente.  Si existen parches pendientes de aplicar, haz clic en el bot&oacute;n Actualizar (UPDATE) para ejecutarlos. 
+	        <li>Una vez ejecutados los parches pendientes, ve nuevamente a la p&aacute;gina inicial del  Gestor de Actualizaciones para asegurarte que todos los parches han sido aplicados. 
+          </ul>
+	<li>Si el Gestor de Actualizaciones de Base de Datos ha sido ejecutado anteriormente:
+	  <ul>
+		<li>El Gestor mostrar&aacute; la lista de los parches que han sido aplicado y los que est&aacute;n pendientes. Si todos los parches han sido aplicados puedes usar Simple Invoices normalmente. Si tienes parches pendientes, haz clic en el bot&oacute;n Actualizar (UPDATE) para aplicarlos.
+		<li>Una vez que todos los parches han sido aplicados verifica en la pantalla inicial del Gestor que todos los parches est&eacute;n aplicados.
+		</ul>
+	</ul>
+</ul>
+<a name="prepare"><b>Preparar Simple Invoices para su uso</b></a>
+<ul>
+	<li>El primer paso para empezar a usar Simple Invoices es configurar la informaci&oacute;n base, esto es: el facturador, clientes, productos, impuestos y preferencias y tipos de facturas.
+</ul>
+	<ul>
+		<li>A&ntilde;adir un facturador
+		  <ul>
+				<li>El facturador es la persona responsable de crear las facturas (Ej. tu compa&ntilde;&iacute;a)
+				<li>Abre Simple Invoices en tu navegador (usualmente http://localhost/simpleinvoice)
+				<li>En la p&aacute;gina principal haz clic en A&ntilde;adir Facturador.
+				<li>En la pantalla de Creaci&oacute;n de Facturador, completa los campos requeridos y haz clic en Agregar.
+				
+				<li>Ahora, cuando crees una factura podr&aacute;s elegir al Facturador recien creado.
+		  </ul>
+	</ul>
+	<ul>
+		<li>A&ntilde;adir Cliente
+		  <ul>
+				<li>En la p&aacute;gina principal haz clic en A&ntilde;adir Cliente.
+				<li>En la pantalla de Creaci&oacute;n de Cliente, completa los campos requeridos y haz clic en Agregar.
+				<li>Ahora, cuando crees una factura podr&aacute;s elegir el cliente recien creado.
+		  </ul>
+</ul>		
+	<ul>
+		<li>A&ntilde;adir Producto
+			<ul>
+				<li>Un producto puede ser cualquier &iacute;tem que quieras que aparezca en como detalle en una factura del tipo detallado. Puede ser cualquier cosa que quieras vender y facturar. Por ejemplo productos como bombillas de luz; o servicios como servicios de contabilidad o cargos por hora.
+				<li>Los productos estan disponibles &uacute;nicamente cuando utilizas la factura de tipo detallado. 
+				<li>En la p&aacute;gina principal haz clic en A&ntilde;adir Producto.
+				<li>En la pantalla de Creaci&oacute;n de Producto, completa los campos requeridos y haz clic en Agregar.
+				<li>Ahora, cuando crees una factura detallada podr&aacute;s elegir el producto recien creado.
+				</ul>
+	</ul>		
+	<ul>
+		<li>Revisa y ajusta los impuestos:
+		  <ul>
+				<li>Algunos pa&iacute;ses como Australia o los pa&iacute;ses de la UE existen los impuestos sobre las ventas (GST: goods or services tax; IVA: impuesto al valor agregado) . Simple Invoices permite configurar al usuario las tasas de impuestos aplicadas en cada caso.
+				<li>Para visualizar los Impuestos configurados, ve a Gestionar Impuestos del men&uacute; de Opciones.
+				<li>Se mostrar&aacute;n los tipos de impuestos configurados y disponibles.
+				
+				<li>Para editar un impuesto existente haz clic sobre el bot&oacute;n Editar y modifica la informaci&oacute;n en la pantalla de edici&oacute;n. Una vez realizados los cambios haz clic en Guardar Impuesto.
+				<li>Para agregar un nuevo impuesto ve a la opci&oacute;n A&ntilde;adir nuevo Impuesto del men&uacute; de Opciones.
+				<li>Completa los campos requeridos y haz clic en Agregar.
+				<li>El nuevo impuesto estar&aacute; disponible para la creaci&oacute;n de tus nuevas facturas.
+		  </ul>		
+</ul>		
+		<ul>
+			<li>Revisa y ajusta las preferencias de facturas:
+			  <ul>
+					<li>Desde esta opci&oacute;n puedes modificar los siguientes par&aacute;metros:
+					  <ul>
+					    <li>Descripci&oacute;n:
+					      <ul>
+					        <li>Este es el nombre del conjunto de preferencias.                             
+				          </ul>
+				        <li>S&iacute;mbolo de Moneda:
+				          <ul>
+					          <li>Es el s&iacute;mbolo de moneda a ser usado. 
+				          </ul>
+				        <li>Cabecera de Factura:	
+					          <ul>
+					            <li>Es la cabecera de la factura.                               
+			              </ul>
+			            <li>Texto de la factura :
+					            <ul>
+					              <li>Este es todo el texto que debe incuir la factura. Datos como Comentarios, Notas, etc.
+			              </ul>
+			            <li>Detalle de Cabecera de factura:
+			              <ul>
+					                <li>Esto es lo que aparecer&aacute; como cabecera de la secci&oacute;n de pie/detalles de la factura. 
+		                  </ul>
+		                <li>Detalle de l&iacute;nea de factura:	
+					                <ul>
+					                  <li>Esto es lo siguiente que aparece en la secci&oacute;n de detalles/pie debajo de la cabecera. Normalmente se usa para definir teminos de pago, etc.
+		                  </ul>
+		                <li>Metodos de pago
+		                  <ul>
+					                    <li>Aqu&iacute; es donde se especifica los metodos de pago que podr&aacute; tener el cliente. Cheque, Efectivo, Transferencias, etc. 
+	                      </ul>
+	                    <li>Nombre de Forma de Pago de Factura - l&iacute;nea 1:
+	                      <ul>
+					                      <li>Aqu&iacute; es donde especificas el nombre de Forma de Pago de Factura - l&iacute;nea 1 Ej. Nombre de Cuenta. 
+	                      </ul>
+	                    <li>Valor de Forma de Pago de Factura - l&iacute;nea 1:
+	                      <ul>
+					                        <li>Aqu&iacute; es donde especificas el valor de Forma de Pago de Factura - l&iacute;nea 1 Ej. Cuenta Bancaria.
+                          </ul>
+                        <li>Nombre de Forma de Pago de Factura - l&iacute;nea 2:
+                          <ul>
+					                          <li>Aqu&iacute; es donde especificas el nombre de Forma de Pago de Factura - l&iacute;nea 2 Ej. Nombre de Cuenta.
+                          </ul>
+                        <li>Valor de Forma de Pago de Factura - l&iacute;nea 2:
+                          <ul>
+					                            <li>Aqu&iacute; es donde especificas el valor de Forma de Pago de Factura - l&iacute;nea 1 Ej. Cuenta Bancaria.
+                          </ul>
+                      </ul>
+								  </ul>
+</ul>		
+			<a name="use"><b>Usando Simple Invoices</b></a>
+            <ul>
+	<li><b>Lo b&aacute;sico</b><br>
+	<br>
+	<ul>
+	<li>Ahora que Simple Invoices ha sido instalado y configurada la informaci&oacute;n necesaria, puedes empezar a facturar! :)
+	<li>Abre Simple Invoices en tu navegador (http://localhost/simpleinvoices)
+	<li>Para crear una factura, en la p&aacute;gina principal haz clic en el tipo de factura que desees crear: Totalizada, Anal&iacute;tica o Detallada:
+	  <ul>
+		<li>Una factura totalizada es una factura que permite agregar todo el detalle que quieras y un solo valor y un impuesto asociado.
+		<li>Una factura detallada es una factura en que debes usar los productos y/o servicios cargados en el &aacute;rea de Productos.
+		<li>Una factura anal&iacute;tica es un punto intermedio entre las dos anteriores. Te permite cargar una l&iacute;nea y valor por cada producto o servicio, pero te permite cargarlo a mano sin tener que depender de los productos cargados en el sistema.
+		</ul>
+	<li>Una vez en la pantalla de creaci&oacute;n de factura, debes seleccionar un facturador y un cliente.
+	<li>Si se crea una factura totalizada, se debe ingresar la descripci&oacute;n, el total y el impuesto. Luego hacer clic en Agregar.
+	<li>Si se crea una factura detallada, se debe seleccionar los productos y cantidades a facturar y el impuesto. Luego hacer clic en Agregar. 
+	<li>Una vez agregada la factura esta se mostrar&aacute; en la vista r&aacute;pida de facturas.
+	<li>La vista r&aacute;pida te permite visualizar las facturas y realizar tareas como impresi&oacute;n, exportaci&oacute;n, etc.
+	<li>Ahora que tu factura ha sido creada puede elegir que es lo que desea hacer con la misma.
+	<li>Se eliges imprimir, el sistema mostrar&aacute; una factura con fondo blanco, apta para impresi&oacute;n.
+	<li>Una vez que haz creado e impresola factura puedes retornar a Gestionar facturas para crear nuevas.
+	<li>Disfruta :)
+</ul>
+	<br>
+  <li><a name="logos"><b> Logos de Facturador </b></a><br>
+	<br>
+<ul>
+	<li>Simple Invoices permite tener un logo para cada facturador el cual sera usado en la opci&oacute;n de Impresi&oacute;n del Facturas.
+	<li>Para agregar un logo debes copiar la imagen al directorio logo dentro del directorio de  Simple Invoices.
+	<li>Una vez que el logo ha sido copiado, debes seleccionar el nombre del logo en el campo Logo Facturador dentro de la pantalla de edici&oacute;n de Facturador. 
+	<li>Ahora, cuando imprimas una factura y hagas una vista preliminar se mostrar&aacute; el logo.
+	</ul>
+	<br>
+  <li><a name="templates"><b>Plantillas de Facturas</b></a>
+	<br>
+	<br>
+<ul>
+	<li>Una plantilla de factura es una plantilla que  Simple Invoices usar&aacute; para realizar la previsualizaci&oacute;n de impresi&oacute;n de la factura. 
+	<li>Para seleccionar cu&aacute;l plantilla quieres que se use, ve a Opciones, y a Valores por Defecto del Sistema.
+	<li>En esta p&aacute;gina puedes ver qu&eacute; plantilla est&aacute; usando tu sistema en el campo Plantilla De Factura Por Defecto.
+	<li>Si deseas modificar la plantilla haz clic en editar y selecciona la plantilla que quieras del combo de selecci&oacute;n. Luego haz clic en grabar. 
+	<li>Ahora la Impresi&oacute;n y Vista preliminar se mostrar&aacute;n con la nueva plantilla.
+	</ul>
+	<br>
+  <li><a name="defaults"><b>Valores por Defecto del Sistema </b></a><br>
+	<br>
+<ul>
+	<li>En Simple Invoices es posible modificar los valores que el sistema usar&aacute; por defecto, estos valores pueden ser definidos desde Valores por Defecto del Sistema disponible en el men&uacute; de Opciones.
+	<li>En esta opci&oacute;n se mostrar&aacute;n los siguientes valores: 
+	  <ul>
+			<li>Facturador por Defecto: define qui&eacute;n es el facurador que se mostrar&aacute; por defecto cada vez que se cree una factura.
+			<li>Cliente por Defecto: define qui&eacute;n es el cliente que se mostrar&aacute; por defecto cada vez que se cree una factura.
+			<li>Impuesto por Defecto: define cu&aacute;l es el impuesto que se mostrar&aacute; por defecto cada vez que se cree una factura.
+			<li>Preferencias de Factura por Defecto: define las preferencias de facturaci&oacute;n que se mostrar&aacute;n por defecto cada vez que se cree una factura.
+			<li>N&uacute;mero de l&iacute;neas por defecto: n&uacute;mero de l&iacute;neas por defecto que tendr&aacute; una factura detallada. 
+			<li>Plantilla de Factura por Defecto: define la plantilla para impresi&oacute;n y vista previa de facturas.
+	    </ul>
+</ul>
+	<br>
+  <li><a name="export"><b>Exportaci&oacute;n a Excel/Word/OpenDocument</b></a><br>
+	<br>
+<ul>
+		<li>Simple Invoices permite exportar las facturas desde la vista r&aacute;pida de facturaci&oacute;n a los formatos Excel, Word y Open Document.
+		<li>Los valores por defecto son .xls (Excel)para hojas de c&aacute;lculo y.doc (Word) para documento de texto. 
+		<li>Estos valores pueden ser modificados desde el archivo config/config.php para usar por ejemplo .ods (hojas de c&aacute;lculo Open Document) y .odt (documentos de texto Open Document).
+		<li>Nota: en el archivo config/config.php cualquier archivo puede ser usado siempre y cuando exista una asociaci&oacute;n con su programa de visualizaci&oacute;n y este  pueda leer documentos html.
+    </ul>
+</ul>
+
+
+<a name="faqs"><b>Preguntas Frecuentes  (FAQ's)</b></a>
+<ul>
+                <li><a name="faqs-what"><b>&iquest;Qu&eacute; es Simple Invoices?</b></a><br>
+                  <br>
+Simple Invoices es un sistema b&aacute;sico de facturaci&oacute;n dise&ntilde;ado con el objetivo de ser simple y funcional.  Concebido para las necesidades de las peque&ntilde;as organizaciones y los usuarios hogare&ntilde;os. Para m&aacute;s informaci&oacute;n por favor referirse a <a href="http://www.simpleinvoices.org">http://www.simpleinvoices.org</a>
+			<br>
+			<br>
+		<li><a name="faqs-need"><b>&iquest;Qu&eacute; necesito para empezar a facturar?</b></a>
+			<br>
+			<br>
+				Una vez que Simple Invoices ha sido instalado en tu sistema (ver Documentaci&oacute;n de Instalaci&oacute;n para m&aacute;s informaci&oacute;n) todo lo que necesitas es crear un facturador (normalmente t&uacute; o tu organizaci&oacute;n) y los clientes a los que deseas facturar.<br>
+				Una vez que estas dos piezas de informaci&oacute;n han sido ingresadas puedes empezar a crear facturas.<br>
+Nota: Si estas creando facturas basadas en productos necesitar&aacute;s ingresarlos en el &aacute;rea de Productos del sistema.<br>
+			<br>
+  <li><a name="faqs-how"><b>&iquest;C&oacute;mo puedo crear facturas?</b></a>
+			<br>
+			<br>
+			Crear facturas es f&aacute;cil. Una vez creados el facturador y los clientes, simplemente selecciona Crear Factura del men&uacute; de Facturas, completa los datos y haz clic en Grabar Factura.<br>
+			<br>		
+  <li><a name="faqs-types"><b>&iquest;Qu&eacute; significan los diferentes tipos de facturas?</b></a>
+			<br>
+			<br>
+			En Simple Invoices hay tres tipos de facturas disponibles:
+		  <ul>                 
+				<li>Una factura totalizada es una factura que permite agregar todo el detalle que quieras y un solo valor y un impuesto asociado.
+		    <li>Una factura detallada es una factura en que debes usar los productos y/o servicios cargados en el &aacute;rea de Productos para confeccionar la factura.
+		    <li>Una factura anal&iacute;tica es un punto intermedio entre las dos anteriores. Te permite cargar una l&iacute;nea y valor por cada producto o servicio, pero te permite cargarlo a mano sin tener que depender de los productos cargados en el sistema.
+	        </ul>
+</ul>
