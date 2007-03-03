@@ -104,6 +104,7 @@ $LANG_format_tooltip = "Format";//1
 $LANG_get_help = "Hilfe";//1
 $LANG_gross_total = "G-Preis";//1
 $LANG_help = "Hilfe";//1
+$LANG_help_manage_invoices = "Whats with all these different columns?";//0
 $LANG_hide_details = "Verberge Details";//1
 $LANG_home = "Startseite";//1
 $LANG_id = "ID";//1
@@ -259,6 +260,8 @@ $LANG_quantity = "Anzahl";//1
 $LANG_quantity_short = "Anz.";//1
 $LANG_want_more_fields = "want more fields";//0
 $LANG_welcome ="Willkommen zur ";//1
+$LANG_what_are_custom_fields = "What are custom fields";//0
+$LANG_whats_this_page_about = "Whats this page about";//0
 $LANG_zip = "PLZ";//1
 
 

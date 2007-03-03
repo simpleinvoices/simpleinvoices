@@ -260,6 +260,8 @@ $LANG_quantity = "Cantidad";//1
 $LANG_quantity_short = "Cant.";//1
 $LANG_want_more_fields = "want more fields";//0
 $LANG_welcome = "Bienvenido a ";//1
+$LANG_what_are_custom_fields = "What are custom fields";//0
+$LANG_whats_this_page_about = "Whats this page about";//0
 $LANG_zip = "C&oacute;digo postal";//1
 
 

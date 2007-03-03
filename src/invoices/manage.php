@@ -73,5 +73,5 @@ Rico.onLoad( function() {
 
 
 <?php echo $display_block; ?>
-<a href="./documentation/info_pages/manage_invoices.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img> What's all these different columns?</a>
+<a href="./documentation/info_pages/manage_invoices.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img><?php echo $LANG_help_manage_invoices; ?></a>
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

@@ -99,6 +99,7 @@ $LANG_format_tooltip = "format";//1
 $LANG_get_help = "Obtine Asistenta";//1
 $LANG_gross_total = "Brut";//1
 $LANG_help = "Asistenta";//1
+$LANG_help_manage_invoices = "Whats with all these different columns?";//0
 $LANG_hide_details = "Ascunde detalii";//1
 $LANG_home = "Acasa";//1
 $LANG_id = "ID";//1
@@ -252,7 +253,10 @@ $LANG_using_simple_invoices = "Utilizare Simple Invoices";//1
 $LANG_view = "Vizualizare";//1
 $LANG_quantity = "Cantitate";//1
 $LANG_quantity_short = "Cant";//1
+$LANG_want_more_fields = "want more fields";//0
 $LANG_welcome = "Bun Venit la ";//1
+$LANG_what_are_custom_fields = "What are custom fields";//0
+$LANG_whats_this_page_about = "Whats this page about";//0
 $LANG_zip = "Cod Postal";//1
 
 

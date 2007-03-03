@@ -104,6 +104,7 @@ $LANG_format_tooltip = "formaat";//1
 $LANG_get_help = "Get Help";//0
 $LANG_gross_total = "bruto";//1
 $LANG_help = "Help";//0
+$LANG_help_manage_invoices = "Whats with all these different columns?";//0
 $LANG_hide_details = "Verberg details";//1
 $LANG_home = "Home";//0
 $LANG_id = "ID";//1
@@ -259,6 +260,8 @@ $LANG_quantity = "Aantal";//1
 $LANG_quantity_short = "Aantal";//1
 $LANG_want_more_fields = "want more fields";//0
 $LANG_welcome = "Welkom bij ";//1
+$LANG_what_are_custom_fields = "What are custom fields";//0
+$LANG_whats_this_page_about = "Whats this page about";//0
 $LANG_zip = "Postcode";//1
 
 

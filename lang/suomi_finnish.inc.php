@@ -106,6 +106,7 @@ $LANG_format_tooltip = "muodossa";//1
 $LANG_get_help = "Get Help";//0
 $LANG_gross_total = "Veroton";//1
 $LANG_help = "Help";//0
+$LANG_help_manage_invoices = "Whats with all these different columns?";//0
 $LANG_hide_details = "Piilota tiedot";//1
 $LANG_home = "Home";//0
 $LANG_id = "Nro";//1
@@ -261,6 +262,8 @@ $LANG_quantity = "M&auml;&auml;r&auml;";//1
 $LANG_quantity_short = "M&auml;&auml;r&auml;";//1
 $LANG_want_more_fields = "want more fields";//0
 $LANG_welcome ="Tervetuloa ohjelmaan ";//1
+$LANG_what_are_custom_fields = "What are custom fields";//1
+$LANG_whats_this_page_about = "Whats this page about";//1
 $LANG_zip = "Postinro";//1
 
 

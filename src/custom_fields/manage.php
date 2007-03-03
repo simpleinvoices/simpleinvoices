@@ -22,9 +22,9 @@ if (mysql_num_rows($result) == 0) {
 	$display_block = <<<EOD
 
 
-<b>{$LANG_manage_custom_fields}</b>
+<b>{$LANG_manage_custom_fields}</b><br>
+<a href="./documentation/info_pages/what_are_custom_fields.html" rel="ibox&height=400">{$LANG_what_are_custom_fields}<img src="./images/common/help-small.png"></img></a> :: <a href="./documentation/info_pages/manage_custom_fields.html" rel="ibox&height=400">{$LANG_whats_this_page_about}<img src="./images/common/help-small.png"></img></a>
  <hr></hr>
-
 <!-- IE hack so that the table fits on the pages -->
 <!--[if gte IE 5.5]>
 <link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
@@ -71,8 +71,6 @@ EOD;
 
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="text/javascript" src="include/jquery.js"></script>
-
 
 <? 
 require "lgplus/php/chklang.php";
@@ -101,6 +99,10 @@ Rico.onLoad( function() {
   new Rico.LiveGrid ('rico_custom_fields', new Rico.GridMenu(menuopts), new Rico.Buffer.Base($('rico_custom_fields').tBodies[0]), opts);
 });
 </script>
+
+<script type="text/javascript" src="./src/include/js/ibox.js"></script>
+<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
+
 </head>
 <body>
 

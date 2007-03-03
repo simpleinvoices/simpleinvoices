@@ -104,7 +104,7 @@ $LANG_format_tooltip = "format";//1
 $LANG_get_help = "Get Help";//1
 $LANG_gross_total = "Gross";//1
 $LANG_help = "Help";//1
-$LANG_help_manage_invoices = "Whts with all these different columns?";//1
+$LANG_help_manage_invoices = "Whats with all these different columns?";//1
 $LANG_hide_details = "Hide details";//1
 $LANG_home = "Home";//1
 $LANG_id = "ID";//1
@@ -260,6 +260,8 @@ $LANG_quantity = "Quantity";//1
 $LANG_quantity_short = "Qty";//1
 $LANG_want_more_fields = "want more fields";//1
 $LANG_welcome = "Welcome to ";//1
+$LANG_what_are_custom_fields = "What are custom fields";//1
+$LANG_whats_this_page_about = "Whats this page about";//1
 $LANG_zip = "Zip code";//1
 
 

@@ -104,6 +104,7 @@ $LANG_format_tooltip = "format";//0
 $LANG_get_help = "Get Help";//0
 $LANG_gross_total = "Suma Total";//1
 $LANG_help = "Help";//0
+$LANG_help_manage_invoices = "Whats with all these different columns?";//0
 $LANG_hide_details = "Hide details";//0
 $LANG_home = "Home";//1
 $LANG_id = "ID";//1
@@ -259,6 +260,8 @@ $LANG_quantity = "Quantitat";//1
 $LANG_quantity_short = "Qtat";//1
 $LANG_want_more_fields = "want more fields";//0
 $LANG_welcome ="Benvingut a ";//1
+$LANG_what_are_custom_fields = "What are custom fields";//0
+$LANG_whats_this_page_about = "Whats this page about";//0
 $LANG_zip = "Codi Postal";//1
 
 
