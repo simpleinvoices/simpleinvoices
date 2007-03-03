@@ -372,18 +372,26 @@ function show_custom_field($custom_field,$custom_field_value,$permission,$css_cl
 
 	include('./config/config.php');
 
-	$conn = mysql_connect( $db_host, $db_user, $db_password );
-	mysql_select_db( $db_name, $conn );
 
 	#get the label for the custom field
+
+        $conn = mysql_connect( $db_host, $db_user, $db_password );
+        mysql_select_db( $db_name, $conn );
+
+
 	$get_custom_label ="select cf_custom_label from si_custom_fields where cf_custom_field = '$custom_field'"; 
 	$result_get_custom_label = mysql_query($get_custom_label, $conn) or die(mysql_error());
 
 	while ($Array_cl = mysql_fetch_array($result_get_custom_label)) {
-                $custom_label_value = $Array_cl['cf_custom_label'];
+                $has_custom_label_value = $Array_cl['cf_custom_label'];
 	}
-	if ($custom_label_value != null) {
-		
+	/*if permision is write then coming from a new invoice screen show show only the custom field and have a label
+	* if custom_field_value !null coming from existing invoice so show only the cf that they actually have
+	*/	
+	if ( (($has_custom_label_value != null) AND ( $permission == "write")) OR ($custom_field_value != null)) {
+
+		$custom_label_value = get_custom_field_label($custom_field);
+
 		if ($permission == "read") {
 			$display_block ="
 			<tr class=\"$css_class_tr\" >
@@ -401,7 +409,7 @@ function show_custom_field($custom_field,$custom_field_value,$permission,$css_cl
 
 		$display_block ="
 			<tr>
-				<td class=\"$css_class1\">$custom_label_value <a href=\"./documentation/info_pages/custom_fields.html?keepThis=true&TB_iframe=true&height=300&width=500\" title=\"Info :: Custom fields\" class=\"thickbox\"><img src=\"./images/common/help-small.png\"></img></a>
+				<td class=\"$css_class1\">$custom_label_value <a href=\"./documentation/info_pages/custom_fields.html\" rel=\"ibox&height=400\"><img src=\"./images/common/help-small.png\"></img></a>
 				</td>
 				<td>
 					<input type=text name=\"i_custom_field$custom_field_number\" value=\"$custom_field_value\"size=25></input>

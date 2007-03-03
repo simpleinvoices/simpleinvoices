@@ -184,12 +184,11 @@ $prod_custom_field_label2 = get_custom_field_label(product_cf2);
 $prod_custom_field_label3 = get_custom_field_label(product_cf3);
 $prod_custom_field_label4 = get_custom_field_label(product_cf4);
 
-#get invoice custom fields
-$show_custom_field_1 = show_custom_field(invoice_cf1,$inv_custom_field1Field,read,'details_screen summary','','',5,'');
-$show_custom_field_2 = show_custom_field(invoice_cf2,$inv_custom_field2Field,read,'details_screen summary','','',5,'');
-$show_custom_field_3 = show_custom_field(invoice_cf3,$inv_custom_field3Field,read,'details_screen summary','','',5,'');
-$show_custom_field_4 = show_custom_field(invoice_cf4,$inv_custom_field4Field,read,'details_screen summary','','',5,'');
 
+$show_custom_field_1 = show_custom_field(invoice_cf1,$inv_custom_field1Field,read,'details_screen summary','','',5,':');
+$show_custom_field_2 = show_custom_field(invoice_cf2,$inv_custom_field2Field,read,'details_screen summary','','',5,':');
+$show_custom_field_3 = show_custom_field(invoice_cf3,$inv_custom_field3Field,read,'details_screen summary','','',5,':');
+$show_custom_field_4 = show_custom_field(invoice_cf4,$inv_custom_field4Field,read,'details_screen summary','','',5,':');
 
 #START INVOICE HERE - TOP SECTION
 
