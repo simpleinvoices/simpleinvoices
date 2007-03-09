@@ -1,5 +1,12 @@
 <?php
 include('./include/include_main.php'); 
+
+//stop the direct browsing to this file - let index.php handle which files get displayed
+if (!defined("BROWSE")) {
+   echo "You Cannot Access This Script Directly, Have a Nice Day.";
+   exit();
+}
+
 include('./config/config.php');
 
 $conn = mysql_connect( $db_host, $db_user, $db_password);

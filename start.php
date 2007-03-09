@@ -6,7 +6,7 @@ include("./lang/$language.inc.php");
 include('./include/sql_patches.php');
 #include('./include/menu.php');
 
-
+//stop the direct browsing to this file - let index.php handle which files get displayed
 if (!defined("BROWSE")) {
    echo "You Cannot Access This Script Directly, Have a Nice Day.";
    exit();

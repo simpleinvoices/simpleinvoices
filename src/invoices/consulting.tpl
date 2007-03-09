@@ -1,3 +1,12 @@
+<?php
+
+//stop the direct browsing to this file - let index.php handle which files get displayed
+if (!defined("BROWSE")) {
+   echo "You Cannot Access This Script Directly, Have a Nice Day.";
+   exit();
+}
+
+?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

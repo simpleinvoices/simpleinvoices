@@ -2,6 +2,12 @@
 #table
 include('./include/include_main.php');
 
+//stop the direct browsing to this file - let index.php handle which files get displayed
+if (!defined("BROWSE")) {
+   echo "You Cannot Access This Script Directly, Have a Nice Day.";
+   exit();
+}
+
 #get the invoice id
 $master_invoice_id = $_GET['submit'];
 

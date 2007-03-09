@@ -1,4 +1,13 @@
-<?php include("./include/include_main.php"); ?>
+<?php 
+include("./include/include_main.php"); 
+
+//stop the direct browsing to this file - let index.php handle which files get displayed
+if (!defined("BROWSE")) {
+   echo "You Cannot Access This Script Directly, Have a Nice Day.";
+   exit();
+}
+
+?>
 <html>
 <head>
 <script type="text/javascript" src="./src/include/js/ibox.js"></script>

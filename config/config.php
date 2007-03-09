@@ -1,4 +1,9 @@
 <?php
+//stop the direct browsing to this file - let index.php handle which files get displayed
+if (!defined("BROWSE")) {
+   echo "You Cannot Access This Script Directly, Have a Nice Day.";
+   exit();
+}
 
 /*Enter your pppconfig/wvdial profile name, if you havent set one up or dont know what it is run pppconfig/wvdialconf from the commandline to find out.  man pppconfig for more information */
 $db_host = "localhost";
@@ -16,7 +21,8 @@ $mysql = 5;
 #$language = "deutsch_german";
 $language = "english_UK";
 #$language = "galego_galician";
-#$language = "português_portuguese";
+#$language = "portugues_portuguese";
+#$language = "romana_romanian";
 #$language = "suomi_finnish";
 
 /*To change the theme, enter the name of the theme folder - defalut is google*/
@@ -30,6 +36,7 @@ $config['date_format']  = 'Y-m-d'; #International format just the date
 #$config['date_format']  = 'm-d-Y h:m'; #US format with date and time
 #$config['date_format']  = 'd-m-Y'; #UK format just date 
 #$config['date_format']  = 'd-m-Y h:m'; #UK format with date and time
+#$config['date_format']  = 'j.n.Y'; #CZ format
 
 #Export to excel/word/openoffice etc. config
 $spreadsheet = "xls"; #MS Excel format
