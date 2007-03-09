@@ -6,6 +6,13 @@ include("./lang/$language.inc.php");
 include('./include/sql_patches.php');
 #include('./include/menu.php');
 
+
+if (!defined("BROWSE")) {
+   echo "You Cannot Access This Script Directly, Have a Nice Day.";
+   exit();
+}
+
+
 $conn = mysql_connect( $db_host, $db_user, $db_password );
 mysql_select_db( $db_name, $conn );
 
