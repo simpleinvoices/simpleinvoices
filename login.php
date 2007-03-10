@@ -16,7 +16,8 @@ INSERT INTO si_users (user_id, user_email, user_name, user_group, user_domain, u
 INSERT INTO si_users (user_id, user_email, user_name, user_group, user_domain, user_password) VALUES ('','demo@simpleinvoices.org','demo','1','1', md5('demo'));
 INSERT INTO si_users (user_id, user_email, user_name, user_group, user_domain, user_password) VALUES ('','admin@simpleinvoices.org','admin','1','1', md5('admin'));
 */
-
+//so config.php works ok without using index.php define browse
+define("BROWSE","browse");
 include 'config/config.php';
 include "lang/$language.inc.php";
 

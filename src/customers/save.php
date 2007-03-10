@@ -34,9 +34,9 @@ $sql ='INSERT INTO
 
 
 if (mysql_query($sql, $conn)) {
-	$display_block =  "Customer successfully added,<br> you will be redirected back to the Manage Customers page";
+	$display_block = $LANG_save_customer_success;
 } else {
-	$display_block =  "Something went wrong, please try adding the customer again";
+	$display_block = $LANG_save_customer_failure;
 }
  	//header( 'refresh: 2; url=manage_customers.php' );
 	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=customers&view=manage>";
@@ -72,9 +72,9 @@ else if ( $op === 'edit_customer' ) {
 				c_id = " . $_GET['submit'];
 
 		if (mysql_query($sql, $conn)) {
-			$display_block =  "Customer successfully edited, <br> you will be redirected back to the Manage Customers";
+			$display_block = $LANG_save_customer_success;
 		} else {
-			$display_block =  "Something went wrong, please try editing the customer again";
+			$display_block =  $LANG_save_customer_failure;
 		}
 
 		//header( 'refresh: 2; url=manage_customers.php' );

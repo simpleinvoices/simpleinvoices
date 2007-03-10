@@ -45,9 +45,9 @@ if ( $op === 'insert_biller') {
 			 )";
  	
  	if (mysql_query($sql, $conn)) {
- 		$display_block =  "Biller successfully added, <br> you will be redirected to the Manage Billers page";
+ 		$display_block = $LANG_save_biller_success;
  	} else {
- 		$display_block =  "Something went wrong, please try adding the biller again<br>$sql";
+ 		$display_block = $LANG_save_biller_failure.$sql;
  	}
  	
  	//header( 'refresh: 2; url=index.php?module=billers&view=manage' );
@@ -84,9 +84,9 @@ else if (  $op === 'edit_biller' ) {
 			WHERE
 				b_id = '$_GET[submit]'";
 		if (mysql_query($sql, $conn)) {
-			$display_block =  "Biller successfully edited, <br> you will be redirected back to the Manage Billers";
+			$display_block = $LANG_save_biller_success;
 		} else {
-			$display_block =  "Something went wrong, please try editing the product again";
+			$display_block = $LANG_save_biller_failure;
 		}
 
 		$refresh_total =  "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=billers&view=manage>";

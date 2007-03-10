@@ -1,6 +1,7 @@
 <?php
+define("BROWSE","browse");
+//if this page has error with auth remove the above line and figure out how to do it right
 include_once('./include/include_main.php');
-include('./config/config.php');
 
 
 $conn = mysql_connect( $db_host, $db_user, $db_password );
@@ -16,14 +17,6 @@ $result = mysql_query($sql, $conn) or die(mysql_error());
 $q = strtolower($_GET["q"]);
 if (!$q) return;
 
-
-/*
-$items = mysql_fetch_array($result);
-
-$items = array(
-"Great Bittern"=>"Botaurus stellaris",
-);
-*/
 
 while ($Array = mysql_fetch_array($result)) {
 	$inv_idField = $Array['inv_id'];

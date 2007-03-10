@@ -34,9 +34,9 @@ mysql_select_db("$db_name",$conn);
                                 cf_id = $_GET[submit]";
 
                 if (mysql_query($sql, $conn)) {
-                        $display_block =  "Custom field successfully edited, <br> you will be redirected back to the Manage Products";
+                        $display_block =  $LANG_save_custom_field_success;
                 } else {
-                        $display_block =  "Something went wrong, please try editing the custom field again<br>";
+                        $display_block =  $LANG_save_custom_field_success;
 			$display_block .=  mysql_error();
                 }
 

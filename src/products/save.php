@@ -37,9 +37,9 @@ $sql = "INSERT into
 		)";
 
 if (mysql_query($sql, $conn)) {
-	$display_block =  "Product successfully added, <br> you will be redirected to the Manage Products page";
+	$display_block = $LANG_save_product_success;
 } else {
-	$display_block =  "Something went wrong, please try adding the biller again";
+	$display_block = $LANG_save_product_failure;
 }
 
 	//header( 'refresh: 2; url=manage_products.php' );
@@ -71,9 +71,9 @@ mysql_select_db("$db_name",$conn);
 				prod_id = '$_GET[submit]'";
 
 		if (mysql_query($sql, $conn)) {
-			$display_block =  "Product successfully edited, <br> you will be redirected back to the Manage Products";
+			$display_block = $LANG_save_product_success;
 		} else {
-			$display_block =  "Something went wrong, please try editing the product again";
+			$display_block = $LANG_save_product_failure;
 		}
 
 		//header( 'refresh: 2; url=manage_products.php' );

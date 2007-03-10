@@ -37,9 +37,9 @@ $sql = "INSERT into
 		)";
 
 if (mysql_query($sql, $conn)) {
-	$display_block =  "Payment Type successfully added, <br> you will be redirected to the Manage Payment Types page";
+	$display_block = $LANG_save_payment_type_success;
 } else {
-	$display_block =  'Something went wrong, please try adding the tax rate again';
+	$display_block =  $LANG_save_payment_type_failure;
 }
 
 //header( 'refresh: 2; url=manage_payment_types.php' );
@@ -66,9 +66,9 @@ else if (  $op === 'edit_payment_type' ) {
 				pt_id = " . $_GET['submit'];
 
 		if (mysql_query($sql, $conn)) {
-			$display_block =  "Payment Type successfully edited, <br> you will be redirected back to the Manage Payment Types";
+			$display_block = $LANG_save_payment_type_success;
 		} else {
-			$display_block =  'Something went wrong, please try editing the tax rate again';
+			$display_block =  $LANG_save_payment_type_failure;
 		}
 
 		//header( 'refresh: 2; url=manage_payment_types.php' );

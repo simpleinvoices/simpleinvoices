@@ -40,9 +40,9 @@ $sql = "INSERT into
 		 )";
 
 if (mysql_query($sql, $conn)) {
-$display_block =  "Invoice preference successfully added,<br> you will be redirected to Manage Preferences page";
+	$display_block = $LANG_save_preference_success;
 } else {
-	$display_block =  'Something went wrong, please try adding the invoice preference again';
+	$display_block =  $LANG_save_preference_failure;
 }
 
 //header( 'refresh: 2; url=manage_preferences.php' );
@@ -74,9 +74,9 @@ else if (  $op === 'edit_preference' ) {
 				pref_id = '$_GET[submit]'";
 
 		if (mysql_query($sql, $conn)) {
-			$display_block =  "Invoice Preference successfully edited, <br> you will be redirected back to Manage Invoice Preferences";
+			$display_block = $LANG_save_preference_success;
 		} else {
-			$display_block =  "Something went wrong, please try editing the invoice preference again";
+			$display_block = $LANG_save_preference_failure;
 		}
 
 		//header( 'refresh: 2; url=manage_preferences.php' );
