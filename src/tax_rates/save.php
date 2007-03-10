@@ -38,9 +38,9 @@ $sql = "INSERT into
 		)";
 
 if (mysql_query($sql, $conn)) {
-	$display_block =  "Tax rate successfully added, <br> you will be redirected to the Manage Tax Rates page";
+	$display_block = $LANG_save_tax_rate_success;
 } else {
-	$display_block =  'Something went wrong, please try adding the tax rate again';
+	$display_block = $LANG_save_tax_rate_failure;
 }
 
 //header( 'refresh: 2; url=manage_tax_rates.php' );
@@ -67,9 +67,9 @@ mysql_select_db("$db_name",$conn);
 				tax_id = " . $_GET['submit'];
 
 		if (mysql_query($sql, $conn)) {
-			$display_block =  "Tax Rate successfully edited, <br> you will be redirected back to the Manage Tax Rates";
+			$display_block = $LANG_save_tax_rate_success;
 		} else {
-			$display_block =  'Something went wrong, please try editing the tax rate again';
+			$display_block = $LANG_save_tax_rate_failure;
 		}
 
 		//header( 'refresh: 2; url=manage_tax_rates.php' );
