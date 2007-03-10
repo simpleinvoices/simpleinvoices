@@ -28,9 +28,6 @@ $display_block_enabled = "<select name=\"pref_enabled\">
 </select>";
 
 
-
-?>
-
 echo <<<EOD
 
 	<script type="text/javascript" src="./src/include/js/ibox.js"></script>
