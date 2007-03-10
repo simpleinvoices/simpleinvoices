@@ -43,8 +43,8 @@ include('./src/invoices/manage.inc.php');
 <link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
 
 <? 
-require "lgplus/php/chklang.php";
-require "lgplus/php/settings.php";
+require "./src/include/js/lgplus/php/chklang.php";
+require "./src/include/js/lgplus/php/settings.php";
 ?>
 
 <script src="./src/include/js/lgplus/js/rico.js" type="text/javascript"></script>

@@ -100,11 +100,11 @@ EOD;
 ?>
 
 <? 
-require "lgplus/php/chklang.php";
-require "lgplus/php/settings.php";
+require "./src/include/js/lgplus/php/chklang.php";
+require "./src/include/js/lgplus/php/settings.php";
 ?>
 
-<script src="lgplus/js/rico.js" type="text/javascript"></script>
+<script src="./src/include/js/lgplus/js/rico.js" type="text/javascript"></script>
 <script type='text/javascript'>
 Rico.loadModule('LiveGrid');
 Rico.loadModule('LiveGridMenu');
