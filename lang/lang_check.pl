@@ -5,6 +5,7 @@
 @langs= (
 	"castellano_spanish.inc.php",
 	"catala_catalan.inc.php",
+	"cestina_czech.inc.php",
 	"deutsch_german.inc.php",
 	"english_UK.inc.php",
 	"galego_galician.inc.php",
