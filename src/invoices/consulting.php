@@ -98,7 +98,7 @@ if (mysql_num_rows($result) == 0) {
         $display_block = <<<EOD
         <select name="sel_id">
         <option selected value="$def[def_biller]" style="font-weight: bold">$biller[b_name]</option>
-        <option value=""></option>
+	<option value=""></option>
 EOD;
 		while ($recs = mysql_fetch_array($result)) {
 			$display_block .= "<option value=".$recs['b_id'].">".$recs['b_name']."</option>";
@@ -117,12 +117,12 @@ if (mysql_num_rows($result_customer) == 0) {
         //has records, so display them
         $display_block_customer = <<<EOD
         <select name="select_customer">
-        <option selected value="$der[def_customer]" style="font-weight: bold">$customer[c_name]</option>
+        <option selected value="$def[def_customer]" style="font-weight: bold">$customer[c_name]</option>
         <option value=""></option>
 EOD;
 
 	while ($recs_customer = mysql_fetch_array($result_customer)) {
-
+		
                 $display_block_customer .= <<<EOD
                 <option value=$recs_customer[c_id]">
                         $recs_customer[c_name]</option>
@@ -258,15 +258,12 @@ include('./config/config.php');
         }
         
      
-        
-        
 
             
-    $today = date("Y-m-d");
+	$today = date("Y-m-d");
     
-    
-    
-    $temp = file_get_contents('./src/invoices/consulting.tpl');
+	$temp = file_get_contents('./src/invoices/consulting.tpl');
+
 	$temp = addslashes($temp);	$content = "";
 	
 	eval ('$content = "'.$temp.'";');

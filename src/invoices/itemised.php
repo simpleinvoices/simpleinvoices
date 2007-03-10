@@ -1,5 +1,5 @@
 <?php
-include('./include/include_main.php');
+include_once('./include/include_main.php');
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 if (!defined("BROWSE")) {
@@ -8,7 +8,7 @@ if (!defined("BROWSE")) {
 }
 
 
-include("./include/validation.php");
+include_once("./include/validation.php");
 
 jsBegin();
 jsFormValidationBegin("frmpost");
