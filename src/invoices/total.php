@@ -301,6 +301,6 @@ Dialog.alert("Test of alert panel, check out debug window after closing it", {wi
 -->
 <!-- </div> -->
 <hr></hr>
-	<input type=submit name="submit" value="<?php echo $LANG_save;echo " "; echo $LANG_inv;?>"><input type=hidden name="invoice_style" value="insert_invoice_total">
+	<input type=submit name="submit" value="<?php echo $LANG_save_invoice;?>"><input type=hidden name="invoice_style" value="insert_invoice_total">
 </FORM>
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

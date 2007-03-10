@@ -289,7 +289,7 @@ EOD;
 $footer = <<<EOD
 <hr></hr>
 <input type="submit" name="cancel" value="{$LANG_cancel}" />
-<input type="submit" name="save_biller" value="{$LANG_save} {$LANG_biller}" />
+<input type="submit" name="save_biller" value="{$LANG_save_biller}" />
 <input type="hidden" name="op" value="edit_biller" />
 
 EOD;

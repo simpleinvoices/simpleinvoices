@@ -115,7 +115,7 @@ if (!defined("BROWSE")) {
 <!-- </div> -->
 <hr></hr>
 		<input type=hidden name="max_items" value="$num">
-		<input type=submit name="submit" value="$LANG_save $LANG_inv">
+		<input type=submit name="submit" value="$LANG_save_invoice">
 		<input type=hidden name="invoice_style" value="insert_invoice_consulting">
 
 </FORM>

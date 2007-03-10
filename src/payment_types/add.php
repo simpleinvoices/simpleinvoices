@@ -46,7 +46,7 @@ $display_block_enabled = "<select name=\"pt_enabled\">
 	
 </table>
 	<hr></hr>
-	<input type=submit name="submit" value="Insert Payment Type">
+	<input type=submit name="submit" value="<?php echo $LANG_insert_payment_type; ?>">
 	<input type=hidden name="op" value="insert_payment_type">
 </FORM>
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

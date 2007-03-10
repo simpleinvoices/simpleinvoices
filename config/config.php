@@ -5,7 +5,7 @@ if (!defined("BROWSE")) {
    exit();
 }
 
-/*Enter your pppconfig/wvdial profile name, if you havent set one up or dont know what it is run pppconfig/wvdialconf from the commandline to find out.  man pppconfig for more information */
+/*Enter your database information */
 $db_host = "localhost";
 $db_name = "simple_invoices";
 $db_user = "root";

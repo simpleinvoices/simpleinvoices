@@ -456,7 +456,7 @@ else {
 </table>
 <!-- </div> -->
 
-	<input type=submit name="submit" value="<?php echo $msd_submit_button; ?>">
+	<input type=submit name="submit" value="<?php echo $LANG_save_defaults; ?>">
 	<input type=hidden name="op" value="update_system_defaults">
 
 </FORM>
