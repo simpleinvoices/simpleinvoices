@@ -1,6 +1,6 @@
 <?php
 #table
-define("BROWSE","browse");
+#define("BROWSE","browse");
 include('./include/include_print.php');
 include("./include/functions.php");
 
