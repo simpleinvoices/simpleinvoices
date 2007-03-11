@@ -27,7 +27,7 @@ $invoice_summary = <<<EOD
 		<tr>
 				<td nowrap class="tbl1-left">$pref[pref_inv_wording] $LANG_date:</td><td class="tbl1-right" colspan=3>$invoice[date]</td>
 		</tr>
-	<!-- Show the Invoice Custom Fields is valid -->
+	<!-- Show the Invoice Custom Fields if valid -->
 
 		$show[custom_field1]
 		$show[custom_field2]
@@ -239,6 +239,11 @@ $itemised_heading = <<<EOD
 			</tr>
 EOD;
 
+$total_heading = <<<EOD
+		<tr class="tbl1 col1">
+			<td class="tbl1" colspan="5"><b>$LANG_description</b></td>
+		</tr>
+EOD;
 
 $itemised_line = <<<EOD
 			<tr class="tbl1" >
@@ -251,12 +256,43 @@ $itemised_line = <<<EOD
 			</tr>
 EOD;
 
+/*Consulting invoices - custom fields start*/
 
-$consulting_line .=  <<<EOD
+$consulting_line =  <<<EOD
 			<tr class="tbl1-left tbl1-right">
 				<td class="tbl1-left" >$master_invoice[inv_it_quantity_formatted]</td>
 				<td>$prod[prod_description]</td><td class="tbl1-right" colspan="5"></td>
 			</tr>
+			
+                <tr>       
+                        <td class="tbl1-left"></td><td class="tbl1-right" colspan="6">
+                                                <table width="100%">
+                                                        <tr>
+EOD;
+                /*Get the custom fields and show them nicely*/
+                $consulting_line .= inv_itemised_cf($product[custom_field_label1], $prod[prod_custom_field1]);
+                $inv_it_tr++;
+                $consulting_line .= do_tr($inv_it_tr,'blank-class');
+                $consulting_line .= inv_itemised_cf($product[custom_field_label2], $prod[prod_custom_field2]);
+                $inv_it_tr++;
+                $consulting_line .= do_tr($inv_it_tr,'blank-class');
+                $consulting_line .= inv_itemised_cf($product[custom_field_label3], $prod[prod_custom_field3]);
+                $inv_it_tr++;
+                $consulting_line .= do_tr($inv_it_tr,'blank-class');
+                $consulting_line .= inv_itemised_cf($product[custom_field_label4], $prod[prod_custom_field4]);
+                $inv_it_tr++;
+                $consulting_line .= do_tr($inv_it_tr,'blank-class');
+                $inv_it_tr = 0;
+                $consulting_line .=  " 
+                                                        </tr>
+                                                </table>
+                                </td>
+                 </tr>";
+/*Consulting invoices - custom fields end*/
+
+$consulting_line .=  <<<EOD
+
+	
 			<tr class="tbl1-left tbl1-right">
 				<td class="tbl1-left"></td>
 				<td class="tbl1-right" colspan=6><i>$LANG_description: </i>$master_invoice[inv_it_description]</td>
@@ -271,6 +307,7 @@ $consulting_line .=  <<<EOD
 			</tr>
 EOD;
 
+if ( $_GET['invoice_style'] === 'Itemised' && !empty($invoice[inv_note]) OR 'Consulting' && !empty($invoice[inv_note])) {
 
 $notes =  <<<EOD
 	<tr>
@@ -283,7 +320,7 @@ $notes =  <<<EOD
 		<td class="tbl1-left tbl1-right" colspan="7">$invoice[inv_note]</td>
 	</tr>
 EOD;
-
+}
 
 
 $total_tax =  <<<EOD

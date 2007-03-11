@@ -203,8 +203,8 @@ if ($_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'Consult
 		}
 		#show the consulting invoice
 		if ($_GET['invoice_style'] === 'Consulting' ) {
-			$itemised_line = addslashes($itemised_line);
-			eval('$line .=  "'.$itemised_line.'";');
+			$line = addslashes($consulting_line);
+			eval('$lines .=  "'.$line.'";');
 		}
 	}
 }
