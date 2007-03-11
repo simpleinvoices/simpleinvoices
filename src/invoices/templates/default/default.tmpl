@@ -119,7 +119,7 @@ EOD;
 
 
 
-        $customer_block .=<<<EOD
+        $customer_block =<<<EOD
 
 	<!-- Customer section - start -->
 	<tr>
@@ -184,13 +184,9 @@ EOD;
         $customer_block .= print_if_not_null($customer[custom_field_label3], $customer[c_custom_field3],'tbl1-left','tbl1-right',3);
         $customer_block .= print_if_not_null($customer[custom_field_label4], $customer[c_custom_field4],'tbl1-left','tbl1-right',3);
 	$customer_block .=<<<EOD
-		<tr><td class='tbl1-top' colspan=4></td></tr>
+		<tr><td class="tbl1-top" colspan=4></td></tr></table>
 EOD;
 
-	$customer_block .=<<<EOD
-	</table>
-	<!-- Customer section end -->
-EOD;
 
 $invoice_total_block =  <<<EOD
 		<table class="left" width="100%">
