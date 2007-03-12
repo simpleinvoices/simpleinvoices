@@ -7,14 +7,9 @@ if (!defined("BROWSE")) {
    exit();
 }
 
-?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="text/javascript" src="./src/include/js/ibox.js"></script>
-<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
+include("./html/header.html");
 
-<?php
+
 /* validataion code */
 include("./include/validation.php");
 
@@ -62,10 +57,10 @@ $display_block_enabled = "<select name=\"b_enabled\">
 </select>";
 
 #get custom field labels
-$biller_custom_field_label1 = get_custom_field_label(biller_cf1);
-$biller_custom_field_label2 = get_custom_field_label(biller_cf2);
-$biller_custom_field_label3 = get_custom_field_label(biller_cf3);
-$biller_custom_field_label4 = get_custom_field_label(biller_cf4);
+$biller_custom_field_label1 = get_custom_field_label("biller_cf1");
+$biller_custom_field_label2 = get_custom_field_label("biller_cf2");
+$biller_custom_field_label3 = get_custom_field_label("biller_cf3");
+$biller_custom_field_label4 = get_custom_field_label("biller_cf4");
 
 ?>
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>

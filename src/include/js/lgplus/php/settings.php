@@ -1,4 +1,4 @@
-<? 
+<?php
 $menu=GetQSitem("menu", "dblclick");
 $frozen=GetQSitem("frozen", "1");
 $highlt=GetQSitem("highlt", "none");

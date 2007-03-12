@@ -2,7 +2,7 @@
 <head>
 </head>
 <body>
-<?
+<?php
 //============================================================================
 //============================================================================
 // Script:    	PHP Script "Yahoo Weather Demo"
@@ -91,8 +91,8 @@ for ($day=0; isset($weather_chile->forecast[$day]); $day++) {
   //print_r($weather_chile->forecast[$day]);
   print "day: ".$weather_chile->forecast[$day]['DAY']."<br>";      // Wed
   print "date: ".$weather_chile->forecast[$day]['DATE']."<br>";    // 26 Oct 2005
-  print "low °C: ".$weather_chile->forecast[$day]['LOW']."<br>";   // 8
-  print "high °C: ".$weather_chile->forecast[$day]['HIGH']."<br>"; // 19
+  print "low ï¿½C: ".$weather_chile->forecast[$day]['LOW']."<br>";   // 8
+  print "high ï¿½C: ".$weather_chile->forecast[$day]['HIGH']."<br>"; // 19
   print "text: ".$weather_chile->forecast[$day]['TEXT']."<br>";    // Partly Cloudy
   print "imgcode: ".$weather_chile->forecast[$day]['CODE']."<br>"; // 29=Image for partly cloudy
   print "image: <img src=http://us.i1.yimg.com/us.yimg.com/i/us/we/52/".$weather_chile->forecast[$day]['CODE'].".gif>";

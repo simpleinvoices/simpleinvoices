@@ -1,4 +1,4 @@
-<?
+<?php
 if (!isset ($_SESSION)) session_start();
 header("Cache-Control: no-cache");
 header("Pragma: no-cache");

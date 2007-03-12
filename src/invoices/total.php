@@ -177,10 +177,11 @@ if (mysql_num_rows($result_preferences) == 0) {
 
 } else {
         //has records, so display them
-        $display_block_preferences = "
-        <select name=\"select_preferences\">
-        <option selected value=\"$def_inv_preferenceField\" style=\"font-weight: bold\">$pref_descriptionField</option>
-        <option value=\"\"></option>";
+        $display_block_preferences = <<<EOD
+        <select name="select_preferences">
+        <option selected value="$def_inv_preferenceField" style="font-weight:bold;">$pref_descriptionField</option>
+        <option value=""></option>
+EOD;
 
         while ($recs_preferences = mysql_fetch_array($result_preferences)) {
                 $id_preferences = $recs_preferences['pref_id'];

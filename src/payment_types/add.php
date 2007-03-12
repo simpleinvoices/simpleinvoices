@@ -7,12 +7,8 @@ if (!defined("BROWSE")) {
    exit();
 }
 
-?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-</head>
-<?php 
+include('./html/header.html');
+
 include('./include/validation.php');
 
 jsBegin();
@@ -22,12 +18,14 @@ jsFormValidationEnd();
 jsEnd();
 
 #do the product enabled/disblaed drop down
-$display_block_enabled = "<select name=\"pt_enabled\">
-<option value=\"1\" selected>$wording_for_enabledField</option>
-<option value=\"0\">$wording_for_disabledField</option>
-</select>";
-?>
+$display_block_enabled = <<<EOD
+<select name="pt_enabled">
+<option value="1" selected>$wording_for_enabledField</option>
+<option value="0">$wording_for_disabledField</option>
+</select>
+EOD;
 
+echo <<<EOD
 <BODY>
 
 
@@ -41,12 +39,14 @@ $display_block_enabled = "<select name=\"pt_enabled\">
 		<td class="details_screen">Payment type description</td><td><input type=text name="pt_description" size=50></td>
 	</tr>
 	<tr>
-		<td class="details_screen"><?php echo $wording_for_enabledField; ?></td><td><?php echo $display_block_enabled;?></td>
+		<td class="details_screen">$wording_for_enabledField</td><td>$display_block_enabled</td>
 	</tr>
 	
 </table>
 	<hr></hr>
-	<input type=submit name="submit" value="<?php echo $LANG_insert_payment_type; ?>">
+	<input type=submit name="submit" value="$LANG_insert_payment_type">
 	<input type=hidden name="op" value="insert_payment_type">
 </FORM>
+EOD;
+?>
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

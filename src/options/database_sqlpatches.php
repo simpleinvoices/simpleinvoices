@@ -175,7 +175,7 @@ $check_patches_sql = "
 
 
 
-if ($_GET[op] == "run_updates") {
+if ($_GET['op'] == "run_updates") {
 	$table = '{$tb_prefix}sql_patchmanager';
 #DEFINE SQL PATCH
 	
@@ -267,19 +267,16 @@ else {
 	if(mysql_num_rows(mysql_query("SHOW TABLES LIKE '".$table."'"))==1) {
 
 
-		echo "
-		<b>Database Upgrade Manager</b> $display_note
+		echo <<<EOD
+		<b>Database Upgrade Manager</b>
+		$display_note
 		<hr></hr>
 
-		<table align='center'>
-";
-
-                echo "<tr></i><tr><td><br>The list below describes which patches have and have not been applied to the database, the aim is to have them all applied.  If there are patches that have not been applied to the Simple Invoices database, please run the Update database by clicking update </td></tr><tr align=center><td><br><a href='index.php?module=options&view=database_sqlpatches&op=run_updates'>UPDATE</a></td></tr></table><br>
-
-<a href=\"./documentation/info_pages/text.html\" rel=\"ibox&height=400\"><font color=\"red\"><img src=\"./images/common/important.png\"></img>Warning:</font></a>
-";
-
-		echo "<table align='center'>";
+		<table align="center">
+			<tr></i><tr><td><br>The list below describes which patches have and have not been applied to the database, the aim is to have them all applied.  If there are patches that have not been applied to the Simple Invoices database, please run the Update database by clicking update </td></tr><tr align=center><td><br><a href='index.php?module=options&view=database_sqlpatches&op=run_updates'>UPDATE</a></td></tr></table><br>
+<a href="./documentation/info_pages/text.html" rel="ibox&height=400"><font color="red"><img src="./images/common/important.png"></img>Warning:</font></a>
+<table align="center">
+EOD;
 
 		$p = 1;
                 while  ($p <= $patch_count) {
@@ -296,20 +293,12 @@ else {
 
 	}
 	else {
-
-
-
-		echo "
+		echo <<<EOD
 
 		<table align='center'>
-";
-
-                echo "<tr><td><br>This is the first time that the Database Upgrade process is to be run.  The first step in the process is to Initialse the database upgrade table. To do this click the Initialise database button<br><br><a href='index.php?module=options&view=database_sqlpatches&op=run_updates'>INITIALISE DATABASE UPGRADE</a></td></tr>";
-
-
-		echo "
+          <tr><td><br>This is the first time that the Database Upgrade process is to be run.  The first step in the process is to Initialse the database upgrade table. To do this click the Initialise database button<br><br><a href='index.php?module=options&view=database_sqlpatches&op=run_updates'>INITIALISE DATABASE UPGRADE</a></td></tr>
 		</table>
-";
+EOD;
 	}
 
 }

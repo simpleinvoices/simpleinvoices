@@ -1,8 +1,9 @@
-<? 
+<?php
 // -------------------------------------------------------------
 // Check languages accepted by browser
 // and see if there is a match
 // -------------------------------------------------------------
+
 
 function setLang() {
   $jsDir="../js/";

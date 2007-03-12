@@ -1,4 +1,4 @@
-<?
+<?php
 if (!isset ($_SESSION)) session_start();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -6,7 +6,7 @@ if (!isset ($_SESSION)) session_start();
 <head>
 <title>Rico LiveGrid Plus-Example 6</title>
 
-<? 
+<?php
 $sqltext="select CustomerID,ShipName,year(ShippedDate),count(*) from nworders group by CustomerID,ShipName,year(ShippedDate)";
 $_SESSION['ex8']=$sqltext;
 
@@ -20,7 +20,7 @@ require "settings.php";
 Rico.loadModule('LiveGridAjax');
 Rico.loadModule('LiveGridMenu');
 Rico.include('demo.css');
-<?
+<?php
 setStyle();
 setLang();
 ?>
@@ -40,12 +40,12 @@ function setFilter() {
 Rico.onLoad( function() {
   yrboxes=document.getElementsByName('year');
   var opts = {  
-    <? GridSettingsScript(); ?>,
+    <?php GridSettingsScript(); ?>,
     prefetchBuffer: false,
     columnSpecs   : [,{type:'control',control:new Rico.TableColumn.link('ex2.php?id={0}','_blank'),width:250},,'specQty']
   };
-  var menuopts = <? GridSettingsMenu(); ?>;
-  var buffer=new Rico.Buffer.AjaxSQL('ricoXMLquery.php', {TimeOut:<? print array_shift(session_get_cookie_params())/60 ?>});
+  var menuopts = <?php GridSettingsMenu(); ?>;
+  var buffer=new Rico.Buffer.AjaxSQL('ricoXMLquery.php', {TimeOut:<?php print array_shift(session_get_cookie_params())/60 ?>});
   ex8=new Rico.LiveGrid ('ex8', new Rico.GridMenu(menuopts), buffer, opts);
   setFilter();
 });
@@ -62,7 +62,7 @@ td.ex8_col3 { text-align:center; }
 
 <body>
 
-<?
+<?php
 require "menu.php";
 print "<table id='explanation' border='0' cellpadding='0' cellspacing='5' style='clear:both'><tr valign='top'><td>";
 GridSettingsForm();

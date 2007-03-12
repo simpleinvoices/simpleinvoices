@@ -97,21 +97,11 @@ while ($Array = mysql_fetch_array($result)) {
 
 
 
-?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+include('./html/header.html');
+include('./config/config.php');
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-<script type="text/javascript" src="include/jquery.js"></script>
-
-<?php include('./config/config.php'); ?>
-
-
-<? 
-require "./src/include/js/lgplus/php/chklang.php";
-require "./src/include/js/lgplus/php/settings.php";
+require("./src/include/js/lgplus/php/chklang.php");
+require("./src/include/js/lgplus/php/settings.php");
 ?>
 
 <script src="./src/include/js/lgplus/js/rico.js" type="text/javascript"></script>

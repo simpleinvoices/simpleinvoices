@@ -7,14 +7,8 @@ if (!defined("BROWSE")) {
    exit();
 }
 
-?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="text/javascript" src="./src/include/js/ibox.js"></script>
-<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
+include("./html/header.html");
 
-<?php
 /* validataion code */
 include("./include/validation.php");
 

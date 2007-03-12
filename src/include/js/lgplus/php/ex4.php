@@ -1,4 +1,4 @@
-<?
+<?php
 if (!isset ($_SESSION)) session_start();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -6,7 +6,7 @@ if (!isset ($_SESSION)) session_start();
 <head>
 <title>Rico LiveGrid Plus-Example 4</title>
 
-<?
+<?php
 require "chklang.php";
 
 $_SESSION['customergrid']="select CustomerID,CompanyName,ContactName,Address,City,Region,PostalCode,Country,Phone,Fax from nwcustomers order by CustomerID";
@@ -20,7 +20,7 @@ Rico.loadModule('LiveGridAjax');
 Rico.loadModule('LiveGridMenu');
 Rico.include('greenHdg.css');
 Rico.include('demo.css');
-<?
+<?php
 setLang();
 ?>
 
@@ -113,7 +113,7 @@ height: 12px;
 
 <body>
 
-<?
+<?php
 require "menu.php";
 ?>
 

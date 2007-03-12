@@ -8,7 +8,7 @@ if (!defined("BROWSE")) {
 }
 
 #get the invoice id
-$customer_id = $_GET[submit];
+$customer_id = $_GET['submit'];
 
 
 #Info from DB print

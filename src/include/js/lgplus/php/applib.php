@@ -1,4 +1,4 @@
-<?
+<?php
 require "dbClass2.php";
 $appName="Northwind";
 $appDB="simple_invoices";
@@ -60,4 +60,3 @@ function AppHeader($hdg) {
   echo "<h2 class='appHeader'>".str_replace("<dialect>",$GLOBALS['oDB']->Dialect,$hdg)."</h2>";
 }
 ?>
-

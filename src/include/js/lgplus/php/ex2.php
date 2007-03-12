@@ -1,4 +1,4 @@
-<?
+<?php
 if (!isset ($_SESSION)) session_start();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -6,7 +6,7 @@ if (!isset ($_SESSION)) session_start();
 <head>
 <title>Rico LiveGrid Plus-Example 2</title>
 
-<? 
+<?php
 require "applib.php";
 
 session_set_cookie_params(60*60);
@@ -29,7 +29,7 @@ require "settings.php";
 Rico.loadModule('LiveGridAjax');
 Rico.loadModule('LiveGridMenu');
 Rico.include('demo.css');
-<?
+<?php
 setStyle();
 setLang();
 ?>
@@ -37,10 +37,10 @@ var orderGrid,buffer;
 
 Rico.onLoad( function() {
   var opts = {  
-    <? GridSettingsScript(); ?>,
+    <?php GridSettingsScript(); ?>,
     columnSpecs   : [,,,,,{type:'date'},{type:'date'}]
   };
-  var menuopts = <? GridSettingsMenu(); ?>;
+  var menuopts = <?php GridSettingsMenu(); ?>;
   buffer=new Rico.Buffer.AjaxSQL('ricoXMLquery.php', {TimeOut:<? print array_shift(session_get_cookie_params())/60 ?>});
   orderGrid=new Rico.LiveGrid ('ex2', new Rico.GridMenu(menuopts), buffer, opts);
 });
@@ -51,7 +51,7 @@ Rico.onLoad( function() {
 
 <body>
 
-<?
+<?php
 require "menu.php";
 print "<table id='explanation' border='0' cellpadding='0' cellspacing='5' style='clear:both'><tr valign='top'><td>";
 GridSettingsForm();

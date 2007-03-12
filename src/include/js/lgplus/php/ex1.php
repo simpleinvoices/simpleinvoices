@@ -3,7 +3,7 @@
 <head>
 <title>Rico LiveGrid Plus-Example 1</title>
 
-<? 
+<?php 
 require "chklang.php";
 require "settings.php";
 ?>
@@ -13,7 +13,7 @@ require "settings.php";
 Rico.loadModule('LiveGrid');
 Rico.loadModule('LiveGridMenu');
 Rico.include('demo.css');
-<?
+<?php
 setStyle();
 setLang();
 ?>
@@ -22,10 +22,10 @@ var ex1,buffer,lastVal=[];
 
 Rico.onLoad( function() {
   var opts = {  
-    <? GridSettingsScript(); ?>,
+    <?php GridSettingsScript(); ?>,
     columnSpecs   : ['specQty']
   };
-  var menuopts = <? GridSettingsMenu(); ?>;
+  var menuopts = <?php GridSettingsMenu(); ?>;
   new Rico.LiveGrid ('ex1', new Rico.GridMenu(menuopts), new Rico.Buffer.Base($('ex1').tBodies[0]), opts);
 }
 
@@ -48,7 +48,7 @@ function keyfilter(txtbox,idx) {
 
 <body>
 
-<?
+<?php
 require "menu.php";
 print "<table id='explanation' border='0' cellpadding='0' cellspacing='5' style='clear:both'><tr valign='top'><td>";
 GridSettingsForm();

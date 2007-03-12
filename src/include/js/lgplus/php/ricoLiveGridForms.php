@@ -1,4 +1,4 @@
-<? 
+<?php
 //**********************************
 // Rico: GENERIC TABLE/VIEW EDITOR
 //  By Matt Brown

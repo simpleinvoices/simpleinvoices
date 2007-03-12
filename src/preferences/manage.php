@@ -96,10 +96,6 @@ EOD;
 		$display_block .= "</table>";
 	} // if
 
-
-?>
-
-<? 
 require "./src/include/js/lgplus/php/chklang.php";
 require "./src/include/js/lgplus/php/settings.php";
 ?>

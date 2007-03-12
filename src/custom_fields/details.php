@@ -7,15 +7,11 @@ if (!defined("BROWSE")) {
    exit();
 }
 
-?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?php
+
 #table
 
 #get the invoice id
-$cf_id = $_GET[submit];
+$cf_id = $_GET["submit"];
 
 
 #Info from DB print
@@ -28,15 +24,9 @@ mysql_select_db("$db_name",$conn);
 $print_product = "SELECT * FROM {$tb_prefix}custom_fields WHERE cf_id = $cf_id";
 $result_print_product = mysql_query($print_product, $conn) or die(mysql_error());
 
+$cf = mysql_fetch_array($result_print_product);
+$cf['name'] = get_custom_field_name($cf['cf_custom_field']);
 
-while ($Array = mysql_fetch_array($result_print_product) ) {
-        $cf_idField = $Array['cf_id'];
-        $cf_custom_fieldField = $Array['cf_custom_field'];
-        $cf_custom_labelField = $Array['cf_custom_label'];
-        //get the nice name of the custom field
-        $custom_field_name = get_custom_field_name($cf_custom_fieldField);
-
-};
 
 
 if ($_GET['action'] == "view") {
@@ -44,26 +34,26 @@ if ($_GET['action'] == "view") {
 	$display_block = <<<EOD
 
 	<b>{$LANG_custom_fields} ::
-	<a href="index.php?module=custom_fields&view=details&submit={$cf_idField}&action=edit">{$LANG_edit}</a></b>
+	<a href="index.php?module=custom_fields&view=details&submit=$cf[cf_id]&action=edit">{$LANG_edit}</a></b>
 	<hr></hr>
 
 
 	
 	<table align="center">
 	<tr>
-		<td class="details_screen">{$LANG_id}</td><td>{$cf_idField}</td>
+		<td class="details_screen">{$LANG_id}</td><td>$cf[cf_id]</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_custom_field_db_field_name}</td>
-		<td>{$cf_custom_fieldField}</td>
+		<td>$cf[cf_custom_field]</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_custom_field}</td>
-		<td>{$custom_field_name}</td>
+		<td>$cf[name]</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_custom_label}</td>
-		<td>{$cf_custom_labelField}</td>
+		<td>$cf[cf_custom_label]</td>
 	</tr>
 	</table>
 	<hr></hr>
@@ -71,7 +61,7 @@ EOD;
 
 $footer = <<<EOD
 
-<a href="index.php?module=custom_fields&view=details&submit={$cf_idField}&action=edit">{$LANG_edit}</a>
+<a href="index.php?module=custom_fields&view=details&submit=$cf[cf_id]&action=edit">{$LANG_edit}</a>
 
 EOD;
 }
@@ -88,19 +78,19 @@ $display_block = <<<EOD
 
 	<table align="center">
         <tr>
-                <td class="details_screen">{$LANG_id}</td><td>{$cf_idField}</td>
+                <td class="details_screen">{$LANG_id}</td><td>$cf[cf_id]</td>
         </tr>
         <tr>
                 <td class="details_screen">{$LANG_custom_field_db_field_name}</td>
-                <td>{$cf_custom_fieldField}</td>
+                <td>$cf[cf_custom_field]</td>
         </tr>
         <tr>
                 <td class="details_screen">{$LANG_custom_field}</td>
-                <td>{$custom_field_name}</td>
+                <td>$cf[name]</td>
         </tr>
 	<tr>
 		<td class="details_screen">{$LANG_custom_label}</td>
-		<td><input type="text" name="cf_custom_label" size="50" value="{$cf_custom_labelField}" /></td>
+		<td><input type="text" name="cf_custom_label" size="50" value="$cf[cf_custom_label]" /></td>
 	</tr>
 	</table>
 	<hr></hr>
@@ -116,9 +106,14 @@ EOD;
 }
 
 ?>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
-<script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
+<script language="javascript" type="text/javascript"
+	src="include/tiny_mce/tiny_mce_src.js"></script>
+<script language="javascript" type="text/javascript"
+	src="include/tiny-mce.conf.js"></script>
 </head>
 <body>
 

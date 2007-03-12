@@ -7,15 +7,8 @@ if (!defined("BROWSE")) {
    exit();
 }
 
-?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+include("./html/header.html");
 
-<script type="text/javascript" src="./src/include/js/ibox.js"></script>
-<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
-
-<?php
 #table
 include("./include/validation.php");
 
@@ -28,7 +21,7 @@ jsEnd();
 
 
 #get the invoice id
-$product_id = $_GET[submit];
+$product_id = $_GET['submit'];
 
 
 #Info from DB print

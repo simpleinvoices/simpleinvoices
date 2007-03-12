@@ -8,10 +8,6 @@ if (!defined("BROWSE")) {
 }
 
 
-?>
-<html>
-<head>
-<?php
 
 #manage products
 $conn = mysql_connect("$db_host","$db_user","$db_password");
@@ -78,9 +74,13 @@ EOD;
 }
 
 ?>
+
+
+<html>
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<? 
+<?php
 require "./src/include/js/lgplus/php/chklang.php";
 require "./src/include/js/lgplus/php/settings.php";
 ?>
@@ -109,7 +109,8 @@ Rico.onLoad( function() {
 </script>
 
 <script type="text/javascript" src="./src/include/js/ibox.js"></script>
-<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
+<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"
+	media="screen" />
 
 </head>
 <body>

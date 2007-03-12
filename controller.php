@@ -7,12 +7,9 @@ if (!defined("BROWSE")) {
 }
 
 
-$module = $_GET['module'];
-
-$view = $_GET['view'];
-
-
-$action = $_GET['case'];
+$module = isset($_GET['module'])?$_GET['module']:null;
+$view = isset($_GET['view'])?$_GET['view']:null;
+$action = isset($_GET['case'])?$_GET['case']:null;
 
 
 /*

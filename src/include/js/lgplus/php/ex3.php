@@ -1,4 +1,4 @@
-<?
+<?php
 if (!isset ($_SESSION)) session_start();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -6,7 +6,7 @@ if (!isset ($_SESSION)) session_start();
 <head>
 <title>Rico LiveGrid Plus-Example 3</title>
 
-<? 
+<?php
 $sqltext="SELECT b_id,b_name,b_email,(CASE WHEN b_enabled = 1 THEN 'Enabled' WHEN b_enabled = 0 THEN 'Disabled'	ELSE '??' END) as b_enabled FROM {$tb_prefix}biller";
 
 $_SESSION['ex3']=$sqltext;
@@ -20,7 +20,7 @@ require "settings.php";
 Rico.loadModule('LiveGridAjax');
 Rico.loadModule('LiveGridMenu');
 Rico.include('demo.css');
-<?
+<?php
 setStyle();
 setLang();
 ?>
@@ -36,8 +36,8 @@ Rico.onLoad( function() {
 
     headingRow    : 1
   };
-  var menuopts = <? GridSettingsMenu(); ?>;
-  buffer=new Rico.Buffer.AjaxSQL('ricoXMLquery.php', {TimeOut:<? print array_shift(session_get_cookie_params())/60 ?>});
+  var menuopts = <?php GridSettingsMenu(); ?>;
+  buffer=new Rico.Buffer.AjaxSQL('ricoXMLquery.php', {TimeOut:<?php print array_shift(session_get_cookie_params())/60 ?>});
   ex3=new Rico.LiveGrid ('ex3', new Rico.GridMenu(menuopts), buffer, opts);
 });
 
@@ -62,7 +62,7 @@ th div.ricoLG_cell { height:1.5em; }  /* the text boxes require a little more he
 
 <body>
 
-<?
+<?php
 require "menu.php";
 print "<table id='explanation' border='0' cellpadding='0' cellspacing='5' style='clear:both'><tr valign='top'><td>";
 GridSettingsForm();

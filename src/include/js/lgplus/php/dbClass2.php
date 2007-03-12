@@ -1,4 +1,4 @@
-<?
+<?php
 /*****************************************************************
  Page        : dbClass.php
  Description : Routines to access MySQL database  

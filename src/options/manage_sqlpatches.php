@@ -21,7 +21,7 @@ $number_of_rows = mysql_num_rows($result);
 if (mysql_num_rows($result) == 0) {
 $display_block = "<P><em>No SQL patches have been applied to the database.</em></p>";
 }else{
-$display_block = "
+$display_block = <<<EOD
 
 <table align=center>
 <div id=header>
@@ -30,7 +30,8 @@ $display_block = "
 <th>SQL ID</th>
 <th>SQL Patch</th>
 <th>SQL Release</th>
-</tr>";
+</tr>
+EOD;
 
 while ($Array = mysql_fetch_array($result)) {
 	$sql_idField = $Array['sql_id'];
@@ -53,9 +54,10 @@ while ($Array = mysql_fetch_array($result)) {
         $display_block .="</table>";
 }
 
+include('./config/config.php');
 
 
-?>
+echo <<<EOD
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -67,17 +69,17 @@ Nifty("div#content,div#nav","same-height small");
 Nifty("div#header,div#footer","small");
 }
 </script>
-
-
-<?php include('./config/config.php'); ?>
 <body>
 
 <br>
 <div id="container">
-<?php echo $display_block; ?>
+$display_block
 <div id="footer"></div>
 </div>
 </div>
 
 </body>
+
+EOD;
+?>
 

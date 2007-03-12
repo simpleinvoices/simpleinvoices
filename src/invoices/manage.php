@@ -42,7 +42,7 @@ include('./src/invoices/manage.inc.php');
 <script type="text/javascript" src="./src/include/js/ibox.js"></script>
 <link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
 
-<? 
+<?php
 require "./src/include/js/lgplus/php/chklang.php";
 require "./src/include/js/lgplus/php/settings.php";
 ?>

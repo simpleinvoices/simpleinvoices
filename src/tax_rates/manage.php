@@ -93,7 +93,7 @@ EOD;
 ?>
 <script type="text/javascript" src="include/jquery.js"></script>
 
-<? 
+<?php
 require "./src/include/js/lgplus/php/chklang.php";
 require "./src/include/js/lgplus/php/settings.php";
 ?>

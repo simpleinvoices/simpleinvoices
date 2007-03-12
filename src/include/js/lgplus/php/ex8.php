@@ -1,4 +1,4 @@
-<? 
+<?php
 if (!isset ($_SESSION)) session_start();
 header("Cache-Control: no-cache");
 header("Pragma: no-cache");
@@ -11,7 +11,7 @@ header("Expires: ".gmdate("D, d M Y H:i:s",time()+(-1*60))." GMT");
 <title>LiveGrid Plus-Edit Example</title>
 <script src="../js/rico.js" type="text/javascript"></script>
 
-<?
+<?php
 $sqltext=".";  // force filtering to "on" in settings box
 require "applib.php";
 require "ricoLiveGridForms.php";
@@ -24,7 +24,7 @@ Rico.include('demo.css');
 Rico.loadModule('LiveGridForms');
 Rico.loadModule('Calendar');
 Rico.loadModule('Tree');
-<?
+<?php
 setStyle();
 setLang();
 ?>
@@ -65,7 +65,7 @@ div.ricoLG_outerDiv thead .ricoLG_cell, div.ricoLG_outerDiv thead td, div.ricoLG
 </head>
 <body>
 
-<?
+<?php
 require "menu.php";
 
 //************************************************************************************************************

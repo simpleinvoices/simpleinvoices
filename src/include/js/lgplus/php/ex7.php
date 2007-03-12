@@ -3,7 +3,7 @@
 <head>
 <title>Rico LiveGrid Plus-Example 7</title>
 
-<? 
+<?php
 require "chklang.php";
 require "settings.php";
 ?>
@@ -13,7 +13,7 @@ require "settings.php";
 Rico.loadModule('LiveGrid');
 Rico.loadModule('LiveGridMenu');
 Rico.include('demo.css');
-<?
+<?php
 setStyle();
 setLang();
 ?>
@@ -24,10 +24,10 @@ var grid,buffer;
 Rico.onLoad( function() {
   var opts = {  
     columnSpecs   : [{canHide:false,type:'control',control:new Rico.TableColumn.checkbox('1','0'),ClassName:'aligncenter'},'specQty'],
-    <? GridSettingsScript(); ?>,
+    <?php GridSettingsScript(); ?>,
     offset        : 20  // first row to display
   };
-  var menuopts = <? GridSettingsMenu(); ?>;
+  var menuopts = <?php GridSettingsMenu(); ?>;
   buffer=new Rico.Buffer.Base($('ex7').tBodies[0]);
   grid=new Rico.LiveGrid ('ex7', new Rico.GridMenu(menuopts), buffer, opts);
 });
@@ -45,7 +45,7 @@ td.ex7_col_0 { text-align:center; }
 
 <body>
 
-<?
+<?php
 require "menu.php";
 print "<table id='explanation' border='0' cellpadding='0' cellspacing='5' style='clear:both'><tr valign='top'><td>";
 GridSettingsForm();
@@ -62,7 +62,7 @@ can be disabled for individual columns (the first column in this example).
 <p class="ricoBookmark"><span id="ex7_bookmark">&nbsp;</span></p>
 <table id="ex7" class="ricoLiveGrid" cellspacing="0" cellpadding="0">
 <colgroup>
-<?
+<?php
 $numcol=12;
 for ($c=1; $c<=$numcol; $c++) {
   echo "<col style='width:80px;' />";
@@ -70,13 +70,13 @@ for ($c=1; $c<=$numcol; $c++) {
 ?>
 </colgroup>
 <thead><tr>
-<?
+<?php
 for ($c=1; $c<=$numcol; $c++) {
   echo "<th>Column $c</th>";
 }
 ?>
 </tr></thead><tbody>
-<?
+<?php
 for ($r=1; $r<=100; $r++) {
   echo "<tr>";
   echo "<td>";

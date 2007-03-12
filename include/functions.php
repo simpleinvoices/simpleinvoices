@@ -32,22 +32,20 @@ function get_custom_field_label($field)         {
 	$conn = mysql_connect( $db_host, $db_user, $db_password );
 	mysql_select_db( $db_name, $conn );
 
-        $sql =  "SELECT cf_custom_label FROM {$tb_prefix}custom_fields WHERE cf_custom_field = '$field'";
-        $result = mysql_query($sql,$conn) or die(mysql_error());
+    $sql =  "SELECT cf_custom_label FROM {$tb_prefix}custom_fields WHERE cf_custom_field = '$field'";
+    $result = mysql_query($sql,$conn) or die(mysql_error());
 
-        while ($Array = mysql_fetch_array($result)) {
-                $custom_field_label = $Array['cf_custom_label'];
-                $cf_display = $Array['cf_display'];
-        };
+    $cf = mysql_fetch_array($result);
 
-        //grab the last character of the field variable
-        $get_cf_number = $field[strlen($field)-1];    
+    //grab the last character of the field variable
+    $get_cf_number = $field[strlen($field)-1];    
 
-        //if custom field is blank in db use the one from the LANG files
-        if ($custom_field_label == null) {
-                $custom_field_label = ${"LANG_custom_field" . $get_cf_number};
-        }
- 	return $custom_field_label;
+    //if custom field is blank in db use the one from the LANG files
+    if ($cf['cf_custom_label'] == null) {
+       	$cf['cf_custom_label'] = ${"LANG_custom_field" . $get_cf_number};
+    }
+        
+    return $cf['cf_custom_label'];
 }
 
 /**

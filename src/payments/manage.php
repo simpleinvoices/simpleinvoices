@@ -17,14 +17,14 @@ $conn = mysql_connect( $db_host, $db_user, $db_password );
 mysql_select_db( $db_name, $conn );
 
 #if coming from another page where you want to filter by just one invoice
-if (!empty($_GET[inv_id])) {
+if (!empty($_GET['inv_id'])) {
 
 	$display_block_header = "<b>$map_payments_filtered $_GET[inv_id]</b> :: <a href='index.php?module=payments&view=process&submit=$_GET[inv_id]&op=pay_selected_invoice'>$map_payments_filtered_invoice</a>";
 
         $sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.c_name, {$tb_prefix}biller.b_name from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = {$tb_prefix}customers.c_id and {$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.b_id and {$tb_prefix}account_payments.ac_inv_id='$_GET[inv_id]' ORDER BY {$tb_prefix}account_payments.ac_id DESC";
 	}
 #if coming from another page where you want to filter by just one customer
-elseif (!empty($_GET[c_id])) {
+elseif (!empty($_GET['c_id'])) {
 	
 	$display_block_header = "<b>$map_payments_filtered_customer $_GET[c_id] :: <a href='index.php?module=payments&view=process&op=pay_invoice'>$map_actions_process_payment</a></b>";
 	
@@ -145,7 +145,7 @@ while ($Array = mysql_fetch_array($result)) {
     <link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
 
 
-<? 
+<?php
 require "./src/include/js/lgplus/php/chklang.php";
 require "./src/include/js/lgplus/php/settings.php";
 ?>

@@ -1,4 +1,4 @@
-<? 
+<?php
 header("Cache-Control: no-cache");
 header("Pragma: no-cache");
 header("Expires: ".gmdate("D, d M Y H:i:s",time()+(-1*60))." GMT");
@@ -10,7 +10,7 @@ header("Expires: ".gmdate("D, d M Y H:i:s",time()+(-1*60))." GMT");
 
 <title>Sales Assignments</title>
 
-<?
+<?php
 require "applib.php";
 require "chklang.php";
 ?>
@@ -21,7 +21,7 @@ Rico.loadModule('LiveGrid');
 Rico.loadModule('CustomMenu');
 Rico.include('greenHdg.css');
 Rico.include('demo.css');
-<?
+<?php
 setLang();
 ?>
 
@@ -66,7 +66,7 @@ overflow:hidden; /* this is very important! */
 
 <body>
 
-<?
+<?php
 require "menu.php";
 ?>
 
@@ -81,7 +81,7 @@ employee names and selections scroll with the grid.
 
 <div class="container">
 
-<?
+<?php
 if (OpenDB()) {
   AppHeader("Sales Assignments By Customer &amp; Product Category");
   echo "<p class='ricoBookmark'><span id='emptab_bookmark' style='font-size:10pt;'>&nbsp;</span></p>";

@@ -7,11 +7,7 @@ if (!defined("BROWSE")) {
    exit();
 }
 
-?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?php
+
 
 #select customers
 $conn = mysql_connect("$db_host","$db_user","$db_password");
@@ -126,10 +122,14 @@ EOD;
 }
 ?>
 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 <script type="text/javascript" src="include/jquery.js"></script>
 
 
-<? 
+<?php
 require "./src/include/js/lgplus/php/chklang.php";
 require "./src/include/js/lgplus/php/settings.php";
 ?>
