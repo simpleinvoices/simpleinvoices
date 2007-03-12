@@ -73,7 +73,7 @@ $invoice['owing'] = number_format($invoice['total'] - $invoice['paid'],2);
 for($i=1;$i<=4;$i++) {
 	$biller["custom_field_label$i"] = get_custom_field_label("biller_cf$i");
 	$customer["custom_field_label$i"] = get_custom_field_label("customer_cf$i");
-	$product["custom_field_label$i"] = get_custom_field_label("product_cf$i");
+	$product_cf["custom_field_label$i"] = get_custom_field_label("product_cf$i");
 	$show["custom_field$i"] = show_custom_field("invoice_cf$i",$invoice["invoice_custom_field$i"],"read",'','tbl1-left','tbl1-right',3,':');
 }
 
@@ -157,6 +157,10 @@ if (isset($_GET['export'])) {
 	if ( $_GET['invoice_style'] === 'Consulting' ) {
 		$heading = $consulting_heading;
 	}
+	#show column heading for total style
+	if ( $_GET['invoice_style'] === 'Total' ) {
+		$heading = $total_heading;
+	}
 	
 
 	
@@ -183,13 +187,13 @@ if ($_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'Consult
 		$print_products = "SELECT * FROM si_products WHERE prod_id = $master_invoice[inv_it_product_id]";
 		$result_print_products = mysql_query($print_products, $conn) or die(mysql_error());
 		
-		$prod = mysql_fetch_array($result_print_products);
+		$product = mysql_fetch_array($result_print_products);
 
 		#END INVOICE ITEMS SECTION
 	
 	
 		#calculation for each line item
-		$gross_total_itemised = $prod['prod_unit_price'] * $master_invoice['inv_it_quantity'] ;
+		$gross_total_itemised = $product['prod_unit_price'] * $master_invoice['inv_it_quantity'] ;
 	
 		#MERGE ITEMISED AND CONSULTING HERE
 		#PRINT the line items
