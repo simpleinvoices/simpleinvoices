@@ -21,7 +21,7 @@ $conn = mysql_connect("$db_host","$db_user","$db_password");
 mysql_select_db("$db_name",$conn);
 
 
-$sql = "select * from si_invoices ORDER BY inv_id desc";
+$sql = "select * from {$tb_prefix}invoices ORDER BY inv_id desc";
 
 $page_header = <<<EOD
 <b>{$LANG_manage_invoices}</b> ::

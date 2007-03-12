@@ -29,16 +29,16 @@ if (!defined("BROWSE")) {
    $sSQL = "
 
 SELECT
-        si_customers.c_id as ID,
-        si_customers.c_name as Customer,
-        (select sum(inv_it_total) from si_invoice_items,si_invoices where  si_invoice_items.inv_it_invoice_id = si_invoices.inv_id and si_invoices.inv_customer_id = ID) as Total,
-        (select IF ( isnull(sum(ac_amount)), '0', sum(ac_amount)) from si_account_payments,si_invoices where si_account_payments.ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = ID) as Paid,
+        {$tb_prefix}customers.c_id as ID,
+        {$tb_prefix}customers.c_name as Customer,
+        (select sum(inv_it_total) from {$tb_prefix}invoice_items,{$tb_prefix}invoices where  {$tb_prefix}invoice_items.inv_it_invoice_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = ID) as Total,
+        (select IF ( isnull(sum(ac_amount)), '0', sum(ac_amount)) from {$tb_prefix}account_payments,{$tb_prefix}invoices where {$tb_prefix}account_payments.ac_inv_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = ID) as Paid,
         (select (Total - Paid)) as Owing
 
 FROM
-        si_customers,si_invoices,si_invoice_items
+        {$tb_prefix}customers,{$tb_prefix}invoices,{$tb_prefix}invoice_items
 WHERE
-        si_invoice_items.inv_it_invoice_id = si_invoices.inv_id and si_invoices.inv_customer_id = c_id
+        {$tb_prefix}invoice_items.inv_it_invoice_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = c_id
 GROUP BY
         Owing DESC;
 

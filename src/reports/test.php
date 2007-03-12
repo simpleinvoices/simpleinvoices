@@ -3,7 +3,7 @@
    ini_set("include_path",ini_get("include_path").":/var/www/phpreports/"); 
    include "PHPReportMaker.php";
 
-   $sSQL = "select si_biller.b_name, si_customers.c_name, si_invoices.inv_id, si_invoice_items.inv_it_total from si_biller, si_customers, si_invoices, si_invoice_items where si_invoices.inv_id = si_invoice_items.inv_it_invoice_id and si_invoices.inv_biller_id = si_biller.b_id and si_invoices.inv_customer_id = si_customers.c_id
+   $sSQL = "select {$tb_prefix}biller.b_name, {$tb_prefix}customers.c_name, {$tb_prefix}invoices.inv_id, {$tb_prefix}invoice_items.inv_it_total from {$tb_prefix}biller, {$tb_prefix}customers, {$tb_prefix}invoices, {$tb_prefix}invoice_items where {$tb_prefix}invoices.inv_id = {$tb_prefix}invoice_items.inv_it_invoice_id and {$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.b_id and {$tb_prefix}invoices.inv_customer_id = {$tb_prefix}customers.c_id
 ";
    $oRpt = new PHPReportMaker();
 

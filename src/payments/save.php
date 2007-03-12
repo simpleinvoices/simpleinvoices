@@ -26,7 +26,7 @@ extract( $_POST );
 if ( $op === 'pay_invoice' OR $op === 'pay_selected_invoice' ) {
 
 	$sql = "INSERT into
-			si_account_payments
+			{$tb_prefix}account_payments
 		VALUES
 			(	
 				'',

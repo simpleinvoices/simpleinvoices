@@ -19,7 +19,7 @@ $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
 if (  $op == 'update_system_defaults' ) {
 
 #get defaultsr query
-$print_defaults = "SELECT * FROM si_defaults WHERE def_id = 1";
+$print_defaults = "SELECT * FROM {$tb_prefix}defaults WHERE def_id = 1";
 $result_print_defaults = mysql_query($print_defaults, $conn) or die(mysql_error());
 
 
@@ -48,7 +48,7 @@ $default_payment_type = $_POST['def_payment_type'];
 	if ($_GET[sys_default] == "line_items") {
 	
 		$sql = "REPLACE INTO
-				si_defaults
+				{$tb_prefix}defaults
 			VALUES
 				(
 					1,
@@ -78,7 +78,7 @@ $default_payment_type = $_POST['def_payment_type'];
 	else if ($_GET[sys_default] == "def_inv_template") {
 
 		$sql = "REPLACE INTO
-				si_defaults
+				{$tb_prefix}defaults
 			VALUES
 				(
 					1,
@@ -106,7 +106,7 @@ $default_payment_type = $_POST['def_payment_type'];
 	else if ($_GET[sys_default] == "def_biller") {
 
 		$sql = "REPLACE INTO
-				si_defaults
+				{$tb_prefix}defaults
 			VALUES
 				 (
 					1,
@@ -134,7 +134,7 @@ $default_payment_type = $_POST['def_payment_type'];
 	else if ($_GET[sys_default] == "def_customer") {
 
 		$sql = "REPLACE INTO
-				si_defaults
+				{$tb_prefix}defaults
 			VALUES
 				(
 					1,
@@ -163,7 +163,7 @@ $default_payment_type = $_POST['def_payment_type'];
 	else if ($_GET[sys_default] == "def_tax") {
 
 		$sql = "REPLACE INTO
-				si_defaults
+				{$tb_prefix}defaults
 			VALUES
 				(
 					1,
@@ -192,7 +192,7 @@ $default_payment_type = $_POST['def_payment_type'];
 	else if ($_GET[sys_default] == "def_invoice_preference") {
 
 		$sql = "REPLACE INTO
-				si_defaults
+				{$tb_prefix}defaults
 			VALUES
 				(
 					1,
@@ -220,7 +220,7 @@ $default_payment_type = $_POST['def_payment_type'];
 	else if ($_GET[sys_default] == "def_payment_type") {
 
 		$sql = "REPLACE INTO
-				si_defaults
+				{$tb_prefix}defaults
 			VALUES
 				(
 					1,

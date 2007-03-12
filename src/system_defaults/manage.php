@@ -18,7 +18,7 @@ mysql_select_db("$db_name",$conn);
 
 
 #system defaults query
-$print_defaults = "SELECT * FROM si_defaults WHERE def_id = 1";
+$print_defaults = "SELECT * FROM {$tb_prefix}defaults WHERE def_id = 1";
 $result_print_defaults = mysql_query($print_defaults, $conn) or die(mysql_error());
 
 
@@ -33,7 +33,7 @@ while ($Array = mysql_fetch_array($result_print_defaults) ) {
                 $def_payment_typeField = $Array['def_payment_type'];
 };
 
-$biller_name = "select b_name from si_biller where b_id = $def_billerField";
+$biller_name = "select b_name from {$tb_prefix}biller where b_id = $def_billerField";
 $result_biller_name = mysql_query($biller_name, $conn) or die(mysql_error());
 
 while ($Array = mysql_fetch_array($result_biller_name) ) {
@@ -41,28 +41,28 @@ while ($Array = mysql_fetch_array($result_biller_name) ) {
 };
 
 
-$customer_name = "select c_name from si_customers where c_id = $def_customerField";
+$customer_name = "select c_name from {$tb_prefix}customers where c_id = $def_customerField";
 $result_customer_name = mysql_query($customer_name, $conn) or die(mysql_error());
 
 while ($Array_customer = mysql_fetch_array($result_customer_name) ) {
                 $c_nameField = $Array_customer['c_name'];
 };
 
-$tax_description = "select tax_description from si_tax where tax_id = $def_taxField";
+$tax_description = "select tax_description from {$tb_prefix}tax where tax_id = $def_taxField";
 $result_tax_description = mysql_query($tax_description, $conn) or die(mysql_error());
 
 while ($Array_tax = mysql_fetch_array($result_tax_description) ) {
                 $tax_descriptionField = $Array_tax['tax_description'];
 };
 
-$inv_preferences = "select pref_description from si_preferences where pref_id = $def_inv_preferenceField";
+$inv_preferences = "select pref_description from {$tb_prefix}preferences where pref_id = $def_inv_preferenceField";
 $result_inv_preferences = mysql_query($inv_preferences, $conn) or die(mysql_error());
 
 while ($Array_inv_preferences = mysql_fetch_array($result_inv_preferences) ) {
                 $inv_preferencesField = $Array_inv_preferences['pref_description'];
 };
 /*
-$inv_num_line_items = "select def_number_line_items from si_preferences where pref_id = $def_inv_preferenceField";
+$inv_num_line_items = "select def_number_line_items from {$tb_prefix}preferences where pref_id = $def_inv_preferenceField";
 $result_inv_preferences = mysql_query($inv_preferences, $conn) or die(mysql_error());
 
 while ($Array_inv_preferences = mysql_fetch_array($result_inv_preferences) ) {
@@ -71,7 +71,7 @@ while ($Array_inv_preferences = mysql_fetch_array($result_inv_preferences) ) {
 */
 
 #Payment type section
-$payment_type_description = "select pt_description from si_payment_types where pt_id = $def_payment_typeField";
+$payment_type_description = "select pt_description from {$tb_prefix}payment_types where pt_id = $def_payment_typeField";
 $result_payment_type_description = mysql_query($payment_type_description, $conn) or die(mysql_error());
 
 while ($Array_pt = mysql_fetch_array($result_payment_type_description) ) {

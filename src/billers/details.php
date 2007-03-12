@@ -37,7 +37,7 @@ mysql_select_db("$db_name",$conn);
 
 
 #biller query
-$print_biller = "SELECT * FROM si_biller WHERE b_id = $biller_id";
+$print_biller = "SELECT * FROM {$tb_prefix}biller WHERE b_id = $biller_id";
 $result_print_biller = mysql_query($print_biller, $conn) or die(mysql_error());
 
 

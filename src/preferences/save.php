@@ -21,7 +21,7 @@ $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
 if (  $op === 'insert_preference' ) {
 
 $sql = "INSERT into
-		si_preferences
+		{$tb_prefix}preferences
 	VALUES
 		(
 			'',
@@ -56,7 +56,7 @@ else if (  $op === 'edit_preference' ) {
 
 	if (isset($_POST['save_preference'])) {
 		$sql = "UPDATE
-				si_preferences
+				{$tb_prefix}preferences
 			SET
 				pref_description = '$_POST[pref_description]',
 				pref_currency_sign = '$_POST[pref_currency_sign]',

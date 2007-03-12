@@ -23,7 +23,7 @@ if (!defined("BROWSE")) {
    include "src/reports/PHPReportMaker.php";
    include "config/config.php";
 
-   $sSQL = "select  sum(inv_it_tax_amount) from si_invoice_items";
+   $sSQL = "select  sum(inv_it_tax_amount) from {$tb_prefix}invoice_items";
    $oRpt = new PHPReportMaker();
 
    $oRpt->setXML("src/reports/xml/report_tax_total.xml");

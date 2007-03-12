@@ -27,7 +27,7 @@ mysql_select_db("$db_name",$conn);
 
         if (isset($_POST['save_custom_field'])) {
                 $sql = "UPDATE
-                                si_custom_fields
+                                {$tb_prefix}custom_fields
                         SET
                                 cf_custom_label = '$_POST[cf_custom_label]'
                         WHERE

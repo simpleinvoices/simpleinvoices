@@ -26,25 +26,25 @@ $conn = mysql_connect("$db_host","$db_user","$db_password");
 mysql_select_db("$db_name",$conn);
 
 #biller query
-$sql = "SELECT * FROM si_biller where b_enabled != 0 ORDER BY b_name";
+$sql = "SELECT * FROM {$tb_prefix}biller where b_enabled != 0 ORDER BY b_name";
 $result = mysql_query($sql, $conn) or die(mysql_error());
 
 #customer
-$sql_customer = "SELECT * FROM si_customers where c_enabled != 0 ORDER BY c_name";
+$sql_customer = "SELECT * FROM {$tb_prefix}customers where c_enabled != 0 ORDER BY c_name";
 $result_customer = mysql_query($sql_customer, $conn) or die(mysql_error());
 
 
 #tax query
-$sql_tax = "SELECT * FROM si_tax where tax_enabled != 0 ORDER BY tax_description";
+$sql_tax = "SELECT * FROM {$tb_prefix}tax where tax_enabled != 0 ORDER BY tax_description";
 $result_tax = mysql_query($sql_tax, $conn) or die(mysql_error());
 
 #invoice preference query
-$sql_preferences = "SELECT * FROM si_preferences where pref_enabled != 0 ORDER BY pref_description";
+$sql_preferences = "SELECT * FROM {$tb_prefix}preferences where pref_enabled != 0 ORDER BY pref_description";
 $result_preferences = mysql_query($sql_preferences, $conn) or die(mysql_error());
 
 #DEFAULTS
 #defaults query and DEFAULT NUMBER OF LINE ITEMS
-$sql_defaults = "SELECT * FROM si_defaults";
+$sql_defaults = "SELECT * FROM {$tb_prefix}defaults";
 $result_defaults = mysql_query($sql_defaults, $conn) or die(mysql_error());
 
 while ($Array_defaults = mysql_fetch_array($result_defaults) ) {
@@ -57,7 +57,7 @@ while ($Array_defaults = mysql_fetch_array($result_defaults) ) {
 };
 #Get the names of the defaults from their id -start
 #default biller name query
-$sql_biller_default = "SELECT b_name FROM si_biller where b_id = $def_billerField";
+$sql_biller_default = "SELECT b_name FROM {$tb_prefix}biller where b_id = $def_billerField";
 $result_biller_default = mysql_query($sql_biller_default , $conn) or die(mysql_error());
 
 while ($Array = mysql_fetch_array($result_biller_default) ) {
@@ -65,7 +65,7 @@ while ($Array = mysql_fetch_array($result_biller_default) ) {
 }
 
 #default customer name query
-$print_customer = "SELECT * FROM si_customers WHERE c_id = $def_customerField";
+$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE c_id = $def_customerField";
 $result_print_customer = mysql_query($print_customer, $conn) or die(mysql_error());
 
 while ($Array_customer = mysql_fetch_array($result_print_customer)) {
@@ -73,7 +73,7 @@ while ($Array_customer = mysql_fetch_array($result_print_customer)) {
 }
 
 #default tax description query
-$print_tax = "SELECT * FROM si_tax WHERE tax_id = $def_taxField";
+$print_tax = "SELECT * FROM {$tb_prefix}tax WHERE tax_id = $def_taxField";
 $result_print_tax = mysql_query($print_tax, $conn) or die(mysql_error());
 
 while ($Array_tax = mysql_fetch_array($result_print_tax)) {
@@ -81,7 +81,7 @@ while ($Array_tax = mysql_fetch_array($result_print_tax)) {
 }
 
 #default invoice preference description query
-$print_inv_preference = "SELECT * FROM si_preferences WHERE pref_id = $def_inv_preferenceField";
+$print_inv_preference = "SELECT * FROM {$tb_prefix}preferences WHERE pref_id = $def_inv_preferenceField";
 $result_inv_preference = mysql_query($print_inv_preference, $conn) or die(mysql_error());
 
 while ($Array_inv_preference = mysql_fetch_array($result_inv_preference)) {

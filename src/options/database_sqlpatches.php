@@ -23,7 +23,7 @@ function check_sql_patch($check_sql_patch_ref, $check_sql_patch_field) {
 
 
 	#check sql patch 1
-	$sql = "select * from si_sql_patchmanager where sql_patch_ref = $check_sql_patch_ref" ;
+	$sql = "select * from {$tb_prefix}sql_patchmanager where sql_patch_ref = $check_sql_patch_ref" ;
 
 	$result = mysql_query($sql, $conn) or die(mysql_error());
 	$number_of_rows = mysql_num_rows($result);
@@ -66,7 +66,7 @@ function run_sql_patch($sql_patch_ref, $sql_patch_name, $sql_patch, $sql_update)
 
 
 	#check sql patch 1
-	$sql_run = "select * from si_sql_patchmanager where sql_patch_ref = $sql_patch_ref" ;
+	$sql_run = "select * from {$tb_prefix}sql_patchmanager where sql_patch_ref = $sql_patch_ref" ;
 
 	$result_run = mysql_query($sql_run, $conn) or die(mysql_error());
 	$number_of_rows_run = mysql_num_rows($result_run);
@@ -97,7 +97,7 @@ function run_sql_patch($sql_patch_ref, $sql_patch_name, $sql_patch, $sql_update)
 
                 <tr><td>SQL patch $sql_patch_ref, $sql_patch_name <i>has</i> been applied to the database</td></tr>
                 ";
-		# now update the si_sql_patchmanager table
+		# now update the {$tb_prefix}sql_patchmanager table
                 mysql_query($sql_update, $conn) or die(mysql_error());
 
 
@@ -126,7 +126,7 @@ function initialise_sql_patch() {
 
 
 	#check sql patch 1
-	$sql_patch_init = "CREATE TABLE si_sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 50 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) TYPE = MYISAM ";
+	$sql_patch_init = "CREATE TABLE {$tb_prefix}sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 50 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) TYPE = MYISAM ";
 	mysql_query($sql_patch_init, $conn) or die(mysql_error());
 
 	$display_block = "
@@ -135,9 +135,9 @@ function initialise_sql_patch() {
 
 	echo $display_block;
 
-	$sql_insert = "INSERT INTO si_sql_patchmanager
+	$sql_insert = "INSERT INTO {$tb_prefix}sql_patchmanager
  ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement )
-VALUES ('','1','Create si_sql_patchmanger table','20060514','$sql_patch_init')";
+VALUES ('','1','Create {$tb_prefix}sql_patchmanger table','20060514','$sql_patch_init')";
 	mysql_query($sql_insert, $conn) or die(mysql_error());
 
 	$display_block2 = "
@@ -154,7 +154,7 @@ $check_patches_sql = "
         SELECT
                 count(sql_patch_ref) as count
         FROM 
-                si_sql_patchmanager;
+                {$tb_prefix}sql_patchmanager;
         ";
 
         $patches_result = mysql_query($check_patches_sql, $conn) or die(mysql_error());
@@ -176,7 +176,7 @@ $check_patches_sql = "
 
 
 if ($_GET[op] == "run_updates") {
-	$table = 'si_sql_patchmanager';
+	$table = '{$tb_prefix}sql_patchmanager';
 #DEFINE SQL PATCH
 	
 	if(mysql_num_rows(mysql_query("SHOW TABLES LIKE '".$table."'"))==1) {
@@ -262,7 +262,7 @@ if ($_GET[op] == "run_updates") {
 
 else {
 	#$tables = mysql_list_tables($dbname);
-	$table = 'si_sql_patchmanager';
+	$table = "{$tb_prefix}sql_patchmanager";
 
 	if(mysql_num_rows(mysql_query("SHOW TABLES LIKE '".$table."'"))==1) {
 

@@ -41,7 +41,7 @@ $conn = mysql_connect( $db_host, $db_user, $db_password );
 mysql_select_db( $db_name, $conn );
 
 #customer query
-$print_customer = 'SELECT * FROM si_customers WHERE c_id = ' . $customer_id;
+$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE c_id = $customer_id";
 $result_print_customer = mysql_query($print_customer, $conn) or die(mysql_error());
 
 
@@ -155,7 +155,7 @@ if ($_GET['action'] === 'view') {
 EOD;
 
 #show invoices per client
-$sql = "select * from si_invoices where inv_customer_id =$customer_id  ORDER BY inv_id desc";
+$sql = "select * from {$tb_prefix}invoices where inv_customer_id =$customer_id  ORDER BY inv_id desc";
 
 $display_block .= <<<EOD
 <br>

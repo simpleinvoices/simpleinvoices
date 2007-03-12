@@ -19,7 +19,7 @@ $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
 if ( $op === 'insert_biller') {
 	
  	$sql = "INSERT into
-			si_biller
+			{$tb_prefix}biller
 		VALUES
 			(
 				'',
@@ -61,7 +61,7 @@ else if (  $op === 'edit_biller' ) {
 
 	if (isset($_POST['save_biller'])) {
 		$sql = "UPDATE
-				si_biller
+				{$tb_prefix}biller
 			SET
 				b_name = '$_POST[b_name]',
 				b_street_address = '$_POST[b_street_address]',

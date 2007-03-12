@@ -22,7 +22,7 @@ $conn = mysql_connect($db_host, $db_user, $db_password);
 mysql_select_db("$db_name",$conn);
 
 #get max invoice id for validataion - start
-$sql_max = "SELECT max(inv_id) as max_inv_id FROM si_invoices";
+$sql_max = "SELECT max(inv_id) as max_inv_id FROM {$tb_prefix}invoices";
 $result_max = mysql_query($sql_max, $conn) or die(mysql_error());
 
 while ($Array_max = mysql_fetch_array($result_max) ) {
@@ -48,10 +48,10 @@ $master_invoice_id = $_GET['submit'];
 
 #master invoice id select
 if (!empty($master_invoice_id)) {
-	$print_master_invoice_id = 'SELECT * FROM si_invoices WHERE inv_id = ' . $master_invoice_id;
+	$print_master_invoice_id = 'SELECT * FROM {$tb_prefix}invoices WHERE inv_id = ' . $master_invoice_id;
 }
 elseif (empty($master_invoice_id)) {
-	$print_master_invoice_id = 'SELECT * FROM si_invoices';
+	$print_master_invoice_id = 'SELECT * FROM {$tb_prefix}invoices';
 }
 $result_print_master_invoice_id  = mysql_query($print_master_invoice_id , $conn) or die(mysql_error());
 
@@ -66,7 +66,7 @@ while ($Array_master_invoice = mysql_fetch_array($result_print_master_invoice_id
 };
 
 #customer query
-$print_customer = "SELECT * FROM si_customers WHERE c_id = $inv_customer_idField";
+$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE c_id = $inv_customer_idField";
 $result_print_customer = mysql_query($print_customer, $conn) or die(mysql_error());
 
 while ($Array = mysql_fetch_array($result_print_customer)) {
@@ -84,7 +84,7 @@ while ($Array = mysql_fetch_array($result_print_customer)) {
 };
 
 #biller query
-$print_biller = "SELECT * FROM si_biller WHERE b_id = $inv_biller_idField";
+$print_biller = "SELECT * FROM {$tb_prefix}biller WHERE b_id = $inv_biller_idField";
 $result_print_biller = mysql_query($print_biller, $conn) or die(mysql_error());
 
 while ($billerArray = mysql_fetch_array($result_print_biller)) {
@@ -102,14 +102,14 @@ while ($billerArray = mysql_fetch_array($result_print_biller)) {
 };
 
 #biller query
-$sql = "SELECT * FROM si_payment_types where pt_enabled != 0 ORDER BY pt_description";
+$sql = "SELECT * FROM {$tb_prefix}payment_types where pt_enabled != 0 ORDER BY pt_description";
 $result = mysql_query($sql, $conn) or die(mysql_error());
 
 
 
 #DEFAULTS
 #defaults query and DEFAULT NUMBER OF LINE ITEMS
-$sql_defaults = "SELECT * FROM si_defaults";
+$sql_defaults = "SELECT * FROM {$tb_prefix}defaults";
 $result_defaults = mysql_query($sql_defaults, $conn) or die(mysql_error());
 
 while ($Array_defaults = mysql_fetch_array($result_defaults) ) {
@@ -118,7 +118,7 @@ $def_payment_typeField = $Array_defaults['def_payment_type'];
 
 #Get the names of the defaults from their id -start
 #default biller name query
-$sql_payment_type_default = "SELECT pt_description FROM si_payment_types where pt_id = $def_payment_typeField";
+$sql_payment_type_default = "SELECT pt_description FROM {$tb_prefix}payment_types where pt_id = $def_payment_typeField";
 $result_payment_type_default = mysql_query($sql_payment_type_default , $conn) or die(mysql_error());
 
 while ($Array = mysql_fetch_array($result_payment_type_default) ) {

@@ -25,7 +25,7 @@ mysql_select_db("$db_name",$conn);
 
 
 #customer query
-$print_product = "SELECT * FROM si_custom_fields WHERE cf_id = $cf_id";
+$print_product = "SELECT * FROM {$tb_prefix}custom_fields WHERE cf_id = $cf_id";
 $result_print_product = mysql_query($print_product, $conn) or die(mysql_error());
 
 

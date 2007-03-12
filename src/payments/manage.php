@@ -21,21 +21,21 @@ if (!empty($_GET[inv_id])) {
 
 	$display_block_header = "<b>$map_payments_filtered $_GET[inv_id]</b> :: <a href='index.php?module=payments&view=process&submit=$_GET[inv_id]&op=pay_selected_invoice'>$map_payments_filtered_invoice</a>";
 
-        $sql = "select si_account_payments.*, si_customers.c_name, si_biller.b_name from si_account_payments, si_invoices, si_customers, si_biller  where ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = si_customers.c_id and si_invoices.inv_biller_id = si_biller.b_id and si_account_payments.ac_inv_id='$_GET[inv_id]' ORDER BY si_account_payments.ac_id DESC";
+        $sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.c_name, {$tb_prefix}biller.b_name from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = {$tb_prefix}customers.c_id and {$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.b_id and {$tb_prefix}account_payments.ac_inv_id='$_GET[inv_id]' ORDER BY {$tb_prefix}account_payments.ac_id DESC";
 	}
 #if coming from another page where you want to filter by just one customer
 elseif (!empty($_GET[c_id])) {
 	
 	$display_block_header = "<b>$map_payments_filtered_customer $_GET[c_id] :: <a href='index.php?module=payments&view=process&op=pay_invoice'>$map_actions_process_payment</a></b>";
 	
-        $sql = "select si_account_payments.*, si_customers.c_name, si_biller.b_name from si_account_payments, si_invoices, si_customers, si_biller  where ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = si_customers.c_id and si_invoices.inv_biller_id = si_biller.b_id and si_customers.c_id='$_GET[c_id]' ORDER BY si_account_payments.ac_id DESC ";
+        $sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.c_name, {$tb_prefix}biller.b_name from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = {$tb_prefix}customers.c_id and {$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.b_id and {$tb_prefix}customers.c_id='$_GET[c_id]' ORDER BY {$tb_prefix}account_payments.ac_id DESC ";
         }
 #if you want to show all invoices - no filters
 else {
 
 	$display_block_header = "<b>$map_page_header :: <a href='index.php?module=payments&view=process&op=pay_invoice'>$map_actions_process_payment</a></b>";
 
-	$sql = "select si_account_payments.*, si_customers.c_name, si_biller.b_name from si_account_payments, si_invoices, si_customers, si_biller  where ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = si_customers.c_id and si_invoices.inv_biller_id = si_biller.b_id ORDER BY si_account_payments.ac_id DESC";
+	$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.c_name, {$tb_prefix}biller.b_name from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = {$tb_prefix}customers.c_id and {$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.b_id ORDER BY {$tb_prefix}account_payments.ac_id DESC";
 	}
 
 $result = mysql_query($sql, $conn) or die(mysql_error());
@@ -105,7 +105,7 @@ while ($Array = mysql_fetch_array($result)) {
                 }
 
 		#Payment type section
-		$payment_type_description = "select pt_description from si_payment_types where pt_id = $ac_payment_typeField";
+		$payment_type_description = "select pt_description from {$tb_prefix}payment_types where pt_id = $ac_payment_typeField";
 		$result_payment_type_description = mysql_query($payment_type_description, $conn) or die(mysql_error());
 
 		while ($Array_pt = mysql_fetch_array($result_payment_type_description) ) {

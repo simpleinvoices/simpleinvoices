@@ -22,7 +22,7 @@ if (!defined("BROWSE")) {
 	$conn = mysql_connect("$db_host","$db_user","$db_password");
 	mysql_select_db("$db_name",$conn);
 
-	$print_preferences = "SELECT * FROM si_preferences ORDER BY pref_description";
+	$print_preferences = "SELECT * FROM {$tb_prefix}preferences ORDER BY pref_description";
 	$result_print_preferences  = mysql_query($print_preferences, $conn) or die(mysql_error());
 
 

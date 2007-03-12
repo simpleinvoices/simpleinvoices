@@ -16,7 +16,7 @@ mysql_select_db( $db_name, $conn );
 
 
 #master invoice id select
-$print_master_invoice_id = "SELECT * FROM si_invoices WHERE inv_id =$master_invoice_id";
+$print_master_invoice_id = "SELECT * FROM {$tb_prefix}invoices WHERE inv_id =$master_invoice_id";
 $result_print_master_invoice_id  = mysql_query($print_master_invoice_id , $conn) or die(mysql_error());
 
 $invoice = mysql_fetch_array($result_print_master_invoice_id);
@@ -25,7 +25,7 @@ $invoice['date'] = date( $config['date_format'], strtotime( $invoice['inv_date']
 
 #invoice_type query
 
-$sql_invoice_type = "SELECT inv_ty_description FROM si_invoice_type WHERE inv_ty_id = $invoice[inv_type] ";
+$sql_invoice_type = "SELECT inv_ty_description FROM {$tb_prefix}invoice_type WHERE inv_ty_id = $invoice[inv_type] ";
 $result_invoice_type = mysql_query($sql_invoice_type, $conn) or die(mysql_error());
 
 
@@ -36,11 +36,11 @@ $result_invoice_type = mysql_query($sql_invoice_type, $conn) or die(mysql_error(
 	};*/
 
 #customer query
-$print_customer = "SELECT * FROM si_customers WHERE c_id = $invoice[inv_customer_id]";
+$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE c_id = $invoice[inv_customer_id]";
 $result_print_customer = mysql_query($print_customer, $conn) or die(mysql_error());
 
 #biller query
-$print_biller = "SELECT * FROM si_biller WHERE b_id = $invoice[inv_biller_id]";
+$print_biller = "SELECT * FROM {$tb_prefix}biller WHERE b_id = $invoice[inv_biller_id]";
 $result_print_biller = mysql_query($print_biller, $conn) or die(mysql_error());
 
 $customer = mysql_fetch_array($result_print_customer);
@@ -48,7 +48,7 @@ $biller = mysql_fetch_array($result_print_biller);
 
 
 #preferences query
-$print_preferences = "SELECT * FROM si_preferences where pref_id = $invoice[inv_preference] ";
+$print_preferences = "SELECT * FROM {$tb_prefix}preferences where pref_id = $invoice[inv_preference] ";
 $result_print_preferences  = mysql_query($print_preferences, $conn) or die(mysql_error());
 
 $pref = mysql_fetch_array($result_print_preferences);
@@ -97,7 +97,7 @@ else {
 
 	#get all the details for the total style
 	#items invoice id select
-	$print_master_invoice_items = "SELECT * FROM si_invoice_items WHERE  inv_it_invoice_id =$master_invoice_id";
+	$print_master_invoice_items = "SELECT * FROM {$tb_prefix}invoice_items WHERE  inv_it_invoice_id =$master_invoice_id";
 	$result_print_master_invoice_items = mysql_query($print_master_invoice_items, $conn) or die(mysql_error());
 
 
@@ -112,14 +112,14 @@ else {
 	
 	
 	#invoice total tax
-	$print_invoice_total_tax ="SELECT SUM(inv_it_tax_amount) AS total_tax FROM si_invoice_items WHERE inv_it_invoice_id =$master_invoice_id";
+	$print_invoice_total_tax ="SELECT SUM(inv_it_tax_amount) AS total_tax FROM {$tb_prefix}invoice_items WHERE inv_it_invoice_id =$master_invoice_id";
 	$result_print_invoice_total_tax = mysql_query($print_invoice_total_tax, $conn) or die(mysql_error());
 	$tax = mysql_fetch_array($result_print_invoice_total_tax);
 	$tax['total_tax'] = number_format($tax['total_tax'],2);	
 
 				
 	#invoice_total total query
-	$print_invoice_total_total ="SELECT SUM(inv_it_total) AS total FROM si_invoice_items WHERE inv_it_invoice_id =$master_invoice_id";
+	$print_invoice_total_total ="SELECT SUM(inv_it_total) AS total FROM {$tb_prefix}invoice_items WHERE inv_it_invoice_id =$master_invoice_id";
 	$result_print_invoice_total_total = mysql_query($print_invoice_total_total, $conn) or die(mysql_error());
 
 	$invoice_total = mysql_fetch_array($result_print_invoice_total_total);
@@ -172,7 +172,7 @@ if (isset($_GET['export'])) {
 	
 	#INVOIVE_ITEMS SECTION
 	#items invoice id sgseelect
-	$print_master_invoice_items = "SELECT * FROM si_invoice_items WHERE  inv_it_invoice_id =$master_invoice_id";
+	$print_master_invoice_items = "SELECT * FROM {$tb_prefix}invoice_items WHERE  inv_it_invoice_id =$master_invoice_id";
 	$result_print_master_invoice_items = mysql_query($print_master_invoice_items, $conn) or die(mysql_error());
 
 
@@ -185,7 +185,7 @@ if (isset($_GET['export'])) {
 		$master_invoice['inv_it_total'] = number_format($master_invoice['inv_it_total'],2);
 		
 		#products query
-		$print_products = "SELECT * FROM si_products WHERE prod_id = $master_invoice[inv_it_product_id]";
+		$print_products = "SELECT * FROM {$tb_prefix}products WHERE prod_id = $master_invoice[inv_it_product_id]";
 		$result_print_products = mysql_query($print_products, $conn) or die(mysql_error());
 		
 		$product = mysql_fetch_array($result_print_products);

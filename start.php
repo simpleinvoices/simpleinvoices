@@ -20,15 +20,15 @@ mysql_select_db( $db_name, $conn );
 if ($mysql > 4) {
 	$sql = "
 	SELECT	
-	        si_customers.c_id as ID,
-	        si_customers.c_name as Customer,
-	        (select sum(inv_it_total) from si_invoice_items,si_invoices where  si_invoice_items.inv_it_invoice_id = si_invoices.inv_id and si_invoices.inv_customer_id = ID) as Total,
-	        (select IF ( isnull(sum(ac_amount)), '0', sum(ac_amount)) from si_account_payments,si_invoices where si_account_payments.ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = ID) as Paid,
+	        {$tb_prefix}customers.c_id as ID,
+	        {$tb_prefix}customers.c_name as Customer,
+	        (select sum(inv_it_total) from {$tb_prefix}invoice_items,{$tb_prefix}invoices where  {$tb_prefix}invoice_items.inv_it_invoice_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = ID) as Total,
+	        (select IF ( isnull(sum(ac_amount)), '0', sum(ac_amount)) from {$tb_prefix}account_payments,{$tb_prefix}invoices where {$tb_prefix}account_payments.ac_inv_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = ID) as Paid,
 	        (select (Total - Paid)) as Owing
 	FROM
-	        si_customers,si_invoices,si_invoice_items
+	        {$tb_prefix}customers,{$tb_prefix}invoices,{$tb_prefix}invoice_items
 	WHERE
-	        si_invoice_items.inv_it_invoice_id = si_invoices.inv_id and si_invoices.inv_customer_id = c_id
+	        {$tb_prefix}invoice_items.inv_it_invoice_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = c_id
 	GROUP BY
 	        Owing DESC
 	LIMIT 1;
@@ -47,16 +47,16 @@ if ($mysql > 4) {
 if ($mysql > 4) {
 	$sql2 = "
 	SELECT
-		si_customers.c_id as ID,
-	        si_customers.c_name as Customer,
-       		(select sum(inv_it_total) from si_invoice_items,si_invoices where  si_invoice_items.inv_it_invoice_id = si_invoices.inv_id and si_invoices.inv_customer_id = ID) as Total,
-	        (select IF ( isnull(sum(ac_amount)), '0', sum(ac_amount)) from si_account_payments,si_invoices where si_account_payments.ac_inv_id = si_invoices.inv_id and si_invoices.inv_customer_id = ID) as Paid,
+		{$tb_prefix}customers.c_id as ID,
+	        {$tb_prefix}customers.c_name as Customer,
+       		(select sum(inv_it_total) from {$tb_prefix}invoice_items,{$tb_prefix}invoices where  {$tb_prefix}invoice_items.inv_it_invoice_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = ID) as Total,
+	        (select IF ( isnull(sum(ac_amount)), '0', sum(ac_amount)) from {$tb_prefix}account_payments,{$tb_prefix}invoices where {$tb_prefix}account_payments.ac_inv_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = ID) as Paid,
 	        (select (Total - Paid)) as Owing
 
 	FROM
-       		si_customers,si_invoices,si_invoice_items
+       		{$tb_prefix}customers,{$tb_prefix}invoices,{$tb_prefix}invoice_items
 	WHERE
-	        si_invoice_items.inv_it_invoice_id = si_invoices.inv_id and si_invoices.inv_customer_id = c_id
+	        {$tb_prefix}invoice_items.inv_it_invoice_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = c_id
 	GROUP BY
 	        Total DESC
 	LIMIT 1;
@@ -75,12 +75,12 @@ if ($mysql > 4) {
 	
 	$sql3 = "
 	SELECT
-		si_biller.b_name,  
-		sum(si_invoice_items.inv_it_total) as Total 
+		{$tb_prefix}biller.b_name,  
+		sum({$tb_prefix}invoice_items.inv_it_total) as Total 
 	FROM 
-		si_biller, si_invoice_items, si_invoices 
+		{$tb_prefix}biller, {$tb_prefix}invoice_items, {$tb_prefix}invoices 
 	WHERE 
-		si_invoices.inv_biller_id = si_biller.b_id and si_invoices.inv_id = si_invoice_items.inv_it_invoice_id GROUP BY b_name ORDER BY Total DESC LIMIT 1;
+		{$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.b_id and {$tb_prefix}invoices.inv_id = {$tb_prefix}invoice_items.inv_it_invoice_id GROUP BY b_name ORDER BY Total DESC LIMIT 1;
 	";
 
 	$result3 = mysql_query($sql3, $conn) or die(mysql_error());
@@ -97,7 +97,7 @@ $sql4 = "
         SELECT
                 count(sql_patch_ref) as count
         FROM 
-                si_sql_patchmanager;
+                {$tb_prefix}sql_patchmanager;
         ";
 
         $result4 = mysql_query($sql4, $conn) or die(mysql_error());

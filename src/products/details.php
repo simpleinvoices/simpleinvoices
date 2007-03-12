@@ -38,7 +38,7 @@ mysql_select_db("$db_name",$conn);
 
 
 #customer query
-$print_product = "SELECT * FROM si_products WHERE prod_id = $product_id";
+$print_product = "SELECT * FROM {$tb_prefix}products WHERE prod_id = $product_id";
 $result_print_product = mysql_query($print_product, $conn) or die(mysql_error());
 
 

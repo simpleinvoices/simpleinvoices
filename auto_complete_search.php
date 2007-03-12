@@ -7,7 +7,7 @@ include_once('./include/include_main.php');
 $conn = mysql_connect( $db_host, $db_user, $db_password );
 mysql_select_db( $db_name, $conn );
 
-$sql = "select * from si_invoices";
+$sql = "select * from {$tb_prefix}invoices";
 
 
 $result = mysql_query($sql, $conn) or die(mysql_error());
@@ -27,21 +27,21 @@ while ($Array = mysql_fetch_array($result)) {
 	$inv_dateField = date( $config['date_format'], strtotime( $Array['inv_date'] ) );
 	$inv_noteField = $Array['inv_note'];
 
-	$sql_biller = "select b_name from si_biller where b_id = $inv_biller_idField ";
+	$sql_biller = "select b_name from {$tb_prefix}biller where b_id = $inv_biller_idField ";
 	$result_biller = mysql_query($sql_biller, $conn) or die(mysql_error());
 
 	while ($billerArray = mysql_fetch_array($result_biller)) {
 		$b_nameField = $billerArray['b_name'];
 
 
-	$sql_customers = "select c_name from si_customers where c_id = $inv_customer_idField ";
+	$sql_customers = "select c_name from {$tb_prefix}customers where c_id = $inv_customer_idField ";
 	$result_customers = mysql_query($sql_customers, $conn) or die(mysql_error());
 
 	while ($customersArray = mysql_fetch_array($result_customers)) {
 		$c_nameField = $customersArray['c_name'];
 
 
-	$sql_invoice_type = "select inv_ty_description from si_invoice_type where inv_ty_id = $inv_typeField ";
+	$sql_invoice_type = "select inv_ty_description from {$tb_prefix}invoice_type where inv_ty_id = $inv_typeField ";
 	$result_invoice_type = mysql_query($sql_invoice_type, $conn) or die(mysql_error());
 
 	while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {

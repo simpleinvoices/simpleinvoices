@@ -22,13 +22,13 @@ if ($op === "insert_customer") {
 
 
 /* old code
-$sql = "INSERT into si_customers values ('','$_POST[c_attention]','$_POST[c_name]','$_POST[c_street_address]','$_POST[c_city]','$_POST[c_state]','$_POST[c_zip_code]','$_POST[c_country]','$_POST[c_phone]','$_POST[c_fax]','$_POST[c_email]')";
+$sql = "INSERT into {$tb_prefix}customers values ('','$_POST[c_attention]','$_POST[c_name]','$_POST[c_street_address]','$_POST[c_city]','$_POST[c_state]','$_POST[c_zip_code]','$_POST[c_country]','$_POST[c_phone]','$_POST[c_fax]','$_POST[c_email]')";
 */
 
 extract( $_POST );
 
 $sql ='INSERT INTO
-		si_customers
+		{$tb_prefix}customers
 	VALUES
 		("","' . $c_attention . '", "' . $c_name . '", "' . $c_street_address . '", "' . $c_street_address2 . '",  "' . $c_city . '", "' . $c_state . '", "' . $c_zip_code . '", "' . $c_country . '", "' . $c_phone . '", "' . $c_mobile_phone . '", "' . $c_fax . '", "' . $c_email . '", "' . $c_notes . '", "' . $c_custom_field1 . '", "' . $c_custom_field2 . '", "' . $c_custom_field3 . '", "' . $c_custom_field4 . '", "' . $c_enabled . '")';
 
@@ -48,7 +48,7 @@ else if ( $op === 'edit_customer' ) {
 	if (isset($_POST['save_customer'])) {
 		$sql = "
 			UPDATE
-				si_customers
+				{$tb_prefix}customers
 			SET
 				c_name = '$_POST[c_name]',
 				c_attention = '$_POST[c_attention]',
@@ -99,7 +99,7 @@ else if ( $op === 'edit_customer' ) {
 else if ( $op === 'pay_invoice' OR $op === 'pay_selected_invoice' ) {
 
 	$sql = "INSERT into
-			si_account_payments
+			{$tb_prefix}account_payments
 		VALUES
 			(	
 				'',
@@ -137,7 +137,7 @@ else if ( $op === 'pay_invoice' OR $op === 'pay_selected_invoice' ) {
 else if ( $op === 'insert_biller') {
 	
  	$sql = "INSERT into
-			si_biller
+			{$tb_prefix}biller
 		VALUES
 			(
 				'',
@@ -178,7 +178,7 @@ else if (  $op === 'edit_biller' ) {
 
 	if (isset($_POST['save_biller'])) {
 		$sql = "UPDATE
-				si_biller
+				{$tb_prefix}biller
 			SET
 				b_name = '$_POST[b_name]',
 				b_street_address = '$_POST[b_street_address]',
@@ -225,7 +225,7 @@ else if (  $op === 'edit_biller' ) {
 else if (  $op === 'insert_product' ) {
 
 $sql = "INSERT into
-		si_products
+		{$tb_prefix}products
 	VALUES
 		(	
 			'',
@@ -260,7 +260,7 @@ mysql_select_db("$db_name",$conn);
 
 	if (isset($_POST['save_product'])) {
 		$sql = "UPDATE
-				si_products
+				{$tb_prefix}products
 			SET
 				prod_description = '$_POST[prod_description]',
 				prod_enabled = '$_POST[prod_enabled]',
@@ -300,11 +300,11 @@ $conn = mysql_connect("$db_host","$db_user","$db_password");
 mysql_select_db("$db_name",$conn);
 
 /*Raymond - what about the '', bit doesnt seem to do an insert in me environment when i exclude it
-$sql = "INSERT INTO si_tax VALUES ('$_POST[tax_description]','$_POST[tax_percentage]')";
+$sql = "INSERT INTO {$tb_prefix}tax VALUES ('$_POST[tax_description]','$_POST[tax_percentage]')";
 */
 
 $sql = "INSERT into
-		si_tax
+		{$tb_prefix}tax
 	VALUES
 		(	
 			'',
@@ -334,7 +334,7 @@ mysql_select_db("$db_name",$conn);
 
 	if (isset($_POST['save_tax_rate'])) {
 		$sql = "UPDATE
-				si_tax
+				{$tb_prefix}tax
 			SET
 				tax_description = '$_POST[tax_description]',
 				tax_percentage = '$_POST[tax_percentage]',
@@ -366,11 +366,11 @@ $conn = mysql_connect("$db_host","$db_user","$db_password");
 mysql_select_db("$db_name",$conn);
 
 /*Raymond - what about the '', bit doesnt seem to do an insert in me environment when i exclude it
-$sql = "INSERT INTO si_tax VALUES ('$_POST[tax_description]','$_POST[tax_percentage]')";
+$sql = "INSERT INTO {$tb_prefix}tax VALUES ('$_POST[tax_description]','$_POST[tax_percentage]')";
 */
 
 $sql = "INSERT into
-		si_payment_types
+		{$tb_prefix}payment_types
 	VALUES
 		(	
 			'',
@@ -398,7 +398,7 @@ else if (  $op === 'edit_payment_type' ) {
 
 	if (isset($_POST['save_payment_type'])) {
 		$sql = "UPDATE
-				si_payment_types
+				{$tb_prefix}payment_types
 			SET
 				pt_description = '$_POST[pt_description]',
 				pt_enabled = '$_POST[pt_enabled]'
@@ -426,7 +426,7 @@ else if (  $op === 'edit_payment_type' ) {
 if (  $op === 'insert_preference' ) {
 
 $sql = "INSERT into
-		si_preferences
+		{$tb_prefix}preferences
 	VALUES
 		(
 			'',
@@ -460,7 +460,7 @@ else if (  $op === 'edit_preference' ) {
 
 	if (isset($_POST['save_preference'])) {
 		$sql = "UPDATE
-				si_preferences
+				{$tb_prefix}preferences
 			SET
 				pref_description = '$_POST[pref_description]',
 				pref_currency_sign = '$_POST[pref_currency_sign]',
@@ -500,7 +500,7 @@ else if (  $op === 'edit_preference' ) {
 else if (  $op == 'update_system_defaults' ) {
 
 #get defaultsr query
-$print_defaults = "SELECT * FROM si_defaults WHERE def_id = 1";
+$print_defaults = "SELECT * FROM {$tb_prefix}defaults WHERE def_id = 1";
 $result_print_defaults = mysql_query($print_defaults, $conn) or die(mysql_error());
 
 
@@ -529,7 +529,7 @@ $default_payment_type = $_POST['def_payment_type'];
 	if ($_GET[sys_default] == "line_items") {
 	
 		$sql = "REPLACE INTO
-				si_defaults
+				{$tb_prefix}defaults
 			VALUES
 				(
 					1,
@@ -558,7 +558,7 @@ $default_payment_type = $_POST['def_payment_type'];
 	else if ($_GET[sys_default] == "def_inv_template") {
 
 		$sql = "REPLACE INTO
-				si_defaults
+				{$tb_prefix}defaults
 			VALUES
 				(
 					1,
@@ -588,7 +588,7 @@ $default_payment_type = $_POST['def_payment_type'];
 	else if ($_GET[sys_default] == "def_biller") {
 
 		$sql = "REPLACE INTO
-				si_defaults
+				{$tb_prefix}defaults
 			VALUES
 				 (
 					1,
@@ -618,7 +618,7 @@ $default_payment_type = $_POST['def_payment_type'];
 	else if ($_GET[sys_default] == "def_customer") {
 
 		$sql = "REPLACE INTO
-				si_defaults
+				{$tb_prefix}defaults
 			VALUES
 				(
 					1,
@@ -649,7 +649,7 @@ $default_payment_type = $_POST['def_payment_type'];
 	else if ($_GET[sys_default] == "def_tax") {
 
 		$sql = "REPLACE INTO
-				si_defaults
+				{$tb_prefix}defaults
 			VALUES
 				(
 					1,
@@ -680,7 +680,7 @@ $default_payment_type = $_POST['def_payment_type'];
 	else if ($_GET[sys_default] == "def_invoice_preference") {
 
 		$sql = "REPLACE INTO
-				si_defaults
+				{$tb_prefix}defaults
 			VALUES
 				(
 					1,
@@ -710,7 +710,7 @@ $default_payment_type = $_POST['def_payment_type'];
 	else if ($_GET[sys_default] == "def_payment_type") {
 
 		$sql = "REPLACE INTO
-				si_defaults
+				{$tb_prefix}defaults
 			VALUES
 				(
 					1,
@@ -747,7 +747,7 @@ mysql_select_db("$db_name",$conn);
 
         if (isset($_POST['save_custom_field'])) {
                 $sql = "UPDATE
-                                si_custom_fields
+                                {$tb_prefix}custom_fields
                         SET
                                 cf_custom_label = '$_POST[cf_custom_label]'
                         WHERE
@@ -780,7 +780,7 @@ mysql_select_db("$db_name",$conn);
 else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_invoice_total' ) {
 
 	$sql = "INSERT into
-			si_invoices (inv_id, inv_biller_id, inv_customer_id, inv_type,
+			{$tb_prefix}invoices (inv_id, inv_biller_id, inv_customer_id, inv_type,
 			inv_preference, inv_date, inv_note)
 		VALUES
 			(
@@ -804,7 +804,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 
 
 	#tax percentage query
-	$print_tax_percentage = "SELECT * FROM si_tax WHERE tax_id ='$_POST[select_tax]'";
+	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
 	$result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
 
 
@@ -821,7 +821,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 		
 
 	$sql_items = "INSERT into
-				si_invoice_items
+				{$tb_prefix}invoice_items
 			VALUES
 				(
 					'',
@@ -854,9 +854,9 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 
 	$invoice_id = $_POST[invoice_id];
 
-	#update the si_invoices table with customer etc  stuff - start
+	#update the {$tb_prefix}invoices table with customer etc  stuff - start
 	$sql = "UPDATE
-			si_invoices
+			{$tb_prefix}invoices
 		SET
 			inv_biller_id = '$_POST[sel_id]',
 			inv_customer_id = '$_POST[select_customer]',
@@ -870,10 +870,10 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 		$display_block =  "Something went wrong, please try adding the invoice again";
 	}
 	
-	#update the si_invoices table with customer etc  stuff - end
+	#update the {$tb_prefix}invoices table with customer etc  stuff - end
 	
 	#tax percentage query -start
-	$print_tax_percentage = "SELECT * FROM si_tax WHERE tax_id ='$_POST[select_tax]'";
+	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
 	$result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
 
 
@@ -891,9 +891,9 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 	$total_invoice_total = $total_invoice_total_tax + $_POST[inv_it_gross_total] ;
 	#calcultate the invoice total - end
 
-	#update the si_invoice_items table - which tax,description etc.. - start
+	#update the {$tb_prefix}invoice_items table - which tax,description etc.. - start
 	$sql_items = "UPDATE
-				si_invoice_items
+				{$tb_prefix}invoice_items
 			SET
 				inv_it_tax_id = '$_POST[select_tax]',
 				inv_it_tax = $tax_percentageField,
@@ -923,7 +923,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 
 	$invoice_itemised_note_field = $_POST[invoice_itemised_note];
 	$sql = "INSERT into
-		si_invoices (inv_id, inv_biller_id, inv_customer_id, inv_type,
+		{$tb_prefix}invoices (inv_id, inv_biller_id, inv_customer_id, inv_type,
 		inv_preference, inv_date, inv_note)
 		values ('','$_POST[sel_id]','$_POST[select_customer]', 2,'$_POST[select_preferences]',now(),'$invoice_itemised_note_field')";
 
@@ -938,7 +938,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 
 
 	#tax percentage query
-	$print_tax_percentage = "SELECT * FROM si_tax WHERE tax_id ='$_POST[select_tax]'";
+	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
 	$result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
 
 
@@ -950,7 +950,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 	};
 /*
 	#product info query
-	$print_products_info = "SELECT * FROM si_products WHERE prod_id ='$_POST[select_products]'";
+	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id ='$_POST[select_products]'";
 	$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 
 
@@ -979,7 +979,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 		}
 			
 
-		$print_products_info = "SELECT * FROM si_products WHERE prod_id =$product_line_item";
+		$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id =$product_line_item";
 		$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 
 
@@ -998,7 +998,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 		$total_invoice_item_gross = $prod_unit_priceField  * $_POST["i_quantity$items"];
 		
 
-		$sql_items = "INSERT into si_invoice_items values ('',$invoice_id,$qty,$product_line_item,$prod_unit_priceField,'$_POST[select_tax]',$tax_percentageField,$total_invoice_tax_amount,$total_invoice_item_gross,'00',$total_invoice_item_total)";
+		$sql_items = "INSERT into {$tb_prefix}invoice_items values ('',$invoice_id,$qty,$product_line_item,$prod_unit_priceField,'$_POST[select_tax]',$tax_percentageField,$total_invoice_tax_amount,$total_invoice_item_gross,'00',$total_invoice_item_total)";
 	
 		/*
 		mysql_query($sql_items);
@@ -1029,9 +1029,9 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 
 	$invoice_id = $_POST[invoice_id];
 
-	#update the si_invoices table with customer etc  stuff - start
+	#update the {$tb_prefix}invoices table with customer etc  stuff - start
 	$sql = "UPDATE
-			si_invoices
+			{$tb_prefix}invoices
 		SET
 			inv_biller_id = '$_POST[sel_id]',
 			inv_customer_id = '$_POST[select_customer]',
@@ -1049,7 +1049,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 
 	#$display_block .= "step 2 - 1";
 	#tax percentage query
-	$print_tax_percentage = "SELECT * FROM si_tax WHERE tax_id ='$_POST[select_tax]'";
+	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
 	$result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
 
 
@@ -1061,7 +1061,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 	};
 /*
 	#product info query
-	$print_products_info = "SELECT * FROM si_products WHERE prod_id ='$_POST[select_products]'";
+	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id ='$_POST[select_products]'";
 	$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 
 
@@ -1095,7 +1095,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 		}
 		
 
-		$print_products_info = "SELECT * FROM si_products WHERE prod_id =$product_line_item";
+		$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id =$product_line_item";
 		$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 		
 		#$display_block .= "step 2 - 5";
@@ -1119,7 +1119,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 		
 
 		$sql_items = "REPLACE into
-					si_invoice_items
+					{$tb_prefix}invoice_items
 				VALUES
 					(
 						$invoice_id_item,
@@ -1162,7 +1162,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_invoice_consulting' ) {
 
 	$sql = "INSERT into
-		si_invoices (inv_id, inv_biller_id, inv_customer_id, inv_type,
+		{$tb_prefix}invoices (inv_id, inv_biller_id, inv_customer_id, inv_type,
 		inv_preference, inv_date, inv_note)
 		values
 			('','$_POST[sel_id]','$_POST[select_customer]', 3,'$_POST[select_preferences]',now(),'$_POST[invoice_consulting_note]')";
@@ -1178,7 +1178,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 
 
 	#tax percentage query
-	$print_tax_percentage = "SELECT * FROM si_tax WHERE tax_id ='$_POST[select_tax]'";
+	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
 	$result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
 
 
@@ -1190,7 +1190,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 	};
 /*
 	#product info query
-	$print_products_info = "SELECT * FROM si_products WHERE prod_id ='$_POST[select_products]'";
+	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id ='$_POST[select_products]'";
 	$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 
 
@@ -1219,7 +1219,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 			break;
 		}
 
-		$print_products_info = "SELECT * FROM si_products WHERE prod_id =$product_line_item";
+		$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id =$product_line_item";
        		$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 
 
@@ -1238,7 +1238,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 		$total_invoice_item_gross = $prod_unit_priceField  * $_POST["i_quantity$items"];
 		
 
-		$sql_items = "INSERT into si_invoice_items values ('',$invoice_id,$qty,$product_line_item,$prod_unit_priceField,'$_POST[select_tax]',$tax_percentageField,$total_invoice_tax_amount,$total_invoice_item_gross,'$line_item_description',$total_invoice_item_total)";
+		$sql_items = "INSERT into {$tb_prefix}invoice_items values ('',$invoice_id,$qty,$product_line_item,$prod_unit_priceField,'$_POST[select_tax]',$tax_percentageField,$total_invoice_tax_amount,$total_invoice_item_gross,'$line_item_description',$total_invoice_item_total)";
 	
 		/*
 		mysql_query($sql_items);
@@ -1267,9 +1267,9 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 
 	$invoice_id = $_POST[invoice_id];
 
-	#update the si_invoices table with customer etc  stuff - start
+	#update the {$tb_prefix}invoices table with customer etc  stuff - start
 	$sql = "UPDATE
-			si_invoices
+			{$tb_prefix}invoices
 		SET
 			inv_biller_id = '$_POST[sel_id]',
 			inv_customer_id = '$_POST[select_customer]',
@@ -1287,7 +1287,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 
 	#$display_block .= "step 2 - 1";
 	#tax percentage query
-	$print_tax_percentage = "SELECT * FROM si_tax WHERE tax_id ='$_POST[select_tax]'";
+	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
 	$result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
 
 	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
@@ -1298,7 +1298,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 	};
 /*
 	#product info query
-	$print_products_info = "SELECT * FROM si_products WHERE prod_id ='$_POST[select_products]'";
+	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id ='$_POST[select_products]'";
 	$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 
 
@@ -1333,7 +1333,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 		       /* break;*/
 		}
 
-		$print_products_info = "SELECT * FROM si_products WHERE prod_id =$product_line_item";
+		$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id =$product_line_item";
 		$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 
 		#$display_block .= "step 2 - 5  <br> $consulting_item_note ";
@@ -1356,7 +1356,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 		$invoice_id_item = $_POST["inv_it_id$items"];
 
 		$sql_items = "REPLACE into
-					si_invoice_items
+					{$tb_prefix}invoice_items
 				VALUES
 					(
 						$invoice_id_item,

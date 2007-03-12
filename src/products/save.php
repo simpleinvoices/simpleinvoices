@@ -22,7 +22,7 @@ $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
 if (  $op === 'insert_product' ) {
 
 $sql = "INSERT into
-		si_products
+		{$tb_prefix}products
 	VALUES
 		(	
 			'',
@@ -57,7 +57,7 @@ mysql_select_db("$db_name",$conn);
 
 	if (isset($_POST['save_product'])) {
 		$sql = "UPDATE
-				si_products
+				{$tb_prefix}products
 			SET
 				prod_description = '$_POST[prod_description]',
 				prod_enabled = '$_POST[prod_enabled]',

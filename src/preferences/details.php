@@ -25,7 +25,7 @@ $preference_id = $_GET['submit'];
 $conn = mysql_connect("$db_host","$db_user","$db_password");
 mysql_select_db("$db_name",$conn);
 
-$print_preferences = "SELECT * FROM si_preferences where pref_id = $preference_id";
+$print_preferences = "SELECT * FROM {$tb_prefix}preferences where pref_id = $preference_id";
 $result_print_preferences  = mysql_query($print_preferences, $conn) or die(mysql_error());
 
 while ($Array_preferences = mysql_fetch_array($result_print_preferences)) {

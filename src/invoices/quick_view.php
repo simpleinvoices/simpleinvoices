@@ -15,7 +15,7 @@ $conn = mysql_connect( $db_host, $db_user, $db_password );
 mysql_select_db( $db_name, $conn );
 
 #master invoice id select
-$print_master_invoice_id = 'SELECT * FROM si_invoices WHERE inv_id = ' . $master_invoice_id;
+$print_master_invoice_id = "SELECT * FROM {$tb_prefix}invoices WHERE inv_id = $master_invoice_id";
 $result_print_master_invoice_id  = mysql_query($print_master_invoice_id , $conn) or die(mysql_error());
 
 while ($Array_master_invoice = mysql_fetch_array($result_print_master_invoice_id)) {
@@ -37,7 +37,7 @@ while ($Array_master_invoice = mysql_fetch_array($result_print_master_invoice_id
 
 #invoice_type query
 
-        $sql_invoice_type = 'SELECT inv_ty_description FROM si_invoice_type WHERE inv_ty_id = ' . $inv_typeField;
+        $sql_invoice_type = "SELECT inv_ty_description FROM {$tb_prefix}invoice_type WHERE inv_ty_id = $inv_typeField";
 
         $result_invoice_type = mysql_query($sql_invoice_type, $conn) or die(mysql_error());
 
@@ -46,11 +46,11 @@ while ($Array_master_invoice = mysql_fetch_array($result_print_master_invoice_id
 	};
 
 #customer query
-$print_customer = "SELECT * FROM si_customers WHERE c_id = $inv_customer_idField";
+$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE c_id = $inv_customer_idField";
 $result_print_customer = mysql_query($print_customer, $conn) or die(mysql_error());
 
 #biller query
-$print_biller = "SELECT * FROM si_biller WHERE b_id = $inv_biller_idField";
+$print_biller = "SELECT * FROM {$tb_prefix}biller WHERE b_id = $inv_biller_idField";
 $result_print_biller = mysql_query($print_biller, $conn) or die(mysql_error());
 
 while ($Array = mysql_fetch_array($result_print_customer)) {
@@ -97,7 +97,7 @@ while ($billerArray = mysql_fetch_array($result_print_biller)) {
 
 
 #preferences query
-$print_preferences = "SELECT * FROM si_preferences where pref_id = $inv_preferenceField ";
+$print_preferences = "SELECT * FROM {$tb_prefix}preferences where pref_id = $inv_preferenceField ";
 $result_print_preferences  = mysql_query($print_preferences, $conn) or die(mysql_error());
 
 while ($Array_preferences = mysql_fetch_array($result_print_preferences)) {
@@ -118,7 +118,7 @@ while ($Array_preferences = mysql_fetch_array($result_print_preferences)) {
 
 
 #system defaults query
-$print_defaults = "SELECT * FROM si_defaults WHERE def_id = 1";
+$print_defaults = "SELECT * FROM {$tb_prefix}defaults WHERE def_id = 1";
 $result_print_defaults = mysql_query($print_defaults, $conn) or die(mysql_error());
 
 
@@ -327,7 +327,7 @@ if (  $_GET['invoice_style'] === 'Total' ) {
 
 	#get all the details for the total style
 	#items invoice id select
-	$print_master_invoice_items = "SELECT * FROM si_invoice_items WHERE  inv_it_invoice_id =$master_invoice_id";
+	$print_master_invoice_items = "SELECT * FROM {$tb_prefix}invoice_items WHERE  inv_it_invoice_id =$master_invoice_id";
 	$result_print_master_invoice_items = mysql_query($print_master_invoice_items, $conn) or die(mysql_error());
 
 
@@ -346,7 +346,7 @@ if (  $_GET['invoice_style'] === 'Total' ) {
 	};
 
 	#products query
-	$print_products = "SELECT * FROM si_products WHERE prod_id = $inv_it_product_idField";
+	$print_products = "SELECT * FROM {$tb_prefix}products WHERE prod_id = $inv_it_product_idField";
 	$result_print_products = mysql_query($print_products, $conn) or die(mysql_error());
 
 
@@ -437,7 +437,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 
 	#INVOIVE_ITEMS SECTION
 	#items invoice id select
-	$print_master_invoice_items = "SELECT * FROM si_invoice_items WHERE  inv_it_invoice_id =$master_invoice_id";
+	$print_master_invoice_items = "SELECT * FROM {$tb_prefix}invoice_items WHERE  inv_it_invoice_id =$master_invoice_id";
 	$result_print_master_invoice_items = mysql_query($print_master_invoice_items, $conn) or die(mysql_error());
 
 
@@ -461,7 +461,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 	*/
 
 	#products query
-	$print_products = "SELECT * FROM si_products WHERE prod_id = $inv_it_product_idField";
+	$print_products = "SELECT * FROM {$tb_prefix}products WHERE prod_id = $inv_it_product_idField";
 	$result_print_products = mysql_query($print_products, $conn) or die(mysql_error());
 
 

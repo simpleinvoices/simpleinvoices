@@ -31,16 +31,16 @@ include('./config/config.php');
 
 SELECT
         inv_id,
-        (select b_name from si_biller where b_id = si_invoices.inv_biller_id) as Biller,
-        (select c_name from si_customers where c_id = si_invoices.inv_customer_id) as Customer,
-        (select sum(inv_it_total) from si_invoice_items WHERE inv_it_invoice_id = inv_id) as Total,
-        ( select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from si_account_payments where  ac_inv_id = inv_id ) as Paid,
+        (select b_name from {$tb_prefix}biller where b_id = {$tb_prefix}invoices.inv_biller_id) as Biller,
+        (select c_name from {$tb_prefix}customers where c_id = {$tb_prefix}invoices.inv_customer_id) as Customer,
+        (select sum(inv_it_total) from {$tb_prefix}invoice_items WHERE inv_it_invoice_id = inv_id) as Total,
+        ( select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from {$tb_prefix}account_payments where  ac_inv_id = inv_id ) as Paid,
         (select (Total - Paid)) as Owing ,
         inv_date
 FROM
-        si_invoices,si_account_payments,si_invoice_items, si_biller, si_customers
+        {$tb_prefix}invoices,{$tb_prefix}account_payments,{$tb_prefix}invoice_items, {$tb_prefix}biller, {$tb_prefix}customers
 WHERE
-        inv_it_invoice_id = si_invoices.inv_id
+        inv_it_invoice_id = {$tb_prefix}invoices.inv_id
 GROUP BY
         inv_id
 ORDER BY

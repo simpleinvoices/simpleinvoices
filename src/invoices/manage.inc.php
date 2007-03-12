@@ -65,21 +65,21 @@ while ($newArray = mysql_fetch_array($result)) {
 	$inv_dateField = date( $config['date_format'], strtotime( $newArray['inv_date'] ) );
 	$inv_noteField = $newArray['inv_note'];
 
-	$sql_biller = "select b_name from si_biller where b_id = $inv_biller_idField ";
+	$sql_biller = "select b_name from {$tb_prefix}biller where b_id = $inv_biller_idField ";
 	$result_biller = mysql_query($sql_biller, $conn) or die(mysql_error());
 
 	while ($billerArray = mysql_fetch_array($result_biller)) {
 		$b_nameField = $billerArray['b_name'];
 
 
-	$sql_customers = "select c_name from si_customers where c_id = $inv_customer_idField ";
+	$sql_customers = "select c_name from {$tb_prefix}customers where c_id = $inv_customer_idField ";
 	$result_customers = mysql_query($sql_customers, $conn) or die(mysql_error());
 
 	while ($customersArray = mysql_fetch_array($result_customers)) {
 		$c_nameField = $customersArray['c_name'];
 
 
-	$sql_invoice_type = "select inv_ty_description from si_invoice_type where inv_ty_id = $inv_typeField ";
+	$sql_invoice_type = "select inv_ty_description from {$tb_prefix}invoice_type where inv_ty_id = $inv_typeField ";
 	$result_invoice_type = mysql_query($sql_invoice_type, $conn) or die(mysql_error());
 
 	while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
@@ -130,14 +130,14 @@ while ($newArray = mysql_fetch_array($result)) {
 	#Overdue - number of days - end
 
 
-        $print_invoice_preference ="select pref_inv_wording from si_preferences where pref_id =$inv_preferenceField";
+        $print_invoice_preference ="select pref_inv_wording from {$tb_prefix}preferences where pref_id =$inv_preferenceField";
         $result_print_invoice_preference = mysql_query($print_invoice_preference, $conn) or die(mysql_error());
 
         while ($Array = mysql_fetch_array($result_print_invoice_preference)) {
                 $invoice_preference_wordingField = $Array['pref_inv_wording'];
 
 	#system defaults query
-	$print_defaults = "SELECT * FROM si_defaults WHERE def_id = 1";
+	$print_defaults = "SELECT * FROM {$tb_prefix}defaults WHERE def_id = 1";
 	$result_print_defaults = mysql_query($print_defaults, $conn) or die(mysql_error());
 
 

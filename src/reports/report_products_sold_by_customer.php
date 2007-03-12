@@ -26,7 +26,7 @@ if (!defined("BROWSE")) {
    include "src/reports/PHPReportMaker.php";
    include "config/config.php";
 
-   $sSQL = "select  sum(si_invoice_items.inv_it_quantity), si_customers.c_name, si_products.prod_description  from  si_customers, si_invoice_items, si_invoices, si_products  where  si_invoice_items.inv_it_product_id = si_products.prod_id and si_invoices.inv_customer_id =  si_customers.c_id and si_invoices.inv_id = si_invoice_items.inv_it_invoice_id GROUP BY inv_it_quantity ORDER BY c_name";
+   $sSQL = "select  sum({$tb_prefix}invoice_items.inv_it_quantity), {$tb_prefix}customers.c_name, {$tb_prefix}products.prod_description  from  {$tb_prefix}customers, {$tb_prefix}invoice_items, {$tb_prefix}invoices, {$tb_prefix}products  where  {$tb_prefix}invoice_items.inv_it_product_id = {$tb_prefix}products.prod_id and {$tb_prefix}invoices.inv_customer_id =  {$tb_prefix}customers.c_id and {$tb_prefix}invoices.inv_id = {$tb_prefix}invoice_items.inv_it_invoice_id GROUP BY inv_it_quantity ORDER BY c_name";
 
    $oRpt = new PHPReportMaker();
 

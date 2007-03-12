@@ -7,7 +7,7 @@ if (!isset ($_SESSION)) session_start();
 <title>Rico LiveGrid Plus-Example 3</title>
 
 <? 
-$sqltext="SELECT b_id,b_name,b_email,(CASE WHEN b_enabled = 1 THEN 'Enabled' WHEN b_enabled = 0 THEN 'Disabled'	ELSE '??' END) as b_enabled FROM si_biller";
+$sqltext="SELECT b_id,b_name,b_email,(CASE WHEN b_enabled = 1 THEN 'Enabled' WHEN b_enabled = 0 THEN 'Disabled'	ELSE '??' END) as b_enabled FROM {$tb_prefix}biller";
 
 $_SESSION['ex3']=$sqltext;
 require "applib.php";

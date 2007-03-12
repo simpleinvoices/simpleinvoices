@@ -24,11 +24,11 @@ $conn = mysql_connect("$db_host","$db_user","$db_password");
 mysql_select_db("$db_name",$conn);
 
 /*Raymond - what about the '', bit doesnt seem to do an insert in me environment when i exclude it
-$sql = "INSERT INTO si_tax VALUES ('$_POST[tax_description]','$_POST[tax_percentage]')";
+$sql = "INSERT INTO {$tb_prefix}tax VALUES ('$_POST[tax_description]','$_POST[tax_percentage]')";
 */
 
 $sql = "INSERT into
-		si_payment_types
+		{$tb_prefix}payment_types
 	VALUES
 		(	
 			'',
@@ -58,7 +58,7 @@ else if (  $op === 'edit_payment_type' ) {
 
 	if (isset($_POST['save_payment_type'])) {
 		$sql = "UPDATE
-				si_payment_types
+				{$tb_prefix}payment_types
 			SET
 				pt_description = '$_POST[pt_description]',
 				pt_enabled = '$_POST[pt_enabled]'

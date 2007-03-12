@@ -35,7 +35,7 @@ mysql_select_db("$db_name",$conn);
 
 
 #customer query
-$print_tax_rate = "SELECT * FROM si_tax WHERE tax_id = $tax_rate_id";
+$print_tax_rate = "SELECT * FROM {$tb_prefix}tax WHERE tax_id = $tax_rate_id";
 $result_print_tax_rate = mysql_query($print_tax_rate, $conn) or die(mysql_error());
 
 

@@ -27,7 +27,7 @@ include('./config/config.php');
    // include the PHPReports classes on the PHP path! configure your path here
    include "./src/reports/PHPReportMaker.php";
 
-   $sSQL = "select  si_biller.b_name,  sum(si_invoice_items.inv_it_total) from si_biller, si_invoice_items, si_invoices where si_invoices.inv_biller_id = si_biller.b_id and si_invoices.inv_id = si_invoice_items.inv_it_invoice_id GROUP BY b_name";
+   $sSQL = "select  {$tb_prefix}biller.b_name,  sum({$tb_prefix}invoice_items.inv_it_total) from {$tb_prefix}biller, {$tb_prefix}invoice_items, {$tb_prefix}invoices where {$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.b_id and {$tb_prefix}invoices.inv_id = {$tb_prefix}invoice_items.inv_it_invoice_id GROUP BY b_name";
    $oRpt = new PHPReportMaker();
 
    $oRpt->setXML("./src/reports/xml/report_biller_total.xml");

@@ -29,7 +29,7 @@ $conn = mysql_connect("$db_host","$db_user","$db_password");
 mysql_select_db("$db_name",$conn);
 
 #customer query
-$print_payment_type = "SELECT * FROM si_payment_types WHERE pt_id = $payment_type_id";
+$print_payment_type = "SELECT * FROM {$tb_prefix}payment_types WHERE pt_id = $payment_type_id";
 $result_payment_type = mysql_query($print_payment_type, $conn) or die(mysql_error());
 
 while ($Array = mysql_fetch_array($result_payment_type) ) {
