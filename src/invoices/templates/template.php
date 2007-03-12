@@ -137,7 +137,7 @@ if (isset($_GET['export'])) {
 /* End Export code */
 
 
-	include("./src/invoices/templates/${template}/${template}.tmpl");
+	include("./src/invoices/templates/${template}/${template}.tpl");
 
 	
 	
@@ -198,7 +198,7 @@ if (isset($_GET['export'])) {
 		#MERGE ITEMISED AND CONSULTING HERE
 		#PRINT the line items
 		#show the itemised invoice
-		include("./src/invoices/templates/${template}/${template}.tmpl");
+		include("./src/invoices/templates/${template}/${template}.tpl");
 		
 		if ($_GET['invoice_style'] === 'Itemised' ) {
 			$line = addslashes($itemised_line);
