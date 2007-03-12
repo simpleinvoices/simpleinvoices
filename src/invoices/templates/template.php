@@ -164,10 +164,11 @@ if (isset($_GET['export'])) {
 	
 
 	
+
 	#INVOICE ITEMEISED SECTION
 	$lines = "";
 		
-if ($_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'Consulting' )  {
+if ($_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'Consulting' || $_GET['invoice_style'] === 'Total' ) {
 	
 	#INVOIVE_ITEMS SECTION
 	#items invoice id sgseelect
@@ -208,6 +209,11 @@ if ($_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'Consult
 		#show the consulting invoice
 		if ($_GET['invoice_style'] === 'Consulting' ) {
 			$line = addslashes($consulting_line);
+			eval('$lines .=  "'.$line.'";');
+		}
+		#show the total invoice
+		if ($_GET['invoice_style'] === 'Total' ) {
+			$line = addslashes($total_line);
 			eval('$lines .=  "'.$line.'";');
 		}
 	}
