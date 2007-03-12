@@ -4,7 +4,8 @@
 include('./include/include_print.php');
 include("./include/functions.php");
 
-$template = "default";
+#$template = "default";
+$template = "simple";
 
 #get the invoice id
 $master_invoice_id = $_GET['submit'];
