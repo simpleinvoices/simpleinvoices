@@ -260,6 +260,7 @@ $total_line = <<<EOD
                 <tr class="tbl1-left tbl1-right">
                         <td colspan=6 class="tbl1-left tbl1-right"><br></td>
                 </tr>
+	<!--
                 <tr class="tbl1-left tbl1-right">
                         <td class="tbl1-left" width="50"%>
 			<td align="right"><b>$LANG_gross_total</b></td>
@@ -272,7 +273,7 @@ $total_line = <<<EOD
 			<td class="tbl1-bottom" align=right>$pref[pref_currency_sign]$master_invoice[inv_it_tax_amount]</td>
 			<td class="tbl1-bottom tbl1-right" align=right><u>$pref[pref_currency_sign]$master_invoice[inv_it_total]</u></td>
                 </tr>
-
+-->
 
 EOD;
 
@@ -365,7 +366,7 @@ $consulting_line .=  <<<EOD
 			</tr>
 EOD;
 
-if ( $_GET['invoice_style'] === 'Itemised' && !empty($invoice[inv_note]) OR 'Consulting' && !empty($invoice[inv_note])) {
+if ( ($_GET['invoice_style'] === 'Itemised' && !empty($invoice[inv_note])) OR ($_GET['invoice_style'] === 'Consulting' && !empty($invoice[inv_note]) ) ) {
 
 	$notes =  <<<EOD
 		<tr>
@@ -380,11 +381,20 @@ if ( $_GET['invoice_style'] === 'Itemised' && !empty($invoice[inv_note]) OR 'Con
 EOD;
 }
 
+if ( $_GET['invoice_style'] === 'Total') {
+$gross_total =  <<<EOD
+	<tr class="tbl1-left tbl1-right">
+		<td class="tbl1-left" colspan="3"></td>
+		<td align="right" colspan="2">$LANG_gross_total</td>
+		<td align="right" class="tbl1-right" >$pref[pref_currency_sign]$master_invoice[inv_it_gross_total]</td>
+	</tr>
+EOD;
+}
 
 $total_tax =  <<<EOD
 	<tr class="tbl1-left tbl1-right">
 		<td class="tbl1-left" colspan="3"></td>
-		<td align="left" colspan="2">$LANG_tax_total</td>
+		<td align="right" colspan="2">$LANG_tax_total</td>
 		<td align="right" class="tbl1-right" >$pref[pref_currency_sign]$tax[total_tax]</td>
 	</tr>
 EOD;
@@ -392,7 +402,7 @@ EOD;
 $total_invoice = <<<EOD
 	<tr class="tbl1-left tbl1-right tbl1-bottom">
 		<td class="tbl1-left tbl1-bottom" colspan="3"></td>
-		<td class="tbl1-bottom" align=left colspan=2><b>$pref[pref_inv_wording] $LANG_amount</b></td>
+		<td class="tbl1-bottom" align=right colspan=2><b>$pref[pref_inv_wording] $LANG_amount</b></td>
 		<td  class="tbl1-bottom tbl1-right" align=right><u>$pref[pref_currency_sign]$invoice_total[total]</u></td>
 	</tr>
 EOD;

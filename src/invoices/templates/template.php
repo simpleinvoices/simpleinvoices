@@ -168,7 +168,6 @@ if (isset($_GET['export'])) {
 	#INVOICE ITEMEISED SECTION
 	$lines = "";
 		
-if ($_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'Consulting' || $_GET['invoice_style'] === 'Total' ) {
 	
 	#INVOIVE_ITEMS SECTION
 	#items invoice id sgseelect
@@ -215,7 +214,6 @@ if ($_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'Consult
 		if ($_GET['invoice_style'] === 'Total' ) {
 			$line = addslashes($total_line);
 			eval('$lines .=  "'.$line.'";');
-		}
 	}
 }
 
@@ -225,8 +223,8 @@ if ($_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'Consult
 	include('./config/config.php');
 
 	$temp = file_get_contents("./src/invoices/templates/${template}/${template}.html");
-	$temp = addslashes($temp);	$content = "";
+	$temp = addslashes($temp); $content = "";
 
-	eval ('$content = "'.$temp.'";');
+	eval ('$content = "'.$temp.'";');
 	echo $content;
 ?>
