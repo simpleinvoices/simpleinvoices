@@ -6,16 +6,40 @@ echo <<<EOD
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<title>Simple Invoices</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
+	<link rel="stylesheet" type="text/css" href="include/jquery.autocomplete.css" title="default" media="screen" />
+	<link rel="stylesheet" type="text/css" href="include/jquery.datePicker.css" title="default" media="screen" />
 	<link rel="stylesheet" type="text/css" href="./src/include/css/header1.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="./src/include/css/header2.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="./src/include/css/screen.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="./src/include/css/print.css" media="print"/>
 	<link rel="stylesheet" type="text/css" href="./src/include/css/blue.css" media="screen"/>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+<script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
+<script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
+
+<script type="text/javascript" src="include/jquery.js"></script>
+<script type="text/javascript" src="include/jquery.dom_creator.js"></script>
+<script type="text/javascript" src="include/jquery.datePicker.js"></script>
+<script type="text/javascript" src="include/jquery.datePicker.conf.js"></script>
+<script type='text/javascript' src='include/jquery.autocomplete.js'></script>
+<script type='text/javascript' src='include/jquery.autocomplete.conf.js'></script>
+
+<script type="text/javascript" src="./src/include/js/ibox.js"></script>
+
+<!--[if gte IE 5.5]>
+<script language="JavaScript" src="dhtml.js" type="text/JavaScript"></script>
+<link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
+<script language="JavaScript" src="./src/include/js/dhtml.js" type="text/JavaScript"></script>
+<link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
+<![endif]-->
+
+
 
 <!-- customer-details -->
-<script type="text/javascript" src="include/jquery.js"></script>
-
 <link rel="stylesheet" href="./include/css/tabs.css" type="text/css" media="print, projection, screen" />
 	<!-- Additional IE/Win specific style sheet (Conditional Comments) -->
 	<!--[if lte IE 7]>
@@ -64,43 +88,9 @@ echo <<<EOD
 	    });
 	//]]></script>
 
-<script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
-<script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
+
 <!-- customer-details -->
 
-
-	<script type="text/javascript" src="include/jquery.js"></script>
-
-<link rel="stylesheet" type="text/css" href="include/jquery.autocomplete.css" title="default" media="screen" />
-<link rel="stylesheet" type="text/css" href="include/jquery.datePicker.css" title="default" media="screen" />
-
-<script type="text/javascript" src="include/jquery.js"></script>
-<script type="text/javascript" src="include/jquery.dom_creator.js"></script>
-<script type="text/javascript" src="include/jquery.datePicker.js"></script>
-<script type="text/javascript" src="include/jquery.datePicker.conf.js"></script>
-<script type='text/javascript' src='include/jquery.autocomplete.js'></script>
-<script type='text/javascript' src='include/jquery.autocomplete.conf.js'></script>
-
-<script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
-<script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
-
-
-<script language="javascript" type="text/javascript" src="include/jquery.js"></script>
-
-<script type="text/javascript" src="./src/include/js/ibox.js"></script>
-<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
-
-<script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
-<script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
-<script type="text/javascript" src="./include/jquery.js"></script>
-<!--[if gte IE 5.5]>
-<script language="JavaScript" src="dhtml.js" type="text/JavaScript"></script>
-<![endif]-->
-
-<!--[if gte IE 5.5]>
-<link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
-<script language="JavaScript" src="./src/include/js/dhtml.js" type="text/JavaScript"></script>
-<![endif]-->
 	<div id="Header">
 		<div id="Tabs">
 			<ul id="MainTabs">
