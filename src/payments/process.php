@@ -42,10 +42,10 @@ $master_invoice_id = $_GET['submit'];
 
 #master invoice id select
 if (!empty($master_invoice_id)) {
-	$print_master_invoice_id = 'SELECT * FROM {$tb_prefix}invoices WHERE inv_id = ' . $master_invoice_id;
+	$print_master_invoice_id = "SELECT * FROM {$tb_prefix}invoices WHERE inv_id = " . $master_invoice_id;
 }
 elseif (empty($master_invoice_id)) {
-	$print_master_invoice_id = 'SELECT * FROM {$tb_prefix}invoices';
+	$print_master_invoice_id = "SELECT * FROM {$tb_prefix}invoices";
 }
 $result_print_master_invoice_id  = mysql_query($print_master_invoice_id , $conn) or die(mysql_error());
 
