@@ -4,9 +4,6 @@
 include('./include/include_print.php');
 include("./include/functions.php");
 
-#$template = "default";
-$template = "simple";
-
 #get the invoice id
 $master_invoice_id = $_GET['submit'];
 
@@ -53,6 +50,13 @@ $result_print_preferences  = mysql_query($print_preferences, $conn) or die(mysql
 
 $pref = mysql_fetch_array($result_print_preferences);
 
+ #system defaults query
+$print_defaults = "SELECT * FROM si_defaults WHERE def_id = 1";
+$result_print_defaults = mysql_query($print_defaults, $conn) or die(mysql_error());
+
+$defaults =  mysql_fetch_array($result_print_defaults);
+                $defaults['def_inv_template'];
+
 #Accounts - for the invoice - start
 #invoice total calc - start
 $invoice['total'] = calc_invoice_total($invoice['inv_id']);
@@ -78,6 +82,8 @@ for($i=1;$i<=4;$i++) {
 	$show["custom_field$i"] = show_custom_field("invoice_cf$i",$invoice["invoice_custom_field$i"],"read",'','tbl1-left','tbl1-right',3,':');
 }
 
+/*Set the template to the default*/
+$template = $defaults['def_inv_template'];
 
 #logo field support - if not logo show nothing else show logo
 

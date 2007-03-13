@@ -69,7 +69,7 @@ else if ($_GET[submit] == "def_inv_template") {
 
 	/*drop down list code for invoice template */
 
-	$dirname="src/invoices/templates";
+	$dirname="src/invoices/templates/";
 	   $ext = array("php");
 	   $files = array();
 	   if($handle = opendir($dirname)) {
