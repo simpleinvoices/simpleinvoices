@@ -7,14 +7,7 @@ if (!defined("BROWSE")) {
    exit();
 }
 
-?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="text/javascript" src="./src/include/js/ibox.js"></script>
-<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
-
-<?php 
+include("./html/header.php");
 #include('./include/functions.php');
 /* validataion code */
 include("./include/validation.php");
@@ -30,17 +23,21 @@ jsEnd();
 /* end validataion code */
 
 #do the product enabled/disblaed drop down
-$display_block_enabled = "<select name=\"prod_enabled\">
-<option value=\"1\" selected>$wording_for_enabledField</option>
-<option value=\"0\">$wording_for_disabledField</option>
-</select>";
+$display_block_enabled = <<<EOD
+<select name="prod_enabled">
+<option value="1" selected>$wording_for_enabledField</option>
+<option value="0">$wording_for_disabledField</option>
+</select>
+EOD;
 
 #get custom field labels
-$prod_custom_field_label1 = get_custom_field_label(product_cf1);
-$prod_custom_field_label2 = get_custom_field_label(product_cf2);
-$prod_custom_field_label3 = get_custom_field_label(product_cf3);
-$prod_custom_field_label4 = get_custom_field_label(product_cf4);
-?>
+$prod_custom_field_label1 = get_custom_field_label("product_cf1");
+$prod_custom_field_label2 = get_custom_field_label("product_cf2");
+$prod_custom_field_label3 = get_custom_field_label("product_cf3");
+$prod_custom_field_label4 = get_custom_field_label("product_cf4");
+
+
+echo <<<EOD
 
 <script language="javascript" type="text/javascript" src="include/jquery.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
@@ -48,8 +45,7 @@ $prod_custom_field_label4 = get_custom_field_label(product_cf4);
 </head>
 <BODY>
 
-<?php
-echo <<<EOD
+
 
 <FORM name="frmpost" ACTION="index.php?module=products&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
 
@@ -94,7 +90,8 @@ echo <<<EOD
 <hr></hr>
 	<input type=submit name="submit" value="{$LANG_insert_product}">
 	<input type=hidden name="op" value="insert_product">
+</FORM>
 EOD;
 ?>
-</FORM>
+
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

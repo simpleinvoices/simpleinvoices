@@ -54,10 +54,10 @@ while ($Array = mysql_fetch_array($result_print_product) ) {
 };
 
 #get custom field labels
-$prod_custom_field_label1 = get_custom_field_label(product_cf1);
-$prod_custom_field_label2 = get_custom_field_label(product_cf2);
-$prod_custom_field_label3 = get_custom_field_label(product_cf3);
-$prod_custom_field_label4 = get_custom_field_label(product_cf4);
+$prod_custom_field_label1 = get_custom_field_label("product_cf1");
+$prod_custom_field_label2 = get_custom_field_label("product_cf2");
+$prod_custom_field_label3 = get_custom_field_label("product_cf3");
+$prod_custom_field_label4 = get_custom_field_label("product_cf4");
 
 
 if ($_GET['action'] == "view") {
@@ -118,11 +118,13 @@ EOD;
 else if ($_GET['action'] == "edit") {
 
 #do the product enabled/disblaed drop down
-$display_block_enabled = "<select name=\"prod_enabled\">
-<option value=\"$prod_enabledField\" selected style=\"font-weight: bold\">$wording_for_enabled</option>
-<option value=\"1\">$wording_for_enabledField</option>
-<option value=\"0\">$wording_for_disabledField</option>
-</select>";
+$display_block_enabled = <<<EOD
+<select name="prod_enabled">
+<option value="$prod_enabledField" selected style="font-weight: bold">$wording_for_enabled</option>
+<option value="1">$wording_for_enabledField</option>
+<option value="0">$wording_for_disabledField</option>
+</select>
+EOD;
 
 $display_block = <<<EOD
 	<b>{$LANG_product_edit}</b>
