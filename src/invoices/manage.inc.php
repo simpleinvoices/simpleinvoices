@@ -37,7 +37,7 @@ if (mysql_num_rows($result) == 0) {
 <col style='width:5%;' />
 <col style='width:10%;' />
 </colgroup>
-<thead > 
+<thead> 
 <tr class="sortHeader">
 <th class="noFilter sortable" >{$LANG_actions} </th>
 <th class="noFilter sortable">{$LANG_id}</th>

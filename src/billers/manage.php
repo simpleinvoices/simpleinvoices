@@ -32,7 +32,7 @@ $display_block = "
 <![endif]-->
 
 
-<table class=\"ricoLiveGrid\" id=\"rico_biller\" align=\"center\">
+<table class=\"ricoLiveGrid manage\" id=\"rico_biller\" align=\"center\">
 <colgroup>
 <col style='width:15%;' />
 <col style='width:10%;' />
@@ -46,15 +46,15 @@ $display_block = "
 </colgroup>
 <thead>
 <tr class=\"sortHeader\">
-<th class=\"noFilter\">$mb_table_action</th>
-<th class=\" index_table\">$mb_table_biller_id</th>
-<th class=\"index_table\">$mb_table_biller_name</th>
+<th class=\"noFilter sortable\">$mb_table_action</th>
+<th class=\" index_table sortable\">$mb_table_biller_id</th>
+<th class=\"index_table sortable\">$mb_table_biller_name</th>
 <!--
 <th class=\"index_table\">$mb_table_phone</th>
 <th class=\"index_table\">$mb_table_mobile_phone</th>
 -->
-<th class=\"index_table\">$mb_table_email</th>
-<th class=\"noFilter index_table\">$wording_for_enabledField</th>
+<th class=\"index_table sortable\">$mb_table_email</th>
+<th class=\"noFilter index_table sortable\">$wording_for_enabledField</th>
 </tr>
 </thead>
 ";

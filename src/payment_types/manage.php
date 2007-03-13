@@ -37,7 +37,7 @@ if (mysql_num_rows($result) == 0) {
 <link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
 <![endif]-->
 
-<table align="center" class="ricoLiveGrid" id="rico_payment_types">
+<table align="center" class="ricoLiveGrid manage" id="rico_payment_types">
 <colgroup>
 <col style='width:15%;' />
 <col style='width:15%;' />
@@ -46,10 +46,10 @@ if (mysql_num_rows($result) == 0) {
 </colgroup>
 <thead>
 <tr class="sortHeader">
-<th class="noFilter">{$LANG_actions}</th>
-<th class="index_table">{$LANG_payment_type_id}</th>
-<th class="index_table">{$LANG_description}</th>
-<th class="noFilter index_table">{$wording_for_enabledField}</th>
+<th class="noFilter sortable">{$LANG_actions}</th>
+<th class="index_table sortable">{$LANG_payment_type_id}</th>
+<th class="index_table sortable">{$LANG_description}</th>
+<th class="noFilter index_table sortable">{$wording_for_enabledField}</th>
 </tr>
 </thead>
 EOD;

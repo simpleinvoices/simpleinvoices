@@ -45,11 +45,11 @@ if (mysql_num_rows($result) == 0) {
 </colgroup>
 <thead>
 <tr class="sortHeader">
-	<th class="noFilter">{$LANG_actions}</th>
-	<th class="index_table">{$LANG_tax_id}</th>
-	<th class="index_table">{$LANG_tax_description}</th>
-	<th class="index_table">{$LANG_tax_percentage}</th>
-	<th class="noFilter index_table">{$wording_for_enabledField}</th>
+	<th class="noFilter sortable">{$LANG_actions}</th>
+	<th class="index_table sortable">{$LANG_tax_id}</th>
+	<th class="index_table sortable">{$LANG_tax_description}</th>
+	<th class="index_table sortable">{$LANG_tax_percentage}</th>
+	<th class="noFilter index_table sortable">{$wording_for_enabledField}</th>
 </tr>
 </thead>
 EOD;

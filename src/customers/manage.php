@@ -35,7 +35,7 @@ if (mysql_num_rows($result) == 0) {
 <![endif]-->
 
 
-<table align="center" id="rico_customer" class="ricoLiveGrid">
+<table align="center" id="rico_customer" class="ricoLiveGrid manage">
 <colgroup>
 <col style='width:10%;' />
 <col style='width:5%;' />
@@ -46,18 +46,18 @@ if (mysql_num_rows($result) == 0) {
 </colgroup>
 <thead>
 <tr class="sortHeader">
-<th class="noFilter">{$LANG_actions}</th>
-<th class="index_table">{$LANG_customer_id}</th>
-<th class="index_table">{$LANG_customer_name}</th>
+<th class="noFilter sortable">{$LANG_actions}</th>
+<th class="index_table sortable">{$LANG_customer_id}</th>
+<th class="index_table sortable">{$LANG_customer_name}</th>
 <!--
 <th class="index_table">{$LANG_phone}</th>
 -->
-<th class="index_table">{$LANG_total}</th>
+<th class="index_table V">{$LANG_total}</th>
 <!--
 <th class="index_table">{$LANG_paid}</th>
 -->
-<th class="index_table">{$LANG_owing}</th>
-<th class="noFilter index_table">{$wording_for_enabledField}</th>
+<th class="index_table sortable">{$LANG_owing}</th>
+<th class="noFilter index_table sortable">{$wording_for_enabledField}</th>
 </tr>
 </thead>
 EOD;

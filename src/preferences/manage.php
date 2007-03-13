@@ -33,7 +33,7 @@ include("./html/header.html");
 	<link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
 	<![endif]-->
 
-	<table align="center" class="ricoLiveGrid" id="rico_preferences">
+	<table align="center" class="ricoLiveGrid manage" id="rico_preferences">
 	<colgroup>
 	<col style='width:10%;' />
 	<col style='width:10%;' />
@@ -42,10 +42,10 @@ include("./html/header.html");
 	</colgroup>
 	<thead>
 	<tr class="sortHeader">
-	<th class="noFilter">{$LANG_actions}</th>
-	<th class="index_table">{$LANG_preference_id}</th>
-	<th class="index_table">{$LANG_description}</th>
-	<th class="noFilter index_table">{$wording_for_enabledField}</th>
+	<th class="noFilter sortable">{$LANG_actions}</th>
+	<th class="index_table sortable">{$LANG_preference_id}</th>
+	<th class="index_table sortable">{$LANG_description}</th>
+	<th class="noFilter index_table sortable">{$wording_for_enabledField}</th>
 	</tr>
 	</thead>
 
