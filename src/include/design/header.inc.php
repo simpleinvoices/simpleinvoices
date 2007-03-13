@@ -1,6 +1,7 @@
 <?php 
 include_once('./include/include_main.php');
 echo <<<EOD
+<html>
 <title>Simple Invoices</title>
 <link rel="stylesheet" type="text/css" href="./src/include/css/header1.css" media="all"/>
 <link rel="stylesheet" type="text/css" href="./src/include/css/header2.css" media="all"/>
