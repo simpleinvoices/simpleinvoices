@@ -41,7 +41,7 @@ Rico.onLoad( function() {
     columnSpecs   : [,,,,,{type:'date'},{type:'date'}]
   };
   var menuopts = <?php GridSettingsMenu(); ?>;
-  buffer=new Rico.Buffer.AjaxSQL('ricoXMLquery.php', {TimeOut:<? print array_shift(session_get_cookie_params())/60 ?>});
+  buffer=new Rico.Buffer.AjaxSQL('ricoXMLquery.php', {TimeOut:<?php print array_shift(session_get_cookie_params())/60 ?>});
   orderGrid=new Rico.LiveGrid ('ex2', new Rico.GridMenu(menuopts), buffer, opts);
 });
 
