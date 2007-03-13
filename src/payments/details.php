@@ -95,26 +95,20 @@ $display_block =  "
                 <td class='details_screen'>$map_table_notes</td><td>$ac_notesField
         </tr>
 
-
-
 </table>
 ";
 
+include('./config/config.php');
 
-?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Simple Invoices - Payment details</title>
-<?php include('./config/config.php'); ?>
-</head>
-<body>
-<b><?php echo $map_page_header; ?></b>
+echo <<<EOD
+<b>$map_page_header</b>
 <hr></hr>
 
-<?php echo $display_block; ?>
+$display_block
 <hr></hr>
 	<form>
 		<input type=button value='Back' onCLick='history.back()'>
 	</form>
+EOD;
+?>
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

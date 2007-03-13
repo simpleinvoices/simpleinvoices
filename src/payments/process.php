@@ -7,7 +7,6 @@ if (!defined("BROWSE")) {
    exit();
 }
 
-include("./html/header.html");
 
 /* validataion code */
 include("./include/validation.php");
@@ -129,16 +128,19 @@ $display_block_payment_type = "<p><em>{$LANG_no_payment_types}</em></p>";
 
 } else {
 //has records, so display them
-$display_block_payment_type = "
-<select name=\"ac_payment_type\">
-<option selected value=\"$def_payment_typeField\" style=\"font-weight: bold\">$sql_payment_type_desciptionField</option>";
+$display_block_payment_type = <<<EOD
+<select name="ac_payment_type">
+<option selected value="$def_payment_typeField" style="font-weight: bold">$sql_payment_type_desciptionField</option>
+EOD;
 
 while ($recs = mysql_fetch_array($result)) {
 	$id = $recs['pt_id'];
 	$display_name = $recs['pt_description'];
 
-	$display_block_payment_type .= "<option value=\"$id\">
-		$display_name</option>";
+	$display_block_payment_type .= <<<EOD
+	<option value="$id">
+		$display_name</option>
+EOD;
 }
 }
 
@@ -254,28 +256,14 @@ else if ($op === "pay_invoice_batch") {
 
 echo <<<EOD
 
-<link rel="stylesheet" type="text/css" href="include/jquery.autocomplete.css" title="default" media="screen" />
-<link rel="stylesheet" type="text/css" href="include/jquery.datePicker.css" title="default" media="screen" />
 
-<script type="text/javascript" src="include/jquery.js"></script>
-<script type="text/javascript" src="include/jquery.dom_creator.js"></script>
-<script type="text/javascript" src="include/jquery.datePicker.js"></script>
-<script type="text/javascript" src="include/jquery.datePicker.conf.js"></script>
-<script type='text/javascript' src='include/jquery.autocomplete.js'></script>
-<script type='text/javascript' src='include/jquery.autocomplete.conf.js'></script>
 
-<script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
-<script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
-
-</head>
-
-<body>
 
 <form name="frmpost" action="index.php?module=payments&view=save" method="post" onsubmit="return frmpost_Validator(this)">
 <b>{$LANG_process_payment}</b>
  <hr></hr>
 
-{$display_block}
+$display_block
 <hr></hr>
 	<input type=submit name="process_payment" value="{$LANG_process_payment}">
 	<input type=hidden name="op" value="{$insert_action_op}">

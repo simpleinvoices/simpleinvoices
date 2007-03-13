@@ -7,7 +7,6 @@ if (!defined("BROWSE")) {
    exit();
 }
 
-include("./html/header.html");
 
 #insert customer
 $conn = mysql_connect("$db_host","$db_user","$db_password");
@@ -86,10 +85,7 @@ EOD;
 }
 
 
-?>
-<script type="text/javascript" src="include/jquery.js"></script>
 
-<?php
 require "./src/include/js/lgplus/php/chklang.php";
 require "./src/include/js/lgplus/php/settings.php";
 ?>
@@ -118,9 +114,6 @@ Rico.onLoad( function() {
   new Rico.LiveGrid ('rico_tax_rates', new Rico.GridMenu(menuopts), new Rico.Buffer.Base($('rico_tax_rates').tBodies[0]), opts);
 });
 </script>
-</head>
-
-<body>
 
 <?php 
 	echo $display_block; 

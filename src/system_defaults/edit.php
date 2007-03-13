@@ -427,45 +427,29 @@ else {
 }
 
 
-?>
 
+include('./config/config.php');
 
+echo <<<EOD
 
-<html>
-<head>
+<form name="frmpost" action="index.php?module=system_defaults&view=save&sys_default=$default" method="post" onsubmit="return frmpost_Validator(this)">
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-<!-- <script type="text/javascript" src="./include/jquery.js"></script> -->
-
-<script type="text/javascript" src="./src/include/js/ibox.js"></script>
-<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
-
-
-</head>
-<?php include('./config/config.php'); ?>
-
-<BODY>
-
-<FORM name="frmpost" ACTION="index.php?module=system_defaults&view=save&sys_default=<?php echo $default; ?>" METHOD=POST onsubmit="return frmpost_Validator(this)">
-
-		<b><?php echo $msd_heading; ?></b>
+		<b>$msd_heading</b>
  <hr></hr>
-
 
 <table align=center>
 
-
-<?php echo $display_block; ?>
-
+$display_block
 
 </tr>
 </tr>
 </table>
 <!-- </div> -->
 
-	<input type=submit name="submit" value="<?php echo $LANG_save_defaults; ?>">
+	<input type=submit name="submit" value="$LANG_save_defaults">
 	<input type=hidden name="op" value="update_system_defaults">
 
 </FORM>
+EOD;
+?>
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

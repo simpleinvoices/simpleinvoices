@@ -7,7 +7,6 @@ if (!defined("BROWSE")) {
    exit();
 }
 
-include("./html/header.php");
 #include('./include/functions.php');
 /* validataion code */
 include("./include/validation.php");

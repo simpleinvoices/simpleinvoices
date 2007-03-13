@@ -7,7 +7,6 @@ if (!defined("BROWSE")) {
    exit();
 }
 
-include("./html/header.html");
 
 #table
 include("./include/validation.php");
@@ -178,14 +177,6 @@ $footer = <<<EOD
 EOD;
 }
 
-?>
-<script language="javascript" type="text/javascript" src="include/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
-<script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
-</head>
-<body>
-
-<?php
 
 echo <<<EOD
 

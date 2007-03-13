@@ -7,11 +7,6 @@ if (!defined("BROWSE")) {
    exit();
 }
 
-?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?php
 #table
 include('./include/validation.php');
 
@@ -91,11 +86,13 @@ $footer = "
 else if ($_GET['action'] === 'edit') {
 
 #do the product enabled/disblaed drop down
-$display_block_enabled = "<select name=\"tax_enabled\">
-<option value=\"$tax_enabledField\" selected style=\"font-weight: bold\">$wording_for_enabled</option>
-<option value=\"1\">$wording_for_enabledField</option>
-<option value=\"0\">$wording_for_disabledField</option>
-</select>";
+$display_block_enabled = <<<EOD
+<select name="tax_enabled">
+<option value="$tax_enabledField" selected style="font-weight: bold">$wording_for_enabled</option>
+<option value="1">$wording_for_enabledField</option>
+<option value="0">$wording_for_disabledField</option>
+</select>
+EOD;
 
 $display_block = <<<EOD
 
@@ -131,21 +128,18 @@ $footer = <<<EOD
 EOD;
 }
 
-?>
-</head>
-<body>
-<?php
 
 echo <<<EOD
 
 <form name="frmpost" action="index.php?module=tax_rates&view=save&submit={$_GET['submit']}"
  method="post" onsubmit="return frmpost_Validator(this)">
 
-{$display_block}
+$display_block
 
-{$footer}
+$footer
 
+
+</form>
 EOD;
 ?>
-</form>
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

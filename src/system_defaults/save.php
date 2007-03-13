@@ -45,7 +45,7 @@ $default_payment_type = $_POST['def_payment_type'];
 
 	#UPDATE the default number of line items
 
-	if ($_GET[sys_default] == "line_items") {
+	if ($_GET['sys_default'] == "line_items") {
 	
 		$sql = "REPLACE INTO
 				{$tb_prefix}defaults
@@ -75,7 +75,7 @@ $default_payment_type = $_POST['def_payment_type'];
 
 	#UPDATE the default invoice template field
 
-	else if ($_GET[sys_default] == "def_inv_template") {
+	else if ($_GET['sys_default'] == "def_inv_template") {
 
 		$sql = "REPLACE INTO
 				{$tb_prefix}defaults
@@ -103,7 +103,7 @@ $default_payment_type = $_POST['def_payment_type'];
 
 	#UPDATE the default biller field
 
-	else if ($_GET[sys_default] == "def_biller") {
+	else if ($_GET['sys_default'] == "def_biller") {
 
 		$sql = "REPLACE INTO
 				{$tb_prefix}defaults
@@ -131,7 +131,7 @@ $default_payment_type = $_POST['def_payment_type'];
 
 	#UPDATE the default customer field
 
-	else if ($_GET[sys_default] == "def_customer") {
+	else if ($_GET['sys_default'] == "def_customer") {
 
 		$sql = "REPLACE INTO
 				{$tb_prefix}defaults
@@ -160,7 +160,7 @@ $default_payment_type = $_POST['def_payment_type'];
 
 	#UPDATE the default tax field
 
-	else if ($_GET[sys_default] == "def_tax") {
+	else if ($_GET['sys_default'] == "def_tax") {
 
 		$sql = "REPLACE INTO
 				{$tb_prefix}defaults
@@ -189,7 +189,7 @@ $default_payment_type = $_POST['def_payment_type'];
 
 	#UPDATE the default invoice preference field
 
-	else if ($_GET[sys_default] == "def_invoice_preference") {
+	else if ($_GET['sys_default'] == "def_invoice_preference") {
 
 		$sql = "REPLACE INTO
 				{$tb_prefix}defaults
@@ -217,7 +217,7 @@ $default_payment_type = $_POST['def_payment_type'];
 
 	#UPDATE the default payment_type field
 
-	else if ($_GET[sys_default] == "def_payment_type") {
+	else if ($_GET['sys_default'] == "def_payment_type") {
 
 		$sql = "REPLACE INTO
 				{$tb_prefix}defaults
@@ -246,28 +246,20 @@ $default_payment_type = $_POST['def_payment_type'];
 }
 #end system default section
 
-?>
-
-<html>
-<head>
-<head>
-<?php
 
 include('./include/include_main.php');
 
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 $display_block_items = isset($display_block_items) ? $display_block_items : '&nbsp;';
+
 echo <<<EOD
 {$refresh_total}
-</head>
-
-<body>
 
 <br>
 
-{$display_block}
+$display_block
 <br><br>
-{$display_block_items}
+$display_block_items
 
 EOD;
 ?>

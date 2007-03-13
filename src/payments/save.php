@@ -64,25 +64,14 @@ if ( $op === 'pay_invoice' OR $op === 'pay_selected_invoice' ) {
 }
 
 
-?>
-
-<html>
-<head>
-<head>
-<?php
 
 include('./include/include_main.php');
 
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 $display_block_items = isset($display_block_items) ? $display_block_items : '&nbsp;';
 echo <<<EOD
-{$refresh_total}
-</head>
 
-<body>
-
-EOD;
-echo <<<EOD
+$refresh_total
 <br>
 <br>
 {$display_block}

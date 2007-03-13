@@ -7,7 +7,6 @@ if (!defined("BROWSE")) {
    exit();
 }
 
-include('./html/header.html');
 
 include('./include/validation.php');
 

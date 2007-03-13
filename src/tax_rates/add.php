@@ -7,11 +7,6 @@ if (!defined("BROWSE")) {
    exit();
 }
 
-?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?php 
 
 include('./include/validation.php');
 
@@ -23,16 +18,13 @@ jsFormValidationEnd();
 jsEnd();
 
 #do the product enabled/disblaed drop down
-$display_block_enabled = "<select name=\"tax_enabled\">
-<option value=\"1\" selected>$wording_for_enabledField</option>
-<option value=\"0\">$wording_for_disabledField</option>
-</select>";
+$display_block_enabled = <<<EOD
+<select name="tax_enabled">
+<option value="1" selected>$wording_for_enabledField</option>
+<option value="0">$wording_for_disabledField</option>
+</select>
+EOD;
 
-?>
-</head>
-
-<BODY>
-<?php
 
 echo <<<EOD
 
@@ -63,7 +55,8 @@ echo <<<EOD
 	<input type=hidden name="op" value="insert_tax_rate">
 
 
+
+</FORM>
 EOD;
 ?>
-</FORM>
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

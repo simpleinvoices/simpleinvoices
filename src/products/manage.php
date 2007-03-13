@@ -83,17 +83,7 @@ EOD;
 	$display_block .= "</table>";
 }
 
-?>
 
-
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-
-<script type="text/javascript" src="include/jquery.js"></script>
-
-<?php
 require "./src/include/js/lgplus/php/chklang.php";
 require "./src/include/js/lgplus/php/settings.php";
 ?>
@@ -123,9 +113,7 @@ Rico.onLoad( function() {
 });
 </script>
 
-</head>
 
-<body>
 
 <?php echo $display_block; ?>
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

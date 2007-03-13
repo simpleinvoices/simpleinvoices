@@ -108,23 +108,17 @@ $display_block =  "
 ";
 
 
+include('./config/config.php');
 
-
-
-?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-<?php include('./config/config.php'); ?>
-</head>
-<body>
-
+echo <<<EOD
 <b>System defaults</b>
     <hr></hr>
 
-<?php echo $display_block; ?>
+$display_block
 <!--
 <a href="manage_system_defaults.php">Edit</a>
+
 -->
+EOD;
+?>
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

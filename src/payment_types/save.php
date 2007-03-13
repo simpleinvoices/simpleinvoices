@@ -84,13 +84,7 @@ else if (  $op === 'edit_payment_type' ) {
 	}
 }
 
-
-
-?>
-
-<html>
-<head>
-<?php
+//TODO: Make redirection with php..
 
 include('./include/include_main.php');
 
