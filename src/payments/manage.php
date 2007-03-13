@@ -133,9 +133,6 @@ while ($Array = mysql_fetch_array($result)) {
         $display_block .="</table>";
 }
 
-
-include("./html/header.html");
-
 require "./src/include/js/lgplus/php/chklang.php";
 require "./src/include/js/lgplus/php/settings.php";
 ?>

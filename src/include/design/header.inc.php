@@ -12,9 +12,65 @@ echo <<<EOD
 	<link rel="stylesheet" type="text/css" href="./src/include/css/print.css" media="print"/>
 	<link rel="stylesheet" type="text/css" href="./src/include/css/blue.css" media="screen"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<script type="text/javascript" src="./src/include/js/ibox.js"></script>
+
+<!-- customer-details -->
+<script type="text/javascript" src="include/jquery.js"></script>
+
+<link rel="stylesheet" href="./include/css/tabs.css" type="text/css" media="print, projection, screen" />
+	<!-- Additional IE/Win specific style sheet (Conditional Comments) -->
+	<!--[if lte IE 7]>
+	<link rel="stylesheet" href="./include/css/tabs-ie.css" type="text/css" media="projection, screen" />
+	<![endif]-->
+	<style type="text/css" media="screen, projection">
+	    /* just to make this demo look a bit better */
+	    h4 {
+		margin: 0;
+		padding: 0;
+	    }
+	    ul {
+		list-style: none;
+		
+	    }
+	    body>ul>li {
+		display: inline;
+	    }
+	    body>ul>li:before {
+		content: ", ";
+	    }
+	    body>ul>li:first-child:before {
+		content: "";
+	    }
+	</style>
+	<!-- Additional IE/Win specific style sheet (Conditional Comments) -->
+	<!--[if lte IE 7]>
+	<style type="text/css" media="screen, projection">
+	    body {
+		font-size: 100%; /* resizable fonts */
+	    }
+	</style>
+	<![endif]-->
+
+	<script src="./include/jquery.js" type="text/javascript"></script>
+	<!-- script src="jquery.history.js" type="text/javascript"></script -->
+	<script src="./include/jquery.tabs.js" type="text/javascript"></script>
+	<script type="text/javascript">//<![CDATA[
+	    $(document).ready(function() {
+		$('#container-1').tabs();
+		$('#trigger-tab').after('<p><a href="#" onclick="$(\'#container-1\').triggerTab(3); return false;">Activate third tab</a></p>');
+		$('#custom-tab-by-hash').title('New window').click(function() {
+		    var win = window.open(this.href, '', 'directories,location,menubar,resizable,scrollbars,status,toolbar');
+		    win.focus();
+		});
+	    });
+	//]]></script>
+
+<script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
+<script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
+<!-- customer-details -->
+
+
 	<script type="text/javascript" src="include/jquery.js"></script>
-	<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
+
 <link rel="stylesheet" type="text/css" href="include/jquery.autocomplete.css" title="default" media="screen" />
 <link rel="stylesheet" type="text/css" href="include/jquery.datePicker.css" title="default" media="screen" />
 
@@ -28,13 +84,18 @@ echo <<<EOD
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 
-	<script type="text/javascript" src="./src/include/js/ibox.js"></script>
-	<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
+
 <script language="javascript" type="text/javascript" src="include/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
-<script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
+
 <script type="text/javascript" src="./src/include/js/ibox.js"></script>
 <link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
+
+<script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
+<script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
+<script type="text/javascript" src="./include/jquery.js"></script>
+<!--[if gte IE 5.5]>
+<script language="JavaScript" src="dhtml.js" type="text/JavaScript"></script>
+<![endif]-->
 
 <!--[if gte IE 5.5]>
 <link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>

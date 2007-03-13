@@ -108,12 +108,6 @@ Rico.onLoad( function() {
 });
 </script>
 
-<script type="text/javascript" src="./src/include/js/ibox.js"></script>
-<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"
-	media="screen" />
-
-</head>
-<body>
 
 <?php 
 	echo $display_block;

@@ -55,27 +55,14 @@ mysql_select_db("$db_name",$conn);
 
 
 
-
-?>
-
-<html>
-<head>
-<head>
-<?php
-
 include('./include/include_main.php');
 
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 $display_block_items = isset($display_block_items) ? $display_block_items : '&nbsp;';
 echo <<<EOD
 {$refresh_total}
-</head>
 
-<body>
 
-EOD;
-
-echo <<<EOD
 <br>
 <br>
 {$display_block}

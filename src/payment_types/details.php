@@ -70,11 +70,13 @@ $footer = "
 else if ($_GET['action'] === 'edit') {
 
 #do the product enabled/disblaed drop down
-$display_block_enabled = "<select name=\"pt_enabled\">
-<option value=\"$pt_enabledField\" selected style=\"font-weight: bold\">$wording_for_enabled</option>
-<option value=\"1\">$wording_for_enabledField</option>
-<option value=\"0\">$wording_for_disabledField</option>
-</select>";
+$display_block_enabled = <<<EOD
+<select name="pt_enabled">
+<option value="$pt_enabledField" selected style="font-weight: bold">$wording_for_enabled</option>
+<option value="1">$wording_for_enabledField</option>
+<option value="0">$wording_for_disabledField</option>
+</select>
+EOD;
 
 $display_block = <<<EOD
 

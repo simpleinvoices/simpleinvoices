@@ -1387,12 +1387,6 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 
 }
 
-?>
-
-<html>
-<head>
-<head>
-<?php
 
 include('./include/include_main.php');
 
@@ -1407,9 +1401,9 @@ echo <<<EOD
 
 <br>
 <br>
-{$display_block}
+$display_block
 <br><br>
-{$display_block_items}
+$display_block_items
 
 EOD;
 ?>

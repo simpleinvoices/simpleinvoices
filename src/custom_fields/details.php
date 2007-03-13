@@ -105,19 +105,7 @@ $footer = <<<EOD
 EOD;
 }
 
-?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<script language="javascript" type="text/javascript"
-	src="include/tiny_mce/tiny_mce_src.js"></script>
-<script language="javascript" type="text/javascript"
-	src="include/tiny-mce.conf.js"></script>
-</head>
-<body>
-
-<?php
 echo <<<EOD
 
 <FORM name="frmpost" ACTION="index.php?module=custom_fields&view=save&submit={$_GET['submit']}"

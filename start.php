@@ -97,7 +97,7 @@ $sql4 = "
         SELECT
                 count(sql_patch_ref) as count
         FROM 
-                {$tb_prefix}sql_patchmanager;
+                {$tb_prefix}sql_patchmanager
         ";
 
         $result4 = mysql_query($sql4, $conn) or die(mysql_error());

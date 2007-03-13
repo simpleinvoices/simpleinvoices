@@ -7,9 +7,6 @@ if (!defined("BROWSE")) {
    exit();
 }
 
-include("./html/header.html");
-
-
 /* validataion code */
 include("./include/validation.php");
 
@@ -39,8 +36,10 @@ sort($files);
 
 
 
-$display_block_logo_list = "<select name=\"b_co_logo\">";
-$display_block_logo_list .= "<option selected value=\"_default_blank_logo.png\" style=\"font-weight: bold\">_default_blank_logo.png</option>";
+$display_block_logo_list = <<<EOD
+<select name="b_co_logo">
+<option selected value="_default_blank_logo.png" style="font-weight: bold">_default_blank_logo.png</option>
+EOD;
 
 foreach ($files as $var)
 {
@@ -51,29 +50,18 @@ $display_block_logo_list .= "</select>";
 /*end logo stuff */
 
 #do the product enabled/disblaed drop down
-$display_block_enabled = "<select name=\"b_enabled\">
-<option value=\"1\" selected>$wording_for_enabledField</option>
-<option value=\"0\">$wording_for_disabledField</option>
-</select>";
+$display_block_enabled = <<<EOD
+<select name="b_enabled">
+<option value="1" selected>$wording_for_enabledField</option>
+<option value="0">$wording_for_disabledField</option>
+</select>
+EOD;
 
 #get custom field labels
 $biller_custom_field_label1 = get_custom_field_label("biller_cf1");
 $biller_custom_field_label2 = get_custom_field_label("biller_cf2");
 $biller_custom_field_label3 = get_custom_field_label("biller_cf3");
 $biller_custom_field_label4 = get_custom_field_label("biller_cf4");
-
-?>
-<script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
-<script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
-<script type="text/javascript" src="./include/jquery.js"></script>
-<!--[if gte IE 5.5]>
-<script language="JavaScript" src="dhtml.js" type="text/JavaScript"></script>
-<![endif]-->
-</head>
-
-<BODY>
-
-<?php
 
 
 echo <<<EOD
@@ -150,8 +138,9 @@ echo <<<EOD
 <hr></hr>
 	<input type="submit" name="submit" value="{$LANG_insert_biller}" />
 	<input type="hidden" name="op" value="insert_biller" />
-EOD;
-?>
+
 
 </FORM>
+EOD;
+?>
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

@@ -153,8 +153,7 @@ Rico.onLoad( function() {
 });
 </script>
 
-</head>
-<body>
+
 
 <?php 
 

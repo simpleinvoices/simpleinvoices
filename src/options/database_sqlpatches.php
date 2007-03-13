@@ -154,7 +154,7 @@ $check_patches_sql = "
         SELECT
                 count(sql_patch_ref) as count
         FROM 
-                {$tb_prefix}sql_patchmanager;
+                {$tb_prefix}sql_patchmanager
         ";
 
         $patches_result = mysql_query($check_patches_sql, $conn) or die(mysql_error());

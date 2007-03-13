@@ -7,12 +7,6 @@ if (!defined("BROWSE")) {
    exit();
 }
 
-?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-<?php
 
 /* validataion code */
 include("./include/validation.php");
@@ -37,16 +31,6 @@ $customer_custom_field_label2 = get_custom_field_label("customer_cf2");
 $customer_custom_field_label3 = get_custom_field_label("customer_cf3");
 $customer_custom_field_label4 = get_custom_field_label("customer_cf4");
 
-?>
-
-<script language="javascript" type="text/javascript" src="include/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
-<script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
-
-<script type="text/javascript" src="./src/include/js/ibox.js"></script>
-<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
-
-<?php
 
 echo <<<EOD
 

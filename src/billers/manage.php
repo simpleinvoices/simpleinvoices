@@ -127,8 +127,6 @@ Rico.onLoad( function() {
 });
 </script>
 
-</head>
-<body>
 
 <?php 
 	echo $display_block; 
