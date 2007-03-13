@@ -134,18 +134,8 @@ while ($Array = mysql_fetch_array($result)) {
 }
 
 
-?>
-<html>
-<head>
+include("./html/header.html");
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-    <script type="text/javascript" src="./include/jquery.js"></script>
-    <script type="text/javascript" src="./src/include/js/ibox.js"></script>
-    <link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
-
-
-<?php
 require "./src/include/js/lgplus/php/chklang.php";
 require "./src/include/js/lgplus/php/settings.php";
 ?>
@@ -155,14 +145,14 @@ require "./src/include/js/lgplus/php/settings.php";
 Rico.loadModule('LiveGrid');
 Rico.loadModule('LiveGridMenu');
 
-<?
+<?php
 setStyle();
 setLang();
 ?>
 
 Rico.onLoad( function() {
   var opts = {  
-    <? GridSettingsScript(); ?>,
+    <?php GridSettingsScript(); ?>,
     columnSpecs   : [ 
 	,
 	{ type:'number', decPlaces:0, ClassName:'alignleft' },
@@ -172,7 +162,7 @@ Rico.onLoad( function() {
 	{ type:'number', decPlaces:2, ClassName:'alignleft' }
  ]
   };
-  var menuopts = <? GridSettingsMenu(); ?>;
+  var menuopts = <?php GridSettingsMenu(); ?>;
   new Rico.LiveGrid ('rico_payment', new Rico.GridMenu(menuopts), new Rico.Buffer.Base($('rico_payment').tBodies[0]), opts);
 });
 </script>

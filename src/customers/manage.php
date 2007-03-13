@@ -120,16 +120,9 @@ EOD;
 	}
 	$display_block .= "</table>";
 }
-?>
 
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+include("./html/header.html");
 
-<script type="text/javascript" src="include/jquery.js"></script>
-
-
-<?php
 require "./src/include/js/lgplus/php/chklang.php";
 require "./src/include/js/lgplus/php/settings.php";
 ?>
@@ -139,14 +132,14 @@ require "./src/include/js/lgplus/php/settings.php";
 Rico.loadModule('LiveGrid');
 Rico.loadModule('LiveGridMenu');
 
-<?
+<?php
 setStyle();
 setLang();
 ?>
 
 Rico.onLoad( function() {
   var opts = {  
-    <? GridSettingsScript(); ?>,
+    <?php GridSettingsScript(); ?>,
     columnSpecs   : [ 
 	,
 	{ type:'number', decPlaces:0, ClassName:'alignleft' },
@@ -155,7 +148,7 @@ Rico.onLoad( function() {
 	{ type:'number', decPlaces:2, ClassName:'alignleft' }
  ]
   };
-  var menuopts = <? GridSettingsMenu(); ?>;
+  var menuopts = <?php GridSettingsMenu(); ?>;
   new Rico.LiveGrid ('rico_customer', new Rico.GridMenu(menuopts), new Rico.Buffer.Base($('rico_customer').tBodies[0]), opts);
 });
 </script>

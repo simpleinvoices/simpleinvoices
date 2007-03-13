@@ -52,14 +52,14 @@ require "./src/include/js/lgplus/php/settings.php";
 Rico.loadModule('LiveGrid');
 Rico.loadModule('LiveGridMenu');
 
-<?
+<?php
 setStyle();
 setLang();
 ?>
 
 Rico.onLoad( function() {
   var opts = {  
-    <? GridSettingsScript(); ?>,
+    <?php GridSettingsScript(); ?>,
     columnSpecs   : [ 
 	,
 	{ type:'number', decPlaces:0, ClassName:'alignleft' },
@@ -70,7 +70,7 @@ Rico.onLoad( function() {
 
  ]
   };
-  var menuopts = <? GridSettingsMenu(); ?>;
+  var menuopts = <?php GridSettingsMenu(); ?>;
   new Rico.LiveGrid ('ex1', new Rico.GridMenu(menuopts), new Rico.Buffer.Base($('ex1').tBodies[0]), opts);
 });
 </script>
