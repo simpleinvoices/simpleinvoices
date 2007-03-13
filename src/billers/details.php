@@ -23,7 +23,7 @@ jsEnd();
 
 
 #get the invoice id
-$biller_id = $_GET[submit];
+$biller_id = $_GET['submit'];
 
 
 #Info from DB print
@@ -64,9 +64,8 @@ $dirname="images/logo";
 
 sort($files);
 
-$display_block_logo_list = "<select name=\"b_co_logo\">";
-
-$display_block_logo_list .= <<<EOD
+$display_block_logo_list = <<<EOD
+<select name="b_co_logo">
 	<option selected value="$biller[b_co_logo]" style="font-weight:bold;">$biller[b_co_logo]</option>
 EOD;
 
@@ -79,10 +78,10 @@ $display_block_logo_list .= "</select>";
 /*end logo stuff */
 
 #get custom field labels
-$biller_custom_field_label1 = get_custom_field_label(biller_cf1);
-$biller_custom_field_label2 = get_custom_field_label(biller_cf2);
-$biller_custom_field_label3 = get_custom_field_label(biller_cf3);
-$biller_custom_field_label4 = get_custom_field_label(biller_cf4);
+$biller_custom_field_label1 = get_custom_field_label("biller_cf1");
+$biller_custom_field_label2 = get_custom_field_label("biller_cf2");
+$biller_custom_field_label3 = get_custom_field_label("biller_cf3");
+$biller_custom_field_label4 = get_custom_field_label("biller_cf4");
 
 
 if ($_GET['action'] == "view") {

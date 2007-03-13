@@ -58,8 +58,7 @@ function get_custom_field_label($field)         {
 **/
 
 
-function get_custom_field_name($field)
-        {
+function get_custom_field_name($field) {
 
         include('./config/config.php');
         ob_start();
@@ -391,29 +390,29 @@ function show_custom_field($custom_field,$custom_field_value,$permission,$css_cl
 		$custom_label_value = get_custom_field_label($custom_field);
 
 		if ($permission == "read") {
-			$display_block ="
-			<tr class=\"$css_class_tr\" >
-				<td class=\"$css_class1\">
+			$display_block = <<<EOD
+			<tr class="$css_class_tr" >
+				<td class="$css_class1">
 					$custom_label_value$seperator
 				</td>
-				<td class=\"$css_class2\" colspan=\"$td_col_span\" >
+				<td class="$css_class2" colspan="$td_col_span" >
 					$custom_field_value
 				</td>
 			</tr>
-			";
+EOD;
 		}
 
 		else if ($permission == "write") {
 
-		$display_block ="
+		$display_block = <<<EOD
 			<tr>
-				<td class=\"$css_class1\">$custom_label_value <a href=\"./documentation/info_pages/custom_fields.html\" rel=\"ibox&height=400\"><img src=\"./images/common/help-small.png\"></img></a>
+				<td class="$css_class1">$custom_label_value <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a>
 				</td>
 				<td>
-					<input type=text name=\"i_custom_field$custom_field_number\" value=\"$custom_field_value\"size=25></input>
+					<input type=text name="i_custom_field$custom_field_number" value="$custom_field_value"size=25></input>
 				</td>
 			</tr>
-			";
+EOD;
 		}
 	}
 	return $display_block;
