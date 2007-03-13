@@ -52,7 +52,7 @@ if (mysql_num_rows($result) == 0) {
 <!--
 <th class="index_table">{$LANG_phone}</th>
 -->
-<th class="index_table V">{$LANG_total}</th>
+<th class="index_table sortable">{$LANG_total}</th>
 <!--
 <th class="index_table">{$LANG_paid}</th>
 -->
