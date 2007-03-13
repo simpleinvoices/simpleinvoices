@@ -56,11 +56,7 @@ $display_block_header
 <link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
 <![endif]-->
 
-<<<<<<< .mine
 <table  align="center" class="ricoLiveGrid" id="rico_payment" >
-=======
-<table  align=\"center\" class=\"ricoLiveGrid manage\" id=\"rico_payment\" >
->>>>>>> .r377
 <colgroup>
 <col style='width:10%;' />
 <col style='width:10%;' />
@@ -74,7 +70,6 @@ $display_block_header
 </colgroup>
 <thead>
 
-<<<<<<< .mine
 <tr class="sortHeader">
 <th class="noFilter">$map_table_action</th>
 <th class="index_table">$map_table_payment_id</th>
@@ -85,18 +80,6 @@ $display_block_header
 <th class="index_table">$map_table_notes</th>
 <th class="selectFilter index_table">$map_table_payment_type</th>
 <th class="noFilter index_table">$map_table_date</th>
-=======
-<tr class=\"sortHeader\">
-<th class=\"noFilter sortable\">$map_table_action</th>
-<th class=\"index_table sortable\">$map_table_payment_id</th>
-<th class=\"index_table sortable\">$map_table_payment_invoice_id</th>
-<th class=\"selectFilter index_table sortable\">$map_table_customer</th>
-<th class=\"selectFilter index_table sortable\">$map_table_biller</th>
-<th class=\"index_table sortable\">$map_table_amount</th>
-<th class=\"index_table sortable\">$map_table_notes</th>
-<th class=\"selectFilter index_table sortable\">$map_table_payment_type</th>
-<th class=\"noFilter index_table sortable\">$map_table_date</th>
->>>>>>> .r377
 </tr>
 </thead>
 EOD;
