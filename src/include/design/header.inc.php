@@ -27,6 +27,7 @@ echo <<<EOD
 <script type="text/javascript" src="include/jquery.datePicker.conf.js"></script>
 <script type='text/javascript' src='include/jquery.autocomplete.js'></script>
 <script type='text/javascript' src='include/jquery.autocomplete.conf.js'></script>
+<script src="./include/jquery.tabs.js" type="text/javascript"></script>
 
 <script type="text/javascript" src="./src/include/js/ibox.js"></script>
 
@@ -74,9 +75,6 @@ echo <<<EOD
 	</style>
 	<![endif]-->
 
-	<script src="./include/jquery.js" type="text/javascript"></script>
-	<!-- script src="jquery.history.js" type="text/javascript"></script -->
-	<script src="./include/jquery.tabs.js" type="text/javascript"></script>
 	<script type="text/javascript">//<![CDATA[
 	    $(document).ready(function() {
 		$('#container-1').tabs();
@@ -87,9 +85,9 @@ echo <<<EOD
 		});
 	    });
 	//]]></script>
-
-
 <!-- customer-details -->
+
+
 
 	<div id="Header">
 		<div id="Tabs">
