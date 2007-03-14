@@ -166,7 +166,7 @@ while ($newArray = mysql_fetch_array($result)) {
 	</a> 
 	<!-- Print View -->
 	<a class="index_table" title="{$LANG_print_preview_tooltip} {$invoice_preference_wordingField} {$inv_idField}"
-	href="index.php?module=invoices&view=templates/{$def_inv_templateField}&submit={$inv_idField}&action=view&location=print&invoice_style={$inv_ty_descriptionField}">
+	href="index.php?module=invoices&view=templates/template&submit={$inv_idField}&action=view&location=print&invoice_style={$inv_ty_descriptionField}">
 	<img src="images/common/printer.gif" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>
  
 	<!-- EXPORT TO PDF -->
