@@ -67,28 +67,16 @@ if ($_GET[submit] == "line_items") {
 else if ($_GET[submit] == "def_inv_template") {
 
 
-	/*drop down list code for invoice template */
+	/*drop down list code for invoice template - only show the folder names in src/invoices/templates*/
 
-	$rep=opendir('src/invoices/templates/');
-	while (false != ($file = readdir($rep))){
-	  if (is_dir($file)){
-		$files[] = $file;
-	  }
-	}
-
-
-/*	$dirname="src/invoices/templates/";
-	   $ext = array("php");
-	   $files = array();
-	   if($handle = opendir($dirname)) {
-	       while(false !== ($file = readdir($handle)))
-	           for($i=0;$i<sizeof($ext);$i++)
-	               if(stristr($file, ".".$ext[$i])) //NOT case sensitive: OK with JpeG, JPG, ecc.
-			 //strip .php from file name
-	                $files[] = substr($file, 0, -4);
-	       closedir($handle);
-	   }
-*/
+	$handle=opendir("./src/invoices/templates/");
+		while ($file = readdir($handle)) {
+			if ($file != ".." && $file != "." && $file !=".svn" && $file !="template.php" ) {
+				$files[] = $file;
+			}
+		}
+	closedir($handle);	
+	
 	sort($files);
 
 	$display_block_templates_list = "<select name=\"def_inv_template\">";
