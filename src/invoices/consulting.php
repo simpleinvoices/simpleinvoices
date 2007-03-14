@@ -21,8 +21,6 @@ jsFormValidationEnd();
 jsEnd();
 
 
-$conn = mysql_connect("$db_host","$db_user","$db_password");
-mysql_select_db("$db_name",$conn);
 
 #biller query
 $sql = "SELECT * FROM {$tb_prefix}biller where b_enabled != 0 ORDER BY b_name";

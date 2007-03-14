@@ -2,10 +2,7 @@
 include_once('./include/include_main.php');
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
-if (!defined("BROWSE")) {
-   echo "You Cannot Access This Script Directly, Have a Nice Day.";
-   exit();
-}
+checkLogin();
 
 #include('./include/functions.php');
 /* validataion code */

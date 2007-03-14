@@ -5,9 +5,7 @@ include_once('./include/include_main.php');
 checkLogin();
 
 
-#select customers
-$conn = mysql_connect("$db_host","$db_user","$db_password");
-mysql_select_db("$db_name",$conn);
+
 
 
 $sql = "select * from {$tb_prefix}customers ORDER BY c_name";

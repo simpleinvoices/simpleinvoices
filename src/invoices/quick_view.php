@@ -7,9 +7,7 @@ checkLogin();
 #get the invoice id
 $master_invoice_id = $_GET['submit'];
 
-#Info from DB print
-$conn = mysql_connect( $db_host, $db_user, $db_password );
-mysql_select_db( $db_name, $conn );
+
 
 #master invoice id select
 $print_master_invoice_id = "SELECT * FROM {$tb_prefix}invoices WHERE inv_id = $master_invoice_id";

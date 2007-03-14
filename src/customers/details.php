@@ -23,9 +23,7 @@ jsEnd();
 $customer_id = $_GET['submit'];
 
 
-#Info from DB print
-$conn = mysql_connect( $db_host, $db_user, $db_password );
-mysql_select_db( $db_name, $conn );
+
 
 
 $customer = getCustomer($customer_id);
@@ -177,11 +175,13 @@ EOD;
 
 else if ($_GET['action'] === 'edit') {
 #do the product enabled/disblaed drop down
-$display_block_enabled = "<select name=\"c_enabled\">
-<option value=\"$c_enabledField\" selected style=\"font-weight: bold\">$wording_for_enabled</option>
-<option value=\"1\">$wording_for_enabledField</option>
-<option value=\"0\">$wording_for_disabledField</option>
-</select>";
+$display_block_enabled = <<<EOD
+<select name="c_enabled">
+<option value="$c_enabledField" selected style="font-weight: bold">$wording_for_enabled</option>
+<option value="1">$wording_for_enabledField</option>
+<option value="0">$wording_for_disabledField</option>
+</select>
+EOD;
 
 	$display_block = <<<EOD
 	<div id="top"><b>{$LANG_customer_edit}</b></div>

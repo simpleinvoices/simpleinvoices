@@ -6,8 +6,7 @@ checkLogin();
 
 include('./config/config.php');
 
-$conn = mysql_connect( $db_host, $db_user, $db_password);
-mysql_select_db( $db_name, $conn);
+
 
 # Deal with op and add some basic sanity checking
 

@@ -13,8 +13,7 @@ echo <<<EOD
 <title>{$title} :: {$LANG_manage_invoices}</title>
 EOD;
 #insert customer
-$conn = mysql_connect("$db_host","$db_user","$db_password");
-mysql_select_db("$db_name",$conn);
+
 
 
 $sql = "select * from {$tb_prefix}invoices ORDER BY inv_id desc";

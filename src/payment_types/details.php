@@ -2,10 +2,7 @@
 include("./include/include_main.php");
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
-if (!defined("BROWSE")) {
-   echo "You Cannot Access This Script Directly, Have a Nice Day.";
-   exit();
-}
+checkLogin();
 
 include("./include/validation.php");
 
@@ -18,9 +15,7 @@ jsEnd();
 #get the invoice id
 $payment_type_id = $_GET['submit'];
 
-#Info from DB print
-$conn = mysql_connect("$db_host","$db_user","$db_password");
-mysql_select_db("$db_name",$conn);
+
 
 #customer query
 $print_payment_type = "SELECT * FROM {$tb_prefix}payment_types WHERE pt_id = $payment_type_id";

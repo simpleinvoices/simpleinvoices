@@ -2,17 +2,13 @@
 include_once('./include/include_main.php');
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
-if (!defined("BROWSE")) {
-   echo "You Cannot Access This Script Directly, Have a Nice Day.";
-   exit();
-}
+checkLogin();
 
 
 /* validataion code */
 include("./include/validation.php");
 
-$conn = mysql_connect($db_host, $db_user, $db_password);
-mysql_select_db("$db_name",$conn);
+
 
 #get max invoice id for validataion - start
 $sql_max = "SELECT max(inv_id) as max_inv_id FROM {$tb_prefix}invoices";
