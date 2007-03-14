@@ -84,6 +84,9 @@ for($i=1;$i<=4;$i++) {
 
 /*Set the template to the default*/
 $template = $defaults['def_inv_template'];
+if (isset($_GET['export'])) {
+	$template = "simple";
+}
 
 #logo field support - if not logo show nothing else show logo
 
@@ -137,7 +140,7 @@ if (isset($_GET['export'])) {
 	$file_extension = $_GET['export'];
 	header("Content-type: application/octet-stream");
 	/*header("Content-type: application/x-msdownload");*/
-	header("Content-Disposition: attachment; filename=$pref[pref_inv_heading]$invoice	[inv_id].$file_extension");
+	header("Content-Disposition: attachment; filename=$pref[pref_inv_heading]$invoice[inv_id].$file_extension");
 	header("Pragma: no-cache");
 	header("Expires: 0");
 }

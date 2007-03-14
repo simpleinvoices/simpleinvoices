@@ -681,9 +681,9 @@ $display_block_bottom =  "
 		 <!-- EXPORT TO PDF -->
 		<a href='<?php echo $url_for_pdf ;?>'><?php echo $LANG_export_pdf;?></a>
 		::
-		<a href="index.php?module=invoices&view=templates/simple&submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>&export=<?php echo $spreadsheet;?>"><?php echo $LANG_export_as; echo " ."; echo $spreadsheet;?></a>
+		<a href="index.php?module=invoices&view=templates/template&submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>&export=<?php echo $spreadsheet;?>"><?php echo $LANG_export_as; echo " ."; echo $spreadsheet;?></a>
 		::
-		<a href="index.php?module=invoices&view=templates/simple&submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>&export=<?php echo $word_processor;?>"><?php echo $LANG_export_as; echo " ."; echo $word_processor;?> </a>
+		<a href="index.php?module=invoices&view=templates/template&submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>&export=<?php echo $word_processor;?>"><?php echo $LANG_export_as; echo " ."; echo $word_processor;?> </a>
 		:: 
 		<?php echo $LANG_email; echo " :: "; echo $LANG_email_quick; ?>
 <!--Actions heading - start-->
