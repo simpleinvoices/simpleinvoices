@@ -218,7 +218,7 @@ $display_block_top =  "
 
 	<table align=center>
 	<tr>
-		<td colspan=6  align=center><b>$pref_inv_headingField</b></td>
+		<td colspan=6 align=center class='align_center'><b>$pref_inv_headingField</b></td>
 	</tr>
         <tr>
                 <td colspan=6><br></td>
@@ -227,7 +227,7 @@ $display_block_top =  "
 	<!-- Invoice Summary section -->
 
 	<tr class='details_screen'>
-		<td><b>$pref_inv_wordingField $LANG_summary:</b></td><td colspan=5 align=right><a href='#' class=\"show-summary\" onClick=\"$('.summary').show();$('.show-summary').hide();\">$LANG_show_details</a><a href='#' class=\"summary\" onClick=\"$('.summary').hide();$('.show-summary').show();\">$LANG_hide_details</a> </td>
+		<td><b>$pref_inv_wordingField $LANG_summary:</b></td><td colspan=5 align=right class='align_right'><a href='#' class=\"show-summary\" onClick=\"$('.summary').show();$('.show-summary').hide();\">$LANG_show_details</a><a href='#' class=\"summary\" onClick=\"$('.summary').hide();$('.show-summary').show();\">$LANG_hide_details</a> </td>
 	</tr>
 	<tr class='details_screen summary'>
 		<td>$pref_inv_wordingField $LANG_number_short:</td><td colspan=5>$inv_idField</td>
@@ -244,7 +244,7 @@ $display_block_top =  "
 	</tr>
 	<!-- Biller section -->
 	<tr class='details_screen'>
-		<td><b>$LANG_biller:</b></td><td colspan=3>$b_nameField</b></td><td colspan=2 align=right><a href='#' class=\"show-biller\" onClick=\"$('.biller').show();$('.show-biller').hide();\">$LANG_show_details</a><a href='#' class=\"biller\" onClick=\"$('.biller').hide();$('.show-biller').show();\">$LANG_hide_details</a></td>
+		<td><b>$LANG_biller:</b></td><td colspan=3>$b_nameField</b></td><td colspan=2 class='align_right' align=right><a href='#' class=\"show-biller\" onClick=\"$('.biller').show();$('.show-biller').hide();\">$LANG_show_details</a><a href='#' class=\"biller\" onClick=\"$('.biller').hide();$('.show-biller').show();\">$LANG_hide_details</a></td>
 	</tr>
 	<tr class='details_screen biller'>
 		<td>$LANG_street:</td><td colspan=5>$b_street_addressField</td>
@@ -282,7 +282,7 @@ $display_block_top =  "
 	
 	<!-- Customer section -->
 	<tr class='details_screen'
-		<td><b>$LANG_customer:</b></td><td colspan=3>$c_nameField</td><td colspan=2 align=right><a href='#' class=\"show-customer\" onClick=\"$('.customer').show(); $('.show-customer').hide(); \">$LANG_show_details</a> <a href='#' class=\"customer\" onClick=\"$('.customer').hide(); $('.show-customer').show();\">$LANG_hide_details</a></td>
+		<td><b>$LANG_customer:</b></td><td colspan=3>$c_nameField</td><td colspan=2 align=right class='align_right'><a href='#' class=\"show-customer\" onClick=\"$('.customer').show(); $('.show-customer').hide(); \">$LANG_show_details</a> <a href='#' class=\"customer\" onClick=\"$('.customer').hide(); $('.show-customer').show();\">$LANG_hide_details</a></td>
 	</tr>	
 	<tr class='details_screen customer'>
 		<td>$LANG_attention_short:</td><td colspan=5 align=left>$c_attentionField,</td>

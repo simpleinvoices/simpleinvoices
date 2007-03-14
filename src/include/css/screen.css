@@ -103,7 +103,11 @@ tr.index_table:hover {
 
 
 
-td { font-family: "Lucida Grande", verdana, arial, helvetica, sans-serif; }
+td { 
+	font-family: "Lucida Grande", verdana, arial, helvetica, sans-serif; 
+	text-align:left;
+}
+
 
 td.columnleft {
 	border-left:5px solid #EEEEEE;
@@ -750,4 +754,13 @@ table.sortable tr.sortBottom td {
 /*Accordian css - end*/
 
 
-
+/*left rigth - define text align for tables here*/
+.align_right {
+	text-align: right;
+}
+.align_left {
+	text-align: left;
+}
+.align_center {
+	text-align: center;
+}
