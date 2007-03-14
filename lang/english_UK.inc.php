@@ -281,6 +281,7 @@ $LANG_total_paid = "Total Paid";//1
 $LANG_total_sales = "Total Sales";//1
 $LANG_total_sales_by_customer = "Total Sales by Customer";//1
 $LANG_total_style = "Total style";//1
+$LANG['total_style'] = "Total style";
 $LANG_total_taxes = "Total taxes";//1
 $LANG_total_uppercase = "TOTAL";//1
 $LANG_totals = "Totals";//1
@@ -295,6 +296,8 @@ $LANG_welcome = "Welcome to ";//1
 $LANG_what_are_custom_fields = "What are custom fields";//1
 $LANG_whats_this_page_about = "Whats this page about";//1
 $LANG_zip = "Zip code";//1
+
+
 
 
 #Index.php - front page

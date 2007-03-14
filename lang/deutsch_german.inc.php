@@ -249,6 +249,8 @@ $LANG_total_paid = "Bezahlt gesamt";//1
 $LANG_total_sales = "Verk&auml;ufe - Total";//1
 $LANG_total_sales_by_customer = "Verk&auml;ufe nach Kunden summiert";//1
 $LANG_total_style = "Freitext";//1
+$LANG['total_style'] = "Freitext";
+
 $LANG_total_taxes = "Steuern - Total";//1
 $LANG_total_uppercase = "TOTAL";//1
 $LANG_totals = "Endsummen";//1

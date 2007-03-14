@@ -25,7 +25,7 @@ $sql = "select * from {$tb_prefix}invoices ORDER BY inv_id desc";
 
 $page_header = <<<EOD
 <b>{$LANG_manage_invoices}</b> ::
-<a href="index.php?module=invoices&view=total">{$LANG_add_new_invoice} - {$LANG_total_style}</a> ::
+<a href="index.php?module=invoices&view=total">{$LANG_add_new_invoice} - $LANG[total_style]</a> ::
 <a href="index.php?module=invoices&view=itemised">{$LANG_add_new_invoice} - {$LANG_itemised_style}</a> ::
 <a href="index.php?module=invoices&view=consulting">{$LANG_add_new_invoice} - {$LANG_consulting_style}</a>
 <hr></hr>

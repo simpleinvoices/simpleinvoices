@@ -249,6 +249,7 @@ $LANG_total_paid = "Total Pagado";//1
 $LANG_total_sales = "Total de Ventas";//1
 $LANG_total_sales_by_customer = "Ventas Totales por Cliente";//1
 $LANG_total_style = "Estilo Totalizado";//1
+$LANG['total_style'] = "Estilo Totalizado";
 $LANG_total_taxes = "Impuestos Totales";//1
 $LANG_total_uppercase = "TOTAL";//1
 $LANG_totals = "Totales";//1

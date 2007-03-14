@@ -249,6 +249,8 @@ $LANG_total_paid = "Total Paid";//0
 $LANG_total_sales = "Total Sales";//0
 $LANG_total_sales_by_customer = "Total Sales by Customer";//0
 $LANG_total_style = "Total style";//0
+$LANG['total_style'] = "Total style";
+
 $LANG_total_taxes = "Total taxes";//0
 $LANG_total_uppercase = "TOTAL";//0
 $LANG_totals = "Totals";//0

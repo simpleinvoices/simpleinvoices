@@ -158,24 +158,24 @@ if( $.browser.safari() ) { // defaults to undefined
 $display_block_notice .="";
 
 
-$display_block ="
-                <div id=\"list1\">
-                <h2><img src=\"./images/common/reports.png\"></img>$LANG_stats</h2>
-                        <div id=\"item11\">
+$display_block = <<<EOD
+                <div id="list1">
+                <h2><img src="./images/common/reports.png"></img>$LANG_stats</h2>
+                        <div id="item11">
 
-                                <div class=\"title\">$LANG_stats_debtor</div>
+                                <div class="title">$LANG_stats_debtor</div>
 
-                                <div class=\"content\">
+                                <div class="content">
 			
 				$largest_debtor
                                 </div>
                         </div>
 
-                        <div id=\"item12\">
+                        <div id="item12">
 
-                                <div class=\"title\">$LANG_stats_customer</div>
+                                <div class="title">$LANG_stats_customer</div>
 
-                                <div class=\"content\">
+                                <div class="content">
 
 				$top_customer
 
@@ -183,11 +183,11 @@ $display_block ="
 
                         </div>
 
-                        <div id=\"item13\">
+                        <div id="item13">
 
-                                <div class=\"title\">$LANG_stats_biller</div>
+                                <div class="title">$LANG_stats_biller</div>
 
-                                <div class=\"content\">
+                                <div class="content">
 
 				$top_biller
 
@@ -197,38 +197,38 @@ $display_block ="
                 </div>
 
 
-               <div id=\"list2\">
+               <div id="list2">
 
-                <h2><img src=\"./images/common/menu.png\">$LANG_shortcut</h2>
+                <h2><img src="./images/common/menu.png">$LANG_shortcut</h2>
 
-                        <div id=\"item21\">
-                                <div class=\"mytitle\">$LANG_getting_started</div>
-                                <div class=\"mycontent\">
+                        <div id="item21">
+                                <div class="mytitle">$LANG_getting_started</div>
+                                <div class="mycontent">
                                       <table>
                                         <tr>
                                                 <td width=10%>
-                                        		<a href=\"index.php?module=documentation/inline_docs&view=inline_instructions#faqs-what\">
-								<img src=\"images/common/question.png\"></img>
+                                        		<a href="index.php?module=documentation/inline_docs&view=inline_instructions#faqs-what">
+								<img src="images/common/question.png"></img>
 								 $LANG_faqs_what
 							</a>
                                 		</td>		
 						<td width=10%>
-		                                        <a href=\"index.php?module=documentation/inline_docs&view=inline_instructions#faqs-need\">
-	                                                	<img src=\"images/common/question.png\"></img>
+		                                        <a href="index.php?module=documentation/inline_docs&view=inline_instructions#faqs-need">
+	                                                	<img src="images/common/question.png"></img>
 								$LANG_faqs_need
 							</a>
                                 		</td>		
 					</tr>
 					<tr>
 						<td width=10%>
-		                                        <a href=\"index.php?module=documentation/inline_docs&view=inline_instructions#faqs-how\">
-	                                                	<img src=\"images/common/question.png\"></img>
+		                                        <a href="index.php?module=documentation/inline_docs&view=inline_instructions#faqs-how">
+	                                                	<img src="images/common/question.png"></img>
 								$LANG_faqs_how
 							</a>
                                 		</td>		
 						<td width=10%>
-                		                        <a href=\"index.php?module=documentation/inline_docs&view=inline_instructions#faqs-types\">
-	                                                	<img src=\"images/common/question.png\"></img>
+                		                        <a href="index.php?module=documentation/inline_docs&view=inline_instructions#faqs-types">
+	                                                	<img src="images/common/question.png"></img>
 								$LANG_faqs_type
 							</a>
                                 		</td>		
@@ -237,34 +237,34 @@ $display_block ="
                                 </div>
                         </div>
 
-                        <div id=\"item22\">
-                                <div class=\"mytitle\">$LANG_create_invoice</div>
-                                <div class=\"mycontent\">
+                        <div id="item22">
+                                <div class="mytitle">$LANG_create_invoice</div>
+                                <div class="mycontent">
 					<table>
 					<tr>
 						<td width=10%>
-				                        <a href=\"index.php?module=invoices&view=itemised\">
-								<img src=\"images/common/itemised.png\"></img>
+				                        <a href="index.php?module=invoices&view=itemised">
+								<img src="images/common/itemised.png"></img>
 								$LANG_itemised_style
 							</a>
                                 		</td>		
 						<td width=10%>
-				        		<a href=\"index.php?module=invoices&view=total\">
-								<img src=\"images/common/total.png\"></img>
-								$LANG_total_style
+				        		<a href="index.php?module=invoices&view=total">
+								<img src="images/common/total.png"></img>
+								$LANG[total_style]
 							</a>
 						</td>
 						<td width=10%>
-		                                        <a href=\"index.php?module=invoices&view=consulting\">
-								<img src=\"images/common/consulting.png\"></img>
+		                                        <a href="index.php?module=invoices&view=consulting">
+								<img src="images/common/consulting.png"></img>
 								$LANG_consulting_style
 							</a>
                 				</td>
 					</tr>
 					<tr>
-						<td colspan=3 align=center class=\"align_center\">
-                		                        <a href=\"index.php?module=documentation/inline_docs&view=inline_instructions#faqs-types\">
-	                                                	<img src=\"images/common/question.png\"></img>
+						<td colspan=3 align=center class="align_center">
+                		                        <a href="index.php?module=documentation/inline_docs&view=inline_instructions#faqs-types">
+	                                                	<img src="images/common/question.png"></img>
 								$LANG_faqs_type
 							</a>
                                 		</td>		
@@ -272,14 +272,14 @@ $display_block ="
 					</table>
 		                </div>
                         </div>
-                        <div id=\"item23\">
-                                <div class=\"mytitle\">$LANG_manage_existing_invoice</div>
-                                <div class=\"mycontent\">
+                        <div id="item23">
+                                <div class="mytitle">$LANG_manage_existing_invoice</div>
+                                <div class="mycontent">
 					<table>
 					<tr>
-						<td width=10% align=center class=\"align_center\">
-                                        		<a href=\"index.php?module=invoices&view=manage\">
-								<img src=\"images/common/manage.png\"></img>
+						<td width=10% align=center class="align_center">
+                                        		<a href="index.php?module=invoices&view=manage">
+								<img src="images/common/manage.png"></img>
 								$LANG_manage_invoices
 							</a>
 						</td>
@@ -288,46 +288,46 @@ $display_block ="
                                 </div>
                         </div>
 
-                        <div id=\"item24\">
-                                <div class=\"mytitle\">$LANG_manage_data</div>
-	                        <div class=\"mycontent\">
+                        <div id="item24">
+                                <div class="mytitle">$LANG_manage_data</div>
+	                        <div class="mycontent">
 	                                <table>
                                         <tr>
                                                 <td width=10%>
-		                                        <a href=\"index.php?module=customers&view=add\">
-                                                        	<img src=\"images/common/add.png\"></img>
+		                                        <a href="index.php?module=customers&view=add">
+                                                        	<img src="images/common/add.png"></img>
 								$LANG_insert_customer
 							</a>
                                                 </td>
                                                 <td width=10%>
-		                                        <a href=\"index.php?module=billers&view=add\">
-                                                        	<img src=\"images/common/add.png\"></img>
+		                                        <a href="index.php?module=billers&view=add">
+                                                        	<img src="images/common/add.png"></img>
 								$LANG_insert_biller
 							</a>
 						</td>
                                                 <td width=10%>
-                                		        <a href=\"index.php?module=products&view=add\">
-                                                        	<img src=\"images/common/add.png\"></img>
+                                		        <a href="index.php?module=products&view=add">
+                                                        	<img src="images/common/add.png"></img>
 								$LANG_insert_product
 							</a>
 						</td>
 					</tr>
 					<tr>
                                                 <td width=10%>
-                		                        <a href=\"index.php?module=customers&view=manage\">
-                                                        	<img src=\"images/common/customers.png\"></img>
+                		                        <a href="index.php?module=customers&view=manage">
+                                                        	<img src="images/common/customers.png"></img>
 								$LANG_manage_customers
 							</a>
 						</td>
                                                 <td width=10%>
-                                        		<a href=\"index.php?module=billers&view=manage\">
-                                                        	<img src=\"images/common/biller.png\"></img>
+                                        		<a href="index.php?module=billers&view=manage">
+                                                        	<img src="images/common/biller.png"></img>
 								$LANG_manage_billers
 							</a>
 						</td>
                                                 <td width=10%>
-		                                        <a href=\"index.php?module=products&view=manage\">
-                                                        	<img src=\"images/common/products.png\"></img>
+		                                        <a href="index.php?module=products&view=manage">
+                                                        	<img src="images/common/products.png"></img>
 								$LANG_manage_products
 							</a>
 						</td>
@@ -335,46 +335,46 @@ $display_block ="
 					</table>
                                 </div>
                         </div>
-                        <div id=\"item25\">
-                                <div class=\"mytitle\">$LANG_options</div>
-                                <div class=\"mycontent\">
+                        <div id="item25">
+                                <div class="mytitle">$LANG_options</div>
+                                <div class="mycontent">
                                       <table>
                                         <tr>
                                                 <td width=10%>
-		                                        <a href=\"index.php?module=system_defaults&view=manage\">
-                                                        	<img src=\"images/common/defaults.png\"></img>
+		                                        <a href="index.php?module=system_defaults&view=manage">
+                                                        	<img src="images/common/defaults.png"></img>
 								$LANG_system_defaults
 							</a>
 						</td>
                                                 <td width=10%>
-                		                        <a href=\"index.php?module=tax_rates&view=manage\">
-                                                        	<img src=\"images/common/tax.png\"></img>
+                		                        <a href="index.php?module=tax_rates&view=manage">
+                                                        	<img src="images/common/tax.png"></img>
 								$LANG_tax_rates
 							</a>
 						</td>
                                                 <td width=10%>
-		                                        <a href=\"index.php?module=preferences&view=manage\">
-                                                        	<img src=\"images/common/preferences.png\"></img>
+		                                        <a href="index.php?module=preferences&view=manage">
+                                                        	<img src="images/common/preferences.png"></img>
 								$LANG_invoice_preferences
 							</a>
 						</td>
 						</tr>
 						<tr>
                                                 <td width=10%>
-                                		        <a href=\"index.php?module=payment_types&view=manage\">
-                                                        	<img src=\"images/common/payment.png\"></img>
+                                		        <a href="index.php?module=payment_types&view=manage">
+                                                        	<img src="images/common/payment.png"></img>
 								$LANG_payment_types
 							</a>
 						</td>
                                                 <td width=10%>
-                		                        <a href=\"database_sqlpatches.php\">
-                                                        	<img src=\"images/common/upgrade.png\"></img>
+                		                        <a href="database_sqlpatches.php">
+                                                        	<img src="images/common/upgrade.png"></img>
 								$LANG_database_upgrade_manager
 							</a>
 						</td>
                                                 <td width=10%>
-		                                        <a href=\"backup_database.php\">
-                                                        	<img src=\"images/common/backup.png\"></img>
+		                                        <a href="backup_database.php">
+                                                        	<img src="images/common/backup.png"></img>
 								$LANG_backup_database
 							</a>
 						</td>
@@ -382,28 +382,28 @@ $display_block ="
 					</table>
                                 </div>
                         </div>
-                        <div id=\"item26\">
-                                <div class=\"mytitle\">$LANG_help</div>
-                                <div class=\"mycontent\">
+                        <div id="item26">
+                                <div class="mytitle">$LANG_help</div>
+                                <div class="mycontent">
                                       <table>
                                         <tr>
                                                 <td width=10%>
-                                        		<a href=\"index.php?module=documentation/inline_docs&view=inline_instructions#installation\">
-                                                        	<img src=\"images/common/help.png\"></img>
+                                        		<a href="index.php?module=documentation/inline_docs&view=inline_instructions#installation">
+                                                        	<img src="images/common/help.png"></img>
 								$LANG_installation
 							</a>
 						</td>	
 						<td width=10%>
-                		                        <a href=\"index.php?module=documentation/inline_docs&view=inline_instructions#upgrading\">
-                                                        	<img src=\"images/common/help.png\"></img>
+                		                        <a href="index.php?module=documentation/inline_docs&view=inline_instructions#upgrading">
+                                                        	<img src="images/common/help.png"></img>
 								$LANG_upgrading_simple_invoices
 							</a>
 						</td>	
 					</tr>
 					<tr>
-						<td width=10% class=\"align_center\" colspan=\"2\">
-		                                        <a href=\"index.php?module=documentation/inline_docs&view=inline_instructions#prepare\">
-                                                        	<img src=\"images/common/help.png\"></img>
+						<td width=10% class="align_center" colspan="2">
+		                                        <a href="index.php?module=documentation/inline_docs&view=inline_instructions#prepare">
+                                                        	<img src="images/common/help.png"></img>
 								$LANG_prepare_simple_invoices
 							</a>
 						</td>	
@@ -412,7 +412,7 @@ $display_block ="
                                 </div>
                                 </div>
                         </div>
-";
+EOD;
 
 
 ?>

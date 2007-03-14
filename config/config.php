@@ -7,9 +7,9 @@ if (!defined("BROWSE")) {
 
 /*Enter your database information */
 $db_host = "localhost";
-$db_name = "simple_invoices";
+$db_name = "test";
 $db_user = "root";
-$db_password = "";
+$db_password = "test";
 $tb_prefix = "si_";
 
 /*mysql version. basically if your using a version less than mysql 5 some features will be disabled*/
@@ -19,7 +19,7 @@ $mysql = 5;
 /*Select language for Simple Invoices to use*/
 #$language = "castellano_spanish";
 #$language = "catala_catalan";
-#$language = "deutsch_german";
+//$language = "deutsch_german";
 $language = "english_UK";
 #$language = "galego_galician";
 #$language = "portugues_portuguese";

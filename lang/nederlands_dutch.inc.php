@@ -249,6 +249,8 @@ $LANG_total_paid = "Totaal Betaald";//1
 $LANG_total_sales = "Totaal Verkoopcijfer";//1
 $LANG_total_sales_by_customer = "Totaal Verkoopcijfer per Klant";//1
 $LANG_total_style = "Totaal stijl";//1
+$LANG['total_style'] = "Totaal stijl";
+
 $LANG_total_taxes = "Totaal BTW";//1
 $LANG_total_uppercase = "TOTAAL";//1
 $LANG_totals = "Totalen";//1

@@ -249,6 +249,8 @@ $LANG_total_paid = "Celkem zaplaceno";//1
 $LANG_total_sales = "Celkem prodej";//1
 $LANG_total_sales_by_customer = "Celkem prodej podle odběratele";//1
 $LANG_total_style = "Styl Celkem";//1
+$LANG['total_style'] = "Styl Celkem";
+
 $LANG_total_taxes = "Celkem daně";//1
 $LANG_total_uppercase = "CELKEM";//1
 $LANG_totals = "Celkem";//1

@@ -244,6 +244,8 @@ $LANG_total_paid = "Total Platit";//1
 $LANG_total_sales = "Total Vinzari";//1
 $LANG_total_sales_by_customer = "Total Vinzari pe Client";//1
 $LANG_total_style = "Stil Total";//1
+$LANG['total_style'] = "Stil Total";
+
 $LANG_total_taxes = "Total taxe";//1
 $LANG_total_uppercase = "TOTAL";//1
 $LANG_totals = "Totaluri";//1
