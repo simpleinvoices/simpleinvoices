@@ -7,7 +7,7 @@ echo <<<EOD
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<title>Simple Invoices</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	
+
 	<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
 	<link rel="stylesheet" type="text/css" href="include/jquery.autocomplete.css" title="default" media="screen" />
 	<link rel="stylesheet" type="text/css" href="include/jquery.datePicker.css" title="default" media="screen" />
@@ -28,7 +28,6 @@ echo <<<EOD
 <script type='text/javascript' src='include/jquery.autocomplete.js'></script>
 <script type='text/javascript' src='include/jquery.autocomplete.conf.js'></script>
 <script src="./include/jquery.tabs.js" type="text/javascript"></script>
-
 <script type="text/javascript" src="./src/include/js/ibox.js"></script>
 
 <!--[if gte IE 5.5]>

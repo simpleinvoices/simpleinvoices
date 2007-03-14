@@ -96,9 +96,9 @@ if ($_GET['action'] === 'view') {
 		<td colspan="7" align="center"> </td>
 	</tr>	
 	<tr>
-		<td colspan="4" align="center"><i>{$LANG_customer_details}</i></td>
+		<td colspan="4" align="center" class="align_center"><i>{$LANG_customer_details}</i></td>
 		<td width="10%"></td>
-		<td colspan="2" align="center"><i>{$LANG_summary_of_accounts}</i></td>
+		<td colspan="2" align="center" class="align_center"><i>{$LANG_summary_of_accounts}</i></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_customer} {$LANG_id}</td>

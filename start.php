@@ -262,7 +262,7 @@ $display_block ="
                 				</td>
 					</tr>
 					<tr>
-						<td colspan=3 align=center>
+						<td colspan=3 align=center class=\"align_center\">
                 		                        <a href=\"index.php?module=documentation/inline_docs&view=inline_instructions#faqs-types\">
 	                                                	<img src=\"images/common/question.png\"></img>
 								$LANG_faqs_type
@@ -277,7 +277,7 @@ $display_block ="
                                 <div class=\"mycontent\">
 					<table>
 					<tr>
-						<td width=10% align=center>
+						<td width=10% align=center class=\"align_center\">
                                         		<a href=\"index.php?module=invoices&view=manage\">
 								<img src=\"images/common/manage.png\"></img>
 								$LANG_manage_invoices
@@ -401,7 +401,7 @@ $display_block ="
 						</td>	
 					</tr>
 					<tr>
-						<td width=10%>
+						<td width=10% class=\"align_center\" colspan=\"2\">
 		                                        <a href=\"index.php?module=documentation/inline_docs&view=inline_instructions#prepare\">
                                                         	<img src=\"images/common/help.png\"></img>
 								$LANG_prepare_simple_invoices

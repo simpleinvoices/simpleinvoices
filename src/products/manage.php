@@ -37,9 +37,8 @@ if (mysql_num_rows($result) == 0) {
 <colgroup>
 <col style='width:10%;' />
 <col style='width:10%;' />
-<col style='width:40%;' />
+<col style='width:50%;' />
 <col style='width:20%;' />
-<col style='width:10%;' />
 <col style='width:10%;' />
 </colgroup>
 <thead>
