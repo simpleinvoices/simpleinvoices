@@ -7,7 +7,7 @@ include_once('./include/include_main.php');
 $conn = mysql_connect( $db_host, $db_user, $db_password );
 mysql_select_db( $db_name, $conn );
 
-$sql = "select * from {$tb_prefix}invoices";
+$sql = "SELECT * FROM {$tb_prefix}invoices";
 
 
 $result = mysql_query($sql, $conn) or die(mysql_error());

@@ -1,6 +1,14 @@
 <?php
 
 include("./include/sql_queries.php");
+
+function checkLogin() {
+	if (!defined("BROWSE")) {
+		echo "You Cannot Access This Script Directly, Have a Nice Day.";
+		exit();
+	}
+}
+
 /*
 * Script: functions.php
 *	Contain all the functions used in Simple Invoices

@@ -2,10 +2,7 @@
 include_once('./include/include_main.php');
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
-if (!defined("BROWSE")) {
-   echo "You Cannot Access This Script Directly, Have a Nice Day.";
-   exit();
-}
+checkLogin();
 
 
 /* validataion code */
@@ -20,10 +17,12 @@ jsEnd();
 /* end validataion code */
 
 #do the product enabled/disblaed drop down
-$display_block_enabled = "<select name=\"c_enabled\">
-<option value=\"1\" selected>$wording_for_enabledField</option>
-<option value=\"0\">$wording_for_disabledField</option>
-</select>";
+$display_block_enabled = <<<EOD
+<select name="c_enabled">
+<option value="1" selected>$wording_for_enabledField</option>
+<option value="0">$wording_for_disabledField</option>
+</select>
+EOD;
 
 #get custom field labels
 $customer_custom_field_label1 = get_custom_field_label("customer_cf1");
