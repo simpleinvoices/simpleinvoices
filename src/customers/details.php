@@ -30,53 +30,25 @@ $customer_id = $_GET['submit'];
 $conn = mysql_connect( $db_host, $db_user, $db_password );
 mysql_select_db( $db_name, $conn );
 
-#customer query
-$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE c_id = $customer_id";
-$result_print_customer = mysql_query($print_customer, $conn) or die(mysql_error());
+
+$customer = getCustomer($customer_id);
 
 
-while ($Array = mysql_fetch_array($result_print_customer) ) {
-	$c_idField = $Array['c_id'];
-	$c_attentionField = $Array['c_attention'];
-	$c_nameField = $Array['c_name'];
-	$c_street_addressField = $Array['c_street_address'];
-	$c_street_address2Field = $Array['c_street_address2'];
-	$c_cityField = $Array['c_city'];
-	$c_stateField = $Array['c_state'];
-	$c_zip_codeField = $Array['c_zip_code'];
-	$c_countryField = $Array['c_country'];
-	$c_phoneField = $Array['c_phone'];
-	$c_mobile_phoneField = $Array['c_mobile_phone'];
-	$c_faxField = $Array['c_fax'];
-	$c_emailField = $Array['c_email'];
-	$c_notesField = $Array['c_notes'];
-	$c_custom_field1Field = $Array['c_custom_field1'];
-	$c_custom_field2Field = $Array['c_custom_field2'];
-	$c_custom_field3Field = $Array['c_custom_field3'];
-	$c_custom_field4Field = $Array['c_custom_field4'];
-	$c_enabledField = $Array['c_enabled'];
+$wording_for_enabled = $customer['c_enabled'] == 1 ?$wording_for_enabledField:$wording_for_disabledField;
 
-	if ($c_enabledField == 1) {
-	      $wording_for_enabled = $wording_for_enabledField;
-	} else {
-	      $wording_for_enabled = $wording_for_disabledField;
-	}
 
-#invoice total calc - start
-		$invoice_total_Field = calc_customer_total($c_idField);
-		$invoice_total_Field_formatted = number_format($invoice_total_Field,2);
+$invoice_total_Field = calc_customer_total($customer['c_id']);
+$invoice_total_Field_formatted = number_format($invoice_total_Field,2);
 #invoice total calc - end
 
 #amount paid calc - start
-			$invoice_paid_Field = calc_customer_paid($c_idField);;
-			$invoice_paid_Field_formatted = number_format($invoice_paid_Field,2);
+$invoice_paid_Field = calc_customer_paid($customer['c_id']);;
+$invoice_paid_Field_formatted = number_format($invoice_paid_Field,2);
 #amount paid calc - end
 
 #amount owing calc - start
-			$invoice_owing_Field = number_format($invoice_total_Field - $invoice_paid_Field,2);
-#amount owing calc - end
+$invoice_owing_Field = number_format($invoice_total_Field - $invoice_paid_Field,2);
 
-}
 
 #get custom field labels
 $customer_custom_field_label1 = get_custom_field_label("customer_cf1");
@@ -88,7 +60,7 @@ $customer_custom_field_label4 = get_custom_field_label("customer_cf4");
 if ($_GET['action'] === 'view') {
 
 	$display_block = <<<EOD
-	<b>{$LANG_customer} :: <a href="index.php?module=customers&view=details&submit={$c_idField}&action=edit">{$LANG_edit}</a></b>
+	<b>{$LANG_customer} :: <a href="index.php?module=customers&view=details&submit={$customer[c_id]}&action=edit">{$LANG_edit}</a></b>
 	<hr></hr>
 
 	<table align="center">
@@ -102,43 +74,43 @@ if ($_GET['action'] === 'view') {
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_customer} {$LANG_id}</td>
-		<td>{$c_idField}</td><td colspan="2"></td><td></td>
+		<td>{$customer[c_id]}</td><td colspan="2"></td><td></td>
 		<td class="details_screen">{$LANG_total_invoices}</td><td>{$invoice_total_Field_formatted}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_customer_name}</td><td colspan="2">{$c_nameField}</td>
+		<td class="details_screen">{$LANG_customer_name}</td><td colspan="2">{$customer[c_name]}</td>
 		<td colspan="2"></td><td class="details_screen">{$LANG_total_paid}</td>
 		<td>{$invoice_paid_Field_formatted}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_attention_short} <a href="documentation/info_pages/customer_contact.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
-		<td colspan="2">{$c_attentionField}</td><td colspan=2></td>
+		<td colspan="2">{$customer[c_attention]}</td><td colspan=2></td>
 		<td class="details_screen">{$LANG_total_owing}</td><td><u>{$invoice_owing_Field}</u></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_street}</td><td>{$c_street_addressField}</td>
+		<td class="details_screen">{$LANG_street}</td><td>{$customer[c_street_address]}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_street2} <a href="./documentation/info_pages/street2.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td>{$c_street_address2Field}</td>
+		<td class="details_screen">{$LANG_street2} <a href="./documentation/info_pages/street2.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td>{$customer[c_street_address2]}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_city}</td><td>{$c_cityField}</td>
+		<td class="details_screen">{$LANG_city}</td><td>{$customer[c_city]}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_zip}</td><td>{$c_zip_codeField}</td>
-		<td class="details_screen">{$LANG_phone}</td><td>{$c_phoneField}</td>
+		<td class="details_screen">{$LANG_zip}</td><td>{$customer[c_zip_code]}</td>
+		<td class="details_screen">{$LANG_phone}</td><td>{$customer[c_phone]}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_state}</td><td>{$c_stateField}</td>
-		<td class="details_screen">{$LANG_mobile_phone}</td><td>{$c_mobile_phoneField}</td>
+		<td class="details_screen">{$LANG_state}</td><td>{$customer[c_state]}</td>
+		<td class="details_screen">{$LANG_mobile_phone}</td><td>{$customer[c_mobile_phone]}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_country}</td><td>{$c_countryField}</td>
-		<td class="details_screen">{$LANG_fax}</td><td>{$c_faxField}</td>
+		<td class="details_screen">{$LANG_country}</td><td>{$customer[c_country]}</td>
+		<td class="details_screen">{$LANG_fax}</td><td>{$customer[c_fax]}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$wording_for_enabledField}</td><td>{$wording_for_enabled}</td>
-		<td class="details_screen">{$LANG_email}</td><td>{$c_emailField}</td>
+		<td class="details_screen">{$LANG_email}</td><td>{$customer[c_email]}</td>
 	</tr>	
 	</table>
 
@@ -160,16 +132,16 @@ $display_block .= <<<EOD
 			<p>
 			<table>
 			<tr>
-				<td class="details_screen">{$customer_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td>{$c_custom_field1Field}</td>
+				<td class="details_screen">{$customer_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td>{$customer[c_custom_field1]}</td>
 			</tr>
 			<tr>
-				<td class="details_screen">{$customer_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td>{$c_custom_field2Field}</td>
+				<td class="details_screen">{$customer_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td>{$customer[c_custom_field2]}</td>
 			</tr>
 			<tr>
-				<td class="details_screen">{$customer_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td>{$c_custom_field3Field}</td>
+				<td class="details_screen">{$customer_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td>{$customer[c_custom_field3]}</td>
 			</tr>
 			<tr>
-				<td class="details_screen">{$customer_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td>{$c_custom_field4Field}</td>
+				<td class="details_screen">{$customer_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td>{$customer[c_custom_field4]}</td>
 			</tr>		
 			</table>	
 			</p>
@@ -190,7 +162,7 @@ $display_block .= <<<EOD
 			<p>
 			
 			<div id="left">
-			{$c_notesField}
+			{$customer[c_notes]}
 			</div>
 			</p>
 		</div>
@@ -202,7 +174,7 @@ EOD;
 
 $footer = <<<EOD
 <hr></hr>
-	<a href="index.php?module=customers&view=details&submit={$c_idField}&action=edit">{$LANG_edit}</a>
+	<a href="index.php?module=customers&view=details&submit={$customer[c_id]}&action=edit">{$LANG_edit}</a>
 EOD;
 }
 
@@ -221,75 +193,75 @@ $display_block_enabled = "<select name=\"c_enabled\">
 	<table align="center">
 	<tr>
 		<td class="details_screen">{$LANG_customer} {$LANG_id}</td>
-		<td>{$c_idField}</td>
+		<td>{$customer[c_id]}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_customer_name}</td>
-		<td><input type="text" name="c_name" value="{$c_nameField}" size="50" /></td>
+		<td><input type="text" name="c_name" value="{$customer[c_name]}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_attention_short} <a href="documentation/info_pages/customer_contact.html" rel="ibox&height=400" ><img src="./images/common/help-small.png"></img></a></td>
-		<td><input type="text" name="c_attention" value="{$c_attentionField}" size="50" /></td>
+		<td><input type="text" name="c_attention" value="{$customer[c_attention]}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_street}</td>
-		<td><input type="text" name="c_street_address" value="{$c_street_addressField}" size="50" /></td>
+		<td><input type="text" name="c_street_address" value="{$customer[c_street_address]}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_street2} <a href="./documentation/info_pages/street2.html" rel="ibox&height=400" ><img src="./images/common/help-small.png"></img></a></td>
-		<td><input type="text" name="c_street_address2" value="{$c_street_address2Field}" size="50" /></td>
+		<td><input type="text" name="c_street_address2" value="{$customer[c_street_address2]}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_city}</td>
-		<td><input type="text" name="c_city" value="{$c_cityField}" size="50" /></td>
+		<td><input type="text" name="c_city" value="{$customer[c_city]}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_zip}</td>
-		<td><input type="text" name="c_zip_code" value="{$c_zip_codeField}" size="50" /></td>
+		<td><input type="text" name="c_zip_code" value="{$customer[c_zip_code]}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_state}</td>
-		<td><input type="text" name="c_state" value="{$c_stateField}" size="50" /></td>
+		<td><input type="text" name="c_state" value="{$customer[c_state]}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_country}</td>
-		<td><input type="text" name="c_country" value="{$c_countryField}" size="50" /></td>
+		<td><input type="text" name="c_country" value="{$customer[c_country]}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_phone}</td>
-		<td><input type="text" name="c_phone" value="{$c_phoneField}" size="50" /></td>
+		<td><input type="text" name="c_phone" value="{$customer[c_phone]}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_mobile_phone}</td>
-		<td><input type="text" name="c_mobile_phone" value="{$c_mobile_phoneField}" size="50" /></td>
+		<td><input type="text" name="c_mobile_phone" value="{$customer[c_mobile_phone]}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_fax}</td>
-		<td><input type="text" name="c_fax" value="{$c_faxField}" size="50" /></td>
+		<td><input type="text" name="c_fax" value="{$customer[c_fax]}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_email}</td>
-		<td><input type="text" name="c_email" value="{$c_emailField}" size="50" /></td
+		<td><input type="text" name="c_email" value="{$customer[c_email]}" size="50" /></td
 	</tr>
 	<tr>
 		<td class="details_screen">{$customer_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
-		<td><input type="text" name="c_custom_field1" value="{$c_custom_field1Field}" size="50" /></td
+		<td><input type="text" name="c_custom_field1" value="{$customer[c_custom_field1]}" size="50" /></td
 	</tr>
 	<tr>
 		<td class="details_screen">{$customer_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
-		<td><input type="text" name="c_custom_field2" value="{$c_custom_field2Field}" size="50" /></td
+		<td><input type="text" name="c_custom_field2" value="{$customer[c_custom_field2]}" size="50" /></td
 	</tr>
 	<tr>
 		<td class="details_screen">{$customer_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
-		<td><input type="text" name="c_custom_field3" value="{$c_custom_field3Field}" size="50" /></td
+		<td><input type="text" name="c_custom_field3" value="{$customer[c_custom_field3]}" size="50" /></td
 	</tr>
 	<tr>
 		<td class="details_screen">{$customer_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
-		<td><input type="text" name="c_custom_field4" value="{$c_custom_field4Field}" size="50" /></td
+		<td><input type="text" name="c_custom_field4" value="{$customer[c_custom_field4]}" size="50" /></td
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_notes}</td>
-		<td><textarea name="c_notes" rows="8" cols="50">{$c_notesField}</textarea></td>
+		<td><textarea name="c_notes" rows="8" cols="50">{$customer[c_notes]}</textarea></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$wording_for_enabledField}</td><td>{$display_block_enabled}</td>

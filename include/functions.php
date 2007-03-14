@@ -1,5 +1,6 @@
 <?php
 
+include("./include/sql_queries.php");
 /*
 * Script: functions.php
 *	Contain all the functions used in Simple Invoices
@@ -46,6 +47,10 @@ function get_custom_field_label($field)         {
     }
         
     return $cf['cf_custom_label'];
+}
+
+function getCustomFieldLables() {
+	
 }
 
 /**
