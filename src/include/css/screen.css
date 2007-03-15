@@ -50,6 +50,7 @@ td.index_table {
         border-color: white white white white;
         background-color: #F5F5F5;
         -moz-border-radius: 0px 0px 0px 0px;
+	border: 1px solid #fff;
         font-style: normal;
         font-weight: normal;
         text-decoration: none;
@@ -115,6 +116,7 @@ td.columnleft {
 
 td.details_screen {
          border-style: none none none none;
+	 border: 1px solid #fff;
          border-color: white white white white;
          background-color: #F5F5F5;
          -moz-border-radius: 0px 0px 0px 0px;
@@ -128,6 +130,7 @@ td.details_screen {
  /*td for the details screen - start*/
  tr.details_screen {
          border-style: none none none none;
+border: 1px solid #fff;
          background-color: #F5F5F5;
          font-style: normal;
         font-weight: normal;
@@ -344,14 +347,15 @@ code, pre	{
 table { border-collapse: collapse; 
 
 }
+
+/*
 tr {
 border: 1px solid #fff;
 }
-
 td {
 border: 1px solid #fff;
 }
-
+*/
 	/*  Work around IE/Win code size bug - courtesy Jesper, waffle.wootest.net  */
 
 * html code	{

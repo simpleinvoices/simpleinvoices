@@ -8,7 +8,10 @@ echo <<<EOD
 	<title>Simple Invoices</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-	<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
+<script type="text/javascript">
+    var GB_ROOT_DIR = "./src/include/js/";
+</script>
+
 	<link rel="stylesheet" type="text/css" href="include/jquery.autocomplete.css" title="default" media="screen" />
 	<link rel="stylesheet" type="text/css" href="include/jquery.datePicker.css" title="default" media="screen" />
 	<link rel="stylesheet" type="text/css" href="./src/include/css/header1.css" media="all"/>
@@ -20,7 +23,6 @@ echo <<<EOD
 
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
-
 <script type="text/javascript" src="include/jquery.js"></script>
 <script type="text/javascript" src="include/jquery.dom_creator.js"></script>
 <script type="text/javascript" src="include/jquery.datePicker.js"></script>
@@ -28,7 +30,6 @@ echo <<<EOD
 <script type='text/javascript' src='include/jquery.autocomplete.js'></script>
 <script type='text/javascript' src='include/jquery.autocomplete.conf.js'></script>
 <script src="./include/jquery.tabs.js" type="text/javascript"></script>
-<script type="text/javascript" src="./src/include/js/ibox.js"></script>
 
 <!--[if gte IE 5.5]>
 <script language="JavaScript" src="dhtml.js" type="text/JavaScript"></script>
@@ -84,6 +85,12 @@ echo <<<EOD
 		});
 	    });
 	//]]></script>
+
+<script type="text/javascript" src="./src/include/js/AJS.js"></script>
+<script type="text/javascript" src="./src/include/js/AJS_fx.js"></script>
+<script type="text/javascript" src="./src/include/js/gb_scripts.js"></script>
+<link href="./src/include/css/gb_styles.css" rel="stylesheet" type="text/css" />
+
 <!-- customer-details -->
 
 
