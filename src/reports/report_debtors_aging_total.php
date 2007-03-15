@@ -12,9 +12,6 @@ if (!defined("BROWSE")) {
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<script type="text/javascript" src="./src/include/js/ibox.js"></script>
-<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
-
 </head>
 <body>
 <br>
@@ -79,4 +76,4 @@ GROUP BY
 </div>
 <div id="footer"></div>
 <hr></hr>
-<a href="./documentation/info_pages/reports_xsl.html" rel="ibox&height=400"><font color="red">Did you get an "OOOOPS, THERE'S AN ERROR HERE." error?</font></a>
+<a href="./documentation/info_pages/reports_xsl.html" rel="gb_page_center[450, 450]"><font color="red">Did you get an "OOOOPS, THERE'S AN ERROR HERE." error?</font></a>

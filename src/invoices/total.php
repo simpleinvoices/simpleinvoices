@@ -208,31 +208,6 @@ EOD;
 <script type="text/javascript" src="include/jquery.datePicker.js"></script>
 <script type="text/javascript" src="include/jquery.datePicker.conf.js"></script>
 
-<script type="text/javascript" src="./src/include/js/ibox.js"></script>
-<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
-
-<!--
-//prep for open rico 
-<script>
-  var cssPath ="themes/"
-</script>
-<link href="themes/default.css" rel="stylesheet" type="text/css" >	 </link> 
-<link href="themes/alert.css" rel="stylesheet" type="text/css" >	 </link>
-<link href="themes/alphacube.css" rel="stylesheet" type="text/css" >	 </link>
-
-<script type="text/javascript" src="javascripts/prototype.js"> </script>
-<script type="text/javascript" src="javascripts/window.js"> </script>
-<script type="text/javascript" src="javascripts/debug.js"> </script>
-<script type="text/javascript" src="javascripts/effects.js"> </script>
-<script type="text/javascript">
-
-	function openDialog(id) {
-
-Dialog.alert("Test of alert panel, check out debug window after closing it", {windowParameters: {width:300, height:100}, okLabel: "close", ok:function(win) {debug("validate alert panel"); return true;}}); 
-
-  }
-</script>
--->
 <title><?php echo $title; echo " :: "; echo $LANG_inv; echo $LANG_inv_total; ?></title>
 
 <?php include('./config/config.php'); ?>
@@ -287,7 +262,7 @@ Dialog.alert("Test of alert panel, check out debug window after closing it", {wi
 </tr>
 <tr>
 	<td align=left>
-		<a href="./documentation/info_pages/invoice_custom_fields.html" rel="ibox&height=400"><?php echo $LANG_want_more_fields; ?><img src="./images/common/help-small.png"></img></a>
+		<a href="./documentation/info_pages/invoice_custom_fields.html" rel="gb_page_center[450, 450]"><?php echo $LANG_want_more_fields; ?><img src="./images/common/help-small.png"></img></a>
 	</td>
 </tr>
 </table>

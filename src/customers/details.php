@@ -78,7 +78,7 @@ if ($_GET['action'] === 'view') {
 		<td>{$invoice_paid_Field_formatted}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_attention_short} <a href="documentation/info_pages/customer_contact.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$LANG_attention_short} <a href="documentation/info_pages/customer_contact.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td colspan="2">{$customer[c_attention]}</td><td colspan=2></td>
 		<td class="details_screen">{$LANG_total_owing}</td><td><u>{$invoice_owing_Field}</u></td>
 	</tr>
@@ -86,7 +86,7 @@ if ($_GET['action'] === 'view') {
 		<td class="details_screen">{$LANG_street}</td><td>{$customer[c_street_address]}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_street2} <a href="./documentation/info_pages/street2.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td>{$customer[c_street_address2]}</td>
+		<td class="details_screen">{$LANG_street2} <a href="./documentation/info_pages/street2.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>{$customer[c_street_address2]}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_city}</td><td>{$customer[c_city]}</td>
@@ -127,16 +127,16 @@ $display_block .= <<<EOD
 			<p>
 			<table>
 			<tr>
-				<td class="details_screen">{$customer_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td>{$customer[c_custom_field1]}</td>
+				<td class="details_screen">{$customer_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>{$customer[c_custom_field1]}</td>
 			</tr>
 			<tr>
-				<td class="details_screen">{$customer_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td>{$customer[c_custom_field2]}</td>
+				<td class="details_screen">{$customer_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>{$customer[c_custom_field2]}</td>
 			</tr>
 			<tr>
-				<td class="details_screen">{$customer_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td>{$customer[c_custom_field3]}</td>
+				<td class="details_screen">{$customer_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>{$customer[c_custom_field3]}</td>
 			</tr>
 			<tr>
-				<td class="details_screen">{$customer_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td>{$customer[c_custom_field4]}</td>
+				<td class="details_screen">{$customer_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>{$customer[c_custom_field4]}</td>
 			</tr>		
 			</table>	
 			</p>
@@ -197,7 +197,7 @@ EOD;
 		<td><input type="text" name="c_name" value="{$customer[c_name]}" size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_attention_short} <a href="documentation/info_pages/customer_contact.html" rel="ibox&height=400" ><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$LANG_attention_short} <a href="documentation/info_pages/customer_contact.html" rel="gb_page_center[450, 450]" ><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type="text" name="c_attention" value="{$customer[c_attention]}" size="50" /></td>
 	</tr>
 	<tr>
@@ -205,7 +205,7 @@ EOD;
 		<td><input type="text" name="c_street_address" value="{$customer[c_street_address]}" size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_street2} <a href="./documentation/info_pages/street2.html" rel="ibox&height=400" ><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$LANG_street2} <a href="./documentation/info_pages/street2.html" rel="gb_page_center[450, 450]" ><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type="text" name="c_street_address2" value="{$customer[c_street_address2]}" size="50" /></td>
 	</tr>
 	<tr>
@@ -241,19 +241,19 @@ EOD;
 		<td><input type="text" name="c_email" value="{$customer[c_email]}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customer_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customer_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type="text" name="c_custom_field1" value="{$customer[c_custom_field1]}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customer_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customer_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type="text" name="c_custom_field2" value="{$customer[c_custom_field2]}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customer_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customer_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type="text" name="c_custom_field3" value="{$customer[c_custom_field3]}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customer_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customer_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type="text" name="c_custom_field4" value="{$customer[c_custom_field4]}" size="50" /></td
 	</tr>
 	<tr>

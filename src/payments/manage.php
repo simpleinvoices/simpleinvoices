@@ -159,5 +159,5 @@ Rico.onLoad( function() {
 
 <?php echo $display_block; ?>
 
-<a href="./documentation/info_pages/wheres_the_edit_button.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img>Wheres the Edit button?</a>
+<a href="./src/documentation/info_pages/wheres_the_edit_button.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img>Wheres the Edit button?</a>
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

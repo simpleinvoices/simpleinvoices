@@ -44,13 +44,13 @@ echo <<<EOD
 	<td class="details_screen">{$LANG_customer_name}</td><td><input type=text name="c_name" size=25></td>
 </tr>
 </tr>
-	<td class="details_screen">{$LANG_customer_contact} <a href="./documentation/info_pages/customer_contact.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="c_attention" size=25></td>
+	<td class="details_screen">{$LANG_customer_contact} <a href="./documentation/info_pages/customer_contact.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="c_attention" size=25></td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG_street}</td><td><input type=text name="c_street_address" size=25></td>
 </tr>
 <tr>
-	<td class="details_screen">{$LANG_street2} <a href="./documentation/info_pages/street2.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="c_street_address2" size=25></td>
+	<td class="details_screen">{$LANG_street2} <a href="./documentation/info_pages/street2.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="c_street_address2" size=25></td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG_city}</td><td><input type=text name="c_city" size=25></td>
@@ -77,16 +77,16 @@ echo <<<EOD
 	<td class="details_screen">{$LANG_email}</td><td><input type=text name="c_email" size=25></td>
 </tr>
 <tr>
-	<td class="details_screen">{$customer_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="c_custom_field1" size=25></td>
+	<td class="details_screen">{$customer_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="c_custom_field1" size=25></td>
 </tr>
 <tr>
-	<td class="details_screen">{$customer_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="c_custom_field2" size=25></td>
+	<td class="details_screen">{$customer_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="c_custom_field2" size=25></td>
 </tr>
 <tr>
-	<td class="details_screen">{$customer_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="c_custom_field3" size=25></td>
+	<td class="details_screen">{$customer_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="c_custom_field3" size=25></td>
 </tr>
 <tr>
-	<td class="details_screen">{$customer_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="c_custom_field4" size=25></td>
+	<td class="details_screen">{$customer_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="c_custom_field4" size=25></td>
 </tr>
 <tr>    
 	<td class="details_screen">{$LANG_notes}</td><td><textarea name='c_notes' rows=8 cols=50></textarea></td>

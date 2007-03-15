@@ -111,4 +111,4 @@ Rico.onLoad( function() {
 
 <?php echo $display_block; ?>
 
-<a href="./documentation/info_pages/inv_pref_what_the.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img> What's all this "Invoice Preference" stuff about?</a>
+<a href="./documentation/info_pages/inv_pref_what_the.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img> What's all this "Invoice Preference" stuff about?</a>

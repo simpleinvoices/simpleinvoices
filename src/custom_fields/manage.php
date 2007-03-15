@@ -21,7 +21,7 @@ if (mysql_num_rows($result) == 0) {
 
 
 <b>{$LANG_manage_custom_fields}</b><br>
-<a href="./documentation/info_pages/what_are_custom_fields.html" rel="ibox&height=400">{$LANG_what_are_custom_fields}<img src="./images/common/help-small.png"></img></a> :: <a href="./documentation/info_pages/manage_custom_fields.html" rel="ibox&height=400">{$LANG_whats_this_page_about}<img src="./images/common/help-small.png"></img></a>
+<a href="./documentation/info_pages/what_are_custom_fields.html" rel="gb_page_center[450, 450]">{$LANG_what_are_custom_fields}<img src="./images/common/help-small.png"></img></a> :: <a href="./documentation/info_pages/manage_custom_fields.html" rel="gb_page_center[450, 450]">{$LANG_whats_this_page_about}<img src="./images/common/help-small.png"></img></a>
  <hr></hr>
 <!-- IE hack so that the table fits on the pages -->
 <!--[if gte IE 5.5]>

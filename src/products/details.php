@@ -77,19 +77,19 @@ if ($_GET['action'] == "view") {
 		<td>{$prod_unit_priceField}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$prod_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td>{$prod_custom_field1Field}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$prod_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td>{$prod_custom_field2Field}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$prod_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td>{$prod_custom_field3Field}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$prod_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td>{$prod_custom_field4Field}</td>
 	</tr>
 	<tr>
@@ -139,19 +139,19 @@ $display_block = <<<EOD
 		<td><input type="text" name="prod_unit_price" size="25" value="{$prod_unit_priceField}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$prod_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type="text" name="prod_custom_field1" size="50" value="{$prod_custom_field1Field}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$prod_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type="text" name="prod_custom_field2" size="50" value="{$prod_custom_field2Field}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$prod_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type="text" name="prod_custom_field3" size="50" value="{$prod_custom_field3Field}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$prod_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type="text" name="prod_custom_field4" size="50" value="{$prod_custom_field4Field}" /></td>
 	</tr>
 	<tr>
