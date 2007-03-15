@@ -11,7 +11,7 @@ $master_invoice_id = $_GET['submit'];
 
 
 #Get the invoice details
-$print_master_invoice_id = 'SELECT * FROM {$tb_prefix}invoices WHERE inv_id = ' . $master_invoice_id;
+$print_master_invoice_id = "SELECT * FROM {$tb_prefix}invoices WHERE inv_id = " . $master_invoice_id ;
 $result_print_master_invoice_id  = mysql_query($print_master_invoice_id , $conn) or die(mysql_error());
 
 while ($Array_master_invoice = mysql_fetch_array($result_print_master_invoice_id)) {
@@ -60,7 +60,7 @@ while ($Array_master_invoice_items = mysql_fetch_array($result_print_master_invo
 
 
 #invoice_type query
-$sql_invoice_type = 'SELECT inv_ty_description FROM {$tb_prefix}invoice_type WHERE inv_ty_id = ' . $inv_typeField;
+$sql_invoice_type = "SELECT inv_ty_description FROM {$tb_prefix}invoice_type WHERE inv_ty_id = " . $inv_typeField;
 $result_invoice_type = mysql_query($sql_invoice_type, $conn) or die(mysql_error());
 
 while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {

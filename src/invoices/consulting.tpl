@@ -11,13 +11,11 @@ checkLogin();	//TODO: Really needed in .tpl files? I don't think so
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 
 <link rel="stylesheet" type="text/css" href="include/jquery.datePicker.css" title="default" media="screen" />
-<link rel="stylesheet" href="./src/include/css/ibox.css" type="text/css"  media="screen"/>
 
 <script type="text/javascript" src="include/jquery.js"></script>
 <script type="text/javascript" src="include/jquery.dom_creator.js"></script>
 <script type="text/javascript" src="include/jquery.datePicker.js"></script>
 <script type="text/javascript" src="include/jquery.datePicker.conf.js"></script>
-<script type="text/javascript" src="./src/include/js/ibox.js"></script>
 
 <!--
     <script type="text/javascript">
@@ -96,7 +94,7 @@ checkLogin();	//TODO: Really needed in .tpl files? I don't think so
 </tr>
 <tr>
 	<td align=left colspan=2> 
-		<a href="./documentation/info_pages/invoice_custom_fields.html" rel="ibox&height=400">$LANG_want_more_fields<img src="./images/common/help-small.png"></img></a>
+		<a href="./src/documentation/info_pages/invoice_custom_fields.html" rel="gb_page_center[400, 400]">$LANG_want_more_fields<img src="./images/common/help-small.png"></img></a>
 
 	</td>
 	
