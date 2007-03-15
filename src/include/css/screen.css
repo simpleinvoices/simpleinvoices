@@ -130,10 +130,10 @@ td.details_screen {
  /*td for the details screen - start*/
  tr.details_screen {
          border-style: none none none none;
-border: 1px solid #fff;
+	 border: 1px solid #fff;
          background-color: #F5F5F5;
          font-style: normal;
-        font-weight: normal;
+         font-weight: normal;
          text-decoration: none;
 }
 
