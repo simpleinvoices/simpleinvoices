@@ -4,9 +4,7 @@ include('./include/include_main.php');
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-#insert customer
-$conn = mysql_connect( $db_host, $db_user, $db_password );
-mysql_select_db( $db_name, $conn );
+
 
 #if coming from another page where you want to filter by just one invoice
 if (!empty($_GET['inv_id'])) {

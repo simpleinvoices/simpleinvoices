@@ -91,7 +91,6 @@ $display_block =  "
 </table>
 ";
 
-include('./config/config.php');
 
 echo <<<EOD
 <b>$map_page_header</b>
@@ -104,4 +103,3 @@ $display_block
 	</form>
 EOD;
 ?>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

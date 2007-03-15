@@ -8,8 +8,6 @@ checkLogin();
 $customer_id = $_GET['submit'];
 
 
-
-
 #system defaults query
 $print_defaults = "SELECT * FROM {$tb_prefix}defaults WHERE def_id = 1";
 $result_print_defaults = mysql_query($print_defaults, $conn) or die(mysql_error());
@@ -26,6 +24,8 @@ while ($Array = mysql_fetch_array($result_print_defaults) ) {
                 $def_payment_typeField = $Array['def_payment_type'];
 };
 
+
+//TODO: Combine all getNames/description in 1 querie...
 $biller_name = "select b_name from {$tb_prefix}biller where b_id = $def_billerField";
 $result_biller_name = mysql_query($biller_name, $conn) or die(mysql_error());
 

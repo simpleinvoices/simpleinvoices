@@ -20,30 +20,9 @@ jsEnd();
 $tax_rate_id = $_GET['submit'];
 
 
-#Info from DB print
-$conn = mysql_connect("$db_host","$db_user","$db_password");
-mysql_select_db("$db_name",$conn);
+$tax = getTaxRate($tax_rate_id);
+$wording_for_enabled = $tax['tax_enabled'] == 1 ? $wording_for_enabledField:$wording_for_disabledField;
 
-
-
-#customer query
-$print_tax_rate = "SELECT * FROM {$tb_prefix}tax WHERE tax_id = $tax_rate_id";
-$result_print_tax_rate = mysql_query($print_tax_rate, $conn) or die(mysql_error());
-
-
-while ($Array = mysql_fetch_array($result_print_tax_rate) ) {
-	$tax_idField = $Array['tax_id'];
-	$tax_descriptionField = $Array['tax_description'];
-	$tax_percentageField = $Array['tax_percentage'];
-	$tax_enabledField = $Array['tax_enabled'];
-
-	if ($tax_enabledField == 1) {
-		$wording_for_enabled = $wording_for_enabledField;	
-	} else {
-		$wording_for_enabled = $wording_for_disabledField;
-	}
-
-};
 
 
 if ($_GET['action'] === 'view') {
@@ -51,19 +30,19 @@ if ($_GET['action'] === 'view') {
 	$display_block = <<<EOD
 
         <b>{$LANG_tax_rate} ::
-        <a href="index.php?module=tax_rates&view=details&submit={$tax_idField}&action=edit">{$LANG_edit}</a></b>
+        <a href="index.php?module=tax_rates&view=details&submit=$tax[tax_id]&action=edit">$LANG_edit</a></b>
 
 	<hr></hr>
 
 	<table align="center">
 	<tr>
-		<td class="details_screen">{$LANG_tax_rate_id}</td><td>{$tax_idField}</td>
+		<td class="details_screen">{$LANG_tax_rate_id}</td><td>$tax[tax_id]</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_description}</td><td>{$tax_descriptionField}</td>
+		<td class="details_screen">{$LANG_description}</td><td>$tax[tax_description]</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_tax_percentage}</td><td>{$tax_percentageField}</td>
+		<td class="details_screen">{$LANG_tax_percentage}</td><td>$tax[tax_percentage]</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$wording_for_enabledField}</td><td>{$wording_for_enabled}</td>
@@ -72,12 +51,11 @@ if ($_GET['action'] === 'view') {
 	<hr></hr>
 
 EOD;
-$footer = "
+$footer = <<<EOD
 
-<a href='index.php?module=tax_rates&view=details&submit={$tax_idField}&action=edit'>{$LANG_edit}</a>
+<a href='index.php?module=tax_rates&view=details&submit=$tax[tax_id]&action=edit'>{$LANG_edit}</a>
 
-";
-
+EOD;
 }
 
 else if ($_GET['action'] === 'edit') {
@@ -85,7 +63,7 @@ else if ($_GET['action'] === 'edit') {
 #do the product enabled/disblaed drop down
 $display_block_enabled = <<<EOD
 <select name="tax_enabled">
-<option value="$tax_enabledField" selected style="font-weight: bold">$wording_for_enabled</option>
+<option value="$tax[tax_enabled]" selected style="font-weight: bold">$wording_for_enabled</option>
 <option value="1">$wording_for_enabledField</option>
 <option value="0">$wording_for_disabledField</option>
 </select>
@@ -99,15 +77,15 @@ $display_block = <<<EOD
 
 	<table align="center">
 	<tr>
-		<td class="details_screen">{$LANG_tax_rate_id}</td><td>{$tax_idField}</td>
+		<td class="details_screen">{$LANG_tax_rate_id}</td><td>$tax[tax_id]</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_description}</td>
-		<td><input type="text" name="tax_description" value="{$tax_descriptionField}" size="50" /></td>
+		<td><input type="text" name="tax_description" value="{$tax['tax_description']}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_tax_percentage}</td>
-		<td><input type="text" name="tax_percentage" value="{$tax_percentageField}" size="10" />%</td>
+		<td><input type="text" name="tax_percentage" value="{$tax['tax_percentage']}" size="10" />%</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$wording_for_enabledField} </td><td>{$display_block_enabled}</td>
@@ -139,4 +117,3 @@ $footer
 </form>
 EOD;
 ?>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

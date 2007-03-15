@@ -6,10 +6,6 @@ checkLogin();
 
 
 
-	#select preferences
-	$conn = mysql_connect("$db_host","$db_user","$db_password");
-	mysql_select_db("$db_name",$conn);
-
 	$print_preferences = "SELECT * FROM {$tb_prefix}preferences ORDER BY pref_description";
 	$result_print_preferences  = mysql_query($print_preferences, $conn) or die(mysql_error());
 
@@ -116,4 +112,3 @@ Rico.onLoad( function() {
 <?php echo $display_block; ?>
 
 <a href="./documentation/info_pages/inv_pref_what_the.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img> What's all this "Invoice Preference" stuff about?</a>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

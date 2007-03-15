@@ -4,7 +4,7 @@ include('./include/include_main.php');
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-include('./config/config.php');
+
 
 
 # Deal with op and add some basic sanity checking
@@ -15,8 +15,6 @@ $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
 
 if (  $op === 'insert_tax_rate' ) {
 
-$conn = mysql_connect("$db_host","$db_user","$db_password");
-mysql_select_db("$db_name",$conn);
 
 /*Raymond - what about the '', bit doesnt seem to do an insert in me environment when i exclude it
 $sql = "INSERT INTO {$tb_prefix}tax VALUES ('$_POST[tax_description]','$_POST[tax_percentage]')";

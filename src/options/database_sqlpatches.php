@@ -7,9 +7,6 @@ checkLogin();
 include('./include/sql_patches.php');
 
 
-#insert customer
-$conn = mysql_connect("$db_host","$db_user","$db_password");
-mysql_select_db("$db_name",$conn);
 
 
 function check_sql_patch($check_sql_patch_ref, $check_sql_patch_field) {

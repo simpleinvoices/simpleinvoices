@@ -5,10 +5,6 @@ include_once('./include/include_main.php');
 checkLogin();
 
 
-#manage products
-$conn = mysql_connect("$db_host","$db_user","$db_password");
-mysql_select_db("$db_name",$conn);
-
 
 $sql = "select * from {$tb_prefix}products ORDER BY prod_description";
 

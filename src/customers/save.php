@@ -4,10 +4,6 @@ include('./include/include_main.php');
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-include('./config/config.php');
-
-
-
 # Deal with op and add some basic sanity checking
 
 $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;

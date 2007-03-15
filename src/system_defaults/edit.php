@@ -409,9 +409,6 @@ else {
 }
 
 
-
-include('./config/config.php');
-
 echo <<<EOD
 
 <form name="frmpost" action="index.php?module=system_defaults&view=save&sys_default=$default" method="post" onsubmit="return frmpost_Validator(this)">
@@ -434,4 +431,3 @@ $display_block
 </FORM>
 EOD;
 ?>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->
