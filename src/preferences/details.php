@@ -100,7 +100,7 @@ $display_block =  "
 			<td colspan=2 align=center></td>
 		</tr>
 		<tr>
-			<td colspan=2 align=center><a href=\"./documentation/info_pages/inv_pref_what_the.html\" rel=\"gb_page_center[450, 450]\"><img src=\"./images/common/help-small.png\"></img> Whats all this \"Invoice Preference\" stuff about?</a></td>
+			<td colspan=2 align=center class=\"align_center\"><a href=\"./documentation/info_pages/inv_pref_what_the.html\" rel=\"gb_page_center[450, 450]\"><img src=\"./images/common/help-small.png\"></img> Whats all this \"Invoice Preference\" stuff about?</a></td>
 		</tr>
 		</table>
 		<hr></hr>
@@ -117,7 +117,7 @@ $footer =  "
 else if (  $_GET['action'] === 'edit' ) {
 
 $display_block_enabled = <<<EOD
-"<select name="pref_enabled">
+<select name="pref_enabled">
 <option value="$pref_enabledField" selected style="font-weight: bold;">$wording_for_enabled</option>
 <option value="1">$wording_for_enabledField</option>
 <option value="0">$wording_for_disabledField</option>
@@ -172,7 +172,7 @@ $display_block =  <<<EOD
                         <td colspan=2 align=center></td>
                 </tr>
                 <tr>
-                        <td colspan=2 align=center><a href="./documentation/info_pages/inv_pref_what_the.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img> Whats all this "Invoice Preference" stuff about?</a></td>
+                        <td colspan=2 align=center class="align_center"><a href="./documentation/info_pages/inv_pref_what_the.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img> Whats all this "Invoice Preference" stuff about?</a></td>
                 </tr>
 
                 </table>
@@ -193,10 +193,11 @@ include('./config/config.php');
 
 
 echo <<<EOD
-<form name="frmpost" action="index.php?module=preferences&view=save&submit=<?php echo $_GET['submit'];?>" method="post" onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=preferences&view=save&submit={$_GET['submit']}" method="post" onsubmit="return frmpost_Validator(this)">
 
-$display_block
-$footer
+	$display_block
+	$footer
+
 EOD;
 ?>
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

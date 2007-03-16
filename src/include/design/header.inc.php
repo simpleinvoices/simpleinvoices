@@ -233,9 +233,11 @@ echo <<<EOD
 							<li>
 								<a href="./index.php?module=options&view=backup_database">{$LANG_backup_database}</a>
 							</li>
+<!--
 							<li>
 								<a href="./index.php?module=options&view=sanity_check">{$LANG_sanity_check}</a>
 							</li>
+-->
 							<li></li>
 							<li>
 								<a href="index.php?module=documentation/inline_docs&view=inline_instructions">{$LANG_help} +</a>
