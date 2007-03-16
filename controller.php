@@ -50,17 +50,27 @@ else if (($module != null ) AND ($view != null)) {
 	        die("Invalid view requested");
 	}
 
+	include("./src/include/design/header.inc.php");
+	
 	/*Check to make sure that the requested files exist*/
 	if (file_exists("./src/$module/$view.php")) {
-	        include("./src/include/design/header.inc.php");
 	        include("./src/$module/$view.php");
-        	include("./src/include/design/footer.inc.php");
+	        
+	        /* Combines Code and template...
+	         * First have to create all templates
+	        $temp = file_get_contents("./src/$module/$view.html");
+	         $temp = addslashes($temp); $content = "";
+
+	         eval('$content = "'.$temp.'";');
+	         echo $content;
+			*/
 	}
 	else {
 		include("./src/include/design/header.inc.php");
 		echo "The file that you requested doesn't exist";
-		include("./src/include/design/footer.inc.php");
 	}
+	
+	include("./src/include/design/footer.inc.php");
 }
 
 /*If all else fails show the start.php page */

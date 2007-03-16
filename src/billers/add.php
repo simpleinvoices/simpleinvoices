@@ -141,4 +141,3 @@ echo <<<EOD
 </FORM>
 EOD;
 ?>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->
