@@ -4,9 +4,6 @@ include_once('./include/include_main.php');
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-
-
-
 /* validataion code */
 include("./include/validation.php");
 
@@ -21,9 +18,6 @@ jsEnd();
 
 #get the invoice id
 $customer_id = $_GET['submit'];
-
-
-
 
 
 $customer = getCustomer($customer_id);
@@ -50,6 +44,9 @@ $customer_custom_field_label1 = get_custom_field_label("customer_cf1");
 $customer_custom_field_label2 = get_custom_field_label("customer_cf2");
 $customer_custom_field_label3 = get_custom_field_label("customer_cf3");
 $customer_custom_field_label4 = get_custom_field_label("customer_cf4");
+
+#show invoices per client
+$sql = "SELECT * FROM {$tb_prefix}invoices WHERE inv_customer_id =$customer_id  ORDER BY inv_id desc";
 
 
 if ($_GET['action'] === 'view') {
@@ -111,8 +108,7 @@ if ($_GET['action'] === 'view') {
 
 EOD;
 
-#show invoices per client
-$sql = "select * from {$tb_prefix}invoices where inv_customer_id =$customer_id  ORDER BY inv_id desc";
+
 
 $display_block .= <<<EOD
 <br>

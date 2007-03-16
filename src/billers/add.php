@@ -54,6 +54,7 @@ $display_block_enabled = <<<EOD
 </select>
 EOD;
 
+
 #get custom field labels
 $biller_custom_field_label1 = get_custom_field_label("biller_cf1");
 $biller_custom_field_label2 = get_custom_field_label("biller_cf2");

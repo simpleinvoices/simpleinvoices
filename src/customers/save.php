@@ -17,12 +17,10 @@ if ($op === "insert_customer") {
 $sql = "INSERT into {$tb_prefix}customers values ('','$_POST[c_attention]','$_POST[c_name]','$_POST[c_street_address]','$_POST[c_city]','$_POST[c_state]','$_POST[c_zip_code]','$_POST[c_country]','$_POST[c_phone]','$_POST[c_fax]','$_POST[c_email]')";
 */
 
+//TODO: What's happening? Which vars are extracted? Not secure...
 extract( $_POST );
 
-$sql ='INSERT INTO
-		{$tb_prefix}customers
-	VALUES
-		("","' . $c_attention . '", "' . $c_name . '", "' . $c_street_address . '", "' . $c_street_address2 . '",  "' . $c_city . '", "' . $c_state . '", "' . $c_zip_code . '", "' . $c_country . '", "' . $c_phone . '", "' . $c_mobile_phone . '", "' . $c_fax . '", "' . $c_email . '", "' . $c_notes . '", "' . $c_custom_field1 . '", "' . $c_custom_field2 . '", "' . $c_custom_field3 . '", "' . $c_custom_field4 . '", "' . $c_enabled . '")';
+$sql ='INSERT INTO {$tb_prefix}customers VALUES ("","' . $c_attention . '", "' . $c_name . '", "' . $c_street_address . '", "' . $c_street_address2 . '",  "' . $c_city . '", "' . $c_state . '", "' . $c_zip_code . '", "' . $c_country . '", "' . $c_phone . '", "' . $c_mobile_phone . '", "' . $c_fax . '", "' . $c_email . '", "' . $c_notes . '", "' . $c_custom_field1 . '", "' . $c_custom_field2 . '", "' . $c_custom_field3 . '", "' . $c_custom_field4 . '", "' . $c_enabled . '")';
 
 
 if (mysql_query($sql, $conn)) {
@@ -30,6 +28,7 @@ if (mysql_query($sql, $conn)) {
 } else {
 	$display_block = $LANG_save_customer_failure;
 }
+	//TODO: Refresh over php?
  	//header( 'refresh: 2; url=manage_customers.php' );
 	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=customers&view=manage>";
 }

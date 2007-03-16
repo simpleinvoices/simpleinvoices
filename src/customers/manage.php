@@ -6,9 +6,7 @@ checkLogin();
 
 
 
-
-
-$sql = "select * from {$tb_prefix}customers ORDER BY c_name";
+$sql = "SELECT * FROM {$tb_prefix}customers ORDER BY c_name";
 
 $result = mysql_query($sql, $conn) or die(mysql_error());
 $number_of_rows = mysql_num_rows($result);

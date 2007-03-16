@@ -38,11 +38,9 @@ function get_custom_field_label($field)         {
 	include("./lang/$language.inc.php");
 	ob_end_clean();
 
-	$conn = mysql_connect( $db_host, $db_user, $db_password );
-	mysql_select_db( $db_name, $conn );
 
     $sql =  "SELECT cf_custom_label FROM {$tb_prefix}custom_fields WHERE cf_custom_field = '$field'";
-    $result = mysql_query($sql,$conn) or die(mysql_error());
+    $result = mysql_query($sql) or die(mysql_error());
 
     $cf = mysql_fetch_array($result);
 
