@@ -170,20 +170,9 @@ while ($Array_defaults = mysql_fetch_array($result_print_defaults) ) {
 
 
 #get custom field labels for biller
-$biller_custom_field_label1 = get_custom_field_label(biller_cf1);
-$biller_custom_field_label2 = get_custom_field_label(biller_cf2);
-$biller_custom_field_label3 = get_custom_field_label(biller_cf3);
-$biller_custom_field_label4 = get_custom_field_label(biller_cf4);
-#get custom field labels for the customer
-$customer_custom_field_label1 = get_custom_field_label(customer_cf1);
-$customer_custom_field_label2 = get_custom_field_label(customer_cf2);
-$customer_custom_field_label3 = get_custom_field_label(customer_cf3);
-$customer_custom_field_label4 = get_custom_field_label(customer_cf4);
-#product custom fields
-$prod_custom_field_label1 = get_custom_field_label(product_cf1);
-$prod_custom_field_label2 = get_custom_field_label(product_cf2);
-$prod_custom_field_label3 = get_custom_field_label(product_cf3);
-$prod_custom_field_label4 = get_custom_field_label(product_cf4);
+$billerCustomFieldLabel = getCustomFieldLabels("biller");
+$customerCustomFieldLabel = getCustomFieldLabels("customer");
+$productCustomFieldLabel = getCustomFieldLabels("product");
 
 
 $show_custom_field_1 = show_custom_field(invoice_cf1,$inv_custom_field1Field,read,'details_screen summary','','',5,':');
@@ -260,16 +249,16 @@ $display_block_top =  "
 		<td class='details_screen'>$LANG_email:</td><td class='details_screen' colspan=5>$b_emailField</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td class='details_screen'>$biller_custom_field_label1:</td><td class='details_screen' colspan=5>$b_custom_field1Field</td>
+		<td class='details_screen'>{$billerCustomFieldLabel['1']}:</td><td class='details_screen' colspan=5>$b_custom_field1Field</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td class='details_screen'>$biller_custom_field_label2:</td><td class='details_screen' colspan=5>$b_custom_field2Field</td>
+		<td class='details_screen'>{$billerCustomFieldLabel['2']}:</td><td class='details_screen' colspan=5>$b_custom_field2Field</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td class='details_screen'>$biller_custom_field_label3:</td><td class='details_screen' colspan=5>$b_custom_field3Field</td>
+		<td class='details_screen'>{$billerCustomFieldLabel['3']}:</td><td class='details_screen' colspan=5>$b_custom_field3Field</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td class='details_screen'>$biller_custom_field_label4:</td><td class='details_screen' colspan=5>$b_custom_field4Field</td>
+		<td class='details_screen'>{$billerCustomFieldLabel['4']}:</td><td class='details_screen' colspan=5>$b_custom_field4Field</td>
 	</tr>	
 	<tr >
 		<td colspan=5><br></td>
@@ -301,16 +290,16 @@ $display_block_top =  "
 		<td class='details_screen'>$LANG_email:</td><td class='details_screen'colspan=5>$c_emailField</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>$customer_custom_field_label1:</td><td colspan=5 class='details_screen'>$c_custom_field1Field</td>
+		<td class='details_screen'>{$customerCustomFieldLabel['1']}:</td><td colspan=5 class='details_screen'>$c_custom_field1Field</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>$customer_custom_field_label2:</td><td colspan=5 class='details_screen'>$c_custom_field2Field</td>
+		<td class='details_screen'>{$customerCustomFieldLabel['2']}:</td><td colspan=5 class='details_screen'>$c_custom_field2Field</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>$customer_custom_field_label3:</td><td class='details_screen' colspan=5>$c_custom_field3Field</td>
+		<td class='details_screen'>{$customerCustomFieldLabel['3']}:</td><td class='details_screen' colspan=5>$c_custom_field3Field</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>$customer_custom_field_label4:</td><td class='details_screen' colspan=5>$c_custom_field4Field</td>
+		<td class='details_screen'>{$customerCustomFieldLabel['4']}:</td><td class='details_screen' colspan=5>$c_custom_field4Field</td>
 	</tr>	
 
 ";
@@ -485,7 +474,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 	#show the itemised invoice
 	if ( $_GET['invoice_style'] === 'Itemised' ) {
 
-		$display_block_details .=  "
+		$display_block_details .=  <<<EOD
 	        <tr>
 	                <td>$inv_it_quantityField</td><td>$prod_descriptionField</td><td>$pref_currency_signField$inv_it_unit_priceField_formatted</td><td>$pref_currency_signField$inv_it_gross_totalField_formatted</td><td>$pref_currency_signField$inv_it_tax_amountField_formatted</td><td>$pref_currency_signField$inv_it_totalField_formatted</td>
 	        </tr>
@@ -494,15 +483,18 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 				<td colspan=5>
 					<table width=100%>
 					<tr>
-						<td width=50% class='details_screen'>$prod_custom_field_label1: $prod_custom_field1Field</td><td width=50% class='details_screen'>$prod_custom_field_label2: $prod_custom_field2Field</td>
+						<td width=50% class='details_screen'>{$productCustomFieldLabel['1']}: $prod_custom_field1Field</td><td width=50% class='details_screen'>{$productCustomFieldLabel['2']}:
+$prod_custom_field2Field</td>
                  			</tr>
 			                <tr class='itemised' >       
-			                       <td width=50% class='details_screen'>$prod_custom_field_label3: $prod_custom_field3Field</td><td width=50% class='details_screen'>$prod_custom_field_label4: $prod_custom_field4Field</td>
+			                       <td width=50% class='details_screen'>{$productCustomFieldLabel['3']}:
+	$prod_custom_field3Field</td><td width=50% class='details_screen'>{$productCustomFieldLabel['4']}:
+	$prod_custom_field4Field</td>
 			                 </tr>
 					</table>
 				</td>
 		</tr>
-		";
+EOD;
 	}	
 	#show the consulting invoice 
 	else if ( $_GET['invoice_style'] === 'Consulting' ) {

@@ -40,10 +40,8 @@ $invoice_owing_Field = number_format($invoice_total_Field - $invoice_paid_Field,
 
 
 #get custom field labels
-$customer_custom_field_label1 = get_custom_field_label("customer_cf1");
-$customer_custom_field_label2 = get_custom_field_label("customer_cf2");
-$customer_custom_field_label3 = get_custom_field_label("customer_cf3");
-$customer_custom_field_label4 = get_custom_field_label("customer_cf4");
+
+$customFieldLabel = getCustomFieldLabels("customer");
 
 #show invoices per client
 $sql = "SELECT * FROM {$tb_prefix}invoices WHERE inv_customer_id =$customer_id  ORDER BY inv_id desc";
@@ -123,16 +121,16 @@ $display_block .= <<<EOD
 			<p>
 			<table>
 			<tr>
-				<td class="details_screen">{$customer_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>{$customer[c_custom_field1]}</td>
+				<td class="details_screen">{$customFieldLabel['1']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>{$customer[c_custom_field1]}</td>
 			</tr>
 			<tr>
-				<td class="details_screen">{$customer_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>{$customer[c_custom_field2]}</td>
+				<td class="details_screen">{$customFieldLabel['2']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>{$customer[c_custom_field2]}</td>
 			</tr>
 			<tr>
-				<td class="details_screen">{$customer_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>{$customer[c_custom_field3]}</td>
+				<td class="details_screen">{$customFieldLabel['3']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>{$customer[c_custom_field3]}</td>
 			</tr>
 			<tr>
-				<td class="details_screen">{$customer_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>{$customer[c_custom_field4]}</td>
+				<td class="details_screen">{$customFieldLabel['4']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>{$customer[c_custom_field4]}</td>
 			</tr>		
 			</table>	
 			</p>

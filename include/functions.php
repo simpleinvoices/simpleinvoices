@@ -55,11 +55,27 @@ function get_custom_field_label($field)         {
     return $cf['cf_custom_label'];
 }
 
-function getCustomFieldLables() {
+/*
+ * Type is for example biller , ...
+ */
+function getCustomFieldLabels($type) {
 	include('./config/config.php');
 	ob_start();
 	include("./lang/$language.inc.php");
 	ob_end_clean();
+	
+	$sql = "SELECT cf_custom_label FROM {$tb_prefix}custom_fields WHERE cf_custom_field LIKE '".$type."_cf_'";
+	$result = mysql_query($sql) or die(mysql_error());
+	
+	for($i=1;$row = mysql_fetch_row($result);$i++) {
+		$cf[$i]=$row[0];
+		if($cf[$i] == null) {
+			$cf[$i] = $LANG_custom_field;
+		}
+	}
+
+	//TODO: What's the value if null? change in database...
+	return $cf;
 }
 
 /**

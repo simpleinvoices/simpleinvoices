@@ -19,81 +19,60 @@ jsEnd();
 #get the invoice id
 $product_id = $_GET['submit'];
 
-
-#Info from DB print
-$conn = mysql_connect("$db_host","$db_user","$db_password");
-mysql_select_db("$db_name",$conn);
-
-
-
 #customer query
 $print_product = "SELECT * FROM {$tb_prefix}products WHERE prod_id = $product_id";
 $result_print_product = mysql_query($print_product, $conn) or die(mysql_error());
 
+$product = mysql_fetch_array($result_print_product);
 
-while ($Array = mysql_fetch_array($result_print_product) ) {
-	$prod_idField = $Array['prod_id'];
-	$prod_descriptionField = $Array['prod_description'];
-	$prod_custom_field1Field = $Array['prod_custom_field1'];
-	$prod_custom_field2Field = $Array['prod_custom_field2'];
-	$prod_custom_field3Field = $Array['prod_custom_field3'];
-	$prod_custom_field4Field = $Array['prod_custom_field4'];
-	$prod_enabledField = $Array['prod_enabled'];
-	$prod_notesField = $Array['prod_notes'];
-	$prod_unit_priceField = $Array['prod_unit_price'];
-
-	if ($prod_enabledField == 1) {
-		$wording_for_enabled = $wording_for_enabledField;
-	} else {
-		$wording_for_enabled = $wording_for_disabledField;
-	}
-};
+if ($product['prod_enabled'] == 1) {
+	$wording_for_enabled = $wording_for_enabledField;
+} else {
+	$wording_for_enabled = $wording_for_disabledField;
+}
 
 #get custom field labels
-$prod_custom_field_label1 = get_custom_field_label("product_cf1");
-$prod_custom_field_label2 = get_custom_field_label("product_cf2");
-$prod_custom_field_label3 = get_custom_field_label("product_cf3");
-$prod_custom_field_label4 = get_custom_field_label("product_cf4");
+$customFieldLabel = getCustomFieldLabels("product");
 
 
 if ($_GET['action'] == "view") {
 
 	$display_block = <<<EOD
 	<b>{$LANG_products} ::
-	<a href="index.php?module=products&view=details&submit={$prod_idField}&action=edit">{$LANG_edit}</a></b>
+	<a href="index.php?module=products&view=details&submit={$product['prod_id']}&action=edit">{$LANG_edit}</a></b>
 	
  	<hr></hr>
 
 	<table align="center">
 	<tr>
-		<td class="details_screen">{$LANG_product_id}</td><td>{$prod_idField}</td>
+		<td class="details_screen">{$LANG_product_id}</td><td>{$product['prod_id']}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_product_description}</td>
-		<td>{$prod_descriptionField}</td>
+		<td>{$product['prod_description']}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_product_unit_price}</td>
-		<td>{$prod_unit_priceField}</td>
+		<td>{$product['prod_unit_price']}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
-		<td>{$prod_custom_field1Field}</td>
+		<td class="details_screen">{$customFieldLabel['1']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td>{$product['prod_custom_field1']}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
-		<td>{$prod_custom_field2Field}</td>
+		<td class="details_screen">{$customFieldLabel['2']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td>{$product['prod_custom_field2']}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
-		<td>{$prod_custom_field3Field}</td>
+		<td class="details_screen">{$customFieldLabel['3']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td>{$product['prod_custom_field3']}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
-		<td>{$prod_custom_field4Field}</td>
+		<td class="details_screen">{$customFieldLabel['4']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td>{$product['prod_custom_field4']}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_notes}</td><td>{$prod_notesField}</td>
+		<td class="details_screen">{$LANG_notes}</td><td>{$product['prod_notes']}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_product_enabled}</td>
@@ -105,7 +84,7 @@ EOD;
 
 $footer = <<<EOD
 <hr></hr>
-<a href="index.php?module=products&view=details&submit={$prod_idField}&action=edit">{$LANG_edit}</a>
+<a href="index.php?module=products&view=details&submit={$product['prod_id']}&action=edit">{$LANG_edit}</a>
 
 EOD;
 
@@ -116,7 +95,7 @@ else if ($_GET['action'] == "edit") {
 #do the product enabled/disblaed drop down
 $display_block_enabled = <<<EOD
 <select name="prod_enabled">
-<option value="$prod_enabledField" selected style="font-weight: bold">$wording_for_enabled</option>
+<option value="{$product['prod_enabled']}" selected style="font-weight: bold">$wording_for_enabled</option>
 <option value="1">$wording_for_enabledField</option>
 <option value="0">$wording_for_disabledField</option>
 </select>
@@ -128,35 +107,35 @@ $display_block = <<<EOD
 
 	<table align="center">
 	<tr>
-		<td class="details_screen">{$LANG_product_id}</td><td>{$prod_idField}</td>
+		<td class="details_screen">{$LANG_product_id}</td><td>{$product['prod_id']}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_product_description}</td>
-		<td><input type="text" name="prod_description" size="50" value="{$prod_descriptionField}" /></td>
+		<td><input type="text" name="prod_description" size="50" value="{$product['prod_description']}" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_product_unit_price}</td>
-		<td><input type="text" name="prod_unit_price" size="25" value="{$prod_unit_priceField}" /></td>
+		<td><input type="text" name="prod_unit_price" size="25" value="{$product['prod_unit_price']}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
-		<td><input type="text" name="prod_custom_field1" size="50" value="{$prod_custom_field1Field}" /></td>
+		<td class="details_screen">{$customFieldLabel['1']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td><input type="text" name="prod_custom_field1" size="50" value="{$product['prod_custom_field1']}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
-		<td><input type="text" name="prod_custom_field2" size="50" value="{$prod_custom_field2Field}" /></td>
+		<td class="details_screen">{$customFieldLabel['2']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td><input type="text" name="prod_custom_field2" size="50" value="{$product['prod_custom_field2']}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
-		<td><input type="text" name="prod_custom_field3" size="50" value="{$prod_custom_field3Field}" /></td>
+		<td class="details_screen">{$customFieldLabel['3']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td><input type="text" name="prod_custom_field3" size="50" value="{$product['prod_custom_field3']}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$prod_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
-		<td><input type="text" name="prod_custom_field4" size="50" value="{$prod_custom_field4Field}" /></td>
+		<td class="details_screen">{$customFieldLabel['4']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td><input type="text" name="prod_custom_field4" size="50" value="{$product['prod_custom_field4']}" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_notes}</td>
-		<td><textarea name="prod_notes" rows="8" cols="50">{$prod_notesField}</textarea></td>
+		<td><textarea name="prod_notes" rows="8" cols="50">{$product['prod_notes']}</textarea></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_product_enabled}</td><td>{$display_block_enabled}</td>

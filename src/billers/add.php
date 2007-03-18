@@ -56,10 +56,7 @@ EOD;
 
 
 #get custom field labels
-$biller_custom_field_label1 = get_custom_field_label("biller_cf1");
-$biller_custom_field_label2 = get_custom_field_label("biller_cf2");
-$biller_custom_field_label3 = get_custom_field_label("biller_cf3");
-$biller_custom_field_label4 = get_custom_field_label("biller_cf4");
+$customFieldLabel = getCustomFieldLabels("biller");
 
 
 echo <<<EOD
@@ -102,16 +99,16 @@ echo <<<EOD
 		<td class="details_screen">{$LANG_email}</td><td><input type=text name="b_email" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$biller_custom_field_label1} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="b_custom_field1" size=25></td>
+		<td class="details_screen">{$customFieldLabel['1']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="b_custom_field1" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$biller_custom_field_label2} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="b_custom_field2" size=25></td>
+		<td class="details_screen">{$customFieldLabel['2']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="b_custom_field2" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$biller_custom_field_label3} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="b_custom_field3" size=25></td>
+		<td class="details_screen">{$customFieldLabel['3']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="b_custom_field3" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$biller_custom_field_label4} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="b_custom_field4" size=25></td>
+		<td class="details_screen">{$customFieldLabel['4']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name="b_custom_field4" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_logo_file} <a href="./documentation/info_pages/insert_biller_text.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>{$display_block_logo_list}</td>
