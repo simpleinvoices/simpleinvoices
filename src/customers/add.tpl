@@ -1,3 +1,7 @@
+<?php
+
+
+$block = <<<EOD
 <form name="frmpost" ACTION="index.php?module=customers&view=save"
 	METHOD=POST onsubmit="return frmpost_Validator(this)">
 <div id="top"><b>{$LANG_customer_add}</b></div>
@@ -98,3 +102,6 @@
 <input type=submit name="submit" value="{$LANG_insert_customer}">
 <input type=hidden name="op" value="insert_customer">
 </form>
+EOD;
+
+?>

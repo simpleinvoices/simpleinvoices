@@ -27,9 +27,7 @@ $customFieldLabel = getCustomFieldLabels("customer");
 #get custom field labels
 
 
-$temp = file_get_contents("./src/customers/add.html");
-$temp = addslashes($temp); $content = "";
+include("./src/customers/add.tpl");
+echo $block;
 
-eval('$content = "'.$temp.'";');
-echo $content;
 ?>

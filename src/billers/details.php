@@ -76,7 +76,7 @@ $display_block = "";
 $footer = "";
 
 
-include('./src/billers/details.html');
+include('./src/billers/details.tpl');
 
 if ($_GET['action'] == "view") {
 	$display_block = $display_block_view;
@@ -87,7 +87,7 @@ else if ($_GET['action'] == "edit") {
 	$footer = $footer_edit;
 }
 
-include('./src/billers/details.html');
+include('./src/billers/details.tpl');
 
 echo $block;
 
