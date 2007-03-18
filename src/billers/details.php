@@ -31,15 +31,6 @@ $result_print_biller = mysql_query($print_biller, $conn) or die(mysql_error());
 $biller = mysql_fetch_array($result_print_biller);
 $biller['wording_for_enabled'] = $biller['b_enabled']==1?$wording_for_enabledField:$wording_for_disabledField;
 
-/*while ($Array = mysql_fetch_array($result_print_biller) ) {
-
-		if ($biller['b_enabled'] == 1) {
-			$wording_for_enabled = $wording_for_enabledField;
-		} else {
-			$wording_for_enabled = $wording_for_disabledField;
-		}
-
-};*/
 
 /*drop down list code for invoice logo */
 
@@ -87,7 +78,7 @@ else if ($_GET['action'] == "edit") {
 	$footer = $footer_edit;
 }
 
-include('./src/billers/details.tpl');
+include('./templates/default/billers/details.tpl');
 
 echo $block;
 

@@ -53,7 +53,7 @@ $display_block = "";
 $footer = "";
 
 
-include('./src/customers/details.tpl');
+include('./templates/default/customers/details.tpl');
 
 if ($_GET['action'] == "view") {
 	$display_block = $display_block_view;
@@ -66,7 +66,7 @@ else if ($_GET['action'] == "edit") {
 	$footer = $footer_edit;
 }
 
-include('./src/customers/details.tpl');
+include('./templates/default/customers/details.tpl');
 
 echo $block;
 ?>

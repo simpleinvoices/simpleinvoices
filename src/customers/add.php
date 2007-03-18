@@ -27,7 +27,7 @@ $customFieldLabel = getCustomFieldLabels("customer");
 #get custom field labels
 
 
-include("./src/customers/add.tpl");
+include("./templates/default/customers/add.tpl");
 echo $block;
 
 ?>

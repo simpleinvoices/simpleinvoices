@@ -59,7 +59,7 @@ EOD;
 $customFieldLabel = getCustomFieldLabels("biller");
 
 
-include("./src/billers/add.tpl");
+include("./templates/default/billers/add.tpl");
 echo $block;
 
 ?>
