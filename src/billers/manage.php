@@ -14,17 +14,17 @@ $number_of_rows = mysql_num_rows($result);
 if (mysql_num_rows($result) == 0) {
 $display_block = "<P><em>$mb_no_invoices.</em></p>";
 }else{
-$display_block = "
+$display_block = <<<EOD
 <b>$mb_page_header :: <a href='index.php?module=billers&view=add'>$mb_actions_new_biller</a></b>
  <hr></hr>
 
 <!-- IE hack so that the table fits on the pages -->
 <!--[if gte IE 5.5]>
-<link rel=\"stylesheet\" type=\"text/css\" href=\"./src/include/css/iehacks.css\" media=\"all\"/>
+<link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
 <![endif]-->
 
 
-<table class=\"ricoLiveGrid manage\" id=\"rico_biller\" align=\"center\">
+<table class="ricoLiveGrid manage" id="rico_biller" align="center">
 <colgroup>
 <col style='width:15%;' />
 <col style='width:10%;' />
@@ -37,29 +37,25 @@ $display_block = "
 <col style='width:10%;' />
 </colgroup>
 <thead>
-<tr class=\"sortHeader\">
-<th class=\"noFilter sortable\">$mb_table_action</th>
-<th class=\" index_table sortable\">$mb_table_biller_id</th>
-<th class=\"index_table sortable\">$mb_table_biller_name</th>
+<tr class="sortHeader">
+<th class="noFilter sortable">$mb_table_action</th>
+<th class=" index_table sortable">$mb_table_biller_id</th>
+<th class="index_table sortable">$mb_table_biller_name</th>
 <!--
-<th class=\"index_table\">$mb_table_phone</th>
-<th class=\"index_table\">$mb_table_mobile_phone</th>
+<th class="index_table">$mb_table_phone</th>
+<th class="index_table">$mb_table_mobile_phone</th>
 -->
-<th class=\"index_table sortable\">$mb_table_email</th>
-<th class=\"noFilter index_table sortable\">$wording_for_enabledField</th>
+<th class="index_table sortable">$mb_table_email</th>
+<th class="noFilter index_table sortable">$wording_for_enabledField</th>
 </tr>
 </thead>
-";
+EOD;
 
-while ($Array = mysql_fetch_array($result)) {
-	$b_idField = $Array['b_id'];
-	$b_mobile_phoneField = $Array['b_mobile_phone'];
-	$b_nameField = $Array['b_name'];
-	$b_phoneField = $Array['b_phone'];
-	$b_emailField = $Array['b_email'];
-	$b_enabledField = $Array['b_enabled'];
+
+
+while ($biller = mysql_fetch_array($result)) {
 	
-        if ($b_enabledField == 1) {
+        if ($biller['b_enabled'] == 1) {
                 $wording_for_enabled = $wording_for_enabledField;
         } else {
                 $wording_for_enabled = $wording_for_disabledField;
@@ -69,15 +65,20 @@ while ($Array = mysql_fetch_array($result)) {
 
 	$display_block .= "
 	<tr class='index_table'>
-	<td class='index_table'><a class='index_table' href='index.php?module=billers&view=details&submit=$b_idField&action=view'>$mb_actions_view</a> :: <a class='index_table' href='index.php?module=billers&view=details&submit=$b_idField&action=edit'>$mb_actions_edit</a></td>
-	<td class='index_table'>$b_idField</td>
-	<td class='index_table'>$b_nameField</td>
+	<td class='index_table'>
+	<a class='index_table' href='index.php?module=billers&view=details&submit={$biller['b_id']}&action=view'>
+	{$mb_actions_view}</a>
+	 :: 
+	<a class='index_table' href='index.php?module=billers&view=details&submit={$biller['b_id']}&action=edit'>
+	{$mb_actions_edit}</a></td>
+	<td class='index_table'>{$biller['b_id']}</td>
+	<td class='index_table'>{$biller['b_name']}</td>
 	<!--
-	<td class='index_table'>$b_phoneField</td>
-	<td class='index_table'>$b_mobile_phoneField</td>
+	<td class='index_table'>{$biller['b_phone']}</td>
+	<td class='index_table'>{$biller['b_mobile_phone']}</td>
 	-->
-	<td class='index_table'>$b_emailField</td>
-	<td class='index_table'>$wording_for_enabled</td>
+	<td class='index_table'>{$biller['b_email']}</td>
+	<td class='index_table'>{$wording_for_enabled}</td>
 	</tr>";
 
                 

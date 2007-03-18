@@ -56,7 +56,10 @@ function get_custom_field_label($field)         {
 }
 
 function getCustomFieldLables() {
-	
+	include('./config/config.php');
+	ob_start();
+	include("./lang/$language.inc.php");
+	ob_end_clean();
 }
 
 /**

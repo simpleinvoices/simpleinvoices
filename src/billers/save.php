@@ -97,11 +97,6 @@ else if (  $op === 'edit_biller' ) {
 
 $refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=billers&view=manage>";
 }
-?>
-
-<html>
-<head>
-<?php
 
 include('./include/include_main.php');
 
