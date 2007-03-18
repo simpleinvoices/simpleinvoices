@@ -1,4 +1,12 @@
 
+- in next release
+ - sql patch: reset default invoices template to default
+ - sql patch: change custom fields to 255 lenght - up from the current 50
+ - used an if file exists check for invoice print to make sure all the real files are there etc..
+ - fix the submenus - make placement work as normal
+ - pdf: change the file name to a shorter one , invoice3.pdf instead of the current long one
+ - pdf: pdf of the default templated doesnt include some of the borders on the right sides - needs fixing
+
 
 - Replace $LANG strings with array
 
