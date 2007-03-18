@@ -282,6 +282,28 @@ ADD b_co_footer TEXT";
         $patch_count++;
 
 
+        $sql_patch_name_37 = "Reset invoice template to default due to new invoice template system";
+        $sql_patch_37 = "
+		UPDATE `si_defaults` SET `def_inv_template` = 'default' WHERE `def_id` =1 LIMIT 1 ;
+        ";
+        $sql_patch_update_37 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',37,'$sql_patch_name_37',20070325,'')";
+        $patch_count++;
+
+        $sql_patch_name_38 = "Alter custom field table - field length now 255 for field name";
+        $sql_patch_38 = "
+		ALTER TABLE `si_custom_fields` CHANGE `cf_custom_field` `cf_custom_field` VARCHAR( 255 )
+        ";
+        $sql_patch_update_38 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',38,'$sql_patch_name_38',20070325,'')";
+        $patch_count++;
+
+
+        $sql_patch_name_39 = "Alter custom field table - field length now 255 for field label";
+        $sql_patch_39 = "
+		ALTER TABLE `si_custom_fields` CHANGE `cf_custom_label` `cf_custom_label` VARCHAR( 255 )
+        ";
+        $sql_patch_update_39 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',39,'$sql_patch_name_39',20070325,'')";
+        $patch_count++;
+
 /*
 CREATE TABLE `si_accounts` (
 `ac_id` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
