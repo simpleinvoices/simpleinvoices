@@ -4,17 +4,6 @@ include_once('./include/include_main.php');
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-/* validataion code */
-include("./include/validation.php");
-
-jsBegin();
-jsFormValidationBegin("frmpost");
-jsValidateRequired("b_name",$LANG_biller_name);
-jsFormValidationEnd();
-jsEnd();
-
-/* end validataion code */
-
 /*drop down list code for invoice logo */
 
 
@@ -32,34 +21,32 @@ $dirname="images/logo";
 sort($files);
 
 
-//TODO: not complet template
-$display_block_logo_list = <<<EOD
-<select name="b_co_logo">
-<option selected value="_default_blank_logo.png" style="font-weight: bold">_default_blank_logo.png</option>
-EOD;
-
-foreach ($files as $var)
-{
-	$display_block_logo_list .= "<option>$var</option>";
-}
-$display_block_logo_list .= "</select>";
-
-/*end logo stuff */
-
-#do the product enabled/disblaed drop down
-$display_block_enabled = <<<EOD
-<select name="b_enabled">
-<option value="1" selected>$wording_for_enabledField</option>
-<option value="0">$wording_for_disabledField</option>
-</select>
-EOD;
-
-
 #get custom field labels
 $customFieldLabel = getCustomFieldLabels("biller");
 
+//TODO: not complet template
+
+$display_block_logo_list = "";
+foreach ($files as $file)
+{
+	include("./templates/default/billers/add.tpl");
+	$display_block_logo_list .= $display_block_logo_line;
+}
+
 
 include("./templates/default/billers/add.tpl");
+
+if($_POST['b_name'] == "" ) {
+	if(isset($_POST['submit'])) {
+		echo "Please insert Biller";
+	}
+}
+else {
+	include("./src/billers/save.php");
+	include("./templates/default/billers/add.tpl");
+	$block = $save;
+}
+
 echo $block;
 
 ?>

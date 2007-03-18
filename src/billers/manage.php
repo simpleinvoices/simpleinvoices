@@ -89,8 +89,6 @@ while ($biller = mysql_fetch_array($result)) {
 }
 
 
-
-include('./html/header.html');
 include('./config/config.php');
 
 require("./src/include/js/lgplus/php/chklang.php");

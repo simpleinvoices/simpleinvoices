@@ -1,4 +1,5 @@
 <?php
+
 include('./include/include_main.php'); 
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
@@ -102,15 +103,6 @@ include('./include/include_main.php');
 
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 $display_block_items = isset($display_block_items) ? $display_block_items : '&nbsp;';
-echo <<<EOD
-{$refresh_total}
 
-<br>
-<br>
-{$display_block}
-<br><br>
-{$display_block_items}
 
-EOD;
 ?>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

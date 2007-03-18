@@ -5,17 +5,6 @@ include_once('./include/include_main.php');
 checkLogin();
 
 
-#table
-include("./include/validation.php");
-
-/*validation code*/
-jsBegin();
-jsFormValidationBegin("frmpost");
-jsValidateRequired("b_name",$LANG_biller_name);
-jsFormValidationEnd();
-jsEnd();
-/*end validation code*/
-
 
 #get the invoice id
 $biller_id = $_GET['submit'];
@@ -52,11 +41,13 @@ $display_block_logo_list = <<<EOD
 	<option selected value="$biller[b_co_logo]" style="font-weight:bold;">$biller[b_co_logo]</option>
 EOD;
 
-foreach ( $files as $var )
+
+$display_block_logo_list = "";
+foreach ($files as $file)
 {
-	$display_block_logo_list .= "<option>{$var}</option>";
+	include("./templates/default/billers/add.tpl");
+	$display_block_logo_list .= $display_block_logo_line;
 }
-$display_block_logo_list .= "</select>";
 
 /*end logo stuff */
 
@@ -67,13 +58,13 @@ $display_block = "";
 $footer = "";
 
 
-include('./src/billers/details.tpl');
+include('./templates/default/billers/details.tpl');
 
 if ($_GET['action'] == "view") {
 	$display_block = $display_block_view;
 	$footer = $footer_view;
 }
-else if ($_GET['action'] == "edit") {
+if ($_GET['action'] == "edit") {
 	$display_block = $display_block_edit;
 	$footer = $footer_edit;
 }

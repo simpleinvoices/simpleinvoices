@@ -1,5 +1,32 @@
 <?php
 
+$save = <<<EOD
+{$refresh_total}
+<br>
+<br>
+{$display_block}
+<br><br>
+{$display_block_items}
+EOD;
+
+$display_block_enabled = <<<EOD
+<select name="b_enabled">
+<option value="1" selected>$wording_for_enabledField</option>
+<option value="0">$wording_for_disabledField</option>
+</select>
+EOD;
+
+$display_block_logo = <<<EOD
+<select name="b_co_logo">
+<option selected value="_default_blank_logo.png" style="font-weight: bold">_default_blank_logo.png</option>
+$display_block_logo_list
+</select>
+EOD;
+
+$display_block_logo_line = <<<EOD
+<option>$file</option>
+EOD;
+
 $display_block_view = <<<EOD
 	<b>{$LANG_biller} :: <a href="index.php?module=billers&view=details&submit=$biller[b_id]&action=edit">{$LANG_edit}</a></b>
  <hr></hr>
@@ -89,7 +116,6 @@ $display_block_enabled = <<<EOD
 </select>
 EOD;
 
-
 $display_block_edit = <<<EOD
 
 	<b>{$LANG_biller_edit}</b>
@@ -161,7 +187,7 @@ $display_block_edit = <<<EOD
 	<tr>
 		<td class="details_screen">{$LANG_logo_file}
 		<a href="documentation/info_pages/insert_biller_text.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
-		<td>{$display_block_logo_list}</td> 
+		<td>{$display_block_logo}</td> 
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_invoice_footer}</td>
@@ -190,7 +216,7 @@ EOD;
 
 
 $block = <<<EOD
-<form name="frmpost" action="index.php?module=billers&view=save&submit={$_GET['submit']}" method="post" onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=billers&view=add&submit={$_GET['submit']}" method="post">
 {$display_block}
 {$footer}
 </form>
