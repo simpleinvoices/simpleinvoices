@@ -170,10 +170,10 @@ $check_patches_sql = "
 
 
 if ($_GET['op'] == "run_updates") {
-	$table = '{$tb_prefix}sql_patchmanager';
+	$table = "{$tb_prefix}sql_patchmanager";
 #DEFINE SQL PATCH
 	
-	if(mysql_num_rows(mysql_query("SHOW TABLES LIKE '".$table."'"))==1) {
+	if(mysql_num_rows(mysql_query("SHOW TABLES LIKE '$table'"))==1) {
 
 
 
@@ -226,6 +226,9 @@ if ($_GET['op'] == "run_updates") {
 		run_sql_patch(34,$sql_patch_name_34,$sql_patch_34,$sql_patch_update_34);
 		run_sql_patch(35,$sql_patch_name_35,$sql_patch_35,$sql_patch_update_35);
 		run_sql_patch(36,$sql_patch_name_36,$sql_patch_36,$sql_patch_update_36);
+		run_sql_patch(37,$sql_patch_name_37,$sql_patch_37,$sql_patch_update_37);
+		run_sql_patch(38,$sql_patch_name_38,$sql_patch_38,$sql_patch_update_38);
+		run_sql_patch(39,$sql_patch_name_39,$sql_patch_39,$sql_patch_update_39);
 
 
 		echo "<tr><td><br>The database patches have now been applied, please go back to the <a href='index.php?module=options&view=database_sqlpatches'>Database Upgrade Manager page</a> to see what patches have been applied. If all patches have been applied then there is now further action required</td></tr>";
@@ -258,7 +261,7 @@ else {
 	#$tables = mysql_list_tables($dbname);
 	$table = "{$tb_prefix}sql_patchmanager";
 
-	if(mysql_num_rows(mysql_query("SHOW TABLES LIKE '".$table."'"))==1) {
+	if(mysql_num_rows(mysql_query("SHOW TABLES LIKE '$table'"))==1) {
 
 
 		echo <<<EOD

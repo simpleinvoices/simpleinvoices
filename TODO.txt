@@ -7,7 +7,7 @@
  - pdf: change the file name to a shorter one , invoice3.pdf instead of the current long one
  - pdf: pdf of the default templated doesnt include some of the borders on the right sides - needs fixing
  - validation: biller edit
- - sqlpatcehs - make sure this works - the latest patches dotn seem happy
+ - sqlpatcehs - make sure this works - the latest patches dotn seem happy - done
 
 - Replace $LANG strings with array
 
