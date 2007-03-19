@@ -43,7 +43,7 @@ $display_block_view = <<<EOD
 		<td class="details_screen">{$LANG_street}</td><td>$biller[b_street_address]</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_street2} <a href="./documentation/info_pages/street2.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td>$biller[b_street_address2]</td>
+		<td class="details_screen">{$LANG_street2} <a href="./documentation/info_pages/street2.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$biller[b_street_address2]</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_city}</td><td>$biller[b_city]</td>
@@ -70,23 +70,23 @@ $display_block_view = <<<EOD
 		<td class="details_screen">{$LANG_email}</td><td>$biller[b_email]</td>
 	</tr>	
 	<tr>
-		<td class="details_screen">{$customFieldLabel['1']} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel['1']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td>$biller[b_custom_field1]</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel['2']} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel['2']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td>$biller[b_custom_field2]</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel['3']} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel['3']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td>$biller[b_custom_field3]</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel['4']} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel['4']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td>$biller[b_custom_field1]</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_logo_file} <a href="documentation/info_pages/insert_biller_text.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td><td>$biller[b_co_logo]</td>
+		<td class="details_screen">{$LANG_logo_file} <a href="documentation/info_pages/insert_biller_text.html" rel=""gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$biller[b_co_logo]</td>
 	</tr>	
 	<tr>
 		<td class="details_screen">{$LANG_invoice_footer}</td><td>$biller[b_co_footer]</td>
@@ -134,7 +134,7 @@ $display_block_edit = <<<EOD
 		<td><input type=text name="b_street_address" value="$biller[b_street_address]" size=50 /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_street2} <a href="./documentation/info_pages/street2.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$LANG_street2} <a href="./documentation/info_pages/street2.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="b_street_address2" value="$biller[b_street_address2]" size=50 /></td>
 	</tr>
 	<tr>
@@ -170,24 +170,24 @@ $display_block_edit = <<<EOD
 		<td><input type=text name="b_email" value="$biller[b_email]" size=50 /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel['1']} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel['1']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="b_custom_field1" value="$biller[b_custom_field1]" size=50 </td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel['2']} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel['2']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="b_custom_field2" value="$biller[b_custom_field2]" size=50 </td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel['3']} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel['3']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="b_custom_field3" value="$biller[b_custom_field3]" size=50 </td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel['4']} <a href="./documentation/info_pages/custom_fields.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel['4']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="b_custom_field4" value="$biller[b_custom_field4]" size=50 </td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_logo_file}
-		<a href="documentation/info_pages/insert_biller_text.html" rel="ibox&height=400"><img src="./images/common/help-small.png"></img></a></td>
+		<a href="documentation/info_pages/insert_biller_text.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td>{$display_block_logo}</td> 
 	</tr>
 	<tr>
