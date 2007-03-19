@@ -231,8 +231,9 @@ if (isset($_GET['export'])) {
 }
 
 #END INVOICE ITEMEISED/CONSULTING SECTION
-	
-	$css = "./src/invoices/templates/${template}/${template}.css";
+	if (is_null($_GET['export'])) {
+		$css = "./src/invoices/templates/${template}/${template}.css";
+	}
 	include('./config/config.php');
 
 	$temp = file_get_contents("./src/invoices/templates/${template}/${template}.html");
