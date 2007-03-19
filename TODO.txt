@@ -6,7 +6,7 @@
  - fix the submenus - make placement work as normal
  - pdf: change the file name to a shorter one , invoice3.pdf instead of the current long one
  - pdf: pdf of the default templated doesnt include some of the borders on the right sides - needs fixing
-
+ - validation: biller edit
 
 - Replace $LANG strings with array
 

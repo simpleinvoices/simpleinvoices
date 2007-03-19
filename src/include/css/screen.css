@@ -72,6 +72,7 @@ tr.index_table:hover {
         font-weight: normal;
         text-decoration: none;
 }
+
 /* table styling */
 .largeHeaders {
         background:
@@ -767,4 +768,13 @@ table.sortable tr.sortBottom td {
 }
 .align_center {
 	text-align: center;
+}
+
+
+.validation_alert {
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #FF0000;
+	padding: 10px;
+	text-transform:uppercase;
 }

@@ -102,7 +102,7 @@ EOD;
 
 $footer_view = <<<EOD
 <hr></hr>
-<a href="?submit=$biller[b_id]&action=edit">{$LANG_edit}</a>
+<a href="?module=billers&view=details&action=edit&submit=$biller[b_id]">{$LANG_edit}</a>
 EOD;
 
 
