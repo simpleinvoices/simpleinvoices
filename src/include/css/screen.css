@@ -776,5 +776,5 @@ table.sortable tr.sortBottom td {
 	color: #FFFFFF;
 	background-color: #FF0000;
 	padding: 10px;
-	text-transform:uppercase;
+	/*text-transform:uppercase;*/
 }

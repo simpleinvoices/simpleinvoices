@@ -38,7 +38,7 @@ include("./templates/default/billers/add.tpl");
 
 if($_POST['b_name'] == "" ) {
 	if(isset($_POST['submit'])) {
-		echo "<div class='validation_alert'>Please enter a Biller name</div><hr></hr>";
+		echo "<div class='validation_alert'><img src='./images/common/important.png'></img>You must enter a Biller name</div><hr></hr>";
 	}
 }
 else {
