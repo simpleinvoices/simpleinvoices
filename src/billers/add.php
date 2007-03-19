@@ -7,18 +7,7 @@ checkLogin();
 /*drop down list code for invoice logo */
 
 
-$dirname="images/logo";
-   $ext = array("jpg", "png", "jpeg", "gif");
-   $files = array();
-   if($handle = opendir($dirname)) {
-       while(false !== ($file = readdir($handle)))
-           for($i=0;$i<sizeof($ext);$i++)
-               if(stristr($file, ".".$ext[$i])) //NOT case sensitive: OK with JpeG, JPG, ecc.
-                   $files[] = $file;
-       closedir($handle);
-   }
-
-sort($files);
+$files = getLogoList();
 
 
 #get custom field labels

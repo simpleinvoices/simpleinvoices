@@ -9,6 +9,22 @@ function checkLogin() {
 	}
 }
 
+function getLogoList() {
+	$dirname="images/logo";
+	$ext = array("jpg", "png", "jpeg", "gif");
+	$files = array();
+	if($handle = opendir($dirname)) {
+		while(false !== ($file = readdir($handle)))
+		for($i=0;$i<sizeof($ext);$i++)
+		if(stristr($file, ".".$ext[$i])) //NOT case sensitive: OK with JpeG, JPG, ecc.
+		$files[] = $file;
+		closedir($handle);
+	}
+
+	sort($files);
+	
+	return $files;
+}
 /*
 * Script: functions.php
 *	Contain all the functions used in Simple Invoices
@@ -446,6 +462,38 @@ EOD;
 		}
 	}
 	return $display_block;
+}
+
+function getRicoLiveGrid($name, $columnSpecs) {
+	
+	echo <<<EOD
+	<script src="./src/include/js/lgplus/js/rico.js" type="text/javascript"></script>
+	<script type='text/javascript'>
+	Rico.loadModule('LiveGrid');
+	Rico.loadModule('LiveGridMenu');
+EOD;
+
+	setStyle();
+	setLang();
+
+	echo <<<EOD
+	Rico.onLoad( function() { var opts = {
+EOD;
+
+GridSettingsScript();
+
+echo <<<EOD
+, columnSpecs : [ , $columnSpecs ] };
+var menuopts =
+EOD;
+
+GridSettingsMenu();
+
+echo <<<EOD
+; new Rico.LiveGrid ('$name', new Rico.GridMenu(menuopts), new
+Rico.Buffer.Base($('$name').tBodies[0]), opts); });
+</script>
+EOD;
 }
 
 ?>

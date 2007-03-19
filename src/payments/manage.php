@@ -5,7 +5,6 @@ include('./include/include_main.php');
 checkLogin();
 
 
-
 #if coming from another page where you want to filter by just one invoice
 if (!empty($_GET['inv_id'])) {
 
@@ -41,10 +40,6 @@ $display_block = <<<EOD
 $display_block_header
 <hr></hr>
 
-<!-- IE hack so that the table fits on the pages -->
-<!--[if gte IE 5.5]>
-<link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
-<![endif]-->
 
 <table align="center" class="ricoLiveGrid"  id="rico_payment" >
 <colgroup>
@@ -122,42 +117,18 @@ while ($Array = mysql_fetch_array($result)) {
 
         $display_block .="</table>";
 }
+ 
+require("./src/include/js/lgplus/php/chklang.php");
+require("./src/include/js/lgplus/php/settings.php");
 
-require "./src/include/js/lgplus/php/chklang.php";
-require "./src/include/js/lgplus/php/settings.php";
-?>
-
-<script src="./src/include/js/lgplus/js/rico.js" type="text/javascript"></script>
-<script type='text/javascript'>
-Rico.loadModule('LiveGrid');
-Rico.loadModule('LiveGridMenu');
-
-<?php
-setStyle();
-setLang();
-?>
-
-Rico.onLoad( function() {
-  var opts = {  
-    <?php GridSettingsScript(); ?>,
-    columnSpecs   : [ 
-	,
-	{ type:'number', decPlaces:0, ClassName:'alignleft' },
+getRicoLiveGrid("rico_payment","{ type:'number', decPlaces:0, ClassName:'alignleft' },
 	{ type:'number', decPlaces:0, ClassName:'alignleft' },
 	,
 	,
-	{ type:'number', decPlaces:2, ClassName:'alignleft' }
- ]
-  };
-  var menuopts = <?php GridSettingsMenu(); ?>;
-  new Rico.LiveGrid ('rico_payment', new Rico.GridMenu(menuopts), new Rico.Buffer.Base($('rico_payment').tBodies[0]), opts);
-});
-</script>
+	{ type:'number', decPlaces:2, ClassName:'alignleft' }");
 
-<?php include('./config/config.php'); ?>
+echo $display_block;
 
-
-<?php echo $display_block; ?>
+?>
 
 <a href="./src/documentation/info_pages/wheres_the_edit_button.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img>Wheres the Edit button?</a>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

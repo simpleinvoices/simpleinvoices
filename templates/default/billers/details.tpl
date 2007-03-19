@@ -16,9 +16,10 @@ $display_block_enabled = <<<EOD
 </select>
 EOD;
 
+
 $display_block_logo = <<<EOD
 <select name="b_co_logo">
-<option selected value="_default_blank_logo.png" style="font-weight: bold">_default_blank_logo.png</option>
+	<option selected value="$biller[b_co_logo]" style="font-weight:bold;">$biller[b_co_logo]</option>
 $display_block_logo_list
 </select>
 EOD;

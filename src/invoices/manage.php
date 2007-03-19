@@ -27,53 +27,13 @@ $page_header = <<<EOD
 EOD;
 include('./src/invoices/manage.inc.php');
 
-?>
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-
-<script type="text/javascript" src="include/jquery.js"></script>
+require("./src/include/js/lgplus/php/chklang.php");
+require("./src/include/js/lgplus/php/settings.php");
 
 
-<?php
-require "./src/include/js/lgplus/php/chklang.php";
-require "./src/include/js/lgplus/php/settings.php";
-?>
-
-<script src="./src/include/js/lgplus/js/rico.js" type="text/javascript"></script>
-<script type='text/javascript'>
-Rico.loadModule('LiveGrid');
-Rico.loadModule('LiveGridMenu');
-
-<?php
-setStyle();
-setLang();
-?>
-
-Rico.onLoad( function() {
-  var opts = {  
-    <?php GridSettingsScript(); ?>,
-    columnSpecs   : [ 
-	,
-	{ type:'number', decPlaces:0, ClassName:'alignleft' },
-	,
-	,
+getRicoLiveGrid("ex1","	{ type:'number', decPlaces:0, ClassName:'alignleft' },,,
 	{ type:'number', decPlaces:2, ClassName:'alignleft' },
-	{ type:'number', decPlaces:2, ClassName:'alignleft' }
+	{ type:'number', decPlaces:2, ClassName:'alignleft' }");
 
- ]
-  };
-  var menuopts = <?php GridSettingsMenu(); ?>;
-  new Rico.LiveGrid ('ex1', new Rico.GridMenu(menuopts), new Rico.Buffer.Base($('ex1').tBodies[0]), opts);
-});
-</script>
-</head>
-
-<body>
-
-
-<?php echo $display_block; ?>
-<!--
-<a href="./documentation/info_pages/manage_invoices.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img><?php echo $LANG_help_manage_invoices; ?></a>
--->
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->
+echo $display_block;
+?>

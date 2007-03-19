@@ -6,7 +6,7 @@ checkLogin();
 
 
 
-$sql = "select * from {$tb_prefix}tax ORDER BY tax_description";
+$sql = "SELECT * FROM {$tb_prefix}tax ORDER BY tax_description";
 
 $result = mysql_query($sql, $conn) or die(mysql_error());
 $number_of_rows = mysql_num_rows($result);
@@ -21,11 +21,6 @@ if (mysql_num_rows($result) == 0) {
 	<a href="./index.php?module=tax_rates&view=add">{$LANG_add_new_tax_rate}</a></b>
  <hr></hr>
 
-
-<!-- IE hack so that the table fits on the pages -->
-<!--[if gte IE 5.5]>
-<link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
-<![endif]-->
 
 <table align="center" class="ricoLiveGrid" id="rico_tax_rates">
 <colgroup>
@@ -77,38 +72,12 @@ EOD;
 	$display_block .= "</table>";
 }
 
+require("./src/include/js/lgplus/php/chklang.php");
+require("./src/include/js/lgplus/php/settings.php");
 
-
-require "./src/include/js/lgplus/php/chklang.php";
-require "./src/include/js/lgplus/php/settings.php";
-?>
-
-<script src="./src/include/js/lgplus/js/rico.js" type="text/javascript"></script>
-<script type='text/javascript'>
-Rico.loadModule('LiveGrid');
-Rico.loadModule('LiveGridMenu');
-
-<?php
-setStyle();
-setLang();
-?>
-
-Rico.onLoad( function() {
-  var opts = {  
-    <?php GridSettingsScript(); ?>,
-    columnSpecs   : [ 
+getRicoLiveGrid("rico_tax_rates","{ type:'number', decPlaces:0, ClassName:'alignleft' },
 	,
-	{ type:'number', decPlaces:0, ClassName:'alignleft' },
-	,
-	{ type:'number', decPlaces:2, ClassName:'alignleft' }
- ]
-  };
-  var menuopts = <?php GridSettingsMenu(); ?>;
-  new Rico.LiveGrid ('rico_tax_rates', new Rico.GridMenu(menuopts), new Rico.Buffer.Base($('rico_tax_rates').tBodies[0]), opts);
-});
-</script>
-
-<?php 
-	echo $display_block; 
+	{ type:'number', decPlaces:2, ClassName:'alignleft' }");
+	
+echo $display_block; 
 ?>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

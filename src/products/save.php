@@ -79,11 +79,8 @@ mysql_select_db("$db_name",$conn);
 		//header( 'refresh: 0; url=manage_products.php' );
 		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=0;URL=index.php?module=products&view=manage>";
 	}
-
-
 }
 
-include('./include/include_main.php');
 
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 $display_block_items = isset($display_block_items) ? $display_block_items : '&nbsp;';
@@ -98,4 +95,3 @@ echo <<<EOD
 
 EOD;
 ?>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

@@ -21,11 +21,6 @@ if (mysql_num_rows($result) == 0) {
 <b>{$LANG_manage_customers} :: <a href="index.php?module=customers&view=add">{$LANG_customer_add}</a></b>
 <hr></hr>
 
-<!-- IE hack so that the table fits on the pages -->
-<!--[if gte IE 5.5]>
-<link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
-<![endif]-->
-
 
 <table align="center" id="rico_customer" class="ricoLiveGrid manage">
 <colgroup>
@@ -113,40 +108,10 @@ EOD;
 	$display_block .= "</table>";
 }
 
+require("./src/include/js/lgplus/php/chklang.php");
+require("./src/include/js/lgplus/php/settings.php");
 
-require "./src/include/js/lgplus/php/chklang.php";
-require "./src/include/js/lgplus/php/settings.php";
-?>
-
-<script src="./src/include/js/lgplus/js/rico.js" type="text/javascript"></script>
-<script type='text/javascript'>
-Rico.loadModule('LiveGrid');
-Rico.loadModule('LiveGridMenu');
-
-<?php
-setStyle();
-setLang();
-?>
-
-Rico.onLoad( function() {
-  var opts = {  
-    <?php GridSettingsScript(); ?>,
-    columnSpecs   : [ 
-	,
-	{ type:'number', decPlaces:0, ClassName:'alignleft' },
-	,
-	{ type:'number', decPlaces:2, ClassName:'alignleft' },
-	{ type:'number', decPlaces:2, ClassName:'alignleft' }
- ]
-  };
-  var menuopts = <?php GridSettingsMenu(); ?>;
-  new Rico.LiveGrid ('rico_customer', new Rico.GridMenu(menuopts), new Rico.Buffer.Base($('rico_customer').tBodies[0]), opts);
-});
-</script>
-
-
-
-<?php 
+getRicoLiveGrid("rico_customer","	{ type:'number', decPlaces:0, ClassName:'alignleft' },,{ type:'number', decPlaces:2, ClassName:'alignleft' },{ type:'number', decPlaces:2, ClassName:'alignleft' }");
 
 echo $display_block;
 

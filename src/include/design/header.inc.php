@@ -35,7 +35,6 @@ echo <<<EOD
 <script language="JavaScript" src="dhtml.js" type="text/JavaScript"></script>
 <link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
 <script language="JavaScript" src="./src/include/js/dhtml.js" type="text/JavaScript"></script>
-<link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
 <![endif]-->
 
 

@@ -20,10 +20,6 @@ checkLogin();
 
 	<hr></hr>
 	
-	<!-- IE hack so that the table fits on the pages -->
-	<!--[if gte IE 5.5]>
-	<link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
-	<![endif]-->
 
 	<table align="center" class="ricoLiveGrid manage" id="rico_preferences">
 	<colgroup>
@@ -80,35 +76,12 @@ EOD;
 		$display_block .= "</table>";
 	} // if
 
-require "./src/include/js/lgplus/php/chklang.php";
-require "./src/include/js/lgplus/php/settings.php";
+	require("./src/include/js/lgplus/php/chklang.php");
+	require("./src/include/js/lgplus/php/settings.php");
+	
+getRicoLiveGrid("rico_preferences","{ type:'number', decPlaces:0, ClassName:'alignleft' }");
+echo $display_block;
+
 ?>
-
-<script src="./src/include/js/lgplus/js/rico.js" type="text/javascript"></script>
-<script type='text/javascript'>
-Rico.loadModule('LiveGrid');
-Rico.loadModule('LiveGridMenu');
-
-<?php
-setStyle();
-setLang();
-?>
-
-Rico.onLoad( function() {
-  var opts = {  
-    <?php GridSettingsScript(); ?>,
-    columnSpecs   : [ 
-	,
-	{ type:'number', decPlaces:0, ClassName:'alignleft' }
- ]
-  };
-  var menuopts = <?php GridSettingsMenu(); ?>;
-  new Rico.LiveGrid ('rico_preferences', new Rico.GridMenu(menuopts), new Rico.Buffer.Base($('rico_preferences').tBodies[0]), opts);
-});
-</script>
-
-
-
-<?php echo $display_block; ?>
 
 <a href="./documentation/info_pages/inv_pref_what_the.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img> What's all this "Invoice Preference" stuff about?</a>
