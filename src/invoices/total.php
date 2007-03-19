@@ -266,11 +266,6 @@ EOD;
 	</td>
 </tr>
 </table>
-<!--
-//prototype window test
-<a href="#" onclick="openDialog();">TEST</a>
--->
-<!-- </div> -->
 <hr></hr>
 	<input type=submit name="submit" value="<?php echo $LANG_save_invoice;?>"><input type=hidden name="invoice_style" value="insert_invoice_total">
 </FORM>

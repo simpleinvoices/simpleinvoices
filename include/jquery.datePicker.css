@@ -103,6 +103,7 @@ div.popup-calendar table {
 	display: inline;
 }
 div.popup-calendar table th, div.popup-calendar table td {
+	border: 1px solid #fff;
 	background: #eee;
 	width: 21px;
 	height: 17px;
@@ -117,7 +118,6 @@ div.popup-calendar table th.weekend, div.popup-calendar table td.weekend {
 }
 div.popup-calendar table td a {
 	display: block;
-	border: 1px solid #eee;
 	width: 19px;
 	height: 15px;
 	text-decoration: none;
