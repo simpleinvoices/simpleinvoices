@@ -86,7 +86,7 @@ function getCustomFieldLabels($type) {
 	for($i=1;$row = mysql_fetch_row($result);$i++) {
 		$cf[$i]=$row[0];
 		if($cf[$i] == null) {
-			$cf[$i] = $LANG_custom_field;
+			$cf[$i] = $LANG_custom_field.$i;
 		}
 	}
 
