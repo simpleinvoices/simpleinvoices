@@ -82,8 +82,8 @@ INSERT INTO `si_biller` (`b_id`, `b_name`, `b_street_address`, `b_street_address
 
 CREATE TABLE `si_custom_fields` (
   `cf_id` int(11) NOT NULL auto_increment,
-  `cf_custom_field` varchar(50) collate utf8_unicode_ci NOT NULL,
-  `cf_custom_label` varchar(50) collate utf8_unicode_ci default NULL,
+  `cf_custom_field` varchar(255) collate utf8_unicode_ci NOT NULL,
+  `cf_custom_label` varchar(255) collate utf8_unicode_ci default NULL,
   `cf_display` varchar(1) collate utf8_unicode_ci NOT NULL default '1',
   PRIMARY KEY  (`cf_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;

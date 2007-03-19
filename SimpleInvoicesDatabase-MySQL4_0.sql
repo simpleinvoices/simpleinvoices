@@ -82,8 +82,8 @@ INSERT INTO `si_biller` (`b_id`, `b_name`, `b_street_address`, `b_street_address
 
 CREATE TABLE `si_custom_fields` (
   `cf_id` int(11) NOT NULL auto_increment,
-  `cf_custom_field` varchar(50) NOT NULL,
-  `cf_custom_label` varchar(50) default NULL,
+  `cf_custom_field` varchar(255) NOT NULL,
+  `cf_custom_label` varchar(255) default NULL,
   `cf_display` varchar(1) NOT NULL default '1',
   PRIMARY KEY  (`cf_id`)
 ) TYPE=MyISAM  AUTO_INCREMENT=17 ;
