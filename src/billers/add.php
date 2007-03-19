@@ -38,7 +38,7 @@ include("./templates/default/billers/add.tpl");
 
 if($_POST['b_name'] == "" ) {
 	if(isset($_POST['submit'])) {
-		echo "Please insert Biller";
+		echo "Please enter a Biller name";
 	}
 }
 else {
