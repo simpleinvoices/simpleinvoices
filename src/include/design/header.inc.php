@@ -32,8 +32,6 @@ echo <<<EOD
 <script src="./include/jquery.tabs.js" type="text/javascript"></script>
 
 <!--[if gte IE 5.5]>
-<script language="JavaScript" src="dhtml.js" type="text/JavaScript"></script>
-<link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
 <script language="JavaScript" src="./src/include/js/dhtml.js" type="text/JavaScript"></script>
 <![endif]-->
 

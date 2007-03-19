@@ -110,6 +110,13 @@ EOD;
 
 getRicoLiveGrid("rico_customer","	{ type:'number', decPlaces:0, ClassName:'alignleft' },,{ type:'number', decPlaces:2, ClassName:'alignleft' },{ type:'number', decPlaces:2, ClassName:'alignleft' }");
 
+
+echo <<<EOD
+<!--[if gte IE 5.5]>
+<link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
+<![endif]-->
+EOD;
+
 echo $display_block;
 
 ?>
