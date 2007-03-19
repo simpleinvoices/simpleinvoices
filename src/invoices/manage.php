@@ -3,18 +3,13 @@ include_once('./include/include_main.php');
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
-?>
 
-<html>
-<head>
 
-<?php
 echo <<<EOD
 <title>{$title} :: {$LANG_manage_invoices}</title>
 EOD;
+
 #insert customer
-
-
 
 $sql = "select * from {$tb_prefix}invoices ORDER BY inv_id desc";
 
@@ -26,9 +21,6 @@ $page_header = <<<EOD
 <hr></hr>
 EOD;
 include('./src/invoices/manage.inc.php');
-
-require("./src/include/js/lgplus/php/chklang.php");
-require("./src/include/js/lgplus/php/settings.php");
 
 
 getRicoLiveGrid("ex1","	{ type:'number', decPlaces:0, ClassName:'alignleft' },,,

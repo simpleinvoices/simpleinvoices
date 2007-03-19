@@ -5,9 +5,6 @@ include_once('./include/include_main.php');
 checkLogin();
 
 
-
-
-
 $sql = "select * from {$tb_prefix}custom_fields ORDER BY cf_custom_field";
 
 $result = mysql_query($sql, $conn) or die(mysql_error());
@@ -16,7 +13,7 @@ $number_of_rows = mysql_num_rows($result);
 
 if (mysql_num_rows($result) == 0) {
 	$display_block = "<P><em>{$LANG_no_invoices}.</em></p>";
-}else{
+} else{
 	$display_block = <<<EOD
 
 
@@ -41,14 +38,14 @@ if (mysql_num_rows($result) == 0) {
 </thead>
 EOD;
 
-while ($Array = mysql_fetch_array($result)) {
-	$cf_idField = $Array['cf_id'];
-	$cf_custom_fieldField = $Array['cf_custom_field'];
-	$cf_custom_labelField = $Array['cf_custom_label'];
-	//get the nice name of the custom field
-	$custom_field_name = get_custom_field_name($cf_custom_fieldField);
+	while ($Array = mysql_fetch_array($result)) {
+		$cf_idField = $Array['cf_id'];
+		$cf_custom_fieldField = $Array['cf_custom_field'];
+		$cf_custom_labelField = $Array['cf_custom_label'];
+		//get the nice name of the custom field
+		$custom_field_name = get_custom_field_name($cf_custom_fieldField);
 
-	$display_block .= <<<EOD
+		$display_block .= <<<EOD
 	<tr class="index_table">
 	<td class="index_table">
 	<a class="index_table" href="index.php?module=custom_fields&view=details&submit={$cf_idField}&action=view">{$LANG_view}</a> ::
@@ -63,9 +60,7 @@ EOD;
 	$display_block .= "</table>";
 }
 
-require("./src/include/js/lgplus/php/chklang.php");
-require("./src/include/js/lgplus/php/settings.php");
 
 getRicoLiveGrid("rico_custom_fields","{ type:'number', decPlaces:0, ClassName:'alignleft' }");
-	echo $display_block;
+echo $display_block;
 ?>

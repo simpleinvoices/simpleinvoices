@@ -62,29 +62,29 @@ EOD;
 		$c_faxField = $Array['c_fax'];
 		$c_emailField = $Array['c_email'];
 		$c_enabledField = $Array['c_enabled'];
-	
-  	if ($c_enabledField == 1) {
-  		$wording_for_enabled = $wording_for_enabledField;
-  	} else {
-  		$wording_for_enabled = $wording_for_disabledField;
+
+		if ($c_enabledField == 1) {
+			$wording_for_enabled = $wording_for_enabledField;
+		} else {
+			$wording_for_enabled = $wording_for_disabledField;
 		}
 
-#invoice total calc - start
-	$invoice_total_Field = calc_customer_total($c_idField );	
-	$invoice_total_Field_format = number_format($invoice_total_Field,2);	
-#invoice total calc - end
+		#invoice total calc - start
+		$invoice_total_Field = calc_customer_total($c_idField );
+		$invoice_total_Field_format = number_format($invoice_total_Field,2);
+		#invoice total calc - end
 
-#amount paid calc - start
-	$invoice_paid_Field = calc_customer_paid($c_idField);
-	$invoice_paid_Field_format = number_format($invoice_paid_Field,2);
-#amount paid calc - end
+		#amount paid calc - start
+		$invoice_paid_Field = calc_customer_paid($c_idField);
+		$invoice_paid_Field_format = number_format($invoice_paid_Field,2);
+		#amount paid calc - end
 
-#amount owing calc - start
-	$invoice_owing_Field = $invoice_total_Field - $invoice_paid_Field;
-	$invoice_owing_Field_format = number_format($invoice_total_Field - $invoice_paid_Field,2);
-#amount owing calc - end
+		#amount owing calc - start
+		$invoice_owing_Field = $invoice_total_Field - $invoice_paid_Field;
+		$invoice_owing_Field_format = number_format($invoice_total_Field - $invoice_paid_Field,2);
+		#amount owing calc - end
 
-				$display_block .= <<<EOD
+		$display_block .= <<<EOD
 	<tr class="index_table">
 	<td class="index_table"><a class="index_table"
 	 href="index.php?module=customers&view=details&submit={$c_idField}&action=view">{$LANG_view}</a> ::
@@ -107,9 +107,6 @@ EOD;
 	}
 	$display_block .= "</table>";
 }
-
-require("./src/include/js/lgplus/php/chklang.php");
-require("./src/include/js/lgplus/php/settings.php");
 
 getRicoLiveGrid("rico_customer","	{ type:'number', decPlaces:0, ClassName:'alignleft' },,{ type:'number', decPlaces:2, ClassName:'alignleft' },{ type:'number', decPlaces:2, ClassName:'alignleft' }");
 

@@ -22,7 +22,6 @@ $customer_id = $_GET['submit'];
 
 $customer = getCustomer($customer_id);
 
-
 $wording_for_enabled = $customer['c_enabled'] == 1 ?$wording_for_enabledField:$wording_for_disabledField;
 
 
@@ -46,12 +45,10 @@ $customFieldLabel = getCustomFieldLabels("customer");
 #show invoices per client
 $sql = "SELECT * FROM {$tb_prefix}invoices WHERE inv_customer_id =$customer_id  ORDER BY inv_id desc";
 
-
 $customFieldLabel = getCustomFieldLabels("biller");
 
 $display_block = "";
 $footer = "";
-
 
 include('./templates/default/customers/details.tpl');
 

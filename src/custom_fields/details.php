@@ -10,10 +10,6 @@ checkLogin();
 $cf_id = $_GET["submit"];
 
 
-
-
-
-
 #customer query
 $print_product = "SELECT * FROM {$tb_prefix}custom_fields WHERE cf_id = $cf_id";
 $result_print_product = mysql_query($print_product, $conn) or die(mysql_error());
@@ -53,17 +49,17 @@ if ($_GET['action'] == "view") {
 	<hr></hr>
 EOD;
 
-$footer = <<<EOD
+	$footer = <<<EOD
 
 <a href="index.php?module=custom_fields&view=details&submit=$cf[cf_id]&action=edit">{$LANG_edit}</a>
 
 EOD;
 }
 
-else if ($_GET['action'] == "edit") {
+	else if ($_GET['action'] == "edit") {
 
 
-$display_block = <<<EOD
+		$display_block = <<<EOD
 
 
 	<b>{$LANG_custom_fields}</b>
@@ -90,7 +86,7 @@ $display_block = <<<EOD
 	<hr></hr>
 EOD;
 
-$footer = <<<EOD
+		$footer = <<<EOD
 
 <input type="submit" name="cancel" value="{$LANG_cancel}" />
 <input type="submit" name="save_custom_field" value="{$LANG_save_custom_field}" />
@@ -100,14 +96,13 @@ EOD;
 }
 
 
-echo <<<EOD
+		echo <<<EOD
 
 <FORM name="frmpost" ACTION="index.php?module=custom_fields&view=save&submit={$_GET['submit']}"
  METHOD="POST" onsubmit="return frmpost_Validator(this)">
 
 {$display_block}
 {$footer}
-
+</form>
 EOD;
 ?>
-</form>

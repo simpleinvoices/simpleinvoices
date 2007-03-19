@@ -76,8 +76,6 @@ EOD;
 		$display_block .= "</table>";
 	} // if
 
-	require("./src/include/js/lgplus/php/chklang.php");
-	require("./src/include/js/lgplus/php/settings.php");
 	
 getRicoLiveGrid("rico_preferences","{ type:'number', decPlaces:0, ClassName:'alignleft' }");
 echo $display_block;

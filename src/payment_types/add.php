@@ -15,10 +15,7 @@ jsEnd();
 
 
 
-$temp = file_get_contents("./src/payment_types/add.html");
-$temp = addslashes($temp); $content = "";
-
-eval('$content = "'.$temp.'";');
-echo $content;
+include("./templates/default/payment_types/add.tpl");
+echo $block;
 
 ?>

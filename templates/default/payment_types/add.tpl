@@ -1,3 +1,6 @@
+<?php
+
+$block = <<<EOD
 <FORM name="frmpost" ACTION="index.php?module=payment_types&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
 		
 <b>Payment type to add</b>
@@ -5,7 +8,8 @@
 
 <table align=center>
 	<tr>
-		<td class="details_screen">Payment type description</td><td><input type=text name="pt_description" size=50></td>
+		<td class="details_screen">Payment type description</td>
+		<td><input type=text name="pt_description" size=50></td>
 	</tr>
 	<tr>
 		<td class="details_screen">$wording_for_enabledField</td><td>
@@ -21,3 +25,5 @@
 	<input type=submit name="submit" value="$LANG_insert_payment_type">
 	<input type=hidden name="op" value="insert_payment_type">
 </FORM>
+EOD;
+?>

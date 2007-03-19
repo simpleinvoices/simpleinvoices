@@ -1,5 +1,8 @@
 <?php
+
+
 include('./include/include_main.php');
+
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
@@ -36,9 +39,6 @@ else {
 	$block = $display_block;
 
 }
-
-require("./src/include/js/lgplus/php/chklang.php");
-require("./src/include/js/lgplus/php/settings.php");
 
 getRicoLiveGrid("rico_biller","{ type:'number', decPlaces:0, ClassName:'alignleft'}");
 	

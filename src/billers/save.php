@@ -40,8 +40,6 @@ else if ($op === 'edit_biller' ) {
 	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=billers&view=manage>";
 }
 
-include('./include/include_main.php');
-
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 $display_block_items = isset($display_block_items) ? $display_block_items : '&nbsp;';
 

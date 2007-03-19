@@ -16,24 +16,18 @@ jsEnd();
 $payment_type_id = $_GET['submit'];
 
 
-
 #customer query
 $print_payment_type = "SELECT * FROM {$tb_prefix}payment_types WHERE pt_id = $payment_type_id";
 $result_payment_type = mysql_query($print_payment_type, $conn) or die(mysql_error());
 
-while ($Array = mysql_fetch_array($result_payment_type) ) {
-	$pt_idField = $Array['pt_id'];
-	$pt_descriptionField = $Array['pt_description'];
-	$pt_enabledField = $Array['pt_enabled'];
+$paymentType = mysql_fetch_array($result_payment_type);
 
-	if ($pt_enabledField == 1) {
-		$wording_for_enabled = $wording_for_enabledField;	
-	} else {
-		$wording_for_enabled = $wording_for_disabledField;
-	}
 
-};
-
+if ($paymentType['pt_enabled'] == 1) {
+	$wording_for_enabled = $wording_for_enabledField;	
+} else {
+	$wording_for_enabled = $wording_for_disabledField;
+}
 
 if ($_GET['action'] === 'view') {
 
@@ -44,10 +38,10 @@ $display_block = <<<EOD
 
 	<table align="center">
 	<tr>
-		<td class="details_screen">{$LANG_payment_type_id}</td><td>{$pt_idField}</td>
+		<td class="details_screen">{$LANG_payment_type_id}</td><td>{$paymentType['pt_id']}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_description}</td><td>{$pt_descriptionField}</td>
+		<td class="details_screen">{$LANG_description}</td><td>{$paymentType['pt_description']}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$wording_for_enabledField}</td><td>{$wording_for_enabled}</td>
@@ -67,7 +61,7 @@ else if ($_GET['action'] === 'edit') {
 #do the product enabled/disblaed drop down
 $display_block_enabled = <<<EOD
 <select name="pt_enabled">
-<option value="$pt_enabledField" selected style="font-weight: bold">$wording_for_enabled</option>
+<option value="{$paymentType['pt_enabled']}" selected style="font-weight: bold">$wording_for_enabled</option>
 <option value="1">$wording_for_enabledField</option>
 <option value="0">$wording_for_disabledField</option>
 </select>
@@ -81,11 +75,11 @@ $display_block = <<<EOD
 	<table align=center>
 	<tr>
 		<td class="details_screen">{$LANG_payment_type_id}</td>
-		<td>{$pt_idField}</td>
+		<td>{$paymentType['pt_id']}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG_description}</td>
-		<td><input type="text" name="pt_description" value="{$pt_descriptionField}"
+		<td><input type="text" name="pt_description" value="{$paymentType['pt_description']}"
 		 size="50" /></td>
 	</tr>
 	<tr>
@@ -105,12 +99,6 @@ $footer = <<<EOD
 EOD;
 }
 
-?>
-</head>
-
-<body>
-<?php
-
 echo <<<EOD
 
 <form name="frmpost" action="index.php?module=payment_types&view=save&submit={$_GET['submit']}" method="post" onsubmit="return frmpost_Validator(this)">
@@ -121,4 +109,3 @@ echo <<<EOD
 {$footer}
 EOD;
 ?>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

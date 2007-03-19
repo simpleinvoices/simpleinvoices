@@ -15,81 +15,69 @@ jsEnd();
 /*end validation code*/
 
 
-
-
 #biller query
 $sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.c_name, {$tb_prefix}biller.b_name from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = {$tb_prefix}customers.c_id and {$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.b_id and {$tb_prefix}account_payments.ac_id='$_GET[inv_id]'";
 
 
 $result = mysql_query($sql, $conn) or die(mysql_error());
 
+$stuff = mysql_fetch_array($result);
+$stuff['date'] = date( $config['date_format'], strtotime( $stuff['ac_date'] ) );
 
-while ($Array = mysql_fetch_array($result)) {
-        $ac_idField = $Array['ac_id'];
-        $ac_inv_idField = $Array['ac_inv_id'];
-        $ac_amountField = $Array['ac_amount'];
-        $ac_notesField = $Array['ac_notes'];
-	$ac_payment_typeField = $Array['ac_payment_type'];
-        $ac_dateField = date( $config['date_format'], strtotime( $Array['ac_date'] ) );
-        $b_nameField = $Array['b_name'];
-        $c_nameField = $Array['c_name'];
-
-};
 
 /*Code to get the Invoice preference - so can link from this screen back to the invoice - START */
-$inv_type_sql = "select * from {$tb_prefix}invoices where inv_id = $ac_inv_idField";
+$inv_type_sql = "SELECT * FROM {$tb_prefix}invoices WHERE inv_id = {$stuff['ac_inv_id']}";
 $inv_type_result = mysql_query($inv_type_sql, $conn) or die(mysql_error());
-while ($inv_typeArray = mysql_fetch_array($inv_type_result)) {
-        $inv_typeField = $inv_typeArray['inv_type'];
-};
 
-$sql_invoice_desc = "select inv_ty_description from {$tb_prefix}invoice_type where inv_ty_id = $inv_typeField";
+$invoiceType = mysql_fetch_array($inv_type_result);
+
+
+$sql_invoice_desc = "SELECT inv_ty_description FROM {$tb_prefix}invoice_type WHERE inv_ty_id = {$invoiceType['inv_type']}";
 $result_invoice_desc = mysql_query($sql_invoice_desc, $conn) or die(mysql_error());
 
-while ($invoice_descArray = mysql_fetch_array($result_invoice_desc)) {
-	   $inv_ty_descriptionField = $invoice_descArray['inv_ty_description'];
-};
+
+$invoiceDescription = mysql_fetch_array($result_invoice_desc);
+
+
 /*Code to get the Invoice preference - so can link from this screen back to the invoice - END*/
 
-                #Payment type section
-                $payment_type_description = "select pt_description from {$tb_prefix}payment_types where pt_id = $ac_payment_typeField";
-                $result_payment_type_description = mysql_query($payment_type_description, $conn) or die(mysql_error());
+#Payment type section
+$payment_type_description = "select pt_description from {$tb_prefix}payment_types where pt_id = {$stuff['ac_payment_type']}";
+$result_payment_type_description = mysql_query($payment_type_description, $conn) or die(mysql_error());
 
-                while ($Array_pt = mysql_fetch_array($result_payment_type_description) ) {
-                                $payment_type_descriptionField = $Array_pt['pt_description'];
-                };
+$paymentType = mysql_fetch_array($result_payment_type_description);
 
 
 
-$display_block =  "
+$display_block =  <<<EOD
 <table align=center>
 	<tr>
-		<td class='details_screen'>$map_table_payment_id</td><td>$ac_idField</td>
+		<td class='details_screen'>$map_table_payment_id</td><td>{$stuff['ac_id']}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>$map_table_payment_invoice_id</td><td><a href='print_quick_view.php?submit=$ac_inv_idField&action=view&invoice_style=$inv_ty_descriptionField''>$ac_inv_idField</a></td>
+		<td class='details_screen'>$map_table_payment_invoice_id</td><td><a href='print_quick_view.php?submit={$stuff['ac_inv_id']}&action=view&invoice_style={$invoiceDescription['inv_ty_description']}''>{$stuff['ac_inv_id']}</a></td>
 	</tr>
 	<tr>
-		<td class='details_screen'>$map_table_amount</td><td>$ac_amountField</td>
+		<td class='details_screen'>$map_table_amount</td><td>{$stuff['ac_amount']}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>$map_table_date</td><td>$ac_dateField</td>
+		<td class='details_screen'>$map_table_date</td><td>{$stuff['date']}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>$map_table_biller</td><td>$b_nameField</td>
+		<td class='details_screen'>$map_table_biller</td><td>{$stuff['b_name']}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>$map_table_customer</td><td>$c_nameField</td>
+		<td class='details_screen'>$map_table_customer</td><td>{$stuff['c_name']}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>$map_table_payment_type</td><td>$payment_type_descriptionField</td>
+		<td class='details_screen'>$map_table_payment_type</td><td>{$paymentType['pt_description']}</td>
 	</tr>
         <tr>
-                <td class='details_screen'>$map_table_notes</td><td>$ac_notesField
+                <td class='details_screen'>$map_table_notes</td><td>{$stuff['ac_notes']}
         </tr>
 
 </table>
-";
+EOD;
 
 
 echo <<<EOD

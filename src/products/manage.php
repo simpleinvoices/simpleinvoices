@@ -70,10 +70,9 @@ EOD;
 	$display_block .= "</table>";
 }
 
-require("./src/include/js/lgplus/php/chklang.php");
-require("./src/include/js/lgplus/php/settings.php");
 
 getRicoLiveGrid("rico_product","{ type:'number', decPlaces:0, ClassName:'alignleft' },,{ type:'number', decPlaces:2, ClassName:'alignleft' }");
 
-echo $display_block; ?>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->
+echo $display_block;
+
+?>
