@@ -270,7 +270,7 @@ else {
 		<hr></hr>
 
 		<table align="center">
-			<tr></i><tr><td><br>The list below describes which patches have and have not been applied to the database, the aim is to have them all applied.  If there are patches that have not been applied to the Simple Invoices database, please run the Update database by clicking update </td></tr><tr align=center><td><br><a href='index.php?module=options&view=database_sqlpatches&op=run_updates'>UPDATE</a></td></tr></table><br>
+			<tr></i><tr><td><br>The list below describes which patches have and have not been applied to the database, the aim is to have them all applied.  If there are patches that have not been applied to the Simple Invoices database, please run the Update database by clicking update </td></tr><tr align=center><td><p class='align_center'><br><a href='index.php?module=options&view=database_sqlpatches&op=run_updates'>UPDATE</a></p></td></tr></table><br>
 <a href="./documentation/info_pages/text.html" rel="gb_page_center[450, 450]"><font color="red"><img src="./images/common/important.png"></img>Warning:</font></a>
 <table align="center">
 EOD;
