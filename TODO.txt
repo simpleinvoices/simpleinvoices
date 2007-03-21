@@ -8,7 +8,7 @@
  - pdf: pdf of the default templated doesnt include some of the borders on the right sides - needs fixing
  - validation: biller edit
  - sqlpatcehs - make sure this works - the latest patches dotn seem happy - done
- - css: make calendar popup css work as before
+ - css: make calendar popup css work as before - done
 
 - Replace $LANG strings with array
 
