@@ -13,7 +13,7 @@ $sql = "SELECT * FROM {$tb_prefix}biller ORDER BY b_name";
 $result = mysql_query($sql, $conn) or die(mysql_error());
 $number_of_rows = mysql_num_rows($result);
 
-include("./templates/default/billers/manage.tpl");
+include("./templates/default/billers/manage2.tpl");
 if (mysql_num_rows($result) == 0) {
 	$block = $display_block_vide;
 }
@@ -29,12 +29,12 @@ else {
                 $wording_for_enabled = $wording_for_disabledField;
         }
 
-		include("./templates/default/billers/manage.tpl");
+		include("./templates/default/billers/manage2.tpl");
 		$display_block_lines .= $display_block_line;           
 	
 	}
 	
-	include("./templates/default/billers/manage.tpl");
+	include("./templates/default/billers/manage2.tpl");
 
 	$block = $display_block;
 

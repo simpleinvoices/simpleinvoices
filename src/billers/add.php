@@ -7,7 +7,10 @@ checkLogin();
 /*drop down list code for invoice logo */
 
 
+
 $files = getLogoList();
+
+$smarty -> assign("files",$files);
 
 
 #get custom field labels
@@ -15,15 +18,15 @@ $customFieldLabel = getCustomFieldLabels("biller");
 
 //TODO: not complet template
 
-$display_block_logo_list = "";
-foreach ($files as $file)
+//$display_block_logo_list = "";
+/*foreach ($files as $file)
 {
-	include("./templates/default/billers/add.tpl");
+	//include("./templates/default/billers/add2.tpl");
 	$display_block_logo_list .= $display_block_logo_line;
-}
+}*/
 
 
-include("./templates/default/billers/add.tpl");
+//include("./templates/default/billers/add2.tpl");
 
 if($_POST['b_name'] == "" ) {
 	if(isset($_POST['submit'])) {
@@ -31,11 +34,15 @@ if($_POST['b_name'] == "" ) {
 	}
 }
 else {
-	include("./src/billers/save.php");
-	include("./templates/default/billers/add.tpl");
-	$block = $save;
+	
+	//include("./templates/default/billers/add2.tpl");
+	$save = true;
 }
 
-echo $block;
+include("./src/billers/save.php");
+
+$smarty -> assign('save',$save);
+
+//echo $block;
 
 ?>

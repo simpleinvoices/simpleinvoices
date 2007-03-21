@@ -15,7 +15,7 @@ jsEnd();
 
 
 
-include("./templates/default/payment_types/add.tpl");
-echo $block;
+//include("./templates/default/payment_types/add2.tpl");
+//echo $block;
 
 ?>

@@ -43,5 +43,8 @@ else if ($op === 'edit_biller' ) {
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 $display_block_items = isset($display_block_items) ? $display_block_items : '&nbsp;';
 
+$smarty -> assign('display_block',$display_block);
+$smarty -> assign('refresh_total',$refresh_total);
+$smarty -> assign('display_block_items',$display_block_items);
 
 ?>

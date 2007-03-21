@@ -50,7 +50,7 @@ $customFieldLabel = getCustomFieldLabels("biller");
 $display_block = "";
 $footer = "";
 
-include('./templates/default/customers/details.tpl');
+include('./templates/default/customers/details2.tpl');
 
 if ($_GET['action'] == "view") {
 	$display_block = $display_block_view;
@@ -63,7 +63,7 @@ else if ($_GET['action'] == "edit") {
 	$footer = $footer_edit;
 }
 
-include('./templates/default/customers/details.tpl');
+include('./templates/default/customers/details2.tpl');
 
 echo $block;
 ?>

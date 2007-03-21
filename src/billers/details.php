@@ -22,7 +22,7 @@ $files = getLogoList();
 $display_block_logo_list = "";
 foreach ($files as $file)
 {
-	include("./templates/default/billers/add.tpl");
+	include("./templates/default/billers/add2.tpl");
 	$display_block_logo_list .= $display_block_logo_line;
 }
 
@@ -35,7 +35,7 @@ $display_block = "";
 $footer = "";
 
 
-include('./templates/default/billers/details.tpl');
+include('./templates/default/billers/details2.tpl');
 
 if ($_GET['action'] == "view") {
 	$display_block = $display_block_view;
@@ -46,7 +46,7 @@ if ($_GET['action'] == "edit") {
 	$footer = $footer_edit;
 }
 
-include('./templates/default/billers/details.tpl');
+include('./templates/default/billers/details2.tpl');
 
 echo $block;
 

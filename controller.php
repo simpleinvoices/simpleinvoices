@@ -11,6 +11,12 @@ $module = isset($_GET['module'])?$_GET['module']:null;
 $view = isset($_GET['view'])?$_GET['view']:null;
 $action = isset($_GET['case'])?$_GET['case']:null;
 
+require_once("./include/smarty/Smarty.class.php");
+$smarty = new Smarty();
+$smarty -> compile_dir = "./cache/";
+$smarty -> config_dir = "./lang";
+$smarty -> config_load("english_uk.conf");
+
 
 /*
 if (($section != null ) AND ($view != null) AND ($case != null)) {
@@ -54,7 +60,14 @@ else if (($module != null ) AND ($view != null)) {
 	
 	/*Check to make sure that the requested files exist*/
 	if (file_exists("./src/$module/$view.php")) {
-	        include("./src/$module/$view.php");
+		
+			if(file_exists("./templates/default/{$module}/{$view}.tpl")) {
+				include("./src/$module/$view.php");
+				$smarty -> display("../templates/default/{$module}/{$view}.tpl");
+			}
+			else {
+	        	include("./src/$module/$view.php");
+			}
 	        
 	        /* Combines Code and template...
 	         * First have to create all templates
@@ -79,5 +92,4 @@ else {
         include("start.php");
         include("./src/include/design/footer.inc.php");
 }
-
 ?>

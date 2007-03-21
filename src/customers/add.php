@@ -9,25 +9,18 @@ include("./include/validation.php");
 
 jsBegin();
 jsFormValidationBegin("frmpost");
-jsValidateRequired("c_name",$LANG_customer_name);
+jsValidateRequired("c_name", $smarty -> get_config_vars("customer_name"));
 jsFormValidationEnd();
 jsEnd();
 
 /* end validataion code */
 
-#do the product enabled/disblaed drop down
-$display_block_enabled = <<<EOD
-<select name="c_enabled">
-<option value="1" selected>$wording_for_enabledField</option>
-<option value="0">$wording_for_disabledField</option>
-</select>
-EOD;
 
 $customFieldLabel = getCustomFieldLabels("customer");
+
 #get custom field labels
 
+$smarty -> assign('customFieldLabel',$customFieldLabel);
 
-include("./templates/default/customers/add.tpl");
-echo $block;
 
 ?>

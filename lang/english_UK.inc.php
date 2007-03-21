@@ -76,7 +76,8 @@ $LANG_customer_contact = "Customer contact (Attn)";//1
 $LANG_customer_details = "Customer details";//1
 $LANG_customer_edit = "Edit Customer";//1
 $LANG_customer_id = "Customer ID";//1
-$LANG_customer_name = "Customer name";//1
+$customer_name = "Customer name";//1
+
 $LANG_customers = "Customers";//1
 $LANG_database_upgrade_manager= "Database Upgrade Manager";//1
 $LANG_date= "date";//1
