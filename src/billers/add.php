@@ -12,7 +12,6 @@ $files = getLogoList();
 
 $smarty -> assign("files",$files);
 
-
 #get custom field labels
 $customFieldLabel = getCustomFieldLabels("biller");
 
@@ -27,17 +26,6 @@ $customFieldLabel = getCustomFieldLabels("biller");
 
 
 //include("./templates/default/billers/add2.tpl");
-
-if($_POST['b_name'] == "" ) {
-	if(isset($_POST['submit'])) {
-		echo "<div class='validation_alert'><img src='./images/common/important.png'></img>You must enter a Biller name</div><hr></hr>";
-	}
-}
-else {
-	
-	//include("./templates/default/billers/add2.tpl");
-	$save = true;
-}
 
 include("./src/billers/save.php");
 

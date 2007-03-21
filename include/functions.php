@@ -493,6 +493,10 @@ echo <<<EOD
 ; new Rico.LiveGrid ('$name', new Rico.GridMenu(menuopts), new
 Rico.Buffer.Base($('$name').tBodies[0]), opts); });
 </script>
+
+<!--[if gte IE 5.5]>
+<link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
+<![endif]-->
 EOD;
 }
 

@@ -7,9 +7,9 @@ if (!defined("BROWSE")) {
 
 /*Enter your database information */
 $db_host = "localhost";
-$db_name = "simple_invoices";
+$db_name = "test";
 $db_user = "root";
-$db_password = "";
+$db_password = "test";
 $tb_prefix = "si_";
 
 /*mysql version. basically if your using a version less than mysql 5 some features will be disabled*/
