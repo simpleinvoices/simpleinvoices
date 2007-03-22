@@ -32,11 +32,6 @@ $customFieldLabel = getCustomFieldLabels("product");
 
 echo <<<EOD
 
-<script language="javascript" type="text/javascript" src="include/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
-<script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
-</head>
-<BODY>
 
 
 

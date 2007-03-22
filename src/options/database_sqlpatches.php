@@ -301,14 +301,7 @@ EOD;
 }
 
 
-?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script type="text/javascript" src="./include/jquery.js"></script>
+include('./config/config.php'); ?>
 
-</head>
-<body>
-<?php include('./config/config.php'); ?>
 <br><br>
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

@@ -44,21 +44,6 @@ $display_block ="
 }
 
 
-
-
-
-
-?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<!-- CSS -->
-    <script type="text/javascript" src="./include/jquery.js"></script>
-
-</head>
-<body>
-
-<?php 
 	echo $display_block; 
 ?>
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

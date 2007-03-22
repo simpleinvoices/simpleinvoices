@@ -10,12 +10,19 @@ checkLogin();	//TODO: Really needed in .tpl files? I don't think so
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
 
-<link rel="stylesheet" type="text/css" href="include/jquery.datePicker.css" title="default" media="screen" />
+<link
+	rel="stylesheet" type="text/css"
+	href="include/jquery/jquery.datePicker.css" title="default"
+	media="screen" />
 
-<script type="text/javascript" src="include/jquery.js"></script>
-<script type="text/javascript" src="include/jquery.dom_creator.js"></script>
-<script type="text/javascript" src="include/jquery.datePicker.js"></script>
-<script type="text/javascript" src="include/jquery.datePicker.conf.js"></script>
+<script
+	type="text/javascript" src="include/jquery/jquery.js"></script>
+<script
+	type="text/javascript" src="include/jquery/jquery.dom_creator.js"></script>
+<script
+	type="text/javascript" src="include/jquery/jquery.datePicker.js"></script>
+<script
+	type="text/javascript" src="include/jquery/jquery.datePicker.conf.js"></script>
 
 <!--
     <script type="text/javascript">

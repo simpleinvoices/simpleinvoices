@@ -629,8 +629,9 @@ $display_block_bottom =  "
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script type="text/javascript" src="./include/jquery.js"></script>
-    <script type="text/javascript">
+<script
+	type="text/javascript" src="./include/jquery/jquery.js"></script>
+<script type="text/javascript">
 	$(document).ready(function() {
 	 // hides the customer and biller details as soon as the DOM is ready (a little sooner that page load)
 	  $('.show-summary').hide();

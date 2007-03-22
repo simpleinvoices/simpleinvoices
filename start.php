@@ -423,8 +423,9 @@ EOD;
 
                 <title><?php echo $title; ?></title>
 
-<script type="text/javascript" src="./include/jquery.js"></script>
-<script type="text/javascript" src="./include/jquery.accordian.js"></script>
+<script type="text/javascript" src="./include/jquery/jquery.js"></script>
+<script
+	type="text/javascript" src="./include/jquery/jquery.accordian.js"></script>
 
 </head>
 <BODY>

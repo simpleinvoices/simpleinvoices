@@ -12,8 +12,8 @@ echo <<<EOD
     var GB_ROOT_DIR = "./src/include/js/";
 </script>
 
-	<link rel="stylesheet" type="text/css" href="include/jquery.autocomplete.css" title="default" media="screen" />
-	<link rel="stylesheet" type="text/css" href="include/jquery.datePicker.css" title="default" media="screen" />
+	<link rel="stylesheet" type="text/css" href="include/jquery/jquery.autocomplete.css" title="default" media="screen" />
+	<link rel="stylesheet" type="text/css" href="include/jquery/jquery.datePicker.css" title="default" media="screen" />
 	<link rel="stylesheet" type="text/css" href="./src/include/css/header1.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="./src/include/css/header2.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="./src/include/css/screen.css" media="all"/>
@@ -23,13 +23,13 @@ echo <<<EOD
 
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
-<script type="text/javascript" src="include/jquery.js"></script>
-<script type="text/javascript" src="include/jquery.dom_creator.js"></script>
-<script type="text/javascript" src="include/jquery.datePicker.js"></script>
-<script type="text/javascript" src="include/jquery.datePicker.conf.js"></script>
-<script type='text/javascript' src='include/jquery.autocomplete.js'></script>
-<script type='text/javascript' src='include/jquery.autocomplete.conf.js'></script>
-<script src="./include/jquery.tabs.js" type="text/javascript"></script>
+<script type="text/javascript" src="include/jquery/jquery.js"></script>
+<script type="text/javascript" src="include/jquery/jquery.dom_creator.js"></script>
+<script type="text/javascript" src="include/jquery/jquery.datePicker.js"></script>
+<script type="text/javascript" src="include/jquery/jquery.datePicker.conf.js"></script>
+<script type='text/javascript' src='include/jquery/jquery.autocomplete.js'></script>
+<script type='text/javascript' src='include/jquery/jquery.autocomplete.conf.js'></script>
+<script type="text/javascript" src="./include/jquery/jquery.tabs.js"></script>
 
 <!--[if gte IE 5.5]>
 <script language="JavaScript" src="./src/include/js/dhtml.js" type="text/JavaScript"></script>
