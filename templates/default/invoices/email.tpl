@@ -2,6 +2,7 @@
 
 
 $block_stage1 = <<<EOD
+
 <form name="frmpost" ACTION="index.php?module=invoices&view=email&stage=2"
 	METHOD=POST onsubmit="return frmpost_Validator(this)">
 <div id="top"><b>Email Invoice to Customer as PDF</b></div>
