@@ -1,5 +1,4 @@
 <?php
-include('./include/include_main.php');
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
@@ -9,7 +8,6 @@ checkLogin();
 $sql = "select * from {$tb_prefix}payment_types ORDER BY pt_description";
 
 $result = mysql_query($sql, $conn) or die(mysql_error());
-$number_of_rows = mysql_num_rows($result);
 
 
 if (mysql_num_rows($result) == 0) {
@@ -38,25 +36,21 @@ if (mysql_num_rows($result) == 0) {
 </thead>
 EOD;
 
-	while ($Array = mysql_fetch_array($result)) {
-		$pt_idField = $Array['pt_id'];
-		$pt_descriptionField = $Array['pt_description'];
-		$pt_enabledField = $Array['pt_enabled'];
-
-		if ($pt_enabledField == 1) {
-			$wording_for_enabled = $wording_for_enabledField;
-		} else {
-			$wording_for_enabled = $wording_for_disabledField;
-	  }
+while ($pt = mysql_fetch_array($result)) {
+	if ($pt['pt_enabled'] == 1) {
+		$wording_for_enabled = $wording_for_enabledField;
+	} else {
+		$wording_for_enabled = $wording_for_disabledField;
+	}
 
 		$display_block .= <<<EOD
 	<tr class="index_table">
 	<td class="index_table"><a class="index_table"
-	 href="index.php?module=payment_types&view=details&submit={$pt_idField}&action=view">{$LANG_view}</a> ::
+	 href="index.php?module=payment_types&view=details&submit={$pt['pt_id']}&action=view">{$LANG_view}</a> ::
 	<a class="index_table"
-	 href="index.php?module=payment_types&view=details&submit={$pt_idField}&action=edit">{$LANG_edit}</a> </td>
-	<td class="index_table">{$pt_idField}</td>
-	<td class="index_table">{$pt_descriptionField}</td>
+	 href="index.php?module=payment_types&view=details&submit={$pt['pt_id']}&action=edit">{$LANG_edit}</a> </td>
+	<td class="index_table">{$pt['pt_id']}</td>
+	<td class="index_table">{$pt['pt_description']}</td>
 	<td class="index_table">{$wording_for_enabled}</td>
 	</tr>
 

@@ -1,5 +1,4 @@
 <?php
-include('./include/include_main.php');
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
@@ -93,9 +92,8 @@ EOD;
 		$payment_type_description = "select pt_description from {$tb_prefix}payment_types where pt_id = $ac_payment_typeField";
 		$result_payment_type_description = mysql_query($payment_type_description, $conn) or die(mysql_error());
 
-		while ($Array_pt = mysql_fetch_array($result_payment_type_description) ) {
-			$payment_type_descriptionField = $Array_pt['pt_description'];
-		};
+
+		$pt = mysql_fetch_array($result_payment_type_description);
 
 
 
@@ -109,7 +107,7 @@ EOD;
 		<td class='index_table'>$b_nameField</td>
 		<td class='index_table'>$ac_amountField</td>
 		<td class='index_table'>$stripped_ac_notesField</td>
-		<td class='index_table'>$payment_type_descriptionField</td>
+		<td class='index_table'>{$pt['pt_description']}</td>
 		<td class='index_table'>$ac_dateField</td>
 	</tr>
 EOD;
@@ -122,11 +120,6 @@ EOD;
 
 getRicoLiveGrid("rico_payment","{ type:'number', decPlaces:0, ClassName:'alignleft' },{ type:'number', decPlaces:0, ClassName:'alignleft' },,,{ type:'number', decPlaces:2, ClassName:'alignleft' }");
 
-echo <<<EOD
-<!--[if gte IE 5.5]>
-<link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
-<![endif]-->
-EOD;
 
 echo $display_block;
 

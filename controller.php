@@ -60,7 +60,8 @@ else if (($module != null ) AND ($view != null)) {
 	
 	/*Check to make sure that the requested files exist*/
 	if (file_exists("./src/$module/$view.php")) {
-		
+			include("./include/include_main.php");
+			
 			if(file_exists("./templates/default/{$module}/{$view}.tpl")) {
 				include("./src/$module/$view.php");
 				$smarty -> display("../templates/default/{$module}/{$view}.tpl");

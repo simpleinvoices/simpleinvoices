@@ -1,5 +1,5 @@
 <?php
-include_once('./include/include_main.php');
+
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
@@ -36,8 +36,6 @@ $invoice_paid_Field_formatted = number_format($invoice_paid_Field,2);
 
 #amount owing calc - start
 $invoice_owing_Field = number_format($invoice_total_Field - $invoice_paid_Field,2);
-
-
 #get custom field labels
 
 $customFieldLabel = getCustomFieldLabels("customer");
