@@ -1,4 +1,6 @@
 <?php
+define("BROWSE","browse");
+
 include("./include/include_main.php");
 
 

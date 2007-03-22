@@ -29,6 +29,6 @@ global $g_pt_scale;
 $g_pt_scale = $g_px_scale * 1.43; 
 
 $pipeline = PipelineFactory::create_default_pipeline("","");
-$pipeline->process('http://localhost:81/testing/ww.html', $media); 
+$pipeline->process('http://localhost/simpleinvoices', $media); 
 
 ?>
