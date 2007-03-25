@@ -20,10 +20,9 @@ if ($op === "insert_customer") {
 	//TODO: What's happening? Which vars are extracted? Not secure...
 	extract( $_POST );
 
-	$sql ='INSERT INTO {$tb_prefix}customers VALUES ("","' . $c_attention . '", "' . $c_name . '", "' . $c_street_address . '", "' . $c_street_address2 . '",  "' . $c_city . '", "' . $c_state . '", "' . $c_zip_code . '", "' . $c_country . '", "' . $c_phone . '", "' . $c_mobile_phone . '", "' . $c_fax . '", "' . $c_email . '", "' . $c_notes . '", "' . $c_custom_field1 . '", "' . $c_custom_field2 . '", "' . $c_custom_field3 . '", "' . $c_custom_field4 . '", "' . $c_enabled . '")';
+	$sql ='INSERT INTO '.$tb_prefix.'customers VALUES ("","' . $c_attention . '", "' . $c_name . '", "' . $c_street_address . '", "' . $c_street_address2 . '",  "' . $c_city . '", "' . $c_state . '", "' . $c_zip_code . '", "' . $c_country . '", "' . $c_phone . '", "' . $c_mobile_phone . '", "' . $c_fax . '", "' . $c_email . '", "' . $c_notes . '", "' . $c_custom_field1 . '", "' . $c_custom_field2 . '", "' . $c_custom_field3 . '", "' . $c_custom_field4 . '", "' . $c_enabled . '")';
 
-
-	if (mysql_query($sql, $conn)) {
+	if (mysql_query($sql)) {
 		$display_block = $LANG_save_customer_success;
 	} else {
 		$display_block = $LANG_save_customer_failure;
@@ -62,7 +61,7 @@ else if ( $op === 'edit_customer' ) {
 			WHERE
 				c_id = " . $_GET['submit'];
 
-		if (mysql_query($sql, $conn)) {
+		if (mysql_query($sql)) {
 			$display_block = $LANG_save_customer_success;
 		} else {
 			$display_block =  $LANG_save_customer_failure;
@@ -101,7 +100,7 @@ else if ( $op === 'pay_invoice' OR $op === 'pay_selected_invoice' ) {
 				'$_POST[ac_payment_type]'
 			)";
 
-	if (mysql_query($sql, $conn)) {
+	if (mysql_query($sql)) {
 		if ( $op === 'pay_selected_invoice' ) {
 			$display_block =  "Payment successfully processed, <br> you will be redirected to the Manage Invoices page";
 		}
@@ -153,7 +152,7 @@ else if ( $op === 'insert_biller') {
 				'$_POST[b_enabled]'
 			 )";
 
-	if (mysql_query($sql, $conn)) {
+	if (mysql_query($sql)) {
 		$display_block =  "Biller successfully added, <br> you will be redirected to the Manage Billers page";
 	} else {
 		$display_block =  "Something went wrong, please try adding the biller again<br>$sql";
@@ -191,7 +190,7 @@ else if (  $op === 'edit_biller' ) {
 				b_enabled = '$_POST[b_enabled]'
 			WHERE
 				b_id = '$_GET[submit]'";
-		if (mysql_query($sql, $conn)) {
+		if (mysql_query($sql)) {
 			$display_block =  "Biller successfully edited, <br> you will be redirected back to the Manage Billers";
 		} else {
 			$display_block =  "Something went wrong, please try editing the product again";
@@ -230,7 +229,7 @@ else if (  $op === 'insert_product' ) {
 			'$_POST[prod_enabled]'
 		)";
 
-	if (mysql_query($sql, $conn)) {
+	if (mysql_query($sql)) {
 		$display_block =  "Product successfully added, <br> you will be redirected to the Manage Products page";
 	} else {
 		$display_block =  "Something went wrong, please try adding the biller again";
@@ -245,9 +244,6 @@ else if (  $op === 'insert_product' ) {
 #edit product
 
 else if (  $op === 'edit_product' ) {
-
-	$conn = mysql_connect("$db_host","$db_user","$db_password");
-	mysql_select_db("$db_name",$conn);
 
 	if (isset($_POST['save_product'])) {
 		$sql = "UPDATE
@@ -264,7 +260,7 @@ else if (  $op === 'edit_product' ) {
 			WHERE
 				prod_id = '$_GET[submit]'";
 
-		if (mysql_query($sql, $conn)) {
+		if (mysql_query($sql)) {
 			$display_block =  "Product successfully edited, <br> you will be redirected back to the Manage Products";
 		} else {
 			$display_block =  "Something went wrong, please try editing the product again";
@@ -287,8 +283,6 @@ else if (  $op === 'edit_product' ) {
 
 else if (  $op === 'insert_tax_rate' ) {
 
-	$conn = mysql_connect("$db_host","$db_user","$db_password");
-	mysql_select_db("$db_name",$conn);
 
 	/*Raymond - what about the '', bit doesnt seem to do an insert in me environment when i exclude it
 	 $sql = "INSERT INTO {$tb_prefix}tax VALUES ('$_POST[tax_description]','$_POST[tax_percentage]')";
@@ -304,7 +298,7 @@ else if (  $op === 'insert_tax_rate' ) {
 			'$_POST[tax_enabled]'
 		)";
 
-	if (mysql_query($sql, $conn)) {
+	if (mysql_query($sql)) {
 		$display_block =  "Tax rate successfully added, <br> you will be redirected to the Manage Tax Rates page";
 	} else {
 		$display_block =  'Something went wrong, please try adding the tax rate again';
@@ -320,9 +314,6 @@ else if (  $op === 'insert_tax_rate' ) {
 
 else if (  $op === 'edit_tax_rate' ) {
 
-	$conn = mysql_connect("$db_host","$db_user","$db_password");
-	mysql_select_db("$db_name",$conn);
-
 	if (isset($_POST['save_tax_rate'])) {
 		$sql = "UPDATE
 				{$tb_prefix}tax
@@ -333,7 +324,7 @@ else if (  $op === 'edit_tax_rate' ) {
 			WHERE
 				tax_id = " . $_GET['submit'];
 
-		if (mysql_query($sql, $conn)) {
+		if (mysql_query($sql)) {
 			$display_block =  "Tax Rate successfully edited, <br> you will be redirected back to the Manage Tax Rates";
 		} else {
 			$display_block =  'Something went wrong, please try editing the tax rate again';
@@ -353,8 +344,6 @@ else if (  $op === 'edit_tax_rate' ) {
 
 else if (  $op === 'insert_payment_type' ) {
 
-	$conn = mysql_connect("$db_host","$db_user","$db_password");
-	mysql_select_db("$db_name",$conn);
 
 	/*Raymond - what about the '', bit doesnt seem to do an insert in me environment when i exclude it
 	 $sql = "INSERT INTO {$tb_prefix}tax VALUES ('$_POST[tax_description]','$_POST[tax_percentage]')";
@@ -369,7 +358,7 @@ else if (  $op === 'insert_payment_type' ) {
 			'$_POST[pt_enabled]'
 		)";
 
-	if (mysql_query($sql, $conn)) {
+	if (mysql_query($sql)) {
 		$display_block =  "Payment Type successfully added, <br> you will be redirected to the Manage Payment Types page";
 	} else {
 		$display_block =  'Something went wrong, please try adding the tax rate again';
@@ -384,9 +373,6 @@ else if (  $op === 'insert_payment_type' ) {
 
 else if (  $op === 'edit_payment_type' ) {
 
-	$conn = mysql_connect("$db_host","$db_user","$db_password");
-	mysql_select_db("$db_name",$conn);
-
 	if (isset($_POST['save_payment_type'])) {
 		$sql = "UPDATE
 				{$tb_prefix}payment_types
@@ -396,7 +382,7 @@ else if (  $op === 'edit_payment_type' ) {
 			WHERE
 				pt_id = " . $_GET['submit'];
 
-		if (mysql_query($sql, $conn)) {
+		if (mysql_query($sql)) {
 			$display_block =  "Payment Type successfully edited, <br> you will be redirected back to the Manage Payment Types";
 		} else {
 			$display_block =  'Something went wrong, please try editing the tax rate again';
@@ -435,7 +421,7 @@ if (  $op === 'insert_preference' ) {
 			'$_POST[pref_enabled]'
 		 )";
 
-	if (mysql_query($sql, $conn)) {
+	if (mysql_query($sql)) {
 		$display_block =  "Invoice preference successfully added,<br> you will be redirected to Manage Preferences page";
 	} else {
 		$display_block =  'Something went wrong, please try adding the invoice preference again';
@@ -468,7 +454,7 @@ else if (  $op === 'edit_preference' ) {
 			WHERE
 				pref_id = '$_GET[submit]'";
 
-		if (mysql_query($sql, $conn)) {
+		if (mysql_query($sql)) {
 			$display_block =  "Invoice Preference successfully edited, <br> you will be redirected back to Manage Invoice Preferences";
 		} else {
 			$display_block =  "Something went wrong, please try editing the invoice preference again";
@@ -492,7 +478,7 @@ else if (  $op == 'update_system_defaults' ) {
 
 	#get defaultsr query
 	$print_defaults = "SELECT * FROM {$tb_prefix}defaults WHERE def_id = 1";
-	$result_print_defaults = mysql_query($print_defaults, $conn) or die(mysql_error());
+	$result_print_defaults = mysql_query($print_defaults) or die(mysql_error());
 
 
 	while ($Array = mysql_fetch_array($result_print_defaults) ) {
@@ -533,7 +519,7 @@ else if (  $op == 'update_system_defaults' ) {
 					$def_payment_typeField
 				)";
 
-		if (mysql_query($sql, $conn)) {
+		if (mysql_query($sql)) {
 			$display_block =  "System default: Number of line items successfully update,<br> you will be redirected back to System Defaults page";
 		} else {
 			$display_block =  "Something went wrong, please try setting the system defaults again<br><<br>$sql";
@@ -562,7 +548,7 @@ else if (  $op == 'update_system_defaults' ) {
 					$def_payment_typeField
 				)";
 
-		if (mysql_query($sql, $conn)) {
+		if (mysql_query($sql)) {
 			$display_block =  "System default: Default invoice template successfully update,<br> you will be redirected back to System Defaults page";
 		} else {
 			$display_block =  "Something went wrong, please try setting the default invoice template again<br>$_POST[def_inv_template]
@@ -592,7 +578,7 @@ else if (  $op == 'update_system_defaults' ) {
 					'$def_payment_typeField'
 					)";
 
-		if (mysql_query($sql, $conn)) {
+		if (mysql_query($sql)) {
 			$display_block =  "System default: Default biller successfully updated,<br> you will be redirected back to System Defaults page";
 		} else {
 			$display_block =  "Something went wrong, please try setting the default biller again<br>$_POST[def_inv_template]
@@ -622,7 +608,7 @@ else if (  $op == 'update_system_defaults' ) {
 					$def_payment_typeField
 				)";
 
-		if (mysql_query($sql, $conn)) {
+		if (mysql_query($sql)) {
 			$display_block =  "System default: Default customer successfully updated,<br> you will be redirected back to System Defaults page";
 		} else {
 			$display_block =  "Something went wrong, please try setting the default customer again<br>$_POST[def_inv_template]
@@ -653,7 +639,7 @@ else if (  $op == 'update_system_defaults' ) {
 					$def_payment_typeField
 				)";
 
-		if (mysql_query($sql, $conn)) {
+		if (mysql_query($sql)) {
 			$display_block =  "System default: Default tax updated,<br> you will be redirected back to System Defaults page";
 		} else {
 			$display_block =  "Something went wrong, please try setting the default tax again<br>$_POST[def_inv_template]
@@ -684,7 +670,7 @@ else if (  $op == 'update_system_defaults' ) {
 					'$def_payment_typeField'
 				)";
 
-		if (mysql_query($sql, $conn)) {
+		if (mysql_query($sql)) {
 			$display_block =  "System default: Default invoice preference updated,<br> you will be redirected back to System Defaults page";
 		} else {
 			$display_block =  "Something went wrong, please try setting the default invoice preference again<br>$_POST[def_inv_template]
@@ -714,7 +700,7 @@ else if (  $op == 'update_system_defaults' ) {
 					$default_payment_type
 				)";
 
-		if (mysql_query($sql, $conn)) {
+		if (mysql_query($sql)) {
 			$display_block =  "System default: Default payment_type updated,<br> you will be redirected back to System Defaults page";
 		} else {
 			$display_block =  "Something went wrong, please try setting the default tax again<br>$_POST[def_inv_template]
@@ -733,8 +719,6 @@ else if (  $op == 'update_system_defaults' ) {
 
 else if (  $op === 'edit_custom_field' ) {
 
-	$conn = mysql_connect("$db_host","$db_user","$db_password");
-	mysql_select_db("$db_name",$conn);
 
 	if (isset($_POST['save_custom_field'])) {
 		$sql = "UPDATE
@@ -744,7 +728,7 @@ else if (  $op === 'edit_custom_field' ) {
                         WHERE
                                 cf_id = $_GET[submit]";
 
-		if (mysql_query($sql, $conn)) {
+		if (mysql_query($sql)) {
 			$display_block =  "Custom field successfully edited, <br> you will be redirected back to the Manage Products";
 		} else {
 			$display_block =  "Something went wrong, please try editing the custom field again<br>";
@@ -796,7 +780,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 
 	#tax percentage query
 	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
-	$result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
+	$result_print_tax_percentage = mysql_query($print_tax_percentage) or die(mysql_error());
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
@@ -865,7 +849,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 
 	#tax percentage query -start
 	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
-	$result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
+	$result_print_tax_percentage = mysql_query($print_tax_percentage) or die(mysql_error());
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
@@ -930,7 +914,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 
 	#tax percentage query
 	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
-	$result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
+	$result_print_tax_percentage = mysql_query($print_tax_percentage) or die(mysql_error());
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
@@ -942,7 +926,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 	/*
 	 #product info query
 	 $print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id ='$_POST[select_products]'";
-	 $result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
+	 $result_print_products_info = mysql_query($print_products_info ) or die(mysql_error());
 
 
 	 while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
@@ -971,7 +955,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 
 
 	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id =$product_line_item";
-	$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
+	$result_print_products_info = mysql_query($print_products_info ) or die(mysql_error());
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
@@ -1041,7 +1025,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 	#$display_block .= "step 2 - 1";
 	#tax percentage query
 	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
-	$result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
+	$result_print_tax_percentage = mysql_query($print_tax_percentage) or die(mysql_error());
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
@@ -1053,7 +1037,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 	/*
 	 #product info query
 	 $print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id ='$_POST[select_products]'";
-	 $result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
+	 $result_print_products_info = mysql_query($print_products_info ) or die(mysql_error());
 
 
 	 while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
@@ -1087,7 +1071,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 
 
 	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id =$product_line_item";
-	$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
+	$result_print_products_info = mysql_query($print_products_info ) or die(mysql_error());
 
 	#$display_block .= "step 2 - 5";
 
@@ -1170,7 +1154,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 
 	#tax percentage query
 	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
-	$result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
+	$result_print_tax_percentage = mysql_query($print_tax_percentage) or die(mysql_error());
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
@@ -1182,7 +1166,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 	/*
 	 #product info query
 	 $print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id ='$_POST[select_products]'";
-	 $result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
+	 $result_print_products_info = mysql_query($print_products_info ) or die(mysql_error());
 
 
 	 while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
@@ -1211,7 +1195,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 	}
 
 	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id =$product_line_item";
-	$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
+	$result_print_products_info = mysql_query($print_products_info ) or die(mysql_error());
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
@@ -1279,7 +1263,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 	#$display_block .= "step 2 - 1";
 	#tax percentage query
 	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
-	$result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
+	$result_print_tax_percentage = mysql_query($print_tax_percentage) or die(mysql_error());
 
 	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
 		$tax_idField = $Array_tax['tax_id'];
@@ -1290,7 +1274,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 	/*
 	 #product info query
 	 $print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id ='$_POST[select_products]'";
-	 $result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
+	 $result_print_products_info = mysql_query($print_products_info ) or die(mysql_error());
 
 
 	 while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
@@ -1325,7 +1309,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 	}
 
 	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id =$product_line_item";
-	$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
+	$result_print_products_info = mysql_query($print_products_info ) or die(mysql_error());
 
 	#$display_block .= "step 2 - 5  <br> $consulting_item_note ";
 
@@ -1379,8 +1363,6 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 }
 
 
-include('./include/include_main.php');
-
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 $display_block_items = isset($display_block_items) ? $display_block_items : '&nbsp;';
 
@@ -1398,4 +1380,3 @@ $display_block_items
 
 EOD;
 ?>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

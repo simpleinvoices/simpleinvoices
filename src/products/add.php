@@ -1,5 +1,4 @@
-<?php 
-include_once('./include/include_main.php');
+<?php
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
@@ -7,7 +6,6 @@ checkLogin();
 
 #include('./include/functions.php');
 /* validataion code */
-include("./include/validation.php");
 
 
 jsBegin();

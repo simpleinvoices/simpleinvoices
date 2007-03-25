@@ -1,5 +1,4 @@
 <?php
-include_once('./include/include_main.php');
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
@@ -38,21 +37,19 @@ if (mysql_num_rows($result) == 0) {
 </thead>
 EOD;
 
-	while ($Array = mysql_fetch_array($result)) {
-		$cf_idField = $Array['cf_id'];
-		$cf_custom_fieldField = $Array['cf_custom_field'];
-		$cf_custom_labelField = $Array['cf_custom_label'];
+	while ($cf = mysql_fetch_array($result)) {
+
 		//get the nice name of the custom field
-		$custom_field_name = get_custom_field_name($cf_custom_fieldField);
+		$cf['filed_name'] = get_custom_field_name($cf['cf_custom_field']);
 
 		$display_block .= <<<EOD
 	<tr class="index_table">
 	<td class="index_table">
-	<a class="index_table" href="index.php?module=custom_fields&view=details&submit={$cf_idField}&action=view">{$LANG_view}</a> ::
-	<a class="index_table" href="index.php?module=custom_fields&view=details&submit={$cf_idField}&action=edit">{$LANG_edit}</a> </td>
-	<td class="index_table">{$cf_idField}</td>
-	<td class="index_table">{$custom_field_name}</td>
-	<td class="index_table">{$cf_custom_labelField}</td>
+	<a class="index_table" href="index.php?module=custom_fields&view=details&submit={$cf['cf_id']}&action=view">{$LANG_view}</a> ::
+	<a class="index_table" href="index.php?module=custom_fields&view=details&submit={$cf['cf_id']}&action=edit">{$LANG_edit}</a> </td>
+	<td class="index_table">{$cf['cf_id']}</td>
+	<td class="index_table">{$cf['filed_name']}</td>
+	<td class="index_table">{$cf['cf_custom_label']}</td>
 	</tr>
 
 EOD;
@@ -62,12 +59,6 @@ EOD;
 
 
 getRicoLiveGrid("rico_custom_fields","{ type:'number', decPlaces:0, ClassName:'alignleft' }");
-
-echo <<<EOD
-<!--[if gte IE 5.5]>
-<link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
-<![endif]-->
-EOD;
 
 echo $display_block;
 ?>

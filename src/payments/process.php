@@ -6,7 +6,6 @@ checkLogin();
 
 
 /* validataion code */
-include("./include/validation.php");
 
 
 

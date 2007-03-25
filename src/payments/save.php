@@ -4,8 +4,6 @@
 checkLogin();
 
 
-
-
 # Deal with op and add some basic sanity checking
 
 $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
@@ -57,9 +55,6 @@ if ( $op === 'pay_invoice' OR $op === 'pay_selected_invoice' ) {
 
 }
 
-
-
-include('./include/include_main.php');
 
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 $display_block_items = isset($display_block_items) ? $display_block_items : '&nbsp;';

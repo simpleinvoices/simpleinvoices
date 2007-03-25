@@ -1,11 +1,8 @@
 <?php
-include('./include/include_main.php');
+
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
-
-
-include('./include/validation.php');
 
 jsBegin();
 jsFormValidationBegin("frmpost");

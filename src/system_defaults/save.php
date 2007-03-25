@@ -1,5 +1,4 @@
 <?php
-include('./include/include_main.php');
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
@@ -242,8 +241,6 @@ $default_payment_type = $_POST['def_payment_type'];
 }
 #end system default section
 
-
-include('./include/include_main.php');
 
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 $display_block_items = isset($display_block_items) ? $display_block_items : '&nbsp;';

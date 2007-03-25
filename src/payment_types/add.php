@@ -5,8 +5,6 @@
 checkLogin();
 
 
-include('./include/validation.php');
-
 jsBegin();
 jsFormValidationBegin("frmpost");
 jsValidateRequired("pt_description","Payment type description");

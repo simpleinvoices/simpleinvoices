@@ -3,8 +3,6 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-include("./include/validation.php");
-
 jsBegin();
 jsFormValidationBegin("frmpost");
 jsValidateRequired("pt_description",$LANG_payment_type_description);

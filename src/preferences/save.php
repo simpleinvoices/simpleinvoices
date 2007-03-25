@@ -1,5 +1,4 @@
 <?php
-include('./include/include_main.php');
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
@@ -82,9 +81,6 @@ else if (  $op === 'edit_preference' ) {
 		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=0;URL=index.php?module=preferences&view=manage>";
 	}
 }
-
-
-include('./include/include_main.php');
 
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 $display_block_items = isset($display_block_items) ? $display_block_items : '&nbsp;';

@@ -1,7 +1,7 @@
 <?php
 //stop the direct browsing to this file - let index.php handle which files get displayed
 
-checkLogin();
+//checkLogin();
 
 /*Enter your database information */
 $db_host = "localhost";

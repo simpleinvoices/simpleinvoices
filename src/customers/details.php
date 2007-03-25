@@ -5,20 +5,16 @@
 checkLogin();
 
 /* validataion code */
-include("./include/validation.php");
-
 jsBegin();
 jsFormValidationBegin("frmpost");
 jsValidateRequired("c_name",$LANG_customer_name);
 jsFormValidationEnd();
 jsEnd();
-
 /* end validataion code */
 
 
 #get the invoice id
 $customer_id = $_GET['submit'];
-
 
 $customer = getCustomer($customer_id);
 

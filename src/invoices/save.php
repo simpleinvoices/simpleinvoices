@@ -1,6 +1,4 @@
 <?php
-include('./config/config.php');
-include('./include/include_main.php');
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
@@ -704,13 +702,6 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 
 }
 
-?>
-
-<html>
-<head>
-<?php
-
-include('./include/include_main.php');
 
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 $display_block_items = isset($display_block_items) ? $display_block_items : '&nbsp;';

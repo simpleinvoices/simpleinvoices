@@ -4,7 +4,6 @@
 checkLogin();
 
 /* validataion code */
-include("./include/validation.php");
 
 jsBegin();
 jsFormValidationBegin("frmpost");
@@ -20,6 +19,5 @@ $customFieldLabel = getCustomFieldLabels("customer");
 #get custom field labels
 
 $smarty -> assign('customFieldLabel',$customFieldLabel);
-
 
 ?>

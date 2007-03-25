@@ -12,7 +12,7 @@ $billers = null;
 
 if (mysql_num_rows($result) != 0) {
 	$count = 0;
-	//$display_block_lines = "";
+
 	while ($biller = mysql_fetch_array($result)) {
 	
         if ($biller['b_enabled'] == 1) {
