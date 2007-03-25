@@ -68,47 +68,34 @@ $display_block_header
 </thead>
 EOD;
 
-	while ($Array = mysql_fetch_array($result)) {
-		$ac_idField = $Array['ac_id'];
-		$ac_inv_idField = $Array['ac_inv_id'];
-		$ac_amountField = ($Array['ac_amount']);
-		$ac_notesField = $Array['ac_notes'];
-		$ac_payment_typeField = $Array['ac_payment_type'];
-		$ac_dateField =  date( $config['date_format'], strtotime( $Array['ac_date'] ) );
-		$b_nameField = $Array['b_name'];
-		$c_nameField = $Array['c_name'];
+	while ($ac = mysql_fetch_array($result)) {
 
 		#item description - only show first 10 characters and add ... to signify theres more text
 		$max_length = 10;
-		if (strlen($ac_notesField) > $max_length ) {
-			$stripped_ac_notesField = substr($ac_notesField,0,10);
-			$stripped_ac_notesField .= "...";
+		if (strlen($ac['ac_notes']) > $max_length ) {
+			$ac['ac_notes'] = substr($ac['ac_notes'],0,10)."...";
 		}
-		else if (strlen($ac_notesField) <= $max_length ) {
-			$stripped_ac_notesField = $ac_notesField;
+		else if (strlen($ac['ac_notes']) <= $max_length ) {
+			$ac['ac_notes'] = $ac['ac_notes'];
 		}
 
 		#Payment type section
-		$payment_type_description = "select pt_description from {$tb_prefix}payment_types where pt_id = $ac_payment_typeField";
+		$payment_type_description = "select pt_description from {$tb_prefix}payment_types where pt_id = {$ac['ac_payment_type']}";
 		$result_payment_type_description = mysql_query($payment_type_description, $conn) or die(mysql_error());
-
 
 		$pt = mysql_fetch_array($result_payment_type_description);
 
-
-
-
 		$display_block .= <<<EOD
 	<tr class='index_table'>
-		<td class='index_table'><a class='index_table' href='index.php?module=payments&view=details&inv_id=$ac_idField'>$map_actions_view</a></td>
-		<td class='index_table'>$ac_idField</td>
-		<td class='index_table'>$ac_inv_idField</td>
-		<td class='index_table'>$c_nameField</td>
-		<td class='index_table'>$b_nameField</td>
-		<td class='index_table'>$ac_amountField</td>
-		<td class='index_table'>$stripped_ac_notesField</td>
+		<td class='index_table'><a class='index_table' href='index.php?module=payments&view=details&inv_id={$ac['ac_id']}'>$map_actions_view</a></td>
+		<td class='index_table'>{$ac['ac_id']}</td>
+		<td class='index_table'>{$ac['ac_inv_id']}</td>
+		<td class='index_table'>{$ac['c_name']}</td>
+		<td class='index_table'>{$ac['b_name']}</td>
+		<td class='index_table'>{$ac['ac_amount']}</td>
+		<td class='index_table'>{$ac['ac_notes']}</td>
 		<td class='index_table'>{$pt['pt_description']}</td>
-		<td class='index_table'>$ac_dateField</td>
+		<td class='index_table'>{$ac['ac_date']}</td>
 	</tr>
 EOD;
 	
