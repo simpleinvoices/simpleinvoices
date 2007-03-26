@@ -85,7 +85,36 @@ function updateBiller() {
 	return mysql_query($sql);
 }
 
+function saveCustomer() {
+	global $tb_prefix;
 
+	$sql = "
+			UPDATE
+				{$tb_prefix}customers
+			SET
+				c_name = '$_POST[c_name]',
+				c_attention = '$_POST[c_attention]',
+				c_street_address = '$_POST[c_street_address]',
+				c_street_address2 = '$_POST[c_street_address2]',
+				c_city = '$_POST[c_city]',
+				c_state = '$_POST[c_state]',
+				c_zip_code = '$_POST[c_zip_code]',
+				c_country = '$_POST[c_country]',
+				c_phone = '$_POST[c_phone]',
+				c_mobile_phone = '$_POST[c_mobile_phone]',
+				c_fax = '$_POST[c_fax]',
+				c_email = '$_POST[c_email]',
+				c_notes = '$_POST[c_notes]',
+				c_custom_field1 = '$_POST[c_custom_field1]',
+				c_custom_field2 = '$_POST[c_custom_field2]',
+				c_custom_field3 = '$_POST[c_custom_field3]',
+				c_custom_field4 = '$_POST[c_custom_field4]',
+				c_enabled = '$_POST[c_enabled]'
+			WHERE
+				c_id = " . $_GET['submit'];
+
+	return mysql_query($sql);
+}
 
 //in this file are functions for all sql queries
 ?>

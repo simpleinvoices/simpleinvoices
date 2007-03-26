@@ -273,4 +273,3 @@ EOD;
 <hr></hr>
 	<input type=submit name="submit" value="<?php echo $LANG_save_invoice;?>"><input type=hidden name="invoice_style" value="insert_invoice_total">
 </FORM>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->
