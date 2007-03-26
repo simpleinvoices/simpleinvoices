@@ -8,6 +8,7 @@
 	"cestina_czech.inc.php",
 	"deutsch_german.inc.php",
 	"english_UK.inc.php",
+	"francais_french.inc.php",
 	"galego_galician.inc.php",
 	"nederlands_dutch.inc.php",
 	"portugues_portuguese.inc.php",
