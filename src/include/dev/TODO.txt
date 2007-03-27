@@ -9,6 +9,7 @@
  - validation: biller edit
  - sqlpatcehs - make sure this works - the latest patches dotn seem happy - done
  - css: make calendar popup css work as before - done
+ - Start page in IE goign crazy again - check ie hacks file is loaded
 
 - Replace $LANG strings with array
 
