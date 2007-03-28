@@ -89,9 +89,9 @@ else if ($_GET['stage'] == 2 ) {
 
 	$mail->IsHTML(true);                                  // set email format to HTML
 
-	$mail->Subject = "Invoice from $biller[b_name] attached";
-	$mail->Body    = "This is the HTML message body <b>in bold!</b>";
-	$mail->AltBody = "This is the body in plain text for non-HTML mail clients";
+	$mail->Subject = "Invoice $invoice_id from $biller[b_name] attached";
+	$mail->Body    = "$_POST[c_notes]";
+	$mail->AltBody = "$_POST[c_notes]";
 
 	if(!$mail->Send())
 	{
@@ -99,11 +99,12 @@ else if ($_GET['stage'] == 2 ) {
 	   echo "Mailer Error: " . $mail->ErrorInfo;
 	   exit;
 	}
-
+	echo "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=invoices&view=manage>";
 	echo "Message has been sent";
 
-
 	echo $block_stage3;
+
+
 }
 
 //stage 3 = assemble email and send
