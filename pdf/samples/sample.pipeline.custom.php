@@ -32,6 +32,6 @@ $pipeline->layout_engine  = new LayoutEngineDefault;
 $pipeline->output_driver  = new OutputDriverFPDF($media);
 $pipeline->destination    = new DestinationFile(null);
 
-$pipeline->process('http://localhost:81/testing/ww.html', $media); 
+$pipeline->process('http://localhost/simpleinvoices/index.php', $media); 
 
 ?>

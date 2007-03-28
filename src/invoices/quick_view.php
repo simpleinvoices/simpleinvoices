@@ -157,7 +157,7 @@ while ($Array_defaults = mysql_fetch_array($result_print_defaults) ) {
 
         #Invoice Age - number of days - start
         if ($invoice_owing_Field > 0 ) {
-                $invoice_age_days = (strtotime(date('Y-m-d')) - strtotime($calc_dateField)) / (60 * 60 * 24);
+                $invoice_age_days =  number_format((strtotime(date('Y-m-d')) - strtotime($calc_dateField)) / (60 * 60 * 24),0);
                 /*$invoice_age_days = (strtotime(date("Y-m-d")) - strtotime($inv_dateField)) / (60 * 60 * 24);*/
                          $invoice_age = "$invoice_age_days $LANG_days";
         }
