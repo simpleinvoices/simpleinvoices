@@ -80,9 +80,10 @@ else if ($_GET['stage'] == 2 ) {
 	$mail->Username = "jswan";  // SMTP username
 	$mail->Password = "secret"; // SMTP password
 
-	$mail->From = "$biller[b_email]";
+	$mail->From = "$_POST[email_from]";
 	$mail->FromName = "$biller[b_name]";
-	$mail->AddAddress("justin@kelly.org.au");
+	$mail->AddAddress("$_POST[email_to]");
+	$mail->AddBCC("$_POST[email_bcc]");
 
 	$mail->WordWrap = 50;                                 // set word wrap to 50 characters
 	$mail->AddAttachment("./pdf/out/unnamed.pdf");         // add attachments
@@ -90,8 +91,8 @@ else if ($_GET['stage'] == 2 ) {
 	$mail->IsHTML(true);                                  // set email format to HTML
 
 	$mail->Subject = "Invoice $invoice_id from $biller[b_name] attached";
-	$mail->Body    = "$_POST[c_notes]";
-	$mail->AltBody = "$_POST[c_notes]";
+	$mail->Body    = "$_POST[email_notes]";
+	$mail->AltBody = "$_POST[email_notes]";
 
 	if(!$mail->Send())
 	{

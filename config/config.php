@@ -63,6 +63,8 @@ $pdf_bottom_margin = 15;
 
 #Error reporting
 #error_reporting(E_ALL);
+#error_reporting(E_WARNING);
+#error_reporting(E_ERROR);
 #error_reporting(E_ALL & ~E_NOTICE);
 #error_reporting(0);
 ?>
