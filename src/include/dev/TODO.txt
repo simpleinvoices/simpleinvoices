@@ -7,10 +7,13 @@
  - pdf: change the file name to a shorter one , invoice3.pdf instead of the current long one
  - pdf: pdf of the default templated doesnt include some of the borders on the right sides - needs fixing
  - validation: biller edit
+ -- apply to all sections of Simple Invoices
  - sqlpatcehs - make sure this works - the latest patches dotn seem happy - done
  - css: make calendar popup css work as before - done
  - Start page in IE goign crazy again - check ie hacks file is loaded
- - make email function work
+ - make email function work - done
+ -- make the info pages for email funtion
+ -- add note on screen that the generation of pdf and email can take 30 seconds
 
 - Replace $LANG strings with array
 

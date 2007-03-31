@@ -177,6 +177,9 @@ while ($newArray = mysql_fetch_array($result)) {
        <!-- was href="index.php?module=invoices&view=templates/{$def_inv_templateField} now using the simple template-->
   <!-- Payment --><a title="{$LANG_process_payment} {$invoice_preference_wordingField} {$inv_idField}"
    class="index_table" href="index.php?module=payments&view=process&submit={$inv_idField}&op=pay_selected_invoice">$</a>
+	<!-- Email -->
+	<a href="index.php?module=invoices&view=email&stage=1&submit={$inv_idField}" title="{$LANG_email}  {$invoice_preference_wordingField} {$inv_idField}"><img src="images/common/mail-message-new.png" height="16" border="0" padding="-4px" valign="bottom" /></a>
+
 	</td>
 	<td class="index_table">{$inv_idField}</td>
 	<td class="index_table">{$b_nameField}</td>
