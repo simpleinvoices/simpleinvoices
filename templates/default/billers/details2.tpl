@@ -17,18 +17,16 @@ $display_block_enabled = <<<EOD
 EOD;
 
 
-$display_block_logo = <<<EOD
+$display_block_logo = '
 <select name="b_co_logo">
 	<option selected value="$biller[b_co_logo]" style="font-weight:bold;">$biller[b_co_logo]</option>
 $display_block_logo_list
 </select>
-EOD;
+';
 
-$display_block_logo_line = <<<EOD
-<option>$file</option>
-EOD;
+$display_block_logo_line = '<option>$file</option>';
 
-$display_block_view = <<<EOD
+$display_block_view = '
 	<b>{$LANG_biller} :: <a href="index.php?module=billers&view=details&submit=$biller[b_id]&action=edit">{$LANG_edit}</a></b>
  <hr></hr>
 
@@ -70,19 +68,19 @@ $display_block_view = <<<EOD
 		<td class="details_screen">{$LANG_email}</td><td>$biller[b_email]</td>
 	</tr>	
 	<tr>
-		<td class="details_screen">{$customFieldLabel['1']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel[1]} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td>$biller[b_custom_field1]</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel['2']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel[2]} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td>$biller[b_custom_field2]</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel['3']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel[3]} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td>$biller[b_custom_field3]</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel['4']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel[4]} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td>$biller[b_custom_field1]</td>
 	</tr>
 	<tr>
@@ -98,8 +96,7 @@ $display_block_view = <<<EOD
 		<td class="details_screen">{$wording_for_enabledField}</td><td>$biller[wording_for_enabled]</td>
 	</tr>
 	</table>
-
-EOD;
+';
 
 $footer_view = <<<EOD
 <hr></hr>
@@ -117,7 +114,7 @@ $display_block_enabled = <<<EOD
 </select>
 EOD;
 
-$display_block_edit = <<<EOD
+$display_block_edit = '
 
 	<b>{$LANG_biller_edit}</b>
  <hr></hr>
@@ -170,19 +167,19 @@ $display_block_edit = <<<EOD
 		<td><input type=text name="b_email" value="$biller[b_email]" size=50 /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel['1']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel[1]} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="b_custom_field1" value="$biller[b_custom_field1]" size=50 </td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel['2']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel[2]} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="b_custom_field2" value="$biller[b_custom_field2]" size=50 </td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel['3']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel[3]} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="b_custom_field3" value="$biller[b_custom_field3]" size=50 </td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel['4']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel[4]} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="b_custom_field4" value="$biller[b_custom_field4]" size=50 </td>
 	</tr>
 	<tr>
@@ -203,8 +200,7 @@ $display_block_edit = <<<EOD
 		<td>{$display_block_enabled}</td>
 	</tr>
 	</table>
-
-EOD;
+';
 
 $footer_edit = <<<EOD
 <hr></hr>
@@ -216,10 +212,9 @@ EOD;
 
 
 
-$block = <<<EOD
-<form name="frmpost" action="index.php?module=billers&view=add&submit={$_GET['submit']}" method="post">
+$block = '
+<form name="frmpost" action="index.php?module=billers&view=add&submit={$_GET[submit]}" method="post">
 {$display_block}
 {$footer}
-</form>
-EOD;
+</form>';
 ?>

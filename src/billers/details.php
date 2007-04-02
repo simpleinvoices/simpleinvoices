@@ -17,12 +17,12 @@ $biller['wording_for_enabled'] = $biller['b_enabled']==1?$wording_for_enabledFie
 
 $files = getLogoList();
 
-
+include("./templates/default/billers/details2.tpl");
 $display_block_logo_list = "";
+
 foreach ($files as $file)
 {
-	include("./templates/default/billers/add2.tpl");
-	$display_block_logo_list .= $display_block_logo_line;
+	eval ('$display_block_logo_list .= "'.$display_block_logo_line.'";');
 }
 
 /*end logo stuff */
@@ -33,20 +33,21 @@ $customFieldLabel = getCustomFieldLabels("biller");
 $display_block = "";
 $footer = "";
 
-
-include('./templates/default/billers/details2.tpl');
+eval ('$display_block_logo = "'.addslashes($display_block_logo).'";');
 
 if ($_GET['action'] == "view") {
+	eval ('$display_block_view = "'.addslashes($display_block_view).'";');
 	$display_block = $display_block_view;
 	$footer = $footer_view;
 }
 if ($_GET['action'] == "edit") {
+	eval ('$display_block_edit = "'.addslashes($display_block_edit).'";');
 	$display_block = $display_block_edit;
 	$footer = $footer_edit;
 }
 
-include('./templates/default/billers/details2.tpl');
 
+eval ('$block = "'.addslashes($block).'";');
 echo $block;
 
 ?>
