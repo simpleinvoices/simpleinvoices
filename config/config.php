@@ -23,8 +23,9 @@ $language = "english_UK";
 #$language = "portugues_portuguese";
 #$language = "romana_romanian";
 #$language = "suomi_finnish";
+#$language = "francais_french";
 
-/*To change the theme, enter the name of the theme folder - defalut is google*/
+/*To change the theme, enter the name of the theme folder - default is google*/
 $theme = "google";
 
 $version = "20070325 unstable";

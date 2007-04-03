@@ -43,7 +43,7 @@ a.date-picker {
 	float: left;
 	overflow: hidden;
 	cursor: pointer;
-	background: url(../images/common/calendar.png) no-repeat; 
+	background: url(../../images/common/calendar.png) no-repeat; 
 }
 
 a.date-picker span {
