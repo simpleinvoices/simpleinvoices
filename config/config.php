@@ -5,9 +5,9 @@
 
 /*Enter your database information */
 $db_host = "localhost";
-$db_name = "test";
+$db_name = "simple_invoices";
 $db_user = "root";
-$db_password = "test";
+$db_password = "";
 $tb_prefix = "si_";
 
 /*mysql version. basically if your using a version less than mysql 5 some features will be disabled*/
@@ -28,7 +28,7 @@ $language = "english_UK";
 /*To change the theme, enter the name of the theme folder - default is google*/
 $theme = "google";
 
-$version = "20070325 unstable";
+$version = "20070425 unstable";
 
 $config['date_format']  = 'Y-m-d'; #International format just the date
 #$config['date_format']  = 'Y-m-d h:m'; #Internalional format date and time 
