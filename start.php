@@ -367,13 +367,13 @@ $display_block = <<<EOD
 							</a>
 						</td>
                                                 <td width=10%>
-                		                        <a href="database_sqlpatches.php">
+                		                        <a href="index.php?module=options&view=database_sqlpatches">
                                                         	<img src="images/common/upgrade.png"></img>
 								$LANG_database_upgrade_manager
 							</a>
 						</td>
                                                 <td width=10%>
-		                                        <a href="backup_database.php">
+		                                        <a href="index.php?module=options&view=backup_database">
                                                         	<img src="images/common/backup.png"></img>
 								$LANG_backup_database
 							</a>
