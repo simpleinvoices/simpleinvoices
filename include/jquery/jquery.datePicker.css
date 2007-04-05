@@ -43,7 +43,7 @@ a.date-picker {
 	float: left;
 	overflow: hidden;
 	cursor: pointer;
-	background: url(../../images/common/calendar.png) no-repeat; 
+	background: url(../../images/common/calendar.png) no-repeat;
 }
 
 a.date-picker span {
@@ -65,49 +65,100 @@ div.popup-calendar {
 	z-index: 2;
 	top: 0;
 	left: -16px; /* value for IE */
-	padding: 4px;
-	border: 2px solid #000;
+	padding: 0;
+	border: 3px solid #036;
 	background: #fff;
 	color: #000;
 	overflow:hidden;
-	width: 163px;
+	width: 180px;
+}
+* html div.popup-calendar {
+	width: 188px;
 }
 html>body div.popup-calendar {
-	left: 99px; /* value for decent browsers */
+	left: 163px; /* value for decent browsers */
+}
+/*For IE7*/
+*+html body div.popup-calendar {
+	left: 170px;
+}
+* html body div.popup-calendar {
+	left: 18px;
 }
 div.popup-calendar div.link-close {
-	float: right;
+	position:absolute;
+	left:38%;
+	bottom:0.5%;
+}
+/*For IE7*/
+*+html div.popup-calendar div.link-close {
+	bottom:2.5%;
+	font-size:90%;
+}
+* html div.popup-calendar div.link-close {
+	left:36%;
+	font-size:90%
 }
 div.popup-calendar div.link-prev {
 	float: left;
 }
+/*For IE7*/
+*+html div.popup-calendar div.link-prev {
+	font-size:90%;
+}
+* html div.popup-calendar div.link-prev {
+	font-size:90%;
+}
 div.popup-calendar h3 {
-	font-size: 1.3em;
-	margin: 2px 0 5px 3px;
+	font-size: 1.2em;
+	margin: 0 0 3px;
+	background-color:#036;
+	color:#fff;
+}
+/*For IE7*/
+*+html div.popup-calendar h3 {
+	font-size: 1em;
+}
+* html div.popup-calendar h3 {
+	font-size: 1.1em;
 }
 div.popup-calendar div.link-next {
 	float: right;
 }
+/*For IE7*/
+*+html div.popup-calendar div.link-next {
+	font-size:90%;
+}
+* html div.popup-calendar div.link-next {
+	font-size:90%;
+}
 div.popup-calendar div a {
-	padding: 1px 2px;
+	background-color:#fff;
+	padding: 3px 2px;
 	color: #000;
 }
 div.popup-calendar div a:hover {
-	background-color: #000;
+	background-color: #900;
 	color: #fff;
 }
 div.popup-calendar table {
-	margin: 0;
+	margin: 5px;
 }
 * html div.popup-calendar table {
 	display: inline;
 }
 div.popup-calendar table th, div.popup-calendar table td {
-	border: 1px solid #fff;
-	background: #eee;
+	background: #E5E5E5;
 	width: 21px;
 	height: 17px;
 	text-align: center;
+}
+/*For IE7*/
+*+html div.popup-calendar table th, div.popup-calendar table td {
+	font-size:85%;
+}
+* html div.popup-calendar table th, div.popup-calendar table td {
+	font-size:85%;
 }
 div.popup-calendar table td.inactive {
 	color: #aaa;
@@ -118,15 +169,18 @@ div.popup-calendar table th.weekend, div.popup-calendar table td.weekend {
 }
 div.popup-calendar table td a {
 	display: block;
-	width: 19px;
-	height: 15px;
-	text-decoration: none;
-	color: #333;
+	border: 1px solid #eee;
+	width: 22px;
+	height: 18px;
+	text-decoration:none;
+	color: #000;
 }
 div.popup-calendar table td.today a {
 	border-color: #aaa;
 }
 div.popup-calendar table td a.selected, div.popup-calendar table td a:hover {
-	background: #333; 
+	background: #036; 
 	color: #fff;
 }
+
+	

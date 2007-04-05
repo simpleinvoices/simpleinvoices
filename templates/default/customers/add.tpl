@@ -10,7 +10,7 @@
 	</tr>
 	</tr>
 	<td class="details_screen">{#customer_contact#} <a
-		href="./documentation/info_pages/customer_contact.html"
+		href="./src/documentation/info_pages/customer_contact.html"
 		rel="gb_page_center[450, 450]"><img
 		src="./images/common/help-small.png"></img></a></td>
 	<td><input type=text name="c_attention" size=25></td>
@@ -21,7 +21,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{#street2#} <a
-			href="./documentation/info_pages/street2.html"
+			href="./src/documentation/info_pages/street2.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="c_street_address2" size=25></td>
@@ -60,28 +60,28 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.1} <a
-			href="./documentation/info_pages/custom_fields.html"
+			href="./src/documentation/info_pages/custom_fields.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="c_custom_field1" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.2} <a
-			href="./documentation/info_pages/custom_fields.html"
+			href="./src/documentation/info_pages/custom_fields.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="c_custom_field2" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.3} <a
-			href="./documentation/info_pages/custom_fields.html"
+			href="./src/documentation/info_pages/custom_fields.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="c_custom_field3" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.4} <a
-			href="./documentation/info_pages/custom_fields.html"
+			href="./src/documentation/info_pages/custom_fields.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="c_custom_field4" size=25></td>
