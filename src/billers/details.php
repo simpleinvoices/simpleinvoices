@@ -17,37 +17,13 @@ $biller['wording_for_enabled'] = $biller['b_enabled']==1?$wording_for_enabledFie
 
 $files = getLogoList();
 
-include("./templates/default/billers/details2.tpl");
-$display_block_logo_list = "";
-
-foreach ($files as $file)
-{
-	eval ('$display_block_logo_list .= "'.$display_block_logo_line.'";');
-}
-
 /*end logo stuff */
 
 #get custom field labels
 $customFieldLabel = getCustomFieldLabels("biller");
 
-$display_block = "";
-$footer = "";
-
-eval ('$display_block_logo = "'.addslashes($display_block_logo).'";');
-
-if ($_GET['action'] == "view") {
-	eval ('$display_block_view = "'.addslashes($display_block_view).'";');
-	$display_block = $display_block_view;
-	$footer = $footer_view;
-}
-if ($_GET['action'] == "edit") {
-	eval ('$display_block_edit = "'.addslashes($display_block_edit).'";');
-	$display_block = $display_block_edit;
-	$footer = $footer_edit;
-}
-
-
-eval ('$block = "'.addslashes($block).'";');
-echo $block;
+$smarty -> assign('biller',$biller);
+$smarty -> assign('files',$files);
+$smarty -> assign('customFieldLabel',$customFieldLabel);
 
 ?>

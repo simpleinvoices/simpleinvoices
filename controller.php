@@ -14,8 +14,6 @@ $action = isset($_GET['case'])?$_GET['case']:null;
 require_once("./include/smarty/Smarty.class.php");
 $smarty = new Smarty();
 $smarty -> compile_dir = "./cache/";
-$smarty -> config_dir = "./lang";
-$smarty -> config_load("english_uk.conf");
 
 
 /*
@@ -64,6 +62,7 @@ else if (($module != null ) AND ($view != null)) {
 			
 			if(file_exists("./templates/default/{$module}/{$view}.tpl")) {
 				include("./src/$module/$view.php");
+				$smarty -> assign("LANG",$LANG);
 				$smarty -> display("../templates/default/{$module}/{$view}.tpl");
 			}
 			else {
