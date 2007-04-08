@@ -47,10 +47,11 @@ ul#navmenu li {
 }
 
 ul#navmenu ul {
+background-color:transparent;
   margin: 0;
   border: 0 none;
   padding: 0;
-  width: 180px;
+  width: 185px;
   list-style: none;
   display: none;
   position: absolute;
@@ -85,7 +86,6 @@ ul#navmenu ul li {
   border: 1px solid #FFF;
   border-right-color: #CCC;
   border-bottom-color: #CCC;
- 
 
   float: none !important; /*For Opera*/
   float: left; /*For IE*/
@@ -96,8 +96,15 @@ ul#navmenu ul li {
   height: auto !important;
   height: 1%; /*For IE*/
 }
-
-
+/*(IE7)Remove spaces between each list*/
+*+html ul#navmenu ul li {
+  margin-bottom:-6px;
+}
+/*(IE7)solves z-index Bug [http://www.aplus.co.yu/adxmenu/examples/vlr/]*/
+ul#navmenu li:hover {
+  z-index: 10000;
+  white-space: normal;
+}
 
 /* Root Menu */
 ul#navmenu a {
@@ -187,7 +194,7 @@ ul#navmenu ul ul ul {
   z-index:2;
   display: none;
   position: absolute;
-  top: 5;
+  top: 5px;
   left: 140px;
   width: 180px;
 }

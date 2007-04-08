@@ -2,7 +2,7 @@
 
 /*
 @author: Justin Kelly
-@last edited: 2007-03-31
+@last edited: 2007-04-07
 */
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
@@ -330,7 +330,7 @@ $mp_no_invoices = "Il n'y a aucun produit dans la base, veuillez svp en ajouter 
 $mp_table_action = "Action";//1
 $mp_table_product_id = "Product ID";//1
 $mp_table_product_desc = "Description des produits";//1
-$mp_table_unit_price = "Prix à l'unit&eacute;";//1
+$mp_table_unit_price = "Prix &agrave; l'unit&eacute;";//1
 $mp_actions_view = "Voir";//1
 $mp_actions_edit = "&Eacute;diter";//1
 $mp_actions_new_product = "Ajouter un nouveau produit";//1
@@ -404,14 +404,14 @@ $map_table_payment_type = "Type de paiement";//1
 $map_table_date = "Date";//1
 $map_actions_view = "Voir";//1
 $map_actions_process_payment = "Process Payment";//0
-$map_payments_filtered = "Encaissements filtrés par facture ID";//1
+$map_payments_filtered = "Encaissements filtr&eacute;s par facture ID";//1
 $map_payments_filtered_invoice = "Process Payment for this facture";//0
-$map_payments_filtered_customer = "Encaissements filtrés par client ID";//1
+$map_payments_filtered_customer = "Encaissements filtr&eacute;s par client ID";//1
 
 #Manage Tax Rate
 $mtr_page_title = " - G&eacute;rer les taux";//1
 $mtr_page_header = "G&eacute;rer les taux";//1
-$mtr_no_invoices = "Il n'y a aucun taux dans la base de données, veuillez svp en ajouter un";//1
+$mtr_no_invoices = "Il n'y a aucun taux dans la base de donn&eacute;es, veuillez svp en ajouter un";//1
 $mtr_table_action = "Action";//1
 $mtr_table_tax_id = "Tax ID";//1
 $mtr_table_tac_desc = "Description de la taxe";//1
