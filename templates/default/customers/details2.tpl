@@ -1,5 +1,6 @@
 <?php
 
+
 $display_block_view = <<<EOD
 <b>{$LANG_customer} :: <a href="index.php?module=customers&view=details&submit={$customer[c_id]}&action=edit">{$LANG_edit}</a>
 </b>
