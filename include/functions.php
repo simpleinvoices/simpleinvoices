@@ -86,7 +86,7 @@ function getCustomFieldLabels($type) {
 	for($i=1;$row = mysql_fetch_row($result);$i++) {
 		$cf[$i]=$row[0];
 		if($cf[$i] == null) {
-			$cf[$i] = $LANG_custom_field." ".$i;
+			$cf[$i] = $LANG["custom_field_$i"];
 		}
 	}
 
@@ -121,19 +121,19 @@ function get_custom_field_name($field) {
         $get_cf_number = $field[strlen($field)-1];
 	
 	if ($get_cf_letter == "b") {
-		$custom_field_name = $LANG_biller;
+		$custom_field_name = $LANG['biller'];
 	}
 	if ($get_cf_letter == "c") {
-		$custom_field_name = $LANG_customer;
+		$custom_field_name = $LANG['customer'];
 	}
 	if ($get_cf_letter == "i") {
-		$custom_field_name = $LANG_invoice;
+		$custom_field_name = $LANG['invoice'];
 	}
 	if ($get_cf_letter == "p") {
-		$custom_field_name = $LANG_product;
+		$custom_field_name = $LANG['product'];
 	}
 	
-	$custom_field_name .= " :: " . $LANG_custom_field . " $get_cf_number" ;
+	$custom_field_name .= " :: " . $LANG["custom_field .  $get_cf_number"] ;
         return $custom_field_name;
 }
 
@@ -184,7 +184,7 @@ function merge_address($field1,$field2,$field3,$street1,$street2,$class1,$class2
         ob_end_clean();
 
         if (($field1 != null OR $field2 != null OR $field3 != null) AND ($street1 ==null AND $street2 ==null)) {
-                $ma .=  "<tr><td class='$class1'>$LANG_address:</td><td class='$class2' colspan=$colspan>";
+                $ma .=  "<tr><td class='$class1'>$LANG[address]:</td><td class='$class2' colspan=$colspan>";
 		$skip_section = 1;
         }
         if (($field1 != null OR $field2 != null OR $field3 != null) AND( $skip_section != 1)) {

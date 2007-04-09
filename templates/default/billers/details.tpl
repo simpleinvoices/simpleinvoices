@@ -1,6 +1,6 @@
 
 <form name="frmpost"
-	action="index.php?module=billers&view=add&submit={$_GET[submit]}"
+	action="index.php?module=billers&view=add&submit={$smarty.get.submit}"
 	method="post"><select name="b_co_logo">
 	<option selected value="{$biller.b_co_logo}" style="font-weight:bold;">{$biller.b_co_logo}</option>
 	{foreach from=$files item=file}

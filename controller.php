@@ -85,7 +85,7 @@ else if (($module != null ) AND ($view != null)) {
 		echo "The file that you requested doesn't exist";
 	}
 	
-	include("./src/include/design/footer.inc.php");
+	$smarty -> display("../src/include/design/footer.inc.php");
 }
 
 /*If all else fails show the start.php page */

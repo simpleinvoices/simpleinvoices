@@ -1,6 +1,4 @@
-<?php
 
-echo <<<EOD
  <!--  </div id="browser"> -->
    </div class="col">
 
@@ -11,5 +9,3 @@ echo <<<EOD
    </div id="Wrapper">
    </BODY>
    </HTML>
-EOD;
-?>
