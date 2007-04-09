@@ -14,6 +14,8 @@ $action = isset($_GET['case'])?$_GET['case']:null;
 require_once("./include/smarty/Smarty.class.php");
 $smarty = new Smarty();
 $smarty -> compile_dir = "./cache/";
+include("./include/include_main.php");
+$smarty -> assign("LANG",$LANG);
 
 
 /*
@@ -54,15 +56,15 @@ else if (($module != null ) AND ($view != null)) {
 	        die("Invalid view requested");
 	}
 
-	include("./src/include/design/header.inc.php");
+	$smarty -> display("../src/include/design/header.inc.php");
 	
 	/*Check to make sure that the requested files exist*/
 	if (file_exists("./src/$module/$view.php")) {
-			include("./include/include_main.php");
+
 			
 			if(file_exists("./templates/default/{$module}/{$view}.tpl")) {
 				include("./src/$module/$view.php");
-				$smarty -> assign("LANG",$LANG);
+				
 				$smarty -> display("../templates/default/{$module}/{$view}.tpl");
 			}
 			else {
@@ -79,7 +81,7 @@ else if (($module != null ) AND ($view != null)) {
 			*/
 	}
 	else {
-		include("./src/include/design/header.inc.php");
+		$smarty -> display("../src/include/design/header.inc.php");
 		echo "The file that you requested doesn't exist";
 	}
 	
@@ -88,8 +90,8 @@ else if (($module != null ) AND ($view != null)) {
 
 /*If all else fails show the start.php page */
 else {
-        include("./src/include/design/header.inc.php");
+        $smarty -> display("../src/include/design/header.inc.php");
         include("start.php");
-        include("./src/include/design/footer.inc.php");
+        $smarty -> display("../src/include/design/footer.inc.php");
 }
 ?>
