@@ -84,7 +84,7 @@ while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
 
 	if (mysql_num_rows($result_customer) == 0) {
 	        //no records
-	        $display_block_customer = "<p><em>$mc_no_invoices</em></p>";
+	        $display_block_customer = "<p><em>$LANG['no_customers']</em></p>";
 
 	} else {
 	        //has records, so display them
@@ -120,7 +120,7 @@ while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
 
 	if (mysql_num_rows($result_biller) == 0) {
 	        //no records
-	        $display_block_biller = "<p><em>$mb_no_invoices</em></p>";
+	        $display_block_biller = "<p><em>$LANG['no_billers']</em></p>";
 
 	} else {
 	        //has records, so display them
@@ -155,7 +155,7 @@ while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
 
 	if (mysql_num_rows($result_tax) == 0) {
 	        //no records
-	        $display_block_tax = "<p><em>$mtr_no_invoices</em></p>";
+	        $display_block_tax = "<p><em>$LANG['no_tax_rates']</em></p>";
 
 	} else {
 	        //has records, so display them
@@ -189,7 +189,7 @@ while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
 
 	if (mysql_num_rows($result_preferences) == 0) {
         	//no records
-	        $display_block_preferences = "<p><em>$mip_no_invoices</em></p>";
+	        $display_block_preferences = "<p><em>$LANG['no_preferences']</em></p>";
 
 	} else {
 	        //has records, so display them
@@ -412,7 +412,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 
 	if (mysql_num_rows($result_products) == 0) {
 	        //no records
-	        $display_block_products = "<p><em>$mp_no_invoices</em></p>";
+	        $display_block_products = "<p><em>$LANG['no_products']</em></p>";
 
 	} else {
 	        //has records, so display them
