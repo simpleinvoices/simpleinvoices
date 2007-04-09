@@ -1,4 +1,4 @@
-{if $billers == ""}
+{if $billers == null}
 <P><em>$LANG['no_billers'].</em></p>
 " {else}
 <b>{$LANG.manage_billers} :: <a href='index.php?module=billers&view=add'>{$LANG.add_new_biller}</a></b>
