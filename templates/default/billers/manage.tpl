@@ -1,5 +1,5 @@
 {if $billers == ""}
-<P><em>$mb_no_invoices.</em></p>
+<P><em>$LANG['no_billers'].</em></p>
 " {else}
 <b>{$LANG.manage_billers} :: <a href='index.php?module=billers&view=add'>{$LANG.add_new_biller}</a></b>
 <hr></hr>
@@ -20,10 +20,6 @@
 			<th class="noFilter sortable">{$LANG.action}</th>
 			<th class=" index_table sortable">{$LANG.biller.id}</th>
 			<th class="index_table sortable">{$LANG.biller_name}</th>
-			<!--
-<th class="index_table">$mb_table_phone</th>
-<th class="index_table">$mb_table_mobile_phone</th>
--->
 			<th class="index_table sortable">{$LANG.email}</th>
 			<th class="noFilter index_table sortable">{$LANG.enabled}</th>
 		</tr>

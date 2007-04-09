@@ -268,7 +268,7 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,
 
 <tr>
 	<td class="details_screen">
-		<?php echo $mb_table_biller_name; ?>
+		<?php echo $LANG['biller_name']; ?>
 	</td>
 	<td input type=text name="biller_block" size=25>
 		<?php echo $display_block; ?>
@@ -276,7 +276,7 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,
 </tr>
 <tr>
 	<td class="details_screen">
-		<?php echo $mc_table_customer_name; ?>
+		<?php echo $LANG['customer_name']; ?>
 	</td>
 	<td input type=text name="customer_block" size=25 >
 		<?php echo $display_block_customer; ?>
