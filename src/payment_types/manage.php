@@ -21,4 +21,6 @@ for ($i=0;$pt = mysql_fetch_array($result);$i++) {
 	$pts[$i]=$pt;
 }
 $smarty -> assign('pts',$pts);
+
+getRicoLiveGrid("rico_payment_types","{ type:'number', decPlaces:0, ClassName:'alignleft' }");
 ?>

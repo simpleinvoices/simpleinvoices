@@ -25,6 +25,8 @@ $LANG['action'] = "Action";
 $LANG['add_new_biller'] = "Add New Biller";
 $LANG['manage_billers'] = "Manage Billers";
 $LANG['no_invoices'] = "No invoices";
+$LANG['actions'] = "Actions";
+$LANG['description'] = "Description";
 
 #New lang file style $lang followed by the word or description - not grouped by page
 $LANG_about = "About";//1
