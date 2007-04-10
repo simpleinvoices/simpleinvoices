@@ -7,21 +7,21 @@ checkLogin();
 #if coming from another page where you want to filter by just one invoice
 if (!empty($_GET['inv_id'])) {
 
-	$display_block_header = "<b>$map_payments_filtered $_GET[inv_id]</b> :: <a href='index.php?module=payments&view=process&submit=$_GET[inv_id]&op=pay_selected_invoice'>$map_payments_filtered_invoice</a>";
+	$display_block_header = "<b>$LANG['payments_filtered'] $_GET[inv_id]</b> :: <a href='index.php?module=payments&view=process&submit=$_GET[inv_id]&op=pay_selected_invoice'>$LANG['payments_filtered_invoice']</a>";
 
 	$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.c_name, {$tb_prefix}biller.b_name from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = {$tb_prefix}customers.c_id and {$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.b_id and {$tb_prefix}account_payments.ac_inv_id='$_GET[inv_id]' ORDER BY {$tb_prefix}account_payments.ac_id DESC";
 }
 #if coming from another page where you want to filter by just one customer
 elseif (!empty($_GET['c_id'])) {
 
-	$display_block_header = "<b>$map_payments_filtered_customer $_GET[c_id] :: <a href='index.php?module=payments&view=process&op=pay_invoice'>$map_actions_process_payment</a></b>";
+	$display_block_header = "<b>$LANG['payments_filtered_customer'] $_GET[c_id] :: <a href='index.php?module=payments&view=process&op=pay_invoice'>$LANG['process_payment']</a></b>";
 
 	$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.c_name, {$tb_prefix}biller.b_name from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = {$tb_prefix}customers.c_id and {$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.b_id and {$tb_prefix}customers.c_id='$_GET[c_id]' ORDER BY {$tb_prefix}account_payments.ac_id DESC ";
 }
 #if you want to show all invoices - no filters
 else {
 
-	$display_block_header = "<b>$map_page_header :: <a href='index.php?module=payments&view=process&op=pay_invoice'>$map_actions_process_payment</a></b>";
+	$display_block_header = "<b>$LANG['manage_payments'] :: <a href='index.php?module=payments&view=process&op=pay_invoice'>$LANG['process_payment']</a></b>";
 
 	$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.c_name, {$tb_prefix}biller.b_name from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = {$tb_prefix}customers.c_id and {$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.b_id ORDER BY {$tb_prefix}account_payments.ac_id DESC";
 }
@@ -31,7 +31,7 @@ $number_of_rows = mysql_num_rows($result);
 
 
 if (mysql_num_rows($result) == 0) {
-	$display_block = "<P><em>$map_no_invoices.</em></p>";
+	$display_block = "<P><em>$LANG['no_payments'].</em></p>";
 }else{
 	$display_block = <<<EOD
 
@@ -55,15 +55,15 @@ $display_block_header
 <thead>
 
 <tr class="sortHeader">
-<th class="noFilter sortable">$map_table_action</th>
-<th class="index_table sortable">$map_table_payment_id</th>
-<th class="index_table sortable">$map_table_payment_invoice_id</th>
-<th class="selectFilter index_table sortable">$map_table_customer</th>
-<th class="selectFilter index_table sortable">$map_table_biller</th>
-<th class="index_table sortable">$map_table_amount</th>
-<th class="index_table sortable">$map_table_notes</th>
-<th class="selectFilter index_table sortable">$map_table_payment_type</th>
-<th class="noFilter index_table sortable">$map_table_date</th>
+<th class="noFilter sortable">$LANG['action']</th>
+<th class="index_table sortable">$LANG['payment_id']</th>
+<th class="index_table sortable">$LANG['invoice_id']</th>
+<th class="selectFilter index_table sortable">$LANG['customer']</th>
+<th class="selectFilter index_table sortable">$LANG['biller']</th>
+<th class="index_table sortable">$LANG['amount']</th>
+<th class="index_table sortable">$LANG['notes']</th>
+<th class="selectFilter index_table sortable">$LANG['payment_type']</th>
+<th class="noFilter index_table sortable">$LANG['date']</th>
 </tr>
 </thead>
 EOD;
@@ -87,7 +87,7 @@ EOD;
 
 		$display_block .= <<<EOD
 	<tr class='index_table'>
-		<td class='index_table'><a class='index_table' href='index.php?module=payments&view=details&inv_id={$ac['ac_id']}'>$map_actions_view</a></td>
+		<td class='index_table'><a class='index_table' href='index.php?module=payments&view=details&inv_id={$ac['ac_id']}'>$LANG['view']</a></td>
 		<td class='index_table'>{$ac['ac_id']}</td>
 		<td class='index_table'>{$ac['ac_inv_id']}</td>
 		<td class='index_table'>{$ac['c_name']}</td>

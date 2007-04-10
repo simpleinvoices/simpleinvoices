@@ -49,28 +49,28 @@ $paymentType = mysql_fetch_array($result_payment_type_description);
 $display_block =  <<<EOD
 <table align=center>
 	<tr>
-		<td class='details_screen'>$map_table_payment_id</td><td>{$stuff['ac_id']}</td>
+		<td class='details_screen'>$LANG['payment_id']</td><td>{$stuff['ac_id']}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>$map_table_payment_invoice_id</td><td><a href='print_quick_view.php?submit={$stuff['ac_inv_id']}&action=view&invoice_style={$invoiceDescription['inv_ty_description']}''>{$stuff['ac_inv_id']}</a></td>
+		<td class='details_screen'>$LANG['invoice_id']</td><td><a href='print_quick_view.php?submit={$stuff['ac_inv_id']}&action=view&invoice_style={$invoiceDescription['inv_ty_description']}''>{$stuff['ac_inv_id']}</a></td>
 	</tr>
 	<tr>
-		<td class='details_screen'>$map_table_amount</td><td>{$stuff['ac_amount']}</td>
+		<td class='details_screen'>$LANG['amount']</td><td>{$stuff['ac_amount']}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>$map_table_date</td><td>{$stuff['date']}</td>
+		<td class='details_screen'>$LANG['date_upper']</td><td>{$stuff['date']}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>$map_table_biller</td><td>{$stuff['b_name']}</td>
+		<td class='details_screen'>$LANG['biller']</td><td>{$stuff['b_name']}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>$map_table_customer</td><td>{$stuff['c_name']}</td>
+		<td class='details_screen'>$LANG['customer']</td><td>{$stuff['c_name']}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>$map_table_payment_type</td><td>{$paymentType['pt_description']}</td>
+		<td class='details_screen'>$LANG['payment_type']</td><td>{$paymentType['pt_description']}</td>
 	</tr>
         <tr>
-                <td class='details_screen'>$map_table_notes</td><td>{$stuff['ac_notes']}
+                <td class='details_screen'>$LANG['notes']</td><td>{$stuff['ac_notes']}
         </tr>
 
 </table>
@@ -78,7 +78,7 @@ EOD;
 
 
 echo <<<EOD
-<b>$map_page_header</b>
+<b>$LANG[manage_payments']</b>
 <hr></hr>
 
 $display_block
