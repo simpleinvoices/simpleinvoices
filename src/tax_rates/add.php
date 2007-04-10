@@ -23,19 +23,19 @@ echo <<<EOD
 
 <FORM name="frmpost" ACTION="index.php?module=tax_rates&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
 
-<b>{$LANG_tax_rate_to_add}</b>
+<b>{$LANG['tax_rate_to_add']}</b>
 
  <hr></hr>
 
 <table align=center>
 	<tr>
-		<td class="details_screen">{$LANG_tax_description}</td>
+		<td class="details_screen">{$LANG['tax_description']}</td>
 		<td><input type=text name="tax_description" size=50></td><td></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_tax_percentage}</td>
+		<td class="details_screen">{$LANG['tax_percentage']}</td>
 		<td><input type=text name="tax_percentage" size=25> %</td>
-		<td>{$LANG_ie_10_for_10}</td>
+		<td>{$LANG['ie_10_for_10']}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$wording_for_enabledField}</td>
@@ -44,7 +44,7 @@ echo <<<EOD
 	
 </table>
 	<hr></hr>
-	<input type=submit name="submit" value="{$LANG_insert_tax_rate}">
+	<input type=submit name="submit" value="{$LANG['insert_tax_rate']}">
 	<input type=hidden name="op" value="insert_tax_rate">
 
 

@@ -30,9 +30,9 @@ $sql = "INSERT into
 		)";
 
 if (mysql_query($sql, $conn)) {
-	$display_block = $LANG_save_tax_rate_success;
+	$display_block = $LANG['save_tax_rate_success'];
 } else {
-	$display_block = $LANG_save_tax_rate_failure;
+	$display_block = $LANG['save_tax_rate_failure'];
 }
 
 //header( 'refresh: 2; url=manage_tax_rates.php' );
@@ -59,9 +59,9 @@ mysql_select_db("$db_name",$conn);
 				tax_id = " . $_GET['submit'];
 
 		if (mysql_query($sql, $conn)) {
-			$display_block = $LANG_save_tax_rate_success;
+			$display_block = $LANG['save_tax_rate_success'];
 		} else {
-			$display_block = $LANG_save_tax_rate_failure;
+			$display_block = $LANG['save_tax_rate_failure'];
 		}
 
 		//header( 'refresh: 2; url=manage_tax_rates.php' );
