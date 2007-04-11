@@ -5,7 +5,7 @@ checkLogin();
 
 
 #include('./include/functions.php');
-/* validataion code */
+/* validation code */
 
 
 jsBegin();
@@ -15,7 +15,7 @@ jsValidateifNum("prod_unit_price",$LANG_product_unit_price);
 jsFormValidationEnd();
 jsEnd();
 
-/* end validataion code */
+/* end validation code */
 
 #do the product enabled/disblaed drop down
 $display_block_enabled = <<<EOD

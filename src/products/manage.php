@@ -39,13 +39,14 @@ if (mysql_num_rows($result) == 0) {
 </thead>
 EOD;
 
-while ($Array = mysql_fetch_array($result)) {
+while ($prod = mysql_fetch_array($result)) {
+	/*
 	$prod_idField = $Array['prod_id'];
 	$prod_descriptionField = $Array['prod_description'];
 	$prod_enabledField = $Array['prod_enabled'];
 	$prod_unit_priceField = $Array['prod_unit_price'];
-	
-	if ($prod_enabledField == 1) {
+	*/
+	if ($prod['prod_enabled'] == 1) {
 		$wording_for_enabled = $wording_for_enabledField;
 	} else {
 		$wording_for_enabled = $wording_for_disabledField;
@@ -58,9 +59,9 @@ while ($Array = mysql_fetch_array($result)) {
 	 href="index.php?module=products&view=details&submit={$prod_idField}&action=view">{$LANG_view}</a> ::
 	<a class="index_table"
 	 href="index.php?module=products&view=details&submit={$prod_idField}&action=edit">{$LANG_edit}</a> </td>
-	<td class="index_table">{$prod_idField}</td>
-	<td class="index_table">{$prod_descriptionField}</td>
-	<td class="index_table">{$prod_unit_priceField}</td>
+	<td class="index_table">{$prod['prod_id']}</td>
+	<td class="index_table">{$prod['prod_description']}</td>
+	<td class="index_table">{$prod['prod_unit_price']}</td>
 	<td class="index_table">{$wording_for_enabled}</td>
 	</tr>
 

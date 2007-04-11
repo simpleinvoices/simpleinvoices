@@ -20,7 +20,8 @@ $preference_id = $_GET['submit'];
 $print_preferences = "SELECT * FROM {$tb_prefix}preferences where pref_id = $preference_id";
 $result_print_preferences  = mysql_query($print_preferences, $conn) or die(mysql_error());
 
-while ($Array_preferences = mysql_fetch_array($result_print_preferences)) {
+while ($pref = mysql_fetch_array($result_print_preferences)) {
+	/*
 	$pref_idField = $Array_preferences['pref_id'];
 	$pref_descriptionField = $Array_preferences['pref_description'];
 	$pref_currency_signField = $Array_preferences['pref_currency_sign'];
@@ -34,8 +35,8 @@ while ($Array_preferences = mysql_fetch_array($result_print_preferences)) {
 	$pref_inv_payment_line2_nameField = $Array_preferences['pref_inv_payment_line2_name'];
 	$pref_inv_payment_line2_valueField = $Array_preferences['pref_inv_payment_line2_value'];
 	$pref_enabledField = $Array_preferences['pref_enabled'];
-
-	if ($pref_enabledField == 1) {
+	*/
+	if ($pref['pref_enabled'] == 1) {
 		$wording_for_enabled = $wording_for_enabledField;
 	} else {
 		$wording_for_enabled = $wording_for_disabledField;
@@ -53,40 +54,40 @@ if (  $_GET['action'] === 'view' ) {
 	
 	<table align=center>
 		<tr>
-  			<td class='details_screen'>Preference ID</td><td>$pref_idField</td>
+  			<td class='details_screen'>Preference ID</td><td>$pref['pref_id']</td>
                 </tr>
 		<tr>	
-			<td class='details_screen'>Description <a href="./documentation/info_pages/inv_pref_description.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$pref_descriptionField</td>
+			<td class='details_screen'>Description <a href="./documentation/info_pages/inv_pref_description.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$pref['pref_description']</td>
                 </tr>
                 <tr>
-			<td class='details_screen'>Currency sign <a href="./documentation/info_pages/inv_pref_currency_sign.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$pref_currency_signField</td>
+			<td class='details_screen'>Currency sign <a href="./documentation/info_pages/inv_pref_currency_sign.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$pref['pref_currency_sign']</td>
                 </tr>
                 <tr>
-			<td class='details_screen'>Invoice heading <a href="./documentation/info_pages/inv_pref_invoice_heading.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$pref_inv_headingField</td>
+			<td class='details_screen'>Invoice heading <a href="./documentation/info_pages/inv_pref_invoice_heading.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$pref['pref_inv_heading']</td>
                 </tr>
                 <tr>
-			<td class='details_screen'>Invoice wording <a href="./documentation/info_pages/inv_pref_invoice_wording.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$pref_inv_wordingField</td>
+			<td class='details_screen'>Invoice wording <a href="./documentation/info_pages/inv_pref_invoice_wording.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$pref['pref_inv_wording']</td>
                 </tr>
                 <tr>
-			<td class='details_screen'>Invoice detail heading <a href="./documentation/info_pages/inv_pref_invoice_detail_heading.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$pref_inv_detail_headingField</td>
+			<td class='details_screen'>Invoice detail heading <a href="./documentation/info_pages/inv_pref_invoice_detail_heading.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$pref['pref_inv_detail_heading']</td>
                 </tr>
                 <tr>
-			<td class='details_screen'>Invoice detail line <a href="./documentation/info_pages/inv_pref_invoice_detail_line.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$pref_inv_detail_lineField</td>
+			<td class='details_screen'>Invoice detail line <a href="./documentation/info_pages/inv_pref_invoice_detail_line.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$pref['pref_inv_detail_line']</td>
                 </tr>
                 <tr>
-			<td class='details_screen'>Invoice payment method <a href="./documentation/info_pages/inv_pref_invoice_payment_method.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$pref_inv_payment_methodField</td>
+			<td class='details_screen'>Invoice payment method <a href="./documentation/info_pages/inv_pref_invoice_payment_method.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$pref['pref_inv_payment_method']</td>
                 </tr>
                 <tr>
-			<td class='details_screen'>Invoice payment line1 name <a href="./documentation/info_pages/inv_pref_payment_line1_name.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$pref_inv_payment_line1_nameField</td>
+			<td class='details_screen'>Invoice payment line1 name <a href="./documentation/info_pages/inv_pref_payment_line1_name.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$pref['pref_inv_payment_line1_name']</td>
                 </tr>
                 <tr>
-			<td class='details_screen'>Invoice payment line1 value <a href="./documentation/info_pages/inv_pref_payment_line1_value.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$pref_inv_payment_line1_valueField</td>
+			<td class='details_screen'>Invoice payment line1 value <a href="./documentation/info_pages/inv_pref_payment_line1_value.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$pref['pref_inv_payment_line1_value']</td>
                 </tr>
                 <tr>
-			<td class='details_screen'>Invoice payment line2 name <a href="./documentation/info_pages/inv_pref_payment_line2_name.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$pref_inv_payment_line2_nameField</td>
+			<td class='details_screen'>Invoice payment line2 name <a href="./documentation/info_pages/inv_pref_payment_line2_name.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$pref['pref_inv_payment_line2_name']</td>
                 </tr>
                 <tr>
-			<td class='details_screen'>Invoice payment line2 value <a href="./documentation/info_pages/inv_pref_payment_line2_value.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$pref_inv_payment_line2_valueField</td>
+			<td class='details_screen'>Invoice payment line2 value <a href="./documentation/info_pages/inv_pref_payment_line2_value.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$pref['pref_inv_payment_line2_value']</td>
 		</tr>
 	        <tr>
         	        <td class='details_screen'>$wording_for_enabledField <a href="./documentation/info_pages/inv_pref_invoice_enabled.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$wording_for_enabled</td>
@@ -113,7 +114,7 @@ else if (  $_GET['action'] === 'edit' ) {
 
 	$display_block_enabled = <<<EOD
 <select name="pref_enabled">
-<option value="$pref_enabledField" selected style="font-weight: bold;">$wording_for_enabled</option>
+<option value="$pref['pref_enabled']" selected style="font-weight: bold;">$wording_for_enabled</option>
 <option value="1">$wording_for_enabledField</option>
 <option value="0">$wording_for_disabledField</option>
 </select>
@@ -125,40 +126,40 @@ EOD;
 
         <table align=center>
                 <tr>
-                        <td class='details_screen'>Preference ID</td><td>$pref_idField</td>
+                        <td class='details_screen'>Preference ID</td><td>$pref['pref_id']</td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Description <a href="./documentation/info_pages/inv_pref_description.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_description' value='$pref_descriptionField' size=50></td>
+                        <td class='details_screen'>Description <a href="./documentation/info_pages/inv_pref_description.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_description' value='$pref['pref_description']' size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Currenc sign <a href="./documentation/info_pages/inv_pref_currency_sign.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_currency_sign' value='$pref_currency_signField' size=50></td>
+                        <td class='details_screen'>Currenc sign <a href="./documentation/info_pages/inv_pref_currency_sign.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_currency_sign' value='$pref['pref_currency_sign']' size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice heading <a href="./documentation/info_pages/inv_pref_invoice_heading.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a><td><input type=text name='pref_inv_heading' value='$pref_inv_headingField' size=50></td>
+                        <td class='details_screen'>Invoice heading <a href="./documentation/info_pages/inv_pref_invoice_heading.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a><td><input type=text name='pref_inv_heading' value='$pref['pref_inv_heading']' size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice wording <a href="./documentation/info_pages/inv_pref_invoice_wording.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_wording' value='$pref_inv_wordingField' size=50></td>
+                        <td class='details_screen'>Invoice wording <a href="./documentation/info_pages/inv_pref_invoice_wording.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_wording' value='$pref['pref_inv_wording']' size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice detail heading <a href="./documentation/info_pages/inv_pref_invoice_detail_heading.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_detail_heading' value='$pref_inv_detail_headingField' size=50></td>
+                        <td class='details_screen'>Invoice detail heading <a href="./documentation/info_pages/inv_pref_invoice_detail_heading.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_detail_heading' value='$pref['pref_inv_detail_heading']' size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice detail line <a href="./documentation/info_pages/inv_pref_invoice_detail_line.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_detail_line' value='$pref_inv_detail_lineField' size=75></td>
+                        <td class='details_screen'>Invoice detail line <a href="./documentation/info_pages/inv_pref_invoice_detail_line.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_detail_line' value='$pref['pref_inv_detail_line']' size=75></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice payment method <a href="./documentation/info_pages/inv_pref_invoice_payment_method.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_payment_method' value='$pref_inv_payment_methodField' size=50></td>
+                        <td class='details_screen'>Invoice payment method <a href="./documentation/info_pages/inv_pref_invoice_payment_method.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_payment_method' value='$pref['pref_inv_payment_method']' size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice payment line1 name <a href="./documentation/info_pages/inv_pref_payment_line1_name.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_payment_line1_name' value='$pref_inv_payment_line1_nameField' size=50></td>
+                        <td class='details_screen'>Invoice payment line1 name <a href="./documentation/info_pages/inv_pref_payment_line1_name.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_payment_line1_name' value='$pref['pref_inv_payment_line1_name']' size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice payment line1 value <a href="./documentation/info_pages/inv_pref_payment_line1_value.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_payment_line1_value' value='$pref_inv_payment_line1_valueField' size=50></td>
+                        <td class='details_screen'>Invoice payment line1 value <a href="./documentation/info_pages/inv_pref_payment_line1_value.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_payment_line1_value' value='$pref['pref_inv_payment_line1_value']' size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice payment line2 name <a href="./documentation/info_pages/inv_pref_payment_line2_name.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_payment_line2_name' value='$pref_inv_payment_line2_nameField' size=50></td>
+                        <td class='details_screen'>Invoice payment line2 name <a href="./documentation/info_pages/inv_pref_payment_line2_name.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_payment_line2_name' value='$pref['pref_inv_payment_line2_name']' size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice payment line2 value <a href="./documentation/info_pages/inv_pref_payment_line2_value.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_payment_line2_value' value='$pref_inv_payment_line2_valueField' size=50></td>
+                        <td class='details_screen'>Invoice payment line2 value <a href="./documentation/info_pages/inv_pref_payment_line2_value.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_payment_line2_value' value='$pref['pref_inv_payment_line2_value']' size=50></td>
                 </tr>
 	        <tr>
         	        <td class='details_screen'>$wording_for_enabledField <a href="./documentation/info_pages/inv_pref_invoice_enabled.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$display_block_enabled</td>

@@ -13,8 +13,10 @@ checkLogin();
 $sql_max = "SELECT max(inv_id) as max_inv_id FROM {$tb_prefix}invoices";
 $result_max = mysql_query($sql_max, $conn) or die(mysql_error());
 
-while ($Array_max = mysql_fetch_array($result_max) ) {
-	$max_invoice_id = $Array_max['max_inv_id'];
+while ($max_invoice = mysql_fetch_array($result_max) ) {
+	/*
+	$max_invoice_id = $max_invoice['max_inv_id'];
+	*/
 };
 
 #get max invoice id for validataion - end
@@ -22,7 +24,7 @@ while ($Array_max = mysql_fetch_array($result_max) ) {
 jsBegin();
 jsFormValidationBegin("frmpost");
 #jsValidateifNum("ac_inv_id",$LANG_invoice_id);
-jsPaymentValidation("ac_inv_id",$LANG_invoice_id,1,$max_invoice_id);
+jsPaymentValidation("ac_inv_id",$LANG_invoice_id,1,$max_invoice['max_inv_id']);
 jsValidateifNum("ac_amount",$LANG_amount);
 jsValidateifNum("ac_date",$LANG_date);
 jsFormValidationEnd();
@@ -91,12 +93,13 @@ if (mysql_num_rows($result) == 0) {
 EOD;
 
 	while ($recs = mysql_fetch_array($result)) {
+		/*
 		$id = $recs['pt_id'];
 		$display_name = $recs['pt_description'];
-
+		*/
 		$display_block_payment_type .= <<<EOD
-	<option value="$id">
-		$display_name</option>
+	<option value="$recs['pt_id']">
+		$recs['pt_description']</option>
 EOD;
 }
 }

@@ -40,13 +40,14 @@ if (mysql_num_rows($result) == 0) {
 </thead>
 EOD;
 
-	while ($Array = mysql_fetch_array($result)) {
+	while ($tax = mysql_fetch_array($result)) {
+		/*
 		$tax_idField = $Array['tax_id'];
 		$tax_descriptionField = $Array['tax_description'];
 		$tax_percentageField = $Array['tax_percentage'];
 		$tax_enabledField = $Array['tax_enabled'];
-
-		if ($tax_enabledField == 1) {
+		*/
+		if ($tax['tax_enabled'] == 1) {
 			$wording_for_enabled = $wording_for_enabledField;
 		} else {
 			$wording_for_enabled = $wording_for_disabledField;
@@ -56,12 +57,12 @@ EOD;
 		<tr class="index_table">
 		<td class="index_table">
 		<a class="index_table"
-		href="./index.php?module=tax_rates&view=details&submit={$tax_idField}&action=view">{$LANG['view']}</a> ::
+		href="./index.php?module=tax_rates&view=details&submit={$tax['tax_id']}&action=view">{$LANG['view']}</a> ::
 		<a class="index_table"
-		 href="./index.php?module=tax_rates&view=details&submit={$tax_idField}&action=edit">{$LANG['edit']}</a></td>
-		<td class="index_table">{$tax_idField}</td>
-		<td class="index_table">{$tax_descriptionField}</td>
-		<td class="index_table">{$tax_percentageField}</td>
+		 href="./index.php?module=tax_rates&view=details&submit={$tax['tax_id']}&action=edit">{$LANG['edit']}</a></td>
+		<td class="index_table">{$tax['tax_id']}</td>
+		<td class="index_table">{$tax['tax_description']}</td>
+		<td class="index_table">{$tax['tax_percentage']}</td>
 		<td class="index_table">{$wording_for_enabled}</td>
 		</tr>
 

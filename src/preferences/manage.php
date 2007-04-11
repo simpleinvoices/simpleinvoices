@@ -37,7 +37,8 @@ checkLogin();
 	</thead>
 
 EOD;
-  	while ($Array_preferences = mysql_fetch_array($result_print_preferences)) {
+  	while ($pref = mysql_fetch_array($result_print_preferences)) {
+		/*
   		$pref_idField = $Array_preferences['pref_id'];
   		$pref_descriptionField = $Array_preferences['pref_description'];
   		$pref_currency_signField = $Array_preferences['pref_currency_sign'];
@@ -51,8 +52,8 @@ EOD;
   		$pref_inv_payment_line2_nameField = $Array_preferences['pref_inv_payment_line2_name'];
   		$pref_inv_payment_line2_valueField = $Array_preferences['pref_inv_payment_line2_value'];
   		$pref_enabledField = $Array_preferences['pref_enabled'];
-
-  		if ($pref_enabledField == 1) {
+		*/
+  		if ($pref['pref_enabled'] == 1) {
   			$wording_for_enabled = $wording_for_enabledField;
   		} else {
   			$wording_for_enabled = $wording_for_disabledField;
@@ -62,11 +63,11 @@ EOD;
  		<tr class="index_table">
 		<td class="index_table">
 		<a class="index_table"
-		href="index.php?module=preferences&view=details&submit={$pref_idField}&action=view">{$LANG_view}</a> ::
+		href="index.php?module=preferences&view=details&submit={$pref['pref_id']}&action=view">{$LANG_view}</a> ::
 		<a class="index_table"
-		href="index.php?module=preferences&view=details&submit={$pref_idField}&action=edit">{$LANG_edit}</a> </td>
-		<td class="index_table">{$pref_idField}</td>
-		<td class="index_table">{$pref_descriptionField}</td>
+		href="index.php?module=preferences&view=details&submit={$pref['pref_id']}&action=edit">{$LANG_edit}</a> </td>
+		<td class="index_table">{$pref['pref_id']}</td>
+		<td class="index_table">{$pref['pref_description']}</td>
 		<td class="index_table">{$wording_for_enabled}</td>
 		</tr>
 
