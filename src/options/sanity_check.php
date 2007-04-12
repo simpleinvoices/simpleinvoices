@@ -26,4 +26,3 @@ This feature is still a work-in-progress, please refer to our homepage: <a href=
 	echo $display_block;
 ?>
 </div>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->
