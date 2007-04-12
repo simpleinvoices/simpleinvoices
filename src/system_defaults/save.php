@@ -57,9 +57,9 @@ $default_payment_type = $_POST['def_payment_type'];
 				)";
 
 		if (mysql_query($sql, $conn)) {
-			$display_block =  $LANG_save_defaults_line_items_success;
+			$display_block =  $LANG['save_defaults_line_items_success'];
 		} else {
-			$display_block =  $LANG_save_default_failure . "<br><br>" . $sql;
+			$display_block =  $LANG['save_default_failure'] . "<br><br>" . $sql;
 }
 
 	//header( 'refresh: 2; url=index.php?module=system_defaults&view=manage' );
@@ -87,9 +87,9 @@ $default_payment_type = $_POST['def_payment_type'];
 				)";
 
 		if (mysql_query($sql, $conn)) {
-			$display_block =  $LANG_save_defaults_template_success;
+			$display_block =  $LANG['save_defaults_template_success'];
 		} else {
-			$display_block =  $LANG_save_default_failure . "<br><br>" . $sql;
+			$display_block =  $LANG['save_default_failure'] . "<br><br>" . $sql;
 }
 
 	//header( 'refresh: 2; url=index.php?module=system_defaults&view=manage' );
@@ -115,9 +115,9 @@ $default_payment_type = $_POST['def_payment_type'];
 					)";
 
 		if (mysql_query($sql, $conn)) {
-			$display_block = $LANG_save_defaults_biller_success;
+			$display_block = $LANG['save_defaults_biller_success'];
 		} else {
-			$display_block =  $LANG_save_default_failure . "<br><br>" . $sql;
+			$display_block =  $LANG['save_default_failure'] . "<br><br>" . $sql;
 }
 
 	//header( 'refresh: 2; url=index.php?module=system_defaults&view=manage' );
@@ -143,9 +143,9 @@ $default_payment_type = $_POST['def_payment_type'];
 				)";
 
 		if (mysql_query($sql, $conn)) {
-			$display_block =  $LANG_save_defaults_customer_success;
+			$display_block =  $LANG['save_defaults_customer_success'];
 		} else {
-			$display_block =  $LANG_save_default_failure . "<br><br>" . $sql;
+			$display_block =  $LANG['save_default_failure'] . "<br><br>" . $sql;
 }
 
 	//header( 'refresh: 2; url=index.php?module=system_defaults&view=manage' );
@@ -172,9 +172,9 @@ $default_payment_type = $_POST['def_payment_type'];
 				)";
 
 		if (mysql_query($sql, $conn)) {
-			$display_block = $LANG_save_defaults_tax_success;
+			$display_block = $LANG['save_defaults_tax_success'];
 		} else {
-			$display_block =  $LANG_save_default_failure . "<br><br>" . $sql;
+			$display_block =  $LANG['save_default_failure'] . "<br><br>" . $sql;
 }
 
 	//header( 'refresh: 2; url=index.php?module=system_defaults&view=manage' );
@@ -201,9 +201,9 @@ $default_payment_type = $_POST['def_payment_type'];
 				)";
 
 		if (mysql_query($sql, $conn)) {
-			$display_block = $LANG_save_defaults_preference_success;
+			$display_block = $LANG['save_defaults_preference_success'];
 		} else {
-			$display_block =  $LANG_save_default_failure . "<br><br>" . $sql;
+			$display_block =  $LANG['save_default_failure'] . "<br><br>" . $sql;
 }
 
 	//header( 'refresh: 2; url=index.php?module=system_defaults&view=manage' );
@@ -229,9 +229,9 @@ $default_payment_type = $_POST['def_payment_type'];
 				)";
 
 		if (mysql_query($sql, $conn)) {
-			$display_block = $LANG_save_defaults_payment_type_success;
+			$display_block = $LANG['save_defaults_payment_type_success'];
 		} else {
-			$display_block =  $LANG_save_default_failure . "<br><br>" . $sql;
+			$display_block =  $LANG['save_default_failure'] . "<br><br>" . $sql;
 	}
 
 	//header( 'refresh: 2; url=index.php?module=system_defaults&view=manage' );
