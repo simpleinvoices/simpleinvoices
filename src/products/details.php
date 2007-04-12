@@ -8,8 +8,8 @@ checkLogin();
 
 jsBegin();
 jsFormValidationBegin("frmpost");
-jsValidateRequired("prod_description",$LANG_product_description);
-jsValidateifNum("prod_unit_price",$LANG_product_unit_price);
+jsValidateRequired("prod_description",$LANG['product_description']);
+jsValidateifNum("prod_unit_price",$LANG['product_unit_price']);
 jsFormValidationEnd();
 jsEnd();
 
@@ -36,21 +36,21 @@ $customFieldLabel = getCustomFieldLabels("product");
 if ($_GET['action'] == "view") {
 
 	$display_block = <<<EOD
-	<b>{$LANG_products} ::
-	<a href="index.php?module=products&view=details&submit={$product['prod_id']}&action=edit">{$LANG_edit}</a></b>
+	<b>{$LANG['products']} ::
+	<a href="index.php?module=products&view=details&submit={$product['prod_id']}&action=edit">{$LANG['edit']}</a></b>
 	
  	<hr></hr>
 
 	<table align="center">
 	<tr>
-		<td class="details_screen">{$LANG_product_id}</td><td>{$product['prod_id']}</td>
+		<td class="details_screen">{$LANG['product_id']}</td><td>{$product['prod_id']}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_product_description}</td>
+		<td class="details_screen">{$LANG['product_description']}</td>
 		<td>{$product['prod_description']}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_product_unit_price}</td>
+		<td class="details_screen">{$LANG['product_unit_price']}</td>
 		<td>{$product['prod_unit_price']}</td>
 	</tr>
 	<tr>
@@ -70,10 +70,10 @@ if ($_GET['action'] == "view") {
 		<td>{$product['prod_custom_field4']}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_notes}</td><td>{$product['prod_notes']}</td>
+		<td class="details_screen">{$LANG['notes']}</td><td>{$product['prod_notes']}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_product_enabled}</td>
+		<td class="details_screen">{$LANG['product_enabled']}</td>
 		<td>{$wording_for_enabled}</td>
 	</tr>
 	</table>
@@ -82,7 +82,7 @@ EOD;
 
 $footer = <<<EOD
 <hr></hr>
-<a href="index.php?module=products&view=details&submit={$product['prod_id']}&action=edit">{$LANG_edit}</a>
+<a href="index.php?module=products&view=details&submit={$product['prod_id']}&action=edit">{$LANG['edit']}</a>
 
 EOD;
 
@@ -100,19 +100,19 @@ $display_block_enabled = <<<EOD
 EOD;
 
 $display_block = <<<EOD
-	<b>{$LANG_product_edit}</b>
+	<b>{$LANG['product_edit']}</b>
 	<hr></hr>
 
 	<table align="center">
 	<tr>
-		<td class="details_screen">{$LANG_product_id}</td><td>{$product['prod_id']}</td>
+		<td class="details_screen">{$LANG['product_id']}</td><td>{$product['prod_id']}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_product_description}</td>
+		<td class="details_screen">{$LANG['product_description']}</td>
 		<td><input type="text" name="prod_description" size="50" value="{$product['prod_description']}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_product_unit_price}</td>
+		<td class="details_screen">{$LANG['product_unit_price']}</td>
 		<td><input type="text" name="prod_unit_price" size="25" value="{$product['prod_unit_price']}" /></td>
 	</tr>
 	<tr>
@@ -132,11 +132,11 @@ $display_block = <<<EOD
 		<td><input type="text" name="prod_custom_field4" size="50" value="{$product['prod_custom_field4']}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_notes}</td>
+		<td class="details_screen">{$LANG['notes']}</td>
 		<td><textarea name="prod_notes" rows="8" cols="50">{$product['prod_notes']}</textarea></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_product_enabled}</td><td>{$display_block_enabled}</td>
+		<td class="details_screen">{$LANG['product_enabled']}</td><td>{$display_block_enabled}</td>
 	</tr>
 	</table>
 
@@ -144,8 +144,8 @@ EOD;
 
 $footer = <<<EOD
 <hr></hr>
-<input type="submit" name="cancel" value="{$LANG_cancel}" />
-<input type="submit" name="save_product" value="{$LANG_save_product}" />
+<input type="submit" name="cancel" value="{$LANG['cancel']}" />
+<input type="submit" name="save_product" value="{$LANG['save_product']}" />
 <input type="hidden" name="op" value="edit_product" />
 
 EOD;

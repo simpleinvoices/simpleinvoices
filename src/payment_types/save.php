@@ -27,9 +27,9 @@ $sql = "INSERT into
 		)";
 
 if (mysql_query($sql, $conn)) {
-	$display_block = $LANG_save_payment_type_success;
+	$display_block = $LANG['save_payment_type_success'];
 } else {
-	$display_block =  $LANG_save_payment_type_failure;
+	$display_block =  $LANG['save_payment_type_failure'];
 }
 
 //header( 'refresh: 2; url=manage_payment_types.php' );
@@ -56,9 +56,9 @@ else if (  $op === 'edit_payment_type' ) {
 				pt_id = " . $_GET['submit'];
 
 		if (mysql_query($sql, $conn)) {
-			$display_block = $LANG_save_payment_type_success;
+			$display_block = $LANG['save_payment_type_success'];
 		} else {
-			$display_block =  $LANG_save_payment_type_failure;
+			$display_block =  $LANG['save_payment_type_failure'];
 		}
 
 		//header( 'refresh: 2; url=manage_payment_types.php' );

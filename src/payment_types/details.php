@@ -5,7 +5,7 @@ checkLogin();
 
 jsBegin();
 jsFormValidationBegin("frmpost");
-jsValidateRequired("pt_description",$LANG_payment_type_description);
+jsValidateRequired("pt_description",$LANG['payment_type_description']);
 jsFormValidationEnd();
 jsEnd();
 

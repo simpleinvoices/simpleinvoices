@@ -12,11 +12,11 @@ $number_of_rows = mysql_num_rows($result);
 
 
 if (mysql_num_rows($result) == 0) {
-	$display_block = "<P><em>{$LANG_no_invoices}.</em></p>";
+	$display_block = "<P><em>{$LANG['no_invoices']}.</em></p>";
 }else{
 	$display_block = <<<EOD
 
-<b>{$LANG_manage_products} :: <a href="index.php?module=products&view=add">{$LANG_add_new_product}</a></b>
+<b>{$LANG['manage_products']} :: <a href="index.php?module=products&view=add">{$LANG['add_new_product']}</a></b>
 
  <hr></hr>
 
@@ -30,10 +30,10 @@ if (mysql_num_rows($result) == 0) {
 </colgroup>
 <thead>
 <tr class="sortHeader">
-<th class="noFilter sortable">{$LANG_actions}</th>
-<th class="index_table sortable">{$LANG_product_id}</th>
-<th class="index_table sortable">{$LANG_product_description}</th>
-<th class="index_table sortable">{$LANG_product_unit_price}</th>
+<th class="noFilter sortable">{$LANG['actions']}</th>
+<th class="index_table sortable">{$LANG['product_id']}</th>
+<th class="index_table sortable">{$LANG['product_description']}</th>
+<th class="index_table sortable">{$LANG['product_unit_price']}</th>
 <th class="noFilter index_table sortable">{$wording_for_enabledField}</th>
 </tr>
 </thead>
@@ -56,9 +56,9 @@ while ($prod = mysql_fetch_array($result)) {
 	<tr class="index_table">
 	<td class="index_table">
 	<a class="index_table"
-	 href="index.php?module=products&view=details&submit={$prod_idField}&action=view">{$LANG_view}</a> ::
+	 href="index.php?module=products&view=details&submit={$prod_idField}&action=view">{$LANG['view']}</a> ::
 	<a class="index_table"
-	 href="index.php?module=products&view=details&submit={$prod_idField}&action=edit">{$LANG_edit}</a> </td>
+	 href="index.php?module=products&view=details&submit={$prod_idField}&action=edit">{$LANG['edit']}</a> </td>
 	<td class="index_table">{$prod['prod_id']}</td>
 	<td class="index_table">{$prod['prod_description']}</td>
 	<td class="index_table">{$prod['prod_unit_price']}</td>
