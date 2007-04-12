@@ -34,7 +34,7 @@ $block_stage1 = <<<EOD
 	</tr>
 </table>
 <hr></hr>
-<input type=submit name="submit" value="{$LANG_email}">
+<input type=submit name="submit" value="{$LANG['email']}">
 <input type=hidden name="op" value="insert_customer">
 </form>
 EOD;

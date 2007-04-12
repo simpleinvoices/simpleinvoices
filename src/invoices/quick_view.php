@@ -159,7 +159,7 @@ while ($Array_defaults = mysql_fetch_array($result_print_defaults) ) {
         if ($invoice_owing_Field > 0 ) {
                 $invoice_age_days =  number_format((strtotime(date('Y-m-d')) - strtotime($calc_dateField)) / (60 * 60 * 24),0);
                 /*$invoice_age_days = (strtotime(date("Y-m-d")) - strtotime($inv_dateField)) / (60 * 60 * 24);*/
-                         $invoice_age = "$invoice_age_days $LANG_days";
+                         $invoice_age = "$invoice_age_days $LANG['days']";
         }
         else {
                 $invoice_age ="";
@@ -184,17 +184,17 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,$inv_custom_field4Field,rea
 $display_block_top =  "
 	<table align=center>
 	<tr>
-		<td class=account colspan=8>$LANG_account_info</td><td width=5%></td><td class=\"columnleft\" width=5%></td><td class=\"account\" colspan=6><a href='index.php?module=customers&view=details&submit=$c_idField&action=view'>$LANG_customer_account</a></td>
+		<td class=account colspan=8>$LANG['account_info']</td><td width=5%></td><td class=\"columnleft\" width=5%></td><td class=\"account\" colspan=6><a href='index.php?module=customers&view=details&submit=$c_idField&action=view'>$LANG['customer_account']</a></td>
 	</tr>
 	<tr>
-		<td class=account>$LANG_total:</td><td class=account>$pref_currency_signField$invoice_total_Field_format</td>
-		<td class=account><a href='index.php?module=payments&view=manage&inv_id=$inv_idField'>$LANG_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field_format</td>
-		<td class=account>$LANG_owing:</td><td class=account><u>$pref_currency_signField$invoice_owing_Field</u></td>
-		<td class=account>$LANG_age:</td><td class=account nowrap >$invoice_age <a href='documentation/info_pages/age.html' rel='gb_page_center[450, 450]'><img src=\"./images/common/help-small.png\"></img></a></td>
+		<td class=account>$LANG['total']:</td><td class=account>$pref_currency_signField$invoice_total_Field_format</td>
+		<td class=account><a href='index.php?module=payments&view=manage&inv_id=$inv_idField'>$LANG['paid']:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field_format</td>
+		<td class=account>$LANG['owing']:</td><td class=account><u>$pref_currency_signField$invoice_owing_Field</u></td>
+		<td class=account>$LANG['age']:</td><td class=account nowrap >$invoice_age <a href='documentation/info_pages/age.html' rel='gb_page_center[450, 450]'><img src=\"./images/common/help-small.png\"></img></a></td>
 		<td></td><td class=\"columnleft\"></td>
-		<td class=\"account\">$LANG_total:</td><td class=account>$pref_currency_signField$invoice_total_Field_customer_format</td>
-		<td class=account><a href='index.php?module=payments&view=manage&c_id=$c_idField'>$LANG_paid:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field_customer_format</td>
-		<td class=account>$LANG_owing:</td><td class=account><u>$pref_currency_signField$invoice_owing_Field_customer</u></td>
+		<td class=\"account\">$LANG['total']:</td><td class=account>$pref_currency_signField$invoice_total_Field_customer_format</td>
+		<td class=account><a href='index.php?module=payments&view=manage&c_id=$c_idField'>$LANG['paid']:</a></td><td class=account>$pref_currency_signField$invoice_paid_Field_customer_format</td>
+		<td class=account>$LANG['owing']:</td><td class=account><u>$pref_currency_signField$invoice_owing_Field_customer</u></td>
 	</tr>
 	</table>
 
@@ -210,13 +210,13 @@ $display_block_top =  "
 	<!-- Invoice Summary section -->
 
 	<tr class='details_screen'>
-		<td class='details_screen'><b>$pref_inv_wordingField $LANG_summary:</b></td><td colspan=5 align=right class='details_screen align_right'><a href='#' class=\"show-summary\" onClick=\"$('.summary').show();$('.show-summary').hide();\">$LANG_show_details</a><a href='#' class=\"summary\" onClick=\"$('.summary').hide();$('.show-summary').show();\">$LANG_hide_details</a> </td>
+		<td class='details_screen'><b>$pref_inv_wordingField $LANG['summary']:</b></td><td colspan=5 align=right class='details_screen align_right'><a href='#' class=\"show-summary\" onClick=\"$('.summary').show();$('.show-summary').hide();\">$LANG['show_details']</a><a href='#' class=\"summary\" onClick=\"$('.summary').hide();$('.show-summary').show();\">$LANG['hide_details']</a> </td>
 	</tr>
 	<tr class='details_screen summary'>
-		<td class='details_screen'>$pref_inv_wordingField $LANG_number_short:</td><td colspan=5 class='details_screen'>$inv_idField</td>
+		<td class='details_screen'>$pref_inv_wordingField $LANG['number_short']:</td><td colspan=5 class='details_screen'>$inv_idField</td>
 	</tr>
 	<tr class='details_screen summary'>
-		<td>$pref_inv_wordingField $LANG_date:</td><td colspan=5>$inv_dateField</td>
+		<td>$pref_inv_wordingField $LANG['date']:</td><td colspan=5>$inv_dateField</td>
 	</tr>
 	$show_custom_field_1 
 	$show_custom_field_2 
@@ -227,25 +227,25 @@ $display_block_top =  "
 	</tr>
 	<!-- Biller section -->
 	<tr class='details_screen'>
-		<td class='details_screen'><b>$LANG_biller:</b></td><td colspan=3>$b_nameField</b></td><td colspan=2 class='align_right' align=right><a href='#' class=\"show-biller\" onClick=\"$('.biller').show();$('.show-biller').hide();\">$LANG_show_details</a><a href='#' class=\"biller\" onClick=\"$('.biller').hide();$('.show-biller').show();\">$LANG_hide_details</a></td>
+		<td class='details_screen'><b>$LANG['biller']:</b></td><td colspan=3>$b_nameField</b></td><td colspan=2 class='align_right' align=right><a href='#' class=\"show-biller\" onClick=\"$('.biller').show();$('.show-biller').hide();\">$LANG['show_details']</a><a href='#' class=\"biller\" onClick=\"$('.biller').hide();$('.show-biller').show();\">$LANG['hide_details']</a></td>
 	</tr>
 	<tr class='details_screen biller'>
-		<td class='details_screen'>$LANG_street:</td><td class='details_screen' colspan=5>$b_street_addressField</td>
+		<td class='details_screen'>$LANG['street']:</td><td class='details_screen' colspan=5>$b_street_addressField</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td class='details_screen'>$LANG_street2:</td><td class='details_screen' colspan=5>$b_street_address2Field</td>
+		<td class='details_screen'>$LANG['street2']:</td><td class='details_screen' colspan=5>$b_street_address2Field</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td class='details_screen'>$LANG_city:</td><td class='details_screen' colspan=3>$b_cityField</td><td class='details_screen'>$LANG_phone_short:</td><td class='details_screen'>$b_phoneField</td>
+		<td class='details_screen'>$LANG['city']:</td><td class='details_screen' colspan=3>$b_cityField</td><td class='details_screen'>$LANG['phone_short']:</td><td class='details_screen'>$b_phoneField</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td class='details_screen'>$LANG_state, Zip:</td><td colspan=3>$b_stateField, $b_zip_codeField</td><td class='details_screen'>$LANG_mobile_short:</td><td class='details_screen'>$b_mobile_phoneField</td>
+		<td class='details_screen'>$LANG['state'], Zip:</td><td colspan=3>$b_stateField, $b_zip_codeField</td><td class='details_screen'>$LANG['mobile_short']:</td><td class='details_screen'>$b_mobile_phoneField</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td class='details_screen'>$LANG_country:</td><td class='details_screen' colspan=3>$b_countryField</td><td class='details_screen'>$LANG_fax:</td><td class='details_screen'>$b_faxField</td>
+		<td class='details_screen'>$LANG['country']:</td><td class='details_screen' colspan=3>$b_countryField</td><td class='details_screen'>$LANG['fax']:</td><td class='details_screen'>$b_faxField</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td class='details_screen'>$LANG_email:</td><td class='details_screen' colspan=5>$b_emailField</td>
+		<td class='details_screen'>$LANG['email']:</td><td class='details_screen' colspan=5>$b_emailField</td>
 	</tr>	
 	<tr class='details_screen biller'>
 		<td class='details_screen'>{$billerCustomFieldLabel['1']}:</td><td class='details_screen' colspan=5>$b_custom_field1Field</td>
@@ -265,28 +265,28 @@ $display_block_top =  "
 	
 	<!-- Customer section -->
 	<tr class='details_screen'
-		<td class='details_screen'><b>$LANG_customer:</b></td><td colspan=3>$c_nameField</td><td colspan=2 align=right class='details_screen align_right'><a href='#' class=\"show-customer\" onClick=\"$('.customer').show(); $('.show-customer').hide(); \">$LANG_show_details</a> <a href='#' class=\"customer\" onClick=\"$('.customer').hide(); $('.show-customer').show();\">$LANG_hide_details</a></td>
+		<td class='details_screen'><b>$LANG['customer']:</b></td><td colspan=3>$c_nameField</td><td colspan=2 align=right class='details_screen align_right'><a href='#' class=\"show-customer\" onClick=\"$('.customer').show(); $('.show-customer').hide(); \">$LANG['show_details']</a> <a href='#' class=\"customer\" onClick=\"$('.customer').hide(); $('.show-customer').show();\">$LANG['hide_details']</a></td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>$LANG_attention_short:</td><td class='details_screen' colspan=5 align=left>$c_attentionField,</td>
+		<td class='details_screen'>$LANG['attention_short']:</td><td class='details_screen' colspan=5 align=left>$c_attentionField,</td>
 	</tr>
 	<tr class='details_screen customer'>
-		<td class='details_screen'>$LANG_street:</td><td class='details_screen' colspan=5 align=left>$c_street_addressField</td>
+		<td class='details_screen'>$LANG['street']:</td><td class='details_screen' colspan=5 align=left>$c_street_addressField</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>$LANG_street2:</td><td class='details_screen' colspan=5 align=left>$c_street_address2Field</td>
+		<td class='details_screen'>$LANG['street2']:</td><td class='details_screen' colspan=5 align=left>$c_street_address2Field</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>$LANG_city:</td><td class='details_screen' colspan=3>$c_cityField</td><td class='details_screen'>Ph:</td><td>$c_phoneField</td>
+		<td class='details_screen'>$LANG['city']:</td><td class='details_screen' colspan=3>$c_cityField</td><td class='details_screen'>Ph:</td><td>$c_phoneField</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>$LANG_state, ZIP:</td><td colspan=3 class='details_screen'>$c_stateField, $c_zip_codeField</td><td class='details_screen'>$LANG_fax:</td><td class='details_screen'>$c_faxField</td>
+		<td class='details_screen'>$LANG['state'], ZIP:</td><td colspan=3 class='details_screen'>$c_stateField, $c_zip_codeField</td><td class='details_screen'>$LANG['fax']:</td><td class='details_screen'>$c_faxField</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>$LANG_country:</td><td class='details_screen' colspan=3>$c_countryField</td><td class='details_screen'>Mobile:</td><td class='details_screen'>$c_mobile_phoneField</td>
+		<td class='details_screen'>$LANG['country']:</td><td class='details_screen' colspan=3>$c_countryField</td><td class='details_screen'>Mobile:</td><td class='details_screen'>$c_mobile_phoneField</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>$LANG_email:</td><td class='details_screen'colspan=5>$c_emailField</td>
+		<td class='details_screen'>$LANG['email']:</td><td class='details_screen'colspan=5>$c_emailField</td>
 	</tr>	
 	<tr class='details_screen customer'>
 		<td class='details_screen'>{$customerCustomFieldLabel['1']}:</td><td colspan=5 class='details_screen'>$c_custom_field1Field</td>
@@ -351,7 +351,7 @@ if (  $_GET['invoice_style'] === 'Total' ) {
 	                <td colspan=6><br></td>
         	</tr>
 	        <tr>
-        	        <td colspan=6><b>$LANG_description</b></td>
+        	        <td colspan=6><b>$LANG['description']</b></td>
 	        </tr>
 	        <tr>
 	                <td colspan=6>$inv_it_descriptionField</td>
@@ -360,7 +360,7 @@ if (  $_GET['invoice_style'] === 'Total' ) {
         	        <td colspan=6><br></td>
 	        </tr>
 	        <tr>
-	                <td></td><td></td><td></td><td><b>$LANG_gross_total</b></td><td><b>$LANG_tax</b></td><td><b>$LANG_total_uppercase</b></td>
+	                <td></td><td></td><td></td><td><b>$LANG['gross_total']</b></td><td><b>$LANG['tax']</b></td><td><b>$LANG['total_uppercase']</b></td>
         	</tr>
 	        <tr>
         	        <td></td><td></td><td></td><td>$pref_currency_signField$inv_it_gross_totalField</td><td>$pref_currency_signField$inv_it_tax_amountField</td><td><u>$pref_currency_signField$inv_it_totalField</u></td>
@@ -395,10 +395,10 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 		<table width=100%>
                         <tr>
                                 <td colspan=5></td>
-                                <td class='details_screen'><a href='#' align=right class=\"show-itemised\" onClick=\"$('.itemised').show();$('.show-itemised').hide();\">$LANG_show_details</a><a href='#' class=\"itemised\" onClick=\"$('.itemised').hide();$('.show-itemised').show();\">$LANG_hide_details</a> 
+                                <td class='details_screen'><a href='#' align=right class=\"show-itemised\" onClick=\"$('.itemised').show();$('.show-itemised').hide();\">$LANG['show_details']</a><a href='#' class=\"itemised\" onClick=\"$('.itemised').hide();$('.show-itemised').show();\">$LANG['hide_details']</a> 
                         <tr>
 			<tr>
-        		        <td><b>$LANG_quantity_short</b></td><td><b>$LANG_description</b></td><td><b>$LANG_unit_price</b><td><b>$LANG_gross_total</b></td><td><b>$LANG_tax</b></td><td><b>$LANG_total_uppercase</b></td>
+        		        <td><b>$LANG['quantity_short']</b></td><td><b>$LANG['description']</b></td><td><b>$LANG['unit_price']</b><td><b>$LANG['gross_total']</b></td><td><b>$LANG['tax']</b></td><td><b>$LANG['total_uppercase']</b></td>
 		        </tr>";
 	}
 	#show column heading for consulting style
@@ -409,9 +409,9 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 		<table width=100%> 
 			<tr>
 				<td colspan=6></td>
-				<td class='details_screen'><a href='#' align=right class=\"show-consulting\" onClick=\"$('.consulting').show();$('.show-consulting').hide();\">$LANG_show_details</a><a href='#' class=\"consulting\" onClick=\"$('.consulting').hide();$('.show-consulting').show();\">$LANG_hide_details</a> 
+				<td class='details_screen'><a href='#' align=right class=\"show-consulting\" onClick=\"$('.consulting').show();$('.show-consulting').hide();\">$LANG['show_details']</a><a href='#' class=\"consulting\" onClick=\"$('.consulting').hide();$('.show-consulting').show();\">$LANG['hide_details']</a> 
         	        <tr>
-               	 	       <td><b>$LANG_quantity_short</b></td><td><b>$LANG_item</b></td><td class=show-consulting><b>$LANG_description</b></td><td class='consulting'></td><td><b>$LANG_unit_price</b><td><b>$LANG_gross_total</b></td><td><b>$LANG_tax</b></td><td align=right><b>$LANG_total_uppercase</b></td>
+               	 	       <td><b>$LANG['quantity_short']</b></td><td><b>$LANG['item']</b></td><td class=show-consulting><b>$LANG['description']</b></td><td class='consulting'></td><td><b>$LANG['unit_price']</b><td><b>$LANG['gross_total']</b></td><td><b>$LANG['tax']</b></td><td align=right><b>$LANG['total_uppercase']</b></td>
 	                </tr>";
         }
 
@@ -529,7 +529,7 @@ EOD;
 		if ($inv_it_descriptionField != null) {
 			$display_block_details .=  "
 			<tr  class='consulting' >	
-				<td></td><td colspan=6 class='details_screen consulting'>$LANG_description:<br>$inv_it_descriptionField</td>
+				<td></td><td colspan=6 class='details_screen consulting'>$LANG['description']:<br>$inv_it_descriptionField</td>
 			 </tr>
 			";
 		}
@@ -561,7 +561,7 @@ EOD;
 				<td></td>
 			</tr>
 			<tr class='details_screen'>
-				<td colspan=5><b>$LANG_notes:</b></td><td align=right class='details_screen'><a href='#' align=right class=\"show-notes\" onClick=\"$('.notes').show();$('.show-notes').hide();\">$LANG_show_details</a><a href='#' class=\"notes\" onClick=\"$('.notes').hide();$('.show-notes').show();\">$LANG_hide_details</a> 
+				<td colspan=5><b>$LANG['notes']:</b></td><td align=right class='details_screen'><a href='#' align=right class=\"show-notes\" onClick=\"$('.notes').show();$('.show-notes').hide();\">$LANG['show_details']</a><a href='#' class=\"notes\" onClick=\"$('.notes').hide();$('.show-notes').show();\">$LANG['hide_details']</a> 
 </td>
 			</tr>
 			<!-- if hide detail click - the stripped note will be displayed -->
@@ -584,12 +584,12 @@ EOD;
 	</tr>	
 
         <tr>
-                <td colspan=3></td><td align=left colspan=2>$LANG_total $LANG_tax $LANG_included</td><td colspan=2 align=right>$pref_currency_signField$invoice_total_taxField_formatted</td>
+                <td colspan=3></td><td align=left colspan=2>$LANG['total'] $LANG['tax'] $LANG['included']</td><td colspan=2 align=right>$pref_currency_signField$invoice_total_taxField_formatted</td>
         </tr>
 	<tr><td><br></td>
 	</tr>
         <tr>
-                <td colspan=3></td><td align=left colspan=2><b>$pref_inv_wordingField $LANG_amount</b></td><td colspan=2 align=right><u>$pref_currency_signField$invoice_total_totalField_formatted</u></td>
+                <td colspan=3></td><td align=left colspan=2><b>$pref_inv_wordingField $LANG['amount']</b></td><td colspan=2 align=right><u>$pref_currency_signField$invoice_total_totalField_formatted</u></td>
         </tr>
 
 
@@ -646,7 +646,7 @@ $display_block_bottom =  "
 	<title><?php echo $title; ?></title>
 <?php include('./config/config.php'); ?> 
 <body>
-<?php echo $LANG_quick_view_of; echo " "; echo $pref_inv_wordingField; ?> <?php echo $master_invoice_id; ?>
+<?php echo $LANG['quick_view_of']; echo " "; echo $pref_inv_wordingField; ?> <?php echo $master_invoice_id; ?>
 <br>
 	<?php 
 	$url_pdf = "$_SERVER[HTTP_HOST]$install_path/index.php?module=invoices&view=templates/template&submit=$inv_idField&action=view&location=pdf&invoice_style=$inv_ty_descriptionField";
@@ -656,20 +656,20 @@ $display_block_bottom =  "
 
 	?>
 <!--Actions heading - start-->
-<?php echo $LANG_actions;?>: 
-		<a href="index.php?module=invoices&view=templates/template&submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>"> <?php echo $LANG_print_preview;?></a>
+<?php echo $LANG['actions'];?>: 
+		<a href="index.php?module=invoices&view=templates/template&submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>"> <?php echo $LANG['print_preview'];?></a>
 		 :: 
-		<a href="index.php?module=invoices&view=details&submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>"> <?php echo $LANG_edit; ?></a>
+		<a href="index.php?module=invoices&view=details&submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>"> <?php echo $LANG['edit']; ?></a>
 		 ::
-		 <a href='index.php?module=payments&view=process&submit=<?php echo $inv_idField;?>&op=pay_selected_invoice'> <?php echo $LANG_process_payment; ?> </a>
+		 <a href='index.php?module=payments&view=process&submit=<?php echo $inv_idField;?>&op=pay_selected_invoice'> <?php echo $LANG['process_payment']; ?> </a>
 		 ::
 		 <!-- EXPORT TO PDF -->
-		<a href='<?php echo $url_for_pdf ;?>'><?php echo $LANG_export_pdf;?></a>
+		<a href='<?php echo $url_for_pdf ;?>'><?php echo $LANG['export_pdf'];?></a>
 		::
-		<a href="index.php?module=invoices&view=templates/template&submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>&export=<?php echo $spreadsheet;?>"><?php echo $LANG_export_as; echo " ."; echo $spreadsheet;?></a>
+		<a href="index.php?module=invoices&view=templates/template&submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>&export=<?php echo $spreadsheet;?>"><?php echo $LANG['export_as']; echo " ."; echo $spreadsheet;?></a>
 		::
-		<a href="index.php?module=invoices&view=templates/template&submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>&export=<?php echo $word_processor;?>"><?php echo $LANG_export_as; echo " ."; echo $word_processor;?> </a>
-		:: <a href="index.php?module=invoices&view=email&stage=1&submit=<?php echo $inv_idField;?>"><?php echo $LANG_email; ?></a>
+		<a href="index.php?module=invoices&view=templates/template&submit=<?php echo $inv_idField; ?>&action=view&invoice_style=<?php echo $inv_ty_descriptionField;?>&export=<?php echo $word_processor;?>"><?php echo $LANG['export_as']; echo " ."; echo $word_processor;?> </a>
+		:: <a href="index.php?module=invoices&view=email&stage=1&submit=<?php echo $inv_idField;?>"><?php echo $LANG['email']; ?></a>
 <!--Actions heading - start-->
 <hr></hr>
 </form>
@@ -683,6 +683,8 @@ $display_block_bottom =  "
 
 <hr></hr>
 	<form>
-		<input type=button value='<?php echo $LANG_cancel;?>'onCLick='history.back()'>
+		<input type=button value='<?php echo $LANG['cancel'];?>'onCLick='history.back()'>
+		<input type=button value='<?php echo $LANG['cancel'];?>'onCLick='history.back()'>
+		<input type=button value='<?php echo $LANG['cancel'];?>'onCLick='history.back()'>
 	</form>
 <!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

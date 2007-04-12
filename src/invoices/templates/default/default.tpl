@@ -19,13 +19,13 @@ $invoice_summary = <<<EOD
 
 	<table class="right">
 		<tr>
-				<td class="col1 tbl1" colspan="4" ><b>$pref[pref_inv_wording] $LANG_summary</b></td>
+				<td class="col1 tbl1" colspan="4" ><b>$pref[pref_inv_wording] $LANG['summary']</b></td>
 		</tr>
 		<tr>
-				<td class="tbl1-left">$pref[pref_inv_wording] $LANG_number_short:</td><td class="tbl1-right" colspan=3>$invoice[inv_id]</td>
+				<td class="tbl1-left">$pref[pref_inv_wording] $LANG['number_short']:</td><td class="tbl1-right" colspan=3>$invoice[inv_id]</td>
 		</tr>
 		<tr>
-				<td nowrap class="tbl1-left">$pref[pref_inv_wording] $LANG_date:</td><td class="tbl1-right" colspan=3>$invoice[date]</td>
+				<td nowrap class="tbl1-left">$pref[pref_inv_wording] $LANG['date']:</td><td class="tbl1-right" colspan=3>$invoice[date]</td>
 		</tr>
 	<!-- Show the Invoice Custom Fields if valid -->
 
@@ -35,13 +35,13 @@ $invoice_summary = <<<EOD
 		$show[custom_field4]
 
 		<tr>
-				<td class="tbl1-left" >$LANG_total: </td><td class="tbl1-right" colspan=3>$pref[pref_currency_sign]$invoice[total_format]</td>
+				<td class="tbl1-left" >$LANG['total']: </td><td class="tbl1-right" colspan=3>$pref[pref_currency_sign]$invoice[total_format]</td>
 		</tr>
 		<tr>
-				<td class="tbl1-left">$LANG_paid:</td><td class="tbl1-right" colspan=3 >$pref[pref_currency_sign]$invoice[paid_format]</td>
+				<td class="tbl1-left">$LANG['paid']:</td><td class="tbl1-right" colspan=3 >$pref[pref_currency_sign]$invoice[paid_format]</td>
 		</tr>
 		<tr>
-				<td nowrap class="tbl1-left tbl1-bottom">$LANG_owing:</td><td class="tbl1-right tbl1-bottom" colspan=3 >$pref[pref_currency_sign]$invoice[owing]</td>
+				<td nowrap class="tbl1-left tbl1-bottom">$LANG['owing']:</td><td class="tbl1-right tbl1-bottom" colspan=3 >$pref[pref_currency_sign]$invoice[owing]</td>
 		</tr>
 
 
@@ -57,14 +57,14 @@ EOD;
         <!-- Biller section - start -->
 	<table class='left'>
         <tr>
-                <td class="tbl1-left tbl1-bottom tbl1-top col1" border=1 cellpadding=2 cellspacing=1><b>$LANG_biller:</b></td><td class="col1 tbl1-bottom tbl1-top tbl1-right" border=1 cellpadding=2 cellspacing=1 colspan=3>$biller[b_name]</td>
+                <td class="tbl1-left tbl1-bottom tbl1-top col1" border=1 cellpadding=2 cellspacing=1><b>$LANG['biller']:</b></td><td class="col1 tbl1-bottom tbl1-top tbl1-right" border=1 cellpadding=2 cellspacing=1 colspan=3>$biller[b_name]</td>
         </tr> 
 EOD;
 
         if ($biller[b_street_address] != null) {
                 $biller_block .=<<<EOD
                 <tr>
-                        <td class='tbl1-left'>$LANG_address:</td><td class='tbl1-right' align=left colspan=3>$biller[b_street_address]</td>
+                        <td class='tbl1-left'>$LANG['address']:</td><td class='tbl1-right' align=left colspan=3>$biller[b_street_address]</td>
                 </tr>   
 EOD;
         }
@@ -74,7 +74,7 @@ EOD;
 EOD;
                 if ($biller[b_street_address] == null) {
                 $biller_block .=<<<EOD
-                        <td class='tbl1-left'>$LANG_address:</td><td class='tbl1-right' align=left colspan=3>$biller[b_street_address2]</td>
+                        <td class='tbl1-left'>$LANG['address']:</td><td class='tbl1-right' align=left colspan=3>$biller[b_street_address2]</td>
                 </tr>   
 EOD;
                 }
@@ -101,12 +101,12 @@ EOD;
         /*country field end*/
 
         /*phone details start */
-	$biller_block .= print_if_not_null($LANG_phone_short, $biller[b_phone],'tbl1-left','tbl1-right',3);
-	$biller_block .= print_if_not_null($LANG_fax, $biller[b_fax],'tbl1-left','tbl1-right',3);
-	$biller_block .= print_if_not_null($LANG_mobile_short, $biller[b_mobile_phone],'tbl1-left','tbl1-right',3);
+	$biller_block .= print_if_not_null($LANG['phone_short'], $biller[b_phone],'tbl1-left','tbl1-right',3);
+	$biller_block .= print_if_not_null($LANG['fax'], $biller[b_fax],'tbl1-left','tbl1-right',3);
+	$biller_block .= print_if_not_null($LANG['mobile_short'], $biller[b_mobile_phone],'tbl1-left','tbl1-right',3);
 
 
-        $biller_block .= print_if_not_null($LANG_email, $biller[b_email],'tbl1-left','tbl1-right',3);
+        $biller_block .= print_if_not_null($LANG['email'], $biller[b_email],'tbl1-left','tbl1-right',3);
         $biller_block .= print_if_not_null($biller[custom_field_label1], $biller[b_custom_field1],'tbl1-left','tbl1-right',3);
         $biller_block .= print_if_not_null($biller[custom_field_label2], $biller[b_custom_field2],'tbl1-left','tbl1-right',3);
         $biller_block .= print_if_not_null($biller[custom_field_label3], $biller[b_custom_field3],'tbl1-left','tbl1-right',3);
@@ -123,21 +123,21 @@ EOD;
 
 	<!-- Customer section - start -->
 	<tr>
-		<td class="tbl1-left tbl1-top tbl1-bottom col1" ><b>$LANG_customer:</b></td><td class="tbl1-top tbl1-bottom col1 tbl1-right" colspan=3>$customer[c_name]</td>
+		<td class="tbl1-left tbl1-top tbl1-bottom col1" ><b>$LANG['customer']:</b></td><td class="tbl1-top tbl1-bottom col1 tbl1-right" colspan=3>$customer[c_name]</td>
 	</tr>
 EOD;
 
         if ($customer[c_attention] != null) {
                 $customer_block .=<<<EOD
                 <tr>
-                        <td class='tbl1-left'>$LANG_attention_short:</td><td align=left class='tbl1-right' colspan=3 >$customer[c_attention]</td>
+                        <td class='tbl1-left'>$LANG['attention_short']:</td><td align=left class='tbl1-right' colspan=3 >$customer[c_attention]</td>
                 </tr>
 EOD;
         }
         if ($customer[c_street_address] != null) {
                 $customer_block .=<<<EOD
                 <tr >
-                        <td class='tbl1-left'>$LANG_address:</td><td class='tbl1-right' align=left colspan=3>$customer[c_street_address]</td>
+                        <td class='tbl1-left'>$LANG['address']:</td><td class='tbl1-right' align=left colspan=3>$customer[c_street_address]</td>
                 </tr>   
 EOD;
         }
@@ -147,7 +147,7 @@ EOD;
 EOD;
                 if ($customer[c_street_address] == null) {
                 $customer_block .=<<<EOD
-                        <td class='tbl1-left'>$LANG_address:</td><td class='tbl1-right' align=left colspan=3>$customer[c_street_address2]</td>
+                        <td class='tbl1-left'>$LANG['address']:</td><td class='tbl1-right' align=left colspan=3>$customer[c_street_address2]</td>
                 </tr>   
 EOD;
                 }
@@ -173,12 +173,12 @@ EOD;
         /*country field end*/
 
         /*phone details start*/
-	$customer_block .= print_if_not_null($LANG_phone_short, $customer[c_phone],'tbl1-left','tbl1-right',3);
-	$customer_block .= print_if_not_null($LANG_fax, $customer[c_fax],'tbl1-left','tbl1-right',3);
-	$customer_block .= print_if_not_null($LANG_mobile_short, $customer[c_mobile_phone],'tbl1-left','tbl1-right',3);
+	$customer_block .= print_if_not_null($LANG['phone_short'], $customer[c_phone],'tbl1-left','tbl1-right',3);
+	$customer_block .= print_if_not_null($LANG['fax'], $customer[c_fax],'tbl1-left','tbl1-right',3);
+	$customer_block .= print_if_not_null($LANG['mobile_short'], $customer[c_mobile_phone],'tbl1-left','tbl1-right',3);
 
 
-        $customer_block .= print_if_not_null($LANG_email, $customer[c_email],'tbl1-left','tbl1-right',3);
+        $customer_block .= print_if_not_null($LANG['email'], $customer[c_email],'tbl1-left','tbl1-right',3);
         $customer_block .= print_if_not_null($customer[custom_field_label1], $customer[c_custom_field1],'tbl1-left','tbl1-right',3);
         $customer_block .= print_if_not_null($customer[custom_field_label2], $customer[c_custom_field2],'tbl1-left','tbl1-right',3);
         $customer_block .= print_if_not_null($customer[custom_field_label3], $customer[c_custom_field3],'tbl1-left','tbl1-right',3);
@@ -194,7 +194,7 @@ $invoice_total_block =  <<<EOD
 			<td colspan=6><br></td>
 		</td>
 			<tr class="tbl1 col1" >
-					<td class="tbl1 col1 tbl1-right" colspan=6><b>$LANG_description</b></td>
+					<td class="tbl1 col1 tbl1-right" colspan=6><b>$LANG['description']</b></td>
 			</tr>
 			<tr class="tbl1-left tbl1-right">
 					<td class="tbl1-left tbl1-right" colspan=6>$master_invoice[inv_it_description]</td>
@@ -203,7 +203,7 @@ $invoice_total_block =  <<<EOD
 					<td colspan=6 class="tbl1-left tbl1-right"><br></td>
 			</tr>
 			<tr class="tbl1-left tbl1-right">
-					<td class="tbl1-left" width="50%"><td align=right><b>$LANG_gross_total</b></td><td align=right><b>$LANG_tax</b></td><td class="tbl1-right" align=right><b>$LANG_total_uppercase</b></td>
+					<td class="tbl1-left" width="50%"><td align=right><b>$LANG['gross_total']</b></td><td align=right><b>$LANG['tax']</b></td><td class="tbl1-right" align=right><b>$LANG['total_uppercase']</b></td>
 			</tr>
 			<tr class="tbl1-left tbl1-right tbl1-bottom">
 					<td class="tbl1-left tbl1-bottom" width="50%"></td></td><td class="tbl1-bottom" align=right> $pref[pref_currency_sign]$master_invoice[inv_it_gross_total]</td><td class="tbl1-bottom" align=right>$pref[pref_currency_sign]$master_invoice[inv_it_tax_amount]</td><td class="tbl1-bottom tbl1-right" align=right><u>$pref[pref_currency_sign]$master_invoice[inv_it_total]</u></td>
@@ -219,23 +219,23 @@ EOD;
 
 $consulting_heading = <<<EOD
 		<tr class="tbl1 col1">
-			<td class="tbl1"><b>$LANG_quantity_short</b></td>
-			<td class="tbl1"><b>$LANG_item</b></td>
-			<td class="tbl1"><b>$LANG_unit_price</b></td>
-			<td class="tbl1"><b>$LANG_gross_total</b></td><td class="tbl1"><b>$LANG_tax</b></td>
-			<td align="right" class="tbl1"><b>$LANG_total_uppercase</b></td>
+			<td class="tbl1"><b>$LANG['quantity_short']</b></td>
+			<td class="tbl1"><b>$LANG['item']</b></td>
+			<td class="tbl1"><b>$LANG['unit_price']</b></td>
+			<td class="tbl1"><b>$LANG['gross_total']</b></td><td class="tbl1"><b>$LANG['tax']</b></td>
+			<td align="right" class="tbl1"><b>$LANG['total_uppercase']</b></td>
 		</tr>
 EOD;
 
 
 $itemised_heading = <<<EOD
 			<tr>
-				<td class="tbl1 col1" ><b>$LANG_quantity_short</b></td>
-				<td class="tbl1 col1" ><b>$LANG_description</b></td>
-				<td class="tbl1 col1" ><b>$LANG_unit_price</b></td>
-				<td class="tbl1 col1" ><b>$LANG_gross_total</b></td>
-				<td class="tbl1 col1" ><b>$LANG_tax</b></td>
-				<td class="tbl1 col1" align=right><b>$LANG_total_uppercase</b></td>
+				<td class="tbl1 col1" ><b>$LANG['quantity_short']</b></td>
+				<td class="tbl1 col1" ><b>$LANG['description']</b></td>
+				<td class="tbl1 col1" ><b>$LANG['unit_price']</b></td>
+				<td class="tbl1 col1" ><b>$LANG['gross_total']</b></td>
+				<td class="tbl1 col1" ><b>$LANG['tax']</b></td>
+				<td class="tbl1 col1" align=right><b>$LANG['total_uppercase']</b></td>
 			</tr>
 EOD;
 
@@ -248,7 +248,7 @@ $total_heading = <<<EOD
                 </td>
 		-->
                 <tr class="tbl1 col1" >
-                        <td class="tbl1 col1 tbl1-right" colspan="6"><b>$LANG_description</b></td>
+                        <td class="tbl1 col1 tbl1-right" colspan="6"><b>$LANG['description']</b></td>
                 </tr>
 EOD;
 
@@ -263,9 +263,9 @@ $total_line = <<<EOD
 	<!--
                 <tr class="tbl1-left tbl1-right">
                         <td class="tbl1-left" width="50"%>
-			<td align="right"><b>$LANG_gross_total</b></td>
-			<td align=right><b>$LANG_tax</b></td>
-			<td class="tbl1-right" align=right><b>$LANG_total_uppercase</b></td>
+			<td align="right"><b>$LANG['gross_total']</b></td>
+			<td align=right><b>$LANG['tax']</b></td>
+			<td class="tbl1-right" align=right><b>$LANG['total_uppercase']</b></td>
                 </tr>
                 <tr class="tbl1-left tbl1-right tbl1-bottom">
 			<td class="tbl1-left tbl1-bottom" width="50%"></td>
@@ -354,7 +354,7 @@ $consulting_line .=  <<<EOD
 	
 			<tr class="tbl1-left tbl1-right">
 				<td class="tbl1-left"></td>
-				<td class="tbl1-right" colspan=6><i>$LANG_description: </i>$master_invoice[inv_it_description]</td>
+				<td class="tbl1-right" colspan=6><i>$LANG['description']: </i>$master_invoice[inv_it_description]</td>
 			</tr>
 			<tr class="tbl1-left tbl1-right tbl1-bottom">
 				<td class="tbl1-left tbl1-bottom" ></td>
@@ -373,7 +373,7 @@ if ( ($_GET['invoice_style'] === 'Itemised' && !empty($invoice[inv_note])) OR ($
 			<td class="tbl1-left tbl1-right" colspan="7"><br></td>
 		</tr>
 		<tr>
-			<td class="tbl1-left tbl1-right" colspan="7" align="left"><b>$LANG_notes:</b></td>
+			<td class="tbl1-left tbl1-right" colspan="7" align="left"><b>$LANG['notes']:</b></td>
 		</tr>
 		<tr>
 			<td class="tbl1-left tbl1-right" colspan="7">$invoice[inv_note]</td>
@@ -385,7 +385,7 @@ if ( $_GET['invoice_style'] === 'Total') {
 $gross_total =  <<<EOD
 	<tr class="tbl1-left tbl1-right">
 		<td class="tbl1-left" colspan="3"></td>
-		<td align="right" colspan="2">$LANG_gross_total</td>
+		<td align="right" colspan="2">$LANG['gross_total']</td>
 		<td align="right" class="tbl1-right" >$pref[pref_currency_sign]$master_invoice[inv_it_gross_total]</td>
 	</tr>
 EOD;
@@ -394,7 +394,7 @@ EOD;
 $total_tax =  <<<EOD
 	<tr class="tbl1-left tbl1-right">
 		<td class="tbl1-left" colspan="3"></td>
-		<td align="right" colspan="2">$LANG_tax_total</td>
+		<td align="right" colspan="2">$LANG['tax_total']</td>
 		<td align="right" class="tbl1-right" >$pref[pref_currency_sign]$tax[total_tax]</td>
 	</tr>
 EOD;
@@ -402,7 +402,7 @@ EOD;
 $total_invoice = <<<EOD
 	<tr class="tbl1-left tbl1-right tbl1-bottom">
 		<td class="tbl1-left tbl1-bottom" colspan="3"></td>
-		<td class="tbl1-bottom" align=right colspan=2><b>$pref[pref_inv_wording] $LANG_amount</b></td>
+		<td class="tbl1-bottom" align=right colspan=2><b>$pref[pref_inv_wording] $LANG['amount']</b></td>
 		<td  class="tbl1-bottom tbl1-right" align=right><u>$pref[pref_currency_sign]$invoice_total[total]</u></td>
 	</tr>
 EOD;

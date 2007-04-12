@@ -44,9 +44,9 @@ if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_inv
 			)";
 
 	if (mysql_query($sql)) {
-		$display_block = $LANG_save_invoice_success;
+		$display_block = $LANG['save_invoice_success'];
 	} else {
-		$display_block = $LANG_save_invoice_failure;
+		$display_block = $LANG['save_invoice_failure'];
 	}
 
 	#get the invoice id from the insert
@@ -90,7 +90,7 @@ if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_inv
 
 
 	if (mysql_query($sql_items)) {
-		$display_block_items = $LANG_save_invoice_items_success;
+		$display_block_items = $LANG['save_invoice_items_success'];
 	} else { die(mysql_error());
 	}
 
@@ -120,9 +120,9 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 			inv_id = $invoice_id";
 
 	if (mysql_query($sql)) {
-		$display_block = $LANG_save_invoice_success;
+		$display_block = $LANG['save_invoice_success'];
 	} else {
-		$display_block = $LANG_save_invoice_failure.$sql;
+		$display_block = $LANG['save_invoice_failure'].$sql;
 	}
 	
 	#update the {$tb_prefix}invoices table with customer etc  stuff - end
@@ -161,7 +161,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 
 
 	if (mysql_query($sql_items)) {
-		$display_block_items = $LANG_save_invoice_items_success;
+		$display_block_items = $LANG['save_invoice_items_success'];
 	} else { die(mysql_error());
 }
 
@@ -207,9 +207,9 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 		)";
 
 	if (mysql_query($sql)) {
-		$display_block = $LANG_save_invoice_success;
+		$display_block = $LANG['save_invoice_success'];
 	} else {
-		$display_block = $LANG_save_invoice_failure;
+		$display_block = $LANG['save_invoice_failure'];
 	}
 
 	#get the invoice id from the insert
@@ -285,7 +285,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 
 		
 		if (mysql_query($sql_items)) {
-			$display_block_items = $LANG_save_invoice_items_success;
+			$display_block_items = $LANG['save_invoice_items_success'];
 		} else { die(mysql_error());
 		}
 		
@@ -325,9 +325,9 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 			inv_id = $invoice_id";
 
 	if (mysql_query($sql)) {
-		$display_block = $LANG_save_invoice_success;
+		$display_block = $LANG['save_invoice_success'];
 	} else {
-		$display_block = $LANG_save_invoice_failure;
+		$display_block = $LANG['save_invoice_failure'];
 	}
 
 
@@ -421,7 +421,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 
 
 		if (mysql_query($sql_items)) {
-			$display_block_items =  $LANG_save_invoice_items_success;
+			$display_block_items =  $LANG['save_invoice_items_success'];
 		} else { die(mysql_error());
 		}
 
@@ -478,9 +478,9 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 		";
 
 	if (mysql_query($sql)) {
-		$display_block =  $LANG_save_invoice_success;
+		$display_block =  $LANG['save_invoice_success'];
 	} else {
-		$display_block = $LANG_save_invoice_failure;
+		$display_block = $LANG['save_invoice_failure'];
 }
 
 	#get the invoice id from the insert
@@ -556,7 +556,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 
 		
 		if (mysql_query($sql_items)) {
-			$display_block_items = $LANG_save_invoice_items_success;
+			$display_block_items = $LANG['save_invoice_items_success'];
 		} else { die(mysql_error());
 		}
 		
@@ -594,9 +594,9 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 			inv_id = $invoice_id";
 
 	if (mysql_query($sql)) {
-		$display_block =  $LANG_save_invoice_success;
+		$display_block =  $LANG['save_invoice_success'];
 	} else {
-		$display_block = $LANG_save_invoice_failure;
+		$display_block = $LANG['save_invoice_failure'];
 }
 
 
@@ -689,7 +689,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 
 
 		if (mysql_query($sql_items)) {
-			$display_block_items =  $LANG_save_invoice_items_success;
+			$display_block_items =  $LANG['save_invoice_items_success'];
 		} else { die(mysql_error());
 		}
 
