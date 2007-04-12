@@ -7,7 +7,7 @@ checkLogin();
 /* validataion code */
 jsBegin();
 jsFormValidationBegin("frmpost");
-jsValidateRequired("c_name",$LANG_customer_name);
+jsValidateRequired("c_name",$LANG['customer_name']);
 jsFormValidationEnd();
 jsEnd();
 /* end validataion code */

@@ -12,9 +12,9 @@ $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
 if ( $op === 'insert_biller') {
 	
 	if(insertBiller()) {
- 		$display_block = $LANG_save_biller_success;
+ 		$display_block = $LANG['save_biller_success'];
  	} else {
- 		$display_block = $LANG_save_biller_failure;
+ 		$display_block = $LANG['save_biller_failure'];
  	}
 
 	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=billers&view=manage>";
@@ -26,9 +26,9 @@ else if ($op === 'edit_biller' ) {
 
 	if (isset($_POST['save_biller'])) {
 		if (updateBiller()) {
-			$display_block = $LANG_save_biller_success;
+			$display_block = $LANG['save_biller_success'];
 		} else {
-			$display_block = $LANG_save_biller_failure;
+			$display_block = $LANG['save_biller_failure'];
 		}
 	}
 	else if (isset($_POST['cancel'])) {

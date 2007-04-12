@@ -10,12 +10,12 @@ $result = mysql_query($sql, $conn) or die(mysql_error());
 
 
 if (mysql_num_rows($result) == 0) {
-	$display_block = "<P><em>{$LANG_no_customers}.</em></p>";
+	$display_block = "<P><em>{$LANG['no_customers']}.</em></p>";
 } else {
 	$display_block = <<<EOD
 
 
-<b>{$LANG_manage_customers} :: <a href="index.php?module=customers&view=add">{$LANG_customer_add}</a></b>
+<b>{$LANG['manage_customers']} :: <a href="index.php?module=customers&view=add">{$LANG['customer_add']}</a></b>
 <hr></hr>
 
 <table align="center" id="rico_customer" class="ricoLiveGrid manage">
@@ -29,17 +29,17 @@ if (mysql_num_rows($result) == 0) {
 </colgroup>
 <thead>
 <tr class="sortHeader">
-<th class="noFilter sortable">{$LANG_actions}</th>
-<th class="index_table sortable">{$LANG_customer_id}</th>
-<th class="index_table sortable">{$LANG_customer_name}</th>
+<th class="noFilter sortable">{$LANG['actions']}</th>
+<th class="index_table sortable">{$LANG['customer_id']}</th>
+<th class="index_table sortable">{$LANG['customer_name']}</th>
 <!--
-<th class="index_table">{$LANG_phone}</th>
+<th class="index_table">{$LANG['phone']}</th>
 -->
-<th class="index_table sortable">{$LANG_total}</th>
+<th class="index_table sortable">{$LANG['total']}</th>
 <!--
-<th class="index_table">{$LANG_paid}</th>
+<th class="index_table">{$LANG['paid']}</th>
 -->
-<th class="index_table sortable">{$LANG_owing}</th>
+<th class="index_table sortable">{$LANG['owing']}</th>
 <th class="noFilter index_table sortable">{$wording_for_enabledField}</th>
 </tr>
 </thead>
@@ -68,9 +68,9 @@ while ($customer = mysql_fetch_array($result)) {
 		$display_block .= <<<EOD
 	<tr class="index_table">
 	<td class="index_table"><a class="index_table"
-	 href="index.php?module=customers&view=details&submit={$customer['c_id']}&action=view">{$LANG_view}</a> ::
+	 href="index.php?module=customers&view=details&submit={$customer['c_id']}&action=view">{$LANG['view']}</a> ::
 	<a class="index_table"
-	 href="index.php?module=customers&view=details&submit={$customer['c_id']}&action=edit">{$LANG_edit}</a> </td>
+	 href="index.php?module=customers&view=details&submit={$customer['c_id']}&action=edit">{$LANG['edit']}</a> </td>
 	<td class="index_table">{$customer['c_id']}</td>
 	<td class="index_table">{$customer['c_name']}</td>
 	<!--

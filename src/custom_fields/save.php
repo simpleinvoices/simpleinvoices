@@ -23,9 +23,9 @@ if (  $op === 'edit_custom_field' ) {
                                 cf_id = $_GET[submit]";
 
 		if (mysql_query($sql, $conn)) {
-			$display_block =  $LANG_save_custom_field_success;
+			$display_block =  $LANG['save_custom_field_success'];
 		} else {
-			$display_block =  $LANG_save_custom_field_success;
+			$display_block =  $LANG['save_custom_field_success'];
 			$display_block .=  mysql_error();
 		}
 

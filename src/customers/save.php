@@ -18,9 +18,9 @@ if ($op === "insert_customer") {
 	$sql ='INSERT INTO '.$tb_prefix.'customers VALUES ("","' . $c_attention . '", "' . $c_name . '", "' . $c_street_address . '", "' . $c_street_address2 . '",  "' . $c_city . '", "' . $c_state . '", "' . $c_zip_code . '", "' . $c_country . '", "' . $c_phone . '", "' . $c_mobile_phone . '", "' . $c_fax . '", "' . $c_email . '", "' . $c_notes . '", "' . $c_custom_field1 . '", "' . $c_custom_field2 . '", "' . $c_custom_field3 . '", "' . $c_custom_field4 . '", "' . $c_enabled . '")';
 
 	if (mysql_query($sql)) {
-		$display_block = $LANG_save_customer_success;
+		$display_block = $LANG['save_customer_success'];
 	} else {
-		$display_block = $LANG_save_customer_failure;
+		$display_block = $LANG['save_customer_failure'];
 	}
 	//TODO: Refresh over php?
 	//header( 'refresh: 2; url=manage_customers.php' );
@@ -33,9 +33,9 @@ else if ( $op === 'edit_customer' ) {
 	if (isset($_POST['save_customer'])) {
 
 		if (saveCustomer()) {
-			$display_block = $LANG_save_customer_success;
+			$display_block = $LANG['save_customer_success'];
 		} else {
-			$display_block =  $LANG_save_customer_failure;
+			$display_block =  $LANG['save_customer_failure'];
 		}
 
 		//header( 'refresh: 2; url=manage_customers.php' );
