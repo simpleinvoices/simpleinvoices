@@ -439,7 +439,7 @@ $display_block
 </table>
 <!-- </div> -->
 
-	<input type=submit name="submit" value="$LANG_save_defaults">
+	<input type=submit name="submit" value="$LANG['save_defaults']">
 	<input type=hidden name="op" value="update_system_defaults">
 
 </form>

@@ -23,10 +23,10 @@ while ($max_invoice = mysql_fetch_array($result_max) ) {
 
 jsBegin();
 jsFormValidationBegin("frmpost");
-#jsValidateifNum("ac_inv_id",$LANG_invoice_id);
-jsPaymentValidation("ac_inv_id",$LANG_invoice_id,1,$max_invoice['max_inv_id']);
-jsValidateifNum("ac_amount",$LANG_amount);
-jsValidateifNum("ac_date",$LANG_date);
+#jsValidateifNum("ac_inv_id",$LANG['invoice_id']);
+jsPaymentValidation("ac_inv_id",$LANG['invoice_id'],1,$max_invoice['max_inv_id']);
+jsValidateifNum("ac_amount",$LANG['amount']);
+jsValidateifNum("ac_date",$LANG['date']);
 jsFormValidationEnd();
 jsEnd();
 
@@ -83,7 +83,7 @@ $pt = mysql_fetch_array($result_payment_type_default);
 
 if (mysql_num_rows($result) == 0) {
 	//no records
-	$display_block_payment_type = "<p><em>{$LANG_no_payment_types}</em></p>";
+	$display_block_payment_type = "<p><em>{$LANG['no_payment_types']}</em></p>";
 
 } else {
 	//has records, so display them
@@ -131,36 +131,36 @@ if ($op === "pay_selected_invoice") {
 	$display_block = <<<EOD
 <table align="center">	
 <tr>
-	<td class="details_screen">{$LANG_invoice_id}</td>
+	<td class="details_screen">{$LANG['invoice_id']}</td>
 	<td><input type="hidden" name="ac_inv_id" value="{$inv['inv_id']}" />{$inv['inv_id']}</td>
-	<td class="details_screen">{$LANG_total}</td><td>{$invoice_total_Field_formatted}</td>
+	<td class="details_screen">{$LANG['total']}</td><td>{$invoice_total_Field_formatted}</td>
 </tr>
 <tr>
-	<td class="details_screen">{$LANG_biller}</td>
+	<td class="details_screen">{$LANG['biller']}</td>
 	<td>{$biller['b_name']}</td>
-	<td class="details_screen">{$LANG_paid}</td>
+	<td class="details_screen">{$LANG['paid']}</td>
 	<td>{$invoice_paid_Field_formatted}</td>
 </tr>
 <tr>
-	<td class="details_screen">{$LANG_customer}</td>
+	<td class="details_screen">{$LANG['customer']}</td>
 	<td>{$customer['c_name']}</td>
-	<td class="details_screen">{$LANG_owing}</td>
+	<td class="details_screen">{$LANG['owing']}</td>
 	<td><u>{$invoice_owing_Field_formatted}</u></td>
 </tr>
 <tr>
-	<td class="details_screen">{$LANG_amount}</td>
+	<td class="details_screen">{$LANG['amount']}</td>
 	<td colspan="5"><input type="text" name="ac_amount" size="25" value="{$invoice_owing_Field}" /><a href="./src/documentation/info_pages/process_payment_auto_amount.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 </tr>
 <tr>
-	<td class="details_screen">{$LANG_date_formatted}</td>
+	<td class="details_screen">{$LANG['date_formatted']}</td>
 	<td><input type="text" class="date-picker" name="ac_date" id="date1" value="{$today}" /></td>
 </tr>
 <tr>
-	<td class="details_screen">{$LANG_payment_type_method}</td>
+	<td class="details_screen">{$LANG['payment_type_method']}</td>
 	<td>{$display_block_payment_type}</td>
 </tr>
 <tr>
-	<td class="details_screen">{$LANG_note}</td>
+	<td class="details_screen">{$LANG['note']}</td>
 	<td colspan="5"><textarea name="ac_notes" rows="5" cols="50"></textarea></td>
 </tr>
 </table>
@@ -177,31 +177,31 @@ else if ($op === "pay_invoice") {
 
 <table align="center">
 <tr>
-	<td class="details_screen">{$LANG_invoice_id}
+	<td class="details_screen">{$LANG['invoice_id']}
 	<a href="./src/documentation/info_pages/process_payment_inv_id.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 	<td><input type="text" id="ac_me" name="ac_inv_id" /></td>
 </tr>
 <tr>
-	<td class="details_screen">{$LANG_details}
+	<td class="details_screen">{$LANG['details']}
 	<a href="./src/documentation/info_pages/process_payment_details.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
-	<td id="js_total"><i>{$LANG_select_invoice}</i> </td>
+	<td id="js_total"><i>{$LANG['select_invoice']}</i> </td>
 </tr>
 <tr>
-	<td class="details_screen">{$LANG_amount}</td>
+	<td class="details_screen">{$LANG['amount']}</td>
 	<td colspan="5"><input type="text" name="ac_amount" size="25" /></td>
 </tr>
 <tr>
 	<div class="demo-holder">
-		<td class="details_screen">{$LANG_date_formatted}</td>
+		<td class="details_screen">{$LANG['date_formatted']}</td>
 		<td><input type="text" class="date-picker" name="ac_date" id="date1" value="{$today}" /></td>
 	</div>
 </tr>
 <tr>
-	<td class="details_screen">{$LANG_payment_type_method}</td>
+	<td class="details_screen">{$LANG['payment_type_method']}</td>
 	<td>{$display_block_payment_type}</td>
 </tr>
 <tr>
-	<td class="details_screen">{$LANG_note}</td>
+	<td class="details_screen">{$LANG['note']}</td>
 	<td colspan="5"><textarea name="ac_notes" rows="5" cols="50"></textarea></td>
 </tr>
 </table>
@@ -217,12 +217,12 @@ else if ($op === "pay_invoice_batch") {
 echo <<<EOD
 
 <form name="frmpost" action="index.php?module=payments&view=save" method="post" onsubmit="return frmpost_Validator(this)">
-<b>{$LANG_process_payment}</b>
+<b>{$LANG['process_payment']}</b>
  <hr></hr>
 
 $display_block
 <hr></hr>
-	<input type=submit name="process_payment" value="{$LANG_process_payment}">
+	<input type=submit name="process_payment" value="{$LANG['process_payment']}">
 	<input type=hidden name="op" value="{$insert_action_op}">
 </form>
 EOD;

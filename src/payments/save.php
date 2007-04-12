@@ -31,15 +31,15 @@ if ( $op === 'pay_invoice' OR $op === 'pay_selected_invoice' ) {
 
 	if (mysql_query($sql, $conn)) {
 		if ( $op === 'pay_selected_invoice' ) {
-			$display_block =  $LANG_save_payment_invoice_success;
+			$display_block =  $LANG['save_payment_invoice_success'];
 		}
 		if ( $op === 'pay_invoice' ) {
-			$display_block =  $LANG_save_payment_success;
+			$display_block =  $LANG['save_payment_success'];
 		}
 		
 
 	} else {
-		$display_block =  $LANG_save_payment_failure."<br>".$sql;
+		$display_block =  $LANG['save_payment_failure']."<br>".$sql;
 	}
 
 	if ( $op === 'pay_selected_invoice' ) {
