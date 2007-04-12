@@ -12,10 +12,10 @@
 
 	<table align="center">
 	<tr>
-		<td class="details_screen">{$LANG_payment_type_id}</td><td>{$paymentType.pt_id}</td>
+		<td class="details_screen">{$LANG['payment_type_id']}</td><td>{$paymentType.pt_id}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG_description}</td><td>{$paymentType.pt_description}</td>
+		<td class="details_screen">{$LANG['description']}</td><td>{$paymentType.pt_description}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$wording_for_enabledField}</td><td>{$wording_for_enabled}</td>
@@ -23,18 +23,18 @@
 	</table>
 	<hr></hr>
 
-<a href='index.php?module=payment_types&view=details&submit={$paymentType.pt_id}&action=edit'>{$LANG_edit}</a>
+<a href='index.php?module=payment_types&view=details&submit={$paymentType.pt_id}&action=edit'>{$LANG['edit']}</a>
 
 {/if}
 
 {if $smarty.get.action == "edit"}
 
-	<b>{$LANG_payment_type_edit}</b>
+	<b>{$LANG['payment_type_edit']}</b>
 	<hr></hr>
 
 	<table align=center>
 	<tr>
-		<td class="details_screen">{$LANG_payment_type_id}</td>
+		<td class="details_screen">{$LANG['payment_type_id']}</td>
 		<td>{$paymentType.pt_id}</td>
 	</tr>
 	<tr>
