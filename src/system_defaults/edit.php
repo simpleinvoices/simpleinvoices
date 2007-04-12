@@ -91,7 +91,7 @@ EOD;
 
 	jsBegin();
 	jsFormValidationBegin("frmpost");
-	jsValidateRequired("def_inv_template","$LANG['default_inv_template']");
+	jsValidateRequired("def_inv_template","{$LANG['default_inv_template']}");
 	jsFormValidationEnd();
 	jsEnd();
 	/*end validataion section */
@@ -114,7 +114,7 @@ EOD;
 	</tr>
 	-->
 	<tr>
-		<td class="details_screen">$LANG['default_inv_template'] <a href='./src/documentation/info_pages/default_invoice_template_text.html' rel='gb_page_center[450, 450]'><img src="images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$LANG['default_inv_template']} <a href='./src/documentation/info_pages/default_invoice_template_text.html' rel='gb_page_center[450, 450]'><img src="images/common/help-small.png"></img></a></td>
 		<td>$display_block_templates_list</td>
 	</tr>
 	<tr>
@@ -143,7 +143,7 @@ else if ($_GET[submit] == "biller") {
 
 	if (mysql_num_rows($result) == 0) {
 		//no records
-		$display_block = "<p><em>$LANG['no_billers']</em></p>";
+		$display_block = "<p><em>{$LANG['no_billers']}</em></p>";
 
 	} else {
 		//has records, so display them
@@ -173,7 +173,7 @@ EOD;
 		<td><br></td>
 	</tr>
 	<tr>
-		<td class="details_screen">$LANG['biller_name']</th><td>$display_block_biller</td>
+		<td class="details_screen">{$LANG['biller_name']}</th><td>$display_block_biller</td>
 	</tr>
 	<tr>
 		<td><br></td>
@@ -204,7 +204,7 @@ else if ($_GET[submit] == "customer") {
 
 	if (mysql_num_rows($result_customer) == 0) {
 		//no records
-		$display_block_customer = "<p><em>$LANG['no_customers']</em></p>";
+		$display_block_customer = "<p><em>{$LANG['no_customers']}</em></p>";
 
 	} else {
 		$default = "def_customer";
@@ -231,7 +231,7 @@ EOD;
 		<td><br></td>
 	</tr>
 	<tr>
-		<td class="details_screen">$LANG['customer_name']</th><td>$display_block_customer</td>
+		<td class="details_screen">{$LANG['customer_name']}</th><td>$display_block_customer</td>
 	</tr>
 	<tr>
 		<td><br></td>
@@ -264,7 +264,7 @@ else if ($_GET[submit] == "tax") {
 
 	if (mysql_num_rows($result_tax) == 0) {
 		//no records
-		$display_block_tax = "<p><em>$LANG['no_tax_rates']</em></p>";
+		$display_block_tax = "<p><em>{$LANG['no_tax_rates']}</em></p>";
 
 	} else {
 		$default = "def_tax";
@@ -292,7 +292,7 @@ EOD;
 		<td><br></td>
 	</tr>
 	<tr>
-	<td class="details_screen">$LANG['tax']</td><td>$display_block_tax</td>
+	<td class="details_screen">{$LANG['tax']}</td><td>$display_block_tax</td>
 	</tr>
 	<tr>
 		<td><br></td>
@@ -322,7 +322,7 @@ else if ($_GET[submit] == "inv_preference") {
 
 	if (mysql_num_rows($result_preferences) == 0) {
 		//no records
-		$display_block_preferences = "<p><em>$LANG['no_preferences']</em></p>";
+		$display_block_preferences = "<p><em>{$LANG['no_preferences']}</em></p>";
 
 	} else {
 		$default = "def_invoice_preference";
@@ -350,7 +350,7 @@ EOD;
 		<td><br></td>
 	</tr>
 	<tr>
-		<td class="details_screen">$LANG['inv_pref']</td><td>$display_block_preferences</td>
+		<td class="details_screen">{$LANG['inv_pref']}</td><td>$display_block_preferences</td>
 	</tr>
 	<tr>
 		<td><br></td>
@@ -381,7 +381,7 @@ else if ($_GET[submit] == "def_payment_type") {
 
 	if (mysql_num_rows($result_payment_type) == 0) {
 		//no records
-		$display_block_payment_type = "<p><em>$LANG['payment_type']</em></p>";
+		$display_block_payment_type = "<p><em>{$LANG['payment_type']}</em></p>";
 
 	} else {
 		$default = "def_payment_type";
@@ -408,7 +408,7 @@ EOD;
                 <td><br></td>
         </tr>
         <tr>
-        <td class="details_screen">$LANG['payment_type']</td><td>$display_block_payment_type</td>
+        <td class="details_screen">{$LANG['payment_type']}</td><td>$display_block_payment_type</td>
         </tr>
         <tr>
                 <td><br></td>
@@ -419,7 +419,7 @@ EOD;
 
 
 else {
-	$display_block = "$LANG['no_defaults']";
+	$display_block = "{$LANG['no_defaults']}";
 }
 
 
@@ -427,7 +427,7 @@ echo <<<EOD
 
 <form name="frmpost" action="index.php?module=system_defaults&view=save&sys_default=$default" method="post" onsubmit="return frmpost_Validator(this)">
 
-		<b>$LANG['system_defaults']</b>
+		<b>{$LANG['system_defaults']}</b>
  <hr></hr>
 
 <table align=center>
@@ -439,7 +439,7 @@ $display_block
 </table>
 <!-- </div> -->
 
-	<input type=submit name="submit" value="$LANG['save_defaults']">
+	<input type=submit name="submit" value="{$LANG['save_defaults']}">
 	<input type=hidden name="op" value="update_system_defaults">
 
 </form>
