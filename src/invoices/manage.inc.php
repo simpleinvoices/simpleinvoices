@@ -8,7 +8,7 @@ $number_of_rows = mysql_num_rows($result);
 
 
 if (mysql_num_rows($result) == 0) {
-	$display_block .= "<P><em>{$LANG_no_invoices}.</em></p>";
+	$display_block .= "<P><em>{$LANG['no_invoices']}.</em></p>";
 }else{
 	$display_block .= <<<EOD
 
@@ -31,18 +31,18 @@ if (mysql_num_rows($result) == 0) {
 </colgroup>
 <thead> 
 <tr class="sortHeader">
-<th class="noFilter sortable" >{$LANG_actions} </th>
-<th class="noFilter sortable">{$LANG_id}</th>
-<th class="selectFilter index_table sortable">{$LANG_biller}</th>
-<th class="selectFilter index_table sortable">{$LANG_customer}</th>
-<th class="noFilter sortable">{$LANG_total}</th>
+<th class="noFilter sortable" >{$LANG['actions']} </th>
+<th class="noFilter sortable">{$LANG['id']}</th>
+<th class="selectFilter index_table sortable">{$LANG['biller']}</th>
+<th class="selectFilter index_table sortable">{$LANG['customer']}</th>
+<th class="noFilter sortable">{$LANG['total']}</th>
 <!--
-<th class="noFilter">{$LANG_paid}</th>
+<th class="noFilter">{$LANG['paid']}</th>
 -->
-<th class="noFilter sortable">{$LANG_owing}</th>
-<th class="selectFilter index_table sortable">{$LANG_aging}</th>
-<th class="noFilter sortable">{$LANG_invoice_type}</th>
-<th class="noFilter sortable">{$LANG_date_created}</th>
+<th class="noFilter sortable">{$LANG['owing']}</th>
+<th class="selectFilter index_table sortable">{$LANG['aging']}</th>
+<th class="noFilter sortable">{$LANG['invoice_type']}</th>
+<th class="noFilter sortable">{$LANG['date_created']}</th>
 </tr>
 </thead>
 EOD;
@@ -147,38 +147,38 @@ while ($newArray = mysql_fetch_array($result)) {
 	<td class="index_table" nowrap>
 	<!-- Quick View -->
 	<a class="index_table"
-	 title="{$LANG_quick_view_tooltip} {$invoice_preference_wordingField} {$inv_idField}"
+	 title="{$LANG['quick_view_tooltip']} {$invoice_preference_wordingField} {$inv_idField}"
 	 href="index.php?module=invoices&view=quick_view&submit={$inv_idField}&invoice_style={$inv_ty_descriptionField}">
 		<img src="images/common/view.png" height="16" border="-5px0" padding="-4px" valign="bottom" /><!-- print --></a>
 	</a>
 	<!-- Edit View -->
-	<a class="index_table" title="{$LANG_edit_view_tooltip} {$invoice_preference_wordingField} {$inv_idField}"
+	<a class="index_table" title="{$LANG['edit_view_tooltip']} {$invoice_preference_wordingField} {$inv_idField}"
 	 href="index.php?module=invoices&view=details&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}">
 		<img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>
 	</a> 
 	<!-- Print View -->
-	<a class="index_table" title="{$LANG_print_preview_tooltip} {$invoice_preference_wordingField} {$inv_idField}"
+	<a class="index_table" title="{$LANG['print_preview_tooltip']} {$invoice_preference_wordingField} {$inv_idField}"
 	href="index.php?module=invoices&view=templates/template&submit={$inv_idField}&action=view&location=print&invoice_style={$inv_ty_descriptionField}">
 	<img src="images/common/printer.gif" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>
  
 	<!-- EXPORT TO PDF -->
-	<a title="{$LANG_export_tooltip} {$invoice_preference_wordingField} {$inv_idField} {$LANG_export_pdf_tooltip}"
+	<a title="{$LANG['export_tooltip']} {$invoice_preference_wordingField} {$inv_idField} {$LANG['export_pdf_tooltip']}"
 	class="index_table" href="{$url_for_pdf}"><img src="images/common/pdf.jpg" height="16" padding="-4px" border="-5px" valign="bottom" /><!-- pdf --></a>
 
 	<!--XLS -->
-	<a title="{$LANG_export_tooltip} {$invoice_preference_wordingField}{$inv_idField} {$LANG_export_xls_tooltip} {$spreadsheet} {$LANG_format_tooltip}"
+	<a title="{$LANG['export_tooltip']} {$invoice_preference_wordingField}{$inv_idField} {$LANG['export_xls_tooltip']} {$spreadsheet} {$LANG['format_tooltip']}"
 	 class="index_table" href="index.php?module=invoices&view=templates/template&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}&location=print&export={$spreadsheet}">
 	 <img src="images/common/xls.gif" height="16" border="0" padding="-4px" valign="bottom" /><!-- $spreadsheet --></a>
 	<!-- was href="index.php?module=invoices&view=templates/{$def_inv_templateField} now using simple template-->
 	<!-- DOC -->
-	<a title="{$LANG_export_tooltip} {$invoice_preference_wordingField} {$inv_idField} {$LANG_export_doc_tooltip} {$word_processor} {$LANG_format_tooltip}"
+	<a title="{$LANG['export_tooltip']} {$invoice_preference_wordingField} {$inv_idField} {$LANG['export_doc_tooltip']} {$word_processor} {$LANG['format_tooltip']}"
 	 class="index_table" href="index.php?module=invoices&view=templates/template&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}&location=print&export={$word_processor}">
 	 <img src="images/common/doc.png" height="16" border="0" padding="-4px" valign="bottom" /><!-- $word_processor --></a>
        <!-- was href="index.php?module=invoices&view=templates/{$def_inv_templateField} now using the simple template-->
-  <!-- Payment --><a title="{$LANG_process_payment} {$invoice_preference_wordingField} {$inv_idField}"
+  <!-- Payment --><a title="{$LANG['process_payment']} {$invoice_preference_wordingField} {$inv_idField}"
    class="index_table" href="index.php?module=payments&view=process&submit={$inv_idField}&op=pay_selected_invoice">$</a>
 	<!-- Email -->
-	<a href="index.php?module=invoices&view=email&stage=1&submit={$inv_idField}" title="{$LANG_email}  {$invoice_preference_wordingField} {$inv_idField}"><img src="images/common/mail-message-new.png" height="16" border="0" padding="-4px" valign="bottom" /></a>
+	<a href="index.php?module=invoices&view=email&stage=1&submit={$inv_idField}" title="{$LANG['email']}  {$invoice_preference_wordingField} {$inv_idField}"><img src="images/common/mail-message-new.png" height="16" border="0" padding="-4px" valign="bottom" /></a>
 
 	</td>
 	<td class="index_table">{$inv_idField}</td>

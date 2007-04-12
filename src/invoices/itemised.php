@@ -252,14 +252,14 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,
 
 </head>
 
-	<title><?php echo $title; echo " :: "; echo $LANG_inv; echo $LANG_inv_itemised; ?></title>
+	<title><?php echo $title; echo " :: "; echo $LANG['inv']; echo $LANG['inv_itemised']; ?></title>
 <?php include('./config/config.php'); ?>
 
 <BODY>
 
 <FORM name="frmpost" ACTION="index.php?module=invoices&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
 
-<b><?php echo $LANG_inv; echo $LANG_inv_itemised; ?></b>
+<b><?php echo $LANG['inv']; echo $LANG['inv_itemised']; ?></b>
 <hr></hr>
 
 
@@ -283,14 +283,14 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,
 	</td>
 </tr>
 <tr>
-        <td class="details_screen"><?php echo $LANG_date_formatted; ?></td>
+        <td class="details_screen"><?php echo $LANG['date_formatted']; ?></td>
         <td>
                         <input type="text" class="date-picker" name="select_date" id="date1" value='<?php echo $today = date("Y-m-d"); ?>'></input>
         </td>
 </tr>
 
 <tr>
-<td class="details_screen"><?php echo $LANG_quantity;?></td><td class="details_screen"><?php echo $LANG_description;?></td>
+<td class="details_screen"><?php echo $LANG['quantity'];?></td><td class="details_screen"><?php echo $LANG['description'];?></td>
 </tr>
 <?php
 /* check the def number of line items and do the print and entry field for that number of items */
@@ -321,22 +321,22 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,
 ?>
 
 <tr>
-        <td colspan=2 class="details_screen"><?php echo $LANG_notes;?></td>
+        <td colspan=2 class="details_screen"><?php echo $LANG['notes'];?></td>
 </tr>
 
 <tr>
         <td colspan=2><textarea input type=text name="invoice_itemised_note" rows=5 cols=70 WRAP=nowrap></textarea></td>
 </tr>
 
-<tr><td class="details_screen"><?php echo $LANG_tax;?></td><td input type=text name="inv_it_tax" size=15> <?php echo $display_block_tax; ?></td>
+<tr><td class="details_screen"><?php echo $LANG['tax'];?></td><td input type=text name="inv_it_tax" size=15> <?php echo $display_block_tax; ?></td>
 </tr>
 
 <tr>
-<td class="details_screen"><?php echo $LANG_inv_pref;?></td><td input type=text name="inv_preferences"><?php echo $display_block_preferences; ?></td>
+<td class="details_screen"><?php echo $LANG['inv_pref'];?></td><td input type=text name="inv_preferences"><?php echo $display_block_preferences; ?></td>
 </tr>	
 <tr>
 	<td align=left>
-		<a href="./documentation/info_pages/invoice_custom_fields.html" rel="gb_page_center[450, 450]"><?php echo $LANG_want_more_fields; ?><img src="./images/common/help-small.png"></img></a>
+		<a href="./documentation/info_pages/invoice_custom_fields.html" rel="gb_page_center[450, 450]"><?php echo $LANG['want_more_fields']; ?><img src="./images/common/help-small.png"></img></a>
 
 	</td>
 </tr>
@@ -350,7 +350,7 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,
 <!-- </div> -->
 <hr></hr>
 		<input type=hidden name="max_items" value="<?php echo $num; ?>">
-		<input type=submit name="submit" value="<?php echo $LANG_save_invoice; ?>">
+		<input type=submit name="submit" value="<?php echo $LANG['save_invoice']; ?>">
 		<input type=hidden name="invoice_style" value="insert_invoice_itemised">
 
 </FORM>
