@@ -176,8 +176,8 @@ EOD;
 EOD;
 
 $footer =  <<<EOD
-<input type=submit name='action' value='{$LANG_cancel}'>
-<input type=submit name='save_preference' value='{$LANG_save}'>
+<input type=submit name='action' value='{$LANG['cancel']}'>
+<input type=submit name='save_preference' value='{$LANG['save']}'>
 <input type=hidden name='op' value='edit_preference'>
 EOD;
 

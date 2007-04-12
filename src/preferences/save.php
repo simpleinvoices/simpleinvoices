@@ -31,9 +31,9 @@ $sql = "INSERT into
 		 )";
 
 if (mysql_query($sql, $conn)) {
-	$display_block = $LANG_save_preference_success;
+	$display_block = $LANG['save_preference_success'];
 } else {
-	$display_block =  $LANG_save_preference_failure;
+	$display_block =  $LANG['save_preference_failure'];
 }
 
 //header( 'refresh: 2; url=manage_preferences.php' );
@@ -65,9 +65,9 @@ else if (  $op === 'edit_preference' ) {
 				pref_id = '$_GET[submit]'";
 
 		if (mysql_query($sql, $conn)) {
-			$display_block = $LANG_save_preference_success;
+			$display_block = $LANG['save_preference_success'];
 		} else {
-			$display_block = $LANG_save_preference_failure;
+			$display_block = $LANG['save_preference_failure'];
 		}
 
 		//header( 'refresh: 2; url=manage_preferences.php' );

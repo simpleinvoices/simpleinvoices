@@ -10,12 +10,12 @@ checkLogin();
 
 
 	if (mysql_num_rows($result_print_preferences) == 0) {
-		$display_block = "<P><em>{$LANG_no_preferences}.</em></p>";
+		$display_block = "<P><em>{$LANG['no_preferences']}.</em></p>";
 	} else {
 		$display_block = <<<EOD
 
-	<b>{$LANG_manage_preferences} ::
-	<a href="index.php?module=preferences&view=add">{$LANG_add_new_preference}</a></b>
+	<b>{$LANG['manage_preferences']} ::
+	<a href="index.php?module=preferences&view=add">{$LANG['add_new_preference']}</a></b>
 
 	<hr></hr>
 	
@@ -29,9 +29,9 @@ checkLogin();
 	</colgroup>
 	<thead>
 	<tr class="sortHeader">
-	<th class="noFilter sortable">{$LANG_actions}</th>
-	<th class="index_table sortable">{$LANG_preference_id}</th>
-	<th class="index_table sortable">{$LANG_description}</th>
+	<th class="noFilter sortable">{$LANG['actions']}</th>
+	<th class="index_table sortable">{$LANG['preference_id']}</th>
+	<th class="index_table sortable">{$LANG['description']}</th>
 	<th class="noFilter index_table sortable">{$wording_for_enabledField}</th>
 	</tr>
 	</thead>
@@ -63,9 +63,9 @@ EOD;
  		<tr class="index_table">
 		<td class="index_table">
 		<a class="index_table"
-		href="index.php?module=preferences&view=details&submit={$pref['pref_id']}&action=view">{$LANG_view}</a> ::
+		href="index.php?module=preferences&view=details&submit={$pref['pref_id']}&action=view">{$LANG['view']}</a> ::
 		<a class="index_table"
-		href="index.php?module=preferences&view=details&submit={$pref['pref_id']}&action=edit">{$LANG_edit}</a> </td>
+		href="index.php?module=preferences&view=details&submit={$pref['pref_id']}&action=edit">{$LANG['edit']}</a> </td>
 		<td class="index_table">{$pref['pref_id']}</td>
 		<td class="index_table">{$pref['pref_description']}</td>
 		<td class="index_table">{$wording_for_enabled}</td>
