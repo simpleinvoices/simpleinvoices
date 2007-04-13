@@ -28,9 +28,6 @@
 <script type='text/javascript' src='include/jquery/jquery.autocomplete.conf.js'></script>
 <script type="text/javascript" src="./include/jquery/jquery.tabs.js"></script>
 
-<!--[if gte IE 5.5]>
-<script language="JavaScript" src="./src/include/js/dhtml.js" type="text/JavaScript"></script>
-<![endif]-->
 
 
 
@@ -44,6 +41,11 @@ include('./templates/default/tmp.php');
 <script type="text/javascript" src="./src/include/js/AJS_fx.js"></script>
 <script type="text/javascript" src="./src/include/js/gb_scripts.js"></script>
 <link href="./src/include/css/gb_styles.css" rel="stylesheet" type="text/css" />
+
+<!--[if gte IE 5.5]>
+<script language="JavaScript" src="./src/include/js/dhtml.js" type="text/JavaScript"></script>
+<link rel="stylesheet" href="./src/include/css/iehacks.css" type="text/css" />
+<![endif]-->
 
 <!-- customer-details -->
 
