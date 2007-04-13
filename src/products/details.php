@@ -160,4 +160,3 @@ echo <<<EOD
 EOD;
 ?>
 </form>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

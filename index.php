@@ -82,7 +82,7 @@ else if (($module != null ) AND ($view != null)) {
 		echo "The file that you requested doesn't exist";
 	}
 	
-	$smarty -> display("../src/include/design/footer.inc.php");
+	$smarty -> display("../templates/default/footer.tpl");
 }
 
 /*If all else fails show the start.php page */

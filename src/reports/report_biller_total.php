@@ -42,4 +42,3 @@ include('./config/config.php');
 <div id="footer"></div>
 <hr></hr>
 <a href="./documentation/info_pages/reports_xsl.html" rel="gb_page_center[450, 450]"><font color="red">Did you get an "OOOOPS, THERE'S AN ERROR HERE." error?</font></a>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

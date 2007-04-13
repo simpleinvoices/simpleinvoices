@@ -354,4 +354,3 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,
 		<input type=hidden name="invoice_style" value="insert_invoice_itemised">
 
 </FORM>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

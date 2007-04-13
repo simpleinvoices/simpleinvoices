@@ -69,4 +69,3 @@ $refresh_total
 
 EOD;
 ?>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

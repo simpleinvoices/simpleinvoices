@@ -304,4 +304,3 @@ EOD;
 include('./config/config.php'); ?>
 
 <br><br>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

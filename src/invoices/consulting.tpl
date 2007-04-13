@@ -120,4 +120,3 @@ checkLogin();	//TODO: Really needed in .tpl files? I don't think so
 		<input type=hidden name="invoice_style" value="insert_invoice_consulting">
 
 </FORM>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

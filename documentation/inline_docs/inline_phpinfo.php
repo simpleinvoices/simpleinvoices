@@ -26,4 +26,3 @@ $display_block = fread( $fp, filesize( $filename ) );
 	phpinfo();
 ?>
 </div>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

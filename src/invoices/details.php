@@ -555,4 +555,3 @@ $display_block_bottom =  "
 	<input type=submit name="submit" value="<?php echo $LANG['save']; ?>">
 	<input type=hidden name="max_items" value="<?php echo $line; ?>">
 </form>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

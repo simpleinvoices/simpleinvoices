@@ -687,4 +687,3 @@ $display_block_bottom =  "
 		<input type=button value='<?php echo $LANG['cancel'];?>'onCLick='history.back()'>
 		<input type=button value='<?php echo $LANG['cancel'];?>'onCLick='history.back()'>
 	</form>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->

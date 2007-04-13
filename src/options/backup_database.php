@@ -46,4 +46,3 @@ $display_block ="
 
 	echo $display_block; 
 ?>
-<!-- ./src/include/design/footer.inc.php gets called here by controller srcipt -->
