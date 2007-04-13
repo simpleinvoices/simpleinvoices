@@ -53,7 +53,7 @@ else if (($module != null ) AND ($view != null)) {
 	        die("Invalid view requested");
 	}
 
-	$smarty -> display("../src/include/design/header.inc.php");
+	$smarty -> display("../templates/default/header.tpl");
 	
 	/*Check to make sure that the requested files exist*/
 	if (file_exists("./src/$module/$view.php")) {
@@ -78,7 +78,7 @@ else if (($module != null ) AND ($view != null)) {
 			*/
 	}
 	else {
-		$smarty -> display("../src/include/design/header.inc.php");
+		$smarty -> display("../templates/default/header.tpl");
 		echo "The file that you requested doesn't exist";
 	}
 	
@@ -87,8 +87,8 @@ else if (($module != null ) AND ($view != null)) {
 
 /*If all else fails show the start.php page */
 else {
-        $smarty -> display("../src/include/design/header.inc.php");
+        $smarty -> display("../templates/default/header.tpl");
         include("start.php");
-        $smarty -> display("../src/include/design/footer.inc.php");
+        $smarty -> display("../templates/default/footer.tpl");
 }
 ?>
