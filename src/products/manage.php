@@ -56,9 +56,9 @@ while ($prod = mysql_fetch_array($result)) {
 	<tr class="index_table">
 	<td class="index_table">
 	<a class="index_table"
-	 href="index.php?module=products&view=details&submit={$prod_idField}&action=view">{$LANG['view']}</a> ::
+	 href="index.php?module=products&view=details&submit={$prod['prod_id']}&action=view">{$LANG['view']}</a> ::
 	<a class="index_table"
-	 href="index.php?module=products&view=details&submit={$prod_idField}&action=edit">{$LANG['edit']}</a> </td>
+	 href="index.php?module=products&view=details&submit={$prod['prod_id']}&action=edit">{$LANG['edit']}</a> </td>
 	<td class="index_table">{$prod['prod_id']}</td>
 	<td class="index_table">{$prod['prod_description']}</td>
 	<td class="index_table">{$prod['prod_unit_price']}</td>

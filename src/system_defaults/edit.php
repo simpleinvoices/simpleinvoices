@@ -44,7 +44,7 @@ if ($_GET[submit] == "line_items") {
 		<td><br></td>
 	</tr>
 	<tr>
-		<td class="details_screen">$LANG'[default_number_items']</td>
+		<td class="details_screen">{$LANG['default_number_items']}</td>
 		<td><input type=text size=25 name='def_num_line_items' value=$def_number_line_itemsField></td>
 	</tr>
 	<tr>
