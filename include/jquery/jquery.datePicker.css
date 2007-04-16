@@ -66,7 +66,8 @@ div.popup-calendar {
 	top: 0;
 	left: -16px; /* value for IE */
 	padding: 0;
-	border: 3px solid #036;
+/*	border: 3px solid #036;*/
+	border: 3px solid #1A4F85;
 	background: #fff;
 	color: #000;
 	overflow:hidden;
@@ -112,7 +113,8 @@ div.popup-calendar div.link-prev {
 div.popup-calendar h3 {
 	font-size: 1.2em;
 	margin: 0 0 3px;
-	background-color:#036;
+/*	background-color:#036;*/
+	background-color:#1A4F85;
 	color:#fff;
 }
 /*For IE7*/
@@ -180,6 +182,7 @@ div.popup-calendar table td.today a {
 }
 div.popup-calendar table td a.selected, div.popup-calendar table td a:hover {
 	background: #036; 
+/*	background: #1A4F85; */
 	color: #fff;
 }
 
