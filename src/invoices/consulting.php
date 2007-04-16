@@ -82,7 +82,7 @@ $pref =  mysql_fetch_array($result_inv_preference);
 
 if (mysql_num_rows($result) == 0) {
         //no records
-        $display_block = "<p><em>$LANG['no_billers']</em></p>";
+        $display_block = "<p><em>{$LANG['no_billers']}</em></p>";
 
 } else {
         //has records, so display them
@@ -102,7 +102,7 @@ EOD;
 
 if (mysql_num_rows($result_customer) == 0) {
         //no records
-        $display_block_customer = "<p><em>$LANG['no_customers']</em></p>";
+        $display_block_customer = "<p><em>{$LANG['no_customers']}</em></p>";
 
 } else {
         //has records, so display them
@@ -134,7 +134,7 @@ function line_items($line) {
 
 	if (mysql_num_rows($result_products) == 0) {
 	        //no records
-	        $display_block_products = "<p><em>$LANG['no_products']</em></p>";
+	        $display_block_products = "<p><em>{$LANG['no_products']}</em></p>";
 
 	} else {
 	        //has records, so display them
@@ -172,7 +172,7 @@ return $string;
 
 if (mysql_num_rows($result_tax) == 0) {
         //no records
-        $display_block_tax = "<p><em>$LANG['no_tax_rates']</em></p>";
+        $display_block_tax = "<p><em>{$LANG['no_tax_rates']}</em></p>";
 
 } else {
         //has records, so display them
@@ -196,7 +196,7 @@ EOD;
 
 if (mysql_num_rows($result_preferences) == 0) {
         //no records
-        $display_block_preferences = "<p><em>$LANG['no_preferences']</em></p>";
+        $display_block_preferences = "<p><em>{$LANG['no_preferences']}</em></p>";
 
 } else {
         //has records, so display them
