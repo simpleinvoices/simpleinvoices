@@ -98,7 +98,7 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,
 
 if (mysql_num_rows($result) == 0) {
         //no records
-        $display_block = "<p><em>$LANG['no_billers']</em></p>";
+        $display_block = "<p><em>{$LANG['no_billers']}</em></p>";
 
 } else {
         //has records, so display them
@@ -120,7 +120,7 @@ if (mysql_num_rows($result) == 0) {
 
 if (mysql_num_rows($result_customer) == 0) {
         //no records
-        $display_block_customer = "<p><em>$LANG['no_customers']</em></p>";
+        $display_block_customer = "<p><em>{$LANG['no_customers']}</em></p>";
 
 } else {
         //has records, so display them
@@ -143,7 +143,7 @@ if (mysql_num_rows($result_customer) == 0) {
 
 if (mysql_num_rows($result_tax) == 0) {
         //no records
-        $display_block_tax = "<p><em>$LANG['no_tax_rates']</em></p>";
+        $display_block_tax = "<p><em>{$LANG['no_tax_rates']}</em></p>";
 
 } else {
         //has records, so display them
@@ -165,7 +165,7 @@ if (mysql_num_rows($result_tax) == 0) {
 
 if (mysql_num_rows($result_preferences) == 0) {
         //no records
-        $display_block_preferences = "<p><em>$LANG['no_preferences']</em></p>";
+        $display_block_preferences = "<p><em>{$LANG['no_preferences']}</em></p>";
 
 } else {
         //has records, so display them

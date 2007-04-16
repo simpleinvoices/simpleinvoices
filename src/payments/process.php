@@ -149,7 +149,7 @@ if ($op === "pay_selected_invoice") {
 </tr>
 <tr>
 	<td class="details_screen">{$LANG['amount']}</td>
-	<td colspan="5"><input type="text" name="ac_amount" size="25" value="{$invoice_owing_Field}" /><a href="./src/documentation/info_pages/process_payment_auto_amount.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+	<td colspan="5"><input type="text" name="ac_amount" size="25" value="{$invoice_owing_Field}" /><a href="./documentation/info_pages/process_payment_auto_amount.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG['date_formatted']}</td>
@@ -178,12 +178,12 @@ else if ($op === "pay_invoice") {
 <table align="center">
 <tr>
 	<td class="details_screen">{$LANG['invoice_id']}
-	<a href="./src/documentation/info_pages/process_payment_inv_id.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+	<a href="./documentation/info_pages/process_payment_inv_id.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 	<td><input type="text" id="ac_me" name="ac_inv_id" /></td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG['details']}
-	<a href="./src/documentation/info_pages/process_payment_details.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+	<a href="./documentation/info_pages/process_payment_details.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 	<td id="js_total"><i>{$LANG['select_invoice']}</i> </td>
 </tr>
 <tr>

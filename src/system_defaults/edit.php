@@ -114,7 +114,7 @@ EOD;
 	</tr>
 	-->
 	<tr>
-		<td class="details_screen">{$LANG['default_inv_template']} <a href='./src/documentation/info_pages/default_invoice_template_text.html' rel='gb_page_center[450, 450]'><img src="images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$LANG['default_inv_template']} <a href='./documentation/info_pages/default_invoice_template_text.html' rel='gb_page_center[450, 450]'><img src="images/common/help-small.png"></img></a></td>
 		<td>$display_block_templates_list</td>
 	</tr>
 	<tr>

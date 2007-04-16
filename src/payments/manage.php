@@ -112,6 +112,6 @@ echo $display_block;
 
 ?>
 
-<a href="./src/documentation/info_pages/wheres_the_edit_button.html"
+<a href="./documentation/info_pages/wheres_the_edit_button.html"
 	rel="gb_page_center[450, 450]"><img
 	src="./images/common/help-small.png"></img>Wheres the Edit button?</a>
