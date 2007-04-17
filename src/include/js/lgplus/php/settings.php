@@ -118,4 +118,3 @@ function SettingOpt($value, $desc, $default) {
   echo "\n<option value='".$value."'".$sel.">".$desc."</option>";
 }
 ?>
-
