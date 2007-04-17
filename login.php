@@ -111,7 +111,7 @@ if($ChallengeLife>0) {
 
 <?php if($MD5Auth==True){?>
 
-    <script src="/src/include/md5-2.2alpha.js"></script>
+    <script src="./include/md5/md5-2.2alpha.js"></script> -->
     <script language="JavaScript"><!--
 
     function login(f) {
