@@ -2,7 +2,7 @@
 #table
 #define("BROWSE","browse");
 include('./include/include_print.php');
-include("./include/functions.php");
+/*include("./include/functions.php");*/
 
 #get the invoice id
 $master_invoice_id = $_GET['submit'];
