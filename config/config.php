@@ -17,13 +17,25 @@ $mysql = 5;
 /*Select language for Simple Invoices to use*/
 #$language = "castellano_spanish";
 #$language = "catala_catalan";
-//$language = "deutsch_german";
+#$language = "deutsch_german";
 $language = "english_UK";
 #$language = "galego_galician";
 #$language = "portugues_portuguese";
 #$language = "romana_romanian";
 #$language = "suomi_finnish";
 #$language = "francais_french";
+
+#PDF configs
+#installation path relative to document root of webserver 
+$install_path = "/simpleinvoices";
+
+#Email configs
+$email_host = "localhost";  // specify main and backup server - separating with ;
+$email_smtp_auth = false;     // turn on SMTP authentication
+#$SMTPAuth = true;     // turn on SMTP authentication
+#if authentication is required for the smtp server please add the username and password in the two options below
+$email_username = "put your username here";  // SMTP username
+$email_password = "put your password here"; // SMTP password
 
 /*To change the theme, enter the name of the theme folder - default is google*/
 $theme = "google";
@@ -45,9 +57,6 @@ $word_processor = "doc"; #MS Word format
 #$word_processor = "odt"; #Open Document Format text
 
 
-#PDF configs
-#installation path relative to document root of webserver 
-$install_path = "/simpleinvoices";
 
 #size in pixels (640,800,1024)
 $pdf_screen_size = 800;

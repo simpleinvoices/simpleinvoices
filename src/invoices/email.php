@@ -75,10 +75,10 @@ else if ($_GET['stage'] == 2 ) {
 	$mail = new PHPMailer();
 
 	$mail->IsSMTP();                                      // set mailer to use SMTP
-	$mail->Host = "localhost";  // specify main and backup server - separating with ;
-	$mail->SMTPAuth = false;     // turn on SMTP authentication
-	$mail->Username = "put your username here";  // SMTP username
-	$mail->Password = "put your password here"; // SMTP password
+	$mail->Host = $email_host;  // specify main and backup server - separating with ;
+	$mail->SMTPAuth = $email_smtp_auth;     // turn on SMTP authentication
+	$mail->Username = $email_username;  // SMTP username
+	$mail->Password = $email_password; // SMTP password
 
 	$mail->From = "$_POST[email_from]";
 	$mail->FromName = "$biller[b_name]";
