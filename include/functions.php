@@ -71,8 +71,12 @@ function get_custom_field_label($field)         {
     return $cf['cf_custom_label'];
 }
 
-/*
- * Type is for example biller , ...
+/* 
+ * Function: getCustomFieldLabels
+ * 
+ * Used to get the names of the custom fields. If custom fields is blank in db then print 'Custom Field' and the ID
+ * Arguments:
+ * Type 	- is the module your getting the labels of the custom fields for, ie. biller
  */
 function getCustomFieldLabels($type) {
 	include('./config/config.php');
@@ -86,7 +90,7 @@ function getCustomFieldLabels($type) {
 	for($i=1;$row = mysql_fetch_row($result);$i++) {
 		$cf[$i]=$row[0];
 		if($cf[$i] == null) {
-			$cf[$i] = $LANG["custom_field_$i"];
+			$cf[$i] = $LANG["custom_field"].' '.$i;
 		}
 	}
 
