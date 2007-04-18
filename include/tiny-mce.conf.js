@@ -1,7 +1,7 @@
 tinyMCE.init({
 mode : "textareas",
         theme : "advanced",
-	nowrap : true,
+	nowrap : false,
         theme_advanced_buttons1 : "bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright, justifyfull,bullist,numlist,undo,redo,code",
         theme_advanced_buttons2 : "",
         theme_advanced_buttons3 : "",

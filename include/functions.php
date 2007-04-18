@@ -137,7 +137,7 @@ function get_custom_field_name($field) {
 		$custom_field_name = $LANG['product'];
 	}
 	
-	$custom_field_name .= " :: " . $LANG["custom_field .  $get_cf_number"] ;
+	$custom_field_name .= " :: " . $LANG["custom_field"] . " " . $get_cf_number ;
         return $custom_field_name;
 }
 

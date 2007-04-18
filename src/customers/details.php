@@ -39,7 +39,7 @@ $customFieldLabel = getCustomFieldLabels("customer");
 #show invoices per client
 $sql = "SELECT * FROM {$tb_prefix}invoices WHERE inv_customer_id =$customer_id  ORDER BY inv_id desc";
 
-$customFieldLabel = getCustomFieldLabels("biller");
+//$customFieldLabel = getCustomFieldLabels("biller");
 
 $display_block = "";
 $footer = "";
