@@ -21,15 +21,15 @@ for($i=0;$customer = mysql_fetch_array($result);$i++) {
 		}
 
 		#invoice total calc - start
-		$invoice['total'] = calc_customer_total($customer['c_id'] );
+		$customer['total'] = calc_customer_total($customer['c_id']);
 		#invoice total calc - end
 
 		#amount paid calc - start
-		$invoice['paid'] = calc_customer_paid($customer['c_id']);
+		$customer['paid'] = calc_customer_paid($customer['c_id']);
 		#amount paid calc - end
 
 		#amount owing calc - start
-		$invoice['owing'] = $invoice['total'] - $invoice['paid'];
+		$customer['owing'] = $customer['total'] - $customer['paid'];
 		
 		#amount owing calc - end
 		

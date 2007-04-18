@@ -28,7 +28,7 @@
 <th class="index_table">{$LANG.paid}</th>
 -->
 <th class="index_table sortable">{$LANG.owing}</th>
-<th class="noFilter index_table sortable">{$wording_for_enabledField}</th>
+<th class="index_table sortable">{$LANG.enabled}</th>
 </tr>
 </thead>
 
@@ -46,11 +46,11 @@
 	<!--
 	<td class="index_table">{$customer.c_phone}</td>
 	-->
-	<td class="index_table">{$invoice.total}</td>
+	<td class="index_table">{$customer.total}</td>
 	<!--
 	<td class="index_table">{$invoice.paid}</td>
 	-->
-	<td class="index_table">{$invoice.owing}</td>
+	<td class="index_table">{$customer.owing}</td>
 	<td class="index_table">{$customer.c_enabled}</td>
 	</tr>
 
