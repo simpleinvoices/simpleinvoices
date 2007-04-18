@@ -98,8 +98,8 @@ EOD;
 		$display_name = $recs['pt_description'];
 		*/
 		$display_block_payment_type .= <<<EOD
-	<option value="$recs['pt_id']">
-		$recs['pt_description']</option>
+	<option value="{$recs['pt_id']}">
+		{$recs['pt_description']}</option>
 EOD;
 }
 }
