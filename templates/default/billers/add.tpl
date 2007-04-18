@@ -50,7 +50,7 @@ You must enter a Biller name</div>
 			value="{$smarty.post.b_zip_code}" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.country} ({$LANG.optional})</td>
+		<td class="details_screen">{$LANG.country}</td>
 		<td><input type=text name="b_country" value="{$smarty.post.b_country}"
 			size=50></td>
 	</tr>
@@ -128,10 +128,10 @@ You must enter a Biller name</div>
 			value="{$smarty.post.b_notes}" rows=8 cols=50></textarea></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.wording_for_enabledField}</td>
+		<td class="details_screen">{$LANG.enabled}</td>
 		<td><select name="b_enabled">
-			<option value="1" selected>{$LANG.wording_for_enabledField}</option>
-			<option value="0">{$LANG.wording_for_disabledField}</option>
+			<option value="1" selected>{$LANG.enabled}</option>
+			<option value="0">{$LANG.disabled}</option>
 		</select></td>
 	</tr>
 	</div>

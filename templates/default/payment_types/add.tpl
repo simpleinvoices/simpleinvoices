@@ -7,16 +7,16 @@
 			<td><input type=text name="pt_description" size=50></td>
 		</tr>
 		<tr>
-			<td class="details_screen">{#wording_for_enabledField#}</td>
+			<td class="details_screen">{$LANG.enabled}</td>
 			<td>
 				<select name="pt_enabled">
-					<option value="1" selected>{#wording_for_enabledField#}</option>
-					<option value="0">{#wording_for_disabledField#}</option>
+					<option value="1" selected>{$LANG.enabled}</option>
+					<option value="0">{$LANG.disabled}</option>
 				</select>
 			</td>
 		</tr>
 	</table>
 	<hr></hr>
-	<input type=submit name="submit" value="{#insert_payment_type#}">
+	<input type=submit name="submit" value="{$LANG.insert_payment_type}">
 	<input type=hidden name="op" value="insert_payment_type">
 </form>

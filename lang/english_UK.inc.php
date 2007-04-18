@@ -18,6 +18,7 @@ $wording_for_disabledField ="Disabled";//1
 $LANG['view'] = "View";
 $LANG['edit'] = "Edit";
 $LANG['enabled'] = "Enabled";
+$LANG['disabled'] = "Disabled";
 $LANG['biller_name'] = "Biller Name";
 $LANG['biller_id'] = "Biller ID";	//which one is better?
 $LANG['biller']['id'] = "Biller ID";
