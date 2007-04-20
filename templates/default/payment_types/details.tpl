@@ -7,34 +7,34 @@
 {if $smarty.get.action == "view" }
 	
 	
-	<b>{$LANG.payment_type}</b>
+	<b>{$LANG.payment_type} :: <a href='index.php?module=payment_types&view=details&submit={$paymentType.pt_id}&action=edit'>{$LANG.edit}</a> </b>
 	<hr></hr>
 
 	<table align="center">
 	<tr>
-		<td class="details_screen">{$LANG['payment_type_id']}</td><td>{$paymentType.pt_id}</td>
+		<td class="details_screen">{$LANG.payment_type_id}</td><td>{$paymentType.pt_id}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG['description']}</td><td>{$paymentType.pt_description}</td>
+		<td class="details_screen">{$LANG.description}</td><td>{$paymentType.pt_description}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$wording_for_enabledField}</td><td>{$wording_for_enabled}</td>
+		<td class="details_screen">{$LANG.enabled}</td><td>{$wording_for_enabled}</td>
 	</tr>
 	</table>
 	<hr></hr>
 
-<a href='index.php?module=payment_types&view=details&submit={$paymentType.pt_id}&action=edit'>{$LANG['edit']}</a>
+<a href='index.php?module=payment_types&view=details&submit={$paymentType.pt_id}&action=edit'>{$LANG.edit}</a>
 
 {/if}
 
 {if $smarty.get.action == "edit"}
 
-	<b>{$LANG['payment_type_edit']}</b>
+	<b>{$LANG.payment_type_edit}</b>
 	<hr></hr>
 
 	<table align=center>
 	<tr>
-		<td class="details_screen">{$LANG['payment_type_id']}</td>
+		<td class="details_screen">{$LANG.payment_type_id}</td>
 		<td>{$paymentType.pt_id}</td>
 	</tr>
 	<tr>
@@ -43,7 +43,7 @@
 		 size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$wording_for_enabledField} </td>
+		<td class="details_screen">{$LANG.enabled} </td>
 		<td>
 		{*displayblock enabled*}
 		<select name="pt_enabled">
