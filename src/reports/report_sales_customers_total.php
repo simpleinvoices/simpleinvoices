@@ -8,12 +8,6 @@ if (!defined("BROWSE")) {
 }
 
 ?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-</head>
-<body>
 <b>Sales in total by Customer</b>
 <hr></hr>
 <div id="container">

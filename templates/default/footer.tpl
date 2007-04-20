@@ -2,7 +2,7 @@
  <!--  </div id="browser"> -->
    </div class="col">
 
-   <div class="bottom"> </div>
+   <div class="bottom"><br></div>
 
    </div class="Full">
    </div id="Container">
