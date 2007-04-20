@@ -19,12 +19,8 @@ $result_payment_type = mysql_query($print_payment_type, $conn) or die(mysql_erro
 
 $paymentType = mysql_fetch_array($result_payment_type);
 
+$paymentType['pt_enabled'] = $paymentType['pt_enabled']==1?$wording_for_enabledField:$wording_for_disabledField;
 
-if ($paymentType['pt_enabled'] == 1) {
-	$paymentType['pt_enabled']  = $wording_for_enabledField;	
-} else {
-	$paymentType['pt_enabled'] = $wording_for_disabledField;
-}
 
 $smarty->assign('paymentType',$paymentType);
 ?>
