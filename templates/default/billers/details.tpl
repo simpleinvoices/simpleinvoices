@@ -1,7 +1,9 @@
 
 <form name="frmpost"
 	action="index.php?module=billers&view=add&submit={$smarty.get.submit}"
-	method="post"><select name="b_co_logo">
+	method="post">
+
+<select name="b_co_logo">
 	<option selected value="{$biller.b_co_logo}" style="font-weight:bold;">{$biller.b_co_logo}</option>
 	{foreach from=$files item=file}
 	<option>{$file}</option>
@@ -109,7 +111,7 @@
 		<td>{$biller.b_notes}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$wording_for_enabledField}</td>
+		<td class="details_screen">{$LANG.enabled}</td>
 		<td>{$biller.wording_for_enabled}</td>
 	</tr>
 </table>
@@ -242,7 +244,7 @@
 		<td><textarea name="b_notes" rows=8 cols=50>{$biller.b_notes}</textarea></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$wording_for_enabledField}</td>
+		<td class="details_screen">{$LANG.enabled}</td>
 		<td>
 		{* enabled block *}
 		<select name="b_enabled">
