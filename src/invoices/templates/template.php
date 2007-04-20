@@ -237,23 +237,24 @@ if (isset($_GET['export'])) {
 		$css = "./src/invoices/templates/${template}/${template}.css";
 	}
 	include('./config/config.php');
+	
 	if(file_exists("./src/invoices/templates/${template}/${template}_.tpl")) {
-	$smarty -> assign('invoice_total',$invoice_total);
-	$smarty -> assign('biller',$biller);
-	$smarty -> assign('customer',$customer);
-	$smarty -> assign('invoice',$invoice);
-	$smarty -> assign('pref',$pref);
-	$smarty -> assign('logo',$logo);
-	$smarty -> assign('template',$template);
-	$smarty -> assign('master_invoices',$master_invoices);
-	$smarty -> display("../src/invoices/templates/${template}/${template}_.tpl");
+		$smarty -> assign('invoice_total',$invoice_total);
+		$smarty -> assign('biller',$biller);
+		$smarty -> assign('customer',$customer);
+		$smarty -> assign('invoice',$invoice);
+		$smarty -> assign('pref',$pref);
+		$smarty -> assign('logo',$logo);
+		$smarty -> assign('template',$template);
+		$smarty -> assign('master_invoices',$master_invoices);
+		$smarty -> display("../src/invoices/templates/${template}/${template}_.tpl");
 	}
 	else {
+		echo "BBB";
+		$temp = file_get_contents("./src/invoices/templates/${template}/${template}.html");
+		$temp = addslashes($temp); $content = "";
 	
-	$temp = file_get_contents("./src/invoices/templates/${template}/${template}.html");
-	$temp = addslashes($temp); $content = "";
-
-	eval ('$content = "'.$temp.'";');
-	echo $content;
+		eval ('$content = "'.$temp.'";');
+		echo $content;
 	}	
 ?>
