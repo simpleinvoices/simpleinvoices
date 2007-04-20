@@ -187,8 +187,8 @@ if (isset($_GET['export'])) {
 	$print_master_invoice_items = "SELECT * FROM {$tb_prefix}invoice_items WHERE  inv_it_invoice_id =$master_invoice_id";
 	$result_print_master_invoice_items = mysql_query($print_master_invoice_items, $conn) or die(mysql_error());
 
-
-	while ($master_invoice = mysql_fetch_array($result_print_master_invoice_items)) {
+	$maste_invoices = null;
+	for($i=0;$master_invoice = mysql_fetch_array($result_print_master_invoice_items);$i++) {
 	
 		$master_invoice['inv_it_quantity_formatted'] = number_format($master_invoice['inv_it_quantity'],2);
 		$master_invoice['inv_it_unit_price'] = number_format($master_invoice['inv_it_unit_price'],2);
@@ -207,6 +207,8 @@ if (isset($_GET['export'])) {
 	
 		#calculation for each line item
 		$gross_total_itemised = $product['prod_unit_price'] * $master_invoice['inv_it_quantity'] ;
+		
+		$master_invoices[$i] = $master_invoice;
 	
 		#MERGE ITEMISED AND CONSULTING HERE
 		#PRINT the line items
@@ -235,10 +237,23 @@ if (isset($_GET['export'])) {
 		$css = "./src/invoices/templates/${template}/${template}.css";
 	}
 	include('./config/config.php');
-
+	if(file_exists("./src/invoices/templates/${template}/${template}_.tpl")) {
+	$smarty -> assign('invoice_total',$invoice_total);
+	$smarty -> assign('biller',$biller);
+	$smarty -> assign('customer',$customer);
+	$smarty -> assign('invoice',$invoice);
+	$smarty -> assign('pref',$pref);
+	$smarty -> assign('logo',$logo);
+	$smarty -> assign('template',$template);
+	$smarty -> assign('master_invoices',$master_invoices);
+	$smarty -> display("../src/invoices/templates/${template}/${template}_.tpl");
+	}
+	else {
+	
 	$temp = file_get_contents("./src/invoices/templates/${template}/${template}.html");
 	$temp = addslashes($temp); $content = "";
 
 	eval ('$content = "'.$temp.'";');
 	echo $content;
+	}	
 ?>
