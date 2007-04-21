@@ -30,6 +30,9 @@ else if ($op === 'edit_biller' ) {
 		} else {
 			$display_block = $LANG['save_biller_failure'];
 		}
+	
+		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=billers&view=manage>";
+
 	}
 	else if (isset($_POST['cancel'])) {
 		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=0;URL=index.php?module=billers&view=manage>";

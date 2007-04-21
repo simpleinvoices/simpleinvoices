@@ -1,14 +1,8 @@
 
 <form name="frmpost"
-	action="index.php?module=billers&view=add&submit={$smarty.get.submit}"
+	action="index.php?module=billers&view=save&submit={$smarty.get.submit}"
 	method="post">
 
-<select name="b_co_logo">
-	<option selected value="{$biller.b_co_logo}" style="font-weight:bold;">{$biller.b_co_logo}</option>
-	{foreach from=$files item=file}
-	<option>{$file}</option>
-	{/foreach}
-</select>
 
 {if $smarty.get.action== 'view' }
 
@@ -257,10 +251,11 @@
 		</td>
 	</tr>
 </table>
-{/if} {if $smarty.get.action== 'edit' }
-
-
-<hr></hr>
-<input type="submit" name="cancel" value="{$LANG.cancel}" /> <input
-	type="submit" name="save_biller" value="{$LANG.save_biller}" /> <input
-	type="hidden" name="op" value="edit_biller" /> {/if}</form>
+{/if} 
+{if $smarty.get.action== 'edit' }
+	<hr></hr>
+		<input type="submit" name="cancel" value="{$LANG.cancel}" /> 
+		<input type="submit" name="save_biller" value="{$LANG.save_biller}" /> 
+		<input type="hidden" name="op" value="edit_biller" /> 
+	{/if}
+</form>
