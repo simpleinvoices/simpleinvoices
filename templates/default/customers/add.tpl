@@ -1,5 +1,21 @@
+{* if customer is updated or saved.*} {if $smarty.post.customer_name != "" && $smarty.post.submit != null } {$refresh_total}
+<br />
+<br>
+{$display_block} 
+<br />
+<br />
+{else}
+{* if  name was inserted *} 
 
-<form name="frmpost" ACTION="index.php?module=customers&view=save"
+{if $smarty.post.submit !=null} 
+<div class="validation_alert"><img src="./images/common/important.png"</img>
+You must enter a Customer name</div>
+<hr></hr>
+{/if}
+
+
+
+<form name="frmpost" ACTION="index.php?module=customers&view=add"
 	METHOD=POST onsubmit="return frmpost_Validator(this)">
 <div id="top"><b>{$LANG.customer_add}</b></div>
 <hr></hr>
@@ -104,3 +120,4 @@
 <input type=submit name="submit" value="{$LANG.insert_customer}">
 <input type=hidden name="op" value="insert_customer">
 </form>
+{/if}

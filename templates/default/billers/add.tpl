@@ -1,4 +1,8 @@
-{* if bill is updated or saved.*} {if $smarty.post.b_name != "" && $smarty.post.submit != null } {$refresh_total}
+{* if bill is updated or saved.*}
+
+{if $smarty.post.b_name != "" && $smarty.post.submit != null } 
+{$refresh_total}
+
 <br />
 <br>
 {$display_block}
