@@ -1,39 +1,38 @@
-{* if customer is updated or saved.*} {if $smarty.post.customer_name != "" && $smarty.post.submit != null } {$refresh_total}
+{* if customer is updated or saved.*} 
+
+{if $smarty.post.c_name != "" && $smarty.post.submit != null } 
+{$refresh_total}
+
 <br />
 <br>
 {$display_block} 
 <br />
 <br />
+
 {else}
 {* if  name was inserted *} 
-
-{if $smarty.post.submit !=null} 
-<div class="validation_alert"><img src="./images/common/important.png"</img>
-You must enter a Customer name</div>
-<hr></hr>
-{/if}
-
-
-
-<form name="frmpost" ACTION="index.php?module=customers&view=add"
-	METHOD=POST onsubmit="return frmpost_Validator(this)">
-<div id="top"><b>{$LANG.customer_add}</b></div>
+	{if $smarty.post.submit !=null} 
+		<div class="validation_alert"><img src="./images/common/important.png"</img>
+		You must enter a Customer name</div>
+		<hr></hr>
+	{/if}
+<form name="frmpost" ACTION="index.php?module=customers&view=add" METHOD="post"><b>{$LANG.customer_add}</b>
 <hr></hr>
 <table align=center>
 	<tr>
 		<td class="details_screen">{$LANG.customer_name}</td>
-		<td><input type=text name="c_name" size=25></td>
+		<td><input type=text name="c_name" value="{$smarty.post.c_name}" size=25></td>
 	</tr>
 	</tr>
 	<td class="details_screen">{$LANG.customer_contact} <a
 		href="./documentation/info_pages/customer_contact.html"
 		rel="gb_page_center[450, 450]"><img
 		src="./images/common/help-small.png"></img></a></td>
-	<td><input type=text name="c_attention" size=25></td>
+	<td><input type=text name="c_attention" size=25 value="{$smarty.post.customer_contact}"></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street}</td>
-		<td><input type=text name="c_street_address" size=25></td>
+		<td><input type=text name="c_street_address" value="{$smarty.post.c_street_address}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street2} <a
