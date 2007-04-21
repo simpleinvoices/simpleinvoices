@@ -14,12 +14,11 @@ $title = "Simple Invoices";//1
 $wording_for_enabledField ="Enabled";//1
 $wording_for_disabledField ="Disabled";//1
 
-#aplysia
 
 #New lang file style $lang followed by the word or description - not grouped by page
 $LANG['about'] = "About";//1
 $LANG['account_info'] = "Account Info";//1
-$LANG['action'] = "Action";
+$LANG['action'] = "Action";//1
 $LANG['actions'] = "Actions";//1
 $LANG['add_biller'] = "Add Biller";//1
 $LANG['add_customer'] = "Add Customer";//1
