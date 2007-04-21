@@ -244,8 +244,8 @@
 		<select name="b_enabled">
 			<option value="$biller[b_enabled]" selected
 				style="font-weight: bold;">{$biller.wording_for_enabled}</option>
-			<option value="1">{$wording_for_enabledField}</option>
-			<option value="0">{$wording_for_disabledField}</option>
+			<option value="1">{$LANG.enabled}</option>
+			<option value="0">{$LANG.disabled}</option>
 		</select>
 		{* /enabled block*}
 		</td>

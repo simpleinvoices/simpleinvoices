@@ -15,27 +15,16 @@ $wording_for_enabledField ="Enabled";//1
 $wording_for_disabledField ="Disabled";//1
 
 #aplysia
-$LANG['view'] = "View";
-$LANG['edit'] = "Edit";
-$LANG['enabled'] = "Enabled";
-$LANG['disabled'] = "Disabled";
-$LANG['biller_name'] = "Biller Name";
-$LANG['biller_id'] = "Biller ID";	//which one is better?
-$LANG['biller']['id'] = "Biller ID";
-$LANG['action'] = "Action";
-$LANG['add_new_biller'] = "Add New Biller";
-$LANG['manage_billers'] = "Manage Billers";
-$LANG['no_invoices'] = "No invoices";
-$LANG['actions'] = "Actions";
-$LANG['description'] = "Description";
 
 #New lang file style $lang followed by the word or description - not grouped by page
 $LANG['about'] = "About";//1
 $LANG['account_info'] = "Account Info";//1
+$LANG['action'] = "Action";
 $LANG['actions'] = "Actions";//1
 $LANG['add_biller'] = "Add Biller";//1
 $LANG['add_customer'] = "Add Customer";//1
 $LANG['add_invoice_preference'] = "Add Invoice Preference";//1
+$LANG['add_new_biller'] = "Add New Biller";
 $LANG['add_new_invoice'] = "Add New Invoice";//1
 $LANG['add_new_payment_type'] = "Add New payment Type";//1
 $LANG['add_new_preference'] = "Add New Invoice Preference";//1
@@ -103,10 +92,12 @@ $LANG['debtors_by_amount_owed'] = "Debtors by amount owed";//1
 $LANG['debtors_by_aging_periods'] = "Debtors by Aging periods";//1
 $LANG['description'] = "Description";//1
 $LANG['details'] = "Details";//1
+$LANG['disabled'] = "Disabled";
 $LANG['edit'] = "Edit";//1
 $LANG['edit_view_tooltip'] = "Edit";//1
 $LANG['email'] = "Email";//1
 $LANG['email_quick'] = "Quick Email";//1
+$LANG['enabled'] = "Enabled";//1
 $LANG['export_as'] = "Export as";//1
 $LANG['export_doc_tooltip'] = "to a word processor as";//1
 $LANG['export_pdf'] = "Export to PDF";//1
