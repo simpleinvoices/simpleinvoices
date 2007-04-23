@@ -11,21 +11,12 @@ $result_print_product = mysql_query($print_product, $conn) or die(mysql_error())
 
 $product = mysql_fetch_array($result_print_product);
 
-if ($product['prod_enabled'] == 1) {
-	$wording_for_enabled = $wording_for_enabledField;
-} else {
-	$wording_for_enabled = $wording_for_disabledField;
-}
+$product['wording_for_enabled'] = $product['prod_enabled']==1?$LANG['enabled']:$LANG['disabled'];
 
 #get custom field labels
 $customFieldLabel = getCustomFieldLabels("product");
 
 $smarty -> assign('product',$product);
 $smarty -> assign('customFieldLabel',$customFieldLabel);
-
-//TODO: Needed?
-$smarty -> assign('wording_for_enabled',$wording_for_enabled);
-$smarty -> assign('wording_for_disabled',$wording_for_disabled);
-
 
 ?>

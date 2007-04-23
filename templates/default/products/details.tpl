@@ -1,8 +1,10 @@
 
-<FORM name="frmpost" ACTION="index.php?module=products&view=save&submit={$smarty.get.submit}" METHOD="POST" onsubmit="return frmpost_Validator(this)">
+<form name="frmpost"
+	action="index.php?module=products&view=add&submit={$smarty.get.submit}"
+	method="post">
 
 
-{if $smarty.get.action == "view"}
+{if $smarty.get.action== 'view' }
 
 	<b>{$LANG.products} ::
 	<a href="index.php?module=products&view=details&submit={$product.prod_id}&action=edit">{$LANG.edit}</a></b>
@@ -42,17 +44,19 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product_enabled}</td>
-		<td>{$wording_for_enabled}</td>
+		<td>{$product.wording_for_enabled}</td>
 	</tr>
 	</table>
-
-<hr></hr>
-<a href="index.php?module=products&view=details&submit={$product.prod_id}&action=edit">{$LANG.edit}</a>
-
 {/if}
 
-{if $smarty.get.action == "edit"}
 
+{if $smarty.get.action== 'view' }
+<hr></hr>
+<a href="index.php?module=products&view=details&submit={$product.prod_id}&action=edit">{$LANG.edit}</a>
+{/if}
+
+
+{if $smarty.get.action== 'edit' }
 
 	<b>{$LANG.product_edit}</b>
 	<hr></hr>
@@ -90,24 +94,24 @@
 		<td><textarea name="prod_notes" rows="8" cols="50">{$product.prod_notes}</textarea></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.product_enabled}</td><td>
+		<td class="details_screen">{$LANG.product_enabled}</td>
+		<td>
+		{* enabled block *}
 		<select name="prod_enabled">
-<option value="{$product.prod_enabled}" selected style="font-weight: bold">$wording_for_enabled</option>
-<option value="1">$wording_for_enabledField</option>
-<option value="0">$wording_for_disabledField</option>
-</select>
-</td>
+			<option value="$product[.prod_enabled]" selected
+				style="font-weight: bold;">{$product.wording_for_enabled}</option>
+			<option value="1">{$LANG.enabled}</option>
+			<option value="0">{$LANG.disabled}</option>
+		</select>
+		{* /enabled block*}
+		</td>
 	</tr>
 	</table>
-
-
-<hr></hr>
-<input type="submit" name="cancel" value="{$LANG.cancel}" />
-<input type="submit" name="save_product" value="{$LANG.save_product}" />
-<input type="hidden" name="op" value="edit_product" />
-
-{/if}
-
-
-
+{/if} 
+{if $smarty.get.action== 'edit' }
+	<hr></hr>
+		<input type="submit" name="cancel" value="{$LANG.cancel}" /> 
+		<input type="submit" name="save_product" value="{$LANG.save_biller}" /> 
+		<input type="hidden" name="op" value="edit_product" /> 
+	{/if}
 </form>
