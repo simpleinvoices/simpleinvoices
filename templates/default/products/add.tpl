@@ -23,7 +23,7 @@
 
 <table align=center>
 	<tr>
-		<td class="details_screen">{$LANG.product_description} <a href=""><img src="./images/common/important.png"></img></a></td>
+		<td class="details_screen">{$LANG.product_description} <a href="./documentation/info_pages/required_field.html" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png"></img></a></td>
 		<td><input type=text name="prod_description" size=50></td>
 	</tr>
 	<tr>
