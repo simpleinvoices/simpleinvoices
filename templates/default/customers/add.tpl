@@ -28,7 +28,7 @@
 		href="./documentation/info_pages/customer_contact.html"
 		rel="gb_page_center[450, 450]"><img
 		src="./images/common/help-small.png"></img></a></td>
-	<td><input type=text name="c_attention" size=25 value="{$smarty.post.customer_contact}"></td>
+	<td><input type=text name="c_attention" size=25 value="{$smarty.post.c_attention}"></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street}</td>
@@ -39,71 +39,71 @@
 			href="./documentation/info_pages/street2.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
-		<td><input type=text name="c_street_address2" size=25></td>
+		<td><input type=text name="c_street_address2" value="{$smarty.post.c_street_address2}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.city}</td>
-		<td><input type=text name="c_city" size=25></td>
+		<td><input type=text name="c_city" value="{$smarty.post.c_city}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.state}</td>
-		<td><input type=text name="c_state" size=25></td>
+		<td><input type=text name="c_state" value="{$smarty.post.c_state}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.zip}</td>
-		<td><input type=text name="c_zip_code" size=25></td>
+		<td><input type=text name="c_zip_code" value="{$smarty.post.c_zip_code}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.country}</td>
-		<td><input type=text name="c_country" size=50></td>
+		<td><input type=text name="c_country" value="{$smarty.post.c_country}" size=50></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.phone}</td>
-		<td><input type=text name="c_phone" size=25></td>
+		<td><input type=text name="c_phone" value="{$smarty.post.c_phone}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.mobile_phone}</td>
-		<td><input type=text name="c_mobile_phone" size=25></td>
+		<td><input type=text name="c_mobile_phone" value="{$smarty.post.c_mobile_phone}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.fax}</td>
-		<td><input type=text name="c_fax" size=25></td>
+		<td><input type=text name="c_fax" value="{$smarty.post.c_fax}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.email}</td>
-		<td><input type=text name="c_email" size=25></td>
+		<td><input type=text name="c_email" value="{$smarty.post.c_email}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.1} <a
 			href="./documentation/info_pages/custom_fields.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
-		<td><input type=text name="c_custom_field1" size=25></td>
+		<td><input type=text name="c_custom_field1" value="{$smarty.post.c_custom_field1}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.2} <a
 			href="./documentation/info_pages/custom_fields.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
-		<td><input type=text name="c_custom_field2" size=25></td>
+		<td><input type=text name="c_custom_field2" value="{$smarty.post.c_custom_field2}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.3} <a
 			href="./documentation/info_pages/custom_fields.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
-		<td><input type=text name="c_custom_field3" size=25></td>
+		<td><input type=text name="c_custom_field3" value="{$smarty.post.c_custom_field3}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.4} <a
 			href="./documentation/info_pages/custom_fields.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
-		<td><input type=text name="c_custom_field4" size=25></td>
+		<td><input type=text name="c_custom_field4" value="{$smarty.post.c_custom_field4}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
-		<td><textarea name='c_notes' rows=8 cols=50></textarea></td>
+		<td><textarea name='c_notes' rows=8 value="{$smarty.post.c_notes}"cols=50></textarea></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
