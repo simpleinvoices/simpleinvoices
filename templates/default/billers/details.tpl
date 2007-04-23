@@ -128,7 +128,7 @@
 		<td>{$biller.b_id}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.biller_name}</td>
+		<td class="details_screen">{$LANG.biller_name} <a href="./documentation/info_pages/required_field.html" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png"></img></a></td>
 		<td><input type=text name="b_name" value="{$biller.b_name}"
 			size=50 /></td>
 	</tr>
