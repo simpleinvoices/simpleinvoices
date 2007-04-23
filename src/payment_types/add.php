@@ -5,12 +5,9 @@
 checkLogin();
 
 
-jsBegin();
-jsFormValidationBegin("frmpost");
-jsValidateRequired("pt_description","Payment type description");
-jsFormValidationEnd();
-jsEnd();
+include("./src/payment_types/save.php");
 
+$smarty -> assign('save',$save);
 
 
 //include("./templates/default/payment_types/add2.tpl");

@@ -1,9 +1,29 @@
-<form name="frmpost" action="index.php?module=payment_types&view=save" method="post" onsubmit="return frmpost_Validator(this)">
+{* if customer is updated or saved.*}
+
+{if $smarty.post.pt_description != "" && $smarty.post.submit != null }
+{$refresh_total}
+
+<br />
+<br>
+{$display_block}
+<br />
+<br />
+
+{else}
+{* if  name was inserted *}
+    {if $smarty.post.submit !=null}
+        <div class="validation_alert"><img src="./images/common/important.png"</img>
+        You must enter a description for the payment type</div>
+        <hr></hr>
+    {/if}
+
+
+<form name="frmpost" action="index.php?module=payment_types&view=add" method="post">
 	<b>Payment type to add</b>
 	<hr></hr>
 	<table align=center>
 		<tr>
-			<td class="details_screen">Payment type description</td>
+			<td class="details_screen">Payment type description *</td>
 			<td><input type=text name="pt_description" size=50></td>
 		</tr>
 		<tr>
@@ -20,3 +40,4 @@
 	<input type=submit name="submit" value="{$LANG.insert_payment_type}">
 	<input type=hidden name="op" value="insert_payment_type">
 </form>
+    {/if}

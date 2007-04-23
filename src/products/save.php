@@ -82,15 +82,8 @@ mysql_select_db("$db_name",$conn);
 
 
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
-$display_block_items = isset($display_block_items) ? $display_block_items : '&nbsp;';
-echo <<<EOD
-{$refresh_total}
 
-<br>
-<br>
-{$display_block}
-<br><br>
-{$display_block_items}
+$smarty -> assign('display_block',$display_block); 
+$smarty -> assign('refresh_total',$refresh_total); 
 
-EOD;
 ?>

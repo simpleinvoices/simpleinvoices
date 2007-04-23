@@ -2,18 +2,6 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-
-#table
-
-//TODO: do check with php...
-jsBegin();
-jsFormValidationBegin("frmpost");
-jsValidateRequired("prod_description",$LANG['product_description']);
-jsValidateifNum("prod_unit_price",$LANG['product_unit_price']);
-jsFormValidationEnd();
-jsEnd();
-
-
 #get the invoice id
 $product_id = $_GET['submit'];
 
