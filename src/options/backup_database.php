@@ -23,7 +23,7 @@ $display_block ="
 $display_block .= $oBack->output; 
 
 $display_block .= "<tr><td><br><br>Your database has now been backed up to the file database_backups/simple_invoices_backup_$today.sql, you can now continue using Simple Invoices as normal</td></tr>
-<tr><td><br><a href=\"./documentation/info_pages/backup_database_fwrite.html\" rel=\"gb_page_center[450, 450]\"><font color=\"red\">Got fwrite errors?</a></font></td></tr></table>"; 
+<tr><td><br><a href=\"./documentation/info_pages/backup_database_fwrite.html\" rel=\"gb_page_center[450, 450]\"><font color=\"red\">Did you get fwrite errors?</a></font></td></tr></table>"; 
 
 }
 

@@ -6,9 +6,11 @@ Simple Invoices - Changelog
 </head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<ul><li>2007-03-25
+<ul><li>2007-04-25</li>
 	<ul>
-		<li>Variable $tb_prefix added.</li>
+		<li>Email function added, you can now email an invoice as PDF in Simple Invoices</li>
+		<li>Replace the javascript validation with a purely php validation system</li>
+		<li>Table prefix configuration option added</li>
 		<li>Corrected &lt;? ... ?&gt; Sytax to &lt;?php ... ?&gt; Syntax</li>
 		<li>Lots of small optimizations</li>
 		<li>Introduced XHTML header</li>
@@ -16,10 +18,12 @@ Simple Invoices - Changelog
 		<li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=75">Issue 75</a>Stop browsing to the source .php files</li>
 		<li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=90">Issue 90</a>Translation update: save button updates</li>
 		<li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=84">Issue 84</a>File cleanup for live grid</li>
-		<li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=93">Issue 93</a>Translation: make the redirect ages (ie save.php) translatable</li>
+		<li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=93">Issue 93</a>Translation: make the redirect pages (ie save.php) translatable</li>
 		<li>Old invoice templates (old_lco and old_original) retired, sorry Gaelyne, we moved to a new template system and these didnt make it</li>
-		<li>ibox replaced with gretbox as the ajax alert box of choice</li>
+		<li>ibox replaced with greybox as the ajax alert box of choice</li>
 		<li>PDF name now 'Wording for invoice'.'Invoice ID'.pdf (ie. Invoice12.pdf or Estimate8.pdf)</li>
+		<li>Moved alot of the templates to smarty - still an ongoing project</li>
+		<li>Language file cleanup</li>
 		<ul>Sql Patches:
 			<li>Patch 37: reset default invoice template to 'default' due to new invoice template</li>
 			<li>Patch 38 & 39: Alter custom field table - field length now 255 for field label and name</li>
