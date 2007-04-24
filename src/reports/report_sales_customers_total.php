@@ -12,7 +12,6 @@ if (!defined("BROWSE")) {
 <hr></hr>
 <div id="container">
 
-
 <?php
    // include the PHPReports classes on the PHP path! configure your path here
    include "src/reports/PHPReportMaker.php";
@@ -30,9 +29,8 @@ if (!defined("BROWSE")) {
    $oRpt->setDatabase("$db_name");
    $oRpt->run();
 ?>
-	
-</div>
 
-<div id="footer"></div>
-<hr></hr>
 <a href="./src/documentation/info_pages/reports_xsl.html" rel="gb_page_center[450, 450]"><font color="red">Did you get an "OOOOPS, THERE'S AN ERROR HERE." error?</font></a>
+<hr></hr>
+</div>
+<div id="footer"></div>
