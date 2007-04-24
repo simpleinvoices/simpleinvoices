@@ -303,6 +303,12 @@ ADD b_co_footer TEXT";
         ";
         $sql_patch_update_39 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',39,'$sql_patch_name_39',20070325,'')";
         $patch_count++;
+        
+        
+        $sql_patch_name_40 = "Alter field name in si_account_payments";
+        $sql_patch_40 = "ALTER TABLE  `si_account_payments` CHANGE  `ac_id`  `id` INT( 10 ) NOT NULL AUTO_INCREMENT";
+        $sql_patch_update_40 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',40,'$sql_patch_name_39',20070424,'')";
+        $patch_count++;
 
 /*
 CREATE TABLE `si_accounts` (
