@@ -105,15 +105,15 @@ while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
 
 #BILLER drop down list -start
 	#biller query
-	$sql_biller = "SELECT * FROM {$tb_prefix}biller where b_enabled != 0 ORDER BY b_name";
+	$sql_biller = "SELECT * FROM {$tb_prefix}biller where b_enabled != 0 ORDER BY name";
 	$result_biller = mysql_query($sql_biller, $conn) or die(mysql_error());
 
 	#Get the names of the selected biller -start
-	$sql_biller_default = "SELECT b_name FROM {$tb_prefix}biller where b_id = $inv_biller_idField ";
+	$sql_biller_default = "SELECT name FROM {$tb_prefix}biller where b_id = $inv_biller_idField ";
 	$result_biller_default = mysql_query($sql_biller_default , $conn) or die(mysql_error());
 
 	while ($Array = mysql_fetch_array($result_biller_default) ) {
-                $sql_biller_defaultField = $Array['b_name'];
+                $sql_biller_defaultField = $Array['name'];
 	}
 
 	# do the biller selector
@@ -130,7 +130,7 @@ while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
 
         	while ($recs = mysql_fetch_array($result_biller)) {
                 	$id = $recs['b_id'];
-	                $display_name_biller = $recs['b_name'];
+	                $display_name_biller = $recs['name'];
 	
 	                $display_block_biller .= "<option value=\"$id\">$display_name_biller</option>";
 	        }

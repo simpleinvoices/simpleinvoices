@@ -57,7 +57,7 @@ EOD;
         <!-- Biller section - start -->
 	<table class='left'>
         <tr>
-                <td class="tbl1-left tbl1-bottom tbl1-top col1" border=1 cellpadding=2 cellspacing=1><b>{$LANG['biller']}:</b></td><td class="col1 tbl1-bottom tbl1-top tbl1-right" border=1 cellpadding=2 cellspacing=1 colspan=3>$biller[b_name]</td>
+                <td class="tbl1-left tbl1-bottom tbl1-top col1" border=1 cellpadding=2 cellspacing=1><b>{$LANG['biller']}:</b></td><td class="col1 tbl1-bottom tbl1-top tbl1-right" border=1 cellpadding=2 cellspacing=1 colspan=3>$biller[name]</td>
         </tr> 
 EOD;
 

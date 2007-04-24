@@ -137,7 +137,7 @@ if ($op === "pay_selected_invoice") {
 </tr>
 <tr>
 	<td class="details_screen">{$LANG['biller']}</td>
-	<td>{$biller['b_name']}</td>
+	<td>{$biller['name']}</td>
 	<td class="details_screen">{$LANG['paid']}</td>
 	<td>{$invoice_paid_Field_formatted}</td>
 </tr>

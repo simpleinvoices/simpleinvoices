@@ -26,7 +26,7 @@ if (!defined("BROWSE")) {
    include "src/reports/PHPReportMaker.php";
    include "config/config.php";
 
-   $sSQL = "select sum({$tb_prefix}invoice_items.inv_it_total), {$tb_prefix}biller.b_name, {$tb_prefix}customers.c_name from {$tb_prefix}biller, {$tb_prefix}customers, {$tb_prefix}invoice_items, {$tb_prefix}invoices where {$tb_prefix}invoices.inv_customer_id = {$tb_prefix}customers.c_id and {$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.b_id and {$tb_prefix}invoices.inv_id = {$tb_prefix}invoice_items.inv_it_invoice_id GROUP BY inv_it_total ORDER BY {$tb_prefix}biller.b_name";
+   $sSQL = "select sum({$tb_prefix}invoice_items.inv_it_total), {$tb_prefix}biller.name, {$tb_prefix}customers.c_name from {$tb_prefix}biller, {$tb_prefix}customers, {$tb_prefix}invoice_items, {$tb_prefix}invoices where {$tb_prefix}invoices.inv_customer_id = {$tb_prefix}customers.c_id and {$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.b_id and {$tb_prefix}invoices.inv_id = {$tb_prefix}invoice_items.inv_it_invoice_id GROUP BY inv_it_total ORDER BY {$tb_prefix}biller.name";
 
    $oRpt = new PHPReportMaker();
 

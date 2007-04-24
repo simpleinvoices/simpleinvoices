@@ -25,13 +25,13 @@
 
 	<GROUPS>
 
-	<GROUP NAME="citygroup" EXPRESSION="b_name">
+	<GROUP NAME="citygroup" EXPRESSION="name">
 
 	<HEADER>
 
 	<ROW>
 <COL CELLCLASS="GROUP_LAYER">c_name</COL>
-<COL CELLCLASS="GROUP_LAYER" TEXTCLASS="BOLD" TYPE="EXPRESSION" COLSPAN="3">$header->getValue("b_name")</COL>
+<COL CELLCLASS="GROUP_LAYER" TEXTCLASS="BOLD" TYPE="EXPRESSION" COLSPAN="3">$header->getValue("name")</COL>
 </ROW>
 
 	<ROW>

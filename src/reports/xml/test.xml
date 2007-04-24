@@ -29,7 +29,7 @@
             <ROW>
 					<COL CELLCLASS="GROUP_LAYER">inv_id</COL>
 					<COL  CELLCLASS="GROUP_LAYER">c_name</COL>
-					<COL  CELLCLASS="GROUP_LAYER">b_name</COL>
+					<COL  CELLCLASS="GROUP_LAYER">name</COL>
 					<COL  CELLCLASS="GROUP_LAYER">inv_it_total</COL>
             </ROW>
          </HEADER>
@@ -45,7 +45,7 @@
 				<ROW>
 					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">inv_id</COL>
 					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">c_name</COL>
-					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">b_name</COL>
+					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">name</COL>
 					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">inv_it_total</COL>
 				</ROW>
 			</FIELDS>

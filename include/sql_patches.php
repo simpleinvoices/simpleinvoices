@@ -307,7 +307,12 @@ ADD b_co_footer TEXT";
         
         $sql_patch_name_40 = "Alter field name in si_account_payments";
         $sql_patch_40 = "ALTER TABLE  `si_account_payments` CHANGE  `ac_id`  `id` INT( 10 ) NOT NULL AUTO_INCREMENT";
-        $sql_patch_update_40 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',40,'$sql_patch_name_39',20070424,'')";
+        $sql_patch_update_40 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',40,'$sql_patch_name_40',20070424,'')";
+        $patch_count++;
+        
+        $sql_patch_name_41 = "Alter field name b_name to name";
+        $sql_patch_41 = "ALTER TABLE  `si_biller` CHANGE  `b_name`  `name` VARCHAR( 50 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;";
+        $sql_patch_update_41 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',41,'$sql_patch_name_41',20070424,'')";
         $patch_count++;
 
 /*

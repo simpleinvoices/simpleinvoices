@@ -19,7 +19,7 @@ jsEnd();
 
 
 #biller query
-$sql = "SELECT * FROM {$tb_prefix}biller where b_enabled != 0 ORDER BY b_name";
+$sql = "SELECT * FROM {$tb_prefix}biller where b_enabled != 0 ORDER BY name";
 $result = mysql_query($sql, $conn) or die(mysql_error());
 
 #customer
@@ -55,11 +55,11 @@ while ($Array_defaults = mysql_fetch_array($result_defaults) ) {
 
 #Get the names of the defaults from their id -start
 #default biller name query
-$sql_biller_default = "SELECT b_name FROM {$tb_prefix}biller where b_id = $def_billerField and b_enabled != 0";
+$sql_biller_default = "SELECT name FROM {$tb_prefix}biller where b_id = $def_billerField and b_enabled != 0";
 $result_biller_default = mysql_query($sql_biller_default , $conn) or die(mysql_error());
 
 while ($Array = mysql_fetch_array($result_biller_default) ) {
-                $sql_biller_defaultField = $Array['b_name'];
+                $sql_biller_defaultField = $Array['name'];
 }
 
 #default customer name query
@@ -106,7 +106,7 @@ if (mysql_num_rows($result) == 0) {
 
         while ($recs = mysql_fetch_array($result)) {
                 $id = $recs['b_id'];
-                $display_name = $recs['b_name'];
+                $display_name = $recs['name'];
 
                 $display_block .= "<option value=\"$id\">
                         $display_name</option>";

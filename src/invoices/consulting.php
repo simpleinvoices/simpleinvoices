@@ -18,7 +18,7 @@ jsEnd();
 
 
 #biller query
-$sql = "SELECT * FROM {$tb_prefix}biller where b_enabled != 0 ORDER BY b_name";
+$sql = "SELECT * FROM {$tb_prefix}biller where b_enabled != 0 ORDER BY name";
 $result = mysql_query($sql, $conn) or die(mysql_error());
 
 #customer
@@ -49,7 +49,7 @@ $def = mysql_fetch_array($result_defaults);
 
 #Get the names of the defaults from their id -start
 #default biller name query
-$sql_biller_default = "SELECT b_name FROM {$tb_prefix}biller where b_id = $def[def_biller] and b_enabled != 0";
+$sql_biller_default = "SELECT name FROM {$tb_prefix}biller where b_id = $def[def_biller] and b_enabled != 0";
 $result_biller_default = mysql_query($sql_biller_default , $conn) or die(mysql_error());
 
 $biller= mysql_fetch_array($result_biller_default);
@@ -88,11 +88,11 @@ if (mysql_num_rows($result) == 0) {
         //has records, so display them
         $display_block = <<<EOD
         <select name="sel_id">
-        <option selected value="$def[def_biller]" style="font-weight: bold">$biller[b_name]</option>
+        <option selected value="$def[def_biller]" style="font-weight: bold">$biller[name]</option>
 	<option value=""></option>
 EOD;
 		while ($recs = mysql_fetch_array($result)) {
-			$display_block .= "<option value=".$recs['b_id'].">".$recs['b_name']."</option>";
+			$display_block .= "<option value=".$recs['b_id'].">".$recs['name']."</option>";
 		}
 }
 

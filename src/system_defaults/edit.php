@@ -128,15 +128,15 @@ else if ($_GET[submit] == "biller") {
 
 
 	#default biller query
-	$sql_biller_default = "SELECT b_name FROM {$tb_prefix}biller where b_id = $def_billerField";
+	$sql_biller_default = "SELECT name FROM {$tb_prefix}biller where b_id = $def_billerField";
 	$result_biller_default = mysql_query($sql_biller_default , $conn) or die(mysql_error());
 
 	while ($Array = mysql_fetch_array($result_biller_default) ) {
-		$sql_biller_defaultField = $Array['b_name'];
+		$sql_biller_defaultField = $Array['name'];
 	}
 
 	#biller query
-	$sql = "SELECT * FROM {$tb_prefix}biller where b_enabled != 0 ORDER BY b_name";
+	$sql = "SELECT * FROM {$tb_prefix}biller where b_enabled != 0 ORDER BY name";
 	$result = mysql_query($sql, $conn) or die(mysql_error());
 
 	#biller selector
@@ -159,7 +159,7 @@ EOD;
 
 		while ($recs = mysql_fetch_array($result)) {
 			$id = $recs['b_id'];
-			$display_name = $recs['b_name'];
+			$display_name = $recs['name'];
 
 			$display_block_biller .= <<<EOD
 			<option value="$id">

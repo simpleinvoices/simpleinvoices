@@ -32,7 +32,7 @@ function insertBiller() {
 		VALUES
 			(
 				'',
-				'$_POST[b_name]',
+				'$_POST[name]',
 				'$_POST[b_street_address]',
 				'$_POST[b_street_address2]',
 				'$_POST[b_city]',
@@ -62,7 +62,7 @@ function updateBiller() {
 	$sql = "UPDATE
 				{$tb_prefix}biller
 			SET
-				b_name = '$_POST[b_name]',
+				name = '$_POST[name]',
 				b_street_address = '$_POST[b_street_address]',
 				b_street_address2 = '$_POST[b_street_address2]',
 				b_city = '$_POST[b_city]',b_state = '$_POST[b_state]',

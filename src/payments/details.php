@@ -6,14 +6,14 @@ checkLogin();
 /*validation code*/
 jsBegin();
 jsFormValidationBegin("frmpost");
-jsValidateRequired("b_name","Biller name");
+jsValidateRequired("name","Biller name");
 jsFormValidationEnd();
 jsEnd();
 /*end validation code*/
 
 
 #biller query
-$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.c_name, {$tb_prefix}biller.b_name from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = {$tb_prefix}customers.c_id and {$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.b_id and {$tb_prefix}account_payments.id='$_GET[inv_id]'";
+$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.c_name, {$tb_prefix}biller.name from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = {$tb_prefix}customers.c_id and {$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.b_id and {$tb_prefix}account_payments.id='$_GET[inv_id]'";
 
 
 $result = mysql_query($sql, $conn) or die(mysql_error());
@@ -61,7 +61,7 @@ $display_block =  <<<EOD
 		<td class='details_screen'>$LANG['date_upper']</td><td>{$stuff['date']}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>$LANG['biller']</td><td>{$stuff['b_name']}</td>
+		<td class='details_screen'>$LANG['biller']</td><td>{$stuff['name']}</td>
 	</tr>
 	<tr>
 		<td class='details_screen'>$LANG['customer']</td><td>{$stuff['c_name']}</td>

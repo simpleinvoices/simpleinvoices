@@ -70,7 +70,7 @@ while ($Array = mysql_fetch_array($result_print_customer)) {
 
 while ($billerArray = mysql_fetch_array($result_print_biller)) {
                 $b_idField = $billerArray['b_id'];
-                $b_nameField = $billerArray['b_name'];
+                $b_nameField = $billerArray['name'];
                 $b_street_addressField = $billerArray['b_street_address'];
                 $b_street_address2Field = $billerArray['b_street_address2'];
                 $b_cityField = $billerArray['b_city'];

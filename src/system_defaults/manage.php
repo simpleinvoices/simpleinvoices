@@ -25,11 +25,11 @@ while ($Array = mysql_fetch_array($result_print_defaults) ) {
 
 
 //TODO: Combine all getNames/description in 1 querie...
-$biller_name = "select b_name from {$tb_prefix}biller where b_id = $def_billerField";
+$biller_name = "SELECT name from {$tb_prefix}biller where b_id = $def_billerField";
 $result_biller_name = mysql_query($biller_name, $conn) or die(mysql_error());
 
 while ($Array = mysql_fetch_array($result_biller_name) ) {
-                $b_nameField = $Array['b_name'];
+                $b_nameField = $Array['name'];
 };
 
 

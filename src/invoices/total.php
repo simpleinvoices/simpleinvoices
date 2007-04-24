@@ -18,7 +18,7 @@ jsEnd();
 
 
 #biller query
-$sql = "SELECT * FROM {$tb_prefix}biller where b_enabled != 0 ORDER BY b_name";
+$sql = "SELECT * FROM {$tb_prefix}biller where b_enabled != 0 ORDER BY name";
 $result = mysql_query($sql, $conn) or die(mysql_error());
 
 #customer

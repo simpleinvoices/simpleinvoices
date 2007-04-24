@@ -75,18 +75,18 @@ if ($mysql > 4) {
 	
 	$sql3 = "
 	SELECT
-		{$tb_prefix}biller.b_name,  
+		{$tb_prefix}biller.name,  
 		sum({$tb_prefix}invoice_items.inv_it_total) as Total 
 	FROM 
 		{$tb_prefix}biller, {$tb_prefix}invoice_items, {$tb_prefix}invoices 
 	WHERE 
-		{$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.b_id and {$tb_prefix}invoices.inv_id = {$tb_prefix}invoice_items.inv_it_invoice_id GROUP BY b_name ORDER BY Total DESC LIMIT 1;
+		{$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.b_id and {$tb_prefix}invoices.inv_id = {$tb_prefix}invoice_items.inv_it_invoice_id GROUP BY name ORDER BY Total DESC LIMIT 1;
 	";
 
 	$result3 = mysql_query($sql3, $conn) or die(mysql_error());
 
 	while ($Array3 = mysql_fetch_array($result3)) {
-	        $top_biller = $Array3['b_name'];
+	        $top_biller = $Array3['name'];
 	};
 }
 #Top biller query - start
