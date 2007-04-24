@@ -3,13 +3,13 @@
 include('./include/include_main.php');
 
 
-$fp = fopen( "./documentation/gpl.html", "r" );
+$fp = fopen( "./src/documentation/gpl.html", "r" );
 if(!$fp)
 {
     echo "Couldn't open the data file. Try again later.";
     exit;
 }
-$filename ="./documentation/gpl.html";
+$filename ="./src/documentation/gpl.html";
 $display_block = fread( $fp, filesize( $filename ) );
 ?>
 

@@ -19,11 +19,11 @@ $mysql = 5;
 #$language = "catala_catalan";
 #$language = "deutsch_german";
 $language = "english_UK";
+#$language = "francais_french";
 #$language = "galego_galician";
 #$language = "portugues_portuguese";
 #$language = "romana_romanian";
 #$language = "suomi_finnish";
-#$language = "francais_french";
 
 /*PDF configs*/
 #installation path relative to document root of webserver 
