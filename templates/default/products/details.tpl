@@ -1,6 +1,6 @@
 
 <form name="frmpost"
-	action="index.php?module=products&view=add&submit={$smarty.get.submit}"
+	action="index.php?module=products&view=save&submit={$smarty.get.submit}"
 	method="post">
 
 
@@ -98,7 +98,7 @@
 		<td>
 		{* enabled block *}
 		<select name="prod_enabled">
-			<option value="$product[.prod_enabled]" selected
+			<option value="{$product.prod_enabled}" selected
 				style="font-weight: bold;">{$product.wording_for_enabled}</option>
 			<option value="1">{$LANG.enabled}</option>
 			<option value="0">{$LANG.disabled}</option>
