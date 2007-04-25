@@ -42,7 +42,7 @@
 			$this->_iCellPadding  = -1;
 			$this->_iCellSpacing  = -1;
 			$this->_iBorder		 = -1;
-			$this->_sAlign			 = "LEFT";
+			$this->_sAlign			 = " "; //left
 			$this->_oGroups		 = null;
 			$this->_sFile			 = $sXMLOutputFile;
 			$this->_bReprintHeader= true;
