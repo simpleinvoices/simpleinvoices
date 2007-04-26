@@ -1,9 +1,17 @@
 <?php
 
 /*
-@author: 
-@last_edited: 200704-26
-@license: GPL v2 or above
+* Script: nederland_dutch.inc.php
+* 	Nederland - Dutch translation file
+*
+* Authors:
+*
+*
+* Last edited:
+* 	 2007-04-27
+*
+* License:
+*	 GPL v2 or above
 */
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
@@ -13,7 +21,6 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
 #all
 $title = "Simple Invoices";//1
 
-#New lang file stijl $lang followed by the word or description - not grouped by page
 $LANG['about'] = "Over Simple Invoices";//1
 $LANG['account_info'] = "Account Informatie";//1
 $LANG['actions'] = "Acties";//1
@@ -26,11 +33,10 @@ $LANG['add_new_payment_type'] = "Nieuwe Betaalmethode Toevoegen";//1
 $LANG['add_new_preference'] = "Nieuwe Factuur Instelling Toevoegen";//1
 $LANG['add_new_product'] = "Nieuw Product Toevoegen";//1
 $LANG['add_new_tax_rate'] = "Nieuw BTW Tarief Toevoegen";//1
-$LANG['add_tax_rate'] = "BTW Tarief Toevoegen";//1
 $LANG['add_payment_type'] = "Betaalmethode Toevoegen";//1
 $LANG['add_product'] = "Product Toevoegen";//1
+$LANG['add_tax_rate'] = "BTW Tarief Toevoegen";//1
 $LANG['address'] = "Adres";//1
-#might be able to delete address: variable - grep files
 $LANG['address_city'] = "Adres: Plaats";//1
 $LANG['address_country'] = "Adres: Land";//1
 $LANG['address_state'] = "Adres: Provincie";//1
@@ -46,10 +52,10 @@ $LANG['biller_details'] = "Details Bedrijf";//1
 $LANG['biller_edit'] = "Bedrijf Wijzigen";//1
 $LANG['biller_id'] = "Bedrijf ID";//1
 $LANG['biller_name'] = "Naam Bedrijf";//1
-$LANG['biller_to_add'] = "Bedrijf toevoegen";//1
 $LANG['biller_sales'] = "Bedrijf Verkoopcijfers";//1
-$LANG['biller_sales_total'] = "Bedrijf Verkoopcijfers - Totaal";//1
 $LANG['biller_sales_by_customer_totals'] = "Bedrijf Verkoopcijfers per Klant - Totalen"; //1
+$LANG['biller_sales_total'] = "Bedrijf Verkoopcijfers - Totaal";//1
+$LANG['biller_to_add'] = "Bedrijf toevoegen";//1
 $LANG['billers'] = "Bedrijven";//1
 $LANG['cancel'] = "Annuleer";//1
 $LANG['change_log'] = "Wijzigingslog";//1
@@ -57,13 +63,14 @@ $LANG['city'] = "Plaats";//1
 $LANG['consulting'] = "Informatieve";//1
 $LANG['consulting_style'] = "Informatieve stijl";//1
 $LANG['country'] = "Land";//1
+$LANG['create_invoice'] ="Maak een factuur";//1
 $LANG['credits'] = "Medewerkers";//1
 $LANG['currency_sign'] = "Valuta teken";//1
+$LANG['custom_field'] = "Gebruikersveld";//1
 $LANG['custom_field1'] = "Gebruikersveld 1";//1
 $LANG['custom_field2'] = "Gebruikersveld 2";//1
 $LANG['custom_field3'] = "Gebruikersveld 3";//1
 $LANG['custom_field4'] = "Gebruikersveld 4";//1
-$LANG['custom_field'] = "Gebruikersveld";//1
 $LANG['custom_field_db_field_name'] = "Database veldnaam";//1
 $LANG['custom_fields'] = "Gebruikersvelden";//1
 $LANG['custom_fields_upper'] = "Gebruikersvelden";//1
@@ -84,8 +91,10 @@ $LANG['date_formatted'] = "Datum (YYYY-MM-DD)";//1
 $LANG['date_upper'] = "Datum";//1
 $LANG['days'] = "dagen";//1
 $LANG['debtors'] = "Debiteuren";//1
-$LANG['debtors_by_amount_owed'] = "Debiteuren per tegoed";//1
 $LANG['debtors_by_aging_periods'] = "Debiteuren per datum tegoed";//1
+$LANG['debtors_by_amount_owed'] = "Debiteuren per tegoed";//1
+$LANG['default_inv_template'] = "Default invoice template ";//0
+$LANG['default_number_items'] = "Default number of line items:";//0
 $LANG['description'] = "Beschrijving";//1
 $LANG['details'] = "Details";//1
 $LANG['disabled'] = "Gedeactiveerd";//1
@@ -98,12 +107,17 @@ $LANG['export_as'] = "Exporteren als";//1
 $LANG['export_doc_tooltip'] = "naar een word processor als";//1
 $LANG['export_pdf'] = "Exporteren naar PDF";//1
 $LANG['export_pdf_tooltip'] = "als PDF formaat";//1
-$LANG['export_tooltip'] = "Exporteren";//1 
+$LANG['export_tooltip'] = "Exporteren";//1
 $LANG['export_xls_tooltip'] = "naar een spreadsheet als";//1
 $LANG['faqs'] = "Frequently Asked Questions";//0
+$LANG['faqs_how'] ="Hoe maak ik facturen?";//1
+$LANG['faqs_need'] ="Wat moet ik doen om te kunnen beginnen met factureren?";//1
+$LANG['faqs_type'] ="Wat zijn de verschillende type facturen?";//1
+$LANG['faqs_what'] ="Wat is Simple Invoices?";//1
 $LANG['fax'] = "Fax";//1
 $LANG['format_tooltip'] = "formaat";//1
 $LANG['get_help'] = "Hulp nodig";//1
+$LANG['getting_started'] ="Start hier";//1
 $LANG['gross_total'] = "Bruto";//1
 $LANG['help'] = "Help";//1
 $LANG['help_manage_invoices'] = "Whats with all these different columns?";//0
@@ -113,9 +127,12 @@ $LANG['id'] = "ID";//1
 $LANG['ie_10_for_10'] = "* bijvoorbeeld. 10 voor 10%";//1
 $LANG['included'] = "inclusief";//1
 $LANG['insert_biller'] = "Bedrijf Toevoegen";//1
+$LANG['insert_biller'] = "Bedrijf Toevoegen";//1
+$LANG['insert_customer'] = "Klant Toevoegen";//1
 $LANG['insert_customer'] = "Klant Toevoegen";//1
 $LANG['insert_payment_type'] = "Betaalmethode Toevoegen";//1
 $LANG['insert_preference'] = "Instelling Toevoegen";//1
+$LANG['insert_product'] = "Product Toevoegen";//1
 $LANG['insert_product'] = "Product Toevoegen";//1
 $LANG['insert_tax_rate'] = "BTW Tarief Toevoegen";//1
 $LANG['installation'] = "Installatie";//1
@@ -153,8 +170,11 @@ $LANG['manage'] = "Beheren";//1
 $LANG['manage_billers'] = "Bedrijven Beheren";//1
 $LANG['manage_custom_fields'] = "Gebruikersvelden Beheren";//1
 $LANG['manage_customers'] = "Klanten Beheren";//1
-$LANG['manage_invoices'] = "Facturen Beheren";//1
+$LANG['manage_data'] ="Beheer je gegevens";//1
+$LANG['manage_existing_invoice'] ="Beheer bestaande facturen";//1
 $LANG['manage_invoice_preferences'] = "Factuur Voorkeuren Beheren";//1
+$LANG['manage_invoices'] = "Facturen Beheren";//1
+$LANG['manage_invoices'] ="Beheer facturen";//1
 $LANG['manage_payment_types'] = "Betaalmethoden Beheren";//1
 $LANG['manage_payments'] = "Betalingen Beheren";//1
 $LANG['manage_preferences'] = "Instellingen Beheren";//1
@@ -166,19 +186,28 @@ $LANG['mobile_short'] = "Mob.";//1
 $LANG['new_invoice_consulting'] = "Nieuwe Factuur - Informatief";//1
 $LANG['new_invoice_itemised'] = "Nieuwe Factuur- Gedetaileerd";//1
 $LANG['new_invoice_total'] = "Nieuwe Factuur - Totaal";//1
+$LANG['no_billers'] = "There are no billers in the database, please add one";//0
 $LANG['no_customers'] = "Er zijn geen klanten beschikbaar";//1
+$LANG['no_customers'] = "There are no customers in the database, please add one";//0
+$LANG['no_defaults'] = "There are no defaults";//0
 $LANG['no_invoices'] = "Er zijn geen facturen beschikbaar";//1
 $LANG['no_payment_types'] = "Er zijn geen betaalmethodes beschikbaar";//1
+$LANG['no_payments'] = "There are no payments in the database";//0
 $LANG['no_preferences'] = "Er zijn geen factuur instellingen beschikbaar";//1
+$LANG['no_preferences'] = "There are no invoice preferences in the database, please add one";//0
+$LANG['no_products'] = "There are no products in the database, please add one";//0
 $LANG['no_tax_rates'] = "Er zijn geen BTW tarieven beschikbaar.";//1
+$LANG['no_tax_rates'] = "There are no tax rates in the database, please add one";//0
 $LANG['note'] = "Opmerking";//1
 $LANG['notes'] = "Opmerkingen";//1
 $LANG['notes_opt'] = "Opmerkingen (optioneel)";//1
 $LANG['number_short'] = "Nr.";//1
-$LANG['owing'] = "Schuldig";//1
 $LANG['optional'] = "optioneel";//1
 $LANG['options'] = "Opties";//1
+$LANG['options'] ="Opties";//1
+$LANG['owing'] = "Schuldig";//1
 $LANG['paid'] = "Betaald";//1
+$LANG['payment_id'] = "Payment ID";//0
 $LANG['payment_type'] = "Betaalmethode";//1
 $LANG['payment_type_description'] = "Beschrijving betaalmethode";//1
 $LANG['payment_type_details'] = "Details Betaalmethode";//1
@@ -188,6 +217,9 @@ $LANG['payment_type_method'] = "Betaalmethode";//1
 $LANG['payment_type_to_add'] = "Betaalmethode toevoegen";//1
 $LANG['payment_types'] = "Betaalmethodes";//1
 $LANG['payments'] = "Betalingen";//1
+$LANG['payments_filtered'] = "Payments filtered by Invoice ID";//0
+$LANG['payments_filtered_customer'] = "Payments filtered by Customer ID";//0
+$LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
 $LANG['phone'] = "Telefoon";//1
 $LANG['phone_short'] = "Tel.";//1
 $LANG['preference_id'] = "Instellings ID";//1
@@ -209,37 +241,39 @@ $LANG['products_by_customer'] = "Producten per klant";//1
 $LANG['products_sold_customer_total'] = "Producten verkocht - Klant - Totaal";//1
 $LANG['products_sold_total'] = "Products verkocht - totaal";//1
 $LANG['provision_of'] = "Provisie van";//1
+$LANG['quantity'] = "Aantal";//1
+$LANG['quantity_short'] = "Aantal";//1
 $LANG['quick_view_of'] = "Dit is een Voorbeeld Weergave van";//1
 $LANG['quick_view_tooltip'] = "Voorbeeld Weergave van";//1
 $LANG['reports'] = "Rapporten";//1
 $LANG['sales'] = "Verkoopcijfers";//1
 $LANG['sales_by_customers'] = "Verkoopcijfers per klant";//1
-$LANG['sanity_check'] = "Sanity check van facturen";//1 
+$LANG['sanity_check'] = "Sanity check van facturen";//1
 $LANG['save'] = "Opslaan";//1
 $LANG['save_biller'] = "Save Biller";//0
-$LANG['save_biller_success'] = "Biller successfully saved, <br> you will be redirected to the Manage Billers page";//0
 $LANG['save_biller_failure'] = "Something went wrong, please try saving the biller again<br>";//0
+$LANG['save_biller_success'] = "Biller successfully saved, <br> you will be redirected to the Manage Billers page";//0
 $LANG['save_custom_field'] = "Gebruikersveld Opslaan";//1
-$LANG['save_custom_field_success'] = "Custom field successfully saved, <br> you will be redirected back to the Manage Custom Fields";//0
 $LANG['save_custom_field_failure'] = "Something went wrong, please try editing the custom field again<br>";//0
+$LANG['save_custom_field_success'] = "Custom field successfully saved, <br> you will be redirected back to the Manage Custom Fields";//0
 $LANG['save_customer'] = "Save Customer";//0
 $LANG['save_customer_failure'] = "Something went wrong, please try saving the customer again";//0
 $LANG['save_customer_success'] = "Customer successfully saved,<br> you will be redirected back to the Manage Customers page";//0
 $LANG['save_defaults'] = "Save Defaults";//0
 $LANG['save_defaults_biller_success'] = "System defaults: Default biller successfully updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_customer_success'] = "System defaults: Default customer successfully updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
 $LANG['save_defaults_line_items_success'] = "System defaults: Number of line items successfully update,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_payment_type_success'] = "System defaults: Default payment_type updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_preference_success'] = "System defaults: Default invoice preference updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_tax_success'] = "System defaults: Default tax updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_template_success'] = "System defaults: Default invoice template successfully update,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
 $LANG['save_invoice'] = "Save Invoice";//0
 $LANG['save_invoice_failure'] = "Something went wrong, please try saving the invoice again";//0
 $LANG['save_invoice_items_success'] = "Processing invoice items<br> you will be redirected back to the Quick View of this invoice";//0
 $LANG['save_invoice_success'] = "Processing invoice, <br> you will be redirected Quick View of this invoice";//0
-$LANG['save_payment_invoice_success'] = "Payment successfully processed, <br> you will be redirected to the Manage Invoices page";//0
 $LANG['save_payment_failure'] = "Something went wrong, please try saving the payment again";//0
+$LANG['save_payment_invoice_success'] = "Payment successfully processed, <br> you will be redirected to the Manage Invoices page";//0
 $LANG['save_payment_success'] = "Payment successfully processed,<br> you will be redirected back to the Manage Payments page";//0
 $LANG['save_payment_type'] = "Betaalmethode Opslaan";//1
 $LANG['save_payment_type_failure'] = "Something went wrong, please try saving the payment type again";//0
@@ -253,8 +287,13 @@ $LANG['save_tax_rate'] = "BTW Tarief Opslaan";//1
 $LANG['save_tax_rate_failure'] = "Something went wrong, please try adding the tax rate again";//0
 $LANG['save_tax_rate_success'] = "Tax rate successfully saved, <br> you will be redirected to the Manage Tax Rates page";//0
 $LANG['select_invoice'] = "Selecteer een factuur";//1
+$LANG['shortcut'] =" Hoofdmenu";//1
 $LANG['show_details'] = "Bekijk details";//1
 $LANG['state'] = "Provincie";//1
+$LANG['stats'] =" Rapporten";//1
+$LANG['stats_biller'] ="Top Bedrijf - totaal gefactureerd";//1
+$LANG['stats_customer'] ="Beste Klant - totaal gefactureerd";//1
+$LANG['stats_debtor'] ="Grootste debiteur";//1
 $LANG['street'] = "Straat";//1
 $LANG['street2'] = "Straat adres 2";//1
 $LANG['sub_total'] = "Subtotaal";//1
@@ -290,57 +329,11 @@ $LANG['unit_price'] = "Eenheidsprijs";//1
 $LANG['upgrading_simple_invoices'] = "Upgrading Simple Invoices";//0
 $LANG['using_simple_invoices'] = "Gebruik Simple Invoices";//1
 $LANG['view'] = "Bekijk";//1
-$LANG['quantity'] = "Aantal";//1
-$LANG['quantity_short'] = "Aantal";//1
 $LANG['want_more_fields'] = "want more fields";//0
 $LANG['welcome'] = "Welkom bij ";//1
 $LANG['what_are_custom_fields'] = "What are custom fields";//0
 $LANG['whats_this_page_about'] = "Whats this page about";//0
 $LANG['zip'] = "Postcode";//1
-
-
-#Index.php - front page
-
-
-$LANG['shortcut'] =" Hoofdmenu";//1
-
-$LANG['getting_started'] ="Start hier";//1
-$LANG['faqs_what'] ="Wat is Simple Invoices?";//1
-$LANG['faqs_need'] ="Wat moet ik doen om te kunnen beginnen met factureren?";//1
-$LANG['faqs_how'] ="Hoe maak ik facturen?";//1
-$LANG['faqs_type'] ="Wat zijn de verschillende type facturen?";//1
-
-$LANG['create_invoice'] ="Maak een factuur";//1
-
-$LANG['manage_existing_invoice'] ="Beheer bestaande facturen";//1
-$LANG['manage_invoices'] ="Beheer facturen";//1
-
-$LANG['manage_data'] ="Beheer je gegevens";//1
-$LANG['insert_customer'] = "Klant Toevoegen";//1
-$LANG['insert_biller'] = "Bedrijf Toevoegen";//1
-$LANG['insert_product'] = "Product Toevoegen";//1
-
-$LANG['options'] ="Opties";//1
-
-$LANG['stats'] =" Rapporten";//1
-$LANG['stats_debtor'] ="Grootste debiteur";//1
-$LANG['stats_customer'] ="Beste Klant - totaal gefactureerd";//1
-$LANG['stats_biller'] ="Top Bedrijf - totaal gefactureerd";//1
-
-/* New stuff */
-$LANG['no_products'] = "There are no products in the database, please add one";//0
-$LANG['no_billers'] = "There are no billers in the database, please add one";//0
-$LANG['no_customers'] = "There are no customers in the database, please add one";//0
-$LANG['no_preferences'] = "There are no invoice preferences in the database, please add one";//0
-$LANG['default_number_items'] = "Default number of line items:";//0
-$LANG['default_inv_template'] = "Default invoice template ";//0
-$LANG['no_defaults'] = "There are no defaults";//0
-$LANG['no_payments'] = "There are no payments in the database";//0
-$LANG['payment_id'] = "Payment ID";//0
-$LANG['payments_filtered'] = "Payments filtered by Invoice ID";//0
-$LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
-$LANG['payments_filtered_customer'] = "Payments filtered by Customer ID";//0
-$LANG['no_tax_rates'] = "There are no tax rates in the database, please add one";//0
 
 
 ?>

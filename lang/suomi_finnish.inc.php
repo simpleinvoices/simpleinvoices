@@ -1,10 +1,19 @@
 <?php
 
 /*
-@author: Petri
-@last_edited: 2007-04-26
-@license: GPL v2 or above
+* Script: suomi_finnish.inc.php
+* 	Suomi - Finnish translation file
+*
+* Authors:
+*	 Petri Hartoma
+*
+* Last edited:
+* 	 2007-04-27
+*
+* License:
+*	 GPL v2 or above
 */
+
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
 regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
@@ -13,7 +22,6 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
 #all
 $title = "Simple Invoices";//1
 
-#New lang file style $lang followed by the word or description - not grouped by page
 $LANG['about'] = "About";//0
 $LANG['account_info'] = "Tilin tiedot";//1
 $LANG['actions'] = "Toiminnot";//1
@@ -26,11 +34,10 @@ $LANG['add_new_payment_type'] = "Lis&auml;&auml; uusi maksutapa";//1
 $LANG['add_new_preference'] = "Lis&auml;&auml; uusi oletuslasku";//1
 $LANG['add_new_product'] = "Uusi tuote";//1
 $LANG['add_new_tax_rate'] = "Lis&auml;&auml; uusi arvonlis&auml;veroluokka";//1
-$LANG['add_tax_rate'] = "Add Tax Rate";//0
 $LANG['add_payment_type'] = "Add Payment Type";//0
 $LANG['add_product'] = "Add Product";//0
+$LANG['add_tax_rate'] = "Add Tax Rate";//0
 $LANG['address'] = "Osoite";//1
-#might be able to delete adderss: variable - grep files
 $LANG['address_city'] = "Postitoimipaikka";//1
 $LANG['address_country'] = "Maa";//1
 $LANG['address_state'] = "Y-tunnus";//1
@@ -47,10 +54,10 @@ $LANG['biller_details'] = "Laskuttajan tiedot";//1
 $LANG['biller_edit'] = "Edit Biller";//0
 $LANG['biller_id'] = "Laskuttajan numero";//1
 $LANG['biller_name'] = "Laskuttajan nimi";//1
-$LANG['biller_to_add'] = "Lis&auml;tt&auml;v&auml; laskuttaja";//1
 $LANG['biller_sales'] = "Biller sales";//0
-$LANG['biller_sales_total'] = "Biller sales - Total";//0
 $LANG['biller_sales_by_customer_totals'] = "Biller sales by Customer - Totals"; //0
+$LANG['biller_sales_total'] = "Biller sales - Total";//0
+$LANG['biller_to_add'] = "Lis&auml;tt&auml;v&auml; laskuttaja";//1
 $LANG['billers'] = "Billers";//0
 $LANG['cancel'] = "Peruuta";//1
 $LANG['change_log'] = "Change Log";//0
@@ -58,13 +65,14 @@ $LANG['city'] = "Postitoimipaikka";//1
 $LANG['consulting'] = "konsultointia";//1
 $LANG['consulting_style'] = "konsultointia";//1
 $LANG['country'] = "Maa";//1
+$LANG['create_invoice'] ="Uusi lasku";//1
 $LANG['credits'] = "Credits";//0
 $LANG['currency_sign'] = "Valuutan tunnus";//1
+$LANG['custom_field'] = "Muokattava kenttä";//1
 $LANG['custom_field1'] = "Muokattava kenttä 1";//1
 $LANG['custom_field2'] = "Muokattava kenttä 2";//1
 $LANG['custom_field3'] = "Muokattava kenttä 3";//1
 $LANG['custom_field4'] = "Muokattava kenttä 4";//1
-$LANG['custom_field'] = "Muokattava kenttä";//1
 $LANG['custom_field_db_field_name'] = "Tietokannan kentän nimi";//1
 $LANG['custom_fields'] = "Muokattava kentät";//1
 $LANG['custom_fields_upper'] = "Custom Fields";//0
@@ -84,8 +92,10 @@ $LANG['date_created'] = "Tehty";//1
 $LANG['date_formatted'] = "P&auml;iv&auml;ys (VVVV-KK-PP)";//1
 $LANG['days'] = "p&auml;iv&auml;&auml;";//1
 $LANG['debtors'] = "Debtors";//0
-$LANG['debtors_by_amount_owed'] = "Debtors by amount owed";//0
 $LANG['debtors_by_aging_periods'] = "Debtors by Aging periods";//0
+$LANG['debtors_by_amount_owed'] = "Debtors by amount owed";//0
+$LANG['default_inv_template'] = "Default invoice template ";//0
+$LANG['default_number_items'] = "Default number of line items:";//0
 $LANG['description'] = "Kuvaus";//1
 $LANG['details'] = "Tiedot";//1
 $LANG['disabled'] = "Ei k&auml;yt&ouml;ss&auml;";//1
@@ -102,9 +112,14 @@ $LANG['export_pdf_tooltip'] = "PDF-muodossa";//1
 $LANG['export_tooltip'] = "Vie";//1
 $LANG['export_xls_tooltip'] = "taulukkolaskentaan tiedostona";//1
 $LANG['faqs'] = "Frequently Asked Questions";//0
+$LANG['faqs_how'] ="Kuinka laskuja tehd&auml;&auml;n?";//1
+$LANG['faqs_need'] ="Mit&auml; tarvitaan laskutuksen aloittamiseksi?";//1
+$LANG['faqs_type'] ="Mit&auml; erityyppiset laskut ovat?";//1
+$LANG['faqs_what'] ="Mik&auml; Simple Invoices on?";//1
 $LANG['fax'] = "URL";//1
 $LANG['format_tooltip'] = "muodossa";//1
 $LANG['get_help'] = "Get Help";//0
+$LANG['getting_started'] ="Aloitus";//1
 $LANG['gross_total'] = "Veroton";//1
 $LANG['help'] = "Help";//0
 $LANG['help_manage_invoices'] = "Whats with all these different columns?";//0
@@ -114,10 +129,13 @@ $LANG['id'] = "Nro";//1
 $LANG['ie_10_for_10'] = "* esim. 10 tarkoittaa 10 %";//1
 $LANG['included'] = "sis&auml;lt&auml;&auml;";//1
 $LANG['insert_biller'] = "Lis&auml;&auml; laskuttaja";//1
+$LANG['insert_biller'] = "Uusi laskuttaja";//1
 $LANG['insert_customer'] = "Lis&auml;&auml; asiakas";//1
+$LANG['insert_customer'] = "Uusi asiakas";//1
 $LANG['insert_payment_type'] = "Lis&auml;&auml; maksutapa";//1
 $LANG['insert_preference'] = "Lis&auml;&auml; oletustiedot";//1
 $LANG['insert_product'] = "Lis&auml;&auml; tuote";//1
+$LANG['insert_product'] = "Uusi tuote";//1
 $LANG['insert_tax_rate'] = "Lis&auml;&auml; ALV-%";//1
 $LANG['installation'] = "Installation";//0
 $LANG['inv'] = "Lasku";//1
@@ -154,8 +172,11 @@ $LANG['manage'] = "K&auml;sittele";//1
 $LANG['manage_billers'] = "Manage Billers";//0
 $LANG['manage_custom_fields'] = "Muokattavien kenttien hallinta";//1
 $LANG['manage_customers'] = "Asiakkaiden hallinta";//1
-$LANG['manage_invoices'] = "Laskujen hallinta";//1
+$LANG['manage_data'] ="Muuta tietoja";//1
+$LANG['manage_existing_invoice'] ="K&auml;sittele sy&ouml;tettyj&auml; laskuja";//1
 $LANG['manage_invoice_preferences'] = "Manage Invoice Preferences";//0
+$LANG['manage_invoices'] = "Laskujen hallinta";//1
+$LANG['manage_invoices'] ="K&auml;sittele laskuja";//1
 $LANG['manage_payment_types'] = "Maksutapojen hallinta";//1
 $LANG['manage_payments'] = "Manage Payments";//0
 $LANG['manage_preferences'] = "Laskujen oletusten hallinta";//1
@@ -167,19 +188,28 @@ $LANG['mobile_short'] = "GSM";//1
 $LANG['new_invoice_consulting'] = "New Invoices - Consulting";//0
 $LANG['new_invoice_itemised'] = "New Invoices - Itemised";//0
 $LANG['new_invoice_total'] = "New Invoices - Total";//0
+$LANG['no_billers'] = "There are no billers in the database, please add one";//0
+$LANG['no_customers'] = "There are no customers in the database, please add one";//0
 $LANG['no_customers'] = "Tietokannassa ei ole yht&auml;&auml;n asiakasta, lis&auml;&auml; ainakin yksi";//1
+$LANG['no_defaults'] = "There are no defaults";//0
 $LANG['no_invoices'] = "Tietokannassa ei ole yht&auml;&auml;n laskua";//1
 $LANG['no_payment_types'] = "Tietokannassa ei ole yht&auml;&auml;n maksutapaa, lis&auml;&auml; ainakin yksi";//1
+$LANG['no_payments'] = "There are no payments in the database";//0
+$LANG['no_preferences'] = "There are no invoice preferences in the database, please add one";//0
 $LANG['no_preferences'] = "Tietokannassa ei ole yht&auml;&auml;n oletuslaskua, lis&auml;&auml; ainakin yksi";//1
+$LANG['no_products'] = "There are no products in the database, please add one";//0
+$LANG['no_tax_rates'] = "There are no tax rates in the database, please add one";//0
 $LANG['no_tax_rates'] = "Tietokannassa ei ole ALV-luokkia, lis&auml;&auml; uusia";//1
 $LANG['note'] = "Lis&auml;tietoja";//1
 $LANG['notes'] = "Lis&auml;tiedot";//1
 $LANG['notes_opt'] = "Lis&auml;tietoja (vapaaehtoinen)";//1
 $LANG['number_short'] = "Nro";//1
-$LANG['owing'] = "Velkaa";//1
 $LANG['optional'] = "vapaaehtoinen";//1
 $LANG['options'] = "Options";//0
+$LANG['options'] ="Asetukset";//1
+$LANG['owing'] = "Velkaa";//1
 $LANG['paid'] = "Maksettu";//1
+$LANG['payment_id'] = "Payment ID";//0
 $LANG['payment_type'] = "Maksutapa";//1
 $LANG['payment_type_description'] = "Maksutavan kuvaus";//1
 $LANG['payment_type_details'] = "Maksutavan tiedot";//1
@@ -189,6 +219,9 @@ $LANG['payment_type_method'] = "Maksun laji / maksutapa";//1
 $LANG['payment_type_to_add'] = "Lis&auml;tt&auml;v&auml; maksutapa";//1
 $LANG['payment_types'] = "Payment Types";//0
 $LANG['payments'] = "Payments";//0
+$LANG['payments_filtered'] = "Payments filtered by Invoice ID";//0
+$LANG['payments_filtered_customer'] = "Payments filtered by Customer ID";//0
+$LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
 $LANG['phone'] = "Puhelin";//1
 $LANG['phone_short'] = "Puh";//1
 $LANG['preference_id'] = "Oletuslaskun numero";//1
@@ -210,6 +243,8 @@ $LANG['products_by_customer'] = "Products by customer";//0
 $LANG['products_sold_customer_total'] = "Products sold - Customer - Total";//0
 $LANG['products_sold_total'] = "Products sold - total";//0
 $LANG['provision_of'] = "Provisiota";//1
+$LANG['quantity'] = "M&auml;&auml;r&auml;";//1
+$LANG['quantity_short'] = "M&auml;&auml;r&auml;";//1
 $LANG['quick_view_of'] = "T&auml;ss&auml; on pikan&auml;kym&auml;";//1
 $LANG['quick_view_tooltip'] = "Pikan&auml;kym&auml; kohteeseen";//1
 $LANG['reports'] = "Reports";//0
@@ -218,29 +253,29 @@ $LANG['sales_by_customers'] = "Sales by customers";//0
 $LANG['sanity_check'] = "Sanity check of invoices";//0
 $LANG['save'] = "Tallenna";//1
 $LANG['save_biller'] = "Save Biller";//0
-$LANG['save_biller_success'] = "Biller successfully saved, <br> you will be redirected to the Manage Billers page";//0
 $LANG['save_biller_failure'] = "Something went wrong, please try saving the biller again<br>";//0
+$LANG['save_biller_success'] = "Biller successfully saved, <br> you will be redirected to the Manage Billers page";//0
 $LANG['save_custom_field'] = "Tallenna muokattava kentt&auml;";//1
-$LANG['save_custom_field_success'] = "Custom field successfully saved, <br> you will be redirected back to the Manage Custom Fields";//0
 $LANG['save_custom_field_failure'] = "Something went wrong, please try editing the custom field again<br>";//0
+$LANG['save_custom_field_success'] = "Custom field successfully saved, <br> you will be redirected back to the Manage Custom Fields";//0
 $LANG['save_customer'] = "Save Customer";//0
 $LANG['save_customer_failure'] = "Something went wrong, please try saving the customer again";//0
 $LANG['save_customer_success'] = "Customer successfully saved,<br> you will be redirected back to the Manage Customers page";//0
 $LANG['save_defaults'] = "Save Defaults";//0
 $LANG['save_defaults_biller_success'] = "System defaults: Default biller successfully updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_customer_success'] = "System defaults: Default customer successfully updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
 $LANG['save_defaults_line_items_success'] = "System defaults: Number of line items successfully update,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_payment_type_success'] = "System defaults: Default payment_type updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_preference_success'] = "System defaults: Default invoice preference updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_tax_success'] = "System defaults: Default tax updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_template_success'] = "System defaults: Default invoice template successfully update,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
 $LANG['save_invoice'] = "Save Invoice";//0
 $LANG['save_invoice_failure'] = "Something went wrong, please try saving the invoice again";//0
 $LANG['save_invoice_items_success'] = "Processing invoice items<br> you will be redirected back to the Quick View of this invoice";//0
 $LANG['save_invoice_success'] = "Processing invoice, <br> you will be redirected Quick View of this invoice";//0
-$LANG['save_payment_invoice_success'] = "Payment successfully processed, <br> you will be redirected to the Manage Invoices page";//0
 $LANG['save_payment_failure'] = "Something went wrong, please try saving the payment again";//0
+$LANG['save_payment_invoice_success'] = "Payment successfully processed, <br> you will be redirected to the Manage Invoices page";//0
 $LANG['save_payment_success'] = "Payment successfully processed,<br> you will be redirected back to the Manage Payments page";//0
 $LANG['save_payment_type'] = "Tallenna maksutapa";//1
 $LANG['save_payment_type_failure'] = "Something went wrong, please try saving the payment type again";//0
@@ -254,8 +289,13 @@ $LANG['save_tax_rate'] = "Tallenna ALV-luokka";//1
 $LANG['save_tax_rate_failure'] = "Something went wrong, please try adding the tax rate again";//0
 $LANG['save_tax_rate_success'] = "Tax rate successfully saved, <br> you will be redirected to the Manage Tax Rates page";//0
 $LANG['select_invoice'] = "Ole hyv&auml; ja valitse lasku";//1
+$LANG['shortcut'] ="Pikavalikko";//1
 $LANG['show_details'] = "N&auml;yt&auml; tiedot";//1
 $LANG['state'] = "Y-tunnus";//1
+$LANG['stats'] =" Pikaraportit";//1
+$LANG['stats_biller'] ="Ykk&ouml;slaskuttaja - laskutuksen m&auml;&auml;r&auml;n mukaan";//1
+$LANG['stats_customer'] ="Ykk&ouml;sasiakas - laskutuksen m&auml;&auml;r&auml;n mukaan";//1
+$LANG['stats_debtor'] ="Suurin velallinen";//1
 $LANG['street'] = "Postiosoite";//1
 $LANG['street2'] = "Postiosoite 2";//1
 $LANG['sub_total'] = "V&auml;lisumma";//1
@@ -291,56 +331,11 @@ $LANG['unit_price'] = "Yks.hinta";//1
 $LANG['upgrading_simple_invoices'] = "Upgrading Simple Invoices";//0
 $LANG['using_simple_invoices'] = "Using Simple Invoices";//0
 $LANG['view'] = "N&auml;yt&auml;";//1
-$LANG['quantity'] = "M&auml;&auml;r&auml;";//1
-$LANG['quantity_short'] = "M&auml;&auml;r&auml;";//1
 $LANG['want_more_fields'] = "want more fields";//0
 $LANG['welcome'] ="Tervetuloa ohjelmaan ";//1
 $LANG['what_are_custom_fields'] = "What are custom fields";//1
 $LANG['whats_this_page_about'] = "Whats this page about";//1
 $LANG['zip'] = "Postinro";//1
 
-
-#Index.php - front page
-
-
-$LANG['shortcut'] ="Pikavalikko";//1
-
-$LANG['getting_started'] ="Aloitus";//1
-$LANG['faqs_what'] ="Mik&auml; Simple Invoices on?";//1
-$LANG['faqs_need'] ="Mit&auml; tarvitaan laskutuksen aloittamiseksi?";//1
-$LANG['faqs_how'] ="Kuinka laskuja tehd&auml;&auml;n?";//1
-$LANG['faqs_type'] ="Mit&auml; erityyppiset laskut ovat?";//1
-
-$LANG['create_invoice'] ="Uusi lasku";//1
-
-$LANG['manage_existing_invoice'] ="K&auml;sittele sy&ouml;tettyj&auml; laskuja";//1
-$LANG['manage_invoices'] ="K&auml;sittele laskuja";//1
-
-$LANG['manage_data'] ="Muuta tietoja";//1
-$LANG['insert_customer'] = "Uusi asiakas";//1
-$LANG['insert_biller'] = "Uusi laskuttaja";//1
-$LANG['insert_product'] = "Uusi tuote";//1
-
-$LANG['options'] ="Asetukset";//1
-
-$LANG['stats'] =" Pikaraportit";//1
-$LANG['stats_debtor'] ="Suurin velallinen";//1
-$LANG['stats_customer'] ="Ykk&ouml;sasiakas - laskutuksen m&auml;&auml;r&auml;n mukaan";//1
-$LANG['stats_biller'] ="Ykk&ouml;slaskuttaja - laskutuksen m&auml;&auml;r&auml;n mukaan";//1
-
-/* New stuff */
-$LANG['no_products'] = "There are no products in the database, please add one";//0
-$LANG['no_billers'] = "There are no billers in the database, please add one";//0
-$LANG['no_customers'] = "There are no customers in the database, please add one";//0
-$LANG['no_preferences'] = "There are no invoice preferences in the database, please add one";//0
-$LANG['default_number_items'] = "Default number of line items:";//0
-$LANG['default_inv_template'] = "Default invoice template ";//0
-$LANG['no_defaults'] = "There are no defaults";//0
-$LANG['no_payments'] = "There are no payments in the database";//0
-$LANG['payment_id'] = "Payment ID";//0
-$LANG['payments_filtered'] = "Payments filtered by Invoice ID";//0
-$LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
-$LANG['payments_filtered_customer'] = "Payments filtered by Customer ID";//0
-$LANG['no_tax_rates'] = "There are no tax rates in the database, please add one";//0
 
 ?>

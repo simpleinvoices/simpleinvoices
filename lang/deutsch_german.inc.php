@@ -1,10 +1,18 @@
 <?php
-
 /*
-@author: Herz Hermann (heart1010@gmail.com)
-@last_edited: 2007-01-29
-@license: GPL v2 or above
+* Script: duetsch_german.inc.php
+* 	Deutsch - German translation file
+*
+* Authors:
+*	 Herz Hermann (heart1010@gmail.com)
+*
+* Last edited:
+* 	 2007-04-27
+*
+* License:
+*	 GPL v2 or above
 */
+
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
 regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
@@ -13,7 +21,6 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
 #all
 $title = "Rechnungsverwaltung";//1
 
-#New lang file style $lang followed by the word or description - not grouped by page
 $LANG['about'] = "&Uuml;ber";//1
 $LANG['account_info'] = "Konto-Information";//1
 $LANG['actions'] = "Aktion";//1
@@ -26,11 +33,10 @@ $LANG['add_new_payment_type'] = "Neue Zahlungseingangsart anlegen";//1
 $LANG['add_new_preference'] = "Neue Rechnungsborgabe anlegen";//1
 $LANG['add_new_product'] = "Neues Produkt anlegen";//1
 $LANG['add_new_tax_rate'] = "Neuen Steuersatz anlegen";//1
-$LANG['add_tax_rate'] = "Steuersatz anlegen";//1
 $LANG['add_payment_type'] = "Zahlungseingangsart anlegen";//1
 $LANG['add_product'] = "Produkt anlegen";//1
+$LANG['add_tax_rate'] = "Steuersatz anlegen";//1
 $LANG['address'] = "Adresse";//1
-#might be able to delete adderss: variable - grep files
 $LANG['address_city'] = "Stadt";//1
 $LANG['address_country'] = "Land";//1
 $LANG['address_state'] = "Bundesland";//1
@@ -46,10 +52,10 @@ $LANG['biller_details'] = "Gl&auml;ubigerdetails";//1
 $LANG['biller_edit'] = "Gl&auml;ubiger bearbeiten";//1
 $LANG['biller_id'] = "Gl&auml;ubiger ID";//1
 $LANG['biller_name'] = "Gl&auml;ubigername";//1
-$LANG['biller_to_add'] = "Gl&auml;ubiger hinzuf&uuml;gen";//1
 $LANG['biller_sales'] = "Gl&auml;ubiger";//1
-$LANG['biller_sales_total'] = "Gl&auml;ubiger - Total";//1
 $LANG['biller_sales_by_customer_totals'] = "Gl&auml;ubiger nach Kunden - Total"; //1
+$LANG['biller_sales_total'] = "Gl&auml;ubiger - Total";//1
+$LANG['biller_to_add'] = "Gl&auml;ubiger hinzuf&uuml;gen";//1
 $LANG['billers'] = "Gl&auml;ubiger";//1
 $LANG['cancel'] = "Abbrechen";//1
 $LANG['change_log'] = "&Auml;nderungshistorie";//1
@@ -57,13 +63,14 @@ $LANG['city'] = "Stadt";//1
 $LANG['consulting'] = "Detail. Artikelaufl.";//1
 $LANG['consulting_style'] = "Detail. Artikelaufl.";//1
 $LANG['country'] = "Land";//1
+$LANG['create_invoice'] ="Rechnung erstellen";//1
 $LANG['credits'] = "Danksagungen";//1
 $LANG['currency_sign'] = "W&auml;hrungszeichen";//1
+$LANG['custom_field'] = "Benutzerdefiniertes Feld";//1
 $LANG['custom_field1'] = "Benutzerdefiniertes Feld 1";//1
 $LANG['custom_field2'] = "Benutzerdefiniertes Feld 2";//1
 $LANG['custom_field3'] = "Benutzerdefiniertes Feld 3";//1
 $LANG['custom_field4'] = "Benutzerdefiniertes Feld 4";//1
-$LANG['custom_field'] = "Benutzerdefiniertes Feld";//1
 $LANG['custom_field_db_field_name'] = "Databankfeldname";//1
 $LANG['custom_fields'] = "Benutzerdefinierte Felder";//1
 $LANG['custom_fields_upper'] = "Benutzerdefinierte Felder";//1
@@ -84,8 +91,10 @@ $LANG['date_formatted'] = "Datum (JJJJ-MM-TT)";//1
 $LANG['date_upper'] = "Datum";//1
 $LANG['days'] = "Tage";//1
 $LANG['debtors'] = "Schuldner";//1
-$LANG['debtors_by_amount_owed'] = "Schuldner nach Gesamtsumme";//1
 $LANG['debtors_by_aging_periods'] = "Schuldner nach Zahlungsdauer";//1
+$LANG['debtors_by_amount_owed'] = "Schuldner nach Gesamtsumme";//1
+$LANG['default_inv_template'] = "Default invoice template ";//0
+$LANG['default_number_items'] = "Default number of line items:";//0
 $LANG['description'] = "Beschreibung";//1
 $LANG['details'] = "Details";//1
 $LANG['disabled'] = "Deaktiviert";//1
@@ -101,9 +110,14 @@ $LANG['export_pdf_tooltip'] = "im PDF-Format";//1
 $LANG['export_tooltip'] = "Exportiere";//1
 $LANG['export_xls_tooltip'] = "zu einem Tabellendokument im";//1
 $LANG['faqs'] = "FAQ";//1
+$LANG['faqs_how'] ="Wie erstellt man Rechnungen?";//1
+$LANG['faqs_need'] ="Was wird ben&ouml;tigt, um mit der Rechnungserstellung starten zu k&ouml;nnen?";//1
+$LANG['faqs_type'] ="Was ist der Unterschied zwischen den verschiedenen Rechnungstypen?";//1
+$LANG['faqs_what'] = 'Was ist "Simple Invoices"?';//1
 $LANG['fax'] = "Fax";//1
 $LANG['format_tooltip'] = "Format";//1
 $LANG['get_help'] = "Hilfe";//1
+$LANG['getting_started'] ="Einstieg";//1
 $LANG['gross_total'] = "G-Preis";//1
 $LANG['help'] = "Hilfe";//1
 $LANG['help_manage_invoices'] = "Whats with all these different columns?";//0
@@ -113,10 +127,13 @@ $LANG['id'] = "ID";//1
 $LANG['ie_10_for_10'] = "* z. B. 10 f&uuml;r 10%";//1
 $LANG['included'] = "inklusive";//1
 $LANG['insert_biller'] = "Gl&auml;ubiger anlegen";//1
+$LANG['insert_biller'] = "Gl&auml;ubiger verwalten";//1
 $LANG['insert_customer'] = "Kunde anlegen";//1
+$LANG['insert_customer'] = "Kunden verwalten";//1
 $LANG['insert_payment_type'] = "Zahlungsmethode anlegen";//1
 $LANG['insert_preference'] = "Rechnungseinstellung anlegen";//1
 $LANG['insert_product'] = "Produkt anlegen";//1
+$LANG['insert_product'] = "Produkte verwalten";//1
 $LANG['insert_tax_rate'] = "Steuersatz anlegen";//1
 $LANG['installation'] = "Installation";//1
 $LANG['inv'] = "Rechnung";//1
@@ -153,8 +170,11 @@ $LANG['manage'] = "Verwalten";//1
 $LANG['manage_billers'] = "Gl&auml;ubiger verwalten";//1
 $LANG['manage_custom_fields'] = "Benutzerdefinierte Felder verwalten";//1
 $LANG['manage_customers'] = "Kunden verwalten";//1
-$LANG['manage_invoices'] = "Rechnungen verwalten";//1
+$LANG['manage_data'] ="Meine Daten verwalten";//1
+$LANG['manage_existing_invoice'] ="Bestehende Rechnungen verwalten";//1
 $LANG['manage_invoice_preferences'] = "Rechnungseinstellungen verwalten";//1
+$LANG['manage_invoices'] = "Rechnungen verwalten";//1
+$LANG['manage_invoices'] ="Rechnungen verwalten";//1
 $LANG['manage_payment_types'] = "Zahlungseingangsarten verwalten";//1
 $LANG['manage_payments'] = "Zahlungseing&auml;nge verwalten";//1
 $LANG['manage_preferences'] = "Vorgaben verwalten";//1
@@ -166,19 +186,28 @@ $LANG['mobile_short'] = "Handy";//1
 $LANG['new_invoice_consulting'] = "Neue Rechnung - Detail. Artikelauflistung";//1
 $LANG['new_invoice_itemised'] = "Neue Rechnung - Artikelauflistung";//1
 $LANG['new_invoice_total'] = "Neue Rechnung - Freitext";//1
+$LANG['no_billers'] = "There are no billers in the database, please add one";//0
 $LANG['no_customers'] = "Es sind keine Kunden in der Datenbank vorhanden";//1
+$LANG['no_customers'] = "There are no customers in the database, please add one";//0
+$LANG['no_defaults'] = "There are no defaults";//0
 $LANG['no_invoices'] = "Es sind keine Rechnungen in der Datenbank vorhanden";//1
 $LANG['no_payment_types'] = "Es ist keine Zahlungsart vorhanden. Bitte zuerst eine anlegen!";//1
+$LANG['no_payments'] = "There are no payments in the database";//0
 $LANG['no_preferences'] = "Es sind keine Vorgaben in der Datenbank gespeichert";//1
+$LANG['no_preferences'] = "There are no invoice preferences in the database, please add one";//0
+$LANG['no_products'] = "There are no products in the database, please add one";//0
 $LANG['no_tax_rates'] = "Es sind keine Steuers&auml;tze in der Datenbank vorhanden";//1
+$LANG['no_tax_rates'] = "There are no tax rates in the database, please add one";//0
 $LANG['note'] = "Kommentar";//1
 $LANG['notes'] = "Kommentare";//1
 $LANG['notes_opt'] = "Kommentare (optional)";//1
 $LANG['number_short'] = "Nr.";//1
-$LANG['owing'] = "Schuldend";//1
 $LANG['optional'] = "optional";//1
 $LANG['options'] = "Optionen";//1
+$LANG['options'] ="Einstellungen";//1
+$LANG['owing'] = "Schuldend";//1
 $LANG['paid'] = "Bezahlt";//1
+$LANG['payment_id'] = "Payment ID";//0
 $LANG['payment_type'] = "Zahlungsart";//1
 $LANG['payment_type_description'] = "Beschreibung der Zahlungsart";//1
 $LANG['payment_type_details'] = "Details Zahlungsart";//1
@@ -188,6 +217,9 @@ $LANG['payment_type_method'] = "Zahlungsmethode";//1
 $LANG['payment_type_to_add'] = "Zahlungsart hinzuf&uuml;gen";//1
 $LANG['payment_types'] = "Zahlungseingangsarten";//1
 $LANG['payments'] = "Zahlungseingang";//1
+$LANG['payments_filtered'] = "Payments filtered by Invoice ID";//0
+$LANG['payments_filtered_customer'] = "Payments filtered by Customer ID";//0
+$LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
 $LANG['phone'] = "Telefon";//1
 $LANG['phone_short'] = "Tel.";//1
 $LANG['preference_id'] = "Vorgabe ID";//1
@@ -209,6 +241,8 @@ $LANG['products_by_customer'] = "Produkte nach Kunden summiert";//1
 $LANG['products_sold_customer_total'] = "Produktverk&auml;ufe je Kunden - Total";//1
 $LANG['products_sold_total'] = "Produktverk&auml;ufe - Total";//1
 $LANG['provision_of'] = "Provision von";//1
+$LANG['quantity'] = "Anzahl";//1
+$LANG['quantity_short'] = "Anz.";//1
 $LANG['quick_view_of'] = "Dies ist eine Schnellansicht von";//1
 $LANG['quick_view_tooltip'] = "Schnellanzeige von";//1
 $LANG['reports'] = "Reports";//1
@@ -217,29 +251,29 @@ $LANG['sales_by_customers'] = "Verk&auml;ufe nach Kunden summiert";//1
 $LANG['sanity_check'] = "Konsistenzpr&uuml;fung der Rechnungen";//1
 $LANG['save'] = "Speichern";//1
 $LANG['save_biller'] = "Save Biller";//0
-$LANG['save_biller_success'] = "Biller successfully saved, <br> you will be redirected to the Manage Billers page";//0
 $LANG['save_biller_failure'] = "Something went wrong, please try saving the biller again<br>";//0
+$LANG['save_biller_success'] = "Biller successfully saved, <br> you will be redirected to the Manage Billers page";//0
 $LANG['save_custom_field'] = "Benutzerdefiniertes Feld speichern";//1
-$LANG['save_custom_field_success'] = "Custom field successfully saved, <br> you will be redirected back to the Manage Custom Fields";//0
 $LANG['save_custom_field_failure'] = "Something went wrong, please try editing the custom field again<br>";//0
+$LANG['save_custom_field_success'] = "Custom field successfully saved, <br> you will be redirected back to the Manage Custom Fields";//0
 $LANG['save_customer'] = "Save Customer";//0
 $LANG['save_customer_failure'] = "Something went wrong, please try saving the customer again";//0
 $LANG['save_customer_success'] = "Customer successfully saved,<br> you will be redirected back to the Manage Customers page";//0
 $LANG['save_defaults'] = "Save Defaults";//0
 $LANG['save_defaults_biller_success'] = "System defaults: Default biller successfully updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_customer_success'] = "System defaults: Default customer successfully updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
 $LANG['save_defaults_line_items_success'] = "System defaults: Number of line items successfully update,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_payment_type_success'] = "System defaults: Default payment_type updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_preference_success'] = "System defaults: Default invoice preference updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_tax_success'] = "System defaults: Default tax updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_template_success'] = "System defaults: Default invoice template successfully update,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
 $LANG['save_invoice'] = "Save Invoice";//0
 $LANG['save_invoice_failure'] = "Something went wrong, please try saving the invoice again";//0
 $LANG['save_invoice_items_success'] = "Processing invoice items<br> you will be redirected back to the Quick View of this invoice";//0
 $LANG['save_invoice_success'] = "Processing invoice, <br> you will be redirected Quick View of this invoice";//0
-$LANG['save_payment_invoice_success'] = "Payment successfully processed, <br> you will be redirected to the Manage Invoices page";//0
 $LANG['save_payment_failure'] = "Something went wrong, please try saving the payment again";//0
+$LANG['save_payment_invoice_success'] = "Payment successfully processed, <br> you will be redirected to the Manage Invoices page";//0
 $LANG['save_payment_success'] = "Payment successfully processed,<br> you will be redirected back to the Manage Payments page";//0
 $LANG['save_payment_type'] = "Zahlungsart speichern";//1
 $LANG['save_payment_type_failure'] = "Something went wrong, please try saving the payment type again";//0
@@ -253,8 +287,13 @@ $LANG['save_tax_rate'] = "Steuersatz speichern";//1
 $LANG['save_tax_rate_failure'] = "Something went wrong, please try adding the tax rate again";//0
 $LANG['save_tax_rate_success'] = "Tax rate successfully saved, <br> you will be redirected to the Manage Tax Rates page";//0
 $LANG['select_invoice'] = "Bitte eine Rechnung ausw&auml;hlen ";//1
+$LANG['shortcut'] ="Schnellzugriffsmen&uuml;";//1
 $LANG['show_details'] = "Zeige Details";//1
 $LANG['state'] = "Bundesland";//1
+$LANG['stats'] =" Kurzstatistiken";//1
+$LANG['stats_biller'] ="Top Gl&auml;ubiger - nach Rechnungssumme";//1
+$LANG['stats_customer'] ="Top Kunde - nach Rechnungssumme";//1
+$LANG['stats_debtor'] ="Gr&ouml;&szlig;ter Schuldner";//1
 $LANG['street'] = "Strasse";//1
 $LANG['street2'] = "2. Strasse";//1
 $LANG['sub_total'] = "Zwischensumme";//1
@@ -290,56 +329,11 @@ $LANG['unit_price'] = "St&uuml;ckpreis";//1
 $LANG['upgrading_simple_invoices'] = "Simple Invoices aktualisieren";//1
 $LANG['using_simple_invoices'] = "Simple Invoices benutzen";//1
 $LANG['view'] = "Anzeigen";//1
-$LANG['quantity'] = "Anzahl";//1
-$LANG['quantity_short'] = "Anz.";//1
 $LANG['want_more_fields'] = "want more fields";//0
 $LANG['welcome'] ="Willkommen zur ";//1
 $LANG['what_are_custom_fields'] = "What are custom fields";//0
 $LANG['whats_this_page_about'] = "Whats this page about";//0
 $LANG['zip'] = "PLZ";//1
 
-
-#Index.php - front page
-
-
-$LANG['shortcut'] ="Schnellzugriffsmen&uuml;";//1
-
-$LANG['getting_started'] ="Einstieg";//1
-$LANG['faqs_what'] = 'Was ist "Simple Invoices"?';//1
-$LANG['faqs_need'] ="Was wird ben&ouml;tigt, um mit der Rechnungserstellung starten zu k&ouml;nnen?";//1
-$LANG['faqs_how'] ="Wie erstellt man Rechnungen?";//1
-$LANG['faqs_type'] ="Was ist der Unterschied zwischen den verschiedenen Rechnungstypen?";//1
-
-$LANG['create_invoice'] ="Rechnung erstellen";//1
-
-$LANG['manage_existing_invoice'] ="Bestehende Rechnungen verwalten";//1
-$LANG['manage_invoices'] ="Rechnungen verwalten";//1
-
-$LANG['manage_data'] ="Meine Daten verwalten";//1
-$LANG['insert_customer'] = "Kunden verwalten";//1
-$LANG['insert_biller'] = "Gl&auml;ubiger verwalten";//1
-$LANG['insert_product'] = "Produkte verwalten";//1
-
-$LANG['options'] ="Einstellungen";//1
-
-$LANG['stats'] =" Kurzstatistiken";//1
-$LANG['stats_debtor'] ="Gr&ouml;&szlig;ter Schuldner";//1
-$LANG['stats_customer'] ="Top Kunde - nach Rechnungssumme";//1
-$LANG['stats_biller'] ="Top Gl&auml;ubiger - nach Rechnungssumme";//1
-
-/* New stuff */
-$LANG['no_products'] = "There are no products in the database, please add one";//0
-$LANG['no_billers'] = "There are no billers in the database, please add one";//0
-$LANG['no_customers'] = "There are no customers in the database, please add one";//0
-$LANG['no_preferences'] = "There are no invoice preferences in the database, please add one";//0
-$LANG['default_number_items'] = "Default number of line items:";//0
-$LANG['default_inv_template'] = "Default invoice template ";//0
-$LANG['no_defaults'] = "There are no defaults";//0
-$LANG['no_payments'] = "There are no payments in the database";//0
-$LANG['payment_id'] = "Payment ID";//0
-$LANG['payments_filtered'] = "Payments filtered by Invoice ID";//0
-$LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
-$LANG['payments_filtered_customer'] = "Payments filtered by Customer ID";//0
-$LANG['no_tax_rates'] = "There are no tax rates in the database, please add one";//0
 
 ?>
