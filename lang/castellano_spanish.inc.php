@@ -1,4 +1,18 @@
 <?php
+/*
+* Script: castellan_spanish.inc.php
+*   Castellano - Spanish translation file
+*
+* Authors:
+*    
+*
+* Last edited: 
+*    2007-04-26
+*
+* License: 
+*    GPL v2 or above
+*/
+
 
 /*
 @author:
