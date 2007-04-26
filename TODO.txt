@@ -16,7 +16,6 @@
  - replce checkLogin with CheckBrowse - check login name assumes something to do with login when its not - not urgent
  - sql queries: rename all the old crappy fields from b_name to name etc..
  -- need to write sql queries for all and change all relevant code that references these fields
- - remove all reference to $wording_for_enabledFiedl and change to $LANG.enabled or $LANG.disabled
 
 -done
  - sql patch: reset default invoices template to default - Done
@@ -29,6 +28,7 @@
  - Start page in IE goign crazy again - check ie hacks file is loaded - done 
  - CSS - in reports page not working good - refer previous release for what its supposed to do
  -- lionel fixed
+ - remove all reference to $wording_for_enabledFiedl and change to $LANG.enabled or $LANG.disabled - done
  
 
 

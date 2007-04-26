@@ -1,8 +1,9 @@
 <?php
 
 /*
-@author: Justin Kelly
+@author: 
 @last edited: 2007-04-26
+@license: GPL v2 or above
 */
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
@@ -14,14 +15,14 @@ $title = "Simple Invoices (factures &agrave; l'aise)";//1
 $LANG['enabled'] = "Actif";//1
 $LANG['disabled'] = "Inactif";//1
 
-
 #New lang file style $lang followed by the word or description - not grouped by page
 $LANG['about'] = "&Agrave;-propos";//1
-$LANG['Compte_info'] = "Informations sur le compte";//1
+$LANG['account_info'] = "Informations sur le compte";//1
 $LANG['actions'] = "Actions";//1
 $LANG['add_biller'] = "Nouveau vendeur";//1
 $LANG['add_customer'] = "Nouveau client";//1
 $LANG['add_invoice_preference'] = "Nouveau mod&egrave;le ";//1
+$LANG['add_new_biller'] = "Add New Biller";//0
 $LANG['add_new_invoice'] = "Nouvelle facture";//1
 $LANG['add_new_payment_type'] = "Nouveau type paiement";//1
 $LANG['add_new_preference'] = "Nouveau mod&egrave;le";//1
@@ -82,6 +83,7 @@ $LANG['database_upgrade_manager'] = "Mise &agrave; jour de la base";//1
 $LANG['date'] = "Date";//1
 $LANG['date_created'] = "Date de cr&eacute;ation";//1
 $LANG['date_formatted'] = "Date (YYYY-MM-DD)";//1
+$LANG['date_upper'] = "Date";//1
 $LANG['days'] = "jours";//1
 $LANG['debtors'] = "D&eacute;biteurs";//1
 $LANG['debtors_by_amount_owed'] = "D&eacute;biteurs par dette";//1
@@ -216,10 +218,42 @@ $LANG['sales'] = "Ventes";//1
 $LANG['sales_by_customers'] = "Ventes par client";//1
 $LANG['sanity_check'] = "V&eacute;rifier factures";//1
 $LANG['save'] = "Enregistrer";//1
+$LANG['save_biller'] = "Save Biller";//0
+$LANG['save_biller_success'] = "Biller successfully saved, <br> you will be redirected to the Manage Billers page";//0
+$LANG['save_biller_failure'] = "Something went wrong, please try saving the biller again<br>";//0
 $LANG['save_custom_field'] = "Enregistrer le champ optionnel";//1
+$LANG['save_custom_field_success'] = "Custom field successfully saved, <br> you will be redirected back to the Manage Custom Fields";//0
+$LANG['save_custom_field_failure'] = "Something went wrong, please try editing the custom field again<br>";//0
+$LANG['save_customer'] = "Save Customer";//0
+$LANG['save_customer_failure'] = "Something went wrong, please try saving the customer again";//0
+$LANG['save_customer_success'] = "Customer successfully saved,<br> you will be redirected back to the Manage Customers page";//0
+$LANG['save_defaults'] = "Save Defaults";//0
+$LANG['save_defaults_biller_success'] = "System defaults: Default biller successfully updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_customer_success'] = "System defaults: Default customer successfully updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_line_items_success'] = "System defaults: Number of line items successfully update,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_payment_type_success'] = "System defaults: Default payment_type updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_preference_success'] = "System defaults: Default invoice preference updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_tax_success'] = "System defaults: Default tax updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_template_success'] = "System defaults: Default invoice template successfully update,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
+$LANG['save_invoice'] = "Save Invoice";//0
+$LANG['save_invoice_failure'] = "Something went wrong, please try saving the invoice again";//0
+$LANG['save_invoice_items_success'] = "Processing invoice items<br> you will be redirected back to the Quick View of this invoice";//0
+$LANG['save_invoice_success'] = "Processing invoice, <br> you will be redirected Quick View of this invoice";//0
+$LANG['save_payment_invoice_success'] = "Payment successfully processed, <br> you will be redirected to the Manage Invoices page";//0
+$LANG['save_payment_failure'] = "Something went wrong, please try saving the payment again";//0
+$LANG['save_payment_success'] = "Payment successfully processed,<br> you will be redirected back to the Manage Payments page";//0
 $LANG['save_payment_type'] = "Enregistrer le type de paiement";//1
+$LANG['save_payment_type_failure'] = "Something went wrong, please try saving the payment type again";//0
+$LANG['save_payment_type_success'] = "Payment Type successfully saved, <br> you will be redirected back to the Manage Payment Types";//0
+$LANG['save_prefence_failure'] = "Something went wrong, please try saving the invoice preference again";//0
+$LANG['save_prefence_success'] = "Invoice preference successfully saved,<br> you will be redirected to Manage Preferences page";//0
 $LANG['save_product'] = "Enregistrer le produit";//1
+$LANG['save_product_failure'] = "Something went wrong, please try saving the product again";//0
+$LANG['save_product_success'] = "Product successfully saved, <br> you will be redirected to the Manage Products page";//0
 $LANG['save_tax_rate'] = "Enregistrer le taux de TVA";//1
+$LANG['save_tax_rate_failure'] = "Something went wrong, please try adding the tax rate again";//0
+$LANG['save_tax_rate_success'] = "Tax rate successfully saved, <br> you will be redirected to the Manage Tax Rates page";//0
 $LANG['select_invoice'] = "S&eacute;lectionner une facture";//1
 $LANG['show_details'] = "voir d&eacute;tails";//1
 $LANG['state'] = "&Eacute;tat";//1
@@ -257,7 +291,7 @@ $LANG['totals'] = "Totaux";//1
 $LANG['unit_price'] = "Prix unitaire";//1
 $LANG['upgrading_simple_invoices'] = "Mettre &agrave; jour Simple Invoices";//1
 $LANG['using_simple_invoices'] = "Utiliser Simple Invoices";//1
-$LANG['view'] = "Voir";//1Description
+$LANG['view'] = "Voir";//1
 $LANG['quantity'] = "TOTAL FACTURE";//1
 $LANG['quantity_short'] = "Nbr";//1
 $LANG['want_more_fields'] = "plus de champs";//1

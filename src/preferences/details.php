@@ -146,7 +146,7 @@ EOD;
                         <td class='details_screen'>Invoice payment line2 value <a href="./src/documentation/info_pages/inv_pref_payment_line2_value.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_payment_line2_value' value='{$pref['pref_inv_payment_line2_value']}' size=50></td>
                 </tr>
 	        <tr>
-        	        <td class='details_screen'>$wording_for_enabledField <a href="./src/documentation/info_pages/inv_pref_invoice_enabled.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$display_block_enabled</td>
+        	        <td class='details_screen'>{$LANG['enabled']} <a href="./src/documentation/info_pages/inv_pref_invoice_enabled.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$display_block_enabled</td>
 	        </tr>
                 <tr>
                         <td colspan=2 align=center></td>
