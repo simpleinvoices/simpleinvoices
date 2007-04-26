@@ -1,13 +1,17 @@
 <?php
 
+/*
+@author: 
+@last edited: 2007-04-26
+@license: GPL v2 or above
+*/
+
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
 regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
 $title = "Simple Invoices";//1
-$LANG['enabled'] = "Activat";//1
-$LANG['disabled'] = "Dezactivat";//1
 
 #New lang file style $lang followed by the word or description - not grouped by page
 $LANG['about'] = "Despre";//1
@@ -16,6 +20,7 @@ $LANG['actions'] = "Actiuni";//1
 $LANG['add_biller'] = "Adauga Furnizor";//1
 $LANG['add_customer'] = "Adauga Client";//1
 $LANG['add_invoice_preference'] = "Adauga Preferinte Factura";//1
+$LANG['add_new_biller'] = "Add New Biller";//1
 $LANG['add_new_invoice'] = "Adauga Factura Noua";//1
 $LANG['add_new_payment_type'] = "Adauga Tip de Plata Nou";//1
 $LANG['add_new_preference'] = "Adauga Preferinta Factura Noua";//1
@@ -76,18 +81,19 @@ $LANG['database_upgrade_manager'] = "Database Upgrade Manager";//0
 $LANG['date'] = "data";//1
 $LANG['date_created'] = "Data crearii";//1
 $LANG['date_formatted'] = "Data (AAAA-LL-ZZ)";//1
+$LANG['date_upper'] = "Data";//1
 $LANG['days'] = "zile";//1
 $LANG['debtors'] = "Debitori";//1
 $LANG['debtors_by_amount_owed'] = "Debitori dupa suma datorata";//1
 $LANG['debtors_by_aging_periods'] = "Debitori dupa vechimea datoriei";//1
 $LANG['description'] = "Descriere";//1
 $LANG['details'] = "Detalii";//1
-$LANG['disabled'] = "Disabled";//0
+$LANG['disabled'] = "Dezactivat";//1
 $LANG['edit'] = "Modifica";//1
 $LANG['edit_view_tooltip'] = "Modifica";//1
 $LANG['email'] = "Email";//1
 $LANG['email_quick'] = "Email Rapid";//1
-$LANG['enabled'] = "Enabled";//0
+$LANG['enabled'] = "Activat";//1
 $LANG['export_as'] = "Exporta ca";//1
 $LANG['export_doc_tooltip'] = "spre un procesor de text ca";//1
 $LANG['export_pdf'] = "Exporta ca PDF";//1
@@ -210,10 +216,42 @@ $LANG['sales'] = "Vinzari";//1
 $LANG['sales_by_customers'] = "Vinzari dupa client";//1
 $LANG['sanity_check'] = "Verificare corectitudinii facturilor";//1
 $LANG['save'] = "Salveaza";//1
+$LANG['save_biller'] = "Save Biller";//0
+$LANG['save_biller_success'] = "Biller successfully saved, <br> you will be redirected to the Manage Billers page";//0
+$LANG['save_biller_failure'] = "Something went wrong, please try saving the biller again<br>";//0
 $LANG['save_custom_field'] = "Salveaza Cimp Personalizat";//1
+$LANG['save_custom_field_success'] = "Custom field successfully saved, <br> you will be redirected back to the Manage Custom Fields";//0
+$LANG['save_custom_field_failure'] = "Something went wrong, please try editing the custom field again<br>";//0
+$LANG['save_customer'] = "Save Customer";//0
+$LANG['save_customer_failure'] = "Something went wrong, please try saving the customer again";//0
+$LANG['save_customer_success'] = "Customer successfully saved,<br> you will be redirected back to the Manage Customers page";//0
+$LANG['save_defaults'] = "Save Defaults";//0
+$LANG['save_defaults_biller_success'] = "System defaults: Default biller successfully updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_customer_success'] = "System defaults: Default customer successfully updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_line_items_success'] = "System defaults: Number of line items successfully update,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_payment_type_success'] = "System defaults: Default payment_type updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_preference_success'] = "System defaults: Default invoice preference updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_tax_success'] = "System defaults: Default tax updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_template_success'] = "System defaults: Default invoice template successfully update,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
+$LANG['save_invoice'] = "Save Invoice";//0
+$LANG['save_invoice_failure'] = "Something went wrong, please try saving the invoice again";//0
+$LANG['save_invoice_items_success'] = "Processing invoice items<br> you will be redirected back to the Quick View of this invoice";//0
+$LANG['save_invoice_success'] = "Processing invoice, <br> you will be redirected Quick View of this invoice";//0
+$LANG['save_payment_invoice_success'] = "Payment successfully processed, <br> you will be redirected to the Manage Invoices page";//0
+$LANG['save_payment_failure'] = "Something went wrong, please try saving the payment again";//0
+$LANG['save_payment_success'] = "Payment successfully processed,<br> you will be redirected back to the Manage Payments page";//0
 $LANG['save_payment_type'] = "Salveaza Tip de Plata";//1
+$LANG['save_payment_type_failure'] = "Something went wrong, please try saving the payment type again";//0
+$LANG['save_payment_type_success'] = "Payment Type successfully saved, <br> you will be redirected back to the Manage Payment Types";//0
+$LANG['save_prefence_failure'] = "Something went wrong, please try saving the invoice preference again";//0
+$LANG['save_prefence_success'] = "Invoice preference successfully saved,<br> you will be redirected to Manage Preferences page";//0
 $LANG['save_product'] = "Salveaza Produs";//1
+$LANG['save_product_failure'] = "Something went wrong, please try saving the product again";//0
+$LANG['save_product_success'] = "Product successfully saved, <br> you will be redirected to the Manage Products page";//0
 $LANG['save_tax_rate'] = "Salveaza Taxa";//1
+$LANG['save_tax_rate_failure'] = "Something went wrong, please try adding the tax rate again";//0
+$LANG['save_tax_rate_success'] = "Tax rate successfully saved, <br> you will be redirected to the Manage Tax Rates page";//0
 $LANG['select_invoice'] = "Selectati o factura";//1
 $LANG['show_details'] = "Arata detalii";//1
 $LANG['state'] = "Judet";//1
@@ -245,7 +283,6 @@ $LANG['total_paid'] = "Total Platit";//1
 $LANG['total_sales'] = "Total Vinzari";//1
 $LANG['total_sales_by_customer'] = "Total Vinzari pe Client";//1
 $LANG['total_style'] = "Stil Total";//1
-
 $LANG['total_taxes'] = "Total taxe";//1
 $LANG['total_uppercase'] = "TOTAL";//1
 $LANG['totals'] = "Totaluri";//1

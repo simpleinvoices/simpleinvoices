@@ -2,7 +2,8 @@
 
 /*
 @author:
-@last_edited:
+@last_edited:2007-04-26
+@license: GPL v2 or above
 */
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
@@ -11,8 +12,6 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
 
 #all
 $title = "Simple Invoices";//1
-$LANG['enabled'] = "Activado";//1
-$LANG['disabled'] = "Desactivado";//1
 
 #New lang file style $lang followed by the word or description - not grouped by page
 $LANG['about'] = "Acerca de";//1
@@ -89,12 +88,12 @@ $LANG['debtors_by_amount_owed'] = "Deudores por Monto de Deuda";//1
 $LANG['debtors_by_aging_periods'] = "Deudores por periodos de Antig&uuml;edad";//1
 $LANG['description'] = "Descripci&oacute;on";//1
 $LANG['details'] = "Detalles";//1
-$LANG['disabled'] = "Disabled";//0
+$LANG['disabled'] = "Desactivado";//1
 $LANG['edit'] = "Editar";//1
 $LANG['edit_view_tooltip'] = "Editar";//1
 $LANG['email'] = "Correo electr&oacute;nico";//1
 $LANG['email_quick'] = "Correo r&aacute;pido";//1
-$LANG['enabled'] = "Enabled";//0
+$LANG['enabled'] = "Activado";//1
 $LANG['export_as'] = "Exportar como";//1
 $LANG['export_doc_tooltip'] = "A formato Word";//1
 $LANG['export_pdf'] = "Exportar a PDF";//1

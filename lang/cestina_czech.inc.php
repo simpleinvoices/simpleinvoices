@@ -12,8 +12,6 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
 
 #all
 $title = "Simple Invoices";//1
-$LANG['enabled'] = "Aktivní";//1
-$LANG['disabled'] = "Neaktivní";//1
 
 
 #New lang file style $lang followed by the word or description - not grouped by page
@@ -91,12 +89,12 @@ $LANG['debtors_by_amount_owed'] = "Dlužníci podle dlužné ?ástky";//1
 $LANG['debtors_by_aging_periods'] = "Dlužníci podle splatnosti";//1
 $LANG['description'] = "Popis";//1
 $LANG['details'] = "Podrobnosti";//1
-$LANG['disabled'] = "Disabled";//0
+$LANG['disabled'] = "Neaktivní";//1
 $LANG['edit'] = "Editovat";//1
 $LANG['edit_view_tooltip'] = "Editovat";//1
 $LANG['email'] = "E-mail";//1
 $LANG['email_quick'] = "Rychlý e-mail";//1
-$LANG['enabled'] = "Enabled";//0
+$LANG['enabled'] = "Aktivní";//1
 $LANG['export_as'] = "Exportovat jako";//1
 $LANG['export_doc_tooltip'] = "do textového procesoru jako";//1
 $LANG['export_pdf'] = "Export do PDF";//1

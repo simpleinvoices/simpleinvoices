@@ -12,12 +12,10 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
 
 #all
 $title = "Simple Invoices";//0
-$LANG['enabled'] = "Habilitat";//1
-$LANG['disabled'] = "Deshabilitat";//1
 
 #New lang file style $lang followed by the word or description - not grouped by page
 $LANG['about'] = "About";//0
-$LANG['account_info'] = "Informaci&oacute;//1 compte";//1
+$LANG['account_info'] = "Informaci&oacute; compte";//1
 $LANG['actions'] = "Accions";//1
 $LANG['add_biller'] = "Add biller";//0
 $LANG['add_customer'] = "Add Customer";//0
@@ -31,7 +29,7 @@ $LANG['add_new_tax_rate'] = "Add New Tax Rate";//0
 $LANG['add_tax_rate'] = "Add Tax Rate";//0
 $LANG['add_payment_type'] = "Add Payment Type";//0
 $LANG['add_product'] = "Add Product";//0
-$LANG['address'] = "Adre&ccedil;//1a";//1
+$LANG['address'] = "Adre&ccedil;a";//1
 #might be able to delete adderss: variable - grep files
 $LANG['address_city'] = "Address: City";//0
 $LANG['address_country'] = "Address: Country";//0
@@ -58,7 +56,7 @@ $LANG['change_log'] = "Change Log";//0
 $LANG['city'] = "Ciutat";//1
 $LANG['consulting'] = "Consulting";//0
 $LANG['consulting_style'] = "Consulting style";//0
-$LANG['country'] = "Pa&igrave;//1";//1
+$LANG['country'] = "Pa&igrave;";//1
 $LANG['credits'] = "Credits";//0
 $LANG['currency_sign'] = "Currency sign";//0
 $LANG['custom_field1'] = "Custom field 1";//0
@@ -88,14 +86,14 @@ $LANG['days'] = "dies";//1
 $LANG['debtors'] = "Debtors";//0
 $LANG['debtors_by_amount_owed'] = "Debtors by amount owed";//0
 $LANG['debtors_by_aging_periods'] = "Debtors by Aging periods";//0
-$LANG['description'] = "Descripci&oacute;//1";//1
+$LANG['description'] = "Descripci&oacute;";//1
 $LANG['details'] = "detalls";//0
-$LANG['disabled'] = "Disabled";//0
+$LANG['disabled'] = "Deshabilitat";//1
 $LANG['edit'] = "Editar";//1
 $LANG['edit_view_tooltip'] = "Edit";//0
 $LANG['email'] = "Email";//0
 $LANG['email_quick'] = "Quick Email";//0
-$LANG['enabled'] = "Enabled";//0
+$LANG['enabled'] = "Habilitat";//1
 $LANG['export_as'] = "Exportar com";//1
 $LANG['export_doc_tooltip'] = "to a word processor as";//0
 $LANG['export_pdf'] = "Exportar a PDF";//0
@@ -113,7 +111,7 @@ $LANG['hide_details'] = "Hide details";//0
 $LANG['home'] = "Home";//1
 $LANG['id'] = "ID";//1
 $LANG['ie_10_for_10'] = "* ie. 10 for 10%";//0
-$LANG['included'] = "inclo&ograve;//1s";//1
+$LANG['included'] = "inclo&ograve;s";//1
 $LANG['insert_biller'] = "Insert Biller";//0
 $LANG['insert_customer'] = "Insert Customer";//0
 $LANG['insert_payment_type'] = "Insert Payment Type";//0
@@ -194,7 +192,7 @@ $LANG['phone'] = "Tel&egrave;//1fon";//1
 $LANG['phone_short'] = "Tfn.";//1
 $LANG['preference_id'] = "Preference ID";//0
 $LANG['prepare_simple_invoices'] = "Prepare Simple Invoices for use";//0
-$LANG['print_preview'] = "Imprimir Previsualitzaci&oacute;//1";//1
+$LANG['print_preview'] = "Imprimir Previsualitzaci&oacute;";//1
 $LANG['print_preview_tooltip'] = "Print Preview of";//0
 $LANG['process_payment'] = "Proc&eacute;//1s pagament";//1
 $LANG['process_payment_for'] = "Process Payment for";//0
@@ -210,8 +208,8 @@ $LANG['products'] = "Productes";//1
 $LANG['products_by_customer'] = "Products by customer";//0
 $LANG['products_sold_customer_total'] = "Products sold - Customer - Total";//0
 $LANG['products_sold_total'] = "Products sold - total";//0
-$LANG['provision_of'] = "Provisi&oacute;//1 de";//1
-$LANG['quick_view_of'] = "Aix&ograve;//1 &eacute;//1s la vista r&agrave;//1pida de";//1
+$LANG['provision_of'] = "Provisi&oacute; de";//1
+$LANG['quick_view_of'] = "Aix&ograve; &eacute;s la vista r&agrave;pida de";//1
 $LANG['quick_view_tooltip'] = "Quick View of";// 0
 $LANG['reports'] = "Reports";//0
 $LANG['sales'] = "Sales";//0
@@ -273,7 +271,7 @@ $LANG['tax_rate_details'] = "Tax rate details";//0
 $LANG['tax_rate_id'] = "Tax Rate ID";//0
 $LANG['tax_rate_to_add'] = "Tax rate to add";//0
 $LANG['tax_rates'] = "Tax Rates";//0
-$LANG['tax_total'] = "IVA incl&ograve;//1s";//1
+$LANG['tax_total'] = "IVA incl&ograve;s";//1
 $LANG['telephone_short'] = "Tel";//1
 $LANG['total'] = "Total";//0
 $LANG['total_amount'] = "Total amount";//0
@@ -306,9 +304,9 @@ $LANG['zip'] = "Codi Postal";//1
 
 $LANG['shortcut'] ="Drecera a menu";//1
 
-$LANG['getting_started'] ="Comen&ccedil;//1a";//1
-$LANG['faqs_what'] ="Qu&egrave;//1 &eacute;//1s Simple Invoices?";//1
-$LANG['faqs_need'] ="Qu&egrave;//1 necessito per facturar?";//1
+$LANG['getting_started'] ="Comen&ccedil;a";//1
+$LANG['faqs_what'] ="Qu&egrave; &eacute;s Simple Invoices?";//1
+$LANG['faqs_need'] ="Qu&egrave; necessito per facturar?";//1
 $LANG['faqs_how'] ="Com es creen factures?";//1
 $LANG['faqs_type'] ="Quants tipus diferents hi ha de factures?";//1
 
@@ -324,7 +322,7 @@ $LANG['insert_product'] = "Afegir Producte";//1
 
 $LANG['options'] ="Opcions";//1
 
-$LANG['stats'] =" Estad&iacute;//1stiques";//1
+$LANG['stats'] =" Estad&iacute;stiques";//1
 $LANG['stats_debtor'] ="Grans Deudors";//1
 $LANG['stats_customer'] ="Millors Clients - per total facturat";//1
 $LANG['stats_biller'] ="Millor Facturador - per total facturat";//1
