@@ -3,6 +3,7 @@
 /*
 @author: Herz Hermann (heart1010@gmail.com)
 @last_edited: 2007-01-29
+@license: GPL v2 or above
 */
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
@@ -22,6 +23,7 @@ $LANG['actions'] = "Aktion";//1
 $LANG['add_biller'] = "Gl&auml;ubiger hinzuf&uuml;gen";//1
 $LANG['add_customer'] = "Kunde hinzuf&uuml;gen";//1
 $LANG['add_invoice_preference'] = "Neue Rechnungseinstellung anlegen";//1
+$LANG['add_new_biller'] = "Add New Biller";//1
 $LANG['add_new_invoice'] = "Neue Rechnung";//1
 $LANG['add_new_payment_type'] = "Neue Zahlungseingangsart anlegen";//1
 $LANG['add_new_preference'] = "Neue Rechnungsborgabe anlegen";//1
@@ -82,6 +84,7 @@ $LANG['database_upgrade_manager'] = "Datenbank Upgrade-Manager";//1
 $LANG['date'] = "Datum";//1
 $LANG['date_created'] = "Re-Datum";//1
 $LANG['date_formatted'] = "Datum (JJJJ-MM-TT)";//1
+$LANG['date_upper'] = "Datum";//1
 $LANG['days'] = "Tage";//1
 $LANG['debtors'] = "Schuldner";//1
 $LANG['debtors_by_amount_owed'] = "Schuldner nach Gesamtsumme";//1
@@ -216,10 +219,42 @@ $LANG['sales'] = "Verk&auml;ufe";//1
 $LANG['sales_by_customers'] = "Verk&auml;ufe nach Kunden summiert";//1
 $LANG['sanity_check'] = "Konsistenzpr&uuml;fung der Rechnungen";//1
 $LANG['save'] = "Speichern";//1
+$LANG['save_biller'] = "Save Biller";//0
+$LANG['save_biller_success'] = "Biller successfully saved, <br> you will be redirected to the Manage Billers page";//0
+$LANG['save_biller_failure'] = "Something went wrong, please try saving the biller again<br>";//0
 $LANG['save_custom_field'] = "Benutzerdefiniertes Feld speichern";//1
+$LANG['save_custom_field_success'] = "Custom field successfully saved, <br> you will be redirected back to the Manage Custom Fields";//0
+$LANG['save_custom_field_failure'] = "Something went wrong, please try editing the custom field again<br>";//0
+$LANG['save_customer'] = "Save Customer";//0
+$LANG['save_customer_failure'] = "Something went wrong, please try saving the customer again";//0
+$LANG['save_customer_success'] = "Customer successfully saved,<br> you will be redirected back to the Manage Customers page";//0
+$LANG['save_defaults'] = "Save Defaults";//0
+$LANG['save_defaults_biller_success'] = "System defaults: Default biller successfully updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_customer_success'] = "System defaults: Default customer successfully updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_line_items_success'] = "System defaults: Number of line items successfully update,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_payment_type_success'] = "System defaults: Default payment_type updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_preference_success'] = "System defaults: Default invoice preference updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_tax_success'] = "System defaults: Default tax updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_template_success'] = "System defaults: Default invoice template successfully update,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
+$LANG['save_invoice'] = "Save Invoice";//0
+$LANG['save_invoice_failure'] = "Something went wrong, please try saving the invoice again";//0
+$LANG['save_invoice_items_success'] = "Processing invoice items<br> you will be redirected back to the Quick View of this invoice";//0
+$LANG['save_invoice_success'] = "Processing invoice, <br> you will be redirected Quick View of this invoice";//0
+$LANG['save_payment_invoice_success'] = "Payment successfully processed, <br> you will be redirected to the Manage Invoices page";//0
+$LANG['save_payment_failure'] = "Something went wrong, please try saving the payment again";//0
+$LANG['save_payment_success'] = "Payment successfully processed,<br> you will be redirected back to the Manage Payments page";//0
 $LANG['save_payment_type'] = "Zahlungsart speichern";//1
+$LANG['save_payment_type_failure'] = "Something went wrong, please try saving the payment type again";//0
+$LANG['save_payment_type_success'] = "Payment Type successfully saved, <br> you will be redirected back to the Manage Payment Types";//0
+$LANG['save_prefence_failure'] = "Something went wrong, please try saving the invoice preference again";//0
+$LANG['save_prefence_success'] = "Invoice preference successfully saved,<br> you will be redirected to Manage Preferences page";//0
 $LANG['save_product'] = "Produkt speichern";//1
+$LANG['save_product_failure'] = "Something went wrong, please try saving the product again";//0
+$LANG['save_product_success'] = "Product successfully saved, <br> you will be redirected to the Manage Products page";//0
 $LANG['save_tax_rate'] = "Steuersatz speichern";//1
+$LANG['save_tax_rate_failure'] = "Something went wrong, please try adding the tax rate again";//0
+$LANG['save_tax_rate_success'] = "Tax rate successfully saved, <br> you will be redirected to the Manage Tax Rates page";//0
 $LANG['select_invoice'] = "Bitte eine Rechnung ausw&auml;hlen ";//1
 $LANG['show_details'] = "Zeige Details";//1
 $LANG['state'] = "Bundesland";//1
@@ -251,7 +286,6 @@ $LANG['total_paid'] = "Bezahlt gesamt";//1
 $LANG['total_sales'] = "Verk&auml;ufe - Total";//1
 $LANG['total_sales_by_customer'] = "Verk&auml;ufe nach Kunden summiert";//1
 $LANG['total_style'] = "Freitext";//1
-
 $LANG['total_taxes'] = "Steuern - Total";//1
 $LANG['total_uppercase'] = "TOTAL";//1
 $LANG['totals'] = "Endsummen";//1

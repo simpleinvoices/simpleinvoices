@@ -4,8 +4,8 @@
  - validation:
  -- apply to all sections of Simple Invoices - work in progress
  -- Biller add page - Notes contents doesnt show/save in page when get valadation error
- -- Add validation to the edit screen
- - templates - add $smarty.post value to ALL values in add and edit screen
+ -- Add validation to the edit screen - moved to next release - just validate on add for now
+ - templates - add $smarty.post value to ALL values in add screen
  - make email function work - done but needs polish
  -- add note on screen that the generation of pdf and email can take 30 seconds
  -- make the info pages for email funtion - done
@@ -13,12 +13,11 @@
  - lang file cleanup up - work in projcess
  -- remove old $m- etc variables - done in english - do to all
  -- move the $lang_ to arrays ie $LANG['word'] - done in english
- - replce checkLogin with CheckBrowse - check login name assumes something to do with login when its not
- - CSS - in reports page not working good - refer previous release for what its supposed to do
- -- lionel fixed
+ - replce checkLogin with CheckBrowse - check login name assumes something to do with login when its not - not urgent
  - reports: queryerror.php file is missing - download phpreports and check for it
  - sql queries: rename all the old crappy fields from b_name to name etc..
  -- need to write sql queries for all and change all relevant code that references these fields
+ - remove all reference to $wording_for_enabledFiedl and change to $LANG.enabled or $LANG.disabled
 
 -done
  - sql patch: reset default invoices template to default - Done
@@ -29,6 +28,8 @@
  - css: make calendar popup css work as before - done
  - Replace $LANG strings with array - done
  - Start page in IE goign crazy again - check ie hacks file is loaded - done 
+ - CSS - in reports page not working good - refer previous release for what its supposed to do
+ -- lionel fixed
  
 
 

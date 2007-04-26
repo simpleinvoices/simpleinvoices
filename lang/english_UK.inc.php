@@ -2,7 +2,8 @@
 
 /*
 @author: Justin Kelly
-@last edited: 2007-03-04
+@last edited: 2007-04-26
+@license: GPL v2 or above
 */
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
@@ -18,7 +19,6 @@ $wording_for_disabledField ="Disabled";//1
 #New lang file style $lang followed by the word or description - not grouped by page
 $LANG['about'] = "About";//1
 $LANG['account_info'] = "Account Info";//1
-$LANG['action'] = "Action";//1
 $LANG['actions'] = "Actions";//1
 $LANG['add_biller'] = "Add Biller";//1
 $LANG['add_customer'] = "Add Customer";//1

@@ -18,7 +18,6 @@ $wording_for_disabledField ="Desactivado";//1
 #New lang file style $lang followed by the word or description - not grouped by page
 $LANG['about'] = "Acerca de";//1
 $LANG['account_info'] = "Informaci&oacute;n de la Cuenta";//1
-$LANG['action'] = "Accion";//0
 $LANG['actions'] = "Acciones";//1
 $LANG['add_biller'] = "A&ntilde;adir Facturador";//1
 $LANG['add_customer'] = "A&ntilde;adir Cliente";//1

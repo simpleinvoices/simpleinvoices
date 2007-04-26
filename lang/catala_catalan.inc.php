@@ -2,7 +2,8 @@
 
 /*
 @author: 
-@last_edited: 
+@last_edited: 2007-04-26
+@license: GPL v2 or above
 */
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
@@ -22,6 +23,7 @@ $LANG['actions'] = "Accions";//1
 $LANG['add_biller'] = "Add biller";//0
 $LANG['add_customer'] = "Add Customer";//0
 $LANG['add_invoice_preference'] = "Add Invoice Preference";//0
+$LANG['add_new_biller'] = "Add New Biller";//0
 $LANG['add_new_invoice'] = "Add New Invoice";//0
 $LANG['add_new_payment_type'] = "Add New payment Type";//0
 $LANG['add_new_preference'] = "Add New Invoice Preference";//0
@@ -82,6 +84,7 @@ $LANG['database_upgrade_manager'] = "Database Upgrade Manager";//0
 $LANG['date'] = "data";//1
 $LANG['date_created'] = "Date created";//0
 $LANG['date_formatted'] = "Date (YYYY-MM-DD)";//0
+$LANG['date_upper'] = "Data";//1
 $LANG['days'] = "dies";//1
 $LANG['debtors'] = "Debtors";//0
 $LANG['debtors_by_amount_owed'] = "Debtors by amount owed";//0
@@ -216,10 +219,42 @@ $LANG['sales'] = "Sales";//0
 $LANG['sales_by_customers'] = "Sales by customers";//0
 $LANG['sanity_check'] = "Sanity check of invoices";//1
 $LANG['save'] = "Salvar";//1
+$LANG['save_biller'] = "Save Biller";//0
+$LANG['save_biller_success'] = "Biller successfully saved, <br> you will be redirected to the Manage Billers page";//0
+$LANG['save_biller_failure'] = "Something went wrong, please try saving the biller again<br>";//0
 $LANG['save_custom_field'] = "Save Custom Field";//0
+$LANG['save_custom_field_success'] = "Custom field successfully saved, <br> you will be redirected back to the Manage Custom Fields";//0
+$LANG['save_custom_field_failure'] = "Something went wrong, please try editing the custom field again<br>";//0
+$LANG['save_customer'] = "Save Customer";//0
+$LANG['save_customer_failure'] = "Something went wrong, please try saving the customer again";//0
+$LANG['save_customer_success'] = "Customer successfully saved,<br> you will be redirected back to the Manage Customers page";//0
+$LANG['save_defaults'] = "Save Defaults";//0
+$LANG['save_defaults_biller_success'] = "System defaults: Default biller successfully updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_customer_success'] = "System defaults: Default customer successfully updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_line_items_success'] = "System defaults: Number of line items successfully update,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_payment_type_success'] = "System defaults: Default payment_type updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_preference_success'] = "System defaults: Default invoice preference updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_tax_success'] = "System defaults: Default tax updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_template_success'] = "System defaults: Default invoice template successfully update,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
+$LANG['save_invoice'] = "Save Invoice";//0
+$LANG['save_invoice_failure'] = "Something went wrong, please try saving the invoice again";//0
+$LANG['save_invoice_items_success'] = "Processing invoice items<br> you will be redirected back to the Quick View of this invoice";//0
+$LANG['save_invoice_success'] = "Processing invoice, <br> you will be redirected Quick View of this invoice";//0
+$LANG['save_payment_invoice_success'] = "Payment successfully processed, <br> you will be redirected to the Manage Invoices page";//0
+$LANG['save_payment_failure'] = "Something went wrong, please try saving the payment again";//0
+$LANG['save_payment_success'] = "Payment successfully processed,<br> you will be redirected back to the Manage Payments page";//0
 $LANG['save_payment_type'] = "Save Payment Type";//0
+$LANG['save_payment_type_failure'] = "Something went wrong, please try saving the payment type again";//0
+$LANG['save_payment_type_success'] = "Payment Type successfully saved, <br> you will be redirected back to the Manage Payment Types";//0
+$LANG['save_prefence_failure'] = "Something went wrong, please try saving the invoice preference again";//0
+$LANG['save_prefence_success'] = "Invoice preference successfully saved,<br> you will be redirected to Manage Preferences page";//0
 $LANG['save_product'] = "Save Product";//0
+$LANG['save_product_failure'] = "Something went wrong, please try saving the product again";//0
+$LANG['save_product_success'] = "Product successfully saved, <br> you will be redirected to the Manage Products page";//0
 $LANG['save_tax_rate'] = "Save Tax Rate";//0
+$LANG['save_tax_rate_failure'] = "Something went wrong, please try adding the tax rate again";//0
+$LANG['save_tax_rate_success'] = "Tax rate successfully saved, <br> you will be redirected to the Manage Tax Rates page";//0
 $LANG['select_invoice'] = "Please select an invoice";//0
 $LANG['show_details'] = "Show details";//0
 $LANG['state'] = "Prov&iacute;//1ncia";//1
@@ -294,7 +329,6 @@ $LANG['stats'] =" Estad&iacute;//1stiques";//1
 $LANG['stats_debtor'] ="Grans Deudors";//1
 $LANG['stats_customer'] ="Millors Clients - per total facturat";//1
 $LANG['stats_biller'] ="Millor Facturador - per total facturat";//1
-
 
 /* New stuff */
 $LANG['no_products'] = "There are no products in the database, please add one";//0
