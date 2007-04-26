@@ -11,9 +11,8 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
 
 #all
 $title = "Facturas Simples";//1
-$wording_for_enabledField ="Activo";//1
-$wording_for_disabledField ="Desactivado";//1
-
+$LANG['enabled'] = "Activo";//1
+$LANG['disabled'] = "Desactivado";//1
 
 #New lang file style $lang followed by the word or description - not grouped by page
 $LANG['about'] = "About";//0

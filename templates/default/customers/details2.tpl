@@ -30,7 +30,7 @@ $display_block_view = <<<EOD
 		<td>{$invoice_paid_Field_formatted}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG['attention_short']} <a href="documentation/info_pages/customer_contact.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$LANG['attention_short']} <a href="./src/documentation/info_pages/customer_contact.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td colspan="2">{$customer[c_attention]}</td>
 		<td colspan=2></td>
@@ -42,7 +42,7 @@ $display_block_view = <<<EOD
 		<td>{$customer[c_street_address]}</td>
 	</tr>
 	<tr>
-		<td class="details_screen" NOWRAP>{$LANG['street2']} <a href="./documentation/info_pages/street2.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen" NOWRAP>{$LANG['street2']} <a href="./src/documentation/info_pages/street2.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>{$customer[c_street_address2]}</td>
 	</tr>
@@ -69,7 +69,7 @@ $display_block_view = <<<EOD
 		<td>{$customer[c_fax]}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$wording_for_enabledField}</td>
+		<td class="details_screen">{$LANG.enabled}</td>
 		<td>{$wording_for_enabled}</td>
 		<td class="details_screen">{$LANG['email']}</td>
 		<td>{$customer[c_email]}</td>
@@ -87,22 +87,22 @@ $display_block_view = <<<EOD
 		<p>
 			<table>
 				<tr>
-					<td class="details_screen">{$customFieldLabel['1']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+					<td class="details_screen">{$customFieldLabel['1']} <a href="./src/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 					</td>
 					<td>{$customer[c_custom_field1]}</td>
 				</tr>
 				<tr>
-					<td class="details_screen">{$customFieldLabel['2']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+					<td class="details_screen">{$customFieldLabel['2']} <a href="./src/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 					</td>
 					<td>{$customer[c_custom_field2]}</td>
 				</tr>
 				<tr>
-					<td class="details_screen">{$customFieldLabel['3']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+					<td class="details_screen">{$customFieldLabel['3']} <a href="./src/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 					</td>
 					<td>{$customer[c_custom_field3]}</td>
 				</tr>
 				<tr>
-					<td class="details_screen">{$customFieldLabel['4']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+					<td class="details_screen">{$customFieldLabel['4']} <a href="./src/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 					</td>
 					<td>{$customer[c_custom_field4]}</td>
 				</tr>
@@ -138,8 +138,8 @@ EOD;
 $display_block_enabled = <<<EOD
 <select name="c_enabled">
 	<option value="$c_enabledField" selected style="font-weight: bold">$wording_for_enabled</option>
-	<option value="1">$wording_for_enabledField</option>
-	<option value="0">$wording_for_disabledField</option>
+	<option value="1">$LANG.enabled</option>
+	<option value="0">$LANG.disabled</option>
 </select>
 EOD;
 
@@ -157,7 +157,7 @@ $display_block_edit = <<<EOD
 		<td><input type="text" name="c_name" value="{$customer[c_name]}" size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG['attention_short']} <a href="documentation/info_pages/customer_contact.html" rel="gb_page_center[450, 450]" ><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$LANG['attention_short']} <a href="./src/documentation/info_pages/customer_contact.html" rel="gb_page_center[450, 450]" ><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td><input type="text" name="c_attention" value="{$customer[c_attention]}" size="50" /></td>
 	</tr>
@@ -166,7 +166,7 @@ $display_block_edit = <<<EOD
 		<td><input type="text" name="c_street_address" value="{$customer[c_street_address]}" size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG['street2']} <a href="./documentation/info_pages/street2.html" rel="gb_page_center[450, 450]" ><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$LANG['street2']} <a href="./src/documentation/info_pages/street2.html" rel="gb_page_center[450, 450]" ><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td><input type="text" name="c_street_address2" value="{$customer[c_street_address2]}" size="50" /></td>
 	</tr>
@@ -204,25 +204,25 @@ $display_block_edit = <<<EOD
 			<input type="text" name="c_email" value="{$customer[c_email]}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel['1']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$customFieldLabel['1']} <a href="./src/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>
 			<input type="text" name="c_custom_field1" value="{$customer[c_custom_field1]}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel['2']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$customFieldLabel['2']} <a href="./src/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>
 			<input type="text" name="c_custom_field2" value="{$customer[c_custom_field2]}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel['3']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$customFieldLabel['3']} <a href="./src/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>
 			<input type="text" name="c_custom_field3" value="{$customer[c_custom_field3]}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel['4']} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$customFieldLabel['4']} <a href="./src/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>
 			<input type="text" name="c_custom_field4" value="{$customer[c_custom_field4]}" size="50" /></td

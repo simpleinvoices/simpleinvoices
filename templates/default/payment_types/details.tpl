@@ -38,7 +38,7 @@
 		<td>{$paymentType.pt_id}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.description} <a href="./documentation/info_pages/required_field.html" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png"></img></a></td>
+		<td class="details_screen">{$LANG.description} <a href="./src/documentation/info_pages/required_field.html" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png"></img></a></td>
 		<td><input type="text" name="pt_description" value="{$paymentType.pt_description}"
 		 size="50" /></td>
 	</tr>
@@ -48,8 +48,8 @@
 		{*displayblock enabled*}
 		<select name="pt_enabled">
 			<option value="{$paymentType.pt_enabled}" selected style="font-weight: bold">{$wording_for_enabled}</option>
-			<option value="1">{$wording_for_enabledField}</option>
-			<option value="0">{$wording_for_disabledField}</option>
+			<option value="1">{$LANG.enabled}</option>
+			<option value="0">{$LANG.disabled}</option>
 		</select>
 		{*/displayblock enabled*}
 		

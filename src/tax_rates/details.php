@@ -19,7 +19,7 @@ $tax_rate_id = $_GET['submit'];
 
 
 $tax = getTaxRate($tax_rate_id);
-$wording_for_enabled = $tax['tax_enabled'] == 1 ? $wording_for_enabledField:$wording_for_disabledField;
+$wording_for_enabled = $tax['tax_enabled'] == 1 ? $LANG['enabled']:$LANG['disabled'];
 
 
 
@@ -43,7 +43,7 @@ if ($_GET['action'] === 'view') {
 		<td class="details_screen">{$LANG['tax_percentage']}</td><td>$tax[tax_percentage]</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$wording_for_enabledField}</td><td>{$wording_for_enabled}</td>
+		<td class="details_screen">{$LANG['enabled']}</td><td>{$wording_for_enabled}</td>
 	</tr>
 	</table>
 	<hr></hr>
@@ -62,8 +62,8 @@ else if ($_GET['action'] === 'edit') {
 $display_block_enabled = <<<EOD
 <select name="tax_enabled">
 <option value="$tax[tax_enabled]" selected style="font-weight: bold">$wording_for_enabled</option>
-<option value="1">$wording_for_enabledField</option>
-<option value="0">$wording_for_disabledField</option>
+<option value="1">{$LANG['enabled']}</option>
+<option value="0">{$LANG['disabled']}</option>
 </select>
 EOD;
 
@@ -86,7 +86,7 @@ $display_block = <<<EOD
 		<td><input type="text" name="tax_percentage" value="{$tax['tax_percentage']}" size="10" />%</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$wording_for_enabledField} </td><td>{$display_block_enabled}</td>
+		<td class="details_screen">{$LANG['enabled']} </td><td>{$display_block_enabled}</td>
 	</tr>
 	</table>
 	<hr></hr>

@@ -47,9 +47,9 @@ while ($prod = mysql_fetch_array($result)) {
 	$prod_unit_priceField = $Array['prod_unit_price'];
 	*/
 	if ($prod['prod_enabled'] == 1) {
-		$wording_for_enabled = $wording_for_enabledField;
+		$wording_for_enabled = $LANG['enabled'];
 	} else {
-		$wording_for_enabled = $wording_for_disabledField;
+		$wording_for_enabled = $LANG['disabled'];
 	}
 
 	$display_block .= <<<EOD
@@ -62,7 +62,7 @@ while ($prod = mysql_fetch_array($result)) {
 	<td class="index_table">{$prod['prod_id']}</td>
 	<td class="index_table">{$prod['prod_description']}</td>
 	<td class="index_table">{$prod['prod_unit_price']}</td>
-	<td class="index_table">{$wording_for_enabled}</td>
+	<td class="index_table">{$LANG['enabled']}</td>
 	</tr>
 
 EOD;

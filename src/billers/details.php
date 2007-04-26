@@ -10,7 +10,7 @@ $biller_id = $_GET['submit'];
 
 
 $biller = getBiller($biller_id);
-$biller['wording_for_enabled'] = $biller['b_enabled']==1?$wording_for_enabledField:$wording_for_disabledField;
+$biller['wording_for_enabled'] = $biller['b_enabled']==1?$LANG['enabled']:$LANG['disabled'];
 
 
 /*drop down list code for invoice logo */

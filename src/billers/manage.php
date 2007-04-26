@@ -16,9 +16,9 @@ if (mysql_num_rows($result) != 0) {
 	while ($biller = mysql_fetch_array($result)) {
 	
         if ($biller['b_enabled'] == 1) {
-                $biller['b_enabled'] = $wording_for_enabledField;
+                $biller['b_enabled'] = $LANG['enabled'];
         } else {
-        	$biller['b_enabled'] = $wording_for_disabledField;
+        	$biller['b_enabled'] = $LANG['disabled'];
         }
 		$billers[$count] = $biller;
 		$count++;

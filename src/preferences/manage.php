@@ -32,7 +32,7 @@ checkLogin();
 	<th class="noFilter sortable">{$LANG['actions']}</th>
 	<th class="index_table sortable">{$LANG['preference_id']}</th>
 	<th class="index_table sortable">{$LANG['description']}</th>
-	<th class="noFilter index_table sortable">{$wording_for_enabledField}</th>
+	<th class="noFilter index_table sortable">{$LANG['enabled']}</th>
 	</tr>
 	</thead>
 
@@ -54,9 +54,9 @@ EOD;
   		$pref_enabledField = $Array_preferences['pref_enabled'];
 		*/
   		if ($pref['pref_enabled'] == 1) {
-  			$wording_for_enabled = $wording_for_enabledField;
+  			$wording_for_enabled = $LANG['enabled'];
   		} else {
-  			$wording_for_enabled = $wording_for_disabledField;
+  			$wording_for_enabled = $LANG['disabled'];
   		}
 
   		$display_block .= <<<EOD

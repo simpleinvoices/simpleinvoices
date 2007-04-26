@@ -14,9 +14,9 @@ $pts = null;
 
 for ($i=0;$pt = mysql_fetch_array($result);$i++) {
 	if ($pt['pt_enabled'] == 1) {
-		$$pt['pt_enabled'] = $wording_for_enabledField;
+		$$pt['pt_enabled'] = $LANG['enabled'];
 	} else {
-		$$pt['pt_enabled'] = $wording_for_disabledField;
+		$$pt['pt_enabled'] = $LANG['disabled'];
 	}
 	$pts[$i]=$pt;
 }

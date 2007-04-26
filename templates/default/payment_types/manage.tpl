@@ -16,7 +16,7 @@
 			<th class="noFilter sortable">{$LANG.actions}</th>
 			<th class="index_table sortable">{$LANG.payment_type_id}</th>
 			<th class="index_table sortable">{$LANG.description}</th>
-			<th class="noFilter index_table sortable">{$wording_for_enabledField}</th>
+			<th class="noFilter index_table sortable">{$LANG.enabled}</th>
 		</tr>
 	</thead>
 	{foreach from=$pts item=pt}

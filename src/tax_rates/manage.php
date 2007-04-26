@@ -35,7 +35,7 @@ if (mysql_num_rows($result) == 0) {
 	<th class="index_table sortable">{$LANG['tax_id']}</th>
 	<th class="index_table sortable">{$LANG['tax_description']}</th>
 	<th class="index_table sortable">{$LANG['tax_percentage']}</th>
-	<th class="noFilter index_table sortable">{$wording_for_enabledField}</th>
+	<th class="noFilter index_table sortable">{$LANG['enabled']}</th>
 </tr>
 </thead>
 EOD;
@@ -48,9 +48,9 @@ EOD;
 		$tax_enabledField = $Array['tax_enabled'];
 		*/
 		if ($tax['tax_enabled'] == 1) {
-			$wording_for_enabled = $wording_for_enabledField;
+			$wording_for_enabled = $LANG['enabled'];
 		} else {
-			$wording_for_enabled = $wording_for_disabledField;
+			$wording_for_enabled = $LANG['disabled'];
 		}
 
 		$display_block .= <<<EOD

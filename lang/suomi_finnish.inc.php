@@ -2,7 +2,7 @@
 
 /*
 @author: 
-@last_edited: 
+@last_edited: 2007-04-26
 */
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
@@ -11,9 +11,8 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
 
 #all
 $title = "Simple Invoices";//1
-$wording_for_enabledField ="K&auml;yt&ouml;//1ss&auml;";//1
-$wording_for_disabledField ="Ei k&auml;yt&ouml;//1ss&auml;";//1
-
+$LANG['enabled'] = "K&auml;yt&ouml;//1ss&auml;";//1
+$LANG['disabled'] = "Ei k&auml;yt&ouml;//1ss&auml;";//1
 
 #New lang file style $lang followed by the word or description - not grouped by page
 $LANG['about'] = "About";//0

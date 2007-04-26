@@ -23,7 +23,7 @@
 
 <table align=center>
 	<tr>
-		<td class="details_screen">{$LANG.product_description} <a href="./documentation/info_pages/required_field.html" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png"></img></a></td>
+		<td class="details_screen">{$LANG.product_description} <a href="./src/documentation/info_pages/required_field.html" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png"></img></a></td>
 		<td><input type=text name="prod_description" size=50></td>
 	</tr>
 	<tr>
@@ -31,19 +31,19 @@
 		<td><input type=text name="prod_unit_price" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.1} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel.1} <a href="./src/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="prod_custom_field1" size=50></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.2} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel.2} <a href="./src/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="prod_custom_field2" size=50></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.3} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel.3} <a href="./src/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="prod_custom_field3" size=50></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.4} <a href="./documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel.4} <a href="./src/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="prod_custom_field4" size=50></td>
 	</tr>
 	<tr>

@@ -63,35 +63,35 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.1} <a
-			href="./documentation/info_pages/custom_fields.html"
+			href="./src/documentation/info_pages/custom_fields.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
 		<td>{$biller.b_custom_field1}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.2} <a
-			href="./documentation/info_pages/custom_fields.html"
+			href="./src/documentation/info_pages/custom_fields.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
 		<td>{$biller.b_custom_field2}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.3} <a
-			href="./documentation/info_pages/custom_fields.html"
+			href="./src/documentation/info_pages/custom_fields.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
 		<td>{$biller.b_custom_field3}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.4} <a
-			href="./documentation/info_pages/custom_fields.html"
+			href="./src/documentation/info_pages/custom_fields.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
 		<td>{$biller.b_custom_field4}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.logo_file} <a
-			href="documentation/info_pages/insert_biller_text.html"
+			href="./src/documentation/info_pages/insert_biller_text.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
 		<td>{$biller.b_co_logo}</td>
@@ -128,7 +128,7 @@
 		<td>{$biller.b_id}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.biller_name} <a href="./documentation/info_pages/required_field.html" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png"></img></a></td>
+		<td class="details_screen">{$LANG.biller_name} <a href="./src/documentation/info_pages/required_field.html" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png"></img></a></td>
 		<td><input type=text name="name" value="{$biller.name}"
 			size=50 /></td>
 	</tr>
@@ -139,7 +139,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street2} <a
-			href="./documentation/info_pages/street2.html"
+			href="./src/documentation/info_pages/street2.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="b_street_address2"
@@ -182,7 +182,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.1} <a
-			href="./documentation/info_pages/custom_fields.html"
+			href="./src/documentation/info_pages/custom_fields.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="b_custom_field1"
@@ -190,7 +190,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.2} <a
-			href="./documentation/info_pages/custom_fields.html"
+			href="./src/documentation/info_pages/custom_fields.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="b_custom_field2"
@@ -198,7 +198,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.3} <a
-			href="./documentation/info_pages/custom_fields.html"
+			href="./src/documentation/info_pages/custom_fields.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="b_custom_field3"
@@ -206,7 +206,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.4} <a
-			href="./documentation/info_pages/custom_fields.html"
+			href="./src/documentation/info_pages/custom_fields.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="b_custom_field4"
@@ -216,7 +216,7 @@
 		<td class="details_screen">
 		{$LANG.logo_file}
 		<a
-			href="documentation/info_pages/insert_biller_text.html"
+			href="./src/documentation/info_pages/insert_biller_text.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
 		<td>{* Logo Part *} <select name="b_co_logo">

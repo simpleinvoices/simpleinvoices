@@ -13,8 +13,8 @@ jsEnd();
 #do the product enabled/disblaed drop down
 $display_block_enabled = <<<EOD
 <select name="tax_enabled">
-<option value="1" selected>$wording_for_enabledField</option>
-<option value="0">$wording_for_disabledField</option>
+<option value="1" selected>{$LANG['enabled']}</option>
+<option value="0">{$LANG['disabled']}</option>
 </select>
 EOD;
 
@@ -38,7 +38,7 @@ echo <<<EOD
 		<td>{$LANG['ie_10_for_10']}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$wording_for_enabledField}</td>
+		<td class="details_screen">{$LANG['enabled']}</td>
 		<td>{$display_block_enabled}</td><td></td>
 	</tr>
 	

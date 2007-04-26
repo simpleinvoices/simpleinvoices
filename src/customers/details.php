@@ -18,7 +18,7 @@ $customer_id = $_GET['submit'];
 
 $customer = getCustomer($customer_id);
 
-$wording_for_enabled = $customer['c_enabled'] == 1 ?$wording_for_enabledField:$wording_for_disabledField;
+$wording_for_enabled = $customer['c_enabled'] == 1 ?$LANG['enabled']:$LANG['disabled'];
 
 
 $invoice_total_Field = calc_customer_total($customer['c_id']);

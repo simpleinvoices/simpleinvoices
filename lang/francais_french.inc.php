@@ -2,7 +2,7 @@
 
 /*
 @author: Justin Kelly
-@last edited: 2007-04-07
+@last edited: 2007-04-26
 */
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
@@ -11,8 +11,8 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
 
 #all
 $title = "Simple Invoices (factures &agrave; l'aise)";//1
-$wording_for_ActifField ="Actif";//1
-$wording_for_InactifField ="Inactif";//1
+$LANG['enabled'] = "Actif";//1
+$LANG['disabled'] = "Inactif";//1
 
 
 #New lang file style $lang followed by the word or description - not grouped by page
@@ -60,10 +60,10 @@ $LANG['consulting_style'] = "texte";//1
 $LANG['country'] = "Pays";//1
 $LANG['credits'] = "Cr&eacute;dits";//1
 $LANG['currency_sign'] = "Signe monnaie";//1
-$LANG['custom_field1'] = "Custom field 1";//0
-$LANG['custom_field2'] = "Custom field 2";//0
-$LANG['custom_field3'] = "Custom field 3";//0
-$LANG['custom_field4'] = "Custom field 4";//0
+$LANG['custom_field1'] = "Champ facultatif 1";//1
+$LANG['custom_field2'] = "Champ facultatif 2";//1
+$LANG['custom_field3'] = "Champ facultatif 3";//1
+$LANG['custom_field4'] = "Champ facultatif 4";//1
 $LANG['custom_field'] = "Option";//1
 $LANG['custom_field_db_field_name'] = "Nom du champ de la base de donn&eacute;es";//1
 $LANG['custom_fields'] = "Champs optionnels";//1
@@ -174,7 +174,7 @@ $LANG['no_tax_rates'] = "Il n'y a pas de % de TVA : veuillez svp en ajouter un";
 $LANG['note'] = "Note";//1
 $LANG['notes'] = "Notes";//1
 $LANG['notes_opt'] = "Notes (optionnel)";//1
-$LANG['number_short'] = "NÂ° 2007-";//1
+$LANG['number_short'] = "N&deg; 2007-";//1
 $LANG['owing'] = "D&ucirc;";//1
 $LANG['optional'] = "optionnel";//1
 $LANG['options'] = "options";//1
@@ -280,10 +280,10 @@ $LANG['faqs_type'] ="Quels sont les diff&eacute;rents types de factures&nbsp;?";
 
 $LANG['create_invoice'] ="Cr&eacute;er une facture";//1
 
-$LANG['manage_existing_invoice'] ="GÃ©rer les factures";//1
+$LANG['manage_existing_invoice'] ="G&eacute;rer les factures";//1
 $LANG['manage_invoices'] ="Factures";//1
 
-$LANG['manage_data'] ="GÃ©rer les donn&eacute;es";//1
+$LANG['manage_data'] ="G&eacute;rer les donn&eacute;es";//1
 $LANG['insert_customer'] = "Ajouter un client";//1
 $LANG['insert_biller'] = "Ajouter un vendeur";//1
 $LANG['insert_product'] = "Ajouter un produit";//1
@@ -296,17 +296,17 @@ $LANG['stats_customer'] ="+ gros client - par montant factur&eacute;";//1
 $LANG['stats_biller'] ="+ gros vendeur - par montant factur&eacute;";//1
 
 /* New stuff */
-$LANG['no_products'] = "There are no products in the database, please add one";//0
-$LANG['no_billers'] = "There are no billers in the database, please add one";//0
-$LANG['no_customers'] = "There are no customers in the database, please add one";//0
-$LANG['no_preferences'] = "There are no invoice preferences in the database, please add one";//0
+$LANG['no_products'] = "Il n'y a pas de produits dans la base, veuillez svp en ajouter un";//1
+$LANG['no_billers'] = "Il n'y a pas de vendeurs dans la base, veuillez svp en ajouter un";//1
+$LANG['no_customers'] = "Il n'y a pas de clients dans la base, veuillez svp en ajouter un";//1
+$LANG['no_preferences'] = "Il n'y a pas de préférences concernant les factures dans la base, veuillez svp en ajouter une";//1
 $LANG['default_number_items'] = "Default number of line items:";//0
 $LANG['default_inv_template'] = "Default invoice template ";//0
 $LANG['no_defaults'] = "There are no defaults";//0
-$LANG['no_payments'] = "There are no payments in the database";//0
-$LANG['payment_id'] = "Payment ID";//0
+$LANG['no_payments'] = "Il n'y a pas de paiements inscrits dans la base";//1
+$LANG['payment_id'] = "Paiement ID";//1
 $LANG['payments_filtered'] = "Payments filtered by Invoice ID";//0
 $LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
 $LANG['payments_filtered_customer'] = "Payments filtered by Customer ID";//0
-$LANG['no_tax_rates'] = "There are no tax rates in the database, please add one";//0
+$LANG['no_tax_rates'] = "Il n'y a pas de taux dans la base, veuillez svp en ajouter un";//1
 ?>

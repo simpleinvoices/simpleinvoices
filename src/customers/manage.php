@@ -15,9 +15,9 @@ for($i=0;$customer = mysql_fetch_array($result);$i++) {
 	
 		
 		if ($customer['c_enabled'] == 1) {
-			$customer['c_enabled'] = $wording_for_enabledField;
+			$customer['c_enabled'] = $LANG['enabled'];
 		} else {
-			$customer['c_enabled'] = $wording_for_disabledField;
+			$customer['c_enabled'] = $LANG['disabled'];
 		}
 
 		#invoice total calc - start
