@@ -14,7 +14,6 @@
  -- remove old $m- etc variables - done in english - do to all
  -- move the $lang_ to arrays ie $LANG['word'] - done in english
  - replce checkLogin with CheckBrowse - check login name assumes something to do with login when its not - not urgent
- - reports: queryerror.php file is missing - download phpreports and check for it
  - sql queries: rename all the old crappy fields from b_name to name etc..
  -- need to write sql queries for all and change all relevant code that references these fields
  - remove all reference to $wording_for_enabledFiedl and change to $LANG.enabled or $LANG.disabled

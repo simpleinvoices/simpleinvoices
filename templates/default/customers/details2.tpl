@@ -232,7 +232,7 @@ $display_block_edit = <<<EOD
 		<td><textarea name="c_notes" rows="8" cols="50">{$customer[c_notes]}</textarea></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$wording_for_enabledField}</td>
+		<td class="details_screen">{$LANG['enabled']}</td>
 		<td>{$display_block_enabled}</td>
 	</tr>
 </table>
