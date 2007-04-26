@@ -1,7 +1,7 @@
 <?php
 
 /*
-@author: 
+@author:
 @last_edited: 2007-04-26
 @license: GPL v2 or above
 */
@@ -174,7 +174,7 @@ $LANG['no_invoices'] = "There are no invoices in the database";//0
 $LANG['no_payment_types'] = "Sorry, no payment types available, please insert one";//0
 $LANG['no_preferences'] = "There are no invoice preferences in the database, please add one";//0
 $LANG['no_tax_rates'] = "There are no tax rates in the database, please add one";//0
-$LANG['note'] = "Nota";//1 
+$LANG['note'] = "Nota";//1
 $LANG['notes'] = "Notes";//0
 $LANG['notes_opt'] = "Notes (opcional)";//1
 $LANG['number_short'] = "No.";//1

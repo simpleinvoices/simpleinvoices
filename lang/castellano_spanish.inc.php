@@ -1,8 +1,8 @@
 <?php
 
 /*
-@author: 
-@last_edited: 
+@author:
+@last_edited:
 */
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
@@ -146,7 +146,7 @@ $LANG['invoice_wording'] = "Comentario de Factura";//1
 $LANG['invoices'] = "Facturas";//1
 $LANG['item'] = "Item";//1
 $LANG['itemised'] = "Detallado";//1
-$LANG['itemised_style'] = "Estilo Detallado";//1 
+$LANG['itemised_style'] = "Estilo Detallado";//1
 $LANG['license'] = "Licencia";//1
 $LANG['login'] = "Log In";//1
 $LANG['logo_file'] = "Archivo de Log";//1
