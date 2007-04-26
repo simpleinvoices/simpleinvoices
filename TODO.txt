@@ -19,6 +19,7 @@
  - reports: queryerror.php file is missing - download phpreports and check for it
  - sql queries: rename all the old crappy fields from b_name to name etc..
  -- need to write sql queries for all and change all relevant code that references these fields
+
 -done
  - sql patch: reset default invoices template to default - Done
  - sql patch: change custom fields to 255 lenght - up from the current 50 - Done
@@ -27,7 +28,7 @@
  - sqlpatcehs - make sure this works - the latest patches dotn seem happy - done
  - css: make calendar popup css work as before - done
  - Replace $LANG strings with array - done
- - Start page in IE goign crazy again - check ie hacks file is loaded - done - needs checking again
+ - Start page in IE goign crazy again - check ie hacks file is loaded - done 
  
 
 

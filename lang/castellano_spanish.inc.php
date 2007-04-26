@@ -23,6 +23,7 @@ $LANG['actions'] = "Acciones";//1
 $LANG['add_biller'] = "A&ntilde;adir Facturador";//1
 $LANG['add_customer'] = "A&ntilde;adir Cliente";//1
 $LANG['add_invoice_preference'] = "A&ntilde;adir Preferencias de Factura";//1
+$LANG['add_new_biller'] = "Add New Biller";//0
 $LANG['add_new_invoice'] = "A&ntilde;adir Nueva Factura";//1
 $LANG['add_new_payment_type'] = "A&ntilde;adir Nuevo Tipo de Pago";//1
 $LANG['add_new_preference'] = "A&ntilde;adir Preferencias de Nueva Factura";//1
@@ -83,6 +84,7 @@ $LANG['database_upgrade_manager'] = "Gestor de Actualizaciones de Base de Datos"
 $LANG['date'] = "Fecha";//1
 $LANG['date_created'] = "Fecha de Creaci&oacute;n";//1
 $LANG['date_formatted'] = "Fecha (YYYY-MM-DD)";//1
+$LANG['date_upper'] = "Fecha";//1
 $LANG['days'] = "D&iacute;as";//1
 $LANG['debtors'] = "Deudores";//1
 $LANG['debtors_by_amount_owed'] = "Deudores por Monto de Deuda";//1
@@ -217,10 +219,42 @@ $LANG['sales'] = "Ventas";//1
 $LANG['sales_by_customers'] = "Ventas por Cliente";//1
 $LANG['sanity_check'] = "Limpieza BD de Facturas";//1
 $LANG['save'] = "Grabar";//1
+$LANG['save_biller'] = "Save Biller";//0
+$LANG['save_biller_success'] = "Biller successfully saved, <br> you will be redirected to the Manage Billers page";//0
+$LANG['save_biller_failure'] = "Something went wrong, please try saving the biller again<br>";//0
 $LANG['save_custom_field'] = "Grabar Campos Personalizables";//1
+$LANG['save_custom_field_success'] = "Custom field successfully saved, <br> you will be redirected back to the Manage Custom Fields";//0
+$LANG['save_custom_field_failure'] = "Something went wrong, please try editing the custom field again<br>";//0
+$LANG['save_customer'] = "Save Customer";//0
+$LANG['save_customer_failure'] = "Something went wrong, please try saving the customer again";//0
+$LANG['save_customer_success'] = "Customer successfully saved,<br> you will be redirected back to the Manage Customers page";//0
+$LANG['save_defaults'] = "Save Defaults";//0
+$LANG['save_defaults_biller_success'] = "System defaults: Default biller successfully updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_customer_success'] = "System defaults: Default customer successfully updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_line_items_success'] = "System defaults: Number of line items successfully update,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_payment_type_success'] = "System defaults: Default payment_type updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_preference_success'] = "System defaults: Default invoice preference updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_tax_success'] = "System defaults: Default tax updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_template_success'] = "System defaults: Default invoice template successfully update,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
+$LANG['save_invoice'] = "Save Invoice";//0
+$LANG['save_invoice_failure'] = "Something went wrong, please try saving the invoice again";//0
+$LANG['save_invoice_items_success'] = "Processing invoice items<br> you will be redirected back to the Quick View of this invoice";//0
+$LANG['save_invoice_success'] = "Processing invoice, <br> you will be redirected Quick View of this invoice";//0
+$LANG['save_payment_invoice_success'] = "Payment successfully processed, <br> you will be redirected to the Manage Invoices page";//0
+$LANG['save_payment_failure'] = "Something went wrong, please try saving the payment again";//0
+$LANG['save_payment_success'] = "Payment successfully processed,<br> you will be redirected back to the Manage Payments page";//0
 $LANG['save_payment_type'] = "Grabar Tipo de Pago";//1
+$LANG['save_payment_type_failure'] = "Something went wrong, please try saving the payment type again";//0
+$LANG['save_payment_type_success'] = "Payment Type successfully saved, <br> you will be redirected back to the Manage Payment Types";//0
+$LANG['save_prefence_failure'] = "Something went wrong, please try saving the invoice preference again";//0
+$LANG['save_prefence_success'] = "Invoice preference successfully saved,<br> you will be redirected to Manage Preferences page";//0
 $LANG['save_product'] = "Grabar Producto";//1
+$LANG['save_product_failure'] = "Something went wrong, please try saving the product again";//0
+$LANG['save_product_success'] = "Product successfully saved, <br> you will be redirected to the Manage Products page";//0
 $LANG['save_tax_rate'] = "Grabar Porcentaje de Impuesto";//1
+$LANG['save_tax_rate_failure'] = "Something went wrong, please try adding the tax rate again";//0
+$LANG['save_tax_rate_success'] = "Tax rate successfully saved, <br> you will be redirected to the Manage Tax Rates page";//0
 $LANG['select_invoice'] = "Por favor seleccione una Factura";//1
 $LANG['show_details'] = "Mostrar detalles";//1
 $LANG['state'] = "Estado";//1
@@ -296,143 +330,20 @@ $LANG['stats_debtor'] ="El mayor deudor";//1
 $LANG['stats_customer'] ="Mayor Cliente - por cantidad facturada";//1
 $LANG['stats_biller'] ="Mayor Facturador - por cantidad facturada";//1
 
-/* Dont translate anything below here */
-
-#Gestionar Facturas
-$mi_page_title'] = " - Gestionar Facturas";//1
-$mi_page_header'] = "Gestionar Facturas";//1
-$mi_no_invoices'] = "No hay facturas en la base de datos";//1
-$mi_table_action'] = "Acci&oacute;n";//1
-$mi_table_id'] = "ID";//1
-$mi_table_biller'] = "Facturador";//1
-$mi_table_customer'] = "Cliente";//1
-$mi_table_total'] = "Total";//1
-$mi_table_paid'] = "Pagado";//1
-$mi_table_owing'] = "Pendiente";//1
-$mi_table_type'] = "Tipo";//1
-$mi_table_date'] = "Fecha de creaci&oacute;n";//1
-$mi_actions_quick_view'] = "Ver";//1
-$mi_actions_quick_view_tooltip'] = "Vista r&aacue;pida de";//1
-$mi_actions_edit_view'] = "Editar";//1
-$mi_actions_edit_view_toolkit'] = "Editar";//1
-$mi_actions_print_preview_tooltip'] = "Imprimir Vista Previa de";//1
-$mi_actions_export_tooltip'] = "Exportar";//1
-$mi_actions_export_pdf_tooltip'] = "En formato PDF";//1
-$mi_actions_format_tooltip'] = "Formato";//1
-$mi_actions_export_xls_tooltip'] = "A formato Excel";//1
-$mi_actions_export_doc_tooltip'] = "A formato Word";//1
-$mi_actions_process_payment'] = "Procesar pago por";//1
-$mi_action_invoice_total'] = "A&ntilde;adir nueva Factura - Estilo Totalizado";//1
-$mi_action_invoice_itemised'] = "A&ntilde;adir nueva Factura - Estilo Detallado";//1
-$mi_action_invoice_consulting'] = "A&ntilde;adir nueva Factura - Estilo Anal&iacute;tico";//1
-
-#Gestionar Products
-$mp_page_title'] = " - Gestionar Productos";//1
-$mp_page_header'] = "Gestionar Productos";//1
-$mp_no_invoices'] = "No hay productos en la base de datos, por favor introduzca uno";//1
-$mp_table_action'] = "Acci&oacute;n";//1
-$mp_table_product_id'] = "ID de Producto";//1
-$mp_table_product_desc'] = "Descripci&oacute;n";//1
-$mp_table_unit_price'] = "Precio Unitario";//1
-$mp_actions_view'] = "Ver";//1
-$mp_actions_edit'] = "Editar";//1
-$mp_actions_new_product'] = "A&ntilde;adir Nuevo Producto";//1
-
-#Gestionar Facturadors
-$mb_page_title'] = " - Gestionar Facturadores";//1
-$mb_page_header'] = "Gestionar Facturadores";//1
-$mb_no_invoices'] = "No hay facturadores en la base de datos, por favor introduzca uno";//1
-$mb_table_action'] = "Acci&oacute;n";//1
-$mb_table_biller_id'] = "ID de Facturador";//1
-$mb_table_biller_name'] = "Nombre de Facturador";//1
-$mb_table_phone'] = "Tel&eacute;fono";//1
-$mb_table_mobile_phone'] = "Tel&eacute;fono m&oacute;vil";//1
-$mb_table_email'] = "Correo electr&oacute;nico";//1
-$mb_actions_view'] = "Vista";//1
-$mb_actions_edit'] = "Editar";//1
-$mb_actions_new_biller'] = "A&ntilde;adir Nuevo Facturador";//1
-
-#Gestionar Clientes
-$mc_page_title'] = " - Gestionar Clientes";//1
-$mc_page_header'] = "Gestionar Clientes";//1
-$mc_no_invoices'] = "No hay clientes en la base de datos, por favor introduzca uno";//1
-$mc_table_action'] = "Acci&oacute;n";//1
-$mc_table_customer_id'] = "ID de Cliente";//1
-$mc_table_customer_name'] = "Nombre de Cliente";//1
-$mc_table_attention'] = "Atenci&oacute;n";//1
-$mc_table_phone'] = "Tel&eacute;fono";//1
-$mc_table_email'] = "Correo electr&oacute;nico";//1
-$mc_actions_view'] = "Ver";//1
-$mc_actions_edit'] = "Editar";//1
-$mc_actions_new_product'] = "A&ntilde;adir Nuevo Cliente";//1
-
-#Gestionar Preferences
-$mip_page_title'] = " - Gestionar Preferencias";//1
-$mip_page_header'] = "Gestionar Preferencias";//1
-$mip_no_invoices'] = "No hay preferencias de factura en la base de datos, por favor introduzca uno";//1
-$mip_table_action'] = "Acci&oacute;n";//1
-$mip_table_preference_id'] = "ID de Preferencia";//1
-$mip_table_description'] = "Descripci&oacute;n";//1
-$mip_actions_view'] = "Ver";//1
-$mip_actions_edit'] = "Editar";//1
-$mip_actions_new_preference'] = "A&ntilde;adir Preferencia de Nueva Factura";//1
-
-#Gestionar System Defautls manage_system_defaults.php
-$msd_default_number_items'] = "N&uacute;mero de l&iacute;nea de &iacute;tems:";//1
-$msd_js_alert_def_inv_template'] = "Modelo predeterminado de factura";//1
-$msd_def_inv_template'] = "Modelo predeterminado de factura";//1
-$msd_no_tax'] = "Lo siento, no hay porcentaje de impuesto disponible, por favor introduzca uno";//1
-$msd_no_payment_type'] = "Lo siento, no hay tipo de pago disponible, por favor introduzca uno";//1
-$msd_tax'] = "Impuesto";//1
-$msd_payment_type'] = "Tipo de Pago";//1
-$msd_invoice_preference'] = "Preferencia de Factura";//1
-$msd_no_defaults'] = "No hay predeterminados";//1
-$msd_page_title'] = " - Gestionar Predeterminados del Sistema";//1
-$msd_heading'] = "Predeterminados del Sistema";//1
-$msd_submit_button '] = "Introducir Predeterminados";//1
-
-
-#Gestionar Cuenta Payments
-$map_page_title'] = " - Gestionar Pagos";//1
-$map_page_header'] = "Gestionar Pagos";//1
-$map_no_invoices'] = "No hay pagos en la base de datos";//1
-$map_table_action'] = "Acci&oacute;n";//1
-$map_table_payment_id'] = "ID de Pago";//1
-$map_table_payment_invoice_id'] = "ID de Fact.";//1
-$map_table_biller'] = "Facturador";//1
-$map_table_customer'] = "Cliente";//1
-$map_table_amount'] = "Cantidad";//1
-$map_table_notes'] = "Notas";//1
-$map_table_payment_type'] = "Tipo de Pago";//1
-$map_table_date'] = "Fecha";//1
-$map_actions_view'] = "Ver";//1
-$map_actions_process_payment'] = "Procesar Pago";//1
-$map_payments_filtered'] = "Pagos filtrados por ID de Factura";//1
-$map_payments_filtered_invoice'] = "Procesar Pago par esta Factura";//1
-$map_payments_filtered_customer'] = "Pagos filtrados por ID de Cliente";//1
-
-#Manage Tax Rate
-$mtr_page_title'] = " - Gestionar Impuestos";//1
-$mtr_page_header'] = "Gestionar Impuestos";//1
-$mtr_no_invoices'] = "No hay impuestos en la base de datos, por favor introduzca uno";//1
-$mtr_table_action'] = "Acci&oacute;n";//1
-$mtr_table_tax_id'] = "ID Impuesto";//1
-$mtr_table_tac_desc'] = "Descripci&oacute;n del Impuesto";//1
-$mtr_table_percentage'] = "Porcentaje de Impuesto";//1
-$mtr_actions_view'] = "Ver";//1
-$mtr_actions_edit'] = "Editar";//1
-$mtr_actions_new_tax'] = "A&ntilde;adir Nuevo Impuesto";//1
-
-#Gestionar Pago Tipos
-$mpt_page_title'] = " - Gestionar Tipos de Pago";//1
-$mpt_page_header'] = "Gestionar Tipos de Pago";//1
-$mpt_no_invoices'] = "No hay tipos de pagos en la base de datos";//1
-$mpt_table_action'] = "Acci&oacute;n";//1
-$mpt_table_pt_id'] = "ID";//1
-$mpt_table_pt_description'] = "Descripci&oacute;n";//1
-$mpt_actions_view'] = "Ver";//1
-$mpt_actions_edit'] = "Editar";//1
-$mpt_actions_new_tax'] = "A&ntilde;adir Nuevo Tipo de Pago";//1
+/* New stuff */
+$LANG['no_products'] = "There are no products in the database, please add one";//0
+$LANG['no_billers'] = "There are no billers in the database, please add one";//0
+$LANG['no_customers'] = "There are no customers in the database, please add one";//0
+$LANG['no_preferences'] = "There are no invoice preferences in the database, please add one";//0
+$LANG['default_number_items'] = "Default number of line items:";//0
+$LANG['default_inv_template'] = "Default invoice template ";//0
+$LANG['no_defaults'] = "There are no defaults";//0
+$LANG['no_payments'] = "There are no payments in the database";//0
+$LANG['payment_id'] = "Payment ID";//0
+$LANG['payments_filtered'] = "Payments filtered by Invoice ID";//0
+$LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
+$LANG['payments_filtered_customer'] = "Payments filtered by Customer ID";//0
+$LANG['no_tax_rates'] = "There are no tax rates in the database, please add one";//0
 
 
 ?>

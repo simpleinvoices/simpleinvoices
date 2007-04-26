@@ -296,143 +296,20 @@ $LANG['stats_debtor'] ="Grootste debiteur";//1
 $LANG['stats_customer'] ="Beste Klant - totaal gefactureerd";//1
 $LANG['stats_biller'] ="Top Bedrijf - totaal gefactureerd";//1
 
-/* Dont translate anything below here */
+/* New stuff */
+$LANG['no_products'] = "There are no products in the database, please add one";//0
+$LANG['no_billers'] = "There are no billers in the database, please add one";//0
+$LANG['no_customers'] = "There are no customers in the database, please add one";//0
+$LANG['no_preferences'] = "There are no invoice preferences in the database, please add one";//0
+$LANG['default_number_items'] = "Default number of line items:";//0
+$LANG['default_inv_template'] = "Default invoice template ";//0
+$LANG['no_defaults'] = "There are no defaults";//0
+$LANG['no_payments'] = "There are no payments in the database";//0
+$LANG['payment_id'] = "Payment ID";//0
+$LANG['payments_filtered'] = "Payments filtered by Invoice ID";//0
+$LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
+$LANG['payments_filtered_customer'] = "Payments filtered by Customer ID";//0
+$LANG['no_tax_rates'] = "There are no tax rates in the database, please add one";//0
 
-
-#Facturen beheren
-$mi_page_title'] = " - Beheer facturen";//1
-$mi_page_header'] = "Beheer facturen";//1
-$mi_no_invoices'] = "Er zijn geen facturen.";//1
-$mi_table_action'] = "Actie";//1
-$mi_table_id'] = "ID";//1
-$mi_table_biller'] = "Bedrijf";//1
-$mi_table_customer'] = "Klant";//1
-$mi_table_total'] = "Totaal";//1
-$mi_table_paid'] = "Betaald";//1
-$mi_table_owing'] = "Schuldig";//1
-$mi_table_type'] = "Type";//1
-$mi_table_date'] = "Datum aangemaakt";//1
-$mi_actions_quick_view'] = "bekijk";//1
-$mi_actions_quick_view_tooltip'] = "Quick Bekijk of";//1 
-$mi_actions_edit_view'] = "wijzig";//1
-$mi_actions_edit_view_toolkit'] = "Wijzig";//1
-$mi_actions_print_preview_tooltip'] = "Afdruk voorbeeld van";//1
-$mi_actions_export_tooltip'] = "Exporteren";//1 
-$mi_actions_export_pdf_tooltip'] = "als PDF formaat";//1
-$mi_actions_format_tooltip'] = "formaat";//1
-$mi_actions_export_xls_tooltip'] = "naar een spreadsheet als";//1
-$mi_actions_export_doc_tooltip'] = "naar een word processor als";//1
-$mi_actions_process_payment'] = "Verwerk betaling voor";//1
-$mi_action_invoice_total'] = "Nieuwe factuur toevoegen - Totaal stijl";//1
-$mi_action_invoice_itemised'] = "Nieuwe factuur toevoegen - Gedetaileerde stijl";//1
-$mi_action_invoice_consulting'] = "Nieuwe factuur toevoegen - Informatieve stijl";//1
-
-#Producten beheren
-$mp_page_title'] = " - Producten beheren";//1
-$mp_page_header'] = "Producten beheren";//1
-$mp_no_invoices'] = "Er zijn geen producten.";//1
-$mp_table_action'] = "Actie";//1
-$mp_table_product_id'] = "ID";//1
-$mp_table_product_desc'] = "Beschrijving";//1
-$mp_table_unit_price'] = "Prijs";//1
-$mp_actions_view'] = "Bekijk";//1
-$mp_actions_edit'] = "Wijzig";//1
-$mp_actions_new_product'] = "Nieuw product toevoegen";//1
-
-#Beheer bedrijven
-$mb_page_title'] = " - Beheer bedrijven";//1
-$mb_page_header'] = "Beheer bedrijven";//1
-$mb_no_invoices'] = "Er zijn geen bedrijven beschikbaar";//1
-$mb_table_action'] = "Actie";//1
-$mb_table_biller_id'] = "ID";//1
-$mb_table_biller_name'] = "Naam Bedrijf";//1
-$mb_table_phone'] = "Telefoon";//1
-$mb_table_mobile_phone'] = "Mobiele telefoon";//1
-$mb_table_email'] = "E-mail";//1
-$mb_actions_view'] = "Bekijk";//1
-$mb_actions_edit'] = "Wijzig";//1
-$mb_actions_new_biller'] = "Nieuw bedrijf toevoegen";//1
-
-#Klanten beheren
-$mc_page_title'] = " - Klanten beheren";//1
-$mc_page_header'] = "Klanten beheren";//1
-$mc_no_invoices'] = "Er zijn geen klanten";//1
-$mc_table_action'] = "Actie";//1
-$mc_table_customer_id'] = "ID";//1
-$mc_table_customer_name'] = "Naam Klant";//1
-$mc_table_attention'] = "Attentie";//1
-$mc_table_phone'] = "Telefoon";//1
-$mc_table_email'] = "E-mail";//1
-$mc_actions_view'] = "Bekijk";//1
-$mc_actions_edit'] = "Wijzig";//1
-$mc_actions_new_product'] = "Nieuwe klant toevoegen";//1
-
-#Instellingen beheren
-$mip_page_title'] = " - Instellingen beheren";//1
-$mip_page_header'] = "Instellingen beheren";//1
-$mip_no_invoices'] = "Er zijn geen factuur instellingen beschikbaar";//1
-$mip_table_action'] = "Actie";//1
-$mip_table_preference_id'] = "ID";//1
-$mip_table_description'] = "Beschrijving";//1
-$mip_actions_view'] = "Bekijk";//1
-$mip_actions_edit'] = "Wijzig";//1
-$mip_actions_new_preference'] = "Nieuwe factuur instelling";//1
-
-#Manage System Defautls manage_system_defaults.php
-$msd_default_number_items'] = "Standaard aantal item regels:";//1
-$msd_js_alert_def_inv_template'] = "Standaard factuur template";//1
-$msd_def_inv_template'] = "Standaard factuur template ";//1
-$msd_no_tax'] = "Geen BTW tarief beschikbaar";//1
-$msd_no_payment_type'] = "Geen betaalmethode beschikbaar";//1
-$msd_tax'] = "BTW";//1
-$msd_payment_type'] = "Betaalmethode";//1
-$msd_invoice_preference'] = "Factuur instelling";//1
-$msd_no_defaults'] = "Er is geen standaard ingesteld";//1
-$msd_page_title'] = " - Beheer basis instellingen";//1
-$msd_heading'] = "Basis instellingen";//1
-$msd_submit_button '] = "Bevestig basis instellingen";//1
-
-
-#Betalingen beheren
-$map_page_title'] = " - Betalingen beheren";//1
-$map_page_header'] = "Betalingen beheren";//1
-$map_no_invoices'] = "Er zijn geen betalingen beschikbaar";//1
-$map_table_action'] = "Actie";//1
-$map_table_payment_id'] = "ID";//1
-$map_table_payment_invoice_id'] = "Factuur ID";//1
-$map_table_biller'] = "Bedrijf";//1
-$map_table_customer'] = "Klant";//1
-$map_table_amount'] = "Aantal";//1
-$map_table_notes'] = "Opmerking";//1
-$map_table_payment_type'] = "Betaalmethode";//1
-$map_table_date'] = "Datum";//1
-$map_actions_view'] = "Bekijk";//1
-$map_actions_process_payment'] = "Betaling verwerken";//1
-$map_payments_filtered'] = "Betalingen gefilterd op Factuur ID";//1
-$map_payments_filtered_invoice'] = "Verwerk betalingen voor deze factuur";//1
-$map_payments_filtered_customer'] = "Betalingen gefilterd op klant ID";//1
-
-#BTW tarieven beheren
-$mtr_page_title'] = " - BTW tarieven beheren";//1
-$mtr_page_header'] = "BTW tarieven beheren";//1
-$mtr_no_invoices'] = "Er zijn geen BTW tarieven";//1
-$mtr_table_action'] = "Actie";//1
-$mtr_table_tax_id'] = "ID";//1
-$mtr_table_tac_desc'] = "Beschrijving";//1
-$mtr_table_percentage'] = "Percentage";//1
-$mtr_actions_view'] = "Bekijk";//1
-$mtr_actions_edit'] = "Wijzig";//1
-$mtr_actions_new_tax'] = "Nieuw BTW tarief toevoegen";//1
-
-#Betaalmethoden beheren
-$mpt_page_title'] = " - Betaalmethoden beheren";//1
-$mpt_page_header'] = "Betaalmethoden beheren";//1
-$mpt_no_invoices'] = "Er zijn geen betaalmethoden";//1
-$mpt_table_action'] = "Actie";//1
-$mpt_table_pt_id'] = "ID";//1
-$mpt_table_pt_description'] = "Beschrijving";//1
-$mpt_actions_view'] = "Bekijk";//1
-$mpt_actions_edit'] = "Wijzig";//1
-$mpt_actions_new_tax'] = "Nieuwe betaalmethode toevoegen";//1
 
 ?>

@@ -296,143 +296,19 @@ $LANG['stats_debtor'] ="Největší dlužník";//1
 $LANG['stats_customer'] ="Nejlepší odběratel - podle faktur. částky";//1
 $LANG['stats_biller'] ="Nejlepší dodavatel - podle faktur. částky";//1
 
-/* Dont translate anything below here */
-
-#Manage Invoices
-$mi_page_title'] = " - Spravovat faktury";//1
-$mi_page_header'] = "Spravovat faktury";//1
-$mi_no_invoices'] = "Databáze neobsahuje žádné faktury";//1
-$mi_table_action'] = "Akce";//1
-$mi_table_id'] = "ID";//1
-$mi_table_biller'] = "Dodavatel";//1
-$mi_table_customer'] = "Odběratel";//1
-$mi_table_total'] = "Celkem";//1
-$mi_table_paid'] = "Zaplaceno";//1
-$mi_table_owing'] = "Dluží";//1
-$mi_table_type'] = "Typ";//1
-$mi_table_date'] = "Datum vytvořeno";//1
-$mi_actions_quick_view'] = "pohled";//1
-$mi_actions_quick_view_tooltip'] = "Rychlý pohled na";//1 
-$mi_actions_edit_view'] = "editovat";//1
-$mi_actions_edit_view_toolkit'] = "Editovat";//1
-$mi_actions_print_preview_tooltip'] = "Náhled tisku";//1
-$mi_actions_export_tooltip'] = "Export";//1 
-$mi_actions_export_pdf_tooltip'] = "jako PDF formát";//1
-$mi_actions_format_tooltip'] = "formát";//1
-$mi_actions_export_xls_tooltip'] = "do tabulky jako";//1
-$mi_actions_export_doc_tooltip'] = "do textového procesoru jako";//1
-$mi_actions_process_payment'] = "Zpracovat platbu";//1
-$mi_action_invoice_total'] = "Přidat novou fakturu - styl Celkem";//1
-$mi_action_invoice_itemised'] = "Přidat novou fakturu - styl Po položkách";//1
-$mi_action_invoice_consulting'] = "Přidat novou fakturu - styl Poradenství";//1
-
-#Manage Products
-$mp_page_title'] = " - Spravovat položky";//1
-$mp_page_header'] = "Spravovat položky";//1
-$mp_no_invoices'] = "Databáze neobsahuje žádné položky, prosím, přidejte je";//1
-$mp_table_action'] = "Akce";//1
-$mp_table_product_id'] = "ID položky";//1
-$mp_table_product_desc'] = "Popis položky";//1
-$mp_table_unit_price'] = "Cena za jednotku";//1
-$mp_actions_view'] = "Pohled";//1
-$mp_actions_edit'] = "Editovat";//1
-$mp_actions_new_product'] = "Přidat novou položku";//1
-
-#Manage Billers
-$mb_page_title'] = " - Spravovat dodavatele";//1
-$mb_page_header'] = "Spravovat dodavatele";//1
-$mb_no_invoices'] = "Databáze neobsahuje žádné dodavatele, prosím, přidejte je";//1
-$mb_table_action'] = "Akce";//1
-$mb_table_biller_id'] = "ID dodavatele";//1
-$mb_table_biller_name'] = "Jméno dodavatele";//1
-$mb_table_phone'] = "Telefon";//1
-$mb_table_mobile_phone'] = "Mobil";//1
-$mb_table_email'] = "E-mail";//1
-$mb_actions_view'] = "Pohled";//1
-$mb_actions_edit'] = "Editovat";//1
-$mb_actions_new_biller'] = "Přidat nového dodavatele";//1
-
-#Manage Customers
-$mc_page_title'] = " - Spravovat odběratele";//1
-$mc_page_header'] = "Spravovat odběratele";//1
-$mc_no_invoices'] = "Databáze neobsahuje žádné odběratele, prosím, vložte alespoň jednoho odběratele";//1
-$mc_table_action'] = "Akce";//1
-$mc_table_customer_id'] = "ID odběratele";//1
-$mc_table_customer_name'] = "Jméno odběratele";//1
-$mc_table_attention'] = "K rukám";//1
-$mc_table_phone'] = "Telefon";//1
-$mc_table_email'] = "E-mail";//1
-$mc_actions_view'] = "Pohled";//1
-$mc_actions_edit'] = "Editovat";//1
-$mc_actions_new_product'] = "Přidat nového odběratele";//1
-
-#Manage Preferences
-$mip_page_title'] = " - Spravovat volby";//1
-$mip_page_header'] = "Spravovat volby";//1
-$mip_no_invoices'] = "Databáze neobsahuje žádné volby faktur, prosím, zadejte je";//1
-$mip_table_action'] = "Akce";//1
-$mip_table_preference_id'] = "ID volby";//1
-$mip_table_description'] = "Popis";//1
-$mip_actions_view'] = "Pohled";//1
-$mip_actions_edit'] = "Editovat";//1
-$mip_actions_new_preference'] = "Přidat volbu nové faktury";//1
-
-#Manage System Defautls manage_system_defaults.php
-$msd_default_number_items'] = "Defaultní počet řádků položek:";//1
-$msd_js_alert_def_inv_template'] = "Defaultní šablona faktury";//1
-$msd_def_inv_template'] = "Defaultní šablona faktury ";//1
-$msd_no_tax'] = "Není k dispozici sazba daně, prosím, zadejte ji";//1
-$msd_no_payment_type'] = "Není k dispozici způsob úhrady, prosím, zadejte jej";//1
-$msd_tax'] = "Daň";//1
-$msd_payment_type'] = "Způsob úhrady";//1
-$msd_invoice_preference'] = "Volby faktury";//1
-$msd_no_defaults'] = "Nejsou k dispozici defaultní nastavení";//1
-$msd_page_title'] = " - Spravovat default. nastavení systému";//1
-$msd_heading'] = "Defaultní nastavení systému";//1
-$msd_submit_button '] = "Uložit defaultní nastavení";//1
-
-
-#Manage Account Payments
-$map_page_title'] = " - Spravovat platby";//1
-$map_page_header'] = "Spravovat platby";//1
-$map_no_invoices'] = "Databáze neobsahuje žádné platby";//1
-$map_table_action'] = "Akce";//1
-$map_table_payment_id'] = "ID platby";//1
-$map_table_payment_invoice_id'] = "ID faktury";//1
-$map_table_biller'] = "Dodavatel";//1
-$map_table_customer'] = "Odběratel";//1
-$map_table_amount'] = "Množství";//1
-$map_table_notes'] = "Poznámky";//1
-$map_table_payment_type'] = "Způsob úhrady";//1
-$map_table_date'] = "Datum";//1
-$map_actions_view'] = "Pohled";//1
-$map_actions_process_payment'] = "Zpracovat platbu";//1
-$map_payments_filtered'] = "Filtrování plateb podle ID faktury";//1
-$map_payments_filtered_invoice'] = "Zpracovat platbu pro tuto fakturu";//1
-$map_payments_filtered_customer'] = "Filtrování plateb podle ID odběratele";//1
-
-#Manage Tax Rate
-$mtr_page_title'] = " - Spravovat sazby daní";//1
-$mtr_page_header'] = "Spravovat sazby daní";//1
-$mtr_no_invoices'] = "Databáze neobsahuje žádné sazby daní, prosím, zadejte je";//1
-$mtr_table_action'] = "Akce";//1
-$mtr_table_tax_id'] = "ID daně";//1
-$mtr_table_tac_desc'] = "Popis daně";//1
-$mtr_table_percentage'] = "Procento daně";//1
-$mtr_actions_view'] = "Pohled";//1
-$mtr_actions_edit'] = "Editovat";//1
-$mtr_actions_new_tax'] = "Přidat novou sazbu daně";//1
-
-#Manage Payment Types
-$mpt_page_title'] = " - Spravovat způsoby úhrady";//1
-$mpt_page_header'] = "Spravovat způsoby úhrady";//1
-$mpt_no_invoices'] = "Databáze neobsahuje žádné způsoby úhrady";//1
-$mpt_table_action'] = "Akce";//1
-$mpt_table_pt_id'] = "ID";//1
-$mpt_table_pt_description'] = "Popis";//1
-$mpt_actions_view'] = "Pohled";//1
-$mpt_actions_edit'] = "Editovat";//1
-$mpt_actions_new_tax'] = "Přidat nový způsob úhrady";//1
-
+/* New stuff */
+$LANG['no_products'] = "There are no products in the database, please add one";//0
+$LANG['no_billers'] = "There are no billers in the database, please add one";//0
+$LANG['no_customers'] = "There are no customers in the database, please add one";//0
+$LANG['no_preferences'] = "There are no invoice preferences in the database, please add one";//0
+$LANG['default_number_items'] = "Default number of line items:";//0
+$LANG['default_inv_template'] = "Default invoice template ";//0
+$LANG['no_defaults'] = "There are no defaults";//0
+$LANG['no_payments'] = "There are no payments in the database";//0
+$LANG['payment_id'] = "Payment ID";//0
+$LANG['payments_filtered'] = "Payments filtered by Invoice ID";//0
+$LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
+$LANG['payments_filtered_customer'] = "Payments filtered by Customer ID";//0
+$LANG['no_tax_rates'] = "There are no tax rates in the database, please add one";//0
 
 ?>

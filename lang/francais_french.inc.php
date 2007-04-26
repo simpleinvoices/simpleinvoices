@@ -295,143 +295,18 @@ $LANG['stats_debtor'] ="+ gros d&eacute;biteur";//1
 $LANG['stats_customer'] ="+ gros client - par montant factur&eacute;";//1
 $LANG['stats_biller'] ="+ gros vendeur - par montant factur&eacute;";//1
 
-/* Dont translate anything below here */
-
-#Manage factures
-$mi_page_title'] = " - G&eacute;rer factures";//1
-$mi_page_header'] = "G&eacute;rer factures";//1
-$mi_no_invoices'] = "Il n'y a pas de facture dans la base";//1
-$mi_table_action'] = "Action";//1
-$mi_table_id'] = "ID";//1
-$mi_table_biller'] = "Biller";//0
-$mi_table_customer'] = "client";//1
-$mi_table_total'] = "Total";//1
-$mi_table_paid'] = "Pay&eacute;";//1
-$mi_table_owing'] = "Du";//1
-$mi_table_type'] = "Type";//1
-$mi_table_date'] = "Date de cr&eacute;ation";//1
-$mi_actions_quick_view'] = "voir";//1
-$mi_actions_quick_view_tooltip'] = "Aper&ccedil;u de";//1 
-$mi_actions_edit_view'] = "&eacute;diter";//1
-$mi_actions_edit_view_toolkit'] = "&Eacute;diter";//1
-$mi_actions_print_preview_tooltip'] = "Aper&ccedil;u impression de ";//1
-$mi_actions_export_tooltip'] = "Export";//1 
-$mi_actions_export_pdf_tooltip'] = "au format PDF";//1
-$mi_actions_format_tooltip'] = "format";//1
-$mi_actions_export_xls_tooltip'] = "to a spreadsheet as";//0
-$mi_actions_export_doc_tooltip'] = "to a word processor as";//0
-$mi_actions_process_payment'] = "Process payment for";//0
-$mi_action_invoice_total'] = "Ajouter une nouvelle facture - Total style";//1
-$mi_action_invoice_itemised'] = "Ajouter une nouvelle facture - Itemised style";//1
-$mi_action_invoice_consulting'] = "Ajouter une nouvelle facture - Consulting style";//1
-
-#Manage Products
-$mp_page_title'] = " - G&eacute;rer produits";//1
-$mp_page_header'] = "G&eacute;rer produits";//1
-$mp_no_invoices'] = "Il n'y a aucun produit dans la base, veuillez svp en ajouter un";//1
-$mp_table_action'] = "Action";//1
-$mp_table_product_id'] = "Product ID";//1
-$mp_table_product_desc'] = "Description des produits";//1
-$mp_table_unit_price'] = "Prix &agrave; l'unit&eacute;";//1
-$mp_actions_view'] = "Voir";//1
-$mp_actions_edit'] = "&Eacute;diter";//1
-$mp_actions_new_product'] = "Ajouter un nouveau produit";//1
-
-#Manage Billers
-$mb_page_title'] = " - G&eacute;rer vendeurs";//1
-$mb_page_header'] = "G&eacute;rer vendeurs";//1
-$mb_no_invoices'] = "Il n'y a aucun vendeur dans la base, veuillez svp en ajouter un";//1
-$mb_table_action'] = "Actions";//1
-$mb_table_biller_id'] = "Vendeur ID";//1
-$mb_table_biller_name'] = "Nom du vendeur";//1
-$mb_table_phone'] = "T&eacute;l&eacute;phone";//1
-$mb_table_mobile_phone'] = "Portable";//1
-$mb_table_email'] = "Email";//1
-$mb_actions_view'] = "Voir";//1
-$mb_actions_edit'] = "&Eacute;diter";//1
-$mb_actions_new_biller'] = "Ajouter un nouveau vendeur";//1
-
-#Manage clients
-$mc_page_title'] = " - G&eacute;rer clients";//1
-$mc_page_header'] = "G&eacute;rer clients";//1
-$mc_no_invoices'] = "Il n'y a aucun client dans la base, veuillez svp en ajouter un";//1
-$mc_table_action'] = "Action";//1
-$mc_table_customer_id'] = "client ID";//1
-$mc_table_customer_name'] = "Nom du client";//1
-$mc_table_attention'] = "Attention";//1
-$mc_table_phone'] = "T&eacute;l&eacute;phone";//1
-$mc_table_email'] = "Email";//1
-$mc_actions_view'] = "Voir";//1
-$mc_actions_edit'] = "&Eacute;diter";//1
-$mc_actions_new_product'] = "Ajouter un nouveau client";//1
-
-#Manage Preferences
-$mip_page_title'] = " - Manage Preferences";//0
-$mip_page_header'] = "Manage Preferences";//0
-$mip_no_invoices'] = "There are no facture preferences in the database, please add one";//0
-$mip_table_action'] = "Action";//1
-$mip_table_preference_id'] = "Preference ID";//1
-$mip_table_description'] = "Description";//1
-$mip_actions_view'] = "Voir";//1
-$mip_actions_edit'] = "&Eacute;diter";//1
-$mip_actions_new_preference'] = "add New facture Preference";//0
-
-#Manage System Defautls manage_system_defaults.php
-$msd_default_number_items'] = "Default number of line items";//0
-$msd_js_alert_def_inv_template'] = "Default facture template";//0
-$msd_def_inv_template'] = "Default facture template ";//0
-$msd_no_tax'] = "Sorry, no tax rate available, please insert one";//0
-$msd_no_payment_type'] = "D&eacute;sol&eacute;, aucun type de paiement disponible, veuillez svp en ins&eacute;rer un";//1
-$msd_tax'] = "Tax";//1
-$msd_payment_type'] = "Type de paiement";//1
-$msd_invoice_preference'] = "facture Preference";//0
-$msd_no_defaults'] = "Il n'y a pas de r&eacute;glages standards";//1
-$msd_page_title'] = " - Manage System Defaults";//0
-$msd_heading'] = "System defaults";//0
-$msd_submit_button '] = "Soumettre les r&eacute;glages standards";//1
-
-
-#Manage Compte Payments
-$map_page_title'] = " - G&eacute;rer les paiements";//1
-$map_page_header'] = "G&eacute;rer les paiements";//1
-$map_no_invoices'] = "Il n'y a aucun paiement dans la base";//1
-$map_table_action'] = "Action";//1
-$map_table_payment_id'] = "Paiement ID";//1
-$map_table_payment_invoice_id'] = "Fact. ID";//1
-$map_table_biller'] = "Vendeur";//1
-$map_table_customer'] = "Client";//1
-$map_table_amount'] = "Amount";//0
-$map_table_notes'] = "Notes";//1
-$map_table_payment_type'] = "Type de paiement";//1
-$map_table_date'] = "Date";//1
-$map_actions_view'] = "Voir";//1
-$map_actions_process_payment'] = "Process Payment";//0
-$map_payments_filtered'] = "Encaissements filtr&eacute;s par facture ID";//1
-$map_payments_filtered_invoice'] = "Process Payment for this facture";//0
-$map_payments_filtered_customer'] = "Encaissements filtr&eacute;s par client ID";//1
-
-#Manage Tax Rate
-$mtr_page_title'] = " - G&eacute;rer les taux";//1
-$mtr_page_header'] = "G&eacute;rer les taux";//1
-$mtr_no_invoices'] = "Il n'y a aucun taux dans la base de donn&eacute;es, veuillez svp en ajouter un";//1
-$mtr_table_action'] = "Action";//1
-$mtr_table_tax_id'] = "Tax ID";//1
-$mtr_table_tac_desc'] = "Description de la taxe";//1
-$mtr_table_percentage'] = "Pourcentage de la taxe";//1
-$mtr_actions_view'] = "Voir";//1
-$mtr_actions_edit'] = "&Eacute;diter";//1
-$mtr_actions_new_tax'] = "Ajouter un nouveau taux";//1
-
-#Manage Payment Types
-$mpt_page_title'] = " - G&eacute;rer les types de paiement";//1
-$mpt_page_header'] = "G&eacute;rer les types de paiement";//1
-$mpt_no_invoices'] = "Il n'y a aucun type de paiement dans la base";//1
-$mpt_table_action'] = "Action";//1
-$mpt_table_pt_id'] = "ID";//1
-$mpt_table_pt_description'] = "Description";//1
-$mpt_actions_view'] = "Voir";//1
-$mpt_actions_edit'] = "&Eacute;diter";//1
-$mpt_actions_new_tax'] = "Ajouter un nouveau type de paiement";//1
-
-
+/* New stuff */
+$LANG['no_products'] = "There are no products in the database, please add one";//0
+$LANG['no_billers'] = "There are no billers in the database, please add one";//0
+$LANG['no_customers'] = "There are no customers in the database, please add one";//0
+$LANG['no_preferences'] = "There are no invoice preferences in the database, please add one";//0
+$LANG['default_number_items'] = "Default number of line items:";//0
+$LANG['default_inv_template'] = "Default invoice template ";//0
+$LANG['no_defaults'] = "There are no defaults";//0
+$LANG['no_payments'] = "There are no payments in the database";//0
+$LANG['payment_id'] = "Payment ID";//0
+$LANG['payments_filtered'] = "Payments filtered by Invoice ID";//0
+$LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
+$LANG['payments_filtered_customer'] = "Payments filtered by Customer ID";//0
+$LANG['no_tax_rates'] = "There are no tax rates in the database, please add one";//0
 ?>

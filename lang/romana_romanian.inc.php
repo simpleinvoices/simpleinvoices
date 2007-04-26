@@ -291,145 +291,20 @@ $LANG['stats_debtor'] ="Cel mai mare debitor";//1
 $LANG['stats_customer'] ="Cel mai bun Client - dupa totalul facturat";//1
 $LANG['stats_biller'] ="Cel mai bun Furnizor - dupa totalul facturat";//1
 
-/* Dont translate anything below here */
-
-
-
-#Manage Invoices
-$mi_page_title'] = " - Administrare facturi";//1
-$mi_page_header'] = "Administrare facturi";//1
-$mi_no_invoices'] = "Nu exista facturi in baza de date";//1
-$mi_table_action'] = "Actiune";//1
-$mi_table_id'] = "ID";//1
-$mi_table_biller'] = "Furnizor";//1
-$mi_table_customer'] = "Client";//1
-$mi_table_total'] = "Total";//1
-$mi_table_paid'] = "platit";//1
-$mi_table_owing'] = "Datorie";//1
-$mi_table_type'] = "Tip";//1
-$mi_table_date'] = "Data crearii";//1
-$mi_actions_quick_view'] = "vizualizare";//1
-$mi_actions_quick_view_tooltip'] = "Vizualizare rapida a";//1
-$mi_actions_edit_view'] = "modifica";//1
-$mi_actions_edit_view_toolkit'] = "Modifica";//1
-$mi_actions_print_preview_tooltip'] = "Previzualizare Tiparire a";//1
-$mi_actions_export_tooltip'] = "Export";//1
-$mi_actions_export_pdf_tooltip'] = "ca format PDF";//1
-$mi_actions_format_tooltip'] = "format";//1
-$mi_actions_export_xls_tooltip'] = "catre o foaie de calcul tabelar ca";//1
-$mi_actions_export_doc_tooltip'] = "catre un procesor de text ca";//1
-$mi_actions_process_payment'] = "Proceseaza plata pentru";//1
-$mi_action_invoice_total'] = "Adauga Factura noua - stilul Total";//1
-$mi_action_invoice_itemised'] = "Adauga Factura noua - stilul Detaliat";//1
-$mi_action_invoice_consulting'] = "Adauga Factura noua - stilul Consultanta";//1
-
-#Manage Products
-$mp_page_title'] = " - Administrare Produse";//1
-$mp_page_header'] = "Administrare Produse";//1
-$mp_no_invoices'] = "Nu exista produse in baza de date, te rog adauga unul";//1
-$mp_table_action'] = "Actiune";//1
-$mp_table_product_id'] = "ID Produs";//1
-$mp_table_product_desc'] = "Descrierea produsului";//1
-$mp_table_unit_price'] = "Pret Unitar";//1
-$mp_actions_view'] = "Vizualizare";//1
-$mp_actions_edit'] = "Modifica";//1
-$mp_actions_new_product'] = "Adauga Produs Nou";//1
-
-#Manage Billers
-$mb_page_title'] = " - Administrare Furnizori";//1
-$mb_page_header'] = "Administrare Furnizori";//1
-$mb_no_invoices'] = "Nu exista furnizori in baza de date, te rog adauga unul";//1
-$mb_table_action'] = "Actiune";//1
-$mb_table_biller_id'] = "ID Furnizor";//1
-$mb_table_biller_name'] = "Nume Furnizor";//1
-$mb_table_phone'] = "Telefon";//1
-$mb_table_mobile_phone'] = "Mobil";//1
-$mb_table_email'] = "Email";//1
-$mb_actions_view'] = "Vizualizare";//1
-$mb_actions_edit'] = "Modifica";//1
-$mb_actions_new_biller'] = "Adauga Furnizor Nou";//1
-
-#Manage Customers
-$mc_page_title'] = " - Administrare Clienti";//1
-$mc_page_header'] = "Administrare Clienti";//1
-$mc_no_invoices'] = "Nu exista clienti in baza de date, te rog adauga unul";//1
-$mc_table_action'] = "Actiune";//1
-$mc_table_customer_id'] = "ID Client";//1
-$mc_table_customer_name'] = "Nume Client";//1
-$mc_table_attention'] = "In Atentia";//1
-$mc_table_phone'] = "Telefon";//1
-$mc_table_email'] = "Email";//1
-$mc_actions_view'] = "Vizualizare";//1
-$mc_actions_edit'] = "Modifica";//1
-$mc_actions_new_product'] = "Adauga Client Nou";//1
-
-#Manage Preferences
-$mip_page_title'] = " - Administrare Preferinte";//1
-$mip_page_header'] = "Administrare Preferinte";//1
-$mip_no_invoices'] = "Nu exista preferinte in baza de date, te rog adauga una";//1
-$mip_table_action'] = "Actiune";//1
-$mip_table_preference_id'] = "ID Preferinta";//1
-$mip_table_description'] = "Descriere";//1
-$mip_actions_view'] = "Vizualizare";//1
-$mip_actions_edit'] = "Modifica";//1
-$mip_actions_new_preference'] = "Adauga o Noua Preferinta Factura";//1
-
-#Manage System Defautls manage_system_defaults.php
-$msd_default_number_items'] = "Numar implicit de linii pe factura:";//1
-$msd_js_alert_def_inv_template'] = "Sablonul implicit pentru factura";//1
-$msd_def_inv_template'] = "Sablonul implicit pentru factura ";//1
-$msd_no_tax'] = "Ne pare rau, nu este disponibila nici o taxa, te rog introdu una";//1
-$msd_no_payment_type'] = "Ne pare rau, nu este disponibila nici un tip de plata, te rog introdu unul";//1
-$msd_tax'] = "Taxa";//1
-$msd_payment_type'] = "Tip de Plata";//1
-$msd_invoice_preference'] = "Preferinta Factura";//1
-$msd_no_defaults'] = "Nu exista valori implicite";//1
-$msd_page_title'] = " - Adminstrare Setari Implicite";//1
-$msd_heading'] = "Setari implicite";//1
-$msd_submit_button '] = "Salveaza setari implicite";//1
-
-
-#Manage Account Payments
-$map_page_title'] = " - Administrare Plati";//1
-$map_page_header'] = "Administrare Plati";//1
-$map_no_invoices'] = "Nu exista PLati in baza de date";//1
-$map_table_action'] = "Actiune";//1
-$map_table_payment_id'] = "ID Plata";//1
-$map_table_payment_invoice_id'] = "ID Fact.";//1
-$map_table_biller'] = "Furnizor";//1
-$map_table_customer'] = "Client";//1
-$map_table_amount'] = "Suma";//1
-$map_table_notes'] = "Note";//1
-$map_table_payment_type'] = "Tip de Plata";//1
-$map_table_date'] = "Data";//1
-$map_actions_view'] = "Vizualizare";//1
-$map_actions_process_payment'] = "Proceseaza Plata";//1
-$map_payments_filtered'] = "Plati filtrate dupa ID-ul Facturii";//1
-$map_payments_filtered_invoice'] = "Proceseaza Plata pentru Aceasta Factura";//1
-$map_payments_filtered_customer'] = "Plati Filtrate dupa ID-ul Clientului";//1
-
-#Manage Tax Rate
-$mtr_page_title'] = " - Administrare Taxe";//1
-$mtr_page_header'] = "Administrare Taxe";//1
-$mtr_no_invoices'] = "Nu exista taxe in baza de date, te rog adauga una";//1
-$mtr_table_action'] = "Actiune";//1
-$mtr_table_tax_id'] = "ID Taxa";//1
-$mtr_table_tac_desc'] = "Descriere Taxa";//1
-$mtr_table_percentage'] = "Procentul Taxei";//1
-$mtr_actions_view'] = "Vizualizare";//1
-$mtr_actions_edit'] = "Modifica";//1
-$mtr_actions_new_tax'] = "Adauga Taxa Noua";//1
-
-#Manage Payment Types
-$mpt_page_title'] = " - Administrare Tipuri de Plata";//1
-$mpt_page_header'] = "Administrare Tipuri de Plata";//1
-$mpt_no_invoices'] = "Nu exista Tipuri de Plata in baza de date";//1
-$mpt_table_action'] = "Actiune";//1
-$mpt_table_pt_id'] = "ID";//1
-$mpt_table_pt_description'] = "Descriere";//1
-$mpt_actions_view'] = "Vizualizare";//1
-$mpt_actions_edit'] = "Modifica";//1
-$mpt_actions_new_tax'] = "Adauga Tip de Plata Nou";//1
+/* New stuff */
+$LANG['no_products'] = "There are no products in the database, please add one";//0
+$LANG['no_billers'] = "There are no billers in the database, please add one";//0
+$LANG['no_customers'] = "There are no customers in the database, please add one";//0
+$LANG['no_preferences'] = "There are no invoice preferences in the database, please add one";//0
+$LANG['default_number_items'] = "Default number of line items:";//0
+$LANG['default_inv_template'] = "Default invoice template ";//0
+$LANG['no_defaults'] = "There are no defaults";//0
+$LANG['no_payments'] = "There are no payments in the database";//0
+$LANG['payment_id'] = "Payment ID";//0
+$LANG['payments_filtered'] = "Payments filtered by Invoice ID";//0
+$LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
+$LANG['payments_filtered_customer'] = "Payments filtered by Customer ID";//0
+$LANG['no_tax_rates'] = "There are no tax rates in the database, please add one";//0
 
 
 ?>

@@ -296,143 +296,18 @@ $LANG['stats_debtor'] ="O maior debedor";//1
 $LANG['stats_customer'] ="Gran Cliente - por cantidade facturada";//1
 $LANG['stats_biller'] ="Gran Emisor - por cantidade facturada";//1
 
-/* Dont translate anything below here */
-
-
-#Manage Invoices
-$mi_page_title'] = " - Xestionar Facturas";//1
-$mi_page_header'] = "Xesti&oacute;//1n de Facturas";//1
-$mi_no_invoices'] = "Non hai facturas na base de datos";//1
-$mi_table_action'] = "Acci&oacute;//1n";//1
-$mi_table_id'] = "ID";//1
-$mi_table_biller'] = "Emisor";//1
-$mi_table_customer'] = "Cliente";//1
-$mi_table_total'] = "Total";//1
-$mi_table_paid'] = "Aboado";//1
-$mi_table_owing'] = "Xerado";//1
-$mi_table_type'] = "Tipo";//1
-$mi_table_date'] = "Data de creaci&oacute;//1n";//1
-$mi_actions_quick_view'] = "ver";//1
-$mi_actions_quick_view_tooltip'] = "Vista r&aacute;//1pida de";//1
-$mi_actions_edit_view'] = "editar";//1
-$mi_actions_edit_view_toolkit'] = "Editar";//1
-$mi_actions_print_preview_tooltip'] = "Imprimir vista previa de";//1
-$mi_actions_export_tooltip'] = "Exportar";//1
-$mi_actions_export_pdf_tooltip'] = "en formato PDF";//1
-$mi_actions_format_tooltip'] = "formato";//1
-$mi_actions_export_xls_tooltip'] = "para unha folla de c&aacute;//1lculo como";//1
-$mi_actions_export_doc_tooltip'] = "para un procesador de textos como ";//1
-$mi_actions_process_payment'] = "Procesar Aboamento para";//1
-$mi_action_invoice_total'] = "Engadir Factura nova - en estilo Total";//1
-$mi_action_invoice_itemised'] = "Engadir Factura nova - en estilo Desagregado";//1
-$mi_action_invoice_consulting'] = "Engadir Factura nova - en estilo An&aacute;//1lise";//1
-
-#Manage Products
-$mp_page_title'] = " - Xestionar Produtos";//1
-$mp_page_header'] = "Xesti&oacute;//1n de Produtos";//1
-$mp_no_invoices'] = "Non hai produtos na base de datos, engada alg&uacute;//1n";//1
-$mp_table_action'] = "Acci&oacute;//1n";//1
-$mp_table_product_id'] = "ID de Produto";//1
-$mp_table_product_desc'] = "Descrici&oacute;//1n de produtos";//1
-$mp_table_unit_price'] = "Prezo unitario";//1
-$mp_actions_view'] = "Vista";//1
-$mp_actions_edit'] = "Editar";//1
-$mp_actions_new_product'] = "Engadir Novo Produto";//1
-
-#Manage Billers
-$mb_page_title'] = " - Xestionar Emisores";//1
-$mb_page_header'] = "Xesti&oacute;//1n de Emisores";//1
-$mb_no_invoices'] = "Non hai Emisores na base de datos, engada alg&uacute;//1n";//1
-$mb_table_action'] = "Acci&oacute;//1n";//1
-$mb_table_biller_id'] = "ID de Emisor";//1
-$mb_table_biller_name'] = "Nome de Emisor";//1
-$mb_table_phone'] = "Telefono";//1
-$mb_table_mobile_phone'] = "M&oacute;//1bil";//1
-$mb_table_email'] = "Correo el.";//1
-$mb_actions_view'] = "Ver";//1
-$mb_actions_edit'] = "Editar";//1
-$mb_actions_new_biller'] = "Engadir Novo Emisor";//1
-
-#Manage Customers
-$mc_page_title'] = " - Xestionar Clientes";//1
-$mc_page_header'] = "Xesti&oacute;//1n de Clientes";//1
-$mc_no_invoices'] = "Non hai clientes na base de datos, engada alg&uacute;//1n";//1
-$mc_table_action'] = "Acci&oacute;//1n";//1
-$mc_table_customer_id'] = "ID de Cliente";//1
-$mc_table_customer_name'] = "Nome de Cliente";//1
-$mc_table_attention'] = "Avisos";//1
-$mc_table_phone'] = "Telefono";//1
-$mc_table_email'] = "M&oacute;//1bil";//1
-$mc_actions_view'] = "Ver";//1
-$mc_actions_edit'] = "Editar";//1
-$mc_actions_new_product'] = "Engadir Novo Cliente";//1
-
-#Manage Preferences
-$mip_page_title'] = " - Xestionar Preferencias";//1
-$mip_page_header'] = "Xesti&oacute;//1n de Preferencias";//1
-$mip_no_invoices'] = "Non hai preferencias de facturaci&oacute;//1n na base de datos, engada algunha";//1
-$mip_table_action'] = "Acci&oacute;//1n";//1
-$mip_table_preference_id'] = "ID de Preferencias";//1
-$mip_table_description'] = "Descrici&oacute;//1n";//1
-$mip_actions_view'] = "Ver";//1
-$mip_actions_edit'] = "Editar";//1
-$mip_actions_new_preference'] = "Engadir Preferencia de Facturaci&oacute;//1n";//1
-
-#Manage System Defautls manage_system_defaults.php
-$msd_default_number_items'] = "N&uacute;//1mero por defecto de &iacute;//1tems por li�a:";//1
-$msd_js_alert_def_inv_template'] = "Modelo de factura por defecto";//1
-$msd_def_inv_template'] = "Modelo de factura por defecto";//1
-$msd_no_tax'] = "Desculpe, non hai ningunha taxa dispo�ible, engada algunha";//1
-$msd_no_payment_type'] = "Desculpe, non hai ning&uacute;//1n tipo de Aboamento dispo�ible, engada alg&uacute;//1n";//1
-$msd_tax'] = "Imposto";//1
-$msd_payment_type'] = "Tipo de Aboamento";//1
-$msd_invoice_preference'] = "Preferencia de Facturaci&oacute;//1n";//1
-$msd_no_defaults'] = "Non hai valores por defecto";//1
-$msd_page_title'] = " - Xesti&oacute;//1n de Valores por defecto do Sistema";//1
-$msd_heading'] = "Valores por defecto do Sistema";//1
-$msd_submit_button '] = "Introducir valores por defecto";//1
-
-
-#Manage Account Payments
-$map_page_title'] = " - Xestionar Aboamentos";//1
-$map_page_header'] = "Xesti&oacute;//1n de Aboamentos";//1
-$map_no_invoices'] = "Non hai Aboamentos na base de datos";//1
-$map_table_action'] = "Acci&oacute;//1n";//1
-$map_table_payment_id'] = "ID de Aboamento";//1
-$map_table_payment_invoice_id'] = "Fact. ID";//1
-$map_table_biller'] = "Emisor";//1
-$map_table_customer'] = "Cliente";//1
-$map_table_amount'] = "Cantidade";//1
-$map_table_notes'] = "Notas";//1
-$map_table_payment_type'] = "Tipo de Aboamento";//1
-$map_table_date'] = "Data";//1
-$map_actions_view'] = "Ver";//1
-$map_actions_process_payment'] = "Procesar Aboamento";//1
-$map_payments_filtered'] = "Aboamentos filtrados por ID de Factura";//1
-$map_payments_filtered_invoice'] = "Procesar Aboamento para esta Factura";//1
-$map_payments_filtered_customer'] = "Aboamento filtrado por ID de Cliente";//1
-
-#Manage Tax Rate
-$mtr_page_title'] = " - Xestionar Porcentaxes de Imposto";//1
-$mtr_page_header'] = "Xesti&oacute;//1n de Porcentaxes de Imposto";//1
-$mtr_no_invoices'] = "Non hai  Porcentaxes de Taxas na base de datos, engda algunha";//1
-$mtr_table_action'] = "Acci&oacute;//1n";//1
-$mtr_table_tax_id'] = "ID de Impostos";//1
-$mtr_table_tac_desc'] = "Descrici&oacute;//1n de Imposto";//1
-$mtr_table_percentage'] = "Porcentaxe de Imposto";//1
-$mtr_actions_view'] = "Ver";//1
-$mtr_actions_edit'] = "Editar";//1
-$mtr_actions_new_tax'] = "Engadir Nova Porcentaxe de Imposto";//1
-
-#Manage Payment Types
-$mpt_page_title'] = " - Xestionar Tipos de Aboamento";//1
-$mpt_page_header'] = "Xesti&oacute;//1n de Tipos de Aboamento";//1
-$mpt_no_invoices'] = "Non hai Tipos de Aboamento na base de datos";//1
-$mpt_table_action'] = "Acci&oacute;//1n";//1
-$mpt_table_pt_id'] = "ID";//1
-$mpt_table_pt_description'] = "Descrici&oacute;//1n";//1
-$mpt_actions_view'] = "Ver";//1
-$mpt_actions_edit'] = "Editar";//1
-$mpt_actions_new_tax'] = "Engadir Tipo de Aboamento";//1
-
+/* New stuff */
+$LANG['no_products'] = "There are no products in the database, please add one";//0
+$LANG['no_billers'] = "There are no billers in the database, please add one";//0
+$LANG['no_customers'] = "There are no customers in the database, please add one";//0
+$LANG['no_preferences'] = "There are no invoice preferences in the database, please add one";//0
+$LANG['default_number_items'] = "Default number of line items:";//0
+$LANG['default_inv_template'] = "Default invoice template ";//0
+$LANG['no_defaults'] = "There are no defaults";//0
+$LANG['no_payments'] = "There are no payments in the database";//0
+$LANG['payment_id'] = "Payment ID";//0
+$LANG['payments_filtered'] = "Payments filtered by Invoice ID";//0
+$LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
+$LANG['payments_filtered_customer'] = "Payments filtered by Customer ID";//0
+$LANG['no_tax_rates'] = "There are no tax rates in the database, please add one";//0
 ?>

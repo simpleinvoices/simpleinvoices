@@ -296,141 +296,19 @@ $LANG['stats_debtor'] ="Gr&ouml;&szlig;ter Schuldner";//1
 $LANG['stats_customer'] ="Top Kunde - nach Rechnungssumme";//1
 $LANG['stats_biller'] ="Top Gl&auml;ubiger - nach Rechnungssumme";//1
 
-/* Dont translate anything below here */
+/* New stuff */
+$LANG['no_products'] = "There are no products in the database, please add one";//0
+$LANG['no_billers'] = "There are no billers in the database, please add one";//0
+$LANG['no_customers'] = "There are no customers in the database, please add one";//0
+$LANG['no_preferences'] = "There are no invoice preferences in the database, please add one";//0
+$LANG['default_number_items'] = "Default number of line items:";//0
+$LANG['default_inv_template'] = "Default invoice template ";//0
+$LANG['no_defaults'] = "There are no defaults";//0
+$LANG['no_payments'] = "There are no payments in the database";//0
+$LANG['payment_id'] = "Payment ID";//0
+$LANG['payments_filtered'] = "Payments filtered by Invoice ID";//0
+$LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
+$LANG['payments_filtered_customer'] = "Payments filtered by Customer ID";//0
+$LANG['no_tax_rates'] = "There are no tax rates in the database, please add one";//0
 
-#Manage Invoices
-$mi_page_title'] = " - Rechnungen verwalten";//1
-$mi_page_header'] = "Rechnungen verwalten";//1
-$mi_no_invoices'] = "Es sind keine Rechnungen in der Datenbank vorhanden";//1
-$mi_table_action'] = "Aktion";//1
-$mi_table_id'] = "Re-Nr.";//1
-$mi_table_biller'] = "Gl&auml;ubiger";//1
-$mi_table_customer'] = "Kunde";//1
-$mi_table_total'] = "Total";//1
-$mi_table_paid'] = "Bezahlt";//1
-$mi_table_owing'] = "Schuldend";//1
-$mi_table_type'] = "Zahlungsart";//1
-$mi_table_date'] = "Re-Datum";//1
-$mi_actions_quick_view'] = "Anzeigen";//1
-$mi_actions_quick_view_tooltip'] = "Schnellanzeige von";//1
-$mi_actions_edit_view'] = "Bearbeiten";//1
-$mi_actions_edit_view_toolkit'] = "bearbeiten";//1
-$mi_actions_print_preview_tooltip'] = "Druckvorschau der";//1
-$mi_actions_export_tooltip'] = "Exportiere";//1
-$mi_actions_export_pdf_tooltip'] = "im PDF-Format";//1
-$mi_actions_format_tooltip'] = "Format";//1
-$mi_actions_export_xls_tooltip'] = "zu einem Tabellendokument im";//1
-$mi_actions_export_doc_tooltip'] = "zu einem Textdokument im";//1
-$mi_actions_process_payment'] = "Verbuche einen Zahlungseingang f&uuml;r";//1
-$mi_action_invoice_total'] = "Neue Rechnung - Freitext";//1
-$mi_action_invoice_itemised'] = "Neue Rechnung - Artikelaufl.";//1
-$mi_action_invoice_consulting'] = "Neue Rechnung - Detail. Artikelaufl.";//1
-
-#Manage Products
-$mp_page_title'] = " - Produkte verwalten";//1
-$mp_page_header'] = "Produkte verwalten";//1
-$mp_no_invoices'] = "Es sind keine Produkte in der Datenbank vorhanden";//1
-$mp_table_action'] = "Aktion";//1
-$mp_table_product_id'] = "Produkt ID";//1
-$mp_table_product_desc'] = "Produktbeschreibung";//1
-$mp_table_unit_price'] = "St&uuml;ckpreis";//1
-$mp_actions_view'] = "Anzeigen";//1
-$mp_actions_edit'] = "Bearbeiten";//1
-$mp_actions_new_product'] = "Neues Produkt anlegen";//1
-
-#Manage Billers
-$mb_page_title'] = " - Gl&auml;ubiger verwalten";//1
-$mb_page_header'] = "Gl&auml;ubiger verwalten";//1
-$mb_no_invoices'] = "Es sind keine Gl&auml;ubiger in der Datenbank vorhanden";//1
-$mb_table_action'] = "Aktion";//1
-$mb_table_biller_id'] = "Gl&auml;ubiger ID";//1
-$mb_table_biller_name'] = "Name des Gl&auml;ubigers";//1
-$mb_table_phone'] = "Telefon-Nr.";//1
-$mb_table_mobile_phone'] = "Handy-Nr.";//1
-$mb_table_email'] = "Email";//1
-$mb_actions_view'] = "Anzeigen";//1
-$mb_actions_edit'] = "Bearbeiten";//1
-$mb_actions_new_biller'] = "Neuen Gl&auml;ubiger anlegen";//1
-
-#Manage Customers
-$mc_page_title'] = " - Kunden verwalten";//1
-$mc_page_header'] = "Kunden verwalten";//1
-$mc_no_invoices'] = "Es sind keine Kunden in der Datenbank vorhanden";//1
-$mc_table_action'] = "Aktion";//1
-$mc_table_customer_id'] = "Kunden-Nr";//1
-$mc_table_customer_name'] = "Name des Kunden";//1
-$mc_table_attention'] = "Ansprechpartner";//1
-$mc_table_phone'] = "Telefon-Nr.";//1
-$mc_table_email'] = "Email";//1
-$mc_actions_view'] = "Anzeigen";//1
-$mc_actions_edit'] = "Bearbeiten";//1
-$mc_actions_new_product'] = "Neuen Kunden anlegen";//1
-
-#Manage Preferences
-$mip_page_title'] = " - Vorgaben verwalten";//1
-$mip_page_header'] = "Vorgaben verwalten";//1
-$mip_no_invoices'] = "Es sind keine Vorgaben in der Datenbank gespeichert";//1
-$mip_table_action'] = "Aktion";//1
-$mip_table_preference_id'] = "Vorgabe ID";//1
-$mip_table_description'] = "Beschreibung";//1
-$mip_actions_view'] = "Anzeigen";//1
-$mip_actions_edit'] = "Bearbeiten";//1
-$mip_actions_new_preference'] = "Neue Rechnungsborgabe anlegen";//1
-
-#Manage System Defautls manage_system_defaults.php
-$msd_default_number_items'] = "Standard Anzahl an Zeilennummern:";//1
-$msd_js_alert_def_inv_template'] = "Standard Rechnungs Template";//1
-$msd_def_inv_template'] = "Standard Rechnungs Template ";//1
-$msd_no_tax'] = "Sorry, keine Steuers&auml;tze vorhanden. Bitte anlegen!";//1
-$msd_no_payment_type'] = "Sorry, kein Zahlungseingangs-Typ vorhanden. Bitte anlegen!";//1
-$msd_tax'] = "Steuersatz";//1
-$msd_payment_type'] = "Zahlungseingang";//1
-$msd_invoice_preference'] = "Rechnungseinstellung";//1
-$msd_no_defaults'] = "Es gibt keine Standardeinstellung";//1
-$msd_page_title'] = " - Bearbeite System Voreinstellungen";//1
-$msd_heading'] = "System Voreinstellungen";//1
-$msd_submit_button '] = "System Voreinstellungen abschicken";//1
-
-
-#Manage Account Payments
-$map_page_title'] = " - Zahlungseing&auml;nge verwalten";//1
-$map_page_header'] = "Zahlungseing&auml;nge verwalten";//1
-$map_no_invoices'] = "Es sind keine Zahlungseing&auml;nge in der Datenbank vorhanden";//1
-$map_table_action'] = "Aktion";//1
-$map_table_payment_id'] = "Zahlungseingangs ID";//1
-$map_table_payment_invoice_id'] = "Re-Nr.";//1
-$map_table_biller'] = "Gl&auml;ubiger";//1
-$map_table_customer'] = "Kunde";//1
-$map_table_amount'] = "Rechnungssumme";//1
-$map_table_notes'] = "Bemerkungen";//1
-$map_table_payment_type'] = "Zahlungseingang";//1
-$map_table_date'] = "Datum";//1
-$map_actions_view'] = "Anzeigen";//1
-$map_actions_process_payment'] = "Zahlungseingang verbuchen";//1
-$map_payments_filtered'] = "Zahlungseing&auml;nge gefiltert nach Re-Nr.";//1
-$map_payments_filtered_invoice'] = "Zahlungseingang f&uuml;r diese Rechnung verbuchen";//1
-$map_payments_filtered_customer'] = "Zahlungseing&auml;nge gefiltert nach Kunden-Nr.";//1
-
-#Manage Tax Rate
-$mtr_page_title'] = " - Steuers&auml;tze verwalten";//1
-$mtr_page_header'] = "Steuers&auml;tze verwalten";//1
-$mtr_no_invoices'] = "Es sind keine Steuers&auml;tze in der Datenbank vorhanden";//1
-$mtr_table_action'] = "Aktion";//1
-$mtr_table_tax_id'] = "Steuersatz ID";//1
-$mtr_table_tac_desc'] = "Beschreibung des Steuersatzes";//1
-$mtr_table_percentage'] = "% Steuersatz";//1
-$mtr_actions_view'] = "Anzeigen";//1
-$mtr_actions_edit'] = "Bearbeiten";//1
-$mtr_actions_new_tax'] = "Steuersatz anlegen";//1
-
-#Manage Payment Types
-$mpt_page_title'] = " - Zahlungseingangsarten verwalten";//1
-$mpt_page_header'] = "Zahlungseingangsarten verwalten";//1
-$mpt_no_invoices'] = "Es sind keine Zahlungseingangsarten in der Datenbank vorhanden";//1
-$mpt_table_action'] = "Aktion";//1
-$mpt_table_pt_id'] = "ID";//1
-$mpt_table_pt_description'] = "Beschreibung";//1
-$mpt_actions_view'] = "Anzeigen";//1
-$mpt_actions_edit'] = "Bearbeiten";//1
-$mpt_actions_new_tax'] = "Zahlungseingangsart anlegen";//1
 ?>

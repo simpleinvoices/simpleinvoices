@@ -298,145 +298,19 @@ $LANG['stats_debtor'] ="Suurin velallinen";//1
 $LANG['stats_customer'] ="Ykk&ouml;//1sasiakas - laskutuksen m&auml;&auml;r&auml;n mukaan";//1
 $LANG['stats_biller'] ="Ykk&ouml;//1slaskuttaja - laskutuksen m&auml;&auml;r&auml;n mukaan";//1
 
-/* Dont translate anything below here */
-
-
-
-#Manage Invoices
-$mi_page_title'] = " - Laskujen hallinta";//1
-$mi_page_header'] = "Laskujen hallinta";//1
-$mi_no_invoices'] = "Tietokannassa ei ole yht&auml;&auml;n laskua";//1
-$mi_table_action'] = "Toiminto";//1
-$mi_table_id'] = "Laskunro";//1
-$mi_table_biller'] = "Laskuttaja";//1
-$mi_table_customer'] = "Asiakas";//1
-$mi_table_total'] = "Yhteens&auml;";//1
-$mi_table_paid'] = "Maksettu";//1
-$mi_table_owing'] = "J&auml;ljell&auml;";//1
-$mi_table_type'] = "Laji";//1
-$mi_table_date'] = "Luotu";//1
-$mi_actions_quick_view'] = "n&auml;yt&auml;";//1
-$mi_actions_quick_view_tooltip'] = "Pikan&auml;kym&auml; kohteesta";//1 
-$mi_actions_edit_view'] = "muokkaa";//1
-$mi_actions_edit_view_toolkit'] = "Muokkaa";//1
-$mi_actions_print_preview_tooltip'] = "Tulostuksen esikatselu kohteesta";//1
-$mi_actions_export_tooltip'] = "Vie";//1
-$mi_actions_export_pdf_tooltip'] = "PDF-muodossa";//1
-$mi_actions_format_tooltip'] = "muodossa";//1
-$mi_actions_export_xls_tooltip'] = "taulukkolaskentaohjelmaan";//1
-$mi_actions_export_doc_tooltip'] = "tekstink&auml;sittelyohjelmaan";//1
-$mi_actions_process_payment'] = "Merkitse maksetuksi";//1
-$mi_action_invoice_total'] = "Uusi lasku - kokonaissummalla";//1
-$mi_action_invoice_itemised'] = "Uusi lasku - yksil&ouml;//1ityn&auml;";//1
-$mi_action_invoice_consulting'] = "Uusi lasku - konsultointia";//1
-
-#Manage Products
-$mp_page_title'] = " - Tuotteiden hallinta";//1
-$mp_page_header'] = "Tuotteiden hallinta";//1
-$mp_no_invoices'] = "Tietokannassa ei ole yht&auml;&auml;n tuotetta, lis&auml;&auml; ainakin yksi";//1
-$mp_table_action'] = "Toiminto";//1
-$mp_table_product_id'] = "Tuotenumero";//1
-$mp_table_product_desc'] = "Tuotekuvaus";//1
-$mp_table_unit_price'] = "Yksikk&ouml;//1hinta";//1
-$mp_actions_view'] = "N&auml;yt&auml;";//1
-$mp_actions_edit'] = "Muokkaa";//1
-$mp_actions_new_product'] = "Lis&auml;&auml; uusi tuote";//1
-
-#Manage Billers
-$mb_page_title'] = " - Laskuttajien hallinta";//1
-$mb_page_header'] = "Laskuttajien hallinta";//1
-$mb_no_invoices'] = "Tietokannassa ei ole yht&auml;&auml;n laskuttajaa";//1
-$mb_table_action'] = "Toiminto";//1
-$mb_table_biller_id'] = "Laskuttajan numero";//1
-$mb_table_biller_name'] = "Laskuttajan nimi";//1
-$mb_table_phone'] = "Puhelin";//1
-$mb_table_mobile_phone'] = "GSM-puhelin";//1
-$mb_table_email'] = "S&auml;hk&ouml;//1posti";//1
-$mb_actions_view'] = "N&auml;yt&auml;";//1
-$mb_actions_edit'] = "Muokkaa";//1
-$mb_actions_new_biller'] = "Lis&auml;&auml; uusi laskuttaja";//1
-
-#Manage Customers
-$mc_page_title'] = " - Asiakkaiden hallinta";//1
-$mc_page_header'] = "Asiakkaiden hallinta";//1
-$mc_no_invoices'] = "Tietokannassa ei ole yht&auml;&auml;n asiakasta, lis&auml;&auml; ainakin yksi";//1
-$mc_table_action'] = "Toiminto";//1
-$mc_table_customer_id'] = "Asiakasnumero";//1
-$mc_table_customer_name'] = "Asiakkaan nimi";//1
-$mc_table_attention'] = "Viite";//1
-$mc_table_phone'] = "Puhelin";//1
-$mc_table_email'] = "S&auml;hk&ouml;//1posti";//1
-$mc_actions_view'] = "N&auml;yt&auml;";//1
-$mc_actions_edit'] = "Muokkaa";//1
-$mc_actions_new_product'] = "Lis&auml;&auml; uusi asiakas";//1
-
-#Manage Preferences
-$mip_page_title'] = " - Laskujen oletusten hallinta";//1
-$mip_page_header'] = "Laskujen oletusten hallinta";//1
-$mip_no_invoices'] = "Tietokannassa ei ole yht&auml;&auml;n oletuslaskua, lis&auml;&auml; ainakin yksi";//1
-$mip_table_action'] = "Toiminto";//1
-$mip_table_preference_id'] = "Oletuslaskun numero";//1
-$mip_table_description'] = "Kuvaus";//1
-$mip_actions_view'] = "N&auml;yt&auml;";//1
-$mip_actions_edit'] = "Muokkaa";//1
-$mip_actions_new_preference'] = "Lis&auml;&auml; uusi oletuslasku";//1
-
-#Manage System Defaults manage_system_defaults.php
-$msd_default_number_items'] = "Laskurivien oletuslukum&auml;&auml;r&auml;:";//1
-$msd_js_alert_def_inv_template'] = "Laskun oletusmalli";//1
-$msd_def_inv_template'] = "Laskun oletusmalli ";//1
-$msd_no_tax'] = "Valitettavasti ei l&ouml;//1ydy yht&auml;&auml;n oletus-ALV-luokkia, lis&auml;&auml; ainakin yksi";//1
-$msd_no_payment_type'] = "Valitettavasti ei l&ouml;//1ydy yht&auml;&auml;n maksutapaa, lis&auml;&auml; ainakin yksi";//1
-$msd_tax'] = "ALV";//1
-$msd_payment_type'] = "Maksutapa";//1
-$msd_invoice_preference'] = "Oletuslasku";//1
-$msd_no_defaults'] = "Oletuslaskuja ei ole";//1
-$msd_page_title'] = " - J&auml;rjestelm&auml;n oletusarvot";//1
-$msd_heading'] = "J&auml;rjestelm&auml;n oletusarvot";//1
-$msd_submit_button '] = "Tallenna oletusarvot";//1
-
-
-#Manage Account Payments
-$map_page_title'] = " - Maksujen hallinta";//1
-$map_page_header'] = "Maksujen hallinta";//1
-$map_no_invoices'] = "Tietokannassa ei ole maksuja";//1
-$map_table_action'] = "Toiminto";//1
-$map_table_payment_id'] = "Maksunro";//1
-$map_table_payment_invoice_id'] = "Laskunro";//1
-$map_table_biller'] = "Laskuttaja";//1
-$map_table_customer'] = "Asiakas";//1
-$map_table_amount'] = "Summa";//1
-$map_table_notes'] = "Lis&auml;tiedot";//1
-$map_table_payment_type'] = "Maksutapa";//1
-$map_table_date'] = "P&auml;iv&auml;ys";//1
-$map_actions_view'] = "N&auml;yt&auml;";//1
-$map_actions_process_payment'] = "Merkitse maksetuksi";//1
-$map_payments_filtered'] = "Maksut rajattu laskun mukaan";//1
-$map_payments_filtered_invoice'] = "Merkitse t&auml;m&auml; lasku maksetuksi";//1
-$map_payments_filtered_customer'] = "Maksut rajattu asiakkaan mukaan";//1
-
-#Manage Tax Rate
-$mtr_page_title'] = " - Arvonlis&auml;veroluokkien hallinta";//1
-$mtr_page_header'] = "Arvonlis&auml;veroluokkien hallinta";//1
-$mtr_no_invoices'] = "Tietokannassa ei ole ALV-luokkia, lis&auml;&auml; uusia";//1
-$mtr_table_action'] = "Toiminto";//1
-$mtr_table_tax_id'] = "ALV";//1
-$mtr_table_tac_desc'] = "ALV-kuvaus";//1
-$mtr_table_percentage'] = "ALV-prosentti";//1
-$mtr_actions_view'] = "N&auml;yt&auml;";//1
-$mtr_actions_edit'] = "Muokkaa";//1
-$mtr_actions_new_tax'] = "Uusi arvonlis&auml;veroluokka";//1
-
-#Manage Payment Types
-$mpt_page_title'] = " - Maksutapojen hallinta";//1
-$mpt_page_header'] = "Maksutapojen hallinta";//1
-$mpt_no_invoices'] = "Tietokannassa ei ole yht&auml;&auml;n maksutapaa";//1
-$mpt_table_action'] = "Toiminto";//1
-$mpt_table_pt_id'] = "Nro";//1
-$mpt_table_pt_description'] = "Kuvaus";//1
-$mpt_actions_view'] = "N&auml;yt&auml;";//1
-$mpt_actions_edit'] = "Muokkaa";//1
-$mpt_actions_new_tax'] = "Uusi maksutapa";//1
-
+/* New stuff */
+$LANG['no_products'] = "There are no products in the database, please add one";//0
+$LANG['no_billers'] = "There are no billers in the database, please add one";//0
+$LANG['no_customers'] = "There are no customers in the database, please add one";//0
+$LANG['no_preferences'] = "There are no invoice preferences in the database, please add one";//0
+$LANG['default_number_items'] = "Default number of line items:";//0
+$LANG['default_inv_template'] = "Default invoice template ";//0
+$LANG['no_defaults'] = "There are no defaults";//0
+$LANG['no_payments'] = "There are no payments in the database";//0
+$LANG['payment_id'] = "Payment ID";//0
+$LANG['payments_filtered'] = "Payments filtered by Invoice ID";//0
+$LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
+$LANG['payments_filtered_customer'] = "Payments filtered by Customer ID";//0
+$LANG['no_tax_rates'] = "There are no tax rates in the database, please add one";//0
 
 ?>

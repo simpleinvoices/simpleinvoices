@@ -295,151 +295,19 @@ $LANG['stats_debtor'] ="Grans Deudors";//1
 $LANG['stats_customer'] ="Millors Clients - per total facturat";//1
 $LANG['stats_biller'] ="Millor Facturador - per total facturat";//1
 
-/* Dont translate anything below here */
 
-
-
-
-
-
-
-
-
-#Manage Invoices
-$mi_page_title'] = " - Gesti&oacute;//1 de Factures";//1
-$mi_page_header'] = "Gestionar Factures";//1
-$mi_no_invoices'] = "No hi ha factures a la base de dades";//1
-$mi_table_action'] = "Acci&oacute;//1";//1
-$mi_table_id'] = "ID";//1
-$mi_table_biller'] = "Facturador";//1
-$mi_table_customer'] = "Client";//1
-$mi_table_total'] = "Total";//1
-$mi_table_paid'] = "Pagament";//1
-$mi_table_owing'] = "El deure";//1
-$mi_table_type'] = "Tipus";//1
-$mi_table_date'] = "Data creaci&oacute;//1";//1
-$mi_actions_quick_view'] = "vista";//1
-$mi_actions_quick_view_tooltip'] = "Vista r&agrave;//1 de";//1 
-$mi_actions_edit_view'] = "editar";//1
-$mi_actions_edit_view_toolkit'] = "Editar";//1
-$mi_actions_print_preview_tooltip'] = "Imprimir Previsualitzaci&oacute;//1";//1
-$mi_actions_export_tooltip'] = "Exportar";//1 
-$mi_actions_export_pdf_tooltip'] = "format PDF";//1
-$mi_actions_format_tooltip'] = "format";//1
-$mi_actions_export_xls_tooltip'] = "com full de c&agrave;//1lcul";//1
-$mi_actions_export_doc_tooltip'] = "com word";//1
-$mi_actions_process_payment'] = "Proc&eacute;//1s de pagament";//1
-$mi_action_invoice_total'] = "Nova Factura - Estil Total";//1
-$mi_action_invoice_itemised'] = "Nova Factura - Estil l&iacute;//1nia";//1
-$mi_action_invoice_consulting'] = "Nova Factura - Estil consulta";//1
-
-#Manage Products
-$mp_page_title'] = " - Gesti&oacute;//1 de Productes";//1
-$mp_page_header'] = "Gestionar Productes";//1
-$mp_no_invoices'] = "No hi ha productes a la base de dades";//1
-$mp_table_action'] = "Acci&oacute;//1";//1
-$mp_table_product_id'] = "ID Producte";//1
-$mp_table_product_desc'] = "Descripci&oacute;//1 producte";//1
-$mp_table_unit_price'] = "PReu Unitari";//1
-$mp_actions_view'] = "Veure";//1
-$mp_actions_edit'] = "Editar";//1
-$mp_actions_new_product'] = "Afegir Nou Producte";//1
-
-#Manage Billers
-$mb_page_title'] = " - Gesti&oacute;//1 de Facturadors";//1
-$mb_page_header'] = "Gestionar Facturadors";//1
-$mb_no_invoices'] = "No hi ha facturadors, afegeix-ne un";//1
-$mb_table_action'] = "Acci&oacute;//1";//1
-$mb_table_biller_id'] = "ID Facturador";//1
-$mb_table_biller_name'] = "Nom Facturador";//1
-$mb_table_phone'] = "Tel&egrave;//1fon";//1
-$mb_table_mobile_phone'] = "M&ograve;//1bil";//1
-$mb_table_email'] = "Email";//1
-$mb_actions_view'] = "Veure";//1
-$mb_actions_edit'] = "Editar";//1
-$mb_actions_new_biller'] = "Afegir Nou Facturador";//1
-
-#Manage Customers
-$mc_page_title'] = " - Gesti&oacute;//1 de Clients";//1
-$mc_page_header'] = "Gestionar Clients";//1
-$mc_no_invoices'] = "No hi ha Clients, sisplau afegeix-ne un";//1
-$mc_table_action'] = "Acci&ograve;//1";//1
-$mc_table_customer_id'] = "ID Client";//1
-$mc_table_customer_name'] = "Nom Client";//1
-$mc_table_attention'] = "Atenci&oacute;//1";//1
-$mc_table_phone'] = "Tel&egrave;//1fon";//1
-$mc_table_email'] = "Email";//1
-$mc_actions_view'] = "Veure";//1
-$mc_actions_edit'] = "Editar";//1
-$mc_actions_new_product'] = "Afegir Nou Client";//1
-
-#Manage Preferences
-$mip_page_title'] = " - Gesti&oacute;//1 de Prefer&egrave;//1ncies";//1
-$mip_page_header'] = "Gestionar Prefer&egrave;//1ncies";//1
-$mip_no_invoices'] = "No hi ha prefer&egrave;//1ncies definides";//1
-$mip_table_action'] = "Acci&ograve;//1";//1
-$mip_table_preference_id'] = "ID Prefer&egrave;//1ncia";//1
-$mip_table_description'] = "Descripci&oacute;//1";//1
-$mip_actions_view'] = "Veure";//1
-$mip_actions_edit'] = "Editar";//1
-$mip_actions_new_preference'] = "Afegir Prefer&egrave;//1ncia Factura";//1
-
-#Manage System Defautls manage_system_defaults.php
-$msd_default_number_items'] = "Nombre de l&iacute;//1nies de productes:";//1
-$msd_js_alert_def_inv_template'] = "Plantilla factura per defecte";//1
-$msd_def_inv_template'] = "Plantilla factura per defecte ";//1
-$msd_no_tax'] = "Perdoni, ha de definir un tipus d'IVA, sisplau isereixi un";//1
-$msd_no_payment_type'] = "Perdoni, no est&agrave;//1 disponible el m&egrave;//1tode de pagament, sisplau isereixi un";//1
-$msd_tax'] = "Tipus d'IVA";//1
-$msd_payment_type'] = "Tipus Pagament";//1
-$msd_invoice_preference'] = "Prefer&egrave;//1ncies Factura";//1
-$msd_no_defaults'] = "No hi ha configuracions per defecte";//1
-$msd_page_title'] = " - Gesti&oacute;//1 de Configuracions per Defecte";//1
-$msd_heading'] = "Gestionar Configuracions per Defecte";//1
-$msd_submit_button '] = "Enviar Configuracions per Defecte";//1
-
-
-#Manage Account Payments
-$map_page_title'] = " - Gesti&oacute;//1 de Pagaments";//1
-$map_page_header'] = "Gestionar Pagaments";//1
-$map_no_invoices'] = "No hi ha sistemes de pagaments";//1
-$map_table_action'] = "Acci&ograve;//1";//1
-$map_table_payment_id'] = "ID PAgament";//1
-$map_table_payment_invoice_id'] = "ID Fact.";//1
-$map_table_biller'] = "Facturador";//1
-$map_table_customer'] = "Client";//1
-$map_table_amount'] = "Quantitat";//1
-$map_table_notes'] = "Notes";//1
-$map_table_payment_type'] = "Tipus Pagament";//1
-$map_table_date'] = "Data";//1
-$map_actions_view'] = "Veure";//1
-$map_actions_process_payment'] = "Proc&eacute;//1s Pagament";//1
-$map_payments_filtered'] = "Pagaments filtrats per Factura";//1
-$map_payments_filtered_invoice'] = "Proc&eacute;//1s de pagament per aquesta Factura";//1
-$map_payments_filtered_customer'] = "Pagaments filtrats per Client";//1
-
-#Manage Tax Rate
-$mtr_page_title'] = " - Gesti&oacute;//1 de Tipus d'IVA";//1
-$mtr_page_header'] = "Gestionar Tipus d'IVA";//1
-$mtr_no_invoices'] = "No hi ha Tipus d'IVA a la base de dades";//1
-$mtr_table_action'] = "Acci&ograve;//1";//1
-$mtr_table_tax_id'] = "ID Tipus d'IVA";//1
-$mtr_table_tac_desc'] = "Descripci&oacute;//1";//1
-$mtr_table_percentage'] = "Percentatge";//1
-$mtr_actions_view'] = "Veure";//1
-$mtr_actions_edit'] = "Editar";//1
-$mtr_actions_new_tax'] = "Afegir Nou Tipus d'IVA";//1
-
-
-#Manage Payment Types
-$mpt_page_title'] = " - Gesti&oacute;//1 de Tipus de Pagaments";//1
-$mpt_page_header'] = "Gestionar Tipus de Pagaments";//1
-$mpt_no_invoices'] = "No hiha tipus de pagaments a la base de dades";//1
-$mpt_table_action'] = "Acci&ograve;//1";//1
-$mpt_table_pt_id'] = "ID";//1
-$mpt_table_pt_description'] = "Descripci&oacute;//1";//1
-$mpt_actions_view'] = "Veure";//1
-$mpt_actions_edit'] = "Editar";//1
-$mpt_actions_new_tax'] = "Afegir Tipus de Pagament";//1
-
+/* New stuff */
+$LANG['no_products'] = "There are no products in the database, please add one";//0
+$LANG['no_billers'] = "There are no billers in the database, please add one";//0
+$LANG['no_customers'] = "There are no customers in the database, please add one";//0
+$LANG['no_preferences'] = "There are no invoice preferences in the database, please add one";//0
+$LANG['default_number_items'] = "Default number of line items:";//0
+$LANG['default_inv_template'] = "Default invoice template ";//0
+$LANG['no_defaults'] = "There are no defaults";//0
+$LANG['no_payments'] = "There are no payments in the database";//0
+$LANG['payment_id'] = "Payment ID";//0
+$LANG['payments_filtered'] = "Payments filtered by Invoice ID";//0
+$LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
+$LANG['payments_filtered_customer'] = "Payments filtered by Customer ID";//0
+$LANG['no_tax_rates'] = "There are no tax rates in the database, please add one";//0
 ?>
