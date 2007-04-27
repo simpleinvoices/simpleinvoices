@@ -23,7 +23,7 @@
 	<hr></hr>
 	<table align=center>
 		<tr>
-			<td class="details_screen">Payment type description <a href="./src/documentation/info_pages/required_field.html" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png"></img></a></td>
+			<td class="details_screen">Payment type description <a href="./modules/documentation/info_pages/required_field.html" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png"></img></a></td>
 			<td><input type=text name="pt_description" size=50></td>
 		</tr>
 		<tr>

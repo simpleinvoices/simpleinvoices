@@ -135,7 +135,7 @@ if($ChallengeLife>0) {
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Simple Invoices Login</title>
-<link rel="stylesheet" type="text/css" href="src/include/css/login.css">
+<link rel="stylesheet" type="text/css" href="modules/include/css/login.css">
 
 </head>
 

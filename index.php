@@ -17,7 +17,7 @@ $smarty -> assign("LANG",$LANG);
 
 /*
 if (($section != null ) AND ($view != null) AND ($case != null)) {
-        include("./src/$section/$view.php?$case");
+        include("./modules/$section/$view.php?$case");
 }
 */
 
@@ -29,8 +29,8 @@ if (($module == "invoices" ) AND (strstr($view,"templates"))) {
 	        die("Invalid view requested");
 	}
 	*/
-	if (file_exists("./src/$module/$view.php")) {
-	        include("./src/$module/$view.php");
+	if (file_exists("./modules/$module/$view.php")) {
+	        include("./modules/$module/$view.php");
 	}
 	else {
 		echo "The file that you requested doesn't exist";
@@ -56,21 +56,21 @@ else if (($module != null ) AND ($view != null)) {
 	$smarty -> display("../templates/default/header.tpl");
 	
 	/*Check to make sure that the requested files exist*/
-	if (file_exists("./src/$module/$view.php")) {
+	if (file_exists("./modules/$module/$view.php")) {
 
 			
 			if(file_exists("./templates/default/{$module}/{$view}.tpl")) {
-				include("./src/$module/$view.php");
+				include("./modules/$module/$view.php");
 				
 				$smarty -> display("../templates/default/{$module}/{$view}.tpl");
 			}
 			else {
-	        	include("./src/$module/$view.php");
+	        	include("./modules/$module/$view.php");
 			}
 	        
 	        /* Combines Code and template...
 	         * First have to create all templates
-	        $temp = file_get_contents("./src/$module/$view.html");
+	        $temp = file_get_contents("./modules/$module/$view.html");
 	         $temp = addslashes($temp); $content = "";
 
 	         eval('$content = "'.$temp.'";');

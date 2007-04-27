@@ -1,8 +1,8 @@
 <?php
 
 
-require_once("./src/include/js/lgplus/php/chklang.php");
-require_once("./src/include/js/lgplus/php/settings.php");
+require_once("./modules/include/js/lgplus/php/chklang.php");
+require_once("./modules/include/js/lgplus/php/settings.php");
 
 
 include('./include/include_auth.php');

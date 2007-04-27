@@ -471,7 +471,7 @@ EOD;
 function getRicoLiveGrid($name, $columnSpecs) {
 	
 	echo <<<EOD
-	<script src="./src/include/js/lgplus/js/rico.js" type="text/javascript"></script>
+	<script src="./modules/include/js/lgplus/js/rico.js" type="text/javascript"></script>
 	<script type='text/javascript'>
 	Rico.loadModule('LiveGrid');
 	Rico.loadModule('LiveGridMenu');
@@ -499,7 +499,7 @@ Rico.Buffer.Base($('$name').tBodies[0]), opts); });
 </script>
 
 <!--[if gte IE 5.5]>
-<link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
+<link rel="stylesheet" type="text/css" href="./modules/include/css/iehacks.css" media="all"/>
 <![endif]-->
 EOD;
 }
