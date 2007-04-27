@@ -1,10 +1,19 @@
 <?php
 
 /*
-@author:
-@last edited: 2007-04-25
-@license: GPL v2 or above
+* Script: cestina_czech.inc.php
+*   Cestina - Czech translation file
+*
+* Authors:
+*  	Roman Dergam
+*
+* Last edited:
+*    2007-04-27
+*
+* License:
+*    GPL v2 or above
 */
+
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
 regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
@@ -13,8 +22,6 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
 #all
 $title = "Simple Invoices";//1
 
-
-#New lang file style $lang followed by the word or description - not grouped by page
 $LANG['about'] = "O programu";//1
 $LANG['account_info'] = "Informace ú?tu";//1
 $LANG['actions'] = "Akce";//1
@@ -27,11 +34,10 @@ $LANG['add_new_payment_type'] = "P?idat nový zp?sob úhrady";//1
 $LANG['add_new_preference'] = "P?idat volbu nové faktury";//1
 $LANG['add_new_product'] = "P?idat novou položku";//1
 $LANG['add_new_tax_rate'] = "P?idat novou sazbu dan?";//1
-$LANG['add_tax_rate'] = "P?idat sazbu dan?";//1
 $LANG['add_payment_type'] = "P?idat zp?sob úhrady";//1
 $LANG['add_product'] = "P?idat položku";//1
+$LANG['add_tax_rate'] = "P?idat sazbu dan?";//1
 $LANG['address'] = "Adresa";//1
-#might be able to delete adderss: variable - grep files
 $LANG['address_city'] = "Adresa: M?sto";//1
 $LANG['address_country'] = "Adresa: Stát";//1
 $LANG['address_state'] = "Adresa: Stát (USA)";//1
@@ -47,10 +53,10 @@ $LANG['biller_details'] = "Údaje dodavatele";//1
 $LANG['biller_edit'] = "Editovat dodavatele";//1
 $LANG['biller_id'] = "ID dodavatele";//1
 $LANG['biller_name'] = "Jméno dodavatele";//1
-$LANG['biller_to_add'] = "P?idat dodavatele";//1
 $LANG['biller_sales'] = "Prodej dodavatele";//1
-$LANG['biller_sales_total'] = "Prodej dodavatele - celkem";//1
 $LANG['biller_sales_by_customer_totals'] = "Prodej dodavatele podle odb?ratele - celkem"; //1
+$LANG['biller_sales_total'] = "Prodej dodavatele - celkem";//1
+$LANG['biller_to_add'] = "P?idat dodavatele";//1
 $LANG['billers'] = "Dodavatelé";//1
 $LANG['cancel'] = "Zrušit";//1
 $LANG['change_log'] = "P?ehled zm?n";//1
@@ -58,13 +64,14 @@ $LANG['city'] = "M?sto";//1
 $LANG['consulting'] = "Poradenství";//1
 $LANG['consulting_style'] = "Styl Poradenství";//1
 $LANG['country'] = "Stát";//1
+$LANG['create_invoice'] ="Vytvo?it fakturu";//1
 $LANG['credits'] = "Tv?rci";//1
 $LANG['currency_sign'] = "Symbol m?ny";//1
+$LANG['custom_field'] = "Volitelné pole";//1
 $LANG['custom_field1'] = "Volitelné pole 1";//1
 $LANG['custom_field2'] = "Volitelné pole 2";//1
 $LANG['custom_field3'] = "Volitelné pole 3";//1
 $LANG['custom_field4'] = "Volitelné pole 4";//1
-$LANG['custom_field'] = "Volitelné pole";//1
 $LANG['custom_field_db_field_name'] = "Název pole databáze";//1
 $LANG['custom_fields'] = "Volitelná pole";//1
 $LANG['custom_fields_upper'] = "Volitelná pole";//1
@@ -85,8 +92,10 @@ $LANG['date_formatted'] = "Datum (RRRR-MM-DD)";//1
 $LANG['date_upper'] = "Date";//0
 $LANG['days'] = "dny";//1
 $LANG['debtors'] = "Dlužníci";//1
-$LANG['debtors_by_amount_owed'] = "Dlužníci podle dlužné ?ástky";//1
 $LANG['debtors_by_aging_periods'] = "Dlužníci podle splatnosti";//1
+$LANG['debtors_by_amount_owed'] = "Dlužníci podle dlužné ?ástky";//1
+$LANG['default_inv_template'] = "Default invoice template ";//0
+$LANG['default_number_items'] = "Default number of line items:";//0
 $LANG['description'] = "Popis";//1
 $LANG['details'] = "Podrobnosti";//1
 $LANG['disabled'] = "Neaktivní";//1
@@ -102,9 +111,14 @@ $LANG['export_pdf_tooltip'] = "jako PDF formát";//1
 $LANG['export_tooltip'] = "Export";//1
 $LANG['export_xls_tooltip'] = "do tabulky jako";//1
 $LANG['faqs'] = "?asto kladené otázky";//1
+$LANG['faqs_how'] ="Jak vytvo?ím faktury?";//1
+$LANG['faqs_need'] ="Co pot?ebuji pro fakturování?";//1
+$LANG['faqs_type'] ="Jaké jsou r?zné typy faktur?";//1
+$LANG['faqs_what'] ="Co je Simple Invoices?";//1
 $LANG['fax'] = "Fax";//1
 $LANG['format_tooltip'] = "formát";//1
 $LANG['get_help'] = "Pomoc";//1
+$LANG['getting_started'] ="Za?ínáme";//1
 $LANG['gross_total'] = "Hrubá ?ástka";//1
 $LANG['help'] = "Nápov?da";//1
 $LANG['help_manage_invoices'] = "Co znamenají jednotlivé sloupce?";//1
@@ -113,10 +127,13 @@ $LANG['home'] = "Dom?";//1
 $LANG['id'] = "ID";//1
 $LANG['ie_10_for_10'] = "* nap?. 10 pro 10 %";//1
 $LANG['included'] = "v?etn?";//1
+$LANG['insert_biller'] = "P?idat dodavatele";//1
 $LANG['insert_biller'] = "Vložit dodavatele";//1
+$LANG['insert_customer'] = "P?idat odb?ratele";//1
 $LANG['insert_customer'] = "Vložit odb?ratele";//1
 $LANG['insert_payment_type'] = "Vložit zp?sob úhrady";//1
 $LANG['insert_preference'] = "Vložit volbu";//1
+$LANG['insert_product'] = "P?idat položku";//1
 $LANG['insert_product'] = "Vložit položku";//1
 $LANG['insert_tax_rate'] = "Vložit sazbu dan?";//1
 $LANG['installation'] = "Instalace";//1
@@ -154,8 +171,11 @@ $LANG['manage'] = "Spravovat";//1
 $LANG['manage_billers'] = "Spravovat dodavatele";//1
 $LANG['manage_custom_fields'] = "Spravovat volitelná pole";//1
 $LANG['manage_customers'] = "Spravovat odb?ratele";//1
-$LANG['manage_invoices'] = "Spravovat faktury";//1
+$LANG['manage_data'] ="Spravovat vaše údaje";//1
+$LANG['manage_existing_invoice'] ="Spravovat vytvo?ené faktury";//1
 $LANG['manage_invoice_preferences'] = "Spravovat volby faktur";//1
+$LANG['manage_invoices'] = "Spravovat faktury";//1
+$LANG['manage_invoices'] ="Spravovat faktury";//1
 $LANG['manage_payment_types'] = "Spravovat zp?soby úhrady";//1
 $LANG['manage_payments'] = "Spravovat platby";//1
 $LANG['manage_preferences'] = "Spravovat volby";//1
@@ -167,19 +187,28 @@ $LANG['mobile_short'] = "Mob.";//1
 $LANG['new_invoice_consulting'] = "Nové faktury - poradenství";//1
 $LANG['new_invoice_itemised'] = "Nové faktury - po položkách";//1
 $LANG['new_invoice_total'] = "Nové faktury - celkem";//1
+$LANG['no_billers'] = "There are no billers in the database, please add one";//0
 $LANG['no_customers'] = "Databáze neobsahuje žádné odb?ratele, prosím, vložte alespo? jednoho odb?ratele";//1
+$LANG['no_customers'] = "There are no customers in the database, please add one";//0
+$LANG['no_defaults'] = "There are no defaults";//0
 $LANG['no_invoices'] = "Databáze neobsahuje žádné faktury";//1
 $LANG['no_payment_types'] = "Nejsou k dispozici žádné zp?soby úhrady, prosím, zadejte je";//1
+$LANG['no_payments'] = "There are no payments in the database";//0
 $LANG['no_preferences'] = "Databáze neobsahuje žádné volby faktur, prosím, zadejte je";//1
+$LANG['no_preferences'] = "There are no invoice preferences in the database, please add one";//0
+$LANG['no_products'] = "There are no products in the database, please add one";//0
 $LANG['no_tax_rates'] = "Databáze neobsahuje žádné sazby daní, prosím, zadejte je";//1
+$LANG['no_tax_rates'] = "There are no tax rates in the database, please add one";//0
 $LANG['note'] = "Poznámka";//1
 $LANG['notes'] = "Poznámky";//1
 $LANG['notes_opt'] = "Poznámky (volitelné)";//1
 $LANG['number_short'] = "?íslo dokladu";//1
-$LANG['owing'] = "K úhrad?:";//1
 $LANG['optional'] = "volitelné";//1
 $LANG['options'] = "Možnosti";//1
+$LANG['options'] ="Možnosti";//1
+$LANG['owing'] = "K úhrad?:";//1
 $LANG['paid'] = "Zaplaceno";//1
+$LANG['payment_id'] = "Payment ID";//0
 $LANG['payment_type'] = "Zp?sob úhrady";//1
 $LANG['payment_type_description'] = "Popis zp?sobu úhrady";//1
 $LANG['payment_type_details'] = "Podrobnosti zp?sobu úhrady";//1
@@ -189,6 +218,9 @@ $LANG['payment_type_method'] = "Zp?sob úhrady";//1
 $LANG['payment_type_to_add'] = "Zp?sob úhrady k p?idání";//1
 $LANG['payment_types'] = "Zp?soby úhrady";//1
 $LANG['payments'] = "Platby";//1
+$LANG['payments_filtered'] = "Payments filtered by Invoice ID";//0
+$LANG['payments_filtered_customer'] = "Payments filtered by Customer ID";//0
+$LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
 $LANG['phone'] = "Telefon";//1
 $LANG['phone_short'] = "Tel.";//1
 $LANG['preference_id'] = "ID volby";//1
@@ -210,6 +242,8 @@ $LANG['products_by_customer'] = "Položky podle odb?ratele";//1
 $LANG['products_sold_customer_total'] = "Prodané položky - odb?ratel - celkem";//1
 $LANG['products_sold_total'] = "Prodané položky - celkem";//1
 $LANG['provision_of'] = "Poskytování";//1
+$LANG['quantity'] = "Množství";//1
+$LANG['quantity_short'] = "Množ.";//1
 $LANG['quick_view_of'] = "Toto je rychlý pohled na";//1
 $LANG['quick_view_tooltip'] = "Rychlý pohled na";//1
 $LANG['reports'] = "Sestavy";//1
@@ -218,29 +252,29 @@ $LANG['sales_by_customers'] = "Prodej podle odb?ratel?";//1
 $LANG['sanity_check'] = "Kontrola správnosti faktur";//1
 $LANG['save'] = "Uložit";//1
 $LANG['save_biller'] = "Save Biller";//0
-$LANG['save_biller_success'] = "Biller successfully saved, <br> you will be redirected to the Manage Billers page";//0
 $LANG['save_biller_failure'] = "Something went wrong, please try saving the biller again<br>";//0
+$LANG['save_biller_success'] = "Biller successfully saved, <br> you will be redirected to the Manage Billers page";//0
 $LANG['save_custom_field'] = "Uložit volitelné pole";//1
-$LANG['save_custom_field_success'] = "Custom field successfully saved, <br> you will be redirected back to the Manage Custom Fields";//0
 $LANG['save_custom_field_failure'] = "Something went wrong, please try editing the custom field again<br>";//0
+$LANG['save_custom_field_success'] = "Custom field successfully saved, <br> you will be redirected back to the Manage Custom Fields";//0
 $LANG['save_customer'] = "Save Customer";//0
 $LANG['save_customer_failure'] = "Something went wrong, please try saving the customer again";//0
 $LANG['save_customer_success'] = "Customer successfully saved,<br> you will be redirected back to the Manage Customers page";//0
 $LANG['save_defaults'] = "Save Defaults";//0
 $LANG['save_defaults_biller_success'] = "System defaults: Default biller successfully updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_customer_success'] = "System defaults: Default customer successfully updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
 $LANG['save_defaults_line_items_success'] = "System defaults: Number of line items successfully update,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_payment_type_success'] = "System defaults: Default payment_type updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_preference_success'] = "System defaults: Default invoice preference updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_tax_success'] = "System defaults: Default tax updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_template_success'] = "System defaults: Default invoice template successfully update,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
 $LANG['save_invoice'] = "Save Invoice";//0
 $LANG['save_invoice_failure'] = "Something went wrong, please try saving the invoice again";//0
 $LANG['save_invoice_items_success'] = "Processing invoice items<br> you will be redirected back to the Quick View of this invoice";//0
 $LANG['save_invoice_success'] = "Processing invoice, <br> you will be redirected Quick View of this invoice";//0
-$LANG['save_payment_invoice_success'] = "Payment successfully processed, <br> you will be redirected to the Manage Invoices page";//0
 $LANG['save_payment_failure'] = "Something went wrong, please try saving the payment again";//0
+$LANG['save_payment_invoice_success'] = "Payment successfully processed, <br> you will be redirected to the Manage Invoices page";//0
 $LANG['save_payment_success'] = "Payment successfully processed,<br> you will be redirected back to the Manage Payments page";//0
 $LANG['save_payment_type'] = "Uložit zp?sob úhrady";//1
 $LANG['save_payment_type_failure'] = "Something went wrong, please try saving the payment type again";//0
@@ -254,8 +288,13 @@ $LANG['save_tax_rate'] = "Uložit sazbu dan?";//1
 $LANG['save_tax_rate_failure'] = "Something went wrong, please try adding the tax rate again";//0
 $LANG['save_tax_rate_success'] = "Tax rate successfully saved, <br> you will be redirected to the Manage Tax Rates page";//0
 $LANG['select_invoice'] = "Vyberte, prosím, fakturu";//1
+$LANG['shortcut'] ="Menu zkratek";//1
 $LANG['show_details'] = "Zobrazit podrobnosti";//1
 $LANG['state'] = "Stát (v USA)";//1
+$LANG['stats'] =" Rychlé sestavy";//1
+$LANG['stats_biller'] ="Nejlepší dodavatel - podle faktur. ?ástky";//1
+$LANG['stats_customer'] ="Nejlepší odb?ratel - podle faktur. ?ástky";//1
+$LANG['stats_debtor'] ="Nejv?tší dlužník";//1
 $LANG['street'] = "Ulice";//1
 $LANG['street2'] = "2. ?ádek ulice";//1
 $LANG['sub_total'] = "Mezisou?et";//1
@@ -291,56 +330,11 @@ $LANG['unit_price'] = "Cena za jednotku";//1
 $LANG['upgrading_simple_invoices'] = "Aktualizace Simple Invoices";//1
 $LANG['using_simple_invoices'] = "Používání Simple Invoices";//1
 $LANG['view'] = "Pohled";//1
-$LANG['quantity'] = "Množství";//1
-$LANG['quantity_short'] = "Množ.";//1
 $LANG['want_more_fields'] = "chci více polí";//1
 $LANG['welcome'] = "Vítejte v ";//1
 $LANG['what_are_custom_fields'] = "Co jsou volitelná pole";//1
 $LANG['whats_this_page_about'] = "O ?em je tato stránka";//1
 $LANG['zip'] = "PS?";//1
 
-
-#Index.php - front page
-
-
-$LANG['shortcut'] ="Menu zkratek";//1
-
-$LANG['getting_started'] ="Za?ínáme";//1
-$LANG['faqs_what'] ="Co je Simple Invoices?";//1
-$LANG['faqs_need'] ="Co pot?ebuji pro fakturování?";//1
-$LANG['faqs_how'] ="Jak vytvo?ím faktury?";//1
-$LANG['faqs_type'] ="Jaké jsou r?zné typy faktur?";//1
-
-$LANG['create_invoice'] ="Vytvo?it fakturu";//1
-
-$LANG['manage_existing_invoice'] ="Spravovat vytvo?ené faktury";//1
-$LANG['manage_invoices'] ="Spravovat faktury";//1
-
-$LANG['manage_data'] ="Spravovat vaše údaje";//1
-$LANG['insert_customer'] = "P?idat odb?ratele";//1
-$LANG['insert_biller'] = "P?idat dodavatele";//1
-$LANG['insert_product'] = "P?idat položku";//1
-
-$LANG['options'] ="Možnosti";//1
-
-$LANG['stats'] =" Rychlé sestavy";//1
-$LANG['stats_debtor'] ="Nejv?tší dlužník";//1
-$LANG['stats_customer'] ="Nejlepší odb?ratel - podle faktur. ?ástky";//1
-$LANG['stats_biller'] ="Nejlepší dodavatel - podle faktur. ?ástky";//1
-
-/* New stuff */
-$LANG['no_products'] = "There are no products in the database, please add one";//0
-$LANG['no_billers'] = "There are no billers in the database, please add one";//0
-$LANG['no_customers'] = "There are no customers in the database, please add one";//0
-$LANG['no_preferences'] = "There are no invoice preferences in the database, please add one";//0
-$LANG['default_number_items'] = "Default number of line items:";//0
-$LANG['default_inv_template'] = "Default invoice template ";//0
-$LANG['no_defaults'] = "There are no defaults";//0
-$LANG['no_payments'] = "There are no payments in the database";//0
-$LANG['payment_id'] = "Payment ID";//0
-$LANG['payments_filtered'] = "Payments filtered by Invoice ID";//0
-$LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
-$LANG['payments_filtered_customer'] = "Payments filtered by Customer ID";//0
-$LANG['no_tax_rates'] = "There are no tax rates in the database, please add one";//0
 
 ?>

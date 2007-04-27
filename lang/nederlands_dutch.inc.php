@@ -5,7 +5,7 @@
 * 	Nederland - Dutch translation file
 *
 * Authors:
-*
+*      Frank Heinen, David (darym3 _at_ hotmail.com)
 *
 * Last edited:
 * 	 2007-04-27

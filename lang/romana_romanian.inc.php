@@ -5,7 +5,7 @@
 * 	Romana - Romanianh translation file
 *
 * Authors:
-*
+*   Dentapro
 *
 * Last edited:
 * 	 2007-04-27

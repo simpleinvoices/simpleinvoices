@@ -4,7 +4,7 @@
 *   Castellano - Spanish translation file
 *
 * Authors:
-*    
+*  Esteban Matías Vergara, Anton Meixome   
 *
 * Last edited: 
 *    2007-04-26
