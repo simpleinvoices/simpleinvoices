@@ -46,7 +46,7 @@ ORDER BY
 ";
    $oRpt = new PHPReportMaker();
 
-   $oRpt->setXML("src/reports/xml/report_debtors_by_amount.xml");
+   $oRpt->setXML("/modules/reports/xml/report_debtors_by_amount.xml");
    $oRpt->setUser("$db_user");
    $oRpt->setPassword("$db_password");
    $oRpt->setConnection("$db_host");

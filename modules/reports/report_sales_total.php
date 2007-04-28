@@ -22,7 +22,7 @@ include('./config/config.php');
    $sSQL = "select sum(inv_it_total) from {$tb_prefix}invoice_items";
    $oRpt = new PHPReportMaker();
 
-   $oRpt->setXML("src/reports/xml/report_sales_total.xml");
+   $oRpt->setXML("/modules/reports/xml/report_sales_total.xml");
    $oRpt->setUser("$db_user");
    $oRpt->setPassword("$db_password");
    $oRpt->setConnection("$db_host");
