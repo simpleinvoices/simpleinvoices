@@ -103,7 +103,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
-		<td><textarea name='c_notes' rows=8 value="{$smarty.post.c_notes}"cols=50></textarea></td>
+		<td><textarea name='c_notes' rows=8 cols=50>{$smarty.post.c_notes}</textarea></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>

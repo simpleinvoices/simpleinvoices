@@ -24,31 +24,31 @@
 <table align=center>
 	<tr>
 		<td class="details_screen">{$LANG.product_description} <a href="./modules/documentation/info_pages/required_field.html" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png"></img></a></td>
-		<td><input type=text name="prod_description" size=50></td>
+		<td><input type=text name="prod_description" value="{$smarty.post.prod_description}" size=50></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product_unit_price}</td>
-		<td><input type=text name="prod_unit_price" size=25></td>
+		<td><input type=text name="prod_unit_price" value="{$smarty.post.prod_unit_price}"  size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.1} <a href="./modules/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
-		<td><input type=text name="prod_custom_field1" size=50></td>
+		<td><input type=text name="prod_custom_field1" value="{$smarty.post.prod_custom_field1}"  size=50></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.2} <a href="./modules/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
-		<td><input type=text name="prod_custom_field2" size=50></td>
+		<td><input type=text name="prod_custom_field2" value="{$smarty.post.prod_custom_field2}" size=50></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.3} <a href="./modules/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
-		<td><input type=text name="prod_custom_field3" size=50></td>
+		<td><input type=text name="prod_custom_field3" value="{$smarty.post.prod_custom_field3}" size=50></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.4} <a href="./modules/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
-		<td><input type=text name="prod_custom_field4" size=50></td>
+		<td><input type=text name="prod_custom_field4" value="{$smarty.post.prod_custom_field4}" size=50></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
-		<td><textarea input type=text name='prod_notes' rows=8 cols=50>{$prod_notesField}</textarea></td>
+		<td><textarea input type=text name='prod_notes' rows=8 cols=50>{$smarty.post.prod_notes}</textarea></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product_enabled}</td>
