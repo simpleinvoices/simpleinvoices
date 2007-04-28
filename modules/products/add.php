@@ -7,7 +7,10 @@ checkLogin();
 #get custom field labels
 $customFieldLabel = getCustomFieldLabels("product");
 
-include("./src/products/save.php");
+//if valid then do save
+if ($_POST['prod_description'] != "" ) {
+	include("./src/products/save.php");
+}
 
 $smarty -> assign('customFieldLabel',$customFieldLabel);
 $smarty -> assign('save',$save);

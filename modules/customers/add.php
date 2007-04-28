@@ -5,8 +5,10 @@ checkLogin();
 
 $customFieldLabel = getCustomFieldLabels("customer");
 
-#get custom field labels
-include("./src/customers/save.php");
+//if valid then do save
+if ($_POST['c_name'] != "" ) {
+	include("./src/customers/save.php");
+}
 
 $smarty -> assign('customFieldLabel',$customFieldLabel);
 $smarty -> assign('save',$save);
