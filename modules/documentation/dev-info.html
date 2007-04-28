@@ -14,6 +14,13 @@ old one
 cd lang
 <br><br>
 perl lang_check.pl > lang_check.html
+<b>Stuff</b>
+Vi: remove MS Dos line break<br>
+:1,$s/^M//
+<br><br>
+Perl:<br>
+perl -pi -e '/s/OLD/NEW/g'<br>
+ie. perl -pi -e '/s/\/src\//\/modules\//g'
 <br><br>
 <b>SVN:</b>
 </body>
