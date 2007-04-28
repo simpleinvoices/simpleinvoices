@@ -5,13 +5,13 @@
 
 {if $smarty.get.action== 'view' }
 
-	<b>Preference :: <a href='index.php?module=preferences&view=details&submit={$preference.pref_id}&action=edit'>Edit</a></b>
+	<b>Preference :: <a href='index.php?module=preferences&view=details&submit={$pref.pref_id}&action=edit'>Edit</a></b>
 	<hr></hr>
 
 	
 	<table align=center>
 		<tr>
-  			<td class='details_screen'>Preference ID</td><td>{$preference.pref_id}</td>
+  			<td class='details_screen'>Preference ID</td><td>{$pref.pref_id}</td>
                 </tr>
 		<tr>	
 			<td class='details_screen'>Description <a href="./modules/documentation/info_pages/inv_pref_description.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>{$preference.pref_description}</td>
