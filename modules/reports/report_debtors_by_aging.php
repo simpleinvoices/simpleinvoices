@@ -54,7 +54,7 @@ GROUP BY
 ";
    $oRpt = new PHPReportMaker();
 
-   $oRpt->setXML("/modules/reports/xml/report_debtors_by_aging.xml");
+   $oRpt->setXML("./modules/reports/xml/report_debtors_by_aging.xml");
    $oRpt->setUser("$db_user");
    $oRpt->setPassword("$db_password");
    $oRpt->setConnection("$db_host");

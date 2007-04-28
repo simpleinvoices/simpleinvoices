@@ -20,7 +20,7 @@ if (!defined("BROWSE")) {
 
 <?php
    // include the PHPReports classes on the PHP path! configure your path here
-   include "/modules/reports/PHPReportMaker.php";
+   include "./modules/reports/PHPReportMaker.php";
    include "config/config.php";
 
    $sSQL = "
@@ -43,7 +43,7 @@ GROUP BY
    ";	
    $oRpt = new PHPReportMaker();
 
-   $oRpt->setXML("/modules/reports/xml/report_debtors_owing_by_customer.xml");
+   $oRpt->setXML("./modules/reports/xml/report_debtors_owing_by_customer.xml");
    $oRpt->setUser("$db_user");
    $oRpt->setPassword("$db_password");
    $oRpt->setConnection("$db_host");
