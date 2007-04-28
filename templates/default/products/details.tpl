@@ -1,4 +1,3 @@
-
 <form name="frmpost"
 	action="index.php?module=products&view=save&submit={$smarty.get.submit}"
 	method="post">
@@ -47,10 +46,7 @@
 		<td>{$product.wording_for_enabled}</td>
 	</tr>
 	</table>
-{/if}
 
-
-{if $smarty.get.action== 'view' }
 <hr></hr>
 <a href="index.php?module=products&view=details&submit={$product.prod_id}&action=edit">{$LANG.edit}</a>
 {/if}
