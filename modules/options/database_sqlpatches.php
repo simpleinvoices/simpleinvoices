@@ -8,165 +8,19 @@ include('./include/sql_patches.php');
 
 
 
-
-function check_sql_patch($check_sql_patch_ref, $check_sql_patch_field) {
-        #product query
-        include('./config/config.php');
-        $conn = mysql_connect("$db_host","$db_user","$db_password");
-        mysql_select_db("$db_name",$conn);
-
-
-	#check sql patch 1
-	$sql = "select * from {$tb_prefix}sql_patchmanager where sql_patch_ref = $check_sql_patch_ref" ;
-
-	$result = mysql_query($sql, $conn) or die(mysql_error());
-	$number_of_rows = mysql_num_rows($result);
-
-
-	while ($Array = mysql_fetch_array($result)) {
-        	$sql_idField = $Array['sql_id'];
-	        $sql_patch_refField = $Array['sql_patch_ref'];
-	        $sql_patchField = $Array['sql_patch'];
-        	$sql_releaseField = $Array['sql_release'];
-	}
-
-	if (!empty($sql_idField))  {
-
-	$display_block = "
-		<tr><td>SQL patch $sql_patch_refField, $sql_patchField <i>has</i> already been applied in release $sql_releaseField</td></tr>
-";
-	}
-
-	else if (empty($sql_idField))  {
-		$display_block = "
-
-		<tr><td>SQL patch $check_sql_patch_ref, $check_sql_patch_field  <b>has not</b> been applied to the database</td></tr>
-
-
-	";
-	}
-
-	echo $display_block;
-}
-
-
-
-
-function run_sql_patch($sql_patch_ref, $sql_patch_name, $sql_patch, $sql_update) {
-
-        include('./config/config.php');
-        $conn = mysql_connect("$db_host","$db_user","$db_password");
-        mysql_select_db("$db_name",$conn);
-
-
-	#check sql patch 1
-	$sql_run = "select * from {$tb_prefix}sql_patchmanager where sql_patch_ref = $sql_patch_ref" ;
-
-	$result_run = mysql_query($sql_run, $conn) or die(mysql_error());
-	$number_of_rows_run = mysql_num_rows($result_run);
-
-        while ($Array_run = mysql_fetch_array($result_run)) {
-                $sql_idField = $Array_run['sql_id'];
-                $sql_patch_refField = $Array_run['sql_patch_ref'];
-                $sql_patchField = $Array_run['sql_patch'];
-                $sql_releaseField = $Array_run['sql_release'];
-        }
-
-	#forget about it!! the patch as its already been run
-        if (!empty($sql_idField))  {
-	
-	$display_block = "
-		</div id='header'>
-		<tr><td>Skipping SQL patch $sql_patch_ref, $sql_patch_name as it <i>has</i> already been applied</td></tr>";
-	};
-
-	#patch hasnt been run before so run it - this is ganna be trouble :)
-	if (empty($sql_idField))  {
-		
-		#so do the bloody patch
-                mysql_query($sql_patch, $conn) or die(mysql_error());
-
-
-                $display_block  = "
-
-                <tr><td>SQL patch $sql_patch_ref, $sql_patch_name <i>has</i> been applied to the database</td></tr>
-                ";
-		# now update the {$tb_prefix}sql_patchmanager table
-                mysql_query($sql_update, $conn) or die(mysql_error());
-
-
-                $display_block = "
-
-                <tr><td>SQL patch $sql_patch_ref, $sql_patch_name <b>has</b> been applied</td></tr>
-
-
-
-	";
-	};
-
-
-	echo $display_block;
-}
-
-
-
-
-function initialise_sql_patch() {
-        #product query
-        include('./config/config.php');
-        $conn = mysql_connect("$db_host","$db_user","$db_password");
-        mysql_select_db("$db_name",$conn);
-
-
-
-	#check sql patch 1
-	$sql_patch_init = "CREATE TABLE {$tb_prefix}sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 50 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) TYPE = MYISAM ";
-	mysql_query($sql_patch_init, $conn) or die(mysql_error());
-
-	$display_block = "
-		<tr>
-		<td>Step 2 - The SQL patch table has been created<br></td></tr>";
-
-	echo $display_block;
-
-	$sql_insert = "INSERT INTO {$tb_prefix}sql_patchmanager
- ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement )
-VALUES ('','1','Create {$tb_prefix}sql_patchmanger table','20060514','$sql_patch_init')";
-	mysql_query($sql_insert, $conn) or die(mysql_error());
-
-	$display_block2 = "
-		<tr><td>Step 3 - The SQL patch has been inserted into the SQL patch table<br></td></tr>";
-
-
-	echo $display_block2;
-
-
-}
-
 #Max patches applied - start
-$check_patches_sql = "
-        SELECT
-                count(sql_patch_ref) as count
-        FROM 
-                {$tb_prefix}sql_patchmanager
-        ";
+$check_patches_sql = "SELECT count(sql_patch_ref) as count FROM {$tb_prefix}sql_patchmanager ";
 
-        $patches_result = mysql_query($check_patches_sql, $conn) or die(mysql_error());
+	$patches_result = mysql_query($check_patches_sql, $conn) or die(mysql_error());
+		
+	$patchs = mysql_fetch_array($patches_result);
 
-        while ($Array_patches = mysql_fetch_array($patches_result)) {
-                $max_patches_applied = $Array_patches['count'];
-        };
-
-	if ($max_patches_applied < $patch_count ) {
-		$patches_to_be_applied = $patch_count - $max_patches_applied;
+	if ($patches['count'] < $patch_count ) {
+		$patches_to_be_applied = $patch_count - $patches['count'];
 		$display_note = "<br>
 			<b>Note:</b>You have $patches_to_be_applied patches to be applied
 		";	
 	}
-#Top biller query - start
-
-
-
 
 
 if ($_GET['op'] == "run_updates") {
@@ -303,6 +157,130 @@ EOD;
 }
 
 
-include('./config/config.php'); ?>
+include('./config/config.php'); 
 
-<br><br>
+
+function check_sql_patch($check_sql_patch_ref, $check_sql_patch_field) {
+        #product query
+        include('./config/config.php');
+        $conn = mysql_connect("$db_host","$db_user","$db_password");
+        mysql_select_db("$db_name",$conn);
+
+
+	#check sql patch 1
+	$sql = "select * from {$tb_prefix}sql_patchmanager where sql_patch_ref = $check_sql_patch_ref" ;
+
+	$result = mysql_query($sql, $conn) or die(mysql_error());
+	$number_of_rows = mysql_num_rows($result);
+
+	$patch = mysql_fetch_array($result);
+
+	if (!empty($patch['sql_id']))  {
+
+	$display_block = "
+		<tr><td>SQL patch $patch[sql_patch_ref], $patch[sql_patch] <i>has</i> already been applied in release $patch[sql_release]</td></tr>
+";
+	}
+
+	else if (empty($patch['sql_id']))  {
+		$display_block = "
+
+		<tr><td>SQL patch $check_sql_patch_ref, $check_sql_patch_field  <b>has not</b> been applied to the database</td></tr>
+
+
+	";
+	}
+
+	echo $display_block;
+}
+
+
+
+
+function run_sql_patch($sql_patch_ref, $sql_patch_name, $sql_patch, $sql_update) {
+
+        include('./config/config.php');
+        $conn = mysql_connect("$db_host","$db_user","$db_password");
+        mysql_select_db("$db_name",$conn);
+
+
+	#check sql patch 1
+	$sql_run = "select * from {$tb_prefix}sql_patchmanager where sql_patch_ref = $sql_patch_ref" ;
+
+	$result_run = mysql_query($sql_run, $conn) or die(mysql_error());
+	$number_of_rows_run = mysql_num_rows($result_run);
+	$patch = mysql_fetch_array($result_run);
+	
+	#forget about it!! the patch as its already been run
+        if (!empty($patch['sql_id']))  {
+	
+	$display_block = "
+		</div id='header'>
+		<tr><td>Skipping SQL patch $sql_patch_ref, $sql_patch_name as it <i>has</i> already been applied</td></tr>";
+	};
+
+	#patch hasnt been run before so run it - this is ganna be trouble :)
+	if (empty($patch['sql_id']))  {
+		
+		#so do the bloody patch
+                mysql_query($sql_patch, $conn) or die(mysql_error());
+
+
+                $display_block  = "
+
+                <tr><td>SQL patch $sql_patch_ref, $sql_patch_name <i>has</i> been applied to the database</td></tr>
+                ";
+		# now update the {$tb_prefix}sql_patchmanager table
+                mysql_query($sql_update, $conn) or die(mysql_error());
+
+
+                $display_block = "
+
+                <tr><td>SQL patch $sql_patch_ref, $sql_patch_name <b>has</b> been applied</td></tr>
+
+
+
+	";
+	};
+
+
+	echo $display_block;
+}
+
+
+
+
+function initialise_sql_patch() {
+        #product query
+        include('./config/config.php');
+        $conn = mysql_connect("$db_host","$db_user","$db_password");
+        mysql_select_db("$db_name",$conn);
+
+
+
+	#check sql patch 1
+	$sql_patch_init = "CREATE TABLE {$tb_prefix}sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 50 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) TYPE = MYISAM ";
+	mysql_query($sql_patch_init, $conn) or die(mysql_error());
+
+	$display_block = "
+		<tr>
+		<td>Step 2 - The SQL patch table has been created<br></td></tr>";
+
+	echo $display_block;
+
+	$sql_insert = "INSERT INTO {$tb_prefix}sql_patchmanager
+ ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement )
+VALUES ('','1','Create {$tb_prefix}sql_patchmanger table','20060514','$sql_patch_init')";
+	mysql_query($sql_insert, $conn) or die(mysql_error());
+
+	$display_block2 = "
+		<tr><td>Step 3 - The SQL patch has been inserted into the SQL patch table<br></td></tr>";
+
+
+	echo $display_block2;
+
+
+}
+
+
+?>
