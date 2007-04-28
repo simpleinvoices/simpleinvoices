@@ -5,7 +5,7 @@ checkLogin();
 
 //if valid then do save
 if ($_POST['tax_description'] != "" ) { 
-	include("./src/tax_rates/save.php");
+	include("./modules/tax_rates/save.php");
 }
 
 $smarty -> assign('save',$save);

@@ -150,7 +150,7 @@ if (isset($_GET['export'])) {
 /* End Export code */
 
 
-	include("./src/invoices/templates/${template}/${template}.tpl");
+	include("./modules/invoices/templates/${template}/${template}.tpl");
 
 	
 	
@@ -213,7 +213,7 @@ if (isset($_GET['export'])) {
 		#MERGE ITEMISED AND CONSULTING HERE
 		#PRINT the line items
 		#show the itemised invoice
-		include("./src/invoices/templates/${template}/${template}.tpl");
+		include("./modules/invoices/templates/${template}/${template}.tpl");
 		
 		if ($_GET['invoice_style'] === 'Itemised' ) {
 			$line = addslashes($itemised_line);
@@ -234,11 +234,11 @@ if (isset($_GET['export'])) {
 
 #END INVOICE ITEMEISED/CONSULTING SECTION
 	if (is_null($_GET['export'])) {
-		$css = "./src/invoices/templates/${template}/${template}.css";
+		$css = "./modules/invoices/templates/${template}/${template}.css";
 	}
 	include('./config/config.php');
 	
-	if(file_exists("./src/invoices/templates/${template}/${template}_.tpl")) {
+	if(file_exists("./modules/invoices/templates/${template}/${template}_.tpl")) {
 		$smarty -> assign('invoice_total',$invoice_total);
 		$smarty -> assign('biller',$biller);
 		$smarty -> assign('customer',$customer);
@@ -247,11 +247,11 @@ if (isset($_GET['export'])) {
 		$smarty -> assign('logo',$logo);
 		$smarty -> assign('template',$template);
 		$smarty -> assign('master_invoices',$master_invoices);
-		$smarty -> display("../src/invoices/templates/${template}/${template}_.tpl");
+		$smarty -> display("../modules/invoices/templates/${template}/${template}_.tpl");
 	}
 	else {
 		echo "BBB";
-		$temp = file_get_contents("./src/invoices/templates/${template}/${template}.html");
+		$temp = file_get_contents("./modules/invoices/templates/${template}/${template}.html");
 		$temp = addslashes($temp); $content = "";
 	
 		eval ('$content = "'.$temp.'";');

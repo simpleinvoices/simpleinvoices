@@ -253,7 +253,7 @@ include('./config/config.php');
             
 	$today = date("Y-m-d");
     
-	$temp = file_get_contents('./src/invoices/consulting.tpl');
+	$temp = file_get_contents('./modules/invoices/consulting.tpl');
 
 	$temp = addslashes($temp);	$content = "";
 	

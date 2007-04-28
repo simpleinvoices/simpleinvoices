@@ -59,7 +59,7 @@ else if ($_GET[submit] == "def_inv_template") {
 
 	/*drop down list code for invoice template - only show the folder names in src/invoices/templates*/
 
-	$handle=opendir("./src/invoices/templates/");
+	$handle=opendir("./modules/invoices/templates/");
 	while ($file = readdir($handle)) {
 		if ($file != ".." && $file != "." && $file !=".svn" && $file !="template.php" && $file !="template.php~" ) {
 			$files[] = $file;

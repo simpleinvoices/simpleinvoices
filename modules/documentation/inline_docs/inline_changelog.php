@@ -3,13 +3,13 @@
 include('./include/include_main.php');
 
 
-$fp = fopen( "./src/documentation/ChangeLog.html", "r" );
+$fp = fopen( "./modules/documentation/ChangeLog.html", "r" );
 if(!$fp)
 {
     echo "Couldn't open the data file. Try again later.";
     exit;
 }
-$filename ="./src/documentation/ChangeLog.html";
+$filename ="./modules/documentation/ChangeLog.html";
 $display_block = fread( $fp, filesize( $filename ) );
 ?>
 

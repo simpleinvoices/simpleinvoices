@@ -19,7 +19,7 @@ $page_header = <<<EOD
 <a href="index.php?module=invoices&view=consulting">{$LANG['add_new_invoice']} - {$LANG['consulting_style']}</a>
 <hr></hr>
 EOD;
-include('./src/invoices/manage.inc.php');
+include('./modules/invoices/manage.inc.php');
 
 
 getRicoLiveGrid("ex1","	{ type:'number', decPlaces:0, ClassName:'alignleft' },,,
@@ -29,7 +29,7 @@ getRicoLiveGrid("ex1","	{ type:'number', decPlaces:0, ClassName:'alignleft' },,,
 
 echo <<<EOD
 <!--[if gte IE 5.5]>
-<link rel="stylesheet" type="text/css" href="./src/include/css/iehacks.css" media="all"/>
+<link rel="stylesheet" type="text/css" href="./modules/include/css/iehacks.css" media="all"/>
 <![endif]-->
 EOD;
 

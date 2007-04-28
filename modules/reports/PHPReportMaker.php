@@ -1,5 +1,5 @@
 <?php
-	require_once("./src/reports/PHPReportsUtil.php");
+	require_once("./modules/reports/PHPReportsUtil.php");
 
 	/******************************************************************************
 	*                                                                             *

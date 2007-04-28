@@ -3,7 +3,7 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-include("./src/invoices/email.tpl");
+include("./modules/invoices/email.tpl");
 
 
 #get the invoice id
@@ -21,7 +21,7 @@ $url_pdf = "http://$_SERVER[HTTP_HOST]$install_path/index.php?module=invoices&vi
 $url_pdf_encoded = urlencode($url_pdf); 
 $url_for_pdf = "./include/pdf/html2ps.php?process_mode=single&renderfields=1&renderlinks=1&renderimages=1&scalepoints=1&pixels=$pdf_screen_size&media=$pdf_paper_size&leftmargin=$pdf_left_margin&rightmargin=$pdf_right_margin&topmargin=$pdf_top_margin&bottommargin=$pdf_bottom_margin&transparency_workaround=1&imagequality_workaround=1&output=2&location=pdf&pdfname=$pref_inv_wordingField$inv_idField&URL=$url_pdf_encoded";
 
-include("./src/invoices/email.tpl");
+include("./modules/invoices/email.tpl");
 
 //show the email stage info
 //stage 1 = enter to, from, cc and message
@@ -70,7 +70,7 @@ else if ($_GET['stage'] == 2 ) {
 
 	echo $block_stage2;
 
-	require("./src/include/mail/class.phpmailer.php");
+	require("./modules/include/mail/class.phpmailer.php");
 
 	$mail = new PHPMailer();
 

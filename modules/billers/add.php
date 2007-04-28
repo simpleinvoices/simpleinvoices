@@ -10,7 +10,7 @@ $smarty -> assign("files",$files);
 $customFieldLabel = getCustomFieldLabels("biller");
 
 if ($_POST['name'] != "" ) {
-	include("./src/billers/save.php");
+	include("./modules/billers/save.php");
 }
 
 $smarty -> assign('files',$files);

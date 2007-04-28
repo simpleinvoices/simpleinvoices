@@ -48,7 +48,7 @@ include('./templates/default/customers/details2.tpl');
 
 if ($_GET['action'] == "view") {
 	$display_block = $display_block_view;
-	include('./src/invoices/manage.inc.php');
+	include('./modules/invoices/manage.inc.php');
 	$display_block .= $display_block_view2;
 	$footer = $footer_view;
 }

@@ -30,7 +30,7 @@ if (!defined("BROWSE")) {
 
    $oRpt = new PHPReportMaker();
 
-   $oRpt->setXML("./src/reports/xml/report_biller_by_customer.xml");
+   $oRpt->setXML("./modules/reports/xml/report_biller_by_customer.xml");
    $oRpt->setUser("$db_user");
    $oRpt->setPassword("$db_password");
    $oRpt->setConnection("$db_host");
@@ -41,6 +41,6 @@ if (!defined("BROWSE")) {
 ?>
 	
 <hr></hr>
-<a href="./src/documentation/info_pages/reports_xsl.html" rel="gb_page_center[450, 450]"><font color="red">Did you get an "OOOOPS, THERE'S AN ERROR HERE." error?</font></a>
+<a href="./modules/documentation/info_pages/reports_xsl.html" rel="gb_page_center[450, 450]"><font color="red">Did you get an "OOOOPS, THERE'S AN ERROR HERE." error?</font></a>
 </div>
 <div id="footer"></div>

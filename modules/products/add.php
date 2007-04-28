@@ -9,7 +9,7 @@ $customFieldLabel = getCustomFieldLabels("product");
 
 //if valid then do save
 if ($_POST['prod_description'] != "" ) {
-	include("./src/products/save.php");
+	include("./modules/products/save.php");
 }
 
 $smarty -> assign('customFieldLabel',$customFieldLabel);

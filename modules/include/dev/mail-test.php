@@ -1,6 +1,6 @@
 <?php
 
-require("./src/include/mail/class.phpmailer.php");
+require("./modules/include/mail/class.phpmailer.php");
 
 $mail = new PHPMailer();
 

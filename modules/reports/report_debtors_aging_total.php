@@ -23,7 +23,7 @@ if (!defined("BROWSE")) {
 include('./config/config.php');
 
    // include the PHPReports classes on the PHP path! configure your path here
-   include "./src/reports/PHPReportMaker.php";
+   include "./modules/reports/PHPReportMaker.php";
 
    $sSQL = "
 
@@ -63,7 +63,7 @@ GROUP BY
 ";
    $oRpt = new PHPReportMaker();
 
-   $oRpt->setXML("./src/reports/xml/report_debtors_aging_total.xml");
+   $oRpt->setXML("./modules/reports/xml/report_debtors_aging_total.xml");
    $oRpt->setUser("$db_user");
    $oRpt->setPassword("$db_password");
    $oRpt->setConnection("$db_host");
@@ -74,6 +74,6 @@ GROUP BY
 ?>
 
 <hr></hr>
-<a href="./src/documentation/info_pages/reports_xsl.html" rel="gb_page_center[450, 450]"><font color="red">Did you get an "OOOOPS, THERE'S AN ERROR HERE." error?</font></a>
+<a href="./modules/documentation/info_pages/reports_xsl.html" rel="gb_page_center[450, 450]"><font color="red">Did you get an "OOOOPS, THERE'S AN ERROR HERE." error?</font></a>
 </div>
 <div id="footer"></div>

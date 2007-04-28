@@ -6,7 +6,7 @@ checkLogin();
 
 //if valid then do save
 if ($_POST['pt_description'] != "" ) {
-	include("./src/payment_types/save.php");
+	include("./modules/payment_types/save.php");
 }
 
 $smarty -> assign('save',$save);

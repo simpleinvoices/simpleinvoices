@@ -7,7 +7,7 @@ $customFieldLabel = getCustomFieldLabels("customer");
 
 //if valid then do save
 if ($_POST['c_name'] != "" ) {
-	include("./src/customers/save.php");
+	include("./modules/customers/save.php");
 }
 
 $smarty -> assign('customFieldLabel',$customFieldLabel);
