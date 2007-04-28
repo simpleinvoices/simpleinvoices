@@ -1,89 +1,85 @@
 <?php
-	$patch_count = 0;
+	
 
-	$sql_patch_name_1 = "Create si_sql_patchmanger table";
-        $sql_patch_1 = "CREATE TABLE si_sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 50 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) TYPE = MYISAM)";
-        $sql_patch_update_1 = "INSERT INTO si_sql_patchmanager
- ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement )
-VALUES ('','1','$sql_patch_name_1','20060514','')";
-	$patch_count++;
+	$patch['1']['name'] = "Create si_sql_patchmanger table";
+	$patch['1']['patch'] = "CREATE TABLE si_sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 50 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) TYPE = MYISAM)";
+         $patch['1']['date'] = "20060514";;
+	
 
-	$sql_patch_name_2 = "Update invoice no details to have a default currency sign";
-        $sql_patch_2 = "UPDATE si_preferences SET pref_currency_sign = '$' WHERE pref_id =2 LIMIT 1";
-        $sql_patch_update_2 = "INSERT INTO si_sql_patchmanager
- ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement )
-VALUES ('','2','$sql_patch_name_2','20060514','')";
-	$patch_count++;
+	$patch['2']['name'] = "Update invoice no details to have a default currency sign";
+        $patch['2']['patch'] = "UPDATE si_preferences SET pref_currency_sign = '$' WHERE pref_id =2 LIMIT 1";
+         $patch['2']['date'] = "20060514";;
+	
 
-	$sql_patch_name_3 = "Add a row into the defaults table to handle the default number of line items";
-        $sql_patch_3 = "ALTER TABLE si_defaults ADD def_number_line_items INT( 25 ) NOT NULL";
-        $sql_patch_update_3 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',3,'$sql_patch_name_3',20060514,'')";
-	$patch_count++;
+	$patch['3']['name'] = "Add a row into the defaults table to handle the default number of line items";
+        $patch['3']['patch'] = "ALTER TABLE si_defaults ADD def_number_line_items INT( 25 ) NOT NULL";
+        $patch['3']['date'] = "20060514";
+	
 
-	$sql_patch_name_4 = "Set the default number of line items to 5";
-        $sql_patch_4 = "UPDATE si_defaults SET def_number_line_items = 5 WHERE def_id =1 LIMIT 1";
-        $sql_patch_update_4 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',4,'$sql_patch_name_4',20060514,'')";
-	$patch_count++;
+	$patch['4']['name'] = "Set the default number of line items to 5";
+        $patch['4']['patch'] = "UPDATE si_defaults SET def_number_line_items = 5 WHERE def_id =1 LIMIT 1";
+        $patch['4']['date'] = "20060514";
+	
 
-	$sql_patch_name_5 = "Add logo and invoice footer support to biller";
-        $sql_patch_5 = "ALTER TABLE si_biller ADD b_co_logo VARCHAR( 50 ) ,
+	$patch['5']['name'] = "Add logo and invoice footer support to biller";
+        $patch['5']['patch'] = "ALTER TABLE si_biller ADD b_co_logo VARCHAR( 50 ) ,
 ADD b_co_footer TEXT";
-        $sql_patch_update_5 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',5,'$sql_patch_name_5',20060514,'')";
-	$patch_count++;
+        $patch['5']['date'] = "20060514";
+	
 
-	$sql_patch_name_6 = "Add default invoice template option";
-        $sql_patch_6 = "ALTER TABLE si_defaults ADD def_inv_template VARCHAR( 25 ) DEFAULT 'print_preview.php' NOT NULL";
-        $sql_patch_update_6 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',6,'$sql_patch_name_6',20060514,'')";
-	$patch_count++;
+	$patch['6']['name'] = "Add default invoice template option";
+        $patch['6']['patch'] = "ALTER TABLE si_defaults ADD def_inv_template VARCHAR( 25 ) DEFAULT 'print_preview.php' NOT NULL";
+        $patch['6']['date'] = "20060514";
+	
 
-	$sql_patch_name_7 = "Edit tax description field lenght to 50";
-        $sql_patch_7 = "ALTER TABLE si_tax CHANGE tax_description tax_description VARCHAR( 50 ) DEFAULT NULL";
-        $sql_patch_update_7 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',7,'$sql_patch_name_7',20060526,'')";
-	$patch_count++;
+	$patch['7']['name'] = "Edit tax description field lenght to 50";
+        $patch['7']['patch'] = "ALTER TABLE si_tax CHANGE tax_description tax_description VARCHAR( 50 ) DEFAULT NULL";
+        $patch['7']['date'] = "20060526";
+	
 
-	$sql_patch_name_8 = "Edit default invoice template field lenght to 50";
-        $sql_patch_8 = "ALTER TABLE si_defaults CHANGE def_inv_template def_inv_template VARCHAR( 50 ) DEFAULT NULL";
-        $sql_patch_update_8 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',8,'$sql_patch_name_8',20060526,'')";
-	$patch_count++;
+	$patch['8']['name'] = "Edit default invoice template field lenght to 50";
+        $patch['8']['patch'] = "ALTER TABLE si_defaults CHANGE def_inv_template def_inv_template VARCHAR( 50 ) DEFAULT NULL";
+        $patch['8']['date'] = "20060526";
+	
 
-	$sql_patch_name_9 = "Add consulting style invoice";
-        $sql_patch_9 = "INSERT INTO si_invoice_type ( inv_ty_id , inv_ty_description ) VALUES (3, 'Consulting')";
-        $sql_patch_update_9 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',9,'$sql_patch_name_9',20060531,'')";
-	$patch_count++;
+	$patch['9']['name'] = "Add consulting style invoice";
+        $patch['9']['patch'] = "INSERT INTO si_invoice_type ( inv_ty_id , inv_ty_description ) VALUES (3, 'Consulting')";
+        $patch['9']['date'] = "20060531";
+	
 
-        $sql_patch_name_10 = "Add enabled to biller";
-        $sql_patch_10 = "ALTER TABLE si_biller ADD b_enabled varchar(1) NOT NULL default '1'";
-        $sql_patch_update_10 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',10,'$sql_patch_name_10',20060815,'')";
-	$patch_count++;
+        $patch['10']['name'] = "Add enabled to biller";
+        $patch['10']['patch'] = "ALTER TABLE si_biller ADD b_enabled varchar(1) NOT NULL default '1'";
+        $patch['10']['date'] = "20060815";
+	
 
-        $sql_patch_name_11 = "Add enabled to customters";
-        $sql_patch_11 = "ALTER TABLE si_customers ADD c_enabled varchar(1) NOT NULL default '1'";
-        $sql_patch_update_11 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',11,'$sql_patch_name_11',20060815,'')";
-	$patch_count++;
+        $patch['11']['name'] = "Add enabled to customters";
+        $patch['11']['patch'] = "ALTER TABLE si_customers ADD c_enabled varchar(1) NOT NULL default '1'";
+        $patch['11']['date'] = "20060815";
+	
 
-        $sql_patch_name_12 = "Add enabled to prefernces";
-        $sql_patch_12 = "ALTER TABLE si_preferences ADD pref_enabled varchar(1) NOT NULL default '1'";
-        $sql_patch_update_12 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',12,'$sql_patch_name_12',20060815,'')";
-	$patch_count++;
+        $patch['12']['name'] = "Add enabled to prefernces";
+        $patch['12']['patch'] = "ALTER TABLE si_preferences ADD pref_enabled varchar(1) NOT NULL default '1'";
+        $patch['12']['date'] = "20060815";
+	
 
-        $sql_patch_name_13 = "Add enabled to products";
-        $sql_patch_13 = "ALTER TABLE si_products ADD prod_enabled varchar(1) NOT NULL default '1'";
-        $sql_patch_update_13 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',13,'$sql_patch_name_13',20060815,'')";
-	$patch_count++;
+        $patch['13']['name'] = "Add enabled to products";
+        $patch['13']['patch'] = "ALTER TABLE si_products ADD prod_enabled varchar(1) NOT NULL default '1'";
+        $patch['13']['date'] = "20060815";
+	
 
-        $sql_patch_name_14 = "Add enabled to products";
-        $sql_patch_14 = "ALTER TABLE si_tax ADD tax_enabled varchar(1) NOT NULL default '1'";
-        $sql_patch_update_14 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',14,'$sql_patch_name_14',20060815,'')";
-	$patch_count++;
+        $patch['14']['name'] = "Add enabled to products";
+        $patch['14']['patch'] = "ALTER TABLE si_tax ADD tax_enabled varchar(1) NOT NULL default '1'";
+        $patch['14']['date'] = "20060815";
+	
 
-        $sql_patch_name_15 = "Add tax_id into invoice_items table";
-        $sql_patch_15 = "ALTER TABLE si_invoice_items ADD inv_it_tax_id VARCHAR( 25 ) NOT NULL default '0'  AFTER inv_it_unit_price";
-        $sql_patch_update_15 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',15,'$sql_patch_name_15',20060815,'')";
-	$patch_count++;
+        $patch['15']['name'] = "Add tax_id into invoice_items table";
+        $patch['15']['patch'] = "ALTER TABLE si_invoice_items ADD inv_it_tax_id VARCHAR( 25 ) NOT NULL default '0'  AFTER inv_it_unit_price";
+        $patch['15']['date'] = "20060815";
+	
 
 
-        $sql_patch_name_16 = "Add Payments table";
-        $sql_patch_16 = "
+        $patch['16']['name'] = "Add Payments table";
+        $patch['16']['patch'] = "
 		CREATE TABLE `si_account_payments` (
 		`ac_id` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 		`ac_inv_id` VARCHAR( 10 ) NOT NULL ,
@@ -92,99 +88,99 @@ ADD b_co_footer TEXT";
 		`ac_date` DATETIME NOT NULL
 		);
 	";
-        $sql_patch_update_16 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',16,'$sql_patch_name_16',20060827,'')";
-	$patch_count++;
-
-
-        $sql_patch_name_17 = "Adjust data type of quantuty field";
-        $sql_patch_17 = "ALTER TABLE `si_invoice_items` CHANGE `inv_it_quantity` `inv_it_quantity` FLOAT NOT NULL DEFAULT '0'";
-        $sql_patch_update_17 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',17,'$sql_patch_name_17',20060827,'')";
-	$patch_count++;
-
-
-        $sql_patch_name_18 = "Create Payment Types table";
-        $sql_patch_18 = "CREATE TABLE `si_payment_types` (`pt_id` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,`pt_description` VARCHAR( 250 ) NOT NULL ,`pt_enabled` VARCHAR( 1 ) NOT NULL DEFAULT '1')";
-        $sql_patch_update_18 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',18,'$sql_patch_name_18',20060909,'')";
-	$patch_count++;
-
-
-        $sql_patch_name_19 = "Add info into the Payment Type table";
-        $sql_patch_19 = "INSERT INTO `si_payment_types` ( `pt_id` , `pt_description` ) VALUES (NULL , 'Cash'), (NULL , 'Credit Card')";
-        $sql_patch_update_19 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',19,'$sql_patch_name_19',20060909,'')";
-	$patch_count++;
-
-
-        $sql_patch_name_20 = "Adjust accounts payments table to add a type field";
-        $sql_patch_20 = "ALTER TABLE `si_account_payments` ADD `ac_payment_type` INT( 10 ) NOT NULL DEFAULT '1'";
-        $sql_patch_update_20 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',20,'$sql_patch_name_20',20060909,'')";
-	$patch_count++;
-
-
-        $sql_patch_name_21 = "Adjust the defautls table to add a payment type field";
-        $sql_patch_21 = "ALTER TABLE `si_defaults` ADD `def_payment_type` VARCHAR( 25 ) DEFAULT '1'";
-        $sql_patch_update_21 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',21,'$sql_patch_name_21',20060909,'')";
-	$patch_count++;
-
-
-        $sql_patch_name_22 = "Add note field to customer";
-        $sql_patch_22 = "ALTER TABLE `si_customers` ADD `c_notes` TEXT NULL AFTER `c_email`";
-        $sql_patch_update_22 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',22,'$sql_patch_name_22',20061026,'')";
-	$patch_count++;
-
-
-        $sql_patch_name_23 = "Add note field to Biller";
-        $sql_patch_23 = "ALTER TABLE `si_biller` ADD `b_notes` TEXT NULL AFTER `b_co_footer`";
-        $sql_patch_update_23 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',23,'$sql_patch_name_23',20061026,'')";
-	$patch_count++;
-
-
-        $sql_patch_name_24 = "Add note field to Products";
-        $sql_patch_24 = "ALTER TABLE `si_products` ADD `prod_notes` TEXT NOT NULL AFTER `prod_unit_price`";
-        $sql_patch_update_24 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',24,'$sql_patch_name_24',20061026,'')";
-	$patch_count++;
-
-/*Custom fields patches - start */
-        $sql_patch_name_25 = "Add street address 2 to customers";
-        $sql_patch_25 = "ALTER TABLE `si_customers` ADD `c_street_address2` VARCHAR( 50 ) AFTER `c_street_address` ";
-        $sql_patch_update_25 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',25,'$sql_patch_name_25',20061211,'')";
-	$patch_count++;
+        $patch['16']['date'] = "20060827";
 	
 
-        $sql_patch_name_26 = "Add custom fields to customers";
-        $sql_patch_26 = "
+
+        $patch['17']['name'] = "Adjust data type of quantuty field";
+        $patch['17']['patch'] = "ALTER TABLE `si_invoice_items` CHANGE `inv_it_quantity` `inv_it_quantity` FLOAT NOT NULL DEFAULT '0'";
+        $patch['17']['date'] = "20060827";
+	
+
+
+        $patch['18']['name'] = "Create Payment Types table";
+        $patch['18']['patch'] = "CREATE TABLE `si_payment_types` (`pt_id` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,`pt_description` VARCHAR( 250 ) NOT NULL ,`pt_enabled` VARCHAR( 1 ) NOT NULL DEFAULT '1')";
+        $patch['18']['date'] = "20060909";
+	
+
+
+        $patch['19']['name'] = "Add info into the Payment Type table";
+        $patch['19']['patch'] = "INSERT INTO `si_payment_types` ( `pt_id` , `pt_description` ) VALUES (NULL , 'Cash'), (NULL , 'Credit Card')";
+        $patch['19']['date'] = "20060909";
+	
+
+
+        $patch['20']['name'] = "Adjust accounts payments table to add a type field";
+        $patch['20']['patch'] = "ALTER TABLE `si_account_payments` ADD `ac_payment_type` INT( 10 ) NOT NULL DEFAULT '1'";
+        $patch['20']['date'] = "20060909";
+	
+
+
+        $patch['21']['name'] = "Adjust the defautls table to add a payment type field";
+        $patch['21']['patch'] = "ALTER TABLE `si_defaults` ADD `def_payment_type` VARCHAR( 25 ) DEFAULT '1'";
+        $patch['21']['date'] = "20060909";
+	
+
+
+        $patch['22']['name'] = "Add note field to customer";
+        $patch['22']['patch'] = "ALTER TABLE `si_customers` ADD `c_notes` TEXT NULL AFTER `c_email`";
+        $patch['22']['date'] = "20061026";
+	
+
+
+        $patch['23']['name'] = "Add note field to Biller";
+        $patch['23']['patch'] = "ALTER TABLE `si_biller` ADD `b_notes` TEXT NULL AFTER `b_co_footer`";
+        $patch['23']['date'] = "20061026";
+	
+
+
+        $patch['24']['name'] = "Add note field to Products";
+        $patch['24']['patch'] = "ALTER TABLE `si_products` ADD `prod_notes` TEXT NOT NULL AFTER `prod_unit_price`";
+        $patch['24']['date'] = "20061026";
+	
+
+/*Custom fields patches - start */
+        $patch['25']['name'] = "Add street address 2 to customers";
+        $patch['25']['patch'] = "ALTER TABLE `si_customers` ADD `c_street_address2` VARCHAR( 50 ) AFTER `c_street_address` ";
+        $patch['25']['date'] = "20061211";
+	
+	
+
+        $patch['26']['name'] = "Add custom fields to customers";
+        $patch['26']['patch'] = "
 	ALTER TABLE `si_customers` ADD `c_custom_field1` VARCHAR( 50 ) AFTER `c_notes` ,
 		ADD `c_custom_field2` VARCHAR( 50 ) AFTER `c_custom_field1` ,
 		ADD `c_custom_field3` VARCHAR( 50 ) AFTER `c_custom_field2` ,
 		ADD `c_custom_field4` VARCHAR( 50 ) AFTER `c_custom_field3` ;
 	";
-        $sql_patch_update_26 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',26,'$sql_patch_name_26',20061211,'')";
-	$patch_count++;
+        $patch['26']['date'] = "20061211";
+	
 
-        $sql_patch_name_27 = "Add mobile phone to customers";
-        $sql_patch_27 = "ALTER TABLE `si_customers` ADD `c_mobile_phone` VARCHAR( 50 ) AFTER `c_phone`";
-        $sql_patch_update_27 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',27,'$sql_patch_name_27',20061211,'')";
-	$patch_count++;
-
-
-        $sql_patch_name_28 = "Add street address 2 to billers";
-        $sql_patch_28 = "ALTER TABLE `si_biller` ADD `b_street_address2` VARCHAR( 50 ) AFTER `b_street_address` ";
-        $sql_patch_update_28 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',28,'$sql_patch_name_28',20061211,'')";
-	$patch_count++;
+        $patch['27']['name'] = "Add mobile phone to customers";
+        $patch['27']['patch'] = "ALTER TABLE `si_customers` ADD `c_mobile_phone` VARCHAR( 50 ) AFTER `c_phone`";
+        $patch['27']['date'] = "20061211";
+	
 
 
-        $sql_patch_name_29 = "Add custom fields to billers";
-        $sql_patch_29 = "
+        $patch['28']['name'] = "Add street address 2 to billers";
+        $patch['28']['patch'] = "ALTER TABLE `si_biller` ADD `b_street_address2` VARCHAR( 50 ) AFTER `b_street_address` ";
+        $patch['28']['date'] = "20061211";
+	
+
+
+        $patch['29']['name'] = "Add custom fields to billers";
+        $patch['29']['patch'] = "
 	ALTER TABLE `si_biller` ADD `b_custom_field1` VARCHAR( 50 ) AFTER `b_notes` ,
 		ADD `b_custom_field2` VARCHAR( 50 ) AFTER `b_custom_field1` ,
 		ADD `b_custom_field3` VARCHAR( 50 ) AFTER `b_custom_field2` ,
 		ADD `b_custom_field4` VARCHAR( 50 ) AFTER `b_custom_field3` ;
 	";
-        $sql_patch_update_29 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',29,'$sql_patch_name_29',20061211,'')";
-	$patch_count++;
+        $patch['29']['date'] = "20061211";
+	
 
 
-        $sql_patch_name_30 = "Creating the custom fields table";
-        $sql_patch_30 = "
+        $patch['30']['name'] = "Creating the custom fields table";
+        $patch['30']['patch'] = "
 		CREATE TABLE `si_custom_fields` (
 			`cf_id` INT NOT NULL AUTO_INCREMENT ,
 			`cf_custom_field` VARCHAR( 50 ) NOT NULL ,
@@ -193,12 +189,12 @@ ADD b_co_footer TEXT";
 			PRIMARY KEY ( `cf_id` )
 		);
 	";
-        $sql_patch_update_30 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',30,'$sql_patch_name_30',20061211,'')";
-	$patch_count++;
+        $patch['30']['date'] = "20061211";
+	
 
 
-        $sql_patch_name_31 = "Adding data to the custom fields table";
-        $sql_patch_31 = "
+        $patch['31']['name'] = "Adding data to the custom fields table";
+        $patch['31']['patch'] = "
 	INSERT INTO `si_custom_fields` ( `cf_id` , `cf_custom_field` , `cf_custom_label` , `cf_display` )
 		VALUES (
 		'', 'biller_cf1', NULL , '0'
@@ -226,37 +222,37 @@ ADD b_co_footer TEXT";
 		'', 'prod_custom_field4', NULL , '0'
 	);
 ";
-        $sql_patch_update_31 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',31,'$sql_patch_name_31',20061211,'')";
-	$patch_count++;
+        $patch['31']['date'] = "20061211";
+	
 
 
-        $sql_patch_name_32 = "Adding custom fields to products";
-        $sql_patch_32 = "
+        $patch['32']['name'] = "Adding custom fields to products";
+        $patch['32']['patch'] = "
 	ALTER TABLE `si_products` ADD `prod_custom_field1` VARCHAR( 50 ) AFTER `prod_unit_price` ,
 		ADD `prod_custom_field2` VARCHAR( 50 ) AFTER `prod_custom_field1` ,
 		ADD `prod_custom_field3` VARCHAR( 50 ) AFTER `prod_custom_field2` ,
 		ADD `prod_custom_field4` VARCHAR( 50 ) AFTER `prod_custom_field3` ;
 	";
-        $sql_patch_update_32 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',32,'$sql_patch_name_32',20061211,'')";
-	$patch_count++;
+        $patch['32']['date'] = "20061211";
+	
 
-        $sql_patch_name_33 = "Alter product custom field 4";
-        $sql_patch_33 = "
+        $patch['33']['name'] = "Alter product custom field 4";
+        $patch['33']['patch'] = "
 		UPDATE `si_custom_fields` SET `cf_custom_field` = 'product_cf4' WHERE `si_custom_fields`.`cf_id` =12 LIMIT 1 ;
         ";
-        $sql_patch_update_33 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',33,'$sql_patch_name_33',20061214,'')";
-        $patch_count++;
+        $patch['33']['date'] = "20061214";
+        
 
-        $sql_patch_name_34 = "Reset invoice template to default refer Issue 70";
-        $sql_patch_34 = "
+        $patch['34']['name'] = "Reset invoice template to default refer Issue 70";
+        $patch['34']['patch'] = "
 		UPDATE `si_defaults` SET `def_inv_template` = 'default' WHERE `def_id` =1 LIMIT 1 ;
         ";
-        $sql_patch_update_34 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',34,'$sql_patch_name_34',20070125,'')";
-        $patch_count++;
+        $patch['34']['date'] = "20070125";
+        
 
 
-        $sql_patch_name_35 = "Adding data to the custom fields table for invoices";
-        $sql_patch_35 = "
+        $patch['35']['name'] = "Adding data to the custom fields table for invoices";
+        $patch['35']['patch'] = "
         INSERT INTO `si_custom_fields` ( `cf_id` , `cf_custom_field` , `cf_custom_label` , `cf_display` )
                 VALUES (
                 '', 'invoice_cf1', NULL , '0'
@@ -268,63 +264,57 @@ ADD b_co_footer TEXT";
                 '', 'invoice_cf4', NULL , '0'             
 	        );
 	";
-        $sql_patch_update_35 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',35,'$sql_patch_name_35',20070204,'')";
-        $patch_count++;
+        $patch['35']['date'] = "20070204";
+        
+        
 
-        $sql_patch_name_36 = "Adding custom fields to the invoices table";
-        $sql_patch_36 = "
+        $patch['36']['name'] = "Adding custom fields to the invoices table";
+        $patch['36']['patch'] = "
         ALTER TABLE `si_invoices` ADD `invoice_custom_field1` VARCHAR( 50 ) AFTER `inv_date` ,
                 ADD `invoice_custom_field2` VARCHAR( 50 ) AFTER `invoice_custom_field1` ,
                 ADD `invoice_custom_field3` VARCHAR( 50 ) AFTER `invoice_custom_field2` ,
                 ADD `invoice_custom_field4` VARCHAR( 50 ) AFTER `invoice_custom_field3` ;
         ";
-        $sql_patch_update_36 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',36,'$sql_patch_name_36',20070204,'')";
-        $patch_count++;
+        $patch['36']['date'] = "20070204";
+        
 
 
-        $sql_patch_name_37 = "Reset invoice template to default due to new invoice template system";
-        $sql_patch_37 = "
+        $patch['37']['name'] = "Reset invoice template to default due to new invoice template system";
+        $patch['37']['patch'] = "
 		UPDATE `si_defaults` SET `def_inv_template` = 'default' WHERE `def_id` =1 LIMIT 1 ;
         ";
-        $sql_patch_update_37 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',37,'$sql_patch_name_37',20070325,'')";
-        $patch_count++;
+        $patch['37']['date'] = "20070325";
+        
 
-        $sql_patch_name_38 = "Alter custom field table - field length now 255 for field name";
-        $sql_patch_38 = "
+        $patch['38']['name'] = "Alter custom field table - field length now 255 for field name";
+        $patch['38']['patch'] = "
 		ALTER TABLE `si_custom_fields` CHANGE `cf_custom_field` `cf_custom_field` VARCHAR( 255 )
         ";
-        $sql_patch_update_38 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',38,'$sql_patch_name_38',20070325,'')";
-        $patch_count++;
+        $patch['38']['date'] = "20070325";
+        
 
 
-        $sql_patch_name_39 = "Alter custom field table - field length now 255 for field label";
-        $sql_patch_39 = "
+        $patch['39']['name'] = "Alter custom field table - field length now 255 for field label";
+        $patch['39']['patch'] = "
 		ALTER TABLE `si_custom_fields` CHANGE `cf_custom_label` `cf_custom_label` VARCHAR( 255 )
         ";
-        $sql_patch_update_39 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',39,'$sql_patch_name_39',20070325,'')";
-        $patch_count++;
+        $patch['39']['date'] = "20070325";
         
         
-        $sql_patch_name_40 = "Alter field name in si_account_payments";
-        $sql_patch_40 = "ALTER TABLE  `si_account_payments` CHANGE  `ac_id`  `id` INT( 10 ) NOT NULL AUTO_INCREMENT";
-        $sql_patch_update_40 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',40,'$sql_patch_name_40',20070424,'')";
-        $patch_count++;
         
-        $sql_patch_name_41 = "Alter field name b_name to name";
-        $sql_patch_41 = "ALTER TABLE  `si_biller` CHANGE  `b_name`  `name` VARCHAR( 50 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;";
-        $sql_patch_update_41 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',41,'$sql_patch_name_41',20070424,'')";
-        $patch_count++;
+        $patch['40']['name'] = "Alter field name in si_account_payments";
+        $patch['40']['patch'] = "ALTER TABLE  `si_account_payments` CHANGE  `ac_id`  `id` INT( 10 ) NOT NULL AUTO_INCREMENT";
+        $patch['40']['date'] = "20070424";
+        
+        
+        $patch['41']['name'] = "Alter field name b_name to name";
+        $patch['41']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_name`  `name` VARCHAR( 50 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;";
+        $patch['41']['date'] = "20070424";
+        
+        $patch['42']['name'] = "Test";
+        $patch['42']['patch'] = "SELECT sql_id FROM si_sql_patchmanager";
+        $patch['42']['date'] = "20070427";
+        
 
-/*
-CREATE TABLE `si_accounts` (
-`ac_id` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`ac_inv_id` VARCHAR( 10 ) NOT NULL ,
-`ac_amount` VARCHAR( 10 ) NOT NULL ,
-`ac_notes` TEXT NOT NULL ,
-`ac_date` DATETIME NOT NULL
-) ENGINE = MYISAM ;
-
-ALTER TABLE `si_invoice_items` CHANGE `inv_it_quantity` `inv_it_quantity` FLOAT NOT NULL DEFAULT '0';
-*/
 ?>
 

@@ -7,14 +7,15 @@ checkLogin();
 include('./include/sql_patches.php');
 
 
+//        $sql_patch_update_33 = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('',33,'$sql_patch_name_33',20061214,'')";
 
 #Max patches applied - start
 $check_patches_sql = "SELECT count(sql_patch_ref) as count FROM {$tb_prefix}sql_patchmanager ";
 
 	$patches_result = mysql_query($check_patches_sql, $conn) or die(mysql_error());
 		
-	$patchs = mysql_fetch_array($patches_result);
-
+	$patches = mysql_fetch_array($patches_result);
+	$patch_count = count($patch);
 	if ($patches['count'] < $patch_count ) {
 		$patches_to_be_applied = $patch_count - $patches['count'];
 		$display_note = "<br>
@@ -43,48 +44,9 @@ if ($_GET['op'] == "run_updates") {
                         $r++;
                 }
 */
-
-		run_sql_patch(1,$sql_patch_name_1,$sql_patch_1,$sql_patch_update_1);
-		run_sql_patch(2,$sql_patch_name_2,$sql_patch_2,$sql_patch_update_2);
-		run_sql_patch(3,$sql_patch_name_3,$sql_patch_3,$sql_patch_update_3);
-		run_sql_patch(4,$sql_patch_name_4,$sql_patch_4,$sql_patch_update_4);
-		run_sql_patch(5,$sql_patch_name_5,$sql_patch_5,$sql_patch_update_5);
-		run_sql_patch(6,$sql_patch_name_6,$sql_patch_6,$sql_patch_update_6);
-		run_sql_patch(7,$sql_patch_name_7,$sql_patch_7,$sql_patch_update_7);
-		run_sql_patch(8,$sql_patch_name_8,$sql_patch_8,$sql_patch_update_8);
-		run_sql_patch(9,$sql_patch_name_9,$sql_patch_9,$sql_patch_update_9);
-		run_sql_patch(10,$sql_patch_name_10,$sql_patch_10,$sql_patch_update_10);
-		run_sql_patch(11,$sql_patch_name_11,$sql_patch_11,$sql_patch_update_11);
-		run_sql_patch(12,$sql_patch_name_12,$sql_patch_12,$sql_patch_update_12);
-		run_sql_patch(13,$sql_patch_name_13,$sql_patch_13,$sql_patch_update_13);
-		run_sql_patch(14,$sql_patch_name_14,$sql_patch_14,$sql_patch_update_14);
-		run_sql_patch(15,$sql_patch_name_15,$sql_patch_15,$sql_patch_update_15);
-		run_sql_patch(16,$sql_patch_name_16,$sql_patch_16,$sql_patch_update_16);
-		run_sql_patch(17,$sql_patch_name_17,$sql_patch_17,$sql_patch_update_17);
-		run_sql_patch(18,$sql_patch_name_18,$sql_patch_18,$sql_patch_update_18);
-		run_sql_patch(19,$sql_patch_name_19,$sql_patch_19,$sql_patch_update_19);
-		run_sql_patch(20,$sql_patch_name_20,$sql_patch_20,$sql_patch_update_20);
-		run_sql_patch(21,$sql_patch_name_21,$sql_patch_21,$sql_patch_update_21);
-		run_sql_patch(22,$sql_patch_name_22,$sql_patch_22,$sql_patch_update_22);
-		run_sql_patch(23,$sql_patch_name_23,$sql_patch_23,$sql_patch_update_23);
-		run_sql_patch(24,$sql_patch_name_24,$sql_patch_24,$sql_patch_update_24);
-		run_sql_patch(25,$sql_patch_name_25,$sql_patch_25,$sql_patch_update_25);
-		run_sql_patch(26,$sql_patch_name_26,$sql_patch_26,$sql_patch_update_26);
-		run_sql_patch(27,$sql_patch_name_27,$sql_patch_27,$sql_patch_update_27);
-		run_sql_patch(28,$sql_patch_name_28,$sql_patch_28,$sql_patch_update_28);
-		run_sql_patch(29,$sql_patch_name_29,$sql_patch_29,$sql_patch_update_29);
-		run_sql_patch(30,$sql_patch_name_30,$sql_patch_30,$sql_patch_update_30);
-		run_sql_patch(31,$sql_patch_name_31,$sql_patch_31,$sql_patch_update_31);
-		run_sql_patch(32,$sql_patch_name_32,$sql_patch_32,$sql_patch_update_32);
-		run_sql_patch(33,$sql_patch_name_33,$sql_patch_33,$sql_patch_update_33);
-		run_sql_patch(34,$sql_patch_name_34,$sql_patch_34,$sql_patch_update_34);
-		run_sql_patch(35,$sql_patch_name_35,$sql_patch_35,$sql_patch_update_35);
-		run_sql_patch(36,$sql_patch_name_36,$sql_patch_36,$sql_patch_update_36);
-		run_sql_patch(37,$sql_patch_name_37,$sql_patch_37,$sql_patch_update_37);
-		run_sql_patch(38,$sql_patch_name_38,$sql_patch_38,$sql_patch_update_38);
-		run_sql_patch(39,$sql_patch_name_39,$sql_patch_39,$sql_patch_update_39);
-		run_sql_patch(40,$sql_patch_name_40,$sql_patch_40,$sql_patch_update_40);
-		run_sql_patch(41,$sql_patch_name_41,$sql_patch_41,$sql_patch_update_41);
+for($i=1;$i <= count($patch);$i++) {
+	run_sql_patch($i,$patch[$i]['name'],$patch[$i]['patch'],$patch[$i]['date']);
+}
 
 
 		echo "<tr><td><br>The database patches have now been applied, please go back to the <a href='index.php?module=options&view=database_sqlpatches'>Database Upgrade Manager page</a> to see what patches have been applied. If all patches have been applied then there is now further action required</td></tr>";
@@ -133,7 +95,7 @@ EOD;
 
 		$p = 1;
                 while  ($p <= $patch_count) {
-			check_sql_patch($p,$sql_patch_name_.$p);
+			check_sql_patch($p,$patch[$p]['name']);
                         $p++;
                 }
 
@@ -197,13 +159,14 @@ function check_sql_patch($check_sql_patch_ref, $check_sql_patch_field) {
 
 
 
-function run_sql_patch($sql_patch_ref, $sql_patch_name, $sql_patch, $sql_update) {
+function run_sql_patch($sql_patch_ref, $sql_patch_name, $sql_patch, $date) {
 
         include('./config/config.php');
         $conn = mysql_connect("$db_host","$db_user","$db_password");
         mysql_select_db("$db_name",$conn);
 
-
+	$sql_update = "INSERT INTO si_sql_patchmanager ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ('', $sql_patch_ref,'$sql_patch_name',$date,'')";
+	
 	#check sql patch 1
 	$sql_run = "select * from {$tb_prefix}sql_patchmanager where sql_patch_ref = $sql_patch_ref" ;
 
