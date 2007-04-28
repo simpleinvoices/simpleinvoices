@@ -34,7 +34,7 @@ if (mysql_num_rows($result) == 0) {
 <th class="index_table sortable">{$LANG['product_id']}</th>
 <th class="index_table sortable">{$LANG['product_description']}</th>
 <th class="index_table sortable">{$LANG['product_unit_price']}</th>
-<th class="noFilter index_table sortable">{$LANG['enabled']</th>
+<th class="noFilter index_table sortable">{$LANG['enabled']}</th>
 </tr>
 </thead>
 EOD;

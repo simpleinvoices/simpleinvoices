@@ -3,9 +3,6 @@
 -todo
  - validation:
  -- apply to all add sections of Simple Invoices - work in progress
- -- Biller add page - Notes contents doesnt show/save in page when get valadation error - done
- -- Add validation to the edit screen - moved to next release - just validate on add for now
- -- make a proper validation function/class
  - templates - add $smarty.post value to ALL values in add screen
  - make email function work - done but needs polish
  -- add note on screen that the generation of pdf and email can take 30 seconds
@@ -14,6 +11,7 @@
  - replce checkLogin with CheckBrowse - check login name assumes something to do with login when its not - not urgent
  - sql queries: rename all the old crappy fields from b_name to name etc..
  -- need to write sql queries for all and change all relevant code that references these fields
+ -- only need to do for products, billers, and invoices
 
 -done
  - sql patch: reset default invoices template to default - Done
@@ -32,6 +30,11 @@
  -- move the $lang_ to arrays ie $LANG['word'] - done 
  
 
+- in next release +1 - aim end of May
+-todo
+ - validation:
+ -- Add validation to the edit screen - moved to next release - just validate on add for now
+ -- make a proper validation function/class
 
 - Replace with easy function...
 #get custom field labels

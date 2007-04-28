@@ -1,5 +1,5 @@
 <form name="frmpost"
-	action="index.php?module=products&view=save&submit={$smarty.get.submit}"
+	action="index.php?module=preferences&view=save&submit={$smarty.get.submit}"
 	method="post">
 
 
@@ -47,7 +47,7 @@
 			<td class='details_screen'>Invoice payment line2 value <a href="./modules/documentation/info_pages/inv_pref_payment_line2_value.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>{$preference.pref_inv_payment_line2_value}</td>
 		</tr>
 	        <tr>
-        	        <td class='details_screen'>$LANG.enabled <a href="./modules/documentation/info_pages/inv_pref_invoice_enabled.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$wording_for_enabled</td>
+        	        <td class='details_screen'>{$LANG.enabled} <a href="./modules/documentation/info_pages/inv_pref_invoice_enabled.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>{$preference.wording_for_enabled}</td>
 	        </tr>	
 		<tr>
 			<td colspan=2 align=center></td>
@@ -57,14 +57,8 @@
 		</tr>
 		</table>
 		<hr></hr>
-EOD;
-
-	$footer =  <<<EOD
 
 <a href='index.php?module=preferences&view=details&submit=$pref_idField&action=edit'>Edit</a>
-EOD;
-
-}
 
 {/if}
 
@@ -110,9 +104,19 @@ EOD;
                 <tr>
                         <td class='details_screen'>Invoice payment line2 value <a href="./modules/documentation/info_pages/inv_pref_payment_line2_value.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_payment_line2_value' value='{$preference.pref_inv_payment_line2_value}' size=50></td>
                 </tr>
-	        <tr>
-        	        <td class='details_screen'>{$LANG.enabled} <a href="./modules/documentation/info_pages/inv_pref_invoice_enabled.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>$display_block_enabled</td>
-	        </tr>
+	<tr>
+    	<td class='details_screen'>{$LANG.enabled} <a href="./modules/documentation/info_pages/inv_pref_invoice_enabled.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td>
+		{* enabled block *}
+		<select name="pref_enabled">
+			<option value="{$preference.pref_enabled}" selected
+				style="font-weight: bold;">{$preference.wording_for_enabled}</option>
+			<option value="1">{$LANG.enabled}</option>
+			<option value="0">{$LANG.disabled}</option>
+		</select>
+		{* /enabled block*}
+		</td>
+	</tr>
                 <tr>
                         <td colspan=2 align=center></td>
                 </tr>
@@ -122,20 +126,9 @@ EOD;
 
                 </table>
 		<hr></hr>
-EOD;
 
-$footer =  <<<EOD
 <input type=submit name='action' value='{$LANG.cancel}'>
 <input type=submit name='save_preference' value='{$LANG.save}'>
 <input type=hidden name='op' value='edit_preference'>
-EOD;
-
-}
-
-
-echo <<<EOD
-<form name="frmpost" action="index.php?module=preferences&view=save&submit={$_GET['submit']}" method="post" onsubmit="return frmpost_Validator(this)">
-	$display_block
-	$footer
-EOD;
-?>
+{/if}
+</form>
