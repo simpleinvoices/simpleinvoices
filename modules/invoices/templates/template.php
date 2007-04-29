@@ -150,7 +150,7 @@ if (isset($_GET['export'])) {
 /* End Export code */
 
 
-	include("./modules/invoices/templates/${template}/${template}.tpl");
+	include("./templates/invoices/${template}/${template}.tpl");
 
 	
 	
@@ -213,7 +213,7 @@ if (isset($_GET['export'])) {
 		#MERGE ITEMISED AND CONSULTING HERE
 		#PRINT the line items
 		#show the itemised invoice
-		include("./modules/invoices/templates/${template}/${template}.tpl");
+		include("./templates/invoices/${template}/${template}.tpl");
 		
 		if ($_GET['invoice_style'] === 'Itemised' ) {
 			$line = addslashes($itemised_line);
@@ -234,7 +234,7 @@ if (isset($_GET['export'])) {
 
 #END INVOICE ITEMEISED/CONSULTING SECTION
 	if (is_null($_GET['export'])) {
-		$css = "./modules/invoices/templates/${template}/${template}.css";
+		$css = "./modules/invoices/${template}/${template}.css";
 	}
 	include('./config/config.php');
 	
@@ -253,7 +253,7 @@ if (isset($_GET['export'])) {
 	}
 	else {
 		echo "Old Template....";
-		$temp = file_get_contents("./modules/invoices/templates/${template}/${template}.html");
+		$temp = file_get_contents("./templates/invoices/${template}/${template}.html");
 		$temp = addslashes($temp); $content = "";
 	
 		eval ('$content = "'.$temp.'";');

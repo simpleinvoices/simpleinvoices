@@ -113,8 +113,7 @@
 	<div id="section-2" class="fragment">
 		<h4><u>{$LANG.invoice_listings}</u></h4>
 		<p>
-EOD;
-			$display_block_view2 = <<<EOD
+
 		</p>
 	</div>
 	<div id="section-3" class="fragment">

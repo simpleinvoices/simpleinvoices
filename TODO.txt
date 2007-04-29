@@ -46,6 +46,36 @@ $customer_custom_field_label2 = get_custom_field_label("customer_cf2");
 $customer_custom_field_label3 = get_custom_field_label("customer_cf3");
 $customer_custom_field_label4 = get_custom_field_label("customer_cf4");
 
+@ruflin (notes):
+- in pop-down menus the preselected entry is always twice. change it with the selected option
+- use utf-8 for e-mail sending
+- redesign of documentation (global and internal)
+- custom-field redesign? more flexible?
+- Search for invoice?
+- invoices longer then 1 page? repeat header?
+- backup to a web directory is not really a good idea. Perhaps the download solution is a better one:
+
+
+<?php
+include('config.php');
+
+$conn = mysql_connect( $host, $user, $password );
+mysql_select_db( $database, $conn );
+$name = date("ymd")."_tillbackup.sql";
+$backupFile = "/tmp/{$name}";
+
+system("/sw/bin/mysqldump --user=$user --pass=$password $database > $backupFile");
+
+header("Content-disposition: attachment; filename=$name");
+header("Content-type: unknown/unknown");
+
+include($backupFile);
+
+unlink($backupFile);
+?>
+
+
+
 
 - Replace
 if (!defined("BROWSE")) {
