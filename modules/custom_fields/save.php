@@ -43,16 +43,7 @@ if (  $op === 'edit_custom_field' ) {
 }
 
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
-$display_block_items = isset($display_block_items) ? $display_block_items : '&nbsp;';
-echo <<<EOD
-{$refresh_total}
 
-
-<br>
-<br>
-{$display_block}
-<br><br>
-{$display_block_items}
-
-EOD;
+$smarty -> assign('display_block',$display_block); 
+$smarty -> assign('refresh_total',$refresh_total); 
 ?>
