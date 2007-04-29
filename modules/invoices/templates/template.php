@@ -238,7 +238,9 @@ if (isset($_GET['export'])) {
 	}
 	include('./config/config.php');
 	
-	if(file_exists("./modules/invoices/templates/${template}/${template}_.tpl")) {
+	$template_path = "../templates/invoices/${template}/${template}_.tpl";
+	
+	if(file_exists($template_path)) {
 		$smarty -> assign('invoice_total',$invoice_total);
 		$smarty -> assign('biller',$biller);
 		$smarty -> assign('customer',$customer);
@@ -247,10 +249,10 @@ if (isset($_GET['export'])) {
 		$smarty -> assign('logo',$logo);
 		$smarty -> assign('template',$template);
 		$smarty -> assign('master_invoices',$master_invoices);
-		$smarty -> display("../modules/invoices/templates/${template}/${template}_.tpl");
+		$smarty -> display($template_path);
 	}
 	else {
-		echo "BBB";
+		echo "Old Template....";
 		$temp = file_get_contents("./modules/invoices/templates/${template}/${template}.html");
 		$temp = addslashes($temp); $content = "";
 	

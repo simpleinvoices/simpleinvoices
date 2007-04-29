@@ -13,64 +13,46 @@ $sql = "SELECT * FROM {$tb_prefix}invoices";
 $result = mysql_query($sql, $conn) or die(mysql_error());
 
 
-
 $q = strtolower($_GET["q"]);
 if (!$q) return;
 
 
-while ($Array = mysql_fetch_array($result)) {
-	$inv_idField = $Array['inv_id'];
-	$inv_biller_idField = $Array['inv_biller_id'];
-	$inv_customer_idField = $Array['inv_customer_id'];
-	$inv_typeField = $Array['inv_type'];
-	$inv_preferenceField = $Array['inv_preference'];
-	$inv_dateField = date( $config['date_format'], strtotime( $Array['inv_date'] ) );
-	$inv_noteField = $Array['inv_note'];
+while ($invoice = mysql_fetch_array($result)) {
 
-	$sql_biller = "select name from {$tb_prefix}biller where b_id = $inv_biller_idField ";
+	$sql_biller = "SELECT name FROM {$tb_prefix}biller WHERE b_id = $invoice[inv_biller_id] ";
 	$result_biller = mysql_query($sql_biller, $conn) or die(mysql_error());
 
-	while ($billerArray = mysql_fetch_array($result_biller)) {
-		$b_nameField = $billerArray['name'];
+	$biller = mysql_fetch_array($result_biller);
 
-
-	$sql_customers = "select c_name from {$tb_prefix}customers where c_id = $inv_customer_idField ";
+	$sql_customers = "SELECT c_name FROM {$tb_prefix}customers WHERE c_id = $invoice[inv_customer_id] ";
 	$result_customers = mysql_query($sql_customers, $conn) or die(mysql_error());
 
-	while ($customersArray = mysql_fetch_array($result_customers)) {
-		$c_nameField = $customersArray['c_name'];
+	$customer = mysql_fetch_array($result_customers);
 
-
-	$sql_invoice_type = "select inv_ty_description from {$tb_prefix}invoice_type where inv_ty_id = $inv_typeField ";
+	$sql_invoice_type = "SELECT inv_ty_description FROM {$tb_prefix}invoice_type WHERE inv_ty_id = $invoice[inv_type] ";
 	$result_invoice_type = mysql_query($sql_invoice_type, $conn) or die(mysql_error());
+		
+	$invoice_type = mysql_fetch_array($result_invoice_type);
+		
+	#invoice total calc - start
+       $invoice['total_field'] = calc_invoice_total($invoice['inv_id']);
+       $invoice['total_field_formatted'] = number_format($invoice['total_field'],2);
+	#invoice total calc - end
 
-	while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
-		$inv_ty_descriptionField = $invoice_typeArray['inv_ty_description'];
-	
+	#amount paid calc - start
+	$invoice['paid_field'] = calc_invoice_paid($invoice['inv_id']);
+	$invoice['paid_field_formatted'] = number_format($invoice['paid_field'],2);
+	#amount paid calc - end
 
-#invoice total calc - start
-        $invoice_total_Field = calc_invoice_total($inv_idField);
-        $invoice_total_Field_formatted = number_format($invoice_total_Field,2);
-#invoice total calc - end
-
-#amount paid calc - start
-	$invoice_paid_Field = calc_invoice_paid($inv_idField);
-	$invoice_paid_Field_formatted = number_format($invoice_paid_Field,2);
-#amount paid calc - end
-
-#amount owing calc - start
-	$invoice_owing_Field = $invoice_total_Field - $invoice_paid_Field;
-	$invoice_owing_Field_formatted = number_format($invoice_total_Field - $invoice_paid_Field,2);
-#amount owing calc - end
+	#amount owing calc - start
+	$invoice['owing_field'] = $invoice['total_field'] - $invoice['paid_field'];
+	$invoice['owing_field_formatted'] = number_format($invoice['total_field'] - $invoice['paid_field'],2);
+	#amount owing calc - end
 
 
-
-
-	if (strpos(strtolower($inv_idField), $q) !== false) {
-		echo "$inv_idField|<table><tr><td class='details_screen'>Invoice:</td><td> $inv_idField </td><td  class='details_screen'>Total: </td><td>$invoice_total_Field_formatted </td></tr><tr><td class='details_screen'>Biller: </td><td>$b_nameField </td><td class='details_screen'>Paid: </td><td>$invoice_paid_Field_formatted </td></tr><tr><td class='details_screen'>Customer: </td><td>$c_nameField </td><td class='details_screen'>Owing: </td><td><u>$invoice_owing_Field_formatted</u></td></tr></table>\n";
+	if (strpos(strtolower($invoice['inv_id']), $q) !== false) {
+		echo "$invoice[inv_id]|<table><tr><td class='details_screen'>Invoice:</td><td> $invoice[inv_id] </td><td  class='details_screen'>Total: </td><td>$invoice[total_field_formatted] </td></tr><tr><td class='details_screen'>Biller: </td><td>$biller[name] </td><td class='details_screen'>Paid: </td><td>$invoice[paid_field_formatted] </td></tr><tr><td class='details_screen'>Customer: </td><td>$customer[c_name] </td><td class='details_screen'>Owing: </td><td><u>$invoice[owing_field_formatted]</u></td></tr></table>\n";
 	}
-	
-}}}
 }
 
 

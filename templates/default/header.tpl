@@ -26,13 +26,14 @@
 <script type="text/javascript" src="include/jquery/jquery.datePicker.conf.js"></script>
 <script type='text/javascript' src='include/jquery/jquery.autocomplete.js'></script>
 <script type='text/javascript' src='include/jquery/jquery.autocomplete.conf.js'></script>
+<script type="text/javascript" src="./include/jquery/jquery.accordian.js"></script>
 <script type="text/javascript" src="./include/jquery/jquery.tabs.js"></script>
 
 
 
 
 <!-- customer-details -->
-<link rel="stylesheet" href="./include/css/tabs.css" type="text/css" media="print, projection, screen" />
+<link rel="stylesheet" href="./templates/default/css/tabs.css" type="text/css" media="print, projection, screen" />
 {php}
 include('./templates/default/tmp.php');
 {/php}

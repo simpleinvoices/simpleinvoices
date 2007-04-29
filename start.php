@@ -1,20 +1,15 @@
 <?php
 
-include('./include/include_main.php'); 
+#include('./include/include_main.php'); 
 #include('./config/config.php'); 
-include("./lang/$language.inc.php");
+#include("./lang/$language.inc.php");
 include('./include/sql_patches.php');
 #include('./include/menu.php');
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
-if (!defined("BROWSE")) {
-   echo "You Cannot Access This Script Directly, Have a Nice Day.";
-   exit();
-}
+checkLogin();
 
 
-$conn = mysql_connect( $db_host, $db_user, $db_password );
-mysql_select_db( $db_name, $conn );
 
 #Largest debtor query - start
 if ($mysql > 4) {
@@ -34,11 +29,9 @@ if ($mysql > 4) {
 	LIMIT 1;
 	";
 
-	$result = mysql_query($sql, $conn) or die(mysql_error());
+	$result = mysql_query($sql) or die(mysql_error());
 
-	while ($Array = mysql_fetch_array($result)) {
-       		$largest_debtor = $Array['Customer'];
-	};
+	$debtor = mysql_fetch_array($result);
 }
 #Largest debtor query - end
 
@@ -62,11 +55,9 @@ if ($mysql > 4) {
 	LIMIT 1;
 ";
 
-	$result2 = mysql_query($sql2, $conn) or die(mysql_error());
+	$result2 = mysql_query($sql2) or die(mysql_error());
 
-	while ($Array2 = mysql_fetch_array($result2)) {
-        	$top_customer = $Array2['Customer'];
-	};
+	$customer = mysql_fetch_array($result2);
 }
 #Top customer query - end
 
@@ -83,11 +74,9 @@ if ($mysql > 4) {
 		{$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.b_id and {$tb_prefix}invoices.inv_id = {$tb_prefix}invoice_items.inv_it_invoice_id GROUP BY name ORDER BY Total DESC LIMIT 1;
 	";
 
-	$result3 = mysql_query($sql3, $conn) or die(mysql_error());
+	$result3 = mysql_query($sql3) or die(mysql_error());
 
-	while ($Array3 = mysql_fetch_array($result3)) {
-	        $top_biller = $Array3['name'];
-	};
+	$biller = mysql_fetch_array($result3);
 }
 #Top biller query - start
 
@@ -100,13 +89,13 @@ $sql4 = "
                 {$tb_prefix}sql_patchmanager
         ";
 
-        $result4 = mysql_query($sql4, $conn) or die(mysql_error());
+        $result4 = mysql_query($sql4) or die(mysql_error());
 
         while ($Array4 = mysql_fetch_array($result4)) {
                 $max_patches_applied = $Array4['count'];
         };
-#Top biller query - start
 
+#Top biller query - start
 
 $display_block_notice .="<div>";
 
@@ -118,7 +107,7 @@ if ($mysql < 5) {
 	";
 };
 
-if ($patch_count > $max_patches_applied) {
+if (count($patch) > $max_patches_applied) {
         $display_block_notice .=" 
                 NOTE <a href='./documentation/info_pages/database_patches.html' rel='gb_page_center[450, 450]'><img src='./images/common/help-small.png'></img></a> :   There are database patches that need to be applied, please select <a href=\"./index.php?module=options&view=database_sqlpatches \">'Database Upgrade Manager'</a> from the Options menu and follow the instructions<br>
         ";
@@ -157,8 +146,9 @@ if( $.browser.safari() ) { // defaults to undefined
 
 $display_block_notice .="";
 
+echo $display_block_notice;
 
-$display_block = <<<EOD
+echo <<<EOD
                 <div id="list1">
                 <h2><img src="./images/common/reports.png"></img>{$LANG['stats']}</h2>
                         <div id="item11">
@@ -167,7 +157,7 @@ $display_block = <<<EOD
 
                                 <div class="content">
 			
-				$largest_debtor
+				$debtor[Customer]
                                 </div>
                         </div>
 
@@ -177,7 +167,7 @@ $display_block = <<<EOD
 
                                 <div class="content">
 
-				$top_customer
+				$customer[Customer];
 
                                 </div>
 
@@ -189,7 +179,7 @@ $display_block = <<<EOD
 
                                 <div class="content">
 
-				$top_biller
+				$biller[name]
 
                                 </div>
 
@@ -412,34 +402,16 @@ $display_block = <<<EOD
                                 </div>
                                 </div>
                         </div>
-EOD;
-
-
-?>
-
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-                <title><?php echo $title; ?></title>
-
-<script type="text/javascript" src="./include/jquery/jquery.js"></script>
-<script type="text/javascript" src="./include/jquery/jquery.accordian.js"></script>
-
-
-</head>
-<BODY>
-<!-- <table align="center" >-->
-
-<?php echo $display_block_notice; ?>
-<?php 
-	echo $display_block;
-
-?>
-</div>
+                        </div>
 <br><br><br><br>
 <br><br><br><br>
 <br><br><br><br>
 <br><br><br><br>
 <br><br><br><br>
 <br>
+EOD;
+
+
+
+?>
+

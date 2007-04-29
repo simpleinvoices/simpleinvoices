@@ -34,18 +34,18 @@ checkLogin();	//TODO: Really needed in .tpl files? I don't think so
 -->
 
 </head>
-	<title>$title ::  $LANG['inv'] $LANG['inv_consulting']></title>
+	<title>$title ::  $LANG[inv] $LANG[inv_consulting]></title>
 <body>
 
 <form name="frmpost" action="index.php?module=invoices&view=save" method="post" onsubmit="return frmpost_Validator(this)">
 
-<b><$LANG['inv'] $LANG['inv_consulting']</b>
+<b><$LANG[inv] $LANG[inv_consulting]</b>
 <hr></hr>
 
 <table align=center>
 <tr>
 	<td class="details_screen">
-		$LANG['biller_name']']
+		$LANG[biller_name]]
 	</td>
 	<td input type=text name="biller_block" size=25>
 		$display_block
@@ -53,14 +53,14 @@ checkLogin();	//TODO: Really needed in .tpl files? I don't think so
 </tr>
 <tr>
 	<td class="details_screen">
-		$LANG['customer_name']
+		$LANG[customer_name]
 	</td>
 	<td input type=text name="customer_block" size=25 >
 		$display_block_customer
 	</td>
 </tr>
 <tr>
-        <td class="details_screen">$LANG['date_formatted']</td>
+        <td class="details_screen">$LANG[date_formatted]</td>
         <td>
                         <input type="text" class="date-picker" name="select_date" id="date1" value="$today"></input>
         </td>
@@ -69,10 +69,10 @@ checkLogin();	//TODO: Really needed in .tpl files? I don't think so
 
 <tr>
 	<td class="details_screen">
-		$LANG['quantity']
+		$LANG[quantity]
 	</td>
 	<td class="details_screen">
-		$LANG['description']
+		$LANG[description]
 	</td>
 </tr>
 
@@ -85,7 +85,7 @@ checkLogin();	//TODO: Really needed in .tpl files? I don't think so
 	 $show_custom_field_4
 
 <tr>
-        <td colspan=2 class="details_screen">$LANG['notes']</td>
+        <td colspan=2 class="details_screen">$LANG[notes]</td>
 </tr>
 
 <tr>
@@ -93,15 +93,15 @@ checkLogin();	//TODO: Really needed in .tpl files? I don't think so
 </tr>
 
 <tr>
-	<td class="details_screen">$LANG['tax']</td><td input type=text name="inv_it_tax" size=15>$display_block_tax</td>
+	<td class="details_screen">$LANG[tax]</td><td input type=text name="inv_it_tax" size=15>$display_block_tax</td>
 </tr>
 
 <tr>
-	<td class="details_screen">$LANG['inv_pref']</td><td input type=text name="inv_preferences">$display_block_preferences</td>
+	<td class="details_screen">$LANG[inv_pref]</td><td input type=text name="inv_preferences">$display_block_preferences</td>
 </tr>
 <tr>
 	<td align=left colspan=2> 
-		<a href="./documentation/info_pages/invoice_custom_fields.html" rel="gb_page_center[400, 400]">$LANG['want_more_fields']<img src="./images/common/help-small.png"></img></a>
+		<a href="./documentation/info_pages/invoice_custom_fields.html" rel="gb_page_center[400, 400]">$LANG[want_more_fields]<img src="./images/common/help-small.png"></img></a>
 
 	</td>
 	
@@ -116,7 +116,7 @@ checkLogin();	//TODO: Really needed in .tpl files? I don't think so
 <!-- </div> -->
 <hr></hr>
 		<input type=hidden name="max_items" value="$num">
-		<input type=submit name="submit" value="$LANG['save_invoice']">
+		<input type=submit name="submit" value="$LANG[save_invoice]">
 		<input type=hidden name="invoice_style" value="insert_invoice_consulting">
 
 </FORM>
