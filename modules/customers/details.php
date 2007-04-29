@@ -4,14 +4,6 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-/* validataion code */
-jsBegin();
-jsFormValidationBegin("frmpost");
-jsValidateRequired("c_name",$LANG['customer_name']);
-jsFormValidationEnd();
-jsEnd();
-/* end validataion code */
-
 
 #get the invoice id
 $customer_id = $_GET['submit'];
@@ -40,24 +32,7 @@ $customFieldLabel = getCustomFieldLabels("customer");
 $sql = "SELECT * FROM {$tb_prefix}invoices WHERE inv_customer_id =$customer_id  ORDER BY inv_id desc";
 
 //$customFieldLabel = getCustomFieldLabels("biller");
+$smarty -> assign('customer',$customer);
+$smarty -> assign('customFieldLabel',$customFieldLabel);
 
-$display_block = "";
-$footer = "";
-
-include('./templates/default/customers/details2.tpl');
-
-if ($_GET['action'] == "view") {
-	$display_block = $display_block_view;
-	include('./modules/invoices/manage.inc.php');
-	$display_block .= $display_block_view2;
-	$footer = $footer_view;
-}
-else if ($_GET['action'] == "edit") {
-	$display_block = $display_block_edit;
-	$footer = $footer_edit;
-}
-
-include('./templates/default/customers/details2.tpl');
-
-echo $block;
 ?>

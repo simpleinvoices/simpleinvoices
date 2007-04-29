@@ -11,6 +11,7 @@
  -- need to write sql queries for all and change all relevant code that references these fields
  -- only need to do for products, billers, and invoices
  - Smarty: Customer - make details and save work!
+ - invoice templates - move to smarty and cleanup 
 
 -done
  - sql patch: reset default invoices template to default - Done
