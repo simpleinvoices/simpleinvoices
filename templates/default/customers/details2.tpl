@@ -69,7 +69,7 @@ $display_block_view = <<<EOD
 		<td>{$customer[c_fax]}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.enabled}</td>
+		<td class="details_screen">{$LANG['enabled']}</td>
 		<td>{$wording_for_enabled}</td>
 		<td class="details_screen">{$LANG['email']}</td>
 		<td>{$customer[c_email]}</td>

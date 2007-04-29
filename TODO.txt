@@ -1,17 +1,16 @@
 
 - in next release - aim end of April
 -todo
- - validation:
- -- apply to all add sections of Simple Invoices - work in progress
- - templates - add $smarty.post value to ALL values in add screen
  - make email function work - done but needs polish
  -- add note on screen that the generation of pdf and email can take 30 seconds
  -- make the info pages for email funtion - done
+ -- move email page to smarty and add validation
  - pdf: pdf of the default templated doesnt include some of the borders on the right sides - needs fixing
  - replce checkLogin with CheckBrowse - check login name assumes something to do with login when its not - not urgent
  - sql queries: rename all the old crappy fields from b_name to name etc..
  -- need to write sql queries for all and change all relevant code that references these fields
  -- only need to do for products, billers, and invoices
+ - Smarty: Customer - make details and save work!
 
 -done
  - sql patch: reset default invoices template to default - Done
@@ -28,6 +27,9 @@
  - lang file cleanup up - done
  -- remove old $m- etc variables - done
  -- move the $lang_ to arrays ie $LANG['word'] - done 
+ - validation:
+ -- apply to all ADD sections of Simple Invoices - except new invoices -done
+ - templates - add $smarty.post value to ALL values in add screen - done
  
 
 - in next release +1 - aim end of May
