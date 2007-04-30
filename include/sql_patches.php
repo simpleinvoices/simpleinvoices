@@ -321,6 +321,9 @@ ADD b_co_footer TEXT";
         $patch['43']['date'] = "20070430";
 
 
+		$patch['44']['name'] = "b_street_address to street_address";
+        $patch['44']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_street_address`  `street_address` VARCHAR( 50 ) NULL DEFAULT NULL";
+        $patch['44']['date'] = "20070430";
 
 
 ?>

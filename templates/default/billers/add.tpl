@@ -27,8 +27,8 @@ You must enter a Biller name</div>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street}</td>
-		<td><input type=text name="b_street_address"
-			value="{$smarty.post.b_street_address}" size=25></td>
+		<td><input type=text name="street_address"
+			value="{$smarty.post.street_address}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street2} <a

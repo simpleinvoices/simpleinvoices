@@ -61,10 +61,10 @@ EOD;
         </tr> 
 EOD;
 
-        if ($biller[b_street_address] != null) {
+        if ($biller[street_address] != null) {
                 $biller_block .=<<<EOD
                 <tr>
-                        <td class='tbl1-left'>{$LANG['address']}:</td><td class='tbl1-right' align=left colspan=3>$biller[b_street_address]</td>
+                        <td class='tbl1-left'>{$LANG['address']}:</td><td class='tbl1-right' align=left colspan=3>$biller[street_address]</td>
                 </tr>   
 EOD;
         }
@@ -72,13 +72,13 @@ EOD;
                 $biller_block .=<<<EOD
                 <tr class='details_screen customer'>
 EOD;
-                if ($biller[b_street_address] == null) {
+                if ($biller[street_address] == null) {
                 $biller_block .=<<<EOD
                         <td class='tbl1-left'>{$LANG['address']}:</td><td class='tbl1-right' align=left colspan=3>$biller[b_street_address2]</td>
                 </tr>   
 EOD;
                 }
-                if ($biller[b_street_address] != null) {
+                if ($biller[street_address] != null) {
                 $biller_block .=<<<EOD
                         <td class='tbl1-left'></td><td class='tbl1-right' align=left colspan=3>$biller[b_street_address2]</td>
                 </tr>   
@@ -87,7 +87,7 @@ EOD;
         }
 
 
-       $biller_block .=  merge_address($biller[b_city], $biller[b_state], $biller[b_zip_code], $biller[b_street_address], $biller[b_street_address2],'tbl1-left','tbl1-right',3);
+       $biller_block .=  merge_address($biller[b_city], $biller[b_state], $biller[b_zip_code], $biller[street_address], $biller[b_street_address2],'tbl1-left','tbl1-right',3);
 
         /*country field start*/
          if ($biller[b_country] != null) {

@@ -20,7 +20,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street}</td>
-		<td>{$biller.b_street_address}</td>
+		<td>{$biller.street_address}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street2} <a
@@ -134,8 +134,8 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street}</td>
-		<td><input type=text name="b_street_address"
-			value="{$biller.b_street_address}" size=50 /></td>
+		<td><input type=text name="street_address"
+			value="{$biller.street_address}" size=50 /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street2} <a

@@ -33,7 +33,7 @@ function insertBiller() {
 			(
 				'',
 				'$_POST[name]',
-				'$_POST[b_street_address]',
+				'$_POST[street_address]',
 				'$_POST[b_street_address2]',
 				'$_POST[b_city]',
 				'$_POST[b_state]',
@@ -63,7 +63,7 @@ function updateBiller() {
 				{$tb_prefix}biller
 			SET
 				name = '$_POST[name]',
-				b_street_address = '$_POST[b_street_address]',
+				b_street_address = '$_POST[street_address]',
 				b_street_address2 = '$_POST[b_street_address2]',
 				b_city = '$_POST[b_city]',b_state = '$_POST[b_state]',
 				b_zip_code = '$_POST[b_zip_code]',

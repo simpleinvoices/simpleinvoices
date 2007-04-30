@@ -63,9 +63,9 @@
                 <td class="tbl1-left tbl1-bottom tbl1-top col1" border=1 cellpadding=2 cellspacing=1><b>{$LANG.biller}:</b></td><td class="col1 tbl1-bottom tbl1-top tbl1-right" border=1 cellpadding=2 cellspacing=1 colspan=3>{$biller.name}</td>
         </tr> 
 
-        {if $biller.b_street_address != null}
+        {if $biller.street_address != null}
                 <tr>
-                     <td class='tbl1-left'>{$LANG.address}:</td><td class='tbl1-right' align=left colspan=3>{$biller.b_street_address}</td>
+                     <td class='tbl1-left'>{$LANG.address}:</td><td class='tbl1-right' align=left colspan=3>{$biller.street_address}</td>
                 </tr>   
         {/if}
         
@@ -73,11 +73,11 @@
 
                 <tr class='details_screen customer'>
 
-                {if $biller.b_street_address == null }
+                {if $biller.street_address == null }
                         <td class='tbl1-left'>{$LANG.address}:</td><td class='tbl1-right' align=left colspan=3>{$biller.b_street_address2}</td>
                 </tr>   
                 {/if}
-                {if $biller.b_street_address != null}
+                {if $biller.street_address != null}
                         <td class='tbl1-left'></td><td class='tbl1-right' align=left colspan=3>{$biller.b_street_address2}</td>
                 </tr>   
                 {/if}
@@ -124,9 +124,9 @@
                         <td class='tbl1-left'>{$LANG.attention_short}:</td><td align=left class='tbl1-right' colspan=3 >{$customer.c_attention}}</td>
                 </tr>
         {/if}
-               {if $biller.b_street_address != null }
+               {if $biller.street_address != null }
                 <tr>
-                     <td class='tbl1-left'>{$LANG.address}:</td><td class='tbl1-right' align=left colspan=3>{$biller.b_street_address}</td>
+                     <td class='tbl1-left'>{$LANG.address}:</td><td class='tbl1-right' align=left colspan=3>{$biller.street_address}</td>
                 </tr>   
         {/if}
         
@@ -134,11 +134,11 @@
 
                 <tr class='details_screen customer'>
 
-                {if $biller.b_street_address == null }
+                {if $biller.street_address == null }
                         <td class='tbl1-left'>{$LANG.address}:</td><td class='tbl1-right' align=left colspan=3>{$biller.b_street_address2}</td>
                 </tr>   
                 {/if}
-                {if $biller.b_street_address != null}
+                {if $biller.street_address != null}
                         <td class='tbl1-left'></td><td class='tbl1-right' align=left colspan=3>{$biller.b_street_address2}</td>
                 </tr>   
                 {/if}
