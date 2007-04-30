@@ -308,13 +308,14 @@ ADD b_co_footer TEXT";
         
         
         $patch['41']['name'] = "Alter field name b_name to name";
-        $patch['41']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_name`  `name` VARCHAR( 50 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;";
+        $patch['41']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_name`  `name` VARCHAR( 50 ) NULL DEFAULT NULL;";
         $patch['41']['date'] = "20070424";
-        
+
+	//Remove this before release
         $patch['42']['name'] = "Test";
         $patch['42']['patch'] = "SELECT sql_id FROM si_sql_patchmanager";
         $patch['42']['date'] = "20070427";
-        
+
 
 ?>
 

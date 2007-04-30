@@ -10,9 +10,10 @@
  - sql queries: rename all the old crappy fields from b_name to name etc..
  -- need to write sql queries for all and change all relevant code that references these fields
  -- only need to do for products, billers, and invoices
- - Smarty: Customer - make details and save work!
+ -- MYSQL4
+ ---- does ALTER TABLE `si_biller` CHANGE `b_street_address` `street_address` VARCHAR( 50 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL work on mysql (mysql4 sometime dosnt liek character set stuff) !!!
  - invoice templates - move to smarty and cleanup 
-
+ 
 -done
  - sql patch: reset default invoices template to default - Done
  - sql patch: change custom fields to 255 lenght - up from the current 50 - Done
@@ -31,6 +32,7 @@
  - validation:
  -- apply to all ADD sections of Simple Invoices - except new invoices -done
  - templates - add $smarty.post value to ALL values in add screen - done
+ - Smarty: Customer - make details and save work - done
  
 
 - in next release +1 - aim end of May
@@ -48,6 +50,7 @@ $customer_custom_field_label4 = get_custom_field_label("customer_cf4");
 
 @ruflin (notes):
 - in pop-down menus the preselected entry is always twice. change it with the selected option
+ -- i couldnt how to do this nicely :) if you could would be great
 - use utf-8 for e-mail sending
 - redesign of documentation (global and internal)
 - custom-field redesign? more flexible?
@@ -57,7 +60,7 @@ $customer_custom_field_label4 = get_custom_field_label("customer_cf4");
   - what do u think?
 - invoices longer then 1 page? repeat header?
 - backup to a web directory is not really a good idea. Perhaps the download solution is a better one:
-  -- just mod the existing backup script to dump to screen - same as how phpmyadmin dumps to screeen - in a text box
+  -- just mod the existing backup script to dump to screen or download file - same as how phpmyadmin dumps to screeen - in a text box
   -- mod headers as in your example
 
 
