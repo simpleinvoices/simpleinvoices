@@ -70,7 +70,8 @@ else if (($module != null ) AND ($view != null)) {
 /*If all else fails show the start.php page */
 else {
         $smarty -> display("../templates/default/header.tpl");
-        include("./modules/home.php");
+        include("./modules/home.php");			
+		$smarty -> display("../templates/default/home.tpl");
         $smarty -> display("../templates/default/footer.tpl");
 }
 ?>
