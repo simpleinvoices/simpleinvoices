@@ -52,8 +52,13 @@ $customer_custom_field_label4 = get_custom_field_label("customer_cf4");
 - redesign of documentation (global and internal)
 - custom-field redesign? more flexible?
 - Search for invoice?
+  - the goal of the new ajax grid is to have this via filters - refer link for example
+  -- http://dowdybrown.com/dbprod/rico2/examples/php/ex3.php
+  - what do u think?
 - invoices longer then 1 page? repeat header?
 - backup to a web directory is not really a good idea. Perhaps the download solution is a better one:
+  -- just mod the existing backup script to dump to screen - same as how phpmyadmin dumps to screeen - in a text box
+  -- mod headers as in your example
 
 
 <?php
