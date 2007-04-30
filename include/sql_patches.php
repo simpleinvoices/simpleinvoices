@@ -311,20 +311,21 @@ ADD b_co_footer TEXT";
         $patch['41']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_name`  `name` VARCHAR( 50 ) NULL DEFAULT NULL;";
         $patch['41']['date'] = "20070424";
 
-	//Remove this before release
+	//Remove this before release @PREP
         $patch['42']['name'] = "Test";
         $patch['42']['patch'] = "SELECT sql_id FROM si_sql_patchmanager";
         $patch['42']['date'] = "20070427";
         
-         $patch['43']['name'] = "b_id to id";
+        $patch['43']['name'] = "b_id to id";
         $patch['43']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_id`  `id` INT( 10 ) NOT NULL AUTO_INCREMENT";
         $patch['43']['date'] = "20070430";
 
-
-		$patch['44']['name'] = "b_street_address to street_address";
-        $patch['44']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_street_address`  `street_address` VARCHAR( 50 ) NULL DEFAULT NULL";
+	$patch['44']['name'] = "b_street_address to street_address";
+        $patch['44']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_street_address`  `street_address` VARCHAR( 255 ) NULL DEFAULT NULL";
         $patch['44']['date'] = "20070430";
 
-
+	$patch['45']['name'] = "b_street_address2 to street_address2";
+        $patch['45']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_street_address2`  `street_address2` VARCHAR( 255 ) NULL DEFAULT NULL";
+        $patch['45']['date'] = "20070430";
 ?>
 

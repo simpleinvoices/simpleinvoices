@@ -69,16 +69,16 @@
                 </tr>   
         {/if}
         
-        {if $biller.b_street_address2 != null }
+        {if $biller.street_address2 != null }
 
                 <tr class='details_screen customer'>
 
                 {if $biller.street_address == null }
-                        <td class='tbl1-left'>{$LANG.address}:</td><td class='tbl1-right' align=left colspan=3>{$biller.b_street_address2}</td>
+                        <td class='tbl1-left'>{$LANG.address}:</td><td class='tbl1-right' align=left colspan=3>{$biller.street_address2}</td>
                 </tr>   
                 {/if}
                 {if $biller.street_address != null}
-                        <td class='tbl1-left'></td><td class='tbl1-right' align=left colspan=3>{$biller.b_street_address2}</td>
+                        <td class='tbl1-left'></td><td class='tbl1-right' align=left colspan=3>{$biller.street_address2}</td>
                 </tr>   
                 {/if}
         {/if}
@@ -130,16 +130,16 @@
                 </tr>   
         {/if}
         
-        {if $biller.b_street_address2 != null }
+        {if $biller.street_address2 != null }
 
                 <tr class='details_screen customer'>
 
                 {if $biller.street_address == null }
-                        <td class='tbl1-left'>{$LANG.address}:</td><td class='tbl1-right' align=left colspan=3>{$biller.b_street_address2}</td>
+                        <td class='tbl1-left'>{$LANG.address}:</td><td class='tbl1-right' align=left colspan=3>{$biller.street_address2}</td>
                 </tr>   
                 {/if}
                 {if $biller.street_address != null}
-                        <td class='tbl1-left'></td><td class='tbl1-right' align=left colspan=3>{$biller.b_street_address2}</td>
+                        <td class='tbl1-left'></td><td class='tbl1-right' align=left colspan=3>{$biller.street_address2}</td>
                 </tr>   
                 {/if}
         {/if}

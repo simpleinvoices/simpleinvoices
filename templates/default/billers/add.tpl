@@ -35,8 +35,8 @@ You must enter a Biller name</div>
 			href="./modules/documentation/info_pages/street2.html"
 			rel="gb_page_center[450, 450]"> <img
 			src="./images/common/help-small.png"></img> </a></td>
-		<td><input type=text name="b_street_address2"
-			value="{$smarty.post.b_street_address2}" size=25></td>
+		<td><input type=text name="street_address2"
+			value="{$smarty.post.street_address2}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.city}</td>

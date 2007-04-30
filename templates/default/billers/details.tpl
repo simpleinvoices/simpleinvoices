@@ -27,7 +27,7 @@
 			href="./documentation/info_pages/street2.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
-		<td>{$biller.b_street_address2}</td>
+		<td>{$biller.street_address2}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.city}</td>
@@ -142,8 +142,8 @@
 			href="./modules/documentation/info_pages/street2.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
-		<td><input type=text name="b_street_address2"
-			value="{$biller.b_street_address2}" size=50 /></td>
+		<td><input type=text name="street_address2"
+			value="{$biller.street_address2}" size=50 /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.city}</td>
