@@ -13,7 +13,7 @@ function getCustomer($id) {
 
 function getBiller($id) {
 	global $tb_prefix;
-	$print_biller = "SELECT * FROM {$tb_prefix}biller WHERE b_id = $id";
+	$print_biller = "SELECT * FROM {$tb_prefix}biller WHERE id = $id";
 	$result_print_biller = mysql_query($print_biller) or die(mysql_error());
 	return mysql_fetch_array($result_print_biller);
 }
@@ -81,7 +81,7 @@ function updateBiller() {
 				b_custom_field4 = '$_POST[b_custom_field4]',
 				b_enabled = '$_POST[b_enabled]'
 			WHERE
-				b_id = '$_GET[submit]'";
+				id = '$_GET[submit]'";
 	return mysql_query($sql);
 }
 

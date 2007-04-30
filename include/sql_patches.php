@@ -315,6 +315,12 @@ ADD b_co_footer TEXT";
         $patch['42']['name'] = "Test";
         $patch['42']['patch'] = "SELECT sql_id FROM si_sql_patchmanager";
         $patch['42']['date'] = "20070427";
+        
+         $patch['43']['name'] = "b_id to id";
+        $patch['43']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_id`  `id` INT( 10 ) NOT NULL AUTO_INCREMENT";
+        $patch['43']['date'] = "20070430";
+
+
 
 
 ?>

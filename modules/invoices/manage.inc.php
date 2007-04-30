@@ -57,7 +57,7 @@ while ($newArray = mysql_fetch_array($result)) {
 	$inv_dateField = date( $config['date_format'], strtotime( $newArray['inv_date'] ) );
 	$inv_noteField = $newArray['inv_note'];
 
-	$sql_biller = "select name from {$tb_prefix}biller where b_id = $inv_biller_idField ";
+	$sql_biller = "select name from {$tb_prefix}biller where id = $inv_biller_idField ";
 	$result_biller = mysql_query($sql_biller, $conn) or die(mysql_error());
 
 	while ($billerArray = mysql_fetch_array($result_biller)) {

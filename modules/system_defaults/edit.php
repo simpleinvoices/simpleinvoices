@@ -128,7 +128,7 @@ else if ($_GET[submit] == "biller") {
 
 
 	#default biller query
-	$sql_biller_default = "SELECT name FROM {$tb_prefix}biller where b_id = $def_billerField";
+	$sql_biller_default = "SELECT name FROM {$tb_prefix}biller where id = $def_billerField";
 	$result_biller_default = mysql_query($sql_biller_default , $conn) or die(mysql_error());
 
 	while ($Array = mysql_fetch_array($result_biller_default) ) {
@@ -158,7 +158,7 @@ else if ($_GET[submit] == "biller") {
 EOD;
 
 		while ($recs = mysql_fetch_array($result)) {
-			$id = $recs['b_id'];
+			$id = $recs['id'];
 			$display_name = $recs['name'];
 
 			$display_block_biller .= <<<EOD

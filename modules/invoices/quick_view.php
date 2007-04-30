@@ -44,7 +44,7 @@ $print_customer = "SELECT * FROM {$tb_prefix}customers WHERE c_id = $inv_custome
 $result_print_customer = mysql_query($print_customer, $conn) or die(mysql_error());
 
 #biller query
-$print_biller = "SELECT * FROM {$tb_prefix}biller WHERE b_id = $inv_biller_idField";
+$print_biller = "SELECT * FROM {$tb_prefix}biller WHERE id = $inv_biller_idField";
 $result_print_biller = mysql_query($print_biller, $conn) or die(mysql_error());
 
 while ($Array = mysql_fetch_array($result_print_customer)) {
@@ -69,7 +69,7 @@ while ($Array = mysql_fetch_array($result_print_customer)) {
 };
 
 while ($billerArray = mysql_fetch_array($result_print_biller)) {
-                $b_idField = $billerArray['b_id'];
+                $b_idField = $billerArray['id'];
                 $b_nameField = $billerArray['name'];
                 $b_street_addressField = $billerArray['b_street_address'];
                 $b_street_address2Field = $billerArray['b_street_address2'];

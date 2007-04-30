@@ -71,7 +71,7 @@ if ($mysql > 4) {
 	FROM 
 		{$tb_prefix}biller, {$tb_prefix}invoice_items, {$tb_prefix}invoices 
 	WHERE 
-		{$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.b_id and {$tb_prefix}invoices.inv_id = {$tb_prefix}invoice_items.inv_it_invoice_id GROUP BY name ORDER BY Total DESC LIMIT 1;
+		{$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.id and {$tb_prefix}invoices.inv_id = {$tb_prefix}invoice_items.inv_it_invoice_id GROUP BY name ORDER BY Total DESC LIMIT 1;
 	";
 
 	$result3 = mysql_query($sql3) or die(mysql_error());

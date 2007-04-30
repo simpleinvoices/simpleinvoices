@@ -15,11 +15,6 @@ include("./include/include_main.php");
 $smarty -> assign("LANG",$LANG);
 
 
-/*
-if (($section != null ) AND ($view != null) AND ($case != null)) {
-        include("./modules/$section/$view.php?$case");
-}
-*/
 
 /*dont include the header if requested file is an invoice template - for print preview etc.. header is not needed */
 if (($module == "invoices" ) AND (strstr($view,"templates"))) {
@@ -35,7 +30,6 @@ if (($module == "invoices" ) AND (strstr($view,"templates"))) {
 	else {
 		echo "The file that you requested doesn't exist";
 	}
-	
 }
 /*$module = the folder in src and view = the file in the requested folder
  *the below if grabs the requested folder and file based on the $_GET info in the url 

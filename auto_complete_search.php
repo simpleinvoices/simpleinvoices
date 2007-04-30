@@ -19,7 +19,7 @@ if (!$q) return;
 
 while ($invoice = mysql_fetch_array($result)) {
 
-	$sql_biller = "SELECT name FROM {$tb_prefix}biller WHERE b_id = $invoice[inv_biller_id] ";
+	$sql_biller = "SELECT name FROM {$tb_prefix}biller WHERE id = $invoice[inv_biller_id] ";
 	$result_biller = mysql_query($sql_biller, $conn) or die(mysql_error());
 
 	$biller = mysql_fetch_array($result_biller);

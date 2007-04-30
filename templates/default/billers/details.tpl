@@ -7,12 +7,12 @@
 {if $smarty.get.action== 'view' }
 
 <b>{$LANG.biller} :: <a
-	href="index.php?module=billers&view=details&submit={$biller.b_id}&action=edit">{$LANG.edit}</a></b>
+	href="index.php?module=billers&view=details&submit={$biller.id}&action=edit">{$LANG.edit}</a></b>
 <hr></hr>
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.biller_id}</td>
-		<td>{$biller.b_id}</td>
+		<td>{$biller.id}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.biller_name}</td>
@@ -114,7 +114,7 @@
 
 {if $smarty.get.action== 'view' }
 <hr></hr>
-<a href="?module=billers&view=details&action=edit&submit={$biller.b_id}">{$LANG.edit}</a>
+<a href="?module=billers&view=details&action=edit&submit={$biller.id}">{$LANG.edit}</a>
 {/if}
 
 
@@ -125,7 +125,7 @@
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.biller_id}</td>
-		<td>{$biller.b_id}</td>
+		<td>{$biller.id}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.biller_name} <a href="./modules/documentation/info_pages/required_field.html" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png"></img></a></td>

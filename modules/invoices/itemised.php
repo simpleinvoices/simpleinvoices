@@ -55,7 +55,7 @@ while ($Array_defaults = mysql_fetch_array($result_defaults) ) {
 
 #Get the names of the defaults from their id -start
 #default biller name query
-$sql_biller_default = "SELECT name FROM {$tb_prefix}biller where b_id = $def_billerField and b_enabled != 0";
+$sql_biller_default = "SELECT name FROM {$tb_prefix}biller where id = $def_billerField and b_enabled != 0";
 $result_biller_default = mysql_query($sql_biller_default , $conn) or die(mysql_error());
 
 while ($Array = mysql_fetch_array($result_biller_default) ) {
@@ -105,7 +105,7 @@ if (mysql_num_rows($result) == 0) {
         <option value=\"\"></option>";
 
         while ($recs = mysql_fetch_array($result)) {
-                $id = $recs['b_id'];
+                $id = $recs['id'];
                 $display_name = $recs['name'];
 
                 $display_block .= "<option value=\"$id\">
