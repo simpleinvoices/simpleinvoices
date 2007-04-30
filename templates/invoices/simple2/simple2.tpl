@@ -177,126 +177,18 @@
 		</tr>
 		
 	{if $smarty.get.invoice_style === 'Itemised' }
-			<tr>
-				<td class="tbl1 col1" ><b>{$LANG.quantity_short}</b></td>
-				<td class="tbl1 col1" ><b>{$LANG.description}</b></td>
-				<td class="tbl1 col1" ><b>{$LANG.unit_price}</b></td>
-				<td class="tbl1 col1" ><b>{$LANG.gross_total}</b></td>
-				<td class="tbl1 col1" ><b>{$LANG.tax}</b></td>
-				<td class="tbl1 col1" align=right><b>{$LANG.total_uppercase}</b></td>
-			</tr>
+		{include file='../templates/invoices/simple2/itemised.tpl'}
 	{/if}
 
 	{if $smarty.get.invoice_style === 'Consulting' }
-		<tr class="tbl1 col1">
-			<td class="tbl1"><b>{$LANG.quantity_short}</b></td>
-			<td class="tbl1"><b>{$LANG.item}</b></td>
-			<td class="tbl1"><b>{$LANG.unit_price}</b></td>
-			<td class="tbl1"><b>{$LANG.gross_total}</b></td><td class="tbl1"><b>{$LANG.tax}</b></td>
-			<td align="right" class="tbl1"><b>{$LANG.total_uppercase}</b></td>
-		</tr>
+		{include file='../templates/invoices/simple2/consulting.tpl'}
 	{/if}
 	
 	{if $smarty.get.invoice_style === 'Total' }
-		                <table class="left" width="100%">
-		<!--
-                <tr>
-                        <td colspan="6"><br></td>
-                </td>
-		-->
-                <tr class="tbl1 col1" >
-                        <td class="tbl1 col1 tbl1-right" colspan="6"><b>{$LANG.description}</b></td>
-                </tr>
+		{include file='../templates/invoices/simple2/total.tpl'}
 	{/if}
 	
-	{foreach from=$master_invoices item=master_invoice}
-		{if $smarty.get.invoice_style === 'Itemised' }
-						<tr class="tbl1" >
-				<td class="tbl1">{$master_invoice.inv_it_quantity_formatted}</td>
-				<td class="tbl1">{$product.prod_description}</td>
-				<td class="tbl1">{$pref.pref_currency_sign}{$master_invoice.inv_it_unit_price}</td>
-				<td class="tbl1">{$pref.pref_currency_sign}{$master_invoice.inv_it_gross_total}</td>
-				<td class="tbl1">{$pref.pref_currency_sign}{$master_invoice.inv_it_tax_amount}</td>
-				<td class="tbl1">{$pref.pref_currency_sign}{$master_invoice.inv_it_total}</td>
-			</tr>
-                <tr>
-                        <td class="tbl1-left"></td><td class="tbl1-right" colspan="5">
-                                                <table width="100%">
-                                                        <tr>
 
-                                                        </tr>
-                                                </table>
-                                </td>
-                 </tr>
-
-		{/if}
-
-		{if $smarty.get.invoice_style === 'Consulting' }
-			<tr class="tbl1-left tbl1-right">
-				<td class="tbl1-left" >{$master_invoice.inv_it_quantity_formatted}</td>
-				<td>{$product.prod_description}</td><td class="tbl1-right" colspan="5"></td>
-			</tr>
-			
-                <tr>       
-                        <td class="tbl1-left"></td><td class="tbl1-right" colspan="6">
-                                                <table width="100%">
-                                                        <tr>
-                                                        </tr>
-                                                </table>
-                                </td>
-                 </tr>
-
-	
-			<tr class="tbl1-left tbl1-right">
-				<td class="tbl1-left"></td>
-				<td class="tbl1-right" colspan=6><i>{$LANG.description}: </i>{$master_invoice.inv_it_description}</td>
-			</tr>
-			<tr class="tbl1-left tbl1-right tbl1-bottom">
-				<td class="tbl1-left tbl1-bottom" ></td>
-				<td class="tbl1-bottom"></td>
-				<td class="tbl1-bottom">{$pref.pref_currency_sign}{$master_invoice.inv_it_unit_price}</td>
-				<td class="tbl1-bottom">{$pref.pref_currency_sign}{$master_invoice.inv_it_gross_total}</td>
-				<td class="tbl1-bottom ">{$pref.pref_currency_sign}{$master_invoice.inv_it_tax_amount}</td>
-				<td align=right colspan=2 class="tbl1-right tbl1-bottom">{$pref.pref_currency_sign}{$master_invoice.inv_it_total}</td>
-			</tr>
-		{/if}
-	
-		{if $smarty.get.invoice_style === 'Total' }
-			                <tr class="tbl1-left tbl1-right">
-                        <td class="tbl1-left tbl1-right\" colspan=6>{$master_invoice.inv_it_description}</td>
-                </tr>
-                <tr class="tbl1-left tbl1-right">
-                        <td colspan=6 class="tbl1-left tbl1-right"><br></td>
-                </tr>
-		{/if}
-	
-	{/foreach}
-                
-
-	{if ( ($smarty.get.invoice_style === 'Itemised' && $invoice.inv_note) || ($smarty.get.invoice_style === 'Consulting' && $invoice.inv_note != null ) ) }
-
-		<tr>
-			<td class="tbl1-left tbl1-right" colspan="7"><br></td>
-		</tr>
-		<tr>
-			<td class="tbl1-left tbl1-right" colspan="7" align="left"><b>{$LANG.notes}:</b></td>
-		</tr>
-		<tr>
-			<td class="tbl1-left tbl1-right" colspan="7">{$invoice.inv_note}</td>
-		</tr>
-	{/if}
-	
-	<tr class="tbl1-left tbl1-right">
-		<td class="tbl1-left tbl1-right" colspan="6" ><br></td>
-	</tr>
-	
-	{if $smarty.get.invoice_style=== 'Total'}
-	<tr class="tbl1-left tbl1-right">
-		<td class="tbl1-left" colspan="3"></td>
-		<td align="right" colspan="2">{$LANG.gross_total}</td>
-		<td align="right" class="tbl1-right" >{$pref.pref_currency_sign}{$master_invoice.inv_it_gross_total}</td>
-	</tr>
-	{/if}
 
 	<tr class="tbl1-left tbl1-right">
 		<td class="tbl1-left" colspan="3"></td>

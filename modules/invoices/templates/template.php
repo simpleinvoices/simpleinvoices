@@ -47,6 +47,7 @@ $customer = getCustomer($invoice['inv_customer_id']);
 $biller = getBiller($invoice['inv_biller_id']);
 
 
+
 #preferences query
 $print_preferences = "SELECT * FROM {$tb_prefix}preferences where pref_id = $invoice[inv_preference] ";
 $result_print_preferences  = mysql_query($print_preferences, $conn) or die(mysql_error());
@@ -150,10 +151,10 @@ if (isset($_GET['export'])) {
 /* End Export code */
 
 
-	include("./templates/invoices/${template}/${template}.tpl");
+	//include("./templates/invoices/${template}/${template}.tpl");
 
-	
-	
+
+
 	#if itemised style show the invoice note field - START
 	if(!( $_GET['invoice_style'] === 'Itemised' && !empty($invoice['inv_note']) OR 'Consulting' && !empty($invoice['inv_note']))) {
 		$notes = "";
@@ -213,7 +214,7 @@ if (isset($_GET['export'])) {
 		#MERGE ITEMISED AND CONSULTING HERE
 		#PRINT the line items
 		#show the itemised invoice
-		include("./templates/invoices/${template}/${template}.tpl");
+		//include("./templates/invoices/${template}/${template}.tpl");
 		
 		if ($_GET['invoice_style'] === 'Itemised' ) {
 			$line = addslashes($itemised_line);
@@ -231,14 +232,14 @@ if (isset($_GET['export'])) {
 			eval('$lines .=  "'.$line.'";');
 	}
 }
-
+	
 #END INVOICE ITEMEISED/CONSULTING SECTION
 	if (is_null($_GET['export'])) {
 		$css = "./modules/invoices/${template}/${template}.css";
 	}
 	include('./config/config.php');
 	
-	$template_path = "../templates/invoices/${template}/${template}_.tpl";
+	$template_path = "./templates/invoices/${template}/${template}.tpl";
 	
 	if(file_exists($template_path)) {
 		$smarty -> assign('invoice_total',$invoice_total);
@@ -249,7 +250,9 @@ if (isset($_GET['export'])) {
 		$smarty -> assign('logo',$logo);
 		$smarty -> assign('template',$template);
 		$smarty -> assign('master_invoices',$master_invoices);
-		$smarty -> display($template_path);
+		
+		
+		$smarty -> display(".".$template_path);
 	}
 	else {
 		echo "Old Template....";
