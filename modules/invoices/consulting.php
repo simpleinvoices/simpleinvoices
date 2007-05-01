@@ -18,7 +18,7 @@ jsEnd();
 
 
 #biller query
-$sql = "SELECT * FROM {$tb_prefix}biller where b_enabled != 0 ORDER BY name";
+$sql = "SELECT * FROM {$tb_prefix}biller where enabled != 0 ORDER BY name";
 $result = mysql_query($sql, $conn) or die(mysql_error());
 
 #customer
@@ -49,7 +49,7 @@ $def = mysql_fetch_array($result_defaults);
 
 #Get the names of the defaults from their id -start
 #default biller name query
-$sql_biller_default = "SELECT name FROM {$tb_prefix}biller where id = $def[def_biller] and b_enabled != 0";
+$sql_biller_default = "SELECT name FROM {$tb_prefix}biller where id = $def[def_biller] and enabled != 0";
 $result_biller_default = mysql_query($sql_biller_default , $conn) or die(mysql_error());
 
 $biller= mysql_fetch_array($result_biller_default);

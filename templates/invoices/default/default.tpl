@@ -102,11 +102,11 @@ EOD;
 
         /*phone details start */
 	$biller_block .= print_if_not_null($LANG['phone_short'], $biller[phone],'tbl1-left','tbl1-right',3);
-	$biller_block .= print_if_not_null($LANG['fax'], $biller[b_fax],'tbl1-left','tbl1-right',3);
+	$biller_block .= print_if_not_null($LANG['fax'], $biller[fax],'tbl1-left','tbl1-right',3);
 	$biller_block .= print_if_not_null($LANG['mobile_short'], $biller[mobile_phone],'tbl1-left','tbl1-right',3);
 
 
-        $biller_block .= print_if_not_null($LANG['email'], $biller[b_email],'tbl1-left','tbl1-right',3);
+        $biller_block .= print_if_not_null($LANG['email'], $biller[email],'tbl1-left','tbl1-right',3);
         $biller_block .= print_if_not_null($biller[custom_field_label1], $biller[b_custom_field1],'tbl1-left','tbl1-right',3);
         $biller_block .= print_if_not_null($biller[custom_field_label2], $biller[b_custom_field2],'tbl1-left','tbl1-right',3);
         $biller_block .= print_if_not_null($biller[custom_field_label3], $biller[b_custom_field3],'tbl1-left','tbl1-right',3);
@@ -429,7 +429,7 @@ EOD;
 
 $footer = <<<EOD
 	<tr>
-		<td colspan="6"><div style="font-size:8pt;" align="center">$biller[b_co_footer]</div></td>
+		<td colspan="6"><div style="font-size:8pt;" align="center">$biller[footer]</div></td>
 	</tr>
 EOD;
 

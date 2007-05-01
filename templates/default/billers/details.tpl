@@ -55,11 +55,11 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.fax}</td>
-		<td>{$biller.b_fax}</td>
+		<td>{$biller.fax}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.email}</td>
-		<td>{$biller.b_email}</td>
+		<td>{$biller.email}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.1} <a
@@ -94,15 +94,15 @@
 			href="./modules/documentation/info_pages/insert_biller_text.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
-		<td>{$biller.b_co_logo}</td>
+		<td>{$biller.logo}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.invoice_footer}</td>
-		<td>{$biller.b_co_footer}</td>
+		<td>{$biller.footer}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
-		<td>{$biller.b_notes}</td>
+		<td>{$biller.notes}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
@@ -174,11 +174,11 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.fax}</td>
-		<td><input type=text name="b_fax" value="{$biller.b_fax}" size=50 /></td>
+		<td><input type=text name="fax" value="{$biller.fax}" size=50 /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.email}</td>
-		<td><input type=text name="b_email" value="{$biller.b_email}" size=50 /></td>
+		<td><input type=text name="email" value="{$biller.email}" size=50 /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.1} <a
@@ -219,9 +219,9 @@
 			href="./modules/documentation/info_pages/insert_biller_text.html"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
-		<td>{* Logo Part *} <select name="b_co_logo">
-			<option selected value="{$biller[b_co_logo]}"
-				style="font-weight:bold;">{$biller.b_co_logo}</option>
+		<td>{* Logo Part *} <select name="logo">
+			<option selected value="{$biller[logo]}"
+				style="font-weight:bold;">{$biller.logo}</option>
 			{foreach from=$files item=file}
 			<option>{$file}</option>
 			{/foreach}
@@ -231,18 +231,18 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.invoice_footer}</td>
-		<td><textarea name="b_co_footer" rows=4 cols=50>{$biller.b_co_footer}</textarea></td>
+		<td><textarea name="footer" rows=4 cols=50>{$biller.footer}</textarea></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
-		<td><textarea name="b_notes" rows=8 cols=50>{$biller.b_notes}</textarea></td>
+		<td><textarea name="notes" rows=8 cols=50>{$biller.notes}</textarea></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
 		<td>
 		{* enabled block *}
-		<select name="b_enabled">
-			<option value="{$biller.b_enabled}" selected
+		<select name="enabled">
+			<option value="{$biller.enabled}" selected
 				style="font-weight: bold;">{$biller.wording_for_enabled}</option>
 			<option value="1">{$LANG.enabled}</option>
 			<option value="0">{$LANG.disabled}</option>

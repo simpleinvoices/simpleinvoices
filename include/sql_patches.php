@@ -244,7 +244,7 @@ ADD b_co_footer TEXT";
         $patch['39']['date'] = "20070325";
 
 
-        $patch['40']['name'] = "Alter field name in si_account_payments";
+        $patch['40']['name'] = "Alter field name in si_partchmanager";
         $patch['40']['patch'] = "ALTER TABLE `si_sql_patchmanager` CHANGE `sql_patch` `sql_patch` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL";
         $patch['40']['date'] = "20070424";
 	
@@ -291,6 +291,31 @@ ADD b_co_footer TEXT";
 	$patch['51']['name'] = "Alter field name b_mobile_phone to mobile_phone";
         $patch['51']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_mobile_phone`  `mobile_phone` VARCHAR( 255 ) NULL DEFAULT NULL";
 	$patch['51']['date'] = "20070430";
+
+	$patch['52']['name'] = "Alter field name b_fax to fax";
+        $patch['52']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_fax`  `fax` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['52']['date'] = "20070430";
+
+	$patch['53']['name'] = "Alter field name b_email to email";
+        $patch['53']['patch'] = "ALTER TABLE  `si_email` CHANGE  `b_email`  `email` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['53']['date'] = "20070430";
+
+	$patch['54']['name'] = "Alter field name b_co_logo to logo";
+        $patch['54']['patch'] = "ALTER TABLE  `si_email` CHANGE  `b_logo`  `logo` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['54']['date'] = "20070430";
+
+	$patch['54']['name'] = "Alter field name b_co_footer to footer";
+        $patch['54']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_co_footer` `footer` TEXT NULL DEFAULT NULL ";
+	$patch['54']['date'] = "20070430";
+	
+	$patch['55']['name'] = "Alter field name b_notes to notes";
+        $patch['55']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_notes` `notes` TEXT NULL DEFAULT NULL ";
+	$patch['55']['date'] = "20070430";
+
+	$patch['56']['name'] = "Alter field name b_enabled to enabled";
+        $patch['56']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_enabled` `enabled` VARCHAR( 1 ) NOT NULL DEFAULT '1'";
+	$patch['56']['date'] = "20070430";
+	
 	//b_co_logo -> logo & b_co_footer -> footer
 ?>
 

@@ -136,7 +136,7 @@ else if ($_GET[submit] == "biller") {
 	}
 
 	#biller query
-	$sql = "SELECT * FROM {$tb_prefix}biller where b_enabled != 0 ORDER BY name";
+	$sql = "SELECT * FROM {$tb_prefix}biller where enabled != 0 ORDER BY name";
 	$result = mysql_query($sql, $conn) or die(mysql_error());
 
 	#biller selector

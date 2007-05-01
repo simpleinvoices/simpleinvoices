@@ -94,8 +94,8 @@ if (isset($_GET['export'])) {
 
 #logo field support - if not logo show nothing else show logo
 
-if(!empty($biller['b_co_logo'])) {
-	$logo = "./images/logo/$biller[b_co_logo]";
+if(!empty($biller['logo'])) {
+	$logo = "./images/logo/$biller[logo]";
 }
 else {
 	$logo = "./images/logo/_default_blank_logo.png";

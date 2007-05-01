@@ -99,7 +99,7 @@
                         <td class='tbl1-left'>{$LANG.mobile_short}.:<td class='tbl1-right' colspan=3>{$biller.mobile_phone}</td>
                 </tr>
                 <tr>
-                        <td class='tbl1-left'>{$LANG.email}:<td class='tbl1-right' colspan=3>{$biller.b_email}</td>
+                        <td class='tbl1-left'>{$LANG.email}:<td class='tbl1-right' colspan=3>{$biller.email}</td>
                 </tr>
                 <tr>
                         <td class='tbl1-left'>{$biller.custom_field_label1}:<td class='tbl1-right' colspan=3>{$biller.b_custom_field1}</td>
@@ -227,7 +227,7 @@
 		<td><br></td>
 	</tr>
 		<tr>
-		<td colspan="6"><div style="font-size:8pt;" align="center">{$biller.b_co_footer}</div></td>
+		<td colspan="6"><div style="font-size:8pt;" align="center">{$biller.footer}</div></td>
 	</tr>
 </table>
 <div id="footer"></div></div>

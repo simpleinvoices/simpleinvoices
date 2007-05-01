@@ -15,10 +15,10 @@ if (mysql_num_rows($result) != 0) {
 
 	while ($biller = mysql_fetch_array($result)) {
 	
-        if ($biller['b_enabled'] == 1) {
-                $biller['b_enabled'] = $LANG['enabled'];
+        if ($biller['enabled'] == 1) {
+                $biller['enabled'] = $LANG['enabled'];
         } else {
-        	$biller['b_enabled'] = $LANG['disabled'];
+        	$biller['enabled'] = $LANG['disabled'];
         }
 		$billers[$count] = $biller;
 		$count++;

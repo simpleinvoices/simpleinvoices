@@ -105,7 +105,7 @@ while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
 
 #BILLER drop down list -start
 	#biller query
-	$sql_biller = "SELECT * FROM {$tb_prefix}biller where b_enabled != 0 ORDER BY name";
+	$sql_biller = "SELECT * FROM {$tb_prefix}biller where enabled != 0 ORDER BY name";
 	$result_biller = mysql_query($sql_biller, $conn) or die(mysql_error());
 
 	#Get the names of the selected biller -start

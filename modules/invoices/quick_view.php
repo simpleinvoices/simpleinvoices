@@ -79,14 +79,14 @@ while ($billerArray = mysql_fetch_array($result_print_biller)) {
                 $b_countryField = $billerArray['country'];
                 $b_phoneField = $billerArray['phone'];
                 $b_mobile_phoneField = $billerArray['mobile_phone'];
-                $b_faxField = $billerArray['b_fax'];
-                $b_emailField = $billerArray['b_email'];
+                $b_faxField = $billerArray['fax'];
+                $b_emailField = $billerArray['email'];
                 $b_custom_field1Field = $billerArray['b_custom_field1'];
                 $b_custom_field2Field = $billerArray['b_custom_field2'];
                 $b_custom_field3Field = $billerArray['b_custom_field3'];
                 $b_custom_field4Field = $billerArray['b_custom_field4'];
-                $b_co_footerField = $billerArray['b_co_footer'];
-                $b_co_logoField = $billerArray['b_co_logo'];
+                $b_co_footerField = $billerArray['footer'];
+                $b_co_logoField = $billerArray['logo'];
 };
 
 

@@ -41,16 +41,16 @@ function insertBiller() {
 				'$_POST[country]',
 				'$_POST[phone]',
 				'$_POST[mobile_phone]',
-				'$_POST[b_fax]',
-				'$_POST[b_email]',
-				'$_POST[b_co_logo]',
-				'$_POST[b_co_footer]',
-				'$_POST[b_notes]',
+				'$_POST[fax]',
+				'$_POST[email]',
+				'$_POST[logo]',
+				'$_POST[footer]',
+				'$_POST[notes]',
 				'$_POST[b_custom_field1]',
 				'$_POST[b_custom_field2]',
 				'$_POST[b_custom_field3]',
 				'$_POST[b_custom_field4]',
-				'$_POST[b_enabled]'
+				'$_POST[enabled]'
 			 )";
 
 	return mysql_query($sql);
@@ -71,16 +71,16 @@ function updateBiller() {
 				country = '$_POST[country]',
 				phone = '$_POST[phone]',
 				mobile_phone = '$_POST[mobile_phone]',
-				b_fax = '$_POST[b_fax]',
-				b_email = '$_POST[b_email]',
-				b_co_logo = '$_POST[b_co_logo]',
-				b_co_footer = '$_POST[b_co_footer]',
-				b_notes = '$_POST[b_notes]',
+				fax = '$_POST[fax]',
+				email = '$_POST[email]',
+				logo = '$_POST[logo]',
+				footer = '$_POST[footer]',
+				notes = '$_POST[notes]',
 				b_custom_field1 = '$_POST[b_custom_field1]',
 				b_custom_field2 = '$_POST[b_custom_field2]',
 				b_custom_field3 = '$_POST[b_custom_field3]',
 				b_custom_field4 = '$_POST[b_custom_field4]',
-				b_enabled = '$_POST[b_enabled]'
+				enabled = '$_POST[enabled]'
 			WHERE
 				id = '$_GET[submit]'";
 	return mysql_query($sql);

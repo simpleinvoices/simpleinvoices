@@ -12,7 +12,7 @@ $block_stage1 = <<<EOD
 		href="./documentation/info_pages/email_from.html"
 		rel="gb_page_center[450, 450]"><img
 		src="./images/common/help-small.png"></img></a></td>
-		<td><input type=text name="email_from" size=50 value="{$biller[b_email]}" ></td>
+		<td><input type=text name="email_from" size=50 value="{$biller[email]}" ></td>
 	</tr>
 	<tr>
 		<td class="details_screen">To<a
@@ -26,7 +26,7 @@ $block_stage1 = <<<EOD
 		href="./documentation/info_pages/email_bcc.html"
 		rel="gb_page_center[450, 450]"><img
 		src="./images/common/help-small.png"></img></a></td>
-	<td><input type=text name="email_bcc" size=50 value="{$biller[b_email]}"></td>
+	<td><input type=text name="email_bcc" size=50 value="{$biller[email]}"></td>
 	</tr>
 	<tr>
 		<td class="details_screen">Message</td>
