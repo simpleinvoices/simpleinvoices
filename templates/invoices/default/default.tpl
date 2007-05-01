@@ -87,23 +87,23 @@ EOD;
         }
 
 
-       $biller_block .=  merge_address($biller[b_city], $biller[b_state], $biller[b_zip_code], $biller[street_address], $biller[street_address2],'tbl1-left','tbl1-right',3);
+       $biller_block .=  merge_address($biller[city], $biller[state], $biller[zip_code], $biller[street_address], $biller[street_address2],'tbl1-left','tbl1-right',3);
 
         /*country field start*/
-         if ($biller[b_country] != null) {
+         if ($biller[country] != null) {
                 $biller_block .=<<<EOD
                 </tr>
                 <tr>
-                        <td class='tbl1-left'></td><td class='tbl1-right' colspan=3>$biller[b_country]</td>
+                        <td class='tbl1-left'></td><td class='tbl1-right' colspan=3>$biller[country]</td>
                 </tr>
 EOD;
         }
         /*country field end*/
 
         /*phone details start */
-	$biller_block .= print_if_not_null($LANG['phone_short'], $biller[b_phone],'tbl1-left','tbl1-right',3);
+	$biller_block .= print_if_not_null($LANG['phone_short'], $biller[phone],'tbl1-left','tbl1-right',3);
 	$biller_block .= print_if_not_null($LANG['fax'], $biller[b_fax],'tbl1-left','tbl1-right',3);
-	$biller_block .= print_if_not_null($LANG['mobile_short'], $biller[b_mobile_phone],'tbl1-left','tbl1-right',3);
+	$biller_block .= print_if_not_null($LANG['mobile_short'], $biller[mobile_phone],'tbl1-left','tbl1-right',3);
 
 
         $biller_block .= print_if_not_null($LANG['email'], $biller[b_email],'tbl1-left','tbl1-right',3);

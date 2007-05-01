@@ -31,27 +31,27 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.city}</td>
-		<td>{$biller.b_city}</td>
+		<td>{$biller.city}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.zip}</td>
-		<td>{$biller.b_zip_code}</td>
+		<td>{$biller.zip_code}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.state}</td>
-		<td>{$biller.b_state}</td>
+		<td>{$biller.state}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.country}</td>
-		<td>{$biller.b_country}</td>
+		<td>{$biller.country}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.mobile_phone}</td>
-		<td>{$biller.b_mobile_phone}</td>
+		<td>{$biller.mobile_phone}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.phone}</td>
-		<td>{$biller.b_phone}</td>
+		<td>{$biller.phone}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.fax}</td>
@@ -147,30 +147,30 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.city}</td>
-		<td><input type=text name="b_city" value="{$biller.b_city}" size=50 /></td>
+		<td><input type=text name="city" value="{$biller.city}" size=50 /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.zip}</td>
-		<td><input type=text name="b_zip_code" value="{$biller.b_zip_code}"
+		<td><input type=text name="zip_code" value="{$biller.zip_code}"
 			size=50 /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.state}</td>
-		<td><input type=text name="b_state" value="{$biller.b_state}" size=50 /></td>
+		<td><input type=text name="state" value="{$biller.state}" size=50 /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.country}</td>
-		<td><input type=text name="b_country" value="{$biller.b_coutry}"
+		<td><input type=text name="country" value="{$biller.b_coutry}"
 			size=50 /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.mobile_phone}</td>
-		<td><input type=text name="b_mobile_phone"
-			value="{$biller.b_mobile_phone}" size=50 /></td>
+		<td><input type=text name="mobile_phone"
+			value="{$biller.mobile_phone}" size=50 /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.phone}</td>
-		<td><input type=text name="b_phone" value="{$biller.b_phone}" size=50 /></td>
+		<td><input type=text name="phone" value="{$biller.phone}" size=50 /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.fax}</td>

@@ -34,8 +34,8 @@
 		<td class='index_table'>{$biller.id}</td>
 		<td class='index_table'>{$biller.name}</td>
 		<!--
-	<td class='index_table'>{$biller.b_phone}</td>
-	<td class='index_table'>{$biller.b_mobile_phone}</td>
+	<td class='index_table'>{$biller.phone}</td>
+	<td class='index_table'>{$biller.mobile_phone}</td>
 	-->
 		<td class='index_table'>{$biller.b_email}</td>
 		<td class='index_table'>{$biller.b_enabled}</td>

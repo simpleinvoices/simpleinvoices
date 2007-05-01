@@ -85,18 +85,18 @@
 
 
 	
-	 <tr><td class='tbl1-left'></td><td class='tbl1-right' colspan=3>{$biller.b_city}, {$biller.b_zip_code}</td></tr>                </tr>
-                {if $biller.b_country != null }
+	 <tr><td class='tbl1-left'></td><td class='tbl1-right' colspan=3>{$biller.city}, {$biller.zip_code}</td></tr>                </tr>
+                {if $biller.country != null }
                 </tr>
                 <tr>
-                        <td class='tbl1-left'></td><td class='tbl1-right' colspan=3>{$biller.b_country}</td>
+                        <td class='tbl1-left'></td><td class='tbl1-right' colspan=3>{$biller.country}</td>
                 </tr>
        			{/if}
                 <tr>
-                        <td class='tbl1-left'>{$LANG.phone_short}.:<td class='tbl1-right' colspan=3>{$biller.b_phone}</td>
+                        <td class='tbl1-left'>{$LANG.phone_short}.:<td class='tbl1-right' colspan=3>{$biller.phone}</td>
                 </tr>
                 <tr>
-                        <td class='tbl1-left'>{$LANG.mobile_short}.:<td class='tbl1-right' colspan=3>{$biller.b_mobile_phone}</td>
+                        <td class='tbl1-left'>{$LANG.mobile_short}.:<td class='tbl1-right' colspan=3>{$biller.mobile_phone}</td>
                 </tr>
                 <tr>
                         <td class='tbl1-left'>{$LANG.email}:<td class='tbl1-right' colspan=3>{$biller.b_email}</td>

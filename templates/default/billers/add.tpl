@@ -40,33 +40,33 @@ You must enter a Biller name</div>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.city}</td>
-		<td><input type=text name="b_city" value="{$smarty.post.b_city}"
+		<td><input type=text name="city" value="{$smarty.post.city}"
 			size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.state}</td>
-		<td><input type=text name="b_state" value="{$smarty.post.b_state}"
+		<td><input type=text name="state" value="{$smarty.post.state}"
 			size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.zip}</td>
-		<td><input type=text name="b_zip_code"
-			value="{$smarty.post.b_zip_code}" size=25></td>
+		<td><input type=text name="zip_code"
+			value="{$smarty.post.zip_code}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.country}</td>
-		<td><input type=text name="b_country" value="{$smarty.post.b_country}"
+		<td><input type=text name="country" value="{$smarty.post.country}"
 			size=50></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.phone}</td>
-		<td><input type=text name="b_phone" value="{$smarty.post.b_phone}"
+		<td><input type=text name="phone" value="{$smarty.post.phone}"
 			size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.mobile_phone}</td>
-		<td><input type=text name="b_mobile_phone"
-			value="{$smarty.post.b_mobile_phone}" size=25></td>
+		<td><input type=text name="mobile_phone"
+			value="{$smarty.post.mobile_phone}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.fax}</td>
