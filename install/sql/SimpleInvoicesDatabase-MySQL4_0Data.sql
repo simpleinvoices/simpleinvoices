@@ -1,92 +1,20 @@
--- phpMyAdmin SQL Dump
--- version 2.9.0
--- http://www.phpmyadmin.net
--- 
--- Host: localhost
--- Generation Time: Feb 06, 2007 at 02:37 PM
--- Server version: 5.0.24
--- PHP Version: 5.1.6
--- 
--- Database: `simple_invoices`
--- 
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table `si_account_payments`
--- 
-
-CREATE TABLE `si_account_payments` (
-  `id` int(10) NOT NULL auto_increment,
-  `ac_inv_id` varchar(10) NOT NULL,
-  `ac_amount` double(25,2) NOT NULL,
-  `ac_notes` text NOT NULL,
-  `ac_date` datetime NOT NULL,
-  `ac_payment_type` int(10) NOT NULL default '1',
-  PRIMARY KEY  (`id`)
-) TYPE=MyISAM  AUTO_INCREMENT=3 ;
-
 -- 
 -- Dumping data for table `si_account_payments`
 -- 
 
-INSERT INTO `si_account_payments` (`id`, `ac_inv_id`, `ac_amount`, `ac_notes`, `ac_date`, `ac_payment_type`) VALUES 
+INSERT INTO `si_account_payments` (`ac_id`, `ac_inv_id`, `ac_amount`, `ac_notes`, `ac_date`, `ac_payment_type`) VALUES 
 (1, '1', 410.00, 'payment - cheque 14526', '2006-08-25 12:09:14', 1),
 (2, '4', 255.75, '', '2006-08-25 12:13:53', 1);
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table `si_biller`
--- 
-
-CREATE TABLE `si_biller` (
-  `id` int(10) NOT NULL auto_increment,
-  `name` varchar(50) default NULL,
-  `street_address` varchar(50) default NULL,
-  `street_address2` varchar(50) default NULL,
-  `city` varchar(50) default NULL,
-  `state` varchar(50) default NULL,
-  `zip_code` varchar(50) default NULL,
-  `country` varchar(100) default NULL,
-  `phone` varchar(50) default NULL,
-  `mobile_phone` varchar(50) default NULL,
-  `fax` varchar(50) default NULL,
-  `email` varchar(50) default NULL,
-  `logo` varchar(50) default NULL,
-  `footer` text,
-  `notes` text,
-  `b_custom_field1` varchar(50) default NULL,
-  `b_custom_field2` varchar(50) default NULL,
-  `b_custom_field3` varchar(50) default NULL,
-  `b_custom_field4` varchar(50) default NULL,
-  `enabled` varchar(1) NOT NULL default '1',
-  PRIMARY KEY  (`id`)
-) TYPE=MyISAM  AUTO_INCREMENT=5 ;
 
 -- 
 -- Dumping data for table `si_biller`
 -- 
 
-INSERT INTO `si_biller` (`id`, `name`, `street_address`, `street_address2`, `city`, `state`, `zip_code`, `country`, `phone`, `mobile_phone`, `fax`, `email`, `logo`, `footer`, `notes`, `b_custom_field1`, `b_custom_field2`, `b_custom_field3`, `b_custom_field4`, `enabled`) VALUES 
+INSERT INTO `si_biller` (`b_id`, `b_name`, `b_street_address`, `b_street_address2`, `b_city`, `b_state`, `b_zip_code`, `b_country`, `b_phone`, `b_mobile_phone`, `b_fax`, `b_email`, `b_co_logo`, `b_co_footer`, `b_notes`, `b_custom_field1`, `b_custom_field2`, `b_custom_field3`, `b_custom_field4`, `b_enabled`) VALUES 
 (1, 'Mr Plough', '43 Evergreen Terace', '', 'Springfield', 'New York', '90245', '', '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'homer@mrplough.com', 'ubuntulogo.png', '', '', '', '7898-87987-87', '', '', '1'),
 (2, 'Homer Simpson', '43 Evergreen Terace', NULL, 'Springfield', 'New York', '90245', NULL, '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'homer@yahoo.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1'),
 (3, 'The Beer Baron', '43 Evergreen Terace', NULL, 'Springfield', 'New York', '90245', NULL, '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'beerbaron@yahoo.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1'),
 (4, 'Fawlty Towers', '13 Seaside Drive', NULL, 'Torquay', 'Brixton on Avon', '65894', 'United Kingdom', '089 6985 4569', '0425 5477 8789', '089 6985 4568', 'penny@fawltytowers.co.uk', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table `si_custom_fields`
--- 
-
-CREATE TABLE `si_custom_fields` (
-  `cf_id` int(11) NOT NULL auto_increment,
-  `cf_custom_field` varchar(255) NOT NULL,
-  `cf_custom_label` varchar(255) default NULL,
-  `cf_display` varchar(1) NOT NULL default '1',
-  PRIMARY KEY  (`cf_id`)
-) TYPE=MyISAM  AUTO_INCREMENT=17 ;
 
 -- 
 -- Dumping data for table `si_custom_fields`
@@ -110,35 +38,6 @@ INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `
 (15, 'invoice_cf3', NULL, '0'),
 (16, 'invoice_cf4', NULL, '0');
 
--- --------------------------------------------------------
-
--- 
--- Table structure for table `si_customers`
--- 
-
-CREATE TABLE `si_customers` (
-  `c_id` int(10) NOT NULL auto_increment,
-  `c_attention` varchar(50) default NULL,
-  `c_name` varchar(50) default NULL,
-  `c_street_address` varchar(50) default NULL,
-  `c_street_address2` varchar(50) default NULL,
-  `c_city` varchar(50) default NULL,
-  `c_state` varchar(50) default NULL,
-  `c_zip_code` varchar(50) default NULL,
-  `c_country` varchar(100) default NULL,
-  `c_phone` varchar(50) default NULL,
-  `c_mobile_phone` varchar(50) default NULL,
-  `c_fax` varchar(50) default NULL,
-  `c_email` varchar(50) default NULL,
-  `c_notes` text,
-  `c_custom_field1` varchar(50) default NULL,
-  `c_custom_field2` varchar(50) default NULL,
-  `c_custom_field3` varchar(50) default NULL,
-  `c_custom_field4` varchar(50) default NULL,
-  `c_enabled` varchar(1) NOT NULL default '1',
-  PRIMARY KEY  (`c_id`)
-) TYPE=MyISAM  AUTO_INCREMENT=4 ;
-
 -- 
 -- Dumping data for table `si_customers`
 -- 
@@ -148,51 +47,12 @@ INSERT INTO `si_customers` (`c_id`, `c_attention`, `c_name`, `c_street_address`,
 (2, 'Mr Burns', 'Springfield Power Plant', '4 Power Plant Drive', 'street2', 'Springfield', 'New York', '90210', '', '04 1235 5698', '', '04 5678 7899', 'mr.burn@spp.com', '<p><strong>Springfield Nuclear Power Plant</strong> is a fictional electricity generating facility in the <a href="http://en.wikipedia.org/wiki/Television" title="Television">television</a> <a href="http://en.wikipedia.org/wiki/Animated_cartoon" title="Animated cartoon">animated cartoon</a> series <em><a href="http://en.wikipedia.org/wiki/The_Simpsons" title="The Simpsons">The Simpsons</a></em>. The plant has a <a href="http://en.wikipedia.org/wiki/Monopoly" title="Monopoly">monopoly</a> on the city of <a href="http://en.wikipedia.org/wiki/Springfield_%28The_Simpsons%29" title="Springfield (The Simpsons)">Springfield&#39;s</a> energy supply, but is sometimes mismanaged and endangers much of the town with its presence.</p> <p>Based on the plant&#39;s appearance and certain episode plots, it likely houses only a single &quot;unit&quot; or reactor (although, judging from the number of <a href="http://en.wikipedia.org/wiki/Containment_building" title="Containment building">containment buildings</a> and <a href="http://en.wikipedia.org/wiki/Cooling_tower" title="Cooling tower">cooling towers</a>, there is a chance it may have two). In one episode an emergency occurs and Homer resorts to the manual, which begins &quot;Congratulations on your purchase of a Fissionator 1952 Slow-Fission Reactor&quot;.</p> <p>The plant is poorly maintained, largely due to owner Montgomery Burns&#39; miserliness. Its <a href="http://en.wikipedia.org/wiki/Nuclear_safety" title="Nuclear safety">safety record</a> is appalling, with various episodes showing luminous rats in the bowels of the building, pipes and drums leaking radioactive waste, the disposal of waste in a children&#39;s playground, <a href="http://en.wikipedia.org/wiki/Plutonium" title="Plutonium">plutonium</a> used as a paperweight, cracked cooling towers (fixed in one episode using a piece of <a href="http://en.wikipedia.org/wiki/Chewing_gum" title="Chewing gum">Chewing gum</a>), dangerously high <a href="http://en.wikipedia.org/wiki/Geiger_counter" title="Geiger counter">Geiger counter</a> readings around the perimeter of the plant, and even a giant spider. In the opening credits a bar of some <a href="http://en.wikipedia.org/wiki/Radioactive" title="Radioactive">radioactive</a> substance is trapped in Homer&#39;s overalls and later disposed of in the street.</p>', '13245-789798', '', '', '', '1'),
 (3, 'Kath Day-Knight', 'Kath and Kim Pty Ltd', '82 Fountain Drive', NULL, 'Fountain Lakes', 'VIC', '3567', 'Australia', '03 9658 7456', NULL, '03 9658 7457', 'kath@kathandkim.com.au', 'Kath Day-Knight (<a href="http://en.wikipedia.org/wiki/Jane_Turner" title="Jane Turner">Jane Turner</a>) is an &#39;empty nester&#39; divorc&eacute;e who wants to enjoy time with her &quot;hunk o&#39; spunk&quot; Kel Knight (<a href="http://en.wikipedia.org/wiki/Glenn_Robbins" title="Glenn Robbins">Glenn Robbins</a>), a local &quot;purveyor of fine meats&quot;, but whose lifestyle is often cramped by the presence of her self-indulgent and spoilt rotten twenty-something daughter Kim Craig <a href="http://en.wikipedia.org/wiki/List_of_French_phrases_used_by_English_speakers#I_.E2.80.93_Q" title="List of French phrases used by English speakers">n&eacute;e</a> Day (<a href="http://en.wikipedia.org/wiki/Gina_Riley" title="Gina Riley">Gina Riley</a>). Kim enjoys frequent and lengthy periods of spiteful estrangement from her forgiving husband Brett Craig (<a href="http://en.wikipedia.org/wiki/Peter_Rowsthorn" title="Peter Rowsthorn">Peter Rowsthorn</a>) for imagined slights and misdemeanors, followed by loving reconciliations with him. During Kim and Brett&#39;s frequent rough patches Kim usually seeks solace from her servile &quot;second best friend&quot; Sharon Strzelecki (<a href="http://en.wikipedia.org/wiki/Magda_Szubanski" title="Magda Szubanski">Magda Szubanski</a>), screaming abuse at Sharon for minor infractions while issuing her with intricately-instructed tasks, such as stalking Brett. Kim and Brett had a baby in the final episode of the second series whom they named Epponnee-Raelene Kathleen Darlene Charlene Craig, shortened to Epponnee-Rae.', NULL, NULL, NULL, NULL, '1');
 
--- --------------------------------------------------------
-
--- 
--- Table structure for table `si_defaults`
--- 
-
-CREATE TABLE `si_defaults` (
-  `def_id` int(10) NOT NULL auto_increment,
-  `def_biller` int(25) default NULL,
-  `def_customer` int(25) default NULL,
-  `def_tax` int(25) default NULL,
-  `def_inv_preference` int(25) default NULL,
-  `def_number_line_items` int(25) NOT NULL default '0',
-  `def_inv_template` varchar(50) NOT NULL default 'default',
-  `def_payment_type` varchar(25) default '1',
-  PRIMARY KEY  (`def_id`)
-) TYPE=MyISAM  AUTO_INCREMENT=3 ;
-
 -- 
 -- Dumping data for table `si_defaults`
 -- 
 
 INSERT INTO `si_defaults` (`def_id`, `def_biller`, `def_customer`, `def_tax`, `def_inv_preference`, `def_number_line_items`, `def_inv_template`, `def_payment_type`) VALUES 
 (1, 4, 3, 1, 1, 5, 'default', '1');
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table `si_invoice_items`
--- 
-
-CREATE TABLE `si_invoice_items` (
-  `inv_it_id` int(10) NOT NULL auto_increment,
-  `inv_it_invoice_id` int(10) NOT NULL default '0',
-  `inv_it_quantity` float NOT NULL default '0',
-  `inv_it_product_id` int(10) default '0',
-  `inv_it_unit_price` double(25,2) default '0.00',
-  `inv_it_tax_id` varchar(25) NOT NULL default '0',
-  `inv_it_tax` double(25,2) default '0.00',
-  `inv_it_tax_amount` double(25,2) default NULL,
-  `inv_it_gross_total` double(25,2) default '0.00',
-  `inv_it_description` text,
-  `inv_it_total` double(25,2) default '0.00',
-  PRIMARY KEY  (`inv_it_id`)
-) TYPE=MyISAM  AUTO_INCREMENT=17 ;
 
 -- 
 -- Dumping data for table `si_invoice_items`
@@ -216,18 +76,6 @@ INSERT INTO `si_invoice_items` (`inv_it_id`, `inv_it_invoice_id`, `inv_it_quanti
 (15, 8, 10, 5, 125.00, '1', 10.00, 125.00, 1250.00, '00', 1375.00),
 (16, 8, 10, 4, 15.50, '1', 10.00, 15.50, 155.00, '00', 170.50);
 
--- --------------------------------------------------------
-
--- 
--- Table structure for table `si_invoice_type`
--- 
-
-CREATE TABLE `si_invoice_type` (
-  `inv_ty_id` int(11) NOT NULL auto_increment,
-  `inv_ty_description` varchar(25) NOT NULL default '',
-  PRIMARY KEY  (`inv_ty_id`)
-) TYPE=MyISAM  AUTO_INCREMENT=4 ;
-
 -- 
 -- Dumping data for table `si_invoice_type`
 -- 
@@ -236,27 +84,6 @@ INSERT INTO `si_invoice_type` (`inv_ty_id`, `inv_ty_description`) VALUES
 (1, 'Total'),
 (2, 'Itemised'),
 (3, 'Consulting');
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table `si_invoices`
--- 
-
-CREATE TABLE `si_invoices` (
-  `inv_id` int(10) NOT NULL auto_increment,
-  `inv_biller_id` int(10) NOT NULL default '0',
-  `inv_customer_id` int(10) NOT NULL default '0',
-  `inv_type` int(10) NOT NULL default '0',
-  `inv_preference` int(10) NOT NULL default '0',
-  `inv_date` datetime NOT NULL default '0000-00-00 00:00:00',
-  `invoice_custom_field1` varchar(50) default NULL,
-  `invoice_custom_field2` varchar(50) default NULL,
-  `invoice_custom_field3` varchar(50) default NULL,
-  `invoice_custom_field4` varchar(50) default NULL,
-  `inv_note` text,
-  PRIMARY KEY  (`inv_id`)
-) TYPE=MyISAM  AUTO_INCREMENT=9 ;
 
 -- 
 -- Dumping data for table `si_invoices`
@@ -272,19 +99,6 @@ INSERT INTO `si_invoices` (`inv_id`, `inv_biller_id`, `inv_customer_id`, `inv_ty
 (7, 2, 2, 2, 1, '2006-12-10 22:32:48', NULL, NULL, NULL, NULL, 'this is a test<br />'),
 (8, 4, 3, 2, 1, '2007-02-06 00:00:00', NULL, NULL, NULL, NULL, '');
 
--- --------------------------------------------------------
-
--- 
--- Table structure for table `si_payment_types`
--- 
-
-CREATE TABLE `si_payment_types` (
-  `pt_id` int(10) NOT NULL auto_increment,
-  `pt_description` varchar(250) NOT NULL,
-  `pt_enabled` varchar(1) NOT NULL default '1',
-  PRIMARY KEY  (`pt_id`)
-) TYPE=MyISAM  AUTO_INCREMENT=3 ;
-
 -- 
 -- Dumping data for table `si_payment_types`
 -- 
@@ -292,29 +106,6 @@ CREATE TABLE `si_payment_types` (
 INSERT INTO `si_payment_types` (`pt_id`, `pt_description`, `pt_enabled`) VALUES 
 (1, 'Cash', '1'),
 (2, 'Credit Card', '1');
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table `si_preferences`
--- 
-
-CREATE TABLE `si_preferences` (
-  `pref_id` int(11) NOT NULL auto_increment,
-  `pref_description` varchar(50) default NULL,
-  `pref_currency_sign` varchar(50) default NULL,
-  `pref_inv_heading` varchar(50) default NULL,
-  `pref_inv_wording` varchar(50) default NULL,
-  `pref_inv_detail_heading` varchar(50) default NULL,
-  `pref_inv_detail_line` text,
-  `pref_inv_payment_method` varchar(50) default NULL,
-  `pref_inv_payment_line1_name` varchar(50) default NULL,
-  `pref_inv_payment_line1_value` varchar(50) default NULL,
-  `pref_inv_payment_line2_name` varchar(50) default NULL,
-  `pref_inv_payment_line2_value` varchar(50) default NULL,
-  `pref_enabled` varchar(1) NOT NULL default '1',
-  PRIMARY KEY  (`pref_id`)
-) TYPE=MyISAM  AUTO_INCREMENT=6 ;
 
 -- 
 -- Dumping data for table `si_preferences`
@@ -327,25 +118,6 @@ INSERT INTO `si_preferences` (`pref_id`, `pref_description`, `pref_currency_sign
 (4, 'Estimate - default', '$', 'Estimate', 'Estimate', 'Details', '<br>This is an estimate of the final value of services rendered.<br>Thank you', '', '', '', '', '', '1'),
 (5, 'Quote - default', '$', 'Quote', 'Quote', 'Details', '<br>This is a quote of the final value of services rendered.<br>Thank you', '', '', '', '', '', '1');
 
--- --------------------------------------------------------
-
--- 
--- Table structure for table `si_products`
--- 
-
-CREATE TABLE `si_products` (
-  `prod_id` int(11) NOT NULL auto_increment,
-  `prod_description` text NOT NULL,
-  `prod_unit_price` decimal(25,2) default NULL,
-  `prod_custom_field1` varchar(50) default NULL,
-  `prod_custom_field2` varchar(50) default NULL,
-  `prod_custom_field3` varchar(50) default NULL,
-  `prod_custom_field4` varchar(50) default NULL,
-  `prod_notes` text NOT NULL,
-  `prod_enabled` varchar(1) NOT NULL default '1',
-  PRIMARY KEY  (`prod_id`)
-) TYPE=MyISAM  AUTO_INCREMENT=6 ;
-
 -- 
 -- Dumping data for table `si_products`
 -- 
@@ -356,21 +128,6 @@ INSERT INTO `si_products` (`prod_id`, `prod_description`, `prod_unit_price`, `pr
 (3, 'Weekly ploughing service', 125.00, NULL, NULL, NULL, NULL, '', '1'),
 (4, 'Bootleg homebrew', 15.50, NULL, NULL, NULL, NULL, '', '1'),
 (5, 'Accomadation', 125.00, NULL, NULL, NULL, NULL, '', '1');
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table `si_sql_patchmanager`
--- 
-
-CREATE TABLE `si_sql_patchmanager` (
-  `sql_id` int(11) NOT NULL auto_increment,
-  `sql_patch_ref` varchar(50) NOT NULL default '',
-  `sql_patch` varchar(50) NOT NULL default '',
-  `sql_release` varchar(25) NOT NULL default '',
-  `sql_statement` text NOT NULL,
-  PRIMARY KEY  (`sql_id`)
-) TYPE=MyISAM  AUTO_INCREMENT=37 ;
 
 -- 
 -- Dumping data for table `si_sql_patchmanager`
@@ -413,20 +170,6 @@ INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_
 (34, '34', 'Reset invoice template to default refer Issue 70', '20070125', ''),
 (35, '35', 'Adding data to the custom fields table for invoice', '20070204', ''),
 (36, '36', 'Adding custom fields to the invoices table', '20070204', '');
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table `si_tax`
--- 
-
-CREATE TABLE `si_tax` (
-  `tax_id` int(11) NOT NULL auto_increment,
-  `tax_description` varchar(50) default NULL,
-  `tax_percentage` decimal(10,2) default NULL,
-  `tax_enabled` varchar(1) NOT NULL default '1',
-  PRIMARY KEY  (`tax_id`)
-) TYPE=MyISAM  AUTO_INCREMENT=8 ;
 
 -- 
 -- Dumping data for table `si_tax`

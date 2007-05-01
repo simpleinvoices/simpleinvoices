@@ -18,11 +18,45 @@ function getBiller($id) {
 	return mysql_fetch_array($result_print_biller);
 }
 
+function getPreferences($id) {
+	global $tb_prefix;
+	$print_preferences = "SELECT * FROM {$tb_prefix}preferences where pref_id = $id";
+	$result_print_preferences  = mysql_query($print_preferences) or die(mysql_error());
+	return mysql_fetch_array($result_print_preferences);
+}
+
 function getTaxRate($id) {
 	global $tb_prefix;
 	$print_tax_rate = "SELECT * FROM {$tb_prefix}tax WHERE tax_id = $id";
 	$result_print_tax_rate = mysql_query($print_tax_rate) or die(mysql_error());
 	return mysql_fetch_array($result_print_tax_rate);
+}
+
+function getInvoice($id) {
+	global $tb_prefix;
+	$print_master_invoice_id = "SELECT * FROM {$tb_prefix}invoices WHERE inv_id = $id";
+	$result_print_master_invoice_id  = mysql_query($print_master_invoice_id) or die(mysql_error());
+
+	$invoice = mysql_fetch_array($result_print_master_invoice_id);
+	$invoice['date_field'] = date( $config['date_format'], strtotime( $invoice['inv_date'] ) );
+	$invoice['calc_date'] = date('Y-m-d', strtotime( $invoice['inv_date'] ) );
+	
+	return $invoice;
+}
+
+function getDefaults() {
+	global $tb_prefix;
+	$print_defaults = "SELECT * FROM {$tb_prefix}defaults WHERE def_id = 1";
+	$result_print_defaults = mysql_query($print_defaults) or die(mysql_error());
+
+	return mysql_fetch_array($result_print_defaults);
+}
+
+function getInvoiceType($id) {
+	global $tb_prefix;
+	$sql_invoice_type = "SELECT inv_ty_description FROM {$tb_prefix}invoice_type WHERE inv_ty_id = $id";
+	$result_invoice_type = mysql_query($sql_invoice_type) or die(mysql_error());
+	return mysql_fetch_array($result_invoice_type);
 }
 
 function insertBiller() {

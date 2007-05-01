@@ -297,11 +297,11 @@ ADD b_co_footer TEXT";
 	$patch['52']['date'] = "20070430";
 
 	$patch['53']['name'] = "Alter field name b_email to email";
-        $patch['53']['patch'] = "ALTER TABLE  `si_email` CHANGE  `b_email`  `email` VARCHAR( 255 ) NULL DEFAULT NULL";
+        $patch['53']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_email`  `email` VARCHAR( 255 ) NULL DEFAULT NULL";
 	$patch['53']['date'] = "20070430";
 
 	$patch['54']['name'] = "Alter field name b_co_logo to logo";
-        $patch['54']['patch'] = "ALTER TABLE  `si_email` CHANGE  `b_logo`  `logo` VARCHAR( 255 ) NULL DEFAULT NULL";
+        $patch['54']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_logo`  `logo` VARCHAR( 255 ) NULL DEFAULT NULL";
 	$patch['54']['date'] = "20070430";
 
 	$patch['54']['name'] = "Alter field name b_co_footer to footer";

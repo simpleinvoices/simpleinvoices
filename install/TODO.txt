@@ -1,0 +1,64 @@
+Design
+------
+Not finished
+
+install.php
+-----------
+-todo
+
+-done
+The language of the user is automatically recognized. If not: English language.
+Abbreviation of the languages has to use in: lang/langNames.txt
+
+preferences.php
+----------------
+-todo
+To write a function to check the xsl existence.
+
+-done
+Control xslt existence.
+Control library Gd existence.
+Control size memory.
+
+connection.php
+--------------
+-todo
+
+-done
+Database form.
+
+connection_post.php
+-------------------
+-todo
+Beta testing...
+Form control (is empty etc.)
+
+-solve
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Resource id #5' at line 1
+Warning: Unknown: Your script possibly relies on a session side-effect which existed until PHP 4.2.3. Please be advised that the session extension does not consider global variables as a source of data, unless register_globals is enabled. You can disable this functionality and this warning by setting session.bug_compat_42 or session.bug_compat_warn to off, respectively. in Unknown on line 0
+
+-done
+Create or drop DB
+
+-future functionalities
+Change functions msql_ to mysqli_
+
+insertion.php
+-------------
+-todo
+Beta testing...
+
+-done
+
+content.php
+-----------
+-todo
+
+-done
+
+Languages files
+---------------
+-todo
+To correct my English
+
+-done
