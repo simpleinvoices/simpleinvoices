@@ -242,50 +242,55 @@ ADD b_co_footer TEXT";
 		ALTER TABLE `si_custom_fields` CHANGE `cf_custom_label` `cf_custom_label` VARCHAR( 255 )
         ";
         $patch['39']['date'] = "20070325";
-               
+
+
         $patch['40']['name'] = "Alter field name in si_account_payments";
-        $patch['40']['patch'] = "ALTER TABLE  `si_account_payments` CHANGE  `ac_id`  `id` INT( 10 ) NOT NULL AUTO_INCREMENT";
+        $patch['40']['patch'] = "ALTER TABLE `si_sql_patchmanager` CHANGE `sql_patch` `sql_patch` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL";
         $patch['40']['date'] = "20070424";
-                
-        $patch['41']['name'] = "Alter field name b_name to name";
-        $patch['41']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_name`  `name` VARCHAR( 50 ) NULL DEFAULT NULL;";
+	
+	$patch['41']['name'] = "Alter field name in si_account_payments";
+        $patch['41']['patch'] = "ALTER TABLE  `si_account_payments` CHANGE  `ac_id`  `id` INT( 10 ) NOT NULL AUTO_INCREMENT";
         $patch['41']['date'] = "20070424";
+                
+        $patch['42']['name'] = "Alter field name b_name to name";
+        $patch['42']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_name`  `name` VARCHAR( 50 ) NULL DEFAULT NULL;";
+        $patch['42']['date'] = "20070424";
 
-        $patch['42']['name'] = "Alter field name b_id to id";
-        $patch['42']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_id`  `id` INT( 10 ) NOT NULL AUTO_INCREMENT";
-        $patch['42']['date'] = "20070430";
-
-	$patch['43']['name'] = "Alter field name b_street_address to street_address";
-        $patch['43']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_street_address`  `street_address` VARCHAR( 255 ) NULL DEFAULT NULL";
+        $patch['43']['name'] = "Alter field name b_id to id";
+        $patch['43']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_id`  `id` INT( 10 ) NOT NULL AUTO_INCREMENT";
         $patch['43']['date'] = "20070430";
 
-	$patch['44']['name'] = "Alter field name b_street_address2 to street_address2";
-        $patch['44']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_street_address2`  `street_address2` VARCHAR( 255 ) NULL DEFAULT NULL";
-	$patch['44']['date'] = "20070430";
+	$patch['44']['name'] = "Alter field name b_street_address to street_address";
+        $patch['44']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_street_address`  `street_address` VARCHAR( 255 ) NULL DEFAULT NULL";
+        $patch['44']['date'] = "20070430";
 
-	$patch['45']['name'] = "Alter field name b_city to city";
-        $patch['45']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_city`  `city` VARCHAR( 255 ) NULL DEFAULT NULL";
-        $patch['45']['date'] = "20070430";
+	$patch['45']['name'] = "Alter field name b_street_address2 to street_address2";
+        $patch['45']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_street_address2`  `street_address2` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['45']['date'] = "20070430";
+
+	$patch['46']['name'] = "Alter field name b_city to city";
+        $patch['46']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_city`  `city` VARCHAR( 255 ) NULL DEFAULT NULL";
+        $patch['46']['date'] = "20070430";
 	
-	$patch['46']['name'] = "Alter field name b_state to state";
-        $patch['46']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_state`  `state` VARCHAR( 255 ) NULL DEFAULT NULL";
-	$patch['46']['date'] = "20070430";
-
-	$patch['47']['name'] = "Alter field name b_zip_code to zip_code";
-        $patch['47']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_zip_code`  `zip_code` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['47']['name'] = "Alter field name b_state to state";
+        $patch['47']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_state`  `state` VARCHAR( 255 ) NULL DEFAULT NULL";
 	$patch['47']['date'] = "20070430";
 
-	$patch['48']['name'] = "Alter field name b_country to country";
-        $patch['48']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_country`  `country` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['48']['name'] = "Alter field name b_zip_code to zip_code";
+        $patch['48']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_zip_code`  `zip_code` VARCHAR( 255 ) NULL DEFAULT NULL";
 	$patch['48']['date'] = "20070430";
 
-	$patch['49']['name'] = "Alter field name b_phone to phone";
-        $patch['49']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_phone`  `phone` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['49']['name'] = "Alter field name b_country to country";
+        $patch['49']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_country`  `country` VARCHAR( 255 ) NULL DEFAULT NULL";
 	$patch['49']['date'] = "20070430";
 
-	$patch['50']['name'] = "Alter field name b_mobile_phone to mobile_phone";
-        $patch['50']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_mobile_phone`  `mobile_phone` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['50']['name'] = "Alter field name b_phone to phone";
+        $patch['50']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_phone`  `phone` VARCHAR( 255 ) NULL DEFAULT NULL";
 	$patch['50']['date'] = "20070430";
+
+	$patch['51']['name'] = "Alter field name b_mobile_phone to mobile_phone";
+        $patch['51']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_mobile_phone`  `mobile_phone` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['51']['date'] = "20070430";
 	//b_co_logo -> logo & b_co_footer -> footer
 ?>
 
