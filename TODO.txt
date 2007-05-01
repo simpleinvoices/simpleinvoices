@@ -54,6 +54,7 @@ $customer_custom_field_label4 = get_custom_field_label("customer_cf4");
 
 @ruflin (notes):
 - make system defaults table nicer (name,value,id, ...)
+- add due date for sending bills via e-mail (cron-script)
 - make $tb_prefix a global constant to be accessible in all functions (without global)
 - in pop-down menus the preselected entry is always twice. change it with the selected option
  -- i couldnt do this nicely :) if you could would be great
