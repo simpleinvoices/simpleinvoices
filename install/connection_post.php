@@ -49,6 +49,7 @@ $dropTables = fopen("sql/drop.sql", "r");
 
 	// _POST Control
 	if(isset($_POST['host']) && isset($_POST['username']) && isset($_POST['passwd']) && isset($_POST['dbname']) && isset($_POST['prefix'])) {
+
 		$host = $_POST['host'];
 		$username = $_POST['username'];
 		$passwd = $_POST['passwd'];
@@ -66,13 +67,23 @@ $dropTables = fopen("sql/drop.sql", "r");
 	$connection = mysql_connect($host, $username, $passwd)
     or die($LANG['unableConnectDb'] . mysql_error());
 
-	// Select mysql version
+	/* Select mysql version
 	$version = mysql_get_server_info(); // no authorized access :-(
 	$_SESSION['sql_version'] = $sql_version;
 		if(substr($version, 0, 1) < 5)
 			$sql_version = $mysql4_create_table;
 		else
 			$sql_version = $mysql5_create_table;
+	*/
+
+	// Select mysql version
+	if (version_compare(phpversion(), "5.0", ">=")) {
+		$sql_version = $mysql4_create_table; }
+	else {
+		$sql_version = $mysql5_create_table; }
+		
+	$_SESSION['sql_version'] = $sql_version;
+
 
 	// Form action DB
 	$submit_array = array_keys($_POST['submit']);
