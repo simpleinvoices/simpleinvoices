@@ -253,7 +253,7 @@ ADD b_co_footer TEXT";
         $patch['41']['date'] = "20070424";
                 
         $patch['42']['name'] = "Alter field name b_name to name";
-        $patch['42']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_name`  `name` VARCHAR( 50 ) NULL DEFAULT NULL;";
+        $patch['42']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_name`  `name` VARCHAR( 255 ) NULL DEFAULT NULL;";
         $patch['42']['date'] = "20070424";
 
         $patch['43']['name'] = "Alter field name b_id to id";
@@ -316,6 +316,5 @@ ADD b_co_footer TEXT";
         $patch['56']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_enabled` `enabled` VARCHAR( 1 ) NOT NULL DEFAULT '1'";
 	$patch['56']['date'] = "20070430";
 	
-	//b_co_logo -> logo & b_co_footer -> footer
 ?>
 
