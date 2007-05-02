@@ -13,7 +13,7 @@ jsEnd();
 
 
 #biller query
-$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.c_name, {$tb_prefix}biller.name from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = {$tb_prefix}customers.c_id and {$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.id and {$tb_prefix}account_payments.id='$_GET[inv_id]'";
+$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.c_name, {$tb_prefix}biller.name FROM {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  WHERE ac_inv_id = {$tb_prefix}invoices.inv_id AND {$tb_prefix}invoices.inv_customer_id = {$tb_prefix}customers.c_id AND {$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.id AND {$tb_prefix}account_payments.id='$_GET[inv_id]'";
 
 
 $result = mysql_query($sql, $conn) or die(mysql_error());
@@ -35,7 +35,6 @@ $result_invoice_desc = mysql_query($sql_invoice_desc, $conn) or die(mysql_error(
 
 $invoiceDescription = mysql_fetch_array($result_invoice_desc);
 
-
 /*Code to get the Invoice preference - so can link from this screen back to the invoice - END*/
 
 #Payment type section
@@ -45,46 +44,40 @@ $result_payment_type_description = mysql_query($payment_type_description, $conn)
 $paymentType = mysql_fetch_array($result_payment_type_description);
 
 
+echo <<<EOD
+<b>{$LANG['manage_payments']}</b>
+<hr></hr>
 
-$display_block =  <<<EOD
 <table align=center>
 	<tr>
-		<td class='details_screen'>$LANG['payment_id']</td><td>{$stuff['id']}</td>
+		<td class='details_screen'>{$LANG['payment_id']}</td><td>{$stuff['id']}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>$LANG['invoice_id']</td><td><a href='print_quick_view.php?submit={$stuff['ac_inv_id']}&action=view&invoice_style={$invoiceDescription['inv_ty_description']}''>{$stuff['ac_inv_id']}</a></td>
+		<td class='details_screen'>{$LANG['invoice_id']}</td><td><a href='print_quick_view.php?submit={$stuff['ac_inv_id']}&action=view&invoice_style={$invoiceDescription['inv_ty_description']}''>{$stuff['ac_inv_id']}</a></td>
 	</tr>
 	<tr>
-		<td class='details_screen'>$LANG['amount']</td><td>{$stuff['ac_amount']}</td>
+		<td class='details_screen'>{$LANG['amount']}</td><td>{$stuff['ac_amount']}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>$LANG['date_upper']</td><td>{$stuff['date']}</td>
+		<td class='details_screen'>{$LANG['date_upper']}</td><td>{$stuff['date']}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>$LANG['biller']</td><td>{$stuff['name']}</td>
+		<td class='details_screen'>{$LANG['biller']}</td><td>{$stuff['name']}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>$LANG['customer']</td><td>{$stuff['c_name']}</td>
+		<td class='details_screen'>{$LANG['customer']}</td><td>{$stuff['c_name']}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>$LANG['payment_type']</td><td>{$paymentType['pt_description']}</td>
+		<td class='details_screen'>{$LANG['payment_type']}</td><td>{$paymentType['pt_description']}</td>
 	</tr>
         <tr>
-                <td class='details_screen'>$LANG['notes']</td><td>{$stuff['ac_notes']}
+                <td class='details_screen'>{$LANG['notes']}</td><td>{$stuff['ac_notes']}
         </tr>
 
 </table>
-EOD;
-
-
-echo <<<EOD
-<b>$LANG[manage_payments']</b>
-<hr></hr>
-
-$display_block
 <hr></hr>
 	<form>
-		<input type=button value='Back' onCLick='history.back()'>
+		<input type="button" value="Back" onCLick="history.back()">
 	</form>
 EOD;
 ?>
