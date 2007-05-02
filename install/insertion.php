@@ -60,36 +60,23 @@ mysql_close($connection);
 //Modification des droits d'accès du dossier ""config"
 chmod("../config", 0777);
 
-// Open file "content"
-$openFileContent = fopen("./content.php", "r");
+require_once('./content.php');
 
-// Ecriture du contenu dans la variable "$contents"
-$contents = file_get_contents("./content.php");
-
-// Contrôle si le fichier est accessible en écriture
-if (is_writable($fileConfig)) {
-
-	// ouverture du fichier "config.php"
-    if (!$openFileConfig = fopen('./config/config.php', 'r+')) {
+$fileConfigOpen = fopen('./config/config.php', 'wb+');
+	if(!$fileConfigOpen)
 		echo $LANG['OpenFileFailure'];
-		exit;
-	}
-
-	// Writing
-	if (fwrite($openFileConfig, $contents) === TRUE) {
+	else
+		$fileConfigWriting = fwrite($fileConfigOpen, $content);
+		
+	if ($fileConfigWriting === TRUE)
 		echo $LANG['writingSuccess'];
+	else
+		echo $LANG['writingNoSuccess'];
 
-		// Closing
-		fclose($openFile);
-    }
-	else {
-    	echo $LANG['writingNoSuccess'];
-    	exit; 
-	}
-} 
+fclose($fileConfigOpen);
 
-	// destruction de la session
-	// session_destroy();
-	// unset($_SESSION);
+// destruction de la session
+// session_destroy();
+// unset($_SESSION);
 	
 ?>

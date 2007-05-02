@@ -1,15 +1,16 @@
 <?php
-session_start();
+$content = <<<STAMP
+<?php
 //stop the direct browsing to this file - let index.php handle which files get displayed
 
 //checkLogin();
 
 /*Enter your database information */
-$db_host = $_SESSION['host'];
-$db_name = $_SESSION['dbname'];
-$db_user = $_SESSION['username'];
-$db_password = $_SESSION['passwd'];
-$tb_prefix = $_SESSION['table_prefix'];
+\$db_host = '$db_host';
+\$db_name = '$db_name';
+\$db_user = '$db_user';
+\$db_password = '$db_password';
+\$tb_prefix = '$tb_prefix';
 
 /*mysql version. basically if your using a version less than mysql 5 some features will be disabled*/
 #$mysql = 4;
@@ -86,4 +87,7 @@ $pdf_bottom_margin = 15;
 #error_reporting(E_ERROR);
 #error_reporting(E_ALL & ~E_NOTICE);
 #error_reporting(0);
+?>
+STAMP;
+
 ?>
