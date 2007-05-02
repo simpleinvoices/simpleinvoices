@@ -26,15 +26,15 @@
 
 <table align=center>
 <tr>
-	<td class="details_screen">{$LANG.description} <a href="./documentation/info_pages/inv_pref_description.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+	<td class="details_screen">{$LANG.description} <a href="./modules/documentation/info_pages/inv_pref_description.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 	<td><input type=text name="p_description"  value="{$smarty.post.p_description}" size=25></td>
 </tr>
 <tr>
-	<td class="details_screen">{$LANG.currency_sign} <a href="./documentation/info_pages/inv_pref_currency_sign.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+	<td class="details_screen">{$LANG.currency_sign} <a href="./modules/documentation/info_pages/inv_pref_currency_sign.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 	<td><input type=text name="p_currency_sign"  value="{$smarty.post.p_currency_sign}" size=25></td>
 </tr>
 <tr>
-	<td class="details_screen">{$LANG.invoice_heading} <a href="./documentation/info_pages/inv_pref_invoice_heading.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+	<td class="details_screen">{$LANG.invoice_heading} <a href="./modules/documentation/info_pages/inv_pref_invoice_heading.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 	<td><input type=text name="p_inv_heading"  value="{$smarty.post.p_inv_heading}" size=50></td>
 </tr>
 <tr>
