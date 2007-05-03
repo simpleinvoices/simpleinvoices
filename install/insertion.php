@@ -45,12 +45,7 @@ or die($LANG['unableConnectDb'] . mysql_error());
 	$db_selected = mysql_select_db($dbname, $connection);
 	if (!$db_selected) {
 		die ($LANG['unableSelectDb'] . mysql_error());
-}		
-
-//sql query to populate tables with sample data version 4
-$mysql_4data = "sql/SimpleInvoicesDatabase-MySQL4_0Data.sql";
-//sql query to populate tables with sample data version 5
-$mysql_5data = "sql/SimpleInvoicesDatabaseData.sql";
+}
 
 // Form action DB
 $submit_array = array_keys($_POST['submit']);
@@ -58,14 +53,22 @@ $action = $submit_array[0];
 switch ($action)
 {
 	case 'insertNo':
-		echo "blablabla";
+		echo "Merci d'utiliser simple invoices";
 		break;	
 		
 	case 'insertYes':
+	//sql query to populate tables with sample data version 4
+	$mysql_4data = "sql/SimpleInvoicesDatabase-MySQL4_0Data.sql";
+	
+	//sql query to populate tables with sample data version 5
+	$mysql_5data = "sql/SimpleInvoicesDatabaseData.sql";
+
 		if($sql_version == $mysql4_create_table)
 			parse_mysql_dump($mysql_4data, $ignoreerrors = false);
 		else
 			parse_mysql_dump($mysql_5data, $ignoreerrors = false);
+			
+		echo "Merci d'utiliser simple invoices";
 		break;	
 }
 

@@ -60,15 +60,6 @@ if(isset($_POST['host']) && isset($_POST['username']) && isset($_POST['passwd'])
 // connection
 $connection = mysql_connect($host, $username, $passwd) or die($LANG['unableConnectDb'] . mysql_error());
 
-	/* Select mysql version
-	$version = mysql_get_server_info(); // no authorized access :-(
-	$_SESSION['sql_version'] = $sql_version;
-		if(substr($version, 0, 1) < 5)
-			$sql_version = $mysql4_create_table;
-		else
-			$sql_version = $mysql5_create_table;
-	*/
-
 
 // Select mysql version
 if (version_compare(phpversion(), "5.0", ">=")) {
@@ -79,7 +70,6 @@ else {
 	$mysql4_create_table = "sql/SimpleInvoicesDatabase-MySQL4_0.sql"; //sql query to create tables
 	$sql_version = $mysql4_create_table;
 	$_SESSION['sql_version'] = $sql_version; }
-
 
 
 function parse_mysql_dump($url, $ignoreerrors = false) {
@@ -116,8 +106,13 @@ switch ($action) {
 		break;	
 		
 	case 'drop':
-		$dropTables = fopen("sql/drop.sql", "r");
-		$query = mysql_query($dropTables, $dbname) or die ($LANG['dropDbError'] . mysql_error());
+		$db_selected = mysql_select_db($dbname, $connection);
+		if (!$db_selected) {
+			die ($LANG['unableSelectDb'] . mysql_error());
+		}
+		
+		$dropTables = "sql/drop.sql";
+		parse_mysql_dump($dropTables, $ignoreerrors = false);
 		break;	
 }
 
