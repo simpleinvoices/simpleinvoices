@@ -301,35 +301,35 @@ ADD b_co_footer TEXT";
 	$patch['53']['date'] = "20070430";
 
 	$patch['54']['name'] = "Alter field name b_co_logo to logo";
-        $patch['54']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_logo`  `logo` VARCHAR( 255 ) NULL DEFAULT NULL";
+        $patch['54']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_co_logo`  `logo` VARCHAR( 255 ) NULL DEFAULT NULL";
 	$patch['54']['date'] = "20070430";
 
-	$patch['54']['name'] = "Alter field name b_co_footer to footer";
-        $patch['54']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_co_footer` `footer` TEXT NULL DEFAULT NULL ";
-	$patch['54']['date'] = "20070430";
-	
-	$patch['55']['name'] = "Alter field name b_notes to notes";
-        $patch['55']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_notes` `notes` TEXT NULL DEFAULT NULL ";
+	$patch['55']['name'] = "Alter field name b_co_footer to footer";
+        $patch['55']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_co_footer` `footer` TEXT NULL DEFAULT NULL ";
 	$patch['55']['date'] = "20070430";
-
-	$patch['56']['name'] = "Alter field name b_enabled to enabled";
-        $patch['56']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_enabled` `enabled` VARCHAR( 1 ) NOT NULL DEFAULT '1'";
-	$patch['56']['date'] = "20070430";
 	
-	$patch['57']['name'] = "Alter field name b_custom_field1 to custom_field1";
-        $patch['57']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_custom_field1` `custom_field1` VARCHAR( 255 ) NULL DEFAULT NULL";
-	$patch['57']['date'] = "20070430";
+	$patch['56']['name'] = "Alter field name b_notes to notes";
+        $patch['56']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_notes` `notes` TEXT NULL DEFAULT NULL ";
+	$patch['56']['date'] = "20070430";
 
-	$patch['58']['name'] = "Alter field name b_custom_field2 to custom_field2";
-        $patch['58']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_custom_field2` `custom_field2` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['57']['name'] = "Alter field name b_enabled to enabled";
+        $patch['57']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_enabled` `enabled` VARCHAR( 1 ) NOT NULL DEFAULT '1'";
+	$patch['57']['date'] = "20070430";
+	
+	$patch['58']['name'] = "Alter field name b_custom_field1 to custom_field1";
+        $patch['58']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_custom_field1` `custom_field1` VARCHAR( 255 ) NULL DEFAULT NULL";
 	$patch['58']['date'] = "20070430";
 
-	$patch['59']['name'] = "Alter field name b_custom_field3 to custom_field3";
-        $patch['59']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_custom_field3` `custom_field3` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['59']['name'] = "Alter field name b_custom_field2 to custom_field2";
+        $patch['59']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_custom_field2` `custom_field2` VARCHAR( 255 ) NULL DEFAULT NULL";
 	$patch['59']['date'] = "20070430";
 
-	$patch['60']['name'] = "Alter field name b_custom_field4 to custom_field4";
-        $patch['60']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_custom_field4` `custom_field4` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['60']['name'] = "Alter field name b_custom_field3 to custom_field3";
+        $patch['60']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_custom_field3` `custom_field3` VARCHAR( 255 ) NULL DEFAULT NULL";
 	$patch['60']['date'] = "20070430";
+
+	$patch['61']['name'] = "Alter field name b_custom_field4 to custom_field4";
+        $patch['61']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_custom_field4` `custom_field4` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['61']['date'] = "20070430";
 ?>
 
