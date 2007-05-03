@@ -53,7 +53,7 @@ $action = $submit_array[0];
 switch ($action)
 {
 	case 'insertNo':
-		echo "Merci d'utiliser simple invoices";
+		echo "Merci d'utiliser simple invoices"."<br />";
 		break;	
 		
 	case 'insertYes':
@@ -68,7 +68,7 @@ switch ($action)
 		else
 			parse_mysql_dump($mysql_5data, $ignoreerrors = false);
 			
-		echo "Merci d'utiliser simple invoices";
+		echo "Merci d'utiliser simple invoices"."<br />";
 		break;	
 }
 
@@ -95,6 +95,9 @@ $fileConfigOpen = fopen('../config/config.php', 'wb+');
 		echo $LANG['writingNoSuccess'];
 
 fclose($fileConfigOpen);
+
+// redirection après 4 secondes
+//<meta http-equiv="refresh" content="4;url=../index.php" />
 
 // destruction de la session
 // session_destroy();
