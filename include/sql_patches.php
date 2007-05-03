@@ -339,7 +339,7 @@ ADD b_co_footer TEXT";
   `value` varchar(30) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;";
+) ";
 	$patch['62']['date'] = "20070503";
 
 	$patch['63']['name'] = "Introduce systemdefaults table";
