@@ -78,8 +78,9 @@ mysql_close($connection);
 
 // Création du contenu du fichier config.php
 
-//Modification des droits d'accès du dossier ""config"
+//Modification des droits d'accès du dossier "config"
 chmod("../config", 0777);
+chmod("../config/config.php", 0666);
 
 require_once('./content.php');
 
@@ -96,11 +97,10 @@ $fileConfigOpen = fopen('../config/config.php', 'wb+');
 
 fclose($fileConfigOpen);
 
-// redirection après 4 secondes
-//<meta http-equiv="refresh" content="4;url=../index.php" />
-
 // destruction de la session
 // session_destroy();
 // unset($_SESSION);
 	
 ?>
+<!--redirection après 4 secondes-->
+<meta http-equiv="refresh" content="4;url=../index.php" />
