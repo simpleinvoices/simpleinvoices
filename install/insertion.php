@@ -19,10 +19,23 @@ session_start();
 // Selection de la langue de l'installeur
 include('lang/lang_'.$language.'.php');
 
-//sql query to populate tables with sample data version 4
-$mysql_4data = fopen("sql/SimpleInvoicesDatabase-MySQL4_0Data.sql", "r");
-//sql query to populate tables with sample data version 5
-$mysql_5data = fopen("sql/SimpleInvoicesDatabaseData.sql", "r");
+
+function parse_mysql_dump($url, $ignoreerrors = false) {
+$file_content = file($url);
+//print_r($file_content);
+$query = "";
+foreach($file_content as $sql_line) {
+	$tsl = trim($sql_line);
+	if (($sql_line != "") && (substr($tsl, 0, 2) != "--") && (substr($tsl, 0, 1) != "#")) {
+		$query .= $sql_line;
+		if(preg_match("/;\s*$/", $sql_line)) {
+			$result = mysql_query($query);
+		if (!$result && !$ignoreerrors) die(mysql_error());
+			$query = "";
+			}
+		}
+	}
+}
 
 // Connection
 $connection = mysql_connect($host, $username, $passwd)
@@ -33,21 +46,26 @@ or die($LANG['unableConnectDb'] . mysql_error());
 	if (!$db_selected) {
 		die ($LANG['unableSelectDb'] . mysql_error());
 }		
-		
+
+//sql query to populate tables with sample data version 4
+$mysql_4data = "sql/SimpleInvoicesDatabase-MySQL4_0Data.sql";
+//sql query to populate tables with sample data version 5
+$mysql_5data = "sql/SimpleInvoicesDatabaseData.sql";
+
 // Form action DB
 $submit_array = array_keys($_POST['submit']);
 $action = $submit_array[0];
 switch ($action)
 {
 	case 'insertNo':
-
+		echo "blablabla";
 		break;	
 		
 	case 'insertYes':
 		if($sql_version == $mysql4_create_table)
-			$sqlTableData = mysql_query($connection, $mysql_4data);
+			parse_mysql_dump($mysql_4data, $ignoreerrors = false);
 		else
-			$sqlTableData = mysql_query($connection, $mysql_5data);
+			parse_mysql_dump($mysql_5data, $ignoreerrors = false);
 		break;	
 }
 

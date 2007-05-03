@@ -40,32 +40,25 @@ include('lang/lang_'.$language.'.php');
 			<hr></hr>
 
 <?php
-$mysql4_create_table = fopen("sql/SimpleInvoicesDatabase-MySQL4_0.sql", "r"); //sql query to create tables
-$mysql5_create_table = fopen("sql/SimpleInvoicesDatabase.sql", "r"); //sql query to create tables
-$_SESSION['mysql4_create_table'] = $mysql4_create_table;
-$_SESSION['mysql5_create_table'] = $mysql5_create_table;
 
-$dropTables = fopen("sql/drop.sql", "r");
+// _POST Control
+if(isset($_POST['host']) && isset($_POST['username']) && isset($_POST['passwd']) && isset($_POST['dbname']) && isset($_POST['prefix'])) {
 
-	// _POST Control
-	if(isset($_POST['host']) && isset($_POST['username']) && isset($_POST['passwd']) && isset($_POST['dbname']) && isset($_POST['prefix'])) {
+	$host = $_POST['host'];
+	$username = $_POST['username'];
+	$passwd = $_POST['passwd'];
+	$dbname = $_POST['dbname'];
+	$table_prefix = $_POST['prefix'];
 
-		$host = $_POST['host'];
-		$username = $_POST['username'];
-		$passwd = $_POST['passwd'];
-		$dbname = $_POST['dbname'];
-		$table_prefix = $_POST['prefix'];
-		
-		$_SESSION['host'] = $host;
-		$_SESSION['username'] = $username;
-		$_SESSION['passwd'] = $passwd;
-		$_SESSION['dbname'] = $dbname;
-		$_SESSION['table_prefix'] = $table_prefix;
-	}
+	$_SESSION['host'] = $host;
+	$_SESSION['username'] = $username;
+	$_SESSION['passwd'] = $passwd;
+	$_SESSION['dbname'] = $dbname;
+	$_SESSION['table_prefix'] = $table_prefix;
+}
 
-	// connection
-	$connection = mysql_connect($host, $username, $passwd)
-    or die($LANG['unableConnectDb'] . mysql_error());
+// connection
+$connection = mysql_connect($host, $username, $passwd) or die($LANG['unableConnectDb'] . mysql_error());
 
 	/* Select mysql version
 	$version = mysql_get_server_info(); // no authorized access :-(
@@ -76,38 +69,60 @@ $dropTables = fopen("sql/drop.sql", "r");
 			$sql_version = $mysql5_create_table;
 	*/
 
-	// Select mysql version
-	if (version_compare(phpversion(), "5.0", ">=")) {
-		$sql_version = $mysql4_create_table; }
-	else {
-		$sql_version = $mysql5_create_table; }
+
+// Select mysql version
+if (version_compare(phpversion(), "5.0", ">=")) {
+	$mysql5_create_table = "sql/SimpleInvoicesDatabase.sql"; //sql query to create tables
+	$sql_version = $mysql5_create_table;
+	$_SESSION['sql_version'] = $sql_version; }
+else {
+	$mysql4_create_table = "sql/SimpleInvoicesDatabase-MySQL4_0.sql"; //sql query to create tables
+	$sql_version = $mysql4_create_table;
+	$_SESSION['sql_version'] = $sql_version; }
+
+
+
+function parse_mysql_dump($url, $ignoreerrors = false) {
+$file_content = file($url);
+//print_r($file_content);
+$query = "";
+foreach($file_content as $sql_line) {
+	$tsl = trim($sql_line);
+	if (($sql_line != "") && (substr($tsl, 0, 2) != "--") && (substr($tsl, 0, 1) != "#")) {
+		$query .= $sql_line;
+		if(preg_match("/;\s*$/", $sql_line)) {
+			$result = mysql_query($query);
+		if (!$result && !$ignoreerrors) die(mysql_error());
+			$query = "";
+			}
+		}
+	}
+}
+
+// Form action DB
+$submit_array = array_keys($_POST['submit']);
+$action = $submit_array[0];
+switch ($action) {
+	case 'create':
+		$query = mysql_query("CREATE DATABASE IF NOT EXISTS ". $dbname) or die ($LANG['existingDb'] . mysql_error());
 		
-	$_SESSION['sql_version'] = $sql_version;
+		// Select DB
+		$db_selected = mysql_select_db($dbname, $connection);
+		if (!$db_selected) {
+			die ($LANG['unableSelectDb'] . mysql_error());
+		}
+	
+		parse_mysql_dump($sql_version, $ignoreerrors = false);
+		break;	
+		
+	case 'drop':
+		$dropTables = fopen("sql/drop.sql", "r");
+		$query = mysql_query($dropTables, $dbname) or die ($LANG['dropDbError'] . mysql_error());
+		break;	
+}
 
-
-	// Form action DB
-	$submit_array = array_keys($_POST['submit']);
-	$action = $submit_array[0];
-	switch ($action)
-	{
-		case 'create':
-			$query = mysql_query("CREATE DATABASE IF NOT EXISTS ". $dbname) or die ($LANG['existingDb'] . mysql_error());
-			$queryCreateTable = mysql_query($sql_version, $connection) or die (mysql_error()); //bug
-			break;	
-			
-		case 'drop':
-			$query = mysql_query($dropTables, $dbname) or die ($LANG['dropDbError'] . mysql_error());
-			break;	
-	}
-
-	// Select DB
-	$db_selected = mysql_select_db($dbname, $connection);
-	if (!$db_selected) {
-		die ($LANG['unableSelectDb'] . mysql_error());
-	}
-
-	// close connection
-	mysql_close($connection);
+// close connection
+mysql_close($connection);
 
 ?>
 
