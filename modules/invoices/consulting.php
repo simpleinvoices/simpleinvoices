@@ -40,35 +40,35 @@ $result_preferences = mysql_query($sql_preferences, $conn) or die(mysql_error())
 
 
 #defaults query and DEFAULT NUMBER OF LINE ITEMS
-$sql_defaults = "SELECT * FROM {$tb_prefix}defaults";
-$result_defaults = mysql_query($sql_defaults, $conn) or die(mysql_error());
+//$sql_defaults = "SELECT * FROM {$tb_prefix}defaults";
+//$result_defaults = mysql_query($sql_defaults, $conn) or die(mysql_error());
 
 #defaults Array
-$def = mysql_fetch_array($result_defaults);
-
+//$def = mysql_fetch_array($result_defaults);
+$defaults = getSystemDefaults();
 
 #Get the names of the defaults from their id -start
 #default biller name query
-$sql_biller_default = "SELECT name FROM {$tb_prefix}biller where id = $def[def_biller] and enabled != 0";
+$sql_biller_default = "SELECT name FROM {$tb_prefix}biller where id = $defaults[biller] and enabled != 0";
 $result_biller_default = mysql_query($sql_biller_default , $conn) or die(mysql_error());
 
 $biller= mysql_fetch_array($result_biller_default);
 
 #default customer name query
-$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE c_id = $def[def_customer] and c_enabled != 0";
+$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE c_id = $defaults[customer] and c_enabled != 0";
 $result_print_customer = mysql_query($print_customer, $conn) or die(mysql_error());
 
 $customer = mysql_fetch_array($result_print_customer);
 
 
 #default tax description query
-$print_tax = "SELECT * FROM {$tb_prefix}tax WHERE tax_id = $def[def_tax] and tax_enabled != 0";
+$print_tax = "SELECT * FROM {$tb_prefix}tax WHERE tax_id = $defaults[tax] and tax_enabled != 0";
 $result_print_tax = mysql_query($print_tax, $conn) or die(mysql_error());
 
 $tax = mysql_fetch_array($result_print_tax);
 
 #default invoice preference description query
-$print_inv_preference = "SELECT * FROM {$tb_prefix}preferences WHERE pref_id = $def[def_inv_preference] and pref_enabled != 0";
+$print_inv_preference = "SELECT * FROM {$tb_prefix}preferences WHERE pref_id = $defaults[invoice] and pref_enabled != 0";
 $result_inv_preference = mysql_query($print_inv_preference, $conn) or die(mysql_error());
 
 $pref =  mysql_fetch_array($result_inv_preference);
@@ -88,7 +88,7 @@ if (mysql_num_rows($result) == 0) {
         //has records, so display them
         $display_block = <<<EOD
         <select name="sel_id">
-        <option selected value="$def[def_biller]" style="font-weight: bold">$biller[name]</option>
+        <option selected value="$defaults[biller]" style="font-weight: bold">$biller[name]</option>
 	<option value=""></option>
 EOD;
 		while ($recs = mysql_fetch_array($result)) {
@@ -108,7 +108,7 @@ if (mysql_num_rows($result_customer) == 0) {
         //has records, so display them
         $display_block_customer = <<<EOD
         <select name="select_customer">
-        <option selected value="$def[def_customer]" style="font-weight: bold">$customer[c_name]</option>
+        <option selected value="$defaults[customer]" style="font-weight: bold">$customer[c_name]</option>
         <option value=""></option>
 EOD;
 
@@ -179,7 +179,7 @@ if (mysql_num_rows($result_tax) == 0) {
         $display_block_tax = <<<EOD
         <select name="select_tax">
         
-	<option selected value="$def[def_tax]" style="font-weight: bold">$tax[tax_description]</option>
+	<option selected value="$defaults[tax]" style="font-weight: bold">$tax[tax_description]</option>
         
 	<option value=""></option>
 EOD;
@@ -203,7 +203,7 @@ if (mysql_num_rows($result_preferences) == 0) {
         $display_block_preferences = <<<EOD
         <select name="select_preferences">
         
-        <option selected value="$def[def_inv_preference]" style="font-weight: bold">$pref[pref_description]</option>
+        <option selected value="$defaults[invoice]" style="font-weight: bold">$pref[pref_description]</option>
 	
 	<option value=""></option>
 EOD;
@@ -234,7 +234,7 @@ include('./config/config.php');
 		$dynamic_line_items = $_GET['get_num_line_items'];
 		} 
 	else {
-		$dynamic_line_items = $def['def_number_line_items'] ;
+		$dynamic_line_items = $defefaults['items'] ;
 	}	
 
 	$num = 0;

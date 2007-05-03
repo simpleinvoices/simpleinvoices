@@ -10,7 +10,9 @@ $invoice_type =  getInvoiceType($invoice['inv_type']);
 $customer = getCustomer($invoice['inv_customer_id']);
 $biller = getBiller($invoice['inv_biller_id']);
 $preferences = getPreferences($invoice['inv_preference']);
-$defaults = getDefaults();
+//$defaults = getDefaults();
+
+$defaults = getSystemDefaults();
 
 
 

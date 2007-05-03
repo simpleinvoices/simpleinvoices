@@ -52,6 +52,31 @@ function getDefaults() {
 	return mysql_fetch_array($result_print_defaults);
 }
 
+function getSystemDefaults() {
+	global $tb_prefix;
+	$print_defaults = "SELECT * FROM {$tb_prefix}systemdefaults";
+	$result_print_defaults = mysql_query($print_defaults) or die(mysql_error());
+	
+	$defaults = null;
+	$default = null;
+	
+	while($default = mysql_fetch_array($result_print_defaults)) {
+		$defaults["$default[name]"] = $default['value'];
+	}
+
+	return $defaults;
+}
+
+function updateDefault($name,$value) {
+	global $tb_prefix;
+	$sql = "UPDATE {$tb_prefix}systemdefaults SET `value` =  '$value' WHERE  `name` = '$name'"; 
+	//echo $sql;
+	if (mysql_query($sql)) {
+		return true;
+	}
+	return false;
+}
+
 function getInvoiceType($id) {
 	global $tb_prefix;
 	$sql_invoice_type = "SELECT inv_ty_description FROM {$tb_prefix}invoice_type WHERE inv_ty_id = $id";

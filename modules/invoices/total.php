@@ -36,7 +36,7 @@ $result_preferences = mysql_query($sql_preferences, $conn) or die(mysql_error())
 
 #DEFAULTS
 #defaults query and DEFAULT NUMBER OF LINE ITEMS
-$sql_defaults = "SELECT * FROM {$tb_prefix}defaults";
+/*$sql_defaults = "SELECT * FROM {$tb_prefix}defaults";
 $result_defaults = mysql_query($sql_defaults, $conn) or die(mysql_error());
 
 while ($Array_defaults = mysql_fetch_array($result_defaults) ) {
@@ -46,10 +46,12 @@ while ($Array_defaults = mysql_fetch_array($result_defaults) ) {
                 $def_taxField = $Array_defaults['def_tax'];
                 $def_inv_preferenceField = $Array_defaults['def_inv_preference'];
                 $def_number_line_itemsField = $Array_defaults['def_number_line_items'];
-};
+};*/
+
+$defaults = getSystemDefaults();
 #Get the names of the defaults from their id -start
 #default biller name query
-$sql_biller_default = "SELECT name FROM {$tb_prefix}biller where id = $def_billerField";
+$sql_biller_default = "SELECT name FROM {$tb_prefix}biller where id = $defaults[biller]";
 $result_biller_default = mysql_query($sql_biller_default , $conn) or die(mysql_error());
 
 while ($Array = mysql_fetch_array($result_biller_default) ) {
@@ -57,7 +59,7 @@ while ($Array = mysql_fetch_array($result_biller_default) ) {
 }
 
 #default customer name query
-$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE c_id = $def_customerField";
+$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE c_id = $defaults[customer]";
 $result_print_customer = mysql_query($print_customer, $conn) or die(mysql_error());
 
 while ($Array_customer = mysql_fetch_array($result_print_customer)) {
@@ -65,7 +67,7 @@ while ($Array_customer = mysql_fetch_array($result_print_customer)) {
 }
 
 #default tax description query
-$print_tax = "SELECT * FROM {$tb_prefix}tax WHERE tax_id = $def_taxField";
+$print_tax = "SELECT * FROM {$tb_prefix}tax WHERE tax_id = $defaults[tax]";
 $result_print_tax = mysql_query($print_tax, $conn) or die(mysql_error());
 
 while ($Array_tax = mysql_fetch_array($result_print_tax)) {
@@ -73,7 +75,7 @@ while ($Array_tax = mysql_fetch_array($result_print_tax)) {
 }
 
 #default invoice preference description query
-$print_inv_preference = "SELECT * FROM {$tb_prefix}preferences WHERE pref_id = $def_inv_preferenceField";
+$print_inv_preference = "SELECT * FROM {$tb_prefix}preferences WHERE pref_id = $defaults[preference]";
 $result_inv_preference = mysql_query($print_inv_preference, $conn) or die(mysql_error());
 
 while ($Array_inv_preference = mysql_fetch_array($result_inv_preference)) {
@@ -102,16 +104,17 @@ if (mysql_num_rows($result) == 0) {
 
 } else {
         //has records, so display them
-        $display_block = "
-        <select name=\"sel_id\">
-        <option selected value=\"$def_billerField\" style=\"font-weight: bold\">$sql_biller_defaultField</option>
-        <option value=\"\"></option>";
+        $display_block = <<<EOD
+        <select name="sel_id">
+        <option selected value="$defaults[biller]" style="font-weight: bold">$sql_biller_defaultField</option>
+        <option value=""></option>
+EOD;
 
         while ($recs = mysql_fetch_array($result)) {
                 $id = $recs['id'];
                 $display_name = $recs['name'];
 
-                $display_block .= "<option value=\"$id\">
+                $display_block .= "<option value="$id">
                         $display_name</option>";
         }
 }
@@ -124,16 +127,17 @@ if (mysql_num_rows($result_customer) == 0) {
 
 } else {
         //has records, so display them
-        $display_block_customer = "
-        <select name=\"select_customer\">
-        <option selected value=\"$def_customerField\" style=\"font-weight: bold\">$c_nameField</option>
-        <option value=\"\"></option>";
+        $display_block_customer = <<<EOD
+        <select name="select_customer">
+        <option selected value="$defaults[customer]" style="font-weight: bold">$c_nameField</option>
+        <option value=""></option>
+EOD;
 
         while ($recs_customer = mysql_fetch_array($result_customer)) {
                 $id_customer = $recs_customer['c_id'];
                 $display_name_customer = $recs_customer['c_name'];
 
-                $display_block_customer .= "<option value=\"$id_customer\">
+                $display_block_customer .= "<option value="$id_customer">
                         $display_name_customer</option>";
         }
 }
@@ -147,16 +151,17 @@ if (mysql_num_rows($result_tax) == 0) {
 
 } else {
         //has records, so display them
-        $display_block_tax = "
-        <select name=\"select_tax\">
-        <option selected value=\"$def_taxField\" style=\"font-weight: bold\">$tax_descriptionField</option>
-        <option value=\"\"></option>";
+        $display_block_tax = <<<EOD
+        <select name="select_tax">
+        <option selected value="$defaults[tax]" style="font-weight: bold">$tax_descriptionField</option>
+        <option value=""></option>
+EOD;
 
         while ($recs_tax = mysql_fetch_array($result_tax)) {
                 $id_tax = $recs_tax['tax_id'];
                 $display_name_tax = $recs_tax['tax_description'];
 
-                $display_block_tax .= "<option value=\"$id_tax\">
+                $display_block_tax .= "<option value="$id_tax">
                         $display_name_tax</option>";
         }
 }
@@ -171,7 +176,7 @@ if (mysql_num_rows($result_preferences) == 0) {
         //has records, so display them
         $display_block_preferences = <<<EOD
         <select name="select_preferences">
-        <option selected value="$def_inv_preferenceField" style="font-weight:bold;">$pref_descriptionField</option>
+        <option selected value="$defaults[preference]" style="font-weight:bold;">$pref_descriptionField</option>
         <option value=""></option>
 EOD;
 
@@ -179,7 +184,7 @@ EOD;
                 $id_preferences = $recs_preferences['pref_id'];
                 $display_name_preferences = $recs_preferences['pref_description'];
 
-                $display_block_preferences .= "<option value=\"$id_preferences\">
+                $display_block_preferences .= "<option value="$id_preferences">
                         $display_name_preferences</option>";
         }
 }

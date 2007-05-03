@@ -129,13 +129,15 @@ while ($newArray = mysql_fetch_array($result)) {
                 $invoice_preference_wordingField = $Array['pref_inv_wording'];
 
 	#system defaults query
-	$print_defaults = "SELECT * FROM {$tb_prefix}defaults WHERE def_id = 1";
+	/*$print_defaults = "SELECT * FROM {$tb_prefix}defaults WHERE def_id = 1";
 	$result_print_defaults = mysql_query($print_defaults, $conn) or die(mysql_error());
-
-
 	while ($Array_defaults = mysql_fetch_array($result_print_defaults) ) {
                 $def_number_line_itemsField = $Array_defaults['def_number_line_items'];
-                $def_inv_templateField = $Array_defaults['def_inv_template'];
+                $def_inv_templateField = $Array_defaults['def_inv_template'];*/
+				
+	$defaults = getSystemDefaults();
+	
+
 	
 	$url_pdf = "{$_SERVER['HTTP_HOST']}{$install_path}/index.php?module=invoices&view=templates/template&submit={$inv_idField}&action=view&location=pdf&invoice_style={$inv_ty_descriptionField}";
 	$url_pdf_encoded = urlencode($url_pdf);
@@ -195,7 +197,7 @@ while ($newArray = mysql_fetch_array($result)) {
 	</tr>
 
 EOD;
-									}
+									
 								}
 							}
 						}

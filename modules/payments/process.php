@@ -66,14 +66,16 @@ $result = mysql_query($sql, $conn) or die(mysql_error());
 
 #DEFAULTS
 #defaults query and DEFAULT NUMBER OF LINE ITEMS
-$sql_defaults = "SELECT * FROM {$tb_prefix}defaults";
+/*$sql_defaults = "SELECT * FROM {$tb_prefix}defaults";
 $result_defaults = mysql_query($sql_defaults, $conn) or die(mysql_error());
 
-$default = mysql_fetch_array($result_defaults);
+$default = mysql_fetch_array($result_defaults);*/
+
+$defaults = getSystemDefaults();
 
 #Get the names of the defaults from their id -start
 #default biller name query
-$sql_payment_type_default = "SELECT pt_description FROM {$tb_prefix}payment_types where pt_id = $default[def_payment_type]";
+$sql_payment_type_default = "SELECT pt_description FROM {$tb_prefix}payment_types where pt_id = $defaults[payment_type]";
 $result_payment_type_default = mysql_query($sql_payment_type_default , $conn) or die(mysql_error());
 
 $pt = mysql_fetch_array($result_payment_type_default);
@@ -89,7 +91,7 @@ if (mysql_num_rows($result) == 0) {
 	//has records, so display them
 	$display_block_payment_type = <<<EOD
 <select name="ac_payment_type">
-<option selected value="{$default['def_payment_type']}" style="font-weight: bold">{$pt['pt_description']}</option>
+<option selected value="{$defaults['payment_type']}" style="font-weight: bold">{$pt['pt_description']}</option>
 EOD;
 
 	while ($recs = mysql_fetch_array($result)) {

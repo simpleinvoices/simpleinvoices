@@ -6,21 +6,8 @@ checkLogin();
 
 
 #system defaults query
-$print_defaults = "SELECT * FROM {$tb_prefix}defaults WHERE def_id = 1";
-$result_print_defaults = mysql_query($print_defaults, $conn) or die(mysql_error());
 
-
-while ($Array_defaults = mysql_fetch_array($result_print_defaults) ) {
-	$def_idField = $Array_defaults['def_id'];
-	$def_customerField = $Array_defaults['def_customer'];
-	$def_billerField = $Array_defaults['def_biller'];
-	$def_taxField = $Array_defaults['def_tax'];
-	$def_inv_preferenceField = $Array_defaults['def_inv_preference'];
-	$def_number_line_itemsField = $Array_defaults['def_number_line_items'];
-	$def_inv_templateField = $Array_defaults['def_inv_template'];
-	$def_payment_typeField = $Array_defaults['def_payment_type'];
-};
-
+$defaults = getSystemDefaults();
 
 
 if ($_GET[submit] == "line_items") {
@@ -32,11 +19,11 @@ if ($_GET[submit] == "line_items") {
 	jsEnd();
 
 	$default = "line_items";
-	$inv_num_line_items = "select def_number_line_items from {$tb_prefix}defaults where def_id=1";
+	/*$inv_num_line_items = "select def_number_line_items from {$tb_prefix}defaults where def_id=1";
 	$result_inv_preferences = mysql_query($inv_num_line_items, $conn) or die(mysql_error());
 
 	while ($Array = mysql_fetch_array($result_inv_preferences) ) {
-		$def_number_line_itemsField = $Array['def_number_line_items'];
+		$defaults['items'] = $Array['def_number_line_items'];*/
 
 
 		$display_block = <<<EOD
@@ -45,18 +32,18 @@ if ($_GET[submit] == "line_items") {
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG['default_number_items']}</td>
-		<td><input type=text size=25 name='def_num_line_items' value=$def_number_line_itemsField></td>
+		<td><input type=text size=25 name='def_num_line_items' value=$defaults[items]></td>
 	</tr>
 	<tr>
 		<td><br></td>
 	</tr>
 EOD;
-}
+//}
 }
 
 else if ($_GET[submit] == "def_inv_template") {
 
-
+	$default = "def_inv_template";
 	/*drop down list code for invoice template - only show the folder names in src/invoices/templates*/
 
 	$handle=opendir("./templates/invoices/");
@@ -74,7 +61,7 @@ else if ($_GET[submit] == "def_inv_template") {
 EOD;
 
 	$display_block_templates_list .= <<<EOD
-	<option selected value='$def_inv_templateField' style="font-weight: bold" >$def_inv_templateField</option>
+	<option selected value='$defaults[template]' style="font-weight: bold" >$defaults[template]</option>
 EOD;
 
 	foreach ( $files as $var )
@@ -96,12 +83,12 @@ EOD;
 	jsEnd();
 	/*end validataion section */
 
-	$default = "def_inv_template";
+	/*$default = "def_inv_template";
 	$def_inv_template = "select def_inv_template from {$tb_prefix}defaults where def_id=1";
 	$result_def_inv_template = mysql_query($def_inv_template, $conn) or die(mysql_error());
 
 	while ($Array = mysql_fetch_array($result_def_inv_template) ) {
-		$def_inv_templateField = $Array['def_inv_template'];
+		$def_inv_templateField = $Array['def_inv_template'];*/
 
 
 		$display_block = <<<EOD
@@ -121,19 +108,19 @@ EOD;
 		<td><br></td>
 	</tr>
 EOD;
-	}
+	//}
 }
 
 else if ($_GET[submit] == "biller") {
 
 
 	#default biller query
-	$sql_biller_default = "SELECT name FROM {$tb_prefix}biller where id = $def_billerField";
+	/*$sql_biller_default = "SELECT name FROM {$tb_prefix}biller where id = $def_billerField";
 	$result_biller_default = mysql_query($sql_biller_default , $conn) or die(mysql_error());
 
 	while ($Array = mysql_fetch_array($result_biller_default) ) {
 		$sql_biller_defaultField = $Array['name'];
-	}
+	}*/
 
 	#biller query
 	$sql = "SELECT * FROM {$tb_prefix}biller where enabled != 0 ORDER BY name";
@@ -148,12 +135,12 @@ else if ($_GET[submit] == "biller") {
 	} else {
 		//has records, so display them
 
-		$default = "def_biller";
+		//$default = "def_biller";
 
 
 		$display_block_biller = <<<EOD
 	        <select name="default_biller">
-	        <option selected value="$def_billerField" style="font-weight: bold">$sql_biller_defaultField</option>
+	        <option selected value="$defaults[biller]" style="font-weight: bold">$sql_biller_defaultField</option>
 	        <option value='0'> </option>
 EOD;
 
@@ -186,14 +173,6 @@ EOD;
 else if ($_GET[submit] == "customer") {
 
 	#customer query
-	$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE c_id = $def_customerField";
-	$result_print_customer = mysql_query($print_customer, $conn) or die(mysql_error());
-
-
-	while ($Array_customer = mysql_fetch_array($result_print_customer)) {
-		$c_idField = $Array_customer['c_id'];
-		$c_nameField = $Array_customer['c_name'];
-	}
 
 	#customer
 	$sql_customer = "SELECT * FROM {$tb_prefix}customers where c_enabled != 0 ORDER BY c_name";
@@ -211,7 +190,7 @@ else if ($_GET[submit] == "customer") {
 		//has records, so display them
 		$display_block_customer = <<<EOD
 	        <select name="default_customer">
-                <option selected value="$def_customerField" style="font-weight: bold">$c_nameField</option>
+                <option selected value="$defaults[customer]" style="font-weight: bold">$c_nameField</option>
                 <option value='0'> </option>
 EOD;
 
@@ -244,8 +223,9 @@ EOD;
 
 else if ($_GET[submit] == "tax") {
 
+	$default = "def_tax";
 	#tax query
-	$print_tax = "SELECT * FROM {$tb_prefix}tax WHERE tax_id = $def_taxField";
+	$print_tax = "SELECT * FROM {$tb_prefix}tax WHERE tax_id = $defaults[tax]";
 	$result_print_tax = mysql_query($print_tax, $conn) or die(mysql_error());
 
 
@@ -267,12 +247,11 @@ else if ($_GET[submit] == "tax") {
 		$display_block_tax = "<p><em>{$LANG['no_tax_rates']}</em></p>";
 
 	} else {
-		$default = "def_tax";
 		//has records, so display them
 		$display_block_tax = <<<EOD
 	        <select name="default_tax">
 
-                <option selected value="$def_taxField" style="font-weight: bold">$tax_descriptionField</option>
+                <option selected value="$defaults[tax]" style="font-weight: bold">$tax_descriptionField</option>
                 <option value='0'> </option>
 EOD;
 
@@ -303,7 +282,7 @@ EOD;
 else if ($_GET[submit] == "inv_preference") {
 
 	#invoice preference query
-	$print_inv_preference = "SELECT * FROM {$tb_prefix}preferences WHERE pref_id = $def_inv_preferenceField";
+	$print_inv_preference = "SELECT * FROM {$tb_prefix}preferences WHERE pref_id = $defaults[invoice]";
 	$result_inv_preference = mysql_query($print_inv_preference, $conn) or die(mysql_error());
 
 
@@ -330,7 +309,7 @@ else if ($_GET[submit] == "inv_preference") {
 		$display_block_preferences = <<<EOD
 	        <select name="default_inv_preference">
 
-                <option selected value="$def_inv_preferenceField" style="font-weight: bold">$pref_descriptionField</option>
+                <option selected value="$defaults[invoice]" style="font-weight: bold">$pref_descriptionField</option>
                 <option value='0'> </option>
 EOD;
 
@@ -362,7 +341,7 @@ EOD;
 else if ($_GET[submit] == "def_payment_type") {
 
 	#payment type query
-	$print_payment_type = "SELECT * FROM {$tb_prefix}payment_types WHERE pt_id = $def_payment_typeField";
+	$print_payment_type = "SELECT * FROM {$tb_prefix}payment_types WHERE pt_id = $defaults[payment_type]";
 	$result_print_payment_type = mysql_query($print_payment_type, $conn) or die(mysql_error());
 
 
@@ -389,7 +368,7 @@ else if ($_GET[submit] == "def_payment_type") {
 		$display_block_payment_type = <<<EOD
                 <select name="def_payment_type">
 
-                <option selected value="$def_payment_typeField" style="font-weight: bold">$pt_descriptionField</option>
+                <option selected value="$defaults[payment_type]" style="font-weight: bold">$pt_descriptionField</option>
 EOD;
 
 		while ($recs_payment_type = mysql_fetch_array($result_payment_type)) {
