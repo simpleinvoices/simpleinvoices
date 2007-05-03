@@ -82,7 +82,7 @@ $display_block_top =  <<<EOD
 		<td class=account>{$LANG['total']}:</td><td class=account>$preferences[pref_currency_sign]$invoice_total_Field_format</td>
 		<td class=account><a href='index.php?module=payments&view=manage&inv_id=$invoice[inv_id]'>{$LANG['paid']}:</a></td><td class=account>$preferences[pref_currency_sign]$invoice_paid_Field_format</td>
 		<td class=account>{$LANG['owing']}:</td><td class=account><u>$preferences[pref_currency_sign]$invoice_owing_Field</u></td>
-		<td class=account>{$LANG['age']}:</td><td class=account nowrap >$invoice_age <a href='documentation/info_pages/age.html' rel='gb_page_center[450, 450]'><img src="./images/common/help-small.png"></img></a></td>
+		<td class=account>{$LANG['age']}:</td><td class=account nowrap >$invoice_age <a href='docs.php?p=age&t=help' rel='gb_page_center[450, 450]'><img src="./images/common/help-small.png"></img></a></td>
 		<td></td><td class="columnleft"></td>
 		<td class="account">{$LANG['total']}:</td><td class=account>$preferences[pref_currency_sign]$invoice_total_Field_customer_format</td>
 		<td class=account><a href='index.php?module=payments&view=manage&c_id=$customer[c_id]'>{$LANG['paid']}:</a></td><td class=account>$preferences[pref_currency_sign]$invoice_paid_Field_customer_format</td>
