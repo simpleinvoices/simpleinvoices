@@ -21,7 +21,7 @@ You must enter a Biller name</div>
 <hr></hr>
 <table align="center">
 	<tr>
-		<td class="details_screen">{$LANG.biller_name} <a href="./modules/documentation/info_pages/required_field.html" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png"></img></a></td>
+		<td class="details_screen">{$LANG.biller_name} <a href="docs.php?t=help&p=required_field" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png"></img></a></td>
 		<td><input type=text name="name" value="{$smarty.post.name}"
 			size=25></td>
 	</tr>
@@ -32,7 +32,7 @@ You must enter a Biller name</div>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street2} <a
-			href="./modules/documentation/info_pages/street2.html"
+			href="docs.php?t=help&p=street2"
 			rel="gb_page_center[450, 450]"> <img
 			src="./images/common/help-small.png"></img> </a></td>
 		<td><input type=text name="street_address2"
@@ -79,7 +79,7 @@ You must enter a Biller name</div>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.1} <a
-			href="./modules/documentation/info_pages/custom_fields.html"
+			href="docs.php?t=help&p=custom_fields"
 			rel="gb_page_center[450, 450]"> <img
 			src="./images/common/help-small.png"></img> </a></td>
 		<td><input type=text name="custom_field1"
@@ -87,7 +87,7 @@ You must enter a Biller name</div>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.2} <a
-			href="./modules/documentation/info_pages/custom_fields.html"
+			href="docs.php?t=help&p=custom_fields"
 			rel="gb_page_center[450, 450]"> <img
 			src="./images/common/help-small.png"></img> </a></td>
 		<td><input type=text name="custom_field2"
@@ -95,7 +95,7 @@ You must enter a Biller name</div>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.3} <a
-			href="./modules/documentation/info_pages/custom_fields.html"
+			href="docs.php?t=help&p=custom_fields"
 			rel="gb_page_center[450, 450]"> <img
 			src="./images/common/help-small.png"></img> </a></td>
 		<td><input type=text name="custom_field3"
@@ -103,7 +103,7 @@ You must enter a Biller name</div>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.4} <a
-			href="./modules/documentation/info_pages/custom_fields.html"
+			href="docs.php?t=help&p=custom_fields"
 			rel="gb_page_center[450, 450]"> <img
 			src="./images/common/help-small.png"></img> </a></td>
 		<td><input type=text name="custom_field4"
@@ -111,7 +111,7 @@ You must enter a Biller name</div>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.logo_file} <a
-			href="./modules/documentation/info_pages/insert_biller_text.html"
+			href="docs.php?t=help&p=insert_biller_text"
 			rel="gb_page_center[450, 450]"> <img
 			src="./images/common/help-small.png"></img> </a></td>
 		<td><select name="logo">

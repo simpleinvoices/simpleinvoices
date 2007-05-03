@@ -31,7 +31,7 @@
 		<td>{$invoice_paid_Field_formatted}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.attention_short} <a href="./modules/documentation/info_pages/customer_contact.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$LANG.attention_short} <a href="docs.php?t=help&p=customer_contact" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td colspan="2">{$customer.c_attention}</td>
 		<td colspan=2></td>
@@ -43,7 +43,7 @@
 		<td>{$customer.c_street_address}</td>
 	</tr>
 	<tr>
-		<td class="details_screen" NOWRAP>{$LANG.street2} <a href="./modules/documentation/info_pages/street2.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen" NOWRAP>{$LANG.street2} <a href="docs.php?t=help&p=street2" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>{$customer.c_street_address2}</td>
 	</tr>
@@ -88,22 +88,22 @@
 		<p>
 			<table>
 				<tr>
-					<td class="details_screen">{$customFieldLabel.1} <a href="./modules/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+					<td class="details_screen">{$customFieldLabel.1} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 					</td>
 					<td>{$customer.c_custom_field1}</td>
 				</tr>
 				<tr>
-					<td class="details_screen">{$customFieldLabel.2} <a href="./modules/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+					<td class="details_screen">{$customFieldLabel.2} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 					</td>
 					<td>{$customer.c_custom_field2}</td>
 				</tr>
 				<tr>
-					<td class="details_screen">{$customFieldLabel.3} <a href="./modules/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+					<td class="details_screen">{$customFieldLabel.3} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 					</td>
 					<td>{$customer.c_custom_field3}</td>
 				</tr>
 				<tr>
-					<td class="details_screen">{$customFieldLabel.4} <a href="./modules/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+					<td class="details_screen">{$customFieldLabel.4} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 					</td>
 					<td>{$customer.c_custom_field4}</td>
 				</tr>
@@ -155,7 +155,7 @@ EOD;
 		<td><input type="text" name="c_name" value="{$customer.c_name}" size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.attention_short} <a href="./modules/documentation/info_pages/customer_contact.html" rel="gb_page_center[450, 450]" ><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$LANG.attention_short} <a href="docs.php?t=help&p=customer_contact" rel="gb_page_center[450, 450]" ><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td><input type="text" name="c_attention" value="{$customer.c_attention}" size="50" /></td>
 	</tr>
@@ -164,7 +164,7 @@ EOD;
 		<td><input type="text" name="c_street_address" value="{$customer.c_street_address}" size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.street2} <a href="./modules/documentation/info_pages/street2.html" rel="gb_page_center[450, 450]" ><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$LANG.street2} <a href="docs.php?t=help&p=street2" rel="gb_page_center[450, 450]" ><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td><input type="text" name="c_street_address2" value="{$customer.c_street_address2}" size="50" /></td>
 	</tr>
@@ -202,25 +202,25 @@ EOD;
 			<input type="text" name="c_email" value="{$customer.c_email}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.1} <a href="./modules/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$customFieldLabel.1} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>
 			<input type="text" name="c_custom_field1" value="{$customer.c_custom_field1}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.2} <a href="./modules/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$customFieldLabel.2} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>
 			<input type="text" name="c_custom_field2" value="{$customer.c_custom_field2}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.3} <a href="./modules/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$customFieldLabel.3} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>
 			<input type="text" name="c_custom_field3" value="{$customer.c_custom_field3}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.4} <a href="./modules/documentation/info_pages/custom_fields.html" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$customFieldLabel.4} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>
 			<input type="text" name="c_custom_field4" value="{$customer.c_custom_field4}" size="50" /></td

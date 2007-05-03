@@ -336,7 +336,7 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,
 </tr>	
 <tr>
 	<td align=left>
-		<a href="./documentation/info_pages/invoice_custom_fields.html" rel="gb_page_center[450, 450]"><?php echo $LANG['want_more_fields']; ?><img src="./images/common/help-small.png"></img></a>
+		<a href="docs.php?t=help&p=invoice_custom_fields" rel="gb_page_center[450, 450]"><?php echo $LANG['want_more_fields']; ?><img src="./images/common/help-small.png"></img></a>
 
 	</td>
 </tr>

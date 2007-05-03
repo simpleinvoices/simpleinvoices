@@ -39,6 +39,6 @@ if (!defined("BROWSE")) {
 ?>
 
 <hr></hr>
-<a href="./modules/documentation/info_pages/reports_xsl.html" rel="gb_page_center[450, 450]"><font color="red">Did you get an "OOOOPS, THERE'S AN ERROR HERE." error?</font></a>
+<a href="docs.php?t=help&p=reports_xsl" rel="gb_page_center[450, 450]"><font color="red">Did you get an "OOOOPS, THERE'S AN ERROR HERE." error?</font></a>
 </div>
 <div id="footer"></div>

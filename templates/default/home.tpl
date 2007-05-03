@@ -4,12 +4,12 @@
 
 {if $mysql < 5}
 
-		NOTE <a href='./documentation/info_pages/mysql4.html' rel='gb_page_center[450, 450]' ><img src='./images/common/help-small.png'></img></a> : As you are using Mysql 4 some features have been disabled<br>
+		NOTE <a href='docs.php?t=help&p=mysql4' rel='gb_page_center[450, 450]' ><img src='./images/common/help-small.png'></img></a> : As you are using Mysql 4 some features have been disabled<br>
 {/if}
 
 {if $patch > $max_patches_applied}
 
-                NOTE <a href='./documentation/info_pages/database_patches.html' rel='gb_page_center[450, 450]'><img src='./images/common/help-small.png'></img></a> :   There are database patches that need to be applied, please select <a href="./index.php?module=options&view=database_sqlpatches ">'Database Upgrade Manager'</a> from the Options menu and follow the instructions<br>
+                NOTE <a href='docs.php?t=help&p=database_patches' rel='gb_page_center[450, 450]'><img src='./images/common/help-small.png'></img></a> :   There are database patches that need to be applied, please select <a href="./index.php?module=options&view=database_sqlpatches ">'Database Upgrade Manager'</a> from the Options menu and follow the instructions<br>
 {/if}
 
 

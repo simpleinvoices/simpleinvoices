@@ -101,7 +101,7 @@ checkLogin();	//TODO: Really needed in .tpl files? I don't think so
 </tr>
 <tr>
 	<td align=left colspan=2> 
-		<a href="./documentation/info_pages/invoice_custom_fields.html" rel="gb_page_center[400, 400]">$LANG[want_more_fields]<img src="./images/common/help-small.png"></img></a>
+		<a href="docs.php?p=invoice_custom_fields&t=help" rel="gb_page_center[400, 400]">$LANG[want_more_fields]<img src="./images/common/help-small.png"></img></a>
 
 	</td>
 	

@@ -9,21 +9,21 @@ $block_stage1 = <<<EOD
 <table align=center>
 	<tr>
 		<td class="details_screen">From<a
-		href="./documentation/info_pages/email_from.html"
+		href="docs.php?p=email_from&t=help"
 		rel="gb_page_center[450, 450]"><img
 		src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="email_from" size=50 value="{$biller[email]}" ></td>
 	</tr>
 	<tr>
 		<td class="details_screen">To<a
-		href="./documentation/info_pages/email_to.html"
+		href="docs.php?t=help&p=email_to"
 		rel="gb_page_center[450, 450]"><img
 		src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="email_to" size=50 value="{$customer[c_email]}" ></td>
 	</tr>
 	</tr>
 	<td class="details_screen">BCC<a
-		href="./documentation/info_pages/email_bcc.html"
+		href="docs.php?t=help&p=email_bcc"
 		rel="gb_page_center[450, 450]"><img
 		src="./images/common/help-small.png"></img></a></td>
 	<td><input type=text name="email_bcc" size=50 value="{$biller[email]}"></td>
