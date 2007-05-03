@@ -331,5 +331,37 @@ ADD b_co_footer TEXT";
 	$patch['61']['name'] = "Alter field name b_custom_field4 to custom_field4";
         $patch['61']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_custom_field4` `custom_field4` VARCHAR( 255 ) NULL DEFAULT NULL";
 	$patch['61']['date'] = "20070430";
-?>
+	
+	$patch['62']['name'] = "Introduce systemdefaults table";
+	$patch['62']['patch'] = "CREATE TABLE `si_systemdefaults` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(30) NOT NULL,
+  `value` varchar(30) NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;";
+	$patch['62']['date'] = "20070503";
 
+	$patch['63']['name'] = "Introduce systemdefaults table";
+	$patch['63']['patch'] = "INSERT INTO `si_systemdefaults` (`id`, `name`, `value`) VALUES 
+(1, 'biller', '4'),
+(2, 'customer', '3'),
+(3, 'tax', '1'),
+(4, 'invoice', '1'),
+(5, 'items', '5'),
+(6, 'template', 'simple2'),
+(7, 'payment_type', '1'),
+(8, 'language', 'en'),
+(9, 'dateformat', 'Y-m-d'),
+(10, 'spreadsheet', 'xls'),
+(11, 'wordprocessor', 'doc'),
+(12, 'pdfscreensize', '800'),
+(13, 'pdfpapersize', 'A4'),
+(14, 'pdfleftmargin', '15'),
+(15, 'pdfrightmargin', '15'),
+(16, 'pdftopmargin', '15'),
+(17, 'pdfbottommargin', '15'),
+(18, 'emailhost', 'localhost'),
+(19, 'emailusername', ''),
+(20, 'emailpassword', '');";
+	$patch['63']['date'] = "20070503";
