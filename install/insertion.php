@@ -83,7 +83,7 @@ chmod("../config", 0777);
 
 require_once('./content.php');
 
-$fileConfigOpen = fopen('./config/config.php', 'wb+');
+$fileConfigOpen = fopen('../config/config.php', 'wb+');
 	if(!$fileConfigOpen)
 		echo $LANG['OpenFileFailure'];
 	else
