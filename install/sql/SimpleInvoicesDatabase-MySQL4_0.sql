@@ -36,10 +36,10 @@ CREATE TABLE `si_biller` (
   `b_co_logo` varchar(50) default NULL,
   `b_co_footer` text,
   `b_notes` text,
-  `b_custom_field1` varchar(50) default NULL,
-  `b_custom_field2` varchar(50) default NULL,
-  `b_custom_field3` varchar(50) default NULL,
-  `b_custom_field4` varchar(50) default NULL,
+  `custom_field1` varchar(50) default NULL,
+  `custom_field2` varchar(50) default NULL,
+  `custom_field3` varchar(50) default NULL,
+  `custom_field4` varchar(50) default NULL,
   `b_enabled` varchar(1) NOT NULL default '1',
   PRIMARY KEY  (`b_id`)
 ) TYPE=MyISAM  AUTO_INCREMENT=5 ;

@@ -80,10 +80,10 @@ function insertBiller() {
 				'$_POST[logo]',
 				'$_POST[footer]',
 				'$_POST[notes]',
-				'$_POST[b_custom_field1]',
-				'$_POST[b_custom_field2]',
-				'$_POST[b_custom_field3]',
-				'$_POST[b_custom_field4]',
+				'$_POST[custom_field1]',
+				'$_POST[custom_field2]',
+				'$_POST[custom_field3]',
+				'$_POST[custom_field4]',
 				'$_POST[enabled]'
 			 )";
 
@@ -110,10 +110,10 @@ function updateBiller() {
 				logo = '$_POST[logo]',
 				footer = '$_POST[footer]',
 				notes = '$_POST[notes]',
-				b_custom_field1 = '$_POST[b_custom_field1]',
-				b_custom_field2 = '$_POST[b_custom_field2]',
-				b_custom_field3 = '$_POST[b_custom_field3]',
-				b_custom_field4 = '$_POST[b_custom_field4]',
+				custom_field1 = '$_POST[custom_field1]',
+				custom_field2 = '$_POST[custom_field2]',
+				custom_field3 = '$_POST[custom_field3]',
+				custom_field4 = '$_POST[custom_field4]',
 				enabled = '$_POST[enabled]'
 			WHERE
 				id = '$_GET[submit]'";

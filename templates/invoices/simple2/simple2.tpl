@@ -102,7 +102,7 @@
                         <td class='tbl1-left'>{$LANG.email}:<td class='tbl1-right' colspan=3>{$biller.email}</td>
                 </tr>
                 <tr>
-                        <td class='tbl1-left'>{$biller.custom_field_label1}:<td class='tbl1-right' colspan=3>{$biller.b_custom_field1}</td>
+                        <td class='tbl1-left'>{$biller.custom_field_label1}:<td class='tbl1-right' colspan=3>{$biller.custom_field1}</td>
                 </tr>	<tr><td class="tbl1-top" colspan=4></td></tr>
 
 <!-- Biller section - end -->

@@ -82,32 +82,32 @@ You must enter a Biller name</div>
 			href="./modules/documentation/info_pages/custom_fields.html"
 			rel="gb_page_center[450, 450]"> <img
 			src="./images/common/help-small.png"></img> </a></td>
-		<td><input type=text name="b_custom_field1"
-			value="{$smarty.post.b_custom_field1}" size=25></td>
+		<td><input type=text name="custom_field1"
+			value="{$smarty.post.custom_field1}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.2} <a
 			href="./modules/documentation/info_pages/custom_fields.html"
 			rel="gb_page_center[450, 450]"> <img
 			src="./images/common/help-small.png"></img> </a></td>
-		<td><input type=text name="b_custom_field2"
-			value="{$smarty.post.b_custom_field2}" size=25></td>
+		<td><input type=text name="custom_field2"
+			value="{$smarty.post.custom_field2}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.3} <a
 			href="./modules/documentation/info_pages/custom_fields.html"
 			rel="gb_page_center[450, 450]"> <img
 			src="./images/common/help-small.png"></img> </a></td>
-		<td><input type=text name="b_custom_field3"
-			value="{$smarty.post.b_custom_field3}" size=25></td>
+		<td><input type=text name="custom_field3"
+			value="{$smarty.post.custom_field3}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.4} <a
 			href="./modules/documentation/info_pages/custom_fields.html"
 			rel="gb_page_center[450, 450]"> <img
 			src="./images/common/help-small.png"></img> </a></td>
-		<td><input type=text name="b_custom_field4"
-			value="{$smarty.post.b_custom_field4}" size=25></td>
+		<td><input type=text name="custom_field4"
+			value="{$smarty.post.custom_field4}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.logo_file} <a

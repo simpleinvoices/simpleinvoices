@@ -12,8 +12,12 @@
  --- customers, 
  --- billers, (done)
  --- and invoices
+ --- do the custom fields fields in biller etc.. to - needs to test the result
  - invoice templates - move to smarty and cleanup 
  - Move .sql out of install and back to root
+ - mysql db connect - if cant connect die and come up with sane error
+ - sql patches error - if pathces unapplied show error and have a redirect link to the sqp patches page
+ -- dont show the rest of the contents of start.php
  
 -done
  - sql patch: reset default invoices template to default - Done
