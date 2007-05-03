@@ -171,12 +171,12 @@ while ($newArray = mysql_fetch_array($result)) {
 	<a title="{$LANG['export_tooltip']} {$invoice_preference_wordingField}{$inv_idField} {$LANG['export_xls_tooltip']} {$spreadsheet} {$LANG['format_tooltip']}"
 	 class="index_table" href="index.php?module=invoices&view=templates/template&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}&location=print&export={$spreadsheet}">
 	 <img src="images/common/xls.gif" height="16" border="0" padding="-4px" valign="bottom" /><!-- $spreadsheet --></a>
-	<!-- was href="index.php?module=invoices&view=templates/{$def_inv_templateField} now using simple template-->
+	<!-- was href="index.php?module=invoices&view=templates/{$default['invoice']} now using simple template-->
 	<!-- DOC -->
 	<a title="{$LANG['export_tooltip']} {$invoice_preference_wordingField} {$inv_idField} {$LANG['export_doc_tooltip']} {$word_processor} {$LANG['format_tooltip']}"
 	 class="index_table" href="index.php?module=invoices&view=templates/template&submit={$inv_idField}&action=view&invoice_style={$inv_ty_descriptionField}&location=print&export={$word_processor}">
 	 <img src="images/common/doc.png" height="16" border="0" padding="-4px" valign="bottom" /><!-- $word_processor --></a>
-       <!-- was href="index.php?module=invoices&view=templates/{$def_inv_templateField} now using the simple template-->
+       <!-- was href="index.php?module=invoices&view=templates/{$default['invoice']} now using the simple template-->
   <!-- Payment --><a title="{$LANG['process_payment']} {$invoice_preference_wordingField} {$inv_idField}"
    class="index_table" href="index.php?module=payments&view=process&submit={$inv_idField}&op=pay_selected_invoice">$</a>
 	<!-- Email -->
