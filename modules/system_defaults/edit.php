@@ -106,39 +106,31 @@ EOD;
 
 else if ($_GET[submit] == "biller") {
 
-
+	$default = "biller";
 
 	#biller query
-	$sql = "SELECT * FROM {$tb_prefix}biller where enabled != 0 ORDER BY name";
-	$result = mysql_query($sql, $conn) or die(mysql_error());
+	$sql = "SELECT * FROM {$tb_prefix}biller WHERE enabled  ORDER BY name";
+	$query = mysql_query($sql) or die(mysql_error());
 
 	#biller selector
 
-	if (mysql_num_rows($result) == 0) {
+	if (mysql_num_rows($query) == 0) {
 		//no records
 		$display_block = "<p><em>{$LANG['no_billers']}</em></p>";
 
 	} else {
-		//has records, so display them
 
-		$default = "biller";
+		$display_block_biller = '<select name="value">';
 
+		while ($result = mysql_fetch_array($query)) {
 
-		$display_block_biller = <<<EOD
-	        <select name="value">
-	        <option selected value="$defaults[biller]" style="font-weight: bold">$sql_biller_defaultField</option>
-	        <option value='0'> </option>
-EOD;
-
-		while ($recs = mysql_fetch_array($result)) {
-			$id = $recs['id'];
-			$display_name = $recs['name'];
-
+			$selected = $result['id'] == $defaults['biller']?"selected":"";
+			
 			$display_block_biller .= <<<EOD
-			<option value="$id">
-	                        $display_name</option>
+			<option $selected value="$id">$result[name]</option>
 EOD;
 		}
+		$display_block_biller .= "</select>";
 	}
 
 	$display_block = <<<EOD

@@ -18,7 +18,7 @@
 	<thead>
 		<tr class="sortHeader">
 			<th class="noFilter sortable">{$LANG.action}</th>
-			<th class=" index_table sortable">{$LANG.biller.id}</th>
+			<th class=" index_table sortable">{$LANG.biller_id}</th>
 			<th class="index_table sortable">{$LANG.biller_name}</th>
 			<th class="index_table sortable">{$LANG.email}</th>
 			<th class="noFilter index_table sortable">{$LANG.enabled}</th>
