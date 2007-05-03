@@ -54,12 +54,7 @@ $result_print_preferences  = mysql_query($print_preferences, $conn) or die(mysql
 
 $pref = mysql_fetch_array($result_print_preferences);
 
- #system defaults query
-/*$print_defaults = "SELECT * FROM si_defaults WHERE def_id = 1";
-$result_print_defaults = mysql_query($print_defaults, $conn) or die(mysql_error());
 
-$defaults =  mysql_fetch_array($result_print_defaults);
-                $defaults['def_inv_template'];*/
 $defaults = getSystemDefaults();
 
 #Accounts - for the invoice - start

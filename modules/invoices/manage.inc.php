@@ -128,12 +128,6 @@ while ($newArray = mysql_fetch_array($result)) {
         while ($Array = mysql_fetch_array($result_print_invoice_preference)) {
                 $invoice_preference_wordingField = $Array['pref_inv_wording'];
 
-	#system defaults query
-	/*$print_defaults = "SELECT * FROM {$tb_prefix}defaults WHERE def_id = 1";
-	$result_print_defaults = mysql_query($print_defaults, $conn) or die(mysql_error());
-	while ($Array_defaults = mysql_fetch_array($result_print_defaults) ) {
-                $def_number_line_itemsField = $Array_defaults['def_number_line_items'];
-                $def_inv_templateField = $Array_defaults['def_inv_template'];*/
 				
 	$defaults = getSystemDefaults();
 	

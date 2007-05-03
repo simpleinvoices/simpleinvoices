@@ -64,12 +64,6 @@ $sql = "SELECT * FROM {$tb_prefix}payment_types where pt_enabled != 0 ORDER BY p
 $result = mysql_query($sql, $conn) or die(mysql_error());
 
 
-#DEFAULTS
-#defaults query and DEFAULT NUMBER OF LINE ITEMS
-/*$sql_defaults = "SELECT * FROM {$tb_prefix}defaults";
-$result_defaults = mysql_query($sql_defaults, $conn) or die(mysql_error());
-
-$default = mysql_fetch_array($result_defaults);*/
 
 $defaults = getSystemDefaults();
 

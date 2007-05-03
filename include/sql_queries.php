@@ -32,6 +32,42 @@ function getTaxRate($id) {
 	return mysql_fetch_array($result_print_tax_rate);
 }
 
+function getDefaultCustomer() {
+	global $tb_prefix;
+	$sql = "SELECT *,c.c_name AS name FROM {$tb_prefix}customers c, {$tb_prefix}systemdefaults s WHERE ( s.name = 'customer' AND c.c_id = s.value)";
+	$query = mysql_query($sql) or die(mysql_error());
+	return mysql_fetch_array($query);
+}
+
+function getDefaultPaymentType() {
+	global $tb_prefix;
+	$sql = "SELECT * FROM {$tb_prefix}payment_types p, {$tb_prefix}systemdefaults s WHERE ( s.name = 'payment_type' AND p.pt_id = s.value)";
+	$query = mysql_query($sql) or die(mysql_error());
+	return mysql_fetch_array($query);
+}
+
+function getDefaultInvoice() {
+	global $tb_prefix;
+	$sql = "SELECT * FROM {$tb_prefix}preferences p, {$tb_prefix}systemdefaults s WHERE ( s.name = 'invoice' AND p.pref_id = s.value)";
+	$query = mysql_query($sql) or die(mysql_error());
+	return mysql_fetch_array($query);
+}
+
+function getDefaultBiller() {
+	global $tb_prefix;
+	$sql = "SELECT *,b.name AS name FROM {$tb_prefix}biller b, {$tb_prefix}systemdefaults s WHERE ( s.name = 'biller' AND b.id = s.value )";
+	$query = mysql_query($sql) or die(mysql_error());
+	return mysql_fetch_array($query);
+}
+
+
+function getDefaultTax() {
+	global $tb_prefix;
+	$sql = "SELECT * FROM {$tb_prefix}tax t, {$tb_prefix}systemdefaults s WHERE (s.name = 'tax' AND t.tax_id = s.value)";
+	$query = mysql_query($sql) or die(mysql_error());
+	return mysql_fetch_array($query);
+}
+
 function getInvoice($id) {
 	global $tb_prefix;
 	$print_master_invoice_id = "SELECT * FROM {$tb_prefix}invoices WHERE inv_id = $id";
@@ -42,14 +78,6 @@ function getInvoice($id) {
 	$invoice['calc_date'] = date('Y-m-d', strtotime( $invoice['inv_date'] ) );
 	
 	return $invoice;
-}
-
-function getDefaults() {
-	global $tb_prefix;
-	$print_defaults = "SELECT * FROM {$tb_prefix}defaults WHERE def_id = 1";
-	$result_print_defaults = mysql_query($print_defaults) or die(mysql_error());
-
-	return mysql_fetch_array($result_print_defaults);
 }
 
 function getSystemDefaults() {
