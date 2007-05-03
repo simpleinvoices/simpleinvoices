@@ -18,13 +18,7 @@ if ($_GET[submit] == "line_items") {
 	jsFormValidationEnd();
 	jsEnd();
 
-	$default = "line_items";
-	/*$inv_num_line_items = "select def_number_line_items from {$tb_prefix}defaults where def_id=1";
-	$result_inv_preferences = mysql_query($inv_num_line_items, $conn) or die(mysql_error());
-
-	while ($Array = mysql_fetch_array($result_inv_preferences) ) {
-		$defaults['items'] = $Array['def_number_line_items'];*/
-
+	$default = "items";
 
 		$display_block = <<<EOD
 	<tr>
@@ -32,18 +26,17 @@ if ($_GET[submit] == "line_items") {
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG['default_number_items']}</td>
-		<td><input type=text size=25 name='def_num_line_items' value=$defaults[items]></td>
+		<td><input type=text size=25 name="value" value=$defaults[items]></td>
 	</tr>
 	<tr>
 		<td><br></td>
 	</tr>
 EOD;
-//}
 }
 
 else if ($_GET[submit] == "def_inv_template") {
 
-	$default = "def_inv_template";
+	$default = "template";
 	/*drop down list code for invoice template - only show the folder names in src/invoices/templates*/
 
 	$handle=opendir("./templates/invoices/");
@@ -57,7 +50,7 @@ else if ($_GET[submit] == "def_inv_template") {
 	sort($files);
 
 	$display_block_templates_list = <<<EOD
-	<select name="def_inv_template">
+	<select name="value">
 EOD;
 
 	$display_block_templates_list .= <<<EOD
@@ -66,7 +59,7 @@ EOD;
 
 	foreach ( $files as $var )
 	{
-		$display_block_templates_list .= "<option>";
+		$display_block_templates_list .= "<option value='$var' >";
 		$display_block_templates_list .= $var;
 		$display_block_templates_list .= "</option>";
 	}
@@ -114,13 +107,6 @@ EOD;
 else if ($_GET[submit] == "biller") {
 
 
-	#default biller query
-	/*$sql_biller_default = "SELECT name FROM {$tb_prefix}biller where id = $def_billerField";
-	$result_biller_default = mysql_query($sql_biller_default , $conn) or die(mysql_error());
-
-	while ($Array = mysql_fetch_array($result_biller_default) ) {
-		$sql_biller_defaultField = $Array['name'];
-	}*/
 
 	#biller query
 	$sql = "SELECT * FROM {$tb_prefix}biller where enabled != 0 ORDER BY name";
@@ -135,11 +121,11 @@ else if ($_GET[submit] == "biller") {
 	} else {
 		//has records, so display them
 
-		//$default = "def_biller";
+		$default = "biller";
 
 
 		$display_block_biller = <<<EOD
-	        <select name="default_biller">
+	        <select name="value">
 	        <option selected value="$defaults[biller]" style="font-weight: bold">$sql_biller_defaultField</option>
 	        <option value='0'> </option>
 EOD;
@@ -186,10 +172,10 @@ else if ($_GET[submit] == "customer") {
 		$display_block_customer = "<p><em>{$LANG['no_customers']}</em></p>";
 
 	} else {
-		$default = "def_customer";
+		$default = "customer";
 		//has records, so display them
 		$display_block_customer = <<<EOD
-	        <select name="default_customer">
+	        <select name="value">
                 <option selected value="$defaults[customer]" style="font-weight: bold">$c_nameField</option>
                 <option value='0'> </option>
 EOD;
@@ -221,9 +207,9 @@ EOD;
 
 
 
-else if ($_GET[submit] == "tax") {
+else if ($_GET['submit'] == "tax") {
 
-	$default = "def_tax";
+	$default = "tax";
 	#tax query
 	$print_tax = "SELECT * FROM {$tb_prefix}tax WHERE tax_id = $defaults[tax]";
 	$result_print_tax = mysql_query($print_tax, $conn) or die(mysql_error());
@@ -249,7 +235,7 @@ else if ($_GET[submit] == "tax") {
 	} else {
 		//has records, so display them
 		$display_block_tax = <<<EOD
-	        <select name="default_tax">
+	        <select name="value">
 
                 <option selected value="$defaults[tax]" style="font-weight: bold">$tax_descriptionField</option>
                 <option value='0'> </option>
@@ -260,7 +246,7 @@ EOD;
 			$display_name_tax = $recs_tax['tax_description'];
 
 			$display_block_tax .= <<<EOD
-			<option value="$id_tax">
+			<option  value="$id_tax">
                         $display_name_tax</option>
 EOD;
 		}
@@ -304,10 +290,10 @@ else if ($_GET[submit] == "inv_preference") {
 		$display_block_preferences = "<p><em>{$LANG['no_preferences']}</em></p>";
 
 	} else {
-		$default = "def_invoice_preference";
+		$default = "invoice";
 		//has records, so display them
 		$display_block_preferences = <<<EOD
-	        <select name="default_inv_preference">
+	        <select name="value">
 
                 <option selected value="$defaults[invoice]" style="font-weight: bold">$pref_descriptionField</option>
                 <option value='0'> </option>
@@ -363,10 +349,10 @@ else if ($_GET[submit] == "def_payment_type") {
 		$display_block_payment_type = "<p><em>{$LANG['payment_type']}</em></p>";
 
 	} else {
-		$default = "def_payment_type";
+		$default = "payment_type";
 		//has records, so display them
 		$display_block_payment_type = <<<EOD
-                <select name="def_payment_type">
+                <select name="value">
 
                 <option selected value="$defaults[payment_type]" style="font-weight: bold">$pt_descriptionField</option>
 EOD;
@@ -404,7 +390,7 @@ else {
 
 echo <<<EOD
 
-<form name="frmpost" action="index.php?module=system_defaults&view=save&sys_default=$default" method="post" onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=system_defaults&view=save" method="post" onsubmit="return frmpost_Validator(this)">
 
 		<b>{$LANG['system_defaults']}</b>
  <hr></hr>
@@ -417,7 +403,7 @@ $display_block
 </tr>
 </table>
 <!-- </div> -->
-
+	<input type="hidden" name="name" value="$default">
 	<input type=submit name="submit" value="{$LANG['save_defaults']}">
 	<input type=hidden name="op" value="update_system_defaults">
 

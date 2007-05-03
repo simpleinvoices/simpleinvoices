@@ -60,6 +60,7 @@ function getSystemDefaults() {
 	$defaults = null;
 	$default = null;
 	
+	
 	while($default = mysql_fetch_array($result_print_defaults)) {
 		$defaults["$default[name]"] = $default['value'];
 	}

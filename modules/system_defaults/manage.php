@@ -6,27 +6,12 @@ checkLogin();
 #get the invoice id
 $customer_id = $_GET['submit'];
 
-
-#system defaults query
-/*$print_defaults = "SELECT * FROM {$tb_prefix}defaults WHERE def_id = 1";
-$result_print_defaults = mysql_query($print_defaults, $conn) or die(mysql_error());
-
-
-while ($Array = mysql_fetch_array($result_print_defaults) ) {
-                $def_idField = $Array['def_id'];
-                $def_customerField = $Array['def_customer'];
-                $def_billerField = $Array['def_biller'];
-                $def_taxField = $Array['def_tax'];
-                $def_inv_preferenceField = $Array['def_inv_preference'];
-                $def_number_line_itemsField = $Array['def_number_line_items'];
-                $def_inv_templateField = $Array['def_inv_template'];
-                $def_payment_typeField = $Array['def_payment_type'];
-};*/
 $defaults = getSystemDefaults();
+
 //echo $defaults['biller']."biller";
 //TODO: Combine all getNames/description in 1 querie...
 $biller_name = "SELECT name from {$tb_prefix}biller where id = $defaults[biller]";
-//echo $biller_name;
+
 $result_biller_name = mysql_query($biller_name, $conn) or die(mysql_error());
 
 while ($Array = mysql_fetch_array($result_biller_name) ) {

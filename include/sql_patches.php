@@ -365,3 +365,8 @@ ADD b_co_footer TEXT";
 (19, 'emailusername', ''),
 (20, 'emailpassword', '');";
 	$patch['63']['date'] = "20070503";
+
+	$patch['64']['name'] = "Drops old default table. Attention: Old defaults get lost...";
+        $patch['64']['patch'] = "DROP TABLE `si_defaults`";
+	$patch['64']['date'] = "20070503";
+
