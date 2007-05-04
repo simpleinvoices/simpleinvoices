@@ -4,7 +4,8 @@
  - make email function work - done but needs polish
  -- add note on screen that the generation of pdf and email can take 30 seconds
  -- make the info pages for email funtion - done
- -- move email page to smarty and add validation
+ -- move email page to smarty - done
+ -- and add validation
  - sql queries: rename all the old crappy fields from b_name to name etc..
  -- need to write sql queries for all and change all relevant code that references these fields
  -- only need to do for 

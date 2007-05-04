@@ -197,11 +197,14 @@ switch ($g_config['output']) {
    break;
  case 1:
    $pipeline->destination = new DestinationDownload($_GET['pdfname']);
+#   $pipeline->destination = new DestinationDownload($g_baseurl);
    break;
  case 2:
    $pipeline->destination = new DestinationFile($_GET['pdfname']);
+#   $pipeline->destination = new DestinationFile($g_baseurl);
    break;
 };
+
 
 // Start the conversion
 
