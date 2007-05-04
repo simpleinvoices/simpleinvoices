@@ -14,10 +14,13 @@
  --- and invoices
  --- do the custom fields fields in biller etc.. to - needs to test the result
  - invoice templates - move to smarty and cleanup 
- - Move .sql out of install and back to root
- - sql patches error - if pathces unapplied show error and have a redirect link to the sqp patches page
- -- dont show the rest of the contents of start.php
- 
+ - Move .sql out of install and back to root (untill the installer is done and included as default)
+ - all rulfins new drop down list code to others 
+ -- note: in the system default you should be able to select "" as an option - need to put make in for biller
+ - move the stuff in index and home in the LANG files
+ - add new lang for sys default saved
+ - update spanish file with tebass new file
+
 -done
  - sql patch: reset default invoices template to default - Done
  - sql patch: change custom fields to 255 lenght - up from the current 50 - Done
@@ -39,6 +42,8 @@
  - templates - add $smarty.post value to ALL values in add screen - done
  - Smarty: Customer - make details and save work - done
  - mysql db connect - if cant connect die and come up with sane error - done
+ - sql patches error - if pathces unapplied show error and have a redirect link to the sqp patches page - done
+ -- dont show the rest of the contents of start.php - done
  
 
 - in next release +1 - aim end of May

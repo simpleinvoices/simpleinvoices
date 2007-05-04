@@ -248,7 +248,7 @@ ADD b_co_footer TEXT";
         $patch['40']['patch'] = "ALTER TABLE `si_sql_patchmanager` CHANGE `sql_patch` `sql_patch` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL";
         $patch['40']['date'] = "20070424";
 	
-	$patch['41']['name'] = "Alter field name in si_account_payments";
+		$patch['41']['name'] = "Alter field name in si_account_payments";
         $patch['41']['patch'] = "ALTER TABLE  `si_account_payments` CHANGE  `ac_id`  `id` INT( 10 ) NOT NULL AUTO_INCREMENT";
         $patch['41']['date'] = "20070424";
                 
@@ -260,90 +260,90 @@ ADD b_co_footer TEXT";
         $patch['43']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_id`  `id` INT( 10 ) NOT NULL AUTO_INCREMENT";
         $patch['43']['date'] = "20070430";
 
-	$patch['44']['name'] = "Alter field name b_street_address to street_address";
+		$patch['44']['name'] = "Alter field name b_street_address to street_address";
         $patch['44']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_street_address`  `street_address` VARCHAR( 255 ) NULL DEFAULT NULL";
         $patch['44']['date'] = "20070430";
 
-	$patch['45']['name'] = "Alter field name b_street_address2 to street_address2";
+		$patch['45']['name'] = "Alter field name b_street_address2 to street_address2";
         $patch['45']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_street_address2`  `street_address2` VARCHAR( 255 ) NULL DEFAULT NULL";
-	$patch['45']['date'] = "20070430";
+		$patch['45']['date'] = "20070430";
 
-	$patch['46']['name'] = "Alter field name b_city to city";
+		$patch['46']['name'] = "Alter field name b_city to city";
         $patch['46']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_city`  `city` VARCHAR( 255 ) NULL DEFAULT NULL";
         $patch['46']['date'] = "20070430";
 	
-	$patch['47']['name'] = "Alter field name b_state to state";
+		$patch['47']['name'] = "Alter field name b_state to state";
         $patch['47']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_state`  `state` VARCHAR( 255 ) NULL DEFAULT NULL";
-	$patch['47']['date'] = "20070430";
+		$patch['47']['date'] = "20070430";
 
-	$patch['48']['name'] = "Alter field name b_zip_code to zip_code";
+		$patch['48']['name'] = "Alter field name b_zip_code to zip_code";
         $patch['48']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_zip_code`  `zip_code` VARCHAR( 255 ) NULL DEFAULT NULL";
-	$patch['48']['date'] = "20070430";
+		$patch['48']['date'] = "20070430";
 
-	$patch['49']['name'] = "Alter field name b_country to country";
+		$patch['49']['name'] = "Alter field name b_country to country";
         $patch['49']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_country`  `country` VARCHAR( 255 ) NULL DEFAULT NULL";
-	$patch['49']['date'] = "20070430";
+		$patch['49']['date'] = "20070430";
 
-	$patch['50']['name'] = "Alter field name b_phone to phone";
+		$patch['50']['name'] = "Alter field name b_phone to phone";
         $patch['50']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_phone`  `phone` VARCHAR( 255 ) NULL DEFAULT NULL";
-	$patch['50']['date'] = "20070430";
+		$patch['50']['date'] = "20070430";
 
-	$patch['51']['name'] = "Alter field name b_mobile_phone to mobile_phone";
+		$patch['51']['name'] = "Alter field name b_mobile_phone to mobile_phone";
         $patch['51']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_mobile_phone`  `mobile_phone` VARCHAR( 255 ) NULL DEFAULT NULL";
-	$patch['51']['date'] = "20070430";
+		$patch['51']['date'] = "20070430";
 
-	$patch['52']['name'] = "Alter field name b_fax to fax";
-        $patch['52']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_fax`  `fax` VARCHAR( 255 ) NULL DEFAULT NULL";
-	$patch['52']['date'] = "20070430";
+		$patch['52']['name'] = "Alter field name b_fax to fax";
+	    $patch['52']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_fax`  `fax` VARCHAR( 255 ) NULL DEFAULT NULL";
+		$patch['52']['date'] = "20070430";
 
-	$patch['53']['name'] = "Alter field name b_email to email";
+		$patch['53']['name'] = "Alter field name b_email to email";
         $patch['53']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_email`  `email` VARCHAR( 255 ) NULL DEFAULT NULL";
-	$patch['53']['date'] = "20070430";
+		$patch['53']['date'] = "20070430";
 
-	$patch['54']['name'] = "Alter field name b_co_logo to logo";
+		$patch['54']['name'] = "Alter field name b_co_logo to logo";
         $patch['54']['patch'] = "ALTER TABLE  `si_biller` CHANGE  `b_co_logo`  `logo` VARCHAR( 255 ) NULL DEFAULT NULL";
-	$patch['54']['date'] = "20070430";
+		$patch['54']['date'] = "20070430";
 
-	$patch['55']['name'] = "Alter field name b_co_footer to footer";
+		$patch['55']['name'] = "Alter field name b_co_footer to footer";
         $patch['55']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_co_footer` `footer` TEXT NULL DEFAULT NULL ";
-	$patch['55']['date'] = "20070430";
+		$patch['55']['date'] = "20070430";
 	
-	$patch['56']['name'] = "Alter field name b_notes to notes";
+		$patch['56']['name'] = "Alter field name b_notes to notes";
         $patch['56']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_notes` `notes` TEXT NULL DEFAULT NULL ";
-	$patch['56']['date'] = "20070430";
+		$patch['56']['date'] = "20070430";
 
-	$patch['57']['name'] = "Alter field name b_enabled to enabled";
+		$patch['57']['name'] = "Alter field name b_enabled to enabled";
         $patch['57']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_enabled` `enabled` VARCHAR( 1 ) NOT NULL DEFAULT '1'";
-	$patch['57']['date'] = "20070430";
+		$patch['57']['date'] = "20070430";
 	
-	$patch['58']['name'] = "Alter field name b_custom_field1 to custom_field1";
+		$patch['58']['name'] = "Alter field name b_custom_field1 to custom_field1";
         $patch['58']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_custom_field1` `custom_field1` VARCHAR( 255 ) NULL DEFAULT NULL";
-	$patch['58']['date'] = "20070430";
+		$patch['58']['date'] = "20070430";
 
-	$patch['59']['name'] = "Alter field name b_custom_field2 to custom_field2";
+		$patch['59']['name'] = "Alter field name b_custom_field2 to custom_field2";
         $patch['59']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_custom_field2` `custom_field2` VARCHAR( 255 ) NULL DEFAULT NULL";
-	$patch['59']['date'] = "20070430";
+		$patch['59']['date'] = "20070430";
 
-	$patch['60']['name'] = "Alter field name b_custom_field3 to custom_field3";
+		$patch['60']['name'] = "Alter field name b_custom_field3 to custom_field3";
         $patch['60']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_custom_field3` `custom_field3` VARCHAR( 255 ) NULL DEFAULT NULL";
-	$patch['60']['date'] = "20070430";
+		$patch['60']['date'] = "20070430";
 
-	$patch['61']['name'] = "Alter field name b_custom_field4 to custom_field4";
+		$patch['61']['name'] = "Alter field name b_custom_field4 to custom_field4";
         $patch['61']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_custom_field4` `custom_field4` VARCHAR( 255 ) NULL DEFAULT NULL";
-	$patch['61']['date'] = "20070430";
+		$patch['61']['date'] = "20070430";
 	
-	$patch['62']['name'] = "Introduce systemdefaults table";
-	$patch['62']['patch'] = "CREATE TABLE `si_systemdefaults` (
+		$patch['62']['name'] = "Introduce systemdefaults table";
+		$patch['62']['patch'] = "CREATE TABLE `si_systemdefaults` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(30) NOT NULL,
   `value` varchar(30) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
 ) ";
-	$patch['62']['date'] = "20070503";
+		$patch['62']['date'] = "20070503";
 
-	$patch['63']['name'] = "Insert date into the systemdefaults table";
-	$patch['63']['patch'] = "INSERT INTO `si_systemdefaults` (`id`, `name`, `value`) VALUES 
+		$patch['63']['name'] = "Insert date into the systemdefaults table";
+		$patch['63']['patch'] = "INSERT INTO `si_systemdefaults` (`id`, `name`, `value`) VALUES 
 (1, 'biller', '4'),
 (2, 'customer', '3'),
 (3, 'tax', '1'),
@@ -364,7 +364,7 @@ ADD b_co_footer TEXT";
 (18, 'emailhost', 'localhost'),
 (19, 'emailusername', ''),
 (20, 'emailpassword', '');";
-	$patch['63']['date'] = "20070503";
+		$patch['63']['date'] = "20070503";
 
 # write conversion srcipt for this release and will drop si_defaults in the following release just incase something bad happens
 # thinking.. is si_systemdefaults the write name or should it be si_options etc..

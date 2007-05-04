@@ -124,7 +124,7 @@ else if ($_GET[submit] == "biller") {
 
 		while ($result = mysql_fetch_array($query)) {
 
-			$selected = $result['id'] == $defaults['biller']?"selected":"";
+			$selected = $result['id'] == $defaults['biller']?"selected style='font-weight: bold'":"";
 			
 			$display_block_biller .= <<<EOD
 			<option $selected value="$result[id]">$result[name]</option>
