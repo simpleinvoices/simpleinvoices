@@ -342,7 +342,7 @@ ADD b_co_footer TEXT";
 ) ";
 	$patch['62']['date'] = "20070503";
 
-	$patch['63']['name'] = "Introduce systemdefaults table";
+	$patch['63']['name'] = "Insert date into the systemdefaults table";
 	$patch['63']['patch'] = "INSERT INTO `si_systemdefaults` (`id`, `name`, `value`) VALUES 
 (1, 'biller', '4'),
 (2, 'customer', '3'),
