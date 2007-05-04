@@ -96,7 +96,7 @@ if ($_GET['stage'] == 2 ) {
 
 	$mail->IsHTML(true);                                  // set email format to HTML
 
-	$mail->Subject = "Invoice $invoice_id from $biller[name] attached";
+	$mail->Subject = "$_POST[email_subject]"; 
 	$mail->Body    = "$_POST[email_notes]";
 	$mail->AltBody = "$_POST[email_notes]";
 
