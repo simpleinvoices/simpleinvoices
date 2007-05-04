@@ -18,24 +18,14 @@ $smarty -> assign("LANG",$LANG);
 
 /*dont include the header if requested file is an invoice template - for print preview etc.. header is not needed */
 if (($module == "invoices" ) AND (strstr($view,"templates"))) {
-	if (file_exists("./modules/$module/$view.php")) {
-	        include("./modules/$module/$view.php");
+	if (file_exists("./modules/invoices/template.php")) {
+	        include("./modules/invoices/template.php");
 	}
 	else {
 		echo "The file that you requested doesn't exist";
 	}
 }
 else if (($module != null ) AND ($view != null)) {
-	
-	/*Check the $module for validitity - make sure no ones hacking the url */
-	if (!ereg("^[a-z_/]+$",$module)) { 
-        	die("Invalid module requested");
-	}
-
-	/*Check the $view for validitity - make sure no ones hacking the url */
-	if (!ereg("^[a-z_]+$",$view)) {
-	        die("Invalid view requested");
-	}
 
 	$smarty -> display("../templates/default/header.tpl");
 	
@@ -51,15 +41,6 @@ else if (($module != null ) AND ($view != null)) {
 			else {
 	        	include("./modules/$module/$view.php");
 			}
-	        
-	        /* Combines Code and template...
-	         * First have to create all templates
-	        $temp = file_get_contents("./modules/$module/$view.html");
-	         $temp = addslashes($temp); $content = "";
-
-	         eval('$content = "'.$temp.'";');
-	         echo $content;
-			*/
 	}
 	else {
 		echo "The file that you requested doesn't exist";
