@@ -15,7 +15,6 @@
  --- do the custom fields fields in biller etc.. to - needs to test the result
  - invoice templates - move to smarty and cleanup 
  - Move .sql out of install and back to root
- - mysql db connect - if cant connect die and come up with sane error
  - sql patches error - if pathces unapplied show error and have a redirect link to the sqp patches page
  -- dont show the rest of the contents of start.php
  
@@ -39,6 +38,7 @@
  -- apply to all ADD sections of Simple Invoices - except new invoices -done
  - templates - add $smarty.post value to ALL values in add screen - done
  - Smarty: Customer - make details and save work - done
+ - mysql db connect - if cant connect die and come up with sane error - done
  
 
 - in next release +1 - aim end of May

@@ -366,7 +366,10 @@ ADD b_co_footer TEXT";
 (20, 'emailpassword', '');";
 	$patch['63']['date'] = "20070503";
 
-	$patch['64']['name'] = "Drops old default table. Attention: Old defaults get lost...";
-        $patch['64']['patch'] = "DROP TABLE `si_defaults`";
-	$patch['64']['date'] = "20070503";
+# write conversion srcipt for this release and will drop si_defaults in the following release just incase something bad happens
+# thinking.. is si_systemdefaults the write name or should it be si_options etc..
+	
+#	$patch['64']['name'] = "Drops old default table. Attention: Old defaults get lost...";
+#        $patch['64']['patch'] = "DROP TABLE `si_defaults`";
+#	$patch['64']['date'] = "20070503";
 
