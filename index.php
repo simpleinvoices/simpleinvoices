@@ -27,6 +27,17 @@ if (($module == "invoices" ) AND (strstr($view,"templates"))) {
 }
 else if (($module != null ) AND ($view != null)) {
 
+       /*Check the $module for validitity - make sure no ones hacking the url */
+       if (!ereg("^[a-z_/]+$",$module)) {
+               die("Invalid module requested");
+       }
+
+       /*Check the $view for validitity - make sure no ones hacking the url */
+       if (!ereg("^[a-z_]+$",$view)) {
+               die("Invalid view requested");
+       }
+		/*if file exists is not good enough cause people could hack url and make bad things happen - cross site scripting attack etc.. */
+
 	$smarty -> display("../templates/default/header.tpl");
 	
 	/*Check to make sure that the requested files exist*/
