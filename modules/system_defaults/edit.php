@@ -127,7 +127,7 @@ else if ($_GET[submit] == "biller") {
 			$selected = $result['id'] == $defaults['biller']?"selected":"";
 			
 			$display_block_biller .= <<<EOD
-			<option $selected value="$id">$result[name]</option>
+			<option $selected value="$result[id]">$result[name]</option>
 EOD;
 		}
 		$display_block_biller .= "</select>";
