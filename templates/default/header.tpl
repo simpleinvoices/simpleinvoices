@@ -197,28 +197,28 @@ include('./templates/default/tmp.php');
 -->
 							<li></li>
 							<li>
-								<a href="index.php?module=documentation/inline_docs&view=inline_instructions">{$LANG.help} +</a>
+								<a href="docs.php?p=ReadMe">{$LANG.help} +</a>
 								<ul>
 									<li>
-										<a href="index.php?module=documentation/inline_docs&view=inline_instructions#installation">{$LANG.installation}</a>
+										<a href="docs.php?p=ReadMe#installation">{$LANG.installation}</a>
 									</li>
 									<li>
-										<a href="index.php?module=documentation/inline_docs&view=inline_instructions#upgrading">{$LANG.upgrading_simple_invoices}</a>
+										<a href="docs.php?p=ReadMe#upgrading">{$LANG.upgrading_simple_invoices}</a>
 									</li>
-									<li><a href="index.php?module=documentation/inline_docs&view=inline_instructions#prepare">{$LANG.prepare_simple_invoices}</a>
+									<li><a href="docs.php?p=ReadMe#prepare">{$LANG.prepare_simple_invoices}</a>
 									</li>
-									<li><a href="index.php?module=documentation/inline_docs&view=inline_instructions#use">{$LANG.using_simple_invoices}</a>
+									<li><a href="docs.php?p=ReadMe#use">{$LANG.using_simple_invoices}</a>
 									</li>
-									<li><a href="index.php?module=documentation/inline_docs&view=inline_instructions#faqs">{$LANG.faqs}</a></li>
+									<li><a href="docs.php?p=ReadMe#faqs">{$LANG.faqs}</a></li>
 									<li><a href="index.php?module=options&view=help">{$LANG.get_help}</a></li>
 								</ul>
 							</li>
 							<li><a href="index.php?module=documentation/inline_docs&view=about">{$LANG.about} +</a>
 								<ul>
-									<li><a href="index.php?module=documentation/inline_docs&view=about">{$LANG.about}</a></li>
-									<li><a href="index.php?module=documentation/inline_docs&view=inline_changelog">{$LANG.change_log}</a></li>
-									<li><a href="index.php?module=documentation/inline_docs&view=inline_credits">{$LANG.credits}</a></li>
-									<li><a href="index.php?module=documentation/inline_docs&view=inline_license">{$LANG.license}</a></li>
+									<li><a href="docs.php?p=about">{$LANG.about}</a></li>
+									<li><a href="docs.php?p=ChangeLog">{$LANG.change_log}</a></li>
+									<li><a href="docs.php?p=Credits">{$LANG.credits}</a></li>
+									<li><a href="docs.php?p=gpl">{$LANG.license}</a></li>
 								</ul>
 							</li>
 						</ul>
