@@ -14,6 +14,9 @@ $print_invoice_id = "SELECT * FROM {$tb_prefix}invoices WHERE inv_id = $invoice_
 $invoice_result  = mysql_query($print_invoice_id , $conn) or die(mysql_error());
 $invoice = mysql_fetch_array($invoice_result);
 
+
+$preferences = getPreferences($invoice['inv_preference']);
+
 $biller = getBiller($invoice[inv_biller_id]);
 $customer = getCustomer($invoice[inv_customer_id]);
 
@@ -64,7 +67,7 @@ if ($_GET['stage'] == 2 ) {
 	$pipeline->parser         = new ParserXHTML;
 	$pipeline->layout_engine  = new LayoutEngineDefault;
 	$pipeline->output_driver  = new OutputDriverFPDF($media);
-	$pipeline->destination    = new DestinationFile($pref_inv_wordingField);
+	$pipeline->destination    = new DestinationFile($preferences[pref_inv_wording].$invoice[inv_id]);
 
 
 
@@ -89,7 +92,7 @@ if ($_GET['stage'] == 2 ) {
 	$mail->AddBCC("$_POST[email_bcc]");
 	}
 	$mail->WordWrap = 50;                                 // set word wrap to 50 characters
-	$mail->AddAttachment("./pdf/out/unnamed.pdf");         // add attachments
+	$mail->AddAttachment("./pdf/cache/$preferences[pref_inv_wording]$invoice[inv_id].pdf");         // add attachments
 
 	$mail->IsHTML(true);                                  // set email format to HTML
 
