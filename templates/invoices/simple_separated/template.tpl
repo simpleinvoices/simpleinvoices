@@ -10,7 +10,7 @@
 
 </div>
 
-<link rel="stylesheet" type="text/css" href="./modules/invoices/templates/{$template}/{$template}.css">
+<link rel="stylesheet" type="text/css" href="{$css}">
 
 
 	<table width="100%" align="center">

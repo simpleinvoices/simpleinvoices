@@ -12,7 +12,7 @@
 
 </div>
 
-<link rel="stylesheet" type="text/css" href="./modules/invoices/templates/$template/$template.css">
+<link rel="stylesheet" type="text/css" href="{$css}">
 
 	<table width="100%" align="center">
 			<tr>
@@ -88,7 +88,7 @@
 		{/php}
 
 
-         {if {$biller.country} != null }
+         {if $biller.country != null }
                 </tr>
                 <tr>
                         <td class='tbl1-left'></td><td class='tbl1-right' colspan=3>{$biller.country}</td>
@@ -127,23 +127,23 @@
 		<td class="tbl1-left tbl1-top tbl1-bottom col1" ><b>{$LANG.customer}:</b></td><td class="tbl1-top tbl1-bottom col1 tbl1-right" colspan=3>{$customer.c_name}</td>
 	</tr>
 
-        {if {$customer.c_attention} != null)}
+        {if $customer.c_attention != null }
                 <tr>
                         <td class='tbl1-left'>{$LANG.attention_short}:</td><td align=left class='tbl1-right' colspan=3 >{$customer.c_attention}</td>
                 </tr>
        {/if}
-        {if {$customer.c_street_address} != null}
+        {if $customer.c_street_address != null }
                 <tr >
                         <td class='tbl1-left'>{$LANG.address}:</td><td class='tbl1-right' align=left colspan=3>{$customer.c_street_address}</td>
                 </tr>   
         {/if}
-        {if {$customer.c_street_address2} != null}
+        {if $customer.c_street_address2 != null}
                 <tr class='details_screen customer'>
-                {if {$customer.c_street_address} == null}
+                {if $customer.c_street_address == null}
                         <td class='tbl1-left'>{$LANG.address}:</td><td class='tbl1-right' align=left colspan=3>{$customer.c_street_address2}</td>
                 </tr>   
                 {/if}
-                {if {$customer.c_street_address} != null}
+                {if $customer.c_street_address != null}
                         <td class='tbl1-left'></td><td class='tbl1-right' align=left colspan=3>{$customer.c_street_address2}</td>
                 </tr>   
                 {/if}
@@ -153,7 +153,7 @@
         echo  merge_address($customer[c_city], $customer[c_state], $customer[c_zip_code], $customer[c_street_address], $customer[c_street_address2],'tbl1-left','tbl1-right',3);
         {/php}
 
-         {if {$customer.c_country} != null}
+         {if $customer.c_country != null}
                 </tr>
                 <tr>
                         <td class='tbl1-left'></td><td class='tbl1-right' colspan=3>{$customer.c_country}</td>

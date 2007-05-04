@@ -231,12 +231,13 @@ if (isset($_GET['export'])) {
 	
 #END INVOICE ITEMEISED/CONSULTING SECTION
 	if (is_null($_GET['export'])) {
-		$css = "./modules/invoices/${template}/style.css";
+		
 	}
 	
 	
 	$templatePath = "./templates/invoices/${template}/template.tpl";
 	$template_path = "../templates/invoices/${template}/";
+	$css = "./templates/invoices/${template}/style.css";
 
 	if(file_exists($templatePath)) {
 		$smarty -> assign('invoice_total',$invoice_total);
@@ -248,6 +249,8 @@ if (isset($_GET['export'])) {
 		$smarty -> assign('template',$template);
 		$smarty -> assign('master_invoices',$master_invoices);
 		$smarty -> assign('template_path',$template_path);
+		$smarty -> assign('css',$css);
+		
 		
 		$smarty -> display(".".$templatePath);
 	}
