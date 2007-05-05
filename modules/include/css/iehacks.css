@@ -1,18 +1,11 @@
-/*IE Accordian hack*/
-#list1 {
-	width:44%;
-}
-#list2 {
-        width:44%;
-}
-
 /*IE rico live grid table with set hack*/
-table.ricoLiveGrid {
-  width:90%;
-}
+	table.ricoLiveGrid {
+	width:90%; }
 
 /*Make the rico live grid scrollbars appear ok - text-align = middle makes it goes crazy*/
 .col {
-	padding: 0 20px;
-	text-align: left;
-}
+	text-align:left;
+	padding:0 20px; }
+
+#list1,#list2 {
+	width:44%; }

@@ -8,7 +8,7 @@
 *	 Catherine, Lionel 
 *
 * Last edited:
-* 	 2007-05-02
+* 	 2007-05-04
 *
 * License:
 *	 GPL v2 or above
@@ -250,9 +250,9 @@ $LANG['quick_view_tooltip'] = "Aper&ccedil;u de ";//1
 $LANG['reports'] = "Rapports";//1
 $LANG['sales'] = "Ventes";//1
 $LANG['sales_by_customers'] = "Ventes par client";//1
-$LANG['sanity_check'] = "V&eacute;rifier factures";//1
+$LANG['sanity_check'] = "V&eacute;rifier les factures";//1
 $LANG['save'] = "Enregistrer";//1
-$LANG['save_biller'] = "Enregistrer vendeur";//1
+$LANG['save_biller'] = "Enregistrer un vendeur";//1
 $LANG['save_biller_failure'] = "Une erreur s'est produite, essayer svp de sauvegarder une nouvelle fois le vendeur<br>";//1
 $LANG['save_biller_success'] = "Vendeur enregistr&eacute; avec succ&egrave;s, <br> vous aller &ecirc;tre redirig&eacute; vers la page de gestion des vendeurs";//1
 $LANG['save_custom_field'] = "Enregistrer un champ optionnel";//1
@@ -261,25 +261,25 @@ $LANG['save_custom_field_success'] = "Champ optionnel enregistr&eacute; avec suc
 $LANG['save_customer'] = "Enregistrer le client";//1
 $LANG['save_customer_failure'] = "Une erreur s'est produite, essayer svp de sauvegarder une nouvelle fois le client";//1
 $LANG['save_customer_success'] = "Client enregistr&eacute; avec succ&egrave;s,<br> vous aller &ecirc;tre redirig&eacute; vers la page de gestion des clients";//1
-$LANG['save_defaults'] = "Save Defaults";//0
-$LANG['save_defaults_biller_success'] = "System defaults: Default biller successfully updated,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_customer_success'] = "System defaults: Default customer successfully updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults'] = "Enregistrer les pr&eacute;f&eacute;rences par d&eacute;faut";//1
+$LANG['save_defaults_biller_success'] = "Pr&eacute;f&eacute;rences de l'utilisateur: les r&eacute;glages pour le vendeur ont &eacute;t&eacute; mis &agrave; jour avec succ&egrave;s,<br> vous aller &ecirc;tre redirig&eacute; vers l'index des pr&eacute;f&eacute;rences de l'utilisateur";//1
+$LANG['save_defaults_customer_success'] = "Pr&eacute;f&eacute;rences de l'utilisateur: les r&eacute;glages pour le client ont &eacute;t&eacute; mis &agrave; jour avec succ&egrave;s,<br> vous aller &ecirc;tre redirig&eacute; vers l'index des pr&eacute;f&eacute;rences de l'utilisateur";//1
 $LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
-$LANG['save_defaults_line_items_success'] = "System defaults: Number of line items successfully update,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_payment_type_success'] = "System defaults: Default payment_type updated,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_preference_success'] = "System defaults: Default invoice preference updated,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_tax_success'] = "System defaults: Default tax updated,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_template_success'] = "System defaults: Default invoice template successfully update,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_line_items_success'] = "System defaults: Number of line items successfully updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_payment_type_success'] = "Pr&eacute;f&eacute;rences de l'utilisateur: les r&eacute;glages pour le type de paiement ont &eacute;t&eacute; mis &agrave; jour avec succ&egrave;s,<br> vous aller &ecirc;tre redirig&eacute; vers l'index des pr&eacute;f&eacute;rences de l'utilisateur";//1
+$LANG['save_defaults_preference_success'] = "Pr&eacute;f&eacute;rences de l'utilisateur: les r&eacute;glages pour la facture ont &eacute;t&eacute; mis &agrave; jour avec succ&egrave;s,<br> vous aller &ecirc;tre redirig&eacute; vers l'index des pr&eacute;f&eacute;rences de l'utilisateur";//1
+$LANG['save_defaults_tax_success'] = "Pr&eacute;f&eacute;rences de l'utilisateur: les r&eacute;glages pour le taux ont &eacute;t&eacute; mis &agrave; jour avec succ&egrave;s,<br> vous aller &ecirc;tre redirig&eacute; vers l'index des pr&eacute;f&eacute;rences de l'utilisateur";//1
+$LANG['save_defaults_template_success'] = "Pr&eacute;f&eacute;rences de l'utilisateur: les r&eacute;glages pour le gabarit des factures ont &eacute;t&eacute; mis &agrave; jour avec succ&egrave;s,<br> vous aller &ecirc;tre redirig&eacute; vers l'index des pr&eacute;f&eacute;rences de l'utilisateur";//1
 $LANG['save_invoice'] = "Enregistrer une facture";//1
 $LANG['save_invoice_failure'] = "Une erreur s'est produite, essayer svp de sauvegarder une nouvelle fois la facture";//1
 $LANG['save_invoice_items_success'] = "Processing invoice items<br> you will be redirected back to the Quick View of this invoice";//0
 $LANG['save_invoice_success'] = "Processing invoice, <br> you will be redirected Quick View of this invoice";//0
-$LANG['save_payment_failure'] = "Something went wrong, please try saving the payment again";//0
+$LANG['save_payment_failure'] = "Une erreur s'est produite, essayer svp de sauvegarder une nouvelle fois le paiement";//1
 $LANG['save_payment_invoice_success'] = "Payment successfully processed, <br> you will be redirected to the Manage Invoices page";//0
 $LANG['save_payment_success'] = "Payment successfully processed,<br> you will be redirected back to the Manage Payments page";//0
 $LANG['save_payment_type'] = "Enregistrer un type de paiement";//1
-$LANG['save_payment_type_failure'] = "Something went wrong, please try saving the payment type again";//0
-$LANG['save_payment_type_success'] = "Payment Type successfully saved, <br> you will be redirected back to the Manage Payment Types";//0
+$LANG['save_payment_type_failure'] = "Une erreur s'est produite, essayer svp de sauvegarder une nouvelle fois le type de paiement";//1
+$LANG['save_payment_type_success'] = "Type de paiement enregistr&eacute; avec succ&egrave;s, <br> vous aller &ecirc;tre redirig&eacute; vers la page de gestion des types de paiement";//1
 $LANG['save_preference_failure'] = "Something went wrong, please try saving the invoice preference again";//0
 $LANG['save_preference_success'] = "Invoice preference successfully saved,<br> you will be redirected to Manage Preferences page";//0
 $LANG['save_product'] = "Enregistrer un produit";//1
@@ -302,7 +302,7 @@ $LANG['sub_total'] = "Sous-total";//1
 $LANG['sum'] = "Total";//1
 $LANG['summary'] = "Facture";//1
 $LANG['summary_of_accounts'] = "R&eacute;sume des comptes";//1
-$LANG['system_defaults'] = "Param&egrave;tres";//1
+$LANG['system_defaults'] = "Pr&eacute;f&eacute;rences de l'utilisateur";//1
 $LANG['tax'] = "TVA";//1
 $LANG['tax_description'] = "Description taxe";//1
 $LANG['tax_id'] = "ID TVA";//1

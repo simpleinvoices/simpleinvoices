@@ -1,32 +1,17 @@
 div#Header {
- /* background: url(../gb_top.giff) top repeat-y*/
-	background: #036;
+	background:#036;
 	position:relative;
-	z-index:100;
-}
+	z-index:100; }
 
-#Tabs a:link,
-#Tabs a:visited {
-/*
-  border-right: 1px solid #036;
-  border-left: 1px solid #036;
-*/
-  color: #fff;
-  background-color: #1A4F85;
-/*  border-bottom: 1px solid #1A4F85;*/
-}
+#Tabs a:link,#Tabs a:visited {
+	color:#fff;
+	background-color:#1A4F85; }
 
 #Tabs a:hover {
-	color: #fff;
-/*	background: #1D64AD;*/
-}
+	color:#fff; }
 
-#Tabs ul a:link.current, #Tabs ul a:visited.current {
-	color: #090;
-}
+#Tabs ul a:link.current,#Tabs ul a:visited.current {
+	color:#090; }
 
-#Tabs li.logout a:link,
-#Tabs li.logout a:visited {
-  color: #8099b3;
-}
-
+#Tabs li.logout a:link,#Tabs li.logout a:visited {
+	color:#8099b3; }
