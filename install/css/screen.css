@@ -7,6 +7,12 @@ body {
 	background: #e5e5e5;
 	text-align: center; }
 
+table {
+	background-color:#E5E5E5;
+	border-collapse:collapse;
+	border-color:#000;
+}
+
 td { 
 	font-family: "Lucida Grande", verdana, arial, helvetica, sans-serif; 
 	text-align:left; }
@@ -39,7 +45,17 @@ a:hover {
 
 p {
 	font-size: 14px;
+	text-align:left;
 	margin: 0 0 15px 0; }
+	
+#welcome {
+background-color:#E5E5E5;
+margin:0 auto;
+border:1px solid #000;
+width:15em;
+padding:15px;
+line-height:1.5em;
+}
 
 h1 {
 	font-size: 32px;

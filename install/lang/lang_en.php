@@ -1,20 +1,17 @@
 <?php
 
 // install
-$LANG['welcome'] = "welcome...";
-$LANG['procedure'] = "Intro...<br />
-Download the latest stable release.<br />
-Unzip that file.<br />
-Upload the folder on your server.";
+$LANG['welcome'] = "Welcome !";
+$LANG['intro'] = "...";
 
 // preferencies
 $LANG['installRequirements'] = "Checking of the requirements for the installation:";
 
-$LANG['memory_no_1'] = "You have only ";
-$LANG['memory_no_2'] = " of memory. That is not sufficient.";
+$LANG['memory_caution_1'] = "You have only ";
+$LANG['memory_caution_2'] = " of memory. That is not sufficient.";
 
-$LANG['memory_yes_1'] = "You have ";
-$LANG['memory_yes_2'] = " of memory. It is perfect!";
+$LANG['memory_valid_1'] = "You have ";
+$LANG['memory_valid_2'] = " of memory. It is perfect!";
 
 $LANG['GD_true'] = "You have the library GD";
 $LANG['GD_false'] = "You need the library GD to make function Simple Invoices ";

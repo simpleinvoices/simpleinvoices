@@ -1,20 +1,17 @@
 <?php
 
 // install
-$LANG['welcome'] = "Bienvenue...";
-$LANG['procedure'] = "Intro...<br />
-T&eacute;l&eacute;chargez la derni&egrave;re version stable.<br />
-D&eacute;compressez l'archive.<br />
-Uploader le dossier sur votre serveur.";
+$LANG['welcome'] = "Bienvenue !";
+$LANG['intro'] = "...";
 
 // preferencies
 $LANG['installRequirements'] = "V&eacute;rification des conditions requises pour l'installation:";
 
-$LANG['memory_no_1'] = "Vous n'avez que ";
-$LANG['memory_no_2'] = " de m&eacute;moire. Cela n'est pas suffisant.";
+$LANG['memory_caution_1'] = "Vous n'avez que ";
+$LANG['memory_caution_2'] = " de m&eacute;moire. Cela n'est pas suffisant.";
 
-$LANG['memory_yes_1'] = "Vous avez ";
-$LANG['memory_yes_2'] = " de m&eacute;moire. C'est parfait!";
+$LANG['memory_valid_1'] = "Vous avez ";
+$LANG['memory_valid_2'] = " de m&eacute;moire. C'est parfait!";
 
 $LANG['GD_true'] = "Vous avez bien la librairie GD";
 $LANG['GD_false'] = "Vous avez besoin de la librairie GD pour faire fonctionner Simple Invoices";

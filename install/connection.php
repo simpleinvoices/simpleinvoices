@@ -12,23 +12,13 @@ $language = $_SESSION['language'];
 include('lang/lang_'.$language.'.php');
 ?>	
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-	<title>Simple Invoices | Installer</title>
+
+<title>Simple Invoices | Installer</title>
+	
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-	<link rel="stylesheet" type="text/css" href="./css/screen.css" media="all"/>
-
-
-	<!-- Additional IE/Win specific style sheet (Conditional Comments) -->
-	<!--[if lte IE 7]>
-	<style type="text/css" media="screen, projection">
-	    body {
-		font-size: 100%; /* resizable fonts */
-	    }
-	</style>
-	<![endif]-->
+<link rel="stylesheet" type="text/css" href="./css/screen.css" media="all"/>
 
 
 <div id="Wrapper">
@@ -36,8 +26,8 @@ include('lang/lang_'.$language.'.php');
 
 		<div class="Full">    
 			<div class="col">
-			<h1>Simple invoices :: installer</h1>
-			<hr></hr>
+			<h1>Simple Invoices :: installer</h1>
+			<hr />
 
 
 			<!-- connexion -->
@@ -60,13 +50,13 @@ include('lang/lang_'.$language.'.php');
 
 
 			<p>
-			<br />	
+			<br /><br />
 				<input type="submit" name="submit[create]" value="<?php echo $LANG['createDB'] ?>">
 				<input type="submit" name="submit[drop]" value="<?php echo $LANG['replaceDB'] ?>">
 			</p>
 			</form>
 
-			<hr></hr>
+			<hr />
 
 			</div>
 			<div class="bottom"></div>
