@@ -2,11 +2,10 @@
 
 // install
 $LANG['welcome'] = "Bienvenue...";
-$LANG['procedure'] = "Intro...";
-$LANG['step1'] = "T&eacute;l&eacute;chargez la derni&egrave;re version stable.";
-$LANG['step2'] = "D&eacute;compressez l'archive.";
-$LANG['step3'] = "Uploader le dossier sur votre serveur.";
-$LANG['step4'] = "...";
+$LANG['procedure'] = "Intro...<br />
+T&eacute;l&eacute;chargez la derni&egrave;re version stable.<br />
+D&eacute;compressez l'archive.<br />
+Uploader le dossier sur votre serveur.";
 
 // preferencies
 $LANG['installRequirements'] = "V&eacute;rification des conditions requises pour l'installation:";

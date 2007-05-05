@@ -90,7 +90,7 @@ include('./templates/default/tmp.php');
 							<li><a href="index.php?module=payments&view=process&op=pay_invoice">{$LANG.process_payment}</a></li>
 						</ul>
 					</li>
-					<li><a href="index.php">{$LANG.reports} +</a>
+					<li><a href="#">{$LANG.reports} +</a>
 						<ul>
 							<li><a href="index.php?module=reports&view=report_sales_total">{$LANG.sales} +</a>
 								<ul>

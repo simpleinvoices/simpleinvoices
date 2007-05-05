@@ -89,7 +89,7 @@ if (extension_loaded('xslt')) {
 
 <?php echo $LANG['installRequirements'] ?>
 <br /><br />
-<table border="1px">
+<table border="1px" cellpadding="4px" align="center">
 <tr>
 <td><?php if(controleGd() == TRUE) echo $LANG['GD_true']; else echo $LANG['GD_false']; ?></td>
 <td><?php if(extension_loaded('gd')) echo '<img src="./images/valid.png" alt="Success"/>'; else echo '<img src="./images/no.png" alt="Failure"/>'; ?></td>

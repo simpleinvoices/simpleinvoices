@@ -53,10 +53,6 @@ $langNav = "en";
 			
 			echo $LANG['welcome'] ."<br />";
 			echo $LANG['procedure'] ."<br />";
-			echo $LANG['step1'] ."<br />";
-			echo $LANG['step2'] ."<br />";
-			echo $LANG['step3'] ."<br />";
-			echo $LANG['step4'] ."<br />";
 			
 			?></p>
 			

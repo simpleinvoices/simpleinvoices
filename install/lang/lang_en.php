@@ -2,11 +2,10 @@
 
 // install
 $LANG['welcome'] = "welcome...";
-$LANG['procedure'] = "Intro...";
-$LANG['step1'] = "Download the latest stable release.";
-$LANG['step2'] = "Unzip that file.";
-$LANG['step3'] = "Upload the folder on your server.";
-$LANG['step4'] = "...";
+$LANG['procedure'] = "Intro...<br />
+Download the latest stable release.<br />
+Unzip that file.<br />
+Upload the folder on your server.";
 
 // preferencies
 $LANG['installRequirements'] = "Checking of the requirements for the installation:";
