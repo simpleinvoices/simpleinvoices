@@ -8,7 +8,7 @@ $language = $_SESSION['language'];
 // | Licence: GNU General Public License 2.0                               |
 // +-----------------------------------------------------------------------+
 
-// Selection de la langue de l'installeur
+// Select the language
 include('lang/lang_'.$language.'.php');
 ?>
 
@@ -32,7 +32,7 @@ include('lang/lang_'.$language.'.php');
 
 <?php
 
-// Contrôle taille mémoire
+// Control size memory
 // Simple invoices want if possible 24M.
 $post_max_size = ini_get('post_max_size');
 
@@ -45,7 +45,7 @@ function controle_post_max_size() {
 	}
 }
 
-// Contrôle taille mémoire
+// Control size memory limit
 // Simple invoices want if possible 24M.
 $memory_limit = ini_get('memory_limit');
 
@@ -58,7 +58,7 @@ function controle_memory_limit() {
 	}
 }
 
-// Contrôle existence librairie GD
+// Control library GD existence
 function controleGd() {
 if (extension_loaded('gd')) {
 	return true; }
@@ -66,7 +66,7 @@ if (extension_loaded('gd')) {
 	return false; }
 }
 
-// Contrôle existence xslt
+// Control xslt existence
 function controleXslt() {
 if (extension_loaded('xslt')) {
 	return true; }

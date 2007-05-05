@@ -34,7 +34,7 @@ else
 		<div class="Full">
 			<div class="col">
    	
-			<h1>Simple invoices :: Installer</h1>
+			<h1>Simple Invoices :: Installer</h1>
 			<hr />
 			<br />
 			
@@ -45,8 +45,7 @@ else
 			</div>
 			
 			<br /><br />
-			
-			<!-- Choix de la langue -->
+
 			<form method="post" action="preferences.php">
 				<input type="submit" name="Continue" value="<?php echo $LANG['continue']; ?>">
 			</form>

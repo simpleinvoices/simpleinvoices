@@ -39,10 +39,11 @@ $LANG['replaceDB'] = "Replacement of the data base";
 $LANG['insertDataYes'] = "Insert data in the data base";
 $LANG['insertDataNo'] = "No insertions";
 
+//insertion
 $LANG['OpenFileFailure'] = "Impossible to open the file";
 $LANG['writingSuccess'] = "The writing succeeded";
 $LANG['writingNoSuccess'] = "Impossible to write in the file";
-
+$LANG['thanks'] = "Thank you to use Simple Invoices";
 
 ?>
 

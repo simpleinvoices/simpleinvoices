@@ -39,8 +39,10 @@ $LANG['replaceDB'] = "Remplacement de la base de donn&eacute;es";
 $LANG['insertDataYes'] = "Insertion des donn&eacute;es dans la base de donn&eacute;es";
 $LANG['insertDataNo'] = "Pas d'insertions";
 
+//insertion
 $LANG['OpenFileFailure'] = "Impossible d'ouvrir le fichier";
 $LANG['writingSuccess'] = "L'&eacute;criture a r&eacute;ussi";
 $LANG['writingNoSuccess'] = "Impossible d'&eacute;crire dans le fichier";
+$LANG['thanks'] = "Merci d'utiliser Simple Invoices";
 
 ?>

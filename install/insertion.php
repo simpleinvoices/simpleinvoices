@@ -10,13 +10,12 @@ session_start();
 	$dbname = $_SESSION['dbname'];
 	$table_prefix = $_SESSION['table_prefix'];
 
-
 // +-----------------------------------------------------------------------+
 // | Simple Invoices                                                       |
 // | Licence: GNU General Public License 2.0                               |
 // +-----------------------------------------------------------------------+
 
-// Selection de la langue de l'installeur
+// Select the language 
 include('lang/lang_'.$language.'.php');
 
 
@@ -53,7 +52,7 @@ $action = $submit_array[0];
 switch ($action)
 {
 	case 'insertNo':
-		echo "Merci d'utiliser simple invoices"."<br />";
+		echo $LANG['thanks']."<br />";
 		break;	
 		
 	case 'insertYes':
@@ -68,7 +67,7 @@ switch ($action)
 		else
 			parse_mysql_dump($mysql_5data, $ignoreerrors = false);
 			
-		echo "Merci d'utiliser simple invoices"."<br />";
+		echo $LANG['thanks']."<br />";
 		break;	
 }
 
@@ -102,5 +101,5 @@ fclose($fileConfigOpen);
 // unset($_SESSION);
 	
 ?>
-<!--redirection après 4 secondes-->
+<!-- redirection after 4 seconds -->
 <meta http-equiv="refresh" content="4;url=../index.php" />

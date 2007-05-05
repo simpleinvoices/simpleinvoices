@@ -8,7 +8,7 @@ $language = $_SESSION['language'];
 // | Licence: GNU General Public License 2.0                               |
 // +-----------------------------------------------------------------------+
 
-// Selection de la langue de l'installeur
+// Select the language
 include('lang/lang_'.$language.'.php');
 ?>	
 
@@ -83,26 +83,31 @@ $submit_array = array_keys($_POST['submit']);
 $action = $submit_array[0];
 switch ($action) {
 	case 'create':
+		// Created a new DB 
 		$query = mysql_query("CREATE DATABASE IF NOT EXISTS ". $dbname) or die ($LANG['existingDb'] . mysql_error());
 		
-		// Select DB
+		// Select this new DB
 		$db_selected = mysql_select_db($dbname, $connection);
 		if (!$db_selected) {
 			die ($LANG['unableSelectDb'] . mysql_error());
 		}
-	
+		// Create tables
 		parse_mysql_dump($sql_version, $ignoreerrors = false);
 		break;	
 		
 	case 'drop':
+		// Select an existing DB
 		$db_selected = mysql_select_db($dbname, $connection);
 		if (!$db_selected) {
 			die ($LANG['unableSelectDb'] . mysql_error());
 		}
-		
+		// Drop tables
 		$dropTables = "sql/drop.sql";
 		parse_mysql_dump($dropTables, $ignoreerrors = false);
-		break;	
+		
+		// Create tables
+		parse_mysql_dump($sql_version, $ignoreerrors = false);
+		break;
 }
 
 // close connection
