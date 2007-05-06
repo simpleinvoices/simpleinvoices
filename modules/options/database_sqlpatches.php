@@ -27,9 +27,10 @@ function runPatches() {
 	global $tb_prefix;
 	global $patch;
 	#DEFINE SQL PATCH
+	
 	if(mysql_num_rows(mysql_query("SHOW TABLES LIKE '{$tb_prefix}sql_patchmanager'")) == 1) {
 
-		$display_block .= "<table align='center'>";
+		$display_block = "<table align='center'>";
 
 		for($i=0;$i < count($patch);$i++) {
 			run_sql_patch($i,$patch[$i]);
@@ -82,7 +83,7 @@ EOD;
 
 		for($p = 0; $p < count($patch);$p++) {
 			if(check_sql_patch($p,$patch[$p]['name'])) {
-				$display_block .= "<tr><td>SQL patch $p, {$patch[$p]['name']} <i>has</i> already been applied in release $patch[sql_release]</td></tr>";
+				$display_block .= "<tr><td>SQL patch $p, {$patch[$p]['name']} <i>has</i> already been applied in release $patch[date]</td></tr>";
 			}
 			else {
 				$display_block .= "<tr><td>SQL patch $p, {$patch[$p]['name']}  <b>has not</b> been applied to the database</td></tr>";
@@ -148,7 +149,9 @@ EOD;
 EOD;
 		# now update the {$tb_prefix}sql_patchmanager table
 		
+		
 		$sql_update = "INSERT INTO {$tb_prefix}sql_patchmanager ( sql_id , sql_patch , sql_release , sql_statement ) VALUES ($id,'$patch[name]',$patch[date],'')";
+		echo $sql_update;
 
 		mysql_query($sql_update) or die(mysql_error());
 

@@ -368,9 +368,23 @@ ADD b_co_footer TEXT";
 (20, 'emailpassword', '');";
 		$patch['63']['date'] = "20070503";
 		
+
+		
 		$patch['64']['name'] = "Removes autoincrement from sql_id";
         $patch['64']['patch'] = "ALTER TABLE  `si_sql_patchmanager` CHANGE  `sql_id`  `sql_id` INT( 11 ) NOT NULL";
 		$patch['64']['date'] = "20070506";
+		
+		$patch['65']['name'] = "Remove Primary Key frem sql_patchmanager";
+        $patch['65']['patch'] = "ALTER TABLE `si_sql_patchmanager` DROP PRIMARY KEY";
+		$patch['65']['date'] = "20070506";
+				
+		$patch['66']['name'] = "Makes sql_id Unique";
+        $patch['66']['patch'] = "ALTER TABLE  `si_sql_patchmanager` ADD UNIQUE (`sql_id`)";
+		$patch['66']['date'] = "20070506";
+		
+		$patch['67']['name'] = "Removes sql_patch_ref";
+        $patch['67']['patch'] = "ALTER TABLE `si_sql_patchmanager` DROP `sql_patch_ref`";
+		$patch['67']['date'] = "20070506";
 
 # write conversion srcipt for this release and will drop si_defaults in the following release just incase something bad happens
 # thinking.. is si_systemdefaults the write name or should it be si_options etc..
@@ -379,17 +393,11 @@ ADD b_co_footer TEXT";
 #        $patch['64']['patch'] = "DROP TABLE `si_defaults`";
 #	$patch['64']['date'] = "20070503";
 
-		$patch['65']['name'] = "Makes sql_id Unique";
-        $patch['65']['patch'] = "ALTER TABLE  `si_sql_patchmanager` ADD UNIQUE (`sql_id`)";
-		$patch['65']['date'] = "20070506";
+
 		
-		$patch['66']['name'] = "Removes sql_patch_ref";
-        $patch['66']['patch'] = "ALTER TABLE `si_sql_patchmanager` DROP `sql_patch_ref`";
-		$patch['66']['date'] = "20070506";
+
 		
-		$patch['67']['name'] = "Remove Primary Key frem sql_patchmanager";
-        $patch['67']['patch'] = "ALTER TABLE `si_sql_patchmanager` DROP PRIMARY KEY";
-		$patch['67']['date'] = "20070506";
+
 
 
 
