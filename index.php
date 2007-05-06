@@ -9,10 +9,32 @@ $view = isset($_GET['view'])?$_GET['view']:null;
 $action = isset($_GET['case'])?$_GET['case']:null;
 
 require_once("./include/smarty/Smarty.class.php");
+
 $smarty = new Smarty();
 $smarty -> compile_dir = "./cache/";
+
 include("./include/include_main.php");
+include('./modules/options/database_sqlpatches.php');
+
+
 $smarty -> assign("LANG",$LANG);
+
+$menu = true;
+$file = "home";
+
+
+if(getNumberOfPatches() > 0 ) {
+	$view = "database_sqlpatches";
+	$module = "options";
+	
+	if($action == "run") {
+		runPatches();
+	}
+	else {
+		listPatches();
+	}
+	$menu = false;
+}
 
 
 
@@ -24,46 +46,35 @@ if (($module == "invoices" ) AND (strstr($view,"templates"))) {
 	else {
 		echo "The file that you requested doesn't exist";
 	}
-}
-else if (($module != null ) AND ($view != null)) {
-
-       /*Check the $module for validitity - make sure no ones hacking the url */
-       if (!ereg("^[a-z_/]+$",$module)) {
-               die("Invalid module requested");
-       }
-
-       /*Check the $view for validitity - make sure no ones hacking the url */
-       if (!ereg("^[a-z_]+$",$view)) {
-               die("Invalid view requested");
-       }
-		/*if file exists is not good enough cause people could hack url and make bad things happen - cross site scripting attack etc.. */
-
-	$smarty -> display("../templates/default/header.tpl");
 	
-	/*Check to make sure that the requested files exist*/
-	if (file_exists("./modules/$module/$view.php")) {
-
-			
-			if(file_exists("./templates/default/{$module}/{$view}.tpl")) {
-				include("./modules/$module/$view.php");
-				
-				$smarty -> display("../templates/default/{$module}/{$view}.tpl");
-			}
-			else {
-	        	include("./modules/$module/$view.php");
-			}
-	}
-	else {
-		echo "The file that you requested doesn't exist";
-	}
-	
-	$smarty -> display("../templates/default/footer.tpl");
+	return;
 }
-/*If all else fails show the start.php page */
+
+
+
+if(file_exists("./modules/$module/$view.php")) {
+	$file = "$module/$view";
+}
+
+
+
+$smarty -> display("../templates/default/header.tpl");
+if($menu) {
+	$smarty -> display("../templates/default/menu.tpl");
+}
+
+$smarty -> display("../templates/default/main.tpl");
+
+include_once("./modules/$file.php");
+
+//Shouldn't be necessary anymore. Ist for old files without tempaltes...
+if(file_exists("./templates/default/$file.tpl")) {
+	$smarty -> display("../templates/default/$file.tpl");
+}
 else {
-        $smarty -> display("../templates/default/header.tpl");
-        include("./modules/home.php");			
-		$smarty -> display("../templates/default/home.tpl");
-        $smarty -> display("../templates/default/footer.tpl");
+	echo "NOTEMPLATE!!";
 }
+
+$smarty -> display("../templates/default/footer.tpl");
+
 ?>

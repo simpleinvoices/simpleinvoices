@@ -1,4 +1,5 @@
 
+   
  <!--  </div id="browser"> -->
    </div class="col">
 
@@ -7,5 +8,5 @@
    </div class="Full">
    </div id="Container">
    </div id="Wrapper">
-   </BODY>
-   </HTML>
+   </body>
+   </html>

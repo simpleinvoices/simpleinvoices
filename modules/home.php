@@ -6,34 +6,6 @@ include('./include/sql_patches.php');
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-#If patches to be applied shod message first!!
-#Max patches applied - start
-$sql4 = "
-        SELECT
-                count(sql_patch_ref) as count
-        FROM 
-                {$tb_prefix}sql_patchmanager
-        ";
-
-        $result4 = mysql_query($sql4) or die(mysql_error());
-
-        while ($Array4 = mysql_fetch_array($result4)) {
-                $max_patches_applied = $Array4['count'];
-        };
-
-$patch = count($patch);
-
-if ($patch > $max_patches_applied) {
-	echo "<br>
-		NOTE 
-			<a href='docs.php?t=help&p=database_patches' rel='gb_page_center[450, 450]'><img src='./images/common/help-small.png'></img>
-			</a> :   
-		Your version of Simple Invoices has been upgraded<br><br>  
-		With this new release there are database patches that need to be applied<br><br>
-		Please select <a href='./index.php?module=options&view=database_sqlpatches '>'Database Upgrade Manager'</a> from the Options menu and follow the instructions<br>";
-	die();
-}
-
 #Largest debtor query - start
 if ($mysql > 4) {
 	$sql = "

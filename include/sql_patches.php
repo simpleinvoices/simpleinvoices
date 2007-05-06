@@ -1,13 +1,15 @@
 <?php
-	
+	$patch['0']['name'] = "Start";
+	$patch['0']['patch'] = "SHOW TABLES LIKE 'test'";
+    $patch['0']['date'] = "20060514";
 
 	$patch['1']['name'] = "Create si_sql_patchmanger table";
 	$patch['1']['patch'] = "CREATE TABLE si_sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 50 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) TYPE = MYISAM)";
-        $patch['1']['date'] = "20060514";;
+        $patch['1']['date'] = "20060514";
 	
 	$patch['2']['name'] = "Update invoice no details to have a default currency sign";
         $patch['2']['patch'] = "UPDATE si_preferences SET pref_currency_sign = '$' WHERE pref_id =2 LIMIT 1";
-        $patch['2']['date'] = "20060514";;
+        $patch['2']['date'] = "20060514";
 	
 	$patch['3']['name'] = "Add a row into the defaults table to handle the default number of line items";
         $patch['3']['patch'] = "ALTER TABLE si_defaults ADD def_number_line_items INT( 25 ) NOT NULL";
@@ -365,6 +367,10 @@ ADD b_co_footer TEXT";
 (19, 'emailusername', ''),
 (20, 'emailpassword', '');";
 		$patch['63']['date'] = "20070503";
+		
+		$patch['64']['name'] = "Removes autoincrement from sql_id";
+        $patch['64']['patch'] = "ALTER TABLE  `si_sql_patchmanager` CHANGE  `sql_id`  `sql_id` INT( 11 ) NOT NULL";
+		$patch['64']['date'] = "20070506";
 
 # write conversion srcipt for this release and will drop si_defaults in the following release just incase something bad happens
 # thinking.. is si_systemdefaults the write name or should it be si_options etc..
@@ -372,4 +378,18 @@ ADD b_co_footer TEXT";
 #	$patch['64']['name'] = "Drops old default table. Attention: Old defaults get lost...";
 #        $patch['64']['patch'] = "DROP TABLE `si_defaults`";
 #	$patch['64']['date'] = "20070503";
+
+		$patch['65']['name'] = "Makes sql_id Unique";
+        $patch['65']['patch'] = "ALTER TABLE  `si_sql_patchmanager` ADD UNIQUE (`sql_id`)";
+		$patch['65']['date'] = "20070506";
+		
+		$patch['66']['name'] = "Removes sql_patch_ref";
+        $patch['66']['patch'] = "ALTER TABLE `si_sql_patchmanager` DROP `sql_patch_ref`";
+		$patch['66']['date'] = "20070506";
+		
+		$patch['67']['name'] = "Remove Primary Key frem sql_patchmanager";
+        $patch['67']['patch'] = "ALTER TABLE `si_sql_patchmanager` DROP PRIMARY KEY";
+		$patch['67']['date'] = "20070506";
+
+
 
