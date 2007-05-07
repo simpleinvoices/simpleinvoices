@@ -145,7 +145,7 @@ if ($op === "pay_selected_invoice") {
 </tr>
 <tr>
 	<td class="details_screen">{$LANG['amount']}</td>
-	<td colspan="5"><input type="text" name="ac_amount" size="25" value="{$invoice_owing_Field}" /><a href="docs.php?t=help&p=process_payment_auto_amount." rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+	<td colspan="5"><input type="text" name="ac_amount" size="25" value="{$invoice_owing_Field}" /><a href="docs.php?t=help&p=process_payment_auto_amount" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG['date_formatted']}</td>

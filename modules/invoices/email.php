@@ -124,5 +124,6 @@ else if ($_GET['stage'] == 3 ) {
 $smarty -> assign('biller',$biller);
 $smarty -> assign('customer',$customer);
 $smarty -> assign('invoice',$invoice);
+$smarty -> assign('preferences',$preferences);
 
 ?>
