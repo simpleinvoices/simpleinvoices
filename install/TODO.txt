@@ -31,13 +31,15 @@ Change functions msql_ to mysqli_
 
 insertion.php
 -------------
--todo
-Beta testing...
+-todo	
+Problem of writing right for the variables of connection.
+
 
 
 content.php
 -----------
 -todo
+Just options of connection to be inserted.
 
 
 Languages files
