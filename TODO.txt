@@ -9,10 +9,11 @@
  - sql queries: rename all the old crappy fields from b_name to name etc..
  -- need to write sql queries for all and change all relevant code that references these fields
  -- only need to do for 
- --- products, 
+ --- products, (done_
  --- customers, 
  --- billers, (done)
- --- and invoices
+ --- and invoices (not sure if i will rename)
+ --- and invoices_items (not sure if i will rename)
  --- do the custom fields fields in biller etc.. to - needs to test the result
  - invoice templates - move to smarty and cleanup 
  - Move .sql out of install and back to root (untill the installer is done and included as default)

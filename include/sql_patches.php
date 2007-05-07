@@ -368,41 +368,41 @@ ADD b_co_footer TEXT";
 (20, 'emailpassword', '');";
 		$patch['63']['date'] = "20070503";
 		
-		$patch['61']['name'] = "Alter field name prod_id to id";
-        $patch['61']['patch'] = "ALTER TABLE `si_products` CHANGE `prod_id` `id` INT( 11 ) NOT NULL AUTO_INCREMENT";
-		$patch['61']['date'] = "20070507";
+		$patch['64']['name'] = "Alter field name prod_id to id";
+        $patch['64']['patch'] = "ALTER TABLE `si_products` CHANGE `prod_id` `id` INT( 11 ) NOT NULL AUTO_INCREMENT";
+		$patch['64']['date'] = "20070507";
 
-		$patch['61']['name'] = "Alter field name prod_description to description";
-        $patch['61']['patch'] = "ALTER TABLE `si_products` CHANGE `prod_description` `description` TEXT NOT NULL ";
-		$patch['61']['date'] = "20070507";
+		$patch['65']['name'] = "Alter field name prod_description to description";
+        $patch['65']['patch'] = "ALTER TABLE `si_products` CHANGE `prod_description` `description` TEXT NOT NULL ";
+		$patch['65']['date'] = "20070507";
 		
-		$patch['61']['name'] = "Alter field name prod_unit_price to unit_price";
-        $patch['61']['patch'] = " ALTER TABLE `si_products` CHANGE `prod_unit_price` `unit_price` DECIMAL( 25, 2 ) NULL DEFAULT NULL";
-		$patch['61']['date'] = "20070507";
+		$patch['66']['name'] = "Alter field name prod_unit_price to unit_price";
+        $patch['66']['patch'] = " ALTER TABLE `si_products` CHANGE `prod_unit_price` `unit_price` DECIMAL( 25, 2 ) NULL DEFAULT NULL";
+		$patch['66']['date'] = "20070507";
 
-		$patch['61']['name'] = "Alter field name prod_custom_field1 to custom_field1";
-        $patch['61']['patch'] = "ALTER TABLE `si_products` CHANGE `prod_custom_field1` `custom_field1` VARCHAR( 255 ) NULL DEFAULT NULL";
-		$patch['61']['date'] = "20070507";
+		$patch['67']['name'] = "Alter field name prod_custom_field1 to custom_field1";
+        $patch['67']['patch'] = "ALTER TABLE `si_products` CHANGE `prod_custom_field1` `custom_field1` VARCHAR( 255 ) NULL DEFAULT NULL";
+		$patch['67']['date'] = "20070507";
 
-		$patch['61']['name'] = "Alter field name prod_custom_field2 to custom_field2";
-        $patch['61']['patch'] = "ALTER TABLE `si_products` CHANGE `prod_custom_field2` `custom_field2` VARCHAR( 255 ) NULL DEFAULT NULL";
-		$patch['61']['date'] = "20070507";
+		$patch['68']['name'] = "Alter field name prod_custom_field2 to custom_field2";
+        $patch['68']['patch'] = "ALTER TABLE `si_products` CHANGE `prod_custom_field2` `custom_field2` VARCHAR( 255 ) NULL DEFAULT NULL";
+		$patch['68']['date'] = "20070507";
 
-		$patch['61']['name'] = "Alter field name prod_custom_field3 to custom_field3";
-        $patch['61']['patch'] = "ALTER TABLE `si_products` CHANGE `prod_custom_field3` `custom_field3` VARCHAR( 255 ) NULL DEFAULT NULL";
-		$patch['61']['date'] = "20070507";
+		$patch['69']['name'] = "Alter field name prod_custom_field3 to custom_field3";
+        $patch['69']['patch'] = "ALTER TABLE `si_products` CHANGE `prod_custom_field3` `custom_field3` VARCHAR( 255 ) NULL DEFAULT NULL";
+		$patch['69']['date'] = "20070507";
 
-		$patch['61']['name'] = "Alter field name prod_custom_field4 to custom_field4";
-        $patch['61']['patch'] = "ALTER TABLE `si_products` CHANGE `prod_custom_field4` `custom_field4` VARCHAR( 255 ) NULL DEFAULT NULL";
-		$patch['61']['date'] = "20070507";
+		$patch['70']['name'] = "Alter field name prod_custom_field4 to custom_field4";
+        $patch['70']['patch'] = "ALTER TABLE `si_products` CHANGE `prod_custom_field4` `custom_field4` VARCHAR( 255 ) NULL DEFAULT NULL";
+		$patch['70']['date'] = "20070507";
 		
-		$patch['61']['name'] = "Alter field name prod_notes to notes";
-        $patch['61']['patch'] = "ALTER TABLE `si_products` CHANGE `prod_notes` `notes` TEXT NOT NULL";
-		$patch['61']['date'] = "20070507";
+		$patch['71']['name'] = "Alter field name prod_notes to notes";
+        $patch['71']['patch'] = "ALTER TABLE `si_products` CHANGE `prod_notes` `notes` TEXT NOT NULL";
+		$patch['71']['date'] = "20070507";
 
-		$patch['61']['name'] = "Alter field name prod_custom_field2 to custom_field2";
-        $patch['61']['patch'] = "ALTER TABLE `si_products` CHANGE `prod_enabled` `enabled` VARCHAR( 1 ) NOT NULL DEFAULT '1'";
-		$patch['61']['date'] = "20070507";
+		$patch['72']['name'] = "Alter field name prod_custom_field2 to custom_field2";
+        $patch['72']['patch'] = "ALTER TABLE `si_products` CHANGE `prod_enabled` `enabled` VARCHAR( 1 ) NOT NULL DEFAULT '1'";
+		$patch['72']['date'] = "20070507";
 /*
  * Not sure about these patches		
 		$patch['64']['name'] = "Removes autoincrement from sql_id";
