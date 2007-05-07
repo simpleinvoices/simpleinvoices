@@ -28,6 +28,7 @@
  -- http://www.rfc-editor.org/rfc/rfc4646.txt
  -- http://www.iana.org/assignments/language-subtag-registry
  - Add redirector after the sql patches have run
+ - Defautls: on all screens that reference systemdeefautls (ie biller etc..) make sure that the default item is working correctly
 
 -done
  - sql patch: reset default invoices template to default - Done

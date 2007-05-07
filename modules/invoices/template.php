@@ -247,6 +247,8 @@ if (isset($_GET['export'])) {
 		$smarty -> assign('pref',$pref);
 		$smarty -> assign('logo',$logo);
 		$smarty -> assign('template',$template);
+		$smarty -> assign('product_cf',$product_cf);
+		$smarty -> assign('product',$product);
 		$smarty -> assign('master_invoices',$master_invoices);
 		$smarty -> assign('template_path',$template_path);
 		$smarty -> assign('css',$css);

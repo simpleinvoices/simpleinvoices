@@ -84,7 +84,7 @@
         {/if}
 
 		{php}
-		       echo  merge_address($biller[city], $biller[state], $biller[zip_code], $biller[street_address], $biller[street_address2],'tbl1-left','tbl1-right',3);
+		       echo  merge_address($biller.city, $biller.state, $biller.zip_code, $biller.street_address, $biller.street_address2,'tbl1-left','tbl1-right',3);
 		{/php}
 
 
@@ -97,9 +97,9 @@
 
 	{php}
         
-	echo print_if_not_null($LANG['phone_short'], $biller[phone],'tbl1-left','tbl1-right',3);
-	echo print_if_not_null($LANG['fax'], $biller[fax],'tbl1-left','tbl1-right',3);
-	echo print_if_not_null($LANG['mobile_short'], $biller[mobile_phone],'tbl1-left','tbl1-right',3);
+	echo print_if_not_null($LANG.phone_short, $biller.phone,'tbl1-left','tbl1-right',3);
+	echo print_if_not_null($LANG.fax, $biller.fax,'tbl1-left','tbl1-right',3);
+	echo print_if_not_null($LANG.mobile_short, $biller.mobile_phone,'tbl1-left','tbl1-right',3);
 
 
         echo print_if_not_null($LANG['email'], $biller[email],'tbl1-left','tbl1-right',3);
