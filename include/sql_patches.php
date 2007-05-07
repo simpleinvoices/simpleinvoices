@@ -1,7 +1,7 @@
 <?php
 	$patch['0']['name'] = "Start";
 	$patch['0']['patch'] = "SHOW TABLES LIKE 'test'";
-    $patch['0']['date'] = "20060514";
+	$patch['0']['date'] = "20060514";
 
 	$patch['1']['name'] = "Create si_sql_patchmanger table";
 	$patch['1']['patch'] = "CREATE TABLE si_sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 50 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) TYPE = MYISAM)";
@@ -400,7 +400,7 @@ ADD b_co_footer TEXT";
         $patch['71']['patch'] = "ALTER TABLE `si_products` CHANGE `prod_notes` `notes` TEXT NOT NULL";
 	$patch['71']['date'] = "20070507";
 
-	$patch['72']['name'] = "Alter field name prod_custom_field2 to custom_field2";
+	$patch['72']['name'] = "Alter field name prod_enabled to enabled";
         $patch['72']['patch'] = "ALTER TABLE `si_products` CHANGE `prod_enabled` `enabled` VARCHAR( 1 ) NOT NULL DEFAULT '1'";
 	$patch['72']['date'] = "20070507";
 /*

@@ -7,12 +7,13 @@ $sql = "SELECT * FROM {$tb_prefix}sql_patchmanager ORDER BY sql_id";
 $query = mysql_query($sql) or die(mysql_error());
 
 echo <<<EOD
-<h2>Here is a list of all Sql-patches</h2>
+<h2>Database patches applied to Simple Invoices</h2>
+<hr></hr>
 <table align="center">
 <tr>
-<th>SQL ID</th>
-<th>SQL Patch</th>
-<th>SQL Release</th>
+<th class='sortable'>Patch ID</th>
+<th class='sortable'>Description</th>
+<th class='sortable'>Release</th>
 </tr>
 EOD;
 
@@ -20,9 +21,9 @@ while ($patch = mysql_fetch_array($query)) {
 	
 	echo "
 	<tr>
-	<td>$patch[sql_id]</td>
-	<td>$patch[sql_patch]</td>
-	<td>$patch[sql_patch]</td>
+	<td class='index_table'>$patch[sql_patch_ref]</td>
+	<td class='index_table'>$patch[sql_patch]</td>
+	<td class='index_table'>$patch[sql_release]</td>
 	</tr>";
 
 }

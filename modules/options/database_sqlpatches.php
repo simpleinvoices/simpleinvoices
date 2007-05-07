@@ -12,7 +12,7 @@ function getNumberOfPatches() {
 	global $tb_prefix;
 	
 
-	$check_patches_sql = "SELECT count(sql_id) AS count FROM {$tb_prefix}sql_patchmanager ";
+	$check_patches_sql = "SELECT count(sql_patch) AS count FROM {$tb_prefix}sql_patchmanager ";
 	$patches_result = mysql_query($check_patches_sql) or die(mysql_error());
 		
 	$patches = mysql_fetch_array($patches_result);
@@ -38,7 +38,10 @@ function runPatches() {
 
 
 		$display_block .= <<<EOD
-		<tr><td><br>The database patches have now been applied. You can now start working with simpleinvoices.<br /><a href="index.php">HOME</a></tr>
+		<br>
+		<b>Simple Invoices :: Database Upgrade Manager</b><br />
+		<hr />
+		<tr><td><br>The database patches have now been applied. You can now start working with Simple Invoices.<br /><p align=middle><br /><a href="index.php">HOME</a></p></tr>
 		</table>
 EOD;
 
@@ -67,7 +70,7 @@ function listPatches() {
 	//if(mysql_num_rows(mysql_query("SHOW TABLES LIKE '{$tb_prefix}sql_patchmanager'")) == 1) {
 
 		$display_block = <<<EOD
-		<b>Database Upgrade Manager</b><br />
+		<b>Simple Invoices :: Database Upgrade Manager</b><br /><br />
 		
 		Your version of Simple Invoices has been upgraded<br><br>  
 		With this new release there are database patches that need to be applied<br><br>
@@ -108,7 +111,7 @@ EOD;
 
 function check_sql_patch($check_sql_patch_ref, $check_sql_patch_field) {
     global $tb_prefix;
-	$sql = "SELECT * FROM {$tb_prefix}sql_patchmanager WHERE sql_id = $check_sql_patch_ref" ;
+	$sql = "SELECT * FROM {$tb_prefix}sql_patchmanager WHERE sql_patch_ref = $check_sql_patch_ref" ;
 
 	$query = mysql_query($sql) or die(mysql_error());
 
@@ -126,7 +129,7 @@ function run_sql_patch($id, $patch) {
 
 	global $tb_prefix;
 
-	$sql = "SELECT * FROM {$tb_prefix}sql_patchmanager WHERE sql_id = $id" ;
+	$sql = "SELECT * FROM {$tb_prefix}sql_patchmanager WHERE sql_patch_ref = $id" ;
 	$query = mysql_query($sql) or die(mysql_error());
 	
 	//echo $sql;
@@ -150,8 +153,9 @@ EOD;
 		# now update the {$tb_prefix}sql_patchmanager table
 		
 		
-		$sql_update = "INSERT INTO {$tb_prefix}sql_patchmanager ( sql_id , sql_patch , sql_release , sql_statement ) VALUES ($id,'$patch[name]',$patch[date],'')";
-		echo $sql_update;
+		$sql_update = "INSERT INTO {$tb_prefix}sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ($id,'$patch[name]',$patch[date],'')";
+		
+		/*echo $sql_update;*/
 
 		mysql_query($sql_update) or die(mysql_error());
 
