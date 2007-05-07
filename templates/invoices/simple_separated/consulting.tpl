@@ -11,7 +11,7 @@
 
 			<tr class="tbl1-left tbl1-right">
 				<td class="tbl1-left" >{$master_invoice.inv_it_quantity_formatted}</td>
-				<td>{$product.prod_description}</td><td class="tbl1-right" colspan="5"></td>
+				<td>{$product.description}</td><td class="tbl1-right" colspan="5"></td>
 			</tr>
 			
                 <tr>       

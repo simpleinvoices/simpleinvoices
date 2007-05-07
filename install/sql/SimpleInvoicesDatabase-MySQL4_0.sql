@@ -21,27 +21,27 @@ CREATE TABLE `si_account_payments` (
 -- 
 
 CREATE TABLE `si_biller` (
-  `b_id` int(10) NOT NULL auto_increment,
-  `b_name` varchar(50) default NULL,
-  `b_street_address` varchar(50) default NULL,
-  `b_street_address2` varchar(50) default NULL,
-  `b_city` varchar(50) default NULL,
-  `b_state` varchar(50) default NULL,
-  `b_zip_code` varchar(50) default NULL,
-  `b_country` varchar(100) default NULL,
-  `b_phone` varchar(50) default NULL,
-  `b_mobile_phone` varchar(50) default NULL,
-  `b_fax` varchar(50) default NULL,
-  `b_email` varchar(50) default NULL,
-  `b_co_logo` varchar(50) default NULL,
-  `b_co_footer` text,
-  `b_notes` text,
+  `id` int(10) NOT NULL auto_increment,
+  `name` varchar(50) default NULL,
+  `street_address` varchar(50) default NULL,
+  `street_address2` varchar(50) default NULL,
+  `city` varchar(50) default NULL,
+  `state` varchar(50) default NULL,
+  `zip_code` varchar(50) default NULL,
+  `country` varchar(100) default NULL,
+  `phone` varchar(50) default NULL,
+  `mobile_phone` varchar(50) default NULL,
+  `fax` varchar(50) default NULL,
+  `email` varchar(50) default NULL,
+  `logo` varchar(50) default NULL,
+  `footer` text,
+  `notes` text,
   `custom_field1` varchar(50) default NULL,
   `custom_field2` varchar(50) default NULL,
   `custom_field3` varchar(50) default NULL,
   `custom_field4` varchar(50) default NULL,
-  `b_enabled` varchar(1) NOT NULL default '1',
-  PRIMARY KEY  (`b_id`)
+  `enabled` varchar(1) NOT NULL default '1',
+  PRIMARY KEY  (`id`)
 ) TYPE=MyISAM  AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
@@ -202,16 +202,16 @@ CREATE TABLE `si_preferences` (
 -- 
 
 CREATE TABLE `si_products` (
-  `prod_id` int(11) NOT NULL auto_increment,
-  `prod_description` text NOT NULL,
-  `prod_unit_price` decimal(25,2) default NULL,
-  `prod_custom_field1` varchar(50) default NULL,
-  `prod_custom_field2` varchar(50) default NULL,
-  `prod_custom_field3` varchar(50) default NULL,
-  `prod_custom_field4` varchar(50) default NULL,
-  `prod_notes` text NOT NULL,
-  `prod_enabled` varchar(1) NOT NULL default '1',
-  PRIMARY KEY  (`prod_id`)
+  `id` int(11) NOT NULL auto_increment,
+  `description` text NOT NULL,
+  `unit_price` decimal(25,2) default NULL,
+  `custom_field1` varchar(50) default NULL,
+  `custom_field2` varchar(50) default NULL,
+  `custom_field3` varchar(50) default NULL,
+  `custom_field4` varchar(50) default NULL,
+  `notes` text NOT NULL,
+  `enabled` varchar(1) NOT NULL default '1',
+  PRIMARY KEY  (`id`)
 ) TYPE=MyISAM  AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------

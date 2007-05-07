@@ -12,7 +12,7 @@
 	{foreach from=$master_invoices item=master_invoice}
 						<tr class="tbl1" >
 				<td class="tbl1">{$master_invoice.inv_it_quantity_formatted}</td>
-				<td class="tbl1">{$product.prod_description}</td>
+				<td class="tbl1">{$product.description}</td>
 				<td class="tbl1">{$pref.pref_currency_sign}{$master_invoice.inv_it_unit_price}</td>
 				<td class="tbl1">{$pref.pref_currency_sign}{$master_invoice.inv_it_gross_total}</td>
 				<td class="tbl1">{$pref.pref_currency_sign}{$master_invoice.inv_it_tax_amount}</td>

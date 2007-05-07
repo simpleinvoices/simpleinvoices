@@ -197,7 +197,7 @@
 
 			<tr class="tbl1" >
 				<td class="tbl1">{$master_invoice.inv_it_quantity_formatted}</td>
-				<td class="tbl1">{$product.prod_description}</td>
+				<td class="tbl1">{$product.description}</td>
 				<td class="tbl1">{$pref.pref_currency_sign}{$master_invoice.inv_it_unit_price}</td>
 				<td class="tbl1">{$pref.pref_currency_sign}{$master_invoice.inv_it_gross_total}</td>
 				<td class="tbl1">{$pref.pref_currency_sign}{$master_invoice.inv_it_tax_amount}</td>
@@ -208,16 +208,16 @@
                                                 <table width="100%">
                                                         <tr>
 			{php}
-                $itemised_line .= inv_itemised_cf($product_cf["custom_field_label1"], $product[prod_custom_field1]);
+                $itemised_line .= inv_itemised_cf($product_cf["custom_field_label1"], $product[custom_field1]);
                 $inv_it_tr++;
                 $itemised_line .= do_tr($inv_it_tr,'blank-class');
-                $itemised_line .= inv_itemised_cf($product_cf[custom_field_label2], $product[prod_custom_field2]);
+                $itemised_line .= inv_itemised_cf($product_cf[custom_field_label2], $product[custom_field2]);
                 $inv_it_tr++;
                 $itemised_line .= do_tr($inv_it_tr,'blank-class');
-                $itemised_line .= inv_itemised_cf($product_cf[custom_field_label3], $product[prod_custom_field3]);
+                $itemised_line .= inv_itemised_cf($product_cf[custom_field_label3], $product[custom_field3]);
                 $inv_it_tr++;
                 $itemised_line .= do_tr($inv_it_tr,'blank-class');
-                $itemised_line .= inv_itemised_cf($product_cf[custom_field_label4], $product[prod_custom_field4]);
+                $itemised_line .= inv_itemised_cf($product_cf[custom_field_label4], $product[custom_field4]);
                 $inv_it_tr++;
                 $itemised_line .= do_tr($inv_it_tr,'blank-class');
                 $inv_it_tr = 0;
@@ -246,7 +246,7 @@
 	
 				<tr class="tbl1-left tbl1-right">
 				<td class="tbl1-left" >{$master_invoice.inv_it_quantity_formatted}</td>
-				<td>{$product.prod_description}</td><td class="tbl1-right" colspan="5"></td>
+				<td>{$product.description}</td><td class="tbl1-right" colspan="5"></td>
 			</tr>
 			
                 <tr>       
@@ -255,16 +255,16 @@
                                                         <tr>
 				{php}
 
-                $consulting_line .= inv_itemised_cf($product_cf[custom_field_label1], $product[prod_custom_field1]);
+                $consulting_line .= inv_itemised_cf($product_cf[custom_field_label1], $product[custom_field1]);
                 $inv_it_tr++;
                 $consulting_line .= do_tr($inv_it_tr,'blank-class');
-                $consulting_line .= inv_itemised_cf($product_cf[custom_field_label2], $product[prod_custom_field2]);
+                $consulting_line .= inv_itemised_cf($product_cf[custom_field_label2], $product[custom_field2]);
                 $inv_it_tr++;
                 $consulting_line .= do_tr($inv_it_tr,'blank-class');
-                $consulting_line .= inv_itemised_cf($product_cf[custom_field_label3], $product[prod_custom_field3]);
+                $consulting_line .= inv_itemised_cf($product_cf[custom_field_label3], $product[custom_field3]);
                 $inv_it_tr++;
                 $consulting_line .= do_tr($inv_it_tr,'blank-class');
-                $consulting_line .= inv_itemised_cf($product_cf[custom_field_label4], $product[prod_custom_field4]);
+                $consulting_line .= inv_itemised_cf($product_cf[custom_field_label4], $product[custom_field4]);
                 $inv_it_tr++;
                 $consulting_line .= do_tr($inv_it_tr,'blank-class');
                 $inv_it_tr = 0;

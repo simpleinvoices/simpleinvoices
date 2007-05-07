@@ -17,14 +17,14 @@ $sql = "INSERT into
 	VALUES
 		(	
 			'',
-			'$_POST[prod_description]',
-			'$_POST[prod_unit_price]',
-			'$_POST[prod_custom_field1]',
-			'$_POST[prod_custom_field2]',
-			'$_POST[prod_custom_field3]',
-			'$_POST[prod_custom_field4]',
-			'$_POST[prod_notes]',
-			'$_POST[prod_enabled]'
+			'$_POST[description]',
+			'$_POST[unit_price]',
+			'$_POST[custom_field1]',
+			'$_POST[custom_field2]',
+			'$_POST[custom_field3]',
+			'$_POST[custom_field4]',
+			'$_POST[notes]',
+			'$_POST[enabled]'
 		)";
 
 if (mysql_query($sql, $conn)) {
@@ -50,16 +50,16 @@ mysql_select_db("$db_name",$conn);
 		$sql = "UPDATE
 				{$tb_prefix}products
 			SET
-				prod_description = '$_POST[prod_description]',
-				prod_enabled = '$_POST[prod_enabled]',
-				prod_notes = '$_POST[prod_notes]',
-				prod_custom_field1 = '$_POST[prod_custom_field1]',
-				prod_custom_field2 = '$_POST[prod_custom_field2]',
-				prod_custom_field3 = '$_POST[prod_custom_field3]',
-				prod_custom_field4 = '$_POST[prod_custom_field4]',
-				prod_unit_price = '$_POST[prod_unit_price]'
+				description = '$_POST[description]',
+				enabled = '$_POST[enabled]',
+				notes = '$_POST[notes]',
+				custom_field1 = '$_POST[custom_field1]',
+				custom_field2 = '$_POST[custom_field2]',
+				custom_field3 = '$_POST[custom_field3]',
+				custom_field4 = '$_POST[custom_field4]',
+				unit_price = '$_POST[unit_price]'
 			WHERE
-				prod_id = '$_GET[submit]'";
+				id = '$_GET[submit]'";
 
 		if (mysql_query($sql, $conn)) {
 			$display_block = $LANG['save_product_success'];

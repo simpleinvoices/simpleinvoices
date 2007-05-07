@@ -149,16 +149,16 @@ CREATE TABLE `si_preferences` (
 
 
 CREATE TABLE `si_products` (
-  `prod_id` int(11) NOT NULL auto_increment,
-  `prod_description` text NOT NULL,
-  `prod_unit_price` decimal(25,2) default NULL,
-  `prod_custom_field1` varchar(50) default NULL,
-  `prod_custom_field2` varchar(50) default NULL,
-  `prod_custom_field3` varchar(50) default NULL,
-  `prod_custom_field4` varchar(50) default NULL,
-  `prod_notes` text NOT NULL,
-  `prod_enabled` varchar(1) NOT NULL default '1',
-  PRIMARY KEY  (`prod_id`)
+  `id` int(11) NOT NULL auto_increment,
+  `description` text NOT NULL,
+  `unit_price` decimal(25,2) default NULL,
+  `custom_field1` varchar(50) default NULL,
+  `custom_field2` varchar(50) default NULL,
+  `custom_field3` varchar(50) default NULL,
+  `custom_field4` varchar(50) default NULL,
+  `notes` text NOT NULL,
+  `enabled` varchar(1) NOT NULL default '1',
+  PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 

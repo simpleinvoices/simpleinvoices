@@ -5,7 +5,7 @@ checkLogin();
 
 
 
-$sql = "select * from {$tb_prefix}products ORDER BY prod_description";
+$sql = "select * from {$tb_prefix}products ORDER BY description";
 
 $result = mysql_query($sql, $conn) or die(mysql_error());
 $number_of_rows = mysql_num_rows($result);
@@ -41,12 +41,12 @@ EOD;
 
 while ($prod = mysql_fetch_array($result)) {
 	/*
-	$prod_idField = $Array['prod_id'];
-	$prod_descriptionField = $Array['prod_description'];
-	$prod_enabledField = $Array['prod_enabled'];
-	$prod_unit_priceField = $Array['prod_unit_price'];
+	$prod_idField = $Array['id'];
+	$prod_descriptionField = $Array['description'];
+	$prod_enabledField = $Array['enabled'];
+	$prod_unit_priceField = $Array['unit_price'];
 	*/
-	if ($prod['prod_enabled'] == 1) {
+	if ($prod['enabled'] == 1) {
 		$wording_for_enabled = $LANG['enabled'];
 	} else {
 		$wording_for_enabled = $LANG['disabled'];
@@ -56,12 +56,12 @@ while ($prod = mysql_fetch_array($result)) {
 	<tr class="index_table">
 	<td class="index_table">
 	<a class="index_table"
-	 href="index.php?module=products&view=details&submit={$prod['prod_id']}&action=view">{$LANG['view']}</a> ::
+	 href="index.php?module=products&view=details&submit={$prod['id']}&action=view">{$LANG['view']}</a> ::
 	<a class="index_table"
-	 href="index.php?module=products&view=details&submit={$prod['prod_id']}&action=edit">{$LANG['edit']}</a> </td>
-	<td class="index_table">{$prod['prod_id']}</td>
-	<td class="index_table">{$prod['prod_description']}</td>
-	<td class="index_table">{$prod['prod_unit_price']}</td>
+	 href="index.php?module=products&view=details&submit={$prod['id']}&action=edit">{$LANG['edit']}</a> </td>
+	<td class="index_table">{$prod['id']}</td>
+	<td class="index_table">{$prod['description']}</td>
+	<td class="index_table">{$prod['unit_price']}</td>
 	<td class="index_table">{$LANG['enabled']}</td>
 	</tr>
 

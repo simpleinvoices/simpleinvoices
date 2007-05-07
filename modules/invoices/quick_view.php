@@ -307,7 +307,7 @@ EOD;
 	
 	
 		#products query
-		$print_products = "SELECT * FROM {$tb_prefix}products WHERE prod_id = $invoice_items[inv_it_product_id]";
+		$print_products = "SELECT * FROM {$tb_prefix}products WHERE id = $invoice_items[inv_it_product_id]";
 		$result_print_products = mysql_query($print_products, $conn) or die(mysql_error());
 	
 		
@@ -320,7 +320,7 @@ EOD;
 			$invoice_total_taxField_formatted = number_format($invoice_total_taxField,2);
 		
 			#calculation for each line item
-			$gross_total_itemised = $product['prod_unit_price'] * $invoice_items['inv_it_quantity'] ;
+			$gross_total_itemised = $product['unit_price'] * $invoice_items['inv_it_quantity'] ;
 		
 			#calculation for the Invoice Total
 	
@@ -331,20 +331,20 @@ EOD;
 	
 			$display_block_details .=  <<<EOD
 		        <tr>
-	                <td>$invoice_items[inv_it_quantity]</td><td>$product[prod_description]</td><td>$preferences[pref_currency_sign]$invoice_items[inv_it_unit_price]</td><td>$preferences[pref_currency_sign]$invoice_items[inv_it_gross_total]</td><td>$preferences[pref_currency_sign]$invoice_items[inv_it_tax_amount]</td><td>$invoice_items[inv_it_total]</td>
+	                <td>$invoice_items[inv_it_quantity]</td><td>$product[description]</td><td>$preferences[pref_currency_sign]$invoice_items[inv_it_unit_price]</td><td>$preferences[pref_currency_sign]$invoice_items[inv_it_gross_total]</td><td>$preferences[pref_currency_sign]$invoice_items[inv_it_tax_amount]</td><td>$invoice_items[inv_it_total]</td>
 	        </tr>
                 <tr  class='itemised' >       
                         <td></td>
 				<td colspan=5>
 					<table width=100%>
 					<tr>
-						<td width=50% class='details_screen'>{$productCustomFieldLabel['1']}: $product[prod_custom_field1]</td><td width=50% class='details_screen'>{$productCustomFieldLabel['2']}:
-$product[prod_custom_field2]</td>
+						<td width=50% class='details_screen'>{$productCustomFieldLabel['1']}: $product[custom_field1]</td><td width=50% class='details_screen'>{$productCustomFieldLabel['2']}:
+$product[custom_field2]</td>
                  			</tr>
 			                <tr class='itemised' >       
 			                       <td width=50% class='details_screen'>{$productCustomFieldLabel['3']}:
-	$product[prod_custom_field3]</td><td width=50% class='details_screen'>{$productCustomFieldLabel['4']}:
-	$product[prod_custom_field4]</td>
+	$product[custom_field3]</td><td width=50% class='details_screen'>{$productCustomFieldLabel['4']}:
+	$product[custom_field4]</td>
 			                 </tr>
 					</table>
 				</td>
@@ -366,21 +366,21 @@ EOD;
 
 	        $display_block_details .=  <<<EOD
         	<tr>
-	                <td>$invoice_items[inv_it_quantity]</td><td>$product[prod_description]</td><td class='show-consulting'>$stripped_item_description</td><td class='consulting'></td><td>$preferences[pref_currency_sign]$invoice_items[inv_it_unit_price]</td><td>$preferences[pref_currency_sign]$invoice_items[inv_it_gross_total]</td><td>$preferences[pref_currency_sign]$invoice_items[inv_it_tax_amount]</td><td align=right>$preferences[pref_currency_sign]$invoice_items[inv_it_total]</td>
+	                <td>$invoice_items[inv_it_quantity]</td><td>$product[description]</td><td class='show-consulting'>$stripped_item_description</td><td class='consulting'></td><td>$preferences[pref_currency_sign]$invoice_items[inv_it_unit_price]</td><td>$preferences[pref_currency_sign]$invoice_items[inv_it_gross_total]</td><td>$preferences[pref_currency_sign]$invoice_items[inv_it_tax_amount]</td><td align=right>$preferences[pref_currency_sign]$invoice_items[inv_it_total]</td>
 		</tr>
 		<tr  class='consulting' >	
                         <td></td>
                                 <td colspan=6>
                                         <table width=100%>
                                         <tr>
-                                                <td width=50% class='details_screen'>$prod_custom_field_label1: $product[prod_custom_field1]</td><td width=50% class='details_screen'>$prod_custom_field_label2: $product[prod_custom_field2]</td>
+                                                <td width=50% class='details_screen'>$prod_custom_field_label1: $product[custom_field1]</td><td width=50% class='details_screen'>$prod_custom_field_label2: $product[custom_field2]</td>
                                         </tr>
                                         <tr>       
-                                               <td width=50% class='details_screen'>$prod_custom_field_label3: $product[prod_custom_field3]</td><td width=50% class='details_screen'>$prod_custom_field_label4: $product[prod_custom_field4]</td>
+                                               <td width=50% class='details_screen'>$prod_custom_field_label3: $product[custom_field3]</td><td width=50% class='details_screen'>$prod_custom_field_label4: $product[custom_field4]</td>
                                          </tr>
                                         </table>
                                 </td>
-	<!--		<td></td><td colspan=6 class='details_screen consulting'>$prod_custom_field_label1: $product[prod_custom_field1], $prod_custom_field_label2: $product[prod_custom_field2], $prod_custom_field_label3: $product[prod_custom_field3], $prod_custom_field_label4: $product[prod_custom_field4]</td> -->
+	<!--		<td></td><td colspan=6 class='details_screen consulting'>$prod_custom_field_label1: $product[custom_field1], $prod_custom_field_label2: $product[custom_field2], $prod_custom_field_label3: $product[custom_field3], $prod_custom_field_label4: $product[custom_field4]</td> -->
 		 </tr>
 EOD;
 		if ($invoice_items['inv_it_description'] != null) {

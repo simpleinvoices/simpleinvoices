@@ -194,7 +194,7 @@ if (isset($_GET['export'])) {
 		$master_invoice['inv_it_total'] = number_format($master_invoice['inv_it_total'],2);
 		
 		#products query
-		$print_products = "SELECT * FROM {$tb_prefix}products WHERE prod_id = $master_invoice[inv_it_product_id]";
+		$print_products = "SELECT * FROM {$tb_prefix}products WHERE id = $master_invoice[inv_it_product_id]";
 		$result_print_products = mysql_query($print_products, $conn) or die(mysql_error());
 		
 		$product = mysql_fetch_array($result_print_products);
@@ -203,7 +203,7 @@ if (isset($_GET['export'])) {
 	
 	
 		#calculation for each line item
-		$gross_total_itemised = $product['prod_unit_price'] * $master_invoice['inv_it_quantity'] ;
+		$gross_total_itemised = $product['unit_price'] * $master_invoice['inv_it_quantity'] ;
 		
 		$master_invoices[$i] = $master_invoice;
 	

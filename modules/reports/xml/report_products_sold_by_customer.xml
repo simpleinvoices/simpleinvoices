@@ -35,7 +35,7 @@
 </ROW>
 
 	<ROW>
-<COL CELLCLASS="GROUP_LAYER">prod_description</COL>
+<COL CELLCLASS="GROUP_LAYER">description</COL>
 <COL CELLCLASS="GROUP_LAYER">sum(si_invoice_items.inv_it_quantity)</COL>
 </ROW>
 </HEADER>
@@ -51,7 +51,7 @@
 	<FIELDS>
 
 	<ROW>
-<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER" >prod_description</COL>
+<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER" >description</COL>
 <COL TYPE="FIELD" CELLCLASS="GROUP_LAYER" NUMBERFORMATEX="2">sum(si_invoice_items.inv_it_quantity)</COL>
 </ROW>
 </FIELDS>

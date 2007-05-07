@@ -229,14 +229,14 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 	};
 /*
 	#product info query
-	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id ='$_POST[select_products]'";
+	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id ='$_POST[select_products]'";
 	$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
 		$prod_idField = $Array_tax['tax_id'];
-		$prod_descriptionField = $Array_tax['prod_description'];
-		$prod_unit_priceField = $Array_tax['prod_unit_price'];
+		$prod_descriptionField = $Array_tax['description'];
+		$prod_unit_priceField = $Array_tax['unit_price'];
 
 	};
 */
@@ -258,14 +258,14 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 		}
 			
 
-		$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id =$product_line_item";
+		$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id =$product_line_item";
 		$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 
 
 		while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
 			$prod_idField = $Array_tax['tax_id'];
-			$prod_descriptionField = $Array_tax['prod_description'];
-			$prod_unit_priceField = $Array_tax['prod_unit_price'];
+			$prod_descriptionField = $Array_tax['description'];
+			$prod_unit_priceField = $Array_tax['unit_price'];
 
 		};
 
@@ -345,14 +345,14 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 	};
 /*
 	#product info query
-	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id ='$_POST[select_products]'";
+	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id ='$_POST[select_products]'";
 	$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
 		$prod_idField = $Array_tax['tax_id'];
-		$prod_descriptionField = $Array_tax['prod_description'];
-		$prod_unit_priceField = $Array_tax['prod_unit_price'];
+		$prod_descriptionField = $Array_tax['description'];
+		$prod_unit_priceField = $Array_tax['unit_price'];
 
 	};
 */
@@ -379,15 +379,15 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 		}
 		
 
-		$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id =$product_line_item";
+		$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id =$product_line_item";
 		$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 		
 		#$display_block .= "step 2 - 5";
 		
 		while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
 			$prod_idField = $Array_tax['tax_id'];
-			$prod_descriptionField = $Array_tax['prod_description'];
-			$prod_unit_priceField = $Array_tax['prod_unit_price'];
+			$prod_descriptionField = $Array_tax['description'];
+			$prod_unit_priceField = $Array_tax['unit_price'];
 
 		};
 
@@ -500,14 +500,14 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 	};
 /*
 	#product info query
-	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id ='$_POST[select_products]'";
+	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id ='$_POST[select_products]'";
 	$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
 		$prod_idField = $Array_tax['tax_id'];
-		$prod_descriptionField = $Array_tax['prod_description'];
-		$prod_unit_priceField = $Array_tax['prod_unit_price'];
+		$prod_descriptionField = $Array_tax['description'];
+		$prod_unit_priceField = $Array_tax['unit_price'];
 
 	};
 */
@@ -529,14 +529,14 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 			break;
 		}
 
-		$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id =$product_line_item";
+		$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id =$product_line_item";
        		$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 
 
 		while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
 			$prod_idField = $Array_tax['tax_id'];
-			$prod_descriptionField = $Array_tax['prod_description'];
-			$prod_unit_priceField = $Array_tax['prod_unit_price'];
+			$prod_descriptionField = $Array_tax['description'];
+			$prod_unit_priceField = $Array_tax['unit_price'];
 
 		};
 
@@ -613,14 +613,14 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 	};
 /*
 	#product info query
-	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id ='$_POST[select_products]'";
+	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id ='$_POST[select_products]'";
 	$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
 		$prod_idField = $Array_tax['tax_id'];
-		$prod_descriptionField = $Array_tax['prod_description'];
-		$prod_unit_priceField = $Array_tax['prod_unit_price'];
+		$prod_descriptionField = $Array_tax['description'];
+		$prod_unit_priceField = $Array_tax['unit_price'];
 
 	};
 */
@@ -648,15 +648,15 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 		       /* break;*/
 		}
 
-		$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE prod_id =$product_line_item";
+		$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id =$product_line_item";
 		$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
 
 		#$display_block .= "step 2 - 5  <br> $consulting_item_note ";
 
 		while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
 			$prod_idField = $Array_tax['tax_id'];
-			$prod_descriptionField = $Array_tax['prod_description'];
-			$prod_unit_priceField = $Array_tax['prod_unit_price'];
+			$prod_descriptionField = $Array_tax['description'];
+			$prod_unit_priceField = $Array_tax['unit_price'];
 
 		};
 

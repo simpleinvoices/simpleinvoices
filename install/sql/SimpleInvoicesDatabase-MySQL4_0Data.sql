@@ -10,7 +10,7 @@ INSERT INTO `si_account_payments` (`ac_id`, `ac_inv_id`, `ac_amount`, `ac_notes`
 -- Dumping data for table `si_biller`
 -- 
 
-INSERT INTO `si_biller` (`b_id`, `b_name`, `b_street_address`, `b_street_address2`, `b_city`, `b_state`, `b_zip_code`, `b_country`, `b_phone`, `b_mobile_phone`, `b_fax`, `b_email`, `b_co_logo`, `b_co_footer`, `b_notes`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `b_enabled`) VALUES 
+INSERT INTO `si_biller` (`id`, `name`, `street_address`, `street_address2`, `city`, `state`, `zip_code`, `country`, `phone`, `mobile_phone`, `fax`, `email`, `logo`, `footer`, `notes`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `enabled`) VALUES 
 (1, 'Mr Plough', '43 Evergreen Terace', '', 'Springfield', 'New York', '90245', '', '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'homer@mrplough.com', 'ubuntulogo.png', '', '', '', '7898-87987-87', '', '', '1'),
 (2, 'Homer Simpson', '43 Evergreen Terace', NULL, 'Springfield', 'New York', '90245', NULL, '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'homer@yahoo.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1'),
 (3, 'The Beer Baron', '43 Evergreen Terace', NULL, 'Springfield', 'New York', '90245', NULL, '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'beerbaron@yahoo.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1'),
@@ -122,7 +122,7 @@ INSERT INTO `si_preferences` (`pref_id`, `pref_description`, `pref_currency_sign
 -- Dumping data for table `si_products`
 -- 
 
-INSERT INTO `si_products` (`prod_id`, `prod_description`, `prod_unit_price`, `prod_custom_field1`, `prod_custom_field2`, `prod_custom_field3`, `prod_custom_field4`, `prod_notes`, `prod_enabled`) VALUES 
+INSERT INTO `si_products` (`id`, `description`, `unit_price`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`) VALUES 
 (1, 'IBM Netfinity 5000', 150.00, NULL, NULL, NULL, NULL, '', '1'),
 (2, 'Accouting services - Barney Gumball (hours)', 140.00, 'CVF1', '', '', '', '', '1'),
 (3, 'Weekly ploughing service', 125.00, NULL, NULL, NULL, NULL, '', '1'),

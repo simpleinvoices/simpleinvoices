@@ -26,7 +26,7 @@ $sql_customer = "SELECT * FROM {$tb_prefix}customers where c_enabled != 0 ORDER 
 $result_customer = mysql_query($sql_customer, $conn) or die(mysql_error());
 
 #productr query
-$sql_products = "SELECT * FROM {$tb_prefix}products where prod_enabled != 0 ORDER BY prod_description";
+$sql_products = "SELECT * FROM {$tb_prefix}products where enabled != 0 ORDER BY description";
 $result_products = mysql_query($sql_products, $conn) or die(mysql_error());
 
 
@@ -127,7 +127,7 @@ function line_items($line) {
         $conn = mysql_connect("$db_host","$db_user","$db_password");
         mysql_select_db("$db_name",$conn);
 
-        $sql_products = "SELECT * FROM {$tb_prefix}products where prod_enabled != 0 ORDER BY prod_description";
+        $sql_products = "SELECT * FROM {$tb_prefix}products where enabled != 0 ORDER BY description";
         $result_products = mysql_query($sql_products, $conn) or die(mysql_error());
         
         $string = "";
@@ -146,8 +146,8 @@ EOD;
         	while ($recs_products = mysql_fetch_array($result_products)) {
 
 	                $display_block_products .= <<<EOD
-	                <option value="$recs_products[prod_id]">
-        	                $recs_products[prod_description]</option>
+	                <option value="$recs_products[id]">
+        	                $recs_products[description]</option>
 EOD;
 	        }
 	        }

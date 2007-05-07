@@ -8,7 +8,7 @@ checkLogin();
 $customFieldLabel = getCustomFieldLabels("product");
 
 //if valid then do save
-if ($_POST['prod_description'] != "" ) {
+if ($_POST['description'] != "" ) {
 	include("./modules/products/save.php");
 }
 

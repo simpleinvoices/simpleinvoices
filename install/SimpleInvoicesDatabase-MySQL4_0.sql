@@ -41,34 +41,34 @@ INSERT INTO `si_account_payments` (`ac_id`, `ac_inv_id`, `ac_amount`, `ac_notes`
 -- 
 
 CREATE TABLE `si_biller` (
-  `b_id` int(10) NOT NULL auto_increment,
-  `b_name` varchar(50) default NULL,
-  `b_street_address` varchar(50) default NULL,
-  `b_street_address2` varchar(50) default NULL,
-  `b_city` varchar(50) default NULL,
-  `b_state` varchar(50) default NULL,
-  `b_zip_code` varchar(50) default NULL,
-  `b_country` varchar(100) default NULL,
-  `b_phone` varchar(50) default NULL,
-  `b_mobile_phone` varchar(50) default NULL,
-  `b_fax` varchar(50) default NULL,
-  `b_email` varchar(50) default NULL,
-  `b_co_logo` varchar(50) default NULL,
-  `b_co_footer` text,
-  `b_notes` text,
-  `b_custom_field1` varchar(50) default NULL,
-  `b_custom_field2` varchar(50) default NULL,
-  `b_custom_field3` varchar(50) default NULL,
-  `b_custom_field4` varchar(50) default NULL,
-  `b_enabled` varchar(1) NOT NULL default '1',
-  PRIMARY KEY  (`b_id`)
+  `id` int(10) NOT NULL auto_increment,
+  `name` varchar(50) default NULL,
+  `street_address` varchar(50) default NULL,
+  `street_address2` varchar(50) default NULL,
+  `city` varchar(50) default NULL,
+  `state` varchar(50) default NULL,
+  `zip_code` varchar(50) default NULL,
+  `country` varchar(100) default NULL,
+  `phone` varchar(50) default NULL,
+  `mobile_phone` varchar(50) default NULL,
+  `fax` varchar(50) default NULL,
+  `email` varchar(50) default NULL,
+  `logo` varchar(50) default NULL,
+  `footer` text,
+  `notes` text,
+  `custom_field1` varchar(50) default NULL,
+  `custom_field2` varchar(50) default NULL,
+  `custom_field3` varchar(50) default NULL,
+  `custom_field4` varchar(50) default NULL,
+  `enabled` varchar(1) NOT NULL default '1',
+  PRIMARY KEY  (`id`)
 ) TYPE=MyISAM  AUTO_INCREMENT=5 ;
 
 -- 
 -- Dumping data for table `si_biller`
 -- 
 
-INSERT INTO `si_biller` (`b_id`, `b_name`, `b_street_address`, `b_street_address2`, `b_city`, `b_state`, `b_zip_code`, `b_country`, `b_phone`, `b_mobile_phone`, `b_fax`, `b_email`, `b_co_logo`, `b_co_footer`, `b_notes`, `b_custom_field1`, `b_custom_field2`, `b_custom_field3`, `b_custom_field4`, `b_enabled`) VALUES 
+INSERT INTO `si_biller` (`id`, `name`, `street_address`, `street_address2`, `city`, `state`, `zip_code`, `country`, `phone`, `mobile_phone`, `fax`, `email`, `co_logo`, `co_footer`, `notes`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `enabled`) VALUES 
 (1, 'Mr Plough', '43 Evergreen Terace', '', 'Springfield', 'New York', '90245', '', '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'homer@mrplough.com', 'ubuntulogo.png', '', '', '', '7898-87987-87', '', '', '1'),
 (2, 'Homer Simpson', '43 Evergreen Terace', NULL, 'Springfield', 'New York', '90245', NULL, '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'homer@yahoo.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1'),
 (3, 'The Beer Baron', '43 Evergreen Terace', NULL, 'Springfield', 'New York', '90245', NULL, '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'beerbaron@yahoo.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1'),
@@ -334,23 +334,23 @@ INSERT INTO `si_preferences` (`pref_id`, `pref_description`, `pref_currency_sign
 -- 
 
 CREATE TABLE `si_products` (
-  `prod_id` int(11) NOT NULL auto_increment,
-  `prod_description` text NOT NULL,
-  `prod_unit_price` decimal(25,2) default NULL,
-  `prod_custom_field1` varchar(50) default NULL,
-  `prod_custom_field2` varchar(50) default NULL,
-  `prod_custom_field3` varchar(50) default NULL,
-  `prod_custom_field4` varchar(50) default NULL,
-  `prod_notes` text NOT NULL,
-  `prod_enabled` varchar(1) NOT NULL default '1',
-  PRIMARY KEY  (`prod_id`)
+  `id` int(11) NOT NULL auto_increment,
+  `description` text NOT NULL,
+  `unit_price` decimal(25,2) default NULL,
+  `custom_field1` varchar(50) default NULL,
+  `custom_field2` varchar(50) default NULL,
+  `custom_field3` varchar(50) default NULL,
+  `custom_field4` varchar(50) default NULL,
+  `notes` text NOT NULL,
+  `enabled` varchar(1) NOT NULL default '1',
+  PRIMARY KEY  (`id`)
 ) TYPE=MyISAM  AUTO_INCREMENT=6 ;
 
 -- 
 -- Dumping data for table `si_products`
 -- 
 
-INSERT INTO `si_products` (`prod_id`, `prod_description`, `prod_unit_price`, `prod_custom_field1`, `prod_custom_field2`, `prod_custom_field3`, `prod_custom_field4`, `prod_notes`, `prod_enabled`) VALUES 
+INSERT INTO `si_products` (`id`, `description`, `unit_price`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`) VALUES 
 (1, 'IBM Netfinity 5000', 150.00, NULL, NULL, NULL, NULL, '', '1'),
 (2, 'Accouting services - Barney Gumball (hours)', 140.00, 'CVF1', '', '', '', '', '1'),
 (3, 'Weekly ploughing service', 125.00, NULL, NULL, NULL, NULL, '', '1'),

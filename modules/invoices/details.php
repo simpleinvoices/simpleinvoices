@@ -285,14 +285,14 @@ if (  $_GET['invoice_style'] === 'Total' ) {
 	
 	/* - might not need - can delete after testing
 	#products query
-	$print_products = "SELECT * FROM {$tb_prefix}products WHERE prod_id = $inv_it_product_idField";
+	$print_products = "SELECT * FROM {$tb_prefix}products WHERE id = $inv_it_product_idField";
 	$result_print_products = mysql_query($print_products, $conn) or die(mysql_error());
 
 
 	while ($Array = mysql_fetch_array($result_print_products)) { 
-                $prod_idField = $Array['prod_id'];
-                $prod_descriptionField = $Array['prod_description'];
-                $prod_unit_priceField = $Array['prod_unit_price'];
+                $prod_idField = $Array['id'];
+                $prod_descriptionField = $Array['description'];
+                $prod_unit_priceField = $Array['unit_price'];
 
 	};
 
@@ -390,17 +390,17 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 	*/
 
 	#products query - for the selected product
-	$print_products = "SELECT * FROM {$tb_prefix}products WHERE prod_id = $inv_it_product_idField";
+	$print_products = "SELECT * FROM {$tb_prefix}products WHERE id = $inv_it_product_idField";
 	$result_print_products = mysql_query($print_products, $conn) or die(mysql_error());
 
 
 	while ($Array = mysql_fetch_array($result_print_products)) { 
-                $prod_idField = $Array['prod_id'];
-                $prod_descriptionField = $Array['prod_description'];
+                $prod_idField = $Array['id'];
+                $prod_descriptionField = $Array['description'];
 
 	
 	#product query - for all the other ones
-        $sql_products = "SELECT * FROM {$tb_prefix}products where prod_enabled != 0 ORDER BY prod_description";
+        $sql_products = "SELECT * FROM {$tb_prefix}products where enabled != 0 ORDER BY description";
         $result_products = mysql_query($sql_products, $conn) or die(mysql_error());
 
 	if (mysql_num_rows($result_products) == 0) {
@@ -414,8 +414,8 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 	                <option selected value=\"$prod_idField\" style=\"font-weight: bold\">$prod_descriptionField</option>";
 
         	while ($recs_products = mysql_fetch_array($result_products)) {
-	                $id_products = $recs_products['prod_id'];
-	                $display_name_products = $recs_products['prod_description'];
+	                $id_products = $recs_products['id'];
+	                $display_name_products = $recs_products['description'];
 	
 	                $display_block_products .= "<option value=\"$id_products\">
 	                        $display_name_products</option>";

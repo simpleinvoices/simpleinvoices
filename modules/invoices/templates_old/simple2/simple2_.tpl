@@ -213,7 +213,7 @@
 		{if $smarty.get.invoice_style === 'Itemised' }
 						<tr class="tbl1" >
 				<td class="tbl1">{$master_invoice.inv_it_quantity_formatted}</td>
-				<td class="tbl1">{$product.prod_description}</td>
+				<td class="tbl1">{$product.description}</td>
 				<td class="tbl1">{$pref.pref_currency_sign}{$master_invoice.inv_it_unit_price}</td>
 				<td class="tbl1">{$pref.pref_currency_sign}{$master_invoice.inv_it_gross_total}</td>
 				<td class="tbl1">{$pref.pref_currency_sign}{$master_invoice.inv_it_tax_amount}</td>
@@ -234,7 +234,7 @@
 		{if $smarty.get.invoice_style === 'Consulting' }
 			<tr class="tbl1-left tbl1-right">
 				<td class="tbl1-left" >{$master_invoice.inv_it_quantity_formatted}</td>
-				<td>{$product.prod_description}</td><td class="tbl1-right" colspan="5"></td>
+				<td>{$product.description}</td><td class="tbl1-right" colspan="5"></td>
 			</tr>
 			
                 <tr>       
