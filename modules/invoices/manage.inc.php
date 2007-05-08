@@ -64,11 +64,11 @@ while ($newArray = mysql_fetch_array($result)) {
 		$b_nameField = $billerArray['name'];
 
 
-	$sql_customers = "select c_name from {$tb_prefix}customers where c_id = $inv_customer_idField ";
+	$sql_customers = "select name from {$tb_prefix}customers where id = $inv_customer_idField ";
 	$result_customers = mysql_query($sql_customers, $conn) or die(mysql_error());
 
 	while ($customersArray = mysql_fetch_array($result_customers)) {
-		$c_nameField = $customersArray['c_name'];
+		$c_nameField = $customersArray['name'];
 
 
 	$sql_invoice_type = "select inv_ty_description from {$tb_prefix}invoice_type where inv_ty_id = $inv_typeField ";

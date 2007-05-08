@@ -6,7 +6,7 @@ checkLogin();
 $customFieldLabel = getCustomFieldLabels("customer");
 
 //if valid then do save
-if ($_POST['c_name'] != "" ) {
+if ($_POST['name'] != "" ) {
 	include("./modules/customers/save.php");
 }
 

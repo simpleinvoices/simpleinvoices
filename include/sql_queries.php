@@ -6,7 +6,7 @@ mysql_select_db( $db_name, $conn );
 
 function getCustomer($id) {
 	global $tb_prefix;
-	$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE c_id = $id";
+	$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE id = $id";
 	$result_print_customer = mysql_query($print_customer) or die(mysql_error());
 	return mysql_fetch_array($result_print_customer);
 }
@@ -34,7 +34,7 @@ function getTaxRate($id) {
 
 function getDefaultCustomer() {
 	global $tb_prefix;
-	$sql = "SELECT *,c.c_name AS name FROM {$tb_prefix}customers c, {$tb_prefix}systemdefaults s WHERE ( s.name = 'customer' AND c.c_id = s.value)";
+	$sql = "SELECT *,c.name AS name FROM {$tb_prefix}customers c, {$tb_prefix}systemdefaults s WHERE ( s.name = 'customer' AND c.id = s.value)";
 	$query = mysql_query($sql) or die(mysql_error());
 	return mysql_fetch_array($query);
 }
@@ -181,26 +181,26 @@ function saveCustomer() {
 			UPDATE
 				{$tb_prefix}customers
 			SET
-				c_name = '$_POST[c_name]',
-				c_attention = '$_POST[c_attention]',
-				c_street_address = '$_POST[c_street_address]',
-				c_street_address2 = '$_POST[c_street_address2]',
-				c_city = '$_POST[c_city]',
-				c_state = '$_POST[c_state]',
-				c_zip_code = '$_POST[c_zip_code]',
-				c_country = '$_POST[c_country]',
-				c_phone = '$_POST[c_phone]',
-				c_mobile_phone = '$_POST[c_mobile_phone]',
-				c_fax = '$_POST[c_fax]',
-				c_email = '$_POST[c_email]',
-				c_notes = '$_POST[c_notes]',
-				c_custom_field1 = '$_POST[c_custom_field1]',
-				c_custom_field2 = '$_POST[c_custom_field2]',
-				c_custom_field3 = '$_POST[c_custom_field3]',
-				c_custom_field4 = '$_POST[c_custom_field4]',
-				c_enabled = '$_POST[c_enabled]'
+				name = '$_POST[name]',
+				attention = '$_POST[attention]',
+				street_address = '$_POST[street_address]',
+				street_address2 = '$_POST[street_address2]',
+				city = '$_POST[city]',
+				state = '$_POST[state]',
+				zip_code = '$_POST[zip_code]',
+				country = '$_POST[country]',
+				phone = '$_POST[phone]',
+				mobile_phone = '$_POST[mobile_phone]',
+				fax = '$_POST[fax]',
+				email = '$_POST[email]',
+				notes = '$_POST[notes]',
+				custom_field1 = '$_POST[custom_field1]',
+				custom_field2 = '$_POST[custom_field2]',
+				custom_field3 = '$_POST[custom_field3]',
+				custom_field4 = '$_POST[custom_field4]',
+				enabled = '$_POST[enabled]'
 			WHERE
-				c_id = " . $_GET['submit'];
+				id = " . $_GET['submit'];
 
 	return mysql_query($sql);
 }

@@ -8,7 +8,7 @@
 		<td class='details_screen'><a href='index.php?module=system_defaults&view=edit&submit=biller'>Edit</a></td><td class='details_screen'>Biller</td><td>{$defaultBiller.name}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'><a href='index.php?module=system_defaults&view=edit&submit=customer'>Edit</a></td><td class='details_screen'>Customer</td><td>{$defaultCustomer.c_name}</td>
+		<td class='details_screen'><a href='index.php?module=system_defaults&view=edit&submit=customer'>Edit</a></td><td class='details_screen'>Customer</td><td>{$defaultCustomer.name}</td>
 	</tr>
 	<tr>
 		<td class='details_screen'><a href='index.php?module=system_defaults&view=edit&submit=tax'>Edit</a></td><td class='details_screen'>Tax</td><td>{$defaultTax.tax_description}</td>

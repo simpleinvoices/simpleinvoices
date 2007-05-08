@@ -48,7 +48,7 @@ $result_print_master_invoice_id  = mysql_query($print_master_invoice_id , $conn)
 $inv = mysql_fetch_array($result_print_master_invoice_id);
 
 #customer query
-$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE c_id = $inv[inv_customer_id]";
+$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE id = $inv[inv_customer_id]";
 $result_print_customer = mysql_query($print_customer, $conn) or die(mysql_error());
 
 $customer = mysql_fetch_array($result_print_customer);
@@ -139,7 +139,7 @@ if ($op === "pay_selected_invoice") {
 </tr>
 <tr>
 	<td class="details_screen">{$LANG['customer']}</td>
-	<td>{$customer['c_name']}</td>
+	<td>{$customer['name']}</td>
 	<td class="details_screen">{$LANG['owing']}</td>
 	<td><u>{$invoice_owing_Field_formatted}</u></td>
 </tr>

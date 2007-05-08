@@ -34,12 +34,12 @@ $defaults = getSystemDefaults();
 
 #Accounts - for the customer - start
 #invoice total calc - start
-	$invoice_total_Field_customer = calc_customer_total($customer['c_id']);
+	$invoice_total_Field_customer = calc_customer_total($customer['id']);
 	$invoice_total_Field_customer_format = number_format($invoice_total_Field_customer,2);
 #invoice total calc - end
 
 #amount paid calc - start
-   	$invoice_paid_Field_customer = calc_customer_paid($customer['c_id']);
+   	$invoice_paid_Field_customer = calc_customer_paid($customer['id']);
         $invoice_paid_Field_customer_format = number_format($invoice_paid_Field_customer,2);
 #amount paid calc - end
 
@@ -76,7 +76,7 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,$invoice['invoice_custom_fi
 $display_block_top =  <<<EOD
 	<table align=center>
 	<tr>
-		<td class=account colspan=8>{$LANG['account_info']}</td><td width=5%></td><td class="columnleft" width=5%></td><td class="account" colspan=6><a href='index.php?module=customers&view=details&submit=$customer[c_id]&action=view'>{$LANG['customer_account']}</a></td>
+		<td class=account colspan=8>{$LANG['account_info']}</td><td width=5%></td><td class="columnleft" width=5%></td><td class="account" colspan=6><a href='index.php?module=customers&view=details&submit=$customer[id]&action=view'>{$LANG['customer_account']}</a></td>
 	</tr>
 	<tr>
 		<td class=account>{$LANG['total']}:</td><td class=account>$preferences[pref_currency_sign]$invoice_total_Field_format</td>
@@ -85,7 +85,7 @@ $display_block_top =  <<<EOD
 		<td class=account>{$LANG['age']}:</td><td class=account nowrap >$invoice_age <a href='docs.php?p=age&t=help' rel='gb_page_center[450, 450]'><img src="./images/common/help-small.png"></img></a></td>
 		<td></td><td class="columnleft"></td>
 		<td class="account">{$LANG['total']}:</td><td class=account>$preferences[pref_currency_sign]$invoice_total_Field_customer_format</td>
-		<td class=account><a href='index.php?module=payments&view=manage&c_id=$customer[c_id]'>{$LANG['paid']}:</a></td><td class=account>$preferences[pref_currency_sign]$invoice_paid_Field_customer_format</td>
+		<td class=account><a href='index.php?module=payments&view=manage&id=$customer[id]'>{$LANG['paid']}:</a></td><td class=account>$preferences[pref_currency_sign]$invoice_paid_Field_customer_format</td>
 		<td class=account>{$LANG['owing']}:</td><td class=account><u>$preferences[pref_currency_sign]$invoice_owing_Field_customer</u></td>
 	</tr>
 	</table>
@@ -157,40 +157,40 @@ $display_block_top =  <<<EOD
 	
 	<!-- Customer section -->
 	<tr class='details_screen'
-		<td class='details_screen'><b>{$LANG['customer']}:</b></td><td colspan=3>$customer[c_name]</td><td colspan=2 align=right class='details_screen align_right'><a href='#' class="show-customer" onClick="$('.customer').show(); $('.show-customer').hide(); ">{$LANG['show_details']}</a> <a href='#' class="customer" onClick="$('.customer').hide(); $('.show-customer').show();">{$LANG['hide_details']}</a></td>
+		<td class='details_screen'><b>{$LANG['customer']}:</b></td><td colspan=3>$customer[name]</td><td colspan=2 align=right class='details_screen align_right'><a href='#' class="show-customer" onClick="$('.customer').show(); $('.show-customer').hide(); ">{$LANG['show_details']}</a> <a href='#' class="customer" onClick="$('.customer').hide(); $('.show-customer').show();">{$LANG['hide_details']}</a></td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>{$LANG['attention_short']}:</td><td class='details_screen' colspan=5 align=left>$customer[c_attention],</td>
+		<td class='details_screen'>{$LANG['attention_short']}:</td><td class='details_screen' colspan=5 align=left>$customer[attention],</td>
 	</tr>
 	<tr class='details_screen customer'>
-		<td class='details_screen'>{$LANG['street']}:</td><td class='details_screen' colspan=5 align=left>$customer[c_street_address]</td>
+		<td class='details_screen'>{$LANG['street']}:</td><td class='details_screen' colspan=5 align=left>$customer[street_address]</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>{$LANG['street2']}:</td><td class='details_screen' colspan=5 align=left>$customer[c_stree_address2]</td>
+		<td class='details_screen'>{$LANG['street2']}:</td><td class='details_screen' colspan=5 align=left>$customer[stree_address2]</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>{$LANG['city']}:</td><td class='details_screen' colspan=3>$customer[c_city]</td><td class='details_screen'>Ph:</td><td>$customer[c_phone]</td>
+		<td class='details_screen'>{$LANG['city']}:</td><td class='details_screen' colspan=3>$customer[city]</td><td class='details_screen'>Ph:</td><td>$customer[phone]</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>{$LANG['state']}, ZIP:</td><td colspan=3 class='details_screen'>$customer[c_state], $customer[c_zip_code]</td><td class='details_screen'>{$LANG['fax']}:</td><td class='details_screen'>$customer[c_fax]</td>
+		<td class='details_screen'>{$LANG['state']}, ZIP:</td><td colspan=3 class='details_screen'>$customer[state], $customer[zip_code]</td><td class='details_screen'>{$LANG['fax']}:</td><td class='details_screen'>$customer[fax]</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>{$LANG['country']}:</td><td class='details_screen' colspan=3>$customer[c_country]</td><td class='details_screen'>Mobile:</td><td class='details_screen'>$customer[c_mobile_phone]</td>
+		<td class='details_screen'>{$LANG['country']}:</td><td class='details_screen' colspan=3>$customer[country]</td><td class='details_screen'>Mobile:</td><td class='details_screen'>$customer[mobile_phone]</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>{$LANG['email']}:</td><td class='details_screen'colspan=5>$customer[c_email]</td>
+		<td class='details_screen'>{$LANG['email']}:</td><td class='details_screen'colspan=5>$customer[email]</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>{$customerCustomFieldLabel['1']}:</td><td colspan=5 class='details_screen'>$customer[c_custom_field1]</td>
+		<td class='details_screen'>{$customerCustomFieldLabel['1']}:</td><td colspan=5 class='details_screen'>$customer[custom_field1]</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>{$customerCustomFieldLabel['2']}:</td><td colspan=5 class='details_screen'>$customer[c_custom_field2]</td>
+		<td class='details_screen'>{$customerCustomFieldLabel['2']}:</td><td colspan=5 class='details_screen'>$customer[custom_field2]</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>{$customerCustomFieldLabel['3']}:</td><td class='details_screen' colspan=5>$customer[c_custom_field3]</td>
+		<td class='details_screen'>{$customerCustomFieldLabel['3']}:</td><td class='details_screen' colspan=5>$customer[custom_field3]</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>{$customerCustomFieldLabel['4']}:</td><td class='details_screen' colspan=5>$customer[c_custom_field4]</td>
+		<td class='details_screen'>{$customerCustomFieldLabel['4']}:</td><td class='details_screen' colspan=5>$customer[custom_field4]</td>
 	</tr>	
 
 EOD;

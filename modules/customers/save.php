@@ -15,7 +15,7 @@ if ($op === "insert_customer") {
 	//TODO: What's happening? Which vars are extracted? Not secure...
 	extract( $_POST );
 
-	$sql ='INSERT INTO '.$tb_prefix.'customers VALUES ("","' . $c_attention . '", "' . $c_name . '", "' . $c_street_address . '", "' . $c_street_address2 . '",  "' . $c_city . '", "' . $c_state . '", "' . $c_zip_code . '", "' . $c_country . '", "' . $c_phone . '", "' . $c_mobile_phone . '", "' . $c_fax . '", "' . $c_email . '", "' . $c_notes . '", "' . $c_custom_field1 . '", "' . $c_custom_field2 . '", "' . $c_custom_field3 . '", "' . $c_custom_field4 . '", "' . $c_enabled . '")';
+	$sql ='INSERT INTO '.$tb_prefix.'customers VALUES ("","' . $attention . '", "' . $name . '", "' . $street_address . '", "' . $street_address2 . '",  "' . $city . '", "' . $state . '", "' . $zip_code . '", "' . $country . '", "' . $phone . '", "' . $mobile_phone . '", "' . $fax . '", "' . $email . '", "' . $notes . '", "' . $custom_field1 . '", "' . $custom_field2 . '", "' . $custom_field3 . '", "' . $custom_field4 . '", "' . $enabled . '")';
 
 	if (mysql_query($sql)) {
 		$display_block = $LANG['save_customer_success'];

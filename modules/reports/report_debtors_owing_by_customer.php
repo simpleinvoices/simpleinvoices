@@ -26,8 +26,8 @@ if (!defined("BROWSE")) {
    $sSQL = "
 
 SELECT
-        {$tb_prefix}customers.c_id as ID,
-        {$tb_prefix}customers.c_name as Customer,
+        {$tb_prefix}customers.id as ID,
+        {$tb_prefix}customers.name as Customer,
         (select sum(inv_it_total) from {$tb_prefix}invoice_items,{$tb_prefix}invoices where  {$tb_prefix}invoice_items.inv_it_invoice_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = ID) as Total,
         (select IF ( isnull(sum(ac_amount)), '0', sum(ac_amount)) from {$tb_prefix}account_payments,{$tb_prefix}invoices where {$tb_prefix}account_payments.ac_inv_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = ID) as Paid,
         (select (Total - Paid)) as Owing
@@ -35,7 +35,7 @@ SELECT
 FROM
         {$tb_prefix}customers,{$tb_prefix}invoices,{$tb_prefix}invoice_items
 WHERE
-        {$tb_prefix}invoice_items.inv_it_invoice_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = c_id
+        {$tb_prefix}invoice_items.inv_it_invoice_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = id
 GROUP BY
         Owing DESC;
 

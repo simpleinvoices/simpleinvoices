@@ -16,7 +16,7 @@
 		href="docs.php?t=help&p=email_to"
 		rel="gb_page_center[450, 450]"><img
 		src="./images/common/help-small.png"></img></a></td>
-		<td><input type=text name="email_to" size=50 value="{$customer.c_email}" ></td>
+		<td><input type=text name="email_to" size=50 value="{$customer.email}" ></td>
 	</tr>
 	<tr>
 	<td class="details_screen">BCC<a

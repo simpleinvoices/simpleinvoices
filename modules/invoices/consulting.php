@@ -22,7 +22,7 @@ $sql = "SELECT * FROM {$tb_prefix}biller where enabled != 0 ORDER BY name";
 $result = mysql_query($sql, $conn) or die(mysql_error());
 
 #customer
-$sql_customer = "SELECT * FROM {$tb_prefix}customers where c_enabled != 0 ORDER BY c_name";
+$sql_customer = "SELECT * FROM {$tb_prefix}customers where enabled != 0 ORDER BY name";
 $result_customer = mysql_query($sql_customer, $conn) or die(mysql_error());
 
 #productr query
@@ -55,7 +55,7 @@ $result_biller_default = mysql_query($sql_biller_default , $conn) or die(mysql_e
 $biller= mysql_fetch_array($result_biller_default);
 
 #default customer name query
-$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE c_id = $defaults[customer] and c_enabled != 0";
+$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE id = $defaults[customer] and enabled != 0";
 $result_print_customer = mysql_query($print_customer, $conn) or die(mysql_error());
 
 $customer = mysql_fetch_array($result_print_customer);
@@ -108,15 +108,15 @@ if (mysql_num_rows($result_customer) == 0) {
         //has records, so display them
         $display_block_customer = <<<EOD
         <select name="select_customer">
-        <option selected value="$defaults[customer]" style="font-weight: bold">$customer[c_name]</option>
+        <option selected value="$defaults[customer]" style="font-weight: bold">$customer[name]</option>
         <option value=""></option>
 EOD;
 
 	while ($recs_customer = mysql_fetch_array($result_customer)) {
 		
                 $display_block_customer .= <<<EOD
-                <option value=$recs_customer[c_id]">
-                        $recs_customer[c_name]</option>
+                <option value=$recs_customer[id]">
+                        $recs_customer[name]</option>
 EOD;
         }
 }

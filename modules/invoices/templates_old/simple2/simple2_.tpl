@@ -116,12 +116,12 @@
 		</tr>
 	<!-- Customer section - start -->
 	<tr>
-		<td class="tbl1-left tbl1-top tbl1-bottom col1" ><b>{$LANG.customer}:</b></td><td class="tbl1-top tbl1-bottom col1 tbl1-right" colspan=3>{$customer.c_name}</td>
+		<td class="tbl1-left tbl1-top tbl1-bottom col1" ><b>{$LANG.customer}:</b></td><td class="tbl1-top tbl1-bottom col1 tbl1-right" colspan=3>{$customer.name}</td>
 	</tr>
 
-        {if $customer.c_attention != null}
+        {if $customer.attention != null}
                 <tr>
-                        <td class='tbl1-left'>{$LANG.attention_short}:</td><td align=left class='tbl1-right' colspan=3 >{$customer.c_attention}}</td>
+                        <td class='tbl1-left'>{$LANG.attention_short}:</td><td align=left class='tbl1-right' colspan=3 >{$customer.attention}}</td>
                 </tr>
         {/if}
                {if $biller.street_address != null }
@@ -146,24 +146,24 @@
 
 
 	
-	 <tr><td class='tbl1-left'></td><td class='tbl1-right' colspan=3>{$customer.c_city}, {$customer.c_zip_code}</td></tr>                </tr>
-                {if $customer.c_country != null }
+	 <tr><td class='tbl1-left'></td><td class='tbl1-right' colspan=3>{$customer.city}, {$customer.zip_code}</td></tr>                </tr>
+                {if $customer.country != null }
                 </tr>
                 <tr>
-                        <td class='tbl1-left'></td><td class='tbl1-right' colspan=3>{$customer.c_country}</td>
+                        <td class='tbl1-left'></td><td class='tbl1-right' colspan=3>{$customer.country}</td>
                 </tr>
        			{/if}
                 <tr>
-                        <td class='tbl1-left'>{$LANG.phone_short}.:<td class='tbl1-right' colspan=3>{$customer.c_phone}</td>
+                        <td class='tbl1-left'>{$LANG.phone_short}.:<td class='tbl1-right' colspan=3>{$customer.phone}</td>
                 </tr>
                 <tr>
-                        <td class='tbl1-left'>{$LANG.mobile_short}.:<td class='tbl1-right' colspan=3>{$customer.c_mobile_phone}</td>
+                        <td class='tbl1-left'>{$LANG.mobile_short}.:<td class='tbl1-right' colspan=3>{$customer.mobile_phone}</td>
                 </tr>
                 <tr>
-                        <td class='tbl1-left'>{$LANG.email}:<td class='tbl1-right' colspan=3>{$customer.c_email}</td>
+                        <td class='tbl1-left'>{$LANG.email}:<td class='tbl1-right' colspan=3>{$customer.email}</td>
                 </tr>
                 <tr>
-                        <td class='tbl1-left'>{$customer.custom_field_label1}:<td class='tbl1-right' colspan=3>{$customer.c_custom_field1}</td>
+                        <td class='tbl1-left'>{$customer.custom_field_label1}:<td class='tbl1-right' colspan=3>{$customer.custom_field1}</td>
                 </tr>	<tr><td class="tbl1-top" colspan=4></td></tr>
 
 

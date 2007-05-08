@@ -3,7 +3,7 @@
 	method="post">
 
 {if $smarty.get.action== 'view' }
-<b>{$LANG.customer} :: <a href="index.php?module=customers&view=details&submit={$customer.c_id}&action=edit">{$LANG.edit}</a>
+<b>{$LANG.customer} :: <a href="index.php?module=customers&view=details&submit={$customer.id}&action=edit">{$LANG.edit}</a>
 </b>
 <hr></hr>
 <table align="center">
@@ -17,7 +17,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.customer} {$LANG.id}</td>
-		<td>{$customer.c_id}</td>
+		<td>{$customer.id}</td>
 		<td colspan="2"></td>
 		<td></td>
 		<td class="details_screen">{$LANG.total_invoices}</td>
@@ -25,7 +25,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.customer_name}</td>
-		<td colspan="2">{$customer.c_name}</td>
+		<td colspan="2">{$customer.name}</td>
 		<td colspan="2"></td>
 		<td class="details_screen">{$LANG.total_paid}</td>
 		<td>{$invoice_paid_Field_formatted}</td>
@@ -33,47 +33,47 @@
 	<tr>
 		<td class="details_screen">{$LANG.attention_short} <a href="docs.php?t=help&p=customer_contact" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 		</td>
-		<td colspan="2">{$customer.c_attention}</td>
+		<td colspan="2">{$customer.attention}</td>
 		<td colspan=2></td>
 		<td class="details_screen">{$LANG.total_owing}</td>
 		<td><u>{$invoice_owing_Field}</u></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street}</td>
-		<td>{$customer.c_street_address}</td>
+		<td>{$customer.street_address}</td>
 	</tr>
 	<tr>
 		<td class="details_screen" NOWRAP>{$LANG.street2} <a href="docs.php?t=help&p=street2" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 		</td>
-		<td>{$customer.c_street_address2}</td>
+		<td>{$customer.street_address2}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.city}</td>
-		<td>{$customer.c_city}</td>
+		<td>{$customer.city}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.zip}</td>
-		<td>{$customer.c_zip_code}</td>
+		<td>{$customer.zip_code}</td>
 		<td class="details_screen">{$LANG.phone}</td>
-		<td>{$customer.c_phone}</td>
+		<td>{$customer.phone}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.state}</td>
-		<td>{$customer.c_state}</td>
+		<td>{$customer.state}</td>
 		<td class="details_screen" NOWRAP>{$LANG.mobile_phone}</td>
-		<td>{$customer.c_mobile_phone}</td>
+		<td>{$customer.mobile_phone}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.country}</td>
-		<td>{$customer.c_country}</td>
+		<td>{$customer.country}</td>
 		<td class="details_screen">{$LANG.fax}</td>
-		<td>{$customer.c_fax}</td>
+		<td>{$customer.fax}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
 		<td>{$wording_for_enabled}</td>
 		<td class="details_screen">{$LANG.email}</td>
-		<td>{$customer.c_email}</td>
+		<td>{$customer.email}</td>
 	</tr>
 </table>
 <br />
@@ -90,22 +90,22 @@
 				<tr>
 					<td class="details_screen">{$customFieldLabel.1} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 					</td>
-					<td>{$customer.c_custom_field1}</td>
+					<td>{$customer.custom_field1}</td>
 				</tr>
 				<tr>
 					<td class="details_screen">{$customFieldLabel.2} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 					</td>
-					<td>{$customer.c_custom_field2}</td>
+					<td>{$customer.custom_field2}</td>
 				</tr>
 				<tr>
 					<td class="details_screen">{$customFieldLabel.3} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 					</td>
-					<td>{$customer.c_custom_field3}</td>
+					<td>{$customer.custom_field3}</td>
 				</tr>
 				<tr>
 					<td class="details_screen">{$customFieldLabel.4} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 					</td>
-					<td>{$customer.c_custom_field4}</td>
+					<td>{$customer.custom_field4}</td>
 				</tr>
 			</table>
 		</p>
@@ -120,7 +120,7 @@
 		<h4><u>{$LANG.customer} {$LANG.notes}</u></h4>
 		<p>
 			<div id="left">
-				{$customer.c_notes}
+				{$customer.notes}
 			</div>
 		</p>
 	</div>
@@ -128,14 +128,14 @@
 
 
 <hr></hr>
-<a href="index.php?module=customers&view=details&submit={$customer.c_id}&action=edit">{$LANG.edit}</a>
+<a href="index.php?module=customers&view=details&submit={$customer.id}&action=edit">{$LANG.edit}</a>
 {/if}
 
 {if $smarty.get.action== 'edit' }
 {*
 #do the product enabled/disblaed drop down
 $display_block_enabled = <<<EOD
-<select name="c_enabled">
+<select name="enabled">
 	<option value="$c_enabledField" selected style="font-weight: bold">$wording_for_enabled</option>
 	<option value="1">$LANG.enabled</option>
 	<option value="0">$LANG.disabled</option>
@@ -148,86 +148,86 @@ EOD;
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.customer} {$LANG.id}</td>
-		<td>{$customer.c_id}</td>
+		<td>{$customer.id}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.customer_name}</td>
-		<td><input type="text" name="c_name" value="{$customer.c_name}" size="50" /></td>
+		<td><input type="text" name="name" value="{$customer.name}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.attention_short} <a href="docs.php?t=help&p=customer_contact" rel="gb_page_center[450, 450]" ><img src="./images/common/help-small.png"></img></a>
 		</td>
-		<td><input type="text" name="c_attention" value="{$customer.c_attention}" size="50" /></td>
+		<td><input type="text" name="attention" value="{$customer.attention}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street}</td>
-		<td><input type="text" name="c_street_address" value="{$customer.c_street_address}" size="50" /></td>
+		<td><input type="text" name="street_address" value="{$customer.street_address}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street2} <a href="docs.php?t=help&p=street2" rel="gb_page_center[450, 450]" ><img src="./images/common/help-small.png"></img></a>
 		</td>
-		<td><input type="text" name="c_street_address2" value="{$customer.c_street_address2}" size="50" /></td>
+		<td><input type="text" name="street_address2" value="{$customer.street_address2}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.city}</td>
-		<td><input type="text" name="c_city" value="{$customer.c_city}" size="50" /></td>
+		<td><input type="text" name="city" value="{$customer.city}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.zip}</td>
-		<td><input type="text" name="c_zip_code" value="{$customer.c_zip_code}" size="50" /></td>
+		<td><input type="text" name="zip_code" value="{$customer.zip_code}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.state}</td>
-		<td><input type="text" name="c_state" value="{$customer.c_state}" size="50" /></td>
+		<td><input type="text" name="state" value="{$customer.state}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.country}</td>
-		<td><input type="text" name="c_country" value="{$customer.c_country}" size="50" /></td>
+		<td><input type="text" name="country" value="{$customer.country}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.phone}</td>
-		<td><input type="text" name="c_phone" value="{$customer.c_phone}" size="50" /></td>
+		<td><input type="text" name="phone" value="{$customer.phone}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.mobile_phone}</td>
-		<td><input type="text" name="c_mobile_phone" value="{$customer.c_mobile_phone}" size="50" /></td>
+		<td><input type="text" name="mobile_phone" value="{$customer.mobile_phone}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.fax}</td>
-		<td><input type="text" name="c_fax" value="{$customer.c_fax}" size="50" /></td>
+		<td><input type="text" name="fax" value="{$customer.fax}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.email}</td>
 		<td>
-			<input type="text" name="c_email" value="{$customer.c_email}" size="50" /></td
+			<input type="text" name="email" value="{$customer.email}" size="50" /></td
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.1} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>
-			<input type="text" name="c_custom_field1" value="{$customer.c_custom_field1}" size="50" /></td
+			<input type="text" name="custom_field1" value="{$customer.custom_field1}" size="50" /></td
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.2} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>
-			<input type="text" name="c_custom_field2" value="{$customer.c_custom_field2}" size="50" /></td
+			<input type="text" name="custom_field2" value="{$customer.custom_field2}" size="50" /></td
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.3} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>
-			<input type="text" name="c_custom_field3" value="{$customer.c_custom_field3}" size="50" /></td
+			<input type="text" name="custom_field3" value="{$customer.custom_field3}" size="50" /></td
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.4} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>
-			<input type="text" name="c_custom_field4" value="{$customer.c_custom_field4}" size="50" /></td
+			<input type="text" name="custom_field4" value="{$customer.custom_field4}" size="50" /></td
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
-		<td><textarea name="c_notes" rows="8" cols="50">{$customer.c_notes}</textarea></td>
+		<td><textarea name="notes" rows="8" cols="50">{$customer.notes}</textarea></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>

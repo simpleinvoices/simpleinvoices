@@ -124,53 +124,53 @@
 
 	<!-- Customer section - start -->
 	<tr>
-		<td class="tbl1-left tbl1-top tbl1-bottom col1" ><b>{$LANG.customer}:</b></td><td class="tbl1-top tbl1-bottom col1 tbl1-right" colspan=3>{$customer.c_name}</td>
+		<td class="tbl1-left tbl1-top tbl1-bottom col1" ><b>{$LANG.customer}:</b></td><td class="tbl1-top tbl1-bottom col1 tbl1-right" colspan=3>{$customer.name}</td>
 	</tr>
 
-        {if $customer.c_attention != null }
+        {if $customer.attention != null }
                 <tr>
-                        <td class='tbl1-left'>{$LANG.attention_short}:</td><td align=left class='tbl1-right' colspan=3 >{$customer.c_attention}</td>
+                        <td class='tbl1-left'>{$LANG.attention_short}:</td><td align=left class='tbl1-right' colspan=3 >{$customer.attention}</td>
                 </tr>
        {/if}
-        {if $customer.c_street_address != null }
+        {if $customer.street_address != null }
                 <tr >
-                        <td class='tbl1-left'>{$LANG.address}:</td><td class='tbl1-right' align=left colspan=3>{$customer.c_street_address}</td>
+                        <td class='tbl1-left'>{$LANG.address}:</td><td class='tbl1-right' align=left colspan=3>{$customer.street_address}</td>
                 </tr>   
         {/if}
-        {if $customer.c_street_address2 != null}
+        {if $customer.street_address2 != null}
                 <tr class='details_screen customer'>
-                {if $customer.c_street_address == null}
-                        <td class='tbl1-left'>{$LANG.address}:</td><td class='tbl1-right' align=left colspan=3>{$customer.c_street_address2}</td>
+                {if $customer.street_address == null}
+                        <td class='tbl1-left'>{$LANG.address}:</td><td class='tbl1-right' align=left colspan=3>{$customer.street_address2}</td>
                 </tr>   
                 {/if}
-                {if $customer.c_street_address != null}
-                        <td class='tbl1-left'></td><td class='tbl1-right' align=left colspan=3>{$customer.c_street_address2}</td>
+                {if $customer.street_address != null}
+                        <td class='tbl1-left'></td><td class='tbl1-right' align=left colspan=3>{$customer.street_address2}</td>
                 </tr>   
                 {/if}
         {/if}
 
 		{php}
-        echo  merge_address($customer[c_city], $customer[c_state], $customer[c_zip_code], $customer[c_street_address], $customer[c_street_address2],'tbl1-left','tbl1-right',3);
+        echo  merge_address($customer[city], $customer[state], $customer[zip_code], $customer[street_address], $customer[street_address2],'tbl1-left','tbl1-right',3);
         {/php}
 
-         {if $customer.c_country != null}
+         {if $customer.country != null}
                 </tr>
                 <tr>
-                        <td class='tbl1-left'></td><td class='tbl1-right' colspan=3>{$customer.c_country}</td>
+                        <td class='tbl1-left'></td><td class='tbl1-right' colspan=3>{$customer.country}</td>
                 </tr>
         {/if}
 
 	{php}
-		$customer_block .= print_if_not_null($LANG['phone_short'], $customer[c_phone],'tbl1-left','tbl1-right',3);
-		$customer_block .= print_if_not_null($LANG['fax'], $customer[c_fax],'tbl1-left','tbl1-right',3);
-		$customer_block .= print_if_not_null($LANG['mobile_short'], $customer[c_mobile_phone],'tbl1-left','tbl1-right',3);
+		$customer_block .= print_if_not_null($LANG['phone_short'], $customer[phone],'tbl1-left','tbl1-right',3);
+		$customer_block .= print_if_not_null($LANG['fax'], $customer[fax],'tbl1-left','tbl1-right',3);
+		$customer_block .= print_if_not_null($LANG['mobile_short'], $customer[mobile_phone],'tbl1-left','tbl1-right',3);
 
 
-        $customer_block .= print_if_not_null($LANG['email'], $customer[c_email],'tbl1-left','tbl1-right',3);
-        $customer_block .= print_if_not_null($customer[custom_field_label1], $customer[c_custom_field1],'tbl1-left','tbl1-right',3);
-        $customer_block .= print_if_not_null($customer[custom_field_label2], $customer[c_custom_field2],'tbl1-left','tbl1-right',3);
-        $customer_block .= print_if_not_null($customer[custom_field_label3], $customer[c_custom_field3],'tbl1-left','tbl1-right',3);
-        $customer_block .= print_if_not_null($customer[custom_field_label4], $customer[c_custom_field4],'tbl1-left','tbl1-right',3);
+        $customer_block .= print_if_not_null($LANG['email'], $customer[email],'tbl1-left','tbl1-right',3);
+        $customer_block .= print_if_not_null($customer[custom_field_label1], $customer[custom_field1],'tbl1-left','tbl1-right',3);
+        $customer_block .= print_if_not_null($customer[custom_field_label2], $customer[custom_field2],'tbl1-left','tbl1-right',3);
+        $customer_block .= print_if_not_null($customer[custom_field_label3], $customer[custom_field3],'tbl1-left','tbl1-right',3);
+        $customer_block .= print_if_not_null($customer[custom_field_label4], $customer[custom_field4],'tbl1-left','tbl1-right',3);
         echo $customer_block;
 	{/php}
 

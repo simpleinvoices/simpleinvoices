@@ -69,15 +69,15 @@ while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
 
 #CUSTOMER drop down list - start
 	#customer
-	$sql_customer = "SELECT * FROM {$tb_prefix}customers where c_enabled != 0 ORDER BY c_name";
+	$sql_customer = "SELECT * FROM {$tb_prefix}customers where enabled != 0 ORDER BY name";
 	$result_customer = mysql_query($sql_customer, $conn) or die(mysql_error());
 
 	#selected customer name query
-	$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE c_id = $inv_customer_idField";
+	$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE id = $inv_customer_idField";
 	$result_print_customer = mysql_query($print_customer, $conn) or die(mysql_error());
 
 	while ($Array_customer = mysql_fetch_array($result_print_customer)) {
-	       $c_nameField = $Array_customer['c_name'];
+	       $c_nameField = $Array_customer['name'];
 	}
 
 	#do the customer selector stuff
@@ -93,8 +93,8 @@ while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
 	        <option selected value=\"$inv_customer_idField\" style=\"font-weight: bold\">$c_nameField</option>";
 	
 	        while ($recs_customer = mysql_fetch_array($result_customer)) {
-	                $id_customer = $recs_customer['c_id'];
-	                $display_name_customer = $recs_customer['c_name'];
+	                $id_customer = $recs_customer['id'];
+	                $display_name_customer = $recs_customer['name'];
 	
 	                $display_block_customer .= "<option value=\"$id_customer\">$display_name_customer</option>";
 	        }

@@ -38,20 +38,20 @@
 
 	<tr class="index_table">
 	<td class="index_table"><a class="index_table"
-	 href="index.php?module=customers&view=details&submit={$customer.c_id}&action=view">{$LANG.view}</a> ::
+	 href="index.php?module=customers&view=details&submit={$customer.id}&action=view">{$LANG.view}</a> ::
 	<a class="index_table"
-	 href="index.php?module=customers&view=details&submit={$customer.c_id}&action=edit">{$LANG.edit}</a> </td>
-	<td class="index_table">{$customer.c_id}</td>
-	<td class="index_table">{$customer.c_name}</td>
+	 href="index.php?module=customers&view=details&submit={$customer.id}&action=edit">{$LANG.edit}</a> </td>
+	<td class="index_table">{$customer.id}</td>
+	<td class="index_table">{$customer.name}</td>
 	<!--
-	<td class="index_table">{$customer.c_phone}</td>
+	<td class="index_table">{$customer.phone}</td>
 	-->
 	<td class="index_table">{$customer.total}</td>
 	<!--
 	<td class="index_table">{$invoice.paid}</td>
 	-->
 	<td class="index_table">{$customer.owing}</td>
-	<td class="index_table">{$customer.c_enabled}</td>
+	<td class="index_table">{$customer.enabled}</td>
 	</tr>
 
 {/foreach}

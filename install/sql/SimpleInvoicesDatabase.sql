@@ -1,11 +1,11 @@
 CREATE TABLE `si_account_payments` (
-  `ac_id` int(10) NOT NULL auto_increment,
+  `id` int(10) NOT NULL auto_increment,
   `ac_inv_id` varchar(10) collate utf8_unicode_ci NOT NULL,
   `ac_amount` double(25,2) NOT NULL,
   `ac_notes` text collate utf8_unicode_ci NOT NULL,
   `ac_date` datetime NOT NULL,
   `ac_payment_type` int(10) NOT NULL default '1',
-  PRIMARY KEY  (`ac_id`)
+  PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 
@@ -45,26 +45,26 @@ CREATE TABLE `si_custom_fields` (
 
 
 CREATE TABLE `si_customers` (
-  `c_id` int(10) NOT NULL auto_increment,
-  `c_attention` varchar(50) default NULL,
-  `c_name` varchar(50) default NULL,
-  `c_street_address` varchar(50) default NULL,
-  `c_street_address2` varchar(50) default NULL,
-  `c_city` varchar(50) default NULL,
-  `c_state` varchar(50) default NULL,
-  `c_zip_code` varchar(50) default NULL,
-  `c_country` varchar(100) default NULL,
-  `c_phone` varchar(50) default NULL,
-  `c_mobile_phone` varchar(50) default NULL,
-  `c_fax` varchar(50) default NULL,
-  `c_email` varchar(50) default NULL,
-  `c_notes` text,
-  `c_custom_field1` varchar(50) default NULL,
-  `c_custom_field2` varchar(50) default NULL,
-  `c_custom_field3` varchar(50) default NULL,
-  `c_custom_field4` varchar(50) default NULL,
-  `c_enabled` varchar(1) NOT NULL default '1',
-  PRIMARY KEY  (`c_id`)
+  `id` int(10) NOT NULL auto_increment,
+  `attention` varchar(50) default NULL,
+  `name` varchar(50) default NULL,
+  `street_address` varchar(50) default NULL,
+  `street_address2` varchar(50) default NULL,
+  `city` varchar(50) default NULL,
+  `state` varchar(50) default NULL,
+  `zip_code` varchar(50) default NULL,
+  `country` varchar(100) default NULL,
+  `phone` varchar(50) default NULL,
+  `mobile_phone` varchar(50) default NULL,
+  `fax` varchar(50) default NULL,
+  `email` varchar(50) default NULL,
+  `notes` text,
+  `custom_field1` varchar(50) default NULL,
+  `custom_field2` varchar(50) default NULL,
+  `custom_field3` varchar(50) default NULL,
+  `custom_field4` varchar(50) default NULL,
+  `enabled` varchar(1) NOT NULL default '1',
+  PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 

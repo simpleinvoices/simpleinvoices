@@ -24,7 +24,7 @@ while ($invoice = mysql_fetch_array($result)) {
 
 	$biller = mysql_fetch_array($result_biller);
 
-	$sql_customers = "SELECT c_name FROM {$tb_prefix}customers WHERE c_id = $invoice[inv_customer_id] ";
+	$sql_customers = "SELECT name FROM {$tb_prefix}customers WHERE id = $invoice[inv_customer_id] ";
 	$result_customers = mysql_query($sql_customers, $conn) or die(mysql_error());
 
 	$customer = mysql_fetch_array($result_customers);
@@ -51,7 +51,7 @@ while ($invoice = mysql_fetch_array($result)) {
 
 
 	if (strpos(strtolower($invoice['inv_id']), $q) !== false) {
-		echo "$invoice[inv_id]|<table><tr><td class='details_screen'>Invoice:</td><td> $invoice[inv_id] </td><td  class='details_screen'>Total: </td><td>$invoice[total_field_formatted] </td></tr><tr><td class='details_screen'>Biller: </td><td>$biller[name] </td><td class='details_screen'>Paid: </td><td>$invoice[paid_field_formatted] </td></tr><tr><td class='details_screen'>Customer: </td><td>$customer[c_name] </td><td class='details_screen'>Owing: </td><td><u>$invoice[owing_field_formatted]</u></td></tr></table>\n";
+		echo "$invoice[inv_id]|<table><tr><td class='details_screen'>Invoice:</td><td> $invoice[inv_id] </td><td  class='details_screen'>Total: </td><td>$invoice[total_field_formatted] </td></tr><tr><td class='details_screen'>Biller: </td><td>$biller[name] </td><td class='details_screen'>Paid: </td><td>$invoice[paid_field_formatted] </td></tr><tr><td class='details_screen'>Customer: </td><td>$customer[name] </td><td class='details_screen'>Owing: </td><td><u>$invoice[owing_field_formatted]</u></td></tr></table>\n";
 	}
 }
 

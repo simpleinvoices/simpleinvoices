@@ -13,7 +13,7 @@ jsEnd();
 
 
 #biller query
-$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.c_name, {$tb_prefix}biller.name FROM {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  WHERE ac_inv_id = {$tb_prefix}invoices.inv_id AND {$tb_prefix}invoices.inv_customer_id = {$tb_prefix}customers.c_id AND {$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.id AND {$tb_prefix}account_payments.id='$_GET[inv_id]'";
+$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.name, {$tb_prefix}biller.name FROM {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  WHERE ac_inv_id = {$tb_prefix}invoices.inv_id AND {$tb_prefix}invoices.inv_customer_id = {$tb_prefix}customers.id AND {$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.id AND {$tb_prefix}account_payments.id='$_GET[inv_id]'";
 
 
 $result = mysql_query($sql, $conn) or die(mysql_error());
@@ -62,10 +62,10 @@ echo <<<EOD
 		<td class='details_screen'>{$LANG['date_upper']}</td><td>{$stuff['date']}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>{$LANG['biller']}</td><td>{$stuff['name']}</td>
+		<td class='details_screen'>{$LANG['biller']}</td><td>{$stuff['biller.name']}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>{$LANG['customer']}</td><td>{$stuff['c_name']}</td>
+		<td class='details_screen'>{$LANG['customer']}</td><td>{$stuff['customers.name']}</td>
 	</tr>
 	<tr>
 		<td class='details_screen'>{$LANG['payment_type']}</td><td>{$paymentType['pt_description']}</td>

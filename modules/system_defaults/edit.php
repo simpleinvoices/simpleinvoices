@@ -153,7 +153,7 @@ else if ($_GET[submit] == "customer") {
 	#customer query
 
 	#customer
-	$sql_customer = "SELECT * FROM {$tb_prefix}customers where c_enabled != 0 ORDER BY c_name";
+	$sql_customer = "SELECT * FROM {$tb_prefix}customers where enabled != 0 ORDER BY name";
 	$result_customer = mysql_query($sql_customer, $conn) or die(mysql_error());
 
 
@@ -173,8 +173,8 @@ else if ($_GET[submit] == "customer") {
 EOD;
 
 		while ($recs_customer = mysql_fetch_array($result_customer)) {
-			$id_customer = $recs_customer['c_id'];
-			$display_name_customer = $recs_customer['c_name'];
+			$id_customer = $recs_customer['id'];
+			$display_name_customer = $recs_customer['name'];
 
 			$display_block_customer .= <<<EOD
 			<option value="$id_customer">

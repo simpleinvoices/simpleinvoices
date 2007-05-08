@@ -10,15 +10,15 @@ $customer_id = $_GET['submit'];
 
 $customer = getCustomer($customer_id);
 
-$wording_for_enabled = $customer['c_enabled'] == 1 ?$LANG['enabled']:$LANG['disabled'];
+$wording_for_enabled = $customer['enabled'] == 1 ?$LANG['enabled']:$LANG['disabled'];
 
 
-$invoice_total_Field = calc_customer_total($customer['c_id']);
+$invoice_total_Field = calc_customer_total($customer['id']);
 $invoice_total_Field_formatted = number_format($invoice_total_Field,2);
 #invoice total calc - end
 
 #amount paid calc - start
-$invoice_paid_Field = calc_customer_paid($customer['c_id']);;
+$invoice_paid_Field = calc_customer_paid($customer['id']);;
 $invoice_paid_Field_formatted = number_format($invoice_paid_Field,2);
 #amount paid calc - end
 

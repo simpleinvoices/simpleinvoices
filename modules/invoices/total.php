@@ -22,7 +22,7 @@ $sql = "SELECT * FROM {$tb_prefix}biller where enabled != 0 ORDER BY name";
 $result = mysql_query($sql, $conn) or die(mysql_error());
 
 #customer
-$sql_customer = "SELECT * FROM {$tb_prefix}customers where c_enabled != 0 ORDER BY c_name";
+$sql_customer = "SELECT * FROM {$tb_prefix}customers where enabled != 0 ORDER BY name";
 $result_customer = mysql_query($sql_customer, $conn) or die(mysql_error());
 
 
@@ -47,7 +47,7 @@ $defaultBiller = mysql_fetch_array($result_biller_default);
 
 
 #default customer name query
-$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE c_id = $defaults[customer]";
+$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE id = $defaults[customer]";
 $result_print_customer = mysql_query($print_customer, $conn) or die(mysql_error());
 
 $defaultCustomer = mysql_fetch_array($result_print_customer);
@@ -123,8 +123,8 @@ if (mysql_num_rows($result_customer) == 0) {
 EOD;
 
         while ($recs_customer = mysql_fetch_array($result_customer)) {
-                $id_customer = $recs_customer['c_id'];
-                $display_name_customer = $recs_customer['c_name'];
+                $id_customer = $recs_customer['id'];
+                $display_name_customer = $recs_customer['name'];
 
                 $display_block_customer .= <<<EOD
                 <option value="$id_customer">
