@@ -68,6 +68,7 @@
  -- http://www.rfc-editor.org/rfc/rfc4646.txt
  -- http://www.iana.org/assignments/language-subtag-registry
  --- sounds good - aim for NR+1
+ - smarty: move all the remaining pages to smarty
 
 - Replace with easy function...
 #get custom field labels
