@@ -13,7 +13,7 @@
  --- billers, - done
  --- and invoices 
  --- and invoices_items 
- --- do the custom fields fields in biller etc.. to - needs to test the result -done
+ --- do the custom fields fields in biller etc.. to - needs to test the result - done
  - Move .sql out of install and back to root (untill the installer is done and included as default)
  - apply aplysia new drop down list code to others 
  -- note: in the system default you should be able to select "" as an option - need to put make in for biller
@@ -27,6 +27,7 @@
  -- make merge_adress work
  -- make invoice items custom fields work
  -- make gross total work
+ - home.php - make the links to the documentation work
 
 -done
  - sql patch: reset default invoices template to default - Done

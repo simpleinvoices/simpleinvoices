@@ -120,7 +120,9 @@ else if ($_GET[submit] == "biller") {
 
 	} else {
 
-		$display_block_biller = '<select name="value">';
+		$display_block_biller = '<select name="value">
+			<option value=0> </option>
+			';
 
 		while ($result = mysql_fetch_array($query)) {
 
