@@ -8,7 +8,6 @@
  -- and add validation
  - sql queries: rename all the old crappy fields from b_name to name etc..
  -- need to write sql queries for all and change all relevant code that references these fields
- -- only need to do for 
  --- products, - done
  --- customers, - done
  --- billers, - done
@@ -20,10 +19,9 @@
  -- note: in the system default you should be able to select "" as an option - need to put make in for biller
  - move the stuff in index and home in the LANG files
  - add new lang for sys default saved
- - update spanish file with tebass new file
+ - update spanish file with tebas new file
  - Help and About docs - add div id = left to left align them and test all work ok
  - Add redirector after the sql patches have run
- - Manage sql patch - more to rico live grid
  - Defautls: on all screens that reference systemdeefautls (ie biller etc..) make sure that the default item is working correctly
  - Invoice templates 
  -- make merge_adress work
@@ -55,6 +53,7 @@
  -- dont show the rest of the contents of start.php - done
  - invoice templates - move to smarty and cleanup - done
  - change index file that data update manager has to be run before working (done)
+ - Manage sql patch - more to rico live grid - done
  
 
 - in next release +1 - aim end of May
