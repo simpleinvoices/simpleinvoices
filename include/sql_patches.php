@@ -403,6 +403,84 @@ ADD b_co_footer TEXT";
 	$patch['72']['name'] = "Alter field name prod_enabled to enabled";
         $patch['72']['patch'] = "ALTER TABLE `si_products` CHANGE `prod_enabled` `enabled` VARCHAR( 1 ) NOT NULL DEFAULT '1'";
 	$patch['72']['date'] = "20070507";
+
+	//customer fields rename sql patches
+	$patch['73']['name'] = "Alter field name c_id to id";
+        $patch['73']['patch'] = "ALTER TABLE `si_customers` CHANGE `c_id` `id` INT( 10 ) NOT NULL AUTO_INCREMENT";
+	$patch['73']['date'] = "20070507";
+
+	$patch['74']['name'] = "Alter field name c_attention to attention";
+        $patch['74']['patch'] = "ALTER TABLE `si_customers` CHANGE `c_attention` `attention` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['74']['date'] = "20070507";
+
+	$patch['75']['name'] = "Alter field name c_name to name";
+        $patch['75']['patch'] = "ALTER TABLE `si_customers` CHANGE `c_name` `name` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['75']['date'] = "20070507";
+
+	$patch['76']['name'] = "Alter field name c_street_address to street_address";
+        $patch['76']['patch'] = "ALTER TABLE `si_customers` CHANGE `c_street_address` `street_address` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['76']['date'] = "20070507";
+
+	$patch['77']['name'] = "Alter field name c_street_address2 to street_address2";
+        $patch['77']['patch'] = "ALTER TABLE `si_customers` CHANGE `c_street_address2` `street_address2` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['77']['date'] = "20070507";
+
+	$patch['78']['name'] = "Alter field name c_city to city";
+        $patch['78']['patch'] = "ALTER TABLE `si_customers` CHANGE `c_city` `city` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['78']['date'] = "20070507";
+
+	$patch['79']['name'] = "Alter field name c_state to state";
+        $patch['79']['patch'] = "ALTER TABLE `si_customers` CHANGE `c_state` `state` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['79']['date'] = "20070507";
+
+	$patch['80']['name'] = "Alter field name c_zip_code to zip_code";
+        $patch['80']['patch'] = "ALTER TABLE `si_customers` CHANGE `c_zip_code` `zip_code` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['80']['date'] = "20070507";
+
+	$patch['81']['name'] = "Alter field name c_country to countyr";
+        $patch['81']['patch'] = "ALTER TABLE `si_customers` CHANGE `c_country` `country` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['81']['date'] = "20070507";
+
+	$patch['82']['name'] = "Alter field name c_phone to phone";
+        $patch['82']['patch'] = "ALTER TABLE `si_customers` CHANGE `c_phone` `phone` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['82']['date'] = "20070507";
+
+	$patch['83']['name'] = "Alter field name c_mobile_phone to mobile_phone";
+        $patch['83']['patch'] = "ALTER TABLE `si_customers` CHANGE `c_mobile_phone` `mobile_phone` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['83']['date'] = "20070507";
+
+	$patch['84']['name'] = "Alter field name c_fax to fax";
+        $patch['84']['patch'] = "ALTER TABLE `si_customers` CHANGE `c_fax` `fax` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['84']['date'] = "20070507";
+
+	$patch['85']['name'] = "Alter field name c_email to email";
+        $patch['85']['patch'] = "ALTER TABLE `si_customers` CHANGE `c_email` `email` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['85']['date'] = "20070507";
+
+	$patch['86']['name'] = "Alter field name c_notes to notes";
+        $patch['86']['patch'] = "ALTER TABLE `si_customers` CHANGE `c_notes` `notes` TEXT  NULL DEFAULT NULL";
+	$patch['86']['date'] = "20070507";
+
+	$patch['87']['name'] = "Alter field name c_custom_field1 to custom_field1";
+        $patch['87']['patch'] = "ALTER TABLE `si_customers` CHANGE `c_custom_field1` `custom_field1` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['87']['date'] = "20070507";
+
+	$patch['88']['name'] = "Alter field name c_custom_field2 to custom_field2";
+        $patch['88']['patch'] = "ALTER TABLE `si_customers` CHANGE `c_custom_field2` `custom_field2` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['88']['date'] = "20070507";
+
+	$patch['89']['name'] = "Alter field name c_custom_field3 to custom_field3";
+        $patch['89']['patch'] = "ALTER TABLE `si_customers` CHANGE `c_custom_field3` `custom_field3` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['89']['date'] = "20070507";
+
+	$patch['90']['name'] = "Alter field name c_custom_field4 to custom_field4";
+        $patch['90']['patch'] = "ALTER TABLE `si_customers` CHANGE `c_custom_field4` `custom_field4` VARCHAR( 255 ) NULL DEFAULT NULL";
+	$patch['90']['date'] = "20070507";
+
+	$patch['91']['name'] = "Alter field name c_enabled to enabled";
+        $patch['91']['patch'] = "ALTER TABLE `si_customers` CHANGE `c_enabled` `enabled` VARCHAR( 1 ) NOT NULL DEFAULT '1'";
+	$patch['91']['date'] = "20070507"
+
 /*
  * Not sure about these patches		
 		$patch['64']['name'] = "Removes autoincrement from sql_id";

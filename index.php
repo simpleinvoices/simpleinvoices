@@ -53,10 +53,19 @@ if (($module == "invoices" ) AND (strstr($view,"templates"))) {
 
 
 if(file_exists("./modules/$module/$view.php")) {
+
+	/*Check the $module for validitity - make sure no ones hacking the url */
+	if (!ereg("^[a-z_/]+$",$module)) { 
+	       	die("Invalid module requested");
+	}
+
+	/*Check the $view for validitity - make sure no ones hacking the url */
+	if (!ereg("^[a-z_]+$",$view)) {
+	        die("Invalid view requested");
+	}
+
 	$file = "$module/$view";
 }
-
-
 
 $smarty -> display("../templates/default/header.tpl");
 if($menu) {
