@@ -205,5 +205,31 @@ function saveCustomer() {
 	return mysql_query($sql);
 }
 
+function getInvoices(&$result) {
+	global $config;
+	$invoice = null;
+
+	if($invoice =  mysql_fetch_array($result)) {
+
+		$invoice['calc_date'] = date( 'Y-m-d', strtotime( $invoice['inv_date'] ) );
+		$invoice['date'] = date( $config['date_format'], strtotime( $invoice['inv_date'] ) );
+			
+		#invoice total total - start
+		$invoice['total'] = calc_invoice_total($invoice['inv_id']);
+		$invoice['total_format'] = number_format($invoice['total'],2);
+		#invoice total total - end
+		
+		#amount paid calc - start
+		$invoice['paid'] = calc_invoice_paid($invoice['inv_id']);
+		$invoice['paid_format'] = number_format($invoice['paid'],2);
+		#amount paid calc - end
+		
+		#amount owing calc - start
+		$invoice['owing'] = $invoice['total'] - $invoice['paid'];
+		$invoice['owing_format'] = number_format($invoice['total'] - $invoice['paid'],2);
+		#amount owing calc - end
+	}
+	return $invoice;
+}
 //in this file are functions for all sql queries
 ?>
