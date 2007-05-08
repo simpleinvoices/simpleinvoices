@@ -39,7 +39,8 @@ if(getNumberOfPatches() > 0 ) {
 
 
 /*dont include the header if requested file is an invoice template - for print preview etc.. header is not needed */
-if (($module == "invoices" ) AND (strstr($view,"templates"))) {
+if (($module == "invoices" ) && (strstr($view,"templates"))) {
+	//TODO: why is $view templates/template?...
 	if (file_exists("./modules/invoices/template.php")) {
 	        include("./modules/invoices/template.php");
 	}
@@ -51,21 +52,18 @@ if (($module == "invoices" ) AND (strstr($view,"templates"))) {
 }
 
 
+$path = "$module/$view";
 
-if(file_exists("./modules/$module/$view.php")) {
+if(file_exists("./modules/$path.php")) {
+	
+	preg_match("/^[a-z|_]+\/[a-z|_]+/",$path,$res);
 
-	/*Check the $module for validitity - make sure no ones hacking the url */
-	if (!ereg("^[a-z_/]+$",$module)) { 
-	       	die("Invalid module requested");
-	}
-
-	/*Check the $view for validitity - make sure no ones hacking the url */
-	if (!ereg("^[a-z_]+$",$view)) {
-	        die("Invalid view requested");
-	}
-
-	$file = "$module/$view";
+	if(isset($res[0]) && $res[0] == $path) {
+		$file = $path;
+	}	
 }
+
+
 
 $smarty -> display("../templates/default/header.tpl");
 if($menu) {
