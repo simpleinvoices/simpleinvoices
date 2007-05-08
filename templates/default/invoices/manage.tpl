@@ -1,4 +1,4 @@
-{if $number_of_rows == 0}
+{if $invoices == null }
 	<P><em>{$LANG.no_invoices}.</em></p>
 {else}
 

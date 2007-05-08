@@ -3,10 +3,7 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-
-
-$sql = "select * from {$tb_prefix}payment_types ORDER BY pt_description";
-
+$sql = "SELECT * FROM {$tb_prefix}payment_types ORDER BY pt_description";
 $result = mysql_query($sql) or die(mysql_error());
 
 
@@ -20,6 +17,7 @@ for ($i=0;$pt = mysql_fetch_array($result);$i++) {
 	}
 	$pts[$i]=$pt;
 }
+
 $smarty -> assign('pts',$pts);
 
 getRicoLiveGrid("rico_payment_types","{ type:'number', decPlaces:0, ClassName:'alignleft' }");

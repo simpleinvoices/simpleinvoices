@@ -32,6 +32,18 @@ function getTaxRate($id) {
 	return mysql_fetch_array($result_print_tax_rate);
 }
 
+function getPaymentType($id) {
+	global $tb_prefix;
+	global $LANG;
+	
+	$sql = "SELECT * FROM {$tb_prefix}payment_types WHERE pt_id = $id";
+	$query = mysql_query($sql) or die(mysql_error());
+	$paymentType = mysql_fetch_array($query);
+	$paymentType['pt_enabled'] = $paymentType['pt_enabled']==1?$LANG['enabled']:$LANG['disabled'];
+	
+	return $paymentType;
+}
+
 function getDefaultCustomer() {
 	global $tb_prefix;
 	$sql = "SELECT *,c.name AS name FROM {$tb_prefix}customers c, {$tb_prefix}systemdefaults s WHERE ( s.name = 'customer' AND c.id = s.value)";
@@ -70,6 +82,7 @@ function getDefaultTax() {
 
 function getInvoice($id) {
 	global $tb_prefix;
+	global $config;
 	$print_master_invoice_id = "SELECT * FROM {$tb_prefix}invoices WHERE inv_id = $id";
 	$result_print_master_invoice_id  = mysql_query($print_master_invoice_id) or die(mysql_error());
 
@@ -231,5 +244,43 @@ function getInvoices(&$result) {
 	}
 	return $invoice;
 }
+
+function getCustomers() {
+		
+	global $LANG;
+	global $tb_prefix;
+	$customer = null;
+	
+	$sql = "SELECT * FROM {$tb_prefix}customers ORDER BY name";
+	$result = mysql_query($sql) or die(mysql_error());
+
+	$customers = null;
+
+	for($i=0;$customer = mysql_fetch_array($result);$i++) {
+		if ($customer['enabled'] == 1) {
+			$customer['enabled'] = $LANG['enabled'];
+		} else {
+			$customer['enabled'] = $LANG['disabled'];
+		}
+
+		#invoice total calc - start
+		$customer['total'] = calc_customer_total($customer['id']);
+		#invoice total calc - end
+
+		#amount paid calc - start
+		$customer['paid'] = calc_customer_paid($customer['id']);
+		#amount paid calc - end
+
+		#amount owing calc - start
+		$customer['owing'] = $customer['total'] - $customer['paid'];
+		
+		#amount owing calc - end
+		$customers[$i] = $customer;
+
+	}
+	
+	return $customers;
+}
+		
 //in this file are functions for all sql queries
 ?>

@@ -11,8 +11,4 @@ if ($_POST['pt_description'] != "" ) {
 
 $smarty -> assign('save',$save);
 
-
-//include("./templates/default/payment_types/add2.tpl");
-//echo $block;
-
 ?>

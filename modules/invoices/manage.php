@@ -13,16 +13,10 @@ EOD;*/
 $sql = "SELECT * FROM {$tb_prefix}invoices ORDER BY inv_id desc";
 
 $result = mysql_query($sql) or die(mysql_error());
-$number_of_rows = mysql_num_rows($result);
-
-
-/*if (mysql_num_rows($result) == 0) {
-	$display_block = "";
-}else{
-	$display_block = <<<EOD*/
 
 
 $invoices = null;
+
 for($i = 0;$invoice = getInvoices($result);$i++) {
 	
 	
@@ -56,14 +50,9 @@ for($i = 0;$invoice = getInvoices($result);$i++) {
         
 	$invoices[$i]['overdue'] = $overdue;
 	$invoices[$i]['url_for_pdf'] = $url_for_pdf;
-							
-	//}
-								
 }
 
 
-
-$smarty -> assign("number_of_rows",$number_of_rows);
 $smarty -> assign("invoices",$invoices);
 
 

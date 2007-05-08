@@ -1,4 +1,4 @@
-{if $result == null}
+{if $customers == null}
 	<P><em>{$LANG.no_customers}.</em></p>
 {else}
 
