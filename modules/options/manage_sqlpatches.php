@@ -7,7 +7,7 @@ $sql = "SELECT * FROM {$tb_prefix}sql_patchmanager ORDER BY sql_id";
 $query = mysql_query($sql) or die(mysql_error());
 
 	
-getRicoLiveGrid("rico_sqlpatches","{ type:'number', decPlaces:0, ClassName:'alignleft' }");
+getRicoLiveGrid("rico_sqlpatches","{ type:'number', decPlaces:0, ClassName:'alignleft' },,{ type:'number', decPlaces:0, ClassName:'alignleft'}");
 
 echo <<<EOD
 <!--[if gte IE 5.5]>
