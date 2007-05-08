@@ -85,7 +85,7 @@ for($i=1;$i<=4;$i++) {
 /*Set the template to the default*/
 $template = $defaults['template'];
 if (isset($_GET['export'])) {
-	$template = "simple";
+	$template = "export";
 }
 
 #logo field support - if not logo show nothing else show logo
