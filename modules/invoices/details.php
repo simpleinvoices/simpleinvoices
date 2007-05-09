@@ -10,7 +10,7 @@ $master_invoice_id = $_GET['submit'];
 
 
 #Get the invoice details
-$print_master_invoice_id = "SELECT * FROM {$tb_prefix}invoices WHERE inv_id = " . $master_invoice_id ;
+$print_master_invoice_id = "SELECT * FROM {$tb_prefix}invoices WHERE id = " . $master_invoice_id ;
 $result_print_master_invoice_id  = mysql_query($print_master_invoice_id , $conn) or die(mysql_error());
 
 while ($Array_master_invoice = mysql_fetch_array($result_print_master_invoice_id)) {

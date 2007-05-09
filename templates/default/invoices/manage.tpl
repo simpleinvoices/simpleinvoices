@@ -50,19 +50,19 @@
 	<!-- Quick View -->
 	<a class="index_table"
 	 title="{$LANG.quick_view_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}"
-	 href="index.php?module=invoices&view=quick_view&submit={$invoice.invoice.id}&invoice_style={$invoiceType.inv_ty_description}">
+	 href="index.php?module=invoices&view=quick_view&submit={$invoice.invoice.id}&invoice_style={$invoice.invoiceType.inv_ty_description}">
 		<img src="images/common/view.png" height="16" border="-5px0" padding="-4px" valign="bottom" /><!-- print --></a>
 	</a>
 	
 	<!-- Edit View -->
 	<a class="index_table" title="{$LANG.edit_view_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}"
-	 href="index.php?module=invoices&view=details&submit={$invoice.invoice.id}&action=view&invoice_style={$invoiceType.inv_ty_description}">
+	 href="index.php?module=invoices&view=details&submit={$invoice.invoice.id}&action=view&invoice_style={$invoice.invoiceType.inv_ty_description}">
 		<img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>
 	</a> 
 	
 	<!-- Print View -->
 	<a class="index_table" title="{$LANG.print_preview_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}"
-	href="index.php?module=invoices&view=templates/template&submit={$invoice.invoice.id}&action=view&location=print&invoice_style={$invoiceType.inv_ty_description}">
+	href="index.php?module=invoices&view=templates/template&submit={$invoice.invoice.id}&action=view&location=print&invoice_style={$invoice.invoiceType.inv_ty_description}">
 	<img src="images/common/printer.gif" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>
  
 	<!-- EXPORT TO PDF -->
@@ -71,12 +71,12 @@
 
 	<!--XLS -->
 	<a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording}{$invoice.invoice.id} {$LANG.export_xls_tooltip} {$spreadsheet} {$LANG.format_tooltip}"
-	 class="index_table" href="index.php?module=invoices&view=templates/template&submit={$invoice.invoice.id}&action=view&invoice_style={$invoiceType.inv_ty_description}&location=print&export={$spreadsheet}">
+	 class="index_table" href="index.php?module=invoices&view=templates/template&submit={$invoice.invoice.id}&action=view&invoice_style={$invoice.invoiceType.inv_ty_description}&location=print&export={$spreadsheet}">
 	 <img src="images/common/xls.gif" height="16" border="0" padding="-4px" valign="bottom" /><!-- $spreadsheet --></a>
 
 	<!-- DOC -->
 	<a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id} {$LANG.export_doc_tooltip} {$word_processor} {$LANG.format_tooltip}"
-	 class="index_table" href="index.php?module=invoices&view=templates/template&submit={$invoice.invoice.id}&action=view&invoice_style={$invoiceType.inv_ty_description}&location=print&export={$word_processor}">
+	 class="index_table" href="index.php?module=invoices&view=templates/template&submit={$invoice.invoice.id}&action=view&invoice_style={$invoice.invoiceType.inv_ty_description}&location=print&export={$word_processor}">
 	 <img src="images/common/doc.png" height="16" border="0" padding="-4px" valign="bottom" /><!-- $word_processor --></a>
 
   <!-- Payment --><a title="{$LANG.process_payment} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}"

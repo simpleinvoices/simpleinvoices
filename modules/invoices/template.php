@@ -49,7 +49,7 @@ $biller = getBiller($invoice['biller_id']);
 
 
 #preferences query
-$print_preferences = "SELECT * FROM {$tb_prefix}preferences where pref_id = $invoice[preference] ";
+$print_preferences = "SELECT * FROM {$tb_prefix}preferences where pref_id = $invoice[preference_id] ";
 $result_print_preferences  = mysql_query($print_preferences, $conn) or die(mysql_error());
 
 $pref = mysql_fetch_array($result_print_preferences);
