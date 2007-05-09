@@ -5,25 +5,25 @@ checkLogin();
 
 
 #if coming from another page where you want to filter by just one invoice
-if (!empty($_GET['inv_id'])) {
+if (!empty($_GET['id'])) {
 
-	$display_block_header = "<b>$LANG[payments_filtered] $_GET[inv_id]</b> :: <a href='index.php?module=payments&view=process&submit=$_GET[inv_id]&op=pay_selected_invoice'>$LANG[payments_filtered_invoice]</a>";
+	$display_block_header = "<b>$LANG[payments_filtered] $_GET[id]</b> :: <a href='index.php?module=payments&view=process&submit=$_GET[id]&op=pay_selected_invoice'>$LANG[payments_filtered_invoice]</a>";
 
-	$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.name, {$tb_prefix}biller.name from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.id and {$tb_prefix}account_payments.ac_inv_id='$_GET[inv_id]' ORDER BY {$tb_prefix}account_payments.id DESC";
+	$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.name, {$tb_prefix}biller.name from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.biller_id = {$tb_prefix}biller.id and {$tb_prefix}account_payments.ac_inv_id='$_GET[id]' ORDER BY {$tb_prefix}account_payments.id DESC";
 }
 #if coming from another page where you want to filter by just one customer
 elseif (!empty($_GET['id'])) {
 
 	$display_block_header = "<b>$LANG[payments_filtered_customer] $_GET[id] :: <a href='index.php?module=payments&view=process&op=pay_invoice'>$LANG[process_payment]</a></b>";
 
-	$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.name, {$tb_prefix}biller.name from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.id and {$tb_prefix}customers.id='$_GET[id]' ORDER BY {$tb_prefix}account_payments.id DESC ";
+	$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.name, {$tb_prefix}biller.name from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.biller_id = {$tb_prefix}biller.id and {$tb_prefix}customers.id='$_GET[id]' ORDER BY {$tb_prefix}account_payments.id DESC ";
 }
 #if you want to show all invoices - no filters
 else {
 
 	$display_block_header = "<b>$LANG[manage_payments] :: <a href='index.php?module=payments&view=process&op=pay_invoice'>$LANG[process_payment]</a></b>";
 
-	$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.name, {$tb_prefix}biller.name from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.inv_id and {$tb_prefix}invoices.inv_customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.id ORDER BY {$tb_prefix}account_payments.id DESC";
+	$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.name, {$tb_prefix}biller.name from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.biller_id = {$tb_prefix}biller.id ORDER BY {$tb_prefix}account_payments.id DESC";
 }
 
 $result = mysql_query($sql, $conn) or die(mysql_error());
@@ -87,7 +87,7 @@ EOD;
 
 		$display_block .= <<<EOD
 	<tr class='index_table'>
-		<td class='index_table'><a class='index_table' href='index.php?module=payments&view=details&inv_id={$ac['id']}'>{$LANG['view']}</a></td>
+		<td class='index_table'><a class='index_table' href='index.php?module=payments&view=details&id={$ac['id']}'>{$LANG['view']}</a></td>
 		<td class='index_table'>{$ac['id']}</td>
 		<td class='index_table'>{$ac['ac_inv_id']}</td>
 		<td class='index_table'>{$ac['customers.name']}</td>

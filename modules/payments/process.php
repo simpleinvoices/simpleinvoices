@@ -10,12 +10,12 @@ checkLogin();
 
 
 #get max invoice id for validataion - start
-$sql_max = "SELECT max(inv_id) as max_inv_id FROM {$tb_prefix}invoices";
+$sql_max = "SELECT max(id) as max_id FROM {$tb_prefix}invoices";
 $result_max = mysql_query($sql_max, $conn) or die(mysql_error());
 
 while ($max_invoice = mysql_fetch_array($result_max) ) {
 	/*
-	$max_invoice_id = $max_invoice['max_inv_id'];
+	$max_invoice_id = $max_invoice['max_id'];
 	*/
 };
 
@@ -24,7 +24,7 @@ while ($max_invoice = mysql_fetch_array($result_max) ) {
 jsBegin();
 jsFormValidationBegin("frmpost");
 #jsValidateifNum("ac_inv_id",$LANG['invoice_id']);
-jsPaymentValidation("ac_inv_id",$LANG['invoice_id'],1,$max_invoice['max_inv_id']);
+jsPaymentValidation("ac_inv_id",$LANG['invoice_id'],1,$max_invoice['max_id']);
 jsValidateifNum("ac_amount",$LANG['amount']);
 jsValidateifNum("ac_date",$LANG['date']);
 jsFormValidationEnd();
@@ -38,7 +38,7 @@ $master_invoice_id = $_GET['submit'];
 
 #master invoice id select
 if (!empty($master_invoice_id)) {
-	$print_master_invoice_id = "SELECT * FROM {$tb_prefix}invoices WHERE inv_id = " . $master_invoice_id;
+	$print_master_invoice_id = "SELECT * FROM {$tb_prefix}invoices WHERE id = " . $master_invoice_id;
 }
 elseif (empty($master_invoice_id)) {
 	$print_master_invoice_id = "SELECT * FROM {$tb_prefix}invoices";
@@ -48,13 +48,13 @@ $result_print_master_invoice_id  = mysql_query($print_master_invoice_id , $conn)
 $inv = mysql_fetch_array($result_print_master_invoice_id);
 
 #customer query
-$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE id = $inv[inv_customer_id]";
+$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE id = $inv[customer_id]";
 $result_print_customer = mysql_query($print_customer, $conn) or die(mysql_error());
 
 $customer = mysql_fetch_array($result_print_customer);
 
 #biller query
-$print_biller = "SELECT * FROM {$tb_prefix}biller WHERE id = $inv[inv_biller_id]";
+$print_biller = "SELECT * FROM {$tb_prefix}biller WHERE id = $inv[biller_id]";
 $result_print_biller = mysql_query($print_biller, $conn) or die(mysql_error());
 
 $biller = mysql_fetch_array($result_print_biller);
@@ -103,12 +103,12 @@ EOD;
 
 #Accounts - for the invoice - start
 #invoice total calc - start
-$invoice_total_Field = calc_invoice_total($inv['inv_id']);
+$invoice_total_Field = calc_invoice_total($inv['id']);
 $invoice_total_Field_formatted = number_format($invoice_total_Field,2);
 #invoice total calc - end
 
 #amount paid calc - start
-$invoice_paid_Field = calc_invoice_paid($inv['inv_id']);
+$invoice_paid_Field = calc_invoice_paid($inv['id']);
 $invoice_paid_Field_formatted = number_format($invoice_paid_Field,2);
 #amount paid calc - end
 
@@ -128,7 +128,7 @@ if ($op === "pay_selected_invoice") {
 <table align="center">	
 <tr>
 	<td class="details_screen">{$LANG['invoice_id']}</td>
-	<td><input type="hidden" name="ac_inv_id" value="{$inv['inv_id']}" />{$inv['inv_id']}</td>
+	<td><input type="hidden" name="ac_inv_id" value="{$inv['id']}" />{$inv['id']}</td>
 	<td class="details_screen">{$LANG['total']}</td><td>{$invoice_total_Field_formatted}</td>
 </tr>
 <tr>

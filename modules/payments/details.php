@@ -13,7 +13,7 @@ jsEnd();
 /*end validation code*/
 
 
-$sql = "SELECT {$tb_prefix}account_payments.*, {$tb_prefix}customers.name, {$tb_prefix}biller.name FROM {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  WHERE ac_inv_id = {$tb_prefix}invoices.inv_id AND {$tb_prefix}invoices.inv_customer_id = {$tb_prefix}customers.id AND {$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.id AND {$tb_prefix}account_payments.id='$_GET[inv_id]'";
+$sql = "SELECT {$tb_prefix}account_payments.*, {$tb_prefix}customers.name, {$tb_prefix}biller.name FROM {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  WHERE ac_inv_id = {$tb_prefix}invoices.id AND {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id AND {$tb_prefix}invoices.biller_id = {$tb_prefix}biller.id AND {$tb_prefix}account_payments.id='$_GET[id]'";
 
 
 $result = mysql_query($sql) or die(mysql_error());

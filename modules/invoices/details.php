@@ -21,7 +21,7 @@ while ($Array_master_invoice = mysql_fetch_array($result_print_master_invoice_id
                 $inv_preferenceField = $Array_master_invoice['preference_id'];
 		$inv_dateField = date( 'Y-m-d', strtotime( $Array_master_invoice['date'] ) );
 		/*
-		$inv_dateField = $Array_master_invoice['inv_date'];
+		$inv_dateField = $Array_master_invoice['date'];
 		*/
                 $inv_noteField = $Array_master_invoice['note'];
                 $inv_custom_field1Field = $Array_master_invoice['custom_field1'];

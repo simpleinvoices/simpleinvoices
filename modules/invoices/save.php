@@ -117,7 +117,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 			custom_field3 = '$_POST[i_custom_field3]',
 			custom_field4 = '$_POST[i_custom_field4]'
 		WHERE
-			inv_id = $invoice_id";
+			id = $invoice_id";
 
 	if (mysql_query($sql)) {
 		$display_block = $LANG['save_invoice_success'];
@@ -322,7 +322,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 			custom_field3 = '$_POST[i_custom_field3]',
 			custom_field4 = '$_POST[i_custom_field4]'
 		WHERE
-			inv_id = $invoice_id";
+			id = $invoice_id";
 
 	if (mysql_query($sql)) {
 		$display_block = $LANG['save_invoice_success'];

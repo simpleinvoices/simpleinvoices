@@ -33,11 +33,11 @@ $result_invoice_type = mysql_query($sql_invoice_type, $conn) or die(mysql_error(
 	};*/
 
 #customer query
-/*$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE id = $invoice[inv_customer_id]";
+/*$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE id = $invoice[customer_id]";
 $result_print_customer = mysql_query($print_customer, $conn) or die(mysql_error());
 
 #biller query
-$print_biller = "SELECT * FROM {$tb_prefix}biller WHERE id = $invoice[inv_biller_id]";
+$print_biller = "SELECT * FROM {$tb_prefix}biller WHERE id = $invoice[biller_id]";
 $result_print_biller = mysql_query($print_biller, $conn) or die(mysql_error());
 
 $customer = mysql_fetch_array($result_print_customer);

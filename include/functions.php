@@ -204,9 +204,9 @@ function calc_customer_total($c_idField) {
 		FROM
 			{$tb_prefix}invoice_items, {$tb_prefix}invoices 
 		WHERE  
-			{$tb_prefix}invoices.inv_customer_id  = $c_idField  
+			{$tb_prefix}invoices.customer_id  = $c_idField  
 		AND 
-			{$tb_prefix}invoices.inv_id = {$tb_prefix}invoice_items.inv_it_invoice_id
+			{$tb_prefix}invoices.id = {$tb_prefix}invoice_items.inv_it_invoice_id
 		";
         $result_print_invoice_total_customer = mysql_query($print_invoice_total_customer, $conn) or die(mysql_error());
 
@@ -235,9 +235,9 @@ function calc_customer_paid($c_idField) {
 		FROM 
 			{$tb_prefix}account_payments, {$tb_prefix}invoices 
 		WHERE 
-			{$tb_prefix}account_payments.ac_inv_id = {$tb_prefix}invoices.inv_id 
+			{$tb_prefix}account_payments.ac_inv_id = {$tb_prefix}invoices.id 
 		AND 
-			{$tb_prefix}invoices.inv_customer_id = $c_idField";  	
+			{$tb_prefix}invoices.customer_id = $c_idField";  	
 
         $result_x2 = mysql_query($x2, $conn) or die(mysql_error());
         while ($result_x2Array = mysql_fetch_array($result_x2)) {

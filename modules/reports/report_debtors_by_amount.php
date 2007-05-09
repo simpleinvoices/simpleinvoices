@@ -27,19 +27,19 @@ include('./config/config.php');
    $sSQL = "
 
 SELECT
-        inv_id,
-        (select name from {$tb_prefix}biller where id = {$tb_prefix}invoices.inv_biller_id) as Biller,
-        (select name from {$tb_prefix}customers where id = {$tb_prefix}invoices.inv_customer_id) as Customer,
-        (select sum(inv_it_total) from {$tb_prefix}invoice_items WHERE inv_it_invoice_id = inv_id) as Total,
-        ( select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from {$tb_prefix}account_payments where  ac_inv_id = inv_id ) as Paid,
+        id,
+        (select name from {$tb_prefix}biller where id = {$tb_prefix}invoices.biller_id) as Biller,
+        (select name from {$tb_prefix}customers where id = {$tb_prefix}invoices.customer_id) as Customer,
+        (select sum(inv_it_total) from {$tb_prefix}invoice_items WHERE inv_it_invoice_id = id) as Total,
+        ( select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from {$tb_prefix}account_payments where  ac_inv_id = id ) as Paid,
         (select (Total - Paid)) as Owing ,
-        inv_date
+        date
 FROM
         {$tb_prefix}invoices,{$tb_prefix}account_payments,{$tb_prefix}invoice_items, {$tb_prefix}biller, {$tb_prefix}customers
 WHERE
-        inv_it_invoice_id = {$tb_prefix}invoices.inv_id
+        inv_it_invoice_id = {$tb_prefix}invoices.id
 GROUP BY
-        inv_id
+        id
 ORDER BY
         Owing DESC;
 

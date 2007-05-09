@@ -29,27 +29,27 @@ include('./config/config.php');
    $sSQL = "
 
 SELECT
-        inv_id,
-        (select name from {$tb_prefix}biller where id = {$tb_prefix}invoices.inv_biller_id) as Biller,
-        (select name from {$tb_prefix}customers where id = {$tb_prefix}invoices.inv_customer_id) as Customer,
-        (select sum(inv_it_total) from {$tb_prefix}invoice_items WHERE inv_it_invoice_id = inv_id) as Total,
-        ( select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from {$tb_prefix}account_payments where  ac_inv_id = inv_id ) as Paid,
+        id,
+        (select name from {$tb_prefix}biller where id = {$tb_prefix}invoices.biller_id) as Biller,
+        (select name from {$tb_prefix}customers where id = {$tb_prefix}invoices.customer_id) as Customer,
+        (select sum(inv_it_total) from {$tb_prefix}invoice_items WHERE inv_it_invoice_id = id) as Total,
+        ( select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from {$tb_prefix}account_payments where  ac_inv_id = id ) as Paid,
         (select (Total - Paid)) as Owing ,
-        date_format(inv_date,'%Y-%m-%e') as Date ,
-        (select datediff(now(),inv_date)) as Age,
-        (CASE WHEN datediff(now(),inv_date) <= 14 THEN '0-14'
-                WHEN datediff(now(),inv_date) <= 30 THEN '15-30'
-                WHEN datediff(now(),inv_date) <= 60 THEN '31-60'
-                WHEN datediff(now(),inv_date) <= 90 THEN '61-90'
+        date_format(date,'%Y-%m-%e') as Date ,
+        (select datediff(now(),date)) as Age,
+        (CASE WHEN datediff(now(),date) <= 14 THEN '0-14'
+                WHEN datediff(now(),date) <= 30 THEN '15-30'
+                WHEN datediff(now(),date) <= 60 THEN '31-60'
+                WHEN datediff(now(),date) <= 90 THEN '61-90'
                 ELSE '90+'
         END ) as Aging
 
 FROM
         {$tb_prefix}invoices,{$tb_prefix}account_payments,{$tb_prefix}invoice_items, {$tb_prefix}biller, {$tb_prefix}customers
 WHERE
-        inv_it_invoice_id = {$tb_prefix}invoices.inv_id
+        inv_it_invoice_id = {$tb_prefix}invoices.id
 GROUP BY
-        inv_id;
+        id;
 
 ";
    $oRpt = new PHPReportMaker();

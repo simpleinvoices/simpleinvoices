@@ -83,12 +83,12 @@ function getDefaultTax() {
 function getInvoice($id) {
 	global $tb_prefix;
 	global $config;
-	$print_master_invoice_id = "SELECT * FROM {$tb_prefix}invoices WHERE inv_id = $id";
+	$print_master_invoice_id = "SELECT * FROM {$tb_prefix}invoices WHERE id = $id";
 	$result_print_master_invoice_id  = mysql_query($print_master_invoice_id) or die(mysql_error());
 
 	$invoice = mysql_fetch_array($result_print_master_invoice_id);
-	$invoice['date_field'] = date( $config['date_format'], strtotime( $invoice['inv_date'] ) );
-	$invoice['calc_date'] = date('Y-m-d', strtotime( $invoice['inv_date'] ) );
+	$invoice['date_field'] = date( $config['date_format'], strtotime( $invoice['date'] ) );
+	$invoice['calc_date'] = date('Y-m-d', strtotime( $invoice['date'] ) );
 	
 	return $invoice;
 }
@@ -224,16 +224,16 @@ function getInvoices(&$result) {
 
 	if($invoice =  mysql_fetch_array($result)) {
 
-		$invoice['calc_date'] = date( 'Y-m-d', strtotime( $invoice['inv_date'] ) );
-		$invoice['date'] = date( $config['date_format'], strtotime( $invoice['inv_date'] ) );
+		$invoice['calc_date'] = date( 'Y-m-d', strtotime( $invoice['date'] ) );
+		$invoice['date'] = date( $config['date_format'], strtotime( $invoice['date'] ) );
 			
 		#invoice total total - start
-		$invoice['total'] = calc_invoice_total($invoice['inv_id']);
+		$invoice['total'] = calc_invoice_total($invoice['id']);
 		$invoice['total_format'] = number_format($invoice['total'],2);
 		#invoice total total - end
 		
 		#amount paid calc - start
-		$invoice['paid'] = calc_invoice_paid($invoice['inv_id']);
+		$invoice['paid'] = calc_invoice_paid($invoice['id']);
 		$invoice['paid_format'] = number_format($invoice['paid'],2);
 		#amount paid calc - end
 		
