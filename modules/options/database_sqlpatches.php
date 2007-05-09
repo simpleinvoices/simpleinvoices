@@ -43,7 +43,9 @@ function runPatches() {
 		<hr />
 		<tr><td><br>The database patches have now been applied. You can now start working with Simple Invoices.<br /><p align=middle><br /><a href="index.php">HOME</a></p></tr>
 		</table>
+
 EOD;
+	$refresh = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php>";
 
 	} else {
 
@@ -60,6 +62,7 @@ EOD;
 	
 	global $smarty;
 	$smarty-> assign("display_block",$display_block);
+	$smarty-> assign("refresh",$refresh);
 
 }
 

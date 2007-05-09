@@ -1,1 +1,2 @@
 {$display_block}
+{$refresh}
