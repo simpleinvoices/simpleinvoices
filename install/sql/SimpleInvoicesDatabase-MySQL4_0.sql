@@ -243,3 +243,15 @@ CREATE TABLE `si_tax` (
   PRIMARY KEY  (`tax_id`)
 ) TYPE=MyISAM  AUTO_INCREMENT=8 ;
 
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `si_systemdefaults`
+-- 
+
+CREATE TABLE `si_systemdefaults` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(30) NOT NULL,
+  `value` varchar(30) NOT NULL,
+  PRIMARY KEY  (`id`),
+) ENGINE=MyISAM  AUTO_INCREMENT=39 ;

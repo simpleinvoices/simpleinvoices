@@ -162,7 +162,6 @@ CREATE TABLE `si_products` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 
-
 CREATE TABLE `si_sql_patchmanager` (
   `sql_id` int(11) NOT NULL auto_increment,
   `sql_patch_ref` varchar(50) NOT NULL default '',
@@ -187,5 +186,4 @@ CREATE TABLE `si_systemdefaults` (
   `name` varchar(30) NOT NULL,
   `value` varchar(30) NOT NULL,
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
