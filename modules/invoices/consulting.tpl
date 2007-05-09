@@ -97,7 +97,7 @@ checkLogin();	//TODO: Really needed in .tpl files? I don't think so
 </tr>
 
 <tr>
-	<td class="details_screen">$LANG[inv_pref]</td><td input type=text name="inv_preferences">$display_block_preferences</td>
+	<td class="details_screen">$LANG[inv_pref]</td><td input type=text name="preference_id">$display_block_preferences</td>
 </tr>
 <tr>
 	<td align=left colspan=2> 

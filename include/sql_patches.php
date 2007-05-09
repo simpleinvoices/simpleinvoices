@@ -481,6 +481,53 @@ ADD b_co_footer TEXT";
         $patch['91']['patch'] = "ALTER TABLE `si_customers` CHANGE `c_enabled` `enabled` VARCHAR( 1 ) NOT NULL DEFAULT '1'";
 	$patch['91']['date'] = "20070507"
 
+	//invoices sql patches
+	$patch['92']['name'] = "Alter field name inv_id to id ";
+        $patch['92']['patch'] = "ALTER TABLE `si_invoices` CHANGE `inv_id` `id` INT( 10 ) NOT NULL AUTO_INCREMENT";
+	$patch['92']['date'] = "20070507"
+
+	$patch['93']['name'] = "Alter field name inv_biller_id to biller_id";
+        $patch['93']['patch'] = "ALTER TABLE `si_invoices` CHANGE `inv_biller_id` `biller_id` INT( 10 ) NOT NULL DEFAULT '0'";
+	$patch['93']['date'] = "20070507"
+
+	$patch['94']['name'] = "Alter field name inv_customer_id to customer_id";
+	$patch['94']['patch'] = "ALTER TABLE `si_invoices` CHANGE `inv_customer_id` `customer_id` INT( 10 ) NOT NULL DEFAULT '0'";
+	$patch['94']['date'] = "20070507"
+
+	$patch['95']['name'] = "Alter field name inv_type type_id";
+	$patch['95']['patch'] = "ALTER TABLE `si_invoices` CHANGE `inv_type` `type_id` INT( 10 ) NOT NULL DEFAULT '0'";
+	$patch['95']['date'] = "20070507"
+
+	$patch['96']['name'] = "Alter field name inv_preference to preference_id";
+	$patch['96']['patch'] = "ALTER TABLE `si_invoices` CHANGE `inv_preference` `preference_id` INT( 10 ) NOT NULL DEFAULT '0'";
+	$patch['96']['date'] = "20070507"
+
+	$patch['97']['name'] = "Alter field name inv_date to date";
+	$patch['97']['patch'] = "ALTER TABLE `si_invoices` CHANGE `inv_date` `date` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'";
+	$patch['97']['date'] = "20070507"
+
+	$patch['98']['name'] = "Alter field name invoice_custom_field1 to custom_field1";
+	$patch['98']['patch'] = "ALTER TABLE `si_invoices` CHANGE `invoice_custom_field1` `custom_field1` VARCHAR( 50 ) NULL DEFAULT NULL";
+	$patch['98']['date'] = "20070507"
+
+	$patch['99']['name'] = "Alter field name invoice_custom_field2 to custom_field2";
+	$patch['99']['patch'] = "ALTER TABLE `si_invoices` CHANGE `invoice_custom_field2` `custom_field2` VARCHAR( 50 ) NULL DEFAULT NULL";
+	$patch['99']['date'] = "20070507"
+
+	$patch['100']['name'] = "Alter field name invoice_custom_field3 to custom_field3";
+	$patch['100']['patch'] = "ALTER TABLE `si_invoices` CHANGE `invoice_custom_field3` `custom_field3` VARCHAR( 50 ) NULL DEFAULT NULL";
+	$patch['100']['date'] = "20070507"
+
+	$patch['101']['name'] = "Alter field name invoice_custom_field4 to custom_field4";
+	$patch['101']['patch'] = "ALTER TABLE `si_invoices` CHANGE `invoice_custom_field4` `custom_field4` VARCHAR( 50 ) NULL DEFAULT NULL";
+	$patch['101']['date'] = "20070507"
+
+	$patch['102']['name'] = "Alter field name ";
+	$patch['102']['patch'] = "ALTER TABLE `si_invoices` CHANGE `inv_note` `note` TEXT NULL DEFAULT NULL";
+	$patch['102']['date'] = "20070507"
+
+
+
 /*
  * Not sure about these patches		
 		$patch['64']['name'] = "Removes autoincrement from sql_id";

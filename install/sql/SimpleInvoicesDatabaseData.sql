@@ -89,7 +89,7 @@ INSERT INTO `si_invoice_type` (`inv_ty_id`, `inv_ty_description`) VALUES
 -- Dumping data for table `si_invoices`
 -- 
 
-INSERT INTO `si_invoices` (`inv_id`, `inv_biller_id`, `inv_customer_id`, `inv_type`, `inv_preference`, `inv_date`, `invoice_custom_field1`, `invoice_custom_field2`, `invoice_custom_field3`, `invoice_custom_field4`, `inv_note`) VALUES 
+INSERT INTO `si_invoices` (`id`, `biller_id`, `customer_id`, `type_id`, `preference_id`, `date`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `note`) VALUES 
 (1, 4, 3, 2, 1, '2007-02-03 00:00:00', NULL, NULL, NULL, NULL, 'Will be delivered via certified post'),
 (2, 1, 2, 1, 1, '2007-01-01 00:00:00', NULL, NULL, NULL, NULL, ''),
 (3, 2, 3, 3, 1, '2007-02-04 00:00:00', NULL, NULL, NULL, NULL, ''),

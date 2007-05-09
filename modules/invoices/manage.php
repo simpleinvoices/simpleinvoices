@@ -20,10 +20,10 @@ $invoices = null;
 for($i = 0;$invoice = getInvoices($result);$i++) {
 	
 	
-	$biller = getBiller($invoice['inv_biller_id']);
-	$customer = getCustomer($invoice['inv_customer_id']);
-	$invoiceType = getInvoiceType($invoice['inv_type']);
-	$preference = getPreferences($invoice['inv_preference']);
+	$biller = getBiller($invoice['biller_id']);
+	$customer = getCustomer($invoice['customer_id']);
+	$invoiceType = getInvoiceType($invoice['type_id']);
+	$preference = getPreferences($invoice['preference_id']);
 	$defaults = getSystemDefaults();
 	
 	$invoices[$i]['invoice'] = $invoice;

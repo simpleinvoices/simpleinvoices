@@ -259,7 +259,7 @@ EOD;
 EOD;
 }
 
-else if ($_GET[submit] == "inv_preference") {
+else if ($_GET[submit] == "preference_id") {
 
 	#invoice preference query
 	$print_inv_preference = "SELECT * FROM {$tb_prefix}preferences WHERE pref_id = $defaults[invoice]";

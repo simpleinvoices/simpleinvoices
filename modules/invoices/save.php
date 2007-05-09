@@ -16,17 +16,17 @@ if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_inv
 	$sql = "INSERT 
 			into
 		{$tb_prefix}invoices (
-			inv_id, 
-			inv_biller_id, 
-			inv_customer_id, 
-			inv_type,
-			inv_preference, 
-			inv_date, 
-			inv_note,
-			invoice_custom_field1,
-			invoice_custom_field2,
-			invoice_custom_field3,
-			invoice_custom_field4
+			id, 
+			biller_id, 
+			customer_id, 
+			type_id,
+			preference_id, 
+			date, 
+			note,
+			custom_field1,
+			custom_field2,
+			custom_field3,
+			custom_field4
 		)
 		VALUES
 		(
@@ -108,14 +108,14 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 	$sql = "UPDATE
 			{$tb_prefix}invoices
 		SET
-			inv_biller_id = '$_POST[sel_id]',
-			inv_customer_id = '$_POST[select_customer]',
-			inv_preference = '$_POST[select_preferences]',
-			inv_date = '$_POST[select_date]',
-			invoice_custom_field1 = '$_POST[i_custom_field1]',
-			invoice_custom_field2 = '$_POST[i_custom_field2]',
-			invoice_custom_field3 = '$_POST[i_custom_field3]',
-			invoice_custom_field4 = '$_POST[i_custom_field4]'
+			biller_id = '$_POST[sel_id]',
+			customer_id = '$_POST[select_customer]',
+			preference_id = '$_POST[select_preferences]',
+			date = '$_POST[select_date]',
+			custom_field1 = '$_POST[i_custom_field1]',
+			custom_field2 = '$_POST[i_custom_field2]',
+			custom_field3 = '$_POST[i_custom_field3]',
+			custom_field4 = '$_POST[i_custom_field4]'
 		WHERE
 			inv_id = $invoice_id";
 
@@ -180,17 +180,17 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 	$sql = "INSERT 
 			into
 		{$tb_prefix}invoices (
-			inv_id, 
-			inv_biller_id, 
-			inv_customer_id, 	
-			inv_type,
-			inv_preference, 
-			inv_date, 
-			inv_note,
-			invoice_custom_field1,
-			invoice_custom_field2,
-			invoice_custom_field3, 
-			invoice_custom_field4
+			id, 
+			biller_id, 
+			customer_id, 	
+			type_id,
+			preference_id, 
+			date, 
+			note,
+			custom_field1,
+			custom_field2,
+			custom_field3, 
+			custom_field4
 		)
 		VALUES (
 			'',
@@ -312,15 +312,15 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 	$sql = "UPDATE
 			{$tb_prefix}invoices
 		SET
-			inv_biller_id = '$_POST[sel_id]',
-			inv_customer_id = '$_POST[select_customer]',
-			inv_preference = '$_POST[select_preferences]',
-			inv_date = '$_POST[select_date]',
-			inv_note = '$_POST[invoice_itemised_note]',
-			invoice_custom_field1 = '$_POST[i_custom_field1]',
-			invoice_custom_field2 = '$_POST[i_custom_field2]',
-			invoice_custom_field3 = '$_POST[i_custom_field3]',
-			invoice_custom_field4 = '$_POST[i_custom_field4]'
+			biller_id = '$_POST[sel_id]',
+			customer_id = '$_POST[select_customer]',
+			preference_id = '$_POST[select_preferences]',
+			date = '$_POST[select_date]',
+			note = '$_POST[invoice_itemised_note]',
+			custom_field1 = '$_POST[i_custom_field1]',
+			custom_field2 = '$_POST[i_custom_field2]',
+			custom_field3 = '$_POST[i_custom_field3]',
+			custom_field4 = '$_POST[i_custom_field4]'
 		WHERE
 			inv_id = $invoice_id";
 
@@ -449,17 +449,17 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 			into
 		{$tb_prefix}invoices 
 			(
-			inv_id, 
-			inv_biller_id, 
-			inv_customer_id, 
-			inv_type,
-			inv_preference, 
-			inv_date, 
-			inv_note,
-			invoice_custom_field1,
-			invoice_custom_field2,
-			invoice_custom_field3,
-			invoice_custom_field4
+			id, 
+			biller_id, 
+			customer_id, 
+			type_id,
+			preference_id, 
+			date, 
+			note,
+			custom_field1,
+			custom_field2,
+			custom_field3,
+			custom_field4
 			)
 		values
 			(
@@ -581,17 +581,17 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 	$sql = "UPDATE
 			{$tb_prefix}invoices
 		SET
-			inv_biller_id = '$_POST[sel_id]',
-			inv_customer_id = '$_POST[select_customer]',
-			inv_preference = '$_POST[select_preferences]',
-			inv_date = '$_POST[select_date]',
-			inv_note = '$_POST[invoice_itemised_note]',
-			invoice_custom_field1 = '$_POST[i_custom_field1]',
-			invoice_custom_field2 = '$_POST[i_custom_field2]',
-			invoice_custom_field3 = '$_POST[i_custom_field3]',
-			invoice_custom_field4 = '$_POST[i_custom_field4]'
+			biller_id = '$_POST[sel_id]',
+			customer_id = '$_POST[select_customer]',
+			preference_id = '$_POST[select_preferences]',
+			date = '$_POST[select_date]',
+			note = '$_POST[invoice_itemised_note]',
+			custom_field1 = '$_POST[i_custom_field1]',
+			custom_field2 = '$_POST[i_custom_field2]',
+			custom_field3 = '$_POST[i_custom_field3]',
+			custom_field4 = '$_POST[i_custom_field4]'
 		WHERE
-			inv_id = $invoice_id";
+			id = $invoice_id";
 
 	if (mysql_query($sql)) {
 		$display_block =  $LANG['save_invoice_success'];

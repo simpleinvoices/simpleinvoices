@@ -6,10 +6,10 @@ checkLogin();
 $master_invoice_id = $_GET['submit'];
 
 $invoice = getInvoice($master_invoice_id);
-$invoice_type =  getInvoiceType($invoice['inv_type']);
-$customer = getCustomer($invoice['inv_customer_id']);
-$biller = getBiller($invoice['inv_biller_id']);
-$preferences = getPreferences($invoice['inv_preference']);
+$invoice_type =  getInvoiceType($invoice['type_id']);
+$customer = getCustomer($invoice['customer_id']);
+$biller = getBiller($invoice['biller_id']);
+$preferences = getPreferences($invoice['preference_id']);
 $defaults = getSystemDefaults();
 
 
@@ -17,12 +17,12 @@ $defaults = getSystemDefaults();
 
 #Accounts - for the invoice - start
 #invoice total total - start
-	$invoice_total_Field = calc_invoice_total($invoice['inv_id']);
+	$invoice_total_Field = calc_invoice_total($invoice['id']);
 	$invoice_total_Field_format = number_format($invoice_total_Field,2);
 #invoice total total - end
 
 #amount paid calc - start
-	$invoice_paid_Field = calc_invoice_paid($invoice['inv_id']);
+	$invoice_paid_Field = calc_invoice_paid($invoice['id']);
 	$invoice_paid_Field_format = number_format($invoice_paid_Field,2);
 #amount paid calc - end
 
@@ -80,7 +80,7 @@ $display_block_top =  <<<EOD
 	</tr>
 	<tr>
 		<td class=account>{$LANG['total']}:</td><td class=account>$preferences[pref_currency_sign]$invoice_total_Field_format</td>
-		<td class=account><a href='index.php?module=payments&view=manage&inv_id=$invoice[inv_id]'>{$LANG['paid']}:</a></td><td class=account>$preferences[pref_currency_sign]$invoice_paid_Field_format</td>
+		<td class=account><a href='index.php?module=payments&view=manage&id=$invoice[id]'>{$LANG['paid']}:</a></td><td class=account>$preferences[pref_currency_sign]$invoice_paid_Field_format</td>
 		<td class=account>{$LANG['owing']}:</td><td class=account><u>$preferences[pref_currency_sign]$invoice_owing_Field</u></td>
 		<td class=account>{$LANG['age']}:</td><td class=account nowrap >$invoice_age <a href='docs.php?p=age&t=help' rel='gb_page_center[450, 450]'><img src="./images/common/help-small.png"></img></a></td>
 		<td></td><td class="columnleft"></td>
@@ -105,7 +105,7 @@ $display_block_top =  <<<EOD
 		<td class='details_screen'><b>$preferences[pref_inv_wording] {$LANG['summary']}:</b></td><td colspan=5 align=right class='details_screen align_right'><a href='#' class="show-summary" onClick="$('.summary').show();$('.show-summary').hide();">{$LANG['show_details']}</a><a href='#' class="summary" onClick="$('.summary').hide();$('.show-summary').show();">{$LANG['hide_details']}</a> </td>
 	</tr>
 	<tr class='details_screen summary'>
-		<td class='details_screen'>$preferences[pref_inv_wording] {$LANG['number_short']}:</td><td colspan=5 class='details_screen'>$invoice[inv_id]</td>
+		<td class='details_screen'>$preferences[pref_inv_wording] {$LANG['number_short']}:</td><td colspan=5 class='details_screen'>$invoice[id]</td>
 	</tr>
 	<tr class='details_screen summary'>
 		<td>$preferences[pref_inv_wording] {$LANG['date']}:</td><td colspan=5>$invoice[date_field]</td>
@@ -399,15 +399,15 @@ EOD;
 	};
 
 	#if itemised style show the invoice note field - START
-	if ( $_GET['invoice_style'] === 'Itemised' && !empty($invoice['inv_note']) OR 'Consulting' && !empty($invoice['inv_note'])) {
+	if ( $_GET['invoice_style'] === 'Itemised' && !empty($invoice['note']) OR 'Consulting' && !empty($invoice['note'])) {
                 #item description - only show first 20 characters and add ... to signify theres more text
                 $max_length = 20;
-                if (strlen($invoice['inv_note']) > $max_length ) {
-                        $stripped_itemised_note = substr($invoice['inv_note'],0,20);
+                if (strlen($invoice['note']) > $max_length ) {
+                        $stripped_itemised_note = substr($invoice['note'],0,20);
                         $stripped_itemised_note .= "...";
                 }
-                else if (strlen($invoice['inv_note']) <= $max_length ) {
-                         $stripped_itemised_note = $invoice['inv_note'];
+                else if (strlen($invoice['note']) <= $max_length ) {
+                         $stripped_itemised_note = $invoice['note'];
                 }
 
 
@@ -427,7 +427,7 @@ EOD;
 			</tr>
 			<!-- if show detail click - the full note will be displayed -->
 			<tr class='notes details_screen'>
-				<td colspan=6>$invoice[inv_note]</td>
+				<td colspan=6>$invoice[note]</td>
 			</tr>
 EOD;
 	}
@@ -482,9 +482,9 @@ EOD;
 include('./config/config.php');
 
 
-	$url_pdf = "$_SERVER[HTTP_HOST]$install_path/index.php?module=invoices&view=templates/template&submit=$invoice[inv_id]&action=view&location=pdf&invoice_style=$invoice_type[inv_ty_description]";
+	$url_pdf = "$_SERVER[HTTP_HOST]$install_path/index.php?module=invoices&view=templates/template&submit=$invoice[id]&action=view&location=pdf&invoice_style=$invoice_type[inv_ty_description]";
 	$url_pdf_encoded = urlencode($url_pdf); 
-	$url_for_pdf = "./pdf/html2ps.php?process_mode=single&renderfields=1&renderlinks=1&renderimages=1&scalepoints=1&pixels=$pdf_screen_size&media=$pdf_paper_size&leftmargin=$pdf_left_margin&rightmargin=$pdf_right_margin&topmargin=$pdf_top_margin&bottommargin=$pdf_bottom_margin&transparency_workaround=1&imagequality_workaround=1&output=1&location=pdf&pdfname=$preferences[pref_inv_wording]$invoice[inv_id]&URL=$url_pdf_encoded";
+	$url_for_pdf = "./pdf/html2ps.php?process_mode=single&renderfields=1&renderlinks=1&renderimages=1&scalepoints=1&pixels=$pdf_screen_size&media=$pdf_paper_size&leftmargin=$pdf_left_margin&rightmargin=$pdf_right_margin&topmargin=$pdf_top_margin&bottommargin=$pdf_bottom_margin&transparency_workaround=1&imagequality_workaround=1&output=1&location=pdf&pdfname=$preferences[pref_inv_wording]$invoice[id]&URL=$url_pdf_encoded";
 	
 	
 echo <<<EOD
@@ -515,19 +515,19 @@ echo <<<EOD
 
 <!--Actions heading - start-->
 {$LANG[actions]}: 
-		<a href="index.php?module=invoices&view=templates/template&submit={$invoice[inv_id]}&action=view&invoice_style={$invoice_type[inv_ty_description]}"> {$LANG['print_preview']}</a>
+		<a href="index.php?module=invoices&view=templates/template&submit={$invoice[id]}&action=view&invoice_style={$invoice_type[inv_ty_description]}"> {$LANG['print_preview']}</a>
 		 :: 
-		<a href="index.php?module=invoices&view=details&submit={$invoice[inv_id]}&action=view&invoice_style={$invoice_type[inv_ty_description]}"> {$LANG[edit]}</a>
+		<a href="index.php?module=invoices&view=details&submit={$invoice[id]}&action=view&invoice_style={$invoice_type[inv_ty_description]}"> {$LANG[edit]}</a>
 		 ::
-		 <a href='index.php?module=payments&view=process&submit={$invoice[inv_id]}&op=pay_selected_invoice'> {$LANG[process_payment]} </a>
+		 <a href='index.php?module=payments&view=process&submit={$invoice[id]}&op=pay_selected_invoice'> {$LANG[process_payment]} </a>
 		 ::
 		 <!-- EXPORT TO PDF -->
 		<a href='{$url_for_pdf }'>{$LANG[export_pdf]}</a>
 		::
-		<a href="index.php?module=invoices&view=templates/template&submit={$invoice[inv_id]}&action=view&invoice_style={$invoice_type[inv_ty_description]}&export={$spreadsheet}">{$LANG[export_as]} .{$spreadsheet}</a>
+		<a href="index.php?module=invoices&view=templates/template&submit={$invoice[id]}&action=view&invoice_style={$invoice_type[inv_ty_description]}&export={$spreadsheet}">{$LANG[export_as]} .{$spreadsheet}</a>
 		::
-		<a href="index.php?module=invoices&view=templates/template&submit={$invoice[inv_id]}&action=view&invoice_style={$invoice_type[inv_ty_description]}&export={$word_processor}">{$LANG[export_as]} .{$word_processor} </a>
-		:: <a href="index.php?module=invoices&view=email&stage=1&submit={$invoice[inv_id]}">{$LANG[email]}</a>
+		<a href="index.php?module=invoices&view=templates/template&submit={$invoice[id]}&action=view&invoice_style={$invoice_type[inv_ty_description]}&export={$word_processor}">{$LANG[export_as]} .{$word_processor} </a>
+		:: <a href="index.php?module=invoices&view=email&stage=1&submit={$invoice[id]}">{$LANG[email]}</a>
 <!--Actions heading - start-->
 <hr></hr>
 </form>

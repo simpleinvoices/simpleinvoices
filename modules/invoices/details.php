@@ -14,20 +14,20 @@ $print_master_invoice_id = "SELECT * FROM {$tb_prefix}invoices WHERE inv_id = " 
 $result_print_master_invoice_id  = mysql_query($print_master_invoice_id , $conn) or die(mysql_error());
 
 while ($Array_master_invoice = mysql_fetch_array($result_print_master_invoice_id)) {
-                $inv_idField = $Array_master_invoice['inv_id'];
-                $inv_biller_idField = $Array_master_invoice['inv_biller_id'];
-                $inv_customer_idField = $Array_master_invoice['inv_customer_id'];
-                $inv_typeField = $Array_master_invoice['inv_type'];
-                $inv_preferenceField = $Array_master_invoice['inv_preference'];
-		$inv_dateField = date( 'Y-m-d', strtotime( $Array_master_invoice['inv_date'] ) );
+                $inv_idField = $Array_master_invoice['id'];
+                $inv_biller_idField = $Array_master_invoice['biller_id'];
+                $inv_customer_idField = $Array_master_invoice['customer_id'];
+                $inv_typeField = $Array_master_invoice['type_id'];
+                $inv_preferenceField = $Array_master_invoice['preference_id'];
+		$inv_dateField = date( 'Y-m-d', strtotime( $Array_master_invoice['date'] ) );
 		/*
 		$inv_dateField = $Array_master_invoice['inv_date'];
 		*/
-                $inv_noteField = $Array_master_invoice['inv_note'];
-                $inv_custom_field1Field = $Array_master_invoice['invoice_custom_field1'];
-                $inv_custom_field2Field = $Array_master_invoice['invoice_custom_field2'];
-                $inv_custom_field3Field = $Array_master_invoice['invoice_custom_field3'];
-                $inv_custom_field4Field = $Array_master_invoice['invoice_custom_field4'];
+                $inv_noteField = $Array_master_invoice['note'];
+                $inv_custom_field1Field = $Array_master_invoice['custom_field1'];
+                $inv_custom_field2Field = $Array_master_invoice['custom_field2'];
+                $inv_custom_field3Field = $Array_master_invoice['custom_field3'];
+                $inv_custom_field4Field = $Array_master_invoice['custom_field4'];
 
 
 };

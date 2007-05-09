@@ -349,7 +349,7 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,
 </tr>
 
 <tr>
-<td class="details_screen"><?php echo $LANG['inv_pref'];?></td><td input type=text name="inv_preferences"><?php echo $display_block_preferences; ?></td>
+<td class="details_screen"><?php echo $LANG['inv_pref'];?></td><td input type=text name="preference_id"><?php echo $display_block_preferences; ?></td>
 </tr>	
 <tr>
 	<td align=left>

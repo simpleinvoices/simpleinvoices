@@ -105,18 +105,18 @@ CREATE TABLE `si_invoice_type` (
 
 
 CREATE TABLE `si_invoices` (
-  `inv_id` int(10) NOT NULL auto_increment,
-  `inv_biller_id` int(10) NOT NULL default '0',
-  `inv_customer_id` int(10) NOT NULL default '0',
-  `inv_type` int(10) NOT NULL default '0',
-  `inv_preference` int(10) NOT NULL default '0',
-  `inv_date` datetime NOT NULL default '0000-00-00 00:00:00',
-  `invoice_custom_field1` varchar(50) default NULL,
-  `invoice_custom_field2` varchar(50) default NULL,
-  `invoice_custom_field3` varchar(50) default NULL,
-  `invoice_custom_field4` varchar(50) default NULL,
-  `inv_note` text,
-  PRIMARY KEY  (`inv_id`)
+  `id` int(10) NOT NULL auto_increment,
+  `biller_id` int(10) NOT NULL default '0',
+  `customer_id` int(10) NOT NULL default '0',
+  `type_id` int(10) NOT NULL default '0',
+  `preference_id` int(10) NOT NULL default '0',
+  `date` datetime NOT NULL default '0000-00-00 00:00:00',
+  `custom_field1` varchar(50) default NULL,
+  `custom_field2` varchar(50) default NULL,
+  `custom_field3` varchar(50) default NULL,
+  `custom_field4` varchar(50) default NULL,
+  `note` text,
+  PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 

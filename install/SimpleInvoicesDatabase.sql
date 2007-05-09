@@ -244,17 +244,17 @@ INSERT INTO `si_invoice_type` (`inv_ty_id`, `inv_ty_description`) VALUES
 -- 
 
 CREATE TABLE `si_invoices` (
-  `inv_id` int(10) NOT NULL auto_increment,
-  `inv_biller_id` int(10) NOT NULL default '0',
-  `inv_customer_id` int(10) NOT NULL default '0',
-  `inv_type` int(10) NOT NULL default '0',
-  `inv_preference` int(10) NOT NULL default '0',
+  `id` int(10) NOT NULL auto_increment,
+  `biller_id` int(10) NOT NULL default '0',
+  `customer_id` int(10) NOT NULL default '0',
+  `type_id` int(10) NOT NULL default '0',
+  `preference_id` int(10) NOT NULL default '0',
   `inv_date` datetime NOT NULL default '0000-00-00 00:00:00',
-  `invoice_custom_field1` varchar(50) default NULL,
-  `invoice_custom_field2` varchar(50) default NULL,
-  `invoice_custom_field3` varchar(50) default NULL,
-  `invoice_custom_field4` varchar(50) default NULL,
-  `inv_note` text,
+  `custom_field1` varchar(50) default NULL,
+  `custom_field2` varchar(50) default NULL,
+  `custom_field3` varchar(50) default NULL,
+  `custom_field4` varchar(50) default NULL,
+  `note` text,
   PRIMARY KEY  (`inv_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
@@ -262,7 +262,7 @@ CREATE TABLE `si_invoices` (
 -- Dumping data for table `si_invoices`
 -- 
 
-INSERT INTO `si_invoices` (`inv_id`, `inv_biller_id`, `inv_customer_id`, `inv_type`, `inv_preference`, `inv_date`, `invoice_custom_field1`, `invoice_custom_field2`, `invoice_custom_field3`, `invoice_custom_field4`, `inv_note`) VALUES 
+INSERT INTO `si_invoices` (`id`, `biller_id`, `customer_id`, `type_id`, `preference_id`, `date`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `note`) VALUES 
 (1, 4, 3, 2, 1, '2007-02-03 00:00:00', NULL, NULL, NULL, NULL, 'Will be delivered via certified post'),
 (2, 1, 2, 1, 1, '2007-01-01 00:00:00', NULL, NULL, NULL, NULL, ''),
 (3, 2, 3, 3, 1, '2007-02-04 00:00:00', NULL, NULL, NULL, NULL, ''),

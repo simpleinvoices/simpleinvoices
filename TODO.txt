@@ -1,5 +1,5 @@
 
-- in next release - aim 9th May 
+- in next release - aim 15th May 
 -todo
  - sql queries: rename all the old crappy fields from b_name to name etc..
  -- need to write sql queries for all and change all relevant code that references these fields
@@ -22,6 +22,7 @@
  -- make invoice items custom fields work
  -- make gross total work
  - home.php - make the links to the documentation work
+ - sql patches: make a conversion script for the old defaults to the new one
 
 -done
  - sql patch: reset default invoices template to default - Done

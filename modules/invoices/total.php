@@ -261,7 +261,7 @@ EOD;
 	<td class="details_screen"><?php echo $LANG['gross_total'];?></td><td class="details_screen"><?php echo $LANG['tax'];?></td><td class="details_screen"><?php echo $LANG['inv_pref'];?></td>
 </tr>
 <tr>
-	<td><input type=text name="inv_it_gross_total" size=15></td><td input type=text name="inv_it_tax" size=15><?php echo $display_block_tax; ?></td><td input type=text name="inv_preferences" size=25><?php echo $display_block_preferences; ?></td>
+	<td><input type=text name="inv_it_gross_total" size=15></td><td input type=text name="inv_it_tax" size=15><?php echo $display_block_tax; ?></td><td input type=text name="preference_id" size=25><?php echo $display_block_preferences; ?></td>
 
 </tr>
 <tr>

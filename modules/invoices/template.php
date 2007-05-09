@@ -13,16 +13,16 @@ mysql_select_db( $db_name, $conn );
 
 
 #master invoice id select
-$print_master_invoice_id = "SELECT * FROM {$tb_prefix}invoices WHERE inv_id =$master_invoice_id";
+$print_master_invoice_id = "SELECT * FROM {$tb_prefix}invoices WHERE id =$master_invoice_id";
 $result_print_master_invoice_id  = mysql_query($print_master_invoice_id , $conn) or die(mysql_error());
 
 $invoice = mysql_fetch_array($result_print_master_invoice_id);
-$invoice['date'] = date( $config['date_format'], strtotime( $invoice['inv_date'] ));
+$invoice['date'] = date( $config['date_format'], strtotime( $invoice['date'] ));
 
 
 #invoice_type query
 
-$sql_invoice_type = "SELECT inv_ty_description FROM {$tb_prefix}invoice_type WHERE inv_ty_id = $invoice[inv_type] ";
+$sql_invoice_type = "SELECT inv_ty_description FROM {$tb_prefix}invoice_type WHERE inv_ty_id = $invoice[type_id] ";
 $result_invoice_type = mysql_query($sql_invoice_type, $conn) or die(mysql_error());
 
 
@@ -43,13 +43,13 @@ $result_print_biller = mysql_query($print_biller, $conn) or die(mysql_error());
 $customer = mysql_fetch_array($result_print_customer);
 $biller = mysql_fetch_array($result_print_biller);*/
 
-$customer = getCustomer($invoice['inv_customer_id']);
-$biller = getBiller($invoice['inv_biller_id']);
+$customer = getCustomer($invoice['customer_id']);
+$biller = getBiller($invoice['biller_id']);
 
 
 
 #preferences query
-$print_preferences = "SELECT * FROM {$tb_prefix}preferences where pref_id = $invoice[inv_preference] ";
+$print_preferences = "SELECT * FROM {$tb_prefix}preferences where pref_id = $invoice[preference] ";
 $result_print_preferences  = mysql_query($print_preferences, $conn) or die(mysql_error());
 
 $pref = mysql_fetch_array($result_print_preferences);
@@ -59,13 +59,13 @@ $defaults = getSystemDefaults();
 
 #Accounts - for the invoice - start
 #invoice total calc - start
-$invoice['total'] = calc_invoice_total($invoice['inv_id']);
+$invoice['total'] = calc_invoice_total($invoice['id']);
 $invoice['total_format'] = number_format($invoice['total'],2);
 #invoice total calc - end
 
 
 #amount paid calc - start
-$invoice['paid'] = calc_invoice_paid($invoice['inv_id']);
+$invoice['paid'] = calc_invoice_paid($invoice['id']);
 $invoice['paid_format'] = number_format($invoice['paid'],2);
 #amount paid calc - end
 
@@ -140,7 +140,7 @@ if (isset($_GET['export'])) {
 	$file_extension = $_GET['export'];
 	header("Content-type: application/octet-stream");
 	/*header("Content-type: application/x-msdownload");*/
-	header("Content-Disposition: attachment; filename=$pref[pref_inv_heading]$invoice[inv_id].$file_extension");
+	header("Content-Disposition: attachment; filename=$pref[pref_inv_heading]$invoice[id].$file_extension");
 	header("Pragma: no-cache");
 	header("Expires: 0");
 }
@@ -152,7 +152,7 @@ if (isset($_GET['export'])) {
 
 
 	#if itemised style show the invoice note field - START
-	if(!( $_GET['invoice_style'] === 'Itemised' && !empty($invoice['inv_note']) OR 'Consulting' && !empty($invoice['inv_note']))) {
+	if(!( $_GET['invoice_style'] === 'Itemised' && !empty($invoice['note']) OR 'Consulting' && !empty($invoice['note']))) {
 		$notes = "";
 	}
 	#END - if itemised style show the invoice note field

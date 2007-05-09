@@ -23,7 +23,7 @@ $stuff['date'] = date( $config['date_format'], strtotime( $stuff['ac_date'] ) );
 
 /*Code to get the Invoice preference - so can link from this screen back to the invoice - START */
 $invoice = getInvoice($stuff['ac_inv_id']);
-$invoiceType = getInvoiceType($invoice['inv_type']);
+$invoiceType = getInvoiceType($invoice['type_id']);
 $paymentType = getPaymentType($stuff['ac_payment_type']);
 
 
