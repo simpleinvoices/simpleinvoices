@@ -130,3 +130,13 @@ if (!defined("BROWSE")) {
 }
 - with
 checkLogin();
+
+- Make custom_fields dynamic with the following tables
+customFieldsCategorie
+id,name (product,customer,biller,...)
+
+customFields
+id,categorieId,value
+
+customFieldsValues
+id,cateogireId,customFieldId,itemId,value
