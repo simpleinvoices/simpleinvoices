@@ -32,7 +32,7 @@
 	{/foreach}
                 
 
-	{if $invoice.inv_note }
+	{if $invoice.note }
 
 		<tr>
 			<td class="tbl1-left tbl1-right" colspan="7"><br></td>
@@ -41,7 +41,7 @@
 			<td class="tbl1-left tbl1-right" colspan="7" align="left"><b>{$LANG.notes}:</b></td>
 		</tr>
 		<tr>
-			<td class="tbl1-left tbl1-right" colspan="7">{$invoice.inv_note}</td>
+			<td class="tbl1-left tbl1-right" colspan="7">{$invoice.note}</td>
 		</tr>
 	{/if}
 	

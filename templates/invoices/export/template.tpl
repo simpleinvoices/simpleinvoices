@@ -27,7 +27,7 @@
 				<td class="col1 tbl1" colspan="4" ><b>{$pref.pref_inv_wording} {$LANG.summary}</b></td>
 		</tr>
 		<tr>
-				<td class="tbl1-left">{$pref.pref_inv_wording} {$LANG.number_short}:</td><td class="tbl1-right" colspan=3>{$invoice.inv_id}</td>
+				<td class="tbl1-left">{$pref.pref_inv_wording} {$LANG.number_short}:</td><td class="tbl1-right" colspan=3>{$invoice.id}</td>
 		</tr>
 		<tr>
 				<td nowrap class="tbl1-left">{$pref.pref_inv_wording} {$LANG.date}:</td><td class="tbl1-right" colspan=3>{$invoice.date}</td>

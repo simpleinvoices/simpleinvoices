@@ -37,7 +37,7 @@
                <COL CELLCLASS="GROUP_LAYER" TEXTCLASS="BOLD" TYPE="EXPRESSION" COLSPAN="8">$header->getValue("Aging")</COL>
             </ROW>
             <ROW>
-                                        <COL  CELLCLASS="GROUP_LAYER">inv_id</COL>
+                                        <COL  CELLCLASS="GROUP_LAYER">id</COL>
                                         <COL  CELLCLASS="GROUP_LAYER">Biller</COL>
                                         <COL  CELLCLASS="GROUP_LAYER">Customer</COL>
                                         <COL  CELLCLASS="GROUP_LAYER">Total</COL>
@@ -59,7 +59,7 @@
 
 			<FIELDS>
 				<ROW>
-					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">inv_id</COL>
+					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">id</COL>
 					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">Biller</COL>
 					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">Customer</COL>
 					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">Total</COL>

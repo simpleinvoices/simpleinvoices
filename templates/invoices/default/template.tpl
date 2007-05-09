@@ -30,7 +30,7 @@
 				<td class="col1 tbl1" colspan="4" ><b>{$pref.pref_inv_wording} {$LANG.summary}</b></td>
 		</tr>
 		<tr>
-				<td class="tbl1-left">{$pref.pref_inv_wording} {$LANG.number_short}:</td><td class="tbl1-right" colspan=3>{$invoice.inv_id}</td>
+				<td class="tbl1-left">{$pref.pref_inv_wording} {$LANG.number_short}:</td><td class="tbl1-right" colspan=3>{$invoice.id}</td>
 		</tr>
 		<tr>
 				<td nowrap class="tbl1-left">{$pref.pref_inv_wording} {$LANG.date}:</td><td class="tbl1-right" colspan=3>{$invoice.date}</td>
@@ -317,7 +317,7 @@
 
 
 
-{if ($smarty.get.invoice_style === 'Itemised' && $invoice.inv_note != "") || ($smarty.get.invoice_style === 'Consulting' && $invoice.inv_note != "" )  }
+{if ($smarty.get.invoice_style === 'Itemised' && $invoice.note != "") || ($smarty.get.invoice_style === 'Consulting' && $invoice.note != "" )  }
 
 		<tr>
 			<td class="tbl1-left tbl1-right" colspan="7"><br></td>
@@ -326,7 +326,7 @@
 			<td class="tbl1-left tbl1-right" colspan="7" align="left"><b>{$LANG.notes}:</b></td>
 		</tr>
 		<tr>
-			<td class="tbl1-left tbl1-right" colspan="7">{$invoice.inv_note}</td>
+			<td class="tbl1-left tbl1-right" colspan="7">{$invoice.note}</td>
 		</tr>
 
 {/if}

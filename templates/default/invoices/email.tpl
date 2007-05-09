@@ -27,7 +27,7 @@
 	</tr>
 	<tr>
 	<td class="details_screen">Subject</td>
-	<td><input type=text name="email_subject" size=50 value="{$preferences.pref_inv_wording} {$invoice.inv_id} from {$biller.name} is attached"></td>
+	<td><input type=text name="email_subject" size=50 value="{$preferences.pref_inv_wording} {$invoice.id} from {$biller.name} is attached"></td>
 	</tr>
 	<tr>
 		<td class="details_screen">Message</td>
