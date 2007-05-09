@@ -22,6 +22,7 @@
  -- make gross total work
  - home.php - make the links to the documentation work
  - sql patches: make a conversion script for the old defaults to the new one
+ - Docs: change chmod 777 with chown apache:apache
 
 -done
  - sql patch: reset default invoices template to default - Done
