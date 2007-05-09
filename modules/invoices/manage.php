@@ -38,7 +38,26 @@ for($i = 0;$invoice = getInvoices($result);$i++) {
 	#Overdue - number of days - start
 	if ($invoice['owing'] > 0 ) {
 		$overdue_days = (strtotime(date('Y-m-d')) - strtotime($invoice['calc_date'])) / (60 * 60 * 24);
-		$overdue = floor($overdue_days);
+		//$overdue = floor($overdue_days);
+
+		if ($overdue_days == 0) {
+			$overdue = "0-14";
+		}
+		elseif ($overdue_days <=14 ) {
+			$overdue = "0-14";
+		}
+		elseif ($overdue_days <= 30 ) {
+			$overdue = "15-30";
+		}
+		elseif ($overdue_days <= 60 ) {
+			$overdue = "31-60";
+		}
+		elseif ($overdue_days <= 90 ) {
+			$overdue = "61-90";
+		}
+		else {
+			$overdue = "90+";
+		}
 	}		
 	else {
 		$overdue ="";
