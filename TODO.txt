@@ -6,7 +6,7 @@
  --- products, - done
  --- customers, - done
  --- billers, - done
- --- and invoices 
+ --- and invoices - done
  --- and invoices_items 
  --- do the custom fields fields in biller etc.. to - needs to test the result - done
  - Move .sql out of install and back to root (untill the installer is done and included as default)
