@@ -45,7 +45,7 @@ function controle_post_max_size() {
 	}
 }
 
-// Control size memory limit
+// Mémoire maximum allouée pendant l'exécution d'un script
 // Simple invoices want if possible 24M.
 $memory_limit = ini_get('memory_limit');
 

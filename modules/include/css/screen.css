@@ -48,7 +48,6 @@ td.details_screen {
 	font-weight:400;
 	text-decoration:none;
 	border-color:#FFF;
-	border-style:none;
 	border-width:1px; }
 
 /*td for the details screen - end
@@ -58,8 +57,7 @@ tr.details_screen {
 	background-color:#F5F5F5;
 	font-style:normal;
 	font-weight:400;
-	text-decoration:none;
-	border-style:none; }
+	text-decoration:none; }
 
 /*-------------------------------------------------
 GLOBALS & GENERAL CASES

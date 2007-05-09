@@ -183,3 +183,47 @@ INSERT INTO `si_tax` (`tax_id`, `tax_description`, `tax_percentage`, `tax_enable
 (5, 'No Tax', 0.00, '1'),
 (6, 'IVA', 20.00, '1'),
 (7, 'MWSt (DE)', 16.00, '1');
+
+-- 
+-- Dumping data for table `si_systemdefaults`
+-- 
+
+INSERT INTO `si_systemdefaults` (`id`, `name`, `value`) VALUES 
+(1, 'biller', '4'),
+(2, 'customer', '3'),
+(3, 'tax', '1'),
+(4, 'invoice', '1'),
+(5, 'items', '5'),
+(6, 'template', 'simple'),
+(7, 'payment_type', '1'),
+(8, 'language', 'de'),
+(9, 'language', 'en'),
+(10, 'language', 'es'),
+(11, 'language', 'es_ca'),
+(12, 'language', 'es_gl'),
+(13, 'language', 'fi'),
+(14, 'language', 'fr'),
+(15, 'language', 'nl'),
+(16, 'language', 'pt'),
+(17, 'language', 'ro'),
+(18, 'dateformat', 'Y-m-d'),
+(19, 'dateformat', 'Y-m-d h:m'),
+(20, 'dateformat', 'm-d-Y'),
+(21, 'dateformat', 'm-d-Y h:m'),
+(22, 'dateformat', 'd-m-Y'),
+(23, 'dateformat', 'd-m-Y h:m'),
+(24, 'dateformat', 'j.n.Y'),
+(25, 'dateformat', 'Y-m-d'),
+(26, 'spreadsheet', 'xls'),
+(27, 'spreadsheet', 'ods'),
+(28, 'wordprocessor', 'doc'),
+(29, 'wordprocessor', 'odt'),
+(30, 'pdfscreensize', '640'),
+(31, 'pdfscreensize', '800'),
+(32, 'pdfscreensize', '1024'),
+(33, 'pdfpapersize', 'A4'),
+(34, 'pdfleftmargin', '15'),
+(35, 'pdfrightmargin', '15'),
+(36, 'pdftopmargin', '15'),
+(37, 'pdfbottommargin', '15'),
+(38, 'theme', 'google');

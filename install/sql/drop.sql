@@ -108,3 +108,11 @@ DROP TABLE IF EXISTS si_sql_patchmanager;
 -- 
 
 DROP TABLE IF EXISTS si_tax;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table 'si_systemdefaults'
+-- 
+
+DROP TABLE IF EXISTS si_systemdefaults;

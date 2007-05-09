@@ -1,3 +1,7 @@
+General
+-------
+max_execution_time
+
 Design
 ------
 -todo
