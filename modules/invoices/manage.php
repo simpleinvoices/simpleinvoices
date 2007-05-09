@@ -73,6 +73,8 @@ for($i = 0;$invoice = getInvoices($result);$i++) {
 
 
 $smarty -> assign("invoices",$invoices);
+$smarty -> assign("spreadsheet",$spreadsheet);
+$smarty -> assign("word_processor",$word_processor);
 
 
 getRicoLiveGrid("ex1","	{ type:'number', decPlaces:0, ClassName:'alignleft' },,,
