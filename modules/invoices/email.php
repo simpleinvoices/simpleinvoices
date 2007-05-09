@@ -15,7 +15,7 @@ $invoice_result  = mysql_query($print_invoice_id , $conn) or die(mysql_error());
 $invoice = mysql_fetch_array($invoice_result);
 
 
-$preferences = getPreferences($invoice['preference_id']);
+$preference = getPreference($invoice['preference_id']);
 
 $biller = getBiller($invoice[biller_id]);
 $customer = getCustomer($invoice[customer_id]);
@@ -67,7 +67,7 @@ if ($_GET['stage'] == 2 ) {
 	$pipeline->parser         = new ParserXHTML;
 	$pipeline->layout_engine  = new LayoutEngineDefault;
 	$pipeline->output_driver  = new OutputDriverFPDF($media);
-	$pipeline->destination    = new DestinationFile($preferences[pref_inv_wording].$invoice[id]);
+	$pipeline->destination    = new DestinationFile($preference[pref_inv_wording].$invoice[id]);
 
 
 
@@ -92,7 +92,7 @@ if ($_GET['stage'] == 2 ) {
 	$mail->AddBCC("$_POST[email_bcc]");
 	}
 	$mail->WordWrap = 50;                                 // set word wrap to 50 characters
-	$mail->AddAttachment("./pdf/cache/$preferences[pref_inv_wording]$invoice[id].pdf");         // add attachments
+	$mail->AddAttachment("./pdf/cache/$preference[pref_inv_wording]$invoice[id].pdf");         // add attachments
 
 	$mail->IsHTML(true);                                  // set email format to HTML
 
@@ -124,6 +124,6 @@ else if ($_GET['stage'] == 3 ) {
 $smarty -> assign('biller',$biller);
 $smarty -> assign('customer',$customer);
 $smarty -> assign('invoice',$invoice);
-$smarty -> assign('preferences',$preferences);
+$smarty -> assign('preferences',$preference);
 
 ?>

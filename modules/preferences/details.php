@@ -10,13 +10,7 @@ if ($_POST['p_description'] != "" ) {
 #get the invoice id
 $preference_id = $_GET['submit'];
 
-
-$print_preferences = "SELECT * FROM {$tb_prefix}preferences where pref_id = $preference_id";
-$result_print_preferences  = mysql_query($print_preferences, $conn) or die(mysql_error());
-
-$preference = mysql_fetch_array($result_print_preferences);
-
-$preference['wording_for_enabled'] = $preference['pref_enabled']==1?$LANG['enabled']:$LANG['disabled'];
+$preference = getPreference($preference_id);
 
 $smarty->assign('preference',$preference);
 

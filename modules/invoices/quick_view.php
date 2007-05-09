@@ -9,7 +9,7 @@ $invoice = getInvoice($master_invoice_id);
 $invoice_type =  getInvoiceType($invoice['type_id']);
 $customer = getCustomer($invoice['customer_id']);
 $biller = getBiller($invoice['biller_id']);
-$preferences = getPreferences($invoice['preference_id']);
+$preference = getPreference($invoice['preference_id']);
 $defaults = getSystemDefaults();
 
 
@@ -79,21 +79,21 @@ $display_block_top =  <<<EOD
 		<td class=account colspan=8>{$LANG['account_info']}</td><td width=5%></td><td class="columnleft" width=5%></td><td class="account" colspan=6><a href='index.php?module=customers&view=details&submit=$customer[id]&action=view'>{$LANG['customer_account']}</a></td>
 	</tr>
 	<tr>
-		<td class=account>{$LANG['total']}:</td><td class=account>$preferences[pref_currency_sign]$invoice_total_Field_format</td>
-		<td class=account><a href='index.php?module=payments&view=manage&id=$invoice[id]'>{$LANG['paid']}:</a></td><td class=account>$preferences[pref_currency_sign]$invoice_paid_Field_format</td>
-		<td class=account>{$LANG['owing']}:</td><td class=account><u>$preferences[pref_currency_sign]$invoice_owing_Field</u></td>
+		<td class=account>{$LANG['total']}:</td><td class=account>$preference[pref_currency_sign]$invoice_total_Field_format</td>
+		<td class=account><a href='index.php?module=payments&view=manage&id=$invoice[id]'>{$LANG['paid']}:</a></td><td class=account>$preference[pref_currency_sign]$invoice_paid_Field_format</td>
+		<td class=account>{$LANG['owing']}:</td><td class=account><u>$preference[pref_currency_sign]$invoice_owing_Field</u></td>
 		<td class=account>{$LANG['age']}:</td><td class=account nowrap >$invoice_age <a href='docs.php?p=age&t=help' rel='gb_page_center[450, 450]'><img src="./images/common/help-small.png"></img></a></td>
 		<td></td><td class="columnleft"></td>
-		<td class="account">{$LANG['total']}:</td><td class=account>$preferences[pref_currency_sign]$invoice_total_Field_customer_format</td>
-		<td class=account><a href='index.php?module=payments&view=manage&id=$customer[id]'>{$LANG['paid']}:</a></td><td class=account>$preferences[pref_currency_sign]$invoice_paid_Field_customer_format</td>
-		<td class=account>{$LANG['owing']}:</td><td class=account><u>$preferences[pref_currency_sign]$invoice_owing_Field_customer</u></td>
+		<td class="account">{$LANG['total']}:</td><td class=account>$preference[pref_currency_sign]$invoice_total_Field_customer_format</td>
+		<td class=account><a href='index.php?module=payments&view=manage&id=$customer[id]'>{$LANG['paid']}:</a></td><td class=account>$preference[pref_currency_sign]$invoice_paid_Field_customer_format</td>
+		<td class=account>{$LANG['owing']}:</td><td class=account><u>$preference[pref_currency_sign]$invoice_owing_Field_customer</u></td>
 	</tr>
 	</table>
 
 
 	<table align=center>
 	<tr>
-		<td colspan=6 align=center class="align_center"><b>$preferences[pref_inv_heading]</b></td>
+		<td colspan=6 align=center class="align_center"><b>$preference[pref_inv_heading]</b></td>
 	</tr>
         <tr>
                 <td colspan=6><br></td>
@@ -102,13 +102,13 @@ $display_block_top =  <<<EOD
 	<!-- Invoice Summary section -->
 
 	<tr class='details_screen'>
-		<td class='details_screen'><b>$preferences[pref_inv_wording] {$LANG['summary']}:</b></td><td colspan=5 align=right class='details_screen align_right'><a href='#' class="show-summary" onClick="$('.summary').show();$('.show-summary').hide();">{$LANG['show_details']}</a><a href='#' class="summary" onClick="$('.summary').hide();$('.show-summary').show();">{$LANG['hide_details']}</a> </td>
+		<td class='details_screen'><b>$preference[pref_inv_wording] {$LANG['summary']}:</b></td><td colspan=5 align=right class='details_screen align_right'><a href='#' class="show-summary" onClick="$('.summary').show();$('.show-summary').hide();">{$LANG['show_details']}</a><a href='#' class="summary" onClick="$('.summary').hide();$('.show-summary').show();">{$LANG['hide_details']}</a> </td>
 	</tr>
 	<tr class='details_screen summary'>
-		<td class='details_screen'>$preferences[pref_inv_wording] {$LANG['number_short']}:</td><td colspan=5 class='details_screen'>$invoice[id]</td>
+		<td class='details_screen'>$preference[pref_inv_wording] {$LANG['number_short']}:</td><td colspan=5 class='details_screen'>$invoice[id]</td>
 	</tr>
 	<tr class='details_screen summary'>
-		<td>$preferences[pref_inv_wording] {$LANG['date']}:</td><td colspan=5>$invoice[date_field]</td>
+		<td>$preference[pref_inv_wording] {$LANG['date']}:</td><td colspan=5>$invoice[date_field]</td>
 	</tr>
 	$show_custom_field_1 
 	$show_custom_field_2 
@@ -236,14 +236,14 @@ if (  $_GET['invoice_style'] === 'Total' ) {
 	                <td></td><td></td><td></td><td><b>{$LANG['gross_total']}</b></td><td><b>{$LANG['tax']}</b></td><td><b>{$LANG['total_uppercase']}</b></td>
         	</tr>
 	        <tr>
-        	        <td></td><td></td><td></td><td>$preferences[pref_currency_sign]$invoice_items[inv_it_gross_total]</td><td>$preferences[pref_currency_sign]$invoice_items[inv_it_tax_amount]</td><td><u>$preferences[pref_currency_sign]$invoice_items[inv_it_total]</u></td>
+        	        <td></td><td></td><td></td><td>$preference[pref_currency_sign]$invoice_items[inv_it_gross_total]</td><td>$preference[pref_currency_sign]$invoice_items[inv_it_tax_amount]</td><td><u>$preference[pref_currency_sign]$invoice_items[inv_it_total]</u></td>
 	        </tr>
 
         	<tr>
                 	<td colspan=6><br><br></td>
 	        </tr>
         	<tr>
-                	<td colspan=6><b>$preferences[pref_inv_detail_heading]</b></td>
+                	<td colspan=6><b>$preference[pref_inv_detail_heading]</b></td>
 	        </tr>
 EOD;
    
@@ -331,7 +331,7 @@ EOD;
 	
 			$display_block_details .=  <<<EOD
 		        <tr>
-	                <td>$invoice_items[inv_it_quantity]</td><td>$product[description]</td><td>$preferences[pref_currency_sign]$invoice_items[inv_it_unit_price]</td><td>$preferences[pref_currency_sign]$invoice_items[inv_it_gross_total]</td><td>$preferences[pref_currency_sign]$invoice_items[inv_it_tax_amount]</td><td>$invoice_items[inv_it_total]</td>
+	                <td>$invoice_items[inv_it_quantity]</td><td>$product[description]</td><td>$preference[pref_currency_sign]$invoice_items[inv_it_unit_price]</td><td>$preference[pref_currency_sign]$invoice_items[inv_it_gross_total]</td><td>$preference[pref_currency_sign]$invoice_items[inv_it_tax_amount]</td><td>$invoice_items[inv_it_total]</td>
 	        </tr>
                 <tr  class='itemised' >       
                         <td></td>
@@ -366,7 +366,7 @@ EOD;
 
 	        $display_block_details .=  <<<EOD
         	<tr>
-	                <td>$invoice_items[inv_it_quantity]</td><td>$product[description]</td><td class='show-consulting'>$stripped_item_description</td><td class='consulting'></td><td>$preferences[pref_currency_sign]$invoice_items[inv_it_unit_price]</td><td>$preferences[pref_currency_sign]$invoice_items[inv_it_gross_total]</td><td>$preferences[pref_currency_sign]$invoice_items[inv_it_tax_amount]</td><td align=right>$preferences[pref_currency_sign]$invoice_items[inv_it_total]</td>
+	                <td>$invoice_items[inv_it_quantity]</td><td>$product[description]</td><td class='show-consulting'>$stripped_item_description</td><td class='consulting'></td><td>$preference[pref_currency_sign]$invoice_items[inv_it_unit_price]</td><td>$preference[pref_currency_sign]$invoice_items[inv_it_gross_total]</td><td>$preference[pref_currency_sign]$invoice_items[inv_it_tax_amount]</td><td align=right>$preference[pref_currency_sign]$invoice_items[inv_it_total]</td>
 		</tr>
 		<tr  class='consulting' >	
                         <td></td>
@@ -441,12 +441,12 @@ EOD;
 	</tr>	
 
         <tr>
-                <td colspan=3></td><td align=left colspan=2>{$LANG['total']} {$LANG['tax']} {$LANG['included']}</td><td colspan=2 align=right>$preferences[pref_currency_sign]$invoice_total_taxField_formatted</td>
+                <td colspan=3></td><td align=left colspan=2>{$LANG['total']} {$LANG['tax']} {$LANG['included']}</td><td colspan=2 align=right>$preference[pref_currency_sign]$invoice_total_taxField_formatted</td>
         </tr>
 	<tr><td><br></td>
 	</tr>
         <tr>
-                <td colspan=3></td><td align=left colspan=2><b>$preferences[pref_inv_wording] {$LANG['amount']}</b></td><td colspan=2 align=right><u>$preferences[pref_currency_sign]$invoice_total_totalField_formatted</u></td>
+                <td colspan=3></td><td align=left colspan=2><b>$preference[pref_inv_wording] {$LANG['amount']}</b></td><td colspan=2 align=right><u>$preference[pref_currency_sign]$invoice_total_totalField_formatted</u></td>
         </tr>
 
 
@@ -454,7 +454,7 @@ EOD;
 		<td colspan=6><br><br></td>
 	</tr>	
 	<tr>
-		<td colspan=6><b>$preferences[pref_inv_detail_heading]</b></td>
+		<td colspan=6><b>$preference[pref_inv_detail_heading]</b></td>
 	</tr>
 EOD;
 }
@@ -464,15 +464,15 @@ EOD;
 
 $display_block_bottom =  <<<EOD
         <tr>
-                <td colspan=6><i>$preferences[pref_inv_detail_line]</i></td>
+                <td colspan=6><i>$preference[pref_inv_detail_line]</i></td>
         </tr>
 	<tr>
-		<td colspan=6>$preferences[pref_inv_payment_method]</td>
+		<td colspan=6>$preference[pref_inv_payment_method]</td>
         <tr>
-                <td>$preferences[pref_inv_payment_line1_name]</td><td colspan=5>$preferences[pref_inv_payment_line1_value]</td>
+                <td>$preference[pref_inv_payment_line1_name]</td><td colspan=5>$preference[pref_inv_payment_line1_value]</td>
         </tr>
         <tr>
-                <td>$preferences[pref_inv_payment_line2_name]</td><td colspan=5>$preferenece[pref_inv_payment_line2_value]</td>
+                <td>$preference[pref_inv_payment_line2_name]</td><td colspan=5>$preferenece[pref_inv_payment_line2_value]</td>
         </tr>
         </table>
 	<!-- addition close table tag to close invoice itemised/consulting if it has a note -->
@@ -484,7 +484,7 @@ include('./config/config.php');
 
 	$url_pdf = "$_SERVER[HTTP_HOST]$install_path/index.php?module=invoices&view=templates/template&submit=$invoice[id]&action=view&location=pdf&invoice_style=$invoice_type[inv_ty_description]";
 	$url_pdf_encoded = urlencode($url_pdf); 
-	$url_for_pdf = "./pdf/html2ps.php?process_mode=single&renderfields=1&renderlinks=1&renderimages=1&scalepoints=1&pixels=$pdf_screen_size&media=$pdf_paper_size&leftmargin=$pdf_left_margin&rightmargin=$pdf_right_margin&topmargin=$pdf_top_margin&bottommargin=$pdf_bottom_margin&transparency_workaround=1&imagequality_workaround=1&output=1&location=pdf&pdfname=$preferences[pref_inv_wording]$invoice[id]&URL=$url_pdf_encoded";
+	$url_for_pdf = "./pdf/html2ps.php?process_mode=single&renderfields=1&renderlinks=1&renderimages=1&scalepoints=1&pixels=$pdf_screen_size&media=$pdf_paper_size&leftmargin=$pdf_left_margin&rightmargin=$pdf_right_margin&topmargin=$pdf_top_margin&bottommargin=$pdf_bottom_margin&transparency_workaround=1&imagequality_workaround=1&output=1&location=pdf&pdfname=$preference[pref_inv_wording]$invoice[id]&URL=$url_pdf_encoded";
 	
 	
 echo <<<EOD
@@ -508,7 +508,7 @@ echo <<<EOD
 
 	<title>{$title}</title>
 <body>
-{$LANG[quick_view_of]} {$preferences[pref_inv_wording]} {$master_invoice_id}
+{$LANG[quick_view_of]} {$preference[pref_inv_wording]} {$master_invoice_id}
 <br>
 
 

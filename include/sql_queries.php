@@ -18,11 +18,36 @@ function getBiller($id) {
 	return mysql_fetch_array($result_print_biller);
 }
 
-function getPreferences($id) {
+function getPreference($id) {
 	global $tb_prefix;
+	global $LANG;
 	$print_preferences = "SELECT * FROM {$tb_prefix}preferences where pref_id = $id";
 	$result_print_preferences  = mysql_query($print_preferences) or die(mysql_error());
-	return mysql_fetch_array($result_print_preferences);
+	$preference = mysql_fetch_array($result_print_preferences);
+	$preference['wording_for_enabled'] = $preference['pref_enabled']==1?$LANG['enabled']:$LANG['disabled'];
+	return $preference;
+}
+
+function getPreferences() {
+	global $tb_prefix;
+	global $LANG;
+	
+	$sql = "SELECT * FROM {$tb_prefix}preferences ORDER BY pref_description";
+	$query  = mysql_query($sql) or die(mysql_error());
+	
+	$preferences = null;
+	
+	for($i=0;$preference = mysql_fetch_array($query);$i++) {
+		$preferences[$i] = $preference;
+		
+  		if ($preference['pref_enabled'] == 1) {
+  			$preference['pref_enabled'] = $LANG['enabled'];
+  		} else {
+  			$preference['pref_enabled'] = $LANG['disabled'];
+  		}
+	}
+	
+	return $preferences;
 }
 
 function getTaxRate($id) {
@@ -42,6 +67,23 @@ function getPaymentType($id) {
 	$paymentType['pt_enabled'] = $paymentType['pt_enabled']==1?$LANG['enabled']:$LANG['disabled'];
 	
 	return $paymentType;
+}
+
+function getProducts() {
+	
+	global $tb_prefix;
+	global $LANG;
+	
+	$sql = "SELECT * FROM {$tb_prefix}products ORDER BY description";
+	$query = mysql_query($sql) or die(mysql_error());
+	
+	$products = null;
+	
+	for($i=0;$product = mysql_fetch_array($query);$i++) {
+		$products[$i] = $product;
+	}
+	
+	return $products;
 }
 
 function getDefaultCustomer() {
