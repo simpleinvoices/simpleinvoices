@@ -218,11 +218,11 @@ function saveCustomer() {
 	return mysql_query($sql);
 }
 
-function getInvoices(&$result) {
+function getInvoices(&$query) {
 	global $config;
 	$invoice = null;
 
-	if($invoice =  mysql_fetch_array($result)) {
+	if($invoice =  mysql_fetch_array($query)) {
 
 		$invoice['calc_date'] = date( 'Y-m-d', strtotime( $invoice['date'] ) );
 		$invoice['date'] = date( $config['date_format'], strtotime( $invoice['date'] ) );
@@ -243,6 +243,21 @@ function getInvoices(&$result) {
 		#amount owing calc - end
 	}
 	return $invoice;
+}
+
+function getCustomerInvoices($id) {
+	global $tb_prefix;
+	$invoices = null;
+	
+	$sql = "SELECT * FROM {$tb_prefix}invoices WHERE customer_id =$id  ORDER BY id DESC";
+	$query = mysql_query($sql) or die(mysql_error());
+	
+	for($i = 0;$invoice = getInvoices($query);$i++) {
+		$invoices[$i] = $invoice;
+	}
+	
+	return $invoices;
+
 }
 
 function getCustomers() {

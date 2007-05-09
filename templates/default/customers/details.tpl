@@ -113,7 +113,10 @@
 	<div id="section-2" class="fragment">
 		<h4><u>{$LANG.invoice_listings}</u></h4>
 		<p>
-
+			{foreach from=$invoices item=invoice}
+				ID:{$invoice.id} / Total: {$invoice.total} / Paid{$invoice.paid} / Owing {$invoice.owing} / Date {$invoice.date}<br />
+			{/foreach}
+			
 		</p>
 	</div>
 	<div id="section-3" class="fragment">

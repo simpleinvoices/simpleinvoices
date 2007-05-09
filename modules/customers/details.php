@@ -28,11 +28,16 @@ $invoice_owing_Field = number_format($invoice_total_Field - $invoice_paid_Field,
 
 $customFieldLabel = getCustomFieldLabels("customer");
 
-#show invoices per client
-$sql = "SELECT * FROM {$tb_prefix}invoices WHERE customer_id =$customer_id  ORDER BY id desc";
+
+
+$invoices = getCustomerInvoices($customer_id);
+
+
+
 
 //$customFieldLabel = getCustomFieldLabels("biller");
 $smarty -> assign('customer',$customer);
+$smarty -> assign('invoices',$invoices);
 $smarty -> assign('customFieldLabel',$customFieldLabel);
 
 ?>
