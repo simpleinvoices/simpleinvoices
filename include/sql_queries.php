@@ -52,9 +52,15 @@ function getPreferences() {
 
 function getTaxRate($id) {
 	global $tb_prefix;
-	$print_tax_rate = "SELECT * FROM {$tb_prefix}tax WHERE tax_id = $id";
-	$result_print_tax_rate = mysql_query($print_tax_rate) or die(mysql_error());
-	return mysql_fetch_array($result_print_tax_rate);
+	global $LANG;
+	
+	$sql = "SELECT * FROM {$tb_prefix}tax WHERE tax_id = $id";
+	$query = mysql_query($sql) or die(mysql_error());
+	
+	$tax = mysql_fetch_array($query);
+	$tax['enabled'] = $tax['tax_enabled'] == 1 ? $LANG['enabled']:$LANG['disabled'];
+	
+	return $tax;
 }
 
 function getPaymentType($id) {
@@ -67,6 +73,16 @@ function getPaymentType($id) {
 	$paymentType['pt_enabled'] = $paymentType['pt_enabled']==1?$LANG['enabled']:$LANG['disabled'];
 	
 	return $paymentType;
+}
+
+function getProduct($id) {
+	global $tb_prefix;
+	global $LANG;
+	$sql = "SELECT * FROM {$tb_prefix}products WHERE id = $id";
+	$query = mysql_query($sql) or die(mysql_error());
+	$product = mysql_fetch_array($query);
+	$product['wording_for_enabled'] = $product['enabled']==1?$LANG['enabled']:$LANG['disabled'];
+	return $product;
 }
 
 function getProducts() {
@@ -85,6 +101,29 @@ function getProducts() {
 	
 	return $products;
 }
+
+function getTaxes() {
+	global $tb_prefix;
+	global $LANG;
+	
+	$sql = "SELECT * FROM {$tb_prefix}tax ORDER BY tax_description";
+	$query = mysql_query($sql) or die(mysql_error());
+	
+	$taxes = null;
+	
+	for($i=0;$tax = mysql_fetch_array($query);$i++) {
+		if ($tax['tax_enabled'] == 1) {
+			$tax['enabled'] = $LANG['enabled'];
+		} else {
+			$tax['enabled'] = $LANG['disabled'];
+		}
+
+		$taxes[$i] = $tax;
+	}
+	
+	return $taxes;
+}
+
 
 function getDefaultCustomer() {
 	global $tb_prefix;
