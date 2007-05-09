@@ -17,7 +17,6 @@ jsEnd();
 #get the invoice id
 $tax_rate_id = $_GET['submit'];
 
-
 $tax = getTaxRate($tax_rate_id);
 
 $smarty -> assign("tax",$tax);

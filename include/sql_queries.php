@@ -28,6 +28,19 @@ function getPreference($id) {
 	return $preference;
 }
 
+function getSQLPatches() {
+	global $tb_prefix;
+	$sql = "SELECT * FROM {$tb_prefix}sql_patchmanager ORDER BY sql_release";                  
+	$query = mysql_query($sql) or die(mysql_error());
+
+	$patches = null;
+	
+	for($i=0;$patch = mysql_fetch_array($query);$i++) {
+		$patches[$i] = $patch;
+	}
+	return $patches;
+}
+
 function getPreferences() {
 	global $tb_prefix;
 	global $LANG;
