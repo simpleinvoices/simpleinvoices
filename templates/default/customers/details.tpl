@@ -112,11 +112,25 @@
 	</div>
 	<div id="section-2" class="fragment">
 		<h4><u>{$LANG.invoice_listings}</u></h4>
-		<p>
+		<p align=center>
+		<table align=centre>
+		<tr>
+			<th class="sortable">ID</th>
+			<th class="sortable">Date</th>
+			<th class="sortable">Total</th>
+			<th class="sortable">Paid</th>
+			<th class="sortable">Owing</th>
+		</tr>
 			{foreach from=$invoices item=invoice}
-				ID:{$invoice.id} / Total: {$invoice.total} / Paid{$invoice.paid} / Owing {$invoice.owing} / Date {$invoice.date}<br />
+			<tr>
+				<td class="details_screen">{$invoice.id}</td>
+				<td class="details_screen">{$invoice.date}</td>
+				<td class="details_screen">{$invoice.total}</td>
+				<td class="details_screen">{$invoice.paid}</td>
+				<td class="details_screen">{$invoice.owing}</td>
+			</tr>
 			{/foreach}
-			
+		</table>	
 		</p>
 	</div>
 	<div id="section-3" class="fragment">
