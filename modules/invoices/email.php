@@ -107,7 +107,7 @@ if ($_GET['stage'] == 2 ) {
 	   exit;
 	}
 	echo "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=invoices&view=manage>";
-	echo "Message has been sent";
+	echo "<br>$preference[pref_inv_wording] $invoice[id] has been sent as a PDF";
 
 	echo $block_stage3;
 

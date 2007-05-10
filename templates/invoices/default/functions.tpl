@@ -87,7 +87,7 @@ function print_if_not_null($label,$field,$class1,$class2,$colspan) {
         if ($field != null) {
                 $print_if_not_null =  "
                 <tr>
-                        <td class='$class1'>{$label}:<td class='$class2' colspan=$colspan>{$field}</td>
+                        <td class='$class1'>$label:<td class='$class2' colspan=$colspan>$field</td>
                 </tr>";  
 		return $print_if_not_null;
         }

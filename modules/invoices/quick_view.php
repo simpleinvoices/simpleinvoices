@@ -24,7 +24,6 @@ $defaults = getSystemDefaults();
 #amount paid calc - start
 	$invoice_paid_Field = calc_invoice_paid($invoice['id']);
 	$invoice_paid_Field_format = number_format($invoice_paid_Field,2);
-<div id="left">
 #amount paid calc - end
 
 #amount owing calc - start
@@ -64,7 +63,6 @@ $defaults = getSystemDefaults();
 #get custom field labels for biller
 $billerCustomFieldLabel = getCustomFieldLabels("biller");
 $customerCustomFieldLabel = getCustomFieldLabels("customer");
-$productCustomFieldLabel = getCustomFieldLabels("product");
 
 
 $show_custom_field_1 = show_custom_field(invoice_cf1,$invoice['invoice_custom_field1'],read,'details_screen summary','','',5,':');
@@ -307,6 +305,8 @@ EOD;
 	    $invoice_items['inv_it_total'] = number_format($invoice_items['inv_it_total'],2);
 	
 	
+		$productCustomFieldLabel = getCustomFieldLabels("product");
+
 		#products query
 		$print_products = "SELECT * FROM {$tb_prefix}products WHERE id = $invoice_items[inv_it_product_id]";
 		$result_print_products = mysql_query($print_products, $conn) or die(mysql_error());
@@ -374,10 +374,10 @@ EOD;
                                 <td colspan=6>
                                         <table width=100%>
                                         <tr>
-                                                <td width=50% class='details_screen'>$prod_custom_field_label1: $product[custom_field1]</td><td width=50% class='details_screen'>$prod_custom_field_label2: $product[custom_field2]</td>
+                                                <td width=50% class='details_screen'>{$productCustomFieldLabel['1']}: $product[custom_field1]</td><td width=50% class='details_screen'>{$productCustomFieldLabel['2']}: $product[custom_field2]</td>
                                         </tr>
                                         <tr>       
-                                               <td width=50% class='details_screen'>$prod_custom_field_label3: $product[custom_field3]</td><td width=50% class='details_screen'>$prod_custom_field_label4: $product[custom_field4]</td>
+                                               <td width=50% class='details_screen'>{$productCustomFieldLabel['3']}: $product[custom_field3]</td><td width=50% class='details_screen'>{$productCustomFieldLabel['4']}: $product[custom_field4]</td>
                                          </tr>
                                         </table>
                                 </td>

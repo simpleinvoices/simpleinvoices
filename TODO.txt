@@ -20,10 +20,12 @@
  -- make merge_adress work
  -- make invoice items custom fields work
  -- make gross total work
+ - Quick View: make invoice custom fields work
  - home.php - make the links to the documentation work
  - sql patches: make a conversion script for the old defaults to the new one
  - Docs: change chmod 777 with chown apache:apache
  - include regexp stuff in docs.php file
+  
 
 -done
  - sql patch: reset default invoices template to default - Done
@@ -56,6 +58,7 @@
  -- make the info pages for email funtion - done
  -- move email page to smarty - done
  - Add redirector after the sql patches have run - done
+ - Quick View: make product custom fields work - done
  
 
 - in next release +1 - aim end of May
