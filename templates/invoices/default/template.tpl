@@ -1,4 +1,4 @@
-		{include file='../templates/invoices/default/functions.tpl'}
+{include file='../templates/invoices/default/functions.tpl'}
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -84,7 +84,11 @@
         {/if}
 
 		{php}
-		       echo  merge_address($biller.city, $biller.state, $biller.zip_code, $biller.street_address, $biller.street_address2,'tbl1-left','tbl1-right',3);
+			global $LANG;
+			global $biller;
+			global $customer;
+			
+		       echo  merge_address($biller['city'], $biller['state'], $biller['zip_code'], $biller['street_address'], $biller['street_address2'],'tbl1-left','tbl1-right',3);
 		{/php}
 
 
@@ -96,17 +100,18 @@
         {/if}
 
 	{php}
-        
-		echo print_if_not_null($LANG.phone_short, $biller.phone,'tbl1-left','tbl1-right',3);
-		echo print_if_not_null($LANG.fax, $biller.fax,'tbl1-left','tbl1-right',3);
-		echo print_if_not_null($LANG.mobile_short, $biller.mobile_phone,'tbl1-left','tbl1-right',3);
+
+		
+		echo print_if_not_null($LANG['phone_short'], $biller['phone'],'tbl1-left','tbl1-right',3);
+		echo print_if_not_null($LANG['fax'], $biller['fax'],'tbl1-left','tbl1-right',3);
+		echo print_if_not_null($LANG['mobile_short'], $biller['mobile_phone'],'tbl1-left','tbl1-right',3);
 
 
-        echo print_if_not_null($LANG['email'], $biller[email],'tbl1-left','tbl1-right',3);
-        echo print_if_not_null($biller[custom_field_label1], $biller[custom_field1],'tbl1-left','tbl1-right',3);
-        echo print_if_not_null($biller[custom_field_label2], $biller[custom_field2],'tbl1-left','tbl1-right',3);
-        echo print_if_not_null($biller[custom_field_label3], $biller[custom_field3],'tbl1-left','tbl1-right',3);
-        echo print_if_not_null($biller[custom_field_label4], $biller[custom_field4],'tbl1-left','tbl1-right',3);
+        echo print_if_not_null($LANG['email'], $biller['email'],'tbl1-left','tbl1-right',3);
+        echo print_if_not_null($biller['custom_field_label1'], $biller['custom_field1'],'tbl1-left','tbl1-right',3);
+        echo print_if_not_null($biller['custom_field_label2'], $biller['custom_field2'],'tbl1-left','tbl1-right',3);
+        echo print_if_not_null($biller['custom_field_label3'], $biller['custom_field3'],'tbl1-left','tbl1-right',3);
+        echo print_if_not_null($biller['custom_field_label4'], $biller['custom_field4'],'tbl1-left','tbl1-right',3);
 	{/php}
 
 	<tr><td class="tbl1-top" colspan=4></td></tr>
@@ -150,7 +155,7 @@
         {/if}
 
 		{php}
-        echo  merge_address($customer[city], $customer[state], $customer[zip_code], $customer[street_address], $customer[street_address2],'tbl1-left','tbl1-right',3);
+        echo  merge_address($customer['city'], $customer['state'], $customer['zip_code'], $customer['street_address'], $customer['street_address2'],'tbl1-left','tbl1-right',3);
         {/php}
 
          {if $customer.country != null}
@@ -161,16 +166,17 @@
         {/if}
 
 	{php}
+		
 		$customer_block .= print_if_not_null($LANG['phone_short'], $customer[phone],'tbl1-left','tbl1-right',3);
 		$customer_block .= print_if_not_null($LANG['fax'], $customer[fax],'tbl1-left','tbl1-right',3);
 		$customer_block .= print_if_not_null($LANG['mobile_short'], $customer[mobile_phone],'tbl1-left','tbl1-right',3);
 
 
         $customer_block .= print_if_not_null($LANG['email'], $customer[email],'tbl1-left','tbl1-right',3);
-        $customer_block .= print_if_not_null($customer[custom_field_label1], $customer[custom_field1],'tbl1-left','tbl1-right',3);
-        $customer_block .= print_if_not_null($customer[custom_field_label2], $customer[custom_field2],'tbl1-left','tbl1-right',3);
-        $customer_block .= print_if_not_null($customer[custom_field_label3], $customer[custom_field3],'tbl1-left','tbl1-right',3);
-        $customer_block .= print_if_not_null($customer[custom_field_label4], $customer[custom_field4],'tbl1-left','tbl1-right',3);
+        $customer_block .= print_if_not_null($customer['custom_field_label1'], $customer['custom_field1'],'tbl1-left','tbl1-right',3);
+        $customer_block .= print_if_not_null($customer['custom_field_label2'], $customer['custom_field2'],'tbl1-left','tbl1-right',3);
+        $customer_block .= print_if_not_null($customer['custom_field_label3'], $customer['custom_field3'],'tbl1-left','tbl1-right',3);
+        $customer_block .= print_if_not_null($customer['custom_field_label4'], $customer['custom_field4'],'tbl1-left','tbl1-right',3);
         echo $customer_block;
 	{/php}
 
@@ -208,6 +214,8 @@
                                                 <table width="100%">
                                                         <tr>
 			{php}
+				global $product_cf;
+				global $product;
                 $itemised_line .= inv_itemised_cf($product_cf["custom_field_label1"], $product[custom_field1]);
                 $inv_it_tr++;
                 $itemised_line .= do_tr($inv_it_tr,'blank-class');
@@ -255,16 +263,16 @@
                                                         <tr>
 				{php}
 
-                $consulting_line .= inv_itemised_cf($product_cf[custom_field_label1], $product[custom_field1]);
+                $consulting_line .= inv_itemised_cf($product_cf['custom_field_label1'], $product[custom_field1]);
                 $inv_it_tr++;
                 $consulting_line .= do_tr($inv_it_tr,'blank-class');
-                $consulting_line .= inv_itemised_cf($product_cf[custom_field_label2], $product[custom_field2]);
+                $consulting_line .= inv_itemised_cf($product_cf['custom_field_label2'], $product[custom_field2]);
                 $inv_it_tr++;
                 $consulting_line .= do_tr($inv_it_tr,'blank-class');
-                $consulting_line .= inv_itemised_cf($product_cf[custom_field_label3], $product[custom_field3]);
+                $consulting_line .= inv_itemised_cf($product_cf['custom_field_label3'], $product[custom_field3]);
                 $inv_it_tr++;
                 $consulting_line .= do_tr($inv_it_tr,'blank-class');
-                $consulting_line .= inv_itemised_cf($product_cf[custom_field_label4], $product[custom_field4]);
+                $consulting_line .= inv_itemised_cf($product_cf['custom_field_label4'], $product[custom_field4]);
                 $inv_it_tr++;
                 $consulting_line .= do_tr($inv_it_tr,'blank-class');
                 $inv_it_tr = 0;
