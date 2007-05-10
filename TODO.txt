@@ -25,7 +25,8 @@
  - sql patches: make a conversion script for the old defaults to the new one
  - Docs: change chmod 777 with chown apache:apache
  - include regexp stuff in docs.php file
-  
+ - Biller: enabled in edit page - check is working + check if working in other sections
+ - Fix reports to work with new db field names 
 
 -done
  - sql patch: reset default invoices template to default - Done
