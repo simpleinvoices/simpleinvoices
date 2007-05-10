@@ -28,8 +28,14 @@ else {
 	else {
 		$file = $file.".php";
 	}
+	
+	if(!file_exists($file)) {
+		$file = "./docs/en/general/about.php";
+	}
+	
 	//echo $file;
-	$smarty -> display("../templates/default/header.tpl"); 
+	$smarty -> display("../templates/default/header.tpl");
+	$smarty -> display("../templates/default/main.tpl"); 
 	include($file);
 	$smarty -> display("../templates/default/footer.tpl");
 

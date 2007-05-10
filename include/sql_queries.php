@@ -63,6 +63,29 @@ function getPreferences() {
 	return $preferences;
 }
 
+function getBillers() {
+	global $tb_prefix;
+	global $LANG;
+	
+	$sql = "SELECT * FROM {$tb_prefix}biller ORDER BY name";
+	$query  = mysql_query($sql) or die(mysql_error());
+	
+	$billers = null;
+	
+	for($i=0;$biller = mysql_fetch_array($query);$i++) {
+		$billers[$i] = $biller;
+		
+  		if ($biller['enabled'] == 1) {
+  			$biller['enabled'] = $LANG['enabled'];
+  		} else {
+  			$biller['enabled'] = $LANG['disabled'];
+  		}
+	}
+	
+	return $billers;
+}
+
+
 function getTaxRate($id) {
 	global $tb_prefix;
 	global $LANG;
@@ -215,9 +238,9 @@ function updateDefault($name,$value) {
 
 function getInvoiceType($id) {
 	global $tb_prefix;
-	$sql_invoice_type = "SELECT inv_ty_description FROM {$tb_prefix}invoice_type WHERE inv_ty_id = $id";
-	$result_invoice_type = mysql_query($sql_invoice_type) or die(mysql_error());
-	return mysql_fetch_array($result_invoice_type);
+	$sql = "SELECT inv_ty_description FROM {$tb_prefix}invoice_type WHERE inv_ty_id = $id";
+	$query = mysql_query($sql) or die(mysql_error());
+	return mysql_fetch_array($query);
 }
 
 function insertBiller() {
