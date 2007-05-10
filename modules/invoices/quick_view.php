@@ -24,6 +24,7 @@ $defaults = getSystemDefaults();
 #amount paid calc - start
 	$invoice_paid_Field = calc_invoice_paid($invoice['id']);
 	$invoice_paid_Field_format = number_format($invoice_paid_Field,2);
+<div id="left">
 #amount paid calc - end
 
 #amount owing calc - start
