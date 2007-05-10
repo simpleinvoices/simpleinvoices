@@ -127,7 +127,7 @@ unlink($backupFile);
 ?>
 
 - Admin-Funtion: Cache Cleanup
-
+- What happens if a page is longer then 1 page for printing? (header,footer?)
 
 - Replace
 if (!defined("BROWSE")) {

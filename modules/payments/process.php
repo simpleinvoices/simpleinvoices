@@ -4,10 +4,7 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-
 /* validataion code */
-
-
 
 #get max invoice id for validataion - start
 $sql_max = "SELECT max(id) as max_id FROM {$tb_prefix}invoices";
@@ -47,35 +44,15 @@ $result_print_master_invoice_id  = mysql_query($print_master_invoice_id , $conn)
 
 $inv = mysql_fetch_array($result_print_master_invoice_id);
 
-#customer query
-$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE id = $inv[customer_id]";
-$result_print_customer = mysql_query($print_customer, $conn) or die(mysql_error());
-
-$customer = mysql_fetch_array($result_print_customer);
-
-#biller query
-$print_biller = "SELECT * FROM {$tb_prefix}biller WHERE id = $inv[biller_id]";
-$result_print_biller = mysql_query($print_biller, $conn) or die(mysql_error());
-
-$biller = mysql_fetch_array($result_print_biller);
-
-#biller query
-$sql = "SELECT * FROM {$tb_prefix}payment_types where pt_enabled != 0 ORDER BY pt_description";
-$result = mysql_query($sql, $conn) or die(mysql_error());
-
-
-
+$customer = getCustomer($inv['customer_id']);
+$biller = getBiller($inv['biller_id']);
 $defaults = getSystemDefaults();
-
-#Get the names of the defaults from their id -start
-#default biller name query
-$sql_payment_type_default = "SELECT pt_description FROM {$tb_prefix}payment_types where pt_id = $defaults[payment_type]";
-$result_payment_type_default = mysql_query($sql_payment_type_default , $conn) or die(mysql_error());
-
-$pt = mysql_fetch_array($result_payment_type_default);
+$pt = getPaymentType($defaults['payment_type']);
 
 
-#biller selector
+$sql = "SELECT * FROM {$tb_prefix}payment_types where pt_enabled != 0 ORDER BY pt_description";
+$result = mysql_query($sql) or die(mysql_error());
+
 
 if (mysql_num_rows($result) == 0) {
 	//no records
@@ -97,7 +74,7 @@ EOD;
 	<option value="{$recs['pt_id']}">
 		{$recs['pt_description']}</option>
 EOD;
-}
+	}
 }
 
 
