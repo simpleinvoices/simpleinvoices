@@ -9,13 +9,13 @@
 <div id="header">
 
 </div>
-
+{$invoiceItems[0].product.description}
 <link rel="stylesheet" type="text/css" href="{$css}">
 
 
 	<table width="100%" align="center">
 			<tr>
-	   				<td colspan="5"><img src="{$logo}" border="0" hspace="0" align="left"></td><th align=right><span class="font1">{$pref.pref_inv_heading}</span></th>
+	   				<td colspan="5"><img src="{$logo}" border="0" hspace="0" align="left"></td><th align=right><span class="font1">{$preference.pref_inv_heading}</span></th>
 			</tr>
 			<tr>
 					<td colspan=6><hr size="1"></td>
@@ -24,13 +24,13 @@
 	
 	<table class="right">
 		<tr>
-				<td class="col1 tbl1" colspan="4" ><b>{$pref.pref_inv_wording} {$LANG.summary}</b></td>
+				<td class="col1 tbl1" colspan="4" ><b>{$preference.pref_inv_wording} {$LANG.summary}</b></td>
 		</tr>
 		<tr>
-				<td class="tbl1-left">{$pref.pref_inv_wording} {$LANG.number_short}:</td><td class="tbl1-right" colspan=3>{$invoice.id}</td>
+				<td class="tbl1-left">{$preference.pref_inv_wording} {$LANG.number_short}:</td><td class="tbl1-right" colspan=3>{$invoice.id}</td>
 		</tr>
 		<tr>
-				<td nowrap class="tbl1-left">{$pref.pref_inv_wording} {$LANG.date}:</td><td class="tbl1-right" colspan=3>{$invoice.date}</td>
+				<td nowrap class="tbl1-left">{$preference.pref_inv_wording} {$LANG.date}:</td><td class="tbl1-right" colspan=3>{$invoice.date}</td>
 		</tr>
 	<!-- Show the Invoice Custom Fields if valid -->
 
@@ -40,13 +40,13 @@
 		{$show.custom_field4}
 
 		<tr>
-				<td class="tbl1-left" >{$LANG.total}: </td><td class="tbl1-right" colspan=3>{$pref.pref_currency_sign}{$invoice.total_format}</td>
+				<td class="tbl1-left" >{$LANG.total}: </td><td class="tbl1-right" colspan=3>{$preference.pref_currency_sign}{$invoice.total_format}</td>
 		</tr>
 		<tr>
-				<td class="tbl1-left">{$LANG.paid}:</td><td class="tbl1-right" colspan=3 >{$pref.pref_currency_sign}{$invoice.paid_format}</td>
+				<td class="tbl1-left">{$LANG.paid}:</td><td class="tbl1-right" colspan=3 >{$preference.pref_currency_sign}{$invoice.paid_format}</td>
 		</tr>
 		<tr>
-				<td nowrap class="tbl1-left tbl1-bottom">{$LANG.owing}:</td><td class="tbl1-right tbl1-bottom" colspan=3 >{$pref.pref_currency_sign}{$invoice.owing}</td>
+				<td nowrap class="tbl1-left tbl1-bottom">{$LANG.owing}:</td><td class="tbl1-right tbl1-bottom" colspan=3 >{$preference.pref_currency_sign}{$invoice.owing}</td>
 		</tr>
 
 
@@ -230,15 +230,15 @@
 	<tr class="tbl1-left tbl1-right">
 		<td class="tbl1-left" colspan="3"></td>
 		<td align="right" colspan="2">{$LANG.tax_total}</td>
-		<td align="right" class="tbl1-right" >{$pref.pref_currency_sign}{$tax.total_tax}</td>
+		<td align="right" class="tbl1-right" >{$preference.pref_currency_sign}{$invoiceItems.total_tax}</td>
 	</tr>
 	<tr class="tbl1-left tbl1-right">
 		<td class="tbl1-left tbl1-right" colspan="6" ><br></td>
 	</tr>
 		<tr class="tbl1-left tbl1-right tbl1-bottom">
 		<td class="tbl1-left tbl1-bottom" colspan="3"></td>
-		<td class="tbl1-bottom" align=right colspan=2><b>{$pref.pref_inv_wording} {$LANG.amount}</b></td>
-		<td  class="tbl1-bottom tbl1-right" align=right><u>{$pref.pref_currency_sign}{$invoice_total.total}</u></td>
+		<td class="tbl1-bottom" align=right colspan=2><b>{$preference.pref_inv_wording} {$LANG.amount}</b></td>
+		<td  class="tbl1-bottom tbl1-right" align=right><u>{$preference.pref_currency_sign}{$invoiceItems.total}</u></td>
 	</tr>
 	<tr>
 		<td colspan="6"><br /><br /></td>
@@ -246,19 +246,19 @@
 	
 		<!-- invoice details section - start -->
 	<tr>
-		<td class="tbl1 col1" colspan="6"><b>{$pref.pref_inv_detail_heading}</b></td>
+		<td class="tbl1 col1" colspan="6"><b>{$preference.pref_inv_detail_heading}</b></td>
 	</tr>
 	<tr>
-		<td class="tbl1-left tbl1-right" colspan=6><i>{$pref.pref_inv_detail_line}</i></td>
+		<td class="tbl1-left tbl1-right" colspan=6><i>{$preference.pref_inv_detail_line}</i></td>
 	</tr>
 	<tr>
-		<td class="tbl1-left tbl1-right" colspan=6>{$pref.pref_inv_payment_method}</td>
+		<td class="tbl1-left tbl1-right" colspan=6>{$preference.pref_inv_payment_method}</td>
 	</tr>
 	<tr>
-		<td class="tbl1-left tbl1-right" colspan=6>{$pref.pref_inv_payment_line1_name} {$pref.pref_inv_payment_line1_value}</td>
+		<td class="tbl1-left tbl1-right" colspan=6>{$preference.pref_inv_payment_line1_name} {$preference.pref_inv_payment_line1_value}</td>
 	</tr>
 	<tr>
-		<td class="tbl1-left tbl1-bottom tbl1-right" colspan=7>{$pref.pref_inv_payment_line2_name} {$pref.pref_inv_payment_line2_value}</td>
+		<td class="tbl1-left tbl1-bottom tbl1-right" colspan=7>{$preference.pref_inv_payment_line2_name} {$preference.pref_inv_payment_line2_value}</td>
 	</tr>
 	<tr>
 		<td><br></td>

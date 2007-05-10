@@ -21,7 +21,7 @@ function getBiller($id) {
 function getPreference($id) {
 	global $tb_prefix;
 	global $LANG;
-	$print_preferences = "SELECT * FROM {$tb_prefix}preferences where pref_id = $id";
+	$print_preferences = "SELECT * FROM {$tb_prefix}preferences WHERE pref_id = $id";
 	$result_print_preferences  = mysql_query($print_preferences) or die(mysql_error());
 	$preference = mysql_fetch_array($result_print_preferences);
 	$preference['wording_for_enabled'] = $preference['pref_enabled']==1?$LANG['enabled']:$LANG['disabled'];
@@ -221,15 +221,55 @@ function getDefaultTax() {
 function getInvoice($id) {
 	global $tb_prefix;
 	global $config;
-	$print_master_invoice_id = "SELECT * FROM {$tb_prefix}invoices WHERE id = $id";
-	$result_print_master_invoice_id  = mysql_query($print_master_invoice_id) or die(mysql_error());
+	
+	$sql = "SELECT * FROM {$tb_prefix}invoices WHERE id = $id";
+	$query  = mysql_query($sql) or die(mysql_error());
 
-	$invoice = mysql_fetch_array($result_print_master_invoice_id);
-	$invoice['date_field'] = date( $config['date_format'], strtotime( $invoice['date'] ) );
+	$invoice = mysql_fetch_array($query);
+	$invoice['date'] = date( $config['date_format'], strtotime( $invoice['date'] ) );
 	$invoice['calc_date'] = date('Y-m-d', strtotime( $invoice['date'] ) );
+	$invoice['total'] = calc_invoice_total($invoice['id']);
+	$invoice['total_format'] = number_format($invoice['total'],2);
+	$invoice['paid'] = calc_invoice_paid($invoice['id']);
+	$invoice['paid_format'] = number_format($invoice['paid'],2);
+	$invoice['owing'] = number_format($invoice['total'] - $invoice['paid'],2);
+
 	
 	return $invoice;
 }
+
+function getInvoiceItems($id) {
+	global $tb_prefix;
+	$sql = "SELECT * FROM {$tb_prefix}invoice_items WHERE  inv_it_invoice_id =$id";
+	$query = mysql_query($sql);
+	
+	$invoiceItems = null;
+	
+	for($i=0;$invoiceItem = mysql_fetch_array($query);$i++) {
+	
+		$invoiceItem['inv_it_quantity_formatted'] = number_format($invoiceItem['inv_it_quantity'],2);
+		$invoiceItem['inv_it_unit_price'] = number_format($invoiceItem['inv_it_unit_price'],2);
+		$invoiceItem['inv_it_tax_amount'] = number_format($invoiceItem['inv_it_tax_amount'],2);
+		$invoiceItem['inv_it_gross_total'] = number_format($invoiceItem['inv_it_gross_total'],2);
+		$invoiceItem['inv_it_total'] = number_format($invoiceItem['inv_it_total'],2);
+		
+		$sql = "SELECT * FROM {$tb_prefix}products WHERE id = {$invoiceItem['inv_it_product_id']}";
+		$query2 = mysql_query($sql) or die(mysql_error());
+		$invoiceItem['product'] = mysql_fetch_array($query2);	
+		
+		$invoiceItems[$i] = $invoiceItem;
+	}
+	
+	#invoice total tax
+	$sql ="SELECT SUM(inv_it_tax_amount) AS total_tax, SUM(inv_it_total) AS total FROM {$tb_prefix}invoice_items WHERE inv_it_invoice_id =$id";
+	$query = mysql_query($sql) or die(mysql_error());
+	$result = mysql_fetch_array($query);
+	$invoiceItems['total'] = number_format($result['total'],2);
+	$invoiceItems['total_tax'] = number_format($result['total_tax']);
+	
+	return $invoiceItems;
+}
+
 
 function getSystemDefaults() {
 	global $tb_prefix;

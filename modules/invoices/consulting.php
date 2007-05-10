@@ -230,11 +230,12 @@ include('./config/config.php');
 /* check the def number of line items and do the print and entry field for that number of items */
    /*Preparation work fro being able to dynamically add line items during an itemised invoice  */
 	/*get the number of line items from the GET or if not set from the default in the database */
+	
 	if (!empty( $_GET['get_num_line_items'] )) {
 		$dynamic_line_items = $_GET['get_num_line_items'];
 		} 
 	else {
-		$dynamic_line_items = $defefaults['items'] ;
+		$dynamic_line_items = $defaults['items'] ;
 	}	
 
 	$num = 0;

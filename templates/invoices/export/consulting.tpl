@@ -7,11 +7,11 @@
 		</tr>
 
 	
-	{foreach from=$master_invoices item=master_invoice}
+	{foreach from=$invoiceItems item=invoiceItem}
 
 			<tr class="tbl1-left tbl1-right">
-				<td class="tbl1-left" >{$master_invoice.inv_it_quantity_formatted}</td>
-				<td>{$product.description}</td><td class="tbl1-right" colspan="5"></td>
+				<td class="tbl1-left" >{$invoiceItem.inv_it_quantity_formatted}</td>
+				<td>{$invoiceItem.product.description}</td><td class="tbl1-right" colspan="5"></td>
 			</tr>
 			
                 <tr>       
@@ -26,15 +26,15 @@
 	
 			<tr class="tbl1-left tbl1-right">
 				<td class="tbl1-left"></td>
-				<td class="tbl1-right" colspan=6><i>{$LANG.description}: </i>{$master_invoice.inv_it_description}</td>
+				<td class="tbl1-right" colspan=6><i>{$LANG.description}: </i>{$invoiceItem.inv_it_description}</td>
 			</tr>
 			<tr class="tbl1-left tbl1-right tbl1-bottom">
 				<td class="tbl1-left tbl1-bottom" ></td>
 				<td class="tbl1-bottom"></td>
-				<td class="tbl1-bottom">{$pref.pref_currency_sign}{$master_invoice.inv_it_unit_price}</td>
-				<td class="tbl1-bottom">{$pref.pref_currency_sign}{$master_invoice.inv_it_gross_total}</td>
-				<td class="tbl1-bottom ">{$pref.pref_currency_sign}{$master_invoice.inv_it_tax_amount}</td>
-				<td align=right colspan=2 class="tbl1-right tbl1-bottom">{$pref.pref_currency_sign}{$master_invoice.inv_it_total}</td>
+				<td class="tbl1-bottom">{$preference.pref_currency_sign}{$invoiceItem.inv_it_unit_price}</td>
+				<td class="tbl1-bottom">{$preference.pref_currency_sign}{$invoiceItem.inv_it_gross_total}</td>
+				<td class="tbl1-bottom ">{$preference.pref_currency_sign}{$invoiceItem.inv_it_tax_amount}</td>
+				<td align=right colspan=2 class="tbl1-right tbl1-bottom">{$preference.pref_currency_sign}{$invoiceItem.inv_it_total}</td>
 			</tr>
 	
 	{/foreach}

@@ -50,7 +50,6 @@ $defaults = getSystemDefaults();
         #Invoice Age - number of days - start
         if ($invoice_owing_Field > 0 ) {
                 $invoice_age_days =  number_format((strtotime(date('Y-m-d')) - strtotime($invoice['calc_date'])) / (60 * 60 * 24),0);
-                /*$invoice_age_days = (strtotime(date("Y-m-d")) - strtotime($invoice[date_field])) / (60 * 60 * 24);*/
                          $invoice_age = "$invoice_age_days {$LANG['days']}";
         }
         else {
@@ -107,7 +106,7 @@ $display_block_top =  <<<EOD
 		<td class='details_screen'>$preference[pref_inv_wording] {$LANG['number_short']}:</td><td colspan=5 class='details_screen'>$invoice[id]</td>
 	</tr>
 	<tr class='details_screen summary'>
-		<td>$preference[pref_inv_wording] {$LANG['date']}:</td><td colspan=5>$invoice[date_field]</td>
+		<td>$preference[pref_inv_wording] {$LANG['date']}:</td><td colspan=5>{$invoice['date']}</td>
 	</tr>
 	$show_custom_field_1 
 	$show_custom_field_2 
@@ -516,11 +515,11 @@ echo <<<EOD
 
 <!--Actions heading - start-->
 {$LANG[actions]}: 
-		<a href="index.php?module=invoices&view=templates/template&submit={$invoice[id]}&action=view&invoice_style={$invoice_type[inv_ty_description]}"> {$LANG['print_preview']}</a>
+		<a href="index.php?module=invoices&view=templates/template&submit={$invoice[id]}&action=view&invoice_style={$invoice_type['inv_ty_description']}"> {$LANG['print_preview']}</a>
 		 :: 
-		<a href="index.php?module=invoices&view=details&submit={$invoice[id]}&action=view&invoice_style={$invoice_type[inv_ty_description]}"> {$LANG[edit]}</a>
+		<a href="index.php?module=invoices&view=details&submit={$invoice[id]}&action=view&invoice_style={$invoice_type['inv_ty_description']}"> {$LANG['edit']}</a>
 		 ::
-		 <a href='index.php?module=payments&view=process&submit={$invoice[id]}&op=pay_selected_invoice'> {$LANG[process_payment]} </a>
+		 <a href='index.php?module=payments&view=process&submit={$invoice[id]}&op=pay_selected_invoice'> {$LANG['process_payment']} </a>
 		 ::
 		 <!-- EXPORT TO PDF -->
 		<a href='{$url_for_pdf }'>{$LANG[export_pdf]}</a>
@@ -528,7 +527,7 @@ echo <<<EOD
 		<a href="index.php?module=invoices&view=templates/template&submit={$invoice[id]}&action=view&invoice_style={$invoice_type[inv_ty_description]}&export={$spreadsheet}">{$LANG[export_as]} .{$spreadsheet}</a>
 		::
 		<a href="index.php?module=invoices&view=templates/template&submit={$invoice[id]}&action=view&invoice_style={$invoice_type[inv_ty_description]}&export={$word_processor}">{$LANG[export_as]} .{$word_processor} </a>
-		:: <a href="index.php?module=invoices&view=email&stage=1&submit={$invoice[id]}">{$LANG[email]}</a>
+		:: <a href="index.php?module=invoices&view=email&stage=1&submit={$invoice[id]}">{$LANG['email']}</a>
 <!--Actions heading - start-->
 <hr></hr>
 </form>
@@ -542,7 +541,7 @@ echo <<<EOD
 
 <hr></hr>
 	<form>
-		<input type=button value="{$LANG[cancel]}" onCLick="history.back()">
+		<input type=button value="{$LANG['cancel']}" onCLick="history.back()">
 	</form>
 EOD;
 

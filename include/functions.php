@@ -65,7 +65,7 @@ function get_custom_field_label($field)         {
 
     //if custom field is blank in db use the one from the LANG files
     if ($cf['cf_custom_label'] == null) {
-       	$cf['cf_custom_label'] = ${"LANG['custom_field']" . $get_cf_number};
+       	$cf['cf_custom_label'] = $LANG['custom_field'] . $get_cf_number;
     }
         
     return $cf['cf_custom_label'];
