@@ -17,7 +17,7 @@
 	</colgroup>
 	<thead>
 		<tr class="sortHeader">
-			<th class="noFilter sortable">{$LANG.action}</th>
+			<th class="noFilter sortable">{$LANG.actions}</th>
 			<th class=" index_table sortable">{$LANG.biller_id}</th>
 			<th class="index_table sortable">{$LANG.biller_name}</th>
 			<th class="index_table sortable">{$LANG.email}</th>
