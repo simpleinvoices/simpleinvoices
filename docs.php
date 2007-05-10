@@ -35,6 +35,7 @@ else {
 	
 	//echo $file;
 	$smarty -> display("../templates/default/header.tpl");
+	$smarty -> display("../templates/default/menu.tpl");
 	$smarty -> display("../templates/default/main.tpl"); 
 	include($file);
 	$smarty -> display("../templates/default/footer.tpl");

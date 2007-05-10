@@ -77,8 +77,9 @@ $smarty -> assign("spreadsheet",$spreadsheet);
 $smarty -> assign("word_processor",$word_processor);
 
 
-getRicoLiveGrid("ex1","	{ type:'number', decPlaces:0, ClassName:'alignleft' },,,
+getRicoLiveGrid("ex1","	{ type:'number', decPlaces:0, ClassName:'alignleft' },,
 	{ type:'number', decPlaces:2, ClassName:'alignleft' },
-	{ type:'number', decPlaces:2, ClassName:'alignleft' }");
+	{ type:'number', decPlaces:2, ClassName:'alignleft' },
+	{ type:'number', decPlaces:2, ClassName:'alignleft' },,,,");
 
 ?>

@@ -113,70 +113,24 @@
 	<div id="section-2" class="fragment">
 		<h4><u>{$LANG.invoice_listings}</u></h4>
 		<p >
-		<table  align="center">
-<tr class="sortHeader">
-<th class="noFilter sortable" >{$LANG.actions} </th>
-<th class="noFilter sortable">{$LANG.id}</th>
-<th class="selectFilter index_table sortable">{$LANG.biller}</th>
-<th class="selectFilter index_table sortable">{$LANG.customer}</th>
-<th class="noFilter sortable">{$LANG.total}</th>
-<th class="noFilter sortable">{$LANG.owing}</th>
-<th class="selectFilter index_table sortable">{$LANG.aging}</th>
-<th class="noFilter sortable">{$LANG.invoice_type}</th>
-<th class="noFilter sortable">{$LANG.date_created}</th>
+		<table width="100%" align="center">
+			<tr class="sortHeader">
 
-		</tr>
+				<th class="sortable">{$LANG.id}</th>
+				<th class="sortable">{$LANG.total}</th>
+				<th class="sortable">{$LANG.owing}</th>
+				<th class="sortable">{$LANG.date_created}</th>
+
+			</tr>
+		
 			{foreach from=$invoices item=invoice}
 	
-	<tr class="index_table">
-	<td class="index_table" nowrap>
-	<!-- Quick View -->
-	<a class="index_table"
-	 title="{$LANG.quick_view_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}"
-	 href="index.php?module=invoices&view=quick_view&submit={$invoice.invoice.id}&invoice_style={$invoice.invoiceType.inv_ty_description}">
-		<img src="images/common/view.png" height="16" border="-5px0" padding="-4px" valign="bottom" /><!-- print --></a>
-	</a>
-	
-	<!-- Edit View -->
-	<a class="index_table" title="{$LANG.edit_view_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}"
-	 href="index.php?module=invoices&view=details&submit={$invoice.invoice.id}&action=view&invoice_style={$invoice.invoiceType.inv_ty_description}">
-		<img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>
-	</a> 
-	
-	<!-- Print View -->
-	<a class="index_table" title="{$LANG.print_preview_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}"
-	href="index.php?module=invoices&view=templates/template&submit={$invoice.invoice.id}&action=view&location=print&invoice_style={$invoice.invoiceType.inv_ty_description}">
-	<img src="images/common/printer.gif" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>
- 
-	<!-- EXPORT TO PDF -->
-	<a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id} {$LANG.export_pdf_tooltip}"
-	class="index_table" href="{$invoice.url_for_pdf}"><img src="images/common/pdf.jpg" height="16" padding="-4px" border="-5px" valign="bottom" /><!-- pdf --></a>
-
-	<!--XLS -->
-	<a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording}{$invoice.invoice.id} {$LANG.export_xls_tooltip} {$spreadsheet} {$LANG.format_tooltip}"
-	 class="index_table" href="index.php?module=invoices&view=templates/template&submit={$invoice.invoice.id}&action=view&invoice_style={$invoice.invoiceType.inv_ty_description}&location=print&export={$spreadsheet}">
-	 <img src="images/common/xls.gif" height="16" border="0" padding="-4px" valign="bottom" /><!-- $spreadsheet --></a>
-
-	<!-- DOC -->
-	<a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id} {$LANG.export_doc_tooltip} {$word_processor} {$LANG.format_tooltip}"
-	 class="index_table" href="index.php?module=invoices&view=templates/template&submit={$invoice.invoice.id}&action=view&invoice_style={$invoice.invoiceType.inv_ty_description}&location=print&export={$word_processor}">
-	 <img src="images/common/doc.png" height="16" border="0" padding="-4px" valign="bottom" /><!-- $word_processor --></a>
-
-  <!-- Payment --><a title="{$LANG.process_payment} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}"
-   class="index_table" href="index.php?module=payments&view=process&submit={$invoice.invoice.id}&op=pay_selected_invoice">$</a>
-	<!-- Email -->
-	<a href="index.php?module=invoices&view=email&stage=1&submit={$invoice.invoice.id}" title="{$LANG.email}  {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}"><img src="images/common/mail-message-new.png" height="16" border="0" padding="-4px" valign="bottom" /></a>
-
-	</td>
-	<td class="index_table">{$invoice.invoice.id}</td>
-	<td class="index_table">{$invoice.biller.name}</td>
-	<td class="index_table">{$invoice.invoice.total}</td>
-	-->
-	<td class="index_table">{$invoice.invoice.owing}</td>
-	<td class="index_table">{$invoice.overdue}</td>
-	<td class="index_table">{$invoice.preference.pref_inv_wording}</td>
-	<td class="index_table">{$invoice.invoice.date}</td>
-	</tr>
+			<tr class="index_table">
+				<td class="details_screen">{$invoice.id}</td>
+				<td class="details_screen">{$invoice.total}</td>
+				<td class="details_screen">{$invoice.owing}</td>
+				<td class="details_screen">{$invoice.date}</td>
+			</tr>
 
 			{/foreach}
 		</table>	

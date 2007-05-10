@@ -236,7 +236,7 @@ if (isset($_GET['export'])) {
 	
 	
 	$templatePath = "./templates/invoices/${template}/template.tpl";
-	$template_path = "../templates/invoices/${template}/";
+	$template_path = "./templates/invoices/${template}/";
 	$css = "./templates/invoices/${template}/style.css";
 
 	if(file_exists($templatePath)) {

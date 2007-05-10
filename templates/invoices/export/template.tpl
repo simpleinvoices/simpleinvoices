@@ -101,9 +101,27 @@
                 <tr>
                         <td class='tbl1-left'>{$LANG.email}:<td class='tbl1-right' colspan=3>{$biller.email}</td>
                 </tr>
+        		{if $biller.custom_field1 != null }
                 <tr>
                         <td class='tbl1-left'>{$biller.custom_field_label1}:<td class='tbl1-right' colspan=3>{$biller.custom_field1}</td>
-                </tr>	<tr><td class="tbl1-top" colspan=4></td></tr>
+                </tr>	
+				{/if}
+        		{if $biller.custom_field2 != null }
+                <tr>
+                        <td class='tbl1-left'>{$biller.custom_field_label2}:<td class='tbl1-right' colspan=3>{$biller.custom_field2}</td>
+                </tr>	
+				{/if}
+        		{if $biller.custom_field3 != null }
+                <tr>
+                        <td class='tbl1-left'>{$biller.custom_field_label3}:<td class='tbl1-right' colspan=3>{$biller.custom_field3}</td>
+                </tr>	
+				{/if}
+        		{if $biller.custom_field4 != null }
+                <tr>
+                        <td class='tbl1-left'>{$biller.custom_field_label4}:<td class='tbl1-right' colspan=3>{$biller.custom_field4}</td>
+                </tr>	
+				{/if}
+				<tr><td class="tbl1-top" colspan=4></td></tr>
 
 <!-- Biller section - end -->
 
@@ -121,7 +139,7 @@
 
         {if $customer.attention != null}
                 <tr>
-                        <td class='tbl1-left'>{$LANG.attention_short}:</td><td align=left class='tbl1-right' colspan=3 >{$customer.attention}}</td>
+                        <td class='tbl1-left'>{$LANG.attention_short}:</td><td align=left class='tbl1-right' colspan=3 >{$customer.attention}</td>
                 </tr>
         {/if}
                {if $biller.street_address != null }
@@ -162,9 +180,28 @@
                 <tr>
                         <td class='tbl1-left'>{$LANG.email}:<td class='tbl1-right' colspan=3>{$customer.email}</td>
                 </tr>
+        		{if $customer.custom_field1 != null }
                 <tr>
                         <td class='tbl1-left'>{$customer.custom_field_label1}:<td class='tbl1-right' colspan=3>{$customer.custom_field1}</td>
-                </tr>	<tr><td class="tbl1-top" colspan=4></td></tr>
+                </tr>	
+				{/if}
+        		{if $customer.custom_field2 != null }
+                <tr>
+                        <td class='tbl1-left'>{$customer.custom_field_label2}:<td class='tbl1-right' colspan=3>{$customer.custom_field2}</td>
+                </tr>	
+				{/if}
+        		{if $customer.custom_field3 != null }
+                <tr>
+                        <td class='tbl1-left'>{$customer.custom_field_label3}:<td class='tbl1-right' colspan=3>{$customer.custom_field3}</td>
+                </tr>	
+				{/if}
+        		{if $customer.custom_field4 != null }
+                <tr>
+                        <td class='tbl1-left'>{$customer.custom_field_label4}:<td class='tbl1-right' colspan=3>{$customer.custom_field4}</td>
+                </tr>	
+				{/if}
+                
+				<tr><td class="tbl1-top" colspan=4></td></tr>
 
 
 <!-- Customer -->
@@ -181,7 +218,7 @@
 	{/if}
 
 	{if $smarty.get.invoice_style === 'Consulting' }
-		{include file=""$template_path/consulting.tpl"}
+		{include file="$template_path/consulting.tpl"}
 	{/if}
 	
 	{if $smarty.get.invoice_style === 'Total' }

@@ -16,13 +16,10 @@
 <col style='width:10%;' />
 <col style='width:10%;' />
 <col style='width:10%;' />
-<!--
-<col style='width:10%;' />
--->
 <col style='width:10%;' />
 <col style='width:5%;' />
 <col style='width:5%;' />
-<col style='width:10%;' />
+<col style='width:15%;' />
 </colgroup>
 <thead> 
 <tr class="sortHeader">
@@ -31,9 +28,6 @@
 <th class="selectFilter index_table sortable">{$LANG.biller}</th>
 <th class="selectFilter index_table sortable">{$LANG.customer}</th>
 <th class="noFilter sortable">{$LANG.total}</th>
-<!--
-<th class="noFilter">{$LANG.paid}</th>
--->
 <th class="noFilter sortable">{$LANG.owing}</th>
 <th class="selectFilter index_table sortable">{$LANG.aging}</th>
 <th class="noFilter sortable">{$LANG.invoice_type}</th>
