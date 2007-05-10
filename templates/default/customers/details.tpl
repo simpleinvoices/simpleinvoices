@@ -21,14 +21,14 @@
 		<td colspan="2"></td>
 		<td></td>
 		<td class="details_screen">{$LANG.total_invoices}</td>
-		<td>{$invoice_total_Field_formatted}</td>
+		<td>{$stuff.total_format}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.customer_name}</td>
 		<td colspan="2">{$customer.name}</td>
 		<td colspan="2"></td>
 		<td class="details_screen">{$LANG.total_paid}</td>
-		<td>{$invoice_paid_Field_formatted}</td>
+		<td>{$stuff.paid_format}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.attention_short} <a href="docs.php?t=help&p=customer_contact" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
@@ -36,7 +36,7 @@
 		<td colspan="2">{$customer.attention}</td>
 		<td colspan=2></td>
 		<td class="details_screen">{$LANG.total_owing}</td>
-		<td><u>{$invoice_owing_Field}</u></td>
+		<td><u>{$stuff.owing}</u></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street}</td>

@@ -13,29 +13,30 @@ $customer = getCustomer($customer_id);
 $wording_for_enabled = $customer['enabled'] == 1 ?$LANG['enabled']:$LANG['disabled'];
 
 
-$invoice_total_Field = calc_customer_total($customer['id']);
-$invoice_total_Field_formatted = number_format($invoice_total_Field,2);
-#invoice total calc - end
+//TODO: Perhaps possible a bit nicer?
+$stuff = null;
+$stuff['total'] = calc_customer_total($customer['id']);
+$stuff['total_format'] = number_format($stuff['total'],2);
 
 #amount paid calc - start
-$invoice_paid_Field = calc_customer_paid($customer['id']);;
-$invoice_paid_Field_formatted = number_format($invoice_paid_Field,2);
+$stuff['paid'] = calc_customer_paid($customer['id']);;
+$stuff['paid_format'] = number_format($stuff['paid'],2);
 #amount paid calc - end
 
 #amount owing calc - start
-$invoice_owing_Field = number_format($invoice_total_Field - $invoice_paid_Field,2);
+$stuff['owing'] = number_format($stuff['total'] - $stuff['paid'],2);
 #get custom field labels
 
+
+
 $customFieldLabel = getCustomFieldLabels("customer");
-
-
-
 $invoices = getCustomerInvoices($customer_id);
 
 
 
 
 //$customFieldLabel = getCustomFieldLabels("biller");
+$smarty -> assign("stuff",$stuff);
 $smarty -> assign('customer',$customer);
 $smarty -> assign('invoices',$invoices);
 $smarty -> assign('customFieldLabel',$customFieldLabel);
