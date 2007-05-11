@@ -63,6 +63,26 @@ function getPreferences() {
 	return $preferences;
 }
 
+function getCustomFieldLabels() {
+	global $LANG;
+	global $tb_prefix;
+	
+	$sql = "SELECT * FROM {$tb_prefix}custom_fields ORDER BY cf_custom_field";
+	$result = mysql_query($sql) or die(mysql_error());
+	
+	for($i=0;$customField = mysql_fetch_array($result);$i++) {
+		$customFields[$customField['cf_custom_field']] = $customField['cf_custom_label'];
+
+		if($customFields[$customField['cf_custom_field']] == null) {
+			//If not set, don't show...
+			//$customFields[$customField['cf_custom_field']] = $LANG["custom_field"].' '.($i%4+1);
+		}
+	}
+
+	return $customFields;
+}
+
+
 function getBillers() {
 	global $tb_prefix;
 	global $LANG;
@@ -235,6 +255,13 @@ function getInvoice($id) {
 	$invoice['owing'] = number_format($invoice['total'] - $invoice['paid'],2);
 
 	
+	#invoice total tax
+	$sql ="SELECT SUM(inv_it_tax_amount) AS total_tax, SUM(inv_it_total) AS total FROM {$tb_prefix}invoice_items WHERE inv_it_invoice_id =$id";
+	$query = mysql_query($sql) or die(mysql_error());
+	$result = mysql_fetch_array($query);
+	//$invoice['total'] = number_format($result['total'],2);
+	$invoice['total_tax'] = number_format($result['total_tax']);
+	
 	return $invoice;
 }
 
@@ -259,13 +286,6 @@ function getInvoiceItems($id) {
 		
 		$invoiceItems[$i] = $invoiceItem;
 	}
-	
-	#invoice total tax
-	$sql ="SELECT SUM(inv_it_tax_amount) AS total_tax, SUM(inv_it_total) AS total FROM {$tb_prefix}invoice_items WHERE inv_it_invoice_id =$id";
-	$query = mysql_query($sql) or die(mysql_error());
-	$result = mysql_fetch_array($query);
-	$invoiceItems['total'] = number_format($result['total'],2);
-	$invoiceItems['total_tax'] = number_format($result['total_tax']);
 	
 	return $invoiceItems;
 }

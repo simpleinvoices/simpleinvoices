@@ -16,7 +16,7 @@
 
 	<table width="100%" align="center">
 			<tr>
-	   				<td colspan="5"><img src="$logo" border="0" hspace="0" align="left"></td><th align=right><span class="font1">{$preference.pref_inv_heading}</span></th>
+	   				<td colspan="5"><img src="{$logo}" border="0" hspace="0" align="left"></td><th align=right><span class="font1">{$preference.pref_inv_heading}</span></th>
 			</tr>
 			<tr>
 					<td colspan=6><hr size="1"></td>
@@ -37,10 +37,10 @@
 		</tr>
 	<!-- Show the Invoice Custom Fields if valid -->
 
-		{$show.custom_field1}
-		{$show.custom_field2}
-		{$show.custom_field3}
-		{$show.custom_field4}
+		{$customFieldLabels.invoice_cf1}
+		{$customFieldLabels.invoice_cf2}
+		{$customFieldLabels.invoice_cf3}
+		{$customFieldLabels.invoice_cf4}
 
 		<tr>
 				<td class="tbl1-left" >{$LANG.total}: </td><td class="tbl1-right" colspan=3>{$preference.pref_currency_sign}{$invoice.total_format}</td>
@@ -95,26 +95,22 @@
          {if $biller.country != null }
                 </tr>
                 <tr>
-                        <td class='tbl1-left'></td><td class='tbl1-right' colspan=3>{$biller.country}</td>
+                        <td class='tbl1-left'></td><td class='tbl1-right' colspan="3">{$biller.country}</td>
                 </tr>
-        {/if}
+       	{/if}
 
 	{php}
-
-		
 		echo print_if_not_null($LANG['phone_short'], $biller['phone'],'tbl1-left','tbl1-right',3);
 		echo print_if_not_null($LANG['fax'], $biller['fax'],'tbl1-left','tbl1-right',3);
 		echo print_if_not_null($LANG['mobile_short'], $biller['mobile_phone'],'tbl1-left','tbl1-right',3);
-
-
         echo print_if_not_null($LANG['email'], $biller['email'],'tbl1-left','tbl1-right',3);
-        echo print_if_not_null($biller['custom_field_label1'], $biller['custom_field1'],'tbl1-left','tbl1-right',3);
-        echo print_if_not_null($biller['custom_field_label2'], $biller['custom_field2'],'tbl1-left','tbl1-right',3);
-        echo print_if_not_null($biller['custom_field_label3'], $biller['custom_field3'],'tbl1-left','tbl1-right',3);
-        echo print_if_not_null($biller['custom_field_label4'], $biller['custom_field4'],'tbl1-left','tbl1-right',3);
+        
+       	for($i=1;$i<=4;$i++) {
+        	echo print_if_not_null($customFieldLabels["biller_cf$i"], $biller["custom_field$i"],'tbl1-left','tbl1-right',3);
+       	}
 	{/php}
 
-	<tr><td class="tbl1-top" colspan=4></td></tr>
+	<tr><td class="tbl1-top" colspan="4"></td></tr>
 
 <!-- Biller section - end -->
 
@@ -173,10 +169,11 @@
 
 
         $customer_block .= print_if_not_null($LANG['email'], $customer[email],'tbl1-left','tbl1-right',3);
-        $customer_block .= print_if_not_null($customer['custom_field_label1'], $customer['custom_field1'],'tbl1-left','tbl1-right',3);
-        $customer_block .= print_if_not_null($customer['custom_field_label2'], $customer['custom_field2'],'tbl1-left','tbl1-right',3);
-        $customer_block .= print_if_not_null($customer['custom_field_label3'], $customer['custom_field3'],'tbl1-left','tbl1-right',3);
-        $customer_block .= print_if_not_null($customer['custom_field_label4'], $customer['custom_field4'],'tbl1-left','tbl1-right',3);
+        
+        for($i=1;$i<=4;$i++) {
+       		$customer_block .= print_if_not_null($customFieldLabels["customer_cf$i"], $customer["custom_field$i"],'tbl1-left','tbl1-right',3);
+        }
+
         echo $customer_block;
 	{/php}
 
@@ -199,15 +196,15 @@
 				<td class="tbl1 col1" align=right><b>{$LANG.total_uppercase}</b></td>
 			</tr>
 			
-				{foreach from=$master_invoices item=master_invoice}
+				{foreach from=$invoiceItems item=invoiceItem}
 
 			<tr class="tbl1" >
-				<td class="tbl1">{$master_invoice.inv_it_quantity_formatted}</td>
+				<td class="tbl1">{$invoiceItem.inv_it_quantity_formatted}</td>
 				<td class="tbl1">{$product.description}</td>
-				<td class="tbl1">{$preference.pref_currency_sign}{$master_invoice.inv_it_unit_price}</td>
-				<td class="tbl1">{$preference.pref_currency_sign}{$master_invoice.inv_it_gross_total}</td>
-				<td class="tbl1">{$preference.pref_currency_sign}{$master_invoice.inv_it_tax_amount}</td>
-				<td class="tbl1">{$preference.pref_currency_sign}{$master_invoice.inv_it_total}</td>
+				<td class="tbl1">{$preference.pref_currency_sign}{$invoiceItem.inv_it_unit_price}</td>
+				<td class="tbl1">{$preference.pref_currency_sign}{$invoiceItem.inv_it_gross_total}</td>
+				<td class="tbl1">{$preference.pref_currency_sign}{$invoiceItem.inv_it_tax_amount}</td>
+				<td class="tbl1">{$preference.pref_currency_sign}{$invoiceItem.inv_it_total}</td>
 			</tr>
                 <tr>
                         <td class="tbl1-left"></td><td class="tbl1-right" colspan="5">
@@ -216,18 +213,13 @@
 			{php}
 				global $product_cf;
 				global $product;
-                $itemised_line .= inv_itemised_cf($product_cf["custom_field_label1"], $product[custom_field1]);
-                $inv_it_tr++;
-                $itemised_line .= do_tr($inv_it_tr,'blank-class');
-                $itemised_line .= inv_itemised_cf($product_cf[custom_field_label2], $product[custom_field2]);
-                $inv_it_tr++;
-                $itemised_line .= do_tr($inv_it_tr,'blank-class');
-                $itemised_line .= inv_itemised_cf($product_cf[custom_field_label3], $product[custom_field3]);
-                $inv_it_tr++;
-                $itemised_line .= do_tr($inv_it_tr,'blank-class');
-                $itemised_line .= inv_itemised_cf($product_cf[custom_field_label4], $product[custom_field4]);
-                $inv_it_tr++;
-                $itemised_line .= do_tr($inv_it_tr,'blank-class');
+				
+				for($i=1;$i<=4;$i++) {
+                	$itemised_line .= inv_itemised_cf($customFieldLabels["product_cf$i"], $product["custom_field$i"]);
+                	$inv_it_tr++;
+                	$itemised_line .= do_tr($inv_it_tr,'blank-class');
+				}
+                
                 $inv_it_tr = 0;
                 echo $itemised_line;
                {/php}
@@ -254,7 +246,7 @@
 	
 				<tr class="tbl1-left tbl1-right">
 				<td class="tbl1-left" >{$invoiceItem.inv_it_quantity_formatted}</td>
-				<td>{$invoiceItem.product.description}</td><td class="tbl1-right" colspan="5"></td>
+				<td>{$invoiceItems.product.description}</td><td class="tbl1-right" colspan="5"></td>
 			</tr>
 			
                 <tr>       
@@ -262,19 +254,14 @@
                                                 <table width="100%">
                                                         <tr>
 				{php}
-
-                $consulting_line .= inv_itemised_cf($product_cf['custom_field_label1'], $product[custom_field1]);
-                $inv_it_tr++;
-                $consulting_line .= do_tr($inv_it_tr,'blank-class');
-                $consulting_line .= inv_itemised_cf($product_cf['custom_field_label2'], $product[custom_field2]);
-                $inv_it_tr++;
-                $consulting_line .= do_tr($inv_it_tr,'blank-class');
-                $consulting_line .= inv_itemised_cf($product_cf['custom_field_label3'], $product[custom_field3]);
-                $inv_it_tr++;
-                $consulting_line .= do_tr($inv_it_tr,'blank-class');
-                $consulting_line .= inv_itemised_cf($product_cf['custom_field_label4'], $product[custom_field4]);
-                $inv_it_tr++;
-                $consulting_line .= do_tr($inv_it_tr,'blank-class');
+				global $customFieldLabels;
+				
+				for($i=1;$i<=4;$i++) {
+	                $consulting_line .= inv_itemised_cf($customFieldLabels["product_cf$i"], $product["custom_field$i"]);
+	                $inv_it_tr++;
+	                $consulting_line .= do_tr($inv_it_tr,'blank-class');
+				}
+                
                 $inv_it_tr = 0;
                 echo $consulting_line;
                 {/php}
@@ -285,15 +272,15 @@
 	
 			<tr class="tbl1-left tbl1-right">
 				<td class="tbl1-left"></td>
-				<td class="tbl1-right" colspan=6><i>{$LANG.description}: </i>{$master_invoice.inv_it_description}</td>
+				<td class="tbl1-right" colspan=6><i>{$LANG.description}: </i>{$invoiceItem.inv_it_description}</td>
 			</tr>
 			<tr class="tbl1-left tbl1-right tbl1-bottom">
 				<td class="tbl1-left tbl1-bottom" ></td>
 				<td class="tbl1-bottom"></td>
-				<td class="tbl1-bottom">{$preference.pref_currency_sign}{$master_invoice.inv_it_unit_price}</td>
-				<td class="tbl1-bottom">{$preference.pref_currency_sign}{$master_invoice.inv_it_gross_total}</td>
-				<td class="tbl1-bottom ">{$preference.pref_currency_sign}{$master_invoice.inv_it_tax_amount}</td>
-				<td align=right colspan=2 class="tbl1-right tbl1-bottom">{$preference.pref_currency_sign}{$master_invoice.inv_it_total}</td>
+				<td class="tbl1-bottom">{$preference.pref_currency_sign}{$invoiceItem.inv_it_unit_price}</td>
+				<td class="tbl1-bottom">{$preference.pref_currency_sign}{$invoiceItem.inv_it_gross_total}</td>
+				<td class="tbl1-bottom ">{$preference.pref_currency_sign}{$invoiceItem.inv_it_tax_amount}</td>
+				<td align=right colspan=2 class="tbl1-right tbl1-bottom">{$preference.pref_currency_sign}{$invoiceItem.inv_it_total}</td>
 			</tr>
 			{/foreach}
 			
@@ -307,10 +294,10 @@
                         <td class="tbl1 col1 tbl1-right" colspan="6"><b>{$LANG.description}</b></td>
                 </tr>
                 
-          {foreach from=$master_invoices item=master_invoice}
+          {foreach from=$invoiceItems item= invoiceItem}
 
 			                <tr class="tbl1-left tbl1-right">
-                        <td class="tbl1-left tbl1-right\" colspan=6>{$master_invoice.inv_it_description}</td>
+                        <td class="tbl1-left tbl1-right" colspan=6>{$invoiceItem.inv_it_description}</td>
                 </tr>
                 <tr class="tbl1-left tbl1-right">
                         <td colspan=6 class="tbl1-left tbl1-right"><br></td>
@@ -348,7 +335,7 @@
 		<tr class="tbl1-left tbl1-right">
 		<td class="tbl1-left" colspan="3"></td>
 		<td align="right" colspan="2">{$LANG.gross_total}</td>
-		<td align="right" class="tbl1-right" >{$preference.pref_currency_sign}{$master_invoice.inv_it_gross_total}</td>
+		<td align="right" class="tbl1-right" >{$preference.pref_currency_sign}{$invoiceItem.inv_it_gross_total}</td>
 	</tr>
 	{/if}
 	
@@ -356,7 +343,7 @@
 		<tr class="tbl1-left tbl1-right">
 		<td class="tbl1-left" colspan="3"></td>
 		<td align="right" colspan="2">{$LANG.tax_total}</td>
-		<td align="right" class="tbl1-right" >{$preference.pref_currency_sign}{$tax.total_tax}</td>
+		<td align="right" class="tbl1-right" >{$preference.pref_currency_sign}{$invoice.total_tax}</td>
 	</tr>
 	<tr class="tbl1-left tbl1-right">
 		<td class="tbl1-left tbl1-right" colspan="6" ><br></td>
@@ -364,7 +351,7 @@
 		<tr class="tbl1-left tbl1-right tbl1-bottom">
 		<td class="tbl1-left tbl1-bottom" colspan="3"></td>
 		<td class="tbl1-bottom" align=right colspan=2><b>{$preference.pref_inv_wording} {$LANG.amount}</b></td>
-		<td  class="tbl1-bottom tbl1-right" align=right><u>{$preference.pref_currency_sign}{$invoice_total.total}</u></td>
+		<td  class="tbl1-bottom tbl1-right" align=right><u>{$preference.pref_currency_sign}{$invoice.total}</u></td>
 	</tr>
 	<tr>
 		<td colspan="6"><br /><br /></td>

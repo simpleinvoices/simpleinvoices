@@ -33,10 +33,10 @@
 		</tr>
 	<!-- Show the Invoice Custom Fields if valid -->
 
-		{$show.custom_field1}
-		{$show.custom_field2}
-		{$show.custom_field3}
-		{$show.custom_field4}
+		{$customFieldLabels.invoice_cf1}
+		{$customFieldLabels.invoice_cf2}
+		{$customFieldLabels.invoice_cf3}
+		{$customFieldLabels.invoice_cf4}
 
 		<tr>
 				<td >{$LANG.total}: </td><td colspan=3>{$preference.pref_currency_sign}{$invoice.total_format}</td>
@@ -113,22 +113,22 @@
 		{/if}
         		{if $biller.custom_field1 != null }
                 <tr>
-                        <td >{$biller.custom_field_label1}:<td colspan=3>{$biller.custom_field1}</td>
+                        <td >{$customFieldLabels.customer_cf1}:<td colspan=3>{$biller.custom_field1}</td>
                 </tr>	
 				{/if}
         		{if $biller.custom_field2 != null }
                 <tr>
-                        <td >{$biller.custom_field_label2}:<td  colspan=3>{$biller.custom_field2}</td>
+                        <td >{$customFieldLabels.customer_cf2}:<td  colspan=3>{$biller.custom_field2}</td>
                 </tr>	
 				{/if}
         		{if $biller.custom_field3 != null }
                 <tr>
-                        <td >{$biller.custom_field_label3}:<td  colspan=3>{$biller.custom_field3}</td>
+                        <td >{$customFieldLabels.customer_cf3}:<td  colspan=3>{$biller.custom_field3}</td>
                 </tr>	
 				{/if}
         		{if $biller.custom_field4 != null }
                 <tr>
-                        <td >{$biller.custom_field_label4}:<td  colspan=3>{$biller.custom_field4}</td>
+                        <td >{$customFieldLabels.customer_cf4}:<td  colspan=3>{$biller.custom_field4}</td>
                 </tr>	
 				{/if}
 				<tr><td colspan=4></td></tr>
@@ -203,22 +203,22 @@
 		{/if}
         		{if $customer.custom_field1 != null }
                 <tr>
-                        <td >{$customer.custom_field_label1}:<td  colspan=3>{$customer.custom_field1}</td>
+                        <td >{$customFieldLabels.customer_cf1}:<td  colspan=3>{$customer.custom_field1}</td>
                 </tr>	
 				{/if}
         		{if $customer.custom_field2 != null }
                 <tr>
-                        <td >{$customer.custom_field_label2}:<td  colspan=3>{$customer.custom_field2}</td>
+                        <td >{$customFieldLabels.customer_cf2}:<td  colspan=3>{$customer.custom_field2}</td>
                 </tr>	
 				{/if}
         		{if $customer.custom_field3 != null }
                 <tr>
-                        <td >{$customer.custom_field_label3}:<td  colspan=3>{$customer.custom_field3}</td>
+                        <td >{$customFieldLabels.customer_cf3}:<td  colspan=3>{$customer.custom_field3}</td>
                 </tr>	
 				{/if}
         		{if $customer.custom_field4 != null }
                 <tr>
-                        <td >{$customer.custom_field_label4}:<td  colspan=3>{$customer.custom_field4}</td>
+                        <td >{$customFieldLabels.customer_cf4}:<td  colspan=3>{$customer.custom_field4}</td>
                 </tr>	
 				{/if}
                 
@@ -251,7 +251,7 @@
 	<tr >
 		<td colspan="3"></td>
 		<td align="right" colspan="2">{$LANG.tax_total}</td>
-		<td align="right" >{$preference.pref_currency_sign}{$invoiceItems.total_tax}</td>
+		<td align="right" >{$preference.pref_currency_sign}{$invoice.total_tax}</td>
 	</tr>
 	<tr >
 		<td colspan="6" ><br></td>
@@ -259,7 +259,7 @@
 		<tr >
 		<td colspan="3"></td>
 		<td align=right colspan=2><b>{$preference.pref_inv_wording} {$LANG.amount}</b></td>
-		<td  align=right><u>{$preference.pref_currency_sign}{$invoiceItems.total}</u></td>
+		<td  align=right><u>{$preference.pref_currency_sign}{$invoice.total}</u></td>
 	</tr>
 	<tr>
 		<td colspan="6"><br /><br /></td>

@@ -48,7 +48,7 @@ if (($module == "invoices" ) && (strstr($view,"templates"))) {
 		echo "The file that you requested doesn't exist";
 	}
 	
-	return;
+	exit(0);
 }
 
 

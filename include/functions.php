@@ -25,6 +25,16 @@ function getLogoList() {
 	
 	return $files;
 }
+
+function getLogo($biller) {
+	if(!empty($biller['logo'])) {
+		return "./images/logo/$biller[logo]";
+	}
+	else {
+		return "./images/logo/_default_blank_logo.png";
+	}
+}
+
 /*
 * Script: functions.php
 *	Contain all the functions used in Simple Invoices
@@ -78,11 +88,9 @@ function get_custom_field_label($field)         {
  * Arguments:
  * Type 	- is the module your getting the labels of the custom fields for, ie. biller
  */
-function getCustomFieldLabels($type) {
-	include('./config/config.php');
-	ob_start();
-	include("./lang/$language.inc.php");
-	ob_end_clean();
+/*function getCustomFieldLabels($type) {
+	global $LANG;
+	global $tb_prefix;
 	
 	$sql = "SELECT cf_custom_label FROM {$tb_prefix}custom_fields WHERE cf_custom_field LIKE '".$type."_cf_'";
 	$result = mysql_query($sql) or die(mysql_error());
@@ -96,7 +104,7 @@ function getCustomFieldLabels($type) {
 
 	//TODO: What's the value if null? change in database...
 	return $cf;
-}
+}*/
 
 /**
 * Function: get_custom_field_name
@@ -297,23 +305,19 @@ function calc_invoice_tax($master_invoice_id) {
 **/
 
 function show_custom_field($custom_field,$custom_field_value,$permission,$css_class_tr,$css_class1,$css_class2,$td_col_span,$seperator) {
-	
+	global $tb_prefix;
 	/*
 	*get the last character of the $custom field - used to set the name of the field
 	*/
 	$custom_field_number =  substr($custom_field, -1, 1);
 
-	include('./config/config.php');
-
 
 	#get the label for the custom field
 
-        $conn = mysql_connect( $db_host, $db_user, $db_password );
-        mysql_select_db( $db_name, $conn );
 
 
-        $get_custom_label ="SELECT cf_custom_label FROM {$tb_prefix}custom_fields WHERE cf_custom_field = '$custom_field'";
-	$result_get_custom_label = mysql_query($get_custom_label, $conn) or die(mysql_error());
+    $get_custom_label ="SELECT cf_custom_label FROM {$tb_prefix}custom_fields WHERE cf_custom_field = '$custom_field'";
+	$result_get_custom_label = mysql_query($get_custom_label) or die(mysql_error());
 
 	while ($Array_cl = mysql_fetch_array($result_get_custom_label)) {
                 $has_custom_label_value = $Array_cl['cf_custom_label'];
