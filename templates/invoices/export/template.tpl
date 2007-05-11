@@ -175,16 +175,22 @@
                 <tr>
                         <td ></td><td  colspan=3>{$customer.country}</td>
                 </tr>
-       			{/if}
+       		{/if}
+                {if $customer.phone != null }
                 <tr>
                         <td >{$LANG.phone_short}.:<td  colspan=3>{$customer.phone}</td>
                 </tr>
+       		{/if}
+                {if $customer.mobile_phone != null }
                 <tr>
                         <td >{$LANG.mobile_short}.:<td  colspan=3>{$customer.mobile_phone}</td>
                 </tr>
+       		{/if}
+                {if $customer.email != null }
                 <tr>
                         <td >{$LANG.email}:<td  colspan=3>{$customer.email}</td>
                 </tr>
+		{/if}
         		{if $customer.custom_field1 != null }
                 <tr>
                         <td >{$customer.custom_field_label1}:<td  colspan=3>{$customer.custom_field1}</td>
