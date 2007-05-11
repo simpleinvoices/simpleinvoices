@@ -314,7 +314,7 @@ function show_custom_field($custom_field,$custom_field_value,$permission,$css_cl
 
 	#get the label for the custom field
 
-
+	$display_block = "";
 
     $get_custom_label ="SELECT cf_custom_label FROM {$tb_prefix}custom_fields WHERE cf_custom_field = '$custom_field'";
 	$result_get_custom_label = mysql_query($get_custom_label) or die(mysql_error());
