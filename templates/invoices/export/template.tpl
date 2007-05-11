@@ -96,6 +96,11 @@
                         <td >{$LANG.phone_short}.:<td colspan=3>{$biller.phone}</td>
                 </tr>
    		{/if}
+                {if $biller.fax != null }
+                <tr>
+                        <td >{$LANG.fax}.:<td colspan=3>{$biller.fax}</td>
+                </tr>
+   		{/if}
                 {if $biller.mobile_phone != null }
                 <tr>
                         <td >{$LANG.mobile_short}.:<td colspan=3>{$biller.mobile_phone}</td>
@@ -179,6 +184,11 @@
                 {if $customer.phone != null }
                 <tr>
                         <td >{$LANG.phone_short}.:<td  colspan=3>{$customer.phone}</td>
+                </tr>
+       		{/if}
+                {if $customer.fax != null }
+                <tr>
+                        <td >{$LANG.fax}.:<td  colspan=3>{$customer.fax}</td>
                 </tr>
        		{/if}
                 {if $customer.mobile_phone != null }

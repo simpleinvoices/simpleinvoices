@@ -86,8 +86,8 @@
 					<li>For 'Export to PDF' to work there are two modifcation that needs to be made to your system:
 					<li>The first step is to make the pdf exports directory writeable by the webserver
 						<ul>
-							<li>To do this the cachce directory in your Simple Invoices folder must be writeable, in unix cd to the Simple Invoices directory (<i>cd /var/www/html/simpleinvoices</i>) and chmod the cache directory to 777 (<i>chmod -Rv 777 cache</i>), in windows just browse to the cache folder and make sure its writeable by all users.
-                                                        <li>We also need to make the pdf fonts directory writeable. To do this in unix chmod the pdf/fpdf directory to 777 (<i>chmod -Rv 777 pdf/fpdf/*</i>), in windows just browse to the fdpf folder(in the pdf folder) and make sure its writeable by all users.
+							<li>To do this the cachce directory in your Simple Invoices folder must be writeable, in unix cd to the Simple Invoices directory (<i>cd /var/www/html/simpleinvoices</i>) and chown the cache directory to the apache (webserver user) (<i>chown apache:apache cache</i>), in windows just browse to the cache folder and make sure its writeable by all users.
+                                                        <li>We also need to make the pdf fonts directory writeable. To do this in unix chown the pdf/fpdf directory to the apache(web server) user (<i>chmown apache:apache pdf/fpdf/*</i>), in windows just browse to the fdpf folder(in the pdf folder) and make sure its writeable by all users.
 						</ul>
 					<li><i>gd2</i> Once this cache folder has been made writeable the next step is to test if version of PHP has GD2 support
 						<ul>
@@ -149,7 +149,7 @@ memory_limit = 24M      ; Maximum amount of memory a script may consume (8MB)
 				<li><a name="backup">Simple invoices database backup</a>
 					<ul>
                                      		 <li>For 'Simple invoices database backup' to work the first step is to make the database_backups directory(which is in the Simple Invoices directory writeable by the webserver
-                                        	 <li>To do this the  in unix cd to the Simple Invoices directory (<i>cd /var/www/html/simpleinvoices</i>) and chmod the database_backups directory to 777 (<i>chmod -Rv 777 database_backups</i>), in windows just browse to the database_backups folder and make sure its writeable by all users.
+                                        	 <li>To do this the  in unix cd to the Simple Invoices directory (<i>cd /var/www/html/simpleinvoices</i>) and chown the database_backups directory to the apache(web server) user (<i>chown apache:apache database_backups</i>), in windows just browse to the database_backups folder and make sure its writeable by all users.
                                        </ul>
 
 			</ul>
