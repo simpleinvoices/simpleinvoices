@@ -385,7 +385,7 @@ function updateBiller() {
 	return mysql_query($sql);
 }
 
-function saveCustomer() {
+function updateCustomer() {
 	global $tb_prefix;
 
 	$sql = "
@@ -415,6 +415,17 @@ function saveCustomer() {
 
 	return mysql_query($sql);
 }
+
+function insertCustomer() {
+	global $tb_prefix;
+	extract( $_POST );
+	$sql = "INSERT INTO {$tb_prefix}customers VALUES ('','$attention', '$name','$street_address','$street_address2','$city','$state',' $zip_code','$country','$phone', '$mobile_phone', '$fax', '$email', '$notes', '$custom_field1', '$custom_field2', '$custom_field3', '$custom_field4', '$enabled')";
+	
+	return mysql_query($sql);
+	
+}
+		
+		
 
 function getInvoices(&$query) {
 	global $config;

@@ -1,13 +1,7 @@
 {* if customer is updated or saved.*} 
 
 {if $smarty.post.name != "" && $smarty.post.submit != null } 
-{$refresh_total}
-
-<br />
-<br>
-{$display_block} 
-<br />
-<br />
+	{include file="../templates/default/customers/save.tpl"}
 
 {else}
 {* if  name was inserted *} 

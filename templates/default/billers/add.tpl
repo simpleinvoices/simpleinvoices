@@ -1,13 +1,7 @@
 {* if bill is updated or saved.*}
 
 {if $smarty.post.name != "" && $smarty.post.submit != null } 
-{$refresh_total}
-
-<br />
-<br>
-{$display_block}
-<br />
-<br />
+	{include file="../templates/default/billers/save.tpl"}
 {else}
 {* if no biller name was inserted *}
 

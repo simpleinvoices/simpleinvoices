@@ -11,5 +11,5 @@ if ($_POST['name'] != "" ) {
 }
 
 $smarty -> assign('customFieldLabel',$customFieldLabel);
-$smarty -> assign('save',$save);
+
 ?>
