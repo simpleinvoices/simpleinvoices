@@ -10,27 +10,26 @@
 
 </div>
 {$invoiceItems[0].product.description}
-<link rel="stylesheet" type="text/css" href="{$css}">
 
 
 	<table width="100%" align="center">
 			<tr>
-	   				<td colspan="5"><img src="{$logo}" border="0" hspace="0" align="left"></td><th align=right><span class="font1">{$preference.pref_inv_heading}</span></th>
+	   				<td colspan="5"><img src="{$logo}" border="0" hspace="0" align="left"></td><th align=right><span >{$preference.pref_inv_heading}</span></th>
 			</tr>
 			<tr>
 					<td colspan=6><hr size="1"></td>
 			</tr>
 	</table>
 	
-	<table class="right">
+	<table >
 		<tr>
-				<td class="col1 tbl1" colspan="4" ><b>{$preference.pref_inv_wording} {$LANG.summary}</b></td>
+				<td colspan="4" ><b>{$preference.pref_inv_wording} {$LANG.summary}</b></td>
 		</tr>
 		<tr>
-				<td class="tbl1-left">{$preference.pref_inv_wording} {$LANG.number_short}:</td><td class="tbl1-right" colspan=3>{$invoice.id}</td>
+				<td >{$preference.pref_inv_wording} {$LANG.number_short}:</td><td colspan=3>{$invoice.id}</td>
 		</tr>
 		<tr>
-				<td nowrap class="tbl1-left">{$preference.pref_inv_wording} {$LANG.date}:</td><td class="tbl1-right" colspan=3>{$invoice.date}</td>
+				<td nowrap >{$preference.pref_inv_wording} {$LANG.date}:</td><td colspan=3>{$invoice.date}</td>
 		</tr>
 	<!-- Show the Invoice Custom Fields if valid -->
 
@@ -40,13 +39,13 @@
 		{$show.custom_field4}
 
 		<tr>
-				<td class="tbl1-left" >{$LANG.total}: </td><td class="tbl1-right" colspan=3>{$preference.pref_currency_sign}{$invoice.total_format}</td>
+				<td >{$LANG.total}: </td><td colspan=3>{$preference.pref_currency_sign}{$invoice.total_format}</td>
 		</tr>
 		<tr>
-				<td class="tbl1-left">{$LANG.paid}:</td><td class="tbl1-right" colspan=3 >{$preference.pref_currency_sign}{$invoice.paid_format}</td>
+				<td >{$LANG.paid}:</td><td colspan=3 >{$preference.pref_currency_sign}{$invoice.paid_format}</td>
 		</tr>
 		<tr>
-				<td nowrap class="tbl1-left tbl1-bottom">{$LANG.owing}:</td><td class="tbl1-right tbl1-bottom" colspan=3 >{$preference.pref_currency_sign}{$invoice.owing}</td>
+				<td nowrap >{$LANG.owing}:</td><td colspan=3 >{$preference.pref_currency_sign}{$invoice.owing}</td>
 		</tr>
 
 
@@ -54,74 +53,80 @@
 	<!-- Summary - end -->
 	
 	
-	<table class="left">
+	<table >
 	
 
         <!-- Biller section - start -->
-	<table class='left'>
+	<table >
         <tr>
-                <td class="tbl1-left tbl1-bottom tbl1-top col1" border=1 cellpadding=2 cellspacing=1><b>{$LANG.biller}:</b></td><td class="col1 tbl1-bottom tbl1-top tbl1-right" border=1 cellpadding=2 cellspacing=1 colspan=3>{$biller.name}</td>
+                <td  border=1 cellpadding=2 cellspacing=1><b>{$LANG.biller}:</b></td><td border=1 cellpadding=2 cellspacing=1 colspan=3>{$biller.name}</td>
         </tr> 
 
         {if $biller.street_address != null}
                 <tr>
-                     <td class='tbl1-left'>{$LANG.address}:</td><td class='tbl1-right' align=left colspan=3>{$biller.street_address}</td>
+                     <td >{$LANG.address}:</td><td  align=left colspan=3>{$biller.street_address}</td>
                 </tr>   
         {/if}
         
         {if $biller.street_address2 != null }
 
-                <tr class='details_screen customer'>
+                <tr >
 
                 {if $biller.street_address == null }
-                        <td class='tbl1-left'>{$LANG.address}:</td><td class='tbl1-right' align=left colspan=3>{$biller.street_address2}</td>
+                        <td >{$LANG.address}:</td><td align=left colspan=3>{$biller.street_address2}</td>
                 </tr>   
                 {/if}
                 {if $biller.street_address != null}
-                        <td class='tbl1-left'></td><td class='tbl1-right' align=left colspan=3>{$biller.street_address2}</td>
+                        <td ></td><td align=left colspan=3>{$biller.street_address2}</td>
                 </tr>   
                 {/if}
         {/if}
 
 
 	
-	 <tr><td class='tbl1-left'></td><td class='tbl1-right' colspan=3>{$biller.city}, {$biller.zip_code}</td></tr>                </tr>
+	 <tr><td ></td><td colspan=3>{$biller.city}, {$biller.zip_code}</td></tr>                </tr>
                 {if $biller.country != null }
                 </tr>
                 <tr>
-                        <td class='tbl1-left'></td><td class='tbl1-right' colspan=3>{$biller.country}</td>
+                        <td ></td><td colspan=3>{$biller.country}</td>
                 </tr>
-       			{/if}
+   		{/if}
+                {if $biller.phone != null }
                 <tr>
-                        <td class='tbl1-left'>{$LANG.phone_short}.:<td class='tbl1-right' colspan=3>{$biller.phone}</td>
+                        <td >{$LANG.phone_short}.:<td colspan=3>{$biller.phone}</td>
                 </tr>
+   		{/if}
+                {if $biller.mobile_phone != null }
                 <tr>
-                        <td class='tbl1-left'>{$LANG.mobile_short}.:<td class='tbl1-right' colspan=3>{$biller.mobile_phone}</td>
+                        <td >{$LANG.mobile_short}.:<td colspan=3>{$biller.mobile_phone}</td>
                 </tr>
+   		{/if}
+                {if $biller.email != null }
                 <tr>
-                        <td class='tbl1-left'>{$LANG.email}:<td class='tbl1-right' colspan=3>{$biller.email}</td>
+                        <td >{$LANG.email}:<td colspan=3>{$biller.email}</td>
                 </tr>
+		{/if}
         		{if $biller.custom_field1 != null }
                 <tr>
-                        <td class='tbl1-left'>{$biller.custom_field_label1}:<td class='tbl1-right' colspan=3>{$biller.custom_field1}</td>
+                        <td >{$biller.custom_field_label1}:<td colspan=3>{$biller.custom_field1}</td>
                 </tr>	
 				{/if}
         		{if $biller.custom_field2 != null }
                 <tr>
-                        <td class='tbl1-left'>{$biller.custom_field_label2}:<td class='tbl1-right' colspan=3>{$biller.custom_field2}</td>
+                        <td >{$biller.custom_field_label2}:<td  colspan=3>{$biller.custom_field2}</td>
                 </tr>	
 				{/if}
         		{if $biller.custom_field3 != null }
                 <tr>
-                        <td class='tbl1-left'>{$biller.custom_field_label3}:<td class='tbl1-right' colspan=3>{$biller.custom_field3}</td>
+                        <td >{$biller.custom_field_label3}:<td  colspan=3>{$biller.custom_field3}</td>
                 </tr>	
 				{/if}
         		{if $biller.custom_field4 != null }
                 <tr>
-                        <td class='tbl1-left'>{$biller.custom_field_label4}:<td class='tbl1-right' colspan=3>{$biller.custom_field4}</td>
+                        <td >{$biller.custom_field_label4}:<td  colspan=3>{$biller.custom_field4}</td>
                 </tr>	
 				{/if}
-				<tr><td class="tbl1-top" colspan=4></td></tr>
+				<tr><td colspan=4></td></tr>
 
 <!-- Biller section - end -->
 
@@ -134,81 +139,81 @@
 		</tr>
 	<!-- Customer section - start -->
 	<tr>
-		<td class="tbl1-left tbl1-top tbl1-bottom col1" ><b>{$LANG.customer}:</b></td><td class="tbl1-top tbl1-bottom col1 tbl1-right" colspan=3>{$customer.name}</td>
+		<td  ><b>{$LANG.customer}:</b></td><td colspan=3>{$customer.name}</td>
 	</tr>
 
         {if $customer.attention != null}
                 <tr>
-                        <td class='tbl1-left'>{$LANG.attention_short}:</td><td align=left class='tbl1-right' colspan=3 >{$customer.attention}</td>
+                        <td >{$LANG.attention_short}:</td><td align=left  colspan=3 >{$customer.attention}</td>
                 </tr>
         {/if}
-               {if $biller.street_address != null }
+               {if $customer.street_address != null }
                 <tr>
-                     <td class='tbl1-left'>{$LANG.address}:</td><td class='tbl1-right' align=left colspan=3>{$biller.street_address}</td>
+                     <td >{$LANG.address}:</td><td  align=left colspan=3>{$customer.street_address}</td>
                 </tr>   
         {/if}
         
-        {if $biller.street_address2 != null }
+        {if $customer.street_address2 != null }
 
-                <tr class='details_screen customer'>
+                <tr >
 
-                {if $biller.street_address == null }
-                        <td class='tbl1-left'>{$LANG.address}:</td><td class='tbl1-right' align=left colspan=3>{$biller.street_address2}</td>
+                {if $customer.street_address == null }
+                        <td >{$LANG.address}:</td><td  align=left colspan=3>{$customer.street_address2}</td>
                 </tr>   
                 {/if}
-                {if $biller.street_address != null}
-                        <td class='tbl1-left'></td><td class='tbl1-right' align=left colspan=3>{$biller.street_address2}</td>
+                {if $customer.street_address != null}
+                        <td ></td><td  align=left colspan=3>{$customer.street_address2}</td>
                 </tr>   
                 {/if}
         {/if}
 
 
 	
-	 <tr><td class='tbl1-left'></td><td class='tbl1-right' colspan=3>{$customer.city}, {$customer.zip_code}</td></tr>                </tr>
+	 <tr><td ></td><td  colspan=3>{$customer.city}, {$customer.zip_code}</td></tr>                </tr>
                 {if $customer.country != null }
                 </tr>
                 <tr>
-                        <td class='tbl1-left'></td><td class='tbl1-right' colspan=3>{$customer.country}</td>
+                        <td ></td><td  colspan=3>{$customer.country}</td>
                 </tr>
        			{/if}
                 <tr>
-                        <td class='tbl1-left'>{$LANG.phone_short}.:<td class='tbl1-right' colspan=3>{$customer.phone}</td>
+                        <td >{$LANG.phone_short}.:<td  colspan=3>{$customer.phone}</td>
                 </tr>
                 <tr>
-                        <td class='tbl1-left'>{$LANG.mobile_short}.:<td class='tbl1-right' colspan=3>{$customer.mobile_phone}</td>
+                        <td >{$LANG.mobile_short}.:<td  colspan=3>{$customer.mobile_phone}</td>
                 </tr>
                 <tr>
-                        <td class='tbl1-left'>{$LANG.email}:<td class='tbl1-right' colspan=3>{$customer.email}</td>
+                        <td >{$LANG.email}:<td  colspan=3>{$customer.email}</td>
                 </tr>
         		{if $customer.custom_field1 != null }
                 <tr>
-                        <td class='tbl1-left'>{$customer.custom_field_label1}:<td class='tbl1-right' colspan=3>{$customer.custom_field1}</td>
+                        <td >{$customer.custom_field_label1}:<td  colspan=3>{$customer.custom_field1}</td>
                 </tr>	
 				{/if}
         		{if $customer.custom_field2 != null }
                 <tr>
-                        <td class='tbl1-left'>{$customer.custom_field_label2}:<td class='tbl1-right' colspan=3>{$customer.custom_field2}</td>
+                        <td >{$customer.custom_field_label2}:<td  colspan=3>{$customer.custom_field2}</td>
                 </tr>	
 				{/if}
         		{if $customer.custom_field3 != null }
                 <tr>
-                        <td class='tbl1-left'>{$customer.custom_field_label3}:<td class='tbl1-right' colspan=3>{$customer.custom_field3}</td>
+                        <td >{$customer.custom_field_label3}:<td  colspan=3>{$customer.custom_field3}</td>
                 </tr>	
 				{/if}
         		{if $customer.custom_field4 != null }
                 <tr>
-                        <td class='tbl1-left'>{$customer.custom_field_label4}:<td class='tbl1-right' colspan=3>{$customer.custom_field4}</td>
+                        <td >{$customer.custom_field_label4}:<td  colspan=3>{$customer.custom_field4}</td>
                 </tr>	
 				{/if}
                 
-				<tr><td class="tbl1-top" colspan=4></td></tr>
+				<tr><td colspan=4></td></tr>
 
 
 <!-- Customer -->
 
 
 	</table>
-		<table class="left" width="100%">
+		<table width="100%">
 		<tr>
 			<td colspan="6"><br /></td>
 		</tr>
@@ -227,18 +232,18 @@
 	
 
 
-	<tr class="tbl1-left tbl1-right">
-		<td class="tbl1-left" colspan="3"></td>
+	<tr >
+		<td colspan="3"></td>
 		<td align="right" colspan="2">{$LANG.tax_total}</td>
-		<td align="right" class="tbl1-right" >{$preference.pref_currency_sign}{$invoiceItems.total_tax}</td>
+		<td align="right" >{$preference.pref_currency_sign}{$invoiceItems.total_tax}</td>
 	</tr>
-	<tr class="tbl1-left tbl1-right">
-		<td class="tbl1-left tbl1-right" colspan="6" ><br></td>
+	<tr >
+		<td colspan="6" ><br></td>
 	</tr>
-		<tr class="tbl1-left tbl1-right tbl1-bottom">
-		<td class="tbl1-left tbl1-bottom" colspan="3"></td>
-		<td class="tbl1-bottom" align=right colspan=2><b>{$preference.pref_inv_wording} {$LANG.amount}</b></td>
-		<td  class="tbl1-bottom tbl1-right" align=right><u>{$preference.pref_currency_sign}{$invoiceItems.total}</u></td>
+		<tr >
+		<td colspan="3"></td>
+		<td align=right colspan=2><b>{$preference.pref_inv_wording} {$LANG.amount}</b></td>
+		<td  align=right><u>{$preference.pref_currency_sign}{$invoiceItems.total}</u></td>
 	</tr>
 	<tr>
 		<td colspan="6"><br /><br /></td>
@@ -246,19 +251,19 @@
 	
 		<!-- invoice details section - start -->
 	<tr>
-		<td class="tbl1 col1" colspan="6"><b>{$preference.pref_inv_detail_heading}</b></td>
+		<td colspan="6"><b>{$preference.pref_inv_detail_heading}</b></td>
 	</tr>
 	<tr>
-		<td class="tbl1-left tbl1-right" colspan=6><i>{$preference.pref_inv_detail_line}</i></td>
+		<td colspan=6><i>{$preference.pref_inv_detail_line}</i></td>
 	</tr>
 	<tr>
-		<td class="tbl1-left tbl1-right" colspan=6>{$preference.pref_inv_payment_method}</td>
+		<td colspan=6>{$preference.pref_inv_payment_method}</td>
 	</tr>
 	<tr>
-		<td class="tbl1-left tbl1-right" colspan=6>{$preference.pref_inv_payment_line1_name} {$preference.pref_inv_payment_line1_value}</td>
+		<td colspan=6>{$preference.pref_inv_payment_line1_name} {$preference.pref_inv_payment_line1_value}</td>
 	</tr>
 	<tr>
-		<td class="tbl1-left tbl1-bottom tbl1-right" colspan=7>{$preference.pref_inv_payment_line2_name} {$preference.pref_inv_payment_line2_value}</td>
+		<td colspan=7>{$preference.pref_inv_payment_line2_name} {$preference.pref_inv_payment_line2_value}</td>
 	</tr>
 	<tr>
 		<td><br></td>
