@@ -98,6 +98,7 @@ $LANG['debtors_by_aging_periods'] = "Debitori dupa vechimea datoriei";//1
 $LANG['debtors_by_amount_owed'] = "Debitori dupa suma datorata";//1
 $LANG['default_inv_template'] = "Default invoice template ";//0
 $LANG['default_number_items'] = "Default number of line items:";//0
+$LANG['default_payment_type'] = "Default payment type";//0
 $LANG['description'] = "Descriere";//1
 $LANG['details'] = "Detalii";//1
 $LANG['disabled'] = "Dezactivat";//1

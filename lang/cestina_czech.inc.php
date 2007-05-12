@@ -96,6 +96,7 @@ $LANG['debtors_by_aging_periods'] = "Dlužníci podle splatnosti";//1
 $LANG['debtors_by_amount_owed'] = "Dlužníci podle dlužné ?ástky";//1
 $LANG['default_inv_template'] = "Default invoice template ";//0
 $LANG['default_number_items'] = "Default number of line items:";//0
+$LANG['default_payment_type'] = "Default payment type";//0
 $LANG['description'] = "Popis";//1
 $LANG['details'] = "Podrobnosti";//1
 $LANG['disabled'] = "Neaktivní";//1

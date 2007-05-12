@@ -95,6 +95,7 @@ $LANG['debtors_by_aging_periods'] = "Debiteuren per datum tegoed";//1
 $LANG['debtors_by_amount_owed'] = "Debiteuren per tegoed";//1
 $LANG['default_inv_template'] = "Default invoice template ";//0
 $LANG['default_number_items'] = "Default number of line items:";//0
+$LANG['default_payment_type'] = "Default payment type";//0
 $LANG['description'] = "Beschrijving";//1
 $LANG['details'] = "Details";//1
 $LANG['disabled'] = "Gedeactiveerd";//1

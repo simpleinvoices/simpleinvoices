@@ -96,6 +96,7 @@ $LANG['debtors_by_aging_periods'] = "Devedores por idade";//1
 $LANG['debtors_by_amount_owed'] = "Devedores por valor devendo";//1
 $LANG['default_inv_template'] = "Default invoice template ";//0
 $LANG['default_number_items'] = "Default number of line items:";//0
+$LANG['default_payment_type'] = "Default payment type";//0
 $LANG['description'] = "Descrição";//1
 $LANG['details'] = "Detalhas";//1
 $LANG['disabled'] = "Desactivado";//1

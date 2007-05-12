@@ -96,6 +96,7 @@ $LANG['debtors_by_aging_periods'] = "Velalliset er&auml;p&auml;iv&auml;n mukaan"
 $LANG['debtors_by_amount_owed'] = "Velalliset saatavien mukaan";//1
 $LANG['default_inv_template'] = "Laskun oletusmalline ";//1
 $LANG['default_number_items'] = "Laskurivien oletuslukum&auml;&auml;r&auml;:";//1
+$LANG['default_payment_type'] = "Default payment type";//0
 $LANG['description'] = "Kuvaus";//1
 $LANG['details'] = "Tiedot";//1
 $LANG['disabled'] = "Ei k&auml;yt&ouml;ss&auml;";//1

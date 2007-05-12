@@ -29,6 +29,12 @@ $LANG['DBUsername'] = "Nom de l'utilisateur:";
 $LANG['DBPassword'] = "Mot de passe de la BD:";
 $LANG['prefix'] = "pr&eacute;fixe:";
 
+$LANG['error_DBHost'] = "Vous devez remplir ce champ";
+$LANG['error_DBName'] = "Vous devez remplir ce champ";
+$LANG['error_DBUsername'] = "Vous devez remplir ce champ";
+$LANG['error_DBPassword'] = "Vous devez remplir ce champ";
+$LANG['error_prefix'] = "Vous devez remplir ce champ";
+
 $LANG['unableConnectDb'] = "Impossible de se connecter";
 $LANG['unableSelectDb'] = "Impossible de s&eacute;lectionner la base de donn&eacute;es";
 $LANG['existingDb'] = "La base de donn&eacute;es est existante";

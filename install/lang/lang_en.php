@@ -29,6 +29,12 @@ $LANG['DBUsername'] = "DB Username:";
 $LANG['DBPassword'] = "DB Password:";
 $LANG['prefix'] = "prefix:";
 
+$LANG['error_DBHost'] = "You must fill this field";
+$LANG['error_DBName'] = "You must fill this field";
+$LANG['error_DBUsername'] = "You must fill this field";
+$LANG['error_DBPassword'] = "You must fill this field";
+$LANG['error_prefix'] = "You must fill this field";
+
 $LANG['unableConnectDb'] = "Unable to connect";
 $LANG['unableSelectDb'] = "Unable to select database";
 $LANG['existingDb'] = "The data base is existing";

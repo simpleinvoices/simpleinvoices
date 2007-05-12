@@ -31,20 +31,46 @@ include('lang/lang_'.$language.'.php');
 <?php
 
 // _POST Control
-if(isset($_POST['host']) && isset($_POST['username']) && isset($_POST['passwd']) && isset($_POST['dbname']) && isset($_POST['prefix'])) {
+if($Click == 'on') {
+    if($_POST['host'] == '') { $Erreur['DBHost'] = $LANG['error_DBHost']; $error = true; }
+	else {
+		$host = trim($_POST['host']);
+		$_SESSION['host'] = $host;
+	}
 
-	$host = $_POST['host'];
-	$username = $_POST['username'];
-	$passwd = $_POST['passwd'];
-	$dbname = $_POST['dbname'];
-	$table_prefix = $_POST['prefix'];
+	if($_POST['dbname'] == '') { $Erreur['DBName'] = $LANG['error_DBName']; $error = true; }
+	else {
+		$dbname = trim($_POST['dbname']);
+		$_SESSION['dbname'] = $dbname;
+	}
 
-	$_SESSION['host'] = $host;
-	$_SESSION['username'] = $username;
-	$_SESSION['passwd'] = $passwd;
-	$_SESSION['dbname'] = $dbname;
-	$_SESSION['table_prefix'] = $table_prefix;
-}
+    if($_POST['username'] == '') { $Erreur['DBUsername'] = $LANG['error_DBUsername']; $error = true; }
+	else {
+		$username = trim($_POST['username']);
+		$_SESSION['username'] = $username;
+	}
+
+    if($_POST['passwd'] == '') { $Erreur['DBPassword'] = $LANG['error_DBPassword']; $error = true; } 
+	else {
+		$passwd = trim($_POST['passwd']);
+		$_SESSION['passwd'] = $passwd;
+	}
+
+    if($_POST['prefix'] == '') { $Erreur['prefix'] = $LANG['error_prefix']; $error = true; } 
+	else {	
+		$table_prefix = trim($_POST['prefix']);
+		$_SESSION['table_prefix'] = $table_prefix;
+	}
+
+$_SESSION['DBHost_error'] = $Erreur['DBHost'];
+$_SESSION['DBName_error'] = $Erreur['DBName'];
+$_SESSION['DBUsername_error'] = $Erreur['DBUsername'];
+$_SESSION['DBPassword_error'] = $Erreur['DBPassword'];
+$_SESSION['prefix_error'] = $Erreur['prefix'];
+
+if($error == true) echo '<meta http-equiv="refresh" content="url=connection.php" />';
+
+if(!isset($Erreur)) {
 
 // connection
 $connection = mysql_connect($host, $username, $passwd) or die($LANG['unableConnectDb'] . mysql_error());
@@ -52,11 +78,11 @@ $connection = mysql_connect($host, $username, $passwd) or die($LANG['unableConne
 
 // Select mysql version
 if (version_compare(phpversion(), "5.0", ">=")) {
-	$mysql5_create_table = "sql/SimpleInvoicesDatabase.sql"; //sql query to create tables
+	$mysql5_create_table = "sql/simpleinvoices.sql"; //sql query to create tables
 	$sql_version = $mysql5_create_table;
 	$_SESSION['sql_version'] = $sql_version; }
 else {
-	$mysql4_create_table = "sql/SimpleInvoicesDatabase-MySQL4_0.sql"; //sql query to create tables
+	$mysql4_create_table = "sql/old/SimpleInvoicesDatabase-MySQL4_0.sql"; //sql query to create tables
 	$sql_version = $mysql4_create_table;
 	$_SESSION['sql_version'] = $sql_version; }
 
@@ -112,6 +138,9 @@ switch ($action) {
 
 // close connection
 mysql_close($connection);
+
+    } 
+}
 
 ?>
 

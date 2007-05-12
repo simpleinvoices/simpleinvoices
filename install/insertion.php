@@ -57,10 +57,10 @@ switch ($action)
 		
 	case 'insertYes':
 	//sql query to populate tables with sample data version 4
-	$mysql_4data = "sql/SimpleInvoicesDatabase-MySQL4_0Data.sql";
+	$mysql_4data = "sql/old/SimpleInvoicesDatabase-MySQL4_0Data.sql";
 	
 	//sql query to populate tables with sample data version 5
-	$mysql_5data = "sql/SimpleInvoicesDatabaseData.sql";
+	$mysql_5data = "sql/simpleinvoicesDemoData.sql";
 
 		if($sql_version == $mysql4_create_table)
 			parse_mysql_dump($mysql_4data, $ignoreerrors = false);

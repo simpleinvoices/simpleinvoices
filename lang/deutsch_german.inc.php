@@ -95,6 +95,7 @@ $LANG['debtors_by_aging_periods'] = "Schuldner nach Zahlungsdauer";//1
 $LANG['debtors_by_amount_owed'] = "Schuldner nach Gesamtsumme";//1
 $LANG['default_inv_template'] = "Default invoice template ";//0
 $LANG['default_number_items'] = "Default number of line items:";//0
+$LANG['default_payment_type'] = "Default payment type";//0
 $LANG['description'] = "Beschreibung";//1
 $LANG['details'] = "Details";//1
 $LANG['disabled'] = "Deaktiviert";//1

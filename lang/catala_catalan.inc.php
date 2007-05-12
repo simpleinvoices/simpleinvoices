@@ -95,6 +95,7 @@ $LANG['debtors_by_aging_periods'] = "Deutors per per&iacute;odes d'antiguitat";/
 $LANG['debtors_by_amount_owed'] = "Deutors per Total De Deute";//1
 $LANG['default_inv_template'] = "Plantilla per defecte en factures ";//1
 $LANG['default_number_items'] = "Nombre Default number of line items:";//1
+$LANG['default_payment_type'] = "Default payment type";//0
 $LANG['description'] = "Descripci&oacute;";//1
 $LANG['details'] = "detalls";//1
 $LANG['disabled'] = "Deshabilitat";//1
