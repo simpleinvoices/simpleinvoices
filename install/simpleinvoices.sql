@@ -1,22 +1,5 @@
--- phpMyAdmin SQL Dump
--- version 2.10.0.2
--- http://www.phpmyadmin.net
 -- 
--- Host: localhost
--- Erstellungszeit: 12. Mai 2007 um 13:45
--- Server Version: 5.0.38
--- PHP-Version: 5.1.4
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
--- 
--- Datenbank: `simpleinvoices`
--- 
-
--- --------------------------------------------------------
-
--- 
--- Tabellenstruktur für Tabelle `si_account_payments`
+-- Tabellenstruktur fuer Tabelle `si_account_payments`
 -- 
 
 CREATE TABLE `si_account_payments` (
@@ -30,7 +13,7 @@ CREATE TABLE `si_account_payments` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 -- 
--- Daten für Tabelle `si_account_payments`
+-- Daten fuer Tabelle `si_account_payments`
 -- 
 
 INSERT INTO `si_account_payments` (`id`, `ac_inv_id`, `ac_amount`, `ac_notes`, `ac_date`, `ac_payment_type`) VALUES 
@@ -40,7 +23,7 @@ INSERT INTO `si_account_payments` (`id`, `ac_inv_id`, `ac_amount`, `ac_notes`, `
 -- --------------------------------------------------------
 
 -- 
--- Tabellenstruktur für Tabelle `si_biller`
+-- Tabellenstruktur fuer Tabelle `si_biller`
 -- 
 
 CREATE TABLE `si_biller` (
@@ -68,7 +51,7 @@ CREATE TABLE `si_biller` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 -- 
--- Daten für Tabelle `si_biller`
+-- Daten fuer Tabelle `si_biller`
 -- 
 
 INSERT INTO `si_biller` (`id`, `name`, `street_address`, `street_address2`, `city`, `state`, `zip_code`, `country`, `phone`, `mobile_phone`, `fax`, `email`, `logo`, `footer`, `notes`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `enabled`) VALUES 
@@ -80,7 +63,7 @@ INSERT INTO `si_biller` (`id`, `name`, `street_address`, `street_address2`, `cit
 -- --------------------------------------------------------
 
 -- 
--- Tabellenstruktur für Tabelle `si_customers`
+-- Tabellenstruktur fuer Tabelle `si_customers`
 -- 
 
 CREATE TABLE `si_customers` (
@@ -107,7 +90,7 @@ CREATE TABLE `si_customers` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 -- 
--- Daten für Tabelle `si_customers`
+-- Daten fuer Tabelle `si_customers`
 -- 
 
 INSERT INTO `si_customers` (`id`, `attention`, `name`, `street_address`, `street_address2`, `city`, `state`, `zip_code`, `country`, `phone`, `mobile_phone`, `fax`, `email`, `notes`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `enabled`) VALUES 
@@ -118,7 +101,7 @@ INSERT INTO `si_customers` (`id`, `attention`, `name`, `street_address`, `street
 -- --------------------------------------------------------
 
 -- 
--- Tabellenstruktur für Tabelle `si_custom_fields`
+-- Tabellenstruktur fuer Tabelle `si_custom_fields`
 -- 
 
 CREATE TABLE `si_custom_fields` (
@@ -130,7 +113,7 @@ CREATE TABLE `si_custom_fields` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
 
 -- 
--- Daten für Tabelle `si_custom_fields`
+-- Daten fuer Tabelle `si_custom_fields`
 -- 
 
 INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`) VALUES 
@@ -154,7 +137,7 @@ INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `
 -- --------------------------------------------------------
 
 -- 
--- Tabellenstruktur für Tabelle `si_defaults`
+-- Tabellenstruktur fuer Tabelle `si_defaults`
 -- 
 
 CREATE TABLE `si_defaults` (
@@ -170,7 +153,7 @@ CREATE TABLE `si_defaults` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 -- 
--- Daten für Tabelle `si_defaults`
+-- Daten fuer Tabelle `si_defaults`
 -- 
 
 INSERT INTO `si_defaults` (`def_id`, `def_biller`, `def_customer`, `def_tax`, `def_inv_preference`, `def_number_line_items`, `def_inv_template`, `def_payment_type`) VALUES 
@@ -179,7 +162,7 @@ INSERT INTO `si_defaults` (`def_id`, `def_biller`, `def_customer`, `def_tax`, `d
 -- --------------------------------------------------------
 
 -- 
--- Tabellenstruktur für Tabelle `si_invoices`
+-- Tabellenstruktur fuer Tabelle `si_invoices`
 -- 
 
 CREATE TABLE `si_invoices` (
@@ -198,7 +181,7 @@ CREATE TABLE `si_invoices` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 -- 
--- Daten für Tabelle `si_invoices`
+-- Daten fuer Tabelle `si_invoices`
 -- 
 
 INSERT INTO `si_invoices` (`id`, `biller_id`, `customer_id`, `type_id`, `preference_id`, `date`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `note`) VALUES 
@@ -213,7 +196,7 @@ INSERT INTO `si_invoices` (`id`, `biller_id`, `customer_id`, `type_id`, `prefere
 -- --------------------------------------------------------
 
 -- 
--- Tabellenstruktur für Tabelle `si_invoice_items`
+-- Tabellenstruktur fuer Tabelle `si_invoice_items`
 -- 
 
 CREATE TABLE `si_invoice_items` (
@@ -232,7 +215,7 @@ CREATE TABLE `si_invoice_items` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 -- 
--- Daten für Tabelle `si_invoice_items`
+-- Daten fuer Tabelle `si_invoice_items`
 -- 
 
 INSERT INTO `si_invoice_items` (`inv_it_id`, `inv_it_invoice_id`, `inv_it_quantity`, `inv_it_product_id`, `inv_it_unit_price`, `inv_it_tax_id`, `inv_it_tax`, `inv_it_tax_amount`, `inv_it_gross_total`, `inv_it_description`, `inv_it_total`) VALUES 
@@ -254,7 +237,7 @@ INSERT INTO `si_invoice_items` (`inv_it_id`, `inv_it_invoice_id`, `inv_it_quanti
 -- --------------------------------------------------------
 
 -- 
--- Tabellenstruktur für Tabelle `si_invoice_type`
+-- Tabellenstruktur fuer Tabelle `si_invoice_type`
 -- 
 
 CREATE TABLE `si_invoice_type` (
@@ -264,7 +247,7 @@ CREATE TABLE `si_invoice_type` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 -- 
--- Daten für Tabelle `si_invoice_type`
+-- Daten fuer Tabelle `si_invoice_type`
 -- 
 
 INSERT INTO `si_invoice_type` (`inv_ty_id`, `inv_ty_description`) VALUES 
@@ -275,7 +258,7 @@ INSERT INTO `si_invoice_type` (`inv_ty_id`, `inv_ty_description`) VALUES
 -- --------------------------------------------------------
 
 -- 
--- Tabellenstruktur für Tabelle `si_payment_types`
+-- Tabellenstruktur fuer Tabelle `si_payment_types`
 -- 
 
 CREATE TABLE `si_payment_types` (
@@ -286,7 +269,7 @@ CREATE TABLE `si_payment_types` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 -- 
--- Daten für Tabelle `si_payment_types`
+-- Daten fuer Tabelle `si_payment_types`
 -- 
 
 INSERT INTO `si_payment_types` (`pt_id`, `pt_description`, `pt_enabled`) VALUES 
@@ -296,7 +279,7 @@ INSERT INTO `si_payment_types` (`pt_id`, `pt_description`, `pt_enabled`) VALUES
 -- --------------------------------------------------------
 
 -- 
--- Tabellenstruktur für Tabelle `si_preferences`
+-- Tabellenstruktur fuer Tabelle `si_preferences`
 -- 
 
 CREATE TABLE `si_preferences` (
@@ -317,7 +300,7 @@ CREATE TABLE `si_preferences` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 -- 
--- Daten für Tabelle `si_preferences`
+-- Daten fuer Tabelle `si_preferences`
 -- 
 
 INSERT INTO `si_preferences` (`pref_id`, `pref_description`, `pref_currency_sign`, `pref_inv_heading`, `pref_inv_wording`, `pref_inv_detail_heading`, `pref_inv_detail_line`, `pref_inv_payment_method`, `pref_inv_payment_line1_name`, `pref_inv_payment_line1_value`, `pref_inv_payment_line2_name`, `pref_inv_payment_line2_value`, `pref_enabled`) VALUES 
@@ -330,7 +313,7 @@ INSERT INTO `si_preferences` (`pref_id`, `pref_description`, `pref_currency_sign
 -- --------------------------------------------------------
 
 -- 
--- Tabellenstruktur für Tabelle `si_products`
+-- Tabellenstruktur fuer Tabelle `si_products`
 -- 
 
 CREATE TABLE `si_products` (
@@ -347,7 +330,7 @@ CREATE TABLE `si_products` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 -- 
--- Daten für Tabelle `si_products`
+-- Daten fuer Tabelle `si_products`
 -- 
 
 INSERT INTO `si_products` (`id`, `description`, `unit_price`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`) VALUES 
@@ -373,7 +356,7 @@ CREATE TABLE `si_sql_patchmanager` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=104 ;
 
 -- 
--- Daten für Tabelle `si_sql_patchmanager`
+-- Daten fuer Tabelle `si_sql_patchmanager`
 -- 
 
 INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES 
@@ -484,19 +467,18 @@ INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_
 -- --------------------------------------------------------
 
 -- 
--- Tabellenstruktur für Tabelle `si_systemdefaults`
+-- Tabellenstruktur fuer Tabelle `si_systemdefaults`
 -- 
 
 CREATE TABLE `si_systemdefaults` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(30) NOT NULL,
   `value` varchar(30) NOT NULL,
-  PRIMARY KEY  (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
 
 -- 
--- Daten für Tabelle `si_systemdefaults`
+-- Daten fuer Tabelle `si_systemdefaults`
 -- 
 
 INSERT INTO `si_systemdefaults` (`id`, `name`, `value`) VALUES 
@@ -505,26 +487,44 @@ INSERT INTO `si_systemdefaults` (`id`, `name`, `value`) VALUES
 (3, 'tax', '1'),
 (4, 'invoice', '1'),
 (5, 'items', '5'),
-(6, 'template', 'simple2'),
+(6, 'template', 'simple'),
 (7, 'payment_type', '1'),
-(8, 'language', 'en'),
-(9, 'dateformat', 'Y-m-d'),
-(10, 'spreadsheet', 'xls'),
-(11, 'wordprocessor', 'doc'),
-(12, 'pdfscreensize', '800'),
-(13, 'pdfpapersize', 'A4'),
-(14, 'pdfleftmargin', '15'),
-(15, 'pdfrightmargin', '15'),
-(16, 'pdftopmargin', '15'),
-(17, 'pdfbottommargin', '15'),
-(18, 'emailhost', 'localhost'),
-(19, 'emailusername', ''),
-(20, 'emailpassword', '');
+(8, 'language', 'de'),
+(9, 'language', 'en'),
+(10, 'language', 'es'),
+(11, 'language', 'es_ca'),
+(12, 'language', 'es_gl'),
+(13, 'language', 'fi'),
+(14, 'language', 'fr'),
+(15, 'language', 'nl'),
+(16, 'language', 'pt'),
+(17, 'language', 'ro'),
+(18, 'dateformat', 'Y-m-d'),
+(19, 'dateformat', 'Y-m-d h:m'),
+(20, 'dateformat', 'm-d-Y'),
+(21, 'dateformat', 'm-d-Y h:m'),
+(22, 'dateformat', 'd-m-Y'),
+(23, 'dateformat', 'd-m-Y h:m'),
+(24, 'dateformat', 'j.n.Y'),
+(25, 'dateformat', 'Y-m-d'),
+(26, 'spreadsheet', 'xls'),
+(27, 'spreadsheet', 'ods'),
+(28, 'wordprocessor', 'doc'),
+(29, 'wordprocessor', 'odt'),
+(30, 'pdfscreensize', '640'),
+(31, 'pdfscreensize', '800'),
+(32, 'pdfscreensize', '1024'),
+(33, 'pdfpapersize', 'A4'),
+(34, 'pdfleftmargin', '15'),
+(35, 'pdfrightmargin', '15'),
+(36, 'pdftopmargin', '15'),
+(37, 'pdfbottommargin', '15'),
+(38, 'theme', 'google');
 
 -- --------------------------------------------------------
 
 -- 
--- Tabellenstruktur für Tabelle `si_tax`
+-- Tabellenstruktur fuer Tabelle `si_tax`
 -- 
 
 CREATE TABLE `si_tax` (
@@ -536,7 +536,7 @@ CREATE TABLE `si_tax` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 -- 
--- Daten für Tabelle `si_tax`
+-- Daten fuer Tabelle `si_tax`
 -- 
 
 INSERT INTO `si_tax` (`tax_id`, `tax_description`, `tax_percentage`, `tax_enabled`) VALUES 
