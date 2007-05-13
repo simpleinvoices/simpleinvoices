@@ -93,17 +93,18 @@ function getBillers() {
 	$billers = null;
 	
 	for($i=0;$biller = mysql_fetch_array($query);$i++) {
-		$billers[$i] = $biller;
 		
   		if ($biller['enabled'] == 1) {
   			$biller['enabled'] = $LANG['enabled'];
   		} else {
   			$biller['enabled'] = $LANG['disabled'];
   		}
+		$billers[$i] = $biller;
 	}
 	
 	return $billers;
 }
+
 
 
 function getTaxRate($id) {
