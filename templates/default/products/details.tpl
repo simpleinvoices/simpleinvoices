@@ -92,14 +92,7 @@
 	<tr>
 		<td class="details_screen">{$LANG.product_enabled}</td>
 		<td>
-		{* enabled block *}
-		<select name="enabled">
-			<option value="{$product.enabled}" selected
-				style="font-weight: bold;">{$product.wording_for_enabled}</option>
-			<option value="1">{$LANG.enabled}</option>
-			<option value="0">{$LANG.disabled}</option>
-		</select>
-		{* /enabled block*}
+			{html_options name=enabled options=$enabled selected=$product.enabled}
 		</td>
 	</tr>
 	</table>
@@ -107,7 +100,7 @@
 {if $smarty.get.action== 'edit' }
 	<hr></hr>
 		<input type="submit" name="cancel" value="{$LANG.cancel}" /> 
-		<input type="submit" name="save_product" value="{$LANG.save_biller}" /> 
+		<input type="submit" name="save_product" value="{$LANG.save_product}" /> 
 		<input type="hidden" name="op" value="edit_product" /> 
 	{/if}
 </form>

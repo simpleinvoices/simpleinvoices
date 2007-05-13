@@ -108,12 +108,9 @@ You must enter a Biller name</div>
 			href="docs.php?t=help&p=insert_biller_text"
 			rel="gb_page_center[450, 450]"> <img
 			src="./images/common/help-small.png"></img> </a></td>
-		<td><select name="logo">
-			<option selected value="_default_blank_logo.png"
-				style="font-weight: bold">_default_blank_logo.png</option>
-			{foreach from=$files item=file}
-			<option>{$file}</option>
-			{/foreach} </td>
+		<td>
+			{html_options name=logo output=$files values=$files selected=$files[0] }
+		</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.invoice_footer}</td>
@@ -127,10 +124,9 @@ You must enter a Biller name</div>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
-		<td><select name="enabled">
-			<option value="1" selected>{$LANG.enabled}</option>
-			<option value="0">{$LANG.disabled}</option>
-		</select></td>
+		<td>
+			{html_options name=enabled options=$enabled selected=1}
+		</td>
 	</tr>
 	</div>
 	</div>

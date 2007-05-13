@@ -102,10 +102,7 @@
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
 		<td>
-			<select name="enabled">
-			<option value="1" selected>{$LANG.enabled}</option>
-			<option value="0">{$LANG.disabled}</option>
-			</select>
+			{html_options name=enabled options=$enabled selected=1}
 		</td>
 	</tr>
 </table>

@@ -10,7 +10,7 @@ function checkLogin() {
 }
 
 function getLogoList() {
-	$dirname="images/logo";
+	$dirname="./templates/invoices/logos";
 	$ext = array("jpg", "png", "jpeg", "gif");
 	$files = array();
 	if($handle = opendir($dirname)) {
@@ -28,10 +28,10 @@ function getLogoList() {
 
 function getLogo($biller) {
 	if(!empty($biller['logo'])) {
-		return "./images/logo/$biller[logo]";
+		return "./templates/invoices/logo/$biller[logo]";
 	}
 	else {
-		return "./images/logo/_default_blank_logo.png";
+		return "./templates/invoices/_default_blank_logo.png";
 	}
 }
 

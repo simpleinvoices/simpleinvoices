@@ -58,7 +58,6 @@ if(file_exists($templatePath)) {
 	$smarty -> assign('invoiceItems',$invoiceItems);
 	$smarty -> assign('template_path',$template_path);
 	$smarty -> assign('css',$css);
-	$smarty -> assign('logo',$logo);
 	$smarty -> assign('customFieldLabels',$customFieldLabels);
 	
 	

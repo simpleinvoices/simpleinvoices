@@ -219,14 +219,8 @@
 			href="docs.php?t=help&p=insert_biller_text"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
-		<td>{* Logo Part *} <select name="logo">
-			<option selected value="{$biller[logo]}"
-				style="font-weight:bold;">{$biller.logo}</option>
-			{foreach from=$files item=file}
-			<option>{$file}</option>
-			{/foreach}
-		</select>
-		{*/ Logo Part *}
+		<td>
+			{html_options name=logo output=$files values=$files selected=$biller.logo }
 		</td>
 	</tr>
 	<tr>
@@ -240,14 +234,7 @@
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
 		<td>
-		{* enabled block *}
-		<select name="enabled">
-			<option value="{$biller.enabled}" selected
-				style="font-weight: bold;">{$biller.wording_for_enabled}</option>
-			<option value="1">{$LANG.enabled}</option>
-			<option value="0">{$LANG.disabled}</option>
-		</select>
-		{* /enabled block*}
+		{html_options name=enabled options=$enabled selected=$biller.enabled}
 		</td>
 	</tr>
 </table>

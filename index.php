@@ -18,6 +18,8 @@ include('./modules/options/database_sqlpatches.php');
 
 
 $smarty -> assign("LANG",$LANG);
+//For Making easy enabled pop-menus (see biller)
+$smarty -> assign("enabled",array($LANG['disabled'],$LANG['enabled']));
 
 $menu = true;
 $file = "home";

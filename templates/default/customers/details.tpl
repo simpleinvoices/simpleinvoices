@@ -152,16 +152,6 @@
 {/if}
 
 {if $smarty.get.action== 'edit' }
-{*
-#do the product enabled/disblaed drop down
-$display_block_enabled = <<<EOD
-<select name="enabled">
-	<option value="$c_enabledField" selected style="font-weight: bold">$wording_for_enabled</option>
-	<option value="1">$LANG.enabled</option>
-	<option value="0">$LANG.disabled</option>
-</select>
-EOD;
-*}
 
 <div id="top"><b>{$LANG.customer_edit}</b></div>
 <hr></hr>
@@ -251,7 +241,7 @@ EOD;
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
-		<td>{$display_block_enabled}</td>
+		<td>{html_options name=enabled options=$enabled selected=$customer.enabled}</td>
 	</tr>
 </table>
 
