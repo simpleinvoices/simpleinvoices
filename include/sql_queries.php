@@ -261,7 +261,7 @@ function getInvoice($id) {
 	$query = mysql_query($sql) or die(mysql_error());
 	$result = mysql_fetch_array($query);
 	//$invoice['total'] = number_format($result['total'],2);
-	$invoice['total_tax'] = number_format($result['total_tax']);
+	$invoice['total_tax'] = number_format($result['total_tax'],2);
 	
 	return $invoice;
 }
