@@ -75,7 +75,7 @@ function getCustomFieldLabels() {
 
 		if($customFields[$customField['cf_custom_field']] == null) {
 			//If not set, don't show...
-			//$customFields[$customField['cf_custom_field']] = $LANG["custom_field"].' '.($i%4+1);
+			$customFields[$customField['cf_custom_field']] = $LANG["custom_field"].' '.($i%4+1);
 		}
 	}
 

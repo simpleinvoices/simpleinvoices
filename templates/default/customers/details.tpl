@@ -71,7 +71,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
-		<td>{$wording_for_enabled}</td>
+		<td>{$customer.enabled}</td>
 		<td class="details_screen">{$LANG.email}</td>
 		<td>{$customer.email}</td>
 	</tr>
