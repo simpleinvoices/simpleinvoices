@@ -119,18 +119,18 @@ CREATE TABLE `si_invoices` (
 -- 
 
 CREATE TABLE `si_invoice_items` (
-  `inv_it_id` int(10) NOT NULL auto_increment,
-  `inv_it_invoice_id` int(10) NOT NULL default '0',
-  `inv_it_quantity` float NOT NULL default '0',
-  `inv_it_product_id` int(10) default '0',
-  `inv_it_unit_price` double(25,2) default '0.00',
-  `inv_it_tax_id` varchar(25) NOT NULL default '0',
-  `inv_it_tax` double(25,2) default '0.00',
-  `inv_it_tax_amount` double(25,2) default NULL,
-  `inv_it_gross_total` double(25,2) default '0.00',
-  `inv_it_description` text,
-  `inv_it_total` double(25,2) default '0.00',
-  PRIMARY KEY  (`inv_it_id`)
+  `id` int(10) NOT NULL auto_increment,
+  `invoice_id` int(10) NOT NULL default '0',
+  `quantity` float NOT NULL default '0',
+  `product_id` int(10) default '0',
+  `unit_price` double(25,2) default '0.00',
+  `tax_id` varchar(25) NOT NULL default '0',
+  `tax` double(25,2) default '0.00',
+  `tax_amount` double(25,2) default NULL,
+  `gross_total` double(25,2) default '0.00',
+  `description` text,
+  `total` double(25,2) default '0.00',
+  PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 -- 

@@ -66,8 +66,8 @@ if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_inv
 	};
 
 	$actual_tax = $tax_percentageField / 100;
-	$total_invoice_total_tax = $_POST[inv_it_gross_total] * $actual_tax ;
-	$total_invoice_total = $total_invoice_total_tax + $_POST[inv_it_gross_total] ;	
+	$total_invoice_total_tax = $_POST[gross_total] * $actual_tax ;
+	$total_invoice_total = $total_invoice_total_tax + $_POST[gross_total] ;	
 		
 
 	$sql_items = "INSERT into
@@ -82,7 +82,7 @@ if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_inv
 					'$_POST[select_tax]',
 					$tax_percentageField,
 					$total_invoice_total_tax,		
-					'$_POST[inv_it_gross_total]',
+					'$_POST[gross_total]',
 					'$_POST[i_description]',
 					$total_invoice_total
 				)
@@ -142,22 +142,22 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 	
 	#calcultate the invoice total - start
 	$actual_tax = $tax_percentageField / 100;
-	$total_invoice_total_tax = $_POST[inv_it_gross_total] * $actual_tax ;
-	$total_invoice_total = $total_invoice_total_tax + $_POST[inv_it_gross_total] ;
+	$total_invoice_total_tax = $_POST[gross_total] * $actual_tax ;
+	$total_invoice_total = $total_invoice_total_tax + $_POST[gross_total] ;
 	#calcultate the invoice total - end
 
 	#update the {$tb_prefix}invoice_items table - which tax,description etc.. - start
 	$sql_items = "UPDATE
 				{$tb_prefix}invoice_items
 			SET
-				inv_it_tax_id = '$_POST[select_tax]',
-				inv_it_tax = $tax_percentageField,
-				inv_it_tax_amount = $total_invoice_total_tax,
-				inv_it_gross_total = '$_POST[inv_it_gross_total]',
-				inv_it_description = '$_POST[i_description]',
-				inv_it_total = $total_invoice_total
+				tax_id = '$_POST[select_tax]',
+				tax = $tax_percentageField,
+				tax_amount = $total_invoice_total_tax,
+				gross_total = '$_POST[gross_total]',
+				description = '$_POST[i_description]',
+				total = $total_invoice_total
 			WHERE
-				inv_it_invoice_id = $invoice_id";
+				invoice_id = $invoice_id";
 
 
 	if (mysql_query($sql_items)) {
@@ -399,7 +399,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 		$total_invoice_item_gross = $prod_unit_priceField  * $_POST["i_quantity$items"];
 		
 
-		$invoice_id_item = $_POST["inv_it_id$items"];
+		$invoice_id_item = $_POST["id$items"];
 		
 
 		$sql_items = "REPLACE into
@@ -668,7 +668,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 		$total_invoice_item_gross = $prod_unit_priceField  * $_POST["i_quantity$items"];
 
 
-		$invoice_id_item = $_POST["inv_it_id$items"];
+		$invoice_id_item = $_POST["id$items"];
 
 		$sql_items = "REPLACE into
 					{$tb_prefix}invoice_items

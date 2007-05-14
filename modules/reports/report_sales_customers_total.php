@@ -17,7 +17,7 @@ if (!defined("BROWSE")) {
    include "./modules/reports/PHPReportMaker.php";
    include "config/config.php";
 
-   $sSQL = "select  {$tb_prefix}customers.name,  sum({$tb_prefix}invoice_items.inv_it_total) from {$tb_prefix}customers, {$tb_prefix}invoice_items, {$tb_prefix}invoices where {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.id = {$tb_prefix}invoice_items.inv_it_invoice_id GROUP BY name ";
+   $sSQL = "select  {$tb_prefix}customers.name,  sum({$tb_prefix}invoice_items.total) from {$tb_prefix}customers, {$tb_prefix}invoice_items, {$tb_prefix}invoices where {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.id = {$tb_prefix}invoice_items.invoice_id GROUP BY name ";
    $oRpt = new PHPReportMaker();
 
    $oRpt->setXML("./modules/reports/xml/report_sales_customers_total.xml");

@@ -7,7 +7,7 @@ jsBegin();
 jsFormValidationBegin("frmpost");
 jsTextValidation("sel_id","Biller Name",1,100);
 jsTextValidation("select_customer","Customer Name",1,100);
-jsValidateifNum("inv_it_gross_total","Gross Total");
+jsValidateifNum("gross_total","Gross Total");
 jsTextValidation("select_tax","Tax Rate",1,100);
 jsPreferenceValidation("select_preferences","Invoice Preference",1,100);
 jsFormValidationEnd();
@@ -261,7 +261,7 @@ EOD;
 	<td class="details_screen"><?php echo $LANG['gross_total'];?></td><td class="details_screen"><?php echo $LANG['tax'];?></td><td class="details_screen"><?php echo $LANG['inv_pref'];?></td>
 </tr>
 <tr>
-	<td><input type=text name="inv_it_gross_total" size=15></td><td input type=text name="inv_it_tax" size=15><?php echo $display_block_tax; ?></td><td input type=text name="preference_id" size=25><?php echo $display_block_preferences; ?></td>
+	<td><input type=text name="gross_total" size=15></td><td input type=text name="tax" size=15><?php echo $display_block_tax; ?></td><td input type=text name="preference_id" size=25><?php echo $display_block_preferences; ?></td>
 
 </tr>
 <tr>

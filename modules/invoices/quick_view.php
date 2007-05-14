@@ -50,7 +50,7 @@ if (  $_GET['invoice_style'] === 'Total' ) {
         	        <td colspan=6><b>{$LANG['description']}</b></td>
 	        </tr>
 	        <tr>
-	                <td colspan=6>{$invoiceItems[0]['inv_it_description']}</td>
+	                <td colspan=6>{$invoiceItems[0]['description']}</td>
         	</tr>
 	        <tr>
         	        <td colspan=6><br></td>
@@ -59,7 +59,7 @@ if (  $_GET['invoice_style'] === 'Total' ) {
 	                <td></td><td></td><td></td><td><b>{$LANG['gross_total']}</b></td><td><b>{$LANG['tax']}</b></td><td><b>{$LANG['total_uppercase']}</b></td>
         	</tr>
 	        <tr>
-        	        <td></td><td></td><td></td><td>$preference[pref_currency_sign]{$invoiceItems[0]['inv_it_gross_total']}</td><td>$preference[pref_currency_sign]{$invoiceItems[0]['inv_it_tax_amount']}</td><td><u>$preference[pref_currency_sign]{$invoiceItems[0]['inv_it_total']}</u></td>
+        	        <td></td><td></td><td></td><td>$preference[pref_currency_sign]{$invoiceItems[0]['gross_total']}</td><td>$preference[pref_currency_sign]{$invoiceItems[0]['tax_amount']}</td><td><u>$preference[pref_currency_sign]{$invoiceItems[0]['total']}</u></td>
 	        </tr>
 
         	<tr>
@@ -121,7 +121,7 @@ EOD;
 	
 			$display_block_details .=  <<<EOD
 		        <tr>
-	                <td>$invoiceItem[inv_it_quantity]</td><td>{$invoiceItem['product']['description']}</td><td>$preference[pref_currency_sign]$invoiceItem[inv_it_unit_price]</td><td>$preference[pref_currency_sign]$invoiceItem[inv_it_gross_total]</td><td>$preference[pref_currency_sign]$invoiceItem[inv_it_tax_amount]</td><td>$invoiceItem[inv_it_total]</td>
+	                <td>$invoiceItem[quantity]</td><td>{$invoiceItem['product']['description']}</td><td>$preference[pref_currency_sign]$invoiceItem[unit_price]</td><td>$preference[pref_currency_sign]$invoiceItem[gross_total]</td><td>$preference[pref_currency_sign]$invoiceItem[tax_amount]</td><td>$invoiceItem[total]</td>
 	        </tr>
                 <tr  class='itemised' >       
                         <td></td>
@@ -148,17 +148,17 @@ EOD;
 		
 	        #item description - only show first 20 characters and add ... to signify theres more text
 	        $max_length = 20;
-	        if (strlen($invoiceItem['inv_it_description']) > $max_length ) {
-	                $stripped_item_description = substr($invoiceItem['inv_it_description'],0,20);
+	        if (strlen($invoiceItem['description']) > $max_length ) {
+	                $stripped_item_description = substr($invoiceItem['description'],0,20);
 	                $stripped_item_description .= "...";
 	        }
-	        else if (strlen($invoiceItem['inv_it_description']) <= $max_length ) {
-	                 $stripped_item_description = $invoiceItem['inv_it_description'];
+	        else if (strlen($invoiceItem['description']) <= $max_length ) {
+	                 $stripped_item_description = $invoiceItem['description'];
 	        }
 
 	        $display_block_details .=  <<<EOD
         	<tr>
-	                <td>$invoiceItem[inv_it_quantity]</td><td>$product[description]</td><td class='show-consulting'>$stripped_item_description</td><td class='consulting'></td><td>$preference[pref_currency_sign]$invoiceItem[inv_it_unit_price]</td><td>$preference[pref_currency_sign]$invoiceItem[inv_it_gross_total]</td><td>$preference[pref_currency_sign]$invoiceItem[inv_it_tax_amount]</td><td align=right>$preference[pref_currency_sign]$invoiceItem[inv_it_total]</td>
+	                <td>$invoiceItem[quantity]</td><td>$product[description]</td><td class='show-consulting'>$stripped_item_description</td><td class='consulting'></td><td>$preference[pref_currency_sign]$invoiceItem[unit_price]</td><td>$preference[pref_currency_sign]$invoiceItem[gross_total]</td><td>$preference[pref_currency_sign]$invoiceItem[tax_amount]</td><td align=right>$preference[pref_currency_sign]$invoiceItem[total]</td>
 		</tr>
 		<tr  class='consulting' >	
                         <td></td>
@@ -175,10 +175,10 @@ EOD;
 	<!--		<td></td><td colspan=6 class='details_screen consulting'>$prod_custom_field_label1: $product[custom_field1], $prod_custom_field_label2: $product[custom_field2], $prod_custom_field_label3: $product[custom_field3], $prod_custom_field_label4: $product[custom_field4]</td> -->
 		 </tr>
 EOD;
-		if ($invoiceItem['inv_it_description'] != null) {
+		if ($invoiceItem['description'] != null) {
 			$display_block_details .= <<<EOD
 			<tr  class='consulting' >	
-				<td></td><td colspan=6 class='details_screen consulting'>{$LANG['description']}:<br>$invoiceItem[inv_it_description]</td>
+				<td></td><td colspan=6 class='details_screen consulting'>{$LANG['description']}:<br>$invoiceItem[description]</td>
 			 </tr>
 EOD;
 		}

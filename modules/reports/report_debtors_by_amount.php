@@ -30,14 +30,14 @@ SELECT
         id,
         (select name from {$tb_prefix}biller where id = {$tb_prefix}invoices.biller_id) as Biller,
         (select name from {$tb_prefix}customers where id = {$tb_prefix}invoices.customer_id) as Customer,
-        (select sum(inv_it_total) from {$tb_prefix}invoice_items WHERE inv_it_invoice_id = id) as Total,
+        (select sum({$tb_prefix}invoice_items.total) from {$tb_prefix}invoice_items WHERE {$tb_prefix}invoice_items.invoice_id = id) as Total,
         ( select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from {$tb_prefix}account_payments where  ac_inv_id = id ) as Paid,
         (select (Total - Paid)) as Owing ,
         date
 FROM
         {$tb_prefix}invoices,{$tb_prefix}account_payments,{$tb_prefix}invoice_items, {$tb_prefix}biller, {$tb_prefix}customers
 WHERE
-        inv_it_invoice_id = {$tb_prefix}invoices.id
+        {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id
 GROUP BY
         id
 ORDER BY

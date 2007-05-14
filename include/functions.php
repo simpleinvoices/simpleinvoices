@@ -162,7 +162,7 @@ function calc_invoice_total($inv_idField) {
 
 
 #invoice total total - start
-$print_invoice_total ="SELECT sum(inv_it_total) AS total FROM {$tb_prefix}invoice_items WHERE inv_it_invoice_id =$inv_idField";
+$print_invoice_total ="SELECT sum(total) AS total FROM {$tb_prefix}invoice_items WHERE invoice_id =$inv_idField";
 	$result_print_invoice_total = mysql_query($print_invoice_total, $conn) or die(mysql_error());
 
 	while ($Array = mysql_fetch_array($result_print_invoice_total)) {
@@ -208,13 +208,13 @@ function calc_customer_total($c_idField) {
 #invoice total calc - start
         $print_invoice_total_customer ="
 		SELECT
-			IF ( isnull( sum(inv_it_total)) ,  '0', sum(inv_it_total)) as total 
+			IF ( isnull( sum({$tb_prefix}invoice_items.total)) ,  '0', sum({$tb_prefix}invoice_items.total)) as total 
 		FROM
 			{$tb_prefix}invoice_items, {$tb_prefix}invoices 
 		WHERE  
 			{$tb_prefix}invoices.customer_id  = $c_idField  
 		AND 
-			{$tb_prefix}invoices.id = {$tb_prefix}invoice_items.inv_it_invoice_id
+			{$tb_prefix}invoices.id = {$tb_prefix}invoice_items.invoice_id
 		";
         $result_print_invoice_total_customer = mysql_query($print_invoice_total_customer, $conn) or die(mysql_error());
 
@@ -275,7 +275,7 @@ function calc_invoice_tax($master_invoice_id) {
 	mysql_select_db( $db_name, $conn );
 
 	#invoice total tax
-	$print_invoice_total_tax ="select sum(inv_it_tax_amount) as total_tax from {$tb_prefix}invoice_items where inv_it_invoice_id =$master_invoice_id";
+	$print_invoice_total_tax ="select sum(tax_amount) as total_tax from {$tb_prefix}invoice_items where invoice_id =$master_invoice_id";
 	$result_print_invoice_total_tax = mysql_query($print_invoice_total_tax, $conn) or die(mysql_error());
 
 	while ($Array_tax = mysql_fetch_array($result_print_invoice_total_tax)) {

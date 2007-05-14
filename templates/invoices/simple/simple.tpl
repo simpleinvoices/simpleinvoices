@@ -197,7 +197,7 @@ $invoice_total_block =  <<<EOD
 					<td class="tbl1 col1 tbl1-right" colspan=6><b>{$LANG['description']}</b></td>
 			</tr>
 			<tr class="tbl1-left tbl1-right">
-					<td class="tbl1-left tbl1-right" colspan=6>$master_invoice[inv_it_description]</td>
+					<td class="tbl1-left tbl1-right" colspan=6>$master_invoice[description]</td>
 			</tr>
 			<tr class="tbl1-left tbl1-right">
 					<td colspan=6 class="tbl1-left tbl1-right"><br></td>
@@ -206,7 +206,7 @@ $invoice_total_block =  <<<EOD
 					<td class="tbl1-left" width="50%"><td align=right><b>{$LANG['gross_total']}</b></td><td align=right><b>{$LANG['tax']}</b></td><td class="tbl1-right" align=right><b>{$LANG['total_uppercase']}</b></td>
 			</tr>
 			<tr class="tbl1-left tbl1-right tbl1-bottom">
-					<td class="tbl1-left tbl1-bottom" width="50%"></td></td><td class="tbl1-bottom" align=right> $preference[pref_currency_sign]$master_invoice[inv_it_gross_total]</td><td class="tbl1-bottom" align=right>$preference[pref_currency_sign]$master_invoice[inv_it_tax_amount]</td><td class="tbl1-bottom tbl1-right" align=right><u>$preference[pref_currency_sign]$master_invoice[inv_it_total]</u></td>
+					<td class="tbl1-left tbl1-bottom" width="50%"></td></td><td class="tbl1-bottom" align=right> $preference[pref_currency_sign]$master_invoice[gross_total]</td><td class="tbl1-bottom" align=right>$preference[pref_currency_sign]$master_invoice[tax_amount]</td><td class="tbl1-bottom tbl1-right" align=right><u>$preference[pref_currency_sign]$master_invoice[total]</u></td>
 			</tr>
 			<tr>
 					<td colspan=6><br><br></td>
@@ -255,7 +255,7 @@ EOD;
 
 $total_line = <<<EOD
                 <tr class="tbl1-left tbl1-right">
-                        <td class="tbl1-left tbl1-right\" colspan=6>$master_invoice[inv_it_description]</td>
+                        <td class="tbl1-left tbl1-right\" colspan=6>$master_invoice[description]</td>
                 </tr>
                 <tr class="tbl1-left tbl1-right">
                         <td colspan=6 class="tbl1-left tbl1-right"><br></td>
@@ -269,9 +269,9 @@ $total_line = <<<EOD
                 </tr>
                 <tr class="tbl1-left tbl1-right tbl1-bottom">
 			<td class="tbl1-left tbl1-bottom" width="50%"></td>
-			</td><td class="tbl1-bottom" align=right> $preference[pref_currency_sign]$master_invoice[inv_it_gross_total]</td>
-			<td class="tbl1-bottom" align=right>$preference[pref_currency_sign]$master_invoice[inv_it_tax_amount]</td>
-			<td class="tbl1-bottom tbl1-right" align=right><u>$preference[pref_currency_sign]$master_invoice[inv_it_total]</u></td>
+			</td><td class="tbl1-bottom" align=right> $preference[pref_currency_sign]$master_invoice[gross_total]</td>
+			<td class="tbl1-bottom" align=right>$preference[pref_currency_sign]$master_invoice[tax_amount]</td>
+			<td class="tbl1-bottom tbl1-right" align=right><u>$preference[pref_currency_sign]$master_invoice[total]</u></td>
                 </tr>
 -->
 
@@ -279,12 +279,12 @@ EOD;
 
 $itemised_line = <<<EOD
 			<tr class="tbl1" >
-				<td class="tbl1">$master_invoice[inv_it_quantity_formatted]</td>
+				<td class="tbl1">$master_invoice[quantity_formatted]</td>
 				<td class="tbl1">$product[description]</td>
-				<td class="tbl1">$preference[pref_currency_sign]$master_invoice[inv_it_unit_price]</td>
-				<td class="tbl1">$preference[pref_currency_sign]$master_invoice[inv_it_gross_total]</td>
-				<td class="tbl1">$preference[pref_currency_sign]$master_invoice[inv_it_tax_amount]</td>
-				<td class="tbl1">$preference[pref_currency_sign]$master_invoice[inv_it_total]</td>
+				<td class="tbl1">$preference[pref_currency_sign]$master_invoice[unit_price]</td>
+				<td class="tbl1">$preference[pref_currency_sign]$master_invoice[gross_total]</td>
+				<td class="tbl1">$preference[pref_currency_sign]$master_invoice[tax_amount]</td>
+				<td class="tbl1">$preference[pref_currency_sign]$master_invoice[total]</td>
 			</tr>
                 <tr>
                         <td class="tbl1-left"></td><td class="tbl1-right" colspan="5">
@@ -319,7 +319,7 @@ EOD;
 
 $consulting_line =  <<<EOD
 			<tr class="tbl1-left tbl1-right">
-				<td class="tbl1-left" >$master_invoice[inv_it_quantity_formatted]</td>
+				<td class="tbl1-left" >$master_invoice[quantity_formatted]</td>
 				<td>$product[description]</td><td class="tbl1-right" colspan="5"></td>
 			</tr>
 			
@@ -354,15 +354,15 @@ $consulting_line .=  <<<EOD
 	
 			<tr class="tbl1-left tbl1-right">
 				<td class="tbl1-left"></td>
-				<td class="tbl1-right" colspan=6><i>{$LANG['description']}: </i>$master_invoice[inv_it_description]</td>
+				<td class="tbl1-right" colspan=6><i>{$LANG['description']}: </i>$master_invoice[description]</td>
 			</tr>
 			<tr class="tbl1-left tbl1-right tbl1-bottom">
 				<td class="tbl1-left tbl1-bottom" ></td>
 				<td class="tbl1-bottom"></td>
-				<td class="tbl1-bottom">$preference[pref_currency_sign]$master_invoice[inv_it_unit_price]</td>
-				<td class="tbl1-bottom">$preference[pref_currency_sign]$master_invoice[inv_it_gross_total]</td>
-				<td class="tbl1-bottom ">$preference[pref_currency_sign]$master_invoice[inv_it_tax_amount]</td>
-				<td align=right colspan=2 class="tbl1-right tbl1-bottom">$preference[pref_currency_sign]$master_invoice[inv_it_total]</td>
+				<td class="tbl1-bottom">$preference[pref_currency_sign]$master_invoice[unit_price]</td>
+				<td class="tbl1-bottom">$preference[pref_currency_sign]$master_invoice[gross_total]</td>
+				<td class="tbl1-bottom ">$preference[pref_currency_sign]$master_invoice[tax_amount]</td>
+				<td align=right colspan=2 class="tbl1-right tbl1-bottom">$preference[pref_currency_sign]$master_invoice[total]</td>
 			</tr>
 EOD;
 
@@ -386,7 +386,7 @@ $gross_total =  <<<EOD
 	<tr class="tbl1-left tbl1-right">
 		<td class="tbl1-left" colspan="3"></td>
 		<td align="right" colspan="2">{$LANG['gross_total']}</td>
-		<td align="right" class="tbl1-right" >$preference[pref_currency_sign]$master_invoice[inv_it_gross_total]</td>
+		<td align="right" class="tbl1-right" >$preference[pref_currency_sign]$master_invoice[gross_total]</td>
 	</tr>
 EOD;
 }

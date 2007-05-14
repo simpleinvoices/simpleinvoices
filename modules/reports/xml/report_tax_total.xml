@@ -15,7 +15,7 @@
 
 			<FIELDS>
 				<ROW>
-					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">sum(inv_it_tax_amount)</COL>
+					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">sum(tax_amount)</COL>
 				</ROW>
 			</FIELDS>
 		</GROUP>

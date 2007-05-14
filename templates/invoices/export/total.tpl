@@ -13,7 +13,7 @@
 	{*foreach from=$invoiceItems item=invoiceItem*}
 
 			                <tr class="tbl1-left tbl1-right">
-                        <td class="tbl1-left tbl1-right" colspan=6>{$invoiceItems[0].inv_it_description}</td>
+                        <td class="tbl1-left tbl1-right" colspan=6>{$invoiceItems[0].description}</td>
                 </tr>
                 <tr class="tbl1-left tbl1-right">
                         <td colspan=6 class="tbl1-left tbl1-right"><br></td>

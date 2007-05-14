@@ -71,7 +71,7 @@ INSERT INTO `si_invoices` (`id`, `biller_id`, `customer_id`, `type_id`, `prefere
 -- Daten fuer Tabelle `si_invoice_items`
 -- 
 
-INSERT INTO `si_invoice_items` (`inv_it_id`, `inv_it_invoice_id`, `inv_it_quantity`, `inv_it_product_id`, `inv_it_unit_price`, `inv_it_tax_id`, `inv_it_tax`, `inv_it_tax_amount`, `inv_it_gross_total`, `inv_it_description`, `inv_it_total`) VALUES 
+INSERT INTO `si_invoice_items` (`id`, `invoice_id`, `quantity`, `product_id`, `unit_price`, `tax_id`, `tax`, `tax_amount`, `gross_total`, `description`, `total`) VALUES 
 (1, 1, 1, 1, 150.00, '1', 10.00, 15.00, 150.00, '00', 165.00),
 (2, 1, 2, 3, 125.00, '1', 10.00, 25.00, 250.00, '00', 275.00),
 (3, 2, 1, 0, 0.00, '3', 10.00, 14.50, 145.00, 'For ploughing services for the period 01 Jan - 01 Feb 2006', 159.50),

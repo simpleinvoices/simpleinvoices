@@ -257,7 +257,7 @@ function getInvoice($id) {
 
 	
 	#invoice total tax
-	$sql ="SELECT SUM(inv_it_tax_amount) AS total_tax, SUM(inv_it_total) AS total FROM {$tb_prefix}invoice_items WHERE inv_it_invoice_id =$id";
+	$sql ="SELECT SUM(tax_amount) AS total_tax, SUM(total) AS total FROM {$tb_prefix}invoice_items WHERE invoice_id =$id";
 	$query = mysql_query($sql) or die(mysql_error());
 	$result = mysql_fetch_array($query);
 	//$invoice['total'] = number_format($result['total'],2);
@@ -268,20 +268,20 @@ function getInvoice($id) {
 
 function getInvoiceItems($id) {
 	global $tb_prefix;
-	$sql = "SELECT * FROM {$tb_prefix}invoice_items WHERE  inv_it_invoice_id =$id";
+	$sql = "SELECT * FROM {$tb_prefix}invoice_items WHERE  invoice_id =$id";
 	$query = mysql_query($sql);
 	
 	$invoiceItems = null;
 	
 	for($i=0;$invoiceItem = mysql_fetch_array($query);$i++) {
 	
-		$invoiceItem['inv_it_quantity_formatted'] = number_format($invoiceItem['inv_it_quantity'],2);
-		$invoiceItem['inv_it_unit_price'] = number_format($invoiceItem['inv_it_unit_price'],2);
-		$invoiceItem['inv_it_tax_amount'] = number_format($invoiceItem['inv_it_tax_amount'],2);
-		$invoiceItem['inv_it_gross_total'] = number_format($invoiceItem['inv_it_gross_total'],2);
-		$invoiceItem['inv_it_total'] = number_format($invoiceItem['inv_it_total'],2);
+		$invoiceItem['quantity_formatted'] = number_format($invoiceItem['quantity'],2);
+		$invoiceItem['unit_price'] = number_format($invoiceItem['unit_price'],2);
+		$invoiceItem['tax_amount'] = number_format($invoiceItem['tax_amount'],2);
+		$invoiceItem['gross_total'] = number_format($invoiceItem['gross_total'],2);
+		$invoiceItem['total'] = number_format($invoiceItem['total'],2);
 		
-		$sql = "SELECT * FROM {$tb_prefix}products WHERE id = {$invoiceItem['inv_it_product_id']}";
+		$sql = "SELECT * FROM {$tb_prefix}products WHERE id = {$invoiceItem['product_id']}";
 		$query2 = mysql_query($sql) or die(mysql_error());
 		$invoiceItem['product'] = mysql_fetch_array($query2);	
 		

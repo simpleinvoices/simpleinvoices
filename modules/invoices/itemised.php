@@ -345,7 +345,7 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,
         <td colspan=2><textarea input type=text name="invoice_itemised_note" rows=5 cols=70 WRAP=nowrap></textarea></td>
 </tr>
 
-<tr><td class="details_screen"><?php echo $LANG['tax'];?></td><td input type=text name="inv_it_tax" size=15> <?php echo $display_block_tax; ?></td>
+<tr><td class="details_screen"><?php echo $LANG['tax'];?></td><td input type=text name="tax" size=15> <?php echo $display_block_tax; ?></td>
 </tr>
 
 <tr>

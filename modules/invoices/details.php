@@ -34,21 +34,21 @@ while ($Array_master_invoice = mysql_fetch_array($result_print_master_invoice_id
 
 #get all the details from the invoice_items table for this invoice
 #items invoice id select
-$print_master_invoice_items = "SELECT * FROM {$tb_prefix}invoice_items WHERE  inv_it_invoice_id =$master_invoice_id";
+$print_master_invoice_items = "SELECT * FROM {$tb_prefix}invoice_items WHERE  invoice_id =$master_invoice_id";
 $result_print_master_invoice_items = mysql_query($print_master_invoice_items, $conn) or die(mysql_error());
 
 while ($Array_master_invoice_items = mysql_fetch_array($result_print_master_invoice_items)) {
-	$inv_it_idField = $Array_master_invoice_items['inv_it_id'];
-        $inv_it_invoice_idField = $Array_master_invoice_items['inv_it_invoice_id'];
-        $inv_it_quantityField = $Array_master_invoice_items['inv_it_quantity'];
-        $inv_it_product_idField = $Array_master_invoice_items['inv_it_product_id'];
-        $inv_it_unit_priceField = $Array_master_invoice_items['inv_it_unit_price'];
-        $inv_it_tax_idField = $Array_master_invoice_items['inv_it_tax_id'];
-        $inv_it_taxField = $Array_master_invoice_items['inv_it_tax'];
-        $inv_it_tax_amountField = $Array_master_invoice_items['inv_it_tax_amount'];
-        $inv_it_gross_totalField = $Array_master_invoice_items['inv_it_gross_total'];
-        $inv_it_descriptionField = $Array_master_invoice_items['inv_it_description'];
-        $inv_it_totalField = $Array_master_invoice_items['inv_it_total'];
+	$inv_it_idField = $Array_master_invoice_items['id'];
+        $inv_it_invoice_idField = $Array_master_invoice_items['invoice_id'];
+        $inv_it_quantityField = $Array_master_invoice_items['quantity'];
+        $inv_it_product_idField = $Array_master_invoice_items['product_id'];
+        $inv_it_unit_priceField = $Array_master_invoice_items['unit_price'];
+        $inv_it_tax_idField = $Array_master_invoice_items['tax_id'];
+        $inv_it_taxField = $Array_master_invoice_items['tax'];
+        $inv_it_tax_amountField = $Array_master_invoice_items['tax_amount'];
+        $inv_it_gross_totalField = $Array_master_invoice_items['gross_total'];
+        $inv_it_descriptionField = $Array_master_invoice_items['description'];
+        $inv_it_totalField = $Array_master_invoice_items['total'];
 };
 
 
@@ -265,21 +265,21 @@ if (  $_GET['invoice_style'] === 'Total' ) {
 
 	#get all the details for the total style
 	#items invoice id select
-	$print_master_invoice_items = "SELECT * FROM {$tb_prefix}invoice_items WHERE  inv_it_invoice_id =$master_invoice_id";
+	$print_master_invoice_items = "SELECT * FROM {$tb_prefix}invoice_items WHERE  invoice_id =$master_invoice_id";
 	$result_print_master_invoice_items = mysql_query($print_master_invoice_items, $conn) or die(mysql_error());
 
 
 	while ($Array_master_invoice_items = mysql_fetch_array($result_print_master_invoice_items)) {
-                $inv_it_idField = $Array_master_invoice_items['inv_it_id'];
-                $inv_it_invoice_idField = $Array_master_invoice_items['inv_it_invoice_id'];
-                $inv_it_quantityField = $Array_master_invoice_items['inv_it_quantity'];
-                $inv_it_product_idField = $Array_master_invoice_items['inv_it_product_id'];
-                $inv_it_unit_priceField = $Array_master_invoice_items['inv_it_unit_price'];
-                $inv_it_taxField = $Array_master_invoice_items['inv_it_tax'];
-                $inv_it_tax_amountField = $Array_master_invoice_items['inv_it_tax_amount'];
-                $inv_it_gross_totalField = $Array_master_invoice_items['inv_it_gross_total'];
-                $inv_it_descriptionField = $Array_master_invoice_items['inv_it_description'];
-                $inv_it_totalField = $Array_master_invoice_items['inv_it_total'];
+                $inv_it_idField = $Array_master_invoice_items['id'];
+                $inv_it_invoice_idField = $Array_master_invoice_items['invoice_id'];
+                $inv_it_quantityField = $Array_master_invoice_items['quantity'];
+                $inv_it_product_idField = $Array_master_invoice_items['product_id'];
+                $inv_it_unit_priceField = $Array_master_invoice_items['unit_price'];
+                $inv_it_taxField = $Array_master_invoice_items['tax'];
+                $inv_it_tax_amountField = $Array_master_invoice_items['tax_amount'];
+                $inv_it_gross_totalField = $Array_master_invoice_items['gross_total'];
+                $inv_it_descriptionField = $Array_master_invoice_items['description'];
+                $inv_it_totalField = $Array_master_invoice_items['total'];
 
 	};
 	
@@ -297,7 +297,7 @@ if (  $_GET['invoice_style'] === 'Total' ) {
 	};
 
 	#invoice_total total query
-	$print_invoice_total_total ="select sum(inv_it_total) as total from {$tb_prefix}invoice_items where inv_it_invoice_id =$master_invoice_id"; 
+	$print_invoice_total_total ="select sum(total) as total from {$tb_prefix}invoice_items where invoice_id =$master_invoice_id"; 
 	$result_print_invoice_total_total = mysql_query($print_invoice_total_total, $conn) or die(mysql_error());
 
 
@@ -323,7 +323,7 @@ if (  $_GET['invoice_style'] === 'Total' ) {
 	 $show_custom_field_3
 	 $show_custom_field_4
 	        <tr>       	         
-			<td class='details_screen'>{$LANG['gross_total']}</td><td><input type=text name='inv_it_gross_total' value='$inv_it_gross_totalField' size=10> </td>
+			<td class='details_screen'>{$LANG['gross_total']}</td><td><input type=text name='gross_total' value='$inv_it_gross_totalField' size=10> </td>
 		</tr>
 		<tr>
 		<tr>
@@ -370,21 +370,21 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 
 	#INVOIVE_ITEMS SECTION
 	#items invoice id select
-	$print_master_invoice_items = "SELECT * FROM {$tb_prefix}invoice_items WHERE  inv_it_invoice_id =$master_invoice_id";
+	$print_master_invoice_items = "SELECT * FROM {$tb_prefix}invoice_items WHERE  invoice_id =$master_invoice_id";
 	$result_print_master_invoice_items = mysql_query($print_master_invoice_items, $conn) or die(mysql_error());
 
 
 	while ($Array_master_invoice_items = mysql_fetch_array($result_print_master_invoice_items)) {
-                $inv_it_idField = $Array_master_invoice_items['inv_it_id'];
-                $inv_it_invoice_idField = $Array_master_invoice_items['inv_it_invoice_id'];
-                $inv_it_quantityField = $Array_master_invoice_items['inv_it_quantity'];
-                $inv_it_product_idField = $Array_master_invoice_items['inv_it_product_id'];
-                $inv_it_unit_priceField = $Array_master_invoice_items['inv_it_unit_price'];
-                $inv_it_taxField = $Array_master_invoice_items['inv_it_tax'];
-                $inv_it_tax_amountField = $Array_master_invoice_items['inv_it_tax_amount'];
-                $inv_it_gross_totalField = $Array_master_invoice_items['inv_it_gross_total'];
-                $inv_it_descriptionField = $Array_master_invoice_items['inv_it_description'];
-                $inv_it_totalField = $Array_master_invoice_items['inv_it_total'];
+                $inv_it_idField = $Array_master_invoice_items['id'];
+                $inv_it_invoice_idField = $Array_master_invoice_items['invoice_id'];
+                $inv_it_quantityField = $Array_master_invoice_items['quantity'];
+                $inv_it_product_idField = $Array_master_invoice_items['product_id'];
+                $inv_it_unit_priceField = $Array_master_invoice_items['unit_price'];
+                $inv_it_taxField = $Array_master_invoice_items['tax'];
+                $inv_it_tax_amountField = $Array_master_invoice_items['tax_amount'];
+                $inv_it_gross_totalField = $Array_master_invoice_items['gross_total'];
+                $inv_it_descriptionField = $Array_master_invoice_items['description'];
+                $inv_it_totalField = $Array_master_invoice_items['total'];
 	/*
 	};
 	*/
@@ -432,7 +432,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 		
 		$display_block_details .=  "
 	        <tr>
-			<td><input type=text name='i_quantity$line' value='$inv_it_quantityField' size=10><input type=hidden text name='inv_it_id$line' value='$inv_it_idField' size=10> </td>
+			<td><input type=text name='i_quantity$line' value='$inv_it_quantityField' size=10><input type=hidden text name='id$line' value='$inv_it_idField' size=10> </td>
 			
 	                <td input type=text name='i_description$line' size=50>$display_block_products</td>
 	        </tr>
@@ -447,7 +447,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 
 	        $display_block_details .=  "
         	<tr>
-                        <td><input type=text name='i_quantity$line' value='$inv_it_quantityField' size=10><input type=hidden text name='inv_it_id$line' value='$inv_it_idField' size=10> </td>
+                        <td><input type=text name='i_quantity$line' value='$inv_it_quantityField' size=10><input type=hidden text name='id$line' value='$inv_it_idField' size=10> </td>
 
                         <td input type=text name='i_description$line' size=50>$display_block_products</td>
         	</tr> 

@@ -93,7 +93,7 @@ checkLogin();	//TODO: Really needed in .tpl files? I don't think so
 </tr>
 
 <tr>
-	<td class="details_screen">$LANG[tax]</td><td input type=text name="inv_it_tax" size=15>$display_block_tax</td>
+	<td class="details_screen">$LANG[tax]</td><td input type=text name="tax" size=15>$display_block_tax</td>
 </tr>
 
 <tr>
