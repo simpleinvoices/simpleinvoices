@@ -10,7 +10,7 @@ mysql_select_db( $db_name, $conn );
 $sql = "SELECT * FROM {$tb_prefix}invoices";
 
 
-$result = mysql_query($sql, $conn) or die(mysql_error());
+$result = mysqlQuery($sql, $conn) or die(mysql_error());
 
 
 $q = strtolower($_GET["q"]);

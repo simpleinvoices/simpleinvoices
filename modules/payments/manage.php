@@ -26,7 +26,7 @@ else {
 	$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.name, {$tb_prefix}biller.name from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.biller_id = {$tb_prefix}biller.id ORDER BY {$tb_prefix}account_payments.id DESC";
 }
 
-$result = mysql_query($sql, $conn) or die(mysql_error());
+$result = mysqlQuery($sql, $conn) or die(mysql_error());
 $number_of_rows = mysql_num_rows($result);
 
 
@@ -81,7 +81,7 @@ EOD;
 
 		#Payment type section
 		$payment_type_description = "select pt_description from {$tb_prefix}payment_types where pt_id = {$ac['ac_payment_type']}";
-		$result_payment_type_description = mysql_query($payment_type_description, $conn) or die(mysql_error());
+		$result_payment_type_description = mysqlQuery($payment_type_description, $conn) or die(mysql_error());
 
 		$pt = mysql_fetch_array($result_payment_type_description);
 

@@ -13,7 +13,7 @@
 	}
 
 	function db_query($oCon,$sSQL) {
-		$oStmt = mysql_query($sSQL,$oCon);
+		$oStmt = mysqlQuery($sSQL,$oCon);
 		return $oStmt;
 	}
 

@@ -52,7 +52,7 @@ class backup_db{
         $oDB         = new database(); 
         $file_handle    = fopen($this->filename,"w"); 
         $query            = "SHOW TABLES"; 
-        $result            = mysql_query($query,$oDB->db_link); 
+        $result            = mysqlQuery($query,$oDB->db_link); 
         while($row = mysql_fetch_array($result)){ 
             $tablename    = $row[0]; 
             $this->_show_create($tablename,$oDB->db_link,$file_handle); 
@@ -70,7 +70,7 @@ class backup_db{
     #------------------------------------------------------------------- 
     function _show_create($tablename,$db_link,$fh){ 
         $query = "SHOW CREATE TABLE `".$tablename."`"; 
-        $result = mysql_query($query,$db_link); 
+        $result = mysqlQuery($query,$db_link); 
         if ($row = mysql_fetch_array($result)) { 
             fwrite($fh,$row[1] . ";\n"); 
             $insert           = $this->_retrieve_data($tablename, $db_link); 
@@ -86,7 +86,7 @@ class backup_db{
     #------------------------------------------------------------------- 
     function _retrieve_data($tablename,$db_link){ 
         $query         = "SHOW COLUMNS FROM `" . $tablename . "`"; 
-        $result        = mysql_query($query,$db_link); 
+        $result        = mysqlQuery($query,$db_link); 
         $i            = 0; 
         while($row = mysql_fetch_array($result)){ 
             $columns[$i][0] = $row[0]; 
@@ -94,7 +94,7 @@ class backup_db{
         } // while 
          
         $query     = "SELECT * FROM `" . $tablename . "`"; 
-        $result = mysql_query($query,$db_link) ; 
+        $result = mysqlQuery($query,$db_link) ; 
         $tmp_query = ""; 
         while($row = mysql_fetch_array($result)){ 
             $tmp_query     .= "INSERT INTO `" . $tablename . "` VALUES("; // create a temporary holder; 

@@ -54,7 +54,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
             FROM si_users
             WHERE user_email = '$userEmail' ";
     
-    $result = mysql_query($sql, $conn) or die('Query failed. ' . mysql_error()); 
+    $result = mysqlQuery($sql, $conn) or die('Query failed. ' . mysql_error()); 
     $credentials = mysql_fetch_array($result);
     $storedPassword=$credentials[user_password];
 
@@ -62,17 +62,17 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 
     if ($ChallengeLife>0) {
         $DeleteOldChallenges = 'DELETE FROM `si_auth_challenges` WHERE `challenges_timestamp` < DATE_SUB(now(),INTERVAL $ChallengeLife Minute)';
-        mysql_query($DeleteOldChallenges, $conn);
+        mysqlQuery($DeleteOldChallenges, $conn);
         $sql = "SELECT *
             FROM si_auth_challenges
             WHERE challenges_key = '$ChallengeKeySubmitted' ";
-        $result = mysql_query($sql, $conn) or die('Query failed. ' . mysql_error()); 
+        $result = mysqlQuery($sql, $conn) or die('Query failed. ' . mysql_error()); 
 #        echo "Found or not the key in DB";
         if (mysql_num_rows($result) >= 1) {
             //Challenge was valid
 #            echo $ChallengeKeySubmitted;
             $DeleteUSEDChallenge = 'DELETE FROM `si_auth_challenges` WHERE `challenges_key` = `$ChallengeKeySubmitted`limit 1';
-            mysql_query($DeleteUSEDChallenge, $conn);
+            mysqlQuery($DeleteUSEDChallenge, $conn);
 #            echo "Deleted Used Key $ChallengeKeySubmitted";
             if($password==hmac_md5($ChallengeKeySubmitted, "$storedPassword")){ 
                 $_SESSION['db_is_logged_in'] = true;
@@ -102,7 +102,7 @@ if($ChallengeLife>0) {
 #    $Challenge_Key=1;
     $conn = mysql_connect( $db_host, $db_user, $db_password);
      mysql_select_db( $db_name, $conn);
-     mysql_query("INSERT INTO si_auth_challenges (challenges_key) VALUES ($Challenge_Key)",$conn);
+     mysqlQuery("INSERT INTO si_auth_challenges (challenges_key) VALUES ($Challenge_Key)",$conn);
 }
 
 ?>

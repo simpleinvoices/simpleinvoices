@@ -30,7 +30,7 @@ $sql = "INSERT into
 			'$_POST[pref_enabled]'
 		 )";
 
-if (mysql_query($sql, $conn)) {
+if (mysqlQuery($sql, $conn)) {
 	$display_block = $LANG['save_preference_success'];
 } else {
 	$display_block =  $LANG['save_preference_failure'];
@@ -64,7 +64,7 @@ else if (  $op === 'edit_preference' ) {
 			WHERE
 				pref_id = '$_GET[submit]'";
 
-		if (mysql_query($sql, $conn)) {
+		if (mysqlQuery($sql, $conn)) {
 			$display_block = $LANG['save_preference_success'];
 		} else {
 			$display_block = $LANG['save_preference_failure'];

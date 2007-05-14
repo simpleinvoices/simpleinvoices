@@ -13,7 +13,7 @@ function getNumberOfPatches() {
 	
 
 	$check_patches_sql = "SELECT count(sql_patch) AS count FROM {$tb_prefix}sql_patchmanager ";
-	$patches_result = mysql_query($check_patches_sql) or die(mysql_error());
+	$patches_result = mysqlQuery($check_patches_sql) or die(mysql_error());
 		
 	$patches = mysql_fetch_array($patches_result);
 	$patch_count = count($patch);
@@ -28,7 +28,7 @@ function runPatches() {
 	global $patch;
 	#DEFINE SQL PATCH
 	
-	if(mysql_num_rows(mysql_query("SHOW TABLES LIKE '{$tb_prefix}sql_patchmanager'")) == 1) {
+	if(mysql_num_rows(mysqlQuery("SHOW TABLES LIKE '{$tb_prefix}sql_patchmanager'")) == 1) {
 
 		$display_block = "<table align='center'>";
 
@@ -70,7 +70,7 @@ function listPatches() {
 	global $tb_prefix;
 	global $patch;
 
-	//if(mysql_num_rows(mysql_query("SHOW TABLES LIKE '{$tb_prefix}sql_patchmanager'")) == 1) {
+	//if(mysql_num_rows(mysqlQuery("SHOW TABLES LIKE '{$tb_prefix}sql_patchmanager'")) == 1) {
 
 		$display_block = <<<EOD
 		<b>Simple Invoices :: Database Upgrade Manager</b><br /><br />
@@ -116,7 +116,7 @@ function check_sql_patch($check_sql_patch_ref, $check_sql_patch_field) {
     global $tb_prefix;
 	$sql = "SELECT * FROM {$tb_prefix}sql_patchmanager WHERE sql_patch_ref = $check_sql_patch_ref" ;
 
-	$query = mysql_query($sql) or die(mysql_error());
+	$query = mysqlQuery($sql) or die(mysql_error());
 
 	if(mysql_num_rows($query) > 0) {
 		return true;
@@ -133,7 +133,7 @@ function run_sql_patch($id, $patch) {
 	global $tb_prefix;
 
 	$sql = "SELECT * FROM {$tb_prefix}sql_patchmanager WHERE sql_patch_ref = $id" ;
-	$query = mysql_query($sql) or die(mysql_error());
+	$query = mysqlQuery($sql) or die(mysql_error());
 	
 	//echo $sql;
 	#forget about it!! the patch as its already been run
@@ -147,7 +147,7 @@ EOD;
 	else {
 		//patch hasn't been run
 		#so do the bloody patch
-		mysql_query($patch['patch']) or die(mysql_error());
+		mysqlQuery($patch['patch']) or die(mysql_error());
 		
 
 		$display_block  = <<<EOD
@@ -160,7 +160,7 @@ EOD;
 		
 		/*echo $sql_update;*/
 
-		mysql_query($sql_update) or die(mysql_error());
+		mysqlQuery($sql_update) or die(mysql_error());
 
 		$display_block .= "<tr><td>SQL patch $id, $patch[name] <b>has</b> been applied</td></tr>";
 	}
@@ -174,7 +174,7 @@ function initialise_sql_patch() {
 
 	#check sql patch 1
 	$sql_patch_init = "CREATE TABLE {$tb_prefix}sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 50 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) TYPE = MYISAM ";
-	mysql_query($sql_patch_init) or die(mysql_error());
+	mysqlQuery($sql_patch_init) or die(mysql_error());
 
 	$display_block = "<tr><td>Step 2 - The SQL patch table has been created<br></td></tr>";
 
@@ -183,7 +183,7 @@ function initialise_sql_patch() {
 	$sql_insert = "INSERT INTO {$tb_prefix}sql_patchmanager
  ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement )
 VALUES ('','1','Create {$tb_prefix}sql_patchmanger table','20060514','$sql_patch_init')";
-	mysql_query($sql_insert, $conn) or die(mysql_error());
+	mysqlQuery($sql_insert, $conn) or die(mysql_error());
 
 	$display_block2 = "<tr><td>Step 3 - The SQL patch has been inserted into the SQL patch table<br></td></tr>";
 	

@@ -8,7 +8,7 @@ checkLogin();
 
 #get max invoice id for validataion - start
 $sql_max = "SELECT max(id) as max_id FROM {$tb_prefix}invoices";
-$result_max = mysql_query($sql_max, $conn) or die(mysql_error());
+$result_max = mysqlQuery($sql_max, $conn) or die(mysql_error());
 
 while ($max_invoice = mysql_fetch_array($result_max) ) {
 	/*
@@ -40,7 +40,7 @@ if (!empty($master_invoice_id)) {
 elseif (empty($master_invoice_id)) {
 	$print_master_invoice_id = "SELECT * FROM {$tb_prefix}invoices";
 }
-$result_print_master_invoice_id  = mysql_query($print_master_invoice_id , $conn) or die(mysql_error());
+$result_print_master_invoice_id  = mysqlQuery($print_master_invoice_id , $conn) or die(mysql_error());
 
 $inv = mysql_fetch_array($result_print_master_invoice_id);
 
@@ -51,7 +51,7 @@ $pt = getPaymentType($defaults['payment_type']);
 
 
 $sql = "SELECT * FROM {$tb_prefix}payment_types where pt_enabled != 0 ORDER BY pt_description";
-$result = mysql_query($sql) or die(mysql_error());
+$result = mysqlQuery($sql) or die(mysql_error());
 
 
 if (mysql_num_rows($result) == 0) {

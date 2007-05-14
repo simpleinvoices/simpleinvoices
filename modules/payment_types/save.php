@@ -26,7 +26,7 @@ $sql = "INSERT into
 			'$_POST[pt_enabled]'
 		)";
 
-if (mysql_query($sql, $conn)) {
+if (mysqlQuery($sql, $conn)) {
 	$display_block = $LANG['save_payment_type_success'];
 } else {
 	$display_block =  $LANG['save_payment_type_failure'];
@@ -55,7 +55,7 @@ else if (  $op === 'edit_payment_type' ) {
 			WHERE
 				pt_id = " . $_GET['submit'];
 
-		if (mysql_query($sql, $conn)) {
+		if (mysqlQuery($sql, $conn)) {
 			$display_block = $LANG['save_payment_type_success'];
 		} else {
 			$display_block =  $LANG['save_payment_type_failure'];

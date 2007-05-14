@@ -27,7 +27,7 @@ $sql = "INSERT into
 			'$_POST[tax_enabled]'
 		)";
 
-if (mysql_query($sql, $conn)) {
+if (mysqlQuery($sql, $conn)) {
 	$display_block = $LANG['save_tax_rate_success'];
 } else {
 	$display_block = $LANG['save_tax_rate_failure'];
@@ -56,7 +56,7 @@ mysql_select_db("$db_name",$conn);
 			WHERE
 				tax_id = " . $_GET['submit'];
 
-		if (mysql_query($sql, $conn)) {
+		if (mysqlQuery($sql, $conn)) {
 			$display_block = $LANG['save_tax_rate_success'];
 		} else {
 			$display_block = $LANG['save_tax_rate_failure'];

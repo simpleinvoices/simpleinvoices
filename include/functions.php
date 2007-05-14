@@ -66,7 +66,7 @@ function get_custom_field_label($field)         {
 
 
     $sql =  "SELECT cf_custom_label FROM {$tb_prefix}custom_fields WHERE cf_custom_field = '$field'";
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysqlQuery($sql) or die(mysql_error());
 
     $cf = mysql_fetch_array($result);
 
@@ -93,7 +93,7 @@ function get_custom_field_label($field)         {
 	global $tb_prefix;
 	
 	$sql = "SELECT cf_custom_label FROM {$tb_prefix}custom_fields WHERE cf_custom_field LIKE '".$type."_cf_'";
-	$result = mysql_query($sql) or die(mysql_error());
+	$result = mysqlQuery($sql) or die(mysql_error());
 	
 	for($i=1;$row = mysql_fetch_row($result);$i++) {
 		$cf[$i]=$row[0];
@@ -163,7 +163,7 @@ function calc_invoice_total($inv_idField) {
 
 #invoice total total - start
 $print_invoice_total ="SELECT sum(total) AS total FROM {$tb_prefix}invoice_items WHERE invoice_id =$inv_idField";
-	$result_print_invoice_total = mysql_query($print_invoice_total, $conn) or die(mysql_error());
+	$result_print_invoice_total = mysqlQuery($print_invoice_total, $conn) or die(mysql_error());
 
 	while ($Array = mysql_fetch_array($result_print_invoice_total)) {
                 $invoice_total_Field = $Array['total'];
@@ -185,7 +185,7 @@ function calc_invoice_paid($inv_idField) {
 
 #amount paid calc - start
 $x1 = "SELECT IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) AS amount FROM {$tb_prefix}account_payments WHERE ac_inv_id = $inv_idField";
-	$result_x1 = mysql_query($x1, $conn) or die(mysql_error());
+	$result_x1 = mysqlQuery($x1, $conn) or die(mysql_error());
 	while ($result_x1Array = mysql_fetch_array($result_x1)) {
 		$invoice_paid_Field = $result_x1Array['amount'];
 		$invoice_paid_Field_format = number_format($result_x1Array['amount'],2);
@@ -216,7 +216,7 @@ function calc_customer_total($c_idField) {
 		AND 
 			{$tb_prefix}invoices.id = {$tb_prefix}invoice_items.invoice_id
 		";
-        $result_print_invoice_total_customer = mysql_query($print_invoice_total_customer, $conn) or die(mysql_error());
+        $result_print_invoice_total_customer = mysqlQuery($print_invoice_total_customer, $conn) or die(mysql_error());
 
         while ($Array_customer = mysql_fetch_array($result_print_invoice_total_customer)) {
                 $invoice_total_Field_customer = $Array_customer['total'];
@@ -247,7 +247,7 @@ function calc_customer_paid($c_idField) {
 		AND 
 			{$tb_prefix}invoices.customer_id = $c_idField";  	
 
-        $result_x2 = mysql_query($x2, $conn) or die(mysql_error());
+        $result_x2 = mysqlQuery($x2, $conn) or die(mysql_error());
         while ($result_x2Array = mysql_fetch_array($result_x2)) {
                 $invoice_paid_Field_customer = $result_x2Array['amount'];
 	}
@@ -276,7 +276,7 @@ function calc_invoice_tax($master_invoice_id) {
 
 	#invoice total tax
 	$print_invoice_total_tax ="select sum(tax_amount) as total_tax from {$tb_prefix}invoice_items where invoice_id =$master_invoice_id";
-	$result_print_invoice_total_tax = mysql_query($print_invoice_total_tax, $conn) or die(mysql_error());
+	$result_print_invoice_total_tax = mysqlQuery($print_invoice_total_tax, $conn) or die(mysql_error());
 
 	while ($Array_tax = mysql_fetch_array($result_print_invoice_total_tax)) {
                 $invoice_total_taxField = $Array_tax['total_tax'];
@@ -317,7 +317,7 @@ function show_custom_field($custom_field,$custom_field_value,$permission,$css_cl
 	$display_block = "";
 
     $get_custom_label ="SELECT cf_custom_label FROM {$tb_prefix}custom_fields WHERE cf_custom_field = '$custom_field'";
-	$result_get_custom_label = mysql_query($get_custom_label) or die(mysql_error());
+	$result_get_custom_label = mysqlQuery($get_custom_label) or die(mysql_error());
 
 	while ($Array_cl = mysql_fetch_array($result_get_custom_label)) {
                 $has_custom_label_value = $Array_cl['cf_custom_label'];

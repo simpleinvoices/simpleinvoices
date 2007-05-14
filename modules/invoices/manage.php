@@ -12,7 +12,7 @@ EOD;*/
 
 $sql = "SELECT * FROM {$tb_prefix}invoices ORDER BY id desc";
 
-$result = mysql_query($sql) or die(mysql_error());
+$result = mysqlQuery($sql) or die(mysql_error());
 
 
 $invoices = null;

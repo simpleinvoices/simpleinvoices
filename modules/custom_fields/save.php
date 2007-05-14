@@ -22,7 +22,7 @@ if (  $op === 'edit_custom_field' ) {
                         WHERE
                                 cf_id = $_GET[submit]";
 
-		if (mysql_query($sql, $conn)) {
+		if (mysqlQuery($sql, $conn)) {
 			$display_block =  $LANG['save_custom_field_success'];
 		} else {
 			$display_block =  $LANG['save_custom_field_success'];

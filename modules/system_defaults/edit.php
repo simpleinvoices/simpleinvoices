@@ -78,7 +78,7 @@ EOD;
 
 	/*$default = "def_inv_template";
 	$def_inv_template = "select def_inv_template from {$tb_prefix}defaults where def_id=1";
-	$result_def_inv_template = mysql_query($def_inv_template, $conn) or die(mysql_error());
+	$result_def_inv_template = mysqlQuery($def_inv_template, $conn) or die(mysql_error());
 
 	while ($Array = mysql_fetch_array($result_def_inv_template) ) {
 		$def_inv_templateField = $Array['def_inv_template'];*/
@@ -110,7 +110,7 @@ else if ($_GET[submit] == "biller") {
 
 	#biller query
 	$sql = "SELECT * FROM {$tb_prefix}biller WHERE enabled  ORDER BY name";
-	$query = mysql_query($sql) or die(mysql_error());
+	$query = mysqlQuery($sql) or die(mysql_error());
 
 	#biller selector
 
@@ -156,7 +156,7 @@ else if ($_GET[submit] == "customer") {
 
 	#customer
 	$sql_customer = "SELECT * FROM {$tb_prefix}customers where enabled != 0 ORDER BY name";
-	$result_customer = mysql_query($sql_customer, $conn) or die(mysql_error());
+	$result_customer = mysqlQuery($sql_customer, $conn) or die(mysql_error());
 
 
 	#customer selector
@@ -206,7 +206,7 @@ else if ($_GET['submit'] == "tax") {
 	$default = "tax";
 	#tax query
 	$print_tax = "SELECT * FROM {$tb_prefix}tax WHERE tax_id = $defaults[tax]";
-	$result_print_tax = mysql_query($print_tax, $conn) or die(mysql_error());
+	$result_print_tax = mysqlQuery($print_tax, $conn) or die(mysql_error());
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_tax)) {
@@ -217,7 +217,7 @@ else if ($_GET['submit'] == "tax") {
 
 	#tax query
 	$sql_tax = "SELECT * FROM {$tb_prefix}tax where tax_enabled != 0 ORDER BY tax_description";
-	$result_tax = mysql_query($sql_tax, $conn) or die(mysql_error());
+	$result_tax = mysqlQuery($sql_tax, $conn) or die(mysql_error());
 
 
 	#tax selector
@@ -263,7 +263,7 @@ else if ($_GET[submit] == "preference_id") {
 
 	#invoice preference query
 	$print_inv_preference = "SELECT * FROM {$tb_prefix}preferences WHERE pref_id = $defaults[invoice]";
-	$result_inv_preference = mysql_query($print_inv_preference, $conn) or die(mysql_error());
+	$result_inv_preference = mysqlQuery($print_inv_preference, $conn) or die(mysql_error());
 
 
 	while ($Array_inv_preference = mysql_fetch_array($result_inv_preference)) {
@@ -274,7 +274,7 @@ else if ($_GET[submit] == "preference_id") {
 
 	#invoice preference query
 	$sql_preferences = "SELECT * FROM {$tb_prefix}preferences where pref_enabled != 0 ORDER BY pref_description";
-	$result_preferences = mysql_query($sql_preferences, $conn) or die(mysql_error());
+	$result_preferences = mysqlQuery($sql_preferences, $conn) or die(mysql_error());
 
 
 	#invoice_preference selector
@@ -322,7 +322,7 @@ else if ($_GET[submit] == "def_payment_type") {
 
 	#payment type query
 	$print_payment_type = "SELECT * FROM {$tb_prefix}payment_types WHERE pt_id = $defaults[payment_type]";
-	$result_print_payment_type = mysql_query($print_payment_type, $conn) or die(mysql_error());
+	$result_print_payment_type = mysqlQuery($print_payment_type, $conn) or die(mysql_error());
 
 
 	while ($Array_payment_type = mysql_fetch_array($result_print_payment_type)) {
@@ -333,7 +333,7 @@ else if ($_GET[submit] == "def_payment_type") {
 
 	#payment type query
 	$sql_payment_type = "SELECT * FROM {$tb_prefix}payment_types where pt_enabled != 0 ORDER BY pt_description";
-	$result_payment_type = mysql_query($sql_payment_type, $conn) or die(mysql_error());
+	$result_payment_type = mysqlQuery($sql_payment_type, $conn) or die(mysql_error());
 
 
 	#payment type selector

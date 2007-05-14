@@ -20,29 +20,29 @@ jsEnd();
 
 #biller query
 $sql = "SELECT * FROM {$tb_prefix}biller where enabled != 0 ORDER BY name";
-$result = mysql_query($sql, $conn) or die(mysql_error());
+$result = mysqlQuery($sql, $conn) or die(mysql_error());
 
 #customer
 $sql_customer = "SELECT * FROM {$tb_prefix}customers where enabled != 0 ORDER BY name";
-$result_customer = mysql_query($sql_customer, $conn) or die(mysql_error());
+$result_customer = mysqlQuery($sql_customer, $conn) or die(mysql_error());
 
 #productr query
 $sql_products = "SELECT * FROM {$tb_prefix}products where enabled != 0 ORDER BY description";
-$result_products = mysql_query($sql_products, $conn) or die(mysql_error());
+$result_products = mysqlQuery($sql_products, $conn) or die(mysql_error());
 
 
 #tax query
 $sql_tax = "SELECT * FROM {$tb_prefix}tax ORDER BY tax_description" ;
-$result_tax = mysql_query($sql_tax, $conn) or die(mysql_error());
+$result_tax = mysqlQuery($sql_tax, $conn) or die(mysql_error());
 
 #invoice preference query
 $sql_preferences = "SELECT * FROM {$tb_prefix}preferences where pref_enabled != 0 ORDER BY pref_description";
-$result_preferences = mysql_query($sql_preferences, $conn) or die(mysql_error());
+$result_preferences = mysqlQuery($sql_preferences, $conn) or die(mysql_error());
 
 
 #defaults query and DEFAULT NUMBER OF LINE ITEMS
 /*$sql_defaults = "SELECT * FROM {$tb_prefix}defaults";
-$result_defaults = mysql_query($sql_defaults, $conn) or die(mysql_error());
+$result_defaults = mysqlQuery($sql_defaults, $conn) or die(mysql_error());
 
 while ($Array_defaults = mysql_fetch_array($result_defaults) ) {
                 $def_idField = $Array_defaults['def_id'];
@@ -58,7 +58,7 @@ $defaults = getSystemDefaults();
 #Get the names of the defaults from their id -start
 #default biller name query
 $sql_biller_default = "SELECT name FROM {$tb_prefix}biller where id = $defaults[biller] and enabled != 0";
-$result_biller_default = mysql_query($sql_biller_default , $conn) or die(mysql_error());
+$result_biller_default = mysqlQuery($sql_biller_default , $conn) or die(mysql_error());
 
 while ($Array = mysql_fetch_array($result_biller_default) ) {
                 $sql_biller_defaultField = $Array['name'];
@@ -66,7 +66,7 @@ while ($Array = mysql_fetch_array($result_biller_default) ) {
 
 #default customer name query
 $print_customer = "SELECT * FROM {$tb_prefix}customers WHERE id = $defaults[customer] and enabled != 0";
-$result_print_customer = mysql_query($print_customer, $conn) or die(mysql_error());
+$result_print_customer = mysqlQuery($print_customer, $conn) or die(mysql_error());
 
 while ($Array_customer = mysql_fetch_array($result_print_customer)) {
        $c_nameField = $Array_customer['name'];
@@ -74,7 +74,7 @@ while ($Array_customer = mysql_fetch_array($result_print_customer)) {
 
 #default tax description query
 $print_tax = "SELECT * FROM {$tb_prefix}tax WHERE tax_id = $defaults[tax] and tax_enabled != 0";
-$result_print_tax = mysql_query($print_tax, $conn) or die(mysql_error());
+$result_print_tax = mysqlQuery($print_tax, $conn) or die(mysql_error());
 
 while ($Array_tax = mysql_fetch_array($result_print_tax)) {
        $tax_descriptionField = $Array_tax['tax_description'];
@@ -82,7 +82,7 @@ while ($Array_tax = mysql_fetch_array($result_print_tax)) {
 
 #default invoice preference description query
 $print_inv_preference = "SELECT * FROM {$tb_prefix}preferences WHERE pref_id = $defaults[invoice]";
-$result_inv_preference = mysql_query($print_inv_preference, $conn) or die(mysql_error());
+$result_inv_preference = mysqlQuery($print_inv_preference, $conn) or die(mysql_error());
 
 while ($Array_inv_preference = mysql_fetch_array($result_inv_preference)) {
        $pref_descriptionField = $Array_inv_preference['pref_description'];
@@ -150,7 +150,7 @@ function line_items($line) {
         mysql_select_db("$db_name",$conn);
 
         $sql_products = "SELECT * FROM {$tb_prefix}products where enabled != 0 ORDER BY description";
-        $result_products = mysql_query($sql_products, $conn) or die(mysql_error());
+        $result_products = mysqlQuery($sql_products, $conn) or die(mysql_error());
 
 if (mysql_num_rows($result_products) == 0) {
         //no records

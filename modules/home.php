@@ -24,7 +24,7 @@ if ($mysql > 4) {
 	LIMIT 1;
 	";
 
-	$result = mysql_query($sql) or die(mysql_error());
+	$result = mysqlQuery($sql) or die(mysql_error());
 
 	$debtor = mysql_fetch_array($result);
 }
@@ -50,7 +50,7 @@ if ($mysql > 4) {
 	LIMIT 1;
 ";
 
-	$result2 = mysql_query($sql2) or die(mysql_error());
+	$result2 = mysqlQuery($sql2) or die(mysql_error());
 
 	$customer = mysql_fetch_array($result2);
 }
@@ -69,7 +69,7 @@ if ($mysql > 4) {
 		{$tb_prefix}invoices.biller_id = {$tb_prefix}biller.id and {$tb_prefix}invoices.id = {$tb_prefix}invoice_items.invoice_id GROUP BY name ORDER BY Total DESC LIMIT 1;
 	";
 
-	$result3 = mysql_query($sql3) or die(mysql_error());
+	$result3 = mysqlQuery($sql3) or die(mysql_error());
 
 	$biller = mysql_fetch_array($result3);
 }

@@ -6,7 +6,7 @@ checkLogin();
 
 $sql = "select * from {$tb_prefix}custom_fields ORDER BY cf_custom_field";
 
-$result = mysql_query($sql, $conn) or die(mysql_error());
+$result = mysqlQuery($sql, $conn) or die(mysql_error());
 $number_of_rows = mysql_num_rows($result);
 
 $cfs = null;

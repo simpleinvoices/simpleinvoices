@@ -28,7 +28,7 @@ foreach($file_content as $sql_line) {
 	if (($sql_line != "") && (substr($tsl, 0, 2) != "--") && (substr($tsl, 0, 1) != "#")) {
 		$query .= $sql_line;
 		if(preg_match("/;\s*$/", $sql_line)) {
-			$result = mysql_query($query);
+			$result = mysqlQuery($query);
 		if (!$result && !$ignoreerrors) die(mysql_error());
 			$query = "";
 			}

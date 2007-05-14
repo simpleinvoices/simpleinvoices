@@ -43,7 +43,7 @@ if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_inv
 			'$_POST[i_custom_field4]'
 			)";
 
-	if (mysql_query($sql)) {
+	if (mysqlQuery($sql)) {
 		$display_block = $LANG['save_invoice_success'];
 	} else {
 		$display_block = $LANG['save_invoice_failure'];
@@ -55,7 +55,7 @@ if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_inv
 
 	#tax percentage query
 	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
-	$result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
+	$result_print_tax_percentage = mysqlQuery($print_tax_percentage, $conn) or die(mysql_error());
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
@@ -89,7 +89,7 @@ if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_inv
 			";
 
 
-	if (mysql_query($sql_items)) {
+	if (mysqlQuery($sql_items)) {
 		$display_block_items = $LANG['save_invoice_items_success'];
 	} else { die(mysql_error());
 	}
@@ -119,7 +119,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 		WHERE
 			id = $invoice_id";
 
-	if (mysql_query($sql)) {
+	if (mysqlQuery($sql)) {
 		$display_block = $LANG['save_invoice_success'];
 	} else {
 		$display_block = $LANG['save_invoice_failure'].$sql;
@@ -129,7 +129,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 	
 	#tax percentage query -start
 	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
-	$result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
+	$result_print_tax_percentage = mysqlQuery($print_tax_percentage, $conn) or die(mysql_error());
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
@@ -160,7 +160,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 				invoice_id = $invoice_id";
 
 
-	if (mysql_query($sql_items)) {
+	if (mysqlQuery($sql_items)) {
 		$display_block_items = $LANG['save_invoice_items_success'];
 	} else { die(mysql_error());
 }
@@ -206,7 +206,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 			'$_POST[i_custom_field4]'
 		)";
 
-	if (mysql_query($sql)) {
+	if (mysqlQuery($sql)) {
 		$display_block = $LANG['save_invoice_success'];
 	} else {
 		$display_block = $LANG['save_invoice_failure'];
@@ -218,7 +218,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 
 	#tax percentage query
 	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
-	$result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
+	$result_print_tax_percentage = mysqlQuery($print_tax_percentage, $conn) or die(mysql_error());
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
@@ -230,7 +230,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 /*
 	#product info query
 	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id ='$_POST[select_products]'";
-	$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
+	$result_print_products_info = mysqlQuery($print_products_info , $conn) or die(mysql_error());
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
@@ -259,7 +259,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 			
 
 		$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id =$product_line_item";
-		$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
+		$result_print_products_info = mysqlQuery($print_products_info , $conn) or die(mysql_error());
 
 
 		while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
@@ -280,11 +280,11 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 		$sql_items = "INSERT into {$tb_prefix}invoice_items values ('',$invoice_id,$qty,$product_line_item,$prod_unit_priceField,'$_POST[select_tax]',$tax_percentageField,$total_invoice_tax_amount,$total_invoice_item_gross,'00',$total_invoice_item_total)";
 	
 		/*
-		mysql_query($sql_items);
+		mysqlQuery($sql_items);
 		*/
 
 		
-		if (mysql_query($sql_items)) {
+		if (mysqlQuery($sql_items)) {
 			$display_block_items = $LANG['save_invoice_items_success'];
 		} else { die(mysql_error());
 		}
@@ -324,7 +324,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 		WHERE
 			id = $invoice_id";
 
-	if (mysql_query($sql)) {
+	if (mysqlQuery($sql)) {
 		$display_block = $LANG['save_invoice_success'];
 	} else {
 		$display_block = $LANG['save_invoice_failure'];
@@ -334,7 +334,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 	#$display_block .= "step 2 - 1";
 	#tax percentage query
 	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
-	$result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
+	$result_print_tax_percentage = mysqlQuery($print_tax_percentage, $conn) or die(mysql_error());
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
@@ -346,7 +346,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 /*
 	#product info query
 	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id ='$_POST[select_products]'";
-	$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
+	$result_print_products_info = mysqlQuery($print_products_info , $conn) or die(mysql_error());
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
@@ -380,7 +380,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 		
 
 		$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id =$product_line_item";
-		$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
+		$result_print_products_info = mysqlQuery($print_products_info , $conn) or die(mysql_error());
 		
 		#$display_block .= "step 2 - 5";
 		
@@ -420,7 +420,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 					)";
 
 
-		if (mysql_query($sql_items)) {
+		if (mysqlQuery($sql_items)) {
 			$display_block_items =  $LANG['save_invoice_items_success'];
 		} else { die(mysql_error());
 		}
@@ -477,7 +477,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 			)
 		";
 
-	if (mysql_query($sql)) {
+	if (mysqlQuery($sql)) {
 		$display_block =  $LANG['save_invoice_success'];
 	} else {
 		$display_block = $LANG['save_invoice_failure'];
@@ -489,7 +489,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 
 	#tax percentage query
 	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
-	$result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
+	$result_print_tax_percentage = mysqlQuery($print_tax_percentage, $conn) or die(mysql_error());
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
@@ -501,7 +501,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 /*
 	#product info query
 	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id ='$_POST[select_products]'";
-	$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
+	$result_print_products_info = mysqlQuery($print_products_info , $conn) or die(mysql_error());
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
@@ -530,7 +530,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 		}
 
 		$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id =$product_line_item";
-       		$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
+       		$result_print_products_info = mysqlQuery($print_products_info , $conn) or die(mysql_error());
 
 
 		while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
@@ -551,11 +551,11 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 		$sql_items = "INSERT into {$tb_prefix}invoice_items values ('',$invoice_id,$qty,$product_line_item,$prod_unit_priceField,'$_POST[select_tax]',$tax_percentageField,$total_invoice_tax_amount,$total_invoice_item_gross,'$line_item_description',$total_invoice_item_total)";
 	
 		/*
-		mysql_query($sql_items);
+		mysqlQuery($sql_items);
 		*/
 
 		
-		if (mysql_query($sql_items)) {
+		if (mysqlQuery($sql_items)) {
 			$display_block_items = $LANG['save_invoice_items_success'];
 		} else { die(mysql_error());
 		}
@@ -593,7 +593,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 		WHERE
 			id = $invoice_id";
 
-	if (mysql_query($sql)) {
+	if (mysqlQuery($sql)) {
 		$display_block =  $LANG['save_invoice_success'];
 	} else {
 		$display_block = $LANG['save_invoice_failure'];
@@ -603,7 +603,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 	#$display_block .= "step 2 - 1";
 	#tax percentage query
 	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
-	$result_print_tax_percentage = mysql_query($print_tax_percentage, $conn) or die(mysql_error());
+	$result_print_tax_percentage = mysqlQuery($print_tax_percentage, $conn) or die(mysql_error());
 
 	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
 		$tax_idField = $Array_tax['tax_id'];
@@ -614,7 +614,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 /*
 	#product info query
 	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id ='$_POST[select_products]'";
-	$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
+	$result_print_products_info = mysqlQuery($print_products_info , $conn) or die(mysql_error());
 
 
 	while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
@@ -649,7 +649,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 		}
 
 		$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id =$product_line_item";
-		$result_print_products_info = mysql_query($print_products_info , $conn) or die(mysql_error());
+		$result_print_products_info = mysqlQuery($print_products_info , $conn) or die(mysql_error());
 
 		#$display_block .= "step 2 - 5  <br> $consulting_item_note ";
 
@@ -688,7 +688,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 					)";
 
 
-		if (mysql_query($sql_items)) {
+		if (mysqlQuery($sql_items)) {
 			$display_block_items =  $LANG['save_invoice_items_success'];
 		} else { die(mysql_error());
 		}

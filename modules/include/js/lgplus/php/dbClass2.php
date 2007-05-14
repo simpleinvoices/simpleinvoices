@@ -230,7 +230,7 @@ class dbClass_mysql
   function ErrorMsg() { return mysql_error(); }
   function Close() { return mysql_close($this->conn); }
   function FreeResult($rsLookUp) { return mysql_free_result($rsLookUp); }
-  function RunQuery($sqltext) { return mysql_query($sqltext,$this->conn); }
+  function RunQuery($sqltext) { return mysqlQuery($sqltext,$this->conn); }
   function NumFields($rsMain) { return mysql_num_fields($rsMain); }
   function NumRows($rsMain) { return mysql_num_rows($rsMain); }
   function FieldType($rsMain,$i) { return mysql_field_type($rsMain,$i); }

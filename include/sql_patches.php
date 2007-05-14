@@ -571,6 +571,25 @@ ADD b_co_footer TEXT";
 	$patch['113']['patch'] = "ALTER TABLE `si_invoice_items` CHANGE `inv_it_total` `total` DOUBLE( 25, 2 ) NULL DEFAULT '0.00'";
 	$patch['113']['date'] = "20070507";
 
+	$patch['114']['name'] = "Add logging table";
+	$patch['114']['patch'] = "CREATE TABLE `si_log` (
+`id` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+`userid` INT NOT NULL ,
+`sqlquerie` TEXT NOT NULL
+) ENGINE = MYISAM ;
+";
+	$patch['114']['date'] = "20070514";
+
+	$patch['115']['name'] = "Add logging systempreference";
+	$patch['115']['patch'] = "INSERT INTO `si_systemdefaults` ( `id` , `name` , `value` ) 
+VALUES (
+NULL , 'logging', '0'
+);";
+	$patch['115']['date'] = "20070514";
+
+
+
 
 
 /*

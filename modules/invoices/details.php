@@ -11,7 +11,7 @@ $master_invoice_id = $_GET['submit'];
 
 #Get the invoice details
 $print_master_invoice_id = "SELECT * FROM {$tb_prefix}invoices WHERE id = " . $master_invoice_id ;
-$result_print_master_invoice_id  = mysql_query($print_master_invoice_id , $conn) or die(mysql_error());
+$result_print_master_invoice_id  = mysqlQuery($print_master_invoice_id , $conn) or die(mysql_error());
 
 while ($Array_master_invoice = mysql_fetch_array($result_print_master_invoice_id)) {
                 $inv_idField = $Array_master_invoice['id'];
@@ -35,7 +35,7 @@ while ($Array_master_invoice = mysql_fetch_array($result_print_master_invoice_id
 #get all the details from the invoice_items table for this invoice
 #items invoice id select
 $print_master_invoice_items = "SELECT * FROM {$tb_prefix}invoice_items WHERE  invoice_id =$master_invoice_id";
-$result_print_master_invoice_items = mysql_query($print_master_invoice_items, $conn) or die(mysql_error());
+$result_print_master_invoice_items = mysqlQuery($print_master_invoice_items, $conn) or die(mysql_error());
 
 while ($Array_master_invoice_items = mysql_fetch_array($result_print_master_invoice_items)) {
 	$inv_it_idField = $Array_master_invoice_items['id'];
@@ -60,7 +60,7 @@ while ($Array_master_invoice_items = mysql_fetch_array($result_print_master_invo
 
 #invoice_type query
 $sql_invoice_type = "SELECT inv_ty_description FROM {$tb_prefix}invoice_type WHERE inv_ty_id = " . $inv_typeField;
-$result_invoice_type = mysql_query($sql_invoice_type, $conn) or die(mysql_error());
+$result_invoice_type = mysqlQuery($sql_invoice_type, $conn) or die(mysql_error());
 
 while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
 	$inv_ty_descriptionField = $invoice_typeArray['inv_ty_description'];
@@ -70,11 +70,11 @@ while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
 #CUSTOMER drop down list - start
 	#customer
 	$sql_customer = "SELECT * FROM {$tb_prefix}customers where enabled != 0 ORDER BY name";
-	$result_customer = mysql_query($sql_customer, $conn) or die(mysql_error());
+	$result_customer = mysqlQuery($sql_customer, $conn) or die(mysql_error());
 
 	#selected customer name query
 	$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE id = $inv_customer_idField";
-	$result_print_customer = mysql_query($print_customer, $conn) or die(mysql_error());
+	$result_print_customer = mysqlQuery($print_customer, $conn) or die(mysql_error());
 
 	while ($Array_customer = mysql_fetch_array($result_print_customer)) {
 	       $c_nameField = $Array_customer['name'];
@@ -106,11 +106,11 @@ while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
 #BILLER drop down list -start
 	#biller query
 	$sql_biller = "SELECT * FROM {$tb_prefix}biller where enabled != 0 ORDER BY name";
-	$result_biller = mysql_query($sql_biller, $conn) or die(mysql_error());
+	$result_biller = mysqlQuery($sql_biller, $conn) or die(mysql_error());
 
 	#Get the names of the selected biller -start
 	$sql_biller_default = "SELECT name FROM {$tb_prefix}biller where id = $inv_biller_idField ";
-	$result_biller_default = mysql_query($sql_biller_default , $conn) or die(mysql_error());
+	$result_biller_default = mysqlQuery($sql_biller_default , $conn) or die(mysql_error());
 
 	while ($Array = mysql_fetch_array($result_biller_default) ) {
                 $sql_biller_defaultField = $Array['name'];
@@ -141,11 +141,11 @@ while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
 #TAX drop down list - start
 	#tax query
 	$sql_tax = "SELECT * FROM {$tb_prefix}tax where tax_enabled != 0 ORDER BY tax_description";
-	$result_tax = mysql_query($sql_tax, $conn) or die(mysql_error());
+	$result_tax = mysqlQuery($sql_tax, $conn) or die(mysql_error());
 
 	#default tax description query
 	$print_tax = "SELECT * FROM {$tb_prefix}tax WHERE tax_id = $inv_it_tax_idField";
-	$result_print_tax = mysql_query($print_tax, $conn) or die(mysql_error());
+	$result_print_tax = mysqlQuery($print_tax, $conn) or die(mysql_error());
 
 	while ($Array_tax = mysql_fetch_array($result_print_tax)) {
 	       $tax_descriptionField = $Array_tax['tax_description'];
@@ -175,11 +175,11 @@ while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
 #PREFERENCE drop down list - start
 	#invoice preference query
 	$sql_preferences = "SELECT * FROM {$tb_prefix}preferences where pref_enabled != 0 ORDER BY pref_description";
-	$result_preferences = mysql_query($sql_preferences, $conn) or die(mysql_error());
+	$result_preferences = mysqlQuery($sql_preferences, $conn) or die(mysql_error());
 
 	#default invoice preference description query
 	$print_inv_preference = "SELECT * FROM {$tb_prefix}preferences WHERE pref_id = $inv_preferenceField";
-	$result_inv_preference = mysql_query($print_inv_preference, $conn) or die(mysql_error());
+	$result_inv_preference = mysqlQuery($print_inv_preference, $conn) or die(mysql_error());
 
 	while ($Array_inv_preference = mysql_fetch_array($result_inv_preference)) {
 	       $pref_descriptionField = $Array_inv_preference['pref_description'];
@@ -208,7 +208,7 @@ while ($invoice_typeArray = mysql_fetch_array($result_invoice_type)) {
 
 #preferences query
 $print_preferences = "SELECT * FROM {$tb_prefix}preferences where pref_id = $inv_preferenceField ";
-$result_print_preferences  = mysql_query($print_preferences, $conn) or die(mysql_error());
+$result_print_preferences  = mysqlQuery($print_preferences, $conn) or die(mysql_error());
 
 while ($Array_preferences = mysql_fetch_array($result_print_preferences)) {
                 $pref_descriptionField = $Array_preferences['pref_description'];
@@ -266,7 +266,7 @@ if (  $_GET['invoice_style'] === 'Total' ) {
 	#get all the details for the total style
 	#items invoice id select
 	$print_master_invoice_items = "SELECT * FROM {$tb_prefix}invoice_items WHERE  invoice_id =$master_invoice_id";
-	$result_print_master_invoice_items = mysql_query($print_master_invoice_items, $conn) or die(mysql_error());
+	$result_print_master_invoice_items = mysqlQuery($print_master_invoice_items, $conn) or die(mysql_error());
 
 
 	while ($Array_master_invoice_items = mysql_fetch_array($result_print_master_invoice_items)) {
@@ -286,7 +286,7 @@ if (  $_GET['invoice_style'] === 'Total' ) {
 	/* - might not need - can delete after testing
 	#products query
 	$print_products = "SELECT * FROM {$tb_prefix}products WHERE id = $inv_it_product_idField";
-	$result_print_products = mysql_query($print_products, $conn) or die(mysql_error());
+	$result_print_products = mysqlQuery($print_products, $conn) or die(mysql_error());
 
 
 	while ($Array = mysql_fetch_array($result_print_products)) { 
@@ -298,7 +298,7 @@ if (  $_GET['invoice_style'] === 'Total' ) {
 
 	#invoice_total total query
 	$print_invoice_total_total ="select sum(total) as total from {$tb_prefix}invoice_items where invoice_id =$master_invoice_id"; 
-	$result_print_invoice_total_total = mysql_query($print_invoice_total_total, $conn) or die(mysql_error());
+	$result_print_invoice_total_total = mysqlQuery($print_invoice_total_total, $conn) or die(mysql_error());
 
 
 	while ($Array = mysql_fetch_array($result_print_invoice_total_total)) {
@@ -371,7 +371,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 	#INVOIVE_ITEMS SECTION
 	#items invoice id select
 	$print_master_invoice_items = "SELECT * FROM {$tb_prefix}invoice_items WHERE  invoice_id =$master_invoice_id";
-	$result_print_master_invoice_items = mysql_query($print_master_invoice_items, $conn) or die(mysql_error());
+	$result_print_master_invoice_items = mysqlQuery($print_master_invoice_items, $conn) or die(mysql_error());
 
 
 	while ($Array_master_invoice_items = mysql_fetch_array($result_print_master_invoice_items)) {
@@ -391,7 +391,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 
 	#products query - for the selected product
 	$print_products = "SELECT * FROM {$tb_prefix}products WHERE id = $inv_it_product_idField";
-	$result_print_products = mysql_query($print_products, $conn) or die(mysql_error());
+	$result_print_products = mysqlQuery($print_products, $conn) or die(mysql_error());
 
 
 	while ($Array = mysql_fetch_array($result_print_products)) { 
@@ -401,7 +401,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 	
 	#product query - for all the other ones
         $sql_products = "SELECT * FROM {$tb_prefix}products where enabled != 0 ORDER BY description";
-        $result_products = mysql_query($sql_products, $conn) or die(mysql_error());
+        $result_products = mysqlQuery($sql_products, $conn) or die(mysql_error());
 
 	if (mysql_num_rows($result_products) == 0) {
 	        //no records

@@ -11,7 +11,7 @@ $invoice_id = $_GET['submit'];
 
 #master invoice id select
 $print_invoice_id = "SELECT * FROM {$tb_prefix}invoices WHERE id = $invoice_id";
-$invoice_result  = mysql_query($print_invoice_id , $conn) or die(mysql_error());
+$invoice_result  = mysqlQuery($print_invoice_id , $conn) or die(mysql_error());
 $invoice = mysql_fetch_array($invoice_result);
 
 

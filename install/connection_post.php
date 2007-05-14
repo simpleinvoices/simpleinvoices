@@ -96,7 +96,7 @@ foreach($file_content as $sql_line) {
 	if (($sql_line != "") && (substr($tsl, 0, 2) != "--") && (substr($tsl, 0, 1) != "#")) {
 		$query .= $sql_line;
 		if(preg_match("/;\s*$/", $sql_line)) {
-			$result = mysql_query($query);
+			$result = mysqlQuery($query);
 		if (!$result && !$ignoreerrors) die(mysql_error());
 			$query = "";
 			}
@@ -110,7 +110,7 @@ $action = $submit_array[0];
 switch ($action) {
 	case 'create':
 		// Created a new DB 
-		$query = mysql_query("CREATE DATABASE IF NOT EXISTS ". $dbname) or die ($LANG['existingDb'] . mysql_error());
+		$query = mysqlQuery("CREATE DATABASE IF NOT EXISTS ". $dbname) or die ($LANG['existingDb'] . mysql_error());
 		
 		// Select this new DB
 		$db_selected = mysql_select_db($dbname, $connection);

@@ -29,7 +29,7 @@ if ( $op === 'pay_invoice' OR $op === 'pay_selected_invoice' ) {
 				'$_POST[ac_payment_type]'
 			)";
 
-	if (mysql_query($sql, $conn)) {
+	if (mysqlQuery($sql, $conn)) {
 		if ( $op === 'pay_selected_invoice' ) {
 			$display_block =  $LANG['save_payment_invoice_success'];
 		}

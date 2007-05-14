@@ -27,7 +27,7 @@ $sql = "INSERT into
 			'$_POST[enabled]'
 		)";
 
-if (mysql_query($sql, $conn)) {
+if (mysqlQuery($sql, $conn)) {
 	$display_block = $LANG['save_product_success'];
 } else {
 	$display_block = $LANG['save_product_failure'];
@@ -61,7 +61,7 @@ mysql_select_db("$db_name",$conn);
 			WHERE
 				id = '$_GET[submit]'";
 
-		if (mysql_query($sql, $conn)) {
+		if (mysqlQuery($sql, $conn)) {
 			$display_block = $LANG['save_product_success'];
 		} else {
 			$display_block = $LANG['save_product_failure'];
