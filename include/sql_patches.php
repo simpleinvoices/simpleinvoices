@@ -526,6 +526,51 @@ ADD b_co_footer TEXT";
 	$patch['102']['patch'] = "ALTER TABLE `si_invoices` CHANGE `inv_note` `note` TEXT NULL DEFAULT NULL";
 	$patch['102']['date'] = "20070507";
 
+	//invoice items
+	$patch['103']['name'] = "Alter field name inv_it_id to id ";
+	$patch['103']['patch'] = "ALTER TABLE `si_invoice_items` CHANGE `inv_it_id` `id` INT( 10 ) NOT NULL AUTO_INCREMENT";
+	$patch['103']['date'] = "20070507";
+
+	$patch['104']['name'] = "Alter field name inv_it_invoice_id to invoice_id ";
+	$patch['104']['patch'] = "ALTER TABLE `si_invoice_items` CHANGE `inv_it_invoice_id` `invoice_id` INT( 10 ) NOT NULL DEFAULT '0'";
+	$patch['104']['date'] = "20070507";
+
+	$patch['105']['name'] = "Alter field name inv_it_quantity to quantity ";
+	$patch['105']['patch'] = "ALTER TABLE `si_invoice_items` CHANGE `inv_it_quantity` `quantity` FLOAT NOT NULL DEFAULT '0'";
+	$patch['105']['date'] = "20070507";
+
+	$patch['106']['name'] = "Alter field name inv_it_product_id to product_id ";
+	$patch['106']['patch'] = "ALTER TABLE `si_invoice_items` CHANGE `inv_it_product_id` `product_id` INT( 10 ) NULL DEFAULT '0'";
+	$patch['106']['date'] = "20070507";
+
+	$patch['107']['name'] = "Alter field name inv_it_unit_price to unit_price ";
+	$patch['107']['patch'] = "ALTER TABLE `si_invoice_items` CHANGE `inv_it_unit_price` `unit_price` DOUBLE( 25, 2 ) NULL DEFAULT '0.00'";
+	$patch['107']['date'] = "20070507";
+
+	$patch['108']['name'] = "Alter field name inv_it_tax_id to tax_id  ";
+	$patch['108']['patch'] = "ALTER TABLE `si_invoice_items` CHANGE `inv_it_tax_id` `tax_id` VARCHAR( 25 ) NOT NULL DEFAULT '0'";
+	$patch['108']['date'] = "20070507";
+
+	$patch['109']['name'] = "Alter field name inv_it_tax to tax  ";
+	$patch['109']['patch'] = "ALTER TABLE `si_invoice_items` CHANGE `inv_it_tax` `tax` DOUBLE( 25, 2 ) NULL DEFAULT '0.00'";
+	$patch['109']['date'] = "20070507";
+
+	$patch['110']['name'] = "Alter field name inv_it_tax_amount to tax_amount  ";
+	$patch['110']['patch'] = "ALTER TABLE `si_invoice_items` CHANGE `inv_it_tax_amount` `tax_amount` DOUBLE( 25, 2 ) NULL DEFAULT NULL ";
+	$patch['110']['date'] = "20070507";
+
+	$patch['111']['name'] = "Alter field name inv_it_gross_total to gross_total ";
+	$patch['111']['patch'] = "ALTER TABLE `si_invoice_items` CHANGE `inv_it_gross_total` `gross_total` DOUBLE( 25, 2 ) NULL DEFAULT '0.00'";
+	$patch['111']['date'] = "20070507";
+
+	$patch['112']['name'] = "Alter field name inv_it_description to description ";
+	$patch['112']['patch'] = "ALTER TABLE `si_invoice_items` CHANGE `inv_it_description` `description` TEXT NULL DEFAULT NULL";
+	$patch['112']['date'] = "20070507";
+
+	$patch['113']['name'] = "Alter field name inv_it_total to total";
+	$patch['113']['patch'] = "ALTER TABLE `si_invoice_items` CHANGE `inv_it_total` `total` DOUBLE( 25, 2 ) NULL DEFAULT '0.00'";
+	$patch['113']['date'] = "20070507";
+
 
 
 /*
