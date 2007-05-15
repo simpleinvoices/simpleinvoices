@@ -103,8 +103,9 @@ function print_if_not_null($label,$field,$class1,$class2,$colspan) {
 * field		- The actual value from the db ie, ABN-12-34-66 etc...
 **/
 function inv_itemised_cf($label,$field) {
+		$print_cf ="testsd";
         if ($field != null) {
-                $print_cf =  "<td width=50%>TEST $label: $field</td>";  
+                $print_cf .=  "<td width=50%>TEST $label: $field</td>";  
                 return $print_cf;
         }
 }

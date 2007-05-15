@@ -266,13 +266,18 @@
 			{php}
 				global $product_cf;
 				global $product;
+				global $customFieldLabels;
 				
+                	$itemised_line .= inv_itemised_cf($customFieldLabels["product_cf1"], $product["custom_field1"]);
+                	$inv_it_tr++;
+                	$itemised_line .= do_tr($inv_it_tr,'blank-class');
+/*
 				for($i=1;$i<=4;$i++) {
                 	$itemised_line .= inv_itemised_cf($customFieldLabels["product_cf$i"], $product["custom_field$i"]);
                 	$inv_it_tr++;
                 	$itemised_line .= do_tr($inv_it_tr,'blank-class');
 				}
-                
+ */              
                 $inv_it_tr = 0;
                 echo $itemised_line;
                {/php}
@@ -309,12 +314,16 @@
 				{php}
 				global $customFieldLabels;
 				
+	                $consulting_line .= inv_itemised_cf($customFieldLabels["product_cf1"], $product["custom_field1"]);
+	                $inv_it_tr++;
+	                $consulting_line .= do_tr($inv_it_tr,'blank-class');
+/*
 				for($i=1;$i<=4;$i++) {
 	                $consulting_line .= inv_itemised_cf($customFieldLabels["product_cf$i"], $product["custom_field$i"]);
 	                $inv_it_tr++;
 	                $consulting_line .= do_tr($inv_it_tr,'blank-class');
 				}
-                
+*/              
                 $inv_it_tr = 0;
                 echo $consulting_line;
                 {/php}
