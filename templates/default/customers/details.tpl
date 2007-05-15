@@ -241,7 +241,9 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
-		<td>{html_options name=enabled options=$enabled selected=$customer.enabled}</td>
+		<td>
+			{html_options name=enabled options=$enabled selected=$customer.enabled}
+		</td>
 	</tr>
 </table>
 
