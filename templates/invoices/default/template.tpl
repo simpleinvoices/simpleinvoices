@@ -36,11 +36,26 @@
 				<td nowrap class="tbl1-left">{$preference.pref_inv_wording} {$LANG.date}:</td><td class="tbl1-right" colspan=3>{$invoice.date}</td>
 		</tr>
 	<!-- Show the Invoice Custom Fields if valid -->
-
-		{$customFieldLabels.invoice_cf1}
-		{$customFieldLabels.invoice_cf2}
-		{$customFieldLabels.invoice_cf3}
-		{$customFieldLabels.invoice_cf4}
+		{ if $invoice.custom_field1 != null}
+		<tr>
+				<td nowrap class="tbl1-left">{$customFieldLabels.invoice_cf1}:</td><td class="tbl1-right" colspan=3>{$invoice.custom_field1}</td>
+		</tr>
+		{/if}
+		{ if $invoice.custom_field2 != null}
+		<tr>
+				<td nowrap class="tbl1-left">{$customFieldLabels.invoice_cf2}:</td><td class="tbl1-right" colspan=3>{$invoice.custom_field2}</td>
+		</tr>
+		{/if}
+		{ if $invoice.custom_field3 != null}
+		<tr>
+				<td nowrap class="tbl1-left">{$customFieldLabels.invoice_cf3}:</td><td class="tbl1-right" colspan=3>{$invoice.custom_field3}</td>
+		</tr>
+		{/if}
+		{ if $invoice.custom_field4 != null}
+		<tr>
+				<td nowrap class="tbl1-left">{$customFieldLabels.invoice_cf4}:</td><td class="tbl1-right" colspan=3>{$invoice.custom_field4}</td>
+		</tr>
+		{/if}
 
 		<tr>
 				<td class="tbl1-left" >{$LANG.total}: </td><td class="tbl1-right" colspan=3>{$preference.pref_currency_sign}{$invoice.total_format}</td>
@@ -103,8 +118,9 @@
 		echo print_if_not_null($LANG['phone_short'], $biller['phone'],'tbl1-left','tbl1-right',3);
 		echo print_if_not_null($LANG['fax'], $biller['fax'],'tbl1-left','tbl1-right',3);
 		echo print_if_not_null($LANG['mobile_short'], $biller['mobile_phone'],'tbl1-left','tbl1-right',3);
-        echo print_if_not_null($LANG['email'], $biller['email'],'tbl1-left','tbl1-right',3);
+ 		echo print_if_not_null($LANG['email'], $biller['email'],'tbl1-left','tbl1-right',3);
         
+        	echo print_if_not_null($customFieldLabels["biller_cf1"], $biller['custom_field1'],'tbl1-left','tbl1-right',3);
        	for($i=1;$i<=4;$i++) {
         	echo print_if_not_null($customFieldLabels["biller_cf$i"], $biller["custom_field$i"],'tbl1-left','tbl1-right',3);
        	}
