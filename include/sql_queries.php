@@ -188,6 +188,13 @@ function getProducts() {
 	$products = null;
 	
 	for($i=0;$product = mysql_fetch_array($query);$i++) {
+		
+		if ($product['enabled'] == 1) {
+			$product['enabled'] = $LANG['enabled'];
+		} else {
+			$product['enabled'] = $LANG['disabled'];
+		}
+
 		$products[$i] = $product;
 	}
 	

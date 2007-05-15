@@ -1,5 +1,5 @@
 {if $products == null }
-	<P><em>{$LANG.no_invoices}.</em></p>
+	<P><em>{$LANG.no_products}</em></p>
 {else}
 
 
@@ -36,7 +36,7 @@
 	<td class="index_table">{$product.id}</td>
 	<td class="index_table">{$product.description}</td>
 	<td class="index_table">{$product.unit_price}</td>
-	<td class="index_table">{$LANG.enabled}</td>
+	<td class="index_table">{$product.enabled}</td>
 	</tr>
 
 {/foreach}
