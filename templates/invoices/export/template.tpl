@@ -1,3 +1,4 @@
+{include file='../templates/invoices/default/functions.tpl'}
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -9,7 +10,6 @@
 <div id="header">
 
 </div>
-{$invoiceItems[0].product.description}
 
 
 	<table width="100%" align="center">
@@ -33,10 +33,27 @@
 		</tr>
 	<!-- Show the Invoice Custom Fields if valid -->
 
-		{$customFieldLabels.invoice_cf1}
-		{$customFieldLabels.invoice_cf2}
-		{$customFieldLabels.invoice_cf3}
-		{$customFieldLabels.invoice_cf4}
+	<!-- Show the Invoice Custom Fields if valid -->
+		{ if $invoice.custom_field1 != null}
+		<tr>
+				<td nowrap>{$customFieldLabels.invoice_cf1}:</td><td colspan=3>{$invoice.custom_field1}</td>
+		</tr>
+		{/if}
+		{ if $invoice.custom_field2 != null}
+		<tr>
+				<td nowrap>{$customFieldLabels.invoice_cf2}:</td><td colspan=3>{$invoice.custom_field2}</td>
+		</tr>
+		{/if}
+		{ if $invoice.custom_field3 != null}
+		<tr>
+				<td nowrap>{$customFieldLabels.invoice_cf3}:</td><td colspan=3>{$invoice.custom_field3}</td>
+		</tr>
+		{/if}
+		{ if $invoice.custom_field4 != null}
+		<tr>
+				<td nowrap>{$customFieldLabels.invoice_cf4}:</td><td colspan=3>{$invoice.custom_field4}</td>
+		</tr>
+		{/if}
 
 		<tr>
 				<td >{$LANG.total}: </td><td colspan=3>{$preference.pref_currency_sign}{$invoice.total_format}</td>
@@ -82,10 +99,16 @@
                 {/if}
         {/if}
 
+		{php}
+			global $LANG;
+			global $biller;
+			global $customer;
+			
+		       echo  merge_address($biller['city'], $biller['state'], $biller['zip_code'], $biller['street_address'], $biller['street_address2'],'','',3);
+		{/php}
 
 	
-	 <tr><td ></td><td colspan=3>{$biller.city}, {$biller.zip_code}</td></tr>                </tr>
-                {if $biller.country != null }
+        {if $biller.country != null }
                 </tr>
                 <tr>
                         <td ></td><td colspan=3>{$biller.country}</td>
@@ -113,22 +136,22 @@
 		{/if}
         		{if $biller.custom_field1 != null }
                 <tr>
-                        <td >{$customFieldLabels.customer_cf1}:<td colspan=3>{$biller.custom_field1}</td>
+                        <td >{$customFieldLabels.biller_cf1}:<td colspan=3>{$biller.custom_field1}</td>
                 </tr>	
 				{/if}
         		{if $biller.custom_field2 != null }
                 <tr>
-                        <td >{$customFieldLabels.customer_cf2}:<td  colspan=3>{$biller.custom_field2}</td>
+                        <td >{$customFieldLabels.biller_cf2}:<td  colspan=3>{$biller.custom_field2}</td>
                 </tr>	
 				{/if}
         		{if $biller.custom_field3 != null }
                 <tr>
-                        <td >{$customFieldLabels.customer_cf3}:<td  colspan=3>{$biller.custom_field3}</td>
+                        <td >{$customFieldLabels.biller_cf3}:<td  colspan=3>{$biller.custom_field3}</td>
                 </tr>	
 				{/if}
         		{if $biller.custom_field4 != null }
                 <tr>
-                        <td >{$customFieldLabels.customer_cf4}:<td  colspan=3>{$biller.custom_field4}</td>
+                        <td >{$customFieldLabels.biller_cf4}:<td  colspan=3>{$biller.custom_field4}</td>
                 </tr>	
 				{/if}
 				<tr><td colspan=4></td></tr>
@@ -173,8 +196,14 @@
         {/if}
 
 
+		{php}
+			global $LANG;
+			global $biller;
+			global $customer;
+			
+		       echo  merge_address($customer['city'], $customer['state'], $customer['zip_code'], $customer['street_address'], $customer['street_address2'],'','',3);
+		{/php}
 	
-	 <tr><td ></td><td  colspan=3>{$customer.city}, {$customer.zip_code}</td></tr>                </tr>
                 {if $customer.country != null }
                 </tr>
                 <tr>

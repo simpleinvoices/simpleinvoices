@@ -16,6 +16,7 @@
  - Enabled in edit page etc.. - check is working + check if working in all sections
  - Fix reports to work with new db field names 
  - Tax rates - edit screen needs fix up
+ - default template - remove logos 
 
 -done
  - sql patch: reset default invoices template to default - Done
