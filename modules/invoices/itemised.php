@@ -68,6 +68,8 @@ while ($Array = mysql_fetch_array($result_biller_default) ) {
 $print_customer = "SELECT * FROM {$tb_prefix}customers WHERE id = $defaults[customer] and enabled != 0";
 $result_print_customer = mysqlQuery($print_customer, $conn) or die(mysql_error());
 
+$defaultCustomer = mysql_fetch_array($result_print_customer);
+	
 while ($Array_customer = mysql_fetch_array($result_print_customer)) {
        $c_nameField = $Array_customer['name'];
 }
@@ -128,7 +130,7 @@ if (mysql_num_rows($result_customer) == 0) {
         //has records, so display them
         $display_block_customer = <<<EOD
         <select name="select_customer">
-        <option selected value="$defaults[customer]" style="font-weight: bold">$c_nameField</option>
+        <option selected value="$defaults[customer]" style="font-weight: bold">$defaultCustomer[name]</option>
         <option value=""></option>
 EOD;
 
@@ -137,7 +139,7 @@ EOD;
                 $display_name_customer = $recs_customer['name'];
 
                 $display_block_customer .= <<<EOD
-                "<option value="$id_customer">
+                <option value="$id_customer">
                         $display_name_customer</option>
 EOD;
         }

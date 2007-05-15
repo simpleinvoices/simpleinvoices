@@ -2,23 +2,20 @@
 - in next release - aim 15th May 
 -todo
  - Move .sql out of install and back to root (untill the installer is done and included as default)
- - apply aplysia new drop down list code to others (refer system default: biller)
  - add new lang for sys default saved
  - update spanish file with tebas new file
  - Help and About docs - add div id = left to left align them and test all work ok
- - Defautls: on all screens that reference system defautls (ie biller etc..) make sure that the default item is working correctly
  - Invoice templates 
- -- make merge_adress work
+ -- make merge_adress work in both templates
  -- make invoice items custom fields work
- -- make gross total work
+ -- make gross total work in both templates
  - Quick View: make invoice custom fields work
  - home.php - make the links to the documentation work
  - sql patches: make a conversion script for the old defaults to the new one
  - include regexp stuff in docs.php file
- - Biller: enabled in edit page - check is working + check if working in other sections
+ - Enabled in edit page etc.. - check is working + check if working in all sections
  - Fix reports to work with new db field names 
  - Tax rates - edit screen needs fix up
- - Edit biller etc. - Custom fields not shows - needs fix up
 
 -done
  - sql patch: reset default invoices template to default - Done
@@ -61,6 +58,8 @@
  --- and invoices - done
  --- and invoices_items - done
  --- do the custom fields fields in biller etc.. to - needs to test the result - done
+ - Defautls: on all screens that reference system defautls (ie biller etc..) make sure that the default item is working correctly - done
+ - Edit biller etc. - Custom fields not shows - needs fix up - done
  
 
 - in next release +1 - aim end of May
@@ -77,6 +76,7 @@
  - smarty: move all the remaining pages to smarty
  - Email: and add validation
  - move the stuff in index and home in the LANG files
+ - apply aplysia new drop down list code to others (refer system default: biller)
 
 - Replace with easy function...
 #get custom field labels
