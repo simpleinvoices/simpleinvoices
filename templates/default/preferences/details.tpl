@@ -46,7 +46,7 @@
 			<td class='details_screen'>Invoice payment line2 value <a href="docs.php?t=help&p=inv_pref_payment_line2_value" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>{$preference.pref_inv_payment_line2_value}</td>
 		</tr>
 	        <tr>
-        	        <td class='details_screen'>{$LANG.enabled} <a href="docs.php?t=help&p=inv_pref_invoice_enabled" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>{$preference.wording_for_enabled}</td>
+        	        <td class='details_screen'>{$LANG.enabled} <a href="docs.php?t=help&p=inv_pref_invoice_enabled" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td>{$preference.enabled}</td>
 	        </tr>	
 		<tr>
 			<td colspan=2 align=center></td>
@@ -109,7 +109,7 @@
 		{* enabled block *}
 		<select name="pref_enabled">
 			<option value="{$preference.pref_enabled}" selected
-				style="font-weight: bold;">{$preference.wording_for_enabled}</option>
+				style="font-weight: bold;">{$preference.enabled}</option>
 			<option value="1">{$LANG.enabled}</option>
 			<option value="0">{$LANG.disabled}</option>
 		</select>

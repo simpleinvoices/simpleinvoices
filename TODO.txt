@@ -15,7 +15,6 @@
  - include regexp stuff in docs.php file
  - Enabled in edit page etc.. - check is working + check if working in all sections
  - Fix reports to work with new db field names 
- - Tax rates - edit screen needs fix up
  - default template - remove logos 
 
 -done
@@ -61,6 +60,7 @@
  --- do the custom fields fields in biller etc.. to - needs to test the result - done
  - Defautls: on all screens that reference system defautls (ie biller etc..) make sure that the default item is working correctly - done
  - Edit biller etc. - Custom fields not shows - needs fix up - done
+ - Tax rates - edit screen needs fix up - done
  
 
 - in next release +1 - aim end of May

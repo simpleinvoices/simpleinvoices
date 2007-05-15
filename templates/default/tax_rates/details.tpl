@@ -39,7 +39,7 @@
 
 	<table align="center">
 	<tr>
-		<td class="details_screen">{$LANG.tax_rate_id}</td><td>$tax.tax_id</td>
+		<td class="details_screen">{$LANG.tax_rate_id}</td><td>{$tax.tax_id}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.description}</td>
@@ -53,7 +53,7 @@
 		<td class="details_screen">{$LANG.enabled} </td><td>
 		
 		<select name="tax_enabled">
-<option value="$tax.tax_enabled" selected style="font-weight: bold">$wording_for_enabled</option>
+<option value="$tax.tax_enabled" selected style="font-weight: bold">{$tax.enabled}</option>
 <option value="1">{$LANG.enabled}</option>
 <option value="0">{$LANG.disabled}</option>
 </select>

@@ -18,7 +18,7 @@
 		<td class="details_screen">{$LANG.description}</td><td>{$paymentType.pt_description}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.enabled}</td><td>{$paymentType.pt_enabled}</td>
+		<td class="details_screen">{$LANG.enabled}</td><td>{$paymentType.enabled}</td>
 	</tr>
 	</table>
 	<hr></hr>
@@ -47,7 +47,7 @@
 		<td>
 		{*displayblock enabled*}
 		<select name="pt_enabled">
-			<option value="{$paymentType.pt_enabled}" selected style="font-weight: bold">{$wording_for_enabled}</option>
+			<option value="{$paymentType.pt_enabled}" selected style="font-weight: bold">{$paymentType.enabled}</option>
 			<option value="1">{$LANG.enabled}</option>
 			<option value="0">{$LANG.disabled}</option>
 		</select>

@@ -38,7 +38,7 @@ function getPreference($id) {
 	$print_preferences = "SELECT * FROM {$tb_prefix}preferences WHERE pref_id = $id";
 	$result_print_preferences  = mysqlQuery($print_preferences) or die(mysql_error());
 	$preference = mysql_fetch_array($result_print_preferences);
-	$preference['wording_for_enabled'] = $preference['pref_enabled']==1?$LANG['enabled']:$LANG['disabled'];
+	$preference['enabled'] = $preference['pref_enabled']==1?$LANG['enabled']:$LANG['disabled'];
 	return $preference;
 }
 
@@ -65,13 +65,14 @@ function getPreferences() {
 	$preferences = null;
 	
 	for($i=0;$preference = mysql_fetch_array($query);$i++) {
-		$preferences[$i] = $preference;
 		
   		if ($preference['pref_enabled'] == 1) {
-  			$preference['pref_enabled'] = $LANG['enabled'];
+  			$preference['enabled'] = $LANG['enabled'];
   		} else {
-  			$preference['pref_enabled'] = $LANG['disabled'];
+  			$preference['enabled'] = $LANG['disabled'];
   		}
+
+		$preferences[$i] = $preference;
 	}
 	
 	return $preferences;
@@ -141,7 +142,7 @@ function getPaymentType($id) {
 	$sql = "SELECT * FROM {$tb_prefix}payment_types WHERE pt_id = $id";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	$paymentType = mysql_fetch_array($query);
-	$paymentType['pt_enabled'] = $paymentType['pt_enabled']==1?$LANG['enabled']:$LANG['disabled'];
+	$paymentType['enabled'] = $paymentType['pt_enabled']==1?$LANG['enabled']:$LANG['disabled'];
 	
 	return $paymentType;
 }

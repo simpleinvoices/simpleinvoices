@@ -34,7 +34,7 @@
 		href="index.php?module=preferences&view=details&submit={$preference.pref_id}&action=edit">{$LANG.edit}</a> </td>
 		<td class="index_table">{$preference.pref_id}</td>
 		<td class="index_table">{$preference.pref_description}</td>
-		<td class="index_table">{$preference.pref_enabled}</td>
+		<td class="index_table">{$preference.enabled}</td>
 		</tr>
 
 		{/foreach}
