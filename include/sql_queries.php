@@ -76,7 +76,9 @@ function getPreferences() {
 	
 	return $preferences;
 }
-
+/*
+ * Using getCustomFieldLabels from funxtiopns.php now
+ */
 function getCustomFieldLabels() {
 	global $LANG;
 	global $tb_prefix;
@@ -95,7 +97,7 @@ function getCustomFieldLabels() {
 
 	return $customFields;
 }
-
+ 
 
 function getBillers() {
 	global $tb_prefix;

@@ -7,7 +7,7 @@ $files = getLogoList();
 $smarty -> assign("files",$files);
 
 #get custom field labels
-$customFieldLabel = getCustomFieldLabels("biller");
+$customFieldLabel = getCustomFieldLabels();
 
 if ($_POST['name'] != "" ) {
 	include("./modules/billers/save.php");

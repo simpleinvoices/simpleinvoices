@@ -87,8 +87,8 @@ function get_custom_field_label($field)         {
  * Used to get the names of the custom fields. If custom fields is blank in db then print 'Custom Field' and the ID
  * Arguments:
  * Type 	- is the module your getting the labels of the custom fields for, ie. biller
- */
-/*function getCustomFieldLabels($type) {
+ *
+function getCustomFieldLabels($type) {
 	global $LANG;
 	global $tb_prefix;
 	
@@ -104,8 +104,8 @@ function get_custom_field_label($field)         {
 
 	//TODO: What's the value if null? change in database...
 	return $cf;
-}*/
-
+}
+ */
 /**
 * Function: get_custom_field_name
 * 

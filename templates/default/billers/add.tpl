@@ -72,7 +72,7 @@ You must enter a Biller name</div>
 			size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.1} <a
+		<td class="details_screen">{$customFieldLabel.biller_cf1}<a
 			href="docs.php?t=help&p=custom_fields"
 			rel="gb_page_center[450, 450]"> <img
 			src="./images/common/help-small.png"></img> </a></td>
@@ -80,7 +80,7 @@ You must enter a Biller name</div>
 			value="{$smarty.post.custom_field1}" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.2} <a
+		<td class="details_screen">{$customFieldLabel.biller_cf2} <a
 			href="docs.php?t=help&p=custom_fields"
 			rel="gb_page_center[450, 450]"> <img
 			src="./images/common/help-small.png"></img> </a></td>
@@ -88,7 +88,7 @@ You must enter a Biller name</div>
 			value="{$smarty.post.custom_field2}" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.3} <a
+		<td class="details_screen">{$customFieldLabel.biller_cf3} <a
 			href="docs.php?t=help&p=custom_fields"
 			rel="gb_page_center[450, 450]"> <img
 			src="./images/common/help-small.png"></img> </a></td>
@@ -96,7 +96,7 @@ You must enter a Biller name</div>
 			value="{$smarty.post.custom_field3}" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.4} <a
+		<td class="details_screen">{$customFieldLabel.biller_cf4} <a
 			href="docs.php?t=help&p=custom_fields"
 			rel="gb_page_center[450, 450]"> <img
 			src="./images/common/help-small.png"></img> </a></td>
