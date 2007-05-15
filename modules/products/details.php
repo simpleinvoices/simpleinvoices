@@ -8,7 +8,7 @@ $product_id = $_GET['submit'];
 $product = getProduct($product_id);
 
 #get custom field labels
-$customFieldLabel = getCustomFieldLabels("product");
+$customFieldLabel = getCustomFieldLabels();
 
 $smarty -> assign('product',$product);
 $smarty -> assign('customFieldLabel',$customFieldLabel);

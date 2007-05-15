@@ -20,7 +20,7 @@ $files = getLogoList();
 /*end logo stuff */
 
 #get custom field labels
-$customFieldLabel = getCustomFieldLabels("biller");
+$customFieldLabel = getCustomFieldLabels();
 
 $smarty -> assign('biller',$biller);
 $smarty -> assign('files',$files);

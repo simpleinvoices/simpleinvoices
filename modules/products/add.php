@@ -5,7 +5,7 @@ checkLogin();
 
 
 #get custom field labels
-$customFieldLabel = getCustomFieldLabels("product");
+$customFieldLabel = getCustomFieldLabels();
 
 //if valid then do save
 if ($_POST['description'] != "" ) {

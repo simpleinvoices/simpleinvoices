@@ -62,28 +62,28 @@
 		<td>{$biller.email}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.1} <a
+		<td class="details_screen">{$customFieldLabel.biller_cf1} <a
 			href="docs.php?t=help&p=custom_fields"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
 		<td>{$biller.custom_field1}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.2} <a
+		<td class="details_screen">{$customFieldLabel.biller_cf2} <a
 			href="docs.php?t=help&p=custom_fields"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
 		<td>{$biller.custom_field2}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.3} <a
+		<td class="details_screen">{$customFieldLabel.biller_cf3} <a
 			href="docs.php?t=help&p=custom_fields"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
 		<td>{$biller.custom_field3}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.4} <a
+		<td class="details_screen">{$customFieldLabel.biller_cf4} <a
 			href="docs.php?t=help&p=custom_fields"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
@@ -181,7 +181,7 @@
 		<td><input type=text name="email" value="{$biller.email}" size=50 /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.1} <a
+		<td class="details_screen">{$customFieldLabel.biller_cf1} <a
 			href="docs.php?t=help&p=custom_fields"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
@@ -189,7 +189,7 @@
 			value="{$biller.custom_field1}" size=50</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.2} <a
+		<td class="details_screen">{$customFieldLabel.biller_cf2} <a
 			href="docs.php?t=help&p=custom_fields"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
@@ -197,7 +197,7 @@
 			value="{$biller.custom_field2}" size=50</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.3} <a
+		<td class="details_screen">{$customFieldLabel.biller_cf3} <a
 			href="docs.php?t=help&p=custom_fields"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>
@@ -205,7 +205,7 @@
 			value="{$biller.custom_field3}" size=50</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.4} <a
+		<td class="details_screen">{$customFieldLabel.biller_cf4} <a
 			href="docs.php?t=help&p=custom_fields"
 			rel="gb_page_center[450, 450]"><img
 			src="./images/common/help-small.png"></img></a></td>

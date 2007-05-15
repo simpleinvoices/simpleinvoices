@@ -88,22 +88,22 @@
 		<p>
 			<table>
 				<tr>
-					<td class="details_screen">{$customFieldLabel.1} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+					<td class="details_screen">{$customFieldLabel.customer_cf1} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 					</td>
 					<td>{$customer.custom_field1}</td>
 				</tr>
 				<tr>
-					<td class="details_screen">{$customFieldLabel.2} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+					<td class="details_screen">{$customFieldLabel.customer_cf2} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 					</td>
 					<td>{$customer.custom_field2}</td>
 				</tr>
 				<tr>
-					<td class="details_screen">{$customFieldLabel.3} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+					<td class="details_screen">{$customFieldLabel.customer_cf3} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 					</td>
 					<td>{$customer.custom_field3}</td>
 				</tr>
 				<tr>
-					<td class="details_screen">{$customFieldLabel.4} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+					<td class="details_screen">{$customFieldLabel.customer_cf4} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 					</td>
 					<td>{$customer.custom_field4}</td>
 				</tr>
@@ -212,25 +212,25 @@
 			<input type="text" name="email" value="{$customer.email}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.1} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$customFieldLabel.customer_cf1} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>
 			<input type="text" name="custom_field1" value="{$customer.custom_field1}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.2} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$customFieldLabel.customer_cf2} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>
 			<input type="text" name="custom_field2" value="{$customer.custom_field2}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.3} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$customFieldLabel.customer_cf3} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>
 			<input type="text" name="custom_field3" value="{$customer.custom_field3}" size="50" /></td
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.4} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$customFieldLabel.customer_cf4} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>
 			<input type="text" name="custom_field4" value="{$customer.custom_field4}" size="50" /></td

@@ -29,7 +29,7 @@ $stuff['owing'] = number_format($stuff['total'] - $stuff['paid'],2);
 
 
 
-$customFieldLabel = getCustomFieldLabels("customer");
+$customFieldLabel = getCustomFieldLabels();
 $invoices = getCustomerInvoices($customer_id);
 
 
