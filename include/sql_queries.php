@@ -27,9 +27,12 @@ function getCustomer($id) {
 
 function getBiller($id) {
 	global $tb_prefix;
+	global $LANG;
 	$print_biller = "SELECT * FROM {$tb_prefix}biller WHERE id = $id";
 	$result_print_biller = mysqlQuery($print_biller) or die(mysql_error());
-	return mysql_fetch_array($result_print_biller);
+	$biller = mysql_fetch_array($result_print_biller);
+	$biller['wording_for_enabled'] = $biller['enabled']==1?$LANG['enabled']:$LANG['disabled'];
+	return $biller;
 }
 
 function getPreference($id) {

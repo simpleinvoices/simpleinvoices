@@ -106,7 +106,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
-		<td>{$biller.enabled}</td>
+		<td>{$biller.wording_for_enabled}</td>
 	</tr>
 </table>
 {/if}

@@ -16,7 +16,6 @@
  - Fix reports to work with new db field names 
  - default template - remove logos 
  - calculation on home.php not working
- - Customer: enabled drop down in edit not working correctly
 
 -done
  - sql patch: reset default invoices template to default - Done
@@ -64,6 +63,7 @@
  - Tax rates - edit screen needs fix up - done
  - Enabled in edit page etc.. - check is working + check if working in all sections - done
  - Quick View: make invoice custom fields work - done
+ - Customer: enabled drop down in edit not working correctly - done
  
 
 - in next release +1 - aim end of May

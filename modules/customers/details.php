@@ -10,7 +10,7 @@ $customer_id = $_GET['submit'];
 
 $customer = getCustomer($customer_id);
 
-$customer['enabled'] = $customer['enabled']==1?$LANG['enabled']:$LANG['disabled'];
+$customer['wording_for_enabled'] = $customer['enabled']==1?$LANG['enabled']:$LANG['disabled'];
 
 
 //TODO: Perhaps possible a bit nicer?
