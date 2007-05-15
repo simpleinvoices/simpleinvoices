@@ -6,16 +6,17 @@
  - update spanish file with tebas new file
  - Help and About docs - add div id = left to left align them and test all work ok
  - Invoice templates 
- -- make merge_adress work in both templates
- -- make invoice items custom fields work
- -- make gross total work in both templates
- - Quick View: make invoice custom fields work
+ -- make merge_adress work in both templates - done
+ -- make invoice items custom fields work - done
+ -- make gross total work in both templates - done
+ -- make product custom fields work
  - home.php - make the links to the documentation work
  - sql patches: make a conversion script for the old defaults to the new one
  - include regexp stuff in docs.php file
- - Enabled in edit page etc.. - check is working + check if working in all sections
  - Fix reports to work with new db field names 
  - default template - remove logos 
+ - calculation on home.php not working
+ - Customer: enabled drop down in edit not working correctly
 
 -done
  - sql patch: reset default invoices template to default - Done
@@ -61,6 +62,8 @@
  - Defautls: on all screens that reference system defautls (ie biller etc..) make sure that the default item is working correctly - done
  - Edit biller etc. - Custom fields not shows - needs fix up - done
  - Tax rates - edit screen needs fix up - done
+ - Enabled in edit page etc.. - check is working + check if working in all sections - done
+ - Quick View: make invoice custom fields work - done
  
 
 - in next release +1 - aim end of May
