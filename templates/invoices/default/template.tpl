@@ -119,14 +119,29 @@
 		echo print_if_not_null($LANG['fax'], $biller['fax'],'tbl1-left','tbl1-right',3);
 		echo print_if_not_null($LANG['mobile_short'], $biller['mobile_phone'],'tbl1-left','tbl1-right',3);
  		echo print_if_not_null($LANG['email'], $biller['email'],'tbl1-left','tbl1-right',3);
-        
-        	echo print_if_not_null($customFieldLabels["biller_cf1"], $biller['custom_field1'],'tbl1-left','tbl1-right',3);
-       	for($i=1;$i<=4;$i++) {
-        	echo print_if_not_null($customFieldLabels["biller_cf$i"], $biller["custom_field$i"],'tbl1-left','tbl1-right',3);
-       	}
 	{/php}
+         {if $biller.custom_field1 != null }
+                <tr>
+                        <td class='tbl1-left'>{$customFieldLabels.biller_cf1}</td><td class='tbl1-right' colspan="3">{$biller.custom_field1}</td>
+                </tr>
+       	{/if}
+         {if $biller.custom_field2 != null }
+                <tr>
+                        <td class='tbl1-left'>{$customFieldLabels.biller_cf2}</td><td class='tbl1-right' colspan="3">{$biller.custom_field2}</td>
+                </tr>
+       	{/if}
+         {if $biller.custom_field3 != null }
+                <tr>
+                        <td class='tbl1-left'>{$customFieldLabels.biller_cf3}</td><td class='tbl1-right' colspan="3">{$biller.custom_field3}</td>
+                </tr>
+       	{/if}
+         {if $biller.custom_field4 != null }
+                <tr>
+                        <td class='tbl1-left'>{$customFieldLabels.biller_cf4}</td><td class='tbl1-right' colspan="3">{$biller.custom_field4}</td>
+                </tr>
+       	{/if}
 
-	<tr><td class="tbl1-top" colspan="4"></td></tr>
+	<tr><td class="tbl1-top" colspan="4"> </td></tr>
 
 <!-- Biller section - end -->
 
@@ -186,13 +201,35 @@
 
         $customer_block .= print_if_not_null($LANG['email'], $customer[email],'tbl1-left','tbl1-right',3);
         
+		/*
+		//nice code but cant get it to do the labels :(
         for($i=1;$i<=4;$i++) {
        		$customer_block .= print_if_not_null($customFieldLabels["customer_cf$i"], $customer["custom_field$i"],'tbl1-left','tbl1-right',3);
         }
-
+		*/
         echo $customer_block;
 	{/php}
 
+         {if $customer.custom_field1 != null }
+                <tr>
+                        <td class='tbl1-left'>{$customFieldLabels.customer_cf1}</td><td class='tbl1-right' colspan="3">{$customer.custom_field1}</td>
+                </tr>
+       	{/if}
+         {if $customer.custom_field2 != null }
+                <tr>
+                        <td class='tbl1-left'>{$customFieldLabels.customer_cf2}</td><td class='tbl1-right' colspan="3">{$customer.custom_field2}</td>
+                </tr>
+       	{/if}
+         {if $customer.custom_field3 != null }
+                <tr>
+                        <td class='tbl1-left'>{$customFieldLabels.customer_cf3}</td><td class='tbl1-right' colspan="3">{$customer.custom_field3}</td>
+                </tr>
+       	{/if}
+         {if $customer.custom_field4 != null }
+                <tr>
+                        <td class='tbl1-left'>{$customFieldLabels.customer_cf4}</td><td class='tbl1-right' colspan="3">{$customer.custom_field4}</td>
+                </tr>
+       	{/if}
 		<tr><td class="tbl1-top" colspan=4></td></tr></table>
 
 
@@ -216,7 +253,7 @@
 
 			<tr class="tbl1" >
 				<td class="tbl1">{$invoiceItem.quantity_formatted}</td>
-				<td class="tbl1">{$product.description}</td>
+				<td class="tbl1">{$invoiceItem.product.description}</td>
 				<td class="tbl1">{$preference.pref_currency_sign}{$invoiceItem.unit_price}</td>
 				<td class="tbl1">{$preference.pref_currency_sign}{$invoiceItem.gross_total}</td>
 				<td class="tbl1">{$preference.pref_currency_sign}{$invoiceItem.tax_amount}</td>
@@ -262,7 +299,7 @@
 	
 				<tr class="tbl1-left tbl1-right">
 				<td class="tbl1-left" >{$invoiceItem.quantity_formatted}</td>
-				<td>{$invoiceItems.product.description}</td><td class="tbl1-right" colspan="5"></td>
+				<td>{$invoiceItem.product.description}</td><td class="tbl1-right" colspan="5"></td>
 			</tr>
 			
                 <tr>       

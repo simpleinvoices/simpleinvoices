@@ -45,7 +45,7 @@ checkLogin();	//TODO: Really needed in .tpl files? I don't think so
 <table align=center>
 <tr>
 	<td class="details_screen">
-		$LANG[biller_name]]
+		$LANG[biller_name]
 	</td>
 	<td input type=text name="biller_block" size=25>
 		$display_block

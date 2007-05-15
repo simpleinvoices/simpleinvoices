@@ -128,12 +128,12 @@ EOD;
 				<td colspan=5>
 					<table width=100%>
 					<tr>
-						<td width=50% class='details_screen'>{$customFieldLabels['customer_cf1']}: {$invoiceItem['product']['custom_field1']}</td><td width=50% class='details_screen'>{$customFieldLabels['customer_cf2']}:
+						<td width=50% class='details_screen'>{$customFieldLabels['product_cf1']}: {$invoiceItem['product']['custom_field1']}</td><td width=50% class='details_screen'>{$customFieldLabels['product_cf2']}:
 {$invoiceItem['product']['custom_field2']}</td>
                  			</tr>
 			                <tr class='itemised' >       
-			                       <td width=50% class='details_screen'>{$customFieldLabels['customer_cf3']}:
-	{$invoiceItem['product']['custom_field3']}</td><td width=50% class='details_screen'>{$customFieldLabels['customer_cf4']}:
+			                       <td width=50% class='details_screen'>{$customFieldLabels['product_cf3']}:
+	{$invoiceItem['product']['custom_field3']}</td><td width=50% class='details_screen'>{$customFieldLabels['product_cf4']}:
 	{$invoiceItem['product']['custom_field4']}</td>
 			                 </tr>
 					</table>
@@ -158,17 +158,17 @@ EOD;
 
 	        $display_block_details .=  <<<EOD
         	<tr>
-	                <td>$invoiceItem[quantity]</td><td>$product[description]</td><td class='show-consulting'>$stripped_item_description</td><td class='consulting'></td><td>$preference[pref_currency_sign]$invoiceItem[unit_price]</td><td>$preference[pref_currency_sign]$invoiceItem[gross_total]</td><td>$preference[pref_currency_sign]$invoiceItem[tax_amount]</td><td align=right>$preference[pref_currency_sign]$invoiceItem[total]</td>
+	                <td>$invoiceItem[quantity]</td><td>{$invoiceItem['product']['description']}</td><td class='show-consulting'>$stripped_item_description</td><td class='consulting'></td><td>$preference[pref_currency_sign]$invoiceItem[unit_price]</td><td>$preference[pref_currency_sign]$invoiceItem[gross_total]</td><td>$preference[pref_currency_sign]$invoiceItem[tax_amount]</td><td align=right>$preference[pref_currency_sign]$invoiceItem[total]</td>
 		</tr>
 		<tr  class='consulting' >	
                         <td></td>
                                 <td colspan=6>
                                         <table width=100%>
                                         <tr>
-                                                <td width=50% class='details_screen'>{$productCustomFieldLabel['1']}: $product[custom_field1]</td><td width=50% class='details_screen'>{$productCustomFieldLabel['2']}: $product[custom_field2]</td>
+                                                <td width=50% class='details_screen'>{$customFieldLabels['product_cf1']}: {$invoiceItem['product']['custom_field1']}</td><td width=50% class='details_screen'>{$customFieldLabels['product_cf2']}: {$invoiceItem['product']['custom_field2']}</td>
                                         </tr>
                                         <tr>       
-                                               <td width=50% class='details_screen'>{$productCustomFieldLabel['3']}: $product[custom_field3]</td><td width=50% class='details_screen'>{$productCustomFieldLabel['4']}: $product[custom_field4]</td>
+                                               <td width=50% class='details_screen'>{$customFieldLabels['product_cf3']}: {$invoiceItem['product']['custom_field3']}</td><td width=50% class='details_screen'>{$customFieldLabels['product_cf4']}: {$invoiceItem['product']['custom_field4']}</td>
                                          </tr>
                                         </table>
                                 </td>
