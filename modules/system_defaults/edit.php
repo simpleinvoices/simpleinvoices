@@ -18,7 +18,7 @@ if ($_GET[submit] == "line_items") {
 	jsFormValidationEnd();
 	jsEnd();
 
-	$default = "items";
+	$default = "line_items";
 
 		$display_block = <<<EOD
 	<tr>
@@ -26,7 +26,7 @@ if ($_GET[submit] == "line_items") {
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG['default_number_items']}</td>
-		<td><input type=text size=25 name="value" value=$defaults[items]></td>
+		<td><input type=text size=25 name="value" value=$defaults[line_items]></td>
 	</tr>
 	<tr>
 		<td><br></td>
@@ -262,7 +262,7 @@ EOD;
 else if ($_GET[submit] == "preference_id") {
 
 	#invoice preference query
-	$print_inv_preference = "SELECT * FROM {$tb_prefix}preferences WHERE pref_id = $defaults[invoice]";
+	$print_inv_preference = "SELECT * FROM {$tb_prefix}preferences WHERE pref_id = $defaults[preference]";
 	$result_inv_preference = mysqlQuery($print_inv_preference, $conn) or die(mysql_error());
 
 
@@ -289,7 +289,7 @@ else if ($_GET[submit] == "preference_id") {
 		$display_block_preferences = <<<EOD
 	        <select name="value">
 
-                <option selected value="$defaults[invoice]" style="font-weight: bold">$pref_descriptionField</option>
+                <option selected value="$defaults[preference]" style="font-weight: bold">$pref_descriptionField</option>
                 <option value='0'> </option>
 EOD;
 

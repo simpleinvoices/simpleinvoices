@@ -62,7 +62,7 @@ while ($Array_tax = mysql_fetch_array($result_print_tax)) {
 }
 
 #default invoice preference description query
-$print_inv_preference = "SELECT * FROM {$tb_prefix}preferences WHERE pref_id = $defaults[invoice]";
+$print_inv_preference = "SELECT * FROM {$tb_prefix}preferences WHERE pref_id = $defaults[preference]";
 $result_inv_preference = mysqlQuery($print_inv_preference, $conn) or die(mysql_error());
 
 while ($Array_inv_preference = mysql_fetch_array($result_inv_preference)) {
@@ -169,7 +169,7 @@ if (mysql_num_rows($result_preferences) == 0) {
         //has records, so display them
         $display_block_preferences = <<<EOD
         <select name="select_preferences">
-        <option selected value="$defaults[invoice]" style="font-weight:bold;">$pref_descriptionField</option>
+        <option selected value="$defaults[preference]" style="font-weight:bold;">$pref_descriptionField</option>
         <option value=""></option>
 EOD;
 

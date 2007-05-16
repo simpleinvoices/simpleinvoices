@@ -70,7 +70,7 @@ $result_print_tax = mysqlQuery($print_tax, $conn) or die(mysql_error());
 $tax = mysql_fetch_array($result_print_tax);
 
 #default invoice preference description query
-$print_inv_preference = "SELECT * FROM {$tb_prefix}preferences WHERE pref_id = $defaults[invoice] and pref_enabled != 0";
+$print_inv_preference = "SELECT * FROM {$tb_prefix}preferences WHERE pref_id = $defaults[preference] and pref_enabled != 0";
 $result_inv_preference = mysqlQuery($print_inv_preference, $conn) or die(mysql_error());
 
 $pref =  mysql_fetch_array($result_inv_preference);
@@ -205,7 +205,7 @@ if (mysql_num_rows($result_preferences) == 0) {
         $display_block_preferences = <<<EOD
         <select name="select_preferences">
         
-        <option selected value="$defaults[invoice]" style="font-weight: bold">$pref[pref_description]</option>
+        <option selected value="$defaults[preference]" style="font-weight: bold">$pref[pref_description]</option>
 	
 	<option value=""></option>
 EOD;
