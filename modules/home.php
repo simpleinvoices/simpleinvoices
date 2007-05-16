@@ -44,7 +44,7 @@ if ($mysql > 4) {
 	FROM
        		{$tb_prefix}customers,{$tb_prefix}invoices,{$tb_prefix}invoice_items
 	WHERE
-	        {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = {$tb_prefix}invoices.id
+	        {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id
 	GROUP BY
 	        Total DESC
 	LIMIT 1;

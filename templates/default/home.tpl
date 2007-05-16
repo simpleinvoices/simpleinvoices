@@ -64,13 +64,13 @@
                                       <table>
                                         <tr>
                                                 <td width=10%>
-                                        		<a href="index.php?module=documentation/inline_docs&view=inline_instructions#faqs-what">
+                                        		<a href="docs.php?p=ReadMe#faqs-what">
 								<img src="images/common/question.png"></img>
 								 {$LANG.faqs_what}
 							</a>
                                 		</td>		
 						<td width=10%>
-		                                        <a href="index.php?module=documentation/inline_docs&view=inline_instructions#faqs-need">
+		                                        <a href="docs.php?p=ReadMe#faqs-need">
 	                                                	<img src="images/common/question.png"></img>
 								{$LANG.faqs_need}
 							</a>
@@ -78,13 +78,13 @@
 					</tr>
 					<tr>
 						<td width=10%>
-		                                        <a href="index.php?module=documentation/inline_docs&view=inline_instructions#faqs-how">
+		                                        <a href="docs.php?p=ReadMe#faqs-how">
 	                                                	<img src="images/common/question.png"></img>
 								{$LANG.faqs_how}
 							</a>
                                 		</td>		
 						<td width=10%>
-                		                        <a href="index.php?module=documentation/inline_docs&view=inline_instructions#faqs-types">
+                		                        <a href="docs.php?p=ReadMe#faqs-types">
 	                                                	<img src="images/common/question.png"></img>
 								{$LANG.faqs_type}
 							</a>
@@ -120,7 +120,7 @@
 					</tr>
 					<tr>
 						<td colspan=3 align=center class="align_center">
-                		                        <a href="index.php?module=documentation/inline_docs&view=inline_instructions#faqs-types">
+                		                        <a href="docs.php?p=ReadMe#faqs-types">
 	                                                	<img src="images/common/question.png"></img>
 								{$LANG.faqs_type}
 							</a>
@@ -245,13 +245,13 @@
                                       <table>
                                         <tr>
                                                 <td width=10%>
-                                        		<a href="index.php?module=documentation/inline_docs&view=inline_instructions#installation">
+                                        		<a href="docs.php?p=ReadMe#installation">
                                                         	<img src="images/common/help.png"></img>
 								{$LANG.installation}
 							</a>
 						</td>	
 						<td width=10%>
-                		                        <a href="index.php?module=documentation/inline_docs&view=inline_instructions#upgrading">
+                		                        <a href="docs.php?p=ReadMe#upgrading">
                                                         	<img src="images/common/help.png"></img>
 								{$LANG.upgrading_simple_invoices}
 							</a>
@@ -259,7 +259,7 @@
 					</tr>
 					<tr>
 						<td width=10% class="align_center" colspan="2">
-		                                        <a href="index.php?module=documentation/inline_docs&view=inline_instructions#prepare">
+		                                        <a href="docs.php?p=ReadMe#prepare">
                                                         	<img src="images/common/help.png"></img>
 								{$LANG.prepare_simple_invoices}
 							</a>
