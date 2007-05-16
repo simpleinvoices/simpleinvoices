@@ -29,11 +29,11 @@ include('./config/config.php');
    $sSQL = "
 
 SELECT
-        id,
-        (select name from {$tb_prefix}biller where id = {$tb_prefix}invoices.biller_id) as Biller,
-        (select name from {$tb_prefix}customers where id = {$tb_prefix}invoices.customer_id) as Customer,
-        (select sum({$tb_prefix}invoice_items.total) from {$tb_prefix}invoice_items WHERE {$tb_prefix}invoice_items.invoice_id = id) as Total,
-        ( select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from {$tb_prefix}account_payments where  ac_inv_id = id ) as Paid,
+        {$tb_prefix}invoices.id,
+        (select name from {$tb_prefix}biller where {$tb_prefix}biller.id = {$tb_prefix}invoices.biller_id) as Biller,
+        (select name from {$tb_prefix}customers where {$tb_prefix}customers.id = {$tb_prefix}invoices.customer_id) as Customer,
+        (select sum({$tb_prefix}invoice_items.total) from {$tb_prefix}invoice_items WHERE {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id) as Total,
+        ( select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from {$tb_prefix}account_payments where  ac_inv_id = {$tb_prefix}invoices.id ) as Paid,
         (select (Total - Paid)) as Owing ,
         date_format(date,'%Y-%m-%e') as Date ,
         (select datediff(now(),date)) as Age,
@@ -49,7 +49,7 @@ FROM
 WHERE
         {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id
 GROUP BY
-        id;
+        {$tb_prefix}invoices.id;
 
 ";
    $oRpt = new PHPReportMaker();

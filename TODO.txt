@@ -10,7 +10,6 @@
  -- make invoice items custom fields work - done
  -- make gross total work in both templates - done
  -- make product custom fields work
- - Fix reports to work with new db field names 
  - Move .sql out of install and back to root (untill the installer is done and included as default)
 
 -done
@@ -68,6 +67,7 @@
  - default template - remove logos - done
  - calculation on home.php not working - done
  - home.php - make the links to the documentation work - done
+ - Fix reports to work with new db field names - done
  
 
 - in next release +1 - aim end of May
