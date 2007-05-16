@@ -39,7 +39,7 @@ $defaults = getSystemDefaults();
 
 #Get the names of the defaults from their id -start
 #default biller name query
-$sql_biller_default = "SELECT name FROM {$tb_prefix}biller where id = $defaults[biller]";
+$sql_biller_default = "SELECT name FROM {$tb_prefix}biller where id = $defaults[biller] and enabled != 0";
 $result_biller_default = mysqlQuery($sql_biller_default , $conn) or die(mysql_error());
 
 $defaultBiller = mysql_fetch_array($result_biller_default);
@@ -47,7 +47,7 @@ $defaultBiller = mysql_fetch_array($result_biller_default);
 
 
 #default customer name query
-$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE id = $defaults[customer]";
+$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE id = $defaults[customer] and enabled != 0";
 $result_print_customer = mysqlQuery($print_customer, $conn) or die(mysql_error());
 
 $defaultCustomer = mysql_fetch_array($result_print_customer);

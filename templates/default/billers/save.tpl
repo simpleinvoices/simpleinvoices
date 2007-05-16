@@ -1,7 +1,13 @@
 {if $saved == true }
+	<br>
 	 {$LANG.save_biller_success}
+	<br>
+	<br>
 {else}
+	<br>
 	 {$LANG.save_biller_failure}
+	<br>
+	<br>
 {/if}
 
 {if $smarty.post.cancel == null }

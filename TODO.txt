@@ -79,6 +79,7 @@
  - validation:
  -- Add validation to the edit screen - moved to next release - just validate on add for now
  -- make a proper validation function/class
+ -- Product Add - add validation on price
  - choose automatic language (need to rename language files/subfolder). We should use this standards (first we can start with only 2 chars variant)
  -- http://www.rfc-editor.org/rfc/rfc4646.txt
  -- http://www.iana.org/assignments/language-subtag-registry
