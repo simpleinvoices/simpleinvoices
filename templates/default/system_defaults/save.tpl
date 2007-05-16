@@ -3,7 +3,7 @@
 <br>
 
 {if $saved }
-	{$LANG.save_default_success}<br />Success
+	{$LANG.save_defaults_success}<br />
 {else}
-	{$LANG.save_default_failure}<br /> Failure
+	{$LANG.save_defaults_failure}<br />
 {/if}
