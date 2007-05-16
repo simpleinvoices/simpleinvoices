@@ -334,8 +334,8 @@ ADD b_co_footer TEXT";
         $patch['61']['patch'] = "ALTER TABLE `si_biller` CHANGE `b_custom_field4` `custom_field4` VARCHAR( 255 ) NULL DEFAULT NULL";
 	$patch['61']['date'] = "20070430";
 	
-	$patch['62']['name'] = "Introduce systemdefaults table";
-	$patch['62']['patch'] = "CREATE TABLE `si_systemdefaults` (
+	$patch['62']['name'] = "Introduce system_defaults table";
+	$patch['62']['patch'] = "CREATE TABLE `si_system_defaults` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(30) NOT NULL,
   `value` varchar(30) NOT NULL,
@@ -344,14 +344,14 @@ ADD b_co_footer TEXT";
 ) ";
 	$patch['62']['date'] = "20070503";
 
-	$patch['63']['name'] = "Insert date into the systemdefaults table";
-	$patch['63']['patch'] = "INSERT INTO `si_systemdefaults` (`id`, `name`, `value`) VALUES 
+	$patch['63']['name'] = "Insert date into the system_defaults table";
+	$patch['63']['patch'] = "INSERT INTO `si_system_defaults` (`id`, `name`, `value`) VALUES 
 (1, 'biller', '4'),
 (2, 'customer', '3'),
 (3, 'tax', '1'),
-(4, 'invoice', '1'),
-(5, 'items', '5'),
-(6, 'template', 'simple2'),
+(4, 'preference', '1'),
+(5, 'line_items', '5'),
+(6, 'template', 'default'),
 (7, 'payment_type', '1'),
 (8, 'language', 'en'),
 (9, 'dateformat', 'Y-m-d'),
@@ -582,11 +582,46 @@ ADD b_co_footer TEXT";
 	$patch['114']['date'] = "20070514";
 
 	$patch['115']['name'] = "Add logging systempreference";
-	$patch['115']['patch'] = "INSERT INTO `si_systemdefaults` ( `id` , `name` , `value` ) 
+	$patch['115']['patch'] = "INSERT INTO `si_system_defaults` ( `id` , `name` , `value` ) 
 VALUES (
 NULL , 'logging', '0'
 );";
 	$patch['115']['date'] = "20070514";
+
+	//systemd efaults conversion patch
+		#defaults query and DEFAULT NUMBER OF LINE ITEMS
+		$sql_defaults = "SELECT * FROM {$tb_prefix}defaults";
+		$result_defaults = mysqlQuery($sql_defaults, $conn) or die(mysql_error());
+
+		$defaults = mysql_fetch_array($result_defaults);
+
+	$patch['116']['name'] = "System defaults conversion patch - set default biller";
+	$patch['116']['patch'] = "UPDATE `si_system_defaults` SET value = $defaults[def_biller] where name = 'biller'";
+	$patch['116']['date'] = "20070507";
+
+	$patch['117']['name'] = "System defaults conversion patch - set default customer";
+	$patch['117']['patch'] = "UPDATE `si_system_defaults` SET value = $defaults[def_customer] where name = 'customer'";
+	$patch['117']['date'] = "20070507";
+
+	$patch['118']['name'] = "System defaults conversion patch - set default tax";
+	$patch['118']['patch'] = "UPDATE `si_system_defaults` SET value = $defaults[def_tax] where name = 'tax";
+	$patch['118']['date'] = "20070507";
+
+	$patch['119']['name'] = "System defaults conversion patch - set default invoice preference";
+	$patch['119']['patch'] = "UPDATE `si_system_defaults` SET value = $defaults[def_inv_preference] where name = 'preference'";
+	$patch['119']['date'] = "20070507";
+
+	$patch['120']['name'] = "System defaults conversion patch - set default number of line items";
+	$patch['120']['patch'] = "UPDATE `si_system_defaults` SET value = $defaults[def_number_line_items] where name = 'line_items'";
+	$patch['120']['date'] = "20070507";
+
+	$patch['121']['name'] = "System defaults conversion patch - set default invoice template";
+	$patch['121']['patch'] = "UPDATE `si_system_defaults` SET value = $defaults[def_inv_template] where name = 'template'";
+	$patch['121']['date'] = "20070507";
+
+	$patch['122']['name'] = "System defaults conversion patch - set default paymemt type";
+	$patch['122']['patch'] = "UPDATE `si_system_defaults` SET value = $defaults[def_payment_type] where name = 'payment_type'";
+	$patch['122']['date'] = "20070507";
 
 
 
@@ -611,7 +646,7 @@ NULL , 'logging', '0'
 		$patch['67']['date'] = "20070506";
  */
 # write conversion srcipt for this release and will drop si_defaults in the following release just incase something bad happens
-# thinking.. is si_systemdefaults the write name or should it be si_options etc..
+# thinking.. is si_system_defaults the write name or should it be si_options etc..
 	
 #	$patch['64']['name'] = "Drops old default table. Attention: Old defaults get lost...";
 #        $patch['64']['patch'] = "DROP TABLE `si_defaults`";

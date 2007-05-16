@@ -185,15 +185,15 @@ INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_
 (36, '36', 'Adding custom fields to the invoices table', '20070204', '');
 
 -- 
--- Dumping data for table `si_systemdefaults`
+-- Dumping data for table `si_system_defaults`
 -- 
 
-INSERT INTO `si_systemdefaults` (`id`, `name`, `value`) VALUES 
+INSERT INTO `si_system_defaults` (`id`, `name`, `value`) VALUES 
 (1, 'biller', '4'),
 (2, 'customer', '3'),
 (3, 'tax', '1'),
-(4, 'invoice', '1'),
-(5, 'items', '5'),
+(4, 'preference', '1'),
+(5, 'line_items', '5'),
 (6, 'template', 'simple'),
 (7, 'payment_type', '1'),
 (8, 'language', 'de'),

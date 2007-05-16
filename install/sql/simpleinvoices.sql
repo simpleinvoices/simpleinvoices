@@ -272,8 +272,8 @@ INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_
 (60, '59', 'Alter field name b_custom_field2 to custom_field2', '20070430', ''),
 (61, '60', 'Alter field name b_custom_field3 to custom_field3', '20070430', ''),
 (62, '61', 'Alter field name b_custom_field4 to custom_field4', '20070430', ''),
-(63, '62', 'Introduce systemdefaults table', '20070503', ''),
-(64, '63', 'Insert date into the systemdefaults table', '20070503', ''),
+(63, '62', 'Introduce system_defaults table', '20070503', ''),
+(64, '63', 'Insert date into the system_defaults table', '20070503', ''),
 (65, '64', 'Alter field name prod_id to id', '20070507', ''),
 (66, '65', 'Alter field name prod_description to description', '20070507', ''),
 (67, '66', 'Alter field name prod_unit_price to unit_price', '20070507', ''),
@@ -315,10 +315,10 @@ INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_
 (103, '102', 'Alter field name inv_note to note ', '20070507', '');
 
 -- 
--- Tabellenstruktur fuer Tabelle `si_systemdefaults`
+-- Tabellenstruktur fuer Tabelle `si_system_defaults`
 -- 
 
-CREATE TABLE `si_systemdefaults` (
+CREATE TABLE `si_system_defaults` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(30) NOT NULL,
   `value` varchar(30) NOT NULL,
@@ -326,15 +326,15 @@ CREATE TABLE `si_systemdefaults` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
 
 -- 
--- Daten fuer Tabelle `si_systemdefaults`
+-- Daten fuer Tabelle `si_system_defaults`
 -- 
 
-INSERT INTO `si_systemdefaults` (`id`, `name`, `value`) VALUES 
+INSERT INTO `si_system_defaults` (`id`, `name`, `value`) VALUES 
 (1, 'biller', '4'),
 (2, 'customer', '3'),
 (3, 'tax', '1'),
-(4, 'invoice', '1'),
-(5, 'items', '5'),
+(4, 'preference', '1'),
+(5, 'line_items', '5'),
 (6, 'template', 'simple'),
 (7, 'payment_type', '1'),
 (8, 'language', 'de'),

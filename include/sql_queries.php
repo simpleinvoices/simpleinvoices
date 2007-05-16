@@ -230,28 +230,28 @@ function getTaxes() {
 
 function getDefaultCustomer() {
 	global $tb_prefix;
-	$sql = "SELECT *,c.name AS name FROM {$tb_prefix}customers c, {$tb_prefix}systemdefaults s WHERE ( s.name = 'customer' AND c.id = s.value)";
+	$sql = "SELECT *,c.name AS name FROM {$tb_prefix}customers c, {$tb_prefix}system_defaults s WHERE ( s.name = 'customer' AND c.id = s.value)";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	return mysql_fetch_array($query);
 }
 
 function getDefaultPaymentType() {
 	global $tb_prefix;
-	$sql = "SELECT * FROM {$tb_prefix}payment_types p, {$tb_prefix}systemdefaults s WHERE ( s.name = 'payment_type' AND p.pt_id = s.value)";
+	$sql = "SELECT * FROM {$tb_prefix}payment_types p, {$tb_prefix}system_defaults s WHERE ( s.name = 'payment_type' AND p.pt_id = s.value)";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	return mysql_fetch_array($query);
 }
 
-function getDefaultInvoice() {
+function getDefaultPreference() {
 	global $tb_prefix;
-	$sql = "SELECT * FROM {$tb_prefix}preferences p, {$tb_prefix}systemdefaults s WHERE ( s.name = 'invoice' AND p.pref_id = s.value)";
+	$sql = "SELECT * FROM {$tb_prefix}preferences p, {$tb_prefix}system_defaults s WHERE ( s.name = 'preference' AND p.pref_id = s.value)";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	return mysql_fetch_array($query);
 }
 
 function getDefaultBiller() {
 	global $tb_prefix;
-	$sql = "SELECT *,b.name AS name FROM {$tb_prefix}biller b, {$tb_prefix}systemdefaults s WHERE ( s.name = 'biller' AND b.id = s.value )";
+	$sql = "SELECT *,b.name AS name FROM {$tb_prefix}biller b, {$tb_prefix}system_defaults s WHERE ( s.name = 'biller' AND b.id = s.value )";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	return mysql_fetch_array($query);
 }
@@ -259,7 +259,7 @@ function getDefaultBiller() {
 
 function getDefaultTax() {
 	global $tb_prefix;
-	$sql = "SELECT * FROM {$tb_prefix}tax t, {$tb_prefix}systemdefaults s WHERE (s.name = 'tax' AND t.tax_id = s.value)";
+	$sql = "SELECT * FROM {$tb_prefix}tax t, {$tb_prefix}system_defaults s WHERE (s.name = 'tax' AND t.tax_id = s.value)";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	return mysql_fetch_array($query);
 }
@@ -319,7 +319,7 @@ function getInvoiceItems($id) {
 
 function getSystemDefaults() {
 	global $tb_prefix;
-	$print_defaults = "SELECT * FROM {$tb_prefix}systemdefaults";
+	$print_defaults = "SELECT * FROM {$tb_prefix}system_defaults";
 	$result_print_defaults = mysqlQuery($print_defaults) or die(mysql_error());
 	
 	$defaults = null;
@@ -335,7 +335,7 @@ function getSystemDefaults() {
 
 function updateDefault($name,$value) {
 	global $tb_prefix;
-	$sql = "UPDATE {$tb_prefix}systemdefaults SET `value` =  '$value' WHERE  `name` = '$name'"; 
+	$sql = "UPDATE {$tb_prefix}system_defaults SET `value` =  '$value' WHERE  `name` = '$name'"; 
 	//echo $sql;
 	if (mysqlQuery($sql)) {
 		return true;

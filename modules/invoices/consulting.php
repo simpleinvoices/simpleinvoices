@@ -237,7 +237,7 @@ include('./config/config.php');
 		$dynamic_line_items = $_GET['get_num_line_items'];
 		} 
 	else {
-		$dynamic_line_items = $defaults['items'] ;
+		$dynamic_line_items = $defaults['line_items'] ;
 	}	
 
 	$num = 0;

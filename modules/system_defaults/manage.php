@@ -7,7 +7,7 @@ $smarty -> assign("defaults", getSystemDefaults());
 $smarty -> assign("defaultBiller", getDefaultBiller());
 $smarty -> assign("defaultCustomer", getDefaultCustomer());
 $smarty -> assign("defaultTax", getDefaultTax());
-$smarty -> assign("defaultInvoice", getDefaultInvoice());
+$smarty -> assign("defaultPreference", getDefaultPreference());
 $smarty -> assign("defaultPaymentType", getDefaultPaymentType());
 
 ?>

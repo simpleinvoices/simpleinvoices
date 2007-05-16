@@ -181,7 +181,7 @@ CREATE TABLE `si_tax` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 
-CREATE TABLE `si_systemdefaults` (
+CREATE TABLE `si_system_defaults` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(30) NOT NULL,
   `value` varchar(30) NOT NULL,

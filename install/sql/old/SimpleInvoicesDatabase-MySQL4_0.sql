@@ -246,10 +246,10 @@ CREATE TABLE `si_tax` (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table `si_systemdefaults`
+-- Table structure for table `si_system_defaults`
 -- 
 
-CREATE TABLE `si_systemdefaults` (
+CREATE TABLE `si_system_defaults` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(30) NOT NULL,
   `value` varchar(30) NOT NULL,

@@ -319,7 +319,7 @@ $show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,
 		$dynamic_line_items = $_GET['get_num_line_items'];
 		} 
 	else {
-		$dynamic_line_items = $defaults['items'] ;
+		$dynamic_line_items = $defaults['line_items'] ;
 	}	
 
 	$num = 0;

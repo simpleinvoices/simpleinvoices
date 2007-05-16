@@ -112,7 +112,7 @@ DROP TABLE IF EXISTS si_tax;
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table 'si_systemdefaults'
+-- Table structure for table 'si_system_defaults'
 -- 
 
-DROP TABLE IF EXISTS si_systemdefaults;
+DROP TABLE IF EXISTS si_system_defaults;
