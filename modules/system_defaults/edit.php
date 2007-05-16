@@ -41,7 +41,7 @@ else if ($_GET[submit] == "def_inv_template") {
 
 	$handle=opendir("./templates/invoices/");
 	while ($file = readdir($handle)) {
-		if ($file != ".." && $file != "." && $file !=".svn" && $file !="template.php" && $file !="template.php~" ) {
+		if ($file != ".." && $file != "." && $file !="logos" && $file !=".svn" && $file !="template.php" && $file !="template.php~" ) {
 			$files[] = $file;
 		}
 	}

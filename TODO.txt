@@ -1,7 +1,6 @@
 
 - in next release - aim 15th May 
 -todo
- - Move .sql out of install and back to root (untill the installer is done and included as default)
  - add new lang for sys default saved
  - update spanish file with tebas new file
  - Help and About docs - add div id = left to left align them and test all work ok
@@ -13,8 +12,8 @@
  - home.php - make the links to the documentation work
  - include regexp stuff in docs.php file
  - Fix reports to work with new db field names 
- - default template - remove logos 
  - calculation on home.php not working
+ - Move .sql out of install and back to root (untill the installer is done and included as default)
 
 -done
  - sql patch: reset default invoices template to default - Done
@@ -68,6 +67,7 @@
  -- change invoice to preference - done
  -- change items to line_items - done
  - sql patches: make a conversion script for the old defaults to the new one - done
+ - default template - remove logos - done
  
 
 - in next release +1 - aim end of May
