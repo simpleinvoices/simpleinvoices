@@ -13,6 +13,7 @@ require_once("./include/smarty/Smarty.class.php");
 $smarty = new Smarty();
 $smarty -> compile_dir = "./cache/";
 
+unset($LANG);
 include("./include/include_main.php");
 include('./modules/options/database_sqlpatches.php');
 
