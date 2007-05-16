@@ -604,7 +604,7 @@ NULL , 'logging', '0'
 	$patch['117']['date'] = "20070507";
 
 	$patch['118']['name'] = "System defaults conversion patch - set default tax";
-	$patch['118']['patch'] = "UPDATE `si_system_defaults` SET value = $defaults[def_tax] where name = 'tax";
+	$patch['118']['patch'] = "UPDATE `si_system_defaults` SET value = $defaults[def_tax] where name = 'tax'";
 	$patch['118']['date'] = "20070507";
 
 	$patch['119']['name'] = "System defaults conversion patch - set default invoice preference";
@@ -616,7 +616,7 @@ NULL , 'logging', '0'
 	$patch['120']['date'] = "20070507";
 
 	$patch['121']['name'] = "System defaults conversion patch - set default invoice template";
-	$patch['121']['patch'] = "UPDATE `si_system_defaults` SET value = $defaults[def_inv_template] where name = 'template'";
+	$patch['121']['patch'] = "UPDATE `si_system_defaults` SET value = '$defaults[def_inv_template]' where name = 'template'";
 	$patch['121']['date'] = "20070507";
 
 	$patch['122']['name'] = "System defaults conversion patch - set default paymemt type";
