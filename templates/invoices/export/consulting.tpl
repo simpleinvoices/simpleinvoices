@@ -28,6 +28,23 @@
 				<td class="tbl1-left"></td>
 				<td class="tbl1-right" colspan=6><i>{$LANG.description}: </i>{$invoiceItem.description}</td>
 			</tr>
+			<tr>
+	                        <td class="tbl1-left"></td><td class="tbl1-right" colspan="5">
+                                                <table width="100%">
+                                                        <tr>
+        			        <tr>
+			                        <td width=50%>{$customFieldLabels.product_cf1}: {$invoiceItem.product.custom_field1}</td><td width=50%>{$customFieldLabels.product_cf2}: {$invoiceItem.product.custom_field2}</td>
+			                </tr>
+			                <tr>
+			                        <td width=50%>{$customFieldLabels.product_cf3}: {$invoiceItem.product.custom_field3}</td><td width=50%>{$customFieldLabels.product_cf4}: {$invoiceItem.product.custom_field4}</td>
+			                </tr>
+
+                                                        </tr>
+                                                </table>
+                                </td>
+	                 </tr>
+
+
 			<tr class="tbl1-left tbl1-right tbl1-bottom">
 				<td class="tbl1-left tbl1-bottom" ></td>
 				<td class="tbl1-bottom"></td>
