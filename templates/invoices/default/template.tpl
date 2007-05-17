@@ -263,27 +263,6 @@
                         <td class="tbl1-left"></td><td class="tbl1-right" colspan="5">
                                                 <table width="100%">
                                                         <tr>
-			{php}
-				/*global $product_cf;
-				global $product;
-				global $customFieldLabels;
-				global $invoiceItem;
-				
-                /*	$itemised_line .= inv_itemised_cf($customFieldLabels["product_cf1"], $product["custom_field1"]);
-                	$inv_it_tr++;
-                	$itemised_line .= do_tr($inv_it_tr,'blank-class');
-		
-				for($i=1;$i<=4;$i++) {
-					
-                	$itemised_line .= inv_itemised_cf($customFieldLabels["product_cf$i"], $invoiceItem['product']["custom_field$i"]);
-                	echo $invoiceItem['product']["custom_field$i"]."TTT";
-                	$inv_it_tr++;
-                	$itemised_line .= do_tr($inv_it_tr,'blank-class');
-				}
-             
-                $inv_it_tr = 0;
-                echo $itemised_line;*/
-               {/php}
 
 					{inv_itemised_cf label=$customFieldLabels.product_cf1 field=$invoiceItem.product.custom_field1}
 					{do_tr number=1 class="blank-class"}
@@ -324,22 +303,16 @@
                         <td class="tbl1-left"></td><td class="tbl1-right" colspan="6">
                                                 <table width="100%">
                                                         <tr>
-				{php}
-				global $customFieldLabels;
-				
-	                $consulting_line .= inv_itemised_cf($customFieldLabels["product_cf1"], $product["custom_field1"]);
-	                $inv_it_tr++;
-	                $consulting_line .= do_tr($inv_it_tr,'blank-class');
-/*
-				for($i=1;$i<=4;$i++) {
-	                $consulting_line .= inv_itemised_cf($customFieldLabels["product_cf$i"], $product["custom_field$i"]);
-	                $inv_it_tr++;
-	                $consulting_line .= do_tr($inv_it_tr,'blank-class');
-				}
-*/              
-                $inv_it_tr = 0;
-                echo $consulting_line;
-                {/php}
+
+					{inv_itemised_cf label=$customFieldLabels.product_cf1 field=$invoiceItem.product.custom_field1}
+					{do_tr number=1 class="blank-class"}
+					{inv_itemised_cf label=$customFieldLabels.product_cf2 field=$invoiceItem.product.custom_field2}
+					{do_tr number=2 class="blank-class"}
+					{inv_itemised_cf label=$customFieldLabels.product_cf3 field=$invoiceItem.product.custom_field3}
+					{do_tr number=3 class="blank-class"}
+					{inv_itemised_cf label=$customFieldLabels.product_cf4 field=$invoiceItem.product.custom_field4}
+					{do_tr number=4 class="blank-class"}
+
                                                         </tr>
                                                 </table>
                                 </td>

@@ -17,10 +17,12 @@ $mysql = 5;
 /*Select language for Simple Invoices to use*/
 #$language = "castellano_spanish";
 #$language = "catala_catalan";
+#$language = "cestina_czech";
 #$language = "deutsch_german";
 $language = "english_UK";
 #$language = "francais_french";
 #$language = "galego_galician";
+#$language = "nederlands_dutch";
 #$language = "portugues_portuguese";
 #$language = "romana_romanian";
 #$language = "suomi_finnish";
