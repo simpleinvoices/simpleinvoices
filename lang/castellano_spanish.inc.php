@@ -1,23 +1,17 @@
 <?php
+
 /*
 * Script: castellan_spanish.inc.php
 *   Castellano - Spanish translation file
 *
 * Authors:
-*  Esteban Mat�as Vergara, Anton Meixome   
+*  Esteban MatÃƒÂ­as Vergara, Anton Meixome
 *
-* Last edited: 
-*    2007-04-26
+* Last edited:
+*    2007-05-03
 *
-* License: 
+* License:
 *    GPL v2 or above
-*/
-
-
-/*
-@author:
-@last_edited:2007-04-26
-@license: GPL v2 or above
 */
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
@@ -27,27 +21,25 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
 #all
 $title = "Simple Invoices";//1
 
-#New lang file style $lang followed by the word or description - not grouped by page
 $LANG['about'] = "Acerca de";//1
 $LANG['account_info'] = "Informaci&oacute;n de la Cuenta";//1
 $LANG['actions'] = "Acciones";//1
 $LANG['add_biller'] = "A&ntilde;adir Facturador";//1
 $LANG['add_customer'] = "A&ntilde;adir Cliente";//1
 $LANG['add_invoice_preference'] = "A&ntilde;adir Preferencias de Factura";//1
-$LANG['add_new_biller'] = "Add New Biller";//0
+$LANG['add_new_biller'] = "A&ntilde;adir Nuevo Facturador";//1
 $LANG['add_new_invoice'] = "A&ntilde;adir Nueva Factura";//1
 $LANG['add_new_payment_type'] = "A&ntilde;adir Nuevo Tipo de Pago";//1
-$LANG['add_new_preference'] = "A&ntilde;adir Preferencias de Nueva Factura";//1
+$LANG['add_new_preference'] = "A&ntilde;adir Preferencias de Factura";//1
 $LANG['add_new_product'] = "A&ntilde;adir Nuevo Producto";//1
-$LANG['add_new_tax_rate'] = "A&ntilde;adir Nuevo Porcentaje de Impuesto";//1
-$LANG['add_tax_rate'] = "A&ntilde;adir Nuevo Impuesto";//1
+$LANG['add_new_tax_rate'] = "A&ntilde;adir Nuevo Tipo de Impuesto";//1
 $LANG['add_payment_type'] = "A&ntilde;adir Tipo de Pago";//1
 $LANG['add_product'] = "A&ntilde;adir Producto";//1
+$LANG['add_tax_rate'] = "A&ntilde;adir Nuevo Impuesto";//1
 $LANG['address'] = "Direcci&oacute;n";//1
-#might be able to delete adderss: variable - grep files
 $LANG['address_city'] = "Direcci&oacute;n: Ciudad";//1
 $LANG['address_country'] = "Direcci&oacute;n: Pa&iacute;s";//1
-$LANG['address_state'] = "Direcci&oacute;n: Provincia/Comunidad Aut&oacute;noma";//1
+$LANG['address_state'] = "Direcci&oacute;n: Provincia";//1
 $LANG['address_street'] = "Direcci&oacute;n: Calle";//1
 $LANG['address_zip'] = "Direcci&oacute;n: C&oacute;digo Postal";//1
 $LANG['age'] = "Edad";//1
@@ -60,10 +52,10 @@ $LANG['biller_details'] = "Detalles del Facturador";//1
 $LANG['biller_edit'] = "Editar Facturador";//1
 $LANG['biller_id'] = "ID del Facturador";//1
 $LANG['biller_name'] = "Nombre del Facturador";//1
-$LANG['biller_to_add'] = "Facturador a A&ntilde;adir";//1
 $LANG['biller_sales'] = "Ventas por Facturador";//1
-$LANG['biller_sales_total'] = "Ventas por Facturador - Total";//1
 $LANG['biller_sales_by_customer_totals'] = "Ventas de Facturador por Cliente - Totales"; //1
+$LANG['biller_sales_total'] = "Ventas por Facturador - Total";//1
+$LANG['biller_to_add'] = "Facturador a A&ntilde;adir";//1
 $LANG['billers'] = "Facturadores";//1
 $LANG['cancel'] = "Anular";//1
 $LANG['change_log'] = "Modificar Log";//1
@@ -71,13 +63,14 @@ $LANG['city'] = "Ciudad";//1
 $LANG['consulting'] = "Analizar";//1
 $LANG['consulting_style'] = "Estilo Anal&iacute;tico";//1
 $LANG['country'] = "Pa&iacute;s";//1
+$LANG['create_invoice'] ="Crear una Factura";//1
 $LANG['credits'] = "Cr&eacute;ditos";//1
 $LANG['currency_sign'] = "Simbolo de Moneda";//1
+$LANG['custom_field'] = "Campo Personalizable";//1
 $LANG['custom_field1'] = "Campo Personalizable 1";//1
 $LANG['custom_field2'] = "Campo Personalizable 2";//1
 $LANG['custom_field3'] = "Campo Personalizable 3";//1
 $LANG['custom_field4'] = "Campo Personalizable 4";//1
-$LANG['custom_field'] = "Campo Personalizable";//1
 $LANG['custom_field_db_field_name'] = "Nombre de Campo en Base de Datos";//1
 $LANG['custom_fields'] = "Campo Personalizables";//1
 $LANG['custom_fields_upper'] = "Campo Personalizables";//1
@@ -100,8 +93,8 @@ $LANG['days'] = "D&iacute;as";//1
 $LANG['debtors'] = "Deudores";//1
 $LANG['debtors_by_aging_periods'] = "Deudores por periodos de Antig&uuml;edad";//1
 $LANG['debtors_by_amount_owed'] = "Deudores por Monto de Deuda";//1
-$LANG['default_inv_template'] = "Default invoice template ";//0
-$LANG['default_number_items'] = "Default number of line items:";//0
+$LANG['default_inv_template'] = "Plantilla predeterminada de factura";//1
+$LANG['default_number_items'] = "N&uacute;mero predeterminado de lineas de items:";//1
 $LANG['default_payment_type'] = "Default payment type";//0
 $LANG['description'] = "Descripci&oacute;on";//1
 $LANG['details'] = "Detalles";//1
@@ -118,21 +111,29 @@ $LANG['export_pdf_tooltip'] = "A formato PDF";//1
 $LANG['export_tooltip'] = "Exportar";//1
 $LANG['export_xls_tooltip'] = "A formato Excel";//1
 $LANG['faqs'] = "Preguntas Frecuentes (FAQ)";//1
+$LANG['faqs_how'] ="&iquest;C&oacute;mo puedo crear facturas?";//1
+$LANG['faqs_need'] ="&iquest;Qu&eacute; necesito para empezar a facturar?";//1
+$LANG['faqs_type'] ="&iquest;Qu&eacute; significan los diferentes tipos de facturas?";//1
+$LANG['faqs_what'] ="&iquest;Qu&eacute; es Simple Invoices?";//1
 $LANG['fax'] = "Fax";//1
 $LANG['format_tooltip'] = "Formato";//1
 $LANG['get_help'] = "Obtener Ayuda";//1
+$LANG['getting_started'] ="Para empezar";//1
 $LANG['gross_total'] = "Bruto Total";//1
 $LANG['help'] = "Ayuda";//1
-$LANG['help_manage_invoices'] = "¿Qu&eacute; significan las diferentes columnas?";//1
+$LANG['help_manage_invoices'] = "&iquest;Qu&eacute; significan las diferentes columnas?";//1
 $LANG['hide_details'] = "Ocultar Detalles";//1
 $LANG['home'] = "Inicio";//1
 $LANG['id'] = "ID";//1
-$LANG['ie_10_for_10'] = "* ej. 10 por 10%";//1
+$LANG['ie_10_for_10'] = "ej. 10 por 10%";//1
 $LANG['included'] = "inclu&iacute;dos";//1
+$LANG['insert_biller'] = "A&ntilde;adir un Facturador";//1
 $LANG['insert_biller'] = "Introducir Facturador";//1
+$LANG['insert_customer'] = "A&ntilde;adir un Cliente";//1
 $LANG['insert_customer'] = "Introducir Cliente";//1
 $LANG['insert_payment_type'] = "Introducir Tipo de Pago";//1
 $LANG['insert_preference'] = "Introducir Preferencia";//1
+$LANG['insert_product'] = "A&ntilde;adir un Producto";//1
 $LANG['insert_product'] = "Introducir Producto";//1
 $LANG['insert_tax_rate'] = "Introducir Porcentaje de Impuesto";//1
 $LANG['installation'] = "Instalaci&oacute;n";//1
@@ -170,8 +171,10 @@ $LANG['manage'] = "Gesti&oacute;n";//1
 $LANG['manage_billers'] = "Gestionar Facturadores";//1
 $LANG['manage_custom_fields'] = "Gestionar Campos Personalizables";//1
 $LANG['manage_customers'] = "Gestionar Clientes";//1
-$LANG['manage_invoices'] = "Gestionar Facturas";//1
+$LANG['manage_data'] ="Gestionar sus Datos";//1
+$LANG['manage_existing_invoice'] ="Gestionar las facturas actuales";//1
 $LANG['manage_invoice_preferences'] = "Gestionar Preferencias de Facturas";//1
+$LANG['manage_invoices'] = "Gestionar Facturas";//1
 $LANG['manage_payment_types'] = "Gestionar Tipos de Pago";//1
 $LANG['manage_payments'] = "Gestionar Pagos";//1
 $LANG['manage_preferences'] = "Gestionar Preferencias";//1
@@ -183,19 +186,24 @@ $LANG['mobile_short'] = "M&oacute;v.";//1
 $LANG['new_invoice_consulting'] = "Crear Factura - Anal&iacute;tico";//1
 $LANG['new_invoice_itemised'] = "Crear Factura - Detallado";//1
 $LANG['new_invoice_total'] = "Crear Factura - Totalizado";//1
-$LANG['no_customers'] = "No hay clientes en la base de datos, por favor introduzca uno";//1
+$LANG['no_billers'] = "No hay facturadores en la Base de Datos. Por favor agregue uno";//1
+$LANG['no_customers'] = "No hay clientes en la Base de Datos. Por favor agregue uno";//1
+$LANG['no_defaults'] = "No hay valores por defecto";//1
 $LANG['no_invoices'] = "No hay facturas en la base de datos";//1
 $LANG['no_payment_types'] = "Lo siento, no hay tipos de pago disponibles, por favor introduzca uno";//1
+$LANG['no_payments'] = "No hay pagos en la Base de Datos";//1
 $LANG['no_preferences'] = "No hay preferencias de factura en la base de datos, por favor introduzca uno";//1
-$LANG['no_tax_rates'] = "No hay porcentajes de impuestos en la base de datos, por favor introduzca uno";//1
+$LANG['no_products'] = "No hay productos en la Base de Datos. Por favor agregue uno.";//1
+$LANG['no_tax_rates'] = "No hay Tipos de Impuestos en la Base de Datos. Por favor agregue uno";//1
 $LANG['note'] = "Nota";//1
 $LANG['notes'] = "Notas";//1
 $LANG['notes_opt'] = "Notas (opcional)";//1
 $LANG['number_short'] = "N&uacute;m.";//1
-$LANG['owing'] = "Pendiente";//1
 $LANG['optional'] = "Opcional";//1
 $LANG['options'] = "Opciones";//1
+$LANG['owing'] = "Pendiente";//1
 $LANG['paid'] = "Pagado";//1
+$LANG['payment_id'] = "ID de Pago";//1
 $LANG['payment_type'] = "Tipo de Pago";//1
 $LANG['payment_type_description'] = "Descripci&oacute;n de tipo de pago";//1
 $LANG['payment_type_details'] = "Detalles de Tipo de Pago";//1
@@ -203,8 +211,11 @@ $LANG['payment_type_edit'] = "Editar Tipo de Pago";//1
 $LANG['payment_type_id'] = "ID de Tipo de Pago";//1
 $LANG['payment_type_method'] = "Tipo/M&eacute;todo de Pago";//1
 $LANG['payment_type_to_add'] = "Tipo de Pago a a&ntilde;adir";//1
-$LANG['payment_types'] = "Tipos de Pago";//0
+$LANG['payment_types'] = "Tipos de Pago";//1
 $LANG['payments'] = "Pagos";//1
+$LANG['payments_filtered'] = "Pagos filtrados por ID de Factura";//1
+$LANG['payments_filtered_customer'] = "Pagos filtrados por ID de Cliente";//1
+$LANG['payments_filtered_invoice'] = "Procesar pago para esta factura";//1
 $LANG['phone'] = "Tel&eacute;fono";//1
 $LANG['phone_short'] = "Telf.";//1
 $LANG['preference_id'] = "ID de Preferencia";//1
@@ -226,6 +237,8 @@ $LANG['products_by_customer'] = "Productos por Cliente";//1
 $LANG['products_sold_customer_total'] = "Productos Vendidos por Cliente - Totales";//1
 $LANG['products_sold_total'] = "Productos Vendidos - Total";//1
 $LANG['provision_of'] = "Provisi&oacute;n de";//1
+$LANG['quantity'] = "Cantidad";//1
+$LANG['quantity_short'] = "Cant.";//1
 $LANG['quick_view_of'] = "Esta es una vista r&aacute;pida de";//1
 $LANG['quick_view_tooltip'] = "Vista r&aacute;pida de";//1
 $LANG['reports'] = "Reportes";//1
@@ -233,45 +246,44 @@ $LANG['sales'] = "Ventas";//1
 $LANG['sales_by_customers'] = "Ventas por Cliente";//1
 $LANG['sanity_check'] = "Limpieza BD de Facturas";//1
 $LANG['save'] = "Grabar";//1
-$LANG['save_biller'] = "Save Biller";//0
-$LANG['save_biller_success'] = "Biller successfully saved, <br> you will be redirected to the Manage Billers page";//0
-$LANG['save_biller_failure'] = "Something went wrong, please try saving the biller again<br>";//0
+$LANG['save_biller'] = "Guardar Facturador";//1
+$LANG['save_biller_failure'] = "Se produjo un error. Por favor intente guardar el facturador m&aacute;s tarde<br>";//1
+$LANG['save_biller_success'] = "Facturador guardado correctamente. <br> Redireccionando a p&aacute;gina de Gesti&oacute;n de Facturadores";//1
 $LANG['save_custom_field'] = "Grabar Campos Personalizables";//1
-$LANG['save_custom_field_success'] = "Custom field successfully saved, <br> you will be redirected back to the Manage Custom Fields";//0
-$LANG['save_custom_field_failure'] = "Something went wrong, please try editing the custom field again<br>";//0
-$LANG['save_customer'] = "Save Customer";//0
-$LANG['save_customer_failure'] = "Something went wrong, please try saving the customer again";//0
-$LANG['save_customer_success'] = "Customer successfully saved,<br> you will be redirected back to the Manage Customers page";//0
-$LANG['save_defaults'] = "Save Defaults";//0
-$LANG['save_defaults_biller_success'] = "System defaults: Default biller successfully updated,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_customer_success'] = "System defaults: Default customer successfully updated,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_line_items_success'] = "System defaults: Number of line items successfully update,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_payment_type_success'] = "System defaults: Default payment_type updated,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_preference_success'] = "System defaults: Default invoice preference updated,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_tax_success'] = "System defaults: Default tax updated,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_template_success'] = "System defaults: Default invoice template successfully update,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_custom_field_failure'] = "Se produjo un error. Por favor intente guardar el campo personalizable m&aacute;s tarde<br>";//1
+$LANG['save_custom_field_success'] = "Campos Personalizables guardados correctamente. <br> Redireccionando a p&aacute;gina de Gesti&oacute;n de Campos Personalizables";//1
+$LANG['save_customer'] = "Guardar Cliente";//1
+$LANG['save_customer_failure'] = "Se produjo un error. Por favor intente guardar el cliente m&aacute;s tarde";//1
+$LANG['save_customer_success'] = "Cliente guardado correctamente. <br> Redireccionando a p&aacute;gina de Gesti&oacute;n de Clientes";//1
+$LANG['save_defaults'] = "Guardar Valores por Defecto";//1
+$LANG['save_defaults_success'] = "The system default has been successfully updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
-$LANG['save_invoice'] = "Save Invoice";//0
-$LANG['save_invoice_failure'] = "Something went wrong, please try saving the invoice again";//0
-$LANG['save_invoice_items_success'] = "Processing invoice items<br> you will be redirected back to the Quick View of this invoice";//0
-$LANG['save_invoice_success'] = "Processing invoice, <br> you will be redirected Quick View of this invoice";//0
-$LANG['save_payment_invoice_success'] = "Payment successfully processed, <br> you will be redirected to the Manage Invoices page";//0
-$LANG['save_payment_failure'] = "Something went wrong, please try saving the payment again";//0
-$LANG['save_payment_success'] = "Payment successfully processed,<br> you will be redirected back to the Manage Payments page";//0
+$LANG['save_invoice'] = "Guardar Factura";//1
+$LANG['save_invoice_failure'] = "Se produjo un error. Por favor intente guardar la factura nuevamente";//1
+$LANG['save_invoice_items_success'] = "Procesando los Items de Factura.<br> Redireccionando a la p&aacute;gina de Vista R&aacute;pida de Facturas";//1
+$LANG['save_invoice_success'] = "Procesando Factura.<br> Redireccionando a la p&aacute;gina de Vista R&aacute;pida de Facturas";//1
+$LANG['save_payment_failure'] = "Se produjo un error. Por favor intente guardar el pago m&aacute;s tarde";//1
+$LANG['save_payment_invoice_success'] = "Pago procesado correctamente. <br> Redireccionando a la p&aacute;gina de Gesti&oacute;n de Facturas";//1
+$LANG['save_payment_success'] = "Pago procesado correctamente. <br> Redireccionando a la p&aacute;gina de Gesti&oacute;n de Pagos";//1
 $LANG['save_payment_type'] = "Grabar Tipo de Pago";//1
-$LANG['save_payment_type_failure'] = "Something went wrong, please try saving the payment type again";//0
-$LANG['save_payment_type_success'] = "Payment Type successfully saved, <br> you will be redirected back to the Manage Payment Types";//0
-$LANG['save_preference_failure'] = "Something went wrong, please try saving the invoice preference again";//0
-$LANG['save_preference_success'] = "Invoice preference successfully saved,<br> you will be redirected to Manage Preferences page";//0
+$LANG['save_payment_type_failure'] = "Se produjo un error. Por favor intente guardar el tipo de pago m&aacute;s tarde";//1
+$LANG['save_payment_type_success'] = "Tipo de Pago procesado correctamente. <br> Redireccionando a la p&aacute;gina de Gesti&oacute;n de Tipos de Pago";//1
+$LANG['save_preference_failure'] = "Se produjo un error. Por favor intente guardar el las preferencias de factura nuevamente";//1
+$LANG['save_preference_success'] = "Preferencias de Factura guardadas correctamente. <br> Redireccionando a la p&aacute;gina de Gesti&oacute;n de Preferencias";//1
 $LANG['save_product'] = "Grabar Producto";//1
-$LANG['save_product_failure'] = "Something went wrong, please try saving the product again";//0
-$LANG['save_product_success'] = "Product successfully saved, <br> you will be redirected to the Manage Products page";//0
+$LANG['save_product_failure'] = "Se produjo un error. Por favor intente guardar el producto m&aacute;s tarde";//1
+$LANG['save_product_success'] = "Producto guardado correctamente. <br> Redireccionando a la p&aacute;gina de Gesti&oacute;n de Productos";//1
 $LANG['save_tax_rate'] = "Grabar Porcentaje de Impuesto";//1
-$LANG['save_tax_rate_failure'] = "Something went wrong, please try adding the tax rate again";//0
-$LANG['save_tax_rate_success'] = "Tax rate successfully saved, <br> you will be redirected to the Manage Tax Rates page";//0
+$LANG['save_tax_rate_failure'] = "Se produjo un error. Por favor intente guardar el tipo de impuesto m&aacute;s tarde";//1
+$LANG['save_tax_rate_success'] = "Tipo de Impuesto guardado correctamente. <br> Redireccionando a la p&aacute;gina de Gesti&oacute;n de Tipos de Impuesto";//1
 $LANG['select_invoice'] = "Por favor seleccione una Factura";//1
+$LANG['shortcut'] ="Men&uacute; de atajos";//1
 $LANG['show_details'] = "Mostrar detalles";//1
 $LANG['state'] = "Estado";//1
+$LANG['stats'] ="Informes r&aacute;pidos";//1
+$LANG['stats_biller'] ="Mayor Facturador - por cantidad facturada";//1
+$LANG['stats_customer'] ="Mayor Cliente - por cantidad facturada";//1
+$LANG['stats_debtor'] ="El mayor deudor";//1
 $LANG['street'] = "Calle";//1
 $LANG['street2'] = "Calle 2";//1
 $LANG['sub_total'] = "Sub Total";//1
@@ -307,57 +319,11 @@ $LANG['unit_price'] = "Precio Unitario";//1
 $LANG['upgrading_simple_invoices'] = "Actualizar Simple Invoices";//1
 $LANG['using_simple_invoices'] = "Usar Simple Invoices";//1
 $LANG['view'] = "Ver";//1
-$LANG['quantity'] = "Cantidad";//1
-$LANG['quantity_short'] = "Cant.";//1
-$LANG['want_more_fields'] = "want more fields";//0
+$LANG['want_more_fields'] = "&iquest;Quiere m&aacute;s campos?";//1
 $LANG['welcome'] = "Bienvenido a ";//1
-$LANG['what_are_custom_fields'] = "What are custom fields";//0
-$LANG['whats_this_page_about'] = "Whats this page about";//0
+$LANG['what_are_custom_fields'] = "&iquest;Qu&eacute; son los campos personalizables?";//1
+$LANG['whats_this_page_about'] = "&iquest;De qu&eacute; trata esta p&aacute;gina?";//1
 $LANG['zip'] = "C&oacute;digo postal";//1
-
-
-#Index.php - front page
-
-
-$LANG['shortcut'] ="Men&uacute; de atajos";//1
-
-$LANG['getting_started'] ="Para empezar";//1
-$LANG['faqs_what'] ="¿Qu&eacute; es Simple Invoices?";//1
-$LANG['faqs_need'] ="¿Qu&eacute; necesito para empezar a facturar?";//1
-$LANG['faqs_how'] ="¿C&oacute;mo puedo crear facturas?";//1
-$LANG['faqs_type'] ="¿Qu&eacute; significan los diferentes tipos de facturas?";//1
-
-$LANG['create_invoice'] ="Crear una Factura";//1
-
-$LANG['manage_existing_invoice'] ="Gestionar las facturas actuales";//1
-$LANG['manage_invoices'] ="Gestionar Facturas";//1
-
-$LANG['manage_data'] ="Gestionar sus Datos";//1
-$LANG['insert_customer'] = "A&ntilde;adir un Cliente";//1
-$LANG['insert_biller'] = "A&ntilde;adir un Facturador";//1
-$LANG['insert_product'] = "A&ntilde;adir un Producto";//1
-
-$LANG['options'] ="Opciones";//1
-
-$LANG['stats'] ="Informes r&aacute;pidos";//1
-$LANG['stats_debtor'] ="El mayor deudor";//1
-$LANG['stats_customer'] ="Mayor Cliente - por cantidad facturada";//1
-$LANG['stats_biller'] ="Mayor Facturador - por cantidad facturada";//1
-
-/* New stuff */
-$LANG['no_products'] = "There are no products in the database, please add one";//0
-$LANG['no_billers'] = "There are no billers in the database, please add one";//0
-$LANG['no_customers'] = "There are no customers in the database, please add one";//0
-$LANG['no_preferences'] = "There are no invoice preferences in the database, please add one";//0
-$LANG['default_number_items'] = "Default number of line items:";//0
-$LANG['default_inv_template'] = "Default invoice template ";//0
-$LANG['no_defaults'] = "There are no defaults";//0
-$LANG['no_payments'] = "There are no payments in the database";//0
-$LANG['payment_id'] = "Payment ID";//0
-$LANG['payments_filtered'] = "Payments filtered by Invoice ID";//0
-$LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
-$LANG['payments_filtered_customer'] = "Payments filtered by Customer ID";//0
-$LANG['no_tax_rates'] = "There are no tax rates in the database, please add one";//0
 
 
 ?>

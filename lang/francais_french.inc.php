@@ -5,7 +5,7 @@
 * 	Engligh translation file
 *
 * Authors:
-*	 Catherine, Lionel 
+*	 Catherine, Lionel
 *
 * Last edited:
 * 	 2007-05-04
@@ -13,8 +13,6 @@
 * License:
 *	 GPL v2 or above
 */
-
-
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
 regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
@@ -177,7 +175,6 @@ $LANG['manage_data'] ="G&eacute;rer les donn&eacute;es";//1
 $LANG['manage_existing_invoice'] ="G&eacute;rer les factures";//1
 $LANG['manage_invoice_preferences'] = "Mod&egrave;les ";//1
 $LANG['manage_invoices'] = "Factures";//1
-$LANG['manage_invoices'] ="Factures";//1
 $LANG['manage_payment_types'] = "Types de paiement";//1
 $LANG['manage_payments'] = "Paiements";//1
 $LANG['manage_preferences'] = "Pr&eacute;f&eacute;rences";//1
@@ -191,23 +188,19 @@ $LANG['new_invoice_itemised'] = "Nouvelle facture d&eacute;taill&eacute;e";//1
 $LANG['new_invoice_total'] = "Nouvelle facture texte";//1
 $LANG['no_billers'] = "Il n'y a pas de vendeurs dans la base, veuillez svp en ajouter un";//1
 $LANG['no_customers'] = "Il n'y a pas de clients dans la base, veuillez svp en ajouter un";//1
-$LANG['no_customers'] = "Il n'y a pas encore de clients : veuillez svp en ajouter un";//1
 $LANG['no_defaults'] = "There are no defaults";//0
 $LANG['no_invoices'] = "Il n'y a pas de factures dans la base";//1
 $LANG['no_payment_types'] = "Il n'y a pas de type de paiement : veuillez svp en ajouter un";//1
 $LANG['no_payments'] = "Il n'y a pas de paiements inscrits dans la base";//1
 $LANG['no_preferences'] = "Il n'y a pas de mod&egrave;le de facture : veuillez svp en ajouter un";//1
-$LANG['no_preferences'] = "Il n'y a pas de pr&eacute;rences concernant les factures dans la base, veuillez svp en ajouter une";//1
 $LANG['no_products'] = "Il n'y a pas de produits dans la base, veuillez svp en ajouter un";//1
 $LANG['no_tax_rates'] = "Il n'y a pas de % de TVA : veuillez svp en ajouter un";//1
-$LANG['no_tax_rates'] = "Il n'y a pas de taux dans la base, veuillez svp en ajouter un";//1
 $LANG['note'] = "Note";//1
 $LANG['notes'] = "Notes";//1
 $LANG['notes_opt'] = "Notes (optionnel)";//1
 $LANG['number_short'] = "N&deg; 2007-";//1
 $LANG['optional'] = "optionnel";//1
 $LANG['options'] = "options";//1
-$LANG['options'] ="Options";//1
 $LANG['owing'] = "D&ucirc;";//1
 $LANG['paid'] = "Pay&eacute;";//1
 $LANG['payment_id'] = "Paiement ID";//1
@@ -263,14 +256,8 @@ $LANG['save_customer'] = "Enregistrer le client";//1
 $LANG['save_customer_failure'] = "Une erreur s'est produite, essayer svp de sauvegarder une nouvelle fois le client";//1
 $LANG['save_customer_success'] = "Client enregistr&eacute; avec succ&egrave;s,<br> vous aller &ecirc;tre redirig&eacute; vers la page de gestion des clients";//1
 $LANG['save_defaults'] = "Enregistrer les pr&eacute;f&eacute;rences par d&eacute;faut";//1
-$LANG['save_defaults_biller_success'] = "Pr&eacute;f&eacute;rences de l'utilisateur: les r&eacute;glages pour le vendeur ont &eacute;t&eacute; mis &agrave; jour avec succ&egrave;s,<br> vous aller &ecirc;tre redirig&eacute; vers l'index des pr&eacute;f&eacute;rences de l'utilisateur";//1
-$LANG['save_defaults_customer_success'] = "Pr&eacute;f&eacute;rences de l'utilisateur: les r&eacute;glages pour le client ont &eacute;t&eacute; mis &agrave; jour avec succ&egrave;s,<br> vous aller &ecirc;tre redirig&eacute; vers l'index des pr&eacute;f&eacute;rences de l'utilisateur";//1
-$LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
-$LANG['save_defaults_line_items_success'] = "System defaults: Number of line items successfully updated,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_payment_type_success'] = "Pr&eacute;f&eacute;rences de l'utilisateur: les r&eacute;glages pour le type de paiement ont &eacute;t&eacute; mis &agrave; jour avec succ&egrave;s,<br> vous aller &ecirc;tre redirig&eacute; vers l'index des pr&eacute;f&eacute;rences de l'utilisateur";//1
-$LANG['save_defaults_preference_success'] = "Pr&eacute;f&eacute;rences de l'utilisateur: les r&eacute;glages pour la facture ont &eacute;t&eacute; mis &agrave; jour avec succ&egrave;s,<br> vous aller &ecirc;tre redirig&eacute; vers l'index des pr&eacute;f&eacute;rences de l'utilisateur";//1
-$LANG['save_defaults_tax_success'] = "Pr&eacute;f&eacute;rences de l'utilisateur: les r&eacute;glages pour le taux ont &eacute;t&eacute; mis &agrave; jour avec succ&egrave;s,<br> vous aller &ecirc;tre redirig&eacute; vers l'index des pr&eacute;f&eacute;rences de l'utilisateur";//1
-$LANG['save_defaults_template_success'] = "Pr&eacute;f&eacute;rences de l'utilisateur: les r&eacute;glages pour le gabarit des factures ont &eacute;t&eacute; mis &agrave; jour avec succ&egrave;s,<br> vous aller &ecirc;tre redirig&eacute; vers l'index des pr&eacute;f&eacute;rences de l'utilisateur";//1
+$LANG['save_defaults_success'] = "The system default has been successfully updated,<br> you will be redirected back to System Defaults page";//1
+$LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//1
 $LANG['save_invoice'] = "Enregistrer une facture";//1
 $LANG['save_invoice_failure'] = "Une erreur s'est produite, essayer svp de sauvegarder une nouvelle fois la facture";//1
 $LANG['save_invoice_items_success'] = "Processing invoice items<br> you will be redirected back to the Quick View of this invoice";//0

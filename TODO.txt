@@ -3,8 +3,6 @@
 -todo
  - include regexp stuff in docs.php file
  - Help and About docs - add div id = left to left align them and test all work ok
- - update spanish file with tebas new file
- - lang files - make sure all have same variables
  - Invoice templates 
  -- make merge_adress work in both templates - done
  -- make invoice items custom fields work - done
@@ -70,7 +68,8 @@
  - add new lang for sys default saved - done
  - Move .sql out of install and back to root (untill the installer is done and included as default) - done
  - check all alert boxes work - done
- 
+ - update spanish file with tebas new file - done
+ - lang files - make sure all have same variables - done
 
 - in next release +1 - aim end of May
 -todo

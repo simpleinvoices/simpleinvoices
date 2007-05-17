@@ -14,7 +14,6 @@
 *    GPL v2 or above
 */
 
-
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
 regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
@@ -176,7 +175,6 @@ $LANG['manage_data'] ="Spravovat vaše údaje";//1
 $LANG['manage_existing_invoice'] ="Spravovat vytvo?ené faktury";//1
 $LANG['manage_invoice_preferences'] = "Spravovat volby faktur";//1
 $LANG['manage_invoices'] = "Spravovat faktury";//1
-$LANG['manage_invoices'] ="Spravovat faktury";//1
 $LANG['manage_payment_types'] = "Spravovat zp?soby úhrady";//1
 $LANG['manage_payments'] = "Spravovat platby";//1
 $LANG['manage_preferences'] = "Spravovat volby";//1
@@ -190,23 +188,19 @@ $LANG['new_invoice_itemised'] = "Nové faktury - po položkách";//1
 $LANG['new_invoice_total'] = "Nové faktury - celkem";//1
 $LANG['no_billers'] = "There are no billers in the database, please add one";//0
 $LANG['no_customers'] = "Databáze neobsahuje žádné odb?ratele, prosím, vložte alespo? jednoho odb?ratele";//1
-$LANG['no_customers'] = "There are no customers in the database, please add one";//0
 $LANG['no_defaults'] = "There are no defaults";//0
 $LANG['no_invoices'] = "Databáze neobsahuje žádné faktury";//1
 $LANG['no_payment_types'] = "Nejsou k dispozici žádné zp?soby úhrady, prosím, zadejte je";//1
 $LANG['no_payments'] = "There are no payments in the database";//0
 $LANG['no_preferences'] = "Databáze neobsahuje žádné volby faktur, prosím, zadejte je";//1
-$LANG['no_preferences'] = "There are no invoice preferences in the database, please add one";//0
 $LANG['no_products'] = "There are no products in the database, please add one";//0
 $LANG['no_tax_rates'] = "Databáze neobsahuje žádné sazby daní, prosím, zadejte je";//1
-$LANG['no_tax_rates'] = "There are no tax rates in the database, please add one";//0
 $LANG['note'] = "Poznámka";//1
 $LANG['notes'] = "Poznámky";//1
 $LANG['notes_opt'] = "Poznámky (volitelné)";//1
 $LANG['number_short'] = "?íslo dokladu";//1
 $LANG['optional'] = "volitelné";//1
 $LANG['options'] = "Možnosti";//1
-$LANG['options'] ="Možnosti";//1
 $LANG['owing'] = "K úhrad?:";//1
 $LANG['paid'] = "Zaplaceno";//1
 $LANG['payment_id'] = "Payment ID";//0
@@ -262,14 +256,8 @@ $LANG['save_customer'] = "Save Customer";//0
 $LANG['save_customer_failure'] = "Something went wrong, please try saving the customer again";//0
 $LANG['save_customer_success'] = "Customer successfully saved,<br> you will be redirected back to the Manage Customers page";//0
 $LANG['save_defaults'] = "Save Defaults";//0
-$LANG['save_defaults_biller_success'] = "System defaults: Default biller successfully updated,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_customer_success'] = "System defaults: Default customer successfully updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_success'] = "The system default has been successfully updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
-$LANG['save_defaults_line_items_success'] = "System defaults: Number of line items successfully update,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_payment_type_success'] = "System defaults: Default payment_type updated,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_preference_success'] = "System defaults: Default invoice preference updated,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_tax_success'] = "System defaults: Default tax updated,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_template_success'] = "System defaults: Default invoice template successfully update,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_invoice'] = "Save Invoice";//0
 $LANG['save_invoice_failure'] = "Something went wrong, please try saving the invoice again";//0
 $LANG['save_invoice_items_success'] = "Processing invoice items<br> you will be redirected back to the Quick View of this invoice";//0

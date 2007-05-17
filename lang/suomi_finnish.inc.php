@@ -14,7 +14,6 @@
 *	 GPL v2 or above
 */
 
-
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
 regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
@@ -90,6 +89,7 @@ $LANG['database_upgrade_manager'] = "Tietokantap&auml;ivitysten hallinta";//1
 $LANG['date'] = "p&auml;iv&auml;ys";//1
 $LANG['date_created'] = "Tehty";//1
 $LANG['date_formatted'] = "P&auml;iv&auml;ys (VVVV-KK-PP)";//1
+$LANG['date_upper'] = "Date";//0
 $LANG['days'] = "p&auml;iv&auml;&auml;";//1
 $LANG['debtors'] = "Velalliset";//1
 $LANG['debtors_by_aging_periods'] = "Velalliset er&auml;p&auml;iv&auml;n mukaan";//1
@@ -258,14 +258,8 @@ $LANG['save_customer'] = "Tallenna asiakas"//1
 $LANG['save_customer_failure'] = "Virhe tietojen tallennuksessa. Yrit&auml; asiakastietojen tallennusta uudestaan";//1
 $LANG['save_customer_success'] = "Asiakastiedot tallennettu,<br>ohjelma siirtyy takaisin Asiakkaiden hallinta -sivulle";//1
 $LANG['save_defaults'] = "Tallenna oletusarvot";//1
-$LANG['save_defaults_biller_success'] = "J&auml;rjestelm&auml;n oletustiedot: oletuslaskuttaja p&auml;ivitetty,<br>ohjelma siirtyy takaisin J&auml;rjestelm&auml;n oletustiedot -sivulle";//1
-$LANG['save_defaults_customer_success'] = "J&auml;rjestelm&auml;n oletustiedot: oletusasiakas p&auml;ivitetty,<br>ohjelma siirtyy takaisin J&auml;rjestelm&auml;n oletustiedot -sivulle";//1
-$LANG['save_defaults_failure'] = "Virhe tietojen tallennuksessa. Yrit&auml; tallentaa J&auml;rjestelm&auml;n oletustiedot uudestaan";//1
-$LANG['save_defaults_line_items_success'] = "J&auml;rjestelm&auml;n oletustiedot: laskurivien oletuslukum&auml;&auml;r&auml; p&auml;ivitetty,<br>ohjelma siirtyy takaisin J&auml;rjestelm&auml;n oletustiedot -sivulle";//1
-$LANG['save_defaults_payment_type_success'] = "J&auml;rjestelm&auml;n oletustiedot: oletusmaksutapa p&auml;ivitetty,<br>ohjelma siirtyy takaisin J&auml;rjestelm&auml;n oletustiedot -sivulle";//1
-$LANG['save_defaults_preference_success'] = "J&auml;rjestelm&auml;n oletustiedot: laskun oletustiedot p&auml;ivitetty,<br>ohjelma siirtyy takaisin J&auml;rjestelm&auml;n oletustiedot -sivulle";//1
-$LANG['save_defaults_tax_success'] = "J&auml;rjestelm&auml;n oletustiedot: oletusarvonlis&auml;vero p&auml;ivitetty,<br>ohjelma siirtyy takaisin J&auml;rjestelm&auml;n oletustiedot -sivulle";//1
-$LANG['save_defaults_template_success'] = "J&auml;rjestelm&auml;n oletustiedot: laskun oletusmalline p&auml;ivitetty,<br>ohjelma siirtyy takaisin J&auml;rjestelm&auml;n oletustiedot -sivulle";//1
+$LANG['save_defaults_success'] = "The system default has been successfully updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
 $LANG['save_invoice'] = "Tallenna lasku";//1
 $LANG['save_invoice_failure'] = "Virhe tietojen tallennuksessa. Yrit&auml; laskun tallennusta uudestaan";//1
 $LANG['save_invoice_items_success'] = "K&auml;sitell&auml;&auml;n laskurivej&auml;,<br>ohjelma siirtyy t&auml;m&auml;n laskun esikatseluun";//1
@@ -332,6 +326,5 @@ $LANG['welcome'] ="Tervetuloa ohjelmaan ";//1
 $LANG['what_are_custom_fields'] = "Mit&auml; muokattavat kent&auml;t ovat";//1
 $LANG['whats_this_page_about'] = "Mit&auml; t&auml;ll&auml; sivulla on";//1
 $LANG['zip'] = "Postinro";//1
-
 
 ?>

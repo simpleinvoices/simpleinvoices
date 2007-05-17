@@ -14,15 +14,12 @@
 *	 GPL v2 or above
 */
 
-
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
 regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
 $title = "Simple Invoices";//1
-
-#New lang file style $lang followed by the word or description - not grouped by page
 
 $LANG['about'] = "Despre";//1
 $LANG['account_info'] = "Detalii cont";//1
@@ -178,7 +175,6 @@ $LANG['manage_data'] ="Administrare date";//1
 $LANG['manage_existing_invoice'] ="Administrare facturi existente";//1
 $LANG['manage_invoice_preferences'] = "Administreaza Preferinte Facturi";//1
 $LANG['manage_invoices'] = "Administreaza Facturi";//1
-$LANG['manage_invoices'] ="Administrare facturi";//1
 $LANG['manage_payment_types'] = "Administreaza Tipuri de Plata";//1
 $LANG['manage_payments'] = "Administreaza Plati";//1
 $LANG['manage_preferences'] = "Administreaza Preferinte";//1
@@ -192,23 +188,19 @@ $LANG['new_invoice_itemised'] = "Factura noua - Detaliat";//1
 $LANG['new_invoice_total'] = "Factura noua - Total";//1
 $LANG['no_billers'] = "There are no billers in the database, please add one";//0
 $LANG['no_customers'] = "Nu exista clienti in baza de date, adaugati va rog unul";//1
-$LANG['no_customers'] = "There are no customers in the database, please add one";//0
 $LANG['no_defaults'] = "There are no defaults";//0
 $LANG['no_invoices'] = "Nu sunt facturi in baza de date";//1
 $LANG['no_payment_types'] = "Ne pare rau, nu sunt disponibile tipuri de plata, va rog adaugati unul";//1
 $LANG['no_payments'] = "There are no payments in the database";//0
 $LANG['no_preferences'] = "Nu exista preferinte pentru facturi in baza de date, va rog adaugati una";//1
-$LANG['no_preferences'] = "There are no invoice preferences in the database, please add one";//0
 $LANG['no_products'] = "There are no products in the database, please add one";//0
 $LANG['no_tax_rates'] = "Nu exista taxe in baza de date, va rog adaugati una";//1
-$LANG['no_tax_rates'] = "There are no tax rates in the database, please add one";//0
 $LANG['note'] = "Nota";//1
 $LANG['notes'] = "Note";//1
 $LANG['notes_opt'] = "Note (optional)";//1
 $LANG['number_short'] = "Nr.";//1
 $LANG['optional'] = "optional";//1
 $LANG['options'] = "Optiuni";//1
-$LANG['options'] ="Optiuni";//1
 $LANG['owing'] = "Debit";//1
 $LANG['paid'] = "Platit";//1
 $LANG['payment_id'] = "Payment ID";//0
@@ -264,14 +256,8 @@ $LANG['save_customer'] = "Save Customer";//0
 $LANG['save_customer_failure'] = "Something went wrong, please try saving the customer again";//0
 $LANG['save_customer_success'] = "Customer successfully saved,<br> you will be redirected back to the Manage Customers page";//0
 $LANG['save_defaults'] = "Save Defaults";//0
-$LANG['save_defaults_biller_success'] = "System defaults: Default biller successfully updated,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_customer_success'] = "System defaults: Default customer successfully updated,<br> you will be redirected back to System Defaults page";//0
+$LANG['save_defaults_success'] = "The system default has been successfully updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
-$LANG['save_defaults_line_items_success'] = "System defaults: Number of line items successfully update,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_payment_type_success'] = "System defaults: Default payment_type updated,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_preference_success'] = "System defaults: Default invoice preference updated,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_tax_success'] = "System defaults: Default tax updated,<br> you will be redirected back to System Defaults page";//0
-$LANG['save_defaults_template_success'] = "System defaults: Default invoice template successfully update,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_invoice'] = "Save Invoice";//0
 $LANG['save_invoice_failure'] = "Something went wrong, please try saving the invoice again";//0
 $LANG['save_invoice_items_success'] = "Processing invoice items<br> you will be redirected back to the Quick View of this invoice";//0
@@ -338,6 +324,5 @@ $LANG['welcome'] = "Bun Venit la ";//1
 $LANG['what_are_custom_fields'] = "What are custom fields";//0
 $LANG['whats_this_page_about'] = "Whats this page about";//0
 $LANG['zip'] = "Cod Postal";//1
-
 
 ?>
