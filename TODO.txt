@@ -1,7 +1,6 @@
 
 - in next release - aim 15th May 
 -todo
- - check all alert boxes work
  - include regexp stuff in docs.php file
  - Help and About docs - add div id = left to left align them and test all work ok
  - update spanish file with tebas new file
@@ -11,7 +10,6 @@
  -- make invoice items custom fields work - done
  -- make gross total work in both templates - done
  -- make product custom fields work
- - Move .sql out of install and back to root (untill the installer is done and included as default)
 
 -done
  - sql patch: reset default invoices template to default - Done
@@ -70,6 +68,8 @@
  - home.php - make the links to the documentation work - done
  - Fix reports to work with new db field names - done
  - add new lang for sys default saved - done
+ - Move .sql out of install and back to root (untill the installer is done and included as default) - done
+ - check all alert boxes work - done
  
 
 - in next release +1 - aim end of May
