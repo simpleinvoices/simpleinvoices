@@ -1,12 +1,6 @@
 
-- in next release - aim 15th May 
+- in next release - aim 18th May 
 -todo
- - include regexp stuff in docs.php file
- - Invoice templates 
- -- make merge_adress work in both templates - done
- -- make invoice items custom fields work - done
- -- make gross total work in both templates - done
- -- make product custom fields work
 
 -done
  - sql patch: reset default invoices template to default - Done
@@ -70,6 +64,13 @@
  - update spanish file with tebas new file - done
  - lang files - make sure all have same variables - done
  - Help and About docs - add div id = left to left align them and test all work ok - done
+ - include regexp stuff in docs.php file - done
+ - Invoice templates 
+ -- make merge_adress work in both templates - done
+ -- make invoice items custom fields work - done
+ -- make gross total work in both templates - done
+ -- make product custom fields work - done - THANKS ruflin!!
+ - update sql patch dates - done
 
 - in next release +1 - aim end of May
 -todo

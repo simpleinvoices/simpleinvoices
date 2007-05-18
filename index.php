@@ -81,9 +81,13 @@ include_once("./modules/$file.php");
 if(file_exists("./templates/default/$file.tpl")) {
 	$smarty -> display("../templates/default/$file.tpl");
 }
+
+/*
+// If no smarty template - add message - onyl uncomment for dev - commented out for release
 else {
 	echo "NOTEMPLATE!!";
 }
+ */
 
 $smarty -> display("../templates/default/footer.tpl");
 

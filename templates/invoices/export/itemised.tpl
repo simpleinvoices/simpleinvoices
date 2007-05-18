@@ -22,12 +22,15 @@
                         <td class="tbl1-left"></td><td class="tbl1-right" colspan="5">
                                                 <table width="100%">
                                                         <tr>
-                <tr>
-                        <td width=50%>{$customFieldLabels.product_cf1}: {$invoiceItem.product.custom_field1}</td><td width=50%>{$customFieldLabels.product_cf2}: {$invoiceItem.product.custom_field2}</td>
-                </tr>
-                <tr>
-                        <td width=50%>{$customFieldLabels.product_cf3}: {$invoiceItem.product.custom_field3}</td><td width=50%>{$customFieldLabels.product_cf4}: {$invoiceItem.product.custom_field4}</td>
-                </tr>
+
+					{inv_itemised_cf label=$customFieldLabels.product_cf1 field=$invoiceItem.product.custom_field1}
+					{do_tr number=1 class="blank-class"}
+					{inv_itemised_cf label=$customFieldLabels.product_cf2 field=$invoiceItem.product.custom_field2}
+					{do_tr number=2 class="blank-class"}
+					{inv_itemised_cf label=$customFieldLabels.product_cf3 field=$invoiceItem.product.custom_field3}
+					{do_tr number=3 class="blank-class"}
+					{inv_itemised_cf label=$customFieldLabels.product_cf4 field=$invoiceItem.product.custom_field4}
+					{do_tr number=4 class="blank-class"}
 
                                                         </tr>
                                                 </table>

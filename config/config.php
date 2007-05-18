@@ -50,7 +50,7 @@ $ChallengeLife = 0; /*To turn off ChallengeLife set this to 0 */
 /*To change the theme, enter the name of the theme folder - default is google*/
 $theme = "google";
 
-$version = "20070425 unstable";
+$version = "20070518 beta";
 
 $config['date_format']  = 'Y-m-d'; #International format just the date
 #$config['date_format']  = 'Y-m-d h:m'; #Internalional format date and time 

@@ -9,6 +9,8 @@ Simple Invoices - Changelog
 <ul><li>2007-05-25</li>
 	<ul>
 		<li>Email function added, you can now email an invoice as PDF in Simple Invoices</li>
+		<li>Moved to smarty for templating system</li>
+		<li>Major rewrite (refactoring) of backend code by aplsyia to simplify and make sane</li>
 		<li>Replace the javascript validation with a purely php validation system</li>
 		<li>Table prefix configuration option added</li>
 		<li>Corrected &lt;? ... ?&gt; Sytax to &lt;?php ... ?&gt; Syntax</li>
@@ -23,11 +25,19 @@ Simple Invoices - Changelog
 		<li>ibox replaced with greybox as the ajax alert box of choice</li>
 		<li>PDF name now 'Wording for invoice'.'Invoice ID'.pdf (ie. Invoice12.pdf or Estimate8.pdf)</li>
 		<li>Moved alot of the templates to smarty - still an ongoing project</li>
-		<li>Language file cleanup</li>
+		<li>Language file cleanup - duplicates and old style variables removed</li>
 		<li>Logo directory moved from images/logos to templates/invoices/logos</li>
+		<li>css update by lionel</li>
+		<li>MySQL connect - pretty info messages instead of errors all over the page</li>
+		<li>SQL Pathces: system changes - manage screen made all nice and if are patches to be applied you have to apply them before using Simple Invoices</li>
+		<li>System defaults: moved to a new db format to be sane</li>
+		<li>Documentation system altered</li>
 		<ul>Sql Patches:
 			<li>Patch 37: reset default invoice template to 'default' due to new invoice template</li>
 			<li>Patch 38 & 39: Alter custom field table - field length now 255 for field label and name</li>
+			<li>Patch 40 - 116: Alter database fields</li>
+			<li>Patch 63: Introduce new system_defaults table</li>
+			<li>Patch 116 - 122: Patches to convert defaults from the old table to the new si_system_defaults table</li>
 		</ul>
 	</ul>
 </ul>

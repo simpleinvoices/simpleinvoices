@@ -16,10 +16,18 @@ else {
 	$lang = "en";
 }
 
+/*Check the $view for validitity - make sure no ones hacking the url */
+if (!ereg("^[a-zA-Z_/]+$",$p)) {
+        die("Invalid view requested");
+}
+
+
 if($_GET['t'] == "help") {
+
 	include("./docs/$lang/help/$_GET[p].html");
 }
 else {
+
 	$file = "./docs/$lang/general/$_GET[p]";
 	
 	if(file_exists($file.".html")) {
