@@ -31,7 +31,7 @@ function getLogo($biller) {
 		return "./templates/invoices/logos/$biller[logo]";
 	}
 	else {
-		return "./templates/invoices/_default_blank_logo.png";
+		return "./templates/invoices/logos/_default_blank_logo.png";
 	}
 }
 
