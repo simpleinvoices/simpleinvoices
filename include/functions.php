@@ -28,7 +28,7 @@ function getLogoList() {
 
 function getLogo($biller) {
 	if(!empty($biller['logo'])) {
-		return "./templates/invoices/logo/$biller[logo]";
+		return "./templates/invoices/logos/$biller[logo]";
 	}
 	else {
 		return "./templates/invoices/_default_blank_logo.png";

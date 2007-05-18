@@ -24,11 +24,11 @@ if (!ereg("^[a-zA-Z_/]+$",$p)) {
 
 if($_GET['t'] == "help") {
 
-	include("./docs/$lang/help/$_GET[p].html");
+	include("./documentation/$lang/help/$_GET[p].html");
 }
 else {
 
-	$file = "./docs/$lang/general/$_GET[p]";
+	$file = "./documentation/$lang/general/$_GET[p]";
 	
 	if(file_exists($file.".html")) {
 		$file = $file.".html";
@@ -38,7 +38,7 @@ else {
 	}
 	
 	if(!file_exists($file)) {
-		$file = "./docs/en/general/about.php";
+		$file = "./documentation/en/general/about.php";
 	}
 	
 	//echo $file;
