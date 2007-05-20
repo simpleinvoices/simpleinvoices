@@ -47,6 +47,9 @@ if (isset($_GET['export'])) {
 $templatePath = "./templates/invoices/${template}/template.tpl";
 $template_path = "../templates/invoices/${template}";
 $css = "./templates/invoices/${template}/style.css";
+$pluginsdir = "./templates/invoices/${template}/plugins/";
+
+$smarty -> plugins_dir = $pluginsdir;
 
 if(file_exists($templatePath)) {
 	$smarty -> assign('biller',$biller);

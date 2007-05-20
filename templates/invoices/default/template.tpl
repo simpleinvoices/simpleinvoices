@@ -1,4 +1,3 @@
-{include file='../templates/invoices/default/functions.tpl'}
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -98,14 +97,7 @@
                 {/if}
         {/if}
 
-		{php}
-			global $LANG;
-			global $biller;
-			global $customer;
-			
-		       echo  merge_address($biller['city'], $biller['state'], $biller['zip_code'], $biller['street_address'], $biller['street_address2'],'tbl1-left','tbl1-right',3);
-		{/php}
-
+		{merge_address field1=$biller.city field2=$biller.state field3=$biller.zip_code street1=$biller.street_address street2=$biller.street_addtess2 class1="tbl1-left" class2="tbl1-right" colspan=3}
 
          {if $biller.country != null }
                 </tr>
@@ -114,32 +106,16 @@
                 </tr>
        	{/if}
 
-	{php}
-		echo print_if_not_null($LANG['phone_short'], $biller['phone'],'tbl1-left','tbl1-right',3);
-		echo print_if_not_null($LANG['fax'], $biller['fax'],'tbl1-left','tbl1-right',3);
-		echo print_if_not_null($LANG['mobile_short'], $biller['mobile_phone'],'tbl1-left','tbl1-right',3);
- 		echo print_if_not_null($LANG['email'], $biller['email'],'tbl1-left','tbl1-right',3);
-	{/php}
-         {if $biller.custom_field1 != null }
-                <tr>
-                        <td class='tbl1-left'>{$customFieldLabels.biller_cf1}</td><td class='tbl1-right' colspan="3">{$biller.custom_field1}</td>
-                </tr>
-       	{/if}
-         {if $biller.custom_field2 != null }
-                <tr>
-                        <td class='tbl1-left'>{$customFieldLabels.biller_cf2}</td><td class='tbl1-right' colspan="3">{$biller.custom_field2}</td>
-                </tr>
-       	{/if}
-         {if $biller.custom_field3 != null }
-                <tr>
-                        <td class='tbl1-left'>{$customFieldLabels.biller_cf3}</td><td class='tbl1-right' colspan="3">{$biller.custom_field3}</td>
-                </tr>
-       	{/if}
-         {if $biller.custom_field4 != null }
-                <tr>
-                        <td class='tbl1-left'>{$customFieldLabels.biller_cf4}</td><td class='tbl1-right' colspan="3">{$biller.custom_field4}</td>
-                </tr>
-       	{/if}
+	{print_if_not_null label=$LANG.phone_short field=$biller.phone class1='tbl1-left' class2='tbl1-right' colspan=3}
+	{print_if_not_null label=$LANG.fax field=$biller.fax class1='tbl1-left' class2='tbl1-right' colspan=3}
+	{print_if_not_null label=$LANG.mobile_short field=$biller.mobile_short class1='tbl1-left' class2='tbl1-right' colspan=3}
+	{print_if_not_null label=$LANG.email field=$biller.email class1='tbl1-left' class2='tbl1-right' colspan=3}
+	
+	{print_if_not_null label=$customFieldLabels.biller_cf1 field=$biller.custom_field1 class1='tbl1-left' class2='tbl1-right' colspan=3}
+	{print_if_not_null label=$customFieldLabels.biller_cf2 field=$biller.custom_field2 class1='tbl1-left' class2='tbl1-right' colspan=3}
+	{print_if_not_null label=$customFieldLabels.biller_cf3 field=$biller.custom_field3 class1='tbl1-left' class2='tbl1-right' colspan=3}
+	{print_if_not_null label=$customFieldLabels.biller_cf4 field=$biller.custom_field4 class1='tbl1-left' class2='tbl1-right' colspan=3}
+	
 
 	<tr><td class="tbl1-top" colspan="4"> </td></tr>
 
@@ -180,10 +156,8 @@
                 </tr>   
                 {/if}
         {/if}
-
-		{php}
-        echo  merge_address($customer['city'], $customer['state'], $customer['zip_code'], $customer['street_address'], $customer['street_address2'],'tbl1-left','tbl1-right',3);
-        {/php}
+		
+		{merge_address field1=$customer.city field2=$customer.state field3=$customer.zip_code street1=$customer.street_address street2=$customer.street_addtess2 class1="tbl1-left" class2="tbl1-right" colspan=3}
 
          {if $customer.country != null}
                 </tr>
@@ -192,44 +166,16 @@
                 </tr>
         {/if}
 
-	{php}
-		
-		$customer_block .= print_if_not_null($LANG['phone_short'], $customer[phone],'tbl1-left','tbl1-right',3);
-		$customer_block .= print_if_not_null($LANG['fax'], $customer[fax],'tbl1-left','tbl1-right',3);
-		$customer_block .= print_if_not_null($LANG['mobile_short'], $customer[mobile_phone],'tbl1-left','tbl1-right',3);
+	{print_if_not_null label=$LANG.phone_short field=$customer.phone class1='tbl1-left' class2='tbl1-right' colspan=3}
+	{print_if_not_null label=$LANG.fax field=$customer.fax class1='tbl1-left' class2='tbl1-right' colspan=3}
+	{print_if_not_null label=$LANG.mobile_short field=$customer.mobile_short class1='tbl1-left' class2='tbl1-right' colspan=3}
+	{print_if_not_null label=$LANG.email field=$customer.email class1='tbl1-left' class2='tbl1-right' colspan=3}
+	
+	{print_if_not_null label=$customFieldLabels.customer_cf1 field=$customer.custom_field1 class1='tbl1-left' class2='tbl1-right' colspan=3}
+	{print_if_not_null label=$customFieldLabels.customer_cf2 field=$customer.custom_field2 class1='tbl1-left' class2='tbl1-right' colspan=3}
+	{print_if_not_null label=$customFieldLabels.customer_cf3 field=$customer.custom_field3 class1='tbl1-left' class2='tbl1-right' colspan=3}
+	{print_if_not_null label=$customFieldLabels.customer_cf4 field=$customer.custom_field4 class1='tbl1-left' class2='tbl1-right' colspan=3}
 
-
-        $customer_block .= print_if_not_null($LANG['email'], $customer[email],'tbl1-left','tbl1-right',3);
-        
-		/*
-		//nice code but cant get it to do the labels :(
-        for($i=1;$i<=4;$i++) {
-       		$customer_block .= print_if_not_null($customFieldLabels["customer_cf$i"], $customer["custom_field$i"],'tbl1-left','tbl1-right',3);
-        }
-		*/
-        echo $customer_block;
-	{/php}
-
-         {if $customer.custom_field1 != null }
-                <tr>
-                        <td class='tbl1-left'>{$customFieldLabels.customer_cf1}</td><td class='tbl1-right' colspan="3">{$customer.custom_field1}</td>
-                </tr>
-       	{/if}
-         {if $customer.custom_field2 != null }
-                <tr>
-                        <td class='tbl1-left'>{$customFieldLabels.customer_cf2}</td><td class='tbl1-right' colspan="3">{$customer.custom_field2}</td>
-                </tr>
-       	{/if}
-         {if $customer.custom_field3 != null }
-                <tr>
-                        <td class='tbl1-left'>{$customFieldLabels.customer_cf3}</td><td class='tbl1-right' colspan="3">{$customer.custom_field3}</td>
-                </tr>
-       	{/if}
-         {if $customer.custom_field4 != null }
-                <tr>
-                        <td class='tbl1-left'>{$customFieldLabels.customer_cf4}</td><td class='tbl1-right' colspan="3">{$customer.custom_field4}</td>
-                </tr>
-       	{/if}
 		<tr><td class="tbl1-top" colspan=4></td></tr></table>
 
 
