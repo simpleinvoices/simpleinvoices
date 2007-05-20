@@ -1,7 +1,7 @@
 <?php
 // we must never forget to start the session
 /*
-CREATE TABLE {$tb_prefix}users (
+CREATE TABLE si_users (
 user_id int(11) NOT NULL auto_increment,
 user_email VARCHAR(100) NOT NULL,
 user_name VARCHAR(100) NOT NULL,
@@ -12,9 +12,9 @@ user_password CHAR(32) NOT NULL,
 PRIMARY KEY (user_id)
 );
 
-INSERT INTO {$tb_prefix}users (user_id, user_email, user_name, user_group, user_domain, user_password) VALUES ('','guest@simpleinvoices.org','guest','1','1', md5('guest'));
-INSERT INTO {$tb_prefix}users (user_id, user_email, user_name, user_group, user_domain, user_password) VALUES ('','demo@simpleinvoices.org','demo','1','1', md5('demo'));
-INSERT INTO {$tb_prefix}users (user_id, user_email, user_name, user_group, user_domain, user_password) VALUES ('','admin@simpleinvoices.org','admin','1','1', md5('admin'));
+INSERT INTO si_users (user_id, user_email, user_name, user_group, user_domain, user_password) VALUES ('','guest@simpleinvoices.org','guest','1','1', md5('guest'));
+INSERT INTO si_users (user_id, user_email, user_name, user_group, user_domain, user_password) VALUES ('','demo@simpleinvoices.org','demo','1','1', md5('demo'));
+INSERT INTO si_users (user_id, user_email, user_name, user_group, user_domain, user_password) VALUES ('','admin@simpleinvoices.org','admin','1','1', md5('admin'));
 
 CREATE TABLE `si_auth_challenges` (
 `challenges_key` INT( 11 ) NOT NULL ,
@@ -25,6 +25,7 @@ CREATE TABLE `si_auth_challenges` (
 //so config.php works ok without using index.php define browse
 define("BROWSE","browse");
 include 'config/config.php';
+include 'include/sql_queries.php';
 include "lang/$language.inc.php";
 include "include/md5/hmac_md5.php";
 session_start();

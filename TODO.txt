@@ -1,6 +1,8 @@
 
 - in next release - aim 18th May 
 -todo
+ - customer view - add edit/export etc, back in
+ - mysql 4 ? issue - my regex stuff needs mods
 
 -done
  - sql patch: reset default invoices template to default - Done
@@ -71,6 +73,10 @@
  -- make gross total work in both templates - done
  -- make product custom fields work - done - THANKS ruflin!!
  - update sql patch dates - done
+ #post beta
+ - manage payments - customer and biller name not showing - done
+ - login.php change 
+ - quick view mod re manage payments link
 
 - in next release +1 - aim end of May
 -todo

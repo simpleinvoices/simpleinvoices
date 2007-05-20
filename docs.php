@@ -17,7 +17,7 @@ else {
 }
 
 /*Check the $view for validitity - make sure no ones hacking the url */
-if (!ereg("^[a-zA-Z_#]+$",$p)) {
+if (!ereg("^[a-zA-Z_#&]+$",$p)) {
         die("Invalid view requested");
 }
 

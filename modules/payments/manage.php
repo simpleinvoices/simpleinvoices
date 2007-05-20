@@ -9,21 +9,21 @@ if (!empty($_GET['id'])) {
 
 	$display_block_header = "<b>$LANG[payments_filtered] $_GET[id]</b> :: <a href='index.php?module=payments&view=process&submit=$_GET[id]&op=pay_selected_invoice'>$LANG[payments_filtered_invoice]</a>";
 
-	$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.name, {$tb_prefix}biller.name from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.biller_id = {$tb_prefix}biller.id and {$tb_prefix}account_payments.ac_inv_id='$_GET[id]' ORDER BY {$tb_prefix}account_payments.id DESC";
+	$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.name as CNAME, {$tb_prefix}biller.name as BNAME from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.biller_id = {$tb_prefix}biller.id and {$tb_prefix}account_payments.ac_inv_id='$_GET[id]' ORDER BY {$tb_prefix}account_payments.id DESC";
 }
 #if coming from another page where you want to filter by just one customer
-elseif (!empty($_GET['id'])) {
+elseif (!empty($_GET['c_id'])) {
 
-	$display_block_header = "<b>$LANG[payments_filtered_customer] $_GET[id] :: <a href='index.php?module=payments&view=process&op=pay_invoice'>$LANG[process_payment]</a></b>";
+	$display_block_header = "<b>$LANG[payments_filtered_customer] $_GET[c_id] :: <a href='index.php?module=payments&view=process&op=pay_invoice'>$LANG[process_payment]</a></b>";
 
-	$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.name, {$tb_prefix}biller.name from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.biller_id = {$tb_prefix}biller.id and {$tb_prefix}customers.id='$_GET[id]' ORDER BY {$tb_prefix}account_payments.id DESC ";
+	$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.name as CNAME, {$tb_prefix}biller.name as BNAME from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.biller_id = {$tb_prefix}biller.id and {$tb_prefix}customers.id='$_GET[c_id]' ORDER BY {$tb_prefix}account_payments.id DESC ";
 }
 #if you want to show all invoices - no filters
 else {
 
 	$display_block_header = "<b>$LANG[manage_payments] :: <a href='index.php?module=payments&view=process&op=pay_invoice'>$LANG[process_payment]</a></b>";
 
-	$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.name, {$tb_prefix}biller.name from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.biller_id = {$tb_prefix}biller.id ORDER BY {$tb_prefix}account_payments.id DESC";
+	$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.name as CNAME, {$tb_prefix}biller.name as BNAME from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.biller_id = {$tb_prefix}biller.id ORDER BY {$tb_prefix}account_payments.id DESC";
 }
 
 $result = mysqlQuery($sql, $conn) or die(mysql_error());
@@ -46,16 +46,16 @@ $display_block_header
 <col style='width:10%;' />
 <col style='width:10%;' />
 <col style='width:15%;' />
+<col style='width:10%;' />
+<col style='width:10%;' />
+<col style='width:10%;' />
+<col style='width:10%;' />
 <col style='width:15%;' />
-<col style='width:10%;' />
-<col style='width:10%;' />
-<col style='width:10%;' />
-<col style='width:10%;' />
 </colgroup>
 <thead>
 
 <tr class="sortHeader">
-<th class="noFilter sortable">$LANG[action]</th>
+<th class="noFilter sortable">$LANG[actions]</th>
 <th class="index_table sortable">$LANG[payment_id]</th>
 <th class="index_table sortable">$LANG[invoice_id]</th>
 <th class="selectFilter index_table sortable">$LANG[customer]</th>
@@ -63,7 +63,7 @@ $display_block_header
 <th class="index_table sortable">$LANG[amount]</th>
 <th class="index_table sortable">$LANG[notes]</th>
 <th class="selectFilter index_table sortable">$LANG[payment_type]</th>
-<th class="noFilter index_table sortable">$LANG[date]</th>
+<th class="noFilter index_table sortable">$LANG[date_upper]</th>
 </tr>
 </thead>
 EOD;
@@ -90,8 +90,8 @@ EOD;
 		<td class='index_table'><a class='index_table' href='index.php?module=payments&view=details&id={$ac['id']}'>{$LANG['view']}</a></td>
 		<td class='index_table'>{$ac['id']}</td>
 		<td class='index_table'>{$ac['ac_inv_id']}</td>
-		<td class='index_table'>{$ac['customers.name']}</td>
-		<td class='index_table'>{$ac['biller.name']}</td>
+		<td class='index_table'>{$ac['CNAME']}</td>
+		<td class='index_table'>{$ac['BNAME']}</td>
 		<td class='index_table'>{$ac['ac_amount']}</td>
 		<td class='index_table'>{$ac['ac_notes']}</td>
 		<td class='index_table'>{$pt['pt_description']}</td>
