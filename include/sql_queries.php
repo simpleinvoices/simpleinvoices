@@ -81,6 +81,22 @@ function getPreferences() {
 	return $preferences;
 }
 
+
+function getActivePreferences() {
+	global $tb_prefix;
+	
+	$sql = "SELECT * FROM {$tb_prefix}preferences WHERE pref_enabled ORDER BY pref_description";
+	$query  = mysqlQuery($sql) or die(mysql_error());
+	
+	$preferences = null;
+	
+	for($i=0;$preference = mysql_fetch_array($query);$i++) {
+		$preferences[$i] = $preference;
+	}
+	
+	return $preferences;
+}
+
 function getCustomFieldLabels() {
 	global $LANG;
 	global $tb_prefix;
@@ -117,6 +133,20 @@ function getBillers() {
   		} else {
   			$biller['enabled'] = $LANG['disabled'];
   		}
+		$billers[$i] = $biller;
+	}
+	
+	return $billers;
+}
+
+function getActiveBillers() {
+	global $tb_prefix;
+	$sql = "SELECT * FROM {$tb_prefix}biller WHERE enabled != 0 ORDER BY name";
+	$query = mysqlQuery($sql) or die(mysql_error());
+		
+	$billers = null;
+	
+	for($i=0;$biller = mysql_fetch_array($query);$i++) {
 		$billers[$i] = $biller;
 	}
 	
@@ -204,6 +234,23 @@ function getProducts() {
 	
 	return $products;
 }
+
+function getActiveProducts() {
+	
+	global $tb_prefix;
+	
+	$sql = "SELECT * FROM {$tb_prefix}products WHERE enabled != 0 ORDER BY description";
+	$query = mysqlQuery($sql) or die(mysql_error());
+	
+	$products = null;
+	
+	for($i=0;$product = mysql_fetch_array($query);$i++) {
+		$products[$i] = $product;
+	}
+	
+	return $products;
+}
+
 
 function getTaxes() {
 	global $tb_prefix;
@@ -531,6 +578,23 @@ function getCustomers() {
 	
 	return $customers;
 }
+
+function getActiveCustomers() {
 		
+	global $LANG;
+	global $tb_prefix;
+	
+	$sql = "SELECT * FROM {$tb_prefix}customers WHERE enabled != 0 ORDER BY name";
+	$result = mysqlQuery($sql) or die(mysql_error());
+
+	$customers = null;
+
+	for($i=0;$customer = mysql_fetch_array($result);$i++) {
+		$customers[$i] = $customer;
+	}
+	
+	return $customers;
+}
+	
 //in this file are functions for all sql queries
 ?>
