@@ -99,16 +99,10 @@
                 {/if}
         {/if}
 
-		{php}
-			global $LANG;
-			global $biller;
-			global $customer;
-			
-		       echo  merge_address($biller['city'], $biller['state'], $biller['zip_code'], $biller['street_address'], $biller['street_address2'],'','',3);
-		{/php}
 
+			{merge_address field1=$biller.city field2=$biller.state field3=$biller.zip_code street1=$biller.street_address street2=$biller.street_addtess2 class1="" class2="" colspan=3
 	
-        {if $biller.country != null }
+	        {if $biller.country != null }
                 </tr>
                 <tr>
                         <td ></td><td colspan=3>{$biller.country}</td>
@@ -195,14 +189,7 @@
                 {/if}
         {/if}
 
-
-		{php}
-			global $LANG;
-			global $biller;
-			global $customer;
-			
-		       echo  merge_address($customer['city'], $customer['state'], $customer['zip_code'], $customer['street_address'], $customer['street_address2'],'','',3);
-		{/php}
+		{merge_address field1=$customer.city field2=$customer.state field3=$customer.zip_code street1=$customer.street_address street2=$customer.street_addtess2 class1="" class2="" colspan=3}
 	
                 {if $customer.country != null }
                 </tr>
