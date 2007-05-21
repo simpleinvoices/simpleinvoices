@@ -1,6 +1,6 @@
 <FORM name="frmpost" ACTION="index.php?module=invoices&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
 
-<b>{$LANG.inv} {$LANG.inv_consulting}</b>
+<b>{$LANG.inv} {$LANG.inv_total}</b>
 <hr></hr>
 
 
@@ -50,50 +50,32 @@
         </td>
 </tr>
 
+
+
+
+
 <tr>
-<td class="details_screen">{$LANG.quantity}</td><td class="details_screen">{$LANG.description}</td>
+<td class="details_screen">{$LANG.description}</td>
 </tr>
 
-
-        {section name=line start=0 loop=$dynamic_line_items step=1}
-
-			<tr>
-				<td><input type=text name="i_quantity{$smarty.section.line.index}" size="5"></td><td input type=text name="i_description{$smarty.section.line.index}" size="50">
-				                
-			{if $products == null }
-				<p><em>{$LANG.no_products}</em></p>
-			{else}
-				<select name="select_products{$smarty.section.line.index}">
-				{foreach from=$products item=product}
-					<option {if $product.id == $defaults.product} selected {/if} value="{$product.id}">{$product.description}</option>
-				{/foreach}
-				</select>
-			{/if}
-				                				                
-                </td></tr>
-                
-                <tr class="text{$smarty.section.line.index} hide">
-        <td colspan=2 ><textarea input type=text name='line_item_description{$smarty.section.line.index}' rows=3 cols=80 WRAP=nowrap></textarea></td>
+<tr>
+	<td colspan=5 class="details_screen" ><textarea input type=text name="i_description" rows=10 cols=100 WRAP=nowrap></textarea></td>
 </tr>
 
-        {/section}
 	{$show_custom_field.1}
 	{$show_custom_field.2}
 	{$show_custom_field.3}
 	{$show_custom_field.4}
 
 
-<tr>
-        <td colspan=2 class="details_screen">{$LANG.notes}</td>
-</tr>
 
 <tr>
-        <td colspan=2><textarea input type=text name="invoice_itemised_note" rows=5 cols=70 WRAP=nowrap></textarea></td>
+	<td class="details_screen">{$LANG.gross_total}</td><td class="details_screen">{$LANG.tax}</td><td class="details_screen">{$LANG.inv_pref}</td>
 </tr>
-
-<tr><td class="details_screen">{$LANG.tax}</td><td input type=text name="tax" size=15>
-
-{if $taxes == null }
+<tr>
+	<td><input type=text name="gross_total" size=15></td><td input type=text name="tax" size=15>
+	
+	{if $taxes == null }
 	<p><em>{$LANG.no_taxes}</em></p>
 {else}
 	<select name="select_tax">
@@ -103,11 +85,7 @@
 	</select>
 {/if}
 
-</td>
-</tr>
-
-<tr>
-<td class="details_screen">{$LANG.inv_pref}</td><td input type=text name="preference_id">
+</td><td input type=text name="preference_id" size=25>
 
 {if $preferences == null }
 	<p><em>{$LANG.no_preferences}</em></p>
@@ -120,7 +98,7 @@
 {/if}
 
 </td>
-</tr>	
+	
 <tr>
 	<td align=left>
 		<a href="docs.php?t=help&p=invoice_custom_fields" rel="gb_page_center[450, 450]">{$LANG.want_more_fields}<img src="./images/common/help-small.png"></img></a>
@@ -138,6 +116,6 @@
 <hr></hr>
 		<input type=hidden name="max_items" value="{$smarty.section.line.index}">
 		<input type=submit name="submit" value="{$LANG.save_invoice}">
-		<input type=hidden name="invoice_style" value="insert_invoice_consulting">
+		<input type=hidden name="invoice_style" value="insert_invoice_total">
 
 </FORM>
