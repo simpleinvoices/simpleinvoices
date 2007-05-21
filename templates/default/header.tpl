@@ -11,10 +11,10 @@
 
 	<link rel="stylesheet" type="text/css" href="include/jquery/jquery.autocomplete.css" title="default" media="screen" />
 	<link rel="stylesheet" type="text/css" href="include/jquery/jquery.datePicker.css" title="default" media="screen" />
-	<link rel="stylesheet" type="text/css" href="./modules/include/css/header1.css" media="all"/>
-	<link rel="stylesheet" type="text/css" href="./modules/include/css/screen.css" media="all"/>
-	<link rel="stylesheet" type="text/css" href="./modules/include/css/print.css" media="print"/>
-	<link rel="stylesheet" type="text/css" href="./modules/include/css/blue.css" media="screen"/>
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/header1.css" media="all"/>
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/screen.css" media="all"/>
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/print.css" media="print"/>
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/blue.css" media="screen"/>
 
 
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
@@ -40,11 +40,11 @@ include('./templates/default/tmp.php');
 <script type="text/javascript" src="./modules/include/js/AJS.js"></script>
 <script type="text/javascript" src="./modules/include/js/AJS_fx.js"></script>
 <script type="text/javascript" src="./modules/include/js/gb_scripts.js"></script>
-<link href="./modules/include/css/gb_styles.css" rel="stylesheet" type="text/css" />
+<link href="./templates/default/css/gb_styles.css" rel="stylesheet" type="text/css" />
 
 <!--[if gte IE 5.5]>
 <script language="JavaScript" src="./modules/include/js/dhtml.js" type="text/JavaScript"></script>
-<link rel="stylesheet" href="./modules/include/css/iehacks.css" type="text/css" />
+<link rel="stylesheet" href="./templates/default/css/iehacks.css" type="text/css" />
 <![endif]-->
 
 <!-- customer-details -->

@@ -1,0 +1,162 @@
+/*-------------------------------------------------
+PAGE BODY
+-------------------------------------------------*/
+body {
+	font-family:"Lucida Grande", verdana, arial, helvetica, sans-serif;
+	color:#333;
+	background-color:#e5e5e5;
+	text-align:center;
+	margin:0 auto;
+	padding:0; }
+
+/* Make sure the table cells show the right font */
+td {
+	font-family:"Lucida Grande", verdana, arial, helvetica, sans-serif; }
+
+/*-------------------------------------------------
+DIALOG BOX
+-------------------------------------------------*/
+.DialogBody {
+	text-align:left;
+	border:1px solid #ccc;
+	border-right:1px solid #999;
+	border-bottom:1px solid #999;
+	background-color:#fff;
+	margin:0;
+	padding:10px; }
+
+.DialogBody td {
+	font-size:11px; }
+
+.DialogHeader {
+	background-color:#333;
+	text-align:left;
+	border-top:1px solid #333;
+	border-left:1px solid #333;
+	border-right:1px solid #333;
+	margin:0;
+	padding:0; }
+
+.DialogHeader h1 {
+	font-family:verdana;
+	font-size:10px;
+	color:#fff;
+	margin:0;
+	padding:3px 0 3px 10px; }
+
+.DialogBody h1 {
+	font-size:12px;
+	font-weight:700;
+	color:red;
+	margin:0; }
+
+.DialogBody p.noundo {
+	font-size:10px;
+	font-weight:400;
+	color:#666; }
+
+.ThePost {
+	border-top:1px solid #999;
+	border-bottom:1px solid #999;
+	margin:10px 0;
+	padding:10px 10px 0; }
+
+.ThePost h1 {
+	color:#000;
+	font-size:12px;
+	font-weight:700;
+	margin:0;
+	padding:0; }
+
+.additional {
+	color:#999;
+	font-size:10px; }
+
+.PrimaryAction {
+	font-size:10px;
+	border-top:1px dotted #999;
+	text-align:right;
+	margin:10px 0 0;
+	padding:5px 0 0; }
+
+.PrimaryAction input {
+	font-size:12px; }
+
+/*-------------------------------------------------
+LOGIN DIALOG BOX
+-------------------------------------------------*/
+#loginFirstTime {
+	text-align:left; }
+
+#loginFirstTime h1 {
+	margin-bottom:15px;
+	font-size:14px;
+	color:green;
+	border-bottom:1px solid #ccc; }
+
+#loginFirstTime h2 {
+	font-size:12px;
+	margin:0;
+	padding:0 0 1px; }
+
+#loginFirstTime p {
+	font-size:11px;
+	line-height:14px;
+	margin:0 0 15px;
+	padding:0; }
+
+/*-------------------------------------------------
+LOGIN SCREEN (.login is body class)
+-------------------------------------------------*/
+.login div.Container {
+	width:500px;
+	min-width:inherit;
+	margin:60px auto 20px; }
+
+.login h1 {
+	margin-bottom:20px; }
+
+.login dt {
+	float:left;
+	width:80px;
+	font-size:14px;
+	line-height:24px; }
+
+.login dd {
+	font-size:11px;
+	line-height:24px;
+	color:#666;
+	margin:0 0 5px 80px; }
+
+.login input {
+	font-size:14px; }
+
+.login dd span {
+	color:#ccc; }
+
+.login input#user {
+	width:300px; }
+
+.login input#pass {
+	width:150px;
+	margin-right:5px; }
+
+.login input#emailpassword {
+	vertical-align:middle;
+	margin-right:5px; }
+
+.login div.AlertGood,.login div.AlertBad {
+	margin:10px 0 20px; }
+
+.login div#Dialog {
+	border:10px solid #ccc;
+	text-align:left;
+	background:#fff;
+	padding:15px 20px 10px; }
+
+body.login div#Dialog h2 {
+	margin:0;
+	padding:0; }
+
+.login dl,.login p {
+	margin:10px 0 0; }

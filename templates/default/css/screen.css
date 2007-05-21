@@ -1,0 +1,325 @@
+/*-------------------------------------------------
+PAGE BODY
+-------------------------------------------------*/
+html {
+	overflow:-moz-scrollbars-vertical; }
+
+body {
+	background:#e5e5e5;
+	text-align:center;
+	margin:0 auto;
+	padding:0; }
+
+body,.dialog {
+	font-family:"Lucida Grande", verdana, arial, helvetica, sans-serif;
+	font-size:14px;
+	color:#333; }
+
+table.manage {
+	font-size:12px; }
+
+td.account {
+	font-size:14px;	}
+
+/* Tablesorter table styling - end
+td for the manage screen - start */
+td.index_table {
+	background-color:#F5F5F5;
+	/*-moz-border-radius:0;*/
+	border:1px solid #fff;
+	font-style:normal;
+	font-weight:400;
+	text-decoration:none;
+	border-color:#FFF;
+	border-style:none; }
+
+td {
+	font-family:"Lucida Grande", verdana, arial, helvetica, sans-serif;
+	text-align:left; }
+
+td.columnleft {
+	border-left:5px solid #EEE; }
+
+td.details_screen {
+	border:1px solid #fff;
+	background-color:#F5F5F5;
+	/*-moz-border-radius:0;*/
+	font-style:normal;
+	font-weight:400;
+	text-decoration:none;
+	border-color:#FFF;
+	border-width:1px; }
+
+/*td for the details screen - end
+td for the details screen - start*/
+tr.details_screen {
+	border:1px solid #fff;
+	background-color:#F5F5F5;
+	font-style:normal;
+	font-weight:400;
+	text-decoration:none; }
+
+/*-------------------------------------------------
+GLOBALS & GENERAL CASES
+-------------------------------------------------*/
+.print_only {
+	display:none; }
+
+a {
+	color:#03c;
+	text-decoration:underline;
+	padding:1px; }
+
+a:hover {
+	color:#fff;
+	background-color:#900;
+	text-decoration:none; }
+
+a.image:link,a.image:visited,a.image:hover {
+	border:none;
+	background:none;
+	padding:0; }
+
+a.toggle.active:link,a.toggle.active:visited,a.toggle.active:hover {
+	background:#999 !important;
+	color:#03c !important;
+	text-decoration:none;
+	font-weight:400 !important; }
+
+p {
+	font:11px Arial, Helvetica, sans-serif;
+	margin:0 0 15px; }
+
+hr {
+	color:#000;
+	background-color:#000;
+	height:1px;
+	border:0;
+	width:100%; }
+	
+h1 {
+	font:bold 32px Arial, Helvetica, sans-serif;
+	letter-spacing:normal;
+	color:#000;
+	position:relative;
+	margin:5px 0 15px;
+	padding:0 0 5px; }
+
+h1.admin {
+	margin-bottom:2px; }
+
+h2 {
+	font-size:18px;
+	font-family:helvetica;
+	margin:0 0 15px; }
+
+a img {
+	border:0; }
+
+a.image img {
+	border:none;
+	margin:0;
+	padding:0; }
+
+table tr.shaded td {
+	background-color:#edf3fe; }
+
+a.anchor:link,a.anchor:visited,a.anchor:hover {
+	color:#fff;
+	background:#fff;
+	font-size:0;
+	text-decoration:none;
+	padding:0; }
+
+div.notice {
+	background:#080; }
+
+div.alert {
+	background:red; }
+
+h4 {
+	font-size:11px;
+	margin:0; }
+
+h5 {
+	font-size:80%;
+	font-style:italic;
+	font-family:georgia;
+	font-weight:400;
+	text-align:left;
+	padding-top:3px;
+	color:#6FC0DE;
+	border-bottom:1px solid #C2DDE7;
+	margin:0 0 20px; }
+
+h5 strong {
+	color:#4F9DBA; }
+
+form {
+	margin:0;
+	padding:0; }
+
+.red {
+	color:#c00; }
+
+.blue {
+	color:#06c; }
+
+.green {
+	color:#390; }
+
+.highlight {
+	background-color:#ffc; }
+
+ins {
+	background-color:#cfc;
+	text-decoration:none; }
+
+del {
+	color:#999; }
+
+code,pre {
+	font-family:"Bitstream Vera Sans Mono", monaco, "Courier New", courier, monospace;
+	background:inherit;
+	color:#333;
+	font-size:80%; }
+
+table {
+	border-collapse:collapse; }
+
+/*
+tr {
+	border:1px solid #fff; }
+	
+td {
+	border:1px solid #fff; }
+
+Work around IE/Win code size bug - courtesy Jesper, waffle.wootest.net  */
+* html code {
+	font-size:105%; }
+
+/*-------------------------------------------------
+STRUCTURE
+-------------------------------------------------*/
+div#Wrapper {
+	margin:0 auto;
+	padding:0 23px 0 30px; }
+
+div#Container {
+	text-align:center;
+	margin:13px auto 0; }
+
+.ClearAll {
+	clear:both;
+	font-size:1px;
+	margin:0;
+	padding:0; }
+
+.Left {
+	text-align:left;
+	width:70%;
+	float:left;
+	margin:0;
+	padding:0; }
+
+.Right {
+	text-align:left;
+	float:left;
+	width:30%;
+	margin:0;
+	padding:0; }
+
+/*--------------------
+FOR PROPORTIONAL WIDTH 
+---------------------*/
+.col {
+	text-align:center;
+	padding:0 20px; }
+
+.Left .col,.Full .col {
+	background:#fff url(../../../images/common/right-bg.gif) right repeat-y;
+	padding:10px 30px 20px 20px; }
+
+.Left .col .showhide {
+	margin-top:8px; }
+
+.Full .bottom,.Left .bottom {
+	background:url(../../../images/common/bottom-bg.gif) top right no-repeat;
+	font-size:8px;
+	margin-bottom:20px; }
+
+body.lobby .Full .bottom {
+	margin-bottom:0; }
+
+.Right .col {
+	padding:0 0 0 9px; }
+
+/*
+ * For manage tables and no javascript and list of invoices in view customer screen
+ * */
+table.sortable {
+	border-spacing:0;
+	border:1px solid #fff;
+	border-collapse:collapse; }
+
+th.sortable {
+	text-align:left;
+	background-color:#e9e9da;
+	border-bottom:1px solid #CBC7B8;
+	border-right:1px solid #D6D2C2;
+	font-weight:400;
+	padding:2px; }
+
+/*
+ * Accordian css - start
+ * */
+#list1 {
+	width:49%;
+	float:right; }
+
+#list2 {
+	width:49%;
+	float:left; }
+
+/*
+ * Accordian css - end
+ * 
+
+ * left rigth - define text align for tables here
+ * */
+.align_right {
+	text-align:right; }
+
+.align_center {
+	text-align:center; }
+
+.validation_alert {
+	font-weight:700;
+	color:#FFF;
+	background-color:red;
+	padding:10px; }
+
+#left,.Full,.align_left {
+	text-align:left; }
+
+a:link,a:visited {
+	/*color:#03c;*/
+	text-decoration:none; }
+
+.title,.mytitle {
+	cursor:pointer;
+	border:1px solid #CCC;
+	margin-top:0.5em;
+	padding:0.1em; }
+
+.on1 .title,.on .mytitle {
+	background-color:#E4EFC7; }
+
+.off1 .title,.off .mytitle {
+	background-color:#E0E0E0; }
+
+.content,.mycontent {
+	background-color:#FFF;
+	border:1px solid silver;
+	border-top-width:0;
+	padding:0.1em; }
