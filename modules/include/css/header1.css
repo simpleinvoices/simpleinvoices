@@ -1,26 +1,40 @@
-/*
-h1 {
-	font:bold 16px Arial, Helvetica, sans-serif; }
+/*-------------------------------------------------
+HEADER
+-------------------------------------------------*/
+div#Header {
+	background:#036;
+	text-align:left;
+	margin:0;
+	padding:13px 0 0; }
 
-p {
-	font:11px Arial, Helvetica, sans-serif; } 
+/*-------------------------------------------------
+TABS
+-------------------------------------------------*/
+#Tabs {
+	height:24px;
+	margin:0;
+	padding:0 20px 0 30px; }
 
-a {
-	color:#900;
+#Tabs ul {
+	background:#036;
+	margin:0;
+	padding:0; }
+
+#Tabs li {
+	display:inline;
+	list-style:none;
+	border:none;
+	margin:0;
+	padding:0; }
+
+#Tabs a:hover {
+	color:#fff;
+	background:#333; }
+	
+div#Tabs a:link,div#Tabs a:visited,a:active {
 	text-decoration:none; }
 
-a:hover {
-	background:#900;
-	color:#FFF; }
-
-hr {
-  color:#000;
-  background-color:#000;
-  height:1px;
-  border:0;
-  width:100%; )
-
-Root = Horizontal, Secondary = Vertical */
+/* Root = Horizontal, Secondary = Vertical */
 ul#navmenu {
 	border:0 none;
 	list-style:none;
@@ -70,6 +84,10 @@ ul#navmenu ul:after /*From IE 7 lack of compliance*/ {
 	font:bold 10px/22px Verdana, Arial, Helvetica, sans-serif;
 	text-decoration:none;
 	height:auto !important; }
+
+/*(IE6)Remove spaces between each list*/
+* html ul#navmenu ul li {
+	margin-bottom:-2.5px; }
 
 /*(IE7)Remove spaces between each list*/
 *+html ul#navmenu ul li {

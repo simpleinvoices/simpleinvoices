@@ -87,13 +87,19 @@ a.toggle.active:link,a.toggle.active:visited,a.toggle.active:hover {
 	font-weight:400 !important; }
 
 p {
-	font-size:14px;
+	font:11px Arial, Helvetica, sans-serif;
 	margin:0 0 15px; }
 
+hr {
+	color:#000;
+	background-color:#000;
+	height:1px;
+	border:0;
+	width:100%; }
+	
 h1 {
-	font-size:32px;
+	font:bold 32px Arial, Helvetica, sans-serif;
 	letter-spacing:normal;
-	font-family:helvetica, arial, sans-serif;
 	color:#000;
 	position:relative;
 	margin:5px 0 15px;
@@ -191,39 +197,6 @@ td {
 Work around IE/Win code size bug - courtesy Jesper, waffle.wootest.net  */
 * html code {
 	font-size:105%; }
-
-/*-------------------------------------------------
-HEADER
--------------------------------------------------*/
-div#Header {
-	background:#036;
-	text-align:left;
-	margin:0;
-	padding:13px 0 0; }
-
-/*-------------------------------------------------
-TABS
--------------------------------------------------*/
-#Tabs {
-	height:24px;
-	margin:0;
-	padding:0 20px 0 30px; }
-
-#Tabs ul {
-	background:#036;
-	margin:0;
-	padding:0; }
-
-#Tabs li {
-	display:inline;
-	list-style:none;
-	border:none;
-	margin:0;
-	padding:0; }
-
-#Tabs a:hover {
-	color:#fff;
-	background:#333; }
 
 /*-------------------------------------------------
 STRUCTURE
@@ -331,9 +304,6 @@ th.sortable {
 
 a:link,a:visited {
 	/*color:#03c;*/
-	text-decoration:none; }
-
-div#Tabs a:link,div#Tabs a:visited,a:active {
 	text-decoration:none; }
 
 .title,.mytitle {

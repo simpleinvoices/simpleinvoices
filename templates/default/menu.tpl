@@ -1,6 +1,6 @@
 <div id="Header">
 		<div id="Tabs">
-			<ul id="MainTabs">
+			<ul>
 				<ul id="navmenu">
 					<li><a href="index.php">{$LANG.home}</a></li>
 					<li><a href="index.php?module=invoices&view=manage">{$LANG.invoices} +</a>
