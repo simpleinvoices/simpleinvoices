@@ -12,7 +12,6 @@
 	<link rel="stylesheet" type="text/css" href="include/jquery/jquery.autocomplete.css" title="default" media="screen" />
 	<link rel="stylesheet" type="text/css" href="include/jquery/jquery.datePicker.css" title="default" media="screen" />
 	<link rel="stylesheet" type="text/css" href="./modules/include/css/header1.css" media="all"/>
-	<link rel="stylesheet" type="text/css" href="./modules/include/css/header2.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="./modules/include/css/screen.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="./modules/include/css/print.css" media="print"/>
 	<link rel="stylesheet" type="text/css" href="./modules/include/css/blue.css" media="screen"/>

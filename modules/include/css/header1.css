@@ -1,97 +1,42 @@
-/*-------------------------------------------------
-HEADER
+/* HEADER
 -------------------------------------------------*/
 div#Header {
 	background:#036;
 	text-align:left;
-	margin:0;
-	padding:13px 0 0; }
+	height:24px;
+	padding-top:13px; }
 
-/*-------------------------------------------------
-TABS
+/* TABS
 -------------------------------------------------*/
 #Tabs {
-	height:24px;
-	margin:0;
-	padding:0 20px 0 30px; }
+	padding:0 20px 0 25px; }
 
-#Tabs ul {
-	background:#036;
-	margin:0;
-	padding:0; }
-
-#Tabs li {
-	display:inline;
-	list-style:none;
-	border:none;
-	margin:0;
-	padding:0; }
-
-#Tabs a:hover {
-	color:#fff;
-	background:#333; }
-	
-div#Tabs a:link,div#Tabs a:visited,a:active {
-	text-decoration:none; }
-
+/* NAVMENU
+-------------------------------------------------*/
 /* Root = Horizontal, Secondary = Vertical */
 ul#navmenu {
-	border:0 none;
-	list-style:none;
-	height:24px;
 	margin:0;
 	padding:0; }
 
 ul#navmenu li {
-	border:0 none;
 	float:left;
-	display:inline;
-	list-style:none;
-	position:relative;
-	height:24px;
-	margin:0;
-	padding:0; }
+	position:relative; }
 
 ul#navmenu ul {
-	background-color:transparent;
-	border:0 none;
 	width:185px;
-	list-style:none;
 	display:none;
 	position:absolute;
 	top:24px;
-	left:0;
 	margin:0;
 	padding:0; }
 
-ul#navmenu ul:after /*From IE 7 lack of compliance*/ {
-	clear:both;
-	display:block;
-	font:1px/0 serif;
-	content:".";
-	height:0;
-	visibility:hidden; }
-
 /*Sub Menu */
-	ul#navmenu ul li {
+ul#navmenu ul li {
 	width:180px;
-	display:block !important;
 	border:1px solid #FFF;
 	border-right-color:#CCC;
 	border-bottom-color:#CCC;
-	float:none !important;
-	background:#EEE;
-	font:bold 10px/22px Verdana, Arial, Helvetica, sans-serif;
-	text-decoration:none;
-	height:auto !important; }
-
-/*(IE6)Remove spaces between each list*/
-* html ul#navmenu ul li {
-	margin-bottom:-2.5px; }
-
-/*(IE7)Remove spaces between each list*/
-*+html ul#navmenu ul li {
-	margin-bottom:-6px; }
+	background-color:#EEE; }
 
 /*(IE7)solves z-index Bug [http://www.aplus.co.yu/adxmenu/examples/vlr/]*/
 ul#navmenu li:hover {
@@ -107,7 +52,9 @@ ul#navmenu a {
 	display:block;
 	background:#EEE;
 	color:#666;
-	font:bold 10px/22px Verdana, Arial, Helvetica, sans-serif;
+	line-height:22px;
+	font-weight:700;
+	font-size:10px;
 	text-decoration:none;
 	height:auto !important; }
 
