@@ -48,64 +48,46 @@ ul#navmenu a {
 	border-left:5px solid #036;
 	padding-left:10px;
 	padding-right:10px;
-	float:none !important;
 	display:block;
-	background:#EEE;
-	color:#666;
 	line-height:22px;
 	font-weight:700;
-	font-size:10px;
-	text-decoration:none;
-	height:auto !important; }
-
-/* Root Menu Hover Persistence */
-ul#navmenu a:hover,ul#navmenu li:hover a,ul#navmenu li.iehover a {
-	background:#900;
-	color:#FFF; }
+	font-size:10px; }
 
 /* 2nd Menu */
 ul#navmenu li:hover li a,ul#navmenu li.iehover li a {
-	font:normal 10px/22px Verdana, Arial, Helvetica, sans-serif;
-	z-index:1;
-	float:none;
-	background:#dcdad5;
+	font-weight:400;
+	line-height:22px;
+	background-color:#dcdad5;
 	color:#000; }
 
 /* 2nd Menu Hover Persistence */
 ul#navmenu li:hover li a:hover,ul#navmenu li:hover li:hover a,ul#navmenu li.iehover li a:hover,ul#navmenu li.iehover li.iehover a {
-	z-index:1;
-	background:#999;
+	background-color:#999;
 	color:#FFF; }
 
 /* 3rd Menu */
 ul#navmenu li:hover li:hover li a,ul#navmenu li.iehover li.iehover li a {
-	z-index:2;
-	background:#dcdad5;
+	background-color:#dcdad5;
 	color:#000; }
 
 /* 3rd Menu Hover Persistence */
 ul#navmenu li:hover li:hover li a:hover,ul#navmenu li:hover li:hover li:hover a,ul#navmenu li.iehover li.iehover li a:hover,ul#navmenu li.iehover li.iehover li.iehover a {
-	z-index:2;
-	background:#999;
+	background-color:#999;
 	color:#FFF; }
 
 /* 4th Menu */
 ul#navmenu li:hover li:hover li:hover li a,ul#navmenu li.iehover li.iehover li.iehover li a {
-	background:#EEE;
+	background-color:#EEE;
 	color:#666; }
 
 /* 4th Menu Hover */
 ul#navmenu li:hover li:hover li:hover li a:hover,ul#navmenu li.iehover li.iehover li.iehover li a:hover {
-	background:#CCC;
+	background-color:#CCC;
 	color:#FFF; }
 
 ul#navmenu ul ul,ul#navmenu ul ul ul {
-	z-index:2;
-	display:none;
-	position:absolute;
 	top:5px;
-	left:140px;
-	width:180px; }
+	left:140px; }
 
 /* Do Not Move - Must Come Before display:block for Gecko */
 ul#navmenu li:hover ul ul,ul#navmenu li:hover ul ul ul,ul#navmenu li.iehover ul ul,ul#navmenu li.iehover ul ul ul {
