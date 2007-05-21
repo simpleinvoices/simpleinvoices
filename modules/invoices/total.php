@@ -76,10 +76,10 @@ while ($Array_inv_preference = mysql_fetch_array($result_inv_preference)) {
 
 #get custom field labels
 
-$show_custom_field_1 = show_custom_field(invoice_cf1,'',write,'',details_screen,'','','');
-$show_custom_field_2 = show_custom_field(invoice_cf2,'',write,'',details_screen,'','','');
-$show_custom_field_3 = show_custom_field(invoice_cf3,'',write,'',details_screen,'','','');
-$show_custom_field_4 = show_custom_field(invoice_cf4,'',write,'',details_screen,'','','');
+$show_custom_field_1 = show_custom_field("invoice_cf1",'',"write",'',"details_screen",'','','');
+$show_custom_field_2 = show_custom_field("invoice_cf2",'',"write",'',"details_screen",'','','');
+$show_custom_field_3 = show_custom_field("invoice_cf3",'',"write",'',"details_screen",'','','');
+$show_custom_field_4 = show_custom_field("invoice_cf4",'',"write",'',"details_screen",'','','');
 
 
 

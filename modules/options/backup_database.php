@@ -6,7 +6,7 @@ include('./include/include_main.php');
 checkLogin();
 
 
-if ($_GET[op] == "backup_db") {
+if ($_GET['op'] == "backup_db") {
 include_once("./include/backup.lib.php");
 $today = date("YmdGisa");
 $oBack    = new backup_db;
