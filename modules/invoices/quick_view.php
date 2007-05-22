@@ -28,10 +28,10 @@ else {
 $customFieldLabels = getCustomFieldLabels();
 
 //TODO...
-$show_custom_field_1 = show_custom_field("invoice_cf1",$invoice['custom_field1'],"read",'details_screen summary','','',5,':');
-$show_custom_field_2 = show_custom_field("invoice_cf2",$invoice['custom_field2'],"read",'details_screen summary','','',5,':');
-$show_custom_field_3 = show_custom_field("invoice_cf3",$invoice['custom_field3'],"read",'details_screen summary','','',5,':');
-$show_custom_field_4 = show_custom_field("invoice_cf4",$invoice['custom_field4'],"read",'details_screen summary','','',5,':');
+$show_custom_field_1 = show_custom_field("invoice_cf1",$invoice['custom_field1'],"read",'details_screen summary','details_screen','details_screen',5,':');
+$show_custom_field_2 = show_custom_field("invoice_cf2",$invoice['custom_field2'],"read",'details_screen summary','details_screen','details_screen',5,':');
+$show_custom_field_3 = show_custom_field("invoice_cf3",$invoice['custom_field3'],"read",'details_screen summary','details_screen','details_screen',5,':');
+$show_custom_field_4 = show_custom_field("invoice_cf4",$invoice['custom_field4'],"read",'details_screen summary','details_screen','details_screen',5,':');
 
 #START INVOICE HERE - TOP SECTION
 
@@ -330,7 +330,7 @@ echo <<<EOD
 		<td class='details_screen'>$preference[pref_inv_wording] {$LANG['number_short']}:</td><td colspan=5 class='details_screen'>$invoice[id]</td>
 	</tr>
 	<tr class='details_screen summary'>
-		<td>$preference[pref_inv_wording] {$LANG['date']}:</td><td colspan=5>{$invoice['date']}</td>
+		<td class='details_screen'>$preference[pref_inv_wording] {$LANG['date']}:</td><td class='details_screen' colspan=5>{$invoice['date']}</td>
 	</tr>
 	$show_custom_field_1 
 	$show_custom_field_2 
@@ -340,8 +340,10 @@ echo <<<EOD
 		<td><br></td>
 	</tr>
 	<!-- Biller section -->
+
+
 	<tr class='details_screen'>
-		<td class='details_screen'><b>{$LANG['biller']}:</b></td><td colspan=3>$biller[name]</b></td><td colspan=2 class='align_right' align=right><a href='#' class="show-biller" onClick="$('.biller').show();$('.show-biller').hide();">{$LANG['show_details']}</a><a href='#' class="biller" onClick="$('.biller').hide();$('.show-biller').show();">{$LANG['hide_details']}</a></td>
+		<td class='details_screen'><b>{$LANG['biller']}:</b></td><td class='details_screen' colspan=3>$biller[name]</b></td><td colspan=2 align=right class='details_screen align_right'><a href='#' class="show-biller" onClick="$('.biller').show();$('.show-biller').hide();">{$LANG['show_details']}</a><a href='#' class="biller" onClick="$('.biller').hide();$('.show-biller').show();">{$LANG['hide_details']}</a></td>
 	</tr>
 	<tr class='details_screen biller'>
 		<td class='details_screen'>{$LANG['street']}:</td><td class='details_screen' colspan=5>$biller[street_address]</td>
@@ -353,7 +355,7 @@ echo <<<EOD
 		<td class='details_screen'>{$LANG['city']}:</td><td class='details_screen' colspan=3>$biller[city]</td><td class='details_screen'>{$LANG['phone_short']}:</td><td class='details_screen'>$biller[phone]</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td class='details_screen'>{$LANG['state']}, Zip:</td><td colspan=3>$biller[state], $biller[zip_code]</td><td class='details_screen'>{$LANG['mobile_short']}:</td><td class='details_screen'>$biller[mobile_phone]</td>
+		<td class='details_screen'>{$LANG['state']}, Zip:</td><td class='details_screen' colspan=3>$biller[state], $biller[zip_code]</td><td class='details_screen'>{$LANG['mobile_short']}:</td><td class='details_screen'>$biller[mobile_phone]</td>
 	</tr>	
 	<tr class='details_screen biller'>
 		<td class='details_screen'>{$LANG['country']}:</td><td class='details_screen' colspan=3>$biller[country]</td><td class='details_screen'>{$LANG['fax']}:</td><td class='details_screen'>$biller[fax]</td>
@@ -379,7 +381,7 @@ echo <<<EOD
 	
 	<!-- Customer section -->
 	<tr class='details_screen'
-		<td class='details_screen'><b>{$LANG['customer']}:</b></td><td colspan=3>$customer[name]</td><td colspan=2 align=right class='details_screen align_right'><a href='#' class="show-customer" onClick="$('.customer').show(); $('.show-customer').hide(); ">{$LANG['show_details']}</a> <a href='#' class="customer" onClick="$('.customer').hide(); $('.show-customer').show();">{$LANG['hide_details']}</a></td>
+		<td class='details_screen'><b>{$LANG['customer']}:</b></td><td class='details_screen' colspan=3>$customer[name]</td><td colspan=2 align=right class='details_screen align_right'><a href='#' class="show-customer" onClick="$('.customer').show(); $('.show-customer').hide(); ">{$LANG['show_details']}</a> <a href='#' class="customer" onClick="$('.customer').hide(); $('.show-customer').show();">{$LANG['hide_details']}</a></td>
 	</tr>	
 	<tr class='details_screen customer'>
 		<td class='details_screen'>{$LANG['attention_short']}:</td><td class='details_screen' colspan=5 align=left>$customer[attention],</td>
@@ -391,7 +393,7 @@ echo <<<EOD
 		<td class='details_screen'>{$LANG['street2']}:</td><td class='details_screen' colspan=5 align=left>$customer[street_address2]</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>{$LANG['city']}:</td><td class='details_screen' colspan=3>$customer[city]</td><td class='details_screen'>Ph:</td><td>$customer[phone]</td>
+		<td class='details_screen'>{$LANG['city']}:</td><td class='details_screen' colspan=3>$customer[city]</td><td class='details_screen'>Ph:</td><td class='details_screen'>$customer[phone]</td>
 	</tr>	
 	<tr class='details_screen customer'>
 		<td class='details_screen'>{$LANG['state']}, ZIP:</td><td colspan=3 class='details_screen'>$customer[state], $customer[zip_code]</td><td class='details_screen'>{$LANG['fax']}:</td><td class='details_screen'>$customer[fax]</td>
