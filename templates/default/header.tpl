@@ -11,7 +11,7 @@
 
 	<link rel="stylesheet" type="text/css" href="include/jquery/jquery.autocomplete.css" title="default" media="screen" />
 	<link rel="stylesheet" type="text/css" href="include/jquery/jquery.datePicker.css" title="default" media="screen" />
-	<link rel="stylesheet" type="text/css" href="./templates/default/css/header1.css" media="all"/>
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/header.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/screen.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/print.css" media="print"/>
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/blue.css" media="screen"/>
@@ -29,8 +29,6 @@
 <script type="text/javascript" src="./include/jquery/jquery.tabs.js"></script>
 
 
-
-
 <!-- customer-details -->
 <link rel="stylesheet" href="./templates/default/css/tabs.css" type="text/css" media="print, projection, screen" />
 {php}
@@ -46,7 +44,5 @@ include('./templates/default/tmp.php');
 <script language="JavaScript" src="./modules/include/js/dhtml.js" type="text/JavaScript"></script>
 <link rel="stylesheet" href="./templates/default/css/iehacks.css" type="text/css" />
 <![endif]-->
-
-<!-- customer-details -->
 
 <body>
