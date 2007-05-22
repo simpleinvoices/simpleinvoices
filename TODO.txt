@@ -3,7 +3,6 @@
 -todo
  - CSS: main container - white section seems to have default height???
  - customer view - add edit/export etc, back in
- - Change all the titles <b>...</b> by <h3>...</h3>
 
 -done
  - sql patch: reset default invoices template to default - Done

@@ -1,4 +1,4 @@
-<form name="frmpost" action="index.php?module=invoices&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=invoices&view=save" method=POST onsubmit="return frmpost_Validator(this)">
 
 <h3>{$LANG.inv} {$LANG.inv_itemised}</h3>
 <hr />
