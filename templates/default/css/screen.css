@@ -269,10 +269,22 @@ th.sortable {
 	width:49%;
 	float:right; }
 
+* html #list1 {
+		width:49% }
+		
+*+html #list1 {
+		width:49% }
+		
 #list2 {
 	width:49%;
 	float:left; }
 
+* html #list2 {
+		width:50% }
+		
+*+html #list2 {
+		width:50% }
+		
 /*
  * Accordian css - end
  * 
