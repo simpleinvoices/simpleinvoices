@@ -45,12 +45,11 @@ GLOBALS & GENERAL CASES
 -------------------------------------------------*/
 .print_only {
 	display:none; }
-
+/*ok*/
 a {
 	color:#03c;
-	text-decoration:underline;
 	padding:1px; }
-
+/*ok*/
 a:hover {
 	color:#fff;
 	background-color:#900;
@@ -187,11 +186,9 @@ Work around IE/Win code size bug - courtesy Jesper, waffle.wootest.net  */
 /* STRUCTURE
 -------------------------------------------------*/
 div#Wrapper {
-	margin:0 auto;
 	padding:0 23px 0 30px; }
 
 div#Container {
-	text-align:center;
 	margin:13px auto 0; }
 
 .ClearAll {
@@ -222,19 +219,13 @@ div#Container {
 
 .Left .col,.Full .col {
 	background:#fff url(../../../images/common/right-bg.gif) right repeat-y;
-	padding:10px 30px 20px 20px;
-	min-height:25em; }
-
-* html .Left .col,* html .Full .col {
-	height:25em;}
+	padding:10px 30px 20px 20px; }
 	
 .Left .col .showhide {
 	margin-top:8px; }
 
 .Full .bottom,.Left .bottom {
-	background:url(../../../images/common/bottom-bg.gif) top right no-repeat;
-	font-size:8px;
-	margin-bottom:20px; }
+	background:url(../../../images/common/bottom-bg.gif) top right no-repeat; }
 
 body.lobby .Full .bottom {
 	margin-bottom:0; }
@@ -261,6 +252,16 @@ th.sortable {
 /*
  * Accordian css - start
  * */
+
+#accordian {
+	width:auto;
+	min-height:22em;
+}
+
+#accordian td {
+	width:10%;
+	height:3em;
+}
 #list1 {
 	width:49%;
 	float:right; }
@@ -295,6 +296,7 @@ a:link,a:visited {
 	text-decoration:none; }
 
 .title,.mytitle {
+	text-align:center;
 	cursor:pointer;
 	border:1px solid #CCC;
 	margin-top:0.5em;

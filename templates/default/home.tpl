@@ -14,7 +14,7 @@
 		NOTE <a href='docs.php?t=help&p=mysql4' rel='gb_page_center[450, 450]' ><img src='./images/common/help-small.png'></img></a> : As you are using Mysql 4 some features have been disabled<br>
 {/if}
 
-
+<div id="accordian">
 	<div id="list1">
 	<h2><img src="./images/common/reports.png"></img>{$LANG.stats}</h2>
 	
@@ -42,18 +42,18 @@
 		<div class="mycontent">
 			<table>
 				<tr>
-					<td width=10%>
+					<td>
 						<a href="docs.php?p=ReadMe#faqs-what"><img src="images/common/question.png"></img>{$LANG.faqs_what}</a>
 					</td>		
-					<td width=10%>
+					<td>
 						<a href="docs.php?p=ReadMe#faqs-need"><img src="images/common/question.png"></img>{$LANG.faqs_need}</a>
 					</td>		
 				</tr>
 				<tr>
-					<td width=10%>
+					<td>
 						<a href="docs.php?p=ReadMe#faqs-how"><img src="images/common/question.png"></img>{$LANG.faqs_how}</a>
 					</td>		
-					<td width=10%>
+					<td>
 						<a href="docs.php?p=ReadMe#faqs-types"><img src="images/common/question.png"></img>{$LANG.faqs_type}</a>
 					</td>		
 				</tr>
@@ -66,13 +66,13 @@
 		<div class="mycontent">
 			<table>
 				<tr>
-					<td width=10%>
+					<td>
 						<a href="index.php?module=invoices&view=itemised"><img src="images/common/itemised.png"></img>{$LANG.itemised_style}</a>
 					</td>		
-					<td width=10%>
+					<td>
 						<a href="index.php?module=invoices&view=total"><img src="images/common/total.png"></img>{$LANG.total_style}</a>
 					</td>
-					<td width=10%>
+					<td>
 						<a href="index.php?module=invoices&view=consulting"><img src="images/common/consulting.png"></img>{$LANG.consulting_style}</a>
 					</td>
 				</tr>
@@ -90,7 +90,7 @@
 		<div class="mycontent">
 			<table>
 				<tr>
-					<td width=10% align=center class="align_center">
+					<td align=center class="align_center">
 						<a href="index.php?module=invoices&view=manage"><img src="images/common/manage.png"></img>{$LANG.manage_invoices}</a>
 					</td>
 				</tr>
@@ -103,24 +103,24 @@
 		<div class="mycontent">
 			<table>
 				 <tr>
-					<td width=10%>
+					<td>
 						<a href="index.php?module=customers&view=add"><img src="images/common/add.png"></img>{$LANG.insert_customer}</a>
 					</td>
-					<td width=10%>
+					<td>
 						<a href="index.php?module=billers&view=add"><img src="images/common/add.png"></img>{$LANG.insert_biller}</a>
 					</td>
-					<td width=10%>
+					<td>
 						<a href="index.php?module=products&view=add"><img src="images/common/add.png"></img>{$LANG.insert_product}</a>
 					</td>
 				</tr>
 				<tr>
-					<td width=10%>
+					<td>
 						<a href="index.php?module=customers&view=manage"><img src="images/common/customers.png"></img>{$LANG.manage_customers}</a>
 					</td>
-					<td width=10%>
+					<td>
 						<a href="index.php?module=billers&view=manage"><img src="images/common/biller.png"></img>{$LANG.manage_billers}</a>
 					</td>
-					<td width=10%>
+					<td>
 						<a href="index.php?module=products&view=manage"><img src="images/common/products.png"></img>{$LANG.manage_products}</a>
 					</td>
 				</tr>
@@ -133,24 +133,24 @@
 		<div class="mycontent">
 			<table>
 				<tr>
-					<td width=10%>
+					<td>
 						<a href="index.php?module=system_defaults&view=manage"><img src="images/common/defaults.png"></img>{$LANG.system_defaults}</a>
 					</td>
-					<td width=10%>
+					<td>
 						<a href="index.php?module=tax_rates&view=manage"><img src="images/common/tax.png"></img>{$LANG.tax_rates}</a>
 					</td>
-					<td width=10%>
+					<td>
 						<a href="index.php?module=preferences&view=manage"><img src="images/common/preferences.png"></img>{$LANG.invoice_preferences}</a>
 					</td>
 				</tr>
 				<tr>
-					<td width=10%>
+					<td>
 						<a href="index.php?module=payment_types&view=manage"><img src="images/common/payment.png"></img>{$LANG.payment_types}</a>
 					</td>
-					<td width=10%>
+					<td>
 						<a href="index.php?module=options&view=database_sqlpatches"><img src="images/common/upgrade.png"></img>{$LANG.database_upgrade_manager}</a>
 					</td>
-					<td width=10%>
+					<td>
 						<a href="index.php?module=options&view=backup_database"><img src="images/common/backup.png"></img>{$LANG.backup_database}</a>
 					</td>
 				</tr>
@@ -163,21 +163,22 @@
 		<div class="mycontent">
 			<table>
 				<tr>
-					<td width=10%>
+					<td>
 						<a href="docs.php?p=ReadMe#installation"><img src="images/common/help.png"></img>{$LANG.installation}</a>
 					</td>	
-					<td width=10%>
+					<td>
 						<a href="docs.php?p=ReadMe#upgrading"><img src="images/common/help.png"></img>{$LANG.upgrading_simple_invoices}</a>
 					</td>	
 				</tr>
 				<tr>
-					<td width=10% class="align_center" colspan="2">
+					<td class="align_center" colspan="2">
 						<a href="docs.php?p=ReadMe#prepare"><img src="images/common/help.png"></img>{$LANG.prepare_simple_invoices}</a>
 					</td>	
 				</tr>
 			</table>
 		</div>
 	</div>
+</div>
 	
 </div>
 </div>
