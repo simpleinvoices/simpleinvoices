@@ -2,6 +2,7 @@
 - in next release - aim 18th May 
 -todo
  - customer view - add edit/export etc, back in
+ - Change all the titles <b>...</b> by <h3>...</h3>
 
 -done
  - sql patch: reset default invoices template to default - Done

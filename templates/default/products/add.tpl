@@ -4,7 +4,7 @@
 {$refresh_total}
 
 <br />
-<br>
+<br />
 {$display_block} 
 <br />
 <br />
@@ -14,12 +14,12 @@
 	{if $smarty.post.submit !=null} 
 		<div class="validation_alert"><img src="./images/common/important.png"</img>
 		You must enter a description for the product</div>
-		<hr></hr>
+		<hr />
 	{/if}
 <FORM name="frmpost" ACTION="index.php?module=products&view=add" METHOD="POST">
 
-<div id="top"><b>&nbsp;{$LANG.product_to_add}&nbsp;</b></div>
- <hr></hr>
+<div id="top"><h3>&nbsp;{$LANG.product_to_add}&nbsp;</h3></div>
+ <hr />
 
 <table align=center>
 	<tr>
@@ -58,7 +58,7 @@
 	</tr>
 </table>
 <!-- </div> -->
-<hr></hr>
+<hr />
 	<input type=submit name="submit" value="{$LANG.insert_product}">
 	<input type=hidden name="op" value="insert_product">
 </FORM>

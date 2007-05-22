@@ -190,8 +190,8 @@ else if ($op === "pay_invoice_batch") {
 echo <<<EOD
 
 <form name="frmpost" action="index.php?module=payments&view=save" method="post" onsubmit="return frmpost_Validator(this)">
-<b>{$LANG['process_payment']}</b>
- <hr></hr>
+<h3>{$LANG['process_payment']}</h3>
+ <hr />
 
 $display_block
 <hr></hr>

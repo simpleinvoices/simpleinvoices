@@ -6,37 +6,36 @@
 <a href="index.php?module=invoices&view=total">{$LANG.add_new_invoice} - {$LANG.total_style}</a> ::
 <a href="index.php?module=invoices&view=itemised">{$LANG.add_new_invoice} - {$LANG.itemised_style}</a> ::
 <a href="index.php?module=invoices&view=consulting">{$LANG.add_new_invoice} - {$LANG.consulting_style}</a>
-<hr></hr>
+<hr />
 
 
 <table align="center" id="ex1" class="ricoLiveGrid manage" >
 <colgroup>
-<col style='width:15%;' />
-<col style='width:5%;' />
-<col style='width:10%;' />
-<col style='width:10%;' />
-<col style='width:10%;' />
-<col style='width:10%;' />
-<col style='width:5%;' />
-<col style='width:5%;' />
-<col style='width:10%;' />
+	<col style='width:15%;' />
+	<col style='width:5%;' />
+	<col style='width:10%;' />
+	<col style='width:10%;' />
+	<col style='width:10%;' />
+	<col style='width:10%;' />
+	<col style='width:5%;' />
+	<col style='width:5%;' />
+	<col style='width:10%;' />
 </colgroup>
 <thead> 
-<tr class="sortHeader">
-<th class="noFilter sortable" >{$LANG.actions} </th>
-<th class="noFilter sortable">{$LANG.id}</th>
-<th class="selectFilter index_table sortable">{$LANG.biller}</th>
-<th class="selectFilter index_table sortable">{$LANG.customer}</th>
-<th class="noFilter sortable">{$LANG.total}</th>
-<th class="noFilter sortable">{$LANG.owing}</th>
-<th class="selectFilter index_table sortable">{$LANG.aging}</th>
-<th class="noFilter sortable">{$LANG.invoice_type}</th>
-<th class="noFilter sortable">{$LANG.date_created}</th>
-</tr>
+	<tr class="sortHeader">
+		<th class="noFilter sortable" >{$LANG.actions} </th>
+		<th class="noFilter sortable">{$LANG.id}</th>
+		<th class="selectFilter index_table sortable">{$LANG.biller}</th>
+		<th class="selectFilter index_table sortable">{$LANG.customer}</th>
+		<th class="noFilter sortable">{$LANG.total}</th>
+		<th class="noFilter sortable">{$LANG.owing}</th>
+		<th class="selectFilter index_table sortable">{$LANG.aging}</th>
+		<th class="noFilter sortable">{$LANG.invoice_type}</th>
+		<th class="noFilter sortable">{$LANG.date_created}</th>
+	</tr>
 </thead>
 
 {foreach from=$invoices item=invoice}
-
 
 	
 	<tr class="index_table">
@@ -94,8 +93,6 @@
 
 									
 	{/foreach}					
-					
-				
 
 </table>
 {/if}

@@ -8,10 +8,10 @@
 	{if $smarty.post.submit !=null} 
 		<div class="validation_alert"><img src="./images/common/important.png"</img>
 		You must enter a Customer name</div>
-		<hr></hr>
+		<hr />
 	{/if}
-<form name="frmpost" ACTION="index.php?module=customers&view=add" METHOD="post"><b>{$LANG.customer_add}</b>
-<hr></hr>
+<form name="frmpost" ACTION="index.php?module=customers&view=add" METHOD="post"><h3>{$LANG.customer_add}</h3>
+<hr />
 <table align=center>
 	<tr>
 		<td class="details_screen">{$LANG.customer_name} <a href="docs.php?t=help&p=required_field" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png"></img></a></td>

@@ -8,11 +8,11 @@
 {if $smarty.post.submit !=null}
 <div class="validation_alert"><img src="./images/common/important.png"</img>
 You must enter a Biller name</div>
-<hr></hr>
+<hr />
 {/if}
 <FORM name="frmpost" action="index.php?module=billers&view=add"
-	method="post"><b>{$LANG.biller_to_add}</b>
-<hr></hr>
+	method="post"><h3>{$LANG.biller_to_add}</h3>
+<hr />
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.biller_name} <a href="docs.php?t=help&p=required_field" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png"></img></a></td>
@@ -133,7 +133,7 @@ You must enter a Biller name</div>
 	</div>
 	</tbody>
 </table>
-<hr></hr>
+<hr />
 <input type="submit" name="submit" value="{$LANG.insert_biller}" /> <input
 	type="hidden" name="op" value="insert_biller" /></FORM>
 {/if}

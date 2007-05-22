@@ -7,21 +7,21 @@ checkLogin();
 #if coming from another page where you want to filter by just one invoice
 if (!empty($_GET['id'])) {
 
-	$display_block_header = "<b>$LANG[payments_filtered] $_GET[id]</b> :: <a href='index.php?module=payments&view=process&submit=$_GET[id]&op=pay_selected_invoice'>$LANG[payments_filtered_invoice]</a>";
+	$display_block_header = "<h3>$LANG[payments_filtered] $_GET[id]</h3> :: <a href='index.php?module=payments&view=process&submit=$_GET[id]&op=pay_selected_invoice'>$LANG[payments_filtered_invoice]</a>";
 
 	$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.name as CNAME, {$tb_prefix}biller.name as BNAME from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.biller_id = {$tb_prefix}biller.id and {$tb_prefix}account_payments.ac_inv_id='$_GET[id]' ORDER BY {$tb_prefix}account_payments.id DESC";
 }
 #if coming from another page where you want to filter by just one customer
 elseif (!empty($_GET['c_id'])) {
 
-	$display_block_header = "<b>$LANG[payments_filtered_customer] $_GET[c_id] :: <a href='index.php?module=payments&view=process&op=pay_invoice'>$LANG[process_payment]</a></b>";
+	$display_block_header = "<h3>$LANG[payments_filtered_customer] $_GET[c_id] :: <a href='index.php?module=payments&view=process&op=pay_invoice'>$LANG[process_payment]</a></h3>";
 
 	$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.name as CNAME, {$tb_prefix}biller.name as BNAME from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.biller_id = {$tb_prefix}biller.id and {$tb_prefix}customers.id='$_GET[c_id]' ORDER BY {$tb_prefix}account_payments.id DESC ";
 }
 #if you want to show all invoices - no filters
 else {
 
-	$display_block_header = "<b>$LANG[manage_payments] :: <a href='index.php?module=payments&view=process&op=pay_invoice'>$LANG[process_payment]</a></b>";
+	$display_block_header = "<h3>$LANG[manage_payments] :: <a href='index.php?module=payments&view=process&op=pay_invoice'>$LANG[process_payment]</a></h3>";
 
 	$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.name as CNAME, {$tb_prefix}biller.name as BNAME from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.biller_id = {$tb_prefix}biller.id ORDER BY {$tb_prefix}account_payments.id DESC";
 }

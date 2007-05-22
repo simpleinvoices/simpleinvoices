@@ -1,5 +1,4 @@
-/*-------------------------------------------------
-PAGE BODY
+/* PAGE BODY
 -------------------------------------------------*/
 html, body { padding: 0; margin: 0; }
 
@@ -73,27 +72,10 @@ p {
 	margin:0 0 15px; }
 
 hr {
-	color:#000;
 	background-color:#000;
 	height:1px;
 	border:0;
-	width:100%; }
-	
-h1 {
-	font:bold 32px Arial, Helvetica, sans-serif;
-	letter-spacing:normal;
-	color:#000;
-	position:relative;
-	margin:5px 0 15px;
-	padding:0 0 5px; }
-
-h1.admin {
-	margin-bottom:2px; }
-
-h2 {
-	font-size:18px;
-	font-family:helvetica;
-	margin:0 0 15px; }
+	margin:10px 0; }
 
 a img {
 	border:0; }
@@ -119,6 +101,28 @@ div.notice {
 div.alert {
 	background:red; }
 
+h1 {
+	font:bold 32px Arial, Helvetica, sans-serif;
+	letter-spacing:normal;
+	color:#000;
+	position:relative;
+	margin:5px 0 15px;
+	padding:0 0 5px; }
+
+/* TYPOGRAPHY
+-------------------------------------------------*/
+h1.admin {
+	margin-bottom:2px; }
+
+h2 {
+	font-size:18px;
+	font-family:helvetica;
+	margin:0 0 15px; }
+	
+h3 {
+	text-align:center;
+	margin:0;
+}
 h4 {
 	font-size:11px;
 	margin:0; }
@@ -180,8 +184,7 @@ Work around IE/Win code size bug - courtesy Jesper, waffle.wootest.net  */
 * html code {
 	font-size:105%; }
 
-/*-------------------------------------------------
-STRUCTURE
+/* STRUCTURE
 -------------------------------------------------*/
 div#Wrapper {
 	margin:0 auto;
@@ -211,9 +214,8 @@ div#Container {
 	margin:0;
 	padding:0; }
 
-/*--------------------
-FOR PROPORTIONAL WIDTH 
----------------------*/
+/* FOR PROPORTIONAL WIDTH 
+--------------------------*/
 .col {
 	text-align:center;
 	padding:0 20px; }

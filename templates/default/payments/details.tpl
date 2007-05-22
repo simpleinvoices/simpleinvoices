@@ -1,5 +1,5 @@
-<b>{$LANG.manage_payments}</b>
-<hr></hr>
+<h3>{$LANG.manage_payments}</h3>
+<hr />
 
 <table align=center>
 	<tr>
