@@ -10,7 +10,20 @@ div#Header {
 -------------------------------------------------*/
 #Tabs {
 	padding:0 20px 0 25px; }
+/* A verifier */
+#Tabs a:link,#Tabs a:visited {
+	color:#fff;
+	background-color:#1A4F85; }
 
+#Tabs a:hover {
+	color:#fff; }
+
+#Tabs ul a:link.current,#Tabs ul a:visited.current {
+	color:#090; }
+
+#Tabs li.logout a:link,#Tabs li.logout a:visited {
+	color:#8099b3; }
+/* fin verification */
 /* NAVMENU
 -------------------------------------------------*/
 /* Root = Horizontal, Secondary = Vertical */

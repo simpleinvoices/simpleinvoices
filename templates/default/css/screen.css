@@ -1,20 +1,16 @@
 /*-------------------------------------------------
 PAGE BODY
 -------------------------------------------------*/
-html {
-	overflow:-moz-scrollbars-vertical; }
+html, body { padding: 0; margin: 0; }
 
 body {
-	background:#e5e5e5;
-	text-align:center;
-	margin:0 auto;
-	padding:0; }
+	background:#e5e5e5; }
 
-body,.dialog {
+body, .dialog {
 	font-family:"Lucida Grande", verdana, arial, helvetica, sans-serif;
 	font-size:14px;
 	color:#333; }
-
+	
 table.manage {
 	font-size:12px; }
 
@@ -25,7 +21,6 @@ td.account {
 td for the manage screen - start */
 td.index_table {
 	background-color:#F5F5F5;
-	/*-moz-border-radius:0;*/
 	border:1px solid #fff;
 	font-style:normal;
 	font-weight:400;
@@ -43,21 +38,8 @@ td.columnleft {
 td.details_screen {
 	border:1px solid #fff;
 	background-color:#F5F5F5;
-	/*-moz-border-radius:0;*/
-	font-style:normal;
-	font-weight:400;
-	text-decoration:none;
 	border-color:#FFF;
 	border-width:1px; }
-
-/*td for the details screen - end
-td for the details screen - start*/
-tr.details_screen {
-	border:1px solid #fff;
-	background-color:#F5F5F5;
-	font-style:normal;
-	font-weight:400;
-	text-decoration:none; }
 
 /*-------------------------------------------------
 GLOBALS & GENERAL CASES

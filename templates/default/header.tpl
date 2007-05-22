@@ -14,7 +14,6 @@
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/header.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/screen.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/print.css" media="print"/>
-	<link rel="stylesheet" type="text/css" href="./templates/default/css/blue.css" media="screen"/>
 
 
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
