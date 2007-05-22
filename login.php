@@ -195,7 +195,10 @@ if ($errorMessage != '') {
   		</dd>
 
       		<dd><input type="checkbox" name="remember_me" /> Remember me on this computer</dd>
-                <dd> <input type="submit" value="login" /></dd>
+		<dd> <input type="submit" value="login" /></dd>
+<!--
+		<dd>Powered by Simple Invoices</dd>
+-->
 <!--  		<dd><input type="submit" value="Sign in" /></dd> -->
 <!--
 	        <label for="username">Username</label>

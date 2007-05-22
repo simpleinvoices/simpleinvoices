@@ -64,6 +64,7 @@
 				<p><em>{$LANG.no_products}</em></p>
 			{else}
 				<select name="select_products{$smarty.section.line.index}">
+					<option value=""></option>
 				{foreach from=$products item=product}
 					<option {if $product.id == $defaults.product} selected {/if} value="{$product.id}">{$product.description}</option>
 				{/foreach}
