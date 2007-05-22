@@ -238,8 +238,12 @@ FOR PROPORTIONAL WIDTH
 
 .Left .col,.Full .col {
 	background:#fff url(../../../images/common/right-bg.gif) right repeat-y;
-	padding:10px 30px 20px 20px; }
+	padding:10px 30px 20px 20px;
+	min-height:25em; }
 
+* html .Left .col,* html .Full .col {
+	height:25em;}
+	
 .Left .col .showhide {
 	margin-top:8px; }
 
