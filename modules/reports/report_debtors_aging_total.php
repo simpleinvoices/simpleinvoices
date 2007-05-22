@@ -34,16 +34,16 @@ SELECT
                 WHEN datediff(now(),date) <= 60 THEN (select  IF ( isnull(sum({$tb_prefix}invoice_items.total)) , '0', sum({$tb_prefix}invoice_items.total)) from {$tb_prefix}invoices,{$tb_prefix}invoice_items where datediff(now(),date) <= 60 and datediff(now(),date) > 30 and {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id)
                 WHEN datediff(now(),date) <= 90 THEN (select  IF ( isnull(sum({$tb_prefix}invoice_items.total)) , '0', sum({$tb_prefix}invoice_items.total)) from {$tb_prefix}invoices,{$tb_prefix}invoice_items where datediff(now(),date) <= 90 and datediff(now(),date) > 60 and {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id)
                 ELSE (select  IF ( isnull(sum({$tb_prefix}invoice_items.total)) , '0', sum({$tb_prefix}invoice_items.total)) from {$tb_prefix}invoices,{$tb_prefix}invoice_items where datediff(now(),date) > 90 and {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id)
-        END ) as Total,
+        END ) as INV_TOTAL,
 
         (CASE WHEN datediff(now(),date) <= 14 THEN (select  IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from {$tb_prefix}account_payments,{$tb_prefix}invoices where datediff(now(),date) <= 14 and ac_inv_id = {$tb_prefix}invoices.id)
                 WHEN datediff(now(),date) <= 30 THEN (select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from {$tb_prefix}account_payments,{$tb_prefix}invoices where datediff(now(),date) > 14 and datediff(now(),date) <= 30 and ac_inv_id = {$tb_prefix}invoices.id )
                 WHEN datediff(now(),date) <= 60 THEN (select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from {$tb_prefix}account_payments,{$tb_prefix}invoices where datediff(now(),date) > 30 and datediff(now(),date) <= 60 and ac_inv_id = {$tb_prefix}invoices.id )
                 WHEN datediff(now(),date) <= 90 THEN (select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from {$tb_prefix}account_payments,{$tb_prefix}invoices where datediff(now(),date) > 60 and datediff(now(),date) <= 90 and ac_inv_id = {$tb_prefix}invoices.id )
                 ELSE (select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from {$tb_prefix}account_payments,{$tb_prefix}invoices where datediff(now(),date) > 90 and ac_inv_id = {$tb_prefix}invoices.id )          
-	  END ) as Paid,
+	  END ) as INV_PAID,
 
-        (select (Total - Paid)) as Owing,
+        (select (INV_TOTAL - INV_PAID)) as INV_OWING,
 
         (CASE WHEN datediff(now(),date) <= 14 THEN '0-14'
                 WHEN datediff(now(),date) <= 30 THEN '15-30'
@@ -57,7 +57,7 @@ FROM
 WHERE
         {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id
 GROUP BY
-        Total;
+        INV_TOTAL;
 
 
 ";

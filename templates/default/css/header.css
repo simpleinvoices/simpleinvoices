@@ -23,6 +23,15 @@ ul#navmenu {
 	padding:0;
 	list-style:none; }
 
+
+/* Root Menu Hover Persistence */
+ul#navmenu a:hover,
+ul#navmenu li:hover a,
+ul#navmenu li.iehover a {
+/*  background: #CCC;*/
+  background: #990000;
+  color: #FFF;
+}
 ul#navmenu li {
 	float:left;
 	position:relative;
