@@ -16,11 +16,13 @@ div#Header {
 /* Root = Horizontal, Secondary = Vertical */
 ul#navmenu {
 	margin:0;
-	padding:0; }
+	padding:0;
+	list-style:none; }
 
 ul#navmenu li {
 	float:left;
-	position:relative; }
+	position:relative;
+	list-style:none; }
 
 ul#navmenu ul {
 	width:185px;

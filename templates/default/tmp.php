@@ -2,26 +2,7 @@
 	<!--[if lte IE 7]>
 	<link rel="stylesheet" href="./temlates/default/css/tabs-ie.css" type="text/css" media="projection, screen" />
 	<![endif]-->
-	<style type="text/css" media="screen, projection">
-	    /* just to make this demo look a bit better */
-h4 {
-	margin:0;
-	padding:0px;
-}
-	    ul {
-		list-style: none;
-		
-	    }
-	    body>ul>li {
-		display: inline;
-	    }
-	    body>ul>li:before {
-		content: ", ";
-	    }
-	    body>ul>li:first-child:before {
-		content: "";
-	    }
-	</style>
+
 	<!-- Additional IE/Win specific style sheet (Conditional Comments) -->
 	<!--[if lte IE 7]>
 	<style type="text/css" media="screen, projection">
