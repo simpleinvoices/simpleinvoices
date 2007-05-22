@@ -258,6 +258,9 @@ th.sortable {
 	min-height:22em;
 }
 
+* html #accordian {
+	height:22em; }
+	
 #accordian td {
 	width:10%;
 	height:3em;
