@@ -16,7 +16,7 @@
 		You must enter a description for the product</div>
 		<hr />
 	{/if}
-<FORM name="frmpost" ACTION="index.php?module=products&view=add" METHOD="POST">
+<form name="frmpost" ACTION="index.php?module=products&view=add" METHOD="POST">
 
 <div id="top"><h3>&nbsp;{$LANG.product_to_add}&nbsp;</h3></div>
  <hr />
@@ -59,7 +59,9 @@
 </table>
 <!-- </div> -->
 <hr />
+<div style="text-align:center;">
 	<input type=submit name="submit" value="{$LANG.insert_product}">
 	<input type=hidden name="op" value="insert_product">
-</FORM>
+</div>
+</form>
 	{/if}

@@ -2,11 +2,12 @@
 	<P><em>{$LANG.no_invoices}.</em></p>
 {else}
 
-<b>{$LANG.manage_invoices}</b> ::
+<h3>{$LANG.manage_invoices}</h3> 
+<div style="text-align:center;">::
 <a href="index.php?module=invoices&view=total">{$LANG.add_new_invoice} - {$LANG.total_style}</a> ::
 <a href="index.php?module=invoices&view=itemised">{$LANG.add_new_invoice} - {$LANG.itemised_style}</a> ::
 <a href="index.php?module=invoices&view=consulting">{$LANG.add_new_invoice} - {$LANG.consulting_style}</a>
-<hr />
+</div><hr />
 
 
 <table align="center" id="ex1" class="ricoLiveGrid manage" >

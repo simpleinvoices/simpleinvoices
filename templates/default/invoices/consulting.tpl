@@ -1,11 +1,9 @@
-<FORM name="frmpost" ACTION="index.php?module=invoices&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=invoices&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
 
-<b>{$LANG.inv} {$LANG.inv_consulting}</b>
-<hr></hr>
-
+<h3>{$LANG.inv} {$LANG.inv_consulting}</h3>
+<hr />
 
 <table align=center>
-
 
 <tr>
 	<td class="details_screen">
@@ -136,9 +134,10 @@
 -->
 </table>
 <!-- </div> -->
-<hr></hr>
-		<input type=hidden name="max_items" value="{$smarty.section.line.index}">
-		<input type=submit name="submit" value="{$LANG.save_invoice}">
-		<input type=hidden name="invoice_style" value="insert_invoice_consulting">
-
-</FORM>
+<hr />
+<div style="text-align:center;">
+	<input type=hidden name="max_items" value="{$smarty.section.line.index}">
+	<input type=submit name="submit" value="{$LANG.save_invoice}">
+	<input type=hidden name="invoice_style" value="insert_invoice_consulting">
+</div>
+</form>

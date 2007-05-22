@@ -6,7 +6,7 @@
 
 
 <h3>{$LANG.manage_custom_fields}</h3>
-<a href="docs.php?t=help&p=what_are_custom_fields" rel="gb_page_center[450, 450]">{$LANG.what_are_custom_fields}<img src="./images/common/help-small.png"></img></a> :: <a href="docs.php?t=help&p=manage_custom_fields" rel="gb_page_center[450, 450]">{$LANG.whats_this_page_about}<img src="./images/common/help-small.png"></img></a>
+<div style="text-align:center;"><a href="docs.php?t=help&p=what_are_custom_fields" rel="gb_page_center[450, 450]">{$LANG.what_are_custom_fields}<img src="./images/common/help-small.png"></img></a> :: <a href="docs.php?t=help&p=manage_custom_fields" rel="gb_page_center[450, 450]">{$LANG.whats_this_page_about}<img src="./images/common/help-small.png"></img></a></div>
 <hr />
 
 <table align="center" class="ricoLiveGrid manage" id="rico_custom_fields">

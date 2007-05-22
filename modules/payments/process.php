@@ -194,9 +194,11 @@ echo <<<EOD
  <hr />
 
 $display_block
-<hr></hr>
+<hr />
+<div style="text-align:center;">
 	<input type=submit name="process_payment" value="{$LANG['process_payment']}">
 	<input type=hidden name="op" value="{$insert_action_op}">
+</div>
 </form>
 EOD;
 ?>

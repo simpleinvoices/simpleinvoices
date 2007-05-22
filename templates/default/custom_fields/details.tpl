@@ -4,9 +4,9 @@
 
 {if $smarty.get.action == "view" }
 
-	<b>{$LANG.custom_fields} ::
-	<a href="index.php?module=custom_fields&view=details&submit={$cf.cf_id}&action=edit">{$LANG.edit}</a></b>
-	<hr></hr>
+	<h3>{$LANG.custom_fields} ::
+	<a href="index.php?module=custom_fields&view=details&submit={$cf.cf_id}&action=edit">{$LANG.edit}</a></h3>
+	<hr />
 
 
 	

@@ -2,7 +2,7 @@
 
 <form name="frmpost" ACTION="index.php?module=invoices&view=email&stage=2&submit={$smarty.get.submit}" METHOD="post">
 <div id="top"><b>Email Invoice to Customer as PDF</b></div>
-<hr></hr>
+<hr />
 <table align=center>
 	<tr>
 		<td class="details_screen">From<a

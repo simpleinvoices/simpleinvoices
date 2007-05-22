@@ -1,5 +1,5 @@
 
-<b>{$LANG.system_defaults}</b>
+<h3>{$LANG.system_defaults}</h3>
     <hr />
 
 	

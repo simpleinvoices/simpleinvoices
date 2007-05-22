@@ -10,7 +10,7 @@
 You must enter a Biller name</div>
 <hr />
 {/if}
-<FORM name="frmpost" action="index.php?module=billers&view=add"
+<form name="frmpost" action="index.php?module=billers&view=add"
 	method="post"><h3>{$LANG.biller_to_add}</h3>
 <hr />
 <table align="center">
@@ -134,6 +134,9 @@ You must enter a Biller name</div>
 	</tbody>
 </table>
 <hr />
-<input type="submit" name="submit" value="{$LANG.insert_biller}" /> <input
-	type="hidden" name="op" value="insert_biller" /></FORM>
+<div style="text-align:center;">
+	<input type="submit" name="submit" value="{$LANG.insert_biller}" /> <input
+	type="hidden" name="op" value="insert_biller" />
+</div>
+</form>
 {/if}

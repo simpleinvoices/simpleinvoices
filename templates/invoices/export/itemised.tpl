@@ -10,7 +10,7 @@
 
 	
 	{foreach from=$invoiceItems item=invoiceItem}
-						<tr >
+						<tr>
 				<td>{$invoiceItem.quantity_formatted}</td>
 				<td>{$invoiceItem.product.description}</td>
 				<td>{$preference.pref_currency_sign}{$invoiceItem.unit_price}</td>

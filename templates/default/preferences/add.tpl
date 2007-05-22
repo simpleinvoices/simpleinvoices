@@ -5,7 +5,7 @@
 {$refresh_total}
 
 <br />
-<br>
+<br />
 {$display_block} 
 <br />
 <br />
@@ -15,13 +15,13 @@
 	{if $smarty.post.submit !=null} 
 		<div class="validation_alert"><img src="./images/common/important.png"</img>
 		You must enter a description for the preference</div>
-		<hr></hr>
+		<hr />
 	{/if}
-<FORM name="frmpost" ACTION="index.php?module=preferences&view=add" METHOD="POST">
+<form name="frmpost" ACTION="index.php?module=preferences&view=add" METHOD="POST">
 
-<b>{$LANG.invoice_preference_to_add}</b>
+<h3>{$LANG.invoice_preference_to_add}</h3>
 
-<hr></hr>
+<hr />
 
 
 <table align=center>
@@ -88,10 +88,11 @@
 	</tr>
 </table>
 <!-- </div> -->
-<hr></hr>
+<hr />
+<div style="text-align:center;">
 	<input type=submit name="submit" value="{$LANG.insert_preference}">
 	<input type=hidden name="op" value="insert_preference">
-
-</FORM>
+</div>
+</form>
 	
 {/if}

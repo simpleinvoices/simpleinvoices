@@ -4,7 +4,7 @@
 {$refresh_total}
 
 <br />
-<br>
+<br />
 {$display_block} 
 <br />
 <br />
@@ -14,14 +14,14 @@
 	{if $smarty.post.submit !=null} 
 		<div class="validation_alert"><img src="./images/common/important.png"</img>
 		You must enter a Tax description</div>
-		<hr></hr>
+		<hr />
 	{/if}
 
-<FORM name="frmpost" ACTION="index.php?module=tax_rates&view=add" METHOD="POST">
+<form name="frmpost" ACTION="index.php?module=tax_rates&view=add" METHOD="POST">
 
-<b>{$LANG.tax_rate_to_add}</b>
+<h3>{$LANG.tax_rate_to_add}</h3>
 
- <hr></hr>
+ <hr />
 
 <table align=center>
 	<tr>
@@ -44,9 +44,10 @@
 	</tr>
 	
 </table>
-	<hr></hr>
+<hr />
+<div style="text-align:center;">
 	<input type=submit name="submit" value="{$LANG.insert_tax_rate}">
 	<input type=hidden name="op" value="insert_tax_rate">
-
-</FORM>
+</div>
+</form>
 {/if}

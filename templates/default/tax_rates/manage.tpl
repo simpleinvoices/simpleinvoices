@@ -2,9 +2,9 @@
 	<p><em>{$LANG.no_tax_rates}.</em></p>
 {else}
 
-	<b>{$LANG.manage_tax_rates} ::
-	<a href="./index.php?module=tax_rates&view=add">{$LANG.add_new_tax_rate}</a></b>
- <hr></hr>
+	<h3>{$LANG.manage_tax_rates} ::
+	<a href="./index.php?module=tax_rates&view=add">{$LANG.add_new_tax_rate}</a></h3>
+ <hr />
 
 
 <table align="center" class="ricoLiveGrid" id="rico_tax_rates">

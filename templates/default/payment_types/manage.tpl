@@ -1,9 +1,8 @@
 {if $paymentTypes==null }
 <P><em>{$LANG.no_payment_types}.</em></p>
 {else}
-<b>{$LANG.manage_payment_types} :: <a href="index.php?module=payment_types&view=add">{$LANG.add_new_payment_type}</a>
-</b>
-<hr></hr>
+<h3>{$LANG.manage_payment_types} :: <a href="index.php?module=payment_types&view=add">{$LANG.add_new_payment_type}</a></h3>
+<hr />
 <table align="center" class="ricoLiveGrid manage" id="rico_payment_types">
 	<colgroup>
 		<col style='width:15%;' />
