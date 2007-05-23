@@ -58,12 +58,8 @@ function getLogo($biller) {
 * field		- The custom field in question
 **/
 function get_custom_field_label($field)         {
-
-	include('./config/config.php');
-	ob_start();
-	include("./lang/$language.inc.php");
-	ob_end_clean();
-
+	global $LANG;
+	global $tb_prefix;
 
     $sql =  "SELECT cf_custom_label FROM {$tb_prefix}custom_fields WHERE cf_custom_field = '$field'";
     $result = mysqlQuery($sql) or die(mysql_error());
@@ -118,14 +114,9 @@ function getCustomFieldLabels($type) {
 
 function get_custom_field_name($field) {
 
-        include('./config/config.php');
-        ob_start();
-        include("./lang/$language.inc.php");
-        ob_end_clean();
+        global $LANG;
+        global $tb_prefix;
 
-        $conn = mysql_connect( $db_host, $db_user, $db_password );
-        mysql_select_db( $db_name, $conn );
-        
 
 	//grab the last character of the field variable
         $get_cf_letter = $field[0];
@@ -151,19 +142,13 @@ function get_custom_field_name($field) {
 
 
 function calc_invoice_total($inv_idField) {
-
-	include('./config/config.php');
-	ob_start();
-	include("./lang/$language.inc.php");
-	ob_end_clean();
-
-	$conn = mysql_connect( $db_host, $db_user, $db_password );
-	mysql_select_db( $db_name, $conn );
+	global $LANG;
+	global $tb_prefix;
 
 
 #invoice total total - start
 $print_invoice_total ="SELECT sum(total) AS total FROM {$tb_prefix}invoice_items WHERE invoice_id =$inv_idField";
-	$result_print_invoice_total = mysqlQuery($print_invoice_total, $conn) or die(mysql_error());
+	$result_print_invoice_total = mysqlQuery($print_invoice_total) or die(mysql_error());
 
 	while ($Array = mysql_fetch_array($result_print_invoice_total)) {
                 $invoice_total_Field = $Array['total'];
@@ -174,18 +159,13 @@ $print_invoice_total ="SELECT sum(total) AS total FROM {$tb_prefix}invoice_items
 }
 
 function calc_invoice_paid($inv_idField) {
+	global $LANG;
+	global $tb_prefix;
 
-	include('./config/config.php');
-	ob_start();
-	include("./lang/$language.inc.php");
-	ob_end_clean();
-
-	$conn = mysql_connect( $db_host, $db_user, $db_password );
-	mysql_select_db( $db_name, $conn );
 
 #amount paid calc - start
 $x1 = "SELECT IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) AS amount FROM {$tb_prefix}account_payments WHERE ac_inv_id = $inv_idField";
-	$result_x1 = mysqlQuery($x1, $conn) or die(mysql_error());
+	$result_x1 = mysqlQuery($x1) or die(mysql_error());
 	while ($result_x1Array = mysql_fetch_array($result_x1)) {
 		$invoice_paid_Field = $result_x1Array['amount'];
 		$invoice_paid_Field_format = number_format($result_x1Array['amount'],2);
@@ -195,14 +175,8 @@ $x1 = "SELECT IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) AS amount FROM 
 }
 
 function calc_customer_total($c_idField) {
-
-	include('./config/config.php');
-	ob_start();
-	include("./lang/$language.inc.php");
-	ob_end_clean();
-
-	$conn = mysql_connect( $db_host, $db_user, $db_password );
-	mysql_select_db( $db_name, $conn );
+	global $LANG;
+	global $tb_prefix;
 
 
 #invoice total calc - start
@@ -216,7 +190,7 @@ function calc_customer_total($c_idField) {
 		AND 
 			{$tb_prefix}invoices.id = {$tb_prefix}invoice_items.invoice_id
 		";
-        $result_print_invoice_total_customer = mysqlQuery($print_invoice_total_customer, $conn) or die(mysql_error());
+        $result_print_invoice_total_customer = mysqlQuery($print_invoice_total_customer) or die(mysql_error());
 
         while ($Array_customer = mysql_fetch_array($result_print_invoice_total_customer)) {
                 $invoice_total_Field_customer = $Array_customer['total'];
@@ -226,14 +200,9 @@ function calc_customer_total($c_idField) {
 }
 
 function calc_customer_paid($c_idField) {
-
-	include('./config/config.php');
-	ob_start();
-	include("./lang/$language.inc.php");
-	ob_end_clean();
-
-	$conn = mysql_connect( $db_host, $db_user, $db_password );
-	mysql_select_db( $db_name, $conn );
+	global $LANG;
+	global $tb_prefix;
+	
 
 
 #amount paid calc - start
@@ -247,7 +216,7 @@ function calc_customer_paid($c_idField) {
 		AND 
 			{$tb_prefix}invoices.customer_id = $c_idField";  	
 
-        $result_x2 = mysqlQuery($x2, $conn) or die(mysql_error());
+        $result_x2 = mysqlQuery($x2) or die(mysql_error());
         while ($result_x2Array = mysql_fetch_array($result_x2)) {
                 $invoice_paid_Field_customer = $result_x2Array['amount'];
 	}
@@ -265,18 +234,12 @@ function calc_customer_paid($c_idField) {
 * invoice_id		- The name of the field, ie. Custom Field 1, etc..
 **/
 function calc_invoice_tax($master_invoice_id) {
-
-	include('./config/config.php');
-	ob_start();
-	include("./lang/$language.inc.php");
-	ob_end_clean();
-
-	$conn = mysql_connect( $db_host, $db_user, $db_password );
-	mysql_select_db( $db_name, $conn );
-
+	global $LANG;
+	global $tb_prefix;
+	
 	#invoice total tax
 	$print_invoice_total_tax ="select sum(tax_amount) as total_tax from {$tb_prefix}invoice_items where invoice_id =$master_invoice_id";
-	$result_print_invoice_total_tax = mysqlQuery($print_invoice_total_tax, $conn) or die(mysql_error());
+	$result_print_invoice_total_tax = mysqlQuery($print_invoice_total_tax) or die(mysql_error());
 
 	while ($Array_tax = mysql_fetch_array($result_print_invoice_total_tax)) {
                 $invoice_total_taxField = $Array_tax['total_tax'];

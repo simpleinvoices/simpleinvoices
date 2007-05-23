@@ -13,7 +13,8 @@ require_once("./include/smarty/Smarty.class.php");
 $smarty = new Smarty();
 $smarty -> compile_dir = "./cache/";
 
-unset($LANG);
+include('./include/language.php');
+
 include("./include/include_main.php");
 include('./modules/options/database_sqlpatches.php');
 
@@ -81,13 +82,10 @@ include_once("./modules/$file.php");
 if(file_exists("./templates/default/$file.tpl")) {
 	$smarty -> display("../templates/default/$file.tpl");
 }
-
-/*
 // If no smarty template - add message - onyl uncomment for dev - commented out for release
 else {
 	echo "NOTEMPLATE!!";
 }
- */
 
 $smarty -> display("../templates/default/footer.tpl");
 

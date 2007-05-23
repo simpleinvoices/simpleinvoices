@@ -121,7 +121,7 @@ $customer_custom_field_label4 = get_custom_field_label("customer_cf4");
 	function mysqlquerie($sql) {
 		//insert $sql,timestamp,userid into database
 		return mysql_querie($sql);
-	}
+	} - done
 -- this is a good idea - we should do - leave for next release or later
 - thinking about user/groups. Extendebal system and connection with other database should be possible -> All throught 1 interface
 - backup to a web directory is not really a good idea. Perhaps the download solution is a better one:
@@ -166,3 +166,6 @@ id,categorieId,value
 
 customFieldsValues
 id,cateogireId,customFieldId,itemId,value
+
+
+- Store Menu in the database...

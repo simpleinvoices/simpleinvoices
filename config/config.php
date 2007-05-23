@@ -16,7 +16,7 @@ $tb_prefix = "si_";
 #$language = "catala_catalan";
 #$language = "cestina_czech";
 #$language = "deutsch_german";
-$language = "english_UK";
+//$language = "english_UK";
 #$language = "francais_french";
 #$language = "galego_galician";
 #$language = "nederlands_dutch";
@@ -26,7 +26,7 @@ $language = "english_UK";
 
 /*PDF configs*/
 #installation path relative to document root of webserver 
-$install_path = "/simpleinvoices";
+$install_path = "/svn/simpleinvoices";
 
 /*Email configs*/
 $email_host = "localhost";  // specify main and backup server - separating with ;

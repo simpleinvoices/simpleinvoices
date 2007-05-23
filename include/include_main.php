@@ -7,9 +7,6 @@ require_once("./modules/include/js/lgplus/php/settings.php");
 
 include('./include/include_auth.php');
 include_once('./config/config.php');
-ob_start();
-include_once("./lang/$language.inc.php");
-ob_end_clean();
 
 $conn = mysql_connect("$db_host","$db_user","$db_password");
 if (!$conn) {
