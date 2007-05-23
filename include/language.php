@@ -18,6 +18,7 @@ function getLanguageArray() {
 	$langPath = "./lang/";
 	$langFile = "/lang.php";
 	$language = getenv("HTTP_ACCEPT_LANGUAGE");
+	$language = "de-ch";
 	
 	include($langPath."en".$langFile);
 	

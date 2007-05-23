@@ -84,6 +84,27 @@ function getPreferences() {
 	return $preferences;
 }
 
+function getActiveTaxes() {
+	global $tb_prefix;
+	global $LANG;
+	
+	$sql = "SELECT * FROM {$tb_prefix}tax WHERE tax_enabled != 0 ORDER BY tax_description";
+	$query = mysqlQuery($sql) or die(mysql_error());
+	
+	$taxes = null;
+	
+	for($i=0;$tax = mysql_fetch_array($query);$i++) {
+		if ($tax['tax_enabled'] == 1) {
+			$tax['enabled'] = $LANG['enabled'];
+		} else {
+			$tax['enabled'] = $LANG['disabled'];
+		}
+
+		$taxes[$i] = $tax;
+	}
+	
+	return $taxes;
+}
 
 function getActivePreferences() {
 	global $tb_prefix;
@@ -343,7 +364,7 @@ function getInvoice($id) {
 
 function getInvoiceItems($id) {
 	global $tb_prefix;
-	$sql = "SELECT * FROM {$tb_prefix}invoice_items WHERE  invoice_id =$id";
+	$sql = "SELECT * FROM {$tb_prefix}invoice_items WHERE invoice_id =$id";
 	$query = mysqlQuery($sql);
 	
 	$invoiceItems = null;
@@ -597,6 +618,37 @@ function getActiveCustomers() {
 	}
 	
 	return $customers;
+}
+
+
+function getMenuStructure() {
+	$sql = "SELECT * FROM  `si_menu` WHERE enabled = 1 ORDER BY parentid,  `order`";
+	$query = mysqlQuery($sql) or die(mysql_error());
+	$menu = null;
+	
+	while($res = mysql_fetch_array($query)) {
+		$menu[$res['parentid']][$res['id']]["name"] = $res['name'];
+		$menu[$res['parentid']][$res['id']]["link"] = $res['link'];
+		$menu[$res['parentid']][$res['id']]["id"] = $res['id'];
+	}
+		
+	//printEntries($menu,0,1);
+	//return $menu;
+}
+
+function printEntries($menu,$id,$depth) {
+	
+	foreach($menu[$id] as $tempentrie) {
+		//echo $id;
+		echo "Name:".$tempentrie["name"]."<br />";
+		echo "ID:".$tempentrie["id"]."<br />";
+		echo "DEPTH: ".$depth;
+		echo "<br /><br />";
+		
+		if(isset($menu[$tempentrie["id"]])) {
+			printEntries($menu,$tempentrie["id"],$depth+1);
+		}
+	}
 }
 	
 //in this file are functions for all sql queries

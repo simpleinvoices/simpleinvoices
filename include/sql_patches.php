@@ -622,6 +622,17 @@ NULL , 'logging', '0'
 	$patch['122']['name'] = "System defaults conversion patch - set default paymemt type";
 	$patch['122']['patch'] = "UPDATE `si_system_defaults` SET value = $defaults[def_payment_type] where name = 'payment_type'";
 	$patch['122']['date'] = "20070523";
+	
+	$patch['123']['name'] = "Create menu table";
+	$patch['123']['patch'] = "CREATE TABLE `si_menu` (
+`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`parentid` INT NOT NULL ,
+`order` INT NOT NULL ,
+`name` VARCHAR( 30 ) NOT NULL ,
+`link` VARCHAR( 100 ) NOT NULL ,
+ `enabled` tinyint(1) NOT NULL default '1'
+) ENGINE = MYISAM ;";
+	$patch['123']['date'] = "20070523";
 
 
 

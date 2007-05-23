@@ -21,7 +21,7 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
 #all
 $title = "Rechnungsverwaltung";//1
 
-$LANG['about'] = "&Uuml;ber";//1
+$LANG['about'] = "Öber";//1
 $LANG['account_info'] = "Konto-Information";//1
 $LANG['actions'] = "Aktion";//1
 $LANG['add_biller'] = "Gl&auml;ubiger hinzuf&uuml;gen";//1
@@ -57,7 +57,7 @@ $LANG['biller_sales_by_customer_totals'] = "Gl&auml;ubiger nach Kunden - Total";
 $LANG['biller_sales_total'] = "Gl&auml;ubiger - Total";//1
 $LANG['biller_to_add'] = "Gl&auml;ubiger hinzuf&uuml;gen";//1
 $LANG['billers'] = "Gl&auml;ubiger";//1
-$LANG['cancel'] = "Abbrechen";//1
+$LANG['cancel'] = "abbräche";//1
 $LANG['change_log'] = "&Auml;nderungshistorie";//1
 $LANG['city'] = "Stadt";//1
 $LANG['consulting'] = "Detail. Artikelaufl.";//1
