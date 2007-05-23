@@ -119,6 +119,7 @@ h2 {
 	margin:0 0 15px; }
 	
 h3 {
+	font-size:1em;
 	text-align:center;
 	margin:4pt;
 }
@@ -171,6 +172,25 @@ code,pre {
 
 table {
 	border-collapse:collapse; }
+	
+table.reportTable {
+	border:1px solid #000; }
+
+*+html table.reportTable {
+	border-collapse:separate; }
+
+*+html td.PAGE_LAYER {
+	border-width:thin;
+	border:1px solid #000;
+	border-collapse:separate; }
+
+*+html table.reportTable tr {
+	border:1px solid #000;
+	border-collapse:separate; }
+	
+table.reportTable td.PAGE_LAYER {
+	background-color:#ccc;
+	border-color:#000; }
 
 /*
 tr {

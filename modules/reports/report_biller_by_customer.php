@@ -18,7 +18,7 @@ if (!defined("BROWSE")) {
 <body>
 
 <b>Sales by Customer - Group by Customer - Total</b>
-<hr></hr>
+<hr />
 <div class=container>
 
 <?php

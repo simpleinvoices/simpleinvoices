@@ -1,7 +1,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 
 <xsl:template match="PG">
-	<TABLE>
+	<TABLE class="reportTable">
 	<xsl:if test="string-length(@AL)>0">
 		<xsl:attribute name="ALIGN">
 			<xsl:value-of select="@AL"/>
