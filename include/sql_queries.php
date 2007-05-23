@@ -8,7 +8,7 @@ mysql_select_db( $db_name, $conn );
  * Used for logging all queries
  */
 function mysqlQuery($sqlQuery) {
-	$logging = 1; //Set to 1 to enable (for testing...)
+	$logging = 0; //Set to 1 to enable (for testing...)
 	$pattern = "/[^a-z]*SELECT|select/";
 	$userid = 1;
 		

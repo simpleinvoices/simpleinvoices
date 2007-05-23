@@ -97,7 +97,7 @@
                 {/if}
         {/if}
 
-		{merge_address field1=$biller.city field2=$biller.state field3=$biller.zip_code street1=$biller.street_address street2=$biller.street_addtess2 class1="tbl1-left" class2="tbl1-right" colspan=3}
+		{merge_address field1=$biller.city field2=$biller.state field3=$biller.zip_code street1=$biller.street_address street2=$biller.street_address2 class1="tbl1-left" class2="tbl1-right" colspan=3}
 
          {if $biller.country != null }
                 </tr>
