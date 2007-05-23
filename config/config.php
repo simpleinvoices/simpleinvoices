@@ -5,9 +5,9 @@
 
 /*Enter your database information */
 $db_host = "localhost";
-$db_name = "simpleinvoices";
+$db_name = "simple_invoices";
 $db_user = "root";
-$db_password = "test";
+$db_password = "";
 $tb_prefix = "si_";
 
 
