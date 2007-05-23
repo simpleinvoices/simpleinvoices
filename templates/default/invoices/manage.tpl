@@ -2,8 +2,8 @@
 	<P><em>{$LANG.no_invoices}.</em></p>
 {else}
 
-<h3>{$LANG.manage_invoices}</h3> 
-<div style="text-align:center;">::
+<div style="text-align:center;">
+<b>{$LANG.manage_invoices}</b> ::
 <a href="index.php?module=invoices&view=total">{$LANG.add_new_invoice} - {$LANG.total_style}</a> ::
 <a href="index.php?module=invoices&view=itemised">{$LANG.add_new_invoice} - {$LANG.itemised_style}</a> ::
 <a href="index.php?module=invoices&view=consulting">{$LANG.add_new_invoice} - {$LANG.consulting_style}</a>
@@ -32,7 +32,7 @@
 		<th class="noFilter sortable">{$LANG.owing}</th>
 		<th class="selectFilter index_table sortable">{$LANG.aging}</th>
 		<th class="noFilter sortable">{$LANG.invoice_type}</th>
-		<th class="noFilter sortable">{$LANG.date_created}</th>
+		<th class="noFilter sortable">{$LANG.date_upper}</th>
 	</tr>
 </thead>
 
