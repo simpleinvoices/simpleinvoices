@@ -23,9 +23,7 @@ if (!defined("BROWSE")) {
    include "./modules/reports/PHPReportMaker.php";
    include "config/config.php";
 
-   $sSQL = "
-
-SELECT
+   $sSQL = "SELECT
         {$tb_prefix}customers.id as CID,
         {$tb_prefix}customers.name as Customer,
         (select sum({$tb_prefix}invoice_items.total) from {$tb_prefix}invoice_items,{$tb_prefix}invoices where  {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id) as INV_TOTAL,

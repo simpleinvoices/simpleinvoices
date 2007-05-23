@@ -8,8 +8,7 @@ checkLogin();
 
 #Largest debtor query - start
 if ($mysql > 4) {
-	$sql = "
-	SELECT	
+	$sql = "SELECT	
 	        {$tb_prefix}customers.id as CID,
 	        {$tb_prefix}customers.name as Customer,
 	        (select sum({$tb_prefix}invoice_items.total) from {$tb_prefix}invoice_items,{$tb_prefix}invoices where  {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = CID) as Total,
@@ -33,8 +32,7 @@ if ($mysql > 4) {
 #Top customer query - start
 
 if ($mysql > 4) {
-	$sql2 = "
-	SELECT
+	$sql2 = "SELECT
 		{$tb_prefix}customers.id as CID,
 	        {$tb_prefix}customers.name as Customer,
        		(select sum({$tb_prefix}invoice_items.total) from {$tb_prefix}invoice_items,{$tb_prefix}invoices where  {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = CID) as Total,
@@ -59,8 +57,7 @@ if ($mysql > 4) {
 #Top biller query - start
 if ($mysql > 4) {
 	
-	$sql3 = "
-	SELECT
+	$sql3 = "SELECT
 		{$tb_prefix}biller.name,  
 		sum({$tb_prefix}invoice_items.total) as Total 
 	FROM 

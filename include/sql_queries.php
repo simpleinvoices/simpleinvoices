@@ -8,10 +8,12 @@ mysql_select_db( $db_name, $conn );
  * Used for logging all queries
  */
 function mysqlQuery($sqlQuery) {
-	$logging = 0; //Set to 1 to enable (for testing...)
-	
-	if($logging) {
-		$sql = "INSERT INTO  `si_log` (  `id` ,  `timestamp` ,  `userid` ,  `sqlquerie` ) VALUES (NULL , CURRENT_TIMESTAMP ,  '1',  '$sqlQuery');";
+	$logging = 1; //Set to 1 to enable (for testing...)
+	$pattern = "/[^a-z]*SELECT|select/";
+	$userid = 1;
+		
+	if($logging && (preg_match($pattern,$sqlQuery) == 0)) {
+		$sql = "INSERT INTO  `si_log` (  `id` ,  `timestamp` ,  `userid` ,  `sqlquerie` ) VALUES (NULL , CURRENT_TIMESTAMP ,  '$userid',  '". addslashes ($sqlQuery)."');";
 		mysql_query($sql);
 	}
 	

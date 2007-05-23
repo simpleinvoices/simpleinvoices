@@ -24,9 +24,7 @@ include('./config/config.php');
    // include the PHPReports classes on the PHP path! configure your path here
    include "./modules/reports/PHPReportMaker.php";
 
-   $sSQL = "
-
-SELECT
+   $sSQL = "SELECT
         {$tb_prefix}invoices.id,
         (select name from {$tb_prefix}biller where {$tb_prefix}biller.id = {$tb_prefix}invoices.biller_id) as Biller,
         (select name from {$tb_prefix}customers where id = {$tb_prefix}invoices.customer_id) as Customer,
