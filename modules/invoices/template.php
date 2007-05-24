@@ -1,7 +1,6 @@
 <?php
 
 #define("BROWSE","browse");
-include('./include/include_print.php');
 
 #get the invoice id
 $invoiceID = $_GET['submit'];

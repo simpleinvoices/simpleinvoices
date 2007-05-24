@@ -4,8 +4,9 @@
 require_once("./modules/include/js/lgplus/php/chklang.php");
 require_once("./modules/include/js/lgplus/php/settings.php");
 
-
-include('./include/include_auth.php');
+if ($_GET['location'] === 'pdf' ) {
+	include('./include/include_auth.php');
+}
 include_once('./config/config.php');
 
 $conn = mysql_connect("$db_host","$db_user","$db_password");

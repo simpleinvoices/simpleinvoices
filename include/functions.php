@@ -157,52 +157,44 @@ $x1 = "SELECT IF ( ISNULL(SUM(ac_amount)) , '0', SUM(ac_amount)) AS amount FROM 
 	}
 }
 
-function calc_customer_total($c_idField) {
+
+function calc_customer_total($customer_id) {
 	global $LANG;
 	global $tb_prefix;
 
-#invoice total calc - start
-        $print_invoice_total_customer ="
+        $sql ="
 		SELECT
-			IF ( isnull( sum({$tb_prefix}invoice_items.total)) ,  '0', sum({$tb_prefix}invoice_items.total)) as total 
+			IF ( ISNULL( SUM({$tb_prefix}invoice_items.total)) ,  '0', SUM({$tb_prefix}invoice_items.total)) AS total 
 		FROM
 			{$tb_prefix}invoice_items, {$tb_prefix}invoices 
 		WHERE  
-			{$tb_prefix}invoices.customer_id  = $c_idField  
+			{$tb_prefix}invoices.customer_id  = $customer_id  
 		AND 
 			{$tb_prefix}invoices.id = {$tb_prefix}invoice_items.invoice_id
 		";
-        $result_print_invoice_total_customer = mysqlQuery($print_invoice_total_customer) or die(mysql_error());
+		
+        $query = mysqlQuery($sql) or die(mysql_error());
+		
+		$invoice = mysql_fetch_array($query);
 
-        while ($Array_customer = mysql_fetch_array($result_print_invoice_total_customer)) {
-                $invoice_total_Field_customer = $Array_customer['total'];
-#invoice total calc - end
-	}
-	return $invoice_total_Field_customer;
+	return $invoice['total'];
 }
 
-function calc_customer_paid($c_idField) {
+function calc_customer_paid($customer_id) {
 	global $LANG;
 	global $tb_prefix;
 	
-
-
 #amount paid calc - start
-        $x2 = "
-		SELECT  
-			IF ( isnull( sum(ac_amount)) ,  '0', sum(ac_amount)) as amount 
-		FROM 
-			{$tb_prefix}account_payments, {$tb_prefix}invoices 
-		WHERE 
-			{$tb_prefix}account_payments.ac_inv_id = {$tb_prefix}invoices.id 
-		AND 
-			{$tb_prefix}invoices.customer_id = $c_idField";  	
+	$sql = "
+	SELECT IF ( ISNULL( sum(ac_amount)) ,  '0', sum(ac_amount)) AS amount 
+	FROM {$tb_prefix}account_payments, {$tb_prefix}invoices 
+	WHERE {$tb_prefix}account_payments.ac_inv_id = {$tb_prefix}invoices.id 
+	AND {$tb_prefix}invoices.customer_id = $customer_id";  	
+	
+	$query = mysqlQuery($sql);
+	$invoice = mysql_fetch_array($query);
 
-        $result_x2 = mysqlQuery($x2) or die(mysql_error());
-        while ($result_x2Array = mysql_fetch_array($result_x2)) {
-                $invoice_paid_Field_customer = $result_x2Array['amount'];
-	}
-	return $invoice_paid_Field_customer;
+	return $invoice['amount'];
 }
 
 
@@ -215,18 +207,17 @@ function calc_customer_paid($c_idField) {
 * Arguments:
 * invoice_id		- The name of the field, ie. Custom Field 1, etc..
 **/
-function calc_invoice_tax($master_invoice_id) {
+function calc_invoice_tax($invoice_id) {
 	global $LANG;
 	global $tb_prefix;
 	
 	#invoice total tax
-	$print_invoice_total_tax ="select sum(tax_amount) as total_tax from {$tb_prefix}invoice_items where invoice_id =$master_invoice_id";
-	$result_print_invoice_total_tax = mysqlQuery($print_invoice_total_tax) or die(mysql_error());
+	$sql ="SELECT SUM(tax_amount) AS total_tax FROM {$tb_prefix}invoice_items WHERE invoice_id =$invoice_id";
+	$query = mysqlQuery($sql);
 
-	while ($Array_tax = mysql_fetch_array($result_print_invoice_total_tax)) {
-                $invoice_total_taxField = $Array_tax['total_tax'];
-	}
-	return $invoice_total_taxField;
+	$tax = mysql_fetch_array($query);
+
+	return $tax['total_tax'];
 }
 
 
