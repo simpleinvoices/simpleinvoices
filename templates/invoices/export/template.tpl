@@ -1,4 +1,3 @@
-{include file='../templates/invoices/default/functions.tpl'}
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
