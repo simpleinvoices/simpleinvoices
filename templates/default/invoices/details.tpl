@@ -73,7 +73,7 @@
 
 {/if}
 
-{if $smarty.get.style === 'itemised' || $smarty.get.style === 'Consulting' }
+{if $smarty.get.style === 'Itemised' || $smarty.get.style === 'Consulting' }
 	
      {if $smarty.get.style === 'Itemised' }
 		<input type=hidden name="style" value="itemised">
@@ -100,7 +100,7 @@
 
 		
 	        <tr>
-			<td><input type=text name='quantity{$line}' value='{$invoiceItem.quantity}' size=10>
+			<td><input type=text name='quantity{$line}' value='{$invoiceItem.quantity}' size=10>aaa
 			<input type=hidden text name='id{$line}' value='{$invoiceItems.id}' size=10> </td>
 			
 	                <td input type=text name='description{$line}' size=50>

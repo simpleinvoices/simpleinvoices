@@ -9,7 +9,8 @@ checkLogin();
 
 $action = !empty( $_POST['action'] ) ? addslashes( $_POST['action'] ) : NULL;
 
-
+$tax = getTaxRate($_POST['tax_id']);
+	
 #insert invoice_total - start
 if ( isset( $_POST['style'] ) && $_POST['style'] === 'insert_total' ) {
 
@@ -27,7 +28,7 @@ if ( isset( $_POST['style'] ) && $_POST['style'] === 'insert_total' ) {
 	$total_invoice_total_tax = $_POST[total] * $actual_tax ;
 	$total_invoice_total = $total_invoice_total_tax + $_POST[total] ;	
 		
-	$tax = getTaxRate($_POST['tax_id']);
+
 	
 	$sql_items = "INSERT into
 				{$tb_prefix}invoice_items
@@ -140,19 +141,22 @@ else if ( isset( $_POST['style'] ) && $_POST['style'] === 'insert_itemised' ) {
 
 	$num = $_POST['max_items'];
 	$items = 0;
+	$num = 5;
 	
-	while ($items < $num) :
-
-		$qty = $_POST["i_quantity$items"];
+	
+	while ($items < $num) {
+		echo "t ";
+		$qty = $_POST["quantity$items"];
 		$product_line_item = $_POST["select_products$items"];
 	
 		
 		#break out of the while if no QUANTITY
-		if (empty($_POST["i_quantity$items"])) {
+		if (empty($_POST["quantity$items"])) {
 			break;
 		}
 		
 		$product = getProduct($_POST["select_products$items"]);
+		print_r($product);
 
 
 		$actual_tax = $tax['tax_percentage']  / 100 ;
@@ -163,19 +167,20 @@ else if ( isset( $_POST['style'] ) && $_POST['style'] === 'insert_itemised' ) {
 		$total_invoice_item_gross = $product['unit_price']  * $_POST["quantity$items"];
 		
 
-		$sql_items = "INSERT into {$tb_prefix}invoice_items values ('',$invoice_id,$qty,{$_POST['product_id$items']},{$product['unit_price']},'$_POST[select_tax]',{$tax['tax_percentage']},$total_invoice_tax_amount,$total_invoice_item_gross,'00',$total_invoice_item_total)";
+		$sql_items = "INSERT INTO {$tb_prefix}invoice_items VALUES ('',$invoice_id,$qty,{$product['id']},{$product['unit_price']},'$_POST[tax_id]',{$tax['tax_percentage']},$total_invoice_tax_amount,$total_invoice_item_gross,'00',$total_invoice_item_total)";
 	
 
-
+		echo $sql_items."<br />";
 		
 		if (mysqlQuery($sql_items)) {
 			$display_block_items = $LANG['save_invoice_items_success'];
 		} else { die(mysql_error());
 		}
 		
-		/* echo "$sql_items <br>";  */
 		$items++ ;
-	 endwhile;
+	}
+	
+	//exit();
 
 
 	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&style=Itemised>";
@@ -285,21 +290,22 @@ else if ( isset( $_POST['style'] ) && $_POST['style'] === 'insert_consulting' ) 
 	#get the invoice id from the insert
 	$invoice_id = mysql_insert_id();
 
-	$num = $_POST[max_items];
+	$num = $_POST['max_items'];
 	$items = 0;
 	
+	echo "NU".$num;
 	while ($items < $num) {
 
 			
 	       /* echo "<b>$items</b><br>"; */
-		$qty = $_POST["i_quantity$items"];
-		$product_line_item = $_POST["select_products$items"];
-		$line_item_description = $_POST["line_item_description$items"];
+		$qty = $_POST["quantity$items"];
+		$product_line_item = $_POST["product$items"];
+		$line_item_description = $_POST["description$items"];
 	       /* echo "Qty: $qty<br> "; */
 	       /*  echo "Prod ID: $product_line_item<br> "; */
 	
 		#break out of the while if no QUANTITY
-		if (empty($_POST["i_quantity$items"])) {
+		if (empty($_POST["quantity$items"])) {
 			/*echo "break"; */
 			break;
 		}
@@ -311,27 +317,25 @@ else if ( isset( $_POST['style'] ) && $_POST['style'] === 'insert_consulting' ) 
 		$total_invoice_item_tax = $product['unit_price'] * $actual_tax;
 		$total_invoice_tax_amount = $total_invoice_item_tax * $_POST["i_quantity$items"];
 		$total_invoice_item = $total_invoice_item_tax + $product['unit_price'] ;	
-		$total_invoice_item_total = $total_invoice_item * $_POST["i_quantity$items"];
-		$total_invoice_item_gross = $product['unit_price']  * $_POST["i_quantity$items"];
+		$total_invoice_item_total = $total_invoice_item * $_POST["quantity$items"];
+		$total_invoice_item_gross = $product['unit_price']  * $_POST["quantity$items"];
 		
 
-		$sql_items = "INSERT into {$tb_prefix}invoice_items values ('',$invoice_id,$qty,$product_line_item,{$product['unit_price']},'$_POST[select_tax]',{tax['tax_percentage']},$total_invoice_tax_amount,$total_invoice_item_gross,'$line_item_description',$total_invoice_item_total)";
-	
-		/*
-		mysqlQuery($sql_items);
-		*/
+		$sql_items = "INSERT into {$tb_prefix}invoice_items VALUES ('',$invoice_id,$qty,$product[id],{$product['unit_price']},'$_POST[tax_id]',{$tax['tax_percentage']},$total_invoice_tax_amount,$total_invoice_item_gross,'$line_item_description',$total_invoice_item_total)";
 
-		
+
+		echo $sql_items."<br />";
 		if (mysqlQuery($sql_items)) {
 			$display_block_items = $LANG['save_invoice_items_success'];
-		} else { die(mysql_error());
+		} else {
+			die(mysql_error());
 		}
 		
 		/* echo "$sql_items <br>";  */
 		$items++ ;
 }
 
-	
+	//exit();
 	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&style=Consulting>";
 
 

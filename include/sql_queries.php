@@ -13,7 +13,7 @@ function mysqlQuery($sqlQuery) {
 	$pattern = "/[^a-z]*SELECT|select/";
 	$userid = 1;
 	
-	echo $sqlQuery;
+	//echo $sqlQuery;
 	
 	if($logging && (preg_match($pattern,$sqlQuery) == 0)) {
 		$sql = "INSERT INTO  `si_log` (  `id` ,  `timestamp` ,  `userid` ,  `sqlquerie` ) VALUES (NULL , CURRENT_TIMESTAMP ,  '$userid',  '". addslashes ($sqlQuery)."');";
@@ -349,7 +349,7 @@ function getInvoiceTotal($invoice_id) {
 	$sql ="SELECT SUM(total) AS total FROM {$tb_prefix}invoice_items WHERE invoice_id = $invoice_id";
 	$query = mysqlQuery($sql);
 	$res = mysql_fetch_array($query);
-	echo "TOTAL".$res['total'];
+	//echo "TOTAL".$res['total'];
 	return $res['total'];
 }
 

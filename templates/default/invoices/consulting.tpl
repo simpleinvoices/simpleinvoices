@@ -61,7 +61,7 @@
 			{if $products == null }
 				<p><em>{$LANG.no_products}</em></p>
 			{else}
-				<select name="select_products{$smarty.section.line.index}">
+				<select name="product{$smarty.section.line.index}">
 					<option value=""></option>
 				{foreach from=$products item=product}
 					<option {if $product.id == $defaults.product} selected {/if} value="{$product.id}">{$product.description}</option>
@@ -95,7 +95,7 @@
 {if $taxes == null }
 	<p><em>{$LANG.no_taxes}</em></p>
 {else}
-	<select name="select_tax">
+	<select name="tax_id">
 	{foreach from=$taxes item=tax}
 		<option {if $tax.tax_id == $defaults.tax} selected {/if} value="{$tax.tax_id}">{$tax.tax_description}</option>
 	{/foreach}
@@ -111,7 +111,7 @@
 {if $preferences == null }
 	<p><em>{$LANG.no_preferences}</em></p>
 {else}
-	<select name="select_preferences">
+	<select name="preference_id">
 	{foreach from=$preferences item=preference}
 		<option {if $preference.pref_id == $defaults.preference} selected {/if} value="{$preference.pref_id}">{$preference.pref_description}</option>
 	{/foreach}
@@ -138,6 +138,6 @@
 <div style="text-align:center;">
 	<input type=hidden name="max_items" value="{$smarty.section.line.index}">
 	<input type=submit name="submit" value="{$LANG.save_invoice}">
-	<input type=hidden name="style" value="insert_invoice_consulting">
+	<input type=hidden name="style" value="insert_consulting">
 </div>
 </form>
