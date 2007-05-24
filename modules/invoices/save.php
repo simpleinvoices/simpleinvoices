@@ -11,39 +11,10 @@ $action = !empty( $_POST['action'] ) ? addslashes( $_POST['action'] ) : NULL;
 
 
 #insert invoice_total - start
-if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_invoice_total' ) {
+if ( isset( $_POST['style'] ) && $_POST['style'] === 'insert_total' ) {
 
-	$sql = "INSERT 
-			into
-		{$tb_prefix}invoices (
-			id, 
-			biller_id, 
-			customer_id, 
-			type_id,
-			preference_id, 
-			date, 
-			note,
-			custom_field1,
-			custom_field2,
-			custom_field3,
-			custom_field4
-		)
-		VALUES
-		(
-			'',
-			'$_POST[sel_id]',
-			'$_POST[select_customer]',
-			'1',
-			'$_POST[select_preferences]',
-			'$_POST[select_date]',
-			'$_POST[invoice_total_note]',
-			'$_POST[i_custom_field1]',
-			'$_POST[i_custom_field2]',
-			'$_POST[i_custom_field3]',
-			'$_POST[i_custom_field4]'
-			)";
-
-	if (mysqlQuery($sql)) {
+	//echo $_POST['biller_id']."TT";
+	if (insertInvoice(1)) {
 		$display_block = $LANG['save_invoice_success'];
 	} else {
 		$display_block = $LANG['save_invoice_failure'];
@@ -52,24 +23,12 @@ if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_inv
 	#get the invoice id from the insert
 	$invoice_id = mysql_insert_id();
 
-
-	#tax percentage query
-	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
-	$result_print_tax_percentage = mysqlQuery($print_tax_percentage, $conn) or die(mysql_error());
-
-
-	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
-		$tax_idField = $Array_tax['tax_id'];
-		$tax_descriptionField = $Array_tax['tax_description'];
-		$tax_percentageField = $Array_tax['tax_percentage'];
-
-	};
-
-	$actual_tax = $tax_percentageField / 100;
-	$total_invoice_total_tax = $_POST[gross_total] * $actual_tax ;
-	$total_invoice_total = $total_invoice_total_tax + $_POST[gross_total] ;	
+	$actual_tax = $tax['tax_percentage'] / 100;
+	$total_invoice_total_tax = $_POST[total] * $actual_tax ;
+	$total_invoice_total = $total_invoice_total_tax + $_POST[total] ;	
 		
-
+	$tax = getTaxRate($_POST['tax_id']);
+	
 	$sql_items = "INSERT into
 				{$tb_prefix}invoice_items
 			VALUES
@@ -79,11 +38,11 @@ if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_inv
 					'1',
 					'00',
 					'00',
-					'$_POST[select_tax]',
-					$tax_percentageField,
+					'$_POST[tax_id]',
+					{$tax['tax_percentage']},
 					$total_invoice_total_tax,		
-					'$_POST[gross_total]',
-					'$_POST[i_description]',
+					'$_POST[total]',
+					'$_POST[description]',
 					$total_invoice_total
 				)
 			";
@@ -91,31 +50,34 @@ if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_inv
 
 	if (mysqlQuery($sql_items)) {
 		$display_block_items = $LANG['save_invoice_items_success'];
-	} else { die(mysql_error());
+	}
+	else {
+		die(mysql_error());
 	}
 
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&invoice_style=Total>";
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&style=Total>";
 
 }
 #insert invoice_total - end
 
 #EDIT invoice_total
-else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_invoice_total' ) {
+else if ( isset( $_POST['style'] ) && $_POST['style'] === 'edit_total' ) {
 
 	$invoice_id = $_POST[invoice_id];
 
 	#update the {$tb_prefix}invoices table with customer etc  stuff - start
+	
 	$sql = "UPDATE
 			{$tb_prefix}invoices
 		SET
-			biller_id = '$_POST[sel_id]',
-			customer_id = '$_POST[select_customer]',
-			preference_id = '$_POST[select_preferences]',
-			date = '$_POST[select_date]',
-			custom_field1 = '$_POST[i_custom_field1]',
-			custom_field2 = '$_POST[i_custom_field2]',
-			custom_field3 = '$_POST[i_custom_field3]',
-			custom_field4 = '$_POST[i_custom_field4]'
+			biller_id = '$_POST[biller_id]',
+			customer_id = '$_POST[customer_id]',
+			preference_id = '$_POST[preference_id]',
+			date = '$_POST[date]',
+			custom_field1 = '$_POST[customField1]',
+			custom_field2 = '$_POST[customField2]',
+			custom_field3 = '$_POST[customField3]',
+			custom_field4 = '$_POST[customField4]'
 		WHERE
 			id = $invoice_id";
 
@@ -124,49 +86,39 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 	} else {
 		$display_block = $LANG['save_invoice_failure'].$sql;
 	}
-	
+
+
 	#update the {$tb_prefix}invoices table with customer etc  stuff - end
 	
-	#tax percentage query -start
-	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
-	$result_print_tax_percentage = mysqlQuery($print_tax_percentage, $conn) or die(mysql_error());
-
-
-	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
-		$tax_idField = $Array_tax['tax_id'];
-		$tax_descriptionField = $Array_tax['tax_description'];
-		$tax_percentageField = $Array_tax['tax_percentage'];
-
-	};
-	#tax info - end	
 	
 	#calcultate the invoice total - start
-	$actual_tax = $tax_percentageField / 100;
+	$actual_tax = $tax['tax_percentage'] / 100;
 	$total_invoice_total_tax = $_POST[gross_total] * $actual_tax ;
 	$total_invoice_total = $total_invoice_total_tax + $_POST[gross_total] ;
 	#calcultate the invoice total - end
 
 	#update the {$tb_prefix}invoice_items table - which tax,description etc.. - start
-	$sql_items = "UPDATE
+	$sql = "UPDATE
 				{$tb_prefix}invoice_items
 			SET
-				tax_id = '$_POST[select_tax]',
-				tax = $tax_percentageField,
+				tax_id = '$_POST[tax_id]',
+				tax = '{$tax['tax_percentage']}',
 				tax_amount = $total_invoice_total_tax,
-				gross_total = '$_POST[gross_total]',
-				description = '$_POST[i_description]',
+				gross_total = '$_POST[total]',
+				description = '$_POST[description]',
 				total = $total_invoice_total
 			WHERE
 				invoice_id = $invoice_id";
 
+	echo $sql;
 
-	if (mysqlQuery($sql_items)) {
-		$display_block_items = $LANG['save_invoice_items_success'];
-	} else { die(mysql_error());
-}
+		if (mysqlQuery($sql)) {
+			$display_block_items = $LANG['save_invoice_items_success'];
+		} else {
+			die(mysql_error());
+		}
 
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&invoice_style=Total>";
-
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&style=Total>";
 }
 
 #EDIT invoce total - end
@@ -174,39 +126,10 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 
 #insert invoice_itemised
 
-else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_invoice_itemised' ) {
+else if ( isset( $_POST['style'] ) && $_POST['style'] === 'insert_itemised' ) {
 
-	$invoice_itemised_note_field = $_POST[invoice_itemised_note];
-	$sql = "INSERT 
-			into
-		{$tb_prefix}invoices (
-			id, 
-			biller_id, 
-			customer_id, 	
-			type_id,
-			preference_id, 
-			date, 
-			note,
-			custom_field1,
-			custom_field2,
-			custom_field3, 
-			custom_field4
-		)
-		VALUES (
-			'',
-			'$_POST[sel_id]',
-			'$_POST[select_customer]',
-			2,
-			'$_POST[select_preferences]',
-			'$_POST[select_date]',
-			'$invoice_itemised_note_field',
-			'$_POST[i_custom_field1]',
-			'$_POST[i_custom_field2]',
-			'$_POST[i_custom_field3]',
-			'$_POST[i_custom_field4]'
-		)";
 
-	if (mysqlQuery($sql)) {
+	if (insertInvoice(2)) {
 		$display_block = $LANG['save_invoice_success'];
 	} else {
 		$display_block = $LANG['save_invoice_failure'];
@@ -215,73 +138,34 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 	#get the invoice id from the insert
 	$invoice_id = mysql_insert_id();
 
-
-	#tax percentage query
-	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
-	$result_print_tax_percentage = mysqlQuery($print_tax_percentage, $conn) or die(mysql_error());
-
-
-	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
-		$tax_idField = $Array_tax['tax_id'];
-		$tax_descriptionField = $Array_tax['tax_description'];
-		$tax_percentageField = $Array_tax['tax_percentage'];
-
-	};
-/*
-	#product info query
-	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id ='$_POST[select_products]'";
-	$result_print_products_info = mysqlQuery($print_products_info , $conn) or die(mysql_error());
-
-
-	while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
-		$prod_idField = $Array_tax['tax_id'];
-		$prod_descriptionField = $Array_tax['description'];
-		$prod_unit_priceField = $Array_tax['unit_price'];
-
-	};
-*/
-	$num = $_POST[max_items];
+	$num = $_POST['max_items'];
 	$items = 0;
+	
 	while ($items < $num) :
 
-	       /* echo "<b>$items</b><br>"; */
 		$qty = $_POST["i_quantity$items"];
 		$product_line_item = $_POST["select_products$items"];
-	       /* echo "Qty: $qty<br> "; */
-	       /*  echo "Prod ID: $product_line_item<br> "; */
 	
 		
 		#break out of the while if no QUANTITY
 		if (empty($_POST["i_quantity$items"])) {
-			/*echo "continue"; */
 			break;
 		}
-			
-
-		$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id =$product_line_item";
-		$result_print_products_info = mysqlQuery($print_products_info , $conn) or die(mysql_error());
+		
+		$product = getProduct($_POST["select_products$items"]);
 
 
-		while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
-			$prod_idField = $Array_tax['tax_id'];
-			$prod_descriptionField = $Array_tax['description'];
-			$prod_unit_priceField = $Array_tax['unit_price'];
-
-		};
-
-		$actual_tax = $tax_percentageField  / 100 ;
-		$total_invoice_item_tax = $prod_unit_priceField * $actual_tax;
-		$total_invoice_tax_amount = $total_invoice_item_tax * $_POST["i_quantity$items"];
-		$total_invoice_item = $total_invoice_item_tax + $prod_unit_priceField ;	
-		$total_invoice_item_total = $total_invoice_item * $_POST["i_quantity$items"];
-		$total_invoice_item_gross = $prod_unit_priceField  * $_POST["i_quantity$items"];
+		$actual_tax = $tax['tax_percentage']  / 100 ;
+		$total_invoice_item_tax = $product['unit_price'] * $actual_tax;
+		$total_invoice_tax_amount = $total_invoice_item_tax * $_POST["quantity$items"];
+		$total_invoice_item = $total_invoice_item_tax + $product['unit_price'] ;	
+		$total_invoice_item_total = $total_invoice_item * $_POST["quantity$items"];
+		$total_invoice_item_gross = $product['unit_price']  * $_POST["quantity$items"];
 		
 
-		$sql_items = "INSERT into {$tb_prefix}invoice_items values ('',$invoice_id,$qty,$product_line_item,$prod_unit_priceField,'$_POST[select_tax]',$tax_percentageField,$total_invoice_tax_amount,$total_invoice_item_gross,'00',$total_invoice_item_total)";
+		$sql_items = "INSERT into {$tb_prefix}invoice_items values ('',$invoice_id,$qty,{$_POST['product_id$items']},{$product['unit_price']},'$_POST[select_tax]',{$tax['tax_percentage']},$total_invoice_tax_amount,$total_invoice_item_gross,'00',$total_invoice_item_total)";
 	
-		/*
-		mysqlQuery($sql_items);
-		*/
+
 
 		
 		if (mysqlQuery($sql_items)) {
@@ -294,7 +178,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 	 endwhile;
 
 
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&invoice_style=Itemised>";
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&style=Itemised>";
 
 
 }
@@ -304,72 +188,28 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 
 #EDIT INVOICE ITEMISED - START
 
-else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_invoice_itemised' ) {
+else if ( isset( $_POST['style'] ) && $_POST['style'] === 'edit_itemised' ) {
 
 	$invoice_id = $_POST[invoice_id];
 
-	#update the {$tb_prefix}invoices table with customer etc  stuff - start
-	$sql = "UPDATE
-			{$tb_prefix}invoices
-		SET
-			biller_id = '$_POST[sel_id]',
-			customer_id = '$_POST[select_customer]',
-			preference_id = '$_POST[select_preferences]',
-			date = '$_POST[select_date]',
-			note = '$_POST[invoice_itemised_note]',
-			custom_field1 = '$_POST[i_custom_field1]',
-			custom_field2 = '$_POST[i_custom_field2]',
-			custom_field3 = '$_POST[i_custom_field3]',
-			custom_field4 = '$_POST[i_custom_field4]'
-		WHERE
-			id = $invoice_id";
-
-	if (mysqlQuery($sql)) {
+	if (updateInvoice($_POST['invoice_id'])) {
 		$display_block = $LANG['save_invoice_success'];
 	} else {
 		$display_block = $LANG['save_invoice_failure'];
 	}
 
 
-	#$display_block .= "step 2 - 1";
-	#tax percentage query
-	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
-	$result_print_tax_percentage = mysqlQuery($print_tax_percentage, $conn) or die(mysql_error());
-
-
-	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
-		$tax_idField = $Array_tax['tax_id'];
-		$tax_descriptionField = $Array_tax['tax_description'];
-		$tax_percentageField = $Array_tax['tax_percentage'];
-
-	};
-/*
-	#product info query
-	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id ='$_POST[select_products]'";
-	$result_print_products_info = mysqlQuery($print_products_info , $conn) or die(mysql_error());
-
-
-	while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
-		$prod_idField = $Array_tax['tax_id'];
-		$prod_descriptionField = $Array_tax['description'];
-		$prod_unit_priceField = $Array_tax['unit_price'];
-
-	};
-*/
 	#$display_block .= "step 2 - 2";
 	$num = $_POST[max_items];
 	$items = 1;
 	$product_id_items = 1;	
-	while ($items < $num) :	
+	while ($items < $num) {
 
 		$display_block_qty =$_POST["i_quantity$items"];
 		#$display_block .= "step 2 - 3  - qty $display_block_qty!! ";
-	       /* echo "<b>$items</b><br>"; */
 		$qty = $_POST["i_quantity$items"];
 		$product_line_item = $_POST["select_products$product_id_items"];
-	       /* echo "Qty: $qty<br> "; */
-	       /*  echo "Prod ID: $product_line_item<br> "; */
-		
+	
 		#$display_block .= "step 2 - 4 : qty $qty :: PLI=$product_line_item MAX-- $_POST[max_items];";
 		#break out of the while if no QUANTITY
 		
@@ -378,31 +218,23 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 		       break;
 		}
 		
-
-		$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id =$product_line_item";
-		$result_print_products_info = mysqlQuery($print_products_info , $conn) or die(mysql_error());
+	#$display_block .= "step 2 - 5";
 		
-		#$display_block .= "step 2 - 5";
-		
-		while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
-			$prod_idField = $Array_tax['tax_id'];
-			$prod_descriptionField = $Array_tax['description'];
-			$prod_unit_priceField = $Array_tax['unit_price'];
+		$product = getProduct($product_line_item);
 
-		};
 
-		$actual_tax = $tax_percentageField  / 100 ;
-		$total_invoice_item_tax = $prod_unit_priceField * $actual_tax;
+		$actual_tax = $tax['tax_percentage']  / 100 ;
+		$total_invoice_item_tax = $product['unit_price'] * $actual_tax;
 		$total_invoice_tax_amount = $total_invoice_item_tax * $_POST["i_quantity$items"];
-		$total_invoice_item = $total_invoice_item_tax + $prod_unit_priceField ;
+		$total_invoice_item = $total_invoice_item_tax + $product['unit_price'] ;
 		$total_invoice_item_total = $total_invoice_item * $_POST["i_quantity$items"];
-		$total_invoice_item_gross = $prod_unit_priceField  * $_POST["i_quantity$items"];
+		$total_invoice_item_gross = $product['unit_price']  * $_POST["i_quantity$items"];
 		
 
 		$invoice_id_item = $_POST["id$items"];
 		
 
-		$sql_items = "REPLACE into
+		$sql_items = "INSERT INTO
 					{$tb_prefix}invoice_items
 				VALUES
 					(
@@ -410,9 +242,9 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 						$invoice_id,
 						$qty,
 						$product_line_item,
-						$prod_unit_priceField,
+						{$product['unit_price']},
 						'$_POST[select_tax]',
-						$tax_percentageField,
+						{$tax['tax_percentage']},
 						$total_invoice_tax_amount,
 						$total_invoice_item_gross,
 						'00',
@@ -428,11 +260,10 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 		/* echo "$sql_items <br>";  */
 		$items++ ;
 		$product_id_items++;
-	 endwhile;
+}
 
 
-
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&invoice_style=Itemised>";
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&style=Itemised>";
 
 }
 
@@ -443,77 +274,21 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 #Insert - INVOICE CONSULTING
 
 
-else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'insert_invoice_consulting' ) {
+else if ( isset( $_POST['style'] ) && $_POST['style'] === 'insert_consulting' ) {
 
-	$sql = "INSERT 
-			into
-		{$tb_prefix}invoices 
-			(
-			id, 
-			biller_id, 
-			customer_id, 
-			type_id,
-			preference_id, 
-			date, 
-			note,
-			custom_field1,
-			custom_field2,
-			custom_field3,
-			custom_field4
-			)
-		values
-			(
-			'',
-			'$_POST[sel_id]',
-			'$_POST[select_customer]',
-			 3,
-			'$_POST[select_preferences]',
-			'$_POST[select_date]',
-			'$_POST[invoice_consulting_note]',
-			'$_POST[i_custom_field1]',
-			'$_POST[i_custom_field2]',
-			'$_POST[i_custom_field3]',
-			'$_POST[i_custom_field4]'
-			)
-		";
-
-	if (mysqlQuery($sql)) {
+	if (insertInvoice(3)) {
 		$display_block =  $LANG['save_invoice_success'];
 	} else {
 		$display_block = $LANG['save_invoice_failure'];
-}
+	}
 
 	#get the invoice id from the insert
 	$invoice_id = mysql_insert_id();
 
-
-	#tax percentage query
-	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
-	$result_print_tax_percentage = mysqlQuery($print_tax_percentage, $conn) or die(mysql_error());
-
-
-	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
-		$tax_idField = $Array_tax['tax_id'];
-		$tax_descriptionField = $Array_tax['tax_description'];
-		$tax_percentageField = $Array_tax['tax_percentage'];
-
-	};
-/*
-	#product info query
-	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id ='$_POST[select_products]'";
-	$result_print_products_info = mysqlQuery($print_products_info , $conn) or die(mysql_error());
-
-
-	while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
-		$prod_idField = $Array_tax['tax_id'];
-		$prod_descriptionField = $Array_tax['description'];
-		$prod_unit_priceField = $Array_tax['unit_price'];
-
-	};
-*/
 	$num = $_POST[max_items];
 	$items = 0;
-	while ($items < $num) :
+	
+	while ($items < $num) {
 
 			
 	       /* echo "<b>$items</b><br>"; */
@@ -529,26 +304,18 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 			break;
 		}
 
-		$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id =$product_line_item";
-       		$result_print_products_info = mysqlQuery($print_products_info , $conn) or die(mysql_error());
-
-
-		while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
-			$prod_idField = $Array_tax['tax_id'];
-			$prod_descriptionField = $Array_tax['description'];
-			$prod_unit_priceField = $Array_tax['unit_price'];
-
-		};
-
-		$actual_tax = $tax_percentageField  / 100 ;
-		$total_invoice_item_tax = $prod_unit_priceField * $actual_tax;
-		$total_invoice_tax_amount = $total_invoice_item_tax * $_POST["i_quantity$items"];
-		$total_invoice_item = $total_invoice_item_tax + $prod_unit_priceField ;	
-		$total_invoice_item_total = $total_invoice_item * $_POST["i_quantity$items"];
-		$total_invoice_item_gross = $prod_unit_priceField  * $_POST["i_quantity$items"];
+		$product = getProduct($product_line_item);
 		
 
-		$sql_items = "INSERT into {$tb_prefix}invoice_items values ('',$invoice_id,$qty,$product_line_item,$prod_unit_priceField,'$_POST[select_tax]',$tax_percentageField,$total_invoice_tax_amount,$total_invoice_item_gross,'$line_item_description',$total_invoice_item_total)";
+		$actual_tax = $tax['tax_percentage']  / 100 ;
+		$total_invoice_item_tax = $product['unit_price'] * $actual_tax;
+		$total_invoice_tax_amount = $total_invoice_item_tax * $_POST["i_quantity$items"];
+		$total_invoice_item = $total_invoice_item_tax + $product['unit_price'] ;	
+		$total_invoice_item_total = $total_invoice_item * $_POST["i_quantity$items"];
+		$total_invoice_item_gross = $product['unit_price']  * $_POST["i_quantity$items"];
+		
+
+		$sql_items = "INSERT into {$tb_prefix}invoice_items values ('',$invoice_id,$qty,$product_line_item,{$product['unit_price']},'$_POST[select_tax]',{tax['tax_percentage']},$total_invoice_tax_amount,$total_invoice_item_gross,'$line_item_description',$total_invoice_item_total)";
 	
 		/*
 		mysqlQuery($sql_items);
@@ -562,10 +329,10 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 		
 		/* echo "$sql_items <br>";  */
 		$items++ ;
-	endwhile;
+}
 
-
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&invoice_style=Consulting>";
+	
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&style=Consulting>";
 
 
 }
@@ -573,7 +340,7 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'inser
 
 #EDIT INVOICE CONSULTING - START
 
-else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_invoice_consulting' ) {
+else if ( isset( $_POST['style'] ) && $_POST['style'] === 'edit_consulting' ) {
 
 	$invoice_id = $_POST[invoice_id];
 
@@ -581,11 +348,11 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 	$sql = "UPDATE
 			{$tb_prefix}invoices
 		SET
-			biller_id = '$_POST[sel_id]',
-			customer_id = '$_POST[select_customer]',
+			biller_id = '$_POST[biller_id]',
+			customer_id = '$_POST[customer_id]',
 			preference_id = '$_POST[select_preferences]',
-			date = '$_POST[select_date]',
-			note = '$_POST[invoice_itemised_note]',
+			date = '$_POST[date]',
+			note = '$_POST[note]',
 			custom_field1 = '$_POST[i_custom_field1]',
 			custom_field2 = '$_POST[i_custom_field2]',
 			custom_field3 = '$_POST[i_custom_field3]',
@@ -599,47 +366,20 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 		$display_block = $LANG['save_invoice_failure'];
 }
 
-
-	#$display_block .= "step 2 - 1";
-	#tax percentage query
-	$print_tax_percentage = "SELECT * FROM {$tb_prefix}tax WHERE tax_id ='$_POST[select_tax]'";
-	$result_print_tax_percentage = mysqlQuery($print_tax_percentage, $conn) or die(mysql_error());
-
-	while ($Array_tax = mysql_fetch_array($result_print_tax_percentage)) {
-		$tax_idField = $Array_tax['tax_id'];
-		$tax_descriptionField = $Array_tax['tax_description'];
-		$tax_percentageField = $Array_tax['tax_percentage'];
-
-	};
-/*
-	#product info query
-	$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id ='$_POST[select_products]'";
-	$result_print_products_info = mysqlQuery($print_products_info , $conn) or die(mysql_error());
-
-
-	while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
-		$prod_idField = $Array_tax['tax_id'];
-		$prod_descriptionField = $Array_tax['description'];
-		$prod_unit_priceField = $Array_tax['unit_price'];
-
-	};
-*/
 	#$display_block .= "step 2 - 2";
 	$num = $_POST[max_items];
 	$items = 1;
 	$product_id_items = 1;
-	while ($items < $num) :
+	while ($items < $num) {
 	
 
 	$consulting_item_note = $_POST["consulting_item_note$items"];
 	$display_block_qty =$_POST["i_quantity$items"];
-	#$display_block .= "step 2 - 3  - qty $display_block_qty!! ";
-	       /* echo "<b>$items</b><br>"; */
+
+
 		$qty = $_POST["i_quantity$items"];
 		$product_line_item = $_POST["select_products$product_id_items"];
-				
-	       /* echo "Qty: $qty<br> "; */
-	       /*  echo "Prod ID: $product_line_item<br> "; */
+
 
 		#$display_block .= "step 2 - 4 : qty $qty :: PLI=$product_line_item MAX-- $_POST[max_items];";
 		#break out of the while if no QUANTITY
@@ -648,24 +388,16 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 		       /* break;*/
 		}
 
-		$print_products_info = "SELECT * FROM {$tb_prefix}products WHERE id =$product_line_item";
-		$result_print_products_info = mysqlQuery($print_products_info , $conn) or die(mysql_error());
-
-		#$display_block .= "step 2 - 5  <br> $consulting_item_note ";
-
-		while ($Array_tax = mysql_fetch_array($result_print_products_info )) {
-			$prod_idField = $Array_tax['tax_id'];
-			$prod_descriptionField = $Array_tax['description'];
-			$prod_unit_priceField = $Array_tax['unit_price'];
-
-		};
-
-		$actual_tax = $tax_percentageField  / 100 ;
-		$total_invoice_item_tax = $prod_unit_priceField * $actual_tax;
+	
+		$product = getProduct($product_line_item);
+		
+	
+		$actual_tax = $tax['tax_percentage']  / 100 ;
+		$total_invoice_item_tax = $product['unit_price'] * $actual_tax;
 		$total_invoice_tax_amount = $total_invoice_item_tax * $_POST["i_quantity$items"];
-		$total_invoice_item = $total_invoice_item_tax + $prod_unit_priceField ;
+		$total_invoice_item = $total_invoice_item_tax + $product['unit_price'] ;
 		$total_invoice_item_total = $total_invoice_item * $_POST["i_quantity$items"];
-		$total_invoice_item_gross = $prod_unit_priceField  * $_POST["i_quantity$items"];
+		$total_invoice_item_gross = $product['unit_price']  * $_POST["i_quantity$items"];
 
 
 		$invoice_id_item = $_POST["id$items"];
@@ -678,9 +410,9 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 						$invoice_id,
 						$qty,
 						$product_line_item,
-						$prod_unit_priceField,
+						{$product['unit_price']},
 						'$_POST[select_tax]',
-						$tax_percentageField,
+						{$tax['tax_percentage']},
 						$total_invoice_tax_amount,
 						$total_invoice_item_gross,
 						'$consulting_item_note',
@@ -690,21 +422,23 @@ else if ( isset( $_POST['invoice_style'] ) && $_POST['invoice_style'] === 'edit_
 
 		if (mysqlQuery($sql_items)) {
 			$display_block_items =  $LANG['save_invoice_items_success'];
-		} else { die(mysql_error());
+		} else {
+			die(mysql_error());
 		}
 
 		/* echo "$sql_items <br>";  */
 		$items++ ;
 		$product_id_items++;
-	 endwhile;
+	}
 
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&invoice_style=Consulting>";
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&style=Consulting>";
 
 }
 
 
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 $display_block_items = isset($display_block_items) ? $display_block_items : '&nbsp;';
+
 echo <<<EOD
 {$refresh_total}
 <title>{$title}</title>

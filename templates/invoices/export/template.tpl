@@ -249,15 +249,15 @@
 			<td colspan="6"><br /></td>
 		</tr>
 		
-	{if $smarty.get.invoice_style === 'Itemised' }
+	{if $smarty.get.style === 'Itemised' }
 		{include file="$template_path/itemised.tpl"}
 	{/if}
 
-	{if $smarty.get.invoice_style === 'Consulting' }
+	{if $smarty.get.style === 'Consulting' }
 		{include file="$template_path/consulting.tpl"}
 	{/if}
 	
-	{if $smarty.get.invoice_style === 'Total' }
+	{if $smarty.get.style === 'Total' }
 		{include file="$template_path/total.tpl"}
 	{/if}
 	

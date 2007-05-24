@@ -39,7 +39,7 @@ $show_custom_field_4 = show_custom_field("invoice_cf4",$invoice['custom_field4']
 #PRINT DETAILS FOR THE TOTAL STYLE INVOICE
 
 
-if (  $_GET['invoice_style'] === 'Total' ) {
+if (  $_GET['style'] === 'Total' ) {
 
 	$display_block_details =  <<<EOD
 
@@ -75,7 +75,7 @@ EOD;
 
 #INVOICE ITEMEISED and CONSULTING SECTION
 
-else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'Consulting' ) {
+else if ( $_GET['style'] === 'Itemised' || $_GET['style'] === 'Consulting' ) {
 
 	$display_block_details = <<<EOD
         <tr>
@@ -84,7 +84,7 @@ else if ( $_GET['invoice_style'] === 'Itemised' || $_GET['invoice_style'] === 'C
 EOD;
 	
 	#show column heading for itemised style
-        if ( $_GET['invoice_style'] === 'Itemised' ) {
+        if ( $_GET['style'] === 'Itemised' ) {
         	
 		$display_block_details .=  <<<EOD
 		<tr>
@@ -100,7 +100,7 @@ EOD;
 EOD;
 	}
 	#show column heading for consulting style
-        else if ( $_GET['invoice_style'] === 'Consulting' ) {
+        else if ( $_GET['style'] === 'Consulting' ) {
                 $display_block_details .=  <<<EOD
 		<tr>
 		<td colspan=6>
@@ -117,7 +117,7 @@ EOD;
 
 		foreach($invoiceItems as $invoiceItem) {
 
-		if ( $_GET['invoice_style'] === 'Itemised' ) {
+		if ( $_GET['style'] === 'Itemised' ) {
 	
 			$display_block_details .=  <<<EOD
 		        <tr>
@@ -144,7 +144,7 @@ EOD;
 	}	
 	
 	#show the consulting invoice 
-	if ( $_GET['invoice_style'] === 'Consulting' ) {
+	if ( $_GET['style'] === 'Consulting' ) {
 		
 	        #item description - only show first 20 characters and add ... to signify theres more text
 	        $max_length = 20;
@@ -189,7 +189,7 @@ EOD;
 
 
 	#if itemised style show the invoice note field - START
-	if ( $_GET['invoice_style'] === 'Itemised' && !empty($invoice['note']) OR 'Consulting' && !empty($invoice['note'])) {
+	if ( $_GET['style'] === 'Itemised' && !empty($invoice['note']) OR 'Consulting' && !empty($invoice['note'])) {
                 #item description - only show first 20 characters and add ... to signify theres more text
                 $max_length = 20;
                 if (strlen($invoice['note']) > $max_length ) {
@@ -252,7 +252,7 @@ EOD;
 
 
 
-	$url_pdf = "$_SERVER[HTTP_HOST]$install_path/index.php?module=invoices&view=templates/template&submit=$invoice[id]&action=view&location=pdf&invoice_style={$invoice_type['inv_ty_description']}";
+	$url_pdf = "$_SERVER[HTTP_HOST]$install_path/index.php?module=invoices&view=templates/template&submit=$invoice[id]&action=view&location=pdf&style={$invoice_type['inv_ty_description']}";
 	$url_pdf_encoded = urlencode($url_pdf); 
 	$url_for_pdf = "./pdf/html2ps.php?process_mode=single&renderfields=1&renderlinks=1&renderimages=1&scalepoints=1&pixels=$pdf_screen_size&media=$pdf_paper_size&leftmargin=$pdf_left_margin&rightmargin=$pdf_right_margin&topmargin=$pdf_top_margin&bottommargin=$pdf_bottom_margin&transparency_workaround=1&imagequality_workaround=1&output=1&location=pdf&pdfname=$preference[pref_inv_wording]$invoice[id]&URL=$url_pdf_encoded";
 	
@@ -278,18 +278,18 @@ echo <<<EOD
 
 <!--Actions heading - start-->
 {$LANG['actions']}: 
-		<a href="index.php?module=invoices&view=templates/template&submit={$invoice['id']}&action=view&invoice_style={$invoice_type['inv_ty_description']}"> {$LANG['print_preview']}</a>
+		<a href="index.php?module=invoices&view=templates/template&submit={$invoice['id']}&action=view&style={$invoice_type['inv_ty_description']}"> {$LANG['print_preview']}</a>
 		 :: 
-		<a href="index.php?module=invoices&view=details&submit={$invoice['id']}&action=view&invoice_style={$invoice_type['inv_ty_description']}"> {$LANG['edit']}</a>
+		<a href="index.php?module=invoices&view=details&submit={$invoice['id']}&action=view&style={$invoice_type['inv_ty_description']}"> {$LANG['edit']}</a>
 		 ::
 		 <a href='index.php?module=payments&view=process&submit={$invoice['id']}&op=pay_selected_invoice'> {$LANG['process_payment']} </a>
 		 ::
 		 <!-- EXPORT TO PDF -->
 		<a href='{$url_for_pdf }'>{$LANG['export_pdf']}</a>
 		::
-		<a href="index.php?module=invoices&view=templates/template&submit={$invoice['id']}&action=view&invoice_style={$invoice_type['inv_ty_description']}&export={$spreadsheet}">{$LANG['export_as']} .{$spreadsheet}</a>
+		<a href="index.php?module=invoices&view=templates/template&submit={$invoice['id']}&action=view&style={$invoice_type['inv_ty_description']}&export={$spreadsheet}">{$LANG['export_as']} .{$spreadsheet}</a>
 		::
-		<a href="index.php?module=invoices&view=templates/template&submit={$invoice['id']}&action=view&invoice_style={$invoice_type['inv_ty_description']}&export={$word_processor}">{$LANG['export_as']} .{$word_processor} </a>
+		<a href="index.php?module=invoices&view=templates/template&submit={$invoice['id']}&action=view&style={$invoice_type['inv_ty_description']}&export={$word_processor}">{$LANG['export_as']} .{$word_processor} </a>
 		:: <a href="index.php?module=invoices&view=email&stage=1&submit={$invoice['id']}">{$LANG['email']}</a>
 <!--Actions heading - start-->
 <hr></hr>

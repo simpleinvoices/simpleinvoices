@@ -141,30 +141,13 @@ function get_custom_field_name($field) {
 }
 
 
-function calc_invoice_total($inv_idField) {
-	global $LANG;
-	global $tb_prefix;
-
-
-#invoice total total - start
-$print_invoice_total ="SELECT sum(total) AS total FROM {$tb_prefix}invoice_items WHERE invoice_id =$inv_idField";
-	$result_print_invoice_total = mysqlQuery($print_invoice_total) or die(mysql_error());
-
-	while ($Array = mysql_fetch_array($result_print_invoice_total)) {
-                $invoice_total_Field = $Array['total'];
-#invoice total total - end
-	
-	}
-	return $invoice_total_Field;
-}
-
 function calc_invoice_paid($inv_idField) {
 	global $LANG;
 	global $tb_prefix;
 
 
 #amount paid calc - start
-$x1 = "SELECT IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) AS amount FROM {$tb_prefix}account_payments WHERE ac_inv_id = $inv_idField";
+$x1 = "SELECT IF ( ISNULL(SUM(ac_amount)) , '0', SUM(ac_amount)) AS amount FROM {$tb_prefix}account_payments WHERE ac_inv_id = $inv_idField";
 	$result_x1 = mysqlQuery($x1) or die(mysql_error());
 	while ($result_x1Array = mysql_fetch_array($result_x1)) {
 		$invoice_paid_Field = $result_x1Array['amount'];
@@ -177,7 +160,6 @@ $x1 = "SELECT IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) AS amount FROM 
 function calc_customer_total($c_idField) {
 	global $LANG;
 	global $tb_prefix;
-
 
 #invoice total calc - start
         $print_invoice_total_customer ="
@@ -312,7 +294,7 @@ EOD;
 				<td class="$css_class1">$custom_label_value <a href="docs.php?p=custom_fields&t=help" rel="gb_page_center[400, 400]"><img src="./images/common/help-small.png"></img></a>
 				</td>
 				<td>
-					<input type=text name="i_custom_field$custom_field_number" value="$custom_field_value"size=25></input>
+					<input type=text name="customField$custom_field_number" value="$custom_field_value"size=25></input>
 				</td>
 			</tr>
 EOD;

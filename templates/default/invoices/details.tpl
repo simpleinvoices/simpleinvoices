@@ -2,7 +2,7 @@
 
  <hr></hr>
 
-<FORM name="frmpost" ACTION="index.php?module=invoices&view=save" METHOD=POST>
+<form name="frmpost" action="index.php?module=invoices&view=save" method="post">
 
 	<table align=center>
 	<tr>
@@ -11,30 +11,23 @@
         <tr>
 		<td class='details_screen'>{$preference.pref_inv_wording} {$LANG.number_short}</td><td><input type=hidden name="invoice_id" value={$invoice.id}  size=15>{$invoice.id}</td>
 	</tr>
-	<!--	
-	<tr>
-		<td class='details_screen'>{$preference.pref_inv_wording} {$LANG.date}</td><td colspan=2>{$invoice.date}</td>
-	</tr>	
-	-->
 	<tr>
 	        <td class="details_screen">{$LANG.date_formatted}</td>
-        	<td><input type="text" class="date-picker" name="select_date" id="date1" value='{$invoice.date}'></input></td>
+        	<td><input type="text" class="date-picker" name="date" id="date1" value='{$invoice.date}'></input></td>
 	</tr>
 	<tr>
 		<td class='details_screen'>{$LANG.biller}</td><td>
-		
-{if $billers == null }
-	<p><em>{$LANG.no_billers}</em></p>
-{else}
-	<select name="sel_id">
-	{foreach from=$billers item=biller}
-		<option {if $biller.id == $invoice.biller_id} selected {/if} value="{$biller.id}">{$biller.name}</option>
-	{/foreach}
-	</select>
-{/if}
-		
-		
-		
+			
+		{if $billers == null }
+			<p><em>{$LANG.no_billers}</em></p>
+		{else}
+			<select name="biller_id">
+			{foreach from=$billers item=biller}
+				<option {if $biller.id == $invoice.biller_id} selected {/if} value="{$biller.id}">{$biller.name}</option>
+			{/foreach}
+			</select>
+		{/if}
+					
 		</td>
 	</tr>
 	<tr>
@@ -42,16 +35,16 @@
 		
 			{if $customers == null}
 	        <p><em>{$LANG.no_customers}</em></p>
-
-	{else}
-	
-	<select name="select_customer">
-	{foreach from=$customers item=customer}
-		<option {if $customer.id == $invoice.customer_id} selected {/if} value="{$customer.id}">{$customer.name}</option>
-	{/foreach}
-	</select>
-
-	{/if}
+		
+			{else}
+			
+			<select name="customer_id">
+			{foreach from=$customers item=customer}
+				<option {if $customer.id == $invoice.customer_id} selected {/if} value="{$customer.id}">{$customer.name}</option>
+			{/foreach}
+			</select>
+		
+			{/if}
 		
 		</td>
 	</tr>	
@@ -59,13 +52,13 @@
 
 
 
-{if $smarty.get.invoice_style === 'Total' }
-		<input type=hidden name="invoice_style" value="edit_invoice_total">
+{if $smarty.get.style === 'Total' }
+		<input type=hidden name="style" value="edit_total">
 	        <tr>
         	        <td colspan=6 class='details_screen'>{$LANG.description}</td>
 	        </tr>
 	        <tr>
-			<td colspan=6 ><textarea input type=text name="i_description" rows=10 cols=70 WRAP=nowrap>{$invoiceItems.0.description}</textarea></td>
+			<td colspan=6 ><textarea input type=text name="description" rows=10 cols=70 WRAP=nowrap>{$invoiceItems.0.description}</textarea></td>
         	</tr>
 
 	 {$customFields.1}
@@ -74,17 +67,16 @@
 	 {$customFields.4}
 	 
 	        <tr>       	         
-			<td class='details_screen'>{$LANG.gross_total}</td><td><input type=text name='gross_total' value='{$invoice.total}' size=10> </td>
+			<td class='details_screen'>{$LANG.gross_total}</td><td><input type="text" name="total" value='{$invoice.total}' size=10> </td>
 		</tr>
 		<tr>
 
 {/if}
 
-
-{if $smarty.get.invoice_style === 'Itemised' || $smarty.get.invoice_style === 'Consulting' }
+{if $smarty.get.style === 'itemised' || $smarty.get.style === 'Consulting' }
 	
-     {if $smarty.get.invoice_style === 'Itemised' }
-		<input type=hidden name="invoice_style" value="edit_invoice_itemised">
+     {if $smarty.get.style === 'Itemised' }
+		<input type=hidden name="style" value="itemised">
 		<tr>
 		<td colspan=6>
 		<table>
@@ -93,8 +85,8 @@
 	        </tr>
 	{/if}
 
-        {if $smarty.get.invoice_style === 'Consulting'}
-		<input type=hidden name="invoice_style" value="edit_invoice_consulting">
+        {if $smarty.get.style === 'Consulting'}
+		<input type=hidden name="style" value="edit_invoice_consulting">
 		<tr>
 		<td colspan=6>
 		<table>
@@ -108,15 +100,15 @@
 
 		
 	        <tr>
-			<td><input type=text name='i_quantity{$line}' value='{$invoiceItem.quantity}' size=10>
+			<td><input type=text name='quantity{$line}' value='{$invoiceItem.quantity}' size=10>
 			<input type=hidden text name='id{$line}' value='{$invoiceItems.id}' size=10> </td>
 			
-	                <td input type=text name='i_description{$line}' size=50>
+	                <td input type=text name='description{$line}' size=50>
 	                
 	                {if $products == null }
 	<p><em>{$LANG.no_products}</em></p>
 {else}
-	<select name="select_products$line">
+	<select name="products$line">
 	{foreach from=$products item=product}
 		<option {if $product.id == $invoiceItem.product_id} selected {/if} value="{$product.id}">{$product.description}</option>
 	{/foreach}
@@ -129,7 +121,7 @@
 	        </tr>
 		
 
-	{if $smarty.get.invoice_style === 'Consulting'}
+	{if $smarty.get.style === 'Consulting'}
 		
 
 		<tr>
@@ -153,7 +145,7 @@
 				<td colspan=6 class='details_screen'>{$LANG.note}:</td>
 			</tr>
 			<tr>
-	             <td colspan=6 ><textarea input type=text name="invoice_itemised_note" rows=10 cols=70 WRAP=nowrap>{$invoice.note}</textarea></td>
+	             <td colspan=6 ><textarea input type=text name="note" rows=10 cols=70 WRAP=nowrap>{$invoice.note}</textarea></td>
 			</tr>
 			
 
@@ -168,7 +160,7 @@
 {if $taxes == null }
 	<p><em>{$LANG.no_taxes}</em></p>
 {else}
-	<select name="select_tax">
+	<select name="tax_id">
 	{foreach from=$taxes item=tax}
 		<option {if $tax.tax_id == $invoiceItem.0.tax_id} selected {/if} value="{$tax.tax_id}">{$tax.tax_description}</option>
 	{/foreach}
@@ -184,7 +176,7 @@
 {if $preferences == null }
 	<p><em>{$LANG.no_preferences}</em></p>
 {else}
-	<select name="select_preferences">
+	<select name="preference_id">
 	{foreach from=$preferences item=preference}
 		<option {if $preference.pref_id == $invoice.preference_id} selected {/if} value="{$preference.pref_id}">{$preference.pref_description}</option>
 	{/foreach}
@@ -204,5 +196,5 @@
 <hr></hr>
 	<input type=button value='Cancel'onCLick='history.back()'>
 	<input type=submit name="submit" value="{$LANG.save}">
-	<input type=hidden name="max_items" value="{$line}">
+	<input type=hidden name="max_items" value="{$lines}">
 </form>

@@ -5,8 +5,8 @@ checkLogin();
 
 jsBegin();
 jsFormValidationBegin("frmpost");
-jsTextValidation("sel_id","Biller Name",1,100);
-jsTextValidation("select_customer","Customer Name",1,100);
+jsTextValidation("biller_id","Biller Name",1,100);
+jsTextValidation("customer_id","Customer Name",1,100);
 jsValidateifNumZero("i_quantity0","Quantity");
 jsValidateifNum("i_quantity0","Quantity");
 jsValidateRequired("select_products0","Product");

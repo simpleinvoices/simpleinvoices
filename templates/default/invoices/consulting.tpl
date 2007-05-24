@@ -13,7 +13,7 @@
 		{if $billers == null }
 	<p><em>{$LANG.no_billers}</em></p>
 {else}
-	<select name="sel_id">
+	<select name="biller_id">
 	{foreach from=$billers item=biller}
 		<option {if $biller.id == $defaults.biller} selected {/if} value="{$biller.id}">{$biller.name}</option>
 	{/foreach}
@@ -31,7 +31,7 @@
 {if $customers == null }
 	<p><em>{$LANG.no_customers}</em></p>
 {else}
-	<select name="select_customer">
+	<select name="customer_id">
 	{foreach from=$customers item=customer}
 		<option {if $customer.id == $defaults.customer} selected {/if} value="{$customer.id}">{$customer.name}</option>
 	{/foreach}
@@ -44,7 +44,7 @@
 <tr>
         <td class="details_screen">{$LANG.date_formatted}</td>
         <td>
-                        <input type="text" class="date-picker" name="select_date" id="date1" value='{$smarty.now|date_format:"%Y-%m-%d"}'></input>
+                        <input type="text" class="date-picker" name="date" id="date1" value='{$smarty.now|date_format:"%Y-%m-%d"}'></input>
         </td>
 </tr>
 
@@ -56,7 +56,7 @@
         {section name=line start=0 loop=$dynamic_line_items step=1}
 
 			<tr>
-				<td><input type=text name="i_quantity{$smarty.section.line.index}" size="5"></td><td input type=text name="i_description{$smarty.section.line.index}" size="50">
+				<td><input type=text name="quantity{$smarty.section.line.index}" size="5"></td><td input type=text name="description{$smarty.section.line.index}" size="50">
 				                
 			{if $products == null }
 				<p><em>{$LANG.no_products}</em></p>
@@ -87,7 +87,7 @@
 </tr>
 
 <tr>
-        <td colspan=2><textarea input type=text name="invoice_itemised_note" rows=5 cols=70 WRAP=nowrap></textarea></td>
+        <td colspan=2><textarea input type=text name="note" rows=5 cols=70 WRAP=nowrap></textarea></td>
 </tr>
 
 <tr><td class="details_screen">{$LANG.tax}</td><td input type=text name="tax" size=15>
@@ -138,6 +138,6 @@
 <div style="text-align:center;">
 	<input type=hidden name="max_items" value="{$smarty.section.line.index}">
 	<input type=submit name="submit" value="{$LANG.save_invoice}">
-	<input type=hidden name="invoice_style" value="insert_invoice_consulting">
+	<input type=hidden name="style" value="insert_invoice_consulting">
 </div>
 </form>

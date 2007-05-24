@@ -80,7 +80,7 @@ EOD;
 
 #Accounts - for the invoice - start
 #invoice total calc - start
-$invoice_total_Field = calc_invoice_total($inv['id']);
+$invoice_total_Field = getInvoiceTotal($inv['id']);
 $invoice_total_Field_formatted = number_format($invoice_total_Field,2);
 #invoice total calc - end
 

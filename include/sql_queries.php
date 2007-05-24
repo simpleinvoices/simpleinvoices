@@ -12,13 +12,20 @@ function mysqlQuery($sqlQuery) {
 	$logging = 1; //Set to 1 to enable (for testing...)
 	$pattern = "/[^a-z]*SELECT|select/";
 	$userid = 1;
-		
+	
+	echo $sqlQuery;
+	
 	if($logging && (preg_match($pattern,$sqlQuery) == 0)) {
 		$sql = "INSERT INTO  `si_log` (  `id` ,  `timestamp` ,  `userid` ,  `sqlquerie` ) VALUES (NULL , CURRENT_TIMESTAMP ,  '$userid',  '". addslashes ($sqlQuery)."');";
 		mysql_query($sql);
 	}
 	
-	return mysql_query($sqlQuery);
+	if($query = mysql_query($sqlQuery)) {
+		return $query;
+	}
+	else {
+		echo $sql."<br />".mysql_error();
+	}
 }
 
 function getCustomer($id) {
@@ -335,6 +342,17 @@ function getDefaultTax() {
 	return mysql_fetch_array($query);
 }
 
+function getInvoiceTotal($invoice_id) {
+	global $LANG;
+	global $tb_prefix;
+	
+	$sql ="SELECT SUM(total) AS total FROM {$tb_prefix}invoice_items WHERE invoice_id = $invoice_id";
+	$query = mysqlQuery($sql);
+	$res = mysql_fetch_array($query);
+	echo "TOTAL".$res['total'];
+	return $res['total'];
+}
+
 function getInvoice($id) {
 	global $tb_prefix;
 	global $config;
@@ -345,7 +363,7 @@ function getInvoice($id) {
 	$invoice = mysql_fetch_array($query);
 	$invoice['date'] = date( $config['date_format'], strtotime( $invoice['date'] ) );
 	$invoice['calc_date'] = date('Y-m-d', strtotime( $invoice['date'] ) );
-	$invoice['total'] = calc_invoice_total($invoice['id']);
+	$invoice['total'] = getInvoiceTotal($invoice['id']);
 	$invoice['total_format'] = number_format($invoice['total'],2);
 	$invoice['paid'] = calc_invoice_paid($invoice['id']);
 	$invoice['paid_format'] = number_format($invoice['paid'],2);
@@ -534,7 +552,7 @@ function getInvoices(&$query) {
 		$invoice['date'] = date( $config['date_format'], strtotime( $invoice['date'] ) );
 			
 		#invoice total total - start
-		$invoice['total'] = calc_invoice_total($invoice['id']);
+		$invoice['total'] = getInvoiceTotal($invoice['id']);
 		$invoice['total_format'] = number_format($invoice['total'],2);
 		#invoice total total - end
 		
@@ -620,6 +638,61 @@ function getActiveCustomers() {
 	return $customers;
 }
 
+function insertInvoice($type) {
+	global $tb_prefix;
+	
+	$sql = "INSERT 
+			into
+		{$tb_prefix}invoices (
+			id, 
+			biller_id, 
+			customer_id, 
+			type_id,
+			preference_id, 
+			date, 
+			note,
+			custom_field1,
+			custom_field2,
+			custom_field3,
+			custom_field4
+		)
+		VALUES
+		(
+			'',
+			'$_POST[biller_id]',
+			'$_POST[customer_id]',
+			'$type',
+			'$_POST[preference_id]',
+			'$_POST[date]',
+			'$_POST[note]',
+			'$_POST[customField1]',
+			'$_POST[customField2]',
+			'$_POST[customField3]',
+			'$_POST[customField4]'
+			)";
+	
+	echo $sql."<br />";
+	return mysqlQuery($sql);
+}
+
+function updateInvoice($invoice_id) {
+		$sql = "UPDATE
+			{$tb_prefix}invoices
+		SET
+			biller_id = '$_POST[biller_id]',
+			customer_id = '$_POST[customer_id]',
+			preference_id = '$_POST[preference_id]',
+			date = '$_POST[date]',
+			note = '$_POST[note]',
+			custom_field1 = '$_POST[customField1]',
+			custom_field2 = '$_POST[customField2]',
+			custom_field3 = '$_POST[customField3]',
+			custom_field4 = '$_POST[customField4]'
+		WHERE
+			id = $invoice_id";
+			
+	return mysqlQuery($sql);
+}
 
 function getMenuStructure() {
 	$sql = "SELECT * FROM  `si_menu` WHERE enabled = 1 ORDER BY parentid,  `order`";

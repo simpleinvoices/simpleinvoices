@@ -9,7 +9,6 @@ $master_invoice_id = $_GET['submit'];
 
 $invoice = getInvoice($master_invoice_id);
 $invoiceItems = getInvoiceItems($master_invoice_id);
-	
 $customers = getActiveCustomers();
 $preference = getPreference($invoice['preference_id']);
 $billers = getActiveBillers();
@@ -31,6 +30,6 @@ $smarty -> assign("taxes",$taxes);
 $smarty -> assign("preferences",$preferences);
 $smarty -> assign("products",$products);
 $smarty -> assign("customFields",$customFields);
-
+$smarty -> assign("lines",count($invoiceItems);
 
 ?>
