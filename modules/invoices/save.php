@@ -315,7 +315,7 @@ else if ( isset( $_POST['style'] ) && $_POST['style'] === 'insert_consulting' ) 
 
 		$actual_tax = $tax['tax_percentage']  / 100 ;
 		$total_invoice_item_tax = $product['unit_price'] * $actual_tax;
-		$total_invoice_tax_amount = $total_invoice_item_tax * $_POST["i_quantity$items"];
+		$total_invoice_tax_amount = $total_invoice_item_tax * $_POST["quantity$items"];
 		$total_invoice_item = $total_invoice_item_tax + $product['unit_price'] ;	
 		$total_invoice_item_total = $total_invoice_item * $_POST["quantity$items"];
 		$total_invoice_item_gross = $product['unit_price']  * $_POST["quantity$items"];

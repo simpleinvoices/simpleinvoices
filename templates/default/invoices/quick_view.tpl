@@ -245,7 +245,7 @@
 				<td colspan=5>
 					<table width=100%>
 					<tr>
-						<td width=50% class='details_screen'>{$customFieldLabels.product_cf1}: {$invoiceItem.product.custom_field1}</td><td width=50% class='details_screen'>{$customFieldLabels.product_cf2}:
+						<td width=50% class='details_screen'>{$customFieldLabels.product_cf1}: {$invoiceItem.product.custom_field1}</td><td width="50%" class='details_screen'>{$customFieldLabels.product_cf2}:
 {$invoiceItem.product.custom_field2}</td>
                  			</tr>
 			                <tr class='itemised' >       

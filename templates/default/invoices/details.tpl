@@ -65,8 +65,8 @@
 	 {$customFields.2}
 	 {$customFields.3}
 	 {$customFields.4}
-	 
-	        <tr>       	         
+	
+		        <tr>       	         
 			<td class='details_screen'>{$LANG.gross_total}</td><td><input type="text" name="total" value='{$invoice.total}' size=10> </td>
 		</tr>
 		<tr>
@@ -86,7 +86,7 @@
 	{/if}
 
         {if $smarty.get.style === 'Consulting'}
-		<input type=hidden name="style" value="edit_invoice_consulting">
+		<input type=hidden name="style" value="edit_consulting">
 		<tr>
 		<td colspan=6>
 		<table>
@@ -100,7 +100,7 @@
 
 		
 	        <tr>
-			<td><input type=text name='quantity{$line}' value='{$invoiceItem.quantity}' size=10>aaa
+			<td><input type=text name='quantity{$line}' value='{$invoiceItem.quantity}' size=10>
 			<input type=hidden text name='id{$line}' value='{$invoiceItems.id}' size=10> </td>
 			
 	                <td input type=text name='description{$line}' size=50>

@@ -27,12 +27,38 @@
 <script type="text/javascript" src="./include/jquery/jquery.accordian.js"></script>
 <script type="text/javascript" src="./include/jquery/jquery.tabs.js"></script>
 
+{literal}
+	<!-- Additional IE/Win specific style sheet (Conditional Comments) -->
+	<!--[if lte IE 7]>
+	<link rel="stylesheet" href="./temlates/default/css/tabs-ie.css" type="text/css" media="projection, screen" />
+	<![endif]-->
+
+	<!-- Additional IE/Win specific style sheet (Conditional Comments) -->
+	<!--[if lte IE 7]>
+	<style type="text/css" media="screen, projection">
+	    body {
+		font-size: 100%; /* resizable fonts */
+	    }
+	</style>
+	<![endif]-->
+
+	<script type="text/javascript">//<![CDATA[
+	    $(document).ready(function() {
+		$('#container-1').tabs();
+		$('#trigger-tab').after('<p><a href="#" onclick="$(\'#container-1\').triggerTab(3); return false;">Activate third tab</a></p>');
+		$('#custom-tab-by-hash').title('New window').click(function() {
+		    var win = window.open(this.href, '', 'directories,location,menubar,resizable,scrollbars,status,toolbar');
+		    win.focus();
+		});
+	    });
+	//]]></script>
+	
+{/literal}
+
 
 <!-- customer-details -->
 <link rel="stylesheet" href="./templates/default/css/tabs.css" type="text/css" media="print, projection, screen" />
-{php}
-include('./templates/default/tmp.php');
-{/php}
+
 
 <script type="text/javascript" src="./modules/include/js/AJS.js"></script>
 <script type="text/javascript" src="./modules/include/js/AJS_fx.js"></script>
@@ -43,5 +69,7 @@ include('./templates/default/tmp.php');
 <script language="JavaScript" src="./modules/include/js/dhtml.js" type="text/JavaScript"></script>
 <link rel="stylesheet" href="./templates/default/css/iehacks.css" type="text/css" />
 <![endif]-->
+
+
 
 <body>
