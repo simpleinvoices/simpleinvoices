@@ -72,7 +72,7 @@
                 </td></tr>
                 
                 <tr class="text{$smarty.section.line.index} hide">
-        <td colspan=2 ><textarea input type=text name='line_item_description{$smarty.section.line.index}' rows=3 cols=80 WRAP=nowrap></textarea></td>
+        <td colspan=2 ><textarea input type=text name='description{$smarty.section.line.index}' rows=3 cols=80 WRAP=nowrap></textarea></td>
 </tr>
 
         {/section}

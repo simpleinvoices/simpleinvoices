@@ -47,9 +47,7 @@
 			{/if}
 		
 		</td>
-	</tr>	
-
-
+	</tr>
 
 
 {if $smarty.get.style === 'Total' }
@@ -130,8 +128,6 @@
 		<tr>
                         <td colspan=6 ><textarea input type=text name="consulting_item_note{$line}" rows=5 cols=70 WRAP=nowrap>{$invoiceItem.description}</textarea></td>
                 </tr>
-
-	{*$line++;*}
 	
 	{/if}
 {/foreach}
@@ -162,7 +158,7 @@
 {else}
 	<select name="tax_id">
 	{foreach from=$taxes item=tax}
-		<option {if $tax.tax_id == $invoiceItem.0.tax_id} selected {/if} value="{$tax.tax_id}">{$tax.tax_description}</option>
+		<option {if $tax.tax_id == $invoiceItems.0.tax_id} selected {/if} value="{$tax.tax_id}">{$tax.tax_description}</option>
 	{/foreach}
 	</select>
 {/if}
