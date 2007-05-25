@@ -4,7 +4,7 @@
 require_once("./modules/include/js/lgplus/php/chklang.php");
 require_once("./modules/include/js/lgplus/php/settings.php");
 
-if ($_GET['location'] === 'pdf' ) {
+if (isset($_GET['location']) && $_GET['location'] === 'pdf' ) {
 	include('./include/include_auth.php');
 }
 include_once('./config/config.php');

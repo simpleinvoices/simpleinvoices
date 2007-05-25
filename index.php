@@ -79,7 +79,11 @@ $smarty -> display("../templates/default/main.tpl");
 include_once("./modules/$file.php");
 
 //Shouldn't be necessary anymore. Ist for old files without tempaltes...
+
 if(file_exists("./templates/default/$file.tpl")) {
+	
+	$path = "../templates/default/$module/";
+	$smarty->assign("path",$path);
 	$smarty -> display("../templates/default/$file.tpl");
 }
 // If no smarty template - add message - onyl uncomment for dev - commented out for release
