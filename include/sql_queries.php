@@ -10,17 +10,18 @@ $mysql = substr(mysql_get_server_info(),0,1)+0;
  */
 function mysqlQuery($sqlQuery) {
 	$logging = 1; //Set to 1 to enable (for testing...)
-	$pattern = "/[^a-z]*SELECT|select/";
+	$pattern = "/[^a-z]*select/i";
 	$userid = 1;
-	
-	//echo $sqlQuery;
-	
-	if($logging && (preg_match($pattern,$sqlQuery) == 0)) {
-		$sql = "INSERT INTO  `si_log` (  `id` ,  `timestamp` ,  `userid` ,  `sqlquerie` ) VALUES (NULL , CURRENT_TIMESTAMP ,  '$userid',  '". addslashes ($sqlQuery)."');";
-		mysql_query($sql);
-	}
-	
+
 	if($query = mysql_query($sqlQuery)) {
+		
+		if($logging && (preg_match($pattern,$sqlQuery) == 0)) {
+			//echo mysql_insert_id()."ID";
+			$sql = "INSERT INTO  `si_log` (  `id` ,  `timestamp` ,  `userid` ,  `sqlquerie`, `last_id` ) VALUES (NULL , CURRENT_TIMESTAMP ,  '$userid',  '". addslashes (preg_replace('/\s\s+/', ' ', trim($sqlQuery)))."','".mysql_insert_id()."');";
+			//echo $sql;
+			mysql_query($sql);
+		}
+	
 		return $query;
 	}
 	else {

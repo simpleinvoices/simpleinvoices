@@ -85,6 +85,7 @@
 							</li>
 						</ul>
 					</li>
+					<li><a href="./index.php?module=reports&view=database_log">Database Log</a></li>
 				</ul>
 			</li>
 			<li><a href="#">{$LANG.options} +</a>
