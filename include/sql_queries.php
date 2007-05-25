@@ -25,7 +25,7 @@ function mysqlQuery($sqlQuery) {
 		return $query;
 	}
 	else {
-		echo $sql."<br />".mysql_error();
+		echo $sqlQuery."<br />".mysql_error();
 	}
 }
 
@@ -381,6 +381,7 @@ function getInvoice($id) {
 	return $invoice;
 }
 
+
 function getInvoiceItems($id) {
 	global $tb_prefix;
 	$sql = "SELECT * FROM {$tb_prefix}invoice_items WHERE invoice_id =$id";
@@ -677,6 +678,7 @@ function insertInvoice($type) {
 }
 
 function updateInvoice($invoice_id) {
+	global $tb_prefix;
 		$sql = "UPDATE
 			{$tb_prefix}invoices
 		SET
@@ -707,7 +709,7 @@ function insertInvoiceItem() {
 		$total_invoice_item_gross = $product['unit_price']  * $_POST["quantity"];
 		
 		
-		$sql = "INSERT INTO {$tb_prefix}invoice_items VALUES ('',$_POST[invoice_id],$_POST[quantity],{$_POST['product']},{$product['unit_price']},'$_POST[tax_id]',{$tax['tax_percentage']},$total_invoice_tax_amount,$total_invoice_item_gross,'$_POST[description]',$total_invoice_item_total)";
+		$sql = "INSERT INTO {$tb_prefix}invoice_items VALUES ('NULL',$_POST[invoice_id],$_POST[quantity],{$_POST['product']},{$product['unit_price']},'$_POST[tax_id]',{$tax['tax_percentage']},$total_invoice_tax_amount,$total_invoice_item_gross,'$_POST[description]',$total_invoice_item_total)";
 		echo $sql;
 		mysqlQuery($sql);
 

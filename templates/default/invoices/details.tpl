@@ -74,7 +74,7 @@
 {if $smarty.get.style === 'Itemised' || $smarty.get.style === 'Consulting' }
 
      {if $smarty.get.style === 'Itemised' }
-		<input type=hidden name="style" value="itemised">
+		<input type=hidden name="style" value="edit_itemised">
 		<tr>
 		<td colspan=6>
 		<table>
@@ -98,8 +98,8 @@
 	<td><a href="./index.php?module=invoices&view=add_invoice_item&invoice={$invoice.id}&style={$smarty.get.style}&tax_id={$invoiceItems.0.tax_id}">Add Invoice Item</a></td><td></td>
 	</tr>
 	
-{foreach from=$invoiceItems item=invoiceItem}
-
+{foreach key=line from=$invoiceItems item=invoiceItem}
+		
 		
 	        <tr>
 			<td><input type=text name='quantity{$line}' value='{$invoiceItem.quantity}' size=10>
@@ -110,7 +110,7 @@
 	                {if $products == null }
 	<p><em>{$LANG.no_products}</em></p>
 {else}
-	<select name="products$line">
+	<select name="products{$line}">
 	{foreach from=$products item=product}
 		<option {if $product.id == $invoiceItem.product_id} selected {/if} value="{$product.id}">{$product.description}</option>
 	{/foreach}

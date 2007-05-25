@@ -13,6 +13,7 @@
 	
 	$pattern = "/.*INSERT INTO si_invoices /i";
 
+	echo '<input type="text" class="date-picker" name="date" id="date1" value=""></input>';
 	while($res = mysql_fetch_array($query)) {
 		
 		$pattern = "/.*INSERT INTO si_invoices /i";
