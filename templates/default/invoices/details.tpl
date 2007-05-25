@@ -72,7 +72,7 @@
 {/if}
 
 {if $smarty.get.style === 'Itemised' || $smarty.get.style === 'Consulting' }
-	
+
      {if $smarty.get.style === 'Itemised' }
 		<input type=hidden name="style" value="itemised">
 		<tr>
@@ -92,7 +92,11 @@
                         <td class='details_screen'>{$LANG.quantity_short}</td><td class='details_screen'>{$LANG.item}</td>
                 </tr>
         {/if}
-
+			
+			
+	<tr>
+	<td><a href="./index.php?module=invoices&view=add_invoice_item&invoice={$invoice.id}&style={$smarty.get.style}&tax_id={$invoiceItems.0.tax_id}">Add Invoice Item</a></td><td></td>
+	</tr>
 	
 {foreach from=$invoiceItems item=invoiceItem}
 

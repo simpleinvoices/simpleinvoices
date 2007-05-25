@@ -634,7 +634,9 @@ NULL , 'logging', '0'
 ) ENGINE = MYISAM ;";
 	$patch['123']['date'] = "20070523";
 
-
+	$patch['124']['name'] = "Change log table that usernames are also possible as id";
+	$patch['124']['patch'] = "ALTER TABLE `si_log` CHANGE `userid` `userid` VARCHAR( 40 ) NOT NULL DEFAULT '0'";
+	$patch['124']['date'] = "20070525";
 
 
 

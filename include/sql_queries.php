@@ -695,6 +695,24 @@ function updateInvoice($invoice_id) {
 	return mysqlQuery($sql);
 }
 
+function insertInvoiceItem() {
+	global $tb_prefix;
+	$tax = getTaxRate($_POST['tax_id']);
+	$product = getProduct($_POST['product']);
+		$actual_tax = $tax['tax_percentage']  / 100 ;
+		$total_invoice_item_tax = $product['unit_price'] * $actual_tax;
+		$total_invoice_tax_amount = $total_invoice_item_tax * $_POST["quantity"];
+		$total_invoice_item = $total_invoice_item_tax + $product['unit_price'] ;	
+		$total_invoice_item_total = $total_invoice_item * $_POST["quantity"];
+		$total_invoice_item_gross = $product['unit_price']  * $_POST["quantity"];
+		
+		
+		$sql = "INSERT INTO {$tb_prefix}invoice_items VALUES ('',$_POST[invoice_id],$_POST[quantity],{$_POST['product']},{$product['unit_price']},'$_POST[tax_id]',{$tax['tax_percentage']},$total_invoice_tax_amount,$total_invoice_item_gross,'$_POST[description]',$total_invoice_item_total)";
+		echo $sql;
+		mysqlQuery($sql);
+
+}
+
 function getMenuStructure() {
 	$sql = "SELECT * FROM  `si_menu` WHERE enabled = 1 ORDER BY parentid,  `order`";
 	$query = mysqlQuery($sql) or die(mysql_error());
