@@ -56,7 +56,7 @@
         	        <td colspan=6 class='details_screen'>{$LANG.description}</td>
 	        </tr>
 	        <tr>
-			<td colspan=6 ><textarea input type=text name="description" rows=10 cols=70 WRAP=nowrap>{$invoiceItems.0.description}</textarea></td>
+			<td colspan=6 ><textarea input type=text name="description0" rows=10 cols=70 WRAP=nowrap>{$invoiceItems.0.description}</textarea></td>
         	</tr>
 
 	 {$customFields.1}
@@ -65,7 +65,13 @@
 	 {$customFields.4}
 	
 		        <tr>       	         
-			<td class='details_screen'>{$LANG.gross_total}</td><td><input type="text" name="total" value='{$invoice.total}' size=10> </td>
+			<td class='details_screen'>{$LANG.gross_total}</td><td><input type="text" name="unit_price" value="{$invoiceItems.0.unit_price}" size=10 />
+			<input type="hidden" name="quantity0" value="1">
+			<input type="hidden" name="id0" value="{$invoiceItems.0.id}">
+			<input type="hidden" name="products0" value="{$invoiceItems.0.product_id}">
+			
+			</td>
+			
 		</tr>
 		<tr>
 
@@ -102,10 +108,10 @@
 		
 		
 	        <tr>
-			<td><input type=text name='quantity{$line}' value='{$invoiceItem.quantity}' size=10>
-			<input type=hidden text name='id{$line}' value='{$invoiceItems.id}' size=10> </td>
+			<td><input type="text" name='quantity{$line}' value='{$invoiceItem.quantity}' size="10">
+			<input type="hidden" name='id{$line}' value='{$invoiceItem.id}' size="10"> </td>
 			
-	                <td input type=text name='description{$line}' size=50>
+	                <td>
 	                
 	                {if $products == null }
 	<p><em>{$LANG.no_products}</em></p>
@@ -128,9 +134,9 @@
 
 		<tr>
 
-			<td colspan=6 class='details_screen'>{$LANG.description}</td>
+			<td colspan="6" class="details_screen">{$LANG.description}</td>
 		<tr>
-                        <td colspan=6 ><textarea input type=text name="consulting_item_note{$line}" rows=5 cols=70 WRAP=nowrap>{$invoiceItem.description}</textarea></td>
+                        <td colspan="6"><textarea input type="text" name="description{$line}" rows=5 cols=70 wrap="nowrap">{$invoiceItem.description}</textarea></td>
                 </tr>
 	
 	{/if}

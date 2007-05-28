@@ -637,6 +637,12 @@ NULL , 'logging', '0'
 	$patch['124']['name'] = "Change log table that usernames are also possible as id";
 	$patch['124']['patch'] = "ALTER TABLE `si_log` CHANGE `userid` `userid` VARCHAR( 40 ) NOT NULL DEFAULT '0'";
 	$patch['124']['date'] = "20070525";
+	
+	$patch['125']['name'] = "Add visible attribute to the products table";
+	$patch['125']['patch'] = "ALTER TABLE  `si_products` ADD  `visible` BOOL NOT NULL DEFAULT  '1';";
+	$patch['125']['date'] = "20070528";
+
+
 
 
 

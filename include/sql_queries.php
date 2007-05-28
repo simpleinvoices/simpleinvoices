@@ -248,7 +248,7 @@ function getProducts() {
 	global $tb_prefix;
 	global $LANG;
 	
-	$sql = "SELECT * FROM {$tb_prefix}products ORDER BY description";
+	$sql = "SELECT * FROM {$tb_prefix}products WHERE visible = 1 ORDER BY description";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	
 	$products = null;
@@ -697,22 +697,58 @@ function updateInvoice($invoice_id) {
 	return mysqlQuery($sql);
 }
 
-function insertInvoiceItem() {
+function insertInvoiceItem($invoice_id,$quantity,$product_id,$tax_id,$description) {
 	global $tb_prefix;
-	$tax = getTaxRate($_POST['tax_id']);
-	$product = getProduct($_POST['product']);
-		$actual_tax = $tax['tax_percentage']  / 100 ;
-		$total_invoice_item_tax = $product['unit_price'] * $actual_tax;
-		$total_invoice_tax_amount = $total_invoice_item_tax * $_POST["quantity"];
-		$total_invoice_item = $total_invoice_item_tax + $product['unit_price'] ;	
-		$total_invoice_item_total = $total_invoice_item * $_POST["quantity"];
-		$total_invoice_item_gross = $product['unit_price']  * $_POST["quantity"];
-		
-		
-		$sql = "INSERT INTO {$tb_prefix}invoice_items VALUES ('NULL',$_POST[invoice_id],$_POST[quantity],{$_POST['product']},{$product['unit_price']},'$_POST[tax_id]',{$tax['tax_percentage']},$total_invoice_tax_amount,$total_invoice_item_gross,'$_POST[description]',$total_invoice_item_total)";
-		echo $sql;
-		mysqlQuery($sql);
+	
+	$tax = getTaxRate($tax_id);
+	$product = getProduct($product_id);
+	
+	$actual_tax = $tax['tax_percentage']  / 100 ;
+	$total_invoice_item_tax = $product['unit_price'] * $actual_tax;
+	$tax_amount = $total_invoice_item_tax * $quantity;
+	$total_invoice_item = $total_invoice_item_tax + $product['unit_price'] ;	
+	$total = $total_invoice_item * $quantity;
+	$gross_total = $product['unit_price']  * $quantity;
+	
+	$sql = "INSERT INTO {$tb_prefix}invoice_items (`invoice_id`,`quantity`,`product_id`,`unit_price`,`tax_id`,`tax`,`tax_amount`,`gross_total`,`description`,`total`) VALUES ($invoice_id,$quantity,$product[id],$product[unit_price],'$tax[tax_id]',$tax[tax_percentage],$tax_amount,$gross_total,'$description',$total)";
 
+	echo $sql;
+	return mysqlQuery($sql);
+
+}
+
+function updateInvoiceItem($id,$quantity,$product_id,$tax_id,$description) {
+
+	global $tb_prefix;
+	
+	$product = getProduct($product_id);
+	$tax = getTaxRate($tax_id);
+	
+	$total_invoice_item_tax = $product['unit_price'] * $tax['tax_percentage'] / 100;	//:100?
+	$tax_amount = $total_invoice_item_tax * $quantity;
+	$total_invoice_item = $total_invoice_item_tax + $product['unit_price'];
+	$total = $total_invoice_item * $quantity;
+	$gross_total = $product['unit_price'] * $quantity;
+	
+	global $tb_prefix;
+	
+	$sql = "UPDATE {$tb_prefix}invoice_items 
+	SET `quantity` =  '$quantity',
+	`product_id` = '$product_id',
+	`unit_price` = '$product[unit_price]',
+	`tax_id` = '$tax_id',
+	`tax` = '$tax[tax_percentage]',
+	`tax_amount` = '$tax_amount',
+	`gross_total` = '$gross_total',
+	`description` = '$description',
+	`total` = '$total'			
+	WHERE  `id` = '$id'";
+	
+	echo $sql;
+	
+	//exit();
+	
+	return mysqlQuery($sql);
 }
 
 function getMenuStructure() {

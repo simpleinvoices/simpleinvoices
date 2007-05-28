@@ -12,12 +12,13 @@
         {section name=line start=0 loop=$dynamic_line_items step=1}
 
 			<tr>
-				<td><input type=text name="quantity{$smarty.section.line.index}" size="5"></td><td input type=text name="i_description{$smarty.section.line.index}" size="50">
+				<td><input type=text name="quantity{$smarty.section.line.index}" size="5"></td>
+				<td>
 				                
 			{if $products == null }
 				<p><em>{$LANG.no_products}</em></p>
 			{else}
-				<select name="select_products{$smarty.section.line.index}">
+				<select name="products{$smarty.section.line.index}">
 					<option value=""></option>
 				{foreach from=$products item=product}
 					<option {if $product.id == $defaults.product} selected {/if} value="{$product.id}">{$product.description}</option>
@@ -42,7 +43,8 @@
         <td colspan=2><textarea input type=text name="note" rows=5 cols=70 WRAP=nowrap></textarea></td>
 </tr>
 
-<tr><td class="details_screen">{$LANG.tax}</td><td input type=text name="tax" size=15>
+<tr><td class="details_screen">{$LANG.tax}</td>
+<td>
 
 {if $taxes == null }
 	<p><em>{$LANG.no_taxes}</em></p>

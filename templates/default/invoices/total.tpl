@@ -23,7 +23,7 @@
 	<td class="details_screen">{$LANG.gross_total}</td><td class="details_screen">{$LANG.tax}</td><td class="details_screen">{$LANG.inv_pref}</td>
 </tr>
 <tr>
-	<td><input type=text name="total" size=15></td><td input type=text name="tax" size=15>
+	<td><input type="text" name="unit_price" size="15"></td><td input type=text name="tax" size=15>
 	
 	{if $taxes == null }
 	<p><em>{$LANG.no_taxes}</em></p>
