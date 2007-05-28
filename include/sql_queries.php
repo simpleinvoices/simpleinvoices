@@ -13,15 +13,15 @@ function mysqlQuery($sqlQuery) {
 	$pattern = "/[^a-z]*select/i";
 	$userid = 1;
 
-	if($query = mysql_query($sqlQuery)) {
-		
-		if($logging && (preg_match($pattern,$sqlQuery) == 0)) {
-			//echo mysql_insert_id()."ID";
-			$sql = "INSERT INTO  `si_log` (  `id` ,  `timestamp` ,  `userid` ,  `sqlquerie`, `last_id` ) VALUES (NULL , CURRENT_TIMESTAMP ,  '$userid',  '". addslashes (preg_replace('/\s\s+/', ' ', trim($sqlQuery)))."','".mysql_insert_id()."');";
-			//echo $sql;
-			mysql_query($sql);
-		}
 	
+	if($logging && (preg_match($pattern,$sqlQuery) == 0)) {
+		//echo mysql_insert_id()."ID";
+		$sql = "INSERT INTO  `si_log` (  `id` ,  `timestamp` ,  `userid` ,  `sqlquerie`, `last_id` ) VALUES (NULL , CURRENT_TIMESTAMP ,  '$userid',  '". addslashes (preg_replace('/\s\s+/', ' ', trim($sqlQuery)))."','".mysql_insert_id()."');";
+		//echo $sql;
+		mysql_query($sql);
+	}
+	
+	if($query = mysql_query($sqlQuery)) {
 		return $query;
 	}
 	else {
@@ -702,7 +702,7 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$tax_id,$descriptio
 	
 	$tax = getTaxRate($tax_id);
 	$product = getProduct($product_id);
-	
+	print_r($product);
 	$actual_tax = $tax['tax_percentage']  / 100 ;
 	$total_invoice_item_tax = $product['unit_price'] * $actual_tax;
 	$tax_amount = $total_invoice_item_tax * $quantity;
@@ -710,7 +710,7 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$tax_id,$descriptio
 	$total = $total_invoice_item * $quantity;
 	$gross_total = $product['unit_price']  * $quantity;
 	
-	$sql = "INSERT INTO {$tb_prefix}invoice_items (`invoice_id`,`quantity`,`product_id`,`unit_price`,`tax_id`,`tax`,`tax_amount`,`gross_total`,`description`,`total`) VALUES ($invoice_id,$quantity,$product[id],$product[unit_price],'$tax[tax_id]',$tax[tax_percentage],$tax_amount,$gross_total,'$description',$total)";
+	$sql = "INSERT INTO {$tb_prefix}invoice_items (`invoice_id`,`quantity`,`product_id`,`unit_price`,`tax_id`,`tax`,`tax_amount`,`gross_total`,`description`,`total`) VALUES ($invoice_id,$quantity,$product_id,$product[unit_price],'$tax[tax_id]',$tax[tax_percentage],$tax_amount,$gross_total,'$description',$total)";
 
 	echo $sql;
 	return mysqlQuery($sql);

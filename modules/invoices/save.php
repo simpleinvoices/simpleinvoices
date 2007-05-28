@@ -13,6 +13,7 @@ if(!isset( $_POST['style'])) {
 	exit("no save action");
 }
 
+
 #insert invoice_total - start
 if ( $_POST['style'] === 'insert_total' ) {
 
@@ -24,10 +25,14 @@ if ( $_POST['style'] === 'insert_total' ) {
 
 	$invoice_id = mysql_insert_id();
 	
+	
 	$sql = "INSERT INTO {$tb_prefix}products (`unit_price`,`description`,`enabled`,`visible`) VALUES('$_POST[unit_price]','$_POST[description]',0,0);";
-	mysqlQuery($sql);
+	mysqlQuery($sql) or die(mysql_error());
+	
 	$product_id = mysql_insert_id();
-
+	//echo mysql_insert_id()."AA";
+	//echo $product_id."èèè";
+	//exit($sql);
 
 	if (insertInvoiceItem($invoice_id,1,$product_id,$_POST['tax_id'],$_POST['description'])) {
 		$display_block_items = $LANG['save_invoice_items_success'];

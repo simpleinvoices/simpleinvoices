@@ -156,7 +156,7 @@ EOD;
 		# now update the {$tb_prefix}sql_patchmanager table
 		
 		
-		$sql_update = "INSERT INTO {$tb_prefix}sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ($id,'$patch[name]',$patch[date],'')";
+		$sql_update = "INSERT INTO {$tb_prefix}sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ($id,'$patch[name]',$patch[date],'".addslashes($patch['patch'])."')";
 		
 		/*echo $sql_update;*/
 
