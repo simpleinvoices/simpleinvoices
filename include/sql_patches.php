@@ -642,6 +642,9 @@ NULL , 'logging', '0'
 	$patch['125']['patch'] = "ALTER TABLE  `si_products` ADD  `visible` BOOL NOT NULL DEFAULT  '1';";
 	$patch['125']['date'] = "20070528";
 
+	$patch['126']['name'] = "Add last_id to logging table";
+	$patch['126']['patch'] = "ALTER TABLE  `si_log` ADD  `last_id` INT NULL ;";
+	$patch['126']['date'] = "20070528";
 
 
 
