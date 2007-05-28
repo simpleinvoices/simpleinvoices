@@ -16,6 +16,7 @@
 				<ul>
 					<li><a href="index.php?module=customers&view=manage">{$LANG.manage_customers}</a></li>
 					<li><a href="index.php?module=customers&view=add">{$LANG.add_customer}</a></li>
+					<li><a href="index.php?module=customers&view=search">Search customer</a></li>
 				</ul>
 			</li>
 			<li><a href="index.php?module=products&view=manage">{$LANG.products} +</a>

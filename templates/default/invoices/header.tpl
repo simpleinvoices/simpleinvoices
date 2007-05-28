@@ -30,7 +30,7 @@
 {else}
 	<select name="customer_id">
 	{foreach from=$customers item=customer}
-		<option {if $customer.id == $defaults.customer} selected {/if} value="{$customer.id}">{$customer.name}</option>
+		<option {if $smarty.get.customer == $customer.id} selected {/if} value="{$customer.id}">{$customer.name}</option>
 	{/foreach}
 	</select>
 {/if}

@@ -537,7 +537,21 @@ function insertCustomer() {
 	return mysqlQuery($sql);
 	
 }
-		
+
+function searchCustomers($search) {
+	$sql = "SELECT * FROM  `si_customers` WHERE  `name` LIKE  '%$search%'";
+	$query = mysqlQuery($sql);
+	
+	$customers = null;
+	
+	for($i=0;$customer = mysql_fetch_array($query);$i++) {
+		$customers[$i] = $customer;
+	}
+	//echo $sql;
+	
+	//print_r($customers);
+	return $customers;
+}	
 		
 
 function getInvoices(&$query) {
