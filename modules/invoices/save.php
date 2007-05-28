@@ -25,7 +25,6 @@ if ( $_POST['style'] === 'insert_total' ) {
 
 	$invoice_id = mysql_insert_id();
 	
-	
 	$sql = "INSERT INTO {$tb_prefix}products (`unit_price`,`description`,`enabled`,`visible`) VALUES('$_POST[unit_price]','$_POST[description]',0,0);";
 	mysqlQuery($sql) or die(mysql_error());
 	

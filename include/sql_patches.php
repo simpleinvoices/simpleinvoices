@@ -645,6 +645,11 @@ NULL , 'logging', '0'
 	$patch['126']['name'] = "Add last_id to logging table";
 	$patch['126']['patch'] = "ALTER TABLE  `si_log` ADD  `last_id` INT NULL ;";
 	$patch['126']['date'] = "20070528";
+	
+	$patch['127']['name'] = "Remove id from si_log to provent mysql_insert_id problems";
+	$patch['127']['patch'] = "ALTER TABLE  `si_log` DROP  `id`";
+	$patch['127']['date'] = "20070528";
+
 
 
 
