@@ -15,9 +15,7 @@ function mysqlQuery($sqlQuery) {
 
 	
 	if($logging && (preg_match($pattern,$sqlQuery) == 0)) {
-		//echo mysql_insert_id()."ID";
 		$sql = "INSERT INTO  `si_log` (  `id` ,  `timestamp` ,  `userid` ,  `sqlquerie`, `last_id` ) VALUES (NULL , CURRENT_TIMESTAMP ,  '$userid',  '". addslashes (preg_replace('/\s\s+/', ' ', trim($sqlQuery)))."','".mysql_insert_id()."');";
-		//echo $sql;
 		mysql_query($sql);
 	}
 	
@@ -673,7 +671,8 @@ function insertInvoice($type) {
 			'$_POST[customField4]'
 			)";
 	
-	echo $sql."<br />";
+	//echo $sql."<br />";
+	
 	return mysqlQuery($sql);
 }
 
@@ -712,7 +711,7 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$tax_id,$descriptio
 	
 	$sql = "INSERT INTO {$tb_prefix}invoice_items (`invoice_id`,`quantity`,`product_id`,`unit_price`,`tax_id`,`tax`,`tax_amount`,`gross_total`,`description`,`total`) VALUES ($invoice_id,$quantity,$product_id,$product[unit_price],'$tax[tax_id]',$tax[tax_percentage],$tax_amount,$gross_total,'$description',$total)";
 
-	echo $sql;
+	//echo $sql;
 	return mysqlQuery($sql);
 
 }
@@ -744,10 +743,8 @@ function updateInvoiceItem($id,$quantity,$product_id,$tax_id,$description) {
 	`total` = '$total'			
 	WHERE  `id` = '$id'";
 	
-	echo $sql;
-	
-	//exit();
-	
+	//echo $sql;
+		
 	return mysqlQuery($sql);
 }
 
