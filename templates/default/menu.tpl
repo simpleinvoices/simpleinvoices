@@ -10,6 +10,7 @@
 					<li><a href="index.php?module=invoices&view=total">{$LANG.new_invoice_total}</a></li>
 					<li><a href="index.php?module=invoices&view=itemised">{$LANG.new_invoice_itemised}</a></li>
 					<li><a href="index.php?module=invoices&view=consulting">{$LANG.new_invoice_consulting}</a></li>
+					<li><a href="index.php?module=invoices&view=search">Search invoices</a></li>
 				</ul>
 			</li>
 			<li><a href="index.php?module=customers&view=manage">{$LANG.customers} +</a>
