@@ -229,6 +229,28 @@ function getPaymentTypes() {
 	return $paymentTypes;
 }
 
+function getActivePaymentTypes() {
+	global $tb_prefix;
+	global $LANG;
+	
+	$sql = "SELECT * FROM {$tb_prefix}payment_types WHERE pt_enabled != 0 ORDER BY pt_description";
+	$query = mysqlQuery($sql) or die(mysql_error());
+	
+	$paymentTypes = null;
+
+	for ($i=0;$paymentType = mysql_fetch_array($query);$i++) {
+		if ($paymentType['pt_enabled'] == 1) {
+			$paymentType['pt_enabled'] = $LANG['enabled'];
+		} else {
+			$paymentType['pt_enabled'] = $LANG['disabled'];
+		}
+		$paymentTypes[$i]=$paymentType;
+	}
+	
+	return $paymentTypes;
+}
+
+
 function getProduct($id) {
 	global $tb_prefix;
 	global $LANG;

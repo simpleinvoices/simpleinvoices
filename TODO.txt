@@ -158,6 +158,7 @@ if (!defined("BROWSE")) {
 checkLogin();
 
 - Make custom_fields dynamic with the following tables
+
 customFieldsCategorie
 id,name (product,customer,biller,...)
 
@@ -166,6 +167,9 @@ id,categorieId,value
 
 customFieldsValues
 id,cateogireId,customFieldId,itemId,value
+
+customFieldType (can be added as plugin or so...)
+id, name, 
 
 
 - Store Menu in the database...

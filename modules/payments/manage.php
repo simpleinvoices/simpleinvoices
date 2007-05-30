@@ -14,13 +14,13 @@ if (!empty($_GET['id'])) {
 elseif (!empty($_GET['c_id'])) {
 
 
-	$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.name as CNAME, {$tb_prefix}biller.name as BNAME from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.biller_id = {$tb_prefix}biller.id and {$tb_prefix}customers.id='$_GET[c_id]' ORDER BY {$tb_prefix}account_payments.id DESC ";
+	$sql = "SELECT {$tb_prefix}account_payments.*, {$tb_prefix}customers.name as CNAME, {$tb_prefix}biller.name as BNAME from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.biller_id = {$tb_prefix}biller.id and {$tb_prefix}customers.id='$_GET[c_id]' ORDER BY {$tb_prefix}account_payments.id DESC ";
 }
 #if you want to show all invoices - no filters
 else {
 
 
-	$sql = "select {$tb_prefix}account_payments.*, {$tb_prefix}customers.name as CNAME, {$tb_prefix}biller.name as BNAME from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  where ac_inv_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.biller_id = {$tb_prefix}biller.id ORDER BY {$tb_prefix}account_payments.id DESC";
+	$sql = "SELECT {$tb_prefix}account_payments.*, {$tb_prefix}customers.name as CNAME, {$tb_prefix}biller.name as BNAME from {$tb_prefix}account_payments, {$tb_prefix}invoices, {$tb_prefix}customers, {$tb_prefix}biller  WHERE ac_inv_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.biller_id = {$tb_prefix}biller.id ORDER BY {$tb_prefix}account_payments.id DESC";
 }
 
 $query = mysqlQuery($sql);
@@ -28,7 +28,7 @@ $datas = null;
 
 for($i=0;$data = mysql_fetch_array($query);$i++) {
 
-		$sql = "SELECT pt_description FROM {$tb_prefix}payment_types where pt_id = {$data['ac_payment_type']}";
+		$sql = "SELECT pt_description FROM {$tb_prefix}payment_types WHERE pt_id = {$data['ac_payment_type']}";
 		$query2 = mysqlQuery($sql);
 
 		$pt = mysql_fetch_array($query2);

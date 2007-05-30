@@ -6,16 +6,11 @@ checkLogin();
 
 # Deal with op and add some basic sanity checking
 
-$op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
-
-
-extract( $_POST );
-
 #insert - process payment
 #op=pay_selected_invoice means the user came from the print_view or manage_invoces
 #op=pay_invoice means the user came from the process_paymen page
 
-if ( $op === 'pay_invoice' OR $op === 'pay_selected_invoice' ) {
+if ( isset($_POST['process_payment']) ) {
 
 	$sql = "INSERT into
 			{$tb_prefix}account_payments
@@ -30,29 +25,12 @@ if ( $op === 'pay_invoice' OR $op === 'pay_selected_invoice' ) {
 			)";
 
 	if (mysqlQuery($sql, $conn)) {
-		if ( $op === 'pay_selected_invoice' ) {
-			$display_block =  $LANG['save_payment_invoice_success'];
-		}
-		if ( $op === 'pay_invoice' ) {
-			$display_block =  $LANG['save_payment_success'];
-		}
-		
-
+		$display_block =  $LANG['save_payment_success'];
 	} else {
 		$display_block =  $LANG['save_payment_failure']."<br>".$sql;
 	}
 
-	if ( $op === 'pay_selected_invoice' ) {
-
-		//header( 'refresh: 2; url=manage_invoices.php' );
-		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=invoices&view=manage>";
-
-	}
-	else if ( $op === 'pay_invoice' ) {
-		//header( 'refresh: 2; url=process_payment.php?op=pay_invoice' );
-		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=payments&view=manage>";
-	}
-
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=payments&view=manage>";
 }
 
 
