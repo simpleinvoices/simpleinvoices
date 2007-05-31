@@ -65,6 +65,8 @@ if ( $_POST['style'] === 'insert_itemised' || $_POST['style'] === 'insert_consul
 
 	//get the invoice id from the insert
 	$invoice_id = mysql_insert_id();
+	echo $invoice_id;
+	exit();
 	
 	for($i=0;!empty($_POST["quantity$i"]) && $i < $_POST['max_items']; $i++) {
 

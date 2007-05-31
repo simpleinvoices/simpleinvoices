@@ -1,22 +1,30 @@
 <?php
 
-$conn = mysql_connect( $db_host, $db_user, $db_password );
+if(LOGGING) {
+	//Logging connection to prevent mysql_insert_id problems. Need to be called before the second connect...
+	$log = mysql_connect( $db_host, $db_user, $db_password );
+	mysql_select_db( $db_name, $log );
+}
+
+$conn = mysql_connect( $db_host, $db_user, $db_password,true );
 mysql_select_db( $db_name, $conn );
-$mysql = substr(mysql_get_server_info(),0,1)+0;
+
+$mysql = substr(mysql_get_server_info(),0,1)+0;	//mysql version
 
 
 /**
  * Used for logging all queries
  */
 function mysqlQuery($sqlQuery) {
-	$logging = 1; //Set to 1 to enable (for testing...)
+	global $log;
+	global $conn;
 	$pattern = "/[^a-z]*select/i";
 	$userid = 1;
 
-	if($query = mysql_query($sqlQuery)) {
-		if($logging && (preg_match($pattern,$sqlQuery) == 0)) {
-			$sql = "INSERT INTO  `si_log` (`timestamp` ,  `userid` ,  `sqlquerie`, `last_id` ) VALUES (CURRENT_TIMESTAMP ,  '$userid',  '". addslashes (preg_replace('/\s\s+/', ' ', trim($sqlQuery)))."','".mysql_insert_id()."');";
-			mysql_unbuffered_query($sql);
+	if($query = mysql_query($sqlQuery,$conn)) {
+		if(LOGGING && (preg_match($pattern,$sqlQuery) == 0)) {
+			$sql = "INSERT INTO  `si_log` (`id`,`timestamp` ,  `userid` ,  `sqlquerie`, `last_id` ) VALUES (NULL,CURRENT_TIMESTAMP ,  '$userid',  '". addslashes (preg_replace('/\s\s+/', ' ', trim($sqlQuery)))."','".mysql_insert_id()."');";
+			mysql_unbuffered_query($sql,$log);
 		}
 		return $query;
 	}
@@ -26,16 +34,16 @@ function mysqlQuery($sqlQuery) {
 }
 
 function getCustomer($id) {
-	global $tb_prefix;
-	$print_customer = "SELECT * FROM {$tb_prefix}customers WHERE id = $id";
+	
+	$print_customer = "SELECT * FROM ".TB_PREFIX."customers WHERE id = $id";
 	$result_print_customer = mysqlQuery($print_customer) or die(mysql_error());
 	return mysql_fetch_array($result_print_customer);
 }
 
 function getBiller($id) {
-	global $tb_prefix;
+	
 	global $LANG;
-	$print_biller = "SELECT * FROM {$tb_prefix}biller WHERE id = $id";
+	$print_biller = "SELECT * FROM ".TB_PREFIX."biller WHERE id = $id";
 	$result_print_biller = mysqlQuery($print_biller) or die(mysql_error());
 	$biller = mysql_fetch_array($result_print_biller);
 	$biller['wording_for_enabled'] = $biller['enabled']==1?$LANG['enabled']:$LANG['disabled'];
@@ -43,9 +51,9 @@ function getBiller($id) {
 }
 
 function getPreference($id) {
-	global $tb_prefix;
+	
 	global $LANG;
-	$print_preferences = "SELECT * FROM {$tb_prefix}preferences WHERE pref_id = $id";
+	$print_preferences = "SELECT * FROM ".TB_PREFIX."preferences WHERE pref_id = $id";
 	$result_print_preferences  = mysqlQuery($print_preferences) or die(mysql_error());
 	$preference = mysql_fetch_array($result_print_preferences);
 	$preference['enabled'] = $preference['pref_enabled']==1?$LANG['enabled']:$LANG['disabled'];
@@ -53,8 +61,8 @@ function getPreference($id) {
 }
 
 function getSQLPatches() {
-	global $tb_prefix;
-	$sql = "SELECT * FROM {$tb_prefix}sql_patchmanager ORDER BY sql_release";                  
+	
+	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager ORDER BY sql_release";                  
 	$query = mysqlQuery($sql) or die(mysql_error());
 
 	$patches = null;
@@ -66,10 +74,10 @@ function getSQLPatches() {
 }
 
 function getPreferences() {
-	global $tb_prefix;
+	
 	global $LANG;
 	
-	$sql = "SELECT * FROM {$tb_prefix}preferences ORDER BY pref_description";
+	$sql = "SELECT * FROM ".TB_PREFIX."preferences ORDER BY pref_description";
 	$query  = mysqlQuery($sql) or die(mysql_error());
 	
 	$preferences = null;
@@ -89,10 +97,10 @@ function getPreferences() {
 }
 
 function getActiveTaxes() {
-	global $tb_prefix;
+	
 	global $LANG;
 	
-	$sql = "SELECT * FROM {$tb_prefix}tax WHERE tax_enabled != 0 ORDER BY tax_description";
+	$sql = "SELECT * FROM ".TB_PREFIX."tax WHERE tax_enabled != 0 ORDER BY tax_description";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	
 	$taxes = null;
@@ -111,9 +119,9 @@ function getActiveTaxes() {
 }
 
 function getActivePreferences() {
-	global $tb_prefix;
 	
-	$sql = "SELECT * FROM {$tb_prefix}preferences WHERE pref_enabled ORDER BY pref_description";
+	
+	$sql = "SELECT * FROM ".TB_PREFIX."preferences WHERE pref_enabled ORDER BY pref_description";
 	$query  = mysqlQuery($sql) or die(mysql_error());
 	
 	$preferences = null;
@@ -127,9 +135,9 @@ function getActivePreferences() {
 
 function getCustomFieldLabels() {
 	global $LANG;
-	global $tb_prefix;
 	
-	$sql = "SELECT * FROM {$tb_prefix}custom_fields ORDER BY cf_custom_field";
+	
+	$sql = "SELECT * FROM ".TB_PREFIX."custom_fields ORDER BY cf_custom_field";
 	$result = mysqlQuery($sql) or die(mysql_error());
 	
 	for($i=0;$customField = mysql_fetch_array($result);$i++) {
@@ -146,10 +154,10 @@ function getCustomFieldLabels() {
  
 
 function getBillers() {
-	global $tb_prefix;
+	
 	global $LANG;
 	
-	$sql = "SELECT * FROM {$tb_prefix}biller ORDER BY name";
+	$sql = "SELECT * FROM ".TB_PREFIX."biller ORDER BY name";
 	$query  = mysqlQuery($sql) or die(mysql_error());
 	
 	$billers = null;
@@ -168,8 +176,8 @@ function getBillers() {
 }
 
 function getActiveBillers() {
-	global $tb_prefix;
-	$sql = "SELECT * FROM {$tb_prefix}biller WHERE enabled != 0 ORDER BY name";
+	
+	$sql = "SELECT * FROM ".TB_PREFIX."biller WHERE enabled != 0 ORDER BY name";
 	$query = mysqlQuery($sql) or die(mysql_error());
 		
 	$billers = null;
@@ -184,10 +192,10 @@ function getActiveBillers() {
 
 
 function getTaxRate($id) {
-	global $tb_prefix;
+	
 	global $LANG;
 	
-	$sql = "SELECT * FROM {$tb_prefix}tax WHERE tax_id = $id";
+	$sql = "SELECT * FROM ".TB_PREFIX."tax WHERE tax_id = $id";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	
 	$tax = mysql_fetch_array($query);
@@ -197,10 +205,10 @@ function getTaxRate($id) {
 }
 
 function getPaymentType($id) {
-	global $tb_prefix;
+	
 	global $LANG;
 	
-	$sql = "SELECT * FROM {$tb_prefix}payment_types WHERE pt_id = $id";
+	$sql = "SELECT * FROM ".TB_PREFIX."payment_types WHERE pt_id = $id";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	$paymentType = mysql_fetch_array($query);
 	$paymentType['enabled'] = $paymentType['pt_enabled']==1?$LANG['enabled']:$LANG['disabled'];
@@ -209,10 +217,10 @@ function getPaymentType($id) {
 }
 
 function getPaymentTypes() {
-	global $tb_prefix;
+	
 	global $LANG;
 	
-	$sql = "SELECT * FROM {$tb_prefix}payment_types ORDER BY pt_description";
+	$sql = "SELECT * FROM ".TB_PREFIX."payment_types ORDER BY pt_description";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	
 	$paymentTypes = null;
@@ -230,10 +238,10 @@ function getPaymentTypes() {
 }
 
 function getActivePaymentTypes() {
-	global $tb_prefix;
+	
 	global $LANG;
 	
-	$sql = "SELECT * FROM {$tb_prefix}payment_types WHERE pt_enabled != 0 ORDER BY pt_description";
+	$sql = "SELECT * FROM ".TB_PREFIX."payment_types WHERE pt_enabled != 0 ORDER BY pt_description";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	
 	$paymentTypes = null;
@@ -252,9 +260,9 @@ function getActivePaymentTypes() {
 
 
 function getProduct($id) {
-	global $tb_prefix;
+	
 	global $LANG;
-	$sql = "SELECT * FROM {$tb_prefix}products WHERE id = $id";
+	$sql = "SELECT * FROM ".TB_PREFIX."products WHERE id = $id";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	$product = mysql_fetch_array($query);
 	$product['wording_for_enabled'] = $product['enabled']==1?$LANG['enabled']:$LANG['disabled'];
@@ -263,10 +271,10 @@ function getProduct($id) {
 
 function getProducts() {
 	
-	global $tb_prefix;
+	
 	global $LANG;
 	
-	$sql = "SELECT * FROM {$tb_prefix}products WHERE visible = 1 ORDER BY description";
+	$sql = "SELECT * FROM ".TB_PREFIX."products WHERE visible = 1 ORDER BY description";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	
 	$products = null;
@@ -287,9 +295,9 @@ function getProducts() {
 
 function getActiveProducts() {
 	
-	global $tb_prefix;
 	
-	$sql = "SELECT * FROM {$tb_prefix}products WHERE enabled != 0 ORDER BY description";
+	
+	$sql = "SELECT * FROM ".TB_PREFIX."products WHERE enabled != 0 ORDER BY description";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	
 	$products = null;
@@ -303,10 +311,10 @@ function getActiveProducts() {
 
 
 function getTaxes() {
-	global $tb_prefix;
+	
 	global $LANG;
 	
-	$sql = "SELECT * FROM {$tb_prefix}tax ORDER BY tax_description";
+	$sql = "SELECT * FROM ".TB_PREFIX."tax ORDER BY tax_description";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	
 	$taxes = null;
@@ -326,46 +334,46 @@ function getTaxes() {
 
 
 function getDefaultCustomer() {
-	global $tb_prefix;
-	$sql = "SELECT *,c.name AS name FROM {$tb_prefix}customers c, {$tb_prefix}system_defaults s WHERE ( s.name = 'customer' AND c.id = s.value)";
+	
+	$sql = "SELECT *,c.name AS name FROM ".TB_PREFIX."customers c, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'customer' AND c.id = s.value)";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	return mysql_fetch_array($query);
 }
 
 function getDefaultPaymentType() {
-	global $tb_prefix;
-	$sql = "SELECT * FROM {$tb_prefix}payment_types p, {$tb_prefix}system_defaults s WHERE ( s.name = 'payment_type' AND p.pt_id = s.value)";
+	
+	$sql = "SELECT * FROM ".TB_PREFIX."payment_types p, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'payment_type' AND p.pt_id = s.value)";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	return mysql_fetch_array($query);
 }
 
 function getDefaultPreference() {
-	global $tb_prefix;
-	$sql = "SELECT * FROM {$tb_prefix}preferences p, {$tb_prefix}system_defaults s WHERE ( s.name = 'preference' AND p.pref_id = s.value)";
+	
+	$sql = "SELECT * FROM ".TB_PREFIX."preferences p, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'preference' AND p.pref_id = s.value)";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	return mysql_fetch_array($query);
 }
 
 function getDefaultBiller() {
-	global $tb_prefix;
-	$sql = "SELECT *,b.name AS name FROM {$tb_prefix}biller b, {$tb_prefix}system_defaults s WHERE ( s.name = 'biller' AND b.id = s.value )";
+	
+	$sql = "SELECT *,b.name AS name FROM ".TB_PREFIX."biller b, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'biller' AND b.id = s.value )";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	return mysql_fetch_array($query);
 }
 
 
 function getDefaultTax() {
-	global $tb_prefix;
-	$sql = "SELECT * FROM {$tb_prefix}tax t, {$tb_prefix}system_defaults s WHERE (s.name = 'tax' AND t.tax_id = s.value)";
+	
+	$sql = "SELECT * FROM ".TB_PREFIX."tax t, ".TB_PREFIX."system_defaults s WHERE (s.name = 'tax' AND t.tax_id = s.value)";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	return mysql_fetch_array($query);
 }
 
 function getInvoiceTotal($invoice_id) {
 	global $LANG;
-	global $tb_prefix;
 	
-	$sql ="SELECT SUM(total) AS total FROM {$tb_prefix}invoice_items WHERE invoice_id = $invoice_id";
+	
+	$sql ="SELECT SUM(total) AS total FROM ".TB_PREFIX."invoice_items WHERE invoice_id = $invoice_id";
 	$query = mysqlQuery($sql);
 	$res = mysql_fetch_array($query);
 	//echo "TOTAL".$res['total'];
@@ -373,10 +381,10 @@ function getInvoiceTotal($invoice_id) {
 }
 
 function getInvoice($id) {
-	global $tb_prefix;
+	
 	global $config;
 	
-	$sql = "SELECT * FROM {$tb_prefix}invoices WHERE id = $id";
+	$sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE id = $id";
 	$query  = mysqlQuery($sql) or die(mysql_error());
 
 	$invoice = mysql_fetch_array($query);
@@ -390,7 +398,7 @@ function getInvoice($id) {
 
 	
 	#invoice total tax
-	$sql ="SELECT SUM(tax_amount) AS total_tax, SUM(total) AS total FROM {$tb_prefix}invoice_items WHERE invoice_id =$id";
+	$sql ="SELECT SUM(tax_amount) AS total_tax, SUM(total) AS total FROM ".TB_PREFIX."invoice_items WHERE invoice_id =$id";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	$result = mysql_fetch_array($query);
 	//$invoice['total'] = number_format($result['total'],2);
@@ -401,8 +409,8 @@ function getInvoice($id) {
 
 
 function getInvoiceItems($id) {
-	global $tb_prefix;
-	$sql = "SELECT * FROM {$tb_prefix}invoice_items WHERE invoice_id =$id";
+	
+	$sql = "SELECT * FROM ".TB_PREFIX."invoice_items WHERE invoice_id =$id";
 	$query = mysqlQuery($sql);
 	
 	$invoiceItems = null;
@@ -415,7 +423,7 @@ function getInvoiceItems($id) {
 		$invoiceItem['gross_total'] = number_format($invoiceItem['gross_total'],2);
 		$invoiceItem['total'] = number_format($invoiceItem['total'],2);
 		
-		$sql = "SELECT * FROM {$tb_prefix}products WHERE id = {$invoiceItem['product_id']}";
+		$sql = "SELECT * FROM ".TB_PREFIX."products WHERE id = {$invoiceItem['product_id']}";
 		$query2 = mysqlQuery($sql) or die(mysql_error());
 		$invoiceItem['product'] = mysql_fetch_array($query2);	
 		
@@ -427,8 +435,8 @@ function getInvoiceItems($id) {
 
 
 function getSystemDefaults() {
-	global $tb_prefix;
-	$print_defaults = "SELECT * FROM {$tb_prefix}system_defaults";
+	
+	$print_defaults = "SELECT * FROM ".TB_PREFIX."system_defaults";
 	$result_print_defaults = mysqlQuery($print_defaults) or die(mysql_error());
 	
 	$defaults = null;
@@ -443,8 +451,8 @@ function getSystemDefaults() {
 }
 
 function updateDefault($name,$value) {
-	global $tb_prefix;
-	$sql = "UPDATE {$tb_prefix}system_defaults SET `value` =  '$value' WHERE  `name` = '$name'"; 
+	
+	$sql = "UPDATE ".TB_PREFIX."system_defaults SET `value` =  '$value' WHERE  `name` = '$name'"; 
 	//echo $sql;
 	if (mysqlQuery($sql)) {
 		return true;
@@ -453,16 +461,16 @@ function updateDefault($name,$value) {
 }
 
 function getInvoiceType($id) {
-	global $tb_prefix;
-	$sql = "SELECT inv_ty_description FROM {$tb_prefix}invoice_type WHERE inv_ty_id = $id";
+	
+	$sql = "SELECT inv_ty_description FROM ".TB_PREFIX."invoice_type WHERE inv_ty_id = $id";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	return mysql_fetch_array($query);
 }
 
 function insertBiller() {
-	global $tb_prefix;
+	
 	$sql = "INSERT into
-			{$tb_prefix}biller
+			".TB_PREFIX."biller
 		VALUES
 			(
 				'',
@@ -492,9 +500,9 @@ function insertBiller() {
 }
 
 function updateBiller() {
-	global $tb_prefix;
+	
 	$sql = "UPDATE
-				{$tb_prefix}biller
+				".TB_PREFIX."biller
 			SET
 				name = '$_POST[name]',
 				street_address = '$_POST[street_address]',
@@ -521,11 +529,11 @@ function updateBiller() {
 }
 
 function updateCustomer() {
-	global $tb_prefix;
+	
 
 	$sql = "
 			UPDATE
-				{$tb_prefix}customers
+				".TB_PREFIX."customers
 			SET
 				name = '$_POST[name]',
 				attention = '$_POST[attention]',
@@ -552,9 +560,9 @@ function updateCustomer() {
 }
 
 function insertCustomer() {
-	global $tb_prefix;
+	
 	extract( $_POST );
-	$sql = "INSERT INTO {$tb_prefix}customers VALUES ('','$attention', '$name','$street_address','$street_address2','$city','$state',' $zip_code','$country','$phone', '$mobile_phone', '$fax', '$email', '$notes', '$custom_field1', '$custom_field2', '$custom_field3', '$custom_field4', '$enabled')";
+	$sql = "INSERT INTO ".TB_PREFIX."customers VALUES ('','$attention', '$name','$street_address','$street_address2','$city','$state',' $zip_code','$country','$phone', '$mobile_phone', '$fax', '$email', '$notes', '$custom_field1', '$custom_field2', '$custom_field3', '$custom_field4', '$enabled')";
 	
 	return mysqlQuery($sql);
 	
@@ -604,10 +612,10 @@ function getInvoices(&$query) {
 }
 
 function getCustomerInvoices($id) {
-	global $tb_prefix;
+	
 	$invoices = null;
 	
-	$sql = "SELECT * FROM {$tb_prefix}invoices WHERE customer_id =$id  ORDER BY id DESC";
+	$sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE customer_id =$id  ORDER BY id DESC";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	
 	for($i = 0;$invoice = getInvoices($query);$i++) {
@@ -621,10 +629,10 @@ function getCustomerInvoices($id) {
 function getCustomers() {
 		
 	global $LANG;
-	global $tb_prefix;
+	
 	$customer = null;
 	
-	$sql = "SELECT * FROM {$tb_prefix}customers ORDER BY name";
+	$sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY name";
 	$result = mysqlQuery($sql) or die(mysql_error());
 
 	$customers = null;
@@ -658,9 +666,9 @@ function getCustomers() {
 function getActiveCustomers() {
 		
 	global $LANG;
-	global $tb_prefix;
 	
-	$sql = "SELECT * FROM {$tb_prefix}customers WHERE enabled != 0 ORDER BY name";
+	
+	$sql = "SELECT * FROM ".TB_PREFIX."customers WHERE enabled != 0 ORDER BY name";
 	$result = mysqlQuery($sql) or die(mysql_error());
 
 	$customers = null;
@@ -673,11 +681,11 @@ function getActiveCustomers() {
 }
 
 function insertInvoice($type) {
-	global $tb_prefix;
+	
 	
 	$sql = "INSERT 
 			into
-		{$tb_prefix}invoices (
+		".TB_PREFIX."invoices (
 			id, 
 			biller_id, 
 			customer_id, 
@@ -711,9 +719,9 @@ function insertInvoice($type) {
 }
 
 function updateInvoice($invoice_id) {
-	global $tb_prefix;
+	
 		$sql = "UPDATE
-			{$tb_prefix}invoices
+			".TB_PREFIX."invoices
 		SET
 			biller_id = '$_POST[biller_id]',
 			customer_id = '$_POST[customer_id]',
@@ -731,7 +739,7 @@ function updateInvoice($invoice_id) {
 }
 
 function insertInvoiceItem($invoice_id,$quantity,$product_id,$tax_id,$description) {
-	global $tb_prefix;
+	
 	
 	$tax = getTaxRate($tax_id);
 	$product = getProduct($product_id);
@@ -743,7 +751,7 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$tax_id,$descriptio
 	$total = $total_invoice_item * $quantity;
 	$gross_total = $product['unit_price']  * $quantity;
 	
-	$sql = "INSERT INTO {$tb_prefix}invoice_items (`invoice_id`,`quantity`,`product_id`,`unit_price`,`tax_id`,`tax`,`tax_amount`,`gross_total`,`description`,`total`) VALUES ($invoice_id,$quantity,$product_id,$product[unit_price],'$tax[tax_id]',$tax[tax_percentage],$tax_amount,$gross_total,'$description',$total)";
+	$sql = "INSERT INTO ".TB_PREFIX."invoice_items (`invoice_id`,`quantity`,`product_id`,`unit_price`,`tax_id`,`tax`,`tax_amount`,`gross_total`,`description`,`total`) VALUES ($invoice_id,$quantity,$product_id,$product[unit_price],'$tax[tax_id]',$tax[tax_percentage],$tax_amount,$gross_total,'$description',$total)";
 
 	//echo $sql;
 	return mysqlQuery($sql);
@@ -752,7 +760,7 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$tax_id,$descriptio
 
 function updateInvoiceItem($id,$quantity,$product_id,$tax_id,$description) {
 
-	global $tb_prefix;
+	
 	
 	$product = getProduct($product_id);
 	$tax = getTaxRate($tax_id);
@@ -763,9 +771,9 @@ function updateInvoiceItem($id,$quantity,$product_id,$tax_id,$description) {
 	$total = $total_invoice_item * $quantity;
 	$gross_total = $product['unit_price'] * $quantity;
 	
-	global $tb_prefix;
 	
-	$sql = "UPDATE {$tb_prefix}invoice_items 
+	
+	$sql = "UPDATE ".TB_PREFIX."invoice_items 
 	SET `quantity` =  '$quantity',
 	`product_id` = '$product_id',
 	`unit_price` = '$product[unit_price]',

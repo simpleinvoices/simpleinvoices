@@ -33,7 +33,7 @@
 		<form action="index.php?module=reports&view=database_log" method="post">
 		<input type="text" class="date-picker" name="startdate" id="date1" value="$startdate" /><br /><br />
 		<input type="text" class="date-picker" name="enddate" id="date1" value="$enddate" /><br /><br />
-		<input type="submit" value="Anzeigen">
+		<input type="submit" value="Show">
 		</form>
 EOD;
 
