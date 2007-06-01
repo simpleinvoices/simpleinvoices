@@ -91,13 +91,15 @@ define("MAX_LINE_LENGTH", 100);
 define('MAX_IMAGE_ROW_LEN',16);
 define('MAX_TRANSPARENT_IMAGE_ROW_LEN',16);
 
-define('CACHE_DIR', HTML2PS_DIR.'/cache/');
-define('OUTPUT_FILE_DIRECTORY', HTML2PS_DIR.'/cache');
+define('CACHE_DIR', '../../cache/');
+define('OUTPUT_FILE_DIRECTORY', '../../cache');
+//define('OUTPUT_FILE_DIRECTORY', HTML2PS_DIR.'/cache');
 define('FPDF_PATH', HTML2PS_DIR.'/fpdf/');
 
 // Note that WRITER_TEMPDIR !REQUIRES! slash (or backslash) on the end (unless you want to get 
 // some files like tempPS_jvckxlvjl in your working directory).
-define('WRITER_TEMPDIR', HTML2PS_DIR.'/cache/');
+//define('WRITER_TEMPDIR', HTML2PS_DIR.'/cache/');
+define('WRITER_TEMPDIR', CACHE_DIR);
 define('WRITER_FILE_PREFIX','PS_');
 
 // number of retries to generate unique filename in case we have had troubles with

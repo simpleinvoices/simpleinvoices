@@ -3,28 +3,23 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-#include("./modules/invoices/email.tpl");
-
 
 #get the invoice id
 $invoice_id = $_GET['submit'];
 
-#master invoice id select
-$print_invoice_id = "SELECT * FROM {$tb_prefix}invoices WHERE id = $invoice_id";
-$invoice_result  = mysqlQuery($print_invoice_id , $conn) or die(mysql_error());
-$invoice = mysql_fetch_array($invoice_result);
-
-
+$invoice = getInvoice($invoice_id);
 $preference = getPreference($invoice['preference_id']);
+$biller = getBiller($invoice['biller_id']);
+$customer = getCustomer($invoice['customer_id']);
 
-$biller = getBiller($invoice[biller_id]);
-$customer = getCustomer($invoice[customer_id]);
+$sql = "SELECT inv_ty_description AS type FROM {$tb_prefix}invoice_type WHERE inv_ty_id = $invoice[type_id]";
+$query = mysqlQuery($sql);
+$invoiceType = mysql_fetch_array($query);
 
-$url_pdf = "http://$_SERVER[HTTP_HOST]$install_path/index.php?module=invoices&view=templates/template&submit=$invoice_id&action=view&location=pdf&style=$invoice[type_id]";
+$url_pdf = "http://$_SERVER[HTTP_HOST]$install_path/index.php?module=invoices&view=templates/template&submit=$invoice_id&action=view&location=pdf&style=$invoiceType[type]";
+echo $url_pdf;
 $url_pdf_encoded = urlencode($url_pdf); 
-$url_for_pdf = "./pdf/html2ps.php?process_mode=single&renderfields=1&renderlinks=1&renderimages=1&scalepoints=1&pixels=$pdf_screen_size&media=$pdf_paper_size&leftmargin=$pdf_left_margin&rightmargin=$pdf_right_margin&topmargin=$pdf_top_margin&bottommargin=$pdf_bottom_margin&transparency_workaround=1&imagequality_workaround=1&output=2&location=pdf&pdfname=$pref_inv_wordingField$inv_idField&URL=$url_pdf_encoded";
-
-#include("./modules/invoices/email.tpl");
+$url_for_pdf = "./include/pdf/html2ps.php?process_mode=single&renderfields=1&renderlinks=1&renderimages=1&scalepoints=1&pixels=$pdf_screen_size&media=$pdf_paper_size&leftmargin=$pdf_left_margin&rightmargin=$pdf_right_margin&topmargin=$pdf_top_margin&bottommargin=$pdf_bottom_margin&transparency_workaround=1&imagequality_workaround=1&output=2&location=pdf&pdfname=$preference[pref_inv_wording]$invoice[id]&URL=$url_pdf_encoded";
 
 //show the email stage info
 //stage 1 = enter to, from, cc and message
@@ -37,8 +32,9 @@ if ($_GET['stage'] == 1 ) {
 
 if ($_GET['stage'] == 2 ) {
 
-	require_once('./pdf/pipeline.class.php');
-	parse_config_file('./pdf/html2ps.config');
+
+	require_once('./include/pdf/pipeline.class.php');
+	parse_config_file('./include/pdf/html2ps.config');
 
 	$g_config = array(
 	                 'cssmedia'     => 'screen',
@@ -57,7 +53,6 @@ if ($_GET['stage'] == 2 ) {
                 	          'top'    => 0,
                 	          'bottom' => 0));
 	$media->set_pixels(1024);
-
 	$g_px_scale = mm2pt($media->width() - $media->margins['left'] - $media->margins['right']) / $media->pixels;
 	$g_pt_scale = $g_px_scale * 1.43; 
 
@@ -67,8 +62,7 @@ if ($_GET['stage'] == 2 ) {
 	$pipeline->parser         = new ParserXHTML;
 	$pipeline->layout_engine  = new LayoutEngineDefault;
 	$pipeline->output_driver  = new OutputDriverFPDF($media);
-	$pipeline->destination    = new DestinationFile($preference[pref_inv_wording].$invoice[id]);
-
+	$pipeline->destination    = new DestinationFile($preference['pref_inv_wording'].$invoice['id']);
 
 
 	$pipeline->process($url_pdf, $media); 
@@ -92,7 +86,7 @@ if ($_GET['stage'] == 2 ) {
 	$mail->AddBCC("$_POST[email_bcc]");
 	}
 	$mail->WordWrap = 50;                                 // set word wrap to 50 characters
-	$mail->AddAttachment("./pdf/cache/$preference[pref_inv_wording]$invoice[id].pdf");         // add attachments
+	$mail->AddAttachment("./include/pdf/cache/$preference[pref_inv_wording]$invoice[id].pdf");         // add attachments
 
 	$mail->IsHTML(true);                                  // set email format to HTML
 

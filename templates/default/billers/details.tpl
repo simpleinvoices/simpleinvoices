@@ -160,7 +160,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.country}</td>
-		<td><input type=text name="country" value="{$biller.b_coutry}"
+		<td><input type=text name="country" value="{$biller.country}"
 			size=50 /></td>
 	</tr>
 	<tr>

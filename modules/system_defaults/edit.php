@@ -260,17 +260,8 @@ EOD;
 }
 
 else if ($_GET[submit] == "preference_id") {
-
-	#invoice preference query
-	$print_inv_preference = "SELECT * FROM {$tb_prefix}preferences WHERE pref_id = $defaults[preference]";
-	$result_inv_preference = mysqlQuery($print_inv_preference, $conn) or die(mysql_error());
-
-
-	while ($Array_inv_preference = mysql_fetch_array($result_inv_preference)) {
-		$pref_descriptionField = $Array_inv_preference['pref_description'];
-	}
-
-
+	
+	$preference = getPreference($defaults['preference']);
 
 	#invoice preference query
 	$sql_preferences = "SELECT * FROM {$tb_prefix}preferences where pref_enabled != 0 ORDER BY pref_description";
@@ -289,7 +280,7 @@ else if ($_GET[submit] == "preference_id") {
 		$display_block_preferences = <<<EOD
 	        <select name="value">
 
-                <option selected value="$defaults[preference]" style="font-weight: bold">$pref_descriptionField</option>
+                <option selected value="$defaults[preference]" style="font-weight: bold">{$preference['pref_description']}</option>
                 <option value='0'> </option>
 EOD;
 

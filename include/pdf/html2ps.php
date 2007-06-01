@@ -1,6 +1,6 @@
 <?php
 
-include('../include/include_auth.php');
+include('../../include/include_auth.php');
 /*
 session_start();
 

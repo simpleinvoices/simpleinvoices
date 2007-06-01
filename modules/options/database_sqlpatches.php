@@ -89,7 +89,7 @@ EOD;
 
 		for($p = 0; $p < count($patch);$p++) {
 			if(check_sql_patch($p,$patch[$p]['name'])) {
-				$display_block .= "<tr><td>SQL patch $p, {$patch[$p]['name']} <i>has</i> already been applied in release $patch[date]</td></tr>";
+				$display_block .= "<tr><td>SQL patch $p, {$patch[$p]['name']} <i>has</i> already been applied in release {$patch[$p]['date']}</td></tr>";
 			}
 			else {
 				$display_block .= "<tr><td>SQL patch $p, {$patch[$p]['name']}  <b>has not</b> been applied to the database</td></tr>";

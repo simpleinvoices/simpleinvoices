@@ -24,14 +24,11 @@ if ( $_POST['style'] === 'insert_total' ) {
 	}
 
 	$invoice_id = mysql_insert_id();
-	
-	$sql = "INSERT INTO {$tb_prefix}products (`unit_price`,`description`,`enabled`,`visible`) VALUES('$_POST[unit_price]','$_POST[description]',0,0);";
-	mysqlQuery($sql) or die(mysql_error());
+
+	insertProduct($_POST['description'],$_POST['unit_price'],,0,0,,,,);
 	
 	$product_id = mysql_insert_id();
-	//echo mysql_insert_id()."AA";
-	//echo $product_id."èèè";
-	//exit($sql);
+
 
 	if (insertInvoiceItem($invoice_id,1,$product_id,$_POST['tax_id'],$_POST['description'])) {
 		$display_block_items = $LANG['save_invoice_items_success'];
@@ -41,7 +38,6 @@ if ( $_POST['style'] === 'insert_total' ) {
 	}
 
 	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&style=Total>";
-
 }
 
 
@@ -49,7 +45,6 @@ if ( $_POST['style'] === 'insert_total' ) {
 
 if ( $_POST['style'] === 'insert_itemised' || $_POST['style'] === 'insert_consulting' ) {
 
-	
 	if ($_POST['style'] === 'insert_consulting' && insertInvoice(3)) {
 		$display_block =  $LANG['save_invoice_success'];
 	} else {
@@ -65,8 +60,6 @@ if ( $_POST['style'] === 'insert_itemised' || $_POST['style'] === 'insert_consul
 
 	//get the invoice id from the insert
 	$invoice_id = mysql_insert_id();
-	echo $invoice_id;
-	exit();
 	
 	for($i=0;!empty($_POST["quantity$i"]) && $i < $_POST['max_items']; $i++) {
 

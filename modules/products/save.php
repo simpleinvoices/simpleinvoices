@@ -13,7 +13,7 @@ $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
 if (  $op === 'insert_product' ) {
 
 $sql = "INSERT into
-		{$tb_prefix}products
+		".TB_PREFIX."products
 	VALUES
 		(	
 			'',
@@ -24,7 +24,8 @@ $sql = "INSERT into
 			'$_POST[custom_field3]',
 			'$_POST[custom_field4]',
 			'$_POST[notes]',
-			'$_POST[enabled]'
+			'$_POST[enabled]',
+			'1'
 		)";
 
 if (mysqlQuery($sql, $conn)) {
@@ -33,7 +34,6 @@ if (mysqlQuery($sql, $conn)) {
 	$display_block = $LANG['save_product_failure'];
 }
 
-	//header( 'refresh: 2; url=manage_products.php' );
 	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=products&view=manage>";
 }
 
@@ -47,8 +47,7 @@ $conn = mysql_connect("$db_host","$db_user","$db_password");
 mysql_select_db("$db_name",$conn);
 
 	if (isset($_POST['save_product'])) {
-		$sql = "UPDATE
-				{$tb_prefix}products
+		$sql = "UPDATE ".TB_PREFIX."products
 			SET
 				description = '$_POST[description]',
 				enabled = '$_POST[enabled]',
@@ -67,15 +66,11 @@ mysql_select_db("$db_name",$conn);
 			$display_block = $LANG['save_product_failure'];
 		}
 
-		//header( 'refresh: 2; url=manage_products.php' );
 		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=0;URL=index.php?module=products&view=manage>";
-
-
 		}
 
 	else if (isset($_POST['cancel'])) {
 	
-		//header( 'refresh: 0; url=manage_products.php' );
 		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=0;URL=index.php?module=products&view=manage>";
 	}
 }

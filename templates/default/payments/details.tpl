@@ -15,10 +15,10 @@
 		<td class='details_screen'>{$LANG.date_upper}</td><td>{$stuff.date}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>{$LANG.biller}</td><td>{$stuff.biller.name}</td>
+		<td class='details_screen'>{$LANG.biller}</td><td>{$stuff.biller}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>{$LANG.customer}</td><td>{$stuff.customers.name}</td>
+		<td class='details_screen'>{$LANG.customer}</td><td>{$stuff.customer}</td>
 	</tr>
 	<tr>
 		<td class='details_screen'>{$LANG.payment_type}</td><td>{$paymentType.pt_description}</td>

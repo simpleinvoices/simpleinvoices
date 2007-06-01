@@ -90,6 +90,6 @@ function convert_to_pdf($path_to_html, $path_to_pdf) {
   $pipeline->process($baseurl, $media);
 }
 
-convert_to_pdf("http://localhost/simpleinvoices/index.php", "./pdf/out/invoice_simple.pdf");
+convert_to_pdf("http://localhost/simpleinvoices/index.php", "./include/pdf/out/invoice_simple.pdf");
 
 ?>

@@ -269,9 +269,14 @@ function getProduct($id) {
 	return $product;
 }
 
+function insertProduct($description="",$unit_price=0,$notes="",$enabled=1,$visible=1,$custom_field1="",$custom_field2="",$custom_field3="",$custom_field4="") {
+	$sql = "INSERT INTO ".TB_PREFIX."products (`description`,`unit_price`,`notes`,`enabled`,`visible`,`custom_field1`,`custom_field2`,`custom_field3`,`custom_field4`,) 
+	VALUES('$description','$unit_price','$notes',$enabled,$visible,'$custom_field1','$custom_field2','$custom_field3','$custom_field4');";
+	
+	return mysqlQuery($sql);
+}
+
 function getProducts() {
-	
-	
 	global $LANG;
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."products WHERE visible = 1 ORDER BY description";
