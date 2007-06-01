@@ -9,7 +9,6 @@ checkLogin();
 
 $defaults = getSystemDefaults();
 
-
 if ($_GET[submit] == "line_items") {
 
 	jsBegin();
@@ -152,12 +151,10 @@ EOD;
 
 else if ($_GET[submit] == "customer") {
 
-	#customer query
 
 	#customer
-	$sql_customer = "SELECT * FROM {$tb_prefix}customers where enabled != 0 ORDER BY name";
-	$result_customer = mysqlQuery($sql_customer, $conn) or die(mysql_error());
-
+	$sql = "SELECT * FROM {$tb_prefix}customers WHERE enabled != 0 ORDER BY name";
+	$query = mysqlQuery($sql);
 
 	#customer selector
 
@@ -170,19 +167,20 @@ else if ($_GET[submit] == "customer") {
 		//has records, so display them
 		$display_block_customer = <<<EOD
 	        <select name="value">
-                <option selected value="$defaults[customer]" style="font-weight: bold">$c_nameField</option>
                 <option value='0'> </option>
 EOD;
 
-		while ($recs_customer = mysql_fetch_array($result_customer)) {
-			$id_customer = $recs_customer['id'];
-			$display_name_customer = $recs_customer['name'];
 
+		while ($recs_customer = mysql_fetch_array($query)) {
+
+			$selected = $recs_customer['id'] == $defaults['customer']?"selected style='font-weight: bold'":"";
+			
 			$display_block_customer .= <<<EOD
-			<option value="$id_customer">
-                        $display_name_customer</option>
+			<option $selected value="$recs_customer[id]">$recs_customer[name]</option>
 EOD;
 		}
+		$display_block_biller .= "</select>";
+		
 	}
 
 	$display_block = <<<EOD

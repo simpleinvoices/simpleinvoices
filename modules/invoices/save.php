@@ -25,7 +25,7 @@ if ( $_POST['style'] === 'insert_total' ) {
 
 	$invoice_id = mysql_insert_id();
 
-	insertProduct($_POST['description'],$_POST['unit_price'],,0,0,,,,);
+	insertProduct($_POST['description'],$_POST['unit_price'],0,0);
 	
 	$product_id = mysql_insert_id();
 
@@ -45,15 +45,8 @@ if ( $_POST['style'] === 'insert_total' ) {
 
 if ( $_POST['style'] === 'insert_itemised' || $_POST['style'] === 'insert_consulting' ) {
 
-	if ($_POST['style'] === 'insert_consulting' && insertInvoice(3)) {
+	if (($_POST['style'] === 'insert_consulting' && insertInvoice(3)) || ($_POST['style'] === 'insert_itemised' && insertInvoice(2))) {
 		$display_block =  $LANG['save_invoice_success'];
-	} else {
-		$display_block = $LANG['save_invoice_failure'];
-	}
-	
-	
-	if ($_POST['style'] === 'insert_itemised' && insertInvoice(2)) {
-		$display_block = $LANG['save_invoice_success'];
 	} else {
 		$display_block = $LANG['save_invoice_failure'];
 	}
@@ -77,7 +70,6 @@ if ( $_POST['style'] === 'insert_itemised' || $_POST['style'] === 'insert_consul
 if ( $_POST['style'] === 'edit_consulting' || $_POST['style'] === 'edit_itemised' || $_POST['style'] === 'edit_total' ) {
 
 	$invoice_id = $_POST['invoice_id'];
-
 	
 	if (updateInvoice($_POST['invoice_id'])) {
 		$display_block = $LANG['save_invoice_success'];

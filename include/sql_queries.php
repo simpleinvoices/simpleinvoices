@@ -269,8 +269,8 @@ function getProduct($id) {
 	return $product;
 }
 
-function insertProduct($description="",$unit_price=0,$notes="",$enabled=1,$visible=1,$custom_field1="",$custom_field2="",$custom_field3="",$custom_field4="") {
-	$sql = "INSERT INTO ".TB_PREFIX."products (`description`,`unit_price`,`notes`,`enabled`,`visible`,`custom_field1`,`custom_field2`,`custom_field3`,`custom_field4`,) 
+function insertProduct($description,$unit_price,$enabled=1,$visible=1,$notes="",$custom_field1="",$custom_field2="",$custom_field3="",$custom_field4="") {
+	$sql = "INSERT INTO ".TB_PREFIX."products (`description`,`unit_price`,`notes`,`enabled`,`visible`,`custom_field1`,`custom_field2`,`custom_field3`,`custom_field4`) 
 	VALUES('$description','$unit_price','$notes',$enabled,$visible,'$custom_field1','$custom_field2','$custom_field3','$custom_field4');";
 	
 	return mysqlQuery($sql);
@@ -689,7 +689,7 @@ function insertInvoice($type) {
 	
 	
 	$sql = "INSERT 
-			into
+			INTO
 		".TB_PREFIX."invoices (
 			id, 
 			biller_id, 
@@ -717,9 +717,7 @@ function insertInvoice($type) {
 			'$_POST[customField3]',
 			'$_POST[customField4]'
 			)";
-	
-	//echo $sql."<br />";
-	
+	//echo $sql;
 	return mysqlQuery($sql);
 }
 
@@ -743,12 +741,11 @@ function updateInvoice($invoice_id) {
 	return mysqlQuery($sql);
 }
 
-function insertInvoiceItem($invoice_id,$quantity,$product_id,$tax_id,$description) {
-	
+function insertInvoiceItem($invoice_id,$quantity,$product_id,$tax_id,$description="") {
 	
 	$tax = getTaxRate($tax_id);
 	$product = getProduct($product_id);
-	print_r($product);
+	//print_r($product);
 	$actual_tax = $tax['tax_percentage']  / 100 ;
 	$total_invoice_item_tax = $product['unit_price'] * $actual_tax;
 	$tax_amount = $total_invoice_item_tax * $quantity;
@@ -824,6 +821,29 @@ function printEntries($menu,$id,$depth) {
 		}
 	}
 }
+
+function searchBillerAndCustomerInvoice($biller,$customer) {
+	$sql = "SELECT b.name as biller, c.name as customer, i.id as invoice, i.date as date, t.inv_ty_description as type
+	FROM si_biller b, si_invoices i, si_customers c, si_invoice_type t
+	WHERE b.name LIKE  '%$biller%'
+	AND c.name LIKE  '%$customer%' 
+	AND i.biller_id = b.id 
+	AND i.customer_id = c.id
+	AND i.type_id = t.inv_ty_id";
+	return mysqlQuery($sql);
+}
+
+function searchInvoiceByDate($startdate,$enddate) {
+	$sql = "SELECT b.name as biller, c.name as customer, i.id as invoice, i.date as date, t.inv_ty_description as type
+	FROM si_biller b, si_invoices i, si_customers c, si_invoice_type t
+	WHERE i.date >= '$startdate' 
+	AND i.date <= '$enddate'
+	AND i.biller_id = b.id 
+	AND i.customer_id = c.id
+	AND i.type_id = t.inv_ty_id";
+	return mysqlQuery($sql);
+}
+	
 	
 //in this file are functions for all sql queries
 ?>

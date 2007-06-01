@@ -39,34 +39,17 @@ Customer: <input type="text" name="customer"><br />
 <br />
 EOD;
 
-$biller = $_POST['biller'];
-$customer = $_POST['customer'];
 $query = null;
 
 if(isset($_POST['biller']) || isset($_POST['customer'])) {
-	//search biller & customer
-	$sql = "SELECT b.name as biller, c.name as customer, i.id as invoice, i.date as date, t.inv_ty_description as type
-	FROM si_biller b, si_invoices i, si_customers c, si_invoice_type t
-	WHERE b.name LIKE  '%$biller%'
-	AND c.name LIKE  '%$customer%' 
-	AND i.biller_id = b.id 
-	AND i.customer_id = c.id
-	AND i.type_id = t.inv_ty_id";
-	$query = mysqlQuery($sql);
+	$query = searchBillerAndCustomerInvoice($_POST['biller'],$_POST['customer']);
 }
 
 $startdate = $_POST['startdate'];
 $enddate = $_POST['enddate'];
 
 if(isset($_POST['startdate']) && isset($_POST['enddate'])) {
-	$sql = "SELECT b.name as biller, c.name as customer, i.id as invoice, i.date as date, t.inv_ty_description as type
-	FROM si_biller b, si_invoices i, si_customers c, si_invoice_type t
-	WHERE i.date >= '$startdate' 
-	AND i.date <= '$enddate'
-	AND i.biller_id = b.id 
-	AND i.customer_id = c.id
-	AND i.type_id = t.inv_ty_id";
-	$query = mysqlQuery($sql);
+	$query = searchInvoiceByDate($_POST['startdate'], $_POST['enddate']);
 }
 
 
