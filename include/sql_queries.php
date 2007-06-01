@@ -216,6 +216,54 @@ function getPaymentType($id) {
 	return $paymentType;
 }
 
+function getPayment($id) {
+	global $config;
+	$sql = "SELECT ".TB_PREFIX."account_payments.*, ".TB_PREFIX."customers.name AS customer, ".TB_PREFIX."biller.name AS biller FROM ".TB_PREFIX."account_payments, ".TB_PREFIX."invoices, ".TB_PREFIX."customers, ".TB_PREFIX."biller  WHERE ac_inv_id = ".TB_PREFIX."invoices.id AND ".TB_PREFIX."invoices.customer_id = ".TB_PREFIX."customers.id AND ".TB_PREFIX."invoices.biller_id = ".TB_PREFIX."biller.id AND ".TB_PREFIX."account_payments.id='$id'";
+
+	$query = mysqlQuery($sql) or die(mysql_error());
+	$payment = mysql_fetch_array($query);
+	$payment['date'] = date( $config['date_format'], strtotime( $payment['ac_date'] ) );
+	return $payment;
+}
+
+function getInvoicePayments($id) {
+	$sql = "SELECT ".TB_PREFIX."account_payments.*, ".TB_PREFIX."customers.name as CNAME, ".TB_PREFIX."biller.name as BNAME from ".TB_PREFIX."account_payments, ".TB_PREFIX."invoices, ".TB_PREFIX."customers, ".TB_PREFIX."biller  where ac_inv_id = ".TB_PREFIX."invoices.id and ".TB_PREFIX."invoices.customer_id = ".TB_PREFIX."customers.id and ".TB_PREFIX."invoices.biller_id = ".TB_PREFIX."biller.id and ".TB_PREFIX."account_payments.ac_inv_id='$id' ORDER BY ".TB_PREFIX."account_payments.id DESC";
+	return mysqlQuery($sql);
+}
+
+
+function getCustomerPayments($id) {
+	$sql = "SELECT ".TB_PREFIX."account_payments.*, ".TB_PREFIX."customers.name as CNAME, ".TB_PREFIX."biller.name as BNAME from ".TB_PREFIX."account_payments, ".TB_PREFIX."invoices, ".TB_PREFIX."customers, ".TB_PREFIX."biller  where ac_inv_id = ".TB_PREFIX."invoices.id and ".TB_PREFIX."invoices.customer_id = ".TB_PREFIX."customers.id and ".TB_PREFIX."invoices.biller_id = ".TB_PREFIX."biller.id and ".TB_PREFIX."customers.id='$id' ORDER BY ".TB_PREFIX."account_payments.id DESC ";
+	return mysqlQuery($sql);
+}
+
+
+function getPayments() {
+	$sql = "SELECT ".TB_PREFIX."account_payments.*, ".TB_PREFIX."customers.name as CNAME, ".TB_PREFIX."biller.name as BNAME from ".TB_PREFIX."account_payments, ".TB_PREFIX."invoices, ".TB_PREFIX."customers, ".TB_PREFIX."biller  WHERE ac_inv_id = ".TB_PREFIX."invoices.id AND ".TB_PREFIX."invoices.customer_id = ".TB_PREFIX."customers.id and ".TB_PREFIX."invoices.biller_id = ".TB_PREFIX."biller.id ORDER BY ".TB_PREFIX."account_payments.id DESC";
+	
+	return mysqlQuery($sql);
+}
+
+function progressPayments($query) {
+	$payments = null;
+
+	for($i=0;$payment = mysql_fetch_array($query);$i++) {
+
+		$sql = "SELECT pt_description FROM ".TB_PREFIX."payment_types WHERE pt_id = {$payment['ac_payment_type']}";
+		$query2 = mysqlQuery($sql);
+
+		$pt = mysql_fetch_array($query2);
+		
+		$payments[$i] = $payment;
+		$payments[$i]['description'] = $pt['pt_description'];
+		
+	}
+	
+	return $payments;
+}
+
+
+
 function getPaymentTypes() {
 	
 	global $LANG;

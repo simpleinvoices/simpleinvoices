@@ -1,5 +1,5 @@
 
-{if $datas == null}
+{if $payments == null}
 	<P><em>{$LANG.no_payments}.</em></p>
 {else}
 
@@ -48,19 +48,19 @@
 </tr>
 </thead>
 
-	{foreach from=$datas item=data}
+	{foreach from=$payments item=payment}
 
 
 	<tr class='index_table'>
-		<td class='index_table'><a class='index_table' href='index.php?module=payments&view=details&id={$data.id}'>{$LANG.view}</a></td>
-		<td class='index_table'>{$data.id}</td>
-		<td class='index_table'>{$data.ac_inv_id}</td>
-		<td class='index_table'>{$data.CNAME}</td>
-		<td class='index_table'>{$data.BNAME}</td>
-		<td class='index_table'>{$data.ac_amount}</td>
-		<td class='index_table'>{$data.ac_notes|truncate:10:"..."}</td>
-		<td class='index_table'>{$data.description}</td>
-		<td class='index_table'>{$data.ac_date}</td>
+		<td class='index_table'><a class='index_table' href='index.php?module=payments&view=details&id={$payment.id}'>{$LANG.view}</a></td>
+		<td class='index_table'>{$payment.id}</td>
+		<td class='index_table'>{$payment.ac_inv_id}</td>
+		<td class='index_table'>{$payment.CNAME}</td>
+		<td class='index_table'>{$payment.BNAME}</td>
+		<td class='index_table'>{$payment.ac_amount}</td>
+		<td class='index_table'>{$payment.ac_notes|truncate:10:"..."}</td>
+		<td class='index_table'>{$payment.description}</td>
+		<td class='index_table'>{$payment.ac_date}</td>
 	</tr>
 	
 	{/foreach}
