@@ -7,8 +7,10 @@
 $db_host = "localhost";
 $db_name = "simple_invoices";
 $db_user = "root";
-$db_password = "";
+$db_password = "test";
 $tb_prefix = "si_";
+define("TB_PREFIX",$tb_prefix);
+define("LOGGING",true);
 
 
 /*Select language for Simple Invoices to use*/
@@ -26,15 +28,15 @@ $tb_prefix = "si_";
 
 /*PDF configs*/
 #installation path relative to document root of webserver 
-$install_path = "/svn/simpleinvoices";
+$install_path = "/simpleinvoices";
 
 /*Email configs*/
-$email_host = "localhost";  // specify main and backup server - separating with ;
-$email_smtp_auth = false;     // turn on SMTP authentication
+$email_host = "";  // specify main and backup server - separating with ;
+$email_smtp_auth = true;     // turn on SMTP authentication
 #$SMTPAuth = true;     // turn on SMTP authentication
 #if authentication is required for the smtp server please add the username and password in the two options below
-$email_username = "put your username here";  // SMTP username
-$email_password = "put your password here"; // SMTP password
+$email_username = "";  // SMTP username
+$email_password = ""; // SMTP password
 
 /*Javascript MD5 login */
 /*If you want JavaScript MD5 hashing to occur so that you can run Simple Invoices on a Non-Https Server with better security Turn Uncomment MD5Auth, Generally if you do that you should turn on ChallengeLife too. ChallengeLife sets how long before a Challenge leaving the server expires in minutes (480 is a good number I think). Defaults to Off (Please don't use Simple invoices with this off, on an non- https internet server) */
