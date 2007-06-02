@@ -7,15 +7,14 @@ checkLogin();
 
 # Deal with op and add some basic sanity checking
 
-$action = !empty( $_POST['action'] ) ? addslashes( $_POST['action'] ) : NULL;
 
-if(!isset( $_POST['style'])) {
+if(!isset( $_POST['type']) && !isset($_POST['action'])) {
 	exit("no save action");
 }
 
 
 #insert invoice_total - start
-if ( $_POST['style'] === 'insert_total' ) {
+if ($_POST['type'] == 1 && $_POST['action'] == "insert" ) {
 
 	if (insertInvoice(1)) {
 		$display_block = $LANG['save_invoice_success'];
@@ -37,15 +36,15 @@ if ( $_POST['style'] === 'insert_total' ) {
 		die(mysql_error());
 	}
 
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&style=Total>";
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&invoice=$invoice_id&type=1>";
 }
 
 
 #insert invoice_itemised
 
-if ( $_POST['style'] === 'insert_itemised' || $_POST['style'] === 'insert_consulting' ) {
+if ( $_POST['action'] == "insert" && ($_POST['type'] == 2 || $_POST['type'] == 3 )) {
 
-	if (($_POST['style'] === 'insert_consulting' && insertInvoice(3)) || ($_POST['style'] === 'insert_itemised' && insertInvoice(2))) {
+	if (($_POST['type'] == 3 && insertInvoice(3)) || ($_POST['type'] == 2 && insertInvoice(2))) {
 		$display_block =  $LANG['save_invoice_success'];
 	} else {
 		$display_block = $LANG['save_invoice_failure'];
@@ -63,11 +62,11 @@ if ( $_POST['style'] === 'insert_itemised' || $_POST['style'] === 'insert_consul
 		}
 	}
 
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&style=Itemised>";
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&invoice=$invoice_id&type=2>";
 }
 
 
-if ( $_POST['style'] === 'edit_consulting' || $_POST['style'] === 'edit_itemised' || $_POST['style'] === 'edit_total' ) {
+if ( $_POST['action'] == "edit" && ($_POST['type'] == 1 || $_POST['type'] == 2 || $_POST['type'] == 3 )) {
 
 	$invoice_id = $_POST['invoice_id'];
 	
@@ -77,7 +76,7 @@ if ( $_POST['style'] === 'edit_consulting' || $_POST['style'] === 'edit_itemised
 		$display_block = $LANG['save_invoice_failure'];
 	}
 
-	if($_POST['style'] === 'edit_total') {
+	if($_POST['type'] == 1) {
 		$sql = "UPDATE {$tb_prefix}products SET `unit_price` = $_POST[unit_price], `description` = '$_POST[description0]' WHERE id = $_POST[products0]";
 		mysqlQuery($sql);
 	}
@@ -92,7 +91,7 @@ if ( $_POST['style'] === 'edit_consulting' || $_POST['style'] === 'edit_itemised
 		}
 	}
 
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&submit=$invoice_id&style=Itemised>";
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&invoice=$invoice_id&type=2>";
 }
 
 

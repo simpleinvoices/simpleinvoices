@@ -1,6 +1,6 @@
 {if $smarty.get.stage == 1 }
 
-<form name="frmpost" ACTION="index.php?module=invoices&view=email&stage=2&submit={$smarty.get.submit}" METHOD="post">
+<form name="frmpost" ACTION="index.php?module=invoices&view=email&stage=2&invoice={$smarty.get.invoice}" METHOD="post">
 <div id="top"><b>Email Invoice to Customer as PDF</b></div>
 <hr />
 <table align=center>
@@ -35,8 +35,8 @@
 	</tr>
 </table>
 <hr></hr>
-<input type=submit name="submit" value="{$LANG.email}">
-<input type=hidden name="op" value="insert_customer">
+<input type="submit" name="submit" value="{$LANG.email}">
+<input type="hidden" name="op" value="insert_customer">
 </form>
 {/if}
 

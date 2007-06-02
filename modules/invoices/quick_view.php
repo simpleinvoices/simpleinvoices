@@ -3,7 +3,7 @@
 checkLogin();
 
 #get the invoice id
-$invoice_id = $_GET['submit'];
+$invoice_id = $_GET['invoice'];
 
 $invoice = getInvoice($invoice_id);
 $invoice_type =  getInvoiceType($invoice['type_id']);

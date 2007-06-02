@@ -1,5 +1,5 @@
 {if $smarty.post.submit != null}
-	<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=details&submit={$smarty.post.invoice_id}&style={$smarty.post.style}>
+	<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=details&invoice={$smarty.post.invoice_id}&type={$smarty.post.type}>
 {else}
 <form name="add_invoice_item" action="index.php?module=invoices&view=add_invoice_item" method="post">
 	<table>
@@ -27,10 +27,10 @@
 </table>
 
 <div style="text-align:center;">
-	<input type=submit name="submit" value="{$LANG.save_invoice}">
-	<input type=hidden name="invoice_id" value="{$smarty.get.invoice}">
-	<input type=hidden name="style" value="{$smarty.get.style}">
-	<input type=hidden name="tax_id" value="{$smarty.get.tax_id}">
+	<input type="submit" name="submit" value="{$LANG.save_invoice}">
+	<input type="hidden" name="invoice_id" value="{$smarty.get.invoice}">
+	<input type="hidden" name="type" value="{$smarty.get.type}">
+	<input type="hidden" name="tax_id" value="{$smarty.get.tax_id}">
 </div>
 </form>
 {/if}

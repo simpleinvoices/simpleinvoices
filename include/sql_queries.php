@@ -265,11 +265,10 @@ function progressPayments($query) {
 
 
 function getPaymentTypes() {
-	
 	global $LANG;
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."payment_types ORDER BY pt_description";
-	$query = mysqlQuery($sql) or die(mysql_error());
+	$query = mysqlQuery($sql);
 	
 	$paymentTypes = null;
 
@@ -871,7 +870,7 @@ function printEntries($menu,$id,$depth) {
 }
 
 function searchBillerAndCustomerInvoice($biller,$customer) {
-	$sql = "SELECT b.name as biller, c.name as customer, i.id as invoice, i.date as date, t.inv_ty_description as type
+	$sql = "SELECT b.name as biller, c.name as customer, i.id as invoice, i.date as date, i.type_id AS type_id,t.inv_ty_description as type
 	FROM si_biller b, si_invoices i, si_customers c, si_invoice_type t
 	WHERE b.name LIKE  '%$biller%'
 	AND c.name LIKE  '%$customer%' 
@@ -882,7 +881,7 @@ function searchBillerAndCustomerInvoice($biller,$customer) {
 }
 
 function searchInvoiceByDate($startdate,$enddate) {
-	$sql = "SELECT b.name as biller, c.name as customer, i.id as invoice, i.date as date, t.inv_ty_description as type
+	$sql = "SELECT b.name as biller, c.name as customer, i.id as invoice, i.date as date,i.type_id AS type_id, t.inv_ty_description as type
 	FROM si_biller b, si_invoices i, si_customers c, si_invoice_type t
 	WHERE i.date >= '$startdate' 
 	AND i.date <= '$enddate'

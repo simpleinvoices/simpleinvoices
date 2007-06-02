@@ -6,7 +6,7 @@ checkLogin();
 
 
 #get the invoice id
-$customer_id = $_GET['submit'];
+$customer_id = $_GET['customer'];
 
 $customer = getCustomer($customer_id);
 

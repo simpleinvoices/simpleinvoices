@@ -21,19 +21,19 @@
 
 <!--Actions heading - start-->
 {$LANG.actions}: 
-		<a href="index.php?module=invoices&view=templates/template&submit={$invoice.id}&action=view&style={$invoice_type.inv_ty_description}"> {$LANG.print_preview}</a>
+		<a href="index.php?module=invoices&view=templates/template&invoice={$invoice.id}&action=view"> {$LANG.print_preview}</a>
 		 :: 
-		<a href="index.php?module=invoices&view=details&submit={$invoice.id}&action=view&style={$invoice_type.inv_ty_description}"> {$LANG.edit}</a>
+		<a href="index.php?module=invoices&view=details&invoice={$invoice.id}&action=view"> {$LANG.edit}</a>
 		 ::
-		 <a href='index.php?module=payments&view=process&submit={$invoice.id}&op=pay_selected_invoice'> {$LANG.process_payment} </a>
+		 <a href='index.php?module=payments&view=process&invoice={$invoice.id}&op=pay_selected_invoice'> {$LANG.process_payment} </a>
 		 ::
 		 <!-- EXPORT TO PDF -->
 		<a href='{$url_for_pdf }'>{$LANG.export_pdf}</a>
 		::
-		<a href="index.php?module=invoices&view=templates/template&submit={$invoice.id}&action=view&style={$invoice_type.inv_ty_description}&export={$spreadsheet}">{$LANG.export_as} .{$spreadsheet}</a>
+		<a href="index.php?module=invoices&view=templates/template&invoice={$invoice.id}&action=view&export={$spreadsheet}">{$LANG.export_as} .{$spreadsheet}</a>
 		::
-		<a href="index.php?module=invoices&view=templates/template&submit={$invoice.id}&action=view&style={$invoice_type.inv_ty_description}&export={$word_processor}">{$LANG.export_as} .{$word_processor} </a>
-		:: <a href="index.php?module=invoices&view=email&stage=1&submit={$invoice.id}">{$LANG.email}</a>
+		<a href="index.php?module=invoices&view=templates/template&invoice={$invoice.id}&action=view&export={$word_processor}">{$LANG.export_as} .{$word_processor} </a>
+		:: <a href="index.php?module=invoices&view=email&stage=1&invoice={$invoice.id}">{$LANG.email}</a>
 <!--Actions heading - start-->
 <hr></hr>
 </form>
@@ -41,7 +41,7 @@
 
 	<table align=center>
 	<tr>
-		<td class=account colspan=8>{$LANG.account_info}</td><td width=5%></td><td class="columnleft" width=5%></td><td class="account" colspan=6><a href='index.php?module=customers&view=details&submit=$customer.id&action=view'>{$LANG.customer_account}</a></td>
+		<td class=account colspan=8>{$LANG.account_info}</td><td width=5%></td><td class="columnleft" width=5%></td><td class="account" colspan=6><a href='index.php?module=customers&view=details&customer=$customer.id&action=view'>{$LANG.customer_account}</a></td>
 	</tr>
 	<tr>
 		<td class=account>{$LANG.total}:</td><td class=account>{$preference.pref_currency_sign}{$invoice.total}</td>
@@ -165,8 +165,7 @@
 <hr></hr>
 
 
-{if $smarty.get.style === 'Total' }
-
+{if $smarty.get.type == 1 }
 
 	        <tr>
 	                <td colspan=6><br></td>
@@ -199,13 +198,13 @@
 {/if}
 
 
-{if $smarty.get.style === 'Itemised' || $smarty.get.style === 'Consulting' }
+{if $smarty.get.type == 2 || $smarty.get.type == 3 }
 
         <tr>
                 <td colspan=6><br></td>
         </tr>
 	
-     {if $smarty.get.style === 'Itemised' }
+     {if $smarty.get.type == 2 }
         	
 		<tr>
 		<td colspan="6">
@@ -220,7 +219,7 @@
 	{/if}
 
 
-    {if $smarty.get.style === 'Consulting' }
+    {if $smarty.get.type == 3 }
 		<tr>
 		<td colspan=6>
 		<table width=100%> 
@@ -235,7 +234,7 @@
 
 		{foreach from=$invoiceItems item=invoiceItem }
 			
-		{if $smarty.get.style === 'Itemised' }
+		{if $smarty.get.type == 2 }
 	
 		        <tr>
 	                <td>{$invoiceItem.quantity}</td><td>{$invoiceItem.product.description}</td><td>{$preference.pref_currency_sign}{$invoiceItem.unit_price}</td><td>{$preference.pref_currency_sign}{$invoiceItem.gross_total}</td><td>{$preference.pref_currency_sign}{$invoiceItem.tax_amount}</td><td>{$invoiceItem.total}</td>
@@ -260,7 +259,7 @@
 	{/if}	
 	
 
-	{if $smarty.get.style === 'Consulting' }
+	{if $smarty.get.type == 3 }
 		
 
 
@@ -297,7 +296,7 @@
 
 
 
-	{if ($smarty.get.style === 'Itemised' && $invoice.note != null ) OR 'Consulting' && $invoice.note != null }
+	{if ($smarty.get.type == 2 && $invoice.note != null ) OR 'Consulting' && $invoice.note != null }
 
 
 

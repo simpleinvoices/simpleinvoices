@@ -92,8 +92,8 @@
 <!-- </div> -->
 <hr />
 <div style="text-align:center;">
-	<input type=hidden name="max_items" value="{$smarty.section.line.index}">
-	<input type=submit name="submit" value="{$LANG.save_invoice}">
-	<input type=hidden name="style" value="insert_consulting">
+	<input type="hidden" name="max_items" value="{$smarty.section.line.index}">
+	<input type="submit" name="submit" value="{$LANG.save_invoice}">
+	<input type="hidden" name="type" value="3">
 </div>
 </form>

@@ -50,13 +50,12 @@
 	</tr>
 
 
-{if $smarty.get.style === 'Total' }
-		<input type=hidden name="style" value="edit_total">
+{if $invoice.type_id == 1 }
 	        <tr>
         	        <td colspan=6 class='details_screen'>{$LANG.description}</td>
 	        </tr>
 	        <tr>
-			<td colspan=6 ><textarea input type=text name="description0" rows=10 cols=70 WRAP=nowrap>{$invoiceItems.0.description}</textarea></td>
+			<td colspan=6 ><textarea input type="text" name="description0" rows=10 cols=70 WRAP=nowrap>{$invoiceItems.0.description}</textarea></td>
         	</tr>
 
 	 {$customFields.1}
@@ -77,10 +76,9 @@
 
 {/if}
 
-{if $smarty.get.style === 'Itemised' || $smarty.get.style === 'Consulting' }
+{if $invoice.type_id == 2 || $invoice.type_id == 3 }
 
-     {if $smarty.get.style === 'Itemised' }
-		<input type=hidden name="style" value="edit_itemised">
+     {if $invoice.type_id == 2 }
 		<tr>
 		<td colspan=6>
 		<table>
@@ -89,8 +87,7 @@
 	        </tr>
 	{/if}
 
-        {if $smarty.get.style === 'Consulting'}
-		<input type=hidden name="style" value="edit_consulting">
+        {if $invoice.type_id == 3}
 		<tr>
 		<td colspan=6>
 		<table>
@@ -101,7 +98,7 @@
 			
 			
 	<tr>
-	<td><a href="./index.php?module=invoices&view=add_invoice_item&invoice={$invoice.id}&style={$smarty.get.style}&tax_id={$invoiceItems.0.tax_id}">Add Invoice Item</a></td><td></td>
+	<td><a href="./index.php?module=invoices&view=add_invoice_item&invoice={$invoice.id}&type={$invoice.type_id}&tax_id={$invoiceItems.0.tax_id}">Add Invoice Item</a></td><td></td>
 	</tr>
 	
 {foreach key=line from=$invoiceItems item=invoiceItem}
@@ -129,7 +126,7 @@
 	        </tr>
 		
 
-	{if $smarty.get.style === 'Consulting'}
+	{if $invoice.type_id == 3}
 		
 
 		<tr>
@@ -200,7 +197,10 @@
 	</table>
 
 <hr></hr>
-	<input type=button value='Cancel'onCLick='history.back()'>
-	<input type=submit name="submit" value="{$LANG.save}">
-	<input type=hidden name="max_items" value="{$lines}">
+	<input type="hidden" name="action" value="edit">
+	<input type="hidden" name="type" value="{$invoice.type_id}";
+
+	<input type="button" value='Cancel'onCLick='history.back()'>
+	<input type="submit" name="submit" value="{$LANG.save}">
+	<input type="hidden" name="max_items" value="{$lines}">
 </form>

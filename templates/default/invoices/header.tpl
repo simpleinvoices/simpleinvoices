@@ -1,5 +1,5 @@
 <hr />
-
+<input type="hidden" name="action" value="insert">
 <table align="center">
 
 <tr>

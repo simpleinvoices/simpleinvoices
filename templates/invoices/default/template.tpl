@@ -185,7 +185,7 @@
 			<td colspan="6"><br /></td>
 		</tr>
 
-	{if $smarty.get.style === 'Itemised' }
+	{if $invoice.type_id == 1 }
 					<tr>
 				<td class="tbl1 col1" ><b>{$LANG.quantity_short}</b></td>
 				<td class="tbl1 col1" ><b>{$LANG.description}</b></td>
@@ -228,7 +228,7 @@
              	
 	{/if}
 
-	{if $smarty.get.style === 'Consulting' }
+	{if $invoice.type_id == 2 }
 				<tr class="tbl1 col1">
 			<td class="tbl1"><b>{$LANG.quantity_short}</b></td>
 			<td class="tbl1"><b>{$LANG.item}</b></td>
@@ -281,7 +281,7 @@
 			
 	{/if}
 	
-	{if $smarty.get.style === 'Total' }
+	{if $invoice.type_id == 3 }
 		                <table class="left" width="100%">
 
                 <tr class="tbl1 col1" >
@@ -306,7 +306,7 @@
 
 
 
-{if ($smarty.get.style === 'Itemised' && $invoice.note != "") || ($smarty.get.style === 'Consulting' && $invoice.note != "" )  }
+{if ($invoice.type_id == 2 && $invoice.note != "") || ($invoice.type_id == 3 && $invoice.note != "" )  }
 
 		<tr>
 			<td class="tbl1-left tbl1-right" colspan="7"><br></td>
@@ -325,7 +325,7 @@
 		<td class="tbl1-left tbl1-right" colspan="6" ><br></td>
 	</tr>
 	
-	{if $smarty.get.style === 'Total' }
+	{if $invoice.type_id == 3}
 		<tr class="tbl1-left tbl1-right">
 		<td class="tbl1-left" colspan="3"></td>
 		<td align="right" colspan="2">{$LANG.gross_total}</td>

@@ -58,7 +58,7 @@ if($query != null) {
 	echo "<table border=1 cellpadding=2>";
 	while($res = mysql_fetch_array($query)) {
 		echo "<tr>";
-		echo "<td><a href='index.php?module=invoices&view=quick_view&submit=$res[invoice]&style=$res[type]'>$res[invoice]</a></td>
+		echo "<td><a href='index.php?module=invoices&view=quick_view&submit=$res[invoice]&type=$res[type_id]'>$res[invoice]</a></td>
 		<td>$res[date]</td>
 		<td>$res[biller]</td>
 		<td>$res[customer]</td>

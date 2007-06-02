@@ -3,7 +3,7 @@
 #define("BROWSE","browse");
 
 #get the invoice id
-$invoiceID = $_GET['submit'];
+$invoiceID = $_GET['invoice'];
 
 #Info from DB print --> TODO: Needed?
 $conn = mysql_connect( $db_host, $db_user, $db_password );
