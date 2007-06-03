@@ -58,7 +58,7 @@ if($query != null) {
 	echo "<table border=1 cellpadding=2>";
 	while($res = mysql_fetch_array($query)) {
 		echo "<tr>";
-		echo "<td><a href='index.php?module=invoices&view=quick_view&submit=$res[invoice]&type=$res[type_id]'>$res[invoice]</a></td>
+		echo "<td><a href='index.php?module=invoices&view=quick_view&invoice=$res[invoice]'>$res[invoice]</a></td>
 		<td>$res[date]</td>
 		<td>$res[biller]</td>
 		<td>$res[customer]</td>
@@ -69,6 +69,9 @@ if($query != null) {
 }
 
 echo "</div>";
+
+getMenuStructure();
+
 /*
 "Enhancements to Invoice Manage pageInitially the invoice manage will display blank screen with only options to search. The search criteria could be on the following:1. from and To Date2. Customer wise3. Biller wise4. Type5. Owing greater than zero6. All"*/
 

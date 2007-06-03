@@ -840,28 +840,37 @@ function updateInvoiceItem($id,$quantity,$product_id,$tax_id,$description) {
 }
 
 function getMenuStructure() {
+	global $LANG;
 	$sql = "SELECT * FROM  `si_menu` WHERE enabled = 1 ORDER BY parentid,  `order`";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	$menu = null;
 	
 	while($res = mysql_fetch_array($query)) {
-		$menu[$res['parentid']][$res['id']]["name"] = $res['name'];
+		$menu[$res['parentid']][$res['id']]["name"] = eval('return "'.$res['name'].'";');
 		$menu[$res['parentid']][$res['id']]["link"] = $res['link'];
 		$menu[$res['parentid']][$res['id']]["id"] = $res['id'];
 	}
-		
-	//printEntries($menu,0,1);
+	
+	echo "<div style='text-align:left;'>";
+	printEntries($menu,0,1);
+	echo "</div>";
 	//return $menu;
 }
+
 
 function printEntries($menu,$id,$depth) {
 	
 	foreach($menu[$id] as $tempentrie) {
+		for($i=0;$i<$depth;$i++) {
+			echo "&nbsp;&nbsp;&nbsp;";
+		}
+		echo $tempentrie["name"]."<br />";
+
 		//echo $id;
-		echo "Name:".$tempentrie["name"]."<br />";
-		echo "ID:".$tempentrie["id"]."<br />";
-		echo "DEPTH: ".$depth;
-		echo "<br /><br />";
+		//echo "Name:".$tempentrie["name"]."<br />";
+		//echo "ID:".$tempentrie["id"]."<br />";
+		//echo "DEPTH: ".$depth;
+		//echo "<br /><br />";
 		
 		if(isset($menu[$tempentrie["id"]])) {
 			printEntries($menu,$tempentrie["id"],$depth+1);
