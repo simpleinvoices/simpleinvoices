@@ -514,7 +514,7 @@ function updateDefault($name,$value) {
 
 function getInvoiceType($id) {
 	
-	$sql = "SELECT inv_ty_description FROM ".TB_PREFIX."invoice_type WHERE inv_ty_id = $id";
+	$sql = "SELECT * FROM ".TB_PREFIX."invoice_type WHERE inv_ty_id = $id";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	return mysql_fetch_array($query);
 }

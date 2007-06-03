@@ -6,7 +6,7 @@
 		<td class='details_screen'>{$LANG.payment_id}</td><td>{$payment.id}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>{$LANG.invoice_id}</td><td><a href='print_quick_view.php?submit={$payment.ac_inv_id}&action=view&style={$invoiceType.inv_ty_description}''>{$payment.ac_inv_id}</a></td>
+		<td class='details_screen'>{$LANG.invoice_id}</td><td><a href='index.php?module=invoices&view=quick_view&invoice={$payment.ac_inv_id}&action=view&type={$invoiceType.inv_ty_id}''>{$payment.ac_inv_id}</a></td>
 	</tr>
 	<tr>
 		<td class='details_screen'>{$LANG.amount}</td><td>{$payment.ac_amount}</td>
