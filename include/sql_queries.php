@@ -860,7 +860,7 @@ EOD;
 
 	printEntries($menu,0,1);
 
-	echo <<<EOD
+echo <<<EOD
 		</div id="Tabs">
 	</div id="Header">
 EOD;
