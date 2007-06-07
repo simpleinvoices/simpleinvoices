@@ -45,6 +45,7 @@ function runPatches() {
 		</table>
 
 EOD;
+	exit();
 	$refresh = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php>";
 
 	} else {
@@ -164,8 +165,8 @@ EOD;
 
 		mysqlQuery($sql_update) or die(mysql_error());
 
-		if($id == 125) {
-			patch125();
+		if($id == 126) {
+			patch126();
 		}
 		$display_block .= "<tr><td>SQL patch $id, $patch[name] <b>has</b> been applied</td></tr>";
 	}
@@ -195,7 +196,7 @@ VALUES ('','1','Create {$tb_prefix}sql_patchmanger table','20060514','$sql_patch
 	echo $display_block2;
 }
 
-function patch125() {
+function patch126() {
 	$sql = "SELECT * FROM si_invoice_items WHERE product_id = 0";
 	$query = mysqlQuery($sql);
 	
@@ -205,7 +206,7 @@ function patch125() {
 		mysqlQuery($sql);
 		$id = mysql_insert_id();
 		$sql = "UPDATE  `si_invoice_items` SET  `product_id` =  '$id', `unit_price` = '$res[gross_total]' WHERE  `si_invoice_items`.`id` =$res[id]";
-		//error_log($sql);
+
 		mysqlQuery($sql);
 	}
 }

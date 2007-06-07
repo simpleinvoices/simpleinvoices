@@ -71,7 +71,8 @@ if(file_exists("./modules/$path.php")) {
 
 $smarty -> display("../templates/default/header.tpl");
 if($menu) {
-	$smarty -> display("../templates/default/menu.tpl");
+	getMenuStructure();
+	//$smarty -> display("../templates/default/menu.tpl");
 }
 
 $smarty -> display("../templates/default/main.tpl");

@@ -846,15 +846,25 @@ function getMenuStructure() {
 	$menu = null;
 	
 	while($res = mysql_fetch_array($query)) {
+		//error_log($res['name']);
 		$menu[$res['parentid']][$res['id']]["name"] = eval('return "'.$res['name'].'";');
 		$menu[$res['parentid']][$res['id']]["link"] = $res['link'];
 		$menu[$res['parentid']][$res['id']]["id"] = $res['id'];
 	}
 	
-	echo "<div style='text-align:left;'>";
+	echo <<<EOD
+	<div id="Header">
+		<div id="Tabs">
+			<ul id="navmenu">
+EOD;
+
 	printEntries($menu,0,1);
-	echo "</div>";
-	//return $menu;
+
+	echo <<<EOD
+		</div id="Tabs">
+	</div id="Header">
+EOD;
+
 }
 
 
@@ -862,19 +872,18 @@ function printEntries($menu,$id,$depth) {
 	
 	foreach($menu[$id] as $tempentrie) {
 		for($i=0;$i<$depth;$i++) {
-			echo "&nbsp;&nbsp;&nbsp;";
+			//echo "&nbsp;&nbsp;&nbsp;";
 		}
-		echo $tempentrie["name"]."<br />";
-
-		//echo $id;
-		//echo "Name:".$tempentrie["name"]."<br />";
-		//echo "ID:".$tempentrie["id"]."<br />";
-		//echo "DEPTH: ".$depth;
-		//echo "<br /><br />";
+		echo <<<EOD
+		<li><a href="$tempentrie[link]">$tempentrie[name]</a>
+EOD;
 		
 		if(isset($menu[$tempentrie["id"]])) {
+			echo "<ul>";
 			printEntries($menu,$tempentrie["id"],$depth+1);
+			echo "</ul>";
 		}
+		echo "</li>\n";
 	}
 }
 
