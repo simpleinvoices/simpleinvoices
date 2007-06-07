@@ -589,11 +589,10 @@ NULL , 'logging', '0'
 	$patch['115']['date'] = "20070523";
 
 	//systemd efaults conversion patch
-		#defaults query and DEFAULT NUMBER OF LINE ITEMS
-		$sql_defaults = "SELECT * FROM {$tb_prefix}defaults";
-		$result_defaults = mysqlQuery($sql_defaults, $conn) or die(mysql_error());
-
-		$defaults = mysql_fetch_array($result_defaults);
+	#defaults query and DEFAULT NUMBER OF LINE ITEMS
+	$sql_defaults = "SELECT * FROM {$tb_prefix}defaults";
+	$result_defaults = mysqlQuery($sql_defaults, $conn) or die(mysql_error());
+	$defaults = mysql_fetch_array($result_defaults);
 
 	$patch['116']['name'] = "System defaults conversion patch - set default biller";
 	$patch['116']['patch'] = "UPDATE `si_system_defaults` SET value = $defaults[def_biller] where name = 'biller'";

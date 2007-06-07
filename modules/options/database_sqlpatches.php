@@ -145,6 +145,8 @@ function run_sql_patch($id, $patch) {
 EOD;
 	}
 	else {
+		
+
 		//patch hasn't been run
 		#so do the bloody patch
 		mysqlQuery($patch['patch']) or die(mysql_error());
@@ -162,6 +164,9 @@ EOD;
 
 		mysqlQuery($sql_update) or die(mysql_error());
 
+		if($id == 125) {
+			patch125();
+		}
 		$display_block .= "<tr><td>SQL patch $id, $patch[name] <b>has</b> been applied</td></tr>";
 	}
 	
@@ -190,5 +195,19 @@ VALUES ('','1','Create {$tb_prefix}sql_patchmanger table','20060514','$sql_patch
 	echo $display_block2;
 }
 
+function patch125() {
+	$sql = "SELECT * FROM si_invoice_items WHERE product_id = 0";
+	$query = mysqlQuery($sql);
+	
+	while($res = mysql_fetch_array($query)) {
+		$sql = "INSERT INTO  `si_products` (  `id` ,  `description` ,  `unit_price` ,  `enabled` ,  `visible` ) 
+			VALUES (NULL ,  '$res[description]',  '$res[gross_total]', '0',  '0');";
+		mysqlQuery($sql);
+		$id = mysql_insert_id();
+		$sql = "UPDATE  `si_invoice_items` SET  `product_id` =  '$id', `unit_price` = '$res[gross_total]' WHERE  `si_invoice_items`.`id` =$res[id]";
+		//error_log($sql);
+		mysqlQuery($sql);
+	}
+}
 
 ?>
