@@ -18,14 +18,14 @@ jsEnd();
 
 $today = date("Y-m-d");
 
-$master_invoice_id = $_GET['submit'];
+$master_invoice_id = $_GET['invoice'];
 $invoice = null;
 
-if(isset($_GET['submit'])) {
+if(isset($_GET['invoice'])) {
 	$invoice = getInvoice($master_invoice_id);
 }
 else {
-	$query = mysqlQuery("SELECT * FROM si_invoices");
+	$query = mysqlQuery("SELECT * FROM ".TB_PREFIX."invoices");
 	$invoice = mysql_fetch_array($query);
 }
 $customer = getCustomer($invoice['customer_id']);

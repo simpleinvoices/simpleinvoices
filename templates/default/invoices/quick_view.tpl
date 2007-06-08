@@ -45,7 +45,7 @@
 	</tr>
 	<tr>
 		<td class=account>{$LANG.total}:</td><td class=account>{$preference.pref_currency_sign}{$invoice.total}</td>
-		<td class=account><a href='index.php?module=payments&view=manage&id=$invoice.id'>{$LANG.paid}:</a></td><td class=account>{$preference.pref_currency_sign}{$invoice.paid_format}</td>
+		<td class=account><a href='index.php?module=payments&view=manage&id={$invoice.id}'>{$LANG.paid}:</a></td><td class=account>{$preference.pref_currency_sign}{$invoice.paid_format}</td>
 		<td class=account>{$LANG.owing}:</td><td class=account><u>{$preference.pref_currency_sign}{$invoice.owing}</u></td>
 		<td class=account>{$LANG.age}:</td><td class=account nowrap >{$invoice_age} <a href='docs.php?p=age&t=help' rel='gb_page_center.450, 450'><img src="./images/common/help-small.png"></img></a></td>
 		<td></td><td class="columnleft"></td>
