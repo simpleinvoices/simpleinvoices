@@ -32,7 +32,6 @@ define("LOGGING",true);
 #installation path relative to document root of webserver 
 //$install_path = "/svn/simpleinvoices";
 //$install_path = $path['dirname'];
-
 /*Email configs*/
 $email_host = "";  // specify main and backup server - separating with ;
 $email_smtp_auth = true;     // turn on SMTP authentication
@@ -52,7 +51,7 @@ $ChallengeLife = 0; /*To turn off ChallengeLife set this to 0 */
 /*To change the theme, enter the name of the theme folder - default is google*/
 $theme = "google";
 
-$version = "20070523 stable";
+$version = "20070615 unstable";
 
 $config['date_format']  = 'Y-m-d'; #International format just the date
 #$config['date_format']  = 'Y-m-d h:m'; #Internalional format date and time 
