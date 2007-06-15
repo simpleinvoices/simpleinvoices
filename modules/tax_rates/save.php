@@ -14,11 +14,11 @@ if (  $op === 'insert_tax_rate' ) {
 
 
 /*Raymond - what about the '', bit doesnt seem to do an insert in me environment when i exclude it
-$sql = "INSERT INTO {$tb_prefix}tax VALUES ('$_POST[tax_description]','$_POST[tax_percentage]')";
+$sql = "INSERT INTO ".TB_PREFIX."tax VALUES ('$_POST[tax_description]','$_POST[tax_percentage]')";
 */
 
 $sql = "INSERT into
-		{$tb_prefix}tax
+		".TB_PREFIX."tax
 	VALUES
 		(	
 			'',
@@ -48,7 +48,7 @@ mysql_select_db("$db_name",$conn);
 
 	if (isset($_POST['save_tax_rate'])) {
 		$sql = "UPDATE
-				{$tb_prefix}tax
+				".TB_PREFIX."tax
 			SET
 				tax_description = '$_POST[tax_description]',
 				tax_percentage = '$_POST[tax_percentage]',

@@ -13,7 +13,7 @@ checkLogin();
 if ( isset($_POST['process_payment']) ) {
 
 	$sql = "INSERT into
-			{$tb_prefix}account_payments
+			".TB_PREFIX."account_payments
 		VALUES
 			(	
 				'',

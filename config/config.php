@@ -5,11 +5,11 @@
 
 /*Enter your database information */
 $db_host = "localhost";
-$db_name = "simpleinvoices";
+$db_name = "simple_invoices";
 $db_user = "root";
 $db_password = "test";
 //$tb_prefix = "si_";
-define("TB_PREFIX",$tb_prefix);
+define("TB_PREFIX",si_);
 define("LOGGING",true);
 
 //$path = pathinfo($_SERVER['REQUEST_URI']);

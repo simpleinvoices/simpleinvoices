@@ -14,11 +14,11 @@ $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
 if (  $op === 'insert_payment_type' ) {
 
 /*Raymond - what about the '', bit doesnt seem to do an insert in me environment when i exclude it
-$sql = "INSERT INTO {$tb_prefix}tax VALUES ('$_POST[tax_description]','$_POST[tax_percentage]')";
+$sql = "INSERT INTO ".TB_PREFIX."tax VALUES ('$_POST[tax_description]','$_POST[tax_percentage]')";
 */
 
 $sql = "INSERT into
-		{$tb_prefix}payment_types
+		".TB_PREFIX."payment_types
 	VALUES
 		(	
 			'',
@@ -48,7 +48,7 @@ else if (  $op === 'edit_payment_type' ) {
 
 	if (isset($_POST['save_payment_type'])) {
 		$sql = "UPDATE
-				{$tb_prefix}payment_types
+				".TB_PREFIX."payment_types
 			SET
 				pt_description = '$_POST[pt_description]',
 				pt_enabled = '$_POST[pt_enabled]'

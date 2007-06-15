@@ -23,7 +23,7 @@ if (!defined("BROWSE")) {
    include "./modules/reports/PHPReportMaker.php";
    include "config/config.php";
 
-   $sSQL = "select {$tb_prefix}products.description, sum({$tb_prefix}invoice_items.quantity) AS SUM_QUANTITY from  {$tb_prefix}invoice_items, {$tb_prefix}invoices, {$tb_prefix}products where {$tb_prefix}invoices.id = {$tb_prefix}invoice_items.invoice_id and {$tb_prefix}invoice_items.product_id = {$tb_prefix}products.id GROUP BY description";
+   $sSQL = "select ".TB_PREFIX."products.description, sum(".TB_PREFIX."invoice_items.quantity) AS SUM_QUANTITY from  ".TB_PREFIX."invoice_items, ".TB_PREFIX."invoices, ".TB_PREFIX."products where ".TB_PREFIX."invoices.id = ".TB_PREFIX."invoice_items.invoice_id and ".TB_PREFIX."invoice_items.product_id = ".TB_PREFIX."products.id GROUP BY description";
    $oRpt = new PHPReportMaker();
 
    $oRpt->setXML("./modules/reports/xml/report_products_sold_total.xml");

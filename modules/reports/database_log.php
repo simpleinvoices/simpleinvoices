@@ -18,7 +18,7 @@
 	}
 
 	
-	$sql = "SELECT * FROM {$tb_prefix}log WHERE (timestamp >= '$startdate' && timestamp < '$enddate') ORDER BY timestamp";
+	$sql = "SELECT * FROM ".TB_PREFIX."log WHERE (timestamp >= '$startdate' && timestamp < '$enddate') ORDER BY timestamp";
 	
 	$query = mysqlQuery($sql);
 	$sqls = null;

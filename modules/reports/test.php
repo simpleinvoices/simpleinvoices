@@ -3,7 +3,7 @@
    ini_set("include_path",ini_get("include_path").":/var/www/phpreports/"); 
    include "PHPReportMaker.php";
 
-   $sSQL = "select {$tb_prefix}biller.name, {$tb_prefix}customers.c_name, {$tb_prefix}invoices.inv_id, {$tb_prefix}invoice_items.inv_it_total from {$tb_prefix}biller, {$tb_prefix}customers, {$tb_prefix}invoices, {$tb_prefix}invoice_items where {$tb_prefix}invoices.inv_id = {$tb_prefix}invoice_items.inv_it_invoice_id and {$tb_prefix}invoices.inv_biller_id = {$tb_prefix}biller.id and {$tb_prefix}invoices.inv_customer_id = {$tb_prefix}customers.c_id
+   $sSQL = "select ".TB_PREFIX."biller.name, ".TB_PREFIX."customers.c_name, ".TB_PREFIX."invoices.inv_id, ".TB_PREFIX."invoice_items.inv_it_total from ".TB_PREFIX."biller, ".TB_PREFIX."customers, ".TB_PREFIX."invoices, ".TB_PREFIX."invoice_items where ".TB_PREFIX."invoices.inv_id = ".TB_PREFIX."invoice_items.inv_it_invoice_id and ".TB_PREFIX."invoices.inv_biller_id = ".TB_PREFIX."biller.id and ".TB_PREFIX."invoices.inv_customer_id = ".TB_PREFIX."customers.c_id
 ";
    $oRpt = new PHPReportMaker();
 

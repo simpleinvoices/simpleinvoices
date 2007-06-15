@@ -16,7 +16,7 @@ if (  $op === 'edit_custom_field' ) {
 
 	if (isset($_POST['save_custom_field'])) {
 		$sql = "UPDATE
-                                {$tb_prefix}custom_fields
+                                ".TB_PREFIX."custom_fields
                         SET
                                 cf_custom_label = '$_POST[cf_custom_label]'
                         WHERE

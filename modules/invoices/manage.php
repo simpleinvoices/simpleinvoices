@@ -10,7 +10,7 @@ EOD;*/
 
 #insert customer
 
-$sql = "SELECT * FROM {$tb_prefix}invoices ORDER BY id desc";
+$sql = "SELECT * FROM ".TB_PREFIX."invoices ORDER BY id desc";
 
 $result = mysqlQuery($sql) or die(mysql_error());
 

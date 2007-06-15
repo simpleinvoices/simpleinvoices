@@ -10,7 +10,7 @@ $cf_id = $_GET["submit"];
 
 
 #customer query
-$print_product = "SELECT * FROM {$tb_prefix}custom_fields WHERE cf_id = $cf_id";
+$print_product = "SELECT * FROM ".TB_PREFIX."custom_fields WHERE cf_id = $cf_id";
 $result_print_product = mysqlQuery($print_product, $conn) or die(mysql_error());
 
 $cf = mysql_fetch_array($result_print_product);

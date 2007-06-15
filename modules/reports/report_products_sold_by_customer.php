@@ -23,7 +23,7 @@ if (!defined("BROWSE")) {
    include "./modules/reports/PHPReportMaker.php";
    include "config/config.php";
 
-   $sSQL = "select sum({$tb_prefix}invoice_items.quantity) as SUM_QUANTITY, {$tb_prefix}customers.name, {$tb_prefix}products.description  from  {$tb_prefix}customers, {$tb_prefix}invoice_items, {$tb_prefix}invoices, {$tb_prefix}products  where  {$tb_prefix}invoice_items.product_id = {$tb_prefix}products.id and {$tb_prefix}invoices.customer_id =  {$tb_prefix}customers.id and {$tb_prefix}invoices.id = {$tb_prefix}invoice_items.invoice_id GROUP BY {$tb_prefix}invoice_items.quantity ORDER BY name";
+   $sSQL = "select sum(".TB_PREFIX."invoice_items.quantity) as SUM_QUANTITY, ".TB_PREFIX."customers.name, ".TB_PREFIX."products.description  from  ".TB_PREFIX."customers, ".TB_PREFIX."invoice_items, ".TB_PREFIX."invoices, ".TB_PREFIX."products  where  ".TB_PREFIX."invoice_items.product_id = ".TB_PREFIX."products.id and ".TB_PREFIX."invoices.customer_id =  ".TB_PREFIX."customers.id and ".TB_PREFIX."invoices.id = ".TB_PREFIX."invoice_items.invoice_id GROUP BY ".TB_PREFIX."invoice_items.quantity ORDER BY name";
 
    $oRpt = new PHPReportMaker();
 

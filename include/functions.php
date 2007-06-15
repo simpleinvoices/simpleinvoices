@@ -59,9 +59,8 @@ function getLogo($biller) {
 **/
 function get_custom_field_label($field)         {
 	global $LANG;
-	global $tb_prefix;
-
-    $sql =  "SELECT cf_custom_label FROM {$tb_prefix}custom_fields WHERE cf_custom_field = '$field'";
+	
+    $sql =  "SELECT cf_custom_label FROM ".TB_PREFIX."custom_fields WHERE cf_custom_field = '$field'";
     $result = mysqlQuery($sql) or die(mysql_error());
 
     $cf = mysql_fetch_array($result);
@@ -86,9 +85,8 @@ function get_custom_field_label($field)         {
  *
 function getCustomFieldLabels($type) {
 	global $LANG;
-	global $tb_prefix;
-	
-	$sql = "SELECT cf_custom_label FROM {$tb_prefix}custom_fields WHERE cf_custom_field LIKE '".$type."_cf_'";
+		
+	$sql = "SELECT cf_custom_label FROM ".TB_PREFIX."custom_fields WHERE cf_custom_field LIKE '".$type."_cf_'";
 	$result = mysqlQuery($sql) or die(mysql_error());
 	
 	for($i=1;$row = mysql_fetch_row($result);$i++) {
@@ -115,8 +113,7 @@ function getCustomFieldLabels($type) {
 function get_custom_field_name($field) {
 
         global $LANG;
-        global $tb_prefix;
-
+        
 
 	//grab the last character of the field variable
         $get_cf_letter = $field[0];
@@ -143,11 +140,10 @@ function get_custom_field_name($field) {
 
 function calc_invoice_paid($inv_idField) {
 	global $LANG;
-	global $tb_prefix;
-
+	
 
 #amount paid calc - start
-$x1 = "SELECT IF ( ISNULL(SUM(ac_amount)) , '0', SUM(ac_amount)) AS amount FROM {$tb_prefix}account_payments WHERE ac_inv_id = $inv_idField";
+$x1 = "SELECT IF ( ISNULL(SUM(ac_amount)) , '0', SUM(ac_amount)) AS amount FROM ".TB_PREFIX."account_payments WHERE ac_inv_id = $inv_idField";
 	$result_x1 = mysqlQuery($x1) or die(mysql_error());
 	while ($result_x1Array = mysql_fetch_array($result_x1)) {
 		$invoice_paid_Field = $result_x1Array['amount'];
@@ -160,17 +156,16 @@ $x1 = "SELECT IF ( ISNULL(SUM(ac_amount)) , '0', SUM(ac_amount)) AS amount FROM 
 
 function calc_customer_total($customer_id) {
 	global $LANG;
-	global $tb_prefix;
-
+	
         $sql ="
 		SELECT
-			IF ( ISNULL( SUM({$tb_prefix}invoice_items.total)) ,  '0', SUM({$tb_prefix}invoice_items.total)) AS total 
+			IF ( ISNULL( SUM(".TB_PREFIX."invoice_items.total)) ,  '0', SUM(".TB_PREFIX."invoice_items.total)) AS total 
 		FROM
-			{$tb_prefix}invoice_items, {$tb_prefix}invoices 
+			".TB_PREFIX."invoice_items, ".TB_PREFIX."invoices 
 		WHERE  
-			{$tb_prefix}invoices.customer_id  = $customer_id  
+			".TB_PREFIX."invoices.customer_id  = $customer_id  
 		AND 
-			{$tb_prefix}invoices.id = {$tb_prefix}invoice_items.invoice_id
+			".TB_PREFIX."invoices.id = ".TB_PREFIX."invoice_items.invoice_id
 		";
 		
         $query = mysqlQuery($sql) or die(mysql_error());
@@ -182,14 +177,13 @@ function calc_customer_total($customer_id) {
 
 function calc_customer_paid($customer_id) {
 	global $LANG;
-	global $tb_prefix;
-	
+		
 #amount paid calc - start
 	$sql = "
 	SELECT IF ( ISNULL( sum(ac_amount)) ,  '0', sum(ac_amount)) AS amount 
-	FROM {$tb_prefix}account_payments, {$tb_prefix}invoices 
-	WHERE {$tb_prefix}account_payments.ac_inv_id = {$tb_prefix}invoices.id 
-	AND {$tb_prefix}invoices.customer_id = $customer_id";  	
+	FROM ".TB_PREFIX."account_payments, ".TB_PREFIX."invoices 
+	WHERE ".TB_PREFIX."account_payments.ac_inv_id = ".TB_PREFIX."invoices.id 
+	AND ".TB_PREFIX."invoices.customer_id = $customer_id";  	
 	
 	$query = mysqlQuery($sql);
 	$invoice = mysql_fetch_array($query);
@@ -209,10 +203,9 @@ function calc_customer_paid($customer_id) {
 **/
 function calc_invoice_tax($invoice_id) {
 	global $LANG;
-	global $tb_prefix;
-	
+		
 	#invoice total tax
-	$sql ="SELECT SUM(tax_amount) AS total_tax FROM {$tb_prefix}invoice_items WHERE invoice_id =$invoice_id";
+	$sql ="SELECT SUM(tax_amount) AS total_tax FROM ".TB_PREFIX."invoice_items WHERE invoice_id =$invoice_id";
 	$query = mysqlQuery($sql);
 
 	$tax = mysql_fetch_array($query);
@@ -241,8 +234,7 @@ function calc_invoice_tax($invoice_id) {
 **/
 
 function show_custom_field($custom_field,$custom_field_value,$permission,$css_class_tr,$css_class1,$css_class2,$td_col_span,$seperator) {
-	global $tb_prefix;
-	/*
+		/*
 	*get the last character of the $custom field - used to set the name of the field
 	*/
 	$custom_field_number =  substr($custom_field, -1, 1);
@@ -252,7 +244,7 @@ function show_custom_field($custom_field,$custom_field_value,$permission,$css_cl
 
 	$display_block = "";
 
-    $get_custom_label ="SELECT cf_custom_label FROM {$tb_prefix}custom_fields WHERE cf_custom_field = '$custom_field'";
+    $get_custom_label ="SELECT cf_custom_label FROM ".TB_PREFIX."custom_fields WHERE cf_custom_field = '$custom_field'";
 	$result_get_custom_label = mysqlQuery($get_custom_label) or die(mysql_error());
 
 	while ($Array_cl = mysql_fetch_array($result_get_custom_label)) {

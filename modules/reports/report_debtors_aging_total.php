@@ -27,18 +27,18 @@ include('./config/config.php');
 
    $sSQL = "SELECT
 
-        (CASE WHEN datediff(now(),date) <= 14 THEN (select IF ( isnull(sum({$tb_prefix}invoice_items.total)) , '0', sum({$tb_prefix}invoice_items.total)) from {$tb_prefix}invoices,{$tb_prefix}invoice_items where datediff(now(),date) <= 14 and {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id)
-                WHEN datediff(now(),date) <= 30 THEN (select  IF ( isnull(sum({$tb_prefix}invoice_items.total)) , '0', sum({$tb_prefix}invoice_items.total)) from {$tb_prefix}invoices,{$tb_prefix}invoice_items where datediff(now(),date) <= 30 and datediff(now(),date) > 14 and {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id)
-                WHEN datediff(now(),date) <= 60 THEN (select  IF ( isnull(sum({$tb_prefix}invoice_items.total)) , '0', sum({$tb_prefix}invoice_items.total)) from {$tb_prefix}invoices,{$tb_prefix}invoice_items where datediff(now(),date) <= 60 and datediff(now(),date) > 30 and {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id)
-                WHEN datediff(now(),date) <= 90 THEN (select  IF ( isnull(sum({$tb_prefix}invoice_items.total)) , '0', sum({$tb_prefix}invoice_items.total)) from {$tb_prefix}invoices,{$tb_prefix}invoice_items where datediff(now(),date) <= 90 and datediff(now(),date) > 60 and {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id)
-                ELSE (select  IF ( isnull(sum({$tb_prefix}invoice_items.total)) , '0', sum({$tb_prefix}invoice_items.total)) from {$tb_prefix}invoices,{$tb_prefix}invoice_items where datediff(now(),date) > 90 and {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id)
+        (CASE WHEN datediff(now(),date) <= 14 THEN (select IF ( isnull(sum(".TB_PREFIX."invoice_items.total)) , '0', sum(".TB_PREFIX."invoice_items.total)) from ".TB_PREFIX."invoices,".TB_PREFIX."invoice_items where datediff(now(),date) <= 14 and ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id)
+                WHEN datediff(now(),date) <= 30 THEN (select  IF ( isnull(sum(".TB_PREFIX."invoice_items.total)) , '0', sum(".TB_PREFIX."invoice_items.total)) from ".TB_PREFIX."invoices,".TB_PREFIX."invoice_items where datediff(now(),date) <= 30 and datediff(now(),date) > 14 and ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id)
+                WHEN datediff(now(),date) <= 60 THEN (select  IF ( isnull(sum(".TB_PREFIX."invoice_items.total)) , '0', sum(".TB_PREFIX."invoice_items.total)) from ".TB_PREFIX."invoices,".TB_PREFIX."invoice_items where datediff(now(),date) <= 60 and datediff(now(),date) > 30 and ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id)
+                WHEN datediff(now(),date) <= 90 THEN (select  IF ( isnull(sum(".TB_PREFIX."invoice_items.total)) , '0', sum(".TB_PREFIX."invoice_items.total)) from ".TB_PREFIX."invoices,".TB_PREFIX."invoice_items where datediff(now(),date) <= 90 and datediff(now(),date) > 60 and ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id)
+                ELSE (select  IF ( isnull(sum(".TB_PREFIX."invoice_items.total)) , '0', sum(".TB_PREFIX."invoice_items.total)) from ".TB_PREFIX."invoices,".TB_PREFIX."invoice_items where datediff(now(),date) > 90 and ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id)
         END ) as INV_TOTAL,
 
-        (CASE WHEN datediff(now(),date) <= 14 THEN (select  IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from {$tb_prefix}account_payments,{$tb_prefix}invoices where datediff(now(),date) <= 14 and ac_inv_id = {$tb_prefix}invoices.id)
-                WHEN datediff(now(),date) <= 30 THEN (select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from {$tb_prefix}account_payments,{$tb_prefix}invoices where datediff(now(),date) > 14 and datediff(now(),date) <= 30 and ac_inv_id = {$tb_prefix}invoices.id )
-                WHEN datediff(now(),date) <= 60 THEN (select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from {$tb_prefix}account_payments,{$tb_prefix}invoices where datediff(now(),date) > 30 and datediff(now(),date) <= 60 and ac_inv_id = {$tb_prefix}invoices.id )
-                WHEN datediff(now(),date) <= 90 THEN (select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from {$tb_prefix}account_payments,{$tb_prefix}invoices where datediff(now(),date) > 60 and datediff(now(),date) <= 90 and ac_inv_id = {$tb_prefix}invoices.id )
-                ELSE (select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from {$tb_prefix}account_payments,{$tb_prefix}invoices where datediff(now(),date) > 90 and ac_inv_id = {$tb_prefix}invoices.id )          
+        (CASE WHEN datediff(now(),date) <= 14 THEN (select  IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from ".TB_PREFIX."account_payments,".TB_PREFIX."invoices where datediff(now(),date) <= 14 and ac_inv_id = ".TB_PREFIX."invoices.id)
+                WHEN datediff(now(),date) <= 30 THEN (select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from ".TB_PREFIX."account_payments,".TB_PREFIX."invoices where datediff(now(),date) > 14 and datediff(now(),date) <= 30 and ac_inv_id = ".TB_PREFIX."invoices.id )
+                WHEN datediff(now(),date) <= 60 THEN (select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from ".TB_PREFIX."account_payments,".TB_PREFIX."invoices where datediff(now(),date) > 30 and datediff(now(),date) <= 60 and ac_inv_id = ".TB_PREFIX."invoices.id )
+                WHEN datediff(now(),date) <= 90 THEN (select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from ".TB_PREFIX."account_payments,".TB_PREFIX."invoices where datediff(now(),date) > 60 and datediff(now(),date) <= 90 and ac_inv_id = ".TB_PREFIX."invoices.id )
+                ELSE (select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from ".TB_PREFIX."account_payments,".TB_PREFIX."invoices where datediff(now(),date) > 90 and ac_inv_id = ".TB_PREFIX."invoices.id )          
 	  END ) as INV_PAID,
 
         (select (INV_TOTAL - INV_PAID)) as INV_OWING,
@@ -51,9 +51,9 @@ include('./config/config.php');
         END ) as Aging
 
 FROM
-        {$tb_prefix}invoices,{$tb_prefix}account_payments,{$tb_prefix}invoice_items, {$tb_prefix}biller, {$tb_prefix}customers
+        ".TB_PREFIX."invoices,".TB_PREFIX."account_payments,".TB_PREFIX."invoice_items, ".TB_PREFIX."biller, ".TB_PREFIX."customers
 WHERE
-        {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id
+        ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id
 GROUP BY
         INV_TOTAL;
 

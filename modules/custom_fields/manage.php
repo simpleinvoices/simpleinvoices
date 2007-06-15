@@ -4,7 +4,7 @@
 checkLogin();
 
 
-$sql = "select * from {$tb_prefix}custom_fields ORDER BY cf_custom_field";
+$sql = "SELECT * FROM ".TB_PREFIX."custom_fields ORDER BY cf_custom_field";
 
 $result = mysqlQuery($sql, $conn) or die(mysql_error());
 $number_of_rows = mysql_num_rows($result);

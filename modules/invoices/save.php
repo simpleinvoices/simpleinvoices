@@ -77,7 +77,7 @@ if ( $_POST['action'] == "edit" && ($_POST['type'] == 1 || $_POST['type'] == 2 |
 	}
 
 	if($_POST['type'] == 1) {
-		$sql = "UPDATE {$tb_prefix}products SET `unit_price` = $_POST[unit_price], `description` = '$_POST[description0]' WHERE id = $_POST[products0]";
+		$sql = "UPDATE ".TB_PREFIX."products SET `unit_price` = $_POST[unit_price], `description` = '$_POST[description0]' WHERE id = $_POST[products0]";
 		mysqlQuery($sql);
 	}
 

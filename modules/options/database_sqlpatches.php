@@ -9,10 +9,9 @@ include('./include/sql_patches.php');
 function getNumberOfPatches() {
 	global $patch;
 	#Max patches applied - start
-	global $tb_prefix;
-	
+		
 
-	$check_patches_sql = "SELECT count(sql_patch) AS count FROM {$tb_prefix}sql_patchmanager ";
+	$check_patches_sql = "SELECT count(sql_patch) AS count FROM ".TB_PREFIX."sql_patchmanager ";
 	$patches_result = mysqlQuery($check_patches_sql) or die(mysql_error());
 		
 	$patches = mysql_fetch_array($patches_result);
@@ -24,11 +23,10 @@ function getNumberOfPatches() {
 
 
 function runPatches() {
-	global $tb_prefix;
-	global $patch;
+		global $patch;
 	#DEFINE SQL PATCH
 	
-	if(mysql_num_rows(mysqlQuery("SHOW TABLES LIKE '{$tb_prefix}sql_patchmanager'")) == 1) {
+	if(mysql_num_rows(mysqlQuery("SHOW TABLES LIKE '".TB_PREFIX."sql_patchmanager'")) == 1) {
 
 		$display_block = "<table align='center'>";
 
@@ -68,10 +66,9 @@ EOD;
 }
 
 function listPatches() {
-	global $tb_prefix;
-	global $patch;
+		global $patch;
 
-	//if(mysql_num_rows(mysqlQuery("SHOW TABLES LIKE '{$tb_prefix}sql_patchmanager'")) == 1) {
+	//if(mysql_num_rows(mysqlQuery("SHOW TABLES LIKE '".TB_PREFIX."sql_patchmanager'")) == 1) {
 
 		$display_block = <<<EOD
 		<b>Simple Invoices :: Database Upgrade Manager</b><br /><br />
@@ -114,8 +111,7 @@ EOD;
 
 
 function check_sql_patch($check_sql_patch_ref, $check_sql_patch_field) {
-    global $tb_prefix;
-	$sql = "SELECT * FROM {$tb_prefix}sql_patchmanager WHERE sql_patch_ref = $check_sql_patch_ref" ;
+    	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager WHERE sql_patch_ref = $check_sql_patch_ref" ;
 
 	$query = mysqlQuery($sql) or die(mysql_error());
 
@@ -131,9 +127,8 @@ function check_sql_patch($check_sql_patch_ref, $check_sql_patch_field) {
 
 function run_sql_patch($id, $patch) {
 
-	global $tb_prefix;
-
-	$sql = "SELECT * FROM {$tb_prefix}sql_patchmanager WHERE sql_patch_ref = $id" ;
+	
+	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager WHERE sql_patch_ref = $id" ;
 	$query = mysqlQuery($sql) or die(mysql_error());
 	
 	//echo $sql;
@@ -156,10 +151,10 @@ EOD;
 		$display_block  = <<<EOD
 			<tr><td>SQL patch $id, $patch[name] <i>has</i> been applied to the database</td></tr>
 EOD;
-		# now update the {$tb_prefix}sql_patchmanager table
+		# now update the ".TB_PREFIX."sql_patchmanager table
 		
 		
-		$sql_update = "INSERT INTO {$tb_prefix}sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ($id,'$patch[name]',$patch[date],'".addslashes($patch['patch'])."')";
+		$sql_update = "INSERT INTO ".TB_PREFIX."sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ($id,'$patch[name]',$patch[date],'".addslashes($patch['patch'])."')";
 		
 		/*echo $sql_update;*/
 
@@ -179,16 +174,16 @@ EOD;
 function initialise_sql_patch() {
 
 	#check sql patch 1
-	$sql_patch_init = "CREATE TABLE {$tb_prefix}sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 50 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) TYPE = MYISAM ";
+	$sql_patch_init = "CREATE TABLE ".TB_PREFIX."sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 50 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) TYPE = MYISAM ";
 	mysqlQuery($sql_patch_init) or die(mysql_error());
 
 	$display_block = "<tr><td>Step 2 - The SQL patch table has been created<br></td></tr>";
 
 	echo $display_block;
 
-	$sql_insert = "INSERT INTO {$tb_prefix}sql_patchmanager
+	$sql_insert = "INSERT INTO ".TB_PREFIX."sql_patchmanager
  ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement )
-VALUES ('','1','Create {$tb_prefix}sql_patchmanger table','20060514','$sql_patch_init')";
+VALUES ('','1','Create ".TB_PREFIX."sql_patchmanger table','20060514','$sql_patch_init')";
 	mysqlQuery($sql_insert, $conn) or die(mysql_error());
 
 	$display_block2 = "<tr><td>Step 3 - The SQL patch has been inserted into the SQL patch table<br></td></tr>";
