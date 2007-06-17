@@ -7,7 +7,7 @@ include('./include/sql_patches.php');
 checkLogin();
 
 #Largest debtor query - start
-if ($mysql > 4) {
+if ($mysql > "4.1.0") {
 	$sql = "SELECT	
 	        ".TB_PREFIX."customers.id as CID,
 	        ".TB_PREFIX."customers.name as Customer,
@@ -31,7 +31,7 @@ if ($mysql > 4) {
 
 #Top customer query - start
 
-if ($mysql > 4) {
+if ($mysql > "4.1.0") {
 	$sql2 = "SELECT
 		".TB_PREFIX."customers.id as CID,
 	        ".TB_PREFIX."customers.name as Customer,
@@ -55,7 +55,7 @@ if ($mysql > 4) {
 #Top customer query - end
 
 #Top biller query - start
-if ($mysql > 4) {
+if ($mysql > "4.1.0") {
 	
 	$sql3 = "SELECT
 		".TB_PREFIX."biller.name,  

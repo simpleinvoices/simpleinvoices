@@ -8,6 +8,9 @@ $db_host = "localhost";
 $db_name = "simple_invoices";
 $db_user = "root";
 $db_password = "test";
+//if you are using a .httaccess file
+$http_auth = "";	//value: "name:password@"
+
 //$tb_prefix = "si_";
 define("TB_PREFIX",si_);
 define("LOGGING",true);

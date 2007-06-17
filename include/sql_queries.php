@@ -9,8 +9,7 @@ if(LOGGING) {
 $conn = mysql_connect( $db_host, $db_user, $db_password,true );
 mysql_select_db( $db_name, $conn );
 
-$mysql = substr(mysql_get_server_info(),0,1)+0;	//mysql version
-
+$mysql = mysql_get_server_info();	//mysql_version
 
 /**
  * Used for logging all queries

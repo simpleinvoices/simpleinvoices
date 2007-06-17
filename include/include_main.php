@@ -41,7 +41,6 @@ if (!$test_db_selection) {
 }
 mysql_select_db("$db_name",$conn);
 
-
 include_once('./include/functions.php');
 
 include_once("./include/validation.php");
