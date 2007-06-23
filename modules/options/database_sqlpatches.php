@@ -43,7 +43,7 @@ function runPatches() {
 		</table>
 
 EOD;
-	exit();
+	//exit();
 	$refresh = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php>";
 
 	} else {
@@ -127,7 +127,6 @@ function check_sql_patch($check_sql_patch_ref, $check_sql_patch_field) {
 
 function run_sql_patch($id, $patch) {
 
-	
 	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager WHERE sql_patch_ref = $id" ;
 	$query = mysqlQuery($sql) or die(mysql_error());
 	
@@ -166,8 +165,8 @@ EOD;
 		$display_block .= "<tr><td>SQL patch $id, $patch[name] <b>has</b> been applied</td></tr>";
 	}
 	
-	global $smarty;
-	$smarty-> assign("display_block",$display_block);
+	//global $smarty;
+	//$smarty-> assign("display_block",$display_block);
 }
 
 

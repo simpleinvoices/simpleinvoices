@@ -38,7 +38,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
      mysql_select_db( $db_name, $conn);
 
     $userEmail   = $_POST['user'];
-    if ($_POST['pass'] == $_POST['md5']){
+    if ($_POST['pass'] == $_POST['md5'] ){
         $password = $_POST['pass'];
     } 
     else {
