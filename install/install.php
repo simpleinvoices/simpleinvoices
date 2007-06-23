@@ -1,4 +1,6 @@
 <?php
+
+die("no ready");
 session_start();
 
 // +-----------------------------------------------------------------------+
@@ -6,7 +8,7 @@ session_start();
 // | Licence: GNU General Public License 2.0                               |
 // +-----------------------------------------------------------------------+
 
-// définition automatique de la langue du navigateur
+// dÃ©finition automatique de la langue du navigateur
 $langNav = substr(getenv("HTTP_ACCEPT_LANGUAGE"),0,2);
 
 // Selection du fichier de langue

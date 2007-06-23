@@ -15,8 +15,13 @@ $smarty -> compile_dir = "./cache/";
 
 include('./include/language.php');
 
-include("./include/include_main.php");
+include_once('./config/config.php');
+include("./include/sql_queries.php");
+
 include('./modules/options/database_sqlpatches.php');
+
+include("./include/include_main.php");
+
 
 
 $smarty -> assign("LANG",$LANG);

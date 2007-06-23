@@ -715,7 +715,33 @@ NULL , 'logging', '0'
 
 	$patch['127']['name'] = "Add last_id to logging table";
 	$patch['127']['patch'] = "ALTER TABLE  `si_log` ADD  `last_id` INT NULL ;";
-	$patch['127']['date'] = "20070528";
+	$patch['127']['date'] = "20070623";
+	
+	$patch['128']['name'] = "Add si_user table";
+	$patch['128']['patch'] = "CREATE TABLE `si_users` (
+  `user_id` int(11) NOT NULL auto_increment,
+  `user_email` varchar(100) NOT NULL,
+  `user_name` varchar(100) NOT NULL,
+  `user_group` varchar(10) NOT NULL,
+  `user_domain` varchar(10) NOT NULL,
+  `user_password` char(32) NOT NULL,
+  PRIMARY KEY  (`user_id`)
+) ;";
+	$patch['128']['date'] = "200700623";
+	
+	$patch['129']['name'] = "Fill si_user table with default values";
+	$patch['129']['patch'] = "INSERT INTO `si_users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`) VALUES 
+(1, 'demo@simpleinvoices.org', 'guest', '1', '1', MD5('demo'))";
+	$patch['129']['date'] = "20070623";
+	
+	$patch['130']['name'] = "Create si_auth_challenges table";
+	$patch['130']['patch'] = "CREATE TABLE `si_auth_challenges` (
+  `challenges_key` int(11) NOT NULL,
+  `challenges_timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);";
+	$patch['130']['date'] = "20070623";
+	
+
+
 
 
 
