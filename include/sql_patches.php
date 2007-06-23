@@ -701,7 +701,7 @@ NULL , 'logging', '0'
 (63, 61, 10, '{$LANG['change_log']}', 'docs.php?p=ReadMe#faqs', 1),
 (64, 61, 15, '{$LANG['credits']}', 'docs.php?p=ReadMe#faqs', 1),
 (65, 61, 20, '{$LANG['license']}', 'docs.php?p=ReadMe#faqs', 1),
-(66, 0, 100, '{$LANG['login']}', 'login.php', 0);";
+(66, 0, 100, '{$LANG['login']}', 'login.php', 1);";
 	$patch['124']['date'] = "20070523";
 
 

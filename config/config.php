@@ -12,7 +12,7 @@ $db_password = "test";
 $http_auth = "";	//value: "name:password@"
 
 //$tb_prefix = "si_";
-define("TB_PREFIX",si_);
+define("TB_PREFIX","si_");
 define("LOGGING",true);
 
 //$path = pathinfo($_SERVER['REQUEST_URI']);

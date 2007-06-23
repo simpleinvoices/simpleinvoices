@@ -1,6 +1,5 @@
 <?php
 
-include("./include/sql_queries.php");
 
 function checkLogin() {
 	if (!defined("BROWSE")) {

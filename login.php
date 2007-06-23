@@ -26,8 +26,9 @@ CREATE TABLE `si_auth_challenges` (
 define("BROWSE","browse");
 include 'config/config.php';
 include 'include/sql_queries.php';
-include "lang/$language.inc.php";
+//include "lang/$language.inc.php";
 include "include/md5/hmac_md5.php";
+
 session_start();
 
 $errorMessage = '';
@@ -47,7 +48,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
         $password = md5($_POST['pass']);
     }
     if ($ChallengeLife>0){
-    $ChallengeKeySubmitted = $_POST['ChallengeKey'];
+    	$ChallengeKeySubmitted = $_POST['ChallengeKey'];
     }
 
     // Grab Password from database
@@ -57,7 +58,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
     
     $result = mysqlQuery($sql, $conn) or die('Query failed. ' . mysql_error()); 
     $credentials = mysql_fetch_array($result);
-    $storedPassword=$credentials[user_password];
+    $storedPassword=$credentials['user_password'];
 
 
 
@@ -72,7 +73,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
         if (mysql_num_rows($result) >= 1) {
             //Challenge was valid
 #            echo $ChallengeKeySubmitted;
-            $DeleteUSEDChallenge = 'DELETE FROM `si_auth_challenges` WHERE `challenges_key` = `$ChallengeKeySubmitted`limit 1';
+            $DeleteUSEDChallenge = 'DELETE FROM `si_auth_challenges` WHERE `challenges_key` = `$ChallengeKeySubmitted` limit 1';
             mysqlQuery($DeleteUSEDChallenge, $conn);
 #            echo "Deleted Used Key $ChallengeKeySubmitted";
             if($password==hmac_md5($ChallengeKeySubmitted, "$storedPassword")){ 
