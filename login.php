@@ -185,11 +185,11 @@ if ($errorMessage != '') {
 
   	<dl>
   		<dt>Email:</dt>
-  		<dd><input name="user" type="text" id="user" /></dd>
+  		<dd><input name="user" type="text" id="user" value="demo@simpleinvoices.org" /></dd>
 
   		<dt>Password:</dt>
   		<dd>
-  		  <input name="pass" type="password" id="pass" />
+  		  <input name="pass" type="password" id="pass" value="demo" />
 			<!--
   		  <span>(<a href="login.php">I forgot my password/username</a>)</span>
 			-->

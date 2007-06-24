@@ -7,7 +7,7 @@ require_once("./include/smarty/Smarty.class.php");
 $smarty = new Smarty();
 $smarty -> compile_dir = "./cache/";
 include("./include/include_main.php");
-include("./include/language.php");
+
 $smarty -> assign("LANG",$LANG);
 
 if(isset($_GET['lang'])) {
