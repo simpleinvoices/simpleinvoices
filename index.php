@@ -4,11 +4,14 @@
 //if browse not defined then the page will exit
 define("BROWSE","browse");
 
+//keeps the old path
+set_include_path(get_include_path() . PATH_SEPARATOR . "./include");
+
 $module = isset($_GET['module'])?$_GET['module']:null;
 $view = isset($_GET['view'])?$_GET['view']:null;
 $action = isset($_GET['case'])?$_GET['case']:null;
 
-require_once("./include/smarty/Smarty.class.php");
+require_once("smarty/Smarty.class.php");
 
 $smarty = new Smarty();
 $smarty -> compile_dir = "./cache/";
@@ -64,7 +67,6 @@ if(file_exists("./modules/$path.php")) {
 		$file = $path;
 	}	
 }
-
 
 
 $smarty -> display("../templates/default/header.tpl");

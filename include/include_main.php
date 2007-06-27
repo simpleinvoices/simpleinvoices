@@ -1,6 +1,6 @@
 <?php
 
-
+//TODO: have to be moved to an other place...
 require_once("./modules/include/js/lgplus/php/chklang.php");
 require_once("./modules/include/js/lgplus/php/settings.php");
 
@@ -21,9 +21,7 @@ if(getNumberOfPatches() == 0 ) {
 	include('./include/include_auth.php');
 }
 
-
 include_once('./include/functions.php');
-
 include_once("./include/validation.php");
 
 ?>
