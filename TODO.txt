@@ -5,6 +5,7 @@
  - add + back into menu 
  - print preview of Total style invocies needs to be fixed
  - quick view - show customer fields for invoices in the invoice summary section and show by default
+ - quick view - add file names extensions (xls,doc) back in to the export section
  - old ones
  -- CSS: main container - white section seems to have default height???
  -- customer view - add edit/export etc, back in
