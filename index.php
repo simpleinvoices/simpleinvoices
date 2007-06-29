@@ -61,7 +61,7 @@ $path = "$module/$view";
 
 if(file_exists("./modules/$path.php")) {
 	
-	preg_match("/^[a-z|_]+\/[a-z|_]+/",$path,$res);
+	preg_match("/^[a-z|A-Z|_]+\/[a-z|A-Z|_]+/",$path,$res);
 
 	if(isset($res[0]) && $res[0] == $path) {
 		$file = $path;

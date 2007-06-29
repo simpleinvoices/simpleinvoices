@@ -5,7 +5,7 @@
 
 /*Enter your database information */
 $db_host = "localhost";
-$db_name = "simple_invoices";
+$db_name = "simpleinvoices";
 $db_user = "root";
 $db_password = "";
 //if you are using a .httaccess file

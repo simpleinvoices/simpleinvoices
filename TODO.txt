@@ -169,7 +169,7 @@ customFieldsCategorie
 id,name (product,customer,biller,...)
 
 customFields
-id,categorieId,value
+id,categorieId,itemId,value
 
 customFieldsValues
 id,cateogireId,customFieldId,itemId,value
@@ -179,3 +179,7 @@ id, name,
 
 
 - Store Menu in the database...
+
+
+- defining for every module an id?
+- customFieldPlugin Id's have to be unique. 0 - 100 for shipping plugins. Other numbers can be choosen with attention (public list?)

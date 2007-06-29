@@ -740,6 +740,44 @@ NULL , 'logging', '0'
   `challenges_timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);";
 	$patch['130']['date'] = "20070623";
 	
+	
+	$patch['131']['name'] = "Create si_customFieldCategories table";
+	$patch['131']['patch'] = "CREATE TABLE `si_customFieldCategories` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(40) NOT NULL,
+  PRIMARY KEY  (`id`) );";
+	$patch['131']['date'] = "20070629";
+	
+	
+	$patch['132']['name'] = "Insert si_customFieldCategories default values";
+	$patch['132']['patch'] = "INSERT INTO `si_customFieldCategories` (`id`, `name`) VALUES 
+(1, 'biller'),
+(2, 'customer'),
+(3, 'product'),
+(4, 'invoice');";
+	$patch['132']['date'] = "20070629";
+	
+	$patch['133']['name'] = "Create si_customFieldValues table";
+	$patch['133']['patch'] = "CREATE TABLE `si_customFieldValues` (
+  `id` int(11) NOT NULL auto_increment,
+  `customFieldId` int(11) NOT NULL,
+  `itemId` int(11) NOT NULL COMMENT 'could be invocie-id,customer-id etc.',
+  `value` text NOT NULL,
+  PRIMARY KEY  (`id`));";
+	$patch['133']['date'] = "20070629";
+	
+	$patch['134']['name'] = "Create si_customFields table";
+	$patch['134']['patch'] = "CREATE TABLE `si_customFields` (
+  `id` int(11) NOT NULL auto_increment,
+  `pluginId` int(11) NOT NULL,
+  `categorieId` int(11) NOT NULL,
+  `name` varchar(30) character set latin1 NOT NULL,
+  `description` varchar(50) collate utf8_unicode_ci NOT NULL,
+  `active` tinyint(1) NOT NULL default '1',
+  PRIMARY KEY  (`id`)
+);";
+	$patch['134']['date'] = "20070629";
+
 
 
 
