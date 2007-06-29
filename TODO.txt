@@ -1,8 +1,13 @@
 
 - in next release - aim 18th May 
 -todo
- - CSS: main container - white section seems to have default height???
- - customer view - add edit/export etc, back in
+ - si_user and auth challenges table - add check to see if all ready exists
+ - add + back into menu 
+ - print preview of Total style invocies needs to be fixed
+ - quick view - show customer fields for invoices in the invoice summary section and show by default
+ - old ones
+ -- CSS: main container - white section seems to have default height???
+ -- customer view - add edit/export etc, back in
 
 -done
  - sql patch: reset default invoices template to default - Done

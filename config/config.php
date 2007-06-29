@@ -7,7 +7,7 @@
 $db_host = "localhost";
 $db_name = "simple_invoices";
 $db_user = "root";
-$db_password = "test";
+$db_password = "";
 //if you are using a .httaccess file
 $http_auth = "";	//value: "name:password@"
 
