@@ -22,6 +22,7 @@ if(getNumberOfPatches() == 0 ) {
 }
 
 include_once('./include/functions.php');
+include_once('./include/manageCustomFields.php');
 include_once("./include/validation.php");
 
 ?>

@@ -17,4 +17,6 @@ $smarty -> assign('files',$files);
 $smarty -> assign('customFieldLabel',$customFieldLabel);
 $smarty -> assign('save',$save);
 
+showCustomFields(1);
+
 ?>

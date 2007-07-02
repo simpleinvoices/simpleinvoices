@@ -15,14 +15,22 @@ abstract class CustomField {
 		//echo $id."  ".$name;
 	}
 	
-	public function printOutput() {
-	}
-	
 	function installPlugin() {
 	}
 	
 	function updatePlugin() {
 	}
+	
+	//Please overwrite the following functions
+	function printInputField() {
+	}
+	
+	function saveInput() {
+	}
+	
+	function showField() {
+	}
+	//
 	
 	function setDescription($description) {
 		$this->description = $description;
