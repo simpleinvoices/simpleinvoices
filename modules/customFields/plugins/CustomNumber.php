@@ -11,7 +11,7 @@ class CustomNumber extends CustomField {
 	}
 	
 	function printInputField($id) {
-		echo "<tr><td>Random Number:</td><td>".rand()."</td></tr>";
+		echo "<tr><input type='hidden' ".$this->getFormName($id)." value='".rand()."'><td>".$this->getDescription().":</td><td>".rand()."</td></tr>";
 	}
 }
 

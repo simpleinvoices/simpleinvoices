@@ -13,8 +13,10 @@ $saved = false;
 
 if ( $op === 'insert_biller') {
 	
-	if(insertBiller()) {
+	if($id = insertBiller()) {
  		$saved = true;
+ 		//error_log("bbb:".mysql_insert_id());
+ 		saveCustomFieldValues($_POST['categorie'],mysql_insert_id());
  	}
 }
 

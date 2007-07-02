@@ -6,6 +6,7 @@ abstract class CustomField {
 	var $name;
 	var $id;
 	var $description;
+	var $fieldId;
 	//array with categorie-id's
 	var $categories;
 	
@@ -25,15 +26,33 @@ abstract class CustomField {
 	function printInputField() {
 	}
 	
-	function saveInput() {
+	
+	function saveInput($value,$itemId) {
+		//error_log($value." aaa".$itemId);
+		$sql = "INSERT INTO si_customFieldValues (customFieldId,itemId,value) VALUES('".$this->fieldId."','".$itemId."','".$value."');";
+		error_log($sql);
+		mysqlQuery($sql);
+		
 	}
 	
 	function showField() {
 	}
 	//
 	
+	function setFieldId($id) {
+		$this->fieldId = $id;
+	}
+	
+	public function getFormName($id) {
+		return ' name="cf'.$id.'" ';
+	}
+	
 	function setDescription($description) {
 		$this->description = $description;
+	}
+	
+	function getDescription() {
+		return "";	//Should be an sql querie
 	}
 	
 	function setActiveCategories($categories) {

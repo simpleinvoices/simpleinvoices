@@ -12,11 +12,16 @@ class TextCustomField extends CustomField {
 	}
 	
 	function printInputField($id) {
+		global $LANG;
+		
 		$sql = "SELECT * FROM ".TB_PREFIX."customFields WHERE id = $id";
 		$query = mysqlQuery($sql);
 		$field = mysql_fetch_array($query);
+		$a = 2;
 		
-		echo "<tr><td>$field[description]:</td><td><input type='text'></td></tr>";
+		error_log($field['description']);
+				
+		echo "<tr><td>".eval("return ".$field['description'].";")."</td><td><input ".$this->getFormName($id)." type='text'></td></tr>";
 	}
 }
 

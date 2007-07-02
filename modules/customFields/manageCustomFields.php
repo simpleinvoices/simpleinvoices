@@ -7,8 +7,13 @@ if(isset($_POST['save'])) {
 
 echo '<form method="post" action="index.php?module=customFields&view=manageCustomFields">';
 
+echo "Plugins: ";
 printPlugins();
+echo "Categorie: ";
 printCategories();
+
+
+//Note: If input is language specific it has to be in the form: $LANG['value']
 
 echo <<<EOD
 	Name: <input type="text" name="name"><br />
@@ -20,6 +25,7 @@ EOD;
 
 printCustomFieldsList();
 showCustomFields(3);
+
 //$plugins = getPlugins();
 
 //getPluginArray();
