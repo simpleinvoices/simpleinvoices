@@ -1,6 +1,5 @@
 -todo
  - si_user and auth challenges table - add check to see if all ready exists
- - add + back into menu 
  - print preview of Total style invocies needs to be fixed
  - quick view - show customer fields for invoices in the invoice summary section and show by default
  - quick view - add file names extensions (xls,doc) back in to the export section
@@ -12,11 +11,15 @@
  - preferences: move rest into db
  - db connect: show nice messages again if cant connect (as in the previous release)
  - db: prevent sql injection (refer info point 1)
+ - menu : issue with sql patch 124 when upgrading from old release - to be looked at
+ - menu : new read from db - what happens when user changes LANG - menu wont update - needs to be fixed
+ - menu : fix documentaion links about etc.. to be correct
  - old ones
  -- CSS: main container - white section seems to have default height???
  -- customer view - add edit/export etc, back in
 
 -done
+ - menu : add + back into menu - done
 
 - in next release +1 - aim end of May
 -todo

@@ -5,7 +5,7 @@
 
 /*Enter your database information */
 $db_host = "localhost";
-$db_name = "simpleinvoices";
+$db_name = "simple_invoices";
 $db_user = "root";
 $db_password = "";
 //if you are using a .httaccess file
@@ -54,7 +54,7 @@ $ChallengeLife = 0; /*To turn off ChallengeLife set this to 0 */
 /*To change the theme, enter the name of the theme folder - default is google*/
 $theme = "google";
 
-$version = "20070615 unstable";
+$version = "200707 unstable";
 
 $config['date_format']  = 'Y-m-d'; #International format just the date
 #$config['date_format']  = 'Y-m-d h:m'; #Internalional format date and time 
