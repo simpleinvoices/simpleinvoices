@@ -10,6 +10,7 @@
  - email: add cc - maybe ??
  - email: add default signature - maybe - set in biller details ??
  - preferences: move rest into db
+ - db connect: show nice messages again if cant connect (as in the previous release)
  - old ones
  -- CSS: main container - white section seems to have default height???
  -- customer view - add edit/export etc, back in
