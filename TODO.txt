@@ -11,84 +11,12 @@
  - email: add default signature - maybe - set in biller details ??
  - preferences: move rest into db
  - db connect: show nice messages again if cant connect (as in the previous release)
+ - db: prevent sql injection (refer info point 1)
  - old ones
  -- CSS: main container - white section seems to have default height???
  -- customer view - add edit/export etc, back in
 
 -done
- - sql patch: reset default invoices template to default - Done
- - sql patch: change custom fields to 255 lenght - up from the current 50 - Done
- - sql patch: change sql_patch field to 255 lenght - up from the current 50 - Done
- - fix the submenus - make placement work as normal - done
- - pdf: change the file name to a shorter one , invoice3.pdf instead of the current long one - done
- - sqlpatcehs - make sure this works - the latest patches dotn seem happy - done
- - css: make calendar popup css work as before - done
- - Replace $LANG strings with array - done
- - Start page in IE goign crazy again - check ie hacks file is loaded - done 
- - CSS - in reports page not working good - refer previous release for what its supposed to do
- -- lionel fixed
- - remove all reference to $wording_for_enabledFiedl and change to $LANG.enabled or $LANG.disabled - done
- - lang file cleanup up - done
- -- remove old $m- etc variables - done
- -- move the $lang_ to arrays ie $LANG['word'] - done 
- - validation:
- -- apply to all ADD sections of Simple Invoices - except new invoices -done
- - templates - add $smarty.post value to ALL values in add screen - done
- - Smarty: Customer - make details and save work - done
- - mysql db connect - if cant connect die and come up with sane error - done
- - sql patches error - if pathces unapplied show error and have a redirect link to the sqp patches page - done
- -- dont show the rest of the contents of start.php - done
- - invoice templates - move to smarty and cleanup - done
- - change index file that data update manager has to be run before working (done)
- - Manage sql patch - more to rico live grid - done
- - make email function work - done but needs polish
- -- add note on screen that the generation of pdf and email can take 30 seconds -dont do any more
- -- make the info pages for email funtion - done
- -- move email page to smarty - done
- - Add redirector after the sql patches have run - done
- - Quick View: make product custom fields work - done
- - Docs: change chmod 777 with chown apache:apache - done
- - sql queries: rename all the old crappy fields from b_name to name etc..
- -- need to write sql queries for all and change all relevant code that references these fields
- --- products, - done
- --- customers, - done
- --- billers, - done
- --- and invoices - done
- --- and invoices_items - done
- --- do the custom fields fields in biller etc.. to - needs to test the result - done
- - Defautls: on all screens that reference system defautls (ie biller etc..) make sure that the default item is working correctly - done
- - Edit biller etc. - Custom fields not shows - needs fix up - done
- - Tax rates - edit screen needs fix up - done
- - Enabled in edit page etc.. - check is working + check if working in all sections - done
- - Quick View: make invoice custom fields work - done
- - Customer: enabled drop down in edit not working correctly - done
- - alter sysdefaults table - done
- -- rename to system_defautls - done
- -- change invoice to preference - done
- -- change items to line_items - done
- - sql patches: make a conversion script for the old defaults to the new one - done
- - default template - remove logos - done
- - calculation on home.php not working - done
- - home.php - make the links to the documentation work - done
- - Fix reports to work with new db field names - done
- - add new lang for sys default saved - done
- - Move .sql out of install and back to root (untill the installer is done and included as default) - done
- - check all alert boxes work - done
- - update spanish file with tebas new file - done
- - lang files - make sure all have same variables - done
- - Help and About docs - add div id = left to left align them and test all work ok - done
- - include regexp stuff in docs.php file - done
- - Invoice templates 
- -- make merge_adress work in both templates - done
- -- make invoice items custom fields work - done
- -- make gross total work in both templates - done
- -- make product custom fields work - done - THANKS ruflin!!
- - update sql patch dates - done
- #post beta
- - manage payments - customer and biller name not showing - done
- - login.php change 
- - quick view mod re manage payments link
- - mysql 4 ? issue - my regex stuff needs mods - done
 
 - in next release +1 - aim end of May
 -todo
@@ -188,3 +116,111 @@ id, name,
 
 - defining for every module an id?
 - customFieldPlugin Id's have to be unique. 0 - 100 for shipping plugins. Other numbers can be choosen with attention (public list?)
+
+###############
+INFO SECTION
+###############
+1.
+> Hey Jakob,
+> 
+> a few other people have mentioned SQL injection as an issue but i 
+> havent really looked into it yet - i know i really need to :)
+> 
+> do you know of any example php code  etc.. or best practices re sql 
+> injection? - it would be a great help cause i dont know much about it.
+
+hi,
+try to look into Drupal source for SQL functions. If you are GNU/GPL too, you can even adopt it :-)
+
+The point is, that EVERY user inputted string must go through some escaping function:
+
+<?php
+
+$user = $_GET['user']; // $_POST['user'] // this is VERY vulnerable $result = MySQL_Query("SELECT * FROM users WHERE username = $user"); // this is NOT vulnerable $result = MySQL_Query("SELECT * FROM users WHERE username = '".mysql_real_escape_string($user)."'");
+
+while ($row = MySQL_Fetch_Array($result)) {
+  // this IS vulnerable to XSS
+  print_r($row);
+  // this IS NOT vulnerable to XSS
+  htmlspecialchars(print_r($row));
+}
+?>
+
+####################
+DONE OLD STUFF
+####################
+
+ - sql patch: reset default invoices template to default - Done
+ - sql patch: change custom fields to 255 lenght - up from the current 50 - Done
+ - sql patch: change sql_patch field to 255 lenght - up from the current 50 - Done
+ - fix the submenus - make placement work as normal - done
+ - pdf: change the file name to a shorter one , invoice3.pdf instead of the current long one - done
+ - sqlpatcehs - make sure this works - the latest patches dotn seem happy - done
+ - css: make calendar popup css work as before - done
+ - Replace $LANG strings with array - done
+ - Start page in IE goign crazy again - check ie hacks file is loaded - done 
+ - CSS - in reports page not working good - refer previous release for what its supposed to do
+ -- lionel fixed
+ - remove all reference to $wording_for_enabledFiedl and change to $LANG.enabled or $LANG.disabled - done
+ - lang file cleanup up - done
+ -- remove old $m- etc variables - done
+ -- move the $lang_ to arrays ie $LANG['word'] - done 
+ - validation:
+ -- apply to all ADD sections of Simple Invoices - except new invoices -done
+ - templates - add $smarty.post value to ALL values in add screen - done
+ - Smarty: Customer - make details and save work - done
+ - mysql db connect - if cant connect die and come up with sane error - done
+ - sql patches error - if pathces unapplied show error and have a redirect link to the sqp patches page - done
+ -- dont show the rest of the contents of start.php - done
+ - invoice templates - move to smarty and cleanup - done
+ - change index file that data update manager has to be run before working (done)
+ - Manage sql patch - more to rico live grid - done
+ - make email function work - done but needs polish
+ -- add note on screen that the generation of pdf and email can take 30 seconds -dont do any more
+ -- make the info pages for email funtion - done
+ -- move email page to smarty - done
+ - Add redirector after the sql patches have run - done
+ - Quick View: make product custom fields work - done
+ - Docs: change chmod 777 with chown apache:apache - done
+ - sql queries: rename all the old crappy fields from b_name to name etc..
+ -- need to write sql queries for all and change all relevant code that references these fields
+ --- products, - done
+ --- customers, - done
+ --- billers, - done
+ --- and invoices - done
+ --- and invoices_items - done
+ --- do the custom fields fields in biller etc.. to - needs to test the result - done
+ - Defautls: on all screens that reference system defautls (ie biller etc..) make sure that the default item is working correctly - done
+ - Edit biller etc. - Custom fields not shows - needs fix up - done
+ - Tax rates - edit screen needs fix up - done
+ - Enabled in edit page etc.. - check is working + check if working in all sections - done
+ - Quick View: make invoice custom fields work - done
+ - Customer: enabled drop down in edit not working correctly - done
+ - alter sysdefaults table - done
+ -- rename to system_defautls - done
+ -- change invoice to preference - done
+ -- change items to line_items - done
+ - sql patches: make a conversion script for the old defaults to the new one - done
+ - default template - remove logos - done
+ - calculation on home.php not working - done
+ - home.php - make the links to the documentation work - done
+ - Fix reports to work with new db field names - done
+ - add new lang for sys default saved - done
+ - Move .sql out of install and back to root (untill the installer is done and included as default) - done
+ - check all alert boxes work - done
+ - update spanish file with tebas new file - done
+ - lang files - make sure all have same variables - done
+ - Help and About docs - add div id = left to left align them and test all work ok - done
+ - include regexp stuff in docs.php file - done
+ - Invoice templates 
+ -- make merge_adress work in both templates - done
+ -- make invoice items custom fields work - done
+ -- make gross total work in both templates - done
+ -- make product custom fields work - done - THANKS ruflin!!
+ - update sql patch dates - done
+ #post beta
+ - manage payments - customer and biller name not showing - done
+ - login.php change 
+ - quick view mod re manage payments link
+ - mysql 4 ? issue - my regex stuff needs mods - done
+
