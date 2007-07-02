@@ -36,42 +36,46 @@ include('lang/lang_'.$language.'.php');
 // Simple invoices want if possible 24M.
 $post_max_size = ini_get('post_max_size');
 
-function controle_post_max_size() {
-	if(substr($post_max_size, 0, strlen($post_max_size)-1) >= 24) {
-		return $boolMaxSize = true;
-	}
-	else if(substr($post_max_size, 0, strlen($post_max_size)-1) < 24) {
-		return $boolMaxSize = false;
-	}
+function controle_post_max_size()
+{
+    if (substr($post_max_size, 0, strlen($post_max_size)-1) >= 24) {
+        return $boolMaxSize = true;
+    } else if (substr($post_max_size, 0, strlen($post_max_size)-1) < 24) {
+        return $boolMaxSize = false;
+    }
 }
 
 // Mémoire maximum allouée pendant l'exécution d'un script
 // Simple invoices want if possible 24M.
 $memory_limit = ini_get('memory_limit');
 
-function controle_memory_limit() {
-	if(substr($memory_limit, 0, strlen($memory_limit)-1) >= 24) {
-		return $boolMaxSize = true;
-	}
-	else if(substr($memory_limit, 0, strlen($memory_limit)-1) < 24) {
-		return $boolMaxSize = false;
-	}
+function controle_memory_limit()
+{
+    if (substr($memory_limit, 0, strlen($memory_limit)-1) >= 24) {
+        return $boolMaxSize = true;
+    } else if (substr($memory_limit, 0, strlen($memory_limit)-1) < 24) {
+        return $boolMaxSize = false;
+    }
 }
 
 // Control library GD existence
-function controleGd() {
-if (extension_loaded('gd')) {
-	return true; }
-	else {
-	return false; }
+function controleGd()
+{
+    if (extension_loaded('gd')) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 // Control xslt existence
-function controleXslt() {
-if (extension_loaded('xslt')) {
-	return true; }
-	else {
-	return false; }	
+function controleXslt()
+{
+    if (extension_loaded('xslt')) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 ?>
