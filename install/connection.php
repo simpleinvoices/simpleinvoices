@@ -36,43 +36,22 @@ include('lang/lang_'.$language.'.php');
 
 				<label for="host"><?php echo $LANG['DBHost'] ?></label>
 				<input name="host" type="text" value="<?php echo $host; ?>" size="20">
-				<?php
-				if($_SESSION['DBHost_error'] != '') {
-					echo $_SESSION['DBHost_error'].'<br />';
-				}
-				?>
+
 
 				<label for="dbname"><?php echo $LANG['DBName'] ?></label>
 				<input name="dbname" type="text" value="<?php echo $dbname; ?>" size="20">
-				<?php
-				if($_SESSION['DBName_error'] != '') {
-					echo $_SESSION['DBName_error'].'<br />';
-				}
-				?>
+
 
 				<label for="username"><?php echo $LANG['DBUsername'] ?></label>
 				<input name="username" type="text" value="<?php echo $username; ?>" size="20">
-				<?php
-				if($_SESSION['DBUsername_error'] != '') {
-					echo $_SESSION['DBUsername_error'].'<br />';
-				}
-				?>
+
 
 				<label for="passwd"><?php echo $LANG['DBPassword'] ?></label>
 				<input name="passwd" type="password" size="20">
-				<?php
-				if($_SESSION['DBPassword_error'] != '') {
-					echo $_SESSION['DBPassword_error'].'<br />';
-				}
-				?>
+
 				
 				<label for="prefix"><?php echo $LANG['prefix'] ?></label>
 				<input name="prefix" type="text" value="<?php echo $table_prefix; ?>" size="20">
-				<?php
-				if($_SESSION['prefix_error'] != '') {
-					echo $_SESSION['prefix_error'].'<br />';
-				}
-				?>
 
 			<p>
 			<br /><br />

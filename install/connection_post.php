@@ -30,59 +30,22 @@ include('lang/lang_'.$language.'.php');
 
 <?php
 
-// _POST Control
-if ($Click == 'on') {
-    if ($_POST['host'] == '') {
-        $Erreur['DBHost'] = $LANG['error_DBHost'];
-        $error = true;
-    } else {
+
         $host = trim($_POST['host']);
         $_SESSION['host'] = $host;
-    }
-    
-    if ($_POST['dbname'] == '') {
-        $Erreur['DBName'] = $LANG['error_DBName'];
-        $error = true;
-    } else {
+
         $dbname = trim($_POST['dbname']);
         $_SESSION['dbname'] = $dbname;
-    }
-    
-    if ($_POST['username'] == '') {
-        $Erreur['DBUsername'] = $LANG['error_DBUsername'];
-        $error = true;
-    } else {
+
         $username = trim($_POST['username']);
         $_SESSION['username'] = $username;
-    }
-    
-    if ($_POST['passwd'] == '') {
-        $Erreur['DBPassword'] = $LANG['error_DBPassword'];
-        $error = true;
-    } else {
+
         $passwd = trim($_POST['passwd']);
         $_SESSION['passwd'] = $passwd;
-    }
-    
-    if ($_POST['prefix'] == '') {
-        $Erreur['prefix'] = $LANG['error_prefix'];
-        $error = true;
-    } else {
+
         $table_prefix = trim($_POST['prefix']);
         $_SESSION['table_prefix'] = $table_prefix;
-    }
-    
-    $_SESSION['DBHost_error'] = $Erreur['DBHost'];
-    $_SESSION['DBName_error'] = $Erreur['DBName'];
-    $_SESSION['DBUsername_error'] = $Erreur['DBUsername'];
-    $_SESSION['DBPassword_error'] = $Erreur['DBPassword'];
-    $_SESSION['prefix_error'] = $Erreur['prefix'];
-    
-    if ($error == true) {
-        echo '<meta http-equiv="refresh" content="url=connection.php" />';
-    }
-    
-    if (!isset($Erreur)) {
+
         
         // connection
         $connection = mysql_connect($host, $username, $passwd) or die($LANG['unableConnectDb'] . mysql_error());
@@ -156,9 +119,7 @@ if ($Click == 'on') {
         
         // close connection
         mysql_close($connection);
-        
-    }
-}
+
 
 ?>
 			<form name="insertion" method="post" action="insertion.php">
