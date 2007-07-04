@@ -7,8 +7,9 @@ abstract class CustomField {
 	var $id;
 	var $description;
 	var $fieldId;
+	
 	//array with categorie-id's
-	var $categories;
+	//?var $categories;
 	
 	public function CustomField($id,$name) {
 		$this->id = $id;
@@ -26,11 +27,31 @@ abstract class CustomField {
 	function printInputField() {
 	}
 	
+	function updateInput($value, $itemId) {
+		
+		$sql = "UPDATE  `si_customFieldValues` SET  `value` =  '$value' WHERE  customFieldId = $this->fieldId AND itemId = $itemId" ;
+		//$sql = "INSERT INTO si_customFieldValues (customFieldId,itemId,value) VALUES('".$this->fieldId."','".$itemId."','".$value."');";
+		error_log($sql);
+		mysqlQuery($sql);
+	}
+	
+	function getValue($id) {
+		$sql = "SELECT * FROM si_customFieldValues WHERE id = $id";
+		$query = mysqlQuery($sql);
+		
+		if($query) {
+			$value = mysql_fetch_array($query);
+			return $value['value'];
+		}
+		
+		return "";
+	}
+	
 	
 	function saveInput($value,$itemId) {
 		//error_log($value." aaa".$itemId);
 		$sql = "INSERT INTO si_customFieldValues (customFieldId,itemId,value) VALUES('".$this->fieldId."','".$itemId."','".$value."');";
-		error_log($sql);
+		//error_log($sql);
 		mysqlQuery($sql);
 		
 	}
@@ -43,21 +64,28 @@ abstract class CustomField {
 		$this->fieldId = $id;
 	}
 	
-	public function getFormName($id) {
-		return ' name="cf'.$id.'" ';
+	function getFormName($id) {
+		return "cf".$id;
 	}
 	
 	function setDescription($description) {
 		$this->description = $description;
 	}
 	
-	function getDescription() {
-		return "";	//Should be an sql querie
+	function getDescription($id) {
+		global $LANG;
+
+		$sql = "SELECT description FROM ".TB_PREFIX."customFields WHERE id = $id";
+		$query = mysqlQuery($sql);
+		$field = mysql_fetch_array($query);
+		
+		error_log('return "'.$field['description'].'";');
+		return eval('return "'.$field['description'].'";');
 	}
 	
-	function setActiveCategories($categories) {
+	/*function setActiveCategories($categories) {
 		$this->categories = $categories;
-	}
+	}?*/
 	
 	function getCustomFieldValues($id) {
 		$sql = "SELECT * FROM ".TB_PREFIX."customFieldValues WHERE id = $id;";
@@ -65,28 +93,5 @@ abstract class CustomField {
 		return mysql_fetch_array($query);
 	}
 }
-
-
-
-/*
-class Test extends CustomField {
-	
-	public function Test() {
-		echo "cc";
-		$id = 2;
-		$name = "hha";
-		//$parent = get_parent_class($this);
-		//$this->$parent();
-		parent::CustomField($id,$name);
-	}
-	
-	public function printOutput() {
-		echo "BBB";
-		parent::printOutput();
-	}
-}
-
-$clas = new Test();
-$clas->printOutput();*/
 
 ?>

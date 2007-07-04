@@ -11,7 +11,11 @@ class CustomNumber extends CustomField {
 	}
 	
 	function printInputField($id) {
-		echo "<tr><input type='hidden' ".$this->getFormName($id)." value='".rand()."'><td>".$this->getDescription().":</td><td>".rand()."</td></tr>";
+		$description = $this->getDescription($id);
+		$value = rand();
+		$name = $this->getFormName($id);
+		
+		echo "<tr><input type='hidden' name='$name' value='$value'><td>$description:</td><td>$value</td></tr>";
 	}
 }
 

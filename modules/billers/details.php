@@ -3,7 +3,7 @@
 checkLogin();
 
 #get the invoice id
-$biller_id = $_GET['submit'];
+$biller_id = $_GET['id'];
 
 $biller = getBiller($biller_id);
 

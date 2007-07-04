@@ -27,9 +27,9 @@
 	{foreach from=$billers item=biller}
 	<tr class='index_table'>
 		<td class='index_table'><a class='index_table'
-			href='index.php?module=billers&view=details&submit={$biller.id}&action=view'>
+			href='index.php?module=billers&view=details&id={$biller.id}&action=view'>
 		{$LANG.view} </a> :: <a class='index_table'
-			href='index.php?module=billers&view=details&submit={$biller.id}&action=edit'>
+			href='index.php?module=billers&view=details&id={$biller.id}&action=edit'>
 		{$LANG.edit} </a></td>
 		<td class='index_table'>{$biller.id}</td>
 		<td class='index_table'>{$biller.name}</td>

@@ -1,42 +1,6 @@
 <?php
 include("./include/CustomField.php");
 
-/*
-if(isset($_POST['save'])) {
-	saveCustomField();
-}
-
-echo '<form method="post" action="index.php?module=customFields&view=manageCustomFields">';
-
-printPlugins();
-printCategories();
-
-echo <<<EOD
-	Name: <input type="text" name="name"><br />
-	Description: <input type="text" name="description"><br />
-	<input type="submit" name="save">
-	</form>
-EOD;
-
-
-printCustomFieldsList();
-showCustomFields(3);
-//$plugins = getPlugins();
-
-//getPluginArray();
-
-/*print_r($plugins);
-
-$path = pathinfo($plugins[2]);
-$path = $path['filename'];
-echo $path;
-
-$filed = new $path();
-echo "..".$filed->id."..";*/
-
-//echo "test";
-
-//print_r(getPluginById(2));
 
 function saveCustomField() {
 	$sql = "INSERT INTO ".TB_PREFIX."customFields  ( `pluginId` ,  `categorieId` ,  `name` ,  `description` ) 
@@ -53,6 +17,16 @@ function saveCustomFieldValues($categorieId,$itemId) {
 		$id = $plugin->fieldId;
 		//error_log("IIDDD".$itemId);
 		$plugin->saveInput($_POST["cf$id"],$itemId);
+	}
+}
+
+function updateCustomFieldValues() {
+	$plugins = getPluginsByCategorie($categorieId);
+	
+	foreach($plugins as $plugin) {
+		$id = $plugin->fieldId;
+		//error_log("IIDDD".$itemId);
+		$plugin->updateInput($_POST["cf$id"],$itemId);
 	}
 }
 
@@ -74,14 +48,13 @@ function showCustomFields($categorieId) {
 	
 	while($field = mysql_fetch_array($query)) {
 		
-		$plugin = getPluginById($field['pluginId']);	
-		//error_log($field['id']."id");
-		
+		$plugin = getPluginById($field['pluginId']);		
 		$plugin->printInputField($field['id']);
 	}
 }
 
 function getPluginArray() {
+	
 	$plugins = getPlugins();
 
 	foreach($plugins as $plugin) {
@@ -94,9 +67,14 @@ function getPluginArray() {
 	foreach($plugins as $plugin) {
 		$path = pathinfo($plugin);
 		$path = $path['filename'];
-		$classes[$i] = new $path();
-		$i++;
-	}	
+		//$classes[$i] = new $path();
+		$plugin = new $path();
+		
+		$classes[$plugin->id] = $plugin;
+		
+		//$i++;
+	}
+	
 	return $classes;
 }
 
@@ -175,6 +153,7 @@ function printCategories() {
 }
 
 function getPlugins() {
+	
 	$files = scandir("./modules/customFields/plugins/");
 	$plugins = null;
 	
@@ -197,15 +176,18 @@ function includePlugins() {
 }
 
 function getPluginById($id) {
-	//error_log($id."tt");
-	
+		
 	$plugins = getPluginArray();
 	
-	foreach($plugins as $plugin) {
+	if($plugins[$id] != null) {
+		return $plugins[$id];
+	}
+	
+	/*foreach($plugins as $plugin) {
 		if($plugin->id == $id) {
 			return $plugin;
 		}
-	}
+	}*/
 	return null;
 }
 
@@ -223,10 +205,6 @@ function printPlugins() {
 	
 	$out .= "</select>";
 	echo $out."<br />";
-}
-
-function initPlugin($id) {
-	
 }
 
 ?>

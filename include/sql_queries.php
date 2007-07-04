@@ -618,7 +618,7 @@ function updateBiller() {
 				custom_field4 = '$_POST[custom_field4]',
 				enabled = '$_POST[enabled]'
 			WHERE
-				id = '$_GET[submit]'";
+				id = '$_GET[id]'";
 	return mysqlQuery($sql);
 }
 

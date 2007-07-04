@@ -13,7 +13,7 @@ echo "Categorie: ";
 printCategories();
 
 
-//Note: If input is language specific it has to be in the form: $LANG['value']
+//Note: If input is language specific it has to be in the form: {$LANG['value']} or {$LANG["value"]}
 
 echo <<<EOD
 	Name: <input type="text" name="name"><br />

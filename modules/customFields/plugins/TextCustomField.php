@@ -11,17 +11,12 @@ class TextCustomField extends CustomField {
 		echo $name.": ".$values['description'];
 	}
 	
-	function printInputField($id) {
-		global $LANG;
+	function printInputField($id) {		
+		$description = $this->getDescription($id);
+		$name = $this->getFormName($id);
+		$value = $this->getValue($id);
 		
-		$sql = "SELECT * FROM ".TB_PREFIX."customFields WHERE id = $id";
-		$query = mysqlQuery($sql);
-		$field = mysql_fetch_array($query);
-		$a = 2;
-		
-		error_log($field['description']);
-				
-		echo "<tr><td>".eval("return ".$field['description'].";")."</td><td><input ".$this->getFormName($id)." type='text'></td></tr>";
+		echo "<tr><td>$description</td><td><input name='$name' value='$value' type='text'></td></tr>";
 	}
 }
 

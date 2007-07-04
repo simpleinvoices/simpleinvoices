@@ -1,6 +1,6 @@
 
 <form name="frmpost"
-	action="index.php?module=billers&view=save&submit={$smarty.get.submit}"
+	action="index.php?module=billers&view=save&id={$smarty.get.id}"
 	method="post">
 
 
@@ -237,6 +237,8 @@
 		{html_options name=enabled options=$enabled selected=$biller.enabled}
 		</td>
 	</tr>
+		{showCustomFields categorieId="1"}
+
 </table>
 {/if} 
 {if $smarty.get.action== 'edit' }

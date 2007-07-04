@@ -23,6 +23,7 @@ if ( $op === 'insert_biller') {
 if ($op === 'edit_biller' ) {
 	if (isset($_POST['save_biller']) && updateBiller()) {
 		$saved = true;
+		updateCustomFieldValues($_POST['categorie'],$_GET['id']);
 	}
 }
 
