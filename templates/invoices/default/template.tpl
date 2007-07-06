@@ -185,7 +185,7 @@
 			<td colspan="6"><br /></td>
 		</tr>
 
-	{if $invoice.type_id == 1 }
+	{if $invoice.type_id == 2 }
 					<tr>
 				<td class="tbl1 col1" ><b>{$LANG.quantity_short}</b></td>
 				<td class="tbl1 col1" ><b>{$LANG.description}</b></td>
@@ -228,7 +228,7 @@
              	
 	{/if}
 
-	{if $invoice.type_id == 2 }
+	{if $invoice.type_id == 3 }
 				<tr class="tbl1 col1">
 			<td class="tbl1"><b>{$LANG.quantity_short}</b></td>
 			<td class="tbl1"><b>{$LANG.item}</b></td>
@@ -281,7 +281,7 @@
 			
 	{/if}
 	
-	{if $invoice.type_id == 3 }
+	{if $invoice.type_id == 1 }
 		                <table class="left" width="100%">
 
                 <tr class="tbl1 col1" >
