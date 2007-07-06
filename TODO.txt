@@ -14,6 +14,7 @@
  - menu : issue with sql patch 124 when upgrading from old release - to be looked at
  - menu : new read from db - what happens when user changes LANG - menu wont update - needs to be fixed
  - menu : fix documentaion links about etc.. to be correct
+ - reports : add export to .xls format
  - old ones
  -- CSS: main container - white section seems to have default height???
  -- customer view - add edit/export etc, back in
