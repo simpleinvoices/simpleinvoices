@@ -216,7 +216,7 @@ function calc_invoice_tax($invoice_id) {
 /**
 * Function: show_custom_field
 * 
-* If a custom field has been defined then show it in the add,edit, or view invoice screen - This is used for the Invoice Custom Fields - may be used for the others as wll based on the situation
+* If a custom field has been defined then show it in the add,edit, or view invoice screen. This is used for the Invoice Custom Fields - may be used for the others as wll based on the situation
 *
 * Parameters:
 * custom_field		- the db name of the custom field ie invoice_cf1

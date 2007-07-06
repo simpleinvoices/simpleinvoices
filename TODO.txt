@@ -15,6 +15,8 @@
  - menu : new read from db - what happens when user changes LANG - menu wont update - needs to be fixed
  - menu : fix documentaion links about etc.. to be correct
  - reports : add export to .xls format
+ - reports : now using new format for total style (using products table) some reports may have to be rewritten - to be investigated
+ - submit : update all refer to submit to better - only some done - all needs to be done and work
  - old ones
  -- CSS: main container - white section seems to have default height???
  -- customer view - add edit/export etc, back in

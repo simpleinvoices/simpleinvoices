@@ -5,7 +5,7 @@
 
 {else}
 {* if  name was inserted *} 
-	{if $smarty.post.submit !=null} 
+	{if $smarty.post.customer !=null} 
 		<div class="validation_alert"><img src="./images/common/important.png"</img>
 		You must enter a Customer name</div>
 		<hr />
@@ -111,7 +111,7 @@
 </table>
 <hr />
 <div style="text-align:center;">
-	<input type=submit name="submit" value="{$LANG.insert_customer}">
+	<input type=submit name="customer" value="{$LANG.insert_customer}">
 	<input type=hidden name="op" value="insert_customer">
 </div>
 </form>
