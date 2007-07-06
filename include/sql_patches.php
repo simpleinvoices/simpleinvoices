@@ -654,7 +654,7 @@ NULL , 'logging', '0'
 (17, 15, 5, "{$LANG[\"add_biller\"]}", "index.php?module=billers&view=add", 1),
 (18, 0, 25, "{$LANG[\"payments\"]} +", "index.php?module=payments&view=manage", 1),
 (19, 18, 5, "{$LANG[\"manage_payments\"]}", "index.php?module=payments&view=manage", 1),
-(67, 18, 10, "{$LANG[\"process_payment\"]}", "index.php?module=payments&view=process", 1),
+(67, 18, 10, "{$LANG[\"process_payment\"]}", "index.php?module=payments&view=process&op=pay_invoice", 1),
 (20, 0, 30, "{$LANG[\"reports\"]} +", "#", 1),
 (21, 20, 5, "{$LANG[\"sales\"]} +", "index.php?module=reports&view=report_sales_total", 1),
 (22, 21, 5, "{$LANG[\"total_sales\"]}", "index.php?module=reports&view=report_sales_total", 1),

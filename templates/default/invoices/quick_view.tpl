@@ -75,10 +75,10 @@
 	<tr class='details_screen summary'>
 		<td class='details_screen'>{$preference.pref_inv_wording} {$LANG.date}:</td><td class='details_screen' colspan=5>{$invoice.date}</td>
 	</tr>
-	{$customFiled.1}
-	{$customFiled.2}
-	{$customFiled.3}
-	{$customFiled.4}
+	{$customField.1}
+	{$customField.2}
+	{$customField.3}
+	{$customField.4}
 
 	<tr>	
 		<td><br></td>

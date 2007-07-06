@@ -1,6 +1,5 @@
 -todo
  - si_user and auth challenges table - add check to see if all ready exists
- - quick view - show customer fields for invoices in the invoice summary section and show by default
  - quick view - add file names extensions (xls,doc) back in to the export section
  - payments - make todays date appear as default in the date field
  - tax : nz - change to 12.5%
@@ -15,6 +14,8 @@
  - reports : add export to .xls format
  - reports : now using new format for total style (using products table) some reports may have to be rewritten - to be investigated
  - submit : update all refer to submit to better - only some done - all needs to be done and work
+ - menu : if logged in change Login to Logout
+ - add more items : update ui 
  - old ones
  -- CSS: main container - white section seems to have default height???
  -- customer view - add edit/export etc, back in
@@ -23,6 +24,7 @@
  - menu : add + back into menu - done
  - print preview of Total style invocies needs to be fixed - done
  - menu : new read from db - what happens when user changes LANG - menu wont update - needs to be fixed - done
+ - quick view - show customer fields for invoices in the invoice summary section and show by default - done
 
 - in next release +1 - aim end of May
 -todo
