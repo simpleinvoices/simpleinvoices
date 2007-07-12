@@ -15,6 +15,8 @@
  - reports : now using new format for total style (using products table) some reports may have to be rewritten - to be investigated
  - submit : update all refer to submit to better - only some done - all needs to be done and work
  - menu : if logged in change Login to Logout
+ - add biller: change 'street' to 'street address'
+ - quick view: total : cut description lenght if greater than 25
  - add more items : update ui 
  - old ones
  -- CSS: main container - white section seems to have default height???
