@@ -55,9 +55,6 @@ $MD5Auth = FALSE; /*To Turn off md5 auth set $MD5Auth to FALSE */
 $ChallengeLife = 0; /*To turn off ChallengeLife set this to 0 */
 
 
-/*To change the theme, enter the name of the theme folder - default is google*/
-$theme = "google";
-
 $version = "200707 unstable";
 
 $config['date_format']  = 'Y-m-d'; #International format just the date
@@ -95,4 +92,8 @@ $pdf_bottom_margin = 15;
 #error_reporting(E_ERROR);
 #error_reporting(E_ALL & ~E_NOTICE);
 #error_reporting(0);
+
+/*To change the theme, enter the name of the theme folder - default is google*/
+//delete this old config
+//$theme = "google";
 ?>
