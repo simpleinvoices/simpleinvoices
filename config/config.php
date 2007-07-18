@@ -8,6 +8,10 @@ $db_host = "localhost";
 $db_name = "simple_invoices";
 $db_user = "root";
 $db_password = "";
+
+//if you want to make Simple Invoices secure and require a username and password set this to tru
+$authenticationOn = "true";
+
 //if you are using a .httaccess file
 $http_auth = "";	//value: "name:password@"
 

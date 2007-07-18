@@ -1,8 +1,8 @@
 -todo
  - si_user and auth challenges table - add check to see if all ready exists
+ - index.php : add filtering (php 5.2) for get and post input etc.
  - quick view - add file names extensions (xls,doc) back in to the export section
  - payments - make todays date appear as default in the date field
- - tax : nz - change to 12.5%
  - email: html and no html option - maybe??
  - email: add cc - maybe ??
  - email: add default signature - maybe - set in biller details ??
@@ -15,7 +15,6 @@
  - reports : now using new format for total style (using products table) some reports may have to be rewritten - to be investigated
  - submit : update all refer to submit to better - only some done - all needs to be done and work
  - menu : if logged in change Login to Logout
- - add biller: change 'street' to 'street address'
  - quick view: total : cut description lenght if greater than 25
  - add more items : update ui 
  - old ones
@@ -27,6 +26,8 @@
  - print preview of Total style invocies needs to be fixed - done
  - menu : new read from db - what happens when user changes LANG - menu wont update - needs to be fixed - done
  - quick view - show customer fields for invoices in the invoice summary section and show by default - done
+ - tax : nz - change to 12.5% - done
+ - add biller: change 'street' to 'street address' - done
 
 - in next release +1 - aim end of May
 -todo

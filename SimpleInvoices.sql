@@ -583,7 +583,7 @@ INSERT INTO `si_tax` (`tax_id`, `tax_description`, `tax_percentage`, `tax_enable
 (1, 'GST (AUS)', 10.00, '1'),
 (2, 'VAT (UK)', 10.00, '1'),
 (3, 'Sales Tax (USA)', 10.00, '1'),
-(4, 'GST (NZ)', 10.00, '1'),
+(4, 'GST (NZ)', 12.50, '1'),
 (5, 'No Tax', 0.00, '1'),
 (6, 'IVA', 20.00, '1'),
 (7, 'MWSt (DE)', 16.00, '1');
