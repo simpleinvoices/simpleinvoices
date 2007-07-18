@@ -1,5 +1,20 @@
 <?php
 
+/*
+* Script: save.php
+* 	Invoice save file
+*
+* Authors:
+*	 Justin Kelly, Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-18
+*
+* License:
+*	 GPL v2 or above
+*/
+
+
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
@@ -62,7 +77,7 @@ if ( $_POST['action'] == "insert" && ($_POST['type'] == 2 || $_POST['type'] == 3
 		}
 	}
 
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&invoice=$invoice_id&type=2>";
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&invoice=$invoice_id&type=3>";
 }
 
 

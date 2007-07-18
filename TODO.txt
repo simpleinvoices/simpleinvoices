@@ -1,4 +1,5 @@
 -todo
+ - invoiec save.php - needs to redirect to correct quick view invoice type
  - si_user and auth challenges table - add check to see if all ready exists
  - index.php : add filtering (php 5.2) for get and post input etc.
  - quick view - add file names extensions (xls,doc) back in to the export section

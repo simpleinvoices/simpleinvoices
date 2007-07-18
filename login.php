@@ -1,4 +1,19 @@
 <?php
+
+/*
+* Script: login.php
+* 	Login page
+*
+* Authors:
+*	 Justin Kelly, Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-18
+*
+* License:
+*	 GPL v2 or above
+*/
+
 // we must never forget to start the session
 /*
 CREATE TABLE si_users (

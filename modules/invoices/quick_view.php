@@ -1,5 +1,19 @@
 <?php
 
+/*
+* Script: quick_view.php
+* 	Quick view model
+*
+* Authors:
+*	 Justin Kelly, Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-18
+*
+* License:
+*	 GPL v2 or above
+ */
+
 checkLogin();
 
 #get the invoice id

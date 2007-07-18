@@ -1,5 +1,20 @@
 <?php
 
+/*
+* Script: index.php
+* 	Main controller file for Simple Invoices
+*
+* Authors:
+*	 Justin Kelly, Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-18
+*
+* License:
+*	 GPL v2 or above
+*/
+
+
 //stop browsing to files directly - all viewing to be handled by index.php
 //if browse not defined then the page will exit
 define("BROWSE","browse");

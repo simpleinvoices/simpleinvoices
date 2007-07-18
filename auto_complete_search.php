@@ -1,4 +1,19 @@
 <?php
+
+/*
+* Script: auto_complete_search.php
+* 	Do the autocomplete of invoice id in the process payment page
+*
+* Authors:
+*	 Justin Kelly, Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-18
+*
+* License:
+*	 GPL v2 or above
+*/
+
 define("BROWSE","browse");
 //if this page has error with auth remove the above line and figure out how to do it right
 include_once('./include/include_main.php');
