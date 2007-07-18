@@ -1,3 +1,22 @@
+{*
+/*
+* Script: manage.tpl
+* 	 Manage invoices template
+*
+* Authors:
+*	 Justin Kelly, Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-18
+*
+* License:
+*	 GPL v2 or above
+*
+* Website:
+*	http://www.simpleinvoices.org
+*/
+*}
+
 {if $invoices == null }
 	<P><em>{$LANG.no_invoices}.</em></p>
 {else}

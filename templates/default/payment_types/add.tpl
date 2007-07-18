@@ -1,3 +1,22 @@
+{*
+/*
+* Script: add.tpl
+* 	 Payment type add template
+*
+* Authors:
+*	 Justin Kelly, Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-18
+*
+* License:
+*	 GPL v2 or above
+*
+* Website:
+*	http://www.simpleinvoices.org
+*/
+*}
+
 {* if customer is updated or saved.*}
 
 {if $smarty.post.pt_description != "" && $smarty.post.submit != null }

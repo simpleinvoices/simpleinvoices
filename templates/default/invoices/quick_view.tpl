@@ -1,7 +1,7 @@
 {*
 /*
 * Script: quick_view.tpl
-* 	Quick view template file
+* 	 Quick view of invoice template
 *
 * Authors:
 *	 Justin Kelly, Nicolas Ruflin
@@ -11,6 +11,9 @@
 *
 * License:
 *	 GPL v2 or above
+*
+* Website:
+*	http://www.simpleinvoices.org
 */
 *}
 

@@ -1,3 +1,22 @@
+{*
+/*
+* Script: manage_sqlpatches.tpl
+* 	 Manage sql patches template
+*
+* Authors:
+*	 Justin Kelly, Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-18
+*
+* License:
+*	 GPL v2 or above
+*
+* Website:
+*	http://www.simpleinvoices.org
+*/
+*}
+
 <h3>Database patches applied to Simple Invoices</h3>
 <hr />
 

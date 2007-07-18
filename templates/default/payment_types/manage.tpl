@@ -1,3 +1,22 @@
+{*
+/*
+* Script: manage.tpl
+* 	 Manage payment types template
+*
+* Authors:
+*	 Justin Kelly, Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-18
+*
+* License:
+*	 GPL v2 or above
+*
+* Website:
+*	http://www.simpleinvoices.org
+*/
+*}
+
 {if $paymentTypes==null }
 <P><em>{$LANG.no_payment_types}.</em></p>
 {else}

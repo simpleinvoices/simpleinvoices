@@ -1,3 +1,21 @@
+{*
+/*
+* Script: details.tpl
+* 	 Payment type details template
+*
+* Authors:
+*	 Justin Kelly, Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-18
+*
+* License:
+*	 GPL v2 or above
+*
+* Website:
+*	http://www.simpleinvoices.org
+*/
+*}
 
 <form name="frmpost" action="index.php?module=payment_types&view=save&submit={$smarty.get.submit}" method="post" onsubmit="return frmpost_Validator(this)">
 

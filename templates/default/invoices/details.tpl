@@ -1,3 +1,21 @@
+{*
+/*
+* Script: details.tpl
+* 	 Invoice details template
+*
+* Authors:
+*	 Justin Kelly, Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-18
+*
+* License:
+*	 GPL v2 or above
+*
+* Website:
+*	http://www.simpleinvoices.org
+*/
+*}
 <b>You are editing {$preference.pref_inv_wording} {$master_invoice_id}</b>
 
  <hr></hr>

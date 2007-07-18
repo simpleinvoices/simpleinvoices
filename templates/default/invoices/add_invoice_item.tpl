@@ -1,3 +1,21 @@
+{*
+/*
+* Script: add_invoice_item.tpl
+* 	 Add new item to an existing invoice 
+*
+* Authors:
+*	 Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-18
+*
+* License:
+*	 GPL v2 or above
+*
+* Website:
+*	http://www.simpleinvoices.org
+*/
+*}
 {if $smarty.post.submit != null}
 	<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=details&invoice={$smarty.post.invoice_id}&type={$smarty.post.type}>
 {else}

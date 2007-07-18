@@ -1,3 +1,21 @@
+{*
+/*
+* Script: header.tpl
+* 	 Header file for invoice template
+*
+* Authors:
+*	 Justin Kelly, Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-18
+*
+* License:
+*	 GPL v2 or above
+*
+* Website:
+*	http://www.simpleinvoices.org
+*/
+}
 <hr />
 <input type="hidden" name="action" value="insert">
 <table align="center">

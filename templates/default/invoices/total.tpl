@@ -1,3 +1,22 @@
+{*
+/*
+* Script: total.tpl
+* 	 Total style invoice template
+*
+* Authors:
+*	 Justin Kelly, Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-18
+*
+* License:
+*	 GPL v2 or above
+*
+* Website:
+*	http://www.simpleinvoices.org
+*/
+*}
+
 <form name="frmpost" action="index.php?module=invoices&view=save" method=POST onsubmit="return frmpost_Validator(this)">
 
 <h3>{$LANG.inv} {$LANG.inv_total}</h3>

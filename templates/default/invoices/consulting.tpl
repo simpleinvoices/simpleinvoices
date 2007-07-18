@@ -1,3 +1,21 @@
+{*
+/*
+* Script: consulting.tpl
+* 	 Consulting invoice type template
+*
+* Authors:
+*	 Justin Kelly, Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-18
+*
+* License:
+*	 GPL v2 or above
+*
+* Website:
+*	http://www.simpleinvoices.org
+*/
+*}
 <form name="frmpost" action="index.php?module=invoices&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
 
 <h3>{$LANG.inv} {$LANG.inv_consulting}</h3>
