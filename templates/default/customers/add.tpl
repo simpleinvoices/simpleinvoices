@@ -1,3 +1,19 @@
+{*
+/*
+* Script: add.tpl
+* 	 Customers add template
+*
+* Authors:
+*	 Justin Kelly, Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-18
+*
+* License:
+*	 GPL v2 or above
+*/
+*}
+
 {* if customer is updated or saved.*} 
 
 {if $smarty.post.name != "" && $smarty.post.customer != null } 

@@ -1,3 +1,18 @@
+{*
+/*
+* Script: manage.tpl
+* 	Biller manage template
+*
+* Authors:
+*	 Justin Kelly, Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-18
+*
+* License:
+*	 GPL v2 or above
+*/
+*}
 {if $billers == null}
 <P><em>{$LANG.no_billers}.</em></p>
 {else}

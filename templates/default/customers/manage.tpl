@@ -1,3 +1,22 @@
+{*
+/*
+* Script: manage.tpl
+* 	 Customer manage template
+*
+* Authors:
+*	 Justin Kelly, Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-18
+*
+* License:
+*	 GPL v2 or above
+*
+* Website:
+*	http://www.simpleinvoices.org
+*/
+*}
+
 {if $customers == null}
 	<P><em>{$LANG.no_customers}.</em></p>
 {else}

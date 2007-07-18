@@ -1,3 +1,19 @@
+{*
+/*
+* Script: details.tpl
+* 	Custom fields details template
+*
+* Authors:
+*	 Justin Kelly, Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-18
+*
+* License:
+*	 GPL v2 or above
+*/
+*}
+
 <FORM name="frmpost" ACTION="index.php?module=custom_fields&view=save&submit={$smarty.get.submit}"
  METHOD="POST" onsubmit="return frmpost_Validator(this)">
 
