@@ -1,5 +1,21 @@
 <?php
 
+/*
+* Script: login.php
+* 	Login page
+*
+* Authors:
+*	 Justin Kelly, Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-18
+*
+* License:
+*	 GPL v2 or above
+*
+* Website:
+* 	http://www.simpleinvoices.org
+ */
 $t = isset($_GET['t'])?$_GET['t']:null;
 $p = isset($_GET['p'])?$_GET['p']:null;
 

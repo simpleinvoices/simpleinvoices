@@ -1,4 +1,20 @@
 <?php
+/*
+* Script: manageCustonFields.php
+* 	new manage custom fields page
+*
+* Authors:
+*	 Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-19
+*
+* License:
+*	 GPL v2 or above
+*
+* Website:
+* 	http://www.simpleinvoices.org
+ */
 
 if(isset($_POST['save'])) {
 	saveCustomField();

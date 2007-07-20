@@ -1,4 +1,20 @@
 <?php
+/*
+* Script: search.php
+* 	Customers search page
+*
+* Authors:
+*	 Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-19
+*
+* License:
+*	 GPL v2 or above
+*
+* Website:
+* 	http://www.simpleinvoices.org
+ */
 
 checkLogin();
 
