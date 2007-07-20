@@ -1,5 +1,20 @@
 <?php
-
+/*
+* Script: add_invoice_item.php
+* 	add new invoice item in edit page
+*
+* Authors:
+*	 Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-19
+*
+* License:
+*	 GPL v2 or above
+*
+* Website:
+* 	http://www.simpleinvoices.org
+ */
 
 
 if(isset($_POST['submit'])) {

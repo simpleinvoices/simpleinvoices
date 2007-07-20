@@ -1,5 +1,20 @@
 <?php
-
+/*
+* Script: template.php
+* 	invoice template page
+*
+* Authors:
+*	 Justin Kelly, Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-19
+*
+* License:
+*	 GPL v2 or above
+*
+* Website:
+* 	http://www.simpleinvoices.org
+ */
 #define("BROWSE","browse");
 
 #get the invoice id

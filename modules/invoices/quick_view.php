@@ -12,6 +12,9 @@
 *
 * License:
 *	 GPL v2 or above
+*	 
+* Website:
+* 	http://www.simpleinvoices.or
  */
 
 checkLogin();
