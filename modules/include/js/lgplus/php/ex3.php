@@ -7,7 +7,7 @@ if (!isset ($_SESSION)) session_start();
 <title>Rico LiveGrid Plus-Example 3</title>
 
 <?php
-$sqltext="SELECT id,name,email,(CASE WHEN enabled = 1 THEN 'Enabled' WHEN enabled = 0 THEN 'Disabled'	ELSE '??' END) as enabled FROM ".TB_PREFIX."biller";
+$sqltext="SELECT id,name,email,city FROM si_biller";
 
 $_SESSION['ex3']=$sqltext;
 require "applib.php";
@@ -84,7 +84,7 @@ Frozen columns would normally be set to 2 for this grid, but feel free to try ot
 	  <th class='ricoFrozen'>id</th>
 	  <th>name</th>
 	  <th>email</th>
-	  <th>enabled</th>
+	  <th>city</th>
   </tr>
   <tr class='dataInput'>
 	  <th class='ricoFrozen'><input type='text' onkeyup='keyfilter(this,0)' size='5'></th>
