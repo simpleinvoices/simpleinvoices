@@ -18,7 +18,7 @@
 *}
 
 {if $paymentTypes==null }
-<P><em>{$LANG.no_payment_types}.</em></p>
+<p><em>{$LANG.no_payment_types}.</em></p>
 {else}
 <h3>{$LANG.manage_payment_types} :: <a href="index.php?module=payment_types&view=add">{$LANG.add_new_payment_type}</a></h3>
 <hr />

@@ -1,7 +1,6 @@
 
 <div id="Header">
-	<div id="Tabs">
-		<ul id="navmenu">
+		<ul class="adxm menu">
 			<li><a href="index.php">{$LANG.home}</a></li>
 			<li><a href="index.php?module=invoices&view=manage">{$LANG.invoices} +</a>
 				<ul>
@@ -178,6 +177,4 @@
 				<li><a href="logout.php">{$LANG.logout}</a></li>
 			{/if}
 		</ul>
-			
-</div id="Tabs">
-</div id="Header">
+</div>

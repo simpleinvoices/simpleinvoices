@@ -1,0 +1,141 @@
+/*<![CDATA[*/
+
+/* - - - ADxMenu: BASIC styles [ MANDATORY ] - - - */
+
+/*Simple Invoices menu header*/
+#Header {
+	background-color:#036;
+	/*height:24px;*/
+	padding-top:13px;
+}
+
+/* remove all list stylings */
+.menu, .menu ul {
+	font-size:12px;
+	margin:0 0 0 28px;
+	padding:0;
+	border:0;
+	list-style-type:none;
+	display:block;
+}
+
+.menu li {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	display: block;
+	float: left;	/* move all main list items into one row, by floating them */
+	position: relative;	/* position each LI, thus creating potential IE.win overlap problem */
+	z-index: 5;		/* thus we need to apply explicit z-index here... */
+}
+
+.menu li:hover {
+	z-index: 10000;	/* ...and here. this makes sure active item is always above anything else in the menu */
+	white-space: normal;/* required to resolve IE7 :hover bug (z-index above is ignored if this is not present)
+							see http://www.tanfa.co.uk/css/articles/pure-css-popups-bug.asp for other stuff that work */
+}
+
+.menu li li {
+	float: none;/* items of the nested menus are kept on separate lines */
+}
+
+.menu ul {
+	visibility: hidden;	/* initially hide all submenus. */
+	position: absolute;
+	z-index: 10;
+	left: 0;	/* while hidden, always keep them at the top left corner, */
+	top: 0;		/* 		to avoid scrollbars as much as possible */
+}
+
+.menu li:hover>ul {
+	visibility: visible;	/* display submenu them on hover */
+	top: 100%;	/* 1st level go below their parent item */
+}
+
+.menu li li:hover>ul {	/* 2nd+ levels go on the right side of the parent item */
+	top:0;
+	left:100%;
+}
+
+/* -- float.clear --
+	force containment of floated LIs inside of UL */
+.menu:after, .menu ul:after {
+	content:".";
+	height:0;
+	display:block;
+	visibility:hidden;
+	overflow:hidden;
+	clear:both;
+}
+.menu, .menu ul {	/* IE7 float clear: */
+	min-height:0;
+}
+/* -- float.clear.END --  */
+
+/* -- sticky.submenu --
+	it should not disappear when your mouse moves a bit outside the submenu
+	YOU SHOULD NOT STYLE the background of the ".menu UL" or this feature may not work properly!
+	if you do it, make sure you 110% know what you do */
+.menu ul {
+	background-image: url(../../../images/common/empty.gif);	/* required for sticky to work in IE6 and IE7 - due to their (different) hover bugs */
+	padding:10px 30px 30px 30px;
+	margin:-10px 0 0 -30px;
+	/*background: #f00;*/	/* uncomment this if you want to see the "safe" area.
+								you can also use to adjust the safe area to your requirement */
+}
+.menu ul ul {
+	padding:30px 30px 30px 10px;
+	margin:-30px 0 0 -10px;
+}
+/* -- sticky.submenu.END -- */
+
+
+/* - - - ADxMenu: DESIGN styles [ OPTIONAL, design your heart out :) ] - - - */
+
+.menu, .menu ul li {
+	color:#eee;
+	background-color:#036;
+}
+
+.menu ul {
+	width:11em;
+}
+
+.menu a {
+	text-decoration:none;
+	color: #eee;
+	padding: .4em 0.8em;
+	display: block;
+	position: relative;
+}
+
+.menu a:hover, .menu li:hover>a {
+	color: #fc0;
+	background-color:#708090;
+}
+
+.menu li li {	/* create borders around each item */
+	border: 1px solid #ccc;
+}
+.menu ul>li + li {	/* and remove the top border on all but first item in the list */
+	border-top: 0;
+}
+
+.menu li li:hover>ul {	/* inset 2nd+ submenus, to show off overlapping */
+	top: 5px;
+	left: 90%;
+}
+
+/* special colouring for "Main menu:", and for "xx submenu" items in ADxMenu
+	placed here to clarify the terminology I use when referencing submenus in posts */
+/*.menu>li:first-child>a, .menu li + li + li li:first-child>a {
+	color: #fc3;
+}*/
+
+/* Fix for IE5/Mac \*//*/
+.menu a {
+	float: left;
+}
+/* End Fix */
+
+/*]]>*/

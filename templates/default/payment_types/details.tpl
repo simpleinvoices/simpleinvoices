@@ -26,7 +26,7 @@
 	
 	
 	<b>{$LANG.payment_type} :: <a href='index.php?module=payment_types&view=details&submit={$paymentType.pt_id}&action=edit'>{$LANG.edit}</a> </b>
-	<hr></hr>
+	<hr />
 
 	<table align="center">
 	<tr>
@@ -39,7 +39,7 @@
 		<td class="details_screen">{$LANG.enabled}</td><td>{$paymentType.enabled}</td>
 	</tr>
 	</table>
-	<hr></hr>
+	<hr />
 
 <a href='index.php?module=payment_types&view=details&submit={$paymentType.pt_id}&action=edit'>{$LANG.edit}</a>
 
@@ -48,7 +48,7 @@
 {if $smarty.get.action == "edit"}
 
 	<b>{$LANG.payment_type_edit}</b>
-	<hr></hr>
+	<hr />
 
 	<table align=center>
 	<tr>
@@ -74,7 +74,7 @@
 		</td>
 	</tr>
 	</table>
-	<hr></hr>
+	<hr />
 
 
 <input type="submit" name="cancel" value="{$LANG.cancel}" />

@@ -17,7 +17,7 @@
 */
 *}
 
-<br>
+<br />
 {$display_block}
 {$refresh_total}
-<br>
+<br />

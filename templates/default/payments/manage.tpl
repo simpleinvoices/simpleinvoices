@@ -18,7 +18,7 @@
 {/if}
 
 
-<hr></hr>
+<hr />
 
 
 <table align="center" class="ricoLiveGrid"  id="rico_payment" >
