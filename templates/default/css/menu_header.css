@@ -30,6 +30,7 @@
 	float:left;	/* move all main list items into one row, by floating them */
 	position:relative;	/* position each LI, thus creating potential IE.win overlap problem */
 	z-index:5;		/* thus we need to apply explicit z-index here... */
+	border-right:1px solid #708090;
 }
 
 .menu li:hover {
