@@ -45,11 +45,7 @@ GLOBALS & GENERAL CASES
 -------------------------------------------------*/
 .print_only {
 	display:none; }
-/*ok*/
-a {
-	color:#03c;
-	padding:1px; }
-/*ok*/
+
 a:hover {
 	color:#fff;
 	background-color:#900;

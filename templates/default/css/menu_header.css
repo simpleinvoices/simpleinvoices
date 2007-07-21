@@ -103,22 +103,22 @@
 
 .menu a {
 	text-decoration:none;
-	color: #eee;
-	padding: .4em 0.8em;
-	display: block;
-	position: relative;
+	color:#eee;
+	padding:.4em 0.8em;
+	display:block;
+	position:relative;
 }
 
 .menu a:hover, .menu li:hover>a {
-	color: #fc0;
+	color:#fc0;
 	background-color:#708090;
 }
 
 .menu li li {	/* create borders around each item */
-	border: 1px solid #ccc;
+	border:1px solid #ccc;
 }
 .menu ul>li + li {	/* and remove the top border on all but first item in the list */
-	border-top: 0;
+	border-top:0;
 }
 
 .menu li li:hover>ul {	/* inset 2nd+ submenus, to show off overlapping */
