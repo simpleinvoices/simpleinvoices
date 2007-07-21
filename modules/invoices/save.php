@@ -33,6 +33,9 @@ if(!isset( $_POST['type']) && !isset($_POST['action'])) {
 
 #insert invoice_total - start
 if ($_POST['type'] == 1 && $_POST['action'] == "insert" ) {
+	
+	//Get type id - so do add into redirector header
+	$typeId = $_POST['type'];
 
 	if (insertInvoice(1)) {
 		$display_block = $LANG['save_invoice_success'];
@@ -54,7 +57,7 @@ if ($_POST['type'] == 1 && $_POST['action'] == "insert" ) {
 		die(mysql_error());
 	}
 
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&invoice=$invoice_id&type=1>";
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&invoice=$invoice_id&type=$typeId>";
 }
 
 
@@ -63,6 +66,9 @@ if ($_POST['type'] == 1 && $_POST['action'] == "insert" ) {
 if ( $_POST['action'] == "insert" && ($_POST['type'] == 2 || $_POST['type'] == 3 )) {
 
 	if (($_POST['type'] == 3 && insertInvoice(3)) || ($_POST['type'] == 2 && insertInvoice(2))) {
+	//Get type id - so do add into redirector header
+
+	$typeId = $_POST['type'];
 		$display_block =  $LANG['save_invoice_success'];
 	} else {
 		$display_block = $LANG['save_invoice_failure'];
@@ -80,11 +86,14 @@ if ( $_POST['action'] == "insert" && ($_POST['type'] == 2 || $_POST['type'] == 3
 		}
 	}
 
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&invoice=$invoice_id&type=3>";
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&invoice=$invoice_id&type=$typeId>";
 }
 
 
 if ( $_POST['action'] == "edit" && ($_POST['type'] == 1 || $_POST['type'] == 2 || $_POST['type'] == 3 )) {
+
+	//Get type id - so do add into redirector header
+	$typeId = $_POST['type'];
 
 	$invoice_id = $_POST['invoice_id'];
 	
@@ -109,7 +118,7 @@ if ( $_POST['action'] == "edit" && ($_POST['type'] == 1 || $_POST['type'] == 2 |
 		}
 	}
 
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&invoice=$invoice_id&type=2>";
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&invoice=$invoice_id&type=$typeId>";
 }
 
 

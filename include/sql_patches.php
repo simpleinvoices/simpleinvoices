@@ -719,7 +719,7 @@ NULL , 'logging', '0'
 	$patch['127']['date'] = "20070623";
 	
 	$patch['128']['name'] = "Add si_user table";
-	$patch['128']['patch'] = "CREATE TABLE `si_users` (
+	$patch['128']['patch'] = "CREATE TABLE IF NOT EXISTS `si_users` (
   `user_id` int(11) NOT NULL auto_increment,
   `user_email` varchar(100) NOT NULL,
   `user_name` varchar(100) NOT NULL,
@@ -736,7 +736,7 @@ NULL , 'logging', '0'
 	$patch['129']['date'] = "20070623";
 	
 	$patch['130']['name'] = "Create si_auth_challenges table";
-	$patch['130']['patch'] = "CREATE TABLE `si_auth_challenges` (
+	$patch['130']['patch'] = "CREATE TABLE IF NOT EXISTS `si_auth_challenges` (
   `challenges_key` int(11) NOT NULL,
   `challenges_timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);";
 	$patch['130']['date'] = "20070623";
