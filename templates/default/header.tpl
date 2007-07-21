@@ -9,17 +9,17 @@
     var GB_ROOT_DIR = "./modules/include/js/";
 </script>
 
-	<link rel="stylesheet" type="text/css" href="include/jquery/jquery.autocomplete.css" title="default" media="screen" />
-	<link rel="stylesheet" type="text/css" href="include/jquery/jquery.datePicker.css" title="default" media="screen" />
-	<link rel="stylesheet" type="text/css" href="./templates/default/css/screen.css" media="all"/>
-	<link rel="stylesheet" type="text/css" href="./templates/default/css/print.css" media="print"/>
-	
 	<!-- Menu header -->
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/menu_header.css" media="screen" />
 	<!--[if lte IE 6]>
 		<link rel="stylesheet" type="text/css" href="./templates/default/css/menu_header_hackIE.css" media="screen" />
 		<script type="text/javascript" src="./templates/default/js/ADxMenu.js"></script>
 	<![endif]-->
+	
+	<link rel="stylesheet" type="text/css" href="include/jquery/jquery.autocomplete.css" title="default" media="screen" />
+	<link rel="stylesheet" type="text/css" href="include/jquery/jquery.datePicker.css" title="default" media="screen" />
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/screen.css" media="all"/>
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/print.css" media="print"/>
 
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>

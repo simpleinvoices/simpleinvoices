@@ -1,7 +1,7 @@
 
 <div id="Header">
 		<ul class="adxm menu">
-			<li><a href="index.php">{$LANG.home}</a></li>
+			<li id="active"><a href="index.php">{$LANG.home}</a></li>
 			<li><a href="index.php?module=invoices&view=manage">{$LANG.invoices} +</a>
 				<ul>
 					<li><a href="index.php?module=invoices&view=manage">{$LANG.manage_invoices}</a></li>

@@ -5,14 +5,17 @@
 /*Simple Invoices menu header*/
 #Header {
 	background-color:#036;
-	/*height:24px;*/
 	padding-top:13px;
 }
 
+.menu #active {
+	color:#fc0;
+	background-color:#708090;
+}
 /* remove all list stylings */
 .menu, .menu ul {
 	font-size:12px;
-	margin:0 0 0 28px;
+	margin:0 0 0 29px;
 	padding:0;
 	border:0;
 	list-style-type:none;
@@ -20,36 +23,36 @@
 }
 
 .menu li {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	display: block;
-	float: left;	/* move all main list items into one row, by floating them */
-	position: relative;	/* position each LI, thus creating potential IE.win overlap problem */
-	z-index: 5;		/* thus we need to apply explicit z-index here... */
+	margin:0;
+	padding:0;
+	border:0;
+	display:block;
+	float:left;	/* move all main list items into one row, by floating them */
+	position:relative;	/* position each LI, thus creating potential IE.win overlap problem */
+	z-index:5;		/* thus we need to apply explicit z-index here... */
 }
 
 .menu li:hover {
-	z-index: 10000;	/* ...and here. this makes sure active item is always above anything else in the menu */
-	white-space: normal;/* required to resolve IE7 :hover bug (z-index above is ignored if this is not present)
+	z-index:10000;	/* ...and here. this makes sure active item is always above anything else in the menu */
+	white-space:normal;/* required to resolve IE7 :hover bug (z-index above is ignored if this is not present)
 							see http://www.tanfa.co.uk/css/articles/pure-css-popups-bug.asp for other stuff that work */
 }
 
 .menu li li {
-	float: none;/* items of the nested menus are kept on separate lines */
+	float:none;/* items of the nested menus are kept on separate lines */
 }
 
 .menu ul {
-	visibility: hidden;	/* initially hide all submenus. */
-	position: absolute;
-	z-index: 10;
-	left: 0;	/* while hidden, always keep them at the top left corner, */
-	top: 0;		/* 		to avoid scrollbars as much as possible */
+	visibility:hidden;	/* initially hide all submenus. */
+	position:absolute;
+	z-index:10;
+	left:0;	/* while hidden, always keep them at the top left corner, */
+	top:0;		/* 		to avoid scrollbars as much as possible */
 }
 
 .menu li:hover>ul {
-	visibility: visible;	/* display submenu them on hover */
-	top: 100%;	/* 1st level go below their parent item */
+	visibility:visible;	/* display submenu them on hover */
+	top:100%;	/* 1st level go below their parent item */
 }
 
 .menu li li:hover>ul {	/* 2nd+ levels go on the right side of the parent item */
@@ -122,8 +125,8 @@
 }
 
 .menu li li:hover>ul {	/* inset 2nd+ submenus, to show off overlapping */
-	top: 5px;
-	left: 90%;
+	top:5px;
+	left:90%;
 }
 
 /* special colouring for "Main menu:", and for "xx submenu" items in ADxMenu
