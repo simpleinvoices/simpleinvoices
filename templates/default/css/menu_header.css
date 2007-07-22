@@ -5,11 +5,15 @@
 /*Simple Invoices menu header*/
 #Header {
 	background-color:#036;
+	border-bottom:1px solid #fff;
 	padding-top:17px;
 	height:26px;
 	width:100%;
 }
-
+#Header_shadow {
+	background:transparent url(../../../images/common/bottom-bg.gif) repeat-x 0 0;
+	height:7px;
+}
 .menu #active {
 	color:#fc0;
 	background-color:#708090;
@@ -20,6 +24,11 @@
 	background-color:#708090;
 }
 
+.title_menu {
+	color:#fff;
+	position:absolute;
+	right:5%;
+}
 /* remove all list stylings */
 .menu, .menu ul {
 	font-size:12.5px;
