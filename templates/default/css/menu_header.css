@@ -6,6 +6,8 @@
 #Header {
 	background-color:#036;
 	padding-top:17px;
+	height:26px;
+	width:100%;
 }
 
 .menu #active {
@@ -20,7 +22,7 @@
 
 /* remove all list stylings */
 .menu, .menu ul {
-	font-size:12px;
+	font-size:12.5px;
 	margin:0 0 0 29px;
 	padding:0;
 	border:0;
@@ -28,6 +30,10 @@
 	display:block;
 }
 
+*+html .menu,*+html .menu ul {
+	font-size:13px;
+}
+	
 .menu li {
 	margin:0;
 	padding:0;
