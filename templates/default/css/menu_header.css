@@ -33,6 +33,10 @@
 *+html .menu,*+html .menu ul {
 	font-size:13px;
 }
+
+* html .menu,* html .menu ul {
+	font-size:13px;
+}
 	
 .menu li {
 	margin:0;
@@ -126,6 +130,11 @@
 }
 
 .menu a:hover, .menu li:hover>a {
+	color:#fc0;
+	background-color:#708090;
+}
+
+* html .menu a:hover {
 	color:#fc0;
 	background-color:#708090;
 }
