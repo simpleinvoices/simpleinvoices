@@ -5,13 +5,19 @@
 /*Simple Invoices menu header*/
 #Header {
 	background-color:#036;
-	padding-top:13px;
+	padding-top:17px;
 }
 
 .menu #active {
 	color:#fc0;
 	background-color:#708090;
 }
+
+.menu .separation {
+	color:#708090;
+	background-color:#708090;
+}
+
 /* remove all list stylings */
 .menu, .menu ul {
 	font-size:12px;

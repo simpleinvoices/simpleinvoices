@@ -5,10 +5,11 @@
 			<li><a href="index.php?module=invoices&view=manage">{$LANG.invoices} +</a>
 				<ul>
 					<li><a href="index.php?module=invoices&view=manage">{$LANG.manage_invoices}</a></li>
-					<li></li>
+					<li class="separation">--</li>
 					<li><a href="index.php?module=invoices&view=total">{$LANG.new_invoice_total}</a></li>
 					<li><a href="index.php?module=invoices&view=itemised">{$LANG.new_invoice_itemised}</a></li>
 					<li><a href="index.php?module=invoices&view=consulting">{$LANG.new_invoice_consulting}</a></li>
+					<li class="separation">--</li>
 					<li><a href="index.php?module=invoices&view=search">Search invoices</a></li>
 				</ul>
 			</li>
@@ -16,6 +17,7 @@
 				<ul>
 					<li><a href="index.php?module=customers&view=manage">{$LANG.manage_customers}</a></li>
 					<li><a href="index.php?module=customers&view=add">{$LANG.add_customer}</a></li>
+					<li class="separation">--</li>
 					<li><a href="index.php?module=customers&view=search">Search customer</a></li>
 				</ul>
 			</li>
@@ -86,6 +88,7 @@
 							</li>
 						</ul>
 					</li>
+					<li class="separation">--</li>
 					<li><a href="./index.php?module=reports&view=database_log">Database Log</a></li>
 				</ul>
 			</li>
@@ -97,7 +100,7 @@
 					<li>
 						<a href="./index.php?module=custom_fields&view=manage">{$LANG.custom_fields_upper}</a>
 					</li>
-					<li></li>
+					<li class="separation">--</li>
 					<li>
 						<a href="./index.php?module=tax_rates&view=manage">{$LANG.tax_rates} +</a>
 						<ul>
@@ -131,7 +134,7 @@
 							</li>
 						</ul>
 					</li>
-					<li></li>
+					<li class="separation">--</li>
 					<li>
 						<a href="./index.php?module=options&view=manage_sqlpatches">{$LANG.database_upgrade_manager}</a>
 					</li>
@@ -143,7 +146,9 @@
 						<a href="./index.php?module=options&view=sanity_check">{$LANG.sanity_check}</a>
 					</li>
 -->
-					<li></li>
+				</ul>
+			<li><a href="#"><img src="./images/common/help-small.png"></a>
+				<ul>
 					<li>
 						<a href="docs.php?p=ReadMe">{$LANG.help} +</a>
 						<ul>
