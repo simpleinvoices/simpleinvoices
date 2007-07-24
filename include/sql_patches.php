@@ -696,11 +696,11 @@ NULL , 'logging', '0'
 (58, 54, 25, "{$LANG[\"using_simple_invoices\"]}", "docs.php?p=ReadMe#use", 1),
 (59, 54, 30, "{$LANG[\"faqs\"]}", "docs.php?p=ReadMe#faqs", 1),
 (60, 54, 35, "{$LANG[\"get_help\"]}", "index.php?module=options&view=help", 1),
-(61, 40, 45, "{$LANG[\"about\"]} +", "docs.php?p=ReadMe#faqs", 1),
-(62, 61, 5, "{$LANG[\"about\"]}", "docs.php?p=ReadMe#faqs", 1),
-(63, 61, 10, "{$LANG[\"change_log\"]}", "docs.php?p=ReadMe#faqs", 1),
-(64, 61, 15, "{$LANG[\"credits\"]}", "docs.php?p=ReadMe#faqs", 1),
-(65, 61, 20, "{$LANG[\"license\"]}", "docs.php?p=ReadMe#faqs", 1),
+(61, 40, 45, "{$LANG[\"about\"]} +", "docs.php?p=about", 1),
+(62, 61, 5, "{$LANG[\"about\"]}", "docs.php?p=about", 1),
+(63, 61, 10, "{$LANG[\"change_log\"]}", "docs.php?p=ChangeLog", 1),
+(64, 61, 15, "{$LANG[\"credits\"]}", "docs.php?p=Credits", 1),
+(65, 61, 20, "{$LANG[\"license\"]}", "docs.php?p=gpl", 1),
 (66, 0, 100, "{$LANG[\"login\"]}", "login.php", 1),
 (68, 40, 14, "Manage Custom Fields 2", "index.php?module=customFields&view=manageCustomFields", 1);';
 	$patch['124']['date'] = "20070523";

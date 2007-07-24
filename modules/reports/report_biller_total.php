@@ -11,7 +11,6 @@ if (!defined("BROWSE")) {
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<!-- thickbox js and css stuff -->
 
 </head>
 <body>

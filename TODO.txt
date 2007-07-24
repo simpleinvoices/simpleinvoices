@@ -1,9 +1,8 @@
 -todo
- - menu : fix documentaion links about etc.. to be correct
  - reports : add export to .xls format
+ - delete : delete invoice - make this happen
  - submit : update all refer to submit to better - only some done - all needs to be done and work
  - preferences: move rest into db
- - db connect: show nice messages again if cant connect (as in the previous release)
  - index.php : add filtering (php 5.2) for get and post input etc.
  - payments - make todays date appear as default in the date field
  - email: html and no html option - maybe??
@@ -29,6 +28,8 @@
  - quick view - add file names extensions (xls,doc) back in to the export section - done
  - si_user and auth challenges table - add check to see if all ready exists(If not exists added to sql) - done
  - invoice save.php - needs to redirect to correct quick view invoice type - hard code type in url removed - relpaced with variable - done
+ - menu : fix documentaion links about etc.. to be correct(you'll need to rerun this patch) - done
+ - db connect: show nice messages again if cant connect (as in the previous release) - done
 
 - in next release +1 - aim end of May
 -todo
