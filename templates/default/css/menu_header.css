@@ -4,19 +4,25 @@
 
 /*Simple Invoices menu header*/
 #Header {
-	background-color:#036;
-	border-bottom:1px solid #fff;
+	background-color:#1579B2;
+/*	background-color:#036;*/
+	border-bottom:5px solid #fc0;
+	/*border-bottom:1px solid #fff;*/
 	padding-top:17px;
 	height:26px;
 	width:100%;
 }
+/* - just testting removing it - Add later ABOVE the menu - ala phishtank.com
 #Header_shadow {
 	background:transparent url(../../../images/common/bottom-bg.gif) repeat-x 0 0;
 	height:7px;
 }
+*/
 .menu #active {
-	color:#fc0;
-	background-color:#708090;
+	color:#FFF;
+	/*color:#fc0;*/
+	background-color:#FFCC00;
+	/*background-color:#708090;*/
 }
 
 .menu .separation {
@@ -33,8 +39,8 @@
 .menu, .menu ul {
 	font-size:12.5px;
 	margin:0 0 0 29px;
-	padding:0;
-	border:0;
+	padding:0 0 0 0;
+	border:0 0 0 0;
 	list-style-type:none;
 	display:block;
 }
@@ -55,7 +61,8 @@
 	float:left;	/* move all main list items into one row, by floating them */
 	position:relative;	/* position each LI, thus creating potential IE.win overlap problem */
 	z-index:5;		/* thus we need to apply explicit z-index here... */
-	border-right:1px solid #708090;
+	border-right:0px solid #708090;
+	/*border-right:1px solid #708090; */
 }
 
 .menu li:hover {
@@ -140,7 +147,8 @@
 
 .menu a:hover, .menu li:hover>a {
 	color:#fc0;
-	background-color:#708090;
+	background-color:#0868A0;
+/*	background-color:#708090;*/
 }
 
 * html .menu a:hover {
@@ -149,7 +157,9 @@
 }
 
 .menu li li {	/* create borders around each item */
-	border:1px solid #ccc;
+	background-color:#ccc;
+	border:0px solid #ccc;
+	/*border:1px solid #ccc;*/
 }
 .menu ul>li + li {	/* and remove the top border on all but first item in the list */
 	border-top:0;
