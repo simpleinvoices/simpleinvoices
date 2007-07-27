@@ -14,7 +14,7 @@
 *
 * Website:
 * 	http://www.simpleinvoices.org
- */
+*/
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
@@ -26,7 +26,7 @@ $preference = getPreference($invoice['preference_id']);
 
 $defaults = getSystemDefaults();
 
-$invoicePayments = getInvoicePayments($invoice_id);
+$invoicePaid = calc_invoice_paid($invoice_id);
 
 
 
@@ -34,6 +34,6 @@ $smarty -> assign("invoice",$invoice);
 $smarty -> assign("preference",$preference);
 
 $smarty -> assign("defaults",$defaults);
-$smarty -> assign("invoicePayments",$invoicePayments);
+$smarty -> assign("invoicePaid",$invoicePaid);
 
 ?>

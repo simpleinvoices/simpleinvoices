@@ -17,29 +17,34 @@
 */
 *}
 
-
+Delete Invoice
+<hr></hr>
 
 <br>
 
-        {if $invoicePayments < 0}
-You can delete this invoices
-{$LANG.quick_view_of} {$preference.pref_inv_wording} {$invoice.id}
-	<tr class='details_screen biller'>
-		<td class='details_screen'>{$customFieldLabels.biller_cf2}:</td><td class='details_screen' colspan=5>{$biller.custom_field2}</td>
-	</tr>	
+        {if $invoicePaid == 0}
+			Are you sure you want to delete {$preference.pref_inv_wording} {$invoice.id}
+<br>
+<br>
+	<hr></hr>
+	<form name="frmpost" ACTION="index.php?module=invoices&view=email&stage=2&invoice={$smarty.get.invoice}" METHOD="post">
+		<input type="submit" name="submit" value="I'm sure"> <input type=button value="Cancel" onCLick="history.back()">
+		<input type="hidden" name="op" value="delete_invoice">
+	</form>	
         {/if}
 
-        {if $invoicePayments > 0}
-You cant delete this invoice
-	<tr class='details_screen biller'>
-		<td class='details_screen'>{$customFieldLabels.biller_cf2}:</td><td class='details_screen' colspan=5>{$biller.custom_field2}</td>
-	</tr>	
+        {if $invoicePaid != 0}
+			{$preference.pref_inv_wording} {$invoice.id} can not be deleted as it has payments of {$preference.pref_currency_sign}{$invoicePaid} recorded against it
+			<br>
+			Add help section here!!
+			<br>
+<hr></hr>
+		<form>
+				<input type=button value="Back" onCLick="history.back()">
+	</form>	
         {/if}
 
 
 	</table>
 
-<hr></hr>
-	<form>
-		<input type=button value="{$LANG.cancel}" onCLick="history.back()">
-	</form>
+
