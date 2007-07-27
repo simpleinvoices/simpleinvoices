@@ -40,7 +40,7 @@
 
 <!--Actions heading - start-->
 {$LANG.actions}: 
-		<a href="index.php?module=invoices&view=templates/template&invoice={$invoice.id}&action=view"> {$LANG.print_preview}</a>
+		<a title="{$LANG.print_preview_tooltip} {$preference.pref_inv_wording} {$invoice.id}" href="index.php?module=invoices&view=templates/template&invoice={$invoice.id}&action=view"> {$LANG.print_preview}</a>
 		 :: 
 		<a href="index.php?module=invoices&view=details&invoice={$invoice.id}&action=view"> {$LANG.edit}</a>
 		 ::
@@ -52,7 +52,13 @@
 		<a href="index.php?module=invoices&view=templates/template&invoice={$invoice.id}&action=view&export={$spreadsheet}">{$LANG.export_as} .{$spreadsheet}</a>
 		::
 		<a href="index.php?module=invoices&view=templates/template&invoice={$invoice.id}&action=view&export={$word_processor}">{$LANG.export_as} .{$word_processor} </a>
-		:: <a href="index.php?module=invoices&view=email&stage=1&invoice={$invoice.id}">{$LANG.email}</a>
+		::
+		<a href="index.php?module=invoices&view=email&stage=1&invoice={$invoice.id}">{$LANG.email}</a>
+		{if $defaults.delete == 'N'} 
+		:: 
+			<a href="index.php?module=invoices&view=delete&invoice={$invoice.id}">Delete</a>
+		{/if}
+
 <!--Actions heading - start-->
 <hr></hr>
 </form>
