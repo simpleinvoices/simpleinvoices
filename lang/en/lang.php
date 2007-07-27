@@ -218,6 +218,7 @@ $LANG['payments_filtered_customer'] = "Payments filtered by Customer ID";//1
 $LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//1
 $LANG['phone'] = "Phone";//1
 $LANG['phone_short'] = "Ph.";//1
+$LANG['preferences'] = "Preferences";//1
 $LANG['preference_id'] = "Preference ID";//1
 $LANG['prepare_simple_invoices'] = "Prepare Simple Invoices for use";//1
 $LANG['print_preview'] = "Print Preview";//1

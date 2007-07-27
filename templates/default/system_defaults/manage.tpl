@@ -25,5 +25,8 @@
 	<tr>
 		<td class='details_screen'><a href='index.php?module=system_defaults&view=edit&submit=def_payment_type'>{$LANG.edit}</a></td><td class='details_screen'>{$LANG.default_payment_type}</td><td>{$defaultPaymentType.pt_description}</td>
 	</tr>
+	<tr>
+		<td class='details_screen'><a href='index.php?module=system_defaults&view=edit&submit=delete'>{$LANG.edit}</a></td><td class='details_screen'>Delete stuff ?Add help here?</td><td>{$defaults.delete}</td>
+	</tr>
         </table>
         

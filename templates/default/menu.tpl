@@ -95,7 +95,7 @@
 			<li><a href="#">{$LANG.options} +</a>
 				<ul>
 					<li>
-						<a href="./index.php?module=system_defaults&view=manage">{$LANG.system_defaults}</a>
+						<a href="./index.php?module=system_defaults&view=manage">{$LANG.preferences}</a>
 					</li>
 					<li>
 						<a href="./index.php?module=custom_fields&view=manage">{$LANG.custom_fields_upper}</a>

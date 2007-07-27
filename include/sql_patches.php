@@ -606,7 +606,7 @@ NULL , 'logging', '0'
 	$patch['118']['patch'] = "UPDATE `si_system_defaults` SET value = $defaults[def_tax] where name = 'tax'";
 	$patch['118']['date'] = "20070523";
 
-	$patch['119']['name'] = "System defaults conversion patch - set default invoice preference";
+	$patch['119']['name'] = "System defaults conversion patch - set default invoice reference";
 	$patch['119']['patch'] = "UPDATE `si_system_defaults` SET value = $defaults[def_inv_preference] where name = 'preference'";
 	$patch['119']['date'] = "20070523";
 
@@ -676,7 +676,7 @@ NULL , 'logging', '0'
 (38, 34, 4, "{$LANG[\"total_by_aging_periods\"]}", "index.php?module=reports&view=report_debtors_aging_total", 1),
 (39, 20, 40, "Database Log", "index.php?module=reports&view=database_log", 1),
 (40, 0, 35, "{$LANG[\"options\"]} +", "#", 1),
-(41, 40, 5, "{$LANG[\"system_defaults\"]}", "index.php?module=system_defaults&view=manage", 1),
+(41, 40, 5, "{$LANG[\"preferences\"]}", "index.php?module=system_defaults&view=manage", 1),
 (42, 40, 10, "{$LANG[\"custom_fields_upper\"]}", "index.php?module=custom_fields&view=manage", 1),
 (43, 40, 15, "{$LANG[\"tax_rates\"]} +", "index.php?module=tax_rates&view=manage", 1),
 (44, 43, 5, "{$LANG[\"manage_tax_rates\"]}", "index.php?module=tax_rates&view=manage", 1),

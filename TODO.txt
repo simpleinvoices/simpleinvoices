@@ -31,6 +31,7 @@
  - invoice save.php - needs to redirect to correct quick view invoice type - hard code type in url removed - relpaced with variable - done
  - menu : fix documentaion links about etc.. to be correct(you'll need to rerun this patch) - done
  - db connect: show nice messages again if cant connect (as in the previous release) - done
+ - change System Defaults to System Options - done
 
 - in next release +1 - aim end of May
 -todo

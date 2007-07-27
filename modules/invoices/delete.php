@@ -36,4 +36,9 @@ $smarty -> assign("preference",$preference);
 $smarty -> assign("defaults",$defaults);
 $smarty -> assign("invoicePaid",$invoicePaid);
 
+/*If delete is disabled - dont allow people to view this page*/
+if ( $defaults['delete'] == 'N' ) {
+	die('Invoice deletion has been disabled, you are not supposed to be here');
+}
+
 ?>

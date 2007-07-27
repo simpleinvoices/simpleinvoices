@@ -54,8 +54,8 @@
 		<a href="index.php?module=invoices&view=templates/template&invoice={$invoice.id}&action=view&export={$word_processor}">{$LANG.export_as} .{$word_processor} </a>
 		::
 		<a href="index.php?module=invoices&view=email&stage=1&invoice={$invoice.id}">{$LANG.email}</a>
-		{if $defaults.delete == 'N'} 
-		:: 
+		{if $defaults.delete == 'Y'} 
+			:: 
 			<a href="index.php?module=invoices&view=delete&invoice={$invoice.id}">Delete</a>
 		{/if}
 
