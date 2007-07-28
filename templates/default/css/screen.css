@@ -201,11 +201,10 @@ Work around IE/Win code size bug - courtesy Jesper, waffle.wootest.net  */
 
 /* STRUCTURE
 -------------------------------------------------*/
-div#Wrapper {
-	padding:0 23px 0 30px; }
 
 div#Container {
-	margin:13px auto 0; }
+	margin:13px auto 0;
+	padding:0 23px 0 30px; }
 
 .ClearAll {
 	clear:both;
