@@ -141,6 +141,10 @@
 	width:11em;
 }
 
+* html .menu ul {
+	width:176px;
+}
+
 .menu a {
 	text-decoration:none;
 	color:#eee;
@@ -157,7 +161,7 @@
 
 * html .menu a:hover {
 	color:#fc0;
-	background-color:#708090;
+	background-color:#0868A0;
 }
 
 .menu li li {	/* create borders around each item */
