@@ -4,7 +4,8 @@
 
 /*Simple Invoices menu header*/
 #Header {
-	background-color:#036;
+	background-color:#1579B2;
+/*	background-color:#036;*/
 	border-bottom:5px solid #fc0;
 	/*border-bottom:1px solid #fff;*/
 	padding-top:17px;
@@ -13,7 +14,7 @@
 }
 /* - just testting removing it - Add later ABOVE the menu - ala phishtank.com */
 #Header_shadow {
-	background:transparent url(../../../images/common/bottom-bg.gif) repeat-x 0 0;
+/*	background:transparent url(../../../images/common/bottom-bg.gif) repeat-x 0 0;*/
 	height:7px;
 }
 

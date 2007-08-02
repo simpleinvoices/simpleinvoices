@@ -9,18 +9,22 @@ $db_name = "simple_invoices";
 $db_user = "root";
 $db_password = "";
 
-//if you want to make Simple Invoices secure and require a username and password set this to tru
-$authenticationOn = "false";
+//if you want to make Simple Invoices secure and require a username and password set this to true
+$authenticationOn = "true";
+//$authenticationOn = "false";
 
 //if you are using a .httaccess file
 $http_auth = "";	//value: "name:password@"
 
 //$tb_prefix = "si_";
 define("TB_PREFIX","si_");
-define("LOGGING",true);
+
+//To turn loggin on set the below to true
+define("LOGGING",false);
+#define("LOGGING",true);
 
 //$path = pathinfo($_SERVER['REQUEST_URI']);
-//echo $pa['dirname'];
+#echo $pa['dirname'];
 
 /*Select language for Simple Invoices to use*/
 #$language = "castellano_spanish";
@@ -49,10 +53,10 @@ $email_password = ""; // SMTP password
 
 /*Javascript MD5 login */
 /*If you want JavaScript MD5 hashing to occur so that you can run Simple Invoices on a Non-Https Server with better security Turn Uncomment MD5Auth, Generally if you do that you should turn on ChallengeLife too. ChallengeLife sets how long before a Challenge leaving the server expires in minutes (480 is a good number I think). Defaults to Off (Please don't use Simple invoices with this off, on an non- https internet server) */
-#$MD5Auth = True; /*To turn of md5 auth set $MD5Auth to True*/
-$MD5Auth = FALSE; /*To Turn off md5 auth set $MD5Auth to FALSE */
-#$ChallengeLife = 480; /*To turn on ChallengeLife set this to 480*/
-$ChallengeLife = 0; /*To turn off ChallengeLife set this to 0 */
+$MD5Auth = True; /*To turn of md5 auth set $MD5Auth to True*/
+#$MD5Auth = FALSE; /*To Turn off md5 auth set $MD5Auth to FALSE */
+$ChallengeLife = 480; /*To turn on ChallengeLife set this to 480*/
+#$ChallengeLife = 0; /*To turn off ChallengeLife set this to 0 */
 
 
 $version = "200707 unstable";

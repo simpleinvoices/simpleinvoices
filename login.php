@@ -78,7 +78,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 
 
     if ($ChallengeLife>0) {
-        $DeleteOldChallenges = 'DELETE FROM `si_auth_challenges` WHERE `challenges_timestamp` < DATE_SUB(now(),INTERVAL $ChallengeLife Minute)';
+        $DeleteOldChallenges = 'DELETE FROM `si_auth_challenges` WHERE `challenges_timestamp` < DATE_SUB(now(),INTERVAL '.$ChallengeLife.' Minute)';
         mysqlQuery($DeleteOldChallenges, $conn);
         $sql = "SELECT *
             FROM si_auth_challenges
@@ -88,7 +88,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
         if (mysql_num_rows($result) >= 1) {
             //Challenge was valid
 #            echo $ChallengeKeySubmitted;
-            $DeleteUSEDChallenge = 'DELETE FROM `si_auth_challenges` WHERE `challenges_key` = `$ChallengeKeySubmitted` limit 1';
+            $DeleteUSEDChallenge = 'DELETE FROM `si_auth_challenges` WHERE `challenges_key` = '.$ChallengeKeySubmitted.' limit 1';
             mysqlQuery($DeleteUSEDChallenge, $conn);
 #            echo "Deleted Used Key $ChallengeKeySubmitted";
             if($password==hmac_md5($ChallengeKeySubmitted, "$storedPassword")){ 
@@ -128,7 +128,7 @@ if($ChallengeLife>0) {
 
 <?php if($MD5Auth==True){?>
 
-    <script src="./include/md5/md5-2.2alpha.js"></script> -->
+    <script src="./include/md5/md5.js"></script> 
     <script language="JavaScript"><!--
 
     function login(f) {
@@ -212,9 +212,8 @@ if ($errorMessage != '') {
 
       		<dd><input type="checkbox" name="remember_me" /> Remember me on this computer</dd>
 		<dd> <input type="submit" value="login" /></dd>
-<!--
-		<dd>Powered by Simple Invoices</dd>
--->
+
+
 <!--  		<dd><input type="submit" value="Sign in" /></dd> -->
 <!--
 	        <label for="username">Username</label>
@@ -240,6 +239,7 @@ if ($errorMessage != '') {
 
 	</div>
         
+		<dd>Powered by <a href="http://www.simpleinvoices.org">Simple Invoices</a></dd>
 
     </div>
 
