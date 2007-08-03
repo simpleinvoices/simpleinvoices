@@ -1,8 +1,9 @@
 
 <div>
+<!--
 <h3>{$title}</h3>
 <hr />
-
+-->
 <!--
 {if $patch > $max_patches_applied}
 
@@ -180,6 +181,8 @@
 		</div>
 	</div>
 </div>
-	
 </div>
+
+<br><br>
+
 </div>

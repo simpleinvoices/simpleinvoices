@@ -4,8 +4,10 @@
 
 /*Simple Invoices menu header*/
 #Header {
-	background-color:#1579B2;
-/*	background-color:#036;*/
+/*	background-color:#255480; /*dark blue*/
+/*	background-color:#3f4c6c;*/ /*mozilal blue*/
+/*	background-color:#1579B2;*/
+	background-color:#036;
 	border-bottom:5px solid #fc0;
 	/*border-bottom:1px solid #fff;*/
 	padding-top:17px;
@@ -63,7 +65,10 @@
 
 /*THIS IS THE HEADER TABS SECTION*/	
 .menu li {
-/*	background:#fff;*/
+	/*background:#4b7296; /* tab blue*/
+	background-color:#255480; /*dark blue*/
+/*	background:#606a7f;*/ /*mozila tab blue*/
+/*	background:#036; */
 	margin:0;
 	padding:0;
 	border:0;
@@ -145,6 +150,9 @@
 .menu, .menu ul li {
 	color:#000;
 	background-color:#036;
+/*	background-color:#255480; /*dark blue*/
+   /* background-color:#3f4c6c;*/ /*mozilal blue*/
+/*	background-color:#1579B2;*/
 }
 
 .menu ul {
@@ -166,7 +174,9 @@
 /*header tabs hover*/
 .menu a:hover, .menu li:hover>a {
 	color:#fc0;
-	background-color:#0868A0;
+	/*background-color:#747f96;*//*mozilla hover*/
+	background:#4b7296; /* tab blue*/
+/*	background-color:#0868A0;*/
 /*	background-color:#708090;*/
 }
 /*Items hover */
