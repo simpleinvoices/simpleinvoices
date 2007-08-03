@@ -1,5 +1,5 @@
 
-<div id="Header"><h2 class="title_menu">Simple Invoices</h2>
+<div id="Header"><!--<h2 class="title_menu">Simple Invoices</h2>-->
 		<ul class="adxm menu">
 			<li id="active"><a href="index.php">{$LANG.home}</a></li>
 			<li><a href="index.php?module=invoices&view=manage">{$LANG.invoices} +</a>

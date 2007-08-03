@@ -9,13 +9,13 @@
 	border-bottom:5px solid #fc0;
 	/*border-bottom:1px solid #fff;*/
 	padding-top:17px;
-	height:26px;
+	height:25px;
 	width:100%;
 }
 /* - just testting removing it - Add later ABOVE the menu - ala phishtank.com */
 #Header_shadow {
 /*	background:transparent url(../../../images/common/bottom-bg.gif) repeat-x 0 0;*/
-	height:7px;
+/*	height:7px; */
 }
 
 .menu #active {
@@ -43,7 +43,7 @@
 }
 /* remove all list stylings */
 .menu, .menu ul {
-	font-size:12.5px;
+	font-size:13px;
 	margin:0 0 0 29px;
 	padding:0;
 	border:0;
@@ -58,8 +58,10 @@
 * html .menu,* html .menu ul {
 	font-size:13px;
 }
-	
+
+/*THIS IS THE HEADER TABS SECTION*/	
 .menu li {
+/*	background:#fff;*/
 	margin:0;
 	padding:0;
 	border:0;
@@ -80,6 +82,7 @@
 	float:none;/* items of the nested menus are kept on separate lines */
 }
 
+/*DROP DOWN BORDERS*/
 .menu ul {
 	visibility:hidden;	/* initially hide all submenus. */
 	position:absolute;
@@ -133,8 +136,9 @@
 
 /* - - - ADxMenu: DESIGN styles [ OPTIONAL, design your heart out :) ] - - - */
 
+/*Controla all the menu background colout*/
 .menu, .menu ul li {
-	color:#eee;
+	color:#000;
 	background-color:#036;
 }
 
@@ -149,7 +153,7 @@
 .menu a {
 	text-decoration:none;
 	color:#eee;
-	padding:.4em 0.8em;
+	padding:4px 7px;
 	display:block;
 	position:relative;
 }
@@ -166,7 +170,9 @@
 }
 
 .menu li li {	/* create borders around each item */
-	border:1px solid #ccc;
+	background-color:#999;
+	color:#000;
+	border:1px 1px 1px 1px solid #fff;
 }
 .menu ul>li + li {	/* and remove the top border on all but first item in the list */
 	border-top:0;
