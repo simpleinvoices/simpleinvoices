@@ -352,4 +352,10 @@ function checkConnection() {
 	}
 }
 
+function menuIsActive($module,$requestedModule) {
+	if ($module == $requestedModule) {
+		echo "id=active";
+	}
+}
+
 ?>

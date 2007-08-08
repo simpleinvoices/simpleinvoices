@@ -1,8 +1,8 @@
 
 <div id="Header"><!--<h2 class="title_menu">Simple Invoices</h2>-->
 		<ul class="adxm menu">
-			<li id="active"><a href="index.php">{$LANG.home}</a></li>
-			<li><a href="index.php?module=invoices&view=manage">{$LANG.invoices} +</a>
+			<li { if $module == null} id="active" {/if}><a href="index.php">{$LANG.home}</a></li>
+			<li { if $module == 'invoices'} id="active" {/if}><a href="index.php?module=invoices&view=manage">{$LANG.invoices} +</a>
 				<ul>
 					<li><a href="index.php?module=invoices&view=manage">{$LANG.manage_invoices}</a></li>
 					<li class="separation"></li>
@@ -13,7 +13,7 @@
 					<li><a href="index.php?module=invoices&view=search">Search invoices</a></li>
 				</ul>
 			</li>
-			<li><a href="index.php?module=customers&view=manage">{$LANG.customers} +</a>
+			<li { if $module == 'customers'} id="active" {/if} ><a href="index.php?module=customers&view=manage">{$LANG.customers} +</a>
 				<ul>
 					<li><a href="index.php?module=customers&view=manage">{$LANG.manage_customers}</a></li>
 					<li><a href="index.php?module=customers&view=add">{$LANG.add_customer}</a></li>
@@ -21,25 +21,25 @@
 					<li><a href="index.php?module=customers&view=search">Search customer</a></li>
 				</ul>
 			</li>
-			<li><a href="index.php?module=products&view=manage">{$LANG.products} +</a>
+			<li { if $module == 'products'} id="active" {/if} ><a href="index.php?module=products&view=manage">{$LANG.products} +</a>
 				<ul>
 					<li><a href="index.php?module=products&view=manage">{$LANG.manage_products}</a></li>
 					<li><a href="index.php?module=products&view=add">{$LANG.add_product}</a></li>
 				</ul>
 			</li>
-			<li><a href="index.php?module=billers&view=manage">{$LANG.billers} +</a>
+			<li { if $module == 'billers'} id="active" {/if}> <a href="index.php?module=billers&view=manage">{$LANG.billers} +</a>
 				<ul>
 					<li><a href="index.php?module=billers&view=manage">{$LANG.manage_billers}</a></li>
 					<li><a href="index.php?module=billers&view=add">{$LANG.add_biller}</a></li>
 				</ul>
 			</li>
-			<li><a href="index.php?module=payments&view=manage">{$LANG.payments} +</a>
+			<li { if $module == 'payments'} id="active" {/if}> <a href="index.php?module=payments&view=manage">{$LANG.payments} +</a>
 				<ul>
 					<li><a href="index.php?module=payments&view=manage">{$LANG.manage_payments}</a></li>
 					<li><a href="index.php?module=payments&view=process&op=pay_invoice">{$LANG.process_payment}</a></li>
 				</ul>
 			</li>
-			<li><a href="#">{$LANG.reports} +</a>
+			<li { if $module == 'reports'} id="active" {/if} ><a href="#">{$LANG.reports} +</a>
 				<ul>
 					<li><a href="index.php?module=reports&view=report_sales_total">{$LANG.sales} +</a>
 						<ul>
@@ -92,7 +92,7 @@
 					<li><a href="./index.php?module=reports&view=database_log">Database Log</a></li>
 				</ul>
 			</li>
-			<li><a href="#">{$LANG.options} +</a>
+			<li  { if $module == 'system_defaults' OR 'custom_fields' OR 'tax_rate' OR 'preferences' OR 'options'} id="active" {/if} ><a href="#">{$LANG.options} +</a>
 				<ul>
 					<li>
 						<a href="./index.php?module=system_defaults&view=manage">{$LANG.preferences}</a>
@@ -147,7 +147,7 @@
 					</li>
 -->
 				</ul>
-			<li><a href="#"><img src="./images/common/help-small.png"></a>
+			<li > <a href="#"><img src="./images/common/help-small.png"></a>
 				<ul>
 					<li>
 						<a href="docs.php?p=ReadMe">{$LANG.help} +</a>

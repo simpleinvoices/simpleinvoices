@@ -1,17 +1,25 @@
 -todo
  - reports : add export to .xls format
  - delete : delete invoice - make this happen
+ -- delete : if delete is enabled allow delete for ALL items - products, billers, etc.. all with their relevant rules ie. if product has been included in an invoice then CAN'T delete etc..
+ -- delete : wrap muliple delete ie for invoices in a sql transaction
+ -- delete : What abot the stuff in the products table for the total style invoices ??
+ --- delete : if this isnt deleted with the invoice products table will have useless info in it - think about this ??
  - submit : update all refer to submit to better - only some done - all needs to be done and work
  - preferences: move rest into db
  - index.php : add filtering (php 5.2) for get and post input etc.
  - payments - make todays date appear as default in the date field
- - email: html and no html option - maybe??
- - email: add cc - maybe ??
- - email: add default signature - maybe - set in biller details ??
+ - email :
+ -- email : html and no html option - maybe??
+ -- email: add cc - maybe ??
+ -- email: add default signature - maybe - set in biller details ??
  - db: prevent sql injection (refer info point 1)
- - menu : issue with sql patch 124 when upgrading from old release - to be looked at
+ - menu re db : issue with sql patch 124 when upgrading from old release - to be looked at
  - reports : now using new format for total style (using products table) some reports may have to be rewritten - to be investigated
- - menu : if logged in change Login to Logout
+ - menu :
+ -- menu : make active tab work for ALL pages
+ -- menu : fix colours for active tab drop down
+ -- menu : if logged in change Login to Logout
  - quick view : check all style if all cut size to 25 characters stuf fis working
  - add more items : update ui 
  - user admin ui

@@ -32,7 +32,7 @@ function mysqlQuery($sqlQuery) {
 		return $query;
 	}
 	else {
-		echo $sqlQuery."<br />".mysql_error();
+		echo "Dude, what happened to your query?: ".$sqlQuery."<br />".mysql_error();
 	}
 }
 
@@ -921,7 +921,10 @@ function searchInvoiceByDate($startdate,$enddate) {
 	AND i.type_id = t.inv_ty_id";
 	return mysqlQuery($sql);
 }
-	
-	
+
+function delete($module,$idField,$id) {
+	$sql = "DELETE FROM ".TB_PREFIX."$module WHERE $idField = $id";
+	return mysqlQuery($sql);
+}
 //in this file are functions for all sql queries
 ?>

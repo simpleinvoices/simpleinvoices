@@ -26,6 +26,7 @@ $module = isset($_GET['module'])?$_GET['module']:null;
 $view = isset($_GET['view'])?$_GET['view']:null;
 $action = isset($_GET['case'])?$_GET['case']:null;
 
+
 require_once("smarty/Smarty.class.php");
 
 $smarty = new Smarty();
@@ -33,6 +34,7 @@ $smarty -> compile_dir = "./cache/";
 
 include("./include/include_main.php");
 
+$smarty -> assign("module",$module);
 
 
 $smarty -> assign("LANG",$LANG);

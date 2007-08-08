@@ -41,4 +41,18 @@ if ( $defaults['delete'] == 'N' ) {
 	die('Invoice deletion has been disabled, you are not supposed to be here');
 }
 
+
+if ( ($_GET['stage'] == 2 ) AND ($_POST['doDelete'] == 'y') ) {
+	
+	//TODO - need to wrap the both deletes in a sql transaction
+	delete('invoices','id',$invoice_id);
+	delete('invoice_items','invoice_id',$invoice_id);
+	//TODO - what about the stuff in the products table for the total style invoices?
+	echo "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=invoices&view=manage>";
+
+}
+
+
+
+
 ?>
