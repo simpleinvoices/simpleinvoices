@@ -1,4 +1,5 @@
 <?php
+
 /*
 * Script: add.php
 * 	Billers add page
@@ -20,19 +21,18 @@ checkLogin();
 
 $files = getLogoList();
 
-$smarty -> assign("files",$files);
+$smarty->assign("files", $files);
 
 #get custom field labels
 $customFieldLabel = getCustomFieldLabels();
 
-if ($_POST['name'] != "" ) {
-	include("./modules/billers/save.php");
+if ($_POST['name'] != "") {
+	include ("./modules/billers/save.php");
 }
 
-$smarty -> assign('files',$files);
-$smarty -> assign('customFieldLabel',$customFieldLabel);
-$smarty -> assign('save',$save);
+$smarty->assign('files', $files);
+$smarty->assign('customFieldLabel', $customFieldLabel);
+$smarty->assign('save', $save);
 
 //showCustomFields(1);
-
 ?>

@@ -1,4 +1,5 @@
 <?php
+
 /*
 * Script: details.php
 * 	Biller details page
@@ -24,7 +25,6 @@ $biller_id = $_GET['id'];
 
 $biller = getBiller($biller_id);
 
-
 /*drop down list code for invoice logo */
 
 $files = getLogoList();
@@ -34,7 +34,7 @@ $files = getLogoList();
 #get custom field labels
 $customFieldLabel = getCustomFieldLabels();
 
-$smarty -> assign('biller',$biller);
+$smarty->assign('biller', $biller);
 /*
 $smarty -> assign('enabled', array(
                                 0 => $LANG[disabled],
@@ -42,7 +42,6 @@ $smarty -> assign('enabled', array(
 			)
 		);
  */
-$smarty -> assign('files',$files);
-$smarty -> assign('customFieldLabel',$customFieldLabel);
-
+$smarty->assign('files', $files);
+$smarty->assign('customFieldLabel', $customFieldLabel);
 ?>

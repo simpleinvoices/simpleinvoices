@@ -32,7 +32,7 @@ function mysqlQuery($sqlQuery) {
 		return $query;
 	}
 	else {
-		echo "Dude, what happened to your query?: ".$sqlQuery."<br />".mysql_error();
+		echo "Dude, what happened to your query?:<br><br> ".$sqlQuery."<br />".mysql_error();
 	}
 }
 
@@ -926,5 +926,21 @@ function delete($module,$idField,$id) {
 	$sql = "DELETE FROM ".TB_PREFIX."$module WHERE $idField = $id";
 	return mysqlQuery($sql);
 }
+
+function maxInvoice() {
+
+	global $LANG;	
+	$sql = "SELECT max(id) as maxId FROM ".TB_PREFIX."invoices";
+
+	$resultSql = mysqlQuery($sql);
+	return mysql_fetch_array($resultSql);
+	
+//while ($Array_max = mysql_fetch_array($result_max) ) {
+//$max_invoice_id = $Array_max['max_inv_id'];
+};
+
+
+
 //in this file are functions for all sql queries
+
 ?>

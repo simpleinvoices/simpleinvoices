@@ -4,10 +4,12 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$maxInvoice = maxInvoice();
+
 jsBegin();
 jsFormValidationBegin("frmpost");
 #jsValidateifNum("ac_inv_id",$LANG['invoice_id']);
-jsPaymentValidation("ac_inv_id",$LANG['invoice_id'],1,$max_invoice['max_id']);
+jsPaymentValidation("ac_inv_id",$LANG['invoice_id'],1,$maxInvoice['maxId']);
 jsValidateifNum("ac_amount",$LANG['amount']);
 jsValidateifNum("ac_date",$LANG['date']);
 jsFormValidationEnd();
