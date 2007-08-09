@@ -40,6 +40,13 @@ td.details_screen {
 	border-color:#FFF;
 	border-width:1px; }
 
+.credit_names li {
+	font-weight:700;
+}
+.credit_names li ul {
+	font-weight:normal;
+	padding:0.2em 0 1.3em 0;
+}
 /*-------------------------------------------------
 GLOBALS & GENERAL CASES
 -------------------------------------------------*/
