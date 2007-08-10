@@ -40,6 +40,8 @@ td.details_screen {
 	border-color:#FFF;
 	border-width:1px; }
 
+/* Credits.html
+-------------------------------------------------*/
 .credit_names li {
 	font-weight:700;
 }
@@ -47,8 +49,16 @@ td.details_screen {
 	font-weight:normal;
 	padding:0.2em 0 1.3em 0;
 }
-/*-------------------------------------------------
-GLOBALS & GENERAL CASES
+
+.solutionTable {
+	margin:20px 0;
+}
+
+.solutionTable td, .solutionTable th  {
+	padding:3px 10px;
+}
+
+/* GLOBALS & GENERAL CASES
 -------------------------------------------------*/
 .print_only {
 	display:none; }
