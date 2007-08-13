@@ -21,7 +21,7 @@
 {if $smarty.get.action== 'view' }
 
 <b>{$LANG.biller} :: <a
-	href="index.php?module=billers&view=details&submit={$biller.id}&action=edit">{$LANG.edit}</a></b>
+	href="index.php?module=billers&view=details&id={$biller.id}&action=edit">{$LANG.edit}</a></b>
 <hr></hr>
 <table align="center">
 	<tr>
@@ -118,6 +118,7 @@
 		<td class="details_screen">{$LANG.notes}</td>
 		<td>{$biller.notes}</td>
 	</tr>
+		{showCustomFields categorieId="1" itemId=$smarty.get.id }
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
 		<td>{$biller.wording_for_enabled}</td>
@@ -251,7 +252,7 @@
 		{html_options name=enabled options=$enabled selected=$biller.enabled}
 		</td>
 	</tr>
-		{showCustomFields categorieId="1"}
+		{showCustomFields categorieId="1" itemId=$smarty.get.id}
 
 </table>
 {/if} 

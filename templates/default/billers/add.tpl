@@ -144,7 +144,7 @@ You must enter a Biller name</div>
 			{html_options name=enabled options=$enabled selected=1}
 		</td>
 	</tr>
-	{showCustomFields categorieId="1"}
+	{showCustomFields categorieId="1" itemId=""}
 	</div>
 	</div>
 	</div>
@@ -152,8 +152,8 @@ You must enter a Biller name</div>
 </table>
 <hr />
 <div style="text-align:center;">
-	<input type="submit" name="submit" value="{$LANG.insert_biller}" /> <input
-	type="hidden" name="op" value="insert_biller" />
+	<input type="submit" name="submit" value="{$LANG.insert_biller}" />
+	<input type="hidden" name="op" value="insert_biller" />
 </div>
 </form>
 {/if}

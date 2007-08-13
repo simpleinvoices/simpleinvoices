@@ -28,10 +28,17 @@ class TextCustomField extends CustomField {
 		echo $name.": ".$values['description'];
 	}
 	
-	function printInputField($id) {		
+	function printInputField($id,$itemId) {		
 		$description = $this->getDescription($id);
 		$name = $this->getFormName($id);
-		$value = $this->getValue($id);
+		
+		if($itemId != "") {
+			//Sould be replace by customFieldId and Itemid
+			$value = $this->getValue($itemId);
+		}
+		else {
+			$value = "";
+		}
 		
 		echo "<tr><td>$description</td><td><input name='$name' value='$value' type='text'></td></tr>";
 	}
