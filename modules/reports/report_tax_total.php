@@ -1,5 +1,18 @@
+<?php
+/* The Export code - supports any file extensions - excel/word/open office - what reads html */
+if (isset($_GET['export'])) {
+	$template = "export";
+	$file_extension = $_GET['export'];
+	header("Content-type: application/octet-stream");
+	/*header("Content-type: application/x-msdownload");*/
+	header("Content-Disposition: attachment; filename=test.xls");
+	header("Pragma: no-cache");
+	header("Expires: 0");
+}
+/* End Export code */
+?>
 <?php 
-include("./include/include_main.php"); 
+//include("./include/include_main.php"); 
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 if (!defined("BROWSE")) {

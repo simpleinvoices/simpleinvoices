@@ -77,7 +77,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 } 
 
 
-/*
+/**/
 
 if (isset($_POST['user']) && isset($_POST['pass'])) {
 
@@ -153,7 +153,7 @@ if($ChallengeLife>0) {
      mysql_select_db( $db_name, $conn);
      mysqlQuery("INSERT INTO si_auth_challenges (challenges_key) VALUES ($Challenge_Key)",$conn);
 }
-*/
+/**/
 
 ?>
 <html>

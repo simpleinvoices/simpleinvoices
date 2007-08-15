@@ -47,7 +47,7 @@
 		 <a href='index.php?module=payments&view=process&invoice={$invoice.id}&op=pay_selected_invoice'> {$LANG.process_payment} </a>
 		 ::
 		 <!-- EXPORT TO PDF -->
-		<a href='{$url_for_pdf }'>{$LANG.export_pdf}</a>
+		<a href='{$invoice.url_for_pdf }'>{$LANG.export_pdf}</a>
 		::
 		<a href="index.php?module=invoices&view=templates/template&invoice={$invoice.id}&action=view&export={$spreadsheet}">{$LANG.export_as} .{$spreadsheet}</a>
 		::
