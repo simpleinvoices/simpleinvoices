@@ -53,6 +53,38 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
      mysql_select_db( $db_name, $conn);
 
     $userEmail   = $_POST['user'];
+    $password = $_POST['pass'];
+    
+    // check if the user id and password combination exist in database
+    $sql = "SELECT user_id 
+            FROM ".TB_PREFIX."users
+            WHERE user_email = '$userEmail' AND user_password = md5('$password')";
+    
+    $result = mysql_query($sql, $conn) or die('Query failed. ' . mysql_error()); 
+    
+    if (mysql_num_rows($result) == 1) {
+        // the user id and password match, 
+        // set the session
+        $_SESSION['db_is_logged_in'] = true;
+        
+        // after login we move to the main page
+	header('Location: .');
+        exit;
+    } else {
+        $errorMessage = 'Sorry, wrong user / password';
+    }
+    
+} 
+
+
+/*
+
+if (isset($_POST['user']) && isset($_POST['pass'])) {
+
+    $conn = mysql_connect( $db_host, $db_user, $db_password);
+     mysql_select_db( $db_name, $conn);
+
+    $userEmail   = $_POST['user'];
     if ($_POST['pass'] == $_POST['md5'] ){
         $password = $_POST['pass'];
     } 
@@ -121,6 +153,7 @@ if($ChallengeLife>0) {
      mysql_select_db( $db_name, $conn);
      mysqlQuery("INSERT INTO si_auth_challenges (challenges_key) VALUES ($Challenge_Key)",$conn);
 }
+*/
 
 ?>
 <html>
@@ -209,8 +242,10 @@ if ($errorMessage != '') {
   		  <span>(<a href="login.php">I forgot my password/username</a>)</span>
 			-->
   		</dd>
-
+<!--TODO add language select drop down here -->
+<!--
       		<dd><input type="checkbox" name="remember_me" /> Remember me on this computer</dd>
+-->
 		<dd> <input type="submit" value="login" /></dd>
 
 
