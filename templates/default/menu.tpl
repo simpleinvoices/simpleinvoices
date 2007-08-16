@@ -95,7 +95,7 @@
 			<li  { if $module == 'system_defaults' OR 'custom_fields' OR 'tax_rate' OR 'preferences' OR 'options'} id="active" {/if} ><a href="#">{$LANG.options} +</a>
 				<ul>
 					<li>
-						<a href="./index.php?module=system_defaults&view=manage">{$LANG.preferences}</a>
+						<a href="./index.php?module=system_defaults&view=manage">System {$LANG.preferences}</a>
 					</li>
 					<li>
 						<a href="./index.php?module=custom_fields&view=manage">{$LANG.custom_fields_upper}</a>

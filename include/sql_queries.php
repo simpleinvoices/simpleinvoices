@@ -425,6 +425,27 @@ function getDefaultTax() {
 	return mysql_fetch_array($query);
 }
 
+function getDefaultDelete() {
+	
+	global $LANG;
+
+	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = 'delete')";
+	$query = mysqlQuery($sql) or die(mysql_error());
+	$array = mysql_fetch_array($query);
+	$delete = $array['value']==1?$LANG['enabled']:$LANG['disabled'];
+	return $delete;
+}
+
+function getDefaultLogging() {
+	
+	global $LANG;
+
+	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = 'logging')";
+	$query = mysqlQuery($sql) or die(mysql_error());
+	$array = mysql_fetch_array($query);
+	$delete = $array['value']==1?$LANG['enabled']:$LANG['disabled'];
+	return $delete;
+}
 function getInvoiceTotal($invoice_id) {
 	global $LANG;
 	

@@ -365,6 +365,38 @@ EOD;
 
 }
 
+else if ($_GET[submit] == "delete") {
+
+	$deleteArray = array(0 => $LANG[disabled], 1=>$LANG[enabled]);
+
+	$default = "delete";
+	//has records, so display them
+
+	$dropDown = <<<EOD
+         <select name="value">
+EOD;
+
+	foreach ($deleteArray as $key => $value)
+	{
+		$key == $defaults[delete]?$selected ="selected":$selected="";
+		$dropDown .= '<OPTION '.$selected.' value='.$key.'> '.$value.'';
+	} 
+
+	$dropDown .= "</select>";
+
+	$display_block = <<<EOD
+        <tr>
+                <td><br></td>
+        </tr>
+        <tr>
+        <td class="details_screen">Delete stuff {$LANG['delete']}</td><td>$dropDown</td>
+        </tr>
+        <tr>
+                <td><br></td>
+        </tr>
+EOD;
+
+}
 
 else {
 	$display_block = "{$LANG['no_defaults']}";
