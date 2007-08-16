@@ -389,7 +389,7 @@ EOD;
                 <td><br></td>
         </tr>
         <tr>
-        <td class="details_screen">Delete stuff {$LANG['delete']}</td><td>$dropDown</td>
+        <td class="details_screen">LANG_TODO:Delete stuff {$LANG['delete']}</td><td>$dropDown</td>
         </tr>
         <tr>
                 <td><br></td>
@@ -398,6 +398,38 @@ EOD;
 
 }
 
+else if ($_GET[submit] == "logging") {
+
+	$array = array(0 => $LANG[disabled], 1=>$LANG[enabled]);
+
+	$default = "logging";
+	//has records, so display them
+
+	$dropDown = <<<EOD
+         <select name="value">
+EOD;
+
+	foreach ($array as $key => $value)
+	{
+		$key == $defaults[logging]?$selected ="selected":$selected="";
+		$dropDown .= '<OPTION '.$selected.' value='.$key.'> '.$value.'';
+	} 
+
+	$dropDown .= "</select>";
+
+	$display_block = <<<EOD
+        <tr>
+                <td><br></td>
+        </tr>
+        <tr>
+        <td class="details_screen">LANG_TODO: Logging</td><td>$dropDown</td>
+        </tr>
+        <tr>
+                <td><br></td>
+        </tr>
+EOD;
+
+}
 else {
 	$display_block = "{$LANG['no_defaults']}";
 }
@@ -407,7 +439,7 @@ echo <<<EOD
 
 <form name="frmpost" action="index.php?module=system_defaults&view=save" method="post" onsubmit="return frmpost_Validator(this)">
 
-		<b>{$LANG['system_defaults']}</b>
+		<b>LANG_TODO: System Preferences</b>
  <hr></hr>
 
 <table align=center>
