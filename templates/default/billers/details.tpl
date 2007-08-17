@@ -13,9 +13,7 @@
 *	 GPL v2 or above
 */
 *}
-<form name="frmpost"
-	action="index.php?module=billers&view=save&id={$smarty.get.id}"
-	method="post">
+<form name="frmpost" action="index.php?module=billers&view=save&id={$smarty.get.id}" method="post">
 
 
 {if $smarty.get.action== 'view' }
@@ -261,5 +259,6 @@
 		<input type="submit" name="cancel" value="{$LANG.cancel}" /> 
 		<input type="submit" name="save_biller" value="{$LANG.save_biller}" /> 
 		<input type="hidden" name="op" value="edit_biller" /> 
+		<input type="hidden" name="categorie" value="1" />
 	{/if}
 </form>

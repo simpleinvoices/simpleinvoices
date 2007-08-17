@@ -35,6 +35,18 @@ abstract class CustomField {
 		mysqlQuery($sql);
 	}
 	
+	function getFieldValue($customeFieldId, $itemId) {
+		$sql = "SELECT * FROM si_customFieldValues WHERE (customFieldId = $customeFieldId && itemId = $itemId)";
+		$query = mysqlQuery($sql);
+		
+		if($query) {
+			$value = mysql_fetch_array($query);
+			return $value['value'];
+		}
+		
+		return "";
+	}
+	
 	function getValue($id) {
 		$sql = "SELECT * FROM si_customFieldValues WHERE id = $id";
 		$query = mysqlQuery($sql);

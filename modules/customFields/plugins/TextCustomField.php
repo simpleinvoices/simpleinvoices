@@ -34,7 +34,7 @@ class TextCustomField extends CustomField {
 		
 		if($itemId != "") {
 			//Sould be replace by customFieldId and Itemid
-			$value = $this->getValue($itemId);
+			$value = $this->getFieldValue($id,$itemId);
 		}
 		else {
 			$value = "";
