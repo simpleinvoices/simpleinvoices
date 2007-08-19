@@ -1,33 +1,19 @@
--todo
- - reports : add export to .xls format
- - delete : delete invoice - make this happen
- -- delete : if delete is enabled allow delete for ALL items - products, billers, etc.. all with their relevant rules ie. if product has been included in an invoice then CAN'T delete etc..
- -- delete : wrap muliple delete ie for invoices in a sql transaction
- -- delete : What abot the stuff in the products table for the total style invoices ??
- --- delete : if this isnt deleted with the invoice products table will have useless info in it - think about this ??
- - submit : update all refer to submit to better - only some done - all needs to be done and work
- - preferences: move rest into db
- - index.php : add filtering (php 5.2) for get and post input etc.
- - payments - make todays date appear as default in the date field
- - email :
- -- email : html and no html option - maybe??
- -- email: add cc - maybe ??
- -- email: add default signature - maybe - set in biller details ??
- - db: prevent sql injection (refer info point 1)
- - menu re db : issue with sql patch 124 when upgrading from old release - to be looked at
+- NR todo (end of August)
  - reports : now using new format for total style (using products table) some reports may have to be rewritten - to be investigated
+ - menu re db : issue with sql patch 124 when upgrading from old release - to be looked at
  - menu :
  -- menu : make active tab work for ALL pages
  -- menu : fix colours for active tab drop down
  -- menu : if logged in change Login to Logout
+ - language : new language system - review
+ - index.php review input if is safe enought
  - quick view : check all style if all cut size to 25 characters stuf fis working
+ -- quick view : check consulting style - is descripton etc coming through OK?
  - add more items : update ui 
- - user admin ui
- - old ones
- -- CSS: main container - white section seems to have default height???
- -- customer view - add edit/export etc, back in
+ -- add famfam icon for add button
+ - lang: add new lang variables into all files
 
--done
+- NR done
  - menu : add + back into menu - done
  - print preview of Total style invocies needs to be fixed - done
  - menu : new read from db - what happens when user changes LANG - menu wont update - needs to be fixed - done
@@ -39,11 +25,29 @@
  - invoice save.php - needs to redirect to correct quick view invoice type - hard code type in url removed - relpaced with variable - done
  - menu : fix documentaion links about etc.. to be correct(you'll need to rerun this patch) - done
  - db connect: show nice messages again if cant connect (as in the previous release) - done
- - change System Defaults to System Options - done
+ - change System Defaults to System Preferences - done
  -- quick view : make export to pdf work - done
+ - payments - make todays date appear as default in the date field - done
+ - delete : delete invoice - make this happen - done
 
-- in next release +1 - aim end of May
+- in next release +1 (NR1) - (aim end of Sept)
 -todo
+ - user admin ui
+ - preferences: move rest into db
+ - index.php : add filtering (php 5.2) for get and post input etc.
+ - db: prevent sql injection (refer info point 1)
+ - submit : update all refer to submit to better - only some done - all needs to be done and work
+ - delete : if delete is enabled allow delete for ALL items - products, billers, etc.. all with their relevant rules ie. if product has been included in an invoice then CAN'T delete etc..
+ - delete : wrap muliple delete ie for invoices in a sql transaction
+ - reports : add export to .xls format NR+1
+ - move the stuff in index and home in the LANG files
+ - email :
+ -- email : html and no html option - maybe??
+ -- email: add cc - maybe ??
+ -- email: add default signature - maybe - set in biller details ??
+ -- email: and add validation
+ - customer view - add edit/export etc, back in
+ -- old ones
  - pdf: pdf of the default templated doesnt include some of the borders on the right sides - needs fixing
  - replce checkLogin with CheckBrowse - check login name assumes something to do with login when its not - not urgent
  - validation:
@@ -54,10 +58,9 @@
  -- http://www.rfc-editor.org/rfc/rfc4646.txt
  -- http://www.iana.org/assignments/language-subtag-registry
  --- sounds good - aim for NR+1
- - smarty: move all the remaining pages to smarty
- - Email: and add validation
- - move the stuff in index and home in the LANG files
  - apply aplysia new drop down list code to others (refer system default: biller)
+
+##############################
 
 - Replace with easy function...
 #get custom field labels

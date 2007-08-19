@@ -18,32 +18,52 @@
 *}
 {if $smarty.post.submit != null}
 	<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=details&invoice={$smarty.post.invoice_id}&type={$smarty.post.type}>
+	<br><br>
+	{$LANG.save_invoice_items_success};
+	<br><br>
 {else}
+<div id="top"><h3>LANG_TODO: Add Invoice Item</h3></div>
+ <hr />
 <form name="add_invoice_item" action="index.php?module=invoices&view=add_invoice_item" method="post">
-	<table>
-
-
+	<table align="center">
 			<tr>
-				<td><input type=text name="quantity" size="5"></td><td input type=text name="description" size="50">
+				<td class="details_screen">
+					{$LANG.quantity}
+				</td>
+				<td>
+					<input type=text name="quantity" size="5">
+				</td>
+			</tr>
+			<tr>
+				<td class="details_screen">
+					{$LANG.product}
+				</td>
+				<td input type=text name="description">
 				                
-			{if $products == null }
-				<p><em>{$LANG.no_products}</em></p>
-			{else}
-				<select name="product">
-					<option value=""></option>
-				{foreach from=$products item=product}
-					<option {if $product.id == $defaults.product} selected {/if} value="{$product.id}">{$product.description}</option>
-				{/foreach}
-				</select>
+				{if $products == null }
+					<p><em>{$LANG.no_products}</em></p>
+				{else}
+					<select name="product">
+						<option value=""></option>
+					{foreach from=$products item=product}
+						<option {if $product.id == $defaults.product} selected {/if} value="{$product.id}">{$product.description}</option>
+					{/foreach}
+					</select>
+				{/if}
+					                				                
+                </td>
+			</tr>
+ 
+			{if $type == 3}               
+            	<tr class="text hide">
+					<td class="details_screen" colspan=2 >{$LANG.description}</td>
+				</tr>
+            	<tr class="text hide">
+					<td colspan=2 ><textarea input type=text name='description' rows=3 cols=80 WRAP=nowrap></textarea></td>
+				</tr>
 			{/if}
-				                				                
-                </td></tr>
-                
-                <tr class="text hide">
-        <td colspan=2 ><textarea input type=text name='description' rows=3 cols=80 WRAP=nowrap></textarea></td>
-</tr>
 </table>
-
+<hr />
 <div style="text-align:center;">
 	<input type="submit" name="submit" value="{$LANG.save_invoice}">
 	<input type="hidden" name="invoice_id" value="{$smarty.get.invoice}">

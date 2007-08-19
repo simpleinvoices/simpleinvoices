@@ -471,7 +471,7 @@ function getInvoice($id) {
 	$invoice['total_format'] = number_format($invoice['total'],2);
 	$invoice['paid'] = calc_invoice_paid($invoice['id']);
 	$invoice['paid_format'] = number_format($invoice['paid'],2);
-	$invoice['owing'] =$invoice['total'] - $invoice['paid'];
+	$invoice['owing'] = $invoice['total'] - $invoice['paid'];
 
 	
 	#invoice total tax

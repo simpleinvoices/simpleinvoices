@@ -22,7 +22,7 @@
 	<hr></hr>
 
 	<br>
-
+		ID = {$invoiceItems.id}
     	    {if $invoicePaid == 0}
 				Are you sure you want to delete {$preference.pref_inv_wording} {$invoice.id}
 	<br>

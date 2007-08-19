@@ -42,5 +42,6 @@ $smarty -> assign("defaults",$defaults);
 $smarty -> assign("biller",$biller);
 $smarty -> assign("customer",$customer);
 $smarty -> assign("invoice",$invoice);
+$smarty -> assign("today",$today);
 
 ?>

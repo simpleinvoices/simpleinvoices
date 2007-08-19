@@ -28,6 +28,7 @@ $defaults = getSystemDefaults();
 
 $invoicePaid = calc_invoice_paid($invoice_id);
 
+$invoiceItems = getInvoiceItems($invoice_id);
 
 
 $smarty -> assign("invoice",$invoice);
@@ -35,6 +36,7 @@ $smarty -> assign("preference",$preference);
 
 $smarty -> assign("defaults",$defaults);
 $smarty -> assign("invoicePaid",$invoicePaid);
+$smarty -> assign("invoiceItems",$invoiceItems);
 
 /*If delete is disabled - dont allow people to view this page*/
 if ( $defaults['delete'] == 'N' ) {
@@ -45,6 +47,12 @@ if ( $defaults['delete'] == 'N' ) {
 if ( ($_GET['stage'] == 2 ) AND ($_POST['doDelete'] == 'y') ) {
 	
 	//TODO - need to wrap the both deletes in a sql transaction
+	//delete products from producsts table for total style
+	if ($invoice['type_id'] == 1) 
+	{
+		delete('products','id',$invoiceItems['0']['product']['id']);
+	}
+	//delete the info from the invoice table and the invoice items table
 	delete('invoices','id',$invoice_id);
 	delete('invoice_items','invoice_id',$invoice_id);
 	//TODO - what about the stuff in the products table for the total style invoices?

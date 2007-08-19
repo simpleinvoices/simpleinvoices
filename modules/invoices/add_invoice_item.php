@@ -27,4 +27,7 @@ $products = getActiveProducts();
 
 $smarty -> assign("products",$products);
 }
+
+$type = $_GET[type];
+$smarty -> assign("type",$type);
 ?>

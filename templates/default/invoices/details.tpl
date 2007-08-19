@@ -113,11 +113,6 @@
                         <td class='details_screen'>{$LANG.quantity_short}</td><td class='details_screen'>{$LANG.item}</td>
                 </tr>
         {/if}
-			
-			
-	<tr>
-	<td><a href="./index.php?module=invoices&view=add_invoice_item&invoice={$invoice.id}&type={$invoice.type_id}&tax_id={$invoiceItems.0.tax_id}">Add Invoice Item</a></td><td></td>
-	</tr>
 	
 {foreach key=line from=$invoiceItems item=invoiceItem}
 		
@@ -157,6 +152,13 @@
 	{/if}
 {/foreach}
 
+	<tr>
+		<td>
+			<a href="./index.php?module=invoices&view=add_invoice_item&invoice={$invoice.id}&type={$invoice.type_id}&tax_id={$invoiceItems.0.tax_id}">LANG_TODO : Add Invoice Item</a>
+		</td>
+		<td>
+		</td>
+	</tr>
 
 	 {$customFields.1}
 	 {$customFields.2}
