@@ -22,7 +22,6 @@
 	<hr></hr>
 
 	<br>
-		ID = {$invoiceItems.id}
     	    {if $invoicePaid == 0}
 				Are you sure you want to delete {$preference.pref_inv_wording} {$invoice.id}
 	<br>
@@ -37,7 +36,7 @@
 	        {if $invoicePaid != 0}
 				{$preference.pref_inv_wording} {$invoice.id} can not be deleted as it has payments of {$preference.pref_currency_sign}{$invoicePaid} recorded against it
 				<br>
-				Add help section here!!
+				LANG_TODO: Add help section here!!
 				<br>
 	<hr></hr>
 			<form>
@@ -53,9 +52,8 @@
 {if $smarty.get.stage == 2 }
 
 	<div id="top"></b></div>
+	<br><br>
 	{$preference.pref_inv_wording} {$invoice_id} has been deleted
-
-	<table align=center>
-	</table>
+	<br><br>
 
 {/if}

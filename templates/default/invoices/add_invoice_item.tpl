@@ -22,7 +22,7 @@
 	{$LANG.save_invoice_items_success};
 	<br><br>
 {else}
-<div id="top"><h3>LANG_TODO: Add Invoice Item</h3></div>
+<div id="top"><h3>{$LANG.add_invoice_item}</h3></div>
  <hr />
 <form name="add_invoice_item" action="index.php?module=invoices&view=add_invoice_item" method="post">
 	<table align="center">
@@ -65,7 +65,7 @@
 </table>
 <hr />
 <div style="text-align:center;">
-	<input type="submit" name="submit" value="{$LANG.save_invoice}">
+	<input type="submit" name="submit" value="{$LANG.add_item}">
 	<input type="hidden" name="invoice_id" value="{$smarty.get.invoice}">
 	<input type="hidden" name="type" value="{$smarty.get.type}">
 	<input type="hidden" name="tax_id" value="{$smarty.get.tax_id}">

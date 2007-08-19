@@ -7,9 +7,6 @@
 * Authors:
 *	 Justin Kelly
 *
-* Last edited:
-* 	 2007-04-26
-*
 * License:
 *	 GPL v2 or above
 */
@@ -27,6 +24,8 @@ $LANG['actions'] = "Actions";//1
 $LANG['add_biller'] = "Add Biller";//1
 $LANG['add_customer'] = "Add Customer";//1
 $LANG['add_invoice_preference'] = "Add Invoice Preference";//1
+$LANG['add_invoice_item'] = "Add Invoice Item";//1
+$LANG['add_item'] = "Add Item";//1
 $LANG['add_new_biller'] = "Add New Biller";//1
 $LANG['add_new_invoice'] = "Add New Invoice";//1
 $LANG['add_new_payment_type'] = "Add New payment Type";//1

@@ -9,9 +9,7 @@
  - index.php review input if is safe enought
  - quick view : check all style if all cut size to 25 characters stuf fis working
  -- quick view : check consulting style - is descripton etc coming through OK?
- - add more items : update ui 
- -- add famfam icon for add button
- - lang: add new lang variables into all files
+ - lang: add new lang variables into all files : grep LANG_TODO
 
 - NR done
  - menu : add + back into menu - done
@@ -29,6 +27,8 @@
  -- quick view : make export to pdf work - done
  - payments - make todays date appear as default in the date field - done
  - delete : delete invoice - make this happen - done
+ - add more items : update ui - done
+ -- add famfam icon for add button - done
 
 - in next release +1 (NR1) - (aim end of Sept)
 -todo
