@@ -59,11 +59,11 @@ else {
 	}
 	
 	//echo $file;
-	$smarty -> display("../templates/default/header.tpl");
-	$smarty -> display("../templates/default/menu.tpl");
-	$smarty -> display("../templates/default/main.tpl"); 
+	$smarty -> display("../templates/modules/header.tpl");
+	$smarty -> display("../templates/modules/menu.tpl");
+	$smarty -> display("../templates/modules/main.tpl"); 
 	include($file);
-	$smarty -> display("../templates/default/footer.tpl");
+	$smarty -> display("../templates/modules/footer.tpl");
 
 }
 

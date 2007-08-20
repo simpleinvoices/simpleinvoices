@@ -86,33 +86,33 @@ if(file_exists("./modules/$path.php")) {
 }
 
 
-$smarty -> display("../templates/default/header.tpl");
+$smarty -> display("../templates/modules/header.tpl");
 //temp added menu.tpl back in so we can easily design new menu system
 
-$smarty -> display("../templates/default/menu.tpl");
+$smarty -> display("../templates/modules/menu.tpl");
 /*
 if($menu) {
 	getMenuStructure();
-	//$smarty -> display("../templates/default/menu.tpl");
+	//$smarty -> display("../templates/modules/menu.tpl");
 }
 */
-$smarty -> display("../templates/default/main.tpl");
+$smarty -> display("../templates/modules/main.tpl");
 
 include_once("./modules/$file.php");
 
 //Shouldn't be necessary anymore. Ist for old files without tempaltes...
 
-if(file_exists("./templates/default/$file.tpl")) {
+if(file_exists("./templates/modules/$file.tpl")) {
 	
-	$path = "../templates/default/$module/";
+	$path = "../templates/modules/$module/";
 	$smarty->assign("path",$path);
-	$smarty -> display("../templates/default/$file.tpl");
+	$smarty -> display("../templates/modules/$file.tpl");
 }
 // If no smarty template - add message - onyl uncomment for dev - commented out for release
 else {
 	error_log("NOTEMPLATE!!");
 }
 
-$smarty -> display("../templates/default/footer.tpl");
+$smarty -> display("../templates/modules/footer.tpl");
 
 ?>
