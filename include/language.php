@@ -32,5 +32,8 @@ function getLanguageArray() {
 	
 	return $LANG;
 }
-
+//TODO: if (getenv("HTTP_ACCEPT_LANGUAGE") != available language) AND (config lang != en) ) {
+// then use config lang
+// }
+//
 ?>
