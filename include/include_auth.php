@@ -8,6 +8,6 @@ if ($_GET['location'] == 'pdf' ) {
 else {
 	include('./include/auth/auth.php');
 }
-*/
+ */
 
 ?>
