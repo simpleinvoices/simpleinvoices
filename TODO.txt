@@ -32,6 +32,8 @@
 
 - in next release +1 (NR1) - (aim end of Sept)
 -todo
+ - manage pages redevelopment!!
+ - users/groups/domains - make this happen!
  - user admin ui
  - preferences: move rest into db
  - index.php : add filtering (php 5.2) for get and post input etc.

@@ -1,6 +1,4 @@
 <?php
-//stop the direct browsing to this file - let index.php handle which files get displayed
-
 //checkLogin();
 
 /*Enter your database information */
@@ -97,7 +95,4 @@ $pdf_bottom_margin = 15;
 #error_reporting(E_ALL & ~E_NOTICE);
 #error_reporting(0);
 
-/*To change the theme, enter the name of the theme folder - default is google*/
-//delete this old config
-//$theme = "google";
 ?>
