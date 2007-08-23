@@ -45,7 +45,7 @@ if($_GET['t'] == "help") {
 }
 else {
 
-	$file = "./documentation/$lang/general/$_GET[p]";
+$file = "./documentation/$lang/general/$_GET[p]";
 	
 	if(file_exists($file.".html")) {
 		$file = $file.".html";
@@ -59,11 +59,11 @@ else {
 	}
 	
 	//echo $file;
-	$smarty -> display("../templates/modules/header.tpl");
-	$smarty -> display("../templates/modules/menu.tpl");
-	$smarty -> display("../templates/modules/main.tpl"); 
+	$smarty -> display("../templates/default/header.tpl");
+	$smarty -> display("../templates/default/menu.tpl");
+	$smarty -> display("../templates/default/main.tpl"); 
 	include($file);
-	$smarty -> display("../templates/modules/footer.tpl");
+	$smarty -> display("../templates/default/footer.tpl");
 
 }
 

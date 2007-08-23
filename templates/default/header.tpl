@@ -9,11 +9,11 @@
     var GB_ROOT_DIR = "./modules/include/js/";
 </script>
 
-	<link rel="stylesheet" type="text/css" href="./templates/modules/css/menu_header.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/menu_header.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="include/jquery/jquery.autocomplete.css" title="default" media="screen" />
 	<link rel="stylesheet" type="text/css" href="include/jquery/jquery.datePicker.css" title="default" media="screen" />
-	<link rel="stylesheet" type="text/css" href="./templates/modules/css/screen.css" media="all"/>
-	<link rel="stylesheet" type="text/css" href="./templates/modules/css/print.css" media="print"/>
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/screen.css" media="all"/>
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/print.css" media="print"/>
 
 <script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
 <script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
@@ -29,13 +29,13 @@
 {literal}
 	<!-- Menu header -->
 	<!--[if lte IE 6]>
-		<link rel="stylesheet" type="text/css" href="./templates/modules/css/menu_header_hackIE.css" media="screen" />
-		<script type="text/javascript" src="./templates/modules/js/ADxMenu.js"></script>
+		<link rel="stylesheet" type="text/css" href="./templates/default/css/menu_header_hackIE.css" media="screen" />
+		<script type="text/javascript" src="./templates/default/js/ADxMenu.js"></script>
 	<![endif]-->
 	
 	<!-- Additional IE/Win specific style sheet (Conditional Comments) -->
 	<!--[if lte IE 7]>
-	<link rel="stylesheet" href="./temlates/modules/css/tabs-ie.css" type="text/css" media="projection, screen" />
+	<link rel="stylesheet" href="./temlates/default/css/tabs-ie.css" type="text/css" media="projection, screen" />
 	<![endif]-->
 
 	<!-- Additional IE/Win specific style sheet (Conditional Comments) -->
@@ -62,17 +62,17 @@
 
 
 <!-- customer-details -->
-<link rel="stylesheet" href="./templates/modules/css/tabs.css" type="text/css" media="print, projection, screen" />
+<link rel="stylesheet" href="./templates/default/css/tabs.css" type="text/css" media="print, projection, screen" />
 
 
 <script type="text/javascript" src="./modules/include/js/AJS.js"></script>
 <script type="text/javascript" src="./modules/include/js/AJS_fx.js"></script>
 <script type="text/javascript" src="./modules/include/js/gb_scripts.js"></script>
-<link href="./templates/modules/css/gb_styles.css" rel="stylesheet" type="text/css" />
+<link href="./templates/default/css/gb_styles.css" rel="stylesheet" type="text/css" />
 
 <!--[if gte IE 5.5]>
 <script language="JavaScript" src="./modules/include/js/dhtml.js" type="text/JavaScript"></script>
-<link rel="stylesheet" href="./templates/modules/css/iehacks.css" type="text/css" />
+<link rel="stylesheet" href="./templates/default/css/iehacks.css" type="text/css" />
 <![endif]-->
 
 
