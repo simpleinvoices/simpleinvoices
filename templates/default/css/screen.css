@@ -250,7 +250,7 @@ div#Container {
 	padding:0 20px; }
 
 .Left .col,.Full .col {
-	background:#fff url(../../../images/common/right-bg.gif) right repeat-y;
+	background:#fff url(../../../images/common/bgRight.png) top right no-repeat;
 	padding:10px 30px 20px 20px; }
 	
 .Left .col .showhide {
