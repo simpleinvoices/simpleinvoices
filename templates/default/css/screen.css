@@ -247,17 +247,32 @@ div#Container {
 --------------------------*/
 .col {
 	text-align:center;
-	padding:0 20px; }
+	padding:0 20px; 
+	min-height:400px;
+	}
 
+.contentLeft {
+background:transparent url(../../../images/common/bgLeft.png) top left no-repeat;
+
+padding-left:10px;
+
+
+}
+.contentRight {
+background:transparent url(../../../images/common/bgRight.png) top right no-repeat;
+padding-right:10px;
+min-height:400px;
+}
 .Left .col,.Full .col {
-	background:#fff url(../../../images/common/bgRight.png) top right no-repeat;
-	padding:10px 30px 20px 20px; }
+	background:#fff;
+padding:10px 30px 20px 20px; 
+}
 	
 .Left .col .showhide {
 	margin-top:8px; }
 
 .Full .bottom,.Left .bottom {
-	background:url(../../../images/common/bottom-bg.gif) top right no-repeat; }
+/*	background:url(../../../images/common/bottom-bg.gif) top right no-repeat; */}
 
 body.lobby .Full .bottom {
 	margin-bottom:0; }
