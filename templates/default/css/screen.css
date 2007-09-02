@@ -253,9 +253,8 @@ div#Container {
 
 .contentLeft {
 background:transparent url(../../../images/common/bgLeft.png) top left no-repeat;
-
+margin-left:-10px;
 padding-left:10px;
-
 
 }
 .contentRight {
