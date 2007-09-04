@@ -1,4 +1,4 @@
-- NR todo (end of August)
+- NR todo (Sept)
  - reports : now using new format for total style (using products table) some reports may have to be rewritten - to be investigated
  - menu re db : issue with sql patch 124 when upgrading from old release - to be looked at
  - menu :

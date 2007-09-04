@@ -87,10 +87,13 @@ for($i = 0;$invoice = getInvoices($result);$i++) {
 	$invoices[$i]['url_for_pdf'] = $url_for_pdf;
 }
 
+$pageActive == "invoices";
 
 $smarty -> assign("invoices",$invoices);
 $smarty -> assign("spreadsheet",$spreadsheet);
 $smarty -> assign("word_processor",$word_processor);
+$smarty -> assign('pageActive', $pageActive);
+
 
 
 getRicoLiveGrid("ex1","	{ type:'number', decPlaces:0, ClassName:'alignleft' },,

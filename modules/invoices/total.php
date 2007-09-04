@@ -17,6 +17,7 @@
  */
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
+
 checkLogin();
 
 jsBegin();
@@ -29,6 +30,8 @@ jsPreferenceValidation("select_preferences","Invoice Preference",1,100);
 jsFormValidationEnd();
 jsEnd();
 
+$pageActive == "invoices";
+$smarty->assign('pageActive', $pageActive);
 
 include('./modules/invoices/invoice.php');
 

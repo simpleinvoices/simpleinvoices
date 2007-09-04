@@ -89,17 +89,20 @@ if(file_exists("./modules/$path.php")) {
 $smarty -> display("../templates/default/header.tpl");
 //temp added menu.tpl back in so we can easily design new menu system
 
-$smarty -> display("../templates/default/menu.tpl");
+
 /*
 if($menu) {
 	getMenuStructure();
 	//$smarty -> display("../templates/modules/menu.tpl");
 }
 */
-$smarty -> display("../templates/default/main.tpl");
+
 
 include_once("./modules/$file.php");
 
+$smarty -> display("../templates/default/menu.tpl");
+
+$smarty -> display("../templates/default/main.tpl");
 //Shouldn't be necessary anymore. Ist for old files without tempaltes...
 
 if(file_exists("./templates/default/$file.tpl")) {

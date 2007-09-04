@@ -44,6 +44,9 @@ for($i=1;$i<=4;$i++) {
 }
 
 
+$pageActive == "invoices";
+
+
 $smarty -> assign("billers",$billers);
 $smarty -> assign("customers",$customers);
 $smarty -> assign("taxes",$taxes);
@@ -53,5 +56,6 @@ $smarty -> assign("dynamic_line_items",$dynamic_line_items);
 $smarty -> assign("show_custom_field",$show_custom_field);
 
 $smarty -> assign("defaults",$defaults);
+$smarty -> assign('pageActive', $pageActive);
 
 ?>

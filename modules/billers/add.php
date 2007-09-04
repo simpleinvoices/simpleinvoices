@@ -30,9 +30,14 @@ if ($_POST['name'] != "") {
 	include ("./modules/billers/save.php");
 }
 
+$pageActive = "billers";
+
 $smarty->assign('files', $files);
 $smarty->assign('customFieldLabel', $customFieldLabel);
 $smarty->assign('save', $save);
+$smarty->assign('pageActive', $pageActive);
+
+
 
 //showCustomFields(1);
 ?>

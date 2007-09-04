@@ -32,6 +32,8 @@ jsPreferenceValidation("select_preferences","Invoice Preference",1,100);
 jsFormValidationEnd();
 jsEnd();
 
+$pageActive == "invoices";
+
 include('./modules/invoices/invoice.php');
 
 ?>

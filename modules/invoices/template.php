@@ -65,6 +65,9 @@ $pluginsdir = "./templates/invoices/${template}/plugins/";
 
 $smarty -> plugins_dir = $pluginsdir;
 
+$pageActive == "invoices";
+$smarty->assign('pageActive', $pageActive);
+
 if(file_exists($templatePath)) {
 	$smarty -> assign('biller',$biller);
 	$smarty -> assign('customer',$customer);
