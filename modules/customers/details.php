@@ -51,6 +51,9 @@ $invoices = getCustomerInvoices($customer_id);
 
 
 //$customFieldLabel = getCustomFieldLabels("biller");
+$pageActive = "customers";
+$smarty->assign('pageActive', $pageActive);
+
 $smarty -> assign("stuff",$stuff);
 $smarty -> assign('customer',$customer);
 $smarty -> assign('invoices',$invoices);

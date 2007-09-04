@@ -44,6 +44,8 @@ if ( $op === 'edit_customer' ) {
 	}
 }
 
+$pageActive = "customers";
+$smarty->assign('pageActive', $pageActive);
 
 $smarty -> assign('saved',$saved); 
 ?>

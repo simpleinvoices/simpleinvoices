@@ -8,6 +8,8 @@ checkLogin();
 if ($_POST['p_description'] != "" ) {
 	include("./modules/preferences/save.php");
 }
+$pageActive = "options";
 
+$smarty->assign('pageActive', $pageActive);
 $smarty -> assign('save',$save);
 ?>

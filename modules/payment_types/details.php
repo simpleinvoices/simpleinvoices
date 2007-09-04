@@ -16,6 +16,7 @@ $payment_type_id = $_GET['submit'];
 
 $paymentType = getPaymentType($payment_type_id);
 
-
+$pageActive = "options";
+$smarty->assign('pageActive', $pageActive);
 $smarty->assign('paymentType',$paymentType);
 ?>

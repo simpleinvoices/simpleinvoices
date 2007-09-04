@@ -37,6 +37,9 @@ $pt = getPaymentType($defaults['payment_type']);
 
 $paymentTypes = getActivePaymentTypes();
 
+$pageActive = "payments";
+
+$smarty->assign('pageActive', $pageActive);
 $smarty -> assign("paymentTypes",$paymentTypes);
 $smarty -> assign("defaults",$defaults);
 $smarty -> assign("biller",$biller);

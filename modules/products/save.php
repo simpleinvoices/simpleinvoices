@@ -78,6 +78,10 @@ mysql_select_db("$db_name",$conn);
 
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 
+
+$pageActive = "products";
+$smarty->assign('pageActive', $pageActive);
+
 $smarty -> assign('display_block',$display_block); 
 $smarty -> assign('refresh_total',$refresh_total); 
 

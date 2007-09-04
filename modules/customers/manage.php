@@ -21,6 +21,9 @@ checkLogin();
 
 $customers = getCustomers();
 
+$pageActive = "customers";
+
+$smarty->assign('pageActive', $pageActive);
 $smarty -> assign("customers",$customers);
 
 getRicoLiveGrid("rico_customer","	{ type:'number', decPlaces:0, ClassName:'alignleft' },,{ type:'number', decPlaces:2, ClassName:'alignleft' },{ type:'number', decPlaces:2, ClassName:'alignleft' }");

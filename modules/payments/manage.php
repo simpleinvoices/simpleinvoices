@@ -21,6 +21,9 @@ $payments = progressPayments($query);
 
 getRicoLiveGrid("rico_payment","{ type:'number', decPlaces:0, ClassName:'alignleft' },{ type:'number', decPlaces:0, ClassName:'alignleft' },,,{ type:'number', decPlaces:2, ClassName:'alignleft' }");
 
+$pageActive = "payments";
+
+$smarty->assign('pageActive', $pageActive);
 $smarty -> assign("payments",$payments);
 
 ?>

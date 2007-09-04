@@ -8,6 +8,8 @@ checkLogin();
 if ($_POST['pt_description'] != "" ) {
 	include("./modules/payment_types/save.php");
 }
+$pageActive = "options";
+$smarty->assign('pageActive', $pageActive);
 
 $smarty -> assign('save',$save);
 

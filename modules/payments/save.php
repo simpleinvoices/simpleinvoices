@@ -3,6 +3,8 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$pageActive = "payments";
+$smarty->assign('pageActive', $pageActive);
 
 # Deal with op and add some basic sanity checking
 

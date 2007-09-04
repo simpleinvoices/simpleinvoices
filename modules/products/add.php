@@ -11,7 +11,9 @@ $customFieldLabel = getCustomFieldLabels();
 if ($_POST['description'] != "" ) {
 	include("./modules/products/save.php");
 }
+$pageActive = "products";
 
+$smarty->assign('pageActive', $pageActive);
 $smarty -> assign('customFieldLabel',$customFieldLabel);
 $smarty -> assign('save',$save);
 ?>

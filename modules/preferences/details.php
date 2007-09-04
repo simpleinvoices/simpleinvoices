@@ -12,6 +12,8 @@ $preference_id = $_GET['submit'];
 
 $preference = getPreference($preference_id);
 
+$pageActive = "options";
+$smarty->assign('pageActive', $pageActive);
 $smarty->assign('preference',$preference);
 
 ?>
