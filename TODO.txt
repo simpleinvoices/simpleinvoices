@@ -6,6 +6,7 @@
  -- menu : fix colours for active tab drop down
  -- menu : if logged in change Login to Logout
  - patchesL 128 - 130 : if an if statement in them
+ - reports need templates - so as to work with menu system
  - language : new language system - review
  - index.php review input if is safe enought
  - quick view : check all style if all cut size to 25 characters stuf fis working
