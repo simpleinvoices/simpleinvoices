@@ -68,9 +68,15 @@ GROUP BY
    $oRpt->setDatabaseInterface("mysql");
    $oRpt->setSQL($sSQL);
    $oRpt->setDatabase("$db_name");
+   ob_start();
    $oRpt->run();
-?>
+   $showReport = ob_get_contents();
+   
+   ob_end_clean();
 
-<hr></hr>
-</div>
-<div id="footer"></div>
+   
+   $pageActive = "reports";
+
+	$smarty->assign('pageActive', $pageActive);
+	$smarty->assign('showReport', $showReport);
+?>

@@ -7,12 +7,7 @@ if (!defined("BROWSE")) {
    exit();
 }
 
-?>
-<b>Sales in total by Customer</b>
-<hr></hr>
-<div id="container">
 
-<?php
    // include the PHPReports classes on the PHP path! configure your path here
    include "./modules/reports/PHPReportMaker.php";
    include "config/config.php";
@@ -27,9 +22,16 @@ if (!defined("BROWSE")) {
    $oRpt->setDatabaseInterface("mysql");
    $oRpt->setSQL($sSQL);
    $oRpt->setDatabase("$db_name");
+   ob_start();
    $oRpt->run();
-?>
-<hr></hr>
+   $showReport = ob_get_contents();
+   
+   ob_end_clean();
 
-</div>
-<div id="footer"></div>
+   
+   $pageActive = "reports";
+
+	$smarty->assign('pageActive', $pageActive);
+	$smarty->assign('showReport', $showReport);
+
+?>

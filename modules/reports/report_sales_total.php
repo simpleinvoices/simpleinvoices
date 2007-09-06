@@ -7,13 +7,6 @@ if (!defined("BROWSE")) {
    exit();
 }
 
-?>
-<b>Sales in total</b>
-<hr></hr>
-
-<div id="container">
-
-<?php
 include('./config/config.php');
 
    // include the PHPReports classes on the PHP path! configure your path here
@@ -29,10 +22,17 @@ include('./config/config.php');
    $oRpt->setDatabaseInterface("mysql");
    $oRpt->setSQL($sSQL);
    $oRpt->setDatabase("$db_name");
+   ob_start();
    $oRpt->run();
-?>
-<hr></hr>
-</div>
-<div id="footer"></div>
+   $showReport = ob_get_contents();
+   
+   ob_end_clean();
 
+   
+   $pageActive = "reports";
+
+	$smarty->assign('pageActive', $pageActive);
+	$smarty->assign('showReport', $showReport);
+
+?>
 

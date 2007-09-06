@@ -19,7 +19,13 @@
    $oRpt->setDatabaseInterface("mysql");
    $oRpt->setSQL($sSQL);
    $oRpt->setDatabase("$db_name");
-   $showReport = $oRpt->run();
+
+   ob_start();
+   $oRpt->run();
+   $showReport = ob_get_contents();
+   
+   ob_end_clean();
+
    
    $pageActive = "reports";
 

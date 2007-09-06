@@ -10,8 +10,7 @@ if (isset($_GET['export'])) {
 	header("Expires: 0");
 }
 /* End Export code */
-?>
-<?php 
+
 //include("./include/include_main.php"); 
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
@@ -20,16 +19,6 @@ if (!defined("BROWSE")) {
    exit();
 }
 
-?>
-<html>
-<head>
-</head>
-<body>
-<b>Taxes in total</b>
-<hr></hr>
-<div id="container">
-
-<?php
    // include the PHPReports classes on the PHP path! configure your path here
    include "./modules/reports/PHPReportMaker.php";
    include "config/config.php";
@@ -44,9 +33,16 @@ if (!defined("BROWSE")) {
    $oRpt->setDatabaseInterface("mysql");
    $oRpt->setSQL($sSQL);
    $oRpt->setDatabase("$db_name");
+   ob_start();
    $oRpt->run();
-?>
+   $showReport = ob_get_contents();
+   
+   ob_end_clean();
 
-<hr></hr>
-</div>
-<div id="footer"></div>
+   
+   $pageActive = "reports";
+
+	$smarty->assign('pageActive', $pageActive);
+	$smarty->assign('showReport', $showReport);
+
+?>

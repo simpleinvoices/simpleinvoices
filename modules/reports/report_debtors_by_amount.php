@@ -1,23 +1,3 @@
-<?php 
-//include("./include/include_main.php");
-
-//stop the direct browsing to this file - let index.php handle which files get displayed
-if (!defined("BROWSE")) {
-   echo "You Cannot Access This Script Directly, Have a Nice Day.";
-   exit();
-}
-
-?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-</head>
-<body>
-<b>Debtor invoices ordered by amount owed</b>
-<hr></hr>
-<div id="container">
-
 <?php
 include('./config/config.php');
 
@@ -51,9 +31,15 @@ ORDER BY
    $oRpt->setDatabaseInterface("mysql");
    $oRpt->setSQL($sSQL);
    $oRpt->setDatabase("$db_name");
+   ob_start();
    $oRpt->run();
-?>
+   $showReport = ob_get_contents();
+   
+   ob_end_clean();
 
-<hr></hr>
-</div>
-<div id="footer"></div>
+   
+   $pageActive = "reports";
+
+	$smarty->assign('pageActive', $pageActive);
+	$smarty->assign('showReport', $showReport);
+?>
