@@ -127,7 +127,7 @@
 
 {if $smarty.get.action== 'view' }
 <hr></hr>
-<a href="?module=billers&view=details&action=edit&submit={$biller.id}">{$LANG.edit}</a>
+<a href="?module=billers&view=details&action=edit&id={$biller.id}">{$LANG.edit}</a>
 {/if}
 
 

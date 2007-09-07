@@ -15,12 +15,12 @@ function saveCustomFieldValues($categorieId,$itemId) {
 	
 	foreach($plugins as $plugin) {
 		$id = $plugin->fieldId;
-		error_log("IIDDD".$itemId);
+		//error_log("IIDDD".$itemId);
 		$plugin->saveInput($_POST["cf$id"],$itemId);
 	}
 }
 
-function updateCustomFieldValues() {
+function updateCustomFieldValues($categorieId,$itemId) {
 	$plugins = getPluginsByCategorie($categorieId);
 	
 	foreach($plugins as $plugin) {

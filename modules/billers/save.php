@@ -27,6 +27,8 @@ $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
 
 $saved = false;
 
+//error_log("cat:".$_POST['categorie']);
+
 if ( $op === 'insert_biller') {
 	
 	if($id = insertBiller()) {

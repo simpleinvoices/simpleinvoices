@@ -28,11 +28,23 @@ abstract class CustomField {
 	}
 	
 	function updateInput($value, $itemId) {
+		$sql = "SELECT * FROM si_customFieldValues WHERE customFieldID = $this->fieldId AND itemID = $itemId";
 		
-		$sql = "UPDATE  `si_customFieldValues` SET  `value` =  '$value' WHERE  customFieldId = $this->fieldId AND itemId = $itemId" ;
-		//$sql = "INSERT INTO si_customFieldValues (customFieldId,itemId,value) VALUES('".$this->fieldId."','".$itemId."','".$value."');";
 		error_log($sql);
-		mysqlQuery($sql);
+		$query = mysql_query($sql);
+		$result = mysql_fetch_array($query);
+		
+		if($result == null) {
+			error_log("no value -> set value");
+			$this->saveInput($value,$itemId);
+		}
+		else {
+		
+			$sql = "UPDATE  `si_customFieldValues` SET  `value` =  '$value' WHERE  customFieldId = $this->fieldId AND itemId = $itemId" ;
+
+			error_log("update value");
+			mysqlQuery($sql);
+		}
 	}
 	
 	function getFieldValue($customeFieldId, $itemId) {
@@ -65,7 +77,6 @@ abstract class CustomField {
 		$sql = "INSERT INTO si_customFieldValues (customFieldId,itemId,value) VALUES('".$this->fieldId."','".$itemId."','".$value."');";
 		//error_log($sql);
 		mysqlQuery($sql);
-		
 	}
 	
 	function showField() {
@@ -91,7 +102,7 @@ abstract class CustomField {
 		$query = mysqlQuery($sql);
 		$field = mysql_fetch_array($query);
 		
-		error_log('return "'.$field['description'].'";');
+		//error_log('return "'.$field['description'].'";');
 		return eval('return "'.$field['description'].'";');
 	}
 	
