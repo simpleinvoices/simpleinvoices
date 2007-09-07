@@ -129,8 +129,9 @@ else if ($_GET['stage'] == 3 ) {
 	echo "How did you get here :)";
 }
 
+$pageActive = "invoices";
 
-
+$smarty -> assign('pageActive', $pageActive);
 $smarty -> assign('biller',$biller);
 $smarty -> assign('customer',$customer);
 $smarty -> assign('invoice',$invoice);

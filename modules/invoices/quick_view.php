@@ -50,7 +50,9 @@ $customFieldLabels = getCustomFieldLabels();
 for($i=1;$i<=4;$i++) {
 	$customField[$i] = show_custom_field("invoice_cf$i",$invoice["custom_field$i"],"read",'details_screen summary', 'details_screen','details_screen',5,':');
 }
+$pageActive = "invoices";
 
+$smarty -> assign('pageActive', $pageActive);
 $smarty -> assign("customField",$customField);
 $smarty -> assign("customFieldLabels",$customFieldLabels);
 $smarty -> assign("invoice_age",$invoice_age);

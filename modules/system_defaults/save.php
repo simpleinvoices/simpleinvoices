@@ -13,7 +13,8 @@ if (isset($_POST['op']) && $_POST['op'] == 'update_system_defaults' ) {
 		$saved = true;
 	}
 }
-
+$pageActive = "options";
+$smarty->assign('pageActive', $pageActive);
 $smarty -> assign("saved",$saved);
 
 ?>

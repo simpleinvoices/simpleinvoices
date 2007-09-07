@@ -2,7 +2,7 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-
+$pageActive = "options";
 
 
 #system defaults query
@@ -10,6 +10,8 @@ checkLogin();
 $defaults = getSystemDefaults();
 
 if ($_GET[submit] == "line_items") {
+
+
 
 	jsBegin();
 	jsFormValidationBegin("frmpost");

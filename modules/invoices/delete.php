@@ -30,7 +30,9 @@ $invoicePaid = calc_invoice_paid($invoice_id);
 
 $invoiceItems = getInvoiceItems($invoice_id);
 
+$pageActive = "invoices";
 
+$smarty -> assign('pageActive', $pageActive);
 $smarty -> assign("invoice",$invoice);
 $smarty -> assign("preference",$preference);
 
