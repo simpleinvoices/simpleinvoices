@@ -32,6 +32,9 @@ for($i=0; $cf = mysql_fetch_array($result);$i++) {
 	$cfs[$i]['filed_name'] = get_custom_field_name($cf['cf_custom_field']);
 }
 
+$pageActive = "options";
+
+$smarty -> assign('pageActive', $pageActive);
 $smarty -> assign("cfs",$cfs);
 
 getRicoLiveGrid("rico_custom_fields","{ type:'number', decPlaces:0, ClassName:'alignleft' }");

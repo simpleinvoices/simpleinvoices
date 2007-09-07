@@ -1,61 +1,25 @@
 <?php
-//stop the direct browsing to this file - let index.php handle which files get displayed
-checkLogin();
 
-$pageActive = "options";
-
-
-#system defaults query
-
-$defaults = getSystemDefaults();
-
-if ($_GET[submit] == "line_items") {
-
-
-
-	jsBegin();
-	jsFormValidationBegin("frmpost");
-	jsValidateifNum("def_num_line_items","Default number of line items");
-	jsFormValidationEnd();
-	jsEnd();
-
-	$default = "line_items";
-
-		$display_block = <<<EOD
+{if $smarty.get.submit  == "line_items"}
 	<tr>
 		<td><br></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG['default_number_items']}</td>
-		<td><input type=text size=25 name="value" value=$defaults[line_items]></td>
+		<td class="details_screen">{$LANG.default_number_items}</td>
+		<td><input type=text size=25 name="value" value={$defaults.line_items}></td>
 	</tr>
 	<tr>
 		<td><br></td>
 	</tr>
-EOD;
-}
 
-else if ($_GET[submit] == "def_inv_template") {
-
-	$default = "template";
-	/*drop down list code for invoice template - only show the folder names in src/invoices/templates*/
-
-	$handle=opendir("./templates/invoices/");
-	while ($file = readdir($handle)) {
-		if ($file != ".." && $file != "." && $file !="logos" && $file !=".svn" && $file !="template.php" && $file !="template.php~" ) {
-			$files[] = $file;
-		}
-	}
-	closedir($handle);
-
-	sort($files);
+{if $smarty.get.submit  == "def_inv_template"}
 
 	$display_block_templates_list = <<<EOD
 	<select name="value">
 EOD;
 
 	$display_block_templates_list .= <<<EOD
-	<option selected value='$defaults[template]' style="font-weight: bold" >$defaults[template]</option>
+	<option selected value='$defaults.template' style="font-weight: bold" >$defaults.template</option>
 EOD;
 
 	foreach ( $files as $var )
@@ -89,11 +53,6 @@ EOD;
 	<tr>
 		<td><br></td>
 	</tr>
-	<!--
-	<tr>
-		<td colspan=2><a href='text/default_invoice_template_text.html' class='lbOn'>Note</a></td>
-	</tr>
-	-->
 	<tr>
 		<td class="details_screen">{$LANG['default_inv_template']} <a href='docs.php?t=help&p=default_invoice_template_text' rel='gb_page_center[450, 450]'><img src="images/common/help-small.png"></img></a></td>
 		<td>$display_block_templates_list</td>
@@ -105,6 +64,7 @@ EOD;
 	//}
 }
 
+{if $smarty.get.submit  == "line_items"}
 else if ($_GET[submit] == "biller") {
 
 	$default = "biller";
@@ -151,6 +111,7 @@ EOD;
 }
 
 
+{if $smarty.get.submit  == "line_items"}
 else if ($_GET[submit] == "customer") {
 
 
@@ -201,6 +162,7 @@ EOD;
 
 
 
+{if $smarty.get.submit  == "line_items"}
 else if ($_GET['submit'] == "tax") {
 
 	$default = "tax";
@@ -259,6 +221,7 @@ EOD;
 EOD;
 }
 
+{if $smarty.get.submit  == "line_items"}
 else if ($_GET[submit] == "preference_id") {
 	
 	$preference = getPreference($defaults['preference']);
@@ -309,6 +272,7 @@ EOD;
 
 }
 
+{if $smarty.get.submit  == "line_items"}
 else if ($_GET[submit] == "def_payment_type") {
 
 	#payment type query
@@ -367,6 +331,7 @@ EOD;
 
 }
 
+{if $smarty.get.submit  == "line_items"}
 else if ($_GET[submit] == "delete") {
 
 	$deleteArray = array(0 => $LANG[disabled], 1=>$LANG[enabled]);
@@ -400,6 +365,7 @@ EOD;
 
 }
 
+{if $smarty.get.submit  == "line_items"}
 else if ($_GET[submit] == "logging") {
 
 	$array = array(0 => $LANG[disabled], 1=>$LANG[enabled]);
@@ -432,6 +398,7 @@ EOD;
 EOD;
 
 }
+{if $smarty.get.submit  == "line_items"}
 else {
 	$display_block = "{$LANG['no_defaults']}";
 }
@@ -458,13 +425,4 @@ $display_block
 
 </form>
 EOD;
-
-$pageActive = "options";
-
-$smarty->assign('pageActive', $pageActive);
-$smarty->assign('files', $files);
-$smarty->assign('customFieldLabel', $customFieldLabel);
-$smarty->assign('save', $save);
-$smarty->assign('defaults', $defaults);
-$smarty->assign('lang', $lang);
 ?>

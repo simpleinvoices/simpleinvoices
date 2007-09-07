@@ -32,10 +32,10 @@ if ($_POST['name'] != "") {
 
 $pageActive = "billers";
 
+$smarty->assign('pageActive', $pageActive);
 $smarty->assign('files', $files);
 $smarty->assign('customFieldLabel', $customFieldLabel);
 $smarty->assign('save', $save);
-$smarty->assign('pageActive', $pageActive);
 
 
 

@@ -1,8 +1,8 @@
 - NR todo (Sept)
  - reports : now using new format for total style (using products table) some reports may have to be rewritten - to be investigated
+ - convert remaining pages to smarty (Sys defaults Edit is the main one left)
  - menu re db : issue with sql patch 124 when upgrading from old release - to be looked at
  - menu :
- -- menu : make active tab work for ALL pages
  -- menu : fix colours for active tab drop down
  -- menu : if logged in change Login to Logout
  - patchesL 128 - 130 : if an if statement in them
@@ -14,6 +14,7 @@
 
 - NR done
  - menu : add + back into menu - done
+ -- menu : make active tab work for ALL pages - done
  - print preview of Total style invocies needs to be fixed - done
  - menu : new read from db - what happens when user changes LANG - menu wont update - needs to be fixed - done
  - quick view - show customer fields for invoices in the invoice summary section and show by default - done
@@ -51,6 +52,7 @@
  -- email: add default signature - maybe - set in biller details ??
  -- email: and add validation
  - customer view - add edit/export etc, back in
+ - move phpreports libs from ./modules/reports/.. to ./include
  -- old ones
  - pdf: pdf of the default templated doesnt include some of the borders on the right sides - needs fixing
  - replce checkLogin with CheckBrowse - check login name assumes something to do with login when its not - not urgent

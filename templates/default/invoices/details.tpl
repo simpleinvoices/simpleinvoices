@@ -16,7 +16,7 @@
 *	http://www.simpleinvoices.org
 */
 *}
-<b>You are editing {$preference.pref_inv_wording} {$master_invoice_id}</b>
+<b>You are editing {$preference.pref_inv_wording} {$invoice.id}</b>
 
  <hr></hr>
 

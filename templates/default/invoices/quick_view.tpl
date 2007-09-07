@@ -387,8 +387,3 @@
         </table>
 	<!-- addition close table tag to close invoice itemised/consulting if it has a note -->
 	</table>
-
-<hr></hr>
-	<form>
-		<input type=button value="{$LANG.cancel}" onCLick="history.back()">
-	</form>

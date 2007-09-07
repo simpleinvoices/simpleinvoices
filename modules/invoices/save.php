@@ -125,16 +125,10 @@ if ( $_POST['action'] == "edit" && ($_POST['type'] == 1 || $_POST['type'] == 2 |
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 $display_block_items = isset($display_block_items) ? $display_block_items : '&nbsp;';
 
-echo <<<EOD
-{$refresh_total}
-<title>{$title}</title>
-</head>
+$smarty->assign('display_block', $display_block);
+$smarty->assign('display_block_items', $display_block_items);
+$smarty->assign('invoice_id', $invoice_id);
+$smarty->assign('typeId', $typeId);
 
-<body>
-
-<br>
-{$display_block}
-<br><br>
-{$display_block_items}
 EOD;
 ?>

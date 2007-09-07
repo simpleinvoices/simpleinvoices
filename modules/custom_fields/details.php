@@ -32,5 +32,8 @@ $cf = mysql_fetch_array($result_print_product);
 $cf['name'] = get_custom_field_name($cf['cf_custom_field']);
 
 
+$pageActive = "options";
+
+$smarty -> assign('pageActive', $pageActive);
 $smarty -> assign("cf",$cf);
 ?>
