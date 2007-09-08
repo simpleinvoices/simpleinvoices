@@ -680,7 +680,7 @@ function updateCustomer() {
 				custom_field4 = '$_POST[custom_field4]',
 				enabled = '$_POST[enabled]'
 			WHERE
-				id = " . $_GET['submit'];
+				id = " . $_GET['id'];
 
 	return mysqlQuery($sql);
 }
@@ -688,7 +688,7 @@ function updateCustomer() {
 function insertCustomer() {
 	
 	extract( $_POST );
-	$sql = "INSERT INTO ".TB_PREFIX."customers VALUES ('','$attention', '$name','$street_address','$street_address2','$city','$state',' $zip_code','$country','$phone', '$mobile_phone', '$fax', '$email', '$notes', '$custom_field1', '$custom_field2', '$custom_field3', '$custom_field4', '$enabled')";
+	$sql = "INSERT INTO ".TB_PREFIX."customers VALUES ('','$attention', '$name','$street_address','$street_address2','$city','$state','$zip_code','$country','$phone', '$mobile_phone', '$fax', '$email', '$notes', '$custom_field1', '$custom_field2', '$custom_field3', '$custom_field4', '$enabled')";
 	
 	return mysqlQuery($sql);
 	

@@ -17,11 +17,11 @@
 */
 *}
 <form name="frmpost"
-	action="index.php?module=customers&view=save&customer={$smarty.get.customer}"
+	action="index.php?module=customers&view=save&id={$smarty.get.customer}"
 	method="post">
 
 {if $smarty.get.action== 'view' }
-<b>{$LANG.customer} :: <a href="index.php?module=customers&view=details&customer={$customer.id}&action=edit">{$LANG.edit}</a>
+<b>{$LANG.customer} :: <a href="index.php?module=customers&view=details&id={$customer.id}&action=edit">{$LANG.edit}</a>
 </b>
 <hr></hr>
 <table align="center">
@@ -166,7 +166,7 @@
 
 
 <hr></hr>
-<a href="index.php?module=customers&view=details&customer={$customer.id}&action=edit">{$LANG.edit}</a>
+<a href="index.php?module=customers&view=details&id={$customer.id}&action=edit">{$LANG.edit}</a>
 {/if}
 
 {if $smarty.get.action== 'edit' }

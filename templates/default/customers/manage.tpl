@@ -57,9 +57,9 @@
 
 	<tr class="index_table">
 	<td class="index_table"><a class="index_table"
-	 href="index.php?module=customers&view=details&customer={$customer.id}&action=view">{$LANG.view}</a> ::
+	 href="index.php?module=customers&view=details&id={$customer.id}&action=view">{$LANG.view}</a> ::
 	<a class="index_table"
-	 href="index.php?module=customers&view=details&customer={$customer.id}&action=edit">{$LANG.edit}</a> </td>
+	 href="index.php?module=customers&view=details&id={$customer.id}&action=edit">{$LANG.edit}</a> </td>
 	<td class="index_table">{$customer.id}</td>
 	<td class="index_table">{$customer.name}</td>
 	<!--

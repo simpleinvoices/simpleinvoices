@@ -40,7 +40,7 @@ function smarty_function_merge_address($params, &$smarty) {
                 $ma .=  "$params[field2]";
         }
 
-        if (($params['field1'] != null OR $params['field2'] != null) AND ($params['field3'] != null)) {
+        if (($params['field1'] != null OR $params['field2'] != null) AND ($params['field3'] != "")) {
                 $ma .=  ", ";
         }
 
