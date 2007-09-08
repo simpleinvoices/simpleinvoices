@@ -732,7 +732,7 @@ NULL , 'logging', '0'
 	
 	$patch['129']['name'] = "Fill si_user table with default values";
 	$patch['129']['patch'] = "INSERT INTO `si_users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`) VALUES 
-(1, 'demo@simpleinvoices.org', 'guest', '1', '1', MD5('demo'))";
+('', 'demo@simpleinvoices.org', 'guest', '1', '1', MD5('demo'))";
 	$patch['129']['date'] = "20070623";
 	
 	$patch['130']['name'] = "Create si_auth_challenges table";
@@ -741,7 +741,7 @@ NULL , 'logging', '0'
   `challenges_timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);";
 	$patch['130']['date'] = "20070623";
 	
-	
+/*Might not include the below Custom Field ones till the Spet release is out*/	
 	$patch['131']['name'] = "Create si_customFieldCategories table";
 	$patch['131']['patch'] = "CREATE TABLE `si_customFieldCategories` (
   `id` int(11) NOT NULL auto_increment,

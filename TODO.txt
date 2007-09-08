@@ -5,7 +5,6 @@
  - menu :
  -- menu : fix colours for active tab drop down
  -- menu : if logged in change Login to Logout
- - patchesL 128 - 130 : if an if statement in them
  - language : new language system - review
  - index.php review input if is safe enought
  - quick view : check all style if all cut size to 25 characters stuf fis working
@@ -32,6 +31,7 @@
  - add more items : update ui - done
  -- add famfam icon for add button - done
  - reports need templates - so as to work with menu system - done
+ - patches 128 - 130 : if an if statement in them - done
 
 - in next release +1 (NR1) - (aim end of Sept)
 -todo
