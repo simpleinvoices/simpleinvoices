@@ -40,7 +40,7 @@ EOD;
 
 
 printCustomFieldsList();
-showCustomFields(3);
+//showCustomFields(3);
 
 //$plugins = getPlugins();
 

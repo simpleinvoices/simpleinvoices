@@ -320,12 +320,52 @@ function getProduct($id) {
 	return $product;
 }
 
-function insertProduct($description,$unit_price,$enabled=1,$visible=1,$notes="",$custom_field1="",$custom_field2="",$custom_field3="",$custom_field4="") {
+/*function insertProduct($description,$unit_price,$enabled=1,$visible=1,$notes="",$custom_field1="",$custom_field2="",$custom_field3="",$custom_field4="") {
 	$sql = "INSERT INTO ".TB_PREFIX."products (`description`,`unit_price`,`notes`,`enabled`,`visible`,`custom_field1`,`custom_field2`,`custom_field3`,`custom_field4`) 
 	VALUES('$description','$unit_price','$notes',$enabled,$visible,'$custom_field1','$custom_field2','$custom_field3','$custom_field4');";
 	
 	return mysqlQuery($sql);
+}*/
+
+
+function insertProduct() {
+	$sql = "INSERT into
+			".TB_PREFIX."products
+		VALUES
+			(	
+				'',
+				'$_POST[description]',
+				'$_POST[unit_price]',
+				'$_POST[custom_field1]',
+				'$_POST[custom_field2]',
+				'$_POST[custom_field3]',
+				'$_POST[custom_field4]',
+				'$_POST[notes]',
+				'$_POST[enabled]',
+				'1'
+			)";
+	return mysqlQuery($sql);
 }
+
+
+function updateProduct() {
+	
+	$sql = "UPDATE ".TB_PREFIX."products
+			SET
+				description = '$_POST[description]',
+				enabled = '$_POST[enabled]',
+				notes = '$_POST[notes]',
+				custom_field1 = '$_POST[custom_field1]',
+				custom_field2 = '$_POST[custom_field2]',
+				custom_field3 = '$_POST[custom_field3]',
+				custom_field4 = '$_POST[custom_field4]',
+				unit_price = '$_POST[unit_price]'
+			WHERE
+				id = '$_GET[id]'";
+
+	return mysqlQuery($sql);
+}
+			
 
 function getProducts() {
 	global $LANG;

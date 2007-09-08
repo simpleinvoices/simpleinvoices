@@ -30,9 +30,9 @@
 	<tr class="index_table">
 	<td class="index_table">
 	<a class="index_table"
-	 href="index.php?module=products&view=details&submit={$product.id}&action=view">{$LANG.view}</a> ::
+	 href="index.php?module=products&view=details&id={$product.id}&action=view">{$LANG.view}</a> ::
 	<a class="index_table"
-	 href="index.php?module=products&view=details&submit={$product.id}&action=edit">{$LANG.edit}</a> </td>
+	 href="index.php?module=products&view=details&id={$product.id}&action=edit">{$LANG.edit}</a> </td>
 	<td class="index_table">{$product.id}</td>
 	<td class="index_table">{$product.description}</td>
 	<td class="index_table">{$product.unit_price}</td>

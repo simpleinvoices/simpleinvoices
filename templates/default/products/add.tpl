@@ -1,17 +1,11 @@
-{* if customer is updated or saved.*} 
 
-{if $smarty.post.description != "" && $smarty.post.submit != null } 
-{$refresh_total}
+{* if bill is updated or saved.*}
 
-<br />
-<br />
-{$display_block} 
-<br />
-<br />
-
+{if $smarty.post.description != "" && $smarty.post.id != null } 
+	{include file="../templates/default/products/save.tpl"}
 {else}
 {* if  name was inserted *} 
-	{if $smarty.post.submit !=null} 
+	{if $smarty.post.id !=null} 
 		<div class="validation_alert"><img src="./images/common/important.png"</img>
 		You must enter a description for the product</div>
 		<hr />
@@ -56,12 +50,13 @@
 			{html_options name=enabled options=$enabled selected=1}
 		</td>
 	</tr>
+		{showCustomFields categorieId="3" itemId=""}
 </table>
 <!-- </div> -->
 <hr />
 <div style="text-align:center;">
-	<input type=submit name="submit" value="{$LANG.insert_product}">
-	<input type=hidden name="op" value="insert_product">
+	<input type="submit" name="id" value="{$LANG.insert_product}">
+	<input type="hidden" name="op" value="insert_product">
 </div>
 </form>
 	{/if}

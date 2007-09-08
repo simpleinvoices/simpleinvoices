@@ -3,7 +3,7 @@
 checkLogin();
 
 #get the invoice id
-$product_id = $_GET['submit'];
+$product_id = $_GET['id'];
 
 $product = getProduct($product_id);
 

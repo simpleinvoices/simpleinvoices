@@ -65,9 +65,10 @@ function getPluginArray() {
 	$i = 0;
 	
 	foreach($plugins as $plugin) {
-		$path = pathinfo($plugin);
-		$path = $path['filename'];
+		$path = basename($plugin,".php");
+
 		//$classes[$i] = new $path();
+
 		$plugin = new $path();
 		
 		$classes[$plugin->id] = $plugin;
