@@ -20,7 +20,7 @@ function smarty_function_showCustomFields($params, &$smarty)
 	
 	while($field = mysql_fetch_array($query)) {
 		$plugin = getPluginById($field['pluginId']);
-		error_log($field['id']."  ".$params['itemId']."sss");
+		//error_log($field['id']."  ".$params['itemId']."sss");
 		$plugin->printInputField($field['id'],$params['itemId']);
 	}
 

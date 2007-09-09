@@ -30,19 +30,19 @@ abstract class CustomField {
 	function updateInput($value, $itemId) {
 		$sql = "SELECT * FROM si_customFieldValues WHERE customFieldID = $this->fieldId AND itemID = $itemId";
 		
-		error_log($sql);
+		//error_log($sql);
 		$query = mysql_query($sql);
 		$result = mysql_fetch_array($query);
 		
 		if($result == null) {
-			error_log("no value -> set value");
+			//error_log("no value -> set value");
 			$this->saveInput($value,$itemId);
 		}
 		else {
 		
 			$sql = "UPDATE  `si_customFieldValues` SET  `value` =  '$value' WHERE  customFieldId = $this->fieldId AND itemId = $itemId" ;
 
-			error_log("update value");
+			//error_log("update value");
 			mysqlQuery($sql);
 		}
 	}
