@@ -31,6 +31,7 @@ if ($op === "insert_customer") {
 
 	if (insertCustomer()) {
 		$saved = true;
+		 saveCustomFieldValues($_POST['categorie'],mysql_insert_id());
 	}
 }
 
@@ -40,6 +41,7 @@ if ( $op === 'edit_customer' ) {
 		
 		if (updateCustomer()) {
 			$saved = true;
+			updateCustomFieldValues($_POST['categorie'],$_GET['id']);
 		}
 	}
 }

@@ -30,7 +30,12 @@ $action = isset($_GET['case'])?$_GET['case']:null;
 require_once("smarty/Smarty.class.php");
 
 $smarty = new Smarty();
-$smarty -> compile_dir = "./cache/";
+
+//cache directory. Have to be writeable (chmod 777)
+$smarty -> compile_dir = "cache";
+
+//adds own smarty plugins
+$smarty->plugins_dir = array("plugins","smarty_plugins");
 
 include("./include/include_main.php");
 
@@ -88,6 +93,8 @@ if(file_exists("./modules/$path.php")) {
 
 $smarty -> display("../templates/default/header.tpl");
 //temp added menu.tpl back in so we can easily design new menu system
+
+
 
 
 /*

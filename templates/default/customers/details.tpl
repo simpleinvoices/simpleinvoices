@@ -17,7 +17,7 @@
 */
 *}
 <form name="frmpost"
-	action="index.php?module=customers&view=save&id={$smarty.get.customer}"
+	action="index.php?module=customers&view=save&id={$smarty.get.id}"
 	method="post">
 
 {if $smarty.get.action== 'view' }
@@ -125,6 +125,8 @@
 					</td>
 					<td>{$customer.custom_field4}</td>
 				</tr>
+					{showCustomFields categorieId="2" itemId=$smarty.get.id }
+
 			</table>
 		</p>
 	</div>
@@ -257,6 +259,7 @@
 		<td class="details_screen">{$LANG.notes}</td>
 		<td><textarea name="notes" rows="8" cols="50">{$customer.notes}</textarea></td>
 	</tr>
+		{showCustomFields categorieId="2" itemId=$smarty.get.id }
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
 		<td>

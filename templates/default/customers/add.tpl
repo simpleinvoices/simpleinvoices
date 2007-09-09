@@ -127,8 +127,8 @@
 </table>
 <hr />
 <div style="text-align:center;">
-	<input type=submit name="customer" value="{$LANG.insert_customer}">
-	<input type=hidden name="op" value="insert_customer">
+	<input type="submit" name="customer" value="{$LANG.insert_customer}">
+	<input type="hidden" name="op" value="insert_customer">
 </div>
 </form>
 {/if}
