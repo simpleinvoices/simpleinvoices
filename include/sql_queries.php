@@ -321,14 +321,19 @@ function getProduct($id) {
 }
 
 /*function insertProduct($description,$unit_price,$enabled=1,$visible=1,$notes="",$custom_field1="",$custom_field2="",$custom_field3="",$custom_field4="") {
-	$sql = "INSERT INTO ".TB_PREFIX."products (`description`,`unit_price`,`notes`,`enabled`,`visible`,`custom_field1`,`custom_field2`,`custom_field3`,`custom_field4`) 
-	VALUES('$description','$unit_price','$notes',$enabled,$visible,'$custom_field1','$custom_field2','$custom_field3','$custom_field4');";
+	$sql = "INSERT INTO ".TB_PREFIX."products
+		(`description`,`unit_price`,`notes`,`enabled`,`visible`,`custom_field1`,`custom_field2`,`custom_field3`,`custom_field4`) 
+		VALUES('$description','$unit_price','$notes',$enabled,$visible,'$custom_field1','$custom_field2','$custom_field3','$custom_field4');";
 	
 	return mysqlQuery($sql);
 }*/
 
 
-function insertProduct() {
+function insertProduct($enabled=1,$visible=1) {
+	if(isset($_POST['enabled'])) {
+		$enabled=$_POST['enabled'];
+	}
+	
 	$sql = "INSERT into
 			".TB_PREFIX."products
 		VALUES
@@ -341,8 +346,8 @@ function insertProduct() {
 				'$_POST[custom_field3]',
 				'$_POST[custom_field4]',
 				'$_POST[notes]',
-				'$_POST[enabled]',
-				'1'
+				'$enabled',
+				'$visible'
 			)";
 	return mysqlQuery($sql);
 }

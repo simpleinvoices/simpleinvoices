@@ -1,4 +1,17 @@
 <?php
+/*
+* Script: index.php
+* 	All manage functions for the custom field system (global)
+*
+* Authors:
+*	 Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-09-10
+*
+* License:
+*	 GPL v2 or above
+*/
 include("./include/CustomField.php");
 
 
@@ -9,13 +22,17 @@ function saveCustomField() {
 	echo "SAVED<br />";
 }
 
+
+/** 
+ * Stores all values of a page into the database.
+ * The POST values are in the form cf$id to catch all values
+ */
 function saveCustomFieldValues($categorieId,$itemId) {
 	
 	$plugins = getPluginsByCategorie($categorieId);
 	
 	foreach($plugins as $plugin) {
 		$id = $plugin->fieldId;
-		//error_log("IIDDD".$itemId);
 		$plugin->saveInput($_POST["cf$id"],$itemId);
 	}
 }
@@ -25,7 +42,6 @@ function updateCustomFieldValues($categorieId,$itemId) {
 	
 	foreach($plugins as $plugin) {
 		$id = $plugin->fieldId;
-		//error_log("IIDDD".$itemId);
 		$plugin->updateInput($_POST["cf$id"],$itemId);
 	}
 }
@@ -47,39 +63,33 @@ function showCustomFields($categorieId) {
 	$query = mysqlQuery($sql);
 	
 	while($field = mysql_fetch_array($query)) {
-		
 		$plugin = getPluginById($field['pluginId']);		
 		$plugin->printInputField($field['id']);
 	}
 }
 
+/**
+ * Reads in all plugins an create an instance for each.
+ */
 function getPluginArray() {
 	
-	$plugins = getPlugins();
-
-	foreach($plugins as $plugin) {
-		include_once($plugin);
-	}
+	$plugins = includePlugins();
 
 	$classes = null;
 	$i = 0;
 	
 	foreach($plugins as $plugin) {
 		$path = basename($plugin,".php");
-
-		//$classes[$i] = new $path();
-
 		$plugin = new $path();
-		
 		$classes[$plugin->id] = $plugin;
-		
-		//$i++;
 	}
-	
 	return $classes;
 }
 
 
+/*****
+ TODO: Custom field output. Should be in Smarty.
+ ******/
 function printCustomFieldsList() {
 	$sql = "SELECT * FROM ".TB_PREFIX."customFields;";
 	$query = mysql_query($sql);
@@ -153,9 +163,12 @@ function printCategories() {
 	echo $out."<br />";
 }
 
+
+/**
+ * Returns an array with all names of the plugins. 
+ */
 function getPlugins() {
-	
-	$files = scandir("./modules/customFields/plugins/");
+	$files = scandir("./modules/customFields/plugins/");	//CustomFields directory plugins
 	$plugins = null;
 	
 	for($i=0;$i<count($files);$i++) {
@@ -167,14 +180,19 @@ function getPlugins() {
 	
 	return $plugins;
 }
-	
+
+/**
+ * Reads (includes) the plugin files
+ */
 function includePlugins() {
 	$plugins = getPlugins();
 	
 	foreach($plugins as $plugin) {
 		include_once($plugin);
 	}
+	return $plugins;
 }
+
 
 function getPluginById($id) {
 		
@@ -184,11 +202,6 @@ function getPluginById($id) {
 		return $plugins[$id];
 	}
 	
-	/*foreach($plugins as $plugin) {
-		if($plugin->id == $id) {
-			return $plugin;
-		}
-	}*/
 	return null;
 }
 

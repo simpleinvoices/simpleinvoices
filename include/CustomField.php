@@ -1,20 +1,36 @@
 <?php
-
-
+/**
+ * Script: CustomField.php
+ *
+ * Abstract class that should extend each custom field.
+ * It defines basic function for all plugins that should be used.
+ * So we can change CustomField a bit without changing each CustomField.
+ * Some function need to be overwritten otherwise their is no output.
+ *
+ * The $id of a CustomField have to be unique. It's hardcoded into the plugin,
+ * so before setting an id, please check the other plugins.
+ * The id's from 0-99 are reserved for core plug-ins. So please use an id > 100.
+ *
+ * Authors:
+ *	 Nicolas Ruflin
+ *
+ * Last edited:
+ * 	 2007-09-10
+ *
+ * License:
+ *	 GPL v2 or above
+ */
 abstract class CustomField {
 	
 	var $name;
 	var $id;
 	var $description;
-	var $fieldId;
+	var $fieldId;	//to differentiate between the instances of a plug-in
 	
-	//array with categorie-id's
-	//?var $categories;
-	
+	/* Constructor: name and id for each CustomField needed. */
 	public function CustomField($id,$name) {
 		$this->id = $id;
 		$this->name = $name;
-		//echo $id."  ".$name;
 	}
 	
 	function installPlugin() {
@@ -23,10 +39,12 @@ abstract class CustomField {
 	function updatePlugin() {
 	}
 	
-	//Please overwrite the following functions
+	/***** Please overwrite the following functions *****/
 	function printInputField() {
 	}
+	/***** Please overwrite the above functions *****/
 	
+	/* Updates the custom field value */
 	function updateInput($value, $itemId) {
 		$sql = "SELECT * FROM si_customFieldValues WHERE customFieldID = $this->fieldId AND itemID = $itemId";
 		
@@ -39,14 +57,12 @@ abstract class CustomField {
 			$this->saveInput($value,$itemId);
 		}
 		else {
-		
 			$sql = "UPDATE  `si_customFieldValues` SET  `value` =  '$value' WHERE  customFieldId = $this->fieldId AND itemId = $itemId" ;
-
-			//error_log("update value");
 			mysqlQuery($sql);
 		}
 	}
 	
+	/* Returns the value for a choosen field and item. Should be unique, because the itemId for each categorie is unique. */
 	function getFieldValue($customeFieldId, $itemId) {
 		$sql = "SELECT * FROM si_customFieldValues WHERE (customFieldId = $customeFieldId && itemId = $itemId)";
 		$query = mysqlQuery($sql);
@@ -71,7 +87,7 @@ abstract class CustomField {
 		return "";
 	}
 	
-	
+	/* Stores the input into the database */
 	function saveInput($value,$itemId) {
 		//error_log($value." aaa".$itemId);
 		$sql = "INSERT INTO si_customFieldValues (customFieldId,itemId,value) VALUES('".$this->fieldId."','".$itemId."','".$value."');";
@@ -81,7 +97,6 @@ abstract class CustomField {
 	
 	function showField() {
 	}
-	//
 	
 	function setFieldId($id) {
 		$this->fieldId = $id;
@@ -95,6 +110,12 @@ abstract class CustomField {
 		$this->description = $description;
 	}
 	
+	/**
+	 * Reads the description for a customField out of the database.
+	 * If it's a language string it's translated to the choosen language.
+	 * The language string have to be in the following format:
+	 * $LANG[name] or {$LANG['name']}
+	 */
 	function getDescription($id) {
 		global $LANG;
 
@@ -102,10 +123,10 @@ abstract class CustomField {
 		$query = mysqlQuery($sql);
 		$field = mysql_fetch_array($query);
 		
-		//error_log('return "'.$field['description'].'";');
 		return eval('return "'.$field['description'].'";');
 	}
 	
+	//TODO: activate and deactivate plugins... What happens if you delete a plug-in?
 	/*function setActiveCategories($categories) {
 		$this->categories = $categories;
 	}?*/

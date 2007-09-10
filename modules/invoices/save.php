@@ -41,7 +41,7 @@ if ($_POST['action'] == "insert" ) {
 	}
 
 	if($type==1) {
-		insertProduct($_POST['description'],$_POST['unit_price'],0,0);
+		insertProduct(0,0);
 		$product_id = mysql_insert_id();
 
 		if (insertInvoiceItem($invoice_id,1,$product_id,$_POST['tax_id'],$_POST['description'])) {

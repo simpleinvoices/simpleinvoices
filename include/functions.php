@@ -8,6 +8,7 @@ function checkLogin() {
 	}
 }
 
+
 function getLogoList() {
 	$dirname="./templates/invoices/logos";
 	$ext = array("jpg", "png", "jpeg", "gif");
