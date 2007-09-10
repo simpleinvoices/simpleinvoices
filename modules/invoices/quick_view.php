@@ -22,6 +22,7 @@ checkLogin();
 #get the invoice id
 $invoice_id = $_GET['invoice'];
 
+
 $invoice = getInvoice($invoice_id);
 $invoice_type =  getInvoiceType($invoice['type_id']);
 $customer = getCustomer($invoice['customer_id']);

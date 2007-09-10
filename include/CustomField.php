@@ -30,7 +30,7 @@ abstract class CustomField {
 	function updateInput($value, $itemId) {
 		$sql = "SELECT * FROM si_customFieldValues WHERE customFieldID = $this->fieldId AND itemID = $itemId";
 		
-		//error_log($sql);
+		error_log($sql);
 		$query = mysql_query($sql);
 		$result = mysql_fetch_array($query);
 		

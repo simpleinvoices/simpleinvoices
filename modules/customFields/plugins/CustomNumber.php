@@ -26,7 +26,7 @@ class CustomNumber extends CustomField {
 		echo rand(0,100);
 	}
 	
-	function printInputField($id) {
+	function printInputField($id,$itemId) {
 		$description = $this->getDescription($id);
 		$value = rand();
 		$name = $this->getFormName($id);

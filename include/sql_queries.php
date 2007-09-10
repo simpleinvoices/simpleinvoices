@@ -502,9 +502,16 @@ function getInvoice($id) {
 	global $config;
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE id = $id";
+	//echo $sql;
+	
 	$query  = mysqlQuery($sql) or die(mysql_error());
 
+	//print_r($query);
 	$invoice = mysql_fetch_array($query);
+	
+	//print_r($invoice);
+	//exit();
+	
 	$invoice['date'] = date( $config['date_format'], strtotime( $invoice['date'] ) );
 	$invoice['calc_date'] = date('Y-m-d', strtotime( $invoice['date'] ) );
 	$invoice['total'] = getInvoiceTotal($invoice['id']);

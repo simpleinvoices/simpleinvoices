@@ -29,80 +29,53 @@ if(!isset( $_POST['type']) && !isset($_POST['action'])) {
 	exit("no save action");
 }
 
+$saved = false;
+$type = $_POST['type'];
 
-#insert invoice_total - start
-if ($_POST['type'] == 1 && $_POST['action'] == "insert" ) {
+if ($_POST['action'] == "insert" ) {
 	
-	//Get type id - so do add into redirector header
-	$typeId = $_POST['type'];
-
-	if (insertInvoice(1)) {
-		$display_block = $LANG['save_invoice_success'];
-	} else {
-		$display_block = $LANG['save_invoice_failure'];
+	if(insertInvoice($type)) {
+		$invoice_id = mysql_insert_id();
+		saveCustomFieldValues($_POST['categorie'],$invoice_id);
+		$saved = true;
 	}
 
-	$invoice_id = mysql_insert_id();
+	if($type==1) {
+		insertProduct($_POST['description'],$_POST['unit_price'],0,0);
+		$product_id = mysql_insert_id();
 
-	insertProduct($_POST['description'],$_POST['unit_price'],0,0);
-	
-	$product_id = mysql_insert_id();
-
-
-	if (insertInvoiceItem($invoice_id,1,$product_id,$_POST['tax_id'],$_POST['description'])) {
-		$display_block_items = $LANG['save_invoice_items_success'];
-	}
-	else {
-		die(mysql_error());
-	}
-
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&invoice=$invoice_id&type=$typeId>";
-}
-
-
-#insert invoice_itemised
-
-if ( $_POST['action'] == "insert" && ($_POST['type'] == 2 || $_POST['type'] == 3 )) {
-
-	if (($_POST['type'] == 3 && insertInvoice(3)) || ($_POST['type'] == 2 && insertInvoice(2))) {
-	//Get type id - so do add into redirector header
-
-	$typeId = $_POST['type'];
-		$display_block =  $LANG['save_invoice_success'];
-	} else {
-		$display_block = $LANG['save_invoice_failure'];
-	}
-
-	//get the invoice id from the insert
-	$invoice_id = mysql_insert_id();
-	
-	for($i=0;!empty($_POST["quantity$i"]) && $i < $_POST['max_items']; $i++) {
-
-		if (insertInvoiceItem($invoice_id,$_POST["quantity$i"],$_POST["products$i"],$_POST['tax_id'],$_POST["description$i"]) ) {
-			$display_block_items = $LANG['save_invoice_items_success'];
-		} else {
+		if (insertInvoiceItem($invoice_id,1,$product_id,$_POST['tax_id'],$_POST['description'])) {
+			//$saved = true;
+		}
+		else {
 			die(mysql_error());
 		}
 	}
-
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&invoice=$invoice_id&type=$typeId>";
+	else {
+		for($i=0;!empty($_POST["quantity$i"]) && $i < $_POST['max_items']; $i++) {
+	
+			if (insertInvoiceItem($invoice_id,$_POST["quantity$i"],$_POST["products$i"],$_POST['tax_id'],$_POST["description$i"]) ) {
+				//$saved = true;
+			} else {
+				die(mysql_error());
+			}
+		}
+	}
 }
 
 
-if ( $_POST['action'] == "edit" && ($_POST['type'] == 1 || $_POST['type'] == 2 || $_POST['type'] == 3 )) {
+if ( $_POST['action'] == "edit") {
 
 	//Get type id - so do add into redirector header
-	$typeId = $_POST['type'];
 
 	$invoice_id = $_POST['invoice_id'];
 	
 	if (updateInvoice($_POST['invoice_id'])) {
-		$display_block = $LANG['save_invoice_success'];
-	} else {
-		$display_block = $LANG['save_invoice_failure'];
+		updateCustomFieldValues($_POST['categorie'],$_POST['invoice_id']);
+		$saved = true;
 	}
 
-	if($_POST['type'] == 1) {
+	if($type == 1) {
 		$sql = "UPDATE ".TB_PREFIX."products SET `unit_price` = $_POST[unit_price], `description` = '$_POST[description0]' WHERE id = $_POST[products0]";
 		mysqlQuery($sql);
 	}
@@ -110,25 +83,18 @@ if ( $_POST['action'] == "edit" && ($_POST['type'] == 1 || $_POST['type'] == 2 |
 	for($i=0;(!empty($_POST["quantity$i"]) && $i < $_POST['max_items']);$i++) {
 		
 		if (updateInvoiceItem($_POST["id$i"],$_POST["quantity$i"],$_POST["products$i"],$_POST['tax_id'],$_POST["description$i"])) {
-			$display_block_items =  $LANG['save_invoice_items_success'];
+			//$saved =  true;
 		}
 		else {
 			die(mysql_error());
 		}
 	}
 
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=quick_view&invoice=$invoice_id&type=$typeId>";
 }
 
-
-
-$refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
-$display_block_items = isset($display_block_items) ? $display_block_items : '&nbsp;';
-
-$smarty->assign('display_block', $display_block);
-$smarty->assign('display_block_items', $display_block_items);
+//Get type id - so do add into redirector header
+$smarty->assign('type', $type);
+$smarty->assign('saved', $saved);
 $smarty->assign('invoice_id', $invoice_id);
-$smarty->assign('typeId', $typeId);
 
-EOD;
 ?>
