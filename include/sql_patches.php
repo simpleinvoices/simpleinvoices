@@ -782,12 +782,8 @@ NULL , 'logging', '0'
 	$patch['135']['name'] = "Add option to delete invoices into the system_defaults table";
 	$patch['135']['patch'] = "INSERT INTO `si_system_defaults` (`id`, `name`, `value`) VALUES 
 ('', 'delete', 'N');";
-	$patch['135']['date'] = "2007083"
+	$patch['135']['date'] = "2007083";
 	
-
-	$patch['136']['name'] = "Add option to select lang into the system_preferences table";
-	$patch['136']['patch'] = "INSERT INTO `si_system_defaults` (`id`, `name`, `value`) VALUES ('', 'language', 'en');";
-	$patch['136']['date'] = "200709"
 
 /*
 INSERT INTO  `si_menu` (  `id` ,  `parentid` ,  `order` ,  `name` ,  `link` ,  `enabled` ) 
