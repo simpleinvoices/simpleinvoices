@@ -358,4 +358,28 @@ function menuIsActive($module,$requestedModule) {
 	}
 }
 
+
+function getLangList() {
+ $startdir = './lang/';
+ $ignoredDirectory[] = '.';
+ $ignoredDirectory[] = '..';
+ $ignoredDirectory[] = '.svn';
+  if (is_dir($startdir)){
+      if ($dh = opendir($startdir)){
+          while (($folder = readdir($dh)) !== false){
+              if (!(array_search($folder,$ignoredDirectory) > -1)){
+                if (filetype($startdir . $folder) == "dir"){
+//                      $directorylist[$startdir . $folder]['name'] = $folder;
+//                     $directorylist[$startdir . $folder]['path'] = $startdir;
+					  $folderList[] = $folder;
+                  }
+              }
+          }
+          closedir($dh);
+      }
+  }
+sort($folderList);
+return($folderList);
+}
+
 ?>

@@ -1,13 +1,14 @@
 - NR todo (Sept)
+ - language : new language system - review
+ - invoice : save total inserts into product table with visible = 1, should be 0
+ - PDF - needs to work with port numbers iie 127.0.0.1:8080/svn/simpleinvoices
  - reports : now using new format for total style (using products table) some reports may have to be rewritten - to be investigated
  - convert remaining pages to smarty (Sys defaults Edit is the main one left)
- - menu re db : issue with sql patch 124 when upgrading from old release - to be looked at
  - menu :
  -- menu : fix colours for active tab drop down
  -- menu : if logged in change Login to Logout
- - language : new language system - review
  - index.php review input if is safe enought
- - quick view : check all style if all cut size to 25 characters stuf fis working
+ - quick view : check all style if all cut size to 25 characters stuff is working
  -- quick view : check consulting style - is descripton etc coming through OK?
  - lang: add new lang variables into all files : grep LANG_TODO
 

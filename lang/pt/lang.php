@@ -5,10 +5,7 @@
 * 	Portugues - Portuguese translation file
 *
 * Authors:
-*	 Murray Buckley, Max
-*
-* Last edited:
-* 	 2007-04-27
+*	 Murray Buckley, Max, Augusto Campos
 *
 * License:
 *	 GPL v2 or above
@@ -258,7 +255,7 @@ $LANG['save_customer_success'] = "Customer successfully saved,<br> you will be r
 $LANG['save_defaults'] = "Save Defaults";//0
 $LANG['save_defaults_success'] = "The system default has been successfully updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
-$LANG['save_invoice'] = "Save Invoice";//0
+$LANG['save_invoice'] = "Gravar Factura";//1
 $LANG['save_invoice_failure'] = "Something went wrong, please try saving the invoice again";//0
 $LANG['save_invoice_items_success'] = "Processing invoice items<br> you will be redirected back to the Quick View of this invoice";//0
 $LANG['save_invoice_success'] = "Processing invoice, <br> you will be redirected Quick View of this invoice";//0

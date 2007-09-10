@@ -12,26 +12,31 @@
 //http_negotiate_language($langs, $result);
 //print_r($result);
 unset($LANG);
-$LANG = getLanguageArray();
 
 function getLanguageArray() {
+	global $language;
 	$langPath = "./lang/";
 	$langFile = "/lang.php";
-	$language = getenv("HTTP_ACCEPT_LANGUAGE");
-	$language = "en";
+	//$getLanguage = getenv("HTTP_ACCEPT_LANGUAGE");
+	$getLanguage = $language;
 	
-	include($langPath."en".$langFile);
-	
-	if(file_exists($langPath.substr($language,0,2).$langFile)) {
-		include($langPath.substr($language,0,2).$langFile);
+	//include($langPath."en".$langFile);
+	include($langPath.$language.$langFile);
+
+	/*
+	if(file_exists($langPath.substr($getLanguage,0,2).$langFile)) {
+		include($langPath.substr($getLanguage,0,2).$langFile);
 	}
 	
-	if(file_exists($langPath.substr($language,0,5).$langFile)) {
-		include($langPath.substr($language,0,5).$langFile);
+	if(file_exists($langPath.substr($getLanguage,0,5).$langFile)) {
+		include($langPath.substr($getLanguage,0,5).$langFile);
 	}
+	*/
 	
 	return $LANG;
 }
+
+$LANG = getLanguageArray();
 //TODO: if (getenv("HTTP_ACCEPT_LANGUAGE") != available language) AND (config lang != en) ) {
 // then use config lang
 // }

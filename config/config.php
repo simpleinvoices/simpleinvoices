@@ -8,8 +8,8 @@ $db_user = "root";
 $db_password = "";
 
 //if you want to make Simple Invoices secure and require a username and password set this to true
-$authenticationOn = "true";
-//$authenticationOn = "false";
+//$authenticationOn = "true";
+$authenticationOn = "false";
 
 //if you are using a .httaccess file
 $http_auth = "";	//value: "name:password@"
@@ -21,25 +21,25 @@ define("TB_PREFIX","si_");
 define("LOGGING",false);
 #define("LOGGING",true);
 
-//$path = pathinfo($_SERVER['REQUEST_URI']);
-#echo $pa['dirname'];
-
 /*Select language for Simple Invoices to use*/
-#$language = "castellano_spanish";
-#$language = "catala_catalan";
-#$language = "cestina_czech";
-#$language = "deutsch_german";
-//$language = "english_UK";
-#$language = "francais_french";
-#$language = "galego_galician";
-#$language = "nederlands_dutch";
-#$language = "portugues_portuguese";
-#$language = "romana_romanian";
-#$language = "suomi_finnish";
+#$language = "cs"; //castellano_spanish
+#$language = "ca"; //catala_catalan
+#$language = "cs"; //cestina_czech
+#$language = "de"; //deutsch_german
+#$language = "de-ch"; //deutsch_german swiss
+$language = "en"; //english_UK
+#$language = "fr"; //francais_french
+#$language = "gl"; //galego_galician
+#$language = "ls"; //slovenščina_slovenian
+#$language = "nl"; //nederlands_dutch
+#$language = "no"; //norwegian_NB
+#$language = "pt"; //portugues_portuguese
+#$language = "ro"; //romana_romanian
+#$language = "fi"; //suomi_finnish
 
 /*PDF configs*/
 #installation path relative to document root of webserver 
-//$install_path = "/svn/simpleinvoices";
+//$install_path = "/simpleinvoices";
 //$install_path = $path['dirname'];
 /*Email configs*/
 $email_host = "";  // specify main and backup server - separating with ;
