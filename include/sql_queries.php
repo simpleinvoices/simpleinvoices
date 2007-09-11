@@ -491,6 +491,16 @@ function getDefaultLogging() {
 	$delete = $array['value']==1?$LANG['enabled']:$LANG['disabled'];
 	return $delete;
 }
+function getDefaultLanguage() {
+	
+	global $LANG;
+
+	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = 'language')";
+	$query = mysqlQuery($sql) or die(mysql_error());
+	$array = mysql_fetch_array($query);
+	return $array['value'];
+}
+
 function getInvoiceTotal($invoice_id) {
 	global $LANG;
 	

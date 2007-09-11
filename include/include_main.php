@@ -11,11 +11,12 @@ $install_path = $path['dirname'];
 
 include_once('./config/config.php');
 
+include("./include/sql_queries.php");
+
 include_once('./include/language.php');
 
 include_once('./include/functions.php');
 
-include("./include/sql_queries.php");
 checkConnection();
 
 include('./modules/options/database_sqlpatches.php');

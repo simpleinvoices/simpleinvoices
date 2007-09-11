@@ -13,14 +13,18 @@
 //print_r($result);
 unset($LANG);
 
+$language = getDefaultLanguage();
+
 function getLanguageArray() {
 	global $language;
 	$langPath = "./lang/";
 	$langFile = "/lang.php";
 	//$getLanguage = getenv("HTTP_ACCEPT_LANGUAGE");
-	$getLanguage = $language;
-	
-	//include($langPath."en".$langFile);
+	//$language = getDefaultLanguage();
+
+	//include english as default - so if the selected lang doesnt have the required lang then it still loads
+	include($langPath."english_UK".$langFile);
+
 	include($langPath.$language.$langFile);
 
 	/*

@@ -31,5 +31,8 @@
 	<tr>
 		<td class='details_screen'><a href='index.php?module=system_defaults&view=edit&submit=logging'>{$LANG.edit}</a></td><td class='details_screen'>LANG_TODO: Logging ?Add help here?</td><td>{$defaultLogging}</td>
 	</tr>
+	<tr>
+		<td class='details_screen'><a href='index.php?module=system_defaults&view=edit&submit=language'>{$LANG.edit}</a></td><td class='details_screen'>LANG_TODO: Language ?Add help here?</td><td>{$defaultLanguage}</td>
+	</tr>
         </table>
         

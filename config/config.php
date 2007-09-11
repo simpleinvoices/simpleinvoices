@@ -27,7 +27,7 @@ define("LOGGING",false);
 #$language = "cs"; //cestina_czech
 #$language = "de"; //deutsch_german
 #$language = "de-ch"; //deutsch_german swiss
-$language = "en"; //english_UK
+#$language = "english_UK"; //english_UK
 #$language = "fr"; //francais_french
 #$language = "gl"; //galego_galician
 #$language = "ls"; //slovenščina_slovenian
