@@ -17,30 +17,6 @@ $http_auth = "";	//value: "name:password@"
 //$tb_prefix = "si_";
 define("TB_PREFIX","si_");
 
-//To turn loggin on set the below to true
-define("LOGGING",false);
-#define("LOGGING",true);
-
-/*Select language for Simple Invoices to use*/
-#$language = "cs"; //castellano_spanish
-#$language = "ca"; //catala_catalan
-#$language = "cs"; //cestina_czech
-#$language = "de"; //deutsch_german
-#$language = "de-ch"; //deutsch_german swiss
-#$language = "english_UK"; //english_UK
-#$language = "fr"; //francais_french
-#$language = "gl"; //galego_galician
-#$language = "ls"; //slovenščina_slovenian
-#$language = "nl"; //nederlands_dutch
-#$language = "no"; //norwegian_NB
-#$language = "pt"; //portugues_portuguese
-#$language = "ro"; //romana_romanian
-#$language = "fi"; //suomi_finnish
-
-/*PDF configs*/
-#installation path relative to document root of webserver 
-//$install_path = "/simpleinvoices";
-//$install_path = $path['dirname'];
 /*Email configs*/
 $email_host = "";  // specify main and backup server - separating with ;
 $email_smtp_auth = true;     // turn on SMTP authentication
@@ -95,4 +71,28 @@ $pdf_bottom_margin = 15;
 #error_reporting(E_ALL & ~E_NOTICE);
 #error_reporting(0);
 
+/*Select language for Simple Invoices to use*/
+#$language = "cs"; //castellano_spanish
+#$language = "ca"; //catala_catalan
+#$language = "cs"; //cestina_czech
+#$language = "de"; //deutsch_german
+#$language = "de-ch"; //deutsch_german swiss
+#$language = "english_UK"; //english_UK
+#$language = "fr"; //francais_french
+#$language = "gl"; //galego_galician
+#$language = "ls"; //slovenščina_slovenian
+#$language = "nl"; //nederlands_dutch
+#$language = "no"; //norwegian_NB
+#$language = "pt"; //portugues_portuguese
+#$language = "ro"; //romana_romanian
+#$language = "fi"; //suomi_finnish
+
+/*PDF configs*/
+#installation path relative to document root of webserver 
+//$install_path = "/simpleinvoices";
+//$install_path = $path['dirname'];
+
+//To turn loggin on set the below to true
+#define("LOGGING",false);
+#define("LOGGING",true);
 ?>
