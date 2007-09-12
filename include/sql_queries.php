@@ -24,7 +24,7 @@ function mysqlQuery($sqlQuery) {
 	if($query = mysql_query($sqlQuery,$conn)) {
 		
 		//error_log("Insert_id: ".mysql_insert_id($conn));
-		
+
 		if(LOGGING && (preg_match($pattern,$sqlQuery) == 0)) {
 			$sql = "INSERT INTO  `si_log` (`id`,`timestamp` ,  `userid` ,  `sqlquerie`, `last_id` ) VALUES (NULL,CURRENT_TIMESTAMP ,  '$userid',  '". addslashes (preg_replace('/\s\s+/', ' ', trim($sqlQuery)))."','".mysql_insert_id()."');";
 			mysql_unbuffered_query($sql,$log);
