@@ -784,6 +784,11 @@ NULL , 'logging', '0'
 ('', 'delete', 'N');";
 	$patch['135']['date'] = "2007083";
 	
+	
+	$patch['136']['name'] = "Set default language in new lang system";
+	$patch['136']['patch'] = "UPDATE `si_system_defaults` SET value = 'english_UK' where name ='language';";
+	$patch['136']['date'] = "200709";
+	
 
 /*
 INSERT INTO  `si_menu` (  `id` ,  `parentid` ,  `order` ,  `name` ,  `link` ,  `enabled` ) 
