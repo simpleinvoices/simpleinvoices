@@ -40,6 +40,38 @@ function getLanguageArray() {
 	return $LANG;
 }
 
+function getLanguageList() {
+	$xmlFile = "info.xml";
+	$langPath = "lang/";
+	$folders = null;
+	
+	if($handle = opendir($langPath)) {
+		
+		//TODO: catch ., .. and other bad folders
+		for($i=0;$file = readdir($handle);$i++) {
+			$folders[$i] = $file;
+		}
+		closedir($handle);
+	}
+	
+	$languages = null;
+	$i = 0;
+	
+	foreach($folders as $folder) {
+		$file = $langPath.$folder."/".$xmlFile;
+		if(file_exists($file)) {
+			//echo $file."<br />";
+			$values = simplexml_load_file($file);
+			$languages[$i] = $values;
+			$i++;
+			//print_r($values);
+			//echo $values->name;
+		}
+	}
+	
+	return $languages;
+}
+
 $LANG = getLanguageArray();
 //TODO: if (getenv("HTTP_ACCEPT_LANGUAGE") != available language) AND (config lang != en) ) {
 // then use config lang

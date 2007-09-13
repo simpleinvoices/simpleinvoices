@@ -9,7 +9,7 @@ $pageActive = "options";
 
 $defaults = getSystemDefaults();
 
-if ($_GET[submit] == "line_items") {
+if ($_GET["submit"] == "line_items") {
 
 	jsBegin();
 	jsFormValidationBegin("frmpost");
@@ -25,7 +25,7 @@ EOD;
 	$description = "{$LANG['default_number_items']}";
 
 }
-else if ($_GET[submit] == "def_inv_template") {
+else if ($_GET["submit"] == "def_inv_template") {
 
 	$default = "template";
 	/*drop down list code for invoice template - only show the folder names in src/invoices/templates*/
@@ -75,7 +75,7 @@ EOD;
 
 }
 
-else if ($_GET[submit] == "biller") {
+else if ($_GET["submit"] == "biller") {
 
 	$default = "biller";
 
@@ -106,7 +106,7 @@ EOD;
 }
 
 
-else if ($_GET[submit] == "customer") {
+else if ($_GET["submit"] == "customer") {
 
 	$customers = getActiveCustomers();
 
@@ -171,7 +171,7 @@ EOD;
 	$description = "{$LANG['tax']}";
 	$value = $display_block_tax;
 }
-else if ($_GET[submit] == "preference_id") {
+else if ($_GET["submit"] == "preference_id") {
 	
 	$pref = getPreference($defaults['preference']);
 	$preferences = getActivePreferences();
@@ -204,7 +204,7 @@ EOD;
 
 }
 
-else if ($_GET[submit] == "def_payment_type") {
+else if ($_GET["submit"] == "def_payment_type") {
 
 	$defpay = getDefaultPaymentType();
 	$payments = getActivePaymentTypes();
@@ -237,7 +237,7 @@ EOD;
 
 }
 
-else if ($_GET[submit] == "delete") {
+else if ($_GET["submit"] == "delete") {
 
 	$deleteArray = array(0 => $LANG[disabled], 1=>$LANG[enabled]);
 
@@ -260,7 +260,7 @@ EOD;
 
 }
 
-else if ($_GET[submit] == "logging") {
+else if ($_GET['submit'] == "logging") {
 
 	$array = array(0 => $LANG[disabled], 1=>$LANG[enabled]);
 
@@ -282,8 +282,20 @@ EOD;
 	$description = "LANG_TODO: Logging";
 	$value = $dropDown;
 }
+else if($_GET['submit'] == "language") {
+	$languages = getLanguageList();
+	
+	//print_r($languages);
+	$value = "<select>";
+	foreach($languages as $language) {
+		$value .= "<option>$language->name ($language->shortname)</option>";
+	}
+	$value .= "</select>";
+	
+	//print_r($folders);
+}
 else {
-	$display_block = "{$LANG['no_defaults']}";
+	$description = "{$LANG['no_defaults']}";
 }
 
 
