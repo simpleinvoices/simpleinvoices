@@ -173,7 +173,7 @@ function getPlugins() {
 	
 	for($i=0;$i<count($files);$i++) {
 		$file = $files[$i];
-		if($file != ".." && $file != "." && $file != ".svn") {
+		if(preg_match("/\.php$/",$file)) {
 			$plugins[$i] = "./modules/customFields/plugins/$file";
 		}
 	}
@@ -197,6 +197,7 @@ function includePlugins() {
 function getPluginById($id) {
 		
 	$plugins = getPluginArray();
+	
 	
 	if($plugins[$id] != null) {
 		return $plugins[$id];
