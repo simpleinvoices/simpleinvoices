@@ -95,7 +95,7 @@ else if ($_GET["submit"] == "biller") {
 			$selected = $biller['id'] == $defaults['biller']?"selected style='font-weight: bold'":"";
 			
 			$display_block_biller .= <<<EOD
-			<option $selected value="$result[id]">$biller[name]</option>
+			<option $selected value="$biller[id]">$biller[name]</option>
 EOD;
 		}
 		$display_block_biller .= "</select>";
@@ -128,7 +128,7 @@ EOD;
 			$selected = $customer['id'] == $defaults['customer']?"selected style='font-weight: bold'":"";
 			
 			$display_block_customer .= <<<EOD
-			<option $selected value="$recs_customer[id]">$customer[name]</option>
+			<option $selected value="$customer[id]">$customer[name]</option>
 EOD;
 		}
 		$display_block_customer .= "</select>";
@@ -283,10 +283,11 @@ EOD;
 	$value = $dropDown;
 }
 else if($_GET['submit'] == "language") {
+	$default = "language";
 	$languages = getLanguageList();
 	
 	//print_r($languages);
-	$value = "<select>";
+	$value = "<select name='value'>";
 	foreach($languages as $language) {
 		$value .= "<option value='$language->shortname'>$language->name ($language->shortname)</option>";
 	}
@@ -311,4 +312,5 @@ $smarty->assign('lang', $lang);
 $smarty->assign('billers',$billers);*/
 $smarty->assign('value',$value);
 $smarty->assign('description',$description);
+$smarty->assign('default',$default);
 ?>

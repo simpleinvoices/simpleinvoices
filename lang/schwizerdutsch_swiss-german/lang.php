@@ -1,10 +1,11 @@
 <?php
 /*
 * Script: duetsch_german.inc.php
-* 	Deutsch - German translation file
+* 	Schweizerdeutsch - Swiss-German translation file
+*	This one is more for testing purpose...
 *
 * Authors:
-*	 Herz Hermann (heart1010@gmail.com)
+*	 Nicolas Ruflin
 *
 * Last edited:
 * 	 2007-04-27
@@ -13,21 +14,16 @@
 *	 GPL v2 or above
 */
 
-
-/*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
-regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
-*/
-
 #all
-$title = "Rechnungsverwaltung";//1
+$title = "Rechnigsproggi";//1
 
 $LANG['about'] = "Öber";//1
-$LANG['account_info'] = "Konto-Information";//1
+$LANG['account_info'] = "Konto-Infos";//1
 $LANG['actions'] = "Aktion";//1
-$LANG['add_biller'] = "Gl&auml;ubiger hinzuf&uuml;gen";//1
-$LANG['add_customer'] = "Kunde hinzuf&uuml;gen";//1
-$LANG['add_invoice_preference'] = "Neue Rechnungseinstellung anlegen";//1
-$LANG['add_new_biller'] = "Add New Biller";//1
+$LANG['add_biller'] = "Gläubiger hinzuefüege";//1
+$LANG['add_customer'] = "Kund hinzuefüege";//1
+$LANG['add_invoice_preference'] = "Neui Rechnig alegge";//1
+$LANG['add_new_biller'] = "Kunde hinzuefüege";//1
 $LANG['add_new_invoice'] = "Neue Rechnung";//1
 $LANG['add_new_payment_type'] = "Neue Zahlungseingangsart anlegen";//1
 $LANG['add_new_preference'] = "Neue Rechnungsborgabe anlegen";//1

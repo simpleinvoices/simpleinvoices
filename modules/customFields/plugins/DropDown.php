@@ -28,16 +28,17 @@ class DropDown extends CustomField {
 		echo $name.": ".$this->getList();
 	}
 	
-	function getList($value = "") {
+	function getList($value = "",$name) {
+
 		$array = array("hans","john","getrud","jonathan","fabian");
 
-		$t = "<select>";
+		$t = "<select name='$name'>";
 		foreach($array as $item) {
 			if($item == $value) {
 				$t .= "<option selected >$item</option>";
 			}
 			else {
-				$t .= "<option>$item</option>";
+				$t .= "<option value='$item'>$item</option>";
 			}
 		}
 		$t .= "</select>";
@@ -46,13 +47,13 @@ class DropDown extends CustomField {
 	}
 	
 	function printInputField($id,$itemId) {
-		
+		$name = $this->getFormName($id);
+
 		if($itemId != "") {
-			//Sould be replace by customFieldId and Itemid
-			$value = $this->getList($this->getFieldValue($id,$itemId));
+			$value = $this->getList($this->getFieldValue($id,$itemId),$name);
 		}
 		else {
-			$value = $this->getList("");
+			$value = $this->getList("",$name);
 		}
 		
 		echo "<tr><td>$description</td><td>".$value."</td></tr>";
