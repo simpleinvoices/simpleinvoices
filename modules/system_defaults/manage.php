@@ -6,6 +6,19 @@ checkLogin();
 $pageActive = "options";
 $smarty->assign('pageActive', $pageActive);
 
+//gets the long language name out of the short name
+$lang = getDefaultLanguage();
+$languages = getLanguageList();
+foreach($languages as $language) {
+	if($language->shortname == $lang) {
+		$lang = $language->name;
+		break;
+	}
+}
+
+
+
+
 $smarty -> assign("defaults", getSystemDefaults());
 $smarty -> assign("defaultBiller", getDefaultBiller());
 $smarty -> assign("defaultCustomer", getDefaultCustomer());
@@ -14,6 +27,6 @@ $smarty -> assign("defaultPreference", getDefaultPreference());
 $smarty -> assign("defaultPaymentType", getDefaultPaymentType());
 $smarty -> assign("defaultDelete", getDefaultDelete());
 $smarty -> assign("defaultLogging", getDefaultLogging());
-$smarty -> assign("defaultLanguage", getDefaultLanguage());
+$smarty -> assign("defaultLanguage", $lang);
 
 ?>

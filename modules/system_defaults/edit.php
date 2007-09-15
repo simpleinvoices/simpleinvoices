@@ -1,4 +1,5 @@
 <?php
+
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
@@ -290,20 +291,25 @@ EOD;
 else if($_GET['submit'] == "language") {
 	$default = "language";
 	$languages = getLanguageList();
+	$lang = getDefaultLanguage();
 	
+	usort($languages,"compareNameIndex");
+
 	//print_r($languages);
 	$value = "<select name='value'>";
 	foreach($languages as $language) {
-		$value .= "<option value='$language->shortname'>$language->name ($language->englishname) ($language->shortname) </option>";
+		$selected = "";
+		if($language->shortname == $lang) {
+			$selected = " selected ";
+		}
+		$value .= "<option $selected value='$language->shortname'>$language->name ($language->englishname) ($language->shortname) </option>";
 	}
 	$value .= "</select>";
 	
-	//print_r($folders);
 }
 else {
 	$description = "{$LANG['no_defaults']}";
 }
-
 
 
 $pageActive = "options";
@@ -319,4 +325,19 @@ $smarty->assign('pageActive', $pageActive);
 $smarty->assign('value',$value);
 $smarty->assign('description',$description);
 $smarty->assign('default',$default);
+
+
+
+/**
+ * Help function for sorting the language array by name
+ */
+function compareNameIndex($a,$b) {
+	$a = $a->name."";
+	$b = $b->name."";
+	
+	if($a > $b) {
+		return 1;
+	}
+	return -1;
+}
 ?>

@@ -497,8 +497,8 @@ function getDefaultLanguage() {
 
 	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = 'language')";
 	$query = mysqlQuery($sql) or die(mysql_error());
-	$array = mysql_fetch_array($query);
-	return $array['value'];
+	$entry = mysql_fetch_array($query);
+	return $entry['value'];
 }
 
 function getInvoiceTotal($invoice_id) {
