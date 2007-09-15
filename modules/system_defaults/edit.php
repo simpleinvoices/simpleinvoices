@@ -307,9 +307,10 @@ $pageActive = "options";
 $smarty->assign('files', $files);
 $smarty->assign('customFieldLabel', $customFieldLabel);
 $smarty->assign('save', $save);
-$smarty->assign('defaults', $defaults);
 $smarty->assign('lang', $lang);
 $smarty->assign('billers',$billers);*/
+$smarty->assign('defaults', $defaults);
+$smarty->assign('pageActive', $pageActive);
 $smarty->assign('value',$value);
 $smarty->assign('description',$description);
 $smarty->assign('default',$default);

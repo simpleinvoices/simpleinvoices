@@ -20,7 +20,7 @@
 </table>
 <!-- </div> -->
 	<input type="hidden" name="name" value="{$default}">
-	<input type=submit name="submit" value="{$LANG.save_defaults}">
+	<input type=submit name="submit" value="{$LANG.save}">
 	<input type=hidden name="op" value="update_system_defaults">
 
 </form>
