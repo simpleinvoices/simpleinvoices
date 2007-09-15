@@ -1,9 +1,8 @@
 - NR todo (Sept)
- - language : new language system - review
  - invoice : save total inserts into product table with visible = 1, should be 0
  - PDF - needs to work with port numbers iie 127.0.0.1:8080/svn/simpleinvoices
  - reports : now using new format for total style (using products table) some reports may have to be rewritten - to be investigated
- - convert remaining pages to smarty (Sys defaults Edit is the main one left)
+ - convert remaining pages to smarty
  - menu :
  -- menu : fix colours for active tab drop down
  -- menu : if logged in change Login to Logout
@@ -33,6 +32,7 @@
  -- add famfam icon for add button - done
  - reports need templates - so as to work with menu system - done
  - patches 128 - 130 : if an if statement in them - done
+ - language : new language system - review - done
 
 - in next release +1 (NR1) - (aim end of Sept)
 -todo

@@ -152,17 +152,20 @@ else if ($_GET['submit'] == "tax") {
 
 	} else {
 		//has records, so display them
+
 		$display_block_tax = <<<EOD
 	        <select name="value">
 
-                <option selected value="$defaults[tax]" style="font-weight: bold">{$tax['tax_description']}</option>
                 <option value='0'> </option>
 EOD;
 
+
 		foreach($taxes as $tax) {
 
+			$selected = $tax['tax_id'] == $defaults['tax']?"selected style='font-weight: bold'":"";
+
 			$display_block_tax .= <<<EOD
-			<option  value="$tax[tax_id]">
+			<option $selected value="$tax[tax_id]">
                         {$tax['tax_description']}</option>
 EOD;
 		}
@@ -186,14 +189,15 @@ else if ($_GET["submit"] == "preference_id") {
 		$display_block_preferences = <<<EOD
 	        <select name="value">
 
-                <option selected value="$defaults[preference]" style="font-weight: bold">{$pref['pref_description']}</option>
                 <option value='0'> </option>
 EOD;
 
 		foreach($preferences as $preference) {
 
+			$selected = $preference['pref_id'] == $defaults['preference']?"selected style='font-weight: bold'":"";
+
 			$display_block_preferences .= <<<EOD
-			<option value="{$preference['pref_id']}">
+			<option $selected value="{$preference['pref_id']}">
 	                        {$preference['pref_description']}</option>
 EOD;
 		}
@@ -220,13 +224,14 @@ else if ($_GET["submit"] == "def_payment_type") {
 		$display_block_payment_type = <<<EOD
                 <select name="value">
 
-                <option selected value="$defaults[payment_type]" style="font-weight: bold">{$defpay['pt_description']}</option>
+                <option value='0'> </option>
 EOD;
 
 		foreach($payments as $payment) {
 
+			$selected = $payment['pt_id'] == $defaults['payment_type']?"selected style='font-weight: bold'":"";
 			$display_block_payment_type .= <<<EOD
-			<option value="{$payment['pt_id']}">
+			<option $selected value="{$payment['pt_id']}">
                         {$payment['pt_description']}</option>
 EOD;
 		}
