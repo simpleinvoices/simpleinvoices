@@ -289,7 +289,7 @@ else if($_GET['submit'] == "language") {
 	//print_r($languages);
 	$value = "<select name='value'>";
 	foreach($languages as $language) {
-		$value .= "<option value='$language->shortname'>$language->name ($language->shortname)</option>";
+		$value .= "<option value='$language->shortname'>$language->name ($language->englishname) ($language->shortname) </option>";
 	}
 	$value .= "</select>";
 	

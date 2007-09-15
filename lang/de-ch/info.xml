@@ -2,6 +2,7 @@
 <langfile version="1.0.0" type="language">
 	<name>Schwizerdütsch</name>
 	<shortname>de-ch</shortname>
+	<englishname>Swiss German</englishname>
 	<version>1.0.0</version>
 	<creationDate>2004-09-20</creationDate>
 	<author>Nicolas Ruflin</author>

@@ -23,7 +23,7 @@ function getLanguageArray() {
 	//$language = getDefaultLanguage();
 
 	//include english as default - so if the selected lang doesnt have the required lang then it still loads
-	include($langPath."english_UK".$langFile);
+	include($langPath."en-gb".$langFile);
 
 	include($langPath.$language.$langFile);
 
