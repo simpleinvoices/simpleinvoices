@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <langfile version="1.0.0" type="language">
-	<name>Dutch (Netherlands)</name>
+	<name>Nederland</name>
 	<shortname>nl</shortname>
+	<englishname>Dutch</englishname>
 	<version>1.0.0</version>
 	<creationDate>2004-09-20</creationDate>
-	<author>Nicolas Ruflin</author>
-	<authorEmail>justin@kelly.org.au</authorEmail>
+	<author>Frank Heinen, David, Ruben Bloemgarten</author>
+	<authorEmail>'',darym3 _at_ hotmail.com, ruben@abubble.nl</authorEmail>
 </langfile>
