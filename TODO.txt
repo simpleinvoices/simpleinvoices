@@ -3,6 +3,7 @@
  - PDF - needs to work with port numbers iie 127.0.0.1:8080/svn/simpleinvoices
  - reports : now using new format for total style (using products table) some reports may have to be rewritten - to be investigated
  - convert remaining pages to smarty
+ - sys pref: make select def inv template work
  - menu :
  -- menu : fix colours for active tab drop down
  -- menu : if logged in change Login to Logout

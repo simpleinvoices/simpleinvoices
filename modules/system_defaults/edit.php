@@ -26,7 +26,7 @@ EOD;
 
 }
 else if ($_GET["submit"] == "def_inv_template") {
-
+	
 	$default = "template";
 	/*drop down list code for invoice template - only show the folder names in src/invoices/templates*/
 
