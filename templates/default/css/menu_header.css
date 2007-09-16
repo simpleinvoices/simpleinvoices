@@ -167,7 +167,7 @@
 .menu a {
 	text-decoration:none;
 	color:#eee;
-	padding:4px 7px;
+	padding:0.35em 7px;
 	display:block;
 	position:relative;
 }
