@@ -15,9 +15,9 @@
 include("./include/CustomField.php");
 
 
-function saveCustomField() {
+function saveCustomField($id, $categorie,$name,$description) {
 	$sql = "INSERT INTO ".TB_PREFIX."customFields  ( `pluginId` ,  `categorieId` ,  `name` ,  `description` ) 
-		VALUES ('$_POST[plugin]','$_POST[categorie]','$_POST[name]','$_POST[description]');";
+		VALUES ('$id','$categorie','$name','$description');";
 	mysqlQuery($sql);
 	echo "SAVED<br />";
 }
