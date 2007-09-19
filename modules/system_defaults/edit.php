@@ -56,6 +56,7 @@ EOD;
 		$display_block_templates_list .= "</option>";
 	}
 
+
 	$display_block_templates_list .= "</select>";
 
 	/*end drop down list section */
@@ -72,8 +73,12 @@ EOD;
 	$description = <<<EOD
 	{$LANG['default_inv_template']} <a href='docs.php?t=help&p=default_invoice_template_text' rel='gb_page_center[450, 450]'><img src="images/common/help-small.png"></img></a>
 EOD;
+
 	$value = $display_block_templates_list;
 
+
+	echo $description;
+	echo $value;
 }
 
 else if ($_GET["submit"] == "biller") {
@@ -288,6 +293,7 @@ EOD;
 	$description = "LANG_TODO: Logging";
 	$value = $dropDown;
 }
+
 else if($_GET['submit'] == "language") {
 	$default = "language";
 	$languages = getLanguageList();
