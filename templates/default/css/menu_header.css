@@ -35,6 +35,7 @@
 
 .menu .separation {
 	height:3px;
+	font-size:0px;
 /*	color:#708090; */
 	background-color:#eee;
 }
@@ -71,6 +72,7 @@
 /*	background:#606a7f;*/ /*mozila tab blue*/
 /*	background:#036; */
 	margin:0;
+
 	padding:0;
 	border:0;
 	display:block;

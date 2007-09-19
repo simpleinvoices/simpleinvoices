@@ -1,0 +1,17 @@
+/*<![CDATA[*/
+
+/* - - - ADxMenu: IE7 BASIC styles [MANDATORY] - - - */
+
+.menu li li {	/* fix white gap problem */
+
+	margin-bottom:-3px;
+
+}
+.separation 
+{
+	margin:-20px;	
+	padding:-20px;
+	height:-10px;
+}
+
+/*]]>*/

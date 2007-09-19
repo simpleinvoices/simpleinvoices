@@ -32,6 +32,7 @@
 
 .menu li li {	/* fix white gap problem */
 	float: left;
+	margin-bottom:0px;
 	width: 100%;
 }
 
@@ -47,5 +48,7 @@
 	top: 5px;
 	left: 90%;
 }
+
+
 
 /*]]>*/
