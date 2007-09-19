@@ -32,13 +32,12 @@ else if ($_GET["submit"] == "def_inv_template") {
 	/*drop down list code for invoice template - only show the folder names in src/invoices/templates*/
 
 	$handle=opendir("./templates/invoices/");
-	while ($file = readdir($handle)) {
-		if ($file != ".." && $file != "." && $file !="logos" && $file !=".svn" && $file !="template.php" && $file !="template.php~" ) {
-			$files[] = $file;
+	while ($template = readdir($handle)) {
+		if ($template != ".." && $template != "." && $template !="logos" && $template !=".svn" && $template !="template.php" && $template !="template.php~" ) {
+			$files[] = $template;
 		}
 	}
 	closedir($handle);
-
 	sort($files);
 
 	$display_block_templates_list = <<<EOD
@@ -73,9 +72,9 @@ EOD;
 	$description = <<<EOD
 	{$LANG['default_inv_template']} <a href='docs.php?t=help&p=default_invoice_template_text' rel='gb_page_center[450, 450]'><img src="images/common/help-small.png"></img></a>
 EOD;
-
+	
 	$value = $display_block_templates_list;
-
+	//error_log($value);
 
 }
 
@@ -248,7 +247,7 @@ EOD;
 
 else if ($_GET["submit"] == "delete") {
 
-	$deleteArray = array(0 => $LANG[disabled], 1=>$LANG[enabled]);
+	$deleteArray = array(0 => $LANG['disabled'], 1=>$LANG['enabled']);
 
 	$default = "delete";
 	//has records, so display them
@@ -314,7 +313,6 @@ else if($_GET['submit'] == "language") {
 else {
 	$description = "{$LANG['no_defaults']}";
 }
-
 
 $pageActive = "options";
 
