@@ -13,6 +13,7 @@ $authenticationOn = "false";
 
 //if you are using a .httaccess file
 $http_auth = "";	//value: "name:password@"
+$httpPort=""; // ":7653" - if you have apache running on a non standard port add it so so PDFs work
 
 //$tb_prefix = "si_";
 define("TB_PREFIX","si_");

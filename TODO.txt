@@ -1,6 +1,4 @@
 - NR todo (Sept)
- - invoice : save total inserts into product table with visible = 1, should be 0
- - PDF - needs to work with port numbers iie 127.0.0.1:8080/svn/simpleinvoices
  - reports : now using new format for total style (using products table) some reports may have to be rewritten - to be investigated
  - convert remaining pages to smarty
  - sys pref: make select def inv template work
@@ -11,6 +9,9 @@
  - quick view : check all style if all cut size to 25 characters stuff is working
  -- quick view : check consulting style - is descripton etc coming through OK?
  - lang: add new lang variables into all files : grep LANG_TODO
+ ----
+ - invoice : save total inserts into product table with visible = 1, should be 0 - nicolas done - JK to test
+ - PDF - needs to work with port numbers iie 127.0.0.1:8080/svn/simpleinvoices - done TO BE TESTED - new var addded in config.php
 
 - NR done
  - menu : add + back into menu - done
