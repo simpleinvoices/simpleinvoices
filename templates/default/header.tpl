@@ -35,8 +35,8 @@
 	
 	
 	<!-- Additional IE/Win specific style sheet (Conditional Comments) -->
-	<!--[if lte IE 7]>
-			<link rel="stylesheet" type="text/css" href="./templates/default/css/menu_header_hackIE7.css" media="screen" />
+	<!--[if IE 7]>
+			<link rel="stylesheet" type="text/css" href="./templates/default/css/menu_header_hackIE.css" media="screen" />
 	<link rel="stylesheet" href="./temlates/default/css/tabs-ie.css" type="text/css" media="projection, screen" />
 	<![endif]-->
 
