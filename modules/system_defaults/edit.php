@@ -77,8 +77,6 @@ EOD;
 	$value = $display_block_templates_list;
 
 
-	echo $description;
-	echo $value;
 }
 
 else if ($_GET["submit"] == "biller") {
