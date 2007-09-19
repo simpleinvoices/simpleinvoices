@@ -3,8 +3,7 @@
  - convert remaining pages to smarty
  - sys pref: make select def inv template work
  - menu :
- -- menu : fix colours for active tab drop down
- -- menu : if logged in change Login to Logout
+
  - index.php review input if is safe enought
  - quick view : check all style if all cut size to 25 characters stuff is working
  -- quick view : check consulting style - is descripton etc coming through OK?
@@ -44,6 +43,10 @@
  - preferences: move rest into db
  - index.php : add filtering (php 5.2) for get and post input etc.
  - db: prevent sql injection (refer info point 1)
+ - menu :
+ -- menu : fix colours for active tab drop down
+ -- menu : if logged in change Login to Logout
+ -- menu : port menu db stuff make in and make if logged in change Login to Logout work
  - submit : update all refer to submit to better - only some done - all needs to be done and work
  - delete : if delete is enabled allow delete for ALL items - products, billers, etc.. all with their relevant rules ie. if product has been included in an invoice then CAN'T delete etc..
  - delete : wrap muliple delete ie for invoices in a sql transaction
