@@ -42,8 +42,9 @@ class BackgroundImage {
    *
    * @return BackgroundImage A copy of current object
    */
-  function copy() {
-    return new BackgroundImage($this->_url, $this->_image);
+  function &copy() {
+    $value =& new BackgroundImage($this->_url, $this->_image);
+    return $value;
   }
 
   /**
@@ -73,34 +74,51 @@ class BackgroundImage {
    * @uses BackgroundPosition
    * @uses OutputDriver
    */
-  function show(&$driver, $box, $repeat, $position) {
+  function show(&$driver, $box, $repeat, $position, $attachment) {
     /**
      * If no image should be rendered, just return
      * @see BackgroundImage::$_url
      */
-    if ($this->_url == null) { 
+    if (is_null($this->_url)) { 
       return; 
-    }
+    };
 
     if (is_null($this->_image)) { 
       return; 
-    }
+    };
 
-    /**
-     * Setup clipping region for padding area. Note that background image is drawn in the padding 
-     * area which in generic case is greater than content area.
-     * 
-     * @see OutputDriver::clip()
-     *
-     * @link http://www.w3.org/TR/CSS21/box.html#box-padding-area CSS 2.1 definition of padding area
-     */
+    if ($attachment == BACKGROUND_ATTACHMENT_FIXED &&
+        $box->getCSSProperty(CSS_DISPLAY) == '-body') {
+      $media =& $driver->get_media();
+      $left = $box->get_left_background();
+      $right = $box->get_right_background();
+      $top = $driver->offset + mm2pt($media->margins['bottom']) + mm2pt($media->real_height());
+      $bottom = $driver->offset + mm2pt($media->margins['bottom']);
+    } else {
+      $left = $box->get_left_background();
+      $right = $box->get_right_background();
+      $top = $box->get_top_background();
+      $bottom = $box->get_bottom_background();
+    };
+
     $driver->save();
-    $driver->moveto($box->get_left_background(),  $box->get_top_background());
-    $driver->lineto($box->get_right_background(), $box->get_top_background());
-    $driver->lineto($box->get_right_background(), $box->get_bottom_background());
-    $driver->lineto($box->get_left_background(),  $box->get_bottom_background());
-    $driver->closepath();
-    $driver->clip();
+
+    if (!$GLOBALS['g_config']['debugnoclip']) {
+      /**
+       * Setup clipping region for padding area. Note that background image is drawn in the padding 
+       * area which in generic case is greater than content area.
+       * 
+       * @see OutputDriver::clip()
+       *
+       * @link http://www.w3.org/TR/CSS21/box.html#box-padding-area CSS 2.1 definition of padding area
+       */
+      $driver->moveto($left,  $top);
+      $driver->lineto($right, $top);
+      $driver->lineto($right, $bottom);
+      $driver->lineto($left,  $bottom);
+      $driver->closepath();
+      $driver->clip();
+    };
 
     /**
      * get real image size in device points
@@ -114,8 +132,8 @@ class BackgroundImage {
     /**
      * Get dimensions of the rectangle to be filled with the background image
      */
-    $padding_width  = $box->get_right_background() - $box->get_left_background();
-    $padding_height = $box->get_top_background() - $box->get_bottom_background();
+    $padding_width  = $right - $left;
+    $padding_height = $top - $bottom;
 
     /**
      * Calculate the vertical offset from the top padding edge to the background image top edge using current 
@@ -159,8 +177,8 @@ class BackgroundImage {
        * 'background-repeat: no-repeat' case; no tiling at all
        */
       $driver->image($this->_image, 
-                     $box->get_left_background() + $x_offset, 
-                     $box->get_top_background() - $image_height - $y_offset, 
+                     $left + $x_offset, 
+                     $top - $image_height - $y_offset, 
                      px2pt(1));
       break;
     case BR_REPEAT_X:
@@ -168,10 +186,10 @@ class BackgroundImage {
        * 'background-repeat: repeat-x' case; horizontal tiling
        */
       $driver->image_rx($this->_image, 
-                        $box->get_left_background() + $x_offset, 
-                        $box->get_top_background() - $image_height - $y_offset, 
+                        $left + $x_offset, 
+                        $top - $image_height - $y_offset, 
                         $image_width,
-                        $box->get_right_background(),
+                        $right,
                         $x_offset, 
                         $y_offset,
                         px2pt(1));
@@ -181,10 +199,10 @@ class BackgroundImage {
        * 'background-repeat: repeat-y' case; vertical tiling
        */
       $driver->image_ry($this->_image, 
-                        $box->get_left_background() + $x_offset, 
-                        $box->get_top_background() - $image_height - $y_offset, 
+                        $left + $x_offset, 
+                        $top - $image_height - $y_offset, 
                         $image_height, 
-                        $box->get_bottom_background(), 
+                        $bottom, 
                         $x_offset,
                         $y_offset,
                         px2pt(1));
@@ -194,12 +212,12 @@ class BackgroundImage {
        * 'background-repeat: repeat' case; full tiling
        */
       $driver->image_rx_ry($this->_image, 
-                           $box->get_left_background() + $x_offset, 
-                           $box->get_top_background() - $image_height + $y_offset, 
+                           $left + $x_offset, 
+                           $top - $image_height + $y_offset, 
                            $image_width,
                            $image_height,
-                           $box->get_right_background(),
-                           $box->get_bottom_background(),
+                           $right,
+                           $bottom,
                            $x_offset, 
                            $y_offset, 
                            px2pt(1));

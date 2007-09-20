@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/html2ps/box.button.php,v 1.24 2006/04/12 15:17:21 Konstantin Exp $
+// $Header: /cvsroot/html2ps/box.button.php,v 1.29 2007/01/24 18:55:43 Konstantin Exp $
 /**
  * @package HTML2PS
  * @subpackage Document
@@ -19,47 +19,13 @@
  * @link http://www.w3.org/TR/html4/interact/forms.html#h-17.4 HTML 4.01 The INPUT element
  */
 class ButtonBox extends InlineControlBox {
-  /**
-   * Create a new button element
-   *
-   * @param string $text text to be rendered on the button
-   */
-  function ButtonBox($text) {
-    $this->InlineBox();
+  function ButtonBox() {
+    $this->InlineControlBox();
+  }
 
-    /**
-     * Button height includes vertical padding (e.g. the following two buttons 
-     * <input type="button" value="test" style="padding: 10px; height: 50px;"/>
-     * <input type="button" value="test" style="padding: 0px; height: 30px;"/>
-     * are render by browsers with the same height!), so we'll need to adjust the 
-     * height constraint, subtracting the vertical padding value from the constraint 
-     * height value.
-     */
-    $hc = $this->get_height_constraint();
-    if (!is_null($hc->constant)) {
-      $hc->constant[0] -= $this->get_padding_top() + $this->get_padding_bottom();
-    };
-    $this->put_height_constraint($hc);
-  
-    /**
-     * If button width is not constrained, then we'll add some space around the button text
-     */
-    $text = " ".$text." ";
-
-    /**
-     * Contents of the text box are somewhat similar to the inline box: 
-     * a sequence of the text and whitespace boxes; we generate this sequence using
-     * the InlineBox, then copy contents of the created inline box to our button.
-     *
-     * @todo probably, create_from_text() function should be extracted to the common parent 
-     * of inline boxes.
-     */
-    $ibox = InlineBox::create_from_text($text, WHITESPACE_PRE);
-
-    $size = count($ibox->content);
-    for ($i=0; $i<$size; $i++) {
-      $this->add_child($ibox->content[$i]);
-    };
+  function get_max_width(&$context, $limit = 10E6) { 
+    return 
+      GenericContainerBox::get_max_width($context, $limit);
   }
 
   /**
@@ -89,8 +55,35 @@ class ButtonBox extends InlineControlBox {
       $text = DEFAULT_BUTTON_TEXT;
     };
 
-    $box =& new ButtonBox($text);
+    $box =& new ButtonBox();
+    $box->readCSS($pipeline->getCurrentCSSState());
+
+    /**
+     * If button width is not constrained, then we'll add some space around the button text
+     */
+    $text = " ".$text." ";
+
+    $box->_setup($text, $pipeline);
+
     return $box;
+  }
+
+  function _setup($text, &$pipeline) {
+    $this->setup_content($text, $pipeline);
+
+    /**
+     * Button height includes vertical padding (e.g. the following two buttons 
+     * <input type="button" value="test" style="padding: 10px; height: 50px;"/>
+     * <input type="button" value="test" style="padding: 0px; height: 30px;"/>
+     * are render by browsers with the same height!), so we'll need to adjust the 
+     * height constraint, subtracting the vertical padding value from the constraint 
+     * height value.
+     */
+    $hc = $this->get_height_constraint();
+    if (!is_null($hc->constant)) {
+      $hc->constant[0] -= $this->get_padding_top() + $this->get_padding_bottom();
+    };
+    $this->put_height_constraint($hc);
   }
 
   /**
@@ -125,8 +118,7 @@ class ButtonBox extends InlineControlBox {
     /**
      * Render the interactive button (if requested and possible)
      */
-    global $g_config;
-    if ($g_config['renderforms']) {
+    if ($GLOBALS['g_config']['renderforms']) {
       $status = GenericContainerBox::show($driver);
       $this->_render_field($driver);
     } else {

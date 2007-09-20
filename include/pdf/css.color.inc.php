@@ -1,22 +1,32 @@
 <?php
-// $Header: /cvsroot/html2ps/css.color.inc.php,v 1.10 2006/04/16 16:54:56 Konstantin Exp $
+// $Header: /cvsroot/html2ps/css.color.inc.php,v 1.13 2007/01/24 18:55:51 Konstantin Exp $
 
-class CSSColor extends CSSProperty {
-  function CSSColor() { $this->CSSProperty(true, true); }
+class CSSColor extends CSSPropertyHandler {
+  function CSSColor() { 
+    $this->CSSPropertyHandler(true, true); 
+  }
 
-  function default_value() { return new Color(array(0,0,0),false); }
+  function default_value() { 
+    return new Color(array(0,0,0),false); 
+  }
 
   function parse($value) {
-    $old_color = $this->get();
-    $color = parse_color_declaration($value, 
-                                     array($old_color->r,
-                                           $old_color->g,
-                                           $old_color->b)
-                                     );
-    return new Color($color, is_transparent($color));
+    if ($value === 'inherit') {
+      return CSS_PROPERTY_INHERIT;
+    };
+
+    return parse_color_declaration($value);
+  }
+
+  function getPropertyCode() {
+    return CSS_COLOR;
+  }
+
+  function getPropertyName() {
+    return 'color';
   }
 }
 
-register_css_property('color', new CSSColor);
+CSS::register_css_property(new CSSColor);
 
 ?>

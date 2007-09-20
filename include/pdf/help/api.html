@@ -28,78 +28,6 @@ span.method_name {
 </head>
 <body>
 
-<h1>Minimal code</h1>
-<h2>Using the default pipeline</h2>
-<pre class="code">
-require_once('pipeline.factory.class.php');
-parse_config_file('./html2ps.config');
-
-global $g_config;
-$g_config = array(
-                  'cssmedia'     => 'screen',
-                  'renderimages' => true,
-                  'renderforms'  => false,
-                  'renderlinks'  => true,
-                  'mode'         => 'html',
-                  'debugbox'     => false,
-                  'draw_page_border' => false
-                  );
-
-$media = Media::predefined('A4');
-$media->set_landscape(false);
-$media->set_margins(array('left'   => 0,
-                          'right'  => 0,
-                          'top'    => 0,
-                          'bottom' => 0));
-$media->set_pixels(1024);
-
-global $g_px_scale;
-$g_px_scale = mm2pt($media->width() - $media->margins['left'] - $media->margins['right']) / $media->pixels;
-
-global $g_pt_scale;
-$g_pt_scale = $g_px_scale * 1.43; 
-
-$pipeline = PipelineFactory::create_default_pipeline("","");
-$pipeline->process('http://www.google.com', $media); 
-</pre>
-
-<h2>Building your own conversion pipeline</h2>
-<pre class="code">
-require_once('pipeline.class.php');
-parse_config_file('html2ps.config');
-
-$g_config = array(
-                  'cssmedia'     => 'screen',
-                  'renderimages' => true,
-                  'renderforms'  => false,
-                  'renderlinks'  => true,
-                  'mode'         => 'html',
-                  'debugbox'     => false,
-                  'draw_page_border' => false
-                  );
-
-$media = Media::predefined('A4');
-$media->set_landscape(false);
-$media->set_margins(array('left'   => 0,
-                          'right'  => 0,
-                          'top'    => 0,
-                          'bottom' => 0));
-$media->set_pixels(1024);
-
-$g_px_scale = mm2pt($media->width() - $media->margins['left'] - $media->margins['right']) / $media->pixels;
-$g_pt_scale = $g_px_scale * 1.43; 
-
-$pipeline = new Pipeline;
-$pipeline->fetchers[]     = new FetcherURL;
-$pipeline->data_filters[] = new DataFilterHTML2XHTML;
-$pipeline->parser         = new ParserXHTML;
-$pipeline->layout_engine  = new LayoutEngineDefault;
-$pipeline->output_driver  = new OutputDriverFPDF($media);
-$pipeline->destination    = new DestinationFile(null);
-
-$pipeline->process('http://www.yahoo.com', $media); 
-</pre>
-
 <h1>Beware: GLOBALS!</h1>
 <p>
 At the moment, the layout/conversion engine makes use of several global variables:
@@ -117,39 +45,28 @@ you may initialize these global with the code from samples above.
 <p>
 Also, there's some global items script initializes itself:
 <ul>
-<li>$g_border</li>
 <li>$g_box_uid</li>
-<li>$g_boxes</li>
 <li>$g_colors</li>
-<li>$g_css</li>
-<li>$g_css_default_obj</li>
-<li>$g_css_handlers</li>
-<li>$g_css_obj</li>
+<li>$__g_css_manager</li>
+<li>$__g_css_handler_set</li>
+<li>$g_encoding_aliases</li>
 <li>$g_frame_level</li>
 <li>$g_font_resolver</li>
 <li>$g_font_resolver_pdf</li>
 <li>$g_html_entities</li>
 <li>$g_image_cache</li>
-<li>$g_font_family</li>
-<li>$g_font_style</li>
-<li>$g_font_weight</li>
-<li>$g_font_size</li>
 <li>$g_last_assigned_font_id</li>
-<li>$g_line_height</li>
-<li>$g_list_item_nums</li>
-<li>$g_media</li>
 <li>$g_manager_encodings</li>
+<li>$g_media</li>
 <li>$g_predefined_media</li>
 <li>$g_stylesheet_title</li>
-<li>$g_table_border</li>
 <li>$g_tag_attrs</li>
 <li>$g_unicode_glyphs</li>
 <li>$g_utf8_converters</li>
-<li>$g_utf8_to_encodings_mapping_pdf</li>
-<li>$g_valign</li>
 </ul>
-There's no need to initialize or modify these variables; just don't accidentally overwrite them. Most of them
-are here for "historical" reasons and will be eventually removed.
+There's no need to initialize or modify these variables; just don't accidentally overwrite them. Some of them
+are here for "historical" reasons and will be eventually removed. Some are here due lack of static class variables
+in older PHP versions.
 </p>
 
 <h1>Conversion pipeline</h1>
@@ -182,10 +99,13 @@ class Pipeline {
   var $destination;
 
   function Pipeline();
-  
+
+  function configure($options);
   function process($data_id, &$media);
   function process_batch($data_id_array, &$media);
   function error_message();
+
+  function &get_dispatcher();
 }
 </pre>
 </div>
@@ -324,8 +244,8 @@ Make some modifications in document tree (in-place) before the layout engine hav
 </dd>
 </dl>
 
-<div class="class">
-<b>PreTreeFilterHTML2PSFields</b> handlers the processing
+<div class="class" id="filter-pre-html2ps-fields">
+<b>PreTreeFilterHTML2PSFields</b> handles the processing
 of special fields (such a date, page count, page number, etc.). 
 </div>
 
@@ -433,11 +353,18 @@ in the browser window.
 </div>
 
 <h2>Implementing your own fetcher class</h2>
+<p>
 Sometimes you may need to convert HTML code taken from database or from other non-standard sources.
 In this case you should implement <b>Fetcher</b> interface yourself, returning the string to be converted 
 from the <span class="method_name">get_data</span> method. Additional parameters (like database connection settings,
 template variables, etc) may be specified either as globals (not recommended, though), passed as a parameters 
 to constructor of fetcher object or as $dataId parameter of <span class="method_name">get_data</span> method.
+</p>
+<p>
+Keep in mind that if you're including files from your HTML code (e.g. stylesheets or images), you should either
+return null from your fetcher for URL of these files, or handle them yourself. Unless you do it, 
+these files will not be available.
+</p>
 
 <pre>
 class MyFetcherLocalFile extends Fetcher {
@@ -457,7 +384,7 @@ class MyFetcherLocalFile extends Fetcher {
 }
 </pre>
 
-Also see <tt>sample.simplest.php</tt> file.
+Also see <tt>sample.simplest.from.file.php</tt> and <tt>sample.simples.from.memory.php</tt> files.
 
 <h1>Class dependencies</h1>
 The pipeline object contains the following:

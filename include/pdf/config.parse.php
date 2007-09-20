@@ -1,7 +1,9 @@
 <?php
-// $Header: /cvsroot/html2ps/config.parse.php,v 1.1 2005/12/13 18:24:45 Konstantin Exp $
+// $Header: /cvsroot/html2ps/config.parse.php,v 1.7 2007/05/07 13:28:39 Konstantin Exp $
 
-require_once('font.resolver.class.php');
+require_once(HTML2PS_DIR.'font.resolver.class.php');
+require_once(HTML2PS_DIR.'treebuilder.class.php');
+require_once(HTML2PS_DIR.'media.layout.inc.php');
 
 // Get list of media types being used by script; 
 // It should be a list of two types: 
@@ -9,8 +11,7 @@ require_once('font.resolver.class.php');
 // 2. 'all' media type
 //
 function config_get_allowed_media() {
-  global $g_config;
-  return array($g_config['cssmedia'],"all");
+  return array($GLOBALS['g_config']['cssmedia'], 'all');
 }
 
 function parse_encoding_override_node_config_file($root, &$resolver) {
@@ -47,9 +48,21 @@ function parse_metrics_node_config_file($root, &$resolver) {
 }
 
 function parse_ttf_node_config_file($root, &$resolver) {
+  switch (FONT_EMBEDDING_MODE) {
+  case 'all':
+    $embed_flag = true;
+    break;
+  case 'none':
+    $embed_flag = false;
+    break;
+  case 'config':
+    $embed_flag = (bool)$root->get_attribute('embed');
+    break;
+  }
+
   $resolver->add_ttf_mapping($root->get_attribute('typeface'),
                              $root->get_attribute('file'),
-                             (bool)$root->get_attribute('embed'));
+                             $embed_flag);
 }
 
 function parse_family_encoding_override_node_config_file($family, $root, &$resolver) {
@@ -115,7 +128,7 @@ function parse_fonts_node_config_file($root, &$resolver) {
     if ($child->node_type() == XML_ELEMENT_NODE) {
       switch ($child->tagname()) {
       case "alias":
-        $resolver->add_alias($child->get_attribute('alias'), $child->get_attribute('family'));
+        $resolver->add_alias(strtolower($child->get_attribute('alias')), $child->get_attribute('family'));
         break;
       case "family":
         parse_fonts_family_node_config_file($child, $resolver);
@@ -135,6 +148,10 @@ function parse_fonts_node_config_file($root, &$resolver) {
 }
 
 function parse_config_file($filename) {
+  // Save old magic_quotes_runtime value and disable it
+  $mq_runtime = get_magic_quotes_runtime();
+  set_magic_quotes_runtime(0);
+
   $doc = TreeBuilder::build(file_get_contents($filename));
   $root=$doc->document_element();
 
@@ -152,11 +169,14 @@ function parse_config_file($filename) {
         break;
       case "media":
         add_predefined_media($child->get_attribute('name'), 
-                             (int)$child->get_attribute('height'),
-                             (int)$child->get_attribute('width'));
+                             (float)$child->get_attribute('height'),
+                             (float)$child->get_attribute('width'));
         break;
       };      
     };
   } while ($child = $child->next_sibling());
+
+  // Restore old magic_quotes_runtime values
+  set_magic_quotes_runtime($mq_runtime);
 }
 ?>

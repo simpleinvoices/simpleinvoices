@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/html2ps/index.php,v 1.15 2006/04/16 16:54:58 Konstantin Exp $
+// $Header: /cvsroot/html2ps/demo/index.php,v 1.5 2007/05/06 18:49:30 Konstantin Exp $
 /* remarked out for testing at halfadot
    unknown if these included elements are needed
   require_once('config.inc.php');
@@ -145,13 +145,21 @@ div.form-row span.formw {
 div.spacer {
         clear: both;
 }
+div.comment {
+  line-height: 1.1em;
+}
 </style>
 </head>
 <body>
 <h1>html2ps/pdf demo</h1>
 
 <p><a target="_blank" href="http://www.cs.wisc.edu/~ghost/" title="More about GhostView - [new window]">GhostView</a> can be used to read PostScript files, and <a target="_blank"  href="http://www.adobe.com/products/acrobat/readstep2.html" title="Download Adobe Acrobat - [new window]">Adobe Acrobat Reader</a> can be used to read PDF files.</p>
-<p>See also: <a target="_blank" href="../help/index.html" title="Table of contents - [new window]">html2ps/pdf documentation</a></p>
+<p>See also:
+<ul>
+<li><a target="_blank" href="../help/index.html" title="Table of contents - [new window]">html2ps/pdf documentation</a></li>
+<li><a href="systemcheck.php">System requirements checking script</a></li>
+</ul>
+</p>
 
 <div style="width:500px;">
 <form action="html2ps.php" method="get" style="margin-top:12px">
@@ -171,6 +179,14 @@ div.spacer {
 <input type="text" tabindex="1" name="batch[]" size="30" value="www.google.com"/><br/>
 <input type="text" tabindex="1" name="batch[]" size="30" value="www.altavista.com"/><br/>
 <input type="text" tabindex="1" name="batch[]" size="30" value="www.msn.com"/><br/>
+<input type="text" tabindex="1" name="batch[]" size="30" value="www.msn.com"/><br/>
+</span>
+</div>
+
+<div class="form-row">
+<label class="hand" for="ur"><span class="labl">Use proxy: </span></label>
+<span class="formw">
+<input type="text" tabindex="1" name="proxy" size="30" value=""/><br/>
 </span>
 </div>
 
@@ -181,53 +197,54 @@ div.spacer {
 <legend>&nbsp;Format Requirements&nbsp;</legend>
 <div class="form-row">
 <label class="hand" for="pixel">
-<span class="labl">Page width [pixels]</span></label>
+<span class="labl"><a href="../help/calling.html#pixels" title="Read description of 'pixels' parameter">Page width [pixels]</a></span></label>
 <span class="formw">
 <select name="pixels" id="pixel">
 <option value="640">640</option>
-<option value="800" selected="selected">800</option>
-<option value="1024">1024</option>
+<option value="800">800</option>
+<option value="1024" selected="selected">1024</option>
+<option value="1280">1280</option>
 </select>
 </span>
 </div>
 
 <div class="form-row">
-<label class="hand" for="scalepoint"><span class="labl">Keep screen pixel/point ratio</span></label>
+<label class="hand" for="scalepoint"><span class="labl"><a href="../help/calling.html#scalepoints" title="Read description of 'scalepoints' parameter">Keep screen pixel/point ratio</a></span></label>
 <span class="formw">
 <input class="nulinp" type="checkbox" name="scalepoints" value="1" checked="checked" id="scalepoint"/>
 </span>
 </div>
 
 <div class="form-row">
-<label class="hand" for="renderi"><span class="labl">Render images</span></label>
+<label class="hand" for="renderi"><span class="labl"><a href="../help/calling.html#renderimages" title="Read description of 'renderimages' parameter">Render images</a></span></label>
 <span class="formw">
  <input class="nulinp" type="checkbox" name="renderimages" value="1" checked="checked" id="renderi"/>
 </span>
 </div>
 
 <div class="form-row">
-<label class="hand" for="renderi"><span class="labl">Render hyperlinks</span></label>
+<label class="hand" for="renderi"><span class="labl"><a href="../help/calling.html#renderlinks" title="Read description of 'renderlinks' parameter">Render hyperlinks</a></span></label>
 <span class="formw">
  <input class="nulinp" type="checkbox" name="renderlinks" value="1" checked="checked" id="renderl"/>
 </span>
 </div>
 
 <div class="form-row">
-<label class="hand" for="renderf"><span class="labl">Interactive forms</span></label>
+<label class="hand" for="renderf"><span class="labl"><a href="../help/calling.html#renderforms" title="Read description of 'renderforms' parameter">Interactive forms</a></span></label>
 <span class="formw">
-<input class="nulinp" type="checkbox" name="renderforms" value="1" id="renderl"/><sup style="color: red">FPDF/PDFLIB output only!</sup>
+<input class="nulinp" type="checkbox" name="renderforms" value="1" id="renderl"/><sup style="color: red">FPDF/PDFLIB <em>1.6</em> output only!</sup>
 </span>
 </div>
 
 <div class="form-row">
-<label class="hand" for="renderi"><span class="labl">Substitute special fields</span></label>
+<label class="hand" for="renderi"><span class="labl"><a href="../help/calling.html#renderfields" title="Read description of 'renderfields' parameter">Substitute special fields</a></span></label>
 <span class="formw">
  <input class="nulinp" type="checkbox" name="renderfields" value="1" checked="checked" id="renderl"/>
 </span>
 </div>
 
 <div class="form-row">
-<label class="hand" for="medi"><span class="labl">Media</span></label>
+<label class="hand" for="medi"><span class="labl"><a href="../help/calling.html#media" title="Read description of 'renderforms' parameter">Media</a></span></label>
 <span class="formw">
 <select name="media" id="medi">
 <!--Can use php here to obtain predefined media types OR leave as is-->
@@ -248,19 +265,22 @@ div.spacer {
 <option value="A8">A8</option>
 <option value="A9">A9</option>
 <option value="A10">A10</option>
+<option value="Screenshot640">Image 640&times;480</option>
+<option value="Screenshot800">Image 800&times;600</option>
+<option value="Screenshot1024">Image 1024&times;768</option>
 <!--end php predefined media options if used-->
 </select>
 </span>
 </div>
 
 <div class="form-row">
-<label class="hand" for="cssmedia"><span class="labl">CSS Media</span></label>
+<label class="hand" for="cssmedia"><span class="labl"><a href="../help/calling.html#renderforms" title="Read description of 'cssmedia' parameter">CSS Media</a></span></label>
 <span class="formw">
 <select name="cssmedia" id="cssmedia">
 <option value="handheld">Handheld</option>
 <option value="print">Print</option>
 <option value="projection">Projection</option>
-<option value="screen" selected="selected">Screen</option>
+<option value="Screen" selected="selected">Screen</option>
 <option value="tty">TTY</option>
 <option value="tv">TV</option>
 </select>
@@ -268,55 +288,48 @@ div.spacer {
 </div>
 
 <div class="form-row">
-<label class="hand" for="lm"><span class="labl">Left margin:mm</span></label>
+<label class="hand" for="lm"><span class="labl"><a href="../help/calling.html#margins" title="Read description of 'leftmargin' parameter">Left margin:mm</a></span></label>
 <span class="formw">
 <input id="lm" type="text" size="3" name="leftmargin" value="30"/>
 </span>
 </div>
 
 <div class="form-row">
-<label class="hand" for="rm"><span class="labl">Right margin:mm</span></label>
+<label class="hand" for="rm"><span class="labl"><a href="../help/calling.html#margins" title="Read description of 'rightmargin' parameter">Right margin:mm</a></span></label>
 <span class="formw">
 <input id="rm" type="text" size="3" name="rightmargin" value="15"/>
 </span>
 </div>
 
 <div class="form-row">
-<label class="hand" for="tm"><span class="labl">Top margin:mm</span></label>
+<label class="hand" for="tm"><span class="labl"><a href="../help/calling.html#margins" title="Read description of 'topmargin' parameter">Top margin:mm</a></span></label>
 <span class="formw">
 <input id="tm" type="text" size="3" name="topmargin" value="15"/>
 </span>
 </div>
 <div class="form-row">
-<label class="hand" for="bm"><span class="labl">Bottom margin:mm</span></label>
+<label class="hand" for="bm"><span class="labl"><a href="../help/calling.html#margins" title="Read description of 'bottommargin' parameter">Bottom margin:mm</a></span></label>
 <span class="formw">
 <input id="bm" type="text" size="3" name="bottommargin" value="15"/>
 </span>
 </div>
 
 <div class="form-row">
-<label class="hand" for="landsc"><span class="labl">Landscape</span></label>
+<label class="hand" for="automargins"><span class="labl">Auto-size vertical margins</span></label>
+<span class="formw">
+<input id="automargins" class="nulinp" type="checkbox" name="automargins" value="1"/>
+</span>
+</div>
+
+<div class="form-row">
+<label class="hand" for="landsc"><span class="labl"><a href="../help/calling.html#landscape" title="Read description of 'landscape' parameter">Landscape</a></span></label>
 <span class="formw">
 <input id="landsc" class="nulinp" type="checkbox" name="landscape" value="1"/>
 </span>
 </div>
 
 <div class="form-row">
-<label class="hand" for="pageborder"><span class="labl">Show page border</span></label>
-<span class="formw">
-<input id="pageborder" class="nulinp" type="checkbox" name="pageborder" value="1"/>
-</span>
-</div>
-
-<div class="form-row">
-<label class="hand" for="debugbox"><span class="labl">Show boxes (debugging only)</span></label>
-<span class="formw">
-<input id="debugbox" class="nulinp" type="checkbox" name="debugbox" value="1"/>
-</span>
-</div>
-
-<div class="form-row">
-<label class="hand" for="encod"><span class="labl">Encoding</span></label>
+<label class="hand" for="encod"><span class="labl"><a href="../help/calling.html#encoding" title="Read description of 'encoding' parameter">Encoding</a></span></label>
 <span class="formw">
 <select id="encod" name="encoding">
 <option value="" selected="selected">Autodetect</option>
@@ -326,6 +339,7 @@ div.spacer {
 <option value="iso-8859-3">iso-8859-3</option>
 <option value="iso-8859-4">iso-8859-4</option>
 <option value="iso-8859-5">iso-8859-5</option>
+<option value="iso-8859-6">iso-8859-6</option>
 <option value="iso-8859-7">iso-8859-7</option>
 <option value="iso-8859-9">iso-8859-9</option>
 <option value="iso-8859-10">iso-8859-10</option>
@@ -344,10 +358,10 @@ div.spacer {
 </fieldset>
 
 <fieldset>
-<legend>&nbsp;Additional data&nbsp;</legend>
+<legend>&nbsp;Content generation&nbsp;</legend>
 <div class="form-row">
 <label class="hand" for="header">
-<span class="labl">Header</span></label>
+<span class="labl"><a href="../help/calling.html#headerhtml">Header</a></span></label>
 <span class="formw">
 <textarea name="headerhtml" id="header">
 </textarea>
@@ -356,7 +370,7 @@ div.spacer {
 
 <div class="form-row">
 <label class="hand" for="footer">
-<span class="labl">Footer</span></label>
+<span class="labl"><a href="../help/calling.html#footerhtml">Footer</a></span></label>
 <span class="formw">
 <textarea name="footerhtml" id="footer">
 </textarea>
@@ -365,10 +379,67 @@ div.spacer {
 
 <div class="form-row">
 <label class="hand" for="watermark">
-<span class="labl">Watermark</span></label>
+<span class="labl"><a href="../help/calling.html#watermarkhtml" title="Read description of 'watermarkhtml' parameter">Watermark</a></span></label>
 <span class="formw">
 <textarea name="watermarkhtml" id="watermark">
 </textarea>
+<div class="comment">
+Note that watermarking is not supported by some output drivers; currently you may place &quot;watermarks&quot;
+using FPDF and PDFLIB output only.
+</div>
+</span>
+</div>
+
+<div class="form-row">
+<label class="hand" for="toc">
+<span class="labl">Table of contents</span></label>
+<span class="formw">
+<input type="checkbox" value="1" name="toc"/>
+</span>
+</div>
+
+<div class="form-row">
+<label class="hand" for="toc-location">
+<span class="labl">Place TOC at:</span></label>
+<span class="formw">
+<select id="toc-location" name="toc-location">
+<option value="before">first page</option>
+<option value="after">last page</option>
+<option value="placeholder">placeholder</option>
+</select>
+</span>
+</div>
+
+<div class="spacer"></div><br />
+</fieldset>
+
+<fieldset>
+<legend>&nbsp;Debugging&nbsp;</legend>
+<div class="form-row">
+<label class="hand" for="pageborder"><span class="labl"><a href="../help/calling.html#pageborder" title="Read description of 'pageborder' parameter">Show page border</a></span></label>
+<span class="formw">
+<input id="pageborder" class="nulinp" type="checkbox" name="pageborder" value="1"/>
+</span>
+</div>
+
+<div class="form-row">
+<label class="hand" for="debugbox"><span class="labl"><a href="../help/calling.html#debugbox" title="Read description of 'debugbox' parameter">Show content boxes</a></span></label>
+<span class="formw">
+<input id="debugbox" class="nulinp" type="checkbox" name="debugbox" value="1"/>
+</span>
+</div>
+
+<div class="form-row">
+<label class="hand" for="debugnoclip"><span class="labl">Disable clipping</span></label>
+<span class="formw">
+<input id="debugnoclip" class="nulinp" type="checkbox" name="debugnoclip" value="1"/>
+</span>
+</div>
+
+<div class="form-row">
+<label class="hand" for="debugbox"><span class="labl">Use "smart" pagebreaking algorithm</span></label>
+<span class="formw">
+<input id="debugbox" class="nulinp" type="checkbox" name="smartpagebreak" checked="checked" value="1"/>
 </span>
 </div>
 
@@ -388,6 +459,8 @@ div.spacer {
 <label for="pdf">&nbsp;</label>
 <br /><input class="nulinp" type="radio" id="pdf" name="method" value="pdflib" />PDF (PDFLIB)
 <br /><input class="nulinp" type="radio" id="pdf" name="method" value="fpdf" checked="checked"/>PDF (FPDF)
+<br /><input class="nulinp" type="radio" id="png" name="method" value="png"/>Image (PNG) <span style="color: red; vertical-align: super; font-size: smaller;">beta</span>
+<!--<br /><input class="nulinp" type="radio" id="png" name="method" value="pcl"/>PCL <span style="color: red; vertical-align: super; font-size: smaller;">alpha</span>-->
 </span>
 </div>
 
@@ -418,7 +491,13 @@ Note: not all output methods support all PDF compatibility levels!
 <label class="hand" for="compr"><span class="labl">Filters</span></label>
 <span class="formw">
 <input class="nulinp" type="checkbox" id="compr" name="ps2pdf"   value="1"/>Convert Postscript to PDF<label for="compr1">&nbsp;&nbsp;</label><br />
-<input class="nulinp" type="checkbox" id="compr" name="compress" value="1"/>Compress output file using GZIP (PostScript only)<label for="compr1">&nbsp;&nbsp;</label><br />
+<input class="nulinp" type="checkbox" id="compr" name="compress" value="1"/>
+Compress output file using GZIP<label for="compr1">&nbsp;&nbsp;</label>
+<div class="comment">
+<span style="color: red;">Don't use this option with PDF output</span>, 
+as Acrobat Reader will treat compressed file as damaged. 
+</div>
+<br />
 </span>
 </div>
 
@@ -448,6 +527,9 @@ Note: not all output methods support all PDF compatibility levels!
 <p>html2ps is free and open-source for commercial and non-commercial use. <a target=_blank href="http://www.tufat.com/html2ps.php" title="More about html2ps">Read more about html2ps</a>.</p>
 
 <p><a target=_blank href="https://www.paypal.com/xclick/business=g8z@yahoo.com&item_name=html2ps+donation&no_shipping=1&currency_code=USD">Donate to the html2ps project</a></p>
+
+<hr/>
+&copy; 2005&ndash;2006 Darren Gates, Konstantin Bournayev 
 
 </body>
 </html>

@@ -7,7 +7,11 @@ class ContentType {
     $this->default_extension = $extension;
     $this->mime_type = $mime;
   }
-  
+
+  function png() {
+    return new ContentType('png', 'image/png');
+  }
+
   function gz() {
     return new ContentType('gz', 'application/gzip');
   }

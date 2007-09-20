@@ -1,34 +1,28 @@
 <?php
-// $Header: /cvsroot/html2ps/css.pseudo.cellspacing.inc.php,v 1.4 2005/09/25 16:21:44 Konstantin Exp $
+// $Header: /cvsroot/html2ps/css.pseudo.cellspacing.inc.php,v 1.6 2006/09/07 18:38:14 Konstantin Exp $
 
-class CSSCellSpacing extends CSSProperty {
-  function CSSCellSpacing() { $this->CSSProperty(false, false); }
-
-  // this pseudo value should be inherited only by the table cells/rows; nested tables 
-  // should get a default value
-  //
-  function inherit() { 
-    // Determine parent 'display' value
-    $handler =& get_css_handler('display');
-
-    // 'display' CSS property processed AFTER this; so parent display value will be
-    // on the top of the stack
-    //
-    $parent_display = $handler->get();
-
-    // Inherit vertical-align from table-rows 
-    if ($parent_display === "table-row" || $parent_display === "table") {
-      $this->push($this->get());
-      return;
-    }
-
-    $this->push(is_inline_element($parent_display) ? $this->get() : $this->default_value());
+class CSSCellSpacing extends CSSPropertyHandler {
+  function CSSCellSpacing() { 
+    $this->CSSPropertyHandler(true, false); 
   }
 
-  function default_value() { return "1px"; }
-  function parse($value) { return $value; }
+  function default_value() { 
+    return Value::fromData(1, UNIT_PX);
+  }
+
+  function parse($value) { 
+    return Value::fromString($value);
+  }
+
+  function getPropertyCode() {
+    return CSS_HTML2PS_CELLSPACING;
+  }
+
+  function getPropertyName() {
+    return '-html2ps-cellspacing';
+  }
 }
 
-register_css_property('-cellspacing', new CSSCellSpacing);
+CSS::register_css_property(new CSSCellSpacing);
 
 ?>

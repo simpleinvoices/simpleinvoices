@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/html2ps/css.list-style-type.inc.php,v 1.9 2006/04/16 16:54:57 Konstantin Exp $
+// $Header: /cvsroot/html2ps/css.list-style-type.inc.php,v 1.13 2006/09/07 18:38:14 Konstantin Exp $
 
 // FIXME: supported only partially
 define('LST_NONE',0);
@@ -13,7 +13,7 @@ define('LST_UPPER_ROMAN',7);
 define('LST_LOWER_LATIN',8);
 define('LST_UPPER_LATIN',9);
 
-class CSSListStyleType extends CSSSubProperty {
+class CSSListStyleType extends CSSSubFieldProperty {
   // CSS 2.1: default value for list-style-type is 'disc'
   function default_value() { return LST_DISC; }
 
@@ -59,20 +59,28 @@ class CSSListStyleType extends CSSSubProperty {
     // undefined constants if I'm using the equivalent 'switch' construct instead of 'if'
     switch ($type) {
     case LST_DECIMAL:
-      return $num."."; 
+      return $num; 
     case LST_DECIMAL_LEADING_ZERO:
-      return sprintf("%02d.",$num); 
+      return sprintf("%02d",$num); 
     case LST_LOWER_LATIN:
-      return chr(ord('a')+($num-1) % 26)."."; 
+      return chr(ord('a')+($num-1) % 26); 
     case LST_UPPER_LATIN:
-      return chr(ord('A')+($num-1) % 26)."."; 
+      return chr(ord('A')+($num-1) % 26); 
     case LST_LOWER_ROMAN:
-      return strtolower(arabic_to_roman($num)."."); 
+      return strtolower(arabic_to_roman($num)); 
     case LST_UPPER_ROMAN:
-      return arabic_to_roman($num)."."; 
+      return arabic_to_roman($num); 
     default:
       return "";
     }
+  }
+
+  function getPropertyCode() {
+    return CSS_LIST_STYLE_TYPE;
+  }
+
+  function getPropertyName() {
+    return 'list-style-type';
   }
 }
 

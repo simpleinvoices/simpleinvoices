@@ -13,11 +13,11 @@
 function merge_height_constraint($hc1, $hc2) {
   // First constraint is constant; return this, as second constraint 
   // will never override it
-  if ($hc1->constant !== null) { return $hc1; };
+  if (!is_null($hc1->constant)) { return $hc1; };
 
   // Second constraint is constant; first is not constant;
   // return second, as it is more important
-  if ($hc2->constant !== null) { return $hc2; };
+  if (!is_null($hc2->constant)) { return $hc2; };
 
   // Ok, both constraints are not constant. Check if there's any diapason 
   // constraints
@@ -25,10 +25,10 @@ function merge_height_constraint($hc1, $hc2) {
   // Second constraint is free constraint, return first one, as 
   // if it is a non-free it should have precedence, otherwise 
   // it will be free constraint too
-  if ($hc2->min === null && $hc2->max === null) { return $hc1; };
+  if (is_null($hc2->min) && is_null($hc2->max)) { return $hc1; };
   
   // The same rule applied if the first constraint is free constraint
-  if ($hc1->min === null && $hc1->max === null) { return $hc2; };
+  if (is_null($hc1->min) && is_null($hc1->max)) { return $hc2; };
 
   // If we got here it means both constraints are diapason constraints.
   return $hc1;
@@ -49,15 +49,17 @@ class HCConstraint {
   var $max;
 
   function applicable(&$box) {
-    if ($this->constant !== null) { return $this->applicable_value($this->constant, $box); }
+    if (!is_null($this->constant)) { 
+      return $this->applicable_value($this->constant, $box); 
+    }
 
     $applicable_min = false;
-    if ($this->min !== null) {
+    if (!is_null($this->min)) {
       $applicable_min = $this->applicable_value($this->min, $box);
     };
 
     $applicable_max = false;
-    if ($this->max !== null) {
+    if (!is_null($this->max)) {
       $applicable_max = $this->applicable_value($this->max, $box);
     };
 
@@ -107,14 +109,14 @@ class HCConstraint {
 
       // if parent does not have constrained height, return null - no height constraint can be applied
       // Table cells should be processed separately
-      if (!is_a($box->parent,"TableCellBox") &&
-          $box->parent->_height_constraint->constant === null &&
-          $box->parent->_height_constraint->min === null &&
-          $box->parent->_height_constraint->max === null) {
+      if (!$box->parent->isCell() &&
+          is_null($box->parent->_height_constraint->constant) &&
+          is_null($box->parent->_height_constraint->min) &&
+          is_null($box->parent->_height_constraint->max)) {
         return $default;
       };
 
-      if (is_a($box->parent,"TableCellBox")) {
+      if ($box->parent->isCell()) {
         if (!$no_table_recursion) {
           $rhc = $box->parent->parent->get_rhc($box->parent->row);
           if ($rhc->is_null()) { return $default; };
@@ -131,32 +133,39 @@ class HCConstraint {
     }
   }
 
-  function create($box) {   
+  function &create(&$box) {   
     // Determine if there's constant restriction
-    $handler =& get_css_handler('height');
-    if (!$handler->is_default($handler->get())) {
-      $constant = $handler->get();
-    } else {
+    $value = $box->getCSSProperty(CSS_HEIGHT);
+
+    if ($value->isAuto($value)) {
       $constant = null;
+    } elseif ($value->isPercentage()) {
+      $constant = array($value->getPercentage(), true);
+    } else {
+      $constant = array($value->getPoints(), false);
     };
 
     // Determine if there's min restriction
-    $handler =& get_css_handler('min-height');
-    if (!$handler->is_default($handler->get())) {
-      $min = $handler->get();
-    } else {
+    $value = $box->getCSSProperty(CSS_MIN_HEIGHT);
+    if ($value->isAuto($value)) {
       $min = null;
+    } elseif ($value->isPercentage()) {
+      $min = array($value->getPercentage(), true);
+    } else {
+      $min = array($value->getPoints(), false);
     };
 
     // Determine if there's max restriction
-    $handler =& get_css_handler('max-height');
-    if (!$handler->is_default($handler->get())) {
-      $max = $handler->get();
-    } else {
+    $value = $box->getCSSProperty(CSS_MAX_HEIGHT);
+    if ($value->isAuto($value)) {
       $max = null;
+    } elseif ($value->isPercentage()) {
+      $max = array($value->getPercentage(), true);
+    } else {
+      $max = array($value->getPoints(), false);
     };
 
-    $constraint = new HCConstraint($constant, $min, $max);
+    $constraint =& new HCConstraint($constant, $min, $max);
     return $constraint;
   }
 
@@ -173,7 +182,7 @@ class HCConstraint {
   }
 
   function apply_min($value, &$box, $no_table_recursion) {
-    if ($this->min === null) {
+    if (is_null($this->min)) {
       return $value;
     } else {
       return max($this->_fix_value($this->min, $box, $value, $no_table_recursion), $value);
@@ -181,7 +190,7 @@ class HCConstraint {
   }
 
   function apply_max($value, &$box, $no_table_recursion) {
-    if ($this->max === null) {
+    if (is_null($this->max)) {
       return $value;
     } else {
       return min($this->_fix_value($this->max, $box, $value, $no_table_recursion), $value);
@@ -189,7 +198,7 @@ class HCConstraint {
   }
 
   function apply($value, &$box, $no_table_recursion = false) {
-    if ($this->constant !== null) {
+    if (!is_null($this->constant)) {
       $height = $this->_fix_value($this->constant, $box, $value, $no_table_recursion);
     } else {
       $height =  $this->apply_min($this->apply_max($value, $box, $no_table_recursion), $box, $no_table_recursion);
@@ -203,25 +212,19 @@ class HCConstraint {
     return $height;
   }
 
+  function is_min_null() {
+    if (is_null($this->min)) {
+      return true;
+    };
+
+    return $this->min[0] == 0;
+  }
+
   function is_null() {
     return 
-      $this->max === null && 
-      $this->min == null && 
-      $this->constant == null;
-  }
-
-  function units2pt($base) {
-    $this->units2pt_value($this->max, $base);
-    $this->units2pt_value($this->min, $base);
-    $this->units2pt_value($this->constant, $base);
-  }
-
-  function units2pt_value(&$value, $base) {
-    if (is_null($value)) { return; };
-
-    if (!$value[1]) {
-      $value[0] = units2pt($value[0], $base);
-    };
+      is_null($this->max) && 
+      $this->is_min_null() && 
+      is_null($this->constant);
   }
 }
 ?>

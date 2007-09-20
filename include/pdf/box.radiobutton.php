@@ -1,7 +1,9 @@
 <?php
-// $Header: /cvsroot/html2ps/box.radiobutton.php,v 1.16 2006/03/22 19:02:36 Konstantin Exp $
+// $Header: /cvsroot/html2ps/box.radiobutton.php,v 1.20 2006/11/11 13:43:51 Konstantin Exp $
 
-class RadioBox extends GenericFormattedBox {
+require_once(HTML2PS_DIR.'box.inline.simple.php');
+
+class RadioBox extends SimpleInlineBox {
   var $_checked;
 
   /**
@@ -25,13 +27,17 @@ class RadioBox extends GenericFormattedBox {
       $value = sprintf("___Value%s",md5(time().rand()));
     };
 
-    $box =& new RadioBox($checked, $value);
+    $css_state = $pipeline->getCurrentCSSState();
+
+    $box =& new RadioBox($checked, $value,
+                         $css_state->getProperty(CSS_HTML2PS_FORM_RADIOGROUP));
+    $box->readCSS($css_state);
     return $box;
   }
 
-  function RadioBox($checked, $value) {
+  function RadioBox($checked, $value, $group_name) {
     // Call parent constructor
-    $this->GenericFormattedBox();
+    $this->GenericBox();
 
     // Check the box state
     $this->_checked = $checked;
@@ -41,28 +47,35 @@ class RadioBox extends GenericFormattedBox {
      */
     $this->_value = trim($value);
 
-    $handler =& get_css_handler('-html2ps-form-radiogroup');
-    $this->_group_name = $handler->get();
+    $this->_group_name = $group_name;
 
     // Setup box size:
-    $this->default_baseline = units2pt(CHECKBOX_SIZE);
-    $this->height           = units2pt(CHECKBOX_SIZE);
-    $this->width            = units2pt(CHECKBOX_SIZE);
+    $this->default_baseline = units2pt(RADIOBUTTON_SIZE);
+    $this->height           = units2pt(RADIOBUTTON_SIZE);
+    $this->width            = units2pt(RADIOBUTTON_SIZE);
+
+    $this->setCSSProperty(CSS_DISPLAY,'-radio');
   }
 
   // Inherited from GenericFormattedBox
-  function get_min_width(&$context) { return $this->get_full_width($context); }
-  function get_max_width(&$context) { return $this->get_full_width($context); }
+  function get_min_width(&$context) { 
+    return $this->get_full_width($context); 
+  }
+  
+  function get_max_width(&$context) { 
+    return $this->get_full_width($context); 
+  }
+  
+  function get_max_width_natural(&$context) { 
+    return $this->get_full_width($context); 
+  }
 
   function reflow(&$parent, &$context) {  
-    GenericFormattedBox::reflow($parent, $context);
-    
+    GenericFormattedBox::reflow($parent, $context);   
+
     // set default baseline
     $this->baseline = $this->default_baseline;
     
-//     // Vertical-align
-//     $this->_apply_vertical_align($parent);
-
     // append to parent line box
     $parent->append_line($this);
 
@@ -113,6 +126,14 @@ class RadioBox extends GenericFormattedBox {
     };
 
     return true;
+  }
+
+  function get_ascender() {
+    return $this->get_height();
+  }
+
+  function get_descender() {
+    return 0;
   }
 }
 ?>

@@ -1,41 +1,41 @@
 <?php
-// $Header: /cvsroot/html2ps/css.rules.inc.php,v 1.6 2006/03/19 09:25:36 Konstantin Exp $
+// $Header: /cvsroot/html2ps/css.rules.inc.php,v 1.10 2007/03/23 18:33:34 Konstantin Exp $
 
 class CSSRule {
   var $selector;
   var $body;
   var $baseurl;
   var $order;
-  var $important;
 
   var $specificity;
   var $pseudoelement;
 
-  function apply(&$root, &$pipeline) {
-    return apply_css_rule_obj($this->body, $this->baseurl, $root, $pipeline);
+  function apply(&$root, &$state, &$pipeline) {
+    $pipeline->push_base_url($this->baseurl);
+    $this->body->apply($state);
+    $pipeline->pop_base_url();
+  }
+
+  function addProperty($property) {
+    $this->body->addProperty($property);
   }
 
   function CSSRule($rule, &$pipeline) {
     $this->selector = $rule[0];
-    $this->body     = $rule[1];
+    $this->body     = $rule[1]->copy();
     $this->baseurl  = $rule[2];
     $this->order    = $rule[3];
 
-    // Pre-parse property values
-    foreach (array_keys($this->body) as $key) {
-      $handler =& get_css_handler($key);
-      if ($handler) { 
-        $value = $this->parse_important($key, $this->body[$key]);
-
-        $pipeline->push_base_url($this->baseurl);
-        $this->body[$key] = $handler->parse($value, $pipeline); 
-        $pipeline->pop_base_url();
-      };
-    };
-
-
     $this->specificity   = css_selector_specificity($this->selector);
     $this->pseudoelement = css_find_pseudoelement($this->selector);
+  }
+
+  function setProperty($key, $value, &$pipeline) {
+    $this->body->setPropertyValue($key, $value);
+  }
+
+  function &getProperty($key) {
+    return $this->body->getPropertyValue($key);
   }
 
   function get_order() { return $this->order; }
@@ -45,19 +45,6 @@ class CSSRule {
 
   function match($root) {
     return match_selector($this->selector, $root);
-  }
-
-  // Check if this property contains !important declaration,
-  // store information about important properties and REMOVE
-  // this declaration from the value
-  //
-  function parse_important($key, $value) {
-    if (preg_match("/^(.*)!\s*important\s*$/",$value,$matches)) {
-      $this->important[$key] = true;
-      return $matches[1];
-    } else {
-      return $value;
-    };
   }
 }
 

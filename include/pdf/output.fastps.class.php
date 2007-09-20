@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/html2ps/output.fastps.class.php,v 1.8 2006/03/19 09:25:36 Konstantin Exp $
+// $Header: /cvsroot/html2ps/output.fastps.class.php,v 1.18 2007/05/17 13:55:13 Konstantin Exp $
 
 define('FASTPS_STATUS_DOCUMENT_INITIALIZED',0);
 define('FASTPS_STATUS_OUTPUT_STARTED',1);
@@ -15,9 +15,13 @@ class OutputDriverFastPS extends OutputDriverGenericPS {
   var $underline;
   var $linethrough;
 
+  function OutputDriverFastPS(&$image_encoder) { 
+    $this->OutputDriverGenericPS($image_encoder);
+  }
+
   function add_link($x, $y, $w, $h, $target) { 
     $this->write(sprintf("[ /Rect [ %.2f %.2f %.2f %.2f ] /Action << /Subtype /URI /URI (%s) >> /Border [0 0 0] /Subtype /Link /ANN pdfmark\n",
-                         $x, $y, $x+$w, $y-$h, quote_ps($target)));
+                         $x, $y, $x+$w, $y-$h, $this->_string($target)));
   }
 
   function add_local_link($left, $top, $width, $height, $anchor) { 
@@ -35,9 +39,9 @@ class OutputDriverFastPS extends OutputDriverGenericPS {
   }
 
   function close() {
-    $this->_show_watermark();
-
-    if ($this->status != FASTPS_STATUS_OUTPUT_STARTED) { return; }
+    if ($this->status != FASTPS_STATUS_OUTPUT_STARTED) { 
+      return; 
+    }
     $this->_terminate_output();
 
     fclose($this->data);
@@ -57,43 +61,13 @@ class OutputDriverFastPS extends OutputDriverGenericPS {
     $this->linethrough = $linethrough;
   }
   
-  function encoding($encoding) {
-    $encoding = trim(strtolower($encoding));
-
-    $translations = array(
-                          'iso-8859-1'   => "ISO-8859-1-Encoding",
-                          'iso-8859-2'   => "ISO-8859-2-Encoding",
-                          'iso-8859-3'   => "ISO-8859-3-Encoding",
-                          'iso-8859-4'   => "ISO-8859-4-Encoding",
-                          'iso-8859-5'   => "ISO-8859-5-Encoding",
-                          'iso-8859-7'   => "ISO-8859-7-Encoding",
-                          'iso-8859-9'   => "ISO-8859-9-Encoding",
-                          'iso-8859-10'  => "ISO-8859-10-Encoding",
-                          'iso-8859-11'  => "ISO-8859-11-Encoding",
-                          'iso-8859-13'  => "ISO-8859-13-Encoding",
-                          'iso-8859-14'  => "ISO-8859-14-Encoding",
-                          'iso-8859-15'  => "ISO-8859-15-Encoding",
-                          'dingbats'     => "Dingbats-Encoding",
-                          'symbol'       => "Symbol-Encoding",
-                          'koi8-r'       => "KOI8-R-Encoding",
-                          'cp1250'       => "Windows-1250-Encoding",
-                          'cp1251'       => "Windows-1251-Encoding",
-                          'windows-1250' => "Windows-1250-Encoding",
-                          'windows-1251' => "Windows-1251-Encoding",
-                          'windows-1252' => "Windows-1252-Encoding"
-                          );
-
-    if (isset($translations[$encoding])) { return $translations[$encoding]; };
-    return $encoding;
-  }
-
   function fill() { 
     $this->write("fill\n");
   }
   
   function _findfont($name, $encoding) {
     $font =& $this->font_factory->get_type1($name, $encoding);
-    if ($font == null) {
+    if (is_null($font)) {
       $this->error_message .= $this->font_factory->error_message();
       $dummy = null;
       return $dummy;
@@ -102,7 +76,8 @@ class OutputDriverFastPS extends OutputDriverGenericPS {
     if (!isset($this->used_encodings[$encoding])) {
       $this->used_encodings[$encoding] = true;
       
-      $this->_write_document_prolog(ManagerEncoding::get_ps_encoding_vector($encoding));
+      $manager = ManagerEncoding::get();
+      $this->_write_document_prolog($manager->get_ps_encoding_vector($encoding));
       $this->_write_document_prolog("\n");
     };
 
@@ -218,35 +193,35 @@ class OutputDriverFastPS extends OutputDriverGenericPS {
   }
 
   function lineto($x, $y) { 
-    $this->write(sprintf("%.2f %.2f lineto\n", $x, $y));
+    $data = sprintf("%.2f %.2f lineto\n", $x, $y);
+    $this->write($data);
   }
 
   function moveto($x, $y) { 
-    $this->write(sprintf("%.2f %.2f moveto\n", $x, $y));
+    $data = sprintf("%.2f %.2f moveto\n", $x, $y);
+    $this->write($data);
   }
 
-  function next_page() {
-    $this->_show_watermark();
+  function next_page($height) {
+    if ($this->current_page > 0) {
+      $this->write("showpage\n");
+    };
 
-    $this->current_page ++;
-    $this->offset -= $this->height - $this->offset_delta;
+    $this->offset -= $height - $this->offset_delta;
 
     // Reset the "correction" offset to it normal value
     // Note: "correction" offset is an offset value required to avoid page breaking 
     // in the middle of text boxes 
     $this->offset_delta = 0;
 
-    $this->write("showpage\n");
-    $this->write(sprintf("%%%%Page: %d %d\n", $this->current_page, $this->current_page));
+    $this->write(sprintf("%%%%Page: %d %d\n", $this->current_page + 1, $this->current_page + 1));
     $this->write("%%BeginPageSetup\n");
     $this->write(sprintf("initpage\n"));
     $this->write(sprintf("0 %.2f translate\n", -$this->offset));
     $this->write("0 0 0 setrgbcolor\n");
     $this->write("%%EndPageSetup\n");
-  }
 
-  function OutputDriverFastPS(&$image_encoder) { 
-    $this->OutputDriverGenericPS($image_encoder);
+    parent::next_page($height);
   }
 
   function reset(&$media) { 
@@ -265,12 +240,12 @@ class OutputDriverFastPS extends OutputDriverGenericPS {
     $this->linethrough = false;
 
     // A font class factory
-    $this->font_factory = new FontFactory;
+    $this->font_factory =& new FontFactory;
 
-    $this->current_page = 1;
+    $this->_document_body = '';
+    $this->_document_prolog = '';
 
-    $this->_document_body = "";
-    $this->_document_prolog = "";
+    $this->status = FASTPS_STATUS_DOCUMENT_INITIALIZED;
   }
 
   function restore() { 
@@ -295,17 +270,19 @@ class OutputDriverFastPS extends OutputDriverGenericPS {
   }
 
   function setlinewidth($x) { 
-    $this->write(sprintf("%.2f setlinewidth\n", $x));
+    $data = sprintf("%.2f setlinewidth\n", $x);
+    $this->write($data);
   }
 
   function setrgbcolor($r, $g, $b)  { 
-    $this->write(sprintf("%.2f %.2f %.2f setrgbcolor\n", $r, $g, $b));
+    $data = sprintf("%.2f %.2f %.2f setrgbcolor\n", $r, $g, $b);
+    $this->write($data);
   }
 
   function show_xy($text, $x, $y) {
-    if (trim($text) !== "") { 
+    if (trim($text) !== '') { 
       $this->moveto($x, $y);
-      $this->write("(".quote_ps($text).") show\n");
+      $this->write("(".$this->_string($text).") show\n");
     };
       
     $width = Font::points($this->fontsize, $this->currentfont->stringwidth($text));
@@ -317,7 +294,7 @@ class OutputDriverFastPS extends OutputDriverGenericPS {
   function stringwidth($string, $name, $encoding, $size) { 
     $font =& $this->font_factory->get_type1($name, $encoding);
 
-    if ($font == null) {
+    if (is_null($font)) {
       $this->error_message .= $this->font_factory->error_message();
       $dummy = null;
       return $dummy;
@@ -331,7 +308,9 @@ class OutputDriverFastPS extends OutputDriverGenericPS {
   }
 
   function write($string) {
-    if ($this->status == FASTPS_STATUS_DOCUMENT_INITIALIZED) { $this->_start_output(); };
+    if ($this->status == FASTPS_STATUS_DOCUMENT_INITIALIZED) { 
+      $this->_start_output(); 
+    };
 
     $this->_document_body .= $string;
   }
@@ -389,7 +368,7 @@ class OutputDriverFastPS extends OutputDriverGenericPS {
     $header = preg_replace("/##MEDIA##/", $this->media->to_ps(), $header);
 
     $header = preg_replace("/##PROLOG##/", $this->_document_prolog, $header);
-    
+
     fwrite($this->data, $header);   
     fwrite($this->data, "\n");
     fwrite($this->data, $this->_document_body);
@@ -399,6 +378,28 @@ class OutputDriverFastPS extends OutputDriverGenericPS {
   }
 
   function _show_watermark() {
+  }
+
+  /**
+   * Protected output-specific methods
+   */
+
+  /**
+   * Escapes special Postscript symbols '(',')' and '%' inside a text string 
+   */
+  function _string($str) {
+    $str = str_replace("\\", "\\\\", $str);
+    $str = str_replace(array("(",")","%"), array("\\(","\\)","\\%"), $str);
+    
+    // Replace characters having 8-bit set with their octal representation
+    for ($i=0; $i<strlen($str); $i++) {
+      if (ord($str{$i}) > 127) {
+        $str = substr_replace($str, sprintf("\\%o", ord($str{$i})), $i, 1);
+        $i += 3;
+      };
+    };
+    
+    return $str;
   }
 }
 

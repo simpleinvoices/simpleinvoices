@@ -1,273 +1,177 @@
 <?php
-// $Header: /cvsroot/html2ps/css.inc.php,v 1.19 2006/05/27 15:33:27 Konstantin Exp $
+// $Header: /cvsroot/html2ps/css.inc.php,v 1.28 2007/04/07 11:16:34 Konstantin Exp $
 
-class CSSObject {
-  var $rules;
-  var $tag_filtered;
+class CSS {
+  var $_handlers;
+  var $_mapping;
+  var $_defaultState;
+  var $_defaultStateFlags;
+
+  function _getDefaultState() {
+    if (!isset($this->_defaultState)) {
+      $this->_defaultState = array();
+
+      $handlers = $this->getHandlers();
+      foreach ($handlers as $property => $handler) {
+        $this->_defaultState[$property] = $handler->default_value();
+      };
+    };
+
+    return $this->_defaultState;
+  }
+
+  function _getDefaultStateFlags() {
+    if (!isset($this->_defaultStateFlags)) {
+      $this->_defaultStateFlags = array();
+
+      $handlers = $this->getHandlers();
+      foreach ($handlers as $property => $handler) {
+        $this->_defaultStateFlags[$property] = true;
+      };
+    };
+
+    return $this->_defaultStateFlags;
+  }
   
-  function add_rule(&$rule, &$pipeline) {
-    $rule_obj = new CSSRule($rule, $pipeline);
-    $this->rules[] = $rule_obj ;
-
-    $tag = $this->detect_applicable_tag($rule_obj->get_selector());
-    if ($tag === null) { $tag = "*"; }
-    $this->tag_filtered[$tag][] = $rule_obj;
+  function getHandlers() {
+    return $this->_handlers;
   }
 
-  function apply(&$root, &$pipeline) {
-    $local_css = array();
-
-    if (isset($this->tag_filtered[strtolower($root->tagname())])) {
-      $local_css = $this->tag_filtered[strtolower($root->tagname())];
-    };
-
-    if (isset($this->tag_filtered["*"])) {
-      $local_css = array_merge($local_css, $this->tag_filtered["*"]);
-    };
-
-    $applicable = array();
-
-    foreach ($local_css as $rule) {
-      if ($rule->match($root)) {
-        $applicable[] = $rule;
-      };
-    };
-
-    usort($applicable, "cmp_rule_objs");
-
-    foreach ($applicable as $rule) {
-      switch ($rule->get_pseudoelement()) {
-      case SELECTOR_PSEUDOELEMENT_BEFORE:
-      case SELECTOR_PSEUDOELEMENT_AFTER:
-        // Just store something in the 'content' property to indicate that current
-        // element have pseudoelements
-        //
-        $handler =& get_css_handler('content');
-        $handler->css("+", $pipeline);
-        break;
-      default:
-        $rule->apply($root, $pipeline);
-        break;
-      };
-    };
-  }
-
-  function apply_pseudoelement($element_type, &$root, &$pipeline) {
-    $local_css = array();
-
-    if (isset($this->tag_filtered[strtolower($root->tagname())])) {
-      $local_css = $this->tag_filtered[strtolower($root->tagname())];
-    };
-
-    if (isset($this->tag_filtered["*"])) {
-      $local_css = array_merge($local_css, $this->tag_filtered["*"]);
-    };
-
-    $applicable = array();
-
-    for ($i=0; $i<count($local_css); $i++) {
-      $rule =& $local_css[$i];
-      if ($rule->get_pseudoelement() == $element_type) {
-        if ($rule->match($root)) {
-          $applicable[] =& $rule;
+  function getInheritableTextHandlers() {
+    if (!isset($this->_handlersInheritableText)) {
+      $this->_handlersInheritabletext = array();
+      foreach ($this->_handlers as $property => $handler) {
+        if ($handler->isInheritableText()) {
+          $this->_handlersInheritableText[$property] =& $this->_handlers[$property];
         };
-      };
-    };
-
-    usort($applicable, "cmp_rule_objs");
-
-    // Note that filtered rules already have pseudoelement mathing (see condition above)
-
-    foreach ($applicable as $rule) {
-      $rule->apply($root, $pipeline);
-    };
-  }
-  
-  // Check if only tag with a specific name can match this selector
-  //
-  function detect_applicable_tag($selector) {
-    switch (selector_get_type($selector)) {
-    case SELECTOR_TAG:
-      return $selector[1];
-    case SELECTOR_TAG_CLASS:
-      return $selector[1];
-    case SELECTOR_SEQUENCE:
-      foreach ($selector[1] as $subselector) {
-        $tag = $this->detect_applicable_tag($subselector);
-        if ($tag) { return $tag; };
-      };
-      return null;
-    default: 
-      return null;
+      }
     }
-  }
-}
 
-global $g_css_handlers, $g_css;
-$g_css_handlers = array();
-$g_css          = array();
-
-function &get_css_handler($property) {
-  global $g_css_handlers;
-  if (isset($g_css_handlers[$property])) {
-    return $g_css_handlers[$property];
-  } else {
-    $dumb = null;
-    return $dumb;
-  };
-};
-
-function pop_css_defaults() {
-  pop_border();
-
-  pop_font_family();
-  pop_font_size();
-  pop_font_style();
-  pop_font_weight();
-
-  pop_line_height();
-
-  global $g_css_handlers;
-  $keys = array_keys($g_css_handlers);
-  foreach ($keys as $key) {
-    $g_css_handlers[$key]->pop();
-  }  
-}
-
-function push_css_defaults() {
-  push_border(default_border());
-
-  push_font_family(get_font_family());
-
-  //  push_font_size(get_font_size());
-  push_font_size("1em");
-
-  push_font_style(get_font_style());
-  push_font_weight(get_font_weight());
-
-  push_line_height(get_line_height());
-
-  global $g_css_handlers;
-  $keys = array_keys($g_css_handlers);
-  foreach ($keys as $key) {
-    $g_css_handlers[$key]->inherit();
-  }  
-}
-
-function push_css_text_defaults() {
-  // No borders for pure text boxes; border can be controlled via SPANs
-  push_border(default_border());
- 
-  push_font_family(get_font_family());
-
-  //  push_font_size(get_font_size());
-  push_font_size("1em");
-
-  push_font_style(get_font_style());
-  push_font_weight(get_font_weight());
-
-  push_line_height(get_line_height());
-
-  global $g_css_handlers;
-  $keys = array_keys($g_css_handlers);
-  foreach ($keys as $key) {
-    $g_css_handlers[$key]->inherit_text();
-  }  
-}
-
-function register_css_property($property, &$handler) {
-  global $g_css_handlers;
-  $g_css_handlers[$property] =& $handler;
-};
-
-// ------------------
-
-class CSSProperty {
-  var $_stack;
-  var $_inheritable;
-  var $_inheritable_text;
-
-  function css($value, &$pipeline) { $this->replace($this->parse($value, $pipeline)); }
-
-  function CSSProperty($inheritable, $inheritable_text) { 
-    $this->_inheritable = $inheritable;
-    $this->_inheritable_text = $inheritable_text;
-
-    $this->_stack = array(array($this->default_value(),false)); 
+    return $this->_handlersInheritableText;
   }
 
-  function get() { return $this->_stack[0][0]; }
+  function getInheritableHandlers() {
+    if (!isset($this->_handlersInheritable)) {
+      $this->_handlersInheritable = array();
+      foreach ($this->_handlers as $property => $handler) {
+        if ($handler->isInheritable()) {
+          $this->_handlersInheritable[$property] =& $this->_handlers[$property];
+        };
+      }
+    }
 
-  function inherit()      { $this->push( ($this->_inheritable ? $this->get() : $this->default_value()) ,false); }
-  function inherit_text() { $this->push( ($this->_inheritable_text ? $this->get() : $this->default_value()) ,false); }
+    return $this->_handlersInheritable;
+  }
 
-  // Check if value on the top of the stack was just CSS-standard default
-  // or have been calculated via some attribute or CSS rule
-  function is_calculated() { return $this->_stack[0][1]; }
+  function &get() {
+    global $__g_css_handler_set;
 
-  function is_default($value) { 
-    if (is_object($value)) {
-      return $value->is_default();
-    } else {
-      return $this->default_value() === $value; 
+    if (!isset($__g_css_handler_set)) {
+      $__g_css_handler_set = new CSS();
     };
-  }
-  function is_subproperty() { return false; }
 
-  function pop() { array_shift($this->_stack); }
-
-  function push_default() { $this->push($this->default_value(), false); }
-  function push_css($value, &$pipeline) { $this->push_default(); $this->css($value, $pipeline); }
-  function push($value, $calculated=true) { array_unshift($this->_stack, array($value, $calculated)); }
-
-  //  function replace($value) { $this->pop(); $this->push($value, true); }
-  function replace($value) { $this->_stack[0] = array($value, true); }
-}
-
-class CSSSubProperty extends CSSProperty {
-  var $_owner;
-  var $_owner_field;
-
-  function CSSSubProperty(&$owner, $field = "") {
-    $this->_owner =& $owner;
-    $this->_owner_field = $field;
+    return $__g_css_handler_set;
   }
 
-  function get() {
-    $owner =& $this->owner();
-    $field = $this->_owner_field;
-    $owner_value = $owner->get();
-    return $owner_value->$field;
+  function CSS() {
+    $this->_handlers = array();
+    $this->_mapping  = array();
   }
 
-  function is_subproperty() { return true; }
-  function &owner() { return $this->_owner; }
- 
-  function default_value() { }
-  function inherit()       { }
-  function inherit_text()  { }
-
-  function replace($value) { 
-    $owner =& $this->owner();
-    $field = $this->_owner_field;
-
-    $owner_value = $owner->get();
-
-    if (is_object($owner_value)) {
-      $owner_value = $owner_value->copy();
-    };
+  function getDefaultValue($property) {
+    $css =& CSS::get();
+    $handler =& $css->_get_handler($property);
+    $value = $handler->default_value();
 
     if (is_object($value)) {
-      $owner_value->$field = $value->copy();
+      return $value->copy();
     } else {
-      $owner_value->$field = $value;
+      return $value;
     };
-
-    $owner->replace($owner_value);
   }
 
-  function push($value)    { }
-  function pop()           { }
+  function &get_handler($property) {
+    $css =& CSS::get();
+    $handler =& $css->_get_handler($property);
+    return $handler;
+  }
 
+  function &_get_handler($property) {
+    if (isset($this->_handlers[$property])) {
+      return $this->_handlers[$property];
+    } else {
+      $dumb = null;
+      return $dumb;
+    };
+  }
+
+  function _word2code($key) {
+    if (!isset($this->_mapping[$key])) { 
+      return null; 
+    };
+
+    return $this->_mapping[$key];
+  }
+
+  function word2code($key) {
+    $css =& CSS::get();
+    return $css->_word2code($key);
+  }
+
+  function register_css_property(&$handler) {
+    $property = $handler->getPropertyCode();
+    $name     = $handler->getPropertyName();
+
+    $css =& CSS::get();
+    $css->_handlers[$property] =& $handler;
+    $css->_mapping[$name] = $property;
+  }
+
+  /**
+   * Refer to CSS 2.1 G.2 Lexical scanner
+   * h		[0-9a-f]
+   * nonascii	[\200-\377]
+   * unicode		\\{h}{1,6}(\r\n|[ \t\r\n\f])?
+   * escape		{unicode}|\\[^\r\n\f0-9a-f]
+   * nmstart		[_a-z]|{nonascii}|{escape}
+   * nmchar		[_a-z0-9-]|{nonascii}|{escape}
+   * ident		-?{nmstart}{nmchar}*
+   */
+  function get_identifier_regexp() {
+    return '-?(?:[_a-z]|[\200-\377]|\\[0-9a-f]{1,6}(?:\r\n|[ \t\r\n\f])?|\\[^\r\n\f0-9a-f])(?:[_a-z0-9-]|[\200-\377]|\\[0-9a-f]{1,6}(?:\r\n|[ \t\r\n\f])?|\\[^\r\n\f0-9a-f])*';
+  }
+
+  function is_identifier($string) {
+    return preg_match(sprintf('/%s/', 
+                              CSS::get_identifier_regexp()), 
+                      $string);
+  }
+
+  function parse_string($string) {
+    if (preg_match(sprintf('/^(%s)\s*(.*)$/s', CSS_STRING1_REGEXP), $string, $matches)) {
+      $value = $matches[1];
+      $rest = $matches[2];
+      
+      $value = CSS::remove_backslash_at_newline($value);
+
+      return array($value, $rest);
+    };
+
+    if (preg_match(sprintf('/^(%s)\s*(.*)$/s', CSS_STRING2_REGEXP), $string, $matches)) {
+      $value = $matches[1];
+      $rest = $matches[2];
+
+      $value = CSS::remove_backslash_at_newline($value);
+
+      return array($value, $rest);
+    };
+
+    return array(null, $string);
+  }
+
+  function remove_backslash_at_newline($value) {
+    return preg_replace("/\\\\\n/", '', $value);
+  }
 }
+
 ?>

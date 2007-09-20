@@ -1,21 +1,9 @@
 <?php
-// $Header: /cvsroot/html2ps/output.pdflib.class.php,v 1.9 2006/04/16 16:54:58 Konstantin Exp $
+// $Header: /cvsroot/html2ps/output.pdflib.class.php,v 1.18 2007/05/17 13:55:13 Konstantin Exp $
 
-class PDFLIBForm {
-  var $_name;
-//   var $submit_action;
-//   var $reset_action;
-
-  function PDFLIBForm($name /*, $submit_action, $reset_action */) {
-    $this->_name          = $name;
-//     $this->submit_action = $submit_action;
-//     $this->reset_action  = $reset_action;
-  }
-
-  function name() {
-    return $this->_name;
-  }
-}
+define('PDFLIB_STATUS_INITIALIZED', 0);
+define('PDFLIB_STATUS_DOCUMENT_STARTED', 1);
+define('PDFLIB_STATUS_PAGE_STARTED', 2);
 
 class OutputDriverPdflib extends OutputDriverGenericPDF {
   var $pdf;
@@ -31,57 +19,13 @@ class OutputDriverPdflib extends OutputDriverGenericPDF {
   var $_radiogroups;
   var $_watermark;
 
-  function add_link($left, $top, $width, $height, $url) {
-    pdf_add_weblink($this->pdf, $left, $top-$height, $left+$width, $top, $url);
-  }
-
-  function add_local_link($left, $top, $width, $height, $anchor) {
-    pdf_add_locallink($this->pdf, 
-                      $left, 
-                      $top-$height - $this->offset , 
-                      $left+$width, 
-                      $top - $this->offset, 
-                      $anchor->page, 
-                      "fitwidth");
-  }
-
-  function circle($x, $y, $r) { 
-    pdf_circle($this->pdf, $x, $y, $r); 
-  }
-
-  function clip() {
-    pdf_clip($this->pdf);
-  }
-
-  function close() {
-    $this->_show_watermark();
-    pdf_end_page($this->pdf);
-    pdf_close($this->pdf); 
-    pdf_delete($this->pdf);
-  }
-
-  function closepath() { 
-    pdf_closepath($this->pdf); 
-  }
-
-  function dash($x, $y) {
-    pdf_setdash($this->pdf, $x, $y); 
-  }
-
-  function decoration($underline, $overline, $strikeout) {
-    // underline
-    pdf_set_parameter($this->pdf, "underline", $underline ? "true" : "false");
-    // overline
-    pdf_set_parameter($this->pdf, "overline",  $overline  ? "true" : "false");
-    // line through
-    pdf_set_parameter($this->pdf, "strikeout", $strikeout ? "true" : "false");
-  }
+  var $_status;
 
   // Converts common encoding names to their PDFLIB equivalents 
   // (for example, PDFLIB does not understand iso-8859-1 encoding name,
   // but have its equivalent names winansi..)
   //
-  function encoding($encoding) {
+   function encoding($encoding) {
     $encoding = trim(strtolower($encoding));
 
     $translations = array(
@@ -109,149 +53,49 @@ class OutputDriverPdflib extends OutputDriverGenericPDF {
     return $encoding;
   }
 
-  function field_multiline_text($x, $y, $w, $h, $value, $name) { 
-    $font = $this->_control_font();
-    pdf_create_field($this->pdf,
-                     $x, $y, $x + $w, $y - $h,
-                     $this->_fqn($name),
-                     "textfield",
-                     sprintf("currentvalue {%s} defaultvalue {%s} font {%s} fontsize {auto} multiline {true}", 
-                             $value,
-                             $value,
-                             $font));    
+  function add_link($left, $top, $width, $height, $url) {
+    pdf_add_weblink($this->pdf, $left, $top-$height, $left+$width, $top, $url);
   }
 
-  function field_text($x, $y, $w, $h, $value, $name) {
-    $font = $this->_control_font();
-    pdf_create_field($this->pdf,
-                     $x, $y, $x + $w, $y - $h,
-                     $this->_fqn($name),
-                     "textfield",
-                     sprintf("currentvalue {%s} defaultvalue {%s} font {%s} fontsize {auto}", 
-                             $value, 
-                             $value,
-                             $font));
+  function add_local_link($left, $top, $width, $height, $anchor) {
+    pdf_add_locallink($this->pdf, 
+                      $left, 
+                      $top-$height - $this->offset , 
+                      $left+$width, 
+                      $top - $this->offset, 
+                      $anchor->page, 
+                      "fitwidth");
   }
 
-  function field_password($x, $y, $w, $h, $value, $name) {
-    $font = $this->_control_font();
-    pdf_create_field($this->pdf,
-                     $x, $y, $x + $w, $y - $h,
-                     $this->_fqn($name),
-                     "textfield",
-                     sprintf("currentvalue {%s} font {%s} fontsize {auto} password {true}", $value, $font));
+  function circle($x, $y, $r) { 
+    pdf_circle($this->pdf, $x, $y, $r); 
   }
 
-  function field_pushbutton($x, $y, $w, $h) {
-    $font = $this->_control_font();
-   
-    pdf_create_field($this->pdf, 
-                     $x, $y, $x + $w, $y - $h,
-                     $this->_fqn(sprintf("___Button%s",md5(time().rand()))),
-                     "pushbutton",
-                     sprintf("font {%s} fontsize {auto} caption {%s}", 
-                             $font, 
-                             " "));
+  function clip() {
+    pdf_clip($this->pdf);
   }
 
-  function field_pushbuttonimage($x, $y, $w, $h, $field_name, $value, $actionURL) {
-    $font = $this->_control_font();
-
-    $action = pdf_create_action($this->pdf,
-                                "SubmitForm",
-                                sprintf("exportmethod {html} url=%s", $actionURL));
-    
-    pdf_create_field($this->pdf, 
-                     $x, $y, $x + $w, $y - $h,
-                     $this->_fqn($field_name),
-                     "pushbutton",
-                     sprintf("action {activate %s} font {%s} fontsize {auto} caption {%s}", 
-                             $action, 
-                             $font, 
-                             " "));
+  function close() {
+    pdf_end_page($this->pdf);
+    pdf_close($this->pdf); 
+    pdf_delete($this->pdf);
   }
 
-  function field_pushbuttonreset($x, $y, $w, $h) {
-    $font = $this->_control_font();
-
-    $action = pdf_create_action($this->pdf,
-                                "ResetForm",
-                                sprintf(""));
-    
-    pdf_create_field($this->pdf, 
-                     $x, $y, $x + $w, $y - $h,
-                     $this->_fqn(sprintf("___ResetButton%d",$action)),
-                     "pushbutton",
-                     sprintf("action {activate %s} font {%s} fontsize {auto} caption {%s}", 
-                             $action, 
-                             $font, 
-                             " "));
+  function closepath() { 
+    pdf_closepath($this->pdf); 
   }
 
-  function field_pushbuttonsubmit($x, $y, $w, $h, $field_name, $value, $actionURL) {
-    $font = $this->_control_font();
-
-    $action = pdf_create_action($this->pdf,
-                                "SubmitForm",
-                                sprintf("exportmethod {html} url=%s", $actionURL));
-    
-    pdf_create_field($this->pdf, 
-                     $x, $y, $x + $w, $y - $h,
-                     $this->_fqn($field_name),
-                     "pushbutton",
-                     sprintf("action {activate %s} font {%s} fontsize {auto} caption {%s}", 
-                             $action, 
-                             $font, 
-                             " "));
+  function dash($x, $y) {
+    pdf_setdash($this->pdf, $x, $y); 
   }
 
-  function field_checkbox($x, $y, $w, $h, $name, $value, $checked) {
-    pdf_create_field($this->pdf, 
-                     $x, $y, $x + $w, $y - $h,
-                     $this->_fqn($name),
-                     "checkbox",
-                     sprintf("buttonstyle {cross} currentvalue {%s} defaultvalue {%s} itemname {%s}", 
-                             $checked ? $value : "Off",
-                             $checked ? $value : "Off",
-                             $value));    
-  }
-
-  function field_radio($x, $y, $w, $h, $groupname, $value, $checked) {
-    $fqgn = $this->_fqn($groupname, true);
-
-    if (!isset($this->_radiogroups[$fqgn])) {
-      $this->_radiogroups[$fqgn] = pdf_create_fieldgroup($this->pdf, $fqgn, "fieldtype=radiobutton");
-    };
-
-    pdf_create_field($this->pdf, 
-                     $x, $y, $x + $w, $y - $h,
-                     sprintf("%s.%s",$fqgn,$value),
-                     "radiobutton",
-                     sprintf("buttonstyle {circle} currentvalue {%s} defaultvalue {%s} itemname {%s}", 
-                             $checked ? $value : "Off",
-                             $checked ? $value : "Off",
-                             $value));    
-  }
-
-  function field_select($x, $y, $w, $h, $name, $value, $options) { 
-    $items_str = "";
-    $text_str  = "";
-    foreach ($options as $option) {
-      $items_str .= sprintf("%s ",$option[0]);
-      $text_str  .= sprintf("%s ",$option[1]);
-    };
-
-    $font = $this->_control_font();
-    pdf_create_field($this->pdf,
-                     $x, $y, $x + $w, $y - $h,
-                     $this->_fqn($name),
-                     "combobox",
-                     sprintf("currentvalue {%s} defaultvalue {%s} font {%s} fontsize {auto} itemnamelist {%s} itemtextlist {%s}", 
-                             $value,
-                             $value,
-                             $font,
-                             $items_str, 
-                             $text_str));
+  function decoration($underline, $overline, $strikeout) {
+    // underline
+    pdf_set_parameter($this->pdf, "underline", $underline ? "true" : "false");
+    // overline
+    pdf_set_parameter($this->pdf, "overline",  $overline  ? "true" : "false");
+    // line through
+    pdf_set_parameter($this->pdf, "strikeout", $strikeout ? "true" : "false");
   }
 
   function fill() { 
@@ -260,11 +104,13 @@ class OutputDriverPdflib extends OutputDriverGenericPDF {
 
   function findfont($name, $encoding) { 
     // PDFLIB is limited by 'builtin' encoding for "Symbol" font
-    if ($name == 'Symbol') { $encoding = 'builtin'; };
+    if ($name == 'Symbol') { 
+      $encoding = 'builtin'; 
+    };
 
     global $g_font_resolver_pdf;
     $embed = $g_font_resolver_pdf->embed[$name];
-    return pdf_findfont($this->pdf, $name, $encoding, $embed); 
+    return pdf_findfont($this->pdf, $name, $this->encoding($encoding), $embed); 
   }
 
   function font_ascender($name, $encoding) { 
@@ -411,30 +257,15 @@ class OutputDriverPdflib extends OutputDriverGenericPDF {
     pdf_moveto($this->pdf, $x, $y); 
   }
 
-  function new_form($name) {
-//     $submit_image_action = pdf_create_action($this->pdf,
-//                                              "SubmitForm",
-//                                              "export-method=html,coordinate");
-    
-//     $reset_action = pdf_create_action($this->pdf,
-//                                       "ResetForm");
-
-    $this->_forms[] = new PDFLIBForm($name);
-
-    pdf_create_fieldgroup($this->pdf, $name, "fieldtype=mixed");
-  }
-
   // OutputDriver interface functions
-  function next_page() {
-    $this->_show_watermark();
-
-    $this->current_page ++;
-
-    pdf_end_page($this->pdf);
+  function next_page($height) {
+    if ($this->_status == PDFLIB_STATUS_PAGE_STARTED) {
+      pdf_end_page($this->pdf);
+    };
     pdf_begin_page($this->pdf, mm2pt($this->media->width()), mm2pt($this->media->height()));
     
     // Calculate coordinate of the next page bottom edge
-    $this->offset -= $this->height - $this->offset_delta;
+    $this->offset -= $height - $this->offset_delta;
 
     // Reset the "correction" offset to it normal value
     // Note: "correction" offset is an offset value required to avoid page breaking 
@@ -442,6 +273,10 @@ class OutputDriverPdflib extends OutputDriverGenericPDF {
     $this->offset_delta = 0;
 
     pdf_translate($this->pdf, 0, -$this->offset);
+
+    parent::next_page($height);
+
+    $this->_status = PDFLIB_STATUS_PAGE_STARTED;
   }
 
   function OutputDriverPdflib($version) {
@@ -451,6 +286,15 @@ class OutputDriverPdflib extends OutputDriverGenericPDF {
     $this->_currentfont = null;
     $this->_radiogroups = array();
     $this->_field_names = array();
+
+    $this->_status = PDFLIB_STATUS_INITIALIZED;
+  }
+
+  function prepare() {
+    parent::prepare();
+
+    $filename = $this->generate_cpg('custom', true);
+    pdf_set_parameter($this->pdf, 'Encoding', sprintf('custom=%s', $filename));
   }
 
   function reset(&$media) {
@@ -465,7 +309,7 @@ class OutputDriverPdflib extends OutputDriverGenericPDF {
       if (!$result) {
         readfile(HTML2PS_DIR.'/templates/missing_pdflib.html');
         error_log("No PDFLIB extension found");
-        die();
+        die("HTML2PS Error");
       }
     }
 
@@ -492,6 +336,10 @@ class OutputDriverPdflib extends OutputDriverGenericPDF {
     if (defined("PDFLIB_UPR_PATH")) {
       pdf_set_parameter($this->pdf, "resourcefile", PDFLIB_UPR_PATH); 
     };
+
+    // Setup encodings not bundled with PDFLIB
+    $filename = $this->generate_cpg('koi8-r');
+    pdf_set_parameter($this->pdf, 'Encoding', sprintf('koi8-r=%s', $filename));
     
     // Setup font outlines
     global $g_font_resolver_pdf;
@@ -503,7 +351,7 @@ class OutputDriverPdflib extends OutputDriverGenericPDF {
     // No borders around links in the generated PDF
     pdf_set_border_style($this->pdf, "solid", 0);
 
-    pdf_begin_page($this->pdf, mm2pt($this->media->width()), mm2pt($this->media->height()));
+    $this->_status = PDFLIB_STATUS_DOCUMENT_STARTED;
   }
 
   function rect($x, $y, $w, $h) { 
@@ -555,69 +403,10 @@ class OutputDriverPdflib extends OutputDriverGenericPDF {
     return pdf_stringwidth($this->pdf, $string, $this->findfont($name, $encoding), $size); 
   }
 
-  function set_watermark($watermark) {
-    $this->_watermark = trim($watermark);
-  }
-
   /* private routines */
 
-  function _control_font() {
-    return pdf_load_font($this->pdf, "Helvetica", "winansi", "embedding=true subsetting=false");
-  }
-
-  function _lastform() {
-    if (count($this->_forms) == 0) {
-      /**
-       * Handle invalid HTML; if we've met an input control outside the form, 
-       * generate a new form with random name
-       */
-      
-      $name = sprintf("AnonymousFormObject_%u", md5(rand().time()));
-
-      $this->_forms[] = new PDFLIBForm($name);
-      pdf_create_fieldgroup($this->pdf, $name, "fieldtype=mixed");
-      
-      error_log(sprintf("Anonymous form generated with name %s; check your HTML for validity", 
-                        $name));
-    };
-
-    return $this->_forms[count($this->_forms)-1];
-  }
-
-  function _valid_name($name) {
-    if (empty($name)) { return false; };
-
-    return true;
-  }
-
-  function _fqn($name, $allowexisting=false) {
-    if (!$this->_valid_name($name)) {
-      $name = uniqid("AnonymousFormFieldObject_");
-      error_log(sprintf("Anonymous field generated with name %s; check your HTML for validity", 
-                        $name));
-    };
-
-    $lastform = $this->_lastform();
-    $fqn = sprintf("%s.%s",
-                   $lastform->name(),
-                   $name);
-
-    if (array_search($fqn, $this->_field_names) === FALSE) {
-      $this->_field_names[] = $fqn;
-    } elseif (!$allowexisting) {
-      error_log(sprintf("Interactive form '%s' already contains field named '%s'",
-                        $lastform->name(),
-                        $name));
-      $fqn .= md5(rand().time());
-    };
-
-    return $fqn;
-  }
-
-  function _show_watermark() {
-    if (is_null($this->_watermark) || $this->_watermark == "") { return; };
-
-    $font = $this->_control_font();
+  function _show_watermark($watermark) {
+    $font = $this->findfont('Helvetica', 'iso-8859-1');
     pdf_setfont($this->pdf, $font, 100);
     
     $x = $this->left + $this->width / 2;
@@ -626,7 +415,24 @@ class OutputDriverPdflib extends OutputDriverGenericPDF {
     pdf_set_value($this->pdf, "textrendering", 1);
     pdf_translate($this->pdf, $x, $y);
     pdf_rotate($this->pdf, 60);
-    pdf_show_xy($this->pdf, $this->_watermark, -pdf_stringwidth($this->pdf, $this->_watermark, $font, 100)/2, -50);
+    pdf_show_xy($this->pdf, $watermark, -pdf_stringwidth($this->pdf, $watermark, $font, 100)/2, -50);
+  }
+
+  function generate_cpg($encoding, $force = false) {
+    $filename = CACHE_DIR.$encoding.'.cpg';
+    if (file_exists($filename) && !$force) {
+      return $filename;
+    };
+
+    $output = fopen($filename, 'w');
+    $manager_encoding =& ManagerEncoding::get();
+    $vector = $manager_encoding->getEncodingVector($encoding);
+    foreach ($vector as $code => $utf) {
+      fwrite($output, sprintf("0x%04X 0x%02X\n", $utf, ord($code)));
+    };
+    fclose($output);
+
+    return $filename;
   }
 }
 ?>

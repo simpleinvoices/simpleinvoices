@@ -1,0 +1,102 @@
+<html>
+<head>
+<title>Events</title>
+<link rel="stylesheet" type="text/css" medial="all" title="Default" href="css/help.css"/>
+<style type="text/css">
+div.note {
+  margin: 0.5em 0;
+}
+
+div.class {
+  margin: 0.5em 0 0.5em 2em;
+}
+
+div.interface {
+  margin: 1em 0 0.5em 0;
+  padding: 2px 5px;
+  background-color: #f0f0f0;
+}
+
+span.interface_name {
+  font-weight: bold;
+}
+
+span.method_name {
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<h1>Events</h1>
+<p>
+Sometimes you'd want to add your own code to the rendering routines; for example, you could want to make your own watermarks, 
+count pages in the multiple-document batch, add digital signature to the generated PDF file or 
+perform any other actions requiring low-level access to PDF file at the certain moments. Now you may do this using 
+HTML2PS events. Pipeline object will fire events at predefined moments while rendering PDF file; you may catch them and 
+do something useful.
+</p>
+
+<p>The code below illustrates installation of a simple callback to be called immediately after 
+new page was rendered. (If you're using PHP 5, you can write this way more elegant, but we're keeping PHP 4 compatibility here)</p>
+<pre>
+$dispatcher =& $pipeline->get_dispatcher();
+$dispatcher->add_observer('after-page', 'my_watermark_callback_func');
+</pre>
+
+<p>
+A single parameter is passed to the callback function: an associative array containing information related to event. 
+</p>
+
+<p>Following events are available:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Fired&hellip;</th>
+<th>Event information</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="event-name">after-batch</td>
+<td>after all documents in current batch were rendered</td>
+<td>pipeline: reference to current pipeline object</td>
+</tr>
+<tr>
+<td class="event-name">after-document</td>
+<td>after all pages in a current document were rendered</td>
+<td>pipeline: reference to current pipeline object; document: reference to the body box object</td>
+</tr>
+<tr>
+<td class="event-name">after-page</td>
+<td>after all elements were rendered on current page, but before new page is added.</td>
+<td>pipeline: reference to current pipeline object; document: reference to the body box object; pageno: current page number (1-based)</td>
+</tr>
+<tr>
+<td class="event-name">before-batch</td>
+<td>before new document batch starts rendering</td>
+<td>pipeline: reference to current pipeline object</td>
+</tr>
+<tr>
+<td class="event-name">before-document</td>
+<td>before new document in a batch starts rendering</td>
+<td>pipeline: reference to current pipeline object; document: reference to the body box object; page-heights: array of page heights (measured in points) for this document</td>
+</tr>
+<tr>
+<td class="event-name">before-page</td>
+<td>after new blank page is added to the PDF document but before any elements are rendered</td>
+<td>pipeline: reference to current pipeline object; document: reference to the body box object; pageno: current page number (1-based)</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Event usage</h2>
+<p>
+A nice sample of events usage was contributed by <b>marco_snake</b> on tufat html2ps/pdf community forum. In this sample, 
+events are used to display specific HTML code only on pages with predefined numbers.
+PHP and HTML code is available in <tt>samples/API/events/1</tt> directory in the distribution package.
+</p>
+
+</body>
+</html>

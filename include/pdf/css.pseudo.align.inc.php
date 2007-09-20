@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/html2ps/css.pseudo.align.inc.php,v 1.11 2006/04/16 16:54:57 Konstantin Exp $
+// $Header: /cvsroot/html2ps/css.pseudo.align.inc.php,v 1.13 2006/09/07 18:38:14 Konstantin Exp $
 
 define('PA_LEFT',0);
 define('PA_CENTER',1);
@@ -7,25 +7,23 @@ define('PA_RIGHT',2);
 
 // This is a pseudo CSS property for 
 
-class CSSPseudoAlign extends CSSProperty {
-  function CSSPseudoAlign() { $this->CSSProperty(true, true); }
-  function default_value() { return PA_LEFT; }
+class CSSPseudoAlign extends CSSPropertyHandler {
+  function CSSPseudoAlign() { $this->CSSPropertyHandler(true, true); }
 
-  function inherit() {
+  function default_value() { 
+    return PA_LEFT; 
+  }
+
+  function inherit($old_state, &$new_state) {
     // This pseudo-property is not inherited by tables
     // As current box display value may not be know at the moment of inheriting, 
     // we'll use parent display value, stopping inheritance on the table-row/table-group level
 
     // Determine parent 'display' value
-    $handler =& get_css_handler('display');
-    $parent_display = $handler->get_parent();
+    $parent_display = $old_state[CSS_DISPLAY];
     
-    if ($parent_display === "table") {
-      $this->push($this->default_value());
-      return;
-    }
-
-    $this->push($this->get());
+    $this->replace_array(($parent_display === 'table') ? $this->default_value() : $this->get($old_state), 
+                         $new_state);
   }
 
   function parse($value) {
@@ -57,8 +55,16 @@ class CSSPseudoAlign extends CSSProperty {
       return "ta_left";
     }
   }
+
+  function getPropertyCode() {
+    return CSS_HTML2PS_ALIGN;
+  }
+
+  function getPropertyName() {
+    return '-html2ps-align';
+  }
 }
 
-register_css_property('-align', new CSSPseudoAlign);
+CSS::register_css_property(new CSSPseudoAlign);
 
 ?>

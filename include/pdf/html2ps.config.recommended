@@ -1,0 +1,187 @@
+<?xml version="1.0"?>
+<!-- $Header: /cvsroot/html2ps/html2ps.config.recommended,v 1.1 2006/12/02 08:10:00 Konstantin Exp $ -->
+<config>
+
+<fonts>
+  <family name="times">
+    <normal normal="Times-Roman" italic="Times-Italic" oblique="Times-Italic"/>
+    <bold normal="Times-Bold" italic="Times-BoldItalic" oblique="Times-BoldItalic"/>
+
+    <encoding-override name="windows-1251,iso-8859-5,koi8-r">
+      <normal normal="TimesCyr-Medium" italic="TimesCyr-Italic" oblique="TimesCyr-Italic"/>
+      <bold normal="TimesCyr-Bold" italic="TimesCyr-BoldItalic" oblique="TimesCyr-BoldItalic"/>
+    </encoding-override>
+  </family>
+
+  <family name="helvetica">
+    <normal normal="Helvetica" italic="Helvetica-Oblique" oblique="Helvetica-Oblique"/>
+    <bold normal="Helvetica-Bold" italic="Helvetica-BoldOblique" oblique="Helvetica-BoldOblique"/>
+
+    <encoding-override name="windows-1251,iso-8859-5,koi8-r">
+      <normal normal="HelveticaCyr-Medium" italic="HelveticaCyr-Italic" oblique="HelveticaCyr-Italic"/>
+      <bold normal="HelveticaCyr-Bold" italic="HelveticaCyr-BoldItalic" oblique="HelveticaCyr-BoldItalic"/>
+    </encoding-override>
+  </family>
+
+  <family name="courier">
+    <normal normal="Courier" italic="Courier-Oblique" oblique="Courier-Oblique"/>
+    <bold normal="Courier-Bold" italic="Courier-BoldOblique" oblique="Courier-BoldOblique"/>
+
+    <encoding-override name="windows-1251,iso-8859-5,koi8-r">
+      <normal normal="Courier10PitchCyr-Medium" italic="Courier10PitchCyr-Italic" oblique="Courier10PitchCyr-Italic"/>
+      <bold normal="Courier10PitchCyr-Bold" italic="Courier10PitchCyr-BoldItalic" oblique="Courier10PitchCyr-BoldItalic"/>
+    </encoding-override>
+  </family>
+
+  <encoding-override name="dingbats">
+    <normal normal="Dingbats" italic="Dingbats" oblique="Dingbats"/>
+    <bold normal="Dingbats" italic="Dingbats" oblique="Dingbats"/>
+  </encoding-override>
+
+  <encoding-override name="symbol">
+    <normal normal="Symbol" italic="Symbol" oblique="Symbol"/>
+    <bold normal="Symbol" italic="Symbol" oblique="Symbol"/>
+  </encoding-override>
+
+  <encoding-override name="iso-8859-7">
+    <normal normal="Symbol" italic="Symbol" oblique="Symbol"/>
+    <bold normal="Symbol" italic="Symbol" oblique="Symbol"/>
+  </encoding-override>
+
+  <alias alias="serif"      family="times"/>
+  <alias alias="arial"      family="helvetica"/>
+  <alias alias="verdana"    family="helvetica"/>
+  <alias alias="sans-serif" family="helvetica"/>
+  <alias alias="monospace"  family="courier"/>
+
+  <!-- 
+    the html2ps is configured to use Sharatype Cyrillic fonts out-of-the-box; if you're using a different
+    set of Cyrillic fonts, you need to adjust names of AFM files.
+  -->
+
+  <metrics typeface="Times-Roman"                  file="n021003l"/>
+  <metrics typeface="Times-Italic"                 file="n021023l"/>
+  <metrics typeface="Times-Bold"                   file="n021004l"/>
+  <metrics typeface="Times-BoldItalic"             file="n021024l"/>
+  <metrics typeface="TimesCyr-Medium"              file="t8c"/>
+  <metrics typeface="TimesCyr-Italic"              file="t8ci"/>
+  <metrics typeface="TimesCyr-Bold"                file="t8cb"/>
+  <metrics typeface="TimesCyr-BoldItalic"          file="t8cbi"/>
+  <metrics typeface="Helvetica"                    file="n019003l"/>
+  <metrics typeface="Helvetica-Oblique"            file="n019023l"/>
+  <metrics typeface="Helvetica-Bold"               file="n019004l"/>
+  <metrics typeface="Helvetica-BoldOblique"        file="n019024l"/>
+  <metrics typeface="HelveticaCyr-Medium"          file="h8c"/>
+  <metrics typeface="HelveticaCyr-Italic"          file="h8ci"/>
+  <metrics typeface="HelveticaCyr-Bold"            file="h8cb"/>
+  <metrics typeface="HelveticaCry-BoldItalic"      file="h8cbi"/>
+  <metrics typeface="Courier"                      file="n022003l"/>
+  <metrics typeface="Courier-Oblique"              file="n022023l"/>
+  <metrics typeface="Courier-Bold"                 file="n022004l"/>
+  <metrics typeface="Courier-BoldOblique"          file="n022024l"/>
+  <metrics typeface="Courier10PitchCyr-Medium"     file="c8c"/>
+  <metrics typeface="Courier10PitchCyr-Italic"     file="c8ci"/>
+  <metrics typeface="Courier10PitchCyr-Bold"       file="c8cb"/>
+  <metrics typeface="Courier10PitchCyr-BoldItalic" file="c8cbi"/>
+  <metrics typeface="Dingbats"                     file="d050000l"/>
+  <metrics typeface="Symbol"                       file="s050000l"/>
+</fonts>
+
+<fonts-pdf>
+  <family name="times">
+    <normal normal="Times-Roman" italic="Times-Italic" oblique="Times-Italic"/>
+    <bold normal="Times-Bold" italic="Times-BoldItalic" oblique="Times-BoldItalic"/>
+  </family>
+
+  <family name="helvetica">
+    <normal normal="Helvetica" italic="Helvetica-Oblique" oblique="Helvetica-Oblique"/>
+    <bold normal="Helvetica-Bold" italic="Helvetica-BoldOblique" oblique="Helvetica-BoldOblique"/>
+  </family>
+
+  <family name="courier">
+    <normal normal="Courier" italic="Courier-Oblique" oblique="Courier-Oblique"/>
+    <bold normal="Courier-Bold" italic="Courier-Oblique" oblique="Courier-BoldOblique"/>
+  </family>
+
+<!--
+  In general, moder TT-fonts are "somewhat" unicode, so there's no need to refer to the symbol font specifically;
+  unicode fonts does contain the glyphs required
+
+  <encoding-override name="dingbats">
+    <normal normal="ZapfDingbats" italic="ZapfDingbats" oblique="ZapfDingbats"/>
+    <bold normal="ZapfDingbats" italic="ZapfDingbats" oblique="ZapfDingbats"/>
+  </encoding-override>
+
+  <encoding-override name="symbol">
+    <normal normal="Symbol" italic="Symbol" oblique="Symbol"/>
+    <bold normal="Symbol" italic="Symbol" oblique="Symbol"/>
+  </encoding-override>
+
+  <encoding-override name="iso-8859-7">
+    <normal normal="Symbol" italic="Symbol" oblique="Symbol"/>
+    <bold normal="Symbol" italic="Symbol" oblique="Symbol"/>
+  </encoding-override>
+-->
+
+  <!-- 
+     'Custom' encoding means that we've encountered a character not present in
+     predefined encoding vectors. In most cases, it will be a specific character 
+     (like Japanese or Chinese) which can be found in Unicode fonts only.
+  -->
+  <encoding-override name="custom">
+    <normal normal="Arial Unicode MS" italic="Arial Unicode MS" oblique="Arial Unicode MS"/>
+    <bold normal="Arial Unicode MS" italic="Arial Unicode MS" oblique="Arial Unicode MS"/>
+  </encoding-override>
+
+  <!-- 
+    iso-8859-11 contains Thai characters; there are not many fonts containing them.
+    Arial Unicode MS is widely available Unicode font with Thai letters.
+  -->
+  <encoding-override name="iso-8859-11">
+    <normal normal="Arial Unicode MS" italic="Arial Unicode MS" oblique="Arial Unicode MS"/>
+    <bold normal="Arial Unicode MS" italic="Arial Unicode MS" oblique="Arial Unicode MS"/>
+  </encoding-override>
+
+  <alias alias="serif"      family="times"/>
+  <alias alias="arial"      family="helvetica"/>
+  <alias alias="verdana"    family="helvetica"/>
+  <alias alias="sans-serif" family="helvetica"/>
+  <alias alias="monospace"  family="courier"/>
+
+  <ttf typeface="Arial Unicode MS"      embed="0" file="arialuni.ttf"/>
+  <ttf typeface="Times-Roman"           embed="1" file="times.ttf"/>
+  <ttf typeface="Times-Italic"          embed="1" file="timesi.ttf"/>
+  <ttf typeface="Times-Bold"            embed="1" file="timesbd.ttf"/>
+  <ttf typeface="Times-BoldItalic"      embed="1" file="timesbi.ttf"/>
+  <ttf typeface="Helvetica"             embed="1" file="arial.ttf"/>
+  <ttf typeface="Helvetica-Oblique"     embed="1" file="ariali.ttf"/>
+  <ttf typeface="Helvetica-Bold"        embed="1" file="arialbd.ttf"/>
+  <ttf typeface="Helvetica-BoldOblique" embed="1" file="arialbi.ttf"/>
+  <ttf typeface="Courier"               embed="1" file="cour.ttf"/>
+  <ttf typeface="Courier-Oblique"       embed="1" file="couri.ttf"/>
+  <ttf typeface="Courier-Bold"          embed="1" file="courbd.ttf"/>
+  <ttf typeface="Courier-BoldOblique"   embed="1" file="courbi.ttf"/>
+  <ttf typeface="Symbol"                embed="1" file="symbol.ttf"/>
+</fonts-pdf>
+
+<media name="Letter" width="216" height="279"/>
+<media name="Legal" width="216" height="357"/>
+<media name="Executive" width="184" height="267"/>
+<media name="B5" width="182" height="257"/>
+<media name="Folio" width="216" height="330"/>
+<media name="A0Oversize" width="882" height="1247"/>
+<media name="A0" width="841" height="1189"/>
+<media name="A1" width="594" height="841"/>
+<media name="A2" width="420" height="594"/>
+<media name="A3" width="297" height="420"/>
+<media name="A4" width="210" height="297"/>
+<media name="A5" width="148" height="210"/>
+<media name="A6" width="105" height="148"/>
+<media name="A7" width="74" height="105"/>
+<media name="A8" width="52" height="74"/>
+<media name="A9" width="37" height="52"/>
+<media name="A10" width="26" height="37"/>
+<media name="Screenshot640"  width="640"  height="480"/>
+<media name="Screenshot800"  width="800"  height="600"/>
+<media name="Screenshot1024" width="1024" height="768"/>
+</config>

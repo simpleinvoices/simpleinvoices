@@ -1,6 +1,6 @@
 <?php
 class ParserXHTML extends Parser {
-  function &process($html, &$pipeline) {
+  function &process($html, &$pipeline, &$media) {
     // Run the XML parser on the XHTML we've prepared
     $dom_tree = TreeBuilder::build($html);
 
@@ -8,7 +8,7 @@ class ParserXHTML extends Parser {
     if (is_null($dom_tree)) {
       readfile(HTML2PS_DIR.'/templates/cannot_parse.html');
       error_log(sprintf("Cannot parse document: %s", $pipeline->get_base_url()));
-      die();
+      die("HTML2PS Error");
     }
 
     /**
@@ -36,19 +36,19 @@ class ParserXHTML extends Parser {
      * This should be done here, as the document body may include STYLE node 
      * (this violates HTML standard, but is rather often appears in Web)
      */
-    scan_styles($dom_tree, $pipeline);
-    // Temporary hack: convert CSS rule array to CSS object
-    global $g_css;
-    global $g_css_obj;
-    $g_css_obj = new CSSObject;
+    $css =& $pipeline->getCurrentCSS();
+    $css->scan_styles($dom_tree, $pipeline);
 
-    foreach ($g_css as $rule) {
-      $g_css_obj->add_rule($rule, $pipeline);
-    }
+    if (!is_null($media)) {
+      // Setup media size and margins
+      $pipeline->get_page_media(1, $media);
+      $pipeline->output_driver->update_media($media);
+      $pipeline->_setupScales($media);
+    };
 
-    $body = traverse_dom_tree_pdf($dom_tree);
-    $box =& create_pdf_box($body, $pipeline);
-    
+    $body =& traverse_dom_tree_pdf($dom_tree);
+    $box =& create_pdf_box($body, $pipeline);   
+
     return $box;
   }
 

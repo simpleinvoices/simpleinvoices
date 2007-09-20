@@ -1,6 +1,6 @@
 <?php
 
-require_once('ps.image.encoder.stream.inc.php');
+require_once(HTML2PS_DIR.'ps.image.encoder.stream.inc.php');
 
 class PSL3ImageEncoderStream extends PSImageEncoderStream {
   function PSL3ImageEncoderStream() {
@@ -206,7 +206,7 @@ class PSL3ImageEncoderStream extends PSImageEncoderStream {
     $ctr = 0;
 
     // Save visible background color
-    $handler =& get_css_handler('background-color');
+    $handler =& CSS::get_handler(CSS_BACKGROUND_COLOR);
     $bg = $handler->get_visible_background_color();
 
     for ($y = 0; $y < $size_y; $y++) {

@@ -1,5 +1,7 @@
 <?php
-// $Header: /cvsroot/html2ps/box.br.php,v 1.25 2006/03/19 09:25:34 Konstantin Exp $
+// $Header: /cvsroot/html2ps/box.br.php,v 1.31 2006/11/11 13:43:51 Konstantin Exp $
+
+require_once(HTML2PS_DIR.'layout.vertical.php');
 
 /**
  * @package HTML2PS
@@ -16,32 +18,37 @@
  *
  * @link http://www.w3.org/TR/html4/struct/text.html#edef-BR HTML 4.01 Forcing a line break: the BR element 
  */
-class BRBox extends GenericFormattedBox {
+class BRBox extends GenericBox {
   /**
    * Create new BR element
    */
   function BRBox() {
-    /**
-     * We're trying to avoid inheriting any of current CSS properties;
-     * push_css_defaults will prevent any unneeded CSS properties like margins and padding to be inherited;
-     * on the other size, it will keep the 'font-size' property we need to calculate the line height 
-     */
-    push_css_defaults();
-    $this->GenericFormattedBox();
-    pop_css_defaults();
+    $this->GenericBox();
+  }
+
+  function apply_clear($y, &$context) {
+    return LayoutVertical::apply_clear($this, $y, $context);
+  }
+
+  function out_of_flow() {
+    return true;
+  }
+
+  function readCSS(&$state) {
+    parent::readCSS($state);
 
     /**
      * We treat BR as a block box; as default value of 'display' property is not 'block', we should 
      * set it up manually.
      */
-    $this->display = 'block';
+    $this->setCSSProperty(CSS_DISPLAY, 'block');
 
-    /**
-     * In addition to 'display', we should inherit the 'clear' CSS property, as the 
-     * <BR style="clear: both;"> construct is often used all over the Net.
-     */
-    $handler =& get_css_handler('clear');
-    $this->clear = $handler->get();
+    $this->_readCSS($state,
+                    array(CSS_CLEAR));
+
+    $this->_readCSSLengths($state, 
+                           array(CSS_MARGIN,
+                                 CSS_LINE_HEIGHT));
   }
 
   /**
@@ -51,6 +58,7 @@ class BRBox extends GenericFormattedBox {
    */
   function &create(&$pipeline) {
     $box =& new BRBox();
+    $box->readCSS($pipeline->getCurrentCSSState());
     return $box;
   }
 
@@ -88,7 +96,7 @@ class BRBox extends GenericFormattedBox {
    * @see GenericContainerBox
    */
   function reflow(&$parent, &$context) {  
-    GenericFormattedBox::reflow($parent, $context);
+    parent::reflow($parent, $context);
 
     /**
      * Apply 'clear' property; the current Y coordinate can be modified as a result of 'clear'.
@@ -113,11 +121,18 @@ class BRBox extends GenericFormattedBox {
        * <div><br/> .. some text here...</div>); thus, as we're initiating
        * a new line, we need to offset current Y coordinate by the font-size value.
        */
-      $parent->close_line($context, true);
-      $parent->_current_y = min($this->get_bottom(), $parent->_current_y - $this->font_size);
 
+      // Note that _current_y should be modified before 'close_line' call, as it checks for 
+      // left-floating boxes, causing an issues if line bottom will be placed below
+      // float while line top is above float bottom margin
+      $font = $this->getCSSProperty(CSS_FONT);
+      $fs = $font->size;
+      $parent->_current_y = min($this->get_bottom(), 
+                                $parent->_current_y - $font->line_height->apply($fs->getPoints()));
+
+      $parent->close_line($context, true);
     } else { 
-      /**
+     /**
        * There's at least 1 non-whitespace element in the parent line box, we do not need to use whitespace 
        * height; the bottom of the line box is defined by the non-whitespace elements. Top of the new line
        * should be equal to that value.
@@ -158,6 +173,29 @@ class BRBox extends GenericFormattedBox {
    */
   function reflow_whitespace(&$linebox_started, &$previous_whitespace) {
     $linebox_started = false;
+  }
+
+  function get_height() {
+    return 0;
+  }
+
+  function get_width() {
+    return 0;
+  }
+
+  /**
+   * BRBox may be placed inside InlineBox (white-space: pre)
+   */
+  function get_ascender() {
+    return 0;
+  }
+
+  function get_descender() {
+    return 0;
+  }
+
+  function isLineBreak() {
+    return true;
   }
 }
 ?>

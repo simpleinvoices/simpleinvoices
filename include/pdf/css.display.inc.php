@@ -1,8 +1,8 @@
 <?php
-// $Header: /cvsroot/html2ps/css.display.inc.php,v 1.18 2005/09/25 16:21:44 Konstantin Exp $
+// $Header: /cvsroot/html2ps/css.display.inc.php,v 1.21 2006/09/07 18:38:13 Konstantin Exp $
 
-class CSSDisplay extends CSSProperty {
-  function CSSDisplay() { $this->CSSProperty(false, false); }
+class CSSDisplay extends CSSPropertyHandler {
+  function CSSDisplay() { $this->CSSPropertyHandler(false, false); }
 
   function get_parent() { 
     if (isset($this->_stack[1])) {
@@ -14,10 +14,20 @@ class CSSDisplay extends CSSProperty {
 
   function default_value() { return "inline"; }
 
-  function parse($value) { return $value; }
+  function getPropertyCode() {
+    return CSS_DISPLAY;
+  }
+
+  function getPropertyName() {
+    return 'display';
+  }
+
+  function parse($value) { 
+    return trim(strtolower($value));
+  }
 }
 
-register_css_property('display', new CSSDisplay);
+CSS::register_css_property(new CSSDisplay);
 
 function is_inline_element($display) {
   return 

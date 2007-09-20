@@ -11,7 +11,7 @@
 // as PHP does not support the static variables, we'll use a global variable
 // containing all cached objects; note that cache consumes memory!
 //
-$g_image_cache = array();
+$GLOBALS['g_image_cache'] = array();
 
 class Image {
   // Static funcion; checks if given URL is already cached and either returns 
@@ -55,15 +55,9 @@ class Image {
     fwrite($file, $data->content);
     fclose($file);
     $pipeline->pop_base_url();
-
-//     if (!@copy($url, $filename)) { 
-//       error_log("Cannot fetch image: ".$url);
-//       return null; 
-//     };
     
     // register it in the cached objects array
     //
-    // $g_image_cache[$url] = $filename;
     $g_image_cache[$url] = array('filename' => $filename,
                                  'handle' => do_image_open($filename));
     
@@ -126,9 +120,7 @@ class Image {
   // TODO: Will cause problems with simultaneous access to the same images  
   //
   function clear_cache() {
-    global $g_image_cache;
-
-    foreach ($g_image_cache as $key => $value) {
+    foreach ($GLOBALS['g_image_cache'] as $key => $value) {
       unlink($value['filename']);
     };
     $g_image_cache = array();

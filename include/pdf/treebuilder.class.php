@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/html2ps/treebuilder.class.php,v 1.14 2006/04/12 15:17:22 Konstantin Exp $
+// $Header: /cvsroot/html2ps/treebuilder.class.php,v 1.17 2007/05/06 18:49:29 Konstantin Exp $
 
 if (!defined('XML_ELEMENT_NODE')) { define('XML_ELEMENT_NODE',1); };
 if (!defined('XML_TEXT_NODE')) { define('XML_TEXT_NODE',2); };
@@ -12,10 +12,19 @@ class TreeBuilder {
     // First uses a set of domxml_* functions, 
     // Second - object-oriented interface
     // Third - pure PHP XML parser
-    if (function_exists('domxml_open_mem')) { return domxml_open_mem($xmlstring); };
-    if (class_exists('DOMDocument')) { return DOMTree::from_DOMDocument(DOMDocument::loadXML($xmlstring)); };
+    if (function_exists('domxml_open_mem')) { 
+      require_once(HTML2PS_DIR.'dom.php4.inc.php');
+      return PHP4DOMTree::from_DOMDocument(domxml_open_mem($xmlstring)); 
+    };
+
+    if (class_exists('DOMDocument')) { 
+      require_once(HTML2PS_DIR.'dom.php5.inc.php');
+      return DOMTree::from_DOMDocument(DOMDocument::loadXML($xmlstring)); 
+    };
+
+    require_once(HTML2PS_DIR.'dom.activelink.inc.php');
     if (file_exists(HTML2PS_DIR.'/classes/include.php')) { 
-      require_once(HTML2PS_DIR.'/classes/include.php');
+      require_once(HTML2PS_DIR.'classes/include.php');
       import('org.active-link.xml.XML');
       import('org.active-link.xml.XMLDocument');
         

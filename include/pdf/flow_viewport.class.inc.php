@@ -16,8 +16,11 @@ class FlowViewport {
     $viewport = new FlowViewport;
     $viewport->left   = $box->get_left_padding();
     $viewport->top    = $box->get_top_padding();
-    $viewport->width  = $box->get_width() + $box->padding->left->value + $box->padding->right->value;
-    $viewport->height = $box->get_height() + $box->padding->top->value + $box->padding->bottom->value;
+    
+    $padding = $box->getCSSProperty(CSS_PADDING);
+    
+    $viewport->width  = $box->get_width() + $padding->left->value + $padding->right->value;
+    $viewport->height = $box->get_height() + $padding->top->value + $padding->bottom->value;
 
     return $viewport;
   }

@@ -1,5 +1,5 @@
 <?php 
-// $Header: /cvsroot/html2ps/xhtml.tables.inc.php,v 1.8 2005/09/06 06:46:29 Konstantin Exp $
+// $Header: /cvsroot/html2ps/xhtml.tables.inc.php,v 1.9 2006/10/28 12:24:16 Konstantin Exp $
 
 function process_cell(&$sample_html, $offset) {
   $r = autoclose_tag($sample_html, $offset, 
@@ -46,8 +46,10 @@ function process_row(&$sample_html, $offset) {
 
 function process_rowgroup($group, &$sample_html, $offset) {
   return autoclose_tag_cleanup($sample_html, $offset, 
-                               "(thead|tbody|tfoot|tr|/table|/{$group})",
-                               array("tr" => "process_row"),
+                               "(thead|tbody|tfoot|td|th|tr|/table|/{$group})",
+                               array("tr" => "process_row",
+                                     "td" => "process_cell",
+                                     "th" => "process_header_cell"),
                                "/{$group}");
 }
 

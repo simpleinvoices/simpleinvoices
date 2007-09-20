@@ -53,7 +53,7 @@ particular functions can be disabled even when <i>safe mode</i> is OFF).</td>
 <td>Enable 'exec' function in your php.ini (refer your PHP manual or <a href="http://www.php.net">www.php.net</a> for exact instructions)</td>
 </tr>
 <tr class="odd">
-<td>Executalbe is missing on your server.</td>
+<td>Executable is missing on your server.</td>
 <td>Check and update paths to executable files in script configuration</td>
 </tr>
 <tr class="even">

@@ -54,7 +54,7 @@ function convert_to_pdf($path_to_html, $path_to_pdf) {
                                                        "");
 
   // Override HTML source 
-  $pipeline->fetchers = array(new MyFetcherLocalFile($path_to_html));
+  $pipeline->fetchers[] = new MyFetcherLocalFile($path_to_html);
 
   // Override destination to local file
   $pipeline->destination = new MyDestinationFile($path_to_pdf);
@@ -90,6 +90,6 @@ function convert_to_pdf($path_to_html, $path_to_pdf) {
   $pipeline->process($baseurl, $media);
 }
 
-convert_to_pdf("http://localhost/simpleinvoices/index.php", "./include/pdf/out/invoice_simple.pdf");
+convert_to_pdf("./testing/forms.html", "./testing/forms.pdf");
 
 ?>

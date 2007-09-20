@@ -1,8 +1,8 @@
 <?php
-// $Header: /cvsroot/html2ps/utils_array.php,v 1.6 2005/12/24 15:37:57 Konstantin Exp $
+// $Header: /cvsroot/html2ps/utils_array.php,v 1.7 2006/09/07 18:38:16 Konstantin Exp $
 
 function any_flag_set(&$flags) {
-  for ($i=0; $i<count($flags); $i++) {
+  for ($i=0, $size = count($flags); $i<$size; $i++) {
     if ($flags[$i]) { return true; };
   }
   return false;
@@ -24,7 +24,7 @@ function expand_to_with_flags($size, $array, $flags) {
 
   // Check if there's any expandable columns
   $sum = 0;
-  for ($i=0; $i<count($flags); $i++) {
+  for ($i=0, $count = count($flags); $i<$count; $i++) {
     if ($flags[$i]) { $sum += $array[$i]; };
   }
 
@@ -42,7 +42,7 @@ function expand_to_with_flags($size, $array, $flags) {
   $koeff = $size / $sum;
 
   // Apply scale koeff
-  for ($i=0; $i<count($flags); $i++) {
+  for ($i=0, $count = count($flags); $i < $count; $i++) {
     if ($flags[$i]) { $array[$i] *= $koeff; };
   }  
 
@@ -65,7 +65,7 @@ function expand_to($size, $array) {
   $koeff = $size / array_sum($array);
 
   // Apply scale koeff
-  for ($i=0; $i<count($array); $i++) {
+  for ($i=0, $size = count($array); $i<$size; $i++) {
     $array[$i] *= $koeff;
   }  
 

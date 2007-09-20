@@ -13,7 +13,7 @@ class FetchedDataURL extends FetchedDataHTML {
     //
     if (is_null($encoding)) {
       foreach ($this->headers as $header) {
-        if (preg_match("/Content-Type: .*charset=\s*(\S+)/i", $header, $matches)) {
+        if (preg_match("/Content-Type: .*charset=\s*([^\s;]+)/i", $header, $matches)) {
           $encoding = strtolower($matches[1]);
         };
       };

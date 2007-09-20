@@ -1,10 +1,12 @@
 <?php
-// $Header: /cvsroot/html2ps/box.legend.php,v 1.12 2006/03/19 09:25:35 Konstantin Exp $
+// $Header: /cvsroot/html2ps/box.legend.php,v 1.14 2006/07/09 09:07:44 Konstantin Exp $
 
 class LegendBox extends GenericContainerBox {
   function &create(&$root, &$pipeline) {
     $box = new LegendBox($root);
+    $box->readCSS($pipeline->getCurrentCSSState());
     $box->create_content($root, $pipeline);
+
     return $box;
   }
 

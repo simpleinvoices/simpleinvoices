@@ -1,21 +1,31 @@
 <?php
-// $Header: /cvsroot/html2ps/css.border.collapse.inc.php,v 1.6 2006/04/16 16:54:56 Konstantin Exp $
+// $Header: /cvsroot/html2ps/css.border.collapse.inc.php,v 1.7 2006/07/09 09:07:44 Konstantin Exp $
 
 define('BORDER_COLLAPSE', 1);
 define('BORDER_SEPARATE', 2);
 
-class CSSBorderCollapse extends CSSProperty {
-  function CSSBorderCollapse() { $this->CSSProperty(true, true); }
+class CSSBorderCollapse extends CSSPropertyStringSet {
+  function CSSBorderCollapse() { 
+    $this->CSSPropertyStringSet(true, 
+                                true,
+                                array('inherit'  => CSS_PROPERTY_INHERIT,
+                                      'collapse' => BORDER_COLLAPSE,
+                                      'separate' => BORDER_SEPARATE)); 
+  }
 
-  function default_value() { return BORDER_SEPARATE; }
+  function default_value() { 
+    return BORDER_SEPARATE; 
+  }
 
-  function parse($value) {
-    if ($value === 'collapse') { return BORDER_COLLAPSE; };
-    if ($value === 'separate') { return BORDER_SEPARATE; };
-    return $this->default_value();
+  function getPropertyCode() {
+    return CSS_BORDER_COLLAPSE;
+  }
+
+  function getPropertyName() {
+    return 'border-collapse';
   }
 }
 
-register_css_property('border-collapse', new CSSBorderCollapse);
+CSS::register_css_property(new CSSBorderCollapse);
 
 ?>

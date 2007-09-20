@@ -1,6 +1,6 @@
 <?php
 
-require_once('ps.image.encoder.stream.inc.php');
+require_once(HTML2PS_DIR.'ps.image.encoder.stream.inc.php');
 
 class PSL2ImageEncoderStream extends PSImageEncoderStream {
   function by_lines($image, &$size_x, &$size_y) {

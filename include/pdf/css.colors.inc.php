@@ -1,7 +1,7 @@
 <?php
-// $Header: /cvsroot/html2ps/css.colors.inc.php,v 1.7 2006/01/07 19:38:06 Konstantin Exp $
+// $Header: /cvsroot/html2ps/css.colors.inc.php,v 1.10 2007/01/24 18:55:51 Konstantin Exp $
 
-$g_colors = array(
+$GLOBALS['g_colors'] = array(
   // Standard HTML colors
   "black"   => array(0,0,0),
   "silver"  => array(192,192,192),
@@ -19,6 +19,7 @@ $g_colors = array(
   "blue"    => array(0,0,255),
   "teal"    => array(0,128,128),
   "aqua"    => array(0,255,255), 
+
   // Widely-used non-stadard color names
   "aliceblue"            => array(240,248,255),
   "antiquewhite"         => array(250,235,215),
@@ -146,7 +147,16 @@ $g_colors = array(
   "yellowgreen"          => array(154,205, 50)
 );
 
-function parse_color_declaration($decl, $defcol) {
+function &parse_color_declaration($decl) {
+  $color = _parse_color_declaration($decl, $success);
+  $color_obj =& new Color($color, is_transparent($color));
+  return $color_obj;
+};
+
+
+function _parse_color_declaration($decl, &$success) {
+  $success = true;
+
   global $g_colors;
   if (isset($g_colors[strtolower($decl)])) { return $g_colors[strtolower($decl)]; };
 
@@ -154,8 +164,6 @@ function parse_color_declaration($decl, $defcol) {
   switch (strtolower($decl)) {
     case "transparent":
       return array(-1,-1,-1);
-    case "inherit":
-      return $defcol;
   }
 
   // rgb(0,0,0) form
@@ -183,7 +191,7 @@ function parse_color_declaration($decl, $defcol) {
   };
 
   // #000000 form
-  if (preg_match("/#([[:xdigit:]]{2})([[:xdigit:]]{2})([[:xdigit:]]{2})/",$decl,$matches)) {
+  if (preg_match("/^#([[:xdigit:]]{2})([[:xdigit:]]{2})([[:xdigit:]]{2})$/",$decl,$matches)) {
     $arrr = unpack("C",pack("H2",$matches[1]));
     $arrg = unpack("C",pack("H2",$matches[2]));
     $arrb = unpack("C",pack("H2",$matches[3]));
@@ -199,7 +207,7 @@ function parse_color_declaration($decl, $defcol) {
   };
 
   // #000 form
-  if (preg_match("/#([[:xdigit:]])([[:xdigit:]])([[:xdigit:]])/",$decl,$matches)) {
+  if (preg_match("/^#([[:xdigit:]])([[:xdigit:]])([[:xdigit:]])$/",$decl,$matches)) {
     $arrr = unpack("C",pack("H2",$matches[1].$matches[1]));
     $arrg = unpack("C",pack("H2",$matches[2].$matches[2]));
     $arrb = unpack("C",pack("H2",$matches[3].$matches[3]));
@@ -214,7 +222,8 @@ function parse_color_declaration($decl, $defcol) {
     return array($r,$g,$b);
   };
 
-  // Transparent color
+  // Transparent color - by default
+  $success = false;
   return array(-1,-1,-1);
 }
 

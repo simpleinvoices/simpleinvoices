@@ -9,8 +9,9 @@ class ListStyleImage {
     $this->_image = $image;
   }
 
-  function copy() {
-    return new ListStyleImage($this->_url, $this->_image);
+  function &copy() {
+    $value =& new ListStyleImage($this->_url, $this->_image);
+    return $value;
   }
 
   function is_default() { 

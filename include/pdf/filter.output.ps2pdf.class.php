@@ -20,7 +20,7 @@ function safe_exec($cmd, &$output) {
       $_cmd = $cmd;
       include(HTML2PS_DIR.'/templates/error_exec.tpl');
       error_log("Error executing '{$cmd}'. Command produced no output.");
-      die();
+      die("HTML2PS Error");
     };
     die($message);
   };

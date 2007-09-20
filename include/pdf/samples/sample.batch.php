@@ -132,6 +132,7 @@ $g_px_scale = mm2pt($media->width() - $media->margins['left'] - $media->margins[
 $g_pt_scale = $g_px_scale * 1.43; 
 
 $pipeline = new Pipeline;
+$pipeline->configure($g_config);
 $pipeline->fetchers[]     = new FetcherURL;
 $pipeline->data_filters[] = new DataFilterDoctype();
 $pipeline->data_filters[] = new DataFilterUTF8("");

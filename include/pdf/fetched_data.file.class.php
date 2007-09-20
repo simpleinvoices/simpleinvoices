@@ -3,6 +3,11 @@ class FetchedDataFile extends FetchedDataHTML {
   var $content;
   var $path;
 
+  function FetchedDataFile($content, $path) {
+    $this->content = $content;
+    $this->path    = $path;
+  }
+
   function detect_encoding() {
     // First, try to get encoding from META http-equiv tag
     //
@@ -13,11 +18,6 @@ class FetchedDataFile extends FetchedDataHTML {
     if (is_null($encoding)) { $encoding = "iso-8859-1";  }
 
     return $encoding;
-  }
-
-  function FetchedDataURL($content, $path) {
-    $this->content = $content;
-    $this->path    = $path;
   }
 
   function get_additional_data($key) {

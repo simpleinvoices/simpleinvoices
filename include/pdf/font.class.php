@@ -1,9 +1,7 @@
 <?php
 
-$g_last_assigned_font_id = 0;
+$GLOBALS['g_last_assigned_font_id'] = 0;
 
-// Note that ALL font dimensions are measured in 1/1000 of font size units;
-//
 class Font {
   var $underline_position;
   var $underline_thickness;
@@ -12,16 +10,120 @@ class Font {
   var $char_widths;
   var $bbox;
 
-  function ascender() { return $this->ascender; }
+  function ascender() { 
+    return $this->ascender; 
+  }
 
-  function descender() { return $this->descender; }
-
-  function error_message() { return $this->error_message; }
+  function descender() { 
+    return $this->descender; 
+  }
+  
+  function error_message() { 
+    return $this->error_message; 
+  }
 
   function Font() {}
 
+  function linethrough_position() {
+    return $this->bbox[3]*0.25;
+  }
+
+  function name() {
+    return $this->name;
+  }
+
+  function overline_position() {
+    return $this->bbox[3]*0.8;
+  }
+
+  function points($fontsize, $dimension) {
+    return $dimension * $fontsize / 1000;
+  }
+
+  function stringwidth($string) {
+    $width = 0;
+
+    $length = strlen($string);
+    for ($i=0; $i<$length; $i++) {
+      $width += $this->char_widths[$string{$i}];
+    };
+
+    return $width;
+  }
+
+  function underline_position() {
+    return $this->underline_position;
+  }
+
+  function underline_thickness() {
+    return $this->underline_thickness;
+  }
+}
+
+class FontTrueType extends Font {
+  function create($fontfile, $encoding) {
+    $font = new FontTrueType();
+    $font->_read(TTF_FONTS_REPOSITORY.$fontfile, $encoding);
+    return $font;
+  }
+
+  /**
+   * TODO: cache results; replace makefont with this utility
+   */
+  function _read($file, $encoding) {
+    error_log(sprintf("Parsing font file file %s for encoding %s", $file, $encoding));
+    
+    $font = new OpenTypeFile();
+    $font->open($file);
+    $hhea = $font->getTable('hhea');
+    $head = $font->getTable('head');
+    $hmtx = $font->getTable('hmtx');
+    $post = $font->getTable('post');
+    $cmap = $font->getTable('cmap');
+    $subtable = $cmap->findSubtable(OT_CMAP_PLATFORM_WINDOWS,
+                                    OT_CMAP_PLATFORM_WINDOWS_UNICODE);  
+
+    /**
+     * Read character widths for selected encoding
+     */
+    $widths = array();
+    $manager = ManagerEncoding::get();
+    $map = $manager->getEncodingVector($encoding);
+    foreach ($map as $code => $ucs2) {
+      $glyphIndex = $subtable->lookup($ucs2);
+      if (!is_null($glyphIndex)) {
+        $widths[$code] = floor($hmtx->_hMetrics[$glyphIndex]['advanceWidth']*1000/$head->_unitsPerEm);
+      } else {
+        $widths[$code] = DEFAULT_CHAR_WIDTH;
+      };
+    };
+
+    // Fill unknown characters with the default char width
+    for ($i=0; $i<256; $i++) {
+      if (!isset($widths[chr($i)])) {
+        $widths[chr($i)] = DEFAULT_CHAR_WIDTH;
+      };
+    };
+
+    $this->ascender            = floor($hhea->_ascender*1000/$head->_unitsPerEm);
+    $this->descender           = floor($hhea->_descender*1000/$head->_unitsPerEm);
+    $this->bbox                = array($head->_xMin*1000/$head->_unitsPerEm,
+                                       $head->_yMin*1000/$head->_unitsPerEm,
+                                       $head->_xMax*1000/$head->_unitsPerEm,
+                                       $head->_yMax*1000/$head->_unitsPerEm);
+    $this->underline_position  = floor($post->_underlinePosition*1000/$head->_unitsPerEm);
+    $this->underline_thickness = floor($post->_underlineThickness*1000/$head->_unitsPerEm);
+    $this->char_widths         = $widths;
+
+    $font->close();
+  }
+}
+
+// Note that ALL font dimensions are measured in 1/1000 of font size units;
+//
+class FontType1 extends Font {
   function &create($typeface, $encoding, $font_resolver, &$error_message) {
-    $font = new Font();
+    $font = new FontType1();
 
     $font->underline_position = 0;
     $font->underline_thickness = 0;
@@ -45,18 +147,6 @@ class Font {
     };
 
     return $font;
-  }
-
-  function linethrough_position() {
-    return $this->bbox[3]*0.25;
-  }
-
-  function name() {
-    return $this->name;
-  }
-
-  function overline_position() {
-    return $this->bbox[3]*0.8;
   }
 
   // Parse the AFM metric file; keep only sized of glyphs present in the chosen encoding
@@ -124,29 +214,6 @@ class Font {
     };
 
     return true;
-  }
-
-  function points($fontsize, $dimension) {
-    return $dimension * $fontsize / 1000;
-  }
-
-  function stringwidth($string) {
-    $width = 0;
-
-    $length = strlen($string);
-    for ($i=0; $i<$length; $i++) {
-      $width += $this->char_widths[$string{$i}];
-    };
-
-    return $width;
-  }
-
-  function underline_position() {
-    return $this->underline_position;
-  }
-
-  function underline_thickness() {
-    return $this->underline_thickness;
   }
 }
 ?>

@@ -1,6 +1,10 @@
 <?php
 
 class OutputDriverFastPSLevel2 extends OutputDriverFastPS {
+  function OutputDriverFastPSLevel2(&$image_encoder) {
+    $this->OutputDriverFastPS($image_encoder);
+  }
+
   function image($image, $x, $y, $scale) {
     $this->image_scaled($image, $x, $y, $scale, $scale);
   }

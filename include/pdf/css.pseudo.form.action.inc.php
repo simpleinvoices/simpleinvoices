@@ -1,15 +1,23 @@
 <?php
 
-class CSSPseudoFormAction extends CSSProperty {
-  function CSSPseudoFormAction() { $this->CSSProperty(true, true); }
+class CSSPseudoFormAction extends CSSPropertyHandler {
+  function CSSPseudoFormAction() { $this->CSSPropertyHandler(true, true); }
 
   function default_value() { return null; }
 
   function parse($value) { 
     return $value;
   }
+
+  function getPropertyCode() {
+    return CSS_HTML2PS_FORM_ACTION;
+  }
+
+  function getPropertyName() {
+    return '-html2ps-form-action';
+  }
 }
 
-register_css_property('-html2ps-form-action', new CSSPseudoFormAction);
+CSS::register_css_property(new CSSPseudoFormAction);
 
 ?>

@@ -19,6 +19,14 @@
   you can get unpredictable results.
 
 <h2>Special fields</h2>
+
+<p>Note that these fields are processed by separate filter 
+(<a href="api.html#filter-pre-html2ps-fields">PreTreeFilterHTML2PSFields</a>). 
+If you're using HTML2PS API, you should install this filter using the following code:
+<pre>
+pipeline->pre_tree_filters[] = new PreTreeFilterHTML2PSFields();
+</pre>
+
 <table>
 <tbody>
 <tr class="odd">
@@ -33,7 +41,10 @@
 
 <tr class="odd">
 <td>##PAGES##</td>
-<td>Total number of pages in the generated PDF file</td>
+<td>
+Total number of pages in the generated PDF file. Note that this directive 
+will show number of pages in current source file when the script is run in batch mode.
+</td>
 </tr>
 
 <tr class="event">

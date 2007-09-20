@@ -1,5 +1,7 @@
 <?php
 
+require_once(HTML2PS_DIR.'fetcher._interface.class.php');
+
 define('HTTP_OK',200);
 
 /**
@@ -37,6 +39,8 @@ class FetcherUrl extends Fetcher {
   }
 
   function get_data($data_id) {
+    $this->redirects = 0;
+
     if ($this->fetch($data_id)) {
       if ($this->code != HTTP_OK) {
 
@@ -71,7 +75,7 @@ class FetcherUrl extends Fetcher {
 
       return null;
     } else {
-      $_server_response    = $this->headers;
+      $_server_response = $this->headers;
       $_url = htmlspecialchars($data_id);
 
       ob_start();
@@ -201,7 +205,15 @@ class FetcherUrl extends Fetcher {
   }
 
   function fetch($url) {
-    error_log("Fetching: $url");
+    /**
+     * Handle empty $url value; unfortunaltely, parse_url will treat empty value as valid
+     * URL, so fetcher will attempt to fetch something from the localhost instead of 
+     * passing control to subsequent user-defined fetchers (which probably will know
+     * how to handle this).
+     */
+    if ($url === "") {
+      return null;
+    }
 
     $this->url = $url;
 
@@ -288,7 +300,7 @@ class FetcherUrl extends Fetcher {
       $path = substr($this->url, 7);
     };
 
-    $normalized_path = realpath($path);
+    $normalized_path = realpath(urldecode($path));
 
     if (substr($normalized_path, 0, strlen(FILE_PROTOCOL_RESTRICT)) !== FILE_PROTOCOL_RESTRICT) {
       error_log(sprintf("Access denied to file '%s'", $normalized_path));
@@ -376,8 +388,6 @@ class FetcherUrl extends Fetcher {
   }
 
   function _process_code($res, $used_get = false) {
-    error_log("Status code:".$this->code);
-
     switch ($this->code) {
     case '200': // OK
       if (preg_match('/(.*?)\r\n\r\n(.*)/s',$res,$matches)) {

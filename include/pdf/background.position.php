@@ -52,9 +52,10 @@ class BackgroundPosition {
    *
    * @return BackgroundPosition A copy of current object
    */
-  function copy() {
-    return new BackgroundPosition($this->x, $this->x_percentage,
-                                  $this->y, $this->y_percentage);
+  function &copy() {
+    $value =& new BackgroundPosition($this->x, $this->x_percentage,
+                                     $this->y, $this->y_percentage);
+    return $value;
   }
 
   /**

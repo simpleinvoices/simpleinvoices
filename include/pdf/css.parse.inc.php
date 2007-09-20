@@ -1,5 +1,9 @@
 <?php
-// $Header: /cvsroot/html2ps/css.parse.inc.php,v 1.21 2006/03/19 09:25:36 Konstantin Exp $
+// $Header: /cvsroot/html2ps/css.parse.inc.php,v 1.28 2007/03/15 18:37:31 Konstantin Exp $
+
+require_once(HTML2PS_DIR.'css.rules.page.inc.php');
+require_once(HTML2PS_DIR.'css.property.collection.php');
+require_once(HTML2PS_DIR.'css.parse.properties.php');
 
 define("SELECTOR_CLASS_REGEXP","[\w\d_-]+");
 define("SELECTOR_ID_REGEXP","[\w\d_-]+");
@@ -9,7 +13,7 @@ define("SELECTOR_ATTR_VALUE_WORD_REGEXP" ,"([\w]+)~=['\"]?([\w]+)['\"]?");
 
 // Parse the 'style' attribute value of current node\
 //
-function parse_style_attr($psdata, $root, &$pipeline) {
+function parse_style_attr($root, &$state, &$pipeline) {
   $style = $root->get_attribute("style");
 
   // Some "designers" (obviously lacking the brain and ability to read ) use such constructs:
@@ -36,43 +40,8 @@ function parse_style_attr($psdata, $root, &$pipeline) {
                             $root
                             ),
                       $pipeline);
-  $rule->apply($root, $pipeline);
-}
 
-function parse_style_node($root, &$pipeline) {
-  global $g_stylesheet_title;
-
-  // Check if this style node have 'media' attribute 
-  // and if we're using this media;
-  //
-  // Note that, according to the HTML 4.01 p.14.2.3 
-  // This attribute specifies the intended destination medium for style information. 
-  // It may be a single media descriptor or a comma-separated list.
-  // The default value for this attribute is "screen".
-  //
-  $media_list = array("screen");
-  if ($root->has_attribute("media")) {
-
-    // Note that there may be whitespace symbols around commas, so we should not just use 'explode' function
-    //
-    $media_list = preg_split("/\s*,\s*/",trim($root->get_attribute("media")));
-  };
-
-  if (!is_allowed_media($media_list)) { return; };
-
-  if ($g_stylesheet_title === "") {
-    $g_stylesheet_title = $root->get_attribute("title");
-  };
-
-  if (!$root->has_attribute("title") || $root->get_attribute("title") === $g_stylesheet_title) {
-    /**
-     * Check if current node is empty (then, we don't need to parse its contents)
-     */
-    $content = trim($root->get_content());
-    if ($content != "") {
-      parse_css($content, $pipeline);
-    };
-  };
+  $rule->apply($root, $state, $pipeline);
 }
 
 // TODO: make a real parser instead of if-then-else mess
@@ -233,134 +202,35 @@ function parse_css_selectors($raw_selectors) {
   return $selectors;
 }
 
-function parse_css_import($import, &$pipeline) {
-  if (preg_match("/@import\s+[\"'](.*)[\"'];/",$import, $matches)) {
-    // @import "<url>"
-    css_import(trim($matches[1]), $pipeline);
-  } elseif (preg_match("/@import\s+url\((.*)\);/",$import, $matches)) {
-    // @import url()
-    css_import(trim(css_remove_value_quotes($matches[1])), $pipeline);
-  } elseif (preg_match("/@import\s+(.*);/",$import, $matches)) {
-    // @import <url>
-    css_import(trim(css_remove_value_quotes($matches[1])), $pipeline);
-  };
-}
+// function &parse_css_property($property, &$pipeline) { 
+//   if (preg_match("/^(.*?)\s*:\s*(.*)/",$property, $matches)) {
+//     $name = strtolower(trim($matches[1]));
+//     $code = CSS::word2code($name);
+//     if (is_null($code)) { 
+//       error_log(sprintf("Unsupported CSS property: '%s'", $name));
+//       $null = null;
+//       return $null;
+//     };
 
-function parse_css_property($property, &$pipeline) {
-  /**
-   * Check for !important declaration; if it is present, remove the "!important"
-   * substring from declaration text.
-   *
-   * @todo: store flag indicating that this property is important in returned data 
-   */
-  if (preg_match("/^(.*)!important/", $property, $matches)) {
-    $property = $matches[1];
-  };
-  
-  if (preg_match("/^(.*?)\s*:\s*(.*)/",$property, $matches)) {
-    return array(
-                 strtolower(trim($matches[1])) => trim($matches[2])
-                 );
-  } elseif (preg_match("/@import\s+\"(.*)\";/",$property, $matches)) {
-    // @import "<url>"
-    css_import(trim($matches[1]), $pipeline);
-  } elseif (preg_match("/@import\s+url\((.*)\);/",$property, $matches)) {
-    // @import url()
-    css_import(trim($matches[1]), $pipeline);
-  } elseif (preg_match("/@import\s+(.*);/",$property, $matches)) {
-    // @import <url>
-    css_import(trim($matches[1]), $pipeline);
-  } else {
-    return array();
-  };
-}
+//     $collection =& new CSSPropertyCollection();
+//     $collection->addProperty(CSSPropertyDeclaration::create($code, trim($matches[2]), $pipeline));
+//     return $collection;
+//   } elseif (preg_match("/@import\s+\"(.*)\";/",$property, $matches)) {
+//     // @import "<url>"
+//     $collection =& css_import(trim($matches[1]), $pipeline);
+//     return $collection;
+//   } elseif (preg_match("/@import\s+url\((.*)\);/",$property, $matches)) {
+//     // @import url()
+//     $collection =& css_import(trim($matches[1]), $pipeline);
+//     return $collection;
+//   } elseif (preg_match("/@import\s+(.*);/",$property, $matches)) {
+//     // @import <url>
+//     $collection =& css_import(trim($matches[1]), $pipeline);
+//     return $collection;
+//   } else {
+//     $collection =& new CSSPropertyCollection();
+//     return $collection;
+//   };
+// }
 
-function parse_css_properties($raw_properties, &$pipeline) {
-  $properties = split(";",$raw_properties);
-  $results = array();
-  foreach ($properties as $property) {
-    $results = array_merge($results, parse_css_property(trim($property), $pipeline));
-  };
-  return $results;
-}
-
-function parse_css($css, &$pipeline, $baseindex = 0) {
-  $allowed_media = implode("|",config_get_allowed_media());
-
-  // remove the UTF8 byte-order mark from the beginning of the file (several high-order symbols at the beginning)
-  $pos = 0;
-  $len = strlen($css);
-  while (ord($css{$pos}) > 127 && $pos < $len) { $pos ++; };
-  $css = substr($css, $pos);
-
-  // Process @media rules; 
-  // basic syntax is:
-  // @media <media>(,<media>)* { <rules> }
-  //
-
-  while (preg_match("/^(.*?)@media([^{]+){(.*)$/s",$css,$matches)) {
-    $head  = $matches[1];
-    $media = $matches[2];
-    $rest  = $matches[3];
-
-    // Process CSS rules placed before the first @media declaration - they should be applied to 
-    // all media types
-    //
-    parse_css_media($head, $pipeline, $baseindex);
-
-    // Extract the media content
-    if (!preg_match("/^((?:[^{}]*{[^{}]*})*)[^{}]*\s*}(.*)$/s", $rest, $matches)) {
-      die("CSS media syntax error\n");
-    } else {
-      $content = $matches[1];
-      $tail    = $matches[2];
-    };
-
-    // Check if this media is to be processed
-    if (preg_match("/".$allowed_media."/i", $media)) {
-      parse_css_media($content, $pipeline, $baseindex);
-    };
-
-    // Process the rest of CSS file
-    $css = $tail;
-  };
-
-  // The rest of CSS file belogs to common media, process it too
-  parse_css_media($css, $pipeline, $baseindex);
-}
-
-function parse_css_media($css, &$pipeline, $baseindex = 0) {
-  // Remove comments
-  $css = preg_replace("#/\*.*?\*/#is","",$css);
-
-  // Extract @import rules
-  if ($num = preg_match_all("/@import[^;]+;/",$css, $matches, PREG_PATTERN_ORDER)) {
-    for ($i=0; $i<$num; $i++) {
-      parse_css_import($matches[0][$i], $pipeline);
-    }
-  };
-
-  while (preg_match("/([^{}]*){(.*?)}(.*)/is", $css, $matches)) {
-    // Drop extracted part
-    $css = $matches[3];
-
-    // Save extracted part
-    $raw_selectors  = $matches[1];
-    $raw_properties = $matches[2];
-
-    $selectors  = parse_css_selectors($raw_selectors);
-
-    $properties = parse_css_properties($raw_properties, $pipeline);
-
-    foreach ($selectors as $selector) {
-      // FIXME: this stuff definitely should be incapsulated
-      global $g_css;
-      global $g_css_index;
-      $g_css_index++;
-      array_push($g_css, array($selector, $properties, 
-                               $pipeline->get_base_url(),
-                               $g_css_index + $baseindex));
-    };
-  };
-}
 ?>
