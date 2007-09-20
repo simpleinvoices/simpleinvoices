@@ -1,10 +1,6 @@
 - NR todo (Sept)
  - reports : now using new format for total style (using products table) some reports may have to be rewritten - to be investigated
- - convert remaining pages to smarty
- - sys pref: make select def inv template work
- - menu :
-
- - index.php review input if is safe enought
+ -- Reports : Products: Dont include products with visibility = 0
  - quick view : check all style if all cut size to 25 characters stuff is working
  -- quick view : check consulting style - is descripton etc coming through OK?
  - lang: add new lang variables into all files : grep LANG_TODO
@@ -34,6 +30,8 @@
  - reports need templates - so as to work with menu system - done
  - patches 128 - 130 : if an if statement in them - done
  - language : new language system - review - done
+ - convert remaining pages to smarty - done
+ - sys pref: make select def inv template work - done
 
 - in next release +1 (NR1) - (aim end of Sept)
 -todo
@@ -71,6 +69,7 @@
  -- http://www.iana.org/assignments/language-subtag-registry
  --- sounds good - aim for NR+1
  - apply aplysia new drop down list code to others (refer system default: biller)
+ - index.php review input if is safe enought
 
 ##############################
 

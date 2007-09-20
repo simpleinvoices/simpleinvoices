@@ -8,16 +8,7 @@ if (!defined("BROWSE")) {
 }
 
 ?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-</head>
-<body>
-<br>
-<b>Totals by Aging periods</b>
-<hr></hr>
-<div id="container">
 
 <?php
 include('./config/config.php');
