@@ -1,5 +1,5 @@
 <?php
-include('./include/include_main.php');
+//include('./include/include_main.php');
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 
@@ -43,6 +43,7 @@ $display_block = <<<EOD
 EOD;
 }
 
+$smarty->assign('display_block', $display_block);
 
-	echo $display_block; 
+//	echo $display_block; 
 ?>

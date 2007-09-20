@@ -125,4 +125,5 @@ else {
 
 $smarty -> display("../templates/default/footer.tpl");
 
+
 ?>
