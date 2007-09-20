@@ -63,6 +63,9 @@
 <div id="top"></b></div>
 
 <table align=center>
+	<tr>
+		<td>{$message}</td>
+	</tr>
 </table>
 
 {/if}
