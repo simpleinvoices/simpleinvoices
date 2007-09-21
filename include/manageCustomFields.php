@@ -31,6 +31,10 @@ function saveCustomFieldValues($categorieId,$itemId) {
 	
 	$plugins = getPluginsByCategorie($categorieId);
 	
+	if($plugins == null) {
+		return;
+	}
+	
 	foreach($plugins as $plugin) {
 		$id = $plugin->fieldId;
 		$plugin->saveInput($_POST["cf$id"],$itemId);
@@ -39,6 +43,8 @@ function saveCustomFieldValues($categorieId,$itemId) {
 
 function updateCustomFieldValues($categorieId,$itemId) {
 	$plugins = getPluginsByCategorie($categorieId);
+	
+	if($plugins == null) return;
 	
 	foreach($plugins as $plugin) {
 		$id = $plugin->fieldId;
@@ -49,6 +55,8 @@ function updateCustomFieldValues($categorieId,$itemId) {
 function getPluginsByCategorie($categorieId) {
 	$sql = "SELECT * FROM ".TB_PREFIX."customFields WHERE categorieID = $categorieId;";
 	$query = mysqlQuery($sql);
+	
+	$plugins = null;
 	
 	for($i=0;$field = mysql_fetch_array($query);$i++) {	
 		$plugins[$i] = getPluginById($field['pluginId']);
