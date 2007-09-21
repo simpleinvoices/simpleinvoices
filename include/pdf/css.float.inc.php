@@ -1,26 +1,32 @@
 <?php
-// $Header: /cvsroot/html2ps/css.float.inc.php,v 1.6 2006/04/16 16:54:57 Konstantin Exp $
+// $Header: /cvsroot/html2ps/css.float.inc.php,v 1.7 2006/07/09 09:07:44 Konstantin Exp $
 
 define('FLOAT_NONE',0);
 define('FLOAT_LEFT',1);
 define('FLOAT_RIGHT',2);
 
-class CSSFloat extends CSSProperty {
-  function CSSFloat() { $this->CSSProperty(false, false); }
+class CSSFloat extends CSSPropertyStringSet {
+  function CSSFloat() { 
+    $this->CSSPropertyStringSet(false, 
+                                false,
+                                array('left'  => FLOAT_LEFT,
+                                      'right' => FLOAT_RIGHT,
+                                      'none'  => FLOAT_NONE)); 
+  }
 
-  function default_value() { return FLOAT_NONE; }
+  function default_value() { 
+    return FLOAT_NONE; 
+  }
 
-  function parse($value) {
-    // Convert value to lower case, as html allows values 
-    // in both cases to be entered
-    $value = strtolower($value);
-    
-    if ($value === 'left') { return FLOAT_LEFT; };
-    if ($value === 'right') { return FLOAT_RIGHT; };
-    return FLOAT_NONE;
+  function getPropertyCode() {
+    return CSS_FLOAT;
+  }
+
+  function getPropertyName() {
+    return 'float';
   }
 }
 
-register_css_property('float', new CSSFloat);
+CSS::register_css_property(new CSSFloat);
 
 ?>

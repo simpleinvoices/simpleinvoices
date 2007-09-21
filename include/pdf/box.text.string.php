@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/html2ps/box.text.string.php,v 1.1 2006/03/19 09:25:35 Konstantin Exp $
+// $Header: /cvsroot/html2ps/box.text.string.php,v 1.5 2006/10/06 20:10:52 Konstantin Exp $
 
 // TODO: from my POV, it wll be better to pass the font- or CSS-controlling object to the constructor
 // instead of using globally visible functions in 'show'.
@@ -7,12 +7,14 @@
 class TextBoxString extends TextBox {
   function &create($text, $encoding) {
     $box =& new TextBoxString($text, $encoding);
+    $box->readCSS($pipeline->getCurrentCSSState());
     return $box;
   }
 
   function TextBoxString($word, $encoding) {
     // Call parent constructor
-    $this->TextBox($word, $encoding);
+    $this->TextBox();
+    $this->add_subword($word, $encoding, array());
   }
 
   function get_extra_bottom() {

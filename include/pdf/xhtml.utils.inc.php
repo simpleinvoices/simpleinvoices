@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/html2ps/xhtml.utils.inc.php,v 1.32 2006/04/12 15:17:22 Konstantin Exp $
+// $Header: /cvsroot/html2ps/xhtml.utils.inc.php,v 1.35 2007/03/15 18:37:36 Konstantin Exp $
 
 function close_tag($tag, $sample_html) {
   return preg_replace("!(<{$tag}(\s[^>]*[^/>])?)>!si","\\1/>",$sample_html);
@@ -29,15 +29,21 @@ function process_html($html) {
     $html = preg_replace("#{$open}(.*?){$open}#is", "<html>\\2", $html);
   };
 
-  if (!preg_match("#{$close}#is",$html)) {
+  if (!preg_match("#{$close}#is", $html)) {
     $html = $html."</html>";
   };
 
+  // PHP 5.2.0 compatilibty issue
+  // preg_replace may accidentally return NULL on large files not matching this 
   $html = preg_replace("#.*({$open})#is","\\1",$html);
 
-// Cut off all data before and after 'html' tag; unless we'll do it,
-// the XML parser will die violently
+  // PHP 5.2.0 compatilibty issue
+  // preg_replace may accidentally return NULL on large files not matching this 
+
+  // Cut off all data before and after 'html' tag; unless we'll do it,
+  // the XML parser will die violently
   $html = preg_replace("#^.*<html#is","<html",$html);
+
   $html = preg_replace("#</html\s*>.*$#is","</html>",$html);
 
   return $html;
@@ -326,13 +332,14 @@ function process_pagebreak_commands(&$html) {
 function xhtml2xhtml($html) {
   process_pagebreak_commands($html);
 
+  // Remove STYLE tags for the same reason and store them in the temporary variable
+  // later they will be added back to HEAD section
+  $styles = process_style($html);
+
   // Do HTML -> XML (XHTML) conversion
   // Convert HTML character references to their Unicode analogues
   process_character_references($html);
-  
-  // Remove HTML and CSS comments inside STYLE tags
-  process_style($html);
-
+ 
   remove_comments($html);
 
   // Convert all tags to lower case
@@ -341,6 +348,8 @@ function xhtml2xhtml($html) {
 
   // Remove SCRIPT tags
   $html = process_script($html);
+
+  $html = insert_styles($html, $styles);
 
   return $html;
 }
@@ -352,10 +361,12 @@ function html2xhtml($html) {
   // mess the firther html-parsing utilities 
   $html = process_script($html);
 
+  // Remove STYLE tags for the same reason and store them in the temporary variable
+  // later they will be added back to HEAD section
+  $styles = process_style($html);
+
   // Convert HTML character references to their Unicode analogues
   process_character_references($html);
-
-  process_style($html);
 
   remove_comments($html);
 
@@ -399,12 +410,15 @@ function html2xhtml($html) {
 
   $html = process_html($html);
   $html = process_body($html);
+
   $html = process_head($html);
   $html = process_p($html);
 
   $html = escape_amp($html);
   $html = escape_lt($html);
   $html = escape_gt($html);
+
+  $html = escape_textarea_content($html);
 
   process_tables($html,0);
 
@@ -414,6 +428,28 @@ function html2xhtml($html) {
 
   $html = fix_tags($html);
   $html = fix_attrs($html);
+
+  $html = insert_styles($html, $styles);
+
+  return $html;
+}
+
+function escape_textarea_content($html) {
+  preg_match_all('#<textarea(.*)>(.*)<\s*/\s*textarea\s*>#Uis', $html, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
+
+  // Why cycle from the last to first match? 
+  // It will keep unprocessed matches offsets valid, 
+  // as escaped content may differ from original content in length, 
+  for ($i = count($matches)-1; $i>=0; $i--) {
+    $match = $matches[$i];
+    $match_offset = $match[2][1];
+    $match_content = $match[2][0];
+    $match_length = strlen($match_content);
+    $escaped_content = preg_replace('/&([^#])/', '&#38;\1',
+                                    str_replace('>', '&#62;',
+                                                str_replace('<', '&#60;', $match_content)));
+    $html = substr_replace($html, $escaped_content, $match_offset, $match_length);
+  };
 
   return $html;
 }

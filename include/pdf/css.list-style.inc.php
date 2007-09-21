@@ -1,29 +1,9 @@
 <?php
-// $Header: /cvsroot/html2ps/css.list-style.inc.php,v 1.4 2006/03/19 09:25:36 Konstantin Exp $
+// $Header: /cvsroot/html2ps/css.list-style.inc.php,v 1.8 2007/02/04 17:08:19 Konstantin Exp $
 
-class ListStyleValue {
-  var $image;
-  var $position;
-  var $type;
+require_once(HTML2PS_DIR.'value.list-style.class.php');
 
-  function is_default() {
-    return 
-      $this->image->is_default() &&
-      $this->position == CSSListStylePosition::default_value() &&
-      $this->type     == CSSListStyleType::default_value();
-  }
-
-  function copy() {
-    $object = new ListStyleValue;
-
-    $object->image    = $this->image->copy();
-    $object->position = $this->position;
-    $object->type     = $this->type;
-    return $object;
-  }
-}
-
-class CSSListStyle extends CSSProperty {
+class CSSListStyle extends CSSPropertyHandler {
   // CSS 2.1: list-style is inherited
   function CSSListStyle() { 
     $this->default_value = new ListStyleValue;
@@ -31,7 +11,7 @@ class CSSListStyle extends CSSProperty {
     $this->default_value->position = CSSListStylePosition::default_value();
     $this->default_value->type     = CSSListStyleType::default_value();
 
-    $this->CSSProperty(true, true); 
+    $this->CSSPropertyHandler(true, true); 
   }
 
   function parse($value, &$pipeline) { 
@@ -44,12 +24,20 @@ class CSSListStyle extends CSSProperty {
   }
 
   function default_value() { return $this->default_value; }
+
+  function getPropertyCode() {
+    return CSS_LIST_STYLE;
+  }
+
+  function getPropertyName() {
+    return 'list-style';
+  }
 }
 
 $ls = new CSSListStyle;
-register_css_property('list-style', $ls);
-register_css_property('list-style-image',    new CSSListStyleImage($ls,    'image'));
-register_css_property('list-style-position', new CSSListStylePosition($ls, 'position'));
-register_css_property('list-style-type',     new CSSListStyleType($ls,     'type'));
+CSS::register_css_property($ls);
+CSS::register_css_property(new CSSListStyleImage($ls,    'image'));
+CSS::register_css_property(new CSSListStylePosition($ls, 'position'));
+CSS::register_css_property(new CSSListStyleType($ls,     'type'));
 
 ?>

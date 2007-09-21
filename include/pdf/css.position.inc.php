@@ -1,36 +1,40 @@
 <?php
-// $Header: /cvsroot/html2ps/css.position.inc.php,v 1.9 2006/04/16 16:54:57 Konstantin Exp $
+// $Header: /cvsroot/html2ps/css.position.inc.php,v 1.12 2006/09/07 18:38:14 Konstantin Exp $
 
 define('POSITION_STATIC',0);
 define('POSITION_RELATIVE',1);
 define('POSITION_ABSOLUTE',2);
 define('POSITION_FIXED',3);
 
-class CSSPosition extends CSSProperty {
-  function CSSPosition() { $this->CSSProperty(false, false); }
+// CSS 3
 
-  function default_value() { return POSITION_STATIC; }
+define('POSITION_FOOTNOTE',4);
 
-  function parse($value) {
-    // As usual, though standards say that CSS properties should be lowercase, 
-    // some people make them uppercase. As we're pretending to be tolerant,
-    // we need to convert it to lower case
+class CSSPosition extends CSSPropertyStringSet {
+  function CSSPosition() { 
+    $this->CSSPropertyStringSet(false, 
+                                false,
+                                array('inherit'  => CSS_PROPERTY_INHERIT,
+                                      'absolute' => POSITION_ABSOLUTE,
+                                      'relative' => POSITION_RELATIVE,
+                                      'fixed'    => POSITION_FIXED,
+                                      'static'   => POSITION_STATIC,
+                                      'footnote' => POSITION_FOOTNOTE)); 
+  }
 
-    switch (strtolower($value)) {
-    case "absolute":
-      return POSITION_ABSOLUTE;
-    case "relative":
-      return POSITION_RELATIVE;
-    case "fixed":
-      return POSITION_FIXED;
-    case "static":
-      return POSITION_STATIC;
-    default:
-      return POSITION_STATIC;
-    }
+  function default_value() { 
+    return POSITION_STATIC; 
+  }
+
+  function getPropertyCode() {
+    return CSS_POSITION;
+  }
+
+  function getPropertyName() {
+    return 'position';
   }
 }
 
-register_css_property('position', new CSSPosition);
+CSS::register_css_property(new CSSPosition);
 
 ?>

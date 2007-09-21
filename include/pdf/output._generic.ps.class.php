@@ -1,11 +1,13 @@
 <?php
-// $Header: /cvsroot/html2ps/output._generic.ps.class.php,v 1.1 2005/12/13 18:24:46 Konstantin Exp $
+// $Header: /cvsroot/html2ps/output._generic.ps.class.php,v 1.2 2007/05/07 13:12:07 Konstantin Exp $
 
 class OutputDriverGenericPS extends OutputDriverGeneric {
   var $language_level;
   var $image_encoder;
  
-  function content_type() { return ContentType::ps(); }
+  function content_type() { 
+    return ContentType::ps(); 
+  }
 
   function &get_image_encoder() { 
     return $this->image_encoder; 

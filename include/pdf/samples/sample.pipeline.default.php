@@ -1,7 +1,8 @@
 <?php
 
-require_once('../pipeline.factory.class.php');
-parse_config_file('../html2ps.config');
+require_once(dirname(__FILE__).'/../config.inc.php');
+require_once(HTML2PS_DIR.'pipeline.factory.class.php');
+parse_config_file(HTML2PS_DIR.'html2ps.config');
 
 global $g_config;
 $g_config = array(
@@ -29,6 +30,7 @@ global $g_pt_scale;
 $g_pt_scale = $g_px_scale * 1.43; 
 
 $pipeline = PipelineFactory::create_default_pipeline("","");
-$pipeline->process('http://localhost/simpleinvoices/index.php', $media); 
+$pipeline->configure($g_config);
+$pipeline->process('http://localhost:81/testing/ww.html', $media); 
 
 ?>

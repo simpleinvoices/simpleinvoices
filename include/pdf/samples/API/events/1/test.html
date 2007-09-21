@@ -1,0 +1,63 @@
+<!-- HTML2PDF_POST_PROCESSING_DIRECTIVES
+// PAGE WIDTH (in pixel)
+page_width:800
+// MARGIN DEFINITION (in mm)
+margin_left:15
+margin_right:17
+margin_top:95
+margin_bottom:75
+// VISIBILITY SPECIFICATION (ids lists)
+only_first_page:my_first_page_id
+only_last_page:my_last_page_id
+all_but_first_page:my_all_but_first_first_id
+all_but_last_page:my_all_but_last_page_id
+only_even_page:my_header_only_even_page_id,my_footer_only_even_page_id
+only_odd_page:my_header_only_odd_page_id,my_footer_only_odd_page_id
+HTML2PDF_POST_PROCESSING_DIRECTIVES -->
+<html>
+<head>
+<title>TEST</title>
+<style type="text/css">
+@page pNormal {
+  size: A4 portrait;
+  margin-left: 15mm;
+  margin-right: 17mm;
+  margin-top: 95mm;
+  margin-bottom: 75mm;
+}
+html { margin: 0mm; padding: 0mm; }
+body { page: pNormal; border: none; margin: 0mm; padding: 0mm; text-align: center; }
+div.dHead { position: fixed; top: -80mm; left: 0; border: 1px solid #FF0000; width: 800px; height: 80mm; }
+div.dFoot { position: fixed; bottom: -53mm; left: 0; border:  1px solid #0000FF; width: 800px; height: 53mm; }
+div.dBody { border: none; width: 800px; }
+</style>
+</head>
+<body>
+<!-- Header Master -->
+<div class="dHead">
+<div>HEADER: In all pages</div>
+<div id="my_all_but_first_first_id">HEADER: In all pages but first</div>
+<div id="my_first_page_id">HEADER: Only in first page</div>
+<div id="my_header_only_even_page_id">HEADER: Only in even pages</div>
+<div id="my_header_only_odd_page_id">HEADER: Only in odd pages</div>
+</div>
+<div class="dBody">
+A long seguence of &lt;br&gt; to get more than one page<br/>
+...<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+...<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+...<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+...<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+...<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+...<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+...<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+...<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+</div>
+<div class="dFoot">
+<div>FOOTER: In all pages</div>
+<div id="my_all_but_last_page_id">FOOTER: In all pages but last</div>
+<div id="my_last_page_id">FOOTER: Only in last page</div>
+<div id="my_footer_only_even_page_id">HEADER: Only in even pages</div>
+<div id="my_footer_only_odd_page_id">HEADER: Only in odd pages</div>
+</div>
+</body>
+</html>

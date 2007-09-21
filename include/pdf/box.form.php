@@ -8,7 +8,10 @@ class FormBox extends BlockBox {
   var $_name;
 
   function show(&$driver) {
-    $driver->new_form($this->_name);
+    global $g_config;
+    if ($g_config['renderforms']) {
+      $driver->new_form($this->_name);
+    };
     return parent::show($driver);
   }
 
@@ -22,6 +25,7 @@ class FormBox extends BlockBox {
     };
 
     $box = new FormBox($name);
+    $box->readCSS($pipeline->getCurrentCSSState());
     $box->create_content($root, $pipeline);
     return $box;
   }

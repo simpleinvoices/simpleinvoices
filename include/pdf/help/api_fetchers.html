@@ -1,0 +1,70 @@
+<html>
+<head>
+<title>How do &quot;fetchers&quot; work?</title>
+<link rel="stylesheet" type="text/css" medial="all" title="Default" href="css/help.css"/>
+<style type="text/css">
+div.note {
+  margin: 0.5em 0;
+}
+
+div.class {
+  margin: 0.5em 0 0.5em 2em;
+}
+
+div.interface {
+  margin: 1em 0 0.5em 0;
+  padding: 2px 5px;
+  background-color: #f0f0f0;
+}
+
+span.interface_name {
+  font-weight: bold;
+}
+
+span.method_name {
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<h1>How do &quot;fetchers&quot; work?</h1>
+<p>
+Basically, &quot;fetcher&quot; is a simple object responsible for delivering external files to the script.
+Default fetcher object supplied with html2ps/pdf fetches HTML, images and CSS from remote sites using HTTP protocol.
+If you're using your own fetcher, you need to implement 'get_data' function returning contents of requested file and,
+probably, 'get_base_url', returning URL to be used as a base one while resolving relative URLs in recently fetched HTML file.
+</p>
+
+<p>
+The image below illustrates simple html2ps session using default fetcher while converting html file from abstract test.com site.
+</p>
+
+<img src="uml/Simple_fetcher_session.PNG"/>
+
+<p>
+If you have pages stored on your local system or dynamically generated and kept in memory, you don't need to use HTTP protocol to fetch them.
+In this case, you should use custom fetcher, so session will look similar to image below. Note that fetcher processes <em>all</em> requests,
+returning valid content for all requests; this makes difference from the <em>very simple</em> fetcher supplied with html2ps, which <em>does always 
+return</em> memory string content whatever the request is. Internals of the fully-featured fetcher will depend on your system architecture greatly,
+so most likely such fetcher will never be included to html2ps distribution.
+</p>
+
+<img src="uml/Custom_fetcher_session.PNG"/>
+
+<p>
+The image below illustrates why images and external stylesheets are not rendered when you're using <em>too simple</em> fetcher object.
+</p>
+
+<img src="uml/Simple_custom_fetcher_session.PNG"/>
+
+<p>
+Sometimes you need to fetch files from different places; for example, HTML code is generated locally, while images and CSS files should be fetched via 
+HTTP protocol. In this case you'll need to use several fetchers at once, as illustrated below. Note that in this case you need to implement 'get_base_url' 
+function returning correct URL so script will be able to resolve relative URLs contained in HTML code.
+</p>
+
+<img src="uml/Multiple_fetcher_session.PNG"/>
+
+</body>
+</html>

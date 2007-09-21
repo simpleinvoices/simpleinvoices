@@ -1,8 +1,12 @@
 <?php
+
+require_once(HTML2PS_DIR.'filter.post.positioned.class.php');
+
 class LayoutEngineDefault extends LayoutEngine {
-  function process(&$box, &$media, &$driver) {
+  function process(&$box, &$media, &$driver, &$context) {
     // Calculate the size of text boxes
     if (is_null($box->reflow_text($driver))) {
+      error_log("LayoutEngineDefault::process: reflow_text call failed");
       return null;
     };
 
@@ -11,21 +15,15 @@ class LayoutEngineDefault extends LayoutEngine {
     // on the paged media.
     $box->_height_constraint = new HCConstraint(null, null, null);
 
-    // As BODY generated box have zero calculated width at the very moment,
-    // and we need some box to use as a parameter to _calc_percentage_margins, 
-    // we'll create a fake box having with equal to the viewport width.
-    $media_box = new BlockBox();
-    $media_box->width = mm2pt($media->width() - $media->margins['left'] - $media->margins['right']);
-
-    // Calculate actual margin values 
-    $box->_calc_percentage_margins($media_box);
+    $margin = $box->getCSSProperty(CSS_MARGIN);
+    $margin->calcPercentages(mm2pt($media->width() - $media->margins['left'] - $media->margins['right']));
+    $box->setCSSProperty(CSS_MARGIN, $margin);
 
     $box->width = mm2pt($media->width() - $media->margins['left'] - $media->margins['right']) - 
       $box->_get_hor_extra();
-    $box->_width_constraint = new WCConstant($box->width);
+    $box->setCSSProperty(CSS_WIDTH, new WCConstant($box->width));
 
-    $box->height = mm2pt($media->height() - $media->margins['top'] - $media->margins['bottom']) -
-      $box->_get_vert_extra();
+    $box->height = mm2pt($media->real_height()) - $box->_get_vert_extra();
 
     $box->put_top(mm2pt($media->height() - 
                         $media->margins['top']) - 
@@ -48,37 +46,38 @@ class LayoutEngineDefault extends LayoutEngine {
     $viewport->height = mm2pt($media->height() - $media->margins['top'] - $media->margins['bottom']);
 
     $fake_parent = null;
-    $context = new FlowContext;
     $context->push_viewport($viewport);
 
     $box->reflow($fake_parent, $context);
 
     // Make the top-level box competely fill the last page
-    $page_real_height = mm2pt($media->height() - $media->margins['top'] - $media->margins['bottom']);
-    
+    $page_real_height = mm2pt($media->real_height());
+   
     // Note we cannot have less than 1 page in our doc; max() call
     // is required as we, in general, CAN have the content height strictly equal to 0.
     // In this case wi still render the very first page
     $pages = max(1,ceil($box->get_full_height() / $page_real_height));
 
-    $box->height = $pages * $page_real_height;
+    /**
+     * Set body box height so it will fit the page exactly
+     */
+    $box->height = $pages * $page_real_height - $box->_get_vert_extra();
+
     $driver->set_expected_pages($pages);
-    $driver->anchors = array();
-    $box->reflow_anchors($driver, $driver->anchors);
 
     /**
      * Flow absolute-positioned boxes;
      * note that we should know the number of expected pages at this moment, unless
      * we will not be able to calculate positions for elements using 'bottom: ...' CSS property
      */
-    for ($i=0; $i<count($context->absolute_positioned); $i++) {
+    for ($i=0, $num_positioned = count($context->absolute_positioned); $i < $num_positioned; $i++) {
       $context->push();
       $context->absolute_positioned[$i]->reflow_absolute($context);
       $context->pop();
     };
          
     // Flow fixed-positioned box
-    for ($i=0; $i<count($context->fixed_positioned); $i++) {
+    for ($i=0, $num_positioned = count($context->fixed_positioned); $i < $num_positioned; $i++) {
       $context->push();
       $context->fixed_positioned[$i]->reflow_fixed($context);
       $context->pop();
@@ -86,7 +85,7 @@ class LayoutEngineDefault extends LayoutEngine {
 
     $box->reflow_inline();
 
-    return $context;
+    return true;
   }
 }
 ?>

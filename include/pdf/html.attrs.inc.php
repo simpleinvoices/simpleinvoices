@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/html2ps/html.attrs.inc.php,v 1.50 2006/05/27 15:33:27 Konstantin Exp $
+// $Header: /cvsroot/html2ps/html.attrs.inc.php,v 1.63 2007/03/15 18:37:32 Konstantin Exp $
 
 global $g_tag_attrs;
 $g_tag_attrs = array(
@@ -7,7 +7,7 @@ $g_tag_attrs = array(
                       * Attribute handlers applicable to all tags
                       */
                      '*'       => array(
-                                        'id'   => 'attr_id'
+                                        'id'   => 'attr_id',
                                         ),
 
                      /**
@@ -20,6 +20,7 @@ $g_tag_attrs = array(
                      'body'    => array(
                                         'background'   => 'attr_background',
                                         'bgcolor'      => 'attr_bgcolor',
+                                        'dir'          => 'attr_dir',
                                         'text'         => 'attr_body_text',
                                         'link'         => 'attr_body_link',
                                         'topmargin'    => 'attr_body_topmargin',
@@ -70,7 +71,8 @@ $g_tag_attrs = array(
                                         'color' => 'attr_hr_color'
                                         ),
                      'input'   => array(
-                                        'name'  => 'attr_input_name'
+                                        'name'  => 'attr_input_name',
+                                        'size'  => 'attr_input_size'
                                         ),
                      'iframe'  => array(
                                         'frameborder'  => 'attr_frameborder',
@@ -96,7 +98,8 @@ $g_tag_attrs = array(
                                         'height' => 'attr_height'
                                         ),
                      'ol'      => array(
-                                        'start' => 'attr_start'
+                                        'start' => 'attr_start',
+                                        'type' => 'attr_ol_type'
                                         ),
                      'p'       => array(
                                         'align' => 'attr_align'
@@ -142,14 +145,15 @@ $g_tag_attrs = array(
                                         'height'  => 'attr_height'
                                         ),
                      'ul'      => array(
-                                        'start' => 'attr_start'
+                                        'start' => 'attr_start',
+                                        'type' => 'attr_ul_type'
                                         )
 );
 
 
-function execute_attrs_before($root, &$pipeline) { execute_attrs($root, "_before", $pipeline); }
-function execute_attrs_after($root, &$pipeline) { execute_attrs($root, "_after", $pipeline); }
-function execute_attrs_after_styles($root, &$pipeline) { execute_attrs($root, "_after_styles", $pipeline); }
+function execute_attrs_before($root, &$pipeline) { execute_attrs($root, '_before', $pipeline); }
+function execute_attrs_after($root, &$pipeline) { execute_attrs($root, '_after', $pipeline); }
+function execute_attrs_after_styles($root, &$pipeline) { execute_attrs($root, '_after_styles', $pipeline); }
 
 function execute_attrs(&$root, $suffix, &$pipeline) {
   global $g_tag_attrs;
@@ -175,16 +179,16 @@ function execute_attrs(&$root, $suffix, &$pipeline) {
 
 // A NAME
 function attr_name_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('-html2ps-link-destination');
-  $handler->css($root->get_attribute("name"), $pipeline);
+  $handler =& CSS::get_handler(CSS_HTML2PS_LINK_DESTINATION);
+  $handler->css($root->get_attribute('name'), $pipeline);
 }
 function attr_name_after_styles(&$root, &$pipeline) {};
 function attr_name_after(&$root, &$pipeline) {};
 
 // A ID
 function attr_id_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('-html2ps-link-destination');
-  $handler->css($root->get_attribute("id"), $pipeline);
+  $handler =& CSS::get_handler(CSS_HTML2PS_LINK_DESTINATION);
+  $handler->css($root->get_attribute('id'), $pipeline);
 }
 function attr_id_after_styles(&$root, &$pipeline) {};
 function attr_id_after(&$root, &$pipeline) {};
@@ -192,38 +196,43 @@ function attr_id_after(&$root, &$pipeline) {};
 
 // A HREF
 function attr_href_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('-html2ps-link-target');
-  $handler->css($root->get_attribute("href"), $pipeline);
+  $handler =& CSS::get_handler(CSS_HTML2PS_LINK_TARGET);
+  $handler->css($root->get_attribute('href'), $pipeline);
 }
 function attr_href_after_styles(&$root, &$pipeline) {};
 function attr_href_after(&$root, &$pipeline) {};
 
 // IFRAME 
 function attr_frameborder_before(&$root, &$pipeline) {
-  if ($root->get_attribute("frameborder") == "1") {
-    css_border("inset black 1px",$root);
-  } else {
-    pop_border();
-    push_border(default_border());
+  $css_state =& $pipeline->getCurrentCSSState();
+  $handler =& CSS::get_handler(CSS_BORDER);
+
+  switch ($root->get_attribute('frameborder')) {
+  case '1':
+    $handler->css('inset black 1px', $pipeline);
+    break;
+  case '0':
+    $handler->css('none', $pipeline);
+    break;
   };
 }
 function attr_frameborder_after_styles(&$root, &$pipeline) {};
 function attr_frameborder_after(&$root, &$pipeline) {};
 
 function attr_iframe_marginheight_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('padding-top');
-  $handler->css((int)$root->get_attribute("marginheight")."px",$pipeline);
-  $handler =& get_css_handler('padding-bottom');
-  $handler->css((int)$root->get_attribute("marginheight")."px",$pipeline);
+  $handler =& CSS::get_handler(CSS_PADDING_TOP);
+  $handler->css((int)$root->get_attribute('marginheight').'px',$pipeline);
+  $handler =& CSS::get_handler(CSS_PADDING_BOTTOM);
+  $handler->css((int)$root->get_attribute('marginheight').'px',$pipeline);
 }
 function attr_iframe_marginheight_after_styles(&$root, &$pipeline) {};
 function attr_iframe_marginheight_after(&$root, &$pipeline) {};
 
 function attr_iframe_marginwidth_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('padding-right');
-  $handler->css((int)$root->get_attribute("marginwidth")."px",$pipeline);
-  $handler =& get_css_handler('padding-left');
-  $handler->css((int)$root->get_attribute("marginwidth")."px",$pipeline);
+  $handler =& CSS::get_handler(CSS_PADDING_RIGHT);
+  $handler->css((int)$root->get_attribute('marginwidth').'px',$pipeline);
+  $handler =& CSS::get_handler(CSS_PADDING_LEFT);
+  $handler->css((int)$root->get_attribute('marginwidth').'px',$pipeline);
 }
 function attr_iframe_marginwidth_after_styles(&$root, &$pipeline) {};
 function attr_iframe_marginwidth_after(&$root, &$pipeline) {};
@@ -231,70 +240,76 @@ function attr_iframe_marginwidth_after(&$root, &$pipeline) {};
 
 // BODY-specific
 function attr_body_text_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('color');
-  $handler->css($root->get_attribute("text"),$pipeline);
+  $handler =& CSS::get_handler(CSS_COLOR);
+  $handler->css($root->get_attribute('text'),$pipeline);
 }
 function attr_body_text_after_styles(&$root, &$pipeline) {};
 function attr_body_text_after(&$root, &$pipeline) {};
 
 function attr_body_link_before(&$root, &$pipeline) {
-  $color = $root->get_attribute("link");
+  $color = $root->get_attribute('link');
 
   // -1000 means priority modifier; so, any real CSS rule will have more priority than 
   // this fake rule
 
-  $rule = array(array(SELECTOR_SEQUENCE, array(array(SELECTOR_TAG, "a"),
+  $collection = new CSSPropertyCollection();
+  $collection->addProperty(CSSPropertyDeclaration::create(CSS_COLOR, $color, $pipeline));
+  $rule = array(array(SELECTOR_SEQUENCE, array(array(SELECTOR_TAG, 'a'),
                                                array(SELECTOR_PSEUDOCLASS_LINK_LOW_PRIORITY))),
-                array('color' => $color),
-                "",
+                $collection,
+                '',
                 -1000);
 
-  global $g_css_obj;
-  $g_css_obj->add_rule($rule, $pipeline);
+  $css =& $pipeline->getCurrentCSS();
+  $css->add_rule($rule, $pipeline);
 } 
 function attr_body_link_after_styles(&$root, &$pipeline) {};
 function attr_body_link_after(&$root, &$pipeline) {};
 
 function attr_body_topmargin_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('margin-top');
-  $handler->css((int)$root->get_attribute("topmargin")."px",$pipeline);
+  $handler =& CSS::get_handler(CSS_MARGIN_TOP);
+  $handler->css((int)$root->get_attribute('topmargin').'px',$pipeline);
 }
 function attr_body_topmargin_after_styles(&$root, &$pipeline) {};
 function attr_body_topmargin_after(&$root, &$pipeline) {};
 
 function attr_body_leftmargin_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('margin-left');
-  $handler->css((int)$root->get_attribute("leftmargin")."px",$pipeline);
+  $handler =& CSS::get_handler(CSS_MARGIN_LEFT);
+  $handler->css((int)$root->get_attribute('leftmargin').'px',$pipeline);
 }
 function attr_body_leftmargin_after_styles(&$root, &$pipeline) {};
 function attr_body_leftmargin_after(&$root, &$pipeline) {};
 
 function attr_body_marginheight_before(&$root, &$pipeline) {
-  $h_top    =& get_css_handler('margin-top');
-  $h_bottom =& get_css_handler('margin-bottom');
+  $css_state =& $pipeline->getCurrentCSSState();
 
-  $top      = $h_top->get();
+  $h_top    =& CSS::get_handler(CSS_MARGIN_TOP);
+  $h_bottom =& CSS::get_handler(CSS_MARGIN_BOTTOM);
 
-  $h_bottom->css(((int)$root->get_attribute("marginheight") - $top->value)."px",$pipeline);
+  $top       = $h_top->get($css_state->getState());
+
+  $h_bottom->css(((int)$root->get_attribute('marginheight') - $top->value).'px',$pipeline);
 }
 function attr_body_marginheight_after_styles(&$root, &$pipeline) {};
 function attr_body_marginheight_after(&$root, &$pipeline) {};
 
 function attr_body_marginwidth_before(&$root, &$pipeline) {
-  $h_left  =& get_css_handler('margin-left');
-  $h_right =& get_css_handler('margin-right');
+  $css_state =& $pipeline->getCurrentCSSState();
 
-  $left = $h_left->get();
+  $h_left  =& CSS::get_handler(CSS_MARGIN_LEFT);
+  $h_right =& CSS::get_handler(CSS_MARGIN_RIGHT);
 
-  $h_right->css(((int)$root->get_attribute("marginwidth") - $left->value)."px",$pipeline);
+  $left = $h_left->get($css_state->getState());
+
+  $h_right->css(((int)$root->get_attribute('marginwidth') - $left->value).'px',$pipeline);
 }
 function attr_body_marginwidth_after_styles(&$root, &$pipeline) {};
 function attr_body_marginwidth_after(&$root, &$pipeline) {};
 
 // === nowrap
 function attr_nowrap_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('-nowrap');
-  $handler->push(NOWRAP_NOWRAP);
+  $css_state =& $pipeline->getCurrentCSSState();
+  $css_state->setProperty(CSS_HTML2PS_NOWRAP, NOWRAP_NOWRAP);
 } 
 
 function attr_nowrap_after_styles(&$root, &$pipeline) {}
@@ -303,10 +318,10 @@ function attr_nowrap_after(&$root, &$pipeline) {}
 // === hspace
 
 function attr_hspace_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('padding-left');
-  $handler->css((int)$root->get_attribute("hspace")."px",$pipeline);
-  $handler =& get_css_handler('padding-right');
-  $handler->css((int)$root->get_attribute("hspace")."px",$pipeline);
+  $handler =& CSS::get_handler(CSS_PADDING_LEFT);
+  $handler->css((int)$root->get_attribute('hspace').'px',$pipeline);
+  $handler =& CSS::get_handler(CSS_PADDING_RIGHT);
+  $handler->css((int)$root->get_attribute('hspace').'px',$pipeline);
 }
 
 function attr_hspace_after_styles(&$root, &$pipeline) {}
@@ -316,10 +331,10 @@ function attr_hspace_after(&$root, &$pipeline) {}
 // === vspace
 
 function attr_vspace_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('padding-top');
-  $handler->css((int)$root->get_attribute("vspace")."px",$pipeline);
-  $handler =& get_css_handler('padding-bottom');
-  $handler->css((int)$root->get_attribute("vspace")."px",$pipeline);
+  $handler =& CSS::get_handler(CSS_PADDING_TOP);
+  $handler->css((int)$root->get_attribute('vspace').'px',$pipeline);
+  $handler =& CSS::get_handler(CSS_PADDING_BOTTOM);
+  $handler->css((int)$root->get_attribute('vspace').'px',$pipeline);
 }
 
 function attr_vspace_after_styles(&$root, &$pipeline) {}
@@ -328,58 +343,67 @@ function attr_vspace_after(&$root, &$pipeline) {}
 // === background
 
 function attr_background_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('background-image');
-  $handler->css("url(".$root->get_attribute("background").")",$pipeline);
+  $handler =& CSS::get_handler(CSS_BACKGROUND_IMAGE);
+  $handler->css('url('.$root->get_attribute('background').')',$pipeline);
 }
 function attr_background_after_styles(&$root, &$pipeline) {}
 function attr_background_after(&$root, &$pipeline) {}
 
 // === align
 
-function attr_table_float_align_before(&$root, &$pipeline) {
-  if ($root->get_attribute("align") === "center") {
-//       $handler =& get_css_handler('-localalign');
-//       $handler->replace(LA_CENTER);
-      
-    $margin_left =& get_css_handler('margin-left');
+function attr_table_float_align_before(&$root, &$pipeline) {}
+function attr_table_float_align_after_styles(&$root, &$pipeline) {
+  if ($root->get_attribute('align') === 'center') {     
+    $margin_left =& CSS::get_handler(CSS_MARGIN_LEFT);
     $margin_left->css('auto',$pipeline);
     
-    $margin_right =& get_css_handler('margin-right');
+    $margin_right =& CSS::get_handler(CSS_MARGIN_RIGHT);
     $margin_right->css('auto',$pipeline);
   } else {
-    $float =& get_css_handler('float');
-    $float->replace($float->parse($root->get_attribute("align")));
+    $float =& CSS::get_handler(CSS_FLOAT);
+    $css_state =& $pipeline->getCurrentCSSState();
+    $float->replace($float->parse($root->get_attribute('align')),
+                    $css_state);
   };
 }
-function attr_table_float_align_after_styles(&$root, &$pipeline) {}
 function attr_table_float_align_after(&$root, &$pipeline) {}
 
 function attr_img_align_before(&$root, &$pipeline) {
-  if (preg_match("/left|right/", $root->get_attribute("align"))) {
-    $float =& get_css_handler('float');
-    $float->replace($float->parse($root->get_attribute("align")));
+  if (preg_match('/left|right/', $root->get_attribute('align'))) {
+    $float =& CSS::get_handler(CSS_FLOAT);
+    $css_state =& $pipeline->getCurrentCSSState();
+    $float->replace($float->parse($root->get_attribute('align')),
+                    $css_state);
   } else {
-    $handler =& get_css_handler('vertical-align');
-    $handler->replace($handler->parse($root->get_attribute("align")));
+    $handler =& CSS::get_handler(CSS_VERTICAL_ALIGN);
+    $css_state =& $pipeline->getCurrentCSSState();
+    $handler->replace($handler->parse($root->get_attribute('align')),
+                      $css_state);
   };
 }
 function attr_img_align_after_styles(&$root, &$pipeline) {}
 function attr_img_align_after(&$root, &$pipeline) {}
 
 function attr_self_align_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('-localalign');
-  switch ($root->get_attribute("align")) {
-  case "left":
-    $handler->replace(LA_LEFT);
+  $handler =& CSS::get_handler(CSS_HTML2PS_LOCALALIGN);
+  $css_state =& $pipeline->getCurrentCSSState();
+
+  switch ($root->get_attribute('align')) {
+  case 'left':
+    $handler->replace(LA_LEFT,
+                      $css_state);
     break;
-  case "center":
-    $handler->replace(LA_CENTER);
+  case 'center':
+    $handler->replace(LA_CENTER,
+                      $css_state);
     break;
-  case "right":
-    $handler->replace(LA_RIGHT);
+  case 'right':
+    $handler->replace(LA_RIGHT,
+                      $css_state);
     break;
   default:
-    $handler->replace(LA_LEFT);
+    $handler->replace(LA_LEFT, 
+                      $css_state);
     break;
   };
 }
@@ -390,46 +414,54 @@ function attr_self_align_after(&$root, &$pipeline) {}
 // === bordercolor
 
 function attr_table_bordercolor_before(&$root, &$pipeline) {
-  $color = parse_color_declaration($root->get_attribute("bordercolor"), array(0,0,0));
+  $color = parse_color_declaration($root->get_attribute('bordercolor'));
 
-  $border = get_table_border();
+  $css_state =& $pipeline->getCurrentCSSState();
+  $border =& $css_state->getProperty(CSS_HTML2PS_TABLE_BORDER);
+  $border =& $border->copy();
   
-  $border['left']['color']   = $color;
-  $border['right']['color']  = $color;
-  $border['top']['color']    = $color;
-  $border['bottom']['color'] = $color;
-  
-  pop_border();
-  push_border($border); 
-  push_table_border($border);
+  $border->left->color   = $color;
+  $border->right->color  = $color;
+  $border->top->color    = $color;
+  $border->bottom->color = $color;
+
+//   $css_state->pushState();
+//   $css_state->setProperty(CSS_HTML2PS_TABLE_BORDER, $border);
+
+//   $css_state->pushState();
+//   $css_state->setProperty(CSS_BORDER, $border);
 }
 
 function attr_table_bordercolor_after_styles(&$root, &$pipeline) {
-  pop_border();
+//   $css_state =& $pipeline->getCurrentCSSState();
+//   $css_state->popState();
 }
 
-function attr_table_bordercolor_after(&$root, &$pipeline) {
-  pop_table_border();
+function attr_table_bordercolor_after(&$root, &$pipeline) { 
+//   $css_state =& $pipeline->getCurrentCSSState();
+//   $css_state->popState();
 }
 
 // === border
 
 function attr_border_before(&$root, &$pipeline) {
-  $width = (int)$root->get_attribute("border");
+  $width = (int)$root->get_attribute('border');
 
-  $border = get_border();
-  $border['left']['width']   = $width . "px";
-  $border['right']['width']  = $width . "px";
-  $border['top']['width']    = $width . "px";
-  $border['bottom']['width'] = $width . "px";
+  $css_state =& $pipeline->getCurrentCSSState();
+  $border =& $css_state->getProperty(CSS_BORDER);
+  $border =& $border->copy();
+
+  $border->left->width   = Value::fromData($width, UNIT_PX);
+  $border->right->width  = Value::fromData($width, 'px');
+  $border->top->width    = Value::fromData($width, 'px');
+  $border->bottom->width = Value::fromData($width, 'px');
   
-  $border['left']['style']   = BS_SOLID;
-  $border['right']['style']  = BS_SOLID;
-  $border['top']['style']    = BS_SOLID;
-  $border['bottom']['style'] = BS_SOLID;
+  $border->left->style   = BS_SOLID;
+  $border->right->style  = BS_SOLID;
+  $border->top->style    = BS_SOLID;
+  $border->bottom->style = BS_SOLID;
 
-  pop_border();
-  push_border($border); 
+  $css_state->setProperty(CSS_BORDER, $border);
 }
 
 function attr_border_after_styles(&$root, &$pipeline) {}
@@ -441,32 +473,34 @@ function attr_table_rules_before(&$root, &$pipeline) {
   /**
    * Handle 'rules' attribute
    */
-  $rules = $root->get_attribute("rules");
-  $border = get_table_border();
+  $rules = $root->get_attribute('rules');
+
+  $css_state =& $pipeline->getCurrentCSSState();
+  $border = $css_state->getProperty(CSS_HTML2PS_TABLE_BORDER);
+
   switch ($rules) {
-  case "none":
-    $border['left']['style']   = BS_NONE;
-    $border['right']['style']  = BS_NONE;
-    $border['top']['style']    = BS_NONE;
-    $border['bottom']['style'] = BS_NONE;
+  case 'none':
+    $border->left->style   = BS_NONE;
+    $border->right->style  = BS_NONE;
+    $border->top->style    = BS_NONE;
+    $border->bottom->style = BS_NONE;
     break;
-  case "groups":
+  case 'groups':
     // Not supported
     break;
-  case "rows":
-    $border['left']['style']   = BS_NONE;
-    $border['right']['style']  = BS_NONE;
+  case 'rows':
+    $border->left->style   = BS_NONE;
+    $border->right->style  = BS_NONE;
     break;
-  case "cols":
-    $border['top']['style']    = BS_NONE;
-    $border['bottom']['style'] = BS_NONE;
+  case 'cols':
+    $border->top->style    = BS_NONE;
+    $border->bottom->style = BS_NONE;
     break;
-  case "all":
+  case 'all':
     break;
   };
  
-  pop_table_border();
-  push_table_border($border);
+  $css_state->setProperty(CSS_HTML2PS_TABLE_BORDER, $border);
 }
 
 function attr_table_rules_after_styles(&$root, &$pipeline) {}
@@ -475,38 +509,59 @@ function attr_table_rules_after(&$root, &$pipeline) {}
 // === border (table)
 
 function attr_table_border_before(&$root, &$pipeline) {
-  $width = (int)$root->get_attribute("border");
+  $width = (int)$root->get_attribute('border');
 
-  $border = get_table_border();
-  $border['left']['width']   = $width . "px";
-  $border['right']['width']  = $width . "px";
-  $border['top']['width']    = $width . "px";
-  $border['bottom']['width'] = $width . "px";
-  
-  $border['left']['style']   = BS_SOLID;
-  $border['right']['style']  = BS_SOLID;
-  $border['top']['style']    = BS_SOLID;
-  $border['bottom']['style'] = BS_SOLID;
-  
-  pop_border();
-  push_border($border); 
+  $css_state =& $pipeline->getCurrentCSSState();
+  $border =& $css_state->getProperty(CSS_HTML2PS_TABLE_BORDER);
+  $border =& $border->copy();
 
-  push_table_border($border);
+  $border->left->width   = Value::fromData($width, UNIT_PX);
+  $border->right->width  = Value::fromData($width, UNIT_PX);
+  $border->top->width    = Value::fromData($width, UNIT_PX);
+  $border->bottom->width = Value::fromData($width, UNIT_PX);
+  
+  $border->left->style   = BS_SOLID;
+  $border->right->style  = BS_SOLID;
+  $border->top->style    = BS_SOLID;
+  $border->bottom->style = BS_SOLID;
+  
+  $css_state->setProperty(CSS_BORDER, $border);
+
+  $css_state->pushState();
+  $border =& $border->copy();
+  $css_state->setProperty(CSS_HTML2PS_TABLE_BORDER, $border);
 }
 
 function attr_table_border_after_styles(&$root, &$pipeline) {}
 
 function attr_table_border_after(&$root, &$pipeline) {
-  pop_table_border(); 
+  $css_state =& $pipeline->getCurrentCSSState();
+  $css_state->popState();  
 }
+
+// === dir
+function attr_dir_before(&$root, &$pipeline) {
+  $handler =& CSS::get_handler(CSS_TEXT_ALIGN);
+  switch (strtolower($root->get_attribute('dir'))) {
+  case 'ltr':
+    $handler->css('left',$pipeline); 
+    return;
+  case 'rtl':
+    $handler->css('right',$pipeline); 
+    return;
+  };
+}
+
+function attr_dir_after_styles(&$root, &$pipeline) {}
+function attr_dir_after(&$root, &$pipeline) {}
 
 // === align
 function attr_align_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('text-align');
-  $handler->css($root->get_attribute("align"),$pipeline); 
+  $handler =& CSS::get_handler(CSS_TEXT_ALIGN);
+  $handler->css($root->get_attribute('align'),$pipeline); 
 
-  $handler =& get_css_handler('-align');
-  $handler->css($root->get_attribute("align"),$pipeline);
+  $handler =& CSS::get_handler(CSS_HTML2PS_ALIGN);
+  $handler->css($root->get_attribute('align'),$pipeline);
 }
 
 function attr_align_after_styles(&$root, &$pipeline) {}
@@ -516,16 +571,17 @@ function attr_align_after(&$root, &$pipeline) {}
 // valign
 // 'valign' attribute value for table rows is inherited
 function attr_row_valign_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('vertical-align');
-  $handler->css($root->get_attribute("valign"),$pipeline);
+  $handler =& CSS::get_handler(CSS_VERTICAL_ALIGN);
+  $handler->css($root->get_attribute('valign'),$pipeline);
 }
 function attr_row_valign_after_styles(&$root, &$pipeline) {}
 function attr_row_valign_after(&$root, &$pipeline) {}
 
 // 'valign' attribute value for boxes other than table rows is not inherited
 function attr_valign_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('vertical-align');
-  $handler->css($root->get_attribute("valign"),$pipeline);
+  $handler =& CSS::get_handler(CSS_VERTICAL_ALIGN);
+  $handler->css($root->get_attribute('valign'),
+                $pipeline);
 }
 
 function attr_valign_after_styles(&$root, &$pipeline) {}
@@ -534,8 +590,8 @@ function attr_valign_after(&$root, &$pipeline) {}
 // bgcolor
 
 function attr_bgcolor_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('background-color');
-  $handler->css($root->get_attribute("bgcolor"),$pipeline); 
+  $handler =& CSS::get_handler(CSS_BACKGROUND_COLOR);
+  $handler->css($root->get_attribute('bgcolor'), $pipeline); 
 }
 function attr_bgcolor_after_styles(&$root, &$pipeline) {}
 function attr_bgcolor_after(&$root, &$pipeline) {}
@@ -543,10 +599,10 @@ function attr_bgcolor_after(&$root, &$pipeline) {}
 // width
 
 function attr_width_before(&$root, &$pipeline) {
-  $width =& get_css_handler('width');
+  $width =& CSS::get_handler(CSS_WIDTH);
 
-  $value = $root->get_attribute("width");
-  if (preg_match("/^\d+$/", $value)) { $value .= "px"; };
+  $value = $root->get_attribute('width');
+  if (preg_match('/^\d+$/', $value)) { $value .= 'px'; };
 
   $width->css($value,$pipeline);
 }
@@ -556,17 +612,17 @@ function attr_width_after(&$root, &$pipeline) {}
 
 // height
 
-// Difference between "attr_height" and "attr_height_required":
+// Difference between 'attr_height' and 'attr_height_required':
 // attr_height sets the minimal box height so that is cal be expanded by it content;
 // a good example is table rows and cells; on the other side, attr_height_required
 // sets the fixed box height - it is useful for boxes which content height can be greater
 // that box height - marquee or iframe, for example
 
 function attr_height_required_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('height');
+  $handler =& CSS::get_handler(CSS_HEIGHT);
 
-  $value = $root->get_attribute("height");
-  if (preg_match("/^\d+$/", $value)) { $value .= "px"; };
+  $value = $root->get_attribute('height');
+  if (preg_match('/^\d+$/', $value)) { $value .= 'px'; };
   $handler->css($value,$pipeline);
 }
 
@@ -575,10 +631,10 @@ function attr_height_required_after_styles(&$root, &$pipeline) {}
 function attr_height_required_after(&$root, &$pipeline) {}
 
 function attr_height_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('min-height');
+  $handler =& CSS::get_handler(CSS_MIN_HEIGHT);
 
-  $value = $root->get_attribute("height");
-  if (preg_match("/^\d+$/", $value)) { $value .= "px"; };
+  $value = $root->get_attribute('height');
+  if (preg_match('/^\d+$/', $value)) { $value .= 'px'; };
   $handler->css($value,$pipeline);
 }
 
@@ -587,27 +643,27 @@ function attr_height_after(&$root, &$pipeline) {}
 
 // FONT attributes
 function attr_font_size_before(&$root, &$pipeline) {
-  $size = $root->get_attribute("size");
+  $size = $root->get_attribute('size');
 
   /**
    * Check if attribute value is empty; no actions will be taken in this case
    */
-  if ($size == "") { return; };
+  if ($size == '') { return; };
 
-  if ($size{0} == "-") {
+  if ($size{0} == '-') {
     $koeff = 1;
     $repeats = (int)substr($size,1);
     for ($i=0; $i<$repeats; $i++) {
       $koeff *= 1/1.2;
     };
-    $newsize = sprintf("%.2fem", round($koeff, 2));
-  } else if ($size{0} == "+") {
+    $newsize = sprintf('%.2fem', round($koeff, 2));
+  } else if ($size{0} == '+') {
     $koeff = 1;
     $repeats = (int)substr($size,1);
     for ($i=0; $i<$repeats; $i++) {
       $koeff *= 1.2;
     };
-    $newsize = sprintf("%.2fem", round($koeff, 2));
+    $newsize = sprintf('%.2fem', round($koeff, 2));
   } else {
     switch ((int)$size) {
     case 1:
@@ -635,30 +691,31 @@ function attr_font_size_before(&$root, &$pipeline) {
       $newsize = BASE_FONT_SIZE_PT;
       break;
     };
-    $newsize = $newsize . "pt";
+    $newsize = $newsize . 'pt';
   };
 
-  pop_font_size(); push_font_size($newsize);
+  $handler =& CSS::get_handler(CSS_FONT_SIZE);
+  $handler->css($newsize, $pipeline);
 }
 function attr_font_size_after_styles(&$root, &$pipeline) {}
 function attr_font_size_after(&$root, &$pipeline) {}
 
 function attr_font_color_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('color');
-  $handler->css($root->get_attribute("color"),$pipeline);
+  $handler =& CSS::get_handler(CSS_COLOR);
+  $handler->css($root->get_attribute('color'),$pipeline);
 }
 function attr_font_color_after_styles(&$root, &$pipeline) {}
 function attr_font_color_after(&$root, &$pipeline) {}
 
 function attr_font_face_before(&$root, &$pipeline) {
-  pop_font_family();
-  push_font_family(parse_font_family($root->get_attribute("face")));
+  $handler =& CSS::get_handler(CSS_FONT_FAMILY);
+  $handler->css($root->get_attribute('face'), $pipeline);
 }
 function attr_font_face_after_styles(&$root, &$pipeline) {}
 function attr_font_face_after(&$root, &$pipeline) {}
 
 function attr_form_action_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('-html2ps-form-action');
+  $handler =& CSS::get_handler(CSS_HTML2PS_FORM_ACTION);
   if ($root->has_attribute('action')) {
     $handler->css($pipeline->guess_url($root->get_attribute('action')),$pipeline);
   } else {
@@ -669,7 +726,7 @@ function attr_form_action_after_styles(&$root, &$pipeline) {}
 function attr_form_action_after(&$root, &$pipeline) {}
 
 function attr_input_name_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('-html2ps-form-radiogroup');
+  $handler =& CSS::get_handler(CSS_HTML2PS_FORM_RADIOGROUP);
   if ($root->has_attribute('name')) {
     $handler->css($root->get_attribute('name'),$pipeline);
   };
@@ -677,42 +734,142 @@ function attr_input_name_before(&$root, &$pipeline) {
 function attr_input_name_after_styles(&$root, &$pipeline) {}
 function attr_input_name_after(&$root, &$pipeline) {}
 
+function attr_input_size_before(&$root, &$pipeline) {
+  // Check if current node has 'size' attribute
+  if (!$root->has_attribute('size')) {
+    return;
+  };
+  $size = $root->get_attribute('size');
+
+  // Get the exact type of the input node, as 'size' has
+  // different meanings for different input types
+  $type = 'text';
+  if ($root->has_attribute('type')) {
+    $type = strtolower($root->get_attribute('type'));
+  };
+
+  switch ($type) {
+  case 'text':
+  case 'password':
+    $handler =& CSS::get_handler(CSS_WIDTH);
+    $width = sprintf('%.2fem', INPUT_SIZE_BASE_EM + $size*INPUT_SIZE_EM_KOEFF);
+    $handler->css($width, $pipeline);
+    break;
+  };
+};
+
+function attr_input_size_after_styles(&$root, &$pipeline) {}
+function attr_input_size_after(&$root, &$pipeline) {}
+
 // TABLE
 
 function attr_cellspacing_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('-cellspacing');
-  $handler->css($root->get_attribute("cellspacing")."px",$pipeline);
+  $css_state =& $pipeline->getCurrentCSSState();
+  $handler =& CSS::get_handler(CSS_HTML2PS_CELLSPACING);
+  $handler->replace(Value::fromData((int)$root->get_attribute('cellspacing'), UNIT_PX),
+                    $css_state);
 }
 function attr_cellspacing_after_styles(&$root, &$pipeline) {}
 function attr_cellspacing_after(&$root, &$pipeline) {}
 
 function attr_cellpadding_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('-cellpadding');
-  $handler->css($root->get_attribute("cellpadding")."px",$pipeline);
+  $css_state =& $pipeline->getCurrentCSSState();
+  $handler =& CSS::get_handler(CSS_HTML2PS_CELLPADDING);
+  $handler->replace(Value::fromData((int)$root->get_attribute('cellpadding'), UNIT_PX),
+                    $css_state);
 }
 function attr_cellpadding_after_styles(&$root, &$pipeline) {}
 function attr_cellpadding_after(&$root, &$pipeline) {}
 
 // UL/OL 'start' attribute
 function attr_start_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('-list-counter');
-  $handler->replace((int)$root->get_attribute("start"));
+  $handler =& CSS::get_handler(CSS_HTML2PS_LIST_COUNTER);
+  $css_state =& $pipeline->getCurrentCSSState();
+  $handler->replace((int)$root->get_attribute('start'),
+                    $css_state);
 }
 function attr_start_after_styles(&$root, &$pipeline) {}
 function attr_start_after(&$root, &$pipeline) {}
 
+// UL 'type' attribute
+//
+// For  the UL  element, possible  values for  the type  attribute are
+// disc, square, and circle. The default value depends on the level of
+// nesting of the current list. These values are case-insensitive.
+//
+// How each value is presented  depends on the user agent. User agents
+// should attempt to  present a "disc" as a  small filled-in circle, a
+// "circle"  as a  small circle  outline, and  a "square"  as  a small
+// square outline.
+//
+function attr_ul_type_before(&$root, &$pipeline) {
+  $type = (string)$root->get_attribute('type');
+  $handler =& CSS::get_handler(CSS_LIST_STYLE_TYPE);
+  $css_state =& $pipeline->getCurrentCSSState();
+
+  switch (strtolower($type)) {
+  case 'disc':
+    $handler->replace(LST_DISC, $css_state);
+    break;
+  case 'circle':
+    $handler->replace(LST_CIRCLE, $css_state);
+    break;
+  case 'square':
+    $handler->replace(LST_SQUARE, $css_state);
+    break;
+  };
+}
+function attr_ul_type_after_styles(&$root, &$pipeline) {}
+function attr_ul_type_after(&$root, &$pipeline) {}
+
+// OL 'type' attribute
+//
+// For the OL element, possible values for the type attribute are summarized in the table below (they are case-sensitive):
+// Type 	Numbering style
+// 1 	arabic numbers 	1, 2, 3, ...
+// a 	lower alpha 	a, b, c, ...
+// A 	upper alpha 	A, B, C, ...
+// i 	lower roman 	i, ii, iii, ...
+// I 	upper roman 	I, II, III, ...
+//
+function attr_ol_type_before(&$root, &$pipeline) {
+  $type = (string)$root->get_attribute('type');
+  $handler =& CSS::get_handler(CSS_LIST_STYLE_TYPE);
+  $css_state =& $pipeline->getCurrentCSSState();
+
+  switch ($type) {
+  case '1':
+    $handler->replace(LST_DECIMAL, $css_state);
+    break;
+  case 'a':
+    $handler->replace(LST_LOWER_LATIN, $css_state);
+    break;
+  case 'A':
+    $handler->replace(LST_UPPER_LATIN, $css_state);
+    break;
+  case 'i':
+    $handler->replace(LST_LOWER_ROMAN, $css_state);
+    break;
+  case 'I':
+    $handler->replace(LST_UPPER_ROMAN, $css_state);
+    break;
+  };
+}
+function attr_ol_type_after_styles(&$root, &$pipeline) {}
+function attr_ol_type_after(&$root, &$pipeline) {}
+
 // Textarea
 
 function attr_textarea_rows_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('height');
-  $handler->css(sprintf("%dem", (int)$root->get_attribute("rows")*1.40),$pipeline);
+  $handler =& CSS::get_handler(CSS_HEIGHT);
+  $handler->css(sprintf('%dem', (int)$root->get_attribute('rows')*1.40),$pipeline);
 }
 function attr_textarea_rows_after_styles(&$root, &$pipeline) {}
 function attr_textarea_rows_after(&$root, &$pipeline) {}
 
 function attr_textarea_cols_before(&$root, &$pipeline) {
-  $handler =& get_css_handler('width');
-  $handler->css(sprintf("%dem", (int)$root->get_attribute("cols")*0.675),$pipeline);
+  $handler =& CSS::get_handler(CSS_WIDTH);
+  $handler->css(sprintf('%dem', (int)$root->get_attribute('cols')*0.675),$pipeline);
 }
 function attr_textarea_cols_after_styles(&$root, &$pipeline) {}
 function attr_textarea_cols_after(&$root, &$pipeline) {}
@@ -721,7 +878,8 @@ function attr_textarea_cols_after(&$root, &$pipeline) {}
  * HR-specific attributes
  */
 function attr_hr_color_before(&$root, &$pipeline) {
-  css_border_color($root->get_attribute("color"),$root); 
+  $handler =& CSS::get_handler(CSS_BORDER_COLOR);
+  $handler->css($root->get_attribute('color'), $pipeline); 
 }
 function attr_hr_color_after_styles(&$root, &$pipeline) {}
 function attr_hr_color_after(&$root, &$pipeline) {}

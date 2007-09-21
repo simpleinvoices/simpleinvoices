@@ -9,8 +9,7 @@ class FlowContext {
   var $container_uid;
 
   function add_absolute_positioned(&$box) {
-    array_unshift($this->absolute_positioned, null);
-    $this->absolute_positioned[0] =& $box;
+    $this->absolute_positioned[] =& $box;
   }
 
   function add_fixed_positioned(&$box) {
@@ -41,7 +40,8 @@ class FlowContext {
     if (count($floats) == 0) { return null; }
 
     $bottom = $floats[0]->get_bottom_margin();
-    for ($i=1; $i<count($floats); $i++) {
+    $size = count($floats);
+    for ($i=1; $i<$size; $i++) {
       $bottom = min($bottom, $floats[$i]->get_bottom_margin());
     };
 
@@ -58,11 +58,12 @@ class FlowContext {
   function float_left_x($x, $y) {
     $floats =& $this->current_floats();
 
-    for ($i=0; $i<count($floats); $i++) {
+    $size = count($floats);
+    for ($i=0; $i<$size; $i++) {
       $float =& $floats[$i];
 
       // Process only left-floating boxes
-      if ($float->float == FLOAT_LEFT) {
+      if ($float->getCSSProperty(CSS_FLOAT) == FLOAT_LEFT) {
         // Check if this float contains given Y-coordinate
         //
         // Note that top margin coordinate is inclusive but 
@@ -107,7 +108,8 @@ class FlowContext {
 
     // Prepare information about the float bottom coordinates
     $float_bottoms = array();
-    for ($i=0; $i<count($floats); $i++) {
+    $size = count($floats);
+    for ($i=0; $i<$size; $i++) {
       $float_bottoms[] = $floats[$i]->get_bottom_margin();
     };
 
@@ -118,13 +120,12 @@ class FlowContext {
       $x  = $this->float_left_x($parent->get_left(), $y);
       
       // Check if current float will fit into the parent box
-      // OR if the parent box have width: auto (it will expanded in this case anyway)
-
-      //      print(($parent->get_right() + EPSILON)."/".($x + $width)."/".$width."<br/>");
+      // OR if there's no parent boxes with constrained width (it will expanded in this case anyway)
 
       // small value to hide the rounding errors
+      $parent_wc = $parent->getCSSProperty(CSS_WIDTH);
       if ($parent->get_right() + EPSILON >= $x + $width ||
-          $parent->width == WIDTH_AUTO) {
+          $parent->mayBeExpanded()) {
 
         // Will fit; 
         // Check if current float will intersect the existing left-floating box
@@ -163,7 +164,8 @@ class FlowContext {
     if (count($floats) == 0) { return null; }
 
     $right = $floats[0]->get_right_margin();
-    for ($i=1; $i<count($floats); $i++) {
+    $size = count($floats);
+    for ($i=1; $i<$size; $i++) {
       $right = max($right, $floats[$i]->get_right_margin());
     };
 
@@ -180,11 +182,12 @@ class FlowContext {
   function float_right_x($x, $y) {
     $floats =& $this->current_floats();
 
-    for ($i=0; $i<count($floats); $i++) {
+    $size = count($floats);
+    for ($i=0; $i<$size; $i++) {
       $float =& $floats[$i];
 
       // Process only right-floating boxes
-      if ($float->float == FLOAT_RIGHT) {
+      if ($float->getCSSProperty(CSS_FLOAT) == FLOAT_RIGHT) {
         // Check if this float contains given Y-coordinate
         //
         // Note that top margin coordinate is inclusive but 
@@ -229,7 +232,8 @@ class FlowContext {
 
     // Prepare information about the float bottom coordinates
     $float_bottoms = array();
-    for ($i=0; $i<count($floats); $i++) {
+    $size = count($floats);
+    for ($i=0; $i<$size; $i++) {
       $float_bottoms[] = $floats[$i]->get_bottom_margin();
     };
 
@@ -327,7 +331,8 @@ class FlowContext {
   function &point_in_floats($x, $y) {
     // Scan the floating children list of the current container box
     $floats =& $this->current_floats();
-    for ($i=0; $i<count($floats); $i++) {
+    $size = count($floats);
+    for ($i=0; $i<$size; $i++) {
       if ($floats[$i]->contains_point_margin($x, $y)) {
         return $floats[$i]; 
       }
@@ -347,7 +352,10 @@ class FlowContext {
 }
 
 function cmp_boxes_by_z_index($a, $b) {
-  if ($a->z_index == $b->z_index) return 0;
-  return ($a->z_index < $b->z_index) ? -1 : 1;
+  $a_z = $a->getCSSProperty(CSS_Z_INDEX);
+  $b_z = $b->getCSSProperty(CSS_Z_INDEX);
+
+  if ($a_z == $b_z) return 0;
+  return ($a_z < $b_z) ? -1 : 1;
 }
 ?>

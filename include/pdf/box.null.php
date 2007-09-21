@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/html2ps/box.null.php,v 1.15 2006/05/27 15:33:26 Konstantin Exp $
+// $Header: /cvsroot/html2ps/box.null.php,v 1.18 2006/07/09 09:07:44 Konstantin Exp $
 
 class NullBox extends GenericInlineBox {
   function get_min_width(&$context) { return 0; }
@@ -7,14 +7,16 @@ class NullBox extends GenericInlineBox {
   function get_height() { return 0; }
 
   function NullBox() {
-    // No CSS rules should be applied to null box
-    push_css_defaults();
-    $this->GenericFormattedBox();
-    pop_css_defaults();
+    $this->GenericInlineBox();
   }
   
-  function &create(&$root, &$pipeline) { 
+  function &create() { 
     $box =& new NullBox;
+
+    $css_state = new CSSState(CSS::get());
+    $css_state->pushState();
+    $box->readCSS($css_state);
+
     return $box; 
   }
 
@@ -23,6 +25,12 @@ class NullBox extends GenericInlineBox {
   }
 
   function reflow_static(&$parent, &$context) {
+    if (!$parent) {
+      $this->put_left(0);
+      $this->put_top(0);
+      return;
+    };
+
     // Move current "box" to parent current coordinates. It is REQUIRED, 
     // as some other routines uses box coordinates.
     $this->put_left($parent->get_left());

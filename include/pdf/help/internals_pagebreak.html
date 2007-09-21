@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>Page breaking algorithm</title>
+<link rel="stylesheet" type="text/css" medial="all" title="Default" href="css/help.css"/>
+</head>
+<body>
+
+<h1>Page breaking algorithm</h1>
+<p>
+First of all, keep in mind that &quot;smart&quot; page breaking algorithm is available in 2.0 branch since 2.0.9; there's no reason 
+to use 2.1 experimental versions, as <b>all</b> features were ported. The difference between 2.1 and 2.0 is, in particular, 
+in the following: 2.1 has smart page breaks enabled by default, while 2.0 uses it only if 'smartpagebreak' setting is set to true. 
+If you're calling 'configure' when initializing pipeline, you notice no difference, as it will be enabled by default.
+If you're not using 'configure' call ($g_config is set up manually) you should explicitly set 'smartpagebreak' element in your $g_config to 'true'.
+</p>
+
+<p>
+To find the exact position of the next page break, script calculates a penalty (a badness, if you prefer) of every possible page break position, and 
+selects one with the minimal penalty value. Possible break positions are horizontal lines between line and block boxes; inside tables they're horizontal row boundaries and horizontal 
+lines passing between line boxes in all table cells in a row (thus, if you're using different font sizes or aligments in different cells, there's 
+a big chance there won't be suitable page break places inside this row at all).
+</p>
+
+<p>
+Penalty is assigned for the following:
+<table>
+<tr>
+<td>breaking the 'page-break-inside: avoid' rule</td>
+<td>PAGE_BREAK_INSIDE_AVOID_PENALTY</td>
+</tr>
+<tr>
+<td>breaking the 'page-break-after: avoid' rule</td>
+<td>PAGE_BREAK_AFTER_AVOID_PENALTY</td>
+</tr>
+<tr>
+<td>breaking the 'page-break-before: avoid' rule</td>
+<td>PAGE_BREAK_BEFORE_AVOID_PENALTY</td>
+</tr>
+<tr>
+<td>leaving less than 'orphans' lines on the next page</td>
+<td>PAGE_BREAK_ORPHANS_PENALTY</td>
+</tr>
+<tr>
+<td>leaving less than 'widows' lines on the next page</td>
+<td>PAGE_BREAK_WIDOWS_PENALTY</td>
+</tr>
+<tr>
+<td>breaking between line boxes instead of block boxes</td>
+<td>PAGE_BREAK_LINE_PENALTY</td>
+</tr>
+<tr>
+<td>breaking inside box having non-zero padding or border</td>
+<td>PAGE_BREAK_BORDER_PENALTY</td>
+</tr>
+</table>
+</p>
+
+<p>
+All assigned penalties stack for each positions; after that a "free space" penalty is added. This additional value is 
+used to prevent too much free space at the bottom of the page and is calculated using the following rules:
+<pre>
+free space penalty = 0, if distance from the bottom page edge / page height < MAX_UNPENALIZED_FREE_FACTION, or
+free space penalty = MAX_PAGE_BREAK_HEIGHT_PENALTY, if distance from the bottom page edge / page height > MAX_FREE_FACTION, or
+free space penalty = MAX_PAGE_BREAK_HEIGHT_PENALTY * ((distance from the bottom page edge / page height) - MAX_UNPENALIZED_FREE_FRACTION) / (MAX_FREE_FRACTION - MAX_UNPENALIZED_FREE_FRACTION), otherwise
+</pre>
+
+<p>After this, script selects the position with the least penalty value and proceeds to the next page.</p>
+
+<p>Refer to default.css for the default CSS rules related to page breaking, and to config.inc.php for default values of penalties</p>
+
+</body>
+</html>

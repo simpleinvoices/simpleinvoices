@@ -1,0 +1,24 @@
+Page breaking "watermark" for non-top-aligned cells
+www.test.de
+www.gmx.de
+height: 100% in quirks mode
+Check for magic_quotes
+Custom postscript prologue
+border-collapse
+Opacity
+Table headers and footers should be repeated on page breaks
+Grayscale image rendering
+Bidirectional text output
+XSL-FO processing
+table-layout: fixed
+JPEG/GIF output
+Completely debug PNG output
+PNG with alpha channels
+Anchors vertical position
+Documentation on page-break algorithm
+Encrypted PDF output
+Write-protected PDF output
+Missing zlib FPDF font generation error
+Systemcheck script checks for CURL in safe_mode (CURLOPT_FOLLOWLOCATION does not work there)
+'caption' support
+Rendering several pages on one page

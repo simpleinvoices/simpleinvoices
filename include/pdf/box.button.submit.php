@@ -33,15 +33,9 @@ class ButtonSubmitBox extends ButtonBox {
    * @param String $field field name (interactive forms)
    * @param String $value field value (interactive forms)
    */
-  function ButtonSubmitBox($text, $field, $value) {
-    $this->ButtonBox($text);
-
-    /**
-     * Save current form action reference for interactive form generation
-     */
-    $handler =& get_css_handler('-html2ps-form-action');
-    $this->_action_url = $handler->get();
-
+  function ButtonSubmitBox($field, $value, $action) {
+    $this->ButtonBox();
+    $this->_action_url = $action;
     $this->_field_name = $field;
     $this->_value = $value;
   }
@@ -67,8 +61,12 @@ class ButtonSubmitBox extends ButtonBox {
 
     $field = $root->get_attribute('name');
     $value = $root->get_attribute('value');
+    
+    $css_state =& $pipeline->getCurrentCSSState();
+    $box =& new ButtonSubmitBox($field, $value, $css_state->getProperty(CSS_HTML2PS_FORM_ACTION));
+    $box->readCSS($css_state);
+    $box->_setup($text, $pipeline);
 
-    $box =& new ButtonSubmitBox($text, $field, $value);
     return $box;
   }
 

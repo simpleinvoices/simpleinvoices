@@ -6,8 +6,23 @@ Simple Invoices - Changelog
 </head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <div id="left">
+<ul><li>2007-10</li>
+	<ul>
+		<li>SQL patch to alter tax rate to 3 decimal places
+	</ul>
+</ul>
 <ul><li>2007-09</li>
 	<ul>
+		<li>PHP5 and above only - Simple Invoices will no longer work on PHP4 servers</li>
+		<li>Invoices now can be deleted- This is can be enabled via the System Preferences page</li>
+		<li>Adding more items to an existing invoice via the edit page it now possible</li>
+		<li>New javascript menu included - now works in IEs,FF and Opera</li>
+		<li>New language select system - system language can now be changed via the System Preferences page</li>
+		<li>All pages move to the smarty templating system</li>
+		<li>Updated UI - were slowly moving away from our 37signals style UI to a more unqiue UI</li>
+		<li>Authentication sql table added to the default install - so you now longer have to manually run the login sql to get authentication working</li>
+		<li>How total invoices are stored in the DB has changed - now a total invoices gets stored as a product in the products table but set to not visible via the Manage Products page</li>
+		<li>System Defautls renamed to System Preferences</li>
 		<li>Authentication can now be set via the config.php file - no need to adjust include_auth.php anymore</li>
 		<li>Customer add template fixed for if no name entered</li>
 		<li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=106">Issue 106</a>Edit tax rates bug fixed</li>

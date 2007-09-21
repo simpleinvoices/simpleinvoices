@@ -1,20 +1,22 @@
 <?php
-// $Header: /cvsroot/html2ps/output.fpdf.class.php,v 1.12 2006/04/23 11:52:12 Konstantin Exp $
+// $Header: /cvsroot/html2ps/output.fpdf.class.php,v 1.27 2007/05/17 13:55:13 Konstantin Exp $
 
-require_once('fpdf/fpdf.php');
-require_once('fpdf/font/makefont/makefont.php');
+require_once(HTML2PS_DIR.'pdf.fpdf.php');
+require_once(HTML2PS_DIR.'pdf.fpdf.makefont.php');
+// require_once(HTML2PS_DIR.'fpdf/font/makefont/makefont.php');
 
 class OutputDriverFPDF extends OutputDriverGenericPDF {
   var $pdf;
-
   var $locallinks;
-
   var $cx;
   var $cy;
 
+  function OutputDriverFPDF() {
+    $this->OutputDriverGenericPDF();   
+  }
+
   function add_link($x, $y, $w, $h, $target) {
-    $y = $y - $this->offset;
-    $this->_coords2pdf($x, $y);
+    $this->_coords2pdf_annotation($x, $y);
     $this->pdf->add_link_external($x, $y, $w, $h, $target);
   }
 
@@ -47,6 +49,13 @@ class OutputDriverFPDF extends OutputDriverGenericPDF {
     $y = mm2pt($this->media->height()) - $y;
   }
 
+  // Annotation coordinates are always interpreted in the default (untranslated!) 
+  // user space. (See PDF Reference 1.6 Section 8.4 p.575)
+  function _coords2pdf_annotation(&$x, &$y) {
+    $y = $y - $this->offset;
+    $this->_coords2pdf($x, $y);
+  }
+
   function decoration($underline, $overline, $strikeout) {
     // underline
     $this->pdf->SetDecoration($underline, $overline, $strikeout);
@@ -61,7 +70,6 @@ class OutputDriverFPDF extends OutputDriverGenericPDF {
   }
 
   function close() {
-    $this->_show_watermark();
     $this->pdf->Output($this->get_filename());
   }
 
@@ -77,60 +85,43 @@ class OutputDriverFPDF extends OutputDriverGenericPDF {
     return $this->bottom + $this->offset;
   }
 
-  // Converts common encoding names to their PDFLIB equivalents 
-  // (for example, PDFLIB does not understand iso-8859-1 encoding name,
-  // but have its equivalent names winansi..)
-  //
-  function encoding($encoding) {
-    $encoding = trim(strtolower($encoding));
-
-    $translations = array(
-                          'windows-1250' => 'cp1250',
-                          'windows-1251' => 'cp1251',
-                          'windows-1252' => 'cp1252'
-                          );
-
-    if (isset($translations[$encoding])) { return $translations[$encoding]; };
-    return $encoding;
-  }
-
   function field_multiline_text($x, $y, $w, $h, $value, $field_name) { 
-    $this->_coords2pdf($x, $y);
+    $this->_coords2pdf_annotation($x, $y);
     $this->pdf->add_field_multiline_text($x, $y, $w, $h, $value, $field_name);
   }
 
   function field_text($x, $y, $w, $h, $value, $field_name) {
-    $this->_coords2pdf($x, $y);
+    $this->_coords2pdf_annotation($x, $y);
     $this->pdf->add_field_text($x, $y, $w, $h, $value, $field_name);
   }
 
   function field_password($x, $y, $w, $h, $value, $field_name) {
-    $this->_coords2pdf($x, $y);
+    $this->_coords2pdf_annotation($x, $y);
     $this->pdf->add_field_password($x, $y, $w, $h, $value, $field_name);
   }
 
   function field_pushbutton($x, $y, $w, $h) {
-    $this->_coords2pdf($x, $y);
+    $this->_coords2pdf_annotation($x, $y);
     $this->pdf->add_field_pushbutton($x, $y, $w, $h);
   }
 
   function field_pushbuttonimage($x, $y, $w, $h, $field_name, $value, $actionURL) {
-    $this->_coords2pdf($x, $y);
+    $this->_coords2pdf_annotation($x, $y);
     $this->pdf->add_field_pushbuttonimage($x, $y, $w, $h, $field_name, $value,  $actionURL);
   }
 
   function field_pushbuttonreset($x, $y, $w, $h) {
-    $this->_coords2pdf($x, $y);
+    $this->_coords2pdf_annotation($x, $y);
     $this->pdf->add_field_pushbuttonreset($x, $y, $w, $h);
   }
 
   function field_pushbuttonsubmit($x, $y, $w, $h, $field_name, $value, $actionURL) {
-    $this->_coords2pdf($x, $y);
+    $this->_coords2pdf_annotation($x, $y);
     $this->pdf->add_field_pushbuttonsubmit($x, $y, $w, $h, $field_name, $value,  $actionURL);
   }
 
   function field_checkbox($x, $y, $w, $h, $name, $value, $checked) {
-    $this->_coords2pdf($x, $y);
+    $this->_coords2pdf_annotation($x, $y);
     $this->pdf->add_field_checkbox($x, $y, $w, $h, $name, $value, $checked);
   }
 
@@ -141,12 +132,12 @@ class OutputDriverFPDF extends OutputDriverGenericPDF {
       $groupname = "__generated_group_".$generated_group_index;
     };
 
-    $this->_coords2pdf($x, $y);
+    $this->_coords2pdf_annotation($x, $y);
     $this->pdf->add_field_radio($x, $y, $w, $h, $groupname, $value, $checked);
   }
 
   function field_select($x, $y, $w, $h, $name, $value, $options) { 
-    $this->_coords2pdf($x, $y);
+    $this->_coords2pdf_annotation($x, $y);
     $this->pdf->add_field_select($x, $y, $w, $h, $name, $value, $options);
   }
 
@@ -175,8 +166,7 @@ class OutputDriverFPDF extends OutputDriverGenericPDF {
                       $x, 
                       $y - imagesy($image) * $scale, 
                       imagesx($image) * $scale, 
-                      imagesy($image) * $scale, 
-                      "png");
+                      imagesy($image) * $scale);
     unlink($tmpname);
   }
 
@@ -187,7 +177,7 @@ class OutputDriverFPDF extends OutputDriverGenericPDF {
     $cx = $x;
     while ($cx < $right) {
       $tx = $cx;
-      $ty = $y + units2pt(imagesy($image)); 
+      $ty = $y + px2pt(imagesy($image)); 
       $this->_coords2pdf($tx, $ty);
       $this->pdf->Image($tmpname, $tx, $ty, imagesx($image) * $scale, imagesy($image) * $scale, "png");
       $cx += $width;
@@ -197,7 +187,7 @@ class OutputDriverFPDF extends OutputDriverGenericPDF {
     $cx = $x;
     while ($cx+$width >= $x - $ox) {
       $tx = $cx-$width;
-      $ty = $y + units2pt(imagesy($image)); 
+      $ty = $y + px2pt(imagesy($image)); 
       $this->_coords2pdf($tx, $ty);
       $this->pdf->Image($tmpname, $tx, $ty, imagesx($image) * $scale, imagesy($image) * $scale, "png");
       $cx -= $width;
@@ -277,7 +267,7 @@ class OutputDriverFPDF extends OutputDriverGenericPDF {
     $cy = $y;
     while ($cy+$height > $bottom) {
       $tx = $x;
-      $ty = $cy + units2pt(imagesy($image)); 
+      $ty = $cy + px2pt(imagesy($image)); 
       $this->_coords2pdf($tx, $ty);
       $this->pdf->Image($tmpname, $tx, $ty, imagesx($image) * $scale, imagesy($image) * $scale, "png");
       $cy -= $height;
@@ -287,7 +277,7 @@ class OutputDriverFPDF extends OutputDriverGenericPDF {
     $cy = $y;
     while ($cy-$height < $y + $oy) {
       $tx = $x;
-      $ty = $cy + units2pt(imagesy($image)); 
+      $ty = $cy + px2pt(imagesy($image)); 
       $this->_coords2pdf($tx, $ty);
       $this->pdf->Image($tmpname, $tx, $ty, imagesx($image) * $scale, imagesy($image) * $scale, "png");
       $cy += $height;
@@ -318,15 +308,11 @@ class OutputDriverFPDF extends OutputDriverGenericPDF {
     $this->pdf->add_form($name);
   }
 
-  function next_page() {
-    $this->_show_watermark();
-
-    $this->current_page ++;
-
-    $this->pdf->AddPage();
+  function next_page($height) {
+    $this->pdf->AddPage(mm2pt($this->media->width()), mm2pt($this->media->height()));
     
     // Calculate coordinate of the next page bottom edge
-    $this->offset -= $this->height - $this->offset_delta;
+    $this->offset -= $height - $this->offset_delta;
 
     // Reset the "correction" offset to it normal value
     // Note: "correction" offset is an offset value required to avoid page breaking 
@@ -334,18 +320,20 @@ class OutputDriverFPDF extends OutputDriverGenericPDF {
     $this->offset_delta = 0;
 
     $this->pdf->Translate(0, -$this->offset);
-  }
 
-  function OutputDriverFPDF() {
-    $this->OutputDriverGenericPDF();   
+    parent::next_page($height);
   }
 
   function reset(&$media) {
-    OutputDriverGenericPDF::reset($media);   
+    parent::reset($media);   
 
-    $this->pdf = new FPDF("P","pt",array(mm2pt($media->width()), mm2pt($media->height())));
-    $this->pdf->SetCompression(0);
-    $this->pdf->AddPage();
+    $this->pdf =& new FPDF('P','pt',array(mm2pt($media->width()), mm2pt($media->height())));
+
+    if (defined('DEBUG_MODE')) {
+      $this->pdf->SetCompression(false);
+    } else {
+      $this->pdf->SetCompression(true);
+    };
 
     $this->cx = 0;
     $this->cy = 0;
@@ -362,7 +350,7 @@ class OutputDriverFPDF extends OutputDriverGenericPDF {
   }
 
   function setfont($name, $encoding, $size) {
-    $this->pdf->SetFont($this->findfont($name, $encoding), $encoding, '', $size);
+    $this->pdf->SetFont($this->findfont($name, $encoding), $encoding, $size);
 
     return true;
   }
@@ -380,6 +368,7 @@ class OutputDriverFPDF extends OutputDriverGenericPDF {
 
   function show_xy($text, $x, $y) {
     $this->_coords2pdf($x, $y);
+
     $this->pdf->Text($x, $y, $text);
   }
 
@@ -389,28 +378,32 @@ class OutputDriverFPDF extends OutputDriverGenericPDF {
 
   function stringwidth($string, $name, $encoding, $size) { 
     $this->setfont($name, $encoding, $size);
-    return $this->pdf->GetStringWidth($string);
+    $width = $this->pdf->GetStringWidth($string);
+    return $width;
   }
 
-  function _show_watermark() {
-    if (is_null($this->_watermark) || $this->_watermark == "") { return; };
-
-    $this->pdf->SetFont("Helvetica", "iso-8859-1", "", 100);
+  function _show_watermark($watermark) {
+    $this->pdf->SetFont("Helvetica", "iso-8859-1", 100);
 
     $x = $this->left + $this->width / 2;
-    $y = $this->bottom  + $this->height / 2 + $this->offset;
+    $y = $this->bottom  + $this->height / 2 - $this->offset;
     $this->_coords2pdf($x, $y);
 
     $this->pdf->SetTextRendering(1);
+    $this->pdf->SetDecoration(false, false, false);
     $this->pdf->Translate($x, $y);
     $this->pdf->Rotate(60);
 
-    $tx = -$this->pdf->GetStringWidth($this->_watermark)/2;
+    $tx = -$this->pdf->GetStringWidth($watermark)/2;
     $ty = -50;
     $this->_coords2pdf($tx, $ty);
+
+    // By default, "watermark" is rendered in black color
+    $this->setrgbcolor(0,0,0);
+
     $this->pdf->Text($tx, 
                      $ty, 
-                     $this->_watermark);
+                     $watermark);
   }
 
   function _mktempimage($image) {   

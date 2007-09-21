@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/html2ps/css.vertical-align.inc.php,v 1.20 2006/04/16 16:54:57 Konstantin Exp $
+// $Header: /cvsroot/html2ps/css.vertical-align.inc.php,v 1.23 2006/09/07 18:38:14 Konstantin Exp $
 
 define('VA_SUPER'      ,0);
 define('VA_SUB'        ,1);
@@ -11,52 +11,24 @@ define('VA_TEXT_TOP'   ,6);
 define('VA_TEXT_BOTTOM',7);
 
 class VerticalAlignSuper { 
-//   function apply(&$child, &$parent) { 
-//     $child->baseline /= 2; 
-//   } 
-
   function apply_cell(&$cell, $row_height, $row_baseline) {
     return; // Do nothing
   }
 }
 
 class VerticalAlignSub   { 
-//   function apply(&$child, &$parent) { 
-//     $child->baseline = $child->baseline/2 - $parent->_line_baseline; 
-//   } 
-
   function apply_cell(&$cell, $row_height, $row_baseline) {
     return; // Do nothing
   }
 }
 
 class VerticalAlignTop { 
-//   function apply(&$child, &$parent) { 
-//     return; // Do nothing 
-//   } 
-
   function apply_cell(&$cell, $row_height, $row_baseline) {
     return; // Do nothing
   }
 }
 
 class VerticalAlignMiddle {
-//   function apply(&$child, &$parent) {
-//     if ($parent->_line_baseline > $child->baseline) {
-//       $child->baseline = $parent->_line_baseline;
-//     } else {
-//       $delta = $parent->_line_baseline > $child->baseline;
-
-//       for ($i=0; $i<count($parent->_line); $i++) {
-//         $parent->_line[$i]->baseline -= $delta;
-//       }
-
-//       $parent->_line_baseline += $delta;
-//     }
-
-//     $child->baseline += ($child->default_baseline - $child->baseline)*0.5;
-//   }
-
   function apply_cell(&$cell, $row_height, $row_baseline) {    
     $delta = max(0, ($row_height - $cell->get_real_full_height()) / 2);
 
@@ -87,35 +59,12 @@ class VerticalAlignBaseline {
 }
 
 class VerticalAlignTextTop {
-//   function apply(&$child, &$parent) {
-//     // FIXME
-//   }
-
   function apply_cell(&$cell, $row_height, $row_baseline) {
     return; // Do nothing
   }
 }
 
 class VerticalAlignTextBottom {
-//   function apply(&$child, &$parent) {
-//     if (-$parent->_line_baseline > $child->baseline) {
-//       $child->baseline = -($parent->_line_baseline);
-//     } else {
-//       $baseline = $child->baseline;
-//       $delta = -$parent->_line_baseline - $child->baseline;
-
-//       for ($i=0; $i<count($parent->_line); $i++) {
-//         $parent->_line[$i]->baseline -= $delta;
-//       }
-
-//       // Child could be already in parent line box; in this case
-//       // its baseline value have been modified; return it to the correct value
-//       $child->baseline = $baseline;
-
-//       $parent->_line_baseline += $delta;
-//     }
-//   }
-
   function apply_cell(&$cell, $row_height, $row_baseline) {
     $delta = ($row_baseline - $cell->get_cell_baseline());
 
@@ -125,44 +74,48 @@ class VerticalAlignTextBottom {
   }
 }
 
-class CSSVerticalAlign extends CSSProperty {
+class CSSVerticalAlign extends CSSPropertyHandler {
   function CSSVerticalAlign() { 
     // Note that in general, parameters 'true' and 'false' are non meaningful in out case,
     // as we anyway override 'inherit' and 'inherit_text' in this class.
-    $this->CSSProperty(true, false); 
+    $this->CSSPropertyHandler(true, true); 
   }
 
-  function inherit() { 
+  function inherit($old_state, &$new_state) { 
     // Determine parent 'display' value
-    $handler =& get_css_handler('display');
-    $parent_display = $handler->get_parent();
+    $parent_display = $old_state[CSS_DISPLAY];
 
     // Inherit vertical-align from table-rows 
     if ($parent_display === "table-row") {
-      $this->push($this->get());
+      $this->replace_array($this->get($old_state),
+                           $new_state);
       return;
     }
 
-    $this->push(is_inline_element($parent_display) ? $this->get() : $this->default_value());
+    if (is_inline_element($parent_display)) {
+      $this->replace_array($this->get($old_state), $new_state);
+      return;
+    };
+        
+    $this->replace_array($this->default_value(), $new_state);
+    return;
   }
   
-  function inherit_text() { 
+  function inherit_text($old_state, &$new_state) { 
     // Determine parent 'display' value
-    $handler =& get_css_handler('display');
-    $parent_display = $handler->get_parent();
+    $parent_display = $old_state[CSS_DISPLAY];
 
-    $this->push(is_inline_element($parent_display) ? $this->get() : $this->default_value());
+    $this->replace_array(is_inline_element($parent_display) ? $this->get($old_state) : $this->default_value(),
+                         $new_state);
   }
 
   function default_value() { return VA_BASELINE; }
 
-  function css($value) { 
-    if ($this->applicable()) {
-      $this->replace($this->parse($value)); 
-    }
-  }
-
   function parse($value) {
+    if ($value === 'inherit') {
+      return CSS_PROPERTY_INHERIT;
+    };
+
     // Convert value to lower case, as html allows values 
     // in both cases to be entered
     $value = strtolower($value);
@@ -195,16 +148,24 @@ class CSSVerticalAlign extends CSSProperty {
     return new VerticalAlignBaseline;
   }
 
-  function applicable() {
-    $handler =& get_css_handler('display');
-    $display = $handler->get();
+  function applicable($css_state) {
+    $handler =& CSS::get_handler(CSS_DISPLAY);
+    $display = $handler->get($css_state->getState());
     return
       $display === 'table-cell' ||
       $display === 'table-row' ||
       is_inline_element($display);
   }
+
+  function getPropertyCode() {
+    return CSS_VERTICAL_ALIGN;
+  }
+
+  function getPropertyName() {
+    return 'vertical-align';
+  }
 }
 
-register_css_property('vertical-align', new CSSVerticalAlign);
+CSS::register_css_property(new CSSVerticalAlign);
 
 ?>

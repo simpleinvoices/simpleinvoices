@@ -1,17 +1,8 @@
 <?php
 
 class ButtonResetBox extends ButtonBox {
-  /**
-   * @var String URL to post the form to; may be null if this is not a 'submit' button
-   * @access private
-   */
-  var $_action_url;
-
   function ButtonResetBox($text) {
     $this->ButtonBox($text);
-
-    $handler =& get_css_handler('-html2ps-form-action');
-    $this->_action_url = $handler->get();
   }
 
   function &create(&$root, &$pipeline) {
@@ -22,7 +13,16 @@ class ButtonResetBox extends ButtonBox {
     };
 
     $box =& new ButtonResetBox($text);
+    $box->readCSS($pipeline->getCurrentCSSState());
+
     return $box;
+  }
+
+  function readCSS(&$state) {
+    parent::readCSS($state);
+    
+    $this->_readCSS($state, 
+                    array(CSS_HTML2PS_FORM_ACTION));
   }
 
   function _render_field(&$driver) {

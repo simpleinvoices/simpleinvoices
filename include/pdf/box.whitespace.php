@@ -1,10 +1,19 @@
 <?php
-// $Header: /cvsroot/html2ps/box.whitespace.php,v 1.29 2006/05/27 15:33:26 Konstantin Exp $
+// $Header: /cvsroot/html2ps/box.whitespace.php,v 1.33 2007/01/24 18:55:46 Konstantin Exp $
 
 class WhitespaceBox extends TextBox {
-  function &create() {
+  function &create(&$pipeline) {
     $box =& new WhitespaceBox();
+    $box->readCSS($pipeline->getCurrentCSSState());
+    $box->add_subword(" ", 'iso-8859-1', array());
     return $box;
+  }
+
+  function readCSS(&$state) {
+    parent::readCSS($state);
+
+    $this->_readCSSLengths($state,
+                           array(CSS_WORD_SPACING));
   }
 
   function get_extra_bottom() {
@@ -43,14 +52,14 @@ class WhitespaceBox extends TextBox {
 
   function WhitespaceBox() {
     // Call parent constructor
-    $this->TextBox(" ",'iso-8859-1');
+    $this->TextBox();
   }
 
   // (!) SIDE EFFECT: current whitespace box can be replaced by a null box during reflow.
   // callers of reflow should take this into account and possilby check for this 
   // after reflow returns. This can be detected by UID change.
   // 
-  function reflow_static(&$parent, &$context) {  
+  function reflow(&$parent, &$context) {  
     // Check if there are any boxes in parent's line box
     if ($parent->line_box_empty()) {
       // The very first whitespace in the line box should not affect neither height nor baseline of the line box;
@@ -64,55 +73,44 @@ class WhitespaceBox extends TextBox {
 
       $this->width = 0;
       $this->height = 0;
+    } elseif ($this->maybe_line_break($parent, $context)) {
+      $this->width = 0;
+      $this->height = 0;
     };
 
-    GenericFormattedBox::reflow($parent, $context);
-
-    // Apply 'line-height'
-    $this->_apply_line_height();
-
-    // default baseline 
-    $this->baseline = $this->default_baseline;
-
-    // append to parent line box
-    $parent->append_line($this);
-
-    // Move box to the parent current point
-    $this->guess_corner($parent);
-
-    // Offset parent's current point
-    $parent->_current_x += $this->width;
-    
-    // Extend parent height
-    $parent->extend_height($this->get_bottom_margin());
-
-    // Update the value of current collapsed margin; pure text (non-span)
-    // boxes always have zero margin
-
-    $context->pop_collapsed_margin();
-    $context->push_collapsed_margin( 0 );
+    parent::reflow($parent, $context);
   }
 
-  function reflow_text(&$viewport) {
-    if (is_null(TextBox::reflow_text($viewport))) {
+  function reflow_text(&$driver) {
+    if (is_null(parent::reflow_text($driver))) {
       return null;
     };
 
     // Override widths
-    $this->width = $this->font_size * WHITESPACE_FONT_SIZE_FRACTION;
+    $letter_spacing = $this->getCSSProperty(CSS_LETTER_SPACING);
+    $word_spacing   = $this->getCSSProperty(CSS_WORD_SPACING);
+
+    $this->width = 
+      $this->height * WHITESPACE_FONT_SIZE_FRACTION + 
+      $letter_spacing->getPoints() + 
+      $word_spacing->getPoints();
+
     return true;
   }
 
   function reflow_whitespace(&$linebox_started, &$previous_whitespace) {
     if (!$linebox_started || 
         ($linebox_started && $previous_whitespace)) {     
-      if ($this->pseudo_link_destination == "") {
+      
+      $link_destination = $this->getCSSProperty(CSS_HTML2PS_LINK_DESTINATION);
+      if (is_null($link_destination)) {
         $this->parent->remove($this);
-      } else {
-        $this->font_height = 0.001;
-        $this->height = 0;
-        $this->width = 0;
+        return;
       };
+
+      $this->font_height = 0.001;
+      $this->height = 0;
+      $this->width = 0;
     };
 
     $previous_whitespace = true;

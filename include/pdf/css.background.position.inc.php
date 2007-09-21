@@ -11,7 +11,15 @@ define('TEXT_REGEXP',"\b(?:top|bottom|left|right|center)\b");
 define('BG_POSITION_SUBVALUE_TYPE_HORZ',1);
 define('BG_POSITION_SUBVALUE_TYPE_VERT',2);
 
-class CSSBackgroundPosition extends CSSSubProperty {
+class CSSBackgroundPosition extends CSSSubFieldProperty {
+  function getPropertyCode() {
+    return CSS_BACKGROUND_POSITION;
+  }
+
+  function getPropertyName() {
+    return 'background-position';
+  }
+
   function default_value() {
     return new BackgroundPosition(0,true,
                                   0,true);
@@ -60,7 +68,7 @@ class CSSBackgroundPosition extends CSSSubProperty {
       $type_x = CSSBackgroundPosition::detect_type($x);
       $type_y = CSSBackgroundPosition::detect_type($y);
 
-      if ($type_x == null && $type_y == null) {
+      if (is_null($type_x) && is_null($type_y)) {
         return CSSBackgroundPosition::build_value($x,$y);
       };
 
@@ -88,6 +96,10 @@ class CSSBackgroundPosition extends CSSSubProperty {
   }
 
   function parse($value) {
+    if ($value === 'inherit') {
+      return CSS_PROPERTY_INHERIT;
+    };
+
     $value = CSSBackgroundPosition::parse_in($value);
     return new BackgroundPosition($value[0][0], $value[0][1],
                                   $value[1][0], $value[1][1]);

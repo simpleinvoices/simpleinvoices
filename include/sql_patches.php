@@ -788,7 +788,11 @@ NULL , 'logging', '0'
 	$patch['136']['name'] = "Set default language in new lang system";
 	$patch['136']['patch'] = "UPDATE `si_system_defaults` SET value = 'english_UK' where name ='language';";
 	$patch['136']['date'] = "200709";
-	
+
+	$patch['137']['name'] = "Make tax field 3 decimal places";
+	$patch['137']['patch'] = "alter table `si_tax` change `tax_percentage` `tax_percentage` decimal (10,3)  NULL";
+	$patch['137']['date'] = "200710";
+		
 
 /*
 INSERT INTO  `si_menu` (  `id` ,  `parentid` ,  `order` ,  `name` ,  `link` ,  `enabled` ) 

@@ -1,0 +1,558 @@
+/**
+ * Simple tags
+ */
+
+address { 
+  display: block;
+  font-style: italic;
+}
+
+applet { 
+  display: none;
+}
+
+area { 
+  display: none;
+}
+
+b { 
+  font-weight: bold;
+}
+
+big { 
+  font-size: 1.2em;
+}
+
+blockquote { 
+  display: block;
+  margin: 1em 40px;
+}
+
+body { 
+  display: -body;
+  margin: 8px;
+  line-height: 1.1;
+  border: none;
+}
+
+br { 
+  display: -break;
+}
+
+button { 
+  display: -button;
+  text-align: center;
+  border: outset 2px;
+  background-color: #eeeeee;
+}
+
+center { 
+  display: block;
+  text-align: center;
+  -html2ps-align: center;
+}
+
+cite { 
+  font-style: italic;
+}
+
+code { 
+  font-family: monospace;
+}
+
+col { 
+  display: none;
+}
+
+colgroup { 
+  display: none;
+}
+
+dd { 
+  display: block;
+  padding-left: 40px;
+}
+
+dfn { 
+  font-style: italic;
+}
+
+div { 
+  display: block;
+}
+
+dir { 
+  margin-left: 1em;
+}
+
+dl { 
+  display: block;
+  margin: 1em 0;
+}
+
+dt { 
+  display: block;
+}
+
+em { 
+  font-style: italic;
+}
+
+embed { 
+  display: block;
+}
+
+fieldset { 
+  display: block;
+  border: solid black 1px;
+  margin-left: 2px;
+  margin-right: 2px;
+  padding: 0.25em 0.625em 0.75em;
+}
+
+form { 
+  display: -form;
+}
+
+frame { 
+  display: -frame;
+  position: absolute;
+  border: solid black 2px;
+  overflow: hidden;
+}
+
+frameset { 
+  display: -frameset;
+}
+
+h1 { 
+  display: block;
+  font-size: 2em;
+  font-weight: bold;
+  margin: .67em 0;
+}
+
+h2 { 
+  display: block;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: .83em 0;
+}
+
+h3 { 
+  display: block;
+  font-size: 1.17em;
+  font-weight: bold;
+  margin: 1em 0;
+}
+
+h4 { 
+  display: block;
+  font-weight: bold;
+  margin: 1.33em 0;
+}
+
+h5 { 
+  display: block;
+  font-size: 0.83em;
+  font-weight: bold;
+  margin: 1.67em 0;
+}
+
+h6 { 
+  display: block;
+  font-size: 0.67em;
+  font-weight: bold;
+  margin: 2.33em 0;
+}
+
+head { 
+  display: none;
+}
+
+hr { 
+  display: block;
+  margin: 0.5em auto 0.5em auto;
+  height: 1px;
+  border: 0.1pt solid black;
+}
+
+/**
+ * We use this non-standard display value to avoid generating box for HTML tag; 
+ * display: none and visibility: hidden are not the alternatives, as they cause the whole 
+ * content of the page to be hidden
+ */
+html { 
+  display: -html;
+}
+
+i { 
+  font-style: italic;
+  display: inline;
+}
+
+iframe { 
+  display: -iframe;
+  border: solid black 2px;
+  padding: 3px;
+  overflow: hidden;
+  width: 300px;
+  height: 150px;
+}
+
+img { 
+  display: -image;
+}
+
+input { 
+  display: -text;
+  padding: 1pt;
+  margin: 1px;
+  background-color: white;
+  border: black inset 2px;
+  line-height: 1;
+  overflow: hidden;
+}
+
+input[type=button] { 
+  display: -button;
+  text-align: center;
+  border: outset 2px;
+  background-color: #eeeeee;
+}
+
+input[type=checkbox] { 
+  display: -checkbox;
+}
+
+input[type=hidden] { 
+  display: none;
+}
+
+input[type=image] { 
+  display: -button-image;
+  border: none 0px;
+  background-color: transparent;
+}
+
+input[type=password] { 
+  display: -password
+}
+
+input[type=radio] { 
+  display: -radio;
+}
+
+input[type=reset] { 
+  display: -button-reset;
+  text-align: center;
+  border: outset 2px;
+  background-color: #eeeeee;  
+}
+
+input[type=submit] { 
+  display: -button-submit;
+  text-align: center;
+  border: outset 2px;
+  background-color: #eeeeee;  
+}
+
+input[type=text] { 
+  display: -text;
+  width: 21ex;
+}
+
+ins { 
+  text-decoration: underline;
+}
+
+isindex { 
+  display: block;
+}
+
+kbd { 
+  font-family: monospace;
+}
+
+legend { 
+  display: -legend;
+  background-color: white;
+}
+
+li { 
+  display: list-item;
+}
+
+marquee { 
+  display: block;
+  overflow: hidden;
+}
+
+menu { 
+  margin-left: 1em;
+}
+
+nobr { 
+  display: inline;
+  white-space: nowrap;
+}
+
+noframes { 
+  display: none;
+}
+
+object { 
+  display: block;
+}
+
+ol {
+  display: block;
+  list-style-type: decimal;
+  padding-left: 40px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  -html2ps-list-counter: 0;
+}
+
+option { 
+  display: none;
+}
+
+p { 
+  display: block;
+  margin: 1em 0;
+}
+
+pagebreak { 
+  display: block;
+  visibility: hidden;
+  page-break-after: always;
+}
+
+param { 
+  display: none;
+}
+
+pre { 
+  display: block;
+  font-family: monospace;
+  white-space: pre;
+}
+
+s { 
+  text-decoration: line-through;
+}
+
+samp { 
+  font-family: monospace;
+}
+
+script { 
+  display: none;
+}
+
+select { 
+  background-color: white;
+  border: inset black 2px;
+  display: -select;
+  overflow: hidden;
+  padding: 1pt;
+  margin: 1px;
+  line-height: 1;
+}
+
+small { 
+  font-size: smaller;
+}
+
+span { 
+  display: inline;
+}
+
+strong { 
+  font-weight: bold;
+}
+
+strike { 
+  text-decoration: line-through;
+}
+
+style { 
+  display: none;
+}
+
+sup { 
+  display: inline;
+  font-size: 50%;
+  vertical-align: super;
+}
+
+sub { 
+  display: inline;
+  font-size: 50%;
+  vertical-align: sub;
+}
+
+table { 
+  display: table;
+  line-height: 1.1;
+  page-break-inside: avoid;
+  -html2ps-cellpadding: 1px;
+  -html2ps-cellspacing: 1px;
+}
+
+textarea { 
+  display: -textarea;
+  border: solid black 2px;
+  padding: 3px;
+  white-space: pre-wrap;
+  overflow: hidden;
+  width: 15.3em;
+  height: 3em;
+}
+
+tbody { 
+  display: table-row-group;
+}
+
+td { 
+  display: table-cell;
+  page-break-inside: avoid;
+}
+
+th { 
+  display: table-cell;
+  font-weight: bold;
+  text-align: center;
+}
+
+thead { 
+  display: table-header-group;
+}
+
+tfoot { 
+  display: table-footer-group;
+}
+
+tr { 
+  display: table-row;
+  vertical-align: middle;
+}
+
+tt { 
+  font-family: monospace;
+}
+
+u { 
+  text-decoration: underline;
+}
+
+ul { 
+  display: block;
+  list-style-type: disc;
+  padding-left: 40px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+var { 
+  font-style: italic;
+}
+
+/**
+ * Tag combinations
+ */
+
+a:link { 
+  color: blue;
+  text-decoration: underline;
+}
+
+
+a img { 
+  border: solid blue 1px;
+}
+
+/* nested lists have no top/bottom margins */
+ul ul,   ul ol,   ul dir,   ul menu,   ul dl,
+ol ul,   ol ol,   ol dir,   ol menu,   ol dl,
+dir ul,  dir ol,  dir dir,  dir menu,  dir dl,
+menu ul, menu ol, menu dir, menu menu, menu dl,
+dl ul,   dl ol,   dl dir,   dl menu,   dl dl {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* 2 deep unordered lists use a circle */
+ol ul,   ul ul,   menu ul,   dir ul,
+ol menu, ul menu, menu menu, dir menu,
+ol dir,  ul dir,  menu dir,  dir dir {
+  list-style-type: circle;
+}
+
+/* 3 deep (or more) unordered lists use a square */
+ol ol ul,     ol ul ul,     ol menu ul,     ol dir ul,
+ol ol menu,   ol ul menu,   ol menu menu,   ol dir menu,
+ol ol dir,    ol ul dir,    ol menu dir,    ol dir dir,
+ul ol ul,     ul ul ul,     ul menu ul,     ul dir ul,
+ul ol menu,   ul ul menu,   ul menu menu,   ul dir menu,
+ul ol dir,    ul ul dir,    ul menu dir,    ul dir dir,
+menu ol ul,   menu ul ul,   menu menu ul,   menu dir ul,
+menu ol menu, menu ul menu, menu menu menu, menu dir menu,
+menu ol dir,  menu ul dir,  menu menu dir,  menu dir dir,
+dir ol ul,    dir ul ul,    dir menu ul,    dir dir ul,
+dir ol menu,  dir ul menu,  dir menu menu,  dir dir menu,
+dir ol dir,   dir ul dir,   dir menu dir,   dir dir dir {
+  list-style-type: square;
+}
+
+/**
+ * CSS 3 - specific defaults
+ */
+/*
+@page { 
+  reset-counter: footnote;
+}
+*/
+
+@footnote { 
+  border-top:  thin solid black;
+  padding-top: 0.6em;
+  margin-top:  0.6em;
+  content: pending(footnote);
+}
+
+*::note-call { 
+  content: counter(footnote, super-decimal);
+}
+
+*::marker { 
+  content: counter(footnote, super-decimal);
+}
+
+.html2ps-toc-wrapper { 
+  position: relative;
+  height: 1.2em;
+  background: white;
+}
+
+.html2ps-toc-2-wrapper { 
+  padding-left: 1em;
+}
+
+.html2ps-toc-3-wrapper { 
+  padding-left: 2em;
+}
+
+.html2ps-toc-name { 
+  float: left;
+  height: 1.2em;
+  width: 100%;
+  margin-right: -5em;
+}
+
+.html2ps-toc-page { 
+  float: left;
+  height: 1.2em;
+  width: 4em;
+}

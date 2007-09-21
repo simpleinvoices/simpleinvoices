@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/html2ps/xhtml.entities.inc.php,v 1.10 2006/04/12 15:17:22 Konstantin Exp $
+// $Header: /cvsroot/html2ps/xhtml.entities.inc.php,v 1.11 2006/12/24 14:42:44 Konstantin Exp $
 
 function process_character_references(&$html) {
   // Process symbolic character references
@@ -31,7 +31,7 @@ function process_character_references(&$html) {
 function escape_amp($html) {
   // Escape all ampersants not followed by a # sharp sign
   // Note that symbolic references were replaced by numeric before this!
-  $html = preg_replace("/&(?!#)/si","&amp;\\1",$html);
+  $html = preg_replace("/&(?!#)/si","&#38;\\1",$html);
 
   // Complete all numeric character references unterminated with ';'
   $html = preg_replace("/&#(\d+)(?![\d;])/si","&#\\1;",$html);
@@ -41,7 +41,7 @@ function escape_amp($html) {
   // symbol reference.
   // Also, don't forget that we've used &amp;! They should not be converted too...
   //
-  $html = preg_replace("/&(?!#\d|amp)/si","&amp;\\1",$html);
+  $html = preg_replace("/&(?!#\d)/si","&#38;\\1",$html);
 
   return $html;
 };
@@ -56,21 +56,21 @@ function escape_lt($html) {
   // search and replace process.
   //
   while (preg_match("#<(\s*[^!/a-zA-Z])#",$html)) {
-    $html = preg_replace("#<(\s*[^!/a-zA-Z])#si","&lt;\\1",$html);
+    $html = preg_replace("#<(\s*[^!/a-zA-Z])#si","&#60;\\1",$html);
   };
     
   while (preg_match("#(<[^>]*?)<#si",$html)) {
-    $html = preg_replace("#(<[^>]*?)<#si","\\1&lt;",$html);
+    $html = preg_replace("#(<[^>]*?)<#si","\\1&#60;",$html);
   };
 
   return $html;
 };
 
 function escape_gt($html) {
-  $html = preg_replace("#([^\s\da-zA-Z'\"/=-])\s*>#si","\\1&gt;",$html);
+  $html = preg_replace("#([^\s\da-zA-Z'\"/=-])\s*>#si","\\1&#62;",$html);
 
   while (preg_match("#(>[^<]*?)>#si",$html)) {
-    $html = preg_replace("#(>[^<]*?)>#si","\\1&gt;",$html);
+    $html = preg_replace("#(>[^<]*?)>#si","\\1&#62;",$html);
   };
 
   return $html;

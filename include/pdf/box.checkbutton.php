@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/html2ps/box.checkbutton.php,v 1.17 2006/03/22 19:02:36 Konstantin Exp $
+// $Header: /cvsroot/html2ps/box.checkbutton.php,v 1.21 2007/05/07 12:15:53 Konstantin Exp $
 
 /**
  * @package HTML2PS
@@ -67,6 +67,8 @@ class CheckBox extends GenericFormattedBox {
     $box =& new CheckBox($root->has_attribute('checked'), 
                          $root->get_attribute('name'),
                          $value);
+    $box->readCSS($pipeline->getCurrentCSSState());
+    $box->setup_dimensions();
     return $box;
   }
 
@@ -83,16 +85,6 @@ class CheckBox extends GenericFormattedBox {
     $this->_checked = $checked;
     $this->_name    = trim($name);
     $this->_value   = trim($value);
-
-    /**
-     * Check box size is constant (defined in config.inc.php) and is never affected
-     * neither by CSS nor HTML.
-     * 
-     * @see CHECKBOX_SIZE
-     */
-    $this->default_baseline = units2pt(CHECKBOX_SIZE);
-    $this->height           = units2pt(CHECKBOX_SIZE);
-    $this->width            = units2pt(CHECKBOX_SIZE);
   }
 
   /**
@@ -136,6 +128,15 @@ class CheckBox extends GenericFormattedBox {
   function reflow(&$parent, &$context) {  
     GenericFormattedBox::reflow($parent, $context);
     
+    /**
+     * Check box size is constant (defined in config.inc.php) and is never affected
+     * neither by CSS nor HTML. Call setup_dimensions once more to restore possible 
+     * changes size
+     * 
+     * @see CHECKBOX_SIZE
+     */
+    $this->setup_dimensions();
+
     // set default baseline
     $this->baseline = $this->default_baseline;
     
@@ -184,6 +185,7 @@ class CheckBox extends GenericFormattedBox {
     /**
      * Draw the box
      */
+    $driver->setrgbcolor(0,0,0);
     $driver->setlinewidth(0.25);
     $driver->moveto($x - $size, $y + $size);
     $driver->lineto($x + $size, $y + $size);
@@ -223,6 +225,12 @@ class CheckBox extends GenericFormattedBox {
     };
 
     return true;
+  }
+
+  function setup_dimensions() {
+    $this->default_baseline = units2pt(CHECKBOX_SIZE);
+    $this->height           = units2pt(CHECKBOX_SIZE);
+    $this->width            = units2pt(CHECKBOX_SIZE);
   }
 }
 ?>

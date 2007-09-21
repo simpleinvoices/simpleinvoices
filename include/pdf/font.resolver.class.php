@@ -1,7 +1,7 @@
 <?php
-// $Header: /cvsroot/html2ps/font.resolver.class.php,v 1.12 2006/05/27 15:33:27 Konstantin Exp $
+// $Header: /cvsroot/html2ps/font.resolver.class.php,v 1.15 2006/11/11 13:43:52 Konstantin Exp $
 
-require_once('font.constants.inc.php');
+require_once(HTML2PS_DIR.'font.constants.inc.php');
 
 class FontResolver {
   var $families;
@@ -15,7 +15,7 @@ class FontResolver {
 
   function setup_ttf_mappings($pdf) {
     foreach ($this->ttf_mappings as $typeface => $file) {
-      pdf_set_parameter($pdf, "FontOutline", $typeface."=".PDFLIB_TTF_FONTS_REPOSITORY.$file); 
+      pdf_set_parameter($pdf, "FontOutline", $typeface."=".TTF_FONTS_REPOSITORY.$file); 
     };
   }
 
@@ -114,9 +114,9 @@ class FontResolver {
     $this->families[$family][WEIGHT_BOLD][FS_OBLIQUE] = $oblique;
   }
 
-  function ps_font_family($family, $weight, $style, $encoding) {
+  function getTypefaceName($family, $weight, $style, $encoding) {
     if ($this->have_alias($family)) {
-      return $this->ps_font_family($this->aliases[$family], $weight, $style, $encoding);
+      return $this->getTypefaceName($this->aliases[$family], $weight, $style, $encoding);
     }
 
     // Check for family-specific encoding override
@@ -136,8 +136,13 @@ class FontResolver {
     return $this->families[$family][$weight][$style];
   }
 
-  function have_alias($family) { return isset($this->aliases[$family]); }
-  function have_font_family($family) { return isset($this->families[$family]) or $this->have_alias($family); }
+  function have_alias($family) { 
+    return isset($this->aliases[$family]); 
+  }
+
+  function have_font_family($family) { 
+    return isset($this->families[$family]) or $this->have_alias($family); 
+  }
 }
 
 global $g_font_resolver, $g_font_resolver_pdf;

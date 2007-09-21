@@ -1,0 +1,1676 @@
+2007-09-14 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.35
+
+	* Fixed: media names  are completely case-insensitive now (see CSS
+	2.1 p.7.2)
+
+	* Fixed: inline controls (text and buttons) with empty value caused 
+	PHP errors (introduced in 2.0.33)
+
+	* Fixed: bottom margin / border values were ignored for inline elements
+
+2007-09-06 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.34
+
+	* Change: minor samples update
+
+2007-08-25 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.33
+
+	* Fixed:   error in  demo  script on  PHP  5  with curl  extension
+	installed
+	
+	* Fixed:  nested  inline  elements inside  pre  caused extra  line
+	breaks
+
+	* Fixed: bottom margins  were incorrectly collapsed when container
+	had  padding /  borders  and  contained more  than  1 child  block
+	element
+
+2007-08-17 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.32
+
+	* Fixed: tables having constrained height smaller than overall row
+	height were not expanded
+
+2007-08-11 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.31
+
+2007-08-06 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Change:  file destination object now  can display a  link to the
+	generated file 
+
+2007-08-05 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Change: "autosized vertical margin boxes" code moved to
+	"features"
+
+	* Change: minor documentation / FAQ updates	
+
+2007-07-28 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.30
+	
+	* Fixed: (PHP4-specific) Generated TOC elements were not clickable
+
+2007-07-22 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.29
+	
+	* Fixed: empty pages could  appear in document when html2ps run in
+	batch mode
+
+2007-07-15 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.28
+	
+	*  Fixed:  Certain character  &  font  files  could cause  warning
+	messages when font files were parsed
+
+2007-07-06 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Fixed: * { display: none; } CSS rule caused script to die
+
+	* Change: minor documentation / FAQ updates
+
+2007-07-01 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.27
+	
+	*  Fixed: number  of  characters not  found  in standard  encoding
+	vectors was  limited to  255 (limit on  total number  of different
+	_symbols_ still exists)
+
+	* Fixed: tables with "fake" cells could result in unexpected page 
+	breaks
+	
+	* Fixed: minor sample updates
+
+2007-06-27 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Fixed:  missing TTF  files may result  in mysterious  PHP errors
+	during the conversion process
+
+2007-06-26 Konstanin Bournayev <bkon@bkon.ru>
+
+	*  Fixed: font  family names  in mixed  case could  be interpreted
+	incorrectly in 'alias' directive, making this typeface unavailable
+
+2007-06-25 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Fixed: margin-XXX subproperties were ignored in @page context
+
+2007-06-24 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.26
+	
+	* Change: minor documentation/FAQ updates
+
+	* Fixed: media size / margin CSS properties support was broken in
+	recent versions
+
+2007-06-20 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Change: minor documentation/FAQ updates
+
+2007-06-19 Konstanin Bournayev <bkon@bkon.ru>
+
+	*  Fixed: PDFLIB-related  errors  (output method  seems broken  in
+	2.0.21+)
+
+2007-06-08 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.25
+
+2007-06-10 Konstanin Bournayev <bkon@bkon.ru>
+
+	*  Fixed:  "Call   to  a  member  function  on   a  non-object  in
+	html2pdf/box.inline.php on  line 257" message  appeared in certain
+	conditions when "smartpagebreak" was enabled.
+
+2007-06-08 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.24
+
+2007-06-07 Konstanin Bournayev <bkon@bkon.ru>
+
+	*   Change:  script   attempts   to  update   pcre.backtrack_limit
+	automatically
+
+	* Change: check for pcre.backtrack_limit added to systemcheck.php
+	
+	* Fixed: better page breaking inside table cells with vertical
+	empty spaces
+
+2007-06-07 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Fixed: removed debugging 'die' accidentally left in 2.0.23 code
+
+2007-06-01 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.23
+
+	* Fixed: ##PAGE## and counter(page) gave incorrect page numbers
+	
+	* New: support for 'type' UL and OL attributes was added
+
+2007-05-27 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.22
+	
+	* Fixed:  html2ps could loop indefinitely  on documents containing
+	less  than  one  page  and   at  least  one  table  under  certain
+	circumstances
+
+2007-05-22 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.21
+
+	* Fixed: a number of issues related to recent changes 
+	in dynamic media definitions and page breaking 
+
+	* Fixed: nested ordered lists were numbered incorrectly
+
+2007-05-08 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.20
+
+2007-05-07 Konstanin Bournayev <bkon@bkon.ru>
+
+	*  New: media  margins may  be  changed from  style
+	definition using 'margins' property in @page rule.
+
+	*  New: media  size  and  orientation may  be  changed from  style
+	definition using CSS 3 'size' property in @page rule.
+	
+	* Fixed:  non-ASCII characters  in TOC items  could result  in XML
+	parser errors
+
+	* Fixed:  checkboxes were incorrectly rendered inside tables
+
+2007-05-06 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.19
+
+2007-05-04 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Fixed: style and link tags were ignored when written in upper case
+
+2007-05-03 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Change: table of contents feature
+
+	* Fixed: several notice messages when PHP 4 DOMXML function were used
+	
+	* Fixed: 'missing font' issue when zlib is not installed
+
+2007-04-30 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Fixed: documentation fixes / updates
+
+2007-04-29 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.18
+
+2007-04-26 Konstanin Bournayev <bkon@bkon.ru>
+
+	*  Change:   array  of  calculated  page  heights   is  passed  to
+	'before-document' event handler
+
+	*  Fixed:   'configure'  method  always   overwrote  configuration
+	variables with their default values
+
+2007-04-07 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.17
+
+2007-04-06 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Fixed: CSS Properties in UPPER and MiXEd case no more ignored
+
+2007-04-02 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Fixed: backslash+newline sequence was not ignored in CSS strings
+	
+	* Fixed: newlines were ignored in generated content in page margin
+	boxes
+
+	* Fixed: backslash escapes were ignored in CSS 'content' property
+
+2007-04-01 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.16
+
+2007-03-28 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Fixed: minor samples updates
+	
+	* Fixed: table cells spanning  several rows in some cases could be
+	ignored when calculating table width
+	
+	* Fixed: table cells with width constraints spanning several columns 
+	could have their width calculated incorrectly
+
+2007-03-28 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Fixed:  tables nested in other tables  could overflow containing
+	cells
+
+2007-03-26 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Change: minor FAQ / documentation updates
+
+2007-03-23 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.15
+	
+	* Fixed: more tolerant  processing of LINK href attribute allowing
+	unescaped spaces
+	
+	* Fixed: CSS rule definitions containing only one property 
+	without trailing semicolon were ignored
+
+2007-03-16 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.14
+
+2007-03-15 Konstanin Bournayev <bkon@bkon.ru>
+
+	* New: support for custom automatically generated encoding vector 
+	in PDFLIB output
+
+2007-03-14 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Fixed: several fixes in CSS processing; HTML entities processing
+	no more affect CSS code;  semicolons inside quoted strings no more
+	treated as end of property definition.
+
+2007-03-06 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Fixed:      "Call       to      a      member      function
+	getPropertiesSortedByPriority() on a non-object" error (affected 
+	all fresh installations of v.2.0.12 and v.2.0.13.
+
+2007-03-05 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.13
+	
+2007-03-03 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Fixed: 'display: block' set  for body box caused body background
+	to be rendered incorrectly
+	
+	* New: support 'background-attachment' CSS property for body boxes
+
+2007-02-27 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Fixed: batch processing mode did  not work when media had no top
+	and bottom margins
+
+2007-02-27 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Fixed: images were never rendered as links 
+
+2007-02-25 Konstanin Bournayev <bkon@bkon.ru>
+
+        * Release: html2ps-2.0.12
+	
+	* New: API extension: events 
+
+2007-02-22 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Fixed:  broken 'text-transform' support. Thanks  to dkrieger for
+	the patch (applied with minor changes).
+
+2007-02-21 Konstanin Bournayev <bkon@bkon.ru>
+
+	* New: background properties  now recognized in page context (CSS3
+	paged media)
+
+2007-02-18 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.11
+	
+	* Changed:  documentation updated  with an article  explaining how
+	fetchers work
+	
+2007-02-12 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Changed: documentation/FAQ updates
+
+	*  Fixed:  overflowing frame  content  was  visible outside  frame
+	boundaries
+
+	*   Fixed:   koi8-r  encoding   was   not   supported  by   PDFLIB
+	out-of-the-box
+
+2007-02-11 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Fixed: several PHP notice messages
+
+	*  Fixed:  'border'  attribute  could affect  elements  after  the
+	element with this attribute
+
+2007-02-04 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.10
+
+2007-01-29 Konstantin Bournayev <bkon@bkon.ru>
+
+	*   Fixed:   PHP    4   reference-related   notice   messages   in
+	value.border.class.php
+	
+	* Change:  DOCTYPE now  is checked by  default when  conversion is
+	done via html2ps API
+
+2007-01-26 Konstantin Bournayev <bkon@bkon.ru>
+
+	*  Fixed: thin/thick/medium  values  of border-*-width  properties
+	were not supported
+
+2007-01-25 Konstanin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.9
+	
+2007-01-23 Konstantin Bournayev <bkon@bkon.ru>
+
+	*  Fixed: page breaks  could not  be made  inside table  cells and
+	block boxes with constrained height
+	
+	* Fixed: partial support for 'direction' property
+
+	* Fixed: minor issues related to absolute-positioned boxes width
+
+2007-01-23 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Fixed: support for 'white-space: nowrap', 'white-space: pre-line'
+
+2007-01-17 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Fixed: interactive form values were not printed
+
+2007-01-16 Konstantin Bournayev <bkon@bkon.ru>
+
+	*  Fixed: absolute positioning was broken for tables
+
+2007-01-10 Konstantin Bournayev <bkon@bkon.ru>
+
+	*  Changes: page breaking  routines backported  from developmental
+	branch
+
+	*  Fixed: several  problems  encountered when  html2ps files  were
+	included  from  the class  member  /  function  instead of  global
+	context
+
+2007-01-04 Konstantin Bournayev <bkon@bkon.ru>
+
+	*  Fixed: under  certain PHP  configurations html2ps  behaved like
+	there are no registered encoding vectors at all
+
+2006-12-25 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Fixed: input text element with constrained height were displayed
+	incorrectly
+
+2006-12-25 Konstantin Bournayev <bkon@bkon.ru>
+
+	* New:  DOM extension check added to  "system configuration check"
+	page
+	
+	* Change:  workaround for Active-Link issue  (attributes in single
+	quotes are ignored)
+
+2006-12-24 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.8
+
+2006-12-22 Konstantin Bournayev <bkon@bkon.ru>
+
+	*  Fixed: cell borders set  via  table 'border'  attribute
+	were not rendered if table contained tbody/thead/tfoot tags
+
+	* Fixed: textarea size was sligtly greater than expected
+
+	* Fixed: more tolerant to invalid textarea content (unescaped 
+	HTML special characters)
+
+	* New: support for 'pre-wrap' value of 'white-space' CSS property
+
+2006-12-21 Konstantin Bournayev <bkon@bkon.ru>
+
+	*  Fixed:   memory  leaks   caused  by  circular   references  and
+	preg_replace_callback+create_function (made love with PHP GC).
+	
+	* Change: minor updates in sample files
+
+	* Change: minor documentation/FAQ updates
+	
+	*  Fixed:  temporary  PDF  files  were not  removed  after  script
+	completion
+
+2006-12-20 Konstantin Bournayev <bkon@bkon.ru>
+
+	* New: pages may be fetched via proxy
+
+	* New: if curl extension is  present, it will be used for fetching
+	pages
+
+2006-12-19 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Fixed:  incorrectly calculated width for  tables /without/ width
+	constraints   containing  table   cells   /with/  constant   width
+	constrants
+
+2006-12-18 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.7
+	
+	*  Fixed:  whitespaces in  justified  boxes  were placed  slightly
+	off the right container edge
+
+2006-12-17 Konstantin Bournayev <bkon@bkon.ru>
+
+	*  Fixed: IFRAMEs  with empty  SRC attribute  value no  more cause
+	html2ps to die with 'Frame nesting too deep' message
+
+2006-12-15 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Change:  more tolerant 'src' attribute  value processing; script
+	attempts to  detect un-escaped symbols  (i.e. spaces) in  path and
+	escape them automatically. Applies to img & input type="image".
+
+2006-12-14 Konstantin Bournayev <bkon@bkon.ru>
+
+	*  Fixed:  absolute-positioned  tables  did not  work  (PHP  Fatal
+	error).
+
+2006-12-12 Konstantin Bournayev <bkon@bkon.ru>
+
+	*  Fixed: cells  with  borders set  via  table 'border'  attribute
+	always had border width set to zero
+
+	*  Fixed: calculated  width  value was  always  zero for  relative
+	positioned block elements with percentage width
+
+2006-12-05 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.6
+	
+	*  Fixed: Call to  undefined method  FlowContext::postpone() error
+	message  while   converting  documents  with   floats  /  relative
+	positioned boxes
+
+	* Fixed:  'draw_page_border' option  had no default  value causing
+	notices in some situations
+
+	* Fixed: radio buttons were rendered incorrectly in PNG output
+
+2006-12-01 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.5
+
+2006-11-29 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Fixed: fixed-positioned blocks were overprinted several times (2
+	times on second page, three on third and so on)
+
+	* Fixed:  <input type="image"> rendered in  interactive forms mode
+	caused Acrobat Reader to crash when used clicks on the image.
+	
+	* Change:  minor documentation/samples updates  (deprecated sample
+	data updated)
+
+2006-11-26 Konstantin Bournayev <bkon@bkon.ru>
+
+	*  Fixed: font  metrics were  extracted incorrectlry  for encoding
+	vectors  containing  less  than  255  characters  (in  particular,
+	iso-8859-8)
+
+2006-11-25 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Fixed: errors while convering frame-based pages
+
+2006-11-24 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Fixed: redirects counter was not reset after file was fetched
+
+2006-11-23 Konstantin Bournayev <bkon@bkon.ru>
+
+	*  Fixed:  interactive form  elements  were  printed on  incorrect
+	positions on all pages except the first one.
+
+2006-11-22 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Fixed: fixed-positioned  blocks nested in other fixed-positioned
+	blocks were printed several times
+	
+	* Change: minor documentation updates
+
+2006-11-21 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Change: punctiation marks immediately after footnotes now cannot
+	be wrapped to the next line
+
+2006-11-20 Konstantin Bournayev <bkon@bkon.ru>
+
+	*  Fixed: <br/>  tags  inside fixed-positioned  blocks caused  PHP
+	errors
+
+2006-11-19 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Fixed:  lines contaning note-call  boxes could run off  the page
+	right side
+
+2006-11-18 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.4
+
+2006-11-16 Konstantin Bournayev <bkon@bkon.ru>
+
+	*     Fixed:    compatibility     issue    for     systems    with
+	magic_quotes_runtime=On
+
+	* Fixed: ##PAGE## /  ##PAGES## directives caused PHP warnings when
+	used inside container with 'position: fixed;'
+
+2006-11-15 Konstantin Bournayev <bkon@bkon.ru>
+
+	*  Fixed:  minor changes  in  CSS  property  handling to  clean-up
+	reference-related issues
+	
+	* Change: if GD extension is not loaded, script will still convert
+	pages with images
+
+2006-11-13 Konstantin Bournayev <bkon@bkon.ru>
+
+	*   Change:  before-document,  after-document,   before-batch  and
+	after-batch callbacks are introduced.
+
+	*  Change:  minor  internal  changes in  Pipeline  class  (removed
+	duplicate code)
+
+2006-11-13 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Change: before-page and after-page callbacks are introduced.
+
+2006-11-12 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.3
+
+2006-11-10 Konstantin Bournayev <bkon@bkon.ru>
+
+	*  Fixed:  is_executable  issue  in system  requirements  checking
+	script under Windows/ISS
+
+	* Fixed: relative paths should cause no more problems when html2ps
+	is  used  with  Windows/ISS.   NOTE:  when  script  API  is  used,
+	'config.inc.php' should be included before any other file.
+
+2006-11-09 Konstantin Bournayev <bkon@bkon.ru>
+
+	*  Fixed:   'inherit'  value  for   font/font-size  property  were
+	interpreted  as  'inherit   initial  value'  instead  of  'inherit
+	calculated'
+
+2006-11-06 Konstantin Bournayev <bkon@bkon.ru>
+
+	*  Change: internal changes  aimed to  ease automated  testing and
+	pipeline configuration
+
+2006-10-28 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.2
+	
+	* Change: minor documentation/FAQ updates
+	
+	*  Fixed: tables  with  several  colspans in  the  same row  under
+	certain conditions could cause notice messages
+
+2006-10-27 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Fixed: missing support for 'in' CSS unit
+	* Fixed: missing support for 'pc' CSS unit
+
+2006-10-26 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Change: minor faq/documentation updates
+
+2006-10-23 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Fixed: non-valid HTML  containing table sections with omitted TR
+	tags  could  result  in  notices/warnings;  tables  were  rendered
+	incorrectly
+
+2006-10-22 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.1
+
+2006-10-20 Konstantin Bournayev <bkon@bkon.ru>
+
+	*  Change:  added  allow_url_fopen  check in  system  requirements
+	checking script
+
+2006-10-19 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Fixed:  FPDF-generated PDF files  with embedded fonts  could not
+	use more than one font
+	
+	* Fixed:  pages with radiobuttons could cause  warning messages to
+	be printed
+	
+	* Change: minor documentation/FAQ updates
+	
+	* Change:  minor system  requirement checking script  update (more
+	verbose message instead of "Missing GD extension")
+	
+	*  Change: added  sample file  illustrating passing  variable with
+	HTML string to conversion engine
+
+2006-10-17 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Change: minor documentation/FAQ updates 
+	
+	* Fixed:  in batch mode @page  rules were applied  to margin boxes
+	only once in the very first file	
+	
+	* Change: files generated via the demo web interface in batch mode
+	were named using the URL field. (Changed to 'batch.pdf')
+
+2006-10-15 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Release: html2ps-2.0.0
+
+2006-10-13 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Change: minor documentation/FAQ updates 
+
+2006-10-09 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Fixed:  basic support for 'dir' attribute  (affects default text
+	alignment only)
+
+2006-10-07 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Fixed: header/footer were sometimes incorrectly positioned
+	
+2006-10-03 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Fixed: sample.simplest.php had some code obsoleted by v2.0
+
+2006-10-01 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Fixed: a lot of minor bugfixes
+
+2006-07-09 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Fixed: 'inherit' value is supported for all CSS properties now
+
+	* Fixed: 'ridge' / 'groove' border style support 
+	
+	* Fixed: a lot of alpha version issues
+	
+2006-06-25 Konstantin Bournayev <bkon@bkon.ru>
+
+	* New: 'letter-spacing' CSS property support added
+	
+	*  Fixed: empty values  for 'padding'  property caused  PHP notice
+	messages
+	
+	*  Change:   more  tolerant  processing   of  unsupported/tolerant
+	'display' values;  script treats them as 'block'  instead of dying
+	with and error message
+	
+	* Fixed: monospace fonts symbol widths were calculated incorrectly
+	when TTF file was parsed
+	
+	* Change: 'text-transform' support  (thanks dkrieger for this nice
+	contribution)
+
+	* Change: some speed/memory optimizations
+	
+	*  Change: several  routines  reworked to  reduce constant  script
+	startup time
+	
+	*  Fixed:   character  widths  were   calculated  incorrectly  for
+	non-ASCII characters when TTF files were parsed directly
+
+2006-06-13 Konstantin Bournayev <bkon@bkon.ru>
+
+	*  Fixed:  &nbsp; symbols  could  cause  page  breaks to  move  to
+	unexpected positions
+	
+	* Fixed:  empty URL value no  more treated as  valid by FetcherURL
+	class.
+	
+	*  Change: simple  system  requirements checking  script added  to
+	'demo' subdirectory
+	
+	*  Change:  basic  support   for  Unicode  characters  missing  in
+	predefined encoding vectors (e.g.  Japanese/Chinese symbols)
+	
+	* Change: unicode/PS glyph name mapping updated
+	
+	* Change: minor FAQ/HOWTO additions
+	
+	* Fixed: Media size was rounded to integer number of millimetres
+
+2006-06-06 Konstantin Bournayev <bkon@bkon.ru>
+
+	*  Fixed: whitespace/line  breaks  were not  preserved inside  the
+	TEXTAREA
+
+	*  Change:  added  iso-8859-8  (arabic)  and  iso-8859-6  (hebrew)
+	encoding vectors
+
+	* Fixed: escape sequences were not supported in 'content' property
+	value.
+
+	* Change: partial support ("alpha" state) for PNG Image output
+	
+	* Change: partial support ("beta" state) for TTF file parsing
+	(getting rid of AFM files in FPDF output method)
+	
+2006-06-04 Konstantin Bournayev <bkon@bkon.ru>
+
+
+	* Fixed: HR tag 'color' attribute was not supported
+
+	* Fixed: minor header/footer positioning issues
+
+	* Fixed:   'em/ex'  units   in  'top'  property   were  processed
+	incorrectly
+
+	* Fixed: Content  of table  cell  spanning several  rows was  not
+	vertically aligned property in certain conditions
+
+2006-05-27 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Fixed:  absolute positioned box width  was incorrecly calculated
+	when uses did  not set it explicitly via CSS  and box had non-zero
+	padding, margins or borders
+	
+	*  Change: minor  FAQ updates;  some frame-related  questions were
+	added
+	
+	* Fixed:  "Call to  a member function  on a non-object"  error for
+	page containing  frames when frame content have  been trimmed down
+	and hyperlinks were rendered
+
+2006-05-17 Konstantin Bournayev <bkon@bkon.ru>
+
+	*  Fixed: broken  layout for  framesets containing  more  than one
+	frame
+	
+	*  Fixed:  several PHP  notice  messages  in frame-related  layout
+	routines
+	
+	*  Change:  HTML2PS_DIR  now  calculated always  relative  to  the
+	config.inc.php,  ignoring  path to  the  script including  html2ps
+	files.
+
+	*  Fixed: some  variables are  explicitly declared  global  now to
+	prevent issues  when including html2ps  files from objects/methods
+	(Thanks mrtwice99)
+
+2006-05-07 Konstantin Bournayev <bkon@bkon.ru>
+
+        * Fixed: If  body contained a very long  floating item without any
+	text after it, the float could be trimmed
+	
+	* Fixed: TABLE tag without nested TD tags caused an PHP error
+	
+	* Fixed: 'position: relative' was ignored for inline boxes
+
+	* Fixed: minor change  in documentation related to headers/footers
+	(FAQ answers were missing)
+	
+	* Fixed: line-height is not inherited by tables
+	
+	* Change:  BODY margin/padding values behaviour now  is similar to
+	browser one (background is rendered inside the margin area)
+
+	* Fixed: text lines having line-height set to value less than font
+	size were aligned incorrectly
+
+2006-04-30 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Change: minor documentation updates related to the "debug boxes"
+	option
+	
+	* Fixed: images with  non-zero padding/margin or border width were
+	incorrectly aligned vertically with the adjacent text
+	
+	* Fixed: invalid URLs which could not be parsed by 'parse_url' PHP
+	function now  no more  cause PHP warnings  to be  printed; they're
+	just silently ignored
+
+	*  Fixed:  added  a  workaround  for  the  different  behavour  of
+	'parse_url' function  on Windows when parsing  'file://' urls with
+	empty hostname (thanks to JensE for noticing and testing this).
+
+	*  Fixed: under certain  conditions content  after the  page break
+	could  not be  rendered (thanks  to JensE  for the  test  case and
+	contributed code!)
+
+2006-04-23 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Fixed:  cells having percentage-constrained  height could result
+	in errors during the conversion process
+
+	*  Fixed: percentage  constrained  rows in  the  table could  give
+	unexpected results if total  percentage of the constraint was less
+	than 100%
+
+	*   Fixed:  nested   mixed  percentage-width   and  constant-width
+	constrained tables were rendered incorrectly
+
+	*  Fixed:  width-constrained  table  with  minimal  content  width
+	greater that constrained value were rendered incorrectly
+
+	*   Fixed:  underconstrained   tables,  containing   columns  with
+	colspanning cells only, could be rendered uncorrectly
+
+	* Change: several test files  were removed; WEB INTERFACE FILE WAS
+	MOVED TO 'demo/' SUBDIRECTORY!
+
+	*  Fixed:   relative  URLs  starting  with   //  were  interpreted
+	incorrectly
+
+2006-04-10 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Fixed: minor documentation updates
+	
+        *  Fixed:   some  file   paths  were  constructed   without  using
+	HTML2PS_PATH variable
+	
+	* Fixed: downloaded files were incorrectly named in Internet
+	Explorer under certain conditions (thanks cpeel)
+	
+	*  Fixed: lists  having certain  combinations of  'text-align' and
+	'list-style-position' were rendered incorrectly
+
+	* Fixed:  non left-aligned text with  non-zero 'text-indent' value
+	was rendered offset to the right
+	
+	* New: added file:// protocol  support (API only; not supported in
+	web interface)
+	
+	* Fixed:  Many elements were  rendered several times  in multipage
+	documents, significiantly increasing document size.
+	
+2006-04-07 Konstantin Bournayev <bkon@bkon.ru>
+
+	*  Fixed:  National   characters  were  displayed  incorreclty  in
+	non-interactive SELECT boxes
+
+	*  Fixed:  National   characters  were  displayed  incorreclty  in
+	non-interactive INPUT type="text" boxes
+
+2006-04-02 Konstantin Bournayev <bkon@bkon.ru>
+
+	*  Fixed: more  human-readable  error message  if 'exec'  function
+	fails under 'safe_mode'
+
+	* Fixed: unescaped  >, & and < characters  inside attribute values
+	could cause containing tag to be processed incorrectly
+
+	* Fixed: fixed an incorrect path to Active-Link DOM XML extension.
+
+2006-03-29 Konstantin Bournayev <bkon@bkon.ru>
+
+	* Fixed: added basic support for 'rules' attribute of TABLE tag
+
+	* Fixed: 'is_executable' did not  work correctly with PHP 5 / *nix
+	systems (cache directory permissions check)
+
+2006-03-26 Konstantin Bournayev  <bkon@bkon.ru>
+
+	* Fixed:  added more comprehensive error  message if a  site to be
+	converted REQUIRES cookies and loops in an infinite recursion
+	
+	* Change: minor additions to FAQ page in "no output" section 
+	
+	* Fixed:  HTML pages containing  <html> tag instead of  </html> at
+	the page  end were  rendered as  a blank PDF.  Now script  is more
+	tolerant to this error.
+
+	* Fixed: table cells with  explicitly set width spanning all table
+	columns could cause table to be rendered incorrectly
+
+	*  Fixed:  Batch  processing   did  not  clear  CSS  rules  before
+	attempting to process a new file
+	
+	* Fixed: HTTP  406 error in some sites (Accept  header now sent in
+	all requests)
+
+	* Fixed: CSS wrapped in both CDATA and HTML comments was ignored
+
+	* Fixed: 'us-ascii' encoding in META tag now handled correcly when
+	no 'iconv' extension present
+	
+	* Fixed:  check/radio buttons having empty  "value" attribute were
+	never rendered as interactive
+	
+	* Fixed: an input element outside a form could cause a PHP warning
+	message (PDFLIB output)
+	
+	* Fixed: a filled circle is drawn inside the radio buttons instead
+	of small cross (FPDF output)
+	
+	* Fixed: anchors without content (for example <a name="name"></a>)
+	were ignored
+	
+	* Fixed: FONT tag support broken in 1.8.2-pre1
+
+	*  Fixed:  :before  /   :after  pseudoelement  support  broken  in
+	1.8.2-pre1
+
+	* Fixed: percentage height constraint of top-level boxes now based
+	on the page height
+
+2006-03-19 Konstantin Bournayev  <bkon@bkon.ru>
+
+	* Fixed: iframes  referring to images instead of  HTML are ignored
+	for now
+	
+	*  Fixed:  Line-Height css  property  was interpreted  incorrectly
+	under PHP 5
+
+	* Fixed:  tables containing several rowspanned  cells at different
+	levels were rendered incorreclty
+
+	* Fixed: nested elements  having font-size measured in em/ex units
+	were rendered incorrectly
+	
+	* Fixed:  bottom margin of the  block box inside  the cell element
+	was ignored in non-quirks mode
+	
+	* Fixed: In non-quirks mode CSS dimensions without units should be
+	treated as 0 instead of using 'px'
+	
+	* Fixed: rgb() CSS  color declarations in composite CSS properties
+	were sometimes parsed incorrectly
+	
+	*  Added:  support  for  BASE  tag (specified  the  base  URI  for
+	resolving relative URIs in this document)
+	
+	*  Fixed: empty STYLE  node could  cause a  notice messages  to be
+	printed on some PHP configurations
+
+	* Fixed: empty 'margin' value  could cause PHP warning messages to
+	printed
+
+	*  Fixed: form  fields  having duplicate  names  now given  unique
+	suffixes (instead of causing script to terminate)
+
+	*  Fixed: input elements  outside forms  no more  cause conversion
+	error (an "anonymous" form is generated automatically)
+
+	*  Fixed:  block  elements  inside fixed-positioned  element  were
+	placed incorrectly
+
+	*  Fixed: elements  having  'id' attribute  are  treated as  valid
+	anchors
+
+	*  Fixed:  several  problems  related local  anchors;  added  some
+	comments to anchor-related routines
+
+2006-03-12 Konstantin Bournayev  <bkon@bkon.ru>
+
+	*   Change:  configuration   file  renamed;   now  it   is  called
+	html2ps.config and is not treated as hidden by Unix systems
+
+	* Fixed: percentage values for 'top', 'left', 'right' and 'bottom'
+	CSS properties sometimes caused unpredictable rendering errors
+
+	* Fixed: PDFLIB  license key now can be  used without patching the
+	script (thanks to Pletfrog for contributing)
+	
+	* Change: PS Level 2 output
+
+	* Fixed: included files (images and stylesheets) are fetched using
+	the same protocol as main page instead of HTTP
+
+	* Fixed:  temporary images files  were created in /tmp  instead of
+	WRITER_TEMPDIR, causing problems in safe_mode
+
+	* Fixed: spaces around 'dispay' values (like ' block') could cause
+	processing error (thanks to fredlefred for contributing)
+	
+	* Change: script-generated footer/header/watermarks
+	
+        * Change: "Batch" processing feature
+	
+	*  Change: Complete  support  for interactive  forms  in FPDF  and
+	PDFLIB output
+	
+	* Change: Added user-contributed basic authentication patch 
+	
+	* Change: config file renamed to 'html2ps.config' (now file is not
+	treated as 'hidden' by Unix-like OSes)
+	
+	*  Fixed:  support for  percentage  values  for  'top' and  'left'
+	properties of absolute-positioned boxes
+	
+	* Change: several small updates in script API documentation
+	
+	* Fixed: PHP error when fetching image file failed due the network
+	timeout
+
+	* Fixed: 'bottom' and 'right'  CSS property support was broken for
+	fixed-positioned boxes
+
+	* Change: all HTTP  requests now contain fake "Mozilla" User-Agent
+	header, as some hosts do not allow scripts to access content
+
+	* Fixed: path to PDFLIB fonts directory was calculated incorrectly
+	when $_SERVER['PATH_TRANSLATED'] was not set
+
+	* Fixed: all 'require' commands moved to 'pieline.class.php' file,
+	so now additional files should be  included now if you need to use
+	API
+
+	* Fixed: PHP 5 object model compatibility problem; pages using CSS
+	subproperties  (like  'margin-left'  or  'background-color')  were
+	rendered incorrectly
+
+	*  Fixed: 'cache'  directory  permissing check  did  not test  the
+	'executable' permission.
+
+	* Fixed:  support for 'colspan' / 'rowspan'  attributes was broken
+	for 'TH' tag
+
+	* Fixed: "cannot open AFM  file" message now contains reference to
+	"open_base_dir" setting and file permissions
+	
+2006-01-21 Konstantin Bournayev  <bkon@bkon.ru>
+
+	* Fixed: text  containing a mix of Greek  and Latin characters was
+	rendered incorrectly in PS output
+
+	* Fixed: single open/close quote could cause the following word to
+	disappear in PS output
+
+2006-01-14 Konstantin Bournayev  <bkon@bkon.ru>
+
+	* Added support for interactive text form fields (PDFLIB 1.6)
+
+	* Added support for checkbox form fields (FPDF)
+
+	* Added support for radio form fields (FPDF)
+
+	* Fixed: 'ndash' sybol was  rendered instead '-' (minus) symbol in
+	Postscript output
+
+	*  Fixed:  many  non-latin-1   symbols  could  have  their  widths
+	calculated incorrectly in Postscript output
+
+	*  Fixed:  images   were  not  displayed  inside  fixed-positioned
+	elements
+
+	* Fixed:  rectangles drawn using "rect" FPDF  output driver method
+	were positioned incorrectly
+	 
+	* Fixed: circles  (i.e. list item markers) could  not be filled in
+	FPDF output
+
+	* Fixed: circles  (i.e. list item markers) were  distorted in FPDF
+	output
+
+	* Fixed:  user could  not generate a  page without a  text content
+	using page breaking commands
+
+2006-01-07 Konstantin Bournayev  <bkon@bkon.ru>
+
+	* Several updates in documentation & source code comments
+	
+	* Added support for interactive text form fields
+
+	* Added support for interactive submit form fields
+
+	*  Fixed: a  part content  after the  manual page  break  could be
+	printed on the same page
+	
+2005-12-30  Konstantin Bournayev  <bkon@bkon.ru>
+
+	* A0-A3  and A6-A10  paper sized added  to the list  of predefined
+	media sizes
+
+	* Lengths given  in relative 'em' and 'ex'  units were incorrectly
+	calculated for 'background-position' property
+
+	*  Fixed a  PHP 5  compatibility problem,  causing an  fatal error
+	message
+
+	* TH attributes were completely ignored
+
+	* Fixed the issue related to printing the text on the page margins
+	inside the fixed-positioned elements
+
+	* Updated the "custom fonts" HOWTO
+
+2005-12-24  Konstantin Bournayev  <bkon@bkon.ru>
+
+        * Change: script have been optimized for pages contaning a lot of
+	text; speed boost of 10-30% expected.
+	
+        * Change: FAQ updated
+	
+        * Fixed: <input type="button"> could not be hidden using 'display:
+	hidden'
+	
+        * Fixed: ##page## / ##pages## fields alignment problem
+	
+        * Fixed:  ##page## /  ##pages## fields could  be ignored  if there
+	were no space before the field
+	
+        *  Fixed: elements  having  'position: fixed'  were drawn  several
+	times on the same page
+	
+        * Fixed:  elements having 'position: fixed' could  cause script to
+	die without any error messages
+	
+        * Fixed: class name confict with Active-Link DOM XML extension
+
+        * Fixed: in PS output spaces were too wide
+
+        * Fixed PS output sometimes contained unexpected lines/borders
+        
+	* Fixed vertical alignment issues inside the SELECT tag
+        
+	* Fixed basic DOCTYPE support
+        
+	* Fixed borders of nested inline element could be duplicated
+        
+	* Fixed no background was rendered in nested inline elements
+        
+	* Fixed negative margin values were ignored
+        
+	*  Fixed IMG  elements in  XHTML documents  now  handled correctly
+	(line height is calculated using the current font size)
+        
+	* Fixed error in @medua rules parsing
+        
+	* Fixed 'dotted' line style caused errors in FPDF output
+        
+	* Fixed CSS rules  with only pseudo-class selectors (e.g. ':link')
+	were ignored
+        
+	* Fixed error with images as the list markers
+        
+	* Fixed  empty values of height/width attributes  could results in
+	printing warning / notice PHP messages
+        
+	*  Fixed   width  of  floating  elements   containing  tables  was
+	calculated incorrectly
+        
+	*  Fixed  more  tolerant  processing  of non-valid  HTML:  if  tag
+	containg  several attributes with  the same  name, only  the first
+	value is taken into account.
+        
+	* Fixed element absolute positioned inside the BODY elemenet using
+	'bottom' property could be positioned incorrectly
+        
+	* Fixed background position containing both text and length values
+	were interpreted incorrectly
+
+	* Fixed several rounding error issues causing background images to
+	be positioned incorrectly
+        
+	*   Fixed  sometimes  background   images  could   be  incorrectly
+	vertically positioned
+        
+	*  Fixed Broken  images inside  the inline  elements did  not take
+	place at all
+        
+	* Fixed  block elements inside  floating element could  have their
+	percentage-constrained width calculated incorrectly
+        
+	* Fixed block elements  inside non-block elements could have their
+	percentage-constrained width calculated incorrectly
+        
+	* Fixed  'bottom' value  containing ex/em elements  was calculated
+	incorrectly
+        
+	* Fixed z-index CSS property was completely ignored
+        
+	*  Fixed   font  size  given   in  ex/em  units  could   cause  an
+	unpredictable  layout errors  if ex/em  units were  used  in other
+	property values
+        
+	*  Fixed absolute positioned  element were  positioned incorrectly
+	when left or top properties were omitted
+        
+	*  Fixed   non-block  floating  element  items   had  their  width
+	calculated incorrectly
+
+	*  Fixed more tolerant  processing of  invalid attribute  names in
+	HTML
+        
+	* Fixed floats could overlap if parent had constrained width
+        
+	* Fixed overflow: hidden handling was broken
+        
+	* Fixed  'ex' unit  size ajusted to  0.6 fraction of  current font
+	size instead of 0.55
+        
+	* Fixed CSS rules applicable to element having more than one class
+	(e.g. .class1.class2 - WITHOUT space) were ignored
+        
+	*  Fixed  :after  /  :before pseudoelement  width  was  calculated
+	incorrectly if parent element had constrained width
+        
+	* Fixed button bounding boxes may be drawn incorrectly sometimes
+        
+	* Fixed constrained button height have been calculated incorrectly
+        
+	* Fixed text was  incorrecly positioned vertically in boxes having
+	non-default line-height
+        
+	* Fixed height in ex/em units have been incorrectly calculated
+        
+	* Fixed  recent PHP versions  (including PHP 5) had  problems with
+	:after / :before pseudoelements
+        
+	* Fixed body height: 100% CSS style was causing problems
+        
+	* Fixed  UTF byte-order  mark at the  beginning of the  file could
+	prevent the very first rule from parsing
+        
+	*  Fixed width  in ex/em  units have  been  incorrectly calculated
+	using the default font size instead of current
+	
+2005-10-30  Konstantin Bournayev  <bkon@bkon.ru>
+
+	* viewport.pdflib.php: non iso-8859-1 encoding support
+	
+	* box.button.php: button content  always was treated as iso-8859-1
+	encoding
+
+	* box.text.php: encoding-override directive was broken
+
+2005-10-17    <Konstantin@BURNAEV>
+
+	* PS2PDF  no more  whitespaces should be  at the beginning  of the
+	text lines
+	
+	* PDFLIB output now allows local links between pages
+	
+	* PS2PDF and FPDF output now support local links
+
+	* fixed-positioned elements may be drawn on page margins
+	
+	* FPDF now have the following functions: Save, Restore, Translate,
+	  MakePath, FillPath,  Fill, Circle allowing  backgrounds, borders
+	  and list markers to be rendered
+
+2005-08-14  Konstantin Bournayev  <bkon@bkon.ru>
+
+	* box.select.php:  fixed bug 1251864 (PS/PDFLIB)  option box width
+	is calculated incorrectly
+
+	* box.img.php: fixed bug 1253150 (PDFLIB) IMG Proportional scaling
+
+	*  box.block.php: fixed bug  1255591 (PDFLIB)  Absolute positioned
+	box width
+	
+	* box.block.php:  fixed bug 1255584  (PDFLIB) absolute positioning
+	inside BODY
+
+	* box.table.cell.ps: fixed bug 1255612 (PS) 'nowrap' cell width
+
+	* table.ps:  fixed bug 1255696  (PS) align="center" table  are not
+	aligned
+
+	* xhtml.utils.inc.php: fixed bug 1255728 (PS) Misplaced TD tag may
+	cause PS error
+
+	*  html.attrs.inc.php:   fixed  bug  1255732   (PS)  iframes  with
+	framrborder="1" cause PS errors
+
+	* box.iframe.php: fixed bug 1255740 (PDFLIB) IFRAME tag is ignored
+
+	*    css.vertical-align.inc.php:   fixed    bug    1256476   (ALL)
+	valign="center" is ignored
+
+	* css.background.inc.php:  fixed bug 1256636  (PDF) row background
+	not rendered
+
+	*  box.button.php:  fixed  bug  1256631 (ALL)  vertical  alignment
+	inside buttons
+
+	*  box.button.php: fixed  bug  1256630 (ALL)  height CSS  property
+	applied to button input
+
+2005-08-07  Konstantin Bournayev  <bkon@bkon.ru>
+
+	* help/calling.html: feature request 1225611 Script parameters are
+	undocumented
+
+	*  help/calling.html:  feature   request  1225677  Explanation  of
+	'scalepoints' option
+
+	*  ps.image.encoder.imagemagick.inc.php:  feature request  1248710
+	Imagemagick image processing support
+
+	* css.defaults.inc.php: reature request 1252407 Form elements have
+	plain solid borders
+
+	* box.block.php: fixed  bug 1247891 (PDFLIB) icorreclty positioned
+	floats
+
+	* flow_context.class.inc.php: fixed bug 1249682 (PS/PDFLIB) floats
+	do not expand containing table cells
+
+	*  html2ps.php: fixed  bug 1249959  (PDFLIB) Problem  using Active
+	Link DOM XML
+
+	* css.border.inc.php: fixed bug 1250123 some CSS border values are
+	ignored
+
+	* box.img.php:  fixed bug 1250130  (PDFLIB) scaled images  are not
+	supported
+
+	* css.border.inc.php:  fixed bug 1250147  (ALL) 'border-style' CSS
+	property ignored
+
+	* form.php: fixed bug 1250738 PS output, "destination" option does
+	not work
+
+	* xhtml.tables.inc.php: fixed bug 1250741 (ALL) TH tags ignored
+
+	*  css.pseudo.align.inc.php:  fixed bug  fixed  bug 1250937  (ALL)
+	incorrect content alignment in nested tables
+
+	*  css.list-style.inc.php:  fixed  bug  1250945  1250944  (PDFLIB)
+	list-style CSS property is ignored
+
+	*     css.list-style.inc.php:    fixed     bug     1250945    (PS)
+	list-style/list-style-type:none is not recognized
+	
+	*   css.list-style-position.inc.php:  fixed   bug   1250960  (ALL)
+	list-style-position CSS propery is ignored
+
+	*   css.list-style-image.inc.php:    fixed   bug   1250962   (ALL)
+	list-style-image CSS propery is ignored
+
+	* templates/missing_gs.html:  fixed bug 1251040  (WIN) gswin32.exe
+	causes script to "hang"
+
+	*   css.background.image.inc.php:   fixed   bug   1251132   Quoted
+	background-image values are ignored
+
+	* box.table.php:  fixed bug  1251142 (PS) colspanned  columns with
+	constrained widths
+
+	*  xhtml.utils.inc.php:  fixed  bug  1251550  Some  tags  are  not
+	coverted to lowercase
+
+	* css.defaults.inc.php: fixed bug 1251594 Lists with margin-left:0
+	are rendered incorrectly (IE like)
+
+	* css.border.inc.php: fixed  bug 1251606 (PDFLIB) composite values
+	of border-left/right/top/bottom
+
+	* box.table.row.php: fixed bug 1251628 (PDFLIB) Contents of column
+	after colspan
+
+	*  box.input.text.php:  fixed  bug  1251827 (PDFLIB)  input  width
+	inside the tables
+
+	* css.height.inc.php:  fixed bug  1251857 - (PDFLIB)  100% content
+	height results in blank PDF
+
+	*  css.border.inc.php: fixed bug  1252412 -  (ALL) inset  style is
+	ignored in 'border' property
+
+	* box.table.php: fixed bug 1252463 - (PDFLIB) Table border overlap
+	previous box
+
+2005-07-30  Konstantin Bournayev  <bkon@bkon.ru>
+
+	* box.table.php: fixed bug 1231826 - empty colspan columns are not
+	displayed properly
+
+	* ps.image.encoder.stream.inc.php: fixed bug 1221703 - /limitcheck
+	error while rendering postscript
+
+	* css.vertical-align.inc.php:  fixed bug 1224662  - 'text-top' and
+	'text-bottom' not supported
+
+	*  css.pseudo.align.inc.php:   fixed  bug  1228168   -  text-align
+	property applied to block content
+
+	*  css.font.inc.php:  fixed bug  1229878  -  composite CSS  'font'
+	property not supported
+
+	* css.selectors.inc.php: fixed bug  1235541 - INPUT type attribute
+	is case-sensitive
+
+	* box.text.php: fixed  bug 1239364 - Text cut-off  (similar to bug
+	1220122)
+
+	* fetcher.class.php:  fixed bug 1245307  - HTTP responce  code 403
+	causes error
+
+	* xhtml.tables.inc.php:  fixed bug 1245915 -  Misplaced TR/TD tags
+	cause XHTML conversion problems
+
+	*  fetcher.class.php: fixed  bug  1245940 -  Malformed URLs  cause
+	mystic error messages
+
+	* xhtml.entities.inc.php: fixed bug 1245943 - Unescaped ampersants
+	cause errors
+
+	*  box.table.php:   fixed  bug  1245990   -  align="center"  TABLE
+	attribute - width issue
+
+	* box.block.php: fixed bug 1246571 - margin: auto issue
+
+	*  css.height.inc.php: fixed  bug  1246625 -  (PDFLIB output)  CSS
+	percentage height
+
+	* css.height.inc.php:  fixed bug 1246689 -  Row 'height' attribute
+	is ignored
+
+	* box.table.php: fixed bug  1246694 - (PDFLIB) vertical-align does
+	not work with 'height'
+
+	* ps.image.encoder.stream.inc.php: fixed  bug 1246715 - Background
+	images are rendered VERY slow
+
+	* tag.frame.inc.php: fixed bug 1247374  - Frame box height is less
+	than expected
+
+	*  box.null.php:  fixed  bug   1247404  -  Display:  none  affects
+	siblings?
+
+	* css.pseudo.nowrap.inc.php: fixed  bug 1247427 - nowrap attribute
+	is applied to the cell children
+
+	*  css.defaults.inc.php:  fixed bug  1247433  - Object/Embed  tags
+	issue
+
+	* tree.navigation.inc.php: fixed bug 1247461 - display: none cause
+	script to hang
+
+	*  xhtml.entities.inc.php: fixed bug  1247840 -  &#X?? hecadecimal
+	character references are not recognised
+
+	*  box.img.php: fixed  bug 1247849  - Consecutive  images  are NOT
+	being wrapped.
+
+	* box.list-item.php:  fixed bug  1247900 - (PDFLIB)  Ordered lists
+	are not supported
+
+	*  box.container.php:  fixed bug  1247902  - (PDFLIB)  complicated
+	pages causes PDFLIB errors
+
+	*  css.parse.inc.php: fixed bug  1247911 -  @import CSS  rules are
+	ignored
+
+2005-07-24 Konstantin Bournayev  <bkon@bkon.ru>
+
+	* box.inline.php: fixed bug 1242411 - PRE tag is not supported
+
+	*  converter.class.php: fixed  bug  1243836 -  (iconv) Pages  with
+	encoding: utf-8 cause errors
+
+	*  html2ps.php:  feature  request  1230933 -  Ability  do  disable
+	HTML->XHTML conversion
+
+	* fetcher.class.php:  fixed bug 1243837 - (w/o  iconv) leading and
+	trailing spaces in encoding names
+
+	*  css.white-space.inc.php:   fixed  bug  1243823   -  white-space
+	property is ignored
+
+	*  html.attrs.inc.php: fixed  bug  1243821 -  nowrap attribute  is
+	ignored
+
+	* pdf.viewport.php:  fixed bug 1243808 - (PDF)  Nested lists cause
+	PHP error
+
+	* box.table.php: fixed bug  1243810 - Unconstrained table width is
+	calculated incorrectly
+
+2005-07-16  Konstantin Bournayev  <bkon@bkon.ru>
+
+	* html2ps.php:  fixed bug 1239361  - Whitespaces in ULR  field are
+	significiant
+
+	* box.br.php: fixed bug 1238821 - <br> ignored at the end of block
+	box
+
+	*  xhtml.p.inc.php:  fixed  bug   1239343  -  P  tags  are  closed
+	incorrectly
+
+	* css.font.inc.php:  fixed bug 1239408 - PHP  notice messages when
+	'font-family' have no value
+
+	* table.ps: fixed bug 1239441 - tables and margin: auto
+
+	*  fetcher.class.php: fixed  bug 1239443  - problem  with relative
+	HTTP redirects
+
+	*  xhtml.autoclose.inc.php:  fixed  bug  1239478  -  Problem  with
+	autoclosing table tags
+
+	* box.table.cell.php: fixed bug 1238161 - Bottom part of rowspaned
+	cells are not rendered
+
+2005-07-10  Konstantin Bournayev  <bkon@bkon.ru>
+
+	* css.border.inc.php:  fixed bug  1235584 - PDFLIB  output ignores
+	'border: none'
+
+	* fetcher.class.php: fixed bug  1235600 - 301 HTTP redirect causes
+	error
+
+	* fetcher.class.php:  fixed bug 1235270  - HTTP responce  code 302
+	Found causes error
+
+	* fetcher.class.php: fixed bug  1234176 - Mystic error messages if
+	PDFLIB is missing
+
+	* fetcher.class.php:  fixed bug 1216996 -  Security limitations on
+	'fopen' function can cause problems
+
+2005-07-09  Konstantin Bournayev  <bkon@bkon.ru>
+
+	* templates/missing_pdflib.html: fixed  bug 1234176 - Mystic error
+	messages if PDFLIB is missing
+
+	* html2ps.php: Fixed bug 1216996 - Security limitations on 'fopen'
+	function can cause problems
+
+	* fetcher.class.php:  Fixed bug 1235270  - HTTP responce  code 302
+	Found causes error
+
+2005-07-07 Konstantin Bournayev  <bkon@bkon.ru>
+
+	* tag.ulol.inc.php:  fixed bug 1233993 - OL  'start' attribute not
+	supported
+
+	* writer.class.php:  fixed bug 1225284 - Mystic  error messages in
+	no GS is found
+
+	* writer.class.php:  fixed bug 1234175  - Mystic error  message if
+	'exec' is disabled
+
+2005-07-03 Konstantin Bournayev  <bkon@bkon.ru>
+
+	*  writer.class.php: feature  request  1220465 -  PDF  now can  be
+	generated natively using PDFLIB
+
+	*  writer.class.php:  feature  request  1230338 -  PDFLIB  dynamic
+	loading using 'dl'
+	
+2005-06-30  Konstantin Bournayev  <bkon@bkon.ru>
+
+	* text-align.ps:  fixed bug  1230159 - Problems  with 'text-align:
+	justify' + 'text-indent'
+
+2005-06-28  Konstantin Bournayev  <bkon@bkon.ru>
+
+	*  fetcher.class.php:  feature  request  1187268  -  encoding  now
+	detected using HTTP headers
+
+	*  html2ps.php:  feature request  1229139  -  open  result in  the
+	browser window
+
+	Notice:   'tofile'  parameter  have   been  renamed   to  'output'
+	parameter; default script behaviour have changed to display result
+	in browser window instead of  providing the file do download.  You
+	can get old-style behaiour by setting 'output' to '1' value.
+
+2005-06-20  Konstantin Bournayev  <bkon@bkon.ru>
+
+	* box.select.ps:  fixed bug  1224157 - Text  do not fit  in SELECT
+	boxes
+
+	* box.select.ps: fixed bug 1224154 - SELECT tag text cut-off
+	
+	*  footer.ps: fixed  bug 1224139  - Multi-page  documents  are not
+	displayed properly
+
+	*   box.text.php:  fixed   bug  1223900   -   Undefined  property:
+	default_baseline
+
+	*  css.list-style-type.inc.php:  fixed  bug 1223899  -  "undefined
+	constant" notices when E_NOTICE is enabled
+
+2005-06-19  Konstantin Bournayev  <bkon@bkon.ru>
+
+	*  treebuilder.class.php:  fixed  bug  1218439 -  'ActiveLink  xml
+	parser returns standard XML entities as-is'
+
+	* footer.ps:  fixed bug 1220122 -  'text is cut-off at  the end of
+	page'
+
+	* writer.class.php: new - basic PDFLIB rendering support
+
+	* footer.ps: fixed bug 1214217  - 'Floating items cannot span more
+	than one page'
+
+	*  tag.ulol.inc.php: fixed  bug  1218398  - 'OL  html  tag is  not
+	supported'
+
+	* form.php: fixed bug 1220121 - 'Bottom margin value is ignored'
+
+	* css.margin.inc.php:  fixed bug 1221681  - 'Class ...  not found'
+	errors when running under PHP 5
+
+	* writer.class.php:  fixed bug 1221776  - script dies  with mystic
+	error message when PDFLIB is not present
+
+	*   css.list-style-type.inc.php:   new   support  for   'decimal',
+	'decimal-leading-zero',     'lower-roman'    and    'upper-roman',
+	'lower-latin'  and 'upper-latin', 'lower-alpha'  and 'upper-alpha'
+	values of 'list-style-type' property

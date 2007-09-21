@@ -144,11 +144,9 @@
 <td>fonts-pdf</td>
 <td>Defines mapping of typefaces to available TrueType fonts. Attributes:
 <ul>
-        <li><tt>typeface</tt> &ndash; typeface name (refers to the ones used in <tt>normal</tt>, 
-          <tt>italic</tt> and <tt>oblique</tt> attributes)</li>
-        <li><tt>file</tt> &ndash; name of the TTF file (searched in PDFLIB_TTF_FONTS_REPOSITORY 
-          directory) 
-      </ul>
+<li><tt>typeface</tt> &ndash; typeface name (refers to the ones used in <tt>normal</tt>, <tt>italic</tt> and <tt>oblique</tt> attributes)</li>
+<li><tt>file</tt> &ndash; name of the TTF file (searched in TTF_FONTS_REPOSITORY directory) 
+<li><tt>embed</tt> &ndash; flag indicating whether this font file should be embedded in generated PDF (0 - not embedded, 1 - embedded).</ul>
 </td>
 </tr>
 </table>
@@ -189,6 +187,28 @@ Default PDF or PS file name to use when no filename have been specified via API.
 <td>
 Default encoding to use when no encoding information is available (e.g. encoding was specified neither in 
 HTTP headers nor in META tag of HTML page).
+</td>
+</tr>
+
+<tr class="even">
+<td>FILE_PROTOCOL_RESTRICT</td>
+<td>
+Determines the prefix of the filesystem path allowed to be referred via 'file' protocol. By default,
+you may refer files in html2ps directory and below; to use files from <tt>C:\images</tt> directory you'll need to 
+store <tt>C:\images\</tt> value in this constant. Note the trailing backslash; if it is omitted, the prefix may match several directories, 
+e.g. both <tt><b>C:\images</b>\</tt> and <tt><b>C:\images</b>-private\</tt>.
+</td>
+</tr>
+
+<tr class="odd">
+<td>FONT_EMBEDDING_MODE</td>
+<td>
+Determines how font files are embedded. May be:
+<ul>
+<li>'all' &mdash; embed all fonts</li>
+<li>'none' &mdash; do not embed any fonts</li>
+<li>'config' &mdash; whether font is embedded is determined by html2ps.config 'embed' attribute value for this font</li>
+</ul>
 </td>
 </tr>
 
@@ -245,7 +265,7 @@ Your PDFLIB license key.
 </tr>
 
 <tr class="even">
-<td>PDFLIB_TTF_FONTS_REPOSITORY</td>
+<td>TTF_FONTS_REPOSITORY</td>
 <td>
 Path to directory containing a set of True-Type font files to be used by PDFLIB.
 </td>

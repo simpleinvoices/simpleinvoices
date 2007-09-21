@@ -5,15 +5,23 @@ class ButtonBrokenImageBox extends BrokenImgBox {
   var $_field_value;
   var $_action_url;
 
-  function ButtonBrokenImageBox($width, $height, $alt, $field, $value) {
+  function ButtonBrokenImageBox($width, $height, $alt, $field, $value, $action_url) {
     $this->BrokenImgBox($width, $height, $alt);
-
-    global $g_css_handlers;
-    $handler =& get_css_handler('-html2ps-form-action');
-    $this->_action_url = $handler->get();
 
     $this->_field_name  = $field;
     $this->_field_value = $value;
+    $this->set_action_url($action_url);
+  }
+
+  function readCSS(&$state) {
+    parent::readCSS($state);
+
+    $this->_readCSS($state,
+                    array(CSS_HTML2PS_FORM_ACTION));
+  }
+
+  function set_action_url($action_url) {
+    $this->_action_url = $action_url;
   }
 
   function show(&$driver) {
@@ -39,15 +47,23 @@ class ButtonImageBox extends ImgBox {
   var $_field_value;
   var $_action_url;
 
-  function ButtonImageBox($img, $field, $value) {
+  function ButtonImageBox($img, $field, $value, $action_url) {
     $this->ImgBox($img);
-
-    global $g_css_handlers;
-    $handler =& get_css_handler('-html2ps-form-action');
-    $this->_action_url = $handler->get();
 
     $this->_field_name  = $field;
     $this->_field_value = $value;
+    $this->set_action_url($action_url);
+  }
+
+  function readCSS(&$state) {
+    parent::readCSS($state);
+
+    $this->_readCSS($state,
+                    array(CSS_HTML2PS_FORM_ACTION));
+  }
+
+  function set_action_url($action_url) {
+    $this->_action_url = $action_url;
   }
 
   function show(&$driver) {
@@ -71,7 +87,8 @@ class ButtonImageBox extends ImgBox {
     $name  = $root->get_attribute('name');
     $value = $root->get_attribute('value');
 
-    $src = trim($root->get_attribute("src"));
+    $url_autofix = new AutofixUrl();
+    $src = $url_autofix->apply(trim($root->get_attribute("src")));
 
     $src_img = Image::get($pipeline->guess_url($src), $pipeline);
     if (is_null($src_img)) {
@@ -91,39 +108,18 @@ class ButtonImageBox extends ImgBox {
 
       $alt = $root->get_attribute('alt');
       
-      $box =& new ButtonBrokenImagebox($width, $height, $alt, $name, $value);
+      $css_state =& $pipeline->getCurrentCSSState();
+      $box =& new ButtonBrokenImagebox($width, $height, $alt, $name, $value, 
+                                       $css_state->getProperty(CSS_HTML2PS_FORM_ACTION));
+      $box->readCSS($css_state);
       return $box;
     };
 
-    $box =& new ButtonImageBox($src_img, $name, $value);
-
-    // Proportional scaling 
-    if ($root->has_attribute('width') && !$root->has_attribute('height')) {
-      $box->scale = SCALE_WIDTH;
-      
-      // Only 'width' attribute given
-      $size = 
-        $box->src_width/$box->src_height*
-        $box->get_width();
-      
-      $box->put_height($size);
-        
-      // Update baseline according to constrained image height
-      $box->default_baseline = $box->get_height();
-      
-    } elseif (!$root->has_attribute('width') && $root->has_attribute('height')) {
-      $box->scale = SCALE_HEIGHT;
-
-      // Only 'height' attribute given
-      $size = 
-        $box->src_height/$box->src_width*
-        $box->get_height();
-      
-      $box->put_width($size);
-      $box->put_width_constraint(new WCConstant($size));
-      
-      $box->default_baseline = $box->get_height();
-    };
+    $css_state =& $pipeline->getCurrentCSSState();
+    $box =& new ButtonImageBox($src_img, $name, $value, 
+                               $css_state->getProperty(CSS_HTML2PS_FORM_ACTION));
+    $box->readCSS($css_state);
+    $box->_setupSize();
     
     return $box;
   }    

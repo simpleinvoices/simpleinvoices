@@ -1,10 +1,13 @@
 <?php
 class GenericInlineBox extends GenericContainerBox {
+  function GenericInlineBox() {
+    $this->GenericContainerBox();
+  }
 
   // @todo this code is duplicated in box.block.php
   //
   function reflow(&$parent, &$context) {
-    switch ($this->position) {
+    switch ($this->getCSSProperty(CSS_POSITION)) {
     case POSITION_STATIC:
       return $this->reflow_static($parent, $context);
 
@@ -22,32 +25,7 @@ class GenericInlineBox extends GenericContainerBox {
        */
 
       $this->reflow_static($parent, $context);
-
-      /**
-       * Note that percentage positioning values are ignored for relative positioning
-       */
-
-      /**
-       * Check if 'top' value is percentage
-       */
-      if ($this->top[1]) { 
-        $top = 0;
-      } else {
-        $top = $this->top[0];
-      }
-
-      /**
-       * Offset the box according to the calculated 'left' and 'top' values
-       */
-      $left = $this->get_css_left_value();
-      if ($this->left[1]) {
-        $left_offset = 0;
-      } else {
-        $left_offset = $left[0];
-      };
-
-      $this->offset($left_offset,-$top);
-
+      $this->offsetRelative();
       return;
     }
   }
@@ -59,7 +37,9 @@ class GenericInlineBox extends GenericContainerBox {
   // @return true if line break occurred; false otherwise
   //
   function maybe_line_break(&$parent, &$context) {
-    if (!$parent->line_break_allowed()) { return false; };
+    if (!$parent->line_break_allowed()) { 
+      return false; 
+    };
 
     // Calculate the x-coordinate of this box right edge 
     $right_x = $this->get_full_width() + $parent->_current_x;
@@ -74,14 +54,16 @@ class GenericInlineBox extends GenericContainerBox {
 
     // No floats; check if we had run out the right edge of container
     // TODO: nobr-before, nobr-after
-    if (($right_x > $parent->get_right()+EPSILON)) {
+
+    if (($right_x > $parent->get_right() + EPSILON)) {
       // Now check if parent line box contains any other boxes;
       // if not, we should draw this box unless we have a floating box to the left
 
       $first = $parent->get_first();
 
       // FIXME: what's this? This condition is invariant!
-      $indent_offset = ($first->uid == $this->uid || 1) ? $parent->text_indent->calculate($parent) : 0;
+      $text_indent = $parent->getCSSProperty(CSS_TEXT_INDENT);
+      $indent_offset = ($first->uid == $this->uid || 1) ? $text_indent->calculate($parent) : 0;
 
       if ($parent->_current_x > $parent->get_left() + $indent_offset + EPSILON) {
         $need_break = true;

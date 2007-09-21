@@ -3,8 +3,6 @@ class DataFilterDoctype extends DataFilter {
   function DataFilterDoctype() { }
 
   function process(&$data) {
-    global $g_config;
-
     $html = $data->get_content();
 
     $xml_declaration = "<\?.*?\?>";
@@ -35,12 +33,12 @@ class DataFilterDoctype extends DataFilter {
       case '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">':
       case '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">':
       case '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">':
-        $g_config['mode'] = 'html';
+        $GLOBALS['g_config']['mode'] = 'html';
         return $data;
       case '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">':
       case '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">':
       case '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">':
-        $g_config['mode'] = 'xhtml';
+        $GLOBALS['g_config']['mode'] = 'xhtml';
         return $data;
       };
       
@@ -50,7 +48,7 @@ class DataFilterDoctype extends DataFilter {
      * No DOCTYPE found; fall back to quirks mode
      */
 
-    $g_config['mode'] = 'quirks';
+    $GLOBALS['g_config']['mode'] = 'quirks';
     return $data;
   }
 }

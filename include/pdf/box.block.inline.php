@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/html2ps/box.block.inline.php,v 1.16 2006/03/19 09:25:34 Konstantin Exp $
+// $Header: /cvsroot/html2ps/box.block.inline.php,v 1.21 2007/04/07 11:16:33 Konstantin Exp $
 
 /**
  * @package HTML2PS
@@ -18,16 +18,11 @@ class InlineBlockBox extends GenericContainerBox {
    */
   function &create(&$root, &$pipeline) {
     $box = new InlineBlockBox();
+    $box->readCSS($pipeline->getCurrentCSSState());
     $box->create_content($root, $pipeline);
     return $box;
   }
 
-  /**
-   * Create new empty 'inline-block' element. Unlike InlineBlockBox::create(), constructor does not 
-   * initialize the box content.
-   * 
-   * @see InlineBlockBox::create()
-   */
   function InlineBlockBox() {
     $this->GenericContainerBox();
   }
@@ -59,7 +54,7 @@ class InlineBlockBox extends GenericContainerBox {
      * @link http://www.w3.org/TR/CSS21/visuren.html#dis-pos-flo CSS 2.1: Relationships between 'display', 'position', and 'float'
      */
 
-    switch ($this->position) {
+    switch ($this->getCSSProperty(CSS_POSITION)) {
     case POSITION_STATIC:
       return $this->reflow_static($parent, $context);
 
@@ -77,24 +72,7 @@ class InlineBlockBox extends GenericContainerBox {
        */
 
       $this->reflow_static($parent, $context);
-
-      /**
-       * Note that percentage positioning values are ignored for relative positioning
-       */
-
-      /**
-       * Check if 'top' value is percentage
-       */
-      if ($this->top[1]) { 
-        $top = 0;
-      } else {
-        $top = $this->top[0];
-      }
-
-      /**
-       * Offset the box according to the calculated 'left' and 'top' values
-       */
-      $this->offset($this->get_css_left_value(),-$top);
+      $this->offsetRelative();
 
       return;
     }
@@ -121,6 +99,7 @@ class InlineBlockBox extends GenericContainerBox {
      * Calculate margin values if they have been set as a percentage
      */
     $this->_calc_percentage_margins($parent);
+    $this->_calc_percentage_padding($parent);
 
     /**
      * Calculate width value if it had been set as a percentage
@@ -157,7 +136,8 @@ class InlineBlockBox extends GenericContainerBox {
      * Calculate element's baseline, as it should be aligned inside the 
      * parent's line box vertically
      */
-    $this->default_baseline = $this->get_height() + $this->font_size;
+    $font = $this->getCSSProperty(CSS_FONT);
+    $this->default_baseline = $this->get_height() + $font->size->getPoints();
     
     /**
      * Extend parent's height to fit current box

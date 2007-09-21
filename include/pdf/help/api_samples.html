@@ -1,0 +1,139 @@
+<html>
+<head>
+<title>Minimal code samples</title>
+<link rel="stylesheet" type="text/css" medial="all" title="Default" href="css/help.css"/>
+<style type="text/css">
+div.note {
+  margin: 0.5em 0;
+}
+
+div.class {
+  margin: 0.5em 0 0.5em 2em;
+}
+
+div.interface {
+  margin: 1em 0 0.5em 0;
+  padding: 2px 5px;
+  background-color: #f0f0f0;
+}
+
+span.interface_name {
+  font-weight: bold;
+}
+
+span.method_name {
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<h1>Minimal code</h1>
+<h2>Using the default pipeline</h2>
+<pre class="code">
+require_once('pipeline.factory.class.php');
+parse_config_file('./html2ps.config');
+
+global $g_config;
+$g_config = array(
+                  'cssmedia'     => 'screen',
+                  'renderimages' => true,
+                  'renderforms'  => false,
+                  'renderlinks'  => true,
+                  'mode'         => 'html',
+                  'debugbox'     => false,
+                  'draw_page_border' => false
+                  );
+
+$media = Media::predefined('A4');
+$media->set_landscape(false);
+$media->set_margins(array('left'   => 0,
+                          'right'  => 0,
+                          'top'    => 0,
+                          'bottom' => 0));
+$media->set_pixels(1024);
+
+global $g_px_scale;
+$g_px_scale = mm2pt($media->width() - $media->margins['left'] - $media->margins['right']) / $media->pixels;
+
+global $g_pt_scale;
+$g_pt_scale = $g_px_scale * 1.43; 
+
+$pipeline = PipelineFactory::create_default_pipeline("","");
+$pipeline->process('http://www.google.com', $media); 
+</pre>
+
+<h2>Building your own conversion pipeline</h2>
+<pre class="code">
+require_once('pipeline.class.php');
+parse_config_file('html2ps.config');
+
+$g_config = array(
+                  'cssmedia'     => 'screen',
+                  'renderimages' => true,
+                  'renderforms'  => false,
+                  'renderlinks'  => true,
+                  'mode'         => 'html',
+                  'debugbox'     => false,
+                  'draw_page_border' => false
+                  );
+
+$media = Media::predefined('A4');
+$media->set_landscape(false);
+$media->set_margins(array('left'   => 0,
+                          'right'  => 0,
+                          'top'    => 0,
+                          'bottom' => 0));
+$media->set_pixels(1024);
+
+$g_px_scale = mm2pt($media->width() - $media->margins['left'] - $media->margins['right']) / $media->pixels;
+$g_pt_scale = $g_px_scale * 1.43; 
+
+$pipeline = new Pipeline;
+$pipeline->fetchers[]     = new FetcherURL;
+$pipeline->data_filters[] = new DataFilterHTML2XHTML;
+$pipeline->parser         = new ParserXHTML;
+$pipeline->layout_engine  = new LayoutEngineDefault;
+$pipeline->output_driver  = new OutputDriverFPDF($media);
+$pipeline->destination    = new DestinationFile(null);
+
+$pipeline->process('http://www.yahoo.com', $media); 
+</pre>
+
+<h2>Running the script in batch mode</h2>
+<pre class="code">
+require_once('pipeline.factory.class.php');
+parse_config_file('./html2ps.config');
+
+global $g_config;
+$g_config = array(
+                  'cssmedia'     => 'screen',
+                  'renderimages' => true,
+                  'renderforms'  => false,
+                  'renderlinks'  => true,
+                  'mode'         => 'html',
+                  'debugbox'     => false,
+                  'draw_page_border' => false
+                  );
+
+$media = Media::predefined('A4');
+$media->set_landscape(false);
+$media->set_margins(array('left'   => 0,
+                          'right'  => 0,
+                          'top'    => 0,
+                          'bottom' => 0));
+$media->set_pixels(1024);
+
+global $g_px_scale;
+$g_px_scale = mm2pt($media->width() - $media->margins['left'] - $media->margins['right']) / $media->pixels;
+
+global $g_pt_scale;
+$g_pt_scale = $g_px_scale * 1.43; 
+
+$pipeline = PipelineFactory::create_default_pipeline("","");
+$pipeline->process_batch(array('http://www.google.com',
+                               'http://www.yahoo.com'), $media); 
+</pre>
+
+</body>
+</html>

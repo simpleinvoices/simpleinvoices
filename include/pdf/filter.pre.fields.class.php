@@ -17,37 +17,40 @@ class PreTreeFilterHTML2PSFields extends PreTreeFilter {
 
   function process(&$tree, $data, &$pipeline) {
     if (is_a($tree, 'TextBox')) {
-      switch ($tree->word) {
+      // Ignore completely empty text boxes
+      if (count($tree->words) == 0) { return; };
+
+      switch ($tree->words[0]) {
       case '##PAGE##':
         $parent =& $tree->parent;
         $field  = BoxTextFieldPageNo::from_box($tree);
 
-        $parent->insertBefore($field, $tree);
+        $parent->insert_before($field, $tree);
 
         $parent->remove($tree);
         break;
       case '##PAGES##':
         $parent =& $tree->parent;
         $field  = BoxTextFieldPages::from_box($tree);
-        $parent->insertBefore($field, $tree);
+        $parent->insert_before($field, $tree);
         $parent->remove($tree);
         break;
       case '##FILENAME##':
         if (is_null($this->filename)) {
-          $tree->word = $data->get_uri();
+          $tree->words[0] = $data->get_uri();
         } else {
-          $tree->word = $this->filename;
+          $tree->words[0] = $this->filename;
         };
         break;
       case '##FILESIZE##':
         if (is_null($this->filesize)) {
-          $tree->word = strlen($data->get_content());
+          $tree->words[0] = strlen($data->get_content());
         } else {
-          $tree->word = $this->filesize;
+          $tree->words[0] = $this->filesize;
         };
         break;
       case '##TIMESTAMP##':
-        $tree->word = $this->_timestamp;
+        $tree->words[0] = $this->_timestamp;
         break;
       };
     } elseif (is_a($tree, 'GenericContainerBox')) {

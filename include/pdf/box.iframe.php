@@ -1,9 +1,10 @@
 <?php
-// $Header: /cvsroot/html2ps/box.iframe.php,v 1.10 2006/03/19 09:25:35 Konstantin Exp $
+// $Header: /cvsroot/html2ps/box.iframe.php,v 1.14 2006/12/18 19:44:21 Konstantin Exp $
 
 class IFrameBox extends InlineBlockBox {
   function &create(&$root, &$pipeline) {
     $box =& new IFrameBox($root, $pipeline);
+    $box->readCSS($pipeline->getCurrentCSSState());
     return $box;
   }
 
@@ -18,19 +19,13 @@ class IFrameBox extends InlineBlockBox {
   }
 
   function IFrameBox(&$root, $pipeline) {
-    // Inherit 'border' CSS value from parent (FRAMESET tag), if current FRAME 
-    // has no FRAMEBORDER attribute, and FRAMESET has one
-    $parent = $root->parent();
-    if (!$root->has_attribute('frameborder') &&
-        $parent->has_attribute('frameborder')) {
-      pop_border();
-      push_border(get_border());
-    }
-
     $this->InlineBlockBox();
 
     // If NO src attribute specified, just return.
-    if (!$root->has_attribute('src')) { return; };
+    if (!$root->has_attribute('src') || 
+        trim($root->get_attribute('src')) == '') { 
+      return; 
+    };
 
     // Determine the fullly qualified URL of the frame content
     $src = $root->get_attribute('src');
@@ -62,27 +57,17 @@ class IFrameBox extends InlineBlockBox {
         
     // Save current stylesheet, as each frame may load its own stylesheets
     //
-    global $g_css;
-    $old_css = $g_css;
-    global $g_css_obj;
-    $old_obj = $g_css_obj;
+    $pipeline->pushCSS();
+    $css =& $pipeline->getCurrentCSS();
+    $css->scan_styles($tree, $pipeline);
 
-    scan_styles($tree, $pipeline);
-    // Temporary hack: convert CSS rule array to CSS object
-    $g_css_obj = new CSSObject;
-    foreach ($g_css as $rule) {
-      $g_css_obj->add_rule($rule, $pipeline);
-    }
- 
     $frame_root = traverse_dom_tree_pdf($tree);
-
     $box_child =& create_pdf_box($frame_root, $pipeline);
     $this->add_child($box_child);
 
     // Restore old stylesheet
     //
-    $g_css = $old_css;
-    $g_css_obj = $old_obj;
+    $pipeline->popCSS();
 
     $pipeline->pop_base_url();
   }

@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/html2ps/utils_url.php,v 1.8 2006/05/27 15:33:27 Konstantin Exp $
+// $Header: /cvsroot/html2ps/utils_url.php,v 1.9 2006/07/09 09:07:46 Konstantin Exp $
 
 function guess_url($path, $baseurl) {
   // Check if path is absolute
@@ -49,18 +49,12 @@ function guess_url($path, $baseurl) {
   // 'Path' is starting at scheme?
   if (substr($path,0,2) == "//") {
     $guessed = $base_scheme . ':' . $path;
-
-    error_log(sprintf("Guessed: '%s'", $guessed));
-
     return $guessed;
   }
 
   // 'Path' is starting at root?
   if (substr($path,0,1) == "/") {
     $guessed = $base_scheme . '://' . $base_user_pass . $base_host . $base_port . $path;
-
-    error_log(sprintf("Guessed: '%s'", $guessed));
-
     return $guessed;
   };
 
@@ -71,9 +65,6 @@ function guess_url($path, $baseurl) {
     $base_path_dir = "";
   };
   $guessed = $base_scheme . '://' . $base_user_pass . $base_host . $base_port . $base_path_dir . '/' . $path;
-
-  error_log(sprintf("Guessed: '%s'", $guessed));
-
   return $guessed;
 };
 

@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/html2ps/output._interface.class.php,v 1.5 2006/03/12 08:00:02 Konstantin Exp $
+// $Header: /cvsroot/html2ps/output._interface.class.php,v 1.8 2007/01/09 20:13:48 Konstantin Exp $
 
 class OutputDriver {
   function add_link($x, $y, $w, $h, $target) { }
@@ -13,7 +13,6 @@ class OutputDriver {
 
   function dash($x, $y) { }
   function decoration($underline, $overline, $strikeout) { }
-  function encoding($encoding) {}
 
   function error_message() { die("Unoverridden 'error_message' method called in ".get_class($this)); }
 
@@ -34,7 +33,13 @@ class OutputDriver {
 
   function fill() { }
   function font_ascender($name, $encoding) {}
+
+  /**
+   * Note that positive value returned by this function 
+   * means offset to the BOTTOM!
+   */
   function font_descender($name, $encoding) {}
+
   function get_bottom() {}
   function image($image, $x, $y, $scale) {}
   function image_scaled($image, $x, $y, $scale_x, $scale_y) { }
@@ -43,7 +48,7 @@ class OutputDriver {
   function image_rx_ry($image, $x, $y, $width, $height, $right, $bottom, $ox, $oy, $scale) { }
   function lineto($x, $y) { }
   function moveto($x, $y) { }
-  function next_page() { }
+  function next_page($height) { }
   function release() { }
   function restore() { }
   function save() { }

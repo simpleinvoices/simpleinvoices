@@ -1,5 +1,10 @@
 <?php
-// $Header: /cvsroot/html2ps/box.inline.php,v 1.41 2006/05/27 15:33:26 Konstantin Exp $
+// $Header: /cvsroot/html2ps/box.inline.php,v 1.53 2007/01/24 18:55:44 Konstantin Exp $
+
+require_once(HTML2PS_DIR.'encoding.inc.php');
+
+define('SYMBOL_SHY', code_to_utf8(0xAD));
+define('BROKEN_SYMBOL', chr(0xC2));
 
 class LineBox {
   var $top;
@@ -7,8 +12,10 @@ class LineBox {
   var $bottom;
   var $left;
 
-  function copy() {
-    $box = new LineBox;
+  function LineBox() { }
+
+  function &copy() {
+    $box =& new LineBox;
     $box->top    = $this->top;
     $box->right  = $this->right;
     $box->bottom = $this->bottom;
@@ -25,14 +32,15 @@ class LineBox {
 
   function create(&$box) {
     $lbox = new LineBox;
+    $lbox->top    = $box->get_top();
     $lbox->right  = $box->get_right();
-    $lbox->bottom = $box->get_top() - $box->get_baseline() - $box->get_descender();
-    $lbox->left = $box->get_left();
-    $lbox->top = $box->get_top() - $box->get_baseline() + $box->get_ascender();
+    $lbox->bottom = $box->get_bottom();
+    $lbox->left   = $box->get_left();
+
+    // $lbox->bottom = $box->get_top() - $box->get_baseline() - $box->get_descender();
+    // $lbox->top    = $box->get_top() - $box->get_baseline() + $box->get_ascender();
     return $lbox;
   }
-
-  function LineBox() { }
 
   function extend(&$box) {
     $base = $box->get_top() - $box->get_baseline();
@@ -46,11 +54,13 @@ class LineBox {
 
   function fake_box(&$box) {
     // Create the fake box object
-    push_css_defaults();
+
+    $fake_state = new CSSState(CSS::get());
+    $fake_state->pushState();
     
     $fake = null;
     $fake_box = new BlockBox($fake);
-    pop_css_defaults();
+    $fake_box->readCSS($fake_state);
 
     // Setup fake box size
     $fake_box->put_left($this->left);
@@ -59,25 +69,41 @@ class LineBox {
     $fake_box->put_height($this->top - $this->bottom);
 
     // Setup padding value
-    $fake_box->padding = $box->padding;
+    $fake_box->setCSSProperty(CSS_PADDING, $box->getCSSProperty(CSS_PADDING));
 
     // Setup fake box border and background
-    $fake_box->background = $box->background;
-    $fake_box->border = $box->border;
+    $fake_box->setCSSProperty(CSS_BACKGROUND, $box->getCSSProperty(CSS_BACKGROUND));
+    $fake_box->setCSSProperty(CSS_BORDER, $box->getCSSProperty(CSS_BORDER));
     
     return $fake_box;
   }
 }
 
 class InlineBox extends GenericInlineBox {
+  var $_lines;
+
+  function InlineBox() {
+    // Call parent's constructor
+    $this->GenericInlineBox();
+
+    // Clear the list of line boxes inside this box
+    $this->_lines = array();
+  }
+
   function &create(&$root, &$pipeline) {
     // Create contents of this inline box
     if ($root->node_type() == XML_TEXT_NODE) {
-      $handler = get_css_handler('white-space');
-      return InlineBox::create_from_text($root->content, $handler->get());
+      $css_state =& $pipeline->getCurrentCSSState();
+      return InlineBox::create_from_text($root->content, 
+                                         $css_state->getProperty(CSS_WHITE_SPACE), 
+                                         $pipeline);
 
     } else {
       $box =& new InlineBox();
+
+      $css_state =& $pipeline->getCurrentCSSState();
+
+      $box->readCSS($css_state);
 
       // Initialize content
       $child = $root->first_child();
@@ -92,192 +118,160 @@ class InlineBox extends GenericInlineBox {
       // document tree
       //
       if ($box->is_null()) {
-        push_css_defaults();
-        pop_font_size();
-        push_font_size('0.01pt');
+        $css_state->pushState();
+        $css_state->setProperty(CSS_FONT_SIZE, Value::fromData(0.01, UNIT_PT));
 
-        $whitespace = new WhitespaceBox();
+        $whitespace = WhitespaceBox::create($pipeline);
+        $whitespace->readCSS($css_state);
 
         $box->add_child($whitespace);        
-        pop_css_defaults();
+
+        $css_state->popState();
       };
     }
 
     return $box;
   }
 
-  function &create_from_text($text, $white_space) {
+  function &create_from_text($text, $white_space, &$pipeline) {
     $box =& new InlineBox();
+    $box->readCSS($pipeline->getCurrentCSSState());
 
     // Apply/inherit text-related CSS properties 
-    push_css_text_defaults();
-    
-    if ($white_space == WHITESPACE_PRE) {
-      $box->init_white_space_pre($text);
-    } else {
-      $box->init_white_space_normal($text);
-    };
+    $css_state =& $pipeline->getCurrentCSSState();
+    $css_state->pushDefaultTextState();
+
+    require_once(HTML2PS_DIR.'inline.content.builder.factory.php');
+    $inline_content_builder =& InlineContentBuilderFactory::get($white_space);
+    $inline_content_builder->build($box, $text, $pipeline);
     
     // Clear the CSS stack
-    pop_css_defaults();
+    $css_state->popState();
 
     return $box;
   }
 
-  function InlineBox() {
-    // Clear the content
-    //    $this->content = array();
-
-    // Clear the list of line boxes inside this box
-    $this->_lines = array();
-
-    // Call parent's constructor
-    $this->GenericInlineBox();
+  function &get_line_box($index) {
+    $line_box =& $this->_lines[$index];
+    return $line_box;
   }
 
-  function init_white_space_pre($raw_content) {
-    // Remove the newfeed at the very beginning / end of the text block
-    $raw_content = preg_replace("/^[\r\n]*/", "", $raw_content);
-    $raw_content = preg_replace("/[\r\n]*$/", "", $raw_content);
-
-    // Convert text content to series of lines
-    $lines = preg_split("/[\r\n]/",$raw_content);
-
-    for ($i=0; $i<count($lines); $i++) {
-      $line = $lines[$i];
-      $this->process_word($line);
-      $this->add_child(new BRBox());
-    };
-  }
-
-  // Note: as we're trying to use unicode, we must beware that a part of unicode character can match generic \s 
-  // declaration; we'll limit ourselves by [\r\n\t ] set!
-  //
-  function init_white_space_normal($raw_content) {
-    $content = preg_replace("/[\r\n\t ]/",' ',$raw_content);
-
-    // Whitespace-only text nodes sill result on only one whitespace box
-    if (trim($content) === "") {
-      $this->add_child(WhitespaceBox::create());
-      return;
-    }
-
-    if (preg_match("# #",substr($content,0,1))) {
-      $this->add_child(WhitespaceBox::create());
-    }
-
-    $words = preg_split("/ /",$content);     
-    $prefix = "";
-    for ($i=0; $i<count($words); $i++) {
-      $word = $prefix.$words[$i];
-
-      // Skip zero-length words
-      if (strlen($word) == 0) { continue; }
-
-      // Check if this word is terminated by a partially-completed 
-      // unicode symbol; in this case we've made a break here incorrectly on
-      // the non-breaking space
-      // 
-      // So, we'll concatenate whis with with the next word
-      // dropping partially parsed unicode symbol and replacing it by a space
-      //
-      if ($word{strlen($word)-1} == chr(0xC2)) {
-        $prefix = substr($word,0,strlen($word)-1)." ";
-        continue;
-      };
-      $prefix = "";
-      
-      if ($word !== "") {
-        $this->process_word($word);
-        
-        // we need to make space between words in 2 cases: 
-        // 1. if there will be another words in the same text node
-        // 2. if it is the last words AND there's space(s) at the end of the text content.
-        //    e.g.: text<b>xxx </font>some more text
-        if ($i < count($words)-1 || preg_match("#\s#",substr($content,strlen($content)-1,1))) { 
-          $this->add_child(WhitespaceBox::create());
-        };
-      };
-    };
+  function get_line_box_count() {
+    return count($this->_lines);
   }
 
   // Inherited from GenericFormattedBox
 
-  function process_word($raw_content) {
-    if ($raw_content === "") { return false; }
-
-    global $g_utf8_to_encodings_mapping_pdf;
+  function process_word($raw_content, &$pipeline) {
+    if ($raw_content === '') { 
+      return false; 
+    }
 
     $ptr      = 0;
-    $word     = "";
-    $encoding = "iso-8859-1";
+    $word     = '';
+    $hyphens  = array();
+    $encoding = 'iso-8859-1';
 
-    while ($ptr < strlen($raw_content)) {
-      if ((ord($raw_content{$ptr}) & 0xF0) == 0xF0) {
-        $charlen = 4;
-      } elseif ((ord($raw_content{$ptr}) & 0xE0) == 0xE0) {
-        $charlen = 3;
-      } elseif ((ord($raw_content{$ptr}) & 0xC0) == 0xC0) {
-        $charlen = 2;
+    $manager_encoding =& ManagerEncoding::get();
+    $text_box =& TextBox::create_empty($pipeline);
+
+    $len = strlen($raw_content);
+    while ($ptr < $len) {
+      $char = $manager_encoding->getNextUTF8Char($raw_content, $ptr);
+
+      // Check if current  char is a soft hyphen  character. It it is,
+      // remove it from the word  (as it should not be drawn normally)
+      // and store its location
+      if ($char == SYMBOL_SHY) {
+        $hyphens[] = strlen($word);
       } else {
-        $charlen = 1;
-      };
+        $mapping = $manager_encoding->getMapping($char);
 
-      $char = substr($raw_content,$ptr,$charlen);
+        /**
+         * If this character is not found in predefined encoding vectors,
+         * we'll use "Custom" encoding and add single-character TextBox
+         *
+         * @TODO: handle characters without known glyph names
+         */
+        if (is_null($mapping)) {
+          /**
+           * No mapping to default encoding vectors found for this character
+           */
+          
+          /**
+           * Add last word
+           */
+          if ($word !== '') { 
+            $text_box->add_subword($word, $encoding, $hyphens);
+          };
 
-      if (!isset($g_utf8_to_encodings_mapping_pdf[$char])) {
-        $ch_hex = "";
-        for ($i=0; $i<strlen($char); $i++) {
-          $ch_hex .= sprintf("%x",ord($char[$i]));
+          /**
+           * Add current symbol
+           */
+          $custom_char = $manager_encoding->addCustomChar(utf8_to_code($char));
+          $text_box->add_subword($custom_char, $manager_encoding->getCustomEncodingName(), $hyphens);
+          
+          $word = '';
+        } else {
+          if (isset($mapping[$encoding])) {
+            $word .= $mapping[$encoding];
+          } else {
+            // This condition prevents empty text boxes from appearing; say, if word starts with a national 
+            // character, an () - text box with no letters will be generated, in rare case causing a random line 
+            // wraps, if container is narrow
+            if ($word !== '') {
+              $text_box->add_subword($word, $encoding, $hyphens);
+            };
+            
+            reset($mapping);
+            list($encoding, $add) = each($mapping);
+            
+            $word = $mapping[$encoding];
+            $hyphens = array();
+          };
         };
-        error_log("Unknown utf8 character:".$ch_hex);
-        $char = "?";
       };
-
-      $mapping = $g_utf8_to_encodings_mapping_pdf[$char];
-
-      if (isset($mapping[$encoding])) {
-        $add = $mapping[$encoding];
-        $word .= $add;
-      } else {
-        // This condition prevents empty text boxes from appearing; say, if word starts with a national 
-        // character, an () - text box with no letters will be generated, in rare case causing a random line 
-        // wraps, if container is narrow
-        if ($word !== "") {
-          $this->add_child(TextBox::create($word, $encoding));
-        };
-
-        $encodings = array_keys($mapping);
-        $encoding = $encodings[0];
-
-        $add = $mapping[$encoding];
-
-        $word = $add;
-      };
-
-      $ptr += $charlen;
     };
 
-    if ($word !== "") {
-      $this->add_child(TextBox::create($word, $encoding));
+    if ($word !== '') {
+      $text_box->add_subword($word, $encoding, $hyphens);
+    };
+
+    $this->add_child($text_box);
+    return true;
+  }
+
+  function show(&$driver) {
+    if ($this->getCSSProperty(CSS_POSITION) == POSITION_RELATIVE) {
+      // Postpone
       return true;
     };
 
-    return false;
+    return $this->_show($driver);
   }
 
-  function show(&$viewport) {
-    // Show line boxes background and borders
-    for ($i=0; $i<count($this->_lines); $i++) {
-      $fake_box = $this->_lines[$i]->fake_box($this);
+  function show_postponed(&$driver) {
+    return $this->_show($driver);
+  }
 
-      $this->background->show($viewport, $fake_box);
-      $this->border->show($viewport, $fake_box);
+  function _show(&$driver) {
+    // Show line boxes background and borders
+    $size = $this->get_line_box_count();
+    for ($i=0; $i<$size; $i++) {
+      $line_box = $this->get_line_box($i);
+      $fake_box = $line_box->fake_box($this);
+
+      $background = $this->getCSSProperty(CSS_BACKGROUND);
+      $border     = $this->getCSSProperty(CSS_BORDER);
+
+      $background->show($driver, $fake_box);
+      $border->show($driver, $fake_box);
     };
 
     // Show content
-    for ($i=0; $i < count($this->content); $i++) {
-      if (is_null($this->content[$i]->show($viewport))) {
+    $size = count($this->content);
+    for ($i=0; $i < $size; $i++) {
+      if (is_null($this->content[$i]->show($driver))) {
         return null;
       };
     }
@@ -337,7 +331,8 @@ class InlineBox extends GenericInlineBox {
       };
     };
 
-    for ($i=$start_line; $i<count($box->_lines); $i++) {
+    $size = count($box->_lines);
+    for ($i=$start_line; $i<$size; $i++) {
       $this->_lines[] = $box->_lines[$i]->copy();
     };
 
@@ -368,7 +363,8 @@ class InlineBox extends GenericInlineBox {
     $this->width = 0;
 
     // Reflow contents
-    for ($i=0; $i<count($this->content); $i++) {
+    $size = count($this->content);
+    for ($i=0; $i<$size; $i++) {
       $child =& $this->content[$i];
 
       // Add current element into _parent_ line box and reflow it
@@ -399,13 +395,14 @@ class InlineBox extends GenericInlineBox {
 
   function reflow_inline() {
     $line_no = 0;
-    for ($i=0; $i<count($this->content); $i++) {
-      $child =& $this->content[$i];
 
+    $size = count($this->content);
+    for ($i=0; $i<$size; $i++) {
+      $child =& $this->content[$i];
       $child->reflow_inline();
 
       if (!$child->is_null()) {
-        if (is_a($child,"InlineBox")) {
+        if (is_a($child,'InlineBox')) {
           $line_no = $this->merge_line($child, $line_no);
         } else {
           $line_no = $this->extend_line($child, $line_no);        
@@ -420,11 +417,14 @@ class InlineBox extends GenericInlineBox {
      * We should not remove such anchors, as this will break internal links 
      * in the document.
      */
-    if ($this->pseudo_link_destination != "") { return; };
+    $dest = $this->getCSSProperty(CSS_HTML2PS_LINK_DESTINATION);
+    if (!is_null($dest)) { 
+      return; 
+    };
 
-    for ($i=0; $i<count($this->content); $i++) {
+    $size = count($this->content);
+    for ($i=0; $i<$size; $i++) {
       $child =& $this->content[$i];
-
       $child->reflow_whitespace($linebox_started, $previous_whitespace);      
     };
 
@@ -441,17 +441,27 @@ class InlineBox extends GenericInlineBox {
     return $this->get_extra_right() + ($this->parent ? $this->parent->get_extra_line_right() : 0);
   }
 
-  // As "nowrap" properties applied to block-level boxes only, we may use simplified version of
-  // 'get_min_width' here
-  //
+  /**
+   * As "nowrap" properties applied to block-level boxes only, we may use simplified version of
+   * 'get_min_width' here
+   */
   function get_min_width(&$context) {
-    // If box does not have any content, its minimal width is determined by extra horizontal space
-    if (count($this->content) == 0) { return $this->_get_hor_extra(); };
+    if (isset($this->_cache[CACHE_MIN_WIDTH])) {
+      return $this->_cache[CACHE_MIN_WIDTH];
+    }
+
+    $content_size = count($this->content);
+
+    /**
+     * If box does not have any content, its minimal width is determined by extra horizontal space
+     */
+    if ($content_size == 0) { 
+      return $this->_get_hor_extra(); 
+    };
 
     $minw = $this->content[0]->get_min_width($context);
 
-    $size = count($this->content);
-    for ($i=1; $i<$size; $i++) {
+    for ($i=1; $i<$content_size; $i++) {
       $item = $this->content[$i];
       if (!$item->out_of_flow()) {
         $minw = max($minw, $item->get_min_width($context));
@@ -459,20 +469,36 @@ class InlineBox extends GenericInlineBox {
     }
 
     // Apply width constraint to min width. Return maximal value
-    return max($minw, $this->_width_constraint->apply($minw, $this->parent->get_width())) + $this->_get_hor_extra();
+    $wc = $this->getCSSProperty(CSS_WIDTH);
+    $min_width = max($minw, $wc->apply($minw, $this->parent->get_width())) + $this->_get_hor_extra();
+
+    $this->_cache[CACHE_MIN_WIDTH] = $min_width;
+    return $min_width;
   }
 
   // Restore default behaviour, as this class is a ContainerBox descendant
-  function get_max_width_natural(&$context) {
-    return $this->get_max_width($context);
+  function get_max_width_natural(&$context, $limit=10E6) {
+    return $this->get_max_width($context, $limit);
   }
 
   function offset($dx, $dy) {
-    for ($i=0; $i<count($this->_lines); $i++) {
+    $size = count($this->_lines);
+    for ($i=0; $i<$size; $i++) {
       $this->_lines[$i]->offset($dx, $dy);
     };
     GenericInlineBox::offset($dx, $dy);
-
   }
-}
+
+  /**
+   * Deprecated
+   */
+  function getLineBoxCount() {
+    return $this->get_line_box_count();
+  }
+
+  function &getLineBox($index) {
+    return $this->get_line_box($index);
+  }
+};
+
 ?>

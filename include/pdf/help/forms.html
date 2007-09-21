@@ -17,6 +17,12 @@ are written this way. When using html2ps interactive forms, you <strong>must</st
 controls which should be rendered interactive. If you don't do it, the control will be rendered as a graphic like "Interactive forms" options 
 disabled.
 
+<h3>Field names should be unique</h3>
+<p>In HTML you usually <i>may</i> enter several controls with the same name into the same form and get 
+some kind of results. PDF files do not allow such fields at all. In this case, all subsequent fields 
+sharing the same name will be rendered as non-interactive.
+</p>
+
 <h3>Form &amp field names</h3>
 <p>Unlike HTML, the parameter names in POST request are not the field names. Acrobat Reader uses a &quot;fully qualified field names&quot;
 instead. It means that field is identified by composite string having the form
