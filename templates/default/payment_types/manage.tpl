@@ -4,10 +4,10 @@
 * 	 Manage payment types template
 *
 * Authors:
-*	 Justin Kelly, Nicolas Ruflin
+*	 Justin Kelly, Nicolas Ruflin, Ben Brown
 *
 * Last edited:
-* 	 2007-07-18
+* 	 2007-09-22
 *
 * License:
 *	 GPL v2 or above
@@ -24,10 +24,10 @@
 <hr />
 <table align="center" class="ricoLiveGrid manage" id="rico_payment_types">
 	<colgroup>
-		<col style='width:15%;' />
-		<col style='width:15%;' />
-		<col style='width:40%;' />
-		<col style='width:20%;' />
+		<col style="width:7%;" />
+		<col style="width:15%;" />
+		<col style="width:48%;" />
+		<col style="width:20%;" />
 	</colgroup>
 	<thead>
 		<tr class="sortHeader">
@@ -39,10 +39,8 @@
 	</thead>
 	{foreach from=$paymentTypes item=paymentType}
 	<tr class="index_table">
-		<td class="index_table"><a class="index_table"
-	 href="index.php?module=payment_types&view=details&submit={$paymentType.pt_id}&action=view">{$LANG.view}</a> ::
-			<a class="index_table"
-	 href="index.php?module=payment_types&view=details&submit={$paymentType.pt_id}&action=edit">{$LANG.edit}</a>
+		<td class="index_table"><a class="index_table" href="index.php?module=payment_types&view=details&submit={$paymentType.pt_id}&action=view"><img src="images/common/view.png" height="16" border="-5px" padding="-4px" valign="bottom" /></a>
+			<a class="index_table" href="index.php?module=payment_types&view=details&submit={$paymentType.pt_id}&action=edit"><img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /></a>
 		</td>
 		<td class="index_table">{$paymentType.pt_id}</td>
 		<td class="index_table">{$paymentType.pt_description}</td>

@@ -6,15 +6,15 @@ body {
 	background:#e5e5e5; }
 
 body, .dialog {
-	font-family:"Lucida Grande", verdana, arial, helvetica, sans-serif;
-	font-size:14px;
+	font-family:verdana, arial, helvetica, sans-serif;
+	font-size:12px;
 	color:#333; }
 	
 table.manage {
 	font-size:12px; }
 
 td.account {
-	font-size:14px;	}
+	font-size:12px;	}
 
 /* Tablesorter table styling - end
 td for the manage screen - start */
@@ -27,8 +27,8 @@ td.index_table {
 	border-color:#FFF;
 	border-style:none; }
 
-td {
-	font-family:"Lucida Grande", verdana, arial, helvetica, sans-serif;
+td, div {
+	font-family:verdana, arial, helvetica, sans-serif;
 	text-align:left; }
 
 td.columnleft {

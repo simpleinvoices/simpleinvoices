@@ -4,10 +4,10 @@
 * 	Biller manage template
 *
 * Authors:
-*	 Justin Kelly, Nicolas Ruflin
+*	 Justin Kelly, Nicolas Ruflin, Ben Brown
 *
 * Last edited:
-* 	 2007-07-18
+* 	 2007-09-22
 *
 * License:
 *	 GPL v2 or above
@@ -20,15 +20,13 @@
 <hr />
 <table class="ricoLiveGrid manage" id="rico_biller" align="center">
 	<colgroup>
-		<col style='width:15%;' />
-		<col style='width:10%;' />
-		<col style='width:40%;' />
-		<!--
-<col style='width:10%;' />
-<col style='width:10%;' />
--->
-		<col style='width:25%;' />
-		<col style='width:10%;' />
+		<col style="width:7%;" />
+		<col style="width:10%;" />
+		<col style="width:48%;" />
+		<!-- <col style="width:10%;" />
+			<col style="width:10%;" /> -->
+		<col style="width:25%;" />
+		<col style="width:10%;" />
 	</colgroup>
 	<thead>
 		<tr class="sortHeader">
@@ -40,20 +38,15 @@
 		</tr>
 	</thead>
 	{foreach from=$billers item=biller}
-	<tr class='index_table'>
-		<td class='index_table'><a class='index_table'
-			href='index.php?module=billers&view=details&id={$biller.id}&action=view'>
-		{$LANG.view} </a> :: <a class='index_table'
-			href='index.php?module=billers&view=details&id={$biller.id}&action=edit'>
-		{$LANG.edit} </a></td>
-		<td class='index_table'>{$biller.id}</td>
-		<td class='index_table'>{$biller.name}</td>
-		<!--
-	<td class='index_table'>{$biller.phone}</td>
-	<td class='index_table'>{$biller.mobile_phone}</td>
-	-->
-		<td class='index_table'>{$biller.email}</td>
-		<td class='index_table'>{$biller.enabled}</td>
+	<tr class="index_table">
+		<td class="index_table"><a class="index_table" href="index.php?module=billers&view=details&id={$biller.id}&action=view"><img src="images/common/view.png" height="16" border="-5px0" padding="-4px" valign="bottom" /></a>
+			<a class="index_table" href="index.php?module=billers&view=details&id={$biller.id}&action=edit"><img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /></a></td>
+		<td class="index_table">{$biller.id}</td>
+		<td class="index_table">{$biller.name}</td>
+		<!-- <td class="index_table">{$biller.phone}</td>
+			<td class="index_table">{$biller.mobile_phone}</td> -->
+		<td class="index_table">{$biller.email}</td>
+		<td class="index_table">{$biller.enabled}</td>
 	</tr>
 	{/foreach}
 </table>

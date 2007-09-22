@@ -9,6 +9,8 @@ function formatItem(row) {
 return row[0] + "<br><i>" + row[1] + "</i>";
 }
 $(document).ready(function() {
-$("#ac_me").autocomplete("auto_complete_search.php", { minChars:1, matchSubset:1, matchContains:1, cacheLength:10, onItemSelect:selectItem, formatItem:formatItem, selectOnly:1 });
+	if($("#ac_me")){
+		$("#ac_me").autocomplete("auto_complete_search.php", { minChars:1, matchSubset:1, matchContains:1, cacheLength:10, onItemSelect:selectItem, formatItem:formatItem, selectOnly:1 });
+	}
 });
 
