@@ -94,6 +94,7 @@ $LANG['debtors_by_amount_owed'] = "Debtors by amount owed";//1
 $LANG['default_inv_template'] = "Default invoice template ";//1
 $LANG['default_number_items'] = "Default number of line items";//1
 $LANG['default_payment_type'] = "Default payment type";//1
+$LANG['delete'] = "Delete";
 $LANG['description'] = "Description";//1
 $LANG['details'] = "Details";//1
 $LANG['disabled'] = "Disabled";
