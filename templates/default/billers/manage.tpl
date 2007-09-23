@@ -39,8 +39,8 @@
 	</thead>
 	{foreach from=$billers item=biller}
 	<tr class="index_table">
-		<td class="index_table"><a class="index_table" href="index.php?module=billers&view=details&id={$biller.id}&action=view"><img src="images/common/view.png" height="16" border="-5px0" padding="-4px" valign="bottom" /></a>
-			<a class="index_table" href="index.php?module=billers&view=details&id={$biller.id}&action=edit"><img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /></a></td>
+		<td class="index_table"><a title="{$LANG.view}" class="index_table" href="index.php?module=billers&view=details&id={$biller.id}&action=view"><img src="images/common/view.png" height="16" border="0" align="absmiddle"/></a>
+			<a title="{$LANG.edit}" class="index_table" href="index.php?module=billers&view=details&id={$biller.id}&action=edit"><img src="images/common/edit.png" height="16" border="0" align="absmiddle" /></a></td>
 		<td class="index_table">{$biller.id}</td>
 		<td class="index_table">{$biller.name}</td>
 		<!-- <td class="index_table">{$biller.phone}</td>

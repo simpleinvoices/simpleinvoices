@@ -40,8 +40,8 @@
 	</thead>
 {foreach from=$products item=product}
 	<tr class="index_table">
-		<td class="index_table"><a class="index_table" href="index.php?module=products&view=details&id={$product.id}&action=view"><img src="images/common/view.png" height="16" border="-5px0" padding="-4px" valign="bottom" /></a>
-			<a class="index_table" href="index.php?module=products&view=details&id={$product.id}&action=edit"><img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /></a> </td>
+		<td class="index_table"><a title="{$LANG.view}" class="index_table" href="index.php?module=products&view=details&id={$product.id}&action=view"><img src="images/common/view.png" height="16" border="0" align="absmiddle"/></a>
+			<a title="{$LANG.edit}" class="index_table" href="index.php?module=products&view=details&id={$product.id}&action=edit"><img src="images/common/edit.png" height="16" border="0" align="absmiddle" /></a> </td>
 		<td class="index_table">{$product.id}</td>
 		<td class="index_table">{$product.description}</td>
 		<td class="index_table">{$product.unit_price}</td>

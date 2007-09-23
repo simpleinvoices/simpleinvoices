@@ -38,8 +38,8 @@
 	</thead>
 	{foreach from=$taxes item=tax}
 	<tr class="index_table">
-		<td class="index_table"><a class="index_table" href="./index.php?module=tax_rates&view=details&submit={$tax.tax_id}&action=view"><img src="images/common/view.png" height="16" border="-5px" padding="-4px" valign="bottom" /></a>
-			<a class="index_table" href="./index.php?module=tax_rates&view=details&submit={$tax.tax_id}&action=edit"><img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /></a></td>
+		<td class="index_table"><a title="{$LANG.view}" class="index_table" href="./index.php?module=tax_rates&view=details&submit={$tax.tax_id}&action=view"><img src="images/common/view.png" height="16" border="0" align="absmiddle" /></a>
+			<a title="{$LANG.edit}" class="index_table" href="./index.php?module=tax_rates&view=details&submit={$tax.tax_id}&action=edit"><img src="images/common/edit.png" height="16" border="0" align="absmiddle" /></a></td>
 		<td class="index_table">{$tax.tax_id}</td>
 		<td class="index_table">{$tax.tax_description}</td>
 		<td class="index_table">{$tax.tax_percentage}</td>

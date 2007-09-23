@@ -56,7 +56,7 @@
 		<a href="index.php?module=invoices&view=email&stage=1&invoice={$invoice.id}">{$LANG.email}</a>
 		{if $defaults.delete == '1'} 
 			:: 
-			<a href="index.php?module=invoices&view=delete&stage=1&invoice={$invoice.id}">Delete</a>
+			<a href="index.php?module=invoices&view=delete&stage=1&invoice={$invoice.id}">{$LANG.delete}</a>
 		{/if}
 
 <!--Actions heading - start-->

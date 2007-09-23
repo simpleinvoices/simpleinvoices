@@ -22,7 +22,8 @@
 	<script type='text/javascript' src='include/jquery/jquery.autocomplete.conf.js'></script>
 	<script type="text/javascript" src="./include/jquery/jquery.accordian.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.tabs.js"></script>
-
+	<script type="text/javascript" src="./include/jquery/jquery.dimensions.js"></script>
+	<script type="text/javascript" src="./include/ext/ext.js"></script>
 {literal}
 	<!-- Menu header -->
 	<!--[if lte IE 6]>
@@ -55,7 +56,7 @@
 				$('#trigger-tab').after('<p><a href="#" onclick="$(\'#container-1\').triggerTab(3); return false;">Activate third tab</a></p>');
 				
 			if($('#custom-tab-by-hash')){
-				$('#custom-tab-by-hash').title('New window').click(function() {
+				$('#custom-tab-by-hash').click(function() {
 				    var win = window.open(this.href, '', 'directories,location,menubar,resizable,scrollbars,status,toolbar');
 				    win.focus();
 				});

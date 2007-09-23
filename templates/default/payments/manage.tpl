@@ -54,7 +54,7 @@
 	</thead>
 	{foreach from=$payments item=payment}
 	<tr class='index_table'>
-		<td class='index_table'><a class='index_table' href='index.php?module=payments&view=details&id={$payment.id}'><img src="images/common/view.png" height="16" border="-5px0" padding="-4px" valign="bottom" /></a></td>
+		<td class='index_table'><a class='index_table' href='index.php?module=payments&view=details&id={$payment.id}'><img src="images/common/view.png" height="16" border="0" align="absmiddle"/></a></td>
 		<td class='index_table'>{$payment.id}</td>
 		<td class='index_table'>{$payment.ac_inv_id}</td>
 		<td class='index_table'>{$payment.CNAME}</td>

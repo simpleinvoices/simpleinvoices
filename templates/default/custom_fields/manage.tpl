@@ -37,8 +37,8 @@
 	{foreach from=$cfs item=cf}
 	<tr class="index_table">
 		<td class="index_table">
-			<a class="index_table" href="index.php?module=custom_fields&view=details&submit={$cf.cf_id}&action=view"><img src="images/common/view.png" height="16" border="-5px" padding="-4px" valign="bottom" /></a>
-			<a class="index_table" href="index.php?module=custom_fields&view=details&submit={$cf.cf_id}&action=edit"><img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /></a> </td>
+			<a title="{$LANG.view}" class="index_table" href="index.php?module=custom_fields&view=details&submit={$cf.cf_id}&action=view"><img src="images/common/view.png" height="16" border="0" align="absmiddle" /></a>
+			<a title="{$LANG.edit}" class="index_table" href="index.php?module=custom_fields&view=details&submit={$cf.cf_id}&action=edit"><img src="images/common/edit.png" height="16" border="0" align="absmiddle" /></a> </td>
 		<td class="index_table">{$cf.cf_id}</td>
 		<td class="index_table">{$cf.filed_name}</td>
 		<td class="index_table">{$cf.cf_custom_label}</td>
