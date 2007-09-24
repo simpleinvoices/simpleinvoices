@@ -1,4 +1,4 @@
 Ext.onReady(function() {
-	var grid = new Ext.grid.TableGrid("the-table");
+	var grid = new Ext.grid.TableGrid("live-grid");
 	grid.render();
 });
