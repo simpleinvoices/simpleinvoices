@@ -7,15 +7,15 @@
 	<script type="text/javascript">
 	    var GB_ROOT_DIR = "./modules/include/js/";
 	</script>
-	<link rel="stylesheet" type="text/css" href="/templates/default/css/menu_header.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="/include/jquery/jquery.plugins.css" title="default" media="screen" />
-	<link rel="stylesheet" type="text/css" href="/templates/default/css/screen.css" media="all"/>
-	<link rel="stylesheet" type="text/css" href="/templates/default/css/print.css" media="print"/>
-	<script type="text/javascript" src="/include/tiny_mce/tiny_mce_src.js"></script>
-	<script type="text/javascript" src="/include/tiny-mce.conf.js"></script>
-	<script type="text/javascript" src="/include/jquery/jquery.js"></script>
-	<script type="text/javascript" src="/include/jquery/jquery.plugins.js"></script>
-	<script type="text/javascript" src="/include/jquery/jquery.conf.js"></script>
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/menu_header.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="./include/jquery/jquery.plugins.css" title="default" media="screen" />
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/screen.css" media="all"/>
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/print.css" media="print"/>
+	<script type="text/javascript" src="./include/tiny_mce/tiny_mce_src.js"></script>
+	<script type="text/javascript" src="./include/tiny-mce.conf.js"></script>
+	<script type="text/javascript" src="./include/jquery/jquery.js"></script>
+	<script type="text/javascript" src="./include/jquery/jquery.plugins.js"></script>
+	<script type="text/javascript" src="./include/jquery/jquery.conf.js"></script>
 <!-- 	<script type="text/javascript" src="./include/ext/ext.js"></script> -->
 {literal}
 	<!-- Menu header -->
@@ -43,10 +43,10 @@
 {/literal}
 	<!-- customer-details -->
 	<link rel="stylesheet" href="./templates/default/css/tabs.css" type="text/css" media="print, projection, screen" />
-	<script type="text/javascript" src="/modules/include/js/AJS.js"></script>
-	<script type="text/javascript" src="/modules/include/js/AJS_fx.js"></script>
-	<script type="text/javascript" src="/modules/include/js/gb_scripts.js"></script>
-	<link href="/templates/default/css/gb_styles.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="./modules/include/js/AJS.js"></script>
+	<script type="text/javascript" src="./modules/include/js/AJS_fx.js"></script>
+	<script type="text/javascript" src="./modules/include/js/gb_scripts.js"></script>
+	<link href="./templates/default/css/gb_styles.css" rel="stylesheet" type="text/css" />
 <!--[if gte IE 5.5]>
 	<script language="JavaScript" src="./modules/include/js/dhtml.js" type="text/JavaScript"></script>
 	<link rel="stylesheet" href="./templates/default/css/iehacks.css" type="text/css" />
