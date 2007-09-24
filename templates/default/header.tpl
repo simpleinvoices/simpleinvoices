@@ -7,23 +7,16 @@
 	<script type="text/javascript">
 	    var GB_ROOT_DIR = "./modules/include/js/";
 	</script>
-	<link rel="stylesheet" type="text/css" href="./templates/default/css/menu_header.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="include/jquery/jquery.autocomplete.css" title="default" media="screen" />
-	<link rel="stylesheet" type="text/css" href="include/jquery/jquery.datePicker.css" title="default" media="screen" />
-	<link rel="stylesheet" type="text/css" href="./templates/default/css/screen.css" media="all"/>
-	<link rel="stylesheet" type="text/css" href="./templates/default/css/print.css" media="print"/>
-	<script language="javascript" type="text/javascript" src="include/tiny_mce/tiny_mce_src.js"></script>
-	<script language="javascript" type="text/javascript" src="include/tiny-mce.conf.js"></script>
-	<script type="text/javascript" src="include/jquery/jquery.js"></script>
-	<script type="text/javascript" src="include/jquery/jquery.dom_creator.js"></script>
-	<script type="text/javascript" src="include/jquery/jquery.datePicker.js"></script>
-	<script type="text/javascript" src="include/jquery/jquery.datePicker.conf.js"></script>
-	<script type='text/javascript' src='include/jquery/jquery.autocomplete.js'></script>
-	<script type='text/javascript' src='include/jquery/jquery.autocomplete.conf.js'></script>
-	<script type="text/javascript" src="./include/jquery/jquery.accordian.js"></script>
-	<script type="text/javascript" src="./include/jquery/jquery.tabs.js"></script>
-	<script type="text/javascript" src="./include/jquery/jquery.dimensions.js"></script>
-	<script type="text/javascript" src="./include/ext/ext.js"></script>
+	<link rel="stylesheet" type="text/css" href="/templates/default/css/menu_header.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="/include/jquery/jquery.plugins.css" title="default" media="screen" />
+	<link rel="stylesheet" type="text/css" href="/templates/default/css/screen.css" media="all"/>
+	<link rel="stylesheet" type="text/css" href="/templates/default/css/print.css" media="print"/>
+	<script type="text/javascript" src="/include/tiny_mce/tiny_mce_src.js"></script>
+	<script type="text/javascript" src="/include/tiny-mce.conf.js"></script>
+	<script type="text/javascript" src="/include/jquery/jquery.js"></script>
+	<script type="text/javascript" src="/include/jquery/jquery.plugins.js"></script>
+	<script type="text/javascript" src="/include/jquery/jquery.conf.js"></script>
+<!-- 	<script type="text/javascript" src="./include/ext/ext.js"></script> -->
 {literal}
 	<!-- Menu header -->
 	<!--[if lte IE 6]>
@@ -46,31 +39,14 @@
 	    }
 	</style>
 	<![endif]-->
-
-	<script type="text/javascript">//<![CDATA[
-	    $(document).ready(function() {
-			if ($('#container-1'))
-				$('#container-1').tabs();
-			
-			if($('#trigger-tab'))
-				$('#trigger-tab').after('<p><a href="#" onclick="$(\'#container-1\').triggerTab(3); return false;">Activate third tab</a></p>');
-				
-			if($('#custom-tab-by-hash')){
-				$('#custom-tab-by-hash').click(function() {
-				    var win = window.open(this.href, '', 'directories,location,menubar,resizable,scrollbars,status,toolbar');
-				    win.focus();
-				});
-			}
-	    });
-	//]]></script>
 	
 {/literal}
 	<!-- customer-details -->
 	<link rel="stylesheet" href="./templates/default/css/tabs.css" type="text/css" media="print, projection, screen" />
-	<script type="text/javascript" src="./modules/include/js/AJS.js"></script>
-	<script type="text/javascript" src="./modules/include/js/AJS_fx.js"></script>
-	<script type="text/javascript" src="./modules/include/js/gb_scripts.js"></script>
-	<link href="./templates/default/css/gb_styles.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="/modules/include/js/AJS.js"></script>
+	<script type="text/javascript" src="/modules/include/js/AJS_fx.js"></script>
+	<script type="text/javascript" src="/modules/include/js/gb_scripts.js"></script>
+	<link href="/templates/default/css/gb_styles.css" rel="stylesheet" type="text/css" />
 <!--[if gte IE 5.5]>
 	<script language="JavaScript" src="./modules/include/js/dhtml.js" type="text/JavaScript"></script>
 	<link rel="stylesheet" href="./templates/default/css/iehacks.css" type="text/css" />
