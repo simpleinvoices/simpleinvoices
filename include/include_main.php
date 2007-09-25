@@ -1,8 +1,9 @@
 <?php
+//commented out by thehandcoder(Ben Brown) should be romoved oncethe new grid is done
 
 //TODO: have to be moved to an other place...
-require_once("./modules/include/js/lgplus/php/chklang.php");
-require_once("./modules/include/js/lgplus/php/settings.php");
+//require_once("./modules/include/js/lgplus/php/chklang.php");
+//require_once("./modules/include/js/lgplus/php/settings.php");
 
 
 $path = pathinfo($_SERVER['REQUEST_URI']);
