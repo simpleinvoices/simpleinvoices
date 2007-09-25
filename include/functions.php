@@ -287,7 +287,9 @@ EOD;
 }
 
 function getRicoLiveGrid($name, $columnSpecs) {
-	
+
+	//Commented out by thehandcoder(Ben Brown).  I didn't want to fully remove this file
+	/*
 	echo <<<EOD
 	<script src="./modules/include/js/lgplus/js/rico.js" type="text/javascript"></script>
 	<script type='text/javascript'>
@@ -319,7 +321,7 @@ Rico.Buffer.Base($('$name').tBodies[0]), opts); });
 <!--[if gte IE 5.5]>
 <link rel="stylesheet" type="text/css" href="./templates/modules/css/iehacks.css" media="all"/>
 <![endif]-->
-EOD;
+EOD;*/
 }
 
 
