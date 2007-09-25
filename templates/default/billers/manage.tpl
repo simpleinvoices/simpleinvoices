@@ -18,7 +18,7 @@
 {else}
 <h3>{$LANG.manage_billers} :: <a href='index.php?module=billers&view=add'>{$LANG.add_new_biller}</a></h3>
 <hr />
-<table class="ricoLiveGrid manage" id="rico_biller" align="center">
+<table class="manage" id="live-grid" align="center">
 	<colgroup>
 		<col style="width:7%;" />
 		<col style="width:10%;" />

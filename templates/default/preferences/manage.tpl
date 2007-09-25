@@ -18,7 +18,7 @@
 {else}
 <h3>{$LANG.manage_preferences} :: <a href="index.php?module=preferences&view=add">{$LANG.add_new_preference}</a></h3>
 <hr />
-<table align="center" class="ricoLiveGrid manage" id="rico_preferences">
+<table class="manage" id="live-grid" align="center">
 	<colgroup>
 		<col style="width:7%;" />
 		<col style="width:10%;" />

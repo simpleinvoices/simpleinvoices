@@ -8,14 +8,24 @@
 	    var GB_ROOT_DIR = "./modules/include/js/";
 	</script>
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/menu_header.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="./include/jquery/jquery.plugins.css" title="default" media="screen" />
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/screen.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/print.css" media="print"/>
 	<script type="text/javascript" src="./include/tiny_mce/tiny_mce_src.js"></script>
 	<script type="text/javascript" src="./include/tiny-mce.conf.js"></script>
+	
+	<!-- jQuery Files -->
 	<script type="text/javascript" src="./include/jquery/jquery.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.plugins.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.conf.js"></script>
+	<link rel="stylesheet" type="text/css" href="./include/jquery/jquery.plugins.css" title="default" media="screen" />
+	
+	<!-- extJs Files -->
+	<script type="text/javascript" src="./include/ext/ext-jquery-adapter.js"></script>
+	<script type="text/javascript" src="./include/ext/ext-all.js"></script>
+	<script type="text/javascript" src="./include/ext/ext.extensions.js"></script>
+	<script type="text/javascript" src="./include/ext/ext.conf.js"></script>
+	<link rel="stylesheet" type="text/css" href="./include/ext/grid.css" title="default" media="screen" />
+	
 <!-- 	<script type="text/javascript" src="./include/ext/ext.js"></script> -->
 {literal}
 	<!-- Menu header -->

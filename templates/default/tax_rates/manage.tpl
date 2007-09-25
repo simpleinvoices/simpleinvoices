@@ -19,7 +19,7 @@
 <h3>{$LANG.manage_tax_rates} ::
 <a href="./index.php?module=tax_rates&view=add">{$LANG.add_new_tax_rate}</a></h3>
 <hr />
-<table align="center" class="ricoLiveGrid" id="rico_tax_rates">
+<table class="manage" id="live-grid" align="center">
 	<colgroup>
 		<col style="width:7%;" />
 		<col style="width:10%;" />

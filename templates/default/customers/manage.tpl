@@ -24,7 +24,7 @@
 
 <h3>{$LANG.manage_customers} :: <a href="index.php?module=customers&view=add">{$LANG.customer_add}</a></h3>
 <hr />
-<table align="center" id="rico_customer" class="ricoLiveGrid manage">
+<table class="manage" id="live-grid" align="center">
 	<colgroup>
 		<col style='width:7%;' />
 		<col style='width:5%;' />

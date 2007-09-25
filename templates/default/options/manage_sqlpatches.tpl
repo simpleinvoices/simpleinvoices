@@ -21,7 +21,7 @@
 <hr />
 
 
-	<table align="center" class="ricoLiveGrid manage" id="rico_sqlpatches">
+	<table class="manage" id="live-grid" align="center">
 	<colgroup>
 		<col style='width:20%;' />
 		<col style='width:60%;' />

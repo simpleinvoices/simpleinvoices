@@ -22,7 +22,7 @@
 {else}
 <h3>{$LANG.manage_payment_types} :: <a href="index.php?module=payment_types&view=add">{$LANG.add_new_payment_type}</a></h3>
 <hr />
-<table align="center" class="ricoLiveGrid manage" id="rico_payment_types">
+<table class="manage" id="live-grid" align="center">
 	<colgroup>
 		<col style="width:7%;" />
 		<col style="width:15%;" />

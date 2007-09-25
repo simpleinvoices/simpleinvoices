@@ -21,7 +21,7 @@
 {else}
 <h3>{$LANG.manage_products} :: <a href="index.php?module=products&view=add">{$LANG.add_new_product}</a></h3>
 <hr />
-<table align="center" class="ricoLiveGrid" id="rico_product">
+<table class="manage" id="live-grid" align="center">
 	<colgroup>
 		<col style='width:7%;' />
 		<col style='width:10%;' />

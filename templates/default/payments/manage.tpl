@@ -27,7 +27,7 @@
 <h3>{$LANG.manage_payments} :: <a href='index.php?module=payments&view=process&op=pay_invoice'>{$LANG.process_payment}</a></h3>
 	{/if}
 <hr />
-<table align="center" class="ricoLiveGrid"  id="rico_payment" >
+<table class="manage" id="live-grid" align="center">
 	<colgroup>
 		<col style='width:7%;' />
 		<col style='width:10%;' />
