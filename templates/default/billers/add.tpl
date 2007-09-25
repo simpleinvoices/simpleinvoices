@@ -144,7 +144,9 @@ You must enter a Biller name</div>
 			{html_options name=enabled options=$enabled selected=1}
 		</td>
 	</tr>
+{*
 	{showCustomFields categorieId="1" itemId=""}
+*}
 	</div>
 	</div>
 	</div>
