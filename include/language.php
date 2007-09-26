@@ -17,6 +17,12 @@ $language = getDefaultLanguage();
 
 function getLanguageArray() {
 	global $language;
+	
+	//if statement for the 200709 release
+	if($language == "en")
+	{
+		$language = "en-gb";
+	}
 	$langPath = "./lang/";
 	$langFile = "/lang.php";
 	//$getLanguage = getenv("HTTP_ACCEPT_LANGUAGE");
