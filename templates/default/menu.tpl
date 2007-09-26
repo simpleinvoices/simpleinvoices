@@ -9,16 +9,12 @@
 					<li><a href="index.php?module=invoices&view=total">{$LANG.new_invoice_total}</a></li>
 					<li><a href="index.php?module=invoices&view=itemised">{$LANG.new_invoice_itemised}</a></li>
 					<li><a href="index.php?module=invoices&view=consulting">{$LANG.new_invoice_consulting}</a></li>
-					<li class="separation"></li>
-					<li><a href="index.php?module=invoices&view=search">Search invoices</a></li>
 				</ul>
 			</li>
 			<li { if $pageActive == 'customers'} id="active" {/if} ><a href="index.php?module=customers&view=manage">{$LANG.customers} +</a>
 				<ul>
 					<li><a href="index.php?module=customers&view=manage">{$LANG.manage_customers}</a></li>
 					<li><a href="index.php?module=customers&view=add">{$LANG.add_customer}</a></li>
-					<li class="separation"></li>
-					<li><a href="index.php?module=customers&view=search">Search customer</a></li>
 				</ul>
 			</li>
 			<li { if $pageActive == 'products'} id="active" {/if} ><a href="index.php?module=products&view=manage">{$LANG.products} +</a>
@@ -88,8 +84,6 @@
 							</li>
 						</ul>
 					</li>
-					<li class="separation"></li>
-					<li><a href="./index.php?module=reports&view=database_log">Database Log</a></li>
 				</ul>
 			</li>
 			<li  { if $pageActive == 'options'} id="active" {/if} ><a href="#">{$LANG.options} +</a>

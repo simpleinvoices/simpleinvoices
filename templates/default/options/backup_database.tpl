@@ -15,6 +15,5 @@
 */
 *}
 
-hkjhkj
 {$display_block}
 

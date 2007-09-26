@@ -80,8 +80,9 @@
 	 {$customFields.2}
 	 {$customFields.3}
 	 {$customFields.4}
+{*
 	 {showCustomFields categorieId="4" itemId=$smarty.get.invoice}
-
+*}
 	
 		        <tr>       	         
 			<td class='details_screen'>{$LANG.gross_total}</td><td><input type="text" name="unit_price" value="{$invoiceItems.0.unit_price}" size=10 />
@@ -166,8 +167,9 @@
 	 {$customFields.2}
 	 {$customFields.3}
 	 {$customFields.4}
+{*
 	 	 {showCustomFields categorieId="4" itemId=$smarty.get.invoice}
-
+*}
 			<tr>
 				<td colspan=6 class='details_screen'>{$LANG.note}:</td>
 			</tr>
