@@ -1026,4 +1026,32 @@ function maxInvoice() {
 
 //in this file are functions for all sql queries
 
+function checkTableExists($table)
+{
+	global $LANG;	
+	$sql = "SELECT 1 FROM `".$table."` LIMIT 0";
+
+	$resultSql = mysql_query($sql);
+	
+	if ($resultSql) {
+		return true;
+	}else {
+		return false;
+	}
+}
+
+function checkFieldExists($table,$field)
+{
+	global $LANG;	
+	
+	$sql = "SELECT `".$field."` FROM `".$table."` LIMIT 0";
+
+	$resultSql = mysql_query($sql);
+	
+	if ($resultSql) {
+		return true;
+	}else {
+		return false;
+	}
+}
 ?>

@@ -34,7 +34,7 @@ $MD5Auth = True; /*To turn of md5 auth set $MD5Auth to True*/
 $ChallengeLife = 0; /*To turn off ChallengeLife set this to 0 */
 
 
-$version = "200707 unstable";
+$version = "200709 unstable";
 
 $config['date_format']  = 'Y-m-d'; #International format just the date
 #$config['date_format']  = 'Y-m-d h:m'; #Internalional format date and time 
