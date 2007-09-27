@@ -622,6 +622,127 @@ NULL , 'logging', '0'
 	$patch['122']['patch'] = "UPDATE `si_system_defaults` SET value = $defaults[def_payment_type] where name = 'payment_type'";
 	$patch['122']['date'] = "20070523";
 	
+//sept release section
+	$patch['123']['name'] = "Add option to delete invoices into the system_defaults table";
+	$patch['123']['patch'] = "INSERT INTO `si_system_defaults` (`id`, `name`, `value`) VALUES 
+('', 'delete', 'N');";
+	$patch['123']['date'] = "200709";
+	
+	$patch['124']['name'] = "Set default language in new lang system";
+	$patch['124']['patch'] = "UPDATE `si_system_defaults` SET value = 'en-gb' where name ='language';";
+	$patch['124']['date'] = "200709";
+
+	$patch['125']['name'] = "Change log table that usernames are also possible as id";
+	$patch['125']['patch'] = "ALTER TABLE `si_log` CHANGE `userid` `userid` VARCHAR( 40 ) NOT NULL DEFAULT '0'";
+	$patch['125']['date'] = "200709";
+	
+	$patch['126']['name'] = "Add visible attribute to the products table";
+	$patch['126']['patch'] = "ALTER TABLE  `si_products` ADD  `visible` BOOL NOT NULL DEFAULT  '1';";
+	$patch['126']['date'] = "200709";
+
+	$patch['127']['name'] = "Add last_id to logging table";
+	$patch['127']['patch'] = "ALTER TABLE  `si_log` ADD  `last_id` INT NULL ;";
+	$patch['127']['date'] = "200709";
+	
+	$patch['128']['name'] = "Add si_user table";
+		if(checkTableExists('si_users') == true) 
+		{
+			if(checkFieldExists('si_users','user_domain') == true) 
+			{	
+				//dumby patch - if table and domainfield exists do nothing
+				$patch['128']['patch'] = "select * from si_users ;";
+			}
+			if(checkFieldExists('si_users','user_domain') == false) 
+			{	
+				//alter existing table to add domain
+				$patch['128']['patch'] = "ALTER TABLE `si_users` ADD `user_domain` VARCHAR( 255 ) NOT NULL AFTER `user_group` ;";				
+			}	
+		}
+		if(checkTableExists('si_users') == false) 
+		{
+			$patch['128']['patch'] = "CREATE TABLE IF NOT EXISTS `si_users` (
+			`user_id` int(11) NOT NULL auto_increment,
+			`user_email` varchar(255) NOT NULL,
+			`user_name` varchar(255) NOT NULL,
+			`user_group` varchar(255) NOT NULL,
+			`user_domain` varchar(255) NOT NULL,
+			`user_password` varchar(255) NOT NULL,
+			PRIMARY KEY  (`user_id`)
+			) ;";
+		}
+	$patch['128']['date'] = "200709";
+	
+	
+	$patch['129']['name'] = "Fill si_user table with default values";
+	$patch['129']['patch'] = "INSERT INTO `si_users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`) VALUES 
+('', 'demo@simpleinvoices.org', 'demo', '1', '1', MD5('demo'))";
+	$patch['129']['date'] = "200709";
+	
+	$patch['130']['name'] = "Create si_auth_challenges table";
+	
+			if(checkTableExists('si_auth_challenges') == true)
+			{
+				//a do nothing patch cause the table already exists
+				$patch['130']['patch'] = "select * from si_auth_challenges";
+			}
+			if(checkTableExists('si_auth_challenges') == false)
+			{
+				$patch['130']['patch'] = "CREATE TABLE IF NOT EXISTS `si_auth_challenges` (
+				`challenges_key` int(11) NOT NULL,
+				`challenges_timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);";
+			}  
+	$patch['130']['date'] = "200709";
+	
+	$patch['131']['name'] = "Make tax field 3 decimal places";
+	$patch['131']['patch'] = "alter table `si_tax` change `tax_percentage` `tax_percentage` decimal (10,3)  NULL";
+	$patch['131']['date'] = "200709";
+	
+	
+	
+	
+
+//old ones - start	
+	
+		$patch['132']['name'] = "Create si_customFieldCategories table";
+		$patch['133']['patch'] = "CREATE TABLE `si_customFieldCategories` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(40) NOT NULL,
+  PRIMARY KEY  (`id`) );";
+	$patch['132']['date'] = "20070629";
+	
+	
+	$patch['133']['name'] = "Insert si_customFieldCategories default values";
+	$patch['133']['patch'] = "INSERT INTO `si_customFieldCategories` (`id`, `name`) VALUES 
+(1, 'biller'),
+(2, 'customer'),
+(3, 'product'),
+(4, 'invoice');";
+	$patch['133']['date'] = "20070629";
+	
+	$patch['134']['name'] = "Create si_customFieldValues table";
+	$patch['134']['patch'] = "CREATE TABLE `si_customFieldValues` (
+  `id` int(11) NOT NULL auto_increment,
+  `customFieldId` int(11) NOT NULL,
+  `itemId` int(11) NOT NULL COMMENT 'could be invocie-id,customer-id etc.',
+  `value` text NOT NULL,
+  PRIMARY KEY  (`id`));";
+	$patch['134']['date'] = "20070629";
+	
+	$patch['135']['name'] = "Create si_customFields table";
+	$patch['135']['patch'] = "CREATE TABLE `si_customFields` (
+  `id` int(11) NOT NULL auto_increment,
+  `pluginId` int(11) NOT NULL,
+  `categorieId` int(11) NOT NULL,
+  `name` varchar(30) character set latin1 NOT NULL,
+  `description` varchar(50) collate utf8_unicode_ci NOT NULL,
+  `active` tinyint(1) NOT NULL default '1',
+  PRIMARY KEY  (`id`)
+);";
+	$patch['135']['date'] = "20070629";
+
+
+	
+/* //TO BE PORTED ACROSS AGAIN
 	$patch['123']['name'] = "Create menu table";
 	$patch['123']['patch'] = "CREATE TABLE `si_menu` (
 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
@@ -704,94 +825,9 @@ NULL , 'logging', '0'
 (66, 0, 100, "{$LANG[\"login\"]}", "login.php", 1),
 (68, 40, 14, "Manage Custom Fields 2", "index.php?module=customFields&view=manageCustomFields", 1);';
 	$patch['124']['date'] = "20070523";
-
-
-	$patch['125']['name'] = "Change log table that usernames are also possible as id";
-	$patch['125']['patch'] = "ALTER TABLE `si_log` CHANGE `userid` `userid` VARCHAR( 40 ) NOT NULL DEFAULT '0'";
-	$patch['125']['date'] = "20070525";
-	
-	$patch['126']['name'] = "Add visible attribute to the products table";
-	$patch['126']['patch'] = "ALTER TABLE  `si_products` ADD  `visible` BOOL NOT NULL DEFAULT  '1';";
-	$patch['126']['date'] = "20070528";
-
-	$patch['127']['name'] = "Add last_id to logging table";
-	$patch['127']['patch'] = "ALTER TABLE  `si_log` ADD  `last_id` INT NULL ;";
-	$patch['127']['date'] = "20070623";
-	
-	$patch['128']['name'] = "Add si_user table";
-	$patch['128']['patch'] = "CREATE TABLE IF NOT EXISTS `si_users` (
-  `user_id` int(11) NOT NULL auto_increment,
-  `user_email` varchar(100) NOT NULL,
-  `user_name` varchar(100) NOT NULL,
-  `user_group` varchar(10) NOT NULL,
-  `user_domain` varchar(10) NOT NULL,
-  `user_password` char(32) NOT NULL,
-  PRIMARY KEY  (`user_id`)
-) ;";
-	$patch['128']['date'] = "200700623";
-	
-	$patch['129']['name'] = "Fill si_user table with default values";
-	$patch['129']['patch'] = "INSERT INTO `si_users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`) VALUES 
-('', 'demo@simpleinvoices.org', 'guest', '1', '1', MD5('demo'))";
-	$patch['129']['date'] = "20070623";
-	
-	$patch['130']['name'] = "Create si_auth_challenges table";
-	$patch['130']['patch'] = "CREATE TABLE IF NOT EXISTS `si_auth_challenges` (
-  `challenges_key` int(11) NOT NULL,
-  `challenges_timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);";
-	$patch['130']['date'] = "20070623";
-	
-/*Might not include the below Custom Field ones till the Spet release is out*/	
-	$patch['131']['name'] = "Create si_customFieldCategories table";
-	$patch['131']['patch'] = "CREATE TABLE `si_customFieldCategories` (
-  `id` int(11) NOT NULL auto_increment,
-  `name` varchar(40) NOT NULL,
-  PRIMARY KEY  (`id`) );";
-	$patch['131']['date'] = "20070629";
 	
 	
-	$patch['132']['name'] = "Insert si_customFieldCategories default values";
-	$patch['132']['patch'] = "INSERT INTO `si_customFieldCategories` (`id`, `name`) VALUES 
-(1, 'biller'),
-(2, 'customer'),
-(3, 'product'),
-(4, 'invoice');";
-	$patch['132']['date'] = "20070629";
-	
-	$patch['133']['name'] = "Create si_customFieldValues table";
-	$patch['133']['patch'] = "CREATE TABLE `si_customFieldValues` (
-  `id` int(11) NOT NULL auto_increment,
-  `customFieldId` int(11) NOT NULL,
-  `itemId` int(11) NOT NULL COMMENT 'could be invocie-id,customer-id etc.',
-  `value` text NOT NULL,
-  PRIMARY KEY  (`id`));";
-	$patch['133']['date'] = "20070629";
-	
-	$patch['134']['name'] = "Create si_customFields table";
-	$patch['134']['patch'] = "CREATE TABLE `si_customFields` (
-  `id` int(11) NOT NULL auto_increment,
-  `pluginId` int(11) NOT NULL,
-  `categorieId` int(11) NOT NULL,
-  `name` varchar(30) character set latin1 NOT NULL,
-  `description` varchar(50) collate utf8_unicode_ci NOT NULL,
-  `active` tinyint(1) NOT NULL default '1',
-  PRIMARY KEY  (`id`)
-);";
-	$patch['134']['date'] = "20070629";
-
-	$patch['135']['name'] = "Add option to delete invoices into the system_defaults table";
-	$patch['135']['patch'] = "INSERT INTO `si_system_defaults` (`id`, `name`, `value`) VALUES 
-('', 'delete', 'N');";
-	$patch['135']['date'] = "2007083";
-	
-	
-	$patch['136']['name'] = "Set default language in new lang system";
-	$patch['136']['patch'] = "UPDATE `si_system_defaults` SET value = 'english_UK' where name ='language';";
-	$patch['136']['date'] = "200709";
-
-	$patch['137']['name'] = "Make tax field 3 decimal places";
-	$patch['137']['patch'] = "alter table `si_tax` change `tax_percentage` `tax_percentage` decimal (10,3)  NULL";
-	$patch['137']['date'] = "200710";
+	*/
 		
 
 /*
