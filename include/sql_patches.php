@@ -621,7 +621,8 @@ NULL , 'logging', '0'
 	$patch['122']['name'] = "System defaults conversion patch - set default paymemt type";
 	$patch['122']['patch'] = "UPDATE `si_system_defaults` SET value = $defaults[def_payment_type] where name = 'payment_type'";
 	$patch['122']['date'] = "20070523";
-	
+
+	//sept release 
 
 	$patch['123']['name'] = "Add option to delete invoices into the system_defaults table";
 	$patch['123']['patch'] = "INSERT INTO `si_system_defaults` (`id`, `name`, `value`) VALUES 
@@ -696,6 +697,8 @@ NULL , 'logging', '0'
 	$patch['131']['name'] = "Make tax field 3 decimal places";
 	$patch['131']['patch'] = "alter table `si_tax` change `tax_percentage` `tax_percentage` decimal (10,3)  NULL";
 	$patch['131']['date'] = "200709";
+	
+
 	
 	
 	
