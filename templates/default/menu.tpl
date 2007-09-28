@@ -1,5 +1,5 @@
 
-<div id="Header"><!--<h2 class="title_menu">Simple Invoices</h2>-->
+<div id="Header">
 		<ul class="adxm menu">
 			<li { if $pageActive == null} id="active" {/if}><a href="index.php">{$LANG.home}</a></li>
 			<li { if $pageActive == 'invoices'} id="active" {/if}><a href="index.php?module=invoices&view=manage">{$LANG.invoices} +</a>
@@ -95,7 +95,7 @@
 			<li  { if $pageActive == 'options'} id="active" {/if} ><a href="#">{$LANG.options} +</a>
 				<ul>
 					<li>
-						<a href="./index.php?module=system_defaults&view=manage">System {$LANG.preferences}</a>
+						<a href="./index.php?module=system_defaults&view=manage">{$LANG.system_preferences}</a>
 					</li>
 					<li>
 						<a href="./index.php?module=custom_fields&view=manage">{$LANG.custom_fields_upper}</a>
