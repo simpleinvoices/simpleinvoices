@@ -1,6 +1,6 @@
 <form name="frmpost" action="index.php?module=system_defaults&view=save" method="post" onsubmit="return frmpost_Validator(this)">
 
-		<b>LANG_TODO: System Preferences</b>
+		<b>{$LANG.system_preferences}</b>
  <hr></hr>
 
 <table align=center>
