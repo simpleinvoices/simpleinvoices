@@ -18,6 +18,16 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
 #all
 $title = "Simple Invoices";//1
 
+
+$LANG['delete'] = "Delete";//1
+$LANG['logging'] = "Logging";//1
+$LANG['language'] = "Language";//1
+$LANG['default_biller'] = "Default Biller";//1
+$LANG['default_customer'] = "Default Customer";//1
+$LANG['default_tax'] = "Default Tax";//1
+$LANG['default_invoice_preference'] = "Default Invoice Preference";//1
+$LANG['system_preferences'] = "System Preferences";//1
+
 $LANG['about'] = "About";//1
 $LANG['account_info'] = "Account Info";//1
 $LANG['actions'] = "Actions";//1
