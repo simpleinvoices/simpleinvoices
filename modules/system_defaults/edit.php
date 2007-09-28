@@ -264,7 +264,7 @@ EOD;
 
 	$dropDown .= "</select>";
 	$value = $dropDown;
-	$description = "LANG_TODO:Delete stuff {$LANG['delete']}";
+	$description = "{$LANG['delete']}";
 
 }
 
@@ -287,7 +287,7 @@ EOD;
 
 	$dropDown .= "</select>";
 
-	$description = "LANG_TODO: Logging";
+	$description = $LANG[logging];
 	$value = $dropDown;
 }
 
@@ -297,7 +297,8 @@ else if($_GET['submit'] == "language") {
 	$lang = getDefaultLanguage();
 	
 	usort($languages,"compareNameIndex");
-
+	
+	$description = $LANG[language];
 	//print_r($languages);
 	$value = "<select name='value'>";
 	foreach($languages as $language) {
