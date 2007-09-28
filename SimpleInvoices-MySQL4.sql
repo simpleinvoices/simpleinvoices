@@ -3,11 +3,11 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Generation Time: May 17, 2007 at 10:04 AM
+-- Generation Time: Sep 28, 2007 at 03:45 PM
 -- Server version: 5.0.27
 -- PHP Version: 5.2.1
 -- 
--- Database: `simple_invoices`
+-- Database: `simple_invoices_test`
 -- 
 
 -- --------------------------------------------------------
@@ -33,6 +33,22 @@ CREATE TABLE `si_account_payments` (
 INSERT INTO `si_account_payments` (`id`, `ac_inv_id`, `ac_amount`, `ac_notes`, `ac_date`, `ac_payment_type`) VALUES 
 (1, '1', 410.00, 'payment - cheque 14526', '2006-08-25 12:09:14', 1),
 (2, '4', 255.75, '', '2006-08-25 12:13:53', 1);
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `si_auth_challenges`
+-- 
+
+CREATE TABLE `si_auth_challenges` (
+  `challenges_key` int(11) NOT NULL,
+  `challenges_timestamp` timestamp NOT NULL
+) TYPE=MyISAM;
+
+-- 
+-- Dumping data for table `si_auth_challenges`
+-- 
+
 
 -- --------------------------------------------------------
 
@@ -201,7 +217,7 @@ CREATE TABLE `si_invoice_items` (
 INSERT INTO `si_invoice_items` (`id`, `invoice_id`, `quantity`, `product_id`, `unit_price`, `tax_id`, `tax`, `tax_amount`, `gross_total`, `description`, `total`) VALUES 
 (1, 1, 1, 1, 150.00, '1', 10.00, 15.00, 150.00, '00', 165.00),
 (2, 1, 2, 3, 125.00, '1', 10.00, 25.00, 250.00, '00', 275.00),
-(3, 2, 1, 0, 0.00, '3', 10.00, 14.50, 145.00, 'For ploughing services for the period 01 Jan - 01 Feb 2006', 159.50),
+(3, 2, 1, 6, 145.00, '3', 10.00, 14.50, 145.00, 'For ploughing services for the period 01 Jan - 01 Feb 2006', 159.50),
 (4, 3, 2, 2, 140.00, '1', 10.00, 28.00, 280.00, 'Accounting services - basic bookkeeping', 308.00),
 (5, 3, 1, 2, 140.00, '1', 10.00, 14.00, 140.00, 'Accounting services - tax return for 2005', 154.00),
 (6, 3, 2, 2, 140.00, '1', 10.00, 28.00, 280.00, 'Accounting serverice - general ledger work', 308.00),
@@ -281,15 +297,27 @@ INSERT INTO `si_invoices` (`id`, `biller_id`, `customer_id`, `type_id`, `prefere
 CREATE TABLE `si_log` (
   `id` bigint(20) NOT NULL auto_increment,
   `timestamp` timestamp NOT NULL,
-  `userid` int(11) NOT NULL,
+  `userid` varchar(40) NOT NULL default '0',
   `sqlquerie` text NOT NULL,
+  `last_id` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) TYPE=MyISAM  AUTO_INCREMENT=11 ;
 
 -- 
 -- Dumping data for table `si_log`
 -- 
 
+INSERT INTO `si_log` (`id`, `timestamp`, `userid`, `sqlquerie`, `last_id`) VALUES 
+(1, '2007-09-28 15:41:20', '1', 'ALTER TABLE `si_log` ADD `last_id` INT NULL ;', 0),
+(2, '2007-09-28 15:41:20', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (127,''Add last_id to logging table'',200709,''ALTER TABLE `si_log` ADD `last_id` INT NULL ;'')', 128),
+(3, '2007-09-28 15:41:20', '1', 'CREATE TABLE IF NOT EXISTS `si_users` ( `user_id` int(11) NOT NULL auto_increment, `user_email` varchar(255) NOT NULL, `user_name` varchar(255) NOT NULL, `user_group` varchar(255) NOT NULL, `user_domain` varchar(255) NOT NULL, `user_password` varchar(255) NOT NULL, PRIMARY KEY (`user_id`) ) ;', 0),
+(4, '2007-09-28 15:41:20', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (128,''Add si_user table'',200709,''CREATE TABLE IF NOT EXISTS `si_users` ( `user_id` int(11) NOT NULL auto_increment, `user_email` varchar(255) NOT NULL, `user_name` varchar(255) NOT NULL, `user_group` varchar(255) NOT NULL, `user_domain` varchar(255) NOT NULL, `user_password` varchar(255) NOT NULL, PRIMARY KEY (`user_id`) ) ;'')', 129),
+(5, '2007-09-28 15:41:20', '1', 'INSERT INTO `si_users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`) VALUES ('''', ''demo@simpleinvoices.org'', ''guest'', ''1'', ''1'', MD5(''demo''))', 1),
+(6, '2007-09-28 15:41:20', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (129,''Fill si_user table with default values'',200709,''INSERT INTO `si_users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`) VALUES (\\''\\'', \\''demo@simpleinvoices.org\\'', \\''guest\\'', \\''1\\'', \\''1\\'', MD5(\\''demo\\''))'')', 130),
+(7, '2007-09-28 15:41:20', '1', 'CREATE TABLE IF NOT EXISTS `si_auth_challenges` ( `challenges_key` int(11) NOT NULL, `challenges_timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);', 0),
+(8, '2007-09-28 15:41:20', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (130,''Create si_auth_challenges table'',200709,''CREATE TABLE IF NOT EXISTS `si_auth_challenges` ( `challenges_key` int(11) NOT NULL, `challenges_timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);'')', 131),
+(9, '2007-09-28 15:41:20', '1', 'alter table `si_tax` change `tax_percentage` `tax_percentage` decimal (10,3) NULL', 0),
+(10, '2007-09-28 15:41:20', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (131,''Make tax field 3 decimal places'',200709,''alter table `si_tax` change `tax_percentage` `tax_percentage` decimal (10,3) NULL'')', 132);
 
 -- --------------------------------------------------------
 
@@ -362,19 +390,21 @@ CREATE TABLE `si_products` (
   `custom_field4` varchar(255) default NULL,
   `notes` text NOT NULL,
   `enabled` varchar(1) NOT NULL default '1',
+  `visible` tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM  AUTO_INCREMENT=6 ;
+) TYPE=MyISAM  AUTO_INCREMENT=7 ;
 
 -- 
 -- Dumping data for table `si_products`
 -- 
 
-INSERT INTO `si_products` (`id`, `description`, `unit_price`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`) VALUES 
-(1, 'IBM Netfinity 5000', 150.00, NULL, NULL, NULL, NULL, '', '1'),
-(2, 'Accouting services - Barney Gumball (hours)', 140.00, 'CVF1', '', '', '', '', '1'),
-(3, 'Weekly ploughing service', 125.00, NULL, NULL, NULL, NULL, '', '1'),
-(4, 'Bootleg homebrew', 15.50, NULL, NULL, NULL, NULL, '', '1'),
-(5, 'Accomadation', 125.00, NULL, NULL, NULL, NULL, '', '1');
+INSERT INTO `si_products` (`id`, `description`, `unit_price`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`) VALUES 
+(1, 'IBM Netfinity 5000', 150.00, NULL, NULL, NULL, NULL, '', '1', 1),
+(2, 'Accouting services - Barney Gumball (hours)', 140.00, 'CVF1', '', '', '', '', '1', 1),
+(3, 'Weekly ploughing service', 125.00, NULL, NULL, NULL, NULL, '', '1', 1),
+(4, 'Bootleg homebrew', 15.50, NULL, NULL, NULL, NULL, '', '1', 1),
+(5, 'Accomadation', 125.00, NULL, NULL, NULL, NULL, '', '1', 1),
+(6, 'For ploughing services for the period 01 Jan - 01 Feb 2006', 145.00, NULL, NULL, NULL, NULL, '', '0', 0);
 
 -- --------------------------------------------------------
 
@@ -389,7 +419,7 @@ CREATE TABLE `si_sql_patchmanager` (
   `sql_release` varchar(25) NOT NULL default '',
   `sql_statement` text NOT NULL,
   PRIMARY KEY  (`sql_id`)
-) TYPE=MyISAM  AUTO_INCREMENT=124 ;
+) TYPE=MyISAM  AUTO_INCREMENT=133 ;
 
 -- 
 -- Dumping data for table `si_sql_patchmanager`
@@ -518,7 +548,16 @@ INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_
 (120, '119', 'System defaults conversion patch - set default invoice preference', '20070507', ''),
 (121, '120', 'System defaults conversion patch - set default number of line items', '20070507', ''),
 (122, '121', 'System defaults conversion patch - set default invoice template', '20070507', ''),
-(123, '122', 'System defaults conversion patch - set default paymemt type', '20070507', '');
+(123, '122', 'System defaults conversion patch - set default paymemt type', '20070507', ''),
+(124, '123', 'Add option to delete invoices into the system_defaults table', '200709', 'INSERT INTO `si_system_defaults` (`id`, `name`, `value`) VALUES \n('''', ''delete'', ''N'');'),
+(125, '124', 'Set default language in new lang system', '200709', 'UPDATE `si_system_defaults` SET value = ''en-gb'' where name =''language'';'),
+(126, '125', 'Change log table that usernames are also possible as id', '200709', 'ALTER TABLE `si_log` CHANGE `userid` `userid` VARCHAR( 40 ) NOT NULL DEFAULT ''0'''),
+(127, '126', 'Add visible attribute to the products table', '200709', 'ALTER TABLE  `si_products` ADD  `visible` BOOL NOT NULL DEFAULT  ''1'';'),
+(128, '127', 'Add last_id to logging table', '200709', 'ALTER TABLE  `si_log` ADD  `last_id` INT NULL ;'),
+(129, '128', 'Add si_user table', '200709', 'CREATE TABLE IF NOT EXISTS `si_users` (\n			`user_id` int(11) NOT NULL auto_increment,\n			`user_email` varchar(255) NOT NULL,\n			`user_name` varchar(255) NOT NULL,\n			`user_group` varchar(255) NOT NULL,\n			`user_domain` varchar(255) NOT NULL,\n			`user_password` varchar(255) NOT NULL,\n			PRIMARY KEY  (`user_id`)\n			) ;'),
+(130, '129', 'Fill si_user table with default values', '200709', 'INSERT INTO `si_users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`) VALUES \n('''', ''demo@simpleinvoices.org'', ''guest'', ''1'', ''1'', MD5(''demo''))'),
+(131, '130', 'Create si_auth_challenges table', '200709', 'CREATE TABLE IF NOT EXISTS `si_auth_challenges` (\n				`challenges_key` int(11) NOT NULL,\n				`challenges_timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);'),
+(132, '131', 'Make tax field 3 decimal places', '200709', 'alter table `si_tax` change `tax_percentage` `tax_percentage` decimal (10,3)  NULL');
 
 -- --------------------------------------------------------
 
@@ -532,7 +571,7 @@ CREATE TABLE `si_system_defaults` (
   `value` varchar(30) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
-) TYPE=InnoDB AUTO_INCREMENT=22 ;
+) TYPE=MyISAM AUTO_INCREMENT=23 ;
 
 -- 
 -- Dumping data for table `si_system_defaults`
@@ -546,7 +585,7 @@ INSERT INTO `si_system_defaults` (`id`, `name`, `value`) VALUES
 (5, 'line_items', '5'),
 (6, 'template', 'default'),
 (7, 'payment_type', '1'),
-(8, 'language', 'en'),
+(8, 'language', 'en-gb'),
 (9, 'dateformat', 'Y-m-d'),
 (10, 'spreadsheet', 'xls'),
 (11, 'wordprocessor', 'doc'),
@@ -559,7 +598,8 @@ INSERT INTO `si_system_defaults` (`id`, `name`, `value`) VALUES
 (18, 'emailhost', 'localhost'),
 (19, 'emailusername', ''),
 (20, 'emailpassword', ''),
-(21, 'logging', '0');
+(21, 'logging', '0'),
+(22, 'delete', 'N');
 
 -- --------------------------------------------------------
 
@@ -570,7 +610,7 @@ INSERT INTO `si_system_defaults` (`id`, `name`, `value`) VALUES
 CREATE TABLE `si_tax` (
   `tax_id` int(11) NOT NULL auto_increment,
   `tax_description` varchar(50) default NULL,
-  `tax_percentage` decimal(10,2) default NULL,
+  `tax_percentage` decimal(10,3) default NULL,
   `tax_enabled` varchar(1) NOT NULL default '1',
   PRIMARY KEY  (`tax_id`)
 ) TYPE=MyISAM  AUTO_INCREMENT=8 ;
@@ -580,10 +620,33 @@ CREATE TABLE `si_tax` (
 -- 
 
 INSERT INTO `si_tax` (`tax_id`, `tax_description`, `tax_percentage`, `tax_enabled`) VALUES 
-(1, 'GST (AUS)', 10.00, '1'),
-(2, 'VAT (UK)', 10.00, '1'),
-(3, 'Sales Tax (USA)', 10.00, '1'),
-(4, 'GST (NZ)', 12.50, '1'),
-(5, 'No Tax', 0.00, '1'),
-(6, 'IVA', 20.00, '1'),
-(7, 'MWSt (DE)', 16.00, '1');
+(1, 'GST (AUS)', 10.000, '1'),
+(2, 'VAT (UK)', 10.000, '1'),
+(3, 'Sales Tax (USA)', 10.000, '1'),
+(4, 'GST (NZ)', 12.500, '1'),
+(5, 'No Tax', 0.000, '1'),
+(6, 'IVA', 20.000, '1'),
+(7, 'MWSt (DE)', 16.000, '1');
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `si_users`
+-- 
+
+CREATE TABLE `si_users` (
+  `user_id` int(11) NOT NULL auto_increment,
+  `user_email` varchar(255) NOT NULL,
+  `user_name` varchar(255) NOT NULL,
+  `user_group` varchar(255) NOT NULL,
+  `user_domain` varchar(255) NOT NULL,
+  `user_password` varchar(255) NOT NULL,
+  PRIMARY KEY  (`user_id`)
+) TYPE=MyISAM AUTO_INCREMENT=2 ;
+
+-- 
+-- Dumping data for table `si_users`
+-- 
+
+INSERT INTO `si_users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`) VALUES 
+(1, 'demo@simpleinvoices.org', 'demo', '1', '1', 'fe01ce2a7fbac8fafaed7c982a04e229');
