@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Generation Time: Sep 28, 2007 at 03:42 PM
+-- Generation Time: Sep 28, 2007 at 03:45 PM
 -- Server version: 5.0.27
 -- PHP Version: 5.2.1
 -- 
@@ -18,13 +18,13 @@
 
 CREATE TABLE `si_account_payments` (
   `id` int(10) NOT NULL auto_increment,
-  `ac_inv_id` varchar(10) collate utf8_unicode_ci NOT NULL,
+  `ac_inv_id` varchar(10) NOT NULL,
   `ac_amount` double(25,2) NOT NULL,
-  `ac_notes` text collate utf8_unicode_ci NOT NULL,
+  `ac_notes` text NOT NULL,
   `ac_date` datetime NOT NULL,
   `ac_payment_type` int(10) NOT NULL default '1',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) TYPE=MyISAM  AUTO_INCREMENT=3 ;
 
 -- 
 -- Dumping data for table `si_account_payments`
@@ -42,8 +42,8 @@ INSERT INTO `si_account_payments` (`id`, `ac_inv_id`, `ac_amount`, `ac_notes`, `
 
 CREATE TABLE `si_auth_challenges` (
   `challenges_key` int(11) NOT NULL,
-  `challenges_timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `challenges_timestamp` timestamp NOT NULL
+) TYPE=MyISAM;
 
 -- 
 -- Dumping data for table `si_auth_challenges`
@@ -78,7 +78,7 @@ CREATE TABLE `si_biller` (
   `custom_field4` varchar(255) default NULL,
   `enabled` varchar(1) NOT NULL default '1',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) TYPE=MyISAM  AUTO_INCREMENT=5 ;
 
 -- 
 -- Dumping data for table `si_biller`
@@ -98,11 +98,11 @@ INSERT INTO `si_biller` (`id`, `name`, `street_address`, `street_address2`, `cit
 
 CREATE TABLE `si_custom_fields` (
   `cf_id` int(11) NOT NULL auto_increment,
-  `cf_custom_field` varchar(255) collate utf8_unicode_ci default NULL,
-  `cf_custom_label` varchar(255) collate utf8_unicode_ci default NULL,
-  `cf_display` varchar(1) collate utf8_unicode_ci NOT NULL default '1',
+  `cf_custom_field` varchar(255) default NULL,
+  `cf_custom_label` varchar(255) default NULL,
+  `cf_display` varchar(1) NOT NULL default '1',
   PRIMARY KEY  (`cf_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
+) TYPE=MyISAM  AUTO_INCREMENT=17 ;
 
 -- 
 -- Dumping data for table `si_custom_fields`
@@ -153,7 +153,7 @@ CREATE TABLE `si_customers` (
   `custom_field4` varchar(255) default NULL,
   `enabled` varchar(1) NOT NULL default '1',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) TYPE=MyISAM  AUTO_INCREMENT=4 ;
 
 -- 
 -- Dumping data for table `si_customers`
@@ -180,7 +180,7 @@ CREATE TABLE `si_defaults` (
   `def_inv_template` varchar(50) NOT NULL default 'default',
   `def_payment_type` varchar(25) default '1',
   PRIMARY KEY  (`def_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) TYPE=MyISAM  AUTO_INCREMENT=3 ;
 
 -- 
 -- Dumping data for table `si_defaults`
@@ -208,7 +208,7 @@ CREATE TABLE `si_invoice_items` (
   `description` text,
   `total` double(25,2) default '0.00',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+) TYPE=MyISAM  AUTO_INCREMENT=17 ;
 
 -- 
 -- Dumping data for table `si_invoice_items`
@@ -242,7 +242,7 @@ CREATE TABLE `si_invoice_type` (
   `inv_ty_id` int(11) NOT NULL auto_increment,
   `inv_ty_description` varchar(25) NOT NULL default '',
   PRIMARY KEY  (`inv_ty_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) TYPE=MyISAM  AUTO_INCREMENT=4 ;
 
 -- 
 -- Dumping data for table `si_invoice_type`
@@ -272,7 +272,7 @@ CREATE TABLE `si_invoices` (
   `custom_field4` varchar(50) default NULL,
   `note` text,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) TYPE=MyISAM  AUTO_INCREMENT=9 ;
 
 -- 
 -- Dumping data for table `si_invoices`
@@ -296,12 +296,12 @@ INSERT INTO `si_invoices` (`id`, `biller_id`, `customer_id`, `type_id`, `prefere
 
 CREATE TABLE `si_log` (
   `id` bigint(20) NOT NULL auto_increment,
-  `timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  `timestamp` timestamp NOT NULL,
   `userid` varchar(40) NOT NULL default '0',
   `sqlquerie` text NOT NULL,
   `last_id` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) TYPE=MyISAM  AUTO_INCREMENT=11 ;
 
 -- 
 -- Dumping data for table `si_log`
@@ -327,10 +327,10 @@ INSERT INTO `si_log` (`id`, `timestamp`, `userid`, `sqlquerie`, `last_id`) VALUE
 
 CREATE TABLE `si_payment_types` (
   `pt_id` int(10) NOT NULL auto_increment,
-  `pt_description` varchar(250) collate utf8_unicode_ci NOT NULL,
-  `pt_enabled` varchar(1) collate utf8_unicode_ci NOT NULL default '1',
+  `pt_description` varchar(250) NOT NULL,
+  `pt_enabled` varchar(1) NOT NULL default '1',
   PRIMARY KEY  (`pt_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) TYPE=MyISAM  AUTO_INCREMENT=3 ;
 
 -- 
 -- Dumping data for table `si_payment_types`
@@ -361,7 +361,7 @@ CREATE TABLE `si_preferences` (
   `pref_inv_payment_line2_value` varchar(50) default NULL,
   `pref_enabled` varchar(1) NOT NULL default '1',
   PRIMARY KEY  (`pref_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) TYPE=MyISAM  AUTO_INCREMENT=6 ;
 
 -- 
 -- Dumping data for table `si_preferences`
@@ -392,7 +392,7 @@ CREATE TABLE `si_products` (
   `enabled` varchar(1) NOT NULL default '1',
   `visible` tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) TYPE=MyISAM  AUTO_INCREMENT=7 ;
 
 -- 
 -- Dumping data for table `si_products`
@@ -419,7 +419,7 @@ CREATE TABLE `si_sql_patchmanager` (
   `sql_release` varchar(25) NOT NULL default '',
   `sql_statement` text NOT NULL,
   PRIMARY KEY  (`sql_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=133 ;
+) TYPE=MyISAM  AUTO_INCREMENT=133 ;
 
 -- 
 -- Dumping data for table `si_sql_patchmanager`
@@ -571,7 +571,7 @@ CREATE TABLE `si_system_defaults` (
   `value` varchar(30) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+) TYPE=MyISAM AUTO_INCREMENT=23 ;
 
 -- 
 -- Dumping data for table `si_system_defaults`
@@ -613,7 +613,7 @@ CREATE TABLE `si_tax` (
   `tax_percentage` decimal(10,3) default NULL,
   `tax_enabled` varchar(1) NOT NULL default '1',
   PRIMARY KEY  (`tax_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) TYPE=MyISAM  AUTO_INCREMENT=8 ;
 
 -- 
 -- Dumping data for table `si_tax`
@@ -642,7 +642,7 @@ CREATE TABLE `si_users` (
   `user_domain` varchar(255) NOT NULL,
   `user_password` varchar(255) NOT NULL,
   PRIMARY KEY  (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) TYPE=MyISAM AUTO_INCREMENT=2 ;
 
 -- 
 -- Dumping data for table `si_users`
