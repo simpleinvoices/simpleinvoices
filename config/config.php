@@ -13,7 +13,6 @@ $authenticationOn = "false";
 
 //if you are using a .httaccess file
 $http_auth = "";	//value: "name:password@"
-$httpPort=""; // ":7653" - if you have apache running on a non standard port add it so so PDFs work
 
 //$tb_prefix = "si_";
 define("TB_PREFIX","si_");
@@ -34,7 +33,7 @@ $MD5Auth = True; /*To turn of md5 auth set $MD5Auth to True*/
 $ChallengeLife = 0; /*To turn off ChallengeLife set this to 0 */
 
 
-$version = "200710 unstable";
+$version = "200711 unstable";
 
 $config['date_format']  = 'Y-m-d'; #International format just the date
 #$config['date_format']  = 'Y-m-d h:m'; #Internalional format date and time 
