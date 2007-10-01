@@ -6,7 +6,7 @@
 {if $smarty.get.action== 'view' }
 
 	<b>{$LANG.products} ::
-	<a href="index.php?module=products&view=details&idt={$product.id}&action=edit">{$LANG.edit}</a></b>
+	<a href="index.php?module=products&view=details&id={$product.id}&action=edit">{$LANG.edit}</a></b>
 	
  	<hr></hr>
 
