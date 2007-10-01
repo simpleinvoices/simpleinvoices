@@ -1,0 +1,90 @@
+<html>
+<head>
+<title>html2ps/html2pdf requirements</title>
+<link rel="stylesheet" type="text/css" medial="all" title="Default" href="css/help.css"/>
+</head>
+<body>
+<h1>html2ps/pdf requirements</h1>
+<p><a href="index.html">Back to table of contents</a></p>
+
+<h2>Required:</h2>
+<ol>
+<li>PHP 4.1.0 or newer (PHP 5 is supported)</li>
+<li>
+native PHP <a href="http://php.net/manual/en/ref.domxml.php" title="DOM XML documentation and installation instructions">DOM XML</a> 
+<em>OR</em> 
+<a href="http://www.active-link.com/software/" title="Active-Link DOM XML download page">Active-Link DOM XML</a> extension installed</li>
+
+<li>
+<a href="http://php.net/manual/en/ref.image.php" title="PHP image functions documentation">GD PHP Image Extension</a>, version 2.0.28 or newer. 
+Note that you <em>may</em> use GD starting with version 2.0.1, but you will lack GIF support.</li>
+</ol>
+<p> If your system satisfies this requirements, you will be able to generate <em>uncompressed</em> 
+  Postscript files. Use <a href="http://www.cs.wisc.edu/~ghost/" title="More about GhostView">GhostView</a> 
+  or any other Postscript viewer to view/print these files. Note that <em>Acrobat 
+  Reader cannot read Poscript files!</em>
+<p>
+Also, use native DOM XML PHP extension if possible. 
+
+<h2>Highly recommended:</h2>
+<ol>
+  <li><a href="http://php.net/manual/en/ref.zlib.php" title="Zlib documentation and installation instructions">Zlib</a> 
+    PHP extension -- allows compressed Postscript file generation. Compression 
+    greatly reduces the generated file size, up to 5-7 times, saving significant 
+    bandwidth.</li>
+  <li><a href="http://www.cs.wisc.edu/~ghost/" title="Ghostscript download page">Ghostscript</a> 
+    version 7.05 or newer -- allows generation of PDF files (strictly speaking, 
+    script generates Postscript file, then converts it to PDF using Ghostscript). 
+    <em>Please note that you'll need to have the ghostscript fonts package intalled 
+    in order for this conversion to work!</em>. Also, keep in mind that Ghostscript 
+    is an external program, so you'll need to have the <em>exec function enabled</em> 
+    in your PHP configuration; if you're using PHP in safe mode, it is probably 
+    disabled. It might be disabled even if safe mode is not in use. Please check 
+    with your system administrator regarding the availability of the <i>exec</i> 
+    function. </li>
+  <li><a href="http://php.net/manual/en/ref.pdf.php" title="PDFLIB PHP extension documentation and installation instructions">PDFLIB</a> 
+    -- allows direct PDF generation; in general, PDF files generated via PDFLIB 
+    have better image quality and renders a little bit faster than PDFs created 
+    using Ghostscript. Nevertheless, PDFLIB is a non-free library, so you'll probably 
+    will need to buy a license for it.</li>
+
+</ol>
+<p>If your system satisfies this requirements, you will be able to generated both 
+  Postscript and PDF files.
+<p>Note: You can choose either Ghostscript or PDFLIB (or both). Only one of these 
+  packages is needed for PDF generation. Another option is to use the FPdf libraries, 
+  which are bundled with html2ps/pdf. Using this method to generate PDFs is slower, 
+  but does not require external libraries.
+<h2>Recommended:</h2>
+<ol>
+  <li><a href="http://ru.php.net/manual/en/ref.iconv.php" title="Iconv documentation and installation instructions">iconv</a> 
+    PHP extension -- allows faster and more stable HTML page conversion from different 
+    charsets (you can ignore this requirement if the pages you're working with 
+    do not contain non-iso-8859-1 symbols -- central european or cyrillic, for 
+    example)</li>
+</ol>
+<p>Systems satisfying these recommended requirements will have a minor boost in 
+  conversion speed. 
+<h2>Recommended PHP configuration settings:</h2>
+<ol>
+<li>PHP Memory limit should be set to 32-62 megabytes;</li>
+<li>PHP Script time execution limit should be set to 2-3 minutes;</li>
+</ol>
+<p>Systems NOT satisfying these requirements MAY be not able to process complicated 
+  pages with big images. The exact values of these variables should be determined 
+  experimentally (trial and error).</p>
+
+<h2>Client-side software:</h2>
+<ol>
+  <li> <a href="http://www.cs.wisc.edu/~ghost/" title="Ghostscript download page">Ghostscript</a> 
+    version 7.05 or newer and <a href="http://www.cs.wisc.edu/~ghost/" title="GSView download page">GSView</a> 
+    -- to view generated compressed and uncompressed files and to convert them 
+    to PDF on the client side.</li>
+  <li> <a href="http://www.adobe.com/products/acrobat/matrix.html" title="Adobe Acrobat download page">Adobe 
+    Acrobat Distiller</a> -- to convert Postscript files to PDF on the client 
+    size (Ghostscript alternative). </li>
+  <li> <a href="http://www.adobe.com/products/acrobat/readstep2.html" title="Adobe Acrobar Reader download page">Adobe 
+    Acrobat Reader</a> -- to view PDF files.</li>
+</ol>
+</body>
+</html>              

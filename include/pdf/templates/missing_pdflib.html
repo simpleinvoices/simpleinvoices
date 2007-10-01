@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>html2ps/html2pdf error message</title>
+<style>
+body {
+  color:#000;
+  background-color:#fff;
+  margin:10px;
+  font-family:arial, helvetica, sans-serif;
+  color:#000;
+  font-size:12px;
+  line-height:18px;
+}
+p,td {
+  color:#000;
+  font-size:12px;
+  line-height:18px;
+  margin-top:3px;
+  vertical-align: top;
+}
+h1 {
+  font-family:arial, helvetica, sans-serif;
+  color:#669;
+  font-size:27px;
+  letter-spacing:-1px;
+  margin-top:12px;
+  margin-bottom:12px;
+}
+tr.odd {
+  background-color: #f0f0f0;
+}
+tr.even {
+  background-color: #ffffff;
+}
+td {
+  padding: 3px;
+}
+</style>
+</head>
+<body>
+<h1>Error</h1>
+<p>
+PDFLIB PHP extension not found. You will not be able to generate PDF using 'PDFLIB' output method, as 
+it requires PDFLIB PHP extension.
+<p>
+<table>
+<tr class="odd"> 
+<th width="20%">Problem</th><th>Solution</th>
+</tr>
+<tr class="even">
+<td rowspan="2">PDFLIB extension not installed on your computer</td>
+<td>Install PDFLIB extension yourself or ask your system administrator. Note that this extension can be loaded dynamically if 
+your PHP configuration allows it.</td>
+</tr>
+<tr class="odd">
+<td>Try using another PDF output methods</td>
+</tr>
+<tr class="even">
+<td>
+You have PDFLIB extension, but it is not loaded dynamically; you're getting warning message 
+"<tt>Warning: dl(): Not supported in multithreaded Web servers - use extension statements in your php.ini in ...</tt>" 
+</td>
+<td>
+You're using multithreaded Web server; in this case you should either add PDF extension to php.ini to be loaded statically, or 
+switch to CGI version of PHP (or possibly change your HTTP server, if possible).
+</td>
+</tr>
+<tr class="odd">
+<td rowspan="2">
+You have PDFLIB extension, but it is not loaded dynamically. No specific warning messages.</tt>" 
+</td>
+<td>
+Probably you have non-standard name of this extension; by default, the script searches for 'php_pdf.dll' on Windows and 
+'pdflib.so' on *nix. Check if your extension have the same name.
+</td>
+</tr>
+<tr class="even">
+<td>
+You have PDFLIB PHP interface, but PDFLIB is missing or placed into directory where system cannot locate it; 
+check if you have both parts of the PDFLIB package.
+</td>
+</tr>
+</table>
+</body>
+</html>              

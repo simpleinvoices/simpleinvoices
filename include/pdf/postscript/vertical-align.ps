@@ -1,0 +1,93 @@
+% $Header: /cvsroot/html2ps/postscript/vertical-align.ps,v 1.1 2005/12/18 07:21:39 Konstantin Exp $
+
+/vertical-align-text-top {
+} def
+
+/vertical-align-text-bottom {
+  1 index get-line-baseline neg
+  1 index get-baseline            % => Parent Child MaxBaseline Baseline
+
+  2 copy ge {
+    pop 
+    1 index put-baseline
+  } {
+    sub 
+    2 index get-line
+    { 
+      dup get-baseline
+      2 index sub
+      exch put-baseline 
+    } forall
+    2 index get-line-baseline
+    add
+    2 index put-line-baseline     % => Parent Child
+  } ifelse 
+} def
+
+/vertical-align-super {
+  dup get-baseline 2 div
+  1 index put-baseline
+} def
+
+/vertical-align-sub {
+  1 index get-line-baseline neg
+  1 index get-baseline
+  2 div
+  add
+  1 index put-baseline
+} def
+/vertical-align-top {
+} def
+/vertical-align-middle {
+  vertical-align-baseline
+
+  dup get-default-baseline
+  1 index get-baseline
+  sub 2 div 
+
+  1 index get-baseline
+  add  
+  1 index put-baseline
+} def
+
+% TODO:
+/vertical-align-bottom {
+  1 index get-line-baseline neg
+  1 index get-baseline            % => Parent Child MaxBaseline Baseline
+
+  2 copy ge {
+    pop 
+    1 index put-baseline
+  } {
+    sub 
+    2 index get-line
+    { 
+      dup get-baseline
+      2 index sub
+      exch put-baseline 
+    } forall
+    2 index get-line-baseline
+    add
+    2 index put-line-baseline     % => Parent Child
+  } ifelse 
+} def
+/vertical-align-baseline {         % => Parent Child
+  1 index get-line-baseline neg
+  1 index get-baseline             % => Parent Child MaxBaseline Baseline
+
+  2 copy ge {
+    pop 
+    1 index put-baseline
+  } {
+    sub 
+    2 index get-line
+    { 
+      dup get-baseline
+      2 index sub
+      exch put-baseline 
+    } forall
+    2 index get-line-baseline
+    add
+    2 index put-line-baseline     % => Parent Child
+  } ifelse 
+} def

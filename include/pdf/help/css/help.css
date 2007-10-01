@@ -1,0 +1,127 @@
+body {
+  color:#000;
+  background-color:#fff;
+  margin:10px;
+  font-family:arial, helvetica, sans-serif;
+  color:#000;
+  font-size:12px;
+  line-height:18px;
+}
+
+p, td {
+  color:#000;
+  font-size:12px;
+  line-height:18px;
+  margin-top:12px;
+  margin-bottom:12px;
+}
+
+h1 {
+  font-family:arial, helvetica, sans-serif;
+  color:#669;
+  font-size:27px;
+  letter-spacing:-1px;
+  margin-top:12px;
+  margin-bottom:12px;
+}
+
+h2 {
+  font-family:arial, helvetica, sans-serif;
+  color:#669;
+  font-size:18px;
+  letter-spacing:-1px;
+  margin-top:12px;
+  margin-bottom:12px;
+}
+
+input,textarea,select {
+  background-color:#eeeeee;
+  border: 1px solid #045564;
+}
+
+img {
+  border:0px;
+}
+
+fieldset {
+  border: #26a solid 1px;
+  margin-left:10px;
+  padding-bottom:0px;
+  padding-top:0px;
+  margin-top:10px;
+}
+
+legend {
+  background: #eee;
+  border: #26a solid 1px;
+  padding: 1px 10px;
+  font-weight:bold;
+}
+
+.submit {
+  background-color:#669;
+  color:#fff;
+}
+
+.nulinp {
+  border:0px;
+  background-color:#fff;
+}
+
+.hand {
+  cursor: pointer;
+}
+
+li ol { 
+  list-style-type: lower-latin;
+}
+
+caption { 
+  text-align: left;
+  font-size: small;
+}
+
+tr.odd {
+  background-color: #f0f0f0;
+}
+
+tr.even {
+  background-color: #ffffff;
+}
+
+td, th {
+  padding: 3px;
+}
+
+.description_table { 
+  width: 100%;
+}
+
+.description_table td { 
+  vertical-align: top;
+}
+
+dt { 
+  font-weight: bold; 
+  margin-top: 2ex; 
+  margin-bottom: 1ex; 
+}
+
+dd { 
+  margin-top: 1ex; 
+  margin-bottom: 2ex; 
+}
+
+.added { 
+  margin-left: 1em;
+  border-top: solid 1px #fcc;
+  border-bottom: solid 1px #fcc;
+}
+
+.when { 
+  background-color: #ddd;
+}
+
+td.yesno { 
+  text-align: center;
+}

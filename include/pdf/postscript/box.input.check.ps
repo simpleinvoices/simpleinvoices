@@ -1,0 +1,63 @@
+% $Header: /cvsroot/html2ps/postscript/box.input.check.ps,v 1.1 2005/12/18 07:21:37 Konstantin Exp $
+
+/show-checked-check-box {
+% render empty (unchecked) radio button
+  show-check-box
+  
+% Get check center coordinates 
+  dup get-left
+  1 index get-right
+  add 2 div
+
+  1 index get-top
+  2 index get-bottom
+  add 2 div                        % => CX CY
+
+% calculate check box size
+  2 index get-width
+  6 div                            % => CX CY R
+
+  2 index 1 index sub              % => CX CY R L
+  2 index 2 index sub              % => CX CY R L T
+  2 index 2 mul dup                % => CX CY R L T H W
+  
+% render the checkmark (cross)
+  0.5 setlinewidth
+
+% / cross part
+  4 copy
+  4 2 roll
+  newpath moveto rlineto stroke
+
+% \ cross part
+  neg
+  4 2 roll 2 index sub
+  newpath moveto rlineto stroke
+
+  pop pop pop
+} def
+
+/show-check-box {
+% Get check center coordinates 
+  dup get-left
+  1 index get-right
+  add 2 div
+
+  1 index get-top
+  2 index get-bottom
+  add 2 div                        % => CX CY
+
+% calculate check box size
+  2 index get-width
+  3 div                            % => CX CY R
+
+  2 index 1 index sub              % => CX CY R L
+  2 index 2 index sub              % => CX CY R L T
+  2 index 2 mul dup                % => CX CY R L T H W
+  
+% render the empty (unchecked) radio button
+  0.25 setlinewidth 
+  rectstroke
+
+  pop pop pop
+} def

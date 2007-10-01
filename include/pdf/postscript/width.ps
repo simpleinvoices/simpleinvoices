@@ -1,0 +1,61 @@
+% $Header: /cvsroot/html2ps/postscript/width.ps,v 1.1 2005/12/18 07:21:39 Konstantin Exp $
+
+/wc-apply {                        % => PW CW WC
+  dup /apply get exec
+} def
+
+/wc-create-constant {              % => Value
+  <<
+    /type  /constant
+    /value 4 index
+    /apply {                       % => ... PW CW This
+      /value get
+      exch pop
+      exch pop
+    }
+    /apply-inverse {
+      pop pop
+    } 
+  >>
+  
+  exch pop
+} def
+
+/wc-create-fraction {              % => Value
+  <<
+    /type /fraction
+    /fraction 4 index
+    /apply {                       % => ... PW CW This
+      /fraction get
+      exch pop
+      mul
+    }
+    /apply-inverse {               % => ... PW CW This
+      /fraction get
+      dup 0 gt {
+        div exch pop
+      } {
+        pop pop pop 0
+      } ifelse
+    } 
+  >>
+
+  exch pop
+} def
+
+/wc-create-none {
+  <<
+    /type /none
+    /apply {                       % => ... PW CW This
+      pop
+      exch pop                     % => ... CW
+    }
+    /apply-inverse {
+      pop pop
+    } 
+  >>
+} def
+
+/wc-is-fraction {                  % => WC
+  /type get /fraction eq
+} def

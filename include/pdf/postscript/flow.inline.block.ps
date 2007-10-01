@@ -1,0 +1,57 @@
+% $Header: /cvsroot/html2ps/postscript/flow.inline.block.ps,v 1.1 2005/12/18 07:21:38 Konstantin Exp $
+
+/flow-inline-block {
+% inline-block margins are never collapsed
+% While drawing, we need position of margin edge, not border edge.
+  1 index get-current-x
+  2 index get-current-y            % => Parent Child X Y
+  2 index
+  move-to-box                      % => Parent Child
+
+  2 copy inline-block-calc-width
+  
+% we're now interested in last content y, not the bottom border of the containing
+% block, because, due the min-height, bottom border can contain lesser (lower on the page)
+% value than current y
+  dup get-right
+  2 index put-current-x
+
+% determine the baseline of inline-block box
+  {
+    get-baseline max
+  }
+  0
+  2 index get-content
+  reduce
+% now we have text baseline counted from the padding edge;
+% add padding, margin and border size on the top size of inline-block box to
+% calculate its own baseline
+  1 index get-margin-top add
+  1 index get-padding-top add
+  1 index get-border-top-width add
+
+  1 index put-baseline
+
+  dup get-vertical-align exec
+
+% do horizontal align
+% treat inline-block content as one long line box
+  dup get-content {               % => Parent Box ContentElement
+    1 index append-line
+  } forall
+
+  dup get-text-align             
+  1 index exch                   
+  exec                           
+  
+% append current box to the parent's line box
+  dup 2 index append-line 
+
+  dup get-full-height
+  2 index exch
+  extend-height                 % => Parent
+  pop
+
+% clear the stack
+  pop pop
+} def

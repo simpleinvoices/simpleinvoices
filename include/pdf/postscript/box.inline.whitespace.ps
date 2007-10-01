@@ -1,0 +1,76 @@
+% $Header: /cvsroot/html2ps/postscript/box.inline.whitespace.ps,v 1.1 2005/12/18 07:21:36 Konstantin Exp $
+
+% Whitespace flow control function. Do nothing if whitespace is at the beginning of the line box
+% make a inline box containining space symbol otherwise. 
+/flow-whitespace {                 % => Parent Child
+  1 index get-current-x
+  2 index get-current-y       % => Parent Child X Y
+  2 index
+  move-to-box                 % => Parent Child
+
+% Check if there are any boxes in parent's line box
+  1 index
+  get-line
+  length 0 gt {
+      % there's some boxes in the parent's line box already
+      % just make a space (if previous inline box wasn't a whitespace!)
+      1 index get-line
+      dup length 1 sub get       % => Parent Child LastInlineBox
+
+      get-box-dict
+      /Display get
+      /inline-whitespace ne {
+        dup get-default-baseline 
+        1 index put-baseline
+
+        apply-line-height
+
+        dup get-vertical-align exec
+
+        dup /get-width call-method
+        2 index get-current-x
+        add
+        2 index put-current-x
+      } {
+% Duplicate whitespace boxes should not offset further content and affect the line box length
+        0 1 index put-width
+% Make whitespace correctly aligned relative to the baseline
+        dup get-vertical-align exec            
+      } ifelse
+  } {
+% The very first whitespace in the line box should not affect neither height nor baseline of the line box;
+% because following boxes can be smaller that assumed whitespace height
+% Example: <br>[whitespace]<img height="2" width="2"><br>; whitespace can overextend this line
+    0 1 index put-height
+% Aslo, the very first whitespace should not offset further content and affect the line box length
+    0 1 index put-width
+  } ifelse
+
+  dup 2 index append-line 
+
+%  dup get-baseline
+%  1 index get-default-baseline
+%  sub
+%  1 index get-full-height
+%  add
+  dup get-full-height
+  exch pop
+  extend-height                 % => Parent
+  
+  pop 
+} def
+
+/make-whitespace-box {             % => FontSize FontName
+  ( )
+  2 index 2 index
+  make-text-box                    % => FontSize FontName Box
+
+  {flow-whitespace}
+  1 index put-flow-fun             % => FontSize FontName Box
+  dup get-box-dict
+  /Display /inline-whitespace put
+
+  3 1 roll
+  pop pop
+} def
+

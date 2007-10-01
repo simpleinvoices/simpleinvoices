@@ -1,0 +1,36 @@
+% $Header: /cvsroot/html2ps/postscript/flow.float.ps,v 1.1 2005/12/18 07:21:38 Konstantin Exp $
+
+/add-deferred-float {              % => Parent Float
+  1 index get-box-dict 
+  /Flow get 
+  /DeferredFloats get              % => Parent Float DefFList
+% see comments on array-append/array-prepend
+  array-prepend                     % => Parent DefFList'
+  1 index get-box-dict 
+  /Flow get                        % => Parent DefFList' FlowDict
+  /DeferredFloats 2 index put
+  pop pop
+} def
+
+% Find the maximal X at the given Y coordinate suitable for float placement
+/float-right-x {                   % => Parent Float W X0
+  context-floats
+  1 index                          % => Parent Float W X0 Floats X0
+  5 index get-current-y            % => Parent Float W X0 Floats X0 Y0
+% The following line is a dirty hack; it is required, as due some rounding errors
+% the right corner, lying on the right float box edge, is not treated by point-in-floats
+% correctly
+  exch 0.0001 sub exch
+  
+  point-in-floats dup false ne {   % => Parent Float W X0 Float
+      get-left 1 sub               % => Parent Float W X0 X1
+      exch pop                     % => Parent Float W X1
+      float-right-x                % => X
+  } {
+      pop                          % => Parent Float W X0
+      exch pop                     % => Parent Float X0
+      exch pop                     % => Parent X
+      exch pop                     % => X
+  } ifelse                         % => X
+} def
+

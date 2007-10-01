@@ -1,0 +1,154 @@
+% $Header: /cvsroot/html2ps/postscript/footer.ps,v 1.1 2005/12/18 07:21:38 Konstantin Exp $
+                                  
+% As BODY generated box have zero calculated width at the very moment,
+% and we need some box to use as a parameter to _calc_percentage_margins, 
+% we'll create a fake box having with equal to the viewport width.
+  
+                                   % => BODY
+  dup /pre-reflow-images
+  call-method                      % => BODY
+
+  box-block-create                 % => BODY MediaBox
+  pagewidth
+  lmargin sub
+  rmargin sub                      % => BODY MediaBox PW
+  1 index put-width                % => BODY MediaBox
+
+% Calculate actual margin values
+  1 index box-generic-calc-percentage-margins
+                                   % => BODY
+
+  pagewidth
+  lmargin sub
+  rmargin sub
+  1 index get-hor-extra sub
+  1 index put-width                % => BODY
+
+  pageheight
+  tmargin sub
+  bmargin sub
+  1 index get-vert-extra sub
+  1 index put-height
+  
+  pageheight tmargin sub
+  1 index get-extra-top sub
+  1 index put-top
+
+  lmargin
+  1 index get-extra-left add
+  1 index put-left  
+  
+% create the initial context
+                                   % => Box
+  context-create                   % => Box Context
+  1 index flow-viewport-create     % => Box Context Viewport
+  1 index context-push-viewport    % => Box Context
+  
+  
+  exch 1 index                     % => Context Box Context
+  /null                            % => Context Box Context FakeParent
+  2 index /reflow call-method      % => Context Box
+  dup /reflow-inline call-method
+
+% flow absolute-positioned boxes
+  1 index
+  context-get-absolute-positioned {% => Context Box AbsoluteBox
+    2 index context-push
+    
+    2 index exch 
+    /reflow-absolute call-method
+
+    1 index context-pop
+  } forall
+
+% flow fixed-positioned boxes
+  1 index
+  context-get-fixed-positioned {% => Context Box AbsoluteBox
+    2 index context-push
+    
+    2 index exch 
+    box-block-reflow-fixed
+
+    1 index context-pop
+  } forall
+
+% Make the top-level box competely fill the last page
+  /pages 1 index get-full-height real-page-height div ceiling 1 max def
+
+% Note we cannot have less than 1 page in our doc; max() call
+% is required as we, in general, CAN have the content height strictly equal to 0.
+% In this case wi still render the very first page
+
+  pages real-page-height mul
+  1 index get-top                     
+  pageheight tmargin sub          
+  sub                             
+  add                              % => Context Box H
+  dup 2 index put-height           % => Context Box H
+  1 index get-content 0 get put-height
+
+  dup viewport-create              % => Context Box Viewport
+
+% generate a list of anchors
+  << >>                            % => Context Box Viewport List
+  dup 
+  2 index                          % => Context Box Viewport List List Viewport
+  4 index                          % => Context Box Viewport List List Viewport Box
+  /reflow-anchors                 
+  call-method                      % => Context Box Viewport Anchors
+  
+  1 index viewport-put-anchors     % => Context Box Viewport
+  exch                             % => Context Viewport Box
+  1 index /page-offset bmargin put
+  1 index /height real-page-height put
+ 
+  1 1 pages {                      % => Context Viewport Box I
+    0 0 moveto
+
+    2 index viewport-init-page
+
+    gsave
+    2 index viewport-setup-clip
+    
+    2 index                        % => Context Viewport Box I Viewport
+    2 index /show call-method      % => Context Viewport Box I
+
+% Absolute positioned boxes should be shown after all other boxes, because 
+% they're placed higher in the stack-order
+    3 index
+    context-get-absolute-positioned { 
+                                   % => Context Viewport Box I AbsoluteBox
+      dup /visibility get-css-value /visible eq {
+        3 index                    % => Context Viewport Box I AbsoluteBox Viewport
+        1 index                    % => Context Viewport Box I AbsoluteBox ViewportAbsoluteBox
+        /show call-method          % => Context Viewport Box I AbsoluteBox
+      } if
+
+      pop
+    } forall                       % => Context Viewport Box I
+
+    grestore
+    
+    3 index
+    context-get-fixed-positioned { 
+                                   % => Context Viewport Box I AbsoluteBox
+      dup /visibility get-css-value /visible eq {
+        3 index                    % => Context Viewport Box I AbsoluteBox Viewport
+        1 index                    % => Context Viewport Box I AbsoluteBox ViewportAbsoluteBox
+        box-block-show-fixed
+      } if
+
+      pop
+    } forall                       % => Context Viewport Box I
+
+    setting-draw-page-border {
+      2 index viewport-draw-page-border
+    } if
+    
+% Add page if currently rendered page is not last
+    2 index viewport-next-page
+
+    showpage
+    pop
+    initpage
+  } for 

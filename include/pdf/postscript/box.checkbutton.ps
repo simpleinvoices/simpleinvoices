@@ -1,0 +1,117 @@
+/checkbutton-size 15 px def
+
+/box-checkbutton-create {
+  box-generic-create
+  dup box-checkbutton-setup-methods
+  
+  dup /checked false put
+  checkbutton-size 1 index put-default-baseline
+  checkbutton-size 1 index put-height
+  checkbutton-size 1 index put-width
+  
+  dup /box-checkbutton add-type
+} def
+
+/box-checkbutton-get-max-width {   % => Context Box
+  dup get-full-width
+  exch pop
+  exch pop
+} def
+
+/box-checkbutton-get-min-width {   % => Context Box
+  dup get-full-width
+  exch pop
+  exch pop
+} def
+
+/box-checkbutton-put-checked {     % => Value Box
+  exch /checked exch put
+} def
+
+/box-checkbutton-reflow {          % => Context Parent Box
+% Set default baseline
+  dup get-default-baseline
+  1 index put-baseline
+
+% append to parent line box
+  dup 2 index box-container-append-line
+
+% Determine coordinates of upper-left _margin_ corner
+  1 index 1 index box-generic-guess-corner
+
+% Offset parent current X coordinate
+  1 index get-current-x
+  1 index get-full-width
+  add
+  2 index put-current-x
+
+% Extend parent height
+  dup get-bottom-margin
+  2 index box-generic-extend-height
+
+  pop pop pop
+} def
+
+/box-checkbutton-setup-methods {
+  dup /Methods get
+  dup /get-max-width {box-checkbutton-get-max-width} put
+  dup /get-min-width {box-checkbutton-get-min-width} put
+  dup /reflow {box-checkbutton-reflow} put
+  dup /show {box-checkbutton-show} put
+  pop pop
+} def
+
+/box-checkbutton-show {            % => Viewport Box
+% Get check center
+  dup get-left
+  1 index get-right add
+  2 div                            % => Viewport Box X
+
+  1 index get-top
+  2 index get-bottom add
+  2 div                            % => Viewport Box X Y
+
+% Calculate checkbox size
+  2 index /get-width call-method
+  3 div                            % => Viewport Box X Y Size
+
+% Draw checkbox
+  0.25 setlinewidth
+  
+  2 index 1 index sub
+  2 index 2 index add moveto
+
+  2 index 1 index add
+  2 index 2 index add lineto
+
+  2 index 1 index add
+  2 index 2 index sub lineto
+
+  2 index 1 index sub
+  2 index 2 index sub lineto
+
+  closepath
+  stroke
+
+% Draw checkmark if needed
+  3 index /checked get {
+    dup 2 div                      % => Viewport Box X Y Size CheckSize
+
+    3 index 1 index sub
+    3 index 2 index add moveto
+    3 index 1 index add
+    3 index 2 index sub lineto
+    stroke
+    
+    3 index 1 index add
+    3 index 2 index add moveto
+    3 index 1 index sub
+    3 index 2 index sub lineto
+    stroke
+
+    pop
+  } if                             % => Viewport Box X Y Size
+
+  pop pop pop
+  pop pop
+} def

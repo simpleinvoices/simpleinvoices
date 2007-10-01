@@ -1,0 +1,231 @@
+% $Header: /cvsroot/html2ps/postscript/height.ps,v 1.1 2005/12/18 07:21:38 Konstantin Exp $
+
+/hc-apply {                        % => Box RawHeight HC
+  dup /constant get /null ne {
+    1 index                        % => Box RawHeight HC RawHeight
+    3 index                        % => Box RawHeight HC RawHeight Box 
+    2 index /constant get          % => Box RawHeight HC RawHeight Box Constant
+    hc-fix-value                   % => Box RawHeight HC H
+  } {
+    2 index                        % => Box RawHeight HC Box
+    2 index                        % => Box RawHeight HC Box RawHeight
+    2 index                        % => Box RawHeight HC Box RawHeight HC
+    hc-apply-max                   % => Box RawHeight HC H0
+
+    3 index exch                   % => Box RawHeight HC Box H0
+    2 index
+    hc-apply-min                   % => Box RawHeight HC H1
+  } ifelse                         % => Box RawHeight HC H
+
+  exch pop
+  exch pop
+  exch pop
+} def
+
+/hc-apply-max {                    % => Box Value HC
+  dup /max get /null eq {
+    1 index
+  } {
+    1 index
+    3 index                        % => Box Value HC Value Box
+    2 index /max get               % => Box Value HC Value Box HC
+    hc-fix-value                   % => Box Value HC H
+    
+    2 index min                    % => Box Value HC H
+  } ifelse                         % => Box Value HC H
+
+  exch pop
+  exch pop
+  exch pop
+} def
+
+/hc-apply-min {                    % => Box Value HC
+  dup /min get /null eq {
+    1 index
+  } {
+    1 index
+    3 index                        % => Box Value HC Value Box
+    2 index /min get               % => Box Value HC Value Box HC
+    hc-fix-value                   % => Box Value HC H
+    
+    2 index max                    % => Box Value HC H
+  } ifelse                         % => Box Value HC H
+
+  exch pop
+  exch pop
+  exch pop
+} def
+
+/hc-create {                       % => Max Min Constant 
+  <<  >>
+  dup /max 5 index put
+  dup /min 4 index put
+  dup /constant 3 index put
+
+  exch pop
+  exch pop
+  exch pop
+} def
+
+/hc-fix-value {                    % => Default Box Value
+% A percentage or immediate value?
+  dup /percentage get {            % => Default Box Value
+      
+% CSS 2.1: The percentage  is calculated with respect to the height of the generated box's containing block.
+% If the height of the containing  block is not specified explicitly (i.e., it  depends on  content height),
+% and this  element is  not absolutely positioned, the value is interpreted like 'auto'.
+
+% Check if parent exists
+
+    1 index get-parent dup
+    /null ne {                     % => Default Box Value Parent
+      dup get-height-constraint    % => Default Box Value Parent ParentHC
+      3 index get-parent /box-table-cell is-a not 
+      1 index /constant get /null eq and
+      1 index /min get /null eq and 
+      1 index /max get /null eq and {
+% if parent does not constrained height, return null - no height constraint can be applied
+        pop pop 2 index
+      } {                          % => Default Box Value Parent ParentHC
+        3 index get-parent /box-table-cell is-a {
+          3 index get-parent
+          /row get                 % => Default Box Value Parent ParentHC Row
+
+% Note that unlike pure PHP DOM tree, we have box-table-row as a direct parent of the cell here
+          4 index get-parent
+          get-parent
+          get-parent               % => Default Box Value Parent ParentHC Row Table
+          
+          box-table-get-rhc        % => Default Box Value Parent ParentHC RHC
+
+          dup hc-is-null {
+            pop 4 index
+          } {
+            4 index exch           % => Default Box Value Parent ParentHC Box RHC
+            1 index get-parent
+            get-height exch        % => Default Box Value Parent ParentHC Box BaseHeight RHC
+            hc-apply               % => Default Box Value Parent ParentHC H
+          } ifelse
+
+          exch pop
+          exch pop                 % => Default Box Value H
+        } {
+          pop
+          get-height               % => Default Box Value ParentH
+          1 index /value get
+          mul 100 div              % => Default Box Value H
+        } ifelse
+      } ifelse
+    } {                            % => Default Box Value
+      /null
+    } ifelse                       % => Default Box Value H
+  } {                              % => Default Box Value
+    dup /value get
+  } ifelse                         % => Default Box Value H
+
+  exch pop
+  exch pop
+  exch pop
+} def
+
+/hc-is-constant {                  % => HC
+  /constant get /null ne
+} def
+
+/hc-is-null {                      % => HC
+  dup /min get /null eq
+  1 index /max get /null eq and
+  1 index /constant get /null eq and
+  exch pop
+} def
+
+/hc-is-percentage {                % => HC
+  dup /min get /null ne {
+    dup /min get /percentage get not
+  } { true } ifelse
+  
+  1 index /max get /null ne {
+    1 index /max get /percentage get not
+  } { true } ifelse and
+  
+  1 index /constant get /null ne {
+    1 index /constant get /percentage get not
+  } { true } ifelse and
+
+  not
+  exch pop
+} def
+
+%%%%%%%%%%%%%
+
+/is-height-constrained {           % => Box
+  dup get-box-dict                 % => Box Dict
+  /Height get
+  dup /Constrained get             % => Box HDict /Constrained
+  1 index /Min get 0 gt            % => Box HDict /Constrained /ConstrainedMin
+  or
+  exch pop
+  exch pop
+} def
+
+/get-min-height {
+  dup get-box-dict                 % => Box Dict
+  /Height get
+  dup /MinPercentage get {         % => Box HeightDict
+% Percentage height can be applied only if parent's height is explicitly height to the constant length
+    1 index get-box-dict
+    /Parent get                    % => Box HeightDict Parent
+    get-box-dict
+    /Height get                    % => Box HeightDict ParentHeightDict
+    dup /Constrained get {         % => Box HeightDict ParentHeightDict
+      /ConstraintPercentage       
+      get not {                    % => Box HeightDict 
+        /Min get
+        1 index exch
+        get-parent-height-fraction
+      } {                          % => Box HeightDict 
+        pop 0
+      } ifelse
+    } {                            % => Box HeightDict ParentHeightDict
+      pop pop 0
+    } ifelse
+  } {
+    /Min get
+  } ifelse
+
+  exch pop
+} def
+
+/find-containing-block-height {    % => Box
+% Check if the parent box have constrained height
+  dup get-box-dict                 % => Box Dict
+  dup /Parent known {
+    /Parent get                    % => Box Parent
+    get-box-dict                   % => Box ParentDict
+    /Height get                    % => Box ParentHeightDict
+    dup /Constrained get           % => Box ParentHeightDict ParentConstrained
+    exch                           % => Box ParentConstrained ParentHeightDict 
+    /ConstraintPercentage get        
+    not                            % => Box ParentConstrained !ParentPercentageConstrained
+    and
+    {
+      get-box-dict /Parent get
+      get-height
+    } {
+  % Box parent is not height-constrained, proceed to its parent
+      get-box-dict /Parent get
+      find-containing-block-height
+    } ifelse
+  } {
+    pop pop 0
+  } ifelse
+} def
+
+/calc-auto-height-margins {     % => Box
+  dup get-real-height           % => Box RH
+  1 index get-min-height        % => Box RH MH
+  max                           % => Box H1
+  1 index get-max-height        
+  min                           % => Box H
+  exch pop
+} def

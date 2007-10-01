@@ -1,0 +1,1256 @@
+% $Header: /cvsroot/html2ps/postscript/table.ps,v 1.1 2005/12/18 07:21:38 Konstantin Exp $
+
+/table-get-row-height-constraints {% => Box
+  get-table-content-rows           % => Rows
+  {
+    row-get-height-constraint
+    exch
+    array-append
+  }
+  []
+  2 index
+  reduce                           % => Rows RHCs
+  
+  exch pop                         % => RHCs
+} def
+
+/put-table-column-width-constraint % => WC Box
+{                                   
+  dup is-table {
+    dup table-get-cwc-raw          % => WC Box CWC
+    1 index get-current-column 
+    1 add                          % => WC Box CWC CC(1-based)
+    2 index get-table-content-rows % => WC Box CWC CC Rows
+    length                         % => WC Box CWC CC CR
+    4 index                        % => WC Box CWC CC CR WC
+    3 array astore                 % => WC Box CWC [CC CR WC]
+    exch array-prepend             % => WC Box CWC'
+    1 index table-put-cwc-raw      % => WC Box
+  } if
+  pop pop
+ 
+} def
+/table-get-cwc {                   % => Table
+  []                              % => Table [](CWC)
+
+  1 index get-current-column 
+  dup 0 ge {
+    1 add
+
+    {wc-none}
+    array-extend
+
+    1 index table-get-cwc-raw       % => Table CWC RawCWCS
+    {                               % => Table CWC RawCWC[CC CR WC]
+      aload pop                     % => Table CWC CC CR WC
+
+% Ignore column-width constraints for colspanned columns
+      1 index
+      3 index
+      6 index
+      table-have-colspan 1 eq {
+        exch pop                      % => Table CWC CC WC
+        exch 1 sub exch               % => Table CWC CC(0-based) WC
+        2 index length 2 index 1 add lt {
+          3 1 roll {wc-none}
+          array-extend                % => Table WC CWC'
+          array-prepend               % => Table CWC''
+        } { 
+          2 index 
+          3 1 roll
+          put 
+        } ifelse
+      } {
+        pop pop pop
+      } ifelse
+    } forall
+    exch pop
+  } {
+    pop pop pop []
+  } ifelse
+} def
+
+% Get the cell-width constraint
+% @param R row number (zero based)
+% @param C column number (zero based)
+% @param Table table being processed
+% returns false if no constraint; WC function if constraint have been found
+/table-get-cwc-raw-at {            % => R C Table
+  []                               % => R C Table []
+  1 index table-get-cwc-raw {      % => R C Table [] CurrentWC
+    aload pop                      % => R C Table [] C' R' WC
+
+    6 index 2 index eq
+    6 index 4 index eq and {       % => R C Table [] C' R' WC
+      exch pop
+      exch pop
+      exch array-append            % => R C Table [WC]
+
+    } {
+      pop pop pop
+    } ifelse                       % => R C Table [WC]
+  } forall
+
+  4 1 roll
+  pop pop pop
+
+  dup length 0 gt {
+    0 get
+  } {
+    pop false
+  } ifelse
+} def
+
+/table-get-cwc-raw {               % => Table
+  get-content                      % => Content
+  5 get                            % => CWC
+} def 
+/table-put-cwc-raw {               % => CWC Table
+  get-content                     % => CWC Content
+  5                               % => CWC Content 5
+  3 2 roll                        % => Content 5 CWC
+  put                             % => 
+} def
+/make-table-box {                  % => W Cols Rows
+  0 3 1 roll      % => W 0(H) Cols Rows
+  2 copy make-table
+  [] []           % => W 0(H) Cols Rows [] [](ColSpans) [](RowSpans)
+  []              % => W 0(H) Cols Rows [] [](ColSpans) [](RowSpans) [](ColumnWidthConstraints)
+  6 array astore  % => W 0(H) [Cols Rows [] [](ColSpans) [](RowSpans)](Content)
+  0 0 0 0
+  5 4 roll        % => W H 0 0 0 0 Content
+  0               % => W H 0 0 0 0 Content 0(Baseline)
+  /show-table-box % => W H 0 0 0 0 Content 0(Baseline) DisplayFun
+  0               % => W H 0 0 0 0 Content 0(Baseline) DisplayFun 0(DefaultBaseline)
+  [0 0 0 0]
+  make-box
+  {flow-table} 1 index put-flow-fun
+% Mark box as table
+  dup get-box-dict 
+  /Display /table put
+} def
+/make-default-table-box {          % => W
+  0 0 make-table-box
+  dup get-box-dict
+  /Width get
+  /Auto false put
+} def
+ 
+% PREDICATES
+/is-constrained-column {           % => WC
+  0 get /wc-none cvx ne  
+} def                              % => Flag
+
+% ROW-RELATED
+/table-fit-row {                   % => R Row Box ColsWidth
+% Get total height of current row
+  3 2 roll                        % => R Box ColsWidth Row
+   
+  2 index
+% table-row-height accepts 1-based row indices
+  4 index 1 add
+  2 index
+  table-row-height                % => R Box ColsWidth Row RH
+
+% Get current Y coordinate (indicated the bottom edge of current row)
+  dup 2 div
+  4 index get-current-y
+% Calculate middle Y coordinate of this row
+  exch sub                        % => R Box ColsWidth Row RH Middle
+  
+% Row baseline information 
+  2 index get-row-baseline        % => R Box ColsWidth Row RH Middle RBaseline
+  exch
+  4 3 roll                        % => R Box ColsWidth RH RBaseline Middle Row 
+                                                          
+  {                               % => R Box ColsWidth RH RBaseline Middle Cell
+    4 copy                                                
+    apply-valign                  % => R Box ColsWidth RH RBaseline Middle Cell
+                                                          
+% extend cell height to fit the row vertically
+    1 index                       % => R Box ColsWidth RH RBaseline Middle Cell Middle
+    6 index get-current-y         % => R Box ColsWidth RH RBaseline Middle Cell Middle CY
+    
+    exch sub                      % => R Box ColsWidth RH RBaseline Middle Cell H/2
+    2 mul                         % => R Box ColsWidth RH RBaseline Middle Cell H
+    dup 2 index                                           
+    get-full-height               % => R Box ColsWidth RH RBaseline Middle Cell H H CellH
+    gt {                          % => R Box ColsWidth RH RBaseline Middle Cell H
+      2 copy exch                                         
+      put-full-height             % => R Box ColsWidth RH RBaseline Middle Cell H
+    } if
+% align the top edge of extended cell with the row top edge
+    2 div 2 index exch                                    
+    add                           % => R Box ColsWidth RH RBaseline Middle Cell TY
+    1 index put-top                                       
+    pop                                                   
+  } forall                        % => R Box ColsWidth RH RBaseline Middle
+
+  pop pop pop pop pop pop         % => 
+} def
+/table-row-height {                % => Box R Row
+  1 exch                           % => Box R 1(C) Row
+  0 exch                           % => Box R 1(C) 0(H) Row
+  {                                % => Box R C H Cell
+    3 index
+    3 index                        % => Box R C H Cell R C
+    6 index                        % => Box R C H Cell R C Box
+    table-have-rowspan             % => Box R C H Cell Span
+    1 le {
+      get-full-height        
+      max                         % => Box R C H
+    } {
+      pop 
+    } ifelse                      % => Box R C H 
+    exch 1 add exch               % => Box R C+1 H 
+  } forall                        % => Box R C+1 H
+  4 1 roll
+  pop pop pop                     % => H
+} def
+/in-table-resize-rows {            % => Box R OY RHs Rows
+  dup length 0 gt {            % => Box R OY RHs Rows
+    1 index 0 get              % => Box R OY RHs Rows H
+
+    1 index 0 get              % => Box R OY RHs Rows H Row
+    5 index                    % => Box R OY RHs Rows H Row R 
+    7 index                    % => Box R OY RHs Rows H Row R Box
+    exch                       % => Box R OY RHs Rows H Row Box R
+    3 2 roll                   % => Box R OY RHs Rows H Box R Row
+    table-row-height           % => Box R OY RHs Rows H OldH
+    7 1 roll                   % => OldH Box R OY RHs Rows H 
+
+    1 index 0 get              % => OldH Box R OY RHs Rows H Row
+
+    dup get-row-baseline 
+    exch                       % => OldH Box R OY RHs Rows H RowBaseLine Row
+
+    {                          % => OldH Box R OY RHs Rows H RowBaseLine Cell
+% align top edge of the expanded cell and the top edge of row 
+% note that table content already have vertical alignment, so it should not
+% be affected by this action
+      dup get-left             % => OldH Box R OY RHs Rows H RowBaseLine Cell X 
+      8 index get-top-internal          
+      7 index sub              % => OldH Box R OY RHs Rows H RowBaseLine Cell X Y
+      2 index 
+      move-to-box              % => OldH Box R OY RHs Rows H RowBaseLine Cell
+
+% re-try to vertical align the cell contents using new row height
+      1 index                  % => OldH Box R OY RHs Rows H RowBaseLine Cell RowBaseline
+      8 index get-top 
+      7 index sub
+      4 index 2 div 
+      sub                      % => OldH Box R OY RHs Rows H RowBaseLine Cell Baseline Middle
+      2 index                  % => OldH Box R OY RHs Rows H RowBaseLine Cell Baseline Middle Cell
+      5 index 4 1 roll         % => OldH Box R OY RHs Rows H RowBaseLine Cell H Baseline Middle Cell
+
+      apply-valign             % => OldH Box R OY RHs Rows H RowBaseLine Cell 
+
+% expand cell to the row height
+      2 index
+      1 index                  % => OldH Box R OY RHs Rows H RowBaseLine Cell H Cell
+      put-full-height          % => OldH Box R OY RHs Rows H RowBaseLine Cell
+     
+      pop
+    } forall                   % => OldH Box R OY RHs Rows H RowBaseLine 
+    pop                        % => OldH Box R OY RHs Rows H
+
+% Calculate new offset from the table top (old offset+current row height)
+    7 6 roll                   % => Box R OY RHs Rows H OldH
+    pop                        % => Box R OY RHs Rows H
+    4 3 roll                   % => Box R RHs Rows H OY
+    add                        % => Box R RHs Rows OY'
+% remove processed element for row array 
+    3 1 roll                   % => Box R OY' RHs Rows 
+    array-pop-first            % => Box R OY RHs Rows'
+% remove processed element for row heights array 
+    4 1 roll
+    array-pop-first            % => Box Rows' R OY RHs'
+% increase row index
+    4 2 roll 
+    1 add                      % => Box OY RHs' Rows' R+1
+% process next row recusively
+    4 1 roll                   % => Box R+1 OY RHs' Rows'
+
+    in-table-resize-rows
+  } if
+} def
+/table-resize-rows {               % => Box RHs
+  dup sum                      % => Box RHs FH
+  2 index put-height           % => Box RHs
+  1 exch                       % => Box 1(R) RHs
+  0 exch                       % => Box 1(R) 0(Ofs) RHs
+  3 index 
+  get-table-content-rows       % => Box 1(R) 0(Ofs) RHs Rows
+  in-table-resize-rows         % => Box 1(R) OY [] []
+  pop pop pop pop pop
+} def
+/table-rows-heights {              % => Box
+  dup get-table-content-rows   % => Box Rows
+  [] exch                      % => Box [](Heights) Rows
+  1 exch                       % => Box [](Heights) 1(R) Rows
+  {                            % => Box Heights R Row
+    1 index exch               % => Box Heights R R Row
+    4 index 3 1 roll           % => Box Heights R Box R Row
+    table-row-height           % => Box Heights R H
+    2 index array-prepend      % => Box Heights R Heights'
+    3 1 roll                   % => Box Heights' Heights R 
+    exch pop                   % => Box Heights R 
+    1 add                      % => Box Heights R+1
+  } forall                     % => Box Heights R
+  pop
+  exch pop                     % => Heights
+} def
+
+% Modify minimal column width using column span information
+/get-max-width-table-column {      % => Box C Column 
+  1 exch 
+  0 exch {                         % => Box C 1(R) 0(ColumnMinWidth) ColumnElement
+    2 index                        % => Box C 1(R) 0(ColumnMinWidth) ColumnElement R
+    4 index                        % => Box C 1(R) 0(ColumnMinWidth) ColumnElement R C
+    6 index
+    table-have-colspan 1 gt {      % => Box C R Width Element
+      pop                          % => Box C R Width
+    } {
+      get-max-width                % => Box C R Width CWidth
+      max                          % => Box C R Width'
+    } ifelse
+    exch 1 add exch                % => Box C R+1 Width'
+  } forall                         % => Box C RL Width'
+
+  exch pop                         % => Box C Width'
+  2 index get-hor-extra
+  sub
+
+  3 1 roll pop pop                 % => Width
+} def
+/get-min-width-table-column {      % => Box C Column 
+  1 exch 
+  0 exch {                         % => Box C 1(R) 0(ColumnMinWidth) ColumnElement
+    2 index                        % => Box C 1(R) 0(ColumnMinWidth) ColumnElement R
+    4 index                        % => Box C 1(R) 0(ColumnMinWidth) ColumnElement R C
+    6 index                        % => Box C 1(R) 0(ColumnMinWidth) ColumnElement R C Box
+  
+    table-have-colspan 1 gt {      % => Box C R Width Element
+      pop                          % => Box C R Width
+    } {
+%      dup get-td-dict 
+%      /NoWrap get {
+%        dup get-max-width
+%        1 index get-min-width
+%        max exch pop
+%      } {
+        get-min-width              % => Box C R Width CWidth
+%      } ifelse
+      max                          % => Box C R Width'
+    } ifelse
+    exch 1 add exch                % => Box C R+1 Width'
+  } forall                         % => Box C RL Width'
+
+  exch pop                         % => Box C Width'
+  2 index get-hor-extra
+  sub
+
+  3 1 roll pop pop                 % => Width
+} def
+/get-table-columns-min-widths {    % => Box
+  dup get-table-content-columns    % => Box ColumnsList
+  1 exch 
+  [] exch                          % => Box 1(C) [] ColumnsList
+  {                                % => Box C [](Widths) Column
+    3 index                        % => Box C Widths Column Box
+    3 index                        % => Box C Widths Column Box C
+    3 2 roll                       % => Box C Widths Box C Column
+
+    get-min-width-table-column     % => Box C Widths ColW
+    exch array-prepend             % => Box C Widths
+ 
+    exch 1 add exch                % => Box C+1 TotalMinWidth
+  } forall                         % => Box C MinWidth
+  exch pop                         % => Box MinWidths
+  exch pop                         % => MinWidths
+} def
+/get-table-columns-max-widths {    % => Box
+  dup get-table-content-columns    % => Box ColumnsList
+  1 exch 
+  [] exch                          % => Box 1(C) [] ColumnsList
+  {                                % => Box C [](Widths) Column
+    3 index                        % => Box C Widths Column Box
+    3 index                        % => Box C Widths Column Box C
+    3 2 roll                       % => Box C Widths Box C Column
+       
+    get-max-width-table-column     % => Box C Widths ColW
+    exch array-prepend             % => Box C Widths
+        
+    exch 1 add exch                % => Box C+1 TotalMinWidth
+  } forall                         % => Box C MaxWidth
+  exch pop                         % => Box MaxWidths
+ 
+  % Use column width constraints - column should not be wider its constrained width
+  1 index get-width                % => Box MaxWidths BW 
+  2 index table-normalize-cwc      % => Box MaxWidths BW CWCs
+  2 index                          % => Box MaxWidths BW CWCs MaxWidths
+  { 1 index is-fraction 
+    { 
+      6 index false 3 index exec 3 1 roll pop pop 
+    } 
+    { exch false exch exec } ifelse } 
+  zip-with 
+  exch pop exch pop                % => Box MaxWidhts
+
+  exch pop                         % => MinWidths
+} def
+
+/table-apply-colspans-minw {       % => Flags Widths Fun Box
+  dup table-get-colspans           % => Flags Widths Fun Box Colspans
+  {                                % => Flags Widths Fun Box Colspan[Size R C]
+    dup 0 get                      % => Flags Widths Fun Box Colspan[Size R C] Size
+    1 index 1 get                  % => Flags Widths Fun Box Colspan[Size R C] Size R
+    2 index 2 get                  % => Flags Widths Fun Box Colspan[Size R C] Size R C
+% Calculate colspanned cell width (using appropriate function passed in the stack when 
+% calling this function)
+    4 index                        % => Flags Widths Fun Box Colspan[Size R C] Size R C Box
+    table-get-cell-content         % => Flags Widths Fun Box Colspan[Size R C] Size Cell
+    4 index exec                   % => Flags Widths Fun Box Colspan[Size R C] Size CellWidth
+% apply cell width constraint, if any
+    2 index aload pop
+    3 2 roll pop                   % => Flags Widths Fun Box Colspan[Size R C] Size CellWidth R C
+    5 index table-get-cwc-raw-at   % => Flags Widths Fun Box Colspan[Size R C] Size CellWidth WC
+    dup false ne {
+      dup is-fraction {
+        4 index no-width-constraint not {
+          4 index get-width exch
+          false exch exec
+          max
+        } {
+          pop
+        } ifelse
+      } {
+        false exch exec
+      } ifelse
+    } {
+      pop
+    } ifelse                       % => Flags Widths Fun Box Colspan[Size R C] Size CellWidth'
+% now select the pre-calculated widths of columns covered by this cell
+    2 index 2 get                % => Flags Widths Fun Box Colspan[Size R C] Size CellWidth C
+    1 sub                        % => Flags Widths Fun Box Colspan[Size R C] Size CellWidth C(ZeroBased)
+    3 2 roll                     % => Flags Widths Fun Box Colspan[Size R C] CellWidth C(ZeroBased) Size 
+    1 index                      % => Flags Widths Fun Box Colspan[Size R C] CellWidth C Size C
+    exch                         % => Flags Widths Fun Box Colspan[Size R C] CellWidth C C Size
+    7 index                      % => Flags Widths Fun Box Colspan[Size R C] CellWidth C C Size Widths
+    3 1 roll                     % => Flags Widths Fun Box Colspan[Size R C] CellWidth C Widths C Size 
+    getinterval                  % => Flags Widths Fun Box Colspan[Size R C] CellWidth C SWidths
+% select the list of resizable columns covered by this cell
+    3 2 roll exch                % => Flags Widths Fun Box Colspan[Size R C] C CellWidth SWidths 
+    7 index                      % => Flags Widths Fun Box Colspan[Size R C] C CellWidth SWidths Flags
+    3 index                      % => Flags Widths Fun Box Colspan[Size R C] C CellWidth SWidths Flags C
+    5 index 0 get                % => Flags Widths Fun Box Colspan[Size R C] C CellWidth SWidths Flags C Size
+    getinterval                  % => Flags Widths Fun Box Colspan[Size R C] C CellWidth SWidths SFlags
+% Subtract sum width of non-resizable columns this cell spans over from the cell width
+% Non-resizable columns are marked as 'false' in SFlags
+    2 copy {
+      { pop 0 } if
+    } zip-with sum               % => Flags Widths Fun Box Colspan[Size R C] C CellWidth SWidths SFlags Non-resizable-width
+    4 3 roll
+    exch sub
+% do not allow target width drop below zero
+    0 max
+    3 1 roll
+% Expand resizable columns to 
+    expand-to-with-flags         % => Flags Widths Fun Box Colspan[Size R C] C SWidths'
+% store modified widths
+    5 index                      % => Flags Widths Fun Box Colspan[Size R C] C SWidths' Widths
+    3 1 roll                     % => Flags Widths Fun Box Colspan[Size R C] Widths C SWidths' 
+    putinterval                  % => Flags Widths' Fun Box Colspan[Size R C]
+    pop                          % => Flags Widths' Fun Box
+  } forall                       % => Flags Widths' Fun Box
+  pop pop                        % => Widths'
+  exch pop
+} def
+
+/table-apply-colspans {            % => Widths Fun Box
+  dup table-get-colspans           % => Widths Fun Box Colspans
+% Scan all cell spanning several columns
+  {                                % => Widths Fun Box Colspan[Size R C]
+% Get current colspan contents
+    dup 0 get                      % => Widths Fun Box Colspan[Size R C] Size
+    1 index 1 get                  % => Widths Fun Box Colspan[Size R C] Size R
+    2 index 2 get                  % => Widths Fun Box Colspan[Size R C] Size R C
+    4 index                        % => Widths Fun Box Colspan[Size R C] Size R C Box
+    table-get-cell-content         % => Widths Fun Box Colspan[Size R C] Size Cell
+% Calculate its width (by calling the appropriate function passed; usually it will be
+% get-min-width or get-max-width)
+    4 index exec                   % => Widths Fun Box Colspan[Size R C] Size CellWidth
+% apply cell width constraint, if any
+    2 index aload pop
+    3 2 roll pop                   % => Flags Widths Fun Box Colspan[Size R C] Size CellWidth R C
+    5 index table-get-cwc-raw-at   % => Flags Widths Fun Box Colspan[Size R C] Size CellWidth WC
+    dup false ne {
+      dup is-fraction {
+        4 index no-width-constraint not {
+          4 index get-width exch
+          false exch exec
+          max
+        } {
+          pop
+        } ifelse
+      } {
+        false exch exec
+      } ifelse
+    } {
+      pop
+    } ifelse                       % => Flags Widths Fun Box Colspan[Size R C] Size CellWidth'
+% Get the width list of columns covered by current column span
+    2 index 2 get                  % => Widths Fun Box Colspan[Size R C] Size CellWidth C
+    1 sub                          % => Widths Fun Box Colspan[Size R C] Size CellWidth C(ZeroBased)
+    3 2 roll                       % => Widths Fun Box Colspan[Size R C] CellWidth C(ZeroBased) Size 
+    1 index                        % => Widths Fun Box Colspan[Size R C] CellWidth C Size C
+    exch                           % => Widths Fun Box Colspan[Size R C] CellWidth C C Size
+    7 index                        % => Widths Fun Box Colspan[Size R C] CellWidth C C Size Widths
+    3 1 roll                       % => Widths Fun Box Colspan[Size R C] CellWidth C Widths C Size 
+    getinterval                    % => Widths Fun Box Colspan[Size R C] CellWidth C SWidths
+% expand these columns to fit spanned data
+    3 2 roll exch                  % => Widths Fun Box Colspan[Size R C] C CellWidth SWidths 
+    expand-to                      % => Widths Fun Box Colspan[Size R C] C SWidths'
+% Store changed widths
+    5 index                        % => Widths Fun Box Colspan[Size R C] C SWidths' Widths
+    3 1 roll                       % => Widths Fun Box Colspan[Size R C] Widths C SWidths' 
+    putinterval                    % => Widths' Fun Box Colspan[Size R C]
+    pop                            % => Widths' Fun Box
+  } forall                         % => Widths' Fun Box
+  pop pop                          % => Widths'
+} def
+/table-column-widths {             % => Box 
+  dup get-width                    % => Box Width
+  table-columns-fit
+} def
+/table-columns-fit {               % => Box Widht
+% Check if there's any columns in table
+  1 index get-table-content-columns
+  length 0 gt {
+    in-table-columns-fit
+  } {
+    pop pop []
+  } ifelse
+} def
+
+% columns-fit helper function
+/fit-cwidth {                      % => MW MCW TW-TCW TMCW-TMW
+  2 index 
+  4 index
+  sub                             % => MW MCW TW-TCW TMCW-TMW MCW-MW
+  exch div                        % => MW MCW TW-TCW MCW-MW/TMCW-TMW
+  mul
+  add
+% to avoid problems with negative cell widths 
+  0 max
+  exch pop
+} def
+/in-table-columns-fit {            % => Box Width
+  1 index                         
+  get-table-content-columns       % => Box Width Columns
+                                  
+  2 index                         % => Box Width Columns Box
+  get-table-columns-min-widths    % => Box Width Columns MinWidths
+
+  3 index                         
+  get-table-columns-max-widths    % => Box Width Columns MinWidths MaxWidths
+
+  1 index 
+  { max }
+  zip-with
+
+% Use data on the spanned cells
+%  exch                            % => Box Width Columns MaxWidths MinWidths 
+%  2 copy { ne } zip-with          % => Box Width Columns MaxWidths MaxWidths [MaxWidthsCi<>MinWidthsCi]
+%  exch                            % => Box Width Columns MaxWidths ResizableFlags MinWidths 
+
+%  { get-min-width } 6 index       % => Box Width Columns ManWidths ResizableFlags MinWidths Fun Box
+%  table-apply-colspans-minw       % => Box Width Columns MaxWidths MinWidth
+%  exch                            % => Box Width Columns MinWidth  MaxWidths
+%  { get-max-width } 5 index       % => Box Width Columns MinWidth  MaxWidths Fun Box
+%  table-apply-colspans            % => Box Width Columns MinWidth  MaxWidths 
+  
+  3 2 roll
+  pop                             % => Box Width MinWidths MaxWidths
+
+% Apply column width constraints to minimum widths
+  2 index                         % => Box Width MinWidths MaxWidths BW 
+  4 index table-normalize-cwc     % => Box Width MinWidths MaxWidths BW CWCs
+  3 index                         % => Box Width MinWidths MaxWidths BW CWCs MinWidths
+  { 1 index is-fraction 
+    { 
+      6 index false 3 index exec 3 1 roll pop pop 
+    } 
+    { exch false exch exec } ifelse } 
+  zip-with 
+  exch pop
+
+% Apply column width constraints to maximum widths
+  3 index                         % => Box Width MinWidths MaxWidths MinWidthsC BW
+  5 index table-normalize-cwc     % => Box Width MinWidths MaxWidths MinWidthsC BW CWCs
+  3 index                         % => Box Width MinWidths MaxWidths MinWidthsC BW CWCs maxWidth
+  { 1 index is-fraction 
+    { 
+      % 6 index = BW
+      6 index false 3 index exec 3 1 roll pop pop 
+    } 
+    { exch false exch exec } ifelse } 
+  zip-with 
+  exch pop                         % => ox Width MinWidths MaxWidths MinWidthsC MaxWidths
+
+% Do not allow constrained max width be less than min width
+  3 index 
+  { max } 
+  zip-with                        % => Box Width MinWidths MaxWidths MinWidthsC MaxWidthsC
+
+% Do not allow constrained min width be less than min width
+  3 index 
+  2 index
+  { max }        
+  zip-with                        % => Box Width MinWidths MaxWidths MinWidthsC MaxWidthsC W'
+  
+  3 2 roll                        % => Box Width MinWidths MaxWidths MaxWidthsC W' MinWidthsC 
+  pop                             % => Box Width MinWidths MaxWidths MaxWidthsC W'
+  exch                            % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC
+
+% Check if sum of constrained widths is too big
+% Note that we compare sum of constrained width with the MAXIMAL value of table width and
+% sum of uncostrained minimal width; it will prevent from unneeded collapsing of table cells
+% if table content will expand its width anyway
+  1 index sum                      % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC SUM(MinWidthsC')
+% find the "template" value
+  5 index
+  5 index sum
+  max
+% compare
+  gt {
+% now we should scale columns to fit table width
+    1 index sum
+% find template value
+    5 index
+    5 index sum
+    max
+
+% Calculate the amount if difference between minimal and constrained minimal width for each columns
+    exch sub                      % => Box Width MinWidths MaxWidths MinWidthsC MaxWidthsC Width-MinWC
+    4 index                       % => Box Width MinWidths MaxWidths MinWidthsC MaxWidthsC Width-MinWC MinWidth
+    3 index                       % => Box Width MinWidths MaxWidths MinWidthsC MaxWidthsC Width-MinWC MinWidth MinWidthC
+    {exch sub} zip-with sum       % => Box Width MinWidths MaxWidths MinWidthsC MaxWidthsC Width-MinWC CWDelta
+    dup 0 gt {
+      5 index                     % => Box Width MinWidths MaxWidths MinWidthsC MaxWidthsC Width-MinWC CWDelta MinW
+      4 index                     % => Box Width MinWidths MaxWidths MinWidthsC MaxWidthsC Width-MinWC CWDelta MinW MinWC
+      4 2 roll                    % => Box Width MinWidths MaxWidths MinWidthsC MaxWidthsC MinW MinWC Width-MinWC CWDelta 
+      /fit-cwidth cvx             % => Box Width MinWidths MaxWidths MinWidthsC MaxWidthsC MinW MinWC Width-MinWC CWDelta cit-cwidth
+      3 array astore cvx          % => Box Width MinWidths MaxWidths MinWidthsC MaxWidthsC MinW MinWC {Width-MinWC CWDelta cit-cwidth}
+      zip-with                    % => Box Width MinWidths MaxWidths MinWidthsC MaxWidthsC MinWC'
+      exch 3 2 roll pop           % => Box Width MinWidths MaxWidths MinWC'     MaxWidthsC 
+    } {
+% if no difference is found, we can collapse no columns
+      pop pop                     % => Box Width MinWidths MaxWidths MinWidthsC MaxWidthsC 
+    } ifelse
+  } if
+
+% Use data on the spanned cells (again)
+  exch                            % => Box Width MinWidths MaxWidths MaxWidthsC MinWidthsC
+  2 copy { ne } zip-with          % => Box Width MinWidths MaxWidths MaxWidthsC MinWidthsC [MaxWidthsCi<>MinWidthsCi]
+  exch                            % => Box Width MinWidths MaxWidths MaxWidthsC ResizableFlags MinWidthsC 
+
+  { get-min-width } 7 index       % => Box Width MinWidths MaxWidths MaxWidthsC ResizableFlags MinWidthsC Fun Box
+  table-apply-colspans-minw       % => Box Width MinWidths MaxWidths MaxWidthsC MinWidthC
+  exch                            % => Box Width MinWidths MaxWidths MinWidthC  MaxWidthsC 
+  { get-max-width } 6 index       % => Box Width MinWidths MaxWidths MinWidthC  MaxWidthsC Fun Box
+  table-apply-colspans            % => Box Width MinWidths MaxWidths MinWidthC  MaxWidthsC 
+
+% Calculate actual widths
+% Prepare width array
+  [] 
+  1 index length 0 
+  array-extend                    % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths
+  
+% First pass - calculate widths for all constrained columns 
+  6 index table-normalize-cwc     % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths CWCs
+
+  0 1 2 index length 1 sub {      % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths CWCs I
+    2 copy get 
+    is-constrained-column {
+      2 index 
+      1 index 
+      6 index 3 index get
+      put
+    } if
+
+    pop
+  } for
+
+% Quick fix for overconstrained tables: if table have width attribute AND its value is less than sum
+% of constrained columns widths plus minimal widths of uncostrained columns, then we'll expand the width of table
+% to fit all columns
+% 1. calculate sum of constrained column widths
+  1 index sum                     % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths CWCs SumConW
+% 2. calculate sum of unconstrained column minimal widths
+  2 index
+  7 index
+  { 1 index 0 gt { pop pop 0 } { exch pop } ifelse } 
+  zip-with sum                    % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths CWCs SumConW SumUnconW
+% 3. compare these widths with the table width
+  add 
+  dup 8 index gt {                % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths CWCs SumConW+SumUnconW
+    8 7 roll pop               
+    7 1 roll
+  } {
+    pop
+  } ifelse
+
+% Second pass - distribute the rest of the width 
+
+% Explanation of the stuff below (I've really had problems with this small piece of code, especially
+% when I was trying to fix "bugs" inside it)
+% 
+% First of all, no column can be narrower than it minimal width (determined by its content)
+% Note that constrained columns have their widths distributed above, so we can exclude them for now 
+% (just throw them out and imagine that table does not contain any width-constrained cols)
+%
+% Second, the relative widths of columns will have _appoximately_ the same ratio as
+% their maximal content widths. (In exception of cases where the first rule will take place - 
+% say for the table containing two columns with the VERY long text in the first and one or two words
+% in the second)
+%
+% In general, this approach can be inoptimal in case of _very_ different font sizes
+% inside the cells, of, say big images; nevertheless, it will give a good approximate
+% AND still fast enough (unlike fully correct methods involving evaluation of the content height of the cell)
+% 
+% Thus, we do the following:
+% - calculate the ratio of current column MAXIMAL ($current_max) width to the sum of MAXIMAL widths of all columns left
+%   (inluding current) second rule applied. Note that we need remember about column spans and select 
+%   maxw or maxwc in order.
+% - then check if the rest of width will be too small for other columns to fit and decrease current columns
+%   width (see MIN function call)
+% - then check again if our width will be too small for current column to fit (and expand if nesessary) - 
+%   MAX function call
+
+    0 1 2 index length 1 sub {      % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths CWCs I
+    2 copy get 
+% Process only uncostrained columns
+    is-constrained-column not {
+      2 index 
+      1 index                      % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths CWCs I Widths I
+% Get undistibuted width (total table width - width of constrained columns)
+      9 index                      % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths CWCs I Widths I Width
+      2 index sum sub              % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths CWCs I Widths I WidthRest
+% Get max width of column being processed
+      8 index 2 index get          % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths CWCs I Widths I WidthRest MaxW
+      7 index 3 index get max      % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths CWCs I Widths I WidthRest MaxW
+% If width is equal to zero, use max constrained width, as this column could be covered by colspan;
+% If not, we lose nothing, because all constrained columns are already processed earlier, and no more
+% columns except these two types can have different constrained and raw widths
+      dup 0 eq {
+        pop
+        6 index 2 index get
+      } if
+% Get sum of maximal constrained widths of unplaced columns
+      3 index                     % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths CWCs I Widths I WidthRest MaxW Widths
+      8 index                     % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths CWCs I Widths I WidthRest MaxW Widths MaxWidthsC
+      { 1 index 0 eq {exch pop} {pop pop 0} ifelse }
+      zip-with 
+      sum                          % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths CWCs I Widths I WidthRest MW MWR
+% Get sum of minimal constrained widths of unplaced columns
+      4 index                      % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths CWCs I Widths I WidthRest MaxW MaxWR Widths
+      10 index                     % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths CWCs I Widths I WidthRest MaxW MaxWR Widths MaxWidthsC
+      { 1 index 0 eq {exch pop} {pop pop 0} ifelse }
+      zip-with 
+      sum                          % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths CWCs I Widths I WidthRest MaxW MaxWR MinWR
+      3 index exch sub             % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths CWCs I Widths I WidthRest MaxW MaxWR WidthRest-MinWR
+% add current columns min width
+      12 index 5 index get
+      11 index 6 index get max
+      add                  
+      4 1 roll                     % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths CWCs I Widths I WidthRest-MinWR WidthRest MaxW MaxWR
+% If some unplaced columns have maximal (constrained width) greater zero
+      dup 0 gt {
+% Calculate the appropriate fraction of free table width for the current column
+        div                        % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths CWCs I Widths I WidthRest-MinWR WidthRest MinWE MaxW MaxWR
+        mul                        % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths CWCs I Widths I WidthRest-MinWR W(WidthRest*MW/MWR)
+        min
+% Remove minimal width of current column; 
+%        9 index 2 index get 
+%        sub
+% This will make calculated width not less than raw minimal column with. See also line marked with (*)
+%        0 max
+      } {
+        pop pop pop pop 0
+      } ifelse
+% (*) Add the minimal width of current column
+      9 index 2 index get
+      dup 0 eq {
+        pop
+        7 index 2 index get
+      } if
+      max                          % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths CWCs I Widths I W
+
+      put
+    } if
+
+    pop
+  } for
+  pop                             % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths
+
+% in case of overconstrained table (e.g. two columns with 20% widths), expand them
+  dup sum                         % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths SumWidth
+  dup 0 gt {
+    6 index
+    exch div
+    dup 1 gt {
+      map-scale
+    } { pop } ifelse
+  } {
+    pop
+  } ifelse                        % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths 
+
+% now - the last attempt; if total width is less than box width, just expand the very first column to fit
+  dup sum 6 index lt {
+    dup sum                         % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths SumWidth
+    6 index
+    exch sub                        % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths Delta
+    1 index 0 get                   % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths Delta W0
+    add                             % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths W0'
+    1 index exch
+    0 exch put                      % => Box Width MinWidths MaxWidths MinWidthsC' MaxWidthsC Widths
+  } if
+
+  7 1 roll
+  pop pop pop 
+  pop pop pop
+} def
+
+% Modify heights of table cells spanning several rows
+/table-fit-rowspans {              % => Table
+  dup table-rows-heights          % => Table RHs
+  1 index table-get-rowspans      % => Table RHs RS
+% scan all cells spanning several rows
+  {                               % => Table RHs RowSpan
+% calculate the bottom edge of current cell
+    aload pop                     % => Box RHs Span R C
+    2 copy                        % => Box RHs Span R C R C
+    6 index                       % => Box RHs Span R C R C Box
+    table-get-cell-content        % => Box RHs Span R C Cell
+    {
+      get-bottom
+      min
+    }
+    1 index get-top
+    2 index get-content
+    reduce
+% reset the height of the cell to its content height (as it have been probably fitted to the top row spanned-over)
+    1 index get-top
+    sub neg
+    1 index put-height
+
+% now check if cell height is less than sum spanned rows height
+    dup get-full-height           % => Box RHs Span R C Cell CellFH
+    5 index                       % => Box RHs Span R C Cell CellFH RHs
+    4 index 1 sub                 % => Box RHs Span R C Cell CellFH RHs R
+    6 index                       % => Box RHs Span R C Cell CellFH RHs R Span
+    getinterval sum               % => Box RHs Span R C Cell CellFH RowH
+
+    2 copy lt {
+% vertical-align current cell
+% calculate (approximate) row baseline
+      6 index                     % => Box RHs Span R C Cell CellFH RowH RHs
+      0 6 index 1 sub             % => Box RHs Span R C Cell CellFH RowH RHs 0 R(ZeroBased)
+      getinterval sum neg         % => Box RHs Span R C Cell CellFH RowH -SpannedRHs
+      8 index get-top-internal 
+      add                         % => Box RHs Span R C Cell CellFH RowH RBaseline
+% calculate row middle coordinate
+      dup 2 index 2 div sub       % => Box RHs Span R C Cell CellFH RowH RBaseline Middle
+
+      2 index
+      2 index
+      2 index
+      7 index
+   
+      apply-valign
+
+      pop pop
+
+% Make cell fill all available vertical space
+      dup                         % => Box RHs Span R C Cell CellFH RowH RowH
+      3 index 
+      put-full-height             % => Box RHs Span R C Cell CellFH RowH 
+
+      pop pop pop
+    } {
+      pop pop pop
+    } ifelse                      % => Box RHs Span R C 
+    pop pop pop
+  } forall     
+  pop pop 
+} def
+
+/table-have-colspan { % => Row Col Table 
+  table-get-colspans 
+  1                   % => Row Col Spans 1
+  exch                % => Row Col 1 Spans
+  {                   % => Row Col CS Span
+    dup 1 get         % => Row Col CS Span Row
+    1 index 2 get     % => Row Col CS Span Row Col
+    4 index eq        % => Row Col CS Span Row CEq
+    exch              % => Row Col CS Span CEq Row 
+    5 index eq        % => Row Col CS Span CEq REq
+    and               % => Row Col CS Span Match
+    {
+      0 get exch pop
+    } { 
+      pop
+    } ifelse
+  } forall            % => Row Col CS
+  3 1 roll            % => CS Row Col
+  pop pop             % => CS
+} def
+
+/table-have-rowspan { % => Row Col Table 
+  table-get-rowspans 
+  1                   % => Row Col Spans 1
+  exch                % => Row Col 1 Spans
+  {                   % => Row Col CS Span
+    dup 1 get         % => Row Col CS Span Row
+    1 index 2 get     % => Row Col CS Span Row Col
+    4 index eq        % => Row Col CS Span Row CEq
+    exch              % => Row Col CS Span CEq Row 
+    5 index eq        % => Row Col CS Span CEq REq
+    and               % => Row Col CS Span Match
+    {
+      0 get exch pop
+    } { 
+      pop
+    } ifelse
+  } forall            % => Row Col CS
+  3 1 roll            % => CS Row Col
+  pop pop             % => CS
+} def
+
+/table-mark-rowspan {    % => Table SpanSize
+  1 index  
+  get-table-content-rows % => Table SpanSize Rows 
+  dup length             % => Table SpanSize Rows CurRow
+  1 index array-last     % => Table SpanSize Rows CurRow LastRow 
+  length                 % => Table SpanSize Rows CurRow CurColumn
+  3 2 roll pop           % => Table SpanSize CurRow CurColumn
+  3 index                % => Table SpanSize CurRow CurColumn Table
+  table-add-rowspan      % => Table 
+} def
+
+/table-mark-colspan {    % => Table SpanSize
+  1 index  
+  get-table-content-rows % => Table SpanSize Rows 
+  dup length             % => Table SpanSize Rows CurRow
+  1 index array-last     % => Table SpanSize Rows CurRow LastRow 
+  length                 % => Table SpanSize Rows CurRow CurColumn
+  3 2 roll pop           % => Table SpanSize CurRow CurColumn
+  3 index                % => Table SpanSize CurRow CurColumn Table
+  table-add-colspan      % => Table 
+} def
+
+/normalize-row {                   % => Length Row
+  aload length   % => Length R1 .. RN N
+  dup            % => Length R1 .. RN N N 
+  dup 2 add      % => Length R1 .. RN N N N+2
+  index          % => Length R1 .. RN N N Length
+  exch sub dup   % => Length R1 .. RN N Delta Delta
+  replicate-row  % => Length R1 .. RN N []..[] Delta 0
+  pop            % => Length R1 .. RN N []..[] Delta
+  dup 2 add      % => Length R1 .. RN N []..[] Delta Delta+2
+  dup 1 sub      % => Length R1 .. RN N []..[] Delta Delta+2 Delta+1
+  roll           % => Length R1 .. RN []..[] Delta N
+  add            % => Length R1 .. RN []..[] Delta+N
+  array astore   % => Length Row'
+  exch pop       % => Row'
+} def
+
+/table-slide-cw {                  % => R C Box
+  dup table-get-cwc-raw            % => R C Box RawCWCS
+  {                                % => R C Box RawCWC
+    aload                          % => R C Box !C !R WC [!C !R WC]
+    2 index 7 index eq {
+      3 index 6 index ge {
+        dup 
+        0 5 index 1 add put        % => R C Box !C !R WC [!C+1 !R WC]
+      } if
+    } if                           % => R C Box !C !R WC [!C !R WC]
+    pop pop pop pop
+  } forall
+
+  pop pop pop
+} def
+
+/do-slide-rs {                     % => ... RS' [SS SR SC] R C 
+  2 index 1 get                   % => ... RS' [SS SR SC] R C SR
+  2 index eq {                    % => ... RS' [SS SR SC] R C
+    2 index 2 get                 % => ... RS' [SS SR SC] R C SC
+    1 index ge {                  % => ... RS' [SS SR SC] R C
+      2 index 2 get               % => ... RS' [SS SR SC] R C SC
+      1 add                       % => ... RS' [SS SR SC] R C SC+1
+      3 index exch  
+      2 exch                      % => ... RS' [SS SR SC] R C [..] 2 SC+1
+      put                         % => ... RS' [SS SR SC+1] R C
+% FIXME: reorder rowspans after this operation?
+    } if
+  } if
+
+  pop pop
+  exch array-prepend 
+} def
+
+/table-slide-rs {                  % => R C Box
+  2 index 2 index /do-slide-rs    % => R C Box {fun}
+  cvx 3 array astore cvx
+  []
+  2 index table-get-rowspans
+  reduce
+
+  1 index table-put-rowspans      % => R C Box
+
+  pop pop pop                     % => 
+} def
+
+/do-slide-cs {                     % => ... RS' [SS SR SC] R C 
+  2 index 1 get                   % => ... RS' [SS SR SC] R C SR
+  2 index eq {                    % => ... RS' [SS SR SC] R C
+    2 index 2 get                 % => ... RS' [SS SR SC] R C SC
+    1 index ge {                  % => ... RS' [SS SR SC] R C
+      2 index 2 get               % => ... RS' [SS SR SC] R C SC
+      1 add                       % => ... RS' [SS SR SC] R C SC+1
+      3 index exch  
+      2 exch                      % => ... RS' [SS SR SC] R C [..] 2 SC+1
+      put                         % => ... RS' [SS SR SC+1] R C
+% FIXME: reorder rowspans after this operation?
+    } if
+  } if
+
+  pop pop
+  exch array-prepend 
+} def
+
+/table-slide-cs {                  % => R C Box
+  2 index 2 index /do-slide-cs    % => R C Box {fun}
+  cvx 3 array astore cvx
+  []
+  2 index table-get-colspans
+  reduce
+
+  1 index table-put-colspans      % => R C Box
+
+  pop pop pop                     % => 
+} def
+
+/table-fake-cell {                 % => R C Box
+  3 copy
+  table-slide-cw                   % => R C Box
+  3 copy
+  table-slide-rs                   % => R C Box
+  3 copy
+  table-slide-cs                   % => R C Box
+
+  dup 
+  get-table-content-rows           % => R C Box Rows
+  dup                              % => R C Box Rows Rows
+  4 index 1 sub                    % => R C Box Rows Rows R(0)
+  dup
+  2 index length 1 sub gt {
+    pop pop pop pop pop pop
+  } {
+    get                            % => R C Box Rows Row
+    3 index 1 sub exch             % => R C Box Rows C(ZeroBased) Row
+    box-block-create       % => R C Box Rows C Row FBox
+    {show-fake-block-box} 
+    1 index put-display
+    exch                           % => R C Box Rows C FBox Row 
+
+    dup length 3 index lt {
+      3 1 roll
+      array-extend
+    } { 
+      array-insert                   % => R C Box Rows Row'
+    } ifelse
+
+    dup length                     % => R C Box Rows Row' RL'
+    3 index get-content            % => R C Box Rows Row' RL' [C R Content]
+    exch 0 exch                    % => R C Box Rows Row' [C R Content] 1 RL' 
+    2 index 0 get max
+    put
+
+    4 index 1 sub                  % => R C Box Rows Row' R(ZeroBased)
+    exch                           % => R C Box Rows R(ZeroBased) Row' 
+    put                            % => R C Box
+    pop pop pop                    % => 
+  } ifelse
+} def
+
+/in-normalize-rowspans {           % => Size Row Col Box
+  3 index 1 gt {
+    2 index 1 add           % => Size Row Col Box Row+1
+    2 index                 % => Size Row Col Box Row+1 Col
+    2 index 
+    table-fake-cell         % => Size Row Col Box 
+    4 2 roll                % => Col Box Size Row  
+    1 add                   % => Col Box Size Row+1
+    4 1 roll                % => Row+1 Col Box Size
+    1 sub                   % => Row+1 Col Box Size-1
+    4 1 roll                % => Size-1 Row+1 Col Box 
+    in-normalize-rowspans   % => 
+  } {
+    pop pop pop pop         % =>
+  } ifelse
+} def
+
+/normalize-rowspans {              % => Box
+  dup table-get-rowspans           % => Box Rowspans
+  {                                % => Box Rowspan
+    aload pop                      % => Box Size Row Col
+    3 index                        % => Box Size Row Col Box
+    in-normalize-rowspans          % => Box
+  } forall                         % => Box
+
+  dup get-table-content-rows       % => Box Rows
+  length                           % => Box RN
+
+  1 index table-get-rowspans       % => Box RN Rowspans
+  {                                % => Box RN Rowspan
+    dup 1 get                      % => Box RN Rowspan RSR
+    dup                            % => Box RN Rowspan RSR RSR
+    2 index 0 get                  % => Box RN Rowspan RSR RSR RSS
+    add 1 sub                      % => Box RN Rowspan RSR RSR+RSS-1
+    3 index min                    % => Box RN RowSpan RSR SpanEnd
+    exch sub 1 add                 % => Box RN RowSpan SpanSize
+    0 exch put                     % => Box RN
+  } forall                         % => Box RN
+
+  pop pop                          % => 
+} def                      
+
+/normalize-table {                 % => Box
+  dup normalize-rowspans
+
+  dup get-content                  % => Box Content
+  get-children-from-content        % => Box Rows
+  dup dup                          % => Box  Rows Rows Rows
+  0 exch                    % => Box Rows Rows 0 Rows
+  {                         % => Box Rows Rows 0 Row
+    length
+    max
+  } forall                  % => Box Rows Rows MaxRowLength
+
+  0 exch                    % => Box Rows Rows 0  MaxRowLength
+  3 2 roll                  % => Box Rows 0       MaxRowLength Rows
+  {                         % => Box Rows RowNo   MaxRowLength Row
+    1 index exch            % => Box Rows RowNo   MaxRowLength MaxRowLength Row
+    normalize-row           % => Box Rows RowNo   MaxRowLength Row'
+    3 index 3 index         % => Box Rows RowNo   MaxRowLength Row' Rows RowNo 
+    3 2 roll                % => Box Rows RowNo   MaxRowLength Rows RowNo Row'
+    put                     % => Box Rows RowNo   MaxRowLength 
+    exch 1 add exch         % => Box Rows RowNo+1 MaxRowLength 
+  } forall
+  
+  pop pop pop
+  pop
+} def
+
+/in-make-table-row {               % => RowData Size
+  dup 0 gt {
+    1 index          % => RowData Size RowData
+    aload            % => RowData Size Data1 ... DataN Arr
+    length           % => RowData Size Data1 ... DataN N
+    1 add            % => RowData Size Data1 ... DataN N+1
+    [] exch          % => RowData Size Data1 ... DataN [] N+1
+    array astore     % => RowData Size NewRowData
+    3 2 roll pop     % => Size NewRowData
+    exch             % => NewRowData Size 
+    1 sub            % => NewRowData Size-1
+    in-make-table-row    
+  } {
+    pop
+  } ifelse
+} def
+
+/make-table-row {                  % => Size
+  [] exch         % => [](EmptyRow) Size
+  in-make-table-row
+} def
+
+/in-make-table {                   % => TableData Cols Rows
+  dup 0 gt {
+    2 index          % => TableData Cols Rows TableData
+    aload            % => TableData Cols Rows Data1 ... DataN TableData
+    length           % => TableData Cols Rows Data1 ... DataN N
+    1 add            % => TableData Cols Rows Data1 ... DataN N+1
+    dup 1 add index
+    make-table-row    
+    exch             % => TableData Cols Rows Data1 ... DataN NewRow N+1
+    array astore     % => TableData Cols Rows NewTableData
+    4 3 roll pop     % => Cols Rows NewTableData
+    3 1 roll         % => NewTableData Cols Rows 
+    1 sub            % => NewTableData Cols Rows-1
+    in-make-table
+  } {
+    pop pop
+  } ifelse
+} def
+
+/make-table {                      % => Cols Rows
+  [] 3 1 roll
+  in-make-table
+} def
+
+/in-add-table-cell {               % => Box Cell
+  1 index get-content % => Box Cell [Cols Rows Content](RawContent)
+  2 get               % => Box Cell Rows
+  dup length 1 sub    % => Box Cell Rows LastIndex
+  dup 
+  2 index exch get    % => Box Cell Rows LastIndex LastRow
+  aload length        % => Box Cell Rows LastIndex Cell1 .. CellN N 
+  dup 3 add           % => Box Cell Rows LastIndex Cell1 .. CellN N N+4
+  index exch          % => Box Cell Rows LastIndex Cell1 .. CellN Cell N 
+  1 add
+  array astore        % => Box Cell Rows LastIndex NewRow
+  dup length          % => Box Cell Rows LastIndex NewRow NewRowLength
+  5 1 roll            % => Box NewRowLength Cell Rows LastIndex NewRow
+  put
+  pop                 % => Box NewRowLength
+  1 index get-content 
+  dup 0 get           % => Box NewRowLength Content Cols
+  3 2 roll            % => Box Content Cols NewRowLength 
+  max
+  0 exch put          % => Box
+} def
+
+/add-table-cell {                 % => Table Child
+  1 index is-table {
+% setup parent reference in the child box
+    dup get-box-dict
+    /Parent 3 index put
+% set display property
+    dup get-box-dict
+    /Display /table-cell put   
+
+% Check if any rows have been added to the table
+% Add one if no rows still exists
+    1 index get-table-content-rows          % => Rows
+    length 0 eq {
+      1 index add-table-row pop
+    } if
+
+    2 copy
+    in-add-table-cell             % => Table Child Table 
+    pop                           % => Table Child
+
+% If table-cell had width constaint, propagate it to the column
+    dup no-width-constraint not {
+      dup get-width-constraint
+      2 index put-table-column-width-constraint
+      {wc-none} 1 index put-width-constraint
+    } if
+    pop
+  } {
+% if parent is not a table, just ignore this box
+    pop
+  } ifelse
+} def

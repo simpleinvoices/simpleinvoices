@@ -1,0 +1,93 @@
+% $Header: /cvsroot/html2ps/postscript/box.break.ps,v 1.1 2005/12/18 07:21:36 Konstantin Exp $
+
+/box-br-create {
+  box-generic-create
+  dup box-br-setup-methods
+  dup /box-br add-type
+
+  dup /display /block put-css-value
+} def
+
+/box-br-get-max-width {            % => Context This
+  pop pop 0
+} def
+
+/box-br-get-min-width {            % => Context This
+  pop pop 0
+} def
+
+/box-br-reflow {                   % => Context Parent This
+  1 index get-current-y            % => Context Parent This PCY
+
+% CSS 'clear' property may be applied to BR tags!
+
+  3 index exch                     % => Context Pareht This Context PCY 
+  2 index box-generic-apply-clear  % => Context Pareht This Y
+    
+% Move current "box" to parent current coordinates. It is REQUIRED, 
+% as some other routines uses box coordinates.
+
+  2 index get-current-x
+  2 index put-left                 % => Context Parent This Y
+
+  1 index put-top                  % => Context Parent This
+
+% If we have a sequence of BR tags (like <BR><BR>), we'll have an only one item in the parent's
+% line box - whitespace; in this case we'll need to additionally offset current y coordinate by the font size
+
+  1 index get-line length 0 eq {   % => Context Parent This
+    2 index
+    2 index
+    box-container-close-line       % => Context Parent This
+
+    1 index get-current-y
+    1 index /font-size get-css-value
+    sub
+    1 index get-bottom
+    min
+
+    2 index put-current-y
+  } {
+    1 index get-line length 1 gt
+    2 index get-line 0 get
+    is-whitespace not or {             % => Context Parent This
+      2 index 
+      2 index box-container-close-line
+    } {
+      1 index get-line length 0 gt {
+% Restore height of whitespace (it had been reset in /flow-whitespace as a first whitespace in a line box)
+        1 index get-line 0 get
+        /font-size get-css-value   % => Context Parent This DH
+        3 index
+        3 index
+        box-container-close-line   % => Context Parent This DH
+        2 index get-current-y
+        exch sub                   % => Context Parent This CY'
+        1 index get-bottom
+        min
+        2 index put-current-y      % => Context Pareht This
+      } if
+    } ifelse
+  } ifelse                         % => Context Parent This
+
+% We need to explicitly extend the parent's height, as we don't know if 
+% it have any children _after_ this BR box.
+  1 index get-current-y
+  2 index box-generic-extend-height
+
+  pop pop pop
+  
+} def
+
+/box-br-setup-methods {
+  dup /Methods get
+  dup /get-max-width {box-br-get-max-width} put
+  dup /get-min-width {box-br-get-min-width} put
+  dup /reflow        {box-br-reflow} put
+  dup /show          {box-br-show} put
+  pop pop
+} def
+
+/box-br-show {                     % => Viewport Box
+  pop pop
+} def

@@ -1,0 +1,291 @@
+/hilight-color-alpha 0.6 def
+
+/border-create {
+  <<
+    /left <<
+      /width 2 px
+      /color 0 0 0 0 color-create
+      /style /none
+    >>
+        
+    /right <<
+      /width 2 px
+      /color 0 0 0 0 color-create
+      /style /none            
+    >>
+        
+    /top <<
+      /width 2 px
+      /color 0 0 0 0 color-create
+      /style /none            
+    >>
+        
+    /bottom <<
+      /width 2 px
+      /color 0 0 0 0 color-create
+      /style /none            
+    >>
+  >>
+} def
+
+/border-show {                     % => Box Viewport Border
+  exch pop                         % => Box Border
+    
+% LEFT
+  dup /left get /width get 0 gt
+  1 index /left get /style get /none ne 
+  and
+  {
+    dup /left get /style get
+    true
+    2  index /left get /color get 
+    3  index /left get /width get
+    5  index get-left-border
+    6  index get-bottom-border
+    7  index get-left-border
+    8  index get-top-border
+    9  index get-left-border    9 index /left get /width get add
+    10 index get-top-border    10 index /top get /width get sub
+    11 index get-left-border   11 index /left get /width get add
+    12 index get-bottom-border 12 index /bottom get /width get add
+    edge-show
+  } if
+
+% RIGHT
+  dup /right get /width get 0 gt
+  1 index /right get /style get /none ne 
+  and
+  {
+    dup /right get /style get
+    false
+    2  index /right get /color get 
+    3  index /right get /width get
+    5  index get-right-border
+    6  index get-bottom-border
+    7  index get-right-border
+    8  index get-top-border
+    9  index get-right-border   9 index /right get /width get sub
+    10 index get-top-border    10 index /top get /width get sub
+    11 index get-right-border  11 index /right get /width get sub
+    12 index get-bottom-border 12 index /bottom get /width get add
+    edge-show
+  } if
+
+% TOP
+  dup /top get /width get 0 gt
+  1 index /top get /style get /none ne 
+  and
+  {
+    dup /top get /style get
+    true
+    2  index /top get /color get 
+    3  index /top get /width get
+    5  index get-left-border
+    6  index get-top-border
+    7  index get-right-border
+    8  index get-top-border
+    9  index get-right-border   9 index /right get /width get sub
+    10 index get-top-border    10 index /top get /width get sub
+    11 index get-left-border   11 index /left get /width get add
+    12 index get-top-border    12 index /top get /width get sub
+    edge-show
+  } if
+
+% BOTTOM
+  dup /bottom get /width get 0 gt
+  1 index /bottom get /style get /none ne 
+  and
+  {
+    dup /bottom get /style get
+    false
+    2  index /bottom get /color get 
+    3  index /bottom get /width get
+    5  index get-left-border
+    6  index get-bottom-border
+    7  index get-right-border
+    8  index get-bottom-border
+    9  index get-right-border   9 index /right get /width get sub
+    10 index get-bottom-border 10 index /bottom get /width get add
+    11 index get-left-border   11 index /left get /width get add
+    12 index get-bottom-border 12 index /bottom get /width get add
+    edge-show
+  } if
+
+  pop pop
+} def
+
+/edge-get-width {                  % => Edge
+  dup /style get /none eq {
+    pop 0
+  } {
+    /width get
+  } ifelse
+} def
+
+/edge-show {
+% If this border have 'transparent' color value, we just will not draw it
+  9 index color-is-transparent {
+    pop pop pop
+    pop
+    pop pop pop pop pop pop pop pop
+  } {
+    edge-show-in
+  } ifelse
+} def
+
+/edge-show-in {                       % => Style HI Color Width X1 Y1 X2 Y2 X3 Y3 X4 Y4
+  newpath
+  11 index /dashed eq {
+    9 index color-apply
+    8 index 4 mul 1 array astore 0 setdash
+    8 index setlinewidth
+    
+    7 index 2 index add 2 div
+    7 index 2 index add 2 div
+    moveto
+
+    5 index 4 index add 2 div
+    5 index 4 index add 2 div
+    lineto
+    
+    stroke
+
+    [] 0 setdash
+  } if
+
+  11 index /dotted eq {  
+    9 index color-apply
+    8 index 1 array astore 0 setdash
+    8 index setlinewidth
+    
+    7 index 2 index add 2 div
+    7 index 2 index add 2 div
+    moveto
+
+    5 index 4 index add 2 div
+    5 index 4 index add 2 div
+    lineto
+    
+    stroke
+
+    [] 0 setdash
+  } if
+
+  11 index /solid eq {
+    9 index color-apply
+    
+    7 index 7 index moveto
+    5 index 5 index lineto
+    3 index 3 index lineto
+    1 index 1 index lineto
+    closepath
+    fill
+  } if
+
+  11 index /double eq {
+    9 index color-apply
+    1 px setlinewidth
+    
+    7 index 7 index moveto
+    5 index 5 index lineto
+    stroke
+    
+    3 index 3 index moveto
+    1 index 1 index lineto
+    stroke
+  } if
+
+  11 index /inset eq {
+    10 index {
+      9 index color-apply
+    } {
+      9 index 
+      [1.0 1.0 1.0 1.0] hilight-color-alpha color-blend
+      color-apply
+    } ifelse
+    
+    7 index 7 index moveto
+    5 index 5 index lineto
+    3 index 3 index lineto
+    1 index 1 index lineto
+    closepath
+    fill
+  } if
+
+  11 index /outset eq {
+    10 index not {
+      9 index color-apply
+    } {
+      9 index 
+      [1.0 1.0 1.0 1.0] hilight-color-alpha color-blend
+      color-apply
+    } ifelse
+    
+    7 index 7 index moveto
+    5 index 5 index lineto
+    3 index 3 index lineto
+    1 index 1 index lineto
+    closepath
+    fill
+  } if
+
+  11 index /groove eq {
+    9 index 
+    [1.0 1.0 1.0 1.0] hilight-color-alpha color-blend
+    color-apply
+    
+    7 index 7 index moveto
+    5 index 5 index lineto
+    3 index 3 index lineto
+    1 index 1 index lineto
+    closepath
+    fill
+
+    9 index aload pop
+    setrgbcolor
+
+    1 px setlinewidth
+
+    10 index {
+      7 index 7 index moveto
+      5 index 5 index lineto
+      stroke
+    } {
+      3 index 3 index moveto
+      1 index 1 index lineto
+      stroke
+    } ifelse
+  } if
+
+  11 index /ridge eq {
+    9 index aload pop
+    setrgbcolor
+    
+    7 index 7 index moveto
+    5 index 5 index lineto
+    3 index 3 index lineto
+    1 index 1 index lineto
+    closepath
+    fill
+
+    9 index aload pop
+    [1.0 1.0 1.0 1.0] hilight-color-alpha color-blend
+    color-apply
+
+    1 px setlinewidth
+
+    10 index {
+      7 index 7 index moveto
+      5 index 5 index lineto
+      stroke
+    } {
+      3 index 3 index moveto
+      1 index 1 index lineto
+      stroke
+    } ifelse
+  } if
+
+  pop pop pop pop pop
+  pop pop pop pop pop
+  pop pop
+} def

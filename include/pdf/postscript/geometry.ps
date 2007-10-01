@@ -1,0 +1,27 @@
+% $Header: /cvsroot/html2ps/postscript/geometry.ps,v 1.1 2005/12/18 07:21:38 Konstantin Exp $
+
+/inside-rectangle {                % => X Y L T W H
+  5 index 4 index sub              % => X Y L T W H X-L
+  dup 0 gt                         % => X Y L T W H X-L X-L>0
+  exch 3 index lt and              % => X Y L T W H (X-L<W & X-L>0)
+  5 index 4 index sub neg          % => X Y L T W H (X-L<W & X-L>0) -(Y-T)
+  dup 0 gt                         % => X Y L T W H (X-L<W & X-L>0) -(Y-T) -(Y-T)>0
+  exch 3 index lt and              % => X Y L T W H (X-L<W & X-L>0) (-(Y-T)>0 & -(Y-T)<H)
+  and                              % => X Y L T W H (X-L<W & X-L>0) & (-(Y-T)>0 & -(Y-T)<H)
+  7 1 roll
+  pop pop 
+  pop pop pop pop
+} def
+
+/inside-rectangle-border {         % => X Y L T W H
+  5 index 4 index sub              % => X Y L T W H X-L
+  dup 0 ge                         % => X Y L T W H X-L X-L>0
+  exch 3 index le and              % => X Y L T W H (X-L<W & X-L>0)
+  5 index 4 index sub neg          % => X Y L T W H (X-L<W & X-L>0) -(Y-T)
+  dup 0 ge                         % => X Y L T W H (X-L<W & X-L>0) -(Y-T) -(Y-T)>0
+  exch 3 index le and              % => X Y L T W H (X-L<W & X-L>0) (-(Y-T)>0 & -(Y-T)<H)
+  and                              % => X Y L T W H (X-L<W & X-L>0) & (-(Y-T)>0 & -(Y-T)<H)
+  7 1 roll
+  pop pop 
+  pop pop pop pop
+} def

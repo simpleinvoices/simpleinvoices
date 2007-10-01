@@ -1,0 +1,29 @@
+/color-apply {
+  aload pop pop
+  setrgbcolor
+} def
+
+/color-blend {                     % => C1 C2 A
+  [0 0 0 0] exch                   % => C1 C2 C3 A
+  0 1 3 {                          % => C1 C2 C3 A I
+   4 index 1 index get             % => C1 C2 C3 A I C1[i]
+   4 index 2 index get             % => C1 C2 C3 A I C1[i] C2[i]
+   1 index sub                     % => C1 C2 C3 A I C1[i] C2[i]-C1[i]
+   3 index mul
+   add                             % => C1 C2 C3 A I C3[i]
+   3 index 2 index 2 index put     % => C1 C2 C3 A I C3[i]
+   pop pop 
+  } for                            % => C1 C2 C3 A
+  
+  pop
+  exch pop
+  exch pop
+} def
+
+/color-create {                    % => R G B A
+  4 array astore
+} def
+
+/color-is-transparent {
+  3 get 0 eq
+} def
