@@ -19,9 +19,9 @@ $httpPort=""; // ":7653" - if you have apache running on a non standard port add
 define("TB_PREFIX","si_");
 
 /*Email configs*/
-$email_host = "";  // specify main and backup server - separating with ;
+$email_host = "localhost";  // specify main and backup server - separating with ;
 $email_smtp_auth = true;     // turn on SMTP authentication
-#$SMTPAuth = true;     // turn on SMTP authentication
+//$email_smtp_auth = false;     // turn on SMTP authentication
 #if authentication is required for the smtp server please add the username and password in the two options below
 $email_username = "";  // SMTP username
 $email_password = ""; // SMTP password
