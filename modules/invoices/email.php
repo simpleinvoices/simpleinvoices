@@ -23,38 +23,55 @@ checkLogin();
 $invoice_id = $_GET['invoice'];
 
 $invoice = getInvoice($invoice_id);
-$preference = getPreference($invoice['preference_id']);
-$biller = getBiller($invoice['biller_id']);
+$invoice_type =  getInvoiceType($invoice['type_id']);
 $customer = getCustomer($invoice['customer_id']);
+$biller = getBiller($invoice['biller_id']);
+$preference = getPreference($invoice['preference_id']);
+$defaults = getSystemDefaults();
+$invoiceItems = getInvoiceItems($invoice_id);
 
-$sql = "SELECT inv_ty_description AS type FROM ".TB_PREFIX."invoice_type WHERE inv_ty_id = $invoice[type_id]";
-$query = mysqlQuery($sql);
-$invoiceType = mysql_fetch_array($query);
-
-$url_pdf = "http://{$http_auth}$_SERVER[HTTP_HOST]{$httpPort}$install_path/index.php?module=invoices&view=templates/template&invoice=$invoice_id&action=view&location=pdf&style=$invoiceType[type]";
-//echo $url_pdf;
-$url_pdf_encoded = urlencode($url_pdf); 
-$url_for_pdf = "http://{$http_auth}$_SERVER[HTTP_HOST]{$httpPort}$install_path/include/pdf/html2ps.php?process_mode=single&renderfields=1&renderlinks=1&renderimages=1&scalepoints=1&pixels=$pdf_screen_size&media=$pdf_paper_size&leftmargin=$pdf_left_margin&rightmargin=$pdf_right_margin&topmargin=$pdf_top_margin&bottommargin=$pdf_bottom_margin&transparency_workaround=1&imagequality_workaround=1&output=2&location=pdf&pdfname=$preference[pref_inv_wording]$invoice[id]&URL=$url_pdf_encoded";
-
+$url_pdf = "{$http_auth}{$_SERVER['HTTP_HOST']}{$httpPort}{$install_path}/index.php?module=invoices&view=templates/template&invoice={$invoice['id']}&action=view&location=pdf&type={$invoice['type_id']}";
+$url_pdf_encoded = urlencode($url_pdf);
+$url_for_pdf = "./include/pdf/html2ps.php?process_mode=single&renderfields=1&renderlinks=1&renderimages=1&scalepoints=1&pixels=$pdf_screen_size&media=$pdf_paper_size&leftmargin=$pdf_left_margin&rightmargin=$pdf_right_margin&topmargin=$pdf_top_margin&bottommargin=$pdf_bottom_margin&transparency_workaround=1&imagequality_workaround=1&output=1&location=pdf&pdfname=$preference[pref_inv_wording]$invoice[id]&URL=$url_pdf_encoded";
+      
 if ($_GET['stage'] == 2 ) {
-	if (extension_loaded('curl')) {
-		$ch = curl_init();
-	
-		// set URL and other appropriate options
-		curl_setopt($ch, CURLOPT_URL, $url_for_pdf);
-		curl_setopt($ch, CURLOPT_HEADER, 0);
-		
-		// grab URL and pass it to the browser
-		$response = curl_exec($ch);
-		
-		// close cURL resource, and free up system resources
-		curl_close($ch);
-	}else{
-		$response = file_get_contents("http://www.example.com/", "r");
-	}
-	
-	//use curl and baring that use fopen
-	//
+
+	require_once('./include/pdf/pipeline.class.php');
+	parse_config_file('./include/pdf/html2ps.config');
+
+	$g_config = array(
+	                 'cssmedia'     => 'screen',
+        	          'renderimages' => true,
+                	  'renderforms'  => false,
+	                  'renderlinks'  => true,
+	                  'mode'         => 'html',
+	                  'debugbox'     => false,
+	                  'draw_page_border' => false
+	                  );
+
+	$media = Media::predefined('A4');
+	$media->set_landscape(false);
+	$media->set_margins(array('left'   => 0,
+        	                  'right'  => 0,
+                	          'top'    => 0,
+                	          'bottom' => 0));
+	$media->set_pixels(1024);
+
+	$g_px_scale = mm2pt($media->width() - $media->margins['left'] - $media->margins['right']) / $media->pixels;
+	$g_pt_scale = $g_px_scale * 1.43; 
+
+	$pipeline = new Pipeline;
+	$pipeline->fetchers[]     = new FetcherURL;
+	$pipeline->data_filters[] = new DataFilterHTML2XHTML;
+	$pipeline->parser         = new ParserXHTML;
+	$pipeline->layout_engine  = new LayoutEngineDefault;
+	$pipeline->output_driver  = new OutputDriverFPDF($media);
+	$pipeline->destination    = new DestinationFile($preference[pref_inv_wording].$invoice[id]);
+
+
+
+	$pipeline->process($url_pdf, $media); 
+
 	echo $block_stage2;
 
 	require("./modules/include/mail/class.phpmailer.php");
@@ -74,7 +91,7 @@ if ($_GET['stage'] == 2 ) {
 	$mail->AddBCC("$_POST[email_bcc]");
 	}
 	$mail->WordWrap = 50;                                 // set word wrap to 50 characters
-	$mail->AddAttachment("./include/pdf/out/$preference[pref_inv_wording]$invoice[id].pdf");         // add attachments
+	$mail->AddAttachment("./include/pdf/cache/$preference[pref_inv_wording]$invoice[id].pdf");         // add attachments
 
 	$mail->IsHTML(true);                                  // set email format to HTML
 
@@ -82,21 +99,23 @@ if ($_GET['stage'] == 2 ) {
 	$mail->Body    = "$_POST[email_notes]";
 	$mail->AltBody = "$_POST[email_notes]";
 
-	$results = $mail->Send();
-	unlink("./include/pdf/out/$preference[pref_inv_wording]$invoice[id].pdf");
-	if(!$results)
+	if(!$mail->Send())
 	{
-	   echo "Message could not be sent. <p>";
-	   echo "Mailer Error: " . $mail->ErrorInfo;
+	   $message .= "Message could not be sent. <p>";
+	   $message .= "Mailer Error: " . $mail->ErrorInfo;
 	   exit;
 	}
-	$message = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=invoices&view=manage><br>$preference[pref_inv_wording] $invoice[id] has been sent as a PDF";
+	echo "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=invoices&view=manage>";
+	$message .= "<br>$preference[pref_inv_wording] $invoice[id] has been sent as a PDF";
+
 	echo $block_stage3;
+
+
 }
 
 //stage 3 = assemble email and send
 else if ($_GET['stage'] == 3 ) {
-	echo "How did you get here :)";
+	$message .= "How did you get here :)";
 }
 
 $pageActive = "invoices";
