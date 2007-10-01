@@ -1054,4 +1054,37 @@ function checkFieldExists($table,$field)
 		return false;
 	}
 }
+
+function urlPDF($invoiceID,$invoiceTypeID) 
+{
+
+	global $http_auth;
+	
+	$script = "/index.php?module=invoices&view=templates/template&invoice=$invoiceID&action=view&location=pdf&type=$invoiceTypeID";
+	$port = "";
+	$dir = dirname($_SERVER['PHP_SELF']);
+
+	//set the port of http(s) section
+	if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on') {
+		$_SERVER['FULL_URL'] = "https://";
+	if($_SERVER['SERVER_PORT']!="443") {
+		$port .= "://" . $_SERVER[’SERVER_PORT’];
+	}
+	} else {
+		$_SERVER['FULL_URL'] = "http://";
+		if($_SERVER['SERVER_PORT']!="80") {
+		$port = ":" . $_SERVER['SERVER_PORT'];
+		}
+	}
+
+	//merge it all togehter
+	if (isset($_SERVER['HTTP_HOST'])) {
+		$_SERVER['FULL_URL'] .= $http_auth.$_SERVER['HTTP_HOST'].$port.$dir.$script;
+	} else {
+		$_SERVER['FULL_URL'] .= $http_auth.$_SERVER['HTTP_HOST'].$port.$dir.$script;
+	}
+	
+	return $_SERVER['FULL_URL'];
+
+}
 ?>
