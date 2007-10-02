@@ -60,12 +60,12 @@
 				<a title="{$LANG.delete} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}" href="index.php?module=invoices&view=delete&stage=1&invoice={$invoice.invoice.id}"><img src="images/common/delete.png" height="16" border="0" align="absmiddle" /></a>
 		{/if}		
 				<!-- Print View -->
-				<a target="_blank" class="index_table" title="{$LANG.print_preview_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}" href="index.php?module=invoices&view=templates/template&invoice={$invoice.invoice.id}&action=view&location=print&type={$invoice.invoiceType.inv_ty_id}"><img src="images/common/printer.gif" height="16" border="0" align="absmiddle" /></a>
+				<a target="_blank" class="index_table" title="{$LANG.print_preview_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}" href="index.php?module=invoices&view=templates/template&invoice={$invoice.invoice.id}&action=view&location=print&type={$invoice.invoiceType.inv_ty_id}"><img src="images/common/printer.png" height="16" border="0" align="absmiddle" /></a>
 			 	
-				<a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}" href="#" class="showdownloads"><img src="images/common/pdf.jpg" height="16" border="0" align="absmiddle" /></a>
+				<a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}" href="#" class="showdownloads"><img src="images/common/page_white_acrobat.png" height="16" border="0" align="absmiddle" /></a>
 				<div class="downloads" style="display:none;">
 					<!-- EXPORT TO PDF -->
-					<a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id} {$LANG.export_pdf_tooltip}" class="index_table" href="{$invoice.url_for_pdf}"><img src="images/common/pdf.jpg" height="16" border="0" align="absmiddle" /></a>
+					<a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id} {$LANG.export_pdf_tooltip}" class="index_table" href="{$invoice.url_for_pdf}"><img src="images/common/page_white_acrobat.png" height="16" border="0" align="absmiddle" /></a>
 				
 					<!--XLS -->
 					<a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording}{$invoice.invoice.id} {$LANG.export_xls_tooltip} {$spreadsheet} {$LANG.format_tooltip}" class="index_table" href="index.php?module=invoices&view=templates/template&invoice={$invoice.invoice.id}&action=view&type={$invoice.invoiceType.inv_ty_id}&location=print&export={$spreadsheet}"><img src="images/common/xls.gif" height="16" border="0" align="absmiddle" /></a>
@@ -74,10 +74,10 @@
 					<a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id} {$LANG.export_doc_tooltip} {$word_processor} {$LANG.format_tooltip}" class="index_table" href="index.php?module=invoices&view=templates/template&invoice={$invoice.invoice.id}&action=view&type={$invoice.invoiceType.inv_ty_id}&location=print&export={$word_processor}"><img src="images/common/doc.png" height="16" border="0" align="absmiddle" /></a>
 				</div>
 			 	<!-- Payment -->
-				<a title="{$LANG.process_payment} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}" class="index_table" href="index.php?module=payments&view=process&invoice={$invoice.invoice.id}&op=pay_selected_invoice">$</a>
+				<a title="{$LANG.process_payment} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}" class="index_table" href="index.php?module=payments&view=process&invoice={$invoice.invoice.id}&op=pay_selected_invoice"><img src="images/common/money_dollar.png" height="16" border="0" align="absmiddle" /></a>
 				
 				<!-- Email -->
-				<a href="index.php?module=invoices&view=email&stage=1&invoice={$invoice.invoice.id}" title="{$LANG.email}  {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}"><img src="images/common/mail-message-new.png" height="16" border="0" border="0" align="absmiddle" /></a></td>
+				<a href="index.php?module=invoices&view=email&stage=1&invoice={$invoice.invoice.id}" title="{$LANG.email}  {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}"><img src="images/common/email_attach.png" height="16" border="0" border="0" align="absmiddle" /></a></td>
 			<td class="index_table">{$invoice.invoice.id}</td>
 			<td class="index_table">{$invoice.biller.name}</td>
 			<td class="index_table">{$invoice.customer.name}</td>
