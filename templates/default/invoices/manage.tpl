@@ -60,7 +60,7 @@
 				<a title="{$LANG.delete} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}" href="index.php?module=invoices&view=delete&stage=1&invoice={$invoice.invoice.id}"><img src="images/common/delete.png" height="16" border="0" align="absmiddle" /></a>
 		{/if}		
 				<!-- Print View -->
-				<a target="_blank" class="index_table" title="{$LANG.print_preview_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}" href="index.php?module=invoices&view=templates/template&invoice={$invoice.invoice.id}&action=view&location=print&type={$invoice.invoiceType.inv_ty_id}"><img src="images/common/printer.png" height="16" border="0" align="absmiddle" /></a>
+				<a class="index_table" title="{$LANG.print_preview_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}" href="index.php?module=invoices&view=templates/template&invoice={$invoice.invoice.id}&action=view&location=print&type={$invoice.invoiceType.inv_ty_id}"><img src="images/common/printer.png" height="16" border="0" align="absmiddle" /></a>
 			 	
 				<a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}" href="#" class="showdownloads"><img src="images/common/page_white_acrobat.png" height="16" border="0" align="absmiddle" /></a>
 				<div class="downloads" style="display:none;">
