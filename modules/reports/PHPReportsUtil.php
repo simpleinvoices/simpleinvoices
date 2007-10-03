@@ -50,7 +50,7 @@
 	*																										*
 	******************************************************************************/
 	function getPHPReportsTmpPath(){
-		$sPath = tempnam(null,"check");
+		$sPath = tempnam("./cache/","check");
 		unlink($sPath);
 		return realpath(dirname($sPath));
 	}
