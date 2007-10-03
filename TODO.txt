@@ -1,38 +1,6 @@
-- NR todo (Sept)
- - quick view : check all style if all cut size to 25 characters stuff is working
- -- quick view : check consulting style - is descripton etc coming through OK?
+- TODO next release - (aim end of Sept)
  - lang: add new lang variables into all files : grep LANG_TODO
-
-- NR done
- - menu : add + back into menu - done
- -- menu : make active tab work for ALL pages - done
- - print preview of Total style invocies needs to be fixed - done
- - menu : new read from db - what happens when user changes LANG - menu wont update - needs to be fixed - done
- - quick view - show customer fields for invoices in the invoice summary section and show by default - done
- - tax : nz - change to 12.5% - done
- - add biller: change 'street' to 'street address' - done
- - quick view - add file names extensions (xls,doc) back in to the export section - done
- - si_user and auth challenges table - add check to see if all ready exists(If not exists added to sql) - done
- - invoice save.php - needs to redirect to correct quick view invoice type - hard code type in url removed - relpaced with variable - done
- - menu : fix documentaion links about etc.. to be correct(you'll need to rerun this patch) - done
- - db connect: show nice messages again if cant connect (as in the previous release) - done
- - change System Defaults to System Preferences - done
- -- quick view : make export to pdf work - done
- - payments - make todays date appear as default in the date field - done
- - delete : delete invoice - make this happen - done
- - add more items : update ui - done
- -- add famfam icon for add button - done
- - reports need templates - so as to work with menu system - done
- - patches 128 - 130 : if an if statement in them - done
- - language : new language system - review - done
- - convert remaining pages to smarty - done
- - sys pref: make select def inv template work - done
- - reports : now using new format for total style (using products table) some reports may have to be rewritten - to be investigated - done
- - PDF - needs to work with port numbers iie 127.0.0.1:8080/svn/simpleinvoices - done TO BE TESTED
- - invoice : save total inserts into product table with visible = 1, should be 0 - nicolas done 
-
-- in next release +1 (NR1) - (aim end of Sept)
--todo
+ - def invoice template - mob phone not coming through - check all fields
  - manage pages redevelopment!!
  - users/groups/domains - make this happen!
  - user admin ui
@@ -259,4 +227,31 @@ DONE OLD STUFF
  - login.php change 
  - quick view mod re manage payments link
  - mysql 4 ? issue - my regex stuff needs mods - done
+ # 20071002 release
+ - menu : add + back into menu - done
+ -- menu : make active tab work for ALL pages - done
+ - print preview of Total style invocies needs to be fixed - done
+ - menu : new read from db - what happens when user changes LANG - menu wont update - needs to be fixed - done
+ - quick view - show customer fields for invoices in the invoice summary section and show by default - done
+ - tax : nz - change to 12.5% - done
+ - add biller: change 'street' to 'street address' - done
+ - quick view - add file names extensions (xls,doc) back in to the export section - done
+ - si_user and auth challenges table - add check to see if all ready exists(If not exists added to sql) - done
+ - invoice save.php - needs to redirect to correct quick view invoice type - hard code type in url removed - relpaced with variable - done
+ - menu : fix documentaion links about etc.. to be correct(you'll need to rerun this patch) - done
+ - db connect: show nice messages again if cant connect (as in the previous release) - done
+ - change System Defaults to System Preferences - done
+ -- quick view : make export to pdf work - done
+ - payments - make todays date appear as default in the date field - done
+ - delete : delete invoice - make this happen - done
+ - add more items : update ui - done
+ -- add famfam icon for add button - done
+ - reports need templates - so as to work with menu system - done
+ - patches 128 - 130 : if an if statement in them - done
+ - language : new language system - review - done
+ - convert remaining pages to smarty - done
+ - sys pref: make select def inv template work - done
+ - reports : now using new format for total style (using products table) some reports may have to be rewritten - to be investigated - done
+ - PDF - needs to work with port numbers iie 127.0.0.1:8080/svn/simpleinvoices - done TO BE TESTED
+ - invoice : save total inserts into product table with visible = 1, should be 0 - nicolas done 
 
