@@ -512,6 +512,11 @@ function getInvoiceTotal($invoice_id) {
 	return $res['total'];
 }
 
+function setInvoiceStatus($invoice, $status){
+	$sql = "UPDATE " . TB_PREFIX . "invoices SET status_id = '" . $status . "' WHERE id = " . $invoice;
+	$query  = mysqlQuery($sql) or die(mysql_error());
+}
+
 function getInvoice($id) {
 	
 	global $config;
@@ -872,6 +877,7 @@ function updateInvoice($invoice_id) {
 			biller_id = '$_POST[biller_id]',
 			customer_id = '$_POST[customer_id]',
 			preference_id = '$_POST[preference_id]',
+			status_id = '$_POST[status_id]',
 			date = '$_POST[date]',
 			note = '$_POST[note]',
 			custom_field1 = '$_POST[customField1]',

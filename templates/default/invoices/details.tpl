@@ -66,6 +66,16 @@
 		
 		</td>
 	</tr>
+	<tr>
+		<td class="details_screen">Invoice Status</td>
+		<td>
+			<select name="status_id">
+				<option value="0">New</option>
+				<option {if $invoice.status_id == 1} selected{/if} value="1">Sent</option>
+				<option {if $invoice.status_id == 2} selected{/if} value="1">Paid</option>
+			</select>
+		</td>
+	</tr>
 
 
 {if $invoice.type_id == 1 }

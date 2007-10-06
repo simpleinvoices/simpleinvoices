@@ -39,16 +39,18 @@ $url_for_pdf = "http://{$http_auth}$_SERVER[HTTP_HOST]{$httpPort}$install_path/i
 */
 	$url_pdf = urlPDF($invoice['id'],$invoice['type_id']);
 	$url_pdf_encoded = urlencode($url_pdf);
-	$url_for_pdf = "./include/pdf/html2ps.php?process_mode=single&renderfields=1&renderlinks=1&renderimages=1&scalepoints=1&pixels=$pdf_screen_size&media=$pdf_paper_size&leftmargin=$pdf_left_margin&rightmargin=$pdf_right_margin&topmargin=$pdf_top_margin&bottommargin=$pdf_bottom_margin&transparency_workaround=1&imagequality_workaround=1&output=1&location=pdf&pdfname=$preference[pref_inv_wording]$invoice[id]&URL=$url_pdf_encoded";
+	$pathparts = pathinfo($_SERVER["SCRIPT_NAME"]);
+	$url_for_pdf = $_SERVER["SERVER_NAME"].$pathparts['dirname']."/include/pdf/html2ps.php?process_mode=single&renderfields=1&renderlinks=1&renderimages=1&scalepoints=1&pixels=$pdf_screen_size&media=$pdf_paper_size&leftmargin=$pdf_left_margin&rightmargin=$pdf_right_margin&topmargin=$pdf_top_margin&bottommargin=$pdf_bottom_margin&transparency_workaround=1&imagequality_workaround=1&output=1&location=pdf&pdfname=$preference[pref_inv_wording]$invoice[id]&URL=$url_pdf_encoded";
       
 
 if ($_GET['stage'] == 2 ) {
 	if (extension_loaded('curl')) {
 		$ch = curl_init();
-	
 		// set URL and other appropriate options
 		curl_setopt($ch, CURLOPT_URL, $url_for_pdf);
 		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+
 		
 		// grab URL and pass it to the browser
 		$response = curl_exec($ch);
@@ -56,9 +58,12 @@ if ($_GET['stage'] == 2 ) {
 		// close cURL resource, and free up system resources
 		curl_close($ch);
 	}else{
-		$response = file_get_contents("http://www.example.com/", "r");
+		$response = file_get_contents($url_for_pdf, "r");
 	}
 	
+	
+	//now save the stream to the out folder
+	file_put_contents("./include/pdf/out/$preference[pref_inv_wording]$invoice[id].pdf", $response);
 	//use curl and baring that use fopen
 	//
 	echo $block_stage2;
@@ -98,6 +103,7 @@ if ($_GET['stage'] == 2 ) {
 	}
 	$message = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=invoices&view=manage><br>$preference[pref_inv_wording] $invoice[id] has been sent as a PDF";
 	echo $block_stage3;
+	setInvoiceStatus($invoice["id"], 1);
 }
 
 //stage 3 = assemble email and send
