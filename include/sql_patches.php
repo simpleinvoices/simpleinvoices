@@ -704,7 +704,7 @@ NULL , 'logging', '0'
 //old ones - start	
 	
 		$patch['132']['name'] = "Create si_customFieldCategories table";
-		$patch['133']['patch'] = "CREATE TABLE `si_customFieldCategories` (
+		$patch['132']['patch'] = "CREATE TABLE `si_customFieldCategories` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(40) NOT NULL,
   PRIMARY KEY  (`id`) );";
