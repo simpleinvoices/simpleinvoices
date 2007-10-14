@@ -91,7 +91,7 @@ include('lang/lang_'.$language.'.php');
         switch ($action) {
         case 'create':
             // Created a new DB
-            $query = mysqlQuery("CREATE DATABASE IF NOT EXISTS ". $dbname) or die($LANG['existingDb'] . mysql_error());
+            //$query = mysqlQuery("CREATE DATABASE IF NOT EXISTS ". $dbname) or die($LANG['existingDb'] . mysql_error());
             
             // Select this new DB
             $db_selected = mysql_select_db($dbname, $connection);

@@ -1,6 +1,5 @@
 <?php
 
-die("no ready");
 session_start();
 
 // +-----------------------------------------------------------------------+
@@ -10,14 +9,16 @@ session_start();
 
 // définition automatique de la langue du navigateur
 $langNav = substr(getenv("HTTP_ACCEPT_LANGUAGE"),0,2);
+$langNav = "en";
 
 // Selection du fichier de langue
 if(!empty($langNav)) {
 	include('lang/lang_'.$langNav.'.php');
 	$_SESSION['language']= $langNav;
 }
-else
+else {
 	$langNav = "en";
+}
 
 ?>
 

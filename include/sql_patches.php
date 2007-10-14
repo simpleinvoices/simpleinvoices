@@ -743,7 +743,14 @@ NULL , 'logging', '0'
 	$patch['136']['name'] = "Add default status_id to invoices";
     $patch['136']['patch'] = "ALTER TABLE si_invoices ADD status_id INT DEFAULT 0 NOT NULL";
     $patch['136']['date'] = "20071006";
-
+    
+    $patch['137']['name'] = "Custom field conversion";
+    $patch['137']['patch'] = "SELECT 1+1";
+    $patch['137']['date'] = "20071006";
+    
+    $patch['138']['name'] = "Add custom field order";
+    $patch['138']['patch'] = "ALTER TABLE  `si_customFields` ADD  `order` INT NULL ;";
+    $patch['138']['date'] = "20071006";
 
 	
 /* //TO BE PORTED ACROSS AGAIN

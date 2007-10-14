@@ -45,7 +45,7 @@ function controle_post_max_size()
     }
 }
 
-// Mémoire maximum allouée pendant l'exécution d'un script
+// MÃ©moire maximum allouÃ©e pendant l'exÃ©cution d'un script
 // Simple invoices want if possible 24M.
 $memory_limit = ini_get('memory_limit');
 
@@ -76,6 +76,17 @@ function controleXslt()
     } else {
         return false;
     }
+}
+
+function checkConfigPermissions() {
+	$perm = substr(sprintf('%o', fileperms('../config/config.php')), -4);
+	
+	if($perm < "0777") {
+		echo "nein";
+	}
+	else {
+		echo "ja";
+	}
 }
 
 ?>
