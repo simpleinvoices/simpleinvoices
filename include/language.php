@@ -13,7 +13,15 @@
 //print_r($result);
 unset($LANG);
 
-$language = getDefaultLanguage();
+/*if upgrading from old version then getDefaultLang wont work during install*/
+if(checkTableExists('si_system_defaults') == true)
+{
+	$language = getDefaultLanguage();
+}
+if(checkTableExists('si_system_defaults') == false)
+{
+	//$language = getDefaultLanguage();
+}  
 
 function getLanguageArray() {
 	global $language;
