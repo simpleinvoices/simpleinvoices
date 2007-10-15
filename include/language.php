@@ -20,7 +20,7 @@ if(checkTableExists('si_system_defaults') == true)
 }
 if(checkTableExists('si_system_defaults') == false)
 {
-	//$language = getDefaultLanguage();
+	$language = "en-gb";
 }  
 
 function getLanguageArray() {
