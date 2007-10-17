@@ -376,5 +376,5 @@
 </table>
 <div id="footer"></div></div>
 
-</body>
+</table></body>
 </html>
