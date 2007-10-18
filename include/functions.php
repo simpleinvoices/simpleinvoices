@@ -385,4 +385,25 @@ sort($folderList);
 return($folderList);
 }
 
+function sql2xml($query4xml) {
+	//count the no. of  columns in the table
+	$fcount = mysql_num_fields($query4xml);
+
+	//you can choose any name for the starting tag
+	$xml = ("<result>");
+	while($row = mysql_fetch_array( $query4xml ) )
+	{
+	$xml .= ("<tablerow>");
+	for($i=0; $i< $fcount; $i++)
+	{
+	$tag = mysql_field_name( $query4xml, $i );
+	$xml .= ("<$tag>". $row[$i]. "</$tag>");
+	}
+	$xml .= ("</tablerow>");
+	}
+	$xml .= ("</result>");
+
+	return $xml;
+}
+
 ?>

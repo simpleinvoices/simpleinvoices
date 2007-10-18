@@ -78,7 +78,18 @@ if (($module == "invoices" ) && (strstr($view,"templates"))) {
 	exit(0);
 }
 
+//xml for the new grid
+if (($module == "invoices" ) && (strstr($view,"xml"))) {
+	if (file_exists("./modules/invoices/xml.php")) {
+		include("./modules/invoices/xml.php");
+	}
+	else {
+		echo "The file that you requested doesn't exist";
+	}
+	
+	exit(0);
 
+}
 $path = "$module/$view";
 
 if(file_exists("./modules/$path.php")) {
