@@ -385,12 +385,13 @@ sort($folderList);
 return($folderList);
 }
 
-function sql2xml($query4xml) {
+function sql2xml($query4xml,$count) {
 	//count the no. of  columns in the table
 	$fcount = mysql_num_fields($query4xml);
 
 	//you can choose any name for the starting tag
 	$xml = ("<result>");
+	$xml .= "<total>".$count."</total>";
 	while($row = mysql_fetch_array( $query4xml ) )
 	{
 	$xml .= ("<tablerow>");

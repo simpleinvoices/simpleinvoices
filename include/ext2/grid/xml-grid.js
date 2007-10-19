@@ -12,26 +12,35 @@ Ext.onReady(function(){
     var ds = new Ext.data.Store({
         // load using HTTP
         //url: 'sheldon2.xml',
-		url: 'http://localhost/simpleinvoices-dev/trunk/index.php?module=invoices&view=xml',
+		url: 'http://localhost/simpleinvoices-dev/trunk/index.php?module=invoices&view=xml&limit=5',
         // the return will be XML, so lets set up a reader
         reader: new Ext.data.XmlReader({
                // records will have an "Item" tag
                record: 'tablerow',
                id: 'id',
-               totalRecords: '@total'
+               totalRecords: 'total'
            }, [
                // set up the fields mapping into the xml doc
                // The first needs mapping, the others are very basic
                {name: 'id', mapping: 'id'},
-               'biller_id', 'customer_id', 'date'
-           ])
+              'Biller','Customer','INV_TOTAL','INV_PAID','INV_OWING','Date','Aging','Type'
+           ]),
+		// turn on remote sorting
+        remoteSort: true
     });
+	
+	ds.setDefaultSort('id', 'desc');
 
     var cm = new Ext.grid.ColumnModel([
 	    {header: "ID", width: 120, dataIndex: 'id'},
-		{header: "Biller", width: 180, dataIndex: 'biller_id'},
-		{header: "Customer", width: 115, dataIndex: 'customer_id'},
-		{header: "Date", width: 100, dataIndex: 'date'}
+		{header: "Biller", width: 180, dataIndex: 'Biller'},
+		{header: "Customer", width: 115, dataIndex: 'Customer'},
+		{header: "Total", width: 115, dataIndex: 'INV_TOTAL'},
+		{header: "Paid", width: 115, dataIndex: 'INV_PAID'},
+		{header: "Owing", width: 115, dataIndex: 'INV_OWING'},
+		{header: "Date", width: 100, dataIndex: 'Date'},
+		{header: "Aging", width: 100, dataIndex: 'Aging'},
+		{header: "Type", width: 100, dataIndex: 'Type'}
 	]);
     cm.defaultSortable = true;
 
@@ -41,8 +50,19 @@ Ext.onReady(function(){
         cm: cm,
         renderTo:'example-grid',
         width:540,
-        height:200
+        height:200,
+		bbar: new Ext.PagingToolbar({
+            pageSize: 5,
+            store: ds,
+            displayInfo: true,
+            displayMsg: 'Displaying invoices {0} - {1} of {2}'
+        })
+		
     });
+	
 
-    ds.load();
+
+	ds.load({params:{start:0, limit:5}});
+
+    //ds.load();
 });
