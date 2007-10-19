@@ -12,7 +12,7 @@ Ext.onReady(function(){
     var ds = new Ext.data.Store({
         // load using HTTP
         //url: 'sheldon2.xml',
-		url: 'http://localhost/simpleinvoices-dev/trunk/index.php?module=invoices&view=xml&limit=5',
+		url: 'http://localhost/simpleinvoices-dev/trunk/index.php?module=invoices&view=xml',
         // the return will be XML, so lets set up a reader
         reader: new Ext.data.XmlReader({
                // records will have an "Item" tag
@@ -48,11 +48,12 @@ Ext.onReady(function(){
     var grid = new Ext.grid.GridPanel({
         ds: ds,
         cm: cm,
-        renderTo:'example-grid',
-        width:540,
-        height:200,
+		title:'Manage Invoices',
+        renderTo:'manageInvoicesGrid',
+        width:800,
+        height:600,
 		bbar: new Ext.PagingToolbar({
-            pageSize: 5,
+            pageSize: 25,
             store: ds,
             displayInfo: true,
             displayMsg: 'Displaying invoices {0} - {1} of {2}'
@@ -62,7 +63,7 @@ Ext.onReady(function(){
 	
 
 
-	ds.load({params:{start:0, limit:5}});
+	ds.load({params:{start:0, limit:25}});
 
     //ds.load();
 });
