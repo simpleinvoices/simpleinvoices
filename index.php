@@ -46,7 +46,8 @@ $smarty -> assign("LANG",$LANG);
 //For Making easy enabled pop-menus (see biller)
 $smarty -> assign("enabled",array($LANG['disabled'],$LANG['enabled']));
 
-$menu = true;
+//$menu = true;
+$menu = false;
 $file = "home";
 
 
@@ -118,7 +119,7 @@ if($menu) {
 
 include_once("./modules/$file.php");
 
-$smarty -> display("../templates/default/menu.tpl");
+//$smarty -> display("../templates/default/menu.tpl");
 
 $smarty -> display("../templates/default/main.tpl");
 //Shouldn't be necessary anymore. Ist for old files without tempaltes...

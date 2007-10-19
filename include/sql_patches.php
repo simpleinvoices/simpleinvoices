@@ -696,15 +696,11 @@ NULL , 'logging', '0'
 	$patch['131']['name'] = "Make tax field 3 decimal places";
 	$patch['131']['patch'] = "alter table `si_tax` change `tax_percentage` `tax_percentage` decimal (10,3)  NULL";
 	$patch['131']['date'] = "200709";
-	
-	
-	
-	
 
 //old ones - start	
 	
-		$patch['132']['name'] = "Create si_customFieldCategories table";
-		$patch['132']['patch'] = "CREATE TABLE `si_customFieldCategories` (
+	$patch['132']['name'] = "Create si_customFieldCategories table";
+	$patch['132']['patch'] = "CREATE TABLE `si_customFieldCategories` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(40) NOT NULL,
   PRIMARY KEY  (`id`) );";
