@@ -32,14 +32,14 @@ Ext.onReady(function(){
 	ds.setDefaultSort('id', 'desc');
 
     var cm = new Ext.grid.ColumnModel([
-	    {header: "ID", width: 120, dataIndex: 'id'},
+	    {header: "ID", width: 50, dataIndex: 'id'},
 		{header: "Biller", width: 180, dataIndex: 'Biller'},
 		{header: "Customer", width: 115, dataIndex: 'Customer'},
-		{header: "Total", width: 115, dataIndex: 'INV_TOTAL'},
-		{header: "Paid", width: 115, dataIndex: 'INV_PAID'},
-		{header: "Owing", width: 115, dataIndex: 'INV_OWING'},
-		{header: "Date", width: 100, dataIndex: 'Date'},
-		{header: "Aging", width: 100, dataIndex: 'Aging'},
+		{header: "Total", width: 75, dataIndex: 'INV_TOTAL'},
+		{header: "Paid", width: 75, dataIndex: 'INV_PAID'},
+		{header: "Owing", width: 75, dataIndex: 'INV_OWING'},
+		{header: "Date", width: 75, dataIndex: 'Date'},
+		{header: "Aging", width: 75, dataIndex: 'Aging'},
 		{header: "Type", width: 100, dataIndex: 'Type'}
 	]);
     cm.defaultSortable = true;
@@ -49,21 +49,49 @@ Ext.onReady(function(){
         ds: ds,
         cm: cm,
 		title:'Manage Invoices',
+        //renderTo: document.body,
         renderTo:'manageInvoicesGrid',
-        width:800,
-        height:600,
+        //width:800,
+        //height:600,
+		//autoHeight: true,
+        viewConfig: {
+             forceFit:true
+        },
+
 		bbar: new Ext.PagingToolbar({
             pageSize: 25,
             store: ds,
             displayInfo: true,
             displayMsg: 'Displaying invoices {0} - {1} of {2}'
-        })
+        }),
+		layout:'fit',
+        	             tbar:[{
+                             text:'Add New Invoice',
+                             tooltip:'Add a new row',
+                             iconCls:'add'
+                         }, '-', {
+                             text:'New Consulting style invoice',
+                             tooltip:'Blah blah blah blaht',
+                             iconCls:'option'
+                         },'-',{
+                             text:'new Itemised style invoice',
+                             tooltip:'Remove the selected item',
+                             iconCls:'remove'
+                         }]
 		
     });
 	
 
+pnl = new Ext.Viewport( {
+ id:'panel',
+ frame:false,
+ layout:'fit',
+ items:grid
+});
 
-	ds.load({params:{start:0, limit:25}});
+
+
+		ds.load({params:{start:0, limit:25}});
 
     //ds.load();
 });

@@ -20,10 +20,12 @@
 {if $invoices == null }
 <p><em>{$LANG.no_invoices}.</em></p>
 {else}
+{*
 <div style="text-align:center;"><b>{$LANG.manage_invoices}</b> :: <a href="index.php?module=invoices&view=total">{$LANG.add_new_invoice} - {$LANG.total_style}</a> :: <a href="index.php?module=invoices&view=itemised">{$LANG.add_new_invoice} - {$LANG.itemised_style}</a> :: <a href="index.php?module=invoices&view=consulting">{$LANG.add_new_invoice} - {$LANG.consulting_style}</a></div><hr />
+*}
 
 <div id="manageInvoicesGrid"></div>
-
+{*
 <div style="text-align:center;"><b>{$LANG.manage_invoices}</b> :: <a href="index.php?module=invoices&view=total">{$LANG.add_new_invoice} - {$LANG.total_style}</a> :: <a href="index.php?module=invoices&view=itemised">{$LANG.add_new_invoice} - {$LANG.itemised_style}</a> :: <a href="index.php?module=invoices&view=consulting">{$LANG.add_new_invoice} - {$LANG.consulting_style}</a></div><hr />
 <table width="95%" border="0" cellspacing="0" cellpadding="0" align="center" class="manage" id="live-grid">
 	<colgroup>
@@ -95,5 +97,7 @@
 	{/foreach}
 	</tbody>				
 </table>
+
+*}
 
 {/if}

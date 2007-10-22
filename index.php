@@ -121,7 +121,8 @@ include_once("./modules/$file.php");
 
 //$smarty -> display("../templates/default/menu.tpl");
 
-$smarty -> display("../templates/default/main.tpl");
+//old main file no longer needed
+//$smarty -> display("../templates/default/main.tpl");
 //Shouldn't be necessary anymore. Ist for old files without tempaltes...
 
 if(file_exists("./templates/default/$file.tpl")) {
@@ -135,7 +136,8 @@ else {
 	error_log("NOTEMPLATE!!!");
 }
 
-$smarty -> display("../templates/default/footer.tpl");
+// not needed
+//$smarty -> display("../templates/default/footer.tpl");
 
 
 ?>
