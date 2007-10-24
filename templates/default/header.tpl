@@ -12,6 +12,13 @@
     <script type="text/javascript" src="./include/ext2/grid/xml-grid.js"></script>
 	<link rel="stylesheet" type="text/css" href="./include/ext2/grid/grid-examples.css" />
 	
+
+	
 	<link rel="stylesheet" type="text/css" href="./include/css/simpleInvoicesStyle.css" />
+	
+	<script type="text/javascript" src="./include/ext2/menu/menus.js"></script>
+	<link rel="stylesheet" type="text/css" href="./include/ext2/menu/menus.css" />
+
+	<!--<script type="text/javascript" src="./include/ext2/layout/layout.js"></script>-->
 </head>
 <body>

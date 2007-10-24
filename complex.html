@@ -39,8 +39,8 @@
        viewport = new Ext.Viewport({
             layout:'border',
             items:[
-                new Ext.BoxComponent({ // raw
-                    region:'north',
+                boxed = new Ext.BoxComponent({ 
+					region:'north',
                     el: 'north',
                     height:10,
                     margins:'0 0 4 0'
@@ -66,7 +66,7 @@
                         //iconCls:'settings'
                     }]
                 },
-                new Ext.TabPanel({
+                centerPanel = new Ext.TabPanel({
                     region:'center',
                     deferredRender:false,
 					autoScroll: true, 
@@ -115,14 +115,41 @@ addCenterGrid : function(grid)
 	layout.endUpdate();
 }
 
+	
 var el = Ext.get('testlink');
 	el.on('click', function(){
-	activate('center2');
+	//centerPanel.setUrl('docs.php');
+	var el2 = Ext.getCmp('center1');
+	el2.setUrl('docs.php');
+	//activate('center2');
 	//alert(this.id);
     //alert('you click on a link');
 });
 
-    });
+boxed.addListener('click', function(node, event) {
+  var a = Ext.getCmp('center1').getActiveTab();
+  a.load( {
+    url : 'docs.php',
+    method : 'post',
+    scripts : true,
+    nocache : true,
+    text : 'Loading...'
+  });
+});  
+  
+clicked : function(){
+  var a = Ext.getCmp('center1').getActiveTab();
+    a.load( {
+    url : '/device/edit/219',
+    method : 'post',
+    scripts : true,
+    nocache : true,
+    text : 'Loading...'
+  })
+};  
+
+
+ });
 	</script>
 </head>
 <body>
@@ -131,8 +158,8 @@ var el = Ext.get('testlink');
     <p><a href="index.php" target="center-iframe">Home</a></p>
     <p><a href="index.php?module=invoices&view=total" onclick="viewport.activate('center1');">New Invoice</a><br>
    <a href="index.php?module=invoices&view=itemised" target="#center1">New Invoice- Consulting</a><br>
-   <a id="testlink" href="#" onclick="addCentreGrid();">New Invoice-Itemised</a><br>
-   <a href="index.php?module=invoices&view=total" target="center3">New Customer</a><br>
+   <a id="testlink" href="#" >New Invoice-Itemised</a><br>
+   <a href="#" onclick="clicked();" target="center1">New Customer</a><br>
    <a href="index.php?module=products&view=add" target="center-iframe">New Products</a><br>
    <a href="index.php?module=payments&view=total" target="center-iframe">Payment</a>
 <li class="x-tree-node">

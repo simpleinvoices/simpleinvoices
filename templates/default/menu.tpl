@@ -1,4 +1,3 @@
-
 <div id="Header">
 		<ul class="adxm menu">
 			<li { if $pageActive == null} id="active" {/if}><a href="index.php">{$LANG.home}</a></li>
@@ -141,11 +140,7 @@
 					<li>
 						<a href="./index.php?module=options&view=backup_database">{$LANG.backup_database}</a>
 					</li>
-<!--
-					<li>
-						<a href="./index.php?module=options&view=sanity_check">{$LANG.sanity_check}</a>
-					</li>
--->
+
 				</ul>
 			<li > <a href="#"><img src="./images/common/help-small.png"></a>
 				<ul>
