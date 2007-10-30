@@ -5,7 +5,7 @@
 * 	Portugues - Portuguese translation file
 *
 * Authors:
-*	 Murray Buckley, Max, Augusto Campos
+*	 Murray Buckley, Max, Augusto Campos, Rui Gouveia
 *
 * License:
 *	 GPL v2 or above
@@ -24,7 +24,7 @@ $LANG['actions'] = "Acções";//1
 $LANG['add_biller'] = "Adicionar facturador";//1
 $LANG['add_customer'] = "Adicionar Cliente";//1
 $LANG['add_invoice_preference'] = "Adicionar Preferências de Factura";//1
-$LANG['add_new_biller'] = "Add New Biller";//1
+$LANG['add_new_biller'] = "Adicionar novo facturador";//1
 $LANG['add_new_invoice'] = "Adicionar Nova Factura";//1
 $LANG['add_new_payment_type'] = "Adicionar Novo Tipo de Pagamento";//1
 $LANG['add_new_preference'] = "Adicionar Novas Preferências de Factura ";//1
@@ -90,9 +90,9 @@ $LANG['days'] = "dias";//1
 $LANG['debtors'] = "Devedores";//1
 $LANG['debtors_by_aging_periods'] = "Devedores por idade";//1
 $LANG['debtors_by_amount_owed'] = "Devedores por valor devendo";//1
-$LANG['default_inv_template'] = "Default invoice template ";//0
-$LANG['default_number_items'] = "Default number of line items:";//0
-$LANG['default_payment_type'] = "Default payment type";//0
+$LANG['default_inv_template'] = "Template da factura por omissão";//1
+$LANG['default_number_items'] = "Número de items por omissão:";//1
+$LANG['default_payment_type'] = "Tipo de pagamento por omissão";//1
 $LANG['description'] = "Descrição";//1
 $LANG['details'] = "Detalhas";//1
 $LANG['disabled'] = "Desactivado";//1
@@ -183,14 +183,14 @@ $LANG['mobile_short'] = "Mov.";//1
 $LANG['new_invoice_consulting'] = "Nova Factura – Estilo Completo";//1
 $LANG['new_invoice_itemised'] = "Nova Factura – Estilo Detalhado";//1
 $LANG['new_invoice_total'] = "Nova Factura – Estilo Comum";//1
-$LANG['no_billers'] = "There are no billers in the database, please add one";//0
+$LANG['no_billers'] = "Não existem facturadores na base de dados, por favor adicione um.";//1
 $LANG['no_customers'] = "Não há nenhum cliente nos registros";//1
-$LANG['no_defaults'] = "There are no defaults";//0
+$LANG['no_defaults'] = "Não existem defaults";//1
 $LANG['no_invoices'] = "Não há nenhum factura nos registros";//1
 $LANG['no_payment_types'] = "Desculpa, não há Tipo de Pagamento disponível, faz favor de Inserir um";//1
-$LANG['no_payments'] = "There are no payments in the database";//0
+$LANG['no_payments'] = "Não existem pagamentos na base de dados";//1
 $LANG['no_preferences'] = "Não há nenhum opção nos registros";//1
-$LANG['no_products'] = "There are no products in the database, please add one";//0
+$LANG['no_products'] = "Não existem produtos na base de dados. Por favor, adicione um.";//1
 $LANG['no_tax_rates'] = "Não há taxas de imposto na Base de Dados";//1
 $LANG['note'] = "Nota";//1
 $LANG['notes'] = "Notas";//1
@@ -200,7 +200,7 @@ $LANG['optional'] = "facultativo";//1
 $LANG['options'] = "Opções";//1
 $LANG['owing'] = "Divida";//1
 $LANG['paid'] = "Pago";//1
-$LANG['payment_id'] = "Payment ID";//0
+$LANG['payment_id'] = "ID pagamento";//1
 $LANG['payment_type'] = "Tipo de Pagamento";//1
 $LANG['payment_type_description'] = " Tipo de Pagamento Descrição";//1
 $LANG['payment_type_details'] = " Tipo de Pagamento Detalhas";//1
@@ -210,9 +210,9 @@ $LANG['payment_type_method'] = "Pagamento Tipo/Método";//1
 $LANG['payment_type_to_add'] = "Adicionar Tipo de Pagamento";//1
 $LANG['payment_types'] = " Tipos de Pagamento ";//1
 $LANG['payments'] = "Pagamento";//1
-$LANG['payments_filtered'] = "Payments filtered by Invoice ID";//0
-$LANG['payments_filtered_customer'] = "Payments filtered by Customer ID";//0
-$LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
+$LANG['payments_filtered'] = "Pagamentos filtrados pelo ID da factura";//1
+$LANG['payments_filtered_customer'] = "Pagamentos filtrados pelo ID do cliente";//1
+$LANG['payments_filtered_invoice'] = "Processar pagamento desta factura";//1
 $LANG['phone'] = "Telefone";//1
 $LANG['phone_short'] = "Tel.";//1
 $LANG['preference_id'] = "Número do Opção";//1
@@ -243,13 +243,13 @@ $LANG['sales'] = "Vendas";//1
 $LANG['sales_by_customers'] = "Vendas por clientes";//1
 $LANG['sanity_check'] = "verificação das facturas";//1
 $LANG['save'] = "Guardar";//1
-$LANG['save_biller'] = "Save Biller";//0
-$LANG['save_biller_failure'] = "Something went wrong, please try saving the biller again<br>";//0
-$LANG['save_biller_success'] = "Biller successfully saved, <br> you will be redirected to the Manage Billers page";//0
+$LANG['save_biller'] = "Gravar facturador";//1
+$LANG['save_biller_failure'] = "Algo correu mal. Por favor, tente gravar novamente o facturador<br>";//1
+$LANG['save_biller_success'] = "Facturador gravado com sucesso,<br>Vai ser redireccionado para a página de gestão de facturadores";//1
 $LANG['save_custom_field'] = "Guardar campo personalizado";//1
-$LANG['save_custom_field_failure'] = "Something went wrong, please try editing the custom field again<br>";//0
-$LANG['save_custom_field_success'] = "Custom field successfully saved, <br> you will be redirected back to the Manage Custom Fields";//0
-$LANG['save_customer'] = "Save Customer";//0
+$LANG['save_custom_field_failure'] = "Algo correu mal. Por favor, tente editar o campo personalisado novamente<br>";//1
+$LANG['save_custom_field_success'] = "Campo personalisado gravado com sucesso,<br>Vai ser redireccionado para a página de gestão de campos personalizados";//1
+$LANG['save_customer'] = "Gravar cliente";//1
 $LANG['save_customer_failure'] = "Something went wrong, please try saving the customer again";//0
 $LANG['save_customer_success'] = "Customer successfully saved,<br> you will be redirected back to the Manage Customers page";//0
 $LANG['save_defaults'] = "Save Defaults";//0
@@ -317,9 +317,9 @@ $LANG['upgrading_simple_invoices'] = "Actualizando Facturas Simples";//1
 $LANG['using_simple_invoices'] = "Utilizando Facturas Simples";//1
 $LANG['view'] = "Ver";//1
 $LANG['want_more_fields'] = "quer mais campos";//1
-$LANG['welcome'] = "Bem-vindo para";//1
-$LANG['what_are_custom_fields'] = "O que e campo adicional";//1
-$LANG['whats_this_page_about'] = "Sobre que esta pagina";//1
+$LANG['welcome'] = "Bem-vindo";//1
+$LANG['what_are_custom_fields'] = "O que são campos adicionais";//1
+$LANG['whats_this_page_about'] = "Sobre esta pagina";//1
 $LANG['zip'] = "Código postal";//1
 
 ?>
