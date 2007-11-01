@@ -53,11 +53,12 @@ if (/=/) { $count++; }
 if (/\/\/1/) { $count_translated++; }
 }
 $percentage = ($count_translated / $count) * 100;
-print "<tr><td>$langs</td>";
+print "<tr>";
+print "<td>$langs</td>";
 print "<td>$count</td>";
 print "<td>$count_translated</td>";
-print "<td>$percentage%</td><tr>\n";
-
+print "<td>$percentage%</td>";
+print "</tr>\n";
 
 }
 
