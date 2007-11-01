@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /*
 * Script: romana_romanian.inc.php
