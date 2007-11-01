@@ -41,7 +41,7 @@ th {
 </style>
 ";
 print "<table> \n";
-print "<tr><th>Language file</th><th>Total variables</th><th>Variables translated</th><th>Percentage</th></th> \n";
+print "<tr><th>Language file</th><th>Total variables</th><th>Variables translated</th><th>Percentage</th></tr> \n";
 
 foreach $langs (@langs) {
 
