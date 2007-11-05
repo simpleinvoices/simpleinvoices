@@ -65,57 +65,44 @@ $langs = array();
 
 if ($dh = opendir($dir)) {
   while (($lang_dir = readdir($dh)) !== false) {
-
-    //echo "debug: $lang_dir\n";
-    
     if (! ereg("^[a-z]{2,3}$|^[a-z]{2,3}-[a-z]{2,3}$", $lang_dir)) {
       continue;
     }
 
     //echo "debug: language folder: $lang_dir\n";
-    
     $langs[] = $lang_dir;
   }
 
   closedir($dh);
-
  } else {
   exit("Error opening folder ($dir)\n");
  }
 
-// Lets process the language folders.
-
 // Sort by lang code.
 sort($langs);
 
-foreach ($langs as $lang_dir) {
+// Lets process the language folders.
+foreach ($langs as $lang_code) {
 
-  $info_file = file_get_contents("$lang_dir/info.xml");
+  // Redo the XML part thanks to a sugestion by Nicolas Ruflin.
+  // Nicolas, thanks for the PHP lesson.
+  $xml = simplexml_load_file("$lang_code/info.xml");
+
+  $tmp = split(',', $xml->author);
+  $xml->author = join(',<br>', $tmp);
+  //echo "debug: $xml->name, $xml->author\n";
   
-  // I'm not an expert in XML, so I'll do this the sysadmin way...
+  /*
+   Process the language files
+  */
   
-  $lang_code = $lang_dir;
+  $lang_file = file("$lang_code/lang.php");
   
-  ereg("<name>(.*)</name>", $info_file, $regs);
-  $lang_name = $regs[1];
-  
-  ereg("<author>(.*)</author>", $info_file, $regs);
-  $lang_authors = $regs[1];
-  $tmp = split(',', $lang_authors);
-  $lang_authors = join(',<br>', $tmp);
-  
-  //echo "debug: $lang_name, $lang_authors\n";
-  
-  $lang_file = file("$lang_dir/lang.php");
-  
-  // Process the language files
   $count = 0;
   $count_translated = 0;
   
   foreach ($lang_file as $line) {
     $line = rtrim($line);
-    
-    //echo "debug: $line";
 
     // A string line
     if (preg_match('/^\$LANG\[/', $line)) {
@@ -145,11 +132,11 @@ foreach ($langs as $lang_dir) {
   print "
 <tr>
 <td>$lang_code</td>
-<td>$lang_name</td>
+<td>$xml->name</td>
 <td align=\"center\">$count</td>
 <td align=\"center\">$count_translated</td>
 <td align=\"right\">$percentage</td>
-<!--td>$lang_authors</td-->
+<!--td>$xml->author</td-->
 </tr>
 ";
 
