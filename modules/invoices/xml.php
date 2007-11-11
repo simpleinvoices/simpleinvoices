@@ -47,6 +47,6 @@ $sqlTotal = "SELECT count(id) FROM ".TB_PREFIX."invoices as count";
 $resultTotal = mysql_query($sqlTotal) or die(mysql_error());
 $resultCount = mysql_fetch_array($resultTotal);
 $count = $resultCount[0];
-echo sql2xml($result,$count);
+echo sql2xml($result,$count,'test');
 
 ?> 

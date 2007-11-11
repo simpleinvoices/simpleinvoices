@@ -22,7 +22,9 @@ Ext.onReady(function(){
            }, [
                // set up the fields mapping into the xml doc
                // The first needs mapping, the others are very basic
+			'actions',
                {name: 'id', mapping: 'id'},
+
               'Biller','Customer','INV_TOTAL','INV_PAID','INV_OWING','Date','Aging','Type'
            ]),
 		// turn on remote sorting
@@ -32,6 +34,7 @@ Ext.onReady(function(){
 	ds.setDefaultSort('id', 'desc');
 
     var cm = new Ext.grid.ColumnModel([
+	    {header: "Actions", width: 50, dataIndex: 'actions', sortable:false,renderer: this.formatAction },
 	    {header: "ID", width: 50, dataIndex: 'id'},
 		{header: "Biller", width: 180, dataIndex: 'Biller'},
 		{header: "Customer", width: 115, dataIndex: 'Customer'},
@@ -79,6 +82,14 @@ Ext.onReady(function(){
                              iconCls:'remove'
                          }]
 		
+/*
+     formatAction: function(value, p, record) {
+         return String.format(
+                 '<div class="topic"><b>{0}</b><span class="author">{1}</span></div>',
+                 value, record.data.author, record.id, record.data.forumid
+                 );
+     }
+*/
     });
 	
 

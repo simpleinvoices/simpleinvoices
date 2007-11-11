@@ -385,7 +385,7 @@ sort($folderList);
 return($folderList);
 }
 
-function sql2xml($query4xml,$count) {
+function sql2xml($query4xml,$count,$actions) {
 	//count the no. of  columns in the table
 	$fcount = mysql_num_fields($query4xml);
 
@@ -395,6 +395,12 @@ function sql2xml($query4xml,$count) {
 	while($row = mysql_fetch_array( $query4xml ) )
 	{
 	$xml .= ("<tablerow>");
+	if(isset($actions))
+	{
+		$xml .= ("<actions>
+<a href='#'><img src='images/common/view.png'></img></a> TESTs sta
+</actions>");
+	}	
 	for($i=0; $i< $fcount; $i++)
 	{
 	$tag = mysql_field_name( $query4xml, $i );
