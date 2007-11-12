@@ -15,34 +15,10 @@
 */
 
 // we must never forget to start the session
-/*
-CREATE TABLE si_users (
-user_id int(11) NOT NULL auto_increment,
-user_email VARCHAR(100) NOT NULL,
-user_name VARCHAR(100) NOT NULL,
-user_group VARCHAR(10) NOT NULL,
-user_domain VARCHAR(10) NOT NULL,
-user_password CHAR(32) NOT NULL,
-
-PRIMARY KEY (user_id)
-);
-
-INSERT INTO si_users (user_id, user_email, user_name, user_group, user_domain, user_password) VALUES ('','guest@simpleinvoices.org','guest','1','1', md5('guest'));
-INSERT INTO si_users (user_id, user_email, user_name, user_group, user_domain, user_password) VALUES ('','demo@simpleinvoices.org','demo','1','1', md5('demo'));
-INSERT INTO si_users (user_id, user_email, user_name, user_group, user_domain, user_password) VALUES ('','admin@simpleinvoices.org','admin','1','1', md5('admin'));
-
-CREATE TABLE `si_auth_challenges` (
-`challenges_key` INT( 11 ) NOT NULL ,
-`challenges_timestamp` TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-*/
 //so config.php works ok without using index.php define browse
 define("BROWSE","browse");
 include 'config/config.php';
 include 'include/sql_queries.php';
-//include "lang/$language.inc.php";
-include "include/md5/hmac_md5.php";
 
 session_start();
 
@@ -77,7 +53,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 } 
 
 
-/**/
+/*
 
 if (isset($_POST['user']) && isset($_POST['pass'])) {
 
@@ -153,35 +129,12 @@ if($ChallengeLife>0) {
      mysql_select_db( $db_name, $conn);
      mysqlQuery("INSERT INTO si_auth_challenges (challenges_key) VALUES ($Challenge_Key)",$conn);
 }
-/**/
+*/
 
 ?>
 <html>
 <head>
 
-<?php if($MD5Auth==True){?>
-
-    <script src="./include/md5/md5.js"></script> 
-    <script language="JavaScript"><!--
-
-    function login(f) {
-
-    <?php if ($ChallengeLife>0){?>
-       f['md5'].value = hex_md5(f['pass'].value);
-       f['pass'].value = hex_hmac_md5(f['ChallengeKey'].value, f['md5'].value);
-       f['md5'].value = hex_hmac_md5(f['ChallengeKey'].value, f['md5'].value);
-    <?php } else {?>   
-       f['md5'].value = hex_md5(f['pass'].value);
-       f['pass'].value = hex_md5(f['pass'].value);
-    <?php }?>
-
-       return true;
-
-}
-
-//--></script>
-
-<?php }?>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Simple Invoices Login</title>
@@ -191,13 +144,10 @@ if($ChallengeLife>0) {
 
 <body class="login" >
 	<div class="Container">
-<?php if($MD5Auth==True){?>
-        <noscript>
-        <p align="center"><strong><font color="#990000">JavaScript must be enabled for MD5 login.</font></strong></p>
-        </noscript>
+
 
 <?php
-}
+
 if ($errorMessage != '') {
 ?>
 <p align="center"><strong><font color="#990000"><?php echo $errorMessage; ?></font></strong></p>
@@ -205,19 +155,9 @@ if ($errorMessage != '') {
 }
 ?>
 <div id="Dialog">
-<!--
-        <div align=center id="disclaimerbox">
-	    <img src="./images/common/important.png"></img>
-	    <strong>Annoucement<br /></strong><br>This is an important annoucement
-		<hr></hr>
-	</div>
--->
-<h1>Simple Invoices</h1>
-<!--
-  <div id="loginbox"  class="hasDisclaimer" >
 
-        <div id="formbox">
--->
+<h1>Simple Invoices</h1>
+
 
 	    <form action="" method="post" name="frmLogin" id="frmLogin" <?php if($MD5Auth==True){?>onSubmit="return login(this);"<?php }?>>
 	        <input type="hidden" name="action" value="login" />
@@ -277,29 +217,6 @@ if ($errorMessage != '') {
 		<dd>Powered by <a href="http://www.simpleinvoices.org">Simple Invoices</a></dd>
 
     </div>
-
-
-
-
-
-<!--
-<form action="" method="post" name="frmLogin" id="frmLogin">
- <table width="400" border="1" align="center" cellpadding="2" cellspacing="2">
-  <tr>
-   <td width="150">User Id</td>
-   <td><input name="txtUserId" type="text" id="txtUserId"></td>
-  </tr>
-  <tr>
-   <td width="150">Password</td>
-   <td><input name="txtPassword" type="password" id="txtPassword"></td>
-  </tr>
-  <tr>
-   <td width="150">&nbsp;</td>
-   <td><input name="btnLogin" type="submit" id="btnLogin" value="Login"></td>
-  </tr>
- </table>
-</form>
--->
 
 </body>
 </html> 
