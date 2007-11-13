@@ -11,6 +11,7 @@
 	<a href="#installation">Installation</a><br> 
 	<a href="#pdf"> --  PDF</a><br> 
 	<a href="#backup"> --  Database backup</a><br> 
+	<a href="#login">Enabling the login system</a><br> 
 	<a href="#upgrading">Upgrading</a><br>
 	<a href="#prepare">Preparing Simple Invoices for use</a><br>
 	<a href="#use">Using Simple Invoices</a><br>
@@ -32,7 +33,7 @@
 		<ul>
 			<li>Apache 
 			<li>MySQL
-			<li>PHP
+			<li>PHP 5
 				<ul>
 					<li>For PDF export to work your PHP needs:
 						<ul>
@@ -42,7 +43,6 @@
 					<li>For Reports to work your PHP needs:
 						<ul>
 							<li>xsl support (in PHP5)
-							<li>xslt support (in PHP4)
 						</ul>
 				</ul>
 			<li>The cache/ directory in the Simple Invoices folder must be writeable by the webserver user (ie chown apache:apache cache)  
@@ -80,6 +80,7 @@
 			<li>$db_name to the name of the database (normally "simple_invoices"), 
 			<li>$db_user to the database username for the database specified in $db_name,
 			<li>$db_password to the password of the database user
+			<li>Set the cache directory as writeable.  To do this cd to the Simple Invoices directory (<i>cd /var/www/html/simpleinvoices</i>) and chown the database_backups directory to the apache(web server) user (<i>chown apache:apache database_backups</i>) or if your lazy just chmod 777 the directory (<i>chmod -Rv 777 cache*</i>)
 			</ul>
 		</ul>
 		<li>The base of Simple invoices has been setup now, there are a couple of changes that need to be made on your system to enable Export to PDF and Simple Invoices database backup 
@@ -162,9 +163,16 @@ memory_limit = 24M      ; Maximum amount of memory a script may consume (8MB)
 	</ul>
 	</ul>
 </ul>
+<a name="login"><b>Enabling the login/authentication system</b></a>
+<ul>
+	<li>Simple Invoices has a login system which can allow you to protect your Simple Invoices with a username and password login system.  By default this is turned off.
+	<li>To turn on the login system in Simple Invoices all you have to do is
+	<li>Open the config/config.php file and change the line $authenticationOn = "false" to $authenticationOn = "true"
+	<li>Done :), now just open up Simple Invoices and it should redirect you to a login page
+</ul>
 <a name="upgrading"><b>Ugrading Simple Invoices from one version to another</b></a>
 <ul>
-	<li>To upgrade Simple Invoices from one version to another, the first step is to download the updated version of Simple Invoices from our <a href="http://simpleinvoices.sf.net">website</a>
+	<li>To upgrade Simple Invoices from one version to another, the first step is to download the updated version of Simple Invoices from our <a href="http://www.simpleinvoices.org">website</a>
 	<li>The next step is to backup (make a copy) of your config.php file which is located in the config folder
 	<li>Once this file has been backed up, extract (unzip) the contents of the Simple Invoices file which you downloaded into the simpleinvoices directory in your webservers document root
 	<li>open up the config.php file thats in the config directory and enter you database details (db_host, $db_name, $db_user and $db_password) into the file and save it
