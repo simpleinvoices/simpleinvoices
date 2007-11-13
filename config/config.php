@@ -25,14 +25,6 @@ $email_smtp_auth = true;     // turn on SMTP authentication
 $email_username = "";  // SMTP username
 $email_password = ""; // SMTP password
 
-/*Javascript MD5 login */
-/*If you want JavaScript MD5 hashing to occur so that you can run Simple Invoices on a Non-Https Server with better security Turn Uncomment MD5Auth */
-$MD5Auth = True; /*To turn of md5 auth set $MD5Auth to True*/
-#$MD5Auth = FALSE; /*To Turn off md5 auth set $MD5Auth to FALSE */
-#$ChallengeLife = 480; /*To turn on ChallengeLife set this to 480*/
-$ChallengeLife = 0; /*To turn off ChallengeLife set this to 0 */
-
-
 $version = "200711 unstable";
 
 $config['date_format']  = 'Y-m-d'; #International format just the date
@@ -49,8 +41,7 @@ $spreadsheet = "xls"; #MS Excel format
 $word_processor = "doc"; #MS Word format
 #$word_processor = "odt"; #Open Document Format text
 
-
-
+/* PDF config options */
 #size in pixels (640,800,1024)
 $pdf_screen_size = 800;
 #paper size (Letter,Legal,Executive,A0Oversize,A0,A1,A2,A3,A4,A5,B5,Folio,A6,A7,A8,A9,A10)
@@ -70,27 +61,6 @@ $pdf_bottom_margin = 15;
 #error_reporting(E_ERROR);
 #error_reporting(E_ALL & ~E_NOTICE);
 #error_reporting(0);
-
-/*Select language for Simple Invoices to use*/
-#$language = "cs"; //castellano_spanish
-#$language = "ca"; //catala_catalan
-#$language = "cs"; //cestina_czech
-#$language = "de"; //deutsch_german
-#$language = "de-ch"; //deutsch_german swiss
-#$language = "english_UK"; //english_UK
-#$language = "fr"; //francais_french
-#$language = "gl"; //galego_galician
-#$language = "ls"; //slovenščina_slovenian
-#$language = "nl"; //nederlands_dutch
-#$language = "no"; //norwegian_NB
-#$language = "pt"; //portugues_portuguese
-#$language = "ro"; //romana_romanian
-#$language = "fi"; //suomi_finnish
-
-/*PDF configs*/
-#installation path relative to document root of webserver 
-//$install_path = "/simpleinvoices";
-//$install_path = $path['dirname'];
 
 //To turn loggin on set the below to true
 #define("LOGGING",false);
