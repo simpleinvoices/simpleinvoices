@@ -55,7 +55,7 @@ $file = "./documentation/$language/general/$_GET[p]";
 	}
 	
 	if(!file_exists($file)) {
-		$file = "./documentation/$language/general/about.php";
+		$file = "./documentation/en-gb/general/about.php";
 	}
 	
 	//echo $file;
