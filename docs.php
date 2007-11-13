@@ -41,11 +41,11 @@ if (!ereg("^[a-zA-Z_#&0-9]+$",$p)) {
 
 if($_GET['t'] == "help") {
 
-	include("./documentation/$lang/help/$_GET[p].html");
+	include("./documentation/$language/help/$_GET[p].html");
 }
 else {
 
-$file = "./documentation/$lang/general/$_GET[p]";
+$file = "./documentation/$language/general/$_GET[p]";
 	
 	if(file_exists($file.".html")) {
 		$file = $file.".html";
@@ -55,7 +55,7 @@ $file = "./documentation/$lang/general/$_GET[p]";
 	}
 	
 	if(!file_exists($file)) {
-		$file = "./documentation/en/general/about.php";
+		$file = "./documentation/en-gb/general/about.php";
 	}
 	
 	//echo $file;
