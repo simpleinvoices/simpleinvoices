@@ -22,7 +22,7 @@ checkConnection();
 include('./modules/options/database_sqlpatches.php');
 
 //dont undertand this one!!
-if(getNumberOfPatches() != 0 ) {
+if( ((getNumberOfPatches() == 0 ) OR (getNumberOfPatches() < 0 )) {
 	include('./include/include_auth.php');
 }
 
