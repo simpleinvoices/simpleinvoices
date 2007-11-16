@@ -40,22 +40,22 @@ if (!ereg("^[a-zA-Z_#&0-9]+$",$p)) {
 
 
 if($_GET['t'] == "help") {
-
-	include("./documentation/$language/help/$_GET[p].html");
+	
+	if(file_exists("./documentation/$language/help/$_GET[p].html"))
+	{
+		include("./documentation/$language/help/$_GET[p].html");
+	}
+	if(!file_exists("./documentation/$language/help/$_GET[p].html"))
+	{
+		include("./documentation/en-gb/help/$_GET[p].html");
+	}
 }
 else {
 
-$file = "./documentation/$language/general/$_GET[p]";
-	
-	if(file_exists($file.".html")) {
-		$file = $file.".html";
-	}
-	else {
-		$file = $file.".php";
-	}
+	$file = "./documentation/$language/general/$_GET[p].html";
 	
 	if(!file_exists($file)) {
-		$file = "./documentation/en-gb/general/about.php";
+		$file = "./documentation/en-gb/general/$_GET[p].html";
 	}
 	
 	//echo $file;
