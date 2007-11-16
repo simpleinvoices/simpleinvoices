@@ -25,6 +25,7 @@ include('./modules/options/database_sqlpatches.php');
 //dont undertand this one!!
 //TODO - think more about this one
 if( (getNumberOfPatches() == 0 ) OR (getNumberOfPatches() < 0 ) ) 
+{
 	include('./include/include_auth.php');
 }
 
