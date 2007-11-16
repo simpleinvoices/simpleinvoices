@@ -51,86 +51,6 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
     }
     
 } 
-
-
-/*
-
-if (isset($_POST['user']) && isset($_POST['pass'])) {
-
-    $conn = mysql_connect( $db_host, $db_user, $db_password);
-     mysql_select_db( $db_name, $conn);
-
-    $userEmail   = $_POST['user'];
-    if ($_POST['pass'] == $_POST['md5'] ){
-        $password = $_POST['pass'];
-    } 
-    else {
-        if($MD5Auth==True){
-            $NoJSonClient=True;
-        }        
-        $password = md5($_POST['pass']);
-    }
-    if ($ChallengeLife>0){
-    	$ChallengeKeySubmitted = $_POST['ChallengeKey'];
-    }
-
-    // Grab Password from database
-    $sql = "SELECT *
-            FROM si_users
-            WHERE user_email = '$userEmail' ";
-    
-    $result = mysqlQuery($sql, $conn) or die('Query failed. ' . mysql_error()); 
-    $credentials = mysql_fetch_array($result);
-    $storedPassword=$credentials['user_password'];
-
-
-
-    if ($ChallengeLife>0) {
-        $DeleteOldChallenges = 'DELETE FROM `si_auth_challenges` WHERE `challenges_timestamp` < DATE_SUB(now(),INTERVAL '.$ChallengeLife.' Minute)';
-        mysqlQuery($DeleteOldChallenges, $conn);
-        $sql = "SELECT *
-            FROM si_auth_challenges
-            WHERE challenges_key = '$ChallengeKeySubmitted' ";
-        $result = mysqlQuery($sql, $conn) or die('Query failed. ' . mysql_error()); 
-#        echo "Found or not the key in DB";
-        if (mysql_num_rows($result) >= 1) {
-            //Challenge was valid
-#            echo $ChallengeKeySubmitted;
-            $DeleteUSEDChallenge = 'DELETE FROM `si_auth_challenges` WHERE `challenges_key` = '.$ChallengeKeySubmitted.' limit 1';
-            mysqlQuery($DeleteUSEDChallenge, $conn);
-#            echo "Deleted Used Key $ChallengeKeySubmitted";
-            if($password==hmac_md5($ChallengeKeySubmitted, "$storedPassword")){ 
-                $_SESSION['db_is_logged_in'] = true;
-                // after login we move to the main page
-	        header('Location: .');
-                exit;
-            } else {
-#                echo $ChallengeKeySubmitted;
-                $DB=hmac_md5($ChallengeKeySubmitted, "$storedPassword");
-                $errorMessage = "Sorry, wrong user / password";
-            }
-        } else {
-            $errorMessage = 'Sorry, the login timed out.  Please try again';
-        }
-    }elseif ($password==$storedPassword){
-            $_SESSION['db_is_logged_in'] = true;
-            // after login we move to the main page
-            header('Location: .');
-            exit;
-    }else {
-    $errorMessage = 'Sorry, wrong user / password';
-    }
-} 
-
-if($ChallengeLife>0) {
-    $Challenge_Key=Rand(0,99999999999);
-#    $Challenge_Key=1;
-    $conn = mysql_connect( $db_host, $db_user, $db_password);
-     mysql_select_db( $db_name, $conn);
-     mysqlQuery("INSERT INTO si_auth_challenges (challenges_key) VALUES ($Challenge_Key)",$conn);
-}
-*/
-
 ?>
 <html>
 <head>
@@ -219,4 +139,4 @@ if ($errorMessage != '') {
     </div>
 
 </body>
-</html> 
+</html>

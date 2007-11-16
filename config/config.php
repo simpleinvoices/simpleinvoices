@@ -26,7 +26,7 @@ $email_username = "";  // SMTP username
 $email_password = ""; // SMTP password
 
 
-$version = "20071113 stable";
+$version = "20071116 stable";
 
 $config['date_format']  = 'Y-m-d'; #International format just the date
 #$config['date_format']  = 'Y-m-d h:m'; #Internalional format date and time 
