@@ -324,6 +324,5 @@ $LANG['want_more_fields'] = "flere felt?";//1
 $LANG['welcome'] = "Velkommen til ";//1
 $LANG['what_are_custom_fields'] = "Hva er egendefinerte felt ";//1
 $LANG['whats_this_page_about'] = "Hva handler denne siden om ";//1
-$LANG['zip'] = "Postnummer";//1
-
+$LANG['zip'] = "Postnummer";//1 
 ?>

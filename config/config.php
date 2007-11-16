@@ -8,8 +8,8 @@ $db_user = "root";
 $db_password = "";
 
 //if you want to make Simple Invoices secure and require a username and password set this to true
-//$authenticationOn = "true";
-$authenticationOn = "false";
+$authenticationOn = "true";
+//$authenticationOn = "false";
 
 //if you are using a .httaccess file
 $http_auth = "";	//value: "name:password@"
@@ -26,7 +26,7 @@ $email_username = "";  // SMTP username
 $email_password = ""; // SMTP password
 
 
-$version = "20071113 stable";
+$version = "20071116 stable";
 
 $config['date_format']  = 'Y-m-d'; #International format just the date
 #$config['date_format']  = 'Y-m-d h:m'; #Internalional format date and time 

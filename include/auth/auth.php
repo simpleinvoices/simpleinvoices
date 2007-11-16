@@ -20,6 +20,4 @@ if (!isset($_SESSION['db_is_logged_in']) || $_SESSION['db_is_logged_in'] !== tru
 	else {};
 
 }
-
-
 ?>
