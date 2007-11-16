@@ -80,7 +80,7 @@
 			<li>$db_name to the name of the database (normally "simple_invoices"), 
 			<li>$db_user to the database username for the database specified in $db_name,
 			<li>$db_password to the password of the database user
-			<li>Set the cache directory as writeable.  To do this cd to the Simple Invoices directory (<i>cd /var/www/html/simpleinvoices</i>) and chown the database_backups directory to the apache(web server) user (<i>chown apache:apache database_backups</i>) or if your lazy just chmod 777 the directory (<i>chmod -Rv 777 cache*</i>)
+			<li>Set the cache directory as writeable.  To do this cd to the Simple Invoices directory (<i>cd /var/www/html/simpleinvoices</i>) and chown the cache directory to the apache(web server) user (<i>chown apache:apache cache</i>) or if your lazy just chmod 777 the directory (<i>chmod -Rv 777 cache*</i>)
 			</ul>
 		</ul>
 		<li>The base of Simple invoices has been setup now, there are a couple of changes that need to be made on your system to enable Export to PDF and Simple Invoices database backup 
