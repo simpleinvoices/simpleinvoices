@@ -33,6 +33,10 @@ $smarty = new Smarty();
 
 //cache directory. Have to be writeable (chmod 777)
 $smarty -> compile_dir = "cache";
+if(!is_writable($smarty -> compile_dir)) {
+	exit("Simple Invoices Error : The folder <i>".$smarty -> compile_dir."</i> has to be writeable");
+}
+
 
 //adds own smarty plugins
 $smarty->plugins_dir = array("plugins","smarty_plugins");
@@ -46,6 +50,7 @@ $smarty -> assign("LANG",$LANG);
 //For Making easy enabled pop-menus (see biller)
 $smarty -> assign("enabled",array($LANG['disabled'],$LANG['enabled']));
 
+//$menu = true;
 $menu = true;
 $file = "home";
 
