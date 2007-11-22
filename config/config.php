@@ -55,6 +55,9 @@ $pdf_top_margin = 15;
 #bottom margin of the pdf
 $pdf_bottom_margin = 15;
 
+//dev stuff
+$config_inc_style = "true";
+
 #Error reporting
 #error_reporting(E_ALL);
 #error_reporting(E_WARNING);

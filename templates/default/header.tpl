@@ -17,8 +17,20 @@
 	<link rel="stylesheet" type="text/css" href="./include/css/simpleInvoicesStyle.css" />
 	
 	<script type="text/javascript" src="./include/ext2/menu/menus.js"></script>
-	<link rel="stylesheet" type="text/css" href="./include/ext2/menu/menus.css" />
+	<!--<link rel="stylesheet" type="text/css" href="./include/ext2/menu/menus.css" />-->
 
 	<!--<script type="text/javascript" src="./include/ext2/layout/layout.js"></script>-->
+
+{literal}
+<?php
+if($config_inc_style == "true") 
+{
+?>
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/screen.css" media="all"/>
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/print.css" media="print"/>
+<?php
+}
+?>
+{/literal}	
 </head>
 <body>

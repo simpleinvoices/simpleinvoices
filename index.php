@@ -34,7 +34,7 @@ $smarty = new Smarty();
 //cache directory. Have to be writeable (chmod 777)
 $smarty -> compile_dir = "cache";
 if(!is_writable($smarty -> compile_dir)) {
-	exit("Folder <i>".$smarty -> compile_dir."</i> has to be writeable");
+	exit("Simple Invoices Error : the folder <i>".$smarty -> compile_dir."</i> has to be writeable");
 }
 
 
@@ -123,10 +123,12 @@ if($menu) {
 
 include_once("./modules/$file.php");
 
+//TODO - remove menu and main
+//old main file no longer needed
 //$smarty -> display("../templates/default/menu.tpl");
 
-//old main file no longer needed
-//$smarty -> display("../templates/default/main.tpl");
+
+$smarty -> display("../templates/default/main.tpl");
 //Shouldn't be necessary anymore. Ist for old files without tempaltes...
 
 if(file_exists("./templates/default/$file.tpl")) {
