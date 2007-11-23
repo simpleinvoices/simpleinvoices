@@ -143,7 +143,7 @@ else {
 }
 
 // not needed
-//$smarty -> display("../templates/default/footer.tpl");
+$smarty -> display("../templates/default/footer.tpl");
 
 
 ?>
