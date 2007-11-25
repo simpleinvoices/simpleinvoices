@@ -4,10 +4,10 @@
 * 	Email invoice page
 *
 * Authors:
-*	 Justin Kelly, Nicolas Ruflin
+*	 Justin Kelly, Nicolas Ruflin, Ap.Muthu
 *
 * Last edited:
-* 	 2007-07-19
+* 	 2007-11-25
 *
 * License:
 *	 GPL v2 or above
@@ -87,6 +87,10 @@ if ($_GET['stage'] == 2 ) {
 	$mail->Username = $email_username;  // SMTP username
 	$mail->Password = $email_password; // SMTP password
 
+	// if statements used for backwards compatibility for old config/config.php - Ap.Muthu
+	if isset($email_smtpport) { $mail->Port = $email_smtpport;     } // SMTP Port
+	if isset($email_secure)   { $mail->SMTPSecure = $email_secure; } // Secure SMTP mode - '', 'ssl', or 'tls'
+	
 	$mail->From = "$_POST[email_from]";
 	$mail->FromName = "$biller[name]";
 	$mail->AddAddress("$_POST[email_to]");

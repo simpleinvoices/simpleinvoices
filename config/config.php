@@ -19,12 +19,16 @@ define("TB_PREFIX","si_");
 
 /*Email configs*/
 $email_host = "localhost";  // specify main and backup server - separating with ;
-$email_smtp_auth = false;     // turn on SMTP authentication
+$email_smtp_auth = false;   // turn on SMTP authentication
 //$email_smtp_auth = true;     // turn on SMTP authentication
 #if authentication is required for the smtp server please add the username and password in the two options below
-$email_username = "";  // SMTP username
-$email_password = ""; // SMTP password
+$email_username = "";  	// SMTP username
+$email_password = ""; 	// SMTP password
 
+// The following two variables are referenced in /modules/invoices/email.php which uses the new PHPMailer v2.10 Beta 1 (internal version still at v2.0 RC 2)
+// Backwards compatibility maintained even if the following 2 variables are omitted as with retaining an old config.php - Ap.Muthu
+$email_smtpport = 25; 	// Default 25 - use 465 for secure ssl
+$email_secure = "";		// one among '', 'ssl', or 'tls' - used by PHPMailer class in modules/include/mail
 
 $version = "20071116 stable";
 
