@@ -294,7 +294,14 @@ th.sortable {
 	border-right:1px solid #D6D2C2;
 	font-weight:400;
 	padding:2px; }
-
+	
+th.sortable_rt {
+	text-align:right;
+	background-color:#e9e9da;
+	border-bottom:1px solid #CBC7B8;
+	border-right:1px solid #D6D2C2;
+	font-weight:400;
+	padding:2px; }
 /*
  * Accordian css - start
  * */
