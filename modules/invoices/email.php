@@ -81,6 +81,7 @@ if ($_GET['stage'] == 2 ) {
 	// if statements used for backwards compatibility for old config/config.php - Ap.Muthu
 	if (isset($email_smtpport)) { $mail->Port = $email_smtpport;     } // SMTP Port
 	if (isset($email_secure))   { $mail->SMTPSecure = $email_secure; } // Secure SMTP mode - '', 'ssl', or 'tls'
+	if (isset($email_ack) && $email_ack) { $mail->ConfirmReadingTo = "$_POST[email_from]"; } // Sets Return receipt as Sender EMail ID
 	
 	$mail->From = "$_POST[email_from]";
 	$mail->FromName = "$biller[name]";
