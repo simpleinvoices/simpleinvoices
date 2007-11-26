@@ -6,6 +6,18 @@ Simple Invoices - Changelog
 </head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <div id="left">
+<ul><li>Next Release
+	<ul>
+		<li>screen.css now has th.sortable_rt class - useful for right align for numeric fields - available in the modules/module-name/manage.php files
+		<li>General Code cleanup
+		<li>Increased limit from 100 to 1000000 billers / clients / inv_prefs - look in modules/invoices/total.php, itemised.php, consulting.php
+		<li>Changes in config/config.php made backwards compatible for use with older config.php
+		<li>Invoice PDF EMail now supports SecureSMTP and user configurable SMTP Port
+		<li>Updated PHPMailer to v2.10 Beta 1 for PHP5
+		<li>lang/en-gb/lang.php capitalised correctly
+		<li>Default Customer now shows up correctly on all add new invoice pages
+	</ul>
+</ul>
 <ul><li>2007-11-16
 	<ul>
 		<li>Security patch to fix issue with the login system - could be bypassed by disabling javascript support
