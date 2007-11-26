@@ -41,14 +41,14 @@
 	<td class="details_screen">
 		{$LANG.customer_name}
 	</td>
-	<td>
+	<td input type="text" name="customer_block" size=25>
 		
 {if $customers == null }
 	<p><em>{$LANG.no_customers}</em></p>
 {else}
 	<select name="customer_id">
 	{foreach from=$customers item=customer}
-		<option {if $smarty.get.customer == $customer.id} selected {/if} value="{$customer.id}">{$customer.name}</option>
+		<option {if $customer.id == $defaults.customer} selected {/if} value="{$customer.id}">{$customer.name}</option>
 	{/foreach}
 	</select>
 {/if}

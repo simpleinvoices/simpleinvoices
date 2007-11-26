@@ -22,11 +22,11 @@ checkLogin();
 
 jsBegin();
 jsFormValidationBegin("frmpost");
-jsTextValidation("biller_id","Biller Name",1,100);
-jsTextValidation("customer_id","Customer Name",1,100);
+jsTextValidation("biller_id","Biller Name",1,1000000);
+jsTextValidation("customer_id","Customer Name",1,1000000);
 jsValidateifNum("gross_total","Gross Total");
 jsTextValidation("select_tax","Tax Rate",1,100);
-jsPreferenceValidation("select_preferences","Invoice Preference",1,100);
+jsPreferenceValidation("select_preferences","Invoice Preference",1,1000000);
 jsFormValidationEnd();
 jsEnd();
 

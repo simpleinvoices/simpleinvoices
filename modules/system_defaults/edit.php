@@ -86,7 +86,7 @@ else if ($_GET["submit"] == "biller") {
 	$billers = getActiveBillers();
 
 	if ($billers == null) {
-		$display_block = "<p><em>{$LANG['no_billers']}</em></p>";
+		$display_block_biller = "<p><em>{$LANG['no_billers']}</em></p>";
 	}
 	else {
 
@@ -111,6 +111,7 @@ EOD;
 
 else if ($_GET["submit"] == "customer") {
 
+	$default = "customer";
 	$customers = getActiveCustomers();
 
 	if ($customers == null) {
@@ -118,12 +119,9 @@ else if ($_GET["submit"] == "customer") {
 		$display_block_customer = "<p><em>{$LANG['no_customers']}</em></p>";
 
 	} else {
-		$default = "customer";
 		//has records, so display them
-		$display_block_customer = <<<EOD
-	        <select name="value">
-                <option value='0'> </option>
-EOD;
+		$display_block_customer = '<select name="value">
+                <option value=0> </option>';
 
 
 		foreach($customers as $customer) {
@@ -138,8 +136,8 @@ EOD;
 		
 	}
 
-	$value = $display_block_customer;
 	$description = "{$LANG['customer_name']}";
+	$value = $display_block_customer;
 }
 
 
