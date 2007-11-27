@@ -17,6 +17,7 @@ Next Release :: TODO
  - submit : update all refer to submit to better - only some done - all needs to be done and work
  - delete : if delete is enabled allow delete for ALL items - products, billers, etc.. all with their relevant rules ie. if product has been included in an invoice then CAN'T delete etc..
  - move the stuff in index and home in the LANG files
+ - Spaces in Invoice Preference name creates PDF issue :http://simpleinvoices.org/forum/topic-384.html
  - email :
  -- email : html and no html option - maybe??
  -- email: add cc - maybe ??
