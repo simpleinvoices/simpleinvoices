@@ -1,3 +1,7 @@
+*************
+Simple Invoices todo list
+- if its in the list it may get done sometime in the future if and when someone feels like it
+*************
 ##############################
 Next Release :: TODO
 ##############################
