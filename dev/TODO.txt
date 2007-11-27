@@ -47,6 +47,7 @@ Next Release + 1 (NR+1) :: TODO
 SOMETIME IN THE FUTURE TODOs
 ##############################
 
+- Date based reports : http://simpleinvoices.org/forum/topic-391.html
 - Customer : Statement of Accounts : http://simpleinvoices.org/forum/topic-414.html
 - add due date for sending bills via e-mail (cron-script)
 - make $tb_prefix a global constant to be accessible in all functions (without global)
