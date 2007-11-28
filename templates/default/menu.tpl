@@ -1,4 +1,3 @@
-<div id="Header">
 		<ul class="adxm menu">
 			<li { if $pageActive == null} id="active" {/if}><a href="index.php">{$LANG.home}</a></li>
 			<li { if $pageActive == 'invoices'} id="active" {/if}><a href="index.php?module=invoices&view=manage">{$LANG.invoices} +</a>
@@ -178,4 +177,3 @@
 			{/if}
 		</ul>
 </div>
-<div id="Header_shadow"></div>

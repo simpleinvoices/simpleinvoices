@@ -105,3 +105,4 @@ if($config_inc_style == "true")
 {/literal}	
 </head>
 <body>
+<div id="Header">
