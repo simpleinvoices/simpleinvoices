@@ -50,8 +50,8 @@ $smarty -> assign("LANG",$LANG);
 //For Making easy enabled pop-menus (see biller)
 $smarty -> assign("enabled",array($LANG['disabled'],$LANG['enabled']));
 
-//$menu = true;
-$menu = false;
+$menu = true;
+//$menu = false;
 $file = "home";
 
 
@@ -111,22 +111,14 @@ $smarty -> display("../templates/default/header.tpl");
 //temp added menu.tpl back in so we can easily design new menu system
 
 
-
-
-/*
-if($menu) {
-	getMenuStructure();
-	//$smarty -> display("../templates/modules/menu.tpl");
-}
-*/
-
-
 include_once("./modules/$file.php");
 
 //TODO - remove menu and main
 //old main file no longer needed
-//$smarty -> display("../templates/default/menu.tpl");
-
+if($menu) {
+	//getMenuStructure();
+	$smarty -> display("../templates/default/menu.tpl");
+}
 
 $smarty -> display("../templates/default/main.tpl");
 //Shouldn't be necessary anymore. Ist for old files without tempaltes...

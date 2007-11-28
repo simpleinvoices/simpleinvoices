@@ -1,7 +1,7 @@
 <!--
 TODO : delet this file
 -->
-<div id="Header">&nbsp;</div>
+<div id="Header"></div>
 <div id="Header_shadow"></div>
 
 <div id="Container">
