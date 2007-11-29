@@ -61,8 +61,10 @@ $pdf_top_margin = 15;
 #bottom margin of the pdf
 $pdf_bottom_margin = 15;
 
+//TODO remove this before release
 //dev stuff
 $config_inc_style = "true";
+$smarty->assign('config_inc_style', $config_inc_style);
 
 #Error reporting
 #error_reporting(E_ALL);

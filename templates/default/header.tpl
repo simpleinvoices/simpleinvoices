@@ -14,15 +14,14 @@
 	<link rel="stylesheet" type="text/css" href="./include/ext2/grid/grid-examples.css" />
 	
 
-	
 	<link rel="stylesheet" type="text/css" href="./include/css/simpleInvoicesStyle.css" />
 
 
+
+
+{if $config_inc_style == "true"}
+	
 {literal}
-<?php
-if($config_inc_style == "true") 
-{
-?>
 	<script type="text/javascript">
 	    var GB_ROOT_DIR = "./modules/include/js/";
 	</script>
@@ -72,10 +71,10 @@ if($config_inc_style == "true")
 		<link rel="stylesheet" href="./templates/default/css/iehacks.css" type="text/css" />
 	<![endif]-->
 	
-<?php
-}
-?>
-{/literal}	
+
+{/literal}
+
+{/if}
 </head>
 <body>
 <div id="Header">
