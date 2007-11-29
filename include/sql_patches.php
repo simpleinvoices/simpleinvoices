@@ -748,7 +748,15 @@ NULL , 'logging', '0'
     $patch['138']['patch'] = "ALTER TABLE  `si_customFields` ADD  `order` INT NULL ;";
     $patch['138']['date'] = "20071006";
 
+    $patch['139']['name'] = "Correct Foreign Key Tax ID Field Type in Invoice Items Table";
+    $patch['139']['patch'] = "ALTER TABLE  `si_invoice_items` CHANGE `tax_id` `tax_id` int  DEFAULT '0' NOT NULL ;";
+    $patch['139']['date'] = "20071126";
 	
+    $patch['140']['name'] = "Correct Foreign Key Invoice ID Field Type in Ac Payments Table";
+    $patch['140']['patch'] = "ALTER TABLE  `si_account_payments` CHANGE `ac_inv_id` `ac_inv_id` int  NOT NULL ;";
+    $patch['140']['date'] = "20071126";
+	
+
 /* //TO BE PORTED ACROSS AGAIN
 	$patch['123']['name'] = "Create menu table";
 	$patch['123']['patch'] = "CREATE TABLE `si_menu` (
