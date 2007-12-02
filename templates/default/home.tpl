@@ -11,7 +11,7 @@
 {/if}
 -->
 
-{if $mysql < 5}
+{if $mysql < 5 && $db_server == 'mysql'}
 
 		NOTE <a href='docs.php?t=help&p=mysql4' rel='gb_page_center[450, 450]' ><img src='./images/common/help-small.png'></img></a> : As you are using Mysql 4 some features have been disabled<br>
 {/if}

@@ -59,11 +59,12 @@ function getLogo($biller) {
 **/
 function get_custom_field_label($field)         {
 	global $LANG;
+	global $dbh;
 	
-    $sql =  "SELECT cf_custom_label FROM ".TB_PREFIX."custom_fields WHERE cf_custom_field = '$field'";
-    $result = mysqlQuery($sql) or die(mysql_error());
+    $sql =  "SELECT cf_custom_label FROM ".TB_PREFIX."custom_fields WHERE cf_custom_field = :field";
+    $sth = dbQuery($sql, ':field', $field) or die(end($dbh->errorInfo()));
 
-    $cf = mysql_fetch_array($result);
+    $cf = $sth->fetch();
 
     //grab the last character of the field variable
     $get_cf_number = $field[strlen($field)-1];    
@@ -140,37 +141,35 @@ function get_custom_field_name($field) {
 
 function calc_invoice_paid($inv_idField) {
 	global $LANG;
-	
+	global $dbh;
 
-#amount paid calc - start
-$x1 = "SELECT IF ( ISNULL(SUM(ac_amount)) , '0', SUM(ac_amount)) AS amount FROM ".TB_PREFIX."account_payments WHERE ac_inv_id = $inv_idField";
-	$result_x1 = mysqlQuery($x1) or die(mysql_error());
-	while ($result_x1Array = mysql_fetch_array($result_x1)) {
+	#amount paid calc - start
+	$x1 = "SELECT coalesce(sum(ac_amount), 0) AS amount FROM ".TB_PREFIX."account_payments WHERE ac_inv_id = :inv_id";
+	$sth = dbQuery($x1, ':inv_id', $inv_idField) or die(end($dbh->errorInfo()));
+	while ($result_x1Array = $sth->fetch()) {
 		$invoice_paid_Field = $result_x1Array['amount'];
 		$invoice_paid_Field_format = number_format($result_x1Array['amount'],2);
-#amount paid calc - end
-	return $invoice_paid_Field;
+		#amount paid calc - end
+		return $invoice_paid_Field;
 	}
 }
 
 
 function calc_customer_total($customer_id) {
 	global $LANG;
+	global $dbh;
 	
-        $sql ="
-		SELECT
-			IF ( ISNULL( SUM(".TB_PREFIX."invoice_items.total)) ,  '0', SUM(".TB_PREFIX."invoice_items.total)) AS total 
+        $sql =" SELECT
+			coalesce(sum(ii.total),  0) AS total 
 		FROM
-			".TB_PREFIX."invoice_items, ".TB_PREFIX."invoices 
+			".TB_PREFIX."invoice_items ii INNER JOIN
+			".TB_PREFIX."invoices iv ON (iv.id = ii.invoice_id)
 		WHERE  
-			".TB_PREFIX."invoices.customer_id  = $customer_id  
-		AND 
-			".TB_PREFIX."invoices.id = ".TB_PREFIX."invoice_items.invoice_id
+			iv.customer_id  = :customer
 		";
 		
-        $query = mysqlQuery($sql) or die(mysql_error());
-		
-		$invoice = mysql_fetch_array($query);
+        $sth = dbQuery($sql, ':customer', $customer_id) or die(end($dbh->errorInfo()));
+	$invoice = $sth->fetch();
 
 	return $invoice['total'];
 }
@@ -180,13 +179,14 @@ function calc_customer_paid($customer_id) {
 		
 #amount paid calc - start
 	$sql = "
-	SELECT IF ( ISNULL( sum(ac_amount)) ,  '0', sum(ac_amount)) AS amount 
-	FROM ".TB_PREFIX."account_payments, ".TB_PREFIX."invoices 
-	WHERE ".TB_PREFIX."account_payments.ac_inv_id = ".TB_PREFIX."invoices.id 
-	AND ".TB_PREFIX."invoices.customer_id = $customer_id";  	
+	SELECT coalesce(sum(ap.ac_amount), 0) AS amount 
+	FROM
+		".TB_PREFIX."account_payments ap INNER JOIN
+		".TB_PREFIX."invoices iv ON (iv.id = ap.ac_inv_id)
+	WHERE iv.customer_id = :customer";
 	
-	$query = mysqlQuery($sql);
-	$invoice = mysql_fetch_array($query);
+	$sth = dbQuery($sql, ':customer', $customer_id);
+	$invoice = $sth->fetch();
 
 	return $invoice['amount'];
 }
@@ -205,10 +205,10 @@ function calc_invoice_tax($invoice_id) {
 	global $LANG;
 		
 	#invoice total tax
-	$sql ="SELECT SUM(tax_amount) AS total_tax FROM ".TB_PREFIX."invoice_items WHERE invoice_id =$invoice_id";
-	$query = mysqlQuery($sql);
+	$sql ="SELECT SUM(tax_amount) AS total_tax FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :invoice_id";
+	$sth = dbQuery($sql, ':invoice_id', $invoice_id);
 
-	$tax = mysql_fetch_array($query);
+	$tax = $sth->fetch();
 
 	return $tax['total_tax'];
 }
@@ -234,6 +234,7 @@ function calc_invoice_tax($invoice_id) {
 **/
 
 function show_custom_field($custom_field,$custom_field_value,$permission,$css_class_tr,$css_class1,$css_class2,$td_col_span,$seperator) {
+	global $dbh;
 		/*
 	*get the last character of the $custom field - used to set the name of the field
 	*/
@@ -244,10 +245,10 @@ function show_custom_field($custom_field,$custom_field_value,$permission,$css_cl
 
 	$display_block = "";
 
-    $get_custom_label ="SELECT cf_custom_label FROM ".TB_PREFIX."custom_fields WHERE cf_custom_field = '$custom_field'";
-	$result_get_custom_label = mysqlQuery($get_custom_label) or die(mysql_error());
+	$get_custom_label ="SELECT cf_custom_label FROM ".TB_PREFIX."custom_fields WHERE cf_custom_field = :field";
+	$sth = dbQuery($get_custom_label, ':field', $custom_field) or die(end($dbh->errorInfo()));
 
-	while ($Array_cl = mysql_fetch_array($result_get_custom_label)) {
+	while ($Array_cl = $sth->fetch()) {
                 $has_custom_label_value = $Array_cl['cf_custom_label'];
 	}
 	/*if permision is write then coming from a new invoice screen show show only the custom field and have a label
@@ -326,29 +327,16 @@ EOD;*/
 
 
 function checkConnection() {
-	global $conn;
-	global $db;
+	global $dbh;
 	
-	if(!$conn) {
+	if(!$dbh) {
 		die('<br>
 		===========================================<br>
 		Simple Invoices database connection problem<br>
 		===========================================<br>
 		Could not connect to the Simple Invoices database<br><br>
-		Please refer to the following Mysql error for for to fix this: <b>ERROR :' . mysql_error() . '</b><br><br>
+		Please refer to the following database ('.$db_server.') error for for to fix this: <b>ERROR :' . end($dbh->errorInfo()) . '</b><br><br>
 		If this is an Access denied error please make sure that the db_host, db_name, db_user, and db_password in config/config.php are correct 
-		<br>
-		===========================================<br>
-		');
-	}
-	
-	if(!$db) {
-		die('<br>
-		===========================================<br>
-		Simple Invoices database selection problem<br>
-		===========================================<br>
-		Could not connect to the Simple Invoices database<br><br>
-		Please make sure that the database name($db_name) in config/config.php is correct
 		<br>
 		===========================================<br>
 		');
@@ -385,28 +373,31 @@ sort($folderList);
 return($folderList);
 }
 
-function sql2xml($query4xml,$count,$actions) {
-	//count the no. of  columns in the table
-	$fcount = mysql_num_fields($query4xml);
+function sql2xml($sth, $count, $actions) {
 
 	//you can choose any name for the starting tag
 	$xml = ("<result>");
 	$xml .= "<total>".$count."</total>";
-	while($row = mysql_fetch_array( $query4xml ) )
+	while($row = $sth->fetch(PDO::FETCH_ASSOC) )
 	{
-	$xml .= ("<tablerow>");
-	if(isset($actions))
-	{
-		$xml .= ("<actions>
+		//count the no. of  columns in the table
+		$fcount = count($row);
+
+		$xml .= ("<tablerow>");
+		if(isset($actions))
+		{
+			$xml .= ("<actions>
 <a href='#'><img src='images/common/view.png'></img></a> TESTs sta
 </actions>");
-	}	
-	for($i=0; $i< $fcount; $i++)
-	{
-	$tag = mysql_field_name( $query4xml, $i );
-	$xml .= ("<$tag>". $row[$i]. "</$tag>");
-	}
-	$xml .= ("</tablerow>");
+		}	
+		//for($i=0; $i < $fcount; $i++)
+		foreach($row as $key => $value)
+		{
+		//	$tag = mysql_field_name( $query4xml, $i );
+		//	$xml .= ("<$tag>". $row[$i]. "</$tag>");
+			$xml .= ("<$key>". $value. "</$key>");
+		}
+		$xml .= ("</tablerow>");
 	}
 	$xml .= ("</result>");
 

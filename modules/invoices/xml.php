@@ -8,16 +8,57 @@ $dir = (isset($_POST['dir'])) ? $_POST['dir'] : "DESC" ;
 $sort = (isset($_POST['sort'])) ? $_POST['sort'] : "id" ;
 $limit = (isset($_POST['limit'])) ? $_POST['limit'] : "5" ;
 
-//$sql = "SELECT * FROM ".TB_PREFIX."invoices ORDER BY $sort $dir LIMIT $start, $limit";
+//SC: Safety checking values that will be directly subbed in
+if (intval($start) != $start) {
+	$start = 0;
+}
+if (intval($limit) != $limit) {
+	$limit = 5;
+}
+if (!preg_match('/^(asc|desc)$/iD', $dir)) {
+	$dir = 'DESC';
+}
 
-$sql ="
+
+if ($db_server == 'pgsql') {
+	$sql = "
+SELECT
+ iv.id,
+ b.name AS Biller,
+ c.name AS Customer,
+ sum(ii.total) AS INV_TOTAL,
+ coalesce(SUM(ap.ac_amount), 0)  AS INV_PAID,
+ (SUM(ii.total) - coalesce(sum(ap.ac_amount), 0)) AS INV_OWING ,
+ to_char(date,'YYYY-MM-DD') AS Date ,
+ (SELECT now()::date - iv.date) AS Age,
+ (CASE WHEN now()::date - iv.date <= '14 days'::interval THEN '0-14'
+  WHEN now()::date - iv.date <= '30 days'::interval THEN '15-30'
+  WHEN now()::date - iv.date <= '60 days'::interval THEN '31-60'
+  WHEN now()::date - iv.date <= '90 days'::interval THEN '61-90'
+  ELSE '90+'
+ END) AS Aging,
+ p.pref_description AS Type
+FROM
+ si_invoices iv
+ LEFT JOIN si_account_payments ap ON ap.ac_inv_id = iv.id
+ LEFT JOIN si_invoice_items ii ON ii.invoice_id = iv.id
+ LEFT JOIN si_biller b ON b.id = iv.biller_id
+ LEFT JOIN si_customers c ON c.id = iv.customer_id
+ LEFT JOIN si_preferences p ON p.pref_id = iv.preference_id
+GROUP BY
+ iv.id, b.name, c.name, date, age, aging, type
+ORDER BY
+ :sort $dir 
+LIMIT $limit OFFSET $start";
+} else {
+	$sql ="
 SELECT
  si_invoices.id,
  si_biller.name AS Biller,
  si_customers.name AS Customer,
  sum(si_invoice_items.total) AS INV_TOTAL,
- IF ( ISNULL(SUM(ac_amount)) , '0', SUM(ac_amount))  AS INV_PAID,
- (SUM(si_invoice_items.total) - IF(ISNULL(sum(ac_amount)), '0', SUM(ac_amount))) AS INV_OWING ,
+ coalesce(SUM(ac_amount), 0)  AS INV_PAID,
+ (SUM(si_invoice_items.total) - coalesce(sum(ac_amount), 0)) AS INV_OWING ,
  DATE_FORMAT(date,'%Y-%m-%e') AS Date ,
  (SELECT DateDiff(now(),date)) AS Age,
  (CASE WHEN DateDiff(now(),date) <= 14 THEN '0-14'
@@ -37,16 +78,17 @@ FROM
 GROUP BY
  si_invoices.id
 ORDER BY
- $sort $dir 
- LIMIT $start, $limit
-";
+ :sort $dir 
+LIMIT $start, $limit";
+}
 
-$result = mysqlQuery($sql) or die(mysql_error());
+global $dbh;
+$sth = dbQuery($sql, ':sort', $sort) or die(end($dbh->errorInfo()));
 
-$sqlTotal = "SELECT count(id) FROM ".TB_PREFIX."invoices as count";
-$resultTotal = mysql_query($sqlTotal) or die(mysql_error());
-$resultCount = mysql_fetch_array($resultTotal);
+$sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."invoices";
+$tth = $dbh->prepare($sqlTotal);
+$resultCount = $tth->fetch();
 $count = $resultCount[0];
-echo sql2xml($result,$count,'test');
+echo sql2xml($sth, $count, 'test');
 
 ?> 

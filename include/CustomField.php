@@ -49,26 +49,27 @@ abstract class CustomField {
 		$sql = "SELECT * FROM si_customFieldValues WHERE customFieldID = $this->fieldId AND itemID = $itemId";
 		
 		error_log($sql);
-		$query = mysql_query($sql);
-		$result = mysql_fetch_array($query);
+		$sth = $dbh->prepare('SELECT * FROM si_customFieldValues WHERE customFieldID = :field AND itemID = :item');
+		$sth->execute(':field', $this->fieldId, ':item', $itemId);
+		$result = $sth->fetch();
 		
 		if($result == null) {
 			//error_log("no value -> set value");
 			$this->saveInput($value,$itemId);
 		}
 		else {
-			$sql = "UPDATE  `si_customFieldValues` SET  `value` =  '$value' WHERE  customFieldId = $this->fieldId AND itemId = $itemId" ;
-			mysqlQuery($sql);
+			$sql = "UPDATE si_customFieldValues SET value = :value WHERE customFieldId = :field AND itemId = :item" ;
+			dbQuery($sql, ':value', $value, ':field', $this->fieldId, ':item', $itemId);
 		}
 	}
 	
 	/* Returns the value for a choosen field and item. Should be unique, because the itemId for each categorie is unique. */
-	function getFieldValue($customeFieldId, $itemId) {
-		$sql = "SELECT * FROM si_customFieldValues WHERE (customFieldId = $customeFieldId && itemId = $itemId)";
-		$query = mysqlQuery($sql);
+	function getFieldValue($customFieldId, $itemId) {
+		$sql = "SELECT * FROM si_customFieldValues WHERE (customFieldId = :field AND itemId = :item)";
+		$sth = dbQuery($sql, ':field', $customFieldId, ':item', $itemId);
 		
-		if($query) {
-			$value = mysql_fetch_array($query);
+		if($sth) {
+			$value = $sth->fetch();
 			return $value['value'];
 		}
 		
@@ -76,11 +77,11 @@ abstract class CustomField {
 	}
 	
 	function getValue($id) {
-		$sql = "SELECT * FROM si_customFieldValues WHERE id = $id";
-		$query = mysqlQuery($sql);
+		$sql = "SELECT * FROM si_customFieldValues WHERE id = :id";
+		$sth = dbQuery($sql, ':id', $id);
 		
-		if($query) {
-			$value = mysql_fetch_array($query);
+		if($sth) {
+			$value = $sth->fetch();
 			return $value['value'];
 		}
 		
@@ -90,9 +91,9 @@ abstract class CustomField {
 	/* Stores the input into the database */
 	function saveInput($value,$itemId) {
 		//error_log($value." aaa".$itemId);
-		$sql = "INSERT INTO si_customFieldValues (customFieldId,itemId,value) VALUES('".$this->fieldId."','".$itemId."','".$value."');";
+		$sql = "INSERT INTO si_customFieldValues (customFieldId,itemId,value) VALUES(:field, :item, :value);";
 		//error_log($sql);
-		mysqlQuery($sql);
+		dbQuery($sql, ':field', $this->fieldId, ':item', $itemId, ':value', $value);
 	}
 	
 	function showField() {
@@ -119,9 +120,9 @@ abstract class CustomField {
 	function getDescription($id) {
 		global $LANG;
 
-		$sql = "SELECT description FROM ".TB_PREFIX."customFields WHERE id = $id";
-		$query = mysqlQuery($sql);
-		$field = mysql_fetch_array($query);
+		$sql = "SELECT description FROM ".TB_PREFIX."customFields WHERE id = :id";
+		$sth = dbQuery($sql, ':id', $id);
+		$field = $sth->fetch();
 		
 		return eval('return "'.$field['description'].'";');
 	}
@@ -132,9 +133,10 @@ abstract class CustomField {
 	}?*/
 	
 	function getCustomFieldValues($id) {
-		$sql = "SELECT * FROM ".TB_PREFIX."customFieldValues WHERE id = $id;";
-		$query = mysql_query($sql);
-		return mysql_fetch_array($query);
+		$sql = "SELECT * FROM ".TB_PREFIX."customFieldValues WHERE id = ?";
+		$sth = $dbh->prepare($sql);
+		$sth->execute(array($id));
+		return $sth->fetch();
 	}
 }
 

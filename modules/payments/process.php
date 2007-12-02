@@ -27,8 +27,8 @@ if(isset($_GET['invoice'])) {
 	$invoice = getInvoice($master_invoice_id);
 }
 else {
-	$query = mysqlQuery("SELECT * FROM ".TB_PREFIX."invoices");
-	$invoice = mysql_fetch_array($query);
+	$sth = dbQuery("SELECT * FROM ".TB_PREFIX."invoices");
+	$invoice = $sth->fetch();
 }
 $customer = getCustomer($invoice['customer_id']);
 $biller = getBiller($invoice['biller_id']);

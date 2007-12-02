@@ -18,12 +18,12 @@
 	}
 
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."log WHERE (timestamp >= '$startdate' && timestamp < '$enddate') ORDER BY timestamp";
+	$sql = "SELECT * FROM ".TB_PREFIX."log WHERE timestamp BETWEEN :start AND :end ORDER BY timestamp";
 	
-	$query = mysqlQuery($sql);
+	$sth = dbQuery($sql, ':start', $startdate, ':end', $enddate);
 	$sqls = null;
 	
-	for($i=0;$res = mysql_fetch_array($query);$i++) {
+	for($i=0;$res = $sth->fetch();$i++) {
 		$sqls[$i] = $res;
 	}
 	

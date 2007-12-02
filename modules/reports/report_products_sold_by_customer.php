@@ -3,7 +3,14 @@
    include "./modules/reports/PHPReportMaker.php";
    include "config/config.php";
 
-   $sSQL = "select sum(".TB_PREFIX."invoice_items.quantity) as SUM_QUANTITY, ".TB_PREFIX."customers.name, ".TB_PREFIX."products.description  from  ".TB_PREFIX."customers, ".TB_PREFIX."invoice_items, ".TB_PREFIX."invoices, ".TB_PREFIX."products  where  ".TB_PREFIX."invoice_items.product_id = ".TB_PREFIX."products.id and ".TB_PREFIX."invoices.customer_id =  ".TB_PREFIX."customers.id and ".TB_PREFIX."invoices.id = ".TB_PREFIX."invoice_items.invoice_id and ".TB_PREFIX."products.visible = 1 GROUP BY ".TB_PREFIX."invoice_items.quantity ORDER BY name";
+   $sSQL = "SELECT sum(ii.quantity) as SUM_QUANTITY, c.name, p.description
+      FROM ".TB_PREFIX."customers c INNER JOIN
+      ".TB_PREFIX."invoices iv ON (c.id = iv.customer_id) INNER JOIN
+      ".TB_PREFIX."invoice_items ii ON (iv.id = ii.invoice_id) INNER JOIN
+      ".TB_PREFIX."products p ON (p.id = ii.product_id)
+      WHERE p.visible
+      GROUP BY p.description, c.name
+      ORDER BY c.name";
 
    $oRpt = new PHPReportMaker();
 
@@ -11,7 +18,11 @@
    $oRpt->setUser("$db_user");
    $oRpt->setPassword("$db_password");
    $oRpt->setConnection("$db_host");
-   $oRpt->setDatabaseInterface("mysql");
+   if ($db_server == 'pgsql') {
+      $oRpt->setDatabaseInterface("postgresql");
+   } else {
+      $oRpt->setDatabaseInterface("mysql");
+   }
    $oRpt->setSQL($sSQL);
    $oRpt->setDatabase("$db_name");
    ob_start();

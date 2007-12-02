@@ -15,10 +15,10 @@
 include("./include/CustomField.php");
 
 
-function saveCustomField($id, $categorie,$name,$description) {
-	$sql = "INSERT INTO ".TB_PREFIX."customFields  ( `pluginId` ,  `categorieId` ,  `name` ,  `description` ) 
-		VALUES ('$id','$categorie','$name','$description');";
-	mysqlQuery($sql);
+function saveCustomField($id, $category, $name, $description) {
+	$sql = "INSERT INTO ".TB_PREFIX."customFields  (pluginId, categorieId, name, description) 
+		VALUES (:id, :category, :name, :description)";
+	dbQuery($sql, ':id', $id, ':category', $category, ':name', $name, ':description', $description);
 	echo "SAVED<br />";
 }
 
@@ -52,13 +52,13 @@ function updateCustomFieldValues($categorieId,$itemId) {
 	}
 }
 
-function getPluginsByCategorie($categorieId) {
-	$sql = "SELECT * FROM ".TB_PREFIX."customFields WHERE categorieID = $categorieId;";
-	$query = mysqlQuery($sql);
+function getPluginsByCategorie($categoryId) {
+	$sql = "SELECT * FROM ".TB_PREFIX."customFields WHERE categorieID = :category";
+	$sth = dbQuery($sql, ':category', $categoryId);
 	
 	$plugins = null;
 	
-	for($i=0;$field = mysql_fetch_array($query);$i++) {	
+	for($i=0; $field = $sth->fetch(); $i++) {
 		$plugins[$i] = getPluginById($field['pluginId']);
 		$plugins[$i]->setFieldId($field['id']);
 	}
@@ -66,11 +66,11 @@ function getPluginsByCategorie($categorieId) {
 	return $plugins;
 }
 
-function showCustomFields($categorieId) {
-	$sql = "SELECT * FROM ".TB_PREFIX."customFields WHERE categorieID = $categorieId;";
-	$query = mysqlQuery($sql);
+function showCustomFields($categoryId) {
+	$sql = "SELECT * FROM ".TB_PREFIX."customFields WHERE categorieID = :category";
+	$sth = dbQuery($sql, ':category', $categoryId);
 	
-	while($field = mysql_fetch_array($query)) {
+	while($field = $sth->fetch()) {
 		$plugin = getPluginById($field['pluginId']);		
 		$plugin->printInputField($field['id']);
 	}
@@ -99,8 +99,10 @@ function getPluginArray() {
  TODO: Custom field output. Should be in Smarty.
  ******/
 function printCustomFieldsList() {
+	global $dbh;
 	$sql = "SELECT * FROM ".TB_PREFIX."customFields;";
-	$query = mysql_query($sql);
+	$sth = $dbh->prepare($sql);
+	$sth->execute();
 	
 	echo <<<EOD
 	<table>
@@ -114,7 +116,7 @@ function printCustomFieldsList() {
 		</tr>
 EOD;
 
-	while($customField = mysql_fetch_array($query)) {
+	while($customField = $sth->fetch()) {
 		echo <<<EOD
 		<tr>
 			<td>$customField[id]</td>
@@ -150,9 +152,10 @@ function readPlugins() {
 
 function getCategories() {
 	$sql = "SELECT * FROM si_customFieldCategories";
-	$query = mysql_query($sql);
+	$sth = $dbh->prepare($sql);
+	$sth->execute();
 	
-	for($i=0;$cat = mysql_fetch_array($query);$i++) {
+	for($i=0;$cat = $sth->fetch();$i++) {
 		$categories[$i] = $cat;
 	}
 	return $categories;

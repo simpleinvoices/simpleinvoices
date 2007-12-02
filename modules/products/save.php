@@ -15,7 +15,7 @@ if (  $op === 'insert_product' ) {
 	
 	if($id = insertProduct()) {
  		$saved = true;
- 		saveCustomFieldValues($_POST['categorie'],mysql_insert_id());
+ 		saveCustomFieldValues($_POST['categorie'], lastInsertId());
  	}
 }
 

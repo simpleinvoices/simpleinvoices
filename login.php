@@ -25,20 +25,24 @@ session_start();
 $errorMessage = '';
 if (isset($_POST['user']) && isset($_POST['pass'])) {
 
-    $conn = mysql_connect( $db_host, $db_user, $db_password);
-     mysql_select_db( $db_name, $conn);
+    $ldbh = new PDO($db_server.':host='.$db_host.';dbname='.$db_name, $db_user, $db_password);
 
-    $userEmail   = $_POST['user'];
-    $password = $_POST['pass'];
+    $userEmail = $_POST['user'];
+    $password  = $_POST['pass'];
     
     // check if the user id and password combination exist in database
-    $sql = "SELECT user_id 
+    $sth = $ldbh->prepare("SELECT user_id, user_email
             FROM ".TB_PREFIX."users
-            WHERE user_email = '$userEmail' AND user_password = md5('$password')";
+            WHERE user_email = ? AND user_password = md5(?)");
+            //WHERE user_email = '$userEmail' AND user_password = md5('$password')";
     
-    $result = mysql_query($sql, $conn) or die('Query failed. ' . mysql_error()); 
+    if ($sth->execute(array($userEmail, $password))) {
+        $results = $sth->fetchAll();
+    } else {
+        die('Query failed. ' . $sth->errorInfo());
+    }
     
-    if (mysql_num_rows($result) == 1) {
+    if ((count($results) == 1) and ($results[0]['user_email'] == $userEmail)) {
         // the user id and password match, 
         // set the session
         $_SESSION['db_is_logged_in'] = true;

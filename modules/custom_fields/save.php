@@ -33,15 +33,16 @@ if (  $op === 'edit_custom_field' ) {
 		$sql = "UPDATE
                                 ".TB_PREFIX."custom_fields
                         SET
-                                cf_custom_label = '$_POST[cf_custom_label]'
+                                cf_custom_label = :label
                         WHERE
-                                cf_id = $_GET[submit]";
+                                cf_id = :id";
 
-		if (mysqlQuery($sql, $conn)) {
+		if (dbQuery($sql, ':id', $_GET['submit'], ':label', $_POST['cf_custom_label'])) {
 			$display_block =  $LANG['save_custom_field_success'];
 		} else {
 			$display_block =  $LANG['save_custom_field_success'];
-			$display_block .=  mysql_error();
+			global $dbh;
+			$display_block .=  end($dbh->errorInfo());
 		}
 
 		//header( 'refresh: 2; url=manage_custom_fields.php' );

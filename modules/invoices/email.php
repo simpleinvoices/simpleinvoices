@@ -27,9 +27,9 @@ $preference = getPreference($invoice['preference_id']);
 $biller = getBiller($invoice['biller_id']);
 $customer = getCustomer($invoice['customer_id']);
 
-$sql = "SELECT inv_ty_description AS type FROM ".TB_PREFIX."invoice_type WHERE inv_ty_id = $invoice[type_id]";
-$query = mysqlQuery($sql);
-$invoiceType = mysql_fetch_array($query);
+$sql = "SELECT inv_ty_description AS type FROM ".TB_PREFIX."invoice_type WHERE inv_ty_id = :type";
+$sth = dbQuery($sql, ':type', $invoice['type_id']);
+$invoiceType = $sth->fetch();
 
 /* - TODO old code delete once working
 $url_pdf = "http://{$http_auth}$_SERVER[HTTP_HOST]{$httpPort}$install_path/index.php?module=invoices&view=templates/template&invoice=$invoice_id&action=view&location=pdf&style=$invoiceType[type]";

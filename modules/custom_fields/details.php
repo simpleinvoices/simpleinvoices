@@ -23,12 +23,12 @@ checkLogin();
 #get the invoice id
 $cf_id = $_GET["submit"];
 
-
+global $dbh;
 #customer query
-$print_product = "SELECT * FROM ".TB_PREFIX."custom_fields WHERE cf_id = $cf_id";
-$result_print_product = mysqlQuery($print_product, $conn) or die(mysql_error());
+$print_product = "SELECT * FROM ".TB_PREFIX."custom_fields WHERE cf_id = :id";
+$sth = dbQuery($print_product, ':id', $cf_id) or die(end($dbh->errorInfo()));
 
-$cf = mysql_fetch_array($result_print_product);
+$cf = $sth->fetch();
 $cf['name'] = get_custom_field_name($cf['cf_custom_field']);
 
 

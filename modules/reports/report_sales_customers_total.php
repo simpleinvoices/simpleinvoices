@@ -12,14 +12,22 @@ if (!defined("BROWSE")) {
    include "./modules/reports/PHPReportMaker.php";
    include "config/config.php";
 
-   $sSQL = "select  ".TB_PREFIX."customers.name,  sum(".TB_PREFIX."invoice_items.total) as SUM_TOTAL  from ".TB_PREFIX."customers, ".TB_PREFIX."invoice_items, ".TB_PREFIX."invoices where ".TB_PREFIX."invoices.customer_id = ".TB_PREFIX."customers.id and ".TB_PREFIX."invoices.id = ".TB_PREFIX."invoice_items.invoice_id GROUP BY ".TB_PREFIX."customers.name ";
+   $sSQL = "SELECT c.name, sum(ii.total) as SUM_TOTAL
+      FROM ".TB_PREFIX."customers c INNER JOIN
+      ".TB_PREFIX."invoices iv ON (iv.customer_id = c.id) INNER JOIN
+      ".TB_PREFIX."invoice_items ii ON (ii.invoice_id = iv.id)
+      GROUP BY c.name ";
    $oRpt = new PHPReportMaker();
 
    $oRpt->setXML("./modules/reports/xml/report_sales_customers_total.xml");
    $oRpt->setUser("$db_user");
    $oRpt->setPassword("$db_password");
    $oRpt->setConnection("$db_host");
-   $oRpt->setDatabaseInterface("mysql");
+   if ($db_server == 'pgsql') {
+      $oRpt->setDatabaseInterface("postgresql");
+   } else {
+      $oRpt->setDatabaseInterface("mysql");
+   }
    $oRpt->setSQL($sSQL);
    $oRpt->setDatabase("$db_name");
    ob_start();

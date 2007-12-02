@@ -591,8 +591,8 @@ NULL , 'logging', '0'
 	//systemd efaults conversion patch
 	#defaults query and DEFAULT NUMBER OF LINE ITEMS
 	$sql_defaults = "SELECT * FROM ".TB_PREFIX."defaults";
-	$result_defaults = mysqlQuery($sql_defaults);
-	$defaults = mysql_fetch_array($result_defaults);
+	$sth = dbQuery($sql_defaults);
+	$defaults = $sth->fetch();
 
 	$patch['116']['name'] = "System defaults conversion patch - set default biller";
 	$patch['116']['patch'] = "UPDATE `si_system_defaults` SET value = $defaults[def_biller] where name = 'biller'";

@@ -21,8 +21,8 @@
 $invoiceID = $_GET['invoice'];
 
 #Info from DB print --> TODO: Needed?
-$conn = mysql_connect( $db_host, $db_user, $db_password );
-mysql_select_db( $db_name, $conn );
+//$conn = mysql_connect( $db_host, $db_user, $db_password );
+//mysql_select_db( $db_name, $conn );
 
 $invoice = getInvoice($invoiceID);
 $customer = getCustomer($invoice['customer_id']);

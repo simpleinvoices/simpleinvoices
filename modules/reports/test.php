@@ -3,7 +3,11 @@
    ini_set("include_path",ini_get("include_path").":/var/www/phpreports/"); 
    include "PHPReportMaker.php";
 
-   $sSQL = "select ".TB_PREFIX."biller.name, ".TB_PREFIX."customers.c_name, ".TB_PREFIX."invoices.inv_id, ".TB_PREFIX."invoice_items.inv_it_total from ".TB_PREFIX."biller, ".TB_PREFIX."customers, ".TB_PREFIX."invoices, ".TB_PREFIX."invoice_items where ".TB_PREFIX."invoices.inv_id = ".TB_PREFIX."invoice_items.inv_it_invoice_id and ".TB_PREFIX."invoices.inv_biller_id = ".TB_PREFIX."biller.id and ".TB_PREFIX."invoices.inv_customer_id = ".TB_PREFIX."customers.c_id
+   $sSQL = "SELECT b.name, c.name, iv.id, ii.total
+   FROM ".TB_PREFIX."biller b INNER JOIN
+      ".TB_PREFIX."invoices iv ON (b.id = iv.biller_id) INNER JOIN
+      ".TB_PREFIX."customers c ON (c.id = iv.customer_id) INNER JOIN
+      ".TB_PREFIX."invoice_items ii ON (ii.invoice_id = iv.id)
 ";
    $oRpt = new PHPReportMaker();
 
@@ -11,7 +15,12 @@
    $oRpt->setUser("php");
    $oRpt->setPassword("php");
    $oRpt->setConnection("localhost");
-   $oRpt->setDatabaseInterface("mysql");
+   global $db_server;
+   if ($db_server == 'pgsql') {
+      $oRpt->setDatabaseInterface("postgresql");
+   } else {
+      $oRpt->setDatabaseInterface("mysql");
+   }
    $oRpt->setSQL($sSQL);
    $oRpt->setDatabase("simple_invoices");
    $oRpt->run();

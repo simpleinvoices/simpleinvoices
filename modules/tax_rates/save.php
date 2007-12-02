@@ -17,24 +17,35 @@ if (  $op === 'insert_tax_rate' ) {
 $sql = "INSERT INTO ".TB_PREFIX."tax VALUES ('$_POST[tax_description]','$_POST[tax_percentage]')";
 */
 
-$sql = "INSERT into
-		".TB_PREFIX."tax
-	VALUES
-		(	
-			'',
-			'$_POST[tax_description]',
-			'$_POST[tax_percentage]',	
-			'$_POST[tax_enabled]'
-		)";
+	$sql = "INSERT into
+			".TB_PREFIX."tax
+			(
+				tax_id, tax_description,
+				tax_percentage, tax_enabled,
+			)
+		VALUES
+			(	
+				'', :description,
+				:percent, :enabled
+			)";
+	if ($db_server == 'pgsql') {
+		$sql = "INSERT into ".TB_PREFIX."tax
+			(tax_description, tax_percentage, tax_enabled)
+		VALUES
+			(:description, :percent, :enabled)";
+	}
+	
+	if (dbQuery($sql,
+	  ':description', $_POST['tax_description'],
+	  ':percent', $_POST['tax_percentage'],
+	  ':enabled', $_POST['tax_enabled'])) {
+		$display_block = $LANG['save_tax_rate_success'];
+	} else {
+		$display_block = $LANG['save_tax_rate_failure'];
+	}
 
-if (mysqlQuery($sql, $conn)) {
-	$display_block = $LANG['save_tax_rate_success'];
-} else {
-	$display_block = $LANG['save_tax_rate_failure'];
-}
-
-//header( 'refresh: 2; url=manage_tax_rates.php' );
-$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=tax_rates&view=manage>";
+	//header( 'refresh: 2; url=manage_tax_rates.php' );
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=tax_rates&view=manage>";
 }
 
 
@@ -43,20 +54,21 @@ $refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=tax_ra
 
 else if (  $op === 'edit_tax_rate' ) {
 
-$conn = mysql_connect("$db_host","$db_user","$db_password");
-mysql_select_db("$db_name",$conn);
-
 	if (isset($_POST['save_tax_rate'])) {
 		$sql = "UPDATE
 				".TB_PREFIX."tax
 			SET
-				tax_description = '$_POST[tax_description]',
-				tax_percentage = '$_POST[tax_percentage]',
-				tax_enabled = '$_POST[tax_enabled]'
+				tax_description = :description,
+				tax_percentage = :percentage,
+				tax_enabled = :enabled
 			WHERE
-				tax_id = " . $_GET['submit'];
+				tax_id = :id";
 
-		if (mysqlQuery($sql, $conn)) {
+		if (dbQuery($sql, 
+		  ':description', $_POST['tax_description'],
+	  	  ':percentage', $_POST['tax_percentage'],
+	  	  ':enabled', $_POST['tax_enabled'],
+	  	  ':id', $_GET['submit'])) {
 			$display_block = $LANG['save_tax_rate_success'];
 		} else {
 			$display_block = $LANG['save_tax_rate_failure'];

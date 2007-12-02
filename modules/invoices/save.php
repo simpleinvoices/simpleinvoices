@@ -35,20 +35,20 @@ $type = $_POST['type'];
 if ($_POST['action'] == "insert" ) {
 	
 	if(insertInvoice($type)) {
-		$invoice_id = mysql_insert_id();
+		$invoice_id = lastInsertId();
 		saveCustomFieldValues($_POST['categorie'],$invoice_id);
 		$saved = true;
 	}
 
 	if($type==1) {
 		insertProduct(0,0);
-		$product_id = mysql_insert_id();
+		$product_id = lastInsertId();
 
 		if (insertInvoiceItem($invoice_id,1,$product_id,$_POST['tax_id'],$_POST['description'])) {
 			//$saved = true;
 		}
 		else {
-			die(mysql_error());
+			die(end($dbh->errorInfo()));
 		}
 	}
 	else {
@@ -57,7 +57,7 @@ if ($_POST['action'] == "insert" ) {
 			if (insertInvoiceItem($invoice_id,$_POST["quantity$i"],$_POST["products$i"],$_POST['tax_id'],$_POST["description$i"]) ) {
 				//$saved = true;
 			} else {
-				die(mysql_error());
+				die(end($dbh->errorInfo()));
 			}
 		}
 	}
@@ -76,8 +76,12 @@ if ( $_POST['action'] == "edit") {
 	}
 
 	if($type == 1) {
-		$sql = "UPDATE ".TB_PREFIX."products SET `unit_price` = '$_POST[unit_price]', `description` = '$_POST[description0]' WHERE id = $_POST[products0]";
-		mysqlQuery($sql);
+		$sql = "UPDATE ".TB_PREFIX."products SET unit_price = :price, description = :description WHERE id = :id";
+		dbQuery($sql,
+			':price', $_POST['unit_price'],
+			':description', $_POST['description0'],
+			':id', $_POST['products0']
+			);
 	}
 
 	for($i=0;(!empty($_POST["quantity$i"]) && $i < $_POST['max_items']);$i++) {
@@ -86,7 +90,7 @@ if ( $_POST['action'] == "edit") {
 			//$saved =  true;
 		}
 		else {
-			die(mysql_error());
+			die(end($dbh->errorInfo()));
 		}
 	}
 

@@ -57,21 +57,21 @@ EOD;
 $query = null;
 
 if(isset($_POST['biller']) || isset($_POST['customer'])) {
-	$query = searchBillerAndCustomerInvoice($_POST['biller'],$_POST['customer']);
+	$sth = searchBillerAndCustomerInvoice($_POST['biller'],$_POST['customer']);
 }
 
 $startdate = $_POST['startdate'];
 $enddate = $_POST['enddate'];
 
 if(isset($_POST['startdate']) && isset($_POST['enddate'])) {
-	$query = searchInvoiceByDate($_POST['startdate'], $_POST['enddate']);
+	$sth = searchInvoiceByDate($_POST['startdate'], $_POST['enddate']);
 }
 
 
-if($query != null) {
+if($sth != null) {
 	echo "<b>Result</b>";
 	echo "<table border=1 cellpadding=2>";
-	while($res = mysql_fetch_array($query)) {
+	while($res = $sth->fetch()) {
 		echo "<tr>";
 		echo "<td><a href='index.php?module=invoices&view=quick_view&invoice=$res[invoice]'>$res[invoice]</a></td>
 		<td>$res[date]</td>

@@ -28,12 +28,11 @@ EOD;*/
 
 $sql = "SELECT * FROM ".TB_PREFIX."invoices ORDER BY id desc";
 
-$result = mysqlQuery($sql) or die(mysql_error());
-
+$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
 
 $invoices = null;
 
-for($i = 0;$invoice = getInvoices($result);$i++) {
+for($i = 0;$invoice = getInvoices($sth);$i++) {
 	
 	
 	$biller = getBiller($invoice['biller_id']);

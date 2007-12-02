@@ -57,9 +57,9 @@ class InvoiceNumber extends CustomField {
 	}
 	
 	function getLastValue() {
-		$sql = "SELECT value FROM  `si_customFieldValues` WHERE customFieldId =7 ORDER BY id DESC LIMIT 1;";
-		$query = mysqlQuery($sql);
-		$result = mysql_fetch_array($query);
+		$sql = "SELECT value FROM si_customFieldValues WHERE customFieldId = 7 ORDER BY id DESC LIMIT 1;";
+		$sth = dbQuery($sql);
+		$result = $sth->fetch();
 		error_log($sql);
 		return $result['value'];
 	}

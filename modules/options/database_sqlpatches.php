@@ -12,9 +12,9 @@ function getNumberOfPatches() {
 		
 
 	$check_patches_sql = "SELECT count(sql_patch) AS count FROM ".TB_PREFIX."sql_patchmanager ";
-	$patches_result = mysqlQuery($check_patches_sql) or die(mysql_error());
+	$sth = dbQuery($check_patches_sql) or die(end($dbh->errorInfo()));
 		
-	$patches = mysql_fetch_array($patches_result);
+	$patches = $sth->fetch();
 	$patch_count = count($patch);
 	
 	//Returns number of patches to be applied
@@ -25,8 +25,14 @@ function getNumberOfPatches() {
 function runPatches() {
 		global $patch;
 	#DEFINE SQL PATCH
-	
-	if(mysql_num_rows(mysqlQuery("SHOW TABLES LIKE '".TB_PREFIX."sql_patchmanager'")) == 1) {
+
+	$sql = "SHOW TABLES LIKE '".TB_PREFIX."sql_patchmanager'";
+	if ($db_server = 'pgsql') {
+		$sql = "SELECT 1 FROM pg_tables WHERE tablename ='".TB_PREFIX."sql_patchmanager'";
+	}
+	$sth = dbQuery($sql);
+	$rows = $sth->fetchAll();
+	if(count($rows) == 1) {
 
 		$display_block = "<table align='center'>";
 
@@ -111,11 +117,11 @@ EOD;
 
 
 function check_sql_patch($check_sql_patch_ref, $check_sql_patch_field) {
-    	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager WHERE sql_patch_ref = $check_sql_patch_ref" ;
+    	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager WHERE sql_patch_ref = :patch" ;
 
-	$query = mysqlQuery($sql) or die(mysql_error());
+	$sth = dbQuery($sql, ':patch', $check_sql_patch_ref) or die(end($dbh->errorInfo()));
 
-	if(mysql_num_rows($query) > 0) {
+	if(count($sth->fetchAll()) > 0) {
 		return true;
 	}
 	
@@ -127,12 +133,12 @@ function check_sql_patch($check_sql_patch_ref, $check_sql_patch_field) {
 
 function run_sql_patch($id, $patch) {
 
-	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager WHERE sql_patch_ref = $id" ;
-	$query = mysqlQuery($sql) or die(mysql_error());
+	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager WHERE sql_patch_ref = :id" ;
+	$sth = dbQuery($sql, ':id', $id) or die(end($dbh->errorInfo()));
 	
 	//echo $sql;
 	#forget about it!! the patch as its already been run
-	if (mysql_num_rows($query) != 0)  {
+	if (count($sth->fetchAll()) != 0)  {
 
 		$display_block = <<<EOD
 		</div id="header">
@@ -141,10 +147,9 @@ EOD;
 	}
 	else {
 		
-
 		//patch hasn't been run
 		#so do the bloody patch
-		mysqlQuery($patch['patch']) or die(mysql_error());
+		dbQuery($patch['patch']) or die(end($dbh->errorInfo()));
 		
 
 		$display_block  = <<<EOD
@@ -153,11 +158,11 @@ EOD;
 		# now update the ".TB_PREFIX."sql_patchmanager table
 		
 		
-		$sql_update = "INSERT INTO ".TB_PREFIX."sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES ($id,'$patch[name]',$patch[date],'".addslashes($patch['patch'])."')";
+		$sql_update = "INSERT INTO ".TB_PREFIX."sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (:id, :name, :date, :patch)";
 		
 		/*echo $sql_update;*/
 
-		mysqlQuery($sql_update) or die(mysql_error());
+		dbQuery($sql_update, ':id', $id, ':name', $patch[name], ':date', $patch[date], ':patch', $patch[patch]) or die(end($dbh->errorInfo()));
 
 		if($id == 126) {
 			patch126();
@@ -174,10 +179,12 @@ EOD;
 
 
 function initialise_sql_patch() {
+	//SC: MySQL-only function, not porting to PostgreSQL
+	global $dbh;
 
 	#check sql patch 1
 	$sql_patch_init = "CREATE TABLE ".TB_PREFIX."sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 50 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) TYPE = MYISAM ";
-	mysqlQuery($sql_patch_init) or die(mysql_error());
+	dbQuery($sql_patch_init) or die(end($dbh->errorInfo()));
 
 	$display_block = "<tr><td>Step 2 - The SQL patch table has been created<br></td></tr>";
 
@@ -185,8 +192,8 @@ function initialise_sql_patch() {
 
 	$sql_insert = "INSERT INTO ".TB_PREFIX."sql_patchmanager
  ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement )
-VALUES ('','1','Create ".TB_PREFIX."sql_patchmanger table','20060514','$sql_patch_init')";
-	mysqlQuery($sql_insert, $conn) or die(mysql_error());
+VALUES ('','1','Create ".TB_PREFIX."sql_patchmanger table','20060514', :patch)";
+	dbQuery($sql_insert, ':patch', $sql_patch_init) or die(end($dbh->errorInfo()));
 
 	$display_block2 = "<tr><td>Step 3 - The SQL patch has been inserted into the SQL patch table<br></td></tr>";
 	
@@ -194,17 +201,23 @@ VALUES ('','1','Create ".TB_PREFIX."sql_patchmanger table','20060514','$sql_patc
 }
 
 function patch126() {
+	//SC: MySQL-only function, not porting to PostgreSQL
 	$sql = "SELECT * FROM si_invoice_items WHERE product_id = 0";
-	$query = mysqlQuery($sql);
+	$sth = dbQuery($sql);
 	
-	while($res = mysql_fetch_array($query)) {
-		$sql = "INSERT INTO  `si_products` (  `id` ,  `description` ,  `unit_price` ,  `enabled` ,  `visible` ) 
-			VALUES (NULL ,  '$res[description]',  '$res[gross_total]', '0',  '0');";
-		mysqlQuery($sql);
-		$id = mysql_insert_id();
-		$sql = "UPDATE  `si_invoice_items` SET  `product_id` =  '$id', `unit_price` = '$res[gross_total]' WHERE  `si_invoice_items`.`id` =$res[id]";
+	while($res = $sth->fetch()) {
+		$sql = "INSERT INTO si_products (id, description, unit_price, enabled, visible) 
+			VALUES (NULL, :description, :gross_total, '0',  '0')";
+		dbQuery($sql, ':description', $res[description], ':total', $res[gross_total]);
+		$id = lastInsertId();
 
-		mysqlQuery($sql);
+		$sql = "UPDATE  si_invoice_items SET product_id = :id, unit_price = :price WHERE si_invoice_items.id = :item";
+
+		dbQuery($sql,
+			':id', $id[0],
+			':price', $res[gross_total],
+			':item', $res[id]
+			);
 	}
 }
 
@@ -212,10 +225,12 @@ function patch126() {
 
 function convertCustomFields() {
 	/* check if any value set -> keeps all data for sure */
+	global $dbh;
 	$sql = "SELECT * FROM si_custom_fields";
-	$query = mysql_query($sql);
+	$sth = $dbh->prepare($sql);
+	$sth->execute();
 	
-	while($custom = mysql_fetch_array($query)) {
+	while($custom = $sth->fetch()) {
 		if(preg_match("/(.+)_cf([1-4])/",$custom['cf_custom_field'],$match)) {
 			//print_r($match);
 			
@@ -229,10 +244,12 @@ function convertCustomFields() {
 			
 			$cf_field = "custom_field".$match[2];
 			if($match[1] != "biller") {
-				$sql = "SELECT id,$cf_field FROM si_$match[1]s";
+				$sql = "SELECT id, :field FROM :table";
+				$tablename = "si_$match[1]s";
 			}
 			else {
-				$sql = "SELECT id,$cf_field FROM si_$match[1]";
+				$sql = "SELECT id, :field FROM :table";
+				$tablename = "si_$match[1]";
 			}
 			
 			
@@ -247,12 +264,15 @@ function convertCustomFields() {
 			
 			
 			//error_log($sql);
-			$query2 = mysql_query($sql);
-			
+			$tth = $dbh->prepare($sql);
+			$tth->bindValue(':table', $tablename);
+			$tth->bindValue(':field', $cf_field);
+			$tth->execute();
+
 			/*
 			 * If any field is set, create custom field
 			 */
-			while($res = mysql_fetch_array($query2)) {
+			while($res = $tth->fetch()) {
 				if($res[1] != NULL) {
 					$store = true;
 					break;
@@ -266,15 +286,18 @@ function convertCustomFields() {
 				
 				//create new text custom field
 				saveCustomField(3,$cat,$custom['cf_custom_field'],$custom['cf_custom_label']);
-				$id = mysql_insert_id();
+				$id = lastInsertId();
 				error_log($id);
 				
 				$plugin = getPluginById(3);
 				$plugin->setFieldId($id);
 				
 				//insert all data
-				$query3 = mysql_query($sql);
-				while($res2 = mysql_fetch_array($query3)) {
+				$uth = $dbh->prepare($sql);
+				$uth->bindValue(':table', $tablename);
+				$uth->bindValue(':field', $cf_field);
+				$uth->execute();
+				while($res2 = $uth->fetch()) {
 					$plugin->saveInput($res2[$cf_field], $res2['id']);
 				}
 				

@@ -7,9 +7,9 @@
 	$biller = getBiller($invoice['biller_id']);
 	$customer = getCustomer($invoice['customer_id']);
 	
-	$sql = "SELECT inv_ty_description AS type FROM ".TB_PREFIX."invoice_type WHERE inv_ty_id = $invoice[type_id]";
-	$query = mysqlQuery($sql);
-	$invoiceType = mysql_fetch_array($query);
+	$sql = "SELECT inv_ty_description AS type FROM ".TB_PREFIX."invoice_type WHERE inv_ty_id = :id";
+	$sth = dbQuery($sql, ':id', $invoice['type_id']);
+	$invoiceType = $sth->fetch();
 	
 	$url_pdf = "http://{$http_auth}$_SERVER[HTTP_HOST]{$httpPort}$install_path/index.php?module=invoices&view=templates/template&invoice=$invoice_id&action=view&location=pdf&style=$invoiceType[type]";
 	//echo $url_pdf;

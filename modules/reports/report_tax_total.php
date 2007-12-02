@@ -23,14 +23,18 @@ if (!defined("BROWSE")) {
    include "./modules/reports/PHPReportMaker.php";
    include "config/config.php";
 
-   $sSQL = "select sum(".TB_PREFIX."invoice_items.tax_amount) as SUM_TAX_AMOUNT from ".TB_PREFIX."invoice_items";
+   $sSQL = "select sum(ii.tax_amount) as SUM_TAX_AMOUNT from ".TB_PREFIX."invoice_items ii";
    $oRpt = new PHPReportMaker();
 
    $oRpt->setXML("./modules/reports/xml/report_tax_total.xml");
    $oRpt->setUser("$db_user");
    $oRpt->setPassword("$db_password");
    $oRpt->setConnection("$db_host");
-   $oRpt->setDatabaseInterface("mysql");
+   if ($db_server == 'pgsql') {
+      $oRpt->setDatabaseInterface("postgresql");
+   } else {
+      $oRpt->setDatabaseInterface("mysql");
+   }
    $oRpt->setSQL($sSQL);
    $oRpt->setDatabase("$db_name");
    ob_start();

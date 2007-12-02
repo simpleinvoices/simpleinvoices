@@ -6,75 +6,85 @@ include('./include/sql_patches.php');
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+global $db_server;
+global $dbh;
 #Largest debtor query - start
-if ($mysql > "4.1.0") {
+if ($db_server == 'pgsql' or $mysql > "4.1.0") {
 	$sql = "SELECT	
-	        ".TB_PREFIX."customers.id as CID,
-	        ".TB_PREFIX."customers.name as Customer,
-	        (select sum(".TB_PREFIX."invoice_items.total) from ".TB_PREFIX."invoice_items,".TB_PREFIX."invoices where  ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id and ".TB_PREFIX."invoices.customer_id = CID) as Total,
-	        (select IF ( isnull(sum(ac_amount)), '0', sum(ac_amount)) from ".TB_PREFIX."account_payments,".TB_PREFIX."invoices where ".TB_PREFIX."account_payments.ac_inv_id = ".TB_PREFIX."invoices.id and ".TB_PREFIX."invoices.customer_id = CID) as Paid,
-	        (select (Total - Paid)) as Owing
+	        	c.id as \"CID\",
+	        	c.name as \"Customer\",
+	        	sum(ii.total) as \"Total\",
+	        	(select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."account_payments ap INNER JOIN ".TB_PREFIX."invoices iv2 ON (ap.ac_inv_id = iv2.id) where iv2.customer_id = c.id) as \"Paid\",
+	        	sum(ii.total) - (select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."account_payments ap INNER JOIN ".TB_PREFIX."invoices iv2 ON (ap.ac_inv_id = iv2.id) where iv2.customer_id = c.id) as \"Owing\"
 	FROM
-	        ".TB_PREFIX."customers,".TB_PREFIX."invoices,".TB_PREFIX."invoice_items
-	WHERE
-	        ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id and ".TB_PREFIX."invoices.customer_id = ".TB_PREFIX."customers.id
+	        ".TB_PREFIX."customers c INNER JOIN
+		".TB_PREFIX."invoices iv ON (c.id = iv.customer_id) INNER JOIN
+		".TB_PREFIX."invoice_items ii ON (iv.id = ii.invoice_id)
 	GROUP BY
-	        Owing DESC
+		\"CID\", iv.customer_id, c.id, c.name
+	ORDER BY
+	        \"Owing\" DESC
 	LIMIT 1;
 	";
 
-	$result = mysqlQuery($sql) or die(mysql_error());
+	$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
 
-	$debtor = mysql_fetch_array($result);
+	$debtor = $sth->fetch();
 }
 #Largest debtor query - end
 
 #Top customer query - start
 
-if ($mysql > "4.1.0") {
+if ($db_server == 'pgsql' or $mysql > "4.1.0") {
 	$sql2 = "SELECT
-		".TB_PREFIX."customers.id as CID,
-	        ".TB_PREFIX."customers.name as Customer,
-       		(select sum(".TB_PREFIX."invoice_items.total) from ".TB_PREFIX."invoice_items,".TB_PREFIX."invoices where  ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id and ".TB_PREFIX."invoices.customer_id = CID) as Total,
-	        (select IF ( isnull(sum(ac_amount)), '0', sum(ac_amount)) from ".TB_PREFIX."account_payments,".TB_PREFIX."invoices where ".TB_PREFIX."account_payments.ac_inv_id = ".TB_PREFIX."invoices.id and ".TB_PREFIX."invoices.customer_id = CID) as Paid,
-	        (select (Total - Paid)) as Owing
+			c.id as \"CID\",
+	        	c.name as \"Customer\",
+       			sum(ii.total) as \"Total\",
+	        	(select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."account_payments ap INNER JOIN ".TB_PREFIX."invoices iv2 ON (ap.ac_inv_id = iv2.id) where iv2.customer_id = c.id) as \"Paid\",
+	        	sum(ii.total) - (select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."account_payments ap INNER JOIN ".TB_PREFIX."invoices iv2 ON (ap.ac_inv_id = iv2.id) where iv2.customer_id = c.id) as \"Owing\"
 
 	FROM
-       		".TB_PREFIX."customers,".TB_PREFIX."invoices,".TB_PREFIX."invoice_items
-	WHERE
-	        ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id and ".TB_PREFIX."invoices.customer_id = ".TB_PREFIX."customers.id
+       		".TB_PREFIX."customers c INNER JOIN
+		".TB_PREFIX."invoices iv ON (c.id = iv.customer_id) INNER JOIN
+		".TB_PREFIX."invoice_items ii ON (iv.id = ii.invoice_id)
 	GROUP BY
-	        Total DESC
+	        \"CID\", iv.customer_id, \"Customer\"
+	ORDER BY 
+		\"Total\" DESC
 	LIMIT 1;
 ";
 
-	$result2 = mysqlQuery($sql2) or die(mysql_error());
+	$tth = dbQuery($sql2) or die(end($dbh->errorInfo()));
 
-	$customer = mysql_fetch_array($result2);
+	$customer = $tth->fetch();
 }
 #Top customer query - end
 
 #Top biller query - start
-if ($mysql > "4.1.0") {
+if ($db_server == 'pgsql' or $mysql > "4.1.0") {
 	
 	$sql3 = "SELECT
-		".TB_PREFIX."biller.name,  
-		sum(".TB_PREFIX."invoice_items.total) as Total 
+		b.name,  
+		sum(ii.total) as Total 
 	FROM 
-		".TB_PREFIX."biller, ".TB_PREFIX."invoice_items, ".TB_PREFIX."invoices 
-	WHERE 
-		".TB_PREFIX."invoices.biller_id = ".TB_PREFIX."biller.id and ".TB_PREFIX."invoices.id = ".TB_PREFIX."invoice_items.invoice_id GROUP BY name ORDER BY Total DESC LIMIT 1;
+		".TB_PREFIX."biller b INNER JOIN
+		".TB_PREFIX."invoices iv ON (b.id = iv.biller_id) INNER JOIN
+		".TB_PREFIX."invoice_items ii ON (iv.id = ii.invoice_id)
+	GROUP BY b.name
+	ORDER BY Total DESC
+	LIMIT 1;
 	";
 
-	$result3 = mysqlQuery($sql3) or die(mysql_error());
+	$uth = dbQuery($sql3) or die(end($dbh->errorInfo()));
 
-	$biller = mysql_fetch_array($result3);
+	$biller = $uth->fetch();
 }
 #Top biller query - start
 
 
 
 $smarty -> assign("mysql",$mysql);
+$smarty -> assign("db_server",$db_server);
 /*
 $smarty -> assign("patch",count($patch));
 $smarty -> assign("max_patches_applied", $max_patches_applied);

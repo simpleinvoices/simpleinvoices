@@ -2,6 +2,8 @@
 //checkLogin();
 
 /*Enter your database information */
+// $db_server can be mysql or pgsql
+$db_server = "mysql";
 $db_host = "localhost";
 $db_name = "simple_invoices";
 $db_user = "root";
@@ -64,7 +66,9 @@ $pdf_bottom_margin = 15;
 //TODO remove this before release
 //dev stuff
 $config_inc_style = "true";
-$smarty->assign('config_inc_style', $config_inc_style);
+if ($smarty) {
+	$smarty->assign('config_inc_style', $config_inc_style);
+}
 
 #Error reporting
 #error_reporting(E_ALL);
