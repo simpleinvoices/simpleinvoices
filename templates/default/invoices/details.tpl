@@ -31,7 +31,7 @@
 	</tr>
 	<tr>
 	        <td class="details_screen">{$LANG.date_formatted}</td>
-        	<td><input type="text" class="date-picker" name="date" id="date1" value='{$invoice.date}'></input></td>
+        	<td><input type="text" class="date-picker" name="date" id="date1" value='{$invoice.calc_date}'></input></td>
 	</tr>
 	<tr>
 		<td class='details_screen'>{$LANG.biller}</td><td>
