@@ -72,7 +72,7 @@ if ($_POST['action'] == "insert" ) {
 		$saved = true;
 	}
 
-	if($type == 1) {
+	if($type == 1 && $saved) {
 		$sql = "UPDATE ".TB_PREFIX."products SET unit_price = :price, description = :description WHERE id = :id";
 		dbQuery($sql,
 			':price', $_POST['unit_price'],
@@ -83,7 +83,7 @@ if ($_POST['action'] == "insert" ) {
 
 	for($i=0;(!empty($_POST["quantity$i"]) && $i < $_POST['max_items']);$i++) {
 		
-		if (updateInvoiceItem($_POST["id$i"],$_POST["quantity$i"],$_POST["products$i"],$_POST['tax_id'],$_POST["description$i"])) {
+		if (updateInvoiceItem($_POST["id$i"],$_POST["quantity$i"],$_POST["products$i"],$_POST['tax_id'],$_POST["description$i"]) && $saved) {
 			//$saved =  true;
 		}
 		else {

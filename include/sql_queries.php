@@ -85,6 +85,65 @@ function lastInsertId() {
 	return $sth->fetchColumn();
 }
 
+/*
+ * _invoice_check_fk performs some manual FK checks on tables that the invoice
+ *     table refers to.   Under normal conditions, this function will return
+ *     true.  Returning false indicates that if the INSERT or UPDATE were to
+ *     proceed, bad data could be written to the database.
+ */
+function _invoice_check_fk($biller, $customer, $type, $preference) {
+	global $dbh;
+
+	//Check biller
+	$sth = $dbh->prepare('SELECT count(id) FROM '.TB_PREFIX.'biller WHERE id = :id');
+	$sth->execute(array(':id' => $biller));
+	if ($sth->fetchColumn() == 0) { return false; }
+	//Check customer
+	$sth = $dbh->prepare('SELECT count(id) FROM '.TB_PREFIX.'customers WHERE id = :id');
+	$sth->execute(array(':id' => $customer));
+	if ($sth->fetchColumn() == 0) { return false; }
+	//Check invoice type
+	$sth = $dbh->prepare('SELECT count(inv_ty_id) FROM '.TB_PREFIX.'invoice_type WHERE inv_ty_id = :id');
+	$sth->execute(array(':id' => $type));
+	if ($sth->fetchColumn() == 0) { return false; }
+	//Check preferences
+	$sth = $dbh->prepare('SELECT count(pref_id) FROM '.TB_PREFIX.'preferences WHERE pref_id = :id');
+	$sth->execute(array(':id' => $preference));
+	if ($sth->fetchColumn() == 0) { return false; }
+	
+	//All good
+	return true;
+}
+
+/*
+ * _invoice_items_check_fk performs some manual FK checks on tables that the
+ *     invoice items table refers to.   Under normal conditions, this function
+ *     will return true.  Returning false indicates that if the INSERT or
+ *     UPDATE were to proceed, bad data could be written to the database.
+ */
+function _invoice_items_check_fk($invoice, $product, $tax, $update) {
+	global $dbh;
+
+	//Check invoice
+	if (is_null($update) || !is_null($invoice)) {
+		$sth = $dbh->prepare('SELECT count(id) FROM '.TB_PREFIX.'invoices WHERE id = :id');
+		$sth->execute(array(':id' => $invoice));
+		if ($sth->fetchColumn() == 0) { return false; }
+	}
+	//Check product
+	$sth = $dbh->prepare('SELECT count(id) FROM '.TB_PREFIX.'products WHERE id = :id');
+	$sth->execute(array(':id' => $product));
+	if ($sth->fetchColumn() == 0) { return false; }
+	//Check tax id
+	$sth = $dbh->prepare('SELECT count(tax_id) FROM '.TB_PREFIX.'tax WHERE tax_id = :id');
+	$sth->execute(array(':id' => $tax));
+	if ($sth->fetchColumn() == 0) { return false; }
+
+	//All good
+	return true;
+}
+
+
 function getCustomer($id) {
 	global $db_server;
 	global $dbh;
@@ -440,7 +499,7 @@ function insertProduct($enabled=1,$visible=1) {
 		':custom_field2', $_POST[custom_field2],
 		':custom_field3', $_POST[custom_field3],
 		':custom_field4', $_POST[custom_field4],
-		':notes', $_POST[notes],
+		':notes', "".$_POST[notes],
 		':enabled', $enabled,
 		':visible', $visible
 		);
@@ -1080,31 +1139,10 @@ function insertInvoice($type) {
 	global $dbh;
 	global $db_server;
 	
-	/*
-	 * SC: Manually pre-checking for FK relationships before inserting on
-	 *     MySQL as the current (20071203) MySQL schema uses MyISAM.
-	 *     PostgreSQL executes proper FK checks.
-	 *
-	 *     Under normal conditions, neither the postgres FK checks nor my
-	 *     added checks for MySQL should fail.
-	 */
-	if ($db_server == 'mysql') {
-		//Check biller
-		$sth = $dbh->prepare('SELECT count(id) FROM '.TB_PREFIX.'biller WHERE id = :id');
-		$sth->execute(array(':id' => $_POST['biller_id']));
-		if ($sth->fetchColumn() == 0) { return null; }
-		//Check customer
-		$sth = $dbh->prepare('SELECT count(id) FROM '.TB_PREFIX.'customers WHERE id = :id');
-		$sth->execute(array(':id' => $_POST['customer_id']));
-		if ($sth->fetchColumn() == 0) { return null; }
-		//Check invoice type
-		$sth = $dbh->prepare('SELECT count(inv_ty_id) FROM '.TB_PREFIX.'invoice_type WHERE inv_ty_id = :id');
-		$sth->execute(array(':id' => $type));
-		if ($sth->fetchColumn() == 0) { return null; }
-		//Check preferences
-		$sth = $dbh->prepare('SELECT count(pref_id) FROM '.TB_PREFIX.'preferences WHERE pref_id = :id');
-		$sth->execute(array(':id' => $_POST['preference_id']));
-		if ($sth->fetchColumn() == 0) { return null; }
+	if ($db_server == 'mysql' && !_invoice_check_fk(
+		$_POST['biller_id'], $_POST['customer_id'],
+		$type, $_POST['preference_id'])) {
+		return null;
 	}
 	$sql = "INSERT 
 			INTO
@@ -1181,33 +1219,38 @@ function insertInvoice($type) {
 
 function updateInvoice($invoice_id) {
 	
-		$sql = "UPDATE
+	if ($db_server == 'mysql' && !_invoice_check_fk(
+		$_POST['biller_id'], $_POST['customer_id'],
+		$type, $_POST['preference_id'])) {
+		return null;
+	}
+	$sql = "UPDATE
 			".TB_PREFIX."invoices
 		SET
-			biller_id = '$_POST[biller_id]',
-			customer_id = '$_POST[customer_id]',
-			preference_id = '$_POST[preference_id]',
-			status_id = '$_POST[status_id]',
-			date = '$_POST[date]',
-			note = '$_POST[note]',
-			custom_field1 = '$_POST[customField1]',
-			custom_field2 = '$_POST[customField2]',
-			custom_field3 = '$_POST[customField3]',
-			custom_field4 = '$_POST[customField4]'
+			biller_id = :biller_id,
+			customer_id = :customer_id,
+			preference_id = :preference_id,
+			status_id = :status_id,
+			date = :date,
+			note = :note,
+			custom_field1 = :customField1,
+			custom_field2 = :customField2,
+			custom_field3 = :customField3,
+			custom_field4 = :customField4
 		WHERE
 			id = :invoice_id";
 			
 	return dbQuery($sql,
-		':biller_id', $_POST[biller_id],
-		':customer_id', $_POST[customer_id],
-		':preference_id', $_POST[preference_id],
-		':status_id', $_POST[status_id],
-		':date', $_POST[date],
-		':note', $_POST[note],
-		':custom_field1', $_POST[customField1],
-		':custom_field2', $_POST[customField2],
-		':custom_field3', $_POST[customField3],
-		':custom_field4', $_POST[customField4],
+		':biller_id', $_POST['biller_id'],
+		':customer_id', $_POST['customer_id'],
+		':preference_id', $_POST['preference_id'],
+		':status_id', $_POST['status_id'],
+		':date', $_POST['date'],
+		':note', $_POST['note'],
+		':customField1', $_POST['customField1'],
+		':customField2', $_POST['customField2'],
+		':customField3', $_POST['customField3'],
+		':customField4', $_POST['customField4'],
 		':invoice_id', $invoice_id
 		);
 }
@@ -1224,6 +1267,10 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$tax_id,$descriptio
 	$total = $total_invoice_item * $quantity;
 	$gross_total = $product['unit_price']  * $quantity;
 	
+	if ($db_server == 'mysql' && !_invoice_items_check_fk(
+		$invoice_id, $product_id, $tax['tax_id'])) {
+		return null;
+	}
 	$sql = "INSERT INTO ".TB_PREFIX."invoice_items (invoice_id, quantity, product_id, unit_price, tax_id, tax, tax_amount, gross_total, description, total) VALUES (:invoice_id, :quantity, :product_id, :product_price, :tax_id, :tax_percentage, :tax_amount, :gross_total, :description, :total)";
 
 	//echo $sql;
@@ -1253,6 +1300,11 @@ function updateInvoiceItem($id,$quantity,$product_id,$tax_id,$description) {
 	$total = $total_invoice_item * $quantity;
 	$gross_total = $product['unit_price'] * $quantity;
 	
+	if ($db_server == 'mysql' && !_invoice_items_check_fk(
+		null, $product_id, $tax_id, 'update')) {
+		return null;
+	}
+
 	$sql = "UPDATE ".TB_PREFIX."invoice_items 
 	SET quantity =  :quantity,
 	product_id = :product_id,
