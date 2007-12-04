@@ -69,6 +69,8 @@ $config_inc_style = "true";
 if ($smarty) {
 	$smarty->assign('config_inc_style', $config_inc_style);
 }
+$config_inc_old_js = "true";
+$smarty->assign('config_inc_old_js', $config_inc_old_js);
 
 #Error reporting
 #error_reporting(E_ALL);

@@ -18,8 +18,15 @@
 
 
 
-
 {if $config_inc_style == "true"}
+
+{literal}
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/screen.css" media="all"/>
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/print.css" media="print"/>
+{/literal}
+{/if}
+
+{if $config_inc_old_js == "true"}
 	
 {literal}
 	<script type="text/javascript">
