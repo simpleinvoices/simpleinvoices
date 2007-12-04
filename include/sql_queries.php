@@ -55,6 +55,7 @@ function dbQuery($sqlQuery) {
 			}
 			$tth = $log_dbh->prepare($sql);
 			$tth->execute(array($userid, trim($sqlQuery)));
+			$tth = null;
 		}
 		return $sth;
 	}
@@ -1076,9 +1077,35 @@ function getActiveCustomers() {
 }
 
 function insertInvoice($type) {
-	
+	global $dbh;
 	global $db_server;
 	
+	/*
+	 * SC: Manually pre-checking for FK relationships before inserting on
+	 *     MySQL as the current (20071203) MySQL schema uses MyISAM.
+	 *     PostgreSQL executes proper FK checks.
+	 *
+	 *     Under normal conditions, neither the postgres FK checks nor my
+	 *     added checks for MySQL should fail.
+	 */
+	if ($db_server == 'mysql') {
+		//Check biller
+		$sth = $dbh->prepare('SELECT count(id) FROM '.TB_PREFIX.'biller WHERE id = :id');
+		$sth->execute(array(':id' => $_POST['biller_id']));
+		if ($sth->fetchColumn() == 0) { return null; }
+		//Check customer
+		$sth = $dbh->prepare('SELECT count(id) FROM '.TB_PREFIX.'customers WHERE id = :id');
+		$sth->execute(array(':id' => $_POST['customer_id']));
+		if ($sth->fetchColumn() == 0) { return null; }
+		//Check invoice type
+		$sth = $dbh->prepare('SELECT count(inv_ty_id) FROM '.TB_PREFIX.'invoice_type WHERE inv_ty_id = :id');
+		$sth->execute(array(':id' => $type));
+		if ($sth->fetchColumn() == 0) { return null; }
+		//Check preferences
+		$sth = $dbh->prepare('SELECT count(pref_id) FROM '.TB_PREFIX.'preferences WHERE pref_id = :id');
+		$sth->execute(array(':id' => $_POST['preference_id']));
+		if ($sth->fetchColumn() == 0) { return null; }
+	}
 	$sql = "INSERT 
 			INTO
 		".TB_PREFIX."invoices (

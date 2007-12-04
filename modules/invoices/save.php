@@ -40,7 +40,7 @@ if ($_POST['action'] == "insert" ) {
 		$saved = true;
 	}
 
-	if($type==1) {
+	if($type==1 && $saved) {
 		insertProduct(0,0);
 		$product_id = lastInsertId();
 
@@ -51,7 +51,7 @@ if ($_POST['action'] == "insert" ) {
 			die(end($dbh->errorInfo()));
 		}
 	}
-	else {
+	elseif ($saved) {
 		for($i=0;!empty($_POST["quantity$i"]) && $i < $_POST['max_items']; $i++) {
 	
 			if (insertInvoiceItem($invoice_id,$_POST["quantity$i"],$_POST["products$i"],$_POST['tax_id'],$_POST["description$i"]) ) {
@@ -61,10 +61,7 @@ if ($_POST['action'] == "insert" ) {
 			}
 		}
 	}
-}
-
-
-if ( $_POST['action'] == "edit") {
+} elseif ( $_POST['action'] == "edit") {
 
 	//Get type id - so do add into redirector header
 
