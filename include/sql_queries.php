@@ -1425,13 +1425,99 @@ function searchInvoiceByDate($startdate,$enddate) {
 		);
 }
 
+
+/*
+ * delete attempts to delete rows from the database.  This function currently
+ * allows for the deletion of invoices, invoice_items, and products entries,
+ * all other $module values will fail.  $idField is also checked on a per-table
+ * basis, i.e. invoice_items can be either "id" or "invoice_id" while products
+ * can only be "id".
+ *
+ * Invalid $module or $idFields values return false, as do calls that would fail
+ * foreign key checks.  Otherwise, the value returned by dbQuery's deletion
+ * attempt is returned.
+ */
 function delete($module,$idField,$id) {
-	$sql = "DELETE FROM :table WHERE :field = :id";
-	return dbQuery($sql,
-		':table', TB_PREFIX.$module,
-		':field', $idField,
-		':id', $id
-		);
+	global $dbh;
+
+	$lctable = strtolower($module);
+	$s_idField = ''; // Presetting the whitelisted column to fail 
+
+	/*
+	 * SC: $valid_tables contains the base names of all tables that can
+	 *     have rows deleted using this function.  This is used for
+	 *     whitelisting deletion targets.
+	 */
+	$valid_tables = array('invoices', 'invoice_items', 'products');
+
+	if (in_array($lctable, $valid_tables)) {
+		// A quick once-over on the dependencies of the possible tables
+		if ($lctable == 'invoice_items') {
+			// Not required by any FK relationships
+			if (!in_array($idField, array('id', 'invoice_id'))) {
+				// Fail, invalid identity field
+				return false;
+			} else {
+				$s_idField = $idField;
+			}
+		} elseif ($lctable == 'products') {
+			// Check for use of product
+			$sth = $dbh->prepare('SELECT count(*)
+				FROM '.TB_PREFIX.'invoice_items
+				WHERE product_id = :id');
+			$sth->execute(array(':id' => $id));
+			$ref = $sth->fetch();
+			if ($sth->fetchColumn() != 0) {
+				// Fail, product still in use
+				return false;
+			}
+			$sth = null;
+
+			if (!in_array($idField, array('id'))) {
+				// Fail, invalid identity field
+				return false;
+			} else {
+				$s_idField = $idField;
+			}
+		} elseif ($lctable == 'invoices') {
+			// Check for existant payments and line items
+			$sth = $dbh->prepare('SELECT count(*) FROM (
+				SELECT id FROM '.TB_PREFIX.'invoice_items
+				WHERE invoice_id = :id
+				UNION ALL
+				SELECT id FROM '.TB_PREFIX.'account_payments
+				WHERE ac_inv_id = :id) x');
+			$sth->execute(array(':id' => $id));
+			if ($sth->fetchColumn() != 0) {
+				// Fail, line items or payments still exist
+				return false;
+			}
+			$sth = null;
+
+			//SC: Later, may accept other values for $idField
+			if (!in_array($idField, array('id'))) {
+				// Fail, invalid identity field
+				return false;
+			} else {
+				$s_idField = $idField;
+			}
+		} else {
+			// Fail, no checks for this table exist yet
+			return false;
+		}
+	} else {
+		// Fail, invalid table name
+		return false;
+	}
+
+	if ($s_idField == '') {
+		// Fail, column whitelisting not performed
+		return false;
+	}
+		
+	// Tablename and column both pass whitelisting and FK checks
+	$sql = "DELETE FROM ".TB_PREFIX."$module WHERE $s_idField = :id";
+	return dbQuery($sql, ':id', $id);
 }
 
 function maxInvoice() {

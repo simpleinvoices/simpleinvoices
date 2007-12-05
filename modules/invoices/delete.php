@@ -47,16 +47,33 @@ if ( $defaults['delete'] == 'N' ) {
 
 
 if ( ($_GET['stage'] == 2 ) AND ($_POST['doDelete'] == 'y') ) {
-	
-	//TODO - need to wrap the both deletes in a sql transaction
+	global $dbh;
+
+	$dbh->beginTransaction();
+	$error = false;
+
+	// Start by deleting the line items
+	if (! delete('invoice_items','invoice_id',$invoice_id)) {
+		$error = true;
+	}
+
 	//delete products from producsts table for total style
 	if ($invoice['type_id'] == 1) 
 	{
-		delete('products','id',$invoiceItems['0']['product']['id']);
+		if ($error || ! delete('products','id',$invoiceItems['0']['product']['id'])) {
+			$error = true;
+		}
 	}
-	//delete the info from the invoice table and the invoice items table
-	delete('invoices','id',$invoice_id);
-	delete('invoice_items','invoice_id',$invoice_id);
+
+	//delete the info from the invoice table
+	if ($error || ! delete('invoices','id',$invoice_id)) {
+		$error = true;
+	} 
+	if ($error) {
+		$dbh->rollBack();
+	} else {
+		$dbh->commit();
+	}
 	//TODO - what about the stuff in the products table for the total style invoices?
 	echo "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=invoices&view=manage>";
 
