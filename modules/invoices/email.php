@@ -91,7 +91,7 @@ if ($_GET['stage'] == 2 ) {
 	}
 	$mail->WordWrap = 50;                                 // set word wrap to 50 characters
 	$spc2us_pref = str_replace(" ", "_", $preference[pref_inv_wording]); // Ap.Muthu added to accomodate spaces in inv pref name
-	$mail->AddAttachment("./include/pdf/cache/$spc2us_pref$invoice[id].pdf");         // add attachments
+	$mail->AddAttachment("./include/pdf/out/$spc2us_pref$invoice[id].pdf");  // out folder currently symlinks to ../../cache       // add attachments
 
 	$mail->IsHTML(true);                                  // set email format to HTML
 
