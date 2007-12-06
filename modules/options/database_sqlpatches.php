@@ -132,7 +132,13 @@ function check_sql_patch($check_sql_patch_ref, $check_sql_patch_field) {
 
 
 function run_sql_patch($id, $patch) {
+	global $dbh;
+	global $db_server;
 
+	if ($db_server == 'pgsql') {
+		// Yay!  Transactional DDL
+		$dbh->beginTransaction();
+	}
 	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager WHERE sql_patch_ref = :id" ;
 	$sth = dbQuery($sql, ':id', $id) or die(end($dbh->errorInfo()));
 	
@@ -166,11 +172,14 @@ EOD;
 
 		if($id == 126) {
 			patch126();
-		}
-		if($id == 137) {
+		} elseif($id == 137) {
 			convertCustomFields();
 		}
 		$display_block .= "<tr><td>SQL patch $id, $patch[name] <b>has</b> been applied</td></tr>";
+	}
+	if ($db_server == 'pgsql') {
+		// Yay!  Transactional DDL
+		$dbh->commit();
 	}
 	
 	//global $smarty;
