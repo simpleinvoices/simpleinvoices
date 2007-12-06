@@ -90,7 +90,8 @@ if ($_GET['stage'] == 2 ) {
 	$mail->AddBCC("$_POST[email_bcc]");
 	}
 	$mail->WordWrap = 50;                                 // set word wrap to 50 characters
-	$mail->AddAttachment("./include/pdf/out/$preference[pref_inv_wording]$invoice[id].pdf");         // add attachments
+	$spc2us_pref = str_replace(" ", "_", $preference[pref_inv_wording]); // Ap.Muthu added to accomodate spaces in inv pref name
+	$mail->AddAttachment("./include/pdf/cache/$spc2us_pref$invoice[id].pdf");         // add attachments
 
 	$mail->IsHTML(true);                                  // set email format to HTML
 
