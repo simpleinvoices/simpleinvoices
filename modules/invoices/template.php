@@ -30,6 +30,7 @@ $biller = getBiller($invoice['biller_id']);
 $preference = getPreference($invoice['preference_id']);
 $defaults = getSystemDefaults();
 $logo = getLogo($biller);
+$logo = str_replace(" ", "%20", $logo);
 $invoiceItems = getInvoiceItems($invoiceID);
 
 /*for($i=1;$i<=4;$i++) {
