@@ -27,7 +27,7 @@ function runPatches() {
 	#DEFINE SQL PATCH
 
 	$sql = "SHOW TABLES LIKE '".TB_PREFIX."sql_patchmanager'";
-	if ($db_server = 'pgsql') {
+	if ($db_server == 'pgsql') {
 		$sql = "SELECT 1 FROM pg_tables WHERE tablename ='".TB_PREFIX."sql_patchmanager'";
 	}
 	$sth = dbQuery($sql);
