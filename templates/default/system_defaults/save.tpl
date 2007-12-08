@@ -1,4 +1,4 @@
-<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=system_defaults&view=manage>
+<META HTTP-EQUIV="REFRESH" CONTENT="2;URL=index.php?module=system_defaults&amp;view=manage">
 
 <br>
 

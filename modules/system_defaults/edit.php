@@ -20,8 +20,9 @@ if ($_GET["submit"] == "line_items") {
 
 	$default = "line_items";
 
+	$escaped = htmlspecialchars($defaults[line_items]);
 	$value = <<<EOD
-<input type=text size=25 name="value" value=$defaults[line_items]>
+<input type="text" size="25" name="value" value="$escaped">
 EOD;
 	$description = "{$LANG['default_number_items']}";
 
@@ -40,16 +41,18 @@ else if ($_GET["submit"] == "def_inv_template") {
 	closedir($handle);
 	sort($files);
 
+	$escaped = htmlspecialchars($defaults[template]);
 	$display_block_templates_list = <<<EOD
 	<select name="value">
 EOD;
 
 	$display_block_templates_list .= <<<EOD
-	<option selected value='$defaults[template]' style="font-weight: bold" >$defaults[template]</option>
+	<option selected value='$escaped' style="font-weight: bold" >$escaped</option>
 EOD;
 
 	foreach ( $files as $var )
 	{
+		$var = htmlspecialchars($var);
 		$display_block_templates_list .= "<option value='$var' >";
 		$display_block_templates_list .= $var;
 		$display_block_templates_list .= "</option>";
@@ -70,7 +73,7 @@ EOD;
 
 
 	$description = <<<EOD
-	{$LANG['default_inv_template']} <a href='docs.php?t=help&p=default_invoice_template_text' rel='gb_page_center[450, 450]'><img src="images/common/help-small.png"></img></a>
+	{$LANG['default_inv_template']} <a href='docs.php?t=help&amp;p=default_invoice_template_text' rel='gb_page_center[450, 450]'><img src="images/common/help-small.png" alt="({$LANG['help']})"></img></a>
 EOD;
 	
 	$value = $display_block_templates_list;
@@ -91,14 +94,15 @@ else if ($_GET["submit"] == "biller") {
 	else {
 
 		$display_block_biller = '<select name="value">
-			<option value=0> </option>';
+			<option value="0"> </option>';
 
 		foreach($billers as $biller) {
 
 			$selected = $biller['id'] == $defaults['biller']?"selected style='font-weight: bold'":"";
 			
+			$escaped = htmlspecialchars($biller['name']);
 			$display_block_biller .= <<<EOD
-			<option $selected value="$biller[id]">$biller[name]</option>
+			<option $selected value="$biller[id]">$escaped</option>
 EOD;
 		}
 		$display_block_biller .= "</select>";
@@ -121,15 +125,17 @@ else if ($_GET["submit"] == "customer") {
 	} else {
 		//has records, so display them
 		$display_block_customer = '<select name="value">
-                <option value=0> </option>';
+                <option value="0"> </option>';
 
 
 		foreach($customers as $customer) {
 
 			$selected = $customer['id'] == $defaults['customer']?"selected style='font-weight: bold'":"";
 			
+
+			$escaped = htmlspecialchars($customer['name']);
 			$display_block_customer .= <<<EOD
-			<option $selected value="$customer[id]">$customer[name]</option>
+			<option $selected value="$customer[id]">$escaped</option>
 EOD;
 		}
 		$display_block_customer .= "</select>";
@@ -139,9 +145,6 @@ EOD;
 	$description = "{$LANG['customer_name']}";
 	$value = $display_block_customer;
 }
-
-
-
 else if ($_GET['submit'] == "tax") {
 	$default = "tax";
 
@@ -165,9 +168,9 @@ EOD;
 
 			$selected = $tax['tax_id'] == $defaults['tax']?"selected style='font-weight: bold'":"";
 
+			$escaped = htmlspecialchars($tax['tax_description']);
 			$display_block_tax .= <<<EOD
-			<option $selected value="$tax[tax_id]">
-                        {$tax['tax_description']}</option>
+			<option $selected value="$tax[tax_id]">$escaped</option>
 EOD;
 		}
 	}
@@ -197,9 +200,10 @@ EOD;
 
 			$selected = $preference['pref_id'] == $defaults['preference']?"selected style='font-weight: bold'":"";
 
+			$escaped = htmlspecialchars($preference['pref_description']);
 			$display_block_preferences .= <<<EOD
 			<option $selected value="{$preference['pref_id']}">
-	                        {$preference['pref_description']}</option>
+	                        $escaped</option>
 EOD;
 		}
 	}
@@ -208,7 +212,6 @@ EOD;
 	$description = "{$LANG['inv_pref']}";
 
 }
-
 else if ($_GET["submit"] == "def_payment_type") {
 
 	$defpay = getDefaultPaymentType();
@@ -231,9 +234,10 @@ EOD;
 		foreach($payments as $payment) {
 
 			$selected = $payment['pt_id'] == $defaults['payment_type']?"selected style='font-weight: bold'":"";
+			$escaped = htmlspecialchars($payment['pt_description']);
 			$display_block_payment_type .= <<<EOD
 			<option $selected value="{$payment['pt_id']}">
-                        {$payment['pt_description']}</option>
+                        $escaped</option>
 EOD;
 		}
 	}
@@ -242,7 +246,6 @@ EOD;
 	$value = $display_block_payment_type;
 
 }
-
 else if ($_GET["submit"] == "delete") {
 
 	$deleteArray = array(0 => $LANG['disabled'], 1=>$LANG['enabled']);
@@ -265,7 +268,6 @@ EOD;
 	$description = "{$LANG['delete']}";
 
 }
-
 else if ($_GET['submit'] == "logging") {
 
 	$array = array(0 => $LANG[disabled], 1=>$LANG[enabled]);
