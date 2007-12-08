@@ -39,7 +39,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
     if ($sth->execute(array($userEmail, $password))) {
         $results = $sth->fetchAll();
     } else {
-        die('Query failed. ' . $sth->errorInfo());
+        die('Query failed. ' . htmlspecialchars(end($sth->errorInfo())));
     }
     
     if ((count($results) == 1) and ($results[0]['user_email'] == $userEmail)) {
@@ -75,7 +75,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 
 if ($errorMessage != '') {
 ?>
-<p align="center"><strong><font color="#990000"><?php echo $errorMessage; ?></font></strong></p>
+<p align="center"><strong><font color="#990000"><?php echo htmlspecialchars($errorMessage); ?></font></strong></p>
 <?php
 }
 ?>
@@ -93,7 +93,7 @@ if ($errorMessage != '') {
                 <input type="hidden" name="md5" value="">
                 <?php }?>		            
                 <?php if($ChallengeLife>0){?>
-                <input type="hidden" name="ChallengeKey" value="<?php echo $Challenge_Key;?>">
+                <input type="hidden" name="ChallengeKey" value="<?php echo(htmlspecialchars($Challenge_Key));?>">
                 <?php }?>		            
 
   	<dl>

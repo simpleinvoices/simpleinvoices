@@ -21,7 +21,7 @@ include_once('./include/include_main.php');
 $sql = "SELECT * FROM ".TB_PREFIX."invoices";
 
 global $dbh
-$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 
 $q = strtolower($_GET["q"]);
 if (!$q) return;
@@ -33,6 +33,12 @@ while ($invoice = getInvoices($sth)) {
 	$invoiceType = getInvoiceType($invoice['type_id']);
 
 	if (strpos(strtolower($invoice['id']), $q) !== false) {
+		$invoice['id'] = htmlspecialchars($invoice['id']);
+		$invoice['total_format'] = htmlspecialchars($invoice['total_format']);
+		$invoice['paid_format'] = htmlspecialchars($invoice['paid_format']);
+		$invoice['owing_format'] = htmlspecialchars($invoice['owing_format']);
+		$biller['name'] = htmlspecialchars($biller['name']);
+		$customer['name'] = htmlspecialchars($customer['name']);
 		echo "$invoice[id]|<table><tr><td class='details_screen'>Invoice:</td><td> $invoice[id] </td><td  class='details_screen'>Total: </td><td>$invoice[total_format] </td></tr><tr><td class='details_screen'>Biller: </td><td>$biller[name] </td><td class='details_screen'>Paid: </td><td>$invoice[paid_format] </td></tr><tr><td class='details_screen'>Customer: </td><td>$customer[name] </td><td class='details_screen'>Owing: </td><td><u>$invoice[owing_format]</u></td></tr></table>\n";
 	}
 }

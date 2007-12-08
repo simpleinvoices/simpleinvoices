@@ -60,7 +60,7 @@ function dbQuery($sqlQuery) {
 		return $sth;
 	}
 	else {
-		echo "Dude, what happened to your query?:<br><br> ".$sqlQuery."<br />".end($sth->errorInfo());
+		echo "Dude, what happened to your query?:<br><br> ".htmlspecialchars($sqlQuery)."<br />".htmlspecialchars(end($sth->errorInfo()));
 	}
 }
 
@@ -149,7 +149,7 @@ function getCustomer($id) {
 	global $dbh;
 
 	$print_customer = "SELECT * FROM ".TB_PREFIX."customers WHERE id = :id";
-	$sth = dbQuery($print_customer, ':id', $id) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($print_customer, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	return $sth->fetch();
 }
 
@@ -158,7 +158,7 @@ function getBiller($id) {
 	global $dbh;
 
 	$print_biller = "SELECT * FROM ".TB_PREFIX."biller WHERE id = :id";
-	$sth = dbQuery($print_biller, ':id', $id) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($print_biller, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$biller = $sth->fetch();
 	$biller['wording_for_enabled'] = $biller['enabled']==1?$LANG['enabled']:$LANG['disabled'];
 	return $biller;
@@ -169,7 +169,7 @@ function getPreference($id) {
 	global $dbh;
 
 	$print_preferences = "SELECT * FROM ".TB_PREFIX."preferences WHERE pref_id = :id";
-	$sth = dbQuery($print_preferences, ':id', $id) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($print_preferences, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$preference = $sth->fetch();
 	$preference['enabled'] = $preference['pref_enabled']==1?$LANG['enabled']:$LANG['disabled'];
 	return $preference;
@@ -179,7 +179,7 @@ function getSQLPatches() {
 	global $dbh;
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager ORDER BY sql_release";                  
-	$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 
 	$patches = null;
 	
@@ -194,7 +194,7 @@ function getPreferences() {
 	global $dbh;
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."preferences ORDER BY pref_description";
-	$sth  = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth  = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
 	$preferences = null;
 	
@@ -221,7 +221,7 @@ function getActiveTaxes() {
 	if ($db_server == 'pgsql') {
 		$sql = "SELECT * FROM ".TB_PREFIX."tax WHERE tax_enabled ORDER BY tax_description";
 	}
-	$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
 	$taxes = null;
 	
@@ -242,7 +242,7 @@ function getActivePreferences() {
 	global $dbh;
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."preferences WHERE pref_enabled ORDER BY pref_description";
-	$sth  = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth  = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
 	$preferences = null;
 	
@@ -258,7 +258,7 @@ function getCustomFieldLabels() {
 	global $dbh;
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."custom_fields ORDER BY cf_custom_field";
-	$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
 	for($i=0;$customField = $sth->fetch();$i++) {
 		$customFields[$customField['cf_custom_field']] = $customField['cf_custom_label'];
@@ -278,7 +278,7 @@ function getBillers() {
 	global $dbh;
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."biller ORDER BY name";
-	$sth  = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth  = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
 	$billers = null;
 	
@@ -303,7 +303,7 @@ function getActiveBillers() {
 	if ($db_server == 'pgsql') {
 		$sql = "SELECT * FROM ".TB_PREFIX."biller WHERE enabled ORDER BY name";
 	}
-	$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 		
 	$billers = null;
 	
@@ -321,7 +321,7 @@ function getTaxRate($id) {
 	global $dbh;
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."tax WHERE tax_id = :id";
-	$sth = dbQuery($sql, ':id', $id) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
 	$tax = $sth->fetch();
 	$tax['enabled'] = $tax['tax_enabled'] == 1 ? $LANG['enabled']:$LANG['disabled'];
@@ -334,7 +334,7 @@ function getPaymentType($id) {
 	global $dbh;
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."payment_types WHERE pt_id = :id";
-	$sth = dbQuery($sql, ':id', $id) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$paymentType = $sth->fetch();
 	$paymentType['enabled'] = $paymentType['pt_enabled']==1?$LANG['enabled']:$LANG['disabled'];
 	
@@ -347,7 +347,7 @@ function getPayment($id) {
 
 	$sql = "SELECT ap.*, c.name AS customer, b.name AS biller FROM ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b WHERE ap.ac_inv_id = iv.id AND iv.customer_id = c.id AND iv.biller_id = b.id AND ap.id = :id";
 
-	$sth = dbQuery($sql, ':id', $id) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$payment = $sth->fetch();
 	$payment['date'] = date( $config['date_format'], strtotime( $payment['ac_date'] ) );
 	return $payment;
@@ -420,7 +420,7 @@ function getActivePaymentTypes() {
 	if ($db_server == 'pgsql') {
 		$sql = "SELECT * FROM ".TB_PREFIX."payment_types WHERE pt_enabled ORDER BY pt_description";
 	}
-	$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
 	$paymentTypes = null;
 
@@ -442,7 +442,7 @@ function getProduct($id) {
 	global $dbh;
 
 	$sql = "SELECT * FROM ".TB_PREFIX."products WHERE id = :id";
-	$sth = dbQuery($sql, ':id', $id) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$product = $sth->fetch();
 	$product['wording_for_enabled'] = $product['enabled']==1?$LANG['enabled']:$LANG['disabled'];
 	return $product;
@@ -544,7 +544,7 @@ function getProducts() {
 	if ($db_server == 'pgsql') {
 		$sql = "SELECT * FROM ".TB_PREFIX."products WHERE visible ORDER BY description";
 	}
-	$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
 	$products = null;
 	
@@ -570,7 +570,7 @@ function getActiveProducts() {
 	if ($db_server == 'pgsql') {
 		$sql = "SELECT * FROM ".TB_PREFIX."products WHERE enabled ORDER BY description";
 	}
-	$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
 	$products = null;
 	
@@ -587,7 +587,7 @@ function getTaxes() {
 	global $dbh;
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."tax ORDER BY tax_description";
-	$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
 	$taxes = null;
 	
@@ -609,7 +609,7 @@ function getDefaultCustomer() {
 	global $dbh;
 	
 	$sql = "SELECT *,c.name AS name FROM ".TB_PREFIX."customers c, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'customer' AND c.id = s.value)";
-	$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	return $sth->fetch();
 }
 
@@ -617,7 +617,7 @@ function getDefaultPaymentType() {
 	global $dbh;
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."payment_types p, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'payment_type' AND p.pt_id = s.value)";
-	$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	return $sth->fetch();
 }
 
@@ -625,7 +625,7 @@ function getDefaultPreference() {
 	global $dbh;
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."preferences p, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'preference' AND p.pref_id = s.value)";
-	$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	return $sth->fetch();
 }
 
@@ -633,7 +633,7 @@ function getDefaultBiller() {
 	global $dbh;
 	
 	$sql = "SELECT *,b.name AS name FROM ".TB_PREFIX."biller b, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'biller' AND b.id = s.value )";
-	$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	return $sth->fetch();
 }
 
@@ -642,7 +642,7 @@ function getDefaultTax() {
 	global $dbh;
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."tax t, ".TB_PREFIX."system_defaults s WHERE (s.name = 'tax' AND t.tax_id = s.value)";
-	$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	return $sth->fetch();
 }
 
@@ -651,7 +651,7 @@ function getDefaultDelete() {
 	global $dbh;
 
 	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = 'delete')";
-	$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$array = $sth->fetch();
 	$delete = $array['value']==1?$LANG['enabled']:$LANG['disabled'];
 	return $delete;
@@ -662,7 +662,7 @@ function getDefaultLogging() {
 	global $dbh;
 
 	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = 'logging')";
-	$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$array = $sth->fetch();
 	$delete = $array['value']==1?$LANG['enabled']:$LANG['disabled'];
 	return $delete;
@@ -672,7 +672,7 @@ function getDefaultLanguage() {
 	global $dbh;
 
 	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = 'language')";
-	$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$entry = $sth->fetch();
 	return $entry['value'];
 }
@@ -691,7 +691,7 @@ function setInvoiceStatus($invoice, $status){
 	global $dbh;
 
 	$sql = "UPDATE " . TB_PREFIX . "invoices SET status_id = :status WHERE id = :id";
-	$sth  = dbQuery($sql, ':status', $status, ':id', $invoice) or die(end($dbh->errorInfo()));
+	$sth  = dbQuery($sql, ':status', $status, ':id', $invoice) or die(htmlspecialchars(end($dbh->errorInfo())));
 }
 
 function getInvoice($id) {
@@ -701,7 +701,7 @@ function getInvoice($id) {
 	$sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE id = :id";
 	//echo $sql;
 	
-	$sth  = dbQuery($sql, ':id', $id) or die(end($dbh->errorInfo()));
+	$sth  = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
 
 	//print_r($query);
 	$invoice = $sth->fetch();
@@ -720,7 +720,7 @@ function getInvoice($id) {
 	
 	#invoice total tax
 	$sql ="SELECT SUM(tax_amount) AS total_tax, SUM(total) AS total FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :id";
-	$sth = dbQuery($sql, ':id', $id) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$result = $sth->fetch();
 	//$invoice['total'] = number_format($result['total'],2);
 	$invoice['total_tax'] = number_format($result['total_tax'],2);
@@ -745,7 +745,7 @@ function getInvoiceItems($id) {
 		$invoiceItem['total'] = number_format($invoiceItem['total'],2);
 		
 		$sql = "SELECT * FROM ".TB_PREFIX."products WHERE id = :id";
-		$tth = dbQuery($sql, ':id', $invoiceItem['product_id']) or die(end($dbh->errorInfo()));
+		$tth = dbQuery($sql, ':id', $invoiceItem['product_id']) or die(htmlspecialchars(end($dbh->errorInfo())));
 		$invoiceItem['product'] = $tth->fetch();	
 		
 		$invoiceItems[$i] = $invoiceItem;
@@ -759,7 +759,7 @@ function getSystemDefaults() {
 	global $dbh;
 	
 	$print_defaults = "SELECT * FROM ".TB_PREFIX."system_defaults";
-	$sth = dbQuery($print_defaults) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($print_defaults) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
 	$defaults = null;
 	$default = null;
@@ -786,7 +786,7 @@ function getInvoiceType($id) {
 	global $dbh;
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."invoice_type WHERE inv_ty_id = :id";
-	$sth = dbQuery($sql, ':id', $id) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	return $sth->fetch();
 }
 
@@ -1067,7 +1067,7 @@ function getCustomerInvoices($id) {
 	$invoices = null;
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE customer_id = :id  ORDER BY id DESC";
-	$sth = dbQuery($sql, ':id', $id) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
 	for($i = 0;$invoice = getInvoices($sth);$i++) {
 		$invoices[$i] = $invoice;
@@ -1084,7 +1084,7 @@ function getCustomers() {
 	$customer = null;
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY name";
-	$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 
 	$customers = null;
 
@@ -1124,7 +1124,7 @@ function getActiveCustomers() {
 	if ($db_server == 'pgsql') {
 		$sql = "SELECT * FROM ".TB_PREFIX."customers WHERE enabled ORDER BY name";
 	}
-	$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 
 	$customers = null;
 
@@ -1341,7 +1341,7 @@ function getMenuStructure() {
 	if ($db_server == 'pgsql') {
 		$sql = "SELECT * FROM si_menu WHERE enabled ORDER BY parentid, \"order\"";
 	}
-	$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$menu = null;
 	
 	while($res = $sth->fetch()) {
@@ -1373,9 +1373,8 @@ function printEntries($menu,$id,$depth) {
 		for($i=0;$i<$depth;$i++) {
 			//echo "&nbsp;&nbsp;&nbsp;";
 		}
-		echo <<<EOD
-		<li><a href="$tempentrie[link]">$tempentrie[name]</a>
-EOD;
+		echo '
+		<li><a href="'.htmlspecialchars($tempentrie[link]).'">'htmlspecialchars($tempentrie[name]).'</a>';
 		
 		if(isset($menu[$tempentrie["id"]])) {
 			echo "<ul>";
@@ -1588,7 +1587,7 @@ function urlPDF($invoiceID,$invoiceTypeID)
 {
 	global $http_auth;
 	
-	$script = "/index.php?module=invoices&view=templates/template&invoice=$invoiceID&action=view&location=pdf&type=$invoiceTypeID";
+	$script = "/index.php?module=invoices&amp;view=templates/template&amp;invoice=".htmlspecialchars($invoiceID)."&amp;action=view&amp;location=pdf&amp;type=".htmlspecialchars($invoiceTypeID);
 	$port = "";
 	$dir = dirname($_SERVER['PHP_SELF']);
 
