@@ -17,7 +17,7 @@
 <p><em>{$LANG.no_tax_rates}.</em></p>
 {else}
 <h3>{$LANG.manage_tax_rates} ::
-<a href="./index.php?module=tax_rates&view=add">{$LANG.add_new_tax_rate}</a></h3>
+<a href="./index.php?module=tax_rates&amp;view=add">{$LANG.add_new_tax_rate}</a></h3>
 <hr />
 <table class="manage" id="live-grid" align="center">
 	<colgroup>
@@ -38,12 +38,12 @@
 	</thead>
 	{foreach from=$taxes item=tax}
 	<tr class="index_table">
-		<td class="index_table"><a title="{$LANG.view}" class="index_table" href="./index.php?module=tax_rates&view=details&submit={$tax.tax_id}&action=view"><img src="images/common/view.png" height="16" border="0" align="absmiddle" /></a>
-			<a title="{$LANG.edit}" class="index_table" href="./index.php?module=tax_rates&view=details&submit={$tax.tax_id}&action=edit"><img src="images/common/edit.png" height="16" border="0" align="absmiddle" /></a></td>
+		<td class="index_table"><a title="{$LANG.view}" class="index_table" href="./index.php?module=tax_rates&amp;view=details&amp;submit={$tax.tax_id}&amp;action=view"><img src="images/common/view.png" height="16" border="0" align="absmiddle" alt="{$LANG.view}" /></a>
+			<a title="{$LANG.edit}" class="index_table" href="./index.php?module=tax_rates&amp;view=details&amp;submit={$tax.tax_id}&amp;action=edit"><img src="images/common/edit.png" height="16" border="0" align="absmiddle" alt="{$LANG.edit}" /></a></td>
 		<td class="index_table">{$tax.tax_id}</td>
-		<td class="index_table">{$tax.tax_description}</td>
-		<td class="index_table">{$tax.tax_percentage}</td>
-		<td class="index_table">{$tax.enabled}</td>
+		<td class="index_table">{$tax.tax_description|escape:html}</td>
+		<td class="index_table">{$tax.tax_percentage|escape:html}</td>
+		<td class="index_table">{$tax.enabled|escape:html}</td>
 	</tr>
 	{/foreach}
 </table>

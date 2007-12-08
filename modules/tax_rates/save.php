@@ -75,7 +75,7 @@ else if (  $op === 'edit_tax_rate' ) {
 		}
 
 		//header( 'refresh: 2; url=manage_tax_rates.php' );
-		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=tax_rates&view=manage>";
+		$refresh_total = "<META HTTP-EQUIV='REFRESH' CONTENT=2;URL=index.php?module=tax_rates&view=manage>";
 
 		}
 

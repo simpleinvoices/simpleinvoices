@@ -17,26 +17,26 @@
 		<hr />
 	{/if}
 
-<form name="frmpost" ACTION="index.php?module=tax_rates&view=add" METHOD="POST">
+<form name="frmpost" action="index.php?module=tax_rates&amp;view=add" method="POST">
 
 <h3>{$LANG.tax_rate_to_add}</h3>
 
  <hr />
 
-<table align=center>
+<table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.tax_description}</td>
-		<td><input type=text name="tax_description" value="{$smarty.post.tax_description}" size=50></td><td></td>
+		<td><input type="text" name="tax_description" value="{$smarty.post.tax_description|escape:html}" size="50"></td><td></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.tax_percentage}</td>
-		<td><input type=text name="tax_percentage" value="{$smarty.post.tax_percentage}"  size=25> %</td>
+		<td><input type="text" name="tax_percentage" value="{$smarty.post.tax_percentage|escape:html}"  size="25"> %</td>
 		<td>{$LANG.ie_10_for_10}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
 		<td>
-			<select name="tax_enabled" value="{$smarty.post.tax_enabled}">
+			<select name="tax_enabled" value="{$smarty.post.tax_enabled|escape:html}">
 			<option value="1" selected>{$LANG.enabled}</option>
 			<option value="0">{$LANG.disabled}</option>
 			</select>
