@@ -1540,7 +1540,7 @@ function checkTableExists($table)
 	global $LANG;
 	global $dbh;
 	global $db_server;
-	$sql = "SELECT 1 FROM :table LIMIT 1";
+	$sql = "SELECT 1 FROM FROM INFORMATION_SCHEMA.TABLES where table_name = :table LIMIT 1";
 	if ($db_server == 'pgsql') {
 		// Use a nicer syntax
 		$sql = 'SELECT 1 FROM pg_tables WHERE tablename = :table LIMIT 1';
@@ -1548,7 +1548,7 @@ function checkTableExists($table)
 
 	$sth = $dbh->prepare($sql);
 	
-	if ($sth->execute(array(':table' => $table))) {
+	if ($sth && $sth->execute(array(':table' => $table))) {
 		if ($sth->fetch()) {
 			return true;
 		} else {
@@ -1565,7 +1565,7 @@ function checkFieldExists($table,$field)
 	global $dbh;
 	global $db_server;
 	
-	$sql = "SELECT :field FROM :table LIMIT 1";
+	$sql = "SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE column_name = :field AND table_name = :table LIMIT 1";
 	if ($db_server == 'pgsql') {
 		// Use a nicer syntax
 		$sql = "SELECT 1 FROM pg_attribute a INNER JOIN pg_class c ON (a.attrelid = c.oid)  WHERE c.relkind = 'r' AND c.relname = :table AND a.attname = :field AND NOT a.attisdropped AND a.attnum > 0 LIMIT 1";
@@ -1573,7 +1573,7 @@ function checkFieldExists($table,$field)
 
 	$sth = $dbh->prepare($sql);
 	
-	if ($sth->execute(array(':field' => $field, ':table' => $table))) {
+	if ($sth && $sth->execute(array(':field' => $field, ':table' => $table))) {
 		if ($sth->fetch()) {
 			return true;
 		} else {
