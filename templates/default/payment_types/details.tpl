@@ -17,7 +17,7 @@
 */
 *}
 
-<form name="frmpost" action="index.php?module=payment_types&view=save&submit={$smarty.get.submit}" method="post" onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=payment_types&amp;view=save&amp;submit={$smarty.get.submit|escape:html}" method="post" onsubmit="return frmpost_Validator(this)">
 
 
 
@@ -25,23 +25,23 @@
 {if $smarty.get.action == "view" }
 	
 	
-	<b>{$LANG.payment_type} :: <a href='index.php?module=payment_types&view=details&submit={$paymentType.pt_id}&action=edit'>{$LANG.edit}</a> </b>
+	<b>{$LANG.payment_type} :: <a href='index.php?module=payment_types&amp;view=details&amp;submit={$paymentType.pt_id|escape:html}&amp;action=edit'>{$LANG.edit}</a> </b>
 	<hr />
 
 	<table align="center">
 	<tr>
-		<td class="details_screen">{$LANG.payment_type_id}</td><td>{$paymentType.pt_id}</td>
+		<td class="details_screen">{$LANG.payment_type_id}</td><td>{$paymentType.pt_id|escape:html}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.description}</td><td>{$paymentType.pt_description}</td>
+		<td class="details_screen">{$LANG.description}</td><td>{$paymentType.pt_description|escape:html}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.enabled}</td><td>{$paymentType.enabled}</td>
+		<td class="details_screen">{$LANG.enabled}</td><td>{$paymentType.enabled|escape:html}</td>
 	</tr>
 	</table>
 	<hr />
 
-<a href='index.php?module=payment_types&view=details&submit={$paymentType.pt_id}&action=edit'>{$LANG.edit}</a>
+<a href='index.php?module=payment_types&amp;view=details&amp;submit={$paymentType.pt_id|escape:html}&amp;action=edit'>{$LANG.edit}</a>
 
 {/if}
 
@@ -50,14 +50,14 @@
 	<b>{$LANG.payment_type_edit}</b>
 	<hr />
 
-	<table align=center>
+	<table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.payment_type_id}</td>
-		<td>{$paymentType.pt_id}</td>
+		<td>{$paymentType.pt_id|escape:html}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.description} <a href="docs.php?t=help&p=required_field" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png"></img></a></td>
-		<td><input type="text" name="pt_description" value="{$paymentType.pt_description}"
+		<td class="details_screen">{$LANG.description} <a href="docs.php?t=help&amp;p=required_field" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png" alt="(required)"></img></a></td>
+		<td><input type="text" name="pt_description" value="{$paymentType.pt_description|escape:html}"
 		 size="50" /></td>
 	</tr>
 	<tr>
@@ -65,7 +65,7 @@
 		<td>
 		{*displayblock enabled*}
 		<select name="pt_enabled">
-			<option value="{$paymentType.pt_enabled}" selected style="font-weight: bold">{$paymentType.enabled}</option>
+			<option value="{$paymentType.pt_enabled|escape:html}" selected style="font-weight: bold">{$paymentType.enabled|escape:html}</option>
 			<option value="1">{$LANG.enabled}</option>
 			<option value="0">{$LANG.disabled}</option>
 		</select>
