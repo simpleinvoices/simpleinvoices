@@ -1,4 +1,4 @@
-<form name="frmpost" action="index.php?module=payments&view=save" method="post" onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=payments&amp;view=save" method="post" onsubmit="return frmpost_Validator(this)">
 <h3>{$LANG.process_payment}</h3>
  <hr />
  
@@ -8,28 +8,28 @@
 <table align="center">	
 <tr>
 	<td class="details_screen">{$LANG.invoice_id}</td>
-	<td><input type="hidden" name="ac_inv_id" value="{$invoice.id}" />{$invoice.id}</td>
-	<td class="details_screen">{$LANG.total}</td><td>{$invoice.total_format}</td>
+	<td><input type="hidden" name="ac_inv_id" value="{$invoice.id|escape:html}" />{$invoice.id|esape:html}</td>
+	<td class="details_screen">{$LANG.total}</td><td>{$invoice.total_format|escape:html}</td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.biller}</td>
-	<td>{$biller.name}</td>
+	<td>{$biller.name|escape:html}</td>
 	<td class="details_screen">{$LANG.paid}</td>
-	<td>{$invoice.paid_format}</td>
+	<td>{$invoice.paid_format|escape:html}</td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.customer}</td>
-	<td>{$customer.name}</td>
+	<td>{$customer.name|escape:html}</td>
 	<td class="details_screen">{$LANG.owing}</td>
-	<td><u>{$invoice.owing_format}</u></td>
+	<td><u>{$invoice.owing_format|escape:html}</u></td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.amount}</td>
-	<td colspan="5"><input type="text" name="ac_amount" size="25" value="{$invoice.owing}" /><a href="docs.php?t=help&p=process_payment_auto_amount" rel="gb_page_center.450, 450"><img src="./images/common/help-small.png"></img></a></td>
+	<td colspan="5"><input type="text" name="ac_amount" size="25" value="{$invoice.owing|escape:html}" /><a href="docs.php?t=help&amp;p=process_payment_auto_amount" rel="gb_page_center.450, 450"><img src="./images/common/help-small.png" alt="({$LANG.help})"></img></a></td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.date_formatted}</td>
-	<td><input type="text" class="date-picker" name="ac_date" id="date1" value="{$today}" /></td>
+	<td><input type="text" class="date-picker" name="ac_date" id="date1" value="{$today|escape:html}" /></td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.payment_type_method}</td>
@@ -43,12 +43,12 @@
 <table align="center">
 <tr>
 	<td class="details_screen">{$LANG.invoice_id}
-	<a href="docs.php?t=help&p=process_payment_inv_id" rel="gb_page_center.450, 450"><img src="./images/common/help-small.png"></img></a></td>
+	<a href="docs.php?t=help&amp;p=process_payment_inv_id" rel="gb_page_center.450, 450"><img src="./images/common/help-small.png" alt="({$LANG.help})"></img></a></td>
 	<td><input type="text" id="ac_me" name="ac_inv_id" /></td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.details}
-	<a href="docs.php?t=help&p=process_payment_details" rel="gb_page_center.450, 450"><img src="./images/common/help-small.png"></img></a></td>
+	<a href="docs.php?t=help&amp;p=process_payment_details" rel="gb_page_center.450, 450"><img src="./images/common/help-small.png" alt="({$LANG.help})"></img></a></td>
 	<td id="js_total"><i>{$LANG.select_invoice}</i> </td>
 </tr>
 <tr>
@@ -58,7 +58,7 @@
 <tr>
 	<div class="demo-holder">
 		<td class="details_screen">{$LANG.date_formatted}</td>
-		<td><input type="text" class="date-picker" name="ac_date" id="date1" value="{$today}" /></td>
+		<td><input type="text" class="date-picker" name="ac_date" id="date1" value="{$today|escape:html}" /></td>
 	</div>
 </tr>
 <tr>
@@ -72,11 +72,11 @@
 {else}
 
 <select name="ac_payment_type">
-<option selected value="{$defaults.payment_type}" style="font-weight: bold">{$pt.pt_description}</option>
+<option selected value="{$defaults.payment_type|escape:html}" style="font-weight: bold">{$pt.pt_description|escape:html}</option>
 
 	{foreach from=$paymentTypes item=paymentType}
-		<option value="{$paymentType.pt_id}">
-		{$paymentType.pt_description}</option>
+		<option value="{$paymentType.pt_id|escape:html}">
+		{$paymentType.pt_description|escape:html}</option>
 	{/foreach}
 {/if}
 
