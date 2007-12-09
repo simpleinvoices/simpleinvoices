@@ -4,14 +4,18 @@
 </head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php
+		
+$URL = $_SERVER['SERVER_NAME'];
 
-		$URL = $_SERVER['REQUEST_URI'];
 
-		$explode = explode('/',$URL);
-		echo $URL;
-		print_r($explode);
-		echo $explode[1];
-		echo "test";
+if($URL == "simpleinvoices.org") 
+	{
+		$location = "http://simpleinvoices.googlecode.com/svn/trunk/images/";
+	}
+if($URL != "simpleinvoices.org") 
+	{
+		$location = "./images/";
+	}
 ?>
 <div id="left">
 	
@@ -41,7 +45,7 @@
 		</li>
 </td>
 <td>
-	<img src="./images/credits/justin_kelly.jpg"/>
+	<img src="<?php echo $location ;?>credits/justin_kelly.jpg"/>
 </td>
 </tr>
 <tr>
@@ -55,7 +59,7 @@
 			</ul>
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>/credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -68,7 +72,7 @@
 			</ul>
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -81,7 +85,7 @@
 			</ul>
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -94,7 +98,7 @@
 			</ul>
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -107,7 +111,7 @@
 			</ul>
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -120,7 +124,7 @@
 			</ul>
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -133,7 +137,7 @@
 			</ul>
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -146,7 +150,7 @@
 			</ul>
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -159,7 +163,7 @@
 			</ul>
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -172,7 +176,7 @@
 			</ul>
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>/credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -185,7 +189,7 @@
 			</ul>
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -199,7 +203,7 @@
 	
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -213,7 +217,7 @@
 	
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -226,7 +230,7 @@
 		</ul>
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -239,7 +243,7 @@
 			</ul>
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -252,7 +256,7 @@
 			</ul>
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -265,7 +269,7 @@
 			</ul>
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -278,7 +282,7 @@
 			</ul>
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -291,7 +295,7 @@
 			</ul>
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -304,7 +308,7 @@
 			</ul>
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -317,7 +321,7 @@
 			</ul>
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -330,7 +334,7 @@
 			</ul>
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -343,7 +347,7 @@
 			</ul>
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -356,7 +360,7 @@
 			</ul>
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>credits/photo.jpg"/>
 </td>
 </tr>
 <tr>
@@ -370,7 +374,7 @@
 		
 </td>
 <td>
-	<img src="./images/credits/photo.jpg"/>
+	<img src="<?php echo $location ;?>credits/photo.jpg"/>
 </td>
 </tr>
 </table>
