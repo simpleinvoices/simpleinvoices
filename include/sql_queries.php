@@ -44,7 +44,7 @@ function dbQuery($sqlQuery) {
 			$sth->bindValue($binds[$i], $binds[++$i]);
 		}
 	}
-	if($sth->execute()) {
+	if($sth && $sth->execute()) {
 		
 		//error_log("Insert_id: ".mysql_insert_id($conn));
 
@@ -1373,8 +1373,9 @@ function printEntries($menu,$id,$depth) {
 		for($i=0;$i<$depth;$i++) {
 			//echo "&nbsp;&nbsp;&nbsp;";
 		}
-		echo '
-		<li><a href="'.htmlspecialchars($tempentrie[link]).'">'htmlspecialchars($tempentrie[name]).'</a>';
+		echo "
+		<li><a href=\".htmlspecialchars($tempentrie[link]).\">htmlspecialchars($tempentrie[name]).</a>
+		";
 		
 		if(isset($menu[$tempentrie["id"]])) {
 			echo "<ul>";
