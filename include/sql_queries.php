@@ -1369,17 +1369,17 @@ EOD;
 
 function printEntries($menu,$id,$depth) {
 	
-	foreach($menu[$id] as $tempentrie) {
+	foreach($menu[$id] as $tempentry) {
 		for($i=0;$i<$depth;$i++) {
 			//echo "&nbsp;&nbsp;&nbsp;";
 		}
 		echo "
-		<li><a href=\".htmlspecialchars($tempentrie[link]).\">htmlspecialchars($tempentrie[name]).</a>
+		<li><a href='".$tempentry[link]."'>".htmlspecialchars($tempentry[name])."</a>
 		";
 		
-		if(isset($menu[$tempentrie["id"]])) {
+		if(isset($menu[$tempentry["id"]])) {
 			echo "<ul>";
-			printEntries($menu,$tempentrie["id"],$depth+1);
+			printEntries($menu,$tempentry["id"],$depth+1);
 			echo "</ul>";
 		}
 		echo "</li>\n";
