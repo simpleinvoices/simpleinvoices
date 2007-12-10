@@ -12,7 +12,7 @@ function getNumberOfPatches() {
 		
 
 	$check_patches_sql = "SELECT count(sql_patch) AS count FROM ".TB_PREFIX."sql_patchmanager ";
-	$sth = dbQuery($check_patches_sql) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($check_patches_sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 		
 	$patches = $sth->fetch();
 	$patch_count = count($patch);
@@ -60,7 +60,7 @@ EOD;
 		
 		initialise_sql_patch();
 		
-		$display_block .= "<tr><td><br>Now that the Database upgrade table has been initialised, please go back to the Database Upgrade Manger page by clicking <a href='index.php?module=options&view=database_sqlpatches'>HERE</a> to run the remaining patches</td></tr>";
+		$display_block .= "<tr><td><br>Now that the Database upgrade table has been initialised, please go back to the Database Upgrade Manger page by clicking <a href='index.php?module=options&amp;view=database_sqlpatches'>HERE</a> to run the remaining patches</td></tr>";
 		$display_block .= "</table></div>";
 
 	}
@@ -85,18 +85,20 @@ function listPatches() {
 		<hr></hr>
 
 		<table align="center">
-			<tr></i><tr><td><br>The list below describes which patches have and have not been applied to the database, the aim is to have them all applied.  If there are patches that have not been applied to the Simple Invoices database, please run the Update database by clicking update </td></tr><tr align=center><td><p class='align_center'><br><a href='index.php?case=run'>UPDATE</a></p></td></tr></table><br>
-<a href="docs.php?t=help&p=text" rel="gb_page_center[450, 450]"><font color="red"><img src="./images/common/important.png"></img>Warning:</font></a>
+			<tr></i><tr><td><br>The list below describes which patches have and have not been applied to the database, the aim is to have them all applied.  If there are patches that have not been applied to the Simple Invoices database, please run the Update database by clicking update </td></tr><tr align="center"><td><p class='align_center'><br><a href='index.php?case=run'>UPDATE</a></p></td></tr></table><br>
+<a href="docs.php?t=help&amp;p=text" rel="gb_page_center[450, 450]"><font color="red"><img src="./images/common/important.png"></img>Warning:</font></a>
 <table align="center">
 EOD;
 
 
 		for($p = 0; $p < count($patch);$p++) {
+			$patch_name = htmlspecialchars($patch[$p]['name']);
+			$patch_date = htmlspecialchars($patch[$p]['date']);
 			if(check_sql_patch($p,$patch[$p]['name'])) {
-				$display_block .= "<tr><td>SQL patch $p, {$patch[$p]['name']} <i>has</i> already been applied in release {$patch[$p]['date']}</td></tr>";
+				$display_block .= "<tr><td>SQL patch $p, $patch_name <i>has</i> already been applied in release $patch_date</td></tr>";
 			}
 			else {
-				$display_block .= "<tr><td>SQL patch $p, {$patch[$p]['name']}  <b>has not</b> been applied to the database</td></tr>";
+				$display_block .= "<tr><td>SQL patch $p, $patch_name <b>has not</b> been applied to the database</td></tr>";
 			}	
 		}
 
@@ -107,7 +109,7 @@ EOD;
 	else {
 		echo <<<EOD
 		<table align="center">
-          <tr><td><br>This is the first time that the Database Upgrade process is to be run.  The first step in the process is to Initialse the database upgrade table. To do this click the Initialise database button<br><br><a href='index.php?module=options&view=database_sqlpatches&op=run_updates'>INITIALISE DATABASE UPGRADE</a></td></tr>
+          <tr><td><br>This is the first time that the Database Upgrade process is to be run.  The first step in the process is to Initialse the database upgrade table. To do this click the Initialise database button<br><br><a href='index.php?module=options&amp;view=database_sqlpatches&amp;op=run_updates'>INITIALISE DATABASE UPGRADE</a></td></tr>
 		</table>
 EOD;
 	}*/
@@ -143,12 +145,14 @@ function run_sql_patch($id, $patch) {
 	$sth = dbQuery($sql, ':id', $id) or die(end($dbh->errorInfo()));
 	
 	//echo $sql;
+	$escaped_id = htmlspecialchars($id);
+	$patch_name = htmlspecialchars($patch['name']);
 	#forget about it!! the patch as its already been run
 	if (count($sth->fetchAll()) != 0)  {
 
 		$display_block = <<<EOD
 		</div id="header">
-		<tr><td>Skipping SQL patch $id, $patch[name] as it <i>has</i> already been applied</td></tr>
+		<tr><td>Skipping SQL patch $escaped_id, $patch_name as it <i>has</i> already been applied</td></tr>
 EOD;
 	}
 	else {
@@ -159,7 +163,7 @@ EOD;
 		
 
 		$display_block  = <<<EOD
-			<tr><td>SQL patch $id, $patch[name] <i>has</i> been applied to the database</td></tr>
+			<tr><td>SQL patch $escaped_id, $patch_name <i>has</i> been applied to the database</td></tr>
 EOD;
 		# now update the ".TB_PREFIX."sql_patchmanager table
 		
@@ -168,14 +172,14 @@ EOD;
 		
 		/*echo $sql_update;*/
 
-		dbQuery($sql_update, ':id', $id, ':name', $patch[name], ':date', $patch[date], ':patch', $patch[patch]) or die(end($dbh->errorInfo()));
+		dbQuery($sql_update, ':id', $id, ':name', $patch['name'], ':date', $patch['date'], ':patch', $patch['patch']) or die(end($dbh->errorInfo()));
 
 		if($id == 126) {
 			patch126();
 		} elseif($id == 137) {
 			convertCustomFields();
 		}
-		$display_block .= "<tr><td>SQL patch $id, $patch[name] <b>has</b> been applied</td></tr>";
+		$display_block .= "<tr><td>SQL patch $escaped_id, $patch_name <b>has</b> been applied</td></tr>";
 	}
 	if ($db_server == 'pgsql') {
 		// Yay!  Transactional DDL
