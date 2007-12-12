@@ -18,7 +18,11 @@
 	}
 
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."log l WHERE l.timestamp BETWEEN :start AND :end ORDER BY l.timestamp";
+	$sql = "SELECT l.*, u.user_name
+	FROM
+	".TB_PREFIX."log l INNER JOIN 
+	".TB_PREFIX."users u ON (u.user_id = l.userid)
+	WHERE l.timestamp BETWEEN :start AND :end ORDER BY l.timestamp";
 	
 	$sth = dbQuery($sql, ':start', $startdate, ':end', $enddate);
 	$sqls = null;
@@ -44,7 +48,8 @@ EOD;
 		$pattern = "/.*INSERT\s+INTO\s+si_invoices\s+/im";
 		
 		if(preg_match($pattern,$sql['sqlquerie'])) {
-			echo "User $sql[userid] created invoice $sql[last_id] on $sql[timestamp].<br />";
+			$user = htmlspecialchars($sql['user_name']).' (id '.htmlspecialchars($sql['userid']).')';
+			echo "User $user created invoice $sql[last_id] on $sql[timestamp].<br />";
 		}
 	}
 
@@ -52,7 +57,8 @@ EOD;
 	foreach($sqls as $sql) {
 		$pattern = "/.*UPDATE\s+si_invoices\s+SET/im";
 		if(preg_match($pattern,$sql['sqlquerie'],$match)) {
-			echo "User $sql[userid] modified invoice $match[1] on $sql[timestamp].<br />";
+			$user = htmlspecialchars($sql['user_name']).' (id '.htmlspecialchars($sql['userid']).')';
+			echo "User $user modified invoice $match[1] on $sql[timestamp].<br />";
 		}
 	}
 	
@@ -65,7 +71,8 @@ EOD;
 			$pattern = "/.*INSERT\s+INTO\s+si_account_payments\s+/im";
 		}
 		if(preg_match($pattern,$sql['sqlquerie'],$match)) {
-			echo "User $sql[userid] processed invoice $match[1] on $sql[timestamp] with amount $match[2].<br />";
+			$user = htmlspecialchars($sql['user_name']).' (id '.htmlspecialchars($sql['userid']).')';
+			echo "User $user processed invoice $match[1] on $sql[timestamp] with amount $match[2].<br />";
 		}
 	}
 	
