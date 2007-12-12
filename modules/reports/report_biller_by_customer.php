@@ -1,14 +1,17 @@
 <?php
 
 
-	//stop the direct browsing to this file - let index.php handle which files get displayed
-	checkLogin();
+   //stop the direct browsing to this file - let index.php handle which files get displayed
+   checkLogin();
 
    // include the PHPReports classes on the PHP path! configure your path here
    include "./modules/reports/PHPReportMaker.php";
-   include "config/config.php";
+   include "./config/config.php";
 
-   $sSQL = "SELECT sum(ii.total) as SUM_TOTAL, b.name as BNAME, c.name as CNAME
+   $sSQL = "SELECT
+      sum(ii.total) AS sum_total,
+         b.name AS bname,
+         c.name AS cname
       FROM ".TB_PREFIX."biller b INNER JOIN
       ".TB_PREFIX."invoices iv ON (b.id = iv.biller_id) INNER JOIN
       ".TB_PREFIX."customers c ON (c.id = iv.customer_id) INNER JOIN
@@ -21,12 +24,11 @@
    $oRpt->setXML("./modules/reports/xml/report_biller_by_customer.xml");
    $oRpt->setUser("$db_user");
    $oRpt->setPassword("$db_password");
-   $oRpt->setConnection("$db_host");
-   $oRpt->setDatabaseInterface("mysql");
+   $oRpt->setDatabaseInterface("pdo");
    if ($db_server == 'pgsql') {
-      $oRpt->setDatabaseInterface("postgresql");
+      $oRpt->setConnection("pgsql:host=$db_host");
    } else {
-      $oRpt->setDatabaseInterface("mysql");
+      $oRpt->setConnection("mysql:host=$db_host");
    }
    $oRpt->setSQL($sSQL);
    $oRpt->setDatabase("$db_name");
@@ -37,11 +39,10 @@
    
    ob_end_clean();
 
-   
    $pageActive = "reports";
 
-	$smarty->assign('pageActive', $pageActive);
-	$smarty->assign('showReport', $showReport);
+   $smarty->assign('pageActive', $pageActive);
+   $smarty->assign('showReport', $showReport);
 
 ?>
 

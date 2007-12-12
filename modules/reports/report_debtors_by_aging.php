@@ -7,21 +7,21 @@ include('./config/config.php');
    if ($db_server == 'pgsql') {
       $sSQL = "SELECT
         iv.id,
-        b.name AS \"Biller\",
-        c.name AS \"Customer\",
+        b.name AS biller,
+        c.name AS customer,
 
-        coalesce(ii.total, 0) AS \"INV_TOTAL\",
-        coalesce(ap.total, 0) AS \"INV_PAID\",
-        coalesce(ii.total, 0) - coalesce(ap.total, 0) as \"INV_OWING\",
+        coalesce(ii.total, 0) AS inv_total,
+        coalesce(ap.total, 0) AS inv_paid,
+        coalesce(ii.total, 0) - coalesce(ap.total, 0) as inv_owing,
 
-        to_char(iv.date,'YYYY-MM-DD') as \"Date\",
-        age(iv.date) as \"Age\",
-        (CASE   WHEN age(iv.date) <= 14 THEN '0-14'
-                WHEN age(iv.date) <= 30 THEN '15-30'
-                WHEN age(iv.date) <= 60 THEN '31-60'
-                WHEN age(iv.date) <= 90 THEN '61-90'
+        to_char(iv.date,'YYYY-MM-DD') as date,
+        age(iv.date) as age,
+        (CASE   WHEN age(iv.date) <= '14 days'::interval THEN '0-14'
+                WHEN age(iv.date) <= '30 days'::interval THEN '15-30'
+                WHEN age(iv.date) <= '60 days'::interval THEN '31-60'
+                WHEN age(iv.date) <= '90 days'::interval THEN '61-90'
                 ELSE '90+'
-        END) as \"Aging\"
+        END) as aging
 
 FROM
         ".TB_PREFIX."invoices iv INNER JOIN
@@ -34,24 +34,24 @@ FROM
          FROM ".TB_PREFIX."account_payments p GROUP BY p.ac_inv_id
         ) ap ON (iv.id = ap.ac_inv_id)
 ORDER BY
-        \"Age\" DESC;
+        age DESC;
 ";
    } else {
       $sSQL = "SELECT
         ".TB_PREFIX."invoices.id,
-        (select name from ".TB_PREFIX."biller where ".TB_PREFIX."biller.id = ".TB_PREFIX."invoices.biller_id) as Biller,
-        (select name from ".TB_PREFIX."customers where ".TB_PREFIX."customers.id = ".TB_PREFIX."invoices.customer_id) as Customer,
-        (select sum(".TB_PREFIX."invoice_items.total) from ".TB_PREFIX."invoice_items WHERE ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id) as INV_TOTAL,
-        (select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from ".TB_PREFIX."account_payments where  ac_inv_id = ".TB_PREFIX."invoices.id ) as INV_PAID,
-        (select (INV_TOTAL - INV_PAID)) as INV_OWING ,
-        date_format(date,'%Y-%m-%e') as Date ,
-        (select datediff(now(),date)) as Age,
+        (select name from ".TB_PREFIX."biller where ".TB_PREFIX."biller.id = ".TB_PREFIX."invoices.biller_id) as biller,
+        (select name from ".TB_PREFIX."customers where ".TB_PREFIX."customers.id = ".TB_PREFIX."invoices.customer_id) as customer,
+        (select sum(".TB_PREFIX."invoice_items.total) from ".TB_PREFIX."invoice_items WHERE ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id) as inv_total,
+        (select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from ".TB_PREFIX."account_payments where  ac_inv_id = ".TB_PREFIX."invoices.id ) as inv_paid,
+        (select (INV_TOTAL - INV_PAID)) as inv_owing ,
+        date_format(date,'%Y-%m-%e') as date ,
+        (select datediff(now(),date)) as age,
         (CASE WHEN datediff(now(),date) <= 14 THEN '0-14'
                 WHEN datediff(now(),date) <= 30 THEN '15-30'
                 WHEN datediff(now(),date) <= 60 THEN '31-60'
                 WHEN datediff(now(),date) <= 90 THEN '61-90'
                 ELSE '90+'
-        END ) as Aging
+        END ) as aging
 
 FROM
         ".TB_PREFIX."invoices,".TB_PREFIX."account_payments,".TB_PREFIX."invoice_items, ".TB_PREFIX."biller, ".TB_PREFIX."customers
@@ -67,12 +67,8 @@ GROUP BY
    $oRpt->setXML("./modules/reports/xml/report_debtors_by_aging.xml");
    $oRpt->setUser("$db_user");
    $oRpt->setPassword("$db_password");
-   $oRpt->setConnection("$db_host");
-   if ($db_server == 'pgsql') {
-      $oRpt->setDatabaseInterface("postgresql");
-   } else {
-      $oRpt->setDatabaseInterface("mysql");
-   }
+   $oRpt->setConnection("$db_server:host=$db_host");
+   $oRpt->setDatabaseInterface("pdo");
    $oRpt->setSQL($sSQL);
    $oRpt->setDatabase("$db_name");
    ob_start();

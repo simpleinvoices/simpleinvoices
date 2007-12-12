@@ -48,13 +48,14 @@ function dbQuery($sqlQuery) {
 		
 		//error_log("Insert_id: ".mysql_insert_id($conn));
 
+		$last = lastInsertId();
 		if(LOGGING && (preg_match($pattern,$sqlQuery) == 0)) {
-			$sql = "INSERT INTO si_log (timestamp,  userid, sqlquerie, last_id) VALUES (CURRENT_TIMESTAMP , ?, ?, lastval())";
+			$sql = "INSERT INTO si_log (timestamp,  userid, sqlquerie, last_id) VALUES (CURRENT_TIMESTAMP , ?, ?, ?)";
 			if ($db_server == 'mysql') {
-				$sql = "INSERT INTO si_log (id, timestamp,  userid, sqlquerie, last_id) VALUES (NULL, CURRENT_TIMESTAMP , ?, ?, last_insert_id())";
+				$sql = "INSERT INTO si_log (id, timestamp,  userid, sqlquerie, last_id) VALUES (NULL, CURRENT_TIMESTAMP , ?, ?, ?)";
 			}
 			$tth = $log_dbh->prepare($sql);
-			$tth->execute(array($userid, trim($sqlQuery)));
+			$tth->execute(array($userid, trim($sqlQuery), $last));
 			$tth = null;
 		}
 		return $sth;

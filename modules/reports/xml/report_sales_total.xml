@@ -15,7 +15,7 @@
 
 			<FIELDS>
 				<ROW>
-					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">Total</COL>
+					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">total</COL>
 				</ROW>
 			</FIELDS>
 		</GROUP>

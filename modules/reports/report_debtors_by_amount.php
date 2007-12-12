@@ -7,12 +7,12 @@ include('./config/config.php');
    if ($db_server == 'pgsql') {
       $sSQL = "SELECT
         iv.id,
-        b.name AS \"Biller\",
-        c.name AS \"Customer\",
+        b.name AS biller,
+        c.name AS customer,
 
-        coalesce(ii.total, 0) AS \"INV_TOTAL\",
-        coalesce(ap.total, 0) AS \"INV_PAID\",
-        coalesce(ii.total, 0) - coalesce(ap.total, 0) AS \"INV_OWING\",
+        coalesce(ii.total, 0) AS inv_total,
+        coalesce(ap.total, 0) AS inv_paid,
+        coalesce(ii.total, 0) - coalesce(ap.total, 0) AS inv_owing,
         iv.date
 FROM
         ".TB_PREFIX."invoices iv INNER JOIN
@@ -25,16 +25,16 @@ FROM
          FROM ".TB_PREFIX."account_payments p GROUP BY p.ac_inv_id
         ) ap ON (iv.id = ap.ac_inv_id)
 ORDER BY
-        \"INV_OWING\" DESC;
+        inv_owing DESC;
 ";
    } else {
       $sSQL = "SELECT
         iv.id,
-        (select name from ".TB_PREFIX."biller where ".TB_PREFIX."biller.id = iv.biller_id) as Biller,
-        (select name from ".TB_PREFIX."customers where id = iv.customer_id) as Customer,
-        (select sum(".TB_PREFIX."invoice_items.total) from ".TB_PREFIX."invoice_items WHERE ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id) as INV_TOTAL,
-        ( select coalesce ( sum(ac_amount), 0) from ".TB_PREFIX."account_payments where  ac_inv_id = ".TB_PREFIX."invoices.id ) as INV_PAID,
-        (select (INV_TOTAL - INV_PAID)) as INV_OWING ,
+        (select name from ".TB_PREFIX."biller where ".TB_PREFIX."biller.id = iv.biller_id) as biller,
+        (select name from ".TB_PREFIX."customers where id = iv.customer_id) as customer,
+        (select sum(".TB_PREFIX."invoice_items.total) from ".TB_PREFIX."invoice_items WHERE ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id) as inv_total,
+        ( select coalesce ( sum(ac_amount), 0) from ".TB_PREFIX."account_payments where  ac_inv_id = ".TB_PREFIX."invoices.id ) as inv_paid,
+        (select (INV_TOTAL - INV_PAID)) as inv_owing ,
         date
 FROM
         ".TB_PREFIX."invoices iv INNER JOIN
@@ -43,7 +43,7 @@ FROM
 GROUP BY
         iv.id
 ORDER BY
-        INV_OWING DESC;
+        inv_owing DESC;
 
 ";
    }
@@ -52,12 +52,8 @@ ORDER BY
    $oRpt->setXML("./modules/reports/xml/report_debtors_by_amount.xml");
    $oRpt->setUser("$db_user");
    $oRpt->setPassword("$db_password");
-   $oRpt->setConnection("$db_host");
-   if ($db_server == 'pgsql') {
-      $oRpt->setDatabaseInterface("postgresql");
-   } else {
-      $oRpt->setDatabaseInterface("mysql");
-   }
+   $oRpt->setConnection("$db_server:host=$db_host");
+   $oRpt->setDatabaseInterface("pdo");
    $oRpt->setSQL($sSQL);
    $oRpt->setDatabase("$db_name");
    ob_start();

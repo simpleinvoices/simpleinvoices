@@ -12,7 +12,7 @@
       <FOOTER>
          <ROW>
             <COL ALIGN="RIGHT" COLSPAN="4" CELLCLASS="PAGE_LAYER">page total</COL>
-            <COL ALIGN="LEFT" NUMBERFORMATEX="2" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD" TYPE="EXPRESSION">$this->getSum("SUM_QUANTITY")</COL>
+            <COL ALIGN="LEFT" NUMBERFORMATEX="2" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD" TYPE="EXPRESSION">$this->getSum("sum_quantity")</COL>
          </ROW>
       </FOOTER>		
    </PAGE>
@@ -22,7 +22,7 @@
 			<FIELDS>
 				<ROW>
 					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">description</COL>
-					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">SUM_QUANTITY</COL>
+					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">sum_quantity</COL>
 				</ROW>
 			</FIELDS>
 		</GROUP>

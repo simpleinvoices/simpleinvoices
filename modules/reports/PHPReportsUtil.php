@@ -14,6 +14,7 @@
 	******************************************************************************/
 	function getPHPReportsIncludePath(){
 		$ipsep = stristr(PHP_OS,"LINUX")?":":";";
+		$ipsep = stristr(PHP_OS,"DARWIN")?":":$ipsep;
 		
 		$aPaths = explode($ipsep,ini_get("include_path"));
 		foreach($aPaths as $sPath)

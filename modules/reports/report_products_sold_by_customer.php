@@ -1,9 +1,9 @@
 <?php
    // include the PHPReports classes on the PHP path! configure your path here
    include "./modules/reports/PHPReportMaker.php";
-   include "config/config.php";
+   include "./config/config.php";
 
-   $sSQL = "SELECT sum(ii.quantity) as SUM_QUANTITY, c.name, p.description
+   $sSQL = "SELECT sum(ii.quantity) as sum_quantity, c.name, p.description
       FROM ".TB_PREFIX."customers c INNER JOIN
       ".TB_PREFIX."invoices iv ON (c.id = iv.customer_id) INNER JOIN
       ".TB_PREFIX."invoice_items ii ON (iv.id = ii.invoice_id) INNER JOIN
@@ -17,12 +17,8 @@
    $oRpt->setXML("./modules/reports/xml/report_products_sold_by_customer.xml");
    $oRpt->setUser("$db_user");
    $oRpt->setPassword("$db_password");
-   $oRpt->setConnection("$db_host");
-   if ($db_server == 'pgsql') {
-      $oRpt->setDatabaseInterface("postgresql");
-   } else {
-      $oRpt->setDatabaseInterface("mysql");
-   }
+   $oRpt->setConnection("$db_server:host=$db_host");
+   $oRpt->setDatabaseInterface("pdo");
    $oRpt->setSQL($sSQL);
    $oRpt->setDatabase("$db_name");
    ob_start();
