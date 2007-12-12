@@ -90,7 +90,7 @@
 		<xsl:text>);&#10;</xsl:text>
 		<xsl:text>&#9;$oCol</xsl:text><xsl:value-of select="count(preceding::*[name()='COL'])+1"/><xsl:text>->setGroup(&amp;$oGroup);&#10;</xsl:text>
 		<xsl:apply-templates select="LINK|BOOKMARK|XHTML|IMG"/>
-		<xsl:text>&#9;$oRow->addCol(&amp;$oCol</xsl:text><xsl:value-of select="count(preceding::*[name()='COL'])+1"/><xsl:text>);&#10;</xsl:text>
+		<xsl:text>&#9;$oRow->addCol($oCol</xsl:text><xsl:value-of select="count(preceding::*[name()='COL'])+1"/><xsl:text>);&#10;</xsl:text>
 	</xsl:if>	
 </xsl:template>
 
