@@ -66,6 +66,12 @@
 <!-- customer-details -->
 <link rel="stylesheet" href="./templates/default/css/tabs.css" type="text/css" media="print, projection, screen" />
 
+
+<script type="text/javascript" src="./modules/include/js/AJS.js"></script>
+<script type="text/javascript" src="./modules/include/js/AJS_fx.js"></script>
+<script type="text/javascript" src="./modules/include/js/gb_scripts.js"></script>
+<link href="./templates/default/css/gb_styles.css" rel="stylesheet" type="text/css" />
+
 <!--[if gte IE 5.5]>
 <script language="JavaScript" src="./modules/include/js/dhtml.js" type="text/JavaScript"></script>
 <link rel="stylesheet" href="./templates/default/css/iehacks.css" type="text/css" />
