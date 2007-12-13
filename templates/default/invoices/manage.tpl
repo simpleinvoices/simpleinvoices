@@ -22,11 +22,12 @@
 {else}
 
 <div style="text-align:center;">
-<b>{$LANG.manage_invoices}</b> ::
-<a href="index.php?module=invoices&view=total">{$LANG.add_new_invoice} - {$LANG.total_style}</a> ::
-<a href="index.php?module=invoices&view=itemised">{$LANG.add_new_invoice} - {$LANG.itemised_style}</a> ::
-<a href="index.php?module=invoices&view=consulting">{$LANG.add_new_invoice} - {$LANG.consulting_style}</a>
-</div><hr />
+<b>{$LANG.manage_invoices}</b> :: <b><font color="blue">{$LANG.add_new_invoice}</font></b> [
+<a href="index.php?module=invoices&view=total"> <b>{$LANG.total_style}</b></a> ::
+<a href="index.php?module=invoices&view=itemised"> <b>{$LANG.itemised_style}</b></a> ::
+<a href="index.php?module=invoices&view=consulting"> <b>{$LANG.consulting_style}</b> </a>]
+</div>
+<hr />
 
 
 <table align="center" id="ex1" class="ricoLiveGrid manage" >

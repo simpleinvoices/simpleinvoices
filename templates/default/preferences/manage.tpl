@@ -5,6 +5,7 @@
 	<h3>{$LANG.manage_preferences} ::
 	<a href="index.php?module=preferences&view=add">{$LANG.add_new_preference}</a></h3>
 
+	<div style="text-align:center;"><a href="docs.php?t=help&p=inv_pref_what_the" rel="gb_page_center[450, 450]">{$LANG.whats_all_this_inv_pref}<img src="./images/common/help-small.png"></img></a></div>
 	<hr />
 	
 
@@ -37,8 +38,7 @@
 		<td class="index_table">{$preference.enabled}</td>
 		</tr>
 
-		{/foreach}
-		</table>
-	{/if}
-<br />
-<div style="text-align:center;"><a href="docs.php?t=help&p=inv_pref_what_the" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img> What's all this "Invoice Preference" stuff about?</a></div>
+	{/foreach}
+	</table>
+{/if}
+
