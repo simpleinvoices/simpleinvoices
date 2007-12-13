@@ -106,13 +106,13 @@ define("MAX_LINE_LENGTH", 100);
 define('MAX_IMAGE_ROW_LEN',16);
 define('MAX_TRANSPARENT_IMAGE_ROW_LEN',16);
 
-define('CACHE_DIR', HTML2PS_DIR.'cache/');
-define('OUTPUT_FILE_DIRECTORY', HTML2PS_DIR.'out/');
+define('CACHE_DIR', HTML2PS_DIR.'../../cache/');
+define('OUTPUT_FILE_DIRECTORY', HTML2PS_DIR.'../../cache/');
 define('FPDF_PATH', HTML2PS_DIR.'fpdf/');
 
 // Trailing directory separator ('/' or '\', depending on your system)
 // SHOULD BE OMITTED
-define('WRITER_TEMPDIR', HTML2PS_DIR.'temp');
+define('WRITER_TEMPDIR', HTML2PS_DIR.'../../cache');
 define('WRITER_FILE_PREFIX','PS_');
 
 // number of retries to generate unique filename in case we have had troubles with
