@@ -59,15 +59,13 @@ if(getNumberOfPatches() > 0 ) {
 	$view = "database_sqlpatches";
 	$module = "options";
 	
-	if($action == "run") {
-		runPatches();
-	}
-	else {
-		listPatches();
-	}
+	if($action == "run") { 	runPatches(); }
+	else { listPatches(); }
 	$menu = false;
 }
-
+else {
+	if (($module == "options") && ($view == "database_sqlpatches")) { donePatches(); }
+}
 
 
 /*dont include the header if requested file is an invoice template - for print preview etc.. header is not needed */

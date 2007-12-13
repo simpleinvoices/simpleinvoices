@@ -65,6 +65,23 @@ EOD;
 
 }
 
+function donePatches() {
+		$display_block = "<table align='center'>";
+		$display_block .= <<<EOD
+		<br>
+		<b>Simple Invoices :: Database Upgrade Manager</b><br />
+		<hr />
+		<tr><td><br>The database patches are uptodate. You can continue working with Simple Invoices.<br /><p align=middle><br /><a href="index.php">HOME</a></p></tr>
+		</table>
+
+EOD;
+	//exit();
+	$refresh = '<meta http-equiv="refresh" content="2;url=index.php">';
+	global $smarty;
+	$smarty-> assign("display_block",$display_block);
+	$smarty-> assign("refresh",$refresh);
+}
+
 function listPatches() {
 		global $patch;
 
