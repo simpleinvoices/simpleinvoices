@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Generation Time: Sep 28, 2007 at 03:45 PM
--- Server version: 5.0.27
--- PHP Version: 5.2.1
+-- Generation Time: Dec 13, 2007 at 05:45 PM
+-- Server version: 4.1.20
+-- PHP Version: 5.2.5
 -- 
 -- Database: `simple_invoices_test`
 -- 
@@ -18,7 +18,7 @@
 
 CREATE TABLE `si_account_payments` (
   `id` int(10) NOT NULL auto_increment,
-  `ac_inv_id` varchar(10) NOT NULL,
+  `ac_inv_id` int(11) NOT NULL,
   `ac_amount` double(25,2) NOT NULL,
   `ac_notes` text NOT NULL,
   `ac_date` datetime NOT NULL,
@@ -180,7 +180,7 @@ CREATE TABLE `si_defaults` (
   `def_inv_template` varchar(50) NOT NULL default 'default',
   `def_payment_type` varchar(25) default '1',
   PRIMARY KEY  (`def_id`)
-) TYPE=MyISAM  AUTO_INCREMENT=3 ;
+) TYPE=MyISAM  AUTO_INCREMENT=2 ;
 
 -- 
 -- Dumping data for table `si_defaults`
@@ -201,7 +201,7 @@ CREATE TABLE `si_invoice_items` (
   `quantity` float NOT NULL default '0',
   `product_id` int(10) default '0',
   `unit_price` double(25,2) default '0.00',
-  `tax_id` varchar(25) NOT NULL default '0',
+  `tax_id` int(11) NOT NULL default '0',
   `tax` double(25,2) default '0.00',
   `tax_amount` double(25,2) default NULL,
   `gross_total` double(25,2) default '0.00',
@@ -313,11 +313,11 @@ INSERT INTO `si_log` (`id`, `timestamp`, `userid`, `sqlquerie`, `last_id`) VALUE
 (3, '2007-09-28 15:41:20', '1', 'CREATE TABLE IF NOT EXISTS `si_users` ( `user_id` int(11) NOT NULL auto_increment, `user_email` varchar(255) NOT NULL, `user_name` varchar(255) NOT NULL, `user_group` varchar(255) NOT NULL, `user_domain` varchar(255) NOT NULL, `user_password` varchar(255) NOT NULL, PRIMARY KEY (`user_id`) ) ;', 0),
 (4, '2007-09-28 15:41:20', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (128,''Add si_user table'',200709,''CREATE TABLE IF NOT EXISTS `si_users` ( `user_id` int(11) NOT NULL auto_increment, `user_email` varchar(255) NOT NULL, `user_name` varchar(255) NOT NULL, `user_group` varchar(255) NOT NULL, `user_domain` varchar(255) NOT NULL, `user_password` varchar(255) NOT NULL, PRIMARY KEY (`user_id`) ) ;'')', 129),
 (5, '2007-09-28 15:41:20', '1', 'INSERT INTO `si_users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`) VALUES ('''', ''demo@simpleinvoices.org'', ''guest'', ''1'', ''1'', MD5(''demo''))', 1),
-(6, '2007-09-28 15:41:20', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (129,''Fill si_user table with default values'',200709,''INSERT INTO `si_users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`) VALUES (\\''\\'', \\''demo@simpleinvoices.org\\'', \\''guest\\'', \\''1\\'', \\''1\\'', MD5(\\''demo\\''))'')', 130),
+(6, '2007-09-28 15:41:20', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (129,''Fill user table with default values'',200709,''INSERT INTO `si_users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`) VALUES (\\''\\'', \\''demo@simpleinvoices.org\\'', \\''demo\\'', \\''1\\'', \\''1\\'', MD5(\\''demo\\''))'')', 130),
 (7, '2007-09-28 15:41:20', '1', 'CREATE TABLE IF NOT EXISTS `si_auth_challenges` ( `challenges_key` int(11) NOT NULL, `challenges_timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);', 0),
-(8, '2007-09-28 15:41:20', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (130,''Create si_auth_challenges table'',200709,''CREATE TABLE IF NOT EXISTS `si_auth_challenges` ( `challenges_key` int(11) NOT NULL, `challenges_timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);'')', 131),
-(9, '2007-09-28 15:41:20', '1', 'alter table `si_tax` change `tax_percentage` `tax_percentage` decimal (10,3) NULL', 0),
-(10, '2007-09-28 15:41:20', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (131,''Make tax field 3 decimal places'',200709,''alter table `si_tax` change `tax_percentage` `tax_percentage` decimal (10,3) NULL'')', 132);
+(8, '2007-09-28 15:41:20', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (130,''Create auth_challenges table'',200709,''CREATE TABLE IF NOT EXISTS `si_auth_challenges` ( `challenges_key` int(11) NOT NULL, `challenges_timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);'')', 131),
+(9, '2007-09-28 15:41:20', '1', 'ALTER TABLE `si_tax` change `tax_percentage` `tax_percentage` decimal (10,3) NULL', 0),
+(10, '2007-09-28 15:41:20', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (131,''Make tax field 3 decimal places'',200709,''ALTER TABLE `si_tax` CHANGE `tax_percentage` `tax_percentage` DECIMAL (10,3) NULL'')', 132);
 
 -- --------------------------------------------------------
 
@@ -426,27 +426,27 @@ CREATE TABLE `si_sql_patchmanager` (
 -- 
 
 INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES 
-(1, '1', 'Create si_sql_patchmanger table', '20060514', 'CREATE TABLE si_sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 50 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) TYPE = MYISAM '),
-(2, '2', 'Update invoice no details to have a default curren', '20060514', ''),
-(3, '3', 'Add a row into the defaults table to handle the de', '20060514', ''),
+(1, '1', 'Create sql_patchmanger table', '20060514', 'CREATE TABLE si_sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 255 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) ENGINE = MYISAM '),
+(2, '2', 'Update invoice no details to have a default currency sign', '20060514', ''),
+(3, '3', 'Add a row into the defaults table to handle the default number of line items', '20060514', ''),
 (4, '4', 'Set the default number of line items to 5', '20060514', ''),
 (5, '5', 'Add logo and invoice footer support to biller', '20060514', ''),
 (6, '6', 'Add default invoice template option', '20060514', ''),
-(7, '7', 'Edit tax description field lenght to 50', '20060526', ''),
-(8, '8', 'Edit default invoice template field lenght to 50', '20060526', ''),
+(7, '7', 'Edit tax description field length to 50', '20060526', ''),
+(8, '8', 'Edit default invoice template field length to 50', '20060526', ''),
 (9, '9', 'Add consulting style invoice', '20060531', ''),
 (10, '10', 'Add enabled to biller', '20060815', ''),
-(11, '11', 'Add enabled to customters', '20060815', ''),
-(12, '12', 'Add enabled to prefernces', '20060815', ''),
+(11, '11', 'Add enabled to customers', '20060815', ''),
+(12, '12', 'Add enabled to preferences', '20060815', ''),
 (13, '13', 'Add enabled to products', '20060815', ''),
 (14, '14', 'Add enabled to products', '20060815', ''),
 (15, '15', 'Add tax_id into invoice_items table', '20060815', ''),
 (16, '16', 'Add Payments table', '20060827', ''),
-(17, '17', 'Adjust data type of quantuty field', '20060827', ''),
+(17, '17', 'Adjust data type of quantity field', '20060827', ''),
 (18, '18', 'Create Payment Types table', '20060909', ''),
 (19, '19', 'Add info into the Payment Type table', '20060909', ''),
 (20, '20', 'Adjust accounts payments table to add a type field', '20060909', ''),
-(21, '21', 'Adjust the defautls table to add a payment type fi', '20060909', ''),
+(21, '21', 'Adjust the defaults table to add a payment type field', '20060909', ''),
 (22, '22', 'Add note field to customer', '20061026', ''),
 (23, '23', 'Add note field to Biller', '20061026', ''),
 (24, '24', 'Add note field to Products', '20061026', ''),
@@ -460,14 +460,14 @@ INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_
 (32, '32', 'Adding custom fields to products', '20061211', ''),
 (33, '33', 'Alter product custom field 4', '20061214', ''),
 (34, '34', 'Reset invoice template to default refer Issue 70', '20070125', ''),
-(35, '35', 'Adding data to the custom fields table for invoice', '20070204', ''),
+(35, '35', 'Adding data to the custom fields table for invoices', '20070204', ''),
 (36, '36', 'Adding custom fields to the invoices table', '20070204', ''),
 (37, '0', 'Start', '20060514', ''),
-(38, '37', 'Reset invoice template to default due to new invoi', '20070325', ''),
-(39, '38', 'Alter custom field table - field length now 255 fo', '20070325', ''),
-(40, '39', 'Alter custom field table - field length now 255 fo', '20070325', ''),
-(41, '40', 'Alter field name in si_partchmanager', '20070424', ''),
-(42, '41', 'Alter field name in si_account_payments', '20070424', ''),
+(38, '37', 'Reset invoice template to default due to new invoice template system', '20070325', ''),
+(39, '38', 'Alter custom field table - field length now 255 for field name', '20070325', ''),
+(40, '39', 'Alter custom field table - field length now 255 for field name', '20070325', ''),
+(41, '40', 'Alter field name in sql_patchmanager', '20070424', ''),
+(42, '41', 'Alter field name in account_payments', '20070424', ''),
 (43, '42', 'Alter field name b_name to name', '20070424', ''),
 (44, '43', 'Alter field name b_id to id', '20070430', ''),
 (45, '44', 'Alter field name b_street_address to street_address', '20070430', ''),
@@ -507,7 +507,7 @@ INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_
 (79, '78', 'Alter field name c_city to city', '20070507', ''),
 (80, '79', 'Alter field name c_state to state', '20070507', ''),
 (81, '80', 'Alter field name c_zip_code to zip_code', '20070507', ''),
-(82, '81', 'Alter field name c_country to countyr', '20070507', ''),
+(82, '81', 'Alter field name c_country to country', '20070507', ''),
 (83, '82', 'Alter field name c_phone to phone', '20070507', ''),
 (84, '83', 'Alter field name c_mobile_phone to mobile_phone', '20070507', ''),
 (85, '84', 'Alter field name c_fax to fax', '20070507', ''),
@@ -541,23 +541,23 @@ INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_
 (113, '112', 'Alter field name inv_it_description to description ', '20070507', ''),
 (114, '113', 'Alter field name inv_it_total to total', '20070507', ''),
 (115, '114', 'Add logging table', '20070514', ''),
-(116, '115', 'Add logging systempreference', '20070514', ''),
+(116, '115', 'Add logging system preference', '20070514', ''),
 (117, '116', 'System defaults conversion patch - set default biller', '20070507', ''),
 (118, '117', 'System defaults conversion patch - set default customer', '20070507', ''),
 (119, '118', 'System defaults conversion patch - set default tax', '20070507', ''),
 (120, '119', 'System defaults conversion patch - set default invoice preference', '20070507', ''),
 (121, '120', 'System defaults conversion patch - set default number of line items', '20070507', ''),
 (122, '121', 'System defaults conversion patch - set default invoice template', '20070507', ''),
-(123, '122', 'System defaults conversion patch - set default paymemt type', '20070507', ''),
+(123, '122', 'System defaults conversion patch - set default payment type', '20070507', ''),
 (124, '123', 'Add option to delete invoices into the system_defaults table', '200709', 'INSERT INTO `si_system_defaults` (`id`, `name`, `value`) VALUES \n('''', ''delete'', ''N'');'),
 (125, '124', 'Set default language in new lang system', '200709', 'UPDATE `si_system_defaults` SET value = ''en-gb'' where name =''language'';'),
 (126, '125', 'Change log table that usernames are also possible as id', '200709', 'ALTER TABLE `si_log` CHANGE `userid` `userid` VARCHAR( 40 ) NOT NULL DEFAULT ''0'''),
 (127, '126', 'Add visible attribute to the products table', '200709', 'ALTER TABLE  `si_products` ADD  `visible` BOOL NOT NULL DEFAULT  ''1'';'),
 (128, '127', 'Add last_id to logging table', '200709', 'ALTER TABLE  `si_log` ADD  `last_id` INT NULL ;'),
-(129, '128', 'Add si_user table', '200709', 'CREATE TABLE IF NOT EXISTS `si_users` (\n			`user_id` int(11) NOT NULL auto_increment,\n			`user_email` varchar(255) NOT NULL,\n			`user_name` varchar(255) NOT NULL,\n			`user_group` varchar(255) NOT NULL,\n			`user_domain` varchar(255) NOT NULL,\n			`user_password` varchar(255) NOT NULL,\n			PRIMARY KEY  (`user_id`)\n			) ;'),
-(130, '129', 'Fill si_user table with default values', '200709', 'INSERT INTO `si_users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`) VALUES \n('''', ''demo@simpleinvoices.org'', ''guest'', ''1'', ''1'', MD5(''demo''))'),
-(131, '130', 'Create si_auth_challenges table', '200709', 'CREATE TABLE IF NOT EXISTS `si_auth_challenges` (\n				`challenges_key` int(11) NOT NULL,\n				`challenges_timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);'),
-(132, '131', 'Make tax field 3 decimal places', '200709', 'alter table `si_tax` change `tax_percentage` `tax_percentage` decimal (10,3)  NULL');
+(129, '128', 'Add user table', '200709', 'CREATE TABLE IF NOT EXISTS `si_users` (\n			`user_id` int(11) NOT NULL auto_increment,\n			`user_email` varchar(255) NOT NULL,\n			`user_name` varchar(255) NOT NULL,\n			`user_group` varchar(255) NOT NULL,\n			`user_domain` varchar(255) NOT NULL,\n			`user_password` varchar(255) NOT NULL,\n			PRIMARY KEY  (`user_id`)\n			) ;'),
+(130, '129', 'Fill user table with default values', '200709', 'INSERT INTO `si_users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`) VALUES \n('''', ''demo@simpleinvoices.org'', ''demo'', ''1'', ''1'', MD5(''demo''))'),
+(131, '130', 'Create auth_challenges table', '200709', 'CREATE TABLE IF NOT EXISTS `si_auth_challenges` (\n				`challenges_key` int(11) NOT NULL,\n				`challenges_timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);'),
+(132, '131', 'Make tax field 3 decimal places', '200709', 'ALTER TABLE `si_tax` CHANGE `tax_percentage` `tax_percentage` DECIMAL (10,3)  NULL');
 
 -- --------------------------------------------------------
 

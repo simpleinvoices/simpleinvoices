@@ -44,7 +44,7 @@ function runPatches() {
 
 EOD;
 	//exit();
-	$refresh = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php>";
+	$refresh = '<meta http-equiv="refresh" content="2;url=index.php">';
 
 	} else {
 
