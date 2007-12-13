@@ -154,31 +154,19 @@ ADD b_co_footer TEXT";
         $patch['31']['name'] = "Adding data to the custom fields table";
         $patch['31']['patch'] = "
 	INSERT INTO `si_custom_fields` ( `cf_id` , `cf_custom_field` , `cf_custom_label` , `cf_display` )
-		VALUES (
-		'', 'biller_cf1', NULL , '0'
-		), (
-		'', 'biller_cf2', NULL , '0'
-		), (
-		'', 'biller_cf3', NULL , '0'
-		), (
-		'', 'biller_cf4', NULL , '0'
-		), (
-		'', 'customer_cf1', NULL , '0'
-		), (
-		'', 'customer_cf2', NULL , '0'
-		), (
-		'', 'customer_cf3', NULL , '0'
-		), (
-		'', 'customer_cf4', NULL , '0'
-		), (
-		'', 'product_cf1', NULL , '0'
-		), (
-		'', 'product_cf2', NULL , '0'
-		), (
-		'', 'product_cf3', NULL , '0'
-		), (
-		'', 'prod_custom_field4', NULL , '0'
-	);
+		VALUES
+		(NULL, 'biller_cf1', NULL , '0'),
+		(NULL, 'biller_cf2', NULL , '0'),
+		(NULL, 'biller_cf3', NULL , '0'),
+		(NULL, 'biller_cf4', NULL , '0'),
+		(NULL, 'customer_cf1', NULL , '0'),
+		(NULL, 'customer_cf2', NULL , '0'),
+		(NULL, 'customer_cf3', NULL , '0'),
+		(NULL, 'customer_cf4', NULL , '0'),
+		(NULL, 'product_cf1', NULL , '0'),
+		(NULL, 'product_cf2', NULL , '0'),
+		(NULL, 'product_cf3', NULL , '0'),
+		(NULL, 'product_cf4', NULL , '0');
 ";
         $patch['31']['date'] = "20061211";
 
@@ -206,16 +194,12 @@ ADD b_co_footer TEXT";
         $patch['35']['name'] = "Adding data to the custom fields table for invoices";
         $patch['35']['patch'] = "
         INSERT INTO `si_custom_fields` ( `cf_id` , `cf_custom_field` , `cf_custom_label` , `cf_display` )
-                VALUES (
-                '', 'invoice_cf1', NULL , '0'
-                ), (
-                '', 'invoice_cf2', NULL , '0'
-                ), (
-                '', 'invoice_cf3', NULL , '0'
-                ), (
-                '', 'invoice_cf4', NULL , '0'             
-	        );
-	";
+            VALUES 
+			(NULL, 'invoice_cf1', NULL , '0'),
+			(NULL, 'invoice_cf2', NULL , '0'),
+			(NULL, 'invoice_cf3', NULL , '0'),
+			(NULL, 'invoice_cf4', NULL , '0');
+";
         $patch['35']['date'] = "20070204";
 
         $patch['36']['name'] = "Adding custom fields to the invoices table";
@@ -625,8 +609,7 @@ NULL , 'logging', '0'
 	//sept release 
 
 	$patch['123']['name'] = "Add option to delete invoices into the system_defaults table";
-	$patch['123']['patch'] = "INSERT INTO `si_system_defaults` (`id`, `name`, `value`) VALUES 
-('', 'delete', 'N');";
+	$patch['123']['patch'] = "INSERT INTO `si_system_defaults` (`id`, `name`, `value`) VALUES (NULL, 'delete', 'N');";
 	$patch['123']['date'] = "200709";
 	
 	$patch['124']['name'] = "Set default language in new lang system";
@@ -675,8 +658,7 @@ NULL , 'logging', '0'
 	
 	
 	$patch['129']['name'] = "Fill si_user table with default values";
-	$patch['129']['patch'] = "INSERT INTO `si_users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`) VALUES 
-('', 'demo@simpleinvoices.org', 'guest', '1', '1', MD5('demo'))";
+	$patch['129']['patch'] = "INSERT INTO `si_users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`) VALUES (NULL, 'demo@simpleinvoices.org', 'guest', '1', '1', MD5('demo'))";
 	$patch['129']['date'] = "200709";
 	
 	$patch['130']['name'] = "Create si_auth_challenges table";
@@ -713,7 +695,7 @@ NULL , 'logging', '0'
 	
 	
 	
-/*Might not include the below Custom Field ones till the Spet release is out*/	
+/*Might not include the below Custom Field ones till the Sept release is out*/	
 
 /*
 	$patch['123']['name'] = "Create menu table";

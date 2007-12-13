@@ -18,7 +18,7 @@ if ( isset($_POST['process_payment']) ) {
 			".TB_PREFIX."account_payments
 		VALUES
 			(	
-				'',
+				NULL,
 				'$_POST[ac_inv_id]',
 				'$_POST[ac_amount]',
 				'$_POST[ac_notes]',

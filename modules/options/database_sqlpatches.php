@@ -182,7 +182,7 @@ function initialise_sql_patch() {
 
 	$sql_insert = "INSERT INTO ".TB_PREFIX."sql_patchmanager
  ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement )
-VALUES ('','1','Create ".TB_PREFIX."sql_patchmanger table','20060514','$sql_patch_init')";
+VALUES (NULL,'1','Create ".TB_PREFIX."sql_patchmanger table','20060514','$sql_patch_init')";
 	mysqlQuery($sql_insert, $conn) or die(mysql_error());
 
 	$display_block2 = "<tr><td>Step 3 - The SQL patch has been inserted into the SQL patch table<br></td></tr>";

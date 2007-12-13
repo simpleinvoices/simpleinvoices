@@ -56,7 +56,7 @@ EOD;
 	
 	echo "<br /><b>Payment Process</b><br />";		
 	foreach($sqls as $sql) {
-		$pattern = "/.*INSERT INTO si_account_payments VALUES \( '', '([0-9]+)', '([0-9]+)',/i";
+		$pattern = "/.*INSERT INTO si_account_payments VALUES \( NULL, '([0-9]+)', '([0-9]+)',/i";
 		if(preg_match($pattern,$sql['sqlquerie'],$match)) {
 			echo "User $sql[userid] processed invoice $match[1] on $sql[timestamp] with amount $match[2].<br />";
 		}

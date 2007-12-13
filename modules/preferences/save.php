@@ -15,7 +15,7 @@ $sql = "INSERT into
 		".TB_PREFIX."preferences
 	VALUES
 		(
-			'',
+			NULL,
 			'$_POST[p_description]',
 			'$_POST[p_currency_sign]',
 			'$_POST[p_inv_heading]',

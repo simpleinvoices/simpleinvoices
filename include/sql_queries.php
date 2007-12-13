@@ -338,7 +338,7 @@ function insertProduct($enabled=1,$visible=1) {
 			".TB_PREFIX."products
 		VALUES
 			(	
-				'',
+				NULL,
 				'$_POST[description]',
 				'$_POST[unit_price]',
 				'$_POST[custom_field1]',
@@ -612,7 +612,7 @@ function insertBiller() {
 			".TB_PREFIX."biller
 		VALUES
 			(
-				'',
+				NULL,
 				'$_POST[name]',
 				'$_POST[street_address]',
 				'$_POST[street_address2]',
@@ -710,7 +710,7 @@ function updateCustomer() {
 function insertCustomer() {
 	
 	extract( $_POST );
-	$sql = "INSERT INTO ".TB_PREFIX."customers VALUES ('','$attention', '$name','$street_address','$street_address2','$city','$state','$zip_code','$country','$phone', '$mobile_phone', '$fax', '$email', '$notes', '$custom_field1', '$custom_field2', '$custom_field3', '$custom_field4', '$enabled')";
+	$sql = "INSERT INTO ".TB_PREFIX."customers VALUES (NULL,'$attention', '$name','$street_address','$street_address2','$city','$state','$zip_code','$country','$phone', '$mobile_phone', '$fax', '$email', '$notes', '$custom_field1', '$custom_field2', '$custom_field3', '$custom_field4', '$enabled')";
 	
 	return mysqlQuery($sql);
 	
@@ -848,7 +848,7 @@ function insertInvoice($type) {
 		)
 		VALUES
 		(
-			'',
+			NULL,
 			'$_POST[biller_id]',
 			'$_POST[customer_id]',
 			'$type',

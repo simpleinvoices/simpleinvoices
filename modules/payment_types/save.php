@@ -21,7 +21,7 @@ $sql = "INSERT into
 		".TB_PREFIX."payment_types
 	VALUES
 		(	
-			'',
+			NULL,
 			'$_POST[pt_description]',
 			'$_POST[pt_enabled]'
 		)";

@@ -21,7 +21,7 @@ $sql = "INSERT into
 		".TB_PREFIX."tax
 	VALUES
 		(	
-			'',
+			NULL,
 			'$_POST[tax_description]',
 			'$_POST[tax_percentage]',	
 			'$_POST[tax_enabled]'
