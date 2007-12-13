@@ -7,7 +7,7 @@ if (!isset ($_SESSION)) session_start();
 <title>Rico LiveGrid Plus-Example 3</title>
 
 <?php
-$sqltext="SELECT id,name,email,city FROM si_biller";
+$sqltext="SELECT id,name,email,city FROM ".TB_PREFIX."biller";
 
 $_SESSION['ex3']=$sqltext;
 require "applib.php";

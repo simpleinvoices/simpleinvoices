@@ -38,7 +38,7 @@ while($custom = mysql_fetch_array($query)) {
 
 
 /* check if any value set -> keeps all data for sure */
-$sql = "SELECT * FROM si_custom_fields";
+$sql = "SELECT * FROM ".TB_PREFIX."custom_fields";
 $query = mysql_query($sql);
 
 while($custom = mysql_fetch_array($query)) {
@@ -53,10 +53,10 @@ while($custom = mysql_fetch_array($query)) {
 			default: $case = 0;
 		}
 		if($match[1] != "biller") {
-			$sql = "SELECT id,custom_field".$match[2]." FROM si_$match[1]s";
+			$sql = "SELECT id,custom_field".$match[2]." FROM ".TB_PREFIX.$match[1] . "s";
 		}
 		else {
-			$sql = "SELECT id,custom_field".$match[2]." FROM si_$match[1]";
+			$sql = "SELECT id,custom_field".$match[2]." FROM ".TB_PREFIX.$match[1];
 		}
 		
 		//error_log($sql);

@@ -26,7 +26,7 @@ function mysqlQuery($sqlQuery) {
 		//error_log("Insert_id: ".mysql_insert_id($conn));
 
 		if(LOGGING && (preg_match($pattern,$sqlQuery) == 0)) {
-			$sql = "INSERT INTO  `si_log` (`id`,`timestamp` ,  `userid` ,  `sqlquerie`, `last_id` ) VALUES (NULL,CURRENT_TIMESTAMP ,  '$userid',  '". addslashes (preg_replace('/\s\s+/', ' ', trim($sqlQuery)))."','".mysql_insert_id()."');";
+			$sql = "INSERT INTO  `".TB_PREFIX."log` (`id`,`timestamp` ,  `userid` ,  `sqlquerie`, `last_id` ) VALUES (NULL,CURRENT_TIMESTAMP ,  '$userid',  '". addslashes (preg_replace('/\s\s+/', ' ', trim($sqlQuery)))."','".mysql_insert_id()."');";
 			mysql_unbuffered_query($sql,$log);
 		}
 		return $query;
@@ -717,7 +717,7 @@ function insertCustomer() {
 }
 
 function searchCustomers($search) {
-	$sql = "SELECT * FROM  `si_customers` WHERE  `name` LIKE  '%$search%'";
+	$sql = "SELECT * FROM  `".TB_PREFIX."customers` WHERE  `name` LIKE  '%$search%'";
 	$query = mysqlQuery($sql);
 	
 	$customers = null;
@@ -937,7 +937,7 @@ function updateInvoiceItem($id,$quantity,$product_id,$tax_id,$description) {
 
 function getMenuStructure() {
 	global $LANG;
-	$sql = "SELECT * FROM  `si_menu` WHERE enabled = 1 ORDER BY parentid,  `order`";
+	$sql = "SELECT * FROM  `".TB_PREFIX."menu` WHERE enabled = 1 ORDER BY parentid,  `order`";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	$menu = null;
 	
@@ -985,7 +985,7 @@ EOD;
 
 function searchBillerAndCustomerInvoice($biller,$customer) {
 	$sql = "SELECT b.name as biller, c.name as customer, i.id as invoice, i.date as date, i.type_id AS type_id,t.inv_ty_description as type
-	FROM si_biller b, si_invoices i, si_customers c, si_invoice_type t
+	FROM ".TB_PREFIX."biller b, ".TB_PREFIX."invoices i, ".TB_PREFIX."customers c, ".TB_PREFIX."invoice_type t
 	WHERE b.name LIKE  '%$biller%'
 	AND c.name LIKE  '%$customer%' 
 	AND i.biller_id = b.id 
@@ -996,7 +996,7 @@ function searchBillerAndCustomerInvoice($biller,$customer) {
 
 function searchInvoiceByDate($startdate,$enddate) {
 	$sql = "SELECT b.name as biller, c.name as customer, i.id as invoice, i.date as date,i.type_id AS type_id, t.inv_ty_description as type
-	FROM si_biller b, si_invoices i, si_customers c, si_invoice_type t
+	FROM ".TB_PREFIX."biller b, ".TB_PREFIX."invoices i, ".TB_PREFIX."customers c, ".TB_PREFIX."invoice_type t
 	WHERE i.date >= '$startdate' 
 	AND i.date <= '$enddate'
 	AND i.biller_id = b.id 

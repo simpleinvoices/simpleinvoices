@@ -39,7 +39,7 @@ EOD;
 
 	echo "<br /><b>Invoice created</b><br />";
 	foreach($sqls as $sql) {
-		$pattern = "/.*INSERT INTO si_invoices /i";
+		$pattern = "/.*INSERT INTO ".TB_PREFIX."invoices /i";
 		
 		if(preg_match($pattern,$sql['sqlquerie'])) {
 			echo "User $sql[userid] created invoice $sql[last_id] on $sql[timestamp].<br />";
@@ -48,7 +48,7 @@ EOD;
 
 	echo "<br /><b>Invoice modified</b><br />";		
 	foreach($sqls as $sql) {
-		$pattern = "/.*UPDATE si_invoices .* WHERE id [^0-9]*([0-9]+)/i";
+		$pattern = "/.*UPDATE ".TB_PREFIX."invoices .* WHERE id [^0-9]*([0-9]+)/i";
 		if(preg_match($pattern,$sql['sqlquerie'],$match)) {
 			echo "User $sql[userid] modified invoice $match[1] on $sql[timestamp].<br />";
 		}
@@ -56,7 +56,7 @@ EOD;
 	
 	echo "<br /><b>Payment Process</b><br />";		
 	foreach($sqls as $sql) {
-		$pattern = "/.*INSERT INTO si_account_payments VALUES \( NULL, '([0-9]+)', '([0-9]+)',/i";
+		$pattern = "/.*INSERT INTO ".TB_PREFIX."account_payments VALUES \( NULL, '([0-9]+)', '([0-9]+)',/i";
 		if(preg_match($pattern,$sql['sqlquerie'],$match)) {
 			echo "User $sql[userid] processed invoice $match[1] on $sql[timestamp] with amount $match[2].<br />";
 		}

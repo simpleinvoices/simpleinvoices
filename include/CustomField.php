@@ -46,7 +46,7 @@ abstract class CustomField {
 	
 	/* Updates the custom field value */
 	function updateInput($value, $itemId) {
-		$sql = "SELECT * FROM si_customFieldValues WHERE customFieldID = $this->fieldId AND itemID = $itemId";
+		$sql = "SELECT * FROM ".TB_PREFIX."customFieldValues WHERE customFieldID = $this->fieldId AND itemID = $itemId";
 		
 		error_log($sql);
 		$query = mysql_query($sql);
@@ -57,14 +57,14 @@ abstract class CustomField {
 			$this->saveInput($value,$itemId);
 		}
 		else {
-			$sql = "UPDATE  `si_customFieldValues` SET  `value` =  '$value' WHERE  customFieldId = $this->fieldId AND itemId = $itemId" ;
+			$sql = "UPDATE  `".TB_PREFIX."customFieldValues` SET  `value` =  '$value' WHERE  customFieldId = $this->fieldId AND itemId = $itemId" ;
 			mysqlQuery($sql);
 		}
 	}
 	
 	/* Returns the value for a choosen field and item. Should be unique, because the itemId for each categorie is unique. */
 	function getFieldValue($customeFieldId, $itemId) {
-		$sql = "SELECT * FROM si_customFieldValues WHERE (customFieldId = $customeFieldId && itemId = $itemId)";
+		$sql = "SELECT * FROM ".TB_PREFIX."customFieldValues WHERE (customFieldId = $customeFieldId && itemId = $itemId)";
 		$query = mysqlQuery($sql);
 		
 		if($query) {
@@ -76,7 +76,7 @@ abstract class CustomField {
 	}
 	
 	function getValue($id) {
-		$sql = "SELECT * FROM si_customFieldValues WHERE id = $id";
+		$sql = "SELECT * FROM ".TB_PREFIX."customFieldValues WHERE id = $id";
 		$query = mysqlQuery($sql);
 		
 		if($query) {
@@ -90,7 +90,7 @@ abstract class CustomField {
 	/* Stores the input into the database */
 	function saveInput($value,$itemId) {
 		//error_log($value." aaa".$itemId);
-		$sql = "INSERT INTO si_customFieldValues (customFieldId,itemId,value) VALUES('".$this->fieldId."','".$itemId."','".$value."');";
+		$sql = "INSERT INTO ".TB_PREFIX."customFieldValues (customFieldId,itemId,value) VALUES('".$this->fieldId."','".$itemId."','".$value."');";
 		//error_log($sql);
 		mysqlQuery($sql);
 	}

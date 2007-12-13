@@ -141,7 +141,7 @@ function readPlugins() {
 }
 
 function getCategories() {
-	$sql = "SELECT * FROM si_customFieldCategories";
+	$sql = "SELECT * FROM ".TB_PREFIX."customFieldCategories";
 	$query = mysql_query($sql);
 	
 	for($i=0;$cat = mysql_fetch_array($query);$i++) {

@@ -191,15 +191,15 @@ VALUES (NULL,'1','Create ".TB_PREFIX."sql_patchmanger table','20060514','$sql_pa
 }
 
 function patch126() {
-	$sql = "SELECT * FROM si_invoice_items WHERE product_id = 0";
+	$sql = "SELECT * FROM ".TB_PREFIX."invoice_items WHERE product_id = 0";
 	$query = mysqlQuery($sql);
 	
 	while($res = mysql_fetch_array($query)) {
-		$sql = "INSERT INTO  `si_products` (  `id` ,  `description` ,  `unit_price` ,  `enabled` ,  `visible` ) 
+		$sql = "INSERT INTO  `".TB_PREFIX."products` (  `id` ,  `description` ,  `unit_price` ,  `enabled` ,  `visible` ) 
 			VALUES (NULL ,  '$res[description]',  '$res[gross_total]', '0',  '0');";
 		mysqlQuery($sql);
 		$id = mysql_insert_id();
-		$sql = "UPDATE  `si_invoice_items` SET  `product_id` =  '$id', `unit_price` = '$res[gross_total]' WHERE  `si_invoice_items`.`id` =$res[id]";
+		$sql = "UPDATE  `".TB_PREFIX."invoice_items` SET  `product_id` =  '$id', `unit_price` = '$res[gross_total]' WHERE  `".TB_PREFIX."invoice_items`.`id` =$res[id]";
 
 		mysqlQuery($sql);
 	}

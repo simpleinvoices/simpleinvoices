@@ -14,11 +14,11 @@
 unset($LANG);
 
 /*if upgrading from old version then getDefaultLang wont work during install*/
-if(checkTableExists('si_system_defaults') == true)
+if(checkTableExists(TB_PREFIX.'system_defaults') == true)
 {
 	$language = getDefaultLanguage();
 }
-if(checkTableExists('si_system_defaults') == false)
+if(checkTableExists(TB_PREFIX.'system_defaults') == false)
 {
 	$language = "en-gb";
 }  
