@@ -331,6 +331,7 @@ $LANG['using_simple_invoices'] = "Using Simple Invoices";//1
 $LANG['view'] = "View";//1
 $LANG['want_more_fields'] = "want more fields";//1
 $LANG['welcome'] = "Welcome to ";//1
+$LANG['wheres_the_edit_button'] = "Wheres the edit button ";//1
 $LANG['what_are_custom_fields'] = "What are custom fields ";//1
 $LANG['whats_this_page_about'] = "Whats this page about ";//1
 $LANG['zip'] = "Zip code";//1
