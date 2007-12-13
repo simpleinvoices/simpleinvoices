@@ -54,7 +54,7 @@
 	<!-- Additional IE/Win specific style sheet (Conditional Comments) -->
 	<!--[if IE 7]>
 			<link rel="stylesheet" type="text/css" href="./templates/default/css/menu_header_hackIE.css" media="screen" />
-	<link rel="stylesheet" href="./temlates/default/css/tabs-ie.css" type="text/css" media="projection, screen" />
+	<link rel="stylesheet" href="./templates/default/css/tabs-ie.css" type="text/css" media="projection, screen" />
 	<![endif]-->
 
 	<!-- Additional IE/Win specific style sheet (Conditional Comments) -->
