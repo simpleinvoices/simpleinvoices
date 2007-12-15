@@ -2,6 +2,8 @@
 
 session_start();
 
+include("functions.php");
+
 // +-----------------------------------------------------------------------+
 // | Simple Invoices                                                       |
 // | Licence: GNU General Public License 2.0                               |
@@ -30,36 +32,4 @@ else {
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="./css/screen.css" media="all"/>
 
-
-<div id="Wrapper">
-	<div id="Container">
- 
-		<div class="Full">
-			<div class="col">
-   	
-			<h1>Simple Invoices :: Installer</h1>
-			<hr />
-			<br />
-			
-			<h2><?php echo $LANG['welcome'] ."<br />"; ?></h2>
-			
-			<div id="welcome">
-				<p><?php echo $LANG['intro'] ."<br />"; ?></p>
-			</div>
-			
-			<br /><br />
-
-			<form method="post" action="preferences.php">
-				<input type="submit" name="Continue" value="<?php echo $LANG['continue']; ?>">
-			</form>
-
-			<hr />
-
-			</div>
-			<div class="bottom"></div>
-		</div>
-	</div>
-</div>
-
-</body>
-</html>
+<body>

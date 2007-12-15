@@ -1,25 +1,4 @@
-<?php
-session_start();
-
-$language = $_SESSION['language'];
-
-// +-----------------------------------------------------------------------+
-// | Simple Invoices                                                       |
-// | Licence: GNU General Public License 2.0                               |
-// +-----------------------------------------------------------------------+
-
-// Selection de la langue de l'installeur
-include('lang/lang_'.$language.'.php');
-?>	
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<title>Simple Invoices | Installer</title>
-	
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="./css/screen.css" media="all"/>
-
+<?php include("header.php"); ?>
 
 <div id="Wrapper">
 	<div id="Container">
@@ -32,7 +11,7 @@ include('lang/lang_'.$language.'.php');
 
 			<!-- connexion -->
 			<form name="connection" method="post" action="connection_post.php">
-			<input type="hidden" name="Click" value="on">
+				<input type="hidden" name="Click" value="on">
 
 				<label for="host"><?php echo "Host:".$LANG['DBHost'] ?></label>
 				<input name="host" type="text" value="<?php echo $host; ?>" size="20">
@@ -67,6 +46,4 @@ include('lang/lang_'.$language.'.php');
 		</div>
 	</div>
 </div>
-
-</body>
-</html>
+<?php include("footer.php"); ?>

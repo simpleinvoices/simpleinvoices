@@ -1,13 +1,14 @@
 <?php
 //checkLogin();
 
+//ini_set("display_errors","On");
 /*Enter your database information */
 // $db_server can be mysql or pgsql
 $db_server = "mysql";
 $db_host = "localhost";
-$db_name = "simple_invoices";
+$db_name = "simpleinvoices";
 $db_user = "root";
-$db_password = "";
+$db_password = "root";
 
 //if you want to make Simple Invoices secure and require a username and password set this to true
 //$authenticationOn = "true";
@@ -80,6 +81,6 @@ $smarty->assign('config_inc_old_js', $config_inc_old_js);
 #error_reporting(0);
 
 //To turn loggin on set the below to true
-#define("LOGGING",false);
+define("LOGGING",false);
 #define("LOGGING",true);
 ?>
