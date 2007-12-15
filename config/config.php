@@ -6,9 +6,9 @@
 // $db_server can be mysql or pgsql
 $db_server = "mysql";
 $db_host = "localhost";
-$db_name = "simpleinvoices";
+$db_name = "simple_invoices";
 $db_user = "root";
-$db_password = "root";
+$db_password = "";
 
 //if you want to make Simple Invoices secure and require a username and password set this to true
 //$authenticationOn = "true";
