@@ -68,9 +68,9 @@
 	
 	<!-- customer-details -->
 	<link rel="stylesheet" href="./templates/default/css/tabs.css" type="text/css" media="print, projection, screen" />
-	<script type="text/javascript" src="./modules/include/js/AJS.js"></script>
-	<script type="text/javascript" src="./modules/include/js/AJS_fx.js"></script>
-	<script type="text/javascript" src="./modules/include/js/gb_scripts.js"></script>
+	<script type="text/javascript" src="./library/ajs/AJS.js"></script>
+	<script type="text/javascript" src="./library/ajs/AJS_fx.js"></script>
+	<script type="text/javascript" src="./library/ajs/gb_scripts.js"></script>
 	<link href="./templates/default/css/gb_styles.css" rel="stylesheet" type="text/css" />
 	
 	<!--[if gte IE 5.5]>
