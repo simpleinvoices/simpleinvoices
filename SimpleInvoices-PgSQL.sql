@@ -3,18 +3,7 @@
 -- version 2.9.2
 -- http://www.phpmyadmin.net
 -- 
--- Host: localhost
--- Generation Time: Sep 28, 2007 at 03:42 PM
--- Server version: 5.0.27
--- PHP Version: 5.2.1
--- 
--- Database: simple_invoices_test
--- 
 
--- --------------------------------------------------------
--- 
--- Table structure for table si_users
--- 
 BEGIN;
 
 CREATE TABLE si_users (
@@ -23,12 +12,12 @@ CREATE TABLE si_users (
   user_name varchar(255) NOT NULL,
   user_group varchar(255) NOT NULL,
   user_domain varchar(255) NOT NULL,
-  user_password varchar(255) NOT NULL
+  user_password char(32) NOT NULL
 );
 
--- 
--- Dumping data for table si_users
--- 
+COMMENT ON TABLE si_users IS $$User and authentication data$$;
+COMMENT ON COLUMN si_users.user_email IS $$Email address functions as the user name for the purpose of authentication$$;
+COMMENT ON COLUMN si_users.user_password IS $$md5 of the actual password$$;
 
 INSERT INTO si_users (user_id, user_email, user_name, user_group, user_domain, user_password) VALUES 
 (1, 'demo@simpleinvoices.org', 'demo', '1', '1', 'fe01ce2a7fbac8fafaed7c982a04e229');
@@ -62,10 +51,6 @@ CREATE TABLE si_customFieldValues (
 );
 COMMENT ON COLUMN si_customfieldvalues.itemid IS 'could be invoice-id,customer-id etc.';
 
--- 
--- Table structure for table si_tax
--- 
-
 CREATE TABLE si_tax (
   tax_id serial PRIMARY KEY,
   tax_description varchar(50),
@@ -73,9 +58,8 @@ CREATE TABLE si_tax (
   tax_enabled boolean NOT NULL default true
 );
 
--- 
--- Dumping data for table si_tax
--- 
+COMMENT ON TABLE si_tax IS $$Basic tax attributes$$;
+COMMENT ON COLUMN si_tax.tax_description IS $$Brief description, any HTML is escaped on display$$;
 
 INSERT INTO si_tax (tax_id, tax_description, tax_percentage, tax_enabled) VALUES 
 (1, 'GST (AUS)', 10.000, true);
@@ -93,14 +77,6 @@ INSERT INTO si_tax (tax_id, tax_description, tax_percentage, tax_enabled) VALUES
 (7, 'MWSt (DE)', 16.000, true);
 SELECT setval('si_tax_tax_id_seq', 7);
 
--- --------------------------------------------------------
-
-
--- --------------------------------------------------------
--- 
--- Table structure for table si_preferences
--- 
-
 CREATE TABLE si_preferences (
   pref_id serial PRIMARY KEY,
   pref_description varchar(50) ,
@@ -117,9 +93,7 @@ CREATE TABLE si_preferences (
   pref_enabled boolean NOT NULL default true
 );
 
--- 
--- Dumping data for table si_preferences
--- 
+COMMENT ON TABLE si_preferences IS $$Invoice preferences, options concerning how an invoice is displayed$$;
 
 INSERT INTO si_preferences (pref_id, pref_description, pref_currency_sign, pref_inv_heading, pref_inv_wording, pref_inv_detail_heading, pref_inv_detail_line, pref_inv_payment_method, pref_inv_payment_line1_name, pref_inv_payment_line1_value, pref_inv_payment_line2_name, pref_inv_payment_line2_value, pref_enabled) VALUES 
 (1, 'Invoice - default', '$', 'Invoice', 'Invoice', 'Details', 'Payment is to be made within 14 days of the invoice being sent', 'Electronic Funds Transfer', 'Account name:', 'H. & M. Simpson', 'Account number:', '0123-4567-7890', '1');
@@ -132,10 +106,6 @@ INSERT INTO si_preferences (pref_id, pref_description, pref_currency_sign, pref_
 INSERT INTO si_preferences (pref_id, pref_description, pref_currency_sign, pref_inv_heading, pref_inv_wording, pref_inv_detail_heading, pref_inv_detail_line, pref_inv_payment_method, pref_inv_payment_line1_name, pref_inv_payment_line1_value, pref_inv_payment_line2_name, pref_inv_payment_line2_value, pref_enabled) VALUES 
 (5, 'Quote - default', '$', 'Quote', 'Quote', 'Details', '<br>This is a quote of the final value of services rendered.<br>Thank you', '', '', '', '', '', '1');
 SELECT setval('si_preferences_pref_id_seq', 5);
-
--- 
--- Table structure for table si_products
--- 
 
 CREATE TABLE si_products (
   id serial PRIMARY KEY,
@@ -150,9 +120,7 @@ CREATE TABLE si_products (
   visible boolean NOT NULL default true
 );
 
--- 
--- Dumping data for table si_products
--- 
+COMMENT ON TABLE si_products IS $$Products, required by all invoice line items$$;
 
 INSERT INTO si_products (id, description, unit_price, custom_field1, custom_field2, custom_field3, custom_field4, notes, enabled, visible) VALUES 
 (1, 'IBM Netfinity 5000', 150.00, NULL, NULL, NULL, NULL, '', true, true);
@@ -168,32 +136,24 @@ INSERT INTO si_products (id, description, unit_price, custom_field1, custom_fiel
 (6, 'For ploughing services for the period 01 Jan - 01 Feb 2006', 145.00, NULL, NULL, NULL, NULL, '', false, false);
 SELECT setval('si_products_id_seq', 6);
 
-
+-- SC: Unused auth challenge table
+-- CREATE TABLE si_auth_challenges (
+--   challenges_key int NOT NULL,
+--   challenges_timestamp timestamp NOT NULL default CURRENT_TIMESTAMP
+-- );
+--
+-- COMMENT ON TABLE si_auth_challenges IS $$Authentication challenges, used as part of MD5-HMAC auth$$;
+--
+-- CREATE OR REPLACE FUNCTION updated_auth_challenge() RETURNS trigger AS $$
+-- BEGIN
+-- 	UPDATE si_auth_challenges SET challenges_timestamp = current_timestamp
+-- 	WHERE challenges_key = new.challenges_key;
+-- END
+-- $$ LANGUAGE plpgsql;
 -- 
--- Table structure for table si_auth_challenges
--- 
+-- CREATE TRIGGER update_auth_challenge AFTER UPDATE ON si_auth_challenges
+-- 	FOR EACH ROW EXECUTE PROCEDURE updated_auth_challenge();
 
-CREATE TABLE si_auth_challenges (
-  challenges_key int NOT NULL,
-  challenges_timestamp timestamp NOT NULL default CURRENT_TIMESTAMP
-);
-
-CREATE OR REPLACE FUNCTION updated_auth_challenge() RETURNS trigger AS $$
-BEGIN
-	UPDATE si_auth_challenges SET challenges_timestamp = current_timestamp
-	WHERE challenges_key = new.challenges_key;
-END
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER update_auth_challenge AFTER UPDATE ON si_auth_challenges
-	FOR EACH ROW EXECUTE PROCEDURE updated_auth_challenge();
-
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table si_biller
--- 
 
 CREATE TABLE si_biller (
   id serial PRIMARY KEY,
@@ -218,9 +178,7 @@ CREATE TABLE si_biller (
   enabled boolean NOT NULL default true
 );
 
--- 
--- Dumping data for table si_biller
--- 
+COMMENT ON TABLE si_biller IS $$Biller details$$;
 
 INSERT INTO si_biller (id, name, street_address, street_address2, city, state, zip_code, country, phone, mobile_phone, fax, email, logo, footer, notes, custom_field1, custom_field2, custom_field3, custom_field4, enabled) VALUES 
 (1, 'Mr Plough', '43 Evergreen Terace', '', 'Springfield', 'New York', '90245', '', '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'homer@mrplough.com', 'ubuntulogo.png', '', '', '', '7898-87987-87', '', '', true);
@@ -232,8 +190,6 @@ INSERT INTO si_biller (id, name, street_address, street_address2, city, state, z
 (4, 'Fawlty Towers', '13 Seaside Drive', NULL, 'Torquay', 'Brixton on Avon', '65894', 'United Kingdom', '089 6985 4569', '0425 5477 8789', '089 6985 4568', 'penny@fawltytowers.co.uk', NULL, NULL, NULL, NULL, NULL, NULL, NULL, true);
 SELECT setval('si_biller_id_seq', 4);
 
--- --------------------------------------------------------
-
 -- 
 -- Table structure for table si_custom_fields
 -- 
@@ -244,10 +200,6 @@ CREATE TABLE si_custom_fields (
   cf_custom_label varchar(255),
   cf_display boolean NOT NULL default true
 );
-
--- 
--- Dumping data for table si_custom_fields
--- 
 
 INSERT INTO si_custom_fields (cf_id, cf_custom_field, cf_custom_label, cf_display) VALUES 
 (1, 'biller_cf1', NULL, false);
@@ -283,12 +235,6 @@ INSERT INTO si_custom_fields (cf_id, cf_custom_field, cf_custom_label, cf_displa
 (16, 'invoice_cf4', NULL, false);
 SELECT setval('si_custom_fields_cf_id_seq', 16);
 
--- --------------------------------------------------------
-
--- 
--- Table structure for table si_customers
--- 
-
 CREATE TABLE si_customers (
   id serial PRIMARY KEY,
   attention varchar(255) ,
@@ -311,9 +257,7 @@ CREATE TABLE si_customers (
   enabled boolean NOT NULL default true
 );
 
--- 
--- Dumping data for table si_customers
--- 
+COMMENt ON TABLE si_customers IS $$Customer details$$;
 
 INSERT INTO si_customers (id, attention, name, street_address, street_address2, city, state, zip_code, country, phone, mobile_phone, fax, email, notes, custom_field1, custom_field2, custom_field3, custom_field4, enabled) VALUES 
 (1, 'Moe Sivloski', 'Moes Tarvern', '45 Main Road', NULL, 'Springfield', 'New York', '65891', '', '04 1234 5698', NULL, '04 5689 4566', 'moe@moestavern.com', '<p><strong>Moe&#39;s Tavern</strong> is a fictional <a href="http://en.wikipedia.org/wiki/Bar_%28establishment%29" title="Bar (establishment)">bar</a> seen on <em><a href="http://en.wikipedia.org/wiki/The_Simpsons" title="The Simpsons">The Simpsons</a></em>. The owner of the bar is <a href="http://en.wikipedia.org/wiki/Moe_Szyslak" title="Moe Szyslak">Moe Szyslak</a>.</p> <p>In The Simpsons world, it is located on the corner of Walnut Street, neighboring King Toot&#39;s Music Store, across the street is the Moeview Motel, and a factory formerly owned by <a href="http://en.wikipedia.org/wiki/Bart_Simpson" title="Bart Simpson">Bart Simpson</a>, until it collapsed. The inside of the bar has a few pool tables and a dartboard. It is very dank and &quot;smells like <a href="http://en.wikipedia.org/wiki/Urine" title="Urine">tinkle</a>.&quot; Because female customers are so rare, Moe frequently uses the women&#39;s restroom as an office. Moe claimed that there haven&#39;t been any ladies at Moe&#39;s since <a href="http://en.wikipedia.org/wiki/1979" title="1979">1979</a> (though earlier episodes show otherwise). A jar of pickled eggs perpetually stands on the bar. Another recurring element is a rat problem. This can be attributed to the episode <a href="http://en.wikipedia.org/wiki/Homer%27s_Enemy" title="Homer&#39;s Enemy">Homer&#39;s Enemy</a> in which Bart&#39;s factory collapses, and the rats are then shown to find a new home at Moe&#39;s. In &quot;<a href="http://en.wikipedia.org/wiki/Who_Shot_Mr._Burns" title="Who Shot Mr. Burns">Who Shot Mr. Burns</a>,&quot; Moe&#39;s Tavern was forced to close down because Mr. Burns&#39; slant-drilling operation near the tavern caused unsafe pollution. It was stated in the &quot;<a href="http://en.wikipedia.org/wiki/Flaming_Moe%27s" title="Flaming Moe&#39;s">Flaming Moe&#39;s</a>&quot; episode that Moe&#39;s Tavern was on Walnut Street. The phone number would be 76484377, since in &quot;<a href="http://en.wikipedia.org/wiki/Homer_the_Smithers" title="Homer the Smithers">Homer the Smithers</a>,&quot; Mr. Burns tried to call Smithers but did not know his phone number. He tried the buttons marked with the letters for Smithers and called Moe&#39;s. In &quot;<a href="http://en.wikipedia.org/wiki/Principal_Charming" title="Principal Charming">Principal Charming</a>&quot; Bart is asked to call Homer by Principal Skinner, the number visible on the card is WORK: KLondike 5-6832 HOME: KLondike 5-6754 MOE&#39;S TAVERN: KLondike 5-1239 , Moe answers the phone and Bart asks for Homer Sexual. The bar serves <a href="http://en.wikipedia.org/wiki/Duff_Beer" title="Duff Beer">Duff Beer</a> and Red Tick Beer, a beer flavored with dogs.</p>', NULL, NULL, NULL, NULL, true);
@@ -323,20 +267,12 @@ INSERT INTO si_customers (id, attention, name, street_address, street_address2, 
 (3, 'Kath Day-Knight', 'Kath and Kim Pty Ltd', '82 Fountain Drive', NULL, 'Fountain Lakes', 'VIC', '3567', 'Australia', '03 9658 7456', NULL, '03 9658 7457', 'kath@kathandkim.com.au', 'Kath Day-Knight (<a href="http://en.wikipedia.org/wiki/Jane_Turner" title="Jane Turner">Jane Turner</a>) is an &#39;empty nester&#39; divorc&eacute;e who wants to enjoy time with her &quot;hunk o&#39; spunk&quot; Kel Knight (<a href="http://en.wikipedia.org/wiki/Glenn_Robbins" title="Glenn Robbins">Glenn Robbins</a>), a local &quot;purveyor of fine meats&quot;, but whose lifestyle is often cramped by the presence of her self-indulgent and spoilt rotten twenty-something daughter Kim Craig <a href="http://en.wikipedia.org/wiki/List_of_French_phrases_used_by_English_speakers#I_.E2.80.93_Q" title="List of French phrases used by English speakers">n&eacute;e</a> Day (<a href="http://en.wikipedia.org/wiki/Gina_Riley" title="Gina Riley">Gina Riley</a>). Kim enjoys frequent and lengthy periods of spiteful estrangement from her forgiving husband Brett Craig (<a href="http://en.wikipedia.org/wiki/Peter_Rowsthorn" title="Peter Rowsthorn">Peter Rowsthorn</a>) for imagined slights and misdemeanors, followed by loving reconciliations with him. During Kim and Brett&#39;s frequent rough patches Kim usually seeks solace from her servile &quot;second best friend&quot; Sharon Strzelecki (<a href="http://en.wikipedia.org/wiki/Magda_Szubanski" title="Magda Szubanski">Magda Szubanski</a>), screaming abuse at Sharon for minor infractions while issuing her with intricately-instructed tasks, such as stalking Brett. Kim and Brett had a baby in the final episode of the second series whom they named Epponnee-Raelene Kathleen Darlene Charlene Craig, shortened to Epponnee-Rae.', NULL, NULL, NULL, NULL, true);
 SELECT setval('si_customers_id_seq', 3);
 
--- --------------------------------------------------------
-
--- --------------------------------------------------------
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table si_invoice_type
--- 
-
 CREATE TABLE si_invoice_type (
   inv_ty_id serial PRIMARY KEY,
   inv_ty_description varchar(25) NOT NULL default ''
 );
+
+COMMENT ON TABLE si_invoice_type IS $$Type of invoice is used to determine interface options$$;
 
 INSERT INTO si_invoice_type (inv_ty_id, inv_ty_description) VALUES 
 (1, 'Total');
@@ -345,12 +281,6 @@ INSERT INTO si_invoice_type (inv_ty_id, inv_ty_description) VALUES
 INSERT INTO si_invoice_type (inv_ty_id, inv_ty_description) VALUES 
 (3, 'Consulting');
 SELECT setval('si_invoice_type_inv_ty_id_seq', 3);
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table si_invoices
--- 
 
 CREATE TABLE si_invoices (
   id serial PRIMARY KEY,
@@ -367,9 +297,7 @@ CREATE TABLE si_invoices (
   status_id int NOT NULL default 0
 );
 
--- 
--- Dumping data for table si_invoices
--- 
+COMMENT ON TABLE si_invoices IS $$The invoices$$;
 
 INSERT INTO si_invoices (id, biller_id, customer_id, type_id, preference_id, date, custom_field1, custom_field2, custom_field3, custom_field4, note) VALUES 
 (1, 4, 3, 2, 1, '2007-02-03 00:00:00', NULL, NULL, NULL, NULL, 'Will be delivered via certified post');
@@ -389,11 +317,6 @@ INSERT INTO si_invoices (id, biller_id, customer_id, type_id, preference_id, dat
 (8, 4, 3, 2, 1, '2007-02-06 00:00:00', NULL, NULL, NULL, NULL, '');
 SELECT setval('si_invoices_id_seq', 8);
 
--- --------------------------------------------------------
--- 
--- Table structure for table si_invoice_items
--- 
-
 CREATE TABLE si_invoice_items (
   id serial PRIMARY KEY,
   invoice_id int NOT NULL REFERENCES si_invoices(id),
@@ -407,10 +330,13 @@ CREATE TABLE si_invoice_items (
   description text,
   total numeric(25,2) default '0.00'
 );
-
--- 
--- Dumping data for table si_invoice_items
--- 
+COMMENT ON TABLE si_invoice_items IS $$Invoice line items$$;
+COMMENT ON COLUMN si_invoice_items.unit_price IS $$Price of a single unit of the product$$;
+COMMENT ON COLUMN si_invoice_items.tax_id IS $$Tax is associated with line items, not the invoice, one tax only$$;
+COMMENT ON COLUMN si_invoice_items.tax IS $$Percentage tax, i.e. 5.000 is 5%$$;
+COMMENT ON COLUMN si_invoice_items.tax_amount IS $$Tax charged$$;
+COMMENT ON COLUMN si_invoice_items.gross_total IS $$Pre-tax line item total$$;
+COMMENT ON COLUMN si_invoice_items.total IS $$Post-tax line item total$$;
 
 INSERT INTO si_invoice_items (id, invoice_id, quantity, product_id, unit_price, tax_id, tax, tax_amount, gross_total, description, total) VALUES 
 (1, 1, 1, 1, 150.00, '1', 10.00, 15.00, 150.00, '00', 165.00);
@@ -446,11 +372,6 @@ INSERT INTO si_invoice_items (id, invoice_id, quantity, product_id, unit_price, 
 (16, 8, 10, 4, 15.50, '1', 10.00, 15.50, 155.00, '00', 170.50);
 SELECT setval('si_invoice_items_id_seq', 16);
 
-
--- 
--- Table structure for table si_log
--- 
-
 CREATE TABLE si_log (
   id bigserial PRIMARY KEY,
   timestamp timestamp NOT NULL default CURRENT_TIMESTAMP,
@@ -458,10 +379,8 @@ CREATE TABLE si_log (
   sqlquerie text NOT NULL,
   last_id int
 );
-
--- 
--- Dumping data for table si_log
--- 
+COMMENT ON TABLE si_log IS $$Query logs for queries done through dbQuery$$;
+COMMENT ON COLUMN si_log.last_id IS $$The value of the most recent sequence to increment in the session the entry was created in$$;
 
 INSERT INTO si_log (id, timestamp, userid, sqlquerie, last_id) VALUES 
 (1, '2007-09-28 15:41:20', '1', 'ALTER TABLE si_log ADD last_id INT NULL ;', 0);
@@ -485,37 +404,18 @@ INSERT INTO si_log (id, timestamp, userid, sqlquerie, last_id) VALUES
 (10, '2007-09-28 15:41:20', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (131,''Make tax field 3 decimal places'',200709,''alter table si_tax change tax_percentage tax_percentage decimal (10,3) NULL'')', 132);
 SELECT setval('si_log_id_seq', 10);
 
--- --------------------------------------------------------
-
--- 
--- Table structure for table si_payment_types
--- 
-
 CREATE TABLE si_payment_types (
   pt_id serial PRIMARY KEY,
   pt_description varchar(250) NOT NULL,
   pt_enabled boolean NOT NULL default true
 );
-
--- 
--- Dumping data for table si_payment_types
--- 
+COMMENT ON TABLE si_payment_types IS $$Different payment methods$$;
 
 INSERT INTO si_payment_types (pt_id, pt_description, pt_enabled) VALUES 
 (1, 'Cash', true);
 INSERT INTO si_payment_types (pt_id, pt_description, pt_enabled) VALUES 
 (2, 'Credit Card', true);
 SELECT setval('si_payment_types_pt_id_seq', 2);
-
--- --------------------------------------------------------
-
--- --------------------------------------------------------
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table si_sql_patchmanager
--- 
 
 CREATE TABLE si_sql_patchmanager (
   sql_id serial PRIMARY KEY,
@@ -524,10 +424,11 @@ CREATE TABLE si_sql_patchmanager (
   sql_release varchar(25) NOT NULL default '',
   sql_statement text NOT NULL
 );
-
--- 
--- Dumping data for table si_sql_patchmanager
--- 
+COMMENT ON TABLE si_sql_patchmanager IS $$Tracking table for applied SQL patches$$;
+COMMENT ON COLUMN si_sql_patchmanager.sql_patch IS $$Textual description of the patch applied$$;
+COMMENT ON COLUMN si_sql_patchmanager.sql_statement IS $$The SQL that makes up the patch$$;
+COMMENT ON COLUMN si_sql_patchmanager.sql_patch_ref IS $$User-visible patch identifier$$;
+COMMENT ON COLUMN si_sql_patchmanager.sql_release IS $$Generally a date, not used by the application$$;
 
 INSERT INTO si_sql_patchmanager (sql_id, sql_patch_ref, sql_patch, sql_release, sql_statement) VALUES 
 (1, '1', 'Create si_sql_patchmanger table', '20060514', 'CREATE TABLE si_sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 50 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) TYPE = MYISAM ');
@@ -834,21 +735,13 @@ INSERT INTO si_sql_patchmanager (sql_id, sql_patch_ref, sql_patch, sql_release, 
 (141, '140', 'Correct Foreign Key Invoice ID Field Type in AC Payments Table', '20071126', $$SELECT 1+1$$);
 SELECT setval('si_sql_patchmanager_sql_id_seq', 141);
 
--- --------------------------------------------------------
-
--- 
--- Table structure for table si_system_defaults
--- 
 
 CREATE TABLE si_system_defaults (
   id serial PRIMARY KEY,
   name varchar(30) UNIQUE NOT NULL,
   value varchar(30) NOT NULL
 );
-
--- 
--- Dumping data for table si_system_defaults
--- 
+COMMENT ON TABLE si_system_defaults IS $$Default values for various aspects of the system, such as the biller$$;
 
 INSERT INTO si_system_defaults (id, name, value) VALUES 
 (1, 'biller', '4');
@@ -896,8 +789,6 @@ INSERT INTO si_system_defaults (id, name, value) VALUES
 (22, 'delete', 'N');
 SELECT setval('si_system_defaults_id_seq', 22);
 
--- --------------------------------------------------------
-
 CREATE TABLE si_account_payments (
   id			serial NOT NULL PRIMARY KEY,
   ac_inv_id		int NOT NULL REFERENCES si_invoices(id),
@@ -906,10 +797,7 @@ CREATE TABLE si_account_payments (
   ac_date		timestamp NOT NULL,
   ac_payment_type	int NOT NULL REFERENCES si_payment_types(pt_id) default 1
 );
-
--- 
--- Dumping data for table si_account_payments
--- 
+COMMENT ON TABLE si_account_payments IS $$Payments for the invoices$$;
 
 INSERT INTO si_account_payments (
 	id, ac_inv_id, ac_amount, ac_notes, ac_date, ac_payment_type) VALUES 
@@ -934,4 +822,15 @@ INSERT INTO si_defaults (def_id, def_biller, def_customer, def_tax, def_inv_pref
 (1, 4, 3, 1, 1, 5, 'default', '1');
 SELECT setval('si_defaults_def_id_seq', 1);
 
+CREATE INDEX si_invoice_items_invoice_id_idx ON si_invoice_items(invoice_id);
+CREATE INDEX si_account_payments_ac_inv_id_idx ON si_account_payments(ac_inv_id);
+CREATE INDEX si_invoices_customer_id_idx ON si_invoices(customer_id);
+CREATE INDEX si_invoices_biller_id_idx ON si_invoices(biller_id);
+CREATE INDEX si_sql_patchmanager_sql_release_idx ON si_sql_patchmanager(sql_release);
+CREATE INDEX si_sql_patchmanager_sql_patch_ref_idx ON si_sql_patchmanager(sql_patch_ref);
+CREATE INDEX si_biller_name_idx ON si_biller(name);
+CREATE INDEX si_customers_name_idx ON si_customers(name);
+
 COMMIT;
+
+VACUUM ANALYZE;
