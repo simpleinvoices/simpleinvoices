@@ -50,8 +50,8 @@ $smarty -> assign("LANG",$LANG);
 //For Making easy enabled pop-menus (see biller)
 $smarty -> assign("enabled",array($LANG['disabled'],$LANG['enabled']));
 
-//$menu = true;
 $menu = true;
+//$menu = false;
 $file = "home";
 
 
@@ -59,8 +59,12 @@ if(getNumberOfPatches() > 0 ) {
 	$view = "database_sqlpatches";
 	$module = "options";
 	
-	if($action == "run") { 	runPatches(); }
-	else { listPatches(); }
+	if($action == "run") {
+		runPatches();
+	}
+	else {
+		listPatches();
+	}
 	$menu = false;
 }
 else {
@@ -103,7 +107,7 @@ $smarty -> display("../templates/default/header.tpl");
 /*
 if($menu) {
 	getMenuStructure();
-	//$smarty -> display("../templates/modules/menu.tpl");
+	//$smarty -> display("../templates/default/menu.tpl");
 }
 */
 

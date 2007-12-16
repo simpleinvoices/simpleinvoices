@@ -222,7 +222,7 @@ function getPaymentType($id) {
 
 function getPayment($id) {
 	global $config;
-	$sql = "SELECT ".TB_PREFIX."account_payments.*, ".TB_PREFIX."customers.name AS customer, ".TB_PREFIX."biller.name AS biller FROM ".TB_PREFIX."account_payments, ".TB_PREFIX."invoices, ".TB_PREFIX."customers, ".TB_PREFIX."biller  WHERE ac_inv_id = ".TB_PREFIX."invoices.id AND ".TB_PREFIX."invoices.customer_id = ".TB_PREFIX."customers.id AND ".TB_PREFIX."invoices.biller_id = ".TB_PREFIX."biller.id AND ".TB_PREFIX."account_payments.id='$id'";
+	$sql = "SELECT ap.*, c.name AS customer, b.name AS biller FROM ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b  WHERE ap.ac_inv_id = iv.id AND iv.customer_id = c.id AND iv.biller_id = b.id AND ap.id='$id'";
 
 	$query = mysqlQuery($sql) or die(mysql_error());
 	$payment = mysql_fetch_array($query);
@@ -231,19 +231,19 @@ function getPayment($id) {
 }
 
 function getInvoicePayments($id) {
-	$sql = "SELECT ".TB_PREFIX."account_payments.*, ".TB_PREFIX."customers.name as CNAME, ".TB_PREFIX."biller.name as BNAME from ".TB_PREFIX."account_payments, ".TB_PREFIX."invoices, ".TB_PREFIX."customers, ".TB_PREFIX."biller  where ac_inv_id = ".TB_PREFIX."invoices.id and ".TB_PREFIX."invoices.customer_id = ".TB_PREFIX."customers.id and ".TB_PREFIX."invoices.biller_id = ".TB_PREFIX."biller.id and ".TB_PREFIX."account_payments.ac_inv_id='$id' ORDER BY ".TB_PREFIX."account_payments.id DESC";
+	$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b where ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and ap.ac_inv_id = :id ORDER BY ap.id DESC";
 	return mysqlQuery($sql);
 }
 
 
 function getCustomerPayments($id) {
-	$sql = "SELECT ".TB_PREFIX."account_payments.*, ".TB_PREFIX."customers.name as CNAME, ".TB_PREFIX."biller.name as BNAME from ".TB_PREFIX."account_payments, ".TB_PREFIX."invoices, ".TB_PREFIX."customers, ".TB_PREFIX."biller  where ac_inv_id = ".TB_PREFIX."invoices.id and ".TB_PREFIX."invoices.customer_id = ".TB_PREFIX."customers.id and ".TB_PREFIX."invoices.biller_id = ".TB_PREFIX."biller.id and ".TB_PREFIX."customers.id='$id' ORDER BY ".TB_PREFIX."account_payments.id DESC ";
+	$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b where ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and c.id = :id ORDER BY ap.id DESC";
 	return mysqlQuery($sql);
 }
 
 
 function getPayments() {
-	$sql = "SELECT ".TB_PREFIX."account_payments.*, ".TB_PREFIX."customers.name as CNAME, ".TB_PREFIX."biller.name as BNAME from ".TB_PREFIX."account_payments, ".TB_PREFIX."invoices, ".TB_PREFIX."customers, ".TB_PREFIX."biller  WHERE ac_inv_id = ".TB_PREFIX."invoices.id AND ".TB_PREFIX."invoices.customer_id = ".TB_PREFIX."customers.id and ".TB_PREFIX."invoices.biller_id = ".TB_PREFIX."biller.id ORDER BY ".TB_PREFIX."account_payments.id DESC";
+	$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b WHERE ap.ac_inv_id = iv.id AND iv.customer_id = c.id and iv.biller_id = b.id ORDER BY ap.id DESC";
 	
 	return mysqlQuery($sql);
 }
@@ -503,7 +503,6 @@ function getDefaultLanguage() {
 
 function getInvoiceTotal($invoice_id) {
 	global $LANG;
-	
 	
 	$sql ="SELECT SUM(total) AS total FROM ".TB_PREFIX."invoice_items WHERE invoice_id = $invoice_id";
 	$query = mysqlQuery($sql);
@@ -1067,13 +1066,13 @@ function urlPDF($invoiceID,$invoiceTypeID)
 	//set the port of http(s) section
 	if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on') {
 		$_SERVER['FULL_URL'] = "https://";
-	if($_SERVER['SERVER_PORT']!="443") {
-		$port .= "://" . $_SERVER[’SERVER_PORT’];
-	}
+		if($_SERVER['SERVER_PORT']!="443") {
+			$port .= "://" . $_SERVER[’SERVER_PORT’];
+		}
 	} else {
 		$_SERVER['FULL_URL'] = "http://";
 		if($_SERVER['SERVER_PORT']!="80") {
-		$port = ":" . $_SERVER['SERVER_PORT'];
+			$port = ":" . $_SERVER['SERVER_PORT'];
 		}
 	}
 

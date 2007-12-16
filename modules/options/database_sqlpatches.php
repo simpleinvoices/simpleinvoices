@@ -103,11 +103,13 @@ EOD;
 
 
 		for($p = 0; $p < count($patch);$p++) {
+			$patch_name = $patch[$p]['name'];
+			$patch_date = $patch[$p]['date'];
 			if(check_sql_patch($p,$patch[$p]['name'])) {
-				$display_block .= "<tr><td>SQL patch $p, {$patch[$p]['name']} <i>has</i> already been applied in release {$patch[$p]['date']}</td></tr>";
+				$display_block .= "<tr><td>SQL patch $p, $patch_name <i>has</i> already been applied in release $patch_date</td></tr>";
 			}
 			else {
-				$display_block .= "<tr><td>SQL patch $p, {$patch[$p]['name']}  <b>has not</b> been applied to the database</td></tr>";
+				$display_block .= "<tr><td>SQL patch $p, $patch_name <b>has not</b> been applied to the database</td></tr>";
 			}	
 		}
 
@@ -148,12 +150,13 @@ function run_sql_patch($id, $patch) {
 	$query = mysqlQuery($sql) or die(mysql_error());
 	
 	//echo $sql;
+	$patch_name = $patch['name'];
 	#forget about it!! the patch as its already been run
 	if (mysql_num_rows($query) != 0)  {
 
 		$display_block = <<<EOD
 		</div id="header">
-		<tr><td>Skipping SQL patch $id, $patch[name] as it <i>has</i> already been applied</td></tr>
+		<tr><td>Skipping SQL patch $id, $patch_name as it <i>has</i> already been applied</td></tr>
 EOD;
 	}
 	else {
@@ -165,7 +168,7 @@ EOD;
 		
 
 		$display_block  = <<<EOD
-			<tr><td>SQL patch $id, $patch[name] <i>has</i> been applied to the database</td></tr>
+			<tr><td>SQL patch $id, $patch_name <i>has</i> been applied to the database</td></tr>
 EOD;
 		# now update the ".TB_PREFIX."sql_patchmanager table
 		
@@ -190,7 +193,7 @@ EOD;
 function initialise_sql_patch() {
 
 	#check sql patch 1
-	$sql_patch_init = "CREATE TABLE ".TB_PREFIX."sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 50 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) TYPE = MYISAM ";
+	$sql_patch_init = "CREATE TABLE ".TB_PREFIX."sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 255 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) TYPE = MYISAM ";
 	mysqlQuery($sql_patch_init) or die(mysql_error());
 
 	$display_block = "<tr><td>Step 2 - The SQL patch table has been created<br></td></tr>";

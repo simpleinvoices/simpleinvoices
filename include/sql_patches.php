@@ -810,7 +810,7 @@ INSERT INTO  `".TB_PREFIX."menu` (  `id` ,  `parentid` ,  `order` ,  `name` ,  `
 VALUES (
 NULL ,  '61',  '100',  'Custom Fields New', 'index.php?module=customFields&amp;view=manageCustomFields',  '1'
 );
-
+*/
 
 
 
