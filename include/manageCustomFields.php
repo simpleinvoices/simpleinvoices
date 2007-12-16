@@ -151,7 +151,7 @@ function readPlugins() {
 }
 
 function getCategories() {
-	$sql = "SELECT * FROM si_customFieldCategories";
+	$sql = "SELECT * FROM ".TB_PREFIX."customFieldCategories";
 	$sth = $dbh->prepare($sql);
 	$sth->execute();
 	

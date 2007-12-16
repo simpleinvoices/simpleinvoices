@@ -40,7 +40,7 @@ while($custom = mysql_fetch_array($query)) {
 function convertCustomFields() {
 	/* check if any value set -> keeps all data for sure */
 	global $dbh;
-	$sql = "SELECT * FROM si_custom_fields";
+	$sql = "SELECT * FROM ".TB_PREFIX."custom_fields";
 	$sth = $dbh->prepare($sql);
 	$sth->execute();
 	
@@ -59,11 +59,11 @@ function convertCustomFields() {
 			$cf_field = "custom_field".$match[2];
 			if($match[1] != "biller") {
 				$sql = "SELECT id, :field FROM :table";
-				$tablename = "si_$match[1]s";
+				$tablename = TB_PREFIX.$match[1]"s";
 			}
 			else {
 				$sql = "SELECT id, :field FROM :table";
-				$tablename = "si_$match[1]";
+				$tablename = TB_PREFIX.$match[1];
 			}
 			
 			

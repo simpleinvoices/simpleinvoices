@@ -45,7 +45,7 @@ EOD;
 
 	echo "<br /><b>Invoice created</b><br />";
 	foreach($sqls as $sql) {
-		$pattern = "/.*INSERT\s+INTO\s+si_invoices\s+/im";
+		$pattern = "/.*INSERT\s+INTO\s+".TB_PREFIX."invoices\s+/im";
 		
 		if(preg_match($pattern,$sql['sqlquerie'])) {
 			$user = htmlspecialchars($sql['user_name']).' (id '.htmlspecialchars($sql['userid']).')';
@@ -55,7 +55,7 @@ EOD;
 
 	echo "<br /><b>Invoice modified</b><br />";		
 	foreach($sqls as $sql) {
-		$pattern = "/.*UPDATE\s+si_invoices\s+SET/im";
+		$pattern = "/.*UPDATE\s+".TB_PREFIX."invoices\s+SET/im";
 		if(preg_match($pattern,$sql['sqlquerie'],$match)) {
 			$user = htmlspecialchars($sql['user_name']).' (id '.htmlspecialchars($sql['userid']).')';
 			echo "User $user modified invoice $match[1] on $sql[timestamp].<br />";
@@ -66,9 +66,9 @@ EOD;
 	global $db_server;
 	foreach($sqls as $sql) {
 		if ($db_server == 'pgsql') {
-			$pattern = "/.*INSERT\s+INTO\s+si_account_payments\s+/im";
+			$pattern = "/.*INSERT\s+INTO\s+".TB_PREFIX."account_payments\s+/im";
 		} else {
-			$pattern = "/.*INSERT\s+INTO\s+si_account_payments\s+/im";
+			$pattern = "/.*INSERT\s+INTO\s+".TB_PREFIX."account_payments\s+/im";
 		}
 		if(preg_match($pattern,$sql['sqlquerie'],$match)) {
 			$user = htmlspecialchars($sql['user_name']).' (id '.htmlspecialchars($sql['userid']).')';

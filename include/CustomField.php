@@ -46,10 +46,10 @@ abstract class CustomField {
 	
 	/* Updates the custom field value */
 	function updateInput($value, $itemId) {
-		$sql = "SELECT * FROM si_customFieldValues WHERE customFieldID = $this->fieldId AND itemID = $itemId";
+		$sql = "SELECT * FROM ".TB_PREFIX."customFieldValues WHERE customFieldID = $this->fieldId AND itemID = $itemId";
 		
 		error_log($sql);
-		$sth = $dbh->prepare('SELECT * FROM si_customFieldValues WHERE customFieldID = :field AND itemID = :item');
+		$sth = $dbh->prepare('SELECT * FROM '.TB_PREFIX.'customFieldValues WHERE customFieldID = :field AND itemID = :item');
 		$sth->execute(':field', $this->fieldId, ':item', $itemId);
 		$result = $sth->fetch();
 		
@@ -58,14 +58,14 @@ abstract class CustomField {
 			$this->saveInput($value,$itemId);
 		}
 		else {
-			$sql = "UPDATE si_customFieldValues SET value = :value WHERE customFieldId = :field AND itemId = :item" ;
+			$sql = "UPDATE ".TB_PREFIX."customFieldValues SET value = :value WHERE customFieldId = :field AND itemId = :item" ;
 			dbQuery($sql, ':value', $value, ':field', $this->fieldId, ':item', $itemId);
 		}
 	}
 	
 	/* Returns the value for a choosen field and item. Should be unique, because the itemId for each categorie is unique. */
 	function getFieldValue($customFieldId, $itemId) {
-		$sql = "SELECT * FROM si_customFieldValues WHERE (customFieldId = :field AND itemId = :item)";
+		$sql = "SELECT * FROM ".TB_PREFIX."customFieldValues WHERE (customFieldId = :field AND itemId = :item)";
 		$sth = dbQuery($sql, ':field', $customFieldId, ':item', $itemId);
 		
 		if($sth) {
@@ -77,7 +77,7 @@ abstract class CustomField {
 	}
 	
 	function getValue($id) {
-		$sql = "SELECT * FROM si_customFieldValues WHERE id = :id";
+		$sql = "SELECT * FROM ".TB_PREFIX."customFieldValues WHERE id = :id";
 		$sth = dbQuery($sql, ':id', $id);
 		
 		if($sth) {
@@ -91,7 +91,7 @@ abstract class CustomField {
 	/* Stores the input into the database */
 	function saveInput($value,$itemId) {
 		//error_log($value." aaa".$itemId);
-		$sql = "INSERT INTO si_customFieldValues (customFieldId,itemId,value) VALUES(:field, :item, :value);";
+		$sql = "INSERT INTO ".TB_PREFIX."customFieldValues (customFieldId,itemId,value) VALUES(:field, :item, :value);";
 		//error_log($sql);
 		dbQuery($sql, ':field', $this->fieldId, ':item', $itemId, ':value', $value);
 	}

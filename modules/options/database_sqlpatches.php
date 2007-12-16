@@ -241,7 +241,7 @@ function patch126() {
 		dbQuery($sql, ':description', $res[description], ':total', $res[gross_total]);
 		$id = lastInsertId();
 
-		$sql = "UPDATE  ".TB_PREFIX."invoice_items SET product_id = :id, unit_price = :price WHERE si_invoice_items.id = :item";
+		$sql = "UPDATE  ".TB_PREFIX."invoice_items SET product_id = :id, unit_price = :price WHERE ".TB_PREFIX."invoice_items.id = :item";
 
 		dbQuery($sql,
 			':id', $id[0],
