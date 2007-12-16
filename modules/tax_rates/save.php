@@ -25,7 +25,7 @@ $sql = "INSERT INTO ".TB_PREFIX."tax VALUES ('$_POST[tax_description]','$_POST[t
 			)
 		VALUES
 			(	
-				'', :description,
+				NULL, :description,
 				:percent, :enabled
 			)";
 	if ($db_server == 'pgsql') {

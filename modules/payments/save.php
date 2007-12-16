@@ -19,7 +19,7 @@ if ( isset($_POST['process_payment']) ) {
 			".TB_PREFIX."account_payments
 		VALUES
 			(	
-				'',
+				NULL,
 				:invoice,
 				:amount,
 				:notes,

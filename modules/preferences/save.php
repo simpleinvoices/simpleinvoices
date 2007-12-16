@@ -15,7 +15,7 @@ if (  $op === 'insert_preference' ) {
 		".TB_PREFIX."preferences
 	VALUES
 		(
-			'',
+			NULL,
 			:description,
 			:currency_sign,
 			:heading,

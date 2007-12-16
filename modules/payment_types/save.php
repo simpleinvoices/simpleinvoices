@@ -26,7 +26,7 @@ $sql = "INSERT INTO ".TB_PREFIX."tax VALUES ('$_POST[tax_description]','$_POST[t
 		$sql = "INSERT into
 				".TB_PREFIX."payment_types
 			VALUES
-				('', :description, :enabled)";
+				(NULL, :description, :enabled)";
 	}
 	
 	if (dbQuery($sql, ':description', $_POST['pt_description'], ':enabled', $_POST['pt_enabled'])) {
