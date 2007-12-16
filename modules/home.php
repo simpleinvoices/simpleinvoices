@@ -8,20 +8,20 @@ checkLogin();
 
 #Largest debtor query - start
 if ($mysql > "4.1.0") {
-	$sql = "SELECT	
-	        ".TB_PREFIX."customers.id as CID,
-	        ".TB_PREFIX."customers.name as Customer,
-	        (select sum(".TB_PREFIX."invoice_items.total) from ".TB_PREFIX."invoice_items,".TB_PREFIX."invoices where  ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id and ".TB_PREFIX."invoices.customer_id = CID) as Total,
-	        (select IF ( isnull(sum(ac_amount)), '0', sum(ac_amount)) from ".TB_PREFIX."account_payments,".TB_PREFIX."invoices where ".TB_PREFIX."account_payments.ac_inv_id = ".TB_PREFIX."invoices.id and ".TB_PREFIX."invoices.customer_id = CID) as Paid,
+	$sql = "SELECT c.id as CID, c.name as Customer,
+	        (select sum(s1_ivt.total) from ".TB_PREFIX."invoice_items s1_ivt, ".TB_PREFIX."invoices s1_iv 
+				where  s1_ivt.invoice_id = s1_iv.id and s1_iv.customer_id = CID) as Total,
+	        (select sum(IF ( isnull(ac_amount), '0', ac_amount)) from ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv 
+				where ap.ac_inv_id = iv.id and iv.customer_id = CID) as Paid,
 	        (select (Total - Paid)) as Owing
 	FROM
-	        ".TB_PREFIX."customers,".TB_PREFIX."invoices,".TB_PREFIX."invoice_items
-	WHERE
-	        ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id and ".TB_PREFIX."invoices.customer_id = ".TB_PREFIX."customers.id
+	        ".TB_PREFIX."customers c 
 	GROUP BY
+			CID
+	ORDER BY
 	        Owing DESC
 	LIMIT 1;
-	";
+";
 
 	$result = mysqlQuery($sql) or die(mysql_error());
 
@@ -32,18 +32,17 @@ if ($mysql > "4.1.0") {
 #Top customer query - start
 
 if ($mysql > "4.1.0") {
-	$sql2 = "SELECT
-		".TB_PREFIX."customers.id as CID,
-	        ".TB_PREFIX."customers.name as Customer,
-       		(select sum(".TB_PREFIX."invoice_items.total) from ".TB_PREFIX."invoice_items,".TB_PREFIX."invoices where  ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id and ".TB_PREFIX."invoices.customer_id = CID) as Total,
-	        (select IF ( isnull(sum(ac_amount)), '0', sum(ac_amount)) from ".TB_PREFIX."account_payments,".TB_PREFIX."invoices where ".TB_PREFIX."account_payments.ac_inv_id = ".TB_PREFIX."invoices.id and ".TB_PREFIX."invoices.customer_id = CID) as Paid,
+	$sql2 = "SELECT c.id as CID, c.name as Customer,
+       		(select sum(s1_ivt.total) from ".TB_PREFIX."invoice_items s1_ivt,".TB_PREFIX."invoices s1_iv 
+				where  s1_ivt.invoice_id = s1_iv.id and s1_iv.customer_id = CID) as Total,
+	        (select sum(IF ( isnull(ac_amount), '0', ac_amount)) from ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv 
+				where ap.ac_inv_id = iv.id and iv.customer_id = CID) as Paid,
 	        (select (Total - Paid)) as Owing
-
 	FROM
-       		".TB_PREFIX."customers,".TB_PREFIX."invoices,".TB_PREFIX."invoice_items
-	WHERE
-	        ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id and ".TB_PREFIX."invoices.customer_id = ".TB_PREFIX."customers.id
+       		".TB_PREFIX."customers c 
 	GROUP BY
+			CID
+	ORDER BY
 	        Total DESC
 	LIMIT 1;
 ";
@@ -57,14 +56,17 @@ if ($mysql > "4.1.0") {
 #Top biller query - start
 if ($mysql > "4.1.0") {
 	
-	$sql3 = "SELECT
-		".TB_PREFIX."biller.name,  
-		sum(".TB_PREFIX."invoice_items.total) as Total 
+	$sql3 = "SELECT b.id, b.name, sum(ivt.total) as Total 
 	FROM 
-		".TB_PREFIX."biller, ".TB_PREFIX."invoice_items, ".TB_PREFIX."invoices 
+		".TB_PREFIX."biller b, ".TB_PREFIX."invoice_items ivt, ".TB_PREFIX."invoices iv 
 	WHERE 
-		".TB_PREFIX."invoices.biller_id = ".TB_PREFIX."biller.id and ".TB_PREFIX."invoices.id = ".TB_PREFIX."invoice_items.invoice_id GROUP BY name ORDER BY Total DESC LIMIT 1;
-	";
+		iv.biller_id = b.id and iv.id = ivt.invoice_id 
+	GROUP BY 
+		name 
+	ORDER BY 
+		Total DESC 
+	LIMIT 1;
+";
 
 	$result3 = mysqlQuery($sql3) or die(mysql_error());
 
