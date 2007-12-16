@@ -50,7 +50,7 @@ function runPatches() {
 
 EOD;
 	//exit();
-	$refresh = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php>";
+	$refresh = '<meta http-equiv="refresh" content="2;url=index.php">';
 
 	} else {
 
@@ -69,6 +69,23 @@ EOD;
 	$smarty-> assign("display_block",$display_block);
 	$smarty-> assign("refresh",$refresh);
 
+}
+
+function donePatches() {
+		$display_block = "<table align='center'>";
+		$display_block .= <<<EOD
+		<br>
+		<b>Simple Invoices :: Database Upgrade Manager</b><br />
+		<hr />
+		<tr><td><br>The database patches are uptodate. You can continue working with Simple Invoices.<br /><p align=middle><br /><a href="index.php">HOME</a></p></tr>
+		</table>
+
+EOD;
+	//exit();
+	$refresh = '<meta http-equiv="refresh" content="2;url=index.php">';
+	global $smarty;
+	$smarty-> assign("display_block",$display_block);
+	$smarty-> assign("refresh",$refresh);
 }
 
 function listPatches() {
@@ -196,7 +213,7 @@ function initialise_sql_patch() {
 	global $dbh;
 
 	#check sql patch 1
-	$sql_patch_init = "CREATE TABLE ".TB_PREFIX."sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 50 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) TYPE = MYISAM ";
+	$sql_patch_init = "CREATE TABLE ".TB_PREFIX."sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 255 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) TYPE = MYISAM ";
 	dbQuery($sql_patch_init) or die(end($dbh->errorInfo()));
 
 	$display_block = "<tr><td>Step 2 - The SQL patch table has been created<br></td></tr>";
@@ -215,16 +232,16 @@ VALUES ('','1','Create ".TB_PREFIX."sql_patchmanger table','20060514', :patch)";
 
 function patch126() {
 	//SC: MySQL-only function, not porting to PostgreSQL
-	$sql = "SELECT * FROM si_invoice_items WHERE product_id = 0";
+	$sql = "SELECT * FROM ".TB_PREFIX."invoice_items WHERE product_id = 0";
 	$sth = dbQuery($sql);
 	
 	while($res = $sth->fetch()) {
-		$sql = "INSERT INTO si_products (id, description, unit_price, enabled, visible) 
+		$sql = "INSERT INTO ".TB_PREFIX."products (id, description, unit_price, enabled, visible) 
 			VALUES (NULL, :description, :gross_total, '0',  '0')";
 		dbQuery($sql, ':description', $res[description], ':total', $res[gross_total]);
 		$id = lastInsertId();
 
-		$sql = "UPDATE  si_invoice_items SET product_id = :id, unit_price = :price WHERE si_invoice_items.id = :item";
+		$sql = "UPDATE  ".TB_PREFIX."invoice_items SET product_id = :id, unit_price = :price WHERE si_invoice_items.id = :item";
 
 		dbQuery($sql,
 			':id', $id[0],
@@ -239,7 +256,7 @@ function patch126() {
 function convertCustomFields() {
 	/* check if any value set -> keeps all data for sure */
 	global $dbh;
-	$sql = "SELECT * FROM si_custom_fields";
+	$sql = "SELECT * FROM ".TB_PREFIX."custom_fields";
 	$sth = $dbh->prepare($sql);
 	$sth->execute();
 	
@@ -258,11 +275,11 @@ function convertCustomFields() {
 			$cf_field = "custom_field".$match[2];
 			if($match[1] != "biller") {
 				$sql = "SELECT id, :field FROM :table";
-				$tablename = "si_$match[1]s";
+				$tablename = TB_PREFIX.$match[1]."s";
 			}
 			else {
 				$sql = "SELECT id, :field FROM :table";
-				$tablename = "si_$match[1]";
+				$tablename = TB_PREFIX.$match[1];
 			}
 			
 			

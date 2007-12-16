@@ -34,7 +34,7 @@ $smarty = new Smarty();
 //cache directory. Have to be writeable (chmod 777)
 $smarty -> compile_dir = "cache";
 if(!is_writable($smarty -> compile_dir)) {
-	exit("Simple Invoices Error : the folder <i>".$smarty -> compile_dir."</i> has to be writeable");
+	exit("Simple Invoices Error : The folder <i>".$smarty -> compile_dir."</i> has to be writeable");
 }
 
 
@@ -67,7 +67,9 @@ if(getNumberOfPatches() > 0 ) {
 	}
 	$menu = false;
 }
-
+else {
+	if (($module == "options") && ($view == "database_sqlpatches")) { donePatches(); }
+}
 
 
 /*dont include the header if requested file is an invoice template - for print preview etc.. header is not needed */

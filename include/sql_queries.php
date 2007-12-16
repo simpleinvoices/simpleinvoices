@@ -52,7 +52,7 @@ function dbQuery($sqlQuery) {
 		if(LOGGING && (preg_match($pattern,$sqlQuery) == 0)) {
 			$sql = "INSERT INTO si_log (timestamp,  userid, sqlquerie, last_id) VALUES (CURRENT_TIMESTAMP , ?, ?, ?)";
 			if ($db_server == 'mysql') {
-				$sql = "INSERT INTO si_log (id, timestamp,  userid, sqlquerie, last_id) VALUES (NULL, CURRENT_TIMESTAMP , ?, ?, ?)";
+				$sql = "INSERT INTO ".TB_PREFIX."log (id, timestamp,  userid, sqlquerie, last_id) VALUES (NULL, CURRENT_TIMESTAMP , ?, ?, ?)";
 			}
 			$tth = $log_dbh->prepare($sql);
 			$tth->execute(array($userid, trim($sqlQuery), $last));
@@ -361,7 +361,7 @@ function getInvoicePayments($id) {
 
 
 function getCustomerPayments($id) {
-	$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b where ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and c.id = :id ORDER BY ap.id DESC ";
+	$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b where ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and c.id = :id ORDER BY ap.id DESC";
 	return dbQuery($sql, ':id', $id);
 }
 
@@ -481,7 +481,7 @@ function insertProduct($enabled=1,$visible=1) {
 			".TB_PREFIX."products
 		VALUES
 			(	
-				'',
+				NULL,
 				:description,
 				:unit_price,
 				:custom_field1,
@@ -816,7 +816,7 @@ function insertBiller() {
 			".TB_PREFIX."biller
 		VALUES
 			(
-				'',
+				NULL,
 				:name,
 				:street_address,
 				:street_address2,
@@ -1017,9 +1017,9 @@ function insertCustomer() {
 function searchCustomers($search) {
 	global $db_server;
 
-	$sql = "SELECT * FROM si_customers WHERE name LIKE :search";
+	$sql = "SELECT * FROM ".TB_PREFIX."customers WHERE name LIKE :search";
 	if ($db_server == 'pgsql') {
-		$sql = "SELECT * FROM si_customers WHERE name ILIKE :search";
+		$sql = "SELECT * FROM ".TB_PREFIX."customers WHERE name ILIKE :search";
 	}
 	$sth = dbQuery($sql, ':search', "%$search%");
 	
@@ -1162,7 +1162,7 @@ function insertInvoice($type) {
 		)
 		VALUES
 		(
-			'',
+			NULL,
 			:biller_id,
 			:customer_id,
 			:type,
@@ -1338,9 +1338,9 @@ function getMenuStructure() {
 	global $LANG;
 	global $dbh;
 	global $db_server;
-	$sql = "SELECT * FROM si_menu WHERE enabled = 1 ORDER BY parentid, `order`";
+	$sql = "SELECT * FROM ".TB_PREFIX."menu WHERE enabled = 1 ORDER BY parentid, `order`";
 	if ($db_server == 'pgsql') {
-		$sql = "SELECT * FROM si_menu WHERE enabled ORDER BY parentid, \"order\"";
+		$sql = "SELECT * FROM ".TB_PREFIX."menu WHERE enabled ORDER BY parentid, \"order\"";
 	}
 	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$menu = null;
@@ -1391,7 +1391,7 @@ function searchBillerAndCustomerInvoice($biller,$customer) {
 	global $db_server;
 
 	$sql = "SELECT b.name as biller, c.name as customer, i.id as invoice, i.date as date, i.type_id AS type_id,t.inv_ty_description as type
-	FROM si_biller b, si_invoices i, si_customers c, si_invoice_type t
+	FROM ".TB_PREFIX."biller b, ".TB_PREFIX."invoices i, ".TB_PREFIX."customers c, ".TB_PREFIX."invoice_type t
 	WHERE b.name LIKE :biller
 	AND c.name LIKE :customer 
 	AND i.biller_id = b.id 
@@ -1399,7 +1399,7 @@ function searchBillerAndCustomerInvoice($biller,$customer) {
 	AND i.type_id = t.inv_ty_id";
 	if ($db_server == 'pgsql') {
 		$sql = "SELECT b.name as biller, c.name as customer, i.id as invoice, i.date as date, i.type_id AS type_id,t.inv_ty_description as type
-		FROM si_biller b, si_invoices i, si_customers c, si_invoice_type t
+		FROM ".TB_PREFIX."biller b, ".TB_PREFIX."invoices i, ".TB_PREFIX."customers c, ".TB_PREFIX."invoice_type t
 		WHERE b.name ILIKE :biller
 		AND c.name ILIKE :customer 
 		AND i.biller_id = b.id 
@@ -1414,7 +1414,7 @@ function searchBillerAndCustomerInvoice($biller,$customer) {
 
 function searchInvoiceByDate($startdate,$enddate) {
 	$sql = "SELECT b.name as biller, c.name as customer, i.id as invoice, i.date as date,i.type_id AS type_id, t.inv_ty_description as type
-	FROM si_biller b, si_invoices i, si_customers c, si_invoice_type t
+	FROM ".TB_PREFIX."biller b, ".TB_PREFIX."invoices i, ".TB_PREFIX."customers c, ".TB_PREFIX."invoice_type t
 	WHERE i.date >= :startdate 
 	AND i.date <= :enddate
 	AND i.biller_id = b.id 
