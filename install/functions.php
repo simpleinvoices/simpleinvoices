@@ -8,7 +8,7 @@ $memoryLimit = 24;
 //cache writeable
 
 function checkPostMaxSize() {
-	global $postMaxSize;
+	global $post_max_size;
 	
 	$post_max_size = ini_get('post_max_size');
 	
@@ -22,7 +22,7 @@ function checkPostMaxSize() {
 
 
 function checkMemoryLimit() {
-	global $memoryLimit;
+	global $memory_limit;
 	
 	$memory_limit = ini_get('memory_limit');
 	
@@ -30,6 +30,16 @@ function checkMemoryLimit() {
     if (substr($memory_limit, 0, strlen($memory_limit)-1) >= $memoryLimit) {
         return true;
     } else if (substr($memory_limit, 0, strlen($memory_limit)-1) < $memoryLimit) {
+        return false;
+    }
+}
+
+// Control library PDO existence
+function checkPDO()
+{
+    if (extension_loaded('pdo')) {
+        return true;
+    } else {
         return false;
     }
 }
