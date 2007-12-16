@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Generation Time: Dec 13, 2007 at 05:45 PM
+-- Generation Time: Dec 16, 2007 at 05:45 PM
 -- Server version: 4.1.20
 -- PHP Version: 5.2.5
 -- 
@@ -18,7 +18,7 @@
 
 CREATE TABLE `si_account_payments` (
   `id` int(10) NOT NULL auto_increment,
-  `ac_inv_id` int(11) NOT NULL,
+  `ac_inv_id` varchar(10) NOT NULL,
   `ac_amount` double(25,2) NOT NULL,
   `ac_notes` text NOT NULL,
   `ac_date` datetime NOT NULL,
@@ -201,7 +201,7 @@ CREATE TABLE `si_invoice_items` (
   `quantity` float NOT NULL default '0',
   `product_id` int(10) default '0',
   `unit_price` double(25,2) default '0.00',
-  `tax_id` int(11) NOT NULL default '0',
+  `tax_id` varchar(25) NOT NULL default '0',
   `tax` double(25,2) default '0.00',
   `tax_amount` double(25,2) default NULL,
   `gross_total` double(25,2) default '0.00',

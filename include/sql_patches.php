@@ -60,7 +60,7 @@
 	$patch['14']['date'] = "20060815";
 
 	$patch['15']['name'] = "Add tax_id into invoice_items table";
-	$patch['15']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ADD inv_it_tax_id int(11) NOT NULL default '0'  AFTER inv_it_unit_price";
+	$patch['15']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ADD inv_it_tax_id VARCHAR( 25 ) NOT NULL default '0'  AFTER inv_it_unit_price";
 	$patch['15']['date'] = "20060815";
 
 	$patch['16']['name'] = "Add Payments table";
@@ -513,7 +513,7 @@ INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 	$patch['107']['date'] = "20070523";
 
 	$patch['108']['name'] = "Alter field name inv_it_tax_id to tax_id  ";
-	$patch['108']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `inv_it_tax_id` `tax_id` int(11) NOT NULL DEFAULT '0'";
+	$patch['108']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `inv_it_tax_id` `tax_id` VARCHAR( 25 ) NOT NULL DEFAULT '0'";
 	$patch['108']['date'] = "20070523";
 
 	$patch['109']['name'] = "Alter field name inv_it_tax to tax  ";
