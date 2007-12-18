@@ -1,8 +1,8 @@
 <?php
 
 /*
-* Script: engligh_UK.inc.php
-* 	Engligh translation file
+* Script: english_UK.inc.php
+* 	English translation file
 *
 * Authors:
 *	 Justin Kelly
