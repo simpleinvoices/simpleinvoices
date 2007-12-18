@@ -50,7 +50,7 @@ function dbQuery($sqlQuery) {
 
 		$last = lastInsertId();
 		if(LOGGING && (preg_match($pattern,$sqlQuery) == 0)) {
-			$sql = "INSERT INTO si_log (timestamp,  userid, sqlquerie, last_id) VALUES (CURRENT_TIMESTAMP , ?, ?, ?)";
+			$sql = "INSERT INTO ".TB_PREFIX."log (timestamp,  userid, sqlquerie, last_id) VALUES (CURRENT_TIMESTAMP , ?, ?, ?)";
 			if ($db_server == 'mysql') {
 				$sql = "INSERT INTO ".TB_PREFIX."log (id, timestamp,  userid, sqlquerie, last_id) VALUES (NULL, CURRENT_TIMESTAMP , ?, ?, ?)";
 			}
