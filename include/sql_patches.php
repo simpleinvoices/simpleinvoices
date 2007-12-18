@@ -717,6 +717,11 @@ PRIMARY KEY  (`user_id`)) ;
     $patch['140']['name'] = "Correct Foreign Key Invoice ID Field Type in Ac Payments Table";
     $patch['140']['patch'] = "ALTER TABLE  `".TB_PREFIX."account_payments` CHANGE `ac_inv_id` `ac_inv_id` int  NOT NULL ;";
     $patch['140']['date'] = "20071126";
+
+    $patch['141']['name'] = "Correct sql_patch_ref Field Type in sql_patchmanager table to be INT";
+    $patch['141']['patch'] = "ALTER TABLE  `".TB_PREFIX."sql_patchmanager` change `sql_patch_ref` `sql_patch_ref` int NOT NULL ;";
+    $patch['141']['date'] = "20071218";
+	
 	
 
 /* //TO BE PORTED ACROSS AGAIN
