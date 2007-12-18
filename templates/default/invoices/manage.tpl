@@ -66,13 +66,11 @@
 	 title="{$LANG.quick_view_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}"
 	 href="index.php?module=invoices&view=quick_view&invoice={$invoice.invoice.id}&type={$invoice.invoiceType.inv_ty_id}">
 		<img src="images/common/view.png" height="16" border="-5px0" padding="-4px" valign="bottom" /><!-- print --></a>
-	</a>
 	
 	<!-- Edit View -->
 	<a class="index_table" title="{$LANG.edit_view_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}"
 	 href="index.php?module=invoices&view=details&invoice={$invoice.invoice.id}&action=view&type={$invoice.invoiceType.inv_ty_id}">
 		<img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>
-	</a> 
 	
 	<!-- Print View -->
 	<a class="index_table" title="{$LANG.print_preview_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}"
