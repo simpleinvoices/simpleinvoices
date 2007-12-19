@@ -5,7 +5,7 @@
 
 {if $smarty.get.id }
 
-	<h3>{$LANG.payments_filtered} {$smarty.get.id}</h3> :: <a href='index.php?module=payments&view=process&submit=$_GET.id&op=pay_selected_invoice'>{$LANG.payments_filtered_invoice}</a>
+	<h3>{$LANG.payments_filtered} {$smarty.get.id} :: <a href='index.php?module=payments&view=process&submit=$_GET.id&op=pay_selected_invoice'>{$LANG.payments_filtered_invoice}</a></h3>
 
 {elseif $smarty.get.c_id }
 <h3>{$LANG.payments_filtered_customer} {$smarty.get.c_id} :: <a href='index.php?module=payments&view=process&op=pay_invoice'>{$LANG.process_payment}</a></h3>
