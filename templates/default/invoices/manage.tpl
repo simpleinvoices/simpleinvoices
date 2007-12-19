@@ -22,10 +22,10 @@
 {else}
 
 <div style="text-align:center;">
-<b>{$LANG.manage_invoices}</b> :: <b><font color="blue">{$LANG.add_new_invoice}</font></b> [
-<a href="index.php?module=invoices&view=total"> <b>{$LANG.total_style}</b></a> ::
-<a href="index.php?module=invoices&view=itemised"> <b>{$LANG.itemised_style}</b></a> ::
-<a href="index.php?module=invoices&view=consulting"> <b>{$LANG.consulting_style}</b> </a>]
+<b>{$LANG.manage_invoices}</b> :: {$LANG.add_new_invoice} 
+<a href="index.php?module=invoices&view=total"> {$LANG.total_style}</b></a> ::
+<a href="index.php?module=invoices&view=itemised"> {$LANG.itemised_style}</a> ::
+<a href="index.php?module=invoices&view=consulting"> {$LANG.consulting_style} </a>
 </div>
 <hr />
 

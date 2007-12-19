@@ -17,10 +17,7 @@
 
 {/if}
 
-
-<div style="text-align:center;"><a href="docs.php?t=help&p=wheres_the_edit_button" rel="gb_page_center[450, 450]">{$LANG.wheres_the_edit_button}<img src="./images/common/help-small.png"></img></a></div>
 <hr />
-
 
 <table align="center" class="ricoLiveGrid"  id="rico_payment" >
 <colgroup>
@@ -68,4 +65,11 @@
 
 	</table>
 {/if}
+
+<br />
+<div style="text-align:center;">
+	<a href="docs.php?t=help&p=wheres_the_edit_button" rel="gb_page_center.450, 450">
+		<img src="./images/common/help-small.png"/> Wheres the Edit button?
+	</a>
+/div>
 
