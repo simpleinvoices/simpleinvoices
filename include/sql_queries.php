@@ -36,6 +36,17 @@ function mysqlQuery($sqlQuery) {
 	}
 }
 
+function sql2array($strSql) {
+	$sqlInArray = null;
+
+	$result_strSql = mysqlQuery($strSql);
+
+	for($i=0;$sqlInRow = mysql_fetch_array($result_strSql);$i++) {
+
+		$sqlInArray[$i] = $sqlInRow;
+	}
+	return $sqlInArray;
+}
 
 function getCustomer($id) {
 	
@@ -67,14 +78,7 @@ function getPreference($id) {
 function getSQLPatches() {
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager ORDER BY sql_release";                  
-	$query = mysqlQuery($sql) or die(mysql_error());
-
-	$patches = null;
-	
-	for($i=0;$patch = mysql_fetch_array($query);$i++) {
-		$patches[$i] = $patch;
-	}
-	return $patches;
+	return sql2array($sql);
 }
 
 function getPreferences() {
@@ -126,15 +130,7 @@ function getActivePreferences() {
 	
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."preferences WHERE pref_enabled ORDER BY pref_description";
-	$query  = mysqlQuery($sql) or die(mysql_error());
-	
-	$preferences = null;
-	
-	for($i=0;$preference = mysql_fetch_array($query);$i++) {
-		$preferences[$i] = $preference;
-	}
-	
-	return $preferences;
+	return sql2array($sql);
 }
 
 function getCustomFieldLabels() {
@@ -182,18 +178,8 @@ function getBillers() {
 function getActiveBillers() {
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."biller WHERE enabled != 0 ORDER BY name";
-	$query = mysqlQuery($sql) or die(mysql_error());
-		
-	$billers = null;
-	
-	for($i=0;$biller = mysql_fetch_array($query);$i++) {
-		$billers[$i] = $biller;
-	}
-	
-	return $billers;
+	return sql2array($sql);
 }
-
-
 
 function getTaxRate($id) {
 	
@@ -231,39 +217,19 @@ function getPayment($id) {
 }
 
 function getInvoicePayments($id) {
-	$sql = "SELECT ap.*, c.name AS CNAME, b.name AS BNAME FROM ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b WHERE ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and ap.ac_inv_id = $id ORDER BY ap.id DESC";
-	return mysqlQuery($sql);
+	$sql = "SELECT ap.*, c.name AS CNAME, b.name AS BNAME, pt.pt_description AS description FROM ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b, ".TB_PREFIX."payment_types pt WHERE ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id AND ap.ac_payment_type = pt.pt_id AND ap.ac_inv_id = $id ORDER BY ap.id DESC";
+	return sql2array($sql);
 }
 
 function getCustomerPayments($id) {
-	$sql = "SELECT ap.*, c.name AS CNAME, b.name AS BNAME FROM ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b WHERE ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and c.id = $id ORDER BY ap.id DESC";
-	return mysqlQuery($sql);
+	$sql = "SELECT ap.*, c.name AS CNAME, b.name AS BNAME, pt.pt_description AS description FROM ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b, ".TB_PREFIX."payment_types pt WHERE ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id AND ap.ac_payment_type = pt.pt_id AND c.id = $id ORDER BY ap.id DESC";
+	return sql2array($sql);
 }
 
 function getPayments() {
-	$sql = "SELECT ap.*, c.name AS CNAME, b.name AS BNAME FROM ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b WHERE ap.ac_inv_id = iv.id AND iv.customer_id = c.id and iv.biller_id = b.id ORDER BY ap.id DESC";
-	return mysqlQuery($sql);
+	$sql = "SELECT ap.*, c.name AS CNAME, b.name AS BNAME, pt.pt_description AS description FROM ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b, ".TB_PREFIX."payment_types pt WHERE ap.ac_inv_id = iv.id AND iv.customer_id = c.id and iv.biller_id = b.id AND ap.ac_payment_type = pt.pt_id ORDER BY ap.id DESC";
+	return sql2array($sql);
 }
-
-function progressPayments($query) {
-	$payments = null;
-
-	for($i=0;$payment = mysql_fetch_array($query);$i++) {
-
-		$sql = "SELECT pt_description FROM ".TB_PREFIX."payment_types WHERE pt_id = {$payment['ac_payment_type']}";
-		$query2 = mysqlQuery($sql);
-
-		$pt = mysql_fetch_array($query2);
-		
-		$payments[$i] = $payment;
-		$payments[$i]['description'] = $pt['pt_description'];
-		
-	}
-	
-	return $payments;
-}
-
-
 
 function getPaymentTypes() {
 	global $LANG;
@@ -396,15 +362,7 @@ function getActiveProducts() {
 	
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."products WHERE enabled != 0 ORDER BY description";
-	$query = mysqlQuery($sql) or die(mysql_error());
-	
-	$products = null;
-	
-	for($i=0;$product = mysql_fetch_array($query);$i++) {
-		$products[$i] = $product;
-	}
-	
-	return $products;
+	return sql2array($sql);
 }
 
 
@@ -568,7 +526,6 @@ function getInvoiceItems($id) {
 	return $invoiceItems;
 }
 
-
 function getSystemDefaults() {
 	
 	$print_defaults = "SELECT * FROM ".TB_PREFIX."system_defaults";
@@ -673,7 +630,6 @@ function updateBiller() {
 }
 
 function updateCustomer() {
-	
 
 	$sql = "
 			UPDATE
@@ -726,7 +682,6 @@ function searchCustomers($search) {
 	//print_r($customers);
 	return $customers;
 }	
-		
 
 function getInvoices(&$query) {
 	global $config;
@@ -760,14 +715,7 @@ function getCustomerInvoices($id) {
 	$invoices = null;
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE customer_id =$id  ORDER BY id DESC";
-	$query = mysqlQuery($sql) or die(mysql_error());
-	
-	for($i = 0;$invoice = getInvoices($query);$i++) {
-		$invoices[$i] = $invoice;
-	}
-	
-	return $invoices;
-
+	return sql2array($sql);
 }
 
 function getCustomers() {
@@ -808,24 +756,14 @@ function getCustomers() {
 }
 
 function getActiveCustomers() {
-		
-	global $LANG;
 	
+	global $LANG; // must this be here?	
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."customers WHERE enabled != 0 ORDER BY name";
-	$result = mysqlQuery($sql) or die(mysql_error());
-
-	$customers = null;
-
-	for($i=0;$customer = mysql_fetch_array($result);$i++) {
-		$customers[$i] = $customer;
-	}
-	
-	return $customers;
+	return sql2array($sql);
 }
 
 function insertInvoice($type) {
-	
 	
 	$sql = "INSERT 
 			INTO
@@ -861,7 +799,7 @@ function insertInvoice($type) {
 }
 
 function updateInvoice($invoice_id) {
-	
+
 		$sql = "UPDATE
 			".TB_PREFIX."invoices
 		SET
@@ -901,8 +839,6 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$tax_id,$descriptio
 
 function updateInvoiceItem($id,$quantity,$product_id,$tax_id,$description) {
 
-	
-	
 	$product = getProduct($product_id);
 	$tax = getTaxRate($tax_id);
 	
@@ -1017,8 +953,6 @@ function maxInvoice() {
 //while ($Array_max = mysql_fetch_array($result_max) ) {
 //$max_invoice_id = $Array_max['max_inv_id'];
 };
-
-
 
 //in this file are functions for all sql queries
 
