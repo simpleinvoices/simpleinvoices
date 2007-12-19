@@ -516,9 +516,8 @@ function getInvoiceItems($id) {
 		$invoiceItem['gross_total'] = number_format($invoiceItem['gross_total'],2);
 		$invoiceItem['total'] = number_format($invoiceItem['total'],2);
 		
-		$sql = "SELECT * FROM ".TB_PREFIX."products WHERE id = {$invoiceItem['product_id']}";
-		$query2 = mysqlQuery($sql) or die(mysql_error());
-		$invoiceItem['product'] = mysql_fetch_array($query2);	
+		$p_id = $invoiceItem['product_id'];
+		$invoiceItem['product'] = getProduct($p_id);	
 		
 		$invoiceItems[$i] = $invoiceItem;
 	}
