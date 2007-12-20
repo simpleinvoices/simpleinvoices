@@ -49,7 +49,7 @@ function dbQuery($sqlQuery) {
 		//error_log("Insert_id: ".mysql_insert_id($conn));
 
 		if(LOGGING && (preg_match($pattern,$sqlQuery) == 0)) {
-			$last = null
+			$last = null;
 			if (preg_match('/^(update|insert)/i', $sqlQuery)) {
 				$last = lastInsertId();
 			}
