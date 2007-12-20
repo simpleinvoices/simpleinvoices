@@ -669,17 +669,8 @@ function insertCustomer() {
 
 function searchCustomers($search) {
 	$sql = "SELECT * FROM  `".TB_PREFIX."customers` WHERE  `name` LIKE  '%$search%'";
-	$query = mysqlQuery($sql);
-	
-	$customers = null;
-	
-	for($i=0;$customer = mysql_fetch_array($query);$i++) {
-		$customers[$i] = $customer;
-	}
-	//echo $sql;
-	
-	//print_r($customers);
-	return $customers;
+
+	return sql2array($sql);
 }	
 
 function getInvoices(&$query) {
