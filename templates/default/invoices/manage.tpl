@@ -22,11 +22,11 @@
 {else}
 
 <div style="text-align:center;">
-<h3>{$LANG.manage_invoices}</b> :: {$LANG.add_new_invoice} 
+<h3>{$LANG.manage_invoices}</h3> :: {$LANG.add_new_invoice} 
 <a href="index.php?module=invoices&view=total"> {$LANG.total_style}</b></a> ::
 <a href="index.php?module=invoices&view=itemised"> {$LANG.itemised_style}</a> ::
 <a href="index.php?module=invoices&view=consulting"> {$LANG.consulting_style} </a>
-</h3>
+
 </div>
 <hr />
 
