@@ -184,13 +184,7 @@ function getSQLPatches() {
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager ORDER BY sql_release";                  
 	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
-
-	$patches = null;
-	
-	for($i=0;$patch = $sth->fetch();$i++) {
-		$patches[$i] = $patch;
-	}
-	return $patches;
+	return $sth->fetchAll();
 }
 
 function getPreferences() {
@@ -247,14 +241,8 @@ function getActivePreferences() {
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."preferences WHERE pref_enabled ORDER BY pref_description";
 	$sth  = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
-	
-	$preferences = null;
-	
-	for($i=0;$preference = $sth->fetch();$i++) {
-		$preferences[$i] = $preference;
-	}
-	
-	return $preferences;
+
+	return $sth->fetchAll();
 }
 
 function getCustomFieldLabels() {
@@ -308,14 +296,8 @@ function getActiveBillers() {
 		$sql = "SELECT * FROM ".TB_PREFIX."biller WHERE enabled ORDER BY name";
 	}
 	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
-		
-	$billers = null;
 	
-	for($i=0;$biller = $sth->fetch();$i++) {
-		$billers[$i] = $biller;
-	}
-	
-	return $billers;
+	return $sth->fetchAll();
 }
 
 
@@ -576,13 +558,7 @@ function getActiveProducts() {
 	}
 	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
-	$products = null;
-	
-	for($i=0;$product = $sth->fetch();$i++) {
-		$products[$i] = $product;
-	}
-	
-	return $products;
+	return $sth->fetchAll();
 }
 
 
@@ -1130,13 +1106,7 @@ function getActiveCustomers() {
 	}
 	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 
-	$customers = null;
-
-	for($i=0;$customer = $sth->fetch();$i++) {
-		$customers[$i] = $customer;
-	}
-	
-	return $customers;
+	return $sth->fetchAll();
 }
 
 function insertInvoice($type) {
