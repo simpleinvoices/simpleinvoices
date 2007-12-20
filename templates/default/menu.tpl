@@ -141,7 +141,8 @@
 					</li>
 -->
 				</ul>
-			<li > <a href="#"><img src="./images/common/help-small.png"></a>
+			</li>
+			<li> <a href="#"><img src="./images/common/help-small.png"></a>
 				<ul>
 					<li>
 						<a href="docs.php?p=ReadMe">{$LANG.help} +</a>
