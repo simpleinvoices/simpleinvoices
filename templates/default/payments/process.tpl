@@ -25,7 +25,7 @@
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.amount}</td>
-	<td colspan="5"><input type="text" name="ac_amount" size="25" value="{$invoice.owing|escape:html}" /><a href="docs.php?t=help&amp;p=process_payment_auto_amount" rel="gb_page_center.450, 450"><img src="./images/common/help-small.png" alt="({$LANG.help})"></img></a></td>
+	<td colspan="5"><input type="text" name="ac_amount" size="25" value="{$invoice.owing|escape:html}" /><a href="docs.php?t=help&amp;p=process_payment_auto_amount" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png" alt="({$LANG.help})"></img></a></td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.date_formatted}</td>
@@ -43,12 +43,12 @@
 <table align="center">
 <tr>
 	<td class="details_screen">{$LANG.invoice_id}
-	<a href="docs.php?t=help&amp;p=process_payment_inv_id" rel="gb_page_center.450, 450"><img src="./images/common/help-small.png" alt="({$LANG.help})"></img></a></td>
+	<a href="docs.php?t=help&amp;p=process_payment_inv_id" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png" alt="({$LANG.help})"></img></a></td>
 	<td><input type="text" id="ac_me" name="ac_inv_id" /></td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.details}
-	<a href="docs.php?t=help&amp;p=process_payment_details" rel="gb_page_center.450, 450"><img src="./images/common/help-small.png" alt="({$LANG.help})"></img></a></td>
+	<a href="docs.php?t=help&amp;p=process_payment_details" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png" alt="({$LANG.help})"></img></a></td>
 	<td id="js_total"><i>{$LANG.select_invoice}</i> </td>
 </tr>
 <tr>
