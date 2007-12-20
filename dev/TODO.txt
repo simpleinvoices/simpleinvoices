@@ -6,14 +6,13 @@ Disclaimer: if its in the list it may get done sometime in the future if and whe
 Next Release :: TODO
 ##############################
 - aim end of Dec
- - lang: add new lang variables into all files : grep LANG_TODO
- - def invoice template - mob phone not coming through - check all fields
+ - lang: add new lang variables into all files : grep LANG_TODO - AP
+ - def invoice template - mob phone not coming through - check all fields - AP
+ - Config.php - used YAML for the DB info : http://prematureoptimization.org/blog/archives/39/ - AP
  - manage pages redevelopment!!
  - users/groups/domains - make this happen!
  - user admin ui
  - preferences: move rest into db
- - index.php : add filtering (php 5.2) for get and post input etc.
- - db: prevent sql injection (refer info point 1)
  - submit : update all refer to submit to better - only some done - all needs to be done and work
  - delete : if delete is enabled allow delete for ALL items - products, billers, etc.. all with their relevant rules ie. if product has been included in an invoice then CAN'T delete etc..
  - move the stuff in index and home in the LANG files
@@ -24,7 +23,7 @@ Next Release :: TODO
  -- email: add default signature - maybe - set in biller details ??
  -- email: and add validation
  - customer view - add edit/export etc, back in
- - move phpreports libs from ./modules/reports/.. to ./include
+ - move phpreports libs from ./modules/reports/.. to ./lib - AP
  -- old ones
  - pdf: pdf of the default templated doesnt include some of the borders on the right sides - needs fixing
  - replce checkLogin with CheckBrowse - check login name assumes something to do with login when its not - not urgent
@@ -38,7 +37,7 @@ Next Release :: TODO
 ###############################
 Next Release + 1 (NR+1) :: TODO
 ###############################
- - reports : add export to .xls format NR+1
+ - reports : add export to .xls format NR+1 - AP
  - choose automatic language (need to rename language files/subfolder). We should use this standards (first we can start with only 2 chars variant)
  -- http://www.rfc-editor.org/rfc/rfc4646.txt
  -- http://www.iana.org/assignments/language-subtag-registry
@@ -49,8 +48,9 @@ SOMETIME IN THE FUTURE TODOs
 ##############################
 
 - Reports
--- Date based reports : http://simpleinvoices.org/forum/topic-391.html ( payments received today, invoices made today etc..)
--- Customer : Statement of Accounts : http://simpleinvoices.org/forum/topic-414.html
+-- Date based reports : http://simpleinvoices.org/forum/topic-391.html ( payments received today, invoices made today etc..) - AP
+-- Customer : Statement of Accounts : http://simpleinvoices.org/forum/topic-414.html - AP
+- Cache - investigate more cache option - apc, memcache, pdo cache option - cache as much as possible - AP
 - add due date for sending bills via e-mail (cron-script)
 - make $tb_prefix a global constant to be accessible in all functions (without global)
 - in pop-down menus the preselected entry is always twice. change it with the selected option
