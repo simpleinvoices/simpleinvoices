@@ -31,7 +31,7 @@ $email_smtpport = 25; 	// Default 25 - use 465 for secure ssl
 $email_secure = "";		// one among '', 'ssl', or 'tls' - used by PHPMailer class in modules/include/mail
 $email_ack = false;		// true means sender's EMail ID will be used as the Return receipt EMail ID - used by PHPMailer class in modules/include/mail
 
-$version = "20071116 stable";
+$version = "20071221 stable";
 
 $config['date_format']  = 'Y-m-d'; #International format just the date
 #$config['date_format']  = 'Y-m-d h:m'; #Internalional format date and time 
