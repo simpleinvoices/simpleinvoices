@@ -68,20 +68,6 @@ function dbQuery($sqlQuery) {
 	}
 }
 
-function sql2array($strSql) {
-	global $dbh;
-
-	$sth = dbQuery($strSql) or die(htmlspecialchars(end($dbh->errorInfo())));
-
-	$sqlInArray = null;
-
-	for($i=0;$sqlInRow = $sth->fetch();$i++) {
-
-		$sqlInArray[$i] = $sqlInRow;
-	}
-	return $sqlInArray;
-}
-
 /*
  * lastInsertId returns the id of the most recently inserted row by the session
  * used by $dbh whose id was created by AUTO_INCREMENT (MySQL) or a sequence
@@ -194,10 +180,17 @@ function getPreference($id) {
 }
 
 function getSQLPatches() {
+	global $dbh;
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager ORDER BY sql_release";                  
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 
-	return sql2array($sql);
+	$patches = null;
+	
+	for($i=0;$patch = $sth->fetch();$i++) {
+		$patches[$i] = $patch;
+	}
+	return $patches;
 }
 
 function getPreferences() {
@@ -250,10 +243,18 @@ function getActiveTaxes() {
 }
 
 function getActivePreferences() {
+	global $dbh;
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."preferences WHERE pref_enabled ORDER BY pref_description";
-
-	return sql2array($sql);
+	$sth  = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	
+	$preferences = null;
+	
+	for($i=0;$preference = $sth->fetch();$i++) {
+		$preferences[$i] = $preference;
+	}
+	
+	return $preferences;
 }
 
 function getCustomFieldLabels() {
@@ -299,13 +300,22 @@ function getBillers() {
 }
 
 function getActiveBillers() {
+	global $dbh;
 	global $db_server;
 
 	$sql = "SELECT * FROM ".TB_PREFIX."biller WHERE enabled != 0 ORDER BY name";
 	if ($db_server == 'pgsql') {
 		$sql = "SELECT * FROM ".TB_PREFIX."biller WHERE enabled ORDER BY name";
 	}
-	return sql2array($sql);
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+		
+	$billers = null;
+	
+	for($i=0;$biller = $sth->fetch();$i++) {
+		$billers[$i] = $biller;
+	}
+	
+	return $billers;
 }
 
 
@@ -552,18 +562,29 @@ function getProducts() {
 
 		$products[$i] = $product;
 	}
+	
 	return $products;
 }
 
 function getActiveProducts() {
+	global $dbh;
 	global $db_server;
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."products WHERE enabled != 0 ORDER BY description";
 	if ($db_server == 'pgsql') {
 		$sql = "SELECT * FROM ".TB_PREFIX."products WHERE enabled ORDER BY description";
 	}
-	return sql2array($sql);
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	
+	$products = null;
+	
+	for($i=0;$product = $sth->fetch();$i++) {
+		$products[$i] = $product;
+	}
+	
+	return $products;
 }
+
 
 function getTaxes() {
 	global $LANG;
@@ -1045,10 +1066,19 @@ function getInvoices(&$sth) {
 }
 
 function getCustomerInvoices($id) {
-
-	$sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE customer_id = :id  ORDER BY id DESC";
+	global $dbh;
 	
-	return sql2array($sql);
+	$invoices = null;
+	
+	$sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE customer_id = :id  ORDER BY id DESC";
+	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
+	
+	for($i = 0;$invoice = getInvoices($sth);$i++) {
+		$invoices[$i] = $invoice;
+	}
+	
+	return $invoices;
+
 }
 
 function getCustomers() {
@@ -1089,14 +1119,24 @@ function getCustomers() {
 }
 
 function getActiveCustomers() {
+	global $LANG;
+	global $dbh;
 	global $db_server;
 	
-// enabled is VARCHAR in mysql for now, otherwise qry same for pgsql and mysql	
+	
 	$sql = "SELECT * FROM ".TB_PREFIX."customers WHERE enabled != 0 ORDER BY name";
 	if ($db_server == 'pgsql') {
 		$sql = "SELECT * FROM ".TB_PREFIX."customers WHERE enabled ORDER BY name";
 	}
-	return sql2array($sql);
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+
+	$customers = null;
+
+	for($i=0;$customer = $sth->fetch();$i++) {
+		$customers[$i] = $customer;
+	}
+	
+	return $customers;
 }
 
 function insertInvoice($type) {
