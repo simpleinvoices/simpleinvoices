@@ -48,8 +48,11 @@ function dbQuery($sqlQuery) {
 		
 		//error_log("Insert_id: ".mysql_insert_id($conn));
 
-		$last = lastInsertId();
 		if(LOGGING && (preg_match($pattern,$sqlQuery) == 0)) {
+			$last = null
+			if (preg_match('/^(update|insert)/i', $sqlQuery)) {
+				$last = lastInsertId();
+			}
 			$sql = "INSERT INTO ".TB_PREFIX."log (timestamp,  userid, sqlquerie, last_id) VALUES (CURRENT_TIMESTAMP , ?, ?, ?)";
 			if ($db_server == 'mysql') {
 				$sql = "INSERT INTO ".TB_PREFIX."log (id, timestamp,  userid, sqlquerie, last_id) VALUES (NULL, CURRENT_TIMESTAMP , ?, ?, ?)";

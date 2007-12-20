@@ -553,8 +553,8 @@ INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 	//systemd efaults conversion patch
 	#defaults query and DEFAULT NUMBER OF LINE ITEMS
 	$sql_defaults = "SELECT * FROM ".TB_PREFIX."defaults";
-	$result_defaults = mysqlQuery($sql_defaults);
-	$defaults = mysql_fetch_array($result_defaults);
+	$sth = dbQuery($sql_defaults);
+	$defaults = $sth->fetch();
 
 	$patch['116']['name'] = "System defaults conversion patch - set default biller";
 	$patch['116']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = $defaults[def_biller] where name = 'biller'";
@@ -719,83 +719,95 @@ PRIMARY KEY  (`user_id`)) ;
     $patch['140']['patch'] = "ALTER TABLE  `".TB_PREFIX."account_payments` CHANGE `ac_inv_id` `ac_inv_id` int  NOT NULL ;";
     $patch['140']['date'] = "20071126";
 
-    $patch['141']['name'] = "Correct sql_patch_ref Field Type in sql_patchmanager table to be INT";
-    $patch['141']['patch'] = "ALTER TABLE  `".TB_PREFIX."sql_patchmanager` change `sql_patch_ref` `sql_patch_ref` int NOT NULL ;";
+    $patch['141']['name'] = "Drop non-int compatible default from si_sql_patchmanager";
+    if ($db_server == "mysql") {
+        $patch['141']['patch'] = "SELECT 1+1;";
+    } elseif ($db_server == "pgsql") {
+        $patch['141']['patch'] = "ALTER TABLE ".TB_PREFIX."sql_patchmanager ALTER COLUMN sql_patch_ref DROP DEFAULT;";
+    } 
     $patch['141']['date'] = "20071218";
+
+    $patch['142']['name'] = "Change sql_patch_ref type in sql_patchmanager to int";
+    if ($db_server == "mysql") {
+        $patch['142']['patch'] = "ALTER TABLE  `".TB_PREFIX."sql_patchmanager` change `sql_patch_ref` `sql_patch_ref` int NOT NULL ;";
+    } elseif ($db_server == "pgsql") {
+        $patch['142']['patch'] = "ALTER TABLE  ".TB_PREFIX."sql_patchmanager ALTER COLUMN sql_patch_ref TYPE int USING to_number(sql_patch_ref, '999');";
+    } 
+    $patch['142']['date'] = "20071218";
 	
-	$patch['142']['name'] = "Add domain_id to invoices table";
-	if ($db_server == "mysql")
-	{
-	    $patch['142']['patch'] = "ALTER TABLE `si_invoices` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
-	}
-	if ($db_server == "pgsql")
-	{
-	    $patch['142']['patch'] = "ALTER TABLE `si_invoices` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
-	}
-    $patch['142']['date'] = "200712";
-	//tentra to check
-
-
-	$patch['143']['name'] = "Add domain_id to billers table";
-	if ($db_server == "mysql")
-	{
-	    $patch['143']['patch'] = "ALTER TABLE `si_biller` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
-	}
-	if ($db_server == "pgsql")
-	{
-	    $patch['143']['patch'] = "ALTER TABLE `si_biller` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
-	}
+    $patch['143']['name'] = "Create domain mapping table";
+    if ($db_server == "mysql") {
+        //SC: Needs MySQL variant
+        $patch['143']['patch'] = "CREATE TABLE ".TB_PREFIX."domain (
+            id serial PRIMARY KEY,
+            name text UNIQUE NOT NULL
+            ) ENGINE=InnoDB;";
+    } elseif ($db_server == "pgsql") {
+        $patch['143']['patch'] = "CREATE TABLE ".TB_PREFIX."domain (
+            id serial PRIMARY KEY,
+            name text UNIQUE NOT NULL
+            );";
+    }
     $patch['143']['date'] = "200712";
-	//tentra to check
 
-	$patch['144']['name'] = "Add domain_id to customers table";
-	if ($db_server == "mysql")
-	{
-	    $patch['144']['patch'] = "ALTER TABLE `si_customers` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
-	}
-	if ($db_server == "pgsql")
-	{
-	    $patch['144']['patch'] = "ALTER TABLE `si_customers` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
-	}
+    $patch['144']['name'] = "Insert default domain";
+    if ($db_server == "mysql") {
+        //SC: Needs MySQL variant
+        $patch['144']['patch'] = "INSERT INTO ".TB_PREFIX."domain (name)
+        VALUES ('default');";
+    } elseif ($db_server == "pgsql") {
+        $patch['144']['patch'] = "INSERT INTO ".TB_PREFIX."domain (name)
+        VALUES ('default');";
+    }
     $patch['144']['date'] = "200712";
-	//tentra to check
 
-	$patch['145']['name'] = "Add domain_id to payment_types table";
-	if ($db_server == "mysql")
-	{
-	    $patch['145']['patch'] = "ALTER TABLE `si_payment_types` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `pt_id` ;";
-	}
-	if ($db_server == "pgsql")
-	{
-	    $patch['145']['patch'] = "ALTER TABLE `si_payment_types` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `pt_id` ;";
-	}
+    $patch['145']['name'] = "Add domain_id to payment_types table";
+    if ($db_server == "mysql") {
+        $patch['145']['patch'] = "ALTER TABLE `si_payment_types` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `pt_id` ;";
+    } elseif ($db_server == "pgsql") {
+        $patch['145']['patch'] = "ALTER TABLE ".TB_PREFIX."payment_types ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
+    }
     $patch['145']['date'] = "200712";
-	//tentra to check
 
-	$patch['146']['name'] = "Add domain_id to preferences table";
-	if ($db_server == "mysql")
-	{
-	    $patch['146']['patch'] = "ALTER TABLE `si_preferences` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `pref_id` ;";
-	}
-	if ($db_server == "pgsql")
-	{
-	    $patch['146']['patch'] = "ALTER TABLE `si_preferences` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `pref_id` ;";
-	}
+    $patch['146']['name'] = "Add domain_id to preferences table";
+    if ($db_server == "mysql") {
+        $patch['146']['patch'] = "ALTER TABLE `si_preferences` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `pref_id` ;";
+    } elseif ($db_server == "pgsql") {
+        $patch['146']['patch'] = "ALTER TABLE ".TB_PREFIX."preferences ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
+    }
     $patch['146']['date'] = "200712";
-	//tentra to check
 
-	$patch['147']['name'] = "Add domain_id to products table";
-	if ($db_server == "mysql")
-	{
-	    $patch['147']['patch'] = "ALTER TABLE `si_products` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
-	}
-	if ($db_server == "pgsql")
-	{
-	    $patch['147']['patch'] = "ALTER TABLE `si_products` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
-	}
-    $patch['147']['date'] = "200712";
-	//tentra to check
+    $patch['147']['name'] = "Add domain_id to products table";
+    if ($db_server == "mysql") {
+        $patch['147']['patch'] = "ALTER TABLE `si_products` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
+    } elseif ($db_server == "pgsql") {
+        $patch['147']['patch'] = "ALTER TABLE ".TB_PREFIX."products ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
+    }
+    $patch['147']['date'] = "200712"; 
+    
+    $patch['148']['name'] = "Add domain_id to billers table";
+    if ($db_server == "mysql") {
+        $patch['148']['patch'] = "ALTER TABLE `si_biller` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
+    } elseif ($db_server == "pgsql") {
+        $patch['148']['patch'] = "ALTER TABLE ".TB_PREFIX."biller ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
+    }
+    $patch['148']['date'] = "200712";
 
+    $patch['149']['name'] = "Add domain_id to invoices table";
+    if ($db_server == "mysql") {
+        $patch['149']['patch'] = "ALTER TABLE `si_invoices` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
+    } elseif ($db_server == "pgsql") {
+        $patch['149']['patch'] = "ALTER TABLE ".TB_PREFIX."invoices ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
+    }
+    $patch['149']['date'] = "200712";
+
+    $patch['150']['name'] = "Add domain_id to customers table";
+    if ($db_server == "mysql") {
+        $patch['150']['patch'] = "ALTER TABLE `si_customers` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
+    } elseif ($db_server == "pgsql") {
+        $patch['150']['patch'] = "ALTER TABLE ".TB_PREFIX."customers ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
+    }
+    $patch['150']['date'] = "200712";
 
 
 /*

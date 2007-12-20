@@ -23,7 +23,9 @@ function getNumberOfPatches() {
 
 
 function runPatches() {
-		global $patch;
+	global $patch;
+	global $db_server;
+	global $dbh;
 	#DEFINE SQL PATCH
 
 	$sql = "SHOW TABLES LIKE '".TB_PREFIX."sql_patchmanager'";
@@ -36,10 +38,17 @@ function runPatches() {
 
 		$display_block = "<table align='center'>";
 
+		if ($db_server == 'pgsql') {
+			// Yay!  Transactional DDL
+			$dbh->beginTransaction();
+		}
 		for($i=0;$i < count($patch);$i++) {
 			run_sql_patch($i,$patch[$i]);
 		}
-
+		if ($db_server == 'pgsql') {
+			// Yay!  Transactional DDL
+			$dbh->commit();
+		}
 
 		$display_block .= <<<EOD
 		<br>
@@ -138,7 +147,7 @@ EOD;
 function check_sql_patch($check_sql_patch_ref, $check_sql_patch_field) {
     	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager WHERE sql_patch_ref = :patch" ;
 
-	$sth = dbQuery($sql, ':patch', $check_sql_patch_ref) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql, ':patch', $check_sql_patch_ref) or die(htmlspecialchars(end($dbh->errorInfo())));
 
 	if(count($sth->fetchAll()) > 0) {
 		return true;
@@ -154,12 +163,8 @@ function run_sql_patch($id, $patch) {
 	global $dbh;
 	global $db_server;
 
-	if ($db_server == 'pgsql') {
-		// Yay!  Transactional DDL
-		$dbh->beginTransaction();
-	}
 	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager WHERE sql_patch_ref = :id" ;
-	$sth = dbQuery($sql, ':id', $id) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
 	//echo $sql;
 	$escaped_id = htmlspecialchars($id);
@@ -176,7 +181,7 @@ EOD;
 		
 		//patch hasn't been run
 		#so do the bloody patch
-		dbQuery($patch['patch']) or die(end($dbh->errorInfo()));
+		dbQuery($patch['patch']) or die(htmlspecialchars(end($dbh->errorInfo())));
 		
 
 		$display_block  = <<<EOD
@@ -189,7 +194,7 @@ EOD;
 		
 		/*echo $sql_update;*/
 
-		dbQuery($sql_update, ':id', $id, ':name', $patch['name'], ':date', $patch['date'], ':patch', $patch['patch']) or die(end($dbh->errorInfo()));
+		dbQuery($sql_update, ':id', $id, ':name', $patch['name'], ':date', $patch['date'], ':patch', $patch['patch']) or die(htmlspecialchars(end($dbh->errorInfo())));
 
 		if($id == 126) {
 			patch126();
@@ -197,10 +202,6 @@ EOD;
 			convertCustomFields();
 		}
 		$display_block .= "<tr><td>SQL patch $escaped_id, $patch_name <b>has</b> been applied</td></tr>";
-	}
-	if ($db_server == 'pgsql') {
-		// Yay!  Transactional DDL
-		$dbh->commit();
 	}
 	
 	//global $smarty;
