@@ -8,10 +8,10 @@
 *  	Antoni Bertran (3&Punt Sol Informatiques), Anton Meixome
 *
 * Last edited:
-*    2007-04-26
+*    2007-12-21
 *
 * License:
-*    GPL v2 or above
+*	 GPL v2 or above
 */
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
@@ -26,7 +26,9 @@ $LANG['account_info'] = "Informaci&oacute; compte";//1
 $LANG['actions'] = "Accions";//1
 $LANG['add_biller'] = "Afegir Facturador";//1
 $LANG['add_customer'] = "Afegir Client";//1
+$LANG['add_invoice_item'] = "Add Invoice Item";//0
 $LANG['add_invoice_preference'] = "Afegir Prefer&egrave;ncies de Factra";//1
+$LANG['add_item'] = "Add Item";//0
 $LANG['add_new_biller'] = "Afegir Nou Facturador";//1
 $LANG['add_new_invoice'] = "Afegir Nova Factura";//1
 $LANG['add_new_payment_type'] = "Afegir Nou M&egrave;tode de pagament";//1
@@ -67,11 +69,11 @@ $LANG['create_invoice'] ="Crear una factura";//1
 $LANG['credits'] = "Cr&egrave;dits";//1
 $LANG['currency_sign'] = "S&iacute;mbols de moneda";//1
 $LANG['custom_field'] = "Camp Personalitzable";//1
+$LANG['custom_field_db_field_name'] = "Nom del Camp a la Base de Dades";//1
 $LANG['custom_field1'] = "Camp Personalitzable 1";//1
 $LANG['custom_field2'] = "Camp Personalitzable 2";//1
 $LANG['custom_field3'] = "Camp Personalitzable 3";//1
 $LANG['custom_field4'] = "Camp Personalitzable 4";//1
-$LANG['custom_field_db_field_name'] = "Nom del Camp a la Base de Dades";//1
 $LANG['custom_fields'] = "Camps Personalitzables";//1
 $LANG['custom_fields_upper'] = "Camps Personalitzables";//1
 $LANG['custom_label'] = "Etiqueta Personalitzable";//1
@@ -93,9 +95,14 @@ $LANG['days'] = "dies";//1
 $LANG['debtors'] = "Deutors";//1
 $LANG['debtors_by_aging_periods'] = "Deutors per per&iacute;odes d'antiguitat";//1
 $LANG['debtors_by_amount_owed'] = "Deutors per Total De Deute";//1
+$LANG['default_biller'] = "Default Biller";//0
+$LANG['default_customer'] = "Default Customer";//0
 $LANG['default_inv_template'] = "Plantilla per defecte en factures ";//1
+$LANG['default_invoice_preference'] = "Default Invoice Preference";//0
 $LANG['default_number_items'] = "Nombre Default number of line items:";//1
 $LANG['default_payment_type'] = "Default payment type";//0
+$LANG['default_tax'] = "Default Tax";//0
+$LANG['delete'] = "Delete";//0
 $LANG['description'] = "Descripci&oacute;";//1
 $LANG['details'] = "detalls";//1
 $LANG['disabled'] = "Deshabilitat";//1
@@ -164,6 +171,8 @@ $LANG['item'] = "Producte";//1
 $LANG['itemised'] = "Detallat";//1
 $LANG['itemised_style'] = "Estil Detallat";//1
 $LANG['license'] = "Llic&egrave;ncia";//1
+$LANG['license'] = "License";//0
+$LANG['logging'] = "Logging";//0
 $LANG['login'] = "Log in";//1
 $LANG['logo_file'] = "Arxiu de logo";//1
 $LANG['logout'] = "Log out";//1
@@ -219,6 +228,7 @@ $LANG['payments_filtered_invoice'] = "Proc&eacute;s de pagament per aquesta fact
 $LANG['phone'] = "Tel&egrave;//1fon";//1
 $LANG['phone_short'] = "Tfn.";//1
 $LANG['preference_id'] = "ID Prefer&egrave;ncia";//1
+$LANG['preferences'] = "Prefer&egrave;ncies";//1
 $LANG['prepare_simple_invoices'] = "Preparar Simple Invoices per usar";//1
 $LANG['print_preview'] = "Imprimir Previsualitzaci&oacute;";//1
 $LANG['print_preview_tooltip'] = "Imprimir Previsualitzaci&oacute; de ";//1
@@ -256,8 +266,8 @@ $LANG['save_customer'] = "Salvar Client";//1
 $LANG['save_customer_failure'] = "Quelcom ha anat malament, sis plau intenti salvar el client una altra vegada";//1
 $LANG['save_customer_success'] = "Client salvat correctament,<br> ser&agrave;s redirigit a la p&agrave;gina de Gesti&oacute; de Clients";//1
 $LANG['save_defaults'] = "Salvar Valors per Defecte";//1
-$LANG['save_defaults_success'] = "The system default has been successfully updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
+$LANG['save_defaults_success'] = "The system default has been successfully updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_invoice'] = "Salvar Factura";//1
 $LANG['save_invoice_failure'] = "Quelcom ha anat malament, sis plau intenti saving the invoice again";//1
 $LANG['save_invoice_items_success'] = "Processant &iacute;tems de factura<br> ser&agrave;s rediritgit a la Vista R&agrave;pida d'aquesta factura";//1
@@ -291,6 +301,7 @@ $LANG['sum'] = "Suma";//1
 $LANG['summary'] = "Resum";//1
 $LANG['summary_of_accounts'] = "Resum de comptes";//1
 $LANG['system_defaults'] = "Valors per Defecte";//1
+$LANG['system_preferences'] = "System Preferences";//0
 $LANG['tax'] = "Impost";//1
 $LANG['tax_description'] = "Descripci&oacute; Impost";//1
 $LANG['tax_id'] = "ID Impost";//1
@@ -322,7 +333,9 @@ $LANG['view'] = "Veure";//1
 $LANG['want_more_fields'] = "desitja m&eacute;s camps";//1
 $LANG['welcome'] ="Benvingut a ";//1
 $LANG['what_are_custom_fields'] = "Qu&egrave; s&oacute;n els camps personalitzats";//1
+$LANG['whats_all_this_inv_pref'] = "Whats all this Invoice Preference stuff about ";//0
 $LANG['whats_this_page_about'] = "Qu&egrave; hi ha en quant a la p&agrave;gina";//1
+$LANG['wheres_the_edit_button'] = "Wheres the edit button ";//0
 $LANG['zip'] = "Codi Postal";//1
 
 ?>
