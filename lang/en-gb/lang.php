@@ -7,6 +7,9 @@
 * Authors:
 *	 Justin Kelly
 *
+* Last edited:
+*    2007-12-21
+*
 * License:
 *	 GPL v2 or above
 */
