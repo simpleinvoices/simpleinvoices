@@ -8,7 +8,7 @@
 *	 Justin Kelly
 *
 * Last edited:
-*    2007-12-21
+*    2007-12-22
 *
 * License:
 *	 GPL v2 or above
@@ -134,13 +134,10 @@ $LANG['home'] = "Home";//1
 $LANG['id'] = "ID";//1
 $LANG['ie_10_for_10'] = "* ie. 10 for 10%";//1
 $LANG['included'] = "included";//1
-$LANG['insert_biller'] = "Add Biller";//1
 $LANG['insert_biller'] = "Insert Biller";//1
-$LANG['insert_customer'] = "Add Customer";//1
 $LANG['insert_customer'] = "Insert Customer";//1
 $LANG['insert_payment_type'] = "Insert Payment Type";//1
 $LANG['insert_preference'] = "Insert Preference";//1
-$LANG['insert_product'] = "Add Product";//1
 $LANG['insert_product'] = "Insert Product";//1
 $LANG['insert_tax_rate'] = "Insert Tax Rate";//1
 $LANG['installation'] = "Installation";//1

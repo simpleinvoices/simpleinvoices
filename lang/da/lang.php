@@ -8,7 +8,7 @@
 *	 Claus Mølgaard Nielsen
 *
 * Last edited:
-* 	 2007-11-10
+* 	 2007-12-22
 *
 * License:
 *	 GPL v2 or above
@@ -21,22 +21,13 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
 #all
 $title = "Simple Invoices";//1
 
-$LANG['delete'] = "Slet";//1
-$LANG['logging'] = "Logge";//1
-$LANG['language'] = "Sprog";//1
-$LANG['default_biller'] = "Standard Operatør";//1
-$LANG['default_customer'] = "Standard Kunde";//1
-$LANG['default_tax'] = "Standard Moms";//1
-$LANG['default_invoice_preference'] = "Standard Faktura Preference";//1
-$LANG['system_preferences'] = "System Preferencer";//1
-
 $LANG['about'] = "Om";//1
 $LANG['account_info'] = "Konto Information";//1
 $LANG['actions'] = "Handlinger";//1
 $LANG['add_biller'] = "Tilføj Operatør";//1
 $LANG['add_customer'] = "Tilføj Kunde";//1
-$LANG['add_invoice_preference'] = "Tilføj Faktura preference";//1
 $LANG['add_invoice_item'] = "Tilføj Faktura postering";//1
+$LANG['add_invoice_preference'] = "Tilføj Faktura preference";//1
 $LANG['add_item'] = "Tilføj postering";//1
 $LANG['add_new_biller'] = "Tilføj Ny Operatør";//1
 $LANG['add_new_invoice'] = "Tilføj Ny Faktura";//1
@@ -78,11 +69,11 @@ $LANG['create_invoice'] ="Skriv Ny Faktura";//1
 $LANG['credits'] = "Credits";//1
 $LANG['currency_sign'] = "Valuta Tegn";//1
 $LANG['custom_field'] = "Egendefineret felt";//1
+$LANG['custom_field_db_field_name'] = "Database felt navn";//1
 $LANG['custom_field1'] = "Egendefineret felt 1";//1
 $LANG['custom_field2'] = "Egendefineret felt 2";//1
 $LANG['custom_field3'] = "Egendefineret felt 3";//1
 $LANG['custom_field4'] = "Egendefineret felt 4";//1
-$LANG['custom_field_db_field_name'] = "Database felt navn";//1
 $LANG['custom_fields'] = "Egendefinerede felter";//1
 $LANG['custom_fields_upper'] = "Egendefinerede felter";//1
 $LANG['custom_label'] = "Egendefineret Label";//1
@@ -104,9 +95,14 @@ $LANG['days'] = "dage";//1
 $LANG['debtors'] = "Debitorer";//1
 $LANG['debtors_by_aging_periods'] = "Debitorer efter betalingsfrist";//1
 $LANG['debtors_by_amount_owed'] = "Debitorer efter hvor meget udestående";//1
+$LANG['default_biller'] = "Standard Operatør";//1
+$LANG['default_customer'] = "Standard Kunde";//1
 $LANG['default_inv_template'] = "Standard faktura skabelon ";//1
+$LANG['default_invoice_preference'] = "Standard Faktura Preference";//1
 $LANG['default_number_items'] = "Standard antal af linje punkter:";//1
 $LANG['default_payment_type'] = "Standard betalingsform";//1
+$LANG['default_tax'] = "Standard Moms";//1
+$LANG['delete'] = "Slet";//1
 $LANG['description'] = "Beskrivelse";//1
 $LANG['details'] = "Detaljer";//1
 $LANG['disabled'] = "Deaktiveret";
@@ -139,12 +135,9 @@ $LANG['id'] = "ID";//1
 $LANG['ie_10_for_10'] = "* feks 25 for 25%";//1
 $LANG['included'] = "includeret";//1
 $LANG['insert_biller'] = "Tilføj Operatør";//1
-$LANG['insert_biller'] = "Tilføj Operatør";//1
-$LANG['insert_customer'] = "Tilføj Kunde";//1
 $LANG['insert_customer'] = "Tilføj Kunde";//1
 $LANG['insert_payment_type'] = "Tilføj Betalingsform";//1
 $LANG['insert_preference'] = "Tilføj Preferense";//1
-$LANG['insert_product'] = "Tilføj Produkt";//1
 $LANG['insert_product'] = "Tilføj Produkt";//1
 $LANG['insert_tax_rate'] = "Tilføj Moms";//1
 $LANG['installation'] = "Installation";//1
@@ -174,7 +167,9 @@ $LANG['invoices'] = "Fakturaer";//1
 $LANG['item'] = "Artikel";//1
 $LANG['itemised'] = "Artikel baseret";//1
 $LANG['itemised_style'] = "Artikel baseret stil";//1
+$LANG['language'] = "Sprog";//1
 $LANG['license'] = "Licens";//1
+$LANG['logging'] = "Logge";//1
 $LANG['login'] = "Log ind";//1
 $LANG['logo_file'] = "Logo fil";//1
 $LANG['logout'] = "Log ud";//1
@@ -229,8 +224,8 @@ $LANG['payments_filtered_customer'] = "Betalinger sorteret efter kunde ID";//1
 $LANG['payments_filtered_invoice'] = "Behandle betaling for denne faktura";//1
 $LANG['phone'] = "Telefon";//1
 $LANG['phone_short'] = "Tlf.";//1
-$LANG['preferences'] = "Indstillinger";//1
 $LANG['preference_id'] = "Indstilling ID";//1
+$LANG['preferences'] = "Indstillinger";//1
 $LANG['prepare_simple_invoices'] = "Gør Simple Invoices klar til brug";//1
 $LANG['print_preview'] = "Print Forhåndsvisning";//1
 $LANG['print_preview_tooltip'] = "Print Forhåndsvisning af";//1
@@ -268,8 +263,8 @@ $LANG['save_customer'] = "Gemme Kunde";//1
 $LANG['save_customer_failure'] = "Noget gik galt, prøv venligst at gemme kunde igen";//1
 $LANG['save_customer_success'] = "Kunde gemt,<br> du bliver omdirigeret tilbage til Behandle Kunder siden";//1
 $LANG['save_defaults'] = "Gemme Standardvalg";//1
-$LANG['save_defaults_success'] = "Systemets standardvalg er opdateret,<br> du vil blive omdirigeret tilbage til Systemets Standardvalg siden";//1
 $LANG['save_defaults_failure'] = "Noget gik galt, prøv venligst at sætte systemets standardvalg igen";//1
+$LANG['save_defaults_success'] = "Systemets standardvalg er opdateret,<br> du vil blive omdirigeret tilbage til Systemets Standardvalg siden";//1
 $LANG['save_invoice'] = "Gemme Faktura";//1
 $LANG['save_invoice_failure'] = "Noget gik galt, prøv venligst at gemme faktura igen";//1
 $LANG['save_invoice_items_success'] = "Behandler faktura artikler<br> du bliver omdirigeret tilbage til Forhåndsvisning af denne faktura";//1
@@ -303,6 +298,7 @@ $LANG['sum'] = "Sum";//1
 $LANG['summary'] = "Sammendrag";//1
 $LANG['summary_of_accounts'] = "Sammendrag af konti";//1
 $LANG['system_defaults'] = "Systemets Forvalg";//1
+$LANG['system_preferences'] = "System Preferencer";//1
 $LANG['tax'] = "Moms";//1
 $LANG['tax_description'] = "Moms - beskrivelse";//1
 $LANG['tax_id'] = "Moms ID";//1
@@ -334,7 +330,9 @@ $LANG['view'] = "Vis";//1
 $LANG['want_more_fields'] = "flere felter?";//1
 $LANG['welcome'] = "Velkommen til ";//1
 $LANG['what_are_custom_fields'] = "Hvad er egendefinerede felter ";//1
+$LANG['whats_all_this_inv_pref'] = "Whats all this Invoice Preference stuff about ";//0
 $LANG['whats_this_page_about'] = "Hvad handler denne side om ";//1
+$LANG['wheres_the_edit_button'] = "Wheres the edit button ";//0
 $LANG['zip'] = "Postnummer";//1
 
 ?>
