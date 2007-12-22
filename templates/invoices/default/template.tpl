@@ -100,7 +100,6 @@
 		{merge_address field1=$biller.city field2=$biller.state field3=$biller.zip_code street1=$biller.street_address street2=$biller.street_address2 class1="tbl1-left" class2="tbl1-right" colspan=3}
 
          {if $biller.country != null }
-                </tr>
                 <tr>
                         <td class='tbl1-left'></td><td class='tbl1-right' colspan="3">{$biller.country}</td>
                 </tr>
@@ -108,7 +107,7 @@
 
 	{print_if_not_null label=$LANG.phone_short field=$biller.phone class1='tbl1-left' class2='tbl1-right' colspan=3}
 	{print_if_not_null label=$LANG.fax field=$biller.fax class1='tbl1-left' class2='tbl1-right' colspan=3}
-	{print_if_not_null label=$LANG.mobile_short field=$biller.mobile_short class1='tbl1-left' class2='tbl1-right' colspan=3}
+	{print_if_not_null label=$LANG.mobile_short field=$biller.mobile_phone class1='tbl1-left' class2='tbl1-right' colspan=3}
 	{print_if_not_null label=$LANG.email field=$biller.email class1='tbl1-left' class2='tbl1-right' colspan=3}
 	
 	{print_if_not_null label=$customFieldLabels.biller_cf1 field=$biller.custom_field1 class1='tbl1-left' class2='tbl1-right' colspan=3}
@@ -168,7 +167,7 @@
 
 	{print_if_not_null label=$LANG.phone_short field=$customer.phone class1='tbl1-left' class2='tbl1-right' colspan=3}
 	{print_if_not_null label=$LANG.fax field=$customer.fax class1='tbl1-left' class2='tbl1-right' colspan=3}
-	{print_if_not_null label=$LANG.mobile_short field=$customer.mobile_short class1='tbl1-left' class2='tbl1-right' colspan=3}
+	{print_if_not_null label=$LANG.mobile_short field=$customer.mobile_phone class1='tbl1-left' class2='tbl1-right' colspan=3}
 	{print_if_not_null label=$LANG.email field=$customer.email class1='tbl1-left' class2='tbl1-right' colspan=3}
 	
 	{print_if_not_null label=$customFieldLabels.customer_cf1 field=$customer.custom_field1 class1='tbl1-left' class2='tbl1-right' colspan=3}
@@ -376,5 +375,5 @@
 </table>
 <div id="footer"></div></div>
 
-</table></body>
+</body>
 </html>

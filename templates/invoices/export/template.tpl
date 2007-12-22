@@ -102,7 +102,6 @@
 			{merge_address field1=$biller.city field2=$biller.state field3=$biller.zip_code street1=$biller.street_address street2=$biller.street_address2 class1="" class2="" colspan=3}
 	
 	        {if $biller.country != null }
-                </tr>
                 <tr>
                         <td ></td><td colspan=3>{$biller.country}</td>
                 </tr>
@@ -191,7 +190,6 @@
 		{merge_address field1=$customer.city field2=$customer.state field3=$customer.zip_code street1=$customer.street_address street2=$customer.street_addtess2 class1="" class2="" colspan=3}
 	
                 {if $customer.country != null }
-                </tr>
                 <tr>
                         <td ></td><td  colspan=3>{$customer.country}</td>
                 </tr>
