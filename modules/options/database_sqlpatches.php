@@ -9,7 +9,6 @@ include('./include/sql_patches.php');
 function getNumberOfPatches() {
 	global $patch;
 	#Max patches applied - start
-		
 
 	$check_patches_sql = "SELECT count(sql_patch) AS count FROM ".TB_PREFIX."sql_patchmanager ";
 	$sth = dbQuery($check_patches_sql) or die(htmlspecialchars(end($dbh->errorInfo())));
@@ -18,7 +17,7 @@ function getNumberOfPatches() {
 	$patch_count = count($patch);
 	
 	//Returns number of patches to be applied
-	return count($patch) - $patches['count'];
+	return $patch_count - $patches['count'];
 }
 
 
