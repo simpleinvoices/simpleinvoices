@@ -8,7 +8,7 @@
 *  	Roman Dergam
 *
 * Last edited:
-*    2007-04-27
+*    2007-12-22
 *
 * License:
 *    GPL v2 or above
@@ -26,7 +26,9 @@ $LANG['account_info'] = "Informace ú?tu";//1
 $LANG['actions'] = "Akce";//1
 $LANG['add_biller'] = "P?idat dodavatele";//1
 $LANG['add_customer'] = "P?idat odb?ratele";//1
+$LANG['add_invoice_item'] = "Add Invoice Item";//0
 $LANG['add_invoice_preference'] = "P?idat volbu faktury";//1
+$LANG['add_item'] = "Add Item";//0
 $LANG['add_new_biller'] = "Add New Biller";//0
 $LANG['add_new_invoice'] = "P?idat novou fakturu";//1
 $LANG['add_new_payment_type'] = "P?idat nový zp?sob úhrady";//1
@@ -67,11 +69,11 @@ $LANG['create_invoice'] ="Vytvo?it fakturu";//1
 $LANG['credits'] = "Tv?rci";//1
 $LANG['currency_sign'] = "Symbol m?ny";//1
 $LANG['custom_field'] = "Volitelné pole";//1
+$LANG['custom_field_db_field_name'] = "Název pole databáze";//1
 $LANG['custom_field1'] = "Volitelné pole 1";//1
 $LANG['custom_field2'] = "Volitelné pole 2";//1
 $LANG['custom_field3'] = "Volitelné pole 3";//1
 $LANG['custom_field4'] = "Volitelné pole 4";//1
-$LANG['custom_field_db_field_name'] = "Název pole databáze";//1
 $LANG['custom_fields'] = "Volitelná pole";//1
 $LANG['custom_fields_upper'] = "Volitelná pole";//1
 $LANG['custom_label'] = "Volitelný popis";//1
@@ -93,9 +95,14 @@ $LANG['days'] = "dny";//1
 $LANG['debtors'] = "Dlužníci";//1
 $LANG['debtors_by_aging_periods'] = "Dlužníci podle splatnosti";//1
 $LANG['debtors_by_amount_owed'] = "Dlužníci podle dlužné ?ástky";//1
+$LANG['default_biller'] = "Default Biller";//0
+$LANG['default_customer'] = "Default Customer";//0
 $LANG['default_inv_template'] = "Default invoice template ";//0
+$LANG['default_invoice_preference'] = "Default Invoice Preference";//0
 $LANG['default_number_items'] = "Default number of line items:";//0
 $LANG['default_payment_type'] = "Default payment type";//0
+$LANG['default_tax'] = "Default Tax";//0
+$LANG['delete'] = "Delete";//0
 $LANG['description'] = "Popis";//1
 $LANG['details'] = "Podrobnosti";//1
 $LANG['disabled'] = "Neaktivní";//1
@@ -163,7 +170,9 @@ $LANG['invoices'] = "Faktury";//1
 $LANG['item'] = "Položka";//1
 $LANG['itemised'] = "Po položkách";//1
 $LANG['itemised_style'] = "Styl Po položkách";//1
+$LANG['language'] = "Language";//0
 $LANG['license'] = "Licence";//1
+$LANG['logging'] = "Logging";//0
 $LANG['login'] = "P?ihlášení";//1
 $LANG['logo_file'] = "Soubor loga";//1
 $LANG['logout'] = "Odhlášení";//1
@@ -219,6 +228,7 @@ $LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
 $LANG['phone'] = "Telefon";//1
 $LANG['phone_short'] = "Tel.";//1
 $LANG['preference_id'] = "ID volby";//1
+$LANG['preferences'] = "Preferences";//0
 $LANG['prepare_simple_invoices'] = "P?iprava Simple Invoices pro použití";//1
 $LANG['print_preview'] = "Náhled tisku";//1
 $LANG['print_preview_tooltip'] = "Náhled tisku";//1
@@ -256,8 +266,8 @@ $LANG['save_customer'] = "Save Customer";//0
 $LANG['save_customer_failure'] = "Something went wrong, please try saving the customer again";//0
 $LANG['save_customer_success'] = "Customer successfully saved,<br> you will be redirected back to the Manage Customers page";//0
 $LANG['save_defaults'] = "Save Defaults";//0
-$LANG['save_defaults_success'] = "The system default has been successfully updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
+$LANG['save_defaults_success'] = "The system default has been successfully updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_invoice'] = "Save Invoice";//0
 $LANG['save_invoice_failure'] = "Something went wrong, please try saving the invoice again";//0
 $LANG['save_invoice_items_success'] = "Processing invoice items<br> you will be redirected back to the Quick View of this invoice";//0
@@ -291,6 +301,7 @@ $LANG['sum'] = "Sou?et";//1
 $LANG['summary'] = "Souhrn";//1
 $LANG['summary_of_accounts'] = "Souhrn ú?t?";//1
 $LANG['system_defaults'] = "Default. nastavení systému";//1
+$LANG['system_preferences'] = "System Preferences";//0
 $LANG['tax'] = "Da?";//1
 $LANG['tax_description'] = "Popis dan?";//1
 $LANG['tax_id'] = "ID dan?";//1
@@ -322,8 +333,9 @@ $LANG['view'] = "Pohled";//1
 $LANG['want_more_fields'] = "chci více polí";//1
 $LANG['welcome'] = "Vítejte v ";//1
 $LANG['what_are_custom_fields'] = "Co jsou volitelná pole";//1
+$LANG['whats_all_this_inv_pref'] = "Whats all this Invoice Preference stuff about ";//0
 $LANG['whats_this_page_about'] = "O ?em je tato stránka";//1
+$LANG['wheres_the_edit_button'] = "Wheres the edit button ";//0
 $LANG['zip'] = "PS?";//1
-
 
 ?>
