@@ -8,7 +8,7 @@
 *	 Petri Hartoma
 *
 * Last edited:
-* 	 2007-05-02
+* 	 2007-12-22
 *
 * License:
 *	 GPL v2 or above
@@ -26,7 +26,9 @@ $LANG['account_info'] = "Tilin tiedot";//1
 $LANG['actions'] = "Toiminnot";//1
 $LANG['add_biller'] = "Uusi laskuttaja";//1
 $LANG['add_customer'] = "Uusi asiakas";//1
+$LANG['add_invoice_item'] = "Add Invoice Item";//0
 $LANG['add_invoice_preference'] = "Uusi oletuslasku";//1
+$LANG['add_item'] = "Add Item";//0
 $LANG['add_new_biller'] = "Lis&auml;&auml; uusi laskuttaja";//1
 $LANG['add_new_invoice'] = "Uusi lasku";//1
 $LANG['add_new_payment_type'] = "Lis&auml;&auml; uusi maksutapa";//1
@@ -47,7 +49,6 @@ $LANG['aging'] = "Ik&auml;";//1
 $LANG['amount'] = "Summa";//1
 $LANG['attention_short'] = "Viite";//1
 $LANG['backup_database'] = "Tietokannan varmuuskopio";//1
-$LANG['bank_ref'] = "Viitenumero";//1
 $LANG['biller'] = "Laskuttaja";//1
 $LANG['biller_details'] = "Laskuttajan tiedot";//1
 $LANG['biller_edit'] = "Muokkaa laskuttajaa";//1
@@ -68,11 +69,11 @@ $LANG['create_invoice'] ="Uusi lasku";//1
 $LANG['credits'] = "Ansiot";//1
 $LANG['currency_sign'] = "Valuutan tunnus";//1
 $LANG['custom_field'] = "Muokattava kentt&auml;";//1
+$LANG['custom_field_db_field_name'] = "Tietokannan kent&auml;n nimi";//1
 $LANG['custom_field1'] = "Muokattava kentt&auml; 1";//1
 $LANG['custom_field2'] = "Muokattava kentt&auml; 2";//1
 $LANG['custom_field3'] = "Muokattava kentt&auml; 3";//1
 $LANG['custom_field4'] = "Muokattava kentt&auml; 4";//1
-$LANG['custom_field_db_field_name'] = "Tietokannan kent&auml;n nimi";//1
 $LANG['custom_fields'] = "Muokattavat kent&auml;t";//1
 $LANG['custom_fields_upper'] = "Muokattavat kent&auml;t";//1
 $LANG['custom_label'] = "Muokattava teksti";//1
@@ -94,13 +95,17 @@ $LANG['days'] = "p&auml;iv&auml;&auml;";//1
 $LANG['debtors'] = "Velalliset";//1
 $LANG['debtors_by_aging_periods'] = "Velalliset er&auml;p&auml;iv&auml;n mukaan";//1
 $LANG['debtors_by_amount_owed'] = "Velalliset saatavien mukaan";//1
+$LANG['default_biller'] = "Default Biller";//0
+$LANG['default_customer'] = "Default Customer";//0
 $LANG['default_inv_template'] = "Laskun oletusmalline ";//1
+$LANG['default_invoice_preference'] = "Default Invoice Preference";//0
 $LANG['default_number_items'] = "Laskurivien oletuslukum&auml;&auml;r&auml;:";//1
 $LANG['default_payment_type'] = "Default payment type";//0
+$LANG['default_tax'] = "Default Tax";//0
+$LANG['delete'] = "Delete";//0
 $LANG['description'] = "Kuvaus";//1
 $LANG['details'] = "Tiedot";//1
 $LANG['disabled'] = "Ei k&auml;yt&ouml;ss&auml;";//1
-$LANG['due_date'] = "Er&auml;p&auml;iv&auml;";//1
 $LANG['edit'] = "Muokkaa";//1
 $LANG['edit_view_tooltip'] = "Muokkaa";//1
 $LANG['email'] = "S&auml;hk&ouml;posti";//1
@@ -165,7 +170,9 @@ $LANG['invoices'] = "Laskut";//1
 $LANG['item'] = "Palvelu";//1
 $LANG['itemised'] = "yksil&ouml;ityn&auml;";//1
 $LANG['itemised_style'] = "yksil&ouml;ityn&auml;";//1
+$LANG['language'] = "Language";//0
 $LANG['license'] = "Lisenssi";//1
+$LANG['logging'] = "Logging";//0
 $LANG['login'] = "Kirjaudu sis&auml;&auml;n";//1
 $LANG['logo_file'] = "Logotiedosto";//1
 $LANG['logout'] = "Kirjaudu ulos";//1
@@ -221,6 +228,7 @@ $LANG['payments_filtered_invoice'] = "Kohdista maksu t&auml;h&auml;n laskuun";//
 $LANG['phone'] = "Puhelin";//1
 $LANG['phone_short'] = "Puh";//1
 $LANG['preference_id'] = "Oletuslaskun numero";//1
+$LANG['preferences'] = "Preferences";//0
 $LANG['prepare_simple_invoices'] = "Simple Invoices -ohjelman k&auml;ytt&ouml;&ouml;notto";//1
 $LANG['print_preview'] = "Tulostuksen esikatselu";//1
 $LANG['print_preview_tooltip'] = "Tulostuksen esikatselu kohteeseen";//1
@@ -258,8 +266,8 @@ $LANG['save_customer'] = "Tallenna asiakas";//1
 $LANG['save_customer_failure'] = "Virhe tietojen tallennuksessa. Yrit&auml; asiakastietojen tallennusta uudestaan";//1
 $LANG['save_customer_success'] = "Asiakastiedot tallennettu,<br>ohjelma siirtyy takaisin Asiakkaiden hallinta -sivulle";//1
 $LANG['save_defaults'] = "Tallenna oletusarvot";//1
-$LANG['save_defaults_success'] = "The system default has been successfully updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
+$LANG['save_defaults_success'] = "The system default has been successfully updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_invoice'] = "Tallenna lasku";//1
 $LANG['save_invoice_failure'] = "Virhe tietojen tallennuksessa. Yrit&auml; laskun tallennusta uudestaan";//1
 $LANG['save_invoice_items_success'] = "K&auml;sitell&auml;&auml;n laskurivej&auml;,<br>ohjelma siirtyy t&auml;m&auml;n laskun esikatseluun";//1
@@ -293,6 +301,7 @@ $LANG['sum'] = "Summa";//1
 $LANG['summary'] = "Yhteenveto";//1
 $LANG['summary_of_accounts'] = "Tilien yhteenveto";//1
 $LANG['system_defaults'] = "J&auml;rjestelm&auml;n oletustiedot";//1
+$LANG['system_preferences'] = "System Preferences";//0
 $LANG['tax'] = "ALV";//1
 $LANG['tax_description'] = "Arvonlis&auml;veron kuvaus";//1
 $LANG['tax_id'] = "ALV";//1
@@ -324,7 +333,9 @@ $LANG['view'] = "N&auml;yt&auml;";//1
 $LANG['want_more_fields'] = "enemm&auml;n kentti&auml;";//1
 $LANG['welcome'] ="Tervetuloa ohjelmaan ";//1
 $LANG['what_are_custom_fields'] = "Mit&auml; muokattavat kent&auml;t ovat";//1
+$LANG['whats_all_this_inv_pref'] = "Whats all this Invoice Preference stuff about ";//0
 $LANG['whats_this_page_about'] = "Mit&auml; t&auml;ll&auml; sivulla on";//1
+$LANG['wheres_the_edit_button'] = "Wheres the edit button ";//0
 $LANG['zip'] = "Postinro";//1
 
 ?>
