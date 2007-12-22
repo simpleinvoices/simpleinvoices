@@ -8,7 +8,7 @@
 *  	Antoni Bertran (3&Punt Sol Informatiques), Anton Meixome
 *
 * Last edited:
-*    2007-12-21
+*    2007-12-22
 *
 * License:
 *	 GPL v2 or above
@@ -134,13 +134,10 @@ $LANG['home'] = "Inici";//1
 $LANG['id'] = "ID";//1
 $LANG['ie_10_for_10'] = "* ex. 10 per 10%";//1
 $LANG['included'] = "inclo&ograve;s";//1
-$LANG['insert_biller'] = "Afegir Facturador";//1
 $LANG['insert_biller'] = "Inserir Facturador";//1
-$LANG['insert_customer'] = "Afegir Client";//1
 $LANG['insert_customer'] = "Inserir Client";//1
 $LANG['insert_payment_type'] = "Inserir Tipus Pagament";//1
 $LANG['insert_preference'] = "Inserir Prefer&egrave;ncies";//1
-$LANG['insert_product'] = "Afegir Producte";//1
 $LANG['insert_product'] = "Inserir Producte";//1
 $LANG['insert_tax_rate'] = "Inserir Tarifa Impost";//1
 $LANG['installation'] = "Instal·laci&oacute;";//1

@@ -8,7 +8,7 @@
 *	 Catherine, Lionel
 *
 * Last edited:
-* 	 2007-22-06
+* 	 2007-12-22
 *
 * License:
 *	 GPL v2 or above
@@ -26,7 +26,9 @@ $LANG['account_info'] = "Informations sur le compte";//1
 $LANG['actions'] = "Actions";//1
 $LANG['add_biller'] = "Nouveau vendeur";//1
 $LANG['add_customer'] = "Nouveau client";//1
+$LANG['add_invoice_item'] = "Add Invoice Item";//0
 $LANG['add_invoice_preference'] = "Nouveau mod&egrave;le ";//1
+$LANG['add_item'] = "Add Item";//0
 $LANG['add_new_biller'] = "Ajouter nouveau vendeur";//1
 $LANG['add_new_invoice'] = "Nouvelle facture";//1
 $LANG['add_new_payment_type'] = "Nouveau type paiement";//1
@@ -67,11 +69,11 @@ $LANG['create_invoice'] ="Cr&eacute;er une facture";//1
 $LANG['credits'] = "Cr&eacute;dits";//1
 $LANG['currency_sign'] = "Symbole de la monnaie";//1
 $LANG['custom_field'] = "Option";//1
+$LANG['custom_field_db_field_name'] = "Nom du champ de la base de donn&eacute;es";//1
 $LANG['custom_field1'] = "Champ facultatif 1";//1
 $LANG['custom_field2'] = "Champ facultatif 2";//1
 $LANG['custom_field3'] = "Champ facultatif 3";//1
 $LANG['custom_field4'] = "Champ facultatif 4";//1
-$LANG['custom_field_db_field_name'] = "Nom du champ de la base de donn&eacute;es";//1
 $LANG['custom_fields'] = "Champs optionnels";//1
 $LANG['custom_fields_upper'] = "Champs optionnels";//1
 $LANG['custom_label'] = "Option d'&eacute;tiquette";//1
@@ -93,9 +95,14 @@ $LANG['days'] = "jours";//1
 $LANG['debtors'] = "D&eacute;biteurs";//1
 $LANG['debtors_by_aging_periods'] = "D&eacute;biteurs par dur&eacute;e";//1
 $LANG['debtors_by_amount_owed'] = "D&eacute;biteurs par dette";//1
+$LANG['default_biller'] = "Default Biller";//0
+$LANG['default_customer'] = "Default Customer";//0
 $LANG['default_inv_template'] = "Mise en page de facture par d&eacute;faut";//0
+$LANG['default_invoice_preference'] = "Default Invoice Preference";//0
 $LANG['default_number_items'] = "Default number of line items:";//0
 $LANG['default_payment_type'] = "Type de paiement par d&eacute;faut";//1
+$LANG['default_tax'] = "Default Tax";//0
+$LANG['delete'] = "Delete";//0
 $LANG['description'] = "Description";//1
 $LANG['details'] = "D&eacute;tails";//1
 $LANG['disabled'] = "Inactif";//1
@@ -163,7 +170,9 @@ $LANG['invoices'] = "Factures";//1
 $LANG['item'] = "Description";//1
 $LANG['itemised'] = "D&eacute;tail";//1
 $LANG['itemised_style'] = "d&eacute;taill&eacute;e";//1
+$LANG['language'] = "Language";//0
 $LANG['license'] = "Licence";//1
+$LANG['logging'] = "Logging";//0
 $LANG['login'] = "Connexion";//1
 $LANG['logo_file'] = "Logotype";//1
 $LANG['logout'] = "D&eacute;connexion";//1
@@ -219,6 +228,7 @@ $LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
 $LANG['phone'] = "T&eacute;l&eacute;phone";//1
 $LANG['phone_short'] = "T&eacute;l.";//1
 $LANG['preference_id'] = "ID du mod&egrave;le";//1
+$LANG['preferences'] = "Preferences";//0
 $LANG['prepare_simple_invoices'] = "Param&eacute;trer Simples Invoices";//1
 $LANG['print_preview'] = "Aper&ccedil;u impression";//1
 $LANG['print_preview_tooltip'] = "Aper&ccedil;u impression : ";//1
@@ -256,8 +266,8 @@ $LANG['save_customer'] = "Enregistrer le client";//1
 $LANG['save_customer_failure'] = "Une erreur s'est produite, essayer svp de sauvegarder une nouvelle fois le client";//1
 $LANG['save_customer_success'] = "Client enregistr&eacute; avec succ&egrave;s,<br> vous allez &ecirc;tre redirig&eacute; vers la page de gestion des clients";//1
 $LANG['save_defaults'] = "Enregistrer les pr&eacute;f&eacute;rences par d&eacute;faut";//1
-$LANG['save_defaults_success'] = "The system default has been successfully updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//1
+$LANG['save_defaults_success'] = "The system default has been successfully updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_invoice'] = "Enregistrer une facture";//1
 $LANG['save_invoice_failure'] = "Une erreur s'est produite, essayer svp de sauvegarder une nouvelle fois la facture";//1
 $LANG['save_invoice_items_success'] = "Processing invoice items<br> you will be redirected back to the Quick View of this invoice";//0
@@ -291,6 +301,7 @@ $LANG['sum'] = "Total";//1
 $LANG['summary'] = "Facture";//1
 $LANG['summary_of_accounts'] = "R&eacute;sume des comptes";//1
 $LANG['system_defaults'] = "Param&egrave;tres";//1
+$LANG['system_preferences'] = "System Preferences";//0
 $LANG['tax'] = "TVA";//1
 $LANG['tax_description'] = "Description taxe";//1
 $LANG['tax_id'] = "ID TVA";//1
@@ -322,7 +333,9 @@ $LANG['view'] = "Voir";//1
 $LANG['want_more_fields'] = "Plus de champs&nbsp;";//1
 $LANG['welcome'] = "Bienvenue ";//1
 $LANG['what_are_custom_fields'] = "Qu'est-ce qu'un champ optionnel&nbsp;?&nbsp;";//1
+$LANG['whats_all_this_inv_pref'] = "Whats all this Invoice Preference stuff about ";//0
 $LANG['whats_this_page_about'] = "&Agrave;-propos de cette page&nbsp;";//1
+$LANG['wheres_the_edit_button'] = "Wheres the edit button ";//0
 $LANG['zip'] = "Code postal";//1
 
 ?>

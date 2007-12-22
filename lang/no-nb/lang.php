@@ -8,7 +8,7 @@
 *	 Thomas A Thorvaldsen
 *
 * Last edited:
-* 	 2007-08-07
+* 	 2007-12-22
 *
 * License:
 *	 GPL v2 or above
@@ -26,7 +26,9 @@ $LANG['account_info'] = "Konto Informasjon";//1
 $LANG['actions'] = "Handlinger";//1
 $LANG['add_biller'] = "Legg Til Operatør";//1
 $LANG['add_customer'] = "Legg Til Kunde";//1
+$LANG['add_invoice_item'] = "Add Invoice Item";//0
 $LANG['add_invoice_preference'] = "Legg Til Faktura Mal";//1
+$LANG['add_item'] = "Add Item";//0
 $LANG['add_new_biller'] = "Legg Til Ny Operatør";//1
 $LANG['add_new_invoice'] = "Legg Til Ny Faktura";//1
 $LANG['add_new_payment_type'] = "Legg Til Ny Betalingsform";//1
@@ -67,11 +69,11 @@ $LANG['create_invoice'] ="Skriv Ny Faktura";//1
 $LANG['credits'] = "Credits";//1
 $LANG['currency_sign'] = "Valuta Tegn";//1
 $LANG['custom_field'] = "Egendefinert felt";//1
+$LANG['custom_field_db_field_name'] = "Database felt navn";//1
 $LANG['custom_field1'] = "Egendefinert felt 1";//1
 $LANG['custom_field2'] = "Egendefinert felt 2";//1
 $LANG['custom_field3'] = "Egendefinert felt 3";//1
 $LANG['custom_field4'] = "Egendefinert felt 4";//1
-$LANG['custom_field_db_field_name'] = "Database felt navn";//1
 $LANG['custom_fields'] = "Egendefinerte felter";//1
 $LANG['custom_fields_upper'] = "Egendefinerte felter";//1
 $LANG['custom_label'] = "Egendefinert Label";//1
@@ -93,9 +95,14 @@ $LANG['days'] = "dager";//1
 $LANG['debtors'] = "Debitorer";//1
 $LANG['debtors_by_aging_periods'] = "Debitorer etter betalingsfrist";//1
 $LANG['debtors_by_amount_owed'] = "Debitorer etter hvor mye utestående";//1
+$LANG['default_biller'] = "Default Biller";//0
+$LANG['default_customer'] = "Default Customer";//0
 $LANG['default_inv_template'] = "Standard faktura mal ";//1
+$LANG['default_invoice_preference'] = "Default Invoice Preference";//0
 $LANG['default_number_items'] = "Standard antall av linje punkter:";//1
 $LANG['default_payment_type'] = "Standard betalingsform";//1
+$LANG['default_tax'] = "Default Tax";//0
+$LANG['delete'] = "Delete";//0
 $LANG['description'] = "Beskrivelse";//1
 $LANG['details'] = "Detaljer";//1
 $LANG['disabled'] = "Deaktivert";
@@ -128,12 +135,9 @@ $LANG['id'] = "ID";//1
 $LANG['ie_10_for_10'] = "* feks 25 for 25%";//1
 $LANG['included'] = "includert";//1
 $LANG['insert_biller'] = "Legg Til Operatør";//1
-$LANG['insert_biller'] = "Legg Til Operatør";//1
-$LANG['insert_customer'] = "Legg Til Kunde";//1
 $LANG['insert_customer'] = "Legg Til Kunde";//1
 $LANG['insert_payment_type'] = "Legg Til Betalingsform";//1
 $LANG['insert_preference'] = "Legg Til Preferanse";//1
-$LANG['insert_product'] = "Legg Til Produkt";//1
 $LANG['insert_product'] = "Legg Til Produkt";//1
 $LANG['insert_tax_rate'] = "Legg Til Moms";//1
 $LANG['installation'] = "Installasjon";//1
@@ -163,7 +167,9 @@ $LANG['invoices'] = "Fakturaer";//1
 $LANG['item'] = "Artikkel";//1
 $LANG['itemised'] = "Artikkel basert";//1
 $LANG['itemised_style'] = "Artikkel basert stil";//1
+$LANG['language'] = "Language";//0
 $LANG['license'] = "Lisens";//1
+$LANG['logging'] = "Logging";//0
 $LANG['login'] = "Logg inn";//1
 $LANG['logo_file'] = "Logo fil";//1
 $LANG['logout'] = "Logg ut";//1
@@ -218,8 +224,8 @@ $LANG['payments_filtered_customer'] = "Betalinger sortert etter kunde ID";//1
 $LANG['payments_filtered_invoice'] = "Behandle betaling for denne faktura";//1
 $LANG['phone'] = "Telefon";//1
 $LANG['phone_short'] = "Tlf.";//1
-$LANG['preferences'] = "Instillinger";//1
 $LANG['preference_id'] = "Instilling ID";//1
+$LANG['preferences'] = "Instillinger";//1
 $LANG['prepare_simple_invoices'] = "Gjør Simple Invoices klar for bruk";//1
 $LANG['print_preview'] = "Print Forhåndsvisning";//1
 $LANG['print_preview_tooltip'] = "Print Forhåndsvisning av";//1
@@ -257,8 +263,8 @@ $LANG['save_customer'] = "Lagre Kunde";//1
 $LANG['save_customer_failure'] = "Noe gikk galt, vennligst prøv å lagre kunde igjen";//1
 $LANG['save_customer_success'] = "Kunde lagret,<br> du blir omdirigert tilbake til Behandle Kunder siden";//1
 $LANG['save_defaults'] = "Lagre Standardvalg";//1
-$LANG['save_defaults_success'] = "Systemets standardvalg er oppdatert,<br> du vil bli omdirigert tilbake til Systemets Standardvalg siden";//1
 $LANG['save_defaults_failure'] = "Noe gikk galt, vennligst prøv å sette systemets standardvalg igjen";//1
+$LANG['save_defaults_success'] = "Systemets standardvalg er oppdatert,<br> du vil bli omdirigert tilbake til Systemets Standardvalg siden";//1
 $LANG['save_invoice'] = "Lagre Faktura";//1
 $LANG['save_invoice_failure'] = "Noe gikk galt, vennligst prøv å lagre faktura igjen";//1
 $LANG['save_invoice_items_success'] = "Behandler faktura artikler<br> du blir omdirigert tilbake til Forhåndsvisning av denne fakturaen";//1
@@ -292,6 +298,7 @@ $LANG['sum'] = "Sum";//1
 $LANG['summary'] = "Sammendrag";//1
 $LANG['summary_of_accounts'] = "Sammendrag av kontoer";//1
 $LANG['system_defaults'] = "Systemets Forvalg";//1
+$LANG['system_preferences'] = "System Preferences";//0
 $LANG['tax'] = "Moms";//1
 $LANG['tax_description'] = "Moms - beskrivelse";//1
 $LANG['tax_id'] = "Moms ID";//1
@@ -323,6 +330,9 @@ $LANG['view'] = "Vis";//1
 $LANG['want_more_fields'] = "flere felt?";//1
 $LANG['welcome'] = "Velkommen til ";//1
 $LANG['what_are_custom_fields'] = "Hva er egendefinerte felt ";//1
+$LANG['whats_all_this_inv_pref'] = "Whats all this Invoice Preference stuff about ";//0
 $LANG['whats_this_page_about'] = "Hva handler denne siden om ";//1
+$LANG['wheres_the_edit_button'] = "Wheres the edit button ";//0
 $LANG['zip'] = "Postnummer";//1 
+
 ?>

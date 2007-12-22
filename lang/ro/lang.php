@@ -8,7 +8,7 @@
 *   Dentapro
 *
 * Last edited:
-* 	 2007-04-27
+* 	 2007-12-22
 *
 * License:
 *	 GPL v2 or above
@@ -26,7 +26,9 @@ $LANG['account_info'] = "Detalii cont";//1
 $LANG['actions'] = "Actiuni";//1
 $LANG['add_biller'] = "Adauga Furnizor";//1
 $LANG['add_customer'] = "Adauga Client";//1
+$LANG['add_invoice_item'] = "Add Invoice Item";//0
 $LANG['add_invoice_preference'] = "Adauga Preferinte Factura";//1
+$LANG['add_item'] = "Add Item";//0
 $LANG['add_new_biller'] = "Add New Biller";//1
 $LANG['add_new_invoice'] = "Adauga Factura Noua";//1
 $LANG['add_new_payment_type'] = "Adauga Tip de Plata Nou";//1
@@ -67,11 +69,11 @@ $LANG['create_invoice'] ="Creeaza o factura";//1
 $LANG['credits'] = "Credits";//0
 $LANG['currency_sign'] = "Simbol moneda";//1
 $LANG['custom_field'] = "Cimp personalizat";//1
+$LANG['custom_field_db_field_name'] = "Nume cimp";//1
 $LANG['custom_field1'] = "Cimp personalizat 1";//1
 $LANG['custom_field2'] = "Cimp personalizat 2";//1
 $LANG['custom_field3'] = "Cimp personalizat 3";//1
 $LANG['custom_field4'] = "Cimp personalizat 4";//1
-$LANG['custom_field_db_field_name'] = "Nume cimp";//1
 $LANG['custom_fields'] = "Cimpuri personalizate";//1
 $LANG['custom_fields_upper'] = "Cimpuri Personalizate";//1
 $LANG['custom_label'] = "Eticheta personalizata";//1
@@ -93,9 +95,14 @@ $LANG['days'] = "zile";//1
 $LANG['debtors'] = "Debitori";//1
 $LANG['debtors_by_aging_periods'] = "Debitori dupa vechimea datoriei";//1
 $LANG['debtors_by_amount_owed'] = "Debitori dupa suma datorata";//1
+$LANG['default_biller'] = "Default Biller";//0
+$LANG['default_customer'] = "Default Customer";//0
 $LANG['default_inv_template'] = "Default invoice template ";//0
+$LANG['default_invoice_preference'] = "Default Invoice Preference";//0
 $LANG['default_number_items'] = "Default number of line items:";//0
 $LANG['default_payment_type'] = "Default payment type";//0
+$LANG['default_tax'] = "Default Tax";//0
+$LANG['delete'] = "Delete";//0
 $LANG['description'] = "Descriere";//1
 $LANG['details'] = "Detalii";//1
 $LANG['disabled'] = "Dezactivat";//1
@@ -128,12 +135,9 @@ $LANG['id'] = "ID";//1
 $LANG['ie_10_for_10'] = "* de ex. 10 pentru 10%";//1
 $LANG['included'] = "inclusa";//1
 $LANG['insert_biller'] = "Adauga Furnizor";//1
-$LANG['insert_biller'] = "Adauga Furnizor";//1
-$LANG['insert_customer'] = "Adauga Client";//1
 $LANG['insert_customer'] = "Adauga Client";//1
 $LANG['insert_payment_type'] = "Adauga Tip de PLata";//1
 $LANG['insert_preference'] = "Adauga Preferinta";//1
-$LANG['insert_product'] = "Adauga Produs";//1
 $LANG['insert_product'] = "Adauga Produs";//1
 $LANG['insert_tax_rate'] = "Adauga Taxa";//1
 $LANG['installation'] = "Instalare";//1
@@ -163,7 +167,9 @@ $LANG['invoices'] = "Facturi";//1
 $LANG['item'] = "Element";//1
 $LANG['itemised'] = "Detaliata";//1
 $LANG['itemised_style'] = "Stil detaliat";//1
+$LANG['language'] = "Language";//0
 $LANG['license'] = "Licenta";//1
+$LANG['logging'] = "Logging";//0
 $LANG['login'] = "Autentificare";//1
 $LANG['logo_file'] = "Fisier sigla";//1
 $LANG['logout'] = "Iesire";//1
@@ -219,6 +225,7 @@ $LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
 $LANG['phone'] = "Telefon";//1
 $LANG['phone_short'] = "Tel.";//1
 $LANG['preference_id'] = "ID Preferinta";//1
+$LANG['preferences'] = "Preferences";//0
 $LANG['prepare_simple_invoices'] = "Pregatirea Simple Invoices pentru utilizare";//1
 $LANG['print_preview'] = "Previzualizare Tiparire";//1
 $LANG['print_preview_tooltip'] = "Previzualizare Tiparire a";//1
@@ -256,8 +263,8 @@ $LANG['save_customer'] = "Save Customer";//0
 $LANG['save_customer_failure'] = "Something went wrong, please try saving the customer again";//0
 $LANG['save_customer_success'] = "Customer successfully saved,<br> you will be redirected back to the Manage Customers page";//0
 $LANG['save_defaults'] = "Save Defaults";//0
-$LANG['save_defaults_success'] = "The system default has been successfully updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
+$LANG['save_defaults_success'] = "The system default has been successfully updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_invoice'] = "Save Invoice";//0
 $LANG['save_invoice_failure'] = "Something went wrong, please try saving the invoice again";//0
 $LANG['save_invoice_items_success'] = "Processing invoice items<br> you will be redirected back to the Quick View of this invoice";//0
@@ -291,6 +298,7 @@ $LANG['sum'] = "Suma";//1
 $LANG['summary'] = "Sumar";//1
 $LANG['summary_of_accounts'] = "Sumarul conturilor";//1
 $LANG['system_defaults'] = "Setari implicite";//1
+$LANG['system_preferences'] = "System Preferences";//0
 $LANG['tax'] = "Taxa";//1
 $LANG['tax_description'] = "Descriere Taxa";//1
 $LANG['tax_id'] = "ID Taxa";//1
@@ -322,7 +330,9 @@ $LANG['view'] = "Vizualizare";//1
 $LANG['want_more_fields'] = "want more fields";//0
 $LANG['welcome'] = "Bun Venit la ";//1
 $LANG['what_are_custom_fields'] = "What are custom fields";//0
+$LANG['whats_all_this_inv_pref'] = "Whats all this Invoice Preference stuff about ";//0
 $LANG['whats_this_page_about'] = "Whats this page about";//0
+$LANG['wheres_the_edit_button'] = "Wheres the edit button ";//0
 $LANG['zip'] = "Cod Postal";//1
 
 ?>

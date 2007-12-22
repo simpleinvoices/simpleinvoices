@@ -7,6 +7,9 @@
 * Authors:
 *	 Murray Buckley, Max, Augusto Campos
 *
+* Last edited:
+*    2007-12-22
+*
 * License:
 *	 GPL v2 or above
 */
@@ -23,7 +26,9 @@ $LANG['account_info'] = "Informação de Conta";//1
 $LANG['actions'] = "Acções";//1
 $LANG['add_biller'] = "Adicionar facturador";//1
 $LANG['add_customer'] = "Adicionar Cliente";//1
+$LANG['add_invoice_item'] = "Add Invoice Item";//0
 $LANG['add_invoice_preference'] = "Adicionar Preferências de Factura";//1
+$LANG['add_item'] = "Add Item";//0
 $LANG['add_new_biller'] = "Add New Biller";//1
 $LANG['add_new_invoice'] = "Adicionar Nova Factura";//1
 $LANG['add_new_payment_type'] = "Adicionar Novo Tipo de Pagamento";//1
@@ -64,11 +69,11 @@ $LANG['create_invoice'] ="Criar Factura";//1
 $LANG['credits'] = "Acerca";//1
 $LANG['currency_sign'] = "Símbolo de Cambio";//1
 $LANG['custom_field'] = "Campo personalizado ";//1
+$LANG['custom_field_db_field_name'] = "Nome de campo na BD";//1
 $LANG['custom_field1'] = "Campo personalizado 1";//1
 $LANG['custom_field2'] = "Campo personalizado 2";//1
 $LANG['custom_field3'] = "Campo personalizado 3";//1
 $LANG['custom_field4'] = "Campo personalizado 4";//1
-$LANG['custom_field_db_field_name'] = "Nome de campo na BD";//1
 $LANG['custom_fields'] = "Campos personalizados";//1
 $LANG['custom_fields_upper'] = "Campos Personalizados";//1
 $LANG['custom_label'] = "Etiqueta personalizada";//1
@@ -90,9 +95,14 @@ $LANG['days'] = "dias";//1
 $LANG['debtors'] = "Devedores";//1
 $LANG['debtors_by_aging_periods'] = "Devedores por idade";//1
 $LANG['debtors_by_amount_owed'] = "Devedores por valor devendo";//1
+$LANG['default_biller'] = "Default Biller";//0
+$LANG['default_customer'] = "Default Customer";//0
 $LANG['default_inv_template'] = "Default invoice template ";//0
+$LANG['default_invoice_preference'] = "Default Invoice Preference";//0
 $LANG['default_number_items'] = "Default number of line items:";//0
 $LANG['default_payment_type'] = "Default payment type";//0
+$LANG['default_tax'] = "Default Tax";//0
+$LANG['delete'] = "Delete";//0
 $LANG['description'] = "Descrição";//1
 $LANG['details'] = "Detalhas";//1
 $LANG['disabled'] = "Desactivado";//1
@@ -124,13 +134,10 @@ $LANG['home'] = "Principal";//1
 $LANG['id'] = "ID";//1
 $LANG['ie_10_for_10'] = "* por exemplo 10 para 10%";//1
 $LANG['included'] = "incluído";//1
-$LANG['insert_biller'] = "Adicionar Facturador";//1
 $LANG['insert_biller'] = "Inserir Facturador";//1
-$LANG['insert_customer'] = "Adicionar Cliente";//1
 $LANG['insert_customer'] = "Inserir Cliente";//1
 $LANG['insert_payment_type'] = "Inserir Tipo de Pagamento";//1
 $LANG['insert_preference'] = "Inserir Preferências";// 1
-$LANG['insert_product'] = "Adicionar Produto";//1
 $LANG['insert_product'] = "Inserir Produto";//1
 $LANG['insert_tax_rate'] = "Inserir Taxa de Imposto";//1
 $LANG['installation'] = "Instalação";//1
@@ -160,7 +167,9 @@ $LANG['invoices'] = "Facturas";//1
 $LANG['item'] = "Item";//1
 $LANG['itemised'] = "Detalhada";//1
 $LANG['itemised_style'] = "Estilo Detalhado";//1
+$LANG['language'] = "Language";//0
 $LANG['license'] = "Licença";//1
+$LANG['logging'] = "Logging";//0
 $LANG['login'] = "Entrar";//1
 $LANG['logo_file'] = "Logo ficheiro";//1
 $LANG['logout'] = "Sair";//1
@@ -216,6 +225,7 @@ $LANG['payments_filtered_invoice'] = "Process Payment for this Invoice";//0
 $LANG['phone'] = "Telefone";//1
 $LANG['phone_short'] = "Tel.";//1
 $LANG['preference_id'] = "Número do Opção";//1
+$LANG['preferences'] = "Preferences";//0
 $LANG['prepare_simple_invoices'] = "Prepare Facturação Simples para utilização";//1
 $LANG['print_preview'] = "Pré visualizar";//1
 $LANG['print_preview_tooltip'] = "Inspecção Prévia de Cópia de";//1
@@ -253,8 +263,8 @@ $LANG['save_customer'] = "Save Customer";//0
 $LANG['save_customer_failure'] = "Something went wrong, please try saving the customer again";//0
 $LANG['save_customer_success'] = "Customer successfully saved,<br> you will be redirected back to the Manage Customers page";//0
 $LANG['save_defaults'] = "Save Defaults";//0
-$LANG['save_defaults_success'] = "The system default has been successfully updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_defaults_failure'] = "Something went wrong, please try setting the system defaults again";//0
+$LANG['save_defaults_success'] = "The system default has been successfully updated,<br> you will be redirected back to System Defaults page";//0
 $LANG['save_invoice'] = "Gravar Factura";//1
 $LANG['save_invoice_failure'] = "Something went wrong, please try saving the invoice again";//0
 $LANG['save_invoice_items_success'] = "Processing invoice items<br> you will be redirected back to the Quick View of this invoice";//0
@@ -288,6 +298,7 @@ $LANG['sum'] = "Soma";//1
 $LANG['summary'] = "Sumario";//1
 $LANG['summary_of_accounts'] = "Sumario das contas";//1
 $LANG['system_defaults'] = "Predefinição do Sistema";//1
+$LANG['system_preferences'] = "System Preferences";//0
 $LANG['tax'] = "Taxa";//1
 $LANG['tax_description'] = "Descrição das Taxas";//1
 $LANG['tax_id'] = " ID de Taxa";//1
@@ -319,7 +330,9 @@ $LANG['view'] = "Ver";//1
 $LANG['want_more_fields'] = "quer mais campos";//1
 $LANG['welcome'] = "Bem-vindo para";//1
 $LANG['what_are_custom_fields'] = "O que e campo adicional";//1
+$LANG['whats_all_this_inv_pref'] = "Whats all this Invoice Preference stuff about ";//0
 $LANG['whats_this_page_about'] = "Sobre que esta pagina";//1
+$LANG['wheres_the_edit_button'] = "Wheres the edit button ";//0
 $LANG['zip'] = "Código postal";//1
 
 ?>

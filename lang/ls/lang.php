@@ -8,7 +8,7 @@
 *	 Boštjan Jerko
 *
 * Last edited:
-* 	 2007-08-7
+* 	 2007-12-22
 *
 * License:
 *	 GPL v2 or above
@@ -26,7 +26,9 @@ $LANG['account_info'] = "Podatki o računu";//1
 $LANG['actions'] = "Dejanja";//1
 $LANG['add_biller'] = "Dodaj ponudnika";//1
 $LANG['add_customer'] = "Dodaj stranko";//1
+$LANG['add_invoice_item'] = "Add Invoice Item";//0
 $LANG['add_invoice_preference'] = "Dodaj nastavitve predračuna";//1
+$LANG['add_item'] = "Add Item";//0
 $LANG['add_new_biller'] = "Dodaj novega ponudnika";//1
 $LANG['add_new_invoice'] = "Dodaj novo ponudbo";//1
 $LANG['add_new_payment_type'] = "Dodaj nov način plačila";//1
@@ -67,11 +69,11 @@ $LANG['create_invoice'] ="Pripravi ponudbo";//1
 $LANG['credits'] = "Prispevki";//1
 $LANG['currency_sign'] = "Oznaka valute";//1
 $LANG['custom_field'] = "Prosta polja";//1
+$LANG['custom_field_db_field_name'] = "Ime polja baze";//1
 $LANG['custom_field1'] = "Prosta polja 1";//1
 $LANG['custom_field2'] = "Prosta polja 2";//1
 $LANG['custom_field3'] = "Prosta polja 3";//1
 $LANG['custom_field4'] = "Prosta polja 4";//1
-$LANG['custom_field_db_field_name'] = "Ime polja baze";//1
 $LANG['custom_fields'] = "Prosta polja";//1
 $LANG['custom_fields_upper'] = "Prosta polja";//1
 $LANG['custom_label'] = "Proste oznake";//1
@@ -93,9 +95,14 @@ $LANG['days'] = "dni";//1
 $LANG['debtors'] = "Dolžniki";//1
 $LANG['debtors_by_aging_periods'] = "Dolžniki po času zastaranja";//1
 $LANG['debtors_by_amount_owed'] = "Dolžniki po znesku";//1
+$LANG['default_biller'] = "Default Biller";//0
+$LANG['default_customer'] = "Default Customer";//0
 $LANG['default_inv_template'] = "Privzeta predloga ponudbe ";//1
+$LANG['default_invoice_preference'] = "Default Invoice Preference";//0
 $LANG['default_number_items'] = "Privzeto št. vrstic elementov:";//1
 $LANG['default_payment_type'] = "Privzet način plačila";//1
+$LANG['default_tax'] = "Default Tax";//0
+$LANG['delete'] = "Delete";//0
 $LANG['description'] = "Opis";//1
 $LANG['details'] = "Podrobnosti";//1
 $LANG['disabled'] = "Onemogočeno";
@@ -128,12 +135,9 @@ $LANG['id'] = "Oznaka";//1
 $LANG['ie_10_for_10'] = "* npr. 10 za 10%";//1
 $LANG['included'] = "vključen";//1
 $LANG['insert_biller'] = "Dodaj ponudnika";//1
-$LANG['insert_biller'] = "Dodaj ponudnika";//1
-$LANG['insert_customer'] = "Dodaj stranko";//1
 $LANG['insert_customer'] = "Dodaj stranko";//1
 $LANG['insert_payment_type'] = "Dodaj način plačila";//1
 $LANG['insert_preference'] = "Dodaj nastavitve";//1
-$LANG['insert_product'] = "Dodaj izdelek";//1
 $LANG['insert_product'] = "Dodaj izdelek";//1
 $LANG['insert_tax_rate'] = "Dodaj davčno stopnjo";//1
 $LANG['installation'] = "Namestitev";//1
@@ -163,7 +167,9 @@ $LANG['invoices'] = "Ponudbe";//1
 $LANG['item'] = "Element";//1
 $LANG['itemised'] = "Po elementih";//1
 $LANG['itemised_style'] = "Po elementih";//1
+$LANG['language'] = "Language";//0
 $LANG['license'] = "Licenca";//1
+$LANG['logging'] = "Logging";//0
 $LANG['login'] = "Prijava";//1
 $LANG['logo_file'] = "Datoteka z logotipom";//1
 $LANG['logout'] = "Odjava";//1
@@ -219,6 +225,7 @@ $LANG['payments_filtered_invoice'] = "Uredi plačilo za to ponudbo";//1
 $LANG['phone'] = "Telefon";//1
 $LANG['phone_short'] = "Tel.";//1
 $LANG['preference_id'] = "Oznaka nastavitev";//1
+$LANG['preferences'] = "Preferences";//0
 $LANG['prepare_simple_invoices'] = "Pripravi Preproste ponudbe za uporabo";//1
 $LANG['print_preview'] = "Predogled tiskanja";//1
 $LANG['print_preview_tooltip'] = "Predogled tiskanja za";//1
@@ -256,8 +263,8 @@ $LANG['save_customer'] = "Shrani stranko";//1
 $LANG['save_customer_failure'] = "Prišlo je do napake, prosim poskusite shraniti stranko še enkrat";//1
 $LANG['save_customer_success'] = "Stranka uspešno shranjena,<br> potrebno je urediti podatke o stranki";//1
 $LANG['save_defaults'] = "Shrani privzeto";//1
-$LANG['save_defaults_success'] = "Privzete stvari sistema so uspešno shranjene,<br> potrebno jih je urediti";//1
 $LANG['save_defaults_failure'] = "Prišlo je do napake, prosim poskusite znova ponastaviti privzete stvari";//1
+$LANG['save_defaults_success'] = "Privzete stvari sistema so uspešno shranjene,<br> potrebno jih je urediti";//1
 $LANG['save_invoice'] = "Shrani ponudbo";//1
 $LANG['save_invoice_failure'] = "Prišlo je do napake, prosim shranite ponudbo še enkrat";//1
 $LANG['save_invoice_items_success'] = "Obdelujem elemente ponudbe<br> preusmeritev na Hitri pogled ponudbe";//1
@@ -291,6 +298,7 @@ $LANG['sum'] = "Vsota";//1
 $LANG['summary'] = "Povzetek";//1
 $LANG['summary_of_accounts'] = "Povzetek računov";//1
 $LANG['system_defaults'] = "Privzeto (sistem)";//1
+$LANG['system_preferences'] = "System Preferences";//0
 $LANG['tax'] = "Davek";//1
 $LANG['tax_description'] = "Opis davka";//1
 $LANG['tax_id'] = "Davčna št.";//1
@@ -322,7 +330,9 @@ $LANG['view'] = "Pogled";//1
 $LANG['want_more_fields'] = "potrebujem več polj";//1
 $LANG['welcome'] = "Dobrodošli v ";//1
 $LANG['what_are_custom_fields'] = "Kaj so prosta polja ";//1
+$LANG['whats_all_this_inv_pref'] = "Whats all this Invoice Preference stuff about ";//0
 $LANG['whats_this_page_about'] = "O čem govori ta stran ";//1
+$LANG['wheres_the_edit_button'] = "Wheres the edit button ";//0
 $LANG['zip'] = "Poštna št.";//1
 
 ?>
