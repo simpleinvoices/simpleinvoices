@@ -17,9 +17,7 @@ unset($LANG);
 if(checkTableExists(TB_PREFIX.'system_defaults') == true)
 {
 	$language = getDefaultLanguage();
-}
-if(checkTableExists(TB_PREFIX.'system_defaults') == false)
-{
+} else {
 	$language = "en-gb";
 }  
 

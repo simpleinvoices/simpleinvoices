@@ -306,7 +306,7 @@ else if($_GET['submit'] == "language") {
 		if($language->shortname == $lang) {
 			$selected = " selected ";
 		}
-		$value .= "<option $selected value='$language->shortname'>$language->name ($language->englishname) ($language->shortname) </option>";
+		$value .= "<option $selected value='".htmlspecialchars($language->shortname)."'>'".htmlspecialchars("$language->name ($language->englishname) ($language->shortname)")."</option>";
 	}
 	$value .= "</select>";
 	
