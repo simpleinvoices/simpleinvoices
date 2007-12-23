@@ -22,14 +22,21 @@
 function smarty_function_merge_address($params, &$smarty) {
 		global $LANG;
 		$skip_section = false;
+		$ma = '';
 		// If any among city, state or zip is present with no street at all
         if (($params['field1'] != null OR $params['field2'] != null OR $params['field3'] != null) AND ($params['street1'] ==null AND $params['street2'] ==null)) {
-                $ma .=  "<tr><td class='$params[class1]'>$LANG[address]:</td><td class='$params[class2]' colspan=$params[colspan]>";
+                $ma .=  "
+		<tr>
+				<td class='$params[class1]'>$LANG[address]:</td>
+				<td class='$params[class2]' colspan=$params[colspan]>";
 		$skip_section = true;
         }
 		// If any among city, state or zip is present with atleast one street value
         if (($params['field1'] != null OR $params['field2'] != null OR $params['field3'] != null) AND ( ! $skip_section )) {
-                $ma .=  "<tr><td class='$params[class1]'></td><td class='$params[class2]' colspan=$params[colspan]>";
+                $ma .=  "
+		<tr>
+				<td class='$params[class1]'></td>
+				<td class='$params[class2]' colspan=$params[colspan]>";
         }
         if ($params['field1'] != null) {
                 $ma .=  "$params[field1]";
@@ -51,7 +58,8 @@ function smarty_function_merge_address($params, &$smarty) {
                 $ma .=  "$params[field3]";
         }
 		
-	$ma .= "</td></tr>";
+	$ma .= "</td>
+		</tr>";
 	echo $ma;
 }
 ?>
