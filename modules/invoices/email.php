@@ -63,7 +63,7 @@ if ($_GET['stage'] == 2 ) {
 	
 	
 	//now save the stream to the out folder
-	file_put_contents("./include/pdf/out/$preference[pref_inv_wording]$invoice[id].pdf", $response);
+	file_put_contents("./cache/$preference[pref_inv_wording]$invoice[id].pdf", $response);
 	//use curl and baring that use fopen
 	//
 	echo $block_stage2;
@@ -91,7 +91,7 @@ if ($_GET['stage'] == 2 ) {
 	}
 	$mail->WordWrap = 50;                                 // set word wrap to 50 characters
 	$spc2us_pref = str_replace(" ", "_", $preference[pref_inv_wording]); // Ap.Muthu added to accomodate spaces in inv pref name
-	$mail->AddAttachment("./include/pdf/out/$spc2us_pref$invoice[id].pdf");  // out folder currently symlinks to ../../cache       // add attachments
+	$mail->AddAttachment("./cache/$spc2us_pref$invoice[id].pdf");  // all tmp in ./cache       // add attachments
 
 	$mail->IsHTML(true);                                  // set email format to HTML
 
@@ -100,7 +100,7 @@ if ($_GET['stage'] == 2 ) {
 	$mail->AltBody = "$_POST[email_notes]";
 
 	$results = $mail->Send();
-	unlink("./include/pdf/out/$preference[pref_inv_wording]$invoice[id].pdf");
+	unlink("./cache/$preference[pref_inv_wording]$invoice[id].pdf");
 	if(!$results)
 	{
 	   echo "Message could not be sent. <p>";
