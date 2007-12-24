@@ -11,7 +11,7 @@ $install_path = $path['dirname'];
 
 include_once('./config/config.php');
 
-include("./include/sql_queries.php");
+include_once("./include/sql_queries.php");
 
 include_once('./include/language.php');
 
@@ -19,14 +19,7 @@ include_once('./include/functions.php');
 
 checkConnection();
 
-include('./modules/options/database_sqlpatches.php');
-
-//dont undertand this one!!
-if( (getNumberOfPatches() == 0 ) OR (getNumberOfPatches() < 0 ) ) 
-{
-	include('./include/include_auth.php');
-}
-
+include('./include/include_auth.php');
 include_once('./include/manageCustomFields.php');
 include_once("./include/validation.php");
 
