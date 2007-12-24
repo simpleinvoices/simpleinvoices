@@ -50,21 +50,22 @@ $smarty -> assign("enabled",array($LANG['disabled'],$LANG['enabled']));
 $menu = true;
 //$menu = false;
 $file = "home";
-include_once('./modules/options/database_sqlpatches.php'); 
 
-// Check for any unapplied SQL patches when going home 
+// SQL patch check 
 if (($module == "options") && ($view == "database_sqlpatches")) { 
-       donePatches(); 
-} else {
+	include_once('./modules/options/database_sqlpatches.php'); 
+	donePatches(); 
+} elseif (is_null($module)) { // if we are home then check for any unapplied SQL patches
+	include_once('./modules/options/database_sqlpatches.php'); 
 	if(getNumberOfPatches() > 0 ) {
 		$view = "database_sqlpatches";
 		$module = "options";
-	
+
 		if($action == "run") {
 			runPatches();
 		}
 		else {
-		listPatches();
+			listPatches();
 		}
 		$menu = false;
 	}

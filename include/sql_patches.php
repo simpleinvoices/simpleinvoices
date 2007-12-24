@@ -606,7 +606,7 @@ INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 	$patch['127']['patch'] = "ALTER TABLE  `".TB_PREFIX."log` ADD  `last_id` INT NULL ;";
 	$patch['127']['date'] = "200709";
 	
-	$patch['128']['name'] = "Add ".TB_PREFIX."user table";
+	$patch['128']['name'] = "Add user table";
 		if(checkTableExists(TB_PREFIX.'users') == true) 
 		{
 			if(checkFieldExists(TB_PREFIX.'users','user_domain') == true) 
@@ -635,11 +635,11 @@ PRIMARY KEY  (`user_id`)) ;
 	$patch['128']['date'] = "200709";
 	
 	
-	$patch['129']['name'] = "Fill ".TB_PREFIX."user table with default values";
+	$patch['129']['name'] = "Fill user table with default values";
 	$patch['129']['patch'] = "INSERT INTO `".TB_PREFIX."users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`) VALUES (NULL, 'demo@simpleinvoices.org', 'demo', '1', '1', MD5('demo'))";
 	$patch['129']['date'] = "200709";
 	
-	$patch['130']['name'] = "Create ".TB_PREFIX."auth_challenges table";
+	$patch['130']['name'] = "Create auth_challenges table";
 	
 			if(checkTableExists('si_auth_challenges') == true)
 			{
