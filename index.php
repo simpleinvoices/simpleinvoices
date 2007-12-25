@@ -90,11 +90,11 @@ if(file_exists("./modules/$path.php")) {
 	}	
 }
 
-// SQL patch check 
-(($module == "options") && ($view == "database_sqlpatches")) {
+// Check for any unapplied SQL patches when going home
+if (($module == "options") && ($view == "database_sqlpatches")) {
 	include_once('./modules/options/database_sqlpatches.php');
 	donePatches();
-} elseif (is_null($module)) { // if we are home then check for any unapplied SQL patches
+} elseif ($file == 'home') {
 	include_once('./modules/options/database_sqlpatches.php');
 	if (getNumberOfPatches() > 0 ) {
 		$view = "database_sqlpatches";
