@@ -51,26 +51,6 @@ $menu = true;
 //$menu = false;
 $file = "home";
 
-// SQL patch check 
-if (($module == "options") && ($view == "database_sqlpatches")) { 
-	include_once('./modules/options/database_sqlpatches.php'); 
-	donePatches(); 
-} elseif (is_null($module)) { // if we are home then check for any unapplied SQL patches
-	include_once('./modules/options/database_sqlpatches.php'); 
-	if(getNumberOfPatches() > 0 ) {
-		$view = "database_sqlpatches";
-		$module = "options";
-
-		if($action == "run") {
-			runPatches();
-		}
-		else {
-			listPatches();
-		}
-		$menu = false;
-	}
-}
-
 /*dont include the header if requested file is an invoice template - for print preview etc.. header is not needed */
 if (($module == "invoices" ) && (strstr($view,"templates"))) {
 	//TODO: why is $view templates/template?...
@@ -95,15 +75,28 @@ if(file_exists("./modules/$path.php")) {
 	}	
 }
 
+// Check for any unapplied SQL patches when going home
+if (($module == "options") && ($view == "database_sqlpatches")) {
+	include_once('./modules/options/database_sqlpatches.php');
+	donePatches();
+} elseif ($file == 'home') {
+	include_once('./modules/options/database_sqlpatches.php');
+	if (getNumberOfPatches() > 0 ) {
+		$view = "database_sqlpatches";
+		$module = "options";
+
+		if($action == "run") {
+			runPatches();
+		} else {
+			listPatches();
+		}
+		$menu = false;
+	}
+}
+
 $smarty -> display("../templates/default/header.tpl");
 //temp added menu.tpl back in so we can easily design new menu system
 
-/*
-if($menu) {
-	getMenuStructure();
-	//$smarty -> display("../templates/default/menu.tpl");
-}
-*/
 
 include_once("./modules/$file.php");
 
