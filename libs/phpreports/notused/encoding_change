@@ -1,0 +1,22 @@
+#!/bin/sh
+# Use this script to change the default encoding
+# from ISO-8859-1 to other that you want.
+# Run it on the PHPReports root directory
+if [ ! -n "$1" ]
+then
+	echo Please inform the encoding to use!
+	exit 1
+fi
+
+temp=/tmp/$$.phprpt
+default='ISO-8859-1'
+for file in `fgrep -Ril $default *`
+do
+	echo converting $file ...
+	sed s/$default/$1/ $file > $temp
+	cp $temp $file
+done
+if [ -f $temp ]
+then
+	rm $temp
+fi

@@ -185,6 +185,8 @@ code,pre {
 
 table {
 	border-collapse:collapse; }
+
+/* Old PHP Reports CSS  - uses class="reportTable" */
 	
 table.reportTable {
 	border:1px solid #000; }
@@ -205,6 +207,55 @@ table.reportTable td.PAGE_LAYER {
 	background-color:#ccc;
 	border-color:#000; }
 
+/* New PHPreports CSS - uses ID="pg2" or "pg1"  - Although HEADER and FOOTER are used now instead of PAGE_LAYER, it is left as is for compatibility */
+	
+table#pg1 {
+	border:1px solid #000; 
+	background-color:#fff; }
+
+*+html table#pg1 {
+	border-collapse:separate; }
+
+*+html td.PAGE_LAYER {
+	border-width:thin;
+	border:1px solid #000;
+	border-collapse:separate; }
+
+*+html table#pg1 tr {
+	border:1px solid #000;
+	border-collapse:separate; }
+
+table#pg1 td.PAGE_LAYER {
+	background-color:#ccc;
+	border-color:#000; }
+
+table#pg1 td.GROUP_LAYER {
+	background-color:#fff;
+	border-color:#000; }
+
+table#pg2 {
+	border:1px solid #000; 
+	background-color:#fff; }
+
+*+html table#pg2 {
+	border-collapse:separate; }
+
+*+html td.PAGE_LAYER {
+	border-width:thin;
+	border:1px solid #000;
+	border-collapse:separate; }
+
+*+html table#pg2 tr {
+	border:1px solid #000;
+	border-collapse:separate; }
+
+table#pg2 td.PAGE_LAYER {
+	background-color:#ccc;
+	border-color:#000; }
+
+table#pg2 td.GROUP_LAYER {
+	background-color:#fff;
+	border-color:#000; }
 /*
 tr {
 	border:1px solid #fff; }

@@ -1,0 +1,619 @@
+-------------------------
+0.4.9 - Nov 21 2006
+
+New features:
+
+- The function isNumericType() was moved from PHPReportMaker.php to
+PHPReportsUtil.php.
+
+- Now we have three events on the COLs: ONCLICK, ONMOUSEOVER and ONMOUSEOUT. 
+  We can have some cool effects using those events. The effects can be applied
+  on the ROWs also using the parentNode JavaScript property. Some samples:
+
+  Changing the background when the mouse is over the COL:
+
+	<ROW>
+		<COL ONMOUSEOVER="this.style.background='#FF0000';" TYPE="FIELD">myfield</COL>
+	</ROW>
+
+  Changing the background when the mouse is clicked on the COL:
+
+	<ROW>
+		<COL ONCLICK="this.style.background='#FF0000';" TYPE="FIELD">myfield</COL>
+	</ROW>
+
+  Using a function to invert the COL background when clicking. First, the
+  JavaScript function:
+
+	function invertBackground(o){
+		var er = /yellow/i;
+		o.style.background = er.test(o.parentNode.style.background)?"transparent":"yellow";
+	}
+
+  Now the XML:
+
+	<ROW>
+		<COL ONCLICK="invert(this);" TYPE="FIELD">myfield</COL>
+	</ROW>
+
+  We can use the DOM to make some effects on the ROW also (not needing to
+  create the same event handlers for ROWs), just changing the object to the
+  parent node of the COL (ROW!):
+
+	function invertBackground(o){
+		var er = /yellow/i;
+		o.parentNode.style.background = er.test(o.parentNode.style.background)?"transparent":"yellow";
+	}
+
+  This will select all the ROW where the COL is.	
+
+- Included a sales.sql with sample data for you who don't want to type some
+  data for testing. You can create the sample table and data like this:
+
+  mysql -u taq -p -D phpreports < sales.sql
+
+  Please don't ask me to create the database for you also. ;-)
+
+- Created the concept of input plugins, that deal with your SQL query and
+create a new one, sending it to the report. With this kind of thing the first
+input plugin created was a crosstab plugin where you can define some columns
+as your static columns and another one to create dynamic columns with its
+value and show the report using an automatic template. More about this on the PDF manual.
+
+Bugs fixed:
+
+- There was a bug when closing the page, now fixed. When you have a certain
+number of lines the page was closed twice.
+
+-------------------------
+0.4.8 - Aug 16 2006
+
+New features:
+
+- When using templates the numeric data columns are right aligned now.
+
+- GROUPs COLs HEADERs are set to a 'bold' CSS class when using templates.
+
+Bugs fixed:
+
+- There was an error on db_array.php on the line count. Fixed. Thanks to 
+  Alexey for warning me!
+
+- There was an error on db_array.php db_columnType method. I forgot a "_" char
+  there. Thanks again to Alexey!
+
+- Seems that some <xsl:param name="language"/> was breaking some stuff on
+  PHP4. I was using this with language features, but not anymore, so I removed 
+  it. Thanks to for Stéphane Riff warning me!
+
+- The GROUPs HEADERs were not repeating on each page break. Fixed.
+
+- The template HEADERs are now capitalized correctly.
+
+-------------------------
+0.4.7 - Jun 21 2006
+
+New features:
+
+- Added a new interface for PHP5 and Oracle.
+
+- We can now use templates files to create our reports. For example, we can
+  have a file with fixed page HEADER and FOOTER, some logo etc. and just
+  tell what GROUPing info we need, with a XML string like the XML file or
+  with some PHP classes and code (more expensive but can help if you want
+  to create it dinamically).
+
+- There is a new "database" interface, db_array.php, where you can send the
+  report values as a multidimensional array (check the file for an example).
+
+- The TABLEs elements have now an id which allow manipulation of the report pages
+  using DOM.
+
+- The error messages can now be translated. There is a new class called 
+  PHPReportsErrorTr() where you can translate the messages to your language.
+  English and Brazilian Portuguese are already there. You can use 
+  <report object>->setLanguage(<language code>) to set your language.
+
+- Added again the FORM element (there was a guy crazy about it! ;-)
+
+- DATE and DATETIME data types added on the grouping functions.
+
+- There is a setBody(<boolean>) method on the PHPReportMaker object now where
+  you can configure to print or not the <HTML><HEAD><BODY></BODY></HEAD></HTML> 
+  tags or just the report data.
+
+Bugs fixed:
+
+- XHTML element does not show its tag on the result HTML file.
+  Thanks to David Sowers for the tip!
+
+-------------------------
+0.4.6 - Dec 08 2005
+
+Bugs fixed:
+
+- LINKs can handle HTML special chars now.
+- PHPReport.dtd fixed on the LINKs element.
+
+-------------------------
+0.4.5 - Nov 04 2005
+
+Bugs fixed:
+
+- There was a bug with PHPReportPreview.xsl and PHP5. Fixed now.
+
+New features:
+
+- LINKs elements now can render an IMG element inside.
+
+- IMGs can have an explicit border of 0px (thanks to Tiago Gava for the tip).
+
+-------------------------
+0.4.4 - Oct 26 2005
+
+Bugs fixed:
+
+- GROUPs were not reseting it's values when the GROUP breaks. So COL's with
+SUPPRESS="TRUE" where not showing it's values when the values were the same as
+the previous GROUP.
+
+New features:
+
+- Automatic GROUP NAMEs are provided now. Not a mandatory attribute anymore.
+
+- There's a new function on the PHPReportMaker object: getBenchmark(<id>),
+  where <id> can be a string key to some benchmarks done while creating the
+  report, returning the timestamp of the event, like:
+  
+  report_start		- when the report started
+  report_end		- when the report ended
+  sql_start			- when the sql query started
+  sql_end			- when the sql query ended
+  code_start		- when the code generation started
+  code_end			- when the code generation ended
+  code_eval_start	- when the code evaluation started
+  code_eval_end	- when the code evaluation ended
+  output_start		- when the output (to a file or screen) started
+  output_end		- when the output ended
+  
+  If you don't request an id, the full array is returned.
+  You can use this to make some benchmarks and see what is happening inside
+  the report creation and perhaps make things works faster.
+
+  You can use like this, AFTER $oRpt->run():
+  
+  $aBench = $oRpt->getBenchmark();
+  foreach($aBench as $k=>$v)
+     print "$k on $v<br/>";
+
+  For example, if you'd like to know on how many seconds your report was created, 
+  you can use:
+
+  $aBench = $oRpt->getBenchmark();
+  $iSec   = $aBench["report_end"]-$aBench["report_start"];
+  print "Your report was created on $iSec seconds.";
+
+-------------------------
+0.4.3 - Oct 05 2005
+
+New features:
+
+- Added the COL setPageNum(<n>) and resetPageNum() methods.
+
+- Added the CMD element, where you can use PHP code to eval() like a COL, 
+  but with no output on the report. For example, when opening a new 
+  group that needs the page always as 1, you can use
+  
+  <CMD>$this->setPageNum(1);</CMD>
+
+  on the group HEADER.
+  Please take care of the commands you put there. They can be all 
+  kind of stuff eval() accepts!
+  Hope it works for you, covi. :-)
+
+Bugs fixed:
+
+- No more LINK's are created if there is an empty string on its values.
+  This will avoid some empty <a href=""></a>. Thanks to Marcelo Reimberg
+  for his suggestion.
+
+-------------------------
+0.4.2 - Jul 15 2005
+
+Bugs fixed:
+
+- Seems that on some recent versions of PHP5.x there was some changes on  
+  the way you can play with $this. You can check 
+  http://bugs.php.net/search.php?cmd=display&search_for=cannot+re-assign+%24this&x=0&y=0
+  for more about this. 
+	  
+  To fix this, I removed some *very old* code that refers to some vars,
+  $oValue and $header. Those vars were used on some old versions, so if you
+  have some reference to them on your XML report layout files, you can safely
+  change it to $this. For example, $oValue->getValue("NAME") or
+  $header->getValue("NAME") to $this->getValue("NAME"). They were used to
+  refer to values on the HEADER but I fixed it later.
+
+  Thanks for Mark Baker for warning me about that. :-)
+
+-------------------------
+0.4.1 - Jun 29 2005
+
+New features:
+
+- Added setPageSize(size) and getPageSize() on the PHPReportMaker object.
+  Now you can specify the page size using code like
+		$oRpt = new PHPReportMaker();	// new report object
+		$oRpt->setPageSize(30);			// 30 lines page
+  for example. This method overrides the XML value.
+  Thanks to Gladyston Pereira Batista for this suggestion. :-)
+  
+-------------------------
+0.4.0 - Jun 21 2005
+
+Bugs fixed:
+
+- Seems that self:: does not work very good on PHP 4.3.x. On the
+  internal calls of the PHPReportsDBI creates a silent error there.
+  I changed just two files: db_mssql.php and db_mysql.php.
+  Thanks to Trevor Lohrbeer for warning me about that! :-)
+
+-------------------------
+0.3.9 - Jun 03 2005
+
+New features:
+
+- Added a new way to reuse your XML data using PHP5. Thanks to 
+  Andy from Xtreme-software. Now you can use XIncludes to insert
+  XML files insert your XML report file, as:
+
+	<REPORT xmlns:xi="http://www.w3.org/2001/XInclude">
+		<PAGE BORDER="0" SIZE="30" CELLSPACING="0" CELLPADDING="3">
+			<xi:include href="header.xml"/>
+			<xi:include href="footer.xml"/>
+		</PAGE>
+	</REPORT>
+
+	Please notice the XML namespace declaration needed on the REPORT
+	element to allow that.
+
+Bugs fixed:
+
+- As I changed the database interfaces on the previous release some stuff
+  was a little broken. Thanks to Andy again for warning me.
+  
+-------------------------
+0.3.8 - May 23 2005
+
+New features:
+
+- I added a "namespace" on the database interface files, so now if you
+  have a function on your code named like for example "db_connect" it will
+  not conflict with PHPReportDBI::db_connect. Please if you have some problem
+  on your database interface because of this change, revert to the old version
+  and contact me ASAP telling me what interface you're using and what error
+  you got.
+
+Bugs fixed:
+
+- Fixed the way PHPReports check the paths on OSX. Thanks to Martin Loitzl!
+
+- Seems that there was some problems about page breaking in some Windows/IE. 
+  I changed the code the way Martin Loitzl told me on
+  http://sourceforge.net/forum/forum.php?thread_id=1287185&forum_id=186814
+  I hope everything runs fine there now.
+
+-------------------------
+0.3.7 - March 3 2005
+
+New features:
+
+- Using NUMBERFORMAT or NUMBERFORMATEX caused null or empty values be shown
+  as 0. Now just if the value is numeric or there is an implicit %s on the
+  NUMBERFORMAT string, they are converted.
+
+- Using -1 as PAGE SIZE gives you unlimited page size. It will just ends when
+  the report ends.
+
+- Added the attribute CLASS to PAGE.  
+
+- Added NO_DATA_FUNC, where you can specify a function to be called if no data
+  is returned from your query. It takes precedence over NO_DATA_MSG. You can
+  use like:
+  <NO_DATA_FUNC>myfunc()</NO_DATA_FUNC>
+  You can send parameters to your func, but if you send strings, please escape
+  it with ' as
+  <NO_DATA_FUNC>myfunc('report name',1,2,3)</NO_DATA_FUNC>
+
+- If you want not to use ISO-8859-1 encoding, there is a encoding_change
+  script that can change all the encodings for you. Unpack the package, go
+  to the its root directory and call
+  encoding_change <your_encoding_here>
+
+- Added a TSV output plugin, thanks to Patrice W.!  
+
+- Added a CSV output plugin.  
+
+Bugs fixed:
+
+- When using the TXT output plugin, there was a chr(160) on the empty space of
+  suppressed fields. I change it to the normal empty space char.
+
+-------------------------
+0.3.6 - January 7 2005
+
+New features:
+
+- I added a new type of COL type: RAW_EXPRESSION.
+  Let me explain what it does. On 0.3.5 I fixed a bug regarding some HTML
+  special chars on the query result using the htmlspecialchars function (see
+  bellow). But sometimes we need the result without this kind of processing.
+  So using COL TYPE="RAW_EXPRESSION" will avoid the use of the
+  htmlspecialchars function and allow you to get the result "as is".
+  It's useful to insert some XHTML dynamic code into your report.
+  Check more about it on the PDF manual, "Inserting code (XHTML/PHP) into your COL".
+
+Bugs fixed:
+
+- There was a bug on the Interbase/Firebird interface, when using for example a query like
+
+  select FIELD as MY_FIELD from table
+
+  it will not retrieve the value of MY_FIELD as a valid FIELD.
+  Interbase/Firebird sees it as an alias, which is right, but if you do not
+  refer to it as an alias on the PHP code it will not get the value (I did not
+  see this kind of behaviour on another DBMS's, but if you find it please tell
+  me). 
+  Thanks to Luis "Gugui" Gustavo for that.
+
+- Now the HTML result have a DOCTYPE inside: -//W3C//DTD HTML 4.01//EN
+  This fixes, for example, empty TDs that didn't show it's borders.
+
+- Just to make sure that some browsers (you know who) will render empty
+  TD's, I just replaced the return of SUPPRESSED fields/expression from 
+  "" to &#160 (XML empty space entity).
+
+- When you have a DOCUMENT HEADER, it was printed AFTER the PAGE HEADER, 
+  but now it's fixed. Thanks for Mario Bertoni for warning me about that.
+  Hey Mario, you just delayed this version for some minutes ehehe. :-)
+
+- On PHPReportGroup.php, row 584, there is some commented code about 
+  printing the DOCUMENT FOOTER after the PAGE FOOTER, on the end of the
+  report. If you want to give a try there, give me your impressions.
+  Maybe on the future we can add a new layer just for printing the 
+  PAGE number and stuff like that. 
+  
+-------------------------
+0.3.5 - November 25 2004
+
+New features:
+
+- Now you can reuse an existing database connection on your report. 
+  Just use the new setDatabaseConnection(<connection handle>) on your
+  PHPReportMaker object:
+
+  $oCon = <code to open your connection here>;
+  $oRpt = new PHPReportMaker();
+  $oRpt->setDatabaseConnection($oCon);	// new code :-)
+  // make your adjustments on the report object
+  $oRpt->run();
+
+  Thanks again to Matthew Palmer for his patch! :-)
+
+- Bugs fixed
+
+  There was a bug on the EXPRESSIONs where if there was some kind of
+  char like & returned from the database, it gives an error there.
+  I just fixed it the same way that works for FIELDs COLs, with a
+  htmlspecialchars() function.
+
+-------------------------
+0.3.4 - September 30 2004
+
+Today is Isabella's 10 months old birthday. :-) Congratulations to my little cute
+daughter, the best thing that happened to my life. :-) 
+
+New features:
+
+- Added a CELLCLASSEXPRESSION parameter on the COL element. Now you can
+  say how your COL will looks like based on a PHP expression on the same
+  way you use on <COL TYPE="EXPRESSION">. For example:
+
+  <COL CELLCLASSEXPRESSION="($this->getValue("VAL")&lt;0?'RED':'BLACK')" TYPE="FIELD">VAL</COL>
+
+- To the users of previous versions, what changed:
+
+  ENVIRONMENT VARS
+  ----------------
+
+  The enviroment variables are gone. Yes, gone. I removed them.
+  Now you don't need to use them, but you do need to tell PHP where the PHP
+  classes are. You have two ways to do that. Let's suppose you installed the
+  classes under /var/www/htdocs/phpreports (I have something to tell you about
+  this soon), so you can:
+
+  1) On the PHP script that calls the PHPReportMaker object, put the path in
+  the include_path using ini_set (note that I'm showing how to do it on Linux,
+  if you use Windows, replace the ':' char to ';'):
+    
+  ini_set("include_path",ini_get("include_path").":/var/www/htdocs/phpreports/");
+
+  2) A better way, put it on your php.ini file and restart your webserver:
+
+  include_path=<your current include path here>:/var/www/htdocs/phpreports/
+
+  PHPReports will check for its path under a call to ini_get("include_path"),
+  breaking it on tokens (breaking with ':' or ';') and searching till find a
+  phpreports reference.
+
+  This will avoid me some trouble with people asking me how to declare
+  environment variables on their operational system. Come on, dudes, you
+  really need to know that! :-)
+
+  TEMP DIRECTORY
+  --------------
+
+  I used to create all the temporary stuff under <phpreports_home>/tmp. Used.
+  Now the temporary stuff are going to your operational system temp directory.
+  On Linux, use to be /tmp, on Windows, c:\temp. Check your return of the 
+  tempnam().
+  Now we only need to have a /tmp directory under your DOCUMENT_ROOT to
+  make some output plugins result available as a web server URL.
+  
+  OUTPUT PLUGINS
+  --------------
+  As I said above, you'll need a tmp directory where the web server can reach.
+  My choice was to call it tmp and put it under DOCUMENT_ROOT. So if your
+  DOCUMENT_ROOT is /var/www/htdocs, tmp will be /var/www/htdocs/tmp/.
+  This is needed for the bookmarks and page output plugins to write their
+  temporary files with the contents that needs to be reached via your web
+  server address bar.  
+
+  WHY DID I CHANGED THAT?
+  -----------------------
+
+  Matthew Palmer gave me some light that we can store PHPReports OUT of the 
+  web server path. For example:
+  
+  /usr/lib/phpreports
+
+  will avoid some people trying to find your PHPReport installation using for
+  example 
+
+  http://www.yourhost.com/phpreports/PHPReportMaker.php
+
+  No problem with that, but they will know that you have PHPReports installed
+  and can try to find some more things about your reports there. I don't see
+  a clear way to mess things up but you know, if there's a way to we improve
+  some security, let's do it. You still can store your PHPReport classes under
+  your web server directory, but it's your choice. As with your XML layout
+  files. Put it somewhere on /usr, /opt/, /var, out of the web server scope.
+  PHP will find them as filesystem regular files, but the web server will not
+  see and return them with an URL on the web browser.
+
+  And using /tmp instead of <phpreports_home>/tmp will avoid users trying to
+  guess that weird temporary file names on your browser also. Just be warned
+  that the bookmarks and page output plugins HTML result files will still be 
+  under the  web server scope, using DOCUMENT_ROOT/tmp. You need to erase them 
+  when you're sure you'll not use them anymore.
+
+Bugs fixed:
+
+- That first item below was buggy. I forgot the change one line there that
+  avoided all the rest of what I made. Now the class name is working properly.
+  
+- There was a bug in the CSS stuff on the bookmarks and page output plugins.
+  Fixed now.    
+
+-------------------------
+0.3.3 - September 27 2004
+
+New features:
+
+- Now you can change the name of the class that will be created to run the 
+  report. On previous versions it was fixed as PHPReport, now you can change
+  it's name using setClassName() function on the PHPReportMaker object.
+  It's a good thing since you know what you're doing. :-)
+
+  Matthew Palmer (mpalmer@hezmatt.org) requested this, you can have some more samples with him.
+
+- Created the putEnvObj() and getEnvObj() functions. Using these functions
+  you can expose any kind of variable (a simple string or a class) to your
+  report, making it accessible to your report. 
+  This can be useful if you need external classes and variables referenced
+  on your COL element. 
+  Some uses are like:
+  
+  $sMyString = "this is my string";
+  ...
+  $oRpt->putEnvObj("mystr",$sMyString);
+  ...
+  <COL TYPE="EXPRESSION">$this->getEnvObj("mystr");</COL>
+
+  This will print "this is my string" there.
+
+  A better use will be with user defined objects (btw, functions you
+  defined on some file that is on the scope of the PHPReportMaker works like
+  PHP functions, available for use inside your report), but to maximize it's
+  potential you must use PHP5. On PHP5 it will looks like this:
+
+  $oClass = new MyUserDefinedClass();
+  ...
+  $oRpt->putEnvObj("myclass",$oClass);
+  ...
+  <COL TYPE="EXPRESSION">$this->getEnvObj("myclass")->myFunction()</COL>
+
+  Using PHP4 this will not work because it can't reference the object returned
+  by the function and the function inside that object.
+  Check about that on "Dereferencing objects returned from functions" here:
+  http://www.php.net/zend-engine-2.php
+
+  Keith Willis (keith@net-soft.com.au) suggested this. He have a cool sample
+  of what can be done with this kind of objects.
+   
+Bugs fixed:
+
+- Fixed PEAR db interface - thanks to Matthew Palmer.
+
+- Fixed setNoDataMsg() function - thanks to Keith Willis for warning me.
+
+-------------------------
+0.3.2 - September 03 2004
+
+I hate when this happens. I just release a new version and some bugs appears ehehe.
+
+On 0.3.1 there was two bugs:
+
+1- On the new CSS media chooser, if you didn't put any media, it should 
+	default to "screen" and "print", but was just inserting the "screen" media, 
+	so your reports was really beautiful on the screen but sucked when 
+	printed. :-) Because there was no "print" media there, and it didn't use any
+	CSS file. Now it's ok, if you don't provide a MEDIA="<media here>" tag 
+	(as on LOTS of old XML report layout files), it will assume that you want 
+	to use the CSS on both types and will work correctly.
+
+2- The setOutput from the PHPReportMaker was overriding the 
+	PHPReportOutputObject, even if it's null. So if you put a 
+	$oOut->setOutput(<file>) on your report output plugin it was never going 
+	to a file, and was showing on the screen. Now it works.
+
+-------------------------
+0.3.1 - September 03 2004
+
+Thanks to Luis Gustavo "Gugui" and Keith Willis for help, suggestions and
+debugging. :-)
+
+New features:
+
+- New CSS elements features. Now you have put more than one CSS reference on
+  your report, specifying the destination media if you want to. This is very
+  good if you want to show your report with a lot of colors on the screen and
+  when printing turns it to black and white. This is done like that:
+
+  <CSS MEDIA="screen">my_full_color_file.css</CSS>
+  <CSS MEDIA="print">few_colors_file.css</CSS>
+
+  When printing, the browser will use the second file.
+
+  More about this here:
+  http://www.w3.org/TR/REC-CSS2/media.html
+
+  And don't worry, the saved reports will work. :-)
+
+- Increased the number of parameters to 10. On previous versions you was just
+  allowed to use 5 parameters.  
+
+- Help files added. Now when some error occurs and is trapped, we can put a
+  link to a help file explaining what the error is about and trying to give
+  some tips on how to fix it.  
+
+Bugs fixed:
+
+- A possible bug was fixed, about the last page break.
+
+- There was a bug on the PHPReportMaker, if there was an output plugin it was
+  not calling the setOutput(<file>) function, when needs to send your report
+  to a file and not to the screen.
+  
+- Removed all the ini_set commands. On Windows it was causing some problems,
+  and I removed it and changed to use realpath() function with PHPREPORTSFILE.
