@@ -33,9 +33,9 @@ $sql = "SELECT	iv.id, b.name As biller, c.name As customer,
 	pf.pref_inv_wording,
 	iv.date,
 	@invd:=(SELECT sum( IF(isnull(ivt.total), 0, ivt.total)) 
-		FROM mypfx_invoice_items ivt where ivt.invoice_id = iv.id) As invd,
+		FROM ".TB_PREFIX."invoice_items ivt where ivt.invoice_id = iv.id) As invd,
 	@apmt:=(SELECT sum( IF(isnull(ap.ac_amount), 0, ap.ac_amount)) 
-		FROM mypfx_account_payments ap where ap.ac_inv_id = iv.id) As pmt,
+		FROM ".TB_PREFIX."account_payments ap where ap.ac_inv_id = iv.id) As pmt,
 	IF(isnull(@invd), 0, @invd) As total,
 	IF(isnull(@apmt), 0, @apmt) As paid_format,
 	(select (total - paid_format)) as owing
