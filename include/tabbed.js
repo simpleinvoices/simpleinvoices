@@ -4,8 +4,9 @@ Ext.onReady(function(){
     // Group box containing actions
     var invoicePanel = new Ext.Panel({
     	frame:true,
-    	title: 'Create an Invoice',
+    	title: 'Invoices',
     	collapsible:true,
+    	collapsed:true,
     	contentEl:'invoices',
     	titleCollapse: true
     });
@@ -90,6 +91,7 @@ Ext.onReady(function(){
 		}]
     });
     
+    
     var headerBox = new Ext.BoxComponent({ 
 					region:'north',
                     el: 'header',
@@ -128,8 +130,8 @@ Ext.onReady(function(){
     
     // Man link ids to functions
     var actions = {
-    	'manage-invoices' : function(){
-    		addTab("Manage Invoices",'./index.php?module=invoices&view=manage');
+        'manage-invoices' : function(){
+    		updateTab('tab1',"Manage Invoices","index.php?module=invoices&view=manage");
     	},
     	'new-invoice-total' : function(){
     		updateTab('tab1',"New Invoice: Total","index.php?module=invoices&view=total");
@@ -141,7 +143,49 @@ Ext.onReady(function(){
     		updateTab('tab1',"New Invoice: Consulting","index.php?module=invoices&view=consulting");
     	},
     	'invoice-types' : function(){
-    		updateTab('invoice-tab','Invoice Help',"./docs.php?p=ReadMe#faqs-types");
+    		updateTab('help-tab','Invoice Help',"./docs.php?p=ReadMe#faqs-types");
+    	},
+    	'manage-customers' : function(){
+    		updateTab('tab1',"Manage Customers","index.php?module=customers&view=manage");
+    	},
+    	'new-customer' : function(){
+    		updateTab('tab1',"New Customer","index.php?module=customers&view=add");
+    	},
+    	'manage-products' : function(){
+    		updateTab('tab1',"Manage Products","index.php?module=products&view=manage");
+    	},
+    	'new-product' : function(){
+    		updateTab('tab1',"New Product","index.php?module=products&view=add");
+    	},
+    	'manage-billers' : function(){
+    		updateTab('tab1',"Manage Billers","index.php?module=billers&view=manage");
+    	},
+    	'new-biller' : function(){
+    		updateTab('tab1',"New Biller","index.php?module=billers&view=add");
+    	},
+    	'manage-payments' : function(){
+    		updateTab('tab1',"Manage Payments","index.php?module=payments&view=manage");
+    	},
+    	'new-payment' : function(){
+    		updateTab('tab1',"New Payment","index.php?module=payments&view=add");
+    	},
+    	'system-defaults' : function(){
+    		updateTab('tab1',"System Defaults","index.php?module=system_defaults&view=manage");
+    	},
+    	'tax-rates' : function(){
+    		updateTab('tab1',"Tax Rates","index.php?module=tax_rates&view=manage");
+    	},
+    	'invoices-preferences' : function(){
+    		updateTab('tab1',"Invoice Preferences","index.php?module=invoices&view=manage");
+    	},
+    	'payment-types' : function(){
+    		updateTab('tab1',"Payment Types","index.php?module=payments&view=manage");
+    	},
+    	'database-upgrade' : function(){
+    		updateTab('tab1',"Database Upgrade","index.php?module=options&view=manage_sqlpatches");
+    	},
+    	'backup-database' : function(){
+    		updateTab('tab1',"Backup Database","index.php?module=options&view=backup_database");
     	}
     };
     
