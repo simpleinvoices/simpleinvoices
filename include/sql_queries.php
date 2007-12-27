@@ -484,9 +484,9 @@ function getInvoice($id) {
 	$invoice['date'] = date( $config['date_format'], strtotime( $invoice['date'] ) );
 	$invoice['calc_date'] = date('Y-m-d', strtotime( $invoice['date'] ) );
 	$invoice['total'] = getInvoiceTotal($invoice['id']);
-	$invoice['total_format'] = number_format($invoice['total'],2);
+	$invoice['total_format'] = round($invoice['total'],2);
 	$invoice['paid'] = calc_invoice_paid($invoice['id']);
-	$invoice['paid_format'] = number_format($invoice['paid'],2);
+	$invoice['paid_format'] = round($invoice['paid'],2);
 	$invoice['owing'] = $invoice['total'] - $invoice['paid'];
 
 	
@@ -494,8 +494,8 @@ function getInvoice($id) {
 	$sql ="SELECT SUM(tax_amount) AS total_tax, SUM(total) AS total FROM ".TB_PREFIX."invoice_items WHERE invoice_id =$id";
 	$query = mysqlQuery($sql) or die(mysql_error());
 	$result = mysql_fetch_array($query);
-	//$invoice['total'] = number_format($result['total'],2);
-	$invoice['total_tax'] = number_format($result['total_tax'],2);
+	//$invoice['total'] = round($result['total'],2);
+	$invoice['total_tax'] = round($result['total_tax'],2);
 	
 	return $invoice;
 }
@@ -510,11 +510,11 @@ function getInvoiceItems($id) {
 	
 	for($i=0;$invoiceItem = mysql_fetch_array($query);$i++) {
 	
-		$invoiceItem['quantity_formatted'] = number_format($invoiceItem['quantity'],2);
-		$invoiceItem['unit_price'] = number_format($invoiceItem['unit_price'],2);
-		$invoiceItem['tax_amount'] = number_format($invoiceItem['tax_amount'],2);
-		$invoiceItem['gross_total'] = number_format($invoiceItem['gross_total'],2);
-		$invoiceItem['total'] = number_format($invoiceItem['total'],2);
+		$invoiceItem['quantity_formatted'] = round($invoiceItem['quantity'],2);
+		$invoiceItem['unit_price'] = round($invoiceItem['unit_price'],2);
+		$invoiceItem['tax_amount'] = round($invoiceItem['tax_amount'],2);
+		$invoiceItem['gross_total'] = round($invoiceItem['gross_total'],2);
+		$invoiceItem['total'] = round($invoiceItem['total'],2);
 		
 		$p_id = $invoiceItem['product_id'];
 		$invoiceItem['product'] = getProduct($p_id);	
@@ -684,17 +684,17 @@ function getInvoices(&$query) {
 			
 		#invoice total total - start
 		$invoice['total'] = getInvoiceTotal($invoice['id']);
-		$invoice['total_format'] = number_format($invoice['total'],2);
+		$invoice['total_format'] = round($invoice['total'],2);
 		#invoice total total - end
 		
 		#amount paid calc - start
 		$invoice['paid'] = calc_invoice_paid($invoice['id']);
-		$invoice['paid_format'] = number_format($invoice['paid'],2);
+		$invoice['paid_format'] = round($invoice['paid'],2);
 		#amount paid calc - end
 		
 		#amount owing calc - start
 		$invoice['owing'] = $invoice['total'] - $invoice['paid'];
-		$invoice['owing_format'] = number_format($invoice['total'] - $invoice['paid'],2);
+		$invoice['owing_format'] = round($invoice['total'] - $invoice['paid'],2);
 		#amount owing calc - end
 	}
 	return $invoice;

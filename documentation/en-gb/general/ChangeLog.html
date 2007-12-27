@@ -6,8 +6,10 @@ Simple Invoices - Changelog
 </head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <div id="left">
-<ul><li>2007-12-27
+<ul><li>2007-12-28
 	<ul>
+		<li>Substituted number_format() to round() in sql_queries.php as fix for extra comma(s) in numeric fields breaking updation
+		<li>Fixed rel-gb syntax js error in invoice detail template
 		<li>Optimised the manage invoices page and template to work from a single SQL extraction
 		<li>Removed redundant check for getSystemDefaults() from loop and Customer now sortable in manage invoices
 		<li>Fixed the datePicker JS Error that appeared on all manage pages using alternate header sans unused js includes
