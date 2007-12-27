@@ -32,15 +32,14 @@ $result = mysqlQuery($sql) or die(mysql_error());
 
 
 $invoices = null;
+$defaults = getSystemDefaults();
 
 for($i = 0;$invoice = getInvoices($result);$i++) {
-	
 	
 	$biller = getBiller($invoice['biller_id']);
 	$customer = getCustomer($invoice['customer_id']);
 	$invoiceType = getInvoiceType($invoice['type_id']);
 	$preference = getPreference($invoice['preference_id']);
-	$defaults = getSystemDefaults();
 	
 	$invoices[$i]['invoice'] = $invoice;
 	$invoices[$i]['biller'] = $biller;
@@ -48,8 +47,6 @@ for($i = 0;$invoice = getInvoices($result);$i++) {
 	$invoices[$i]['invoiceType'] = $invoiceType;
 	$invoices[$i]['preference'] = $preference;
 	$invoices[$i]['defaults'] = $defaults;
-
-
 
 	#Overdue - number of days - start
 	if ($invoice['owing'] > 0 ) {
@@ -98,9 +95,8 @@ $smarty -> assign('pageActive', $pageActive);
 
 
 
-getRicoLiveGrid("ex1","	{ type:'number', decPlaces:0, ClassName:'alignleft' },,
+getRicoLiveGrid("ex1","	{ type:'number', decPlaces:0, ClassName:'alignleft' },,,
 	{ type:'number', decPlaces:2, ClassName:'alignleft' },
-	{ type:'number', decPlaces:2, ClassName:'alignleft' },
-	{ type:'number', decPlaces:2, ClassName:'alignleft' },,,,");
+	{ type:'number', decPlaces:2, ClassName:'alignleft' }");
 
 ?>
