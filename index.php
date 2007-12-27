@@ -94,7 +94,13 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 	}
 }
 
-$smarty -> display("../templates/default/header.tpl");
+// To remove the js error due to multiple document.ready.function() 
+// 	in jquery.datePicker.js, jquery.autocomplete.conf.js and jquery.accordian.js 
+//	 without instances in manage pages - Ap.Muthu
+if ($view == "manage") 
+	$smarty -> display("../templates/default/headerm.tpl");
+else
+	$smarty -> display("../templates/default/header.tpl");
 //temp added menu.tpl back in so we can easily design new menu system
 
 
