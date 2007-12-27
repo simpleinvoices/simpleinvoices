@@ -17,10 +17,11 @@ require_once("./include/reportlib.php");
 	$sSQL .= "	IF(isnull(@invd), 0, @invd) As INV_TOTAL, ";
 	$sSQL .= "	@apmt:=(select sum( IF(isnull(ap.ac_amount), 0, ap.ac_amount)) from " . TB_PREFIX . "account_payments ap where ap.ac_inv_id = iv.id) As pmt, ";
 	$sSQL .= "	IF(isnull(@apmt), 0, @apmt) As INV_PAID, ";
-	$sSQL .= "	(select (INV_TOTAL - INV_PAID)) as INV_OWING ";
+	$sSQL .= "	(select (INV_TOTAL - INV_PAID)) As INV_OWING ";
 	$sSQL .= "FROM " . TB_PREFIX . "invoices iv, " . TB_PREFIX . "customers c, " . TB_PREFIX . "biller b ";
 	$sSQL .= "WHERE iv.customer_id = c.id AND iv.biller_id = b.id ";
-	$sSQL .= "ORDER BY Aging";
+	$sSQL .= "HAVING INV_OWING > 0 "; // implicit GROUP BY - Ap.Muthu
+	$sSQL .= "ORDER BY Aging DESC";
 
 	$oRpt->setXML("./modules/reports/report_debtors_by_aging.xml");
 

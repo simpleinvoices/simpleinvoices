@@ -16,7 +16,7 @@ require_once("./include/reportlib.php");
 	$sSQL .= "	IF(isnull(@apmt), 0, @apmt) As invpaid, ";
 	$sSQL .= "	(select (invtot - invpaid)) as invowing ";
 	$sSQL .= "	FROM " . TB_PREFIX . "invoices iv GROUP BY iv.id) As mysum ";
-	$sSQL .= "GROUP BY Aging;";
+	$sSQL .= "GROUP BY Aging DESC";
 
 	$oRpt->setXML("./modules/reports/report_debtors_aging_total.xml");
 

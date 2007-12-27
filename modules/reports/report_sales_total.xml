@@ -14,7 +14,7 @@
 		<GROUP NAME="citygroup" >
 			<FIELDS>
 				<ROW>
-					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">Total</COL>
+					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER" NUMBERFORMATEX="2">Total</COL>
 				</ROW>
 			</FIELDS>
 		</GROUP>
