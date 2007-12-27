@@ -4,10 +4,10 @@
 * 	Manage Invoices page
 *
 * Authors:
-*	 Justin Kelly, Nicolas Ruflin
+*	 Justin Kelly, Nicolas Ruflin, Ap.Muthu
 *
 * Last edited:
-* 	 2007-07-19
+* 	 2007-12-27
 *
 * License:
 *	 GPL v2 or above
@@ -19,70 +19,48 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-
 /*echo <<<EOD
 <title>{$title} :: {$LANG['manage_invoices']}</title>
 EOD;*/
 
-#insert customer
+$sql = "SELECT	iv.id, b.name As biller, c.name As customer, 
+	(CASE	WHEN datediff(now(),date) <= 14 THEN '0-14' 
+			WHEN datediff(now(),date) <= 30 THEN '15-30'
+			WHEN datediff(now(),date) <= 60 THEN '31-60'
+			WHEN datediff(now(),date) <= 60 THEN '61-90'
+			ELSE '90+' END ) as overdue,
+	iv.type_id,
+	pf.pref_inv_wording,
+	iv.date,
+	@invd:=(SELECT sum( IF(isnull(ivt.total), 0, ivt.total)) 
+		FROM mypfx_invoice_items ivt where ivt.invoice_id = iv.id) As invd,
+	@apmt:=(SELECT sum( IF(isnull(ap.ac_amount), 0, ap.ac_amount)) 
+		FROM mypfx_account_payments ap where ap.ac_inv_id = iv.id) As pmt,
+	IF(isnull(@invd), 0, @invd) As total,
+	IF(isnull(@apmt), 0, @apmt) As paid_format,
+	(select (total - paid_format)) as owing
+FROM ".TB_PREFIX."invoices iv, ".TB_PREFIX."biller b, ".TB_PREFIX."customers c, ".TB_PREFIX."preferences pf
+WHERE iv.customer_id = c.id AND iv.biller_id = b.id AND iv.preference_id = pf.pref_id
+GROUP BY iv.id 
+ORDER BY iv.id DESC";
 
-$sql = "SELECT * FROM ".TB_PREFIX."invoices ORDER BY id desc";
+// $result = mysqlQuery($sql) or die(mysql_error());
 
-$result = mysqlQuery($sql) or die(mysql_error());
-
-
-$invoices = null;
+$invoices = sql2array($sql);
 $defaults = getSystemDefaults();
 
-for($i = 0;$invoice = getInvoices($result);$i++) {
+$numrecs = count($invoices);
+
+for($i = 0; $i < $numrecs; $i++) {
 	
-	$biller = getBiller($invoice['biller_id']);
-	$customer = getCustomer($invoice['customer_id']);
-	$invoiceType = getInvoiceType($invoice['type_id']);
-	$preference = getPreference($invoice['preference_id']);
-	
-	$invoices[$i]['invoice'] = $invoice;
-	$invoices[$i]['biller'] = $biller;
-	$invoices[$i]['customer'] = $customer;
-	$invoices[$i]['invoiceType'] = $invoiceType;
-	$invoices[$i]['preference'] = $preference;
+// why is this done?
 	$invoices[$i]['defaults'] = $defaults;
 
-	#Overdue - number of days - start
-	if ($invoice['owing'] > 0 ) {
-		$overdue_days = (strtotime(date('Y-m-d')) - strtotime($invoice['calc_date'])) / (60 * 60 * 24);
-		//$overdue = floor($overdue_days);
-		//$overdue = (($overdue_days%15)*15+1)."-".(($overdue_days%15+1)*15);
-		if ($overdue_days == 0) {
-			$overdue = "0-14";
-		}
-		elseif ($overdue_days <=14 ) {
-			$overdue = "0-14";
-		}
-		elseif ($overdue_days <= 30 ) {
-			$overdue = "15-30";
-		}
-		elseif ($overdue_days <= 60 ) {
-			$overdue = "31-60";
-		}
-		elseif ($overdue_days <= 90 ) {
-			$overdue = "61-90";
-		}
-		else {
-			$overdue = "90+";
-		}
-	}		
-	else {
-		$overdue ="";
-	}
-	
-
 	//$url_pdf = "{$http_auth}{$_SERVER['HTTP_HOST']}{$httpPort}{$install_path}/index.php?module=invoices&view=templates/template&invoice={$invoice['id']}&action=view&location=pdf&type={$invoice['type_id']}";
-	$url_pdf = urlPDF($invoice['id'],$invoice['type_id']);
+	$invid = $invoices[$i]['id'];
+	$url_pdf = urlPDF($invid,$invoices[$i]['type_id']);
 	$url_pdf_encoded = urlencode($url_pdf);
-	$url_for_pdf = "./include/pdf/html2ps.php?process_mode=single&renderfields=1&renderlinks=1&renderimages=1&scalepoints=1&pixels=$pdf_screen_size&media=$pdf_paper_size&leftmargin=$pdf_left_margin&rightmargin=$pdf_right_margin&topmargin=$pdf_top_margin&bottommargin=$pdf_bottom_margin&transparency_workaround=1&imagequality_workaround=1&output=1&location=pdf&pdfname=$preference[pref_inv_wording]$invoice[id]&URL=$url_pdf_encoded";
-        
-	$invoices[$i]['overdue'] = $overdue;
+	$url_for_pdf = "./include/pdf/html2ps.php?process_mode=single&renderfields=1&renderlinks=1&renderimages=1&scalepoints=1&pixels=$pdf_screen_size&media=$pdf_paper_size&leftmargin=$pdf_left_margin&rightmargin=$pdf_right_margin&topmargin=$pdf_top_margin&bottommargin=$pdf_bottom_margin&transparency_workaround=1&imagequality_workaround=1&output=1&location=pdf&pdfname=$invoice[pref_inv_wording]$invid&URL=$url_pdf_encoded";
 	$invoices[$i]['url_for_pdf'] = $url_for_pdf;
 }
 
@@ -92,8 +70,6 @@ $smarty -> assign("invoices",$invoices);
 $smarty -> assign("spreadsheet",$spreadsheet);
 $smarty -> assign("word_processor",$word_processor);
 $smarty -> assign('pageActive', $pageActive);
-
-
 
 getRicoLiveGrid("ex1","	{ type:'number', decPlaces:0, ClassName:'alignleft' },,,
 	{ type:'number', decPlaces:2, ClassName:'alignleft' },
