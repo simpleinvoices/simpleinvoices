@@ -122,9 +122,9 @@ foreach ($langs as $lang_code) {
   if ($count == 0) {
     $percentage = 'N/A';
   } else {
-    $percentage = round(($count_translated / $count) * 100, 2) . '%';
+    $percentage = number_format(round(($count_translated / $count) * 100, 2), 2) . '%';
 
-    if ($percentage == '100%') {
+    if ($percentage == '100.00%') {
       $percentage = "<strong>$percentage</strong>";
     }
   }

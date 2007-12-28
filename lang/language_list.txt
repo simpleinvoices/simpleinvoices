@@ -1,8 +1,9 @@
+<?
 /*
 Script: language_list.txt
 	List of language abbreviatiosn
 */
-Script Source URI: http://techpatterns.com/downloads/php_language_detection.php
+// Script Source URI: http://techpatterns.com/downloads/php_language_detection.php
 
 function languages()
 {
