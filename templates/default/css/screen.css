@@ -208,10 +208,10 @@ table.reportTable td.PAGE_LAYER {
 	border-color:#000; }
 
 /* New PHPreports CSS - uses ID="pg2" or "pg1"  - Although HEADER and FOOTER are used now instead of PAGE_LAYER, it is left as is for compatibility */
-	
+
+
 table#pg1 {
-	border:1px solid #000; 
-	background-color:#fff; }
+	border:1px solid #000; }
 
 *+html table#pg1 {
 	border-collapse:separate; }
@@ -233,9 +233,9 @@ table#pg1 td.GROUP_LAYER {
 	background-color:#fff;
 	border-color:#000; }
 
+
 table#pg2 {
-	border:1px solid #000; 
-	background-color:#fff; }
+	border:1px solid #000; }
 
 *+html table#pg2 {
 	border-collapse:separate; }
@@ -256,6 +256,7 @@ table#pg2 td.PAGE_LAYER {
 table#pg2 td.GROUP_LAYER {
 	background-color:#fff;
 	border-color:#000; }
+
 /*
 tr {
 	border:1px solid #fff; }
@@ -353,6 +354,7 @@ th.sortable_rt {
 	border-right:1px solid #D6D2C2;
 	font-weight:400;
 	padding:2px; }
+
 /*
  * Accordian css - start
  * */
