@@ -1,9 +1,9 @@
-- NR todo (Sept)
+- NR todo (Sep)
  - quick view : check all style if all cut size to 25 characters stuff is working
  -- quick view : check consulting style - is descripton etc coming through OK?
- - lang: add new lang variables into all files : grep LANG_TODO
 
 - NR done
+ - lang: add new lang variables into all files : grep LANG_TODO - done
  - menu : add + back into menu - done
  -- menu : make active tab work for ALL pages - done
  - print preview of Total style invocies needs to be fixed - done
