@@ -228,7 +228,7 @@
 	else 
 		$oCon = $this->_oCon;
 
-	if(!is_resource($oCon))
+	if(!is_resource($oCon) &amp;&amp; !is_object($oCon))
 		$oError->showMsg("INVALIDCON");
 
 	// input filters
