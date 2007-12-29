@@ -1,7 +1,7 @@
 <?
 require_once("./config/config.php");
 
-// needed for /libs/phpreports to function
+// needed for /library/phpreports to function
 $val = ini_get("include_path");
 // PATH_SEPARATOR is ":" for non-windows and ":" for windows
 $val = $val . PATH_SEPARATOR . "./library/phpreports";
