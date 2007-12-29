@@ -15,7 +15,7 @@ require_once("./include/reportlib.php");
 	$sSQL .= "FROM " . TB_PREFIX . "invoices iv, " . TB_PREFIX . "biller b, " . TB_PREFIX . "customers c ";
 	$sSQL .= "WHERE iv.biller_id = b.id AND iv.customer_id = c.id ";
 	$sSQL .= "GROUP BY iv.id ";
-//	$sSQL .= "HAVING INV_OWING > 0 ";	// comment out if all invoices are to be displayed and not just owing invoices
+	$sSQL .= "HAVING INV_OWING > 0 ";	// comment out if all invoices are to be displayed and not just owing invoices
 	$sSQL .= "ORDER BY INV_OWING DESC;";
 
 	$oRpt->setXML("./modules/reports/report_debtors_by_amount.xml");
