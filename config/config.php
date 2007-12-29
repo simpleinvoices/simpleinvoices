@@ -1,26 +1,29 @@
 <?php
 //checkLogin();
 
-//ini_set("display_errors","On");
-/*Enter your database information */
-// $db_server can be mysql or pgsql
-$db_server = "mysql";
+######################
+/* Database connection info
+/* Enter your database information */
+######################
+$db_server = "mysql"; /* Can be either mysql or pgsql */
 $db_host = "localhost";
 $db_name = "simple_invoices";
 $db_user = "root";
 $db_password = "";
+//ini_set("display_errors","On");
 
+#####################
+/* Authentication options */
+#####################
 //if you want to make Simple Invoices secure and require a username and password set this to true
 //$authenticationOn = "true";
 $authenticationOn = "false";
-
 //if you are using a .httaccess file
-$http_auth = "";	//value: "name:password@"
+$http_auth = ""	//value: "name:password@"
 
-//$tb_prefix = "si_";
-define("TB_PREFIX","si_");
-
-/*Email configs*/
+#####################
+/* Email configs */
+#####################
 $email_host = "localhost";  // specify main and backup server - separating with ;
 $email_smtp_auth = false;	// turn off SMTP authentication
 // $email_smtp_auth = true;	// turn on SMTP authentication
@@ -32,10 +35,14 @@ $email_password = ""; 	// SMTP password
 // Backwards compatibility maintained even if the following 2 variables are omitted as with retaining an old config.php - Ap.Muthu
 $email_smtpport = 25; 	// Default 25 - use 465 for secure ssl
 $email_secure = "";		// one among '', 'ssl', or 'tls' - used by PHPMailer class in modules/include/mail
-$email_ack = false;		// true means sender's EMail ID will be used as the Return receipt EMail ID - used by PHPMailer class in modules/include/mail
+$email_ack = true;		// true means sender's EMail ID will be used as the Return receipt EMail ID - used by PHPMailer class in modules/include/mail
 
+####################
+/* General configs */
+####################
+//$tb_prefix = "si_";
+define("TB_PREFIX","si_");
 $version = "200711 unstable";
-
 $config['date_format']  = 'Y-m-d'; #International format just the date
 #$config['date_format']  = 'Y-m-d h:m'; #Internalional format date and time 
 #$config['date_format']  = 'm-d-Y'; #US format just date 
@@ -50,7 +57,9 @@ $spreadsheet = "xls"; #MS Excel format
 $word_processor = "doc"; #MS Word format
 #$word_processor = "odt"; #Open Document Format text
 
+#################
 /* PDF config options */
+#################
 #size in pixels (640,800,1024)
 $pdf_screen_size = 800;
 #paper size (Letter,Legal,Executive,A0Oversize,A0,A1,A2,A3,A4,A5,B5,Folio,A6,A7,A8,A9,A10)
@@ -64,6 +73,9 @@ $pdf_top_margin = 15;
 #bottom margin of the pdf
 $pdf_bottom_margin = 15;
 
+####################
+/* Other stuff*/
+####################
 //TODO remove this before release
 //dev stuff
 $config_inc_style = "true";
