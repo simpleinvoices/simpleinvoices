@@ -13,7 +13,7 @@
 	class PHPReportsDBI {
 		function db_connect($oArray) {
 			$sHost	= isset($oArray[2])?$oArray[2]:"localhost";
-			$sString = "pgsql:host=".$sHost.";dbname=".$oArray[3];
+			$sString = ";dbname=".$oArray[3];
 			$dbh = new PDO($sString, $oArray[0], $oArray[1]);
 			if(!$dbh) {
 				die(htmlspecialchars(end($dbh->errorInfo())));

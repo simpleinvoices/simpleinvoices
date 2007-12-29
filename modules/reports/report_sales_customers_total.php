@@ -11,6 +11,6 @@ require_once("./include/reportlib.php");
    $oRpt->setXML("./modules/reports/report_sales_customers_total.xml");
 
 //   include phpreports run code
-	include("./include/reportrunlib.php
+	include("./include/reportrunlib.php");
 
 ?>

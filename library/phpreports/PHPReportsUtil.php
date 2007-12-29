@@ -13,8 +13,8 @@
 	*																										*
 	******************************************************************************/
 	function getPHPReportsIncludePath(){
-		$sep = stristr(PHP_OS,'WIN')?';',':';
-		$sep = stristr(PHP_OS,'DARWIN')?':',$sep;
+		$sep = stristr(PHP_OS,'WIN')?';':':';
+		$sep = stristr(PHP_OS,'DARWIN')?':':$sep;
 		$aPaths = explode($sep,ini_get("include_path"));
 		foreach($aPaths as $sPath)
 			if(stristr($sPath,"phpreports"))

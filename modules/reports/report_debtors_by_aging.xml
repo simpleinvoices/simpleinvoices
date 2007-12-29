@@ -35,7 +35,7 @@
          <HEADER>
             <ROW>
                <COL CELLCLASS="GROUP_LAYER">Aging:</COL>
-               <COL CELLCLASS="GROUP_LAYER" TEXTCLASS="BOLD" TYPE="EXPRESSION" COLSPAN="8">$header->getValue("aging")</COL>
+               <COL CELLCLASS="GROUP_LAYER" TEXTCLASS="BOLD" TYPE="EXPRESSION" COLSPAN="8">$this->getValue("aging")</COL>
             </ROW>
             <ROW>
                                         <COL  CELLCLASS="GROUP_LAYER">id</COL>

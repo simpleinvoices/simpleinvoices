@@ -26,17 +26,13 @@
 	
 	$sth = dbQuery($sql, ':start', $startdate, ':end', $enddate);
 	$sqls = null;
-	
-	for($i=0;$res = $sth->fetch();$i++) {
-		$sqls[$i] = $res;
-	}
-	
+	$sqls = $sth->fetchAll();
 	
 	$e_startdate = htmlspecialchars($startdate);
 	$e_enddate = htmlspecialchars($enddate);
 	echo <<<EOD
 		<div style="text-align:left;">
-		<form action="index.php?module=reports&view=database_log" method="post">
+		<form action="index.php?module=reports&amp;view=database_log" method="post">
 		<input type="text" class="date-picker" name="startdate" id="date1" value="$e_startdate" /><br /><br />
 		<input type="text" class="date-picker" name="enddate" id="date1" value="$e_enddate" /><br /><br />
 		<input type="submit" value="Show">
