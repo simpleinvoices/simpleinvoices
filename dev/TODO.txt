@@ -6,8 +6,6 @@ Disclaimer: if its in the list it may get done sometime in the future if and whe
 Next Release :: TODO
 ##############################
 - aim end of Dec
- - lang: add new lang variables into all files : grep LANG_TODO - AP
- - def invoice template - mob phone not coming through - check all fields - AP
  - Config.php - used YAML for the DB info : http://prematureoptimization.org/blog/archives/39/ - AP
  - manage pages redevelopment!!
  - users/groups/domains - make this happen!
@@ -16,16 +14,13 @@ Next Release :: TODO
  - submit : update all refer to submit to better - only some done - all needs to be done and work
  - delete : if delete is enabled allow delete for ALL items - products, billers, etc.. all with their relevant rules ie. if product has been included in an invoice then CAN'T delete etc..
  - move the stuff in index and home in the LANG files
- - Spaces in Invoice Preference name creates PDF issue :http://simpleinvoices.org/forum/topic-384.html
  - email :
  -- email : html and no html option - maybe??
  -- email: add cc - maybe ??
  -- email: add default signature - maybe - set in biller details ??
  -- email: and add validation
  - customer view - add edit/export etc, back in
- - move phpreports libs from ./modules/reports/.. to ./lib - AP
  -- old ones
- - pdf: pdf of the default templated doesnt include some of the borders on the right sides - needs fixing
  - replce checkLogin with CheckBrowse - check login name assumes something to do with login when its not - not urgent
  - validation:
  -- Add validation to the edit screen - moved to next release - just validate on add for now
@@ -52,7 +47,6 @@ SOMETIME IN THE FUTURE TODOs
 -- Customer : Statement of Accounts : http://simpleinvoices.org/forum/topic-414.html - AP
 - Cache - investigate more cache option - apc, memcache, pdo cache option - cache as much as possible - AP
 - add due date for sending bills via e-mail (cron-script)
-- make $tb_prefix a global constant to be accessible in all functions (without global)
 - in pop-down menus the preselected entry is always twice. change it with the selected option
  -- i couldnt do this nicely :) if you could would be great
 - use utf-8 for e-mail sending

@@ -1,3 +1,14 @@
+########
+DONE NOW
+########
+ - lang: add new lang variables into all files : grep LANG_TODO - AP - done
+ - def invoice template - mob phone not coming through - check all fields - AP
+ - Spaces in Invoice Preference name creates PDF issue :http://simpleinvoices.org/forum/topic-384.html
+ - move phpreports libs from ./modules/reports/.. to ./lib - AP
+ - pdf: pdf of the default templated doesnt include some of the borders on the right sides - needs fixing
+ - make $tb_prefix a global constant to be accessible in all functions (without global) - now as define
+
+
 
 ####################
 DONE OLD STUFF

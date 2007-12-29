@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE REPORT SYSTEM "PHPReport.dtd">
+<REPORT MARGINWIDTH="5" MARGINHEIGHT="5">
+   <TITLE>Sales Report</TITLE>
+   <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
+	<CSS>sales.css</CSS>
+	<SQL>select CITY,NAME,TYPE,ITEM,VALUE from sales order by CITY,NAME,TYPE,ITEM</SQL>
+	<CONNECTION>localhost</CONNECTION>
+	<INTERFACE>mysql</INTERFACE>
+	<DATABASE>phpreports</DATABASE>
+	<NO_DATA_MSG>No data was found, check your query</NO_DATA_MSG>
+	<DOCUMENT>
+		<FOOTER>
+			<ROW>
+				<COL COLSPAN="2" CELLCLASS="FOOTER" TEXTCLASS="BOLDRED" ALIGN="RIGHT">GRAND TOTAL</COL>
+				<COL CELLCLASS="FOOTER" TEXTCLASS="BOLDRED" TYPE="EXPRESSION" ALIGN="RIGHT" NUMBERFORMATEX="2">$this->getSum("VALUE")</COL>
+			</ROW>
+		</FOOTER>
+	</DOCUMENT>
+   <PAGE BORDER="0" SIZE="30" CELLSPACING="0" CELLPADDING="3">
+		<HEADER>
+			<ROW>
+				<COL CELLCLASS="HEADER" COLSPAN="3">
+					<XHTML>
+						<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+							<TR>
+								<TD CLASS="HEADER">
+									<b>JOHN DOE ENTERPRISES</b>
+								</TD>
+								<TD ROWSPAN="2" CLASS="HEADER" style="background:#A0A0A0;color:#FFFFFF;" ALIGN="CENTER">
+										powered by<br/><b>phpreports</b>
+								</TD>
+							</TR>
+							<TR>
+								<TD CLASS="HEADER">
+									<b>SALES REPORT</b>
+								</TD>
+							</TR>
+							<TR>
+								<TD COLSPAN="3"><HR/></TD>
+							</TR>
+						</TABLE>
+					</XHTML>
+				</COL>
+			</ROW>	
+		</HEADER>
+		<FOOTER>
+			<ROW>
+				<COL ALIGN="RIGHT" CELLCLASS="FOOTER" COLSPAN="2">page total</COL>
+				<COL TYPE="EXPRESSION" CELLCLASS="FOOTER" TEXTCLASS="BOLD" ALIGN="RIGHT" NUMBERFORMATEX="2">$this->getSum("VALUE")</COL>
+			</ROW>	
+			<ROW>
+				<COL ALIGN="RIGHT" COLSPAN="3" TYPE="EXPRESSION" CELLCLASS="FOOTER">"page number ".$this->getPageNum()</COL>
+			</ROW>
+		</FOOTER>
+	</PAGE>
+	<GROUPS>
+		<GROUP NAME="city" EXPRESSION="CITY" REPRINT_HEADER_ON_PAGEBREAK="TRUE" PAGEBREAK="TRUE">
+			<HEADER>
+				<ROW>
+					<COL ALIGN="RIGHT" CELLCLASS="HEADER" WIDTH="50"><LINK TYPE="STATIC" TARGET="_blank" TITLE="explain of what is a city">http://www.whatisacity.com</LINK>city:</COL>
+					<COL TYPE="EXPRESSION" CELLCLASS="HEADER" TEXTCLASS="BOLD" COLSPAN="2"><BOOKMARK TYPE="EXPRESSION" CELLCLASS="CITY" TEXTCLASS="BOOKMARK_TEXT">$this->getValue("CITY")</BOOKMARK>$this->getValue("CITY")</COL>
+				</ROW>
+			</HEADER> 
+			<FOOTER>
+				<ROW>
+					<COL COLSPAN="3" CELLCLASS="FOOTER"></COL>
+				</ROW>
+				<ROW>
+					<COL ALIGN="RIGHT" TYPE="EXPRESSION" CELLCLASS="FOOTER" COLSPAN="2">"total of ".$this->getValue("CITY")</COL>
+					<COL TYPE="EXPRESSION" CELLCLASS="FOOTER" TEXTCLASS="BOLD" ALIGN="RIGHT" NUMBERFORMATEX="2">$this->getSum("VALUE")</COL>
+				</ROW>
+				<ROW>
+					<COL COLSPAN="3" CELLCLASS="FOOTER"></COL>
+				</ROW>
+			</FOOTER>
+			<GROUP NAME="customer" EXPRESSION="NAME" RESET_SUPPRESS_ON_PAGEBREAK="TRUE" REPRINT_HEADER_ON_PAGEBREAK="TRUE">
+				<HEADER>
+					<ROW>
+						<COL CELLCLASS="HEADER" ALIGN="RIGHT" WIDTH="50">customer:</COL>
+						<COL CELLCLASS="HEADER" TEXTCLASS="BOLD" TYPE="EXPRESSION" COLSPAN="2"><LINK TYPE="EXPRESSION" TARGET="_blank" TITLE="click here to check info about the customer">"http://localhost/getcustomerinfo.php?name=".$this->getValue("NAME")</LINK>$this->getValue("NAME")</COL>
+					</ROW>
+					<ROW>
+						<COL CELLCLASS="HEADER" TEXTCLASS="BOLD" ALIGN="LEFT">type</COL>
+						<COL CELLCLASS="HEADER" TEXTCLASS="BOLD" ALIGN="LEFT">title</COL>
+						<COL CELLCLASS="HEADER" TEXTCLASS="BOLD" ALIGN="RIGHT">$</COL>
+					</ROW>
+				</HEADER>
+				<FIELDS>
+					<ROW>
+						<COL TYPE="FIELD" CELLCLASSEVEN="EVEN" CELLCLASSODD="ODD" ALIGN="LEFT" SUPPRESS="TRUE">TYPE</COL>
+						<COL TYPE="FIELD" CELLCLASSEVEN="EVEN" CELLCLASSODD="ODD" ALIGN="LEFT">ITEM</COL>
+						<COL TYPE="FIELD" CELLCLASSEVEN="EVEN" CELLCLASSODD="ODD" ALIGN="RIGHT">VALUE</COL>
+					</ROW>
+				</FIELDS>
+				<FOOTER>
+					<ROW>
+						<COL ALIGN="RIGHT" TYPE="EXPRESSION" CELLCLASS="FOOTER" COLSPAN="2">"total of ".$this->getValue("NAME")</COL>
+						<COL TYPE="EXPRESSION" CELLCLASS="FOOTER" TEXTCLASS="BOLD" ALIGN="RIGHT" NUMBERFORMATEX="2">$this->getSum("VALUE")</COL>
+					</ROW>
+					<ROW>
+						<COL COLSPAN="3" TYPE="EXPRESSION" CELLCLASS="FOOTER" TEXTCLASS="BOLD" ALIGN="RIGHT">($this->getSum("VALUE")>200?"*** Free shipping bonus!***":"Regular shipping charging")</COL>
+					</ROW>
+				</FOOTER>
+			</GROUP>	
+		</GROUP>
+	</GROUPS>
+</REPORT>

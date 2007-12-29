@@ -1,0 +1,60 @@
+.HEADER {
+	font-family: "arial","verdana";
+	font-size: 10px;
+	color: #505050;
+	background: #DDDDDD;
+}
+
+.FOOTER {
+	font-family: "arial","verdana";
+	font-size: 10px;
+	color: #505050;
+	background: #CCCCCC;
+}
+
+.FIELDS {
+	font-family: "arial","verdana";
+	font-size: 10px;
+	color: #000000;
+	background: #FEFEFE;
+}
+
+.EVEN {
+	font-family: "arial","verdana";
+	font-size: 10px;
+	color: #000000;
+	background: #95CDED;
+}
+
+.ODD {
+	font-family: "arial","verdana";
+	font-size: 10px;
+	color: #000000;
+	background: #BDDFF3;
+}
+
+.BOLD {
+	font-weight: bold;
+}
+
+.BOLDRED {
+	color: #FF0000;
+	font-weight: bold;
+}
+
+.PHPREPORTS_PAGE_CELL {
+	font-family:"verdana","arial";
+	font-size:12px;
+	color:#000000;
+}
+
+.PHPREPORTS_PAGE_LINK {
+	font-family:"verdana","arial";
+	font-size:12px;
+	color:#000000;
+}
+
+.PHPREPORTS_PAGE_LINK_BOLD {
+	font-size:16px;
+	font-weight:bold;
+}

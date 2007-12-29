@@ -1,0 +1,163 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+			PHPReports validation schema			
+	  </xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:complexType name="PHPXHTML" mixed="true">
+		<xsd:sequence>
+			<xsd:any namespace="http://www.w3.org/1999/xhtml" minOccurs="0" maxOccurs="unbounded" processContents="skip"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="REPORT" type="PHPREPORT"/>
+	
+	<xsd:element name="PHPBOOKMARK">
+		<xsd:complexType mixed="true">
+			<xsd:all>
+				<xsd:attribute name="TYPE"			type="xsd:string"/>
+				<xsd:attribute name="CELLCLASS"	type="xsd:string"/>
+				<xsd:attribute name="TEXTCLASS"	type="xsd:string"/>
+			<xsd:all>
+		<xsd:complexType>	
+	</xsd:element>	
+		
+	<xsd:complexType name="PHPLINK">
+		<xsd:complexType mixed="true">
+			<xsd:all>
+				<xsd:element   name="IMG"     type="PHPIMG" minOccurs="0" maxOccurs="1"/>
+				<xsd:attribute name="TYPE"		type="xsd:string"/>
+				<xsd:attribute name="TARGET"	type="xsd:string"/>
+				<xsd:attribute name="TITLE"	type="xsd:string"/>
+			<xsd:all>
+		<xsd:complexType>	
+	</xsd:complexType>
+
+	<xsd:complexType name="PHPIMG">
+		<xsd:complexType mixed="true">
+			<xsd:all>
+				<xsd:attribute name="WIDTH"	type="xsd:int"/>
+				<xsd:attribute name="HEIGHT"	type="xsd:int"/>
+				<xsd:attribute name="BORDER"	type="xsd:int"/>
+				<xsd:attribute name="ALT"		type="xsd:string"/>
+			<xsd:all>
+		<xsd:complexType>	
+	</xsd:complexType>
+
+	<xsd:element name="PHPCOL">
+		<xsd:complexType mixed="true">
+			<xsd:all>
+				<xsd:element   name="LINK"				type="PHPLINK"		 minOccurs="0" maxOccurs="1"/>
+				<xsd:element   name="BOOKMARK"		type="PHPBOOKMARK" minOccurs="0" maxOccurs="1"/>
+				<xsd:element   name="IMG"				type="PHPIMG"		 minOccurs="0" maxOccurs="1"/>
+				<xsd:element   name="XHTML"			type="PHPXHTML"    minOccurs="0" maxOccurs="1"/>
+			</xsd:all>	
+			<xsd:attribute name="ONCLICK"					type="xsd:string"/>
+			<xsd:attribute name="ONMOUSEOVER"			type="xsd:string"/>
+			<xsd:attribute name="ONMOUSEOUT"				type="xsd:string"/>
+			<xsd:attribute name="NUMBERFORMAT"			type="xsd:string"/>
+			<xsd:attribute name="NUMBERFORMATEX"		type="xsd:int"/>
+			<xsd:attribute name="CELLCLASS"				type="xsd:string"/>
+			<xsd:attribute name="CELLCLASSEVEN"			type="xsd:string"/>
+			<xsd:attribute name="CELLCLASSODD"			type="xsd:string"/>
+			<xsd:attribute name="CELLCLASSEXPRESSION"	type="xsd:string"/>
+			<xsd:attribute name="TEXTCLASS"				type="xsd:string"/>
+			<xsd:attribute name="ROWSPAN"					type="xsd:int"/>
+			<xsd:attribute name="COLSPAN"					type="xsd:int"/>
+			<xsd:attribute name="WIDTH"					type="xsd:int"/>
+			<xsd:attribute name="HEIGHT"					type="xsd:int"/>
+			<xsd:attribute name="ALIGN"					type="xsd:string"/>
+			<xsd:attribute name="VALIGN"					type="xsd:string"/>
+			<xsd:attribute name="SUPPRESS"				type="xsd:boolean"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="PHPROW">
+		<xsd:element name="COL" type="PHPCOL" minOccurs="1" maxOccurs="unbounded"/>
+		<xsd:element name="CMD" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="PHPFOOTER">
+		<xsd:element name="ROW" type="PHPROW" minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="PHPHEADER">
+		<xsd:element name="ROW" type="PHPROW" minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="PHPREPORT">
+		<xsd:sequence>
+			<xsd:element name="TITLE"					type="xsd:string"  minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="DESC"					type="xsd:string"  minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="PATH"					type="xsd:string"  minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="BACKGROUND_COLOR"	type="xsd:string"  minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="BACKGROUND_IMAGE"	type="xsd:string"  minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="CSS"						type="xsd:string"  minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="SQL"						type="xsd:string"  minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="USER"					type="xsd:string"  minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="PASSWORD"				type="xsd:string"  minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="CONNECTION"			type="xsd:string"  minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="INTERFACE"				type="xsd:string"  minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="DATABASE"				type="xsd:string"  minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="NO_DATA_MSG"			type="xsd:string"  minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="NO_DATA_FUNC"			type="xsd:string"  minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="TEMP"					type="xsd:string"  minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="DEBUG"					type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="FORM"					type="PHPFORM"     minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="DOCUMENT"				type="PHPDOC"      minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="PAGE"					type="PHPPAGE"     minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="GROUPS"					type="PHPGROUPS"   minOccurs="1" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="MARGINWIDTH"    type="xsd:int"/>
+		<xsd:attribute name="MARGINHEIGTH"	 type="xsd:int"/>
+		<xsd:attribute name="MAX_ROW_BUFFER" type="xsd:int"/>
+	</xsd:complexType>
+	
+	<xsd:complexType name="PHPFORM">
+		<xsd:sequence>
+			<xsd:element name="FORM_NAME"   type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="FORM_METHOD" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="FORM_ACTION" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="PHPDOC">
+		<xsd:element name="HEADER" type="PHPHEADER" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="FOOTER" type="PHPFOOTER" minOccurs="0" maxOccurs="1"/>
+	</xsd:complexType>
+	
+	<xsd:complexType name="PHPPAGE">
+		<xsd:attribute name="CLASS"		  type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		<xsd:attribute name="SIZE"			  type="xsd:int"/>
+		<xsd:attribute name="WIDTH"		  type="xsd:int"/>
+		<xsd:attribute name="HEIGHT"		  type="xsd:int"/>
+		<xsd:attribute name="CELLSPACING"  type="xsd:int"/>
+		<xsd:attribute name="CELLPADDING"  type="xsd:int"/>
+		<xsd:attribute name="BORDER"		  type="xsd:int"/>
+		<xsd:attribute name="ALIGN"		  type="xsd:string"/>
+		<xsd:element   name="HEADER"		  type="PHPHEADER" minOccurs="0" maxOccurs="1"/>
+		<xsd:element   name="FOOTER"		  type="PHPFOOTER" minOccurs="0" maxOccurs="1"/>
+	</xsd:complexType>
+	
+	<xsd:complexType name="PHPGROUPS">
+		<xsd:element  name="GROUP" type="PHPGROUP" minOccurs="1" maxOccurs="unbounded"/>
+	</xsd:complexType>
+	
+	<xsd:complexType  name="PHPGROUP">
+		<xsd:attribute name="NAME"			    type="xsd:string" use="required"/>
+		<xsd:attribute name="EXPRESSION"		 type="xsd:string"/>
+		<xsd:attribute name="RAW_EXPRESSION" type="xsd:string"/>
+		<xsd:attribute name="PAGEBREAK"		 type="xsd:boolean"/>
+		<xsd:attribute name="REPRINT_HEADER_ON_PAGEBREAK" type="xsd:boolean"/>
+		<xsd:attribute name="RESET_SUPPRESS_ON_PAGEBREAK" type="xsd:boolean"/>
+		<xsd:element   name="HEADER"		type="PHPHEADER" minOccurs="0" maxOccurs="1"/>
+		<xsd:element   name="FIELDS"		type="PHPFIELDS" minOccurs="0" maxOccurs="1"/>
+		<xsd:element   name="FOOTER"		type="PHPFOOTER" minOccurs="0" maxOccurs="1"/>
+		<xsd:element   name="GROUP"		type="PHPGROUP"  minOccurs="0" maxOccurs="1"/>
+	</xsd:complexType>
+	
+	<xsd:complexType name="PHPFIELDS">
+		<xsd:element name="ROW" type="PHPROW" minOccurs="1" maxOccurs="unbounded"/>
+	</xsd:complexType>
+</xsd:schema> 

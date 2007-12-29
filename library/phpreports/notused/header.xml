@@ -1,0 +1,26 @@
+<HEADER>
+	<ROW>
+		<COL CELLCLASS="HEADER" COLSPAN="3">
+			<XHTML>
+				<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="100%">
+					<TR>
+						<TD CLASS="HEADER">
+							<b>JOHN DOE ENTERPRISES</b>
+						</TD>
+						<TD ROWSPAN="2" CLASS="HEADER" style="background:#A0A0A0;color:#FFFFFF;" ALIGN="CENTER">
+								powered by<br/><b>phpreports</b>
+						</TD>
+					</TR>
+					<TR>
+						<TD CLASS="HEADER">
+							<b>SALES REPORT</b>
+						</TD>
+					</TR>
+					<TR>
+						<TD COLSPAN="3"><HR/></TD>
+					</TR>
+				</TABLE>
+			</XHTML>
+		</COL>
+	</ROW>	
+</HEADER>
