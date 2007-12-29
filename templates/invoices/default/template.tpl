@@ -62,7 +62,7 @@
 
 		<tr>
 				<td class="tbl1-left" >{$LANG.total}: </td>
-				<td class="tbl1-right" colspan="3">{$preference.pref_currency_sign}{$invoice.total_format|number_format:2}</td>
+				<td class="tbl1-right" colspan="3">{$preference.pref_currency_sign}{$invoice.total|number_format:2}</td>
 		</tr>
 		<tr>
 				<td class="tbl1-left">{$LANG.paid}:</td>
