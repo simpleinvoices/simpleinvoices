@@ -9,6 +9,7 @@ $db_host = "localhost";
 $db_name = "simple_invoices";
 $db_user = "root";
 $db_password = "";
+define("TB_PREFIX","si_"); // default tabbbble prefix si_ -  Old variable: $tb_prefix = "si_";
 
 #####################
 /* Authentication options */
@@ -40,9 +41,7 @@ $email_ack = false;   // true means sender's EMail ID will be used as the Return
 ####################
 /* General configs */
 ####################
-//$tb_prefix = "si_";
-define("TB_PREFIX","si_");
-$version = "20071226 stable";
+$version = "20071229 stable";
 $config['date_format']  = 'Y-m-d'; #International format just the date
 #$config['date_format']  = 'Y-m-d h:m'; #Internalional format date and time 
 #$config['date_format']  = 'm-d-Y'; #US format just date 
