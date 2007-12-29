@@ -26,5 +26,5 @@
 	<tr class="tbl1-left tbl1-right">
 		<td class="tbl1-left" colspan="3"></td>
 		<td align="right" colspan="2">{$LANG.gross_total}</td>
-		<td align="right" class="tbl1-right" >{$preference.pref_currency_sign}{$invoice.total}</td>
+		<td align="right" class="tbl1-right" >{$preference.pref_currency_sign}{$invoice.total|number_format:2}</td>
 	</tr>

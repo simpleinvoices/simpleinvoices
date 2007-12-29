@@ -39,14 +39,14 @@
 		<td colspan="2"></td>
 		<td></td>
 		<td class="details_screen">{$LANG.total_invoices}</td>
-		<td>{$stuff.total_format}</td>
+		<td style="text-align:right">{$stuff.total|number_format:2}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.customer_name}</td>
 		<td colspan="2">{$customer.name}</td>
 		<td colspan="2"></td>
 		<td class="details_screen">{$LANG.total_paid}</td>
-		<td>{$stuff.paid_format}</td>
+		<td style="text-align:right">{$stuff.paid|number_format:2}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.attention_short} <a href="docs.php?t=help&p=customer_contact" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a>
@@ -54,7 +54,7 @@
 		<td colspan="2">{$customer.attention}</td>
 		<td colspan=2></td>
 		<td class="details_screen">{$LANG.total_owing}</td>
-		<td><u>{$stuff.owing}</u></td>
+		<td style="text-align:right"><u>{$stuff.owing|number_format:2}</u></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street}</td>
@@ -139,6 +139,7 @@
 
 				<th class="sortable">{$LANG.id}</th>
 				<th class="sortable">{$LANG.total}</th>
+				<th class="sortable">{$LANG.paid}</th>
 				<th class="sortable">{$LANG.owing}</th>
 				<th class="sortable">{$LANG.date_created}</th>
 
@@ -147,9 +148,10 @@
 			{foreach from=$invoices item=invoice}
 	
 			<tr class="index_table">
-				<td class="details_screen">{$invoice.id}</td>
-				<td class="details_screen">{$invoice.total}</td>
-				<td class="details_screen">{$invoice.owing}</td>
+				<td class="details_screen"><a href="index.php?module=invoices&view=quick_view&invoice={$invoice.id}&type={$invoice.type_id}">{$invoice.id}</a></td>
+				<td class="details_screen">{$invoice.total|number_format:2}</td>
+				<td class="details_screen">{$invoice.paid|number_format:2}</td>
+				<td class="details_screen">{$invoice.owing|number_format:2}</td>
 				<td class="details_screen">{$invoice.date}</td>
 			</tr>
 

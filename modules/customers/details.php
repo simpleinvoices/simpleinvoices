@@ -31,23 +31,32 @@ $customer['wording_for_enabled'] = $customer['enabled']==1?$LANG['enabled']:$LAN
 //TODO: Perhaps possible a bit nicer?
 $stuff = null;
 $stuff['total'] = calc_customer_total($customer['id']);
-$stuff['total_format'] = number_format($stuff['total'],2);
 
 #amount paid calc - start
 $stuff['paid'] = calc_customer_paid($customer['id']);;
-$stuff['paid_format'] = number_format($stuff['paid'],2);
 #amount paid calc - end
 
 #amount owing calc - start
-$stuff['owing'] = number_format($stuff['total'] - $stuff['paid'],2);
+$stuff['owing'] = $stuff['total'] - $stuff['paid'];
 #get custom field labels
 
 
 
 $customFieldLabel = getCustomFieldLabels();
-$invoices = getCustomerInvoices($customer_id);
 
+$sSQL = "SELECT	iv.id, iv.date, iv.type_id, 
+	@invd:=(SELECT sum( IF(isnull(ivt.total), 0, ivt.total)) 
+		FROM " . TB_PREFIX . "invoice_items ivt where ivt.invoice_id = iv.id) As invd, 
+	@apmt:=(SELECT sum( IF(isnull(ap.ac_amount), 0, ap.ac_amount)) 
+		FROM " . TB_PREFIX . "account_payments ap where ap.ac_inv_id = iv.id) As pmt, 
+	IF(isnull(@invd), 0, @invd) As total, 
+	IF(isnull(@apmt), 0, @apmt) As paid, 
+	(select (total - paid)) as owing 
+FROM " . TB_PREFIX . "invoices iv 
+WHERE iv.customer_id = $customer_id 
+ORDER BY iv.id DESC";
 
+$invoices = sql2array($sSQL);
 
 
 //$customFieldLabel = getCustomFieldLabels("biller");

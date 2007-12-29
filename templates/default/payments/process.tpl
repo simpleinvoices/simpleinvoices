@@ -2,26 +2,26 @@
 <h3>{$LANG.process_payment}</h3>
  <hr />
  
+<table align="center">	
 
 {if $smarty.get.op === "pay_selected_invoice"}
 
-<table align="center">	
 <tr>
 	<td class="details_screen">{$LANG.invoice_id}</td>
 	<td><input type="hidden" name="ac_inv_id" value="{$invoice.id}" />{$invoice.id}</td>
-	<td class="details_screen">{$LANG.total}</td><td>{$invoice.total_format}</td>
+	<td class="details_screen">{$LANG.total}</td><td>{$invoice.total|number_format:2}</td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.biller}</td>
 	<td>{$biller.name}</td>
 	<td class="details_screen">{$LANG.paid}</td>
-	<td>{$invoice.paid_format}</td>
+	<td>{$invoice.paid|number_format:2}</td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.customer}</td>
 	<td>{$customer.name}</td>
 	<td class="details_screen">{$LANG.owing}</td>
-	<td><u>{$invoice.owing_format}</u></td>
+	<td><u>{$invoice.owing|number_format:2}</u></td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.amount}</td>
@@ -31,16 +31,12 @@
 	<td class="details_screen">{$LANG.date_formatted}</td>
 	<td><input type="text" class="date-picker" name="ac_date" id="date1" value="{$today}" /></td>
 </tr>
-<tr>
-	<td class="details_screen">{$LANG.payment_type_method}</td>
-	<td>
 
 {/if}
 
 
 {if $smarty.get.op === "pay_invoice"}
 	
-<table align="center">
 <tr>
 	<td class="details_screen">{$LANG.invoice_id}
 	<a href="docs.php?t=help&p=process_payment_inv_id" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
@@ -61,11 +57,13 @@
 		<td><input type="text" class="date-picker" name="ac_date" id="date1" value="{$today}" /></td>
 	</div>
 </tr>
+
+{/if}
+
+
 <tr>
 	<td class="details_screen">{$LANG.payment_type_method}</td>
 	<td>
-{/if}
-
 
 {if $paymentTypes == null}
 	<p><em>{$LANG.no_payment_types}</em></p>
@@ -79,8 +77,6 @@
 		{$paymentType.pt_description}</option>
 	{/foreach}
 {/if}
-
-
 	
 	</td>
 </tr>

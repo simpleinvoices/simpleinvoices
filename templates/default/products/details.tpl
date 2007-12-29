@@ -20,7 +20,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product_unit_price}</td>
-		<td>{$product.unit_price}</td>
+		<td>{$product.unit_price|number_format:2}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf1} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>

@@ -66,11 +66,11 @@
 		</tr>
 		<tr>
 				<td class="tbl1-left">{$LANG.paid}:</td>
-				<td class="tbl1-right" colspan="3" >{$preference.pref_currency_sign}{$invoice.paid_format}</td>
+				<td class="tbl1-right" colspan="3" >{$preference.pref_currency_sign}{$invoice.paid|number_format:2}</td>
 		</tr>
 		<tr>
 				<td nowrap class="tbl1-left tbl1-bottom">{$LANG.owing}:</td>
-				<td class="tbl1-right tbl1-bottom" colspan="3" >{$preference.pref_currency_sign}{$invoice.owing}</td>
+				<td class="tbl1-right tbl1-bottom" colspan="3" >{$preference.pref_currency_sign}{$invoice.owing|number_format:2}</td>
 		</tr>
 
 	</table>
@@ -212,12 +212,12 @@
 				{foreach from=$invoiceItems item=invoiceItem}
 
 			<tr class="tbl1" >
-				<td class="tbl1">{$invoiceItem.quantity_formatted}</td>
+				<td class="tbl1">{$invoiceItem.quantity|number_format:0}</td>
 				<td class="tbl1">{$invoiceItem.product.description}</td>
-				<td class="tbl1">{$preference.pref_currency_sign}{$invoiceItem.unit_price}</td>
-				<td class="tbl1">{$preference.pref_currency_sign}{$invoiceItem.gross_total}</td>
-				<td class="tbl1">{$preference.pref_currency_sign}{$invoiceItem.tax_amount}</td>
-				<td class="tbl1" align="right">{$preference.pref_currency_sign}{$invoiceItem.total}</td>
+				<td class="tbl1">{$preference.pref_currency_sign}{$invoiceItem.unit_price|number_format:2}</td>
+				<td class="tbl1">{$preference.pref_currency_sign}{$invoiceItem.gross_total|number_format:2}</td>
+				<td class="tbl1">{$preference.pref_currency_sign}{$invoiceItem.tax_amount|number_format:2}</td>
+				<td class="tbl1" align="right">{$preference.pref_currency_sign}{$invoiceItem.total|number_format:2}</td>
 			</tr>
             <tr>
                 <td class="tbl1-left"></td>
@@ -254,7 +254,7 @@
 			{foreach from=$invoiceItems item=invoiceItem}
 	
 			<tr class="tbl1-left tbl1-right">
-				<td class="tbl1-left" >{$invoiceItem.quantity_formatted}</td>
+				<td class="tbl1-left" >{$invoiceItem.quantity|number_format:0}</td>
 				<td>{$invoiceItem.product.description}</td>
 				<td class="tbl1-right" colspan="4"></td>
 			</tr>
@@ -286,10 +286,10 @@
 			<tr class="tbl1-left tbl1-right tbl1-bottom">
 				<td class="tbl1-left tbl1-bottom" ></td>
 				<td class="tbl1-bottom"></td>
-				<td class="tbl1-bottom">{$preference.pref_currency_sign}{$invoiceItem.unit_price}</td>
-				<td class="tbl1-bottom">{$preference.pref_currency_sign}{$invoiceItem.gross_total}</td>
-				<td class="tbl1-bottom ">{$preference.pref_currency_sign}{$invoiceItem.tax_amount}</td>
-				<td align="right" class="tbl1-right tbl1-bottom">{$preference.pref_currency_sign}{$invoiceItem.total}</td>
+				<td class="tbl1-bottom">{$preference.pref_currency_sign}{$invoiceItem.unit_price|number_format:2}</td>
+				<td class="tbl1-bottom">{$preference.pref_currency_sign}{$invoiceItem.gross_total|number_format:2}</td>
+				<td class="tbl1-bottom ">{$preference.pref_currency_sign}{$invoiceItem.tax_amount|number_format:2}</td>
+				<td align="right" class="tbl1-right tbl1-bottom">{$preference.pref_currency_sign}{$invoiceItem.total|number_format:2}</td>
 			</tr>
 			{/foreach}
 	{/if}
@@ -335,14 +335,14 @@
 	<tr class="tbl1-left tbl1-right">
 		<td class="tbl1-left" colspan="2"></td>
 		<td align="right" colspan="3">{$LANG.gross_total}</td>
-		<td align="right" class="tbl1-right">{$preference.pref_currency_sign}{$invoiceItem.gross_total}</td>
+		<td align="right" class="tbl1-right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|number_format:2}</td>
 	</tr>
 	{/if}
 	
 	<tr class="tbl1-left tbl1-right">
 		<td class="tbl1-left" colspan="2"></td>
 		<td align="right" colspan="3">{$LANG.tax_total}</td>
-		<td align="right" class="tbl1-right" >{$preference.pref_currency_sign}{$invoice.total_tax}</td>
+		<td align="right" class="tbl1-right" >{$preference.pref_currency_sign}{$invoice.total_tax|number_format:2}</td>
 	</tr>
 	<tr class="tbl1-left tbl1-right">
 		<td class="tbl1-left tbl1-right" colspan="6" ><br></td>
@@ -350,7 +350,7 @@
 	<tr class="tbl1-left tbl1-right tbl1-bottom">
 		<td class="tbl1-left tbl1-bottom" colspan="2"></td>
 		<td class="tbl1-bottom" align="right" colspan="3"><b>{$preference.pref_inv_wording} {$LANG.amount}</b></td>
-		<td  class="tbl1-bottom tbl1-right" align="right"><u>{$preference.pref_currency_sign}{$invoice.total}</u></td>
+		<td  class="tbl1-bottom tbl1-right" align="right"><u>{$preference.pref_currency_sign}{$invoice.total|number_format:2}</u></td>
 	</tr>
 	<tr>
 		<td colspan="6"><br /><br /></td>

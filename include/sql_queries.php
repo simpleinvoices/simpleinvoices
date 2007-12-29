@@ -510,7 +510,7 @@ function getInvoiceItems($id) {
 	
 	for($i=0;$invoiceItem = mysql_fetch_array($query);$i++) {
 	
-		$invoiceItem['quantity_formatted'] = round($invoiceItem['quantity'],2);
+//		$invoiceItem['quantity_formatted'] = $invoiceItem['quantity'];
 		$invoiceItem['unit_price'] = round($invoiceItem['unit_price'],2);
 		$invoiceItem['tax_amount'] = round($invoiceItem['tax_amount'],2);
 		$invoiceItem['gross_total'] = round($invoiceItem['gross_total'],2);

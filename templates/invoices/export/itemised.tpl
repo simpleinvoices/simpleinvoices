@@ -11,12 +11,12 @@
 	
 	{foreach from=$invoiceItems item=invoiceItem}
 			<tr>
-				<td>{$invoiceItem.quantity_formatted}</td>
+				<td>{$invoiceItem.quantity|number_format:0}</td>
 				<td>{$invoiceItem.product.description}</td>
-				<td>{$preference.pref_currency_sign}{$invoiceItem.unit_price}</td>
-				<td >{$preference.pref_currency_sign}{$invoiceItem.gross_total}</td>
-				<td >{$preference.pref_currency_sign}{$invoiceItem.tax_amount}</td>
-				<td align="right">{$preference.pref_currency_sign}{$invoiceItem.total}</td>
+				<td>{$preference.pref_currency_sign}{$invoiceItem.unit_price|number_format:2}</td>
+				<td >{$preference.pref_currency_sign}{$invoiceItem.gross_total|number_format:2}</td>
+				<td >{$preference.pref_currency_sign}{$invoiceItem.tax_amount|number_format:2}</td>
+				<td align="right">{$preference.pref_currency_sign}{$invoiceItem.total|number_format:2}</td>
 			</tr>
 			<tr>
                 <td class="tbl1-left"></td>
