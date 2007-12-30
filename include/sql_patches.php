@@ -739,8 +739,8 @@ PRIMARY KEY  (`user_id`)) ;
     if ($db_server == "mysql") {
         //SC: Needs MySQL variant
         $patch['143']['patch'] = "CREATE TABLE ".TB_PREFIX."domain (
-            id serial PRIMARY KEY,
-            name text UNIQUE NOT NULL
+	    `id` int(11) NOT NULL auto_increment  PRIMARY KEY,
+            `name` varchar(255) UNIQUE NOT NULL
             ) ENGINE=InnoDB;";
     } elseif ($db_server == "pgsql") {
         $patch['143']['patch'] = "CREATE TABLE ".TB_PREFIX."domain (

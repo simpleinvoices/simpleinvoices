@@ -20,7 +20,7 @@ define("TB_PREFIX","si_"); // default table prefix - old var $tb_prefix = "si_";
 //$authenticationOn = "true";
 $authenticationOn = "false";
 //if you are using a .httaccess file
-$http_auth = ""	//value: "name:password@"
+$http_auth = ""; //value: "name:password@"
 
 #####################
 /* Email configs */
@@ -41,7 +41,7 @@ $email_ack = false;		// true means sender's EMail ID will be used as the Return 
 ####################
 /* General configs */
 ####################
-$version = "200711 unstable";
+$version = "200801 unstable";
 $config['date_format']  = 'Y-m-d'; #International format just the date
 #$config['date_format']  = 'Y-m-d h:m'; #Internalional format date and time 
 #$config['date_format']  = 'm-d-Y'; #US format just date 
@@ -92,6 +92,6 @@ $smarty->assign('config_inc_old_js', $config_inc_old_js);
 #error_reporting(0);
 
 //To turn loggin on set the below to true
-define("LOGGING",false);
+#define("LOGGING",false);
 #define("LOGGING",true);
 ?>
