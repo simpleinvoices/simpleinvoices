@@ -8,6 +8,7 @@ Next Release :: TODO
 - aim end of Dec
  - Config.php - used YAML for the DB info : http://prematureoptimization.org/blog/archives/39/ - AP
  - manage pages redevelopment!!
+ - Address fields in invoice templates - include comma after add 1 or 2 if other address field not null
  - users/groups/domains - make this happen!
  - user admin ui
  - preferences: move rest into db
@@ -28,6 +29,8 @@ Next Release :: TODO
  -- Product Add - add validation on price
  - apply aplysia new drop down list code to others (refer system default: biller)
  - index.php review input if is safe enought
+ - Quick view - Note section: show the first 25 characters then follow with ... in the Hide View and full note in Show View
+ - PDF - test that PDF works when using sub-domains ie http://invoices.test.com - AP
 
 ###############################
 Next Release + 1 (NR+1) :: TODO
