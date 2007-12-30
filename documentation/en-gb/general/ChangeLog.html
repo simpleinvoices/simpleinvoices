@@ -8,12 +8,18 @@ Simple Invoices - Changelog
 <div id="left">
 <ul><li>2007-12-30
 	<ul>
+		<li>Email read receipts now supported in Invoice PDF EMail (Boolean variable in config.php)</li>
+		<li>PDF cache is the main smarty cache folder itself - no more symlinks - hence removed the /include/pdf/out and /include/pdf/cache symlinks
+		<li>Invoice PDF and email now support spaces in Biller Logo file name
+		<li>Invoice PDF email now supports spaces in Invoice Preference Name
+		<li>Invoice PDF email now supports SecureSMTP and user configurable SMTP Port</li>
+		<li>Editing invoice with custom date format issue fixed : http://simpleinvoices.org/forum/topic-424.html</li>
+		<li>Right side border lines now display correctly in PDF view  of invoices
 		<li>All fields in Customer Invoices tab in View Customer work now
 		<li>Transferred number_format to smarty from functions and queries
-		<li>Renamed the libs folder as library to match trunk
 		<li>Corrected Spanish translation file for correct encoding and double quote typo
 		<li>Fixed 'over' footer issue with new reports and report_debtors_by_amount now shows all invoices
-		<li>Substituted number_format() to round() in sql_queries.php as fix for extra comma(s) in numeric fields breaking updation
+		<li>Substituted number_format() to round() in sql_queries.php as fix for extra comma(s) in numeric fields breaking editing a Total style invoice
 		<li>Fixed rel-gb syntax js error in invoice detail template
 		<li>Optimised the manage invoices page and template to work from a single SQL extraction
 		<li>Removed redundant check for getSystemDefaults() from loop and Customer now sortable in manage invoices
@@ -24,7 +30,6 @@ Simple Invoices - Changelog
 		<li>Back Ported the redundant language check
 		<li>Fixed email.php with new location of pdf cache folder - ./cache
 		<li>Fix for undefined $title in invoice output templates and html syntax fixes
-		<li>Right side border lines now display correctly in print preview of invoices
 		<li>Mobile Phone of Biller and Customer now prints and displays correctly
 		<li>Removed duplicates in all lang files (insert_biller, insert_customer, insert_product)
 		<li>Synched all language files alphabetically with new variables to that in en-gb with 0 attribute
@@ -46,19 +51,12 @@ Simple Invoices - Changelog
 		<li>Fixed correct location of iehacks.css in the code in include/functions.php line 320
 		<li>PHPReports DARWIN OS - $ipsep extended
 		<li>PHPReports PHP5 deprecated use of array_push issue fixed
-		<li>PDF cache is the main smarty cache folder itself - no more symlinks - hence removed the /include/pdf/out and /include/pdf/cache symlinks
-		<li>Invoice PDF and EMail now support spaces in Biller Logo file name
-		<li>Invoice PDF EMail now supports spaces in Invoice Preference Name
-		<li>Invoice PDF EMail (Boolean variable in config.php) now supports Confirm Reading Receipt to Sender</li>
 		<li>screen.css now has th.sortable_rt class - useful for right align for numeric fields - available in the modules/module-name/manage.php files</li>
 		<li>General Code cleanup</li>
 		<li>Increased limit from 100 to 1000000 billers / clients / inv_prefs - look in modules/invoices/total.php, itemised.php, consulting.php</li>
-		<li>Changes in config/config.php made backwards compatible for use with older config.php</li>
-		<li>Invoice PDF EMail now supports SecureSMTP and user configurable SMTP Port</li>
 		<li>Updated PHPMailer to v2.10 Beta 1 for PHP5</li>
 		<li>lang/en-gb/lang.php capitalised correctly</li>
 		<li>Default Customer now shows up correctly on all add new invoice pages</li>
-		<li>Editing invoice with custom date format issue fixed : http://simpleinvoices.org/forum/topic-424.html</li>
 	</ul>
 </ul>
 <ul><li>2007-11-16

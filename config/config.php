@@ -41,7 +41,6 @@ $email_ack = false;   // true means sender's EMail ID will be used as the Return
 ####################
 /* General configs */
 ####################
-$version = "20071229 stable";
 $config['date_format']  = 'Y-m-d'; #International format just the date
 #$config['date_format']  = 'Y-m-d h:m'; #Internalional format date and time 
 #$config['date_format']  = 'm-d-Y'; #US format just date 
@@ -55,6 +54,11 @@ $spreadsheet = "xls"; #MS Excel format
 #$spreadsheet = "ods"; #Open Document Format spreadsheet
 $word_processor = "doc"; #MS Word format
 #$word_processor = "odt"; #Open Document Format text
+
+/* Version Info*/
+$version = "20071231 stable";
+$versionFriendlyName ="07 New Years eve release";
+$versionSeries = "200708 series";
 
 #################
 /* PDF config options */
