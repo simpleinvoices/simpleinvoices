@@ -6,7 +6,7 @@
 /* Enter your database information */
 ######################
 $db_host = "localhost";
-$db_name = "simple_invoices_test";
+$db_name = "simple_invoices";
 $db_user = "root";
 $db_password = "";
 define("TB_PREFIX","si_"); // default tabbbble prefix si_ -  Old variable: $tb_prefix = "si_";
