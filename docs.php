@@ -30,7 +30,7 @@ if(isset($_GET['lang'])) {
 	$lang = $_GET['lang'];
 }
 else {
-	$lang = "en";
+	$lang = "en-gb";
 }
 
 /*Check the $view for validitity - make sure no ones hacking the url */
@@ -60,7 +60,7 @@ else {
 	
 	//echo $file;
 	$smarty -> display("../templates/default/header.tpl");
-	//$smarty -> display("../templates/default/menu.tpl");
+	$smarty -> display("../templates/default/menu.tpl");
 	$smarty -> display("../templates/default/main.tpl"); 
 	include($file);
 	$smarty -> display("../templates/default/footer.tpl");

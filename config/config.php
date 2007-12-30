@@ -41,7 +41,6 @@ $email_ack = false;		// true means sender's EMail ID will be used as the Return 
 ####################
 /* General configs */
 ####################
-$version = "200801 unstable";
 $config['date_format']  = 'Y-m-d'; #International format just the date
 #$config['date_format']  = 'Y-m-d h:m'; #Internalional format date and time 
 #$config['date_format']  = 'm-d-Y'; #US format just date 
@@ -55,6 +54,18 @@ $spreadsheet = "xls"; #MS Excel format
 #$spreadsheet = "ods"; #Open Document Format spreadsheet
 $word_processor = "doc"; #MS Word format
 #$word_processor = "odt"; #Open Document Format text
+
+/* Version Info*/
+$version = "200801 unstable";
+$versionFriendlyName ="start moving to extjs";
+$versionSeries = "Flying Doormat"; 
+/*
+versionSeries to be choosen from Carlton 'Team of the Century' players nicknames
+refer:
+http://en.wikipedia.org/wiki/Carlton_FC
+http://en.wikipedia.org/wiki/Carlton_FC#Carlton.27s_Team_of_the_Century
+http://en.wikipedia.org/wiki/Bruce_Doull
+*/
 
 #################
 /* PDF config options */
