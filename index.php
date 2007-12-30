@@ -51,6 +51,26 @@ $menu = true;
 //$menu = false;
 $file = "home";
 
+// Check for any unapplied SQL patches when going home
+if (($module == "options") && ($view == "database_sqlpatches")) {
+	include_once('./modules/options/database_sqlpatches.php');
+	donePatches();
+} elseif ($file == 'home') {
+	include_once('./modules/options/database_sqlpatches.php');
+	if (getNumberOfPatches() > 0 ) {
+		$view = "database_sqlpatches";
+		$module = "options";
+
+		if($action == "run") {
+			runPatches();
+		} else {
+			listPatches();
+		}
+		$menu = false;
+	}
+}
+
+
 /*dont include the header if requested file is an invoice template - for print preview etc.. header is not needed */
 if (($module == "invoices" ) && (strstr($view,"templates"))) {
 	//TODO: why is $view templates/template?...
@@ -73,25 +93,6 @@ if(file_exists("./modules/$path.php")) {
 	if(isset($res[0]) && $res[0] == $path) {
 		$file = $path;
 	}	
-}
-
-// Check for any unapplied SQL patches when going home
-if (($module == "options") && ($view == "database_sqlpatches")) {
-	include_once('./modules/options/database_sqlpatches.php');
-	donePatches();
-} elseif ($file == 'home') {
-	include_once('./modules/options/database_sqlpatches.php');
-	if (getNumberOfPatches() > 0 ) {
-		$view = "database_sqlpatches";
-		$module = "options";
-
-		if($action == "run") {
-			runPatches();
-		} else {
-			listPatches();
-		}
-		$menu = false;
-	}
 }
 
 // To remove the js error due to multiple document.ready.function() 
