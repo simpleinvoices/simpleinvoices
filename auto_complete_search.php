@@ -34,12 +34,12 @@ while ($invoice = getInvoices($sth)) {
 
 	if (strpos(strtolower($invoice['id']), $q) !== false) {
 		$invoice['id'] = htmlspecialchars($invoice['id']);
-		$invoice['total_format'] = htmlspecialchars($invoice['total_format']);
-		$invoice['paid_format'] = htmlspecialchars($invoice['paid_format']);
-		$invoice['owing_format'] = htmlspecialchars($invoice['owing_format']);
+		$invoice['total'] = htmlspecialchars(number_format($invoice['total'],2));
+		$invoice['paid'] = htmlspecialchars(number_format($invoice['paid'],2));
+		$invoice['owing'] = htmlspecialchars(number_format($invoice['owing'],2));
 		$biller['name'] = htmlspecialchars($biller['name']);
 		$customer['name'] = htmlspecialchars($customer['name']);
-		echo "$invoice[id]|<table><tr><td class='details_screen'>Invoice:</td><td> $invoice[id] </td><td  class='details_screen'>Total: </td><td>$invoice[total_format] </td></tr><tr><td class='details_screen'>Biller: </td><td>$biller[name] </td><td class='details_screen'>Paid: </td><td>$invoice[paid_format] </td></tr><tr><td class='details_screen'>Customer: </td><td>$customer[name] </td><td class='details_screen'>Owing: </td><td><u>$invoice[owing_format]</u></td></tr></table>\n";
+		echo "$invoice[id]|<table><tr><td class='details_screen'>Invoice:</td><td> $invoice[id] </td><td  class='details_screen'>Total: </td><td>$invoice[total] </td></tr><tr><td class='details_screen'>Biller: </td><td>$biller[name] </td><td class='details_screen'>Paid: </td><td>$invoice[paid] </td></tr><tr><td class='details_screen'>Customer: </td><td>$customer[name] </td><td class='details_screen'>Owing: </td><td><u>$invoice[owing]</u></td></tr></table>\n";
 	}
 }
 

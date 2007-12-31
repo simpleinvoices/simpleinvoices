@@ -39,14 +39,14 @@
 		<td colspan="2"></td>
 		<td></td>
 		<td class="details_screen">{$LANG.total_invoices}</td>
-		<td>{$stuff.total_format}</td>
+		<td>{$stuff.total}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.customer_name}</td>
 		<td colspan="2">{$customer.name}</td>
 		<td colspan="2"></td>
 		<td class="details_screen">{$LANG.total_paid}</td>
-		<td>{$stuff.paid_format}</td>
+		<td>{$stuff.paid|number_format:2}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.attention_short} <a href="docs.php?t=help&p=customer_contact" style="showhelp"><img src="./images/common/help-small.png"></img></a>
@@ -54,7 +54,7 @@
 		<td colspan="2">{$customer.attention}</td>
 		<td colspan=2></td>
 		<td class="details_screen">{$LANG.total_owing}</td>
-		<td><u>{$stuff.owing}</u></td>
+		<td><u>{$stuff.owing|number_format:2}</u></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street}</td>
@@ -147,8 +147,8 @@
 	
 			<tr class="index_table">
 				<td class="details_screen">{$invoice.id}</td>
-				<td class="details_screen">{$invoice.total}</td>
-				<td class="details_screen">{$invoice.owing}</td>
+				<td class="details_screen">{$invoice.total|number_format:2}</td>
+				<td class="details_screen">{$invoice.owing|number_format:2}</td>
 				<td class="details_screen">{$invoice.date}</td>
 			</tr>
 

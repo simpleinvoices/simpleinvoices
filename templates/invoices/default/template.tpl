@@ -62,15 +62,15 @@
 
 		<tr>
 				<td class="tbl1-left" >{$LANG.total}: </td>
-				<td class="tbl1-right" colspan="3">{$preference.pref_currency_sign}{$invoice.total_format|number_format:2}</td>
+				<td class="tbl1-right" colspan="3">{$preference.pref_currency_sign}{$invoice.total|number_format:2}</td>
 		</tr>
 		<tr>
 				<td class="tbl1-left">{$LANG.paid}:</td>
-				<td class="tbl1-right" colspan="3" >{$preference.pref_currency_sign}{$invoice.paid_format}</td>
+				<td class="tbl1-right" colspan="3" >{$preference.pref_currency_sign}{$invoice.paid|number_format:2}</td>
 		</tr>
 		<tr>
 				<td nowrap class="tbl1-left tbl1-bottom">{$LANG.owing}:</td>
-				<td class="tbl1-right tbl1-bottom" colspan="3" >{$preference.pref_currency_sign}{$invoice.owing}</td>
+				<td class="tbl1-right tbl1-bottom" colspan="3" >{$preference.pref_currency_sign}{$invoice.owing|number_format:2}</td>
 		</tr>
 
 	</table>
@@ -215,8 +215,8 @@
 				<td class="tbl1">{$invoiceItem.quantity_formatted}</td>
 				<td class="tbl1">{$invoiceItem.product.description}</td>
 				<td class="tbl1">{$preference.pref_currency_sign}{$invoiceItem.unit_price}</td>
-				<td class="tbl1">{$preference.pref_currency_sign}{$invoiceItem.gross_total}</td>
-				<td class="tbl1">{$preference.pref_currency_sign}{$invoiceItem.tax_amount}</td>
+				<td class="tbl1">{$preference.pref_currency_sign}{$invoiceItem.gross_total|number_format:2}</td>
+				<td class="tbl1">{$preference.pref_currency_sign}{$invoiceItem.tax_amount|number_format:2}</td>
 				<td class="tbl1" align="right">{$preference.pref_currency_sign}{$invoiceItem.total|number_format:2}</td>
 			</tr>
             <tr>

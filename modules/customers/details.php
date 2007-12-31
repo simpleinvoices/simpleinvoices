@@ -31,15 +31,13 @@ $customer['wording_for_enabled'] = $customer['enabled']==1?$LANG['enabled']:$LAN
 //TODO: Perhaps possible a bit nicer?
 $stuff = null;
 $stuff['total'] = calc_customer_total($customer['id']);
-$stuff['total_format'] = number_format($stuff['total'],2);
 
 #amount paid calc - start
 $stuff['paid'] = calc_customer_paid($customer['id']);;
-$stuff['paid_format'] = number_format($stuff['paid'],2);
 #amount paid calc - end
 
 #amount owing calc - start
-$stuff['owing'] = number_format($stuff['total'] - $stuff['paid'],2);
+$stuff['owing'] = $stuff['total'] - $stuff['paid'];
 #get custom field labels
 
 
