@@ -6,14 +6,14 @@ header("Content-type: text/xml");
 $start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
 $dir = (isset($_POST['dir'])) ? $_POST['dir'] : "DESC" ;
 $sort = (isset($_POST['sort'])) ? $_POST['sort'] : "id" ;
-$limit = (isset($_POST['limit'])) ? $_POST['limit'] : "5" ;
+$limit = (isset($_POST['limit'])) ? $_POST['limit'] : "25" ;
 
 //SC: Safety checking values that will be directly subbed in
 if (intval($start) != $start) {
 	$start = 0;
 }
 if (intval($limit) != $limit) {
-	$limit = 5;
+	$limit = 25;
 }
 if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 	$dir = 'DESC';

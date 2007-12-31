@@ -12,7 +12,7 @@ Ext.onReady(function(){
     var ds = new Ext.data.Store({
         // load using HTTP
         //url: 'sheldon2.xml',
-		url: 'http://localhost/simpleinvoices-dev/trunk/index.php?module=invoices&view=xml',
+	url: 'http://localhost/simpleinvoices-dev/trunk/index.php?module=invoices&view=xml',
         // the return will be XML, so lets set up a reader
         reader: new Ext.data.XmlReader({
                // records will have an "Item" tag
@@ -22,7 +22,7 @@ Ext.onReady(function(){
            }, [
                // set up the fields mapping into the xml doc
                // The first needs mapping, the others are very basic
-			'actions',
+		'actions',
                {name: 'id', mapping: 'id'},
 
               'Biller','Customer','INV_TOTAL','INV_PAID','INV_OWING','Date','Aging','Type'
@@ -33,8 +33,15 @@ Ext.onReady(function(){
 	
 	ds.setDefaultSort('id', 'desc');
 
+// pluggable renders
+	function renderActions(value, p, record){
+           return String.format(
+                 '<a href="index.php?module=invoices&view=quick_view&invoice={2}&type={2}">Quick View</a>::{0} :: {1} :: {2} :: {3}',
+            value, record.data.forumtitle, record.id, record.data.forumid);
+        }
+
     var cm = new Ext.grid.ColumnModel([
-	    {header: "Actions", width: 50, dataIndex: 'actions', sortable:false,renderer: this.formatAction },
+	    {header: "Actions", width: 50, dataIndex: 'actions', sortable:false,renderer: renderActions },
 	    {header: "ID", width: 50, dataIndex: 'id'},
 		{header: "Biller", width: 180, dataIndex: 'Biller'},
 		{header: "Customer", width: 115, dataIndex: 'Customer'},
@@ -69,7 +76,7 @@ Ext.onReady(function(){
         }),
 		layout:'fit',
         	             tbar:[{
-                             text:'Add New Invoice',
+                             text:'Add New Invoice - Total style',
                              tooltip:'Add a new row',
                              iconCls:'add'
                          }, '-', {

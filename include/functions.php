@@ -384,12 +384,13 @@ function sql2xml($sth, $count, $actions) {
 		$fcount = count($row);
 
 		$xml .= ("<tablerow>");
+/*
 		if(isset($actions))
 		{
-			$xml .= ("<actions>
-<a href='#'><img src='images/common/view.png'></img></a> TESTs sta
+			$xml .= ("<actions><a href='index.php'>TEST</a>
 </actions>");
 		}	
+*/
 		//for($i=0; $i < $fcount; $i++)
 		foreach($row as $key => $value)
 		{
