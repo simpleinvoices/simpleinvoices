@@ -701,7 +701,7 @@ function getInvoice($id) {
 	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$result = $sth->fetch();
 	//$invoice['total'] = number_format($result['total'],2);
-	$invoice['total_tax'] = number_format($result['total_tax'],2);
+	$invoice['total_tax'] = $result['total_tax'];
 	
 	return $invoice;
 }
@@ -716,11 +716,11 @@ function getInvoiceItems($id) {
 	
 	for($i=0;$invoiceItem = $sth->fetch();$i++) {
 	
-		$invoiceItem['quantity_formatted'] = number_format($invoiceItem['quantity'],2);
-		$invoiceItem['unit_price'] = number_format($invoiceItem['unit_price'],2);
-		$invoiceItem['tax_amount'] = number_format($invoiceItem['tax_amount'],2);
-		$invoiceItem['gross_total'] = number_format($invoiceItem['gross_total'],2);
-		$invoiceItem['total'] = number_format($invoiceItem['total'],2);
+		$invoiceItem['quantity'] = $invoiceItem['quantity'];
+		$invoiceItem['unit_price'] = $invoiceItem['unit_price'];
+		$invoiceItem['tax_amount'] = $invoiceItem['tax_amount'];
+		$invoiceItem['gross_total'] = $invoiceItem['gross_total'];
+		$invoiceItem['total'] = $invoiceItem['total'];
 		
 		$sql = "SELECT * FROM ".TB_PREFIX."products WHERE id = :id";
 		$tth = dbQuery($sql, ':id', $invoiceItem['product_id']) or die(htmlspecialchars(end($dbh->errorInfo())));
@@ -1023,17 +1023,14 @@ function getInvoices(&$sth) {
 			
 		#invoice total total - start
 		$invoice['total'] = getInvoiceTotal($invoice['id']);
-		$invoice['total_format'] = number_format($invoice['total'],2);
 		#invoice total total - end
 		
 		#amount paid calc - start
 		$invoice['paid'] = calc_invoice_paid($invoice['id']);
-		$invoice['paid_format'] = number_format($invoice['paid'],2);
 		#amount paid calc - end
 		
 		#amount owing calc - start
 		$invoice['owing'] = $invoice['total'] - $invoice['paid'];
-		$invoice['owing_format'] = number_format($invoice['total'] - $invoice['paid'],2);
 		#amount owing calc - end
 	}
 	return $invoice;

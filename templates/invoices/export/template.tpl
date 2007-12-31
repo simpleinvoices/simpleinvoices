@@ -62,15 +62,15 @@
 
 		<tr>
 				<td >{$LANG.total}: </td>
-				<td colspan="3">{$preference.pref_currency_sign}{$invoice.total_format}</td>
+				<td colspan="3">{$preference.pref_currency_sign}{$invoice.total|number_format:2}</td>
 		</tr>
 		<tr>
 				<td >{$LANG.paid}:</td>
-				<td colspan="3">{$preference.pref_currency_sign}{$invoice.paid_format}</td>
+				<td colspan="3">{$preference.pref_currency_sign}{$invoice.paid|number_format:2}</td>
 		</tr>
 		<tr>
 				<td nowrap >{$LANG.owing}:</td>
-				<td colspan="3">{$preference.pref_currency_sign}{$invoice.owing}</td>
+				<td colspan="3">{$preference.pref_currency_sign}{$invoice.owing|number_format    :2}</td>
 		</tr>
 
 </table>
@@ -297,7 +297,7 @@
 	<tr >
 		<td colspan="3"></td>
 		<td align="right" colspan="2">{$LANG.tax_total}</td>
-		<td align="right" >{$preference.pref_currency_sign}{$invoice.total_tax}</td>
+		<td align="right" >{$preference.pref_currency_sign}{$invoice.total_tax|number_format:2}</td>
 	</tr>
 	<tr >
 		<td colspan="6" ><br></td>
@@ -305,7 +305,7 @@
 	<tr >
 		<td colspan="3"></td>
 		<td align="right" colspan="2"><b>{$preference.pref_inv_wording} {$LANG.amount}</b></td>
-		<td  align="right"><u>{$preference.pref_currency_sign}{$invoice.total}</u></td>
+		<td  align="right"><u>{$preference.pref_currency_sign}{$invoice.total|number_format:2}</u></td>
 	</tr>
 	<tr>
 		<td colspan="6"><br /><br /></td>
