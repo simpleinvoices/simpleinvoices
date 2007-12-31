@@ -61,31 +61,24 @@ ORDER BY
 LIMIT $limit OFFSET $start";
 } else {
 	$sql ="
-SELECT
- si_invoices.id,
- si_biller.name AS Biller,
- si_customers.name AS Customer,
- sum(si_invoice_items.total) AS INV_TOTAL,
- coalesce(SUM(ac_amount), 0)  AS INV_PAID,
- (SUM(si_invoice_items.total) - coalesce(sum(ac_amount), 0)) AS INV_OWING ,
- DATE_FORMAT(date,'%Y-%m-%e') AS Date ,
- (SELECT DateDiff(now(),date)) AS Age,
- (CASE WHEN DateDiff(now(),date) <= 14 THEN '0-14'
-  WHEN DateDiff(now(),date) <= 30 THEN '15-30'
-  WHEN DateDiff(now(),date) <= 60 THEN '31-60'
-  WHEN DateDiff(now(),date) <= 90 THEN '61-90'
-  ELSE '90+'
- END) AS Aging,
- si_preferences.pref_description AS Type
-FROM
- si_invoices
- LEFT JOIN si_account_payments ON ac_inv_id = si_invoices.id
- LEFT JOIN si_invoice_items ON si_invoice_items.invoice_id = si_invoices.id
- LEFT JOIN si_biller ON si_biller.id = si_invoices.biller_id
- LEFT JOIN si_customers ON si_customers.id = si_invoices.customer_id
- LEFT JOIN si_preferences ON pref_id = preference_id
-GROUP BY
- si_invoices.id
+SELECT  iv.id,  
+	b.name AS Biller,  
+	c.name AS Customer,  
+	@invt:=(SELECT SUM(coalesce(ii.total,  0)) FROM mypfx_invoice_items ii WHERE ii.invoice_id = iv.id) AS INV_TOTAL,  
+	@invp:=(SELECT SUM(coalesce(ac_amount, 0)) FROM mypfx_account_payments ap WHERE ap.ac_inv_id = iv.id) AS INV_PAID,  
+	(SELECT (coalesce(@invt,0) - coalesce(@invp,0))) As INV_OWING,
+	DATE_FORMAT(date,'%Y-%m-%d') AS Date,  
+	(SELECT DateDiff(now(),date)) AS Age,  
+	(CASE 	WHEN DateDiff(now(),date) <= 14 THEN '0-14'   
+		WHEN DateDiff(now(),date) <= 30 THEN '15-30'   
+		WHEN DateDiff(now(),date) <= 60 THEN '31-60'   
+		WHEN DateDiff(now(),date) <= 90 THEN '61-90'   
+		ELSE '90+'  END) AS Aging,  
+	pf.pref_description AS Type 
+FROM  	mypfx_invoices iv	
+		LEFT JOIN mypfx_biller b ON b.id = iv.biller_id  
+		LEFT JOIN mypfx_customers c ON c.id = iv.customer_id  
+		LEFT JOIN mypfx_preferences pf ON pf.pref_id = iv.preference_id
 ORDER BY
  $sort $dir 
 LIMIT $start, $limit";
