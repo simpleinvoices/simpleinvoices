@@ -27,22 +27,17 @@ ORDER BY
 ";
    } else {
       $sSQL = "SELECT
-        iv.id,
-        (select name from ".TB_PREFIX."biller where ".TB_PREFIX."biller.id = iv.biller_id) as biller,
-        (select name from ".TB_PREFIX."customers where id = iv.customer_id) as customer,
-        (select sum(".TB_PREFIX."invoice_items.total) from ".TB_PREFIX."invoice_items WHERE ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id) as inv_total,
-        ( select coalesce ( sum(ac_amount), 0) from ".TB_PREFIX."account_payments where  ac_inv_id = ".TB_PREFIX."invoices.id ) as inv_paid,
-        (select (INV_TOTAL - INV_PAID)) as inv_owing ,
+        i.id,
+        (select name from " . TB_PREFIX . "biller b where b.id = i.biller_id) as biller,
+        (select name from " . TB_PREFIX . "customers c where c.id = i.customer_id) as customer,
+        (select sum(coalesce(ii.total, 0)) from " . TB_PREFIX . "invoice_items ii WHERE ii.invoice_id = i.id) as inv_total,
+        (select sum(coalesce(ap.ac_amount, 0)) from " . TB_PREFIX . "account_payments ap where  ap.ac_inv_id = i.id ) as inv_paid,
+        (select coalesce(INV_TOTAL,0) - coalesce(INV_PAID,0)) as inv_owing ,
         date
 FROM
-        ".TB_PREFIX."invoices iv INNER JOIN
-        ".TB_PREFIX."invoice_items ii ON (ii.invoice_id = iv.id),
-	".TB_PREFIX."account_payments,".TB_PREFIX."biller, ".TB_PREFIX."customers
-GROUP BY
-        iv.id
+        " . TB_PREFIX . "invoices i
 ORDER BY
         inv_owing DESC;
-
 ";
    }
 

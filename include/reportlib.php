@@ -19,18 +19,20 @@ if (!defined("BROWSE")) {
 
 	$oRpt->setUser($db_user);
 	$oRpt->setPassword($db_password);
-// Non PDO usage
-//	$oRpt->setConnection($db_host); 
-//	$oRpt->setDatabaseInterface("mysql"); // set as $db_server in trunk
-//	or
-//	$oRpt->setDatabaseInterface($db_server); // set as $db_server in trunk
-// PDO Usage
-   $oRpt->setDatabaseInterface("pdo");
-   if ($db_server == 'pgsql') {
-      $oRpt->setConnection("pgsql:host=$db_host");
-   } else {
-      $oRpt->setConnection("mysql:host=$db_host");
-   }
-
 	$oRpt->setDatabase($db_name);
+	
+// Non PDO usage
+	$oRpt->setConnection($db_host); 
+	$oRpt->setDatabaseInterface($db_server);
+// End Non PDO usage
+
+// PDO Usage
+//   $oRpt->setDatabaseInterface("pdo");
+//   if ($db_server == 'pgsql') {
+//      $oRpt->setConnection("pgsql:host=$db_host");
+//   } else {
+//      $oRpt->setConnection("mysql:host=$db_host");
+//   }
+// End PDO Usage
+
 ?>
