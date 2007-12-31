@@ -31,6 +31,7 @@ Next Release :: TODO
  - index.php review input if is safe enought
  - Quick view - Note section: show the first 25 characters then follow with ... in the Hide View and full note in Show View
  - PDF - test that PDF works when using sub-domains ie http://invoices.test.com - AP
+ - Lang: norwegian lang problem http://simpleinvoices.org/forum/topic-post1954.html#post1954 - AP
 
 ###############################
 Next Release + 1 (NR+1) :: TODO
