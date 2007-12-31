@@ -79,7 +79,7 @@ SELECT
  si_preferences.pref_description AS Type
 FROM
  si_invoices
- LEFT JOIN si_account_payments ON  ac_inv_id = si_invoices.id
+ LEFT JOIN si_account_payments ON ac_inv_id = si_invoices.id
  LEFT JOIN si_invoice_items ON si_invoice_items.invoice_id = si_invoices.id
  LEFT JOIN si_biller ON si_biller.id = si_invoices.biller_id
  LEFT JOIN si_customers ON si_customers.id = si_invoices.customer_id

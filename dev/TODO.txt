@@ -5,9 +5,10 @@ Disclaimer: if its in the list it may get done sometime in the future if and whe
 ##############################
 Next Release :: TODO
 ##############################
-- aim end of Dec
+- aim Jan/Feb 08
  - Config.php - used YAML for the DB info : http://prematureoptimization.org/blog/archives/39/ - AP
  - manage pages redevelopment!!
+ - manage invoices sql - check to make sure is 100% OK - AP
  - Address fields in invoice templates - include comma after add 1 or 2 if other address field not null
  - users/groups/domains - make this happen!
  - user admin ui
