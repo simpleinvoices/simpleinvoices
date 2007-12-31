@@ -19,6 +19,15 @@ if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 	$dir = 'DESC';
 }
 
+/*Check that the sort field is OK*/
+$validFields = array('id', 'Biller', 'Customer', 'INV_TOTAL','INV_PAID','INV_OWING','Date','Age','Aging','Type');
+
+if (in_array($sort, $validFields)) {
+	$sort = $sort;
+} else {
+	$sort = "id";
+}
+/*Sort field check end*/
 
 if ($db_server == 'pgsql') {
 	$sql = "
@@ -48,7 +57,7 @@ FROM
 GROUP BY
  iv.id, b.name, c.name, date, age, aging, type
 ORDER BY
- :sort $dir 
+ $sort $dir 
 LIMIT $limit OFFSET $start";
 } else {
 	$sql ="
@@ -78,12 +87,12 @@ FROM
 GROUP BY
  si_invoices.id
 ORDER BY
- :sort $dir 
+ $sort $dir 
 LIMIT $start, $limit";
 }
 
 global $dbh;
-$sth = dbQuery($sql, ':sort', $sort) or die(end($dbh->errorInfo()));
+$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
 
 $sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."invoices";
 $tth = $dbh->prepare($sqlTotal);
