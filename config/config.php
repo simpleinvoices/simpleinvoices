@@ -12,7 +12,7 @@ $db_user = "root";
 $db_password = "";
 define("TB_PREFIX","si_"); // default table prefix - old var $tb_prefix = "si_";
 //ini_set("display_errors","On");
-$db_layer = "pdo" // database abstraction layer type pdo, adodb, pear etc..
+$db_layer = "pdo"; // database abstraction layer type pdo, adodb, pear etc..
 
 #####################
 /* Authentication options */
