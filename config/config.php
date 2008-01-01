@@ -9,7 +9,7 @@ $db_host = "localhost";
 $db_name = "simple_invoices";
 $db_user = "root";
 $db_password = "";
-define("TB_PREFIX","si_"); // default tabbbble prefix si_ -  Old variable: $tb_prefix = "si_";
+define("TB_PREFIX","si_"); // default table prefix si_ -  Old variable: $tb_prefix = "si_";
 
 #####################
 /* Authentication options */
@@ -86,7 +86,7 @@ $pdf_bottom_margin = 15;
 #error_reporting(E_ALL & ~E_NOTICE);
 #error_reporting(0);
 
-//To turn loggin on set the below to true
+//To turn logging on set the below to true - not needed as it is set in System Defaults
 #define("LOGGING",false);
 #define("LOGGING",true);
 ?>
