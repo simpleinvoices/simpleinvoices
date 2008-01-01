@@ -26,6 +26,7 @@ function mysqlQuery($sqlQuery) { dbQuery($sqlQuery); }
  *  $tth = dbQuery('SELECT c.name FROM si_customers c WHERE c.id = :id',
  *                 ':id', $id);
  */
+
 function dbQuery($sqlQuery) {
 	global $log_dbh;
 	global $dbh;
@@ -1038,16 +1039,27 @@ function getInvoices(&$sth) {
 
 function getCustomerInvoices($id) {
 	global $dbh;
-	
-	$invoices = null;
-	
-	$sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE customer_id = :id  ORDER BY id DESC";
+	global $config;
+
+// tested for MySQL	
+	$sql = "SELECT	i.id, i.date, i.type_id, 
+		(SELECT sum( COALESCE(ii.total, 0)) FROM " . TB_PREFIX . "invoice_items ii where ii.invoice_id = i.id) As invd,
+		(SELECT sum( COALESCE(ap.ac_amount, 0)) FROM " . TB_PREFIX . "account_payments ap where ap.ac_inv_id = i.id) As pmt,
+		(SELECT COALESCE(invd, 0)) As total, 
+		(SELECT COALESCE(pmt, 0)) As paid, 
+		(select (total - paid)) as owing 
+	FROM " . TB_PREFIX . "invoices i 
+	WHERE i.customer_id = :id
+	ORDER BY i.id DESC;";	
+
 	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
-	
-	for($i = 0;$invoice = getInvoices($sth);$i++) {
-		$invoices[$i] = $invoice;
+
+	$invoices = null;
+	while ($invoice = $sth->fetch()) {
+		$invoice['calc_date'] = date( 'Y-m-d', strtotime( $invoice['date'] ) );
+		$invoice['date'] = date( $config['date_format'], strtotime( $invoice['date'] ) );
+		$invoices[] = $invoice;
 	}
-	
 	return $invoices;
 
 }

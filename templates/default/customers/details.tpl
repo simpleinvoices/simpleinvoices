@@ -4,10 +4,10 @@
 * 	 Customer details template
 *
 * Authors:
-*	 Justin Kelly, Nicolas Ruflin
+*	 Justin Kelly, Nicolas Ruflin, Ap.Muthu
 *
 * Last edited:
-* 	 2007-07-18
+* 	 2008-01-01
 *
 * License:
 *	 GPL v2 or above
@@ -39,14 +39,14 @@
 		<td colspan="2"></td>
 		<td></td>
 		<td class="details_screen">{$LANG.total_invoices}</td>
-		<td>{$stuff.total}</td>
+		<td style="text-align:right">{$stuff.total|number_format:2}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.customer_name}</td>
 		<td colspan="2">{$customer.name}</td>
 		<td colspan="2"></td>
 		<td class="details_screen">{$LANG.total_paid}</td>
-		<td>{$stuff.paid|number_format:2}</td>
+		<td style="text-align:right">{$stuff.paid|number_format:2}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.attention_short} <a href="docs.php?t=help&p=customer_contact" style="showhelp"><img src="./images/common/help-small.png"></img></a>
@@ -54,7 +54,7 @@
 		<td colspan="2">{$customer.attention}</td>
 		<td colspan=2></td>
 		<td class="details_screen">{$LANG.total_owing}</td>
-		<td><u>{$stuff.owing|number_format:2}</u></td>
+		<td style="text-align:right"><u>{$stuff.owing|number_format:2}</u></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street}</td>
@@ -137,19 +137,21 @@
 			<tr class="sortHeader">
 
 				<th class="sortable">{$LANG.id}</th>
-				<th class="sortable">{$LANG.total}</th>
-				<th class="sortable">{$LANG.owing}</th>
-				<th class="sortable">{$LANG.date_created}</th>
+				<th class="sortable_rt">{$LANG.total}</th>
+				<th class="sortable_rt">{$LANG.paid}</th>
+				<th class="sortable_rt">{$LANG.owing}</th>
+				<th class="sortable_rt">{$LANG.date_created}</th>
 
 			</tr>
 		
 			{foreach from=$invoices item=invoice}
 	
 			<tr class="index_table">
-				<td class="details_screen">{$invoice.id}</td>
-				<td class="details_screen">{$invoice.total|number_format:2}</td>
-				<td class="details_screen">{$invoice.owing|number_format:2}</td>
-				<td class="details_screen">{$invoice.date}</td>
+				<td class="details_screen"><a href="index.php?module=invoices&view=quick_view&invoice={$invoice.id}&type={$invoice.type_id}">{$invoice.id}</a></td>
+				<td style="text-align:right" class="details_screen">{$invoice.total|number_format:2}</td>
+				<td style="text-align:right" class="details_screen">{$invoice.paid|number_format:2}</td>
+				<td style="text-align:right" class="details_screen">{$invoice.owing|number_format:2}</td>
+				<td style="text-align:right" class="details_screen">{$invoice.date}</td>
 			</tr>
 
 			{/foreach}
