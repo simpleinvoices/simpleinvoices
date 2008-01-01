@@ -48,12 +48,12 @@ SELECT
  END) AS Aging,
  p.pref_description AS Type
 FROM
- si_invoices iv
- LEFT JOIN si_account_payments ap ON ap.ac_inv_id = iv.id
- LEFT JOIN si_invoice_items ii ON ii.invoice_id = iv.id
- LEFT JOIN si_biller b ON b.id = iv.biller_id
- LEFT JOIN si_customers c ON c.id = iv.customer_id
- LEFT JOIN si_preferences p ON p.pref_id = iv.preference_id
+ " . TB_PREFIX . "invoices iv
+ LEFT JOIN " . TB_PREFIX . "account_payments ap ON ap.ac_inv_id = iv.id
+ LEFT JOIN " . TB_PREFIX . "invoice_items ii ON ii.invoice_id = iv.id
+ LEFT JOIN " . TB_PREFIX . "biller b ON b.id = iv.biller_id
+ LEFT JOIN " . TB_PREFIX . "customers c ON c.id = iv.customer_id
+ LEFT JOIN " . TB_PREFIX . "preferences p ON p.pref_id = iv.preference_id
 GROUP BY
  iv.id, b.name, c.name, date, age, aging, type
 ORDER BY
@@ -64,8 +64,8 @@ LIMIT $limit OFFSET $start";
 SELECT  iv.id,  
 	b.name AS Biller,  
 	c.name AS Customer,  
-	@invt:=(SELECT SUM(coalesce(ii.total,  0)) FROM si_invoice_items ii WHERE ii.invoice_id = iv.id) AS INV_TOTAL,  
-	@invp:=(SELECT SUM(coalesce(ac_amount, 0)) FROM si_account_payments ap WHERE ap.ac_inv_id = iv.id) AS INV_PAID,  
+	@invt:=(SELECT SUM(coalesce(ii.total,  0)) FROM " . TB_PREFIX . "invoice_items ii WHERE ii.invoice_id = iv.id) AS INV_TOTAL,  
+	@invp:=(SELECT SUM(coalesce(ac_amount, 0)) FROM " . TB_PREFIX . "account_payments ap WHERE ap.ac_inv_id = iv.id) AS INV_PAID,  
 	(SELECT (coalesce(@invt,0) - coalesce(@invp,0))) As INV_OWING,
 	DATE_FORMAT(date,'%Y-%m-%d') AS Date,  
 	(SELECT DateDiff(now(),date)) AS Age,  
@@ -75,10 +75,10 @@ SELECT  iv.id,
 		WHEN DateDiff(now(),date) <= 90 THEN '61-90'   
 		ELSE '90+'  END) AS Aging,  
 	pf.pref_description AS Type 
-FROM  	si_invoices iv	
-		LEFT JOIN si_biller b ON b.id = iv.biller_id  
-		LEFT JOIN si_customers c ON c.id = iv.customer_id  
-		LEFT JOIN si_preferences pf ON pf.pref_id = iv.preference_id
+FROM  	" . TB_PREFIX . "invoices iv	
+		LEFT JOIN " . TB_PREFIX . "biller b ON b.id = iv.biller_id  
+		LEFT JOIN " . TB_PREFIX . "customers c ON c.id = iv.customer_id  
+		LEFT JOIN " . TB_PREFIX . "preferences pf ON pf.pref_id = iv.preference_id
 ORDER BY
  $sort $dir 
 LIMIT $start, $limit";
@@ -88,7 +88,7 @@ global $dbh;
 $sth = dbQuery($sql) or die(end($dbh->errorInfo()));
 
 $sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."invoices";
-$tth = $dbh->prepare($sqlTotal);
+$tth = dbQuery($sqlTotal) or die(end($dbh->errorInfo()));
 $resultCount = $tth->fetch();
 $count = $resultCount[0];
 echo sql2xml($sth, $count, 'test');
