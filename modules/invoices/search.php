@@ -53,7 +53,7 @@ if(isset($_POST['biller']) || isset($_POST['customer'])) {
 
 
 if(isset($_POST['startdate']) && isset($_POST['enddate'])) {
-	$sth = searchInvoiceByDate($startdate, $enddate]);
+	$sth = searchInvoiceByDate($startdate, $enddate);
 }
 
 
