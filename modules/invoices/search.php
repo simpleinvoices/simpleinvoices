@@ -15,8 +15,10 @@
 * Website:
 * 	http://www.simpleinvoices.org
  */
-	$startdate = (isset($_POST['startdate'])) ? $_POST['startdate'], date("Y-m-d",strtotime("last Year"));
-	$enddate   = (isset($_POST['enddate']))   ? $_POST['enddate'],   date("Y-m-d",strtotime("now"));
+	$startdate = (isset($_POST['startdate'])) ? $_POST['startdate'] : date("Y-m-d",strtotime("last Year"));
+	$startdate = htmlspecialchars($startdate);
+	$enddate   = (isset($_POST['enddate']))   ? $_POST['enddate']   : date("Y-m-d",strtotime("now"));
+	$enddate = htmlspecialchars($enddate);
 
 echo "Search Invoice<br />";
 
@@ -36,7 +38,7 @@ Customer: <input type="text" name="customer"><br />
 <b>Search by date</b>
 <form action="index.php?module=invoices&view=search" method="post">
 <input type="text" class="date-picker" name="startdate" id="date1" value='$startdate' /><br /><br />
-<input type="text" class="date-picker" name="enddate" id="date1" value='$enddate' /><br /><br />
+<input type="text" class="date-picker" name="enddate" id="date2" value='$enddate' /><br /><br />
 <input type="submit" value="Search">
 </form>
 <br />

@@ -2,21 +2,10 @@
 
 	checkLogin();
 	
-	
-	if(isset($_POST['startdate'])) {
-		$startdate = $_POST['startdate'];
-	}
-	else {
-		$startdate = date("Y-m-d",strtotime("today"));
-	}
-	
-	if(isset($_POST['enddate']) && $_POST['enddate'] != "") {
-		$enddate = $_POST['enddate'];
-	}
-	else {
-		$enddate = date("Y-m-d",strtotime("tomorrow"));
-	}
-
+	$startdate	= (isset($_POST['startdate'])) ? $_POST['startdate'] : date("Y-m-d",strtotime("last Year"));
+	$startdate = htmlspecialchars($startdate);
+	$enddate	= (isset($_POST['enddate']))   ? $_POST['enddate']   : date("Y-m-d",strtotime("now"));
+	$enddate = htmlspecialchars($enddate);
 	
 	$sql = "SELECT l.*, u.user_name
 	FROM
@@ -28,13 +17,12 @@
 	$sqls = null;
 	$sqls = $sth->fetchAll();
 	
-	$e_startdate = htmlspecialchars($startdate);
-	$e_enddate = htmlspecialchars($enddate);
 	echo <<<EOD
 		<div style="text-align:left;">
+		<br /><br />
 		<form action="index.php?module=reports&amp;view=database_log" method="post">
-		<input type="text" class="date-picker" name="startdate" id="date1" value="$e_startdate" /><br /><br />
-		<input type="text" class="date-picker" name="enddate" id="date1" value="$e_enddate" /><br /><br />
+		<input type="text" class="date-picker" name="startdate" id="date1" value='$startdate' /><br /><br />
+		<input type="text" class="date-picker" name="enddate" id="date2" value='$enddate' /><br /><br />
 		<input type="submit" value="Show">
 		</form>
 EOD;
