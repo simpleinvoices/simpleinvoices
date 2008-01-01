@@ -171,10 +171,12 @@
 					</li>
 				</ul>
 			</li>
-			{if $smarty.session.db_is_logged_in == null}
-				<li><a href="login.php">{$LANG.login}</a></li>
-			{else}
-				<li><a href="logout.php">{$LANG.logout}</a></li>
+			{if $authenticationOn}
+				{if $smarty.session.db_is_logged_in == null}
+					<li><a href="login.php">{$LANG.login}</a></li>
+				{else}
+					<li><a href="logout.php">{$LANG.logout}</a></li>
+				{/if}
 			{/if}
 		</ul>
 </div>
