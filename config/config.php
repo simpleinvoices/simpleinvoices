@@ -103,7 +103,7 @@ $smarty->assign('config_inc_old_js', $config_inc_old_js);
 #error_reporting(E_ALL & ~E_NOTICE);
 #error_reporting(0);
 
-//To turn loggin on set the below to true
+//To turn logging on set the below to true - not needed as it is set in System Defaults
 #define("LOGGING",false);
 #define("LOGGING",true);
 ?>
