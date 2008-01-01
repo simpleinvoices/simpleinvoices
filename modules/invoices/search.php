@@ -15,26 +15,14 @@
 * Website:
 * 	http://www.simpleinvoices.org
  */
-	if(isset($_POST['startdate'])) {
-		$startdate = $_POST['startdate'];
-	}
-	else {
-		$startdate = date("Y-m-d",strtotime("today"));
-	}
-	
-	if(isset($_POST['enddate']) && $_POST['enddate'] != "") {
-		$enddate = $_POST['enddate'];
-	}
-	else {
-		$enddate = date("Y-m-d",strtotime("tomorrow"));
-	}
-
+	$startdate = (isset($_POST['startdate'])) ? $_POST['startdate'], date("Y-m-d",strtotime("last Year"));
+	$enddate   = (isset($_POST['enddate']))   ? $_POST['enddate'],   date("Y-m-d",strtotime("now"));
 
 echo "Search Invoice<br />";
 
-
 echo <<<EOD
 <div style="text-align:left;">
+<br />
 <b>Search by biller and customer name</b><br />
 <form action="index.php?module=invoices&view=search" method="post">
 Biller:<input type="text" name="biller"><br />
@@ -47,24 +35,23 @@ Customer: <input type="text" name="customer"><br />
 
 <b>Search by date</b>
 <form action="index.php?module=invoices&view=search" method="post">
-<input type="text" class="date-picker" name="startdate" id="date1" value="$startdate" /><br /><br />
-<input type="text" class="date-picker" name="enddate" id="date1" value="$enddate" /><br /><br />
+<input type="text" class="date-picker" name="startdate" id="date1" value='$startdate' /><br /><br />
+<input type="text" class="date-picker" name="enddate" id="date1" value='$enddate' /><br /><br />
 <input type="submit" value="Search">
 </form>
 <br />
 EOD;
 
-$query = null;
+$sth = null;
 
 if(isset($_POST['biller']) || isset($_POST['customer'])) {
 	$sth = searchBillerAndCustomerInvoice($_POST['biller'],$_POST['customer']);
 }
 
-$startdate = $_POST['startdate'];
-$enddate = $_POST['enddate'];
+
 
 if(isset($_POST['startdate']) && isset($_POST['enddate'])) {
-	$sth = searchInvoiceByDate($_POST['startdate'], $_POST['enddate']);
+	$sth = searchInvoiceByDate($startdate, $enddate]);
 }
 
 
@@ -85,9 +72,18 @@ if($sth != null) {
 
 echo "</div>";
 
-getMenuStructure();
+//getMenuStructure();
+// till template is made
+exit();
 
 /*
-"Enhancements to Invoice Manage pageInitially the invoice manage will display blank screen with only options to search. The search criteria could be on the following:1. from and To Date2. Customer wise3. Biller wise4. Type5. Owing greater than zero6. All"*/
+"Enhancements to Invoice Manage page
+Initially the invoice manage will display blank screen with only options to search. The search criteria could be on the following:
+1. from and To Date
+2. Customer wise
+3. Biller wise
+4. Type
+5. Owing greater than zero
+6. All"*/
 
 ?>
