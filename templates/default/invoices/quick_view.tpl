@@ -56,7 +56,7 @@
 		<a href="index.php?module=invoices&view=email&stage=1&invoice={$invoice.id}">{$LANG.email}</a>
 		{if $defaults.delete == '1'} 
 			:: 
-			<a href="index.php?module=invoices&view=delete&stage=1&invoice={$invoice.id}">Delete</a>
+			<a href="index.php?module=invoices&view=delete&stage=1&invoice={$invoice.id}">{$LANG.delete}</a>
 		{/if}
 
 <!--Actions heading - start-->
@@ -74,7 +74,7 @@
 		<td class=account>{$LANG.owing}:</td><td class=account><u>{$preference.pref_currency_sign}{$invoice.owing|number_format:2}</u></td>
 		<td class=account>{$LANG.age}:</td><td class=account nowrap >{$invoice_age} <a href='docs.php?p=age&t=help' rel='gb_page_center[450, 450]'><img src="./images/common/help-small.png"></img></a></td>
 		<td></td><td class="columnleft"></td>
-		<td class="account">{$LANG.total}:</td><td class=account>{$preference.pref_currency_sign}{$invoice.total_format|number_format:2}</td>
+		<td class="account">{$LANG.total}:</td><td class=account>{$preference.pref_currency_sign}{$invoice.total|number_format:2}</td>
 		<td class=account><a href='index.php?module=payments&view=manage&c_id={$customer.id}'>{$LANG.paid}:</a></td><td class=account>{$preference.pref_currency_sign}{$invoice.paid|number_format:2}</td>
 		<td class=account>{$LANG.owing}:</td><td class=account><u>{$preference.pref_currency_sign}{$invoice.owing|number_format:2}</u></td>
 	</tr>
@@ -149,8 +149,10 @@
 	</tr>	
 	
 	<!-- Customer section -->
-	<tr class='details_screen'
-		<td class='details_screen'><b>{$LANG.customer}:</b></td><td class='details_screen' colspan=3>{$customer.name}</td><td colspan=2 align=right class='details_screen align_right'><a href='#' class="show-customer" {literal} onClick="$('.customer').show(); $('.show-customer').hide(); {/literal}">{$LANG.show_details}</a> <a href='#' class="customer" {literal} onClick="$('.customer').hide(); $('.show-customer').show(); {/literal}">{$LANG.hide_details}</a></td>
+	<tr class='details_screen'>
+		<td class='details_screen'><b>{$LANG.customer}:</b></td>
+		<td class='details_screen' colspan=3>{$customer.name}</td>
+		<td colspan=2 align=right class='details_screen align_right'><a href='#' class="show-customer" {literal} onClick="$('.customer').show(); $('.show-customer').hide(); {/literal}">{$LANG.show_details}</a> <a href='#' class="customer" {literal} onClick="$('.customer').hide(); $('.show-customer').show(); {/literal}">{$LANG.hide_details}</a></td>
 	</tr>	
 	<tr class='details_screen customer'>
 		<td class='details_screen'>{$LANG.attention_short}:</td><td class='details_screen' colspan=5 align=left>{$customer.attention},</td>
@@ -256,7 +258,7 @@
 						   <td><b>{$LANG.item}</b></td>
 					<td class='show-consulting'></td>
 					<td class='consulting'></td>
-						   <td style="text-align:right"><b>{$LANG.unit_price}</b>
+						   <td style="text-align:right"><b>{$LANG.unit_price}</b></td>
 						   <td style="text-align:right"><b>{$LANG.gross_total}</b></td>
 						   <td style="text-align:right"><b>{$LANG.tax}</b></td>
 						   <td style="text-align:right"><b>{$LANG.total_uppercase}</b></td>
