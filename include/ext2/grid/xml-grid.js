@@ -98,12 +98,11 @@ Ext.onReady(function(){
      }
 
     var cm = new Ext.grid.ColumnModel([
-	    {header: "Actions", width: 100, dataIndex: 'actions', sortable:false, renderer: renderActions },
+	    {header: "Actions", width: 105, dataIndex: 'actions', sortable:false, renderer: renderActions },
 	    {header: "ID", width: 50, dataIndex: 'id'},
 		{header: "Biller", width: 180, dataIndex: 'Biller'},
 		{header: "Customer", width: 115, dataIndex: 'Customer'},
 		{header: "Total", width: 75, dataIndex: 'INV_TOTAL'},
-		{header: "Paid", width: 75, dataIndex: 'INV_PAID'},
 		{header: "Owing", width: 75, dataIndex: 'INV_OWING'},
 		{header: "Date", width: 75, dataIndex: 'Date'},
 		{header: "Aging", width: 75, dataIndex: 'Aging'},
@@ -133,27 +132,19 @@ Ext.onReady(function(){
         }),
 		layout:'fit',
         	             tbar:[{
-                             text:'Add New Invoice - Total style',
+                             text:'New Invoice - Total style',
                              tooltip:'Add a new row',
                              iconCls:'add'
                          }, '-', {
-                             text:'New Consulting style invoice',
+                             text:'New Invoice - Consulting style',
                              tooltip:'Blah blah blah blaht',
                              iconCls:'option'
                          },'-',{
-                             text:'new Itemised style invoice',
+                             text:'New Invoice - Itemised style',
                              tooltip:'Remove the selected item',
                              iconCls:'remove'
                          }]
 		
-/*
-     formatAction: function(value, p, record) {
-         return String.format(
-                 '<div class="topic"><b>{0}</b><span class="author">{1}</span></div>',
-                 value, record.data.author, record.id, record.data.forumid
-                 );
-     }
-*/
     });
 	
     function onButtonClick(btn){

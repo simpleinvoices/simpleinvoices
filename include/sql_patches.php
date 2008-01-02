@@ -830,45 +830,36 @@ PRIMARY KEY  (`user_id`)) ;
     }
     $patch['152']['date'] = "200080102";
 
-    $patch['153']['name'] = "Drop old defaults table";
+    $patch['153']['name'] = "Drop old auth_challenges table";
     if ($db_server == "mysql") {
-        $patch['153']['patch'] = "DROP TABLE `".TB_PREFIX."defaults`;";
+        $patch['153']['patch'] = "DROP TABLE `".TB_PREFIX."auth_challenges`;";
     } elseif ($db_server == "pgsql") {
 	// needs pgsql variant
-        $patch['153']['patch'] = "DROP TABLE `".TB_PREFIX."defaults`;";
+        $patch['153']['patch'] = "DROP TABLE `".TB_PREFIX."auth_challenges`;";
     }
     $patch['153']['date'] = "200080102";
 
-    $patch['154']['name'] = "Drop old auth_challenges table";
-    if ($db_server == "mysql") {
-        $patch['154']['patch'] = "DROP TABLE `".TB_PREFIX."auth_challenges`;";
-    } elseif ($db_server == "pgsql") {
-	// needs pgsql variant
-        $patch['154']['patch'] = "DROP TABLE `".TB_PREFIX."auth_challenges`;";
-    }
-    $patch['154']['date'] = "200080102";
-
-    $patch['155']['name'] = "Create usergroup table";
+    $patch['154']['name'] = "Create usergroup table";
     if ($db_server == "mysql") {
         $patch['155']['patch'] = "CREATE TABLE ".TB_PREFIX."user_group (
 	    `id` int(11) NOT NULL auto_increment  PRIMARY KEY,
             `name` varchar(255) UNIQUE NOT NULL
             ) ENGINE=InnoDB;";
     } elseif ($db_server == "pgsql") {
-        $patch['155']['patch'] = "CREATE TABLE ".TB_PREFIX."user_group (
+        $patch['154']['patch'] = "CREATE TABLE ".TB_PREFIX."user_group (
             id serial PRIMARY KEY,
             name text UNIQUE NOT NULL
             );";
     }
-    $patch['155']['date'] = "20080102";
+    $patch['154']['date'] = "20080102";
 
-    $patch['156']['name'] = "Insert default user group";
+    $patch['155']['name'] = "Insert default user group";
     if ($db_server == "mysql") {
-        $patch['156']['patch'] = "INSERT INTO ".TB_PREFIX."user_group (name) VALUES ('default');";
+        $patch['155']['patch'] = "INSERT INTO ".TB_PREFIX."user_group (name) VALUES ('default');";
     } elseif ($db_server == "pgsql") {
-        $patch['156']['patch'] = "INSERT INTO ".TB_PREFIX."user_group (name) VALUES ('default');";
+        $patch['155']['patch'] = "INSERT INTO ".TB_PREFIX."user_group (name) VALUES ('default');";
     }
-    $patch['156']['date'] = "20080102";
+    $patch['155']['date'] = "20080102";
 
 
 
@@ -883,6 +874,15 @@ NULL ,  '61',  '100',  'Custom Fields New', 'index.php?module=customFields&amp;v
 
 /*
  * Not sure about these patches		
+		
+$patch['153']['name'] = "Drop old defaults table";
+    if ($db_server == "mysql") {
+        $patch['153']['patch'] = "DROP TABLE `".TB_PREFIX."defaults`;";
+    } elseif ($db_server == "pgsql") {
+	// needs pgsql variant
+        $patch['153']['patch'] = "DROP TABLE `".TB_PREFIX."defaults`;";
+    }
+    $patch['153']['date'] = "200080102";
 		
 	$patch['65']['name'] = "Remove Primary Key frem sql_patchmanager";
 	$patch['65']['patch'] = "ALTER TABLE `".TB_PREFIX."sql_patchmanager` DROP PRIMARY KEY";
