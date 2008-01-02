@@ -46,6 +46,7 @@ SELECT
   WHEN now()::date - iv.date <= '90 days'::interval THEN '61-90'
   ELSE '90+'
  END) AS Aging,
+ iv.type_id As type_id,
  p.pref_description AS Type
 FROM
  " . TB_PREFIX . "invoices iv

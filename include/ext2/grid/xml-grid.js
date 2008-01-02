@@ -36,13 +36,69 @@ Ext.onReady(function(){
 
 // pluggable renders
 	function renderActions(value, p, record){
-           return String.format(
-                 '<a href="index.php?module=invoices&view=quick_view&invoice={1}&type={2}">Quick View</a>::{0} :: {1} :: {2} :: {3}',
-            value, record.id, record.data.type_id, record.data.forumid);
-        }
+           var quickViewLink = String.format(
+                '<!--0 Quick View --><a class="index_table" title="{$LANG.quick_view_tooltip} {$invoice.preference.pref_inv_wording} {8}" href="index.php?module=invoices&view=quick_view&invoice={1}&type={2}"> <img src="images/common/view.png" height="16" border="-5px0" padding="-4px" valign="bottom" /></a>',
+				value, 
+				record.id, 
+				record.data.type_id, 
+				record.data.forumid);
+		
+			var editViewLink = String.format(
+               '<!--1 Edit View --><a class="index_table" title="{$LANG.edit_view_tooltip} {$invoice.preference.pref_inv_wording} {8}" href="index.php?module=invoices&view=details&invoice={1}&action=view&type={2}"><img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>',
+				value, 
+				record.id, 
+				record.data.type_id, 
+				record.data.forumid);
+				
+			var printViewLink = String.format(
+				'<!--2 Print View --><a class="index_table" title="{$LANG.print_preview_tooltip} {$invoice.preference.pref_inv_wording} {8}" href="index.php?module=invoices&view=templates/template&invoice={1}&action=view&location=print&type={2}"><img src="images/common/printer.png" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>',
+				value, 
+				record.id, 
+				record.data.type_id, 
+				record.data.forumid);
+
+			var pdfLink = String.format(
+				'<!--3 EXPORT TO PDF --><a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {8} {$LANG.export_pdf_tooltip}"	class="index_table" href="{$invoice.url_for_pdf}"><img src="images/common/page_white_acrobat.png" height="16" padding="-4px" border="-5px" valign="bottom" /><!-- pdf --></a>',
+				value, 
+				record.id, 
+				record.data.type_id, 
+				record.data.forumid);				
+
+			var xlsLink = String.format(
+				'<!--4 XLS --><a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording}{8} {$LANG.export_xls_tooltip} {$spreadsheet} {$LANG.format_tooltip}" class="index_table" href="index.php?module=invoices&view=templates/template&invoice={1}&action=view&type={2}&location=print&export={$spreadsheet}"><img src="images/common/page_white_excel.png" height="16" border="0" padding="-4px" valign="bottom" /><!-- $spreadsheet --></a>',
+				value, 
+				record.id, 
+				record.data.type_id, 
+				record.data.forumid);	
+
+			var docLink = String.format(
+				'<!--5 DOC --><a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {8} {$LANG.export_doc_tooltip} {$word_processor} {$LANG.format_tooltip}" class="index_table" href="index.php?module=invoices&view=templates/template&invoice={1}&action=view&type={2}&location=print&export={$word_processor}"><img src="images/common/page_white_word.png" height="16" border="0" padding="-4px" valign="bottom" /><!-- $word_processor --></a>',
+				value, 
+				record.id, 
+				record.data.type_id, 
+				record.data.forumid);	
+
+			var paymentLink = String.format(
+				'<!--6 Payment --><a title="{$LANG.process_payment} {$invoice.preference.pref_inv_wording} {8}" class="index_table" href="index.php?module=payments&view=process&invoice={1}&op=pay_selected_invoice"><img src="images/common/money_dollar.png" height="16" border="0" padding="-4px" valign="bottom" /></a>',		
+				value, 
+				record.id, 
+				record.data.type_id, 
+				record.data.forumid);	
+				
+				
+			var emailLink = String.format(
+				'<!--7 Email --><a href="index.php?module=invoices&view=email&stage=1&invoice={1}" title="{$LANG.email}  {$invoice.preference.pref_inv_wording} {8}"><img src="images/common/mail-message-new.png" height="16" border="0" padding="-4px" valign="bottom" /></a>',
+				value, 
+				record.id, 
+				record.data.type_id, 
+				record.data.forumid);	
+
+		//Return a nice big link for the Actions column in the Manage Invoices page
+			return quickViewLink + editViewLink + printViewLink + pdfLink + xlsLink + docLink + paymentLink + emailLink;
+     }
 
     var cm = new Ext.grid.ColumnModel([
-	    {header: "Actions", width: 50, dataIndex: 'actions', sortable:false,renderer: renderActions },
+	    {header: "Actions", width: 100, dataIndex: 'actions', sortable:false, renderer: renderActions },
 	    {header: "ID", width: 50, dataIndex: 'id'},
 		{header: "Biller", width: 180, dataIndex: 'Biller'},
 		{header: "Customer", width: 115, dataIndex: 'Customer'},
@@ -100,7 +156,10 @@ Ext.onReady(function(){
 */
     });
 	
-
+    function onButtonClick(btn){
+        Ext.example.msg('Button Click','You clicked the "{0}" button.', btn.text);
+    }
+	
 pnl = new Ext.Viewport( {
  id:'panel',
  frame:false,
