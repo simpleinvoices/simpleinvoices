@@ -83,11 +83,11 @@
 
 	<table align=center>
 	<tr>
-		<td colspan=6 align=center class="align_center"><b>{$preference.pref_inv_heading}</b></td>
+		<td colspan="6" class="align_center"><b>{$preference.pref_inv_heading}</b></td>
 	</tr>
-        <tr>
-                <td colspan=6><br></td>
-        </tr>
+    <tr>
+        <td colspan="6"><br></td>
+    </tr>
 
 	<!-- Invoice Summary section -->
 
@@ -98,7 +98,8 @@
 		<td class='details_screen'>{$preference.pref_inv_wording} {$LANG.number_short}:</td><td colspan=5 class='details_screen'>{$invoice.id}</td>
 	</tr>
 	<tr class='details_screen summary'>
-		<td class='details_screen'>{$preference.pref_inv_wording} {$LANG.date}:</td><td class='details_screen' colspan=5>{$invoice.date}</td>
+		<td class='details_screen'>{$preference.pref_inv_wording} {$LANG.date}:</td>
+		<td class='details_screen' colspan="5">{$invoice.date}</td>
 	</tr>
 	{$customField.1}
 	{$customField.2}
@@ -110,9 +111,10 @@
 	</tr>
 	<!-- Biller section -->
 
-
 	<tr class='details_screen'>
-		<td class='details_screen'><b>{$LANG.biller}:</b></td><td class='details_screen' colspan=3>{$biller.name}</b></td><td colspan=2 align=right class='details_screen align_right'><a href='#' class="show-biller" onClick="$('.biller').show();$('.show-biller').hide();">{$LANG.show_details}</a><a href='#' class="biller" onClick="$('.biller').hide();$('.show-biller').show();">{$LANG.hide_details}</a></td>
+		<td><b>{$LANG.biller}:</b></td>
+		<td colspan="3"><b>{$biller.name}</b></td>
+		<td colspan="2" class='details_screen align_right'><a href='#' class="show-biller" onClick="$('.biller').show();$('.show-biller').hide();">{$LANG.show_details}</a><a href='#' class="biller" onClick="$('.biller').hide();$('.show-biller').show();">{$LANG.hide_details}</a></td>
 	</tr>
 	<tr class='details_screen biller'>
 		<td class='details_screen'>{$LANG.street}:</td><td class='details_screen' colspan=5>{$biller.street_address}</td>
@@ -144,15 +146,15 @@
 	<tr class='details_screen biller'>
 		<td class='details_screen'>{$customFieldLabels.biller_cf4}:</td><td class='details_screen' colspan=5>{$biller.custom_field4}</td>
 	</tr>	
-	<tr >
+	<tr>
 		<td colspan=5><br></td>
 	</tr>	
 	
 	<!-- Customer section -->
 	<tr class='details_screen'>
-		<td class='details_screen'><b>{$LANG.customer}:</b></td>
-		<td class='details_screen' colspan=3>{$customer.name}</td>
-		<td colspan=2 align=right class='details_screen align_right'><a href='#' class="show-customer" {literal} onClick="$('.customer').show(); $('.show-customer').hide(); {/literal}">{$LANG.show_details}</a> <a href='#' class="customer" {literal} onClick="$('.customer').hide(); $('.show-customer').show(); {/literal}">{$LANG.hide_details}</a></td>
+		<td><b>{$LANG.customer}:</b></td>
+		<td colspan="3"><b>{$customer.name}</b></td>
+		<td colspan="2" class='details_screen align_right'><a href='#' class="show-customer" {literal} onClick="$('.customer').show(); $('.show-customer').hide(); {/literal}">{$LANG.show_details}</a> <a href='#' class="customer" {literal} onClick="$('.customer').hide(); $('.show-customer').show(); {/literal}">{$LANG.hide_details}</a></td>
 	</tr>	
 	<tr class='details_screen customer'>
 		<td class='details_screen'>{$LANG.attention_short}:</td><td class='details_screen' colspan=5 align=left>{$customer.attention},</td>
@@ -207,10 +209,20 @@
         	        <td colspan=6><br></td>
 	        </tr>
 	        <tr>
-	                <td></td><td></td><td></td><td style="text-align:right"><b>{$LANG.gross_total}</b></td><td style="text-align:right"><b>{$LANG.tax}</b></td><td style="text-align:right"><b>{$LANG.total_uppercase}</b></td>
+	                <td></td>
+					<td></td>
+					<td></td>
+					<td style="text-align:right"><b>{$LANG.gross_total}</b></td>
+					<td style="text-align:right"><b>{$LANG.tax}</b></td>
+					<td style="text-align:right"><b>{$LANG.total_uppercase}</b></td>
         	</tr>
 	        <tr>
-        	        <td></td><td></td><td></td><td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItems.0.gross_total|number_format:2}</td><td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItems.0.tax_amount|number_format:2}</td><td style="text-align:right"><u>{$preference.pref_currency_sign}{$invoiceItems.0.total|number_format:2}</u></td>
+        	        <td></td>
+					<td></td>
+					<td></td>
+					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItems.0.gross_total|number_format:2}</td>
+					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItems.0.tax_amount|number_format:2}</td>
+					<td style="text-align:right"><u>{$preference.pref_currency_sign}{$invoiceItems.0.total|number_format:2}</u></td>
 	        </tr>
 
         	<tr>
@@ -220,57 +232,55 @@
                 	<td colspan=6><b>{$preference.pref_inv_detail_heading}</b></td>
 	        </tr>
 
-   
 
 {/if}
-
 
 {if $smarty.get.type == 2 || $smarty.get.type == 3 }
 
         <tr>
                 <td colspan=6><br></td>
         </tr>
-	
-     {if $smarty.get.type == 2 }
-        	
 		<tr>
 		<td colspan="6">
-		<table width="100%">
-                        <tr>
-                                <td colspan="5"></td>
-                                <td class="details_screen"><a href='#' align=right class="show-itemised" onClick="$('.itemised').show();$('.show-itemised').hide();">{$LANG.show_details}</a><a href='#' class="itemised" onClick="$('.itemised').hide();$('.show-itemised').show();">{$LANG.hide_details}</a> 
-                        <tr>
+		<table width="100%"> 
+	
+	{if $smarty.get.type == 2 }
+
+            <tr>
+                    <td colspan="6" class="details_screen align_right"><a href='#' class="show-itemised" onClick="$('.itemised').show();$('.show-itemised').hide();">{$LANG.show_details}</a><a href='#' class="itemised" onClick="$('.itemised').hide();$('.show-itemised').show();">{$LANG.hide_details}</a></td>
+            </tr>
 			<tr>
-        		        <td><b>{$LANG.quantity_short}</b></td><td><b>{$LANG.description}</b></td><td style="text-align:right"><b>{$LANG.unit_price}</b><td style="text-align:right"><b>{$LANG.gross_total}</b></td><td style="text-align:right"><b>{$LANG.tax}</b></td><td style="text-align:right"><b>{$LANG.total_uppercase}</b></td>
-		        </tr>
+        		    <td><b>{$LANG.quantity_short}</b></td>
+					<td><b>{$LANG.description}</b></td>
+					<td style="text-align:right"><b>{$LANG.unit_price}</b></td>
+					<td style="text-align:right"><b>{$LANG.gross_total}</b></td>
+					<td style="text-align:right"><b>{$LANG.tax}</b></td>
+					<td style="text-align:right"><b>{$LANG.total_uppercase}</b></td>
+		    </tr>
 	{/if}
 
 
     {if $smarty.get.type == 3 }
-		<tr>
-		<td colspan=6>
-		<table width=100%> 
+
 			<tr>
-				<td colspan=6></td>
-				<td class='details_screen'><a href='#' align=right class="show-consulting" onClick="$('.consulting').show();$('.show-consulting').hide();">{$LANG.show_details}</a><a href='#' class="consulting" onClick="$('.consulting').hide();$('.show-consulting').show();">{$LANG.hide_details}</a> 
-        	        <tr>
-               	 	       <td><b>{$LANG.quantity_short}</b></td>
-						   <td><b>{$LANG.item}</b></td>
-					<td class='show-consulting'></td>
-					<td class='consulting'></td>
-						   <td style="text-align:right"><b>{$LANG.unit_price}</b></td>
-						   <td style="text-align:right"><b>{$LANG.gross_total}</b></td>
-						   <td style="text-align:right"><b>{$LANG.tax}</b></td>
-						   <td style="text-align:right"><b>{$LANG.total_uppercase}</b></td>
-	                </tr>
-        {/if}
+					<td colspan="6" class="details_screen align_right"><a href='#' class="show-consulting" onClick="$('.consulting').show();$('.show-consulting').hide();">{$LANG.show_details}</a><a href='#' class="consulting" onClick="$('.consulting').hide();$('.show-consulting').show();">{$LANG.hide_details}</a></td>
+        	</tr>
+			<tr>
+               	 	<td><b>{$LANG.quantity_short}</b></td>
+					<td><b>{$LANG.item}</b></td>
+					<td style="text-align:right"><b>{$LANG.unit_price}</b></td>
+					<td style="text-align:right"><b>{$LANG.gross_total}</b></td>
+					<td style="text-align:right"><b>{$LANG.tax}</b></td>
+					<td style="text-align:right"><b>{$LANG.total_uppercase}</b></td>
+	        </tr>
+    {/if}
 
 
-		{foreach from=$invoiceItems item=invoiceItem }
+{foreach from=$invoiceItems item=invoiceItem }
 			
 		{if $smarty.get.type == 2 }
 	
-		        <tr>
+			<tr>
 	                <td>{$invoiceItem.quantity|number_format:0}</td>
 					<td>{$invoiceItem.product.description}</td>
 					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.unit_price|number_format:2}</td>
@@ -278,126 +288,124 @@
 					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.tax_amount|number_format:2}</td>
 					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.total|number_format:2}</td>
 	        </tr>
-                <tr  class='itemised' >       
-                        <td></td>
-				<td colspan=5>
+			<tr class='itemised'>       
+				<td colspan="6">
 					<table width=100%>
-					<tr>
-						<td width=50% class='details_screen'>{$customFieldLabels.product_cf1}: {$invoiceItem.product.custom_field1}</td><td width="50%" class='details_screen'>{$customFieldLabels.product_cf2}:
-{$invoiceItem.product.custom_field2}</td>
-                 			</tr>
-			                <tr class='itemised' >       
-			                       <td width=50% class='details_screen'>{$customFieldLabels.product_cf3}:
-	{$invoiceItem.product.custom_field3}</td><td width=50% class='details_screen'>{$customFieldLabels.product_cf4}:
-	{$invoiceItem.product.custom_field4}</td>
-			                 </tr>
+						<tr>
+							<td width="50%" class='details_screen'>{$customFieldLabels.product_cf1}: {$invoiceItem.product.custom_field1}</td>
+							<td width="50%" class='details_screen'>{$customFieldLabels.product_cf2}: {$invoiceItem.product.custom_field2}</td>
+						</tr>
+						<tr>       
+							<td width="50%" class='details_screen'>{$customFieldLabels.product_cf3}: {$invoiceItem.product.custom_field3}</td>
+							<td width="50%" class='details_screen'>{$customFieldLabels.product_cf4}: {$invoiceItem.product.custom_field4}</td>
+						</tr>
 					</table>
 				</td>
-		</tr>
+			</tr>
 		
 	{/if}	
 	
 
 	{if $smarty.get.type == 3 }
-		
 
-
-        	<tr>
-	                <td>{$invoiceItem.quantity|number_format:0}</td><td>{$invoiceItem.product.description}</td><td class='show-consulting'>
-	                {$invoiceItem.description|truncate:"..."}
-	                
-	                </td><td class='consulting'></td><td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.unit_price|number_format:2}</td><td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|number_format:2}</td><td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.tax_amount|number_format:2}</td><td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.total|number_format:2}</td>
-		</tr>
-		<tr  class='consulting' >	
-                        <td></td>
-                                <td colspan=6>
-                                        <table width=100%>
-                                        <tr>
-                                                <td width=50% class='details_screen'>{$customFieldLabels.product_cf1}: {$invoiceItem.product.custom_field1}</td><td width=50% class='details_screen'>{$customFieldLabels.product_cf2}: {$invoiceItem.product.custom_field2}</td>
-                                        </tr>
-                                        <tr>       
-                                               <td width=50% class='details_screen'>{$customFieldLabels.product_cf3}: {$invoiceItem.product.custom_field3}</td><td width=50% class='details_screen'>{$customFieldLabels.product_cf4}: {$invoiceItem.product.custom_field4}</td>
-                                         </tr>
-                                        </table>
-                                </td>
+			<tr>
+	            <td>{$invoiceItem.quantity|number_format:0}</td>
+				<td>{$invoiceItem.product.description}</td>
+				<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.unit_price|number_format:2}</td>
+				<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|number_format:2}</td>
+				<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.tax_amount|number_format:2}</td>
+				<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.total|number_format:2}</td>
+			</tr>
+			<tr  class='consulting' >	
+				<td colspan="6">
+					<table width=100%>
+						<tr>
+                            <td width=50% class='details_screen'>{$customFieldLabels.product_cf1}: {$invoiceItem.product.custom_field1}</td>
+							<td width=50% class='details_screen'>{$customFieldLabels.product_cf2}: {$invoiceItem.product.custom_field2}</td>
+						</tr>
+						<tr>       
+                            <td width=50% class='details_screen'>{$customFieldLabels.product_cf3}: {$invoiceItem.product.custom_field3}</td>
+							<td width=50% class='details_screen'>{$customFieldLabels.product_cf4}: {$invoiceItem.product.custom_field4}</td>
+						</tr>
+					</table>
+				</td>
 	<!--		<td></td><td colspan=6 class='details_screen consulting'>{$prod_custom_field_label1}: {$product.custom_field1}, {$prod_custom_field_label2}: {$product.custom_field2}, {$prod_custom_field_label3}: {$product.custom_field3}, {$prod_custom_field_label4}: {$product.custom_field4}</td> -->
-		 </tr>
+			</tr>
 		 
 		{if $invoiceItem.description != null}
-			<tr  class='consulting' >	
-				<td></td><td colspan=6 class='details_screen consulting'>{$LANG.description}:<br>{$invoiceItem.description}</td>
-			 </tr>
+			<tr class='show-consulting' >	
+				<td colspan="6" class='details_screen consulting'>{$invoiceItem.description|truncate:"..."}</td>
+			</tr>
+			<tr class='consulting' >	
+				<td colspan="6" class='details_screen consulting'>{$LANG.description}:<br>{$invoiceItem.description}</td>
+			</tr>
 		{/if}
 	{/if}
 
 {/foreach}
 
+<!-- we are still in the itemised or consulting loop -->
+		</table>
+		</td>
+		</tr>
 
-
-
-	{if ($smarty.get.type == 2 && $invoice.note != null ) OR 'Consulting' && $invoice.note != null }
-
-
-
-
-			</table>
-			</td></tr>
-			<tr>
-				<td></td>
-			</tr>
-			<tr class='details_screen'>
-				<td colspan=5><b>{$LANG.notes}:</b></td><td align=right class='details_screen'><a href='#' align=right class="show-notes" onClick="$('.notes').show();$('.show-notes').hide();">{$LANG.show_details}</a><a href='#' class="notes" onClick="$('.notes').hide();$('.show-notes').show();">{$LANG.hide_details}</a> 
-</td>
-			</tr>
+		{if ($invoice.note != null) }
+		<tr>
+				<td colspan="6"></td>
+		</tr>
+		<tr class="details_screen">
+				<td colspan="5"><b>{$LANG.notes}:</b></td>
+				<td class="details_screen align_right"><a href='#' class="show-notes" onClick="$('.notes').show();$('.show-notes').hide();">{$LANG.show_details}</a><a href='#' class="notes" onClick="$('.notes').hide();$('.show-notes').show();">{$LANG.hide_details}</a></td>
+		</tr>
 			<!-- if hide detail click - the stripped note will be displayed -->
-			<tr class='show-notes details_screen'>
-				<td colspan=6>{$invoice.note|truncate:"..."}</td>
-			</tr>
+		<tr class='show-notes details_screen'>
+				<td colspan="6">{$invoice.note|truncate:"..."}</td>
+		</tr>
 			<!-- if show detail click - the full note will be displayed -->
-			<tr class='notes details_screen'>
-				<td colspan=6>{$invoice.note}</td>
-			</tr>
-
-	{/if}
-	
-	
-
+		<tr class='notes details_screen'>
+				<td colspan="6">{$invoice.note}</td>
+		</tr>
+		{/if}
 
 	<tr>
-		<td colspan=6><br></td>
+		<td colspan="6"><br></td>
 	</tr>	
 
-        <tr>
-                <td colspan=3></td><td align=left colspan=2>{$LANG.total} {$LANG.tax} {$LANG.included}</td><td colspan=2  style="text-align:right">{$preference.pref_currency_sign}{$invoice.total_tax|number_format:2}</td>
-        </tr>
-	<tr><td><br></td>
+    <tr class='details_screen'>
+        <td colspan="3"></td>
+		<td colspan="2" class="align_right">{$LANG.total} {$LANG.tax} {$LANG.included}</td>
+		<td colspan="2" class="align_right">{$preference.pref_currency_sign}{$invoice.total_tax|number_format:2}</td>
+    </tr>
+	<tr>
+		<td colspan="6"><br></td>
 	</tr>
-        <tr>
-                <td colspan=3></td><td align=left colspan=2><b>{$preference.pref_inv_wording} {$LANG.amount}</b></td><td colspan=2  style="text-align:right"><u>{$preference.pref_currency_sign}{$invoice.total|number_format:2}</u></td>
-        </tr>
-
-
+    <tr class='details_screen'>
+        <td colspan="3"></td>
+		<td colspan="2" class="align_right"><b>{$preference.pref_inv_wording} {$LANG.amount}</b></td>
+		<td colspan="2" class="align_right"><u>{$preference.pref_currency_sign}{$invoice.total|number_format:2}</u></td>
+    </tr>
 	<tr>
-		<td colspan=6><br><br></td>
+		<td colspan="6"><br><br></td>
 	</tr>	
 	<tr>
-		<td colspan=6><b>{$preference.pref_inv_detail_heading}</b></td>
+		<td colspan="6"><b>{$preference.pref_inv_detail_heading}</b></td>
 	</tr>
 {/if}
 
 
 
-        <tr>
-                <td colspan=6><i>{$preference.pref_inv_detail_line}</i></td>
-        </tr>
+    <tr>
+        <td colspan="6"><i>{$preference.pref_inv_detail_line}</i></td>
+    </tr>
 	<tr>
-		<td colspan=6>{$preference.pref_inv_payment_method}</td>
-        <tr>
-                <td>{$preference.pref_inv_payment_line1_name}</td><td colspan=5>{$preference.pref_inv_payment_line1_value}</td>
-        </tr>
-        <tr>
-                <td>{$preference.pref_inv_payment_line2_name}</td><td colspan=5>{$preference.pref_inv_payment_line2_value}</td>
-        </tr>
-        </table>
-	<!-- addition close table tag to close invoice itemised/consulting if it has a note -->
-	</table>
+		<td colspan="6">{$preference.pref_inv_payment_method}</td>
+	</tr>
+    <tr>
+        <td>{$preference.pref_inv_payment_line1_name}</td>
+		<td colspan="5">{$preference.pref_inv_payment_line1_value}</td>
+    </tr>
+    <tr>
+        <td>{$preference.pref_inv_payment_line2_name}</td>
+		<td colspan="5">{$preference.pref_inv_payment_line2_value}</td>
+    </tr>
+</table>
