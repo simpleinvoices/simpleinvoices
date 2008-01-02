@@ -5,19 +5,27 @@
 
 include('./include/sql_patches.php');
 
-
-function getNumberOfPatches() {
-	global $patch;
-	#Max patches applied - start
+// Made it into 2 functions to get rid of the old defaults table
+function getNumberOfDonePatches() {
 
 	$check_patches_sql = "SELECT count(sql_patch) AS count FROM ".TB_PREFIX."sql_patchmanager ";
 	$patches_result = mysqlQuery($check_patches_sql) or die(mysql_error());
 		
 	$patches = mysql_fetch_array($patches_result);
+	
+	//Returns number of patches applied
+	return $patches['count'];
+}
+
+function getNumberOfPatches() {
+	global $patch;
+	#Max patches applied - start
+		
+	$patches = getNumberOfDonePatches();
 	$patch_count = count($patch);
 	
 	//Returns number of patches to be applied
-	return $patch_count - $patches['count'];
+	return $patch_count - $patches;
 }
 
 

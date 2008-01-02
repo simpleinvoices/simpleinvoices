@@ -550,11 +550,14 @@ INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 	$patch['115']['patch'] = "INSERT INTO `".TB_PREFIX."system_defaults` ( `id` , `name` , `value` ) VALUES (NULL , 'logging', '0');";
 	$patch['115']['date'] = "20070523";
 
-	//systemd efaults conversion patch
-	#defaults query and DEFAULT NUMBER OF LINE ITEMS
-	$sql_defaults = "SELECT * FROM ".TB_PREFIX."defaults";
-	$result_defaults = mysqlQuery($sql_defaults);
-	$defaults = mysql_fetch_array($result_defaults);
+	$numpatchesdone = getNumberOfDonePatches();
+	if ($numpatchesdone < 124) {
+		// system defaults conversion patch
+		// defaults query and DEFAULT NUMBER OF LINE ITEMS
+		$sql_defaults = "SELECT * FROM ".TB_PREFIX."defaults";
+		$result_defaults = mysqlQuery($sql_defaults);
+		$defaults = mysql_fetch_array($result_defaults);
+	}
 
 	$patch['116']['name'] = "System defaults conversion patch - set default biller";
 	$patch['116']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = $defaults[def_biller] where name = 'biller'";
