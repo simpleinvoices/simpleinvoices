@@ -66,7 +66,7 @@
 
 	<table align=center>
 	<tr>
-		<td class=account colspan=8>{$LANG.account_info}</td><td width=5%></td><td class="columnleft" width=5%></td><td class="account" colspan=6><a href='index.php?module=customers&view=details&customer={$customer.id}&action=view'>{$LANG.customer_account}</a></td>
+		<td class=account colspan=8>{$LANG.account_info}</td><td width=5%></td><td class="columnleft" width=5%></td><td class="account" colspan=6><a href='index.php?module=customers&view=details&id={$customer.id}&action=view'>{$LANG.customer_account}</a></td>
 	</tr>
 	<tr>
 		<td class=account>{$LANG.total}:</td><td class=account>{$preference.pref_currency_sign}{$invoice.total|number_format:2}</td>
