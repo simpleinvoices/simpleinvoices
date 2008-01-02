@@ -18,13 +18,14 @@ Ext.onReady(function(){
                // records will have an "Item" tag
                record: 'tablerow',
                id: 'id',
+			   type_id: 'type_id',
                totalRecords: 'total'
            }, [
                // set up the fields mapping into the xml doc
                // The first needs mapping, the others are very basic
 		'actions',
                {name: 'id', mapping: 'id'},
-
+				{name: 'type_id', mapping: 'type_id'},
               'Biller','Customer','INV_TOTAL','INV_PAID','INV_OWING','Date','Aging','Type'
            ]),
 		// turn on remote sorting
@@ -36,8 +37,8 @@ Ext.onReady(function(){
 // pluggable renders
 	function renderActions(value, p, record){
            return String.format(
-                 '<a href="index.php?module=invoices&view=quick_view&invoice={2}&type={2}">Quick View</a>::{0} :: {1} :: {2} :: {3}',
-            value, record.data.forumtitle, record.id, record.data.forumid);
+                 '<a href="index.php?module=invoices&view=quick_view&invoice={1}&type={2}">Quick View</a>::{0} :: {1} :: {2} :: {3}',
+            value, record.id, record.data.type_id, record.data.forumid);
         }
 
     var cm = new Ext.grid.ColumnModel([

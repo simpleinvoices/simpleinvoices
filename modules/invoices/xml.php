@@ -73,7 +73,8 @@ SELECT  iv.id,
 		WHEN DateDiff(now(),date) <= 30 THEN '15-30'   
 		WHEN DateDiff(now(),date) <= 60 THEN '31-60'   
 		WHEN DateDiff(now(),date) <= 90 THEN '61-90'   
-		ELSE '90+'  END) AS Aging,  
+		ELSE '90+'  END) AS Aging, 
+	iv.type_id As type_id,
 	pf.pref_description AS Type 
 FROM  	" . TB_PREFIX . "invoices iv	
 		LEFT JOIN " . TB_PREFIX . "biller b ON b.id = iv.biller_id  
