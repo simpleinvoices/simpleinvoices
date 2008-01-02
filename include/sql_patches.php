@@ -550,11 +550,14 @@ INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 	$patch['115']['patch'] = "INSERT INTO `".TB_PREFIX."system_defaults` ( `id` , `name` , `value` ) VALUES (NULL , 'logging', '0');";
 	$patch['115']['date'] = "20070523";
 
-	//systemd efaults conversion patch
-	#defaults query and DEFAULT NUMBER OF LINE ITEMS
-	$sql_defaults = "SELECT * FROM ".TB_PREFIX."defaults";
-	$sth = dbQuery($sql_defaults);
-	$defaults = $sth->fetch();
+	$numpatchesdone = getNumberOfDonePatches();
+	if ($numpatchesdone < 124) {
+		// system defaults conversion patch
+		// defaults query and DEFAULT NUMBER OF LINE ITEMS
+		$sql_defaults = "SELECT * FROM ".TB_PREFIX."defaults";
+		$sth = dbQuery($sql_defaults);
+		$defaults = $sth->fetch();
+	}
 
 	$patch['116']['name'] = "System defaults conversion patch - set default biller";
 	$patch['116']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = $defaults[def_biller] where name = 'biller'";
@@ -763,7 +766,7 @@ PRIMARY KEY  (`user_id`)) ;
 
     $patch['145']['name'] = "Add domain_id to payment_types table";
     if ($db_server == "mysql") {
-        $patch['145']['patch'] = "ALTER TABLE `si_payment_types` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `pt_id` ;";
+        $patch['145']['patch'] = "ALTER TABLE `".TB_PREFIX."payment_types` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `pt_id` ;";
     } elseif ($db_server == "pgsql") {
         $patch['145']['patch'] = "ALTER TABLE ".TB_PREFIX."payment_types ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
@@ -771,7 +774,7 @@ PRIMARY KEY  (`user_id`)) ;
 
     $patch['146']['name'] = "Add domain_id to preferences table";
     if ($db_server == "mysql") {
-        $patch['146']['patch'] = "ALTER TABLE `si_preferences` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `pref_id` ;";
+        $patch['146']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `pref_id` ;";
     } elseif ($db_server == "pgsql") {
         $patch['146']['patch'] = "ALTER TABLE ".TB_PREFIX."preferences ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
@@ -779,7 +782,7 @@ PRIMARY KEY  (`user_id`)) ;
 
     $patch['147']['name'] = "Add domain_id to products table";
     if ($db_server == "mysql") {
-        $patch['147']['patch'] = "ALTER TABLE `si_products` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
+        $patch['147']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
     } elseif ($db_server == "pgsql") {
         $patch['147']['patch'] = "ALTER TABLE ".TB_PREFIX."products ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
@@ -787,7 +790,7 @@ PRIMARY KEY  (`user_id`)) ;
     
     $patch['148']['name'] = "Add domain_id to billers table";
     if ($db_server == "mysql") {
-        $patch['148']['patch'] = "ALTER TABLE `si_biller` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
+        $patch['148']['patch'] = "ALTER TABLE `".TB_PREFIX."biller` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
     } elseif ($db_server == "pgsql") {
         $patch['148']['patch'] = "ALTER TABLE ".TB_PREFIX."biller ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
@@ -795,7 +798,7 @@ PRIMARY KEY  (`user_id`)) ;
 
     $patch['149']['name'] = "Add domain_id to invoices table";
     if ($db_server == "mysql") {
-        $patch['149']['patch'] = "ALTER TABLE `si_invoices` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
+        $patch['149']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
     } elseif ($db_server == "pgsql") {
         $patch['149']['patch'] = "ALTER TABLE ".TB_PREFIX."invoices ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
@@ -803,12 +806,47 @@ PRIMARY KEY  (`user_id`)) ;
 
     $patch['150']['name'] = "Add domain_id to customers table";
     if ($db_server == "mysql") {
-        $patch['150']['patch'] = "ALTER TABLE `si_customers` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
+        $patch['150']['patch'] = "ALTER TABLE `".TB_PREFIX."customers` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
     } elseif ($db_server == "pgsql") {
         $patch['150']['patch'] = "ALTER TABLE ".TB_PREFIX."customers ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
     $patch['150']['date'] = "200712";
 
+    $patch['151']['name'] = "Change group field to group_id in users table";
+    if ($db_server == "mysql") {
+        $patch['151']['patch'] = "ALTER TABLE `".TB_PREFIX."users` CHANGE `user_group` `group_id` INT  DEFAULT '1' NOT NULL;";
+    } elseif ($db_server == "pgsql") {
+	// needs pgsql variant
+        $patch['151']['patch'] = "ALTER TABLE `".TB_PREFIX."users` ALTER COLUMN `group_id` TYPE int DEFAULT '1' NOT NULL USING to_number(`user_group`, '999');";
+    }
+    $patch['151']['date'] = "20080102";
+
+    $patch['152']['name'] = "Change domain field to domain_id in users table";
+    if ($db_server == "mysql") {
+        $patch['152']['patch'] = "ALTER TABLE `" . TB_PREFIX . "users` CHANGE `user_domain` `domain_id` INT  DEFAULT '1' NOT NULL;";
+    } elseif ($db_server == "pgsql") {
+	// needs pgsql variant
+        $patch['152']['patch'] = "ALTER TABLE `" . TB_PREFIX . "users` ALTER COLUMN `domain_id` TYPE int DEFAULT '1' NOT NULL USING to_number(`user_domain`, '999');";
+    }
+    $patch['152']['date'] = "200080102";
+
+    $patch['153']['name'] = "Drop old defaults table";
+    if ($db_server == "mysql") {
+        $patch['153']['patch'] = "DROP TABLE `".TB_PREFIX."defaults`;";
+    } elseif ($db_server == "pgsql") {
+	// needs pgsql variant
+        $patch['153']['patch'] = "DROP TABLE `".TB_PREFIX."defaults`;";
+    }
+    $patch['153']['date'] = "200080102";
+
+    $patch['154']['name'] = "Drop old auth_challenges table";
+    if ($db_server == "mysql") {
+        $patch['154']['patch'] = "DROP TABLE `".TB_PREFIX."auth_challenges`;";
+    } elseif ($db_server == "pgsql") {
+	// needs pgsql variant
+        $patch['154']['patch'] = "DROP TABLE `".TB_PREFIX."auth_challenges`;";
+    }
+    $patch['154']['date'] = "200080102";
 
 /*
 INSERT INTO  `".TB_PREFIX."menu` (  `id` ,  `parentid` ,  `order` ,  `name` ,  `link` ,  `enabled` ) 
