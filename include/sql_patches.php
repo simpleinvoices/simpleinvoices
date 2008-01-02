@@ -848,6 +848,30 @@ PRIMARY KEY  (`user_id`)) ;
     }
     $patch['154']['date'] = "200080102";
 
+    $patch['155']['name'] = "Create usergroup table";
+    if ($db_server == "mysql") {
+        $patch['155']['patch'] = "CREATE TABLE ".TB_PREFIX."user_group (
+	    `id` int(11) NOT NULL auto_increment  PRIMARY KEY,
+            `name` varchar(255) UNIQUE NOT NULL
+            ) ENGINE=InnoDB;";
+    } elseif ($db_server == "pgsql") {
+        $patch['155']['patch'] = "CREATE TABLE ".TB_PREFIX."user_group (
+            id serial PRIMARY KEY,
+            name text UNIQUE NOT NULL
+            );";
+    }
+    $patch['155']['date'] = "20080102";
+
+    $patch['156']['name'] = "Insert default user group";
+    if ($db_server == "mysql") {
+        $patch['156']['patch'] = "INSERT INTO ".TB_PREFIX."user_group (name) VALUES ('default');";
+    } elseif ($db_server == "pgsql") {
+        $patch['156']['patch'] = "INSERT INTO ".TB_PREFIX."user_group (name) VALUES ('default');";
+    }
+    $patch['156']['date'] = "20080102";
+
+
+
 /*
 INSERT INTO  `".TB_PREFIX."menu` (  `id` ,  `parentid` ,  `order` ,  `name` ,  `link` ,  `enabled` ) 
 VALUES (
@@ -859,9 +883,6 @@ NULL ,  '61',  '100',  'Custom Fields New', 'index.php?module=customFields&amp;v
 
 /*
  * Not sure about these patches		
-	$patch['64']['name'] = "Removes autoincrement from sql_id";
-	$patch['64']['patch'] = "ALTER TABLE  `".TB_PREFIX."sql_patchmanager` CHANGE  `sql_id`  `sql_id` INT( 11 ) NOT NULL";
-	$patch['64']['date'] = "20070506";
 		
 	$patch['65']['name'] = "Remove Primary Key frem sql_patchmanager";
 	$patch['65']['patch'] = "ALTER TABLE `".TB_PREFIX."sql_patchmanager` DROP PRIMARY KEY";
@@ -875,11 +896,6 @@ NULL ,  '61',  '100',  'Custom Fields New', 'index.php?module=customFields&amp;v
 	$patch['67']['patch'] = "ALTER TABLE `".TB_PREFIX."sql_patchmanager` DROP `sql_patch_ref`";
 	$patch['67']['date'] = "20070506";
  */
-# write conversion srcipt for this release and will drop ".TB_PREFIX."defaults in the following release just incase something bad happens
-# thinking.. is ".TB_PREFIX."system_defaults the write name or should it be ".TB_PREFIX."options etc..
-	
-#	$patch['64']['name'] = "Drops old default table. Attention: Old defaults get lost...";
-#	$patch['64']['patch'] = "DROP TABLE `".TB_PREFIX."defaults`";
-#	$patch['64']['date'] = "20070503";
+
 
 ?>
