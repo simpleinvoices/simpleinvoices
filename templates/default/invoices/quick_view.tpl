@@ -61,7 +61,7 @@
 
 <!--Actions heading - start-->
 <hr></hr>
-</form>
+
 <!-- #PDF end -->
 
 	<table align=center>
@@ -69,9 +69,9 @@
 		<td class=account colspan=8>{$LANG.account_info}</td><td width=5%></td><td class="columnleft" width=5%></td><td class="account" colspan=6><a href='index.php?module=customers&view=details&customer={$customer.id}&action=view'>{$LANG.customer_account}</a></td>
 	</tr>
 	<tr>
-		<td class=account>{$LANG.total}:</td><td class=account>{$preference.pref_currency_sign}{$invoice.total}<_td>
+		<td class=account>{$LANG.total}:</td><td class=account>{$preference.pref_currency_sign}{$invoice.total|number_format:2}</td>
 		<td class=account><a href='index.php?module=payments&view=manage&id={$invoice.id}'>{$LANG.paid}:</a></td><td class=account>{$preference.pref_currency_sign}{$invoice.paid|number_format:2}</td>
-		<td class=account>{$LANG.owing}:</td><td class=account><u>{$preference.pref_currency_sign}{$invoice.owing}</u></td>
+		<td class=account>{$LANG.owing}:</td><td class=account><u>{$preference.pref_currency_sign}{$invoice.owing|number_format:2}</u></td>
 		<td class=account>{$LANG.age}:</td><td class=account nowrap >{$invoice_age} <a href='docs.php?p=age&t=help' rel='gb_page_center[450, 450]'><img src="./images/common/help-small.png"></img></a></td>
 		<td></td><td class="columnleft"></td>
 		<td class="account">{$LANG.total}:</td><td class=account>{$preference.pref_currency_sign}{$invoice.total|number_format:2}</td>
@@ -149,8 +149,10 @@
 	</tr>	
 	
 	<!-- Customer section -->
-	<tr class='details_screen'
-		<td class='details_screen'><b>{$LANG.customer}:</b></td><td class='details_screen' colspan=3>{$customer.name}</td><td colspan=2 align=right class='details_screen align_right'><a href='#' class="show-customer" {literal} onClick="$('.customer').show(); $('.show-customer').hide(); {/literal}">{$LANG.show_details}</a> <a href='#' class="customer" {literal} onClick="$('.customer').hide(); $('.show-customer').show(); {/literal}">{$LANG.hide_details}</a></td>
+	<tr class='details_screen'>
+		<td class='details_screen'><b>{$LANG.customer}:</b></td>
+		<td class='details_screen' colspan=3>{$customer.name}</td>
+		<td colspan=2 align=right class='details_screen align_right'><a href='#' class="show-customer" {literal} onClick="$('.customer').show(); $('.show-customer').hide(); {/literal}">{$LANG.show_details}</a> <a href='#' class="customer" {literal} onClick="$('.customer').hide(); $('.show-customer').show(); {/literal}">{$LANG.hide_details}</a></td>
 	</tr>	
 	<tr class='details_screen customer'>
 		<td class='details_screen'>{$LANG.attention_short}:</td><td class='details_screen' colspan=5 align=left>{$customer.attention},</td>
@@ -205,10 +207,10 @@
         	        <td colspan=6><br></td>
 	        </tr>
 	        <tr>
-	                <td></td><td></td><td></td><td><b>{$LANG.gross_total}</b></td><td><b>{$LANG.tax}</b></td><td><b>{$LANG.total_uppercase}</b></td>
+	                <td></td><td></td><td></td><td style="text-align:right"><b>{$LANG.gross_total}</b></td><td style="text-align:right"><b>{$LANG.tax}</b></td><td style="text-align:right"><b>{$LANG.total_uppercase}</b></td>
         	</tr>
 	        <tr>
-        	        <td></td><td></td><td></td><td>{$preference.pref_currency_sign}{$invoiceItems.0.gross_total|number_format:2}</td><td>{$preference.pref_currency_sign}{$invoiceItems.0.tax_amount|number_format:2}</td><td><u>{$preference.pref_currency_sign}{$invoiceItems.0.total|number_format:2}</u></td>
+        	        <td></td><td></td><td></td><td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItems.0.gross_total|number_format:2}</td><td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItems.0.tax_amount|number_format:2}</td><td style="text-align:right"><u>{$preference.pref_currency_sign}{$invoiceItems.0.total|number_format:2}</u></td>
 	        </tr>
 
         	<tr>
@@ -239,7 +241,7 @@
                                 <td class="details_screen"><a href='#' align=right class="show-itemised" onClick="$('.itemised').show();$('.show-itemised').hide();">{$LANG.show_details}</a><a href='#' class="itemised" onClick="$('.itemised').hide();$('.show-itemised').show();">{$LANG.hide_details}</a> 
                         <tr>
 			<tr>
-        		        <td><b>{$LANG.quantity_short}</b></td><td><b>{$LANG.description}</b></td><td><b>{$LANG.unit_price}</b><td><b>{$LANG.gross_total}</b></td><td><b>{$LANG.tax}</b></td><td><b>{$LANG.total_uppercase}</b></td>
+        		        <td><b>{$LANG.quantity_short}</b></td><td><b>{$LANG.description}</b></td><td style="text-align:right"><b>{$LANG.unit_price}</b><td style="text-align:right"><b>{$LANG.gross_total}</b></td><td style="text-align:right"><b>{$LANG.tax}</b></td><td style="text-align:right"><b>{$LANG.total_uppercase}</b></td>
 		        </tr>
 	{/if}
 
@@ -252,7 +254,14 @@
 				<td colspan=6></td>
 				<td class='details_screen'><a href='#' align=right class="show-consulting" onClick="$('.consulting').show();$('.show-consulting').hide();">{$LANG.show_details}</a><a href='#' class="consulting" onClick="$('.consulting').hide();$('.show-consulting').show();">{$LANG.hide_details}</a> 
         	        <tr>
-               	 	       <td><b>{$LANG.quantity_short}</b></td><td><b>{$LANG.item}</b></td><td class=show-consulting><b>{$LANG.description}</b></td><td class='consulting'></td><td><b>{$LANG.unit_price}</b><td><b>{$LANG.gross_total}</b></td><td><b>{$LANG.tax}</b></td><td align=right><b>{$LANG.total_uppercase}</b></td>
+               	 	       <td><b>{$LANG.quantity_short}</b></td>
+						   <td><b>{$LANG.item}</b></td>
+					<td class='show-consulting'></td>
+					<td class='consulting'></td>
+						   <td style="text-align:right"><b>{$LANG.unit_price}</b></td>
+						   <td style="text-align:right"><b>{$LANG.gross_total}</b></td>
+						   <td style="text-align:right"><b>{$LANG.tax}</b></td>
+						   <td style="text-align:right"><b>{$LANG.total_uppercase}</b></td>
 	                </tr>
         {/if}
 
@@ -262,7 +271,12 @@
 		{if $smarty.get.type == 2 }
 	
 		        <tr>
-	                <td>{$invoiceItem.quantity}</td><td>{$invoiceItem.product.description}</td><td>{$preference.pref_currency_sign}{$invoiceItem.unit_price|number_format:2}</td><td>{$preference.pref_currency_sign}{$invoiceItem.gross_total|number_format:2}</td><td>{$preference.pref_currency_sign}{$invoiceItem.tax_amount|number_format:2}</td><td>{$invoiceItem.total|number_format:2}</td>
+	                <td>{$invoiceItem.quantity|number_format:0}</td>
+					<td>{$invoiceItem.product.description}</td>
+					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.unit_price|number_format:2}</td>
+					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|number_format:2}</td>
+					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.tax_amount|number_format:2}</td>
+					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.total|number_format:2}</td>
 	        </tr>
                 <tr  class='itemised' >       
                         <td></td>
@@ -289,10 +303,10 @@
 
 
         	<tr>
-	                <td>{$invoiceItem.quantity}</td><td>{$invoiceItem.product.description}</td><td class='show-consulting'>
+	                <td>{$invoiceItem.quantity|number_format:0}</td><td>{$invoiceItem.product.description}</td><td class='show-consulting'>
 	                {$invoiceItem.description|truncate:"..."}
 	                
-	                </td><td class='consulting'></td><td>{$preference.pref_currency_sign}{$invoiceItem.unit_price|number_format:2}</td><td>{$preference.pref_currency_sign}{$invoiceItem.gross_total|number_format:2}</td><td>{$preference.pref_currency_sign}{$invoiceItem.tax_amount|number_format:2}</td><td align=right>{$preference.pref_currency_sign}{$invoiceItem.total|number_format:2}</td>
+	                </td><td class='consulting'></td><td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.unit_price|number_format:2}</td><td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|number_format:2}</td><td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.tax_amount|number_format:2}</td><td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.total|number_format:2}</td>
 		</tr>
 		<tr  class='consulting' >	
                         <td></td>
@@ -354,12 +368,12 @@
 	</tr>	
 
         <tr>
-                <td colspan=3></td><td align=left colspan=2>{$LANG.total} {$LANG.tax} {$LANG.included}</td><td colspan=2 align=right>{$preference.pref_currency_sign}{$invoice.total_tax|number_format:2}</td>
+                <td colspan=3></td><td align=left colspan=2>{$LANG.total} {$LANG.tax} {$LANG.included}</td><td colspan=2  style="text-align:right">{$preference.pref_currency_sign}{$invoice.total_tax|number_format:2}</td>
         </tr>
 	<tr><td><br></td>
 	</tr>
         <tr>
-                <td colspan=3></td><td align=left colspan=2><b>{$preference.pref_inv_wording} {$LANG.amount}</b></td><td colspan=2 align=right><u>{$preference.pref_currency_sign}{$invoice.total|number_format:2}</u></td>
+                <td colspan=3></td><td align=left colspan=2><b>{$preference.pref_inv_wording} {$LANG.amount}</b></td><td colspan=2  style="text-align:right"><u>{$preference.pref_currency_sign}{$invoice.total|number_format:2}</u></td>
         </tr>
 
 

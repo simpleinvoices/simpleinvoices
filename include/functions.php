@@ -1,5 +1,17 @@
 <?php
-
+/*
+* Script: functions.php
+*	Contain all the functions used in Simple Invoices
+*
+* Authors:
+*	- Justin Kelly
+*
+* License:
+*	GNU GPL2 or above
+*
+* Date last edited:
+*	Fri Feb 16 21:48:02 EST 2007
+**/
 
 function checkLogin() {
 	if (!defined("BROWSE")) {
@@ -7,7 +19,6 @@ function checkLogin() {
 		exit();
 	}
 }
-
 
 function getLogoList() {
 	$dirname="./templates/invoices/logos";
@@ -34,20 +45,6 @@ function getLogo($biller) {
 		return "./templates/invoices/logos/_default_blank_logo.png";
 	}
 }
-
-/*
-* Script: functions.php
-*	Contain all the functions used in Simple Invoices
-*
-* Authors:
-*	- Justin Kelly
-*
-* License:
-*	GNU GPL2 or above
-*
-* Date last edited:
-*	Fri Feb 16 21:48:02 EST 2007
-**/
 
 /**
 * Function: get_custom_field_label
@@ -101,6 +98,7 @@ function getCustomFieldLabels($type) {
 	return $cf;
 }
  */
+
 /**
 * Function: get_custom_field_name
 * 
@@ -110,17 +108,16 @@ function getCustomFieldLabels($type) {
 * field         - The custom field in question
 **/
 
-
 function get_custom_field_name($field) {
 
         global $LANG;
-        
 
-	//grab the last character of the field variable
+		//grab the first character of the field variable
         $get_cf_letter = $field[0];
         //grab the last character of the field variable
         $get_cf_number = $field[strlen($field)-1];
 	
+/*
 	if ($get_cf_letter == "b") {
 		$custom_field_name = $LANG['biller'];
 	}
@@ -133,11 +130,21 @@ function get_custom_field_name($field) {
 	if ($get_cf_letter == "p") {
 		$custom_field_name = $LANG['product'];
 	}
-	
-	$custom_field_name .= " :: " . $LANG["custom_field"] . " " . $get_cf_number ;
-        return $custom_field_name;
-}
+*/
 
+// functon to return false if invalid custom_field
+	$custom_field_name = "";
+	switch ($get_cf_letter) {
+		case "b":  $custom_field_name = $LANG['biller'];	break;
+		case "c":  $custom_field_name = $LANG['customer'];	break;
+		case "i":  $custom_field_name = $LANG['invoice'];	break;
+		case "p":  $custom_field_name = $LANG['products'];	break;
+		default :  $custom_field_name = false;
+	}
+	if (!$custom_field_name) $custom_field_name .= " :: " . $LANG["custom_field"] . " " . $get_cf_number ;
+
+    return $custom_field_name;
+}
 
 function calc_invoice_paid($inv_idField) {
 	global $LANG;
