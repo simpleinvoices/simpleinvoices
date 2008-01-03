@@ -78,8 +78,8 @@ for($i = 0;$invoice = getInvoices($sth);$i++) {
 	}
 	
 	//$url_pdf = "{$http_auth}{$_SERVER['HTTP_HOST']}{$httpPort}{$install_path}/index.php?module=invoices&view=templates/template&invoice={$invoice['id']}&action=view&location=pdf&type={$invoice['type_id']}";
-	$invid = $invoices[$i]['id'];
-	$invname = $invoices[$i][pref_inv_wording];
+	$invid = $invoice['id'];
+	$invname = $preference['pref_inv_wording'];
 	$url_pdf = urlPDF($invid);
 	$url_pdf_encoded = urlencode($url_pdf);
 	$url_for_pdf = "./include/pdf/html2ps.php?process_mode=single&renderfields=1&renderlinks=1&renderimages=1&scalepoints=1&pixels=$pdf_screen_size&media=$pdf_paper_size&leftmargin=$pdf_left_margin&rightmargin=$pdf_right_margin&topmargin=$pdf_top_margin&bottommargin=$pdf_bottom_margin&transparency_workaround=1&imagequality_workaround=1&output=1&location=pdf&pdfname=$invname$invid&URL=$url_pdf_encoded";

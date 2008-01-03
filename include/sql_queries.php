@@ -1555,8 +1555,9 @@ function checkFieldExists($table,$field) {
 function urlPDF($invoiceID) {
 
 	global $http_auth;
-	
-	$script = "/index.php?module=invoices&amp;view=templates/template&amp;invoice=".htmlspecialchars($invoiceID)."&amp;action=view&amp;location=pdf";
+//	html2ps does not like &amp; and htmlcharacters encoding - latter useless since InvoiceID comes from an integer field	
+//	$script = "/index.php?module=invoices&amp;view=templates/template&amp;invoice=".htmlspecialchars($invoiceID)."&amp;action=view&amp;location=pdf";
+	$script = "/index.php?module=invoices&view=templates/template&invoice=$invoiceID&action=view&location=pdf";
 	$port = "";
 	$dir = dirname($_SERVER['PHP_SELF']);
 
