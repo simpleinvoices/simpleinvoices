@@ -828,7 +828,7 @@ PRIMARY KEY  (`user_id`)) ;
 	// needs pgsql variant
         $patch['152']['patch'] = "ALTER TABLE `" . TB_PREFIX . "users` ALTER COLUMN `domain_id` TYPE int DEFAULT '1' NOT NULL USING to_number(`user_domain`, '999');";
     }
-    $patch['152']['date'] = "200080102";
+    $patch['152']['date'] = "20080102";
 
     $patch['153']['name'] = "Drop old auth_challenges table";
     if ($db_server == "mysql") {
@@ -837,7 +837,7 @@ PRIMARY KEY  (`user_id`)) ;
 	// needs pgsql variant
         $patch['153']['patch'] = "DROP TABLE `".TB_PREFIX."auth_challenges`;";
     }
-    $patch['153']['date'] = "200080102";
+    $patch['153']['date'] = "20080102";
 
     $patch['154']['name'] = "Create usergroup table";
     if ($db_server == "mysql") {
