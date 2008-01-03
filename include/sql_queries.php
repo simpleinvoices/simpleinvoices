@@ -26,7 +26,7 @@ function mysqlQuery($sqlQuery) {
 		//error_log("Insert_id: ".mysql_insert_id($conn));
 
 		if(LOGGING && (preg_match($pattern,$sqlQuery) == 0)) {
-			$sql = "INSERT INTO  `".TB_PREFIX."log` (`id`,`timestamp` ,  `userid` ,  `sqlquerie`, `last_id` ) VALUES (NULL,CURRENT_TIMESTAMP ,  '$userid',  '". addslashes (preg_replace('/\s\s+/', ' ', trim($sqlQuery)))."','".mysql_insert_id()."');";
+			$sql = "INSERT INTO  `".TB_PREFIX."log` (`timestamp` ,  `userid` ,  `sqlquerie`, `last_id` ) VALUES (CURRENT_TIMESTAMP ,  '$userid',  '". addslashes (preg_replace('/\s\s+/', ' ', trim($sqlQuery)))."','".mysql_insert_id()."');";
 			mysql_unbuffered_query($sql,$log);
 		}
 		return $query;
@@ -975,12 +975,12 @@ function checkFieldExists($table,$field)
 	}
 }
 
-function urlPDF($invoiceID,$invoiceTypeID) 
+function urlPDF($invoiceID) 
 {
 
 	global $http_auth;
 	
-	$script = "/index.php?module=invoices&view=templates/template&invoice=$invoiceID&action=view&location=pdf&type=$invoiceTypeID";
+	$script = "/index.php?module=invoices&view=templates/template&invoice=$invoiceID&action=view&location=pdf";
 	$port = "";
 	$dir = dirname($_SERVER['PHP_SELF']);
 
