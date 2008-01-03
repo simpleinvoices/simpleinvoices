@@ -5,16 +5,18 @@ if(LOGGING) {
 	$log_dbh = new PDO($db_server.':host='.$db_host.';dbname='.$db_name, $db_user, $db_password);
 }
 
+$dbh = new PDO($db_server.':host='.$db_host.';dbname='.$db_name, $db_user, $db_password);
+
 if ($db_server == 'mysql') {
 	//SC: May not really be 5...
 	$mysql = 5;
 }
-$dbh = new PDO($db_server.':host='.$db_host.';dbname='.$db_name, $db_user, $db_password);
 
-/**
- * Used for logging all queries
- */
-function mysqlQuery($sqlQuery) { dbQuery($sqlQuery); }
+function mysqlQuery($sqlQuery) {
+
+	dbQuery($sqlQuery);
+
+}
 
 /*
  * dbQuery is a variadic function that, in its simplest case, functions as the
@@ -28,11 +30,8 @@ function mysqlQuery($sqlQuery) { dbQuery($sqlQuery); }
  */
 
 function dbQuery($sqlQuery) {
-	global $log_dbh;
 	global $dbh;
 	global $db_server;
-	$pattern = "/[^a-z]*select/i";
-	$userid = 1;
 
 	$argc = func_num_args();
 	//error_log($sqlQuery);
@@ -46,26 +45,34 @@ function dbQuery($sqlQuery) {
 		}
 	}
 	if($sth && $sth->execute()) {
-		
-		//error_log("Insert_id: ".mysql_insert_id($conn));
 
-		if(LOGGING && (preg_match($pattern,$sqlQuery) == 0)) {
-			$last = null;
-			if (preg_match('/^(update|insert)/i', $sqlQuery)) {
-				$last = lastInsertId();
-			}
-			$sql = "INSERT INTO ".TB_PREFIX."log (timestamp,  userid, sqlquerie, last_id) VALUES (CURRENT_TIMESTAMP , ?, ?, ?)";
-			if ($db_server == 'mysql') {
-				$sql = "INSERT INTO ".TB_PREFIX."log (id, timestamp,  userid, sqlquerie, last_id) VALUES (NULL, CURRENT_TIMESTAMP , ?, ?, ?)";
-			}
-			$tth = $log_dbh->prepare($sql);
-			$tth->execute(array($userid, trim($sqlQuery), $last));
-			$tth = null;
-		}
+	//error_log("Insert_id: ".mysql_insert_id($conn));
+		dbLogger($sqlQuery);
 		return $sth;
-	}
+	} 
 	else {
 		echo "Dude, what happened to your query?:<br><br> ".htmlspecialchars($sqlQuery)."<br />".htmlspecialchars(end($sth->errorInfo()));
+	}
+}
+
+// Used for logging all queries
+function dbLogger($sqlQuery) {
+	global $log_dbh;
+	global $db_server;
+	$userid = 1;		// for now
+	
+	$selectpattern = "/[^a-z]*select/i";
+	$modifypattern = "'/^(update|insert)/i'";
+
+	if(LOGGING && (preg_match($selectpattern,$sqlQuery) == 0)) {	// Log only non selects - only db changes
+		$last = null;
+		if (preg_match($modifypattern, $sqlQuery)) {
+			$last = lastInsertId();
+		}
+		$sql = "INSERT INTO ".TB_PREFIX."log (timestamp,  userid, sqlquerie, last_id) VALUES (CURRENT_TIMESTAMP , ?, ?, ?)";
+		$tth = $log_dbh->prepare($sql);
+		$tth->execute(array($userid, trim($sqlQuery), $last));
+		$tth = null;
 	}
 }
 
@@ -96,6 +103,10 @@ function lastInsertId() {
  *     true.  Returning false indicates that if the INSERT or UPDATE were to
  *     proceed, bad data could be written to the database.
  */
+
+// In every instance of insertion into / updation  of the invoice table, we only pick from dropdown boxes which are sourced from the respective lookup tables.
+// Hence is this function necessary to be used at all?
+
 function _invoice_check_fk($biller, $customer, $type, $preference) {
 	global $dbh;
 
@@ -147,7 +158,6 @@ function _invoice_items_check_fk($invoice, $product, $tax, $update) {
 	//All good
 	return true;
 }
-
 
 function getCustomer($id) {
 	global $db_server;
@@ -265,7 +275,6 @@ function getCustomFieldLabels() {
 	return $customFields;
 }
  
-
 function getBillers() {
 	global $LANG;
 	global $dbh;
@@ -300,8 +309,6 @@ function getActiveBillers() {
 	
 	return $sth->fetchAll();
 }
-
-
 
 function getTaxRate($id) {
 	global $LANG;
@@ -345,12 +352,10 @@ function getInvoicePayments($id) {
 	return dbQuery($sql, ':id', $id);
 }
 
-
 function getCustomerPayments($id) {
 	$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b where ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and c.id = :id ORDER BY ap.id DESC";
 	return dbQuery($sql, ':id', $id);
 }
-
 
 function getPayments() {
 	$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b WHERE ap.ac_inv_id = iv.id AND iv.customer_id = c.id and iv.biller_id = b.id ORDER BY ap.id DESC";
@@ -375,8 +380,6 @@ function progressPayments($sth) {
 	
 	return $payments;
 }
-
-
 
 function getPaymentTypes() {
 	global $LANG;
@@ -423,7 +426,6 @@ function getActivePaymentTypes() {
 	return $paymentTypes;
 }
 
-
 function getProduct($id) {
 	global $LANG;
 	global $dbh;
@@ -442,7 +444,6 @@ function getProduct($id) {
 	
 	return mysqlQuery($sql);
 }*/
-
 
 function insertProduct($enabled=1,$visible=1) {
 	global $db_server;
@@ -492,7 +493,6 @@ function insertProduct($enabled=1,$visible=1) {
 		);
 }
 
-
 function updateProduct() {
 	
 	$sql = "UPDATE ".TB_PREFIX."products
@@ -520,7 +520,6 @@ function updateProduct() {
 		':id', $_GET[id]
 		);
 }
-			
 
 function getProducts() {
 	global $LANG;
@@ -553,15 +552,11 @@ function getActiveProducts() {
 	global $dbh;
 	global $db_server;
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."products WHERE enabled != 0 ORDER BY description";
-	if ($db_server == 'pgsql') {
-		$sql = "SELECT * FROM ".TB_PREFIX."products WHERE enabled ORDER BY description";
-	}
+	$sql = "SELECT * FROM ".TB_PREFIX."products WHERE enabled ORDER BY description";
 	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
 	return $sth->fetchAll();
 }
-
 
 function getTaxes() {
 	global $LANG;
@@ -584,7 +579,6 @@ function getTaxes() {
 	
 	return $taxes;
 }
-
 
 function getDefaultCustomer() {
 	global $dbh;
@@ -618,7 +612,6 @@ function getDefaultBiller() {
 	return $sth->fetch();
 }
 
-
 function getDefaultTax() {
 	global $dbh;
 	
@@ -648,6 +641,7 @@ function getDefaultLogging() {
 	$delete = $array['value']==1?$LANG['enabled']:$LANG['disabled'];
 	return $delete;
 }
+
 function getDefaultLanguage() {
 	global $LANG;
 	global $dbh;
@@ -707,7 +701,6 @@ function getInvoice($id) {
 	return $invoice;
 }
 
-
 function getInvoiceItems($id) {
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :id";
@@ -732,7 +725,6 @@ function getInvoiceItems($id) {
 	
 	return $invoiceItems;
 }
-
 
 function getSystemDefaults() {
 	global $dbh;
@@ -1011,7 +1003,6 @@ function searchCustomers($search) {
 	//print_r($customers);
 	return $customers;
 }
-
 
 function getInvoices(&$sth) {
 	global $config;
@@ -1344,12 +1335,10 @@ echo <<<EOD
 		</div id="Tabs">
 	</div id="Header">
 EOD;
-
 }
 
-
 function printEntries($menu,$id,$depth) {
-	
+
 	foreach($menu[$id] as $tempentry) {
 		for($i=0;$i<$depth;$i++) {
 			//echo "&nbsp;&nbsp;&nbsp;";
@@ -1406,7 +1395,6 @@ function searchInvoiceByDate($startdate,$enddate) {
 		);
 }
 
-
 /*
  * delete attempts to delete rows from the database.  This function currently
  * allows for the deletion of invoices, invoice_items, and products entries,
@@ -1418,6 +1406,7 @@ function searchInvoiceByDate($startdate,$enddate) {
  * foreign key checks.  Otherwise, the value returned by dbQuery's deletion
  * attempt is returned.
  */
+
 function delete($module,$idField,$id) {
 	global $dbh;
 
@@ -1513,11 +1502,9 @@ function maxInvoice() {
 //$max_invoice_id = $Array_max['max_inv_id'];
 };
 
-
-
 //in this file are functions for all sql queries
-function checkTableExists($table)
-{
+function checkTableExists($table) {
+
 	global $LANG;
 	global $dbh;
 	global $db_server;
@@ -1540,8 +1527,8 @@ function checkTableExists($table)
 	}
 }
 
-function checkFieldExists($table,$field)
-{
+function checkFieldExists($table,$field) {
+
 	global $LANG;
 	global $dbh;
 	global $db_server;
@@ -1565,8 +1552,8 @@ function checkFieldExists($table,$field)
 	}
 }
 
-function urlPDF($invoiceID,$invoiceTypeID) 
-{
+function urlPDF($invoiceID,$invoiceTypeID) {
+
 	global $http_auth;
 	
 	$script = "/index.php?module=invoices&amp;view=templates/template&amp;invoice=".htmlspecialchars($invoiceID)."&amp;action=view&amp;location=pdf&amp;type=".htmlspecialchars($invoiceTypeID);
@@ -1594,6 +1581,6 @@ function urlPDF($invoiceID,$invoiceTypeID)
 	}
 	
 	return $_SERVER['FULL_URL'];
-
 }
+
 ?>
