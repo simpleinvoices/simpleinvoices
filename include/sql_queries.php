@@ -1552,11 +1552,11 @@ function checkFieldExists($table,$field) {
 	}
 }
 
-function urlPDF($invoiceID,$invoiceTypeID) {
+function urlPDF($invoiceID) {
 
 	global $http_auth;
 	
-	$script = "/index.php?module=invoices&amp;view=templates/template&amp;invoice=".htmlspecialchars($invoiceID)."&amp;action=view&amp;location=pdf&amp;type=".htmlspecialchars($invoiceTypeID);
+	$script = "/index.php?module=invoices&amp;view=templates/template&amp;invoice=".htmlspecialchars($invoiceID)."&amp;action=view&amp;location=pdf";
 	$port = "";
 	$dir = dirname($_SERVER['PHP_SELF']);
 

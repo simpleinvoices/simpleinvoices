@@ -4,10 +4,10 @@
 * 	 Quick view of invoice template
 *
 * Authors:
-*	 Justin Kelly, Nicolas Ruflin
+*	 Justin Kelly, Nicolas Ruflin, Ap.Muthu
 *
 * Last edited:
-* 	 2007-07-18
+* 	 2008-01-03
 *
 * License:
 *	 GPL v2 or above
@@ -65,18 +65,29 @@
 <!-- #PDF end -->
 
 	<table align=center>
-	<tr>
-		<td class=account colspan=8>{$LANG.account_info}</td><td width=5%></td><td class="columnleft" width=5%></td><td class="account" colspan=6><a href='index.php?module=customers&view=details&id={$customer.id}&action=view'>{$LANG.customer_account}</a></td>
+	<tr class="account">
+		<td class="account" colspan="8">{$LANG.account_info}</td>
+		<td width=5%></td>
+		<td class="columnleft" width=5%></td>
+		<td class="account" colspan="6"><a href='index.php?module=customers&view=details&id={$customer.id}&action=view'>{$LANG.customer_account}</a></td>
 	</tr>
 	<tr>
-		<td class=account>{$LANG.total}:</td><td class=account>{$preference.pref_currency_sign}{$invoice.total|number_format:2}</td>
-		<td class=account><a href='index.php?module=payments&view=manage&id={$invoice.id}'>{$LANG.paid}:</a></td><td class=account>{$preference.pref_currency_sign}{$invoice.paid|number_format:2}</td>
-		<td class=account>{$LANG.owing}:</td><td class=account><u>{$preference.pref_currency_sign}{$invoice.owing|number_format:2}</u></td>
-		<td class=account>{$LANG.age}:</td><td class=account nowrap >{$invoice_age} <a href='docs.php?p=age&t=help' rel='gb_page_center[450, 450]'><img src="./images/common/help-small.png"></img></a></td>
-		<td></td><td class="columnleft"></td>
-		<td class="account">{$LANG.total}:</td><td class=account>{$preference.pref_currency_sign}{$invoice.total|number_format:2}</td>
-		<td class=account><a href='index.php?module=payments&view=manage&c_id={$customer.id}'>{$LANG.paid}:</a></td><td class=account>{$preference.pref_currency_sign}{$invoice.paid|number_format:2}</td>
-		<td class=account>{$LANG.owing}:</td><td class=account><u>{$preference.pref_currency_sign}{$invoice.owing|number_format:2}</u></td>
+		<td class="account">{$LANG.total}:</td>
+		<td class="account">{$preference.pref_currency_sign}{$invoice.total|number_format:2}</td>
+		<td class="account"><a href='index.php?module=payments&view=manage&id={$invoice.id}'>{$LANG.paid}:</a></td>
+		<td class="account">{$preference.pref_currency_sign}{$invoice.paid|number_format:2}</td>
+		<td class="account">{$LANG.owing}:</td>
+		<td class="account"><u>{$preference.pref_currency_sign}{$invoice.owing|number_format:2}</u></td>
+		<td class="account">{$LANG.age}:</td>
+		<td class="account" nowrap>{$invoice_age} <a href='docs.php?p=age&t=help' rel='gb_page_center[450, 450]'><img src="./images/common/help-small.png"></img></a></td>
+		<td></td>
+		<td class="columnleft"></td>
+		<td class="account">{$LANG.total}:</td>
+		<td class="account">{$preference.pref_currency_sign}{$invoice.total|number_format:2}</td>
+		<td class="account"><a href='index.php?module=payments&view=manage&c_id={$customer.id}'>{$LANG.paid}:</a></td>
+		<td class="account">{$preference.pref_currency_sign}{$invoice.paid|number_format:2}</td>
+		<td class="account">{$LANG.owing}:</td>
+		<td class="account"><u>{$preference.pref_currency_sign}{$invoice.owing|number_format:2}</u></td>
 	</tr>
 	</table>
 
@@ -194,7 +205,7 @@
 <hr></hr>
 
 
-{if $smarty.get.type == 1 }
+{if $invoice.type_id == 1 }
 
 	        <tr>
 	                <td colspan=6><br></td>
@@ -235,7 +246,7 @@
 
 {/if}
 
-{if $smarty.get.type == 2 || $smarty.get.type == 3 }
+{if $invoice.type_id == 2 || $invoice.type_id == 3 }
 
         <tr>
                 <td colspan=6><br></td>
@@ -244,7 +255,7 @@
 		<td colspan="6">
 		<table width="100%"> 
 	
-	{if $smarty.get.type == 2 }
+	{if $invoice.type_id == 2 }
 
             <tr>
                     <td colspan="6" class="details_screen align_right"><a href='#' class="show-itemised" onClick="$('.itemised').show();$('.show-itemised').hide();">{$LANG.show_details}</a><a href='#' class="itemised" onClick="$('.itemised').hide();$('.show-itemised').show();">{$LANG.hide_details}</a></td>
@@ -260,7 +271,7 @@
 	{/if}
 
 
-    {if $smarty.get.type == 3 }
+    {if $invoice.type_id == 3 }
 
 			<tr>
 					<td colspan="6" class="details_screen align_right"><a href='#' class="show-consulting" onClick="$('.consulting').show();$('.show-consulting').hide();">{$LANG.show_details}</a><a href='#' class="consulting" onClick="$('.consulting').hide();$('.show-consulting').show();">{$LANG.hide_details}</a></td>
@@ -278,7 +289,7 @@
 
 {foreach from=$invoiceItems item=invoiceItem }
 			
-		{if $smarty.get.type == 2 }
+		{if $invoice.type_id == 2 }
 	
 			<tr>
 	                <td>{$invoiceItem.quantity|number_format:0}</td>
@@ -306,7 +317,7 @@
 	{/if}	
 	
 
-	{if $smarty.get.type == 3 }
+	{if $invoice.type_id == 3 }
 
 			<tr>
 	            <td>{$invoiceItem.quantity|number_format:0}</td>

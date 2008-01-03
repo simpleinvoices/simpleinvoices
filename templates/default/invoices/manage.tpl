@@ -4,10 +4,10 @@
 * 	 Manage invoices template
 *
 * Authors:
-*	 Justin Kelly, Nicolas Ruflin, Ben Brown
+*	 Justin Kelly, Nicolas Ruflin, Ben Brown, Ap.Muthu
 *
 * Last edited:
-* 	 2007-09-22
+* 	 2008-01-03
 *
 * License:
 *	 GPL v2 or above
@@ -57,16 +57,16 @@
 		<tr class="index_table">
 			<td class="index_table" nowrap>
 				<!-- Quick View -->
-				<a class="index_table" title="{$LANG.quick_view_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}" href="index.php?module=invoices&view=quick_view&invoice={$invoice.invoice.id}&type={$invoice.invoiceType.inv_ty_id}"><img src="images/common/view.png" height="16" border="0" align="absmiddle" /></a>
+				<a class="index_table" title="{$LANG.quick_view_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}" href="index.php?module=invoices&view=quick_view&invoice={$invoice.invoice.id}"><img src="images/common/view.png" height="16" border="0" align="absmiddle" /></a>
 				
 				<!-- Edit View -->
-				<a class="index_table" title="{$LANG.edit_view_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}" href="index.php?module=invoices&view=details&invoice={$invoice.invoice.id}&action=view&type={$invoice.invoiceType.inv_ty_id}"><img src="images/common/edit.png" height="16" border="0" align="absmiddle" /></a>
+				<a class="index_table" title="{$LANG.edit_view_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}" href="index.php?module=invoices&view=details&invoice={$invoice.invoice.id}&action=view"><img src="images/common/edit.png" height="16" border="0" align="absmiddle" /></a>
 		{if $defaults.delete == '1'}
 				<!-- Delete -->
 				<a title="{$LANG.delete} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}" href="index.php?module=invoices&view=delete&stage=1&invoice={$invoice.invoice.id}"><img src="images/common/delete.png" height="16" border="0" align="absmiddle" /></a>
 		{/if}		
 				<!-- Print View -->
-				<a class="index_table" title="{$LANG.print_preview_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}" href="index.php?module=invoices&view=templates/template&invoice={$invoice.invoice.id}&action=view&location=print&type={$invoice.invoiceType.inv_ty_id}"><img src="images/common/printer.png" height="16" border="0" align="absmiddle" /></a>
+				<a class="index_table" title="{$LANG.print_preview_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}" href="index.php?module=invoices&view=templates/template&invoice={$invoice.invoice.id}&action=view&location=print"><img src="images/common/printer.png" height="16" border="0" align="absmiddle" /></a>
 			 	
 				<a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}" href="#" class="showdownloads"><img src="images/common/page_white_acrobat.png" height="16" border="0" align="absmiddle" /></a>
 				<div class="downloads" style="display:none;">
@@ -74,10 +74,10 @@
 					<a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id} {$LANG.export_pdf_tooltip}" class="index_table" href="{$invoice.url_for_pdf}"><img src="images/common/page_white_acrobat.png" height="16" border="0" align="absmiddle" /></a>
 				
 					<!--XLS -->
-					<a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording}{$invoice.invoice.id} {$LANG.export_xls_tooltip} {$spreadsheet} {$LANG.format_tooltip}" class="index_table" href="index.php?module=invoices&view=templates/template&invoice={$invoice.invoice.id}&action=view&type={$invoice.invoiceType.inv_ty_id}&location=print&export={$spreadsheet}"><img src="images/common/xls.gif" height="16" border="0" align="absmiddle" /></a>
+					<a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording}{$invoice.invoice.id} {$LANG.export_xls_tooltip} {$spreadsheet} {$LANG.format_tooltip}" class="index_table" href="index.php?module=invoices&view=templates/template&invoice={$invoice.invoice.id}&action=view&location=print&export={$spreadsheet}"><img src="images/common/xls.gif" height="16" border="0" align="absmiddle" /></a>
 				
 					<!-- DOC -->
-					<a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id} {$LANG.export_doc_tooltip} {$word_processor} {$LANG.format_tooltip}" class="index_table" href="index.php?module=invoices&view=templates/template&invoice={$invoice.invoice.id}&action=view&type={$invoice.invoiceType.inv_ty_id}&location=print&export={$word_processor}"><img src="images/common/doc.png" height="16" border="0" align="absmiddle" /></a>
+					<a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id} {$LANG.export_doc_tooltip} {$word_processor} {$LANG.format_tooltip}" class="index_table" href="index.php?module=invoices&view=templates/template&invoice={$invoice.invoice.id}&action=view&location=print&export={$word_processor}"><img src="images/common/doc.png" height="16" border="0" align="absmiddle" /></a>
 				</div>
 			 	<!-- Payment -->
 				<a title="{$LANG.process_payment} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}" class="index_table" href="index.php?module=payments&view=process&invoice={$invoice.invoice.id}&op=pay_selected_invoice"><img src="images/common/money_dollar.png" height="16" border="0" align="absmiddle" /></a>

@@ -7,7 +7,7 @@
 *	 Justin Kelly, Nicolas Ruflin, Ap.Muthu
 *
 * Last edited:
-* 	 2008-01-01
+* 	 2008-01-03
 *
 * License:
 *	 GPL v2 or above
@@ -16,11 +16,8 @@
 *	http://www.simpleinvoices.org
 */
 *}
-<form name="frmpost"
-	action="index.php?module=customers&view=save&id={$smarty.get.id}"
-	method="post">
 
-{if $smarty.get.action== 'view' }
+{if $smarty.get.action == 'view' }
 <b>{$LANG.customer} :: <a href="index.php?module=customers&view=details&id={$customer.id}&action=edit">{$LANG.edit}</a>
 </b>
 <hr></hr>
@@ -147,7 +144,7 @@
 			{foreach from=$invoices item=invoice}
 	
 			<tr class="index_table">
-				<td class="details_screen"><a href="index.php?module=invoices&view=quick_view&invoice={$invoice.id}&type={$invoice.type_id}">{$invoice.id}</a></td>
+				<td class="details_screen"><a href="index.php?module=invoices&view=quick_view&invoice={$invoice.id}">{$invoice.id}</a></td>
 				<td style="text-align:right" class="details_screen">{$invoice.total|number_format:2}</td>
 				<td style="text-align:right" class="details_screen">{$invoice.paid|number_format:2}</td>
 				<td style="text-align:right" class="details_screen">{$invoice.owing|number_format:2}</td>
@@ -173,7 +170,11 @@
 <a href="index.php?module=customers&view=details&id={$customer.id}&action=edit">{$LANG.edit}</a>
 {/if}
 
-{if $smarty.get.action== 'edit' }
+{if $smarty.get.action == 'edit' }
+
+<form name="frmpost"
+	action="index.php?module=customers&view=save&id={$customer.id}"
+	method="post">
 
 <div id="top"><b>{$LANG.customer_edit}</b></div>
 <hr></hr>
