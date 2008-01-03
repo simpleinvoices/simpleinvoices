@@ -841,7 +841,7 @@ PRIMARY KEY  (`user_id`)) ;
 
     $patch['154']['name'] = "Create usergroup table";
     if ($db_server == "mysql") {
-        $patch['155']['patch'] = "CREATE TABLE ".TB_PREFIX."user_group (
+        $patch['154']['patch'] = "CREATE TABLE ".TB_PREFIX."user_group (
 	    `id` int(11) NOT NULL auto_increment  PRIMARY KEY,
             `name` varchar(255) UNIQUE NOT NULL
             ) ENGINE=InnoDB;";
