@@ -31,18 +31,9 @@ $sql = "SELECT inv_ty_description AS type FROM ".TB_PREFIX."invoice_type WHERE i
 $sth = dbQuery($sql, ':type', $invoice['type_id']);
 $invoiceType = $sth->fetch();
 
-/* - TODO old code delete once working
-$url_pdf = "http://{$http_auth}$_SERVER[HTTP_HOST]{$httpPort}$install_path/index.php?module=invoices&view=templates/template&invoice=$invoice_id&action=view&location=pdf&style=$invoiceType[type]";
-//echo $url_pdf;
-$url_pdf_encoded = urlencode($url_pdf); 
-$url_for_pdf = "http://{$http_auth}$_SERVER[HTTP_HOST]{$httpPort}$install_path/include/pdf/html2ps.php?process_mode=single&renderfields=1&renderlinks=1&renderimages=1&scalepoints=1&pixels=$pdf_screen_size&media=$pdf_paper_size&leftmargin=$pdf_left_margin&rightmargin=$pdf_right_margin&topmargin=$pdf_top_margin&bottommargin=$pdf_bottom_margin&transparency_workaround=1&imagequality_workaround=1&output=2&location=pdf&pdfname=$preference[pref_inv_wording]$invoice[id]&URL=$url_pdf_encoded";
-*/
-	$url_pdf = urlPDF($invoice['id'],$invoice['type_id']);
-	$url_pdf_encoded = urlencode($url_pdf);
 	$pathparts = pathinfo($_SERVER["SCRIPT_NAME"]);
-	$url_for_pdf = $_SERVER["SERVER_NAME"].$pathparts['dirname']."/include/pdf/html2ps.php?process_mode=single&renderfields=1&renderlinks=1&renderimages=1&scalepoints=1&pixels=$pdf_screen_size&media=$pdf_paper_size&leftmargin=$pdf_left_margin&rightmargin=$pdf_right_margin&topmargin=$pdf_top_margin&bottommargin=$pdf_bottom_margin&transparency_workaround=1&imagequality_workaround=1&output=1&location=pdf&pdfname=$preference[pref_inv_wording]$invoice[id]&URL=$url_pdf_encoded";
+	$url_for_pdf = $_SERVER["SERVER_NAME"].$pathparts['dirname']."/pdfmaker.php?id=$invoice[id]";
       
-
 if ($_GET['stage'] == 2 ) {
 	if (extension_loaded('curl')) {
 		$ch = curl_init();
@@ -50,7 +41,6 @@ if ($_GET['stage'] == 2 ) {
 		curl_setopt($ch, CURLOPT_URL, $url_for_pdf);
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-
 		
 		// grab URL and pass it to the browser
 		$response = curl_exec($ch);
@@ -60,7 +50,6 @@ if ($_GET['stage'] == 2 ) {
 	}else{
 		$response = file_get_contents($url_for_pdf, "r");
 	}
-	
 	
 	//now save the stream to the out folder
 	file_put_contents("./cache/$preference[pref_inv_wording]$invoice[id].pdf", $response);
@@ -99,22 +88,24 @@ if ($_GET['stage'] == 2 ) {
 	$mail->Body    = "$_POST[email_notes]";
 	$mail->AltBody = "$_POST[email_notes]";
 
-	$results = $mail->Send();
-	unlink("./cache/$preference[pref_inv_wording]$invoice[id].pdf");
-	if(!$results)
+	if(!$mail->Send())
 	{
 	   echo "Message could not be sent. <p>";
 	   echo "Mailer Error: " . $mail->ErrorInfo;
 	   exit;
 	}
-	$message = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=invoices&view=manage><br>$preference[pref_inv_wording] $invoice[id] has been sent as a PDF";
+	unlink("./cache/$preference[pref_inv_wording]$invoice[id].pdf");
+	$message  = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=invoices&view=manage>";
+	$message .= "<br>$preference[pref_inv_wording] $invoice[id] has been sent as a PDF";
+
 	echo $block_stage3;
+
 	setInvoiceStatus($invoice["id"], 1);
 }
 
 //stage 3 = assemble email and send
 else if ($_GET['stage'] == 3 ) {
-	echo "How did you get here :)";
+	$message = "How did you get here :)";
 }
 
 $pageActive = "invoices";
