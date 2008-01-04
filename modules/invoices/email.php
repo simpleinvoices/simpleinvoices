@@ -30,17 +30,12 @@ $preference = getPreference($invoice['preference_id']);
 $defaults = getSystemDefaults();
 $invoiceItems = getInvoiceItems($invoice_id);
 
-
-//$url_pdf = "{$http_auth}{$_SERVER['HTTP_HOST']}{$httpPort}{$install_path}/index.php?module=invoices&view=templates/template&invoice={$invoice['id']}&action=view&location=pdf&type={$invoice['type_id']}";
-$url_pdf = urlPDF($invoice['id'],$invoice['type_id']);
-
-$url_pdf_encoded = urlencode($url_pdf);
-$url_for_pdf = "./include/pdf/html2ps.php?process_mode=single&renderfields=1&renderlinks=1&renderimages=1&scalepoints=1&pixels=$pdf_screen_size&media=$pdf_paper_size&leftmargin=$pdf_left_margin&rightmargin=$pdf_right_margin&topmargin=$pdf_top_margin&bottommargin=$pdf_bottom_margin&transparency_workaround=1&imagequality_workaround=1&output=1&location=pdf&pdfname=$preference[pref_inv_wording]$invoice[id]&URL=$url_pdf_encoded";
+$url_for_pdf = "./pdfmaker.php?id=$invoice[id]";
       
 if ($_GET['stage'] == 2 ) {
 
-	require_once('./include/pdf/pipeline.class.php');
-	parse_config_file('./include/pdf/html2ps.config');
+	require_once('./library/pdf/pipeline.class.php');
+	parse_config_file('./library/pdf/html2ps.config');
 
 	$g_config = array(
 	                 'cssmedia'     => 'screen',
@@ -71,8 +66,7 @@ if ($_GET['stage'] == 2 ) {
 	$pipeline->output_driver  = new OutputDriverFPDF($media);
 	$pipeline->destination    = new DestinationFile($preference[pref_inv_wording].$invoice[id]);
 
-
-
+	$url_pdf = urlPDF($invoice['id']);
 	$pipeline->process($url_pdf, $media); 
 
 	echo $block_stage2;
@@ -100,7 +94,7 @@ if ($_GET['stage'] == 2 ) {
 	}
 	$mail->WordWrap = 50;                                 // set word wrap to 50 characters
 	$spc2us_pref = str_replace(" ", "_", $preference[pref_inv_wording]); // Ap.Muthu added to accomodate spaces in inv pref name
-	$mail->AddAttachment("./cache/$spc2us_pref$invoice[id].pdf");         // add attachments
+	$mail->AddAttachment("./cache/$spc2us_pref$invoice[id].pdf");  // all tmp in ./cache         // add attachments
 
 	$mail->IsHTML(true);                                  // set email format to HTML
 
@@ -110,11 +104,12 @@ if ($_GET['stage'] == 2 ) {
 
 	if(!$mail->Send())
 	{
-	   $message .= "Message could not be sent. <p>";
-	   $message .= "Mailer Error: " . $mail->ErrorInfo;
+	   echo "Message could not be sent. <p>";
+	   echo "Mailer Error: " . $mail->ErrorInfo;
 	   exit;
 	}
-	echo "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=invoices&view=manage>";
+	unlink("./cache/$preference[pref_inv_wording]$invoice[id].pdf");
+	$message  = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=invoices&view=manage>";
 	$message .= "<br>$preference[pref_inv_wording] $invoice[id] has been sent as a PDF";
 
 	echo $block_stage3;
@@ -124,7 +119,7 @@ if ($_GET['stage'] == 2 ) {
 
 //stage 3 = assemble email and send
 else if ($_GET['stage'] == 3 ) {
-	$message .= "How did you get here :)";
+	$message = "How did you get here :)";
 }
 
 $pageActive = "invoices";
