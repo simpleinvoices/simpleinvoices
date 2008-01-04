@@ -72,29 +72,26 @@ http://en.wikipedia.org/wiki/Bruce_Doull
 /* PDF config options */
 #################
 #size in pixels (640,800,1024)
-$pdf_screen_size = 800;
+$pdf_screen_size 	= 800;
 #paper size (Letter,Legal,Executive,A0Oversize,A0,A1,A2,A3,A4,A5,B5,Folio,A6,A7,A8,A9,A10)
-$pdf_paper_size = "A4";
-#left margin of the pdf
-$pdf_left_margin = 15;
-#right margin of the pdf
-$pdf_right_margin = 15;
-#top margin of the pdf
-$pdf_top_margin = 15;
-#bottom margin of the pdf
-$pdf_bottom_margin = 15;
+$pdf_paper_size 	= "A4";
+#margins of the pdf
+$pdf_left_margin 	= 15;
+$pdf_right_margin 	= 15;
+$pdf_top_margin 	= 15;
+$pdf_bottom_margin 	= 15;
 
 ####################
 /* Other stuff*/
 ####################
 //TODO remove this before release
 //dev stuff
-$config_inc_style = "true";
+$config_inc_style 	= "true";
+$config_inc_old_js 	= "true";
 if ($smarty) {
 	$smarty->assign('config_inc_style', $config_inc_style);
+	$smarty->assign('config_inc_old_js', $config_inc_old_js);
 }
-$config_inc_old_js = "true";
-$smarty->assign('config_inc_old_js', $config_inc_old_js);
 
 #Error reporting
 #error_reporting(E_ALL);
