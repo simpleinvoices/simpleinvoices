@@ -662,7 +662,7 @@ PRIMARY KEY  (`user_id`)) ;
 	$patch['131']['patch'] = "ALTER TABLE `".TB_PREFIX."tax` CHANGE `tax_percentage` `tax_percentage` DECIMAL (10,3)  NULL";
 	$patch['131']['date'] = "200709";
 
-//old ones - start	
+//new MDV ones - start	
 	
 	$patch['132']['name'] = "Create customFieldCategories table";
 	$patch['132']['patch'] = "CREATE TABLE `".TB_PREFIX."customFieldCategories` (
@@ -832,10 +832,10 @@ PRIMARY KEY  (`user_id`)) ;
 
     $patch['153']['name'] = "Drop old auth_challenges table";
     if ($db_server == "mysql") {
-        $patch['153']['patch'] = "DROP TABLE `".TB_PREFIX."auth_challenges`;";
+        $patch['153']['patch'] = "DROP TABLE IF EXISTS `".TB_PREFIX."auth_challenges`;";
     } elseif ($db_server == "pgsql") {
 	// needs pgsql variant
-        $patch['153']['patch'] = "DROP TABLE `".TB_PREFIX."auth_challenges`;";
+        $patch['153']['patch'] = "DROP TABLE IF EXISTS `".TB_PREFIX."auth_challenges`;";
     }
     $patch['153']['date'] = "20080102";
 
@@ -877,12 +877,12 @@ NULL ,  '61',  '100',  'Custom Fields New', 'index.php?module=customFields&amp;v
 		
 $patch['153']['name'] = "Drop old defaults table";
     if ($db_server == "mysql") {
-        $patch['153']['patch'] = "DROP TABLE `".TB_PREFIX."defaults`;";
+        $patch['153']['patch'] = "DROP TABLE IF EXISTS `".TB_PREFIX."defaults`;";
     } elseif ($db_server == "pgsql") {
 	// needs pgsql variant
-        $patch['153']['patch'] = "DROP TABLE `".TB_PREFIX."defaults`;";
+        $patch['153']['patch'] = "DROP TABLE IF EXISTS `".TB_PREFIX."defaults`;";
     }
-    $patch['153']['date'] = "200080102";
+    $patch['153']['date'] = "20080102";
 		
 	$patch['65']['name'] = "Remove Primary Key frem sql_patchmanager";
 	$patch['65']['patch'] = "ALTER TABLE `".TB_PREFIX."sql_patchmanager` DROP PRIMARY KEY";
