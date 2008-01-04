@@ -2,10 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-	<div class="si_grey_background">
+	<head>
 	<title>Simple Invoices</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<head>
 	<!-- extJs2 Files -->	
 	<link rel="stylesheet" type="text/css" href="./include/ext2/resources/css/ext-all.css" />
  	<script type="text/javascript" src="./include/ext2/adapter/ext/ext-base.js"></script>
@@ -84,4 +83,5 @@
 {/if}
 </head>
 <body>
-<div id="Header">
+<div class="si_grey_background"></div>
+

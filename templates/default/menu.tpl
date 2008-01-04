@@ -1,3 +1,4 @@
+<div id="Header">
 		<ul class="adxm menu">
 			<li { if $pageActive == null} id="active" {/if}><a href="index.php">{$LANG.home}</a></li>
 			<li { if $pageActive == 'invoices'} id="active" {/if}><a href="index.php?module=invoices&view=manage">{$LANG.invoices} +</a>
@@ -141,7 +142,8 @@
 					</li>
 
 				</ul>
-			<li > <a href="#"><img src="./images/common/help-small.png"></a>
+			</li>
+			<li> <a href="#"><img src="./images/common/help-small.png"></a>
 				<ul>
 					<li>
 						<a href="docs.php?p=ReadMe">{$LANG.help} +</a>
