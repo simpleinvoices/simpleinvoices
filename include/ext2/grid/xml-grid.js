@@ -8,11 +8,12 @@
 
 Ext.onReady(function(){
 
+
     // create the Data Store
-    var ds = new Ext.data.Store({
+    var ds = new Ext.data.GroupingStore({
         // load using HTTP
         //url: 'sheldon2.xml',
-	url: 'http://localhost/simpleinvoices-dev/trunk/index.php?module=invoices&view=xml',
+		url: 'http://localhost/simpleinvoices-dev/trunk/index.php?module=invoices&view=xml',
         // the return will be XML, so lets set up a reader
         reader: new Ext.data.XmlReader({
                // records will have an "Item" tag
@@ -29,6 +30,7 @@ Ext.onReady(function(){
               'Biller','Customer','INV_TOTAL','INV_PAID','INV_OWING','Date','Aging','Type'
            ]),
 		// turn on remote sorting
+		//groupField: 'id',
         remoteSort: true
     });
 	
@@ -123,7 +125,12 @@ Ext.onReady(function(){
         viewConfig: {
              forceFit:true
         },
-
+		
+        view: new Ext.grid.GroupingView({
+            forceFit:true,
+            groupTextTpl: '{text} ({[values.rs.length]} {[values.rs.length > 1 ? "Items" : "Item"]})'
+        }),
+		
 		bbar: new Ext.PagingToolbar({
             pageSize: 25,
             store: ds,
