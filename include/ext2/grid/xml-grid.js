@@ -13,7 +13,7 @@ Ext.onReady(function(){
     var ds = new Ext.data.GroupingStore({
         // load using HTTP
         //url: 'sheldon2.xml',
-		url: 'http://localhost/simpleinvoices-dev/trunk/index.php?module=invoices&view=xml',
+		url: 'index.php?module=invoices&view=xml',
         // the return will be XML, so lets set up a reader
         reader: new Ext.data.XmlReader({
                // records will have an "Item" tag
@@ -39,42 +39,42 @@ Ext.onReady(function(){
 // pluggable renders
 	function renderActions(value, p, record){
            var quickViewLink = String.format(
-                '<!--0 Quick View --><a class="index_table" title="{$LANG.quick_view_tooltip} {$invoice.preference.pref_inv_wording} {8}" href="index.php?module=invoices&view=quick_view&invoice={1}&type={2}"> <img src="images/common/view.png" height="16" border="-5px0" padding="-4px" valign="bottom" /></a>',
+                '<!--0 Quick View --><a class="index_table" title="{$LANG.quick_view_tooltip} {$invoice.preference.pref_inv_wording} {8}" href="index.php?module=invoices&view=quick_view&invoice={1}"> <img src="images/common/view.png" height="16" border="-5px" padding="-4px" valign="bottom" /></a>',
 				value, 
 				record.id, 
 				record.data.type_id, 
 				record.data.forumid);
 		
 			var editViewLink = String.format(
-               '<!--1 Edit View --><a class="index_table" title="{$LANG.edit_view_tooltip} {$invoice.preference.pref_inv_wording} {8}" href="index.php?module=invoices&view=details&invoice={1}&action=view&type={2}"><img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>',
+               '<!--1 Edit View --><a class="index_table" title="{$LANG.edit_view_tooltip} {$invoice.preference.pref_inv_wording} {8}" href="index.php?module=invoices&view=details&invoice={1}&action=view"><img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>',
 				value, 
 				record.id, 
 				record.data.type_id, 
 				record.data.forumid);
 				
 			var printViewLink = String.format(
-				'<!--2 Print View --><a class="index_table" title="{$LANG.print_preview_tooltip} {$invoice.preference.pref_inv_wording} {8}" href="index.php?module=invoices&view=templates/template&invoice={1}&action=view&location=print&type={2}"><img src="images/common/printer.png" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>',
+				'<!--2 Print View --><a class="index_table" title="{$LANG.print_preview_tooltip} {$invoice.preference.pref_inv_wording} {8}" href="index.php?module=invoices&view=templates/template&invoice={1}&action=view&location=print"><img src="images/common/printer.png" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>',
 				value, 
 				record.id, 
 				record.data.type_id, 
 				record.data.forumid);
 
 			var pdfLink = String.format(
-				'<!--3 EXPORT TO PDF --><a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {8} {$LANG.export_pdf_tooltip}"	class="index_table" href="{$invoice.url_for_pdf}"><img src="images/common/page_white_acrobat.png" height="16" padding="-4px" border="-5px" valign="bottom" /><!-- pdf --></a>',
+				'<!--3 EXPORT TO PDF --><a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {8} {$LANG.export_pdf_tooltip}"	class="index_table" href="pdfmaker.php?id={1}"><img src="images/common/page_white_acrobat.png" height="16" padding="-4px" border="-5px" valign="bottom" /><!-- pdf --></a>',
 				value, 
 				record.id, 
 				record.data.type_id, 
 				record.data.forumid);				
 
 			var xlsLink = String.format(
-				'<!--4 XLS --><a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording}{8} {$LANG.export_xls_tooltip} {$spreadsheet} {$LANG.format_tooltip}" class="index_table" href="index.php?module=invoices&view=templates/template&invoice={1}&action=view&type={2}&location=print&export={$spreadsheet}"><img src="images/common/page_white_excel.png" height="16" border="0" padding="-4px" valign="bottom" /><!-- $spreadsheet --></a>',
+				'<!--4 XLS --><a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording}{8} {$LANG.export_xls_tooltip} {$spreadsheet} {$LANG.format_tooltip}" class="index_table" href="index.php?module=invoices&view=templates/template&invoice={1}&action=view&location=print&export={$spreadsheet}"><img src="images/common/page_white_excel.png" height="16" border="0" padding="-4px" valign="bottom" /><!-- $spreadsheet --></a>',
 				value, 
 				record.id, 
 				record.data.type_id, 
 				record.data.forumid);	
 
 			var docLink = String.format(
-				'<!--5 DOC --><a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {8} {$LANG.export_doc_tooltip} {$word_processor} {$LANG.format_tooltip}" class="index_table" href="index.php?module=invoices&view=templates/template&invoice={1}&action=view&type={2}&location=print&export={$word_processor}"><img src="images/common/page_white_word.png" height="16" border="0" padding="-4px" valign="bottom" /><!-- $word_processor --></a>',
+				'<!--5 DOC --><a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {8} {$LANG.export_doc_tooltip} {$word_processor} {$LANG.format_tooltip}" class="index_table" href="index.php?module=invoices&view=templates/template&invoice={1}&action=view&location=print&export={$word_processor}"><img src="images/common/page_white_word.png" height="16" border="0" padding="-4px" valign="bottom" /><!-- $word_processor --></a>',
 				value, 
 				record.id, 
 				record.data.type_id, 
