@@ -165,6 +165,7 @@
 						<ul>
 							<li><a href="docs.php?p=about">{$LANG.about}</a></li>
 							<li><a href="docs.php?p=ChangeLog">{$LANG.change_log}</a></li>
+							<li><a href="docs.php?p=lang_check">{$LANG.language}</a></li>
 							<li><a href="docs.php?p=Credits">{$LANG.credits}</a></li>
 							<li><a href="docs.php?p=gpl">{$LANG.license}</a></li>
 						</ul>
