@@ -816,8 +816,7 @@ PRIMARY KEY  (`user_id`)) ;
     if ($db_server == "mysql") {
         $patch['151']['patch'] = "ALTER TABLE `".TB_PREFIX."users` CHANGE `user_group` `group_id` INT  DEFAULT '1' NOT NULL;";
     } elseif ($db_server == "pgsql") {
-	// needs pgsql variant
-        $patch['151']['patch'] = "ALTER TABLE `".TB_PREFIX."users` ALTER COLUMN `group_id` TYPE int DEFAULT '1' NOT NULL USING to_number(`user_group`, '999');";
+        $patch['151']['patch'] = "ALTER TABLE ".TB_PREFIX."users RENAME COLUMN group TO group_id;";
     }
     $patch['151']['date'] = "20080102";
 
@@ -825,8 +824,7 @@ PRIMARY KEY  (`user_id`)) ;
     if ($db_server == "mysql") {
         $patch['152']['patch'] = "ALTER TABLE `" . TB_PREFIX . "users` CHANGE `user_domain` `domain_id` INT  DEFAULT '1' NOT NULL;";
     } elseif ($db_server == "pgsql") {
-	// needs pgsql variant
-        $patch['152']['patch'] = "ALTER TABLE `" . TB_PREFIX . "users` ALTER COLUMN `domain_id` TYPE int DEFAULT '1' NOT NULL USING to_number(`user_domain`, '999');";
+        $patch['152']['patch'] = "ALTER TABLE " . TB_PREFIX . "users RENAME COLUMN user_domain TO domain_id;";
     }
     $patch['152']['date'] = "20080102";
 
@@ -834,8 +832,10 @@ PRIMARY KEY  (`user_id`)) ;
     if ($db_server == "mysql") {
         $patch['153']['patch'] = "DROP TABLE IF EXISTS `".TB_PREFIX."auth_challenges`;";
     } elseif ($db_server == "pgsql") {
-	// needs pgsql variant
-        $patch['153']['patch'] = "DROP TABLE IF EXISTS `".TB_PREFIX."auth_challenges`;";
+        /* SC: auth_challenges creation was already removed from the postgres
+         *     schema before this patch
+         */
+        $patch['153']['patch'] = "SELECT 1+1";
     }
     $patch['153']['date'] = "20080102";
 
