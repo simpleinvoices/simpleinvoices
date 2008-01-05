@@ -816,7 +816,7 @@ PRIMARY KEY  (`user_id`)) ;
     if ($db_server == "mysql") {
         $patch['151']['patch'] = "ALTER TABLE `".TB_PREFIX."users` CHANGE `user_group` `group_id` INT  DEFAULT '1' NOT NULL;";
     } elseif ($db_server == "pgsql") {
-        $patch['151']['patch'] = "ALTER TABLE ".TB_PREFIX."users RENAME COLUMN group TO group_id;";
+        $patch['151']['patch'] = "ALTER TABLE ".TB_PREFIX."users RENAME COLUMN user_group TO group_id;";
     }
     $patch['151']['date'] = "20080102";
 
