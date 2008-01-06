@@ -331,7 +331,7 @@
 		<td class="tbl1-left tbl1-right" colspan="6" ><br></td>
 	</tr>
 	
-	{if $invoice.type_id == 3}
+	{if $invoice.type_id == 1}
 	<tr class="tbl1-left tbl1-right">
 		<td class="tbl1-left" colspan="2"></td>
 		<td align="right" colspan="3">{$LANG.gross_total}</td>
