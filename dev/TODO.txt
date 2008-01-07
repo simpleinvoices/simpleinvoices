@@ -7,9 +7,8 @@ Next Release :: TODO
 ##############################
 - aim Jan/Feb 08
  - Config.php - used YAML for the DB info : http://prematureoptimization.org/blog/archives/39/ - AP
- - URL link - get ride of the type id of an invoice being required in the url link - AP
  - manage pages redevelopment!!
- - manage invoices sql - check to make sure is 100% OK - AP
+ - manage invoices sql - check to make sure is 100% OK - Justin
  - Address fields in invoice templates - include comma after add 1 or 2 if other address field not null
  - users/groups/domains - make this happen!
  - user admin ui

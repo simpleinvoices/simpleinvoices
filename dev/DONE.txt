@@ -1,6 +1,7 @@
 ########
 DONE NOW
 ########
+ - URL link - get ride of the type id of an invoice being required in the url link - AP
  - lang: add new lang variables into all files : grep LANG_TODO - AP - done
  - def invoice template - mob phone not coming through - check all fields - AP
  - Spaces in Invoice Preference name creates PDF issue :http://simpleinvoices.org/forum/topic-384.html
