@@ -8,7 +8,9 @@ Next Release :: TODO
 - aim Jan/Feb 08
  - Config.php - used YAML for the DB info : http://prematureoptimization.org/blog/archives/39/ - AP
  - manage pages redevelopment!!
+ - move all sql out of individual files and into sql_queries.php (ie. login,php etc..)
  - manage invoices sql - check to make sure is 100% OK - Justin
+ - Simple Invoices Errors - make a function and make look all pretty (ie cache read only, no PDO, no PHP5.2, can't connect to Db etc..)
  - Address fields in invoice templates - include comma after add 1 or 2 if other address field not null
  - users/groups/domains - make this happen!
  - user admin ui
