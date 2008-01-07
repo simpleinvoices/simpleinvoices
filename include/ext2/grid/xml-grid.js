@@ -30,7 +30,7 @@ Ext.onReady(function(){
               'Biller','Customer','INV_TOTAL','INV_PAID','INV_OWING','Date','Aging','Type'
            ]),
 		// turn on remote sorting
-		//groupField: 'id',
+		groupField: 'Aging',
         remoteSort: true
     });
 	
