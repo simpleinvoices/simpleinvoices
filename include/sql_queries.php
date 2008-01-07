@@ -13,9 +13,7 @@ if ($db_server == 'mysql') {
 }
 
 function mysqlQuery($sqlQuery) {
-
 	dbQuery($sqlQuery);
-
 }
 
 /*
@@ -58,19 +56,33 @@ function dbQuery($sqlQuery) {
 // Used for logging all queries
 function dbLogger($sqlQuery) {
 	global $log_dbh;
+	global $dbh;
 	global $db_server;
 	$userid = 1;		// for now
 	
-	$selectpattern = "/[^a-z]*select/i";
-	$modifypattern = "'/^(update|insert)/i'";
-
-	if(LOGGING && (preg_match($selectpattern,$sqlQuery) == 0)) {	// Log only non selects - only db changes
+	if(LOGGING && (preg_match('/^\s*select/iD',$sqlQuery) == 0)) {
+		// Only log queries that could result in data/database
+		// modification
 		$last = null;
-		if (preg_match($modifypattern, $sqlQuery)) {
+		$tth = null;
+		$sql = "INSERT INTO ".TB_PREFIX."log (timestamp, userid, sqlquerie, last_id) VALUES (CURRENT_TIMESTAMP , ?, ?, ?)";
+
+		/* SC: Check for the patch manager patch loader.  If a
+		 *     patch is being run, avoid $log_dbh due to the
+		 *     risk of deadlock.
+		 */
+		$call_stack = debug_backtrace();
+		//SC: XXX Change the number back to 1 if returned to directly
+		//    within dbQuery.  The joys of dealing with the call stack.
+		if ($call_stack[2]['function'] == 'run_sql_patch') {
+			/* Running the patch manager, avoid deadlock */
+			$tth = $dbh->prepare($sql);
+		} elseif (preg_match('/^(update|insert)/iD', $sqlQuery)) {
 			$last = lastInsertId();
+			$tth = $log_dbh->prepare($sql);
+		} else {
+			$tth = $log_dbh->prepare($sql);
 		}
-		$sql = "INSERT INTO ".TB_PREFIX."log (timestamp,  userid, sqlquerie, last_id) VALUES (CURRENT_TIMESTAMP , ?, ?, ?)";
-		$tth = $log_dbh->prepare($sql);
 		$tth->execute(array($userid, trim($sqlQuery), $last));
 		$tth = null;
 	}
