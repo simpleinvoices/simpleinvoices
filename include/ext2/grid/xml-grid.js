@@ -8,6 +8,7 @@
 
 Ext.onReady(function(){
 
+  Ext.QuickTips.init();
 
     // create the Data Store
     var ds = new Ext.data.GroupingStore({
@@ -131,6 +132,7 @@ Ext.onReady(function(){
             groupTextTpl: '{text} ({[values.rs.length]} {[values.rs.length > 1 ? "Items" : "Item"]})'
         }),
 		
+
 		bbar: new Ext.PagingToolbar({
             pageSize: 25,
             store: ds,
@@ -138,17 +140,22 @@ Ext.onReady(function(){
             displayMsg: 'Displaying invoices {0} - {1} of {2}'
         }),
 		layout:'fit',
-        	             tbar:[{
+        	             tbar:[
+						 {
                              text:'New Invoice - Total style',
-                             tooltip:'Add a new row',
+                             tooltip:'Create a new invoice using the Total style',
+							 href:'index.php',
                              iconCls:'add'
                          }, '-', {
                              text:'New Invoice - Consulting style',
-                             tooltip:'Blah blah blah blaht',
+                             tooltip:'Create a new invoice using the Consulting style',
+							 href:'http://www.simpleinvoices.org',
+							 hrefTarget:'self',
                              iconCls:'option'
                          },'-',{
                              text:'New Invoice - Itemised style',
-                             tooltip:'Remove the selected item',
+                             tooltip:'Create a new invoice using the Itemised style',
+							 href:'index.php',
                              iconCls:'remove'
                          }]
 		
