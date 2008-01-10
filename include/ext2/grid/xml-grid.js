@@ -204,7 +204,7 @@ Ext.onReady(function(){
 						 new Ext.LinkButton({
 						     text:'New Invoice - Total style',
                              tooltip:'Create a new invoice using the Total style',
-							 href:'index.php',
+							 href:'index.php?module=invoices&view=total',
 							 IconCls: 'add'
 						})
 						 , '-',

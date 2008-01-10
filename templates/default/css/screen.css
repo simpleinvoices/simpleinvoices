@@ -457,6 +457,7 @@ th.sortable_rt {
 
 a:link,a:visited {
 	/*color:#03c;*/
+	color: #000;
 	text-decoration:none; }
 
 .title,.mytitle {
