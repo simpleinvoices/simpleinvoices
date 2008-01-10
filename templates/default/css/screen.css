@@ -105,12 +105,12 @@ td.details_screen {
 -------------------------------------------------*/
 .print_only {
 	display:none; }
-
+/*
 a:hover {
 	color:#fff;
 	background-color:#900;
 	text-decoration:none; }
-
+*/
 a.image:link,a.image:visited,a.image:hover {
 	border:none;
 	background:none;

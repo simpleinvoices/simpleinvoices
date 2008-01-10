@@ -10,6 +10,36 @@ Ext.onReady(function(){
 
 
   Ext.QuickTips.init();
+  
+  //Create a clickable button for the Manage pages - toolbar
+  Ext.LinkButton = Ext.extend(Ext.Button, 
+  {
+	template: new Ext.Template(
+	'<table border="0" cellpadding="0" cellspacing="0" class="x-btn-wrap"><tbody><tr>',
+	'<td class="x-btn-left"><i> </i></td><td class="x-btn-center"><a class="x-btn-text" href="{1}" target="{2}">{0}</a></td><td class="x-btn-right"><i> </i></td>',
+	"</tr></tbody></table>"),
+
+	onRender: function(ct, position)
+	{
+		var btn, targs = [this.text || ' ', this.href, this.target || "_self"];
+		
+		if(position){
+			btn = this.template.insertBefore(position, targs, true);
+		}else{
+			btn = this.template.append(ct, targs, true);
+		}
+		
+		var btnEl = btn.child("a:first");
+		btnEl.on('focus', this.onFocus, this);
+		btnEl.on('blur', this.onBlur, this);
+
+		this.initButtonEl(btn, btnEl);
+		btn.un(this.clickEvent, this.onClick, this);
+		Ext.ButtonToggleMgr.register(this);
+	}
+  });
+
+  
 
       var action1 = new Ext.Action({
         text: 'Help',
@@ -27,7 +57,7 @@ Ext.onReady(function(){
 	 function showWindow() {   
       var win = new Ext.Window({
          width:400,
-         height:200,
+         height:400,
          title:"Simple Invoices help",
 		 autoLoad: 'documentation/en-gb/help/age.html',
          autoScroll:true,
@@ -171,9 +201,17 @@ Ext.onReady(function(){
         	             tbar:[
 						 action1, 
 						 '-', 
+						 new Ext.LinkButton({
+						     text:'New Invoice - Total style',
+                             tooltip:'Create a new invoice using the Total style',
+							 href:'index.php',
+							 IconCls: 'add'
+						})
+						 , '-',
 						 {
                              text:'New Invoice - Total style',
                              tooltip:'Create a new invoice using the Total style',
+							 type: 'submit',
 							 href:'index.php',
                              iconCls:'add'
                          }, '-', {
