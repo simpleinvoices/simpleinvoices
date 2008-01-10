@@ -8,8 +8,36 @@
 
 Ext.onReady(function(){
 
+
   Ext.QuickTips.init();
 
+      var action1 = new Ext.Action({
+        text: 'Help',
+        handler: function(){
+			showWindow();
+			//Ext.MessageBox.alert('Simple Invoices help', 'This is a test help box thing.');
+			//Ext.Msg.prompt('Enter Text', 'Enter new text for Action 1:');
+			//href:'index.php';
+			//alert('test');
+            //Ext.msg('Click','You clicked on "Action 1".');
+        },
+        iconCls: 'blist'
+    });
+	
+	 function showWindow() {   
+      var win = new Ext.Window({
+         width:400,
+         height:200,
+         title:"Simple Invoices help",
+		 autoLoad: 'documentation/en-gb/help/age.html',
+         autoScroll:true,
+         modal:true
+         //html:'documentation/en-gb/help/age.html'
+         //animateTarget:"btnHello"
+      });
+      win.show()
+	}
+	
     // create the Data Store
     var ds = new Ext.data.GroupingStore({
         // load using HTTP
@@ -141,6 +169,8 @@ Ext.onReady(function(){
         }),
 		layout:'fit',
         	             tbar:[
+						 action1, 
+						 '-', 
 						 {
                              text:'New Invoice - Total style',
                              tooltip:'Create a new invoice using the Total style',
