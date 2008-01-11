@@ -85,12 +85,14 @@ Ext.onReady(function(){
                // The first needs mapping, the others are very basic
 		'actions',
                {name: 'id', mapping: 'id'},
-				{name: 'type_id', mapping: 'type_id'},
+		{name: 'type_id', mapping: 'type_id'},
+		{name: 'Aging', mapping: 'Aging'},
               'Biller','Customer','INV_TOTAL','INV_PAID','INV_OWING','Date','Aging','Type'
            ]),
-		// turn on remote sorting
+		// turn on defautl grouping by Aging field
 		groupField: 'Aging',
-        remoteSort: true
+		// turn on remote sorting
+        	remoteSort: true
     });
 	
 	ds.setDefaultSort('id', 'desc');
