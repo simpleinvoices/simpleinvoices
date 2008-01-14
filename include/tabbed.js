@@ -4,13 +4,59 @@ Ext.onReady(function(){
     // Group box containing actions
     var invoicePanel = new Ext.Panel({
     	frame:true,
-    	title: 'Invoices',
-    	collapsible:true,
-    	collapsed:true,
+    	title: 'Simple Invoices : Menu',
+    	collapsible:false,
+    	collapsed:false,
     	contentEl:'invoices',
-    	titleCollapse: true
+    	titleCollapse: false
     });
-    
+	
+var tbar1 = new Ext.Panel({
+ tbar: [{
+ iconCls:'add-feed',
+ text:'Add Feed',
+ handler: this.showWindow,
+ scope: this
+ },{
+ id:'delete',
+ iconCls:'delete-icon',
+ text:'Remove',
+ handler: function(){
+ var s = this.getSelectionModel().getSelectedNode();
+ if(s){
+ this.removeFeed(s.attributes.url);
+ }
+ },
+ scope: this
+ }],
+ html:"<br>sdfsdfsdfsdfsdf<br><br>"
+    });
+	
+var accordion = new Ext.Panel({
+    //title: 'Accordion Layout',
+    layout:'accordion',
+	collapsible:false,
+	collapsed:false,
+	//border:false,
+    defaults: {
+        // applied to each contained panel
+        //bodyStyle: 'padding:15px'
+    },
+    layoutConfig: {
+        // layout-specific configs go here
+        //titleCollapse: false,
+        animate: false,
+		collapsible:false,
+        activeOnTop: true
+    },
+    items: [{
+	    collapsible:false,
+        title: 'Panel 1',
+        html: '<p>Panel content!</p>'
+    }]
+});
+/*
+   
     // Group box containing actions
     var customerPanel = new Ext.Panel({
     	frame:true,
@@ -60,35 +106,54 @@ Ext.onReady(function(){
     	contentEl:'options',
     	titleCollapse: true
     });
-    
+    */
     // West Panel containing action box
     var actionPanel = new Ext.Panel({
     	id:'action-panel',
     	region:'west',
     	split:true,
     	collapsible: true,
+		margins:'0 0 0 5',
     	collapseMode: 'mini',
     	width:200,
     	minWidth: 150,
     	border: false,
     	baseCls:'x-plain',
-    	items: [invoicePanel,customerPanel,productPanel,billerPanel,paymentPanel,optionPanel]
+		//items:[tbar1]
+		items: [invoicePanel]
+    	//items: [invoicePanel,customerPanel,productPanel,billerPanel,paymentPanel,optionPanel]
     });
     
     // Main (Tabbed) Panel
     var tabPanel = new Ext.TabPanel({
 		region:'center',
 		deferredRender:false,
+		resizeTabs:true, // turn on tab resizing
+		enableTabScroll:true,
+		//defaults: {autoScroll:true},
+        //plugins: new Ext.ux.TabCloseMenu(),
 		autoScroll: true, 
 		margins:'0 4 4 0',
 		activeTab:0,
+
 		items:[{
 			id:'tab1',
 			contentEl:'tabs',
+			autoLoad: 'index.php',
     		title: 'Main',
     		closable:false,
     		autoScroll:true
-		}]
+		},
+		{
+			id:'help',
+			contentEl:'tabs',
+			autoLoad: 'docs.php?p=ReadMe#faqs-types',
+    		title: 'Documentation',
+    		closable:false,
+    		autoScroll:true
+		}
+		
+		]
     });
     
     
@@ -134,16 +199,16 @@ Ext.onReady(function(){
     		updateTab('tab1',"Manage Invoices","index.php?module=invoices&view=manage");
     	},
     	'new-invoice-total' : function(){
-    		updateTab('tab1',"New Invoice: Total","index.php?module=invoices&view=total");
+    		updateTab('tab-inv-total',"New Invoice: Total","index.php?module=invoices&view=total");
     	},
     	'new-invoice-itemised' : function(){
-    		updateTab('tab1',"New Invoice: Itemised","index.php?module=invoices&view=itemised");
+    		updateTab('tab-inv-itemised',"New Invoice: Itemised","index.php?module=invoices&view=itemised");
     	},
     	'new-invoice-consulting' : function(){
-    		updateTab('tab1',"New Invoice: Consulting","index.php?module=invoices&view=consulting");
+    		updateTab('tab-inv-consulting',"New Invoice: Consulting","index.php?module=invoices&view=consulting");
     	},
     	'invoice-types' : function(){
-    		updateTab('help-tab','Invoice Help',"./docs.php?p=ReadMe#faqs-types");
+    		updateTab('help-tab','Invoice Help',"docs.php?p=ReadMe#faqs-types");
     	},
     	'manage-customers' : function(){
     		updateTab('tab1',"Manage Customers","index.php?module=customers&view=manage");
