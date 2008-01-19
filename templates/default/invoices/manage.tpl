@@ -109,7 +109,7 @@
 	<td class="index_table">{$invoice.paid_format}</td>
 	-->
 	<td class="index_table">{$invoice.owing}</td>
-	<td class="index_table">{$invoice.overdue}</td>
+	<td class="index_table">{if $invoice.owing > 0}{$invoice.overdue}{/if}</td>
 	<td class="index_table">{$invoice.pref_inv_wording}</td>
 	<td class="index_table">{$invoice.date}</td>
 	</tr>

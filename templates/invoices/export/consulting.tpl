@@ -11,7 +11,7 @@
 	{foreach from=$invoiceItems item=invoiceItem}
 
 			<tr class="tbl1-left tbl1-right">
-				<td class="tbl1-left">{$invoiceItem.quantity|number_format:0}</td>
+				<td class="tbl1-left">{$invoiceItem.quantity|number_format:2}</td>
 				<td>{$invoiceItem.product.description}</td>
 				<td class="tbl1-right" colspan="4"></td>
 			</tr>

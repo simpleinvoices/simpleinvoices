@@ -172,7 +172,7 @@
 					</li>
 				</ul>
 			</li>
-			{if $authenticationOn}
+			{if $authenticationOn == "true"}
 				{if $smarty.session.db_is_logged_in == null}
 					<li><a href="login.php">{$LANG.login}</a></li>
 				{else}
