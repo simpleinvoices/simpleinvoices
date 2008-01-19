@@ -2,14 +2,44 @@
 
 if(LOGGING) {
 	//Logging connection to prevent mysql_insert_id problems. Need to be called before the second connect...
-	$log_dbh = new PDO($db_server.':host='.$db_host.';dbname='.$db_name, $db_user, $db_password);
+	$log_dbh = db_connector();
 }
 
-$dbh = new PDO($db_server.':host='.$db_host.';dbname='.$db_name, $db_user, $db_password);
+$dbh = db_connector();
 
 if ($db_server == 'mysql') {
 	//SC: May not really be 5...
 	$mysql = 5;
+}
+
+function db_connector() {
+
+global $db_server;
+global $db_host;
+global $db_user;
+global $db_password;
+global $db_name;
+global $db_mainlayer;
+
+  switch ($db_mainlayer) {
+	case "pdo":
+		$connlink = new PDO($db_server.':host='.$db_host.';dbname='.$db_name, $db_user, $db_password);
+		break;
+	default:
+		switch ($db_server) {
+			case "mysql":
+				$connlink = mysql_connect( $db_host, $db_user, $db_password );
+				mysql_select_db($db_name, $$skelconn);
+				break;
+			case "pgsql":
+				$connlink = pg_connect("host=$db_host, dbname=$db_name, user=$db_user, password=$db_password");
+				break;
+			default:
+				echo "Dude, what happened to your db connection config?:<br /><br />";
+				exit;
+		}	
+  }
+  return $connlink;
 }
 
 function mysqlQuery($sqlQuery) {

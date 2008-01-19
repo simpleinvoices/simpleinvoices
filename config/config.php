@@ -12,7 +12,8 @@ $db_user = "root";
 $db_password = "";
 define("TB_PREFIX","si_"); // default table prefix - old var $tb_prefix = "si_";
 //ini_set("display_errors","On");
-$db_layer = ""; // database abstraction layer type "", "pdo", "adodb", "pear" etc..- currently "" works and "pdo" is in implementation
+$db_mainlayer = "pdo"; // database abstraction layer type "", "pdo", "adodb", "pear" etc..- currently "pdo" works and "" is in implementation
+$db_layer = ""; // phpreports - database abstraction layer type "", "pdo", "adodb", "pear" etc..- currently "" works and "pdo" is in implementation
 
 #####################
 /* Authentication options */
