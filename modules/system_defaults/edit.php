@@ -188,7 +188,7 @@ else if ($_GET["submit"] == "preference_id") {
 		$display_block_preferences = "<p><em>{$LANG['no_preferences']}</em></p>";
 
 	} else {
-		$default = "invoice";
+		$default = "preference";
 		//has records, so display them
 		$display_block_preferences = <<<EOD
 	        <select name="value">

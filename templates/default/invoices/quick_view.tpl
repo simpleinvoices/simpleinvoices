@@ -292,7 +292,7 @@
 		{if $invoice.type_id == 2 }
 	
 			<tr>
-	                <td>{$invoiceItem.quantity|number_format:0}</td>
+	                <td>{$invoiceItem.quantity|number_format:2}</td>
 					<td>{$invoiceItem.product.description}</td>
 					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.unit_price|number_format:2}</td>
 					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|number_format:2}</td>
@@ -320,7 +320,7 @@
 	{if $invoice.type_id == 3 }
 
 			<tr>
-	            <td>{$invoiceItem.quantity|number_format:0}</td>
+	            <td>{$invoiceItem.quantity|number_format:2}</td>
 				<td>{$invoiceItem.product.description}</td>
 				<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.unit_price|number_format:2}</td>
 				<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|number_format:2}</td>
