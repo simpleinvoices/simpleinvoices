@@ -65,16 +65,17 @@ LIMIT $limit OFFSET $start";
 SELECT  iv.id,  
 	b.name AS Biller,  
 	c.name AS Customer,  
-	@invt:=(SELECT SUM(coalesce(ii.total,  0)) FROM " . TB_PREFIX . "invoice_items ii WHERE ii.invoice_id = iv.id) AS INV_TOTAL,  
-	@invp:=(SELECT SUM(coalesce(ac_amount, 0)) FROM " . TB_PREFIX . "account_payments ap WHERE ap.ac_inv_id = iv.id) AS INV_PAID,  
-	(SELECT (coalesce(@invt,0) - coalesce(@invp,0))) As INV_OWING,
+	(SELECT SUM(coalesce(ii.total,  0)) FROM " . TB_PREFIX . "invoice_items ii WHERE ii.invoice_id = iv.id) AS INV_TOTAL,  
+	(SELECT SUM(coalesce(ac_amount, 0)) FROM " . TB_PREFIX . "account_payments ap WHERE ap.ac_inv_id = iv.id) AS INV_PAID,  
+	(SELECT (coalesce(INV_TOTAL,0) - coalesce(INV_PAID,0))) As INV_OWING,
 	DATE_FORMAT(date,'%Y-%m-%d') AS Date,  
-	(SELECT DateDiff(now(),date)) AS Age,  
-	(CASE 	WHEN DateDiff(now(),date) <= 14 THEN '0-14'   
-		WHEN DateDiff(now(),date) <= 30 THEN '15-30'   
-		WHEN DateDiff(now(),date) <= 60 THEN '31-60'   
-		WHEN DateDiff(now(),date) <= 90 THEN '61-90'   
-		ELSE '90+'  END) AS Aging, 
+ 	(SELECT IF((INV_OWING = 0), 0, DateDiff(now(), date))) AS Age,
+	(SELECT (CASE 	WHEN Age = 0 THEN ''
+					WHEN Age <= 14 THEN '0-14'   
+					WHEN Age <= 30 THEN '15-30'   
+					WHEN Age <= 60 THEN '31-60'   
+					WHEN Age <= 90 THEN '61-90'   
+					ELSE '90+'  END)) AS Aging, 
 	iv.type_id As type_id,
 	pf.pref_description AS Type 
 FROM  	" . TB_PREFIX . "invoices iv	
