@@ -57,45 +57,106 @@ function mysqlQuery($sqlQuery) {
  *                 ':id', $id);
  */
 
-function dbQuery($sqlQuery) {
-	global $dbh;
+function nonPdoPrepare($sqlQuery, $binds) {
+	$sth = $sqlQuery;
+	array_shift($binds);
+	for ($i = 0; $i < count($binds); $i++) {
+		$sth = str_replace($binds[$i], $binds[++$i], $sth);
+	}
+	return $sth;
+}
+
+function nonPdoExecute($sqlQuery, $connlink) {
+// returns the result of the execution of a Non PDO prepared query  
+	global $db_server;
+	$sth = false;
+	switch ($db_server) {
+		case "mysql":
+			if (!($sth = mysql_query($sqlQuery, $connlink)))
+				echo "Dude, what happened to your query?:<br><br> ".$sqlQuery."<br />".mysql_error();
+			break;
+		case "pgsql":
+			if (!($sth = pg_query($connlink, $sqlQuery)))
+				echo "Dude, what happened to your query?:<br><br> ".$sqlQuery."<br />".pg_result_error();
+			break;
+		default:
+			echo "Dude, what happened to your db connection config for query?:<br /><br />";
+		}
+	return $sth;
+}
+
+function sql2array($sqlQuery, $connlink) {
 	global $db_server;
 
-	$argc = func_num_args();
-	//error_log($sqlQuery);
-	
-	$sth = $dbh->prepare($sqlQuery);
-	if ($argc > 1) {
-		$binds = func_get_args();
-		array_shift($binds);
-		for ($i = 0; $i < count($binds); $i++) {
-			$sth->bindValue($binds[$i], $binds[++$i]);
-		}
-	}
-	if($sth && $sth->execute()) {
+	$rsInArray = nonPdoExecute($sqlQuery, $connlink);
 
-	//error_log("Insert_id: ".mysql_insert_id($conn));
-		dbLogger($sqlQuery);
-		return $sth;
-	} 
-	else {
-		echo "Dude, what happened to your query?:<br><br> ".htmlspecialchars($sqlQuery)."<br />".htmlspecialchars(end($sth->errorInfo()));
+	switch ($db_server) {
+		case "mysql":
+			for($i=0;$rsInRow = mysql_fetch_array($resultSet);$i++) { $rsInArray[$i] = $rsInRow; }
+			break;
+		case "pgsql":
+			for($i=0;$rsInRow = pg_fetch_array($resultSet, $i);$i++) { $rsInArray[$i] = $rsInRow; }
+			break;
+		default:
+			echo "Dude, what happened to your db connection config for result set?:<br /><br />";
 	}
+	return $rsInArray;
+}
+
+function dbQuery($sqlQuery) {
+	global $dbh;
+	global $db_mainlayer;
+
+	$argc = func_num_args();
+	$binds = func_get_args();
+	$sth = false;
+
+	switch ($db_mainlayer) {
+		case "pdo":
+			// PDO SQL Preparation
+			$sth = $dbh->prepare($sqlQuery);
+			if ($argc > 1) {
+				array_shift($binds);
+				for ($i = 0; $i < count($binds); $i++) {
+					$sth->bindValue($binds[$i], $binds[++$i]);
+				}
+			}
+			// PDO Execution
+			if($sth && $sth->execute()) {
+				dbLogger($sqlQuery);
+			} else {
+				echo "Dude, what happened to your query?:<br><br> ".htmlspecialchars($sqlQuery)."<br />".htmlspecialchars(end($sth->errorInfo()));
+		// Earlier implementation did not return the $sth on error
+			}
+			break;
+		default:
+			// Non PDO SQL Preparation
+			if ($argc > 1) { $sth = nonPdoPrepare($sqlQuery, $binds); }
+			
+			// Non PDO Execution
+			$sth = nonPdoExecute($sqlQuery, $dbh);
+
+			// Logged here so that Preparation and Execution do not race with logger activity in continuous recursion
+			if ($sth) { dbLogger($sqlQuery); }
+	}
+// $sth now has either the PDO object or the SQL result or false on error.
+	return $sth;
 }
 
 // Used for logging all queries
 function dbLogger($sqlQuery) {
+	global $db_mainlayer;
 	global $log_dbh;
 	global $dbh;
-	global $db_server;
 	$userid = 1;		// for now
 	
 	if(LOGGING && (preg_match('/^\s*select/iD',$sqlQuery) == 0)) {
-		// Only log queries that could result in data/database
-		// modification
+		// Only log queries that could result in data/database  modification
+
 		$last = null;
 		$tth = null;
-		$sql = "INSERT INTO ".TB_PREFIX."log (timestamp, userid, sqlquerie, last_id) VALUES (CURRENT_TIMESTAMP , ?, ?, ?)";
+		if ($db_mainlayer == "pdo")
+			$sql = "INSERT INTO ".TB_PREFIX."log (timestamp, userid, sqlquerie, last_id) VALUES (CURRENT_TIMESTAMP , ?, ?, ?)";
 
 		/* SC: Check for the patch manager patch loader.  If a
 		 *     patch is being run, avoid $log_dbh due to the
@@ -104,16 +165,33 @@ function dbLogger($sqlQuery) {
 		$call_stack = debug_backtrace();
 		//SC: XXX Change the number back to 1 if returned to directly
 		//    within dbQuery.  The joys of dealing with the call stack.
-		if ($call_stack[2]['function'] == 'run_sql_patch') {
-			/* Running the patch manager, avoid deadlock */
-			$tth = $dbh->prepare($sql);
-		} elseif (preg_match('/^(update|insert)/iD', $sqlQuery)) {
-			$last = lastInsertId();
-			$tth = $log_dbh->prepare($sql);
-		} else {
-			$tth = $log_dbh->prepare($sql);
+
+		switch ($db_mainlayer) {
+			case "pdo":
+				if ($call_stack[2]['function'] == 'run_sql_patch') {
+					/* Running the patch manager, avoid deadlock */
+					$tth = $dbh->prepare($sql);
+				} elseif (preg_match('/^(update|insert)/iD', $sqlQuery)) {
+					$last = lastInsertId();
+					$tth = $log_dbh->prepare($sql);
+				} else {
+					$tth = $log_dbh->prepare($sql);
+				}
+				$tth->execute(array($userid, trim($sqlQuery), $last));
+				break;
+			default:
+			// Non PDO Logging
+				$connlink = $log_dbh;
+				if ($call_stack[2]['function'] == 'run_sql_patch') {
+					/* Running the patch manager, avoid deadlock */
+					$connlink = $dbh;
+				} elseif (preg_match('/^(update|insert)/iD', $sqlQuery)) {
+					$last = lastInsertId();
+				} else {
+				}
+				$sql = "INSERT INTO ".TB_PREFIX."log (timestamp, userid, sqlquerie, last_id) VALUES (CURRENT_TIMESTAMP , $userid, trim($sqlQuery), $last)";
+				$tth = nonPdoExecute($sql, $connlink);
 		}
-		$tth->execute(array($userid, trim($sqlQuery), $last));
 		$tth = null;
 	}
 }
@@ -126,17 +204,28 @@ function dbLogger($sqlQuery) {
  *
  */
 function lastInsertId() {
+	global $db_mainlayer;
 	global $db_server;
 	global $dbh;
+	
+	$retval = false;
 
 	if ($db_server == 'pgsql') {
 		$sql = 'SELECT lastval()';
 	} elseif ($db_server == 'mysql') {
 		$sql = 'SELECT last_insert_id()';
 	}
-	$sth = $dbh->prepare($sql);
-	$sth->execute();
-	return $sth->fetchColumn();
+	switch ($db_mainlayer) {
+		case "pdo":
+			$sth = $dbh->prepare($sql);
+			$sth->execute();
+			$retval = $sth->fetchColumn();
+			break;
+		default:
+			$sth = sql2array($sql, $dbh);
+			$retval = $sth[0];
+	}
+	return $retval;
 }
 
 /*
