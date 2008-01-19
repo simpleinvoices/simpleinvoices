@@ -18,7 +18,7 @@
 *}
 
 {if $smarty.get.action == 'view' }
-<b>{$LANG.customer} :: <a href="index.php?module=customers&view=details&id={$customer.id}&action=edit">{$LANG.edit}</a>
+<b>{$LANG.customer} :: <a href="index.php?module=customers&view=details&customer={$customer.id}&action=edit">{$LANG.edit}</a>
 </b>
 <hr></hr>
 <table align="center">
@@ -122,7 +122,7 @@
 					</td>
 					<td>{$customer.custom_field4}</td>
 				</tr>
-					{showCustomFields categorieId="2" itemId=$smarty.get.id }
+					{showCustomFields categorieId="2" itemId=$smarty.get.customer }
 
 			</table>
 		</p>
@@ -167,13 +167,13 @@
 
 
 <hr></hr>
-<a href="index.php?module=customers&view=details&id={$customer.id}&action=edit">{$LANG.edit}</a>
+<a href="index.php?module=customers&view=details&customer={$customer.id}&action=edit">{$LANG.edit}</a>
 {/if}
 
 {if $smarty.get.action == 'edit' }
 
 <form name="frmpost"
-	action="index.php?module=customers&view=save&id={$customer.id}"
+	action="index.php?module=customers&view=save&customer={$customer.id}"
 	method="post">
 
 <div id="top"><b>{$LANG.customer_edit}</b></div>
@@ -262,7 +262,7 @@
 		<td class="details_screen">{$LANG.notes}</td>
 		<td><textarea name="notes" rows="8" cols="50">{$customer.notes}</textarea></td>
 	</tr>
-		{showCustomFields categorieId="2" itemId=$smarty.get.id }
+		{showCustomFields categorieId="2" itemId=$smarty.get.customer }
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
 		<td>

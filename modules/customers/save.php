@@ -41,7 +41,7 @@ if ( $op === 'edit_customer' ) {
 		
 		if (updateCustomer()) {
 			$saved = true;
-			updateCustomFieldValues($_POST['categorie'],$_GET['id']);
+			updateCustomFieldValues($_POST['categorie'],$_GET['customer']);
 		}
 	}
 }

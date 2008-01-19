@@ -47,8 +47,8 @@
 	</thead>
 {foreach from=$customers item=customer}
 	<tr class="index_table">
-		<td class="index_table"><a title="{$LANG.view}" class="index_table" href="index.php?module=customers&view=details&id={$customer.id}&action=view"><img src="images/common/view.png" height="16" border="0" align="absmiddle"/></a>
-			<a title="{$LANG.edit}" class="index_table" href="index.php?module=customers&view=details&id={$customer.id}&action=edit"><img src="images/common/edit.png" height="16" border="0" align="absmiddle" /></a> </td>
+		<td class="index_table"><a title="{$LANG.view}" class="index_table" href="index.php?module=customers&view=details&customer={$customer.id}&action=view"><img src="images/common/view.png" height="16" border="0" align="absmiddle"/></a>
+			<a title="{$LANG.edit}" class="index_table" href="index.php?module=customers&view=details&customer={$customer.id}&action=edit"><img src="images/common/edit.png" height="16" border="0" align="absmiddle" /></a> </td>
 		<td class="index_table">{$customer.id}</td>
 		<td class="index_table">{$customer.name}</td>
 		<!-- <td class="index_table">{$customer.phone}</td> -->
