@@ -125,13 +125,13 @@ COMMENT ON TABLE si_products IS $$Products, required by all invoice line items$$
 INSERT INTO si_products (id, description, unit_price, custom_field1, custom_field2, custom_field3, custom_field4, notes, enabled, visible) VALUES 
 (1, 'IBM Netfinity 5000', 150.00, NULL, NULL, NULL, NULL, '', true, true);
 INSERT INTO si_products (id, description, unit_price, custom_field1, custom_field2, custom_field3, custom_field4, notes, enabled, visible) VALUES 
-(2, 'Accouting services - Barney Gumball (hours)', 140.00, 'CVF1', '', '', '', '', true, true);
+(2, 'Accounting services - Barney Gumball (hours)', 140.00, 'CVF1', '', '', '', '', true, true);
 INSERT INTO si_products (id, description, unit_price, custom_field1, custom_field2, custom_field3, custom_field4, notes, enabled, visible) VALUES 
 (3, 'Weekly ploughing service', 125.00, NULL, NULL, NULL, NULL, '', true, true);
 INSERT INTO si_products (id, description, unit_price, custom_field1, custom_field2, custom_field3, custom_field4, notes, enabled, visible) VALUES 
 (4, 'Bootleg homebrew', 15.50, NULL, NULL, NULL, NULL, '', true, true);
 INSERT INTO si_products (id, description, unit_price, custom_field1, custom_field2, custom_field3, custom_field4, notes, enabled, visible) VALUES 
-(5, 'Accomadation', 125.00, NULL, NULL, NULL, NULL, '', true, true);
+(5, 'Accomodation', 125.00, NULL, NULL, NULL, NULL, '', true, true);
 INSERT INTO si_products (id, description, unit_price, custom_field1, custom_field2, custom_field3, custom_field4, notes, enabled, visible) VALUES 
 (6, 'For ploughing services for the period 01 Jan - 01 Feb 2006', 145.00, NULL, NULL, NULL, NULL, '', false, false);
 SELECT setval('si_products_id_seq', 6);

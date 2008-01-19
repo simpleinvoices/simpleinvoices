@@ -400,10 +400,10 @@ CREATE TABLE `si_products` (
 
 INSERT INTO `si_products` (`id`, `description`, `unit_price`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`) VALUES 
 (1, 'IBM Netfinity 5000', 150.00, NULL, NULL, NULL, NULL, '', '1', 1),
-(2, 'Accouting services - Barney Gumball (hours)', 140.00, 'CVF1', '', '', '', '', '1', 1),
+(2, 'Accounting services - Barney Gumball (hours)', 140.00, 'CVF1', '', '', '', '', '1', 1),
 (3, 'Weekly ploughing service', 125.00, NULL, NULL, NULL, NULL, '', '1', 1),
 (4, 'Bootleg homebrew', 15.50, NULL, NULL, NULL, NULL, '', '1', 1),
-(5, 'Accomadation', 125.00, NULL, NULL, NULL, NULL, '', '1', 1),
+(5, 'Accomodation', 125.00, NULL, NULL, NULL, NULL, '', '1', 1),
 (6, 'For ploughing services for the period 01 Jan - 01 Feb 2006', 145.00, NULL, NULL, NULL, NULL, '', '0', 0);
 
 -- --------------------------------------------------------
