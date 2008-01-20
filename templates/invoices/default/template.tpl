@@ -336,7 +336,7 @@
 		<td align="right" colspan="3">{$LANG.gross_total}</td>
 {php}   global $invoice; $this->assign('invoice_gross_total', $invoice[total] - $invoice[total_tax]); {/php}
 {if $invoice.type_id == 1} <!-- Only Type 1 is a single entry - hence last row gross is valid as gross_total - see Invoice 2 in sample data-->
-		<td align="right" class="tbl1-right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|number_format:2}</td>
+		<td align="right" class="tbl1-right">{$preference.pref_currency_sign}{$invoiceItems.0.gross_total|number_format:2}</td>
 {else}
 		<td align="right" class="tbl1-right">{$preference.pref_currency_sign}{$invoice_gross_total|number_format:2}</td>
 {/if}

@@ -80,3 +80,9 @@
 		<tr class="tbl1-left tbl1-right">
 			<td class="tbl1-left tbl1-right" colspan="6" ><br></td>
 		</tr>
+{php}   global $invoice; $this->assign('invoice_gross_total', $invoice[total] - $invoice[total_tax]); {/php}
+		<tr>
+			<td colspan="3"></td>
+			<td align="right" colspan="2">{$LANG.gross_total}</td>
+			<td align="right">{$preference.pref_currency_sign}{$invoice_gross_total|number_format:2}</td>
+		</tr>	
