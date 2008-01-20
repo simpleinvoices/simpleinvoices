@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /*
 * Script: norwegian_NB_RC2.inc.php

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /*
 * Script: slovenščina_SI.inc.php
