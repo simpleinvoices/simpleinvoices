@@ -1,4 +1,4 @@
-﻿/*****************************************************************
+/*****************************************************************
  Page : livegrid_DE.js
  Description : LiveGrid text for German menus
  Translator: rainer@langheiter@.com

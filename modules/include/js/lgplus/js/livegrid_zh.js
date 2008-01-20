@@ -1,4 +1,4 @@
-﻿/*****************************************************************
+/*****************************************************************
  Page : livegrid_zh.js
  Description : LiveGrid text for CHINA menus
  Translator: Sam Shan at gz_shanming@yahoo.com
