@@ -124,10 +124,10 @@ INSERT INTO `si_preferences` (`pref_id`, `pref_description`, `pref_currency_sign
 
 INSERT INTO `si_products` (`id`, `description`, `unit_price`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`) VALUES 
 (1, 'IBM Netfinity 5000', 150.00, NULL, NULL, NULL, NULL, '', '1'),
-(2, 'Accouting services - Barney Gumball (hours)', 140.00, 'CVF1', '', '', '', '', '1'),
+(2, 'Accounting services - Barney Gumball (hours)', 140.00, 'CVF1', '', '', '', '', '1'),
 (3, 'Weekly ploughing service', 125.00, NULL, NULL, NULL, NULL, '', '1'),
 (4, 'Bootleg homebrew', 15.50, NULL, NULL, NULL, NULL, '', '1'),
-(5, 'Accomadation', 125.00, NULL, NULL, NULL, NULL, '', '1');
+(5, 'Accomodation', 125.00, NULL, NULL, NULL, NULL, '', '1');
 
 -- 
 -- Dumping data for table `si_tax`
