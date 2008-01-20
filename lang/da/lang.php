@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /*
 * Script: danish_da.inc.php
