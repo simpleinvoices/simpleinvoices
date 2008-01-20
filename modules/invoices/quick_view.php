@@ -51,6 +51,12 @@ for($i=1;$i<=4;$i++) {
 }
 $pageActive = "invoices";
 
+//Customer accounts sections
+$customerAccount = null;
+$customerAccount['total'] = calc_customer_total($customer['id']);
+$customerAccount['paid'] = calc_customer_paid($customer['id']);;
+$customerAccount['owing'] = $customerAccount['total'] - $customerAccount['paid'];
+
 $smarty -> assign('pageActive', $pageActive);
 $smarty -> assign("customField",$customField);
 $smarty -> assign("customFieldLabels",$customFieldLabels);
@@ -64,6 +70,7 @@ $smarty -> assign("invoice_type",$invoice_type);
 $smarty -> assign("invoice",$invoice);
 $smarty -> assign("word_processor",$word_processor);
 $smarty -> assign("spreadsheet",$spreadsheet);
+$smarty -> assign("customerAccount",$customerAccount);
 
 
 ?>

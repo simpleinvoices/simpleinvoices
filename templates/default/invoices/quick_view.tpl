@@ -83,11 +83,11 @@
 		<td></td>
 		<td class="columnleft"></td>
 		<td class="account">{$LANG.total}:</td>
-		<td class="account">{$preference.pref_currency_sign}{$invoice.total|number_format:2}</td>
+		<td class="account">{$preference.pref_currency_sign}{$customerAccount.total|number_format:2}</td>
 		<td class="account"><a href='index.php?module=payments&view=manage&c_id={$customer.id}'>{$LANG.paid}:</a></td>
-		<td class="account">{$preference.pref_currency_sign}{$invoice.paid|number_format:2}</td>
+		<td class="account">{$preference.pref_currency_sign}{$customerAccount.paid|number_format:2}</td>
 		<td class="account">{$LANG.owing}:</td>
-		<td class="account"><u>{$preference.pref_currency_sign}{$invoice.owing|number_format:2}</u></td>
+		<td class="account"><u>{$preference.pref_currency_sign}{$customerAccount.owing|number_format:2}</u></td>
 	</tr>
 	</table>
 
