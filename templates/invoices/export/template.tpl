@@ -62,11 +62,11 @@
 
 		<tr>
 				<td >{$LANG.total}: </td>
-				<td colspan="3">{$preference.pref_currency_sign}{$invoice.total_format|number_format:2}</td>
+				<td colspan="3">{$preference.pref_currency_sign}{$invoice.total|number_format:2}</td>
 		</tr>
 		<tr>
 				<td >{$LANG.paid}:</td>
-				<td colspan="3">{$preference.pref_currency_sign}{$invoice.paid_format|number_format:2}</td>
+				<td colspan="3">{$preference.pref_currency_sign}{$invoice.paid|number_format:2}</td>
 		</tr>
 		<tr>
 				<td nowrap >{$LANG.owing}:</td>
