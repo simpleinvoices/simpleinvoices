@@ -118,7 +118,7 @@ function lastInsertId() {
 	}
 	$sth = $dbh->prepare($sql);
 	$sth->execute();
-	$return $sth->fetchColumn();
+	return $sth->fetchColumn();
 }
 
 /*
