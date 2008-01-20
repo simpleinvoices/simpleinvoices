@@ -70,7 +70,7 @@
 		</tr>
 		<tr>
 				<td nowrap >{$LANG.owing}:</td>
-				<td colspan="3">{$preference.pref_currency_sign}{$invoice.owing|number_format    :2}</td>
+				<td colspan="3">{$preference.pref_currency_sign}{$invoice.owing|number_format:2}</td>
 		</tr>
 
 </table>
