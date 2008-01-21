@@ -40,6 +40,7 @@ Next Release :: TODO
 ###############################
 Next Release + 1 (NR+1) :: TODO
 ###############################
+ - Pear::auth - remove our crappy auth system and replace with somethign kickass like pear auth or zend acl/auth - AP
  - reports : add export to .xls format NR+1 - AP
  - docs.php: merge docs.php into the normal system
  - choose automatic language (need to rename language files/subfolder). We should use this standards (first we can start with only 2 chars variant)
