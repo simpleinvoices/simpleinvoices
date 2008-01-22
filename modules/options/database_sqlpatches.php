@@ -35,49 +35,52 @@ function runPatches() {
 	global $dbh;
 	#DEFINE SQL PATCH
 
+	$display_block = "";
+
 	$sql = "SHOW TABLES LIKE '".TB_PREFIX."sql_patchmanager'";
 	if ($db_server == 'pgsql') {
 		$sql = "SELECT 1 FROM pg_tables WHERE tablename ='".TB_PREFIX."sql_patchmanager'";
 	}
 	$sth = dbQuery($sql);
 	$rows = $sth->fetchAll();
+	$display_block .= <<<EOD
+		<br>
+		<b>Simple Invoices :: Database Upgrade Manager</b><br />
+		<hr />
+		<br>The database patches have now been applied. You can now start working with Simple Invoices.<br />
+		<p align=middle><br /><a href="index.php"><font color="green">HOME</font></a></p>
+<table align='center'>
+EOD;
+
 	if(count($rows) == 1) {
 
-		$display_block = "<table align='center'>";
 
 		if ($db_server == 'pgsql') {
 			// Yay!  Transactional DDL
 			$dbh->beginTransaction();
 		}
 		for($i=0;$i < count($patch);$i++) {
-			run_sql_patch($i,$patch[$i]);
+//			run_sql_patch($i,$patch[$i]); // use instead of following line if patch application status display is to be suppressed
+			$display_block .= run_sql_patch($i,$patch[$i]);
 		}
 		if ($db_server == 'pgsql') {
 			// Yay!  Transactional DDL
 			$dbh->commit();
 		}
 
-		$display_block .= <<<EOD
-		<br>
-		<b>Simple Invoices :: Database Upgrade Manager</b><br />
-		<hr />
-		<tr><td><br>The database patches have now been applied. You can now start working with Simple Invoices.<br /><p align=middle><br /><a href="index.php">HOME</a></p></tr>
-		</table>
+		$display_block .= "\n</table>";
 
-EOD;
 	//exit();
-	$refresh = '<meta http-equiv="refresh" content="2;url=index.php">';
+	$refresh = '<meta http-equiv="refresh" content="5;url=index.php">';
 
 	} else {
 
-
-		$display_block .= "<table align='center'>";
-		$display_block .= "<br><br><tr><td>Step 1 - This is the first time Database Updates has been run</td></tr><br>";
+		$display_block .= "\n<tr><td><br><br>Step 1 - This is the first time Database Updates has been run<br></td></tr>";
 		
 		initialise_sql_patch();
 		
-		$display_block .= "<tr><td><br>Now that the Database upgrade table has been initialised, please go back to the Database Upgrade Manger page by clicking <a href='index.php?module=options&amp;view=database_sqlpatches'>HERE</a> to run the remaining patches</td></tr>";
-		$display_block .= "</table></div>";
+		$display_block .= "\n<tr><td><br>Now that the Database upgrade table has been initialised, please go back to the Database Upgrade Manger page by clicking <a href='index.php?module=options&amp;view=database_sqlpatches'>HERE</a> to run the remaining patches</td></tr>";
+		$display_block .= "\n</table>";
 
 	}
 	
@@ -93,7 +96,7 @@ function donePatches() {
 		<br>
 		<b>Simple Invoices :: Database Upgrade Manager</b><br />
 		<hr />
-		<tr><td><br>The database patches are uptodate. You can continue working with Simple Invoices.<br /><p align=middle><br /><a href="index.php">HOME</a></p></tr>
+		<tr><td><br>The database patches are uptodate. You can continue working with Simple Invoices.<br /><p align=middle><br /><a href="index.php"><font color="green">HOME</font></a></p></tr>
 		</table>
 
 EOD;
@@ -118,8 +121,14 @@ function listPatches() {
 		<hr></hr>
 
 		<table align="center">
-			<tr></i><tr><td><br>The list below describes which patches have and have not been applied to the database, the aim is to have them all applied.  If there are patches that have not been applied to the Simple Invoices database, please run the Update database by clicking update </td></tr><tr align="center"><td><p class='align_center'><br><a href='index.php?case=run'>UPDATE</a></p></td></tr></table><br>
-<a href="docs.php?t=help&amp;p=text" rel="gb_page_center[450, 450]"><font color="red"><img src="./images/common/important.png"></img>Warning:</font></a>
+			<tr><td><br>The list below describes which patches have and have not been applied to the database, the aim is to have them all applied.  If there are patches that have not been applied to the Simple Invoices database, please run the Update database by clicking update </td></tr>
+			<tr align="center"><td><p class='align_center'><br><a href='index.php?case=run'>UPDATE</a></p></td></tr>
+		</table>
+		<br>
+		<a href="docs.php?t=help&amp;p=text" rel="gb_page_center[450, 450]">
+		<img src="./images/common/important.png"></img><font color="red">Warning:</font>
+		</a>
+
 <table align="center">
 EOD;
 
@@ -128,31 +137,23 @@ EOD;
 			$patch_name = htmlspecialchars($patch[$p]['name']);
 			$patch_date = htmlspecialchars($patch[$p]['date']);
 			if(check_sql_patch($p,$patch[$p]['name'])) {
-				$display_block .= "<tr><td>SQL patch $p, $patch_name <i>has</i> already been applied in release $patch_date</td></tr>";
+				$display_block .= "\n<tr><td>SQL patch $p, $patch_name <i>has</i> already been applied in release $patch_date</td></tr>";
 			}
 			else {
-				$display_block .= "<tr><td>SQL patch $p, $patch_name <b>has not</b> been applied to the database</td></tr>";
+				$display_block .= "\n<tr><td>SQL patch $p, $patch_name <b>has not</b> been applied to the database</td></tr>";
 			}	
 		}
 
-		$display_block .= "</table>";
+		$display_block .= "\n</table>";
 	global $smarty;
 	$smarty-> assign("display_block",$display_block);
-	/*}
-	else {
-		echo <<<EOD
-		<table align="center">
-          <tr><td><br>This is the first time that the Database Upgrade process is to be run.  The first step in the process is to Initialse the database upgrade table. To do this click the Initialise database button<br><br><a href='index.php?module=options&amp;view=database_sqlpatches&amp;op=run_updates'>INITIALISE DATABASE UPGRADE</a></td></tr>
-		</table>
-EOD;
-	}*/
-
 }
 
 
 
 function check_sql_patch($check_sql_patch_ref, $check_sql_patch_field) {
-    	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager WHERE sql_patch_ref = :patch" ;
+
+   	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager WHERE sql_patch_ref = :patch" ;
 
 	$sth = dbQuery($sql, ':patch', $check_sql_patch_ref) or die(htmlspecialchars(end($dbh->errorInfo())));
 
@@ -169,6 +170,7 @@ function check_sql_patch($check_sql_patch_ref, $check_sql_patch_field) {
 function run_sql_patch($id, $patch) {
 	global $dbh;
 	global $db_server;
+	$display_block = "";
 
 	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager WHERE sql_patch_ref = :id" ;
 	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
@@ -179,10 +181,7 @@ function run_sql_patch($id, $patch) {
 	#forget about it!! the patch as its already been run
 	if (count($sth->fetchAll()) != 0)  {
 
-		$display_block = <<<EOD
-		</div id="header">
-		<tr><td>Skipping SQL patch $escaped_id, $patch_name as it <i>has</i> already been applied</td></tr>
-EOD;
+		$display_block .= "\n	<tr><td>Skipping SQL patch $escaped_id, $patch_name as it <i>has</i> already been applied</td></tr>";
 	}
 	else {
 		
@@ -191,9 +190,8 @@ EOD;
 		dbQuery($patch['patch']) or die(htmlspecialchars(end($dbh->errorInfo())));
 		
 
-		$display_block  = <<<EOD
-			<tr><td>SQL patch $escaped_id, $patch_name <i>has</i> been applied to the database</td></tr>
-EOD;
+		$display_block  = "\n	<tr><td>SQL patch $escaped_id, $patch_name <i>has</i> been applied to the database</td></tr>";
+
 		# now update the ".TB_PREFIX."sql_patchmanager table
 		
 		
@@ -206,13 +204,11 @@ EOD;
 		if($id == 126) {
 			patch126();
 		} elseif($id == 137) {
-			convertCustomFields();
+			convertInitCustomFields();
 		}
-		$display_block .= "<tr><td>SQL patch $escaped_id, $patch_name <b>has</b> been applied</td></tr>";
+		$display_block .= "\n	<tr><td>SQL patch $escaped_id, $patch_name <b>has</b> been applied</td></tr>";
 	}
-	
-	//global $smarty;
-	//$smarty-> assign("display_block",$display_block);
+	return $display_block;
 }
 
 
@@ -261,7 +257,8 @@ function patch126() {
 
 
 
-function convertCustomFields() {
+function convertInitCustomFields() {
+// This function is exactly the same as convertCustomFields() in ./include/customFieldConversion.php but without the print_r and echo output while storing
 	/* check if any value set -> keeps all data for sure */
 	global $dbh;
 	$sql = "SELECT * FROM ".TB_PREFIX."custom_fields";
@@ -319,11 +316,11 @@ function convertCustomFields() {
 			}
 			
 			if($store) {
-				print_r($res);
-				echo "<br />".$sql."   ".$res['id'];
+//				print_r($res);
+//				echo "<br />".$sql."   ".$res['id'];
 				
 				//create new text custom field
-				saveCustomField(3,$cat,$custom['cf_custom_field'],$custom['cf_custom_label']);
+				saveInitCustomField(3,$cat,$custom['cf_custom_field'],$custom['cf_custom_label']);
 				$id = lastInsertId();
 				error_log($id);
 				
@@ -344,4 +341,11 @@ function convertCustomFields() {
 	}
 }
 
+function saveInitCustomField($id, $category, $name, $description) {
+// This function is exactly same as saveCustomField() in ./include/manageCustomFields.php but without the final echo output
+	$sql = "INSERT INTO ".TB_PREFIX."customFields  (pluginId, categorieId, name, description) 
+		VALUES (:id, :category, :name, :description)";
+	dbQuery($sql, ':id', $id, ':category', $category, ':name', $name, ':description', $description);
+//	echo "SAVED<br />";
+}
 ?>
