@@ -220,6 +220,22 @@ function calc_invoice_tax($invoice_id) {
 	return $tax['total_tax'];
 }
 
+function dropDown($choiceArray, $defVal) {
+
+	$dropDown = '<select name="value">' . "\n";
+
+	foreach ($choiceArray as $key => $value)
+	{
+		if ($key == $defVal) {
+			$dropDown .= "\n" . '<OPTION SELECTED style="font-weight: bold" value='.$key.'>'.$value.'</OPTION>';
+		} else {
+			$dropDown .= "\n" . '<OPTION '.$selected.' value='.$key.'>'.$value.'</OPTION>';
+		}
+	}
+	$dropDown .= "\n</select>";
+
+	return $dropDown;
+}
 
 /**
 * Function: show_custom_field

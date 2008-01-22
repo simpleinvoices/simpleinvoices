@@ -248,47 +248,17 @@ EOD;
 }
 else if ($_GET["submit"] == "delete") {
 
-	$deleteArray = array(0 => $LANG['disabled'], 1=>$LANG['enabled']);
-
+	$array = array(0 => $LANG[disabled], 1=>$LANG[enabled]);
 	$default = "delete";
-	//has records, so display them
-
-	$dropDown = <<<EOD
-         <select name="value">
-EOD;
-
-	foreach ($deleteArray as $key => $value)
-	{
-		$key == $defaults[delete]?$selected ="selected":$selected="";
-		$dropDown .= '<OPTION '.$selected.' value='.$key.'> '.$value.'';
-	} 
-
-	$dropDown .= "</select>";
-	$value = $dropDown;
-	$description = "{$LANG['delete']}";
-
+	$description = $LANG[logging];
+	$value = dropDown($array, $defaults[$default]);
 }
 else if ($_GET['submit'] == "logging") {
 
 	$array = array(0 => $LANG[disabled], 1=>$LANG[enabled]);
-
 	$default = "logging";
-	//has records, so display them
-
-	$dropDown = <<<EOD
-         <select name="value">
-EOD;
-
-	foreach ($array as $key => $value)
-	{
-		$key == $defaults[logging]?$selected ="selected":$selected="";
-		$dropDown .= '<OPTION '.$selected.' value='.$key.'> '.$value.'';
-	} 
-
-	$dropDown .= "</select>";
-
 	$description = $LANG[logging];
-	$value = $dropDown;
+	$value = dropDown($array, $defaults[$default]);
 }
 
 else if($_GET['submit'] == "language") {
