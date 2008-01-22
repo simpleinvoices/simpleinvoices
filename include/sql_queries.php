@@ -1231,8 +1231,46 @@ function getTopBiller() {
   return $biller;
 }
 
+function insertTaxRate() {
+	global $LANG;
 
+	$sql = "INSERT into ".TB_PREFIX."tax
+				(tax_description, tax_percentage, tax_enabled)
+			VALUES
+				(:description, :percent, :enabled)";
+	
+	$display_block = $LANG['save_tax_rate_success'];
+	if (!(dbQuery($sql,
+		':description', $_POST['tax_description'],
+		':percent', $_POST['tax_percentage'],
+		':enabled', $_POST['tax_enabled']))) {
+		$display_block = $LANG['save_tax_rate_failure'];
+	}
+	return $display_block;
+}
 
+function updateTaxRate() {
+	global $LANG;
+	
+	$sql = "UPDATE
+				".TB_PREFIX."tax
+			SET
+				tax_description = :description,
+				tax_percentage = :percentage,
+				tax_enabled = :enabled
+			WHERE
+				tax_id = :id";
+
+	$display_block = $LANG['save_tax_rate_success'];
+	if (!(dbQuery($sql,
+		':description', $_POST['tax_description'],
+	  	':percentage', $_POST['tax_percentage'],
+	  	':enabled', $_POST['tax_enabled'],
+	  	':id', $_GET['submit']))) {
+		$display_block = $LANG['save_tax_rate_failure'];
+	}
+	return $display_block;
+}
 
 function insertInvoice($type) {
 	global $dbh;
