@@ -1,4 +1,5 @@
-<?
+<?php
+
 require_once("./config/config.php");
 
 // needed for /library/phpreports to function
