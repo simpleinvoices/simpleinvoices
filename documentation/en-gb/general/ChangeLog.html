@@ -8,40 +8,41 @@ Simple Invoices - Changelog
 <div id="left">
 <ul><li>NR +1 2008-02
 	<ul>
-		<li>DB Upgrade SQL Patcher extra text output error and html syntax errors fixed 
-		<li>Enabled Gross Total in Export formats too.
-		<li>Norwegian, Slovenian, Danish lang.php corrected by removing leading hex EF BB BF in file - now authentication works for them too.
-		<li>Quantity Format in invoice quick view set to number_format:2
-		<li>System Default Invoice Preference now gets saved correctly
-		<li>Zero Owing Fully Paid Invoices now have 0 Age and blank Aging in Manage Invoices page
-		<li>Enabled Gross Total in all invoices with local template variable: gross_total = total - total_tax
-		<li>Migrated PDF to library and a new pdfmaker.php that takes only Invoice ID in URL
-		<li>Removed Type ID from URLs in manage invoices
-		<li>Introduced user_group table patch
-		<li>domain_id and group_id field changes in users table and dropping of old defaults and auth_challenges table
-		<li>Migrated PHPReports to library/phpreports and modified the existing reports to use it
-		<li>Corrected SQL in report_products_sold_by_customer
-		<li>Corrected Spanish translation file for correct encoding and double quote typo
-		<li>Fixed email.php with new location of pdf cache folder - ./cache - no need for out symlink
-		<li>Fix for undefined $title in invoice output templates and html syntax fixes
-		<li>Right side border lines now display correctly in print preview of invoices
-		<li>Mobile Phone of Biller and Customer now prints and displays correctly
-		<li>Removed duplicates in all lang files (insert_biller, insert_customer, insert_product)
-		<li>Synched all language files alphabetically with new variables to that in en-gb with 0 attribute and same as in stable version
-		<li>Patch 141: sql_patchmanager.sql_patch_ref field changed to INT
-		<li>Some more NULL replacements in various save.php files
-		<li>Some more TB_PREFIX replacements in various php files
-		<li>Ported the DB Upgrade click fix (when all upgrades are over)
-		<li>Ported the INSERT NULL (primary key) and TB_PREFIX from NextRelease into sql_patches, sql_queries and the MySQL Dumps - Postgres Dump need to be updated
-		<li>Alphabetically arranged lang/en-gb/lang.php and removed unused and duplicated system_prefs element
-		<li>Uploaded missing header_bg.gif and g_close.gif files in /modules/include/js - this was causing GET errors in the Apache Log files
-		<li>PDF cache is the main smarty cache folder itself - no more symlinks - hence removed the /include/pdf/temp and /include/pdf/out symlinks - the /include/pdf/cache symlink was removed earlier
-		<li>Fixed typo temlates to templates in /templates/default/header.tpl on line 57
-		<li>Fixed correct location of iehacks.css in the code in include/functions.php line 323
-		<li>PHPReports DARWIN OS - $ipsep extended
-		<li>PHPReports PHP5 deprecated use of array_push issue fixed
-		<li>Invoice PDF and EMail now support spaces in Biller Logo file name
-		<li>Invoice PDF EMail now supports spaces in Invoice Preference Name
+		<li>Reports on WAMP problem fixed - http://simpleinvoices.org/forum/topic-449.html</li>
+		<li>DB Upgrade SQL Patcher extra text output error and html syntax errors fixed </li>
+		<li>Enabled Gross Total in Export formats too.</li>
+		<li>Norwegian, Slovenian, Danish lang.php corrected by removing leading hex EF BB BF in file - now authentication works for them too.</li>
+		<li>Quantity Format in invoice quick view set to number_format:2</li>
+		<li>System Default Invoice Preference now gets saved correctly</li>
+		<li>Zero Owing Fully Paid Invoices now have 0 Age and blank Aging in Manage Invoices page</li>
+		<li>Enabled Gross Total in all invoices with local template variable: gross_total = total - total_tax</li>
+		<li>Migrated PDF to library and a new pdfmaker.php that takes only Invoice ID in URL</li>
+		<li>Removed Type ID from URLs in manage invoices</li>
+		<li>Introduced user_group table patch</li>
+		<li>domain_id and group_id field changes in users table and dropping of old defaults and auth_challenges table</li>
+		<li>Migrated PHPReports to library/phpreports and modified the existing reports to use it</li>
+		<li>Corrected SQL in report_products_sold_by_customer</li>
+		<li>Corrected Spanish translation file for correct encoding and double quote typo</li>
+		<li>Fixed email.php with new location of pdf cache folder - ./cache - no need for out symlink</li>
+		<li>Fix for undefined $title in invoice output templates and html syntax fixes</li>
+		<li>Right side border lines now display correctly in print preview of invoices</li>
+		<li>Mobile Phone of Biller and Customer now prints and displays correctly</li>
+		<li>Removed duplicates in all lang files (insert_biller, insert_customer, insert_product)</li>
+		<li>Synched all language files alphabetically with new variables to that in en-gb with 0 attribute and same as in stable version</li>
+		<li>Patch 141: sql_patchmanager.sql_patch_ref field changed to INT</li>
+		<li>Some more NULL replacements in various save.php files</li>
+		<li>Some more TB_PREFIX replacements in various php files</li>
+		<li>Ported the DB Upgrade click fix (when all upgrades are over)</li>
+		<li>Ported the INSERT NULL (primary key) and TB_PREFIX from NextRelease into sql_patches, sql_queries and the MySQL Dumps - Postgres Dump need to be updated</li>
+		<li>Alphabetically arranged lang/en-gb/lang.php and removed unused and duplicated system_prefs element</li>
+		<li>Uploaded missing header_bg.gif and g_close.gif files in /modules/include/js - this was causing GET errors in the Apache Log files</li>
+		<li>PDF cache is the main smarty cache folder itself - no more symlinks - hence removed the /include/pdf/temp and /include/pdf/out symlinks - the /include/pdf/cache symlink was removed earlier</li>
+		<li>Fixed typo temlates to templates in /templates/default/header.tpl on line 57</li>
+		<li>Fixed correct location of iehacks.css in the code in include/functions.php line 323</li>
+		<li>PHPReports DARWIN OS - $ipsep extended</li>
+		<li>PHPReports PHP5 deprecated use of array_push issue fixed</li>
+		<li>Invoice PDF and EMail now support spaces in Biller Logo file name</li>
+		<li>Invoice PDF EMail now supports spaces in Invoice Preference Name</li>
 		<li>Invoice PDF EMail (Boolean variable in config.php) now supports Confirm Reading Receipt to Sender</li>
 		<li>screen.css now has th.sortable_rt class - useful for right align for numeric fields - available in the modules/module-name/manage.php files</li>
 		<li>General Code cleanup</li>
