@@ -7,7 +7,7 @@
    *        Rui Gouveia
    *
    * Last edited:
-   *        2007-11-01
+   *        2007-11-01, 2008-01-26
    *
    * License:
    *        GPL v3
@@ -19,6 +19,33 @@
    *      php -q lang_check.php > lang_check.html
    *
    */
+
+function process_lang_file($lang_code) {
+
+  $lang_file = file("$lang_code/lang.php");
+  
+  $count = 0;
+  $count_translated = 0;
+  
+  foreach ($lang_file as $line) {
+    $line = rtrim($line);
+
+    // A string line
+    if (preg_match('/^\$LANG\[/', $line)) {
+      $count++;
+	
+      if (preg_match('/^\$LANG\[.*;\s*\/\/\s*1/', $line)) {
+	$count_translated++;
+      } else {
+	// Not translated string. Just to be sure.
+	//echo "debug: $line\n";
+      }
+    }
+  }
+
+  $ret = array($count, $count_translated);
+  return $ret;
+  }
 ?>
 
 <style>
@@ -44,12 +71,13 @@ th {
 
 <table>
 <tr>
-<th>Lang.</th>
-<th>Language name</th>
-<th>Tot. strings</th>
-<th>Tot. translated</th>
-<th>% Done</th>
-<!--th>Authors</th-->
+<th valign="top">Language<br>code</th>
+<th valign="top">Language<br>name</th>
+<th valign="top">New strings<br>available</th>
+<th valign="top">Total strings</th>
+<th valign="top">Total strings<br>translated</th>
+<th valign="top">% Done</th>
+<!--th valign="top">Authors</th-->
 </tr>
 
 <?php
@@ -81,6 +109,10 @@ if ($dh = opendir($dir)) {
 // Sort by lang code.
 sort($langs);
 
+$en_lang = process_lang_file('en-gb');
+//echo "debug: en-gb, $en_lang[0], $en_lang[1]\n";
+
+
 // Lets process the language folders.
 foreach ($langs as $lang_code) {
 
@@ -96,36 +128,29 @@ foreach ($langs as $lang_code) {
    Process the language files
   */
   
-  $lang_file = file("$lang_code/lang.php");
+  $count = process_lang_file($lang_code);
+  //echo "debug: $lang_code, $count[0], $count[1]\n";
   
-  $count = 0;
-  $count_translated = 0;
-  
-  foreach ($lang_file as $line) {
-    $line = rtrim($line);
-
-    // A string line
-    if (preg_match('/^\$LANG\[/', $line)) {
-      $count++;
-	
-      if (preg_match('/^\$LANG\[.*;\s*\/\/\s*1/', $line)) {
-	$count_translated++;
-      } else {
-	// Not translated string. Just to be sure.
-	//echo "debug: $line\n";
-      }
-    }
-
-    //echo "debug: $count, $count_translated, '$line'\n";
-  }
-
-  if ($count == 0) {
+  if ($count[0] == 0) {
     $percentage = 'N/A';
   } else {
-    $percentage = number_format(round(($count_translated / $count) * 100, 2), 2) . '%';
+    $percentage = number_format(round(($count[1] / $count[0]) * 100, 2), 2) . '%';
 
     if ($percentage == '100.00%') {
       $percentage = "<strong>$percentage</strong>";
+    }
+  }
+
+  // New strings available?
+  if ($en_lang[0] - $count[0] == 0) {
+    $new_strings = 'All Done';
+  } else {
+    $new_strings = $en_lang[0] - $count[0];
+
+    if ($new_strings > 0) {
+      $new_strings = "<b>$new_strings</b>";
+    } else {
+      $new_strings = "<font color='red'>? $new_strings ?</font>";
     }
   }
 
@@ -133,8 +158,9 @@ foreach ($langs as $lang_code) {
 <tr>
 <td>$lang_code</td>
 <td>$xml->name</td>
-<td align=\"center\">$count</td>
-<td align=\"center\">$count_translated</td>
+<td align=\"center\">$new_strings</td>
+<td align=\"center\">$count[0]</td>
+<td align=\"center\">$count[1]</td>
 <td align=\"right\">$percentage</td>
 <!--td>$xml->author</td-->
 </tr>
