@@ -623,7 +623,7 @@ INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 				$patch['128']['patch'] = "ALTER TABLE `".TB_PREFIX."users` ADD `user_domain` VARCHAR( 255 ) NOT NULL AFTER `user_group` ;";				
 			}	
 		}
-		if(checkTableExists('si_users') == false) 
+		if(checkTableExists(TB_PREFIX.'users') == false) 
 		{
 			$patch['128']['patch'] = "CREATE TABLE IF NOT EXISTS `".TB_PREFIX."users` (
 `user_id` int(11) NOT NULL auto_increment,
@@ -644,12 +644,12 @@ PRIMARY KEY  (`user_id`)) ;
 	
 	$patch['130']['name'] = "Create auth_challenges table";
 	
-			if(checkTableExists('si_auth_challenges') == true)
+			if(checkTableExists(TB_PREFIX.'auth_challenges') == true)
 			{
 				//a do nothing patch cause the table already exists
 			$patch['130']['patch'] = "select * from ".TB_PREFIX."auth_challenges";
 			}
-			if(checkTableExists('si_auth_challenges') == false)
+			if(checkTableExists(TB_PREFIX.'auth_challenges') == false)
 			{
 				$patch['130']['patch'] = "CREATE TABLE IF NOT EXISTS `".TB_PREFIX."auth_challenges` (
 `challenges_key` int(11) NOT NULL,
@@ -862,6 +862,104 @@ PRIMARY KEY  (`user_id`)) ;
     $patch['155']['date'] = "20080102";
 
 
+    $patch['156']['name'] = "Table = Account_payments Field = ac_amount : change field type and length to decimal";
+        $patch['156']['patch'] = "ALTER TABLE `".TB_PREFIX."account_payments` CHANGE `ac_amount` `ac_amount` DECIMAL( 25, 6 ) NOT NULL;";
+    } elseif ($db_server == "pgsql") {
+        $patch['156']['patch'] = " ALTER TABLE `".TB_PREFIX."account_payments` CHANGE `ac_amount` `ac_amount` DECIMAL( 25, 6 ) NOT NULL;";
+    }
+    $patch['156']['date'] = "20080128";
+
+    $patch['157']['name'] = "Table = Invoice_items Field = quantity : change field type and length to decimal";
+        $patch['157']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `quantity` `quantity` DECIMAL( 25, 6 ) NOT NULL DEFAULT '0' ";
+    } elseif ($db_server == "pgsql") {
+        $patch['157']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `quantity` `quantity` DECIMAL( 25, 6 ) NOT NULL DEFAULT '0'";
+    }
+    $patch['157']['date'] = "20080128";
+
+    $patch['158']['name'] = "Table = Invoice_items Field = unit_price : change field type and length to decimal";
+        $patch['158']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `unit_price` `unit_price` DECIMAL( 25, 6 ) NULL DEFAULT '0.00' ";
+    } elseif ($db_server == "pgsql") {
+        $patch['158']['patch'] = " ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `unit_price` `unit_price` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
+    }
+    $patch['158']['date'] = "20080128";
+
+    $patch['159']['name'] = "Table = Invoice_items Field = tax : change field type and length to decimal";
+        $patch['159']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `tax` `tax` DECIMAL( 25, 6 ) NULL DEFAULT '0.00' ";
+    } elseif ($db_server == "pgsql") {
+        $patch['159']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `tax` `tax` DECIMAL( 25, 6 ) NULL DEFAULT '0.00' ";
+    }
+    $patch['159']['date'] = "20080128";
+
+    $patch['160']['name'] = "Table = Invoice_items Field = tax_amount : change field type and length to decimal";
+        $patch['160']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `tax_amount` `tax_amount` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
+    } elseif ($db_server == "pgsql") {
+        $patch['160']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `tax_amount` `tax_amount` DECIMAL( 2    5, 6 ) NULL DEFAULT '0.00'";
+    }
+    $patch['160']['date'] = "20080128";
+
+    $patch['161']['name'] = "Table = Invoice_items Field = gross_total : change field type and length to decimal";
+        $patch['161']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `gross_total` `gross_total` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
+    } elseif ($db_server == "pgsql") {
+        $patch['161']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `gross_total` `gross_total` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
+    }
+    $patch['161']['date'] = "20080128";
+
+
+    $patch['162']['name'] = "Table = Invoice_items Field = total : change field type and length to decimal";
+        $patch['162']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `total` `total` DECIMAL( 25, 6 ) NULL DEFAULT '0.00' ";
+    } elseif ($db_server == "pgsql") {
+        $patch['162']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `total` `total` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
+    }
+    $patch['162']['date'] = "20080128";
+
+
+    $patch['163']['name'] = "Table = Products Field = unit_price : change field type and length to decimal";
+        $patch['163']['patch'] = "ALTER TABLE `".TB_PREFIX."products` CHANGE `unit_price` `unit_price` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
+    } elseif ($db_server == "pgsql") {
+        $patch['163']['patch'] = "ALTER TABLE `".TB_PREFIX."products` CHANGE `unit_price` `unit_price` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
+    }
+    $patch['163']['date'] = "20080128";
+
+
+    $patch['164']['name'] = "Table = Tax Field = quantity : change field type and length to decimal";
+        $patch['164']['patch'] = "ALTER TABLE `".TB_PREFIX."tax` CHANGE `tax_percentage` `tax_percentage` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
+    } elseif ($db_server == "pgsql") {
+        $patch['164']['patch'] = "ALTER TABLE `".TB_PREFIX."tax` CHANGE `tax_percentage` `tax_percentage` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
+    }
+    $patch['164']['date'] = "20080128";
+
+/*
+    $patch['157']['name'] = "Table = Invoice_items Field = quantity : change field type and length to decimal";
+        $patch['157']['patch'] = "";
+    } elseif ($db_server == "pgsql") {
+        $patch['157']['patch'] = "";
+    }
+    $patch['157']['date'] = "20080128";
+
+
+    $patch['157']['name'] = "Table = Invoice_items Field = quantity : change field type and length to decimal";
+        $patch['157']['patch'] = "";
+    } elseif ($db_server == "pgsql") {
+        $patch['157']['patch'] = "";
+    }
+    $patch['157']['date'] = "20080128";
+
+
+    $patch['157']['name'] = "Table = Invoice_items Field = quantity : change field type and length to decimal";
+        $patch['157']['patch'] = "";
+    } elseif ($db_server == "pgsql") {
+        $patch['157']['patch'] = "";
+    }
+    $patch['157']['date'] = "20080128";
+
+
+    $patch['157']['name'] = "Table = Invoice_items Field = quantity : change field type and length to decimal";
+        $patch['157']['patch'] = "";
+    } elseif ($db_server == "pgsql") {
+        $patch['157']['patch'] = "";
+    }
+    $patch['157']['date'] = "20080128";
+*/
 
 /*
 INSERT INTO  `".TB_PREFIX."menu` (  `id` ,  `parentid` ,  `order` ,  `name` ,  `link` ,  `enabled` ) 
