@@ -865,42 +865,48 @@ PRIMARY KEY  (`user_id`)) ;
     $patch['156']['name'] = "Table = Account_payments Field = ac_amount : change field type and length to decimal";
     $patch['156']['patch'] = "ALTER TABLE `".TB_PREFIX."account_payments` CHANGE `ac_amount` `ac_amount` DECIMAL( 25, 6 ) NOT NULL;";
     if ($db_server == "pgsql") {
-        $patch['156']['patch'] = " ALTER TABLE `".TB_PREFIX."account_payments` CHANGE `ac_amount` `ac_amount` DECIMAL( 25, 6 ) NOT NULL;";
+        $patch['156']['name'] = "Widen ac_amount field of account_payments";
+        $patch['156']['patch'] = "ALTER TABLE ".TB_PREFIX."account_payments ALTER COLUMN ac_amount TYPE numeric(25, 6)";
     }
     $patch['156']['date'] = "20080128";
 
     $patch['157']['name'] = "Table = Invoice_items Field = quantity : change field type and length to decimal";
     $patch['157']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `quantity` `quantity` DECIMAL( 25, 6 ) NOT NULL DEFAULT '0' ";
     if ($db_server == "pgsql") {
-       $patch['157']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `quantity` `quantity` DECIMAL( 25, 6 ) NOT NULL DEFAULT '0'";
+        $patch['157']['name'] = "Widen quantity field of invoice_items";
+        $patch['157']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN quantity TYPE numeric(25, 6)";
     }
     $patch['157']['date'] = "20080128";
 
     $patch['158']['name'] = "Table = Invoice_items Field = unit_price : change field type and length to decimal";
     $patch['158']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `unit_price` `unit_price` DECIMAL( 25, 6 ) NULL DEFAULT '0.00' ";
     if ($db_server == "pgsql") {
-        $patch['158']['patch'] = " ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `unit_price` `unit_price` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
+        $patch['158']['name'] = "Widen unit_price field of invoice_items";
+        $patch['158']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN unit_price TYPE numeric(25, 6)";
     }
     $patch['158']['date'] = "20080128";
 
     $patch['159']['name'] = "Table = Invoice_items Field = tax : change field type and length to decimal";
     $patch['159']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `tax` `tax` DECIMAL( 25, 6 ) NULL DEFAULT '0.00' ";
     if ($db_server == "pgsql") {
-        $patch['159']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `tax` `tax` DECIMAL( 25, 6 ) NULL DEFAULT '0.00' ";
+        $patch['159']['name'] = "Widen tax field of invoice_items";
+        $patch['159']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN tax TYPE numeric(25, 6)";
     }
     $patch['159']['date'] = "20080128";
 
     $patch['160']['name'] = "Table = Invoice_items Field = tax_amount : change field type and length to decimal";
     $patch['160']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `tax_amount` `tax_amount` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
     if ($db_server == "pgsql") {
-        $patch['160']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `tax_amount` `tax_amount` DECIMAL( 2    5, 6 ) NULL DEFAULT '0.00'";
+        $patch['160']['name'] = "Widen tax_amount field of invoice_items";
+        $patch['160']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN tax_amount TYPE numeric(25, 6)";
     }
     $patch['160']['date'] = "20080128";
 
     $patch['161']['name'] = "Table = Invoice_items Field = gross_total : change field type and length to decimal";
     $patch['161']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `gross_total` `gross_total` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
     if ($db_server == "pgsql") {
-        $patch['161']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `gross_total` `gross_total` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
+        $patch['161']['name'] = "Widen gross_total field of invoice_items";
+        $patch['161']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN gross_total TYPE numeric(25, 6)";
     }
     $patch['161']['date'] = "20080128";
 
@@ -908,7 +914,8 @@ PRIMARY KEY  (`user_id`)) ;
     $patch['162']['name'] = "Table = Invoice_items Field = total : change field type and length to decimal";
     $patch['162']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `total` `total` DECIMAL( 25, 6 ) NULL DEFAULT '0.00' ";
     if ($db_server == "pgsql") {
-        $patch['162']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `total` `total` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
+        $patch['162']['name'] = "Widen total field of invoice_items";
+        $patch['162']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN total TYPE numeric(25, 6)";
     }
     $patch['162']['date'] = "20080128";
 
@@ -916,7 +923,8 @@ PRIMARY KEY  (`user_id`)) ;
     $patch['163']['name'] = "Table = Products Field = unit_price : change field type and length to decimal";
     $patch['163']['patch'] = "ALTER TABLE `".TB_PREFIX."products` CHANGE `unit_price` `unit_price` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
     if ($db_server == "pgsql") {
-        $patch['163']['patch'] = "ALTER TABLE `".TB_PREFIX."products` CHANGE `unit_price` `unit_price` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
+        $patch['163']['name'] = "Widen unit_price field of products";
+        $patch['163']['patch'] = "ALTER TABLE ".TB_PREFIX."products ALTER COLUMN unit_price TYPE numeric(25, 6)";
     }
     $patch['163']['date'] = "20080128";
 
@@ -924,7 +932,8 @@ PRIMARY KEY  (`user_id`)) ;
     $patch['164']['name'] = "Table = Tax Field = quantity : change field type and length to decimal";
     $patch['164']['patch'] = "ALTER TABLE `".TB_PREFIX."tax` CHANGE `tax_percentage` `tax_percentage` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
     if ($db_server == "pgsql") {
-        $patch['164']['patch'] = "ALTER TABLE `".TB_PREFIX."tax` CHANGE `tax_percentage` `tax_percentage` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
+        $patch['164']['name'] = "Widen tax_percentage field of tax";
+        $patch['164']['patch'] = "ALTER TABLE ".TB_PREFIX."tax ALTER COLUMN tax_percentage TYPE numeric(25, 6)";
     }
     $patch['164']['date'] = "20080128";
 
