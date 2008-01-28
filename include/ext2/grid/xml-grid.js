@@ -59,7 +59,7 @@ Ext.onReady(function(){
          width:400,
          height:400,
          title:"Simple Invoices help",
-		 autoLoad: 'documentation/en-gb/help/age.html',
+	 autoLoad: 'documentation/en-gb/help/age.html',
          autoScroll:true,
          modal:true
          //html:'documentation/en-gb/help/age.html'
@@ -159,6 +159,7 @@ Ext.onReady(function(){
 		//Return a nice big link for the Actions column in the Manage Invoices page
 			return quickViewLink + editViewLink + printViewLink + pdfLink + xlsLink + docLink + paymentLink + emailLink;
      }
+	
 
     var cm = new Ext.grid.ColumnModel([
 	    {header: "Actions", width: 105, dataIndex: 'actions', sortable:false, renderer: renderActions },

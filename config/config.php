@@ -19,8 +19,8 @@ $db_layer = ""; // phpreports - database abstraction layer type "", "pdo", "adod
 /* Authentication options */
 #####################
 //if you want to make Simple Invoices secure and require a username and password set this to true
-//$authenticationOn = "true";
-$authenticationOn = "false";
+$authenticationOn = "true";
+//$authenticationOn = "false";
 //if you are using a .httaccess file
 $http_auth = ""; //value: "name:password@"
 
