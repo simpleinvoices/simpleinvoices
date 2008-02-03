@@ -99,6 +99,9 @@
 					<li>
 						<a href="./index.php?module=custom_fields&view=manage">{$LANG.custom_fields_upper}</a>
 					</li>
+					<li>
+						<a href="./index.php?module=customFields&view=manage">{$LANG.custom_fields_upper} 2</a>
+					</li>
 					<li class="separation"></li>
 					<li>
 						<a href="./index.php?module=tax_rates&view=manage">{$LANG.tax_rates} +</a>

@@ -469,12 +469,13 @@ function getProduct($id) {
 	return mysqlQuery($sql);
 }*/
 
-function insertProduct($enabled=1,$visible=1) {
-	global $db_server;
+function insertProductComplete($enabled=1,$visible=1,$description, 
+		$unit_price, $custom_field1 = NULL, $custom_field2, $custom_field3, $custom_field4, $notes) {
 
-	if(isset($_POST['enabled'])) {
-		$enabled=$_POST['enabled'];
-	}
+
+	/*if(isset($enabled)) {
+		$enabled=$enabled;
+	}*/
 	
 	if ($db_server == 'pgsql') {
 		$sql = "INSERT into
@@ -505,15 +506,28 @@ function insertProduct($enabled=1,$visible=1) {
 			)";
 	}
 	return dbQuery($sql,
-		':description', $_POST[description],
-		':unit_price', $_POST[unit_price],
-		':custom_field1', $_POST[custom_field1],
-		':custom_field2', $_POST[custom_field2],
-		':custom_field3', $_POST[custom_field3],
-		':custom_field4', $_POST[custom_field4],
-		':notes', "".$_POST[notes],
+		':description', $description,
+		':unit_price', $unit_price,
+		':custom_field1', $custom_field1,
+		':custom_field2', $custom_field2,
+		':custom_field3', $custom_field3,
+		':custom_field4', $custom_field4,
+		':notes', "".$notes,
 		':enabled', $enabled,
 		':visible', $visible
+		);
+}
+
+
+function insertProduct($enabled=1,$visible=1) {
+	return insertProductComplete($enabled, $visible, $_POST['description'], $_POST['unit_price'],
+		$_POST['custom_field1'],
+		$_POST['custom_field2'],
+		$_POST['custom_field3'],
+		$_POST['custom_field4'],
+		$_POST['notes'],
+		$enabled,
+		$visible
 		);
 }
 

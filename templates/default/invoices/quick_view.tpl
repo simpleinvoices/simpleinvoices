@@ -156,7 +156,9 @@
 	</tr>	
 	<tr class='details_screen biller'>
 		<td class='details_screen'>{$customFieldLabels.biller_cf4}:</td><td class='details_screen' colspan=5>{$biller.custom_field4}</td>
-	</tr>	
+	</tr>
+		{showCustomFields categorieId="1" itemId=$biller.id }
+
 	<tr>
 		<td colspan=5><br></td>
 	</tr>	
@@ -201,6 +203,7 @@
 		<td class='details_screen'>{$customFieldLabels.customer_cf4}:</td><td class='details_screen' colspan=5>{$customer.custom_field4}</td>
 	</tr>	
 
+				{showCustomFields categorieId="2" itemId=$customer.id }
 
 <hr></hr>
 
@@ -246,7 +249,7 @@
 
 {/if}
 
-{if $invoice.type_id == 2 || $invoice.type_id == 3 }
+{if $invoice.type_id == 2 || $invoice.type_id == 3  || $invoice.type_id == 4}
 
         <tr>
                 <td colspan=6><br></td>
@@ -255,7 +258,7 @@
 		<td colspan="6">
 		<table width="100%"> 
 	
-	{if $invoice.type_id == 2 }
+	{if $invoice.type_id == 2 || $invoice.type_id == 4}
 
             <tr>
                     <td colspan="6" class="details_screen align_right"><a href='#' class="show-itemised" onClick="$('.itemised').show();$('.show-itemised').hide();">{$LANG.show_details}</a><a href='#' class="itemised" onClick="$('.itemised').hide();$('.show-itemised').show();">{$LANG.hide_details}</a></td>
@@ -289,7 +292,7 @@
 
 {foreach from=$invoiceItems item=invoiceItem }
 			
-		{if $invoice.type_id == 2 }
+		{if $invoice.type_id == 2 || $invoice.type_id == 4}
 	
 			<tr>
 	                <td>{$invoiceItem.quantity|number_format:2}</td>
@@ -299,6 +302,8 @@
 					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.tax_amount|number_format:2}</td>
 					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.total|number_format:2}</td>
 	        </tr>
+	        
+
 			<tr class='itemised'>       
 				<td colspan="6">
 					<table width=100%>
@@ -313,7 +318,10 @@
 					</table>
 				</td>
 			</tr>
-		
+			 {*TODO: CustomField is normaly stored for a product. Here it needs to be added to the invoices Item
+			 	-> categorie 5 *}
+			 {showCustomFields categorieId="3" itemId=$invoiceItem.productId }
+
 	{/if}	
 	
 
@@ -402,6 +410,8 @@
 		<td colspan="6"><b>{$preference.pref_inv_detail_heading}</b></td>
 	</tr>
 {/if}
+	
+	{showCustomFields categorieId="4" itemId=$invoice.id }
 
 
 

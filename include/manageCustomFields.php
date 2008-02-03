@@ -151,6 +151,7 @@ function readPlugins() {
 }
 
 function getCategories() {
+	global $dbh;
 	$sql = "SELECT * FROM ".TB_PREFIX."customFieldCategories";
 	$sth = $dbh->prepare($sql);
 	$sth->execute();

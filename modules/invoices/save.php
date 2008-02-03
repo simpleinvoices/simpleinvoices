@@ -32,6 +32,8 @@ if(!isset( $_POST['type']) && !isset($_POST['action'])) {
 $saved = false;
 $type = $_POST['type'];
 
+
+
 if ($_POST['action'] == "insert" ) {
 	
 	if(insertInvoice($type)) {
@@ -53,8 +55,15 @@ if ($_POST['action'] == "insert" ) {
 	}
 	elseif ($saved) {
 		for($i=0;!empty($_POST["quantity$i"]) && $i < $_POST['max_items']; $i++) {
-	
-			if (insertInvoiceItem($invoice_id,$_POST["quantity$i"],$_POST["products$i"],$_POST['tax_id'],$_POST["description$i"]) ) {
+
+			if($type == 4) {
+				insertProductComplete(0,0,$_POST["description$i"],$_POST["price$i"],NULL,NULL,NULL,NULL,$_POST["notes$i"]);
+				$product = lastInsertId();
+			}
+			else {
+				$product = $_POST["products$i"];
+			}
+			if (insertInvoiceItem($invoice_id,$_POST["quantity$i"],$product,$_POST['tax_id'],$_POST["description$i"]) ) {
 				//$saved = true;
 			} else {
 				die(end($dbh->errorInfo()));

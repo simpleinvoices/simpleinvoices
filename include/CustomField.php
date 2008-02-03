@@ -46,6 +46,8 @@ abstract class CustomField {
 	
 	/* Updates the custom field value */
 	function updateInput($value, $itemId) {
+		global $dbh;
+		
 		$sql = "SELECT * FROM ".TB_PREFIX."customFieldValues WHERE customFieldID = $this->fieldId AND itemID = $itemId";
 		
 		error_log($sql);
@@ -133,6 +135,8 @@ abstract class CustomField {
 	}?*/
 	
 	function getCustomFieldValues($id) {
+		global $dbh;
+			
 		$sql = "SELECT * FROM ".TB_PREFIX."customFieldValues WHERE id = ?";
 		$sth = $dbh->prepare($sql);
 		$sth->execute(array($id));

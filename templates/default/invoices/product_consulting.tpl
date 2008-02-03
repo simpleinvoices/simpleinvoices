@@ -23,31 +23,24 @@
 {include file="$path/header.tpl" }
 
 <tr>
-<td class="details_screen">{$LANG.quantity}</td><td class="details_screen">{$LANG.description}</td>
+<td class="details_screen">{$LANG.quantity}</td>
+<td class="details_screen">{$LANG.description}</td>
+<td class="details_screen">Price</td>
+
 </tr>
 
 
         {section name=line start=0 loop=$dynamic_line_items step=1}
 
 			<tr>
-				<td><input type=text name="quantity{$smarty.section.line.index}" size="5"></td><td input type=text name="description{$smarty.section.line.index}" size="50">
-				                
-			{if $products == null }
-				<p><em>{$LANG.no_products}</em></p>
-			{else}
-				<select name="products{$smarty.section.line.index}">
-					<option value=""></option>
-				{foreach from=$products item=product}
-					<option {if $product.id == $defaults.product} selected {/if} value="{$product.id}">{$product.description}</option>
-				{/foreach}
-				</select>
-			{/if}
-				                				                
-                </td></tr>
+				<td><input type=text name="quantity{$smarty.section.line.index}" size="5" /></td>
+				<td><input type=text name="description{$smarty.section.line.index}" size="50" /></td>
+				<td><input type=text name="price{$smarty.section.line.index}" size="50" /></td>
+            </tr>
                 
-                <tr class="text{$smarty.section.line.index} hide">
-        <td colspan=2 ><textarea input type=text name='description{$smarty.section.line.index}' rows=3 cols=80 WRAP=nowrap></textarea></td>
-</tr>
+			<tr class="text{$smarty.section.line.index} hide">
+        		<td colspan="3" ><textarea input type=text name='notes{$smarty.section.line.index}' rows=3 cols=80 WRAP=nowrap></textarea></td>
+			</tr>
 
         {/section}
 	{$show_custom_field.1}
@@ -63,10 +56,10 @@
 </tr>
 
 <tr>
-        <td colspan=2><textarea input type="text" name="note" rows=5 cols=70 WRAP=nowrap></textarea></td>
+        <td colspan=2><textarea input type=text name="note" rows=5 cols=70 WRAP=nowrap></textarea></td>
 </tr>
 
-<tr><td class="details_screen">{$LANG.tax}</td><td input type="text" name="tax" size=15>
+<tr><td class="details_screen">{$LANG.tax}</td><td input type=text name="tax" size=15>
 
 {if $taxes == null }
 	<p><em>{$LANG.no_taxes}</em></p>
@@ -114,6 +107,6 @@
 <div style="text-align:center;">
 	<input type="hidden" name="max_items" value="{$smarty.section.line.index}">
 	<input type="submit" name="submit" value="{$LANG.save_invoice}">
-	<input type="hidden" name="type" value="3">
+	<input type="hidden" name="type" value="4">
 </div>
 </form>
