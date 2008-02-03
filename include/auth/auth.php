@@ -3,7 +3,24 @@
 session_start();
 
 // is the one accessing this page logged in or not?
-if (!isset($_SESSION['db_is_logged_in']) || $_SESSION['db_is_logged_in'] !== true) {
+
+require_once "Auth.php";
+
+$options = array(
+   'dsn' => $db_server."://".$db_user."@".$db_host."/".$db_name."",
+   'table' => TB_PREFIX.'users',
+   'usernamecol' => 'user_email',
+   'passwordcol' => 'user_password',
+   'cryptType' => 'md5',
+   'regenerateSessionId' => true,
+   'db_fields' => '*'
+);
+
+$a = new Auth("MDB2", $options, "loginFunction");
+	  
+
+if ($a->getAuth() == FALSE) {
+//if (!isset($_SESSION['db_is_logged_in']) || $_SESSION['db_is_logged_in'] !== true) {
 
 	if ($_GET['location'] == 'pdf' ) {
 		// not logged in, and coming from the pdf converter move to login page

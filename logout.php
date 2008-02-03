@@ -17,12 +17,14 @@
 
 // i will keep yelling this
 // DON'T FORGET TO START THE SESSION !!!
-
-session_start();
+if ($a->checkAuth()) {
+	    $a->logout();
+	    session_start();
 
 // if the user is logged in, unset the session
+/*
 if (isset($_SESSION['db_is_logged_in'])) {
-   unset($_SESSION['db_is_logged_in']);
+   unset($_SESSION['db_is_logged_in']);   */
 }
 
 // now that the user is logged out,
