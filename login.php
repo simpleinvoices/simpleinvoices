@@ -60,7 +60,7 @@ $a = new Auth("MDB2", $options, "loginFunction");
 
 $a->start();
 
-$_SESSION['_authsession']['id'] = "trunk";
+$_SESSION['_authsession']['identifier'] = $authSessionIdentifier;
 
 
 //redirecto to index page if login is ok

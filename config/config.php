@@ -91,6 +91,10 @@ ini_set('session.use_trans_sid', false); //so session ids arent put in the url b
 ####################
 /* Other stuff*/
 ####################
+//security thing: $authSessionIdentifier is used by auth process to ensure that user once logged in can not log into another install of Simple Invoices 
+$authSessionIdentifier = $_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']);
+//$authSessionIdentifier = "something unique to name this install of Simple nvoics";
+
 //TODO remove this before release
 //dev stuff
 $config_inc_style 	= "true";
@@ -110,4 +114,22 @@ if ($smarty) {
 //To turn logging on set the below to true - not needed as it is set in System Defaults
 #define("LOGGING",false);
 #define("LOGGING",true);
+
+####################
+/* Environment*/
+####################
+/*
+This allows you to have another local config file for your dev or other purposes
+ie. dev.config.php 
+any config.php setting in this extra file(which wont be kept in svn) will overwrite config.php values
+- this way everyone can have there own conf setting without messing with anyones setting
+RELEASE TODO: make sure $environment is set back to live
+*/
+$environment = "local"; //test,staging,dev,live etc..
+if($environment != "live")
+{
+	@include("./config/".htmlspecialchars($environment).".config.php");
+}
+
+
 ?>
