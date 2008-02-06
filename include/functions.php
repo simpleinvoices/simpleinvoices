@@ -348,11 +348,48 @@ Rico.Buffer.Base($('$name').tBodies[0]), opts); });
 EOD;*/
 }
 
+function simpleInvoicesError($type,$info1 = "", $info2 = "") 
+{
+
+switch ($type)
+{
+	case "cache":
+
+		$error = exit("
+		<br>
+		===========================================<br>
+		Simple Invoices error<br>
+		===========================================<br>
+		The folder <b>./".$info1."</b> has to be writeable");
+	break;
+	
+	case "dbConnection":
+	
+		$error = exit("
+		<br>
+		===========================================<br>
+		Simple Invoices database connection problem<br>
+		===========================================<br>
+		Could not connect to the Simple Invoices database<br><br>
+		Please refer to the following database ('.$info1.') error for for to fix this: <b>ERROR :' . end($info2 . '</b><br><br>
+		If this is an Access denied error please make sure that the db_host, db_name, db_user, and db_password in config/config.php are correct 
+		<br>
+		===========================================<br>
+		");
+	break;
+
+}
+
+return $error;
+
+}
 
 function checkConnection() {
 	global $dbh;
 	
 	if(!$dbh) {
+		simpleInvoiceError("dbConnection",$db_server,$dbh->errorInfo());
+/*
 		die('<br>
 		===========================================<br>
 		Simple Invoices database connection problem<br>
@@ -363,6 +400,7 @@ function checkConnection() {
 		<br>
 		===========================================<br>
 		');
+*/
 	}
 }
 

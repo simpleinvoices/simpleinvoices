@@ -28,20 +28,22 @@ $action = isset($_GET['case'])?$_GET['case']:null;
 
 
 require_once("smarty/Smarty.class.php");
+require_once("./include/functions.php");
 
 $smarty = new Smarty();
 
 //cache directory. Have to be writeable (chmod 777)
 $smarty -> compile_dir = "cache";
 if(!is_writable($smarty -> compile_dir)) {
-	exit("Simple Invoices Error : The folder <i>".$smarty -> compile_dir."</i> has to be writeable");
+	simpleInvoicesError("cache", $smarty -> compile_dir);
+	//exit("Simple Invoices Error : The folder <i>".$smarty -> compile_dir."</i> has to be writeable");
 }
 
 
 //adds own smarty plugins
 $smarty->plugins_dir = array("plugins","smarty_plugins");
 
-include("./include/include_main.php");
+require_once("./include/include_main.php");
 
 $smarty -> assign("authenticationOn",$authenticationOn); // to toggle the login / logout button visibility in the menu
 $smarty -> assign("module",$module);
