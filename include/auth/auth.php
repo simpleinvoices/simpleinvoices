@@ -1,7 +1,9 @@
 <?php
+ob_start();
 // like i said, we must never forget to start the session
 session_start();
 
+print_r($_SESSION);
 // is the one accessing this page logged in or not?
 
 require_once "Auth.php";
@@ -19,7 +21,9 @@ $options = array(
 $a = new Auth("MDB2", $options, "loginFunction");
 	  
 
-if ($a->getAuth() == FALSE) {
+//if ($a->getAuth() == FALSE) {
+if ( ($a->getAuth() == FALSE) AND ($_SESSION[md5($authSessionIdentifier)] != md5($authSessionIdentifier) ))  
+{
 //if (!isset($_SESSION['db_is_logged_in']) || $_SESSION['db_is_logged_in'] !== true) {
 
 	if ($_GET['location'] == 'pdf' ) {

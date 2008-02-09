@@ -19,8 +19,8 @@ $db_layer = ""; // phpreports - database abstraction layer type "", "pdo", "adod
 /* Authentication options */
 #####################
 //if you want to make Simple Invoices secure and require a username and password set this to true
-$authenticationOn = "true";
-//$authenticationOn = "false";
+//$authenticationOn = "true";
+$authenticationOn = "false";
 //if you are using a .httaccess file
 $http_auth = ""; //value: "name:password@"
 
@@ -94,6 +94,8 @@ ini_set('session.use_trans_sid', false); //so session ids arent put in the url b
 //security thing: $authSessionIdentifier is used by auth process to ensure that user once logged in can not log into another install of Simple Invoices 
 $authSessionIdentifier = $_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']);
 //$authSessionIdentifier = "something unique to name this install of Simple nvoics";
+/*You can also concat stuff to the start or end to make it harder(assuming they are not doing packet sniffing on non https line) to guess/hack your session info */
+//$authSessionIdentifier .= "any random stuff you want";
 
 //TODO remove this before release
 //dev stuff

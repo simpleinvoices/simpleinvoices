@@ -1,5 +1,7 @@
 <?php
 ob_start();
+
+echo "test:";
 ?>
 <html>
 <head>
@@ -59,18 +61,28 @@ $options = array(
 $a = new Auth("MDB2", $options, "loginFunction");
 
 $a->start();
+/*
+JK: 
+- problem: with current auth it checks if a session variable it set to x
+-- the problem with this is if you have multiple installs on Simple Invoices on 1 server, by logging into 1 install of Simple Invoices on that server you will then be able to login to all the other ones without haveing to enter a password - which is bad
+- by adding a SessionIdentifier thing - attempt to fix the above problem bu having each install have its own identifyer (default is based on the url to try and make it auto unique)
 
-$_SESSION['_authsession']['identifier'] = $authSessionIdentifier;
+- if anyone knows a better way to fix this issues please do so
+
+*/
+$_SESSION[md5($authSessionIdentifier)] = "true";
 
 
 //redirecto to index page if login is ok
-if ($a->getAuth()) {
+if ( ($a->getAuth()) && (isset($_SESSION[md5($authSessionIdentifier)])) ) {
+    $_SESSION[md5($authSessionIdentifier)] = md5($authSessionIdentifier);
     header('Location: .');
     ob_end_flush();
 }
 
 if ($_GET['action'] == "logout" && $a->checkAuth()) {
     $a->logout();
+    unset($_SESSION[md5($authSessionIdentifier)]);
     $errorMessage = "You have just logged out. <br><br>Thank you for using Simple Invoices";
     $a->start();
 }
@@ -79,6 +91,9 @@ if ( (isset($_POST['login']) ) AND ($a->getAuth() == FALSE) )
 {
 	$errorMessage = "Sorry wrong username / password";
 }
+
+
+print_r($_SESSION);
 ?>
 	</div>
 		<dd>Powered by <a href="http://www.simpleinvoices.org">Simple Invoices</a></dd>
