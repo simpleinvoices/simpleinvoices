@@ -5,7 +5,7 @@
 *   Castellano - Spanish translation file
 *
 * Authors:
-*  Esteban Mat&iacute;as Vergara, Anton Meixome
+*  Esteban Mat&iacute;as Vergara, Anton Meixome, Agustin Henze
 *
 * Last edited:
 *    2007-12-28
@@ -26,9 +26,9 @@ $LANG['account_info'] = "Informaci&oacute;n de la Cuenta";//1
 $LANG['actions'] = "Acciones";//1
 $LANG['add_biller'] = "A&ntilde;adir Facturador";//1
 $LANG['add_customer'] = "A&ntilde;adir Cliente";//1
-$LANG['add_invoice_item'] = "Add Invoice Item";//0
+$LANG['add_invoice_item'] = "A&ntilde;adir un item a la Factura";//1
 $LANG['add_invoice_preference'] = "A&ntilde;adir Preferencias de Factura";//1
-$LANG['add_item'] = "Add Item";//0
+$LANG['add_item'] = "A&ntilde;adir item";//1
 $LANG['add_new_biller'] = "A&ntilde;adir Nuevo Facturador";//1
 $LANG['add_new_invoice'] = "A&ntilde;adir Nueva Factura";//1
 $LANG['add_new_payment_type'] = "A&ntilde;adir Nuevo Tipo de Pago";//1
@@ -95,14 +95,14 @@ $LANG['days'] = "D&iacute;as";//1
 $LANG['debtors'] = "Deudores";//1
 $LANG['debtors_by_aging_periods'] = "Deudores por periodos de Antig&uuml;edad";//1
 $LANG['debtors_by_amount_owed'] = "Deudores por Monto de Deuda";//1
-$LANG['default_biller'] = "Default Biller";//0
-$LANG['default_customer'] = "Default Customer";//0
+$LANG['default_biller'] = "Entidad Facturadora por defecto";//1
+$LANG['default_customer'] = "Cliente por defecto";//1
 $LANG['default_inv_template'] = "Plantilla predeterminada de factura";//1
-$LANG['default_invoice_preference'] = "Default Invoice Preference";//0
+$LANG['default_invoice_preference'] = "Preferencias de Facturación";//1
 $LANG['default_number_items'] = "N&uacute;mero predeterminado de lineas de items:";//1
 $LANG['default_payment_type'] = "Tipo de Pago predeterminado";//1
-$LANG['default_tax'] = "Default Tax";//0
-$LANG['delete'] = "Delete";//0
+$LANG['default_tax'] = "Impuesto por defecto";//1
+$LANG['delete'] = "Borrar";//1
 $LANG['description'] = "Descripci&oacute;on";//1
 $LANG['details'] = "Detalles";//1
 $LANG['disabled'] = "Desactivado";//1
@@ -167,9 +167,9 @@ $LANG['invoices'] = "Facturas";//1
 $LANG['item'] = "Item";//1
 $LANG['itemised'] = "Detallado";//1
 $LANG['itemised_style'] = "Estilo Detallado";//1
-$LANG['language'] = "Language";//0
+$LANG['language'] = "Lenguage";//1
 $LANG['license'] = "Licencia";//1
-$LANG['logging'] = "Logging";//0
+$LANG['logging'] = "Registro";//1
 $LANG['login'] = "Log In";//1
 $LANG['logo_file'] = "Archivo de Log";//1
 $LANG['logout'] = "Log out";//1
@@ -225,7 +225,7 @@ $LANG['payments_filtered_invoice'] = "Procesar pago para esta factura";//1
 $LANG['phone'] = "Tel&eacute;fono";//1
 $LANG['phone_short'] = "Telf.";//1
 $LANG['preference_id'] = "ID de Preferencia";//1
-$LANG['preferences'] = "Preferences";//0
+$LANG['preferences'] = "Preferencias";//1
 $LANG['prepare_simple_invoices'] = "Preparar Simple Invoices para su uso";//1
 $LANG['print_preview'] = "Imprimir Vista Previa";//1
 $LANG['print_preview_tooltip'] = "Vista Previa de";//1
@@ -298,7 +298,7 @@ $LANG['sum'] = "Sum";//1
 $LANG['summary'] = "Resumen";//1
 $LANG['summary_of_accounts'] = "Resumen de cuentas";//1
 $LANG['system_defaults'] = "Valores Predeterminados del Sistema";//
-$LANG['system_preferences'] = "System Preferences";//0
+$LANG['system_preferences'] = "Preferencias del Sistema";//1
 $LANG['tax'] = "Impuestos";//1
 $LANG['tax_description'] = "Descripci&oacute;n de Impuesto";//1
 $LANG['tax_id'] = "ID de Impuesto";//1
