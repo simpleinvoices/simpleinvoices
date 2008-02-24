@@ -551,6 +551,8 @@ INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 	$patch['115']['date'] = "20070523";
 
 	$numpatchesdone = getNumberOfDonePatches();
+	$defaults = null;
+	
 	if ($numpatchesdone < 124) {
 		// system defaults conversion patch
 		// defaults query and DEFAULT NUMBER OF LINE ITEMS
