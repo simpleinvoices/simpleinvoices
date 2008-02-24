@@ -41,7 +41,7 @@ if(!is_writable($smarty -> compile_dir)) {
 
 
 //adds own smarty plugins
-$smarty->plugins_dir = array("plugins","smarty_plugins");
+$smarty->plugins_dir = array("plugins","include/smarty_plugins");
 
 require_once("./include/include_main.php");
 
