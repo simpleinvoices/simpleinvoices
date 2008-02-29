@@ -987,14 +987,22 @@ function urlPDF($invoiceID)
 	//set the port of http(s) section
 	if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on') {
 		$_SERVER['FULL_URL'] = "https://";
+		//http://simpleinvoices.org/forum/topic-457.html
+		//below code no longer required - please test if your using a non standard port
+		/*
 		if($_SERVER['SERVER_PORT']!="443") {
 			$port .= "://" . $_SERVER[’SERVER_PORT’];
 		}
+		*/
 	} else {
 		$_SERVER['FULL_URL'] = "http://";
+		//http://simpleinvoices.org/forum/topic-457.html
+		//below code no longer required - please test if your using a non standard port
+		/*
 		if($_SERVER['SERVER_PORT']!="80") {
 			$port = ":" . $_SERVER['SERVER_PORT'];
 		}
+		*/
 	}
 
 	//merge it all togehter
