@@ -20,7 +20,7 @@
 define("BROWSE","browse");
 
 //keeps the old path
-set_include_path(get_include_path() . PATH_SEPARATOR . "./include". PATH_SEPARATOR . "./library");
+set_include_path(get_include_path() . PATH_SEPARATOR . "./include". PATH_SEPARATOR . "./library". PATH_SEPARATOR . "./include/smarty_plugins" );
 
 $module = isset($_GET['module'])?$_GET['module']:null;
 $view = isset($_GET['view'])?$_GET['view']:null;
