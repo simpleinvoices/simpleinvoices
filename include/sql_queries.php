@@ -1765,9 +1765,9 @@ function urlPDF($invoiceID) {
 
 	//merge it all togehter
 	if (isset($_SERVER['HTTP_HOST'])) {
-		$_SERVER['FULL_URL'] .= $http_auth.$_SERVER['HTTP_HOST'].$port.$dir.$script;
+		$_SERVER['FULL_URL'] .= $http_auth.$_SERVER['HTTP_HOST'].$dir.$script;
 	} else {
-		$_SERVER['FULL_URL'] .= $http_auth.$_SERVER['HTTP_HOST'].$port.$dir.$script;
+		$_SERVER['FULL_URL'] .= $http_auth.$_SERVER['HTTP_HOST'].$dir.$script;
 	}
 	
 	return $_SERVER['FULL_URL'];
