@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<title>Simple Invoices</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link REL="SHORTCUT ICON" HREF="./images/common/favicon.ico">
 
 <script type="text/javascript">
     var GB_ROOT_DIR = "./modules/include/js/";
