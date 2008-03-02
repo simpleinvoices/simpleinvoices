@@ -6,6 +6,7 @@ Disclaimer: if its in the list it may get done sometime in the future if and whe
 Next Release :: TODO
 ##############################
 - aim Jan/Feb 08
+ - Consulting style - if desciptoin null then don;t show Description heading thing on the invoice- JK
  - remove float data types(chage to decimal), and change decimals from 2 to 3 decimal points - AP
  - Config.php - used YAML for the DB info : http://prematureoptimization.org/blog/archives/39/ - AP
  - manage pages redevelopment!! - JK
