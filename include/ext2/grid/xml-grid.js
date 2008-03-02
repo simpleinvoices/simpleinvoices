@@ -38,35 +38,6 @@ Ext.onReady(function(){
 		Ext.ButtonToggleMgr.register(this);
 	}
   });
-
-  
-
-      var action1 = new Ext.Action({
-        text: 'Help',
-        handler: function(){
-			showWindow();
-			//Ext.MessageBox.alert('Simple Invoices help', 'This is a test help box thing.');
-			//Ext.Msg.prompt('Enter Text', 'Enter new text for Action 1:');
-			//href:'index.php';
-			//alert('test');
-            //Ext.msg('Click','You clicked on "Action 1".');
-        },
-        iconCls: 'blist'
-    });
-	
-	 function showWindow() {   
-      var win = new Ext.Window({
-         width:400,
-         height:400,
-         title:"Simple Invoices help",
-	 autoLoad: 'documentation/en-gb/help/age.html',
-         autoScroll:true,
-         modal:true
-         //html:'documentation/en-gb/help/age.html'
-         //animateTarget:"btnHello"
-      });
-      win.show()
-	}
 	
     // create the Data Store
     var ds = new Ext.data.GroupingStore({
@@ -179,15 +150,11 @@ Ext.onReady(function(){
         ds: ds,
         cm: cm,
 		title:'Manage Invoices',
-        //renderTo: document.body,
         renderTo:'manageInvoicesGrid',
-        //width:800,
-        //height:600,
-		//autoHeight: true,
+		autoHeight: true,
         viewConfig: {
              forceFit:true
-        },
-		
+        },		
         view: new Ext.grid.GroupingView({
             forceFit:true,
             groupTextTpl: '{text} ({[values.rs.length]} {[values.rs.length > 1 ? "Items" : "Item"]})'
@@ -200,52 +167,13 @@ Ext.onReady(function(){
             displayInfo: true,
             displayMsg: 'Displaying invoices {0} - {1} of {2}'
         }),
-		layout:'fit',
-        	             tbar:[
-						 action1, 
-						 '-', 
-						 new Ext.LinkButton({
-						     text:'New Invoice - Total style',
-                             tooltip:'Create a new invoice using the Total style',
-							 href:'index.php?module=invoices&view=total',
-							 IconCls: 'add'
-						})
-						 , '-',
-						 {
-                             text:'New Invoice - Total style',
-                             tooltip:'Create a new invoice using the Total style',
-							 type: 'submit',
-							 href:'index.php',
-                             iconCls:'add'
-                         }, '-', {
-                             text:'New Invoice - Consulting style',
-                             tooltip:'Create a new invoice using the Consulting style',
-							 href:'http://www.simpleinvoices.org',
-							 hrefTarget:'self',
-                             iconCls:'option'
-                         },'-',{
-                             text:'New Invoice - Itemised style',
-                             tooltip:'Create a new invoice using the Itemised style',
-							 href:'index.php',
-                             iconCls:'remove'
-                         }]
-		
+		layout:'fit'	
     });
 	
     function onButtonClick(btn){
         Ext.example.msg('Button Click','You clicked the "{0}" button.', btn.text);
     }
-	
-pnl = new Ext.Viewport( {
- id:'panel',
- frame:false,
- layout:'fit',
- items:grid
-});
+    
+	ds.load({params:{start:0, limit:25}});
 
-
-
-		ds.load({params:{start:0, limit:25}});
-
-    //ds.load();
 });
