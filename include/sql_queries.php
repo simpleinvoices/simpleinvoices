@@ -491,9 +491,12 @@ function insertProductComplete($enabled=1,$visible=1,$description,
 	} else {
 		$sql = "INSERT into
 			".TB_PREFIX."products
+			(
+				description, unit_price, custom_field1, custom_field2,
+				custom_field3, custom_field4, notes, enabled, visible
+			)
 		VALUES
 			(	
-				NULL,
 				:description,
 				:unit_price,
 				:custom_field1,
