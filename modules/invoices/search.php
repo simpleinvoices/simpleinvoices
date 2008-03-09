@@ -7,7 +7,7 @@
 *	 Justin Kelly, Nicolas Ruflin
 *
 * Last edited:
-* 	 2007-07-19
+* 	 2008-03-09 - John Gates
 *
 * License:
 *	 GPL v2 or above
@@ -15,6 +15,11 @@
 * Website:
 * 	http://www.simpleinvoices.org
  */
+//stop the direct browsing to this file - let index.php handle which files get displayed
+checkLogin();
+$smarty -> display("../templates/default/menu.tpl");
+$smarty -> display("../templates/default/main.tpl");
+
 	$startdate = (isset($_POST['startdate'])) ? $_POST['startdate'] : date("Y-m-d",strtotime("last Year"));
 	$startdate = htmlspecialchars($startdate);
 	$enddate   = (isset($_POST['enddate']))   ? $_POST['enddate']   : date("Y-m-d",strtotime("now"));
@@ -74,7 +79,9 @@ if($sth != null) {
 
 echo "</div>";
 
-//getMenuStructure();
+$pageActive = "invoices";
+$smarty -> assign("invoices",$invoices);
+getMenuStructure();
 // till template is made
 exit();
 
