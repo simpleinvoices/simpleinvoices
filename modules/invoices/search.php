@@ -81,14 +81,15 @@ if(isset($_POST['startdate']) && isset($_POST['enddate'])) {
 
 if($sth != null) {
 	echo "<b>Result</b>";
-	echo "<table border=1 cellpadding=2>";
+	echo "<table border=1 cellpadding=2 cellspacing=2>";
+	echo "<tr><td>&nbsp;Invoice Number&nbsp;</td><td>&nbsp;Date</td><td>&nbsp;Biller</td><td>&nbsp;Customer</td><td>&nbsp;Type</td></tr>";
 	while($res = $sth->fetch()) {
 		echo "<tr>";
-		echo "<td><a href='index.php?module=invoices&view=quick_view&invoice=$res[invoice]'>$res[invoice]</a></td>
-		<td>$res[date]</td>
-		<td>$res[biller]</td>
-		<td>$res[customer]</td>
-		<td>$res[type]</td>";
+		echo "<td>&nbsp;<a href='index.php?module=invoices&view=quick_view&invoice=$res[invoice]'>$res[invoice]</a></td>
+		<td>&nbsp; $res[date] &nbsp;</td>
+		<td>&nbsp; $res[biller] &nbsp;</td>
+		<td>&nbsp; $res[customer] &nbsp;</td>
+		<td>&nbsp; $res[type] &nbsp;</td>";
 		echo "</tr>";
 	}
 	echo "</table>";
