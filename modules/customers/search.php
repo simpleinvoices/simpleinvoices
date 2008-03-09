@@ -31,12 +31,13 @@ EOD;
 
 $customers = searchCustomers($_POST['name']);
 
-echo "<table>";
+echo "<table> <br />";
 
 foreach($customers as $customer) {
 	echo <<<EOD
+		
 		<tr>
-			<td>$customer[name]</td>
+			<td>$customer[name]&nbsp;&nbsp;</td>
 			<td><a href="index.php?module=invoices&view=itemised&customer_id=$customer[id]">Itemised</a> |</td> 
 			<td><a href="index.php?module=invoices&view=consulting&customer_id=$customer[id]">&nbsp;Consulting</a> |</td> 
 			<td><a href="index.php?module=invoices&view=total&customer_id=$customer[id]">&nbsp;Total</a></td> 
