@@ -4,10 +4,10 @@
 * 	Customers search page
 *
 * Authors:
-*	 Nicolas Ruflin
+*	 Nicolas Ruflin - John Gates
 *
 * Last edited:
-* 	 2007-07-19
+* 	 2008-03-09 - John Gates
 *
 * License:
 *	 GPL v2 or above
@@ -18,8 +18,11 @@
 
 checkLogin();
 
+$smarty -> display("../templates/default/menu.tpl");
+$smarty -> display("../templates/default/main.tpl");
 
 echo <<<EOD
+	<div>
 	<form action="index.php?module=customers&view=search" method="post">
 	<input type="text" name="name" />
 	<input type="submit" value="Search">
@@ -34,13 +37,15 @@ foreach($customers as $customer) {
 	echo <<<EOD
 		<tr>
 			<td>$customer[name]</td>
-			<td><a href="index.php?module=invoices&view=itemised&customer_id=$customer[id]">Itemised</a></td>
-			<td><a href="index.php?module=invoices&view=consulting&customer_id=$customer[id]">Consulting</a></td>
-			<td><a href="index.php?module=invoices&view=total&customer_id=$customer[id]">Total</a></td>
+			<td><a href="index.php?module=invoices&view=itemised&customer_id=$customer[id]">Itemised</a> |</td> 
+			<td><a href="index.php?module=invoices&view=consulting&customer_id=$customer[id]">&nbsp;Consulting</a> |</td> 
+			<td><a href="index.php?module=invoices&view=total&customer_id=$customer[id]">&nbsp;Total</a></td> 
 		</tr>
 EOD;
 }
 
-echo "</table>";
+echo "</table></div>";
+
+getMenuStructure();
 
 ?>
