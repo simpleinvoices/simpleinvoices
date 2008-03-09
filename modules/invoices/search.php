@@ -26,10 +26,11 @@ $smarty -> display("../templates/default/main.tpl");
 	$enddate   = (isset($_POST['enddate']))   ? $_POST['enddate']   : date("Y-m-d",strtotime("now"));
 	$enddate = htmlspecialchars($enddate);
 
-echo "<b>Search Invoice</b><br />";
+
 
 echo <<<EOD
 <div style="text-align:left;">
+<b>Search Invoice</b><br />
 <br />
 <b>Search by biller and customer name</b><br />
 <form action="index.php?module=invoices&view=search" method="post">
@@ -62,7 +63,7 @@ echo <<<EOD
 <input type="submit" value="Search">
 </form>
 <br />
-</div>
+
 EOD;
 
 $sth = null;
