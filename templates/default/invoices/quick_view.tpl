@@ -123,8 +123,8 @@
 	<!-- Biller section -->
 
 	<tr class='details_screen'>
-		<td><b>{$LANG.biller}:</b></td>
-		<td colspan="3"><b>{$biller.name}</b></td>
+		<td class='details_screen'><b>{$LANG.biller}:</b></td>
+		<td  class='details_screen' colspan="3">{$biller.name}</td>
 		<td colspan="2" class='details_screen align_right'><a href='#' class="show-biller" onClick="$('.biller').show();$('.show-biller').hide();">{$LANG.show_details}</a><a href='#' class="biller" onClick="$('.biller').hide();$('.show-biller').show();">{$LANG.hide_details}</a></td>
 	</tr>
 	<tr class='details_screen biller'>
@@ -163,8 +163,8 @@
 	
 	<!-- Customer section -->
 	<tr class='details_screen'>
-		<td><b>{$LANG.customer}:</b></td>
-		<td colspan="3"><b>{$customer.name}</b></td>
+		<td  class='details_screen' ><b>{$LANG.customer}:</b></td>
+		<td  class='details_screen' colspan="3">{$customer.name}</td>
 		<td colspan="2" class='details_screen align_right'><a href='#' class="show-customer" {literal} onClick="$('.customer').show(); $('.show-customer').hide(); {/literal}">{$LANG.show_details}</a> <a href='#' class="customer" {literal} onClick="$('.customer').hide(); $('.show-customer').show(); {/literal}">{$LANG.hide_details}</a></td>
 	</tr>	
 	<tr class='details_screen customer'>
@@ -362,7 +362,7 @@
 
 		{if ($invoice.note != null) }
 		<tr>
-				<td colspan="6"></td>
+				<td colspan="6">&nbsp;</td>
 		</tr>
 		<tr class="details_screen">
 				<td colspan="5"><b>{$LANG.notes}:</b></td>

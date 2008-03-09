@@ -56,8 +56,8 @@ $word_processor = "doc"; #MS Word format
 #$word_processor = "odt"; #Open Document Format text
 
 /* Version Info*/
-$version = "20071231 stable";
-$versionFriendlyName ="07 New Years eve release";
+$version = "20070303 stable";
+$versionFriendlyName ="Patch release 3rd March 08 of 07 New Years eve release";
 $versionSeries = "200708 series";
 
 #################
