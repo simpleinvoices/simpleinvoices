@@ -17,6 +17,7 @@
  */
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
+
 $smarty -> display("../templates/default/menu.tpl");
 $smarty -> display("../templates/default/main.tpl");
 
@@ -25,16 +26,30 @@ $smarty -> display("../templates/default/main.tpl");
 	$enddate   = (isset($_POST['enddate']))   ? $_POST['enddate']   : date("Y-m-d",strtotime("now"));
 	$enddate = htmlspecialchars($enddate);
 
-echo "Search Invoice<br />";
+echo "<b>Search Invoice</b><br />";
 
 echo <<<EOD
 <div style="text-align:left;">
 <br />
 <b>Search by biller and customer name</b><br />
 <form action="index.php?module=invoices&view=search" method="post">
-Biller:<input type="text" name="biller"><br />
-Customer: <input type="text" name="customer"><br />
-<input type="submit" value="Search">
+<table width="18%"  border="0">
+  <tr>
+    <td width="6%"><div align="right">Biller: </div></td>
+    <td width="94%"><input type="text" name="biller"></td>
+  </tr>
+  <tr>
+    <td><div align="right">Customer:</div></td>
+    <td><input type="text" name="customer"></td>
+  </tr>
+  <tr>
+    <td><div align="right">
+      <input type="submit" value="Search">
+    </div></td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+
 </form>
 <br />
 <br />
@@ -47,6 +62,7 @@ Customer: <input type="text" name="customer"><br />
 <input type="submit" value="Search">
 </form>
 <br />
+</div>
 EOD;
 
 $sth = null;
