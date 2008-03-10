@@ -47,6 +47,6 @@ EOD;
 
 echo "</table></div>";
 
-getMenuStructure();
+//getMenuStructure();
 
 ?>

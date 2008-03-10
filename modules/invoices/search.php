@@ -99,7 +99,7 @@ echo "</div>";
 
 $pageActive = "invoices";
 $smarty -> assign("invoices",$invoices);
-getMenuStructure();
+//getMenuStructure();
 // till template is made
 exit();
 
