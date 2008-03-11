@@ -8,7 +8,7 @@
 *	 Justin Kelly, Nicolas Ruflin
 *
 * Last edited:
-* 	 2007-07-18
+* 	 2008-03-10 - John Gates
 *
 * License:
 *	 GPL v2 or above
@@ -19,7 +19,7 @@
 $t = isset($_GET['t'])?$_GET['t']:null;
 $p = isset($_GET['p'])?$_GET['p']:null;
 
-require_once("./include/smarty/Smarty.class.php");
+require_once("./library/smarty/Smarty.class.php");
 $smarty = new Smarty();
 $smarty -> compile_dir = "./cache/";
 include("./include/include_main.php");
