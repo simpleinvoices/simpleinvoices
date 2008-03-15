@@ -4,10 +4,10 @@
 * 	Customers search page
 *
 * Authors:
-*	 Nicolas Ruflin - John Gates
+*	 Nicolas Ruflin, John Gates 
 *
 * Last edited:
-* 	 2008-03-09 - John Gates
+* 	 2008-03-15 - John Gates
 *
 * License:
 *	 GPL v2 or above
@@ -48,5 +48,6 @@ EOD;
 echo "</table></div>";
 
 //getMenuStructure();
+exit(); //Fix double menu display ;-) - Gates
 
 ?>
