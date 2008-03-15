@@ -118,6 +118,19 @@ define("LOGGING",false);
 #define("LOGGING",true);
 
 ####################
+/* Exntesions */
+####################
+//1 = enabled 0 = disabled
+//name is the director in ./extensions which it lives
+$extension['gene']['name'] = "gene";
+$extension['gene']['description'] = "gene's purchase order based system extension";
+$extension['gene']['enabled'] = "0";
+$extension['test']['name'] = "test extension";
+$extension['test']['description'] = "this is a test";
+$extension['test']['enabled'] = "0";
+// dev guys to enable extensions via your local.config.php file
+
+####################
 /* Environment*/
 ####################
 /*
