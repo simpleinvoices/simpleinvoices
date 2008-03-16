@@ -41,7 +41,28 @@ if(!is_writable($smarty -> compile_dir)) {
 //adds own smarty plugins
 $smarty->plugins_dir = array("plugins","include/smarty_plugins");
 
+/*
+* The include configs and requirements stuff section - start
+*/
 require_once("./include/include_main.php");
+
+foreach($extension as $key=>$value)
+{
+	/*
+	* If extension is enabled then continue and include the requested file for that extension if it exists
+	*/	
+	if($value['enabled'] == "1")
+	{
+		//echo "Enabled:".$value['name']."<br><br>";
+		if(file_exists("./extensions/$value[name]/include/include_main.php"))
+		{
+			require_once("../extensions/$value[name]/include/include_main.php");
+		}
+	}
+}
+/*
+* The include configs and requirements stuff section - end
+*/
 
 $smarty -> assign("authenticationOn",$authenticationOn); // to toggle the login / logout button visibility in the menu
 $smarty -> assign("module",$module);

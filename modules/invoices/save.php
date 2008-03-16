@@ -42,6 +42,10 @@ if ($_POST['action'] == "insert" ) {
 		$saved = true;
 	}
 
+    /*
+    * 1 = Total Invoices
+    */
+
 	if($type==1 && $saved) {
 		insertProduct(0,0);
 		$product_id = lastInsertId();
