@@ -118,7 +118,7 @@ define("LOGGING",false);
 #define("LOGGING",true);
 
 ####################
-/* Exntesions */
+/* Extensions */
 ####################
 //1 = enabled 0 = disabled
 //name is the director in ./extensions which it lives
