@@ -988,7 +988,7 @@ function insertCustomer() {
 	global $db_server;
 
 	extract( $_POST );
-	$sql = "INSERT INTO ".TB_PREFIX."customers VALUES ('', :attention, :name, :street_address, :street_address2, :city, :state, :zip_code, :country, :phone, :mobile_phone, :fax, :email, :notes, :custom_field1, :custom_field2, :custom_field3, :custom_field4, :enabled)";
+	$sql = "INSERT INTO ".TB_PREFIX."customers VALUES ('',1  ,:attention, :name, :street_address, :street_address2, :city, :state, :zip_code, :country, :phone, :mobile_phone, :fax, :email, :notes, :custom_field1, :custom_field2, :custom_field3, :custom_field4, :enabled)";
 	
 	if ($db_server == 'pgsql') {
 		$sql = "INSERT INTO ".TB_PREFIX."customers (
@@ -1752,7 +1752,7 @@ function urlPDF($invoiceID) {
 		//below code no longer required - please test if your using a non standard port
 		/*
 		if($_SERVER['SERVER_PORT']!="443") {
-			$port .= "://" . $_SERVER[’SERVER_PORT’];
+			$port .= "://" . $_SERVER[ï¿½SERVER_PORTï¿½];
 		}
 		*/
 	} else {
