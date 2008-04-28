@@ -57,7 +57,7 @@
 		</table>
 		<hr></hr>
 
-<a href='index.php?module=preferences&view=details&submit=$pref_idField&action=edit'>Edit</a>
+<a href='index.php?module=preferences&view=details&submit={$preference.pref_id}&action=edit'>Edit</a>
 
 {/if}
 
