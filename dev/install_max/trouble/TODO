@@ -1,0 +1,3 @@
+Here must be PHP file with description of problem and how to resolve it. When installer detects problem itcreates ancor link to this file
+
+In script folder must be scripts to change rights to backup, cache and config file :) 
