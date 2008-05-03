@@ -1,3 +1,4 @@
+<!--Modified code to display apostrophes in text box output 05/02/2008-Gates-->
 <form name="frmpost"
 	action="index.php?module=preferences&view=save&submit={$smarty.get.submit}"
 	method="post">
@@ -71,37 +72,37 @@
                         <td class='details_screen'>Preference ID</td><td>{$preference.pref_id}</td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Description <a href="docs.php?t=help&p=inv_pref_description" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_description' value='{$preference.pref_description}' size=50></td>
+                        <td class='details_screen'>Description <a href="docs.php?t=help&p=inv_pref_description" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_description' value="{$preference.pref_description}" size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Currenc sign <a href="docs.php?t=help&p=inv_pref_currency_sign" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_currency_sign' value='{$preference.pref_currency_sign}' size=50></td>
+                        <td class='details_screen'>Currenc sign <a href="docs.php?t=help&p=inv_pref_currency_sign" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_currency_sign' value="{$preference.pref_currency_sign}" size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice heading <a href="docs.php?t=help&p=inv_pref_invoice_heading" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a><td><input type=text name='pref_inv_heading' value='{$preference.pref_inv_heading}' size=50></td>
+                        <td class='details_screen'>Invoice heading <a href="docs.php?t=help&p=inv_pref_invoice_heading" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a><td><input type=text name='pref_inv_heading' value="{$preference.pref_inv_heading}" size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice wording <a href="docs.php?t=help&p=inv_pref_invoice_wording" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_wording' value='{$preference.pref_inv_wording}' size=50></td>
+                        <td class='details_screen'>Invoice wording <a href="docs.php?t=help&p=inv_pref_invoice_wording" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_wording' value="{$preference.pref_inv_wording}" size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice detail heading <a href="docs.php?t=help&p=inv_pref_invoice_detail_heading" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_detail_heading' value='{$preference.pref_inv_detail_heading}' size=50></td>
+                        <td class='details_screen'>Invoice detail heading <a href="docs.php?t=help&p=inv_pref_invoice_detail_heading" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_detail_heading' value="{$preference.pref_inv_detail_heading}" size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice detail line <a href="docs.php?t=help&p=inv_pref_invoice_detail_line" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_detail_line' value='{$preference.pref_inv_detail_line}' size=75></td>
+                        <td class='details_screen'>Invoice detail line <a href="docs.php?t=help&p=inv_pref_invoice_detail_line" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_detail_line' value="{$preference.pref_inv_detail_line}" size=75></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice payment method <a href="docs.php?t=help&p=inv_pref_invoice_payment_method" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_payment_method' value='{$preference.pref_inv_payment_method}' size=50></td>
+                        <td class='details_screen'>Invoice payment method <a href="docs.php?t=help&p=inv_pref_invoice_payment_method" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_payment_method' value="{$preference.pref_inv_payment_method}" size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice payment line1 name <a href="docs.php?t=help&p=inv_pref_payment_line1_name" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_payment_line1_name' value='{$preference.pref_inv_payment_line1_name}' size=50></td>
+                        <td class='details_screen'>Invoice payment line1 name <a href="docs.php?t=help&p=inv_pref_payment_line1_name" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_payment_line1_name' value="{$preference.pref_inv_payment_line1_name}" size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice payment line1 value <a href="docs.php?t=help&p=inv_pref_payment_line1_value" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_payment_line1_value' value='{$preference.pref_inv_payment_line1_value}' size=50></td>
+                        <td class='details_screen'>Invoice payment line1 value <a href="docs.php?t=help&p=inv_pref_payment_line1_value" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_payment_line1_value' value="{$preference.pref_inv_payment_line1_value}" size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice payment line2 name <a href="docs.php?t=help&p=inv_pref_payment_line2_name" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_payment_line2_name' value='{$preference.pref_inv_payment_line2_name}' size=50></td>
+                        <td class='details_screen'>Invoice payment line2 name <a href="docs.php?t=help&p=inv_pref_payment_line2_name" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_payment_line2_name' value="{$preference.pref_inv_payment_line2_name}" size=50></td>
                 </tr>
                 <tr>
-                        <td class='details_screen'>Invoice payment line2 value <a href="docs.php?t=help&p=inv_pref_payment_line2_value" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_payment_line2_value' value='{$preference.pref_inv_payment_line2_value}' size=50></td>
+                        <td class='details_screen'>Invoice payment line2 value <a href="docs.php?t=help&p=inv_pref_payment_line2_value" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td><td><input type=text name='pref_inv_payment_line2_value' value="{$preference.pref_inv_payment_line2_value}" size=50></td>
                 </tr>
 	<tr>
     	<td class='details_screen'>{$LANG.enabled} <a href="docs.php?t=help&p=inv_pref_invoice_enabled" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
