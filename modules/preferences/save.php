@@ -1,5 +1,5 @@
 <?php
-
+// -Gates 5/5/2008 added domain_id to parameters 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
@@ -16,6 +16,7 @@ if (  $op === 'insert_preference' ) {
 	VALUES
 		(
 			NULL,
+			:domain_id,
 			:description,
 			:currency_sign,
 			:heading,
@@ -32,6 +33,7 @@ if (  $op === 'insert_preference' ) {
 	if ($db_server == 'pgsql') {
 		$sql = "INSERT into ".TB_PREFIX."preferences
 		(
+			pref_domain_id,
 			pref_description,
 			pref_currency_sign,
 			pref_inv_heading,
@@ -47,6 +49,7 @@ if (  $op === 'insert_preference' ) {
 		)
 		VALUES
 		(
+			:domain_id,
 			:description,
 			:currency_sign,
 			:heading,
@@ -63,6 +66,7 @@ if (  $op === 'insert_preference' ) {
 	}
 
 	if (dbQuery($sql,
+	  ':domain_id', '1',
 	  ':description', $_POST['p_description'],
 	  ':currency_sign', $_POST['p_currency_sign'],
 	  ':heading', $_POST['p_inv_heading'],
@@ -109,7 +113,7 @@ else if (  $op === 'edit_preference' ) {
 			WHERE
 				pref_id = :id";
 
-		if (dbQuery($sql,
+		if (dbQuery($sql, 
 		  ':description', $_POST['pref_description'],
 		  ':currency_sign', $_POST['pref_currency_sign'],
 		  ':heading', $_POST['pref_inv_heading'],
@@ -122,8 +126,8 @@ else if (  $op === 'edit_preference' ) {
 		  ':line2_name', $_POST['pref_inv_payment_line2_name'],
 		  ':line2_value', $_POST['pref_inv_payment_line2_value'],
 		  ':enabled', $_POST['pref_enabled'],
-		  ':id', $_GET['submit'],
-		  )) {
+		  ':id', $_GET['submit']))
+	    {
 			$display_block = $LANG['save_preference_success'];
 		} else {
 			$display_block = $LANG['save_preference_failure'];
