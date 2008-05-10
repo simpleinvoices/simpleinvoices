@@ -5,10 +5,10 @@
 * 	Nederland - Dutch translation file
 *
 * Authors:
-*      Frank Heinen, David (darym3 _at_ hotmail.com), Ruben Bloemgarten (ruben@abubble.nl)
+*      Frank Heinen, David (darym3 _at_ hotmail.com), Ruben Bloemgarten (ruben@abubble.nl), Kai (level411@gmail.com)
 *
 * Last edited:
-* 	 2007-12-22
+* 	 2007-05-09
 *
 * License:
 *	 GPL v2 or above
@@ -26,9 +26,9 @@ $LANG['account_info'] = "Account Informatie";//1
 $LANG['actions'] = "Acties";//1
 $LANG['add_biller'] = "Nieuw Bedrijf Toevoegen";//1
 $LANG['add_customer'] = "Klant Toevoegen";//1
-$LANG['add_invoice_item'] = "Add Invoice Item";//0
+$LANG['add_invoice_item'] = "Voeg Factuurregel Toe";//1
 $LANG['add_invoice_preference'] = "Factuur Voorkeur Toevoegen";//1
-$LANG['add_item'] = "Add Item";//0
+$LANG['add_item'] = "Voeg Regel Toe";//1
 $LANG['add_new_biller'] = "Voeg Bedrijf toe";//1
 $LANG['add_new_invoice'] = "Nieuwe Factuur Toevoegen";//1
 $LANG['add_new_payment_type'] = "Nieuwe Betaalmethode Toevoegen";//1
@@ -48,7 +48,7 @@ $LANG['age'] = "Leeftijd";//1
 $LANG['aging'] = "Leeftijd";//1
 $LANG['amount'] = "Bedrag";//1
 $LANG['attention_short'] = "t.a.v.";//1
-$LANG['backup_database'] = "Backup Database";//0
+$LANG['backup_database'] = "Database Backuppen";//1
 $LANG['biller'] = "Bedrijf";//1
 $LANG['biller_details'] = "Details Bedrijf";//1
 $LANG['biller_edit'] = "Bedrijf Wijzigen";//1
@@ -95,14 +95,14 @@ $LANG['days'] = "dagen";//1
 $LANG['debtors'] = "Debiteuren";//1
 $LANG['debtors_by_aging_periods'] = "Debiteuren per datum tegoed";//1
 $LANG['debtors_by_amount_owed'] = "Debiteuren per tegoed";//1
-$LANG['default_biller'] = "Default Biller";//0
-$LANG['default_customer'] = "Default Customer";//0
+$LANG['default_biller'] = "Standaard Bedrijf";//1
+$LANG['default_customer'] = "Standaard Klant";//1
 $LANG['default_inv_template'] = "Standaard Factuur Template ";//1
-$LANG['default_invoice_preference'] = "Default Invoice Preference";//0
+$LANG['default_invoice_preference'] = "Standaard Factuur Voorkeur";//1
 $LANG['default_number_items'] = "Standaard hoeveelheid regel objecten:";//1
 $LANG['default_payment_type'] = "Standaard betalingstype";//1
-$LANG['default_tax'] = "Default Tax";//0
-$LANG['delete'] = "Delete";//0
+$LANG['default_tax'] = "Standaard BTW";//1
+$LANG['delete'] = "Wis";//1
 $LANG['description'] = "Beschrijving";//1
 $LANG['details'] = "Details";//1
 $LANG['disabled'] = "Gedeactiveerd";//1
@@ -130,7 +130,7 @@ $LANG['gross_total'] = "Bruto";//1
 $LANG['help'] = "Help";//1
 $LANG['help_manage_invoices'] = "Wat moet dat met al die verschillende kolommen?";//1
 $LANG['hide_details'] = "Verberg details";//1
-$LANG['home'] = "Home";//0
+$LANG['home'] = "Home";//1
 $LANG['id'] = "ID";//1
 $LANG['ie_10_for_10'] = "* bijvoorbeeld. 10 voor 10%";//1
 $LANG['included'] = "inclusief";//1
@@ -167,9 +167,9 @@ $LANG['invoices'] = "Facturen";//1
 $LANG['item'] = "Item";//1
 $LANG['itemised'] = "Gedetailleerd";//1
 $LANG['itemised_style'] = "Gedetailleerde stijl";//1
-$LANG['language'] = "Language";//0
+$LANG['language'] = "Taal";//1
 $LANG['license'] = "Licentie";//1
-$LANG['logging'] = "Logging";//0
+$LANG['logging'] = "Loggen";//1
 $LANG['login'] = "Aanmelden";//1
 $LANG['logo_file'] = "Logo bestand";//1
 $LANG['logout'] = "Afmelden";//1
@@ -225,7 +225,7 @@ $LANG['payments_filtered_invoice'] = "Verwerk betaling voor deze factuur";//1
 $LANG['phone'] = "Telefoon";//1
 $LANG['phone_short'] = "Tel.";//1
 $LANG['preference_id'] = "Voorkeur ID";//1
-$LANG['preferences'] = "Preferences";//0
+$LANG['preferences'] = "Voorkeuren";//1
 $LANG['prepare_simple_invoices'] = "Maak Simple Invoices gereed voor gebruik";//1
 $LANG['print_preview'] = "Afdruk Voorbeeld";//1
 $LANG['print_preview_tooltip'] = "Afdruk Voorbeeld van";//1
@@ -261,7 +261,7 @@ $LANG['save_custom_field_failure'] = "Er is iets mis gegaan, probeert u het  keu
 $LANG['save_custom_field_success'] = "Keuze veld is goed opgeslagen, <br> u wordt nu terug naar de Beheer Keuze Velden pagina verwezen.";//1
 $LANG['save_customer'] = "Bewaar Klant";//1
 $LANG['save_customer_failure'] = "Er is iets mis gegaan, probeer de klant nogmaals op te slaan.";//1
-$LANG['save_customer_success'] = "Klant is goed opgeslagen,<br> u wordt nu terug naar de Beheer Klanten pagina verwezen.";//0
+$LANG['save_customer_success'] = "Klant is goed opgeslagen,<br> u wordt nu terug naar de Beheer Klanten pagina verwezen.";//1
 $LANG['save_defaults'] = "Sla standaard waarden op";//1
 $LANG['save_defaults_failure'] = "Er is iets mis gegaan, probeer de systeem standaard waarden nogmaals in te stellen.";//1
 $LANG['save_defaults_success'] = "De standaard systeem waarden zijn goed opgeslagen,<br> u wordt nu naar de Systeem Standaard pagina verwezen.";//1
@@ -281,7 +281,7 @@ $LANG['save_product'] = "Product Opslaan";//1
 $LANG['save_product_failure'] = "Er is iets mis gegaan, probeer het product nogmaals op te slaan.";//1
 $LANG['save_product_success'] = "Product is goed opgeslagen, <br> u wordt nu naar de Beheer Producten pagina verwezen.";//1
 $LANG['save_tax_rate'] = "BTW Tarief Opslaan";//1
-$LANG['save_tax_rate_failure'] = "Er is iets mis gegaan, probeer het BTW tarief opnieuw op te slaan.";//0
+$LANG['save_tax_rate_failure'] = "Er is iets mis gegaan, probeer het BTW tarief opnieuw op te slaan.";//1
 $LANG['save_tax_rate_success'] = "BTW tarief is goed opgeslagen, <br> u wordt nu naar de Beheer BTW Tarieven pagina verwezen.";//1
 $LANG['select_invoice'] = "Selecteer een factuur";//1
 $LANG['shortcut'] =" Hoofdmenu";//1
@@ -297,8 +297,8 @@ $LANG['sub_total'] = "Subtotaal";//1
 $LANG['sum'] = "Som";//1
 $LANG['summary'] = "Samenvatting";//1
 $LANG['summary_of_accounts'] = "Samenvatting van accounts";//1
-$LANG['system_defaults'] = "Systeem Voorkeuren";//1
-$LANG['system_preferences'] = "System Preferences";//0
+$LANG['system_defaults'] = "Systeem Standaardinstellingen";//1
+$LANG['system_preferences'] = "Systeem Voorkeuren";//1
 $LANG['tax'] = "BTW";//1
 $LANG['tax_description'] = "BTW beschrijving";//1
 $LANG['tax_id'] = "BTW ID";//1
@@ -324,15 +324,15 @@ $LANG['total_taxes'] = "Totaal BTW";//1
 $LANG['total_uppercase'] = "TOTAAL";//1
 $LANG['totals'] = "Totalen";//1
 $LANG['unit_price'] = "Eenheidprijs";//1
-$LANG['upgrading_simple_invoices'] = "Upgrading Simple Invoices";//0
+$LANG['upgrading_simple_invoices'] = "Nieuwere versie van Simple Invoices installeren";//1
 $LANG['using_simple_invoices'] = "Simple Invoices gebruiken";//1
 $LANG['view'] = "Bekijk";//1
 $LANG['want_more_fields'] = "wilt u meer velden?";//1
 $LANG['welcome'] = "Welkom bij ";//1
 $LANG['what_are_custom_fields'] = "Wat zijn voorkeur velden?";//1
-$LANG['whats_all_this_inv_pref'] = "Whats all this Invoice Preference stuff about ";//0
+$LANG['whats_all_this_inv_pref'] = "Waar gaat deze Factuur Voorkeur pagina over?";//1
 $LANG['whats_this_page_about'] = "Waar gaat deze pagina over?";//1
-$LANG['wheres_the_edit_button'] = "Wheres the edit button ";//0
+$LANG['wheres_the_edit_button'] = "Waar zit de knop om te bewerken?";//1
 $LANG['zip'] = "Postcode";//1
 
 ?>
