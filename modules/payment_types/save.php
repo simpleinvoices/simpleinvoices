@@ -19,14 +19,14 @@ $sql = "INSERT INTO ".TB_PREFIX."tax VALUES ('$_POST[tax_description]','$_POST[t
 
 	if ($db_server == 'pgsql') {
 		$sql = "INSERT into ".TB_PREFIX."payment_types
-				(pt_description, pt_enabled)
+				(domain_id, pt_description, pt_enabled)
 			VALUES
-				(:description, :enabled)";
+				('1', :description, :enabled)";
 	} else {
 		$sql = "INSERT into
 				".TB_PREFIX."payment_types
 			VALUES
-				(NULL, :description, :enabled)";
+				(NULL, '1', :description, :enabled)";
 	}
 	
 	if (dbQuery($sql, ':description', $_POST['pt_description'], ':enabled', $_POST['pt_enabled'])) {
