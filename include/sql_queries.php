@@ -828,6 +828,7 @@ function insertBiller() {
 		VALUES
 			(
 				NULL,
+				1,
 				:name,
 				:street_address,
 				:street_address2,
