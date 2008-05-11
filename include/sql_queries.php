@@ -725,8 +725,8 @@ function getInvoice($id) {
 	//print_r($invoice);
 	//exit();
 	
-	$invoice['date'] = date( $config['date_format'], strtotime( $invoice['date'] ) );
 	$invoice['calc_date'] = date('Y-m-d', strtotime( $invoice['date'] ) );
+	$invoice['date'] = date( $config['date_format'], strtotime( $invoice['date'] ) );
 	$invoice['total'] = getInvoiceTotal($invoice['id']);
 	$invoice['paid'] = calc_invoice_paid($invoice['id']);
 	$invoice['owing'] = $invoice['total'] - $invoice['paid'];
