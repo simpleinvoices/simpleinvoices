@@ -1,0 +1,23 @@
+==========================================================================================
+Lang. Code | Lang. name      | New strings | Total strings | Total translated |   % Done | 
+==========================================================================================
+ca         | Catala          | All Done    |           313 |              298 |   95.21% | 
+cs         | Cestina         | All Done    |           313 |              261 |   83.39% | 
+da         | Dansk           | All Done    |           313 |              310 |   99.04% | 
+de         | Deutsch         | All Done    |           313 |              313 |  100.00% | 
+de-ch      | Schwizerdütsch  | All Done    |           313 |              259 |   82.75% | 
+en-gb      | English         | All Done    |           313 |              313 |  100.00% | 
+es         | Castellano      | All Done    |           313 |              310 |   99.04% | 
+fi         | Suomi           | All Done    |           313 |              296 |   94.57% | 
+fr         | Français        | All Done    |           313 |              291 |   92.97% | 
+gl         | Galego          | All Done    |           313 |              205 |   65.50% | 
+gr         | Greek           | All Done    |           313 |              313 |  100.00% | 
+ls         | Sloven??ina     | All Done    |           313 |              297 |   94.89% | 
+lv         | Latviesu        | All Done    |           313 |              165 |   52.72% | 
+nl         | Nederland       | All Done    |           313 |              313 |  100.00% | 
+no-nb      | Norsk NB        | All Done    |           313 |              300 |   95.85% | 
+pt         | Portugues       | All Done    |           313 |              313 |  100.00% | 
+ro         | Romana          | All Done    |           313 |              300 |   95.85% | 
+sk         | Slovensky       | All Done    |           313 |              261 |   83.39% | 
+sq         | Shqip           | All Done    |           313 |              313 |  100.00% | 
+------------------------------------------------------------------------------------------

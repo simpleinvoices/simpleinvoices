@@ -7,7 +7,7 @@
    *        Rui Gouveia
    *
    * Last edited:
-   *        2007-11-01, 2008-01-26
+   *        2007-11-01, 2008-01-26, 2008-05-12
    *
    * License:
    *        GPL v3
@@ -20,8 +20,51 @@
    *
    */
 
-function process_lang_file($lang_code) {
 
+  /*
+   * Get the language codes ('en', 'pt', etc) that exists in this folder.
+   */
+
+function get_defined_langs() {
+
+  // The root path of the language files. Change if needed.
+  $dir = '.';
+  
+  // Open a known directory, and proceed to read its contents
+  if (! is_dir($dir)) {
+    exit("($dir) is not a directory.");
+  }
+
+  $langs = array();
+
+  if ($dh = opendir($dir)) {
+    while (($lang_dir = readdir($dh)) !== false) {
+      if (! ereg("^[a-z]{2,3}$|^[a-z]{2,3}-[a-z]{2,3}$", $lang_dir)) {
+	continue;
+      }
+      
+      //echo "debug: language folder: $lang_dir\n";
+      $langs[] = $lang_dir;
+    }
+  
+    closedir($dh);
+  } else {
+    exit("Error opening folder ($dir)\n");
+  }
+
+  // Sort by lang code.
+  sort($langs);
+
+  return $langs;
+  }
+
+
+/*
+ * Access one language folder and returns an array with two values: the total strings and the total translated strings.
+ */
+
+function process_lang_file($lang_code) {
+  
   $lang_file = file("$lang_code/lang.php");
   
   $count = 0;
@@ -29,11 +72,11 @@ function process_lang_file($lang_code) {
   
   foreach ($lang_file as $line) {
     $line = rtrim($line);
-
+    
     // A string line
     if (preg_match('/^\$LANG\[/', $line)) {
       $count++;
-	
+      
       if (preg_match('/^\$LANG\[.*;\s*\/\/\s*1/', $line)) {
 	$count_translated++;
       } else {
@@ -42,86 +85,40 @@ function process_lang_file($lang_code) {
       }
     }
   }
-
+  
   $ret = array($count, $count_translated);
   return $ret;
   }
-?>
 
-<style>
-td {
-        border-style: none none none none;
-        border-color: white white white white;
-        background-color: #F5F5F5;
-        -moz-border-radius: 0px 0px 0px 0px;
-        font-style: normal;
-        font-weight: normal;
-        text-decoration: none;
-}
-th {
-        border-style: none none none none;
-        border-color: white white white white;
-        background-color: #F8F8F8;
-        -moz-border-radius: 0px 0px 0px 0px;
-        font-style: normal;
-        font-weight: strong;
-        text-decoration: none;
-}
-</style>
 
-<table>
-<tr>
-<th valign="top">Language<br>code</th>
-<th valign="top">Language<br>name</th>
-<th valign="top">New strings<br>available</th>
-<th valign="top">Total strings</th>
-<th valign="top">Total strings<br>translated</th>
-<th valign="top">% Done</th>
-<!--th valign="top">Authors</th-->
-</tr>
+// Header
+print str_repeat("=", 90);
+print "\n";
+print sprintf("%-10s", 'Lang. Code') . " | ";
+print sprintf("%-15s", 'Lang. name') . " | ";
+print sprintf("%-11s", 'New strings') . " | ";
+print sprintf("%13s", 'Total strings') . " | ";
+print sprintf("%16s", 'Total translated') . " | ";
+print sprintf("%8s", '% Done') . " | ";
+//print sprintf("%10s", 'Authors');
+print "\n";
+print str_repeat("=", 90);
+print "\n";
 
-<?php
-  // The root path of the language files.
-$dir = '.';
 
-// Open a known directory, and proceed to read its contents
-if (! is_dir($dir)) {
-  exit("($dir) is not a directory.");
- }
-
-$langs = array();
-
-if ($dh = opendir($dir)) {
-  while (($lang_dir = readdir($dh)) !== false) {
-    if (! ereg("^[a-z]{2,3}$|^[a-z]{2,3}-[a-z]{2,3}$", $lang_dir)) {
-      continue;
-    }
-
-    //echo "debug: language folder: $lang_dir\n";
-    $langs[] = $lang_dir;
-  }
-
-  closedir($dh);
- } else {
-  exit("Error opening folder ($dir)\n");
- }
-
-// Sort by lang code.
-sort($langs);
-
+// The main language. Needed to compare the % done of the other languages.
 $en_lang = process_lang_file('en-gb');
 //echo "debug: en-gb, $en_lang[0], $en_lang[1]\n";
 
-
 // Lets process the language folders.
-foreach ($langs as $lang_code) {
+foreach (get_defined_langs() as $lang_code) {
 
   // Redo the XML part thanks to a sugestion by Nicolas Ruflin.
   // Nicolas, thanks for the PHP lesson.
   $xml = simplexml_load_file("$lang_code/info.xml");
 
   $tmp = split(',', $xml->author);
-  $xml->author = join(',<br>', $tmp);
+  $xml->author = join(', ', $tmp);
   //echo "debug: $xml->name, $xml->author\n";
   
   /*
@@ -135,10 +132,6 @@ foreach ($langs as $lang_code) {
     $percentage = 'N/A';
   } else {
     $percentage = number_format(round(($count[1] / $count[0]) * 100, 2), 2) . '%';
-
-    if ($percentage == '100.00%') {
-      $percentage = "<strong>$percentage</strong>";
-    }
   }
 
   // New strings available?
@@ -146,27 +139,21 @@ foreach ($langs as $lang_code) {
     $new_strings = 'All Done';
   } else {
     $new_strings = $en_lang[0] - $count[0];
-
-    if ($new_strings > 0) {
-      $new_strings = "<b>$new_strings</b>";
-    } else {
-      $new_strings = "<font color='red'>? $new_strings ?</font>";
-    }
   }
 
-  print "
-<tr>
-<td>$lang_code</td>
-<td>$xml->name</td>
-<td align=\"center\">$new_strings</td>
-<td align=\"center\">$count[0]</td>
-<td align=\"center\">$count[1]</td>
-<td align=\"right\">$percentage</td>
-<!--td>$xml->author</td-->
-</tr>
-";
 
+
+  print sprintf("%-10s", $lang_code) . " | ";
+  print sprintf("%-15s", utf8_decode($xml->name)) . " | ";
+  print sprintf("%-11s", $new_strings) . " | ";
+  print sprintf("%13s", $count[0]) . " | ";
+  print sprintf("%16s", $count[1]) . " | ";
+  print sprintf("%8s", $percentage) . " | ";
+  //print sprintf("%10s", $xml->author) . " | ";
+  print "\n";
 }
-?>
 
-</table>
+// Footer
+print str_repeat("-", 90);
+print "\n";
+?>
