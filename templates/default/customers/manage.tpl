@@ -37,7 +37,7 @@
 		<tr class="sortHeader">
 			<th class="noFilter sortable">{$LANG.actions}</th>
 			<th class="index_table sortable">{$LANG.customer_id}</th>
-			<th class="index_table sortable">{$LANG.customer_name}</th>
+			<th class="index_table sortable">{$LANG.customer_name|regex_replace:"/[\\\]/":""}</th>
 			<!-- <th class="index_table">{$LANG.phone}</th> -->
 			<th class="index_table sortable">{$LANG.total}</th>
 			<!-- <th class="index_table">{$LANG.paid}</th> -->
@@ -50,7 +50,7 @@
 		<td class="index_table"><a title="{$LANG.view}" class="index_table" href="index.php?module=customers&view=details&customer={$customer.id}&action=view"><img src="images/common/view.png" height="16" border="0" align="absmiddle"/></a>
 			<a title="{$LANG.edit}" class="index_table" href="index.php?module=customers&view=details&customer={$customer.id}&action=edit"><img src="images/common/edit.png" height="16" border="0" align="absmiddle" /></a> </td>
 		<td class="index_table">{$customer.id}</td>
-		<td class="index_table">{$customer.name}</td>
+		<td class="index_table">{$customer.name|regex_replace:"/[\\\]/":""}</td>
 		<!-- <td class="index_table">{$customer.phone}</td> -->
 		<td class="index_table">{$customer.total}</td>
 		<!-- <td class="index_table">{$invoice.paid}</td> -->
