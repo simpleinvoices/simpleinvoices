@@ -189,6 +189,7 @@ $LANG['manage_tax_rates'] = "Manage Tax Rates";//1
 $LANG['mandatory_fields'] = "All fields are mandatory";//1
 $LANG['mobile_phone'] = "Mobile Phone";//1
 $LANG['mobile_short'] = "Mob.";//1
+$LANG['monthly_sales_per_year'] = "Monthly Sales and Payments per year";//1
 $LANG['new_invoice_consulting'] = "New Invoices - Consulting";//1
 $LANG['new_invoice_itemised'] = "New Invoices - Itemised";//1
 $LANG['new_invoice_total'] = "New Invoices - Total";//1

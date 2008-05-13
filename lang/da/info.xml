@@ -5,8 +5,6 @@
 	<englishname>Danish</englishname>
 	<version>1.0.0</version>
 	<creationDate>2004-11-10</creationDate>
-	<author>Claus Mølgaard Nielsen</author>
-	<authorEmail>claus@cmn-service.dk</authorEmail>
-	<author> Michael Larsen</author>
-	<authorEmail></authorEmail>
+	<author>Claus Mølgaard Nielsen, Michael Larsen</author>
+	<authorEmail>claus@cmn-service.dk,-</authorEmail>
 </langfile>

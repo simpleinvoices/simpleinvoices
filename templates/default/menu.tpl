@@ -43,6 +43,7 @@
 					<li><a href="index.php?module=reports&view=report_sales_total">{$LANG.sales} +</a>
 						<ul>
 							<li><a href="index.php?module=reports&view=report_sales_total">{$LANG.total_sales}</a></li>
+							<li><a href="index.php?module=reports&view=report_sales_by_period">{$LANG.monthly_sales_per_year}</a></li>
 						</ul>
 					</li>
 					<li><a href="index.php?module=reports&view=report_sales_customers_total">{$LANG.sales_by_customers} +</a>
