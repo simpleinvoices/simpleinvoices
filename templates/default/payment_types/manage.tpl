@@ -43,7 +43,7 @@
 			<a title="{$LANG.edit}" class="index_table" href="index.php?module=payment_types&amp;view=details&amp;submit={$paymentType.pt_id|escape:html}&amp;action=edit"><img src="images/common/edit.png" height="16" border="0" align="absmiddle" alt="{$LANG.edit}" /></a>
 		</td>
 		<td class="index_table">{$paymentType.pt_id|escape:html}</td>
-		<td class="index_table">{$paymentType.pt_description|escape:html}</td>
+		<td class="index_table">{$paymentType.pt_description|escape:html|regex_replace:"/[\\\]/":""}</td>
 		<td class="index_table">{$paymentType.pt_enabled|escape:html}</td>
 	</tr>
 	{/foreach}

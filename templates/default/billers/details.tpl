@@ -142,7 +142,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.biller_name} <a href="docs.php?t=help&p=required_field" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png"></img></a></td>
-		<td><input type=text name="name" value="{$biller.name}"
+		<td><input type=text name="name" value="{$biller.name|regex_replace:"/[\\\]/":""}"
 			size=50 /></td>
 	</tr>
 	<tr>

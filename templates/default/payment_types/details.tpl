@@ -57,7 +57,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.description} <a href="docs.php?t=help&amp;p=required_field" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png" alt="(required)"></img></a></td>
-		<td><input type="text" name="pt_description" value="{$paymentType.pt_description|escape:html}"
+		<td><input type="text" name="pt_description" value="{$paymentType.pt_description|escape:html|regex_replace:"/[\\\]/":""}"
 		 size="50" /></td>
 	</tr>
 	<tr>

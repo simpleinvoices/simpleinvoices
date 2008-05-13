@@ -38,7 +38,7 @@
 		<td class="index_table"><a title="{$LANG.view}" class="index_table" href="index.php?module=preferences&view=details&submit={$preference.pref_id}&action=view"><img src="images/common/view.png" height="16" border="0" align="absmiddle" /></a>
 			<a title="{$LANG.edit}" class="index_table" href="index.php?module=preferences&view=details&submit={$preference.pref_id}&action=edit"><img src="images/common/edit.png" height="16" border="0" align="absmiddle" /></a> </td>
 		<td class="index_table">{$preference.pref_id}</td>
-		<td class="index_table">{$preference.pref_description}</td>
+		<td class="index_table">{$preference.pref_description|regex_replace:"/[\\\]/":""}</td>
 		<td class="index_table">{$preference.enabled}</td>
 	</tr>
 	{/foreach}

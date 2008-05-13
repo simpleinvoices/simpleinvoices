@@ -32,7 +32,7 @@
 		<tr class="sortHeader">
 			<th class="noFilter sortable">{$LANG.actions}</th>
 			<th class=" index_table sortable">{$LANG.biller_id}</th>
-			<th class="index_table sortable">{$LANG.biller_name}</th>
+			<th class="index_table sortable">{$LANG.biller_name|regex_replace:"/[\\\]/":""}</th>
 			<th class="index_table sortable">{$LANG.email}</th>
 			<th class="noFilter index_table sortable">{$LANG.enabled}</th>
 		</tr>
@@ -42,7 +42,7 @@
 		<td class="index_table"><a title="{$LANG.view}" class="index_table" href="index.php?module=billers&view=details&id={$biller.id}&action=view"><img src="images/common/view.png" height="16" border="0" align="absmiddle"/></a>
 			<a title="{$LANG.edit}" class="index_table" href="index.php?module=billers&view=details&id={$biller.id}&action=edit"><img src="images/common/edit.png" height="16" border="0" align="absmiddle" /></a></td>
 		<td class="index_table">{$biller.id}</td>
-		<td class="index_table">{$biller.name}</td>
+		<td class="index_table">{$biller.name|regex_replace:"/[\\\]/":""}</td>
 		<!-- <td class="index_table">{$biller.phone}</td>
 			<td class="index_table">{$biller.mobile_phone}</td> -->
 		<td class="index_table">{$biller.email}</td>
