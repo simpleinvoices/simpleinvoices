@@ -1,23 +1,23 @@
-============================================================================================================
-Lang. Code | Lang. name      | English name    | New strings | Total strings | Total translated |   % Done | 
-============================================================================================================
-ca         | Catala          | Catalan         | 1           |           313 |              298 |   95.21% | 
-cs         | Cestina         | Czech           | 1           |           313 |              261 |   83.39% | 
-da         | Dansk           | Danish          | 1           |           313 |              310 |   99.04% | 
-de         | Deutsch         | German          | 1           |           313 |              313 |  100.00% | 
-de-ch      | Schwizerdütsch  | Swiss German    | 1           |           313 |              259 |   82.75% | 
-en-gb      | English         | UK              | All Done    |           314 |              314 |  100.00% | 
-es         | Castellano      | Spanish         | 1           |           313 |              310 |   99.04% | 
-fi         | Suomi           | Finnish         | 1           |           313 |              296 |   94.57% | 
-fr         | Français        | French          | 1           |           313 |              291 |   92.97% | 
-gl         | Galego          | Galician        | 1           |           313 |              205 |   65.50% | 
-gr         | Greek           | GR              | 1           |           313 |              313 |  100.00% | 
-ls         | Sloven??ina     | Slovenian       | 1           |           313 |              297 |   94.89% | 
-lv         | Latviesu        | Latvian         | 1           |           313 |              165 |   52.72% | 
-nl         | Nederland       | Dutch           | 1           |           313 |              313 |  100.00% | 
-no-nb      | Norsk NB        | Norwegian NB    | 1           |           313 |              300 |   95.85% | 
-pt         | Portugues       | Portuguese      | 1           |           313 |              313 |  100.00% | 
-ro         | Romana          | Romanian        | 1           |           313 |              300 |   95.85% | 
-sk         | Slovensky       | Slovak          | 1           |           313 |              261 |   83.39% | 
-sq         | Shqip           | SQ              | 1           |           313 |              313 |  100.00% | 
-------------------------------------------------------------------------------------------------------------
+========================================================================================================
+Lang. Code | Lang. name                    | New strings | Total strings | Total translated |   % Done | 
+========================================================================================================
+ca         | Catala (Catalan)              | 1           |           313 |              298 |   95.21% | 
+cs         | Cestina (Czech)               | 1           |           313 |              261 |   83.39% | 
+da         | Dansk (Danish)                | 1           |           313 |              310 |   99.04% | 
+de         | Deutsch (German)              | 1           |           313 |              313 |  100.00% | 
+de-ch      | Schwizerdütsch (Swiss German) | 1           |           313 |              259 |   82.75% | 
+en-gb      | English (UK)                  | All Done    |           314 |              314 |  100.00% | 
+es         | Castellano (Spanish)          | 1           |           313 |              310 |   99.04% | 
+fi         | Suomi (Finnish)               | 1           |           313 |              296 |   94.57% | 
+fr         | Français (French)             | 1           |           313 |              291 |   92.97% | 
+gl         | Galego (Galician)             | 1           |           313 |              205 |   65.50% | 
+gr         | Greek (GR)                    | 1           |           313 |              313 |  100.00% | 
+ls         | Sloven??ina (Slovenian)       | 1           |           313 |              297 |   94.89% | 
+lv         | Latviesu (Latvian)            | 1           |           313 |              165 |   52.72% | 
+nl         | Nederland (Dutch)             | 1           |           313 |              313 |  100.00% | 
+no-nb      | Norsk NB (Norwegian NB)       | 1           |           313 |              300 |   95.85% | 
+pt         | Portugues (Portuguese)        | 1           |           313 |              313 |  100.00% | 
+ro         | Romana (Romanian)             | 1           |           313 |              300 |   95.85% | 
+sk         | Slovensky (Slovak)            | 1           |           313 |              261 |   83.39% | 
+sq         | Shqip (SQ)                    | 1           |           313 |              313 |  100.00% | 
+--------------------------------------------------------------------------------------------------------

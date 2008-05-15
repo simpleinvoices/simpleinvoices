@@ -92,18 +92,17 @@ function process_lang_file($lang_code) {
 
 
 // Header
-print str_repeat("=", 108);
+print str_repeat("=", 104);
 print "\n";
 print sprintf("%-10s", 'Lang. Code') . " | ";
-print sprintf("%-15s", 'Lang. name') . " | ";
-print sprintf("%-15s", 'English name') . " | ";
+print sprintf("%-29s", 'Lang. name') . " | ";
 print sprintf("%-11s", 'New strings') . " | ";
 print sprintf("%13s", 'Total strings') . " | ";
 print sprintf("%16s", 'Total translated') . " | ";
 print sprintf("%8s", '% Done') . " | ";
 //print sprintf("%10s", 'Authors');
 print "\n";
-print str_repeat("=", 108);
+print str_repeat("=", 104);
 print "\n";
 
 
@@ -145,8 +144,7 @@ foreach (get_defined_langs() as $lang_code) {
 
 
   print sprintf("%-10s", $lang_code) . " | ";
-  print sprintf("%-15s", utf8_decode($xml->name)) . " | ";
-  print sprintf("%-15s", utf8_decode($xml->englishname)) . " | ";
+  print sprintf("%-29s", utf8_decode($xml->name." (".$xml->englishname.")")) . " | ";
   print sprintf("%-11s", $new_strings) . " | ";
   print sprintf("%13s", $count[0]) . " | ";
   print sprintf("%16s", $count[1]) . " | ";
@@ -156,6 +154,6 @@ foreach (get_defined_langs() as $lang_code) {
 }
 
 // Footer
-print str_repeat("-", 108);
+print str_repeat("-", 104);
 print "\n";
 ?>
