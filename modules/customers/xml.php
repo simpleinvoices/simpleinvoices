@@ -20,20 +20,46 @@ if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 }
 
 /*Check that the sort field is OK*/
-$validFields = array('id', 'name', 'customer_total','owing','enabled');
+$validFields = array('CID', 'name', 'customer_total','owing','enabled');
 
 if (in_array($sort, $validFields)) {
 	$sort = $sort;
 } else {
-	$sort = "id";
+	$sort = "CID";
 }
 
-
 	//$sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY $sort $dir LIMIT $start, $limit";
-	$sql = "SELECT * FROM ".TB_PREFIX."customers LIMIT $start, $limit";
+	$sql = "SELECT 
+				c.id as CID, 
+				c.name as name, 
+				(SELECT (CASE  WHEN c.enabled = 0 THEN 'Disabled' ELSE 'Enabled' END )) AS enabled,
+				(
+					SELECT
+			            coalesce(sum(ii.total),  0) AS total 
+			        FROM
+			            ".TB_PREFIX."invoice_items ii INNER JOIN
+			            ".TB_PREFIX."invoices iv ON (iv.id = ii.invoice_id)
+			        WHERE  
+			            iv.customer_id  = CID ) as customer_total,
+                (
+                    SELECT 
+                        coalesce(sum(ap.ac_amount), 0) AS amount 
+                    FROM
+                        ".TB_PREFIX."account_payments ap INNER JOIN
+                        ".TB_PREFIX."invoices iv ON (iv.id = ap.ac_inv_id)
+                    WHERE 
+                        iv.customer_id = CID) AS owing
+
+			FROM 
+				".TB_PREFIX."customers c  
+			ORDER BY 
+				$sort $dir 
+			LIMIT 
+				$start, $limit";
 
 	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
-
+	$customers = $sth->fetchAll(PDO::FETCH_ASSOC);
+/*
 	$customers = null;
 
 	for($i=0; $customer = $sth->fetch(PDO::FETCH_ASSOC); $i++) {
@@ -42,26 +68,7 @@ if (in_array($sort, $validFields)) {
 		} else {
 			$customer['enabled'] = $LANG['disabled'];
 		}
-
-		#invoice total calc - start
-		$customer['customer_total'] = calc_customer_total($customer['id']);
-		#invoice total calc - end
-
-		#amount paid calc - start
-		$customer['paid'] = calc_customer_paid($customer['id']);
-		#amount paid calc - end
-
-		#amount owing calc - start
-		$customer['owing'] = $customer['customer_total'] - $customer['paid'];
-		
-		#amount owing calc - end
-		$customers[$i] = $customer;
-
-
-	}
-
-	$customers = sorted($customers,$sort,$dir);
-
+*/
 global $dbh;
 
 $sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."customers";

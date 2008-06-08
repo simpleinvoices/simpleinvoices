@@ -10,15 +10,6 @@ these strings to String.format on each row, which also delimits with curly brace
 
 {literal}
 
-var quick_view_tooltip ="{/literal}{$LANG.quick_view_tooltip} {ldelim}1{rdelim}{literal}";
-var edit_view_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pref_inv_wording} {ldelim}1{rdelim}{literal}";
-var print_preview_tooltip = "{/literal}{$LANG.print_preview_tooltip} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim}{literal}";
-var export_tooltip = "{/literal}{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim} {$LANG.export_pdf_tooltip}{literal}";
-var export_xls_tooltip = "{/literal}{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim} {$LANG.export_xls_tooltip} {$spreadsheet} {$LANG.format_tooltip}{literal}"
-var export_word_tooltip = "{/literal}{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim} {$LANG.export_doc_tooltip} {$word_processor} {$LANG.format_tooltip}{literal}";
-var process_payment_tooltip = "{/literal}{$LANG.process_payment} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim}{literal}";
-var email_tooltip = "{/literal}{$LANG.email}  {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim}{literal}";
-
 Ext.onReady(function(){
 
 	Ext.QuickTips.init();
@@ -60,14 +51,14 @@ Ext.onReady(function(){
 		reader: new Ext.data.XmlReader({
 			// records will have an "Item" tag
 			record: 'tablerow',
-			id: 'id',
+			id: 'CID',
 			type_id: 'type_id',
 			totalRecords: 'total'
 		}, [
 		// set up the fields mapping into the xml doc
 		// The first needs mapping, the others are very basic
 		'actions',
-		{name: 'id', mapping: 'id'},
+		{name: 'CID', mapping: 'CID'},
 		'name','customer_total','owing','enabled'
 		]),
 		// turn on defautl grouping by Aging field
@@ -80,72 +71,30 @@ Ext.onReady(function(){
 	// pluggable renders
 	function renderActions(value, p, record ){
 		
-		var quickViewLink = String.format(
-		'<!--0 Quick View --><a class="index_table" title="'+  +''+ quick_view_tooltip +'" href="index.php?module=invoices&view=quick_view&invoice={1}"> <img src="images/common/view.png" height="16" border="-5px" padding="-4px" valign="bottom" /></a>',
+		var viewLink = String.format(
+		'<!--0 Quick View --><a class="index_table" href="index.php?module=customers&view=details&id={1}&action=view"> <img src="images/common/view.png" height="16" border="-5px" padding="-4px" valign="bottom" /></a>',
 		value,
 		record.id,
 		record.data.type_id,
 		record.data.forumid);
 
-		var editViewLink = String.format(
-		'<!--1 Edit View --><a class="index_table" title="'+ edit_view_tooltip +'" href="index.php?module=invoices&view=details&invoice={1}&action=view"><img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>',
+		var editLink = String.format(
+		'<!--1 Edit View --><a class="index_table" href="index.php?module=customers&view=details&id={1}&action=edit"><img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>',
 		value,
 		record.id,
 		record.data.type_id,
 		record.data.forumid);
 
-		var printViewLink = String.format(
-		'<!--2 Print View --><a class="index_table" title="'+ print_preview_tooltip +'" href="index.php?module=invoices&view=templates/template&invoice={1}&action=view&location=print"><img src="images/common/printer.png" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>',
-		value,
-		record.id,
-		record.data.type_id,
-		record.data.forumid);
-
-		var pdfLink = String.format(
-		'<!--3 EXPORT TO PDF --><a title="'+export_tooltip+'"	class="index_table" href="pdfmaker.php?id={1}"><img src="images/common/page_white_acrobat.png" height="16" padding="-4px" border="-5px" valign="bottom" /><!-- pdf --></a>',
-		value,
-		record.id,
-		record.data.type_id,
-		record.data.forumid);
-
-		var xlsLink = String.format(
-		'<!--4 XLS --><a title="'+ export_xls_tooltip +'" class="index_table" href="index.php?module=invoices&view=templates/template&invoice={1}&action=view&location=print&export={$spreadsheet}"><img src="images/common/page_white_excel.png" height="16" border="0" padding="-4px" valign="bottom" /><!-- $spreadsheet --></a>',
-		value,
-		record.id,
-		record.data.type_id,
-		record.data.forumid);
-
-		var docLink = String.format(
-		'<!--5 DOC --><a title="'+ export_word_tooltip +'" class="index_table" href="index.php?module=invoices&view=templates/template&invoice={1}&action=view&location=print&export={$word_processor}"><img src="images/common/page_white_word.png" height="16" border="0" padding="-4px" valign="bottom" /><!-- $word_processor --></a>',
-		value,
-		record.id,
-		record.data.type_id,
-		record.data.forumid);
-
-		var paymentLink = String.format(
-		'<!--6 Payment --><a title="'+ process_payment_tooltip +'" class="index_table" href="index.php?module=payments&view=process&invoice={1}&op=pay_selected_invoice"><img src="images/common/money_dollar.png" height="16" border="0" padding="-4px" valign="bottom" /></a>',
-		value,
-		record.id,
-		record.data.type_id,
-		record.data.forumid);
-
-
-		var emailLink = String.format(
-		'<!--7 Email --><a href="index.php?module=invoices&view=email&stage=1&invoice={1}" title="'+ email_tooltip +'"><img src="images/common/mail-message-new.png" height="16" border="0" padding="-4px" valign="bottom" /></a>',
-		value,
-		record.id,
-		record.data.type_id,
-		record.data.forumid);
 
 		//Return a nice big link for the Actions column in the Manage Invoices page
-		return quickViewLink + editViewLink + printViewLink + pdfLink + xlsLink + docLink + paymentLink + emailLink;
+		return viewLink + editLink ;
 		
 	}
 
 
 	var cm = new Ext.grid.ColumnModel([
 	{header: "Actions", width: 105, dataIndex: 'actions', sortable:false, renderer: renderActions },
-	{header: "ID", width: 50, dataIndex: 'id'},
+	{header: "ID", width: 50, dataIndex: 'CID'},
 	{header: "Name", width: 180, dataIndex: 'name'},
 	{header: "Total", width: 115, dataIndex: 'customer_total'},
 	{header: "Owing", width: 75, dataIndex: 'owing'},
