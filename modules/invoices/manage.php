@@ -13,11 +13,15 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+	$sql = "SELECT count(*) as count FROM ".TB_PREFIX."invoices";
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$number_of_invoices  = $sth->fetch(PDO::FETCH_ASSOC);
 //all funky xml - sql stuff done in xml.php
 
 $pageActive = "invoices";
 
 $smarty -> assign("invoices",$invoices);
+$smarty -> assign("number_of_invoices",$number_of_invoices);
 $smarty -> assign("spreadsheet",$spreadsheet);
 $smarty -> assign("word_processor",$word_processor);
 $smarty -> assign('pageActive', $pageActive);

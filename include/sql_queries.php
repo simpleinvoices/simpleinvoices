@@ -1104,7 +1104,7 @@ function getCustomers() {
 	
 	$customer = null;
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY name";
+	$sql = "SELECT * FROM ".TB_PREFIX."customers";
 	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 
 	$customers = null;

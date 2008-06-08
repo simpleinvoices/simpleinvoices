@@ -96,6 +96,6 @@ $sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."invoices";
 $tth = dbQuery($sqlTotal) or die(end($dbh->errorInfo()));
 $resultCount = $tth->fetch();
 $count = $resultCount[0];
-echo sql2xml($invoices, $count, 'test');
+echo sql2xml($invoices, $count);
 
 ?> 

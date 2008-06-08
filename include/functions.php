@@ -310,44 +310,6 @@ EOD;
 	return $display_block;
 }
 
-function getRicoLiveGrid($name, $columnSpecs) {
-
-	//Commented out by thehandcoder(Ben Brown).  I didn't want to fully remove this file
-	/*
-	echo <<<EOD
-	<script src="./modules/include/js/lgplus/js/rico.js" type="text/javascript"></script>
-	<script type='text/javascript'>
-	Rico.loadModule('LiveGrid');
-	Rico.loadModule('LiveGridMenu');
-EOD;
-
-	setStyle();
-	setLang();
-
-	echo <<<EOD
-	Rico.onLoad( function() { var opts = {
-EOD;
-
-GridSettingsScript();
-
-echo <<<EOD
-, columnSpecs : [ , $columnSpecs ] };
-var menuopts =
-EOD;
-
-GridSettingsMenu();
-
-echo <<<EOD
-; new Rico.LiveGrid ('$name', new Rico.GridMenu(menuopts), new
-Rico.Buffer.Base($('$name').tBodies[0]), opts); });
-</script>
-
-<!--[if gte IE 5.5]>
-<link rel="stylesheet" type="text/css" href="./templates/default/css/iehacks.css" media="all"/>
-<![endif]-->
-EOD;*/
-}
-
 function simpleInvoicesError($type,$info1 = "", $info2 = "") 
 {
 
@@ -434,7 +396,7 @@ sort($folderList);
 return($folderList);
 }
 
-function sql2xml($sth, $count, $actions) {
+function sql2xml($sth, $count) {
 
 	//you can choose any name for the starting tag
 	$xml = ("<result>");
@@ -458,7 +420,7 @@ function sql2xml($sth, $count, $actions) {
 		{
 		//	$tag = mysql_field_name( $query4xml, $i );
 		//	$xml .= ("<$tag>". $row[$i]. "</$tag>");
-			$xml .= ("<$key>". $value. "</$key>");
+			$xml .= ("<$key>". htmlspecialchars($value). "</$key>");
 		}
 		$xml .= ("</tablerow>");
 	}
