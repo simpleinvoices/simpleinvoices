@@ -70,7 +70,7 @@ Ext.onReady(function(){
 		{name: 'id', mapping: 'id'},
 		{name: 'type_id', mapping: 'type_id'},
 		{name: 'Aging', mapping: 'Aging'},
-		'biller','customer','total','owing','date','aging','preference'
+		'biller','customer','invoice_total','owing','date','aging','preference'
 		]),
 		// turn on defautl grouping by Aging field
 		//groupField: 'Aging',
@@ -150,7 +150,7 @@ Ext.onReady(function(){
 	{header: "ID", width: 50, dataIndex: 'id'},
 	{header: "Biller", width: 180, dataIndex: 'biller'},
 	{header: "Customer", width: 115, dataIndex: 'customer'},
-	{header: "Total", width: 75, dataIndex: 'total'},
+	{header: "Total", width: 75, dataIndex: 'invoice_total'},
 	{header: "Owing", width: 75, dataIndex: 'owing'},
 	{header: "Date", width: 75, dataIndex: 'date'},
 	{header: "Aging", width: 75, dataIndex: 'aging'},

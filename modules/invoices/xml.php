@@ -20,7 +20,7 @@ if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 }
 
 /*Check that the sort field is OK*/
-$validFields = array('id', 'biller', 'customer', 'total','owing','date','aging','type');
+$validFields = array('id', 'biller', 'customer', 'invoice_total','owing','date','aging','type');
 
 if (in_array($sort, $validFields)) {
 	$sort = $sort;
@@ -29,7 +29,7 @@ if (in_array($sort, $validFields)) {
 }
 
 
-$sql = "SELECT * FROM ".TB_PREFIX."invoices ORDER BY id desc";
+$sql = "SELECT * FROM ".TB_PREFIX."invoices ORDER BY $sort $dir LIMIT $start, $limit";
 
 $sth = dbQuery($sql) or die(end($dbh->errorInfo()));
 
@@ -47,7 +47,7 @@ for($i = 0;$invoice = getInvoices($sth);$i++) {
 	$invoices[$i]['id'] = $invoice['id'];
 	$invoices[$i]['biller'] = $biller['name'];
 	$invoices[$i]['customer'] = $customer['name'];
-	$invoices[$i]['total'] = $invoice['total'];
+	$invoices[$i]['invoice_total'] = $invoice['total'];
 	$invoices[$i]['owing'] = $invoice['owing'];
 	$invoices[$i]['date'] = $invoice['date'];
 	//$invoices[$i]['invoiceType'] = $invoiceType;
