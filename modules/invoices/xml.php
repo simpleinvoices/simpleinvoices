@@ -29,7 +29,7 @@ if (in_array($sort, $validFields)) {
 }
 
 
-$sql = "SELECT * FROM ".TB_PREFIX."invoices ORDER BY $sort $dir LIMIT $start, $limit";
+$sql = "SELECT * FROM ".TB_PREFIX."invoices LIMIT $start, $limit";
 
 $sth = dbQuery($sql) or die(end($dbh->errorInfo()));
 
@@ -90,6 +90,7 @@ for($i = 0;$invoice = getInvoices($sth);$i++) {
 	//$invoices[$i]['url_for_pdf'] = $url_for_pdf;
 }
 
+	$invoices = sorted($invocies,$sort,$dir);
 global $dbh;
 
 $sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."invoices";

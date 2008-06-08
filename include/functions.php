@@ -429,4 +429,40 @@ function sql2xml($sth, $count) {
 	return $xml;
 }
 
+/**
+* Function: sorted
+* 
+* Sort associated array - from http://codingforums.com/showpost.php?s=e892139ced497d7911f2c51174b25d93&p=385064&postcount=2
+*
+* Parameters:
+* array		- the array to sort
+* index		- the element to sort by
+* order		- the order of sort (ASC or DESC)
+* natsort	- "natural order" algorithm
+* case_sensitive		- is the search case sensitive
+*
+* Returns:
+* The array sorted as you want
+**/
+    function sorted ($array, $index, $order='ASC', $natsort=FALSE, $case_sensitive=FALSE) 
+    {
+        if(is_array($array) && count($array)>0) 
+        {
+           foreach(array_keys($array) as $key) 
+               $temp[$key]=$array[$key][$index];
+               if(!$natsort) 
+                   ($order=='ASC')? asort($temp) : arsort($temp);
+              else 
+              {
+                 ($case_sensitive)? natsort($temp) : natcasesort($temp);
+                 if($order!='ASC') 
+                     $temp=array_reverse($temp,TRUE);
+           }
+           foreach(array_keys($temp) as $key) 
+               (is_numeric($key))? $sorted[]=$array[$key] : $sorted[$key]=$array[$key];
+           return $sorted;
+      }
+      return $array;
+    }  
+
 ?>

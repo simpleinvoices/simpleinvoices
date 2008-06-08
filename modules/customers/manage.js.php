@@ -173,7 +173,7 @@ Ext.onReady(function(){
 			pageSize: 25,
 			store: ds,
 			displayInfo: true,
-			displayMsg: 'Displaying invoices {0} - {1} of {2}'
+			displayMsg: 'Displaying customers {0} - {1} of {2}'
 		}),
 		layout:'fit'
 	});

@@ -29,7 +29,8 @@ if (in_array($sort, $validFields)) {
 }
 
 
-	$sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY $sort $dir LIMIT $start, $limit";
+	//$sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY $sort $dir LIMIT $start, $limit";
+	$sql = "SELECT * FROM ".TB_PREFIX."customers LIMIT $start, $limit";
 
 	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 
@@ -51,12 +52,15 @@ if (in_array($sort, $validFields)) {
 		#amount paid calc - end
 
 		#amount owing calc - start
-		$customer['owing'] = $customer['total'] - $customer['paid'];
+		$customer['owing'] = $customer['customer_total'] - $customer['paid'];
 		
 		#amount owing calc - end
 		$customers[$i] = $customer;
 
+
 	}
+
+	$customers = sorted($customers,$sort,$dir);
 
 global $dbh;
 
