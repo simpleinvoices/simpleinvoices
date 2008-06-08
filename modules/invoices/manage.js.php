@@ -83,7 +83,7 @@ Ext.onReady(function(){
 	function renderActions(value, p, record ){
 		
 		var quickViewLink = String.format(
-		'<!--0 Quick View --><a class="index_table" title="'+ id +''+ quick_view_tooltip +'" href="index.php?module=invoices&view=quick_view&invoice={1}"> <img src="images/common/view.png" height="16" border="-5px" padding="-4px" valign="bottom" /></a>',
+		'<!--0 Quick View --><a class="index_table" title="'+  +''+ quick_view_tooltip +'" href="index.php?module=invoices&view=quick_view&invoice={1}"> <img src="images/common/view.png" height="16" border="-5px" padding="-4px" valign="bottom" /></a>',
 		value,
 		record.id,
 		record.data.type_id,
