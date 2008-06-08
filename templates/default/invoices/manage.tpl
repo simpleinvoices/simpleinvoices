@@ -11,7 +11,7 @@
 */
 *}
 
- {include file='../modules/invoices/manage.js.php'}
+ {include file='../modules/invoices/manage.js.php' LANG=$LANG invoices=$invoices testvar='this is a test'}
 
 <div style="text-align:center;">
 <b>{$LANG.manage_invoices}</b> :: {$LANG.add_new_invoice} &ndash
@@ -20,10 +20,6 @@
 <a href="index.php?module=invoices&view=consulting"> {$LANG.consulting_style}</a>
 </div>
 <hr />
-{if $invoices == null }
-<p><em>{$LANG.no_invoices}.</em></p>
-{else}
 
 <div id="manageInvoicesGrid"></div>
 
-{/if}

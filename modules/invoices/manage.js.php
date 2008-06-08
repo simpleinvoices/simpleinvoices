@@ -10,14 +10,14 @@ these strings to String.format on each row, which also delimits with curly brace
 
 {literal}
 
-var quick_view_tooltip = "{$LANG.quick_view_tooltip} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim}";
-var edit_view_tooltip = "{$LANG.edit_view_tooltip} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim}";
-var print_preview_tooltip = "{$LANG.print_preview_tooltip} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim}";
-var export_tooltip = "{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim} {$LANG.export_pdf_tooltip}";
-var export_xls_tooltip = "{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim} {$LANG.export_xls_tooltip} {$spreadsheet} {$LANG.format_tooltip}"
-var export_word_tooltip = "{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim} {$LANG.export_doc_tooltip} {$word_processor} {$LANG.format_tooltip}";
-var process_payment_tooltip = "{$LANG.process_payment} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim}";
-var email_tooltip = "{$LANG.email}  {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim}";
+var quick_view_tooltip ="{/literal}{$LANG.quick_view_tooltip} {ldelim}1{rdelim}{literal}";
+var edit_view_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pref_inv_wording} {ldelim}1{rdelim}{literal}";
+var print_preview_tooltip = "{/literal}{$LANG.print_preview_tooltip} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim}{literal}";
+var export_tooltip = "{/literal}{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim} {$LANG.export_pdf_tooltip}{literal}";
+var export_xls_tooltip = "{/literal}{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim} {$LANG.export_xls_tooltip} {$spreadsheet} {$LANG.format_tooltip}{literal}"
+var export_word_tooltip = "{/literal}{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim} {$LANG.export_doc_tooltip} {$word_processor} {$LANG.format_tooltip}{literal}";
+var process_payment_tooltip = "{/literal}{$LANG.process_payment} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim}{literal}";
+var email_tooltip = "{/literal}{$LANG.email}  {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim}{literal}";
 
 Ext.onReady(function(){
 
@@ -70,7 +70,7 @@ Ext.onReady(function(){
 		{name: 'id', mapping: 'id'},
 		{name: 'type_id', mapping: 'type_id'},
 		{name: 'Aging', mapping: 'Aging'},
-		'Biller','Customer','INV_TOTAL','INV_PAID','INV_OWING','Date','Aging','Type'
+		'biller','customer','total','owing','date','aging','preference'
 		]),
 		// turn on defautl grouping by Aging field
 		//groupField: 'Aging',
@@ -79,12 +79,11 @@ Ext.onReady(function(){
 	});
 
 	ds.setDefaultSort('id', 'desc');
-
 	// pluggable renders
-	function renderActions(value, p, record){
+	function renderActions(value, p, record ){
 		
 		var quickViewLink = String.format(
-		'<!--0 Quick View --><a class="index_table" title="'+ quick_view_tooltip +'" href="index.php?module=invoices&view=quick_view&invoice={1}"> <img src="images/common/view.png" height="16" border="-5px" padding="-4px" valign="bottom" /></a>',
+		'<!--0 Quick View --><a class="index_table" title="'+ id +''+ quick_view_tooltip +'" href="index.php?module=invoices&view=quick_view&invoice={1}"> <img src="images/common/view.png" height="16" border="-5px" padding="-4px" valign="bottom" /></a>',
 		value,
 		record.id,
 		record.data.type_id,
@@ -149,13 +148,13 @@ Ext.onReady(function(){
 	var cm = new Ext.grid.ColumnModel([
 	{header: "Actions", width: 105, dataIndex: 'actions', sortable:false, renderer: renderActions },
 	{header: "ID", width: 50, dataIndex: 'id'},
-	{header: "Biller", width: 180, dataIndex: 'Biller'},
-	{header: "Customer", width: 115, dataIndex: 'Customer'},
-	{header: "Total", width: 75, dataIndex: 'INV_TOTAL'},
-	{header: "Owing", width: 75, dataIndex: 'INV_OWING'},
-	{header: "Date", width: 75, dataIndex: 'Date'},
-	{header: "Aging", width: 75, dataIndex: 'Aging'},
-	{header: "Type", width: 100, dataIndex: 'Type'}
+	{header: "Biller", width: 180, dataIndex: 'biller'},
+	{header: "Customer", width: 115, dataIndex: 'customer'},
+	{header: "Total", width: 75, dataIndex: 'total'},
+	{header: "Owing", width: 75, dataIndex: 'owing'},
+	{header: "Date", width: 75, dataIndex: 'date'},
+	{header: "Aging", width: 75, dataIndex: 'aging'},
+	{header: "Type", width: 100, dataIndex: 'preference'}
 	]);
 	cm.defaultSortable = true;
 

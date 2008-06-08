@@ -111,12 +111,12 @@ if (($module == "invoices" ) && (strstr($view,"templates"))) {
 }
 
 /*
-* xml for the new grid
-* TODO - make this better and work for all mange pages
+* Get the xml for the new grids
 */
-if (($module == "invoices" ) && (strstr($view,"xml"))) {
-	if (file_exists("./modules/invoices/xml.php")) {
-		include("./modules/invoices/xml.php");
+
+if (strstr($view,"xml")) {
+	if (file_exists("./modules/$module/xml.php")) {
+		include("./modules/$module/xml.php");
 	}
 	else {
 		echo "The file that you requested doesn't exist";

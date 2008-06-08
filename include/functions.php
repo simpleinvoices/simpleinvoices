@@ -439,7 +439,8 @@ function sql2xml($sth, $count, $actions) {
 	//you can choose any name for the starting tag
 	$xml = ("<result>");
 	$xml .= "<total>".$count."</total>";
-	while($row = $sth->fetch(PDO::FETCH_ASSOC) )
+	//while($row = $sth->fetch(PDO::FETCH_ASSOC) )
+	while($row = next($sth) )
 	{
 		//count the no. of  columns in the table
 		$fcount = count($row);
