@@ -137,7 +137,7 @@
 		<td class='details_screen'>{$LANG.city}:</td><td class='details_screen' colspan=3>{$biller.city}</td><td class='details_screen'>{$LANG.phone_short}:</td><td class='details_screen'>{$biller.phone}</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td class='details_screen'>{$LANG.state}, Zip:</td><td class='details_screen' colspan=3>{$biller.state}, {$biller.zip_code}</td><td class='details_screen'>{$LANG.mobile_short}:</td><td class='details_screen'>{$biller.mobile_phone}</td>
+		<td class='details_screen'>{$LANG.state}, {$LANG.zip}:</td><td class='details_screen' colspan=3>{$biller.state}, {$biller.zip_code}</td><td class='details_screen'>{$LANG.mobile_short}:</td><td class='details_screen'>{$biller.mobile_phone}</td>
 	</tr>	
 	<tr class='details_screen biller'>
 		<td class='details_screen'>{$LANG.country}:</td><td class='details_screen' colspan=3>{$biller.country}</td><td class='details_screen'>{$LANG.fax}:</td><td class='details_screen'>{$biller.fax}</td>
