@@ -24,8 +24,6 @@ $billers = getBillers();
 $pageActive = "billers";
 
 
-getRicoLiveGrid("rico_biller","{ type:'number', decPlaces:0, ClassName:'alignleft'}");
-
 $smarty -> assign("billers",$billers);
 $smarty -> assign('pageActive', $pageActive);
 ?>
