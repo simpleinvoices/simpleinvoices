@@ -62,7 +62,9 @@ function dbQuery($sqlQuery) {
 	// Earlier implementation did not return the $sth on error
 	}
 // $sth now has the PDO object or false on error.
+
 	return $sth;
+
 }
 
 // Used for logging all queries
