@@ -49,20 +49,20 @@ Ext.onReady(function(){
 	var ds = new Ext.data.GroupingStore({
 		// load using HTTP
 		//url: 'sheldon2.xml',
-		url: 'index.php?module=customers&view=xml',
+		url: 'index.php?module=products&view=xml',
 		// the return will be XML, so lets set up a reader
 		reader: new Ext.data.XmlReader({
 			// records will have an "Item" tag
 			record: 'tablerow',
-			id: 'CID',
+			id: 'id',
 			type_id: 'type_id',
 			totalRecords: 'total'
 		}, [
 		// set up the fields mapping into the xml doc
 		// The first needs mapping, the others are very basic
 		'actions',
-		{name: 'CID', mapping: 'CID'},
-		'name','customer_total','owing','enabled'
+		{name: 'id', mapping: 'id'},
+		'description','unit_price','enabled'
 		]),
 		// turn on defautl grouping by Aging field
 		//groupField: 'Aging',
@@ -75,14 +75,14 @@ Ext.onReady(function(){
 	function renderActions(value, p, record ){
 		
 		var viewLink = String.format(
-		'<!--0 Quick View --><a class="index_table" title="'+  +''+ view_tooltip +'"  href="index.php?module=customers&view=details&id={1}&action=view"> <img src="images/common/view.png" height="16" border="-5px" padding="-4px" valign="bottom" /></a>',
+		'<!--0 Quick View --><a class="index_table" title="'+  +''+ view_tooltip +'"  href="index.php?module=products&view=details&id={1}&action=view"> <img src="images/common/view.png" height="16" border="-5px" padding="-4px" valign="bottom" /></a>',
 		value,
 		record.id,
 		record.data.type_id,
 		record.data.forumid);
 
 		var editLink = String.format(
-		'<!--1 Edit View --><a class="index_table" title="'+  +''+ edit_tooltip +'"  href="index.php?module=customers&view=details&id={1}&action=edit"><img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>',
+		'<!--1 Edit View --><a class="index_table" title="'+  +''+ edit_tooltip +'"  href="index.php?module=products&view=details&id={1}&action=edit"><img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>',
 		value,
 		record.id,
 		record.data.type_id,
@@ -97,10 +97,9 @@ Ext.onReady(function(){
 
 	var cm = new Ext.grid.ColumnModel([
 	{header: "Actions", width: 105, dataIndex: 'actions', sortable:false, renderer: renderActions },
-	{header: "ID", width: 50, dataIndex: 'CID'},
-	{header: "Name", width: 180, dataIndex: 'name'},
-	{header: "Total", width: 115, dataIndex: 'customer_total'},
-	{header: "Owing", width: 75, dataIndex: 'owing'},
+	{header: "ID", width: 50, dataIndex: 'id'},
+	{header: "Description", width: 180, dataIndex: 'description'},
+	{header: "Unit Price", width: 115, dataIndex: 'unit_price'},
 	{header: "Enabled", width: 100, dataIndex: 'enabled'}
 	]);
 	cm.defaultSortable = true;
@@ -109,8 +108,8 @@ Ext.onReady(function(){
 	var grid = new Ext.grid.GridPanel({
 		ds: ds,
 		cm: cm,
-		title:'Manage Customers',
-		renderTo:'manageCustomersGrid',
+		title:'Manage Products',
+		renderTo:'manageProductsGrid',
 		autoHeight: true,
 		viewConfig: {
 			forceFit:true
@@ -125,7 +124,7 @@ Ext.onReady(function(){
 			pageSize: 25,
 			store: ds,
 			displayInfo: true,
-			displayMsg: 'Displaying customers {0} - {1} of {2}'
+			displayMsg: 'Displaying products {0} - {1} of {2}'
 		}),
 		layout:'fit'
 	});

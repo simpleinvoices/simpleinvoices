@@ -30,28 +30,13 @@ if (in_array($sort, $validFields)) {
 
 	//$sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY $sort $dir LIMIT $start, $limit";
 	$sql = "SELECT 
-				c.id as CID, 
-				c.name as name, 
-				(SELECT (CASE  WHEN c.enabled = 0 THEN 'Disabled' ELSE 'Enabled' END )) AS enabled,
-				(
-					SELECT
-			            coalesce(sum(ii.total),  0) AS total 
-			        FROM
-			            ".TB_PREFIX."invoice_items ii INNER JOIN
-			            ".TB_PREFIX."invoices iv ON (iv.id = ii.invoice_id)
-			        WHERE  
-			            iv.customer_id  = CID ) as customer_total,
-                (
-                    SELECT 
-                        coalesce(sum(ap.ac_amount), 0) AS amount 
-                    FROM
-                        ".TB_PREFIX."account_payments ap INNER JOIN
-                        ".TB_PREFIX."invoices iv ON (iv.id = ap.ac_inv_id)
-                    WHERE 
-                        iv.customer_id = CID) AS owing
+				id, 
+				name, 
+				email,
+				(SELECT (CASE  WHEN enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
 
 			FROM 
-				".TB_PREFIX."customers c  
+				".TB_PREFIX."biller  
 			ORDER BY 
 				$sort $dir 
 			LIMIT 
@@ -71,7 +56,7 @@ if (in_array($sort, $validFields)) {
 */
 global $dbh;
 
-$sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."customers";
+$sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."biller";
 $tth = dbQuery($sqlTotal) or die(end($dbh->errorInfo()));
 $resultCount = $tth->fetch();
 $count = $resultCount[0];

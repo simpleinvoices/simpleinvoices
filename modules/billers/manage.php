@@ -19,11 +19,13 @@
 checkLogin();
 
 
-$billers = getBillers();
+	$sql = "SELECT count(*) as count FROM ".TB_PREFIX."biller";
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$number_of_rows  = $sth->fetch(PDO::FETCH_ASSOC);
 
 $pageActive = "billers";
 
 
-$smarty -> assign("billers",$billers);
+$smarty -> assign("number_of_rows",$number_of_rows);
 $smarty -> assign('pageActive', $pageActive);
 ?>
