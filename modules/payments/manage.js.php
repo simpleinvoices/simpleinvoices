@@ -49,7 +49,7 @@ Ext.onReady(function(){
 	var ds = new Ext.data.GroupingStore({
 		// load using HTTP
 		//url: 'sheldon2.xml',
-		url: 'index.php?module=products&view=xml',
+		url: 'index.php?module=payments&view=xml',
 		// the return will be XML, so lets set up a reader
 		reader: new Ext.data.XmlReader({
 			// records will have an "Item" tag

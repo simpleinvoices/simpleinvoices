@@ -20,13 +20,60 @@ if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 }
 
 /*Check that the sort field is OK*/
-$validFields = array('id', 'description', 'unit_price','enabled');
+$validFields = array('ap.id', 'description', 'unit_price','enabled');
 
 if (in_array($sort, $validFields)) {
 	$sort = $sort;
 } else {
-	$sort = "id";
+	$sort = "ap.id";
 }
+
+$query = null;
+#if coming from another page where you want to filter by just one invoice
+if (!empty($_GET['id'])) {
+
+	$id = $_GET['c_id']);
+	//$query = getInvoicePayments($_GET['id']);
+	
+	$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b where ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and ap.ac_inv_id = :id ORDER BY ap.id DESC";
+	
+	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
+	
+}
+#if coming from another page where you want to filter by just one customer
+elseif (!empty($_GET['c_id'])) {
+	//$query = getCustomerPayments($_GET['c_id']);
+	$id = $_GET['c_id']);
+	$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b where ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and c.id = :id ORDER BY ap.id DESC";
+
+	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
+	
+}
+#if you want to show all invoices - no filters
+else {
+	$query = getPayments();
+	
+	$sql = "SELECT 
+				ap.*, 
+				c.name as cname, 
+				b.name as bname 
+			FROM 
+				".TB_PREFIX."account_payments ap, 
+				".TB_PREFIX."invoices iv, 
+				".TB_PREFIX."customers c, 
+				".TB_PREFIX."biller b 
+			WHERE 
+				ap.ac_inv_id = iv.id 
+				AND 
+				iv.customer_id = c.id 
+				AND iv.biller_id = b.id 
+			ORDER BY 
+				ap.id DESC
+				$sort $dir 
+			LIMIT 
+				$start, $limit
+				";
+	
 
 	//$sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY $sort $dir LIMIT $start, $limit";
 	$sql = "SELECT 
@@ -44,7 +91,9 @@ if (in_array($sort, $validFields)) {
 				$start, $limit";
 
 	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+}
 	$customers = $sth->fetchAll(PDO::FETCH_ASSOC);
+
 /*
 	$customers = null;
 
@@ -55,6 +104,7 @@ if (in_array($sort, $validFields)) {
 			$customer['enabled'] = $LANG['disabled'];
 		}
 */
+
 global $dbh;
 
 $sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."products WHERE visible =1";

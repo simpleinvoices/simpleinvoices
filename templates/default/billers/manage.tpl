@@ -19,7 +19,7 @@
 
  {include file='../modules/billers/manage.js.php' LANG=$LANG}
 
-<h3>{$LANG.manage_billers} :: <a href="index.php?module=billers&view=add">{$LANG.biller_add}</a></h3>
+<h3>{$LANG.manage_billers} :: <a href="index.php?module=billers&view=add">{$LANG.add_new_biller}</a></h3>
 <hr />
 <div id="manageBillersGrid"></div>
 
