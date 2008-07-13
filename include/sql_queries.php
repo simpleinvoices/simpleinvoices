@@ -369,7 +369,7 @@ function getPayment($id) {
 
 	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$payment = $sth->fetch();
-	$payment['date'] = date( $config['date_format'], strtotime( $payment['ac_date'] ) );
+	$payment['date'] = date( $config->date->format, strtotime( $payment['ac_date'] ) );
 	return $payment;
 }
 
@@ -728,7 +728,7 @@ function getInvoice($id) {
 	//exit();
 	
 	$invoice['calc_date'] = date('Y-m-d', strtotime( $invoice['date'] ) );
-	$invoice['date'] = date( $config['date_format'], strtotime( $invoice['date'] ) );
+	$invoice['date'] = date( $config->date->format, strtotime( $invoice['date'] ) );
 	$invoice['total'] = getInvoiceTotal($invoice['id']);
 	$invoice['paid'] = calc_invoice_paid($invoice['id']);
 	$invoice['owing'] = $invoice['total'] - $invoice['paid'];
@@ -1056,7 +1056,7 @@ function getInvoices(&$sth) {
 	if($invoice = $sth->fetch()) {
 
 		$invoice['calc_date'] = date( 'Y-m-d', strtotime( $invoice['date'] ) );
-		$invoice['date'] = date( $config['date_format'], strtotime( $invoice['date'] ) );
+		$invoice['date'] = date( $config->date->format, strtotime( $invoice['date'] ) );
 			
 		#invoice total total - start
 		$invoice['total'] = getInvoiceTotal($invoice['id']);
@@ -1093,7 +1093,7 @@ function getCustomerInvoices($id) {
 	$invoices = null;
 	while ($invoice = $sth->fetch()) {
 		$invoice['calc_date'] = date( 'Y-m-d', strtotime( $invoice['date'] ) );
-		$invoice['date'] = date( $config['date_format'], strtotime( $invoice['date'] ) );
+		$invoice['date'] = date( $config->date->format, strtotime( $invoice['date'] ) );
 		$invoices[] = $invoice;
 	}
 	return $invoices;
