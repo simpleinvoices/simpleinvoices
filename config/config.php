@@ -85,8 +85,8 @@ $pdf_bottom_margin 	= 15;
 ####################
 /* PHP.ini setting*/
 ####################
-ini_set('include_path',ini_get('include_path').';./library/pear/;');//for pear
-ini_set('session.use_trans_sid', false); //so session ids arent put in the url by php
+//ini_set('include_path',ini_get('include_path').';./library/pear/;');//for pear
+//ini_set('session.use_trans_sid', false); //so session ids arent put in the url by php
 
 ####################
 /* Other stuff*/
@@ -140,11 +140,6 @@ any config.php setting in this extra file(which wont be kept in svn) will overwr
 - this way everyone can have there own conf setting without messing with anyones setting
 RELEASE TODO: make sure $environment is set back to live
 */
-$environment = "local"; //test,staging,dev,live etc..
-if($environment != "live")
-{
-	@include("./config/".htmlspecialchars($environment).".config.php");
-}
-
+$environment = "dev"; //test,staging,dev,live etc..
 
 ?>
