@@ -4,9 +4,6 @@
 * Script: index.php
 * 	Main controller file for Simple Invoices
 *
-* Authors:
-*	 Justin Kelly, Nicolas Ruflin
-*
 * Last edited:
 * 	 2007-07-18
 *
@@ -25,26 +22,10 @@ $module = isset($_GET['module'])?$_GET['module']:null;
 $view = isset($_GET['view'])?$_GET['view']:null;
 $action = isset($_GET['case'])?$_GET['case']:null;
 
-require_once("smarty/Smarty.class.php");
-require_once("./include/functions.php");
-
-$smarty = new Smarty();
-
-//cache directory. Have to be writeable (chmod 777)
-$smarty -> compile_dir = "cache";
-if(!is_writable($smarty -> compile_dir)) {
-	simpleInvoicesError("cache", $smarty -> compile_dir);
-	//exit("Simple Invoices Error : The folder <i>".$smarty -> compile_dir."</i> has to be writeable");
-}
-
-
-//adds own smarty plugins
-$smarty->plugins_dir = array("plugins","include/smarty_plugins");
-
 /*
 * The include configs and requirements stuff section - start
 */
-require_once("./include/include_main.php");
+require_once("./include/init.php");
 
 foreach($extension as $key=>$value)
 {
@@ -54,9 +35,9 @@ foreach($extension as $key=>$value)
 	if($value['enabled'] == "1")
 	{
 		//echo "Enabled:".$value['name']."<br><br>";
-		if(file_exists("./extensions/$value[name]/include/include_main.php"))
+		if(file_exists("./extensions/$value[name]/include/init.php"))
 		{
-			require_once("../extensions/$value[name]/include/include_main.php");
+			require_once("../extensions/$value[name]/include/init.php");
 		}
 	}
 }
