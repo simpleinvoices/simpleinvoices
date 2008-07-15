@@ -103,6 +103,7 @@ $LANG['default_number_items'] = "Default number of line items";//1
 $LANG['default_payment_type'] = "Default Payment Type";//1
 $LANG['default_tax'] = "Default Tax";//1
 $LANG['delete'] = "Delete";//1
+$LANG['denied_page'] = "You are not allowed to view this page";//1
 $LANG['description'] = "Description";//1
 $LANG['details'] = "Details";//1
 $LANG['disabled'] = "Disabled";//1
