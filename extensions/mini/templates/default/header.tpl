@@ -3,8 +3,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 	<title>Simple Invoices</title>
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
-		<link rel="Stylesheet" href="templates/mobile/css/Render.css" />
-		<script type="text/javascript" src="templates/mobile/WebApp/Action/Logic.js"></script>
+		<link rel="Stylesheet" href="library/WebApp/Design/Render.css" />
+		<script type="text/javascript" src="library/WebApp/Action/Logic.js"></script>
 
 
 
@@ -46,9 +46,9 @@
 <body -dir="rtl"><div id="WebApp">
 <div id="loader" class="iItem" style="padding:10px 5px;font-weight:bold;font-size:12px;text-align:center;">
 	<div style="font-size:20px">
-		<a href="#" style="display:block;border-width: 0 12px;line-height:45px;-webkit-border-image: url(templates/mobile/WebApp/Design/Img/button-b-black.png) 0 12 0 12;margin:10px;color:white;text-decoration:none;text-align:center;text-shadow:#000 1px -1px 0;font-weight:bold">Test</a>
-		<a href="#" style="display:block;border-width: 0 12px;line-height:45px;-webkit-border-image: url(templates/mobile/WebApp/Design/Img/button-b-white.png) 0 12 0 12;margin:10px;color:black;text-decoration:none;text-align:center;text-shadow:#fff 1px 1px 0;font-weight:bold">Test</a>
-		<a href="#" style="display:block;border-width: 0 12px;line-height:45px;-webkit-border-image: url(templates/mobile/WebApp/Design/Img/button-b-red.png) 0 12 0 12;margin:10px;color:white;text-decoration:none;text-align:center;text-shadow:rgba(0,0,0,0.2) 1px -1px 0;font-weight:bold">Test</a>
+		<a href="#" style="display:block;border-width: 0 12px;line-height:45px;-webkit-border-image: url(library/WebApp/Design/Img/button-b-black.png) 0 12 0 12;margin:10px;color:white;text-decoration:none;text-align:center;text-shadow:#000 1px -1px 0;font-weight:bold">Test</a>
+		<a href="#" style="display:block;border-width: 0 12px;line-height:45px;-webkit-border-image: url(library/WebApp/Design/Img/button-b-white.png) 0 12 0 12;margin:10px;color:black;text-decoration:none;text-align:center;text-shadow:#fff 1px 1px 0;font-weight:bold">Test</a>
+		<a href="#" style="display:block;border-width: 0 12px;line-height:45px;-webkit-border-image: url(library/WebApp/Design/Img/button-b-red.png) 0 12 0 12;margin:10px;color:white;text-decoration:none;text-align:center;text-shadow:rgba(0,0,0,0.2) 1px -1px 0;font-weight:bold">Test</a>
 	</div>
 </div>
 <div id="iHeader">
@@ -60,7 +60,7 @@
 				<li><a href="./templates/mobile/Layer/async-tab.xml" rev="async"><span>Async</span></a></li>
 			</ul>
 		</div>
-		<a href="#" class="iBAction iRightButton" onclick="return tabs(0)"><img src="templates/mobile/WebApp/Img/less.png" alt="Hide" /></a>
+		<a href="#" class="iBAction iRightButton" onclick="return tabs(0)"><img src="library/WebApp/Img/less.png" alt="Hide" /></a>
 	</div>
 
 	<a href="#" id="waBackButton">Back</a>

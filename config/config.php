@@ -7,7 +7,7 @@
 ######################
 $db_server = "mysql"; /* Can be either mysql or pgsql */
 $db_host = "localhost";
-$db_name = "simple_invoices";
+$db_name = "simple_invoices_dev";
 $db_user = "root";
 $db_password = "";
 define("TB_PREFIX","si_"); // default table prefix - old var $tb_prefix = "si_";
@@ -141,5 +141,10 @@ any config.php setting in this extra file(which wont be kept in svn) will overwr
 RELEASE TODO: make sure $environment is set back to live
 */
 $environment = "dev"; //test,staging,dev,live etc..
+
+if($environment != "live")
+{
+    @include("./config/".htmlspecialchars($environment).".config.php");
+}
 
 ?>
