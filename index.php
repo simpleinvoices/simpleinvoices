@@ -307,7 +307,7 @@ $smarty -> display("../templates/default/main.tpl");
 				$path = "../extensions/$tplValue[name]/templates/default/$module/";
 				$tplDirectory = "extensions/$tplValue[name]/";
 				$extensionTemplates++;
-			}
+			}	
 		}
 	}
 	/*

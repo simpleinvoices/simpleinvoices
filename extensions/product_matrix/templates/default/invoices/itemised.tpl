@@ -24,7 +24,7 @@
 {include file="$path/header.tpl" }
 
 <tr>
-<td class="details_screen">{$LANG.quantity}</td><td class="details_screen">{$LANG.description}</td>
+<td class="details_screen">{$LANG.quantity}</td><td class="details_screen">{$LANG.description}</td><td class="details_screen">Attribute</td><td class="details_screen">Value</td>
 </tr>
 
 
@@ -45,7 +45,24 @@
 				</select>
 			{/if}
 				                				                
-                </td></tr>
+                </td>
+				<td>
+					<select name="products{$smarty.section.line.index}">
+						<option value=""></option>
+						{foreach from=$matrix item=matrix_item}
+							<option {if $product.id == $defaults.product} selected {/if} value="{$matrix_item.id}">{$matrix_item.display}</option>
+						{/foreach}
+					</select>
+				</td>	
+				<td>
+					<select name="products{$smarty.section.line.index}">
+						<option value=""></option>
+						{foreach from=$matrix item=matrix_item}
+							<option {if $product.id == $defaults.product} selected {/if} value="{$matrix_item.id}">{$matrix_item.display}</option>
+						{/foreach}
+					</select>
+				</td>	
+		</tr>
 
         {/section}
 	{$show_custom_field.1}

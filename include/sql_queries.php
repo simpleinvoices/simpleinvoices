@@ -68,7 +68,7 @@ function dbQuery($sqlQuery) {
 	// Earlier implementation did not return the $sth on error
 	}
 // $sth now has the PDO object or false on error.
-
+		
 	return $sth;
 
 }
@@ -1783,6 +1783,19 @@ function urlPDF($invoiceID) {
 	}
 	
 	return $_SERVER['FULL_URL'];
+}
+
+function sql2array($strSql) { 
+	global $dbh;
+    $sqlInArray = null; 
+ 
+    $result_strSql = dbQuery($strSql); 
+ 
+    for($i=0;$sqlInRow = PDOStatement::fetchAll($result_strSql);$i++) { 
+ 
+        $sqlInArray[$i] = $sqlInRow; 
+    } 
+    return $sqlInArray; 
 }
 
 ?>
