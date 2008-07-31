@@ -11,12 +11,18 @@ Zend_Loader::loadClass('Zend_Auth');
 Zend_Loader::loadClass('Zend_Session');
 Zend_Loader::loadClass('Zend_Session_Namespace');
 Zend_Loader::loadClass('Zend_Config_Ini');
+Zend_Loader::loadClass('Zend_Acl');
+Zend_Loader::loadClass('Zend_Acl_Role');
+Zend_Loader::loadClass('Zend_Acl_Resource');
 
 Zend_Session::start();
 
 /* 
  * Zend framework init - end
  */
+
+
+
 
 /* 
  * Smarty inint - start

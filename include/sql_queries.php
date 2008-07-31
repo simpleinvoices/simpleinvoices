@@ -14,13 +14,19 @@ if ($db_server == 'mysql') {
 
 function db_connector() {
 
-	global $db_server;
-	global $db_host;
-	global $db_user;
-	global $db_password;
-	global $db_name;
-
-	$connlink = new PDO($db_server.':host='.$db_host.';dbname='.$db_name, $db_user, $db_password);
+	global $config;
+	/*
+	* strip the pdo_ section from the adapter
+	*/
+	$pdoAdapter = substr($config->database->adapter, 4);
+	
+	$connlink = new PDO(
+					$pdoAdapter.':
+					host='.$config->database->params->host.';
+					dbname='.$config->database->params->dbname, 
+						$config->database->params->username, 
+						$config->database->params->password
+				);
 	return $connlink;
 }
 

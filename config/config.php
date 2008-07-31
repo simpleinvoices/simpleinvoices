@@ -1,18 +1,7 @@
 <?php
-//checkLogin();
 
-######################
-/* Database connection info
-/* Enter your database information */
-######################
-$db_server = "mysql"; /* Can be either mysql or pgsql */
-$db_host = "localhost";
-$db_name = "simple_invoices_dev";
-$db_user = "root";
-$db_password = "";
 define("TB_PREFIX","si_"); // default table prefix - old var $tb_prefix = "si_";
-//ini_set("display_errors","On");
-// Different DB Abstraction methods can be used by replacing the sql_queries.php file for now
+
 $db_layer = ""; // phpreports - database abstraction layer type "", "pdo", "adodb", "pear" etc..- currently "" works and "pdo" is in implementation
 
 #####################
@@ -68,34 +57,6 @@ http://en.wikipedia.org/wiki/Carlton_FC
 http://en.wikipedia.org/wiki/Carlton_FC#Carlton.27s_Team_of_the_Century
 http://en.wikipedia.org/wiki/Bruce_Doull
 */
-
-#################
-/* PDF config options */
-#################
-#size in pixels (640,800,1024)
-$pdf_screen_size 	= 800;
-#paper size (Letter,Legal,Executive,A0Oversize,A0,A1,A2,A3,A4,A5,B5,Folio,A6,A7,A8,A9,A10)
-$pdf_paper_size 	= "A4";
-#margins of the pdf
-$pdf_left_margin 	= 15;
-$pdf_right_margin 	= 15;
-$pdf_top_margin 	= 15;
-$pdf_bottom_margin 	= 15;
-
-####################
-/* PHP.ini setting*/
-####################
-//ini_set('include_path',ini_get('include_path').';./library/pear/;');//for pear
-//ini_set('session.use_trans_sid', false); //so session ids arent put in the url by php
-
-####################
-/* Other stuff*/
-####################
-//security thing: $authSessionIdentifier is used by auth process to ensure that user once logged in can not log into another install of Simple Invoices 
-$authSessionIdentifier = $_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']);
-//$authSessionIdentifier = "something unique to name this install of Simple nvoics";
-/*You can also concat stuff to the start or end to make it harder(assuming they are not doing packet sniffing on non https line) to guess/hack your session info */
-//$authSessionIdentifier .= "any random stuff you want";
 
 //TODO remove this before release
 //dev stuff
