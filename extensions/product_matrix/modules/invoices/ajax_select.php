@@ -2,12 +2,6 @@
 
 header("Content-Type: application/json; charset=UTF-8");
 
-error_reporting(E_ALL);
-
-include 'MyDB.class';
-
-$db = new MyDB;
-
 $json = array();
 
 // Lets get the variables we passed
@@ -19,15 +13,12 @@ $str = isset($_GET['str']) ? (string) $_GET['str'] : '';
 // Allows A-Z, a-z, 0-9, whitespace, minus/hyphen, equals, ampersand, underscore, and period/full stop.
 $str = preg_replace("/[^A-Za-z0-9\s\-\=\&\_\.]/","", $str);
 
-$str = mysql_real_escape_string($str);
-
-
 switch ($search) {
 
    case "country":
 
 
-      $db->query("select 
+	  $sql = "select 
 					CONCAT(a.id, '-', v.id) as id, 
 					CONCAT(a.name, '-',v.value) as display 
 				from 
@@ -37,9 +28,13 @@ switch ($search) {
 					a.id = v.attribute_id 
 					AND 
 					a.id= '{$str}'
-				");
+				";
 
-      while ($db->next_record()) {
+	  $sth =  dbQuery($sql);
+//	  $matrix = $sth->fetchAll();
+
+
+      while ($sth->nextRowset()) {
 
          $json[] = '{"optionValue": "'.$db->f("id").'", "optionDisplay": "'.$db->f("display").'"}';
       }

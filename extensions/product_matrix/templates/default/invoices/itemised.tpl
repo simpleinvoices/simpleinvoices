@@ -16,6 +16,20 @@
 *	http://www.simpleinvoices.org
 */
 *}
+{literal}
+<script type="text/javascript" charset="utf-8">
+
+$(function(){
+
+$('.product_select').linkedSelect('./index.php?module=invoices&view=ajaxt&search=country','.linkSel',{firstOption: 'Please Select A State'});
+
+
+$('#state').linkedSelect('./index.php?module=invoices&view=ajax&search=state','#city',{firstOption: 'Please Select A City', loadingText: 'Loading Please Wait...'});
+
+});
+
+</script>
+{/literal}
 
 <form name="frmpost" action="index.php?module=invoices&view=save" method=POST onsubmit="return frmpost_Validator(this)">
 
@@ -37,7 +51,7 @@
 			{if $products == null }
 				<p><em>{$LANG.no_products}</em></p>
 			{else}
-				<select name="products{$smarty.section.line.index}">
+				<select class="product_select" name="products{$smarty.section.line.index}">
 					<option value=""></option>
 				{foreach from=$products item=product}
 					<option {if $product.id == $defaults.product} selected {/if} value="{$product.id}">{$product.description}</option>
@@ -46,6 +60,17 @@
 			{/if}
 				                				                
                 </td>
+			<td>
+<select id="state" class="linkSel" name="state" disabled="disabled">
+<option value="">--  --</option>
+</select><br /><br />
+
+<label for="city">City</label><br />
+<select id="city" class="linkSel" name="city" disabled="disabled">
+<option value="">--  --</option>
+</select>
+</td>
+
 				<td>
 					<select name="products{$smarty.section.line.index}">
 						<option value=""></option>
