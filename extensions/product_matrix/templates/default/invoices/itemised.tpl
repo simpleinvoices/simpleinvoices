@@ -21,7 +21,7 @@
 $(function()
 {
 
-for (var x = 0; x <= 10; x++)
+for (var x = 0; x <= {/literal}{$dynamic_line_items}{literal}; x++)
    {
         $('.product_select'+x).chainSelect('#state'+x,'./index.php?module=invoices&view=ajax&search=country');
         $('#state'+x).chainSelect('#city'+x,'./index.php?module=invoices&view=ajax&search=state');
