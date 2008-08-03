@@ -124,6 +124,17 @@ if (strstr($view,"xml")) {
 	exit(0);
 
 }
+if (strstr($view,"ajax")) {
+	if (file_exists("./extensions/product_matrix/modules/$module/ajax.php")) {
+		include("./extensions/product_matrix/modules/$module/ajax.php");
+	}
+	else {
+		echo "The file that you requested doesn't exist";
+	}
+	
+	exit(0);
+
+}
 
 $path = "$module/$view";
 
@@ -137,6 +148,28 @@ $path = "$module/$view";
 	/*
 	* TODO: fix the javascript or move datapicker to extjs to fix this hack - not nice
 	*/
+
+/*
+* If extension is enabled load its javascript files	- start
+* Note: this system is probably slow - if you got a better method for handling extensions let me know
+*/
+	foreach($extension as $key=>$value)
+	{
+		/*
+		* If extension is enabled then continue and include the requested file for that extension if it exists
+		*/	
+		if($value['enabled'] == "1")
+		{
+			if(file_exists("./extensions/$value[name]/include/jquery/$value[name].jquery.ext.js")) {
+				$extension_jquery_files .= "<script type=\"text/javascript\" src=\"./extensions/$value[name]/include/jquery/$value[name].jquery.ext.js\"></script>";
+			}
+		}
+	}
+	
+	$smarty -> assign("extension_jquery_files",$extension_jquery_files);
+/*
+* If extension is enabled load its javascript files	- end
+*/
 
 /*
 * Header - start 
@@ -224,28 +257,6 @@ if($module !== "auth")
 * Include the php file for the requested page section - end
 */
 
-	/*
-	* If extension is enabled load its javascript files	- start
-	* Note: this system is probably slow - if you got a better method for handling extensions let me know
-	*/
-	foreach($extension as $key=>$value)
-	{
-		/*
-		* If extension is enabled then continue and include the requested file for that extension if it exists
-		*/	
-		if($value['enabled'] == "1")
-		{
-			//echo "Enabled:".$value['name']."<br><br>";
-			if(file_exists("./extensions/$value[name]/include/jquery/$value[name].jquery.ext.js")) {
-				$extension_jquery_files .= "<script type=\"text/javascript\" src=\"./extensions/$value[name]/include/jquery/$value[name].jquery.ext.js\"></script>";
-			}
-		}
-	}
-	
-	$smarty -> assign("extension_jquery_files",$extension_jquery_files);
-/*
-* If extension is enabled load its javascript files	- end
-*/
 		
 
 /*

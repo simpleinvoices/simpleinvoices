@@ -18,16 +18,16 @@
 *}
 {literal}
 <script type="text/javascript" charset="utf-8">
+$(function()
+{
 
-$(function(){
-
-$('.product_select').linkedSelect('./index.php?module=invoices&view=ajaxt&search=country','.linkSel',{firstOption: 'Please Select A State'});
-
-
-$('#state').linkedSelect('./index.php?module=invoices&view=ajax&search=state','#city',{firstOption: 'Please Select A City', loadingText: 'Loading Please Wait...'});
+for (var x = 0; x <= 10; x++)
+   {
+        $('.product_select'+x).chainSelect('#state'+x,'./index.php?module=invoices&view=ajax&search=country');
+        $('#state'+x).chainSelect('#city'+x,'./index.php?module=invoices&view=ajax&search=state');
+	}
 
 });
-
 </script>
 {/literal}
 
@@ -38,7 +38,7 @@ $('#state').linkedSelect('./index.php?module=invoices&view=ajax&search=state','#
 {include file="$path/header.tpl" }
 
 <tr>
-<td class="details_screen">{$LANG.quantity}</td><td class="details_screen">{$LANG.description}</td><td class="details_screen">Attribute</td><td class="details_screen">Value</td>
+<td class="details_screen">{$LANG.quantity}</td><td class="details_screen">{$LANG.description}</td><td class="details_screen">Attribute 1</td><td class="details_screen">Attribute 2</td>
 </tr>
 
 
@@ -51,7 +51,7 @@ $('#state').linkedSelect('./index.php?module=invoices&view=ajax&search=state','#
 			{if $products == null }
 				<p><em>{$LANG.no_products}</em></p>
 			{else}
-				<select class="product_select" name="products{$smarty.section.line.index}">
+				<select class="product_select{$smarty.section.line.index}" name="products{$smarty.section.line.index}">
 					<option value=""></option>
 				{foreach from=$products item=product}
 					<option {if $product.id == $defaults.product} selected {/if} value="{$product.id}">{$product.description}</option>
@@ -61,16 +61,16 @@ $('#state').linkedSelect('./index.php?module=invoices&view=ajax&search=state','#
 				                				                
                 </td>
 			<td>
-<select id="state" class="linkSel" name="state" disabled="disabled">
-<option value="">--  --</option>
-</select><br /><br />
-
-<label for="city">City</label><br />
-<select id="city" class="linkSel" name="city" disabled="disabled">
-<option value="">--  --</option>
-</select>
-</td>
-
+				<select id="state{$smarty.section.line.index}" name="state{$smarty.section.line.index}" class="linkSel" disabled="disabled">
+					<option value="">--  --</option>
+				</select>
+			</td>
+			<td>
+				<select id="city{$smarty.section.line.index}" name="city{$smarty.section.line.index}" class="linkSel" disabled="disabled">
+					<option value="">--  --</option>
+				</select>
+			</td>	
+{*
 				<td>
 					<select name="products{$smarty.section.line.index}">
 						<option value=""></option>
@@ -87,6 +87,7 @@ $('#state').linkedSelect('./index.php?module=invoices&view=ajax&search=state','#
 						{/foreach}
 					</select>
 				</td>	
+*}
 		</tr>
 
         {/section}

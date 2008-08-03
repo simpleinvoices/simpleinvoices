@@ -2,17 +2,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
 	<title>Simple Invoices</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link REL="SHORTCUT ICON" HREF="./images/common/favicon.ico">
-	<!-- extJs2 Files -->	
+	<!-- extJs2 Files
 	<link rel="stylesheet" type="text/css" href="./include/ext2/resources/css/ext-all.css" />
  	<script type="text/javascript" src="./include/ext2/adapter/ext/ext-base.js"></script>
     <script type="text/javascript" src="./include/ext2/ext-all.js"></script>
 	<link rel="stylesheet" type="text/css" href="./include/ext2/grid/grid-examples.css" />
 	
-
+	-->
 	<link rel="stylesheet" type="text/css" href="./include/css/simpleInvoicesStyle.css" />
 
 
@@ -27,7 +26,6 @@
 
 {if $config_inc_old_js == "true"}
 	
-{literal}
 	<script type="text/javascript">
 	    var GB_ROOT_DIR = "./modules/include/js/";
 	</script>
@@ -38,11 +36,12 @@
 	<script type="text/javascript" src="./include/tiny-mce.conf.js"></script>
 	
 		<!-- jQuery Files -->
-	<script type="text/javascript" src="./include/jquery/jquery.js"></script>
+	<script type="text/javascript" src="./include/jquery/jquery-1.2.6.min.js"></script>
+	{$extension_jquery_files }
 	<script type="text/javascript" src="./include/jquery/jquery.plugins.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.conf.js"></script>
 	<link rel="stylesheet" type="text/css" href="./include/jquery/jquery.plugins.css" title="default" media="screen" />
-	
+{literal}
 	<!-- Menu header -->
 	<!--[if lte IE 6]>
 		<link rel="stylesheet" type="text/css" href="./templates/default/css/menu_header_hackIE.css" media="screen" />
