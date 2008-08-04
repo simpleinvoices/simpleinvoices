@@ -41,6 +41,7 @@
 	{$extension_jquery_files }
 	<script type="text/javascript" src="./include/jquery/jquery.plugins.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.conf.js"></script>
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/flexigrid.css">
 	<link rel="stylesheet" type="text/css" href="./include/jquery/jquery.plugins.css" title="default" media="screen" />
 {literal}
 	<!-- Menu header -->

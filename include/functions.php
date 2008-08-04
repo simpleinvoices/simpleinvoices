@@ -400,6 +400,7 @@ function sql2xml($sth, $count) {
 
 	//you can choose any name for the starting tag
 	$xml = ("<result>");
+	$xml .= "<page>1</page>";
 	$xml .= "<total>".$count."</total>";
 	//while($row = $sth->fetch(PDO::FETCH_ASSOC) )
 	foreach($sth as $row)

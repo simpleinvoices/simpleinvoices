@@ -37,5 +37,4 @@ $pageActive = "options";
 $smarty -> assign('pageActive', $pageActive);
 $smarty -> assign("cfs",$cfs);
 
-getRicoLiveGrid("rico_custom_fields","{ type:'number', decPlaces:0, ClassName:'alignleft' }");
 ?>

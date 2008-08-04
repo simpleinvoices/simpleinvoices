@@ -25,7 +25,7 @@
 
 .flexigrid div.nDiv
 	{
-	background: #eee url(images/line.gif) repeat-y -1px top;
+	background: #eee url(../../../images/flexigrid/line.gif) repeat-y -1px top;
 	border: 1px solid #ccc;
 	border-top: 0px;
 	overflow: auto;
@@ -66,7 +66,7 @@
 
 .flexigrid div.nDiv tr:hover td, .flexigrid div.nDiv tr.ndcolover td
 	{
-	background: #d5effc url(images/hl.png) repeat-x top;
+	background: #d5effc url(../../../images/flexigrid/hl.png) repeat-x top;
 	border: 1px solid #a8d8eb;
 	}
 	
@@ -97,7 +97,7 @@
 		height: 24px;
 		width: 14px;
 		z-index: 900;
-		background: #fafafa url(images/fhbg.gif) repeat-x bottom;
+		background: #fafafa url(../../../images/flexigrid/fhbg.gif) repeat-x bottom;
 		border: 0px solid #ccc;
 		border-left: 1px solid #ccc;
 		top: 0px;
@@ -113,18 +113,18 @@
 			width: 12px;
 			border-left: 1px solid #fff;
 			float: left;
-			background: url(images/ddn.png) no-repeat center;
+			background: url(../../../images/flexigrid/ddn.png) no-repeat center;
 			}		
 		
 		.flexigrid div.nBtn.srtd
 			{
-			background: url(images/wbg.gif) repeat-x 0px -1px;
+			background: url(../../../images/flexigrid/wbg.gif) repeat-x 0px -1px;
 			}
 		
 
 .flexigrid div.mDiv
 	{
-	background: url(images/wbg.gif) repeat-x top;
+	background: url(../../../images/flexigrid/wbg.gif) repeat-x top;
 	border: 1px solid #ccc;
 	border-bottom: 0px;
 	border-top: 0px;
@@ -168,17 +168,17 @@
 			border-bottom: 1px solid #ddd;
 			width: 14px;
 			height: 14px;
-			background: url(images/uup.png) no-repeat center;
+			background: url(../../../images/flexigrid/uup.png) no-repeat center;
 			}
 			
 			.flexigrid div.mDiv div.ptogtitle.vsble span
 			{
-			background: url(images/ddn.png) no-repeat center;			
+			background: url(../../../images/flexigrid/ddn.png) no-repeat center;			
 			}			
 
 .flexigrid div.tDiv /*toolbar*/
 	{
-	background: #fafafa url(images/bg.gif) repeat-x top;
+	background: #fafafa url(../../../images/flexigrid/bg.gif) repeat-x top;
 	position: relative;			
 	border: 1px solid #ccc;
 	border-bottom: 0px;
@@ -194,7 +194,7 @@
 
 .flexigrid div.sDiv /*toolbar*/
 	{
-	background: #fafafa url(images/bg.gif) repeat-x top;
+	background: #fafafa url(../../../images/flexigrid/bg.gif) repeat-x top;
 	position: relative;
 	border: 1px solid #ccc;
 	border-top: 0px;
@@ -266,7 +266,7 @@
 
 .flexigrid div.hDiv
 	{
-	background: #fafafa url(images/fhbg.gif) repeat-x bottom;
+	background: #fafafa url(../../../images/flexigrid/fhbg.gif) repeat-x bottom;
 	position: relative;
 	border: 1px solid #ccc;
 	border-bottom: 0px;
@@ -299,7 +299,7 @@
 			
 		.flexigrid div.cDrag div:hover, .flexigrid div.cDrag div.dragging
 			{
-			background: url(images/line.gif) repeat-y 2px center;
+			background: url(../../../images/flexigrid/line.gif) repeat-y 2px center;
 			}
 
 .flexigrid div.iDiv
@@ -347,7 +347,7 @@
 	right: 0px;
 	height: 5px;
 	width: 5px;
-	background: url(images/line.gif) repeat-x center;
+	background: url(../../../images/flexigrid/line.gif) repeat-x center;
 	margin-right: 1px;
 	cursor: col-resize;
 	}
@@ -363,7 +363,7 @@
 		height: 5px;
 		overflow: hidden;
 		position: relative;
-		background: #fafafa url(images/wbg.gif) repeat-x 0px -1px;
+		background: #fafafa url(../../../images/flexigrid/wbg.gif) repeat-x 0px -1px;
 		border: 1px solid #ccc;
 		border-top: 0px;
 		text-align: center;
@@ -409,7 +409,7 @@
 div.colCopy {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 11px;
-	background: #fafafa url(images/fhbg.gif) repeat-x bottom;
+	background: #fafafa url(../../../images/flexigrid/fhbg.gif) repeat-x bottom;
 	border: 1px solid #ccc;
 	border-bottom: 0px;
 	overflow: hidden;
@@ -417,7 +417,7 @@ div.colCopy {
 
 .flexigrid div.hDiv th.sorted
 	{
-	background: url(images/wbg.gif) repeat-x 0px -1px;
+	background: url(../../../images/flexigrid/wbg.gif) repeat-x 0px -1px;
 	border-bottom: 0px solid #ccc;
 	}
 	
@@ -456,12 +456,12 @@ div.colCopy {
 	
 	.flexigrid div.hDiv th div.sdesc
 		{
-		background: url(images/dn.png) no-repeat center top;
+		background: url(../../../images/flexigrid/dn.png) no-repeat center top;
 		}	
 
 	.flexigrid div.hDiv th div.sasc
 		{
-		background: url(images/up.png) no-repeat center top;
+		background: url(../../../images/flexigrid/up.png) no-repeat center top;
 		}	
 		
 .flexigrid div.bDiv td
@@ -478,7 +478,7 @@ div.colCopy {
 			.flexigrid span.cdropleft
 			{
 			display: block;
-			background: url(images/prev.gif) no-repeat -4px center;
+			background: url(../../../images/flexigrid/prev.gif) no-repeat -4px center;
 			width: 24px;
 			height: 24px;
 			position: relative;
@@ -490,7 +490,7 @@ div.colCopy {
 			.flexigrid div.hDiv span.cdropright
 			{
 			display: block;
-			background: url(images/next.gif) no-repeat 12px center;
+			background: url(../../../images/flexigrid/next.gif) no-repeat 12px center;
 			width: 24px;
 			height: 24px;
 			float: right;
@@ -552,7 +552,7 @@ div.colCopy {
 		.flexigrid tr.trSelected td.sorted, 
 		.flexigrid tr.trSelected td
 			{
-			background: #d5effc url(images/hl.png) repeat-x top;
+			background: #d5effc url(../../../images/flexigrid/hl.png) repeat-x top;
 			border-right: 1px solid #d2e3ec;
 			border-left: 1px solid #eef8ff;
 			border-bottom: 1px solid #a8d8eb;
@@ -608,7 +608,7 @@ div.colCopy {
 
 .flexigrid div.pDiv
 	{
-	background: url(images/wbg.gif) repeat-x 0 -1px;
+	background: url(../../../images/flexigrid/wbg.gif) repeat-x 0 -1px;
 	border: 1px solid #ccc;
 	border-top: 0px;
 	overflow: hidden;
@@ -684,37 +684,37 @@ div.colCopy {
 
 		.flexigrid .pSearch
 			{
-			background: url(images/magnifier.png) no-repeat center;
+			background: url(../../../images/flexigrid/magnifier.png) no-repeat center;
 			}
 	
 		.flexigrid .pFirst
 			{
-			background: url(images/first.gif) no-repeat center;
+			background: url(../../../images/flexigrid/first.gif) no-repeat center;
 			}
 			
 		.flexigrid .pPrev
 			{
-			background: url(images/prev.gif) no-repeat center;
+			background: url(../../../images/flexigrid/prev.gif) no-repeat center;
 			}
 
 		.flexigrid .pNext
 			{
-			background: url(images/next.gif) no-repeat center;
+			background: url(../../../images/flexigrid/next.gif) no-repeat center;
 			}
 
 		.flexigrid .pLast
 			{
-			background: url(images/last.gif) no-repeat center;
+			background: url(../../../images/flexigrid/last.gif) no-repeat center;
 			}
 			
 		.flexigrid .pReload
 			{
-			background: url(images/load.png) no-repeat center;
+			background: url(../../../images/flexigrid/load.png) no-repeat center;
 			}
 			
 		.flexigrid .pReload.loading
 			{
-			background: url(images/load.gif) no-repeat center;
+			background: url(../../../images/flexigrid/load.gif) no-repeat center;
 			}															
 
 /* ie adjustments */

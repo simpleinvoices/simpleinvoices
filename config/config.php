@@ -103,7 +103,7 @@ RELEASE TODO: make sure $environment is set back to live
 */
 $environment = "dev"; //test,staging,dev,live etc..
 
-if($environment != "live")
+if($environment != "production")
 {
     @include("./config/".htmlspecialchars($environment).".config.php");
 }
