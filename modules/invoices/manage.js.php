@@ -6,7 +6,6 @@ This Script has to be inlined so that smarty renders it.
 Assign Smarty vars to JS vars before we switch to literal/JS mode.  We'll be passing
 these strings to String.format on each row, which also delimits with curly braces, so we need to use
 {ldelim} and {rdelim}.
-*}
 
 {literal}
 
@@ -190,6 +189,58 @@ Ext.onReady(function(){
 	ds.load({params:{start:0, limit:25}});
 
 });
+{/literal}
+
+
+*}
+
+{literal}
+
+			function test(com,grid)
+			{
+				if (com=='Delete')
+					{
+						confirm('Delete ' + $('.trSelected',grid).length + ' items?')
+					}
+				else if (com=='Add')
+					{
+						alert('Add New Item');
+					}			
+			}
+
+
+			$("#manageInvoicesGrid").flexigrid
+			(
+			{
+			url: 'index.php?module=invoices&view=xml',
+			dataType: 'xml',
+			colModel : [
+				{display: 'ID', name : 'id', width : 40, sortable : true, align: 'center'},
+				{display: 'Biller', name : 'biller_id', width : 10, sortable : true, align: 'left'},
+				{display: 'Customer', name : 'customer_id', width : 10, sortable : true, align: 'left'},
+				{display: 'Type', name : 'type_id', width : 30, sortable : true, align: 'left', hide: true},
+				{display: 'Date', name : 'date', width : 10, sortable : true, align: 'right'}
+				],
+			buttons : [
+				{name: 'Add', bclass: 'add', onpress : test},
+				{name: 'Delete', bclass: 'delete', onpress : test},
+				{separator: true}
+				],
+			searchitems : [
+				{display: 'ID', name : 'id'},
+				{display: 'Biller ID', name : 'biller_id', isdefault: true}
+				],
+			sortname: "id",
+			sortorder: "asc",
+			usepager: true,
+			title: 'Invoices',
+			useRp: false,
+			rp: 15,
+			showTableToggleBtn: false,
+			width: 'auto',
+			//height: 200
+			}
+			);
 {/literal}
 
 </script>
