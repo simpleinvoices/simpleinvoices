@@ -3,7 +3,7 @@ CREATE TABLE `si_products_attributes` (
 `name` VARCHAR( 255 ) NOT NULL
 ) ENGINE = MYISAM ;
 
-INSERT INTO `si_products_attributes` (`id`, `name`) VALUES (NULL, 'Size'), (NULL, 'Colour')
+INSERT INTO `si_products_attributes` (`id`, `name`) VALUES (NULL, 'Size'), (NULL, 'Colour');
 
 CREATE TABLE `si_products_values` (
 `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,

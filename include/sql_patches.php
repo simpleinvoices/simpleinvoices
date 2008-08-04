@@ -725,115 +725,101 @@ PRIMARY KEY  (`user_id`)) ;
     $patch['140']['date'] = "20071126";
 
     $patch['141']['name'] = "Drop non-int compatible default from si_sql_patchmanager";
-    if ($db_server == "mysql") {
-        $patch['141']['patch'] = "SELECT 1+1;";
-    } elseif ($db_server == "pgsql") {
+    $patch['141']['patch'] = "SELECT 1+1;";
+    if ($config->database->adapter == "pdo_pgsql") {
         $patch['141']['patch'] = "ALTER TABLE ".TB_PREFIX."sql_patchmanager ALTER COLUMN sql_patch_ref DROP DEFAULT;";
     } 
     $patch['141']['date'] = "20071218";
 
     $patch['142']['name'] = "Change sql_patch_ref type in sql_patchmanager to int";
-    if ($db_server == "mysql") {
-        $patch['142']['patch'] = "ALTER TABLE  `".TB_PREFIX."sql_patchmanager` change `sql_patch_ref` `sql_patch_ref` int NOT NULL ;";
-    } elseif ($db_server == "pgsql") {
+    $patch['142']['patch'] = "ALTER TABLE  `".TB_PREFIX."sql_patchmanager` change `sql_patch_ref` `sql_patch_ref` int NOT NULL ;";
+    if ($config->database->adapter == "pdo_pgsql") {
         $patch['142']['patch'] = "ALTER TABLE  ".TB_PREFIX."sql_patchmanager ALTER COLUMN sql_patch_ref TYPE int USING to_number(sql_patch_ref, '999');";
     } 
     $patch['142']['date'] = "20071218";
 	
     $patch['143']['name'] = "Create domain mapping table";
-    if ($db_server == "mysql") {
-        //SC: Needs MySQL variant
-        $patch['143']['patch'] = "CREATE TABLE ".TB_PREFIX."domain (
+    $patch['143']['patch'] = "CREATE TABLE ".TB_PREFIX."domain (
 	    `id` int(11) NOT NULL auto_increment  PRIMARY KEY,
             `name` varchar(255) UNIQUE NOT NULL
             ) ENGINE=InnoDB;";
-    } elseif ($db_server == "pgsql") {
+   	if ($config->database->adapter == "pdo_pgsql") {
         $patch['143']['patch'] = "CREATE TABLE ".TB_PREFIX."domain (
             id serial PRIMARY KEY,
             name text UNIQUE NOT NULL
             );";
     }
     $patch['143']['date'] = "200712";
+    
 
     $patch['144']['name'] = "Insert default domain";
-    if ($db_server == "mysql") {
-        //SC: Needs MySQL variant
-        $patch['144']['patch'] = "INSERT INTO ".TB_PREFIX."domain (name)
+    $patch['144']['patch'] = "INSERT INTO ".TB_PREFIX."domain (name)
         VALUES ('default');";
-    } elseif ($db_server == "pgsql") {
+    if ($config->database->adapter == "pdo_pgsql") {
         $patch['144']['patch'] = "INSERT INTO ".TB_PREFIX."domain (name)
         VALUES ('default');";
     }
     $patch['144']['date'] = "200712";
 
     $patch['145']['name'] = "Add domain_id to payment_types table";
-    if ($db_server == "mysql") {
-        $patch['145']['patch'] = "ALTER TABLE `".TB_PREFIX."payment_types` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `pt_id` ;";
-    } elseif ($db_server == "pgsql") {
+    $patch['145']['patch'] = "ALTER TABLE `".TB_PREFIX."payment_types` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `pt_id` ;";
+    if ($config->database->adapter == "pdo_pgsql") {
         $patch['145']['patch'] = "ALTER TABLE ".TB_PREFIX."payment_types ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
     $patch['145']['date'] = "200712";
 
     $patch['146']['name'] = "Add domain_id to preferences table";
-    if ($db_server == "mysql") {
-        $patch['146']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `pref_id` ;";
-    } elseif ($db_server == "pgsql") {
+    $patch['146']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `pref_id` ;";
+    if ($config->database->adapter == "pdo_pgsql") {
         $patch['146']['patch'] = "ALTER TABLE ".TB_PREFIX."preferences ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
     $patch['146']['date'] = "200712";
 
     $patch['147']['name'] = "Add domain_id to products table";
-    if ($db_server == "mysql") {
-        $patch['147']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
-    } elseif ($db_server == "pgsql") {
+    $patch['147']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
+    if ($config->database->adapter == "pdo_pgsql") {
         $patch['147']['patch'] = "ALTER TABLE ".TB_PREFIX."products ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
     $patch['147']['date'] = "200712"; 
     
     $patch['148']['name'] = "Add domain_id to billers table";
-    if ($db_server == "mysql") {
-        $patch['148']['patch'] = "ALTER TABLE `".TB_PREFIX."biller` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
-    } elseif ($db_server == "pgsql") {
+    $patch['148']['patch'] = "ALTER TABLE `".TB_PREFIX."biller` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
+    if ($config->database->adapter == "pdo_pgsql") {
         $patch['148']['patch'] = "ALTER TABLE ".TB_PREFIX."biller ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
     $patch['148']['date'] = "200712";
 
     $patch['149']['name'] = "Add domain_id to invoices table";
-    if ($db_server == "mysql") {
-        $patch['149']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
-    } elseif ($db_server == "pgsql") {
+    $patch['149']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
+    if ($config->database->adapter == "pdo_pgsql") {
         $patch['149']['patch'] = "ALTER TABLE ".TB_PREFIX."invoices ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
     $patch['149']['date'] = "200712";
 
     $patch['150']['name'] = "Add domain_id to customers table";
-    if ($db_server == "mysql") {
-        $patch['150']['patch'] = "ALTER TABLE `".TB_PREFIX."customers` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
-    } elseif ($db_server == "pgsql") {
+    $patch['150']['patch'] = "ALTER TABLE `".TB_PREFIX."customers` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
+    if ($config->database->adapter == "pdo_pgsql") {
         $patch['150']['patch'] = "ALTER TABLE ".TB_PREFIX."customers ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
     $patch['150']['date'] = "200712";
 
     $patch['151']['name'] = "Change group field to group_id in users table";
-    if ($db_server == "mysql") {
-        $patch['151']['patch'] = "ALTER TABLE `".TB_PREFIX."users` CHANGE `user_group` `group_id` INT  DEFAULT '1' NOT NULL;";
-    } elseif ($db_server == "pgsql") {
+    $patch['151']['patch'] = "ALTER TABLE `".TB_PREFIX."users` CHANGE `user_group` `group_id` INT  DEFAULT '1' NOT NULL;";
+    if ($config->database->adapter == "pdo_pgsql") {
         $patch['151']['patch'] = "ALTER TABLE ".TB_PREFIX."users RENAME COLUMN user_group TO group_id;";
     }
     $patch['151']['date'] = "20080102";
 
     $patch['152']['name'] = "Change domain field to domain_id in users table";
-    if ($db_server == "mysql") {
-        $patch['152']['patch'] = "ALTER TABLE `" . TB_PREFIX . "users` CHANGE `user_domain` `domain_id` INT  DEFAULT '1' NOT NULL;";
-    } elseif ($db_server == "pgsql") {
+    $patch['152']['patch'] = "ALTER TABLE `" . TB_PREFIX . "users` CHANGE `user_domain` `domain_id` INT  DEFAULT '1' NOT NULL;";
+    if ($config->database->adapter == "pdo_pgsql") {
         $patch['152']['patch'] = "ALTER TABLE " . TB_PREFIX . "users RENAME COLUMN user_domain TO domain_id;";
     }
     $patch['152']['date'] = "20080102";
 
     $patch['153']['name'] = "Drop old auth_challenges table";
-    if ($db_server == "mysql") {
-        $patch['153']['patch'] = "DROP TABLE IF EXISTS `".TB_PREFIX."auth_challenges`;";
-    } elseif ($db_server == "pgsql") {
+    $patch['153']['patch'] = "DROP TABLE IF EXISTS `".TB_PREFIX."auth_challenges`;";
+    if ($config->database->adapter == "pdo_pgsql") {
         /* SC: auth_challenges creation was already removed from the postgres
          *     schema before this patch
          */
@@ -842,12 +828,11 @@ PRIMARY KEY  (`user_id`)) ;
     $patch['153']['date'] = "20080102";
 
     $patch['154']['name'] = "Create usergroup table";
-    if ($db_server == "mysql") {
-        $patch['154']['patch'] = "CREATE TABLE ".TB_PREFIX."user_group (
+    $patch['154']['patch'] = "CREATE TABLE ".TB_PREFIX."user_group (
 	    `id` int(11) NOT NULL auto_increment  PRIMARY KEY,
             `name` varchar(255) UNIQUE NOT NULL
             ) ENGINE=InnoDB;";
-    } elseif ($db_server == "pgsql") {
+    if ($config->database->adapter == "pdo_pgsql") {
         $patch['154']['patch'] = "CREATE TABLE ".TB_PREFIX."user_group (
             id serial PRIMARY KEY,
             name text UNIQUE NOT NULL
@@ -856,9 +841,8 @@ PRIMARY KEY  (`user_id`)) ;
     $patch['154']['date'] = "20080102";
 
     $patch['155']['name'] = "Insert default user group";
-    if ($db_server == "mysql") {
-        $patch['155']['patch'] = "INSERT INTO ".TB_PREFIX."user_group (name) VALUES ('default');";
-    } elseif ($db_server == "pgsql") {
+    $patch['155']['patch'] = "INSERT INTO ".TB_PREFIX."user_group (name) VALUES ('default');";
+    if ($config->database->adapter == "pdo_pgsql") {
         $patch['155']['patch'] = "INSERT INTO ".TB_PREFIX."user_group (name) VALUES ('default');";
     }
     $patch['155']['date'] = "20080102";
@@ -866,7 +850,7 @@ PRIMARY KEY  (`user_id`)) ;
 
     $patch['156']['name'] = "Table = Account_payments Field = ac_amount : change field type and length to decimal";
     $patch['156']['patch'] = "ALTER TABLE `".TB_PREFIX."account_payments` CHANGE `ac_amount` `ac_amount` DECIMAL( 25, 6 ) NOT NULL;";
-    if ($db_server == "pgsql") {
+    if ($config->database->adapter == "pdo_pgsql") {
         $patch['156']['name'] = "Widen ac_amount field of account_payments";
         $patch['156']['patch'] = "ALTER TABLE ".TB_PREFIX."account_payments ALTER COLUMN ac_amount TYPE numeric(25, 6)";
     }
@@ -874,7 +858,7 @@ PRIMARY KEY  (`user_id`)) ;
 
     $patch['157']['name'] = "Table = Invoice_items Field = quantity : change field type and length to decimal";
     $patch['157']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `quantity` `quantity` DECIMAL( 25, 6 ) NOT NULL DEFAULT '0' ";
-    if ($db_server == "pgsql") {
+    if ($config->database->adapter == "pdo_pgsql") {
         $patch['157']['name'] = "Widen quantity field of invoice_items";
         $patch['157']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN quantity TYPE numeric(25, 6)";
     }
@@ -882,7 +866,7 @@ PRIMARY KEY  (`user_id`)) ;
 
     $patch['158']['name'] = "Table = Invoice_items Field = unit_price : change field type and length to decimal";
     $patch['158']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `unit_price` `unit_price` DECIMAL( 25, 6 ) NULL DEFAULT '0.00' ";
-    if ($db_server == "pgsql") {
+    if ($config->database->adapter == "pdo_pgsql") {
         $patch['158']['name'] = "Widen unit_price field of invoice_items";
         $patch['158']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN unit_price TYPE numeric(25, 6)";
     }
@@ -890,7 +874,7 @@ PRIMARY KEY  (`user_id`)) ;
 
     $patch['159']['name'] = "Table = Invoice_items Field = tax : change field type and length to decimal";
     $patch['159']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `tax` `tax` DECIMAL( 25, 6 ) NULL DEFAULT '0.00' ";
-    if ($db_server == "pgsql") {
+    if ($config->database->adapter == "pdo_pgsql") {
         $patch['159']['name'] = "Widen tax field of invoice_items";
         $patch['159']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN tax TYPE numeric(25, 6)";
     }
@@ -898,7 +882,7 @@ PRIMARY KEY  (`user_id`)) ;
 
     $patch['160']['name'] = "Table = Invoice_items Field = tax_amount : change field type and length to decimal";
     $patch['160']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `tax_amount` `tax_amount` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
-    if ($db_server == "pgsql") {
+    if ($config->database->adapter == "pdo_pgsql") {
         $patch['160']['name'] = "Widen tax_amount field of invoice_items";
         $patch['160']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN tax_amount TYPE numeric(25, 6)";
     }
@@ -906,7 +890,7 @@ PRIMARY KEY  (`user_id`)) ;
 
     $patch['161']['name'] = "Table = Invoice_items Field = gross_total : change field type and length to decimal";
     $patch['161']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `gross_total` `gross_total` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
-    if ($db_server == "pgsql") {
+    if ($config->database->adapter == "pdo_pgsql") {
         $patch['161']['name'] = "Widen gross_total field of invoice_items";
         $patch['161']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN gross_total TYPE numeric(25, 6)";
     }
@@ -915,7 +899,7 @@ PRIMARY KEY  (`user_id`)) ;
 
     $patch['162']['name'] = "Table = Invoice_items Field = total : change field type and length to decimal";
     $patch['162']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `total` `total` DECIMAL( 25, 6 ) NULL DEFAULT '0.00' ";
-    if ($db_server == "pgsql") {
+    if ($config->database->adapter == "pdo_pgsql") {
         $patch['162']['name'] = "Widen total field of invoice_items";
         $patch['162']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN total TYPE numeric(25, 6)";
     }
@@ -924,7 +908,7 @@ PRIMARY KEY  (`user_id`)) ;
 
     $patch['163']['name'] = "Table = Products Field = unit_price : change field type and length to decimal";
     $patch['163']['patch'] = "ALTER TABLE `".TB_PREFIX."products` CHANGE `unit_price` `unit_price` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
-    if ($db_server == "pgsql") {
+    if ($config->database->adapter == "pdo_pgsql") {
         $patch['163']['name'] = "Widen unit_price field of products";
         $patch['163']['patch'] = "ALTER TABLE ".TB_PREFIX."products ALTER COLUMN unit_price TYPE numeric(25, 6)";
     }
@@ -933,7 +917,7 @@ PRIMARY KEY  (`user_id`)) ;
 
     $patch['164']['name'] = "Table = Tax Field = quantity : change field type and length to decimal";
     $patch['164']['patch'] = "ALTER TABLE `".TB_PREFIX."tax` CHANGE `tax_percentage` `tax_percentage` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
-    if ($db_server == "pgsql") {
+    if ($config->database->adapter == "pdo_pgsql") {
         $patch['164']['name'] = "Widen tax_percentage field of tax";
         $patch['164']['patch'] = "ALTER TABLE ".TB_PREFIX."tax ALTER COLUMN tax_percentage TYPE numeric(25, 6)";
     }
@@ -942,7 +926,7 @@ PRIMARY KEY  (`user_id`)) ;
 /*
     $patch['157']['name'] = "Table = Invoice_items Field = quantity : change field type and length to decimal";
         $patch['157']['patch'] = "";
-    } elseif ($db_server == "pgsql") {
+    } elseif ($config->database->adapter == "pdo_pgsql") {
         $patch['157']['patch'] = "";
     }
     $patch['157']['date'] = "20080128";
@@ -950,7 +934,7 @@ PRIMARY KEY  (`user_id`)) ;
 
     $patch['157']['name'] = "Table = Invoice_items Field = quantity : change field type and length to decimal";
         $patch['157']['patch'] = "";
-    } elseif ($db_server == "pgsql") {
+    } elseif ($config->database->adapter == "pdo_pgsql") {
         $patch['157']['patch'] = "";
     }
     $patch['157']['date'] = "20080128";
@@ -958,7 +942,7 @@ PRIMARY KEY  (`user_id`)) ;
 
     $patch['157']['name'] = "Table = Invoice_items Field = quantity : change field type and length to decimal";
         $patch['157']['patch'] = "";
-    } elseif ($db_server == "pgsql") {
+    } elseif ($config->database->adapter == "pdo_pgsql") {
         $patch['157']['patch'] = "";
     }
     $patch['157']['date'] = "20080128";
@@ -966,7 +950,7 @@ PRIMARY KEY  (`user_id`)) ;
 
     $patch['157']['name'] = "Table = Invoice_items Field = quantity : change field type and length to decimal";
         $patch['157']['patch'] = "";
-    } elseif ($db_server == "pgsql") {
+    } elseif ($config->database->adapter == "pdo_pgsql") {
         $patch['157']['patch'] = "";
     }
     $patch['157']['date'] = "20080128";
@@ -985,9 +969,9 @@ NULL ,  '61',  '100',  'Custom Fields New', 'index.php?module=customFields&amp;v
  * Not sure about these patches		
 		
 $patch['153']['name'] = "Drop old defaults table";
-    if ($db_server == "mysql") {
+    if ($config->database->adapter == "pdo_mysql") {
         $patch['153']['patch'] = "DROP TABLE IF EXISTS `".TB_PREFIX."defaults`;";
-    } elseif ($db_server == "pgsql") {
+    } elseif ($config->database->adapter == "pdo_pgsql") {
 	// needs pgsql variant
         $patch['153']['patch'] = "DROP TABLE IF EXISTS `".TB_PREFIX."defaults`;";
     }

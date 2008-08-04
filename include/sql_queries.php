@@ -12,6 +12,8 @@ if ($db_server == 'mysql') {
 	$mysql = 5;
 }
 
+
+
 function db_connector() {
 
 	global $config;
@@ -21,12 +23,10 @@ function db_connector() {
 	$pdoAdapter = substr($config->database->adapter, 4);
 	
 	$connlink = new PDO(
-					$pdoAdapter.':
-					host='.$config->database->params->host.';
-					dbname='.$config->database->params->dbname, 
-						$config->database->params->username, 
-						$config->database->params->password
+					$pdoAdapter.':host='.$config->database->params->host.';	dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password
 				);
+
+			
 	return $connlink;
 }
 
