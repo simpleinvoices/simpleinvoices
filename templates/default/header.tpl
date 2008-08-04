@@ -5,13 +5,13 @@
 	<title>Simple Invoices</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link REL="SHORTCUT ICON" HREF="./images/common/favicon.ico">
-	<!-- extJs2 Files
+	<!-- extJs2 Files -->
 	<link rel="stylesheet" type="text/css" href="./include/ext2/resources/css/ext-all.css" />
  	<script type="text/javascript" src="./include/ext2/adapter/ext/ext-base.js"></script>
     <script type="text/javascript" src="./include/ext2/ext-all.js"></script>
 	<link rel="stylesheet" type="text/css" href="./include/ext2/grid/grid-examples.css" />
 	
-	-->
+	
 	<link rel="stylesheet" type="text/css" href="./include/css/simpleInvoicesStyle.css" />
 
 
