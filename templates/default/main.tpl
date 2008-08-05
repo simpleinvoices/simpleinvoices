@@ -7,4 +7,3 @@ TODO : delet this file
 <div class="contentRight">
 <div class="contentLeft">
 <div class="col">
-

@@ -3,12 +3,6 @@
 * Script: manage.tpl
 * 	 Custom fields manage template
 *
-* Authors:
-*	 Justin Kelly, Nicolas Ruflin, Ben Brown
-*
-* Last edited:
-* 	 2007-09-22
-*
 * License:
 *	 GPL v2 or above
 */
@@ -16,10 +10,12 @@
 {if $cfs == null}
 <p><em>{$LANG.no_invoices}.</em></p>
 {else}
+
 <h3>{$LANG.manage_custom_fields}</h3>
 <div style="text-align:center;"><a href="docs.php?t=help&p=what_are_custom_fields" rel="gb_page_center[450, 450]">{$LANG.what_are_custom_fields}<img src="./images/common/help-small.png"></img></a> :: <a href="docs.php?t=help&p=manage_custom_fields" rel="gb_page_center[450, 450]">{$LANG.whats_this_page_about}<img src="./images/common/help-small.png"></img></a></div>
 <hr />
-<table id="flex2" style="display:none"></table>
+
+<table id="manageGrid" style="display:none"></table>
 
  {include file='../modules/custom_fields/manage.js.php'}
 {*

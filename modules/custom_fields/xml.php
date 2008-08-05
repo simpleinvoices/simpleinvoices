@@ -4,15 +4,17 @@
 header("Content-type: text/xml");
 
 $start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
-$dir = (isset($_POST['dir'])) ? $_POST['dir'] : "ASC" ;
-$sort = (isset($_POST['sort'])) ? $_POST['sort'] : "id" ;
-$limit = (isset($_POST['limit'])) ? $_POST['limit'] : "25" ;
+$dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC" ;
+$sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "id" ;
+$limit = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
+$page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 
-$page = $_POST['page'];
 //SC: Safety checking values that will be directly subbed in
-if (intval($start) != $start) {
+if (intval($page) != $page) {
 	$start = 0;
 }
+$start = (($page-1) * $limit);
+
 if (intval($limit) != $limit) {
 	$limit = 25;
 }
@@ -70,6 +72,8 @@ foreach ($customers as $row) {
 
 	$xml .= "<row id='".$row['iso']."'>";
 
+	$xml .= "<cell><![CDATA['View :: Edit']]></cell>";
+			
 	$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";		
 
 	$xml .= "<cell><![CDATA[".utf8_encode($row['biller_id'])."]]></cell>";
