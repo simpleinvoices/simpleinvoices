@@ -1,6 +1,4 @@
 <?php
-//Developed by -==[Mihir Shah]==- during my Project work
-//for the output
 header("Content-type: text/xml");
 
 $start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;

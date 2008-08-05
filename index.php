@@ -110,31 +110,40 @@ if (($module == "invoices" ) && (strstr($view,"templates"))) {
 }
 
 /*
-* Get the xml for the new grids
+* xml or ajax page requeset - start
 */
 
-if (strstr($view,"xml")) {
-	if (file_exists("./modules/$module/xml.php")) {
-		include("./modules/$module/xml.php");
-	}
-	else {
-		echo "The file that you requested doesn't exist";
-	}
-	
-	exit(0);
+	if( (strstr($view,"xml") OR (strstr($view,"ajax")) ) )
+	{	
+		$extensionXml = 0;
+		foreach($extension as $tplKey=>$tplValue)
+		{
+			/*
+			* If extension is enabled then continue and include the requested file for that extension if it exists
+			*/	
+			if($tplValue['enabled'] == "1")
+			{
+				if(file_exists("./extensions/$tplValue[name]/modules/$module/$view.php")) 
+				{
+					include("./extensions/$tplValue[name]/modules/$module/$view.php");
+					$extensionXml++;
+				}
+			}
+		}
+		/*
+		* If no extension php file for requested file load the normal php file if it exists
+		*/
+		if($extensionXml == 0) 
+		{
+			include("./modules/$module/$view.php");
+		}
 
-}
-if (strstr($view,"ajax")) {
-	if (file_exists("./extensions/product_matrix/modules/$module/ajax.php")) {
-		include("./extensions/product_matrix/modules/$module/ajax.php");
+		exit(0);
 	}
-	else {
-		echo "The file that you requested doesn't exist";
-	}
-	
-	exit(0);
+/*
+* xml or ajax page request - end
+*/
 
-}
 
 $path = "$module/$view";
 
