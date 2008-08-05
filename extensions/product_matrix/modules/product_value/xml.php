@@ -25,12 +25,12 @@ $query = $_POST['query'];
 $qtype = $_POST['qtype'];
 
 $where = "";
-if ($query) $where = " WHERE $qtype LIKE '%$query%' ";
+if ($query) $where = " AND $qtype LIKE '%$query%' ";
 
 
 
 /*Check that the sort field is OK*/
-$validFields = array('id', 'name');
+$validFields = array('id', 'name', 'value' );
 
 if (in_array($sort, $validFields)) {
 	$sort = $sort;
@@ -38,12 +38,15 @@ if (in_array($sort, $validFields)) {
 	$sort = "id";
 }
 
-	//$sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY $sort $dir LIMIT $start, $limit";
 	$sql = "SELECT 
-				id, 
-				name
+				v.id as id, 
+				a.name as name,
+				v.value as value
 			FROM 
-				".TB_PREFIX."products_attributes
+				".TB_PREFIX."products_attributes a,
+				".TB_PREFIX."products_values v
+			WHERE
+				a.id = v.attribute_id
 			$where
 			ORDER BY 
 				$sort $dir 
@@ -64,7 +67,7 @@ if (in_array($sort, $validFields)) {
 */
 global $dbh;
 
-$sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."products_attributes";
+$sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."products_values";
 $tth = dbQuery($sqlTotal) or die(end($dbh->errorInfo()));
 $resultCount = $tth->fetch();
 $count = $resultCount[0];
@@ -79,11 +82,12 @@ foreach ($customers as $row) {
 
 	$xml .= "<row id='".$row['id']."'>";
 
-	$xml .= "<cell><![CDATA[<a href='index.php?module=product_atrribute&view=details&action=view&id=".$row['id']."'>View</a> :: <a href='index.php?module=product_atrribute&view=details&action=view&id=".$row['id']."'>Edit</a>]]></cell>";
+	$xml .= "<cell><![CDATA[<a href='index.php?module=product_value&view=details&action=view&id=".$row['id']."'>View</a> :: <a href='index.php?module=product_value&view=details&action=view&id=".$row['id']."'>Edit</a>]]></cell>";
 			
 	$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";		
 
 	$xml .= "<cell><![CDATA[".utf8_encode($row['name'])."]]></cell>";
+	$xml .= "<cell><![CDATA[".utf8_encode($row['value'])."]]></cell>";
 
 
 	$xml .= "</row>";		
