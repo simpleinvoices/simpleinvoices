@@ -23,5 +23,7 @@
  
 <h3>{$LANG.manage_products} :: <a href="index.php?module=products&view=add">{$LANG.add_new_product}</a></h3>
 <hr />
-<div id="manageProductsGrid"></div>
+<table id="manageGrid" style="display:none"></table>
+
+ {include file='../modules/products/manage.js.php'}
 {/if}
