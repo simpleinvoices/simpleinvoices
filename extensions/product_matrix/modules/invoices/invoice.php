@@ -44,11 +44,15 @@ for($i=1;$i<=4;$i++) {
 }
 
 
-$sql = "select CONCAT(a.id, '-', v.id) as id, CONCAT(a.name, '-',v.value) as display from si_products_attributes a, si_products_values v where a.id = v.attribute_id;";
+$sql = "select CONCAT(a.id, '-', v.id) as id, CONCAT(a.name, '-',v.value) as display from ".TB_PREFIX."products_attributes a, ".TB_PREFIX."products_values v where a.id = v.attribute_id;";
 $sth =  dbQuery($sql);
 $matrix = $sth->fetchAll();
 $smarty -> assign("matrix", $matrix);
 
+$sql_prod = "select product_id as PID, (select count(product_id) from ".TB_PREFIX."products_matrix where product_id = PID ) as count from ".TB_PREFIX."products_matrix ORDER BY count desc LIMIT 1;";
+$sth_prod =  dbQuery($sql_prod);
+$number_of_products = $sth_prod->fetchAll();
+$smarty -> assign("number_of_products", $number_of_products['0']['count']);
 
 $pageActive == "invoices";
 

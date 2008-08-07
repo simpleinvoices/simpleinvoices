@@ -3,17 +3,19 @@
 checkLogin();
 
 //if valid then do save
-if ($_POST['p_description'] != "" ) {
-	include("./modules/preferences/save.php");
+if ($_POST['name'] != "" ) {
+	include("./extensions/product_matrix/modules/product_attribute/save.php");
 }
 
 #get the invoice id
-$preference_id = $_GET['submit'];
+$id = $_GET['id'];
 
-$preference = getPreference($preference_id);
+$sql_prod = "select * from ".TB_PREFIX."products_attributes where id = $id;";
+$sth_prod =  dbQuery($sql_prod);
+$product_attribute = $sth_prod->fetch();
 
 $pageActive = "options";
 $smarty->assign('pageActive', $pageActive);
-$smarty->assign('preference',$preference);
+$smarty->assign('product_attribute',$product_attribute);
 
 ?>

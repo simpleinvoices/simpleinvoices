@@ -23,8 +23,13 @@ $(function()
 
 for (var x = 0; x <= {/literal}{$dynamic_line_items}{literal}; x++)
    {
-        $('.product_select'+x).chainSelect('#state'+x,'./index.php?module=invoices&view=ajax&search=country');
-        $('#state'+x).chainSelect('#city'+x,'./index.php?module=invoices&view=ajax&search=state');
+        $('.product_select'+x).chainSelect('#attr1-'+x,'./index.php?module=invoices&view=ajax&search=attr1');
+        $('#attr1-'+x).chainSelect('#attr2-'+x,'./index.php?module=invoices&view=ajax&search=attr2');
+{/literal} 
+{if $number_of_attributes == 3}
+        $('#attr1-'+x).chainSelect('#attr3-'+x,'./index.php?module=invoices&view=ajax&search=attr3');
+{/if}
+{literal}
 	}
 
 });
@@ -61,15 +66,22 @@ for (var x = 0; x <= {/literal}{$dynamic_line_items}{literal}; x++)
 				                				                
                 </td>
 			<td>
-				<select id="state{$smarty.section.line.index}" name="state{$smarty.section.line.index}" class="linkSel" disabled="disabled">
+				<select id="attr1-{$smarty.section.line.index}" name="attr1-{$smarty.section.line.index}" class="linkSel" disabled="disabled">
 					<option value="">--  --</option>
 				</select>
 			</td>
 			<td>
-				<select id="city{$smarty.section.line.index}" name="city{$smarty.section.line.index}" class="linkSel" disabled="disabled">
+				<select id="attr2-{$smarty.section.line.index}" name="attr2-{$smarty.section.line.index}" class="linkSel" disabled="disabled">
 					<option value="">--  --</option>
 				</select>
 			</td>	
+			{if $number_of_attributes == 3}
+			<td>
+				<select id="attr3-{$smarty.section.line.index}" name="attr3-{$smarty.section.line.index}" class="linkSel" disabled="disabled">
+					<option value="">--  --</option>
+				</select>
+			</td>	
+			{/if}
 {*
 				<td>
 					<select name="products{$smarty.section.line.index}">

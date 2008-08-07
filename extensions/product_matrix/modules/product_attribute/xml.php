@@ -79,7 +79,7 @@ foreach ($customers as $row) {
 
 	$xml .= "<row id='".$row['id']."'>";
 
-	$xml .= "<cell><![CDATA[<a href='index.php?module=product_atrribute&view=details&action=view&id=".$row['id']."'>View</a> :: <a href='index.php?module=product_atrribute&view=details&action=view&id=".$row['id']."'>Edit</a>]]></cell>";
+	$xml .= "<cell><![CDATA[<a href='index.php?module=product_attribute&view=details&action=view&id=".$row['id']."'>View</a> :: <a href='index.php?module=product_attribute&view=details&action=edit&id=".$row['id']."'>Edit</a>]]></cell>";
 			
 	$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";		
 

@@ -9,140 +9,58 @@ $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
 
 
 #insert invoice_preference
-if (  $op === 'insert_preference' ) {
+if (  $op === 'insert_product_value' ) {
 
 	$sql = "INSERT into
-		".TB_PREFIX."preferences
+		".TB_PREFIX."products_values
 	VALUES
 		(
 			NULL,
-			:domain_id,
-			:description,
-			:currency_sign,
-			:heading,
-			:wording,
-			:detail_heading,
-			:detail_line,
-			:payment_method,
-			:payment_line1_name,
-			:payment_line1_value,
-			:payment_line2_name,
-			:payment_line2_value,
-			:enabled
+			:attribute_id,
+			:value
 		 )";
-	if ($db_server == 'pgsql') {
-		$sql = "INSERT into ".TB_PREFIX."preferences
-		(
-			pref_domain_id,
-			pref_description,
-			pref_currency_sign,
-			pref_inv_heading,
-			pref_inv_wording,
-			pref_inv_detail_heading,
-			pref_inv_detail_line,
-			pref_inv_payment_method,
-			pref_inv_payment_line1_name,
-			pref_inv_payment_line1_value,
-			pref_inv_payment_line2_name,
-			pref_inv_payment_line2_value,
-			pref_enabled
-		)
-		VALUES
-		(
-			:domain_id,
-			:description,
-			:currency_sign,
-			:heading,
-			:wording,
-			:detail_heading,
-			:detail_line,
-			:payment_method,
-			:payment_line1_name,
-			:payment_line1_value,
-			:payment_line2_name,
-			:payment_line2_value,
-			:enabled
-		)";
-	}
 
 	if (dbQuery($sql,
-	  ':domain_id', '1',
-	  ':description', $_POST['p_description'],
-	  ':currency_sign', $_POST['p_currency_sign'],
-	  ':heading', $_POST['p_inv_heading'],
-	  ':wording', $_POST['p_inv_wording'],
-	  ':detail_heading', $_POST['p_inv_detail_heading'],
-	  ':detail_line', $_POST['p_inv_detail_line'],
-	  ':payment_method', $_POST['p_inv_payment_method'],
-	  ':payment_line1_name', $_POST['p_inv_payment_line1_name'],
-	  ':payment_line1_value', $_POST['p_inv_payment_line1_value'],
-	  ':payment_line2_name', $_POST['p_inv_payment_line2_name'],
-	  ':payment_line2_value', $_POST['p_inv_payment_line2_value'],
-	  ':enabled', $_POST['pref_enabled']
+	  ':attribute_id', $_POST['attribute_id'],
+	  ':value', $_POST['value']
 	  )) {
-		$display_block = $LANG['save_preference_success'];
+		$display_block = "Successfully saved";
 	} else {
-		$display_block =  $LANG['save_preference_failure'];
+		$display_block = "Error occurred with saving";
 	}
 
 	//header( 'refresh: 2; url=manage_preferences.php' );
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=preferences&view=manage>";
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=product_value&view=manage>";
 
 }
 
 #edit preference
 
-else if (  $op === 'edit_preference' ) {
+if (  $op === 'edit_product_value' ) {
 
-	if (isset($_POST['save_preference'])) {
+	if (isset($_POST['save_product_value'])) {
 		$sql = "UPDATE
-				".TB_PREFIX."preferences
+				".TB_PREFIX."products_values
 			SET
-				pref_description = :description,
-				pref_currency_sign = :currency_sign,
-				pref_inv_heading = :heading,
-				pref_inv_wording = :wording,
-				pref_inv_detail_heading = :detail_heading,
-				pref_inv_detail_line = :detail_line,
-				pref_inv_payment_method = :payment_method,
-				pref_inv_payment_line1_name = :line1_name,
-				pref_inv_payment_line1_value = :line1_value,
-				pref_inv_payment_line2_name = :line2_name,
-				pref_inv_payment_line2_value = :line2_value,
-				pref_enabled = :enabled
+				attribute_id = :attribute_id,
+				value = :value
 			WHERE
-				pref_id = :id";
+				id = :id";
 
 		if (dbQuery($sql, 
-		  ':description', $_POST['pref_description'],
-		  ':currency_sign', $_POST['pref_currency_sign'],
-		  ':heading', $_POST['pref_inv_heading'],
-		  ':wording', $_POST['pref_inv_wording'],
-		  ':detail_heading', $_POST['pref_inv_detail_heading'],
-		  ':detail_line', $_POST['pref_inv_detail_line'],
-		  ':payment_method', $_POST['pref_inv_payment_method'],
-		  ':line1_name', $_POST['pref_inv_payment_line1_name'],
-		  ':line1_value', $_POST['pref_inv_payment_line1_value'],
-		  ':line2_name', $_POST['pref_inv_payment_line2_name'],
-		  ':line2_value', $_POST['pref_inv_payment_line2_value'],
-		  ':enabled', $_POST['pref_enabled'],
-		  ':id', $_GET['submit']))
+		  ':attribute_id', $_POST['attribute_id'],
+		  ':value', $_POST['value'],
+		  ':id', $_GET['id'])) 
 	    {
-			$display_block = $LANG['save_preference_success'];
+			$display_block = "Successfully saved";
 		} else {
-			$display_block = $LANG['save_preference_failure'];
+			$display_block = "Error occurred with saving";
 		}
 
 		//header( 'refresh: 2; url=manage_preferences.php' );
-		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=preferences&view=manage>";
+		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=product_value&view=manage>";
 
 		}
-
-	else if ($_POST[action] == "Cancel") {
-
-		//header( 'refresh: 0; url=manage_preferences.php' );
-		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=0;URL=index.php?module=preferences&view=manage>";
-	}
 }
 
 

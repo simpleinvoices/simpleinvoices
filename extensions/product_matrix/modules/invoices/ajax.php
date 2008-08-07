@@ -15,7 +15,7 @@ $str = preg_replace("/[^A-Za-z0-9\s\-\=\&\_\.]/","", $str);
 
 switch ($search) {
 
-   case "country":
+   case "attr1":
 
 
 	  $sql = "select 
@@ -49,7 +49,38 @@ switch ($search) {
 	  echo json_encode( $json );
    break;
 
-   case "state":
+   case "attr2":
+
+	$str_before = substr($str, 0, strpos($str, '-'));     
+	$str_after = substr($str, -1, strpos($str, '-'));      
+	
+		$sql = "select 
+					CONCAT(a.id, '-', v.id) as id, 
+					CONCAT(a.name, '-',v.value) as display 
+				from 
+					si_products_matrix m, 
+					si_products_attributes a, 
+					si_products p, 
+					si_products_values v 
+				where 
+					p.id = m.product_id 
+					and 
+					a.id = m.attribute_id 
+					and 
+					v.attribute_id = a.id 
+					and 
+					p.id = '{$str_before}'
+					and
+					m.product_attribute_number = '2' 
+				";
+		$sth =  dbQuery($sql);
+		foreach($sth as $row) {
+         $json[] =  array($row['id'] => $row['display']);
+      }
+	  echo json_encode( $json );
+   break;
+
+   case "attr3":
 
 	$str_before = substr($str, 0, strpos($str, '-'));     
 	$str_after = substr($str, -1, strpos($str, '-'));      
@@ -87,7 +118,6 @@ switch ($search) {
 	  echo json_encode( $json );
 
 	*/
-   break;
 
    default:
 
