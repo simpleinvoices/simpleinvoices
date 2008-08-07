@@ -1,23 +1,32 @@
 <?php
-//Developed by -==[Mihir Shah]==- during my Project work
-//for the output
+
 header("Content-type: text/xml");
 
 $start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
-$dir = (isset($_POST['dir'])) ? $_POST['dir'] : "ASC" ;
-$sort = (isset($_POST['sort'])) ? $_POST['sort'] : "name" ;
-$limit = (isset($_POST['limit'])) ? $_POST['limit'] : "25" ;
+$dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC" ;
+$sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "name" ;
+$limit = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
+$page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 
 //SC: Safety checking values that will be directly subbed in
-if (intval($start) != $start) {
+if (intval($page) != $page) {
 	$start = 0;
 }
+$start = (($page-1) * $limit);
+
 if (intval($limit) != $limit) {
 	$limit = 25;
 }
 if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 	$dir = 'DESC';
 }
+
+$query = $_POST['query'];
+$qtype = $_POST['qtype'];
+
+$where = "";
+if ($query) $where = " WHERE $qtype LIKE '%$query%' ";
+
 
 /*Check that the sort field is OK*/
 $validFields = array('CID', 'name', 'customer_total','owing','enabled');
@@ -52,6 +61,7 @@ if (in_array($sort, $validFields)) {
 
 			FROM 
 				".TB_PREFIX."customers c  
+			$where
 			ORDER BY 
 				$sort $dir 
 			LIMIT 
@@ -75,6 +85,25 @@ $sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."customers";
 $tth = dbQuery($sqlTotal) or die(end($dbh->errorInfo()));
 $resultCount = $tth->fetch();
 $count = $resultCount[0];
-echo sql2xml($customers, $count);
+
+
+	$xml .= "<rows>";
+	$xml .= "<page>$page</page>";
+	$xml .= "<total>$count</total>";
+	
+	foreach ($customers as $row) {
+		$xml .= "<row id='".$row['CID']."'>";
+		$xml .= "<cell><![CDATA[<a title='".$LANG['quick_view_tooltip']." ".$row['CID']."' href='index.php?module=products&view=details&action=view&id=".$row['id']."'>View</a> :: <a href='index.php?module=products&view=details&action=view&id=".$row['CID']."'>Edit</a>]]></cell>";
+		$xml .= "<cell><![CDATA[".$row['CID']."]]></cell>";		
+		$xml .= "<cell><![CDATA[".utf8_encode($row['name'])."]]></cell>";
+		$xml .= "<cell><![CDATA[".utf8_encode($row['customer_total'])."]]></cell>";
+		$xml .= "<cell><![CDATA[".utf8_encode($row['owing'])."]]></cell>";
+		$xml .= "<cell><![CDATA[".utf8_encode($row['enabled'])."]]></cell>";				
+		$xml .= "</row>";		
+	}
+	$xml .= "</rows>";
+
+echo $xml;
+
 
 ?> 

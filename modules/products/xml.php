@@ -1,7 +1,5 @@
 <?php
 
-
-
 header("Content-type: text/xml");
 
 $start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;

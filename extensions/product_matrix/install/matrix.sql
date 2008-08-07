@@ -23,3 +23,6 @@ CREATE TABLE `si_products_matrix` (
 
 
 INSERT INTO `si_products_matrix` (`id`, `product_id`,`attribute_id`) VALUES (NULL,'1', '1'),  (NULL,'1', '2'), (NULL,'2', '2');
+
+
+ALTER TABLE `si_products_matrix` ADD `product_attribute_number` INT( 11 ) NOT NULL AFTER `product_id` ;

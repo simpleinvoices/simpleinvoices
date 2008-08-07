@@ -35,6 +35,8 @@ switch ($search) {
 					v.attribute_id = a.id 
 					and
 					p.id= '{$str}'
+					and
+					m.product_attribute_number = '1' 
 				";
 
 	  $sth =  dbQuery($sql);
@@ -69,7 +71,7 @@ switch ($search) {
 					and 
 					p.id = '{$str_before}'
 					and
-					v.id != '{$str_after}'
+					m.product_attribute_number = '2' 
 				";
 		$sth =  dbQuery($sql);
 		foreach($sth as $row) {

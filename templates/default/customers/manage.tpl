@@ -19,6 +19,8 @@
 
 <h3>{$LANG.manage_customers} :: <a href="index.php?module=customers&view=add">{$LANG.customer_add}</a></h3>
 <hr />
-<div id="manageCustomersGrid"></div>
+<table id="manageGrid" style="display:none"></table>
+
+ {include file='../modules/customers/manage.js.php'}
 
 {/if}
