@@ -116,14 +116,16 @@ function dbLogger($sqlQuery) {
  *
  */
 function lastInsertId() {
-	global $db_server;
+	global $config;
 	global $dbh;
+	$pdoAdapter = substr($config->database->adapter, 4);
 	
-	if ($db_server == 'pgsql') {
+	if ($pdoAdapter == 'pgsql') {
 		$sql = 'SELECT lastval()';
-	} elseif ($db_server == 'mysql') {
+	} elseif ($pdoAdapter == 'mysql') {
 		$sql = 'SELECT last_insert_id()';
 	}
+	echo $sql;
 	$sth = $dbh->prepare($sql);
 	$sth->execute();
 	return $sth->fetchColumn();

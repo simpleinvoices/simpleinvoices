@@ -14,9 +14,36 @@ $saved = false;
 if (  $op === 'insert_product' ) {
 	
 	if($id = insertProduct()) {
+		echo "ID:".$product_id = lastInsertId();
  		$saved = true;
  		saveCustomFieldValues($_POST['categorie'], lastInsertId());
  	}
+ 	
+ 	
+ 	$i = 1;
+ 	while ($i <= 3 )
+ 	{
+ 		if(!empty($_POST['attribute_'.$i]))
+ 		{
+	 		$sql = "INSERT into
+				".TB_PREFIX."products_matrix
+			VALUES
+				(
+					NULL,
+					:product_id,
+					:product_attribute_number,
+					:attribute_id
+			 	)";
+	
+			dbQuery($sql,
+		  		':product_id', $product_id, 
+				':product_attribute_number', $i,
+				':attribute_id', $_POST['attribute_'.$i]
+		  	);
+ 		}
+	  	$i++;
+ 	}
+ 	
 }
 
 if ($op === 'edit_product' ) {
@@ -24,6 +51,30 @@ if ($op === 'edit_product' ) {
 		$saved = true;
 		updateCustomFieldValues($_POST['categorie'],$_GET['id']);
 	}
+	
+ 	$i = 1;
+ 	while ($i <= 3 )
+ 	{
+ 		if(!empty($_POST['attribute_'.$i]))
+ 		{
+	 		$sql = "UPDATE
+	 						".TB_PREFIX."products_matrix
+			SET
+					:product_id,
+					:product_attribute_number,
+					:attribute_id
+			 	)";
+	
+			dbQuery($sql,
+		  		':product_id', $product_id, 
+				':product_attribute_number', $i,
+				':attribute_id', $_POST['attribute_'.$i]
+		  	);
+ 		}
+	  	$i++;
+ 	}
+	
+	
 }
 
 

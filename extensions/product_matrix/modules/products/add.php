@@ -9,11 +9,17 @@ $customFieldLabel = getCustomFieldLabels();
 
 //if valid then do save
 if ($_POST['description'] != "" ) {
-	include("./modules/products/save.php");
+	include("./extensions/product_matrix/modules/products/save.php");
 }
 $pageActive = "products";
 
 $smarty->assign('pageActive', $pageActive);
 $smarty -> assign('customFieldLabel',$customFieldLabel);
 $smarty -> assign('save',$save);
+
+
+$sql = "select * from ".TB_PREFIX."products_attributes";
+$sth =  dbQuery($sql);
+$attributes = $sth->fetchAll();
+$smarty -> assign("attributes", $attributes);
 ?>

@@ -41,6 +41,39 @@
 		<td><input type=text name="custom_field4" value="{$smarty.post.custom_field4}" size=50></td>
 	</tr>
 	<tr>
+		<td class="details_screen">Attribute 1</td>
+		<td>
+		     <select name="attribute_1">
+		     <option value=""></option>
+            {foreach from=$attributes item=attribute}
+                <option value="{$attribute.id}">{$attribute.name}</option>
+            {/foreach}
+            </select>
+		</td>
+	</tr>
+	<tr>
+		<td class="details_screen">Attribute 2</td>
+		<td>
+		     <select name="attribute_2">
+		     <option value=""></option>
+            {foreach from=$attributes item=attribute}
+                <option value="{$attribute.id}">{$attribute.name}</option>
+            {/foreach}
+            </select>
+		</td>
+	</tr>
+	<tr>
+		<td class="details_screen">Attribute 3</td>
+		<td>
+		     <select name="attribute_3">
+		     <option value=""></option>
+            {foreach from=$attributes item=attribute}
+                <option value="{$attribute.id}">{$attribute.name}</option>
+            {/foreach}
+            </select>
+		</td>
+	</tr>
+	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
 		<td><textarea input type=text name='notes' rows=8 cols=50>{$smarty.post.notes}</textarea></td>
 	</tr>

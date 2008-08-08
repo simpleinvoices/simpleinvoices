@@ -21,7 +21,8 @@ if (  $op === 'insert_product_attribute' ) {
 		 )";
 
 	if (dbQuery($sql,
-	  ':name', $_POST['name'], $_POST['display_name']
+	  ':name', $_POST['name'],
+	  ':display_name', $_POST['display_name']
 	  )) {
 		$display_block = "Successfully saved";
 	} else {
