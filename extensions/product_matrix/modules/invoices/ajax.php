@@ -20,7 +20,7 @@ switch ($search) {
 
 	  $sql = "select 
 					CONCAT(p.id, '-', a.id, '-', v.id) as id, 
-					CONCAT(a.name, '-',v.value) as display 
+					CONCAT(a.display_name, '-',v.value) as display 
 				from 
 					si_products_attributes a, 
 					si_products_values v,
@@ -56,7 +56,7 @@ switch ($search) {
 	
 		$sql = "select 
 					CONCAT(a.id, '-', v.id) as id, 
-					CONCAT(a.name, '-',v.value) as display 
+					CONCAT(a.display_name, '-',v.value) as display 
 				from 
 					si_products_matrix m, 
 					si_products_attributes a, 
@@ -87,7 +87,7 @@ switch ($search) {
 	
 		$sql = "select 
 					CONCAT(a.id, '-', v.id) as id, 
-					CONCAT(a.name, '-',v.value) as display 
+					CONCAT(a.display_name, '-',v.value) as display 
 				from 
 					si_products_matrix m, 
 					si_products_attributes a, 

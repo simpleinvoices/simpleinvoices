@@ -15,7 +15,10 @@
                 </tr>
 		<tr>	
 			<td class='details_screen'>Name</td><td>{$product_attribute.name}</td>
-                </tr>
+        </tr>
+        <tr>	
+			<td class='details_screen'>Dsiplay Name</td><td>{$product_attribute.display_name}</td>
+        </tr>
 		</table>
 		<hr></hr>
 
@@ -34,6 +37,9 @@
                 </tr>
                 <tr>
                         <td class='details_screen'>Name</td><td><input type=text name='name' value="{$product_attribute.name}" size=50></td>
+                </tr>
+                <tr>
+                        <td class='details_screen'>Display Name</td><td><input type=text name='display_name' value="{$product_attribute.display_name}" size=50></td>
                 </tr>
                 </table>
 		<hr></hr>

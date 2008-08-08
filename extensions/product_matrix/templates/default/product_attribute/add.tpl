@@ -26,11 +26,15 @@
 
 <table align=center>
 <tr>
-	<td class="details_screen">Attribute name <a href="docs.php?t=help&p=inv_pref_description" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+	<td class="details_screen">Attribute name</td>
 	<td><input type=text name="name"  value="{$smarty.post.name}" size=25></td>
 </tr>
+<tr>
+	<td class="details_screen">Display name</td>
+	<td><input type=text name="display_name"  value="{$smarty.post.display_name}" size=25></td>
+</tr>
 </table>
-<!-- </div> -->
+
 <hr />
 <div style="text-align:center;">
 	<input type=submit name="submit" value="Insert Product Attribute">

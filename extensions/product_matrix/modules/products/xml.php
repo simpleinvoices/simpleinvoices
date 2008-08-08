@@ -1,4 +1,5 @@
 <?php
+
 header("Content-type: text/xml");
 
 $start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
@@ -20,17 +21,15 @@ if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 	$dir = 'DESC';
 }
 
-
 $query = $_POST['query'];
 $qtype = $_POST['qtype'];
 
 $where = "";
-if ($query) $where = " WHERE $qtype LIKE '%$query%' ";
-
+if ($query) $where = " AND $qtype LIKE '%$query%' ";
 
 
 /*Check that the sort field is OK*/
-$validFields = array('id', 'name');
+$validFields = array('id', 'biller_id','customer_id');
 
 if (in_array($sort, $validFields)) {
 	$sort = $sort;
@@ -38,18 +37,22 @@ if (in_array($sort, $validFields)) {
 	$sort = "id";
 }
 
-	//$sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY $sort $dir LIMIT $start, $limit";
 	$sql = "SELECT 
 				id, 
-				name,
-				display_name
+				description,
+				unit_price,
+				(SELECT (CASE  WHEN enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
 			FROM 
-				".TB_PREFIX."products_attributes
-			$where
+				".TB_PREFIX."products  
+			WHERE 
+				visible = 1
+				$where
 			ORDER BY 
 				$sort $dir 
 			LIMIT 
 				$start, $limit";
+				
+			
 
 	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$customers = $sth->fetchAll(PDO::FETCH_ASSOC);
@@ -65,7 +68,7 @@ if (in_array($sort, $validFields)) {
 */
 global $dbh;
 
-$sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."products_attributes";
+$sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."products where visible =1";
 $tth = dbQuery($sqlTotal) or die(end($dbh->errorInfo()));
 $resultCount = $tth->fetch();
 $count = $resultCount[0];
@@ -78,18 +81,14 @@ $xml .= "<total>$count</total>";
 
 foreach ($customers as $row) {
 
-	$xml .= "<row id='".$row['id']."'>";
-	$xml .= "<cell><![CDATA[<a href='index.php?module=product_attribute&view=details&action=view&id=".$row['id']."'>View</a> :: <a href='index.php?module=product_attribute&view=details&action=edit&id=".$row['id']."'>Edit</a>]]></cell>";
+	$xml .= "<row id='".$row['iso']."'>";
+	$xml .= "<cell><![CDATA[<a title='".$LANG['quick_view_tooltip']." ".$row['id']."' href='index.php?module=products&view=details&action=view&id=".$row['id']."'>View</a> :: <a href='index.php?module=products&view=details&action=view&id=".$row['id']."'>Edit</a>]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";		
-	$xml .= "<cell><![CDATA[".utf8_encode($row['name'])."]]></cell>";
-	$xml .= "<cell><![CDATA[".utf8_encode($row['display_name'])."]]></cell>";
-
-
+	$xml .= "<cell><![CDATA[".utf8_encode($row['description'])."]]></cell>";
+	$xml .= "<cell><![CDATA[".utf8_encode($row['unit_price'])."]]></cell>";
+	$xml .= "<cell><![CDATA[".utf8_encode($row['enabled'])."]]></cell>";				
 	$xml .= "</row>";		
-
 }
-
-
 
 $xml .= "</rows>";
 

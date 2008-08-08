@@ -16,11 +16,12 @@ if (  $op === 'insert_product_attribute' ) {
 	VALUES
 		(
 			NULL,
-			:name
+			:name,
+			:display_name
 		 )";
 
 	if (dbQuery($sql,
-	  ':name', $_POST['name']
+	  ':name', $_POST['name'], $_POST['display_name']
 	  )) {
 		$display_block = "Successfully saved";
 	} else {
@@ -40,12 +41,14 @@ else if (  $op === 'edit_product_attribute' ) {
 		$sql = "UPDATE
 				".TB_PREFIX."products_attributes
 			SET
-				name = :name
+				name = :name,
+				display_name = :display_name
 			WHERE
 				id = :id";
 
 		if (dbQuery($sql, 
 		  ':name', $_POST['name'],
+		  ':display_name', $_POST['display_name'],
 		  ':id', $_GET['id']))
 	    {
 			$display_block = "Successfully saved";
