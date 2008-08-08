@@ -38,6 +38,30 @@
 		<td class="details_screen">{$customFieldLabel.product_cf4} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td>{$product.custom_field4}</td>
 	</tr>
+	<tr>
+		<td class="details_screen">Attribute 1</td>
+		<td>
+            {foreach from=$attributes item=attribute}
+                {if $matrix1.attribute_id == $attribute.id}{$attribute.name}{/if}
+            {/foreach}
+		</td>
+	</tr>
+	<tr>
+		<td class="details_screen">Attribute 2</td>
+		<td>
+            {foreach from=$attributes item=attribute}
+                {if $matrix2.attribute_id == $attribute.id}{$attribute.name}{/if}
+            {/foreach}
+		</td>
+	</tr>
+	<tr>
+		<td class="details_screen">Attribute 3</td>
+		<td>
+            {foreach from=$attributes item=attribute}
+                {if $matrix3.attribute_id == $attribute.id}{$attribute.name}{/if}
+            {/foreach}
+		</td>
+	</tr>
 		{showCustomFields categorieId="3" itemId=$smarty.get.id }
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td><td>{$product.notes}</td>
@@ -85,6 +109,39 @@
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf4} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
 		<td><input type="text" name="custom_field4" size="50" value="{$product.custom_field4}" /></td>
+	</tr>
+	<tr>
+		<td class="details_screen">Attribute 1</td>
+		<td>
+		     <select name="attribute_1">
+		     <option value=""></option>
+            {foreach from=$attributes item=attribute}
+                <option {if $matrix1.attribute_id == $attribute.id} selected{/if}   value="{$attribute.id}">{$attribute.name}</option>
+            {/foreach}
+            </select>
+		</td>
+	</tr>
+	<tr>
+		<td class="details_screen">Attribute 2</td>
+		<td>
+		     <select name="attribute_2">
+		     <option value=""></option>
+            {foreach from=$attributes item=attribute}
+                <option {if $matrix2.attribute_id == $attribute.id} selected{/if}   value="{$attribute.id}">{$attribute.name}</option>
+            {/foreach}
+            </select>
+		</td>
+	</tr>
+	<tr>
+		<td class="details_screen">Attribute 3</td>
+		<td>
+		     <select name="attribute_3">
+		     <option value=""></option>
+            {foreach from=$attributes item=attribute}
+                <option {if $matrix3.attribute_id == $attribute.id} selected{/if}   value="{$attribute.id}">{$attribute.name}</option>
+            {/foreach}
+            </select>
+		</td>
 	</tr>
 		{showCustomFields categorieId="3" itemId=$smarty.get.id }
 	<tr>

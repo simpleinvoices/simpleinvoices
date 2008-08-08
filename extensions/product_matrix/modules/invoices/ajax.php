@@ -51,11 +51,11 @@ switch ($search) {
 
    case "attr2":
 
-	$str_before = substr($str, 0, strpos($str, '-'));     
-	$str_after = substr($str, -1, strpos($str, '-'));      
+/*	$str_before = substr($str, 0, strpos($str, '-'));     
+	$str_after = substr($str, -1, strpos($str, '-'));      */
 	
 		$sql = "select 
-					CONCAT(a.id, '-', v.id) as id, 
+					CONCAT(p.id, '-', a.id, '-', v.id) as id, 
 					CONCAT(a.display_name, '-',v.value) as display 
 				from 
 					si_products_matrix m, 
@@ -69,24 +69,25 @@ switch ($search) {
 					and 
 					v.attribute_id = a.id 
 					and 
-					p.id = '{$str_before}'
+					p.id = '{$str}'
 					and
 					m.product_attribute_number = '2' 
 				";
-		$sth =  dbQuery($sql);
+		$sth =  dbQuery($sql);
 		foreach($sth as $row) {
-         $json[] =  array($row['id'] => $row['display']);
-      }
+        	$json[] =  array($row['id'] => $row['display']);
+      	}
+
 	  echo json_encode( $json );
    break;
 
    case "attr3":
-
+/*
 	$str_before = substr($str, 0, strpos($str, '-'));     
 	$str_after = substr($str, -1, strpos($str, '-'));      
-	
+*/	
 		$sql = "select 
-					CONCAT(a.id, '-', v.id) as id, 
+					CONCAT(p.id, '-', a.id, '-', v.id) as id, 
 					CONCAT(a.display_name, '-',v.value) as display 
 				from 
 					si_products_matrix m, 
@@ -100,15 +101,19 @@ switch ($search) {
 					and 
 					v.attribute_id = a.id 
 					and 
-					p.id = '{$str_before}'
+					p.id = '{$str}'
 					and
-					m.product_attribute_number = '2' 
+					m.product_attribute_number = '3' 
 				";
 		$sth =  dbQuery($sql);
-		foreach($sth as $row) {
-         $json[] =  array($row['id'] => $row['display']);
-      }
+		foreach($sth as $row) 
+		{
+     	    $json[] =  array($row['id'] => $row['display']);
+	    }
+
 	  echo json_encode( $json );
+
+	break;
 /*
       while ($db->next_record()) {
 

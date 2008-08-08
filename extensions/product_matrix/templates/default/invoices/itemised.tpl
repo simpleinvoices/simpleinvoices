@@ -24,10 +24,14 @@ $(function()
 for (var x = 0; x <= {/literal}{$dynamic_line_items}{literal}; x++)
    {
         $('.product_select'+x).chainSelect('#attr1-'+x,'./index.php?module=invoices&view=ajax&search=attr1');
-        $('#attr1-'+x).chainSelect('#attr2-'+x,'./index.php?module=invoices&view=ajax&search=attr2');
+        $('.product_select'+x).chainSelect('#attr2-'+x,'./index.php?module=invoices&view=ajax&search=attr2');
+/*        $('#attr1-'+x).chainSelect('#attr2-'+x,'./index.php?module=invoices&view=ajax&search=attr2');
+        $('.product_select'+x).chainSelect('#attr3-'+x,'./index.php?module=invoices&view=ajax&search=attr3');
+        $('#attr2-'+x).chainSelect('#attr3-'+x,'./index.php?module=invoices&view=ajax&search=attr3');
+*/
 {/literal} 
-{if $number_of_attributes == 3}
-        $('#attr1-'+x).chainSelect('#attr3-'+x,'./index.php?module=invoices&view=ajax&search=attr3');
+{if $number_of_attributes == "3"}
+        $('.product_select'+x).chainSelect('#attr3-'+x,'./index.php?module=invoices&view=ajax&search=attr3');
 {/if}
 {literal}
 	}
@@ -43,7 +47,13 @@ for (var x = 0; x <= {/literal}{$dynamic_line_items}{literal}; x++)
 {include file="$path/header.tpl" }
 
 <tr>
-<td class="details_screen">{$LANG.quantity}</td><td class="details_screen">{$LANG.description}</td><td class="details_screen">Attribute 1</td><td class="details_screen">Attribute 2</td>
+	<td class="details_screen">Qty</td>
+	<td class="details_screen">Desc</td>
+	<td class="details_screen">Attr1</td>
+	<td class="details_screen">Attr2</td>
+	{if $number_of_attributes == "3"}
+	<td class="details_screen">Attr3</td>
+	{/if}
 </tr>
 
 
@@ -75,7 +85,7 @@ for (var x = 0; x <= {/literal}{$dynamic_line_items}{literal}; x++)
 					<option value="">--  --</option>
 				</select>
 			</td>	
-			{if $number_of_attributes == 3}
+			{if $number_of_attributes == "3"}
 			<td>
 				<select id="attr3-{$smarty.section.line.index}" name="attr3-{$smarty.section.line.index}" class="linkSel" disabled="disabled">
 					<option value="">--  --</option>

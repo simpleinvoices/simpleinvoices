@@ -19,7 +19,7 @@ if (  $op === 'insert_product' ) {
  		saveCustomFieldValues($_POST['categorie'], lastInsertId());
  	}
  	
- 	
+ 
  	$i = 1;
  	while ($i <= 3 )
  	{
@@ -55,23 +55,97 @@ if ($op === 'edit_product' ) {
  	$i = 1;
  	while ($i <= 3 )
  	{
- 		if(!empty($_POST['attribute_'.$i]))
- 		{
-	 		$sql = "UPDATE
-	 						".TB_PREFIX."products_matrix
-			SET
-					:product_id,
-					:product_attribute_number,
-					:attribute_id
-			 	)";
+		/* 1 - check if attribue exists for that product in the matrix - 2 if not INSERT 3 if is UPDATE*/
+
+/*		$sql1 = "select attribute_id from ".TB_PREFIX."products_matrix where product_id = ".$_GET['id'];
+		$result1 = dbQuery($sql1);
+		$attributes = $result1->fetch(PDO::FETCH_ASSOC);		
+		foreach ($attributes as $key=>$value)
+		{
+			if ($value == $_POST['attribute_'.$i])
+			{
+			echo "<br><br><b>".$_POST['attribute_'.$i]."in db</b><br>";
+			}
+			echo $key." ".$value>"<br>";
+		}
+
+		print_r($attributes) ;
+*/
+ 		if($_POST['attribute_'.$i] != "")
+		{
+			#echo "<br> Atttr:".$_POST['attribute_'.$i]." is not empty";
 	
-			dbQuery($sql,
-		  		':product_id', $product_id, 
-				':product_attribute_number', $i,
-				':attribute_id', $_POST['attribute_'.$i]
-		  	);
- 		}
-	  	$i++;
+			$sql = "select * from ".TB_PREFIX."products_matrix where product_id = ".$_GET['id']." and product_attribute_number = ".$_POST['attribute_'.$i];
+			$result = @dbQuery($sql);
+			$number_of_rows = $result->rowCount();		
+			
+
+			if($number_of_rows > "0")
+			{	
+				#echo "<br> Atttr:".$_POST['attribute_'.$i]." updating";
+				$sql = "UPDATE
+								".TB_PREFIX."products_matrix
+				SET
+						attribute_id = :attribute_id
+				WHERE 
+					product_id = :product_id
+					and
+					product_attribute_number = :product_attribute_number
+					";
+				dbQuery($sql,
+					':product_id', $_GET['id'], 
+					':product_attribute_number', $i,
+					':attribute_id', $_POST['attribute_'.$i]
+				);
+			} else 	{
+				#echo "<br> Atttr:".$_POST['attribute_'.$i]." insert";
+				$sql = "INSERT into
+					".TB_PREFIX."products_matrix
+				VALUES
+					(
+						NULL,
+						:product_id,
+						:product_attribute_number,
+						:attribute_id
+					)";
+		
+				dbQuery($sql,
+					':product_id', $_GET['id'], 
+					':product_attribute_number', $i,
+					':attribute_id', $_POST['attribute_'.$i]
+				);
+			} # inner !empty - insert
+		} #!empty - end
+ 		if($_POST['attribute_'.$i] =="")
+		{
+			#echo "<br> Attr:".$_POST['attribute_'.$i]." is empty";
+/*
+			function checkRows()
+			{
+				$sql = "select * from ".TB_PREFIX."products_matrix where product_id = ".$_GET['id']." and product_attribute_number = ".$_POST['attribute_'.$i];
+				$result = dbQuery($sql);
+				$number_of_rows = $result->rowCount();		
+			}
+#			if value for attrx = null - check it is in db - if in db then delete
+			if(checkRows())
+			{	
+*/
+				#echo "<br>Deleting  Attr:".$_POST['attribute_'.$i];
+				$sql = "DELETE FROM
+								".TB_PREFIX."products_matrix
+				WHERE 
+					product_id = :product_id
+					and
+					product_attribute_number = :product_attribute_number
+					";
+				dbQuery($sql,
+					':product_id', $_GET['id'], 
+					':product_attribute_number', $i
+				);
+		#	} #inner empy - delete
+		} #end empty
+	
+	$i++;
  	}
 	
 	
