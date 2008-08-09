@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
 		<link rel="Stylesheet" href="library/WebApp/Design/Render.css" />
 		<script type="text/javascript" src="library/WebApp/Action/Logic.js"></script>
+		<!-- jQuery Files -->
+	<script type="text/javascript" src="./include/jquery/jquery-1.2.6.min.js"></script>
+	<script type="text/javascript" src="./include/jquery/jquery.flexigrid.1.0b3.pack.js"></script>
+	{$extension_jquery_files }
+	<script type="text/javascript" src="./include/jquery/jquery.plugins.js"></script>
+	<script type="text/javascript" src="./include/jquery/jquery.conf.js"></script>
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/flexigrid.css">
+	<link rel="stylesheet" type="text/css" href="./include/jquery/jquery.plugins.css" title="default" media="screen" />
 
 
 

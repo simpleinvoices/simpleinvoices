@@ -47,9 +47,14 @@ $smarty -> assign("LANG",$LANG);
 //For Making easy enabled pop-menus (see biller)
 $smarty -> assign("enabled",array($LANG['disabled'],$LANG['enabled']));
 
-$menu = true;
-//$menu = false;
-$file = "home";
+/*
+* Menu - hide or show menu
+*/
+$menu = isset($menu)?$menu: true;
+/*
+* File - set which page will be displayed as the start page
+*/
+$file = isset($file)?$file: "home";
 
 // Check for any unapplied SQL patches when going home
 if (($module == "options") && ($view == "database_sqlpatches")) {

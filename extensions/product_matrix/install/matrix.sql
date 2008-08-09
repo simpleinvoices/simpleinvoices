@@ -26,9 +26,9 @@ ALTER TABLE `si_products_matrix` ADD `product_attribute_number` INT( 11 ) NOT NU
 
 INSERT INTO `si_products_matrix` (`id`, `product_id`,`product_attribute_number`, `attribute_id`) VALUES (NULL,'1', '1', '1'),  (NULL,'1', '2', '2'), (NULL,'2', '1', '2');
 
-ALTER TABLE `si_invoice_items` ADD `attribute_1` INT( 11 ) NOT NULL ,
-ADD `attribute_2` INT( 11 ) NOT NULL ,
-ADD `attribute_3` INT( 11 ) NOT NULL ;
+ALTER TABLE `si_invoice_items` ADD `attribute_1` INT( 11 ) NULL ,
+ADD `attribute_2` INT( 11 ) NULL ,
+ADD `attribute_3` INT( 11 ) NULL ;
 
 ALTER TABLE `si_products_attributes` ADD `display_name` VARCHAR( 255 ) NOT NULL ;
 
