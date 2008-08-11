@@ -3,20 +3,25 @@
 	* Script: header.tpl
 	* 	 Header file for invoice template
 	*
+	* Authors:
+	*	 Justin Kelly, Nicolas Ruflin
+	*
+	* Last edited:
+	* 	 2007-07-18
+	*
 	* License:
-	*	 GPL v3 or above
+	*	 GPL v2 or above
 	*
 	* Website:
 	*	http://www.simpleinvoices.org
 	*/
 *}
-<hr />
 <input type="hidden" name="action" value="insert">
 <table align="center">
 
 <tr>
 	<td class="details_screen">
-		{$LANG.biller_name}
+		{$LANG.biller}
 	</td>
 	<td input type="text" name="biller_block" size=25>
 		{if $billers == null }
@@ -33,7 +38,7 @@
 </tr>
 <tr>
 	<td class="details_screen">
-		{$LANG.customer_name}
+		{$LANG.customer_short}
 	</td>
 	<td input type="text" name="customer_block" size=25>
 		
@@ -50,7 +55,7 @@
 	</td>
 </tr>
 <tr>
-        <td class="details_screen">{$LANG.date_formatted}</td>
+        <td class="details_screen">{$LANG.date_upper}</td>
         <td>
                         <input type="text" class="date-picker" name="date" id="date1" value='{$smarty.now|date_format:"%Y-%m-%d"}'></input>
         </td>

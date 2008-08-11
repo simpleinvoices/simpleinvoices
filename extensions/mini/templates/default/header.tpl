@@ -16,7 +16,8 @@
 
 
 
-<style>{literal}
+<style>
+	{literal}
 			body[dir=rtl] #iHeader .iTab {margin-left:40px;margin-right:15px }
 			#iHeader .iTab {margin-right:55px}
 
@@ -47,7 +48,7 @@
 				WA.Header(!s, "tab1");
 				return false;
 			}
-{/literal}
+	{/literal}
 		</script>
 </head>
 

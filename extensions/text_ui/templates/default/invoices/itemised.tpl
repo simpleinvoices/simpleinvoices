@@ -19,17 +19,15 @@
 
 <form name="frmpost" action="index.php?module=invoices&view=save" method=POST onsubmit="return frmpost_Validator(this)">
 
-<h3>{$LANG.inv} {$LANG.inv_itemised}</h3>
-
 {include file="$path/header.tpl" }
 
 <tr>
-	<td class="details_screen">{$LANG.quantity}</td>
-	<td class="details_screen">{$LANG.description}</td>
-	<td class="details_screen">{$LANG.attribute}1</td>
-	<td class="details_screen">{$LANG.attribute}2</td>
+	<td class="details_screen">{$LANG.quantity_short}</td>
+	<td class="details_screen">{$LANG.description_short}</td>
+	<td class="details_screen">{$LANG.attribute_short}1</td>
+	<td class="details_screen">{$LANG.attribute_short}2</td>
 	{if $number_of_attributes == "3"}
-	<td class="details_screen">{$LANG.attribute}3</td>
+	<td class="details_screen">{$LANG.attribute_short}3</td>
 	{/if}
 </tr>
 
@@ -97,7 +95,7 @@
 	{showCustomFields categorieId="4" itemId=""}
 
 
-
+{*
 <tr>
         <td colspan=2 class="details_screen">{$LANG.notes}</td>
 </tr>
@@ -105,7 +103,7 @@
 <tr>
         <td colspan=2><textarea input type=text name="note" rows=5 cols=70 WRAP=nowrap></textarea></td>
 </tr>
-
+*}
 <tr><td class="details_screen">{$LANG.tax}</td>
 <td>
 
@@ -123,7 +121,7 @@
 </tr>
 
 <tr>
-<td class="details_screen">{$LANG.inv_pref}</td><td input type=text name="preference_id">
+<td class="details_screen">{$LANG.inv_pref_short}</td><td input type=text name="preference_id">
 
 {if $preferences == null }
 	<p><em>{$LANG.no_preferences}</em></p>
@@ -137,12 +135,6 @@
 
 </td>
 </tr>	
-<tr>
-	<td align=left>
-		<a href="docs.php?t=help&p=invoice_custom_fields" rel="gb_page_center[450, 450]">{$LANG.want_more_fields}<img src="./images/common/help-small.png"></img></a>
-
-	</td>
-</tr>
 <!--Add more line items while in an itemeised invoice - Get style - has problems- wipes the current values of the existing rows - not good
 <tr>
 <td>
