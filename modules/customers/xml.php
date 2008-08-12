@@ -69,23 +69,13 @@ if (in_array($sort, $validFields)) {
 
 	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$customers = $sth->fetchAll(PDO::FETCH_ASSOC);
-/*
-	$customers = null;
 
-	for($i=0; $customer = $sth->fetch(PDO::FETCH_ASSOC); $i++) {
-		if ($customer['enabled'] == 1) {
-			$customer['enabled'] = $LANG['enabled'];
-		} else {
-			$customer['enabled'] = $LANG['disabled'];
-		}
-*/
 global $dbh;
 
 $sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."customers";
 $tth = dbQuery($sqlTotal) or die(end($dbh->errorInfo()));
 $resultCount = $tth->fetch();
 $count = $resultCount[0];
-
 
 	$xml .= "<rows>";
 	$xml .= "<page>$page</page>";

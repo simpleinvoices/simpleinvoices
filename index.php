@@ -290,6 +290,7 @@ if($module !== "auth")
 				if(file_exists("./extensions/$tplValue[name]/templates/default/menu.tpl")) 
 				{
 					$smarty -> display("../extensions/$tplValue[name]/templates/default/menu.tpl");
+					$extensionMenu++;
 				}
 			}
 		}

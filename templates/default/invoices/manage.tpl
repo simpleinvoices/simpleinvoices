@@ -14,7 +14,7 @@
 {if $number_of_invoices.count == 0}
 	<p><em>{$LANG.no_invoices}</em></p>
 {else}
- {include file='../modules/invoices/manage.js.php' LANG=$LANG}
+
 
 <div style="text-align:center;">
 <b>{$LANG.manage_invoices}</b> :: {$LANG.add_new_invoice} &ndash
@@ -23,6 +23,7 @@
 <a href="index.php?module=invoices&view=consulting"> {$LANG.consulting_style}</a>
 </div>
 <hr />
+<table id="manageGrid" style="display:none"></table>
 
-<div id="manageInvoicesGrid"></div>
+ {include file='../modules/invoices/manage.js.php'}
 {/if}
