@@ -1,3 +1,9 @@
+######
+July 08
+######
+- Move to Flexigrid as the Simple Invoies grid of choice
+- Replaced the html editor tiny_mce with jwysiwyg (http://code.google.com/p/jwysiwyg/)
+
 ########
 DONE NOW
 ########

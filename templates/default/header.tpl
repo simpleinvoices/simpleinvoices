@@ -16,15 +16,8 @@
 
 
 
-{if $config_inc_style == "true"}
-
 {literal}
-	<link rel="stylesheet" type="text/css" href="./templates/default/css/screen.css" media="all"/>
-	<link rel="stylesheet" type="text/css" href="./templates/default/css/print.css" media="print"/>
-{/literal}
-{/if}
 
-{if $config_inc_old_js == "true"}
 	
 	<script type="text/javascript">
 	    var GB_ROOT_DIR = "./modules/include/js/";
@@ -32,10 +25,8 @@
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/menu_header.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/screen.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/print.css" media="print"/>
-	<script type="text/javascript" src="./include/tiny_mce/tiny_mce_src.js"></script>
-	<script type="text/javascript" src="./include/tiny-mce.conf.js"></script>
 	
-		<!-- jQuery Files -->
+	<!-- jQuery Files -->
 	<script type="text/javascript" src="./include/jquery/jquery-1.2.6.min.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.flexigrid.1.0b3.pack.js"></script>
 	{$extension_jquery_files }
@@ -43,6 +34,11 @@
 	<script type="text/javascript" src="./include/jquery/jquery.conf.js"></script>
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/flexigrid.css">
 	<link rel="stylesheet" type="text/css" href="./include/jquery/jquery.plugins.css" title="default" media="screen" />
+	
+	<link rel="stylesheet" type="text/css" href="./include/jquery/wysiwyg/jquery.wysiwyg.css" />
+	<script type="text/javascript" src="./include/jquery/wysiwyg/jquery.wysiwyg.0.3.pack.js"></script>
+	<script type="text/javascript" src="./include/jquery/wysiwyg/jquery.wysiwyg.conf.js"></script>
+	
 {literal}
 	<!-- Menu header -->
 	<!--[if lte IE 6]>
@@ -81,7 +77,7 @@
 
 {/literal}
 
-{/if}
+
 </head>
 <body>
 <div class="si_grey_background"></div>
