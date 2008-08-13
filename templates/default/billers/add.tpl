@@ -33,14 +33,14 @@ You must enter a Biller name</div>
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.biller_name} 
-		<a href="docs.php?t=help&p=required_field" class="jqmTrigger">
+		<a href="docs.php?t=help&p=required_field" name=".a_biller_name" onclick="siModal(jQuery(this))" >
 		<img src="./images/common/required-small.png"></img>
-		</a><div class="jqmNotice"></div>
+		</a><div class="jqmNotice a_biller_name"></div>
 		</td>
 		<td><input type=text name="name" value="{$smarty.post.name}"
 			size=25></td>
 	</tr>
-	<tr>
+	<tr> 
 		<td class="details_screen">{$LANG.street}</td>
 		<td><input type=text name="street_address"
 			value="{$smarty.post.street_address}" size=25></td>

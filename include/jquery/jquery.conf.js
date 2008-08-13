@@ -1,6 +1,10 @@
 $(document).ready(init);
 
 function init(){
+
+	/*
+	Load the jquery datePicker with out config
+	*/
 	if($.datePicker){
 		$.datePicker.setDateFormat('ymd','-');
 		$('input.date-picker').datePicker({startDate:'01/01/1970'});
@@ -48,5 +52,49 @@ function selectItem(li) {
 function formatItem(row) {
 	return row[0] + "<br><i>" + row[1] + "</i>";
 }
+
+/*
+ function: siModal
+ description: a wrapper function for jqModal, 
+ example use in a template
+   <a href="docs.php?t=help&p=required_field" name=".a_biller_name" onclick="siModal(jQuery(this))" >
+ -  put the link in href
+ -  put the target div class name in name
+ -  and call this function onclick
+   
+  example target div:   <div class="jqmNotice a_biller_name"></div>
+   
+  in target div remember to put in jqmNotice to load the jqModal notice css
+*/
+function siModal(url)
+	{
+		
+		var url_request = url.attr('href');
+		var url_target = url.attr('name');
+		var url_trigger = $(this);
+		
+		/*
+		console.log("URL href:  %s ", url_request);
+		console.log("URL Target:  %s ", url_target);
+		*/
+		
+		 $(url_target)
+		    .jqm(
+				{
+					ajax: url_request,
+					trigger: url_trigger,
+					overlay: 0,
+					onShow: function(h) {
+				        /* callback executed when a trigger click. Show notice */
+				        h.w.css('opacity',0.92).show(); 
+				    },
+				    onHide: function(h) {
+				        /* callback executed on window hide. Hide notice, overlay. */
+				        h.w.slideUp("slow",function() { if(h.o) h.o.remove(); }); } 
+					}  
+			);
+	
+	} 
+	
 
 
