@@ -29,9 +29,14 @@ You must enter a Biller name</div>
 <form name="frmpost" action="index.php?module=billers&view=add"
 	method="post"><h3>{$LANG.biller_to_add}</h3>
 <hr />
+
 <table align="center">
 	<tr>
-		<td class="details_screen">{$LANG.biller_name} <a href="docs.php?t=help&p=required_field" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png"></img></a></td>
+		<td class="details_screen">{$LANG.biller_name} 
+		<a href="docs.php?t=help&p=required_field" class="jqmTrigger">
+		<img src="./images/common/required-small.png"></img>
+		</a><div class="jqmNotice"></div>
+		</td>
 		<td><input type=text name="name" value="{$smarty.post.name}"
 			size=25></td>
 	</tr>

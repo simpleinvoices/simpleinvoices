@@ -19,9 +19,6 @@
 {literal}
 
 	
-	<script type="text/javascript">
-	    var GB_ROOT_DIR = "./modules/include/js/";
-	</script>
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/menu_header.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/screen.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/print.css" media="print"/>
@@ -29,7 +26,7 @@
 	<!-- jQuery Files -->
 	<script type="text/javascript" src="./include/jquery/jquery-1.2.6.min.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.flexigrid.1.0b3.pack.js"></script>
-	{$extension_jquery_files }
+	{/literal}{$extension_jquery_files }{literal}
 	<script type="text/javascript" src="./include/jquery/jquery.plugins.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.conf.js"></script>
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/flexigrid.css">
@@ -39,7 +36,13 @@
 	<script type="text/javascript" src="./include/jquery/wysiwyg/jquery.wysiwyg.0.3.pack.js"></script>
 	<script type="text/javascript" src="./include/jquery/wysiwyg/jquery.wysiwyg.conf.js"></script>
 	
-{literal}
+	<link rel="stylesheet" type="text/css" href="./include/jquery/jqModal/jquery.jqModal.css" />
+	<script type="text/javascript" src="./include/jquery/jqModal/jquery.jqModal.js"></script>
+	<script type="text/javascript" src="./include/jquery/jqModal/jquery.jqModal.conf.js"></script>
+	
+
+	
+
 	<!-- Menu header -->
 	<!--[if lte IE 6]>
 		<link rel="stylesheet" type="text/css" href="./templates/default/css/menu_header_hackIE.css" media="screen" />
@@ -64,11 +67,7 @@
 	
 	<!-- customer-details -->
 	<link rel="stylesheet" href="./templates/default/css/tabs.css" type="text/css" media="print, projection, screen" />
-	<script type="text/javascript" src="./library/ajs/AJS.js"></script>
-	<script type="text/javascript" src="./library/ajs/AJS_fx.js"></script>
-	<script type="text/javascript" src="./library/ajs/gb_scripts.js"></script>
-	<link href="./templates/default/css/gb_styles.css" rel="stylesheet" type="text/css" />
-	
+
 	<!--[if gte IE 5.5]>
 		<script language="JavaScript" src="./modules/include/js/dhtml.js" type="text/JavaScript"></script>
 		<link rel="stylesheet" href="./templates/default/css/iehacks.css" type="text/css" />
