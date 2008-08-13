@@ -1,8 +1,9 @@
 ######
 July 08
 ######
-- Move to Flexigrid as the Simple Invoies grid of choice
+- Move to Flexigrid as the Simple Invoies grid of choice (www.webplicity.net/flexigrid/)
 - Replaced the html editor tiny_mce with jwysiwyg (http://code.google.com/p/jwysiwyg/)
+- Replaced modal/info window - from ajs to jqModal (http://dev.iceburg.net/jquery/jqModal/)
 
 ########
 DONE NOW
