@@ -1,0 +1,14 @@
+
+
+
+body, div, p, th, td, li, dd    {
+    /* redundant selectors to help NS4 remember */
+    font-family:  Verdana, Lucida, Arial, Helvetica, sans-serif;
+    font-size:    10px;
+    }
+td{
+	border:none;
+	padding:0; 
+	margin:0; 
+	
+}

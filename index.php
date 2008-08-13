@@ -306,8 +306,36 @@ if($module !== "auth")
 * Menu : If extension has custom menu use it else use default - end
 */
 
-$smarty -> display("../templates/default/main.tpl");
-//Shouldn't be necessary anymore. Ist for old files without tempaltes...
+
+/*
+* Main : If extension has custom layout use it else use default - start
+*/
+
+		$extensionMain = 0;
+		foreach($extension as $tplKey=>$tplValue)
+		{
+			/*
+			* If extension is enabled then continue and include the requested file for that extension if it exists
+			*/	
+			if($tplValue['enabled'] == "1")
+			{
+				if(file_exists("./extensions/$tplValue[name]/templates/default/main.tpl")) 
+				{
+					$smarty -> display("../extensions/$tplValue[name]/templates/default/main.tpl");
+					$extensionMain++;
+				}
+			}
+		}
+		/*
+		* If no extension php file for requested file load the normal php file if it exists
+		*/
+		if($extensionMain == "0") 
+		{
+			$smarty -> display("../templates/default/main.tpl");
+		}
+/*
+* Main : If extension has custom menu use it else use default - end
+*/
 
 
 /*
