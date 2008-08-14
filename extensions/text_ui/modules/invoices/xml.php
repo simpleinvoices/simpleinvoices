@@ -118,7 +118,6 @@ $count = $resultCount[0];
 	foreach ($invoices as $row) {
 		$xml .= "<row id='".$row['id']."'>";
 		$xml .= "<cell><![CDATA[<a href='index.php?module=invoices&view=quick_view&invoice=".$row['id']."'>".utf8_encode($row['id'])."</a>]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode($row['biller'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".utf8_encode($row['customer'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".utf8_encode($row['date'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".utf8_encode($row['invoice_total'])."]]></cell>";

@@ -22,7 +22,7 @@ var email_tooltip = "{/literal}{$LANG.email}  {$invoice.preference.pref_inv_word
 		'<!--6 Payment --><a title="'+ process_payment_tooltip +'" class="index_table" href="index.php?module=payments&view=process&invoice={1}&op=pay_selected_invoice"><img src="images/common/money_dollar.png" height="16" border="0" padding="-4px" valign="bottom" /></a>',
 */
 
-			var columns = 8;
+			var columns = 7;
 			var padding = 12;
 			var grid_width = $('.col').width();
 			
@@ -49,10 +49,9 @@ var email_tooltip = "{/literal}{$LANG.email}  {$invoice.preference.pref_inv_word
 			dataType: 'xml',
 			colModel : [
 				{display: 'ID', name : 'id', width :10 * percentage_width, sortable : true, align: 'center'},
-				{display: 'Biller', name : 'biller', width :20 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Customer', name : 'customer', width :20 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Date', name : 'date', width : 25 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Total', name : 'invoice_total', width : 25 * percentage_width, sortable : true, align: 'left'}
+				{display: 'Customer', name : 'customer', width :30 * percentage_width, sortable : true, align: 'left'},
+				{display: 'Date', name : 'date', width : 30 * percentage_width, sortable : true, align: 'left'},
+				{display: 'Total', name : 'invoice_total', width : 30 * percentage_width, sortable : true, align: 'left'}
 				
 				],
 				/*
