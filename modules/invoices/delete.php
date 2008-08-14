@@ -28,7 +28,7 @@ $defaults = getSystemDefaults();
 
 $invoicePaid = calc_invoice_paid($invoice_id);
 
-$invoiceItems = getInvoiceItems($invoice_id);
+$invoiceItems = invoice::getInvoiceItems($invoice_id);
 
 $pageActive = "invoices";
 

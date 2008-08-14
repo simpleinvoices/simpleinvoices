@@ -752,29 +752,31 @@ function getInvoice($id) {
 	return $invoice;
 }
 
-function getInvoiceItems($id) {
+class invoice {
+	function getInvoiceItems($id) {
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :id";
-	$sth = dbQuery($sql, ':id', $id);
-	
-	$invoiceItems = null;
-	
-	for($i=0;$invoiceItem = $sth->fetch();$i++) {
-	
-		$invoiceItem['quantity'] = $invoiceItem['quantity'];
-		$invoiceItem['unit_price'] = $invoiceItem['unit_price'];
-		$invoiceItem['tax_amount'] = $invoiceItem['tax_amount'];
-		$invoiceItem['gross_total'] = $invoiceItem['gross_total'];
-		$invoiceItem['total'] = $invoiceItem['total'];
+		$sql = "SELECT * FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :id";
+		$sth = dbQuery($sql, ':id', $id);
 		
-		$sql = "SELECT * FROM ".TB_PREFIX."products WHERE id = :id";
-		$tth = dbQuery($sql, ':id', $invoiceItem['product_id']) or die(htmlspecialchars(end($dbh->errorInfo())));
-		$invoiceItem['product'] = $tth->fetch();	
+		$invoiceItems = null;
 		
-		$invoiceItems[$i] = $invoiceItem;
+		for($i=0;$invoiceItem = $sth->fetch();$i++) {
+		
+			$invoiceItem['quantity'] = $invoiceItem['quantity'];
+			$invoiceItem['unit_price'] = $invoiceItem['unit_price'];
+			$invoiceItem['tax_amount'] = $invoiceItem['tax_amount'];
+			$invoiceItem['gross_total'] = $invoiceItem['gross_total'];
+			$invoiceItem['total'] = $invoiceItem['total'];
+			
+			$sql = "SELECT * FROM ".TB_PREFIX."products WHERE id = :id";
+			$tth = dbQuery($sql, ':id', $invoiceItem['product_id']) or die(htmlspecialchars(end($dbh->errorInfo())));
+			$invoiceItem['product'] = $tth->fetch();	
+			
+			$invoiceItems[$i] = $invoiceItem;
+		}
+		
+		return $invoiceItems;
 	}
-	
-	return $invoiceItems;
 }
 
 function getSystemDefaults() {

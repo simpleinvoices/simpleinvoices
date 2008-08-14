@@ -156,7 +156,7 @@
 	
 			<tr>
 	                <td>{$invoiceItem.quantity|number_format:2}</td>
-					<td colspan=3>{$invoiceItem.product.description}</td>
+					<td colspan=3>{$invoiceItem.product.description} {if $invoiceItem.attr1.display != "" } ::{/if} {$invoiceItem.attr1.display}  {$invoiceItem.attr2.display} {$invoiceItem.attr3.display}</td>
 			</tr>
 			<tr>
 					<td >{$preference.pref_currency_sign}{$invoiceItem.unit_price|number_format:2}</td>
@@ -246,9 +246,6 @@
 		{$LANG.total} {$LANG.tax} {$LANG.included}: {$preference.pref_currency_sign}{$invoice.total_tax|number_format:2}<br>
 		<b>{$preference.pref_inv_wording} {$LANG.amount}</b>: <u>{$preference.pref_currency_sign}{$invoice.total|number_format:2}</u><br>
 	</tr>	
-	<tr>
-		<td colspan="6"><b>{$preference.pref_inv_detail_heading}</b></td>
-	</tr>
 {/if}
 
 </table>
