@@ -48,8 +48,10 @@ You must enter a Biller name</div>
 	<tr>
 		<td class="details_screen">{$LANG.street2} <a
 			href="docs.php?t=help&p=street2"
-			rel="gb_page_center[450, 450]"> <img
-			src="./images/common/help-small.png"></img> </a></td>
+			name=".a_street2" onclick="siModal(jQuery(this))"> <img
+			src="./images/common/help-small.png"></img> </a>
+			<div class="jqmNotice a_street2"></div>
+		</td>
 		<td><input type=text name="street_address2"
 			value="{$smarty.post.street_address2}" size=25></td>
 	</tr>
@@ -95,32 +97,40 @@ You must enter a Biller name</div>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.biller_cf1}<a
 			href="docs.php?t=help&p=custom_fields"
-			rel="gb_page_center[450, 450]"> <img
-			src="./images/common/help-small.png"></img> </a></td>
+			name=".a_cf1" onclick="siModal(jQuery(this))"> <img
+			src="./images/common/help-small.png"></img> </a>
+			<div class="jqmNotice a_cf1"></div>
+		</td>
 		<td><input type=text name="custom_field1"
 			value="{$smarty.post.custom_field1}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.biller_cf2} <a
 			href="docs.php?t=help&p=custom_fields"
-			rel="gb_page_center[450, 450]"> <img
-			src="./images/common/help-small.png"></img> </a></td>
+			name=".a_cf2" onclick="siModal(jQuery(this))"> <img
+			src="./images/common/help-small.png"></img> </a>
+			<div class="jqmNotice a_cf2"></div>
+		</td>
 		<td><input type=text name="custom_field2"
 			value="{$smarty.post.custom_field2}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.biller_cf3} <a
 			href="docs.php?t=help&p=custom_fields"
-			rel="gb_page_center[450, 450]"> <img
-			src="./images/common/help-small.png"></img> </a></td>
+			name=".a_cf3" onclick="siModal(jQuery(this))"> <img
+			src="./images/common/help-small.png"></img> </a>
+			<div class="jqmNotice a_cf3"></div>
+		</td>
 		<td><input type=text name="custom_field3"
 			value="{$smarty.post.custom_field3}" size=25></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.biller_cf4} <a
 			href="docs.php?t=help&p=custom_fields"
-			rel="gb_page_center[450, 450]"> <img
-			src="./images/common/help-small.png"></img> </a></td>
+			name=".a_cf4" onclick="siModal(jQuery(this))"> <img
+			src="./images/common/help-small.png"></img> </a>
+			<div class="jqmNotice a_cf4"></div>
+		</td>
 		<td><input type=text name="custom_field4"
 			value="{$smarty.post.custom_field4}" size=25></td>
 	</tr>
