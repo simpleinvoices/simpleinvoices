@@ -33,7 +33,7 @@ You must enter a Biller name</div>
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.biller_name} 
-		<a href="docs.php?t=help&p=required_field" name=".a_biller_name" onclick="siModal(jQuery(this))" >
+		<a href="docs.php?t=help&p=required_field" id="id_biller_name" name=".a_biller_name" onclick="siModal(jQuery(this),'#id_b')" >
 		<img src="./images/common/required-small.png"></img>
 		</a><div class="jqmNotice a_biller_name"></div>
 		</td>

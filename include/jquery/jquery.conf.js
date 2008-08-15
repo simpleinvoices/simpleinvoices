@@ -71,12 +71,12 @@ function siModal(url)
 		
 		var url_request = url.attr('href');
 		var url_target = url.attr('name');
-		var url_trigger = $(this);
+		var url_trigger = url.attr('id');
 		
-		/*
+		
 		console.log("URL href:  %s ", url_request);
 		console.log("URL Target:  %s ", url_target);
-		*/
+		console.log("URL Trigger:  %s ", url_trigger);
 		
 		 $(url_target)
 		    .jqm(
