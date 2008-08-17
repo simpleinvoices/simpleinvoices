@@ -66,12 +66,17 @@ function formatItem(row) {
    
   in target div remember to put in jqmNotice to load the jqModal notice css
 */
-function siModal(url)
+function siModal(url, trigger, target)
 	{
-		
+		/*
 		var url_request = url.attr('href');
 		var url_target = url.attr('name');
 		var url_trigger = url.attr('id');
+		*/
+		var url_request = url;
+		var url_target = '.'+target;
+		/*#var url_trigger = '#'+trigger;*/
+		var url_trigger = trigger;
 		
 		
 		console.log("URL href:  %s ", url_request);
@@ -82,7 +87,7 @@ function siModal(url)
 		    .jqm(
 				{
 					ajax: url_request,
-					trigger: url_trigger,
+					trigger:url_trigger,
 					overlay: 0,
 					onShow: function(h) {
 				        /* callback executed when a trigger click. Show notice */

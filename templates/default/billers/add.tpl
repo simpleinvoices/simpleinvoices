@@ -33,9 +33,9 @@ You must enter a Biller name</div>
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.biller_name} 
-		<a href="docs.php?t=help&p=required_field" id="id_biller_name" name=".a_biller_name" onclick="siModal(jQuery(this),'#id_b')" >
+		<a onclick="siModal('docs.php?t=help&p=required_field','trigger_biller_name','target_biller_name')" id="trigger_biller_name" href="#"  >
 		<img src="./images/common/required-small.png"></img>
-		</a><div class="jqmNotice a_biller_name"></div>
+		</a><div class="jqmNotice target_biller_name"></div>
 		</td>
 		<td><input type=text name="name" value="{$smarty.post.name}"
 			size=25></td>
@@ -47,10 +47,10 @@ You must enter a Biller name</div>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street2} <a
-			href="docs.php?t=help&p=street2"
-			name=".a_street2" onclick="siModal(jQuery(this))"> <img
+			href="#"
+			id="trigger_street2" onclick="siModal('docs.php?t=help&p=street2',jQuery(this),'target_street2')"> <img
 			src="./images/common/help-small.png"></img> </a>
-			<div class="jqmNotice a_street2"></div>
+			<div class="jqmNotice target_street2"></div>
 		</td>
 		<td><input type=text name="street_address2"
 			value="{$smarty.post.street_address2}" size=25></td>
