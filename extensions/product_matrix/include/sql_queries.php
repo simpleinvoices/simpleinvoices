@@ -20,6 +20,32 @@ class matrix_invoice
 			$sql = "SELECT * FROM ".TB_PREFIX."products WHERE id = :id";
 			$tth = dbQuery($sql, ':id', $invoiceItem['product_id']) or die(htmlspecialchars(end($dbh->errorInfo())));
 			$invoiceItem['product'] = $tth->fetch();	
+
+			$attr_sql = "select 
+                    CONCAT(a.display_name, '-',v.value) as display,
+					CONCAT(p.id, '-', a.id, '-', v.id) as id 
+				
+                from
+                    si_products_attributes a,
+                    si_products_values v,
+					si_products_matrix m,
+					si_products p
+                where
+					p.id = m.product_id 
+					and 
+					a.id = m.attribute_id 
+					and 
+                    a.id = v.attribute_id
+					and
+					p.id = :pid
+                    and
+                    v.id = :attr_id";
+			$attr1 = dbQuery($attr_sql, ':attr_id', $invoiceItem['attribute_1'], ':pid', $invoiceItem['product_id']   ) or die(htmlspecialchars(end($dbh->errorInfo())));
+            $invoiceItem['attr1'] = $attr1->fetch();
+			$attr2 = dbQuery($attr_sql, ':attr_id', $invoiceItem['attribute_2'], ':pid',$invoiceItem['product_id']) or die(htmlspecialchars(end($dbh->errorInfo())));
+            $invoiceItem['attr2'] = $attr2->fetch();
+			$attr3 = dbQuery($attr_sql, ':attr_id', $invoiceItem['attribute_3'], ':pid',$invoiceItem['product_id']) or die(htmlspecialchars(end($dbh->errorInfo())));
+            $invoiceItem['attr3'] = $attr3->fetch();
 			
 			$invoiceItems[$i] = $invoiceItem;
 		}
@@ -79,7 +105,21 @@ class matrix_invoice
 
 	}
 
-	function updateInvoiceItem($id,$quantity,$product_id,$tax_id,$description) {
+	function updateInvoiceItem($id,$quantity,$product_id,$tax_id,$description,$attr1="",$attr2="",$attr3="") {
+
+			$attr1 = explode("-",$attr1);
+			$attr1 = $attr1[2];
+			echo "Attr1: ".$attr1." ";
+
+			$attr2 = explode("-",$attr2);
+			$attr2 = $attr2[2];
+			echo "Attr2 : ".$attr2." ";
+
+			$attr3 = explode("-",$attr3);
+			$attr3 = $attr3[2];
+			echo "Attr3 : ".$attr3;
+			echo "<br><br>";
+
 
 		$product = getProduct($product_id);
 		$tax = getTaxRate($tax_id);
@@ -104,7 +144,10 @@ class matrix_invoice
 		tax_amount = :tax_amount,
 		gross_total = :gross_total,
 		description = :description,
-		total = :total			
+		total = :total,			
+		attribute_1 = :attr1,			
+		attribute_2 = :attr2,			
+		attribute_3 = :attr3			
 		WHERE id = :id";
 		
 		//echo $sql;
@@ -119,7 +162,10 @@ class matrix_invoice
 			':gross_total', $gross_total,
 			':description', $description,
 			':total', $total,
-			':id', $id
+			':id', $id,
+			':attr1', $attr1,
+			':attr2', $attr2,
+			':attr3', $attr3
 			);
 	}
 }

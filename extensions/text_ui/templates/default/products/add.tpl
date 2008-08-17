@@ -15,7 +15,7 @@
 <div id="top"><h3>&nbsp;{$LANG.product_to_add}&nbsp;</h3></div>
  <hr />
 
-<table align=center>
+<table>
 	<tr>
 		<td class="details_screen">{$LANG.product_description} </td>
 		<td><input type=text name="description" value="{$smarty.post.description}" size=20></td>

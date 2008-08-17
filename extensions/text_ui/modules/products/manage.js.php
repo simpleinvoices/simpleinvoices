@@ -10,7 +10,7 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 		'<!--1 Edit View --><a class="index_table" title="'+  +''+ edit_tooltip +'"  href="index.php?module=products&view=details&id={1}&action=edit"><img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>',
 */
 
-			var columns = 5;
+			var columns = 4;
 			var padding = 12;
 			var grid_width = $('.col').width();
 			
@@ -24,11 +24,9 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			url: 'index.php?module=products&view=xml',
 			dataType: 'xml',
 			colModel : [
-				{display: 'Actions', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
 				{display: 'ID', name : 'id', width : 10 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Name', name : 'description', width : 40 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Unit Price', name : 'unit_price', width : 20 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Enabled', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'}
+				{display: 'Name', name : 'description', width : 70 * percentage_width, sortable : true, align: 'left'},
+				{display: 'Unit Price', name : 'unit_price', width : 20 * percentage_width, sortable : true, align: 'left'}
 				
 				],
 				

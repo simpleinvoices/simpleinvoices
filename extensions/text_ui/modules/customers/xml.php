@@ -83,12 +83,10 @@ $count = $resultCount[0];
 	
 	foreach ($customers as $row) {
 		$xml .= "<row id='".$row['CID']."'>";
-		$xml .= "<cell><![CDATA[<a title='".$LANG['quick_view_tooltip']." ".$row['CID']."' href='index.php?module=customers&view=details&action=view&id=".$row['CID']."'>View</a> :: <a href='index.php?module=customers&view=details&action=view&id=".$row['CID']."'>Edit</a>]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['CID']."]]></cell>";		
+		$xml .= "<cell><![CDATA[<a title='".$LANG['quick_view_tooltip']." ".$row['CID']."' href='index.php?module=customers&view=details&action=view&id=".$row['CID']."'>".$row['CID']."</a>]]></cell>";
 		$xml .= "<cell><![CDATA[".utf8_encode($row['name'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".utf8_encode($row['customer_total'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".utf8_encode($row['owing'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode($row['enabled'])."]]></cell>";				
 		$xml .= "</row>";		
 	}
 	$xml .= "</rows>";
