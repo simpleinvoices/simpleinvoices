@@ -8,7 +8,7 @@ div.jqmNotice img.jqResize {position: absolute; right: 2px; bottom: 2px;}
 div.jqmNotice {
     display: none;
     
-    position: fixed;
+    position: absolute;
     
     width: 320px;
     background:#FFFFCC url(note_icon.png) 5px 5px no-repeat;

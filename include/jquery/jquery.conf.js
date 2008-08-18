@@ -68,26 +68,30 @@ function formatItem(row) {
 */
 function siModal(url, trigger, target)
 	{
+		
 		/*
 		var url_request = url.attr('href');
 		var url_target = url.attr('name');
 		var url_trigger = url.attr('id');
+		var myTrigger = $('#'+trigger.attr('id'));
+		#var url_trigger = '#'+trigger;
 		*/
-		var url_request = url;
-		var url_target = '.'+target;
-		/*#var url_trigger = '#'+trigger;*/
-		var url_trigger = trigger;
+		
+		var modal_url = url;
+		var modal_target = '.'+target;
+		var modal_trigger = '#'+trigger.attr('id');
 		
 		
-		console.log("URL href:  %s ", url_request);
-		console.log("URL Target:  %s ", url_target);
-		console.log("URL Trigger:  %s ", url_trigger);
+		console.log("URL href:  %s ", modal_url);
+		console.log("URL Target:  %s ", modal_target);
+		console.log("URL Trigger:  %s ", modal_trigger);
 		
-		 $(url_target)
-		    .jqm(
+		
+		 $(modal_target)
+		 	.jqm(
 				{
-					ajax: url_request,
-					trigger:url_trigger,
+					ajax: modal_url,
+					trigger: modal_trigger,			
 					overlay: 0,
 					onShow: function(h) {
 				        /* callback executed when a trigger click. Show notice */
@@ -98,8 +102,12 @@ function siModal(url, trigger, target)
 				        h.w.slideUp("slow",function() { if(h.o) h.o.remove(); }); } 
 					}  
 			);
+			
+		
+		
 	
 	} 
 	
+
 
 

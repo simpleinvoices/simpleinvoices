@@ -33,9 +33,15 @@ You must enter a Biller name</div>
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.biller_name} 
-		<a onclick="siModal('docs.php?t=help&p=required_field','trigger_biller_name','target_biller_name')" id="trigger_biller_name" href="#"  >
+		<a 
+			id="trigger_biller_name" 
+			onclick="siModal('docs.php?t=help&p=required_field',jQuery(this),'target_biller_name')"
+			href="#" 
+			 
+		>
 		<img src="./images/common/required-small.png"></img>
-		</a><div class="jqmNotice target_biller_name"></div>
+		</a>	
+		<div class="jqmNotice target_biller_name"></div>
 		</td>
 		<td><input type=text name="name" value="{$smarty.post.name}"
 			size=25></td>
@@ -46,10 +52,15 @@ You must enter a Biller name</div>
 			value="{$smarty.post.street_address}" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.street2} <a
-			href="#"
-			id="trigger_street2" onclick="siModal('docs.php?t=help&p=street2',jQuery(this),'target_street2')"> <img
-			src="./images/common/help-small.png"></img> </a>
+		<td class="details_screen">{$LANG.street2} 
+			<a
+				href="#"
+				id="trigger_street2" onclick="siModal('docs.php?t=help&p=street2',jQuery(this),'target_street2')"
+			> 
+			<img
+				src="./images/common/help-small.png">
+			</img> 
+			</a>
 			<div class="jqmNotice target_street2"></div>
 		</td>
 		<td><input type=text name="street_address2"
@@ -95,50 +106,72 @@ You must enter a Biller name</div>
 			size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.biller_cf1}<a
-			href="docs.php?t=help&p=custom_fields"
-			name=".a_cf1" onclick="siModal(jQuery(this))"> <img
+		<td class="details_screen">{$customFieldLabel.biller_cf1}
+			<a
+				href="#"
+				id="trigger_cf1"
+				onclick="siModal('docs.php?t=help&p=custom_fields',jQuery(this),'target_cf1')"
+			> 
+			<img
 			src="./images/common/help-small.png"></img> </a>
-			<div class="jqmNotice a_cf1"></div>
+			<div class="jqmNotice target_cf1"></div>
 		</td>
 		<td><input type=text name="custom_field1"
 			value="{$smarty.post.custom_field1}" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.biller_cf2} <a
-			href="docs.php?t=help&p=custom_fields"
-			name=".a_cf2" onclick="siModal(jQuery(this))"> <img
+		<td class="details_screen">{$customFieldLabel.biller_cf2} 
+			<a
+				href="#"
+				id="trigger_cf2"
+				onclick="siModal('docs.php?t=help&p=custom_fields',jQuery(this),'target_cf2')"
+			> 
+			<img
 			src="./images/common/help-small.png"></img> </a>
-			<div class="jqmNotice a_cf2"></div>
+			<div class="jqmNotice target_cf2"></div>
 		</td>
 		<td><input type=text name="custom_field2"
 			value="{$smarty.post.custom_field2}" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.biller_cf3} <a
-			href="docs.php?t=help&p=custom_fields"
-			name=".a_cf3" onclick="siModal(jQuery(this))"> <img
+		<td class="details_screen">{$customFieldLabel.biller_cf3} 
+			<a
+				href="#"
+				id="trigger_cf3"
+				onclick="siModal('docs.php?t=help&p=custom_fields',jQuery(this),'target_cf3')"
+			> 
+			<img
 			src="./images/common/help-small.png"></img> </a>
-			<div class="jqmNotice a_cf3"></div>
+			<div class="jqmNotice target_cf3"></div>
 		</td>
 		<td><input type=text name="custom_field3"
 			value="{$smarty.post.custom_field3}" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.biller_cf4} <a
-			href="docs.php?t=help&p=custom_fields"
-			name=".a_cf4" onclick="siModal(jQuery(this))"> <img
+		<td class="details_screen">{$customFieldLabel.biller_cf4} 
+			<a
+				href="#"
+				id="trigger_cf4"
+				onclick="siModal('docs.php?t=help&p=custom_fields',jQuery(this),'target_cf4')"
+			> 
+			<img
 			src="./images/common/help-small.png"></img> </a>
-			<div class="jqmNotice a_cf4"></div>
+			<div class="jqmNotice target_cf4"></div>
 		</td>
 		<td><input type=text name="custom_field4"
 			value="{$smarty.post.custom_field4}" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.logo_file} <a
-			href="docs.php?t=help&p=insert_biller_text"
-			rel="gb_page_center[450, 450]"> <img
-			src="./images/common/help-small.png"></img> </a></td>
+		<td class="details_screen">{$LANG.logo_file} 
+			<a
+				href="#"
+				id="trigger_logo"
+				onclick="siModal('docs.php?t=help&p=insert_biller_text',jQuery(this),'target_logo')"
+			> 
+			<img
+			src="./images/common/help-small.png"></img> </a>
+			<div class="jqmNotice target_logo"></div>
+			</td>
 		<td>
 			{html_options name=logo output=$files values=$files selected=$files[0] }
 		</td>
