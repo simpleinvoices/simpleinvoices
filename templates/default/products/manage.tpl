@@ -3,14 +3,9 @@
 * Script: manage.tpl
 * 	 Products manage template
 *
-* Authors:
-*	 Justin Kelly, Ben Brown
-*
-* Last edited:
-* 	 2007-09-22
 *
 * License:
-*	 GPL v2 or above
+*	 GPL v3 or above
 *
 * Website:
 *	http://www.simpleinvoices.org
