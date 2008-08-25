@@ -25,7 +25,8 @@
 	
 	<!-- jQuery Files -->
 	<script type="text/javascript" src="./include/jquery/jquery-1.2.6.min.js"></script>
-	<script type="text/javascript" src="./include/jquery/jqModal/jquery.jqModal.js"></script>
+	<script type="text/javascript" src="./include/jquery/cluetip/jquery.hoverIntent.minified.js"></script>
+	<script type="text/javascript" src="./include/jquery/cluetip/jquery.cluetip.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.flexigrid.1.0b3.pack.js"></script>
 	{/literal}{$extension_jquery_files }{literal}
 	<script type="text/javascript" src="./include/jquery/jquery.plugins.js"></script>
@@ -37,7 +38,7 @@
 	<script type="text/javascript" src="./include/jquery/wysiwyg/jquery.wysiwyg.0.3.pack.js"></script>
 	<script type="text/javascript" src="./include/jquery/wysiwyg/jquery.wysiwyg.conf.js"></script>
 	
-	<link rel="stylesheet" type="text/css" href="./include/jquery/jqModal/jquery.jqModal.css" />
+	<link rel="stylesheet" type="text/css" href="./include/jquery/cluetip/jquery.cluetip.css" />
 	
 
 	

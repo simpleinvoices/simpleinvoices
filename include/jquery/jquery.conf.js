@@ -42,6 +42,23 @@ function init(){
 		    win.focus();
 		});
 	}
+	/*Load the cluetip*/
+	$('a.cluetip').cluetip(
+		{
+			activation: 'click',
+			sticky: true,
+			cluetipClass: 'notice',
+			fx: {             
+                      open:       'fadeIn', // can be 'show' or 'slideDown' or 'fadeIn'
+                      openSpeed:  '70'
+    		},
+  			arrows: true,
+  			closePosition: 'title',			
+  			closeText: '<img src="./images/common/cross.png" alt="" />'
+			
+			
+		}
+	);
 }
 
 function selectItem(li) {
@@ -53,60 +70,8 @@ function formatItem(row) {
 	return row[0] + "<br><i>" + row[1] + "</i>";
 }
 
-/*
- function: siModal
- description: a wrapper function for jqModal, 
- example use in a template
-   <a href="docs.php?t=help&p=required_field" name=".a_biller_name" onclick="siModal(jQuery(this))" >
- -  put the link in href
- -  put the target div class name in name
- -  and call this function onclick
-   
-  example target div:   <div class="jqmNotice a_biller_name"></div>
-   
-  in target div remember to put in jqmNotice to load the jqModal notice css
-*/
-function siModal(url, trigger, target)
-	{
-		
-		/*
-		var url_request = url.attr('href');
-		var url_target = url.attr('name');
-		var url_trigger = url.attr('id');
-		var myTrigger = $('#'+trigger.attr('id'));
-		#var url_trigger = '#'+trigger;
-		*/
-		
-		var modal_url = url;
-		var modal_target = '.'+target;
-		var modal_trigger = '#'+trigger.attr('id');
-		
-		
-		console.log("URL href:  %s ", modal_url);
-		console.log("URL Target:  %s ", modal_target);
-		console.log("URL Trigger:  %s ", modal_trigger);
-		
-		
-		 $(modal_target)
-		 	.jqm(
-				{
-					ajax: modal_url,
-					trigger: modal_trigger,			
-					overlay: 0,
-					onShow: function(h) {
-				        /* callback executed when a trigger click. Show notice */
-				        h.w.css('opacity',0.92).show(); 
-				    },
-				    onHide: function(h) {
-				        /* callback executed on window hide. Hide notice, overlay. */
-				        h.w.slideUp("slow",function() { if(h.o) h.o.remove(); }); } 
-					}  
-			);
-			
-		
-		
-	
-	} 
+
+
 	
 
 
