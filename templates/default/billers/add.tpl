@@ -35,7 +35,7 @@ You must enter a Biller name</div>
 		<td class="details_screen">{$LANG.biller_name} 
 		<a 
 				class="cluetip"
-				href="docs.php?t=help&p=required_field"
+				href="#"
 				rel="docs.php?t=help&p=required_field"
 				title="{$LANG.Required_Field}"
 				
@@ -55,7 +55,7 @@ You must enter a Biller name</div>
 		<td class="details_screen">{$LANG.street2} 
 			<a
 				class="cluetip"
-				href="docs.php?t=help&p=street2"
+				href="#"
 				rel="docs.php?t=help&p=street2"
 				title="{$LANG.street2}"
 			> 
@@ -110,7 +110,7 @@ You must enter a Biller name</div>
 		<td class="details_screen">{$customFieldLabel.biller_cf1}
 			<a
 				class="cluetip"
-				href="docs.php?t=help&p=custom_fields"
+				href="#"
 				rel="docs.php?t=help&p=custom_fields"
 				title="{$LANG.Custom_Fields}"
 			> 
@@ -124,7 +124,7 @@ You must enter a Biller name</div>
 		<td class="details_screen">{$customFieldLabel.biller_cf2} 
 			<a
 				class="cluetip"
-				href="docs.php?t=help&p=custom_fields"
+				href="#"
 				rel="docs.php?t=help&p=custom_fields"
 				title="{$LANG.Custom_Fields}"
 			> 
@@ -138,7 +138,7 @@ You must enter a Biller name</div>
 		<td class="details_screen">{$customFieldLabel.biller_cf3} 
 			<a
 				class="cluetip"
-				href="docs.php?t=help&p=custom_fields"
+				href="#"
 				rel="docs.php?t=help&p=custom_fields"
 				title="{$LANG.Custom_Fields}"
 			> 
@@ -152,7 +152,7 @@ You must enter a Biller name</div>
 		<td class="details_screen">{$customFieldLabel.biller_cf4} 
 			<a
 				class="cluetip"
-				href="docs.php?t=help&p=custom_fields"
+				href="#"
 				rel="docs.php?t=help&p=custom_fields"
 				title="{$LANG.Custom_Fields}"
 			> 
@@ -167,7 +167,7 @@ You must enter a Biller name</div>
 		<td class="details_screen">{$LANG.logo_file} 
 			<a
 				class="cluetip"
-				href="docs.php?t=help&p=insert_biller_text"
+				href="#"
 				rel="docs.php?t=help&p=insert_biller_text"
 				title="{$LANG.Logo_File}"
 			> 
