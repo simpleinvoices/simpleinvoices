@@ -123,8 +123,10 @@
 				class="cluetip"
 				href="#"
 				rel="docs.php?t=help&p=insert_biller_text"
-				title="{$LANG.Logo_File}
-			></img></a></td>
+				title="{$LANG.Logo_File}"
+			>
+			<img src="./images/common/help-small.png">
+			</img></a></td>
 		<td>{$biller.logo}</td>
 	</tr>
 	<tr>
@@ -160,7 +162,14 @@
 		<td>{$biller.id}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.biller_name} <a href="docs.php?t=help&p=required_field" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png"></img></a></td>
+		<td class="details_screen">{$LANG.biller_name} 
+			<a 
+					class="cluetip"
+					href="#"
+					rel="docs.php?t=help&p=required_field"
+					title="{$LANG.Required_Field}"
+			>
+			<img src="./images/common/required-small.png"></img></a></td>
 		<td><input type=text name="name" value="{$biller.name|regex_replace:"/[\\\]/":""}"
 			size=50 /></td>
 	</tr>
@@ -170,9 +179,14 @@
 			value="{$biller.street_address}" size=50 /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.street2} <a
-			href="docs.php?t=help&p=street2"
-			rel="gb_page_center[450, 450]"><img
+		<td class="details_screen">{$LANG.street2}
+			<a
+				class="cluetip"
+				href="#"
+				rel="docs.php?t=help&p=street2"
+				title="{$LANG.street2}"
+			> 
+			<img
 			src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="street_address2"
 			value="{$biller.street_address2}" size=50 /></td>
@@ -213,33 +227,53 @@
 		<td><input type=text name="email" value="{$biller.email}" size=50 /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.biller_cf1} <a
-			href="docs.php?t=help&p=custom_fields"
-			rel="gb_page_center[450, 450]"><img
+		<td class="details_screen">{$customFieldLabel.biller_cf1}
+			<a
+				class="cluetip"
+				href="#"
+				rel="docs.php?t=help&p=custom_fields"
+				title="{$LANG.Custom_Fields}"
+			> 
+			<img
 			src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="custom_field1"
 			value="{$biller.custom_field1}" size=50</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.biller_cf2} <a
-			href="docs.php?t=help&p=custom_fields"
-			rel="gb_page_center[450, 450]"><img
+		<td class="details_screen">{$customFieldLabel.biller_cf2}
+			<a
+				class="cluetip"
+				href="#"
+				rel="docs.php?t=help&p=custom_fields"
+				title="{$LANG.Custom_Fields}"
+			> 
+			<img
 			src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="custom_field2"
 			value="{$biller.custom_field2}" size=50</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.biller_cf3} <a
-			href="docs.php?t=help&p=custom_fields"
-			rel="gb_page_center[450, 450]"><img
+		<td class="details_screen">{$customFieldLabel.biller_cf3}
+			<a
+				class="cluetip"
+				href="#"
+				rel="docs.php?t=help&p=custom_fields"
+				title="{$LANG.Custom_Fields}"
+			> 
+			<img
 			src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="custom_field3"
 			value="{$biller.custom_field3}" size=50</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.biller_cf4} <a
-			href="docs.php?t=help&p=custom_fields"
-			rel="gb_page_center[450, 450]"><img
+		<td class="details_screen">{$customFieldLabel.biller_cf4}
+			<a
+				class="cluetip"
+				href="#"
+				rel="docs.php?t=help&p=custom_fields"
+				title="{$LANG.Custom_Fields}"
+			> 
+			<img
 			src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="custom_field4"
 			value="{$biller.custom_field4}" size=50</td>
@@ -247,9 +281,13 @@
 	<tr>
 		<td class="details_screen">
 		{$LANG.logo_file}
-		<a
-			href="docs.php?t=help&p=insert_biller_text"
-			rel="gb_page_center[450, 450]"><img
+			<a
+				class="cluetip"
+				href="#"
+				rel="docs.php?t=help&p=insert_biller_text"
+				title="{$LANG.Logo_File}"
+			> 
+			<img
 			src="./images/common/help-small.png"></img></a></td>
 		<td>
 			{html_options name=logo output=$files values=$files selected=$biller.logo }
