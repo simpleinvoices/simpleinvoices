@@ -46,7 +46,15 @@
 		<td style="text-align:right">{$stuff.paid|number_format:2}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.attention_short} <a href="docs.php?t=help&p=customer_contact" style="showhelp"><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$LANG.attention_short}
+		<a
+			rel="docs.php?t=help&p=customer_contact"
+			href="#"
+			class="cluetip"
+			title="{$LANG.customer_contact}"
+		>
+		<img src="./images/common/help-small.png"></img></a>
+		
 		</td>
 		<td colspan="2">{$customer.attention}</td>
 		<td colspan=2></td>
@@ -58,7 +66,13 @@
 		<td>{$customer.street_address}</td>
 	</tr>
 	<tr>
-		<td class="details_screen" NOWRAP>{$LANG.street2} <a href="docs.php?t=help&p=street2" style="showhelp"><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen" NOWRAP>{$LANG.street2}
+			<a
+				class="cluetip"
+				href="#"
+				rel="docs.php?t=help&p=street2"
+				title="{$LANG.street2}"
+			> <img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>{$customer.street_address2}</td>
 	</tr>
@@ -103,27 +117,56 @@
 		<p>
 			<table>
 				<tr>
-					<td class="details_screen">{$customFieldLabel.customer_cf1} <a href="docs.php?t=help&p=custom_fields" style="showhelp"><img src="./images/common/help-small.png"></img></a>
+					<td class="details_screen">{$customFieldLabel.customer_cf1}
+ 						<a
+							class="cluetip"
+							href="#"
+							rel="docs.php?t=help&p=custom_fields"
+							title="{$LANG.Custom_Fields}"
+						> 
+						<img src="./images/common/help-small.png"></img></a>
 					</td>
 					<td>{$customer.custom_field1}</td>
 				</tr>
 				<tr>
-					<td class="details_screen">{$customFieldLabel.customer_cf2} <a href="docs.php?t=help&p=custom_fields" style="showhelp"><img src="./images/common/help-small.png"></img></a>
+					<td class="details_screen">{$customFieldLabel.customer_cf2}
+					 	<a
+							class="cluetip"
+							href="#"
+							rel="docs.php?t=help&p=custom_fields"
+							title="{$LANG.Custom_Fields}"
+						> 
+						<img src="./images/common/help-small.png"></img></a>
 					</td>
 					<td>{$customer.custom_field2}</td>
 				</tr>
 				<tr>
-					<td class="details_screen">{$customFieldLabel.customer_cf3} <a href="docs.php?t=help&p=custom_fields" style="showhelp"><img src="./images/common/help-small.png"></img></a>
+					<td class="details_screen">{$customFieldLabel.customer_cf3}
+					 	<a
+							class="cluetip"
+							href="#"
+							rel="docs.php?t=help&p=custom_fields"
+							title="{$LANG.Custom_Fields}"
+						> 
+						<img src="./images/common/help-small.png"></img></a>
 					</td>
 					<td>{$customer.custom_field3}</td>
 				</tr>
 				<tr>
-					<td class="details_screen">{$customFieldLabel.customer_cf4} <a href="docs.php?t=help&p=custom_fields" style="showhelp"><img src="./images/common/help-small.png"></img></a>
-					</td>
+					<td class="details_screen">{$customFieldLabel.customer_cf4}
+					 	<a
+							class="cluetip"
+							href="#"
+							rel="docs.php?t=help&p=custom_fields"
+							title="{$LANG.Custom_Fields}"
+						> 
+						<img src="./images/common/help-small.png"></img></a>
+ 					</td>
 					<td>{$customer.custom_field4}</td>
 				</tr>
+				{*
 					{showCustomFields categorieId="2" itemId=$smarty.get.customer }
-
+				*}
 			</table>
 		</p>
 	</div>
@@ -167,7 +210,7 @@
 
 
 <hr></hr>
-<a href="index.php?module=customers&view=details&customer={$customer.id}&action=edit">{$LANG.edit}</a>
+<a href="index.php?module=customers&view=details&id={$customer.id}&action=edit">{$LANG.edit}</a>
 {/if}
 
 {if $smarty.get.action == 'edit' }
@@ -184,11 +227,26 @@
 		<td>{$customer.id}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.customer_name}</td>
+		<td class="details_screen">{$LANG.customer_name}
+		<a 
+				class="cluetip"
+				href="#"
+				rel="docs.php?t=help&p=required_field"
+				title="{$LANG.Required_Field}"
+		>
+		<img src="./images/common/required-small.png"></img></a>
+		</td>
 		<td><input type="text" name="name" value="{$customer.name|regex_replace:"/[\\\]/":""}" size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.attention_short} <a href="docs.php?t=help&p=customer_contact" style="showhelp" ><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$LANG.attention_short}
+		<a
+			rel="docs.php?t=help&p=customer_contact"
+			href="#"
+			class="cluetip"
+			title="{$LANG.customer_contact}"
+		>
+		 <img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td><input type="text" name="attention" value="{$customer.attention}" size="50" /></td>
 	</tr>
@@ -197,7 +255,15 @@
 		<td><input type="text" name="street_address" value="{$customer.street_address}" size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.street2} <a href="docs.php?t=help&p=street2" style="showhelp" ><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$LANG.street2}
+			<a
+				class="cluetip"
+				href="#"
+				rel="docs.php?t=help&p=street2"
+				title="{$LANG.street2}"
+			> 
+				<img src="./images/common/help-small.png"></img>
+			</a>
 		</td>
 		<td><input type="text" name="street_address2" value="{$customer.street_address2}" size="50" /></td>
 	</tr>
@@ -235,25 +301,53 @@
 			<input type="text" name="email" value="{$customer.email}" size="50" /></td
 	></tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.customer_cf1} <a href="docs.php?t=help&p=custom_fields" style="showhelp"><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$customFieldLabel.customer_cf1}
+ 			<a
+				class="cluetip"
+				href="#"
+				rel="docs.php?t=help&p=custom_fields"
+				title="{$LANG.Custom_Fields}"
+			> 
+		 <img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>
 			<input type="text" name="custom_field1" value="{$customer.custom_field1}" size="50" /></td
 	></tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.customer_cf2} <a href="docs.php?t=help&p=custom_fields" style="showhelp"><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$customFieldLabel.customer_cf2}
+ 			<a
+				class="cluetip"
+				href="#"
+				rel="docs.php?t=help&p=custom_fields"
+				title="{$LANG.Custom_Fields}"
+			> 
+		 <img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>
 			<input type="text" name="custom_field2" value="{$customer.custom_field2}" size="50" /></td
 	></tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.customer_cf3} <a href="docs.php?t=help&p=custom_fields" style="showhelp"><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$customFieldLabel.customer_cf3} 
+ 			<a
+				class="cluetip"
+				href="#"
+				rel="docs.php?t=help&p=custom_fields"
+				title="{$LANG.Custom_Fields}"
+			> 
+		<img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>
 			<input type="text" name="custom_field3" value="{$customer.custom_field3}" size="50" /></td
 	></tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.customer_cf4} <a href="docs.php?t=help&p=custom_fields" style="showhelp"><img src="./images/common/help-small.png"></img></a>
+		<td class="details_screen">{$customFieldLabel.customer_cf4}
+ 			<a
+				class="cluetip"
+				href="#"
+				rel="docs.php?t=help&p=custom_fields"
+				title="{$LANG.Custom_Fields}"
+			> 
+		 <img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>
 			<input type="text" name="custom_field4" value="{$customer.custom_field4}" size="50" /></td
@@ -262,7 +356,9 @@
 		<td class="details_screen">{$LANG.notes}</td>
 		<td><textarea name="notes" rows="8" cols="50">{$customer.notes}</textarea></td>
 	</tr>
+	{*
 		{showCustomFields categorieId="2" itemId=$smarty.get.customer }
+		*}
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
 		<td>

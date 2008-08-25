@@ -1,17 +1,12 @@
 {*
-/*
 * Script: details.tpl
 * 	Custom fields details template
 *
-* Authors:
-*	 Justin Kelly, Nicolas Ruflin
-*
 * Last edited:
-* 	 2007-07-18
+* 	 2008-08-25
 *
 * License:
-*	 GPL v2 or above
-*/
+*	 GPL v3 or above
 *}
 
 <FORM name="frmpost" ACTION="index.php?module=custom_fields&view=save&submit={$smarty.get.submit}"

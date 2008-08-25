@@ -1,17 +1,12 @@
 {*
-/*
 * Script: add.tpl
 * 	 Customers add template
 *
-* Authors:
-*	 Justin Kelly, Nicolas Ruflin
-*
 * Last edited:
-* 	 2007-07-18
+* 	 2008-08-25
 *
 * License:
-*	 GPL v2 or above
-*/
+*	 GPL v3 or above
 *}
 
 {* if customer is updated or saved.*} 
@@ -30,14 +25,29 @@
 <hr />
 <table align=center>
 	<tr>
-		<td class="details_screen">{$LANG.customer_name} <a href="docs.php?t=help&p=required_field" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png"></img></a></td>
+		<td class="details_screen">{$LANG.customer_name}
+		<a 
+				class="cluetip"
+				href="#"
+				rel="docs.php?t=help&p=required_field"
+				title="{$LANG.Required_Field}"
+		>
+		<img src="./images/common/required-small.png"></img></a></td>
 		<td><input type=text name="name" value="{$smarty.post.name}" size=25></td>
 	</tr>
 	</tr>
-	<td class="details_screen">{$LANG.customer_contact} <a
-		href="docs.php?t=help&p=customer_contact"
-		rel="gb_page_center[450, 450]"><img
-		src="./images/common/help-small.png"></img></a></td>
+	<td class="details_screen">{$LANG.customer_contact}
+		<a
+			rel="docs.php?t=help&p=customer_contact"
+			href="#"
+			class="cluetip"
+			title="{$LANG.customer_contact}"
+		>
+			<img
+				src="./images/common/help-small.png"
+			></img>
+		</a>
+	</td>
 	<td><input type=text name="attention" size=25 value="{$smarty.post.attention}"></td>
 	</tr>
 	<tr>
@@ -45,10 +55,19 @@
 		<td><input type=text name="street_address" value="{$smarty.post.street_address}" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.street2} <a
-			href="docs.php?t=help&p=street2"
-			rel="gb_page_center[450, 450]"><img
-			src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$LANG.street2}
+			<a
+				class="cluetip"
+				href="#"
+				rel="docs.php?t=help&p=street2"
+				title="{$LANG.street2}"
+			> 
+				<img
+					src="./images/common/help-small.png"
+				>
+				</img>
+			</a>
+		</td>
 		<td><input type=text name="street_address2" value="{$smarty.post.street_address2}" size=25></td>
 	</tr>
 	<tr>
@@ -84,30 +103,52 @@
 		<td><input type=text name="email" value="{$smarty.post.email}" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.customer_cf1} <a
-			href="docs.php?t=help&p=custom_fields"
-			rel="gb_page_center[450, 450]"><img
+		<td class="details_screen">{$customFieldLabel.customer_cf1}
+ 			<a
+				class="cluetip"
+				href="#"
+				rel="docs.php?t=help&p=custom_fields"
+				title="{$LANG.Custom_Fields}"
+			> <img
 			src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="custom_field1" value="{$smarty.post.custom_field1}" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.customer_cf2} <a
-			href="docs.php?t=help&p=custom_fields"
-			rel="gb_page_center[450, 450]"><img
-			src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel.customer_cf2}
+			<a
+				class="cluetip"
+				href="#"
+				rel="docs.php?t=help&p=custom_fields"
+				title="{$LANG.Custom_Fields}"
+			> 
+				<img
+					src="./images/common/help-small.png">
+				</img>
+			</a>
+		</td>
 		<td><input type=text name="custom_field2" value="{$smarty.post.custom_field2}" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.customer_cf3} <a
-			href="docs.php?t=help&p=custom_fields"
-			rel="gb_page_center[450, 450]"><img
+		<td class="details_screen">{$customFieldLabel.customer_cf3}
+			<a
+				class="cluetip"
+				href="#"
+				rel="docs.php?t=help&p=custom_fields"
+				title="{$LANG.Custom_Fields}"
+			> 
+		<img
 			src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="custom_field3" value="{$smarty.post.custom_field3}" size=25></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.customer_cf4} <a
-			href="docs.php?t=help&p=custom_fields"
-			rel="gb_page_center[450, 450]"><img
+		<td class="details_screen">{$customFieldLabel.customer_cf4}
+			<a
+				class="cluetip"
+				href="#"
+				rel="docs.php?t=help&p=custom_fields"
+				title="{$LANG.Custom_Fields}"
+			> 
+		<img
 			src="./images/common/help-small.png"></img></a></td>
 		<td><input type=text name="custom_field4" value="{$smarty.post.custom_field4}" size=25></td>
 	</tr>

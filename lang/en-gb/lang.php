@@ -4,14 +4,11 @@
 * Script: english_UK.inc.php
 * 	English translation file
 *
-* Authors:
-*	 Justin Kelly
-*
 * Last edited:
-*    2007-12-22
+*    2008-08-25
 *
 * License:
-*	 GPL v2 or above
+*	 GPL v3 or above
 */
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done

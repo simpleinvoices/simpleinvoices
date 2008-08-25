@@ -1,17 +1,12 @@
 {*
-/*
 * Script: details.tpl
 * 	Biller details template
 *
-* Authors:
-*	 Justin Kelly, Nicolas Ruflin
-*
 * Last edited:
-* 	 2007-07-18
+* 	 2008-08-25
 *
 * License:
-*	 GPL v2 or above
-*/
+*	 GPL v3 or above
 *}
 <form name="frmpost" action="index.php?module=billers&view=save&id={$smarty.get.id}" method="post">
 
@@ -36,8 +31,12 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street2} <a
-			href="docs.php?t=help&p=street2"
-			rel="gb_page_center[450, 450]"><img
+			class="cluetip"
+			rel="docs.php?t=help&p=street2"
+			href="#"
+			title="{$LANG.street2}"
+			>
+			<img
 			src="./images/common/help-small.png"></img></a></td>
 		<td>{$biller.street_address2}</td>
 	</tr>
@@ -75,37 +74,57 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.biller_cf1} <a
-			href="docs.php?t=help&p=custom_fields"
-			rel="gb_page_center[450, 450]"><img
+			class="cluetip"
+			rel="docs.php?t=help&p=custom_fields"
+			href="#"
+			title="{$LANG.Custom_Fields}"
+			><img
 			src="./images/common/help-small.png"></img></a></td>
 		<td>{$biller.custom_field1}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.biller_cf2} <a
-			href="docs.php?t=help&p=custom_fields"
-			rel="gb_page_center[450, 450]"><img
-			src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel.biller_cf2} 
+		<a
+			class="cluetip"
+			rel="docs.php?t=help&p=custom_fields"
+			href="#"
+			title="{$LANG.Custom_Fields}"
+		>
+		<img
+			src="./images/common/help-small.png"
+		></img>
+		</a>
+		</td>
 		<td>{$biller.custom_field2}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.biller_cf3} <a
-			href="docs.php?t=help&p=custom_fields"
-			rel="gb_page_center[450, 450]"><img
+		<td class="details_screen">{$customFieldLabel.biller_cf3} 
+		<a
+			class="cluetip"
+			rel="docs.php?t=help&p=custom_fields"
+			href="#"
+			title="{$LANG.Custom_Fields}"
+		><img
 			src="./images/common/help-small.png"></img></a></td>
 		<td>{$biller.custom_field3}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.biller_cf4} <a
-			href="docs.php?t=help&p=custom_fields"
-			rel="gb_page_center[450, 450]"><img
+			class="cluetip"
+			rel="docs.php?t=help&p=custom_fields"
+			href="#"
+			title="{$LANG.Custom_Fields}"><img
 			src="./images/common/help-small.png"></img></a></td>
 		<td>{$biller.custom_field4}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.logo_file} <a
-			href="docs.php?t=help&p=insert_biller_text"
-			rel="gb_page_center[450, 450]"><img
-			src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$LANG.logo_file} 
+			<a
+				class="cluetip"
+				href="#"
+				rel="docs.php?t=help&p=insert_biller_text"
+				title="{$LANG.Logo_File}
+			></img></a></td>
 		<td>{$biller.logo}</td>
 	</tr>
 	<tr>

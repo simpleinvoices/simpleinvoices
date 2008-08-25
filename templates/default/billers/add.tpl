@@ -1,17 +1,12 @@
 {*
-/*
 * Script: add.tpl
 * 	Biller add template
 *
-* Authors:
-*	 Justin Kelly, Nicolas Ruflin
-*
 * Last edited:
-* 	 2007-07-18
+* 	 2008-08-25
 *
 * License:
-*	 GPL v2 or above
-*/
+*	 GPL v3 or above
 *}
 
 {* if bill is updated or saved.*}
@@ -38,7 +33,6 @@ You must enter a Biller name</div>
 				href="#"
 				rel="docs.php?t=help&p=required_field"
 				title="{$LANG.Required_Field}"
-				
 		>
 		<img src="./images/common/required-small.png"></img>
 		</a>	
