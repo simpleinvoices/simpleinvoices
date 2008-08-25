@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+
+<langfile version="1.0.0" type="language">
+
+	<name>Svenska</name>
+	<shortname>sv</shortname>
+	<englishname>Swedish</englishname>
+	<author>Ivar Walfridsson</author>
+	<authorEmail>iwar@linux.nu</authorEmail>
+</langfile>

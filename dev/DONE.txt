@@ -1,10 +1,14 @@
 ######
+Aug 08
+######
+- Turkish tranlsation added - thanks Don Camillo
+- Swedish translation added - Thanks Ivar Walfridson
+######
 July 08
 ######
 - Move to Flexigrid as the Simple Invoies grid of choice (www.webplicity.net/flexigrid/)
 - Replaced the html editor tiny_mce with jwysiwyg (http://code.google.com/p/jwysiwyg/)
 - Replaced modal/info window - from ajs to cluetip (http://plugins.learningjquery.com/cluetip/)
-
 ########
 DONE NOW
 ########
