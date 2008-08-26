@@ -42,23 +42,24 @@ function init(){
 		    win.focus();
 		});
 	}
-	/*Load the cluetip*/
-	$('a.cluetip').cluetip(
-		{
-			activation: 'click',
-			sticky: true,
-			cluetipClass: 'notice',
-			fx: {             
+	/*Load the cluetip - only if cluetip plugin has been loaded*/
+	if(typeof cluetip=='function')
+	{
+		$('a.cluetip').cluetip(
+			{
+				activation: 'click',
+				sticky: true,
+				cluetipClass: 'notice',
+				fx: {             
                       open:       'fadeIn', // can be 'show' or 'slideDown' or 'fadeIn'
                       openSpeed:  '70'
-    		},
-  			arrows: true,
-  			closePosition: 'title',			
-  			closeText: '<img src="./images/common/cross.png" alt="" />'
-			
-			
-		}
-	);
+    			},
+  				arrows: true,
+  				closePosition: 'title',			
+  				closeText: '<img src="./images/common/cross.png" alt="" />'
+			}
+		);
+	}
 }
 
 function selectItem(li) {

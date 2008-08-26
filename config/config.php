@@ -89,6 +89,12 @@ $extension['gene']['enabled'] = "0";
 $extension['test']['name'] = "test extension";
 $extension['test']['description'] = "this is a test";
 $extension['test']['enabled'] = "0";
+$extension['product_matrix']['name'] = "product_matrix";
+$extension['product_matrix']['description'] = "product matrix extension";
+$extension['product_matrix']['enabled'] = "1";
+$extension['text_ui']['name'] = "text_ui";
+$extension['text_ui']['description'] = "UI for mobile devices";
+$extension['text_ui']['enabled'] = "1";
 // dev guys to enable extensions via your local.config.php file
 
 ####################

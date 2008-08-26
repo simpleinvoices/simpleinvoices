@@ -58,6 +58,6 @@
 
 </head>
 <body>
-<a href="index.php">HOME</a>
-<hr/>
+<a href="index.php">HOME</a><br>
+
 

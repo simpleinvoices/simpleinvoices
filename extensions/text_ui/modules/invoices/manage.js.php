@@ -73,8 +73,7 @@ var email_tooltip = "{/literal}{$LANG.email}  {$invoice.preference.pref_inv_word
 			rp: 25,
 			showToggleBtn: false,
 			showTableToggleBtn: false,
-			width: 'auto',
-			//height: 200
+			width: 'auto'
 			}
 			);
 {/literal}
