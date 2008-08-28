@@ -7,7 +7,7 @@
    *        Rui Gouveia
    *
    * Last edited:
-   *        2007-11-01, 2008-01-26, 2008-05-12
+   *        2007-11-01, 2008-01-26, 2008-05-12, 2008-08-28
    *
    * License:
    *        GPL v3
@@ -92,17 +92,17 @@ function process_lang_file($lang_code) {
 
 
 // Header
-print str_repeat("=", 104);
+print str_repeat("=", 106);
 print "\n";
 print sprintf("%-10s", 'Lang. Code') . " | ";
 print sprintf("%-29s", 'Lang. name') . " | ";
 print sprintf("%-11s", 'New strings') . " | ";
-print sprintf("%13s", 'Total strings') . " | ";
+print sprintf("%15s", 'Strings in file') . " | ";
 print sprintf("%16s", 'Total translated') . " | ";
 print sprintf("%8s", '% Done') . " | ";
 //print sprintf("%10s", 'Authors');
 print "\n";
-print str_repeat("=", 104);
+print str_repeat("=", 106);
 print "\n";
 
 
@@ -131,7 +131,8 @@ foreach (get_defined_langs() as $lang_code) {
   if ($count[0] == 0) {
     $percentage = 'N/A';
   } else {
-    $percentage = number_format(round(($count[1] / $count[0]) * 100, 2), 2) . '%';
+    // The percentage is compared with the total strings of the english language.
+    $percentage = number_format(round(($count[1] / $en_lang[0]) * 100, 2), 2) . '%';
   }
 
   // New strings available?
@@ -146,7 +147,7 @@ foreach (get_defined_langs() as $lang_code) {
   print sprintf("%-10s", $lang_code) . " | ";
   print sprintf("%-29s", utf8_decode($xml->name." (".$xml->englishname.")")) . " | ";
   print sprintf("%-11s", $new_strings) . " | ";
-  print sprintf("%13s", $count[0]) . " | ";
+  print sprintf("%15s", $count[0]) . " | ";
   print sprintf("%16s", $count[1]) . " | ";
   print sprintf("%8s", $percentage) . " | ";
   //print sprintf("%10s", $xml->author) . " | ";
@@ -154,6 +155,6 @@ foreach (get_defined_langs() as $lang_code) {
 }
 
 // Footer
-print str_repeat("-", 104);
+print str_repeat("-", 106);
 print "\n";
 ?>
