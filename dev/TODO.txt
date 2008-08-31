@@ -5,13 +5,13 @@ Disclaimer: if its in the list it may get done sometime in the future if and whe
 ##############################
 Next Release :: TODO
 ##############################
-- aim Jan/Feb 08
+
+ - Manage pages - numbers to be right aligned - JK 
+
  - Consulting style - if desciptoin null then don;t show Description heading thing on the invoice- JK
  - remove float data types(chage to decimal), and change decimals from 2 to 3 decimal points - AP
  - Config.php - used YAML for the DB info : http://prematureoptimization.org/blog/archives/39/ - AP
  - manage pages redevelopment!! - JK
- - blow up phpreports and implement our own reporting tools
- - move all sql out of individual files and into sql_queries.php (ie. login,php etc..) - KL
  - manage invoices sql - check to make sure is 100% OK - Justin
  - Simple Invoices Errors - make a function and make look all pretty (ie cache read only, no PDO, no PHP5.2, can't connect to Db etc..) - AP
  - Address fields in invoice templates - include comma after add 1 or 2 if other address field not null
@@ -36,13 +36,11 @@ Next Release :: TODO
  - apply aplysia new drop down list code to others (refer system default: biller)
  - index.php review input if is safe enought
  - Quick view - Note section: show the first 25 characters then follow with ... in the Hide View and full note in Show View
- - PDF - test that PDF works when using sub-domains ie http://invoices.test.com - AP
- - Lang: norwegian lang problem http://simpleinvoices.org/forum/topic-post1954.html#post1954 - AP
 
 ###############################
 Next Release + 1 (NR+1) :: TODO
 ###############################
- - Pear::auth - remove our crappy auth system and replace with somethign kickass like pear auth or zend acl/auth - AP
+ - blow up phpreports and implement our own reporting tools
  - reports : add export to .xls format NR+1 - AP
  - docs.php: merge docs.php into the normal system
  - choose automatic language (need to rename language files/subfolder). We should use this standards (first we can start with only 2 chars variant)

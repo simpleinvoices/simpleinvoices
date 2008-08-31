@@ -45,6 +45,7 @@ function init(){
 	/*Load the cluetip - only if cluetip plugin has been loaded*/
 	if(typeof cluetip=='function')
 	{
+
 		$('a.cluetip').cluetip(
 			{
 				activation: 'click',
