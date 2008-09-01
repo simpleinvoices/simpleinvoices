@@ -3,14 +3,11 @@
 * Script: details.tpl
 * 	 Invoice details template
 *
-* Authors:
-*	 Justin Kelly, Nicolas Ruflin
-*
 * Last edited:
-* 	 2007-07-18
+* 	 2008-09-01
 *
 * License:
-*	 GPL v2 or above
+*	 GPL v3 or above
 *
 * Website:
 *	http://www.simpleinvoices.org

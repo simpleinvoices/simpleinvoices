@@ -19,7 +19,7 @@ if (  $op === 'insert_product' ) {
  		saveCustomFieldValues($_POST['categorie'], lastInsertId());
  	}
  	
- 
+
  	$i = 1;
  	while ($i <= 3 )
  	{
@@ -75,12 +75,15 @@ if ($op === 'edit_product' ) {
 		{
 			#echo "<br> Atttr:".$_POST['attribute_'.$i]." is not empty";
 	
-			$sql = "select * from ".TB_PREFIX."products_matrix where product_id = ".$_GET['id']." and product_attribute_number = ".$_POST['attribute_'.$i];
-			$result = @dbQuery($sql);
-			$number_of_rows = $result->rowCount();		
+			$sql = "select count(id) as count from ".TB_PREFIX."products_matrix where product_id = ".$_GET['id']." and product_attribute_number = ".$i;
+			$count_result = dbQuery($sql);
+			$number_of_rows = $count_result->fetch();
+			$number_of_rows = $number_of_rows['count'];
+			print_r($number_of_rows);
+			//eacho $number_of_rows = $result;		
 			
 
-			if($number_of_rows > "0")
+			if($number_of_rows > 0)
 			{	
 				#echo "<br> Atttr:".$_POST['attribute_'.$i]." updating";
 				$sql = "UPDATE
@@ -97,7 +100,9 @@ if ($op === 'edit_product' ) {
 					':product_attribute_number', $i,
 					':attribute_id', $_POST['attribute_'.$i]
 				);
-			} else 	{
+			} 
+			if($number_of_rows == 0)
+			{
 				#echo "<br> Atttr:".$_POST['attribute_'.$i]." insert";
 				$sql = "INSERT into
 					".TB_PREFIX."products_matrix
