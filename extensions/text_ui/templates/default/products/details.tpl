@@ -38,6 +38,30 @@
 		<td class="details_screen">{$customFieldLabel.product_cf4}</a></td>
 		<td>{$product.custom_field4}</td>
 	</tr>
+		<tr>
+		<td class="details_screen">Attribute 1</td>
+		<td>
+            {foreach from=$attributes item=attribute}
+                {if $matrix1.attribute_id == $attribute.id}{$attribute.name}{/if}
+            {/foreach}
+		</td>
+	</tr>
+	<tr>
+		<td class="details_screen">Attribute 2</td>
+		<td>
+            {foreach from=$attributes item=attribute}
+                {if $matrix2.attribute_id == $attribute.id}{$attribute.name}{/if}
+            {/foreach}
+		</td>
+	</tr>
+	<tr>
+		<td class="details_screen">Attribute 3</td>
+		<td>
+            {foreach from=$attributes item=attribute}
+                {if $matrix3.attribute_id == $attribute.id}{$attribute.name}{/if}
+            {/foreach}
+		</td>
+	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product_enabled}</td>
 		<td>{$product.wording_for_enabled}</td>
@@ -81,6 +105,39 @@
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf4}</td>
 		<td><input type="text" name="custom_field4" size="25" value="{$product.custom_field4}" /></td>
+	</tr>
+		<tr>
+		<td class="details_screen">Attribute 1</td>
+		<td>
+		     <select name="attribute_1">
+		     <option value=""></option>
+            {foreach from=$attributes item=attribute}
+                <option {if $matrix1.attribute_id == $attribute.id} selected{/if}   value="{$attribute.id}">{$attribute.name}</option>
+            {/foreach}
+            </select>
+		</td>
+	</tr>
+	<tr>
+		<td class="details_screen">Attribute 2</td>
+		<td>
+		     <select name="attribute_2">
+		     <option value=""></option>
+            {foreach from=$attributes item=attribute}
+                <option {if $matrix2.attribute_id == $attribute.id} selected{/if}   value="{$attribute.id}">{$attribute.name}</option>
+            {/foreach}
+            </select>
+		</td>
+	</tr>
+	<tr>
+		<td class="details_screen">Attribute 3</td>
+		<td>
+		     <select name="attribute_3">
+		     <option value=""></option>
+            {foreach from=$attributes item=attribute}
+                <option {if $matrix3.attribute_id == $attribute.id} selected{/if}   value="{$attribute.id}">{$attribute.name}</option>
+            {/foreach}
+            </select>
+		</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product_enabled}</td>
