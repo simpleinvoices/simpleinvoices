@@ -40,12 +40,42 @@ class matrix_invoice
 					p.id = :pid
                     and
                     v.id = :attr_id";
+
+			$attr_all_sql = "select 
+                    CONCAT(a.display_name, '-',v.value) as display,
+					CONCAT(p.id, '-', a.id, '-', v.id) as id 
+				
+                from
+                    si_products_attributes a,
+                    si_products_values v,
+					si_products_matrix m,
+					si_products p
+                where
+					p.id = m.product_id 
+					and 
+					a.id = m.attribute_id 
+					and 
+                    a.id = v.attribute_id
+					and
+					p.id = :pid
+                    and
+                    v.id != :attr_id";
+
 			$attr1 = dbQuery($attr_sql, ':attr_id', $invoiceItem['attribute_1'], ':pid', $invoiceItem['product_id']   ) or die(htmlspecialchars(end($dbh->errorInfo())));
             $invoiceItem['attr1'] = $attr1->fetch();
+			$attr_all_1 = dbQuery($attr_all_sql, ':attr_id', $invoiceItem['attribute_1'], ':pid', $invoiceItem['product_id']   ) or die(htmlspecialchars(end($dbh->errorInfo())));
+            $invoiceItem['attr_all_1'] = $attr_all_1->fetchAll();
+
+
 			$attr2 = dbQuery($attr_sql, ':attr_id', $invoiceItem['attribute_2'], ':pid',$invoiceItem['product_id']) or die(htmlspecialchars(end($dbh->errorInfo())));
             $invoiceItem['attr2'] = $attr2->fetch();
+			$attr_all_2 = dbQuery($attr_all_sql, ':attr_id', $invoiceItem['attribute_2'], ':pid',$invoiceItem['product_id']) or die(htmlspecialchars(end($dbh->errorInfo())));
+            $invoiceItem['attr_all_2'] = $attr_all_2->fetch();
+
 			$attr3 = dbQuery($attr_sql, ':attr_id', $invoiceItem['attribute_3'], ':pid',$invoiceItem['product_id']) or die(htmlspecialchars(end($dbh->errorInfo())));
             $invoiceItem['attr3'] = $attr3->fetch();
+			$attr_all_3 = dbQuery($attr_all_sql, ':attr_id', $invoiceItem['attribute_3'], ':pid',$invoiceItem['product_id']) or die(htmlspecialchars(end($dbh->errorInfo())));
+            $invoiceItem['attr_all_3'] = $attr_all_3->fetch();
 			
 			$invoiceItems[$i] = $invoiceItem;
 		}

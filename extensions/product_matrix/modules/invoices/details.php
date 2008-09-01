@@ -25,6 +25,7 @@ $master_invoice_id = $_GET['invoice'];
 
 $invoice = getInvoice($master_invoice_id);
 $invoiceItems = matrix_invoice::getInvoiceItems($master_invoice_id);
+print_r($invoiceItems[0]['attr_all_1'][0]);
 $customers = getActiveCustomers();
 $preference = getPreference($invoice['preference_id']);
 $billers = getActiveBillers();

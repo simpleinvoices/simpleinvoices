@@ -144,19 +144,28 @@
 	           </td>
 			<td>
 				<select id="attr1-{$line}" name="attr1-{$line}" class="linkSel">
-					
 					<option value="{$invoiceItem.attr1.id}">{$invoiceItem.attr1.display}</option>
+
+					{foreach key=line1 from=$invoiceItems.$line.attr_all_1.0 item=invoiceItemAll1}
+						<option value="{$invoiceItemAll1.id}">{$invoiceItemAll1.display}</option>
+					{/foreach}
 				</select>
 			</td>
 			<td>
 				<select id="attr2-{$line}" name="attr2-{$line}" class="linkSel" >
 					<option value="{$invoiceItem.attr2.id}">{$invoiceItem.attr2.display}</option>
+					{foreach key=line2 from=$invoiceItems.$line.1.attr_all_2 item=invoiceItemAll}
+						<option value="{$invoiceItemAll.id}">{$invoiceItemAll.display}</option>
+					{/foreach}
 				</select>
 			</td>	
 			{if $number_of_attributes == "3"}
 			<td>
 				<select id="attr3-{$line}" name="attr3-{$line}" class="linkSel" >
 					<option value="{$invoiceItem.attr3.id}">{$invoiceItem.attr3.display}</option>
+					{foreach key=line3 from=$invoiceItems.$line.2.attr_all_3 item=invoiceItemAll}
+						<option value="{$invoiceItemAll.id}">{$invoiceItemAll.display}</option>
+					{/foreach}
 				</select>
 			</td>	
 			{/if}
