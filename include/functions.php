@@ -431,40 +431,28 @@ function sql2xml($sth, $count) {
 }
 
 /**
-* Function: sorted
+* Function: si_truncate
 * 
-* Sort associated array - from http://codingforums.com/showpost.php?s=e892139ced497d7911f2c51174b25d93&p=385064&postcount=2
-*
+* Trucate a given string
+* 
 * Parameters:
-* array		- the array to sort
-* index		- the element to sort by
-* order		- the order of sort (ASC or DESC)
-* natsort	- "natural order" algorithm
-* case_sensitive		- is the search case sensitive
+* string	- the string to truncate
+* max		- the max lenght in characters to truncate the string to 
+* rep		- characters to be added at end of truncated string
+
 *
 * Returns:
 * The array sorted as you want
 **/
-    function sorted ($array, $index, $order='ASC', $natsort=FALSE, $case_sensitive=FALSE) 
+function si_truncate($string, $max = 20, $rep = '')
+{
+    if (strlen($string) <= ($max + strlen($rep)))
     {
-        if(is_array($array) && count($array)>0) 
-        {
-           foreach(array_keys($array) as $key) 
-               $temp[$key]=$array[$key][$index];
-               if(!$natsort) 
-                   ($order=='ASC')? asort($temp) : arsort($temp);
-              else 
-              {
-                 ($case_sensitive)? natsort($temp) : natcasesort($temp);
-                 if($order!='ASC') 
-                     $temp=array_reverse($temp,TRUE);
-           }
-           foreach(array_keys($temp) as $key) 
-               (is_numeric($key))? $sorted[]=$array[$key] : $sorted[$key]=$array[$key];
-           return $sorted;
-      }
-      return $array;
-    }  
+        return $string;
+    }
+    $leave = $max - strlen ($rep);
+    return substr_replace($string, $rep, $leave);
+} 
 
 
 ?>

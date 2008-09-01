@@ -3,14 +3,12 @@
 * Script: manage.tpl
 * 	 Payments manage template
 *
-* Authors:
-*	 Justin Kelly, Ben Brown
 *
 * Last edited:
-* 	 2007-09-22
+* 	 2008-09-01
 *
 * License:
-*	 GPL v2 or above
+*	 GPL v3 or above
 *
 * Website:
 *	http://www.simpleinvoices.org
@@ -19,7 +17,7 @@
 {if $payments == null}
 	<P><em>{$LANG.no_payments}.</em></p>
 {else}
- {include file='../modules/payments/manage.js.php' LANG=$LANG}
+
  
 	{if $smarty.get.id }
 <h3>{$LANG.payments_filtered} {$smarty.get.id|escape:html}</h3> :: <a href='index.php?module=payments&amp;view=process&amp;submit={$_GET.id}&amp;op=pay_selected_invoice'>{$LANG.payments_filtered_invoice}</a>
@@ -30,7 +28,10 @@
 	{/if}
 <hr />
 
-<div id="managePaymentsGrid"></div>
+<table id="manageGrid" style="display:none"></table>
+
+ {include file='../modules/payments/manage.js.php'}
+
 {/if}
 <br />
 <div style="text-align:center;"><a href="docs.php?t=help&amp;p=wheres_the_edit_button" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png" alt="(help)"></img> Wheres the Edit button?</a></div>

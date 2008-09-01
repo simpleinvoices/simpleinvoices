@@ -42,10 +42,11 @@ function init(){
 		    win.focus();
 		});
 	}
+	
+	
 	/*Load the cluetip - only if cluetip plugin has been loaded*/
-	if(typeof cluetip=='function')
+	if(jQuery.cluetip)
 	{
-
 		$('a.cluetip').cluetip(
 			{
 				activation: 'click',
@@ -61,6 +62,10 @@ function init(){
 			}
 		);
 	}
+	
+	
+	
+
 }
 
 function selectItem(li) {
@@ -72,6 +77,7 @@ function formatItem(row) {
 	return row[0] + "<br><i>" + row[1] + "</i>";
 }
 
+	
 
 
 	

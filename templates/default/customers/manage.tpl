@@ -4,7 +4,7 @@
 * 	 Customer manage template
 *
 * License:
-*	 GPL v2 or above
+*	 GPL v3 or above
 *
 * Website:
 *	http://www.simpleinvoices.org
