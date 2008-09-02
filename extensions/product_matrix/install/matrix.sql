@@ -1,4 +1,4 @@
-CREATE TABLE `si_products_attributes` (LTER TABLE `si_products_matrix` ADD `product_attribute_number` INT( 11 ) NOT NULL AFTER `product_id` ;
+CREATE TABLE `si_products_attributes` (
 `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `name` VARCHAR( 255 ) NOT NULL
 ) ENGINE = MYISAM ;

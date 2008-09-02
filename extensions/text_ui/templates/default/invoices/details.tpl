@@ -128,24 +128,51 @@
 		
 		
 	        <tr>
-			<td><input type="text" name='quantity{$line}' value='{$invoiceItem.quantity}' size="10">
-			<input type="hidden" name='id{$line}' value='{$invoiceItem.id}' size="10"> </td>
-			
-	                <td>
+				<td>
+					<input type="text" name='quantity{$line}' value='{$invoiceItem.quantity}' size="10">
+					<input type="hidden" name='id{$line}' value='{$invoiceItem.id}' size="10"> 
+				</td>
+			    <td>
+					{if $products == null }
+						<p><em>{$LANG.no_products}</em></p>
+					{else}
+						<select class="product_select{$line}" name="products{$line}">
+							{foreach from=$products item=product}
+								<option {if $product.id == $invoiceItem.product_id} selected {/if} value="{$product.id}">{$product.description}</option>
+							{/foreach}
+						</select>
+					{/if}
+                </td>
+	            <td>
+				<select id="attr1-{$line}" name="attr1-{$line}" class="linkSel">
+					<option value="{$invoiceItem.attr1.id}">{$invoiceItem.attr1.display}</option>
+					{foreach  from=$invoiceItem.attr_all_1 item=invoiceItemAll1}
+						<option value="{$invoiceItemAll1.id}">{$invoiceItemAll1.display}</option>
+					{/foreach}
+				</select>
+				</td>
+				<td>
+				<select id="attr2-{$line}" name="attr2-{$line}" class="linkSel" >
+					<option value="{$invoiceItem.attr2.id}">{$invoiceItem.attr2.display}</option>
+					{foreach  from=$invoiceItem.attr_all_2 item=invoiceItemAll2}
+						<option value="{$invoiceItemAll2.id}">{$invoiceItemAll2.display}</option>
+					{/foreach}
+				</select>
+			</td>	
+			{if $number_of_attributes == "3"}
+			<td>
+				<select id="attr3-{$line}" name="attr3-{$line}" class="linkSel" >
+					<option value="{$invoiceItem.attr3.id}">{$invoiceItem.attr3.display}</option>
+					{foreach from=$invoiceItem.attr_all_3 item=invoiceItemAll3}
+						<option value="{$invoiceItemAll3.id}">{$invoiceItemAll3.display}</option>
+					{/foreach}
+				</select>
+			</td>	
+			{/if}
+	        </tr>
+		
 	                
-	                {if $products == null }
-	<p><em>{$LANG.no_products}</em></p>
-{else}
-	<select name="products{$line}">
-	{foreach from=$products item=product}
-		<option {if $product.id == $invoiceItem.product_id} selected {/if} value="{$product.id}">{$product.description}</option>
-	{/foreach}
-	</select>
-{/if}
-
 	                
-	                
-	                </td>
 	        </tr>
 		
 
