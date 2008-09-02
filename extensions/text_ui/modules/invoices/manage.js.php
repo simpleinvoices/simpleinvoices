@@ -29,18 +29,6 @@ var email_tooltip = "{/literal}{$LANG.email}  {$invoice.preference.pref_inv_word
 			grid_width = grid_width - (columns * padding);
 			percentage_width = grid_width / 100; 
 			
-			function test(com,grid)
-			{
-				if (com=='Delete')
-					{
-						confirm('Delete ' + $('.trSelected',grid).length + ' items?')
-					}
-				else if (com=='Add')
-					{
-						alert('Add New Item');
-					}			
-			}
-
 
 			$("#manageGrid").flexigrid
 			(
@@ -63,7 +51,7 @@ var email_tooltip = "{/literal}{$LANG.email}  {$invoice.preference.pref_inv_word
 			*/
 			searchitems : [
 				{display: 'ID', name : 'id'},
-				{display: 'Biller ID', name : 'biller_id', isdefault: true}
+				{display: 'Customer', name : 'customer', isdefault: true}
 				],
 			sortname: "id",
 			sortorder: "desc",
@@ -73,7 +61,8 @@ var email_tooltip = "{/literal}{$LANG.email}  {$invoice.preference.pref_inv_word
 			rp: 25,
 			showToggleBtn: false,
 			showTableToggleBtn: false,
-			width: 'auto'
+			width: 'auto',
+			height: 'auto'
 			}
 			);
 {/literal}
