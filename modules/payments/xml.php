@@ -39,12 +39,13 @@ $query = null;
 #if coming from another page where you want to filter by just one invoice
 if (!empty($_GET['id'])) {
 
-	$id = $_GET['c_id'];
+	$id = $_GET['id'];
 	//$query = getInvoicePayments($_GET['id']);
 	
 	$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b where ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and ap.ac_inv_id = :id ORDER BY ap.id DESC";
 	
 	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$count = $sth->rowCount();
 	
 }
 #if coming from another page where you want to filter by just one customer
@@ -55,11 +56,12 @@ elseif (!empty($_GET['c_id'])) {
 	$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b where ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and c.id = :id ORDER BY ap.id DESC";
 
 	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$count = $sth->rowCount();
 	
 }
 #if you want to show all invoices - no filters
 else {
-	$query = getPayments();
+	//$query = getPayments();
 	
 	$sql = "SELECT 
 				ap.*, 
@@ -89,17 +91,18 @@ else {
 				";
 				
 	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$count = $sth->rowCount();
 }
 	$payments = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 global $dbh;
-
+/*
 $sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."account_payments";
 $tth = dbQuery($sqlTotal) or die(end($dbh->errorInfo()));
 $resultCount = $tth->fetch();
 $count = $resultCount[0];
 //echo sql2xml($customers, $count);
-
+*/
 
 	$xml .= "<rows>";
 	$xml .= "<page>$page</page>";

@@ -22,7 +22,23 @@ var email_tooltip = "{/literal}{$LANG.email}  {$invoice.preference.pref_inv_word
 		'<!--6 Payment --><a title="'+ process_payment_tooltip +'" class="index_table" href="index.php?module=payments&view=process&invoice={1}&op=pay_selected_invoice"><img src="images/common/money_dollar.png" height="16" border="0" padding="-4px" valign="bottom" /></a>',
 */
 
-alert("{/literal}{$get.c_id}{literal}");
+			var c_id ;
+			c_id = '{/literal}{$get.c_id}{literal}';
+			var id;
+			id = '{/literal}{$get.id}{literal}';
+
+			var url_extension = "";
+
+			if(c_id !== "")
+			{
+				url_extension = "&c_id="+c_id;
+				
+			};
+			if(id !== "")
+			{
+				url_extension = "&id="+id;
+		
+			};
 
 			var columns = 9;
 			var padding = 12;
@@ -43,11 +59,11 @@ alert("{/literal}{$get.c_id}{literal}");
 					}			
 			}
 
-
+		//	console.log("URL: %s",url_extension);
 			$("#manageGrid").flexigrid
 			(
 			{
-			url: 'index.php?module=payments&view=xml',
+			url: 'index.php?module=payments&view=xml'+url_extension,
 			dataType: 'xml',
 			colModel : [
 				{display: 'Actions', name : 'actions', width : 08 * percentage_width, sortable : false, align: 'center'},

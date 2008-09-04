@@ -27,8 +27,6 @@
 <h3>{$LANG.manage_payments} :: <a href='index.php?module=payments&amp;view=process&amp;op=pay_invoice'>{$LANG.process_payment}</a></h3>
 	{/if}
 <hr />
-{$smarty.get}
-{$smarty.get.c_id}
 
 <table id="manageGrid" style="display:none"></table>
 

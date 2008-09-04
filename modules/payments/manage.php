@@ -17,6 +17,7 @@ else {
 	$query = getPayments();
 }
 
+//
 $payments = progressPayments($query);
 
 $pageActive = "payments";
