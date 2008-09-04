@@ -43,7 +43,11 @@
 			{if $products == null }
 				<p><em>{$LANG.no_products}</em></p>
 			{else}
-				<select class="product_select{$smarty.section.line.index}" name="products{$smarty.section.line.index}">
+				<select
+					class="product_select{$smarty.section.line.index} selector" 
+					name="products{$smarty.section.line.index}"
+					onchange="chainSelect('#attr1-'+{$smarty.section.line.index},'./index.php?module=invoices&view=ajax&search=attr1')"	
+				>
 					<option value=""></option>
 				{foreach from=$products item=product}
 					<option {if $product.id == $defaults.product} selected {/if} value="{$product.id}">{$product.description}</option>

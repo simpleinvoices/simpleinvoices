@@ -22,6 +22,8 @@ var email_tooltip = "{/literal}{$LANG.email}  {$invoice.preference.pref_inv_word
 		'<!--6 Payment --><a title="'+ process_payment_tooltip +'" class="index_table" href="index.php?module=payments&view=process&invoice={1}&op=pay_selected_invoice"><img src="images/common/money_dollar.png" height="16" border="0" padding="-4px" valign="bottom" /></a>',
 */
 
+alert("{/literal}{$get.c_id}{literal}");
+
 			var columns = 9;
 			var padding = 12;
 			var grid_width = $('.col').width();

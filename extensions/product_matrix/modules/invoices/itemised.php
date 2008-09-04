@@ -1,4 +1,4 @@
-<?php
+<?php	
 /*
 * Script: itemised.php
 * 	itemised invoice page
@@ -36,14 +36,18 @@ include('./extensions/product_matrix/modules/invoices/invoice.php');
 
 $js =<<<EOD
 <script type="text/javascript" charset="utf-8">
+
+
 $(function()
 {
 
 for (var x = 0; x <= $dynamic_line_items; x++)
    {
+  /*
         $('.product_select'+x).chainSelect('#attr1-'+x,'./index.php?module=invoices&view=ajax&search=attr1');
         $('.product_select'+x).chainSelect('#attr2-'+x,'./index.php?module=invoices&view=ajax&search=attr2');
         $('.product_select'+x).chainSelect('#attr3-'+x,'./index.php?module=invoices&view=ajax&search=attr3');
+      */
 	}
 
 });
