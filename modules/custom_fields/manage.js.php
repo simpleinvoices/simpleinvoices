@@ -25,20 +25,16 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			dataType: 'xml',
 			colModel : [
 				{display: 'Actions', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
-				{display: 'ID', name : 'pt_id', width : 10 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Description', name : 'pt_description', width : 70 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Enabled', name : 'enabled', width : 10 * percentage_width, sortable : true, align: 'left'}
+				{display: 'ID', name : 'cf_id', width : 10 * percentage_width, sortable : false, align: 'left'},
+				{display: 'Custom field', name : 'cf_custom_field', width : 40 * percentage_width, sortable : false, align: 'left'},
+				{display: 'Custom label', name : 'cf_custom_label', width : 40 * percentage_width, sortable : false, align: 'left'}
 				
 				],
 				
 
-			searchitems : [
-				{display: 'ID', name : 'pt_id'},
-				{display: 'Description', name : 'pt_description', isdefault: true}
-				],
-			sortname: 'pt_description',
+			sortname: 'cf_id',
 			sortorder: 'asc',
-			usepager: true,
+			usepager: false,
 			/*title: 'Manage Custom Fields',*/
 			useRp: false,
 			rp: 25,

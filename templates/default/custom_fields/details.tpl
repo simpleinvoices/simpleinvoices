@@ -2,21 +2,21 @@
 * Script: details.tpl
 * 	Custom fields details template
 *
-* Last edited:
-* 	 2008-08-25
+* Website:
+* 	 http://www.simpleinvoices.org
 *
 * License:
 *	 GPL v3 or above
 *}
 
-<FORM name="frmpost" ACTION="index.php?module=custom_fields&view=save&submit={$smarty.get.submit}"
+<FORM name="frmpost" ACTION="index.php?module=custom_fields&view=save&id={$smarty.get.id}"
  METHOD="POST" onsubmit="return frmpost_Validator(this)">
 
 
 {if $smarty.get.action == "view" }
 
 	<h3>{$LANG.custom_fields} ::
-	<a href="index.php?module=custom_fields&view=details&submit={$cf.cf_id}&action=edit">{$LANG.edit}</a></h3>
+	<a href="index.php?module=custom_fields&view=details&id={$cf.cf_id}&action=edit">{$LANG.edit}</a></h3>
 	<hr />
 
 
@@ -41,7 +41,7 @@
 	<hr></hr>
 
 
-<a href="index.php?module=custom_fields&view=details&submit={$cf.cf_id}&action=edit">{$LANG.edit}</a>
+<a href="index.php?module=custom_fields&view=details&id={$cf.cf_id}&action=edit">{$LANG.edit}</a>
 
 {/if}
 

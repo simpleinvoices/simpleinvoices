@@ -37,7 +37,7 @@ if (  $op === 'edit_custom_field' ) {
                         WHERE
                                 cf_id = :id";
 
-		if (dbQuery($sql, ':id', $_GET['submit'], ':label', $_POST['cf_custom_label'])) {
+		if (dbQuery($sql, ':id', $_GET['id'], ':label', $_POST['cf_custom_label'])) {
 			$display_block =  $LANG['save_custom_field_success'];
 		} else {
 			$display_block =  $LANG['save_custom_field_success'];

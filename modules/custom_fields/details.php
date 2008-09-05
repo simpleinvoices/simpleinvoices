@@ -3,14 +3,8 @@
 * Script: details.php
 * 	Custom fields details page
 *
-* Authors:
-*	 Justin Kelly, Nicolas Ruflin
-*
-* Last edited:
-* 	 2007-07-19
-*
 * License:
-*	 GPL v2 or above
+*	 GPL v3 or above
 *
 * Website:
 * 	http://www.simpleinvoices.org
@@ -21,7 +15,7 @@ checkLogin();
 #table
 
 #get the invoice id
-$cf_id = $_GET["submit"];
+$cf_id = $_GET["id"];
 
 global $dbh;
 #customer query

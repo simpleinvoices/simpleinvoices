@@ -115,7 +115,7 @@ function get_custom_field_name($field) {
 		//grab the first character of the field variable
         $get_cf_letter = $field[0];
         //grab the last character of the field variable
-        $get_cf_number = $field[strlen($field)-1];
+       	$get_cf_number = $field[strlen($field)-1];
 	
 /*
 	if ($get_cf_letter == "b") {
@@ -141,7 +141,8 @@ function get_custom_field_name($field) {
 		case "p":  $custom_field_name = $LANG['products'];	break;
 		default :  $custom_field_name = false;
 	}
-	if (!$custom_field_name) $custom_field_name .= " :: " . $LANG["custom_field"] . " " . $get_cf_number ;
+	//if (!$custom_field_name) $custom_field_name .= " :: " . $LANG["custom_field"] . " " . $get_cf_number ;
+	$custom_field_name .= " :: " . $LANG["custom_field"] . " " . $get_cf_number ;
 
     return $custom_field_name;
 }
