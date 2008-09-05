@@ -22,6 +22,11 @@
 {else}
 <h3>{$LANG.manage_payment_types} :: <a href="index.php?module=payment_types&amp;view=add">{$LANG.add_new_payment_type}</a></h3>
 <hr />
+
+<table id="manageGrid" style="display:none"></table>
+
+ {include file='../modules/payment_types/manage.js.php'}
+{*
 <table class="manage" id="live-grid" align="center">
 	<colgroup>
 		<col style="width:7%;" />
@@ -48,4 +53,5 @@
 	</tr>
 	{/foreach}
 </table>
+*}
 {/if}

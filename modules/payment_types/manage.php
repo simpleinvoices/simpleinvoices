@@ -10,5 +10,4 @@ $pageActive = "options";
 $smarty->assign('pageActive', $pageActive);
 $smarty -> assign('paymentTypes',$paymentTypes);
 
-getRicoLiveGrid("rico_payment_types","{ type:'number', decPlaces:0, ClassName:'alignleft' }");
 ?>

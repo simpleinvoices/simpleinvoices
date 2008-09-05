@@ -3,21 +3,15 @@
 * Script: details.tpl
 * 	 Payment type details template
 *
-* Authors:
-*	 Justin Kelly, Nicolas Ruflin
-*
-* Last edited:
-* 	 2007-07-18
-*
 * License:
-*	 GPL v2 or above
+*	 GPL v3 or above
 *
 * Website:
 *	http://www.simpleinvoices.org
 */
 *}
 
-<form name="frmpost" action="index.php?module=payment_types&amp;view=save&amp;submit={$smarty.get.submit|escape:html}" method="post" onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=payment_types&amp;view=save&amp;id={$smarty.get.id|escape:html}" method="post" onsubmit="return frmpost_Validator(this)">
 
 
 
@@ -25,7 +19,7 @@
 {if $smarty.get.action == "view" }
 	
 	
-	<b>{$LANG.payment_type} :: <a href='index.php?module=payment_types&amp;view=details&amp;submit={$paymentType.pt_id|escape:html}&amp;action=edit'>{$LANG.edit}</a> </b>
+	<b>{$LANG.payment_type} :: <a href='index.php?module=payment_types&amp;view=details&amp;id={$paymentType.pt_id|escape:html}&amp;action=edit'>{$LANG.edit}</a> </b>
 	<hr />
 
 	<table align="center">
@@ -41,7 +35,7 @@
 	</table>
 	<hr />
 
-<a href='index.php?module=payment_types&amp;view=details&amp;submit={$paymentType.pt_id|escape:html}&amp;action=edit'>{$LANG.edit}</a>
+<a href='index.php?module=payment_types&amp;view=details&amp;id={$paymentType.pt_id|escape:html}&amp;action=edit'>{$LANG.edit}</a>
 
 {/if}
 

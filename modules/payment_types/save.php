@@ -58,7 +58,7 @@ else if (  $op === 'edit_payment_type' ) {
 			WHERE
 				pt_id = :id";
 
-		if (dbQuery($sql, ':description', $_POST['pt_description'], ':enabled', $_POST['pt_enabled'], ':id', $_GET['submit'])) {
+		if (dbQuery($sql, ':description', $_POST['pt_description'], ':enabled', $_POST['pt_enabled'], ':id', $_GET['id'])) {
 			$display_block = $LANG['save_payment_type_success'];
 		} else {
 			$display_block =  $LANG['save_payment_type_failure'];
