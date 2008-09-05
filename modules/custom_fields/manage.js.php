@@ -1,5 +1,15 @@
-<script type="text/javascript">
+<script>
+
 {literal}
+/*
+var view_tooltip ="{/literal}{$LANG.quick_view_tooltip} {ldelim}1{rdelim}{literal}";
+var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pref_inv_wording} {ldelim}1{rdelim}{literal}";
+
+		'<!--0 Quick View --><a class="index_table" title="'+  +''+ view_tooltip +'"  href="index.php?module=products&view=details&id={1}&action=view"> <img src="images/common/view.png" height="16" border="-5px" padding="-4px" valign="bottom" /></a>',
+
+		'<!--1 Edit View --><a class="index_table" title="'+  +''+ edit_tooltip +'"  href="index.php?module=products&view=details&id={1}&action=edit"><img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>',
+*/
+
 			var columns = 4;
 			var padding = 12;
 			var grid_width = $('.col').width();
@@ -15,16 +25,18 @@
 			dataType: 'xml',
 			colModel : [
 				{display: 'Actions', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
-				{display: 'ISO', name : 'id', width : 10 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Name', name : 'biller_id', width : 40 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Printable Name', name : 'customer_id', width : 40 * percentage_width, sortable : true, align: 'left'}
+				{display: 'ID', name : 'pt_id', width : 10 * percentage_width, sortable : true, align: 'left'},
+				{display: 'Description', name : 'pt_description', width : 70 * percentage_width, sortable : true, align: 'left'},
+				{display: 'Enabled', name : 'enabled', width : 10 * percentage_width, sortable : true, align: 'left'}
+				
 				],
+				
 
 			searchitems : [
-				{display: 'ISO', name : 'id'},
-				{display: 'Name', name : 'name', isdefault: true}
+				{display: 'ID', name : 'pt_id'},
+				{display: 'Description', name : 'pt_description', isdefault: true}
 				],
-			sortname: 'id',
+			sortname: 'pt_description',
 			sortorder: 'asc',
 			usepager: true,
 			/*title: 'Manage Custom Fields',*/
@@ -35,5 +47,8 @@
 			height: 'auto'
 			}
 			);
+
+
 {/literal}
+
 </script>
