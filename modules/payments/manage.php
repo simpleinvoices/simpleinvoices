@@ -2,7 +2,7 @@
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
-
+//TODO - replace get..Payments with simple count - as data is got by xml.php now
 $query = null;
 #if coming from another page where you want to filter by just one invoice
 if (!empty($_GET['id'])) {

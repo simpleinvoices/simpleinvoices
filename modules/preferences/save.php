@@ -126,7 +126,7 @@ else if (  $op === 'edit_preference' ) {
 		  ':line2_name', $_POST['pref_inv_payment_line2_name'],
 		  ':line2_value', $_POST['pref_inv_payment_line2_value'],
 		  ':enabled', $_POST['pref_enabled'],
-		  ':id', $_GET['submit']))
+		  ':id', $_GET['id']))
 	    {
 			$display_block = $LANG['save_preference_success'];
 		} else {

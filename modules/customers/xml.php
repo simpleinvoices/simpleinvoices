@@ -83,7 +83,10 @@ $count = $resultCount[0];
 	
 	foreach ($customers as $row) {
 		$xml .= "<row id='".$row['CID']."'>";
-		$xml .= "<cell><![CDATA[<a title='".$LANG['quick_view_tooltip']." ".$row['CID']."' href='index.php?module=customers&view=details&action=view&id=".$row['CID']."'>View</a> :: <a href='index.php?module=customers&view=details&action=view&id=".$row['CID']."'>Edit</a>]]></cell>";
+		$xml .= "<cell><![CDATA[
+			<a class='index_table' title='$LANG[view] $LANG[biller] ".utf8_encode($row['name'])."' href='index.php?module=billers&view=details&id=$row[CID]&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+			<a class='index_table' title='$LANG[edit] $LANG[biller] ".utf8_encode($row['name'])."' href='index.php?module=billers&view=details&id=$row[CID]&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+		]]></cell>";		
 		$xml .= "<cell><![CDATA[".$row['CID']."]]></cell>";		
 		$xml .= "<cell><![CDATA[".utf8_encode($row['name'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".utf8_encode($row['customer_total'])."]]></cell>";

@@ -1,11 +1,11 @@
 <!--Modified code to display apostrophes in text box output 05/02/2008-Gates-->
 <form name="frmpost"
-	action="index.php?module=preferences&view=save&submit={$smarty.get.submit}"
+	action="index.php?module=preferences&view=save&id={$smarty.get.id}"
 	method="post">
 
 
 {if $smarty.get.action== 'view' }
-	<b>Preference :: <a href='index.php?module=preferences&view=details&submit={$preference.pref_id}&action=edit'>Edit</a></b>
+	<b>Preference :: <a href='index.php?module=preferences&view=details&id={$preference.pref_id}&action=edit'>Edit</a></b>
 	<hr></hr>
 
 	
@@ -58,7 +58,7 @@
 		</table>
 		<hr></hr>
 
-<a href='index.php?module=preferences&view=details&submit={$preference.pref_id}&action=edit'>Edit</a>
+<a href='index.php?module=preferences&view=details&id={$preference.pref_id}&action=edit'>Edit</a>
 
 {/if}
 

@@ -15,8 +15,6 @@
 	<p><em>{$LANG.no_customers}</em></p>
 {else}
 
- {include file='../modules/customers/manage.js.php' LANG=$LANG}
-
 <h3>{$LANG.manage_customers} :: <a href="index.php?module=customers&view=add">{$LANG.customer_add}</a></h3>
 <hr />
 <table id="manageGrid" style="display:none"></table>

@@ -8,7 +8,7 @@ if ($_POST['p_description'] != "" ) {
 }
 
 #get the invoice id
-$preference_id = $_GET['submit'];
+$preference_id = $_GET['id'];
 
 $preference = getPreference($preference_id);
 
