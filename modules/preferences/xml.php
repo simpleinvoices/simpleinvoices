@@ -43,6 +43,7 @@ if (in_array($sort, $validFields)) {
 				(SELECT (CASE  WHEN pref_enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
 			FROM 
 				".TB_PREFIX."preferences 
+			$where
 			ORDER BY 
 				$sort $dir 
 			LIMIT 

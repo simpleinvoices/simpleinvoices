@@ -1,5 +1,5 @@
 
-<form name="frmpost" action="index.php?module=tax_rates&amp;view=save&amp;submit={$smarty.get.submit|escape:html}"
+<form name="frmpost" action="index.php?module=tax_rates&amp;view=save&amp;id={$smarty.get.id|escape:html}"
  method="post" onsubmit="return frmpost_Validator(this)">
 
 
@@ -26,7 +26,7 @@
 	<hr></hr>
 
 
-<a href='index.php?module=tax_rates&amp;view=details&amp;submit={$tax.tax_id|escape:html}&amp;action=edit'>{$LANG.edit}</a>
+<a href='index.php?module=tax_rates&amp;view=details&amp;id={$tax.tax_id|escape:html}&amp;action=edit'>{$LANG.edit}</a>
 {/if}
 
 {if $smarty.get.action === 'edit'}

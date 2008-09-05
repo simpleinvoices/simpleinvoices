@@ -35,4 +35,7 @@ switch ($op) {
 
 $smarty -> assign('display_block',$display_block); 
 $smarty -> assign('refresh_total',$refresh_total); 
+
+$pageActive = "options";
+$smarty -> assign('pageActive', $pageActive)
 ?>

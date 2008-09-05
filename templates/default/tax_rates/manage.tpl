@@ -19,6 +19,13 @@
 <h3>{$LANG.manage_tax_rates} ::
 <a href="./index.php?module=tax_rates&amp;view=add">{$LANG.add_new_tax_rate}</a></h3>
 <hr />
+
+<table id="manageGrid" style="display:none"></table>
+
+ {include file='../modules/tax_rates/manage.js.php'}
+ 
+ 
+{*
 <table class="manage" id="live-grid" align="center">
 	<colgroup>
 		<col style="width:7%;" />
@@ -47,4 +54,5 @@
 	</tr>
 	{/foreach}
 </table>
+*}
 {/if}

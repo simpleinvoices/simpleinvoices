@@ -1296,7 +1296,7 @@ function updateTaxRate() {
 		':description', $_POST['tax_description'],
 	  	':percentage', $_POST['tax_percentage'],
 	  	':enabled', $_POST['tax_enabled'],
-	  	':id', $_GET['submit']))) {
+	  	':id', $_GET['id']))) {
 		$display_block = $LANG['save_tax_rate_failure'];
 	}
 	return $display_block;
