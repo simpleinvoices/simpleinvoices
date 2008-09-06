@@ -46,7 +46,7 @@
 				<select
 					class="product_select{$smarty.section.line.index} selector" 
 					name="products{$smarty.section.line.index}"
-					onchange="chainSelect('#attr1-'+{$smarty.section.line.index},'./index.php?module=invoices&view=ajax&search=attr1')"	
+				{*	onchange="chainSelect('#attr1-'+{$smarty.section.line.index},'./index.php?module=invoices&view=ajax&search=attr1')"	*}
 				>
 					<option value=""></option>
 				{foreach from=$products item=product}

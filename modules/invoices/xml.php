@@ -2,10 +2,10 @@
 
 header("Content-type: text/xml");
 
-$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
+//$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
 $dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "DESC" ;
 $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "id" ;
-$limit = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
+$rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
 $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 
 //SC: Safety checking values that will be directly subbed in
@@ -15,9 +15,10 @@ if (intval($start) != $start) {
 if (intval($limit) != $limit) {
 	$limit = 25;
 }
-if (!preg_match('/^(asc|desc)$/iD', $dir)) {
-	$dir = 'DESC';
-}
+
+$start = (($page-1) * $rp);
+
+$limit = "LIMIT $start, $rp";
 
 $query = $_POST['query'];
 $qtype = $_POST['qtype'];
@@ -97,7 +98,7 @@ if ($db_server == 'pgsql') {
 		$where
 		ORDER BY
 		 $sort $dir
-		LIMIT $start, $limit";
+		$limit";
 }
 
 $sth = dbQuery($sql) or die(end($dbh->errorInfo()));

@@ -43,11 +43,10 @@ $(function()
 
 for (var x = 0; x <= $dynamic_line_items; x++)
    {
-  /*
         $('.product_select'+x).chainSelect('#attr1-'+x,'./index.php?module=invoices&view=ajax&search=attr1');
         $('.product_select'+x).chainSelect('#attr2-'+x,'./index.php?module=invoices&view=ajax&search=attr2');
         $('.product_select'+x).chainSelect('#attr3-'+x,'./index.php?module=invoices&view=ajax&search=attr3');
-      */
+  
 	}
 
 });
