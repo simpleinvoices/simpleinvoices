@@ -13,19 +13,21 @@ if (intval($start) != $start) {
 	$start = 0;
 }
 if (intval($limit) != $limit) {
-	$limit = 25;
+	$limit = 15;
 }
 
+/*SQL Limit - start*/
 $start = (($page-1) * $rp);
-
 $limit = "LIMIT $start, $rp";
+/*SQL Limit - end*/
 
+/*SQL where - start*/
 $query = $_POST['query'];
 $qtype = $_POST['qtype'];
 
 $where = "";
 if ($query) $where = " WHERE $qtype LIKE '%$query%' ";
-
+/*SQL where - end*/
 
 /*Check that the sort field is OK*/
 $validFields = array('id', 'biller', 'customer', 'invoice_total','owing','date','aging','type');
@@ -97,7 +99,7 @@ if ($db_server == 'pgsql') {
 		               LEFT JOIN " . TB_PREFIX . "preferences pf ON pf.pref_id = iv.preference_id
 		$where
 		ORDER BY
-		 $sort $dir
+		$sort $dir
 		$limit";
 }
 

@@ -74,7 +74,7 @@ var email_tooltip = "{/literal}{$LANG.email}  {$invoice.preference.pref_inv_word
 			usepager: true,
 			/*title: 'Manage Custom Fields',*/
 			useRp: false,
-			rp: 2,
+			rp: 15,
 			showToggleBtn: false,
 			showTableToggleBtn: false,
 			width: 'auto',
