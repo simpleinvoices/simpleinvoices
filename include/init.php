@@ -57,7 +57,7 @@ $config = new Zend_Config_Ini('./config/config.ini', $environment);
 /*
  * Include another config file if required
  */
-if($environemnt != 'production') {
+if($environment != 'production') {
      $config = new Zend_Config_Ini('./config/'.$environment.'.config.ini', $environment);
 }
 
