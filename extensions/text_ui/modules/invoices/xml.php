@@ -2,11 +2,11 @@
 
 header("Content-type: text/xml");
 
-$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
+//$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
 $dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "DESC" ;
 $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "id" ;
-$limit = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
-$page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
+$rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
+$page = (isset($_GET['page'])) ? $_GET['page'] : "1" ;
 
 //SC: Safety checking values that will be directly subbed in
 if (intval($start) != $start) {
@@ -18,6 +18,11 @@ if (intval($limit) != $limit) {
 if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 	$dir = 'DESC';
 }
+
+/*SQL Limit - start*/
+$start = (($page-1) * $rp);
+$limit = "LIMIT $start, $rp";
+/*SQL Limit - end*/
 
 $query = $_POST['query'];
 $qtype = $_POST['qtype'];
@@ -96,8 +101,8 @@ if ($db_server == 'pgsql') {
 		               LEFT JOIN " . TB_PREFIX . "preferences pf ON pf.pref_id = iv.preference_id
 		$where
 		ORDER BY
-		 $sort $dir
-		LIMIT $start, $limit";
+		$sort $dir
+		$limit";
 }
 
 $sth = dbQuery($sql) or die(end($dbh->errorInfo()));
@@ -117,10 +122,10 @@ $count = $resultCount[0];
 	
 	foreach ($invoices as $row) {
 		$xml .= "<row id='".$row['id']."'>";
-		$xml .= "<cell><![CDATA[<a href='index.php?module=invoices&view=quick_view&invoice=".$row['id']."'>".utf8_encode($row['id'])."</a>]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode($row['customer'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode($row['date'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode($row['invoice_total'])."]]></cell>";
+		$xml .= "<action><![CDATA[<a href='index.php?module=invoices&view=quick_view&invoice=".$row['id']."'>".utf8_encode($row['id'])."</a>]]></action>";
+		$xml .= "<customer><![CDATA[".utf8_encode($row['customer'])."]]></customer>";
+		$xml .= "<date><![CDATA[".utf8_encode($row['date'])."]]></date>";
+		$xml .= "<invoice_total><![CDATA[".utf8_encode($row['invoice_total'])."]]></invoice_total>";
 		$xml .= "</row>";		
 	}
 	$xml .= "</rows>";
