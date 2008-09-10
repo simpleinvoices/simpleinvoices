@@ -237,6 +237,7 @@ $LANG['payments_filtered_customer'] = "Pagamentos filtrados pelo ID do cliente";
 $LANG['payments_filtered_invoice'] = "A processar pagamento para esta factura";//1
 $LANG['phone'] = "Telefone";//1
 $LANG['phone_short'] = "Tel.";//1
+$LANG['preference'] = "Preferência";//1
 $LANG['preference_id'] = "Número do Opção";//1
 $LANG['preferences'] = "Preferências";//1
 $LANG['prepare_simple_invoices'] = "Prepare Facturação Simples para utilização";//1
