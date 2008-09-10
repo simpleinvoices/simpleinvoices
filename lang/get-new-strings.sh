@@ -10,5 +10,5 @@ fi
 
 /bin/cat en-gb/lang.php | grep LANG | cut -d= -f1 > /tmp/lang.en.tmp
 /bin/cat $1/lang.php | grep LANG | cut -d= -f1 > /tmp/lang.$1.tmp
-/usr/bin/diff /tmp/lang.en.tmp /tmp/lang.$1.tmp
+/usr/bin/diff -C 1 /tmp/lang.en.tmp /tmp/lang.$1.tmp
 rm -f /tmp/lang.en.tmp /tmp/lang.$1.tmp
