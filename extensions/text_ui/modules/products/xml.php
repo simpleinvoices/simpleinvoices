@@ -2,11 +2,11 @@
 
 header("Content-type: text/xml");
 
-$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
+//$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
 $dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC" ;
-$sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "id" ;
-$limit = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
-$page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
+$sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "description" ;
+$rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
+$page = (isset($_GET['page'])) ? $_GET['page'] : "1" ;
 
 //SC: Safety checking values that will be directly subbed in
 if (intval($page) != $page) {
@@ -18,8 +18,14 @@ if (intval($limit) != $limit) {
 	$limit = 25;
 }
 if (!preg_match('/^(asc|desc)$/iD', $dir)) {
-	$dir = 'DESC';
+	$dir = 'ASC';
 }
+
+
+/*SQL Limit - start*/
+$start = (($page-1) * $rp);
+$limit = "LIMIT $start, $rp";
+/*SQL Limit - end*/
 
 $query = $_POST['query'];
 $qtype = $_POST['qtype'];
@@ -29,7 +35,7 @@ if ($query) $where = " AND $qtype LIKE '%$query%' ";
 
 
 /*Check that the sort field is OK*/
-$validFields = array('id', 'biller_id','customer_id');
+$validFields = array('id', 'description','customer_id');
 
 if (in_array($sort, $validFields)) {
 	$sort = $sort;
@@ -49,8 +55,7 @@ if (in_array($sort, $validFields)) {
 				$where
 			ORDER BY 
 				$sort $dir 
-			LIMIT 
-				$start, $limit";
+			$limit";
 				
 			
 
@@ -82,9 +87,9 @@ $xml .= "<total>$count</total>";
 foreach ($customers as $row) {
 
 	$xml .= "<row id='".$row['id']."'>";
-	$xml .= "<cell><![CDATA[<a href='index.php?module=products&view=details&action=view&id=".$row['id']."'>".$row['id']."</a>]]></cell>";
-	$xml .= "<cell><![CDATA[".utf8_encode($row['description'])."]]></cell>";
-	$xml .= "<cell><![CDATA[".utf8_encode($row['unit_price'])."]]></cell>";
+	$xml .= "<action><![CDATA[<a href='index.php?module=products&view=details&action=view&id=".$row['id']."'>".$row['id']."</a>]]></action>";
+	$xml .= "<description><![CDATA[".utf8_encode($row['description'])."]]></description>";
+	$xml .= "<unit_price><![CDATA[".utf8_encode($row['unit_price'])."]]></unit_price>";
 	$xml .= "</row>";		
 }
 

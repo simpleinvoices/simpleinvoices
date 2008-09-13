@@ -28,7 +28,7 @@
 		<td>{$cell->action}</td>
 		<td>{$cell->customer}</td>
 		<td>{$cell->date}</td>
-		<td>{$cell->invoice_total}</td>
+		<td align="right">{$cell->invoice_total}</td>
 	</tr>
 {/foreach}
 

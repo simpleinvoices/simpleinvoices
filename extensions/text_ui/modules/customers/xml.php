@@ -2,13 +2,15 @@
 
 header("Content-type: text/xml");
 
-$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
+//$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
 $dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC" ;
 $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "name" ;
-$limit = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
-$page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
+$rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
+$page = (isset($_GET['page'])) ? $_GET['page'] : "1" ;
+
 
 //SC: Safety checking values that will be directly subbed in
+
 if (intval($page) != $page) {
 	$start = 0;
 }
@@ -20,6 +22,11 @@ if (intval($limit) != $limit) {
 if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 	$dir = 'DESC';
 }
+
+/*SQL Limit - start*/
+$start = (($page-1) * $rp);
+$limit = "LIMIT $start, $rp";
+/*SQL Limit - end*/
 
 $query = $_POST['query'];
 $qtype = $_POST['qtype'];
@@ -64,9 +71,8 @@ if (in_array($sort, $validFields)) {
 				".TB_PREFIX."customers c  
 			$where
 			ORDER BY 
-				$sort $dir 
-			LIMIT 
-				$start, $limit";
+			$sort $dir 
+			$limit";
 
 	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$customers = $sth->fetchAll(PDO::FETCH_ASSOC);
@@ -84,10 +90,10 @@ $count = $resultCount[0];
 	
 	foreach ($customers as $row) {
 		$xml .= "<row id='".$row['CID']."'>";
-		$xml .= "<cell><![CDATA[<a title='".$LANG['quick_view_tooltip']." ".$row['CID']."' href='index.php?module=customers&view=details&action=view&id=".$row['CID']."'>".$row['CID']."</a>]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode($row['name'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode($row['customer_total'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode($row['owing'])."]]></cell>";
+		$xml .= "<action><![CDATA[<a title='".$LANG['quick_view_tooltip']." ".$row['CID']."' href='index.php?module=customers&view=details&action=view&id=".$row['CID']."'>".$row['CID']."</a>]]></action>";
+		$xml .= "<name><![CDATA[".utf8_encode($row['name'])."]]></name>";
+		$xml .= "<total><![CDATA[".utf8_encode(siLocal::number($row['customer_total']))."]]></total>";
+		$xml .= "<owing><![CDATA[".utf8_encode(siLocal::number($row['owing']))."]]></owing>";
 		$xml .= "</row>";		
 	}
 	$xml .= "</rows>";

@@ -3,14 +3,8 @@
 * Script: manage.tpl
 * 	 Products manage template
 *
-* Authors:
-*	 Justin Kelly, Ben Brown
-*
-* Last edited:
-* 	 2007-09-22
-*
 * License:
-*	 GPL v2 or above
+*	 GPL v3 or above
 *
 * Website:
 *	http://www.simpleinvoices.org
@@ -21,7 +15,24 @@
 {else}
  
 <b>{$LANG.manage_products} :: <a href="index.php?module=products&view=add">{$LANG.add_new_product}</a></b>
-<table id="manageGrid" style="display:none"></table>
+<table id="manageGrid" >
+    <tr>
+		<td>Action</td>
+		<td>Name</td>
+		<td>Price</td>
+	</tr>
+{foreach from=$xml->row item=cell}
+    <tr>
+		<td>{$cell->action}</td>
+		<td>{$cell->description}</td>
+		<td align="right">{$cell->unit_price}</td>
+	</tr>
+{/foreach}
 
- {include file='../extensions/text_ui/modules/products/manage.js.php'}
+</table>
+{if $number_of_rows.count > 25}
+	<a href='index.php?module=products&view=manage&page={$page_prev}'> << </a>
+		::
+	<a href='index.php?module=products&view=manage&page={$page_next}'> >> </a>
+{/if}
 {/if}

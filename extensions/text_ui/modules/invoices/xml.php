@@ -125,7 +125,7 @@ $count = $resultCount[0];
 		$xml .= "<action><![CDATA[<a href='index.php?module=invoices&view=quick_view&invoice=".$row['id']."'>".utf8_encode($row['id'])."</a>]]></action>";
 		$xml .= "<customer><![CDATA[".utf8_encode($row['customer'])."]]></customer>";
 		$xml .= "<date><![CDATA[".utf8_encode($row['date'])."]]></date>";
-		$xml .= "<invoice_total><![CDATA[".utf8_encode($row['invoice_total'])."]]></invoice_total>";
+		$xml .= "<invoice_total><![CDATA[".utf8_encode(siLocal::number($row['invoice_total']))."]]></invoice_total>";
 		$xml .= "</row>";		
 	}
 	$xml .= "</rows>";

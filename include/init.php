@@ -14,6 +14,8 @@ Zend_Loader::loadClass('Zend_Config_Ini');
 Zend_Loader::loadClass('Zend_Acl');
 Zend_Loader::loadClass('Zend_Acl_Role');
 Zend_Loader::loadClass('Zend_Acl_Resource');
+Zend_Loader::loadClass('Zend_Locale');
+Zend_Loader::loadClass('Zend_Locale_Format');
 
 Zend_Session::start();
 

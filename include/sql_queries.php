@@ -1815,4 +1815,19 @@ function sql2array($strSql) {
     return $sqlInArray; 
 }
 
+/* Class: wrapper class for zend locale*/
+class siLocal 
+{
+	/*Function: wrapper function for zend_locale_format::toNumber*/
+	function number($number,$precision="",$locale="")
+	{
+		//TODO: get correct locale & precision from config.ini
+		$locale = new Zend_Locale('en');
+		$load_precision = "2"; //TODO load from config.ini
+		$precision == "" ? $precision = $load_precision : $precision = $precision;
+		$formatted_number = Zend_Locale_Format::toNumber($number, array('precision' => $precision, 'locale' => $locale));
+		return $formatted_number;
+	}
+
+}
 ?>
