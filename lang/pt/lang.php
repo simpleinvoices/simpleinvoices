@@ -8,7 +8,7 @@
 *	Murray Buckley, Max, Augusto Campos, Rui Gouveia
 *
 * Last edited:
-*       2007-12-29
+*       2008-09-13
 *
 * License:
 *	GPL v2 or above
@@ -186,7 +186,7 @@ $LANG['logo_file'] = "Ficheiro do logotipo";//1
 $LANG['Logo_File'] = "Ficheiro do Logotipo";//1
 $LANG['logout'] = "Sair";//1
 $LANG['manage'] = "Organizar";//1
-$LANG['manage_billers'] = "Organizar Facturadores";//1
+$LANG['manage_billers'] = "Organizar Empresas";//1
 $LANG['manage_custom_fields'] = "Organizar campos personalizados";//1
 $LANG['manage_customers'] = "Organizar Clientes";//1
 $LANG['manage_data'] ="Organizar a sua informação";//1
