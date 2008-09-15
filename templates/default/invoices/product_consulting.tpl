@@ -91,8 +91,7 @@
 </tr>	
 <tr>
 	<td align=left>
-		<a href="docs.php?t=help&p=invoice_custom_fields" rel="gb_page_center[450, 450]">{$LANG.want_more_fields}<img src="./images/common/help-small.png"></img></a>
-
+		<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="{$LANG.Custom_Fields}"><img src="./images/common/help-small.png"></img> {$LANG.want_more_fields}</a>
 	</td>
 </tr>
 <!--Add more line items while in an itemeised invoice - Get style - has problems- wipes the current values of the existing rows - not good
