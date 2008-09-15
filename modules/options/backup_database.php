@@ -38,7 +38,11 @@ $display_block = <<<EOD
 <tr><td><br /><br />To make a backup of your Simple Invoices database click the below link</td></tr>
 <tr><td align=center><br><a href='index.php?module=options&amp;view=backup_database&amp;op=backup_db'>BACKUP DATABASE NOW</a><br><br><br></td></tr>
 <tr><td>Note: this will backup your database to a file into your database_backups directory</td></tr>
-<tr><td><a href="docs.php?t=help&amp;p=backup_database" rel="gb_page_center[450, 450]"><font color="red"><img src="./images/common/important.png"></img>Extra information</font></td></tr></table>
+<tr>
+<td>
+<a class="cluetip" href="#"	rel="docs.php?t=help&p=backup_database"><img src="./images/common/important.png"></img> <font color="red"> Extra information</font></a>
+</td>
+</tr></table>
 
 EOD;
 }
