@@ -1,4 +1,11 @@
 ######
+Sept 08
+######
+- Zend Local added
+- the old $date_format variable has been removed 
+-- now using the Zend_Date to auto print the date in the locale date format
+-- note: default dates printed in the locales zend medium format
+######
 Aug 08
 ######
 - Turkish tranlsation added - thanks Don Camillo

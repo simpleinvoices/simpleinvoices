@@ -6,6 +6,7 @@
 set_include_path(get_include_path() . PATH_SEPARATOR . "./library/");
 require_once './library/Zend/Loader.php';
 Zend_Loader::loadClass('Zend_Db_Table');
+Zend_Loader::loadClass('Zend_Date');
 Zend_Loader::loadClass('Zend_Debug');
 Zend_Loader::loadClass('Zend_Auth');
 Zend_Loader::loadClass('Zend_Session');

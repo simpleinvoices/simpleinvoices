@@ -377,7 +377,7 @@ function getPayment($id) {
 
 	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$payment = $sth->fetch();
-	$payment['date'] = date( $config->date->format, strtotime( $payment['ac_date'] ) );
+	$payment['date'] = siLocal::date($payment['ac_date']);
 	return $payment;
 }
 
@@ -736,7 +736,7 @@ function getInvoice($id) {
 	//exit();
 	
 	$invoice['calc_date'] = date('Y-m-d', strtotime( $invoice['date'] ) );
-	$invoice['date'] = date( $config->date->format, strtotime( $invoice['date'] ) );
+	$invoice['date'] = siLocal::date( $invoice['date'] );
 	$invoice['total'] = getInvoiceTotal($invoice['id']);
 	$invoice['paid'] = calc_invoice_paid($invoice['id']);
 	$invoice['owing'] = $invoice['total'] - $invoice['paid'];
@@ -1066,7 +1066,7 @@ function getInvoices(&$sth) {
 	if($invoice = $sth->fetch()) {
 
 		$invoice['calc_date'] = date( 'Y-m-d', strtotime( $invoice['date'] ) );
-		$invoice['date'] = date( $config->date->format, strtotime( $invoice['date'] ) );
+		$invoice['date'] = siLocal::date($invoice['date']);
 			
 		#invoice total total - start
 		$invoice['total'] = getInvoiceTotal($invoice['id']);
@@ -1103,7 +1103,7 @@ function getCustomerInvoices($id) {
 	$invoices = null;
 	while ($invoice = $sth->fetch()) {
 		$invoice['calc_date'] = date( 'Y-m-d', strtotime( $invoice['date'] ) );
-		$invoice['date'] = date( $config->date->format, strtotime( $invoice['date'] ) );
+		$invoice['date'] = siLocal::date( $invoice['date'] );
 		$invoices[] = $invoice;
 	}
 	return $invoices;
@@ -1821,12 +1821,46 @@ class siLocal
 	/*Function: wrapper function for zend_locale_format::toNumber*/
 	function number($number,$precision="",$locale="")
 	{
-		//TODO: get correct locale & precision from config.ini
-		$locale = new Zend_Locale('en');
-		$load_precision = "2"; //TODO load from config.ini
+		global $config;
+		
+		$locale == "" ? $locale = new Zend_Locale($config->local->locale) : $locale = $locale;
+		$load_precision = $config->local->precision; 
+		
 		$precision == "" ? $precision = $load_precision : $precision = $precision;
 		$formatted_number = Zend_Locale_Format::toNumber($number, array('precision' => $precision, 'locale' => $locale));
 		return $formatted_number;
+	}
+	
+	/*Function: wrapper function for zend_date*/
+	function date($date,$length="",$locale="")
+	{
+		global $config;
+		
+		$locale == "" ? $locale = new Zend_Locale($config->local->locale) : $locale = $locale;
+		$length == "" ? $length = "medium" : $lenght = $length;
+		/*
+		 * Length can be any of the Zend_Date lenghts - FULL, LONG, MEDIUM, SHORT
+		 */
+
+		$formatted_date = new Zend_Date($date,'yyyy-MM-dd');
+		
+		switch ($length) {
+			case "full":
+			    return $formatted_date->get(Zend_Date::DATE_FULL,$locale);
+			    break;
+			case "long":
+			    return $formatted_date->get(Zend_Date::DATE_LONG,$locale);
+			    break;
+			case "medium":
+			    return $formatted_date->get(Zend_Date::DATE_MEDIUM,$locale);
+			    break;
+			case "short":
+			    return $formatted_date->get(Zend_Date::DATE_SHORT,$locale);
+			    break;
+			default:
+				return $formatted_date->get(Zend_Date::DATE_SHORT,$locale);
+		}
+		
 	}
 
 }

@@ -27,7 +27,7 @@ if ($query) $where = " WHERE $qtype LIKE '%$query%' ";
 
 
 /*Check that the sort field is OK*/
-$validFields = array('ap.id', 'description', 'unit_price','enabled');
+$validFields = array('ap.id', 'ac_inv_id', 'description', 'unit_price','enabled');
 
 if (in_array($sort, $validFields)) {
 	$sort = $sort;
@@ -122,7 +122,7 @@ $count = $resultCount[0];
 		$xml .= "<cell><![CDATA[".utf8_encode($row['ac_amount'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".utf8_encode($notes)."]]></cell>";
 		$xml .= "<cell><![CDATA[".utf8_encode($row['description'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode($row['date'])."]]></cell>";
+		$xml .= "<cell><![CDATA[".utf8_encode(siLocal::date($row['date']))."]]></cell>";
 	
 		$xml .= "</row>";		
 	}
