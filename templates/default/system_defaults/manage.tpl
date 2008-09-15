@@ -26,10 +26,18 @@
 		<td class='details_screen'><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=def_payment_type'>{$LANG.edit}</a></td><td class='details_screen'>{$LANG.default_payment_type}</td><td>{$defaultPaymentType.pt_description|escape:html}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=delete'>{$LANG.edit}</a></td><td class='details_screen'>{$LANG.delete}<a href="docs.php?t=help&amp;p=delete" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png" alt="({$LANG.help})"></img></a></td><td>{$defaultDelete|escape:html}</td>
+		<td class='details_screen'>
+		<a href='index.php?module=system_defaults&amp;view=edit&amp;submit=delete'>{$LANG.edit}</a></td><td class='details_screen'>{$LANG.delete}
+		<a class="cluetip" href="#"	rel="docs.php?t=help&p=delete" title="{$LANG.help}"><img src="./images/common/help-small.png"></img></a>
+		</td>
+		<td>
+		{$defaultDelete|escape:html}
+		</td>
 	</tr>
 	<tr>
-		<td class='details_screen'><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=logging'>{$LANG.edit}</a></td><td class='details_screen'>{$LANG.logging} <a href="docs.php?t=help&amp;p=logging" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png" alt="({$LANG.help})"></img></a></td>
+		<td class='details_screen'><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=logging'>{$LANG.edit}</a></td><td class='details_screen'>{$LANG.logging} 
+		<a class="cluetip" href="#"	rel="docs.php?t=help&p=logging" title="{$LANG.help}"><img src="./images/common/help-small.png"></img></a>
+		</td>
 		<td>{$defaultLogging|escape:html}</td>
 	</tr>
 	<tr>

@@ -24,4 +24,4 @@
 
 {/if}
 <br />
-<div style="text-align:center;"><a class="cluetip" href="#"	rel="docs.php?t=help&p=inv_pref_what_the" title="{$LANG.Custom_Fields}"><img src="./images/common/help-small.png"></img> Whats all this "Invoice Preference" stuff about? </a></div>
+<div style="text-align:center;"><a class="cluetip" href="#"	rel="docs.php?t=help&p=inv_pref_what_the" title="{$LANG.help}"><img src="./images/common/help-small.png"></img> Whats all this "Invoice Preference" stuff about? </a></div>

@@ -14,7 +14,5 @@
 *	http://www.simpleinvoices.org
 */
 *}
-
-hkjhkj
 {$display_block}
 
