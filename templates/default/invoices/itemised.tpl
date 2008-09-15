@@ -97,7 +97,7 @@
 </tr>	
 <tr>
 	<td class="details_screen">{$customFieldLabel.biller_cf4} 
-		<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="{$LANG.Custom_Fields}"><img src="./images/common/help-small.png"></img> {$LANG.want_more_fields}</a>
+		<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="{$LANG.help}"><img src="./images/common/help-small.png"></img> {$LANG.want_more_fields}</a>
 	</td>
 </tr>
 <!--Add more line items while in an itemeised invoice - Get style - has problems- wipes the current values of the existing rows - not good
