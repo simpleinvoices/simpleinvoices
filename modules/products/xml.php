@@ -85,7 +85,7 @@ foreach ($customers as $row) {
 	$xml .= "<cell><![CDATA[<a title='".$LANG['quick_view_tooltip']." ".$row['id']."' href='index.php?module=products&view=details&action=view&id=".$row['id']."'>View</a> :: <a href='index.php?module=products&view=details&action=edit&id=".$row['id']."'>Edit</a>]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";		
 	$xml .= "<cell><![CDATA[".utf8_encode($row['description'])."]]></cell>";
-	$xml .= "<cell><![CDATA[".utf8_encode($row['unit_price'])."]]></cell>";
+	$xml .= "<cell><![CDATA[".utf8_encode(siLocal::number($row['unit_price']))."]]></cell>";
 	$xml .= "<cell><![CDATA[".utf8_encode($row['enabled'])."]]></cell>";				
 	$xml .= "</row>";		
 }

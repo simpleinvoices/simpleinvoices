@@ -89,8 +89,8 @@ $count = $resultCount[0];
 		]]></cell>";		
 		$xml .= "<cell><![CDATA[".$row['CID']."]]></cell>";		
 		$xml .= "<cell><![CDATA[".utf8_encode($row['name'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode($row['customer_total'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode($row['owing'])."]]></cell>";
+		$xml .= "<cell><![CDATA[".utf8_encode(siLocal::number($row['customer_total']))."]]></cell>";
+		$xml .= "<cell><![CDATA[".utf8_encode(siLocal::number($row['owing']))."]]></cell>";
 		$xml .= "<cell><![CDATA[".utf8_encode($row['enabled'])."]]></cell>";				
 		$xml .= "</row>";		
 	}
