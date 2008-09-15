@@ -23,19 +23,27 @@
 		<td>{$product.unit_price|number_format:2}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf1} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel.product_cf1} 
+		<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="{$LANG.Custom_Fields}"><img src="./images/common/help-small.png"></img></a>
+		</td>
 		<td>{$product.custom_field1}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf2} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel.product_cf2} 
+		<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="{$LANG.Custom_Fields}"><img src="./images/common/help-small.png"></img></a>
+		</td>
 		<td>{$product.custom_field2}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf3} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel.product_cf3} 
+		<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="{$LANG.Custom_Fields}"><img src="./images/common/help-small.png"></img></a>
+		</td>
 		<td>{$product.custom_field3}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf4} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel.product_cf4} 
+		<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="{$LANG.Custom_Fields}"><img src="./images/common/help-small.png"></img></a>
+		</td>
 		<td>{$product.custom_field4}</td>
 	</tr>
 		{showCustomFields categorieId="3" itemId=$smarty.get.id }
@@ -71,19 +79,27 @@
 		<td><input type="text" name="unit_price" size="25" value="{$product.unit_price}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf1} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel.product_cf1} 
+		<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="{$LANG.Custom_Fields}"><img src="./images/common/help-small.png"></img></a>
+		</td>
 		<td><input type="text" name="custom_field1" size="50" value="{$product.custom_field1}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf2} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel.product_cf2} 
+		<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="{$LANG.Custom_Fields}"><img src="./images/common/help-small.png"></img></a>
+		</td>
 		<td><input type="text" name="custom_field2" size="50" value="{$product.custom_field2}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf3} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel.product_cf3} 
+		<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="{$LANG.Custom_Fields}"><img src="./images/common/help-small.png"></img></a>
+		</td>
 		<td><input type="text" name="custom_field3" size="50" value="{$product.custom_field3}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf4} <a href="docs.php?t=help&p=custom_fields" rel="gb_page_center[450, 450]"><img src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">{$customFieldLabel.product_cf4} 
+		<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="{$LANG.Custom_Fields}"><img src="./images/common/help-small.png"></img></a>
+		</td>
 		<td><input type="text" name="custom_field4" size="50" value="{$product.custom_field4}" /></td>
 	</tr>
 		{showCustomFields categorieId="3" itemId=$smarty.get.id }
