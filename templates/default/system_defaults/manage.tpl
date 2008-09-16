@@ -28,7 +28,7 @@
 	<tr>
 		<td class='details_screen'>
 		<a href='index.php?module=system_defaults&amp;view=edit&amp;submit=delete'>{$LANG.edit}</a></td><td class='details_screen'>{$LANG.delete}
-		<a class="cluetip" href="#"	rel="docs.php?t=help&p=delete" title="{$LANG.help}"><img src="./images/common/help-small.png"></img></a>
+		<a class="cluetip" href="#"	rel="docs.php?t=help&p=delete" title="{$LANG.delete}"><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>
 		{$defaultDelete|escape:html}
@@ -36,7 +36,7 @@
 	</tr>
 	<tr>
 		<td class='details_screen'><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=logging'>{$LANG.edit}</a></td><td class='details_screen'>{$LANG.logging} 
-		<a class="cluetip" href="#"	rel="docs.php?t=help&p=logging" title="{$LANG.help}"><img src="./images/common/help-small.png"></img></a>
+		<a class="cluetip" href="#"	rel="docs.php?t=help&p=logging" title="{$LANG.logging}"><img src="./images/common/help-small.png"></img></a>
 		</td>
 		<td>{$defaultLogging|escape:html}</td>
 	</tr>
