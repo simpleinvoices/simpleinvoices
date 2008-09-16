@@ -45,10 +45,10 @@
 			<table>
 				<tr>
 					<td>
-						<a href="docs.php?p=ReadMe#faqs-what"><img src="images/common/question.png"></img>{$LANG.faqs_what}</a>
+						<a class="cluetip" href="#"	rel="docs.php?t=help&p=simple_invoices" title="{$LANG.using_simple_invoices}"><img src="./images/common/help-small.png"></img> {$LANG.faqs_need}</a>
 					</td>		
 					<td>
-						<a href="docs.php?p=ReadMe#faqs-need"><img src="images/common/question.png"></img>{$LANG.faqs_need}</a>
+						<a class="cluetip" href="#"	rel="docs.php?t=help&p=invoice_start" title="{$LANG.invoice_start}"><img src="./images/common/help-small.png"></img> {$LANG.faqs_need}</a>
 					</td>		
 				</tr>
 				<tr>
