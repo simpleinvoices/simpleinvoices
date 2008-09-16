@@ -53,10 +53,10 @@
 				</tr>
 				<tr>
 					<td>
-						<a href="docs.php?p=ReadMe#faqs-how"><img src="images/common/question.png"></img>{$LANG.faqs_how}</a>
+						<a class="cluetip" href="#"	rel="docs.php?t=help&p=invoice_create" title="{$LANG.invoice_create}"><img src="./images/common/help-small.png"></img> {$LANG.faqs_how}</a>
 					</td>		
 					<td>
-						<a href="docs.php?p=ReadMe#faqs-types"><img src="images/common/question.png"></img>{$LANG.faqs_type}</a>
+						<a class="cluetip" href="#"	rel="docs.php?t=help&p=invoice_types" title="{$LANG.invoice_type}"><img src="./images/common/help-small.png"></img> {$LANG.faqs_type}</a>
 					</td>		
 				</tr>
 			</table>
@@ -80,7 +80,7 @@
 				</tr>
 				<tr>
 					<td colspan=3 align=center class="align_center">
-						<a href="docs.php?p=ReadMe#faqs-types"><img src="images/common/question.png"></img>{$LANG.faqs_type}</a>
+						<a class="cluetip" href="#"	rel="docs.php?t=help&p=invoice_types" title="{$LANG.invoice_type}"><img src="./images/common/help-small.png"></img> {$LANG.faqs_type}</a>
 					</td>		
 				</tr>
 			</table>
