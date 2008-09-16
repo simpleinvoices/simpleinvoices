@@ -39,13 +39,13 @@
 	
 <tr>
 	<td class="details_screen">{$LANG.invoice_id}
-	<a class="cluetip" href="#"	rel="docs.php?t=help&p=process_payment_inv_id" title="{$LANG.help}"><img src="./images/common/help-small.png"></img></a>
+	<a class="cluetip" href="#"	rel="docs.php?t=help&p=process_payment_inv_id" title="{$LANG.process_payment_inv_id}"><img src="./images/common/help-small.png"></img></a>
 	</td>
 	<td><input type="text" id="ac_me" name="ac_inv_id" /></td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.details}
-	<a class="cluetip" href="#"	rel="docs.php?t=help&p=process_payment_details" title="{$LANG.help}"><img src="./images/common/help-small.png"></img></a>
+	<a class="cluetip" href="#"	rel="docs.php?t=help&p=process_payment_details" title="{$LANG.process_payment_details}"><img src="./images/common/help-small.png"></img></a>
 	</td>
 	<td id="js_total"><i>{$LANG.select_invoice}</i> </td>
 </tr>

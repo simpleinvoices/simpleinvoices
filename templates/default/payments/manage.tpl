@@ -35,5 +35,5 @@
 {/if}
 <br />
 <div style="text-align:center;">
-<a class="cluetip" href="#"	rel="docs.php?t=help&p=wheres_the_edit_button" title="{$LANG.help}"><img src="./images/common/help-small.png"></img> Wheres the Edit button?</a>
+<a class="cluetip" href="#"	rel="docs.php?t=help&p=wheres_the_edit_button" title="{$LANG.wheres_the_edit_button}"><img src="./images/common/help-small.png"></img> Wheres the Edit button?</a>
 </div>
