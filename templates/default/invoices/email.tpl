@@ -23,24 +23,21 @@
 <hr />
 <table align=center>
 	<tr>
-		<td class="details_screen">From<a
-		href="docs.php?p=email_from&t=help"
-		rel="gb_page_center[450, 450]"><img
-		src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">From
+		<a class="cluetip" href="#"	rel="docs.php?t=help&p=email_from" title="{$LANG.email_from}"><img src="./images/common/help-small.png"></img></a>
+		</td>
 		<td><input type=text name="email_from" size=50 value="{$biller.email}" ></td>
 	</tr>
 	<tr>
-		<td class="details_screen">To<a
-		href="docs.php?t=help&p=email_to"
-		rel="gb_page_center[450, 450]"><img
-		src="./images/common/help-small.png"></img></a></td>
+		<td class="details_screen">To
+		<a class="cluetip" href="#"	rel="docs.php?t=help&p=email_to" title="{$LANG.email_to}"><img src="./images/common/help-small.png"></img></a>
+		</td>
 		<td><input type=text name="email_to" size=50 value="{$customer.email}" ></td>
 	</tr>
 	<tr>
-	<td class="details_screen">BCC<a
-		href="docs.php?t=help&p=email_bcc"
-		rel="gb_page_center[450, 450]"><img
-		src="./images/common/help-small.png"></img></a></td>
+	<td class="details_screen">BCC
+		<a class="cluetip" href="#"	rel="docs.php?t=help&p=email_bcc" title="{$LANG.email_bcc}"><img src="./images/common/help-small.png"></img></a>
+		</td>
 	<td><input type=text name="email_bcc" size=50 value="{$biller.email}"></td>
 	</tr>
 	<tr>
