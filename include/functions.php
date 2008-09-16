@@ -179,7 +179,7 @@ function calc_customer_total($customer_id) {
         $sth = dbQuery($sql, ':customer', $customer_id) or die(end($dbh->errorInfo()));
 	$invoice = $sth->fetch();
 
-	return $invoice['total'];
+	return number_format($invoice['total'],"#########.##");
 }
 
 function calc_customer_paid($customer_id) {
