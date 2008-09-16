@@ -166,15 +166,15 @@
 			<table>
 				<tr>
 					<td>
-						<a href="docs.php?p=ReadMe#installation"><img src="images/common/help.png"></img>{$LANG.installation}</a>
+						<a href="docs.php?p=ReadMe#installation" target="_blank"><img src="images/common/help.png"></img>{$LANG.installation} </a>
 					</td>	
 					<td>
-						<a href="docs.php?p=ReadMe#upgrading"><img src="images/common/help.png"></img>{$LANG.upgrading_simple_invoices}</a>
+						<a href="docs.php?p=ReadMe#upgrading" target="_blank"><img src="images/common/help.png"></img>{$LANG.upgrading_simple_invoices} </a>
 					</td>	
 				</tr>
 				<tr>
 					<td class="align_center" colspan="2">
-						<a href="docs.php?p=ReadMe#prepare"><img src="images/common/help.png"></img>{$LANG.prepare_simple_invoices}</a>
+						<a href="docs.php?p=ReadMe#prepare" target="_blank"><img src="images/common/help.png"></img>{$LANG.prepare_simple_invoices}</a>
 					</td>	
 				</tr>
 			</table>
