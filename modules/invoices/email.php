@@ -3,14 +3,8 @@
 * Script: email.php
 * 	Email invoice page
 *
-* Authors:
-*	 Justin Kelly, Nicolas Ruflin, Ap.Muthu
-*
-* Last edited:
-* 	 2007-11-26
-*
 * License:
-*	 GPL v2 or above
+*	 GPL v3 or above
 *
 * Website:
 * 	http://www.simpleinvoices.org
@@ -32,15 +26,19 @@ $sth = dbQuery($sql, ':type', $invoice['type_id']);
 $invoiceType = $sth->fetch();
 
 	$pathparts = pathinfo($_SERVER["SCRIPT_NAME"]);
-	$url_for_pdf = $_SERVER["SERVER_NAME"].$pathparts['dirname']."/pdfmaker.php?id=$invoice[id]";
+	///echo $url_for_pdf = "http://".$_SERVER["SERVER_NAME"].$pathparts['dirname']."/pdfmaker.php?id=$invoice[id]";
+	 $url = getURL();
+	$url_for_pdf = $url."./pdfmaker.php?id=$invoice[id]";
       
 if ($_GET['stage'] == 2 ) {
+/*
 	if (extension_loaded('curl')) {
-		$ch = curl_init();
+		$ch = curl_init($url_for_pdf);
 		// set URL and other appropriate options
-		curl_setopt($ch, CURLOPT_URL, $url_for_pdf);
+		//curl_setopt($ch, CURLOPT_URL, $url_for_pdf);
 		curl_setopt($ch, CURLOPT_HEADER, 0);
-		curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
 		
 		// grab URL and pass it to the browser
 		$response = curl_exec($ch);
@@ -55,6 +53,45 @@ if ($_GET['stage'] == 2 ) {
 	file_put_contents("./cache/$preference[pref_inv_wording]$invoice[id].pdf", $response);
 	//use curl and baring that use fopen
 	//
+*/
+	require_once('./library/pdf/config.inc.php');
+	require_once('./library/pdf/pipeline.class.php');
+	require_once('./library/pdf/fetcher.url.class.php');
+	parse_config_file('./library/pdf/html2ps.config');
+
+	$g_config = array(
+	                 'cssmedia'     => 'screen',
+        	          'renderimages' => true,
+                	  'renderforms'  => false,
+	                  'renderlinks'  => true,
+	                  'mode'         => 'html',
+	                  'debugbox'     => false,
+	                  'draw_page_border' => false
+	                  );
+
+	$media = Media::predefined($config->export->pdf->papersize);
+	$media->set_landscape(false);
+	$media->set_margins(array('left'   => $config->export->pdf->leftmargin,
+        	                  'right'  => $config->export->pdf->rightmargin,
+                	          'top'    => $config->export->pdf->topmargin,
+                	          'bottom' => $config->export->pdf->bottommargin));
+	$media->set_pixels($config->export->pdf->screensize);
+
+	$g_px_scale = mm2pt($media->width() - $media->margins['left'] - $media->margins['right']) / $media->pixels;
+	$g_pt_scale = $g_px_scale * 1.43; 
+
+	$pipeline = new Pipeline;
+	$pipeline->fetchers[]     = new FetcherURL;
+	$pipeline->data_filters[] = new DataFilterHTML2XHTML;
+	$pipeline->parser         = new ParserXHTML;
+	$pipeline->layout_engine  = new LayoutEngineDefault;
+	$pipeline->output_driver  = new OutputDriverFPDF($media);
+	$pipeline->destination    = new DestinationFile($preference[pref_inv_wording].$invoice[id]);
+
+
+	$url_pdf = urlPDF($invoice['id']);
+	$pipeline->process($url_pdf, $media); 
+
 	echo $block_stage2;
 
 	require("./include/mail/class.phpmailer.php");
@@ -94,13 +131,13 @@ if ($_GET['stage'] == 2 ) {
 	   echo "Mailer Error: " . $mail->ErrorInfo;
 	   exit;
 	}
-	unlink("./cache/$preference[pref_inv_wording]$invoice[id].pdf");
+	//unlink("./cache/$preference[pref_inv_wording]$invoice[id].pdf");
 	$message  = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=invoices&view=manage>";
 	$message .= "<br>$preference[pref_inv_wording] $invoice[id] has been sent as a PDF";
 
 	echo $block_stage3;
 
-	setInvoiceStatus($invoice["id"], 1);
+	//setInvoiceStatus($invoice["id"], 1);
 }
 
 //stage 3 = assemble email and send
