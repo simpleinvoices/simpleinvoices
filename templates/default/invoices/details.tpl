@@ -62,6 +62,8 @@
 		
 		</td>
 	</tr>
+	{*
+	TODO: implement status 
 	<tr>
 		<td class="details_screen">Invoice Status</td>
 		<td>
@@ -72,6 +74,7 @@
 			</select>
 		</td>
 	</tr>
+	*}
 
 
 {if $invoice.type_id == 1 }
@@ -109,7 +112,9 @@
 		<td colspan=6>
 		<table>
 		<tr>
-        	        <td class='details_screen'>{$LANG.quantity_short}</td><td class='details_screen'>{$LANG.description}</td>
+        	        <td class='details_screen'>{$LANG.quantity_short}</td>
+        	        <td class='details_screen'>{$LANG.description}</td>
+        	        <td class='details_screen'>{$LANG.unit_price}</td>
 	        </tr>
 	{/if}
 
@@ -118,7 +123,9 @@
 		<td colspan=6>
 		<table>
                 <tr>
-                        <td class='details_screen'>{$LANG.quantity_short}</td><td class='details_screen'>{$LANG.item}</td>
+                        <td class='details_screen'>{$LANG.quantity_short}</td>
+                        <td class='details_screen'>{$LANG.item}</td>
+                        <td class='details_screen'>{$LANG.unit_price}</td>
                 </tr>
         {/if}
 	

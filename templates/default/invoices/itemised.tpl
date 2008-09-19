@@ -49,9 +49,8 @@
 			{/if}
 				                				                
                 </td>
-                				<td>
+                <td>
 					<input id="unit_price{$smarty.section.line.index}" name="unit_price{$smarty.section.line.index}" size="7" value=""></input>
-
 				</td>	
                 </tr>
 
