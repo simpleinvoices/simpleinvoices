@@ -13,25 +13,34 @@
 
 <form name="frmpost" action="index.php?module=invoices&view=save" method=POST onsubmit="return frmpost_Validator(this)">
 
-<h3>{$LANG.inv} {$LANG.inv_itemised}</h3>
+<h3>{$LANG.inv} {$LANG.inv_itemised}
+<div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
+        	<img src="images/common/gmail-loader.gif" alt="Loading ..."/> Loading ...
+</div>
+</h3>
 
 {include file="$path/header.tpl" }
 
 <tr>
-<td class="details_screen">{$LANG.quantity}</td><td class="details_screen">{$LANG.description}</td>
+	<td class="details_screen">{$LANG.quantity}</td>
+	<td class="details_screen">{$LANG.description}</td>
+	<td class="details_screen">{$LANG.unit_price}</td>
 </tr>
 
 
         {section name=line start=0 loop=$dynamic_line_items step=1}
 
 			<tr>
-				<td><input type=text name="quantity{$smarty.section.line.index}" size="5"></td>
+				<td><input type=text  id="quantity{$smarty.section.line.index}" name="quantity{$smarty.section.line.index}" size="5"></td>
 				<td>
 				                
 			{if $products == null }
 				<p><em>{$LANG.no_products}</em></p>
 			{else}
-				<select name="products{$smarty.section.line.index}">
+				<select 
+					name="products{$smarty.section.line.index}"
+					onchange="invoice_product_change_price($(this).val(), {$smarty.section.line.index}, jQuery('#quantity{$smarty.section.line.index}').val() );"
+				>
 					<option value=""></option>
 				{foreach from=$products item=product}
 					<option {if $product.id == $defaults.product} selected {/if} value="{$product.id}">{$product.description}</option>
@@ -39,7 +48,12 @@
 				</select>
 			{/if}
 				                				                
-                </td></tr>
+                </td>
+                				<td>
+					<input id="unit_price{$smarty.section.line.index}" name="unit_price{$smarty.section.line.index}" size="7" value=""></input>
+
+				</td>	
+                </tr>
 
         {/section}
 	{$show_custom_field.1}
@@ -51,11 +65,11 @@
 
 
 <tr>
-        <td colspan=2 class="details_screen">{$LANG.notes}</td>
+        <td colspan=3 class="details_screen">{$LANG.notes}</td>
 </tr>
 
 <tr>
-        <td colspan=2><textarea input type=text name="note" rows=5 cols=70 WRAP=nowrap></textarea></td>
+        <td colspan=3><textarea input type=text name="note" rows=5 cols=70 WRAP=nowrap></textarea></td>
 </tr>
 
 <tr><td class="details_screen">{$LANG.tax}</td>

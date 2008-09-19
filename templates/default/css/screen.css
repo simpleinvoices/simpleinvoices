@@ -482,3 +482,14 @@ a:link,a:visited {
 {
 	background:#e5e5e5; 
 }
+
+.gmailLoader
+{
+   background-color:#CF4342;
+   color:#fff;
+   top:0px;
+   right:0px;
+   position:fixed;
+   padding: 3px
+
+}
