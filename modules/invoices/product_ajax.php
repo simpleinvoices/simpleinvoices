@@ -14,7 +14,7 @@ if($_GET['id'])
 	//	print_r($row);
 	//		$output .= '<input id="state" class="field select two-third addr" value="'.$row['unit_price'].'"/>';
 			/*Format with decimal places with precision as defined in config.ini*/
-			$output .= number_format($row['unit_price'], $config->local->precision, '.', '');
+			$output .= siLocal::number_formatted($row['unit_price']);
 	//		$output .= $_POST['id'];
 		
 	}

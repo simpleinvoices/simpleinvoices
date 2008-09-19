@@ -1422,30 +1422,30 @@ function updateInvoice($invoice_id) {
 		);
 }
 
-function insertInvoiceItem($invoice_id,$quantity,$product_id,$tax_id,$description="") {
+function insertInvoiceItem($invoice_id,$quantity,$product_id,$tax_id,$description="", $unit_price="") {
 	
 	$tax = getTaxRate($tax_id);
-	$product = getProduct($product_id);
+	//$product = getProduct($product_id);
 	//print_r($product);
 	$actual_tax = $tax['tax_percentage']  / 100 ;
-	$total_invoice_item_tax = $product['unit_price'] * $actual_tax;
+	$total_invoice_item_tax = $unit_price * $actual_tax;
 	$tax_amount = $total_invoice_item_tax * $quantity;
-	$total_invoice_item = $total_invoice_item_tax + $product['unit_price'] ;	
+	$total_invoice_item = $total_invoice_item_tax + $unit_price;	
 	$total = $total_invoice_item * $quantity;
-	$gross_total = $product['unit_price']  * $quantity;
+	$gross_total = $unit_price  * $quantity;
 	
 	if ($db_server == 'mysql' && !_invoice_items_check_fk(
 		$invoice_id, $product_id, $tax['tax_id'])) {
 		return null;
 	}
-	$sql = "INSERT INTO ".TB_PREFIX."invoice_items (invoice_id, quantity, product_id, unit_price, tax_id, tax, tax_amount, gross_total, description, total) VALUES (:invoice_id, :quantity, :product_id, :product_price, :tax_id, :tax_percentage, :tax_amount, :gross_total, :description, :total)";
+	$sql = "INSERT INTO ".TB_PREFIX."invoice_items (invoice_id, quantity, product_id, unit_price, tax_id, tax, tax_amount, gross_total, description, total) VALUES (:invoice_id, :quantity, :product_id, :unit_price, :tax_id, :tax_percentage, :tax_amount, :gross_total, :description, :total)";
 
 	//echo $sql;
 	return dbQuery($sql,
 		':invoice_id', $invoice_id,
 		':quantity', $quantity,
 		':product_id', $product_id,
-		':product_price', $product[unit_price],
+		':unit_price', $unit_price,
 		':tax_id', $tax[tax_id],
 		':tax_percentage', $tax[tax_percentage],
 		':tax_amount', $tax_amount,
@@ -1456,16 +1456,16 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$tax_id,$descriptio
 
 }
 
-function updateInvoiceItem($id,$quantity,$product_id,$tax_id,$description) {
+function updateInvoiceItem($id,$quantity,$product_id,$tax_id,$description,$unit_price) {
 
-	$product = getProduct($product_id);
+	//$product = getProduct($product_id);
 	$tax = getTaxRate($tax_id);
 	
-	$total_invoice_item_tax = $product['unit_price'] * $tax['tax_percentage'] / 100;	//:100?
+	$total_invoice_item_tax = $unit_price * $tax['tax_percentage'] / 100;	//:100?
 	$tax_amount = $total_invoice_item_tax * $quantity;
-	$total_invoice_item = $total_invoice_item_tax + $product['unit_price'];
+	$total_invoice_item = $total_invoice_item_tax + $unit_price;
 	$total = $total_invoice_item * $quantity;
-	$gross_total = $product['unit_price'] * $quantity;
+	$gross_total = $unit_price * $quantity;
 	
 	if ($db_server == 'mysql' && !_invoice_items_check_fk(
 		null, $product_id, $tax_id, 'update')) {
@@ -1489,7 +1489,7 @@ function updateInvoiceItem($id,$quantity,$product_id,$tax_id,$description) {
 	return dbQuery($sql,
 		':quantity', $quantity,
 		':product_id', $product_id,
-		':unit_price', $product[unit_price],
+		':unit_price', $unit_price,
 		':tax_id', $tax_id,
 		':tax', $tax[tax_percentage],
 		':tax_amount', $tax_amount,
@@ -1862,6 +1862,16 @@ class siLocal
 		}
 		
 	}
-
+	/*
+	 * Function: number_formatted
+	 * Description: wrapper for php number_format
+	 * Purpose: to format numbers for data entry fields - ie invoice edit/ajax where data is in 6 decimial places but only neex x places in edit view
+	 */
+	function number_formatted($number)
+	{
+		global $config;
+		$number_formatted = number_format($number, $config->local->precision, '.', '');
+		return $number_formatted;
+	}
 }
 ?>

@@ -3,21 +3,17 @@
 * Script: details.tpl
 * 	 Invoice details template
 *
-* Authors:
-*	 Justin Kelly, Nicolas Ruflin
-*
-* Last edited:
-* 	 2007-07-18
-*
 * License:
-*	 GPL v2 or above
+*	 GPL v3 or above
 *
 * Website:
 *	http://www.simpleinvoices.org
 */
 *}
 <b>You are editing {$preference.pref_inv_wording} {$invoice.id}</b>
-
+<div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
+        	<img src="images/common/gmail-loader.gif" alt="Loading ..."/> Loading ...
+</div>
  <hr></hr>
 
 <form name="frmpost" action="index.php?module=invoices&view=save" method="post">
@@ -126,28 +122,33 @@
                 </tr>
         {/if}
 	
-{foreach key=line from=$invoiceItems item=invoiceItem}
+{foreach key=line from=$invoiceItems item=invoiceItem name=line_item_number}
 		
 		
-	        <tr>
-			<td><input type="text" name='quantity{$line}' value='{$invoiceItem.quantity}' size="10">
-			<input type="hidden" name='id{$line}' value='{$invoiceItem.id}' size="10"> </td>
-			
-	                <td>
-	                
-	                {if $products == null }
-	<p><em>{$LANG.no_products}</em></p>
-{else}
-	<select name="products{$line}">
-	{foreach from=$products item=product}
-		<option {if $product.id == $invoiceItem.product_id} selected {/if} value="{$product.id}">{$product.description}</option>
-	{/foreach}
-	</select>
-{/if}
-
-	                
-	                
-	                </td>
+	        <tr class="row{$line}">
+				<td>
+					<a title="Delete this line item"onclick="delete_line_item({$line}); " class="show-customer" href="#" style="display: inline;"><img src="./images/common/delete_item.png" /></a>
+					<input type="hidden" id='delete{$line}' name='delete{$line}' size="3">
+					<input type="text" name='quantity{$line}' value='{$invoiceItem.quantity|number_format:2}' size="10">
+					<input type="hidden" name='id{$line}' value='{$invoiceItem.id}' size="10"> </td>
+					<td>
+			                
+			        {if $products == null }
+						<p><em>{$LANG.no_products}</em></p>
+					{else}
+						<select 
+							name="products{$line}"
+							onchange="invoice_product_change_price($(this).val(), {$line}, jQuery('#quantity{$line}').val() );" 
+						>
+						{foreach from=$products item=product}
+							<option {if $product.id == $invoiceItem.product_id} selected {/if} value="{$product.id}">{$product.description}</option>
+						{/foreach}
+						</select>
+					{/if}
+				</td>
+				<td>
+					<input id="unit_price{$line}" name="unit_price{$line}" size="7" value="{$invoiceItem.unit_price|number_format:2}"></input>
+				</td>
 	        </tr>
 		
 

@@ -61,13 +61,13 @@ if ($_POST['action'] == "insert" ) {
 		for($i=0;!empty($_POST["quantity$i"]) && $i < $_POST['max_items']; $i++) {
 
 			if($type == 4) {
-				insertProductComplete(0,0,$_POST["description$i"],$_POST["price$i"],NULL,NULL,NULL,NULL,$_POST["notes$i"]);
+				insertProductComplete(0,0,$_POST["description$i"],$_POST["price$i"],NULL,NULL,NULL,NULL,$_POST["notes$i"],$_POST["unit_price$i"]);
 				$product = lastInsertId();
 			}
 			else {
 				$product = $_POST["products$i"];
 			}
-			if (insertInvoiceItem($invoice_id,$_POST["quantity$i"],$product,$_POST['tax_id'],$_POST["description$i"]) ) {
+			if (insertInvoiceItem($invoice_id,$_POST["quantity$i"],$product,$_POST['tax_id'],$_POST["description$i"], $_POST["unit_price$i"] )) {
 				//$saved = true;
 			} else {
 				die(end($dbh->errorInfo()));
@@ -95,13 +95,19 @@ if ($_POST['action'] == "insert" ) {
 	}
 
 	for($i=0;(!empty($_POST["quantity$i"]) && $i < $_POST['max_items']);$i++) {
-		
-		if (updateInvoiceItem($_POST["id$i"],$_POST["quantity$i"],$_POST["products$i"],$_POST['tax_id'],$_POST["description$i"]) && $saved) {
-			//$saved =  true;
+		if($_POST["delete$i"] == "yes")
+		{
+			delete('invoice_items','id',$_POST["id$i"]);
 		}
-		else {
-			die(end($dbh->errorInfo()));
-		}
+		if($_POST["delete$i"] != "yes")
+		{
+			if (updateInvoiceItem($_POST["id$i"],$_POST["quantity$i"],$_POST["products$i"],$_POST['tax_id'],$_POST["description$i"],$_POST["unit_price$i"]) && $saved) {
+				//$saved =  true;
+			}
+			else {
+				die(end($dbh->errorInfo()));
+			}
+	}
 	}
 
 }
