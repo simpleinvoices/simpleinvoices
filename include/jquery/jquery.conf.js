@@ -63,6 +63,7 @@ function init(){
 		);
 	}
 	
+	$('.rte-zone').rte('include/jquery/rte/rte.css', 'include/jquery/rte/');
 	
 	
 

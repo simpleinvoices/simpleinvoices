@@ -68,7 +68,10 @@
 </tr>
 
 <tr>
-        <td colspan=3><textarea input type=text name="note" rows=5 cols=70 WRAP=nowrap></textarea></td>
+        <td colspan=3>
+        	<textarea class="editor" input type=text name="note" rows=5 cols=70 WRAP=nowrap></textarea>
+        	
+        	</td>
 </tr>
 
 <tr><td class="details_screen">{$LANG.tax}</td>

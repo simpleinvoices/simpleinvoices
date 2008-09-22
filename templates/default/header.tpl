@@ -30,6 +30,7 @@
 	<script type="text/javascript" src="./include/jquery/jquery.flexigrid.1.0b3.pack.js"></script>
 	{/literal}{$extension_jquery_files }{literal}
 	<script type="text/javascript" src="./include/jquery/jquery.plugins.js"></script>
+		<script type="text/javascript" src="./include/jquery/rte/jquery.rte.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.conf.js"></script>
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/flexigrid.css">
 	<link rel="stylesheet" type="text/css" href="./include/jquery/jquery.plugins.css" title="default" media="screen" />
@@ -37,7 +38,9 @@
 	<link rel="stylesheet" type="text/css" href="./include/jquery/wysiwyg/jquery.wysiwyg.css" />
 	<script type="text/javascript" src="./include/jquery/wysiwyg/jquery.wysiwyg.0.3.pack.js"></script>
 	<script type="text/javascript" src="./include/jquery/wysiwyg/jquery.wysiwyg.conf.js"></script>
-	
+
+	<!-- TODO choose rte or jwysiwyg for textarea -->
+	<link rel="stylesheet" type="text/css" href="./include/jquery/rte/rte.css" />	
 	<link rel="stylesheet" type="text/css" href="./include/jquery/cluetip/jquery.cluetip.css" />
 	
 
