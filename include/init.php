@@ -44,6 +44,8 @@ if(!is_writable($smarty -> compile_dir)) {
 //adds own smarty plugins
 $smarty->plugins_dir = array("plugins","include/smarty_plugins");
 
+//add stripslash smarty function
+$smarty->register_modifier("unescape","stripslashes");
 /* 
  * Smarty inint - end
  */

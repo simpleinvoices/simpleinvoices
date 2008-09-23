@@ -82,7 +82,7 @@
         	        <td colspan=6 class='details_screen'>{$LANG.description}</td>
 	        </tr>
 	        <tr>
-			<td colspan=6 ><textarea  class="editor" input type="text" name="description0" rows=10 cols=70 WRAP=nowrap>{$invoiceItems.0.description}</textarea></td>
+			<td colspan=6 ><textarea input type="text"  class="editor" name="description0" rows=10 cols=70 WRAP=nowrap>{$invoiceItems.0.description|unescape}</textarea></td>
         	</tr>
 
 	 {$customFields.1}

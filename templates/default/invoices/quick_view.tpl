@@ -219,7 +219,7 @@
         	        <td colspan=6><b>{$LANG.description}</b></td>
 	        </tr>
 	        <tr>
-	                <td colspan=6>{$invoiceItems.0.description}</td>
+	                <td colspan=6>{$invoiceItems.0.description|unescape}</td>
         	</tr>
 	        <tr>
         	        <td colspan=6><br></td>

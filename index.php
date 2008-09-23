@@ -42,7 +42,6 @@ foreach($config->extension as $extension)
 $smarty -> assign("config",$config); // to toggle the login / logout button visibility in the menu
 $smarty -> assign("module",$module);
 
-
 $smarty -> assign("LANG",$LANG);
 //For Making easy enabled pop-menus (see biller)
 $smarty -> assign("enabled",array($LANG['disabled'],$LANG['enabled']));
