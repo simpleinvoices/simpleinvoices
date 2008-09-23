@@ -174,12 +174,12 @@ You must enter a Biller name</div>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.invoice_footer}</td>
-		<td><textarea input type=text name="footer"
+		<td><textarea class="editor" input type=text name="footer"
 			rows=4 cols=50>{$smarty.post.footer}</textarea></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
-		<td><textarea input type=text name="notes"
+		<td><textarea  class="editor" input type=text name="notes"
 			 rows=8 cols=50>{$smarty.post.notes}</textarea></td>
 	</tr>
 	<tr>

@@ -105,7 +105,7 @@
 		{showCustomFields categorieId="3" itemId=$smarty.get.id }
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
-		<td><textarea name="notes" rows="8" cols="50">{$product.notes}</textarea></td>
+		<td><textarea class="editor" name="notes" rows="8" cols="50">{$product.notes}</textarea></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product_enabled}</td>

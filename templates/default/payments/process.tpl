@@ -86,7 +86,7 @@
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.note}</td>
-	<td colspan="5"><textarea name="ac_notes" rows="5" cols="50"></textarea></td>
+	<td colspan="5"><textarea class="editor" name="ac_notes" rows="5" cols="50"></textarea></td>
 </tr>
 </table>
 

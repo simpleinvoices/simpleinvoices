@@ -69,7 +69,7 @@
 
 <tr>
         <td colspan=3>
-        	<textarea class="editor" input type=text name="note" rows=5 cols=70 WRAP=nowrap></textarea>
+        	<textarea class="editor" class="editor" input type=text name="note" rows=5 cols=70 WRAP=nowrap></textarea>
         	
         	</td>
 </tr>

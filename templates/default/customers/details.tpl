@@ -354,7 +354,7 @@
 	></tr>
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
-		<td><textarea name="notes" rows="8" cols="50">{$customer.notes}</textarea></td>
+		<td><textarea  class="editor" name="notes" rows="8" cols="50">{$customer.notes}</textarea></td>
 	</tr>
 	{*
 		{showCustomFields categorieId="2" itemId=$smarty.get.customer }
