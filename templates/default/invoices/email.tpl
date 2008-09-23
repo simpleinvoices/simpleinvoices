@@ -46,7 +46,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">Message</td>
-		<td><textarea  class="editor" name='email_notes' rows=8 cols=50></textarea></td>
+		<td><textarea name='email_notes' class="editor" rows=8 cols=50></textarea></td>
 	</tr>
 </table>
 <hr></hr>

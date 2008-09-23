@@ -295,11 +295,11 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.invoice_footer}</td>
-		<td><textarea  class="editor" name="footer" rows=4 cols=50>{$biller.footer}</textarea></td>
+		<td><textarea  name="footer" class="editor" rows=4 cols=50>{$biller.footer}</textarea></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
-		<td><textarea class="editor" name="notes" rows=8 cols=50>{$biller.notes}</textarea></td>
+		<td><textarea  name="notes"class="editor" rows=8 cols=50>{$biller.notes|unescape}</textarea></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
