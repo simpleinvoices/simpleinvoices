@@ -56,7 +56,7 @@ jQuery.fn.rte = function(css_url, media_url) {
         iframe.frameBorder=0;
         iframe.frameMargin=0;
         iframe.framePadding=0;
-        iframe.height=200;
+        iframe.height=100;
         if(textarea.attr('class'))
             iframe.className = textarea.attr('class');
         if(textarea.attr('id'))
@@ -109,13 +109,13 @@ jQuery.fn.rte = function(css_url, media_url) {
 				<a href='#' class='orderedlist'><img src='"+media_url+"ordered.gif' alt='unordered list' /></a>\
                 <a href='#' class='disable'><img src='"+media_url+"close.gif' alt='close rte' /></a>\
             </p></div></div>");
-        $('select', tb).change(function(){
+        /*$('select', tb).change(function(){
             var index = this.selectedIndex;
             if( index!=0 ) {
                 var selected = this.options[index].value;
                 formatText(iframe, "formatblock", '<'+selected+'>');
             }
-        });
+        });*/
         $('.bold', tb).click(function(){ formatText(iframe, 'bold');return false; });
         $('.italic', tb).click(function(){ formatText(iframe, 'italic');return false; });
         $('.unorderedlist', tb).click(function(){ formatText(iframe, 'insertunorderedlist');return false; });
@@ -161,6 +161,7 @@ jQuery.fn.rte = function(css_url, media_url) {
     }
         
     function setSelectedType(node, select) {
+	/*
         while(node.parentNode) {
             var nName = node.nodeName.toLowerCase();
             for(var i=0;i<select.options.length;i++) {
@@ -172,6 +173,7 @@ jQuery.fn.rte = function(css_url, media_url) {
             node = node.parentNode;
         }
         select.selectedIndex=0;
+	*/
         return true;
     }
     

@@ -14,17 +14,27 @@
     padding:2px;
 }
 
-.rte-zone
+.editor
 {
-	width:350px;
+	width:100%;
 	margin:0;
 	padding:0;
-	height:160px;
-	border:1px #999 solid;
+	/*height:160px;*/
+	/*border:1px #999 solid;*/
+	border-right:1px #CCC solid;
+	border-left:1px #CCC solid;
+	border-bottom:1px #CCC solid;
     clear:both;
 }
 
-.rte-toolbar{ overflow:hidden; }
+.rte-toolbar{ overflow:hidden; 
+	width:100%;
+	border-left:1px #CCC solid;
+	border-right:1px #CCC solid;
+	border-top:1px #CCC solid;
+	border-bottom:1px #CCC dashed;
+
+	}
 
 .rte-toolbar a, .rte-toolbar a img {
 	border:0;
