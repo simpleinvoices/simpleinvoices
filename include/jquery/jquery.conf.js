@@ -62,7 +62,7 @@ function init(){
 			}
 		);
 	}
-	
+	/*textarea - rte - make all textarea with class="editor" a html editor box*/
 	$('.editor').rte('include/jquery/rte/rte.css', 'include/jquery/rte/');
 	
 	
