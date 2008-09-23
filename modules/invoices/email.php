@@ -99,15 +99,15 @@ if ($_GET['stage'] == 2 ) {
 	$mail = new PHPMailer();
 
 	$mail->IsSMTP();                                      // set mailer to use SMTP
-	$mail->Host = $email_host;  // specify main and backup server - separating with ;
-	$mail->SMTPAuth = $email_smtp_auth;     // turn on SMTP authentication
-	$mail->Username = $email_username;  // SMTP username
-	$mail->Password = $email_password; // SMTP password
+	$mail->Host = $config->email->host;  // specify main and backup server - separating with ;
+	$mail->SMTPAuth = $config->email->smtp_auth;     // turn on SMTP authentication
+	$mail->Username = $config->email->username;  // SMTP username
+	$mail->Password = $config->email->password; // SMTP password
 
 	// if statements used for backwards compatibility for old config/config.php - Ap.Muthu
-	if (isset($email_smtpport)) { $mail->Port = $email_smtpport;     } // SMTP Port
-	if (isset($email_secure))   { $mail->SMTPSecure = $email_secure; } // Secure SMTP mode - '', 'ssl', or 'tls'
-	if (isset($email_ack) && $email_ack) { $mail->ConfirmReadingTo = "$_POST[email_from]"; } // Sets Return receipt as Sender EMail ID
+	if (isset($config->email->smtpport)) { $mail->Port = $config->email->smtpport;     } // SMTP Port
+	if (isset($config->email->secure))   { $mail->SMTPSecure = $config->email->secure; } // Secure SMTP mode - '', 'ssl', or 'tls'
+	if (isset($config->email->ack) && $config->email->ack) { $mail->ConfirmReadingTo = "$_POST[email_from]"; } // Sets Return receipt as Sender EMail ID
 	
 	$mail->From = "$_POST[email_from]";
 	$mail->FromName = "$biller[name]";

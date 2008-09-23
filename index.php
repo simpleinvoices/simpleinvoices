@@ -21,17 +21,17 @@ $action = isset($_GET['case'])?$_GET['case']:null;
 */
 require_once("./include/init.php");
 
-foreach($extension as $key=>$value)
+foreach($config->extension as $extension)
 {
 	/*
 	* If extension is enabled then continue and include the requested file for that extension if it exists
 	*/	
-	if($value['enabled'] == "1")
+	if($extension->enabled == "1")
 	{
 		//echo "Enabled:".$value['name']."<br><br>";
-		if(file_exists("./extensions/$value[name]/include/init.php"))
+		if(file_exists("./extensions/$extension->name/include/init.php"))
 		{
-			require_once("./extensions/$value[name]/include/init.php");
+			require_once("./extensions/$extension->name/include/init.php");
 		}
 	}
 }
@@ -87,17 +87,17 @@ if (($module == "invoices" ) && (strstr($view,"templates"))) {
 		* Note: this system is probably slow - if you got a better method for handling extensions let me know
 		*/
 		$extensionInvoiceTemplateFile = 0;
-		foreach($extension as $key=>$value)
+		foreach($config->extension as $extension)
 		{
 			/*
 			* If extension is enabled then continue and include the requested file for that extension if it exists
 			*/	
-			if($value['enabled'] == "1")
+			if($extension->enabled == "1")
 			{
 				//echo "Enabled:".$value['name']."<br><br>";
-				if(file_exists("./extensions/$value[name]/modules/invoices/template.php")) {
+				if(file_exists("./extensions/$extension->name/modules/invoices/template.php")) {
 			
-					include_once("./extensions/$value[name]/modules/invoices/template.php");
+					include_once("./extensions/$extension->name/modules/invoices/template.php");
 					$extensionInvoiceTemplateFile++;
 				}
 			}
@@ -121,16 +121,16 @@ if (($module == "invoices" ) && (strstr($view,"templates"))) {
 	if( (strstr($view,"xml") OR (strstr($view,"ajax")) ) )
 	{	
 		$extensionXml = 0;
-		foreach($extension as $tplKey=>$tplValue)
+		foreach($config->extension as $extension)
 		{
 			/*
 			* If extension is enabled then continue and include the requested file for that extension if it exists
 			*/	
-			if($tplValue['enabled'] == "1")
+			if($extension->enabled == "1")
 			{
-				if(file_exists("./extensions/$tplValue[name]/modules/$module/$view.php")) 
+				if(file_exists("./extensions/$extension->name/modules/$module/$view.php")) 
 				{
-					include("./extensions/$tplValue[name]/modules/$module/$view.php");
+					include("./extensions/$extension->name/modules/$module/$view.php");
 					$extensionXml++;
 				}
 			}
@@ -167,15 +167,15 @@ $path = "$module/$view";
 * If extension is enabled load its javascript files	- start
 * Note: this system is probably slow - if you got a better method for handling extensions let me know
 */
-	foreach($extension as $key=>$value)
+	foreach($config->extension as $extension)
 	{
 		/*
 		* If extension is enabled then continue and include the requested file for that extension if it exists
 		*/	
-		if($value['enabled'] == "1")
+		if($extension->enabled == "1")
 		{
-			if(file_exists("./extensions/$value[name]/include/jquery/$value[name].jquery.ext.js")) {
-				$extension_jquery_files .= "<script type=\"text/javascript\" src=\"./extensions/$value[name]/include/jquery/$value[name].jquery.ext.js\"></script>";
+			if(file_exists("./extensions/$extension->name/include/jquery/$extension->name.jquery.ext.js")) {
+				$extension_jquery_files .= "<script type=\"text/javascript\" src=\"./extensions/$extension->name/include/jquery/$extension->name.jquery.ext.js\"></script>";
 			}
 		}
 	}
@@ -191,16 +191,16 @@ $path = "$module/$view";
 if($module !== "auth")
 {
 		$extensionHeader = 0;
-		foreach($extension as $tplKey=>$tplValue)
+		foreach($config->extension as $extension)
 		{
 			/*
 			* If extension is enabled then continue and include the requested file for that extension if it exists
 			*/	
-			if($tplValue['enabled'] == "1")
+			if($extension->enabled == "1")
 			{
-				if(file_exists("./extensions/$tplValue[name]/templates/default/header.tpl")) 
+				if(file_exists("./extensions/$extension->name/templates/default/header.tpl")) 
 				{
-					$smarty -> display("../extensions/$tplValue[name]/templates/default/header.tpl");
+					$smarty -> display("../extensions/$extension->name/templates/default/header.tpl");
 					$extensionHeader++;
 				}
 			}
@@ -236,17 +236,17 @@ if($module !== "auth")
 		* Note: this system is probably slow - if you got a better method for handling extensions let me know
 		*/
 		$extensionPHPFile = 0;
-		foreach($extension as $key=>$value)
+		foreach($config->extension as $extension)
 		{
 			/*
 			* If extension is enabled then continue and include the requested file for that extension if it exists
 			*/	
-			if($value['enabled'] == "1")
+			if($extension->enabled == "1")
 			{
 
 
 				//echo "Enabled:".$value['name']."<br><br>";
-				if(file_exists("./extensions/$value[name]/modules/$path.php")) {
+				if(file_exists("./extensions/$extension->name/modules/$path.php")) {
 			
 					preg_match("/^[a-z|A-Z|_]+\/[a-z|A-Z|_]+/",$path,$res);
 
@@ -254,7 +254,7 @@ if($module !== "auth")
 						$file = $path;
 					}	
 
-					include_once("./extensions/$value[name]/modules/$file.php");
+					include_once("./extensions/$extension->name/modules/$file.php");
 					$extensionPHPFile++;
 				}
 			}
@@ -280,16 +280,16 @@ if($module !== "auth")
 	if($menu == "true")
 	{	
 		$extensionMenu = 0;
-		foreach($extension as $tplKey=>$tplValue)
+		foreach($config->extension as $extension)
 		{
 			/*
 			* If extension is enabled then continue and include the requested file for that extension if it exists
 			*/	
-			if($tplValue['enabled'] == "1")
+			if($extension->enabled == "1")
 			{
-				if(file_exists("./extensions/$tplValue[name]/templates/default/menu.tpl")) 
+				if(file_exists("./extensions/$extension->name/templates/default/menu.tpl")) 
 				{
-					$smarty -> display("../extensions/$tplValue[name]/templates/default/menu.tpl");
+					$smarty -> display("../extensions/$extension->name/templates/default/menu.tpl");
 					$extensionMenu++;
 				}
 			}
@@ -312,16 +312,16 @@ if($module !== "auth")
 */
 
 		$extensionMain = 0;
-		foreach($extension as $tplKey=>$tplValue)
+		foreach($config->extension as $extension)
 		{
 			/*
 			* If extension is enabled then continue and include the requested file for that extension if it exists
 			*/	
-			if($tplValue['enabled'] == "1")
+			if($extension->enabled == "1")
 			{
-				if(file_exists("./extensions/$tplValue[name]/templates/default/main.tpl")) 
+				if(file_exists("./extensions/$extension->name/templates/default/main.tpl")) 
 				{
-					$smarty -> display("../extensions/$tplValue[name]/templates/default/main.tpl");
+					$smarty -> display("../extensions/$extension->name/templates/default/main.tpl");
 					$extensionMain++;
 				}
 			}
@@ -348,17 +348,17 @@ if($module !== "auth")
 	* --if = 0 after checking all extensions then show default
 	*/
 	$extensionTemplates = 0;
-	foreach($extension as $tplKey=>$tplValue)
+	foreach($config->extension as $extension)
 	{
 		/*
 		* If extension is enabled then continue and include the requested file for that extension if it exists
 		*/	
-		if($tplValue['enabled'] == "1")
+		if($extension->enabled == "1")
 		{
-			if(file_exists("./extensions/$tplValue[name]/templates/default/$file.tpl")) 
+			if(file_exists("./extensions/$extension->name/templates/default/$file.tpl")) 
 			{
-				$path = "../extensions/$tplValue[name]/templates/default/$module/";
-				$tplDirectory = "extensions/$tplValue[name]/";
+				$path = "../extensions/$extension->name/templates/default/$module/";
+				$tplDirectory = "extensions/$extension->name/";
 				$extensionTemplates++;
 			}	
 		}
@@ -392,16 +392,16 @@ if($module !== "auth")
 * Footer - start 
 */
 		$extensionFooter = 0;
-		foreach($extension as $tplKey=>$tplValue)
+		foreach($config->extension as $extension)
 		{
 			/*
 			* If extension is enabled then continue and include the requested file for that extension if it exists
 			*/	
-			if($tplValue['enabled'] == "1")
+			if($extension->enabled == "1")
 			{
-				if(file_exists("./extensions/$tplValue[name]/templates/default/footer.tpl")) 
+				if(file_exists("./extensions/$extension->name/templates/default/footer.tpl")) 
 				{
-					$smarty -> display("../extensions/$tplValue[name]/templates/default/footer.tpl");
+					$smarty -> display("../extensions/$extension->name/templates/default/footer.tpl");
 					$extensionFooter++;
 				}
 			}
