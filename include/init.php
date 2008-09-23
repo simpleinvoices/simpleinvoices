@@ -54,7 +54,7 @@ $path = pathinfo($_SERVER['REQUEST_URI']);
 $install_path = htmlspecialchars($path['dirname']);
 
 
-include_once('./config/config.php');
+include_once('./config/define.php');
 
 $config = new Zend_Config_Ini('./config/config.ini', $environment);
 /*

@@ -39,7 +39,7 @@ foreach($config->extension as $extension)
 * The include configs and requirements stuff section - end
 */
 
-$smarty -> assign("authenticationOn",$authenticationOn); // to toggle the login / logout button visibility in the menu
+$smarty -> assign("config",$config); // to toggle the login / logout button visibility in the menu
 $smarty -> assign("module",$module);
 
 
