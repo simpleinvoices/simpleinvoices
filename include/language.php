@@ -23,6 +23,8 @@ if(checkTableExists(TB_PREFIX.'system_defaults') == true)
 
 function getLanguageArray() {
 	global $language;
+	global $config;
+
 	$langPath = "./lang/";
 	$langFile = "/lang.php";
 	//$getLanguage = getenv("HTTP_ACCEPT_LANGUAGE");
@@ -33,15 +35,20 @@ function getLanguageArray() {
 
 	include($langPath.$language.$langFile);
 
-	/*
-	if(file_exists($langPath.substr($getLanguage,0,2).$langFile)) {
-		include($langPath.substr($getLanguage,0,2).$langFile);
+	foreach($config->extension as $extension)
+	{
+		/*
+		* If extension is enabled then continue and include the requested file for that extension if it exists
+		*/	
+		if($extension->enabled == "1")
+		{
+			//echo "Enabled:".$value['name']."<br><br>";
+			if(file_exists("./extensions/$extension->name/lang/$language/lang.php"))
+			{
+				include_once("./extensions/$extension->name/lang/$language/lang.php");
+			}
+		}
 	}
-	
-	if(file_exists($langPath.substr($getLanguage,0,5).$langFile)) {
-		include($langPath.substr($getLanguage,0,5).$langFile);
-	}
-	*/
 	
 	return $LANG;
 }
