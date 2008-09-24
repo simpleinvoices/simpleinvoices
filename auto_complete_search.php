@@ -16,11 +16,11 @@
 
 define("BROWSE","browse");
 //if this page has error with auth remove the above line and figure out how to do it right
-include_once('./include/include_main.php');
+include_once('./include/init.php');
 
 $sql = "SELECT * FROM ".TB_PREFIX."invoices";
 
-global $dbh
+global $dbh;
 $sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 
 $q = strtolower($_GET["q"]);
