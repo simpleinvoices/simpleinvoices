@@ -3,14 +3,8 @@
 * Script: details.tpl
 * 	 Customer details template
 *
-* Authors:
-*	 Justin Kelly, Nicolas Ruflin, Ap.Muthu
-*
-* Last edited:
-* 	 2008-01-03
-*
 * License:
-*	 GPL v2 or above
+*	 GPL v3 or above
 *
 * Website:
 *	http://www.simpleinvoices.org
@@ -18,7 +12,7 @@
 *}
 
 {if $smarty.get.action == 'view' }
-<b>{$LANG.customer} :: <a href="index.php?module=customers&view=details&customer={$customer.id}&action=edit">{$LANG.edit}</a>
+<b>{$LANG.customer} :: <a href="index.php?module=customers&view=details&id={$customer.id}&action=edit">{$LANG.edit}</a>
 </b>
 <hr></hr>
 <table align="center">

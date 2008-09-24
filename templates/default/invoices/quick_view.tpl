@@ -380,11 +380,11 @@
 		</tr>
 			<!-- if hide detail click - the stripped note will be displayed -->
 		<tr class='show-notes details_screen'>
-				<td colspan="6">{$invoice.note|truncate:"..."}</td>
+				<td colspan="6">{$invoice.note|truncate:"...":true}</td>
 		</tr>
 			<!-- if show detail click - the full note will be displayed -->
 		<tr class='notes details_screen'>
-				<td colspan="6">{$invoice.note}</td>
+				<td colspan="6">{$invoice.note|unescape}</td>
 		</tr>
 		{/if}
 
