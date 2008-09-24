@@ -319,7 +319,7 @@
 			<td class="tbl1-left tbl1-right" colspan="6"><br></td>
 		</tr>
 		<tr>
-			<td class="tbl1-left tbl1-right" colspan="6" align="left"><b>{$LANG.notes}:</b></td>
+			<td class="tbl1-left tbl1-right" colspan="6" align="left"><b>{$LANG.notes|unescape}:</b></td>
 		</tr>
 		<tr>
 			<td class="tbl1-left tbl1-right" colspan="6">{$invoice.note}</td>
