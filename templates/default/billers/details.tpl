@@ -295,7 +295,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.invoice_footer}</td>
-		<td><textarea  name="footer" class="editor" rows=4 cols=50>{$biller.footer}</textarea></td>
+		<td><textarea  name="footer" class="editor" rows=4 cols=50>{$biller.footer|unescape}</textarea></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>

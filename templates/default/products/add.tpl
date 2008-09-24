@@ -52,7 +52,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
-		<td><textarea input type=text class="editor" name='notes' rows=8 cols=50>{$smarty.post.notes}</textarea></td>
+		<td><textarea input type=text class="editor" name='notes' rows=8 cols=50>{$smarty.post.notes|unescape}</textarea></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product_enabled}</td>

@@ -166,7 +166,7 @@
 
 			<td colspan="6" class="details_screen">{$LANG.description}</td>
 		<tr>
-                        <td colspan="6"><textarea input type="text" class="editor" name="description{$line}" rows=5 cols=70 wrap="nowrap">{$invoiceItem.description}</textarea></td>
+                        <td colspan="6"><textarea input type="text" class="editor" name="description{$line}" rows=5 cols=70 wrap="nowrap">{$invoiceItem.description|unescape}</textarea></td>
                 </tr>
 	
 	{/if}

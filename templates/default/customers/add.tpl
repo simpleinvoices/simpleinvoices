@@ -154,7 +154,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
-		<td><textarea  name='notes' class="editor" rows=8 cols=50>{$smarty.post.notes}</textarea></td>
+		<td><textarea  name='notes' class="editor" rows=8 cols=50>{$smarty.post.notes|unescape}</textarea></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>

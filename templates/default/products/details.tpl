@@ -48,7 +48,7 @@
 	</tr>
 		{showCustomFields categorieId="3" itemId=$smarty.get.id }
 	<tr>
-		<td class="details_screen">{$LANG.notes}</td><td>{$product.notes}</td>
+		<td class="details_screen">{$LANG.notes}</td><td>{$product.notes|unescape}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product_enabled}</td>
