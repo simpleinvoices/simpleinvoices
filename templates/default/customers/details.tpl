@@ -102,9 +102,9 @@
 <br />
 <div id="container-1">
 	<ul class="anchors">
-		<li><a href="#section-1">{$LANG.custom_fields}</a></li>
-		<li><a href="#section-2">{$LANG.customer} {$LANG.invoice_listings}</a></li>
-		<li><a href="#section-3">{$LANG.notes}</a></li>
+		<li><a href="#section-1" target="_top">{$LANG.custom_fields}</a></li>
+		<li><a href="#section-2" target="_top">{$LANG.customer} {$LANG.invoice_listings}</a></li>
+		<li><a href="#section-3" target="_top">{$LANG.notes}</a></li>
 	</ul>
 	<div id="section-1" class="fragment">
 		<h4><u>{$LANG.customer} {$LANG.custom_fields}</u></h4>
