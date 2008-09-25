@@ -1170,7 +1170,7 @@ function getTopDebtor() {
   $debtor = null;
 
   #Largest debtor query - start
-  if ($db_server == 'pgsql' or $mysql > "4.1.0") {
+  
 	$sql = "SELECT	
 	        	c.id as \"CID\",
 	        	c.name as \"Customer\",
@@ -1191,7 +1191,7 @@ function getTopDebtor() {
 	$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
 
 	$debtor = $sth->fetch();
-  }
+  
   #Largest debtor query - end
   return $debtor;
 }
@@ -1204,7 +1204,7 @@ function getTopCustomer() {
   $customer = null;
 
   #Top customer query - start
-  if ($db_server == 'pgsql' or $mysql > "4.1.0") {
+  
 	$sql2 = "SELECT
 			c.id as \"CID\",
 	        	c.name as \"Customer\",
@@ -1226,7 +1226,7 @@ function getTopCustomer() {
 	$tth = dbQuery($sql2) or die(end($dbh->errorInfo()));
 
 	$customer = $tth->fetch();
-  }
+ 
   #Top customer query - end
   return $customer;
 }
@@ -1239,8 +1239,7 @@ function getTopBiller() {
   $biller = null;
 
   #Top biller query - start
-  if ($db_server == 'pgsql' or $mysql > "4.1.0") {
-	
+ 	
 	$sql3 = "SELECT
 		b.name,  
 		sum(ii.total) as Total 
@@ -1256,7 +1255,7 @@ function getTopBiller() {
 	$uth = dbQuery($sql3) or die(end($dbh->errorInfo()));
 
 	$biller = $uth->fetch();
-  }
+  
   #Top biller query - start
   return $biller;
 }
