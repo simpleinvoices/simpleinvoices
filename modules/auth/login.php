@@ -4,7 +4,7 @@
 * 	Login page
 *
 * License:
-*	 GPL v2 or above
+*	 GPL v3 or above
 */
 
 $menu = false;
@@ -67,13 +67,14 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 		/*
 		* grab user data  from the datbase
 		*/
+
 		$result = $dbAdapter->fetchRow('
 			SELECT 
-				u.user_id, u.user_email, u.user_name, u.user_group, r.name as role_name, u.user_domain 
+				u.user_id, u.user_email, u.user_name, r.name as role_name, u.user_domain_id
 			FROM 
-				si_users u, si_user_role r 
+				si_users u,  si_user_role r 
 			WHERE 
-				user_email = ? AND u.user_group = r.id', $userEmail
+				user_email = ? AND u.user_role_id = r.id', $userEmail
 		);
 		
 		/*

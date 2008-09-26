@@ -203,9 +203,17 @@ function run_sql_patch($id, $patch) {
 
 		if($id == 126) {
 			patch126();
-		} elseif($id == 137) {
-			convertInitCustomFields();
-		}
+		} 
+		
+		/*
+		 * cusom_fields to new customFields patch - commented out till future
+		 */
+			/*
+		 	elseif($id == 137) {
+				convertInitCustomFields();
+			}
+			*/
+		
 		$display_block .= "\n	<tr><td>SQL patch $escaped_id, $patch_name <b>has</b> been applied</td></tr>";
 	}
 	return $display_block;

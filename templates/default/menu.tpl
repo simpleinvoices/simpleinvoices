@@ -178,11 +178,11 @@
 					</li>
 				</ul>
 			</li>
-			{if $config->authentication->enabled == "true"}
-				{if $smarty.session.db_is_logged_in == null}
-					<li><a href="login.php">{$LANG.login}</a></li>
+			{if $config->authentication->enabled == 1}
+				{if $smarty.session.Zend_Auth.user_id == null}
+					<li><a href="index.php?module=auth&action=login">{$LANG.login}</a></li>
 				{else}
-					<li><a href="login.php?action=logout">{$LANG.logout}</a></li>
+					<li><a href="index.php?module=auth&action=logout">{$LANG.logout}</a></li>
 				{/if}
 			{/if}
 		</ul>

@@ -66,9 +66,14 @@ if($environment != 'production') {
      $config = new Zend_Config_Ini('./config/'.$environment.'.config.ini', $environment);
 }
 
+
 include_once("./include/sql_queries.php");
 
 include_once('./include/language.php');
+
+include_once("./include/acl.php");
+
+include_once("./include/check_permission.php");
 
 include_once('./include/functions.php');
 
