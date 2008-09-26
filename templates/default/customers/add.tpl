@@ -163,7 +163,9 @@
 		</td>
 	</tr>
 	
-	{showCustomFields categorieId="2"}
+	{* 
+		{showCustomFields categorieId="2"}
+	*}
 
 </table>
 <hr />
