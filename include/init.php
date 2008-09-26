@@ -71,10 +71,6 @@ include_once("./include/sql_queries.php");
 
 include_once('./include/language.php');
 
-include_once("./include/acl.php");
-
-include_once("./include/check_permission.php");
-
 include_once('./include/functions.php');
 
 checkConnection();
@@ -82,5 +78,9 @@ checkConnection();
 include('./include/include_auth.php');
 include_once('./include/manageCustomFields.php');
 include_once("./include/validation.php");
+
+include_once("./include/acl.php");
+include_once("./include/check_permission.php");
+
 
 ?>

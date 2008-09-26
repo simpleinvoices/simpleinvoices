@@ -180,9 +180,9 @@
 			</li>
 			{if $config->authentication->enabled == 1}
 				{if $smarty.session.Zend_Auth.user_id == null}
-					<li><a href="index.php?module=auth&action=login">{$LANG.login}</a></li>
+					<li><a href="index.php?module=auth&view=login">{$LANG.login}</a></li>
 				{else}
-					<li><a href="index.php?module=auth&action=logout">{$LANG.logout}</a></li>
+					<li><a href="index.php?module=auth&view=logout">{$LANG.logout}</a></li>
 				{/if}
 			{/if}
 		</ul>
