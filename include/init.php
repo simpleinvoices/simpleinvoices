@@ -79,8 +79,12 @@ include('./include/include_auth.php');
 include_once('./include/manageCustomFields.php');
 include_once("./include/validation.php");
 
-include_once("./include/acl.php");
-include_once("./include/check_permission.php");
+//if authentication enabled then do acl check etc..
+if ($config->authentication->enabled == 1 )
+{
+	include_once("./include/acl.php");
+	include_once("./include/check_permission.php");
+}
 
 
 ?>
