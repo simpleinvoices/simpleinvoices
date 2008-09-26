@@ -161,7 +161,7 @@
 	</tr>
 	{*
 		{showCustomFields categorieId="1" itemId=$biller.id }
-	}*
+	*}
 
 	<tr>
 		<td colspan=5><br></td>
