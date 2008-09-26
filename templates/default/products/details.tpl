@@ -46,7 +46,9 @@
 		</td>
 		<td>{$product.custom_field4}</td>
 	</tr>
-		{* {showCustomFields categorieId="3" itemId=$smarty.get.id } }*
+		{*
+			{showCustomFields categorieId="3" itemId=$smarty.get.id } 
+		*}
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td><td>{$product.notes|unescape}</td>
 	</tr>

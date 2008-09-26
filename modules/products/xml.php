@@ -82,7 +82,11 @@ $xml .= "<total>$count</total>";
 foreach ($customers as $row) {
 
 	$xml .= "<row id='".$row['iso']."'>";
-	$xml .= "<cell><![CDATA[<a title='".$LANG['quick_view_tooltip']." ".$row['id']."' href='index.php?module=products&view=details&action=view&id=".$row['id']."'>View</a> :: <a href='index.php?module=products&view=details&action=edit&id=".$row['id']."'>Edit</a>]]></cell>";
+	$xml .= "<cell><![CDATA[
+			<a class='index_table' title='$LANG[view] ".utf8_encode($row['description'])."' href='index.php?module=products&view=details&id=".$row['id']."&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+			<a class='index_table' title='$LANG[edit] ".utf8_encode($row['description'])."' href='index.php?module=products&view=details&id=".$row['id']."&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+		]]></cell>";		
+	
 	$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";		
 	$xml .= "<cell><![CDATA[".utf8_encode($row['description'])."]]></cell>";
 	$xml .= "<cell><![CDATA[".utf8_encode(siLocal::number($row['unit_price']))."]]></cell>";
