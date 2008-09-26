@@ -89,7 +89,9 @@
 	 {$customFields.2}
 	 {$customFields.3}
 	 {$customFields.4}
-	 {showCustomFields categorieId="4" itemId=$smarty.get.invoice}
+	 {*
+	 	{showCustomFields categorieId="4" itemId=$smarty.get.invoice}
+	 *}
 
 	
 		        <tr>       	         
@@ -184,8 +186,9 @@
 	 {$customFields.2}
 	 {$customFields.3}
 	 {$customFields.4}
+	 {*
 	 	 {showCustomFields categorieId="4" itemId=$smarty.get.invoice}
-
+	 *}
 			<tr>
 				<td colspan=6 class='details_screen'>{$LANG.note}:</td>
 			</tr>
