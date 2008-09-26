@@ -60,7 +60,7 @@
 			{html_options name=enabled options=$enabled selected=1}
 		</td>
 	</tr>
-		{showCustomFields categorieId="3" itemId=""}
+	{*	{showCustomFields categorieId="3" itemId=""} *}
 </table>
 <!-- </div> -->
 <hr />

@@ -31,7 +31,7 @@ if ($op === "insert_customer") {
 
 	if (insertCustomer()) {
 		$saved = true;
-		 saveCustomFieldValues($_POST['categorie'],lastInsertId());
+		// saveCustomFieldValues($_POST['categorie'],lastInsertId());
 	}
 }
 
@@ -41,7 +41,7 @@ if ( $op === 'edit_customer' ) {
 		
 		if (updateCustomer()) {
 			$saved = true;
-			updateCustomFieldValues($_POST['categorie'],$_GET['customer']);
+			//updateCustomFieldValues($_POST['categorie'],$_GET['customer']);
 		}
 	}
 }

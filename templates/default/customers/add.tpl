@@ -126,7 +126,7 @@
 				</img>
 			</a>
 		</td>
-		<td><input type=text name="custom_field2" value="{$smarty.post.custom_field2}" size=25></td>
+	{*	<td><input type=text name="custom_field2" value="{$smarty.post.custom_field2}" size=25></td> *}
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.customer_cf3}

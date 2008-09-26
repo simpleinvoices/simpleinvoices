@@ -15,14 +15,14 @@ if (  $op === 'insert_product' ) {
 	
 	if($id = insertProduct()) {
  		$saved = true;
- 		saveCustomFieldValues($_POST['categorie'], lastInsertId());
+ 		//saveCustomFieldValues($_POST['categorie'], lastInsertId());
  	}
 }
 
 if ($op === 'edit_product' ) {
 	if (isset($_POST['save_product']) && updateProduct()) {
 		$saved = true;
-		updateCustomFieldValues($_POST['categorie'],$_GET['id']);
+		//updateCustomFieldValues($_POST['categorie'],$_GET['id']);
 	}
 }
 
