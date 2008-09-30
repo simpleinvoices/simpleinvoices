@@ -18,7 +18,7 @@ if(checkTableExists(TB_PREFIX.'system_defaults') == true)
 {
 	$language = getDefaultLanguage();
 } else {
-	$language = "en-gb";
+ 	$language = "en-gb";
 }  
 
 function getLanguageArray() {

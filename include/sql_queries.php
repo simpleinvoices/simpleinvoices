@@ -1701,9 +1701,9 @@ function checkTableExists($table) {
 
 	global $LANG;
 	global $dbh;
-	global $db_server;
-	$sql = "SELECT 1 FROM FROM INFORMATION_SCHEMA.TABLES where table_name = :table LIMIT 1";
-	if ($db_server == 'pgsql') {
+	global $config;
+	$sql = "SELECT 1 FROM INFORMATION_SCHEMA.TABLES where table_name = :table LIMIT 1";
+	if ($config->database->adapter == 'pgsql') {
 		// Use a nicer syntax
 		$sql = 'SELECT 1 FROM pg_tables WHERE tablename = :table LIMIT 1';
 	}
