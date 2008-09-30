@@ -304,7 +304,7 @@
           {foreach from=$invoiceItems item= invoiceItem}
 
 			    <tr class="tbl1-left tbl1-right">
-                    <td class="tbl1-left tbl1-right" colspan="6">{$invoiceItem.description}</td>
+                    <td class="tbl1-left tbl1-right" colspan="6">{$invoiceItem.description|unescape}</td>
                 </tr>
                 <tr class="tbl1-left tbl1-right">
                     <td colspan="6" class="tbl1-left tbl1-right"><br></td>
