@@ -4,11 +4,8 @@
 * Script: save.php
 * 	Invoice save file
 *
-* Authors:
-*	 Justin Kelly, Nicolas Ruflin
-*
 * License:
-*	 GPL v2 or above
+*	 GPL v3 or above
 *	 
 * Website:
 * 	http://www.simpleinvoices.or

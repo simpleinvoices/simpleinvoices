@@ -12,7 +12,7 @@
 
 
 if(isset($_POST['submit'])) {
-	matrix_invoice::insertInvoiceItem($_POST['invoice_id'],$_POST['quantity'],$_POST['product'],$_POST['tax_id'],$_POST['description'],$_POST["attr1"],$_POST["attr2"], $_POST["attr3"]);
+	matrix_invoice::insertInvoiceItem($_POST['invoice_id'],$_POST['quantity1'],$_POST['product1'],$_POST['tax_id'],$_POST['description'],$_POST["attr1"],$_POST["attr2"], $_POST["attr3"], $_POST["unit_price1"]);
 }
 else {
 

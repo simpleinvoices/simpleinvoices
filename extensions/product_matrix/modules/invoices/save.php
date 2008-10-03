@@ -64,7 +64,7 @@ if ($_POST['action'] == "insert" ) {
 			else {
 				$product = $_POST["products$i"];
 			}
-			if (matrix_invoice::insertInvoiceItem($invoice_id,$_POST["quantity$i"],$product,$_POST['tax_id'],$_POST["description$i"],$_POST["attr1-$i"],$_POST["attr2-$i"], $_POST["attr3-$i"])) {
+			if (matrix_invoice::insertInvoiceItem($invoice_id,$_POST["quantity$i"],$product,$_POST['tax_id'],$_POST["description$i"],$_POST["attr1-$i"],$_POST["attr2-$i"], $_POST["attr3-$i"], $_POST["unit_price$i"])) {
 				//$saved = true;
 			} else {
 				die(end($dbh->errorInfo()));
@@ -93,7 +93,7 @@ if ($_POST['action'] == "insert" ) {
 
 	for($i=0;(!empty($_POST["quantity$i"]) && $i < $_POST['max_items']);$i++) {
 		
-		if (matrix_invoice::updateInvoiceItem($_POST["id$i"],$_POST["quantity$i"],$_POST["products$i"],$_POST['tax_id'],$_POST["description$i"],$_POST["attr1-$i"],$_POST["attr2-$i"], $_POST["attr3-$i"] ) && $saved) {
+		if (matrix_invoice::updateInvoiceItem($_POST["id$i"],$_POST["quantity$i"],$_POST["products$i"],$_POST['tax_id'],$_POST["description$i"],$_POST["attr1-$i"],$_POST["attr2-$i"], $_POST["attr3-$i"],$_POST["unit_price$i"] ) && $saved) {
 			//$saved =  true;
 		}
 		else {

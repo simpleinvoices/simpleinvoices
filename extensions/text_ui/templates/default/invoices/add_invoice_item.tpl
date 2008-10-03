@@ -43,7 +43,11 @@
 				{if $products == null }
 					<p><em>{$LANG.no_products}</em></p>
 				{else}
-					<select name="product" class="product_select">
+					<select 
+						name="product1" 
+						class="product_select"
+						onchange="invoice_product_change_price($(this).val(), 1, jQuery('#quantity1').val() );" 
+					>
 						<option value=""></option>
 					{foreach from=$products item=product}
 						<option {if $product.id == $defaults.product} selected {/if} value="{$product.id}">{$product.description}</option>
@@ -85,8 +89,14 @@
 			</td>	
 			</tr>	
 			{/if}
-
-
+			</tr>
+			<tr>
+				<td class="details_screen">
+					{$LANG.unit_price}
+				</td>
+				<td>
+					<input id="unit_price1" name="unit_price1" size="7" value="{$invoiceItem.unit_price|number_format:2}"></input>
+				</td>
 			</tr>
  
 			{if $type == 3}               

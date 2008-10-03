@@ -13,9 +13,15 @@
 *	http://www.simpleinvoices.org
 */
 *}
+<div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
+        	<img src="images/common/gmail-loader.gif" alt="Loading ..."/> Loading ...
+</div>
 <b>You are editing {$preference.pref_inv_wording} {$invoice.id}</b>
 
- <hr></hr>
+<br>
+--<br>
+
+
 
 <form name="frmpost" action="index.php?module=invoices&view=save" method="post">
 
@@ -111,7 +117,11 @@
 		<td colspan=6>
 		<table>
 		<tr>
-        	        <td class='details_screen'>{$LANG.quantity_short}</td><td class='details_screen'>{$LANG.description}</td>
+        	        <td class='details_screen'>{$LANG.quantity_short}</td>
+        	        <td class='details_screen'>{$LANG.description}</td>
+        	        <td class='details_screen'>Attr 1</td>
+        	        <td class='details_screen'>Attr 2</td>
+        	        <td class='details_screen'>{$LANG.unit_price}</td>
 	        </tr>
 	{/if}
 
@@ -129,14 +139,18 @@
 		
 	        <tr>
 				<td>
-					<input type="text" name='quantity{$line}' value='{$invoiceItem.quantity}' size="10">
+					<input type="text" name='quantity{$line}' value='{$invoiceItem.quantity|number_format:2}' size="10">
 					<input type="hidden" name='id{$line}' value='{$invoiceItem.id}' size="10"> 
 				</td>
 			    <td>
 					{if $products == null }
 						<p><em>{$LANG.no_products}</em></p>
 					{else}
-						<select class="product_select{$line}" name="products{$line}">
+					   <select 
+					   		class="product_select{$line}"
+							name="products{$line}"
+							onchange="invoice_product_change_price($(this).val(), {$line}, jQuery('#quantity{$line}').val() );" 
+						>
 							{foreach from=$products item=product}
 								<option {if $product.id == $invoiceItem.product_id} selected {/if} value="{$product.id}">{$product.description}</option>
 							{/foreach}
@@ -169,6 +183,9 @@
 				</select>
 			</td>	
 			{/if}
+				<td>
+					<input id="unit_price{$line}" name="unit_price{$line}" size="7" value="{$invoiceItem.unit_price|number_format:2}"></input>
+				</td>
 	        </tr>
 		
 	                
@@ -246,7 +263,8 @@
 	<!-- addition close table tag to close invoice itemised/consulting if it has a note -->
 	</table>
 
-<hr></hr>
+--
+<br>
 	<input type="hidden" name="action" value="edit">
 	<input type="hidden" name="type" value="{$invoice.type_id}";
 

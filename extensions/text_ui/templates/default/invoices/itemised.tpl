@@ -16,7 +16,9 @@
 *	http://www.simpleinvoices.org
 */
 *}
-
+<div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
+        	<img src="images/common/gmail-loader.gif" alt="Loading ..."/> Loading ...
+</div>
 <form name="frmpost" action="index.php?module=invoices&view=save" method=POST onsubmit="return frmpost_Validator(this)">
 
 {include file="$path/header.tpl" }
@@ -35,13 +37,18 @@
         {section name=line start=0 loop=$dynamic_line_items step=1}
 
 			<tr>
-				<td><input type=text name="quantity{$smarty.section.line.index}" size="5"></td>
+				<td>
+					<input type=text  id="quantity{$smarty.section.line.index}" name="quantity{$smarty.section.line.index}" size="5"></td>
 				<td>
 				                
 			{if $products == null }
 				<p><em>{$LANG.no_products}</em></p>
 			{else}
-				<select class="product_select{$smarty.section.line.index}" name="products{$smarty.section.line.index}">
+				<select
+					class="product_select{$smarty.section.line.index} selector" 
+					name="products{$smarty.section.line.index}"
+					onchange="invoice_product_change_price($(this).val(), {$smarty.section.line.index}, jQuery('#quantity{$smarty.section.line.index}').val() );"
+				>
 					<option value=""></option>
 				{foreach from=$products item=product}
 					<option {if $product.id == $defaults.product} selected {/if} value="{$product.id}">{$product.description}</option>
@@ -67,6 +74,9 @@
 				</select>
 			</td>	
 			{/if}
+			<td>
+				<input id="unit_price{$smarty.section.line.index}" name="unit_price{$smarty.section.line.index}" size="7" value=""></input>
+			</td>
 {*
 				<td>
 					<select name="products{$smarty.section.line.index}">

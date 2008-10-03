@@ -48,19 +48,26 @@ for (var x = 0; x <= {/literal}{$dynamic_line_items}{literal}; x++)
 	{if $number_of_attributes == "3"}
 	<td class="details_screen">Attr3</td>
 	{/if}
+	<td class="details_screen">{$LANG.unit_price}</td>
 </tr>
 
 
         {section name=line start=0 loop=$dynamic_line_items step=1}
 
 			<tr>
-				<td><input type=text name="quantity{$smarty.section.line.index}" size="5"></td>
+
+				<td>
+					<input type=text  id="quantity{$smarty.section.line.index}" name="quantity{$smarty.section.line.index}" size="5"></td>
 				<td>
 				                
 			{if $products == null }
 				<p><em>{$LANG.no_products}</em></p>
 			{else}
-				<select class="product_select{$smarty.section.line.index}" name="products{$smarty.section.line.index}">
+				<select 
+					class="product_select{$smarty.section.line.index}" 
+					name="products{$smarty.section.line.index}"
+					onchange="invoice_product_change_price($(this).val(), {$smarty.section.line.index}, jQuery('#quantity{$smarty.section.line.index}').val() );"
+				>
 					<option value=""></option>
 				{foreach from=$products item=product}
 					<option {if $product.id == $defaults.product} selected {/if} value="{$product.id}">{$product.description}</option>
@@ -86,6 +93,9 @@ for (var x = 0; x <= {/literal}{$dynamic_line_items}{literal}; x++)
 				</select>
 			</td>	
 			{/if}
+			<td>
+				<input id="unit_price{$smarty.section.line.index}" name="unit_price{$smarty.section.line.index}" size="7" value=""></input>
+			</td>
 {*
 				<td>
 					<select name="products{$smarty.section.line.index}">

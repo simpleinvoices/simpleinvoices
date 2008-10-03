@@ -18,12 +18,13 @@
 
 		<!-- jQuery Files -->
 	<script type="text/javascript" src="./include/jquery/jquery-1.2.6.min.js"></script>
-	<script type="text/javascript" src="./include/jquery/jquery.flexigrid.1.0b3.pack.js"></script>
 	{$extension_jquery_files }
 	<script type="text/javascript" src="./include/jquery/jquery.plugins.js"></script>
+		<script type="text/javascript" src="./include/jquery/rte/jquery.rte.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.conf.js"></script>
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/flexigrid.css">
 	<link rel="stylesheet" type="text/css" href="./include/jquery/jquery.plugins.css" title="default" media="screen" />
+		<link rel="stylesheet" type="text/css" href="./include/jquery/rte/rte.css" />
 {literal}
 	<!-- Menu header -->
 	<!--[if lte IE 6]>

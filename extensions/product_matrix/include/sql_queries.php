@@ -89,7 +89,7 @@ class matrix_invoice
 		return $invoiceItems;
 	}
 
-	function insertInvoiceItem($invoice_id,$quantity,$product_id,$tax_id,$description="",$attr1="",$attr2="",$attr3=""  ) {
+	function insertInvoiceItem($invoice_id,$quantity,$product_id,$tax_id,$description="",$attr1="",$attr2="",$attr3="", $unit_price=""  ) {
 		
 		/*strip attri of unneeded info - only need the last section - the attribute id*/
 		
@@ -108,13 +108,15 @@ class matrix_invoice
 
 		$tax = getTaxRate($tax_id);
 		$product = getProduct($product_id);
+		
+		($unit_price =="") ? $product_unit_price = $product['unit_price'] : $product_unit_price = $unit_price ;
 		//print_r($product);
 		$actual_tax = $tax['tax_percentage']  / 100 ;
 		$total_invoice_item_tax = $product['unit_price'] * $actual_tax;
 		$tax_amount = $total_invoice_item_tax * $quantity;
-		$total_invoice_item = $total_invoice_item_tax + $product['unit_price'] ;	
+		$total_invoice_item = $total_invoice_item_tax + $product_unit_price ;	
 		$total = $total_invoice_item * $quantity;
-		$gross_total = $product['unit_price']  * $quantity;
+		$gross_total = $product_unit_price  * $quantity;
 		
 		if ($db_server == 'mysql' && !_invoice_items_check_fk(
 			$invoice_id, $product_id, $tax['tax_id'])) {
@@ -127,7 +129,7 @@ class matrix_invoice
 			':invoice_id', $invoice_id,
 			':quantity', $quantity,
 			':product_id', $product_id,
-			':product_price', $product[unit_price],
+			':product_price', $product_unit_price,
 			':tax_id', $tax[tax_id],
 			':tax_percentage', $tax[tax_percentage],
 			':tax_amount', $tax_amount,
@@ -141,7 +143,7 @@ class matrix_invoice
 
 	}
 
-	function updateInvoiceItem($id,$quantity,$product_id,$tax_id,$description,$attr1="",$attr2="",$attr3="") {
+	function updateInvoiceItem($id,$quantity,$product_id,$tax_id,$description,$attr1="",$attr2="",$attr3="", $unit_price="") {
 
 			$attr1 = explode("-",$attr1);
 			$attr1 = $attr1[2];
@@ -158,13 +160,14 @@ class matrix_invoice
 
 
 		$product = getProduct($product_id);
+		($unit_price == "") ? $product_unit_price = $product['unit_price'] : $product_unit_price = $unit_price ;
 		$tax = getTaxRate($tax_id);
 		
-		$total_invoice_item_tax = $product['unit_price'] * $tax['tax_percentage'] / 100;	//:100?
+		$total_invoice_item_tax = $product_unit_price * $tax['tax_percentage'] / 100;	//:100?
 		$tax_amount = $total_invoice_item_tax * $quantity;
-		$total_invoice_item = $total_invoice_item_tax + $product['unit_price'];
+		$total_invoice_item = $total_invoice_item_tax + $product_unit_price;
 		$total = $total_invoice_item * $quantity;
-		$gross_total = $product['unit_price'] * $quantity;
+		$gross_total = $product_unit_price * $quantity;
 		
 		if ($db_server == 'mysql' && !_invoice_items_check_fk(
 			null, $product_id, $tax_id, 'update')) {
@@ -191,7 +194,7 @@ class matrix_invoice
 		return dbQuery($sql,
 			':quantity', $quantity,
 			':product_id', $product_id,
-			':unit_price', $product[unit_price],
+			':unit_price', $product_unit_price,
 			':tax_id', $tax_id,
 			':tax', $tax[tax_percentage],
 			':tax_amount', $tax_amount,
