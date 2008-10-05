@@ -40,7 +40,7 @@ $js =<<<EOD
 
 $(function()
 {
-
+/*
 for (var x = 0; x <= $dynamic_line_items; x++)
    {
         $('.product_select'+x).chainSelect('#attr1-'+x,'./index.php?module=invoices&view=ajax&search=attr1');
@@ -48,7 +48,7 @@ for (var x = 0; x <= $dynamic_line_items; x++)
         $('.product_select'+x).chainSelect('#attr3-'+x,'./index.php?module=invoices&view=ajax&search=attr3');
   
 	}
-
+*/
 });
 </script>
 EOD;

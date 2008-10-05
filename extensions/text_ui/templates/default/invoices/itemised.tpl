@@ -47,7 +47,13 @@
 				<select
 					class="product_select{$smarty.section.line.index} selector" 
 					name="products{$smarty.section.line.index}"
-					onchange="invoice_product_change_price($(this).val(), {$smarty.section.line.index}, jQuery('#quantity{$smarty.section.line.index}').val() );"
+					{* onchange="invoice_product_change_price($(this).val(), {$smarty.section.line.index}, jQuery('#quantity{$smarty.section.line.index}').val() );" *}
+					onchange="
+						invoice_product_change_price($(this).val(), {$smarty.section.line.index}, jQuery('#quantity{$smarty.section.line.index}').val() );
+						chain_select($(this).val(),'#attr1-'+{$smarty.section.line.index}, 'attr1', {$smarty.section.line.index},  jQuery('#quantity{$smarty.section.line.index}').val() );
+						chain_select($(this).val(),'#attr2-'+{$smarty.section.line.index}, 'attr2', {$smarty.section.line.index},  jQuery('#quantity{$smarty.section.line.index}').val() );
+						chain_select($(this).val(),'#attr3-'+{$smarty.section.line.index}, 'attr3', {$smarty.section.line.index},  jQuery('#quantity{$smarty.section.line.index}').val() );
+							"	
 				>
 					<option value=""></option>
 				{foreach from=$products item=product}

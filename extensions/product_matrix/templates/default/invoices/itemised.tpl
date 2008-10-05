@@ -46,7 +46,13 @@
 				<select
 					class="product_select{$smarty.section.line.index} selector" 
 					name="products{$smarty.section.line.index}"
-					onchange="invoice_product_change_price($(this).val(), {$smarty.section.line.index}, jQuery('#quantity{$smarty.section.line.index}').val() );"
+					{*onchange="invoice_product_change_price($(this).val(), {$smarty.section.line.index}, jQuery('#quantity{$smarty.section.line.index}').val() );"*}
+					onchange="
+						invoice_product_change_price($(this).val(), {$smarty.section.line.index}, jQuery('#quantity{$smarty.section.line.index}').val() );
+						chain_select($(this).val(),'#attr1-'+{$smarty.section.line.index}, 'attr1', {$smarty.section.line.index},  jQuery('#quantity{$smarty.section.line.index}').val() );
+						chain_select($(this).val(),'#attr2-'+{$smarty.section.line.index}, 'attr2', {$smarty.section.line.index},  jQuery('#quantity{$smarty.section.line.index}').val() );
+						chain_select($(this).val(),'#attr3-'+{$smarty.section.line.index}, 'attr3', {$smarty.section.line.index},  jQuery('#quantity{$smarty.section.line.index}').val() );
+							"	
 				>
 				{*	onchange="chainSelect('#attr1-'+{$smarty.section.line.index},'./index.php?module=invoices&view=ajax&search=attr1')"	*}
 				>
@@ -108,11 +114,11 @@
 
 
 <tr>
-        <td colspan=2 class="details_screen">{$LANG.notes}</td>
+        <td colspan=5 class="details_screen">{$LANG.notes}</td>
 </tr>
 
 <tr>
-        <td colspan=2><textarea class="editor" input type=text name="note" height="20px" width="50px" rows=1 cols=60 WRAP=nowrap></textarea></td>
+        <td colspan=5><textarea class="editor" input type=text name="note" height="20px" width="50px" rows=1 cols=60 WRAP=nowrap></textarea></td>
 </tr>
 
 <tr><td class="details_screen">{$LANG.tax}</td>
