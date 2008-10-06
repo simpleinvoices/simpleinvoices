@@ -1,6 +1,4 @@
-<form name="frmpost"
-	action="index.php?module=products&view=save&id={$smarty.get.id}"
-	method="post">
+<form name="frmpost" action="index.php?module=products&view=save&id={$smarty.get.id}" method="post" id="frmpost" onSubmit="return checkForm(this);">
 
 
 {if $smarty.get.action== 'view' }
@@ -74,7 +72,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product_description}</td>
-		<td><input type="text" name="description" size="50" value="{$product.description}" /></td>
+		<td><input type="text" name="description" size="50" value="{$product.description}" id="description" class="required" onblur="checkField(this);"/></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product_unit_price}</td>

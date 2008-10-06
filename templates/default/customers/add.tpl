@@ -21,7 +21,7 @@
 		You must enter a Customer name</div>
 		<hr />
 	{/if}
-<form name="frmpost" ACTION="index.php?module=customers&view=add" METHOD="post"><h3>{$LANG.customer_add}</h3>
+<form name="frmpost" ACTION="index.php?module=customers&view=add" METHOD="post" id="frmpost" onSubmit="return checkForm(this);"><h3>{$LANG.customer_add}</h3>
 <hr />
 <table align=center>
 	<tr>
@@ -33,7 +33,7 @@
 				title="{$LANG.Required_Field}"
 		>
 		<img src="./images/common/required-small.png"></img></a></td>
-		<td><input type=text name="name" value="{$smarty.post.name}" size=25></td>
+		<td><input type=text name="name" value="{$smarty.post.name}" size=25 id="name" class="required" onblur="checkField(this);"></td>
 	</tr>
 	</tr>
 	<td class="details_screen">{$LANG.customer_contact}

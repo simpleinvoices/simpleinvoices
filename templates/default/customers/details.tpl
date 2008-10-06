@@ -209,9 +209,7 @@
 
 {if $smarty.get.action == 'edit' }
 
-<form name="frmpost"
-	action="index.php?module=customers&view=save&customer={$customer.id}"
-	method="post">
+<form name="frmpost" action="index.php?module=customers&view=save&customer={$customer.id}" method="post" id="frmpost" onSubmit="return checkForm(this);">
 
 <div id="top"><b>{$LANG.customer_edit}</b></div>
 <hr></hr>
@@ -230,7 +228,7 @@
 		>
 		<img src="./images/common/required-small.png"></img></a>
 		</td>
-		<td><input type="text" name="name" value="{$customer.name|regex_replace:"/[\\\]/":""}" size="50" /></td>
+		<td><input type="text" name="name" value="{$customer.name|regex_replace:"/[\\\]/":""}" size="50" id="name" class="required" onblur="checkField(this);"/></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.attention_short}

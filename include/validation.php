@@ -20,6 +20,20 @@ function jsFormValidationEnd(){
   echo "}\n";
 }
 
+function checkrequired_name_empty($sForm, $sName, $sLabel)
+{
+if ((this.document.$sForm.$sName.value == ""))
+{
+alert("The form is incomplete please make sure you have entered all the information marked with *\n\nPlease enter the $sLabel.\n\n");
+this.document.$sForm.$sName.focus();
+ $sForm.$sName.focus( ); //This focuses the cursor on the empty field
+
+return false;
+}
+return true;
+}
+
+
 function jsTextValidation($sName, $sLabel, $iMin, $iMax){
 /*
   echo "  if (theForm.".$sName.".value != \"\")\n";

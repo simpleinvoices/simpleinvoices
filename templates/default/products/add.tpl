@@ -10,7 +10,7 @@
 		You must enter a description for the product</div>
 		<hr />
 	{/if}
-<form name="frmpost" ACTION="index.php?module=products&view=add" METHOD="POST">
+<form name="frmpost" ACTION="index.php?module=products&view=add" METHOD="POST" id="frmpost" onSubmit="return checkForm(this);">
 
 <div id="top"><h3>&nbsp;{$LANG.product_to_add}&nbsp;</h3></div>
  <hr />
@@ -20,7 +20,7 @@
 		<td class="details_screen">{$LANG.product_description} 
 		<a class="cluetip" href="#"	rel="docs.php?t=help&p=required_field" title="{$LANG.Required_Field}"><img src="./images/common/help-small.png"></img></a>
 		</td>
-		<td><input type=text name="description" value="{$smarty.post.description}" size=50></td>
+		<td><input type=text name="description" value="{$smarty.post.description}" size=50 id="description" class="required" onblur="checkField(this);"></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product_unit_price}</td>

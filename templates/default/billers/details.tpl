@@ -8,7 +8,7 @@
 * License:
 *	 GPL v3 or above
 *}
-<form name="frmpost" action="index.php?module=billers&view=save&id={$smarty.get.id}" method="post">
+<form name="frmpost" action="index.php?module=billers&view=save&id={$smarty.get.id}" method="post" id="frmpost" onSubmit="return checkForm(this);">
 
 
 {if $smarty.get.action== 'view' }
@@ -172,8 +172,7 @@
 					title="{$LANG.Required_Field}"
 			>
 			<img src="./images/common/required-small.png"></img></a></td>
-		<td><input type=text name="name" value="{$biller.name|regex_replace:"/[\\\]/":""}"
-			size=50 /></td>
+		<td><input type=text name="name" value="{$biller.name|regex_replace:"/[\\\]/":""}" size=50 id="name" class="required" onblur="checkField(this);"/></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street}</td>
