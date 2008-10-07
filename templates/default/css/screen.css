@@ -491,5 +491,17 @@ a:link,a:visited {
    right:0px;
    position:fixed;
    padding: 3px
-
 }
+
+/* extjs/doukiwki style input boes */
+input.edit, select.edit 
+{
+	background:#FFFFFF url(../../../images/common/text-bg.gif) repeat-x scroll center top;
+	/*border:1px solid #B5B8C8;*/
+	border:1px solid #CCCCCC;
+	/*padding:1px 3px;*/
+	margin:1px;
+	padding:0.2em 0.3em;
+}
+
+
