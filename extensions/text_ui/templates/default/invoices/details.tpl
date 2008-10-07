@@ -146,11 +146,19 @@
 					{if $products == null }
 						<p><em>{$LANG.no_products}</em></p>
 					{else}
-					   <select 
-					   		class="product_select{$line}"
-							name="products{$line}"
-							onchange="invoice_product_change_price($(this).val(), {$line}, jQuery('#quantity{$line}').val() );" 
+
+						<select
+							class="product_select{$smarty.section.line.index} selector" 
+							name="products{$smarty.section.line.index}"
+							onchange="
+								invoice_product_change_price($(this).val(), {$line}, jQuery('#quantity{$line}').val() );
+								chain_select($(this).val(),'#attr1-'+{$line}, 'attr1', {$line},  jQuery('#quantity{$line}').val() );
+								chain_select($(this).val(),'#attr2-'+{$line}, 'attr2', {$line},  jQuery('#quantity{$line}').val() );
+								chain_select($(this).val(),'#attr3-'+{$line}, 'attr3', {$line},  jQuery('#quantity{$line}').val() );
+									"	
 						>
+						
+						
 							{foreach from=$products item=product}
 								<option {if $product.id == $invoiceItem.product_id} selected {/if} value="{$product.id}">{$product.description}</option>
 							{/foreach}

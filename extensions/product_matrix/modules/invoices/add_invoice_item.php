@@ -27,16 +27,23 @@ $pageActive = "invoices";
 $smarty->assign('pageActive', $pageActive);
 $smarty -> assign("type",$type);
 
+$sql_prod = "select product_id as PID, (select count(product_id) from ".TB_PREFIX."products_matrix where product_id = PID ) as count from ".TB_PREFIX."products_matrix ORDER BY count desc LIMIT 1;";
+$sth_prod =  dbQuery($sql_prod);
+$number_of_products = $sth_prod->fetchAll();
+
+$smarty -> assign("number_of_attributes", $number_of_products['0']['count']);
+
 $js =<<<EOD
 <script type="text/javascript" charset="utf-8">
 
 
 $(function()
 {
-
+/*
         $('.product_select').chainSelect('#attr1','./index.php?module=invoices&view=ajax&search=attr1');
         $('.product_select').chainSelect('#attr2','./index.php?module=invoices&view=ajax&search=attr2');
         $('.product_select').chainSelect('#attr3','./index.php?module=invoices&view=ajax&search=attr3');
+*/
 /*
 for (var x = 0; x <= $dynamic_line_items; x++)
    {
