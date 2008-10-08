@@ -66,8 +66,9 @@ var email_tooltip = "{/literal}{$LANG.email}  {$invoice.preference.pref_inv_word
 				],
 			*/
 			searchitems : [
-				{display: 'ID', name : 'id'},
-				{display: 'Biller ID', name : 'biller_id', isdefault: true}
+				{display: 'Invoice Number', name : 'id'},
+				{display: 'Biller', name : 'b.name', isdefault: true},
+				{display: 'Customer', name : 'c.name', isdefault: true}
 				],
 			sortname: "id",
 			sortorder: "desc",
