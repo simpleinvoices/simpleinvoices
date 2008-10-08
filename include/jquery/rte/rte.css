@@ -19,11 +19,11 @@ padding:0.2em 0.3em;
 
 .editor
 {
-	width:99%;
+	width:100%;
 /*	margin:0;*/
-margin-left:1px;
-margin-right:1px;
-margin-bottom:1px;
+	margin-left:1px;
+	margin-right:1px;
+	margin-bottom:1px;
 	padding:0;
 	/*height:160px;*/
 	/*border:1px #999 solid;*/
@@ -34,10 +34,12 @@ margin-bottom:1px;
 }
 
 .rte-toolbar{ overflow:hidden; 
-	width:99%;
-margin-right:1px;
-margin-left:1px;
-margin-top:1px;
+	width:100%;
+
+		margin-right:1px;
+		margin-left:1px;
+
+	margin-top:1px;
 	border-left:1px #CCC solid;
 	border-right:1px #CCC solid;
 	border-top:1px #CCC solid;

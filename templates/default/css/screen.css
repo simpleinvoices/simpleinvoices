@@ -494,7 +494,7 @@ a:link,a:visited {
 }
 
 /* extjs/doukiwki style input boes */
-input.edit, select.edit 
+input, select
 {
 	background:#FFFFFF url(../../../images/common/text-bg.gif) repeat-x scroll center top;
 	/*border:1px solid #B5B8C8;*/
@@ -502,6 +502,132 @@ input.edit, select.edit
 	/*padding:1px 3px;*/
 	margin:1px;
 	padding:0.2em 0.3em;
+}
+
+.xxbutton {
+		background:#FFFFFF url(../../../images/common/text-bg-rotate.gif) repeat-x scroll center bottom;
+
+}
+
+.xxbutton{
+
+    border-top:1px solid #eee;
+    border-left:1px solid #eee;
+
+	/*border:1px solid #8CACBB;*/
+	color:#000000;
+	cursor:pointer;
+	/*font-size:100%;*/
+	margin:1px;
+	/*padding:0.125em 0.4em;*/
+	text-decoration:none;
+	vertical-align:middle;
+	
+	
+	font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+    font-size:100%;
+    line-height:130%;
+    text-decoration:none;
+    font-weight:bold;
+    color:#565656;
+    cursor:pointer;
+    padding:5px 10px 6px 7px; /* Links */
+}
+
+.xxbutton_img {
+	border:medium none;
+	height:16px;
+	margin:0 3px -3px 0 !important;
+	padding:0;
+	width:16px;
+}
+
+
+/* BUTTONS */
+
+.buttons a, .buttons button{
+    display:block;
+    float:left;
+    margin:0 7px 0 0;
+    background:#FFFFFF url(../../../images/common/text-bg-rotate.gif) repeat-x scroll center bottom;
+   /* background-color:#f5f5f5;*/
+    border:1px solid #ccc;
+    border-top:1px solid #eee;
+    border-left:1px solid #eee;
+
+    font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+    font-size:100%;
+    line-height:130%;
+    text-decoration:none;
+    font-weight:bold;
+    color:#565656;
+    cursor:pointer;
+    /*padding:5px 10px 6px 7px;*/ /* OLD Links */
+    padding:5px 10px 7px 7px; /* Links */
+}
+.buttons button{
+    width:auto;
+    overflow:visible;
+    padding:4px 10px 3px 7px; /* IE6 */
+}
+.buttons button[type]{
+    padding:5px 10px 5px 7px; /* Firefox */
+    line-height:17px; /* Safari */
+}
+*:first-child+html button[type]{
+    padding:4px 10px 3px 7px; /* IE7 */
+}
+.buttons button img, .buttons a img{
+    margin:0 3px -3px 0 !important;
+    padding:0;
+    border:none;
+    width:16px;
+    height:16px;
+}
+
+/* STANDARD */
+
+button:hover, .buttons a:hover{
+
+    border:1px solid #c2e1ef;
+    color:#336699;
+}
+.buttons a:active{
+
+    border:1px solid #6299c5;
+    color:#fff;
+}
+
+/* POSITIVE */
+
+button.positive, .buttons a.positive{
+   /* color:#529214;*/
+}
+.buttons a.positive:hover, button.positive:hover{
+
+    border:1px solid #C6D880;
+    color:#529214;
+}
+.buttons a.positive:active{
+
+    border:1px solid #529214;
+    color:#fff;
+}
+
+/* NEGATIVE */
+
+.buttons a.negative, button.negative{
+ /*   color:#d12f19;*/
+}
+.buttons a.negative:hover, button.negative:hover{
+
+    border:1px solid #fbc2c4;
+    color:#d12f19;
+}
+.buttons a.negative:active{
+
+    border:1px solid #d12f19;
+    color:#fff;
 }
 
 

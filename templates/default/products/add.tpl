@@ -18,7 +18,7 @@
 <table align=center>
 	<tr>
 		<td class="details_screen">{$LANG.product_description} 
-		<a class="cluetip" href="#"	rel="docs.php?t=help&p=required_field" title="{$LANG.Required_Field}"><img src="./images/common/help-small.png"></img></a>
+		<a class="cluetip" href="#"	rel="docs.php?t=help&p=required_field" title="{$LANG.Required_Field}"><img src="./images/common/required-small.png"></img></a>
 		</td>
 		<td><input type=text name="description" value="{$smarty.post.description}" size=50 id="description" class="required edit" onblur="checkField(this);"></td>
 	</tr>
@@ -62,11 +62,25 @@
 	</tr>
 	{*	{showCustomFields categorieId="3" itemId=""} *}
 </table>
-<!-- </div> -->
-<hr />
-<div style="text-align:center;">
-	<input type="submit" name="id" value="{$LANG.insert_product}">
-	<input type="hidden" name="op" value="insert_product">
-</div>
+<hr/>
+<table class="buttons" align="center">
+	<tr>
+		<td>
+			<button type="submit" class="positive" name="id" value="{$LANG.save}">
+			    <img class="button_img" src="./images/common/tick.png" alt=""/> 
+				{$LANG.save}
+			</button>
+
+			<input type="hidden" name="op" value="insert_product">
+		
+			<a href="./index.php?module=product&view=manage" class="negative">
+		        <img src="./images/common/cross.png" alt=""/>
+	        	{$LANG.cancel}
+    		</a>
+	
+		</td>
+	</tr>
+</table>
+
 </form>
 	{/if}
