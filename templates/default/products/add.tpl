@@ -63,6 +63,7 @@
 	{*	{showCustomFields categorieId="3" itemId=""} *}
 </table>
 <hr/>
+
 <table class="buttons" align="center">
 	<tr>
 		<td>
@@ -73,7 +74,7 @@
 
 			<input type="hidden" name="op" value="insert_product">
 		
-			<a href="./index.php?module=product&view=manage" class="negative">
+			<a href="./index.php?module=products&view=manage" class="negative">
 		        <img src="./images/common/cross.png" alt=""/>
 	        	{$LANG.cancel}
     		</a>
@@ -81,6 +82,7 @@
 		</td>
 	</tr>
 </table>
+
 
 </form>
 	{/if}
