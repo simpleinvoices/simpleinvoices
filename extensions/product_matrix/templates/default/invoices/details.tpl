@@ -65,16 +65,6 @@
 		
 		</td>
 	</tr>
-	<tr>
-		<td class="details_screen">Invoice Status</td>
-		<td>
-			<select name="status_id">
-				<option value="0">New</option>
-				<option {if $invoice.status_id == 1} selected{/if} value="1">Sent</option>
-				<option {if $invoice.status_id == 2} selected{/if} value="1">Paid</option>
-			</select>
-		</td>
-	</tr>
 
 
 {if $invoice.type_id == 1 }
@@ -89,7 +79,7 @@
 	 {$customFields.2}
 	 {$customFields.3}
 	 {$customFields.4}
-	 {showCustomFields categorieId="4" itemId=$smarty.get.invoice}
+	{* {showCustomFields categorieId="4" itemId=$smarty.get.invoice} *}
 
 	
 		        <tr>       	         
@@ -143,8 +133,8 @@
 						<p><em>{$LANG.no_products}</em></p>
 					{else}
 						<select
-							class="product_select{$smarty.section.line.index} selector" 
-							name="products{$smarty.section.line.index}"
+							class="product_select{$line} selector" 
+							name="products{$line}"
 							onchange="
 								invoice_product_change_price($(this).val(), {$line}, jQuery('#quantity{$line}').val() );
 								chain_select($(this).val(),'#attr1-'+{$line}, 'attr1', {$line},  jQuery('#quantity{$line}').val() );
@@ -218,13 +208,17 @@
 	 {$customFields.2}
 	 {$customFields.3}
 	 {$customFields.4}
-	 	 {showCustomFields categorieId="4" itemId=$smarty.get.invoice}
+	 	{*  {showCustomFields categorieId="4" itemId=$smarty.get.invoice} *}
 
 			<tr>
 				<td colspan=6 class='details_screen'>{$LANG.note}:</td>
 			</tr>
 			<tr>
-	             <td colspan=6 ><textarea input type=text name="note" rows=10 cols=70 WRAP=nowrap>{$invoice.note}</textarea></td>
+	             <td colspan=6 >
+					<textarea  input type=text class="editor" name="note" rows=8 cols=50>
+						{$invoice.notes|unescape}
+					</textarea>
+				</td>
 			</tr>
 			
 

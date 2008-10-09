@@ -112,7 +112,7 @@ class matrix_invoice
 		($unit_price =="") ? $product_unit_price = $product['unit_price'] : $product_unit_price = $unit_price ;
 		//print_r($product);
 		$actual_tax = $tax['tax_percentage']  / 100 ;
-		$total_invoice_item_tax = $product['unit_price'] * $actual_tax;
+		$total_invoice_item_tax = $product_unit_price * $actual_tax;
 		$tax_amount = $total_invoice_item_tax * $quantity;
 		$total_invoice_item = $total_invoice_item_tax + $product_unit_price ;	
 		$total = $total_invoice_item * $quantity;

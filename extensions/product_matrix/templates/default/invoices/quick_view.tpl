@@ -157,7 +157,7 @@
 	<tr class='details_screen biller'>
 		<td class='details_screen'>{$customFieldLabels.biller_cf4}:</td><td class='details_screen' colspan=5>{$biller.custom_field4}</td>
 	</tr>
-		{showCustomFields categorieId="1" itemId=$biller.id }
+	{*	{showCustomFields categorieId="1" itemId=$biller.id } *}
 
 	<tr>
 		<td colspan=5><br></td>
@@ -203,7 +203,7 @@
 		<td class='details_screen'>{$customFieldLabels.customer_cf4}:</td><td class='details_screen' colspan=5>{$customer.custom_field4}</td>
 	</tr>	
 
-				{showCustomFields categorieId="2" itemId=$customer.id }
+			{*	{showCustomFields categorieId="2" itemId=$customer.id } *}
 
 <hr></hr>
 
@@ -325,7 +325,7 @@
 			</tr>
 			 {*TODO: CustomField is normaly stored for a product. Here it needs to be added to the invoices Item
 			 	-> categorie 5 *}
-			 {showCustomFields categorieId="3" itemId=$invoiceItem.productId }
+			{* {showCustomFields categorieId="3" itemId=$invoiceItem.productId } *}
 
 	{/if}	
 	
@@ -421,7 +421,7 @@
 	</tr>
 {/if}
 	
-	{showCustomFields categorieId="4" itemId=$invoice.id }
+{* 	{showCustomFields categorieId="4" itemId=$invoice.id } *}
 
 
 

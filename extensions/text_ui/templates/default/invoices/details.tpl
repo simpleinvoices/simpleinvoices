@@ -94,7 +94,7 @@
 	 {$customFields.2}
 	 {$customFields.3}
 	 {$customFields.4}
-	 {showCustomFields categorieId="4" itemId=$smarty.get.invoice}
+	{* {showCustomFields categorieId="4" itemId=$smarty.get.invoice} *}
 
 	
 		        <tr>       	         
@@ -148,8 +148,8 @@
 					{else}
 
 						<select
-							class="product_select{$smarty.section.line.index} selector" 
-							name="products{$smarty.section.line.index}"
+							class="product_select{$line} selector" 
+							name="products{$line}"
 							onchange="
 								invoice_product_change_price($(this).val(), {$line}, jQuery('#quantity{$line}').val() );
 								chain_select($(this).val(),'#attr1-'+{$line}, 'attr1', {$line},  jQuery('#quantity{$line}').val() );

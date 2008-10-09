@@ -53,7 +53,7 @@
 							name="product1"
 							onchange="
 								invoice_product_change_price($(this).val(), 1, jQuery('#quantity1').val() );
-								chain_select($(this).val(),'#attr1', 'attr1', 1,  jQuery('#quantity1}').val() );
+								chain_select($(this).val(),'#attr1', 'attr1', 1,  jQuery('#quantity1').val() );
 								chain_select($(this).val(),'#attr2', 'attr2', 1,  jQuery('#quantity1').val() );
 								chain_select($(this).val(),'#attr3', 'attr3', 1,  jQuery('#quantity1').val() );
 									"	
