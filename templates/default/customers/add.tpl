@@ -169,9 +169,23 @@
 
 </table>
 <hr />
-<div style="text-align:center;">
-	<input type="submit" name="customer" value="{$LANG.insert_customer}">
-	<input type="hidden" name="op" value="insert_customer">
-</div>
+<table class="buttons" align="center">
+    <tr>
+        <td>
+            <button type="submit" class="positive" name="insert_customer" value="{$LANG.save}">
+                <img class="button_img" src="./images/common/tick.png" alt=""/> 
+                {$LANG.save}
+            </button>
+
+            <input type="hidden" name="op" value="insert_customer">
+        
+            <a href="./index.php?module=customers&view=manage" class="negative">
+                <img src="./images/common/cross.png" alt=""/>
+                {$LANG.cancel}
+            </a>
+    
+        </td>
+    </tr>
+</table>
 </form>
 {/if}

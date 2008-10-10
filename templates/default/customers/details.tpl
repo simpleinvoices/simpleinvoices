@@ -361,10 +361,25 @@
 
 
 <hr></hr>
-<input type="submit" name="cancel" value="{$LANG.cancel}" />
-<input type="submit" name="save_customer" value="{$LANG.save_customer}" />
-<input type="hidden" name="op" value="edit_customer" />
 
+<table class="buttons" align="center">
+    <tr>
+        <td>
+            <button type="submit" class="positive" name="save_customer" value="{$LANG.save_customer}">
+                <img class="button_img" src="./images/common/tick.png" alt=""/> 
+                {$LANG.save}
+            </button>
+
+            <input type="hidden" name="op" value="edit_customer">
+        
+            <a href="./index.php?module=customers&view=manage" class="negative">
+                <img src="./images/common/cross.png" alt=""/>
+                {$LANG.cancel}
+            </a>
+    
+        </td>
+    </tr>
+</table>
 
 </form>
 {/if}
