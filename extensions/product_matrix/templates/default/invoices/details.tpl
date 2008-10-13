@@ -216,7 +216,7 @@
 			<tr>
 	             <td colspan=6 >
 					<textarea  input type=text class="editor" name="note" rows=8 cols=50>
-						{$invoice.notes|unescape}
+						{$invoice.note|unescape}
 					</textarea>
 				</td>
 			</tr>

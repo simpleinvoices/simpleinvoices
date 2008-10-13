@@ -125,7 +125,7 @@ function lastInsertId() {
 	} elseif ($pdoAdapter == 'mysql') {
 		$sql = 'SELECT last_insert_id()';
 	}
-	echo $sql;
+	//echo $sql;
 	$sth = $dbh->prepare($sql);
 	$sth->execute();
 	return $sth->fetchColumn();

@@ -11,18 +11,19 @@
 
 {* if customer is updated or saved.*} 
 
-{if $smarty.post.name != "" && $smarty.post.customer != null } 
+{if $smarty.post.name != "" && $smarty.post.name != null } 
 	{include file="../templates/default/customers/save.tpl"}
 
 {else}
 {* if  name was inserted *} 
-	{if $smarty.post.customer !=null} 
+	{if $smarty.post.name !=null} 
 		<div class="validation_alert"><img src="./images/common/important.png"</img>
 		You must enter a Customer name</div>
 		<hr />
 	{/if}
-<form name="frmpost" ACTION="index.php?module=customers&view=add" METHOD="post" id="frmpost" onSubmit="return checkForm(this);"><h3>{$LANG.customer_add}</h3>
-<hr />
+<form name="frmpost" ACTION="index.php?module=customers&view=add" METHOD="post" id="frmpost" onSubmit="return checkForm(this);">
+<h3>{$LANG.customer_add}</h3>
+
 <table align=center>
 	<tr>
 		<td class="details_screen">{$LANG.customer_name}
@@ -33,7 +34,7 @@
 				title="{$LANG.Required_Field}"
 		>
 		<img src="./images/common/required-small.png"></img></a></td>
-		<td><input type=text name="name" value="{$smarty.post.name}" size=25 id="name" class="required" onblur="checkField(this);"></td>
+		<td><input type=text name="name" id="name" value="{$smarty.post.name}" size=25  class="required" onblur="checkField(this);"></td>
 	</tr>
 	</tr>
 	<td class="details_screen">{$LANG.customer_contact}
@@ -126,7 +127,7 @@
 				</img>
 			</a>
 		</td>
-	{*	<td><input type=text name="custom_field2" value="{$smarty.post.custom_field2}" size=25></td> *}
+		<td><input type=text name="custom_field2" value="{$smarty.post.custom_field2}" size=25></td> 
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.customer_cf3}
@@ -138,7 +139,7 @@
 			> 
 		<img
 			src="./images/common/help-small.png"></img></a></td>
-		<td><input type=text name="custom_field3" value="{$smarty.post.custom_field3}" size=25></td>
+		<td><input type=text name="custom_field3" value="{$smarty.post.custom_field3}" size=25/></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.customer_cf4}
@@ -150,7 +151,7 @@
 			> 
 		<img
 			src="./images/common/help-small.png"></img></a></td>
-		<td><input type=text name="custom_field4" value="{$smarty.post.custom_field4}" size=25></td>
+		<td><input type=text name="custom_field4" value="{$smarty.post.custom_field4}" size=25/></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>

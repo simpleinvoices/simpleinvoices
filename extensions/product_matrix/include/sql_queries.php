@@ -95,16 +95,16 @@ class matrix_invoice
 		
 			$attr1 = explode("-",$attr1);
 			$attr1 = $attr1[2];
-			echo "Attr1: ".$attr1." ";
+			//echo "Attr1: ".$attr1." ";
 
 			$attr2 = explode("-",$attr2);
 			$attr2 = $attr2[2];
-			echo "Attr2 : ".$attr2." ";
+			//echo "Attr2 : ".$attr2." ";
 
 			$attr3 = explode("-",$attr3);
 			$attr3 = $attr3[2];
-			echo "Attr3 : ".$attr3;
-			echo "<br><br>";
+			//echo "Attr3 : ".$attr3;
+			//echo "<br><br>";
 
 		$tax = getTaxRate($tax_id);
 		$product = getProduct($product_id);
@@ -147,16 +147,16 @@ class matrix_invoice
 
 			$attr1 = explode("-",$attr1);
 			$attr1 = $attr1[2];
-			echo "Attr1: ".$attr1." ";
+			//echo "Attr1: ".$attr1." ";
 
 			$attr2 = explode("-",$attr2);
 			$attr2 = $attr2[2];
-			echo "Attr2 : ".$attr2." ";
+			//echo "Attr2 : ".$attr2." ";
 
 			$attr3 = explode("-",$attr3);
 			$attr3 = $attr3[2];
-			echo "Attr3 : ".$attr3;
-			echo "<br><br>";
+			//echo "Attr3 : ".$attr3;
+			//echo "<br><br>";
 
 
 		$product = getProduct($product_id);

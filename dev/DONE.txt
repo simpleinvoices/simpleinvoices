@@ -1,32 +1,42 @@
-######
-Sept 08
-######
-- Zend Local added
-- the old $date_format variable has been removed 
--- now using the Zend_Date to auto print the date in the locale date format
--- note: default dates printed in the locales zend medium format
-######
-Aug 08
-######
-- Turkish tranlsation added - thanks Don Camillo
-- Swedish translation added - Thanks Ivar Walfridson
-######
-July 08
-######
-- Move to Flexigrid as the Simple Invoies grid of choice (www.webplicity.net/flexigrid/)
-- Replaced the html editor tiny_mce with a modified version of jquery rte (http://batiste.dosimple.ch/blog/2007-09/)
-- Replaced modal/info window - from ajs to cluetip (http://plugins.learningjquery.com/cluetip/)
-########
-DONE NOW
-########
- - URL link - get ride of the type id of an invoice being required in the url link - AP
- - lang: add new lang variables into all files : grep LANG_TODO - AP - done
- - def invoice template - mob phone not coming through - check all fields - AP
- - Spaces in Invoice Preference name creates PDF issue :http://simpleinvoices.org/forum/topic-384.html
- - move phpreports libs from ./modules/reports/.. to ./lib - AP
- - pdf: pdf of the default templated doesnt include some of the borders on the right sides - needs fixing
- - make $tb_prefix a global constant to be accessible in all functions (without global) - now as define
-
+--------
+BETA 2
+--------
+	- Make fields look pretty 
+	- Fix problem with selecting language
+	- Documentation - need to updat to change permmissions of config/config.ini to 640
+	
+--------
+BETA 1
+--------
+	######
+	Sept 08
+	######
+	- Zend Local added
+	- the old $date_format variable has been removed 
+	-- now using the Zend_Date to auto print the date in the locale date format
+	-- note: default dates printed in the locales zend medium format
+	######
+	Aug 08
+	######
+	- Turkish tranlsation added - thanks Don Camillo
+	- Swedish translation added - Thanks Ivar Walfridson
+	######
+	July 08
+	######
+	- Move to Flexigrid as the Simple Invoies grid of choice (www.webplicity.net/flexigrid/)
+	- Replaced the html editor tiny_mce with a modified version of jquery rte (http://batiste.dosimple.ch/blog/2007-09/)
+	- Replaced modal/info window - from ajs to cluetip (http://plugins.learningjquery.com/cluetip/)
+	########
+	DONE NOW
+	########
+	 - URL link - get ride of the type id of an invoice being required in the url link - AP
+	 - lang: add new lang variables into all files : grep LANG_TODO - AP - done
+	 - def invoice template - mob phone not coming through - check all fields - AP
+	 - Spaces in Invoice Preference name creates PDF issue :http://simpleinvoices.org/forum/topic-384.html
+	 - move phpreports libs from ./modules/reports/.. to ./lib - AP
+	 - pdf: pdf of the default templated doesnt include some of the borders on the right sides - needs fixing
+	 - make $tb_prefix a global constant to be accessible in all functions (without global) - now as define
+	
 
 
 ####################
