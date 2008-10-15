@@ -15,13 +15,7 @@
 	{include file="../templates/default/billers/save.tpl"}
 {else}
 {* if no biller name was inserted *}
-
-{if $smarty.post.submit !=null}
-<div class="validation_alert"><img src="./images/common/important.png"</img>
-You must enter a Biller name</div>
-<hr />
-{/if}
-<form name="frmpost" action="index.php?module=billers&view=add"	method="post" id="frmpost" onSubmit="return checkForm(this);"><h3>{$LANG.biller_to_add}</h3>
+<form name="frmpost" action="index.php?module=billers&view=add"	method="post" id="frmpost"><h3>{$LANG.biller_to_add}</h3>
 <hr />
 
 <table align="center">
@@ -195,9 +189,24 @@ You must enter a Biller name</div>
 	</tbody>
 </table>
 <hr />
-<div style="text-align:center;">
-	<input type="submit" name="submit" value="{$LANG.insert_biller}" />
-	<input type="hidden" name="op" value="insert_biller" />
-</div>
+
+<table class="buttons" align="center">
+    <tr>
+        <td>
+            <button type="submit" class="positive" name="insert_biller" value="{$LANG.insert_biller}">
+                <img class="button_img" src="./images/common/tick.png" alt=""/> 
+                {$LANG.save}
+            </button>
+
+            <input type="hidden" name="op" value="insert_biller">
+        
+            <a href="./index.php?module=billers&view=manage" class="negative">
+                <img src="./images/common/cross.png" alt=""/>
+                {$LANG.cancel}
+            </a>
+    
+        </td>
+    </tr>
+</table>
 </form>
 {/if}

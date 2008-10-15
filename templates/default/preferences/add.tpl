@@ -127,10 +127,24 @@
 </table>
 <!-- </div> -->
 <hr />
-<div style="text-align:center;">
-	<input type=submit name="submit" value="{$LANG.insert_preference}">
-	<input type=hidden name="op" value="insert_preference">
-</div>
+<table class="buttons" align="center">
+    <tr>
+        <td>
+            <button type="submit" class="positive" name="insert_preference" value="{$LANG.save}">
+                <img class="button_img" src="./images/common/tick.png" alt=""/> 
+                {$LANG.save}
+            </button>
+
+            <input type="hidden" name="op" value="insert_preference">
+        
+            <a href="./index.php?module=preferences&view=manage" class="negative">
+                <img src="./images/common/cross.png" alt=""/>
+                {$LANG.cancel}
+            </a>
+    
+        </td>
+    </tr>
+ </table>
 </form>
 	
 {/if}

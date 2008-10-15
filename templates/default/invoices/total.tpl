@@ -80,9 +80,24 @@
 </table>
 <!-- </div> -->
 <hr />
-<div style="text-align:center;">
-	<input type=hidden name="max_items" value="{$smarty.section.line.index}">
-	<input type=submit name="submit" value="{$LANG.save_invoice}">
-	<input type=hidden name="type" value="1">
-</div>
+<table class="buttons" align="center">
+    <tr>
+        <td>
+            <button type="submit" class="positive" name="submit" value="{$LANG.save}">
+                <img class="button_img" src="./images/common/tick.png" alt=""/> 
+                {$LANG.save}
+            </button>
+            
+			<input type=hidden name="max_items" value="{$smarty.section.line.index}">
+        	<input type=hidden name="type" value="1">
+        	
+            <a href="./index.php?module=invoices&view=manage" class="negative">
+                <img src="./images/common/cross.png" alt=""/>
+                {$LANG.cancel}
+            </a>
+    
+        </td>
+    </tr>
+ </table>
+
 </form>

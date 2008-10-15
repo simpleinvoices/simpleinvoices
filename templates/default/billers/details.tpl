@@ -315,10 +315,24 @@
 </table>
 {/if} 
 {if $smarty.get.action== 'edit' }
-	<hr></hr>
-		<input type="submit" name="cancel" value="{$LANG.cancel}" /> 
-		<input type="submit" name="save_biller" value="{$LANG.save_biller}" /> 
-		<input type="hidden" name="op" value="edit_biller" /> 
-		<input type="hidden" name="categorie" value="1" />
+	<table class="buttons" align="center">
+    <tr>
+        <td>
+            <button type="submit" class="positive" name="save_biller" value="{$LANG.save_biller}">
+                <img class="button_img" src="./images/common/tick.png" alt=""/> 
+                {$LANG.save}
+            </button>
+
+            <input type="hidden" name="op" value="edit_biller">
+   			<input type="hidden" name="categorie" value="1" />
+
+            <a href="./index.php?module=billers&view=manage" class="negative">
+                <img src="./images/common/cross.png" alt=""/>
+                {$LANG.cancel}
+            </a>
+    
+        </td>
+    </tr>
+	</table>
 	{/if}
 </form>

@@ -245,9 +245,23 @@
 
                 </table>
 		<hr></hr>
+<table class="buttons" align="center">
+    <tr>
+        <td>
+            <button type="submit" class="positive" name="save_preference" value="{$LANG.save}">
+                <img class="button_img" src="./images/common/tick.png" alt=""/> 
+                {$LANG.save}
+            </button>
 
-<input type=submit name='action' value='{$LANG.cancel}'>
-<input type=submit name='save_preference' value='{$LANG.save}'>
-<input type=hidden name='op' value='edit_preference'>
+            <input type="hidden" name="op" value="edit_preference">
+        
+            <a href="./index.php?module=preferences&view=manage" class="negative">
+                <img src="./images/common/cross.png" alt=""/>
+                {$LANG.cancel}
+            </a>
+    
+        </td>
+    </tr>
+ </table>
 {/if}
 </form>

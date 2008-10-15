@@ -117,8 +117,24 @@
 {/if} 
 {if $smarty.get.action== 'edit' }
 	<hr></hr>
-		<input type="submit" name="cancel" value="{$LANG.cancel}" /> 
-		<input type="submit" name="save_product" value="{$LANG.save_product}" /> 
-		<input type="hidden" name="op" value="edit_product" /> 
+	<table class="buttons" align="center">
+	<tr>
+		<td>
+			<button type="submit" class="positive" name="save_product" value="{$LANG.save}">
+			    <img class="button_img" src="./images/common/tick.png" alt=""/> 
+				{$LANG.save}
+			</button>
+
+			<input type="hidden" name="op" value="edit_product">
+		
+			<a href="./index.php?module=products&view=manage" class="negative">
+		        <img src="./images/common/cross.png" alt=""/>
+	        	{$LANG.cancel}
+    		</a>
+	
+		</td>
+	</tr>
+</table>
+		
 	{/if}
 </form>

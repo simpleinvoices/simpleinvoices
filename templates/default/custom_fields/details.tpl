@@ -70,11 +70,26 @@
 	</table>
 	<hr></hr>
 
+<table class="buttons" align="center">
+    <tr>
+        <td>
+            <button type="submit" class="positive" name="save_custom_field" value="{$LANG.save}">
+                <img class="button_img" src="./images/common/tick.png" alt=""/> 
+                {$LANG.save}
+            </button>
+
+            <input type="hidden" name="op" value="edit_custom_field">
+        
+            <a href="./index.php?module=custom_fields&view=manage" class="negative">
+                <img src="./images/common/cross.png" alt=""/>
+                {$LANG.cancel}
+            </a>
+    
+        </td>
+    </tr>
+ </table>
 
 
-<input type="submit" name="cancel" value="{$LANG.cancel}" />
-<input type="submit" name="save_custom_field" value="{$LANG.save_custom_field}" />
-<input type="hidden" name="op" value="edit_custom_field" />
 
 {/if}
 

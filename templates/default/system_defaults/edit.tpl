@@ -19,8 +19,24 @@
 </tr>
 </table>
 <!-- </div> -->
-	<input type="hidden" name="name" value="{$default}">
-	<input type="submit" name="submit" value="{$LANG.save}">
-	<input type="hidden" name="op" value="update_system_defaults">
+<table class="buttons" align="center">
+    <tr>
+        <td>
+            <button type="submit" class="positive" name="submit" value="{$LANG.save}">
+                <img class="button_img" src="./images/common/tick.png" alt=""/> 
+                {$LANG.save}
+            </button>
+			<input type="hidden" name="name" value="{$default}">
+            <input type="hidden" name="op" value="update_system_defaults">
+        
+            <a href="./index.php?module=system_defaults&view=manage" class="negative">
+                <img src="./images/common/cross.png" alt=""/>
+                {$LANG.cancel}
+            </a>
+    
+        </td>
+    </tr>
+ </table>
+ 	
 
 </form>

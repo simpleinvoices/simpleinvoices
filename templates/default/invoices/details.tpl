@@ -242,10 +242,26 @@
 	</table>
 
 <hr></hr>
-	<input type="hidden" name="action" value="edit">
-	<input type="hidden" name="type" value="{$invoice.type_id}";
+<table class="buttons" align="center">
+    <tr>
+        <td>
+            <button type="submit" class="positive" name="submit" value="{$LANG.save}">
+                <img class="button_img" src="./images/common/tick.png" alt=""/> 
+                {$LANG.save}
+            </button>
 
-	<input type="button" value='Cancel'onCLick='history.back()'>
-	<input type="submit" name="submit" value="{$LANG.save}">
-	<input type="hidden" name="max_items" value="{$lines}">
+ 			<input type="hidden" name="action" value="edit">
+			<input type="hidden" name="type" value="{$invoice.type_id}";
+            <input type="hidden" name="op" value="insert_preference">
+        	<input type="hidden" name="max_items" value="{$lines}">
+        	
+            <a href="./index.php?module=invoices&view=manage" class="negative">
+                <img src="./images/common/cross.png" alt=""/>
+                {$LANG.cancel}
+            </a>
+    
+        </td>
+    </tr>
+ </table>
+ 	
 </form>
