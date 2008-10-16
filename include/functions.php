@@ -299,7 +299,9 @@ EOD;
 
 		$display_block = <<<EOD
 			<tr>
-				<td class="$css_class1">$custom_label_value <a href="docs.php?p=custom_fields&t=help" rel="gb_page_center[400, 400]"><img src="./images/common/help-small.png"></img></a>
+				<td class="$css_class1">$custom_label_value
+				<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="Custom Fields"><img src="./images/common/help-small.png"></img></a>
+ 
 				</td>
 				<td>
 					<input type=text name="customField$custom_field_number" value="$custom_field_value"size=25></input>
