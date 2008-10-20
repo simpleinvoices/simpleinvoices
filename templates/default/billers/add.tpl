@@ -193,7 +193,7 @@
 <table class="buttons" align="center">
     <tr>
         <td>
-            <button type="submit" class="positive" name="insert_biller" value="{$LANG.insert_biller}">
+            <button type="submit" class="positive" name="submit" value="{$LANG.insert_biller}">
                 <img class="button_img" src="./images/common/tick.png" alt=""/> 
                 {$LANG.save}
             </button>

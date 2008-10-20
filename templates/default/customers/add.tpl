@@ -17,9 +17,11 @@
 {else}
 {* if  name was inserted *} 
 {if $smarty.post.id !=null} 
+{*
 		<div class="validation_alert"><img src="./images/common/important.png"</img>
 		You must enter a description for the Customer</div>
 		<hr />
+*}
 	{/if}	
 <form name="frmpost" ACTION="index.php?module=customers&view=add" METHOD="post" id="frmpost" onSubmit="return checkForm(this);">
 <h3>{$LANG.customer_add}</h3>

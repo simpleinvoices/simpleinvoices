@@ -1,6 +1,7 @@
 --------
 BETA 2
 --------
+    - Make buttons look pretty
 	- Make fields look pretty 
 	- Fix problem with selecting language
 	- Documentation - need to updat to change permmissions of config/config.ini to 640
