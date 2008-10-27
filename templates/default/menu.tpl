@@ -172,7 +172,7 @@
 							<li><a href="index.php?module=options&view=help">{$LANG.get_help}</a></li>
 						</ul>
 					</li>
-					<li><a href="index.php?module=documentation/inline_docs&view=about">{$LANG.about} +</a>
+					<li><a href="docs.php?p=about">{$LANG.about} +</a>
 						<ul>
 							<li><a href="docs.php?p=about">{$LANG.about}</a></li>
 							<li><a href="docs.php?p=ChangeLog">{$LANG.change_log}</a></li>
