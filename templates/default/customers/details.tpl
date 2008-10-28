@@ -204,7 +204,17 @@
 
 
 <hr></hr>
-<a href="index.php?module=customers&view=details&id={$customer.id}&action=edit">{$LANG.edit}</a>
+<table class="buttons" align="center">
+    <tr>
+        <td>
+            <a href="./index.php?module=customers&view=details&id={$customer.id}&action=edit" class="positive">
+                <img src="./images/common/tick.png" alt=""/>
+                {$LANG.edit}
+            </a>
+    
+        </td>
+    </tr>
+</table>
 {/if}
 
 {if $smarty.get.action == 'edit' }
