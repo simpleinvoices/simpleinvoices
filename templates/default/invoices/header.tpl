@@ -10,7 +10,6 @@
 	*	http://www.simpleinvoices.org
 	*/
 *}
-<hr />
 <input type="hidden" name="action" value="insert">
 <table align="center">
 

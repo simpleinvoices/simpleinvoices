@@ -599,17 +599,24 @@ button.positive, .buttons a.positive{
 }
 	
 .ui-tabs-hide { display: none; }
+
 .txt_right
 {
 	margin:0pt;
 padding:0pt;
-padding-top:8px;
+padding-top:4px;
+padding-bottom:4px;
 text-align:right;
 	padding-right:30px;
+height:21px;
+/*background:#464646;*/
+background:transparent url(../../../images/top_menu_grey.png) repeat scroll left top;
+color:#EEE;
+/*color:#999999;*/
 }
 
 .settings {
 float:right;
-margin-top:6px;
+margin-top:16px;
 padding-right:30px;
 }

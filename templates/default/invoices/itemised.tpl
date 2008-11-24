@@ -13,11 +13,9 @@
 
 <form name="frmpost" action="index.php?module=invoices&view=save" method=POST onsubmit="return frmpost_Validator(this)">
 
-<h3>{$LANG.inv} {$LANG.inv_itemised}
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
         	<img src="images/common/gmail-loader.gif" alt="Loading ..."/> Loading ...
 </div>
-</h3>
 
 {include file="$path/header.tpl" }
 
@@ -109,7 +107,7 @@
 </td>
 </tr>	
 <tr>
-	<td class="details_screen">{$customFieldLabel.biller_cf4} 
+	<td class=""> 
 		<a class="cluetip" href="#"	rel="docs.php?t=help&p=invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="./images/common/help-small.png"></img> {$LANG.want_more_fields}</a>
 	</td>
 </tr>
@@ -121,7 +119,6 @@
 -->
 </table>
 <!-- </div> -->
-<hr />
 <table class="buttons" align="center">
     <tr>
         <td>
