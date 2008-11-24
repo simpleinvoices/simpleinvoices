@@ -22,10 +22,21 @@ function db_connector() {
 	*/
 	$pdoAdapter = substr($config->database->adapter, 4);
 	
+
+/*	$connlink = new PDO(
+					$pdoAdapter.':host='.$config->database->params->host.';	dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password
+				);*/
+	try{
+
 	$connlink = new PDO(
 					$pdoAdapter.':host='.$config->database->params->host.';	dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password
 				);
 
+	}catch( PDOException $exception ){
+
+		die($exception->getMessage());
+
+	}
 			
 	return $connlink;
 }
@@ -1698,7 +1709,7 @@ function maxInvoice() {
 
 //in this file are functions for all sql queries
 function checkTableExists($table) {
-
+/*
 	global $LANG;
 	global $dbh;
 	global $config;
@@ -1706,6 +1717,11 @@ function checkTableExists($table) {
 	if ($config->database->adapter == 'pgsql') {
 		// Use a nicer syntax
 		$sql = 'SELECT 1 FROM pg_tables WHERE tablename = :table LIMIT 1';
+	}
+	
+	if ($config->database->adapter == 'pdo_sqlite2') {
+		// Use a nicer syntax
+		$sql = 'SELECT * FROM :table LIMIT 1';
 	}
 
 	$sth = $dbh->prepare($sql);
@@ -1719,6 +1735,7 @@ function checkTableExists($table) {
 	} else {
 		return false;
 	}
+*/
 }
 
 function checkFieldExists($table,$field) {
