@@ -12,8 +12,6 @@
 	{/if}
 <form name="frmpost" ACTION="index.php?module=products&view=add" METHOD="POST" id="frmpost" onSubmit="return checkForm(this);">
 
-<div id="top"><h3>&nbsp;{$LANG.product_to_add}&nbsp;</h3></div>
- <hr />
 
 <table align=center>
 	<tr>
@@ -62,7 +60,6 @@
 	</tr>
 	{*	{showCustomFields categorieId="3" itemId=""} *}
 </table>
-<hr/>
 
 <table class="buttons" align="center">
 	<tr>

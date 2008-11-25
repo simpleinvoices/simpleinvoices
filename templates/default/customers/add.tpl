@@ -24,7 +24,6 @@
 *}
 	{/if}	
 <form name="frmpost" ACTION="index.php?module=customers&view=add" METHOD="post" id="frmpost" onSubmit="return checkForm(this);">
-<h3>{$LANG.customer_add}</h3>
 
 <table align=center>
 	<tr>
@@ -171,7 +170,6 @@
 	*}
 
 </table>
-<hr />
 <table class="buttons" align="center">
     <tr>
         <td>
