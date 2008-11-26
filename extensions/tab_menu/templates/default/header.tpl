@@ -18,12 +18,13 @@
 
 {literal}
 	<link rel="stylesheet" type="text/css" href="./extensions/tab_menu/templates/default/css/tab-screen.css" media="all"/>
+		<link rel="stylesheet" type="text/css" href="./extensions/tab_menu/templates/default/css/default/default.dialog.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/print.css" media="print"/>
 	<!-- jQuery Files -->
 	<script type="text/javascript" src="./include/jquery/jquery-1.2.6.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="./extensions/tab_menu/templates/default/css/tab_menu.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="./extensions/tab_menu/templates/default/css/tab.css" media="all"/>
-	<script type="text/javascript" src="./include/jquery/jquery-ui-tabs-1.6rc2.packed.js"></script>
+	<script type="text/javascript" src="./include/jquery/jquery-ui-personalized-1.6rc2.packed.js"></script>
 	<script type="text/javascript" src="./include/jquery/cluetip/jquery.hoverIntent.minified.js"></script>
 	<script type="text/javascript" src="./include/jquery/cluetip/jquery.cluetip.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.flexigrid.1.0b3.pack.js"></script>
@@ -38,10 +39,56 @@
 	<link rel="stylesheet" type="text/css" href="./include/jquery/cluetip/jquery.cluetip.css" />
 
   <script>
+  <!-- to be moved to the main javascript file - once tab_menu in main -->
   $(document).ready(function(){
-    $("#Header > ul").tabs();
     $("#tabmenu > ul").tabs();
+    
+    $("#dialog").hide();
+     $('#invoice_dialog').click(function() 
+		{ 
+				 $("#dialog").show();  								
+				 $("#dialog").dialog({ 
+				   modal: true, 
+				   buttons: { 
+			        "Ok": function() { 
+			            alert("Ok"); 
+			        }, 
+			        "Cancel": function() { 
+			            $(this).dialog("destroy"); 
+			        }
+			        },
+				    overlay: { 
+				        opacity: 0.5, 
+				        background: "black" 
+				    },
+				    close:  function() { $(this).dialog("destroy")}
+				});
+				
+		}); 
+    
   });
+
+  $('#invoice_dialog').click(function() 
+		{ 
+  				console.log("clicked");
+				  $("#dialog").dialog({ 
+				   modal: true, 
+				   buttons: { 
+				        "Ok": function() { 
+				            alert("Ok"); 
+				        }, 
+				        "Cancel": function() { 
+				            $(this).dialog("close"); 
+				        } 
+				    },
+				    overlay: { 
+				        opacity: 0.5, 
+				        background: "black" 
+				    } 
+				});
+				
+		}); 
+	
   </script>
 	
 <script type="text/javascript" src="jquery.validate.js">

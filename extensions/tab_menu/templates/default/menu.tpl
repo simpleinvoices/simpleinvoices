@@ -1,25 +1,3 @@
-<!--       <div id="example" class="flora">
-            <ul>
-
-                <li><a href="#fragment-1"><span>One</span></a></li>
-                <li><a href="#fragment-2"><span>Two</span></a></li>
-                <li><a href="#fragment-3"><span>Three</span></a></li>
-            </ul>
-            <div id="fragment-1">
-                <p>First tab is active by default:</p>
-                <pre><code>$('#example > ul').tabs();</code></pre>
-            </div>
-            <div id="fragment-2">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-            </div>
-            <div id="fragment-3">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-            </div>
-        </div> 
--->
 <div class="txt_right">
 	Hello Justin | <a href="">Help</a> | <a href="">Logout</a>
 </div>
@@ -43,9 +21,9 @@
             <div id="fragment-2">
 				<ul class="subnav">
 					<li><a href="index.php?module=invoices&view=manage">{$LANG.manage_invoices}</a></li>
-					<li><a href="index.php?module=invoices&view=total">{$LANG.new_invoice_total}</a></li>
-					<li><a href="index.php?module=invoices&view=itemised">{$LANG.new_invoice_itemised}</a></li>
-					<li><a href="index.php?module=invoices&view=consulting">{$LANG.new_invoice_consulting}</a></li>
+					<li><a id="invoice_dialog" href="#">New invoice</a></li> {*LANG TODO*} ||
+					<li><a href="index.php?module=invoices&view=itemised">{$LANG.manage payments}</a></li>
+					<li><a href="index.php?module=invoices&view=consulting">{$LANG.new_payment}</a></li>
 				</ul>
             </div>
             <div id="fragment-3">
@@ -259,3 +237,14 @@
 		</ul>
 </div>
 -->
+
+<div id="dialog" class="flora" title="This is my title">I'm in a dialog!
+
+:: Add New Invoice::<br>
+<a href="index.php?module=invoices&view=total"> Total style</a>
+<br><br>
+<a href="index.php?module=invoices&view=itemised"> Itemised style</a>
+<br><br>
+<a href="index.php?module=invoices&view=consulting"> Consulting style</a>
+
+</div>
