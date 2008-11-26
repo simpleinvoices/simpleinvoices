@@ -44,15 +44,12 @@
     $("#tabmenu > ul").tabs();
     
     $("#dialog").hide();
-     $('#invoice_dialog').click(function() 
+    $('#invoice_dialog').click(function() 
 		{ 
 				 $("#dialog").show();  								
 				 $("#dialog").dialog({ 
 				   modal: true, 
 				   buttons: { 
-			        "Ok": function() { 
-			            alert("Ok"); 
-			        }, 
 			        "Cancel": function() { 
 			            $(this).dialog("destroy"); 
 			        }
@@ -65,30 +62,34 @@
 				});
 				
 		}); 
+		
+		
+		$("#export_dialog").hide();
+	    $('#invoice_export_dialog').click(function() 
+			{ 
+					 console.log("clicked export");
+					 $("#export_dialog").show();  								
+					 $("#export_dialog").dialog({ 
+					   modal: true, 
+					   buttons: { 
+				        "Cancel": function() { 
+				            $(this).dialog("destroy"); 
+				        }
+				        },
+					    overlay: { 
+					        opacity: 0.5, 
+					        background: "black" 
+					    },
+					    close:  function() { $(this).dialog("destroy")}
+					});
+					
+			}); 
+		
+		
     
   });
 
-  $('#invoice_dialog').click(function() 
-		{ 
-  				console.log("clicked");
-				  $("#dialog").dialog({ 
-				   modal: true, 
-				   buttons: { 
-				        "Ok": function() { 
-				            alert("Ok"); 
-				        }, 
-				        "Cancel": function() { 
-				            $(this).dialog("close"); 
-				        } 
-				    },
-				    overlay: { 
-				        opacity: 0.5, 
-				        background: "black" 
-				    } 
-				});
-				
-		}); 
-	
+
   </script>
 	
 <script type="text/javascript" src="jquery.validate.js">

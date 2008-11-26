@@ -22,7 +22,7 @@
 				<ul class="subnav">
 					<li><a href="index.php?module=invoices&view=manage">{$LANG.manage_invoices}</a></li>
 					<li><a id="invoice_dialog" href="#">New invoice</a></li> {*LANG TODO*} ||
-					<li><a href="index.php?module=invoices&view=itemised">{$LANG.manage payments}</a></li>
+					<li><a id="invoice_export_dialog"  href="index.php?module=invoices&view=itemised">{$LANG.manage payments}</a></li>
 					<li><a href="index.php?module=invoices&view=consulting">{$LANG.new_payment}</a></li>
 				</ul>
             </div>
@@ -238,13 +238,18 @@
 </div>
 -->
 
-<div id="dialog" class="flora" title="This is my title">I'm in a dialog!
+<div id="dialog" class="flora" title="Please select Invoice type">
+	<a href="index.php?module=invoices&view=total"> Total style</a>
+	<br>
+	<a href="index.php?module=invoices&view=itemised"> Itemised style</a>
+	<br>
+	<a href="index.php?module=invoices&view=consulting"> Consulting style</a>
+</div>
 
-:: Add New Invoice::<br>
-<a href="index.php?module=invoices&view=total"> Total style</a>
-<br><br>
-<a href="index.php?module=invoices&view=itemised"> Itemised style</a>
-<br><br>
-<a href="index.php?module=invoices&view=consulting"> Consulting style</a>
-
+<div id="export_dialog" class="flora" title="EXPORTlect Invoice type">
+	<a href="index.php?module=invoices&view=total"> Total style</a>
+	<br>
+	<a href="index.php?module=invoices&view=itemised"> Itemised style</a>
+	<br>
+	<a href="index.php?module=invoices&view=consulting"> Consulting style</a>
 </div>
