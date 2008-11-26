@@ -65,7 +65,8 @@ function init(){
 	/*textarea - rte - make all textarea with class="editor" a html editor box*/
 	$('.editor').rte('include/jquery/rte/rte.css', 'include/jquery/rte/');
 	
-	
+	/*hide the text for the export dialog on the manage invoices page*/
+	$("#export_dialog").hide();
 
 }
 
@@ -121,11 +122,24 @@ function add_line_item(row_number)
 
 }
 
+function export_invoice(){
 
+	 $("#export_dialog").show();  								
+	 $("#export_dialog").dialog({ 
+	   modal: true, 
+	   buttons: { 
+        "Cancel": function() { 
+            $(this).dialog("destroy"); 
+        }
+        },
+	    overlay: { 
+	        opacity: 0.5, 
+	        background: "black" 
+	    },
+	    close:  function() { $(this).dialog("destroy")}
+	});
 
-
-
-
+}
 	
 
 

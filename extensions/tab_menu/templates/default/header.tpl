@@ -62,30 +62,6 @@
 				});
 				
 		}); 
-		
-		
-		$("#export_dialog").hide();
-	    $('#invoice_export_dialog').click(function() 
-			{ 
-					 console.log("clicked export");
-					 $("#export_dialog").show();  								
-					 $("#export_dialog").dialog({ 
-					   modal: true, 
-					   buttons: { 
-				        "Cancel": function() { 
-				            $(this).dialog("destroy"); 
-				        }
-				        },
-					    overlay: { 
-					        opacity: 0.5, 
-					        background: "black" 
-					    },
-					    close:  function() { $(this).dialog("destroy")}
-					});
-					
-			}); 
-		
-		
     
   });
 
