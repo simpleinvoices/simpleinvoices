@@ -18,7 +18,7 @@ FROM
          FROM ".TB_PREFIX."invoice_items i GROUP BY i.invoice_id
         ) ii ON (iv.id = ii.invoice_id) LEFT JOIN
 	(SELECT p.ac_inv_id, coalesce(sum(p.ac_amount), 0) AS ac_amount
-         FROM ".TB_PREFIX."account_payments p GROUP BY p.ac_inv_id
+         FROM ".TB_PREFIX."payment p GROUP BY p.ac_inv_id
         ) ap ON (iv.id = ap.ac_inv_id)
 GROUP BY
         c.id, c.name
@@ -30,7 +30,7 @@ ORDER BY
         c.id as cid,
         c.name as customer,
         (select coalesce(sum(ii.total), 0) from ".TB_PREFIX."invoice_items,".TB_PREFIX."invoices where ii2.invoice_id = iv2.id and iv2.customer_id = c.id) as inv_total,
-        (select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv2 where ap.ac_inv_id = iv2.id and iv2.customer_id = c.id) as inv_paid,
+        (select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."payment ap, ".TB_PREFIX."invoices iv2 where ap.ac_inv_id = iv2.id and iv2.customer_id = c.id) as inv_paid,
         (select (inv_total - inv_paid)) as inv_owing
 
 FROM

@@ -6,6 +6,12 @@ Disclaimer: if its in the list it may get done sometime in the future if and whe
 Next Release :: TODO
 ##############################
 
+- set domain_id in session
+- si_account_payments: change all refer to si_payment - done
+- si_payment: add domain_id into all queries
+- si_tax: add domain_id into all queries
+- si_user: change all refer to si_user
+
  - Manage pages - numbers to be right aligned - JK 
 
  - Consulting style - if desciptoin null then don;t show Description heading thing on the invoice- JK

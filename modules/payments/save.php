@@ -16,7 +16,7 @@ global $db_server;
 if ( isset($_POST['process_payment']) ) {
 
 	$sql = "INSERT into
-			".TB_PREFIX."account_payments
+			".TB_PREFIX."payment
 		VALUES
 			(	
 				NULL,
@@ -27,7 +27,7 @@ if ( isset($_POST['process_payment']) ) {
 				:payment_type
 			)";
 	if ($db_server == 'pgsql') {
-		$sql = "INSERT into ".TB_PREFIX."account_payments
+		$sql = "INSERT into ".TB_PREFIX."payment
 			(ac_inv_id, ac_amount, ac_notes, ac_date, ac_payment_type)
 		VALUES
 			(:invoice, :amount, :notes, :date, :payment_type)";

@@ -42,7 +42,7 @@ if (!empty($_GET['id'])) {
 	$id = $_GET['id'];
 	//$query = getInvoicePayments($_GET['id']);
 	
-	$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b where ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and ap.ac_inv_id = :id ORDER BY ap.id DESC";
+	$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."payment ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b where ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and ap.ac_inv_id = :id ORDER BY ap.id DESC";
 	
 	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$count = $sth->rowCount();
@@ -53,7 +53,7 @@ elseif (!empty($_GET['c_id'])) {
 	
 	//$query = getCustomerPayments($_GET['c_id']);
 	$id = $_GET['c_id'];
-	$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b where ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and c.id = :id ORDER BY ap.id DESC";
+	$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."payment ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b where ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and c.id = :id ORDER BY ap.id DESC";
 
 	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$count = $sth->rowCount();
@@ -71,7 +71,7 @@ else {
 				ac_notes AS notes,
 				DATE_FORMAT(ac_date,'%Y-%m-%d') AS date
 			FROM 
-				".TB_PREFIX."account_payments ap, 
+				".TB_PREFIX."payment ap, 
 				".TB_PREFIX."invoices iv, 
 				".TB_PREFIX."customers c, 
 				".TB_PREFIX."biller b ,
@@ -97,7 +97,7 @@ else {
 
 global $dbh;
 /*
-$sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."account_payments";
+$sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."payment";
 $tth = dbQuery($sqlTotal) or die(end($dbh->errorInfo()));
 $resultCount = $tth->fetch();
 $count = $resultCount[0];

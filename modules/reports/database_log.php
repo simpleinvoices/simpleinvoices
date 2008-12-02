@@ -53,9 +53,9 @@ EOD;
 	global $db_server;
 	foreach($sqls as $sql) {
 		if ($db_server == 'pgsql') {
-			$pattern = "/.*INSERT\s+INTO\s+".TB_PREFIX."account_payments\s+/im";
+			$pattern = "/.*INSERT\s+INTO\s+".TB_PREFIX."payment\s+/im";
 		} else {
-			$pattern = "/.*INSERT\s+INTO\s+".TB_PREFIX."account_payments\s+/im";
+			$pattern = "/.*INSERT\s+INTO\s+".TB_PREFIX."payment\s+/im";
 		}
 		if(preg_match($pattern,$sql['sqlquerie'],$match)) {
 			$user = htmlspecialchars($sql['user_name']).' (id '.htmlspecialchars($sql['userid']).')';

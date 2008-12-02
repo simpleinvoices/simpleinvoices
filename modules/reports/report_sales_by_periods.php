@@ -64,7 +64,7 @@ while ( $year <= $this_year )
 		/*
 		* Payment
 		*/
-		$total_month_payments_sql = " select sum(ac_amount) as month_total_payments from ".TB_PREFIX."account_payments where ac_date like '$year-$month%'";
+		$total_month_payments_sql = " select sum(ac_amount) as month_total_payments from ".TB_PREFIX."payment where ac_date like '$year-$month%'";
 		$total_month_payments = mysqlQuery($total_month_payments_sql);
 		$total_month_payments_array= mysql_fetch_array($total_month_payments);
 		$total_payments[$year][$month] = $total_month_payments_array['month_total_payments'];
@@ -89,7 +89,7 @@ while ( $year <= $this_year )
 	/*
 	* Payment
 	*/
-	$total_year_payments_sql = " select sum(ac_amount) as year_total_payments from ".TB_PREFIX."account_payments where ac_date like '$year%'";
+	$total_year_payments_sql = " select sum(ac_amount) as year_total_payments from ".TB_PREFIX."payment where ac_date like '$year%'";
 	$total_year_payments = mysqlQuery($total_year_payments_sql);
 	$total_year_payments_array= mysql_fetch_array($total_year_payments);
 	$total_payments[$year]['Total'] = $total_year_payments_array['year_total_payments'];

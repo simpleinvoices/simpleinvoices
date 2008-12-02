@@ -23,7 +23,7 @@ FROM
          FROM ".TB_PREFIX."invoice_items i GROUP BY i.invoice_id
         ) ii ON (iv.id = ii.invoice_id) LEFT JOIN
         (SELECT p.ac_inv_id, sum(p.ac_amount) AS ac_amount
-         FROM ".TB_PREFIX."account_payments p GROUP BY p.ac_inv_id
+         FROM ".TB_PREFIX."payment p GROUP BY p.ac_inv_id
         ) ap ON (iv.id = ap.ac_inv_id)
 GROUP BY
         aging
@@ -51,7 +51,7 @@ FROM
          FROM ".TB_PREFIX."invoice_items i GROUP BY i.invoice_id
         ) ii ON (iv.id = ii.invoice_id) LEFT JOIN
         (SELECT p.ac_inv_id, sum(p.ac_amount) AS ac_amount
-         FROM ".TB_PREFIX."account_payments p GROUP BY p.ac_inv_id
+         FROM ".TB_PREFIX."payment p GROUP BY p.ac_inv_id
         ) ap ON (iv.id = ap.ac_inv_id)
 GROUP BY
         aging

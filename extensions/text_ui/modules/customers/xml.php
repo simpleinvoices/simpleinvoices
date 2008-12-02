@@ -61,7 +61,7 @@ if (in_array($sort, $validFields)) {
                     SELECT 
                         coalesce(sum(ap.ac_amount), 0) AS amount 
                     FROM
-                        ".TB_PREFIX."account_payments ap INNER JOIN
+                        ".TB_PREFIX."payment ap INNER JOIN
                         ".TB_PREFIX."invoices iv ON (iv.id = ap.ac_inv_id)
                     WHERE 
                         iv.customer_id = CID) AS paid,

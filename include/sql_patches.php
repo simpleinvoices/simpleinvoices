@@ -871,6 +871,43 @@ PRIMARY KEY  (`user_id`)) ;
         $patch['157']['patch'] = "ALTER TABLE ".TB_PREFIX."tax ALTER COLUMN tax_percentage TYPE numeric(25, 6)";
     }
     $patch['157']['date'] = "20080128";
+   
+    $patch['158']['name'] = "Rename table si_account_payments to si_payment";
+    $patch['158']['patch'] = "RENAME TABLE `".TB_PREFIX."account_payments` TO  `".TB_PREFIX."payment`;";
+    if ($config->database->adapter == "pdo_pgsql") {
+        $patch['158']['patch'] = "RENAME TABLE `".TB_PREFIX."account_payments` TO  `".TB_PREFIX."payment`";
+    }
+    $patch['158']['date'] = "20081201";
+    //TODO: postgres and sqlite patch
+    
+    $patch['159']['name'] = "Add domain_id to payments table";
+    $patch['159']['patch'] = "ALTER TABLE  `".TB_PREFIX."payment` ADD  `domain_id` INT NOT NULL ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+        $patch['159']['patch'] = "ALTER TABLE  `".TB_PREFIX."payment` ADD  `domain_id` INT NOT NULL ";
+    }
+    $patch['159']['date'] = "20081201";
+    //TODO: postgres and sqlite patch  
+
+    $patch['160']['name'] = "Add domain_id to tax table";
+    $patch['160']['patch'] = "ALTER TABLE  `".TB_PREFIX."tax` ADD  `domain_id` INT NOT NULL ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+        $patch['160']['patch'] = "ALTER TABLE  `".TB_PREFIX."tax` ADD  `domain_id` INT NOT NULL ";
+    }
+    $patch['160']['date'] = "20081201";
+    //TODO: postgres and sqlite patch  
+    
+    $patch['161']['name'] = "Change user table from si_users to si_user";
+    $patch['161']['patch'] = "RENAME TABLE `".TB_PREFIX."users` TO  `".TB_PREFIX."user` ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+        $patch['161']['patch'] = "RENAME TABLE `".TB_PREFIX."users` TO  `".TB_PREFIX."user`";
+    }
+    $patch['161']['date'] = "20081201";
+    //TODO: postgres and sqlite patch      
+    
+  
+    
+    
+    
     
     //TODO - new patch to change the name of si_users table to si_user required - also need to update auth system with new table name etc..
 

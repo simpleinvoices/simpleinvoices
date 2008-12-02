@@ -29,7 +29,7 @@ FROM
          FROM ".TB_PREFIX."invoice_items i GROUP BY i.invoice_id
         ) ii ON (iv.id = ii.invoice_id) LEFT JOIN
         (SELECT p.ac_inv_id, sum(p.ac_amount) AS total
-         FROM ".TB_PREFIX."account_payments p GROUP BY p.ac_inv_id
+         FROM ".TB_PREFIX."payments p GROUP BY p.ac_inv_id
         ) ap ON (iv.id = ap.ac_inv_id)
 ORDER BY
         age DESC;
@@ -40,7 +40,7 @@ ORDER BY
         (select name from ".TB_PREFIX."biller where ".TB_PREFIX."biller.id = ".TB_PREFIX."invoices.biller_id) as biller,
         (select name from ".TB_PREFIX."customers where ".TB_PREFIX."customers.id = ".TB_PREFIX."invoices.customer_id) as customer,
         (select sum(".TB_PREFIX."invoice_items.total) from ".TB_PREFIX."invoice_items WHERE ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id) as inv_total,
-        (select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from ".TB_PREFIX."account_payments where  ac_inv_id = ".TB_PREFIX."invoices.id ) as inv_paid,
+        (select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from ".TB_PREFIX."payment where  ac_inv_id = ".TB_PREFIX."invoices.id ) as inv_paid,
         (select (INV_TOTAL - INV_PAID)) as inv_owing ,
         date_format(date,'%Y-%m-%e') as date ,
         (select datediff(now(),date)) as age,
@@ -52,7 +52,7 @@ ORDER BY
         END ) as aging
 
 FROM
-        ".TB_PREFIX."invoices,".TB_PREFIX."account_payments,".TB_PREFIX."invoice_items, ".TB_PREFIX."biller, ".TB_PREFIX."customers
+        ".TB_PREFIX."invoices,".TB_PREFIX."payment,".TB_PREFIX."invoice_items, ".TB_PREFIX."biller, ".TB_PREFIX."customers
 WHERE
         ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id
 GROUP BY

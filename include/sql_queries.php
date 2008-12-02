@@ -384,7 +384,7 @@ function getPayment($id) {
 	global $config;
 	global $dbh;
 
-	$sql = "SELECT ap.*, c.name AS customer, b.name AS biller FROM ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b WHERE ap.ac_inv_id = iv.id AND iv.customer_id = c.id AND iv.biller_id = b.id AND ap.id = :id";
+	$sql = "SELECT ap.*, c.name AS customer, b.name AS biller FROM ".TB_PREFIX."payment ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b WHERE ap.ac_inv_id = iv.id AND iv.customer_id = c.id AND iv.biller_id = b.id AND ap.id = :id";
 
 	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$payment = $sth->fetch();
@@ -393,17 +393,17 @@ function getPayment($id) {
 }
 
 function getInvoicePayments($id) {
-	$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b where ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and ap.ac_inv_id = :id ORDER BY ap.id DESC";
+	$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."payment ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b where ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and ap.ac_inv_id = :id ORDER BY ap.id DESC";
 	return dbQuery($sql, ':id', $id);
 }
 
 function getCustomerPayments($id) {
-	$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b where ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and c.id = :id ORDER BY ap.id DESC";
+	$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."payment ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b where ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and c.id = :id ORDER BY ap.id DESC";
 	return dbQuery($sql, ':id', $id);
 }
 
 function getPayments() {
-	$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."account_payments ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b WHERE ap.ac_inv_id = iv.id AND iv.customer_id = c.id and iv.biller_id = b.id ORDER BY ap.id DESC";
+	$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."payment ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b WHERE ap.ac_inv_id = iv.id AND iv.customer_id = c.id and iv.biller_id = b.id ORDER BY ap.id DESC";
 	
 	return dbQuery($sql);
 }
@@ -1101,7 +1101,7 @@ function getCustomerInvoices($id) {
 // tested for MySQL	
 	$sql = "SELECT	i.id, i.date, i.type_id, 
 		(SELECT sum( COALESCE(ii.total, 0)) FROM " . TB_PREFIX . "invoice_items ii where ii.invoice_id = i.id) As invd,
-		(SELECT sum( COALESCE(ap.ac_amount, 0)) FROM " . TB_PREFIX . "account_payments ap where ap.ac_inv_id = i.id) As pmt,
+		(SELECT sum( COALESCE(ap.ac_amount, 0)) FROM " . TB_PREFIX . "payment ap where ap.ac_inv_id = i.id) As pmt,
 		(SELECT COALESCE(invd, 0)) As total, 
 		(SELECT COALESCE(pmt, 0)) As paid, 
 		(select (total - paid)) as owing 
@@ -1186,8 +1186,8 @@ function getTopDebtor() {
 	        	c.id as \"CID\",
 	        	c.name as \"Customer\",
 	        	sum(ii.total) as \"Total\",
-	        	(select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."account_payments ap INNER JOIN ".TB_PREFIX."invoices iv2 ON (ap.ac_inv_id = iv2.id) where iv2.customer_id = c.id) as \"Paid\",
-	        	sum(ii.total) - (select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."account_payments ap INNER JOIN ".TB_PREFIX."invoices iv2 ON (ap.ac_inv_id = iv2.id) where iv2.customer_id = c.id) as \"Owing\"
+	        	(select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."payment ap INNER JOIN ".TB_PREFIX."invoices iv2 ON (ap.ac_inv_id = iv2.id) where iv2.customer_id = c.id) as \"Paid\",
+	        	sum(ii.total) - (select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."payment ap INNER JOIN ".TB_PREFIX."invoices iv2 ON (ap.ac_inv_id = iv2.id) where iv2.customer_id = c.id) as \"Owing\"
 	FROM
 	        ".TB_PREFIX."customers c INNER JOIN
 		".TB_PREFIX."invoices iv ON (c.id = iv.customer_id) INNER JOIN
@@ -1220,8 +1220,8 @@ function getTopCustomer() {
 			c.id as \"CID\",
 	        	c.name as \"Customer\",
        			sum(ii.total) as \"Total\",
-	        	(select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."account_payments ap INNER JOIN ".TB_PREFIX."invoices iv2 ON (ap.ac_inv_id = iv2.id) where iv2.customer_id = c.id) as \"Paid\",
-	        	sum(ii.total) - (select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."account_payments ap INNER JOIN ".TB_PREFIX."invoices iv2 ON (ap.ac_inv_id = iv2.id) where iv2.customer_id = c.id) as \"Owing\"
+	        	(select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."payment ap INNER JOIN ".TB_PREFIX."invoices iv2 ON (ap.ac_inv_id = iv2.id) where iv2.customer_id = c.id) as \"Paid\",
+	        	sum(ii.total) - (select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."payment ap INNER JOIN ".TB_PREFIX."invoices iv2 ON (ap.ac_inv_id = iv2.id) where iv2.customer_id = c.id) as \"Owing\"
 
 	FROM
        		".TB_PREFIX."customers c INNER JOIN
@@ -1660,7 +1660,7 @@ function delete($module,$idField,$id) {
 				SELECT id FROM '.TB_PREFIX.'invoice_items
 				WHERE invoice_id = :id
 				UNION ALL
-				SELECT id FROM '.TB_PREFIX.'account_payments
+				SELECT id FROM '.TB_PREFIX.'payment
 				WHERE ac_inv_id = :id) x');
 			$sth->execute(array(':id' => $id));
 			if ($sth->fetchColumn() != 0) {

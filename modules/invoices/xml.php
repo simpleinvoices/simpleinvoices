@@ -62,7 +62,7 @@ if ($db_server == 'pgsql') {
 			 p.pref_description AS Type
 		FROM
 			 " . TB_PREFIX . "invoices iv
-			 LEFT JOIN " . TB_PREFIX . "account_payments ap ON ap.ac_inv_id = iv.id
+			 LEFT JOIN " . TB_PREFIX . "payment ap ON ap.ac_inv_id = iv.id
 			 LEFT JOIN " . TB_PREFIX . "invoice_items ii ON ii.invoice_id = iv.id
 			 LEFT JOIN " . TB_PREFIX . "biller b ON b.id = iv.biller_id
 			 LEFT JOIN " . TB_PREFIX . "customers c ON c.id = iv.customer_id
@@ -81,7 +81,7 @@ if ($db_server == 'pgsql') {
 		       (SELECT SUM(coalesce(ii.total,  0)) FROM " .
 		TB_PREFIX . "invoice_items ii WHERE ii.invoice_id = iv.id) AS invoice_total,
 		       (SELECT SUM(coalesce(ac_amount, 0)) FROM " .
-		TB_PREFIX . "account_payments ap WHERE ap.ac_inv_id = iv.id) AS INV_PAID,
+		TB_PREFIX . "payment ap WHERE ap.ac_inv_id = iv.id) AS INV_PAID,
 		       (SELECT (coalesce(invoice_total,0) - coalesce(INV_PAID,0))) As owing,
 		       DATE_FORMAT(date,'%Y-%m-%d') AS date,
 		       (SELECT IF((owing = 0), 0, DateDiff(now(), date))) AS Age,

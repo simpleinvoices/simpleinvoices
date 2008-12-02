@@ -152,7 +152,7 @@ function calc_invoice_paid($inv_idField) {
 	global $dbh;
 
 	#amount paid calc - start
-	$x1 = "SELECT coalesce(sum(ac_amount), 0) AS amount FROM ".TB_PREFIX."account_payments WHERE ac_inv_id = :inv_id";
+	$x1 = "SELECT coalesce(sum(ac_amount), 0) AS amount FROM ".TB_PREFIX."payment WHERE ac_inv_id = :inv_id";
 	$sth = dbQuery($x1, ':inv_id', $inv_idField) or die(end($dbh->errorInfo()));
 	while ($result_x1Array = $sth->fetch()) {
 		$invoice_paid_Field = $result_x1Array['amount'];
@@ -189,7 +189,7 @@ function calc_customer_paid($customer_id) {
 	$sql = "
 	SELECT coalesce(sum(ap.ac_amount), 0) AS amount 
 	FROM
-		".TB_PREFIX."account_payments ap INNER JOIN
+		".TB_PREFIX."payment ap INNER JOIN
 		".TB_PREFIX."invoices iv ON (iv.id = ap.ac_inv_id)
 	WHERE iv.customer_id = :customer";
 	
