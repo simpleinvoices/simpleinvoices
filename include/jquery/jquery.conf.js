@@ -122,9 +122,21 @@ function add_line_item(row_number)
 
 }
 
-function export_invoice(){
+function export_invoice(row_number,spreadsheet,wordprocessor){
 
-	 $("#export_dialog").show();  								
+
+	 $("#export_dialog").show();
+	 $(".export_pdf").attr({ 
+          href: "pdfmaker.php?id="+row_number,
+          onclick: "$(this).dialog('destroy')"
+        });
+	 $(".export_doc").attr({ 
+		  href: "index.php?module=invoices&view=templates/template&invoice="+row_number+"&action=view&location=print&export="+spreadsheet
+        });	 
+      $(".export_xls").attr({ 
+          href: "index.php?module=invoices&view=templates/template&invoice="+row_number+"&action=view&location=print&export="+wordprocessor,
+          onclick: "$().dialog('destroy')"
+        });							
 	 $("#export_dialog").dialog({ 
 	   modal: true, 
 	   buttons: { 
@@ -140,6 +152,11 @@ function export_invoice(){
 	});
 
 }
+
+function dialog_close(){
+         $(this).dialog("destroy"); 
+}
+	
 	
 
 
