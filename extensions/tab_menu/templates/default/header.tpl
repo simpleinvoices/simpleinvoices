@@ -42,6 +42,9 @@
   <!-- to be moved to the main javascript file - once tab_menu in main -->
   $(document).ready(function(){
     $("#tabmenu > ul").tabs();
+	//TODO - grab the active page and put in here - so correct tab is open for that page
+	$("#tabmenu > ul").tabs("select", '#money');
+
     
     $("#dialog").hide();
     $('#invoice_dialog').click(function() 

@@ -7,26 +7,26 @@
        <div id="tabmenu" class="flora">
             <ul>
 
-                <li><a href="#fragment-1"><span>Home</span></a></li>
-                <li><a href="#fragment-2"><span>Money</span></a></li>
-                <li><a href="#fragment-3"><span>People</span></a></li>
-                <li><a href="#fragment-4"><span>Products</span></a></li>
+                <li><a href="#home"><span>Home</span></a></li>
+                <li><a href="#money"><span>Money</span></a></li>
+                <li><a href="#people"><span>People</span></a></li>
+                <li><a href="#product"><span>Products</span></a></li>
             </ul>
-            <div id="fragment-1">
+            <div id="home">
 				<ul class="subnav">
 					<li><a href="index.php?module=customers&view=manage">Dashboard</a></li>
 					<li><a href="index.php?module=customers&view=add">All reports</a></li>
 				</ul>
             </div>
-            <div id="fragment-2">
+            <div id="money">
 				<ul class="subnav">
-					<li><a href="index.php?module=invoices&view=manage">{$LANG.manage_invoices}</a></li>
+					<li { if $pageActive == null} id="active" {/if}> ><a href="index.php?module=invoices&view=manage">{$LANG.manage_invoices}</a></li>
 					<li><a id="invoice_dialog" href="#">New invoice</a></li> {*LANG TODO*} ||
 					<li><a id="invoice_export_dialog"  href="index.php?module=invoices&view=itemised">{$LANG.manage payments}</a></li>
 					<li><a href="index.php?module=invoices&view=consulting">{$LANG.new_payment}</a></li>
 				</ul>
             </div>
-            <div id="fragment-3">
+            <div id="people">
 				<ul class="subnav">
 					<li><a href="index.php?module=customers&view=manage">{$LANG.manage_customers}</a></li>
 					<li><a href="index.php?module=customers&view=add">{$LANG.add_customer}</a> :: </li>
@@ -34,7 +34,7 @@
 					<li><a href="index.php?module=customers&view=add">{$LANG.add_biller}</a></li>
 				</ul>
 			</div>
-           <div id="fragment-4">
+           <div id="product">
                 <ul class="subnav">
 					<li><a href="index.php?module=products&view=manage">{$LANG.manage_products}</a></li>
 					<li><a href="index.php?module=products&view=add">{$LANG.add_product}</a></li>
