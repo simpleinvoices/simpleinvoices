@@ -14,8 +14,6 @@
 	<link rel="stylesheet" type="text/css" href="./include/css/simpleInvoicesStyle.css" />
 	-->
 
-
-
 {literal}
 	<link rel="stylesheet" type="text/css" href="./extensions/tab_menu/templates/default/css/tab-screen.css" media="all"/>
 		<link rel="stylesheet" type="text/css" href="./extensions/tab_menu/templates/default/css/default/default.dialog.css" media="all"/>
@@ -38,38 +36,7 @@
 	<link rel="stylesheet" type="text/css" href="./include/jquery/rte/rte.css" />	
 	<link rel="stylesheet" type="text/css" href="./include/jquery/cluetip/jquery.cluetip.css" />
 
-  <script>
-  <!-- to be moved to the main javascript file - once tab_menu in main -->
-  $(document).ready(function(){
-    $("#tabmenu > ul").tabs();
-	//TODO - grab the active page and put in here - so correct tab is open for that page
-	$("#tabmenu > ul").tabs("select", '#money');
 
-    
-    $("#dialog").hide();
-    $('#invoice_dialog').click(function() 
-		{ 
-				 $("#dialog").show();  								
-				 $("#dialog").dialog({ 
-				   modal: true, 
-				   buttons: { 
-			        "Cancel": function() { 
-			            $(this).dialog("destroy"); 
-			        }
-			        },
-				    overlay: { 
-				        opacity: 0.5, 
-				        background: "black" 
-				    },
-				    close:  function() { $(this).dialog("destroy")}
-				});
-				
-		}); 
-    
-  });
-
-
-  </script>
 	
 <script type="text/javascript" src="jquery.validate.js">
 </script>

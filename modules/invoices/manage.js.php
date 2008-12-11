@@ -2,9 +2,10 @@
 {literal}
 			var columns = 8;
 			var padding = 12;
+			var action_menu = 140;
 			var grid_width = $('.col').width();
 			
-			grid_width = grid_width - (columns * padding);
+			grid_width = grid_width - (columns * padding) - action_menu;
 			percentage_width = grid_width / 100; 
 			
 			function test(com,grid)
@@ -26,11 +27,11 @@
 			url: 'index.php?module=invoices&view=xml',
 			dataType: 'xml',
 			colModel : [
-				{display: 'Actions', name : 'actions', width : 15 * percentage_width, sortable : false, align: 'center'},
+				{display: 'Actions', name : 'actions', width : action_menu, sortable : false, align: 'center'},
 				{display: 'ID', name : 'id', width :05 * percentage_width, sortable : true, align: 'center'},
-				{display: 'Biller', name : 'biller', width :20 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Customer', name : 'customer', width :20 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Date', name : 'date', width : 10 * percentage_width, sortable : true, align: 'left'},
+				{display: 'Biller', name : 'biller', width :25 * percentage_width, sortable : true, align: 'left'},
+				{display: 'Customer', name : 'customer', width :25 * percentage_width, sortable : true, align: 'left'},
+				{display: 'Date', name : 'date', width : 15 * percentage_width, sortable : true, align: 'left'},
 				{display: 'Total', name : 'invoice_total', width : 10 * percentage_width, sortable : true, align: 'left'},
 				{display: 'Owing', name : 'owing', width : 10 * percentage_width, sortable : true, align: 'left'},
 				{display: 'Aging', name : 'aging', width : 10 * percentage_width, sortable : true, align: 'left'}

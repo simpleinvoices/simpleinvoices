@@ -270,6 +270,39 @@ if($module !== "auth")
 * Include the php file for the requested page section - end
 */
 
+/*
+* If extension is enabled load its post load javascript files	- start
+* By Post load - i mean post of the .php so that it can used info from the .php in the javascript
+* Note: this system is probably slow - if you got a better method for handling extensions let me know
+*/
+	$extensionPostLoadJquery = 0;
+	foreach($config->extension as $extension)
+	{
+		/*
+		* If extension is enabled then continue and include the requested file for that extension if it exists
+		*/	
+		if($extension->enabled == "1")
+		{
+			if(file_exists("./extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.tpl")) {
+					$smarty -> display("../extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.tpl");
+			}
+		}
+		
+	}
+	/*
+	* If no extension php file for requested file load the normal php file if it exists
+	*/
+	if($extensionPostLoadJquery == 0) 
+	{
+		$smarty -> display("../include/jquery/post_load.jquery.ext.js.tpl");
+	}
+
+/*
+* If extension is enabled load its javascript files	- end
+*/
+		
+		
+		
 		
 
 /*

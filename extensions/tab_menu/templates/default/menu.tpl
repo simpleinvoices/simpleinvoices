@@ -4,6 +4,7 @@
 <div class="settings">
 	<a href="">Settings</a>
 </div>
+
        <div id="tabmenu" class="flora">
             <ul>
 
@@ -41,8 +42,36 @@
 				</ul>
             </div>
         </div>
-<!--
+        
+        
+<div id="dialog" class="flora" title="Please select Invoice type">
+	<a href="index.php?module=invoices&view=total"> Total style</a>
+	<br>
+	<a href="index.php?module=invoices&view=itemised"> Itemised style</a>
+	<br>
+	<a href="index.php?module=invoices&view=consulting"> Consulting style</a>
+</div>
 
+<div id="export_dialog" class="flora" title="EXPORTlect Invoice type">
+
+		<!--3 EXPORT TO PDF --><a title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_pdf_tooltip']."' class='export_pdf' href=''><img src='images/common/page_white_acrobat.png' height='16' padding='-4px' border='-5px' valign='bottom' /><!-- pdf --></a>
+		<!--4 XLS --><a title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_xls_tooltip'].$spreadsheet." ".$LANG['format_tooltip']."' class='export_xls' href='index.php?module=invoices&view=templates/template&invoice='".$row['id']."&action=view&location=print&export=".$spreadsheet."'><img src='images/common/page_white_excel.png' height='16' border='0' padding='-4px' valign='bottom' /><!-- $spreadsheet --></a>
+	<!--4 XLS --><a title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_xls_tooltip'].$spreadsheet." ".$LANG['format_tooltip']."' class='export_doc' href='index.php?module=invoices&view=templates/template&invoice='".$row['id']."&action=view&location=print&export=".$spreadsheet."'><img src='images/common/page_white_excel.png' height='16' border='0' padding='-4px' valign='bottom' /><!-- $spreadsheet --></a>
+
+
+	<a href="index.php?module=invoices&view=total"> Total style</a>
+	<br>
+	<a href="index.php?module=invoices&view=itemised"> Itemised style</a>
+	<br>
+	<a href="index.php?module=invoices&view=consulting"> Consulting style</a>
+</div>
+
+
+
+<!--
+########
+OLD MENU
+########
 <div id="Header">
 		<ul class="">
 			<li { if $pageActive == null} id="active" {/if}><a href="index.php">{$LANG.home}</a></li>
@@ -236,26 +265,5 @@
 			{/if}
 		</ul>
 </div>
+
 -->
-
-<div id="dialog" class="flora" title="Please select Invoice type">
-	<a href="index.php?module=invoices&view=total"> Total style</a>
-	<br>
-	<a href="index.php?module=invoices&view=itemised"> Itemised style</a>
-	<br>
-	<a href="index.php?module=invoices&view=consulting"> Consulting style</a>
-</div>
-
-<div id="export_dialog" class="flora" title="EXPORTlect Invoice type">
-
-		<!--3 EXPORT TO PDF --><a title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_pdf_tooltip']."' class='export_pdf' href=''><img src='images/common/page_white_acrobat.png' height='16' padding='-4px' border='-5px' valign='bottom' /><!-- pdf --></a>
-		<!--4 XLS --><a title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_xls_tooltip'].$spreadsheet." ".$LANG['format_tooltip']."' class='export_xls' href='index.php?module=invoices&view=templates/template&invoice='".$row['id']."&action=view&location=print&export=".$spreadsheet."'><img src='images/common/page_white_excel.png' height='16' border='0' padding='-4px' valign='bottom' /><!-- $spreadsheet --></a>
-	<!--4 XLS --><a title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_xls_tooltip'].$spreadsheet." ".$LANG['format_tooltip']."' class='export_doc' href='index.php?module=invoices&view=templates/template&invoice='".$row['id']."&action=view&location=print&export=".$spreadsheet."'><img src='images/common/page_white_excel.png' height='16' border='0' padding='-4px' valign='bottom' /><!-- $spreadsheet --></a>
-
-
-	<a href="index.php?module=invoices&view=total"> Total style</a>
-	<br>
-	<a href="index.php?module=invoices&view=itemised"> Itemised style</a>
-	<br>
-	<a href="index.php?module=invoices&view=consulting"> Consulting style</a>
-</div>
