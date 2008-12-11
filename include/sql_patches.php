@@ -902,6 +902,10 @@ PRIMARY KEY  (`user_id`)) ;
         $patch['161']['patch'] = "RENAME TABLE `".TB_PREFIX."users` TO  `".TB_PREFIX."user`";
     }
     $patch['161']['date'] = "20081201";
+
+//162 - ALTER TABLE `si_invoice_items` ADD `tax_type` VARCHAR( 1 ) NOT NULL AFTER `tax_id` ;
+
+
     //TODO: postgres and sqlite patch      
     
   
