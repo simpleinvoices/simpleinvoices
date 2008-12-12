@@ -21,18 +21,17 @@
             </div>
             <div id="money">
 				<ul class="subnav">
-					<li { if $pageActive == null} id="active" {/if}> ><a href="index.php?module=invoices&view=manage">{$LANG.manage_invoices}</a></li>
-					<li><a id="invoice_dialog" href="#">New invoice</a></li> {*LANG TODO*} ||
-					<li><a id="invoice_export_dialog"  href="index.php?module=invoices&view=itemised">{$LANG.manage payments}</a></li>
-					<li><a href="index.php?module=invoices&view=consulting">{$LANG.new_payment}</a></li>
+					<li { if $pageActive == null} id="active" {/if}> ><a href="index.php?module=invoices&view=manage">{$LANG.invoices}</a></li>
+					<li><a id="invoice_dialog" href="#">New invoice</a></li> {*LANG TODO*} |
+					<li><a id="invoice_export_dialog"  href="index.php?module=payments&view=manage">{$LANG.payments}</a></li> |
+					<li><a href="index.php?module=payments&view=process&op=pay_invoice">Sales Reports {*$LANG TODO*}</a></li>
 				</ul>
             </div>
             <div id="people">
 				<ul class="subnav">
-					<li><a href="index.php?module=customers&view=manage">{$LANG.manage_customers}</a></li>
-					<li><a href="index.php?module=customers&view=add">{$LANG.add_customer}</a> :: </li>
-					<li><a href="index.php?module=customers&view=manage">{$LANG.manage_billers}</a></li>
-					<li><a href="index.php?module=customers&view=add">{$LANG.add_biller}</a></li>
+					<li><a href="index.php?module=customers&view=manage">{$LANG.customers}</a></li>|
+					<li><a href="index.php?module=customers&view=manage">{$LANG.billers}</a></li>|
+					<li><a href="index.php?module=customers&view=add">Users {* $LANG TODO *}</a></li>
 				</ul>
 			</div>
            <div id="product">
