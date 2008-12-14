@@ -1430,70 +1430,14 @@ function updateInvoice($invoice_id) {
 		);
 }
 
-function getTaxesPerLineItem($line_item_tax_id,$quantity, $unit_price)
-{
-	print_r($line_item_tax_id);
-
-	global $logger;
-
-	foreach($line_item_tax_id as $key => $value) 
-	{
-		$logger->log("Key: ".$key." Value: ".$value, Zend_Log::INFO);
-		$tax = getTaxRate($value);
-		$logger->log('tax rate: '.$tax['tax_percentage'], Zend_Log::INFO);
-		
-		if($tax['type'] == "%")
-		{
-			$tax_amount = ( ($tax['tax_percentage'] / 100)  * $unit_price) * $quantity;
-		}
-		if($tax['type'] == "$")
-		{
-			$tax_amount = ($tax['tax_percentage'] + $unit_price) * $quantity;
-		}
-
-		//get Total tax for line item
-		$tax_total = $tax_total + $tax_amount;
-
-		$logger->log('Qty: '.$quantity.' Unit price: '.$unit_price, Zend_Log::INFO);
-		$logger->log('Tax rate: '.$tax[tax_percentage].' Tax type: '.$tax['tax_type'].' Tax $: '.$tax_amount, Zend_Log::INFO);
-
-		return $tax_total;
-	}
-}
-
 function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_item_tax_id,$description="", $unit_price="") {
 
 	global $logger;
 	//do taxes
-	print_r($line_item_tax_id);
-//	$tax_total = getTaxesPerLineItem($line_item_tax_id,$quantity, $unit_price);
-	foreach($line_item_tax_id as $key => $value) 
-	{
-		$tax_amount ="";
-		$logger->log("Key: ".$key." Value: ".$value, Zend_Log::INFO);
-		$tax = getTaxRate($value);
-		$logger->log('tax rate: '.$tax['tax_percentage'], Zend_Log::INFO);
-		
-		if($tax['type'] == "%")
-		{
-			$tax_amount = ( ($tax['tax_percentage'] / 100)  * $unit_price) * $quantity;
-		}
-		if($tax['type'] == "$")
-		{
-			$tax_amount = ($tax['tax_percentage'] + $unit_price) * $quantity;
-		}
 
-		//get Total tax for line item
-		$tax_total = $tax_total + $tax_amount;
+	$tax_total = getTaxesPerLineItem($line_item_tax_id,$quantity, $unit_price);
 
-		$logger->log('Qty: '.$quantity.' Unit price: '.$unit_price, Zend_Log::INFO);
-		$logger->log('Tax rate: '.$tax[tax_percentage].' Tax type: '.$tax['tax_type'].' Tax $: '.$tax_amount, Zend_Log::INFO);
-
-//		return $tax_total;
-		unset($tax_amount);
-	}
-
-	$logger->log('Tax for line item '.$line_number.': '.$tax_total, Zend_Log::INFO);
+	$logger->log('Invoice: '.$invoice_id.' Tax for line item '.$line_number.': '.$tax_total, Zend_Log::INFO);
 	$logger->log(' ', Zend_Log::INFO);
 
 	//line item gross total
@@ -1522,13 +1466,57 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 		':total', $total
 		);
 	
-	$logger->log('Invoice Item ID - : '.lastInsertId(), Zend_Log::INFO);	
 	insert_invoice_item_tax(lastInsertId(),$line_item_tax_id,$unit_price,$quantity);
 
 	//TODO fix this
 	return true;
 }
+/*
+Function: getTaxesPerLineItem
+Purpose: get the total tax for the line item
+*/
+function getTaxesPerLineItem($line_item_tax_id,$quantity, $unit_price)
+{
+	global $logger;
 
+	foreach($line_item_tax_id as $key => $value) 
+	{
+		//$logger->log("Key: ".$key." Value: ".$value, Zend_Log::INFO);
+		$tax = getTaxRate($value);
+		//$logger->log('tax rate: '.$tax['tax_percentage'], Zend_Log::INFO);
+
+		$tax_amount = lineItemTaxCalc($tax,$unit_price,$quantity);
+		//get Total tax for line item
+		$tax_total = $tax_total + $tax_amount;
+
+		//$logger->log('Qty: '.$quantity.' Unit price: '.$unit_price, Zend_Log::INFO);
+		//$logger->log('Tax rate: '.$tax[tax_percentage].' Tax type: '.$tax['tax_type'].' Tax $: '.$tax_amount, Zend_Log::INFO);
+
+	}
+	return $tax_total;
+}
+
+/*
+Function: lineItemTaxCalc
+Purpose: do the calc for the tax for tax x on line item y
+*/
+function lineItemTaxCalc($tax,$unit_price,$quantity)
+{
+	if($tax['type'] == "%")
+	{
+		$tax_amount = ( ($tax['tax_percentage'] / 100)  * $unit_price ) * $quantity;
+	}
+	if($tax['type'] == "$")
+	{
+		$tax_amount = $tax['tax_percentage'] * $quantity;
+	}
+		
+	return $tax_amount;
+}
+/*
+Function: insert_invoice_item_tax
+Purpose: insert the multiple taxes per line item into the si_invoice_item_tax table
+*/
 function insert_invoice_item_tax($invoice_item_id,$line_item_tax_id,$unit_price,$quantity) {
 	
 	global $logger;
@@ -1537,33 +1525,17 @@ function insert_invoice_item_tax($invoice_item_id,$line_item_tax_id,$unit_price,
 	{
 		if($value !== "")
 		{
-			$logger->log("ITEM :: Key: ".$key." Value: ".$value, Zend_Log::INFO);
 			$tax = getTaxRate($value);
-			$logger->log('ITEM :: tax rate: '.$tax['tax_percentage'], Zend_Log::INFO);
-			
-			if($tax['type'] == "%")
-			{
-				$tax_amount = ( ($tax['tax_percentage'] / 100)  * $unit_price) * $quantity;
-			}
-			if($tax['type'] == "$")
-			{
-				$tax_amount = ($tax['tax_percentage'] + $unit_price) * $quantity;
-			}
 
+			$logger->log("ITEM :: Key: ".$key." Value: ".$value, Zend_Log::INFO);
+			$logger->log('ITEM :: tax rate: '.$tax['tax_percentage'], Zend_Log::INFO);
+
+			$tax_amount = lineItemTaxCalc($tax,$unit_price,$quantity);
 			//get Total tax for line item
 			$tax_total = $tax_total + $tax_amount;
 
 			$logger->log('ITEM :: Qty: '.$quantity.' Unit price: '.$unit_price, Zend_Log::INFO);
-			$logger->log('ITEM :: Tax rate: '.$tax[tax_percentage].' Tax type: '.$tax['tax_type'].' Tax $: '.$tax_amount, Zend_Log::INFO);
-
-	//		return $tax_total;
-
-			/*
-			if ($db_server == 'mysql' && !_invoice_items_check_fk(
-				$invoice_id, $product_id, $tax['tax_id'])) {
-				return null;
-			}
-			*/
+			$logger->log('ITEM :: Tax rate: '.$tax[tax_percentage].' Tax type: '.$tax['type'].' Tax $: '.$tax_amount, Zend_Log::INFO);
 
 			$sql = "INSERT 
 						INTO 
@@ -1584,7 +1556,6 @@ function insert_invoice_item_tax($invoice_item_id,$line_item_tax_id,$unit_price,
 						:tax_amount
 					)";
 
-			//echo $sql;
 			dbQuery($sql,
 				':invoice_item_id', $invoice_item_id,
 				':tax_id', $tax[tax_id],

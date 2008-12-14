@@ -943,7 +943,7 @@ PRIMARY KEY  (`user_id`)) ;
     $patch['165']['name'] = "Add default tax id 2 into products table";
     $patch['165']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `default_tax_id_2` INT( 11 ) NULL AFTER `default_tax_id` ;";
     if ($config->database->adapter == "pdo_pgsql") {
-    	$patch['165']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `default_tax_id` INT( 11 ) NULL AFTER `unit_price` ;";
+    	$patch['165']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `default_tax_id_2` INT( 11 ) NULL AFTER `default_tax_id` ;";
     }
     $patch['165']['date'] = "20081212";
 
@@ -964,7 +964,7 @@ PRIMARY KEY  (`user_id`)) ;
     $patch['168']['name'] = "Add tax type";
     $patch['168']['patch'] = "ALTER TABLE `".TB_PREFIX."tax` ADD `type` VARCHAR( 1 ) NULL AFTER `tax_percentage` ;";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['168']['patch'] = "ALTER TABLE `".TB_PREFIX."tax` ADD `type` INT( 11 ) NULL AFTER `tax_percentage` ;";
+	    $patch['168']['patch'] = "ALTER TABLE `".TB_PREFIX."tax` ADD `type` VARCHAR( 1 ) NULL AFTER `tax_percentage` ;";
     }
     $patch['168']['date'] = "20081212";
 
