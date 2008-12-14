@@ -401,6 +401,13 @@
 		<td colspan="2" class="align_right">{$LANG.total} {$LANG.tax} {$LANG.included}</td>
 		<td colspan="2" class="align_right">{$preference.pref_currency_sign}{$invoice.total_tax|number_format:2}</td>
     </tr>
+    {section name=line start=0 loop=$invoice.tax_grouped step=1}
+    	<tr class='details_screen'>
+	        <td colspan="3"></td>
+			<td colspan="2" class="align_right">{$invoice.tax_grouped[line].tax_name}</td>
+			<td colspan="2" class="align_right">{$invoice.tax_grouped[line].tax_amount|siLocal_number}</td>
+	    </tr>
+	{/section}
 	<tr>
 		<td colspan="6"><br></td>
 	</tr>

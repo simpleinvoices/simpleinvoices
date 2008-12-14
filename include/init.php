@@ -73,6 +73,9 @@ if($environment != 'production') {
 
 include_once("./include/sql_queries.php");
 
+//TODO
+//$smarty->register_modifier("siLocal_number","siLocal::number");
+
 include_once('./include/language.php');
 
 include_once('./include/functions.php');

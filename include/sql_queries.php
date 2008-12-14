@@ -759,10 +759,39 @@ function getInvoice($id) {
 	$result = $sth->fetch();
 	//$invoice['total'] = number_format($result['total'],2);
 	$invoice['total_tax'] = $result['total_tax'];
-	
+		
+	$invoice['tax_grouped'] = taxesGroupedForInvoice($id);
+
 	return $invoice;
 }
 
+/*
+Function: taxesGroupedForInvoice
+Purpose: to show a nice summary of total $ for tax for an invoice
+*/
+function taxesGroupedForInvoice($invoice_id)
+{
+	$sql = "select 
+				tax.tax_description as tax_name, 
+				sum(item_tax.tax_amount) as tax_amount
+			from 
+				si_invoice_item_tax item_tax, 
+				si_invoice_items item, 
+				si_tax tax 
+			where 
+				item.id = item_tax.invoice_item_id 
+				AND 
+				tax.tax_id = item_tax.tax_id 
+				AND 
+				item.invoice_id = :invoice_id
+				GROUP BY 
+				tax.tax_id;";
+	$sth = dbQuery($sql, ':invoice_id', $invoice_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$result = $sth->fetchAll();
+
+	return $result;
+
+}
 class invoice {
 	function getInvoiceItems($id) {
 	
