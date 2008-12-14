@@ -43,9 +43,7 @@ for($i=1;$i<=4;$i++) {
 	$show_custom_field[$i] = show_custom_field("invoice_cf$i",'',"write",'',"details_screen",'','','');
 }
 
-
 $pageActive == "invoices";
-
 
 $smarty -> assign("billers",$billers);
 $smarty -> assign("customers",$customers);

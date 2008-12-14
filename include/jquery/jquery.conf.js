@@ -95,6 +95,7 @@ function invoice_product_change_price(si_product,row_number, quantity)
 		type: 'GET',
 		url: './index.php?module=invoices&view=product_ajax&id='+si_product,
 		data: "id: "+si_product,
+		dataType: "json",
 		success: function(data){
 			$('#gmail_loading').hide();
 			/*$('#state').html(data);*/
@@ -103,7 +104,9 @@ function invoice_product_change_price(si_product,row_number, quantity)
 			{	
 				$("#quantity"+row_number).attr("value","1");
 			}
-			$("#unit_price"+row_number).attr("value",data);
+			$("#unit_price"+row_number).attr("value",data['unit_price']);
+			$("#tax_id\\["+row_number+"\\]\\[0\\]").val(data['default_tax_id']);
+			$("#tax_id\\["+row_number+"\\]\\[1\\]").val(data['default_tax_id_2']);
 		}
 	});
 }

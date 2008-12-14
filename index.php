@@ -74,6 +74,7 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 	}
 }
 
+
 /*
 * dont include the header if requested file is an invoice template - for print preview etc.. header is not needed 
 */

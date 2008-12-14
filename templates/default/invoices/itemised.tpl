@@ -22,6 +22,9 @@
 <tr>
 	<td class="details_screen">{$LANG.quantity}</td>
 	<td class="details_screen">{$LANG.description}</td>
+	{section name=tax_header loop=$defaults.tax_per_line_item }
+		<td class="details_screen">{$LANG.tax} {if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1}{/if} </td>
+	{/section}
 	<td class="details_screen">{$LANG.unit_price}</td>
 </tr>
 
@@ -46,8 +49,17 @@
 				{/foreach}
 				</select>
 			{/if}
-				                				                
+				</td>
+				{section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
+				<td>				                				                
+					<select id="tax_id[{$smarty.section.line.index}][{$smarty.section.tax.index}]" name="tax_id[{$smarty.section.line.index}][{$smarty.section.tax.index}]" >
+					<option value=""></option>
+					{foreach from=$taxes item=tax}
+						<option value="{$tax.tax_id}">{$tax.tax_description}</option>
+					{/foreach}
+				</select>
                 </td>
+				{/section}
                 <td>
 					<input id="unit_price{$smarty.section.line.index}" name="unit_price{$smarty.section.line.index}" size="7" value=""></input>
 				</td>	
@@ -74,9 +86,10 @@
         	
         	</td>
 </tr>
-
+{*
 <tr><td class="details_screen">{$LANG.tax}</td>
 <td>
+
 
 {if $taxes == null }
 	<p><em>{$LANG.no_taxes}</em></p>
@@ -89,6 +102,7 @@
 {/if}
 
 </td>
+*}
 </tr>
 
 <tr>

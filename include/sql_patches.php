@@ -903,8 +903,78 @@ PRIMARY KEY  (`user_id`)) ;
     }
     $patch['161']['date'] = "20081201";
 
-//162 - ALTER TABLE `si_invoice_items` ADD `tax_type` VARCHAR( 1 ) NOT NULL AFTER `tax_id` ;
+    $patch['162']['name'] = "Add new invoice items tax table";
+    $patch['162']['patch'] = "CREATE TABLE `".TB_PREFIX."invoice_item_tax` (
+		`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+		`invoice_item_id` INT( 11 ) NOT NULL ,
+		`tax_id` INT( 11 ) NOT NULL ,
+		`tax_type` VARCHAR( 1 ) NOT NULL ,
+		`tax_rate` DECIMAL( 25, 6 ) NOT NULL ,
+		`tax_amount` DECIMAL( 25, 6 ) NOT NULL
+		) ENGINE = MYISAM ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+	    $patch['162']['patch'] = "CREATE TABLE `".TB_PREFIX."invoice_item_tax` (
+			`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+			`invoice_item_id` INT( 11 ) NOT NULL ,
+			`tax_id` INT( 11 ) NOT NULL ,
+			`tax_type` VARCHAR( 1 ) NOT NULL ,
+			`tax_rate` DECIMAL( 25, 6 ) NOT NULL ,
+			`tax_amount` DECIMAL( 25, 6 ) NOT NULL
+			) ENGINE = MYISAM ;"; //TODO - psql version
+    }
+    $patch['162']['date'] = "20081212";
 
+	//do conversion
+    $patch['163']['name'] = "Concert tax info in si_invoice_items to si_invoice_item_tax";
+    $patch['163']['patch'] = "insert into `".TB_PREFIX."_invoice_item_tax` (invoice_item_id, tax_id, tax_type, tax_rate, tax_amount) select invoice_id, tax_id, '%', tax, tax_amount from `".TB_PREFIX."invoice_items`;";
+    if ($config->database->adapter == "pdo_pgsql") {
+    	$patch['163']['patch'] = "insert into `".TB_PREFIX."invoice_item_tax` (invoice_item_id, tax_id, tax_type, tax_rate, tax_amount) select invoice_id, tax_id, '%', tax, tax_amount from `".TB_PREFIX."invoice_items;";
+    }
+    $patch['163']['date'] = "20081212";
+
+
+    $patch['164']['name'] = "Add default tax id into products table";
+    $patch['164']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `default_tax_id` INT( 11 ) NULL AFTER `unit_price` ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+    	$patch['164']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `default_tax_id` INT( 11 ) NULL AFTER `unit_price` ;";
+    }
+    $patch['164']['date'] = "20081212";
+
+    $patch['165']['name'] = "Add default tax id 2 into products table";
+    $patch['165']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `default_tax_id_2` INT( 11 ) NULL AFTER `default_tax_id` ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+    	$patch['165']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `default_tax_id` INT( 11 ) NULL AFTER `unit_price` ;";
+    }
+    $patch['165']['date'] = "20081212";
+
+    $patch['166']['name'] = "Add default tax into product items";
+    $patch['166']['patch'] = "update `".TB_PREFIX."products` set default_tax_id = (select value from `".TB_PREFIX."system_defaults` where name ='tax');";
+    if ($config->database->adapter == "pdo_pgsql") {
+    	$patch['166']['patch'] = "update `".TB_PREFIX."products` set default_tax_id = (select value from `".TB_PREFIX."system_defaults` where name ='tax');";
+    }
+    $patch['166']['date'] = "20081212";
+
+    $patch['167']['name'] = "Add default number of taxes per line item into system_defaults";
+    $patch['167']['patch'] = "insert into `".TB_PREFIX."system_defaults` values ('','tax_per_line_item','1')";
+    if ($config->database->adapter == "pdo_pgsql") {
+    	$patch['167']['patch'] = "insert into `".TB_PREFIX."system_defaults` values ('','tax_per_line_item','1')";
+    }
+    $patch['167']['date'] = "20081212";
+
+    $patch['168']['name'] = "Add tax type";
+    $patch['168']['patch'] = "ALTER TABLE `".TB_PREFIX."tax` ADD `type` VARCHAR( 1 ) NULL AFTER `tax_percentage` ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+	    $patch['168']['patch'] = "ALTER TABLE `".TB_PREFIX."tax` ADD `type` INT( 11 ) NULL AFTER `tax_percentage` ;";
+    }
+    $patch['168']['date'] = "20081212";
+
+    $patch['169']['name'] = "Set tax type on current taxes to %";
+    $patch['169']['patch'] = "UPDATE `".TB_PREFIX."tax` SET `type` = '%' ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+	    $patch['169']['patch'] = "UPDATE `".TB_PREFIX."tax` SET `type` = '%';"; 
+    }
+    $patch['169']['date'] = "20081212";
+	//delete the old fields in si_invoice_items
 
     //TODO: postgres and sqlite patch      
     

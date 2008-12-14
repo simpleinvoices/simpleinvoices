@@ -32,6 +32,9 @@ jsEnd();
 
 $pageActive = "invoices";
 
+$logger->log('Itemised invoice created', Zend_Log::INFO);
+
+
 include('./modules/invoices/invoice.php');
 
 ?>

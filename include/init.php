@@ -17,6 +17,8 @@ Zend_Loader::loadClass('Zend_Acl_Role');
 Zend_Loader::loadClass('Zend_Acl_Resource');
 Zend_Loader::loadClass('Zend_Locale');
 Zend_Loader::loadClass('Zend_Locale_Format');
+Zend_Loader::loadClass('Zend_Log');
+Zend_Loader::loadClass('Zend_Log_Writer_Stream');
 
 Zend_Session::start();
 
@@ -24,6 +26,8 @@ Zend_Session::start();
  * Zend framework init - end
  */
 
+$writer = new Zend_Log_Writer_Stream('./cache/si.log');
+$logger = new Zend_Log($writer);
 
 
 
