@@ -1,6 +1,7 @@
 
-body { background: white; color: black; font-style: normal; font-size: 12pt; font-family: Veranda, San-Serif, Arial; }
+body { background: white; color: #444444; font-style: normal; font-size: 12pt; font-family: Veranda, San-Serif, Arial; }
 
+hr {color: #444444;}
 table {
         border-spacing: 0;
         border-collapse: collapse;
@@ -17,11 +18,11 @@ tr {margin: 0px;      padding: 0px;}
 
 .font3 { font-family: Arial; font-size: 8pt; }
 
-.tbl1 { border: #33628D 1px solid; border-collapse:collapse; }
-.tbl1-left { border-left: #33628D 1px solid; border-collapse:collapse; }
-.tbl1-right { border-right: #33628D 1px solid; border-collapse:collapse; }
-.tbl1-bottom { border-bottom: #33628D 1px solid; border-collapse:collapse; }
-.tbl1-top { border-top: #33628D 1px solid; border-collapse:collapse; }
+.tbl1 { border: #A0A0A0 1px solid; border-collapse:collapse; }
+.tbl1-left { border-left: #A0A0A0 1px solid; border-collapse:collapse; }
+.tbl1-right { border-right: #A0A0A0 1px solid; border-collapse:collapse; }
+.tbl1-bottom { border-bottom: #A0A0A0 1px solid; border-collapse:collapse; }
+.tbl1-top { border-top: #A0A0A0 1px solid; border-collapse:collapse; }
 
 .left {
  clear: left;

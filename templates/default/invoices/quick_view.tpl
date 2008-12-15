@@ -269,11 +269,9 @@
             </tr>
 			<tr>
         		    <td><b>{$LANG.quantity_short}</b></td>
-					<td><b>{$LANG.description}</b></td>
-					<td style="text-align:right"><b>{$LANG.unit_price}</b></td>
-					<td style="text-align:right"><b>{$LANG.gross_total}</b></td>
-					<td style="text-align:right"><b>{$LANG.tax}</b></td>
-					<td style="text-align:right"><b>{$LANG.total_uppercase}</b></td>
+					<td colspan="2"><b>{$LANG.description}</b></td>
+					<td style="text-align:right"><b>{$LANG.Unit_Cost}</b></td>
+					<td style="text-align:right"><b>{$LANG.Price}</b></td>
 		    </tr>
 	{/if}
 
@@ -285,11 +283,9 @@
         	</tr>
 			<tr>
                	 	<td><b>{$LANG.quantity_short}</b></td>
-					<td><b>{$LANG.item}</b></td>
-					<td style="text-align:right"><b>{$LANG.unit_price}</b></td>
-					<td style="text-align:right"><b>{$LANG.gross_total}</b></td>
-					<td style="text-align:right"><b>{$LANG.tax}</b></td>
-					<td style="text-align:right"><b>{$LANG.total_uppercase}</b></td>
+					<td colspan="2"><b>{$LANG.item}</b></td>
+					<td style="text-align:right"><b>{$LANG.Unit_Cost}</b></td>
+					<td style="text-align:right"><b>{$LANG.Price}</b></td>
 	        </tr>
     {/if}
 
@@ -300,11 +296,9 @@
 	
 			<tr>
 	                <td>{$invoiceItem.quantity|siLocal_number_trim}</td>
-					<td>{$invoiceItem.product.description}</td>
+					<td colspan="2">{$invoiceItem.product.description}</td>
 					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.unit_price|siLocal_number}</td>
 					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|siLocal_number}</td>
-					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.tax_amount|siLocal_number}</td>
-					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.total|siLocal_number}</td>
 	        </tr>
 	        
 
@@ -335,11 +329,10 @@
 
 			<tr>
 	            <td>{$invoiceItem.quantity|number_format:2}</td>
-				<td>{$invoiceItem.product.description}</td>
+				<td colspan="2">{$invoiceItem.product.description}</td>
 				<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.unit_price|siLocal_number}</td>
 				<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|siLocal_number}</td>
-				<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.tax_amount|siLocal_number}</td>
-				<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.total|siLocal_number}</td>
+
 			</tr>
 			<tr  class='consulting' >	
 				<td colspan="6">
@@ -398,7 +391,7 @@
 
     <tr class='details_screen'>
         <td colspan="3"></td>
-		<td colspan="2" class="align_right">{$LANG.total} {$LANG.tax} {$LANG.included}</td>
+		<td colspan="2" class="align_right">{$LANG.tax_total}</td>
 		<td colspan="2" class="align_right">{$preference.pref_currency_sign}{$invoice.total_tax|number_format:2}</td>
     </tr>
     {section name=line start=0 loop=$invoice.tax_grouped step=1}
