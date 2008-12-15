@@ -7,6 +7,7 @@ Next Release :: TODO
 ##############################
 
 - set domain_id in session
+- change Unit Price to Unit Cost - change gross to Price
 - si_account_payments: change all refer to si_payment - done
 - si_payment: add domain_id into all queries
 - si_tax: add domain_id into all queries

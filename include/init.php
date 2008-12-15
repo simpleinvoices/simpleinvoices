@@ -70,12 +70,10 @@ if($environment != 'production') {
      $config = new Zend_Config_Ini('./config/'.$environment.'.config.ini', $environment);
 }
 
-
 include_once("./include/sql_queries.php");
 
-//TODO
-//$smarty->register_modifier("siLocal_number","siLocal::number");
-
+$smarty->register_modifier("siLocal_number", array("siLocal", "number"));
+$smarty->register_modifier("siLocal_number_trim", array("siLocal", "number_trim"));
 include_once('./include/language.php');
 
 include_once('./include/functions.php');

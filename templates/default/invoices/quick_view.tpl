@@ -299,12 +299,12 @@
 		{if $invoice.type_id == 2 || $invoice.type_id == 4}
 	
 			<tr>
-	                <td>{$invoiceItem.quantity|number_format:2}</td>
+	                <td>{$invoiceItem.quantity|siLocal_number_trim}</td>
 					<td>{$invoiceItem.product.description}</td>
-					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.unit_price|number_format:2}</td>
-					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|number_format:2}</td>
-					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.tax_amount|number_format:2}</td>
-					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.total|number_format:2}</td>
+					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.unit_price|siLocal_number}</td>
+					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|siLocal_number}</td>
+					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.tax_amount|siLocal_number}</td>
+					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.total|siLocal_number}</td>
 	        </tr>
 	        
 
@@ -336,10 +336,10 @@
 			<tr>
 	            <td>{$invoiceItem.quantity|number_format:2}</td>
 				<td>{$invoiceItem.product.description}</td>
-				<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.unit_price|number_format:2}</td>
-				<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|number_format:2}</td>
-				<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.tax_amount|number_format:2}</td>
-				<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.total|number_format:2}</td>
+				<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.unit_price|siLocal_number}</td>
+				<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|siLocal_number}</td>
+				<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.tax_amount|siLocal_number}</td>
+				<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.total|siLocal_number}</td>
 			</tr>
 			<tr  class='consulting' >	
 				<td colspan="6">

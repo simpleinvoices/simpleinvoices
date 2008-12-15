@@ -1,6 +1,10 @@
 --------
 BETA 2
 --------
+	- Tax rates can be % or $ figure based - ie can be used for Sales Tax (10%) or Postage ($10)
+ 	- Multiple tax rates per line item now possible
+	- New UI
+	- Qty now trims zeros from decimal places - so no longer have 2 decimal places for Qty
     - Make buttons look pretty
 	- Make fields look pretty 
 	- Fix problem with selecting language
