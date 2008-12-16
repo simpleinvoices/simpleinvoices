@@ -1,22 +1,18 @@
 
 			<tr>
 				<td class="tbl1 col1" ><b>{$LANG.quantity_short}</b></td>
-				<td class="tbl1 col1" ><b>{$LANG.description}</b></td>
-				<td class="tbl1 col1" ><b>{$LANG.unit_price}</b></td>
-				<td class="tbl1 col1" ><b>{$LANG.gross_total}</b></td>
-				<td class="tbl1 col1" ><b>{$LANG.tax}</b></td>
-				<td class="tbl1 col1" align="right"><b>{$LANG.total_uppercase}</b></td>
+				<td colspan="3" class="tbl1 col1" ><b>{$LANG.description}</b></td>
+				<td class="tbl1 col1" ><b>{$LANG.Unit_Cost}</b></td>
+				<td class="tbl1 col1" align="right"><b>{$LANG.Price}</b></td>
 			</tr>
 
 	
 	{foreach from=$invoiceItems item=invoiceItem}
 			<tr>
-				<td>{$invoiceItem.quantity|number_format:2}</td>
-				<td>{$invoiceItem.product.description}</td>
-				<td>{$preference.pref_currency_sign}{$invoiceItem.unit_price|number_format:2}</td>
-				<td >{$preference.pref_currency_sign}{$invoiceItem.gross_total|number_format:2}</td>
-				<td >{$preference.pref_currency_sign}{$invoiceItem.tax_amount|number_format:2}</td>
-				<td align="right">{$preference.pref_currency_sign}{$invoiceItem.total|number_format:2}</td>
+				<td>{$invoiceItem.quantity|siLocal_number_trim}</td>
+				<td colspan="3">{$invoiceItem.product.description}</td>
+				<td>{$preference.pref_currency_sign}{$invoiceItem.unit_price|siLocal_number}</td>
+				<td align="right">{$preference.pref_currency_sign}{$invoiceItem.total|siLocal_number}</td>
 			</tr>
 			<tr>
                 <td class="tbl1-left"></td>
@@ -60,5 +56,5 @@
 		<tr>
 			<td colspan="3"></td>
 			<td align="right" colspan="2">{$LANG.gross_total}</td>
-			<td align="right">{$preference.pref_currency_sign}{$invoice_gross_total|number_format:2}</td>
+			<td align="right">{$preference.pref_currency_sign}{$invoice_gross_total|siLocal_number}</td>
 		</tr>	

@@ -1,17 +1,15 @@
 		<tr class="tbl1 col1">
 			<td class="tbl1"><b>{$LANG.quantity_short}</b></td>
-			<td class="tbl1"><b>{$LANG.item}</b></td>
-			<td class="tbl1"><b>{$LANG.unit_price}</b></td>
-			<td class="tbl1"><b>{$LANG.gross_total}</b></td>
-			<td class="tbl1"><b>{$LANG.tax}</b></td>
-			<td class="tbl1" align="right"><b>{$LANG.total_uppercase}</b></td>
+			<td colspan="3" class="tbl1"><b>{$LANG.item}</b></td>
+			<td class="tbl1"><b>{$LANG.Unit_Cost}</b></td>
+			<td class="tbl1" align="right"><b>{$LANG.Price}</b></td>
 		</tr>
 
 	
 	{foreach from=$invoiceItems item=invoiceItem}
 
 			<tr class="tbl1-left tbl1-right">
-				<td class="tbl1-left">{$invoiceItem.quantity|number_format:2}</td>
+				<td class="tbl1-left">{$invoiceItem.quantity|siLocal_number_trim}</td>
 				<td>{$invoiceItem.product.description}</td>
 				<td class="tbl1-right" colspan="4"></td>
 			</tr>
@@ -55,11 +53,9 @@
 
 			<tr class="tbl1-left tbl1-right tbl1-bottom">
 				<td class="tbl1-left tbl1-bottom" ></td>
-				<td class="tbl1-bottom"></td>
-				<td class="tbl1-bottom">{$preference.pref_currency_sign}{$invoiceItem.unit_price|number_format:2}</td>
-				<td class="tbl1-bottom">{$preference.pref_currency_sign}{$invoiceItem.gross_total|number_format:2}</td>
-				<td class="tbl1-bottom ">{$preference.pref_currency_sign}{$invoiceItem.tax_amount|number_format:2}</td>
-				<td class="tbl1-right tbl1-bottom" align="right">{$preference.pref_currency_sign}{$invoiceItem.total|number_format:2}</td>
+				<td colspan="3" class="tbl1-bottom"></td>
+				<td class="tbl1-bottom">{$preference.pref_currency_sign}{$invoiceItem.unit_price|siLocal_number}</td>
+				<td class="tbl1-right tbl1-bottom" align="right">{$preference.pref_currency_sign}{$invoiceItem.total|siLocal_number}</td>
 			</tr>
 	
 	{/foreach}
@@ -84,5 +80,5 @@
 		<tr>
 			<td colspan="3"></td>
 			<td align="right" colspan="2">{$LANG.gross_total}</td>
-			<td align="right">{$preference.pref_currency_sign}{$invoice_gross_total|number_format:2}</td>
+			<td align="right">{$preference.pref_currency_sign}{$invoice_gross_total|siLocal_number}</td>
 		</tr>	
