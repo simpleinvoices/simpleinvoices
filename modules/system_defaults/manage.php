@@ -17,8 +17,6 @@ foreach($languages as $language) {
 }
 
 
-
-
 $smarty -> assign("defaults", getSystemDefaults());
 $smarty -> assign("defaultBiller", getDefaultBiller());
 $smarty -> assign("defaultCustomer", getDefaultCustomer());

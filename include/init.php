@@ -90,6 +90,3 @@ if ($config->authentication->enabled == 1 )
 	include_once("./include/acl.php");
 	include_once("./include/check_permission.php");
 }
-
-
-?>

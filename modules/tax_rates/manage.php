@@ -7,5 +7,3 @@ $smarty -> assign("taxes",getTaxes());
 
 $pageActive = "options";
 $smarty -> assign('pageActive', $pageActive)
-
-?>

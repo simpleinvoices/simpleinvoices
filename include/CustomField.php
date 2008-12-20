@@ -143,5 +143,3 @@ abstract class CustomField {
 		return $sth->fetch();
 	}
 }
-
-?>

@@ -18,4 +18,3 @@ $smarty -> assign("biller", $biller);
 $smarty -> assign("customer", $customer);
 $smarty -> assign("debtor", $debtor);
 $smarty -> assign("title", $title);
-?>

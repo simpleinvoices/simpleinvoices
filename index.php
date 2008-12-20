@@ -449,5 +449,3 @@ if($module !== "auth")
 /*
 * Footer - end 
 */
-
-?>

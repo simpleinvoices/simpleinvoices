@@ -9,4 +9,3 @@ if ($_POST['tax_description'] != "" ) {
 }
 
 $smarty -> assign('save',$save);
-?>

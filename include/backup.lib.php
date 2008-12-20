@@ -108,4 +108,4 @@ class backup_db{
         } // while     
         return $tmp_query; 
     } 
-} ?>
+}

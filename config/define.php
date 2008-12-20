@@ -22,5 +22,3 @@ if($environment != "production")
 {
     @include("./config/".htmlspecialchars($environment).".define.php");
 }
-
-?>

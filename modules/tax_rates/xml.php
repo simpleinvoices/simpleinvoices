@@ -75,8 +75,3 @@ if (in_array($sort, $validFields)) {
 	$xml .= "</rows>";
 
 echo $xml;
-
-
-
-
-?> 
