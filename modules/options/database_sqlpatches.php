@@ -6,6 +6,7 @@
 include('./include/sql_patches.php');
 
 // Made it into 2 functions to get rid of the old defaults table
+
 function getNumberOfDonePatches() {
 
 	$check_patches_sql = "SELECT count(sql_patch) AS count FROM ".TB_PREFIX."sql_patchmanager ";

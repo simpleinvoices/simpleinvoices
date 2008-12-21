@@ -70,6 +70,7 @@ if($environment != 'production') {
      $config = new Zend_Config_Ini('./config/'.$environment.'.config.ini', $environment);
 }
 
+//include_once("./include/sql_patches.php");
 include_once("./include/sql_queries.php");
 
 $smarty->register_modifier("siLocal_number", array("siLocal", "number"));

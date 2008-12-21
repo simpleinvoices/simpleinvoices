@@ -45,7 +45,11 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 
 	// ...or configure the instance with setter methods
 	$authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
-	$authAdapter->setTableName(TB_PREFIX.'users')
+
+	//sql patch 161 changes user table name - need to accomodate
+	$user_table = (getNumberOfDoneSQLPatches() < "161") ? "users" : "user";
+
+	$authAdapter->setTableName(TB_PREFIX.$user_table)
 				->setIdentityColumn('user_email')
 				->setCredentialColumn('user_password')
 				->setCredentialTreatment('MD5(?)');
@@ -68,15 +72,31 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 		* grab user data  from the datbase
 		*/
 
-		$result = $dbAdapter->fetchRow('
-			SELECT 
-				u.user_id, u.user_email, u.user_name, r.name as role_name, u.user_domain_id
-			FROM 
-				si_users u,  si_user_role r 
-			WHERE 
-				user_email = ? AND u.user_role_id = r.id', $userEmail
-		);
-		
+		//patch 147 adds user_role table - need to accomodate pre and post patch 147
+		if (getNumberOfDoneSQLPatches() < "147")
+		{
+			$result = $dbAdapter->fetchRow('
+				SELECT 
+					u.user_id, u.user_email, u.user_name
+				FROM 
+					si_users u
+				WHERE 
+					user_email = ?', $userEmail
+			);
+			$result['role_name']="administrator";
+		}
+
+		if (getNumberOfDoneSQLPatches() >= "147")
+		{
+			$result = $dbAdapter->fetchRow('
+				SELECT 
+					u.user_id, u.user_email, u.user_name, r.name as role_name, u.user_domain_id
+				FROM 
+					si_user u,  si_user_role r 
+				WHERE 
+					user_email = ? AND u.user_role_id = r.id', $userEmail
+			);
+		}		
 		/*
 		* chuck the user details sans password into the Zend_auth session
 		*/

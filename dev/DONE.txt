@@ -1,6 +1,7 @@
 --------
 BETA 2
 --------
+	- Upgrade issue fixed - if auth on upgrade now works ok
 	- Simplify invoice layout - remove item tax and item total - now shows: qty, item, unit_cost, price
 	- Tax rates can be % or $ figure based - ie can be used for Sales Tax (10%) or Postage ($10)
  	- Multiple tax rates per line item now possible

@@ -6,6 +6,7 @@ Disclaimer: if its in the list it may get done sometime in the future if and whe
 Next Release :: TODO
 ##############################
 
+- change config.ini back to config.php - but keep ini format and add ;<?php on line 1 and ; exit; on line 2 - this is for sercurity reasons
 - set domain_id in session
 - change Unit Price to Unit Cost - change gross to Price - Done
 -- need to edit the export template - TODO

@@ -55,22 +55,29 @@ $menu = isset($menu)?$menu: true;
 */
 $file = isset($file)?$file: "home";
 
+
+//if auth - make sure is valid session else skip
 // Check for any unapplied SQL patches when going home
 if (($module == "options") && ($view == "database_sqlpatches")) {
 	include_once('./modules/options/database_sqlpatches.php');
 	donePatches();
 } elseif ($file == 'home') {
-	include_once('./modules/options/database_sqlpatches.php');
-	if (getNumberOfPatches() > 0 ) {
-		$view = "database_sqlpatches";
-		$module = "options";
-		
-		if($action == "run") {
-			runPatches();
-		} else {
-			listPatches();
+	
+	//if auth on must login before upgrade
+	if ( ($config->authentication->enabled == 1 AND isset($auth_session->user_id)) OR ($config->authentication->enabled == 0) )	
+	{
+		include_once('./modules/options/database_sqlpatches.php');
+		if (getNumberOfPatches() > 0 ) {
+			$view = "database_sqlpatches";
+			$module = "options";
+			
+			if($action == "run") {
+				runPatches();
+			} else {
+				listPatches();
+			}
+			$menu = false;
 		}
-		$menu = false;
 	}
 }
 

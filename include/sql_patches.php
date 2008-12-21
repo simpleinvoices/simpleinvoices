@@ -1,4 +1,5 @@
 <?php
+
 	$patch['0']['name'] = "Start";
 	$patch['0']['patch'] = "SHOW TABLES LIKE 'test'";
 	$patch['0']['date'] = "20060514";

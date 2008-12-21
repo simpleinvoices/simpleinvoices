@@ -3,8 +3,10 @@
 Zend_Session::start();
 //session_start();
 
+$auth_session = new Zend_Session_Namespace('Zend_Auth');
+
 // is the one accessing this page logged in or not?
-if (!isset($_SESSION['Zend_Auth']['user_id']))
+if (!isset($auth_session->user_id))
 {
 	if  ($_GET['module'] !== "auth")  
 	{

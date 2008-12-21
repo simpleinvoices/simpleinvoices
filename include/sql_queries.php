@@ -2033,4 +2033,14 @@ class siLocal
 		return $number_formatted;
 	}
 }
-?>
+
+function getNumberOfDoneSQLPatches() {
+
+	$check_patches_sql = "SELECT count(sql_patch) AS count FROM ".TB_PREFIX."sql_patchmanager ";
+	$sth = dbQuery($check_patches_sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+		
+	$patches = $sth->fetch();
+	
+	//Returns number of patches applied
+	return $patches['count'];
+}
