@@ -392,7 +392,7 @@
     <tr class='details_screen'>
         <td colspan="3"></td>
 		<td colspan="2" class="align_right">{$LANG.tax_total}</td>
-		<td colspan="2" class="align_right">{$preference.pref_currency_sign}{$invoice.total_tax|number_format:2}</td>
+		<td colspan="2" class="align_right">{$preference.pref_currency_sign}{$invoice.total_tax|siLocal_number}</td>
     </tr>
     {section name=line start=0 loop=$invoice.tax_grouped step=1}
     	<tr class='details_screen'>
@@ -407,7 +407,7 @@
     <tr class='details_screen'>
         <td colspan="3"></td>
 		<td colspan="2" class="align_right"><b>{$preference.pref_inv_wording} {$LANG.amount}</b></td>
-		<td colspan="2" class="align_right"><u>{$preference.pref_currency_sign}{$invoice.total|number_format:2}</u></td>
+		<td colspan="2" class="align_right"><u>{$preference.pref_currency_sign}{$invoice.total|siLocal_number}</u></td>
     </tr>
 	<tr>
 		<td colspan="6"><br><br></td>

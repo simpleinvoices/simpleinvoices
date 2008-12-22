@@ -55,7 +55,7 @@ $pageActive = "invoices";
 //Customer accounts sections
 $customerAccount = null;
 $customerAccount['total'] = calc_customer_total($customer['id']);
-$customerAccount['paid'] = calc_customer_paid($customer['id']);;
+$customerAccount['paid'] = calc_customer_paid($customer['id']);
 $customerAccount['owing'] = $customerAccount['total'] - $customerAccount['paid'];
 
 $smarty -> assign('pageActive', $pageActive);

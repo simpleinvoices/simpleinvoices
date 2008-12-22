@@ -10,10 +10,14 @@ Next Release :: TODO
 - set domain_id in session
 - change Unit Price to Unit Cost - change gross to Price - Done
 -- need to edit the export template - TODO
+
 - si_account_payments: change all refer to si_payment - done
 - si_payment: add domain_id into all queries
+
 - si_tax: add domain_id into all queries
 - si_user: change all refer to si_user
+- domain_id sql patches - write an update table set domain_id = 1 for all tables
+- add domain_id into custom_fields tables
 
  - Manage pages - numbers to be right aligned - JK 
 

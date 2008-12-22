@@ -57,7 +57,8 @@ if (in_array($sort, $validFields)) {
                         ".TB_PREFIX."payment ap INNER JOIN
                         ".TB_PREFIX."invoices iv ON (iv.id = ap.ac_inv_id)
                     WHERE 
-                        iv.customer_id = CID) AS owing
+                        iv.customer_id = CID) AS paid,
+                ( select customer_total - paid ) AS owing
 
 			FROM 
 				".TB_PREFIX."customers c  
