@@ -18,6 +18,7 @@ Next Release :: TODO
 - si_user: change all refer to si_user
 - domain_id sql patches - write an update table set domain_id = 1 for all tables
 - add domain_id into custom_fields tables
+- add domain_id into system_defaults table
 
  - Manage pages - numbers to be right aligned - JK 
 

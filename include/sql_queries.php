@@ -528,7 +528,7 @@ function getProduct($id) {
 function insertProductComplete($enabled=1,$visible=1,$description, 
 		$unit_price, $custom_field1 = NULL, $custom_field2, $custom_field3, $custom_field4, $notes) {
 
-
+	global $auth_session;
 	/*if(isset($enabled)) {
 		$enabled=$enabled;
 	}*/
@@ -536,11 +536,11 @@ function insertProductComplete($enabled=1,$visible=1,$description,
 	if ($db_server == 'pgsql') {
 		$sql = "INSERT into
 			".TB_PREFIX."products
-			(description, unit_price, custom_field1, custom_field2,
+			(domain_id, description, unit_price, custom_field1, custom_field2,
 			custom_field3, custom_field4, notes, enabled, visible)
 		VALUES
 			(	
-				:description, :unit_price, :custom_field1,
+				:domain_id, :description, :unit_price, :custom_field1,
 				:custom_field2, :custom_field3, :custom_field4,
 				:notes, :enabled, :visible
 			)";
@@ -548,11 +548,12 @@ function insertProductComplete($enabled=1,$visible=1,$description,
 		$sql = "INSERT into
 			".TB_PREFIX."products
 			(
-				description, unit_price, custom_field1, custom_field2,
+				domain_id, description, unit_price, custom_field1, custom_field2,
 				custom_field3, custom_field4, notes, enabled, visible
 			)
 		VALUES
 			(	
+				:domain_id,
 				:description,
 				:unit_price,
 				:custom_field1,
@@ -565,6 +566,7 @@ function insertProductComplete($enabled=1,$visible=1,$description,
 			)";
 	}
 	return dbQuery($sql,
+		':domain_id',$auth_session->domain_id,	
 		':description', $description,
 		':unit_price', $unit_price,
 		':custom_field1', $custom_field1,
@@ -622,12 +624,13 @@ function getProducts() {
 	global $LANG;
 	global $dbh;
 	global $db_server;
+	global $auth_session;
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."products WHERE visible = 1 ORDER BY description";
+	$sql = "SELECT * FROM ".TB_PREFIX."products WHERE visible = 1 AND domain_id = :domain_id ORDER BY description";
 	if ($db_server == 'pgsql') {
-		$sql = "SELECT * FROM ".TB_PREFIX."products WHERE visible ORDER BY description";
+		$sql = "SELECT * FROM ".TB_PREFIX."products WHERE visible and domain_id = :domain_id ORDER BY description";
 	}
-	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
 	$products = null;
 	
@@ -648,9 +651,10 @@ function getProducts() {
 function getActiveProducts() {
 	global $dbh;
 	global $db_server;
+	global $auth_session;
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."products WHERE enabled ORDER BY description";
-	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sql = "SELECT * FROM ".TB_PREFIX."products WHERE enabled and domain_id = :domain_id ORDER BY description";
+	$sth = dbQuery($sql, ':domain_id',$auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
 	return $sth->fetchAll();
 }
@@ -658,9 +662,10 @@ function getActiveProducts() {
 function getTaxes() {
 	global $LANG;
 	global $dbh;
+	global $auth_session;
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."tax ORDER BY tax_description";
-	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sql = "SELECT * FROM ".TB_PREFIX."tax WHERE domain_id = :domain_id ORDER BY tax_description";
+	$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
 	$taxes = null;
 	
@@ -679,48 +684,55 @@ function getTaxes() {
 
 function getDefaultCustomer() {
 	global $dbh;
+	global $auth_session;
 	
-	$sql = "SELECT *,c.name AS name FROM ".TB_PREFIX."customers c, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'customer' AND c.id = s.value)";
-	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sql = "SELECT *,c.name AS name FROM ".TB_PREFIX."customers c, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'customer' AND c.id = s.value) AND c.domain_id = :domain_id";
+	$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	return $sth->fetch();
 }
 
 function getDefaultPaymentType() {
 	global $dbh;
+	global $auth_session;
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."payment_types p, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'payment_type' AND p.pt_id = s.value)";
-	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sql = "SELECT * FROM ".TB_PREFIX."payment_types p, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'payment_type' AND p.pt_id = s.value) AND p.domain_id = :domain_id";
+	$sth = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	return $sth->fetch();
 }
 
 function getDefaultPreference() {
 	global $dbh;
+	global $auth_session;
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."preferences p, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'preference' AND p.pref_id = s.value)";
-	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sql = "SELECT * FROM ".TB_PREFIX."preferences p, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'preference' AND p.pref_id = s.value) AND p.domain_id = :domain_id";
+	$sth = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	return $sth->fetch();
 }
 
 function getDefaultBiller() {
 	global $dbh;
+	global $auth_session
 	
-	$sql = "SELECT *,b.name AS name FROM ".TB_PREFIX."biller b, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'biller' AND b.id = s.value )";
-	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sql = "SELECT *,b.name AS name FROM ".TB_PREFIX."biller b, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'biller' AND b.id = s.value ) and b.domain_id = :domain_id";
+	$sth = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	return $sth->fetch();
 }
 
 function getDefaultTax() {
 	global $dbh;
+	global $auth_session
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."tax t, ".TB_PREFIX."system_defaults s WHERE (s.name = 'tax' AND t.tax_id = s.value)";
-	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sql = "SELECT * FROM ".TB_PREFIX."tax t, ".TB_PREFIX."system_defaults s WHERE (s.name = 'tax' AND t.tax_id = s.value) AND t.domain_id = :domain_id";
+	$sth = dbQuery($sql,':domain_id',$auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	return $sth->fetch();
 }
 
 function getDefaultDelete() {
 	global $LANG;
 	global $dbh;
-
+	global $auth_session;
+	//domain id TODO
+	
 	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = 'delete')";
 	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$array = $sth->fetch();
@@ -769,11 +781,12 @@ function setInvoiceStatus($invoice, $status){
 function getInvoice($id) {
 	global $dbh;
 	global $config;
+	global $auth_session; 
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE id = :id";
+	$sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE id = :id and domain_id = :domain_id";
 	//echo $sql;
 	
-	$sth  = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sth  = dbQuery($sql, ':id', $id, ':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 
 	//print_r($query);
 	$invoice = $sth->fetch();
@@ -896,7 +909,7 @@ function insertBiller() {
 	if ($db_server == 'pgsql') {
 		$sql = "INSERT into
 			".TB_PREFIX."biller (
-				name, street_address, street_address2, city,
+				domain_id, name, street_address, street_address2, city,
 				state, zip_code, country, phone, mobile_phone,
 				fax, email, logo, footer, notes, custom_field1,
 				custom_field2, custom_field3, custom_field4,
@@ -904,7 +917,7 @@ function insertBiller() {
 			)
 		VALUES
 			(
-				:name, :street_address, :street_address2, :city,
+				:domaain_id, :name, :street_address, :street_address2, :city,
 				:state, :zip_code, :country, :phone,
 				:mobile_phone, :fax, :email, :logo, :footer,
 				:notes, :custom_field1, :custom_field2,
@@ -1083,12 +1096,12 @@ function insertCustomer() {
 	
 	if ($db_server == 'pgsql') {
 		$sql = "INSERT INTO ".TB_PREFIX."customers (
-			attention, name, street_address, street_address2,
+			domain_id, attention, name, street_address, street_address2,
 			city, state, zip_code, country, phone, mobile_phone,
 			fax, email, notes, custom_field1, custom_field2,
 			custom_field3, custom_field4, enabled)
 		VALUES (
-			:attention, :name, :street_address, :street_address2,
+			:domain_id, :attention, :name, :street_address, :street_address2,
 			:city, :state, :zip_code, :country, :phone,
 			:mobile_phone, :fax, :email, :notes, :custom_field1,
 			:custom_field2, :custom_field3, :custom_field4, :enabled)";
@@ -1119,6 +1132,7 @@ function insertCustomer() {
 }
 
 function searchCustomers($search) {
+//TODO remove this function - note used anymore
 	global $db_server;
 
 	$sql = "SELECT * FROM ".TB_PREFIX."customers WHERE name LIKE :search";
@@ -1165,19 +1179,28 @@ function getInvoices(&$sth) {
 function getCustomerInvoices($id) {
 	global $dbh;
 	global $config;
+	global $auth_session;
 
 // tested for MySQL	
-	$sql = "SELECT	i.id, i.date, i.type_id, 
+	$sql = "SELECT	
+		i.id, 
+		i.date, 
+		i.type_id, 
 		(SELECT sum( COALESCE(ii.total, 0)) FROM " . TB_PREFIX . "invoice_items ii where ii.invoice_id = i.id) As invd,
 		(SELECT sum( COALESCE(ap.ac_amount, 0)) FROM " . TB_PREFIX . "payment ap where ap.ac_inv_id = i.id) As pmt,
 		(SELECT COALESCE(invd, 0)) As total, 
 		(SELECT COALESCE(pmt, 0)) As paid, 
 		(select (total - paid)) as owing 
-	FROM " . TB_PREFIX . "invoices i 
-	WHERE i.customer_id = :id
-	ORDER BY i.id DESC;";	
+	FROM 
+		" . TB_PREFIX . "invoices i 
+	WHERE 
+		i.customer_id = :id
+		and
+		i.domain_id = :domain_id
+	ORDER BY 
+		i.id DESC;";	
 
-	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sth = dbQuery($sql, ':id', $id, ':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 
 	$invoices = null;
 	while ($invoice = $sth->fetch()) {
@@ -1192,11 +1215,12 @@ function getCustomerInvoices($id) {
 function getCustomers() {
 	global $dbh;
 	global $LANG;
+	global $auth_session;
 	
 	$customer = null;
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."customers";
-	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sql = "SELECT * FROM ".TB_PREFIX."customers WHERE domain_id = :domain_id";
+	$sth = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 
 	$customers = null;
 
@@ -1230,13 +1254,14 @@ function getActiveCustomers() {
 	global $LANG;
 	global $dbh;
 	global $db_server;
+	global $auth_session;
 	
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."customers WHERE enabled != 0 ORDER BY name";
+	$sql = "SELECT * FROM ".TB_PREFIX."customers WHERE enabled != 0 and domain_id = :domain_id ORDER BY name";
 	if ($db_server == 'pgsql') {
-		$sql = "SELECT * FROM ".TB_PREFIX."customers WHERE enabled ORDER BY name";
+		$sql = "SELECT * FROM ".TB_PREFIX."customers WHERE enabled and domain_id = :domain_id ORDER BY name";
 	}
-	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sth = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 
 	return $sth->fetchAll();
 }
@@ -1245,6 +1270,7 @@ function getTopDebtor() {
   global $db_server;
   global $dbh;
   global $mysql;
+  global $auth_session;
 
   $debtor = null;
 
@@ -1260,6 +1286,8 @@ function getTopDebtor() {
 	        ".TB_PREFIX."customers c INNER JOIN
 		".TB_PREFIX."invoices iv ON (c.id = iv.customer_id) INNER JOIN
 		".TB_PREFIX."invoice_items ii ON (iv.id = ii.invoice_id)
+	WHERE 
+		c.domain_id = :domain_id
 	GROUP BY
 		\"CID\", iv.customer_id, c.id, c.name
 	ORDER BY
@@ -1267,7 +1295,7 @@ function getTopDebtor() {
 	LIMIT 1;
 	";
 
-	$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(end($dbh->errorInfo()));
 
 	$debtor = $sth->fetch();
   
@@ -1279,6 +1307,7 @@ function getTopCustomer() {
   global $db_server;
   global $dbh;
   global $mysql;
+  global $auth_session;
 
   $customer = null;
 
@@ -1295,6 +1324,8 @@ function getTopCustomer() {
        		".TB_PREFIX."customers c INNER JOIN
 		".TB_PREFIX."invoices iv ON (c.id = iv.customer_id) INNER JOIN
 		".TB_PREFIX."invoice_items ii ON (iv.id = ii.invoice_id)
+	WHERE
+		c.domain_id = :domain_id
 	GROUP BY
 	        \"CID\", iv.customer_id, \"Customer\"
 	ORDER BY 
@@ -1302,7 +1333,7 @@ function getTopCustomer() {
 	LIMIT 1;
 ";
 
-	$tth = dbQuery($sql2) or die(end($dbh->errorInfo()));
+	$tth = dbQuery($sql2,':domain_id',$auth_session->domain_id) or die(end($dbh->errorInfo()));
 
 	$customer = $tth->fetch();
  
@@ -1314,6 +1345,7 @@ function getTopBiller() {
   global $db_server;
   global $dbh;
   global $mysql;
+  global $auth_session;
 
   $biller = null;
 
@@ -1326,12 +1358,14 @@ function getTopBiller() {
 		".TB_PREFIX."biller b INNER JOIN
 		".TB_PREFIX."invoices iv ON (b.id = iv.biller_id) INNER JOIN
 		".TB_PREFIX."invoice_items ii ON (iv.id = ii.invoice_id)
+	WHERE
+		b.domain_id = :domain_id
 	GROUP BY b.name
 	ORDER BY Total DESC
 	LIMIT 1;
 	";
 
-	$uth = dbQuery($sql3) or die(end($dbh->errorInfo()));
+	$uth = dbQuery($sql3, ':domain_id', $auth_session->domain_id) or die(end($dbh->errorInfo()));
 
 	$biller = $uth->fetch();
   
@@ -1343,12 +1377,13 @@ function insertTaxRate() {
 	global $LANG;
 
 	$sql = "INSERT into ".TB_PREFIX."tax
-				(tax_description, tax_percentage, tax_enabled)
+				(domain_id, tax_description, tax_percentage, tax_enabled)
 			VALUES
-				(:description, :percent, :enabled)";
+				(:domain_id, :description, :percent, :enabled)";
 	
 	$display_block = $LANG['save_tax_rate_success'];
 	if (!(dbQuery($sql,
+		':domain_id', $auth_session->domain_id,
 		':description', $_POST['tax_description'],
 		':percent', $_POST['tax_percentage'],
 		':enabled', $_POST['tax_enabled']))) {
@@ -1383,6 +1418,7 @@ function updateTaxRate() {
 function insertInvoice($type) {
 	global $dbh;
 	global $db_server;
+	global $auth_session;
 	
 	if ($db_server == 'mysql' && !_invoice_check_fk(
 		$_POST['biller_id'], $_POST['customer_id'],
@@ -1393,6 +1429,7 @@ function insertInvoice($type) {
 			INTO
 		".TB_PREFIX."invoices (
 			id, 
+			domain_id,
 			biller_id, 
 			customer_id, 
 			type_id,
@@ -1407,6 +1444,7 @@ function insertInvoice($type) {
 		VALUES
 		(
 			NULL,
+			:domain_id,
 			:biller_id,
 			:customer_id,
 			:type,
@@ -1422,6 +1460,7 @@ function insertInvoice($type) {
 		$sql = "INSERT 
 				INTO
 			".TB_PREFIX."invoices (
+				domain_id,
 				biller_id, 
 				customer_id, 
 				type_id,
@@ -1435,6 +1474,7 @@ function insertInvoice($type) {
 			)
 			VALUES
 			(
+				:domain_id,
 				:biller_id,
 				:customer_id,
 				:type,
@@ -1449,6 +1489,7 @@ function insertInvoice($type) {
 	}
 	//echo $sql;
 	return dbQuery($sql,
+		':domain_id', $auth_session->domain_id,
 		':biller_id', $_POST[biller_id],
 		':customer_id', $_POST[customer_id],
 		':type', $type,
@@ -1734,6 +1775,7 @@ function printEntries($menu,$id,$depth) {
 */
 
 function searchBillerAndCustomerInvoice($biller,$customer) {
+//TODO remove this function - not used
 	global $db_server;
 
 	$sql = "SELECT b.name as biller, c.name as customer, i.id as invoice, i.date as date, i.type_id AS type_id,t.inv_ty_description as type
@@ -1759,6 +1801,7 @@ function searchBillerAndCustomerInvoice($biller,$customer) {
 }
 
 function searchInvoiceByDate($startdate,$enddate) {
+//TODO remove this function - not used
 	$sql = "SELECT b.name as biller, c.name as customer, i.id as invoice, i.date as date,i.type_id AS type_id, t.inv_ty_description as type
 	FROM ".TB_PREFIX."biller b, ".TB_PREFIX."invoices i, ".TB_PREFIX."customers c, ".TB_PREFIX."invoice_type t
 	WHERE i.date >= :startdate 
@@ -1786,6 +1829,7 @@ function searchInvoiceByDate($startdate,$enddate) {
 
 function delete($module,$idField,$id) {
 	global $dbh;
+	global $auth_session; //TODO add some domain_id stuff in here if requried
 
 	$lctable = strtolower($module);
 	$s_idField = ''; // Presetting the whitelisted column to fail 
@@ -1870,6 +1914,7 @@ function delete($module,$idField,$id) {
 function maxInvoice() {
 
 	global $LANG;	
+	
 	$sql = "SELECT max(id) as maxId FROM ".TB_PREFIX."invoices";
 
 	$sth = dbQuery($sql);
