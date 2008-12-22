@@ -20,7 +20,10 @@ Zend_Loader::loadClass('Zend_Locale_Format');
 Zend_Loader::loadClass('Zend_Log');
 Zend_Loader::loadClass('Zend_Log_Writer_Stream');
 
+//session_start();
 Zend_Session::start();
+$auth_session = new Zend_Session_Namespace('Zend_Auth');
+
 
 /* 
  * Zend framework init - end

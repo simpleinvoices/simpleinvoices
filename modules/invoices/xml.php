@@ -25,12 +25,12 @@ $limit = "LIMIT $start, $rp";
 $query = $_POST['query'];
 $qtype = $_POST['qtype'];
 
-$where = "";
-if ($query) $where = " WHERE $qtype LIKE '%$query%' ";
+$where = " WHERE iv.domain_id = :domain_id ";
+if ($query) $where = " WHERE iv.domain_id = :domain_id AND $qtype LIKE '%$query%' ";
 /*SQL where - end*/
 
 /*Check that the sort field is OK*/
-$validFields = array('id', 'biller', 'customer', 'invoice_total','owing','date','aging','type');
+$validFields = array('iv.id', 'biller', 'customer', 'invoice_total','owing','date','aging','type');
 
 if (in_array($sort, $validFields)) {
 	$sort = $sort;
@@ -75,7 +75,8 @@ if ($db_server == 'pgsql') {
 		LIMIT $limit OFFSET $start";
 } else {
        $sql ="
-		SELECT  iv.id,
+		SELECT  
+			   iv.id,
 		       b.name AS biller,
 		       c.name AS customer,
 		       (SELECT SUM(coalesce(ii.total,  0)) FROM " .
@@ -98,20 +99,23 @@ if ($db_server == 'pgsql') {
 		               LEFT JOIN " . TB_PREFIX . "customers c ON c.id = iv.customer_id
 		               LEFT JOIN " . TB_PREFIX . "preferences pf ON pf.pref_id = iv.preference_id
 		$where
+		GROUP BY
+			iv.id
 		ORDER BY
 		$sort $dir
 		$limit";
 }
 
-$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+$sth = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(end($dbh->errorInfo()));
 $invoices = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 global $dbh;
 
-$sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."invoices";
-$tth = dbQuery($sqlTotal) or die(end($dbh->errorInfo()));
-$resultCount = $tth->fetch();
-$count = $resultCount[0];
+//$sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."invoices";
+//$tth = dbQuery($sqlTotal) or die(end($dbh->errorInfo()));
+//$resultCount = $tth->fetch();
+//$count = $resultCount[0];
+$count = $sth->rowCount();
 //echo sql2xml($invoices, $count);
 
 	$xml .= "<rows>";
@@ -119,7 +123,7 @@ $count = $resultCount[0];
 	$xml .= "<total>$count</total>";
 	
 	foreach ($invoices as $row) {
-		$xml .= "<row id='".$row['id']."'>";
+		$xml .= "<row id='".$row['iv.id']."'>";
 		$xml .= "<cell>
 					<![CDATA[<a class='index_table' title='".$LANG['quick_view_tooltip'].$row['id']."' href='index.php?module=invoices&view=quick_view&invoice=".$row['id']."'> <img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 		<a class='index_table' title=".$LANG['edit_view_tooltip']." ".$invoices['preference.pref_inv_wording']." ".$row['id']."' href='index.php?module=invoices&view=details&invoice=".$row['id']."&action=view'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>

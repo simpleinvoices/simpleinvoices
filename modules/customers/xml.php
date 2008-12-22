@@ -2,6 +2,9 @@
 
 header("Content-type: text/xml");
 
+//global $auth_session;
+//global $dbh;
+
 $start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
 $dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC" ;
 $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "name" ;
@@ -24,8 +27,8 @@ if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 $query = $_POST['query'];
 $qtype = $_POST['qtype'];
 
-$where = "";
-if ($query) $where = " WHERE $qtype LIKE '%$query%' ";
+$where = "  WHERE c.domain_id = :domain_id";
+if ($query) $where = " WHERE c.domain_id = :domain_id AND $qtype LIKE '%$query%' ";
 
 
 /*Check that the sort field is OK*/
@@ -68,15 +71,10 @@ if (in_array($sort, $validFields)) {
 			LIMIT 
 				$start, $limit";
 
-	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$customers = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-global $dbh;
-
-$sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."customers";
-$tth = dbQuery($sqlTotal) or die(end($dbh->errorInfo()));
-$resultCount = $tth->fetch();
-$count = $resultCount[0];
+$count = $sth->rowCount()];
 
 	$xml .= "<rows>";
 	$xml .= "<page>$page</page>";

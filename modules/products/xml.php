@@ -46,6 +46,7 @@ if (in_array($sort, $validFields)) {
 				".TB_PREFIX."products  
 			WHERE 
 				visible = 1
+				AND domain_id = :domain_id
 				$where
 			ORDER BY 
 				$sort $dir 
@@ -54,7 +55,7 @@ if (in_array($sort, $validFields)) {
 				
 			
 
-	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$customers = $sth->fetchAll(PDO::FETCH_ASSOC);
 /*
 	$customers = null;

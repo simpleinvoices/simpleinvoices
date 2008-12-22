@@ -45,7 +45,7 @@
 				],
 			*/
 			searchitems : [
-				{display: 'Invoice Number', name : 'id'},
+				{display: 'Invoice Number', name : 'iv.id'},
 				{display: 'Biller', name : 'b.name', isdefault: true},
 				{display: 'Customer', name : 'c.name', isdefault: true}
 				],

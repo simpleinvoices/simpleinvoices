@@ -13,14 +13,14 @@ if ($config->authentication->enabled == 1 ) {
 /*If auth not on - use default domain and user id of 1*/
 if ($config->authentication->enabled != 1 ) 
 {
-		Zend_Session::start();
+		//Zend_Session::start();
 
 		/*
 		* chuck the user details sans password into the Zend_auth session
 		*/
-		$authNamespace = new Zend_Session_Namespace('Zend_Auth');
-		$authNamespace->user_id = "1";
-		$authNamespace->domain_id = "1";
+		//$authNamespace = new Zend_Session_Namespace('Zend_Auth');
+		$auth_session->user_id = "1";
+		$auth_session->domain_id = "1";
 
 }
 

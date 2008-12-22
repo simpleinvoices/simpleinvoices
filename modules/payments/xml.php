@@ -22,8 +22,8 @@ if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 $query = $_POST['query'];
 $qtype = $_POST['qtype'];
 
-$where = "";
-if ($query) $where = " WHERE $qtype LIKE '%$query%' ";
+$where = " WHERE ap. domain_id = :domain_id";
+if ($query) $where = " WHERE ap.domain_id = :domain_id AND $qtype LIKE '%$query%' ";
 
 
 /*Check that the sort field is OK*/
@@ -84,13 +84,15 @@ else {
 					iv.biller_id = b.id 
 				AND
 					ap.ac_payment_type = pt.pt_id 
+				AND
+					ap.domain_id = :domain_id
 			ORDER BY 
 				$sort $dir 
 			LIMIT 
 				$start, $limit
 				";
 				
-	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sth = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$count = $sth->rowCount();
 }
 	$payments = $sth->fetchAll(PDO::FETCH_ASSOC);

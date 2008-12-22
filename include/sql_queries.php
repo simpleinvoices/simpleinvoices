@@ -711,7 +711,7 @@ function getDefaultPreference() {
 
 function getDefaultBiller() {
 	global $dbh;
-	global $auth_session
+	global $auth_session;
 	
 	$sql = "SELECT *,b.name AS name FROM ".TB_PREFIX."biller b, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'biller' AND b.id = s.value ) and b.domain_id = :domain_id";
 	$sth = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
@@ -720,7 +720,7 @@ function getDefaultBiller() {
 
 function getDefaultTax() {
 	global $dbh;
-	global $auth_session
+	global $auth_session;
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."tax t, ".TB_PREFIX."system_defaults s WHERE (s.name = 'tax' AND t.tax_id = s.value) AND t.domain_id = :domain_id";
 	$sth = dbQuery($sql,':domain_id',$auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));

@@ -1,9 +1,5 @@
 <?php
 // like i said, we must never forget to start the session
-Zend_Session::start();
-//session_start();
-
-$auth_session = new Zend_Session_Namespace('Zend_Auth');
 
 // is the one accessing this page logged in or not?
 if (!isset($auth_session->user_id))

@@ -24,8 +24,8 @@ if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 $query = $_POST['query'];
 $qtype = $_POST['qtype'];
 
-$where = "";
-if ($query) $where = " WHERE $qtype LIKE '%$query%' ";
+$where = " WHERE domain_id = :domain_id";
+if ($query) $where = " WHERE domain_id = :domain_id AND $qtype LIKE '%$query%' ";
 
 
 /*Check that the sort field is OK*/
@@ -68,7 +68,7 @@ if (in_array($sort, $validFields)) {
 			LIMIT 
 				$start, $limit";
 			
-	$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(end($dbh->errorInfo()));
 	$count = $sth->rowCount();
 	
 	$cfs = null;
@@ -94,7 +94,7 @@ if (in_array($sort, $validFields)) {
 			<a class='index_table' title='$LANG[edit] $LANG[custom_field] ".utf8_encode($row['field_name_nice'])."' href='index.php?module=custom_fields&view=details&id=$row[cf_id]&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 		]]></cell>";
 		$xml .= "<cell><![CDATA[".utf8_encode($row['cf_id'])."]]></cell>";		
-		$xml .= "<cell><![CDATA[".utf8_encode($row['field_name_nice'])."]]></cell>";
+		$xml .= "<cell><![CDATA[".utf8_encode($row['field_name_nice']).$auth_session->domain_id."]]></cell>";
 		$xml .= "<cell><![CDATA[".utf8_encode($row['cf_custom_label'])."]]></cell>";				
 		$xml .= "</row>";		
 	}
