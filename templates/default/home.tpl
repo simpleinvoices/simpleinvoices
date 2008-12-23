@@ -15,7 +15,7 @@ Thank you for choosing Simple Invoices! There are just a couple of things to do 
 2 - Add a client - <a href="index.php?module=customers&view=add">click here</a><br>
 3 - Add some products - <a href="index.php?module=products&view=add">click here</a><br>
 4 - go nuts creating invoices - <a href="index.php?module=invoices&view=itemised">click here</a><br><br>
-If you need to customise some of the <a href="">settings</a> (ie. language, default items, etc..) <a href="">click here</a> and adjust as required
+If you need to customise some of the <a href="index.php?module=options&view=index">settings</a> (ie. language, default items, etc..) <a href="">click here</a> and adjust as required
 <br><br>
 Already know Simple Invoices by heart? You can <a href="">hide this text</a> forever then  <a href="">click here</a>
 
@@ -36,18 +36,18 @@ Already know Simple Invoices by heart? You can <a href="">hide this text</a> for
     <tr>
         <td>
 
-            <a href="./index.php?module=customers&view=manage" class="positive">
+            <a href="index.php?module=customers&view=manage" class="positive">
                 <img src="./images/common/add.png" alt=""/>
                 Add a new Invoice {* LANG TODO*}
             </a>
             
-             <a href="./index.php?module=customers&view=manage" class="positive">
+             <a href="index.php?module=customers&view=manage" class="positive">
                 <img src="./images/common/add.png" alt=""/>
                  Add a new Client {* LANG TODO*}
             </a>
     
     
-           <a href="./index.php?module=customers&view=manage" class="positive">
+           <a href="index.php?module=customers&view=manage" class="positive">
                 <img src="./images/common/add.png" alt=""/>
                  Add a new Product {* LANG TODO*}
             </a>
@@ -66,7 +66,7 @@ Already know Simple Invoices by heart? You can <a href="">hide this text</a> for
         <td>
 
             
-             <a href="./index.php?module=customers&view=manage" class="">
+             <a href="index.php?module=options&view=index" class="">
                 <img src="./images/common/cog_edit.png" alt=""/>
                  Customise the settings {* LANG TODO*}
             </a>

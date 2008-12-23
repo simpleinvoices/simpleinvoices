@@ -15,14 +15,19 @@
 	<p><em>{$LANG.no_invoices}</em></p>
 {else}
 
+<table class="buttons" align="center">
+    <tr>
+        <td>
 
-<div style="text-align:center;">
-<b>{$LANG.manage_invoices}</b> :: {$LANG.add_new_invoice} &ndash
-<a href="index.php?module=invoices&view=total"> {$LANG.total_style}</a> :: 
-<a href="index.php?module=invoices&view=itemised"> {$LANG.itemised_style}</a> :: 
-<a href="index.php?module=invoices&view=consulting"> {$LANG.consulting_style}</a>
-</div>
-<hr />
+            <a href="index.php?module=invoices&view=itemised" class="positive">
+                <img src="./images/common/add.png" alt=""/>
+                Add a new Invoice {* TODO $LANG  *}
+            </a>
+
+        </td>
+    </tr>
+</table>
+
 <table id="manageGrid" style="display:none"></table>
 
  {include file='../modules/invoices/manage.js.php'}
