@@ -74,7 +74,7 @@ if (in_array($sort, $validFields)) {
 	$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$customers = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-$count = $sth->rowCount()];
+$count = $sth->rowCount();
 
 	$xml .= "<rows>";
 	$xml .= "<page>$page</page>";

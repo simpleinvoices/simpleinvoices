@@ -7,7 +7,7 @@ Next Release :: TODO
 ##############################
 
 - change config.ini back to config.php - but keep ini format and add ;<?php on line 1 and ; exit; on line 2 - this is for sercurity reasons
-- set domain_id in session
+- set domain_id in session - Done
 - change Unit Price to Unit Cost - change gross to Price - Done
 -- need to edit the export template - TODO
 
@@ -15,9 +15,9 @@ Next Release :: TODO
 - si_payment: add domain_id into all queries
 
 - si_tax: add domain_id into all queries
-- si_user: change all refer to si_user
-- domain_id sql patches - write an update table set domain_id = 1 for all tables
-- add domain_id into custom_fields tables
+- si_user: change all refer to si_user - done
+- domain_id sql patches - write an update table set domain_id = 1 for all tables 
+- add domain_id into custom_fields tables 
 - add domain_id into system_defaults table
 
  - Manage pages - numbers to be right aligned - JK 
