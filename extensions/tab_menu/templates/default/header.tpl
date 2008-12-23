@@ -5,14 +5,6 @@
 	<title>Simple Invoices</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link REL="SHORTCUT ICON" HREF="./images/common/favicon.ico">
-	<!-- extJs2 Files 
-	<link rel="stylesheet" type="text/css" href="./include/ext2/resources/css/ext-all.css" />
- 	<script type="text/javascript" src="./include/ext2/adapter/ext/ext-base.js"></script>
-    <script type="text/javascript" src="./include/ext2/ext-all.js"></script>
-	<link rel="stylesheet" type="text/css" href="./include/ext2/grid/grid-examples.css" />
-	
-	<link rel="stylesheet" type="text/css" href="./include/css/simpleInvoicesStyle.css" />
-	-->
 
 {literal}
 	<link rel="stylesheet" type="text/css" href="./extensions/tab_menu/templates/default/css/tab-screen.css" media="all"/>
@@ -35,6 +27,7 @@
 	<link rel="stylesheet" type="text/css" href="./include/jquery/jquery.plugins.css" title="default" media="screen" />
 	<link rel="stylesheet" type="text/css" href="./include/jquery/rte/rte.css" />	
 	<link rel="stylesheet" type="text/css" href="./include/jquery/cluetip/jquery.cluetip.css" />
+	<link rel="stylesheet" type="text/css" href="./extensions/tab_menu/templates/default/css/default.css" media="all"/>
 
 
 	

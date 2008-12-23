@@ -113,6 +113,7 @@ div.notice {
 div.alert {
 	background:red; }
 
+/*
 h1 {
 	font:bold 32px Arial, Helvetica, sans-serif;
 	letter-spacing:normal;
@@ -120,12 +121,12 @@ h1 {
 	position:relative;
 	margin:5px 0 15px;
 	padding:0 0 5px; }
-
+*/
 /* TYPOGRAPHY
 -------------------------------------------------*/
 h1.admin {
 	margin-bottom:2px; }
-
+/*
 h2 {
 	font-size:18px;
 	font-family:helvetica;
@@ -153,6 +154,7 @@ h5 {
 
 h5 strong {
 	color:#4F9DBA; }
+*/
 
 form {
 	margin:0;
@@ -564,6 +566,7 @@ button:hover, .buttons a:hover{
 
 button.positive, .buttons a.positive{
    /* color:#529214;*/
+   
 }
 .buttons a.positive:hover, button.positive:hover{
 
@@ -619,4 +622,11 @@ color:#EEE;
 float:right;
 margin-top:16px;
 padding-right:30px;
+}
+
+.floatLeft{
+	float:left;
+}
+.floatRight{
+	float:right;
 }

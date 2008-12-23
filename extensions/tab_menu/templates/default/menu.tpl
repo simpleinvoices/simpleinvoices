@@ -15,7 +15,7 @@
             </ul>
             <div id="home">
 				<ul class="subnav">
-					<li><a href="index.php?module=customers&view=manage">Dashboard</a></li>
+					<li><a href="index.php">Dashboard</a></li>
 					<li><a href="index.php?module=customers&view=add">All reports</a></li>
 				</ul>
             </div>
