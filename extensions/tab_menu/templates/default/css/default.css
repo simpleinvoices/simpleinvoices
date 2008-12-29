@@ -2,3 +2,13 @@ h1, h2, h3
 {
 color:#4B7296;
 } 
+
+.welcome
+{
+	padding:10px;
+	margin-top:10px;
+	margin-bottom:10px;
+	background-color:#FFFFCC;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+}

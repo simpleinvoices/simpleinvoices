@@ -126,12 +126,13 @@ h1 {
 -------------------------------------------------*/
 h1.admin {
 	margin-bottom:2px; }
-/*
+
 h2 {
-	font-size:18px;
+/*	font-size:18px;
 	font-family:helvetica;
+*/
 	margin:0 0 15px; }
-	
+/*	
 h3 {
 	font-size:1em;
 	text-align:center;
