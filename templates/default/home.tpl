@@ -36,14 +36,14 @@
                 Add a new Invoice {* LANG TODO*}
             </a>
             
-             <a href="index.php?module=customers&view=add" class="positive">
-                <img src="./images/common/add.png" alt=""/>
+             <a href="index.php?module=customers&view=add" class="">
+                <img src="./images/common/vcard_add.png" alt=""/>
                  Add a new Client {* LANG TODO*}
             </a>
     
     
-           <a href="index.php?module=products&view=add" class="positive">
-                <img src="./images/common/add.png" alt=""/>
+           <a href="index.php?module=products&view=add" class="">
+                <img src="./images/common/cart_add.png" alt=""/>
                  Add a new Product {* LANG TODO*}
             </a>
         </td>
