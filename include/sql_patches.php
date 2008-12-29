@@ -978,10 +978,113 @@ PRIMARY KEY  (`user_id`)) ;
 	//delete the old fields in si_invoice_items
 
     //TODO: postgres and sqlite patch      
+
     
+    $patch['170']['name'] = "Set domain_id on tax table to 1";
+    $patch['170']['patch'] = "UPDATE `".TB_PREFIX."tax` SET `domain_id` = '1' ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+	    $patch['170']['patch'] = "UPDATE `".TB_PREFIX."tax` SET `domain_id` = '1';"; 
+    }
+    $patch['170']['date'] = "20081229";
+
+    $patch['171']['name'] = "Set domain_id on payment table to 1";
+    $patch['171']['patch'] = "UPDATE `".TB_PREFIX."payment` SET `domain_id` = '1' ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+	    $patch['171']['patch'] = "UPDATE `".TB_PREFIX."payment` SET `domain_id` = '1';"; 
+    }
+    $patch['171']['date'] = "20081229";
   
+    $patch['172']['name'] = "Set domain_id on payment_types table to 1";
+    $patch['172']['patch'] = "UPDATE `".TB_PREFIX."payment_types` SET `domain_id` = '1' ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+	    $patch['172']['patch'] = "UPDATE `".TB_PREFIX."payment_types` SET `domain_id` = '1';"; 
+    }
+    $patch['172']['date'] = "20081229";    
+  
+    $patch['173']['name'] = "Set domain_id on preference table to 1";
+    $patch['173']['patch'] = "UPDATE `".TB_PREFIX."preferences` SET `domain_id` = '1' ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+	    $patch['173']['patch'] = "UPDATE `".TB_PREFIX."preferences` SET `domain_id` = '1';"; 
+    }
+    $patch['173']['date'] = "20081229";        
     
-    
+    $patch['174']['name'] = "Set domain_id on products table to 1";
+    $patch['174']['patch'] = "UPDATE `".TB_PREFIX."products` SET `domain_id` = '1' ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+	    $patch['174']['patch'] = "UPDATE `".TB_PREFIX."products` SET `domain_id` = '1';"; 
+    }
+    $patch['174']['date'] = "20081229";        
+
+    $patch['175']['name'] = "Set domain_id on biller table to 1";
+    $patch['175']['patch'] = "UPDATE `".TB_PREFIX."biller` SET `domain_id` = '1' ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+	    $patch['175']['patch'] = "UPDATE `".TB_PREFIX."biller` SET `domain_id` = '1';"; 
+    }
+    $patch['175']['date'] = "20081229";  
+          
+    $patch['176']['name'] = "Set domain_id on invoices table to 1";
+    $patch['176']['patch'] = "UPDATE `".TB_PREFIX."invoices` SET `domain_id` = '1' ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+	    $patch['176']['patch'] = "UPDATE `".TB_PREFIX."invoices` SET `domain_id` = '1';"; 
+    }
+    $patch['176']['date'] = "20081229";        
+
+    $patch['177']['name'] = "Set domain_id on customers table to 1";
+    $patch['177']['patch'] = "UPDATE `".TB_PREFIX."customers` SET `domain_id` = '1' ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+	    $patch['177']['patch'] = "UPDATE `".TB_PREFIX."customers` SET `domain_id` = '1';"; 
+    }
+    $patch['177']['date'] = "20081229";        
+        
+    $patch['178']['name'] = "Rename si_user.user_id to si_user.id";
+    $patch['178']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_id` `id` int(11) ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+	    $patch['178']['patch'] = "UPDATE `".TB_PREFIX."user` CHANGE `user_id` `id` int(11);"; 
+    }
+    $patch['178']['date'] = "20081229";        
+     //TODO: postgres and sqlite patch  
+
+    $patch['179']['name'] = "Rename si_user.user_email to si_user.email";
+    $patch['179']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_email` `email` VARCHAR( 255 );";
+    if ($config->database->adapter == "pdo_pgsql") {
+	    $patch['179']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_email` `email` VARCHAR( 255 );"; 
+    }
+    $patch['179']['date'] = "20081229";        
+     //TODO: postgres and sqlite patch  
+     
+    $patch['180']['name'] = "Rename si_user.user_name to si_user.name";
+    $patch['180']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_name` `name` VARCHAR( 255 );";
+    if ($config->database->adapter == "pdo_pgsql") {
+	    $patch['180']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_name` `name` VARCHAR( 255 );"; 
+    }
+    $patch['180']['date'] = "20081229";        
+     //TODO: postgres and sqlite patch      
+     
+    $patch['181']['name'] = "Rename si_user.user_role_id to si_user.role_id";
+    $patch['181']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_role_id` `role_id` int(11);";
+    if ($config->database->adapter == "pdo_pgsql") {
+	    $patch['181']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_role_id` `role_id` int(11);"; 
+    }
+    $patch['181']['date'] = "20081229";        
+     //TODO: postgres and sqlite patch      
+     
+    $patch['182']['name'] = "Rename si_user.user_domain_id to si_user.domain_id";
+    $patch['182']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_domain_id` `domain_id` int(11) ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+	    $patch['182']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_domain_id` `domain_id` int(11) ;"; 
+    }
+    $patch['182']['date'] = "20081229";        
+     //TODO: postgres and sqlite patch        
+     
+    $patch['183']['name'] = "Rename si_user.user_password to si_user.password";
+    $patch['183']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_password` `password` VARCHAR( 255 )  ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+	    $patch['183']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_password` `password` VARCHAR( 255 ) ;"; 
+    }
+    $patch['183']['date'] = "20081229";        
+     //TODO: postgres and sqlite patch        
+
+
     
     
     //TODO - new patch to change the name of si_users table to si_user required - also need to update auth system with new table name etc..

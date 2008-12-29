@@ -74,12 +74,13 @@
         </td>
     </tr>
 </table>
-
+<br>
 <!-- Don't forget to menu - end -->
 
 <!-- Reports menu - start -->
 <h2>Your reports</h2>
 --fancy graph here-- --some links on the right--
+<br>
 <!-- Reports menu - end -->
 
 

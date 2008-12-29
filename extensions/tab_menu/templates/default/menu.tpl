@@ -24,7 +24,7 @@
 					<li { if $pageActive == null} id="active" {/if}> ><a href="index.php?module=invoices&view=manage">{$LANG.invoices}</a></li>
 					<li><a id="invoice_dialog" href="#">New invoice</a></li> {*LANG TODO*} |
 					<li><a id="invoice_export_dialog"  href="index.php?module=payments&view=manage">{$LANG.payments}</a></li> |
-					<li><a href="index.php?module=reports&view=index#sales">Sales Reports {*$LANG TODO*}</a></li>
+					<li><a href="index.php?module=reports&view=report_sales_total">Sales Report {*$LANG TODO*}</a></li>
 				</ul>
             </div>
             <div id="people">

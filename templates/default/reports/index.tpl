@@ -128,7 +128,7 @@
 
  
 </table>
-
+<br>
 
 <h2>{$LANG.Other}</h2>
 <table class="buttons" >

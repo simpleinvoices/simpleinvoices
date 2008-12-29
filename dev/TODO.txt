@@ -16,9 +16,9 @@ Next Release :: TODO
 
 - si_tax: add domain_id into all queries
 - si_user: change all refer to si_user - done
-- domain_id sql patches - write an update table set domain_id = 1 for all tables 
-- add domain_id into custom_fields tables 
-- add domain_id into system_defaults table
+- domain_id sql patches - write an update table set domain_id = 1 for all tables - done
+- add domain_id into custom_fields tables - TODO
+- add domain_id into system_defaults table - flatten this table - old style - TODO
 
  - Manage pages - numbers to be right aligned - JK 
 
