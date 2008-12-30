@@ -21,7 +21,7 @@ $p = isset($_GET['p'])?$_GET['p']:null;
 
 require_once("./library/smarty/Smarty.class.php");
 $smarty = new Smarty();
-$smarty -> compile_dir = "./cache/";
+$smarty -> compile_dir = "./tmp/cache/";
 include("./include/init.php");
 
 $smarty -> assign("LANG",$LANG);

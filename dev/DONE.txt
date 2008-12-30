@@ -1,6 +1,9 @@
 --------
 BETA 2
 --------
+	- cache move to tmp/cache
+	- database_backup move to tmp/database_backup
+	- Simple Invoices log file added - tmp/log/si.log
 	- customer total calcs updated
 	- Upgrade issue fixed - if auth on upgrade now works ok
 	- Simplify invoice layout - remove item tax and item total - now shows: qty, item, unit_cost, price

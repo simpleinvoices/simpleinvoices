@@ -60,7 +60,7 @@
 		function PHPReportMaker() {
 			$this->_sPath				= getPHPReportsFilePath();
 //			$this->_sTmp				= getPHPReportsTmpPath();
-			$this->_sTmp				= dirname(dirname(dirname(__FILE__))) . "/cache";  // done for SI to work - Ap.Muthu
+			$this->_sTmp				= dirname(dirname(dirname(__FILE__))) . "/tmp/cache";  // done for SI to work - Ap.Muthu
 			$this->sXML					= null;		
 			$this->sXSLT				= $this->_sPath."/xslt/PHPReport.xsl";		
 			$this->sUser				= null;		

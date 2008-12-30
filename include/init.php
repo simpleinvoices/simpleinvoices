@@ -4,7 +4,8 @@
  * Zend framework init - start
  */
 set_include_path(get_include_path() . PATH_SEPARATOR . "./library/");
-require_once './library/Zend/Loader.php';
+set_include_path(get_include_path() . PATH_SEPARATOR . "./library/ZendFramework/1.7.2/");
+require_once 'Zend/Loader.php';
 Zend_Loader::loadClass('Zend_Db_Table');
 Zend_Loader::loadClass('Zend_Date');
 Zend_Loader::loadClass('Zend_Debug');
@@ -29,7 +30,7 @@ $auth_session = new Zend_Session_Namespace('Zend_Auth');
  * Zend framework init - end
  */
 
-$writer = new Zend_Log_Writer_Stream('./cache/si.log');
+$writer = new Zend_Log_Writer_Stream('./tmp/log/si.log');
 $logger = new Zend_Log($writer);
 
 
@@ -42,7 +43,7 @@ require_once("smarty/Smarty.class.php");
 $smarty = new Smarty();
 
 //cache directory. Have to be writeable (chmod 777)
-$smarty -> compile_dir = "cache";
+$smarty -> compile_dir = "tmp/cache";
 if(!is_writable($smarty -> compile_dir)) {
 	simpleInvoicesError("cache", $smarty -> compile_dir);
 	//exit("Simple Invoices Error : The folder <i>".$smarty -> compile_dir."</i> has to be writeable");

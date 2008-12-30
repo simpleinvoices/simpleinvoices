@@ -50,8 +50,8 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 	$user_table = (getNumberOfDoneSQLPatches() < "161") ? "users" : "user";
 
 	$authAdapter->setTableName(TB_PREFIX.$user_table)
-				->setIdentityColumn('user_email')
-				->setCredentialColumn('user_password')
+				->setIdentityColumn('email')
+				->setCredentialColumn('password')
 				->setCredentialTreatment('MD5(?)');
 
     $userEmail   = $_POST['user'];
@@ -90,11 +90,11 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 		{
 			$result = $dbAdapter->fetchRow('
 				SELECT 
-					u.user_id, u.user_email, u.user_name, r.name as role_name, u.user_domain_id
+					u.id, u.email, u.name, r.name as role_name, u.domain_id
 				FROM 
 					si_user u,  si_user_role r 
 				WHERE 
-					user_email = ? AND u.user_role_id = r.id', $userEmail
+					u.email = ? AND u.role_id = r.id', $userEmail
 			);
 		}		
 		/*

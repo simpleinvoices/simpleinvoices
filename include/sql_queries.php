@@ -90,7 +90,7 @@ function dbLogger($sqlQuery) {
 	global $dbh;
 	global $auth_session;
 	
-	$userid = $auth_session->user_id;
+	$userid = $auth_session->id;
 	
 	if(LOGGING && (preg_match('/^\s*select/iD',$sqlQuery) == 0)) {
 		// Only log queries that could result in data/database  modification

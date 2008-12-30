@@ -19,7 +19,7 @@ if ($config->authentication->enabled != 1 )
 		* chuck the user details sans password into the Zend_auth session
 		*/
 		//$authNamespace = new Zend_Session_Namespace('Zend_Auth');
-		$auth_session->user_id = "1";
+		$auth_session->id = "1";
 		$auth_session->domain_id = "1";
 
 }
