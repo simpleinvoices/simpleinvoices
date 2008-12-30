@@ -1082,10 +1082,39 @@ PRIMARY KEY  (`user_id`)) ;
 	    $patch['183']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_password` `password` VARCHAR( 255 ) ;"; 
     }
     $patch['183']['date'] = "20081229";        
-     //TODO: postgres and sqlite patch        
+     //TODO: postgres and sqlite patch     
+        
+    $patch['184']['name'] = "Drop name column from si_user table";
+    $patch['184']['patch'] = "ALTER TABLE `".TB_PREFIX."user` DROP `name`  ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+	    $patch['184']['patch'] = "ALTER TABLE `".TB_PREFIX."user` DROP `name`  ;"; 
+    }
+    $patch['184']['date'] = "20081230";        
+    //TODO: postgres and sqlite patch        
 
-
-    
+    $patch['185']['name'] = "Drop old defaults table";
+    $patch['185']['patch'] = "DROP TABLE `".TB_PREFIX."defaults` ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+	    $patch['185']['patch'] = "DROP TABLE `".TB_PREFIX."defaults`  ;"; 
+    }
+    $patch['185']['date'] = "20081230";        
+    //TODO: postgres and sqlite patch  
+     
+    $patch['186']['name'] = "Set domain_id on customers table to 1";
+    $patch['186']['patch'] = "ALTER TABLE  `".TB_PREFIX."custom_fields` ADD  `domain_id` INT NOT NULL ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+	    $patch['186']['patch'] = "ALTER TABLE  `".TB_PREFIX."custom_fields` ADD  `domain_id` INT NOT NULL ;"; 
+    }
+    $patch['186']['date'] = "20081230";        
+    //TODO: postgres and sqlite patch 
+              
+    $patch['187']['name'] = "Set domain_id on custom_feilds table to 1";
+    $patch['187']['patch'] = "UPDATE `".TB_PREFIX."custom_fields` SET `domain_id` = '1' ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+	    $patch['187']['patch'] = "UPDATE `".TB_PREFIX."custom_fields` SET `domain_id` = '1';"; 
+    }
+    $patch['187']['date'] = "20081230"; 
+    //TODO: postgres and sqlite patch     
     
     //TODO - new patch to change the name of si_users table to si_user required - also need to update auth system with new table name etc..
 
@@ -1218,6 +1247,3 @@ $patch['153']['name'] = "Drop old defaults table";
 	$patch['67']['patch'] = "ALTER TABLE `".TB_PREFIX."sql_patchmanager` DROP `sql_patch_ref`";
 	$patch['67']['date'] = "20070506";
  */
-
-
-?>

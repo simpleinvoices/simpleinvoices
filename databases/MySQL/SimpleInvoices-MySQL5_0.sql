@@ -3,33 +3,16 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 26, 2008 at 03:31 PM
+-- Generation Time: Dec 30, 2008 at 04:28 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 --
--- Database: `simple_invoices_current`
+-- Database: `simple_invoices_dev`
 --
 
--- --------------------------------------------------------
-
---
--- Table structure for table `si_account_payments`
---
-
-CREATE TABLE IF NOT EXISTS `si_account_payments` (
-  `id` int(10) NOT NULL auto_increment,
-  `ac_inv_id` int(11) NOT NULL,
-  `ac_amount` decimal(25,6) NOT NULL,
-  `ac_notes` text collate utf8_unicode_ci NOT NULL,
-  `ac_date` datetime NOT NULL,
-  `ac_payment_type` int(10) NOT NULL default '1',
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci  ;
-
---
 -- --------------------------------------------------------
 
 --
@@ -59,19 +42,8 @@ CREATE TABLE IF NOT EXISTS `si_biller` (
   `custom_field4` varchar(255) default NULL,
   `enabled` varchar(1) NOT NULL default '1',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8  ;
 
---
--- Dumping data for table `si_biller`
---
-
-INSERT INTO `si_biller` (`id`, `domain_id`, `name`, `street_address`, `street_address2`, `city`, `state`, `zip_code`, `country`, `phone`, `mobile_phone`, `fax`, `email`, `logo`, `footer`, `notes`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `enabled`) VALUES
-(1, 1, 'Mr Plough', '43 Evergreen Terace', '', 'Springfield', 'New York', '90245', '', '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'homer@mrplough.com', 'ubuntulogo.png', '', '', '', '7898-87987-87', '', '', '1'),
-(2, 1, 'Homer Simpson', '43 Evergreen Terace', NULL, 'Springfield', 'New York', '90245', NULL, '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'homer@yahoo.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1'),
-(3, 1, 'The Beer Baron', '43 Evergreen Terace', NULL, 'Springfield', 'New York', '90245', NULL, '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'beerbaron@yahoo.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1'),
-(4, 1, 'Fawlty Towers', '13 Seaside Drive', NULL, 'Torquay', 'Brixton on Avon', '65894', 'United Kingdom', '089 6985 4569', '0425 5477 8789', '089 6985 4568', 'penny@fawltytowers.co.uk', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `si_customers`
@@ -99,18 +71,8 @@ CREATE TABLE IF NOT EXISTS `si_customers` (
   `custom_field4` varchar(255) default NULL,
   `enabled` varchar(1) NOT NULL default '1',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8  ;
 
---
--- Dumping data for table `si_customers`
---
-
-INSERT INTO `si_customers` (`id`, `domain_id`, `attention`, `name`, `street_address`, `street_address2`, `city`, `state`, `zip_code`, `country`, `phone`, `mobile_phone`, `fax`, `email`, `notes`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `enabled`) VALUES
-(1, 1, 'Moe Sivloski', 'Moes Tarvern', '45 Main Road', NULL, 'Springfield', 'New York', '65891', '', '04 1234 5698', NULL, '04 5689 4566', 'moe@moestavern.com', '<p><strong>Moe&#39;s Tavern</strong> is a fictional <a href="http://en.wikipedia.org/wiki/Bar_%28establishment%29" title="Bar (establishment)">bar</a> seen on <em><a href="http://en.wikipedia.org/wiki/The_Simpsons" title="The Simpsons">The Simpsons</a></em>. The owner of the bar is <a href="http://en.wikipedia.org/wiki/Moe_Szyslak" title="Moe Szyslak">Moe Szyslak</a>.</p> <p>In The Simpsons world, it is located on the corner of Walnut Street, neighboring King Toot&#39;s Music Store, across the street is the Moeview Motel, and a factory formerly owned by <a href="http://en.wikipedia.org/wiki/Bart_Simpson" title="Bart Simpson">Bart Simpson</a>, until it collapsed. The inside of the bar has a few pool tables and a dartboard. It is very dank and &quot;smells like <a href="http://en.wikipedia.org/wiki/Urine" title="Urine">tinkle</a>.&quot; Because female customers are so rare, Moe frequently uses the women&#39;s restroom as an office. Moe claimed that there haven&#39;t been any ladies at Moe&#39;s since <a href="http://en.wikipedia.org/wiki/1979" title="1979">1979</a> (though earlier episodes show otherwise). A jar of pickled eggs perpetually stands on the bar. Another recurring element is a rat problem. This can be attributed to the episode <a href="http://en.wikipedia.org/wiki/Homer%27s_Enemy" title="Homer&#39;s Enemy">Homer&#39;s Enemy</a> in which Bart&#39;s factory collapses, and the rats are then shown to find a new home at Moe&#39;s. In &quot;<a href="http://en.wikipedia.org/wiki/Who_Shot_Mr._Burns" title="Who Shot Mr. Burns">Who Shot Mr. Burns</a>,&quot; Moe&#39;s Tavern was forced to close down because Mr. Burns&#39; slant-drilling operation near the tavern caused unsafe pollution. It was stated in the &quot;<a href="http://en.wikipedia.org/wiki/Flaming_Moe%27s" title="Flaming Moe&#39;s">Flaming Moe&#39;s</a>&quot; episode that Moe&#39;s Tavern was on Walnut Street. The phone number would be 76484377, since in &quot;<a href="http://en.wikipedia.org/wiki/Homer_the_Smithers" title="Homer the Smithers">Homer the Smithers</a>,&quot; Mr. Burns tried to call Smithers but did not know his phone number. He tried the buttons marked with the letters for Smithers and called Moe&#39;s. In &quot;<a href="http://en.wikipedia.org/wiki/Principal_Charming" title="Principal Charming">Principal Charming</a>&quot; Bart is asked to call Homer by Principal Skinner, the number visible on the card is WORK: KLondike 5-6832 HOME: KLondike 5-6754 MOE&#39;S TAVERN: KLondike 5-1239 , Moe answers the phone and Bart asks for Homer Sexual. The bar serves <a href="http://en.wikipedia.org/wiki/Duff_Beer" title="Duff Beer">Duff Beer</a> and Red Tick Beer, a beer flavored with dogs.</p>', NULL, NULL, NULL, NULL, '1'),
-(2, 1, 'Mr Burns', 'Springfield Power Plant', '4 Power Plant Drive', 'street2', 'Springfield', 'New York', '90210', '', '04 1235 5698', '', '04 5678 7899', 'mr.burn@spp.com', '<p><strong>Springfield Nuclear Power Plant</strong> is a fictional electricity generating facility in the <a href="http://en.wikipedia.org/wiki/Television" title="Television">television</a> <a href="http://en.wikipedia.org/wiki/Animated_cartoon" title="Animated cartoon">animated cartoon</a> series <em><a href="http://en.wikipedia.org/wiki/The_Simpsons" title="The Simpsons">The Simpsons</a></em>. The plant has a <a href="http://en.wikipedia.org/wiki/Monopoly" title="Monopoly">monopoly</a> on the city of <a href="http://en.wikipedia.org/wiki/Springfield_%28The_Simpsons%29" title="Springfield (The Simpsons)">Springfield&#39;s</a> energy supply, but is sometimes mismanaged and endangers much of the town with its presence.</p> <p>Based on the plant&#39;s appearance and certain episode plots, it likely houses only a single &quot;unit&quot; or reactor (although, judging from the number of <a href="http://en.wikipedia.org/wiki/Containment_building" title="Containment building">containment buildings</a> and <a href="http://en.wikipedia.org/wiki/Cooling_tower" title="Cooling tower">cooling towers</a>, there is a chance it may have two). In one episode an emergency occurs and Homer resorts to the manual, which begins &quot;Congratulations on your purchase of a Fissionator 1952 Slow-Fission Reactor&quot;.</p> <p>The plant is poorly maintained, largely due to owner Montgomery Burns&#39; miserliness. Its <a href="http://en.wikipedia.org/wiki/Nuclear_safety" title="Nuclear safety">safety record</a> is appalling, with various episodes showing luminous rats in the bowels of the building, pipes and drums leaking radioactive waste, the disposal of waste in a children&#39;s playground, <a href="http://en.wikipedia.org/wiki/Plutonium" title="Plutonium">plutonium</a> used as a paperweight, cracked cooling towers (fixed in one episode using a piece of <a href="http://en.wikipedia.org/wiki/Chewing_gum" title="Chewing gum">Chewing gum</a>), dangerously high <a href="http://en.wikipedia.org/wiki/Geiger_counter" title="Geiger counter">Geiger counter</a> readings around the perimeter of the plant, and even a giant spider. In the opening credits a bar of some <a href="http://en.wikipedia.org/wiki/Radioactive" title="Radioactive">radioactive</a> substance is trapped in Homer&#39;s overalls and later disposed of in the street.</p>', '13245-789798', '', '', '', '1'),
-(3, 1, 'Kath Day-Knight', 'Kath and Kim Pty Ltd', '82 Fountain Drive', NULL, 'Fountain Lakes', 'VIC', '3567', 'Australia', '03 9658 7456', NULL, '03 9658 7457', 'kath@kathandkim.com.au', 'Kath Day-Knight (<a href="http://en.wikipedia.org/wiki/Jane_Turner" title="Jane Turner">Jane Turner</a>) is an &#39;empty nester&#39; divorc&eacute;e who wants to enjoy time with her &quot;hunk o&#39; spunk&quot; Kel Knight (<a href="http://en.wikipedia.org/wiki/Glenn_Robbins" title="Glenn Robbins">Glenn Robbins</a>), a local &quot;purveyor of fine meats&quot;, but whose lifestyle is often cramped by the presence of her self-indulgent and spoilt rotten twenty-something daughter Kim Craig <a href="http://en.wikipedia.org/wiki/List_of_French_phrases_used_by_English_speakers#I_.E2.80.93_Q" title="List of French phrases used by English speakers">n&eacute;e</a> Day (<a href="http://en.wikipedia.org/wiki/Gina_Riley" title="Gina Riley">Gina Riley</a>). Kim enjoys frequent and lengthy periods of spiteful estrangement from her forgiving husband Brett Craig (<a href="http://en.wikipedia.org/wiki/Peter_Rowsthorn" title="Peter Rowsthorn">Peter Rowsthorn</a>) for imagined slights and misdemeanors, followed by loving reconciliations with him. During Kim and Brett&#39;s frequent rough patches Kim usually seeks solace from her servile &quot;second best friend&quot; Sharon Strzelecki (<a href="http://en.wikipedia.org/wiki/Magda_Szubanski" title="Magda Szubanski">Magda Szubanski</a>), screaming abuse at Sharon for minor infractions while issuing her with intricately-instructed tasks, such as stalking Brett. Kim and Brett had a baby in the final episode of the second series whom they named Epponnee-Raelene Kathleen Darlene Charlene Craig, shortened to Epponnee-Rae.', NULL, NULL, NULL, NULL, '1');
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `si_custom_fields`
@@ -121,6 +83,7 @@ CREATE TABLE IF NOT EXISTS `si_custom_fields` (
   `cf_custom_field` varchar(255) collate utf8_unicode_ci default NULL,
   `cf_custom_label` varchar(255) collate utf8_unicode_ci default NULL,
   `cf_display` varchar(1) collate utf8_unicode_ci NOT NULL default '1',
+  `domain_id` int(11) NOT NULL,
   PRIMARY KEY  (`cf_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
 
@@ -128,48 +91,23 @@ CREATE TABLE IF NOT EXISTS `si_custom_fields` (
 -- Dumping data for table `si_custom_fields`
 --
 
-INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`) VALUES
-(1, 'biller_cf1', NULL, '0'),
-(2, 'biller_cf2', 'Tax ID', '0'),
-(3, 'biller_cf3', NULL, '0'),
-(4, 'biller_cf4', NULL, '0'),
-(5, 'customer_cf1', NULL, '0'),
-(6, 'customer_cf2', NULL, '0'),
-(7, 'customer_cf3', NULL, '0'),
-(8, 'customer_cf4', NULL, '0'),
-(9, 'product_cf1', NULL, '0'),
-(10, 'product_cf2', NULL, '0'),
-(11, 'product_cf3', NULL, '0'),
-(12, 'product_cf4', NULL, '0'),
-(13, 'invoice_cf1', NULL, '0'),
-(14, 'invoice_cf2', NULL, '0'),
-(15, 'invoice_cf3', NULL, '0'),
-(16, 'invoice_cf4', NULL, '0');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `si_defaults`
---
-
-CREATE TABLE IF NOT EXISTS `si_defaults` (
-  `def_id` int(10) NOT NULL auto_increment,
-  `def_biller` int(25) default NULL,
-  `def_customer` int(25) default NULL,
-  `def_tax` int(25) default NULL,
-  `def_inv_preference` int(25) default NULL,
-  `def_number_line_items` int(25) NOT NULL default '0',
-  `def_inv_template` varchar(50) NOT NULL default 'default',
-  `def_payment_type` varchar(25) default '1',
-  PRIMARY KEY  (`def_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `si_defaults`
---
-
-INSERT INTO `si_defaults` (`def_id`, `def_biller`, `def_customer`, `def_tax`, `def_inv_preference`, `def_number_line_items`, `def_inv_template`, `def_payment_type`) VALUES
-(1, 4, 3, 1, 1, 5, 'default', '1');
+INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`, `domain_id`) VALUES
+(1, 'biller_cf1', NULL, '0', 1),
+(2, 'biller_cf2', 'Tax ID', '0', 1),
+(3, 'biller_cf3', NULL, '0', 1),
+(4, 'biller_cf4', NULL, '0', 1),
+(5, 'customer_cf1', NULL, '0', 1),
+(6, 'customer_cf2', NULL, '0', 1),
+(7, 'customer_cf3', NULL, '0', 1),
+(8, 'customer_cf4', NULL, '0', 1),
+(9, 'product_cf1', NULL, '0', 1),
+(10, 'product_cf2', NULL, '0', 1),
+(11, 'product_cf3', NULL, '0', 1),
+(12, 'product_cf4', NULL, '0', 1),
+(13, 'invoice_cf1', NULL, '0', 1),
+(14, 'invoice_cf2', NULL, '0', 1),
+(15, 'invoice_cf3', NULL, '0', 1),
+(16, 'invoice_cf4', NULL, '0', 1);
 
 -- --------------------------------------------------------
 
@@ -194,8 +132,6 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8  ;
 
 
-
-
 --
 -- Table structure for table `si_invoice_items`
 --
@@ -213,8 +149,27 @@ CREATE TABLE IF NOT EXISTS `si_invoice_items` (
   `description` text,
   `total` decimal(25,6) default '0.000000',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 A;
 
+
+
+--
+-- Table structure for table `si_invoice_item_tax`
+--
+
+CREATE TABLE IF NOT EXISTS `si_invoice_item_tax` (
+  `id` int(11) NOT NULL auto_increment,
+  `invoice_item_id` int(11) NOT NULL,
+  `tax_id` int(11) NOT NULL,
+  `tax_type` varchar(1) NOT NULL,
+  `tax_rate` decimal(25,6) NOT NULL,
+  `tax_amount` decimal(25,6) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf ;
+
+
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `si_invoice_type`
@@ -248,7 +203,34 @@ CREATE TABLE IF NOT EXISTS `si_log` (
   `sqlquerie` text NOT NULL,
   `last_id` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8  ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `si_log`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `si_payment`
+--
+
+CREATE TABLE IF NOT EXISTS `si_payment` (
+  `id` int(10) NOT NULL auto_increment,
+  `ac_inv_id` int(11) NOT NULL,
+  `ac_amount` decimal(25,6) NOT NULL,
+  `ac_notes` text collate utf8_unicode_ci NOT NULL,
+  `ac_date` datetime NOT NULL,
+  `ac_payment_type` int(10) NOT NULL default '1',
+  `domain_id` int(11) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `si_payment`
+--
+
 
 -- --------------------------------------------------------
 
@@ -317,6 +299,8 @@ CREATE TABLE IF NOT EXISTS `si_products` (
   `domain_id` int(11) NOT NULL default '1',
   `description` text NOT NULL,
   `unit_price` decimal(25,6) default '0.000000',
+  `default_tax_id` int(11) default NULL,
+  `default_tax_id_2` int(11) default NULL,
   `custom_field1` varchar(255) default NULL,
   `custom_field2` varchar(255) default NULL,
   `custom_field3` varchar(255) default NULL,
@@ -325,18 +309,8 @@ CREATE TABLE IF NOT EXISTS `si_products` (
   `enabled` varchar(1) NOT NULL default '1',
   `visible` tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 
---
--- Dumping data for table `si_products`
---
-
-INSERT INTO `si_products` (`id`, `domain_id`, `description`, `unit_price`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`) VALUES
-(1, 1, 'IBM Netfinity 5000', 150.000000, NULL, NULL, NULL, NULL, '', '1', 1),
-(2, 1, 'Accounting services', 140.000000, 'CVF1', '', '', '', '', '1', 1),
-(3, 1, 'Ploughing service', 125.000000, NULL, NULL, NULL, NULL, '', '1', 1),
-(4, 1, 'Bootleg homebrew', 15.500000, NULL, NULL, NULL, NULL, '', '1', 1),
-(5, 1, 'Accomodation', 125.000000, NULL, NULL, NULL, NULL, '', '1', 1);
 
 --
 -- Table structure for table `si_sql_patchmanager`
@@ -349,7 +323,7 @@ CREATE TABLE IF NOT EXISTS `si_sql_patchmanager` (
   `sql_release` varchar(25) NOT NULL default '',
   `sql_statement` text NOT NULL,
   PRIMARY KEY  (`sql_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=159 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=189 ;
 
 --
 -- Dumping data for table `si_sql_patchmanager`
@@ -513,7 +487,37 @@ INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_
 (155, 154, 'Table = Invoice_items Field = gross_total : change field type and length to decimal', '20080128', 'ALTER TABLE `si_invoice_items` CHANGE `gross_total` `gross_total` DECIMAL( 25, 6 ) NULL DEFAULT ''0.00'''),
 (156, 155, 'Table = Invoice_items Field = total : change field type and length to decimal', '20080128', 'ALTER TABLE `si_invoice_items` CHANGE `total` `total` DECIMAL( 25, 6 ) NULL DEFAULT ''0.00'' '),
 (157, 156, 'Table = Products Field = unit_price : change field type and length to decimal', '20080128', 'ALTER TABLE `si_products` CHANGE `unit_price` `unit_price` DECIMAL( 25, 6 ) NULL DEFAULT ''0.00'''),
-(158, 157, 'Table = Tax Field = quantity : change field type and length to decimal', '20080128', 'ALTER TABLE `si_tax` CHANGE `tax_percentage` `tax_percentage` DECIMAL( 25, 6 ) NULL DEFAULT ''0.00''');
+(158, 157, 'Table = Tax Field = quantity : change field type and length to decimal', '20080128', 'ALTER TABLE `si_tax` CHANGE `tax_percentage` `tax_percentage` DECIMAL( 25, 6 ) NULL DEFAULT ''0.00'''),
+(159, 158, 'Rename table si_account_payments to si_payment', '20081201', 'RENAME TABLE `si_account_payments` TO  `si_payment`;'),
+(160, 159, 'Add domain_id to payments table', '20081201', 'ALTER TABLE  `si_payment` ADD  `domain_id` INT NOT NULL ;'),
+(161, 160, 'Add domain_id to tax table', '20081201', 'ALTER TABLE  `si_tax` ADD  `domain_id` INT NOT NULL ;'),
+(162, 161, 'Change user table from si_users to si_user', '20081201', 'RENAME TABLE `si_users` TO  `si_user` ;'),
+(163, 162, 'Add new invoice items tax table', '20081212', 'CREATE TABLE `si_invoice_item_tax` (\n		`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,\n		`invoice_item_id` INT( 11 ) NOT NULL ,\n		`tax_id` INT( 11 ) NOT NULL ,\n		`tax_type` VARCHAR( 1 ) NOT NULL ,\n		`tax_rate` DECIMAL( 25, 6 ) NOT NULL ,\n		`tax_amount` DECIMAL( 25, 6 ) NOT NULL\n		) ENGINE = MYISAM ;'),
+(164, 163, 'Concert tax info in si_invoice_items to si_invoice_item_tax', '20081212', 'insert into `si_invoice_item_tax` (invoice_item_id, tax_id, tax_type, tax_rate, tax_amount) select invoice_id, tax_id, ''%'', tax, tax_amount from `si_invoice_items`;'),
+(165, 164, 'Add default tax id into products table', '20081212', 'ALTER TABLE `si_products` ADD `default_tax_id` INT( 11 ) NULL AFTER `unit_price` ;'),
+(166, 165, 'Add default tax id 2 into products table', '20081212', 'ALTER TABLE `si_products` ADD `default_tax_id_2` INT( 11 ) NULL AFTER `default_tax_id` ;'),
+(167, 166, 'Add default tax into product items', '20081212', 'update `si_products` set default_tax_id = (select value from `si_system_defaults` where name =''tax'');'),
+(168, 167, 'Add default number of taxes per line item into system_defaults', '20081212', 'insert into `si_system_defaults` values ('''',''tax_per_line_item'',''1'')'),
+(169, 168, 'Add tax type', '20081212', 'ALTER TABLE `si_tax` ADD `type` VARCHAR( 1 ) NULL AFTER `tax_percentage` ;'),
+(170, 169, 'Set tax type on current taxes to %', '20081212', 'UPDATE `si_tax` SET `type` = ''%'' ;'),
+(171, 170, 'Set domain_id on tax table to 1', '20081229', 'UPDATE `si_tax` SET `domain_id` = ''1'' ;'),
+(172, 171, 'Set domain_id on payment table to 1', '20081229', 'UPDATE `si_payment` SET `domain_id` = ''1'' ;'),
+(173, 172, 'Set domain_id on payment_types table to 1', '20081229', 'UPDATE `si_payment_types` SET `domain_id` = ''1'' ;'),
+(174, 173, 'Set domain_id on preference table to 1', '20081229', 'UPDATE `si_preferences` SET `domain_id` = ''1'' ;'),
+(175, 174, 'Set domain_id on products table to 1', '20081229', 'UPDATE `si_products` SET `domain_id` = ''1'' ;'),
+(176, 175, 'Set domain_id on biller table to 1', '20081229', 'UPDATE `si_biller` SET `domain_id` = ''1'' ;'),
+(177, 176, 'Set domain_id on invoices table to 1', '20081229', 'UPDATE `si_invoices` SET `domain_id` = ''1'' ;'),
+(178, 177, 'Set domain_id on customers table to 1', '20081229', 'UPDATE `si_customers` SET `domain_id` = ''1'' ;'),
+(179, 178, 'Rename si_user.user_id to si_user.id', '20081229', 'ALTER TABLE `si_user` CHANGE `user_id` `id` int(11) ;'),
+(180, 179, 'Rename si_user.user_email to si_user.email', '20081229', 'ALTER TABLE `si_user` CHANGE `user_email` `email` VARCHAR( 255 );'),
+(181, 180, 'Rename si_user.user_name to si_user.name', '20081229', 'ALTER TABLE `si_user` CHANGE `user_name` `name` VARCHAR( 255 );'),
+(182, 181, 'Rename si_user.user_role_id to si_user.role_id', '20081229', 'ALTER TABLE `si_user` CHANGE `user_role_id` `role_id` int(11);'),
+(183, 182, 'Rename si_user.user_domain_id to si_user.domain_id', '20081229', 'ALTER TABLE `si_user` CHANGE `user_domain_id` `domain_id` int(11) ;'),
+(184, 183, 'Rename si_user.user_password to si_user.password', '20081229', 'ALTER TABLE `si_user` CHANGE `user_password` `password` VARCHAR( 255 )  ;'),
+(185, 184, 'Drop name column from si_user table', '20081230', 'ALTER TABLE `si_user` DROP `name`  ;'),
+(186, 185, 'Drop old defaults table', '20081230', 'DROP TABLE `si_defaults` ;'),
+(187, 186, 'Set domain_id on customers table to 1', '20081230', 'ALTER TABLE  `si_custom_fields` ADD  `domain_id` INT NOT NULL ;'),
+(188, 187, 'Set domain_id on custom_feilds table to 1', '20081230', 'UPDATE `si_custom_fields` SET `domain_id` = ''1'' ;');
 
 -- --------------------------------------------------------
 
@@ -527,7 +531,7 @@ CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `value` varchar(30) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
 
 --
 -- Dumping data for table `si_system_defaults`
@@ -555,7 +559,8 @@ INSERT INTO `si_system_defaults` (`id`, `name`, `value`) VALUES
 (19, 'emailusername', ''),
 (20, 'emailpassword', ''),
 (21, 'logging', '0'),
-(22, 'delete', 'N');
+(22, 'delete', 'N'),
+(23, 'tax_per_line_item', '1');
 
 -- --------------------------------------------------------
 
@@ -567,7 +572,9 @@ CREATE TABLE IF NOT EXISTS `si_tax` (
   `tax_id` int(11) NOT NULL auto_increment,
   `tax_description` varchar(50) default NULL,
   `tax_percentage` decimal(25,6) default '0.000000',
+  `type` varchar(1) default NULL,
   `tax_enabled` varchar(1) NOT NULL default '1',
+  `domain_id` int(11) NOT NULL,
   PRIMARY KEY  (`tax_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
@@ -575,35 +582,33 @@ CREATE TABLE IF NOT EXISTS `si_tax` (
 -- Dumping data for table `si_tax`
 --
 
-INSERT INTO `si_tax` (`tax_id`, `tax_description`, `tax_percentage`, `tax_enabled`) VALUES
-(1, 'GST', 10.000000, '1'),
-(2, 'VAT', 10.000000, '1'),
-(3, 'Sales Tax', 10.000000, '1'),
-(4, 'No Tax', 0.000000, '1');
-
+INSERT INTO `si_tax` (`tax_id`, `tax_description`, `tax_percentage`, `type`, `tax_enabled`, `domain_id`) VALUES
+(1, 'GST', 10.000000, '%', '1', 1),
+(2, 'VAT', 10.000000, '%', '1', 1),
+(3, 'Sales Tax', 10.000000, '%', '1', 1),
+(4, 'No Tax', 0.000000, '%', '1', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_users`
+-- Table structure for table `si_user`
 --
 
-CREATE TABLE IF NOT EXISTS `si_users` (
-  `user_id` int(11) NOT NULL auto_increment,
-  `user_email` varchar(255) NOT NULL,
-  `user_name` varchar(255) NOT NULL,
-  `user_role_id` int(11) NOT NULL default '1',
-  `user_domain_id` int(11) NOT NULL default '1',
-  `user_password` varchar(255) NOT NULL,
-  PRIMARY KEY  (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+CREATE TABLE IF NOT EXISTS `si_user` (
+  `id` int(11) NOT NULL default '0',
+  `email` varchar(255) default NULL,
+  `role_id` int(11) default NULL,
+  `domain_id` int(11) default NULL,
+  `password` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `si_users`
+-- Dumping data for table `si_user`
 --
 
-INSERT INTO `si_users` (`user_id`, `user_email`, `user_name`, `user_role_id`, `user_domain_id`, `user_password`) VALUES
-(1, 'demo@simpleinvoices.org', 'demo', 1, 1, 'fe01ce2a7fbac8fafaed7c982a04e229');
+INSERT INTO `si_user` (`id`, `email`, `role_id`, `domain_id`, `password`) VALUES
+(1, 'demo@simpleinvoices.org', 1, 1, 'fe01ce2a7fbac8fafaed7c982a04e229');
 
 -- --------------------------------------------------------
 

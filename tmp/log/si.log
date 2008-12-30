@@ -1,1 +1,32 @@
 2008-12-30T14:37:31+11:00 INFO (6): Itemised invoice created
+2008-12-30T16:20:25+11:00 INFO (6): Itemised invoice created
+2008-12-30T16:20:48+11:00 INFO (6): Invoice: 1 Tax for line item 0: 12.5
+2008-12-30T16:20:48+11:00 INFO (6):  
+2008-12-30T16:20:48+11:00 INFO (6): ITEM :: Key: 0 Value: 3
+2008-12-30T16:20:48+11:00 INFO (6): ITEM :: tax rate: 10.000000
+2008-12-30T16:20:48+11:00 INFO (6): ITEM :: Qty: 1 Unit price: 125.00
+2008-12-30T16:20:48+11:00 INFO (6): ITEM :: Tax rate: 10.000000 Tax type: % Tax $: 12.5
+2008-12-30T16:20:48+11:00 INFO (6): Invoice: 1 Tax for line item 1: 12.5
+2008-12-30T16:20:48+11:00 INFO (6):  
+2008-12-30T16:20:48+11:00 INFO (6): ITEM :: Key: 0 Value: 1
+2008-12-30T16:20:48+11:00 INFO (6): ITEM :: tax rate: 10.000000
+2008-12-30T16:20:48+11:00 INFO (6): ITEM :: Qty: 1 Unit price: 125.00
+2008-12-30T16:20:48+11:00 INFO (6): ITEM :: Tax rate: 10.000000 Tax type: % Tax $: 12.5
+2008-12-30T16:20:48+11:00 INFO (6): Invoice: 1 Tax for line item 2: 0
+2008-12-30T16:20:48+11:00 INFO (6):  
+2008-12-30T16:20:48+11:00 INFO (6): ITEM :: Key: 0 Value: 4
+2008-12-30T16:20:48+11:00 INFO (6): ITEM :: tax rate: 0.000000
+2008-12-30T16:20:48+11:00 INFO (6): ITEM :: Qty: 1 Unit price: 140.00
+2008-12-30T16:20:48+11:00 INFO (6): ITEM :: Tax rate: 0.000000 Tax type: % Tax $: 0
+2008-12-30T16:20:48+11:00 INFO (6): Invoice: 1 Tax for line item 3: 14
+2008-12-30T16:20:48+11:00 INFO (6):  
+2008-12-30T16:20:48+11:00 INFO (6): ITEM :: Key: 0 Value: 1
+2008-12-30T16:20:48+11:00 INFO (6): ITEM :: tax rate: 10.000000
+2008-12-30T16:20:48+11:00 INFO (6): ITEM :: Qty: 1 Unit price: 140.00
+2008-12-30T16:20:48+11:00 INFO (6): ITEM :: Tax rate: 10.000000 Tax type: % Tax $: 14
+2008-12-30T16:20:48+11:00 INFO (6): Invoice: 1 Tax for line item 4: 0
+2008-12-30T16:20:48+11:00 INFO (6):  
+2008-12-30T16:20:48+11:00 INFO (6): ITEM :: Key: 0 Value: 4
+2008-12-30T16:20:48+11:00 INFO (6): ITEM :: tax rate: 0.000000
+2008-12-30T16:20:48+11:00 INFO (6): ITEM :: Qty: 1 Unit price: 150.00
+2008-12-30T16:20:48+11:00 INFO (6): ITEM :: Tax rate: 0.000000 Tax type: % Tax $: 0
