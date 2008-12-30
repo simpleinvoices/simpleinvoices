@@ -22,7 +22,8 @@
 </tr>
 
 <tr>
-	<td colspan=5 ><textarea input type=text class="editor" name="description" rows=10 cols=100 WRAP=nowrap></textarea></td>
+	<td colspan=6 >
+<textarea input type=text class="editor" name="description" rows=10 cols=100 WRAP=nowrap></textarea></td>
 </tr>
 
 	{$show_custom_field.1}

@@ -62,9 +62,36 @@ function init(){
 			}
 		);
 	}
-	/*textarea - rte - make all textarea with class="editor" a html editor box*/
-	$('.editor').rte('include/jquery/rte/rte.css', 'include/jquery/rte/');
-	
+
+
+	$('.editor').wysiwyg({
+    controls : {
+	    html : { visible : true },
+	    createLink : { visible : false },
+	    insertImage : { visible : false },
+		separator00 : { visible : false, separator : false },
+		separator01 : { visible : false, separator : false },
+		separator02 : { visible : false, separator : false },
+		separator03 : { visible : false, separator : false },
+		separator04 : { visible : false, separator : false },
+		separator05 : { visible : false, separator : false },
+		separator06 : { visible : false, separator : false },
+		separator07 : { visible : false, separator : false },
+		separator08 : { visible : false, separator : false },
+		separator09 : { visible : false, separator : false },
+		h1mozilla : { visible : false},
+		h2mozilla : { visible : false},
+		h3mozilla : { visible : false},
+		h1 : { visible : false},
+		h2 : { visible : false},
+		h3 : { visible : false},
+		increaseFontSize : { visible : false },
+		decreaseFontSize : { visible : false },
+        insertOrderedList : { visible : true },
+        insertUnorderedList : { visible : true }
+    }
+});
+
 	/*hide the text for the export dialog on the manage invoices page*/
 	$("#export_dialog").hide();
 

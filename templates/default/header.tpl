@@ -30,7 +30,7 @@
 	<script type="text/javascript" src="./include/jquery/jquery.flexigrid.1.0b3.pack.js"></script>
 	{/literal}{$extension_jquery_files }{literal}
 	<script type="text/javascript" src="./include/jquery/jquery.plugins.js"></script>
-	<script type="text/javascript" src="./include/jquery/rte/jquery.rte.js"></script>
+	<script type="text/javascript" src="./include/jquery/html/html.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.conf.js"></script>
 	
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/flexigrid.css">

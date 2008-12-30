@@ -77,11 +77,11 @@
 
 
 <tr>
-        <td colspan=3 class="details_screen">{$LANG.notes}</td>
+        <td colspan=1 class="details_screen">{$LANG.notes}</td>
 </tr>
 
 <tr>
-        <td colspan=3>
+        <td colspan=4>
         	<textarea input type=text class="editor" name="note" rows=5 cols=70 WRAP=nowrap></textarea>
         	
         	</td>
