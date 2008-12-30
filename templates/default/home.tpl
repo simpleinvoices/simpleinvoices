@@ -4,7 +4,7 @@
 {/if}
 <!-- Welcome message - start -->
 <div class="welcome">
-	<h2>Welcome --username-- !</h2>
+	<h2>Welcome {$smarty.session.Zend_Auth.email}!</h2>
 	Thank you for choosing Simple Invoices! There are just a couple of things to do before you can start invoicing<br><br>
 	1 - Setup yourself up as a biller - <a href="index.php?module=biller&view=add">click here</a><br>
 	2 - Add a client - <a href="index.php?module=customers&view=add">click here</a><br>

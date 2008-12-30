@@ -275,6 +275,8 @@ Work around IE/Win code size bug - courtesy Jesper, waffle.wootest.net  */
 -------------------------------------------------*/
 
 div#Container {
+	
+	background:#fff;
 /*	margin:13px auto 0;
 	padding:0 23px 0 30px; 
 */
@@ -307,31 +309,6 @@ div#Container {
 	padding:0 20px; 
 	/*min-height:352px;*/
 	}
-
-.contentLeft {
-/*background:transparent url(../../../images/common/bgLeft.png) top left no-repeat;
-margin-left:-10px;
-padding-left:10px;
-*/
-
-}
-.contentRight {
-/*
-background:transparent url(../../../images/common/bgRight.png) top right no-repeat;
-padding-right:10px;
-min-height:400px;
-*/
-}
-.Left .col,.Full .col {
-	background:#fff;
-/*	padding:10px 20px 20px 20px; */
-}
-	
-.Left .col .showhide {
-	margin-top:8px; }
-
-.Full .bottom,.Left .bottom {
-/*	background:url(../../../images/common/bottom-bg.gif) top right no-repeat; */}
 
 body.lobby .Full .bottom {
 	margin-bottom:0; }
@@ -509,7 +486,9 @@ input, select
 
 
 /* BUTTONS */
-
+table.buttons{
+	border-collapse:none;
+}
 .buttons a, .buttons button{
     display:block;
     float:left;

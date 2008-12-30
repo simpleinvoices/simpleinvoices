@@ -21,7 +21,7 @@ if ($config->authentication->enabled != 1 )
 		//$authNamespace = new Zend_Session_Namespace('Zend_Auth');
 		$auth_session->id = "1";
 		$auth_session->domain_id = "1";
-
+		$auth_session->email = "demo@simpleinvoices.org";
 }
 
 ?>

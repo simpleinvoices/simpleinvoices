@@ -48,10 +48,12 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 
 	//sql patch 161 changes user table name - need to accomodate
 	$user_table = (getNumberOfDoneSQLPatches() < "161") ? "users" : "user";
+	$user_email = (getNumberOfDoneSQLPatches() < "184") ? "user_email" : "email";
+	$user_password = (getNumberOfDoneSQLPatches() < "184") ? "user_password" : "password";
 
 	$authAdapter->setTableName(TB_PREFIX.$user_table)
-				->setIdentityColumn('email')
-				->setCredentialColumn('password')
+				->setIdentityColumn($user_email)
+				->setCredentialColumn($user_password)
 				->setCredentialTreatment('MD5(?)');
 
     $userEmail   = $_POST['user'];
@@ -86,11 +88,22 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 			$result['role_name']="administrator";
 		}
 
-		if (getNumberOfDoneSQLPatches() >= "147")
+		if ( (getNumberOfDoneSQLPatches() >= "147") && ( getNumberOfDoneSQLPatches() < "184") )
 		{
 			$result = $dbAdapter->fetchRow('
 				SELECT 
-					u.id, u.email, u.name, r.name as role_name, u.domain_id
+					u.user_id, u.user_email, u.user_name, r.name as role_name, u.user_domain_id
+				FROM 
+					si_user u,  si_user_role r 
+				WHERE 
+					u.user_email = ? AND u.user_role_id = r.id', $userEmail
+			);
+		}		
+		if (getNumberOfDoneSQLPatches() >= "184")
+		{
+			$result = $dbAdapter->fetchRow('
+				SELECT 
+					u.id, u.email, r.name as role_name, u.domain_id
 				FROM 
 					si_user u,  si_user_role r 
 				WHERE 

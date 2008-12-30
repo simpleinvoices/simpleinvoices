@@ -19,6 +19,7 @@ $acl->add(new Zend_Acl_Resource('billers'));
 $acl->add(new Zend_Acl_Resource('products'));
 $acl->add(new Zend_Acl_Resource('payments'));
 $acl->add(new Zend_Acl_Resource('reports'));
+$acl->add(new Zend_Acl_Resource('options'));
 $acl->add(new Zend_Acl_Resource('system_defaults'));
 $acl->add(new Zend_Acl_Resource('custom_fields'));
 $acl->add(new Zend_Acl_Resource('user'));

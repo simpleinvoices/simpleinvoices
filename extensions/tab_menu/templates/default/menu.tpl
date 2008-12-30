@@ -1,5 +1,5 @@
 <div class="txt_right">
-	Hello Justin | <a href="">Help</a> | <a href="">Logout</a>
+	Hello {$smarty.session.Zend_Auth.email} | <a href="">Help</a> | <a href="">Logout</a>
 </div>
 <div class="settings">
 	<a href="index.php?module=options&view=index">Settings</a>

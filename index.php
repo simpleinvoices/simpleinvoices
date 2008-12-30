@@ -64,7 +64,7 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 } elseif ($file == 'home') {
 	
 	//if auth on must login before upgrade
-	if ( ($config->authentication->enabled == 1 AND isset($auth_session->user_id)) OR ($config->authentication->enabled == 0) )	
+	if ( ($config->authentication->enabled == 1 AND isset($auth_session->id)) OR ($config->authentication->enabled == 0) )	
 	{
 		include_once('./modules/options/database_sqlpatches.php');
 		if (getNumberOfPatches() > 0 ) {
