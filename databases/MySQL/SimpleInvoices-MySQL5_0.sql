@@ -27,16 +27,9 @@ CREATE TABLE IF NOT EXISTS `si_account_payments` (
   `ac_date` datetime NOT NULL,
   `ac_payment_type` int(10) NOT NULL default '1',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci  ;
 
 --
--- Dumping data for table `si_account_payments`
---
-
-INSERT INTO `si_account_payments` (`id`, `ac_inv_id`, `ac_amount`, `ac_notes`, `ac_date`, `ac_payment_type`) VALUES
-(1, 1, 410.000000, 'payment - cheque 14526', '2006-08-25 12:09:14', 1),
-(2, 4, 255.750000, '', '2006-08-25 12:13:53', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -198,23 +191,10 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
   `custom_field4` varchar(50) default NULL,
   `note` text,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8  ;
 
---
--- Dumping data for table `si_invoices`
---
 
-INSERT INTO `si_invoices` (`id`, `domain_id`, `biller_id`, `customer_id`, `type_id`, `preference_id`, `date`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `note`) VALUES
-(1, 1, 4, 3, 2, 1, '2007-02-03 00:00:00', NULL, NULL, NULL, NULL, 'Will be delivered via certified post'),
-(2, 1, 1, 2, 1, 1, '2007-01-01 00:00:00', NULL, NULL, NULL, NULL, ''),
-(3, 1, 2, 3, 3, 1, '2007-02-04 00:00:00', NULL, NULL, NULL, NULL, ''),
-(4, 1, 2, 1, 2, 4, '2006-08-25 12:12:17', NULL, NULL, NULL, NULL, 'Weekly bootleg deliveries'),
-(5, 1, 4, 3, 3, 5, '2007-01-16 00:00:00', NULL, NULL, NULL, NULL, ''),
-(6, 1, 4, 3, 2, 3, '2006-08-25 12:13:37', NULL, NULL, NULL, NULL, ''),
-(7, 1, 2, 2, 2, 1, '2006-12-10 22:32:48', NULL, NULL, NULL, NULL, 'this is a test<br />'),
-(8, 1, 4, 3, 2, 1, '2007-02-06 00:00:00', NULL, NULL, NULL, NULL, '');
 
--- --------------------------------------------------------
 
 --
 -- Table structure for table `si_invoice_items`
@@ -233,31 +213,8 @@ CREATE TABLE IF NOT EXISTS `si_invoice_items` (
   `description` text,
   `total` decimal(25,6) default '0.000000',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 
---
--- Dumping data for table `si_invoice_items`
---
-
-INSERT INTO `si_invoice_items` (`id`, `invoice_id`, `quantity`, `product_id`, `unit_price`, `tax_id`, `tax`, `tax_amount`, `gross_total`, `description`, `total`) VALUES
-(1, 1, 1.000000, 1, 150.000000, 1, 10.000000, 15.000000, 150.000000, '00', 165.000000),
-(2, 1, 2.000000, 3, 125.000000, 1, 10.000000, 25.000000, 250.000000, '00', 275.000000),
-(3, 2, 1.000000, 6, 145.000000, 3, 10.000000, 14.500000, 145.000000, 'For ploughing services for the period 01 Jan - 01 Feb 2006', 159.500000),
-(4, 3, 2.000000, 2, 140.000000, 1, 10.000000, 28.000000, 280.000000, 'Accounting services - basic bookkeeping', 308.000000),
-(5, 3, 1.000000, 2, 140.000000, 1, 10.000000, 14.000000, 140.000000, 'Accounting services - tax return for 2005', 154.000000),
-(6, 3, 2.000000, 2, 140.000000, 1, 10.000000, 28.000000, 280.000000, 'Accounting serverice - general ledger work', 308.000000),
-(7, 4, 15.000000, 4, 15.500000, 4, 10.000000, 23.250000, 232.500000, '00', 255.750000),
-(8, 5, 1.000000, 2, 140.000000, 4, 10.000000, 14.000000, 140.000000, 'Quote for accounting service - hours', 154.000000),
-(9, 5, 2.000000, 1, 150.000000, 4, 10.000000, 30.000000, 300.000000, 'Quote for new servers', 330.000000),
-(10, 6, 1.000000, 1, 150.000000, 4, 10.000000, 15.000000, 150.000000, '00', 165.000000),
-(11, 6, 2.000000, 4, 15.500000, 4, 10.000000, 3.100000, 31.000000, '00', 34.100000),
-(12, 6, 4.000000, 5, 125.000000, 4, 10.000000, 50.000000, 500.000000, '00', 550.000000),
-(13, 7, 1.000000, 2, 140.000000, 1, 10.000000, 14.000000, 140.000000, '00', 154.000000),
-(14, 7, 2.000000, 5, 125.000000, 1, 10.000000, 25.000000, 250.000000, '00', 275.000000),
-(15, 8, 10.000000, 5, 125.000000, 1, 10.000000, 125.000000, 1250.000000, '00', 1375.000000),
-(16, 8, 10.000000, 4, 15.500000, 1, 10.000000, 15.500000, 155.000000, '00', 170.500000);
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `si_invoice_type`
@@ -291,23 +248,7 @@ CREATE TABLE IF NOT EXISTS `si_log` (
   `sqlquerie` text NOT NULL,
   `last_id` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
-
---
--- Dumping data for table `si_log`
---
-
-INSERT INTO `si_log` (`id`, `timestamp`, `userid`, `sqlquerie`, `last_id`) VALUES
-(1, '2007-09-28 15:41:20', '1', 'ALTER TABLE `si_log` ADD `last_id` INT NULL ;', 0),
-(2, '2007-09-28 15:41:20', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (127,''Add last_id to logging table'',200709,''ALTER TABLE `si_log` ADD `last_id` INT NULL ;'')', 128),
-(3, '2007-09-28 15:41:20', '1', 'CREATE TABLE IF NOT EXISTS `si_users` ( `user_id` int(11) NOT NULL auto_increment, `user_email` varchar(255) NOT NULL, `user_name` varchar(255) NOT NULL, `user_group` varchar(255) NOT NULL, `user_domain` varchar(255) NOT NULL, `user_password` varchar(255) NOT NULL, PRIMARY KEY (`user_id`) ) ;', 0),
-(4, '2007-09-28 15:41:20', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (128,''Add user table'',200709,''CREATE TABLE IF NOT EXISTS `si_users` ( `user_id` int(11) NOT NULL auto_increment, `user_email` varchar(255) NOT NULL, `user_name` varchar(255) NOT NULL, `user_group` varchar(255) NOT NULL, `user_domain` varchar(255) NOT NULL, `user_password` varchar(255) NOT NULL, PRIMARY KEY (`user_id`) ) ;'')', 129),
-(5, '2007-09-28 15:41:20', '1', 'INSERT INTO `si_users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`) VALUES ('''', ''demo@simpleinvoices.org'', ''guest'', ''1'', ''1'', MD5(''demo''))', 1),
-(6, '2007-09-28 15:41:20', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (129,''Fill user table with default values'',200709,''INSERT INTO `si_users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`) VALUES (\\''\\'', \\''demo@simpleinvoices.org\\'', \\''demo\\'', \\''1\\'', \\''1\\'', MD5(\\''demo\\''))'')', 130),
-(7, '2007-09-28 15:41:20', '1', 'CREATE TABLE IF NOT EXISTS `si_auth_challenges` ( `challenges_key` int(11) NOT NULL, `challenges_timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);', 0),
-(8, '2007-09-28 15:41:20', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (130,''Create auth_challenges table'',200709,''CREATE TABLE IF NOT EXISTS `si_auth_challenges` ( `challenges_key` int(11) NOT NULL, `challenges_timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);'')', 131),
-(9, '2007-09-28 15:41:20', '1', 'ALTER TABLE `si_tax` change `tax_percentage` `tax_percentage` decimal (10,3) NULL', 0),
-(10, '2007-09-28 15:41:20', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (131,''Make tax field 3 decimal places'',200709,''ALTER TABLE `si_tax` CHANGE `tax_percentage` `tax_percentage` DECIMAL (10,3) NULL'')', 132);
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8  ;
 
 -- --------------------------------------------------------
 
@@ -353,18 +294,17 @@ CREATE TABLE IF NOT EXISTS `si_preferences` (
   `pref_inv_payment_line2_value` varchar(50) default NULL,
   `pref_enabled` varchar(1) NOT NULL default '1',
   PRIMARY KEY  (`pref_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `si_preferences`
 --
 
 INSERT INTO `si_preferences` (`pref_id`, `domain_id`, `pref_description`, `pref_currency_sign`, `pref_inv_heading`, `pref_inv_wording`, `pref_inv_detail_heading`, `pref_inv_detail_line`, `pref_inv_payment_method`, `pref_inv_payment_line1_name`, `pref_inv_payment_line1_value`, `pref_inv_payment_line2_name`, `pref_inv_payment_line2_value`, `pref_enabled`) VALUES
-(1, 1, 'Invoice - default', '$', 'Invoice', 'Invoice', 'Details', 'Payment is to be made within 14 days of the invoice being sent', 'Electronic Funds Transfer', 'Account name:', 'H. & M. Simpson', 'Account number:', '0123-4567-7890', '1'),
-(2, 1, 'Invoice - no payment details', '$', 'Invoice', 'Invoice', NULL, '', '', '', '', '', '', '1'),
-(3, 1, 'Receipt - default', '$', 'Receipt', 'Receipt', 'Details', '<br>This transaction has been paid in full, please keep this receipt as proof of purchase.<br> Thank you', '', '', '', '', '', '1'),
-(4, 1, 'Estimate - default', '$', 'Estimate', 'Estimate', 'Details', '<br>This is an estimate of the final value of services rendered.<br>Thank you', '', '', '', '', '', '1'),
-(5, 1, 'Quote - default', '$', 'Quote', 'Quote', 'Details', '<br>This is a quote of the final value of services rendered.<br>Thank you', '', '', '', '', '', '1');
+(1, 1, 'Invoice', '$', 'Invoice', 'Invoice', 'Details', 'Payment is to be made within 14 days of the invoice being sent', 'Electronic Funds Transfer', 'Account name:', 'H. & M. Simpson', 'Account number:', '0123-4567-7890', '1'),
+(2, 1, 'Receipt', '$', 'Receipt', 'Receipt', 'Details', '<br>This transaction has been paid in full, please keep this receipt as proof of purchase.<br> Thank you', '', '', '', '', '', '1'),
+(3, 1, 'Estimate', '$', 'Estimate', 'Estimate', 'Details', '<br>This is an estimate of the final value of services rendered.<br>Thank you', '', '', '', '', '', '1'),
+(4, 1, 'Quote', '$', 'Quote', 'Quote', 'Details', '<br>This is a quote of the final value of services rendered.<br>Thank you', '', '', '', '', '', '1');
 
 -- --------------------------------------------------------
 
@@ -385,7 +325,7 @@ CREATE TABLE IF NOT EXISTS `si_products` (
   `enabled` varchar(1) NOT NULL default '1',
   `visible` tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `si_products`
@@ -393,13 +333,10 @@ CREATE TABLE IF NOT EXISTS `si_products` (
 
 INSERT INTO `si_products` (`id`, `domain_id`, `description`, `unit_price`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`) VALUES
 (1, 1, 'IBM Netfinity 5000', 150.000000, NULL, NULL, NULL, NULL, '', '1', 1),
-(2, 1, 'Accounting services - Barney Gumball (hours)', 140.000000, 'CVF1', '', '', '', '', '1', 1),
-(3, 1, 'Weekly ploughing service', 125.000000, NULL, NULL, NULL, NULL, '', '1', 1),
+(2, 1, 'Accounting services', 140.000000, 'CVF1', '', '', '', '', '1', 1),
+(3, 1, 'Ploughing service', 125.000000, NULL, NULL, NULL, NULL, '', '1', 1),
 (4, 1, 'Bootleg homebrew', 15.500000, NULL, NULL, NULL, NULL, '', '1', 1),
-(5, 1, 'Accomodation', 125.000000, NULL, NULL, NULL, NULL, '', '1', 1),
-(6, 1, 'For ploughing services for the period 01 Jan - 01 Feb 2006', 145.000000, NULL, NULL, NULL, NULL, '', '0', 0);
-
--- --------------------------------------------------------
+(5, 1, 'Accomodation', 125.000000, NULL, NULL, NULL, NULL, '', '1', 1);
 
 --
 -- Table structure for table `si_sql_patchmanager`
@@ -632,20 +569,18 @@ CREATE TABLE IF NOT EXISTS `si_tax` (
   `tax_percentage` decimal(25,6) default '0.000000',
   `tax_enabled` varchar(1) NOT NULL default '1',
   PRIMARY KEY  (`tax_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `si_tax`
 --
 
 INSERT INTO `si_tax` (`tax_id`, `tax_description`, `tax_percentage`, `tax_enabled`) VALUES
-(1, 'GST (AUS)', 10.000000, '1'),
-(2, 'VAT (UK)', 10.000000, '1'),
-(3, 'Sales Tax (USA)', 10.000000, '1'),
-(4, 'GST (NZ)', 12.500000, '1'),
-(5, 'No Tax', 0.000000, '1'),
-(6, 'IVA', 20.000000, '1'),
-(7, 'MWSt (DE)', 16.000000, '1');
+(1, 'GST', 10.000000, '1'),
+(2, 'VAT', 10.000000, '1'),
+(3, 'Sales Tax', 10.000000, '1'),
+(4, 'No Tax', 0.000000, '1');
+
 
 -- --------------------------------------------------------
 

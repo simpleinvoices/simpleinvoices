@@ -714,44 +714,44 @@ PRIMARY KEY  (`user_id`)) ;
     $patch['137']['date'] = "200712";
 
     $patch['138']['name'] = "Add domain_id to payment_types table";
-    $patch['138']['patch'] = "ALTER TABLE `".TB_PREFIX."payment_types` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `pt_id` ;";
+    $patch['138']['patch'] = "ALTER TABLE `".TB_PREFIX."payment_types` ADD `domain_id` INT  NOT NULL AFTER `pt_id` ;";
     if ($config->database->adapter == "pdo_pgsql") {
-        $patch['145']['patch'] = "ALTER TABLE ".TB_PREFIX."payment_types ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
+        $patch['145']['patch'] = "ALTER TABLE ".TB_PREFIX."payment_types ADD COLUMN domain_id int NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
     $patch['138']['date'] = "200712";
 
     $patch['139']['name'] = "Add domain_id to preferences table";
-    $patch['139']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `pref_id` ;";
+    $patch['139']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `domain_id` INT  NOT NULL AFTER `pref_id` ;";
     if ($config->database->adapter == "pdo_pgsql") {
-        $patch['139']['patch'] = "ALTER TABLE ".TB_PREFIX."preferences ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
+        $patch['139']['patch'] = "ALTER TABLE ".TB_PREFIX."preferences ADD COLUMN domain_id int NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
     $patch['139']['date'] = "200712";
 
     $patch['140']['name'] = "Add domain_id to products table";
-    $patch['140']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
+    $patch['140']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `domain_id` INT  NOT NULL AFTER `id` ;";
     if ($config->database->adapter == "pdo_pgsql") {
-        $patch['140']['patch'] = "ALTER TABLE ".TB_PREFIX."products ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
+        $patch['140']['patch'] = "ALTER TABLE ".TB_PREFIX."products ADD COLUMN domain_id int NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
     $patch['140']['date'] = "200712"; 
     
     $patch['141']['name'] = "Add domain_id to billers table";
-    $patch['141']['patch'] = "ALTER TABLE `".TB_PREFIX."biller` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
+    $patch['141']['patch'] = "ALTER TABLE `".TB_PREFIX."biller` ADD `domain_id` INT  NOT NULL AFTER `id` ;";
     if ($config->database->adapter == "pdo_pgsql") {
-        $patch['141']['patch'] = "ALTER TABLE ".TB_PREFIX."biller ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
+        $patch['141']['patch'] = "ALTER TABLE ".TB_PREFIX."biller ADD COLUMN domain_id int NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
     $patch['141']['date'] = "200712";
 
     $patch['142']['name'] = "Add domain_id to invoices table";
-    $patch['142']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
+    $patch['142']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD `domain_id` INT NOT NULL AFTER `id` ;";
     if ($config->database->adapter == "pdo_pgsql") {
-        $patch['142']['patch'] = "ALTER TABLE ".TB_PREFIX."invoices ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
+        $patch['142']['patch'] = "ALTER TABLE ".TB_PREFIX."invoices ADD COLUMN domain_id int NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
     $patch['142']['date'] = "200712";
 
     $patch['143']['name'] = "Add domain_id to customers table";
-    $patch['143']['patch'] = "ALTER TABLE `".TB_PREFIX."customers` ADD `domain_id` INT DEFAULT '1' NOT NULL AFTER `id` ;";
+    $patch['143']['patch'] = "ALTER TABLE `".TB_PREFIX."customers` ADD `domain_id` INT NOT NULL AFTER `id` ;";
     if ($config->database->adapter == "pdo_pgsql") {
-        $patch['143']['patch'] = "ALTER TABLE ".TB_PREFIX."customers ADD COLUMN domain_id int DEFAULT 1 NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
+        $patch['143']['patch'] = "ALTER TABLE ".TB_PREFIX."customers ADD COLUMN domain_id int NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
     $patch['143']['date'] = "200712";
 
