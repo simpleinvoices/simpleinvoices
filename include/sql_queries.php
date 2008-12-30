@@ -433,7 +433,7 @@ function getPayments() {
 				and 
 				iv.biller_id = b.id 
 				and 
-				ap.domain_id = ':domain_id'
+				ap.domain_id = :domain_id
 			ORDER BY ap.id DESC";
 	
 	return dbQuery($sql,':domain_id',$auth_session->domain_id);
@@ -1266,6 +1266,7 @@ function getActiveCustomers() {
 	return $sth->fetchAll();
 }
 
+/* DELETE this function */
 function getTopDebtor() {
   global $db_server;
   global $dbh;
@@ -1303,6 +1304,7 @@ function getTopDebtor() {
   return $debtor;
 }
 
+/* DELETE this function */
 function getTopCustomer() {
   global $db_server;
   global $dbh;
@@ -1341,6 +1343,7 @@ function getTopCustomer() {
   return $customer;
 }
 
+/* DELETE this function */
 function getTopBiller() {
   global $db_server;
   global $dbh;
@@ -1374,6 +1377,7 @@ function getTopBiller() {
 }
 
 function insertTaxRate() {
+  	global $auth_session;
 	global $LANG;
 
 	$sql = "INSERT into ".TB_PREFIX."tax

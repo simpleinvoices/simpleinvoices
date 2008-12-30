@@ -1,0 +1,13 @@
+2008-12-30T23:28:48+11:00 INFO (6): Itemised invoice created
+2008-12-30T23:29:10+11:00 INFO (6): Invoice: 9 Tax for line item 0: 12.5
+2008-12-30T23:29:10+11:00 INFO (6):  
+2008-12-30T23:29:10+11:00 INFO (6): ITEM :: Key: 0 Value: 1
+2008-12-30T23:29:10+11:00 INFO (6): ITEM :: tax rate: 10.000000
+2008-12-30T23:29:10+11:00 INFO (6): ITEM :: Qty: 1 Unit price: 125.00
+2008-12-30T23:29:10+11:00 INFO (6): ITEM :: Tax rate: 10.000000 Tax type: % Tax $: 12.5
+2008-12-30T23:35:38+11:00 INFO (6): Invoice: 10 Tax for line item 0: 
+2008-12-30T23:35:38+11:00 INFO (6):  
+2008-12-30T23:35:38+11:00 INFO (6): Invoice: 10 Tax for line item 1: 
+2008-12-30T23:35:38+11:00 INFO (6):  
+2008-12-30T23:35:38+11:00 INFO (6): Invoice: 10 Tax for line item 2: 
+2008-12-30T23:35:38+11:00 INFO (6):  

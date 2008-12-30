@@ -367,7 +367,7 @@
 		</td>
 		</tr>
 
-		{if ($invoice.note != null) }
+		{if ($invoice.note != "") }
 		<tr>
 				<td colspan="6">&nbsp;</td>
 		</tr>
@@ -377,7 +377,7 @@
 		</tr>
 			<!-- if hide detail click - the stripped note will be displayed -->
 		<tr class='show-notes details_screen'>
-				<td colspan="6">{$invoice.note|truncate:"...":true}</td>
+				<td colspan="6">{$invoice.note|truncate:25:"...":true}</td>
 		</tr>
 			<!-- if show detail click - the full note will be displayed -->
 		<tr class='notes details_screen'>

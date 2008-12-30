@@ -12,21 +12,18 @@ Next Release :: TODO
 -- need to edit the export template - TODO
 
 - si_account_payments: change all refer to si_payment - done
-- si_payment: add domain_id into all queries
+- si_payment: add domain_id into all queries - done
 
-- si_tax: add domain_id into all queries
+- si_tax: add domain_id into all queries - done
 - si_user: change all refer to si_user - done
 - domain_id sql patches - write an update table set domain_id = 1 for all tables - done
 - add domain_id into custom_fields tables - TODO
 - add domain_id into system_defaults table - flatten this table - old style - TODO
 
- - Manage pages - numbers to be right aligned - JK 
-
  - Consulting style - if desciptoin null then don;t show Description heading thing on the invoice- JK
- - remove float data types(chage to decimal), and change decimals from 2 to 3 decimal points - AP
- - Config.php - used YAML for the DB info : http://prematureoptimization.org/blog/archives/39/ - AP
- - manage pages redevelopment!! - JK
- - manage invoices sql - check to make sure is 100% OK - Justin
+
+ - manage pages redevelopment!! - JK - done
+
  - Simple Invoices Errors - make a function and make look all pretty (ie cache read only, no PDO, no PHP5.2, can't connect to Db etc..) - AP
  - Address fields in invoice templates - include comma after add 1 or 2 if other address field not null
  - users/groups/domains - make this happen!
