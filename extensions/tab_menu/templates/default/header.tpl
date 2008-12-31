@@ -20,11 +20,11 @@
 	<script type="text/javascript" src="./include/jquery/jquery.flexigrid.1.0b3.pack.js"></script>
 	{/literal}{$extension_jquery_files }{literal}
 	<script type="text/javascript" src="./include/jquery/jquery.plugins.js"></script>
-	<script type="text/javascript" src="./include/jquery/html/html.js"></script>
+	<script type="text/javascript" src="./include/jquery/wysiwyg/jquery.wysiwyg.pack.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.conf.js"></script>
 	
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/flexigrid.css">
-	<link rel="stylesheet" type="text/css" href="./include/jquery/html/html.css">
+	<link rel="stylesheet" type="text/css" href="./include/jquery/wysiwyg/wysiwyg.css">
 	<link rel="stylesheet" type="text/css" href="./include/jquery/jquery.plugins.css" title="default" media="screen" />
 	<link rel="stylesheet" type="text/css" href="./include/jquery/rte/rte.css" />	
 	<link rel="stylesheet" type="text/css" href="./include/jquery/cluetip/jquery.cluetip.css" />

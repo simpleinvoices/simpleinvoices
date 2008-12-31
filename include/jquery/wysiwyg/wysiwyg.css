@@ -5,7 +5,7 @@ div.wysiwyg * { margin: 0; padding: 0; }
 div.wysiwyg ul.panel { border-bottom: 1px solid #ccc; float: left; width: 100%; padding: 0 0 4px 0; }
 div.wysiwyg ul.panel li { list-style-type: none; float: left; margin: 0 2px; }
 div.wysiwyg ul.panel li.separator { height: 16px; margin: 0 4px; border-left: 1px solid #ccc; }
-div.wysiwyg ul.panel li a { opacity: 0.6; display: block; width: 16px; height: 16px; background: url('jquery.wysiwyg.gif') no-repeat -64px -80px; border: 0; cursor: pointer; padding: 1px; }
+div.wysiwyg ul.panel li a { opacity: 0.6; display: block; width: 16px; height: 16px; background: url('jquery.wysiwyg.gif') no-repeat -64px -80px; border: 0; cursor: pointer; /*padding: 1px;*/ }
 div.wysiwyg ul.panel li a:hover, div.wysiwyg ul.panel li a.active { opacity: 0.99; }
 div.wysiwyg ul.panel li a.active { background-color: #f9f9f9; border: 1px solid #ccc; border-left-color: #AAA; border-top-color: #AAA; padding: 0; }
 
