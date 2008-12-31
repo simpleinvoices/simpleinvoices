@@ -130,6 +130,7 @@ $LANG['faqs_need'] ="What do I need to start invoicing?";//1
 $LANG['faqs_type'] ="What are the different types of invoices?";//1
 $LANG['faqs_what'] ="What is Simple Invoices?";//1
 $LANG['fax'] = "Fax";//1
+$LANG['financial_status'] = "Financial status";//1
 $LANG['format_tooltip'] = "format";//1
 $LANG['get_help'] = "Get Help";//1
 $LANG['getting_started'] ="Getting started";//1

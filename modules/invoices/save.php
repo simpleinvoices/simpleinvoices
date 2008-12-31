@@ -15,9 +15,8 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$pageActive = "invoices";
-
-$smarty->assign('pageActive', $pageActive);
+$smarty -> assign('pageActive', 'invoice_new');
+$smarty -> assign('active_tab', '#money');
 
 # Deal with op and add some basic sanity checking
 

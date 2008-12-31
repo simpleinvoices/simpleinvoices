@@ -277,6 +277,8 @@ Work around IE/Win code size bug - courtesy Jesper, waffle.wootest.net  */
 div#Container {
 	
 	background:#fff;
+	padding-top:10px;
+	padding-bottom:10px;
 /*	margin:13px auto 0;
 	padding:0 23px 0 30px; 
 */
@@ -438,7 +440,7 @@ a:link,a:visited {
 /* extjs/doukiwki style input boes */
 input, select
 {
-	background:#FFFFFF url(../../../images/common/text-bg.gif) repeat-x scroll center top;
+	background:#FFFFFF url(../../../../../images/common/text-bg.gif) repeat-x scroll center top;
 	/*border:1px solid #B5B8C8;*/
 	border:1px solid #CCCCCC;
 	/*padding:1px 3px;*/

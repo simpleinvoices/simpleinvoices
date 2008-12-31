@@ -32,8 +32,7 @@ jsPreferenceValidation("select_preferences","Invoice Preference",1,1000000);
 jsFormValidationEnd();
 jsEnd();
 
-$pageActive = "invoices";
-
 include('./modules/invoices/invoice.php');
 
-?>
+$smarty -> assign('pageActive', 'invoice_new');
+$smarty -> assign('active_tab', '#money');

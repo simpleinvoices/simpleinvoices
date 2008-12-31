@@ -1,6 +1,7 @@
 --------
 BETA 2
 --------
+	- quick view cleanup
 	- cache move to tmp/cache
 	- database_backup move to tmp/database_backup
 	- Simple Invoices log file added - tmp/log/si.log

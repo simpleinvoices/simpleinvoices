@@ -12,9 +12,9 @@
 *}
 
 <form name="frmpost" action="index.php?module=invoices&view=save" method=POST onsubmit="return frmpost_Validator(this)">
-
+<!--
 <h3>{$LANG.inv} {$LANG.inv_total}</h3>
-
+-->
 {include file="$path/header.tpl" }
 
 <tr>
@@ -80,7 +80,7 @@
 -->
 </table>
 <!-- </div> -->
-<hr />
+<br>
 <table class="buttons" align="center">
     <tr>
         <td>

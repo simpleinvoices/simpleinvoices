@@ -49,7 +49,6 @@ $customFieldLabels = getCustomFieldLabels();
 for($i=1;$i<=4;$i++) {
 	$customField[$i] = show_custom_field("invoice_cf$i",$invoice["custom_field$i"],"read",'details_screen summary', 'details_screen','details_screen',5,':');
 }
-$pageActive = "invoices";
 
 
 //Customer accounts sections
@@ -58,7 +57,8 @@ $customerAccount['total'] = calc_customer_total($customer['id']);
 $customerAccount['paid'] = calc_customer_paid($customer['id']);
 $customerAccount['owing'] = $customerAccount['total'] - $customerAccount['paid'];
 
-$smarty -> assign('pageActive', $pageActive);
+$smarty -> assign('pageActive', 'invoice');
+$smarty -> assign('active_tab', '#money');
 $smarty -> assign("customField",$customField);
 $smarty -> assign("customFieldLabels",$customFieldLabels);
 $smarty -> assign("invoice_age",$invoice_age);
@@ -69,7 +69,7 @@ $smarty -> assign("biller",$biller);
 $smarty -> assign("customer",$customer);
 $smarty -> assign("invoice_type",$invoice_type);
 $smarty -> assign("invoice",$invoice);
-$smarty -> assign("word_processor",$config->export->word_processor);
+$smarty -> assign("wordprocessor",$config->export->wordprocessor);
 $smarty -> assign("spreadsheet",$config->export->spreadsheet);
 $smarty -> assign("customerAccount",$customerAccount);
 

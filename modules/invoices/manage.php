@@ -18,7 +18,7 @@ checkLogin();
 	$number_of_invoices  = $sth->fetch(PDO::FETCH_ASSOC);
 //all funky xml - sql stuff done in xml.php
 
-$pageActive = "invoices";
+$pageActive = "invoice";
 
 $smarty -> assign("invoices",$invoices);
 $smarty -> assign("number_of_invoices",$number_of_invoices);
