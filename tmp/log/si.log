@@ -1,0 +1,43 @@
+2009-01-01T01:26:35+11:00 INFO (6): Itemised invoice created
+2009-01-01T01:27:33+11:00 INFO (6): Invoice: 16 Tax for line item 0: 1.55
+2009-01-01T01:27:33+11:00 INFO (6):  
+2009-01-01T01:27:33+11:00 INFO (6): ITEM :: Key: 0 Value: 1
+2009-01-01T01:27:33+11:00 INFO (6): ITEM :: tax rate: 10.000000
+2009-01-01T01:27:33+11:00 INFO (6): ITEM :: Qty: 1 Unit price: 15.50
+2009-01-01T01:27:33+11:00 INFO (6): ITEM :: Tax rate: 10.000000 Tax type: % Tax $: 1.55
+2009-01-01T01:27:33+11:00 INFO (6): Invoice: 16 Tax for line item 1: 12.5
+2009-01-01T01:27:33+11:00 INFO (6):  
+2009-01-01T01:27:33+11:00 INFO (6): ITEM :: Key: 0 Value: 1
+2009-01-01T01:27:33+11:00 INFO (6): ITEM :: tax rate: 10.000000
+2009-01-01T01:27:33+11:00 INFO (6): ITEM :: Qty: 1 Unit price: 125.00
+2009-01-01T01:27:33+11:00 INFO (6): ITEM :: Tax rate: 10.000000 Tax type: % Tax $: 12.5
+2009-01-01T01:27:33+11:00 INFO (6): Invoice: 16 Tax for line item 2: 12.5
+2009-01-01T01:27:33+11:00 INFO (6):  
+2009-01-01T01:27:33+11:00 INFO (6): ITEM :: Key: 0 Value: 1
+2009-01-01T01:27:33+11:00 INFO (6): ITEM :: tax rate: 10.000000
+2009-01-01T01:27:33+11:00 INFO (6): ITEM :: Qty: 1 Unit price: 125.00
+2009-01-01T01:27:33+11:00 INFO (6): ITEM :: Tax rate: 10.000000 Tax type: % Tax $: 12.5
+2009-01-01T01:27:33+11:00 INFO (6): Invoice: 16 Tax for line item 3: 3.1
+2009-01-01T01:27:33+11:00 INFO (6):  
+2009-01-01T01:27:33+11:00 INFO (6): ITEM :: Key: 0 Value: 6
+2009-01-01T01:27:33+11:00 INFO (6): ITEM :: tax rate: 20.000000
+2009-01-01T01:27:33+11:00 INFO (6): ITEM :: Qty: 1 Unit price: 15.50
+2009-01-01T01:27:33+11:00 INFO (6): ITEM :: Tax rate: 20.000000 Tax type: % Tax $: 3.1
+2009-01-01T01:27:33+11:00 INFO (6): Invoice: 16 Tax for line item 4: 17.5
+2009-01-01T01:27:33+11:00 INFO (6):  
+2009-01-01T01:27:33+11:00 INFO (6): ITEM :: Key: 0 Value: 4
+2009-01-01T01:27:33+11:00 INFO (6): ITEM :: tax rate: 12.500000
+2009-01-01T01:27:33+11:00 INFO (6): ITEM :: Qty: 1 Unit price: 140.00
+2009-01-01T01:27:33+11:00 INFO (6): ITEM :: Tax rate: 12.500000 Tax type: % Tax $: 17.5
+2009-01-01T01:45:26+11:00 INFO (6): Itemised invoice created
+2009-01-01T01:46:37+11:00 INFO (6): Itemised invoice created
+2009-01-01T01:47:57+11:00 INFO (6): Itemised invoice created
+2009-01-01T01:48:23+11:00 INFO (6): Itemised invoice created
+2009-01-01T01:49:03+11:00 INFO (6): Itemised invoice created
+2009-01-01T01:49:35+11:00 INFO (6): Itemised invoice created
+2009-01-01T01:52:05+11:00 INFO (6): Itemised invoice created
+2009-01-01T01:52:24+11:00 INFO (6): Itemised invoice created
+2009-01-01T01:52:47+11:00 INFO (6): Itemised invoice created
+2009-01-01T01:53:47+11:00 INFO (6): Itemised invoice created
+2009-01-01T01:54:26+11:00 INFO (6): Itemised invoice created
+2009-01-01T01:56:00+11:00 INFO (6): Itemised invoice created

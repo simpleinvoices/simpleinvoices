@@ -21,41 +21,41 @@
             </ul>
             <div id="home">
 				<ul class="subnav">
-					<li { if $pageActive == "dashboard"} id="active" >{/if}><a href="index.php">Dashboard</a></li>
-					<li { if $pageActive == "report"} id="active" >{/if}><a href="index.php?module=reports&view=index">All reports</a></li>
+					<li><a { if $pageActive == "dashboard"} id="active" {/if} href="index.php">Dashboard</a></li>
+					<li><a { if $pageActive == "report"} id="active" {/if} href="index.php?module=reports&view=index">All reports</a></li>
 				</ul>
             </div>
             <div id="money">
 				<ul class="subnav">
-					<li { if $pageActive == "invoice"} id="active" >{/if} ><a href="index.php?module=invoices&view=manage">{$LANG.invoices}</a></li>
-					<li { if $pageActive == "invoice_new"} id="active" >{/if}><a id="invoice_dialog" href="#">New invoice</a></li> {*LANG TODO*}
-					<li { if $pageActive == "payment"} id="active" >{/if}><a id="invoice_export_dialog"  href="index.php?module=payments&view=manage">{$LANG.payments}</a></li>
-					<li { if $pageActive == "report_sale"} id="active" >{/if}><a href="index.php?module=reports&view=report_sales_total">Sales Report {*$LANG TODO*}</a></li>
+					<li><a { if $pageActive == "invoice"} id="active" {/if} href="index.php?module=invoices&view=manage">{$LANG.invoices}</a></li>
+					<li><a { if $pageActive == "invoice_new"} id="active" {/if} id="invoice_dialog" href="#">New invoice</a></li> {*LANG TODO*}
+					<li><a { if $pageActive == "payment"} id="active" {/if} id="invoice_export_dialog"  href="index.php?module=payments&view=manage">{$LANG.payments}</a></li>
+					<li><a { if $pageActive == "report_sale"} id="active" {/if} href="index.php?module=reports&view=report_sales_total">Sales Report {*$LANG TODO*}</a></li>
 				</ul>
             </div>
             <div id="people">
 				<ul class="subnav">
-					<li { if $pageActive == "customer"} id="active" >{/if}><a href="index.php?module=customers&view=manage">{$LANG.customers}</a></li>
-					<li { if $pageActive == "biller"} id="active" >{/if}><a href="index.php?module=customers&view=manage">{$LANG.billers}</a></li>
-					<li { if $pageActive == "user"} id="active" >{/if}><a href="index.php?module=customers&view=add">Users {* $LANG TODO *}</a></li>
+					<li><a { if $pageActive == "customer"} id="active"{/if} href="index.php?module=customers&view=manage">{$LANG.customers}</a></li>
+					<li><a { if $pageActive == "biller"} id="active" {/if} href="index.php?module=customers&view=manage">{$LANG.billers}</a></li>
+					<li><a { if $pageActive == "user"} id="active" {/if} href="index.php?module=customers&view=add">Users {* $LANG TODO *}</a></li>
 				</ul>
 			</div>
            <div id="product">
                 <ul class="subnav">
-					<li { if $pageActive == "product_manage"} id="active" >{/if}><a href="index.php?module=products&view=manage">{$LANG.manage_products}</a></li>
-					<li { if $pageActive == "product_add"} id="active" >{/if}><a href="index.php?module=products&view=add">{$LANG.add_product}</a></li>
+					<li><a { if $pageActive == "product_manage"} id="active"{/if} href="index.php?module=products&view=manage">{$LANG.manage_products}</a></li>
+					<li><a { if $pageActive == "product_add"} id="active"{/if} href="index.php?module=products&view=add">{$LANG.add_product}</a></li>
 				</ul>
             </div>
            <div style="float: right; " id="setting">
                 <ul class="subnav">
-					<li { if $pageActive == "product_manage"} id="active" >{/if}><a href="index.php?module=options&view=index">All settings {* LANG TODO *}</a></li>
-					<li { if $pageActive == "product_add"} id="active" >{/if}><a href="index.php?module=system_defaults&view=manage">{$LANG.system_preferences}</a></li>
-					<li { if $pageActive == "product_add"} id="active" >{/if}><a href="index.php?module=custom_fields&view=manage">{$LANG.custom_fields_upper}</a></li>
-					<li { if $pageActive == "product_add"} id="active" >{/if}><a href="index.php?module=tax_rates&view=manage">{$LANG.tax_rates}</a></li>
-					<li { if $pageActive == "product_add"} id="active" >{/if}><a href="index.php?module=preferences&view=manage">{$LANG.invoice_preferences}</a></li>
-					<li { if $pageActive == "product_add"} id="active" >{/if}><a href="index.php?module=payment_types&view=manage">{$LANG.payment_types}</a></li>
-					<li { if $pageActive == "product_add"} id="active" >{/if}><a href="index.php?module=options&view=backup_database">{$LANG.backup_database}</a></li>
-					<li { if $pageActive == "product_add"} id="active" >{/if}><a href="index.php?module=options&view=manage_sqlpatches">{$LANG.database_upgrade_manager}</a></li>
+					<li><a { if $pageActive == "product_manage"} id="active"{/if} href="index.php?module=options&view=index">All settings {* LANG TODO *}</a></li>
+					<li><a { if $pageActive == "product_add"} id="active"{/if} href="index.php?module=system_defaults&view=manage">{$LANG.system_preferences}</a></li>
+					<li><a { if $pageActive == "product_add"} id="active"{/if} href="index.php?module=custom_fields&view=manage">{$LANG.custom_fields_upper}</a></li>
+					<li><a { if $pageActive == "product_add"} id="active"{/if} href="index.php?module=tax_rates&view=manage">{$LANG.tax_rates}</a></li>
+					<li><a { if $pageActive == "product_add"} id="active"{/if} href="index.php?module=preferences&view=manage">{$LANG.invoice_preferences}</a></li>
+					<li><a { if $pageActive == "product_add"} id="active"{/if} href="index.php?module=payment_types&view=manage">{$LANG.payment_types}</a></li>
+					<li><a { if $pageActive == "product_add"} id="active"{/if} href="index.php?module=options&view=backup_database">{$LANG.backup_database}</a></li>
+					<li><a { if $pageActive == "product_add"} id="active"{/if} href="index.php?module=options&view=manage_sqlpatches">{$LANG.database_upgrade_manager}</a></li>
 				</ul>
             </div>
         </div>

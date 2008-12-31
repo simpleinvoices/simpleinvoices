@@ -36,8 +36,8 @@
 .ui-tabs-nav a, .ui-tabs-nav a span {
     float: left; /* fixes dir=ltr problem and other quirks IE */
     padding: 0 12px;
-color:#21759B;
-background:#f1f1f1;
+	color:#21759B;
+	background:#f1f1f1;
 }
 .ui-tabs-nav a {
     margin: 5px 0 0; /* position: relative makes opacity fail for disabled tab in IE */
@@ -103,6 +103,10 @@ color:#555555;
 .ui-tabs-nav .ui-tabs-disabled a:link, .ui-tabs-nav .ui-tabs-disabled a:visited {
     color: #000;
 }
+
+.ui-tabs-panel a {
+	color: #D54E21;
+}
 .ui-tabs-panel {
 /*    padding: 10px;*/
 
@@ -125,4 +129,22 @@ color: #D54E21;
 }
 *:first-child+html .ui-tabs-nav  { /* auto clear @ IE 7 Standards Mode - do not group selectors, otherwise IE 6 will ignore complete rule (because of the unknown + combinator)... */
     display: inline-block;
+}
+
+#active
+{
+/*	background:#fff url(../../../../../images/common/bullet_arrow_up.png) no-repeat bottom;*/
+/*	padding-bottom:5px;*/
+	color:#fff;
+	font-weight:bold;
+
+-moz-border-radius-bottomleft:9px;
+-moz-border-radius-bottomright:9px;
+-moz-border-radius-topleft:9px;
+-moz-border-radius-topright:9px;
+background-color:#21759B;
+background-color:#D54E21;
+margin-bottom:10px;
+margin-top:10px;
+padding:7px;
 }
