@@ -1,5 +1,16 @@
 <div>
 
+{literal}
+<script type="text/javascript">
+<!--
+
+//$(document).ready(function(){
+//	("#tabmenu > ul").tabs({ selected: null });
+//});
+
+//-->
+</script>
+{/literal} 
 <!-- Welcome message - start -->
 <div class="welcome">
 	<h2>Sysmte preferences welcome message</h2>

@@ -3,7 +3,7 @@
 
 #tabmenu
 {
-background:#f1f1f1;
+background:#f1f1f1 url(../back.gif);
 height:57px;
 padding-top:10px;
 /*padding-bottom:10px;*/
@@ -17,6 +17,12 @@ height:25px;
 list-style-type: none;
 
 padding-right: 20px;
+}
+
+.menu_setting
+{
+	padding-right: 20px;
+	float:right;
 }
 /*
 

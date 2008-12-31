@@ -588,22 +588,22 @@ button.positive, .buttons a.positive{
 .txt_right
 {
 	margin:0pt;
-padding:0pt;
-padding-top:4px;
-padding-bottom:4px;
-text-align:right;
+	padding:0pt;
+	padding-top:4px;
+	padding-bottom:4px;
+	text-align:right;
 	padding-right:30px;
-height:21px;
-/*background:#464646;*/
-background:transparent url(../../../images/top_menu_grey.png) repeat scroll left top;
-color:#EEE;
-/*color:#999999;*/
+	height:21px;
+	/*background:#464646;*/
+	background:transparent url(../../../images/top_menu_grey.png) repeat scroll left top;
+	color:#EEE;
+	/*color:#999999;*/
 }
 
 .settings {
-float:right;
-margin-top:16px;
-padding-right:30px;
+	float:right;
+	margin-top:10px;
+	padding-right:30px;
 }
 
 .floatLeft{

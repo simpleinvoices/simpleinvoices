@@ -1,9 +1,14 @@
 <div class="txt_right">
 	Hello {$smarty.session.Zend_Auth.email} | <a href="">Help</a> | <a href="">Logout</a>
 </div>
+<!--
 <div class="settings">
-	<a href="index.php?module=options&view=index">Settings</a>
+ <a href="index.php?module=options&view=index">Settings</a>
+                <ul class="ui-tabs-nav">
+					<li { if $pageActive == "setting"} class="ui-tabs-selected"{/if}><a href="index.php?module=options&view=index"><span>Settings</span></a></li>
+				</ul>
 </div>
+-->
 
        <div id="tabmenu" class="flora">
             <ul>
@@ -12,6 +17,7 @@
                 <li ><a href="#money"><span>Money</span></a></li>
                 <li ><a href="#people"><span>People</span></a></li>
                 <li ><a href="#product"><span>Products</span></a></li>
+                <li style="float:right" class="menu_setting"><a href="#setting"><span>Settings</span></a></li>
             </ul>
             <div id="home">
 				<ul class="subnav">
@@ -29,8 +35,8 @@
             </div>
             <div id="people">
 				<ul class="subnav">
-					<li { if $pageActive == "customer"} id="active" >{/if}><a href="index.php?module=customers&view=manage">{$LANG.customers}</a></li>|
-					<li { if $pageActive == "biller"} id="active" >{/if}><a href="index.php?module=customers&view=manage">{$LANG.billers}</a></li>|
+					<li { if $pageActive == "customer"} id="active" >{/if}><a href="index.php?module=customers&view=manage">{$LANG.customers}</a></li>
+					<li { if $pageActive == "biller"} id="active" >{/if}><a href="index.php?module=customers&view=manage">{$LANG.billers}</a></li>
 					<li { if $pageActive == "user"} id="active" >{/if}><a href="index.php?module=customers&view=add">Users {* $LANG TODO *}</a></li>
 				</ul>
 			</div>
@@ -38,6 +44,18 @@
                 <ul class="subnav">
 					<li { if $pageActive == "product_manage"} id="active" >{/if}><a href="index.php?module=products&view=manage">{$LANG.manage_products}</a></li>
 					<li { if $pageActive == "product_add"} id="active" >{/if}><a href="index.php?module=products&view=add">{$LANG.add_product}</a></li>
+				</ul>
+            </div>
+           <div style="float: right; " id="setting">
+                <ul class="subnav">
+					<li { if $pageActive == "product_manage"} id="active" >{/if}><a href="index.php?module=options&view=index">All settings {* LANG TODO *}</a></li>
+					<li { if $pageActive == "product_add"} id="active" >{/if}><a href="index.php?module=system_defaults&view=manage">{$LANG.system_preferences}</a></li>
+					<li { if $pageActive == "product_add"} id="active" >{/if}><a href="index.php?module=custom_fields&view=manage">{$LANG.custom_fields_upper}</a></li>
+					<li { if $pageActive == "product_add"} id="active" >{/if}><a href="index.php?module=tax_rates&view=manage">{$LANG.tax_rates}</a></li>
+					<li { if $pageActive == "product_add"} id="active" >{/if}><a href="index.php?module=preferences&view=manage">{$LANG.invoice_preferences}</a></li>
+					<li { if $pageActive == "product_add"} id="active" >{/if}><a href="index.php?module=payment_types&view=manage">{$LANG.payment_types}</a></li>
+					<li { if $pageActive == "product_add"} id="active" >{/if}><a href="index.php?module=options&view=backup_database">{$LANG.backup_database}</a></li>
+					<li { if $pageActive == "product_add"} id="active" >{/if}><a href="index.php?module=options&view=manage_sqlpatches">{$LANG.database_upgrade_manager}</a></li>
 				</ul>
             </div>
         </div>

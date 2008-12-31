@@ -75,7 +75,7 @@
 	<!-- Invoice Summary section -->
 
 	<tr class='details_screen'>
-		<td class='details_screen'><b>{$preference.pref_inv_wording} {$LANG.summary}:</b></td><td colspan=5 align=right class='details_screen align_right'><a href='#' class="show-summary" onClick="$('.summary').show();$('.show-summary').hide();"> + {* $LANG.show_details *}</a><a href='#' class="summary" onClick="$('.summary').hide();$('.show-summary').show();"> - {* $LANG.hide_details *}</a> </td>
+		<td class='details_screen'><b>{$preference.pref_inv_wording} {$LANG.summary}:</b></td><td colspan=5 align=right class='details_screen align_right'><a href='#' class="show-summary" onClick="$('.summary').show();$('.show-summary').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"</a><a href='#' class="summary" onClick="$('.summary').hide();$('.show-summary').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a> </td>
 	</tr>
 	<tr class='details_screen summary'>
 		<td class='details_screen'>{$preference.pref_inv_wording} {$LANG.number_short}:</td><td colspan=5 class='details_screen'>{$invoice.id}</td>
@@ -97,7 +97,7 @@
 	<tr class='details_screen'>
 		<td class='details_screen'><b>{$LANG.biller}:</b></td>
 		<td class='details_screen' colspan="3">{$biller.name}</td>
-		<td colspan="2" class='details_screen align_right'><a href='#' class="show-biller" onClick="$('.biller').show();$('.show-biller').hide();">{$LANG.show_details}</a><a href='#' class="biller" onClick="$('.biller').hide();$('.show-biller').show();">{$LANG.hide_details}</a></td>
+		<td colspan="2" class='details_screen align_right'><a href='#' class="show-biller" onClick="$('.biller').show();$('.show-biller').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a><a href='#' class="biller" onClick="$('.biller').hide();$('.show-biller').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a></td>
 	</tr>
 	<tr class='details_screen biller'>
 		<td class='details_screen'>{$LANG.street}:</td><td class='details_screen' colspan=5>{$biller.street_address}</td>
@@ -141,7 +141,7 @@
 	<tr class='details_screen'>
 		<td class='details_screen'><b>{$LANG.customer}:</b></td>
 		<td class='details_screen' colspan="3">{$customer.name}</td>
-		<td colspan="2" class='details_screen align_right'><a href='#' class="show-customer" {literal} onClick="$('.customer').show(); $('.show-customer').hide(); {/literal}">{$LANG.show_details}</a> <a href='#' class="customer" {literal} onClick="$('.customer').hide(); $('.show-customer').show(); {/literal}">{$LANG.hide_details}</a></td>
+		<td colspan="2" class='details_screen align_right'><a href='#' class="show-customer" {literal} onClick="$('.customer').show(); $('.show-customer').hide(); {/literal}"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a> <a href='#' class="customer" {literal} onClick="$('.customer').hide(); $('.show-customer').show(); {/literal}"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a></td>
 	</tr>	
 	<tr class='details_screen customer'>
 		<td class='details_screen'>{$LANG.attention_short}:</td><td class='details_screen' colspan=5 align=left>{$customer.attention},</td>
@@ -233,7 +233,7 @@
 	{if $invoice.type_id == 2 || $invoice.type_id == 4}
 
             <tr>
-                    <td colspan="6" class="details_screen align_right"><a href='#' class="show-itemised" onClick="$('.itemised').show();$('.show-itemised').hide();">{$LANG.show_details}</a><a href='#' class="itemised" onClick="$('.itemised').hide();$('.show-itemised').show();">{$LANG.hide_details}</a></td>
+                    <td colspan="6" class="details_screen align_right"><a href='#' class="show-itemised" onClick="$('.itemised').show();$('.show-itemised').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a><a href='#' class="itemised" onClick="$('.itemised').hide();$('.show-itemised').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a></td>
             </tr>
 			<tr>
         		    <td><b>{$LANG.quantity_short}</b></td>
@@ -247,7 +247,7 @@
     {if $invoice.type_id == 3 }
 
 			<tr>
-					<td colspan="6" class="details_screen align_right"><a href='#' class="show-consulting" onClick="$('.consulting').show();$('.show-consulting').hide();">{$LANG.show_details}</a><a href='#' class="consulting" onClick="$('.consulting').hide();$('.show-consulting').show();">{$LANG.hide_details}</a></td>
+					<td colspan="6" class="details_screen align_right"><a href='#' class="show-consulting" onClick="$('.consulting').show();$('.show-consulting').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a><a href='#' class="consulting" onClick="$('.consulting').hide();$('.show-consulting').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a></td>
         	</tr>
 			<tr>
                	 	<td><b>{$LANG.quantity_short}</b></td>
@@ -335,13 +335,13 @@
 		</td>
 		</tr>
 
-		{if ($invoice.note != "") }
+		{if ($invoice.note != null) }
 		<tr>
 				<td colspan="6">&nbsp;</td>
 		</tr>
 		<tr class="details_screen">
 				<td colspan="5"><b>{$LANG.notes}:</b></td>
-				<td class="details_screen align_right"><a href='#' class="show-notes" onClick="$('.notes').show();$('.show-notes').hide();">{$LANG.show_details}</a><a href='#' class="notes" onClick="$('.notes').hide();$('.show-notes').show();">{$LANG.hide_details}</a></td>
+				<td class="details_screen align_right"><a href='#' class="show-notes" onClick="$('.notes').show();$('.show-notes').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a><a href='#' class="notes" onClick="$('.notes').hide();$('.show-notes').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a></td>
 		</tr>
 			<!-- if hide detail click - the stripped note will be displayed -->
 		<tr class='show-notes details_screen'>
@@ -416,7 +416,7 @@
 		</td>
 	</tr>
 	<tr class="account">
-		<td class="account" colspan="8">{$LANG.account_info}</td>
+		<td class="account" colspan="8">{$preference.pref_inv_wording} {$invoice.id}</td>
 		<td width=5%></td>
 		<td class="columnleft" width=5%></td>
 		<td class="account" colspan="6"><a href='index.php?module=customers&view=details&id={$customer.id}&action=view'>{$LANG.customer_account}</a></td>
