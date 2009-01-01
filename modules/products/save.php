@@ -69,10 +69,10 @@ else if (  $op === 'edit_product' ) {
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 
 
-$pageActive = "products";
-//$smarty->assign('pageActive', $pageActive);
 $smarty->assign('saved',$saved);
 //$smarty -> assign('display_block',$display_block); 
 //$smarty -> assign('refresh_total',$refresh_total); 
 
+$smarty -> assign('pageActive', 'product_manage');
+$smarty -> assign('active_tab', '#product');
 ?>

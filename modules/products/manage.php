@@ -10,8 +10,5 @@ $number_of_rows  = $sth->fetch(PDO::FETCH_ASSOC);
 
 $smarty -> assign("number_of_rows",$number_of_rows);
 
-$pageActive = "products";
-$smarty->assign('pageActive', $pageActive);
-
-
-?>
+$smarty -> assign('pageActive', 'product_manage');
+$smarty -> assign('active_tab', '#product');

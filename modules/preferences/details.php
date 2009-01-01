@@ -12,8 +12,7 @@ $preference_id = $_GET['id'];
 
 $preference = getPreference($preference_id);
 
-$pageActive = "options";
-$smarty->assign('pageActive', $pageActive);
 $smarty->assign('preference',$preference);
 
-?>
+$smarty -> assign('pageActive', 'preference');
+$smarty -> assign('active_tab', '#setting');

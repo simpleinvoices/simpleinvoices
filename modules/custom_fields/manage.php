@@ -26,9 +26,7 @@ for($i=0; $cf = $sth->fetch();$i++) {
 	$number_of_rows = $i;
 }
 
-$pageActive = "options";
-
-$smarty -> assign('pageActive', $pageActive);
 $smarty -> assign("cfs",$cfs);
 
-?>
+$smarty -> assign('pageActive', 'custom_field');
+$smarty -> assign('active_tab', '#setting');

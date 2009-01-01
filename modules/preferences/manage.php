@@ -5,12 +5,7 @@ checkLogin();
 
 $preferences = getPreferences();
 
-$pageActive = "options";
-
-$smarty->assign('pageActive', $pageActive);
 $smarty -> assign("preferences",$preferences);
-	
 
-
-
-?>
+$smarty -> assign('pageActive', 'preference');
+$smarty -> assign('active_tab', '#setting');

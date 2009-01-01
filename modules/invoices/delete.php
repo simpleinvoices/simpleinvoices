@@ -30,9 +30,6 @@ $invoicePaid = calc_invoice_paid($invoice_id);
 
 $invoiceItems = invoice::getInvoiceItems($invoice_id);
 
-$pageActive = "invoices";
-
-$smarty -> assign('pageActive', $pageActive);
 $smarty -> assign("invoice",$invoice);
 $smarty -> assign("preference",$preference);
 
@@ -81,5 +78,5 @@ if ( ($_GET['stage'] == 2 ) AND ($_POST['doDelete'] == 'y') ) {
 
 
 
-
-?>
+$smarty -> assign('pageActive', 'invoice');
+$smarty -> assign('active_tab', '#money');

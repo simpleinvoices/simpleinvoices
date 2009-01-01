@@ -148,9 +148,8 @@ else if (  $op === 'edit_preference' ) {
 
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 
-$pageActive = "options";
-$smarty->assign('pageActive', $pageActive);
-
 $smarty -> assign('display_block',$display_block); 
 $smarty -> assign('refresh_total',$refresh_total); 
-?>
+
+$smarty -> assign('pageActive', 'preference');
+$smarty -> assign('active_tab', '#setting');

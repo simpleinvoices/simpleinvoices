@@ -30,7 +30,7 @@ $smarty -> assign("products",$products);
 }
 
 $type = $_GET[type];
-$pageActive = "invoices";
-$smarty->assign('pageActive', $pageActive);
 $smarty -> assign("type",$type);
-?>
+
+$smarty -> assign('pageActive', 'invoice');
+$smarty -> assign('active_tab', '#money');

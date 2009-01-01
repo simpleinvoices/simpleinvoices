@@ -39,4 +39,3 @@ include('./modules/invoices/invoice.php');
 
 $smarty -> assign('pageActive', 'invoice_new');
 $smarty -> assign('active_tab', '#money');
-?>

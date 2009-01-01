@@ -13,4 +13,6 @@ require_once("./include/reportlib.php");
    $oRpt->setXML("./modules/reports/report_products_sold_by_customer.xml");
 
 	include("./include/reportrunlib.php");
-?>
+
+$smarty -> assign('pageActive', 'report');
+$smarty -> assign('active_tab', '#home');

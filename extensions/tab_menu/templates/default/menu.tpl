@@ -48,14 +48,14 @@
             </div>
            <div style="float: right; " id="setting">
                 <ul class="subnav">
-					<li><a { if $pageActive == "product_manage"} id="active"{/if} href="index.php?module=options&view=index">All settings {* LANG TODO *}</a></li>
-					<li><a { if $pageActive == "product_add"} id="active"{/if} href="index.php?module=system_defaults&view=manage">{$LANG.system_preferences}</a></li>
-					<li><a { if $pageActive == "product_add"} id="active"{/if} href="index.php?module=custom_fields&view=manage">{$LANG.custom_fields_upper}</a></li>
-					<li><a { if $pageActive == "product_add"} id="active"{/if} href="index.php?module=tax_rates&view=manage">{$LANG.tax_rates}</a></li>
-					<li><a { if $pageActive == "product_add"} id="active"{/if} href="index.php?module=preferences&view=manage">{$LANG.invoice_preferences}</a></li>
-					<li><a { if $pageActive == "product_add"} id="active"{/if} href="index.php?module=payment_types&view=manage">{$LANG.payment_types}</a></li>
-					<li><a { if $pageActive == "product_add"} id="active"{/if} href="index.php?module=options&view=backup_database">{$LANG.backup_database}</a></li>
-					<li><a { if $pageActive == "product_add"} id="active"{/if} href="index.php?module=options&view=manage_sqlpatches">{$LANG.database_upgrade_manager}</a></li>
+					<li><a { if $pageActive == "setting"} id="active"{/if} href="index.php?module=options&view=index">All settings {* LANG TODO *}</a></li>
+					<li><a { if $pageActive == "system_default"} id="active"{/if} href="index.php?module=system_defaults&view=manage">{$LANG.system_preferences}</a></li>
+					<li><a { if $pageActive == "custom_field"} id="active"{/if} href="index.php?module=custom_fields&view=manage">{$LANG.custom_fields_upper}</a></li>
+					<li><a { if $pageActive == "tax_rate"} id="active"{/if} href="index.php?module=tax_rates&view=manage">{$LANG.tax_rates}</a></li>
+					<li><a { if $pageActive == "preference"} id="active"{/if} href="index.php?module=preferences&view=manage">{$LANG.invoice_preferences}</a></li>
+					<li><a { if $pageActive == "payment_type"} id="active"{/if} href="index.php?module=payment_types&view=manage">{$LANG.payment_types}</a></li>
+					<li><a { if $pageActive == "backup"} id="active"{/if} href="index.php?module=options&view=backup_database">{$LANG.backup_database}</a></li>
+					<li><a { if $pageActive == "sqlpatch"} id="active"{/if} href="index.php?module=options&view=manage_sqlpatches">{$LANG.database_upgrade_manager}</a></li>
 				</ul>
             </div>
         </div>

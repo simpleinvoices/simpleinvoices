@@ -16,7 +16,7 @@ $payment_type_id = $_GET['id'];
 
 $paymentType = getPaymentType($payment_type_id);
 
-$pageActive = "options";
-$smarty->assign('pageActive', $pageActive);
 $smarty->assign('paymentType',$paymentType);
-?>
+
+$smarty -> assign('pageActive', 'payment_type');
+$smarty -> assign('active_tab', '#setting');

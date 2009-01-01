@@ -47,3 +47,6 @@ EOD;
 }
 
 $smarty->assign('display_block', $display_block);
+
+$smarty -> assign('pageActive', 'backup');
+$smarty -> assign('active_tab', '#setting');

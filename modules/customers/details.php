@@ -47,12 +47,11 @@ $invoices = getCustomerInvoices($customer_id);
 
 
 //$customFieldLabel = getCustomFieldLabels("biller");
-$pageActive = "customers";
-$smarty->assign('pageActive', $pageActive);
 
 $smarty -> assign("stuff",$stuff);
 $smarty -> assign('customer',$customer);
 $smarty -> assign('invoices',$invoices);
 $smarty -> assign('customFieldLabel',$customFieldLabel);
 
-?>
+$smarty -> assign('pageActive', 'customer');
+$smarty -> assign('active_tab', '#people');

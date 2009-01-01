@@ -45,4 +45,5 @@ if ($op === 'edit_biller' ) {
 
 $smarty -> assign('saved',$saved);
 
-?>
+$smarty -> assign('pageActive', 'biller');
+$smarty -> assign('active_tab', '#people');

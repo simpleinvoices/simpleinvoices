@@ -46,4 +46,5 @@ ORDER BY
 //   include phpreports run code
 	include("./include/reportrunlib.php");
 
-?>
+$smarty -> assign('pageActive', 'report');
+$smarty -> assign('active_tab', '#home');

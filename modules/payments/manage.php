@@ -20,9 +20,7 @@ else {
 //
 $payments = progressPayments($query);
 
-$pageActive = "payments";
-
-$smarty->assign('pageActive', $pageActive);
 $smarty -> assign("payments",$payments);
 
-?>
+$smarty -> assign('pageActive', 'payment');
+$smarty -> assign('active_tab', '#money');

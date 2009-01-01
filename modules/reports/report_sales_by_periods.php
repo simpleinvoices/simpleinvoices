@@ -24,8 +24,12 @@ checkLogin();
 * Get earliest invoice date
 */
 $sql="select min(date) as date from ".TB_PREFIX."invoices";
-$invoice_start = mysqlQuery($sql);
-$invoice_start_array= mysql_fetch_array($invoice_start);
+$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+$invoice_start_array = $sth->fetchAll();
+
+
+//$invoice_start = dbQuery($sql);
+//$invoice_start_array= mysql_fetch_array($invoice_start);
 $first_invoice_year = date('Y', strtotime( $invoice_start_array['date'] ) );
 /*
 * Get total for each month of each year from first invoice
@@ -108,14 +112,11 @@ echo "</pre><br>Total Payments<pre>";
 print_r($total_payments);
 echo "</pre>";
 */
-$pageActive = "reports";
-
-$smarty->assign('pageActive', $pageActive);
 $smarty->assign('total_sales', $total_sales);
 $smarty->assign('total_payments', $total_payments);
 //$years = array(2006,2007,2008);
 $years = array_reverse($years);
 $smarty->assign('years', $years);
 
-
-?>
+$smarty -> assign('pageActive', 'report');
+$smarty -> assign('active_tab', '#home');

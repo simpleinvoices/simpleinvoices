@@ -3,9 +3,6 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$pageActive = "payments";
-$smarty->assign('pageActive', $pageActive);
-
 # Deal with op and add some basic sanity checking
 
 #insert - process payment
@@ -49,4 +46,6 @@ if ( isset($_POST['process_payment']) ) {
 }
 
 $smarty->assign('display_block', $display_block);
-?>
+
+$smarty -> assign('pageActive', 'payment');
+$smarty -> assign('active_tab', '#money');

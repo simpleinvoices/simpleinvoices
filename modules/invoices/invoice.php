@@ -43,8 +43,6 @@ for($i=1;$i<=4;$i++) {
 	$show_custom_field[$i] = show_custom_field("invoice_cf$i",'',"write",'',"details_screen",'','','');
 }
 
-$pageActive == "invoices";
-
 $smarty -> assign("billers",$billers);
 $smarty -> assign("customers",$customers);
 $smarty -> assign("taxes",$taxes);
@@ -55,6 +53,6 @@ $smarty -> assign("show_custom_field",$show_custom_field);
 
 $smarty -> assign("defaultCustomerID",$defaultCustomerID);
 $smarty -> assign("defaults",$defaults);
-$smarty -> assign('pageActive', $pageActive);
 
+$smarty -> assign('active_tab', '#money');
 ?>

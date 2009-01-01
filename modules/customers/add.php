@@ -25,8 +25,7 @@ $customFieldLabel = getCustomFieldLabels();
 if ($_POST['name'] != "" ) {
 	include("./modules/customers/save.php");
 }
-$pageActive = "customers";
-$smarty->assign('pageActive', $pageActive);
 $smarty -> assign('customFieldLabel',$customFieldLabel);
 
-?>
+$smarty -> assign('pageActive', 'customer');
+$smarty -> assign('active_tab', '#people');

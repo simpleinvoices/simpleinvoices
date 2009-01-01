@@ -17,10 +17,8 @@ checkLogin();
 	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$number_of_customers  = $sth->fetch(PDO::FETCH_ASSOC);
 
-$pageActive = "customers";
-
 $smarty -> assign('number_of_customers', $number_of_customers);
-$smarty -> assign('pageActive', $pageActive);
 $smarty -> assign("customers",$customers);
 
-?>
+$smarty -> assign('pageActive', 'customer');
+$smarty -> assign('active_tab', '#people');

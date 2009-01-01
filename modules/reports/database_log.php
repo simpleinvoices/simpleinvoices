@@ -1,6 +1,9 @@
 <?php
 
 	checkLogin();
+
+$smarty -> assign('pageActive', 'report');
+$smarty -> assign('active_tab', '#home');
 	
 	$smarty -> display("../templates/default/menu.tpl");
 	$smarty -> display("../templates/default/main.tpl");

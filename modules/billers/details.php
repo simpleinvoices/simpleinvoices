@@ -43,9 +43,8 @@ $smarty -> assign('enabled', array(
 		);
  */
  
-$pageActive = "billers";
-$smarty->assign('pageActive', $pageActive);
-
 $smarty->assign('files', $files);
 $smarty->assign('customFieldLabel', $customFieldLabel);
-?>
+
+$smarty -> assign('pageActive', 'biller');
+$smarty -> assign('active_tab', '#people');
