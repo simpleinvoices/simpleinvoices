@@ -26,7 +26,19 @@
 		<td class="details_screen">{$LANG.tax} {if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1}{/if} </td>
 	{/section}
 	<td class="details_screen">{$LANG.unit_price}</td>
-	<td><img src="./images/common/page_white_add.png"/></td>
+	<td>
+	<a 
+		href='#' 
+		class="show-notes" 
+		onClick="$('.notes').show();$('.show-notes').hide();"
+	>
+		<img src="./images/common/page_white_add" title="{$LANG.show_details}">
+	</a>
+	<a href='#' class="notes" onClick="$('.notes').hide();$('.show-notes').show();">
+		<img src="./images/common/page_white_delete" title="{$LANG.hide_details}"/>
+	</a> 
+
+</td>
 </tr>
 
 
@@ -66,7 +78,7 @@
 				</td>	
                 </tr>
 					
-				<tr>
+				<tr class="notes">
 						<td colspan=4>
 							<textarea input type=text class="editor" name="description{$smarty.section.line.index}" rows=3 cols=3 WRAP=nowrap></textarea>
 							
