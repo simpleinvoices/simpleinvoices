@@ -25,8 +25,7 @@ checkLogin();
 */
 $sql="select min(date) as date from ".TB_PREFIX."invoices";
 $sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
-$invoice_start_array = $sth->fetchAll();
-
+$invoice_start_array = $sth->fetch();
 
 //$invoice_start = dbQuery($sql);
 //$invoice_start_array= mysql_fetch_array($invoice_start);
@@ -36,12 +35,12 @@ $first_invoice_year = date('Y', strtotime( $invoice_start_array['date'] ) );
 */
 $this_year= date('Y');
 $year = $first_invoice_year ;
-$years[]=$first_invoice_year ;
+//$years[]=$first_invoice_year ;
 /*
 * loop for each year
 */
 while ( $year <= $this_year )
-{
+{	
 	/*
 	* loop for each month
 	*/
@@ -57,8 +56,12 @@ while ( $year <= $this_year )
 		* Sales
 		*/
 		$total_month_sales_sql = "select sum(ii.total) as month_total from ".TB_PREFIX."invoice_items ii, si_invoices i where i.id = ii.invoice_id AND i.date like '$year-$month%'";
-		$total_month_sales = mysqlQuery($total_month_sales_sql);
-		$total_month_sales_array= mysql_fetch_array($total_month_sales);
+		//$total_month_sales = mysqlQuery($total_month_sales_sql);
+		//$total_month_sales_array= mysql_fetch_array($total_month_sales);
+
+		$total_month_sales = dbQuery($total_month_sales_sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+		$total_month_sales_array = $total_month_sales -> fetch();
+
 		$total_sales[$year][$month] = $total_month_sales_array['month_total'];
 		if ($total_sales[$year][$month] == "" ) 
 		{
@@ -69,8 +72,12 @@ while ( $year <= $this_year )
 		* Payment
 		*/
 		$total_month_payments_sql = " select sum(ac_amount) as month_total_payments from ".TB_PREFIX."payment where ac_date like '$year-$month%'";
-		$total_month_payments = mysqlQuery($total_month_payments_sql);
-		$total_month_payments_array= mysql_fetch_array($total_month_payments);
+		//$total_month_payments = mysqlQuery($total_month_payments_sql);
+		//$total_month_payments_array= mysql_fetch_array($total_month_payments);
+
+		$total_month_payments = dbQuery($total_month_payments_sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+		$total_month_payments_array = $total_month_payments -> fetch();
+
 		$total_payments[$year][$month] = $total_month_payments_array['month_total_payments'];
 		if ($total_payments[$year][$month] == "" ) 
 		{
@@ -82,8 +89,12 @@ while ( $year <= $this_year )
 	* Sales
 	*/
 	$total_year_sales_sql = "select sum(ii.total) as year_total from ".TB_PREFIX."invoice_items ii, si_invoices i where i.id = ii.invoice_id AND i.date like '$year%'";
-	$total_year_sales = mysqlQuery($total_year_sales_sql);
-	$total_year_sales_array= mysql_fetch_array($total_year_sales);
+	//$total_year_sales = mysqlQuery($total_year_sales_sql);
+	//$total_year_sales_array= mysql_fetch_array($total_year_sales);
+
+	$total_year_sales = dbQuery($total_year_sales_sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$total_year_sales_array = $total_year_sales -> fetch();
+
 	$total_sales[$year]['Total'] = $total_year_sales_array['year_total'];
 		if ($total_sales[$year]['Total']  == "" ) 
 		{
@@ -94,8 +105,12 @@ while ( $year <= $this_year )
 	* Payment
 	*/
 	$total_year_payments_sql = " select sum(ac_amount) as year_total_payments from ".TB_PREFIX."payment where ac_date like '$year%'";
-	$total_year_payments = mysqlQuery($total_year_payments_sql);
-	$total_year_payments_array= mysql_fetch_array($total_year_payments);
+	//$total_year_payments = mysqlQuery($total_year_payments_sql);
+	//$total_year_payments_array= mysql_fetch_array($total_year_payments);
+
+	$total_year_payments = dbQuery($total_year_payments_sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$total_year_payments_array = $total_year_payments -> fetch();
+
 	$total_payments[$year]['Total'] = $total_year_payments_array['year_total_payments'];
 		if ($total_payments[$year]['Total']  == "" ) 
 		{

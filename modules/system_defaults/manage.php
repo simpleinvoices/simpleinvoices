@@ -3,9 +3,6 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$pageActive = "options";
-$smarty->assign('pageActive', $pageActive);
-
 //gets the long language name out of the short name
 $lang = getDefaultLanguage();
 $languages = getLanguageList();
@@ -27,4 +24,5 @@ $smarty -> assign("defaultDelete", getDefaultDelete());
 $smarty -> assign("defaultLogging", getDefaultLogging());
 $smarty -> assign("defaultLanguage", $lang);
 
-?>
+$smarty -> assign('pageActive', 'system_default');
+$smarty -> assign('active_tab', '#setting');

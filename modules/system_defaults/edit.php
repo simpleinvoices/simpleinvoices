@@ -3,9 +3,6 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$pageActive = "options";
-
-
 #system defaults query
 
 $defaults = getSystemDefaults();
@@ -285,7 +282,6 @@ else {
 	$description = "{$LANG['no_defaults']}";
 }
 
-$pageActive = "options";
 
 /*$smarty->assign('pageActive', $pageActive);
 $smarty->assign('files', $files);
@@ -294,7 +290,6 @@ $smarty->assign('save', $save);
 $smarty->assign('lang', $lang);
 $smarty->assign('billers',$billers);*/
 $smarty->assign('defaults', $defaults);
-$smarty->assign('pageActive', $pageActive);
 $smarty->assign('value',$value);
 $smarty->assign('description',$description);
 $smarty->assign('default',$default);
@@ -313,4 +308,6 @@ function compareNameIndex($a,$b) {
 	}
 	return -1;
 }
-?>
+
+$smarty -> assign('pageActive', 'system_default');
+$smarty -> assign('active_tab', '#setting');

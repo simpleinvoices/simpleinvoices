@@ -5,5 +5,5 @@ checkLogin();
 
 $smarty -> assign("taxes",getTaxes());
 
-$pageActive = "options";
-$smarty -> assign('pageActive', $pageActive)
+$smarty -> assign('pageActive', 'tax_rate');
+$smarty -> assign('active_tab', '#setting');

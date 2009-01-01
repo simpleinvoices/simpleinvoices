@@ -36,5 +36,5 @@ switch ($op) {
 $smarty -> assign('display_block',$display_block); 
 $smarty -> assign('refresh_total',$refresh_total); 
 
-$pageActive = "options";
-$smarty -> assign('pageActive', $pageActive)
+$smarty -> assign('pageActive', 'tax_rate');
+$smarty -> assign('active_tab', '#setting');
