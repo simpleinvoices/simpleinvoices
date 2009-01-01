@@ -1,15 +1,3 @@
-/**
- * WYSIWYG - jQuery plugin 0.4
- *
- * Copyright (c) 2008 Juan M Martinez
- * http://plugins.jquery.com/project/jWYSIWYG
- *
- * Dual licensed under the MIT and GPL licenses:
- *   http://www.opensource.org/licenses/mit-license.php
- *   http://www.gnu.org/licenses/gpl.html
- *
- * $Id: $
- */
 (function( $ )
 {
     $.fn.document = function()
@@ -245,9 +233,9 @@
                     newY = ( element.rows * 16 ) + 16;
 
                 var editor = this.editor = $('<iframe></iframe>').css({
-                    minHeight : ( newY - 6 ).toString() + 'px',
+                   // minHeight : ( newY - 6 ).toString() + 'px',
                     height : ( newY - 6 ).toString() + 'px',
-                    width     : ( newX - 7 ).toString() + 'px'
+                    width     : ( newX - 8 ).toString() + 'px'
                 }).attr('id', $(element).attr('id') + 'IFrame');
 
                 if ( $.browser.msie )

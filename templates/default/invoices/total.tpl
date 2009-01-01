@@ -46,7 +46,7 @@
 	{if $taxes == null }
 	<p><em>{$LANG.no_taxes}</em></p>
 {else}
-	<select name="tax_id">
+	<select name="tax_id[0][0]"">
 	{foreach from=$taxes item=tax}
 		<option {if $tax.tax_id == $defaults.tax} selected {/if} value="{$tax.tax_id}">{$tax.tax_description}</option>
 	{/foreach}

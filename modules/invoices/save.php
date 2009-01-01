@@ -42,11 +42,11 @@ if ($_POST['action'] == "insert" ) {
     * 1 = Total Invoices
     */
 
-	if($type==1 && $saved) {
+	if($type==total_invoice && $saved) {
 		insertProduct(0,0);
 		$product_id = lastInsertId();
 
-		if (insertInvoiceItem($invoice_id,1,$product_id,$_POST['tax_id'],$_POST['description'])) {
+		if (insertInvoiceItem($invoice_id,1,$product_id,1,$_POST['tax_id'][0],$_POST['description'],$_POST['unit_price'])) {
 			//$saved = true;
 		}
 		else {
@@ -55,15 +55,6 @@ if ($_POST['action'] == "insert" ) {
 	}
 	elseif ($saved) {
 		for($i=0;!empty($_POST["quantity$i"]) && $i < $_POST['max_items']; $i++) {
-/*
-			if($type == 4) {
-				insertProductComplete(0,0,$_POST["description$i"],$_POST["price$i"],NULL,NULL,NULL,NULL,$_POST["notes$i"],$_POST["unit_price$i"]);
-				$product = lastInsertId();
-			}
-			else {
-				$product = $_POST["products$i"];
-			}
-*/
 			$product = $_POST["products$i"];
 			if (insertInvoiceItem($invoice_id,$_POST["quantity$i"],$product,$i,$_POST["tax_id"][$i],$_POST["description$i"], $_POST["unit_price$i"] )) {
 	//			insert_invoice_item_tax(lastInsertId(), )
@@ -84,7 +75,7 @@ if ($_POST['action'] == "insert" ) {
 		$saved = true;
 	}
 
-	if($type == 1 && $saved) {
+	if($type == total_invoice && $saved) {
 		$sql = "UPDATE ".TB_PREFIX."products SET unit_price = :price, description = :description WHERE id = :id";
 		dbQuery($sql,
 			':price', $_POST['unit_price'],

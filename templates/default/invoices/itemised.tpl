@@ -26,6 +26,7 @@
 		<td class="details_screen">{$LANG.tax} {if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1}{/if} </td>
 	{/section}
 	<td class="details_screen">{$LANG.unit_price}</td>
+	<td><img src="./images/common/page_white_add.png"/></td>
 </tr>
 
 
@@ -64,7 +65,13 @@
 					<input id="unit_price{$smarty.section.line.index}" name="unit_price{$smarty.section.line.index}" size="7" value=""></input>
 				</td>	
                 </tr>
-
+					
+				<tr>
+						<td colspan=4>
+							<textarea input type=text class="editor" name="description{$smarty.section.line.index}" rows=3 cols=3 WRAP=nowrap></textarea>
+							
+							</td>
+				</tr>
         {/section}
 	{$show_custom_field.1}
 	{$show_custom_field.2}

@@ -1550,7 +1550,7 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 
 	$tax_total = getTaxesPerLineItem($line_item_tax_id,$quantity, $unit_price);
 
-	$logger->log('Invoice: '.$invoice_id.' Tax for line item '.$line_number.': '.$tax_total, Zend_Log::INFO);
+	$logger->log('Invoice: '.$invoice_id.' Tax '.$line_item_tax_id.' for line item '.$line_number.': '.$tax_total, Zend_Log::INFO);
 	$logger->log(' ', Zend_Log::INFO);
 
 	//line item gross total
@@ -1594,9 +1594,9 @@ function getTaxesPerLineItem($line_item_tax_id,$quantity, $unit_price)
 
 	foreach($line_item_tax_id as $key => $value) 
 	{
-		//$logger->log("Key: ".$key." Value: ".$value, Zend_Log::INFO);
+		$logger->log("Key: ".$key." Value: ".$value, Zend_Log::INFO);
 		$tax = getTaxRate($value);
-		//$logger->log('tax rate: '.$tax['tax_percentage'], Zend_Log::INFO);
+		$logger->log('tax rate: '.$tax['tax_percentage'], Zend_Log::INFO);
 
 		$tax_amount = lineItemTaxCalc($tax,$unit_price,$quantity);
 		//get Total tax for line item

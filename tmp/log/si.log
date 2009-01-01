@@ -114,3 +114,35 @@
 2009-01-01T09:45:49+11:00 INFO (6): ITEM :: tax rate: 10.000000
 2009-01-01T09:45:49+11:00 INFO (6): ITEM :: Qty: 1 Unit price: 125.00
 2009-01-01T09:45:49+11:00 INFO (6): ITEM :: Tax rate: 10.000000 Tax type: % Tax $: 12.5
+2009-01-01T21:53:10+11:00 INFO (6): Itemised invoice created
+2009-01-01T21:55:10+11:00 INFO (6): Invoice: 21 Tax for line item 1: 
+2009-01-01T21:55:10+11:00 INFO (6):  
+2009-01-01T21:57:47+11:00 INFO (6): Invoice: 22 Tax for line item 1: 
+2009-01-01T21:57:47+11:00 INFO (6):  
+2009-01-01T22:12:22+11:00 INFO (6): Invoice: 23 Tax for line item 1: 
+2009-01-01T22:12:22+11:00 INFO (6):  
+2009-01-01T22:14:57+11:00 INFO (6): Invoice: 24 Tax for line item 1: 
+2009-01-01T22:14:57+11:00 INFO (6):  
+2009-01-01T22:16:29+11:00 INFO (6): Invoice: 25 Tax 1 for line item 1: 
+2009-01-01T22:16:29+11:00 INFO (6):  
+2009-01-01T22:19:34+11:00 INFO (6): Key: 0 Value: 1
+2009-01-01T22:19:34+11:00 INFO (6): tax rate: 10.000000
+2009-01-01T22:19:34+11:00 INFO (6): Invoice: 26 Tax Array for line item 1: 45.1
+2009-01-01T22:19:34+11:00 INFO (6):  
+2009-01-01T22:19:34+11:00 INFO (6): ITEM :: Key: 0 Value: 1
+2009-01-01T22:19:34+11:00 INFO (6): ITEM :: tax rate: 10.000000
+2009-01-01T22:19:34+11:00 INFO (6): ITEM :: Qty: 1 Unit price: 451
+2009-01-01T22:19:34+11:00 INFO (6): ITEM :: Tax rate: 10.000000 Tax type: % Tax $: 45.1
+2009-01-01T22:25:34+11:00 INFO (6): Itemised invoice created
+2009-01-01T22:27:53+11:00 INFO (6): Itemised invoice created
+2009-01-01T22:31:21+11:00 INFO (6): Itemised invoice created
+2009-01-01T22:33:34+11:00 INFO (6): Itemised invoice created
+2009-01-01T22:33:55+11:00 INFO (6): Itemised invoice created
+2009-01-01T22:34:35+11:00 INFO (6): Itemised invoice created
+2009-01-01T22:37:11+11:00 INFO (6): Itemised invoice created
+2009-01-01T22:37:36+11:00 INFO (6): Itemised invoice created
+2009-01-01T22:38:27+11:00 INFO (6): Itemised invoice created
+2009-01-01T22:39:37+11:00 INFO (6): Itemised invoice created
+2009-01-01T22:40:26+11:00 INFO (6): Itemised invoice created
+2009-01-01T22:40:56+11:00 INFO (6): Itemised invoice created
+2009-01-01T22:53:33+11:00 INFO (6): Itemised invoice created
