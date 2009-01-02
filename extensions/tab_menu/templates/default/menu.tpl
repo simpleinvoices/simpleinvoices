@@ -28,7 +28,8 @@
             <div id="money">
 				<ul class="subnav">
 					<li><a { if $pageActive == "invoice"} class="active" {/if} href="index.php?module=invoices&view=manage">{$LANG.invoices}</a></li>
-					<li><a { if $pageActive == "invoice_new"} class="active" {/if} id="invoice_dialog" href="#">New invoice</a></li> {*LANG TODO*}
+					{* dialog style *} <li><a { if $pageActive == "invoice_new"} class="active" {/if} id="invoice_dialog" href="#">New invoice</a></li> {*LANG TODO*}
+					<li><a { if $pageActive == "invoice_new"} class="active" {/if} id="invoice_dialogx" href="index.php?module=invoices&view=manage">New invoice</a></li> {*LANG TODO*}
 					<li><a { if $pageActive == "payment"} class="active" {/if} href="index.php?module=payments&view=manage">{$LANG.payments}</a></li>
 					<li><a { if $pageActive == "report_sale"} class="active" {/if} href="index.php?module=reports&view=report_sales_total">Sales Report {*$LANG TODO*}</a></li>
 				</ul>
