@@ -20,12 +20,13 @@ Next Release :: Beta 2
 	- merge itemised and consulting invoice styles - JK
 	- multiple taxes (% and $ based) per line item - JK
 	-- updates Taxes - add % or $ option - JK
+	- domain_id into custom_fields tables - needs to be completed - JK
+
+	## might move the below to beta 3 (or a 2.5 :) ) ##
 	- mini installer - someone
 	-- create a mini installer and use Zend_config_writer to write to config.ini
 	-- just ask for db details and if you want demo data installer
 	-- just the basics - do rest later
-
-	- add domain_id into custom_fields tables - TODO
 	- add domain_id into system_defaults table - flatten this table - old style - TODO
 
 ##############################
