@@ -19,6 +19,15 @@ BETA 2
 	- Fix problem with selecting language
 	- Documentation - need to updat to change permmissions of config/config.ini to 640
 	
+	- set domain_id in session - Done
+	- change Unit Price to Unit Cost - change gross to Price - Done
+	- si_account_payments: change all refer to si_payment - done
+	- si_payment: add domain_id into all queries - done
+	- si_tax: add domain_id into all queries - done
+	- si_user: change all refer to si_user - done
+	- domain_id sql patches - write an update table set domain_id = 1 for all tables - done
+ 	- Consulting style - if desciptoin null then don;t show Description heading thing on the invoice- JK
+
 --------
 BETA 1
 --------

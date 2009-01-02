@@ -3,27 +3,35 @@ Simple Invoices todo list
 Disclaimer: if its in the list it may get done sometime in the future if and when someone feels like it
 *************
 ##############################
-Next Release :: TODO
+Next Release :: Beta 3 
+##############################
+	- database backup - export as XML - Hannes
+	- change config.ini back to config.php - but keep ini format and add ;<?php on line 1 and ; exit; on line 2 - this is for sercurity reasons
+	-- maybe got to think about this and see if new installer can do it
+	- make search in Manage pages work good for all pages
+	- mini installer complete
+	-- add checks for php.ini settings, writeable folders etc.. and make pretty
+
+##############################
+Next Release :: Beta 2 
 ##############################
 
-- change config.ini back to config.php - but keep ini format and add ;<?php on line 1 and ; exit; on line 2 - this is for sercurity reasons
-- set domain_id in session - Done
-- change Unit Price to Unit Cost - change gross to Price - Done
--- need to edit the export template - TODO
+	- new UI to be finished - JK
+	- merge itemised and consulting invoice styles - JK
+	- multiple taxes (% and $ based) per line item - JK
+	-- updates Taxes - add % or $ option - JK
+	- mini installer - someone
+	-- create a mini installer and use Zend_config_writer to write to config.ini
+	-- just ask for db details and if you want demo data installer
+	-- just the basics - do rest later
 
-- si_account_payments: change all refer to si_payment - done
-- si_payment: add domain_id into all queries - done
+	- add domain_id into custom_fields tables - TODO
+	- add domain_id into system_defaults table - flatten this table - old style - TODO
 
-- si_tax: add domain_id into all queries - done
-- si_user: change all refer to si_user - done
-- domain_id sql patches - write an update table set domain_id = 1 for all tables - done
-- add domain_id into custom_fields tables - TODO
-- add domain_id into system_defaults table - flatten this table - old style - TODO
-
- - Consulting style - if desciptoin null then don;t show Description heading thing on the invoice- JK
-
- - manage pages redevelopment!! - JK - done
-
+##############################
+Sometime soon
+##############################
+### maybe some work(or thoughts/planning) has been done but needs to be complete ###
  - Simple Invoices Errors - make a function and make look all pretty (ie cache read only, no PDO, no PHP5.2, can't connect to Db etc..) - AP
  - Address fields in invoice templates - include comma after add 1 or 2 if other address field not null
  - users/groups/domains - make this happen!
@@ -48,11 +56,14 @@ Next Release :: TODO
  - index.php review input if is safe enought
  - Quick view - Note section: show the first 25 characters then follow with ... in the Hide View and full note in Show View
 
-###############################
-Next Release + 1 (NR+1) :: TODO
-###############################
+### Below here are mainly ideas we should look at but nothing(or little) has been done ###
+
+############################################
+SOMETIME IN THE NOT TOO DISTANT FUTURE TODOs
+############################################
+
  - blow up phpreports and implement our own reporting tools
- - reports : add export to .xls format NR+1 - AP
+ - reports : add export to .xls format 
  - docs.php: merge docs.php into the normal system
  - choose automatic language (need to rename language files/subfolder). We should use this standards (first we can start with only 2 chars variant)
  -- http://www.rfc-editor.org/rfc/rfc4646.txt
@@ -60,6 +71,7 @@ Next Release + 1 (NR+1) :: TODO
  --- sounds good - aim for NR+1
  ---- use in the installer and i'll think about it for the login page when/if i add a lang drop down box there
  - Localise - look into Zend Locale or similar to handle localising all the formatting of dates, currency etc.
+
 ##############################
 SOMETIME IN THE FUTURE TODOs
 ##############################
