@@ -168,10 +168,10 @@ function export_invoice(row_number,spreadsheet,wordprocessor){
           onclick: "$(this).dialog('destroy')"
         });
 	 $(".export_doc").attr({ 
-		  href: "index.php?module=invoices&view=templates/template&invoice="+row_number+"&action=view&location=print&export="+spreadsheet
+		  href: "index.php?module=invoices&view=templates/template&invoice="+row_number+"&action=view&location=print&export="+wordprocessor
         });	 
       $(".export_xls").attr({ 
-          href: "index.php?module=invoices&view=templates/template&invoice="+row_number+"&action=view&location=print&export="+wordprocessor,
+          href: "index.php?module=invoices&view=templates/template&invoice="+row_number+"&action=view&location=print&export="+spreadsheet,
           onclick: "$().dialog('destroy')"
         });							
 	 $("#export_dialog").dialog({ 

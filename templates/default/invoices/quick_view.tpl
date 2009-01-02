@@ -230,17 +230,18 @@
 		<td colspan="6">
 		<table width="100%"> 
 	
-	{if $invoice.type_id == 2 || $invoice.type_id == 4}
+	{if $invoice.type_id == 2 }
 
             <tr>
                     <td colspan="6" class="details_screen align_right"><a href='#' class="show-itemised" onClick="$('.itemised').show();$('.show-itemised').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a><a href='#' class="itemised" onClick="$('.itemised').hide();$('.show-itemised').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a></td>
             </tr>
 			<tr>
         		    <td><b>{$LANG.quantity_short}</b></td>
-					<td colspan="2"><b>{$LANG.description}</b></td>
+					<td colspan="2"><b>{$LANG.item}</b></td>
 					<td style="text-align:right"><b>{$LANG.Unit_Cost}</b></td>
 					<td style="text-align:right"><b>{$LANG.Price}</b></td>
 		    </tr>
+		    
 	{/if}
 
 
@@ -260,7 +261,7 @@
 
 {foreach from=$invoiceItems item=invoiceItem }
 			
-		{if $invoice.type_id == 2 || $invoice.type_id == 4}
+		{if $invoice.type_id == 2 }
 	
 			<tr>
 	                <td>{$invoiceItem.quantity|siLocal_number_trim}</td>
@@ -268,6 +269,20 @@
 					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.unit_price|siLocal_number}</td>
 					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|siLocal_number}</td>
 	        </tr>
+	        
+	        {if $invoiceItem.description != null}
+				<tr class='show-itemised' >
+					<td>
+					</td>	
+					<td colspan="5" class=''>
+						{$LANG.description}: {$invoiceItem.description|truncate:15:"...":true}
+					</td>
+				</tr>
+				<tr class='itemised' >	
+					<td colspan="6" class='details_screen'>
+						{$LANG.description}: {$invoiceItem.description}</td>
+				</tr>
+			{/if}
 	        
 
 			<tr class='itemised'>       
@@ -318,14 +333,7 @@
 	<!--		<td></td><td colspan=6 class='details_screen consulting'>{$prod_custom_field_label1}: {$product.custom_field1}, {$prod_custom_field_label2}: {$product.custom_field2}, {$prod_custom_field_label3}: {$product.custom_field3}, {$prod_custom_field_label4}: {$product.custom_field4}</td> -->
 			</tr>
 		 
-		{if $invoiceItem.description != null}
-			<tr class='show-consulting' >	
-				<td colspan="6" class='details_screen consulting'>{$invoiceItem.description|truncate:"..."}</td>
-			</tr>
-			<tr class='consulting' >	
-				<td colspan="6" class='details_screen consulting'>{$LANG.description}:<br>{$invoiceItem.description}</td>
-			</tr>
-		{/if}
+
 	{/if}
 
 {/foreach}
@@ -340,8 +348,10 @@
 				<td colspan="6">&nbsp;</td>
 		</tr>
 		<tr class="details_screen">
-				<td colspan="5"><b>{$LANG.notes}:</b></td>
-				<td class="details_screen align_right"><a href='#' class="show-notes" onClick="$('.notes').show();$('.show-notes').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a><a href='#' class="notes" onClick="$('.notes').hide();$('.show-notes').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a></td>
+			<td colspan="5"><b>{$LANG.notes}:</b></td>
+				{if ($invoice.note|count_characters:true > 25)}
+					<td class="details_screen align_right"><a href='#' class="show-notes" onClick="$('.notes').show();$('.show-notes').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a><a href='#' class="notes" onClick="$('.notes').hide();$('.show-notes').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a></td>
+				{/if}						
 		</tr>
 			<!-- if hide detail click - the stripped note will be displayed -->
 		<tr class='show-notes details_screen'>
@@ -357,25 +367,31 @@
 		<td colspan="6"><br></td>
 	</tr>	
 
-    <tr class='details_screen'>
-        <td colspan="3"></td>
-		<td colspan="2" class="align_right">{$LANG.tax_total}</td>
-		<td colspan="2" class="align_right">{$preference.pref_currency_sign}{$invoice.total_tax|siLocal_number}</td>
-    </tr>
+
     {section name=line start=0 loop=$invoice.tax_grouped step=1}
+    
+    	{if ($invoice.tax_grouped[line].tax_amount == "0") } {php}break;{/php} {/if}
+    	
     	<tr class='details_screen'>
 	        <td colspan="3"></td>
 			<td colspan="2" class="align_right">{$invoice.tax_grouped[line].tax_name}</td>
-			<td colspan="2" class="align_right">{$invoice.tax_grouped[line].tax_amount|siLocal_number}</td>
+			<td colspan="1" class="align_right">{$preference.pref_currency_sign}{$invoice.tax_grouped[line].tax_amount|siLocal_number}</td>
 	    </tr>
+	    
 	{/section}
+	
+	<tr class='details_screen'>
+        <td colspan="3"></td>
+		<td colspan="2" class="align_right">{$LANG.tax_total}</td>
+		<td colspan="1" class="align_right"><u>{$preference.pref_currency_sign}{$invoice.total_tax|siLocal_number}</u></td>
+    </tr>
 	<tr>
 		<td colspan="6"><br></td>
 	</tr>
     <tr class='details_screen'>
         <td colspan="3"></td>
 		<td colspan="2" class="align_right"><b>{$preference.pref_inv_wording} {$LANG.amount}</b></td>
-		<td colspan="2" class="align_right"><u>{$preference.pref_currency_sign}{$invoice.total|siLocal_number}</u></td>
+		<td colspan="2" class="align_right"><span class="double_underline">{$preference.pref_currency_sign}{$invoice.total|siLocal_number}</span></td>
     </tr>
 {*
 	<tr>

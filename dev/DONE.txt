@@ -1,6 +1,7 @@
 --------
 BETA 2
 --------
+	- Zend Framework upgraded to version 1.7.2
 	- monthly sales/payments per year report fixed not to repeat first year
 	- quick view cleanup
 	- cache move to tmp/cache

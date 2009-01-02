@@ -16,4 +16,11 @@ color:#4B7296;
 .footer
 {
 	font-size: 11px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.double_underline
+{
+	border-bottom: 3px double #555;
 }

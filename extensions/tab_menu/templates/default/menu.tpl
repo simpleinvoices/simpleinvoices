@@ -21,41 +21,40 @@
             </ul>
             <div id="home">
 				<ul class="subnav">
-					<li><a { if $pageActive == "dashboard"} id="active" {/if} href="index.php">Dashboard</a></li>
-					<li><a { if $pageActive == "report"} id="active" {/if} href="index.php?module=reports&view=index">All reports</a></li>
+					<li><a { if $pageActive == "dashboard"} class="active" {/if} href="index.php">Dashboard</a></li>
+					<li><a { if $pageActive == "report"} class="active" {/if} href="index.php?module=reports&view=index">All reports</a></li>
 				</ul>
             </div>
             <div id="money">
 				<ul class="subnav">
-					<li><a { if $pageActive == "invoice"} id="active" {/if} href="index.php?module=invoices&view=manage">{$LANG.invoices}</a></li>
-					<li><a { if $pageActive == "invoice_new"} id="active" {/if} id="invoice_dialog" href="#">New invoice</a></li> {*LANG TODO*}
-					<li><a { if $pageActive == "payment"} id="active" {/if} id="invoice_export_dialog"  href="index.php?module=payments&view=manage">{$LANG.payments}</a></li>
-					<li><a { if $pageActive == "report_sale"} id="active" {/if} href="index.php?module=reports&view=report_sales_total">Sales Report {*$LANG TODO*}</a></li>
+					<li><a { if $pageActive == "invoice"} class="active" {/if} href="index.php?module=invoices&view=manage">{$LANG.invoices}</a></li>
+					<li><a { if $pageActive == "invoice_new"} class="active" {/if} id="invoice_dialog" href="#">New invoice</a></li> {*LANG TODO*}
+					<li><a { if $pageActive == "payment"} class="active" {/if} href="index.php?module=payments&view=manage">{$LANG.payments}</a></li>
+					<li><a { if $pageActive == "report_sale"} class="active" {/if} href="index.php?module=reports&view=report_sales_total">Sales Report {*$LANG TODO*}</a></li>
 				</ul>
             </div>
             <div id="people">
 				<ul class="subnav">
-					<li><a { if $pageActive == "customer"} id="active"{/if} href="index.php?module=customers&view=manage">{$LANG.customers}</a></li>
-					<li><a { if $pageActive == "biller"} id="active" {/if} href="index.php?module=customers&view=manage">{$LANG.billers}</a></li>
-					<li><a { if $pageActive == "user"} id="active" {/if} href="index.php?module=customers&view=add">Users {* $LANG TODO *}</a></li>
+					<li><a { if $pageActive == "customer"} class="active"{/if} href="index.php?module=customers&view=manage">{$LANG.customers}</a></li>
+					<li><a { if $pageActive == "biller"} class="active" {/if} href="index.php?module=customers&view=manage">{$LANG.billers}</a></li>
+					<li><a { if $pageActive == "user"} class="active" {/if} href="index.php?module=customers&view=add">Users {* $LANG TODO *}</a></li>
 				</ul>
 			</div>
            <div id="product">
                 <ul class="subnav">
-					<li><a { if $pageActive == "product_manage"} id="active"{/if} href="index.php?module=products&view=manage">{$LANG.manage_products}</a></li>
-					<li><a { if $pageActive == "product_add"} id="active"{/if} href="index.php?module=products&view=add">{$LANG.add_product}</a></li>
+					<li><a { if $pageActive == "product_manage"} class="active"{/if} href="index.php?module=products&view=manage">{$LANG.manage_products}</a></li>
+					<li><a { if $pageActive == "product_add"} class="active"{/if} href="index.php?module=products&view=add">{$LANG.add_product}</a></li>
 				</ul>
             </div>
            <div style="float: right; " id="setting">
                 <ul class="subnav">
-					<li><a { if $pageActive == "setting"} id="active"{/if} href="index.php?module=options&view=index">All settings {* LANG TODO *}</a></li>
-					<li><a { if $pageActive == "system_default"} id="active"{/if} href="index.php?module=system_defaults&view=manage">{$LANG.system_preferences}</a></li>
-					<li><a { if $pageActive == "custom_field"} id="active"{/if} href="index.php?module=custom_fields&view=manage">{$LANG.custom_fields_upper}</a></li>
-					<li><a { if $pageActive == "tax_rate"} id="active"{/if} href="index.php?module=tax_rates&view=manage">{$LANG.tax_rates}</a></li>
-					<li><a { if $pageActive == "preference"} id="active"{/if} href="index.php?module=preferences&view=manage">{$LANG.invoice_preferences}</a></li>
-					<li><a { if $pageActive == "payment_type"} id="active"{/if} href="index.php?module=payment_types&view=manage">{$LANG.payment_types}</a></li>
-					<li><a { if $pageActive == "backup"} id="active"{/if} href="index.php?module=options&view=backup_database">{$LANG.backup_database}</a></li>
-					<li><a { if $pageActive == "sqlpatch"} id="active"{/if} href="index.php?module=options&view=manage_sqlpatches">{$LANG.database_upgrade_manager}</a></li>
+					<li><a { if $pageActive == "setting"} class="active"{/if} href="index.php?module=options&view=index">All settings {* LANG TODO *}</a></li>
+					<li><a { if $pageActive == "system_default"} class="active"{/if} href="index.php?module=system_defaults&view=manage">{$LANG.system_preferences}</a></li>
+					<li><a { if $pageActive == "custom_field"} class="active"{/if} href="index.php?module=custom_fields&view=manage">{$LANG.custom_fields_upper}</a></li>
+					<li><a { if $pageActive == "tax_rate"} class="active"{/if} href="index.php?module=tax_rates&view=manage">{$LANG.tax_rates}</a></li>
+					<li><a { if $pageActive == "preference"} class="active"{/if} href="index.php?module=preferences&view=manage">{$LANG.invoice_preferences}</a></li>
+					<li><a { if $pageActive == "payment_type"} class="active"{/if} href="index.php?module=payment_types&view=manage">{$LANG.payment_types}</a></li>
+					<li><a { if $pageActive == "backup"} class="active"{/if} href="index.php?module=options&view=backup_database">{$LANG.backup_database}</a></li>
 				</ul>
             </div>
         </div>
@@ -69,18 +68,53 @@
 	<a href="index.php?module=invoices&view=consulting"> Consulting style</a>
 </div>
 
-<div id="export_dialog" class="flora" title="EXPORTlect Invoice type">
+<div id="export_dialog" class="flora" title="Export">
 
-		<!--3 EXPORT TO PDF --><a title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_pdf_tooltip']."' class='export_pdf' href=''><img src='images/common/page_white_acrobat.png' height='16' padding='-4px' border='-5px' valign='bottom' /><!-- pdf --></a>
-		<!--4 XLS --><a title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_xls_tooltip'].$spreadsheet." ".$LANG['format_tooltip']."' class='export_xls' href='index.php?module=invoices&view=templates/template&invoice='".$row['id']."&action=view&location=print&export=".$spreadsheet."'><img src='images/common/page_white_excel.png' height='16' border='0' padding='-4px' valign='bottom' /><!-- $spreadsheet --></a>
-	<!--4 XLS --><a title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_xls_tooltip'].$spreadsheet." ".$LANG['format_tooltip']."' class='export_doc' href='index.php?module=invoices&view=templates/template&invoice='".$row['id']."&action=view&location=print&export=".$spreadsheet."'><img src='images/common/page_white_excel.png' height='16' border='0' padding='-4px' valign='bottom' /><!-- $spreadsheet --></a>
+<table class="buttons" >
+    <tr>
+        <td>
 
-
-	<a href="index.php?module=invoices&view=total"> Total style</a>
-	<br>
-	<a href="index.php?module=invoices&view=itemised"> Itemised style</a>
-	<br>
-	<a href="index.php?module=invoices&view=consulting"> Consulting style</a>
+            <a
+            	title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_pdf_tooltip']."' 
+            	class='export_pdf' 
+            	href=''
+            >
+                <img src="./images/common/page_white_acrobat.png" alt=""/>
+                Export as PDF {* LANG TODO*}
+            </a>
+          </td>
+    </tr>
+    <tr>
+    	<td>  
+            
+            <a 
+             	title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_xls_tooltip'].$spreadsheet." ".$LANG['format_tooltip']."' 
+             	class='export_xls'
+             	href=''
+           >
+                <img src="./images/common/page_white_excel.png" alt=""/>
+                 Export as .XLS {* LANG TODO*}
+            </a>
+            </td>
+    </tr>
+    <tr>
+    	<td>    
+    
+           <a 
+           		title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_xls_tooltip'].$spreadsheet." ".$LANG['format_tooltip']."' 
+           		class='export_doc' 
+           		href=''         
+           >
+                <img src="./images/common/page_white_word.png" alt=""/>
+                 Export as .DOC {* LANG TODO*}
+            </a>
+        </td>
+    </tr>
+</table>
+<br>
+	
+	
+	
 </div>
 
 

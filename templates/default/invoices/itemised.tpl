@@ -21,7 +21,7 @@
 
 <tr>
 	<td class="details_screen">{$LANG.quantity}</td>
-	<td class="details_screen">{$LANG.description}</td>
+	<td class="details_screen">{$LANG.item}</td>
 	{section name=tax_header loop=$defaults.tax_per_line_item }
 		<td class="details_screen">{$LANG.tax} {if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1}{/if} </td>
 	{/section}

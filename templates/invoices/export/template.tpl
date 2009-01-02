@@ -294,6 +294,19 @@
 	
 
 
+    {section name=line start=0 loop=$invoice.tax_grouped step=1}
+    
+    	{if ($invoice.tax_grouped[line].tax_amount == "0") } {php}break;{/php} {/if}
+    	
+    	<tr class='details_screen'>
+	        <td colspan="2"></td>
+			<td colspan="3" align="right">{$invoice.tax_grouped[line].tax_name}</td>
+			<td colspan="1" align="right">{$preference.pref_currency_sign}{$invoice.tax_grouped[line].tax_amount|siLocal_number}</td>
+	    </tr>
+	    
+	{/section}
+
+
 	<tr >
 		<td colspan="3"></td>
 		<td align="right" colspan="2">{$LANG.tax_total}</td>

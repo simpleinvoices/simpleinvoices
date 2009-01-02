@@ -110,11 +110,12 @@ color:#555555;
 .ui-tabs-panel {
 /*    padding: 10px;*/
 
-background:#fff;
-border-bottom:1px solid #fff;
-border-top:1px solid #fff;
-clear:both;
-color: #D54E21;
+	/*background:#fff;
+	border-bottom:1px solid #fff;
+	border-top:1px solid #fff;
+	*/
+	clear:both;
+	color: #D54E21;
 
 /*    background: #fff;*/ /* declare background color for container to avoid distorted fonts in IE while fading */
 }
@@ -131,20 +132,22 @@ color: #D54E21;
     display: inline-block;
 }
 
-#active
+.active
 {
-/*	background:#fff url(../../../../../images/common/bullet_arrow_up.png) no-repeat bottom;*/
-/*	padding-bottom:5px;*/
-	color:#fff;
+	/*	background:#fff url(../../../../../images/common/bullet_arrow_up.png) no-repeat bottom;*/
+	/*	padding-bottom:5px;*/
 	font-weight:bold;
-
--moz-border-radius-bottomleft:9px;
--moz-border-radius-bottomright:9px;
--moz-border-radius-topleft:9px;
--moz-border-radius-topright:9px;
-background-color:#21759B;
-background-color:#D54E21;
-margin-bottom:10px;
-margin-top:10px;
-padding:7px;
+	
+	-moz-border-radius:9px;
+	-webkit-border-radius:9px;
+	
+	background-color:#21759B;
+	background-color:#D54E21;
+	margin-bottom:10px;
+	margin-top:10px;
+	padding:7px;
+}
+a.active
+{
+	color:#fff;
 }

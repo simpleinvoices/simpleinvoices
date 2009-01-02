@@ -202,7 +202,7 @@
 	{if $invoice.type_id == 2 }
 					<tr>
 				<td class="tbl1-bottom col1"><b>{$LANG.quantity_short}</b></td>
-				<td class="tbl1-bottom col1" colspan="3"><b>{$LANG.description}</b></td>
+				<td class="tbl1-bottom col1" colspan="3"><b>{$LANG.item}</b></td>
 				<td class="tbl1-bottom col1" align="right"><b>{$LANG.Unit_Cost}</b></td>
 				<td class="tbl1-bottom col1" align="right"><b>{$LANG.Price}</b></td>
 			</tr>
@@ -210,12 +210,19 @@
 				{foreach from=$invoiceItems item=invoiceItem}
 
 			<tr class="" >
-				<td class="tbl1-bottom">{$invoiceItem.quantity|siLocal_number_trim}</td>
-				<td class="tbl1-bottom" colspan="3">{$invoiceItem.product.description}</td>
-				<td class="tbl1-bottom" align="right">{$preference.pref_currency_sign}{$invoiceItem.unit_price|siLocal_number}</td>
-				<td class="tbl1-bottom" align="right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|siLocal_number}</td>
+				<td class="">{$invoiceItem.quantity|siLocal_number_trim}</td>
+				<td class="" colspan="3">{$invoiceItem.product.description}</td>
+				<td class="" align="right">{$preference.pref_currency_sign}{$invoiceItem.unit_price|siLocal_number}</td>
+				<td class="" align="right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|siLocal_number}</td>
 			</tr>
-            <tr>
+			{if $invoiceItem.description != null}
+			<tr class="">
+				<td class=""></td>
+				<td class="" colspan="5">{$LANG.description}: {$invoiceItem.description}</td>
+			</tr>
+			{/if}
+			
+            <tr class="tbl1-bottom">
                 <td class=""></td>
 				<td class="" colspan="5">
 					<table width="100%">
@@ -253,6 +260,7 @@
 				<td class="" colspan="4"></td>
 			</tr>
 			
+						
             <tr>       
                 <td class=""></td>
 				<td class="" colspan="5">
@@ -324,29 +332,42 @@
 	<tr class="">
 		<td class="" colspan="6" ><br></td>
 	</tr>
+
+	{if $invoice.type_id == 1} <!-- Only Type 1 is a single entry - hence last row gross is valid as gross_total - see Invoice 2 in sample data-->
+		<tr>
+			<td class="" colspan="2"></td>
+			<td align="right" colspan="3">{$LANG.gross_total}</td>
+			<td align="right" class="">{$preference.pref_currency_sign}{$invoiceItems.0.gross_total|siLocal_number}</td>
+		</tr>
+	{/if}
 	
-	<tr>
-		<td class="" colspan="2"></td>
-		<td align="right" colspan="3">{$LANG.gross_total}</td>
-{php}   global $invoice; $this->assign('invoice_gross_total', $invoice[total] - $invoice[total_tax]); {/php}
-{if $invoice.type_id == 1} <!-- Only Type 1 is a single entry - hence last row gross is valid as gross_total - see Invoice 2 in sample data-->
-		<td align="right" class="">{$preference.pref_currency_sign}{$invoiceItems.0.gross_total|siLocal_number}</td>
-{else}
-		<td align="right" class="">{$preference.pref_currency_sign}{$invoice_gross_total|siLocal_number}</td>
-{/if}
-	</tr>	
-	<tr class="">
-		<td class="" colspan="2"></td>
-		<td align="right" colspan="3">{$LANG.tax_total}</td>
-		<td align="right" class="" >{$preference.pref_currency_sign}{$invoice.total_tax|siLocal_number}</td>
-	</tr>
+	
+    {section name=line start=0 loop=$invoice.tax_grouped step=1}
+
+		{if ($invoice.tax_grouped[line].tax_amount == "0") } {php}break;{/php} {/if}
+		
+		<tr class=''>
+	        <td colspan="2"></td>
+			<td colspan="3" align="right">{$invoice.tax_grouped[line].tax_name}</td>
+			<td colspan="1" align="right">{$preference.pref_currency_sign}{$invoice.tax_grouped[line].tax_amount|siLocal_number}</td>
+	    </tr>
+	    
+	{/section}
+	
+	<tr class=''>
+        <td colspan="2"></td>
+		<td colspan="3" align="right">{$LANG.tax_total}</td>
+		<td colspan="1" align="right"><u>{$preference.pref_currency_sign}{$invoice.total_tax|siLocal_number}</u></td>
+    </tr>
+	
+	
 	<tr class="">
 		<td class="" colspan="6" ><br></td>
 	</tr>
 	<tr class="">
 		<td class="" colspan="2"></td>
 		<td class="" align="right" colspan="3"><b>{$preference.pref_inv_wording} {$LANG.amount}</b></td>
-		<td  class="" align="right"><u>{$preference.pref_currency_sign}{$invoice.total|siLocal_number}</u></td>
+		<td  class="" align="right"><span class="double_underline" >{$preference.pref_currency_sign}{$invoice.total|siLocal_number}</span></td>
 	</tr>
 	<tr>
 		<td colspan="6"><br /><br /></td>

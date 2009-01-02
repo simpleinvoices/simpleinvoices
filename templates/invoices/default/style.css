@@ -31,3 +31,8 @@ tr {margin: 0px;      padding: 0px;}
 .right {
  float: right;
 }
+
+.double_underline
+{
+	border-bottom: 3px double #555;
+}

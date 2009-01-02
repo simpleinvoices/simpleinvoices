@@ -492,6 +492,9 @@ table.buttons{
 	border-collapse:none;
 }
 .buttons a, .buttons button{
+	
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
     display:block;
     float:left;
     margin:0 7px 0 0;
