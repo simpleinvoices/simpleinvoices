@@ -2030,7 +2030,7 @@ function urlPDF($invoiceID) {
 	$url = getURL();
 //	html2ps does not like &amp; and htmlcharacters encoding - latter useless since InvoiceID comes from an integer field	
 //	$script = "/index.php?module=invoices&amp;view=templates/template&amp;invoice=".htmlspecialchars($invoiceID)."&amp;action=view&amp;location=pdf";
-	$script = "/index.php?module=invoices&view=templates/template&invoice=$invoiceID&action=view&location=pdf";
+	$script = "/index.php?module=invoices&view=template&id=$invoiceID&action=view&location=pdf";
 
 	$full_url=$url.$script;
 	

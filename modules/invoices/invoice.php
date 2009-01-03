@@ -55,4 +55,5 @@ $smarty -> assign("defaultCustomerID",$defaultCustomerID);
 $smarty -> assign("defaults",$defaults);
 
 $smarty -> assign('active_tab', '#money');
+
 ?>

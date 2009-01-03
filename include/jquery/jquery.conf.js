@@ -63,16 +63,6 @@ function init(){
 		);
 	}
 
-	/*hide the text for the export dialog on the manage invoices page*/
-	$("#export_dialog").hide();
-
-	$('.show-summary').hide();
-	$('.biller').hide();
-	$('.customer').hide();
-	$('.consulting').hide();
-	$('.itemised').hide();
-	$('.notes').hide();
-
 
 	$('.editor').wysiwyg({
     controls : {
@@ -101,6 +91,16 @@ function init(){
         insertUnorderedList : { visible : true }
     }
 	});
+
+	/*hide the text for the export dialog on the manage invoices page*/
+	$("#export_dialog").hide();
+
+	$('.show-summary').hide();
+	$('.biller').hide();
+	$('.customer').hide();
+	$('.consulting').hide();
+	$('.itemised').hide();
+	$('.notes').hide();
 
 }
 

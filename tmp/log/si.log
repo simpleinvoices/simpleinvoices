@@ -52,3 +52,18 @@
 2009-01-03T18:51:20+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=templates/template&invoice=28&action=view&location=pdf
 2009-01-03T18:51:20+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplates%2Ftemplate%26invoice%3D28%26action%3Dview%26location%3Dpdf
 2009-01-03T19:00:26+11:00 INFO (6): Itemised invoice created
+2009-01-03T19:00:56+11:00 INFO (6): Itemised invoice created
+2009-01-03T19:01:32+11:00 INFO (6): Itemised invoice created
+2009-01-03T19:03:48+11:00 INFO (6): Itemised invoice created
+2009-01-03T19:05:12+11:00 INFO (6): Itemised invoice created
+2009-01-03T19:06:36+11:00 INFO (6): Itemised invoice created
+2009-01-03T19:07:51+11:00 INFO (6): Itemised invoice created
+2009-01-03T21:26:25+11:00 INFO (6): Itemised invoice created
+2009-01-03T21:29:22+11:00 INFO (6): Itemised invoice created
+2009-01-03T21:30:50+11:00 INFO (6): Itemised invoice created
+2009-01-03T21:38:28+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=templates/template&invoice=28&action=view&location=pdf
+2009-01-03T21:38:28+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplates%2Ftemplate%26invoice%3D28%26action%3Dview%26location%3Dpdf
+2009-01-03T21:39:29+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=templates/template&invoice=28&action=view&location=pdf
+2009-01-03T21:39:29+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplates%2Ftemplate%26invoice%3D28%26action%3Dview%26location%3Dpdf
+2009-01-03T21:40:56+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=28&action=view&location=pdf
+2009-01-03T21:40:56+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D28%26action%3Dview%26location%3Dpdf
