@@ -164,8 +164,8 @@ function export_invoice(row_number,spreadsheet,wordprocessor){
 
 	 $("#export_dialog").show();
 	 $(".export_pdf").attr({ 
-          href: "pdfmaker.php?id="+row_number,
-          onclick: "$(this).dialog('destroy')"
+          href: "index.php>module-invoices&view=pdf&id="+row_number,
+          onClick: "$(this).dialog('destroy')"
         });
 	 $(".export_doc").attr({ 
 		  href: "index.php?module=invoices&view=templates/template&invoice="+row_number+"&action=view&location=print&export="+wordprocessor

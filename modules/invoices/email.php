@@ -28,7 +28,7 @@ $invoiceType = $sth->fetch();
 	$pathparts = pathinfo($_SERVER["SCRIPT_NAME"]);
 	///echo $url_for_pdf = "http://".$_SERVER["SERVER_NAME"].$pathparts['dirname']."/pdfmaker.php?id=$invoice[id]";
 	 $url = getURL();
-	$url_for_pdf = $url."./pdfmaker.php?id=$invoice[id]";
+	 $url_for_pdf = $url."./index.php?module=export&view=pdf&id=$invoice[id]";
       
 if ($_GET['stage'] == 2 ) {
 /*
