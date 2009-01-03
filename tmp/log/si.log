@@ -16,3 +16,20 @@
 2009-01-02T20:39:57+11:00 INFO (6): ITEM :: Qty: 1 Unit price: 125.00
 2009-01-02T20:39:57+11:00 INFO (6): ITEM :: Tax rate: 10.000000 Tax type: % Tax $: 12.5
 2009-01-02T20:41:57+11:00 INFO (6): Itemised invoice created
+2009-01-03T08:03:34+11:00 INFO (6): Itemised invoice created
+2009-01-03T08:03:57+11:00 INFO (6): Key: 0 Value: 1
+2009-01-03T08:03:57+11:00 INFO (6): tax rate: 10.000000
+2009-01-03T08:03:57+11:00 INFO (6): Invoice: 28 Tax Array for line item 0: 12.5
+2009-01-03T08:03:57+11:00 INFO (6):  
+2009-01-03T08:03:57+11:00 INFO (6): ITEM :: Key: 0 Value: 1
+2009-01-03T08:03:57+11:00 INFO (6): ITEM :: tax rate: 10.000000
+2009-01-03T08:03:57+11:00 INFO (6): ITEM :: Qty: 1 Unit price: 125.00
+2009-01-03T08:03:57+11:00 INFO (6): ITEM :: Tax rate: 10.000000 Tax type: % Tax $: 12.5
+2009-01-03T08:03:57+11:00 INFO (6): Key: 0 Value: 1
+2009-01-03T08:03:57+11:00 INFO (6): tax rate: 10.000000
+2009-01-03T08:03:57+11:00 INFO (6): Invoice: 28 Tax Array for line item 1: 15
+2009-01-03T08:03:57+11:00 INFO (6):  
+2009-01-03T08:03:57+11:00 INFO (6): ITEM :: Key: 0 Value: 1
+2009-01-03T08:03:57+11:00 INFO (6): ITEM :: tax rate: 10.000000
+2009-01-03T08:03:57+11:00 INFO (6): ITEM :: Qty: 1 Unit price: 150.00
+2009-01-03T08:03:57+11:00 INFO (6): ITEM :: Tax rate: 10.000000 Tax type: % Tax $: 15
