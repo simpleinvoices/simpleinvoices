@@ -27,7 +27,7 @@
 	<br>
 	<br>
 		<hr></hr>
-		<form name="frmpost" ACTION="index.php?module=invoices&view=delete&stage=2&invoice={$smarty.get.invoice}" METHOD="post">
+		<form name="frmpost" ACTION="index.php?module=invoices&view=delete&stage=2&id={$smarty.get.invoice}" METHOD="post">
 			<input type="submit" name="submit" value="I'm sure"> <input type=button value="Cancel" onCLick="history.back()">
 			<input type="hidden" name="doDelete" value="y">
 		</form>	
@@ -53,7 +53,7 @@
 
 	<div id="top"></b></div>
 	<br><br>
-	{$preference.pref_inv_wording} {$invoice_id} has been deleted
+	{$preference.pref_inv_wording} {$id} has been deleted
 	<br><br>
 
 {/if}

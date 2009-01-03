@@ -17,20 +17,6 @@
 */
 *}
 
-{literal}
-	
-	<script type="text/javascript">
-	$(document).ready(function() {
-	 // hides the customer and biller details as soon as the DOM is ready (a little sooner that page load)
-	  $('.show-summary').hide();
-	  $('.biller').hide();
-	  $('.customer').hide();
-	  $('.consulting').hide();
-	  $('.itemised').hide();
-	  $('.notes').hide();
-  	});
-    </script>
-{/literal}
 <div class="align_center">
 	{$LANG.quick_view_of} {$preference.pref_inv_wording} {$invoice.id}
 	<br><br>
@@ -38,18 +24,18 @@
 
 	<!--Actions heading - start-->
 	<span class="welcome">
-			<a title="{$LANG.print_preview_tooltip} {$preference.pref_inv_wording} {$invoice.id}" href="index.php?module=invoices&view=templates/template&invoice={$invoice.id}&action=view"> {$LANG.print_preview}</a>
+			<a title="{$LANG.print_preview_tooltip} {$preference.pref_inv_wording} {$invoice.id}" href="index.php?module=invoices&view=template&id={$invoice.id}&action=view"> {$LANG.print_preview}</a>
 			 :: 
-			<a href="index.php?module=invoices&view=details&invoice={$invoice.id}&action=view"> {$LANG.edit}</a>
+			<a href="index.php?module=invoices&view=details&id={$invoice.id}&action=view"> {$LANG.edit}</a>
 			 ::
-			 <a href='index.php?module=payments&view=process&invoice={$invoice.id}&op=pay_selected_invoice'> {$LANG.process_payment} </a>
+			 <a href='index.php?module=payments&view=process&id={$invoice.id}&op=pay_selected_invoice'> {$LANG.process_payment} </a>
 			 ::
 			 <!-- EXPORT TO PDF -->
 			<a href='{$invoice.url_for_pdf }'>{$LANG.export_pdf}</a>
 			::
-			<a href="index.php?module=invoices&view=templates/template&invoice={$invoice.id}&action=view&export={$spreadsheet}">{$LANG.export_as} .{$spreadsheet}</a>
+			<a href="index.php?module=invoices&view=template&id={$invoice.id}&action=view&export={$spreadsheet}">{$LANG.export_as} .{$spreadsheet}</a>
 			::
-			<a href="index.php?module=invoices&view=templates/template&invoice={$invoice.id}&action=view&export={$word_processor}">{$LANG.export_as} .{$wordprocessor} </a>
+			<a href="index.php?module=invoices&view=template&id={$invoice.id}&action=view&export={$word_processor}">{$LANG.export_as} .{$wordprocessor} </a>
 			::
 			<a href="index.php?module=invoices&view=email&stage=1&invoice={$invoice.id}">{$LANG.email}</a>
 			{if $defaults.delete == '1'} 

@@ -63,6 +63,16 @@ function init(){
 		);
 	}
 
+	/*hide the text for the export dialog on the manage invoices page*/
+	$("#export_dialog").hide();
+
+	$('.show-summary').hide();
+	$('.biller').hide();
+	$('.customer').hide();
+	$('.consulting').hide();
+	$('.itemised').hide();
+	$('.notes').hide();
+
 
 	$('.editor').wysiwyg({
     controls : {
@@ -90,17 +100,7 @@ function init(){
         insertOrderedList : { visible : true },
         insertUnorderedList : { visible : true }
     }
-});
-
-	/*hide the text for the export dialog on the manage invoices page*/
-	$("#export_dialog").hide();
-
-	$('.show-summary').hide();
-	$('.biller').hide();
-	$('.customer').hide();
-	$('.consulting').hide();
-	$('.itemised').hide();
-	$('.notes').hide();
+	});
 
 }
 
@@ -164,14 +164,14 @@ function export_invoice(row_number,spreadsheet,wordprocessor){
 
 	 $("#export_dialog").show();
 	 $(".export_pdf").attr({ 
-          href: "index.php>module-invoices&view=pdf&id="+row_number,
+          href: "index.php?module=export&view=pdf&id="+row_number,
           onClick: "$(this).dialog('destroy')"
         });
 	 $(".export_doc").attr({ 
-		  href: "index.php?module=invoices&view=templates/template&invoice="+row_number+"&action=view&location=print&export="+wordprocessor
+		  href: "index.php?module=invoices&view=template&id="+row_number+"&action=view&location=print&export="+wordprocessor
         });	 
       $(".export_xls").attr({ 
-          href: "index.php?module=invoices&view=templates/template&invoice="+row_number+"&action=view&location=print&export="+spreadsheet,
+          href: "index.php?module=invoices&view=template&id="+row_number+"&action=view&location=print&export="+spreadsheet,
           onclick: "$().dialog('destroy')"
         });							
 	 $("#export_dialog").dialog({ 

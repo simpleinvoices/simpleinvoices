@@ -85,8 +85,7 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 /*
 * dont include the header if requested file is an invoice template - for print preview etc.. header is not needed 
 */
-if (($module == "invoices" ) && (strstr($view,"templates"))) {
-	//TODO: why is $view templates/template?...
+if (($module == "invoices" ) && (strstr($view,"template"))) {
 
 
 		/*
@@ -195,7 +194,7 @@ $path = "$module/$view";
 /*
 * Header - start 
 */
-if($module !== "auth")
+if( !in_array($module."_".$view, $early_exit) )
 {
 		$extensionHeader = 0;
 		foreach($config->extension as $extension)
@@ -311,7 +310,10 @@ if($module !== "auth")
 		
 		
 		
-		
+if($module == "export")
+{
+	exit(0);
+}	
 
 /*
 * Menu : If extension has custom menu use it else use default - start
@@ -431,6 +433,8 @@ if($module !== "auth")
 /*
 * Footer - start 
 */
+	if( !in_array($module."_".$view, $early_exit) )
+	{
 		$extensionFooter = 0;
 		foreach($config->extension as $extension)
 		{
@@ -452,7 +456,8 @@ if($module !== "auth")
 		if($extensionFooter == 0) 
 		{
 			$smarty -> display("../templates/default/footer.tpl");
-		}
+		}	
+	}
 /*
 * Footer - end 
 */

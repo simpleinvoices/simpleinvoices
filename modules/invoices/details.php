@@ -15,7 +15,7 @@
 checkLogin();
 
 #get the invoice id
-$master_invoice_id = $_GET['invoice'];
+$master_invoice_id = $_GET['id'];
 
 $invoice = getInvoice($master_invoice_id);
 $invoiceItems = invoice::getInvoiceItems($master_invoice_id);

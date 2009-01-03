@@ -33,3 +33,22 @@
 2009-01-03T08:03:57+11:00 INFO (6): ITEM :: tax rate: 10.000000
 2009-01-03T08:03:57+11:00 INFO (6): ITEM :: Qty: 1 Unit price: 150.00
 2009-01-03T08:03:57+11:00 INFO (6): ITEM :: Tax rate: 10.000000 Tax type: % Tax $: 15
+2009-01-03T17:22:42+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=templates/template&invoice=27&action=view&location=pdf
+2009-01-03T17:22:42+11:00 INFO (6): PDF url: 
+2009-01-03T17:35:54+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=templates/template&invoice=22&action=view&location=print
+2009-01-03T17:35:54+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplates%2Ftemplate%26invoice%3D22%26action%3Dview%26location%3Dprint
+2009-01-03T17:45:57+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=templates/template&invoice=23&action=view&location=pdf
+2009-01-03T17:45:57+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplates%2Ftemplate%26invoice%3D23%26action%3Dview%26location%3Dpdf
+2009-01-03T17:46:22+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=templates/template&invoice=24&action=view&location=pdf
+2009-01-03T17:46:22+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplates%2Ftemplate%26invoice%3D24%26action%3Dview%26location%3Dpdf
+2009-01-03T18:35:27+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=templates/template&invoice=28&action=view&location=pdf
+2009-01-03T18:35:27+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplates%2Ftemplate%26invoice%3D28%26action%3Dview%26location%3Dpdf
+2009-01-03T18:35:59+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=templates/template&invoice=27&action=view&location=pdf
+2009-01-03T18:35:59+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplates%2Ftemplate%26invoice%3D27%26action%3Dview%26location%3Dpdf
+2009-01-03T18:41:29+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=templates/template&invoice=27&action=view&location=pdf
+2009-01-03T18:41:29+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplates%2Ftemplate%26invoice%3D27%26action%3Dview%26location%3Dpdf
+2009-01-03T18:51:04+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=templates/template&invoice=26&action=view&location=pdf
+2009-01-03T18:51:04+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplates%2Ftemplate%26invoice%3D26%26action%3Dview%26location%3Dpdf
+2009-01-03T18:51:20+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=templates/template&invoice=28&action=view&location=pdf
+2009-01-03T18:51:20+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplates%2Ftemplate%26invoice%3D28%26action%3Dview%26location%3Dpdf
+2009-01-03T19:00:26+11:00 INFO (6): Itemised invoice created

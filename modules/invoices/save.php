@@ -68,9 +68,9 @@ if ($_POST['action'] == "insert" ) {
 
 	//Get type id - so do add into redirector header
 
-	$invoice_id = $_POST['invoice_id'];
+	$invoice_id = $_POST['id'];
 	
-	if (updateInvoice($_POST['invoice_id'])) {
+	if (updateInvoice($_POST['id'])) {
 		//updateCustomFieldValues($_POST['categorie'],$_POST['invoice_id']);
 		$saved = true;
 	}
@@ -105,6 +105,6 @@ if ($_POST['action'] == "insert" ) {
 //Get type id - so do add into redirector header
 $smarty->assign('type', $type);
 $smarty->assign('saved', $saved);
-$smarty->assign('invoice_id', $invoice_id);
+$smarty->assign('id', $id);
 
 ?>

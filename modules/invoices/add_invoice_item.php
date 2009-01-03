@@ -13,7 +13,7 @@
 
 if(isset($_POST['submit'])) {
 	insertInvoiceItem(
-		$_POST['invoice_id'],
+		$_POST['id'],
 		$_POST['quantity1'],
 		$_POST['product1'],
 		$_POST['tax_id'],

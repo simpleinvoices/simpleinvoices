@@ -13,6 +13,8 @@ $pdfname = trim($preference['pref_inv_wording']) . $invoice_id;
 
 $url_pdf = urlPDF($invoice_id);
 $url_pdf_encoded = urlencode($url_pdf);
+	$logger->log('PDF: '.$url_pdf, Zend_Log::INFO);
+	$logger->log('PDF url: '.$url_pdf_encoded, Zend_Log::INFO);
 
 header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 	// Date in the past

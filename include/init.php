@@ -95,3 +95,12 @@ if ($config->authentication->enabled == 1 )
 	include_once("./include/acl.php");
 	include_once("./include/check_permission.php");
 }
+
+/*
+Array: Early_exit
+- Pages that don't need header or exit prior to adding the template add in here
+*/
+$early_exit = array();
+$early_exit[] = "auth_login";
+$early_exit[] = "auth_logout";
+$early_exit[] = "export_pdf";

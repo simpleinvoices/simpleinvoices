@@ -11,7 +11,7 @@
 */
 *}
 {if $smarty.post.submit != null}
-	<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=details&invoice={$smarty.post.invoice_id}&type={$smarty.post.type}>
+	<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=details&id={$smarty.post.id}&type={$smarty.post.type}>
 	<br><br>
 	{$LANG.save_invoice_items_success};
 	<br><br>
@@ -74,7 +74,7 @@
 <hr />
 <div style="text-align:center;">
 	<input type="submit" name="submit" value="{$LANG.add_item}">
-	<input type="hidden" name="invoice_id" value="{$smarty.get.invoice}">
+	<input type="hidden" name="id" value="{$smarty.get.id}">
 	<input type="hidden" name="type" value="{$smarty.get.type}">
 	<input type="hidden" name="tax_id" value="{$smarty.get.tax_id}">
 </div>

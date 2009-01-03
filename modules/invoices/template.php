@@ -18,7 +18,7 @@
 #define("BROWSE","browse");
 
 #get the invoice id
-$invoiceID = $_GET['invoice'];
+$invoiceID = $_GET['id'];
 
 #Info from DB print --> TODO: Needed?
 //$conn = mysql_connect( $db_host, $db_user, $db_password );

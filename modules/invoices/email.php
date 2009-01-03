@@ -14,7 +14,7 @@
 checkLogin();
 
 #get the invoice id
-$invoice_id = $_GET['invoice'];
+$invoice_id = $_GET['id'];
 
 $invoice = getInvoice($invoice_id);
 $preference = getPreference($invoice['preference_id']);

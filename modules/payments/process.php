@@ -20,10 +20,10 @@ jsEnd();
 
 $today = date("Y-m-d");
 
-$master_invoice_id = $_GET['invoice'];
+$master_invoice_id = $_GET['id'];
 $invoice = null;
 
-if(isset($_GET['invoice'])) {
+if(isset($_GET['id'])) {
 	$invoice = getInvoice($master_invoice_id);
 }
 else {
