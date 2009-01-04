@@ -177,8 +177,8 @@ function add_line_item()
 
 	//update all the row items
 	//
-	clonedRow.find("tbody").removeAttr("id");
 
+	clonedRow.attr("id","row"+rowID_new);
 	//trash image
 	clonedRow.find("#trash_link"+rowID_old).attr("id", "trash_link"+rowID_new);
 	clonedRow.find("#trash_link"+rowID_new).attr("onclick", "delete_row("+rowID_new+");");
@@ -190,10 +190,10 @@ function add_line_item()
 	$("#quantity"+rowID_new, clonedRow).val('');
 
 //	clonedRow.find("#row"+rowID_old).removeAttr("id");
-	var pid = clonedRow.find("tbody").attr("id");
+//	var pid = clonedRow.attr("id");
 
 //	var pid = clonedRow.find(".table_row"+rowID_old).parent.attr("id");
-	console.log("parent"+pid);
+//	console.log("parent"+pid);
 //	$(".line_item", clonedRow).attr("ID", "row"+rowID_new);
 
 	clonedRow.find("#products"+rowID_old).removeAttr("onchange");

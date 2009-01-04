@@ -24,6 +24,7 @@
 	<table id="itemtable">
 		 <tbody id="itemtable-tbody">
 		<tr>
+			<td class=""></td>
 			<td class="details_screen">{$LANG.quantity}</td>
 			<td class="details_screen">{$LANG.item}</td>
 			{section name=tax_header loop=$defaults.tax_per_line_item }
@@ -79,6 +80,8 @@
 							 />
 						</a>
 						{/if}
+					</td>
+					<td>
 						<input type=text  id="quantity{$smarty.section.line.index}" size="5"></td>
 					<td>
 									
@@ -112,6 +115,8 @@
 				</tr>
 						
 				<tr class="notes">
+						<td>
+						</td>
 						<td colspan=4>
 							<textarea input type=text class="editor" id="description{$smarty.section.line.index}" rows=3 cols=3 WRAP=nowrap></textarea>
 							
