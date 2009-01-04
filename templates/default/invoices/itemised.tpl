@@ -29,6 +29,10 @@
 	<td>
 	<a 
 		href='#' 
+		onClick="add_line_item();"
+	>Add</a>
+	<a 
+		href='#' 
 		class="show-notes" 
 		onClick="$('.notes').show();$('.show-notes').hide();"
 	>
@@ -40,20 +44,24 @@
 
 </td>
 </tr>
-
+<tr>
+	<td >
+	<table id="itemtable">
 
         {section name=line start=0 loop=$dynamic_line_items step=1}
-
+			<tr class="main" id="{$smarty.section.line.index}">
+			<td>
+			<table>
 			<tr>
 				<td>
-					<input type=text  id="quantity{$smarty.section.line.index}" name="quantity{$smarty.section.line.index}" size="5"></td>
+					<input type=text  id="quantity{$smarty.section.line.index}" size="5"></td>
 				<td>
 				                
 			{if $products == null }
 				<p><em>{$LANG.no_products}</em></p>
 			{else}
 				<select 
-					name="products{$smarty.section.line.index}"
+					id="products{$smarty.section.line.index}"
 					onchange="invoice_product_change_price($(this).val(), {$smarty.section.line.index}, jQuery('#quantity{$smarty.section.line.index}').val() );"
 				>
 					<option value=""></option>
@@ -65,7 +73,7 @@
 				</td>
 				{section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
 				<td>				                				                
-					<select id="tax_id[{$smarty.section.line.index}][{$smarty.section.tax.index}]" name="tax_id[{$smarty.section.line.index}][{$smarty.section.tax.index}]" >
+					<select id="tax_id[{$smarty.section.line.index}][{$smarty.section.tax.index}]" >
 					<option value=""></option>
 					{foreach from=$taxes item=tax}
 						<option value="{$tax.tax_id}">{$tax.tax_description}</option>
@@ -74,16 +82,19 @@
                 </td>
 				{/section}
                 <td>
-					<input id="unit_price{$smarty.section.line.index}" name="unit_price{$smarty.section.line.index}" size="7" value=""></input>
+					<input id="unit_price{$smarty.section.line.index}" size="7" value=""></input>
 				</td>	
-                </tr>
+            </tr>
 					
-				<tr class="notes">
-						<td colspan=4>
-							<textarea input type=text class="editor" name="description{$smarty.section.line.index}" rows=3 cols=3 WRAP=nowrap></textarea>
-							
-							</td>
-				</tr>
+			<tr class="notes">
+					<td colspan=4>
+						<textarea input type=text class="editor" id="description{$smarty.section.line.index}" rows=3 cols=3 WRAP=nowrap></textarea>
+						
+						</td>
+			</tr>
+			</table>
+			</td>
+			</tr>
         {/section}
 	{$show_custom_field.1}
 	{$show_custom_field.2}
@@ -93,7 +104,9 @@
 		{showCustomFields categorieId="4" itemId=""}
 	*}
 
-
+	</td>
+	</tr>
+</table>
 
 <tr>
         <td colspan=1 class="details_screen">{$LANG.notes}</td>

@@ -26,4 +26,4 @@
 	<br>
 {/if}
 
-<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=invoices&view=quick_view&invoice={$invoice_id}&type={$type}>
+<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=invoices&view=quick_view&id={$id}&type={$type}>

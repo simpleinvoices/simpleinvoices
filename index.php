@@ -312,7 +312,7 @@ if( !in_array($module."_".$view, $early_exit) )
 		
 if($module == "export")
 {
-	exit(0);
+//	exit(0);
 }	
 
 /*

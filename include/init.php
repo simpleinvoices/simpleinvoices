@@ -103,4 +103,4 @@ Array: Early_exit
 $early_exit = array();
 $early_exit[] = "auth_login";
 $early_exit[] = "auth_logout";
-$early_exit[] = "export_pdf";
+//$early_exit[] = "export_pdf";

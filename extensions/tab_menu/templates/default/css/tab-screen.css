@@ -448,6 +448,12 @@ input, select
 	padding:0.2em 0.3em;
 }
 
+/*
+input:focus, select:focus, iframe:focus .wysiwyg:focus,  #IFrame:focus
+{
+	border-bottom:1px solid #D54E21;
+}
+*/
 .xxbutton {
 		background:#FFFFFF url(../../../images/common/text-bg-rotate.gif) repeat-x scroll center bottom;
 

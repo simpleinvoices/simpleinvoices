@@ -144,18 +144,44 @@ function invoice_product_change_price(si_product,row_number, quantity)
 		}
 	});
 }
-
-function add_line_item(row_number)
+/*
+ * function: add_line_item
+ * purpose: to add a new line item in invoice creation page
+ * */
+function add_line_item()
 {
-/*    $("#line tr:last").clone().append("#line tr:last");*/
-    $("#line"+row_number).clone().append("#line"+row_number);
-/*    $("#line :last").hide();*/
-    /*
-    $('#line'+row_number).after('<tr id><td>THIS IS A TEST<td><tr>');
-    */
-/*    $('#line'+row_number).hide();
-    $('#line'+row_number).append('<tr><td>THIS IS A TEST<td><tr>');
-  */
+
+	//clone the last tr in the item table
+	var clonedRow = $('#itemtable tr.main:last').clone(); 
+
+	//find the Id for the row from the quantity if
+	var rowID_old = $("input[@id^='quantity']",clonedRow).attr("id");
+	rowID_old = parseInt(rowID_old.slice(8)); //using 8 as 'quantity' has eight letters and want to get the number thats after that
+
+	//create next row id
+	var rowID_new = rowID_old + 1;
+
+//	console.log(rowID_old);
+//	console.log(rowID_new);
+
+	//update all the row items
+	$("#quantity"+rowID_old, clonedRow).attr("id", "quantity"+rowID_new);
+	$("#quantity"+rowID_new, clonedRow).val('');
+
+	clonedRow.find("#products"+rowID_old).removeAttr("onchange");
+	clonedRow.find("#products"+rowID_old).attr("id", "products"+rowID_new);
+	clonedRow.find("#products"+rowID_new).attr("onChange", "invoice_product_change_price($(this).val(), "+rowID_new+", jQuery('#quantity"+rowID_new+"').val() )");
+
+	$("#unit_price"+rowID_old, clonedRow).attr("id", "unit_price"+rowID_new);
+	$("#unit_price"+rowID_new, clonedRow).val("");
+
+	$("#description"+rowID_old, clonedRow).attr("id", "description"+rowID_new);
+	$("#description"+rowID_new, clonedRow).val("");
+
+	$("#tax_id\\["+rowID_old+"\\]\\[0\\]", clonedRow).attr("id", "tax_id["+rowID_new+"][0]");
+	$("#tax_id\\["+rowID_old+"\\]\\[1\\]", clonedRow).attr("id", "tax_id["+rowID_new+"][1]");
+
+	$('#itemtable').append(clonedRow);
 
 }
 
@@ -193,8 +219,3 @@ function export_invoice(row_number,spreadsheet,wordprocessor){
 function dialog_close(){
          $(this).dialog("destroy"); 
 }
-	
-	
-
-
-

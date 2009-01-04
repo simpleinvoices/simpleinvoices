@@ -67,3 +67,277 @@
 2009-01-03T21:39:29+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplates%2Ftemplate%26invoice%3D28%26action%3Dview%26location%3Dpdf
 2009-01-03T21:40:56+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=28&action=view&location=pdf
 2009-01-03T21:40:56+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D28%26action%3Dview%26location%3Dpdf
+2009-01-03T21:41:42+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=28&action=view&location=pdf
+2009-01-03T21:41:42+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D28%26action%3Dview%26location%3Dpdf
+2009-01-03T21:41:59+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=14&action=view&location=pdf
+2009-01-03T21:41:59+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D14%26action%3Dview%26location%3Dpdf
+2009-01-03T21:45:02+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=14&action=view&location=pdf
+2009-01-03T21:45:02+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D14%26action%3Dview%26location%3Dpdf
+2009-01-03T21:46:37+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=14&action=view&location=pdf
+2009-01-03T21:46:37+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D14%26action%3Dview%26location%3Dpdf
+2009-01-03T21:47:10+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=14&action=view&location=pdf
+2009-01-03T21:47:10+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D14%26action%3Dview%26location%3Dpdf
+2009-01-03T21:47:25+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=15&action=view&location=pdf
+2009-01-03T21:47:25+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D15%26action%3Dview%26location%3Dpdf
+2009-01-03T21:55:37+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=15&action=view&location=pdf
+2009-01-03T21:55:37+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D15%26action%3Dview%26location%3Dpdf
+2009-01-03T21:56:28+11:00 INFO (6): Invoice ID: 15 Get ID: 15
+2009-01-03T21:56:28+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=15&action=view&location=pdf
+2009-01-03T21:56:28+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D15%26action%3Dview%26location%3Dpdf
+2009-01-03T21:57:56+11:00 INFO (6): Invoice ID: 15 Get ID: 15
+2009-01-03T21:57:56+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=15&action=view&location=pdf
+2009-01-03T21:57:56+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D15%26action%3Dview%26location%3Dpdf
+2009-01-03T21:58:08+11:00 INFO (6): Invoice ID: 18 Get ID: 18
+2009-01-03T21:58:08+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=18&action=view&location=pdf
+2009-01-03T21:58:08+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D18%26action%3Dview%26location%3Dpdf
+2009-01-03T21:58:32+11:00 INFO (6): Invoice ID: 15 Get ID: 15
+2009-01-03T21:58:32+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=15&action=view&location=pdf
+2009-01-03T21:58:32+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D15%26action%3Dview%26location%3Dpdf
+2009-01-03T22:08:54+11:00 INFO (6): Invoice ID: 15 Get ID: 15
+2009-01-03T22:08:54+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=15&action=view&location=pdf
+2009-01-03T22:08:54+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D15%26action%3Dview%26location%3Dpdf
+2009-01-03T22:10:08+11:00 INFO (6): Invoice ID: 25 Get ID: 25
+2009-01-03T22:10:08+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=25&action=view&location=pdf
+2009-01-03T22:10:08+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D25%26action%3Dview%26location%3Dpdf
+2009-01-03T22:10:57+11:00 INFO (6): Itemised invoice created
+2009-01-03T22:11:05+11:00 INFO (6): Key: 0 Value: 1
+2009-01-03T22:11:05+11:00 INFO (6): tax rate: 10.000000
+2009-01-03T22:11:05+11:00 INFO (6): Invoice: 29 Tax Array for line item 0: 14
+2009-01-03T22:11:05+11:00 INFO (6):  
+2009-01-03T22:11:05+11:00 INFO (6): ITEM :: Key: 0 Value: 1
+2009-01-03T22:11:05+11:00 INFO (6): ITEM :: tax rate: 10.000000
+2009-01-03T22:11:05+11:00 INFO (6): ITEM :: Qty: 1 Unit price: 140.00
+2009-01-03T22:11:05+11:00 INFO (6): ITEM :: Tax rate: 10.000000 Tax type: % Tax $: 14
+2009-01-03T22:11:05+11:00 INFO (6): Key: 0 Value: 1
+2009-01-03T22:11:05+11:00 INFO (6): tax rate: 10.000000
+2009-01-03T22:11:05+11:00 INFO (6): Invoice: 29 Tax Array for line item 1: 14
+2009-01-03T22:11:05+11:00 INFO (6):  
+2009-01-03T22:11:05+11:00 INFO (6): ITEM :: Key: 0 Value: 1
+2009-01-03T22:11:05+11:00 INFO (6): ITEM :: tax rate: 10.000000
+2009-01-03T22:11:05+11:00 INFO (6): ITEM :: Qty: 1 Unit price: 140.00
+2009-01-03T22:11:05+11:00 INFO (6): ITEM :: Tax rate: 10.000000 Tax type: % Tax $: 14
+2009-01-03T22:11:05+11:00 INFO (6): Key: 0 Value: 1
+2009-01-03T22:11:05+11:00 INFO (6): tax rate: 10.000000
+2009-01-03T22:11:05+11:00 INFO (6): Invoice: 29 Tax Array for line item 2: 15
+2009-01-03T22:11:05+11:00 INFO (6):  
+2009-01-03T22:11:05+11:00 INFO (6): ITEM :: Key: 0 Value: 1
+2009-01-03T22:11:05+11:00 INFO (6): ITEM :: tax rate: 10.000000
+2009-01-03T22:11:05+11:00 INFO (6): ITEM :: Qty: 1 Unit price: 150.00
+2009-01-03T22:11:05+11:00 INFO (6): ITEM :: Tax rate: 10.000000 Tax type: % Tax $: 15
+2009-01-03T22:11:32+11:00 INFO (6): Invoice ID: 29 Get ID: 29
+2009-01-03T22:11:32+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=29&action=view&location=pdf
+2009-01-03T22:11:32+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D29%26action%3Dview%26location%3Dpdf
+2009-01-03T22:17:40+11:00 INFO (6): Invoice ID: 15 Get ID: 15
+2009-01-03T22:17:40+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=15&action=view&location=pdf
+2009-01-03T22:17:40+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D15%26action%3Dview%26location%3Dpdf
+2009-01-03T22:18:08+11:00 INFO (6): Invoice ID: 15 Get ID: 15
+2009-01-03T22:18:08+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=15&action=view&location=pdf
+2009-01-03T22:18:08+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D15%26action%3Dview%26location%3Dpdf
+2009-01-03T22:22:02+11:00 INFO (6): Invoice ID: 15 Get ID: 15
+2009-01-03T22:22:02+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=15&action=view&location=pdf
+2009-01-03T22:22:02+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D15%26action%3Dview%26location%3Dpdf
+2009-01-03T22:22:25+11:00 INFO (6): Invoice ID: 29 Get ID: 29
+2009-01-03T22:22:25+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=29&action=view&location=pdf
+2009-01-03T22:22:25+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D29%26action%3Dview%26location%3Dpdf
+2009-01-03T22:27:59+11:00 INFO (6): Invoice ID: 29 Get ID: 29
+2009-01-03T22:27:59+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=29&action=view&location=pdf
+2009-01-03T22:27:59+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D29%26action%3Dview%26location%3Dpdf
+2009-01-03T22:28:34+11:00 INFO (6): Invoice ID: 29 Get ID: 29
+2009-01-03T22:28:34+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=29&action=view&location=pdf
+2009-01-03T22:28:34+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D29%26action%3Dview%26location%3Dpdf
+2009-01-03T22:29:53+11:00 INFO (6): Invoice ID: 29 Get ID: 29
+2009-01-03T22:29:53+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=29&action=view&location=pdf
+2009-01-03T22:29:53+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D29%26action%3Dview%26location%3Dpdf
+2009-01-03T22:38:12+11:00 INFO (6): Invoice ID: 29 Get ID: 29
+2009-01-03T22:38:12+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=29&action=view&location=pdf
+2009-01-03T22:38:12+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D29%26action%3Dview%26location%3Dpdf
+2009-01-03T22:40:10+11:00 INFO (6): Invoice ID: 29 Get ID: 29
+2009-01-03T22:40:10+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=29&action=view&location=pdf
+2009-01-03T22:40:10+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D29%26action%3Dview%26location%3Dpdf
+2009-01-03T22:40:34+11:00 INFO (6): Invoice ID: 29 Get ID: 29
+2009-01-03T22:40:34+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=29&action=view&location=pdf
+2009-01-03T22:40:34+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D29%26action%3Dview%26location%3Dpdf
+2009-01-03T22:41:10+11:00 INFO (6): Invoice ID: 29 Get ID: 29
+2009-01-03T22:41:10+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=29&action=view&location=pdf
+2009-01-03T22:41:10+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D29%26action%3Dview%26location%3Dpdf
+2009-01-03T22:41:41+11:00 INFO (6): Invoice ID: 29 Get ID: 29
+2009-01-03T22:41:41+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=29&action=view&location=pdf
+2009-01-03T22:41:41+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D29%26action%3Dview%26location%3Dpdf
+2009-01-03T22:42:05+11:00 INFO (6): Invoice ID: 29 Get ID: 29
+2009-01-03T22:42:05+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=29&action=view&location=pdf
+2009-01-03T22:42:05+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D29%26action%3Dview%26location%3Dpdf
+2009-01-03T22:42:39+11:00 INFO (6): Invoice ID: 29 Get ID: 29
+2009-01-03T22:42:39+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=29&action=view&location=pdf
+2009-01-03T22:42:39+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D29%26action%3Dview%26location%3Dpdf
+2009-01-03T22:43:06+11:00 INFO (6): Invoice ID: 29 Get ID: 29
+2009-01-03T22:43:06+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=29&action=view&location=pdf
+2009-01-03T22:43:06+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D29%26action%3Dview%26location%3Dpdf
+2009-01-03T22:43:33+11:00 INFO (6): Invoice ID: 29 Get ID: 29
+2009-01-03T22:43:33+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=29&action=view&location=pdf
+2009-01-03T22:43:33+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D29%26action%3Dview%26location%3Dpdf
+2009-01-03T22:44:06+11:00 INFO (6): Invoice ID: 29 Get ID: 29
+2009-01-03T22:44:06+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=29&action=view&location=pdf
+2009-01-03T22:44:06+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D29%26action%3Dview%26location%3Dpdf
+2009-01-03T22:58:56+11:00 INFO (6): Invoice ID: 24 Get ID: 24
+2009-01-03T22:58:56+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=24&action=view&location=pdf
+2009-01-03T22:58:56+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D24%26action%3Dview%26location%3Dpdf
+2009-01-03T22:59:44+11:00 INFO (6): Invoice ID: 24 Get ID: 24
+2009-01-03T22:59:44+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=24&action=view&location=pdf
+2009-01-03T22:59:44+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D24%26action%3Dview%26location%3Dpdf
+2009-01-03T23:00:08+11:00 INFO (6): Invoice ID: 24 Get ID: 24
+2009-01-03T23:00:08+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=24&action=view&location=pdf
+2009-01-03T23:00:08+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D24%26action%3Dview%26location%3Dpdf
+2009-01-03T23:00:33+11:00 INFO (6): Invoice ID: 24 Get ID: 24
+2009-01-03T23:00:33+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=24&action=view&location=pdf
+2009-01-03T23:00:33+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D24%26action%3Dview%26location%3Dpdf
+2009-01-03T23:00:50+11:00 INFO (6): Invoice ID: 24 Get ID: 24
+2009-01-03T23:00:50+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=24&action=view&location=pdf
+2009-01-03T23:00:50+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D24%26action%3Dview%26location%3Dpdf
+2009-01-03T23:07:49+11:00 INFO (6): Invoice ID: 24 Get ID: 24
+2009-01-03T23:07:49+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=24&action=view&location=pdf
+2009-01-03T23:07:49+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D24%26action%3Dview%26location%3Dpdf
+2009-01-03T23:18:42+11:00 INFO (6): Invoice ID:  Get ID: 24
+2009-01-03T23:18:42+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=&action=view&location=pdf
+2009-01-03T23:18:42+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D%26action%3Dview%26location%3Dpdf
+2009-01-03T23:19:27+11:00 INFO (6): Invoice ID: 24 Get ID: 24
+2009-01-03T23:19:27+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=24&action=view&location=pdf
+2009-01-03T23:19:27+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D24%26action%3Dview%26location%3Dpdf
+2009-01-03T23:19:49+11:00 INFO (6): Invoice ID: 24 Get ID: 24
+2009-01-03T23:19:49+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=24&action=view&location=pdf
+2009-01-03T23:19:49+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D24%26action%3Dview%26location%3Dpdf
+2009-01-03T23:20:44+11:00 INFO (6): Invoice ID: 24 Get ID: 24
+2009-01-03T23:20:44+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=24&action=view&location=pdf
+2009-01-03T23:20:44+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D24%26action%3Dview%26location%3Dpdf
+2009-01-03T23:20:58+11:00 INFO (6): Invoice ID: 24 Get ID: 24
+2009-01-03T23:20:58+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=24&action=view&location=pdf
+2009-01-03T23:20:58+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D24%26action%3Dview%26location%3Dpdf
+2009-01-03T23:21:12+11:00 INFO (6): Invoice ID: 24 Get ID: 24
+2009-01-03T23:21:12+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=24&action=view&location=pdf
+2009-01-03T23:21:12+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D24%26action%3Dview%26location%3Dpdf
+2009-01-03T23:21:39+11:00 INFO (6): Invoice ID: 24 Get ID: 24
+2009-01-03T23:21:39+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=24&action=view&location=pdf
+2009-01-03T23:21:39+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D24%26action%3Dview%26location%3Dpdf
+2009-01-03T23:21:59+11:00 INFO (6): Invoice ID: 24 Get ID: 24
+2009-01-03T23:21:59+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=24&action=view&location=pdf
+2009-01-03T23:21:59+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D24%26action%3Dview%26location%3Dpdf
+2009-01-03T23:22:20+11:00 INFO (6): Invoice ID: 24 Get ID: 24
+2009-01-03T23:22:20+11:00 INFO (6): PDF: http://localhost/simpleinvoices/trunk/index.php?module=invoices&view=template&id=24&action=view&location=pdf
+2009-01-03T23:22:20+11:00 INFO (6): PDF url: http%3A%2F%2Flocalhost%2Fsimpleinvoices%2Ftrunk%2Findex.php%3Fmodule%3Dinvoices%26view%3Dtemplate%26id%3D24%26action%3Dview%26location%3Dpdf
+2009-01-04T16:50:47+11:00 INFO (6): Itemised invoice created
+2009-01-04T16:56:40+11:00 INFO (6): Itemised invoice created
+2009-01-04T16:57:37+11:00 INFO (6): Itemised invoice created
+2009-01-04T16:58:32+11:00 INFO (6): Itemised invoice created
+2009-01-04T16:59:08+11:00 INFO (6): Itemised invoice created
+2009-01-04T16:59:43+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:04:11+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:06:06+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:06:39+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:07:14+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:07:47+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:08:22+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:23:43+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:25:22+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:26:10+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:29:09+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:29:34+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:32:55+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:38:47+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:40:39+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:41:30+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:45:35+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:47:03+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:47:47+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:49:35+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:50:30+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:51:16+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:52:27+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:56:25+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:57:54+11:00 INFO (6): Itemised invoice created
+2009-01-04T17:59:52+11:00 INFO (6): Itemised invoice created
+2009-01-04T18:08:58+11:00 INFO (6): Itemised invoice created
+2009-01-04T18:19:39+11:00 INFO (6): Itemised invoice created
+2009-01-04T18:20:58+11:00 INFO (6): Itemised invoice created
+2009-01-04T18:21:46+11:00 INFO (6): Itemised invoice created
+2009-01-04T18:26:39+11:00 INFO (6): Itemised invoice created
+2009-01-04T18:26:49+11:00 INFO (6): Itemised invoice created
+2009-01-04T18:27:50+11:00 INFO (6): Itemised invoice created
+2009-01-04T18:28:06+11:00 INFO (6): Itemised invoice created
+2009-01-04T18:28:45+11:00 INFO (6): Itemised invoice created
+2009-01-04T18:29:55+11:00 INFO (6): Itemised invoice created
+2009-01-04T18:30:49+11:00 INFO (6): Itemised invoice created
+2009-01-04T18:31:08+11:00 INFO (6): Itemised invoice created
+2009-01-04T18:32:05+11:00 INFO (6): Itemised invoice created
+2009-01-04T18:33:27+11:00 INFO (6): Itemised invoice created
+2009-01-04T18:34:13+11:00 INFO (6): Itemised invoice created
+2009-01-04T18:35:38+11:00 INFO (6): Itemised invoice created
+2009-01-04T18:36:14+11:00 INFO (6): Itemised invoice created
+2009-01-04T18:38:54+11:00 INFO (6): Itemised invoice created
+2009-01-04T19:28:03+11:00 INFO (6): Itemised invoice created
+2009-01-04T19:28:30+11:00 INFO (6): Itemised invoice created
+2009-01-04T19:29:05+11:00 INFO (6): Itemised invoice created
+2009-01-04T19:31:32+11:00 INFO (6): Itemised invoice created
+2009-01-04T19:32:33+11:00 INFO (6): Itemised invoice created
+2009-01-04T19:33:36+11:00 INFO (6): Itemised invoice created
+2009-01-04T19:34:00+11:00 INFO (6): Itemised invoice created
+2009-01-04T19:34:25+11:00 INFO (6): Itemised invoice created
+2009-01-04T19:39:39+11:00 INFO (6): Itemised invoice created
+2009-01-04T19:40:02+11:00 INFO (6): Itemised invoice created
+2009-01-04T19:40:26+11:00 INFO (6): Itemised invoice created
+2009-01-04T19:42:04+11:00 INFO (6): Itemised invoice created
+2009-01-04T19:46:13+11:00 INFO (6): Itemised invoice created
+2009-01-04T19:51:06+11:00 INFO (6): Itemised invoice created
+2009-01-04T19:52:37+11:00 INFO (6): Itemised invoice created
+2009-01-04T19:54:02+11:00 INFO (6): Itemised invoice created
+2009-01-04T19:55:23+11:00 INFO (6): Itemised invoice created
+2009-01-04T19:57:48+11:00 INFO (6): Itemised invoice created
+2009-01-04T19:59:38+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:03:58+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:04:55+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:05:47+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:13:42+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:14:46+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:16:09+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:17:47+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:18:00+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:20:54+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:21:37+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:22:46+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:23:51+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:25:04+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:27:46+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:31:34+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:32:21+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:33:12+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:33:59+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:36:59+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:38:36+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:40:52+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:42:51+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:43:41+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:44:08+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:45:03+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:48:54+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:50:29+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:51:20+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:52:24+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:54:21+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:57:13+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:57:55+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:58:18+11:00 INFO (6): Itemised invoice created
+2009-01-04T20:58:52+11:00 INFO (6): Itemised invoice created
+2009-01-04T21:00:21+11:00 INFO (6): Itemised invoice created
+2009-01-04T21:00:47+11:00 INFO (6): Itemised invoice created
+2009-01-04T21:06:12+11:00 INFO (6): Itemised invoice created
+2009-01-04T21:06:30+11:00 INFO (6): Itemised invoice created
+2009-01-04T21:08:09+11:00 INFO (6): Itemised invoice created
+2009-01-04T21:08:35+11:00 INFO (6): Itemised invoice created
+2009-01-04T21:08:59+11:00 INFO (6): Itemised invoice created
+2009-01-04T21:10:46+11:00 INFO (6): Itemised invoice created
+2009-01-04T21:17:30+11:00 INFO (6): Itemised invoice created
+2009-01-04T21:17:55+11:00 INFO (6): Itemised invoice created
+2009-01-04T21:21:02+11:00 INFO (6): Itemised invoice created
+2009-01-04T21:21:38+11:00 INFO (6): Itemised invoice created
+2009-01-04T21:22:12+11:00 INFO (6): Itemised invoice created
+2009-01-04T21:26:07+11:00 INFO (6): Itemised invoice created
+2009-01-04T21:28:26+11:00 INFO (6): Itemised invoice created
+2009-01-04T21:30:42+11:00 INFO (6): Itemised invoice created
