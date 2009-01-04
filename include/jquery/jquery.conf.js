@@ -113,8 +113,15 @@ function formatItem(row) {
 	return row[0] + "<br><i>" + row[1] + "</i>";
 }
 
-	
-
+//delete line item in new invoice page
+function delete_row(row_number)
+{
+//	$('#row'+row_number).hide(); 
+	$('#row'+row_number).remove(); 
+//	$('#notes_row'+row_number).remove(); 
+//	$('#table_row'+row_number).remove(); 
+}
+//dlete line item in EDIT page
 function delete_line_item(row_number)
 {
 	$('.row'+row_number).hide(); 
@@ -152,21 +159,42 @@ function add_line_item()
 {
 
 	//clone the last tr in the item table
-	var clonedRow = $('#itemtable tr.main:last').clone(); 
+	var clonedRow = $('#itemtable tbody.line_item:first').clone(); 
+	var lastRow = $('#itemtable tbody.line_item:last').clone(); 
 
 	//find the Id for the row from the quantity if
 	var rowID_old = $("input[@id^='quantity']",clonedRow).attr("id");
+	var rowID_last = $("input[@id^='quantity']",lastRow).attr("id");
 	rowID_old = parseInt(rowID_old.slice(8)); //using 8 as 'quantity' has eight letters and want to get the number thats after that
+	rowID_last = parseInt(rowID_last.slice(8)); //using 8 as 'quantity' has eight letters and want to get the number thats after that
 
 	//create next row id
-	var rowID_new = rowID_old + 1;
+	var rowID_new = rowID_last + 1;
 
-//	console.log(rowID_old);
-//	console.log(rowID_new);
+	console.log("Old row ID: "+rowID_old);
+	console.log("New row ID:"+rowID_new);
+	console.log("Last row ID:"+rowID_last);
 
 	//update all the row items
+	//
+	clonedRow.find("tbody").removeAttr("id");
+
+	//trash image
+	clonedRow.find("#trash_link"+rowID_old).attr("id", "trash_link"+rowID_new);
+	clonedRow.find("#trash_link"+rowID_new).attr("onclick", "delete_row("+rowID_new+");");
+
+	clonedRow.find("#trash_image"+rowID_old).attr("src", "./images/common/delete_item.png");
+	clonedRow.find("#trash_image"+rowID_old).attr("title", "Delete this row");
+
 	$("#quantity"+rowID_old, clonedRow).attr("id", "quantity"+rowID_new);
 	$("#quantity"+rowID_new, clonedRow).val('');
+
+//	clonedRow.find("#row"+rowID_old).removeAttr("id");
+	var pid = clonedRow.find("tbody").attr("id");
+
+//	var pid = clonedRow.find(".table_row"+rowID_old).parent.attr("id");
+	console.log("parent"+pid);
+//	$(".line_item", clonedRow).attr("ID", "row"+rowID_new);
 
 	clonedRow.find("#products"+rowID_old).removeAttr("onchange");
 	clonedRow.find("#products"+rowID_old).attr("id", "products"+rowID_new);

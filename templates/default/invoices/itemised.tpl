@@ -20,81 +20,104 @@
 {include file="$path/header.tpl" }
 
 <tr>
-	<td class="details_screen">{$LANG.quantity}</td>
-	<td class="details_screen">{$LANG.item}</td>
-	{section name=tax_header loop=$defaults.tax_per_line_item }
-		<td class="details_screen">{$LANG.tax} {if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1}{/if} </td>
-	{/section}
-	<td class="details_screen">{$LANG.unit_price}</td>
-	<td>
-	<a 
-		href='#' 
-		onClick="add_line_item();"
-	>Add</a>
-	<a 
-		href='#' 
-		class="show-notes" 
-		onClick="$('.notes').show();$('.show-notes').hide();"
-	>
-		<img src="./images/common/page_white_add" title="{$LANG.show_details}">
-	</a>
-	<a href='#' class="notes" onClick="$('.notes').hide();$('.show-notes').show();">
-		<img src="./images/common/page_white_delete" title="{$LANG.hide_details}"/>
-	</a> 
-
-</td>
-</tr>
-<tr>
-	<td >
+	<td colspan=3">
 	<table id="itemtable">
+		 <tbody id="itemtable-tbody">
+		<tr>
+			<td class="details_screen">{$LANG.quantity}</td>
+			<td class="details_screen">{$LANG.item}</td>
+			{section name=tax_header loop=$defaults.tax_per_line_item }
+				<td class="details_screen">{$LANG.tax} {if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1}{/if} </td>
+			{/section}
+			<td class="details_screen">{$LANG.unit_price}</td>
+			<td>
+			<a 
+				href='#' 
+				class="show-notes" 
+				onClick="$('.notes').show();$('.show-notes').hide();"
+			>
+				<img src="./images/common/page_white_add" title="{$LANG.show_details}">
+			</a>
+			<a href='#' class="notes" onClick="$('.notes').hide();$('.show-notes').show();">
+				<img src="./images/common/page_white_delete" title="{$LANG.hide_details}"/>
+			</a> 
+
+		</td>
+		</tr>
+		</tbody>
 
         {section name=line start=0 loop=$dynamic_line_items step=1}
-			<tr class="main" id="{$smarty.section.line.index}">
-			<td>
-			<table>
-			<tr>
-				<td>
-					<input type=text  id="quantity{$smarty.section.line.index}" size="5"></td>
-				<td>
-				                
-			{if $products == null }
-				<p><em>{$LANG.no_products}</em></p>
-			{else}
-				<select 
-					id="products{$smarty.section.line.index}"
-					onchange="invoice_product_change_price($(this).val(), {$smarty.section.line.index}, jQuery('#quantity{$smarty.section.line.index}').val() );"
-				>
-					<option value=""></option>
-				{foreach from=$products item=product}
-					<option {if $product.id == $defaults.product} selected {/if} value="{$product.id}">{$product.description}</option>
-				{/foreach}
-				</select>
-			{/if}
-				</td>
-				{section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
-				<td>				                				                
-					<select id="tax_id[{$smarty.section.line.index}][{$smarty.section.tax.index}]" >
-					<option value=""></option>
-					{foreach from=$taxes item=tax}
-						<option value="{$tax.tax_id}">{$tax.tax_description}</option>
+			<tbody class="line_item" id="row{$smarty.section.line.index}">
+				<tr>
+					<td>
+						{if $smarty.section.line.index == "0"}
+						<a 
+							href="#" 
+							class="cluetip"
+							id="trash_link{$smarty.section.line.index}"
+							title="The first row can not be deleted"
+						>
+							<img 
+								id="trash_image{$smarty.section.line.index}"
+								src="./images/common/blank.gif"
+								height="16px"
+								width="16px"
+								title="The first row can not be deleted"
+							 />
+						</a>
+						{/if}
+						{if $smarty.section.line.index != 0}
+						{* can't delete line 0 *}
+						<a 
+							title="Delete this row" 
+							onclick="delete_row({$smarty.section.line.index});" 
+							href="#" 
+							style="display: inline;"
+						>
+							<img 
+								src="./images/common/delete_item.png"
+							 />
+						</a>
+						{/if}
+						<input type=text  id="quantity{$smarty.section.line.index}" size="5"></td>
+					<td>
+									
+				{if $products == null }
+					<p><em>{$LANG.no_products}</em></p>
+				{else}
+					<select 
+						id="products{$smarty.section.line.index}"
+						onchange="invoice_product_change_price($(this).val(), {$smarty.section.line.index}, jQuery('#quantity{$smarty.section.line.index}').val() );"
+					>
+						<option value=""></option>
+					{foreach from=$products item=product}
+						<option {if $product.id == $defaults.product} selected {/if} value="{$product.id}">{$product.description}</option>
 					{/foreach}
-				</select>
-                </td>
-				{/section}
-                <td>
-					<input id="unit_price{$smarty.section.line.index}" size="7" value=""></input>
-				</td>	
-            </tr>
-					
-			<tr class="notes">
-					<td colspan=4>
-						<textarea input type=text class="editor" id="description{$smarty.section.line.index}" rows=3 cols=3 WRAP=nowrap></textarea>
+					</select>
+				{/if}
+					</td>
+					{section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
+					<td>				                				                
+						<select id="tax_id[{$smarty.section.line.index}][{$smarty.section.tax.index}]" >
+						<option value=""></option>
+						{foreach from=$taxes item=tax}
+							<option value="{$tax.tax_id}">{$tax.tax_description}</option>
+						{/foreach}
+					</select>
+					</td>
+					{/section}
+					<td>
+						<input id="unit_price{$smarty.section.line.index}" size="7" value=""></input>
+					</td>	
+				</tr>
 						
-						</td>
-			</tr>
-			</table>
-			</td>
-			</tr>
+				<tr class="notes">
+						<td colspan=4>
+							<textarea input type=text class="editor" id="description{$smarty.section.line.index}" rows=3 cols=3 WRAP=nowrap></textarea>
+							
+							</td>
+				</tr>
+			</tbody>
         {/section}
 	{$show_custom_field.1}
 	{$show_custom_field.2}
@@ -107,7 +130,28 @@
 	</td>
 	</tr>
 </table>
-
+<tr>
+	<td>
+		<table class="buttons" align="left">
+			<tr>
+				<td>
+					<a 
+						href="#" 
+						onClick="add_line_item();"
+						class="positive"
+					>
+						<img 
+							src="./images/common/add.png"
+							alt=""
+						/>
+						Add new row{* $LANG TODO *}
+					</a>
+			
+				</td>
+			</tr>
+		 </table>
+	</td>
+</tr>
 <tr>
         <td colspan=1 class="details_screen">{$LANG.notes}</td>
 </tr>
