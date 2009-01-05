@@ -17,6 +17,10 @@ Next Release :: Beta 2
 ##############################
 
 	- new UI to be finished - JK
+	-- new icons for reports - each report section have different icon from famfam - JK
+	- add new line items on the fly in invoice creation - JK
+	- update invoice editing with tax rates and dynamical line items - JK
+	- fix page load - where html sections are hidden - ie. export html - only hides after a few seconds - JK
 	- merge itemised and consulting invoice styles - JK
 	- multiple taxes (% and $ based) per line item - JK
 	-- updates Taxes - add % or $ option - JK

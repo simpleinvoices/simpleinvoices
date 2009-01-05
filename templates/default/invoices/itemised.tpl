@@ -32,18 +32,17 @@
 			{/section}
 			<td class="details_screen">{$LANG.unit_price}</td>
 			<td>
-			<a 
-				href='#' 
-				class="show-notes" 
-				onClick="$('.notes').show();$('.show-notes').hide();"
-			>
-				<img src="./images/common/page_white_add" title="{$LANG.show_details}">
-			</a>
-			<a href='#' class="notes" onClick="$('.notes').hide();$('.show-notes').show();">
-				<img src="./images/common/page_white_delete" title="{$LANG.hide_details}"/>
-			</a> 
-
-		</td>
+				<a 
+					href='#' 
+					class="show-notes" 
+					onClick="$('.notes').show();$('.show-notes').hide();"
+				>
+					<img src="./images/common/page_white_add.png" title="{$LANG.show_details}">
+				</a>
+				<a href='#' class="notes" onClick="$('.notes').hide();$('.show-notes').show();">
+					<img src="./images/common/page_white_delete.png" title="{$LANG.hide_details}"/>
+				</a>
+			</td>
 		</tr>
 		</tbody>
 
@@ -54,7 +53,7 @@
 						{if $smarty.section.line.index == "0"}
 						<a 
 							href="#" 
-							class="cluetip"
+							class="trash_link"
 							id="trash_link{$smarty.section.line.index}"
 							title="The first row can not be deleted"
 						>
@@ -69,9 +68,12 @@
 						{/if}
 						{if $smarty.section.line.index != 0}
 						{* can't delete line 0 *}
+						<!-- onclick="delete_row({$smarty.section.line.index});" --> 
 						<a 
+							id="trash_link{$smarty.section.line.index}"
+							class="trash_link"
 							title="Delete this row" 
-							onclick="delete_row({$smarty.section.line.index});" 
+							rel="{$smarty.section.line.index}"
 							href="#" 
 							style="display: inline;"
 						>
@@ -88,10 +90,12 @@
 				{if $products == null }
 					<p><em>{$LANG.no_products}</em></p>
 				{else}
+				{* onchange="invoice_product_change_price($(this).val(), {$smarty.section.line.index}, jQuery('#quantity{$smarty.section.line.index}').val() );" *}
 					<select 
 						id="products{$smarty.section.line.index}"
-						onchange="invoice_product_change_price($(this).val(), {$smarty.section.line.index}, jQuery('#quantity{$smarty.section.line.index}').val() );"
-					>
+						rel="{$smarty.section.line.index}"
+						class="product_change"
+											>
 						<option value=""></option>
 					{foreach from=$products item=product}
 						<option {if $product.id == $defaults.product} selected {/if} value="{$product.id}">{$product.description}</option>
@@ -140,10 +144,10 @@
 		<table class="buttons" align="left">
 			<tr>
 				<td>
+					{* onClick="add_line_item();" *}
 					<a 
 						href="#" 
-						onClick="add_line_item();"
-						class="positive"
+						class="add_line_item"
 					>
 						<img 
 							src="./images/common/add.png"

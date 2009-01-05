@@ -7,11 +7,14 @@
 	<link REL="SHORTCUT ICON" HREF="./images/common/favicon.ico">
 
 {literal}
+	<script type="text/javascript" src="./include/jquery/jquery-1.2.6.min.js"></script>
+	<script type="text/javascript" src="./include/jquery/jquery.init.js"></script>
+		
 	<link rel="stylesheet" type="text/css" href="./extensions/tab_menu/templates/default/css/tab-screen.css" media="all"/>
 		<link rel="stylesheet" type="text/css" href="./extensions/tab_menu/templates/default/css/default/default.dialog.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/print.css" media="print"/>
 	<!-- jQuery Files -->
-	<script type="text/javascript" src="./include/jquery/jquery-1.2.6.min.js"></script>
+
 	<link rel="stylesheet" type="text/css" href="./extensions/tab_menu/templates/default/css/tab_menu.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="./extensions/tab_menu/templates/default/css/tab.css" media="all"/>
 	<script type="text/javascript" src="./include/jquery/jquery-ui-personalized-1.6rc2.packed.js"></script>
@@ -21,6 +24,7 @@
 	{/literal}{$extension_jquery_files }{literal}
 	<script type="text/javascript" src="./include/jquery/jquery.plugins.js"></script>
 	<script type="text/javascript" src="./include/jquery/wysiwyg/wysiwyg.modified.packed.js"></script>
+	<script type="text/javascript" src="./include/jquery/jquery.livequery.pack.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.conf.js"></script>
 	
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/flexigrid.css">
