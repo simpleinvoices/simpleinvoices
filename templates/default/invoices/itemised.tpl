@@ -34,12 +34,12 @@
 			<td>
 				<a 
 					href='#' 
-					class="show-notes" 
-					onClick="$('.notes').show();$('.show-notes').hide();"
+					class="show-note" 
+					onClick="$('.note').show();$('.show-note').hide();"
 				>
 					<img src="./images/common/page_white_add.png" title="{$LANG.show_details}">
 				</a>
-				<a href='#' class="notes" onClick="$('.notes').hide();$('.show-notes').show();">
+				<a href='#' class="note" onClick="$('.note').hide();$('.show-note').show();">
 					<img src="./images/common/page_white_delete.png" title="{$LANG.hide_details}"/>
 				</a>
 			</td>
@@ -84,7 +84,7 @@
 						{/if}
 					</td>
 					<td>
-						<input type=text  id="quantity{$smarty.section.line.index}" size="5"></td>
+						<input type=text name="quantity{$smarty.section.line.index}" id="quantity{$smarty.section.line.index}" size="5"></td>
 					<td>
 									
 				{if $products == null }
@@ -93,6 +93,7 @@
 				{* onchange="invoice_product_change_price($(this).val(), {$smarty.section.line.index}, jQuery('#quantity{$smarty.section.line.index}').val() );" *}
 					<select 
 						id="products{$smarty.section.line.index}"
+						name="products{$smarty.section.line.index}"
 						rel="{$smarty.section.line.index}"
 						class="product_change"
 											>
@@ -105,7 +106,10 @@
 					</td>
 					{section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
 					<td>				                				                
-						<select id="tax_id[{$smarty.section.line.index}][{$smarty.section.tax.index}]" >
+						<select 
+							id="tax_id[{$smarty.section.line.index}][{$smarty.section.tax.index}]"
+							name="tax_id[{$smarty.section.line.index}][{$smarty.section.tax.index}]"
+						>
 						<option value=""></option>
 						{foreach from=$taxes item=tax}
 							<option value="{$tax.tax_id}">{$tax.tax_description}</option>
@@ -114,15 +118,21 @@
 					</td>
 					{/section}
 					<td>
-						<input id="unit_price{$smarty.section.line.index}" size="7" value=""></input>
+						<input 
+							id="unit_price{$smarty.section.line.index}" 
+							name="unit_price{$smarty.section.line.index}" 
+							size="7"
+							value=""
+						>
+						</input>
 					</td>	
 				</tr>
 						
-				<tr class="notes">
+				<tr class="note">
 						<td>
 						</td>
 						<td colspan=4>
-							<textarea input type=text class="editor" id="description{$smarty.section.line.index}" rows=3 cols=3 WRAP=nowrap></textarea>
+							<textarea input type=text class="note" id="description{$smarty.section.line.index}" rows=3 cols=3 WRAP=nowrap></textarea>
 							
 							</td>
 				</tr>
@@ -221,12 +231,12 @@
 <table class="buttons" align="center">
     <tr>
         <td>
-            <button type="submit" class="positive" name="submit" value="{$LANG.save}">
+            <button type="submit" class="invoice_save positive" name="submit" value="{$LANG.save}">
                 <img class="button_img" src="./images/common/tick.png" alt=""/> 
                 {$LANG.save}
             </button>
             
-			<input type=hidden name="max_items" value="{$smarty.section.line.index}">
+			<input type=hidden id="max_items" name="max_items" value="{$smarty.section.line.index}">
         	<input type=hidden name="type" value="2">
         	
             <a href="./index.php?module=invoices&view=manage" class="negative">

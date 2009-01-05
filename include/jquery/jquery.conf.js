@@ -62,7 +62,8 @@ $(document).ready(function(){
 	}
 
 	//load the configs for the html editor
-	$('.editor').wysiwyg({
+	//$('.editor').livequery(function(){ $(this).wysiwyg({
+	$('.Xeditor').wysiwyg({
     controls : {
 	    html : { visible : true },
 	    createLink : { visible : false },
@@ -112,8 +113,18 @@ $(document).ready(function(){
 	//add new lien item in invoices
 	$("a.add_line_item").click(function () { 
 		add_line_item();
+		//autoFill($(".note"), "Description");
     });
 
+	//calc number of line items 
+	$(".invoice_save").click(function () { 
+		count_invoice_line_items();
+    });
+
+	//$('.editor').livequery(function(){ $(this).wysiwyg({
+	$(".note").livequery(function(){ 	
+		autoFill($(".note"), "Description");
+		});
 
 
 });

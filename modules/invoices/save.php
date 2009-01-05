@@ -33,7 +33,7 @@ $type = $_POST['type'];
 if ($_POST['action'] == "insert" ) {
 	
 	if(insertInvoice($type)) {
-		$invoice_id = lastInsertId();
+		$id = lastInsertId();
 		//saveCustomFieldValues($_POST['categorie'],$invoice_id);
 		$saved = true;
 	}
@@ -46,7 +46,7 @@ if ($_POST['action'] == "insert" ) {
 		insertProduct(0,0);
 		$product_id = lastInsertId();
 
-		if (insertInvoiceItem($invoice_id,1,$product_id,1,$_POST['tax_id'][0],$_POST['description'],$_POST['unit_price'])) {
+		if (insertInvoiceItem($id,1,$product_id,1,$_POST['tax_id'][0],$_POST['description'],$_POST['unit_price'])) {
 			//$saved = true;
 		}
 		else {
@@ -54,21 +54,30 @@ if ($_POST['action'] == "insert" ) {
 		}
 	}
 	elseif ($saved) {
-		for($i=0;!empty($_POST["quantity$i"]) && $i < $_POST['max_items']; $i++) {
-			$product = $_POST["products$i"];
-			if (insertInvoiceItem($invoice_id,$_POST["quantity$i"],$product,$i,$_POST["tax_id"][$i],$_POST["description$i"], $_POST["unit_price$i"] )) {
-	//			insert_invoice_item_tax(lastInsertId(), )
-				//$saved = true;
-			} else {
-				die(end($dbh->errorInfo()));
+		
+		$logger->log('Max items:'.$_POST['max_items'], Zend_Log::INFO);
+		$i = 0;
+		while ($i <= $_POST['max_items']) {
+			$logger->log('i='.$i, Zend_Log::INFO);
+			$logger->log('qty='.$_POST["quantity$i"], Zend_Log::INFO);
+			if($_POST["quantity$i"] != null)
+			{
+				$product = $_POST["products$i"];
+				if (insertInvoiceItem($id,$_POST["quantity$i"],$product,$i,$_POST["tax_id"][$i],$_POST["description$i"], $_POST["unit_price$i"] )) {
+		//			insert_invoice_item_tax(lastInsertId(), )
+					//$saved = true;
+				} else {
+					die(end($dbh->errorInfo()));
+				}
 			}
+			$i++;
 		}
 	}
 } elseif ( $_POST['action'] == "edit") {
 
 	//Get type id - so do add into redirector header
 
-	$invoice_id = $_POST['id'];
+	$id = $_POST['id'];
 	
 	if (updateInvoice($_POST['id'])) {
 		//updateCustomFieldValues($_POST['categorie'],$_POST['invoice_id']);

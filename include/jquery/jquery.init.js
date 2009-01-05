@@ -8,6 +8,7 @@ $(document).ready(function(){
 	$('.customer').hide();
 	$('.consulting').hide();
 	$('.itemised').hide();
+	$('.note').hide();
 
 
 });

@@ -34,9 +34,12 @@
 	<link rel="stylesheet" type="text/css" href="./include/jquery/rte/rte.css" />	
 	<link rel="stylesheet" type="text/css" href="./include/jquery/cluetip/jquery.cluetip.css" />
 	<link rel="stylesheet" type="text/css" href="./extensions/tab_menu/templates/default/css/default.css" media="all"/>
-
-
-	
+	{/literal}
+	{if $config->debug->level == "All"}
+	<script type="text/javascript" src="./include/blackbirdjs/blackbird.js"></script>
+	<link rel="stylesheet" type="text/css" href="./include/blackbirdjs/blackbird.css" />	
+	{/if}
+	{literal}
 <script type="text/javascript" src="jquery.validate.js">
 </script>
 <script language="javascript">

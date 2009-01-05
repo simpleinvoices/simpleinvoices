@@ -57,14 +57,27 @@
 	
    		 });
      };
-     
+    
+	/*
+	 * Function: count_invoice_line_items
+	 * Purpose: find the last line item and update max_items so /modules/invoice/save.php can access it
+	 */
+	function count_invoice_line_items()
+	{
+		var lastRow = $('#itemtable tbody.line_item:last'); 
+		var rowID_last = $("input[@id^='quantity']",lastRow).attr("id");
+		rowID_last = parseInt(rowID_last.slice(8)); //using 8 as 'quantity' has eight letters and want to get the number thats after that
+		$("#max_items").val(rowID_last);
+		log.debug( 'Max Items = '+rowID_last );
+		
+	}
+
      /*
 	 * function: add_line_item
 	 * purpose: to add a new line item in invoice creation page
 	 * */
 	function add_line_item()
 	{
-	
 		//clone the last tr in the item table
 		var clonedRow = $('#itemtable tbody.line_item:first').clone(); 
 		var lastRow = $('#itemtable tbody.line_item:last').clone(); 
@@ -77,6 +90,8 @@
 	
 		//create next row id
 		var rowID_new = rowID_last + 1;
+		
+		log.debug( 'Line item '+rowID_new+'added');
 	
 		//console.log("Old row ID: "+rowID_old);
 		//console.log("New row ID:"+rowID_new);
@@ -88,7 +103,8 @@
 		clonedRow.attr("id","row"+rowID_new);
 		//trash image
 		clonedRow.find("#trash_link"+rowID_old).attr("id", "trash_link"+rowID_new);
-		//clonedRow.find("#trash_link"+rowID_new).attr("onclick", "delete_row("+rowID_new+");");
+		clonedRow.find("#trash_link"+rowID_new).attr("name", "trash_link"+rowID_new);
+
 		clonedRow.find("#trash_link"+rowID_new).attr("href", "#");
 		clonedRow.find("#trash_link"+rowID_new).attr("rel", rowID_new);
 	
@@ -97,22 +113,28 @@
 	
 	
 		$("#quantity"+rowID_old, clonedRow).attr("id", "quantity"+rowID_new);
+		$("#quantity"+rowID_new, clonedRow).attr("name", "quantity"+rowID_new);
 		$("#quantity"+rowID_new, clonedRow).val('');
 	
 		//clonedRow.find("#products"+rowID_old).removeAttr("onchange");
 		clonedRow.find("#products"+rowID_old).attr("rel", rowID_new);
 		clonedRow.find("#products"+rowID_old).attr("id", "products"+rowID_new);
+		clonedRow.find("#products"+rowID_new).attr("name", "products"+rowID_new);
 
 		//clonedRow.find("#products"+rowID_new).attr("onChange", "invoice_product_change_price($(this).val(), "+rowID_new+", jQuery('#quantity"+rowID_new+"').val() )");
 	
 		$("#unit_price"+rowID_old, clonedRow).attr("id", "unit_price"+rowID_new);
+		$("#unit_price"+rowID_new, clonedRow).attr("name", "unit_price"+rowID_new);
 		$("#unit_price"+rowID_new, clonedRow).val("");
 	
 		$("#description"+rowID_old, clonedRow).attr("id", "description"+rowID_new);
+		$("#description"+rowID_new, clonedRow).attr("name", "description"+rowID_new);
 		$("#description"+rowID_new, clonedRow).val("");
 	
 		$("#tax_id\\["+rowID_old+"\\]\\[0\\]", clonedRow).attr("id", "tax_id["+rowID_new+"][0]");
+		$("#tax_id\\["+rowID_new+"\\]\\[0\\]", clonedRow).attr("name", "tax_id["+rowID_new+"][0]");
 		$("#tax_id\\["+rowID_old+"\\]\\[1\\]", clonedRow).attr("id", "tax_id["+rowID_new+"][1]");
+		$("#tax_id\\["+rowID_new+"\\]\\[1\\]", clonedRow).attr("name", "tax_id["+rowID_new+"][1]");
 	
 		$('#itemtable').append(clonedRow);
 	
@@ -154,3 +176,15 @@
 	         $(this).dialog("destroy"); 
 	}
      
+function autoFill(id, v){
+	$(id).css({ color: "#b2adad" }).attr({ value: v }).focus(function(){
+		if($(this).val()==v){
+			$(this).val("").css({ color: "#b2adad" });
+		}
+	}).blur(function(){
+		if($(this).val()==""){
+			$(this).css({ color: "#b2adad"}).val(v);
+		}
+	});
+
+}

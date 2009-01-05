@@ -438,7 +438,7 @@ a:link,a:visited {
 }
 
 /* extjs/doukiwki style input boes */
-input, select
+input, select, textarea
 {
 	background:#FFFFFF url(../../../../../images/common/text-bg.gif) repeat-x scroll center top;
 	/*border:1px solid #B5B8C8;*/
@@ -620,4 +620,9 @@ button.positive, .buttons a.positive{
 }
 .floatRight{
 	float:right;
+}
+
+.note
+{
+width:100%
 }
