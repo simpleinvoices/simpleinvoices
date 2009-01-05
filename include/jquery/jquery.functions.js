@@ -72,6 +72,14 @@
 		
 	}
 
+	function siLog(level,message)
+	{
+		$level = level;
+		if(log)
+		{
+			log.debug(message);
+		}
+	}
      /*
 	 * function: add_line_item
 	 * purpose: to add a new line item in invoice creation page
@@ -91,7 +99,8 @@
 		//create next row id
 		var rowID_new = rowID_last + 1;
 		
-		log.debug( 'Line item '+rowID_new+'added');
+		siLog('debug','Line item '+rowID_new+'added');
+		//log.debug( 'Line item '+rowID_new+'added');
 	
 		//console.log("Old row ID: "+rowID_old);
 		//console.log("New row ID:"+rowID_new);
