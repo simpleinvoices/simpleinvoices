@@ -4,11 +4,13 @@
 	* Purpose: jquery/javascript functions for Simple Invoices 
 	*/
 	
+	// for autocomplete in papyment page
 	function selectItem(li) {
 		if (li.extra)
 	        document.getElementById("js_total").innerHTML= " " + li.extra[0] + " "
 	}
 	
+	// for autocomplete in papyment page
 	function formatItem(row) {
 		return row[0] + "<br><i>" + row[1] + "</i>";
 	}
@@ -18,9 +20,8 @@
 	{
 	//	$('#row'+row_number).hide(); 
 		$('#row'+row_number).remove(); 
-	//	$('#notes_row'+row_number).remove(); 
-	//	$('#table_row'+row_number).remove(); 
 	}
+	
 	//dlete line item in EDIT page
 	function delete_line_item(row_number)
 	{
@@ -29,31 +30,7 @@
 		$('#delete'+row_number).attr('value','yes');
 	}
 	
-	/*old*/
-	function invoice_product_change_price(si_product,row_number, quantity)
-	{
-		$('#gmail_loading').show();
-		$.ajax({
-			type: 'GET',
-			url: './index.php?module=invoices&view=product_ajax&id='+si_product,
-			data: "id: "+si_product,
-			dataType: "json",
-			success: function(data){
-				$('#gmail_loading').hide();
-				/*$('#state').html(data);*/
-				/*if ( (quantity.length==0) || (quantity.value==null) ) */
-				if (quantity=="") 
-				{	
-					$("#quantity"+row_number).attr("value","1");
-				}
-				$("#unit_price"+row_number).attr("value",data['unit_price']);
-				$("#tax_id\\["+row_number+"\\]\\[0\\]").val(data['default_tax_id']);
-				$("#tax_id\\["+row_number+"\\]\\[1\\]").val(data['default_tax_id_2']);
-			}
-		});
-	}
-	
-	
+
 	/*
 	* Product Change - updates line item with product price info
 	*/
@@ -101,9 +78,9 @@
 		//create next row id
 		var rowID_new = rowID_last + 1;
 	
-		console.log("Old row ID: "+rowID_old);
-		console.log("New row ID:"+rowID_new);
-		console.log("Last row ID:"+rowID_last);
+		//console.log("Old row ID: "+rowID_old);
+		//console.log("New row ID:"+rowID_new);
+		//console.log("Last row ID:"+rowID_last);
 	
 		//update all the row items
 		//
@@ -141,14 +118,14 @@
 	
 	}
 	
-	
+	//the export dialog in the manage invoices page
 	function export_invoice(row_number,spreadsheet,wordprocessor){
 	
 	
 		 $("#export_dialog").show();
 		 $(".export_pdf").attr({ 
 	          href: "index.php?module=export&view=pdf&id="+row_number,
-	          onClick: "$(this).dialog('destroy')"
+	          onClick: "dialog('destroy')"
 	        });
 		 $(".export_doc").attr({ 
 			  href: "index.php?module=invoices&view=template&id="+row_number+"&action=view&location=print&export="+wordprocessor

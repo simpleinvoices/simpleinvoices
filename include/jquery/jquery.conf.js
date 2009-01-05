@@ -61,7 +61,7 @@ $(document).ready(function(){
 		);
 	}
 
-
+	//load the configs for the html editor
 	$('.editor').wysiwyg({
     controls : {
 	    html : { visible : true },
@@ -90,6 +90,7 @@ $(document).ready(function(){
     }
 	});
 
+	//hide the description field for each line item on invoice creation
 	$('.notes').hide();
 
 	/*
@@ -102,12 +103,13 @@ $(document).ready(function(){
  		invoice_product_change($product, $row_number, $quantity);
      });
      
-
+	//delete line in invoice
 	$(".trash_link").livequery('click',function () { 
       id = $(this).attr("rel");
       delete_row(id);
     });
 	
+	//add new lien item in invoices
 	$("a.add_line_item").click(function () { 
 		add_line_item();
     });
