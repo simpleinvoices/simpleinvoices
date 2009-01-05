@@ -25,6 +25,7 @@
 	<script type="text/javascript" src="./include/jquery/jquery.plugins.js"></script>
 	<script type="text/javascript" src="./include/jquery/wysiwyg/wysiwyg.modified.packed.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.livequery.pack.js"></script>
+	<script type="text/javascript" src="./include/jquery/jquery.functions.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.conf.js"></script>
 	
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/flexigrid.css">
