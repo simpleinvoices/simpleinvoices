@@ -1,3 +1,5 @@
+{literal}
+<script>
 $(document).ready(function(){
 
 	/*
@@ -63,7 +65,7 @@ $(document).ready(function(){
 
 	//load the configs for the html editor
 	//$('.editor').livequery(function(){ $(this).wysiwyg({
-	$('.Xeditor').wysiwyg({
+	$('.editor').wysiwyg({
     controls : {
 	    html : { visible : true },
 	    createLink : { visible : false },
@@ -102,6 +104,7 @@ $(document).ready(function(){
       	var $product = $(this).val();
       	var $quantity = $("#quantity"+$row_number).attr("value");
  		invoice_product_change($product, $row_number, $quantity);
+		siLog('debug','{/literal}{$LANG.description}{literal}');
      });
      
 	//delete line in invoice
@@ -128,8 +131,10 @@ $(document).ready(function(){
 	//$('.editor').livequery(function(){ $(this).wysiwyg({
 	//Autofill "Description" into the invoice items description/notes textarea
 	$(".note").livequery(function(){ 	
-		autoFill($(".note"), "Description");
+		autoFill($(".note"), "{/literal}{$LANG.description} {literal}");
 		});
 
 
 });
+</script>
+{/literal}

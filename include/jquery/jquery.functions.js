@@ -1,4 +1,5 @@
-
+{literal}
+<script>
 	/*
 	* Script: jquery.functions.js
 	* Purpose: jquery/javascript functions for Simple Invoices 
@@ -108,6 +109,8 @@
 		var rowID_new = rowID_last + 1;
 		
 		siLog('debug','Line item '+rowID_new+'added');
+		siLog('info','{ldelim}{$LANG.description}{rdelim}');
+		siLog('info','{/literal}{$LANG.description}{literal}');
 		//log.debug( 'Line item '+rowID_new+'added');
 	
 		//console.log("Old row ID: "+rowID_old);
@@ -200,27 +203,30 @@
 			}
 		}).blur(function(){
 			if($(this).val()==""){
-				$(this).css({ color: "#b2adad"}).val(v);
+//				$(this).css({ color: "#b2adad"}).val(v);
 			}
 		});
+	}
 
 	/*
-	 * Function: count_invoice_line_items
-	 * Purpose: find the last line item and update max_items so /modules/invoice/save.php can access it
+	 * Function: invoice_save_remove_autofill
+	 * Purpose: remove the autofilled text in the line items ntoes box
 	 */
 	function invoice_save_remove_autofill()
 	{
 		siLog('debug','exectued invoice save remove');
 		
-		var description = $("textarea[@id^='description']").attr("val");
+		var description = $("textarea[@id^='description']").attr("value");
 
 		siLog('debug',description);
 		if (description =="Description")
 		{
-			$("textarea[@id^='description']").attr("val","");
+			siLog('info','autofill value of '+description+' to be removed removed');
+			$("textarea[@id^='description']").val('');
+			siLog('info','autofill value was removed');
 		}
 		
-		siLog('info','autofill removed');
 		
 	}
-}
+</script>
+{/literal}
