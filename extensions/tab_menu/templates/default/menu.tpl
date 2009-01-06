@@ -61,58 +61,6 @@
         </div>
         
         
-<div id="dialog" class="flora" title="Please select Invoice type">
-	<a href="index.php?module=invoices&view=total"> Total style</a>
-	<br>
-	<a href="index.php?module=invoices&view=itemised"> Itemised style</a>
-	<br>
-	<a href="index.php?module=invoices&view=consulting"> Consulting style</a>
-</div>
-
-<div id="export_dialog" class="flora" title="Export">
-
-<table class="buttons" >
-    <tr>
-        <td>
-
-            <a
-            	title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_pdf_tooltip']."' 
-            	class='export_pdf' 
-            	href=''
-            >
-                <img src="./images/common/page_white_acrobat.png" alt=""/>
-                Export as PDF {* LANG TODO*}
-            </a>
-          </td>
-    </tr>
-    <tr>
-    	<td>  
-            
-            <a 
-             	title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_xls_tooltip'].$spreadsheet." ".$LANG['format_tooltip']."' 
-             	class='export_xls'
-             	href=''
-           >
-                <img src="./images/common/page_white_excel.png" alt=""/>
-                 Export as .XLS {* LANG TODO*}
-            </a>
-            </td>
-    </tr>
-    <tr>
-    	<td>    
-    
-           <a 
-           		title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_xls_tooltip'].$spreadsheet." ".$LANG['format_tooltip']."' 
-           		class='export_doc' 
-           		href=''         
-           >
-                <img src="./images/common/page_white_word.png" alt=""/>
-                 Export as .DOC {* LANG TODO*}
-            </a>
-        </td>
-    </tr>
-</table>
-<br>
 	
 	
 	

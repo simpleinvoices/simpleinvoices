@@ -109,8 +109,6 @@
 		var rowID_new = rowID_last + 1;
 		
 		siLog('debug','Line item '+rowID_new+'added');
-		siLog('info','{ldelim}{$LANG.description}{rdelim}');
-		siLog('info','{/literal}{$LANG.description}{literal}');
 		//log.debug( 'Line item '+rowID_new+'added');
 	
 		//console.log("Old row ID: "+rowID_old);
@@ -218,15 +216,14 @@
 		
 		var description = $("textarea[@id^='description']").attr("value");
 
-		siLog('debug',description);
-		if (description =="Description")
+		if (description =='{/literal}{$LANG.description}{literal}')
 		{
 			siLog('info','autofill value of '+description+' to be removed removed');
 			$("textarea[@id^='description']").val('');
 			siLog('info','autofill value was removed');
 		}
 		
-		
 	}
+
 </script>
 {/literal}

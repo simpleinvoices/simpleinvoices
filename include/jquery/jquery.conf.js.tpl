@@ -131,7 +131,7 @@ $(document).ready(function(){
 	//$('.editor').livequery(function(){ $(this).wysiwyg({
 	//Autofill "Description" into the invoice items description/notes textarea
 	$(".note").livequery(function(){ 	
-		autoFill($(".note"), "{/literal}{$LANG.description} {literal}");
+		autoFill($(".note"), "{/literal}{$LANG.description}{literal}");
 		});
 
 

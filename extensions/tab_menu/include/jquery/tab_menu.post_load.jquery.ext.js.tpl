@@ -25,6 +25,7 @@ console.log('{/literal}{$active_tab}{literal}');
 	}
 */
  });
+
  </script>
  {/literal}
  

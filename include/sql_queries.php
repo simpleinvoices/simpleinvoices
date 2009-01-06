@@ -1577,12 +1577,13 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 	//line item total
 	$total = $gross_total + $tax_total;	
 
-	//Remove jquery auto-fill description - refer jquery.com.js autofill section
+	//Remove jquery auto-fill description - refer jquery.conf.js.tpl autofill section
 	if ($description =="Description")
 	{	
 		$description ="";
 	}
 	
+
 	if ($db_server == 'mysql' && !_invoice_items_check_fk(
 		$invoice_id, $product_id, $tax['tax_id'])) {
 		return null;

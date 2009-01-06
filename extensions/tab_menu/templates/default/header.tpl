@@ -25,8 +25,12 @@
 	<script type="text/javascript" src="./include/jquery/jquery.plugins.js"></script>
 	<script type="text/javascript" src="./include/jquery/wysiwyg/wysiwyg.modified.packed.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.livequery.pack.js"></script>
-	<script type="text/javascript" src="./include/jquery/jquery.functions.js"></script>
-	<script type="text/javascript" src="./include/jquery/jquery.conf.js"></script>
+	{/literal}
+	{include file='../include/jquery/jquery.functions.js.tpl'}
+	{include file='../include/jquery/jquery.conf.js.tpl'}
+	{literal}
+
+	<!--<script type="text/javascript" src="./include/jquery/jquery.conf.js.tpl"></script>-->
 	
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/flexigrid.css">
 	<link rel="stylesheet" type="text/css" href="./include/jquery/wysiwyg/wysiwyg.css">
