@@ -72,14 +72,22 @@
 		
 	}
 
+	/*
+	* function: siLog
+	* purpose: wrapper function for blackbirdjs logging
+	* if debugging is OFF in config.ini - then blackbirdjs.js wont be loaded in header.tpl and normal call to log.debug would fail and cause problems
+	*/
 	function siLog(level,message)
 	{
-		$level = level;
-		if(log)
+		log_level = "log." + level + "('" + message + "')";
+		
+		//if blackbirdjs is loaded (ie. debug in config.ini is on) run - else do nothing
+		if(window.log)
 		{
-			log.debug(message);
+			eval(log_level);
 		}
 	}
+	
      /*
 	 * function: add_line_item
 	 * purpose: to add a new line item in invoice creation page

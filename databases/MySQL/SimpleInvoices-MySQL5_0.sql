@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `si_biller` (
   `custom_field4` varchar(255) default NULL,
   `enabled` varchar(1) NOT NULL default '1',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8  ;
+) ENGINE=MyISAM  DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ;
 
 
 --
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `si_customers` (
   `custom_field4` varchar(255) default NULL,
   `enabled` varchar(1) NOT NULL default '1',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8  ;
+) ENGINE=MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 
 --
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `si_custom_fields` (
   `cf_display` varchar(1) collate utf8_unicode_ci NOT NULL default '1',
   `domain_id` int(11) NOT NULL,
   PRIMARY KEY  (`cf_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
+) ENGINE=MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `si_custom_fields`
@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
   `custom_field4` varchar(50) default NULL,
   `note` text,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8  ;
+) ENGINE=MyISAM  DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ;
 
 
 --
@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `si_invoice_item_tax` (
   `tax_rate` decimal(25,6) NOT NULL,
   `tax_amount` decimal(25,6) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf ;
+) ENGINE=MyISAM  DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ;
 
 
 
@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `si_invoice_type` (
   `inv_ty_id` int(11) NOT NULL auto_increment,
   `inv_ty_description` varchar(25) NOT NULL default '',
   PRIMARY KEY  (`inv_ty_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `si_invoice_type`
@@ -203,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `si_log` (
   `sqlquerie` text NOT NULL,
   `last_id` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `si_log`
@@ -225,7 +225,7 @@ CREATE TABLE IF NOT EXISTS `si_payment` (
   `ac_payment_type` int(10) NOT NULL default '1',
   `domain_id` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `si_payment`
@@ -244,7 +244,7 @@ CREATE TABLE IF NOT EXISTS `si_payment_types` (
   `pt_description` varchar(250) collate utf8_unicode_ci NOT NULL,
   `pt_enabled` varchar(1) collate utf8_unicode_ci NOT NULL default '1',
   PRIMARY KEY  (`pt_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `si_payment_types`
@@ -276,7 +276,7 @@ CREATE TABLE IF NOT EXISTS `si_preferences` (
   `pref_inv_payment_line2_value` varchar(50) default NULL,
   `pref_enabled` varchar(1) NOT NULL default '1',
   PRIMARY KEY  (`pref_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `si_preferences`
@@ -309,7 +309,7 @@ CREATE TABLE IF NOT EXISTS `si_products` (
   `enabled` varchar(1) NOT NULL default '1',
   `visible` tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM  DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 
 --
@@ -323,7 +323,7 @@ CREATE TABLE IF NOT EXISTS `si_sql_patchmanager` (
   `sql_release` varchar(25) NOT NULL default '',
   `sql_statement` text NOT NULL,
   PRIMARY KEY  (`sql_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=189 ;
+) ENGINE=MyISAM  DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci AUTO_INCREMENT=189 ;
 
 --
 -- Dumping data for table `si_sql_patchmanager`
@@ -531,7 +531,7 @@ CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `value` varchar(30) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+) ENGINE=MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci AUTO_INCREMENT=24 ;
 
 --
 -- Dumping data for table `si_system_defaults`
@@ -576,7 +576,7 @@ CREATE TABLE IF NOT EXISTS `si_tax` (
   `tax_enabled` varchar(1) NOT NULL default '1',
   `domain_id` int(11) NOT NULL,
   PRIMARY KEY  (`tax_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `si_tax`
@@ -601,7 +601,7 @@ CREATE TABLE IF NOT EXISTS `si_user` (
   `domain_id` int(11) default NULL,
   `password` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 --
 -- Dumping data for table `si_user`
@@ -621,7 +621,7 @@ CREATE TABLE IF NOT EXISTS `si_user_domain` (
   `name` varchar(255) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `si_user_domain`
@@ -641,7 +641,7 @@ CREATE TABLE IF NOT EXISTS `si_user_role` (
   `name` varchar(255) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `si_user_role`

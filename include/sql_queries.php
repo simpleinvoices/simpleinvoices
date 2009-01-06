@@ -21,21 +21,38 @@ function db_connector() {
 	* strip the pdo_ section from the adapter
 	*/
 	$pdoAdapter = substr($config->database->adapter, 4);
-	
 
 /*	$connlink = new PDO(
 					$pdoAdapter.':host='.$config->database->params->host.';	dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password
 				);*/
-	try{
+	try
+	{
+		
+		switch ($pdoAdapter) 
+		{
 
-	$connlink = new PDO(
+		    case "pgsql":
+		    	$connlink = new PDO(
 					$pdoAdapter.':host='.$config->database->params->host.';	dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password
 				);
-
-	}catch( PDOException $exception ){
-
+		    
+		    case "sqlite":
+		    	$connlink = new PDO(
+					$pdoAdapter.':host='.$config->database->params->host.';	dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password
+				);
+		    default:
+		    	//mysql
+		    	$connlink = new PDO(
+					$pdoAdapter.':host='.$config->database->params->host.';	dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password,  array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
+				);
+				
+				break;
+		}
+		
+	}
+	catch( PDOException $exception )
+	{
 		die($exception->getMessage());
-
 	}
 			
 	return $connlink;
