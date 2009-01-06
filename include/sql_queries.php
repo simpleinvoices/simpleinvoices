@@ -1563,6 +1563,7 @@ function updateInvoice($invoice_id) {
 function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_item_tax_id,$description="", $unit_price="") {
 
 	global $logger;
+	global $LANG;
 	//do taxes
 
 	
@@ -1578,7 +1579,7 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 	$total = $gross_total + $tax_total;	
 
 	//Remove jquery auto-fill description - refer jquery.conf.js.tpl autofill section
-	if ($description =="Description")
+	if ($description == $LANG['Description'])
 	{	
 		$description ="";
 	}
