@@ -1565,6 +1565,7 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 	global $logger;
 	//do taxes
 
+	
 	$tax_total = getTaxesPerLineItem($line_item_tax_id,$quantity, $unit_price);
 
 	$logger->log('Invoice: '.$invoice_id.' Tax '.$line_item_tax_id.' for line item '.$line_number.': '.$tax_total, Zend_Log::INFO);
@@ -1576,11 +1577,38 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 	//line item total
 	$total = $gross_total + $tax_total;	
 
+	//Remove jquery auto-fill description - refer jquery.com.js autofill section
+	if ($description =="Description")
+	{	
+		$description ="";
+	}
+	
 	if ($db_server == 'mysql' && !_invoice_items_check_fk(
 		$invoice_id, $product_id, $tax['tax_id'])) {
 		return null;
 	}
-	$sql = "INSERT INTO ".TB_PREFIX."invoice_items (invoice_id, quantity, product_id, unit_price, tax_amount, gross_total, description, total) VALUES (:invoice_id, :quantity, :product_id, :unit_price, :tax_amount, :gross_total, :description, :total)";
+	$sql = "INSERT INTO ".TB_PREFIX."invoice_items 
+			(
+				invoice_id, 
+				quantity, 
+				product_id, 
+				unit_price, 
+				tax_amount, 
+				gross_total, 
+				description, 
+				total
+			) 
+			VALUES 
+			(
+				:invoice_id, 
+				:quantity, 
+				:product_id, 
+				:unit_price, 
+				:tax_amount, 
+				:gross_total, 
+				:description, 
+				:total
+			)";
 
 	//echo $sql;
 	dbQuery($sql,

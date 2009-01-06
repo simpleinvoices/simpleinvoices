@@ -132,7 +132,7 @@
 						<td>
 						</td>
 						<td colspan=4>
-							<textarea input type=text class="note" id="description{$smarty.section.line.index}" rows=3 cols=3 WRAP=nowrap></textarea>
+							<textarea input type=text class="note" name="description{$smarty.section.line.index}" id="description{$smarty.section.line.index}" rows=3 cols=3 WRAP=nowrap></textarea>
 							
 							</td>
 				</tr>

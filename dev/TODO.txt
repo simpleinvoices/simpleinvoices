@@ -16,6 +16,8 @@ Next Release :: Beta 3
 Next Release :: Beta 2 
 ##############################
 
+ 	- javascript logging added - set debug.level = All in config.ini and press F2 in invoice creation - add some new line items to see it in action
+
 	- new UI to be finished - JK
 	-- new icons for reports - each report section have different icon from famfam - JK
 	- add new line items on the fly in invoice creation - JK

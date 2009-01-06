@@ -117,11 +117,16 @@ $(document).ready(function(){
     });
 
 	//calc number of line items 
-	$(".invoice_save").click(function () { 
-		count_invoice_line_items();
-    });
+	$(".invoice_save").click(function () {
+		siLog('debug','invoice save')
+		count_invoice_line_items()
+		siLog('debug','invoice save- post count')
+		invoice_save_remove_autofill()
+	});
 
+	
 	//$('.editor').livequery(function(){ $(this).wysiwyg({
+	//Autofill "Description" into the invoice items description/notes textarea
 	$(".note").livequery(function(){ 	
 		autoFill($(".note"), "Description");
 		});

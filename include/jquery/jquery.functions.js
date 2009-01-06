@@ -68,7 +68,7 @@
 		var rowID_last = $("input[@id^='quantity']",lastRow).attr("id");
 		rowID_last = parseInt(rowID_last.slice(8)); //using 8 as 'quantity' has eight letters and want to get the number thats after that
 		$("#max_items").val(rowID_last);
-		log.debug( 'Max Items = '+rowID_last );
+		siLog('debug', 'Max Items = '+rowID_last );
 		
 	}
 
@@ -193,15 +193,34 @@
 	         $(this).dialog("destroy"); 
 	}
      
-function autoFill(id, v){
-	$(id).css({ color: "#b2adad" }).attr({ value: v }).focus(function(){
-		if($(this).val()==v){
-			$(this).val("").css({ color: "#b2adad" });
-		}
-	}).blur(function(){
-		if($(this).val()==""){
-			$(this).css({ color: "#b2adad"}).val(v);
-		}
-	});
+	function autoFill(id, v){
+		$(id).css({ color: "#b2adad" }).attr({ value: v }).focus(function(){
+			if($(this).val()==v){
+				$(this).val("").css({ color: "#333" });
+			}
+		}).blur(function(){
+			if($(this).val()==""){
+				$(this).css({ color: "#b2adad"}).val(v);
+			}
+		});
 
+	/*
+	 * Function: count_invoice_line_items
+	 * Purpose: find the last line item and update max_items so /modules/invoice/save.php can access it
+	 */
+	function invoice_save_remove_autofill()
+	{
+		siLog('debug','exectued invoice save remove');
+		
+		var description = $("textarea[@id^='description']").attr("val");
+
+		siLog('debug',description);
+		if (description =="Description")
+		{
+			$("textarea[@id^='description']").attr("val","");
+		}
+		
+		siLog('info','autofill removed');
+		
+	}
 }
