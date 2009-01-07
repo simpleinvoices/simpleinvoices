@@ -35,17 +35,19 @@ function db_connector() {
 		    	$connlink = new PDO(
 					$pdoAdapter.':host='.$config->database->params->host.';	dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password
 				);
-		    
+		    	break;
+		    	
 		    case "sqlite":
 		    	$connlink = new PDO(
 					$pdoAdapter.':host='.$config->database->params->host.';	dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password
 				);
+				break;
+				
 		    default:
 		    	//mysql
 		    	$connlink = new PDO(
-					$pdoAdapter.':host='.$config->database->params->host.';	dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password,  array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
+					$pdoAdapter.':host='.$config->database->params->host.';	dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password,  array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8", PDO::MYSQL_ATTR_INIT_COMMAND=>"SET CHARACTER SET utf8;")
 				);
-				
 				break;
 		}
 		
