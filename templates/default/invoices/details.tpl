@@ -116,6 +116,7 @@
 		<tr>
         	        <td class='details_screen'>{$LANG.quantity_short}</td>
         	        <td class='details_screen'>{$LANG.description}</td>
+        	        <td class='details_screen'>{$LANG.tax}</td>
         	        <td class='details_screen'>{$LANG.unit_price}</td>
 	        </tr>
 	{/if}
@@ -138,16 +139,25 @@
 				<td>
 					<a title="Delete this line item"onclick="delete_line_item({$line}); " class="show-customer" href="#" style="display: inline;"><img src="./images/common/delete_item.png" /></a>
 					<input type="hidden" id='delete{$line}' name='delete{$line}' size="3">
-					<input type="text" name='quantity{$line}' value='{$invoiceItem.quantity|number_format:2}' size="10">
+					<input 
+						type="text" 
+						name='quantity{$line}' 
+						id='quantity{$line}' 
+						value='{$invoiceItem.quantity|number_format:2}' 
+						size="10"
+					>
 					<input type="hidden" name='id{$line}' value='{$invoiceItem.id}' size="10"> </td>
 					<td>
 			                
 			        {if $products == null }
 						<p><em>{$LANG.no_products}</em></p>
 					{else}
+						{*	onchange="invoice_product_change_price($(this).val(), {$line}, jQuery('#quantity{$line}').val() );" *}
 						<select 
 							name="products{$line}"
-							onchange="invoice_product_change_price($(this).val(), {$line}, jQuery('#quantity{$line}').val() );" 
+							id="products{$line}"
+							rel="{$line}"
+							class="product_change"
 						>
 						{foreach from=$products item=product}
 							<option {if $product.id == $invoiceItem.product_id} selected {/if} value="{$product.id}">{$product.description}</option>
@@ -155,6 +165,20 @@
 						</select>
 					{/if}
 				</td>
+				{section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
+					<td>				                				                
+						<select 
+							id="tax_id[{$line}][{$smarty.section.tax.index}]"
+							name="tax_id[{$line}][{$smarty.section.tax.index}]"
+						>
+						<option value=""></option>
+						{assign var="index" value=$smarty.section.tax.index}
+						{foreach from=$taxes item=tax}
+							<option {if $tax.tax_id.id == $invoiceItem.tax.$index} selected {/if} value="{$tax.tax_id}">{$tax.tax_description}</option>
+						{/foreach}
+					</select>
+					</td>
+				{/section}
 				<td>
 					<input id="unit_price{$line}" name="unit_price{$line}" size="7" value="{$invoiceItem.unit_price|number_format:2}"></input>
 				</td>

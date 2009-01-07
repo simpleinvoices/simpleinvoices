@@ -859,9 +859,37 @@ function taxesGroupedForInvoice($invoice_id)
 	return $result;
 
 }
+
+/*
+Function: taxesGroupedForInvoiceItem
+Purpose: to show a nice summary of total $ for tax for an invoice item - used for invoice editing
+*/
+function taxesGroupedForInvoiceItem($invoice_item_id)
+{
+	$sql = "select 
+				item_tax.id as row_id, 
+				tax.tax_description as tax_name, 
+				tax.tax_id as tax_id 
+			from 
+				si_invoice_item_tax item_tax, 
+				si_tax tax 
+			where 
+				item_tax.invoice_item_id = :invoice_item_id 
+				AND 
+				tax.tax_id = item_tax.tax_id 
+				ORDER BY 
+				row_id ASC;";
+	$sth = dbQuery($sql, ':invoice_item_id', $invoice_item_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$result = $sth->fetchAll();
+
+	return $result;
+
+}
+
 class invoice {
 	function getInvoiceItems($id) {
 	
+		global $logger;
 		$sql = "SELECT * FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :id";
 		$sth = dbQuery($sql, ':id', $id);
 		
@@ -878,7 +906,14 @@ class invoice {
 			$sql = "SELECT * FROM ".TB_PREFIX."products WHERE id = :id";
 			$tth = dbQuery($sql, ':id', $invoiceItem['product_id']) or die(htmlspecialchars(end($dbh->errorInfo())));
 			$invoiceItem['product'] = $tth->fetch();	
-			
+
+			$tax = taxesGroupedForInvoiceItem($invoiceItem['id']);
+
+			foreach ($tax as $key => $value)
+			{
+				$invoiceItem['tax'][$key] = $value['tax_id'];
+				$logger->log('Invoice: '.$invoiceItem['invoice_id'].' Item id: '.$invoiceItem['id'].' Tax '.$key.' Tax ID: '.$value['tax_id'], Zend_Log::INFO);
+			}
 			$invoiceItems[$i] = $invoiceItem;
 		}
 		

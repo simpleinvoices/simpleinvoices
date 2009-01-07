@@ -22,7 +22,9 @@ $invoiceItems = invoice::getInvoiceItems($master_invoice_id);
 $customers = getActiveCustomers();
 $preference = getPreference($invoice['preference_id']);
 $billers = getActiveBillers();
-$taxes = getActiveTaxes();
+//$taxes = getActiveTaxes(); <--- look into this
+$defaults = getSystemDefaults();
+$taxes = getTaxes();
 $preferences = getActivePreferences();
 $products = getActiveProducts();
 
@@ -32,6 +34,7 @@ for($i=1;$i<=4;$i++) {
 }
 
 $smarty -> assign("invoice",$invoice);
+$smarty -> assign("defaults",$defaults);
 $smarty -> assign("invoiceItems",$invoiceItems);
 $smarty -> assign("customers",$customers);
 $smarty -> assign("preference",$preference);
