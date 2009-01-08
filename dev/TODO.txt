@@ -39,6 +39,11 @@ Next Release :: Beta 2
 Sometime soon
 ##############################
 ### maybe some work(or thoughts/planning) has been done but needs to be complete ###
+ - Customer Login
+ - User admin 
+ - Biller login
+ - Customer payments - accept via Paypal etc..
+ - Product Cost field - http://simpleinvoices.org/forum/discussion/687/product-cost-price-field 
  - Simple Invoices Errors - make a function and make look all pretty (ie cache read only, no PDO, no PHP5.2, can't connect to Db etc..) - AP
  - Address fields in invoice templates - include comma after add 1 or 2 if other address field not null
  - users/groups/domains - make this happen!
