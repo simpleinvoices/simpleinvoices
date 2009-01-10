@@ -2071,7 +2071,7 @@ function checkFieldExists($table,$field) {
 
 function getURL()
 {
-	global $http_auth;
+	global $config
 //	html2ps does not like &amp; and htmlcharacters encoding - latter useless since InvoiceID comes from an integer field	
 //	$script = "/index.php?module=invoices&amp;view=templates/template&amp;invoice=".htmlspecialchars($invoiceID)."&amp;action=view&amp;location=pdf";
 //	$script = "/index.php?module=invoices&view=templates/template&invoice=$invoiceID&action=view&location=pdf";
@@ -2101,9 +2101,9 @@ function getURL()
 
 	//merge it all togehter
 	if (isset($_SERVER['HTTP_HOST'])) {
-		$_SERVER['FULL_URL'] .= $http_auth.$_SERVER['HTTP_HOST'].$dir.$script;
-	} else {
-		$_SERVER['FULL_URL'] .= $http_auth.$_SERVER['HTTP_HOST'].$dir.$script;
+		$_SERVER['FULL_URL'] .= $config->authentication->http.$_SERVER['HTTP_HOST'].$dir.$script;
+		} else {
+			$_SERVER['FULL_URL'] .= $config->authentication->http.$_SERVER['HTTP_HOST'].$dir.$script;
 	}
 	
 	return $_SERVER['FULL_URL'];
