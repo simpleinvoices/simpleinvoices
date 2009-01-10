@@ -2014,19 +2014,25 @@ function maxInvoice() {
 
 //in this file are functions for all sql queries
 function checkTableExists($table) {
-/*
+
 	global $LANG;
 	global $dbh;
 	global $config;
-	$sql = "SELECT 1 FROM INFORMATION_SCHEMA.TABLES where table_name = :table LIMIT 1";
-	if ($config->database->adapter == 'pgsql') {
-		// Use a nicer syntax
-		$sql = 'SELECT 1 FROM pg_tables WHERE tablename = :table LIMIT 1';
-	}
-	
-	if ($config->database->adapter == 'pdo_sqlite2') {
-		// Use a nicer syntax
-		$sql = 'SELECT * FROM :table LIMIT 1';
+	switch ($config->database->adapter) 
+	{
+
+		case "pdo_pgsql":
+			$sql = 'SELECT 1 FROM pg_tables WHERE tablename = :table LIMIT 1';
+			break;
+
+		case "pdo_sqlite":
+			$sql = 'SELECT * FROM :table LIMIT 1';
+			break;
+		case "pdo_mysql":
+		default:
+		//mysql
+			$sql = "SELECT 1 FROM INFORMATION_SCHEMA.TABLES where table_name = :table LIMIT 1";
+			break;
 	}
 
 	$sth = $dbh->prepare($sql);
@@ -2040,7 +2046,7 @@ function checkTableExists($table) {
 	} else {
 		return false;
 	}
-*/
+
 }
 
 function checkFieldExists($table,$field) {
@@ -2071,7 +2077,7 @@ function checkFieldExists($table,$field) {
 
 function getURL()
 {
-	global $config
+	global $config;
 //	html2ps does not like &amp; and htmlcharacters encoding - latter useless since InvoiceID comes from an integer field	
 //	$script = "/index.php?module=invoices&amp;view=templates/template&amp;invoice=".htmlspecialchars($invoiceID)."&amp;action=view&amp;location=pdf";
 //	$script = "/index.php?module=invoices&view=templates/template&invoice=$invoiceID&action=view&location=pdf";
