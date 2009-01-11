@@ -5,7 +5,7 @@
 
 {if $smarty.get.action === 'view' }
         <b>{$LANG.tax_rate} ::
-        <a href="index.php?module=tax_rates&amp;view=details&amp;submit={$tax.tax_id|escape:html}&amp;action=edit">{$LANG.edit}</a></b>
+        <a href="index.php?module=tax_rates&amp;view=details&amp;id={$tax.tax_id|escape:html}&amp;action=edit">{$LANG.edit}</a></b>
 
 	<hr></hr>
 
@@ -17,7 +17,7 @@
 		<td class="details_screen">{$LANG.description}</td><td>{$tax.tax_description|escape:html}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.tax_percentage}</td><td>{$tax.tax_percentage|escape:html}</td>
+		<td class="details_screen">{$LANG.rate} {* TODO - add html button here *}</td><td>{$tax.tax_percentage|siLocal_number} {$tax.type|escape:html}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td><td>{$tax.enabled|escape:html}</td>
@@ -46,8 +46,11 @@
 		<td><input type="text" name="tax_description" value="{$tax.tax_description|escape:html}" size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.tax_percentage}</td>
-		<td><input type="text" name="tax_percentage" value="{$tax.tax_percentage|escape:html}" size="10" />%</td>
+		<td class="details_screen">{$LANG.rate}</td>
+		<td>
+			<input type="text" name="tax_percentage" value="{$tax.tax_percentage|siLocal_number}" size="10" />
+			{html_options name=type options=$types selected=$tax.type}
+		</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled} </td><td>
@@ -60,13 +63,25 @@
 
 </td>
 	</tr>
+	</table><br>
+	<table class="buttons" align="center">
+    <tr>
+        <td>
+            <button type="submit" class="positive" name="save_tax_rate" value="{$LANG.save_tax_rate}">
+                <img class="button_img" src="./images/common/tick.png" alt=""/> 
+                {$LANG.save}
+            </button>
+
+			<input type="hidden" name="op" value="edit_tax_rate" />
+
+            <a href="./index.php?module=tax_rates&view=manage" class="negative">
+                <img src="./images/common/cross.png" alt=""/>
+                {$LANG.cancel}
+            </a>
+    
+        </td>
+    </tr>
 	</table>
-	<hr></hr>
-
-<input type="submit" name="cancel" value="{$LANG.cancel}" />
-<input type="submit" name="save_tax_rate" value="{$LANG.save_tax_rate}" />
-<input type="hidden" name="op" value="edit_tax_rate" />
-
 
 {/if}
 

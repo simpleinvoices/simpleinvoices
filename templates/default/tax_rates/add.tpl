@@ -44,10 +44,24 @@
 	</tr>
 	
 </table>
-<hr />
-<div style="text-align:center;">
-	<input type=submit name="submit" value="{$LANG.insert_tax_rate}">
-	<input type=hidden name="op" value="insert_tax_rate">
-</div>
+<br>
+	<table class="buttons" align="center">
+    <tr>
+        <td>
+            <button type="submit" class="positive" name="submit" value="{$LANG.insert_tax_rate}">
+                <img class="button_img" src="./images/common/tick.png" alt=""/> 
+                {$LANG.save}
+            </button>
+
+			<input type="hidden" name="op" value="insert_tax_rate" />
+
+            <a href="./index.php?module=tax_rates&view=manage" class="negative">
+                <img src="./images/common/cross.png" alt=""/>
+                {$LANG.cancel}
+            </a>
+    
+        </td>
+    </tr>
+	</table>
 </form>
 {/if}

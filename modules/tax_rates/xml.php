@@ -41,6 +41,7 @@ if (in_array($sort, $validFields)) {
 				tax_id, 
 				tax_description,
 				tax_percentage,
+				type,
 				(SELECT (CASE  WHEN tax_enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
 			FROM 
 				".TB_PREFIX."tax
@@ -68,7 +69,7 @@ if (in_array($sort, $validFields)) {
 		]]></cell>";
 		$xml .= "<cell><![CDATA[".utf8_encode($row['tax_id'])."]]></cell>";		
 		$xml .= "<cell><![CDATA[".utf8_encode($row['tax_description'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode($row['tax_percentage'])."]]></cell>";
+		$xml .= "<cell><![CDATA[".utf8_encode(siLocal::number($row['tax_percentage']))." ".utf8_encode($row['type'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".utf8_encode($row['enabled'])."]]></cell>";				
 		$xml .= "</row>";		
 	}

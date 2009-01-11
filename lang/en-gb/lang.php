@@ -267,6 +267,7 @@ $LANG['quantity'] = "Quantity";//1
 $LANG['quantity_short'] = "Qty";//1
 $LANG['quick_view_of'] = "This is a Quick View of";//1
 $LANG['quick_view_tooltip'] = "Quick View of";//1
+$LANG['rate'] = "Rate";//1
 $LANG['reports'] = "Reports";//1
 $LANG['Required_Field'] = "Required Field";//1
 $LANG['sales'] = "Sales";//1

@@ -12,28 +12,26 @@ Next Release :: Beta 3
 	- mini installer complete
 	-- add checks for php.ini settings, writeable folders etc.. and make pretty
 
-##############################
-Next Release :: Beta 2 
-##############################
-
- 	- javascript logging added - set debug.level = All in config.ini and press F2 in invoice creation - add some new line items to see it in action
-
-	- new UI to be finished - JK
-	-- new icons for reports - each report section have different icon from famfam - JK
-	- add new line items on the fly in invoice creation - JK
-	- update invoice editing with tax rates and dynamical line items - JK
-	- fix page load - where html sections are hidden - ie. export html - only hides after a few seconds - JK
-	- merge itemised and consulting invoice styles - JK
-	- multiple taxes (% and $ based) per line item - JK
-	-- updates Taxes - add % or $ option - JK
-	- domain_id into custom_fields tables - needs to be completed - JK
-
-	## might move the below to beta 3 (or a 2.5 :) ) ##
+## might move the below to beta 3 (or a 2.5 :) ) ##
 	- mini installer - someone
 	-- create a mini installer and use Zend_config_writer to write to config.ini
 	-- just ask for db details and if you want demo data installer
 	-- just the basics - do rest later
 	- add domain_id into system_defaults table - flatten this table - old style - TODO
+	- consulting - add systep prefer to always show description field for invoice line items
+
+##############################
+Next Release :: Beta 2 
+##############################
+
+	- new UI to be finished - JK
+	-- new icons for reports - each report section have different icon from famfam - JK
+	- add new line items on the fly in invoice creation - JK
+	- update invoice editing with tax rates and dynamical line items - JK
+	- multiple taxes (% and $ based) per line item - JK
+	-- updates Taxes - add % or $ option - done
+	- add system pref for number of taxes per line item
+	- domain_id into custom_fields tables - needs to be completed - JK
 
 ##############################
 Sometime soon

@@ -13,6 +13,9 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			var columns = 5;
 			var padding = 12;
 			var grid_width = $('.col').width();
+
+			//LANG
+			var LANG_rate = {/literal}'{$LANG.rate}'{literal};
 			
 			grid_width = grid_width - (columns * padding);
 			percentage_width = grid_width / 100; 
@@ -27,7 +30,7 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 				{display: 'Actions', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
 				{display: 'ID', name : 'tax_id', width : 10 * percentage_width, sortable : true, align: 'left'},
 				{display: 'Description', name : 'tax_description', width : 50 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Percentage', name : 'tax_percentage', width : 20 * percentage_width, sortable : true, align: 'left'},
+				{display: LANG_rate, name : 'tax_percentage', width : 20 * percentage_width, sortable : true, align: 'left'},
 				{display: 'Enabled', name : 'enabled', width : 10 * percentage_width, sortable : true, align: 'left'}
 				
 				],

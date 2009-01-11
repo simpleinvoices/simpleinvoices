@@ -147,7 +147,8 @@
 	
 		$("#description"+rowID_old, clonedRow).attr("id", "description"+rowID_new);
 		$("#description"+rowID_new, clonedRow).attr("name", "description"+rowID_new);
-		$("#description"+rowID_new, clonedRow).val("");
+		//$("#description"+rowID_new, clonedRow).attr("value","{/literal}{$LANG.description}{literal}");
+		//$("#description"+rowID_new, clonedRow).css({ color: "#b2adad" });
 	
 		$("#tax_id\\["+rowID_old+"\\]\\[0\\]", clonedRow).attr("id", "tax_id["+rowID_new+"][0]");
 		$("#tax_id\\["+rowID_new+"\\]\\[0\\]", clonedRow).attr("name", "tax_id["+rowID_new+"][0]");
@@ -193,9 +194,18 @@
 	function dialog_close(){
 	         $(this).dialog("destroy"); 
 	}
-     
+    /* 
 	function autoFill(id, v){
-		$(id).css({ color: "#b2adad" }).attr({ value: v }).focus(function(){
+	
+		//set colour
+		$(id).css({ color: "#b2adad" });
+
+		
+		if( ($(id).val()!==v ) {
+			$(id).css({ color: "#b2adad" }).attr({ value: v });
+		}
+		
+		focus(function(){
 			if($(this).val()==v){
 				$(this).val("").css({ color: "#333" });
 			}
@@ -204,6 +214,32 @@
 //				$(this).css({ color: "#b2adad"}).val(v);
 			}
 		});
+	}
+	*/
+
+	function autoFill(id, v){
+
+		$description = $(id).val().length;
+
+		siLog('info','Description: '+$description);
+		$colour = "#b2adad";
+		if ($description == 0)
+		{
+			$(id).val(v);
+		}
+
+		$(id).css({ color: $colour });
+
+		$(id).focus(function(){
+			if($(this).val()==v){
+				$(this).val("").css({ color: $colour });
+			}
+		}).blur(function(){
+			if($(this).val()==""){
+				$(this).css({ color: $colour }).val(v);
+			}
+		});
+
 	}
 
 	/*

@@ -388,14 +388,23 @@ function getActiveBillers() {
 function getTaxRate($id) {
 	global $LANG;
 	global $dbh;
+	global $auth_session;
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."tax WHERE tax_id = :id";
-	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sql = "SELECT * FROM ".TB_PREFIX."tax WHERE tax_id = :id and domain_id = :domain_id";
+	$sth = dbQuery($sql, ':id', $id, ':domain_id',$auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
 	$tax = $sth->fetch();
 	$tax['enabled'] = $tax['tax_enabled'] == 1 ? $LANG['enabled']:$LANG['disabled'];
 	
 	return $tax;
+}
+function getTaxTypes() {
+	
+	$types=  array(
+                                '$' => '$',
+                                '%' => '%'
+	);
+	return $types;
 }
 
 function getPaymentType($id) {
@@ -1452,22 +1461,31 @@ function insertTaxRate() {
 
 function updateTaxRate() {
 	global $LANG;
+	global $auth_session;
 	
 	$sql = "UPDATE
 				".TB_PREFIX."tax
 			SET
 				tax_description = :description,
 				tax_percentage = :percentage,
+				type = :type,
 				tax_enabled = :enabled
 			WHERE
-				tax_id = :id";
+				tax_id = :id
+			AND
+				domain_id = :domain_id
+			";
 
 	$display_block = $LANG['save_tax_rate_success'];
 	if (!(dbQuery($sql,
 		':description', $_POST['tax_description'],
 	  	':percentage', $_POST['tax_percentage'],
 	  	':enabled', $_POST['tax_enabled'],
-	  	':id', $_GET['id']))) {
+	  	':id', $_GET['id'],
+	  	':domain_id', $auth_session->domain_id,
+	  	':type', $_POST['type']
+
+		))) {
 		$display_block = $LANG['save_tax_rate_failure'];
 	}
 	return $display_block;
@@ -1607,6 +1625,7 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 	$tax_total = getTaxesPerLineItem($line_item_tax_id,$quantity, $unit_price);
 
 	$logger->log('Invoice: '.$invoice_id.' Tax '.$line_item_tax_id.' for line item '.$line_number.': '.$tax_total, Zend_Log::INFO);
+	$logger->log('Description: '.$description, Zend_Log::INFO);
 	$logger->log(' ', Zend_Log::INFO);
 
 	//line item gross total

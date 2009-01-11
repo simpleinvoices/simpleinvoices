@@ -18,8 +18,10 @@ jsEnd();
 $tax_rate_id = $_GET['id'];
 
 $tax = getTaxRate($tax_rate_id);
+$types = getTaxTypes();
 
 $smarty -> assign("tax",$tax);
+$smarty -> assign("types",$types);
 
 $smarty -> assign('pageActive', 'tax_rate');
 $smarty -> assign('active_tab', '#setting');

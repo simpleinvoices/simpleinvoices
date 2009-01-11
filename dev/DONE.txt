@@ -19,14 +19,18 @@ BETA 2
 	- Fix problem with selecting language
 	- Documentation - need to updat to change permmissions of config/config.ini to 640
 	
-	- set domain_id in session - Done
-	- change Unit Price to Unit Cost - change gross to Price - Done
-	- si_account_payments: change all refer to si_payment - done
-	- si_payment: add domain_id into all queries - done
-	- si_tax: add domain_id into all queries - done
-	- si_user: change all refer to si_user - done
-	- domain_id sql patches - write an update table set domain_id = 1 for all tables - done
- 	- Consulting style - if desciptoin null then don;t show Description heading thing on the invoice- JK
+	- set domain_id in session 
+	- change Unit Price to Unit Cost - change gross to Price
+	- si_account_payments: change all refer to si_payment 
+	- si_payment: add domain_id into all queries 
+	- si_tax: add domain_id into all queries 
+	- si_user: change all refer to si_user
+	- domain_id sql patches - write an update table set domain_id = 1 for all tables
+ 	- Consulting style - if desciptoin null then don;t show Description heading thing on the invoice
+	- language select now works again 
+	- http_auth now working for PDf again 
+ 	- javascript logging added - set debug.level = All in config.ini and press F2 in invoice creation - add some new line items to see it in action
+	- merge itemised and consulting invoice styles
 
 --------
 BETA 1

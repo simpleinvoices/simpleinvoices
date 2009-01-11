@@ -123,18 +123,40 @@ $(document).ready(function(){
 	$(".invoice_save").click(function () {
 		siLog('debug','invoice save')
 		count_invoice_line_items()
-		siLog('debug','invoice save- post count')
-		invoice_save_remove_autofill()
+//		siLog('debug','invoice save- post count')
+//		invoice_save_remove_autofill()
 	});
 
 	
 	//$('.editor').livequery(function(){ $(this).wysiwyg({
 	//Autofill "Description" into the invoice items description/notes textarea
+/*
 	$(".note").livequery(function(){ 	
 		autoFill($(".note"), "{/literal}{$LANG.description}{literal}");
-		});
+	});
+*/	
+	//autoFill($(".note"), "{/literal}{$LANG.description}{literal}");
+
+	$(".note").livequery(function(){
+			
+			//$description = $(".note").attr("value");
+			$description = $(".note").val();
+		
+			if ($description == "")
+			{
+				$(".note").val('{/literal}{$LANG.description}{literal}');
+			}
+	
+			$(".note").focus(function(){
+	            if($(this).val()=="{/literal}{$LANG.description}{literal}"){
+    	           $(this).val("");
+            }
+	});
+	});
+	$(".note").css({ color: "#b2adad" });
 
 
 });
+
 </script>
 {/literal}
