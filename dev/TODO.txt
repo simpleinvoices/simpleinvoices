@@ -25,7 +25,7 @@ Next Release :: Beta 2
 ##############################
 
 	- new UI to be finished - JK
-	-- new icons for reports - each report section have different icon from famfam - JK
+	-- new icons for reports - each report section have different icon from famfam - done
 	- add new line items on the fly in invoice creation - JK
 	- update invoice editing with tax rates and dynamical line items - JK
 	- multiple taxes (% and $ based) per line item - JK
