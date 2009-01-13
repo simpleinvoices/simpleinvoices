@@ -80,13 +80,14 @@ if (  $op === 'insert_preference' ) {
 	  ':payment_line2_value', $_POST['p_inv_payment_line2_value'],
 	  ':enabled', $_POST['pref_enabled']
 	  )) {
-		$display_block = $LANG['save_preference_success'];
+		$saved = true;
+		//$display_block = $LANG['save_preference_success'];
 	} else {
-		$display_block =  $LANG['save_preference_failure'];
+		$saved = false;
+		//$display_block =  $LANG['save_preference_failure'];
 	}
 
 	//header( 'refresh: 2; url=manage_preferences.php' );
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=preferences&view=manage>";
 
 }
 
@@ -128,28 +129,21 @@ else if (  $op === 'edit_preference' ) {
 		  ':enabled', $_POST['pref_enabled'],
 		  ':id', $_GET['id']))
 	    {
-			$display_block = $LANG['save_preference_success'];
+			$saved =true;
+		//	$display_block = $LANG['save_preference_success'];
 		} else {
-			$display_block = $LANG['save_preference_failure'];
+			$saved = false;
+			//$display_block = $LANG['save_preference_failure'];
 		}
 
 		//header( 'refresh: 2; url=manage_preferences.php' );
-		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=preferences&view=manage>";
+	//	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=preferences&view=manage>";
 
 		}
 
-	else if ($_POST[action] == "Cancel") {
-
-		//header( 'refresh: 0; url=manage_preferences.php' );
-		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=0;URL=index.php?module=preferences&view=manage>";
-	}
 }
 
-
-$refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
-
-$smarty -> assign('display_block',$display_block); 
-$smarty -> assign('refresh_total',$refresh_total); 
+$smarty -> assign('saved',$saved); 
 
 $smarty -> assign('pageActive', 'preference');
 $smarty -> assign('active_tab', '#setting');

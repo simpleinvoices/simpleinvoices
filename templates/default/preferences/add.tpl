@@ -1,23 +1,9 @@
-
-{* if customer is updated or saved.*} 
-
-{if $smarty.post.p_description != "" && $smarty.post.submit != null } 
-{$refresh_total}
-
-<br />
-<br />
-{$display_block} 
-<br />
-<br />
-
-{else}
-{* if  name was inserted *} 
-	{if $smarty.post.submit !=null} 
+{if $smarty.post.p_description == "" AND $smarty.post.submit != null } 
 		<div class="validation_alert"><img src="./images/common/important.png"</img>
 		You must enter a description for the preference</div>
 		<hr />
-	{/if}
-<form name="frmpost" ACTION="index.php?module=preferences&view=add" METHOD="POST">
+{/if}
+<form name="frmpost" ACTION="index.php?module=preferences&view=save" METHOD="POST">
 
 
 <table align=center>
@@ -142,5 +128,3 @@
     </tr>
  </table>
 </form>
-	
-{/if}
