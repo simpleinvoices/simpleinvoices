@@ -16,30 +16,7 @@
 *	http://www.simpleinvoices.org
 */
 *}
-
-{* if customer is updated or saved.*}
-
-{if $smarty.post.pt_description != "" && $smarty.post.submit != null }
-{$refresh_total}
-
-<br />
-<br />
-{$display_block}
-<br />
-<br />
-
-{else}
-{* if  name was inserted *}
-    {if $smarty.post.submit !=null}
-        <div class="validation_alert"><img src="./images/common/important.png"</img>
-        You must enter a description for the payment type</div>
-        <hr />
-    {/if}
-
-
-<form name="frmpost" action="index.php?module=payment_types&amp;view=add" method="post">
-	<h3>Payment type to add</h3>
-	<hr />
+<form name="frmpost" action="index.php?module=payment_types&amp;view=save" method="post">
 	<table align="center">
 		<tr>
 			<td class="details_screen">Payment type description 
@@ -63,10 +40,26 @@
 			</td>
 		</tr>
 	</table>
-	<hr />
+	<br />
+	<table class="buttons" align="center">
+		<tr>
+			<td>
+				<button type="submit" class="positive" name="insert_preference" value="{$LANG.save}">
+					<img class="button_img" src="./images/common/tick.png" alt=""/> 
+					{$LANG.save}
+				</button>
+
+				<input type="hidden" name="op" value="insert_preference">
+			
+				<a href="./index.php?module=payment_types&view=manage" class="negative">
+					<img src="./images/common/cross.png" alt=""/>
+					{$LANG.cancel}
+				</a>
+		
+			</td>
+		</tr>
+	 </table>
 	<div style="text-align:center;">
-		<input type="submit" name="submit" value="{$LANG.insert_payment_type}">
 		<input type="hidden" name="op" value="insert_payment_type">
 	</div>
 </form>
-    {/if}

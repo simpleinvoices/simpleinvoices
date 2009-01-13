@@ -19,9 +19,6 @@
 {if $smarty.get.action == "view" }
 	
 	
-	<b>{$LANG.payment_type} :: <a href='index.php?module=payment_types&amp;view=details&amp;id={$paymentType.pt_id|escape:html}&amp;action=edit'>{$LANG.edit}</a> </b>
-	<hr />
-
 	<table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.payment_type_id}</td><td>{$paymentType.pt_id|escape:html}</td>
@@ -33,16 +30,26 @@
 		<td class="details_screen">{$LANG.enabled}</td><td>{$paymentType.enabled|escape:html}</td>
 	</tr>
 	</table>
-	<hr />
+		<br>
+	<table class="buttons" align="center">
+		<tr>
+			<td>
+				<a href="./index.php?module=payment_types&view=details&id={$paymentType.pt_id}&action=edit" class="positive">
+					<img src="./images/famfam/report_edit.png" alt=""/>
+					{$LANG.edit}
+				</a>
 
-<a href='index.php?module=payment_types&amp;view=details&amp;id={$paymentType.pt_id|escape:html}&amp;action=edit'>{$LANG.edit}</a>
-
+				<a href="./index.php?module=payment_types&view=manage" class="negative">
+					<img src="./images/common/cross.png" alt=""/>
+					{$LANG.cancel}
+				</a>
+		
+			</td>
+		</tr>
+	 </table>
 {/if}
 
 {if $smarty.get.action == "edit"}
-
-	<b>{$LANG.payment_type_edit}</b>
-	<hr />
 
 	<table align="center">
 	<tr>
@@ -68,11 +75,24 @@
 		</td>
 	</tr>
 	</table>
-	<hr />
+	<br>
+	<table class="buttons" align="center">
+		<tr>
+			<td>
+				<button type="submit" class="positive" name="save_payment_type" value="{$LANG.save}">
+					<img class="button_img" src="./images/common/tick.png" alt=""/> 
+					{$LANG.save}
+				</button>
 
-
-<input type="submit" name="cancel" value="{$LANG.cancel}" />
-<input type="submit" name="save_payment_type" value="{$LANG.save_payment_type}" />
-<input type="hidden" name="op" value="edit_payment_type" />
+				<input type="hidden" name="op" value="edit_payment_type">
+			
+				<a href="./index.php?module=preferences&view=manage" class="negative">
+					<img src="./images/common/cross.png" alt=""/>
+					{$LANG.cancel}
+				</a>
+		
+			</td>
+		</tr>
+	 </table>
 
 {/if}

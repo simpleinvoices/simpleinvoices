@@ -20,8 +20,17 @@
 {if $paymentTypes==null }
 <p><em>{$LANG.no_payment_types}.</em></p>
 {else}
-<h3>{$LANG.manage_payment_types} :: <a href="index.php?module=payment_types&amp;view=add">{$LANG.add_new_payment_type}</a></h3>
-<hr />
+<table class="buttons" align="center">
+    <tr>
+        <td>
+            <a href="./index.php?module=payment_types&view=add" class="positive">
+                <img src="./images/famfam/add.png" alt=""/>
+                {$LANG.add_new_payment_type}
+            </a>
+
+        </td>
+    </tr>
+ </table>
 
 <table id="manageGrid" style="display:none"></table>
 

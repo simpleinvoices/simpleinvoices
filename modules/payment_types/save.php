@@ -21,22 +21,23 @@ $sql = "INSERT INTO ".TB_PREFIX."tax VALUES ('$_POST[tax_description]','$_POST[t
 		$sql = "INSERT into ".TB_PREFIX."payment_types
 				(domain_id, pt_description, pt_enabled)
 			VALUES
-				('1', :description, :enabled)";
+				(:domain_id', :description, :enabled)";
 	} else {
 		$sql = "INSERT into
 				".TB_PREFIX."payment_types
 			VALUES
-				(NULL, '1', :description, :enabled)";
+				(NULL, :domain_id, :description, :enabled)";
 	}
 	
-	if (dbQuery($sql, ':description', $_POST['pt_description'], ':enabled', $_POST['pt_enabled'])) {
-		$display_block = $LANG['save_payment_type_success'];
+	if (dbQuery($sql, ':domain_id', $auth_session->domain_id, ':description', $_POST['pt_description'], ':enabled', $_POST['pt_enabled'])) {
+		$saved = true;
+		//$display_block = $LANG['save_payment_type_success'];
 	} else {
-		$display_block =  $LANG['save_payment_type_failure'];
+		$saved = false;
+		//$display_block =  $LANG['save_payment_type_failure'];
 	}
 	
 	//header( 'refresh: 2; url=manage_payment_types.php' );
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=payment_types&view=manage>";
 
 
 }
@@ -59,20 +60,17 @@ else if (  $op === 'edit_payment_type' ) {
 				pt_id = :id";
 
 		if (dbQuery($sql, ':description', $_POST['pt_description'], ':enabled', $_POST['pt_enabled'], ':id', $_GET['id'])) {
-			$display_block = $LANG['save_payment_type_success'];
+			$saved = true;
+			//$display_block = $LANG['save_payment_type_success'];
 		} else {
-			$display_block =  $LANG['save_payment_type_failure'];
+			$saved = false;
+			//$display_block =  $LANG['save_payment_type_failure'];
 		}
 
 		//header( 'refresh: 2; url=manage_payment_types.php' );
-		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=payment_types&view=manage>";
+		//$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=payment_types&view=manage>";
 
-	} else if (isset($_POST['cancel'])) {
-
-		//header( 'refresh: 0; url=manage_payment_types.php' );
-		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=0;URL=index.php?module=payment_types&view=manage>";
-
-	}
+	} 
 }
 
 //TODO: Make redirection with php..
@@ -83,6 +81,7 @@ $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 
 $smarty -> assign('display_block',$display_block); 
 $smarty -> assign('refresh_total',$refresh_total); 
+$smarty -> assign('saved',$saved); 
 
 $smarty -> assign('pageActive', 'payment_type');
 $smarty -> assign('active_tab', '#setting');

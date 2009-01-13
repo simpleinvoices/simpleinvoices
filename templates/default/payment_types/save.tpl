@@ -17,7 +17,19 @@
 */
 *}
 
-<br />
-{$display_block}
-{$refresh_total}
-<br />
+<br>
+{if $saved == true }
+	<br>
+	 {$LANG.save_payment_type_success}
+	<br>
+	<br>
+{else}
+	<br>
+	 {$LANG.save_payment_type_failure}
+	<br>
+	<br>
+{/if}
+
+{if $saved == true }
+	<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=payment_types&view=manage>
+{/if}
