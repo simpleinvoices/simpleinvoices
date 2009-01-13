@@ -5,8 +5,6 @@
 
 
 {if $smarty.get.action== 'view' }
-	<b>Preference :: <a href='index.php?module=preferences&view=details&id={$preference.pref_id}&action=edit'>Edit</a></b>
-	<hr></hr>
 
 	
 	<table align=center>
@@ -110,22 +108,38 @@
 			<td colspan=2 align=center>
 			</td>
 		</tr>
+		</table>
+		<br>
+<table class="buttons" align="center">
+    <tr>
+        <td>
+            <a href="./index.php?module=preferences&view=details&id={$preference.pref_id}&action=edit" class="positive">
+                <img src="./images/famfam/report_edit.png" alt=""/>
+                {$LANG.edit}
+            </a>
+
+            <a href="./index.php?module=preferences&view=manage" class="negative">
+                <img src="./images/common/cross.png" alt=""/>
+                {$LANG.cancel}
+            </a>
+    
+        </td>
+    </tr>
+ </table>
+<br>
+<table  align="center">
 		<tr>
 			<td colspan=2 align=center class="align_center">
 				<a class="cluetip" href="#"	rel="docs.php?t=help&p=inv_pref_what_the" title="{$LANG.whats_all_this_inv_pref}"><img src="./images/common/help-small.png"></img> Whats all this "Invoice Preference" stuff about? </a>
 			</td>
 		</tr>
 		</table>
-		<hr></hr>
 
-<a href='index.php?module=preferences&view=details&id={$preference.pref_id}&action=edit'>Edit</a>
 
 {/if}
 
 {if $smarty.get.action== 'edit' }
 
-<b>Preferences</b>
-	<hr></hr>
 
         <table align=center>
                 <tr>
@@ -244,7 +258,7 @@
                 </tr>
 
                 </table>
-		<hr></hr>
+<br>
 <table class="buttons" align="center">
     <tr>
         <td>

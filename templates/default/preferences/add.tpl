@@ -19,10 +19,6 @@
 	{/if}
 <form name="frmpost" ACTION="index.php?module=preferences&view=add" METHOD="POST">
 
-<h3>{$LANG.invoice_preference_to_add}</h3>
-
-<hr />
-
 
 <table align=center>
 <tr>
@@ -126,7 +122,7 @@
 	</tr>
 </table>
 <!-- </div> -->
-<hr />
+<br />
 <table class="buttons" align="center">
     <tr>
         <td>

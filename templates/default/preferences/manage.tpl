@@ -16,8 +16,17 @@
 {if preferences == null}
 <P><em>{$LANG.no_preferences}.</em></p>
 {else}
-<h3>{$LANG.manage_preferences} :: <a href="index.php?module=preferences&view=add">{$LANG.add_new_preference}</a></h3>
-<hr />
+<table class="buttons" align="center">
+    <tr>
+        <td>
+            <a href="./index.php?module=preferences&view=add" class="positive">
+                <img src="./images/famfam/add.png" alt=""/>
+                {$LANG.add_new_preference}
+            </a>
+
+        </td>
+    </tr>
+ </table>
 <table id="manageGrid" style="display:none"></table>
 
  {include file='../modules/preferences/manage.js.php'}
