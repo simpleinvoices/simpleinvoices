@@ -1,0 +1,10 @@
+IndexIgnore */*
+
+<FilesMatch "\.(htaccess|htpasswd|ini|phps|fla|psd|log|sh)$"> 
+	Order Allow,Deny 
+	Deny from all 
+</FilesMatch>
+
+<FilesMatch "\.(htm|html|css|js|php)$">
+	AddDefaultCharset UTF-8
+</FilesMatch>

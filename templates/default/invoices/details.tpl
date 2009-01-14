@@ -109,103 +109,138 @@
 
 {if $invoice.type_id == 2 || $invoice.type_id == 3 }
 
-     {if $invoice.type_id == 2 }
-		<tr>
-		<td colspan=6>
-		<table>
-		<tr>
-        	        <td class='details_screen'>{$LANG.quantity_short}</td>
-        	        <td class='details_screen'>{$LANG.description}</td>
-        	        <td class='details_screen'>{$LANG.tax}</td>
-        	        <td class='details_screen'>{$LANG.unit_price}</td>
-	        </tr>
-	{/if}
 
-        {if $invoice.type_id == 3}
 		<tr>
 		<td colspan=6>
-		<table>
-                <tr>
-                        <td class='details_screen'>{$LANG.quantity_short}</td>
-                        <td class='details_screen'>{$LANG.item}</td>
-                        <td class='details_screen'>{$LANG.unit_price}</td>
-                </tr>
-        {/if}
-	
-{foreach key=line from=$invoiceItems item=invoiceItem name=line_item_number}
 		
-		
-	        <tr class="row{$line}">
-				<td>
-					<a title="Delete this line item"onclick="delete_line_item({$line}); " class="show-customer" href="#" style="display: inline;"><img src="./images/common/delete_item.png" /></a>
-					<input type="hidden" id='delete{$line}' name='delete{$line}' size="3">
-					<input 
-						type="text" 
-						name='quantity{$line}' 
-						id='quantity{$line}' 
-						value='{$invoiceItem.quantity|number_format:2}' 
-						size="10"
+		<table id="itemtable">
+			<tr>
+				<td class='details_screen'></td>
+	        	<td class='details_screen'>{$LANG.quantity_short}</td>
+	        	<td class='details_screen'>{$LANG.description}</td>
+	        	<td class='details_screen'>{$LANG.tax}</td>
+	        	<td class='details_screen'>{$LANG.unit_price}</td>
+	        	<td>
+					<a 
+						href='#' 
+						class="show-note" 
+						onClick="$('.note').show();$('.show-note').hide();"
 					>
-					<input type="hidden" name='id{$line}' value='{$invoiceItem.id}' size="10"> </td>
-					<td>
-			                
-			        {if $products == null }
-						<p><em>{$LANG.no_products}</em></p>
-					{else}
-						{*	onchange="invoice_product_change_price($(this).val(), {$line}, jQuery('#quantity{$line}').val() );" *}
-						<select 
-							name="products{$line}"
-							id="products{$line}"
-							rel="{$line}"
-							class="product_change"
-						>
-						{foreach from=$products item=product}
-							<option {if $product.id == $invoiceItem.product_id} selected {/if} value="{$product.id}">{$product.description}</option>
-						{/foreach}
-						</select>
-					{/if}
+						<img src="./images/common/page_white_add.png" title="{$LANG.show_details}">
+					</a>
+					<a href='#' class="note" onClick="$('.note').hide();$('.show-note').show();">
+						<img src="./images/common/page_white_delete.png" title="{$LANG.hide_details}"/>
+					</a>
 				</td>
-				{section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
-					<td>				                				                
-						<select 
-							id="tax_id[{$line}][{$smarty.section.tax.index}]"
-							name="tax_id[{$line}][{$smarty.section.tax.index}]"
-						>
-						<option value=""></option>
-						{assign var="index" value=$smarty.section.tax.index}
-						{foreach from=$taxes item=tax}
-							<option {if $tax.tax_id.id == $invoiceItem.tax.$index} selected {/if} value="{$tax.tax_id}">{$tax.tax_description}</option>
-						{/foreach}
-					</select>
-					</td>
-				{/section}
-				<td>
-					<input id="unit_price{$line}" name="unit_price{$line}" size="7" value="{$invoiceItem.unit_price|number_format:2}"></input>
-				</td>
-	        </tr>
-		
-
-	{if $invoice.type_id == 3}
-		
-
-		<tr>
-
-			<td colspan="6" class="details_screen">{$LANG.description}</td>
-		<tr>
-                        <td colspan="6"><textarea input type="text" class="editor" name="description{$line}" rows=5 cols=70 wrap="nowrap">{$invoiceItem.description|unescape}</textarea></td>
-                </tr>
+		    </tr>
 	
-	{/if}
-{/foreach}
-
-	<tr>
-		<td>
-			<a href="./index.php?module=invoices&view=add_invoice_item&invoice={$invoice.id}&type={$invoice.type_id}&tax_id={$invoiceItems.0.tax_id}"><img src="./images/common/famfamAdd.png"></img>{$LANG.add_invoice_item}</a>
+			{foreach key=line from=$invoiceItems item=invoiceItem name=line_item_number}
+				<tbody class="line_item" id="row{$line}">
+			        <tr>
+						<td>
+						{if $line == "0"}
+							<a title="Delete this line item" href="#" style="display: inline;">
+								<img src="./images/common/delete_item.png" />
+							</a>
+						{/if}
+						{if $line != "0"}
+							<a title="Delete this line item" href="#" style="display: inline;">
+								<img src="./images/common/blank.gif" />
+							</a>
+						{/if}
+						</td>
+						<td>
+							<input type="hidden" id='delete{$line}' name='delete{$line}' size="3">
+							<input 
+								type="text" 
+								name='quantity{$line}' 
+								id='quantity{$line}' 
+								value='{$invoiceItem.quantity|number_format:2}' 
+								size="10"
+							>
+							<input type="hidden" name='id{$line}' value='{$invoiceItem.id}' size="10"> 
+						</td>
+						<td>
+					                
+					        {if $products == null }
+								<p><em>{$LANG.no_products}</em></p>
+							{else}
+								{*	onchange="invoice_product_change_price($(this).val(), {$line}, jQuery('#quantity{$line}').val() );" *}
+								<select 
+									name="products{$line}"
+									id="products{$line}"
+									rel="{$line}"
+									class="product_change"
+								>
+								{foreach from=$products item=product}
+									<option {if $product.id == $invoiceItem.product_id} selected {/if} value="{$product.id}">{$product.description}</option>
+								{/foreach}
+								</select>
+							{/if}
+						</td>
+						{section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
+							<td>				                				                
+								<select 
+									id="tax_id[{$line}][{$smarty.section.tax.index}]"
+									name="tax_id[{$line}][{$smarty.section.tax.index}]"
+								>
+								<option value=""></option>
+								{assign var="index" value=$smarty.section.tax.index}
+								{foreach from=$taxes item=tax}
+									<option {if $tax.tax_id.id == $invoiceItem.tax.$index} selected {/if} value="{$tax.tax_id}">{$tax.tax_description}</option>
+								{/foreach}
+							</select>
+							</td>
+						{/section}
+						<td>
+							<input id="unit_price{$line}" name="unit_price{$line}" size="7" value="{$invoiceItem.unit_price|number_format:2}"></input>
+						</td>
+			        </tr>
+		            	<tr colspan="6" class="notem">
+								<td>
+								</td>
+								<td colspan=4>
+									<textarea input type=text class="note" name="description{$smarty.section.line.index}" id="description{$smarty.section.line.index}" rows=3 cols=3 WRAP=nowrap>{$invoiceItem.description|unescape}</textarea>
+									
+									</td>
+						</tr>
+					</tbody>
+			{/foreach}
+		</table>
 		</td>
-		<td>
-		</td>
-	</tr>
+		</tr>
+		<tr>
+			<td>
+				<table class="buttons" align="left">
+					<tr>
+						<td>
+							{* onClick="add_line_item();" *}
+							<a 
+								href="#" 
+								class="add_line_item"
+							>
+								<img 
+									src="./images/common/add.png"
+									alt=""
+								/>
+								Add new row{* $LANG TODO *}
+							</a>
+					
+						</td>
+					</tr>
+				 </table>
+			</td>
+		</tr>
 
+		{*
+			<tr>
+				<td>
+					<a href="./index.php?module=invoices&view=add_invoice_item&invoice={$invoice.id}&type={$invoice.type_id}&tax_id={$invoiceItems.0.tax_id}"><img src="./images/common/famfamAdd.png"></img>{$LANG.add_invoice_item}</a>
+				</td>
+				<td>
+				</td>
+			</tr>
+		*}
 	 {$customFields.1}
 	 {$customFields.2}
 	 {$customFields.3}
@@ -224,48 +259,32 @@
 	{/if}
 	
 	
+
 	<tr>
-		<td class='details_screen'>{$LANG.tax}</td>
-		<td>
+		<td class='details_screen'>{$LANG.inv_pref}</td><td>
+
+
+		{if $preferences == null }
+			<p><em>{$LANG.no_preferences}</em></p>
+		{else}
+			<select name="preference_id">
+			{foreach from=$preferences item=preference}
+				<option {if $preference.pref_id == $invoice.preference_id} selected {/if} value="{$preference.pref_id}">{$preference.pref_description}</option>
+			{/foreach}
+			</select>
+		{/if}
 	                         
-	                         	
-{if $taxes == null }
-	<p><em>{$LANG.no_taxes}</em></p>
-{else}
-	<select name="tax_id">
-	{foreach from=$taxes item=tax}
-		<option {if $tax.tax_id == $invoiceItems.0.tax_id} selected {/if} value="{$tax.tax_id}">{$tax.tax_description}</option>
-	{/foreach}
-	</select>
-{/if}
-
-
-	</td>
+	    </td>
 	</tr>
-	<td class='details_screen'>{$LANG.inv_pref}</td><td>
-
-
-{if $preferences == null }
-	<p><em>{$LANG.no_preferences}</em></p>
-{else}
-	<select name="preference_id">
-	{foreach from=$preferences item=preference}
-		<option {if $preference.pref_id == $invoice.preference_id} selected {/if} value="{$preference.pref_id}">{$preference.pref_description}</option>
-	{/foreach}
-	</select>
-{/if}
-	                         
-	                         </td>
-	                </tr>
 
 	
 
 
-        </table>
+    </table>
 	<!-- addition close table tag to close invoice itemised/consulting if it has a note -->
 	</table>
 
-<hr></hr>
+<br>
 <table class="buttons" align="center">
     <tr>
         <td>

@@ -21,6 +21,7 @@
 
 <tr>
 	<td colspan=3">
+	
 	<table id="itemtable">
 		 <tbody id="itemtable-tbody">
 		<tr>

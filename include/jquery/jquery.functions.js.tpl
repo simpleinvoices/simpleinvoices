@@ -26,7 +26,7 @@
 	//dlete line item in EDIT page
 	function delete_line_item(row_number)
 	{
-		$('.row'+row_number).hide(); 
+		$('#row'+row_number).hide(); 
 		$('#quantity'+row_number).attr('value','0');
 		$('#delete'+row_number).attr('value','yes');
 	}

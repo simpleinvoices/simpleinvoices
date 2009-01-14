@@ -8,6 +8,7 @@ Next Release :: Beta 3
 	- database backup - export as XML - Hannes
 	- change config.ini back to config.php - but keep ini format and add ;<?php on line 1 and ; exit; on line 2 - this is for sercurity reasons
 	-- maybe got to think about this and see if new installer can do it
+	-- using .htaccess to protect against reasding of .ini - done
 	- make search in Manage pages work good for all pages
 	- mini installer complete
 	-- add checks for php.ini settings, writeable folders etc.. and make pretty
