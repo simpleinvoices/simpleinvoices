@@ -1,8 +1,10 @@
 <?php 
 
+include('./include/init.php');
 
 class database{
-    var $db_link;
+	
+	var $db_link;
     #-- Class Constructor ------------------------------------------------
     function database(){
         $this->db_link = $this->open_database();
@@ -13,10 +15,12 @@ class database{
     # creates a connection to the mysql database
     #-------------------------------------------------------------------
     function open_database(){
-	include('./config/config.php');
-        $db        = mysql_connect("$db_host","$db_user","$db_password")
+    	
+		global $config;
+    	
+        $db = mysql_connect($config->database->params->host,$config->database->params->username,$config->database->params->password)
             or die("<font color=\"#ff0000\">There was an error connecting to the database server</font>");
-        mysql_select_db("$db_name")
+        mysql_select_db($config->database->params->dbname)
             or die("<font color=\"#ff0000\">There was an error selecting the database</font>");
         
         return $db;
