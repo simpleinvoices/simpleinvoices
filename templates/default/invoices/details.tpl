@@ -138,14 +138,28 @@
 				<tbody class="line_item" id="row{$line}">
 			        <tr>
 						<td>
-						{if $line == "0"}
-							<a title="Delete this line item" href="#" style="display: inline;">
-								<img src="./images/common/delete_item.png" />
+						{if $line != "0"}
+							<a 
+								id="trash_link_edit{$line}"
+								class="trash_link_edit"
+								title="Delete this line item" 
+								href="#" 
+								style="display: inline;"
+								rel="{$line}"
+							>
+								<img id="delete_image{$line}" src="./images/common/delete_item.png" />
 							</a>
 						{/if}
-						{if $line != "0"}
-							<a title="Delete this line item" href="#" style="display: inline;">
-								<img src="./images/common/blank.gif" />
+						{if $line == "0"}
+							<a 
+								id="trash_link_edit{$line}"
+								class="trash_link_edit"
+								title="Delete this line item"
+								href="#"
+								style="display: inline;"
+								rel="{$line}"
+							>
+								<img id="delete_image{$line}" src="./images/common/blank.gif" />
 							</a>
 						{/if}
 						</td>

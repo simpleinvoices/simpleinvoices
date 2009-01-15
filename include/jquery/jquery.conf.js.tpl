@@ -113,6 +113,12 @@ $(document).ready(function(){
       delete_row(id);
     });
 	
+	//delete line in invoice
+	$(".trash_link_edit").livequery('click',function () { 
+      id = $(this).attr("rel");
+      delete_line_item(id);
+    });
+
 	//add new lien item in invoices
 	$("a.add_line_item").click(function () { 
 		add_line_item();

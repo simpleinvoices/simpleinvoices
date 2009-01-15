@@ -122,9 +122,21 @@
 		//trash image
 		clonedRow.find("#trash_link"+rowID_old).attr("id", "trash_link"+rowID_new);
 		clonedRow.find("#trash_link"+rowID_new).attr("name", "trash_link"+rowID_new);
+		clonedRow.find("#trash_link_edit"+rowID_old).attr("id", "trash_link_edit"+rowID_new);
+		clonedRow.find("#trash_link_edit"+rowID_new).attr("name", "trash_link_edit"+rowID_new);
+
+		//update teh hidden delete field
+		clonedRow.find("#delete"+rowID_old).attr("id", "delete"+rowID_new);
+		clonedRow.find("#delete"+rowID_new).attr("name", "delete"+rowID_new);
+		//update the delete icon
+		clonedRow.find("#delete_image"+rowID_old).attr("id", "delete_image"+rowID_new);
+		clonedRow.find("#delete_image"+rowID_new).attr("name", "delete_image"+rowID_new);
+		clonedRow.find("#delete_image"+rowID_new).attr("src", "./images/common/delete_item.png");
 
 		clonedRow.find("#trash_link"+rowID_new).attr("href", "#");
 		clonedRow.find("#trash_link"+rowID_new).attr("rel", rowID_new);
+		clonedRow.find("#trash_link_edit"+rowID_new).attr("href", "#");
+		clonedRow.find("#trash_link_edit"+rowID_new).attr("rel", rowID_new);
 	
 		clonedRow.find("#trash_image"+rowID_old).attr("src", "./images/common/delete_item.png");
 		clonedRow.find("#trash_image"+rowID_old).attr("title", "Delete this row");
