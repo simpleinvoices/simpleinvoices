@@ -55,7 +55,7 @@
 <!-- Do stuff menu  - end -->
 
 <!-- Don't forget to menu - start -->
-<h2>Don't forget to</h2>
+<h2 class="align_left">Don't forget to</h2>
 <table class="buttons" >
     <tr>
         <td>
@@ -78,9 +78,11 @@
 <!-- Don't forget to menu - end -->
 
 <!-- Reports menu - start -->
-<h2>Your reports</h2>
---fancy graph here-- --some links on the right--
-<br>
+<div class="align_left">
+	<h2>Your reports</h2>
+		--fancy graph here-- --some links on the right--
+		<br>
+	</div>
 <!-- Reports menu - end -->
 
 

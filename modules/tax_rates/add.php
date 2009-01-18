@@ -8,6 +8,10 @@ if ($_POST['tax_description'] != "" ) {
 	include("./modules/tax_rates/save.php");
 }
 
+$types = getTaxTypes();
+
+$smarty -> assign("types",$types);
+
 $smarty -> assign('save',$save);
 
 $smarty -> assign('pageActive', 'tax_rate');

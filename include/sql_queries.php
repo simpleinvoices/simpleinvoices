@@ -401,8 +401,8 @@ function getTaxRate($id) {
 function getTaxTypes() {
 	
 	$types=  array(
-                                '$' => '$',
-                                '%' => '%'
+                                '%' => '%',
+                                '$' => '$'
 	);
 	return $types;
 }
@@ -1444,15 +1444,16 @@ function insertTaxRate() {
 	global $LANG;
 
 	$sql = "INSERT into ".TB_PREFIX."tax
-				(domain_id, tax_description, tax_percentage, tax_enabled)
+				(domain_id, tax_description, tax_percentage, type,  tax_enabled)
 			VALUES
-				(:domain_id, :description, :percent, :enabled)";
+				(:domain_id, :description, :percent, :type, :enabled)";
 	
 	$display_block = $LANG['save_tax_rate_success'];
 	if (!(dbQuery($sql,
 		':domain_id', $auth_session->domain_id,
 		':description', $_POST['tax_description'],
 		':percent', $_POST['tax_percentage'],
+		':type', $_POST['type'],
 		':enabled', $_POST['tax_enabled']))) {
 		$display_block = $LANG['save_tax_rate_failure'];
 	}
@@ -1682,7 +1683,7 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 		':total', $total
 		);
 	
-	insert_invoice_item_tax(lastInsertId(),$line_item_tax_id,$unit_price,$quantity);
+	invoice_item_tax(lastInsertId(),$line_item_tax_id,$unit_price,$quantity,"insert");
 
 	//TODO fix this
 	return true;
@@ -1730,12 +1731,28 @@ function lineItemTaxCalc($tax,$unit_price,$quantity)
 	return $tax_amount;
 }
 /*
-Function: insert_invoice_item_tax
-Purpose: insert the multiple taxes per line item into the si_invoice_item_tax table
+Function: invoice_item_tax
+Purpose: insert/update the multiple taxes per line item into the si_invoice_item_tax table
 */
-function insert_invoice_item_tax($invoice_item_id,$line_item_tax_id,$unit_price,$quantity) {
+function invoice_item_tax($invoice_item_id,$line_item_tax_id,$unit_price,$quantity,$action="") {
 	
 	global $logger;
+
+	//if editing invoice delete all tax info then insert first then do insert again
+	//probably can be done without delete - someone to look into this if required - TODO
+	if ($action =="update")
+	{
+
+		$sql_delete = "DELETE from
+							".TB_PREFIX."invoice_item_tax
+					   WHERE
+							invoice_item_id = :invoice_item_id";
+		$logger->log("Invoice item: ".$invoice_item_id." tax lines deleted", Zend_Log::INFO);
+
+		dbQuery($sql_delete,':invoice_item_id',$invoice_item_id);
+
+
+	}
 
 	foreach($line_item_tax_id as $key => $value) 
 	{
@@ -1784,17 +1801,25 @@ function insert_invoice_item_tax($invoice_item_id,$line_item_tax_id,$unit_price,
 	//TODO fix this
 	return true;
 }
-function updateInvoiceItem($id,$quantity,$product_id,$tax_id,$description,$unit_price) {
+function updateInvoiceItem($id,$quantity,$product_id,$line_number,$line_item_tax_id,$description,$unit_price) {
 
+	global $logger;
 	//$product = getProduct($product_id);
-	$tax = getTaxRate($tax_id);
+	//$tax = getTaxRate($tax_id);
 	
-	$total_invoice_item_tax = $unit_price * $tax['tax_percentage'] / 100;	//:100?
-	$tax_amount = $total_invoice_item_tax * $quantity;
-	$total_invoice_item = $total_invoice_item_tax + $unit_price;
-	$total = $total_invoice_item * $quantity;
-	$gross_total = $unit_price * $quantity;
-	
+	$tax_total = getTaxesPerLineItem($line_item_tax_id,$quantity, $unit_price);
+
+	$logger->log('Invoice: '.$invoice_id.' Tax '.$line_item_tax_id.' for line item '.$line_number.': '.$tax_total, Zend_Log::INFO);
+	$logger->log('Description: '.$description, Zend_Log::INFO);
+	$logger->log(' ', Zend_Log::INFO);
+
+	//line item gross total
+	$gross_total = $unit_price  * $quantity;
+
+	//line item total
+	$total = $gross_total + $tax_total;	
+
+
 	if ($db_server == 'mysql' && !_invoice_items_check_fk(
 		null, $product_id, $tax_id, 'update')) {
 		return null;
@@ -1804,8 +1829,6 @@ function updateInvoiceItem($id,$quantity,$product_id,$tax_id,$description,$unit_
 	SET quantity =  :quantity,
 	product_id = :product_id,
 	unit_price = :unit_price,
-	tax_id = :tax_id,
-	tax = :tax,
 	tax_amount = :tax_amount,
 	gross_total = :gross_total,
 	description = :description,
@@ -1814,18 +1837,22 @@ function updateInvoiceItem($id,$quantity,$product_id,$tax_id,$description,$unit_
 	
 	//echo $sql;
 		
-	return dbQuery($sql,
+	dbQuery($sql,
 		':quantity', $quantity,
 		':product_id', $product_id,
 		':unit_price', $unit_price,
-		':tax_id', $tax_id,
-		':tax', $tax[tax_percentage],
-		':tax_amount', $tax_amount,
+		':tax_amount', $tax_total,
 		':gross_total', $gross_total,
 		':description', $description,
 		':total', $total,
 		':id', $id
 		);
+
+	//if from a new invoice item in the edit page user lastInsertId()
+	($id == null) ? $id = lastInsertId() : $id  =$id ;
+	invoice_item_tax($id,$line_item_tax_id,$unit_price,$quantity,"update");
+
+	return true;
 }
 
 /*

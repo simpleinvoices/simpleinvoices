@@ -307,7 +307,7 @@ div#Container {
 /* FOR PROPORTIONAL WIDTH 
 --------------------------*/
 .col {
-	/*text-align:center;*/
+	text-align:center;
 	padding:0 20px; 
 	/*min-height:352px;*/
 	}

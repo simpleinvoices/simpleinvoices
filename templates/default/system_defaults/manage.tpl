@@ -1,8 +1,3 @@
-
-<h3>{$LANG.system_preferences}</h3>
-    <hr />
-
-	
 	<table align=center>
 	<tr>
 		<td class='details_screen'><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=biller'>{$LANG.edit}</a></td><td class='details_screen'>{$LANG.default_biller}</td><td>{$defaultBiller.name|escape:html}</td>

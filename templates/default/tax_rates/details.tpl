@@ -4,10 +4,6 @@
 
 
 {if $smarty.get.action === 'view' }
-        <b>{$LANG.tax_rate} ::
-        <a href="index.php?module=tax_rates&amp;view=details&amp;id={$tax.tax_id|escape:html}&amp;action=edit">{$LANG.edit}</a></b>
-
-	<hr></hr>
 
 	<table align="center">
 	<tr>
@@ -17,16 +13,38 @@
 		<td class="details_screen">{$LANG.description}</td><td>{$tax.tax_description|escape:html}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.rate} {* TODO - add html button here *}</td><td>{$tax.tax_percentage|siLocal_number} {$tax.type|escape:html}</td>
+		<td class="details_screen">{$LANG.rate}
+		<a 
+				class="cluetip"
+				href="#"
+				rel="docs.php?t=help&p=tax_rate_sign"
+				title="{$LANG.tax_rate}"
+		>
+		<img src="./images/common/help-small.png"></img>
+		</a>
+	</td>
+	<td>
+		{$tax.tax_percentage|siLocal_number} {$tax.type|escape:html}
+	</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td><td>{$tax.enabled|escape:html}</td>
 	</tr>
 	</table>
-	<hr></hr>
+	<br>
+	<table class="buttons" align="center">
+    <tr>
+        <td>
+            <a href="./index.php?module=tax_rates&amp;view=details&amp;id={$tax.tax_id|escape:html}&amp;action=edit" class="positive">
+                <img src="./images/famfam/report_edit.png" alt=""/>
+                {$LANG.edit}
+            </a>
+    
+        </td>
+    </tr>
+	</table>
 
 
-<a href='index.php?module=tax_rates&amp;view=details&amp;id={$tax.tax_id|escape:html}&amp;action=edit'>{$LANG.edit}</a>
 {/if}
 
 {if $smarty.get.action === 'edit'}
@@ -46,7 +64,16 @@
 		<td><input type="text" name="tax_description" value="{$tax.tax_description|escape:html}" size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.rate}</td>
+		<td class="details_screen">{$LANG.rate}
+		<a 
+			class="cluetip"
+			href="#"
+			rel="docs.php?t=help&p=tax_rate_sign"
+			title="{$LANG.tax_rate}"
+		>
+			<img src="./images/common/help-small.png"></img>
+		</a>
+		</td>
 		<td>
 			<input type="text" name="tax_percentage" value="{$tax.tax_percentage|siLocal_number}" size="10" />
 			{html_options name=type options=$types selected=$tax.type}

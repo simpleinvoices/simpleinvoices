@@ -19,18 +19,27 @@
 
 <form name="frmpost" action="index.php?module=tax_rates&amp;view=add" method="POST">
 
-<h3>{$LANG.tax_rate_to_add}</h3>
-
- <hr />
 
 <table align="center">
 	<tr>
-		<td class="details_screen">{$LANG.tax_description}</td>
+		<td class="details_screen">{$LANG.description}</td>
 		<td><input type="text" name="tax_description" value="{$smarty.post.tax_description|escape:html}" size="50"></td><td></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.tax_percentage}</td>
-		<td><input type="text" name="tax_percentage" value="{$smarty.post.tax_percentage|escape:html}"  size="25"> %</td>
+		<td class="details_screen">{$LANG.rate}
+		<a 
+				class="cluetip"
+				href="#"
+				rel="docs.php?t=help&p=tax_rate_sign"
+				title="{$LANG.tax_rate}"
+		>
+		<img src="./images/common/help-small.png"></img>
+		</a>
+		</td>
+		<td>
+			<input type="text" name="tax_percentage" value="{$smarty.post.tax_percentage|escape:html}"  size="25">
+			{html_options name=type options=$types selected=$tax.type}
+		</td>
 		<td>{$LANG.ie_10_for_10}</td>
 	</tr>
 	<tr>

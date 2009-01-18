@@ -23,7 +23,7 @@
 		<td colspan=6 align=center></td>
 	</tr>
         <tr>
-		<td class='details_screen'>{$preference.pref_inv_wording} {$LANG.number_short}</td><td><input type=hidden name="invoice_id" value={$invoice.id}  size=15>{$invoice.id}</td>
+		<td class='details_screen'>{$preference.pref_inv_wording} {$LANG.number_short}</td><td><input type=hidden name="id" value={$invoice.id}  size=15>{$invoice.id}</td>
 	</tr>
 	<tr>
 	        <td class="details_screen">{$LANG.date_formatted}</td>
@@ -172,7 +172,7 @@
 								value='{$invoiceItem.quantity|number_format:2}' 
 								size="10"
 							>
-							<input type="hidden" name='id{$line}' value='{$invoiceItem.id}' size="10"> 
+							<input type="hidden" name='id{$line}' id='id{$line}' value='{$invoiceItem.id}' size="10"> 
 						</td>
 						<td>
 					                
@@ -302,7 +302,7 @@
 <table class="buttons" align="center">
     <tr>
         <td>
-            <button type="submit" class="positive" name="submit" value="{$LANG.save}">
+            <button type="submit" class="invoice_save positive" name="submit" value="{$LANG.save}">
                 <img class="button_img" src="./images/common/tick.png" alt=""/> 
                 {$LANG.save}
             </button>

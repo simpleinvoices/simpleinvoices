@@ -11,12 +11,10 @@
 <p><em>{$LANG.no_invoices}.</em></p>
 {else}
 
-<h3>{$LANG.manage_custom_fields}</h3>
 <div style="text-align:center;">
 <a class="cluetip" href="#"	rel="docs.php?t=help&p=what_are_custom_fields" title="{$LANG.what_are_custom_fields}">{$LANG.what_are_custom_fields}<img src="./images/common/help-small.png"></img></a> ::
 <a class="cluetip" href="#"	rel="docs.php?t=help&p=manage_custom_fields" title="{$LANG.whats_this_page_about}">{$LANG.whats_this_page_about}<img src="./images/common/help-small.png"></img></a>
 </div>
-<hr />
 
 <table id="manageGrid" style="display:none"></table>
 

@@ -141,7 +141,11 @@
 		clonedRow.find("#trash_image"+rowID_old).attr("src", "./images/common/delete_item.png");
 		clonedRow.find("#trash_image"+rowID_old).attr("title", "Delete this row");
 	
-	
+		//edit invoice - newly added line item
+		clonedRow.find("#id"+rowID_old).attr("id", "id"+rowID_new);
+		clonedRow.find("#id"+rowID_new).val('');
+
+
 		$("#quantity"+rowID_old, clonedRow).attr("id", "quantity"+rowID_new);
 		$("#quantity"+rowID_new, clonedRow).attr("name", "quantity"+rowID_new);
 		$("#quantity"+rowID_new, clonedRow).val('');

@@ -1116,7 +1116,21 @@ PRIMARY KEY  (`user_id`)) ;
     $patch['187']['date'] = "20081230"; 
     //TODO: postgres and sqlite patch     
     
-    //TODO - new patch to change the name of si_users table to si_user required - also need to update auth system with new table name etc..
+    $patch['188']['name'] = "Drop tax_id column from si_invoice_items table";
+    $patch['188']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` DROP `tax_id`  ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+	    $patch['188']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` DROP `tax_id`  ;"; 
+    }
+    $patch['188']['date'] = "20090118";        
+
+    //TODO: postgres and sqlite patch        
+    $patch['189']['name'] = "Drop tax column from si_invoice_items table";
+    $patch['189']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` DROP `tax`  ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+	    $patch['189']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` DROP `tax`  ;"; 
+    }
+    $patch['189']['date'] = "20090118";        
+    //TODO: postgres and sqlite patch        
 
 /*
  * New Custom Fields patches - to be included in the future - no ready just yet
