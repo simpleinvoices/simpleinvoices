@@ -245,16 +245,16 @@ EOD;
 }
 else if ($_GET["submit"] == "delete") {
 
-	$array = array(0 => $LANG[disabled], 1=>$LANG[enabled]);
+	$array = array(0 => $LANG['disabled'], 1=>$LANG['enabled']);
 	$default = "delete";
-	$description = $LANG[logging];
-	$value = dropDown($array, $defaults[$default]);
+	$description = $LANG['delete'];
+	$value = dropDown($array, $defaults['delete']);
 }
 else if ($_GET['submit'] == "logging") {
 
-	$array = array(0 => $LANG[disabled], 1=>$LANG[enabled]);
+	$array = array(0 => $LANG['disabled'], 1=>$LANG['enabled']);
 	$default = "logging";
-	$description = $LANG[logging];
+	$description = $LANG['logging'];
 	$value = dropDown($array, $defaults[$default]);
 }
 

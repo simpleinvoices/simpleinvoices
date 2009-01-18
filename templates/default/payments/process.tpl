@@ -73,13 +73,14 @@
 	<p><em>{$LANG.no_payment_types}</em></p>
 {else}
 
-<select name="ac_payment_type">
-<option selected value="{$defaults.payment_type|escape:html}" style="font-weight: bold">{$pt.pt_description|escape:html}</option>
 
-	{foreach from=$paymentTypes item=paymentType}
-		<option value="{$paymentType.pt_id|escape:html}">
-		{$paymentType.pt_description|escape:html}</option>
-	{/foreach}
+	<select name="ac_payment_type">
+		{foreach from=$paymentTypes item=paymentType}
+			<option value="{$paymentType.pt_id|escape:html}" {if $paymentType.pt_id == $defaults.payment_type}selected{/if}>
+				{$paymentType.pt_description|escape:html}
+			</option>
+		{/foreach}
+	</select>
 {/if}
 	
 	</td>

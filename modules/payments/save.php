@@ -10,6 +10,7 @@ checkLogin();
 #op=pay_invoice means the user came from the process_paymen page
 
 global $db_server;
+global $auth_session;
 if ( isset($_POST['process_payment']) ) {
 
 	$sql = "INSERT into
@@ -21,13 +22,14 @@ if ( isset($_POST['process_payment']) ) {
 				:amount,
 				:notes,
 				:date,
-				:payment_type
+				:payment_type,
+				:domain_id
 			)";
 	if ($db_server == 'pgsql') {
 		$sql = "INSERT into ".TB_PREFIX."payment
-			(ac_inv_id, ac_amount, ac_notes, ac_date, ac_payment_type)
+			(ac_inv_id, ac_amount, ac_notes, ac_date, ac_payment_type, domain_id)
 		VALUES
-			(:invoice, :amount, :notes, :date, :payment_type)";
+			(:invoice, :amount, :notes, :date, :payment_type, :domain_id)";
 	}
 
 	if (dbQuery($sql,
@@ -35,14 +37,15 @@ if ( isset($_POST['process_payment']) ) {
 	  ':amount', $_POST['ac_amount'],
 	  ':notes', $_POST['ac_notes'],
 	  ':date', $_POST['ac_date'],
-	  ':payment_type', $_POST['ac_payment_type']
+	  ':payment_type', $_POST['ac_payment_type'],
+	  ':domain_id', $auth_session->domain_id
 	  )) {
 		$display_block =  $LANG['save_payment_success'];
 	} else {
 		$display_block =  $LANG['save_payment_failure']."<br>".$sql;
 	}
 
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=payments&view=manage>";
+	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=27;URL=index.php?module=payments&view=manage>";
 }
 
 $smarty->assign('display_block', $display_block);
