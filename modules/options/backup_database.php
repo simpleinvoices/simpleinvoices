@@ -4,25 +4,29 @@
 
 checkLogin();
 
+$smarty -> assign('pageActive', 'backup');
+$smarty -> assign('active_tab', '#setting');
 
 if ($_GET['op'] == "backup_db") {
-include_once("./include/backup.lib.php");
-$today = date("YmdGisa");
-$oBack    = new backup_db;
-$oBack->filename = "./tmp/database_backups/simple_invoices_backup_$today.sql"; // output file name
-$oBack->start_backup();
-$display_block ="
 
-<h3>Database Backup</h3>
-<hr />
+	include_once("./include/backup.lib.php");
 
-<table align='center'>";
+	$today = date("YmdGisa");
+	$oBack    = new backup_db;
+	$oBack->filename = "./tmp/database_backups/simple_invoices_backup_$today.sql"; // output file name
+	$oBack->start_backup();
+	$display_block ="
 
-$display_block .= $oBack->output; 
+	<h3>Database Backup</h3>
+	<hr />
 
-$display_block .= <<<EOD
-<tr><td><br /><br />Your database has now been backed up to the file tmp/database_backups/simple_invoices_backup_$today.sql, you can now continue using Simple Invoices as normal</td></tr>
-<tr><td><br /><a href="docs.php?t=help&amp;p=backup_database_fwrite" rel="gb_page_center[450, 450]"><font color="red">Did you get fwrite errors?</a></font></td></tr></table>
+	<table align='center'>";
+
+	$display_block .= $oBack->output; 
+
+	$display_block .= <<<EOD
+	<tr><td><br /><br />Your database has now been backed up to the file tmp/database_backups/simple_invoices_backup_$today.sql, you can now continue using Simple Invoices as normal</td></tr>
+	<tr><td><br /><a href="docs.php?t=help&amp;p=backup_database_fwrite" rel="gb_page_center[450, 450]"><font color="red">Did you get fwrite errors?</a></font></td></tr></table>
 EOD;
 
 }
@@ -48,5 +52,3 @@ EOD;
 
 $smarty->assign('display_block', $display_block);
 
-$smarty -> assign('pageActive', 'backup');
-$smarty -> assign('active_tab', '#setting');
