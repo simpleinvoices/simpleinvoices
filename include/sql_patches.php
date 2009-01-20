@@ -705,13 +705,17 @@ PRIMARY KEY  (`user_id`)) ;
     
 
     $patch['137']['name'] = "Insert default domain";
-    $patch['137']['patch'] = "INSERT INTO ".TB_PREFIX."user_domain (name)
-        VALUES ('default');";
-    if ($config->database->adapter == "pdo_pgsql") {
-        $patch['137']['patch'] = "INSERT INTO ".TB_PREFIX."user_domain (name)
-        VALUES ('default');";
+    switch ($config->database->adapter)
+    {
+		case "pdo_pgsql" :
+			$patch['137']['patch'] = "INSERT INTO ".TB_PREFIX."user_domain (name) VALUES ('default');";
+			break;
+		case "pdo_mysql" :
+		default:
+			$patch['137']['patch'] = "INSERT INTO ".TB_PREFIX."user_domain (name) VALUES ('default');";
     }
     $patch['137']['date'] = "200712";
+    //TODO postgres patch 
 
     $patch['138']['name'] = "Add domain_id to payment_types table";
     $patch['138']['patch'] = "ALTER TABLE `".TB_PREFIX."payment_types` ADD `domain_id` INT  NOT NULL AFTER `pt_id` ;";
