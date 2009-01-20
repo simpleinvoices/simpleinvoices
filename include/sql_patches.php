@@ -715,6 +715,7 @@ PRIMARY KEY  (`user_id`)) ;
 	            id serial PRIMARY KEY,
             	name text UNIQUE NOT NULL
             	);";
+    }
     $patch['136']['date'] = "200712";
     
 
