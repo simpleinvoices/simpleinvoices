@@ -677,30 +677,44 @@ PRIMARY KEY  (`user_id`)) ;
     $patch['133']['date'] = "20071126";
 
     $patch['134']['name'] = "Drop non-int compatible default from si_sql_patchmanager";
-    $patch['134']['patch'] = "SELECT 1+1;";
-    if ($config->database->adapter == "pdo_pgsql") {
-        $patch['134']['patch'] = "ALTER TABLE ".TB_PREFIX."sql_patchmanager ALTER COLUMN sql_patch_ref DROP DEFAULT;";
+    switch ($config->database->adapter)
+    {
+		case "pdo_pgsql" :
+        	$patch['134']['patch'] = "ALTER TABLE ".TB_PREFIX."sql_patchmanager ALTER COLUMN sql_patch_ref DROP DEFAULT;";
+        	break;
+		case "pdo_mysql" :
+		default :
+			$patch['134']['patch'] = "SELECT 1+1;";
     } 
     $patch['134']['date'] = "20071218";
 
     $patch['135']['name'] = "Change sql_patch_ref type in sql_patchmanager to int";
-    $patch['135']['patch'] = "ALTER TABLE  `".TB_PREFIX."sql_patchmanager` change `sql_patch_ref` `sql_patch_ref` int NOT NULL ;";
-    if ($config->database->adapter == "pdo_pgsql") {
-        $patch['135']['patch'] = "ALTER TABLE  ".TB_PREFIX."sql_patchmanager ALTER COLUMN sql_patch_ref TYPE int USING to_number(sql_patch_ref, '999');";
+    switch ($config->database->adapter)
+    {
+		case "pdo_pgsql" :
+        	$patch['135']['patch'] = "ALTER TABLE  ".TB_PREFIX."sql_patchmanager ALTER COLUMN sql_patch_ref TYPE int USING to_number(sql_patch_ref, '999');";
+        	break;
+		case "pdo_mysql" :
+		default :
+   			$patch['135']['patch'] = "ALTER TABLE  `".TB_PREFIX."sql_patchmanager` change `sql_patch_ref` `sql_patch_ref` int NOT NULL ;";
     } 
     $patch['135']['date'] = "20071218";
 	
     $patch['136']['name'] = "Create domain mapping table";
-    $patch['136']['patch'] = "CREATE TABLE ".TB_PREFIX."user_domain (
-	    `id` int(11) NOT NULL auto_increment  PRIMARY KEY,
-            `name` varchar(255) UNIQUE NOT NULL
-            ) ENGINE=InnoDB;";
-   	if ($config->database->adapter == "pdo_pgsql") {
-        $patch['136']['patch'] = "CREATE TABLE ".TB_PREFIX."user_domain (
-            id serial PRIMARY KEY,
-            name text UNIQUE NOT NULL
-            );";
-    }
+    switch ($config->database->adapter)
+    {
+		case "pdo_pgsql" :
+			$patch['136']['patch'] = "CREATE TABLE ".TB_PREFIX."user_domain (
+	    		`id` int(11) NOT NULL auto_increment  PRIMARY KEY,
+            	`name` varchar(255) UNIQUE NOT NULL
+            	) ENGINE=InnoDB;";
+         	break;
+		case "pdo_mysql" :
+		default :
+        	$patch['136']['patch'] = "CREATE TABLE ".TB_PREFIX."user_domain (
+	            id serial PRIMARY KEY,
+            	name text UNIQUE NOT NULL
+            	);";
     $patch['136']['date'] = "200712";
     
 
@@ -718,9 +732,14 @@ PRIMARY KEY  (`user_id`)) ;
     //TODO postgres patch 
 
     $patch['138']['name'] = "Add domain_id to payment_types table";
-    $patch['138']['patch'] = "ALTER TABLE `".TB_PREFIX."payment_types` ADD `domain_id` INT  NOT NULL AFTER `pt_id` ;";
-    if ($config->database->adapter == "pdo_pgsql") {
-        $patch['145']['patch'] = "ALTER TABLE ".TB_PREFIX."payment_types ADD COLUMN domain_id int NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
+    switch ($config->database->adapter)
+    {
+		case "pdo_pgsql" :
+			$patch['138']['patch'] = "ALTER TABLE ".TB_PREFIX."payment_types ADD COLUMN domain_id int NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
+			break;
+		case "pdo_mysql" :
+		default:
+   			$patch['138']['patch'] = "ALTER TABLE `".TB_PREFIX."payment_types` ADD `domain_id` INT  NOT NULL AFTER `pt_id` ;";     
     }
     $patch['138']['date'] = "200712";
 
