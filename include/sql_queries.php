@@ -637,7 +637,7 @@ function updateProduct() {
 
 	return dbQuery($sql,
 		':description', $_POST[description],
-		':enabled', $_POST[enabled],
+		':enabled', $_POST['enabled'],
 		':notes', $_POST[notes],
 		':custom_field1', $_POST[custom_field1],
 		':custom_field2', $_POST[custom_field2],
@@ -1035,7 +1035,7 @@ function insertBiller() {
 		':custom_field2', $_POST[custom_field2],
 		':custom_field3', $_POST[custom_field3],
 		':custom_field4', $_POST[custom_field4],
-		':enabled', $_POST[enabled],
+		':enabled', $_POST['enabled'],
 		':domain_id', $auth_session->domain_id
 		);
 	/*
@@ -1094,7 +1094,7 @@ function updateBiller() {
 		':custom_field2', $_POST[custom_field2],
 		':custom_field3', $_POST[custom_field3],
 		':custom_field4', $_POST[custom_field4],
-		':enabled', $_POST[enabled],
+		':enabled', $_POST['enabled'],
 		':id', $_GET[id]
 		);
 }
@@ -1145,8 +1145,8 @@ function updateCustomer() {
 		':custom_field2', $_POST[custom_field2],
 		':custom_field3', $_POST[custom_field3],
 		':custom_field4', $_POST[custom_field4],
-		':enabled', $_POST[enabled],
-		':id', $_GET['customer']
+		':enabled', $_POST['enabled'],
+		':id', $_GET['id']
 		);
 }
 

@@ -19,6 +19,7 @@ Next Release :: Beta 3
 	-- just ask for db details and if you want demo data installer
 	-- just the basics - do rest later
 	- add domain_id into system_defaults table - flatten this table - old style - TODO
+	- users table admin
 	- consulting - add systep prefer to always show description field for invoice line items
 	- system defaults/preferences - flatten table and add domain_id
 
@@ -33,15 +34,16 @@ Next Release :: Beta 2
 	-- updates Taxes - add % or $ option - done
 	- add system pref for number of taxes per line item
 	- domain_id into custom_fields tables - needs to be completed - JK
+	- PDF
 	
 	Issues:
 	- Invoice line item - Description issue - JK 
-	- menu - on page load issue
-	- Biller - enabled/diabled not workign correctly
-	-- test all other enable/disable 
-	- backup db - once db backed up - menu goes wierd
 	- test all custom fields to make suer all work ok and come through on invoices etc..
-	- validation - check/remove the validation on products
+	- backup db - once db backed up - menu goes wierd - minor
+	- menu - on page load issue - done - added to jquery.init.js - so should load firs
+	- Biller - enabled/diabled not workign correctly - done
+	-- test all other enable/disable - done
+	- validation - check/remove the validation on products - has been removed till beta 3 - will add back in and complete
 
 ##############################
 Sometime soon

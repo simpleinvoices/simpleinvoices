@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+	$("#tabmenu > ul").tabs();
+
 	/*hide the text for the export dialog on the manage invoices page*/
 	$('#export_dialog').hide();
 

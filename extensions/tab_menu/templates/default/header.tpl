@@ -48,7 +48,7 @@
 </script>
 <script language="javascript">
 	<!--
-
+/*
 var demo_mode=false; // set to false to allow form submit
 
 function checkFieldTask (aFieldName) {
@@ -146,7 +146,7 @@ function offsetAlertDiv (aFieldName) {
 	//$("#form_alert_"+aFieldName+"_msg").offset($("#"+aFieldName).offset());
 }
 
-
+*/
 // -->
 </script>
 

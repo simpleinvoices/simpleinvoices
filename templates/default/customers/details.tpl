@@ -219,7 +219,7 @@
 
 {if $smarty.get.action == 'edit' }
 
-<form name="frmpost" action="index.php?module=customers&view=save&customer={$customer.id}" method="post" id="frmpost" onSubmit="return checkForm(this);">
+<form name="frmpost" action="index.php?module=customers&view=save&id={$customer.id}" method="post" id="frmpost" onSubmit="return checkForm(this);">
 
 <div id="top"><b>{$LANG.customer_edit}</b></div>
 <hr></hr>
@@ -360,7 +360,7 @@
 	</tr>
 	{*
 		{showCustomFields categorieId="2" itemId=$smarty.get.customer }
-		*}
+	*}
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
 		<td>
