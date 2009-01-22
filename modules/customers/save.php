@@ -41,15 +41,7 @@ if ( $op === 'edit_customer' ) {
 		
 		if (updateCustomer()) {
 
-		 ob_start();
-
-        print_r($_POST);
-
-        $output = ob_get_clean();
-		$logger->log('Customer save '.$output, Zend_Log::INFO);
-
 			$saved = true;
-			var_dump($_POST);
 			//updateCustomFieldValues($_POST['categorie'],$_GET['customer']);
 		}
 	}
