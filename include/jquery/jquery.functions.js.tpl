@@ -95,6 +95,8 @@
 	 * */
 	function add_line_item()
 	{
+		$('#gmail_loading').show();
+		
 		//clone the last tr in the item table
 		var clonedRow = $('#itemtable tbody.line_item:first').clone(); 
 		var lastRow = $('#itemtable tbody.line_item:last').clone(); 
@@ -172,6 +174,8 @@
 		$("#tax_id\\["+rowID_new+"\\]\\[1\\]", clonedRow).attr("name", "tax_id["+rowID_new+"][1]");
 	
 		$('#itemtable').append(clonedRow);
+		
+		$('#gmail_loading').hide();
 	
 	}
 	
@@ -238,21 +242,22 @@
 		$description = $(id).val().length;
 
 		siLog('info','Description: '+$description);
-		$colour = "#b2adad";
+		$colour_dark = "#333";
+		$colour_light = "#b2adad";
 		if ($description == 0)
 		{
 			$(id).val(v);
 		}
 
-		$(id).css({ color: $colour });
+		$(id).css({ color: $colour_light });
 
 		$(id).focus(function(){
 			if($(this).val()==v){
-				$(this).val("").css({ color: $colour });
+				$(this).val("").css({ color: $colour_dark });
 			}
 		}).blur(function(){
 			if($(this).val()==""){
-				$(this).css({ color: $colour }).val(v);
+				$(this).css({ color: $colour_light }).val(v);
 			}
 		});
 

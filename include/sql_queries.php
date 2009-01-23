@@ -1640,7 +1640,7 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 	{	
 		$description ="";
 	}
-	
+
 
 	if ($db_server == 'mysql' && !_invoice_items_check_fk(
 		$invoice_id, $product_id, $tax['tax_id'])) {

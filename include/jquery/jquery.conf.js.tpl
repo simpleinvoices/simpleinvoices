@@ -127,10 +127,12 @@ $(document).ready(function(){
 
 	//calc number of line items 
 	$(".invoice_save").click(function () {
-		siLog('debug','invoice save')
-		count_invoice_line_items()
-//		siLog('debug','invoice save- post count')
-//		invoice_save_remove_autofill()
+		$('#gmail_loading').show();
+		siLog('debug','invoice save');
+		count_invoice_line_items();
+		siLog('debug','invoice save- post count');
+		invoice_save_remove_autofill();
+		$('#gmail_loading').hide();
 	});
 
 	
@@ -145,17 +147,17 @@ $(document).ready(function(){
 
 	$(".note").livequery(function(){
 			
-			//$description = $(".note").attr("value");
 			$description = $(".note").val();
 		
 			if ($description == "")
 			{
 				$(".note").val('{/literal}{$LANG.description}{literal}');
+				//$(this).val("").css({ color: '#333'});
 			}
 	
 			$(".note").focus(function(){
 	            if($(this).val()=="{/literal}{$LANG.description}{literal}"){
-    	           $(this).val("");
+	               $(this).val("").css({ color: '#333' });
             }
 	});
 	});
