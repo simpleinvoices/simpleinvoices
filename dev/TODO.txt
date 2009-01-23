@@ -22,21 +22,19 @@ Next Release :: Beta 3
 	- users table admin
 	- consulting - add systep prefer to always show description field for invoice line items
 	- system defaults/preferences - flatten table and add domain_id
+	- Products - allow setting 2 or more default taxes pre product
 
 ##############################
 Next Release :: Beta 2 
 ##############################
 
-	- new UI to be finished - JK
-	- add new line items on the fly in invoice creation - JK
 	- update invoice editing with tax rates and dynamical line items - JK
 	- multiple taxes (% and $ based) per line item - JK
-	-- updates Taxes - add % or $ option - done
-	-- Default tax per product 
 	- add system pref for number of taxes per line item
-	- domain_id into custom_fields tables - needs to be completed - JK
 	- PDF
 	
+	- new UI to be finished - JK
+
 	Issues:
 	- test all custom fields to make suer all work ok and come through on invoices etc..
 	- backup db - once db backed up - menu goes wierd - minor
@@ -46,6 +44,10 @@ Next Release :: Beta 2
 	- Biller - enabled/diabled not workign correctly - done
 	-- test all other enable/disable - done
 	- validation - check/remove the validation on products - has been removed till beta 3 - will add back in and complete
+	- domain_id into custom_fields tables - done
+	- add new line items on the fly in invoice creation - done
+	- updates Taxes - add % or $ option - done
+	- Default tax per product  - done
 
 ##############################
 Sometime soon

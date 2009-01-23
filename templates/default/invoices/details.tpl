@@ -201,7 +201,7 @@
 								<option value=""></option>
 								{assign var="index" value=$smarty.section.tax.index}
 								{foreach from=$taxes item=tax}
-									<option {if $tax.tax_id.id == $invoiceItem.tax.$index} selected {/if} value="{$tax.tax_id}">{$tax.tax_description}</option>
+									<option {if $tax.tax_id === $invoiceItem.tax.$index} selected {/if} value="{$tax.tax_id}">{$tax.tax_description}</option>
 								{/foreach}
 							</select>
 							</td>

@@ -21,6 +21,12 @@
 		<td>{$product.unit_price|number_format:2}</td>
 	</tr>
 	<tr>
+		<td class="details_screen">{$LANG.default_tax}</td>
+		<td>
+			{$tax_selected.tax_description} {$tax_selected.type}
+		</td>
+	</tr>
+	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf1} 
 		<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png"></img></a>
 		</td>
@@ -77,6 +83,16 @@
 	<tr>
 		<td class="details_screen">{$LANG.product_unit_price}</td>
 		<td><input type="text" name="unit_price" size="25" value="{$product.unit_price}" /></td>
+	</tr>
+	<tr>
+		<td class="details_screen">{$LANG.default_tax}</td>
+		<td>
+		<select name="default_tax_id">
+			{foreach from=$taxes item=tax}
+				<option value="{$tax.tax_id}" {if $tax.tax_id == $product.default_tax_id}selected{/if}>{$tax.tax_description}</option>
+			{/foreach}
+		</select>
+		</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf1} 

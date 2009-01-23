@@ -609,16 +609,46 @@ function insertProductComplete($enabled=1,$visible=1,$description,
 
 
 function insertProduct($enabled=1,$visible=1) {
-	return insertProductComplete($enabled, $visible, $_POST['description'], $_POST['unit_price'],
-		$_POST['custom_field1'],
-		$_POST['custom_field2'],
-		$_POST['custom_field3'],
-		$_POST['custom_field4'],
-		$_POST['notes'],
-		$enabled,
-		$visible
+	global $auth_session;
+	
+	(isset($_POST['enabled'])) ? $enabled = $_POST['enabled']  : $enabled = $enabled ;
+
+	$sql = "INSERT into
+		".TB_PREFIX."products
+		(
+			domain_id, description, unit_price, custom_field1, custom_field2,
+			custom_field3, custom_field4, notes, default_tax_id, enabled, visible
+		)
+	VALUES
+		(	
+			:domain_id,
+			:description,
+			:unit_price,
+			:custom_field1,
+			:custom_field2,
+			:custom_field3,
+			:custom_field4,
+			:notes,
+			:default_tax_id,
+			:enabled,
+			:visible
+		)";
+
+	return dbQuery($sql,
+		':domain_id',$auth_session->domain_id,	
+		':description', $_POST['description'],
+		':unit_price', $_POST['unit_price'],
+		':custom_field1', $_POST['custom_field1'],
+		':custom_field2', $_POST['custom_field2'],
+		':custom_field3', $_POST['custom_field3'],
+		':custom_field4', $_POST['custom_field4'],
+		':notes', "".$_POST['notes'],
+		':default_tax_id', $_POST['default_tax_id'],
+		':enabled', $enabled,
+		':visible', $visible
 		);
 }
+
 
 function updateProduct() {
 	
@@ -626,6 +656,7 @@ function updateProduct() {
 			SET
 				description = :description,
 				enabled = :enabled,
+				default_tax_id = :default_tax_id,
 				notes = :notes,
 				custom_field1 = :custom_field1,
 				custom_field2 = :custom_field2,
@@ -639,6 +670,7 @@ function updateProduct() {
 		':description', $_POST[description],
 		':enabled', $_POST['enabled'],
 		':notes', $_POST[notes],
+		':default_tax_id', $_POST['default_tax_id'],
 		':custom_field1', $_POST[custom_field1],
 		':custom_field2', $_POST[custom_field2],
 		':custom_field3', $_POST[custom_field3],

@@ -15,14 +15,25 @@
 
 <table align=center>
 	<tr>
-		<td class="details_screen">{$LANG.product_description} 
+		<td class="details_screen">{$LANG.description} 
 		<a class="cluetip" href="#"	rel="docs.php?t=help&p=required_field" title="{$LANG.Required_Field}"><img src="./images/common/required-small.png"></img></a>
 		</td>
 		<td><input type=text name="description" value="{$smarty.post.description}" size=50 id="description" class="required edit" onblur="checkField(this);"></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.product_unit_price}</td>
+		<td class="details_screen">{$LANG.unit_price}</td>
 		<td><input type=text class="edit" name="unit_price" value="{$smarty.post.unit_price}"  size=25></td>
+	</tr>
+	<tr>
+		<td class="details_screen">{$LANG.default_tax}</td>
+		<td>
+		<select name="default_tax_id">
+		    <option value=''></option>
+			{foreach from=$taxes item=tax}
+				<option value="{$tax.tax_id}">{$tax.tax_description}</option>
+			{/foreach}
+		</select>
+		</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf1} 
@@ -53,7 +64,7 @@
 		<td><textarea input type=text class="editor" name='notes' rows=8 cols=50>{$smarty.post.notes|unescape}</textarea></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.product_enabled}</td>
+		<td class="details_screen">{$LANG.enabled}</td>
 		<td>
 			{html_options class=edit name=enabled options=$enabled selected=1}
 		</td>

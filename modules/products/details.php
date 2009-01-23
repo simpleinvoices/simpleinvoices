@@ -9,8 +9,12 @@ $product = getProduct($product_id);
 
 #get custom field labels
 $customFieldLabel = getCustomFieldLabels();
+$taxes = getActiveTaxes();
+$tax_selected = getTaxRate($product['default_tax_id']);
 
 $smarty -> assign('product',$product);
+$smarty -> assign('taxes',$taxes);
+$smarty -> assign('tax_selected',$tax_selected);
 $smarty -> assign('customFieldLabel',$customFieldLabel);
 
 $smarty -> assign('pageActive', 'product_manage');

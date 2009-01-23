@@ -214,54 +214,6 @@
 	function dialog_close(){
 	         $(this).dialog("destroy"); 
 	}
-    /* 
-	function autoFill(id, v){
-	
-		//set colour
-		$(id).css({ color: "#b2adad" });
-
-		
-		if( ($(id).val()!==v ) {
-			$(id).css({ color: "#b2adad" }).attr({ value: v });
-		}
-		
-		focus(function(){
-			if($(this).val()==v){
-				$(this).val("").css({ color: "#333" });
-			}
-		}).blur(function(){
-			if($(this).val()==""){
-//				$(this).css({ color: "#b2adad"}).val(v);
-			}
-		});
-	}
-	*/
-
-	function autoFill(id, v){
-
-		$description = $(id).val().length;
-
-		siLog('info','Description: '+$description);
-		$colour_dark = "#333";
-		$colour_light = "#b2adad";
-		if ($description == 0)
-		{
-			$(id).val(v);
-		}
-
-		$(id).css({ color: $colour_light });
-
-		$(id).focus(function(){
-			if($(this).val()==v){
-				$(this).val("").css({ color: $colour_dark });
-			}
-		}).blur(function(){
-			if($(this).val()==""){
-				$(this).css({ color: $colour_light }).val(v);
-			}
-		});
-
-	}
 
 	/*
 	 * Function: invoice_save_remove_autofill
