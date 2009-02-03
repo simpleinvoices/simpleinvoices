@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `si_invoice_items` (
   `description` text,
   `total` decimal(25,6) default '0.000000',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 A;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 
 

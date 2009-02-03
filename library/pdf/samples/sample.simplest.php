@@ -1,5 +1,8 @@
 <?php
 
+require_once(dirname(__FILE__).'/../config.inc.php');
+require_once(HTML2PS_DIR.'pipeline.factory.class.php');
+
 require_once('../pipeline.class.php');
 require_once('../pipeline.factory.class.php');
 
@@ -38,7 +41,8 @@ function convert_to_pdf($path_to_html, $path_to_pdf) {
     var $_content;
 
     function MyFetcherLocalFile($file) {
-      $this->_content = file_get_contents($file);
+      //$this->_content = file_get_contents($file);
+	  $this->_content = $file;
     }
 
     function get_data($dummy1) {
@@ -90,6 +94,6 @@ function convert_to_pdf($path_to_html, $path_to_pdf) {
   $pipeline->process($baseurl, $media);
 }
 
-convert_to_pdf("./testing/forms.html", "./testing/forms.pdf");
+convert_to_pdf("<html>TEST PDF</html>", "forms.pdf");
 
 ?>
