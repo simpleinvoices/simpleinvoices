@@ -3,7 +3,7 @@ Simple Invoices todo list
 Disclaimer: if its in the list it may get done sometime in the future if and when someone feels like it
 *************
 ##############################
-Next Release :: Beta 3 
+Next Release :: Beta 4
 ##############################
 	- database backup - export as XML - Hannes
 	- change config.ini back to config.php - but keep ini format and add ;<?php on line 1 and ; exit; on line 2 - this is for sercurity reasons
@@ -13,7 +13,13 @@ Next Release :: Beta 3
 	- mini installer complete
 	-- add checks for php.ini settings, writeable folders etc.. and make pretty
 
-## might move the below to beta 3 (or a 2.5 :) ) ##
+##############################
+Next Release :: Beta 3
+##############################
+	- add system pref for number of taxes per line item - JK
+	- UI - update all buttons - Edit links etc.. to be new style 
+	- multiple taxes (% and $ based) per line item - JK
+	- update invoice editing with tax rates and dynamical line items - JK
 	- mini installer - someone
 	-- create a mini installer and use Zend_config_writer to write to config.ini
 	-- just ask for db details and if you want demo data installer
@@ -23,31 +29,36 @@ Next Release :: Beta 3
 	- consulting - add systep prefer to always show description field for invoice line items
 	- system defaults/preferences - flatten table and add domain_id
 	- Products - allow setting 2 or more default taxes pre product
+	- validation - check/remove the validation on products - has been removed till beta 3 - will add back in and complete
 
 ##############################
-Next Release :: Beta 2 
+Next Release :: Beta 2  - Current work in progress
 ##############################
+	- PDF - change system - instead of url - put everthign in a varieble and send to html2pdf 
+		- manage invoices - export -done
+		- email invoice - TODO	
+	- Manage pages - row count - limit issue
 
-	- update invoice editing with tax rates and dynamical line items - JK
-	- multiple taxes (% and $ based) per line item - JK
-	- add system pref for number of taxes per line item
-	- PDF
-	
-	- new UI to be finished - JK
-
-	Issues:
-	- test all custom fields to make suer all work ok and come through on invoices etc..
-	- backup db - once db backed up - menu goes wierd - minor
 	###
 	- menu - on page load issue - done - added to jquery.init.js - so should load firs
 	- Invoice line item - Description issue - done 
 	- Biller - enabled/diabled not workign correctly - done
 	-- test all other enable/disable - done
-	- validation - check/remove the validation on products - has been removed till beta 3 - will add back in and complete
 	- domain_id into custom_fields tables - done
 	- add new line items on the fly in invoice creation - done
 	- updates Taxes - add % or $ option - done
 	- Default tax per product  - done
+
+	Known issues
+	- customer view info tabs - not happy - need to be redone in jquery UI
+	- can't close yellow text
+	- backup db - once db backed up - menu goes wierd - minor
+	- IE - buttons not all nice
+	- no data validation on form input
+	- only 1 tax per line item
+	- postgres version not complete 
+	- no manage users 
+	
 
 ##############################
 Sometime soon
