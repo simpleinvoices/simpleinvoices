@@ -38,16 +38,7 @@ Next Release :: Beta 2  - Current work in progress
 		- manage invoices - export -done
 		- email invoice - TODO	
 	- Manage pages - row count - limit issue
-
-	###
-	- menu - on page load issue - done - added to jquery.init.js - so should load firs
-	- Invoice line item - Description issue - done 
-	- Biller - enabled/diabled not workign correctly - done
-	-- test all other enable/disable - done
-	- domain_id into custom_fields tables - done
-	- add new line items on the fly in invoice creation - done
-	- updates Taxes - add % or $ option - done
-	- Default tax per product  - done
+	- simpleInvoicesError - fix
 
 	Known issues
 	- customer view info tabs - not happy - need to be redone in jquery UI
@@ -58,6 +49,7 @@ Next Release :: Beta 2  - Current work in progress
 	- only 1 tax per line item
 	- postgres version not complete 
 	- no manage users 
+	- total style invoice not selectable
 	
 
 ##############################

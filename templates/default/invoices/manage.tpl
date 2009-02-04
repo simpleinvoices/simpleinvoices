@@ -32,49 +32,50 @@
 
  {include file='../modules/invoices/manage.js.php'}
 
+
 <div id="export_dialog" class="flora" title="Export">
 
-<table class="buttons" >
-    <tr>
-        <td>
+	<table class="buttons" >
+		<tr>
+			<td>
 
-            <a
-            	title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_pdf_tooltip']."' 
-            	class='export_pdf' 
-            	href=''
-            >
-                <img src="./images/common/page_white_acrobat.png" alt=""/>
-                Export as PDF {* LANG TODO*}
-            </a>
-          </td>
-    </tr>
-    <tr>
-    	<td>  
-            
-            <a 
-             	title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_xls_tooltip'].$spreadsheet." ".$LANG['format_tooltip']."' 
-             	class='export_xls'
-             	href=''
-           >
-                <img src="./images/common/page_white_excel.png" alt=""/>
-                 Export as .XLS {* LANG TODO*}
-            </a>
-            </td>
-    </tr>
-    <tr>
-    	<td>    
-    
-           <a 
-           		title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_xls_tooltip'].$spreadsheet." ".$LANG['format_tooltip']."' 
-           		class='export_doc' 
-           		href=''         
-           >
-                <img src="./images/common/page_white_word.png" alt=""/>
-                 Export as .DOC {* LANG TODO*}
-            </a>
-        </td>
-    </tr>
-</table>
+				<a
+			{*     	title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_pdf_tooltip']."' *}
+					class='export_pdf export_window' 
+				>
+					<img src="./images/common/page_white_acrobat.png" alt=""/>
+					Export as PDF {* LANG TODO*}
+				</a>
+			  </td>
+		</tr>
+		<tr>
+			<td>  
+				
+				<a 
+					title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_xls_tooltip'].$spreadsheet." ".$LANG['format_tooltip']."' 
+					class='export_xls export_window'
+					href=''
+			   >
+					<img src="./images/common/page_white_excel.png" alt=""/>
+					 Export as .XLS {* LANG TODO*}
+				</a>
+				</td>
+		</tr>
+		<tr>
+			<td>    
+		
+			   <a 
+					title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_xls_tooltip'].$spreadsheet." ".$LANG['format_tooltip']."' 
+					class='export_doc export_window' 
+					href=''         
+			   >
+					<img src="./images/common/page_white_word.png" alt=""/>
+					 Export as .DOC {* LANG TODO*}
+				</a>
+			</td>
+		</tr>
+	</table>
+</div>
 {/if}
 
 

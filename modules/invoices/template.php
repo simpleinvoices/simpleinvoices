@@ -61,7 +61,7 @@ if (isset($_GET['export'])) {
 	
 $templatePath = "./templates/invoices/${template}/template.tpl";
 $template_path = "../templates/invoices/${template}";
-$css = "./templates/invoices/${template}/style.css";
+$css = $siUrl."/templates/invoices/${template}/style.css";
 $pluginsdir = "./templates/invoices/${template}/plugins/";
 
 $smarty -> plugins_dir = $pluginsdir;
@@ -82,7 +82,14 @@ if(file_exists($templatePath)) {
 	$smarty -> assign('customFieldLabels',$customFieldLabels);
 	
 	
-	$smarty -> display(".".$templatePath);
+	if ($_GET['location'] =="pdf")
+	{
+		$html = $smarty -> fetch(".".$templatePath);
+		pdfThis($html);
+		exit();
+	}
+	$smarty -> $smarty_output(".".$templatePath);
+
 }
 
 ?>

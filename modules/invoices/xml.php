@@ -127,9 +127,16 @@ $count = $sth->rowCount();
 		$xml .= "<cell>
 					<![CDATA[<a class='index_table' title='".$LANG['quick_view_tooltip'].$row['id']."' href='index.php?module=invoices&view=quick_view&id=".$row['id']."'> <img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 		<a class='index_table' title=".$LANG['edit_view_tooltip']." ".$invoices['preference.pref_inv_wording']." ".$row['id']."' href='index.php?module=invoices&view=details&id=".$row['id']."&action=view'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-		<!--2 Print View --><a class='index_table' title='".$LANG['print_preview_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']."' href='index.php?module=invoices&view=template&id=".$row['id']."&action=view&location=print'><img src='images/common/printer.png' height='16' border='-5px' padding='-4px' valign='bottom' /><!-- print --></a>
-		<!--3 EXPORT DIALOG --><a id='invoice_export_dialog' href='#' onclick='export_invoice(".$row['id'].", \"".$config->export->spreadsheet."\", \"".$config->export->wordprocessor."\");'><img src='images/common/page_white_acrobat.png' height='16' padding='-4px' border='-5px' valign='bottom' /></a>
-		
+		<!--2 Print View -->
+			<a class='index_table' title='".$LANG['print_preview_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']."' href='index.php?module=invoices&view=template&id=".$row['id']."&action=view&location=print'>
+				<img src='images/common/printer.png' height='16' border='-5px' padding='-4px' valign='bottom' /><!-- print -->
+			</a>
+		<!--3 EXPORT DIALOG -->
+			<a class='invoice_export_dialog' href='#' rel='".$row['id']."'>
+				<img src='images/common/page_white_acrobat.png' height='16' padding='-4px' border='-5px' valign='bottom' />
+			</a>
+
+		<!--3 EXPORT DIALOG  onclick='export_invoice(".$row['id'].", \"".$config->export->spreadsheet."\", \"".$config->export->wordprocessor."\");'> -->	
 		<!--3 EXPORT TO PDF <a title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_pdf_tooltip']."' class='index_table' href='pdfmaker.php?id=".$row['id']."'><img src='images/common/page_white_acrobat.png' height='16' padding='-4px' border='-5px' valign='bottom' /></a> -->
 		<!--4 XLS <a title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_xls_tooltip'].$spreadsheet." ".$LANG['format_tooltip']."' class='index_table' href='index.php?module=invoices&view=templates/template&invoice='".$row['id']."&action=view&location=print&export=".$spreadsheet."'><img src='images/common/page_white_excel.png' height='16' border='0' padding='-4px' valign='bottom' /></a> -->
 		
