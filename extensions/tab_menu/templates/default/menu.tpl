@@ -48,7 +48,7 @@
 				<ul class="subnav">
 					<li><a { if $pageActive == "customer"} class="active"{/if} href="index.php?module=customers&view=manage">{$LANG.customers}</a></li>
 					<li><a { if $pageActive == "biller"} class="active" {/if} href="index.php?module=billers&view=manage">{$LANG.billers}</a></li>
-					<li><a { if $pageActive == "user"} class="active" {/if} href="index.php?module=customers&view=add">Users {* $LANG TODO *}</a></li>
+					<li><a { if $pageActive == "user"} class="active" {/if} href="index.php?module=user&view=manage">Users {* $LANG TODO *}</a></li>
 				</ul>
 			</div>
            <div id="product">

@@ -32,6 +32,7 @@ Next Release :: Beta 3
 	- validation - check/remove the validation on products - has been removed till beta 3 - will add back in and complete
 	- PDF - change system - instead of url - put everthign in a varieble and send to html2pdf 
 		- email invoice - TODO	
+	- Reports - localise
 
 ##############################
 Next Release :: Beta 2  - Current work in progress
@@ -49,7 +50,8 @@ Next Release :: Beta 2  - Current work in progress
 	- no manage users 
 	- total style invoice not selectable
 	- Help link - top right - not working
-	- Email as PDF note working
+	- Email as PDF not working
+	- Reports - not localised - ie. in 6 decimal places
 
 ##############################
 Sometime soon
