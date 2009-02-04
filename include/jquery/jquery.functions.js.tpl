@@ -184,16 +184,16 @@
 	
 	
 		 $("#export_dialog").show();
+			siLog('debug','export_dialog_show');
 		 $(".export_pdf").attr({ 
-	          href: "index.php?module=export&view=pdf&id="+row_number,
-	          onClick: "dialog('destroy')"
+	          //href: "index.php?module=export&view=pdf&id="+row_number
+			  href: "index.php?module=invoices&view=template&id="+row_number+"&action=view&location=pdf"
 	        });
 		 $(".export_doc").attr({ 
 			  href: "index.php?module=invoices&view=template&id="+row_number+"&action=view&location=print&export="+wordprocessor
 	        });	 
 	      $(".export_xls").attr({ 
-	          href: "index.php?module=invoices&view=template&id="+row_number+"&action=view&location=print&export="+spreadsheet,
-	          onclick: "$().dialog('destroy')"
+	          href: "index.php?module=invoices&view=template&id="+row_number+"&action=view&location=print&export="+spreadsheet
 	        });							
 		 $("#export_dialog").dialog({ 
 		   modal: true, 
@@ -206,15 +206,12 @@
 		        opacity: 0.5, 
 		        background: "black" 
 		    },
-		    close:  function() { $(this).dialog("destroy")}
+			close: function() { $(this).dialog("destroy")}
 		});
 	
 	}
-	
-	function dialog_close(){
-	         $(this).dialog("destroy"); 
-	}
 
+	
 	/*
 	 * Function: invoice_save_remove_autofill
 	 * Purpose: remove the autofilled text in the line items ntoes box

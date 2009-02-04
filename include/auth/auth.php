@@ -1,7 +1,5 @@
 <?php
-// like i said, we must never forget to start the session
 
-// is the one accessing this page logged in or not?
 if (!isset($auth_session->id))
 {
 	if  ($_GET['module'] !== "auth")  

@@ -206,7 +206,8 @@ if( !in_array($module."_".$view, $early_exit) )
 			{
 				if(file_exists("./extensions/$extension->name/templates/default/header.tpl")) 
 				{
-					$smarty -> display("../extensions/$extension->name/templates/default/header.tpl");
+					$smarty -> $smarty_output("../extensions/$extension->name/templates/default/header.tpl");
+
 					$extensionHeader++;
 				}
 			}
@@ -216,7 +217,7 @@ if( !in_array($module."_".$view, $early_exit) )
 		*/
 		if($extensionHeader == 0) 
 		{
-			$smarty -> display("../templates/default/header.tpl");
+			$smarty -> $smarty_output("../templates/default/header.tpl");
 		}
 		
 }
@@ -276,6 +277,12 @@ if( !in_array($module."_".$view, $early_exit) )
 /*
 * Include the php file for the requested page section - end
 */
+if($module == "export")
+{
+	exit(0);
+
+
+}	
 
 /*
 * If extension is enabled load its post load javascript files	- start
@@ -291,7 +298,7 @@ if( !in_array($module."_".$view, $early_exit) )
 		if($extension->enabled == "1")
 		{
 			if(file_exists("./extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.tpl")) {
-					$smarty -> display("../extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.tpl");
+					$smarty -> $smarty_output("../extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.tpl");
 			}
 		}
 		
@@ -301,7 +308,7 @@ if( !in_array($module."_".$view, $early_exit) )
 	*/
 	if($extensionPostLoadJquery == 0) 
 	{
-		$smarty -> display("../include/jquery/post_load.jquery.ext.js.tpl");
+		$smarty -> $smarty_output("../include/jquery/post_load.jquery.ext.js.tpl");
 	}
 
 /*
@@ -310,10 +317,6 @@ if( !in_array($module."_".$view, $early_exit) )
 		
 		
 		
-if($module == "export")
-{
-	exit(0);
-}	
 
 /*
 * Menu : If extension has custom menu use it else use default - start
@@ -331,7 +334,7 @@ if($module == "export")
 			{
 				if(file_exists("./extensions/$extension->name/templates/default/menu.tpl")) 
 				{
-					$smarty -> display("../extensions/$extension->name/templates/default/menu.tpl");
+					$smarty -> $smarty_output("../extensions/$extension->name/templates/default/menu.tpl");
 					$extensionMenu++;
 				}
 			}
@@ -341,7 +344,7 @@ if($module == "export")
 		*/
 		if($extensionMenu == "0") 
 		{
-			$smarty -> display("../templates/default/menu.tpl");
+			$smarty -> $smarty_output("../templates/default/menu.tpl");
 		}
 	}
 /*
@@ -363,7 +366,7 @@ if($module == "export")
 			{
 				if(file_exists("./extensions/$extension->name/templates/default/main.tpl")) 
 				{
-					$smarty -> display("../extensions/$extension->name/templates/default/main.tpl");
+					$smarty -> $smarty_output("../extensions/$extension->name/templates/default/main.tpl");
 					$extensionMain++;
 				}
 			}
@@ -373,7 +376,7 @@ if($module == "export")
 		*/
 		if($extensionMain == "0") 
 		{
-			$smarty -> display("../templates/default/main.tpl");
+			$smarty -> $smarty_output("../templates/default/main.tpl");
 		}
 /*
 * Main : If extension has custom menu use it else use default - end
@@ -418,7 +421,7 @@ if($module == "export")
 	}
 	
 	$smarty->assign("path",$path);
-	$smarty -> display("../".$tplDirectory."templates/default/$file.tpl");
+	$smarty -> $smarty_output("../".$tplDirectory."templates/default/$file.tpl");
 	
 	// If no smarty template - add message - onyl uncomment for dev - commented out for release
 	if ($extensionTemplates == 0 )
@@ -445,7 +448,7 @@ if($module == "export")
 			{
 				if(file_exists("./extensions/$extension->name/templates/default/footer.tpl")) 
 				{
-					$smarty -> display("../extensions/$extension->name/templates/default/footer.tpl");
+					$smarty -> $smarty_output("../extensions/$extension->name/templates/default/footer.tpl");
 					$extensionFooter++;
 				}
 			}
@@ -455,8 +458,9 @@ if($module == "export")
 		*/
 		if($extensionFooter == 0) 
 		{
-			$smarty -> display("../templates/default/footer.tpl");
-		}	
+			$smarty -> $smarty_output("../templates/default/footer.tpl");
+		}
+	
 	}
 /*
 * Footer - end 

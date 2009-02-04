@@ -4,8 +4,10 @@
  * Zend framework init - start
  */
 set_include_path(get_include_path() . PATH_SEPARATOR . "./library/");
+set_include_path(get_include_path() . PATH_SEPARATOR . "./library/pdf");
 set_include_path(get_include_path() . PATH_SEPARATOR . "./library/ZendFramework/1.7.2/");
 require_once 'Zend/Loader.php';
+
 Zend_Loader::loadClass('Zend_Db_Table');
 Zend_Loader::loadClass('Zend_Date');
 Zend_Loader::loadClass('Zend_Debug');
@@ -20,6 +22,10 @@ Zend_Loader::loadClass('Zend_Locale');
 Zend_Loader::loadClass('Zend_Locale_Format');
 Zend_Loader::loadClass('Zend_Log');
 Zend_Loader::loadClass('Zend_Log_Writer_Stream');
+
+//Zend_Loader::registerAutoload();
+
+
 
 //session_start();
 Zend_Session::start();
@@ -103,4 +109,19 @@ Array: Early_exit
 $early_exit = array();
 $early_exit[] = "auth_login";
 $early_exit[] = "auth_logout";
-//$early_exit[] = "export_pdf";
+$early_exit[] = "export_pdf";
+$early_exit[] = "invoice_template";
+
+
+switch ($module)
+{
+	case "export" :	
+		$smarty_output = "fetch";
+		break;
+	default :
+		$smarty_output = "display";
+		break;
+}
+
+//get the url - used for templates / pdf
+$siUrl = getURL();

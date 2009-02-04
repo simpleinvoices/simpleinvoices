@@ -38,11 +38,14 @@ function getLogoList() {
 }
 
 function getLogo($biller) {
+
+	$url = getURL();
+
 	if(!empty($biller['logo'])) {
-		return "./templates/invoices/logos/$biller[logo]";
+		return $url."/templates/invoices/logos/$biller[logo]";
 	}
 	else {
-		return "./templates/invoices/logos/_default_blank_logo.png";
+		return $url."/templates/invoices/logos/_default_blank_logo.png";
 	}
 }
 

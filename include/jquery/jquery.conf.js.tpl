@@ -125,6 +125,7 @@ $(document).ready(function(){
 		//autoFill($(".note"), "Description");
     });
 
+
 	//calc number of line items 
 	$(".invoice_save").click(function () {
 		$('#gmail_loading').show();
@@ -155,6 +156,27 @@ $(document).ready(function(){
 	});
 	$(".note").css({ color: "#b2adad" });
 
+
+
+	//Export dialog window - onclick export button close window
+
+	$(".export_window").livequery('click',function () { 
+		$('.ui-dialog-titlebar-close').trigger('click');
+    });
+
+/*
+	$(".export_window").click(function () { 
+		$('.ui-dialog-titlebar-close').trigger('click');
+    });
+*/
+	/*
+	* Product Change - updates line item with product price info
+	*/
+	$(".invoice_export_dialog").livequery('click',function () { 
+      	var $row_number = $(this).attr("rel");
+		siLog('debug',"{/literal}$config->export->spreadsheet{literal}");
+		export_invoice($row_number, '{/literal}{$config->export->spreadsheet}{literal}','{/literal}{$config->export->wordprocessor}{literal}');
+     });
 
 });
 

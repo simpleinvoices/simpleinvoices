@@ -2300,3 +2300,122 @@ function getNumberOfDoneSQLPatches() {
 	//Returns number of patches applied
 	return $patches['count'];
 }
+
+
+function pdfThis($html)
+{
+
+	global $config;
+
+//	set_include_path("../../../../library/pdf/");
+	require_once('./library/pdf/config.inc.php');
+	require_once('./library/pdf/pipeline.factory.class.php');
+	require_once('./library/pdf/pipeline.class.php');
+	parse_config_file('./library/pdf/html2ps.config');
+
+	require_once("./include/init.php");	// for getInvoice() and getPreference()
+	$invoice_id = $_GET['id'];
+	$invoice = getInvoice($invoice_id);
+
+	$preference = getPreference($invoice['preference_id']);
+	$pdfname = trim($preference['pref_inv_wording']) . $invoice_id;
+
+	error_reporting(E_ALL);
+	ini_set("display_errors","1");
+	@set_time_limit(10000);
+
+	/**
+	 * Runs the HTML->PDF conversion with default settings
+	 *
+	 * Warning: if you have any files (like CSS stylesheets and/or images referenced by this file,
+	 * use absolute links (like http://my.host/image.gif).
+	 *
+	 * @param $path_to_html String path to source html file.
+	 * @param $path_to_pdf  String path to file to save generated PDF to.
+	 */
+	function convert_to_pdf($html_to_pdf, $pdfname) {
+
+		global $config;
+	  /**
+	   * Handles the saving generated PDF to user-defined output file on server
+	   */
+
+	  class MyFetcherLocalFile extends Fetcher {
+		var $_content;
+
+		function MyFetcherLocalFile($html_to_pdf) {
+		  //$this->_content = file_get_contents($file);
+		  $this->_content = $html_to_pdf;
+		}
+
+		function get_data($dummy1) {
+		  return new FetchedDataURL($this->_content, array(), "");
+		}
+
+		function get_base_url() {
+		  return "";
+		}
+	  }
+
+	  $pipeline = PipelineFactory::create_default_pipeline("", // Attempt to auto-detect encoding
+														   "");
+
+	  // Override HTML source 
+	  $pipeline->fetchers[] = new MyFetcherLocalFile($html_to_pdf);
+
+	  $baseurl = "";
+	  $media = Media::predefined("A4");
+	  $media->set_landscape(false);
+
+	  global $g_config;
+	  $g_config = array(
+						'cssmedia'     => 'screen',
+						'renderimages' => true,
+						'renderlinks'  => true,
+						'renderfields' => true,
+						'renderforms'  => false,
+						'mode'         => 'html',
+						'encoding'     => '',
+						'debugbox'     => false,
+						'pdfversion'    => '1.4',
+
+						'process_mode'     => 'single',
+						'output'     => 1,
+						'location'     => 'pdf',
+						'pixels'     => $config->export->pdf->screensize,
+						'media'     => $config->export->pdf->papersize,
+                        'margins'       => array(
+                                                      'left'    => $config->export->pdf->leftmargin,
+                                                      'right'   => $config->export->pdf->rightmargin,
+                                                      'top'     => $config->export->pdf->topmargin,
+                                                      'bottom'  => $config->export->pdf->bottommargin,
+                                                      ),
+						'transparency_workaround'     => 1,
+						'imagequality_workaround'     => 1,
+
+						'draw_page_border' => false
+						);
+
+		$media->set_margins($g_config['margins']);
+		$media->set_pixels($config->export->pdf->screensize);
+
+/*
+header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 	// Date in the past
+
+header("Location: $myloc");
+*/
+	  global $g_px_scale;
+	  $g_px_scale = mm2pt($media->width() - $media->margins['left'] - $media->margins['right']) / $media->pixels; 
+	  global $g_pt_scale;
+	  $g_pt_scale = $g_px_scale * 1.43; 
+
+  	  $pipeline->configure($g_config);
+	  $pipeline->data_filters[] = new DataFilterUTF8("");
+	  $pipeline->destination = new DestinationDownload($pdfname);
+	  $pipeline->process($baseurl, $media);
+	}
+
+	convert_to_pdf($html, $pdfname);
+
+}
