@@ -705,16 +705,15 @@ PRIMARY KEY  (`user_id`)) ;
     {
 		case "pdo_pgsql" :
 			$patch['136']['patch'] = "CREATE TABLE ".TB_PREFIX."user_domain (
-	    		`id` int(11) NOT NULL auto_increment  PRIMARY KEY,
-            	`name` varchar(255) UNIQUE NOT NULL
-            	) ENGINE=InnoDB;";
+	            id serial PRIMARY KEY,
+            	name text UNIQUE NOT NULL;";
          	break;
 		case "pdo_mysql" :
 		default :
         	$patch['136']['patch'] = "CREATE TABLE ".TB_PREFIX."user_domain (
-	            id serial PRIMARY KEY,
-            	name text UNIQUE NOT NULL
-            	);";
+	    		`id` int(11) NOT NULL auto_increment  PRIMARY KEY,
+            	`name` varchar(255) UNIQUE NOT NULL
+            	)";
     }
     $patch['136']['date'] = "200712";
     

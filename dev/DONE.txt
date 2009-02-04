@@ -41,6 +41,9 @@ BETA 2
 	- updates Taxes - add % or $ option - done
 	- Default tax per product  - done
 
+	- PDF - change system from requiring the url of the invoice - this should fix lots of peoples PDF problems
+	-- note: PDF in email is still a work-in-progress
+
 --------
 BETA 1
 --------

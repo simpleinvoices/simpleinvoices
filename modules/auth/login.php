@@ -79,7 +79,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 		{
 			$result = $dbAdapter->fetchRow('
 				SELECT 
-					u.user_id, u.user_email, u.user_name
+					u.user_id as id, u.user_email, u.user_name
 				FROM 
 					si_users u
 				WHERE 
@@ -92,7 +92,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 		{
 			$result = $dbAdapter->fetchRow('
 				SELECT 
-					u.user_id, u.user_email, u.user_name, r.name as role_name, u.user_domain_id
+					u.user_id as id, u.user_email, u.user_name, r.name as role_name, u.user_domain_id
 				FROM 
 					si_user u,  si_user_role r 
 				WHERE 
@@ -130,5 +130,3 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 }
 
 $smarty->assign("errorMessage",$errorMessage);
-
-?>

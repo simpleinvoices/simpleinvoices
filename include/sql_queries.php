@@ -54,6 +54,7 @@ function db_connector() {
 	}
 	catch( PDOException $exception )
 	{
+		simpleInvoicesError("dbConnection",$exception->getMessage());
 		die($exception->getMessage());
 	}
 			

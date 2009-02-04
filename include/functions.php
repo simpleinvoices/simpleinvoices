@@ -340,8 +340,8 @@ switch ($type)
 		Simple Invoices database connection problem<br>
 		===========================================<br>
 		Could not connect to the Simple Invoices database<br><br>
-		Please refer to the following database ('.$info1.') error for for to fix this: <b>ERROR :' . end($info2 . '</b><br><br>
-		If this is an Access denied error please make sure that the db_host, db_name, db_user, and db_password in config/config.php are correct 
+		For information on how to fix this pease refer to the following database error: <br> --> <b>$info1</b><br><br>
+		If this is an Access denied error please make sure that the database.params setting in config/config.ini are correct 
 		<br>
 		===========================================<br>
 		");

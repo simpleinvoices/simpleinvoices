@@ -12,20 +12,13 @@ if ( ($config->authentication->enabled == 1 ) AND ($auth_session->fake_auth =="1
 // 1 = config->auth->enabled == "true"
 if ($config->authentication->enabled == 1 ) {
 
-
-	if (isset($_GET['location']) && $_GET['location'] == 'pdf' ) {
-		include('./include/auth/auth.php');
-	
-		//TODO - this needs to be fixed !!
-		if ($auth_session->domain_id == null)
-		{
-			$auth_session->domain_id = "1";
-		}
-
-	} 
-	else {
-		include('./include/auth/auth.php');
+	//TODO - this needs to be fixed !!
+	if ($auth_session->domain_id == null)
+	{
+		$auth_session->domain_id = "1";
 	}
+
+	include('./include/auth/auth.php');
 }
 
 /*If auth not on - use default domain and user id of 1*/

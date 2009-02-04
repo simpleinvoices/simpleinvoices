@@ -46,6 +46,8 @@ $logger = new Zend_Log($writer);
  */
 require_once("smarty/Smarty.class.php");
 
+include_once('./include/functions.php');
+
 $smarty = new Smarty();
 
 //cache directory. Have to be writeable (chmod 777)

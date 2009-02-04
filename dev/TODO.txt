@@ -30,27 +30,26 @@ Next Release :: Beta 3
 	- system defaults/preferences - flatten table and add domain_id
 	- Products - allow setting 2 or more default taxes pre product
 	- validation - check/remove the validation on products - has been removed till beta 3 - will add back in and complete
+	- PDF - change system - instead of url - put everthign in a varieble and send to html2pdf 
+		- email invoice - TODO	
 
 ##############################
 Next Release :: Beta 2  - Current work in progress
 ##############################
-	- PDF - change system - instead of url - put everthign in a varieble and send to html2pdf 
-		- manage invoices - export -done
-		- email invoice - TODO	
 	- Manage pages - row count - limit issue
-	- simpleInvoicesError - fix
 
 	Known issues
 	- customer view info tabs - not happy - need to be redone in jquery UI
 	- can't close yellow text
-	- backup db - once db backed up - menu goes wierd - minor
+	- backup db - once db backed up - menu goes wierd 
 	- IE - buttons not all nice
 	- no data validation on form input
 	- only 1 tax per line item
 	- postgres version not complete 
 	- no manage users 
 	- total style invoice not selectable
-	
+	- Help link - top right - not working
+	- Email as PDF note working
 
 ##############################
 Sometime soon
