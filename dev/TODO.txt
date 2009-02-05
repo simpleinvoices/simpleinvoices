@@ -33,13 +33,13 @@ Next Release :: Beta 3
 	- PDF - change system - instead of url - put everthign in a varieble and send to html2pdf 
 		- email invoice - TODO	
 	- Reports - localise
+	- Manage pages - adjust xml for all remaining pages (invoice/biller/products/customer/payments done)
 
 ##############################
 Next Release :: Beta 2  - Current work in progress
 ##############################
-	- Manage pages - row count - limit issue - invoices/payments done
+
 	- test the .sql files for mysql5
-	- change define to production
 
 	Known issues
 	- customer view info tabs - not happy - need to be redone in jquery UI

@@ -8,73 +8,98 @@ header("Content-type: text/xml");
 $start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
 $dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC" ;
 $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "name" ;
-$limit = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
+$rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
 $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 
-//SC: Safety checking values that will be directly subbed in
-if (intval($page) != $page) {
-	$start = 0;
-}
-$start = (($page-1) * $limit);
 
-if (intval($limit) != $limit) {
-	$limit = 25;
-}
-if (!preg_match('/^(asc|desc)$/iD', $dir)) {
-	$dir = 'DESC';
-}
+function sql($type='', $dir, $sort, $rp, $page )
+{
+	global $config;
+	global $auth_session;
 
-$query = $_POST['query'];
-$qtype = $_POST['qtype'];
+		
+	//SC: Safety checking values that will be directly subbed in
+	if (intval($page) != $page) {
+		$start = 0;
+	}
+	
+	if (intval($rp) != $rp) {
+		$rp = 25;
+	}
+	
+	/*SQL Limit - start*/
+	$start = (($page-1) * $rp);
+	$limit = "LIMIT $start, $rp";
 
-$where = "  WHERE c.domain_id = :domain_id";
-if ($query) $where = " WHERE c.domain_id = :domain_id AND $qtype LIKE '%$query%' ";
+	if($type =="count")
+	{
+		unset($limit);
+	}
+	/*SQL Limit - end*/	
+	
+	
+	if (!preg_match('/^(asc|desc)$/iD', $dir)) {
+		$dir = 'DESC';
+	}
+	
+	$query = $_POST['query'];
+	$qtype = $_POST['qtype'];
+	
+	$where = "  WHERE c.domain_id = :domain_id";
+	if ($query) $where = " WHERE c.domain_id = :domain_id AND $qtype LIKE '%$query%' ";
+	
+	
+	/*Check that the sort field is OK*/
+	$validFields = array('CID', 'name', 'customer_total','owing','enabled');
+	
+	if (in_array($sort, $validFields)) {
+		$sort = $sort;
+	} else {
+		$sort = "CID";
+	}
+	
+		//$sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY $sort $dir LIMIT $start, $limit";
+		$sql = "SELECT 
+					c.id as CID, 
+					c.name as name, 
+					(SELECT (CASE  WHEN c.enabled = 0 THEN 'Disabled' ELSE 'Enabled' END )) AS enabled,
+					(
+						SELECT
+				            coalesce(sum(ii.total),  0) AS total 
+				        FROM
+				            ".TB_PREFIX."invoice_items ii INNER JOIN
+				            ".TB_PREFIX."invoices iv ON (iv.id = ii.invoice_id)
+				        WHERE  
+				            iv.customer_id  = CID ) as customer_total,
+	                (
+	                    SELECT 
+	                        coalesce(sum(ap.ac_amount), 0) AS amount 
+	                    FROM
+	                        ".TB_PREFIX."payment ap INNER JOIN
+	                        ".TB_PREFIX."invoices iv ON (iv.id = ap.ac_inv_id)
+	                    WHERE 
+	                        iv.customer_id = CID) AS paid,
+	                ( select customer_total - paid ) AS owing
+	
+				FROM 
+					".TB_PREFIX."customers c  
+				$where
+				ORDER BY 
+					$sort $dir 
+				$limit";
+	
+		$result = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+		return $result;
+		
+}	
 
+$sth = sql('', $dir, $sort, $rp, $page);
+$sth_count_rows = sql('count',$dir, $sort, $rp, $page);
 
-/*Check that the sort field is OK*/
-$validFields = array('CID', 'name', 'customer_total','owing','enabled');
+$customers = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-if (in_array($sort, $validFields)) {
-	$sort = $sort;
-} else {
-	$sort = "CID";
-}
+$count = $sth_count_rows->rowCount();
 
-	//$sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY $sort $dir LIMIT $start, $limit";
-	$sql = "SELECT 
-				c.id as CID, 
-				c.name as name, 
-				(SELECT (CASE  WHEN c.enabled = 0 THEN 'Disabled' ELSE 'Enabled' END )) AS enabled,
-				(
-					SELECT
-			            coalesce(sum(ii.total),  0) AS total 
-			        FROM
-			            ".TB_PREFIX."invoice_items ii INNER JOIN
-			            ".TB_PREFIX."invoices iv ON (iv.id = ii.invoice_id)
-			        WHERE  
-			            iv.customer_id  = CID ) as customer_total,
-                (
-                    SELECT 
-                        coalesce(sum(ap.ac_amount), 0) AS amount 
-                    FROM
-                        ".TB_PREFIX."payment ap INNER JOIN
-                        ".TB_PREFIX."invoices iv ON (iv.id = ap.ac_inv_id)
-                    WHERE 
-                        iv.customer_id = CID) AS paid,
-                ( select customer_total - paid ) AS owing
-
-			FROM 
-				".TB_PREFIX."customers c  
-			$where
-			ORDER BY 
-				$sort $dir 
-			LIMIT 
-				$start, $limit";
-
-	$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
-	$customers = $sth->fetchAll(PDO::FETCH_ASSOC);
-
-$count = $sth->rowCount();
 
 	$xml .= "<rows>";
 	$xml .= "<page>$page</page>";
