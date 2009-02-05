@@ -54,6 +54,7 @@ Next Release :: Beta 2  - Current work in progress
 	- Help link - top right - not working
 	- Email as PDF not working
 	- Reports - not localised - ie. in 6 decimal places
+	- PHP.ini max memory needs to be min 64M to handle new PDF
 
 ##############################
 Sometime soon

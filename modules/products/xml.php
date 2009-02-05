@@ -2,77 +2,87 @@
 
 header("Content-type: text/xml");
 
-$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
+//$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
 $dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC" ;
 $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "id" ;
-$limit = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
+$rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
 $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 
-//SC: Safety checking values that will be directly subbed in
-if (intval($page) != $page) {
-	$start = 0;
+function sql($type='', $dir, $sort, $rp, $page )
+{
+	global $config;
+	global $auth_session;
+	
+	//SC: Safety checking values that will be directly subbed in
+	if (intval($start) != $start) {
+		$start = 0;
+	}
+	$start = (($page-1) * $limit);
+	
+	if (intval($limit) != $limit) {
+		$limit = 25;
+	}
+	/*SQL Limit - start*/
+	$start = (($page-1) * $rp);
+	$limit = "LIMIT $start, $rp";
+
+	if($type =="count")
+	{
+		unset($limit);
+	}
+	/*SQL Limit - end*/	
+		
+	if (!preg_match('/^(asc|desc)$/iD', $dir)) {
+		$dir = 'DESC';
+	}
+	
+	$query = $_POST['query'];
+	$qtype = $_POST['qtype'];
+	
+	$where = "";
+	if ($query) $where = " AND $qtype LIKE '%$query%' ";
+	
+	
+	/*Check that the sort field is OK*/
+	$validFields = array('id', 'biller_id','customer_id');
+	
+	if (in_array($sort, $validFields)) {
+		$sort = $sort;
+	} else {
+		$sort = "id";
+	}
+	
+		$sql = "SELECT 
+					id, 
+					description,
+					unit_price,
+					(SELECT (CASE  WHEN enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
+				FROM 
+					".TB_PREFIX."products  
+				WHERE 
+					visible = 1
+					AND domain_id = :domain_id
+					$where
+				ORDER BY 
+					$sort $dir 
+				$limit";
+	
+	
+	$result = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+
+	return $result;
 }
-$start = (($page-1) * $limit);
 
-if (intval($limit) != $limit) {
-	$limit = 25;
-}
-if (!preg_match('/^(asc|desc)$/iD', $dir)) {
-	$dir = 'DESC';
-}
+$sth = sql('', $dir, $sort, $rp, $page);
+$sth_count_rows = sql('count',$dir, $sort, $rp, $page);
 
-$query = $_POST['query'];
-$qtype = $_POST['qtype'];
+$customers = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-$where = "";
-if ($query) $where = " AND $qtype LIKE '%$query%' ";
+$count = $sth_count_rows->rowCount();
 
 
-/*Check that the sort field is OK*/
-$validFields = array('id', 'biller_id','customer_id');
 
-if (in_array($sort, $validFields)) {
-	$sort = $sort;
-} else {
-	$sort = "id";
-}
 
-	$sql = "SELECT 
-				id, 
-				description,
-				unit_price,
-				(SELECT (CASE  WHEN enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
-			FROM 
-				".TB_PREFIX."products  
-			WHERE 
-				visible = 1
-				AND domain_id = :domain_id
-				$where
-			ORDER BY 
-				$sort $dir 
-			LIMIT 
-				$start, $limit";
-				
-			
-
-	$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
-	$customers = $sth->fetchAll(PDO::FETCH_ASSOC);
-/*
-	$customers = null;
-
-	for($i=0; $customer = $sth->fetch(PDO::FETCH_ASSOC); $i++) {
-		if ($customer['enabled'] == 1) {
-			$customer['enabled'] = $LANG['enabled'];
-		} else {
-			$customer['enabled'] = $LANG['disabled'];
-		}
-*/
-global $dbh;
-
-$sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."products where visible =1";
-$tth = dbQuery($sqlTotal) or die(end($dbh->errorInfo()));
-$resultCount = $tth->fetch();
-$count = $resultCount[0];
 //echo sql2xml($customers, $count);
 $xml .= "<rows>";
 
