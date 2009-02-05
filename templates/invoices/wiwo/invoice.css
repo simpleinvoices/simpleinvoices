@@ -1,0 +1,124 @@
+body { margin:0; padding:0}
+
+img#bol {
+        width: 130px;
+        height: 123px;
+	float: left;
+	margin: 0.5em 1em 0.5em 1em;
+}
+
+#envelope {
+/*	border: 1px dashed red;		*/
+}
+
+#heading {
+	margin: 0 1em 0 150px;
+}
+
+table#kop {
+	width: 100%;
+	border-bottom: 3px solid red;
+}
+
+tr	{ margin: 0; padding: 0;
+}
+
+#logobol {
+
+}
+
+#logoblok	{
+	width: 16em;
+	text-align: center;
+}
+
+#logoblok #wiwo {
+	font-size: 24pt;
+	font-family: "Georgia","Times Roman",serif;
+	background-color: #ffffc4;
+}
+
+#logoblok .webadres {
+	font-size: 18pt;
+	background-color: #ffffc4;
+}
+
+#naw	{
+	text-align: right;
+}
+
+ul	{ 
+	list-style-type: none;
+	padding: 0;
+}
+
+ul#adresblok {
+	padding-top: 2em;
+	padding-left: 50%;
+}
+
+table#faktuurinfo td {
+	padding: 0;
+	margin: 0;
+}
+
+table#faktuurinfo td.left {
+	text-align: right;
+}
+
+#info {
+	margin-top: 1em;
+	rackground-color: #ffffc4;
+}
+
+table#fregels {
+	width: 100%;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+table#fregels th {
+	text-align: left;
+	font-weight: normal;
+	border-bottom: 1px dotted black;
+	height: 1em;
+}
+
+table#fregels .aantal {
+	width: 5em;
+}
+.geld, .totaal {
+	text-align: right;
+	width: 7em;
+}
+
+#totalen {
+	margin-top: 0;
+	padding-top: 2em;
+}
+
+#totalen table {
+	width: 100%;
+}
+
+#totalen table td.left {
+	text-align: right;
+}
+
+#totalen table td.totaal {
+	font-weight: bold;
+	border-top: 1px dashed black;
+}
+
+table#footer {
+	margin-top: 10%;
+	width: 100%;
+}
+
+table#footer td.middle {
+	text-align: center;
+}
+
+table#footer td.right {
+	text-align: right;
+}

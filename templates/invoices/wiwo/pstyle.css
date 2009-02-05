@@ -1,0 +1,151 @@
+body { margin:0; padding:0}
+
+img#bol {
+        width: 130px;
+        height: 123px;
+	float: left;
+	margin: 0.5em 1em 0.5em 1em;
+}
+
+#envelope {
+/*	border: 1px dashed red;		*/
+}
+
+#heading {
+	margin: 0 1em 0 150px;
+}
+
+table#kop {
+	width: 100%;
+	border-bottom: 3px solid red;
+}
+
+tr	{ margin: 0; padding: 0;
+}
+
+#logobol {
+
+}
+
+#logoblok	{
+	width: 16em;
+	text-align: center;
+}
+
+#logoblok #biller {
+	font-size: 18pt;
+	font-family: "Georgia","Times Roman",serif;
+	background-color: #ffffc4;
+}
+
+#logoblok .webadres {
+	font-size: 14pt;
+	background-color: #ffffc4;
+}
+
+#naw	{
+	text-align: right;
+}
+
+ul	{ 
+	list-style-type: none;
+	padding: 0;
+}
+
+ul#adresblok {
+	padding-top: 2em;
+	margin-left: 50%;
+}
+
+table#faktuurinfo  {
+	border: 1px solid grey;
+}
+
+table#faktuurinfo td {
+	padding: 0;
+	margin: 0;
+}
+
+table#faktuurinfo td.left {
+	text-align: right;
+}
+
+#info {
+	margin-top: 2em;
+	margin-bottom: 2em;
+}
+
+table#fregels {
+	width: 100%;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	font-size: smaller;
+}
+
+table#fregels th {
+	text-align: left;
+	font-weight: normal;
+	border-bottom: 1px dotted black;
+	height: 1em;
+}
+
+table#fregels th.geld {
+	text-align: right;
+	width: 7em;
+}
+
+table#fregels .aantal {
+	width: 8em;
+}
+
+.geld, .totaal {
+	text-align: right;
+	width: 7em;
+}
+
+#totalen {
+	margin-top: 0;
+	padding-top: 2em;
+}
+
+#totalen table {
+	width: 100%;
+}
+
+#totalen table td.left {
+	text-align: right;
+}
+
+#totalen table td.totaal {
+	font-weight: bold;
+	border-top: 1px dotted black;
+}
+
+
+div#conditie {
+	font-size:smaller;
+	padding-top: 1em;
+	padding-bottom: 1em;
+}
+
+
+
+table#footer {
+	border-top: solid 1px grey;
+	margin-top: 10%;
+	width: 100%;
+
+}
+
+table#footer td.middle {
+	text-align: center;
+}
+
+table#footer td.right {
+	text-align: right;
+}
+div#foot {
+	max-height: 100px;
+	width: 100%;
+	bottom: 10px;
+}
