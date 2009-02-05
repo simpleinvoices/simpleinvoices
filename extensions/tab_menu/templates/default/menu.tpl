@@ -23,32 +23,33 @@
        <div id="tabmenu" class="flora">
             <ul>
 
-                <li ><a href="#home"><span>Home</span></a></li>
-                <li ><a href="#money"><span>Money</span></a></li>
-                <li ><a href="#people"><span>People</span></a></li>
-                <li ><a href="#product"><span>Products</span></a></li>
-                <li style="float:right" class="menu_setting"><a href="#setting"><span>Settings</span></a></li>
+                <li ><a href="#home"><span>{$LANG.home}</span></a></li>
+                <li ><a href="#money"><span>{$LANG.money}</span></a></li>
+                <li ><a href="#people"><span>{$LANG.people}</span></a></li>
+                <li ><a href="#product"><span>{$LANG.products}</span></a></li>
+                <li style="float:right" class="menu_setting"><a href="#setting"><span>{$LANG.settings}</span></a></li>
             </ul>
             <div id="home">
 				<ul class="subnav">
-					<li><a { if $pageActive == "dashboard"} class="active" {/if} href="index.php">Dashboard</a></li>
-					<li><a { if $pageActive == "report"} class="active" {/if} href="index.php?module=reports&view=index">All reports</a></li>
+					<li><a { if $pageActive == "dashboard"} class="active" {/if} href="index.php">{$LANG.dashboard}</a></li>
+					<li><a { if $pageActive == "report"} class="active" {/if} href="index.php?module=reports&view=index">{$LANG.all_reports}</a></li>
 				</ul>
             </div>
             <div id="money">
 				<ul class="subnav">
 					<li><a { if $pageActive == "invoice"} class="active" {/if} href="index.php?module=invoices&view=manage">{$LANG.invoices}</a></li>
-					{* dialog style <li><a { if $pageActive == "invoice_new"} class="active" {/if} id="invoice_dialog" href="#">New invoice</a></li> *} {*LANG TODO*}
-					<li><a { if $pageActive == "invoice_new"} class="active" {/if} id="invoice_dialogx" href="index.php?module=invoices&view=itemised">New invoice</a></li> {*LANG TODO*}
+					{* dialog style <li><a { if $pageActive == "invoice_new"} class="active" {/if} id="invoice_dialog" href="#">{$LANG.new_invoice}</a></li> *}
+					<li><a { if $pageActive == "invoice_new"} class="active" {/if} id="invoice_dialogx" href="index.php?module=invoices&view=itemised">{$LANG.new_invoice}</a></li> 
 					<li><a { if $pageActive == "payment"} class="active" {/if} href="index.php?module=payments&view=manage">{$LANG.payments}</a></li>
-					<li><a { if $pageActive == "report_sale"} class="active" {/if} href="index.php?module=reports&view=report_sales_total">Sales Report {*$LANG TODO*}</a></li>
+					<li><a { if $pageActive == "report_sale"} class="active" {/if} href="index.php?module=reports&view=report_sales_total">{$LANG.sales_report}</a></li>
 				</ul>
             </div>
             <div id="people">
 				<ul class="subnav">
 					<li><a { if $pageActive == "customer"} class="active"{/if} href="index.php?module=customers&view=manage">{$LANG.customers}</a></li>
 					<li><a { if $pageActive == "biller"} class="active" {/if} href="index.php?module=billers&view=manage">{$LANG.billers}</a></li>
-					<li><a { if $pageActive == "user"} class="active" {/if} href="index.php?module=user&view=manage">Users {* $LANG TODO *}</a></li>
+					<li><a { if $pageActive == "user"} class="active" {/if} href="index.php?module=user&view=manage">{$LANG.users}</a></li>
+
 				</ul>
 			</div>
            <div id="product">
@@ -59,7 +60,7 @@
             </div>
            <div style="float: right; " id="setting">
                 <ul class="subnav">
-					<li><a { if $pageActive == "setting"} class="active"{/if} href="index.php?module=options&view=index">All settings {* LANG TODO *}</a></li>
+					<li><a { if $pageActive == "setting"} class="active"{/if} href="index.php?module=options&view=index">{$LANG.settings}</a></li>
 					<li><a { if $pageActive == "system_default"} class="active"{/if} href="index.php?module=system_defaults&view=manage">{$LANG.system_preferences}</a></li>
 					<li><a { if $pageActive == "custom_field"} class="active"{/if} href="index.php?module=custom_fields&view=manage">{$LANG.custom_fields_upper}</a></li>
 					<li><a { if $pageActive == "tax_rate"} class="active"{/if} href="index.php?module=tax_rates&view=manage">{$LANG.tax_rates}</a></li>

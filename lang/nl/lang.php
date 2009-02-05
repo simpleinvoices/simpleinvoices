@@ -337,5 +337,9 @@ $LANG['whats_all_this_inv_pref'] = "Waar gaat deze Faktuur Voorkeur pagina over?
 $LANG['whats_this_page_about'] = "Waar gaat deze pagina over?";//1
 $LANG['wheres_the_edit_button'] = "Waar zit de knop om te bewerken?";//1
 $LANG['zip'] = "Postcode";//1
-
+$LANG['settings'] = "Instellingen";//1
+$LANG['sales_report'] = "Verkoop rapport";//1
+$LANG['new_invoice'] = "Nieuwe Faktuur";//1
+$LANG['dashboard'] = "Dashboard";//1
+$LANG['all_reports'] = "Alle rapporten";//1
 ?>

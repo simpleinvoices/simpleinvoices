@@ -1,7 +1,7 @@
 <?php
   /*
    * Script: lang_check.php
-   *       Calculate languages tanslation status
+   *       Calculate languages translation status
    *
    * Authors:
    *        Rui Gouveia

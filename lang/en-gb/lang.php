@@ -356,5 +356,12 @@ $LANG['whats_all_this_inv_pref'] = "Whats all this Invoice Preference stuff abou
 $LANG['whats_this_page_about'] = "Whats this page about ";//1
 $LANG['wheres_the_edit_button'] = "Wheres the edit button ";//1
 $LANG['zip'] = "Zip code";//1
-
+$LANG['people'] = "People";//1
+$LANG['money'] = "Money";//1
+$LANG['settings'] = "Settings";//1
+$LANG['users'] = "Users";//1
+$LANG['dashboard'] = "Dashboard";//1
+$LANG['all_reports'] = "All reports";//1
+$LANG['new_invoice'] = "New invoice";//1
+$LANG['sales_report'] = "Sales report";//1
 ?>
