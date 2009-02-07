@@ -364,4 +364,5 @@ $LANG['dashboard'] = "Dashboard";//1
 $LANG['all_reports'] = "All reports";//1
 $LANG['new_invoice'] = "New invoice";//1
 $LANG['sales_report'] = "Sales report";//1
+$LANG['for'] = "for";//1
 ?>
