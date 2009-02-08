@@ -161,7 +161,7 @@
 	</tr>	
 	<tr class='details_screen customer'>
 		<td class='details_screen'>{$customFieldLabels.customer_cf4}:</td><td class='details_screen' colspan=4>{$customer.custom_field4}</td>
-		<td class='details_screen align_right'><a href="?module=invoices&view=usedefault&action=update_template&id={$invoice.id}&customer_id={$customer.id}"><img src="./images/flexigrid/load.png" /></a></td>
+		<td class='details_screen align_right'><a href="?module=invoices&view=usedefault&action=update_template&id={$invoice.id}&customer_id={$customer.id}"><img src="./images/flexigrid/load.png" title='{$LANG.invoice} {$invoice.id} {$LANG.as_template} {$LANG.for} {$customer.name}'/></a></td>
 
 	</tr>	
 			{*

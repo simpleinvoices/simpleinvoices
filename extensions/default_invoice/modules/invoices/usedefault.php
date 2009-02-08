@@ -27,7 +27,12 @@ $customer = getCustomer($master_customer_id);
 
 if ($_GET['action'] == 'update_template') {	/* update default template for customer */
 
- $sql = "UPDATE `si_customers` SET `custom_field4` = ".$_GET['id']." WHERE `id` = ".$master_customer_id;
+ $sql = "UPDATE ".TB_PREFIX."customers SET custom_field4 = :cf4 WHERE id = :id";
+ dbQuery($sql,
+	':cf4', $_GET['id'],
+ 	':id', $master_customer_id
+	);
+
  $smarty -> assign("view","quick_view");
  $smarty -> assign("spec","id");
  $smarty -> assign("id",$_GET['id']);

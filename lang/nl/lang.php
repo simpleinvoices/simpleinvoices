@@ -343,4 +343,5 @@ $LANG['new_invoice'] = "Nieuwe faktuur";//1
 $LANG['dashboard'] = "Dashboard";//1
 $LANG['all_reports'] = "Alle rapporten";//1
 $LANG['for'] = "voor";//1
+$LANG['as_template'] = "als sjabloon gebruiken";//1
 ?>
