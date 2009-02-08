@@ -34,24 +34,19 @@ if ($_GET['action'] == 'update_template') {	/* update default template for custo
 # print("debug=$sql");
 } else {
  
- if ($customer['custom_field4'] == null) { 	/* No default template for this customer */
-  #include('./extensions/default_invoice/modules/invoices/itemised.php'); 
+$template = $defaults['default_invoice'];					/* GET DEFAULT TEMPLATE, OR NULL */
+($customer['custom_field4'] != null) && $template = $customer['custom_field4'];	/* OVERRIDE WITH CF4 IF IT EXISTS */
+$invoice = getInvoice($template);
+$template = $invoice['id'];							/* CHECK IF TEMPLATE EXISTS, OR NULL */
+
+ if ($template == null) { 				/* No template for this customer */
   $smarty -> assign("view","itemised");
   $smarty -> assign("spec","customer_id");
   $smarty -> assign("id",$master_customer_id);
- } else {
-  $template = $customer['custom_field4'];
-  $invoice = getInvoice($template);
-  if (isSet($invoice['id'])) {
-   #include('./extensions/default_invoice/modules/invoices/details.php'); 
-   $smarty -> assign("view","details");
-   $smarty -> assign("spec","template");
-   $smarty -> assign("id",$template);
-  } else {					/* selected invoice does not exist */
-   $smarty -> assign("view","itemised");
-   $smarty -> assign("spec","customer_id");
-   $smarty -> assign("id",$master_customer_id);
-  }
+ } else {						/* Use template for this customer */
+  $smarty -> assign("view","details");
+  $smarty -> assign("spec","template");
+  $smarty -> assign("id",$template);
  }
 }
 ?>
