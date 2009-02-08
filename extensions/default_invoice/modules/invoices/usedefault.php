@@ -25,17 +25,26 @@ $defaults = getSystemDefaults();
 $master_customer_id = $_GET['customer_id'];
 $customer = getCustomer($master_customer_id);
 
-if ($customer['custom_field4'] == null) { 	/* No default template for this customer */
- #include('./extensions/default_invoice/modules/invoices/itemised.php'); 
- $smarty -> assign("view","itemised");
- $smarty -> assign("spec","customer_id");
- $smarty -> assign("id",$master_customer_id);
-} else {
- $template = $customer['custom_field4'];
- #include('./extensions/default_invoice/modules/invoices/details.php'); 
- $smarty -> assign("view","details");
- $smarty -> assign("spec","template");
- $smarty -> assign("id",$template);
-}
+if ($_GET['action'] == 'update_template') {	/* update default template for customer */
 
+ $sql = "UPDATE `si_customers` SET `custom_field4` = ".$_GET['id']." WHERE `id` = ".$master_customer_id;
+ $smarty -> assign("view","quick_view");
+ $smarty -> assign("spec","id");
+ $smarty -> assign("id",$_GET['id']);
+# print("debug=$sql");
+} else {
+ 
+ if ($customer['custom_field4'] == null) { 	/* No default template for this customer */
+  #include('./extensions/default_invoice/modules/invoices/itemised.php'); 
+  $smarty -> assign("view","itemised");
+  $smarty -> assign("spec","customer_id");
+  $smarty -> assign("id",$master_customer_id);
+ } else {
+  $template = $customer['custom_field4'];
+  #include('./extensions/default_invoice/modules/invoices/details.php'); 
+  $smarty -> assign("view","details");
+  $smarty -> assign("spec","template");
+  $smarty -> assign("id",$template);
+ }
+}
 ?>
