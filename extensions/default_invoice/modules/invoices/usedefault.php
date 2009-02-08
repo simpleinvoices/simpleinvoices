@@ -41,10 +41,17 @@ if ($_GET['action'] == 'update_template') {	/* update default template for custo
   $smarty -> assign("id",$master_customer_id);
  } else {
   $template = $customer['custom_field4'];
-  #include('./extensions/default_invoice/modules/invoices/details.php'); 
-  $smarty -> assign("view","details");
-  $smarty -> assign("spec","template");
-  $smarty -> assign("id",$template);
+  $invoice = getInvoice($template);
+  if (isSet($invoice['id'])) {
+   #include('./extensions/default_invoice/modules/invoices/details.php'); 
+   $smarty -> assign("view","details");
+   $smarty -> assign("spec","template");
+   $smarty -> assign("id",$template);
+  } else {					/* selected invoice does not exist */
+   $smarty -> assign("view","itemised");
+   $smarty -> assign("spec","customer_id");
+   $smarty -> assign("id",$master_customer_id);
+  }
  }
 }
 ?>
