@@ -5,6 +5,8 @@
 *
 * Authors:
 *	 Justin Kelly, Nicolas Ruflin, Ap.Muthu
+*	 Modified for 'default_invoice by Marcel van Dorp. Version 20090208
+*	 'Customer' section has an extra button to set the default invoice
 *
 * Last edited:
 * 	 2008-01-03

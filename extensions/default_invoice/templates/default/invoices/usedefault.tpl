@@ -1,13 +1,14 @@
 {*
 /*
-* Script: save.tpl
-* 	Biller save template
+* Script: usedefault.tpl
+* 	Template used to redirect to the correct page, 
+*	depending on the existence of a template
 *
 * Authors:
-*	 Justin Kelly, Nicolas Ruflin
+*	 Marcel van Dorp
 *
 * Last edited:
-* 	 2007-07-18
+* 	 2009-02-08
 *
 * License:
 *	 GPL v2 or above

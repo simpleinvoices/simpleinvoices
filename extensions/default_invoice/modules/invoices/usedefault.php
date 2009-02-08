@@ -7,7 +7,7 @@
 *	 Marcel van Dorp, Justin Kelly, Nicolas Ruflin
 *
 * Last edited:
-* 	 2009-02-07
+* 	 2009-02-08
 *
 * License:
 *	 GPL v2 or above

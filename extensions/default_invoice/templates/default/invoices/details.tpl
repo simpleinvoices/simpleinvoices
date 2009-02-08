@@ -2,6 +2,8 @@
 /*
 * Script: details.tpl
 * 	 Invoice details template
+*	 Modified for 'default_invoices' by Marcel van Dorp. Version 20090208
+*	 if no invoice_id set, the date will be today, and the action will be 'insert' instead of 'edit'
 *
 * License:
 *	 GPL v3 or above
