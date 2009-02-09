@@ -2,6 +2,8 @@
 /*
 * Script: details.tpl
 * 	 Invoice details template
+*	 Modified for 'default_invoices' by Marcel van Dorp. Version 20090208
+*	 if no invoice_id set, the date will be today, and the action will be 'insert' instead of 'edit'
 *
 * License:
 *	 GPL v3 or above
@@ -23,11 +25,15 @@
 		<td colspan=6 align=center></td>
 	</tr>
         <tr>
-		<td class='details_screen'>{$preference.pref_inv_wording} {$LANG.number_short}</td><td><input type=hidden name="id" value={$invoice.id}  size=15>{$invoice.id}</td>
+		<td class='details_screen'>{$preference.pref_inv_wording} {$LANG.number_short}</td><td> {$invoice.id} </td>
 	</tr>
 	<tr>
 	        <td class="details_screen">{$LANG.date_formatted}</td>
+	{if $invoice.id == null} 
+        	<td><input type="text" class="date-picker" name="date" id="date1" value='{$smarty.now|date_format:"%Y-%m-%d"}'></input></td>
+	{else}
         	<td><input type="text" class="date-picker" name="date" id="date1" value='{$invoice.calc_date}'></input></td>
+	{/if}
 	</tr>
 	<tr>
 		<td class='details_screen'>{$LANG.biller}</td><td>
@@ -307,10 +313,15 @@
                 {$LANG.save}
             </button>
 
- 			<input type="hidden" name="action" value="edit">
+		{if $invoice.id == null} 
+ 			<input type="hidden" name="action" value="insert" />
+		{else}
+			<input type="hidden" name="id" value="{$invoice.id}" />
+ 			<input type="hidden" name="action" value="edit" />
+		{/if}
 			<input type="hidden" name="type" value="{$invoice.type_id}";
-            <input type="hidden" name="op" value="insert_preference">
-        	<input type="hidden" name="max_items" value="{$lines}">
+            <input type="hidden" name="op" value="insert_preference" />
+        	<input type="hidden" name="max_items" value="{$lines}" />
         	
             <a href="./index.php?module=invoices&view=manage" class="negative">
                 <img src="./images/common/cross.png" alt=""/>
