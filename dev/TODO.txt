@@ -5,7 +5,7 @@ Disclaimer: if its in the list it may get done sometime in the future if and whe
 ##############################
 Next Release :: Beta 4
 ##############################
-	- database backup - export as XML - Hannes
+
 	- change config.ini back to config.php - but keep ini format and add ;<?php on line 1 and ; exit; on line 2 - this is for sercurity reasons
 	-- maybe got to think about this and see if new installer can do it
 	-- using .htaccess to protect against reasding of .ini - done
@@ -13,6 +13,11 @@ Next Release :: Beta 4
 	- mini installer complete
 	-- add checks for php.ini settings, writeable folders etc.. and make pretty
 	- look at redoign the new buttons using: http://stopdesign.com/archive/2009/02/04/recreating-the-button.html
+	
+	- mini installer - someone
+	-- create a mini installer and use Zend_config_writer to write to config.ini
+	-- just ask for db details and if you want demo data installer
+	-- just the basics - do rest later
 
 ##############################
 Next Release :: Beta 3
@@ -24,22 +29,25 @@ Next Release :: Beta 3
 	- UI - update all buttons - Edit links etc.. to be new style 
 	- multiple taxes (% and $ based) per line item - JK
 	- update invoice editing with tax rates and dynamical line items - JK
-	- mini installer - someone
-	-- create a mini installer and use Zend_config_writer to write to config.ini
-	-- just ask for db details and if you want demo data installer
-	-- just the basics - do rest later
-	- add domain_id into system_defaults table - flatten this table - old style - TODO
-	- users table admin
+
 	- consulting - add systep prefer to always show description field for invoice line items
-	- system defaults/preferences - flatten table and add domain_id
+	
 	- Products - allow setting 2 or more default taxes pre product
 	- validation - check/remove the validation on products - has been removed till beta 3 - will add back in and complete
-	- PDF - change system - instead of url - put everthign in a varieble and send to html2pdf 
-		- email invoice - TODO	
+
 	- Reports - localise
 	- Manage pages - adjust xml for all remaining pages (invoice/biller/products/customer/payments done)
 	- merge docs.php into normal index.php
 	- php error reports - make work with E_ALL/E_STRICT
+	
+	
+	- users table admin - JK
+	- PDF - change system - instead of url - put everthign in a varieble and send to html2pdf 
+		- email invoice - TODO	
+	- add domain_id into system_defaults table - flatten this table - old style - TODO - JK
+	- system defaults/preferences - flatten table and add domain_id - JK
+	- custom fields - domain id - stuff - JK
+	- database backup - export as XML - Hannes
 
 ##############################
 Next Release :: Beta 2  - Current work in progress
