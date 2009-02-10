@@ -7,11 +7,13 @@ if(LOGGING) {
 
 $dbh = db_connector();
 
+/*
+ * TODO - remove this code - mysql 5 only 
 if ($db_server == 'mysql') {
 	//SC: May not really be 5...
 	$mysql = 5;
 }
-
+*/
 
 
 function db_connector() {
@@ -2184,13 +2186,8 @@ function getURL()
 		*/
 	}
 
-	//merge it all togehter
-	if (isset($_SERVER['HTTP_HOST'])) {
-		$_SERVER['FULL_URL'] .= $config->authentication->http.$_SERVER['HTTP_HOST'].$dir.$script;
-		} else {
-			$_SERVER['FULL_URL'] .= $config->authentication->http.$_SERVER['HTTP_HOST'].$dir.$script;
-	}
-	
+	$_SERVER['FULL_URL'] .= $config->authentication->http.$_SERVER['HTTP_HOST'].$dir;
+
 	return $_SERVER['FULL_URL'];
 
 }

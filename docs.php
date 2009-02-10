@@ -19,13 +19,15 @@
 $t = isset($_GET['t'])?$_GET['t']:null;
 $p = isset($_GET['p'])?$_GET['p']:null;
 
+include("./include/init.php");
+/*
 require_once("./library/smarty/Smarty.class.php");
 $smarty = new Smarty();
 $smarty -> compile_dir = "./tmp/cache/";
-include("./include/init.php");
+
 
 $smarty -> assign("LANG",$LANG);
-
+*/
 if(isset($_GET['lang'])) {
 	$lang = $_GET['lang'];
 }

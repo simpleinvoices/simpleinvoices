@@ -17,6 +17,9 @@ Next Release :: Beta 4
 ##############################
 Next Release :: Beta 3
 ##############################
+	- Invoice - Edit old itemised/consultign invoice - test the conversion patch 163 again
+    - Invoice - Description issues - JK to investigate
+	- PDF - bottom getting cut off - refer fourm
 	- add system pref for number of taxes per line item - JK
 	- UI - update all buttons - Edit links etc.. to be new style 
 	- multiple taxes (% and $ based) per line item - JK
@@ -35,6 +38,8 @@ Next Release :: Beta 3
 		- email invoice - TODO	
 	- Reports - localise
 	- Manage pages - adjust xml for all remaining pages (invoice/biller/products/customer/payments done)
+	- merge docs.php into normal index.php
+	- php error reports - make work with E_ALL/E_STRICT
 
 ##############################
 Next Release :: Beta 2  - Current work in progress

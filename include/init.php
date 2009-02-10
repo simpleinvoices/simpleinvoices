@@ -115,7 +115,7 @@ $early_exit[] = "export_pdf";
 $early_exit[] = "invoice_template";
 
 
-switch ($module)
+switch ($_GET['module'])
 {
 	case "export" :	
 		$smarty_output = "fetch";

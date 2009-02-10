@@ -173,6 +173,8 @@ $path = "$module/$view";
 * If extension is enabled load its javascript files	- start
 * Note: this system is probably slow - if you got a better method for handling extensions let me know
 */
+	$extension_jquery_files = "";
+	
 	foreach($config->extension as $extension)
 	{
 		/*

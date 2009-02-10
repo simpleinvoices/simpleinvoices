@@ -14,6 +14,8 @@ define("consulting_invoice","3"); // default table prefix - old var $tb_prefix =
 define("LOGGING",false);
 #define("LOGGING",true);
 
+
+
 ####################
 /* Environment*/
 ####################
@@ -30,3 +32,15 @@ if($environment != "production")
 {
     @include("./config/".htmlspecialchars($environment).".define.php");
 }
+
+
+#####################
+/* Error reporting */
+#####################
+#
+#error_reporting(E_STRICT);
+#error_reporting(E_ALL);
+#error_reporting(E_WARNING);
+#error_reporting(E_ERROR);
+#error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
+error_reporting(0);
