@@ -930,40 +930,7 @@ function taxesGroupedForInvoiceItem($invoice_item_id)
 
 }
 
-class invoice {
-	function getInvoiceItems($id) {
-	
-		global $logger;
-		$sql = "SELECT * FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :id";
-		$sth = dbQuery($sql, ':id', $id);
-		
-		$invoiceItems = null;
-		
-		for($i=0;$invoiceItem = $sth->fetch();$i++) {
-		
-			$invoiceItem['quantity'] = $invoiceItem['quantity'];
-			$invoiceItem['unit_price'] = $invoiceItem['unit_price'];
-			$invoiceItem['tax_amount'] = $invoiceItem['tax_amount'];
-			$invoiceItem['gross_total'] = $invoiceItem['gross_total'];
-			$invoiceItem['total'] = $invoiceItem['total'];
-			
-			$sql = "SELECT * FROM ".TB_PREFIX."products WHERE id = :id";
-			$tth = dbQuery($sql, ':id', $invoiceItem['product_id']) or die(htmlspecialchars(end($dbh->errorInfo())));
-			$invoiceItem['product'] = $tth->fetch();	
 
-			$tax = taxesGroupedForInvoiceItem($invoiceItem['id']);
-
-			foreach ($tax as $key => $value)
-			{
-				$invoiceItem['tax'][$key] = $value['tax_id'];
-				$logger->log('Invoice: '.$invoiceItem['invoice_id'].' Item id: '.$invoiceItem['id'].' Tax '.$key.' Tax ID: '.$value['tax_id'], Zend_Log::INFO);
-			}
-			$invoiceItems[$i] = $invoiceItem;
-		}
-		
-		return $invoiceItems;
-	}
-}
 
 function getSystemDefaults() {
 	global $dbh;
@@ -2159,31 +2126,16 @@ function checkFieldExists($table,$field) {
 function getURL()
 {
 	global $config;
-//	html2ps does not like &amp; and htmlcharacters encoding - latter useless since InvoiceID comes from an integer field	
-//	$script = "/index.php?module=invoices&amp;view=templates/template&amp;invoice=".htmlspecialchars($invoiceID)."&amp;action=view&amp;location=pdf";
-//	$script = "/index.php?module=invoices&view=templates/template&invoice=$invoiceID&action=view&location=pdf";
+
 	$port = "";
 	$dir = dirname($_SERVER['PHP_SELF']);
 
 	//set the port of http(s) section
 	if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on') {
 		$_SERVER['FULL_URL'] = "https://";
-		//http://simpleinvoices.org/forum/topic-457.html
-		//below code no longer required - please test if your using a non standard port
-		/*
-		if($_SERVER['SERVER_PORT']!="443") {
-			$port .= "://" . $_SERVER[�SERVER_PORT�];
-		}
-		*/
 	} else {
 		$_SERVER['FULL_URL'] = "http://";
-		//http://simpleinvoices.org/forum/topic-457.html
-		//below code no longer required - please test if your using a non standard port
-		/*
-		if($_SERVER['SERVER_PORT']!="80") {
-			$port = ":" . $_SERVER['SERVER_PORT'];
-		}
-		*/
+
 	}
 
 	$_SERVER['FULL_URL'] .= $config->authentication->http.$_SERVER['HTTP_HOST'].$dir;
@@ -2216,77 +2168,6 @@ function sql2array($strSql) {
     return $sqlInArray; 
 }
 
-/* Class: wrapper class for zend locale*/
-class siLocal 
-{
-	/*Function: wrapper function for zend_locale_format::toNumber*/
-	function number($number,$precision="",$locale="")
-	{
-		global $config;
-		
-		$locale == "" ? $locale = new Zend_Locale($config->local->locale) : $locale = $locale;
-		$load_precision = $config->local->precision; 
-		
-		$precision == "" ? $precision = $load_precision : $precision = $precision;
-		$formatted_number = Zend_Locale_Format::toNumber($number, array('precision' => $precision, 'locale' => $locale));
-		
-		//trim zeros from decimal point if enabled
-		//if ($config->local->trim_zeros == "y") { $formatted_number = rtrim(trim($formatted_number, '0'), '.'); }
-		
-		return $formatted_number;
-	}
-	
-	function number_trim($number)
-	{
-		$formatted_number = siLocal::number($number);
-		$formatted_number = rtrim(trim($formatted_number, '0'), '.');
-		return $formatted_number;
-		
-	}
-	
-	/*Function: wrapper function for zend_date*/
-	function date($date,$length="",$locale="")
-	{
-		global $config;
-		
-		$locale == "" ? $locale = new Zend_Locale($config->local->locale) : $locale = $locale;
-		$length == "" ? $length = "medium" : $lenght = $length;
-		/*
-		 * Length can be any of the Zend_Date lenghts - FULL, LONG, MEDIUM, SHORT
-		 */
-
-		$formatted_date = new Zend_Date($date,'yyyy-MM-dd');
-		
-		switch ($length) {
-			case "full":
-			    return $formatted_date->get(Zend_Date::DATE_FULL,$locale);
-			    break;
-			case "long":
-			    return $formatted_date->get(Zend_Date::DATE_LONG,$locale);
-			    break;
-			case "medium":
-			    return $formatted_date->get(Zend_Date::DATE_MEDIUM,$locale);
-			    break;
-			case "short":
-			    return $formatted_date->get(Zend_Date::DATE_SHORT,$locale);
-			    break;
-			default:
-				return $formatted_date->get(Zend_Date::DATE_SHORT,$locale);
-		}
-		
-	}
-	/*
-	 * Function: number_formatted
-	 * Description: wrapper for php number_format
-	 * Purpose: to format numbers for data entry fields - ie invoice edit/ajax where data is in 6 decimial places but only neex x places in edit view
-	 */
-	function number_formatted($number)
-	{
-		global $config;
-		$number_formatted = number_format($number, $config->local->precision, '.', '');
-		return $number_formatted;
-	}
-}
 
 function getNumberOfDoneSQLPatches() {
 

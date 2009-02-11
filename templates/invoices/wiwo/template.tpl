@@ -6,7 +6,7 @@
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
    <title>{$preference.pref_inv_wording} {$LANG.number_short}: {$invoice.id}</title>
    <link href="{$css}" rel="stylesheet" media="screen" type="text/css" />
-   <link href="./templates/invoices/wiwo/pstyle.css" rel="stylesheet" media="print" type="text/css" />
+   <link href="{$siUrl}/templates/invoices/wiwo/pstyle.css" rel="stylesheet" media="print" type="text/css" />
   </head>
 
  <body>

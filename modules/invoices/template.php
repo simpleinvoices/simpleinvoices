@@ -3,14 +3,8 @@
 * Script: template.php
 * 	invoice template page
 *
-* Authors:
-*	 Justin Kelly, Nicolas Ruflin
-*
-* Last edited:
-* 	 2007-07-19
-*
 * License:
-*	 GPL v2 or above
+*	 GPL v3 or above
 *
 * Website:
 * 	http://www.simpleinvoices.org
@@ -46,12 +40,12 @@ $template = $defaults['template'];
 
 
 
-/* The Export code - supports any file extensions - excel/word/open office - what reads html */
+/* The Export code - supports any file extensions - excel/word/open office - what reads html*/
 if (isset($_GET['export'])) {
 	$template = "export";
 	$file_extension = $_GET['export'];
 	header("Content-type: application/octet-stream");
-	/*header("Content-type: application/x-msdownload");*/
+	//header("Content-type: application/x-msdownload");
 	header("Content-Disposition: attachment; filename=$preference[pref_inv_heading]$invoice[id].$file_extension");
 	header("Pragma: no-cache");
 	header("Expires: 0");

@@ -18,6 +18,8 @@ Next Release :: Beta 4
 	-- create a mini installer and use Zend_config_writer to write to config.ini
 	-- just ask for db details and if you want demo data installer
 	-- just the basics - do rest later
+	
+	-email - uses stella code to allow multlpe people in to and bcc fields in email
 
 ##############################
 Next Release :: Beta 3
@@ -40,10 +42,10 @@ Next Release :: Beta 3
 	- merge docs.php into normal index.php
 	- php error reports - make work with E_ALL/E_STRICT
 	
-	
-	- users table admin - JK
+
 	- PDF - change system - instead of url - put everthign in a varieble and send to html2pdf 
-		- email invoice - TODO	
+		- email invoice - TODO		
+	- users table admin - JK
 	- add domain_id into system_defaults table - flatten this table - old style - TODO - JK
 	- system defaults/preferences - flatten table and add domain_id - JK
 	- custom fields - domain id - stuff - JK

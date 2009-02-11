@@ -187,7 +187,7 @@
 			siLog('debug','export_dialog_show');
 		 $(".export_pdf").attr({ 
 	          //href: "index.php?module=export&view=pdf&id="+row_number
-			  href: "index.php?module=invoices&view=template&id="+row_number+"&action=view&location=pdf"
+			  href: "index.php?module=export&view=invoice&id="+row_number+"&format=pdf"
 	        });
 		 $(".export_doc").attr({ 
 			  href: "index.php?module=invoices&view=template&id="+row_number+"&action=view&location=print&export="+wordprocessor

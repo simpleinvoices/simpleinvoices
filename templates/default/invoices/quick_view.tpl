@@ -24,14 +24,14 @@
 
 	<!--Actions heading - start-->
 	<span class="welcome">
-			<a title="{$LANG.print_preview_tooltip} {$preference.pref_inv_wording} {$invoice.id}" href="index.php?module=invoices&view=template&id={$invoice.id}&action=view"> {$LANG.print_preview}</a>
+			<a title="{$LANG.print_preview_tooltip} {$preference.pref_inv_wording} {$invoice.id}" href="index.php?module=export&view=invoice&id={$invoice.id}&format=print"> {$LANG.print_preview}</a>
 			 :: 
 			<a href="index.php?module=invoices&view=details&id={$invoice.id}&action=view"> {$LANG.edit}</a>
 			 ::
 			 <a href='index.php?module=payments&view=process&id={$invoice.id}&op=pay_selected_invoice'> {$LANG.process_payment} </a>
 			 ::
 			 <!-- EXPORT TO PDF -->
-			<a href='index.php?module=invoices&view=template&id={$invoice.id}&action=view&location=pdf'>{$LANG.export_pdf}</a>
+			<a href='index.php?module=export&view=invoice&id={$invoice.id}&format=pdf'>{$LANG.export_pdf}</a>
 			::
 			<a href="index.php?module=invoices&view=template&id={$invoice.id}&action=view&export={$spreadsheet}">{$LANG.export_as} .{$spreadsheet}</a>
 			::

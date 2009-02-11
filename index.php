@@ -41,6 +41,7 @@ foreach($config->extension as $extension)
 
 $smarty -> assign("config",$config); // to toggle the login / logout button visibility in the menu
 $smarty -> assign("module",$module);
+$smarty -> assign("siUrl",$siUrl);//used for template css
 
 $smarty -> assign("LANG",$LANG);
 //For Making easy enabled pop-menus (see biller)
@@ -85,6 +86,7 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 /*
 * dont include the header if requested file is an invoice template - for print preview etc.. header is not needed 
 */
+
 if (($module == "invoices" ) && (strstr($view,"template"))) {
 
 
