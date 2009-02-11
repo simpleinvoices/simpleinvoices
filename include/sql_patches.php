@@ -949,10 +949,10 @@ PRIMARY KEY  (`user_id`)) ;
     $patch['162']['date'] = "20081212";
 
 	//do conversion
-    $patch['163']['name'] = "Concert tax info in si_invoice_items to si_invoice_item_tax";
-    $patch['163']['patch'] = "insert into `".TB_PREFIX."invoice_item_tax` (invoice_item_id, tax_id, tax_type, tax_rate, tax_amount) select invoice_id, tax_id, '%', tax, tax_amount from `".TB_PREFIX."invoice_items`;";
+    $patch['163']['name'] = "Convert tax info in si_invoice_items to si_invoice_item_tax";
+    $patch['163']['patch'] = "insert into `".TB_PREFIX."invoice_item_tax` (invoice_item_id, tax_id, tax_type, tax_rate, tax_amount) select id, tax_id, '%', tax, tax_amount from `".TB_PREFIX."invoice_items`;";
     if ($config->database->adapter == "pdo_pgsql") {
-    	$patch['163']['patch'] = "insert into `".TB_PREFIX."invoice_item_tax` (invoice_item_id, tax_id, tax_type, tax_rate, tax_amount) select invoice_id, tax_id, '%', tax, tax_amount from `".TB_PREFIX."invoice_items;";
+    	$patch['163']['patch'] = "insert into `".TB_PREFIX."invoice_item_tax` (invoice_item_id, tax_id, tax_type, tax_rate, tax_amount) select id, tax_id, '%', tax, tax_amount from `".TB_PREFIX."invoice_items;";
     }
     $patch['163']['date'] = "20081212";
 
