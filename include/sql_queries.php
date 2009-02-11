@@ -2181,7 +2181,7 @@ function getNumberOfDoneSQLPatches() {
 }
 
 
-function pdfThis($html)
+function pdfThis($html,$file_location="")
 {
 
 	global $config;
@@ -2212,9 +2212,11 @@ function pdfThis($html)
 	 * @param $path_to_html String path to source html file.
 	 * @param $path_to_pdf  String path to file to save generated PDF to.
 	 */
-	function convert_to_pdf($html_to_pdf, $pdfname) {
+	function convert_to_pdf($html_to_pdf, $pdfname, $file_location="") {
 
 		global $config;
+	  
+		$destination = $file_location="download" ? "DestinationDownload" : "DestinationFile";
 	  /**
 	   * Handles the saving generated PDF to user-defined output file on server
 	   */
@@ -2291,7 +2293,7 @@ header("Location: $myloc");
 
   	  $pipeline->configure($g_config);
 	  $pipeline->data_filters[] = new DataFilterUTF8("");
-	  $pipeline->destination = new DestinationDownload($pdfname);
+	  $pipeline->destination = new $destination($pdfname);
 	  $pipeline->process($baseurl, $media);
 	}
 

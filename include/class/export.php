@@ -4,6 +4,7 @@ class export
 {
 	public $format;
 	public $file_type;
+	public $file_location;
 	public $module;
 	public $id;
 
@@ -20,7 +21,7 @@ class export
 			
 			case "pdf":
 			{
-				pdfThis($data);
+				$this->file_location = "download" ? pdfThis($data) : pdfThis($data, 'file');
 				exit();	
 				break;
 			}		
