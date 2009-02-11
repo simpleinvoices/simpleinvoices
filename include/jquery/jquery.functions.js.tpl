@@ -190,10 +190,10 @@
 			  href: "index.php?module=export&view=invoice&id="+row_number+"&format=pdf"
 	        });
 		 $(".export_doc").attr({ 
-			  href: "index.php?module=invoices&view=template&id="+row_number+"&action=view&location=print&export="+wordprocessor
+			  href: "index.php?module=export&view=invoice&id="+row_number+"&format=file&filetype="+wordprocessor
 	        });	 
 	      $(".export_xls").attr({ 
-	          href: "index.php?module=invoices&view=template&id="+row_number+"&action=view&location=print&export="+spreadsheet
+	          href: "index.php?module=export&view=invoice&id="+row_number+"&action=file&filetype="+spreadsheet
 	        });							
 		 $("#export_dialog").dialog({ 
 		   modal: true, 

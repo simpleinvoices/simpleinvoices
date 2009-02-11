@@ -142,7 +142,7 @@ $count = $sth_count_rows->rowCount();
 					<![CDATA[<a class='index_table' title='".$LANG['quick_view_tooltip'].$row['id']."' href='index.php?module=invoices&view=quick_view&id=".$row['id']."'> <img src='images/common/view.png' class='action' /></a>
 		<a class='index_table' title=".$LANG['edit_view_tooltip']." ".$invoices['preference.pref_inv_wording']." ".$row['id']."' href='index.php?module=invoices&view=details&id=".$row['id']."&action=view'><img src='images/common/edit.png' class='action' /></a>
 		<!--2 Print View -->
-			<a class='index_table' title='".$LANG['print_preview_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']."' href='index.php?module=invoices&view=template&id=".$row['id']."&action=view&location=print'>
+			<a class='index_table' title='".$LANG['print_preview_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']."' href='index.php?module=export&view=invoice&id=".$row['id']."&format=print'>
 				<img src='images/common/printer.png' class='action' /><!-- print -->
 			</a>
 		<!--3 EXPORT DIALOG -->

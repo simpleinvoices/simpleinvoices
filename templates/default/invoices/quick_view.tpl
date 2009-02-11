@@ -33,9 +33,9 @@
 			 <!-- EXPORT TO PDF -->
 			<a href='index.php?module=export&view=invoice&id={$invoice.id}&format=pdf'>{$LANG.export_pdf}</a>
 			::
-			<a href="index.php?module=invoices&view=template&id={$invoice.id}&action=view&export={$spreadsheet}">{$LANG.export_as} .{$spreadsheet}</a>
+			<a href="index.php?module=export&view=invoice&id={$invoice.id}&format=file&filetype={$spreadsheet}">{$LANG.export_as} .{$spreadsheet}</a>
 			::
-			<a href="index.php?module=invoices&view=template&id={$invoice.id}&action=view&export={$word_processor}">{$LANG.export_as} .{$wordprocessor} </a>
+			<a href="index.php?module=export&view=invoice&id={$invoice.id}&format=file&filetype={$word_processor}">{$LANG.export_as} .{$wordprocessor} </a>
 			::
 			<a href="index.php?module=invoices&view=email&stage=1&invoice={$invoice.id}">{$LANG.email}</a>
 			{if $defaults.delete == '1'} 

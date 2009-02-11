@@ -3,6 +3,7 @@
 class export
 {
 	public $format;
+	public $file_type;
 	public $module;
 	public $id;
 
@@ -25,16 +26,19 @@ class export
 			}		
 			case "file":
 			{
-				/* The Export code - supports any file extensions - excel/word/open office - what reads html*/
-				if (isset($_GET['export'])) {
-					$template = "export";
-					$file_extension = $_GET['export'];
-					header("Content-type: application/octet-stream");
-					//header("Content-type: application/x-msdownload");
-					header("Content-Disposition: attachment; filename=$preference[pref_inv_heading]$invoice[id].$file_extension");
-					header("Pragma: no-cache");
-					header("Expires: 0");
-				}
+				$invoice = getInvoice($this->id);
+				$preference = getPreference($invoice['preference_id']);
+
+				//xls/doc export no longer uses the export template
+				//$template = "export";
+				
+				header("Content-type: application/octet-stream");
+				//header("Content-type: application/x-msdownload");
+				header("Content-Disposition: attachment; filename=$preference[pref_inv_heading]$this->id.$this->file_type");
+				header("Pragma: no-cache");
+				header("Expires: 0");
+				
+				echo($data);
 				
 				break;
 			}

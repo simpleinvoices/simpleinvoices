@@ -10,7 +10,12 @@
 * 	http://www.simpleinvoices.org
  */
 #define("BROWSE","browse");
-
+/*
+ * 
+ * NOTE: THIS FILE IS NOT USED ANYMORE
+ * 
+ */
+/*
 #get the invoice id
 $invoiceID = $_GET['id'];
 
@@ -27,20 +32,20 @@ $logo = getLogo($biller);
 $logo = str_replace(" ", "%20", $logo);
 $invoiceItems = invoice::getInvoiceItems($invoiceID);
 
-/*for($i=1;$i<=4;$i++) {
-	$show["custom_field$i"] = show_custom_field("invoice_cf$i",$invoice["invoice_custom_field$i"],"read",'','tbl1-left','tbl1-right',3,':');
-}*/
+//for($i=1;$i<=4;$i++) {
+//	$show["custom_field$i"] = show_custom_field("invoice_cf$i",$invoice["invoice_custom_field$i"],"read",'','tbl1-left','tbl1-right',3,':');
+//
 
 $customFieldLabels = getCustomFieldLabels();
 
 
-/*Set the template to the default*/
+// Set the template to the default
 $template = $defaults['template'];
 
 
 
 
-/* The Export code - supports any file extensions - excel/word/open office - what reads html*/
+// The Export code - supports any file extensions - excel/word/open office - what reads html
 if (isset($_GET['export'])) {
 	$template = "export";
 	$file_extension = $_GET['export'];
@@ -50,7 +55,7 @@ if (isset($_GET['export'])) {
 	header("Pragma: no-cache");
 	header("Expires: 0");
 }
-/* End Export code */
+// End Export code 
 
 	
 $templatePath = "./templates/invoices/${template}/template.tpl";
@@ -85,5 +90,4 @@ if(file_exists($templatePath)) {
 	$smarty -> $smarty_output(".".$templatePath);
 
 }
-
-?>
+*/
