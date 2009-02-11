@@ -94,7 +94,7 @@ if ($_GET['stage'] == 2 ) {
 
 	echo $block_stage2;
 
-	require("./include/mail/class.phpmailer.php");
+	require("./library/mail/class.phpmailer.php");
 
 	$mail = new PHPMailer();
 
