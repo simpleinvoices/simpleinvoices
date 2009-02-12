@@ -76,6 +76,7 @@ Next Release :: Beta 2  - Current work in progress
 Sometime soon
 ##############################
 ### maybe some work(or thoughts/planning) has been done but needs to be complete ###
+ - Email - if fail to send add error messages etc..
  - Customer Login
  - User admin 
  - Biller login

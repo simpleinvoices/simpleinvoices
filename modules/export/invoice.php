@@ -19,6 +19,7 @@ $get_file_type = $_GET['filetype'];
 $export = new export();
 $export -> format = $get_format;
 $export -> file_type = $get_file_type;
+$export -> file_location = 'download';
 $export -> module = 'invoice';
 $export -> id = $invoiceID;
 $export -> execute();

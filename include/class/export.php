@@ -21,8 +21,8 @@ class export
 			
 			case "pdf":
 			{
-				$this->file_location = "download" ? pdfThis($data) : pdfThis($data, 'file');
-				exit();	
+				pdfThis($data, $this->file_location);
+				$this->file_location == "download" ? exit():"" ;	
 				break;
 			}		
 			case "file":

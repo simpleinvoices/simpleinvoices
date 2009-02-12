@@ -2216,7 +2216,7 @@ function pdfThis($html,$file_location="")
 
 		global $config;
 	  
-		$destination = $file_location="download" ? "DestinationDownload" : "DestinationFile";
+		$destination = $file_location=="download" ? "DestinationDownload" : "DestinationFile";
 	  /**
 	   * Handles the saving generated PDF to user-defined output file on server
 	   */
@@ -2297,6 +2297,7 @@ header("Location: $myloc");
 	  $pipeline->process($baseurl, $media);
 	}
 
-	convert_to_pdf($html, $pdfname);
+	//echo "location: ".$file_location;
+	convert_to_pdf($html, $pdfname, $file_location);
 
 }
