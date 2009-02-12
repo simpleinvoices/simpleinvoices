@@ -2261,8 +2261,8 @@ function pdfThis($html,$file_location="")
 						'pdfversion'    => '1.4',
 
 						'process_mode'     => 'single',
-						'output'     => 1,
-						'location'     => 'pdf',
+						//'output'     => 1,
+						//'location'     => 'pdf',
 						'pixels'     => $config->export->pdf->screensize,
 						'media'     => $config->export->pdf->papersize,
                         'margins'       => array(
