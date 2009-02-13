@@ -16,21 +16,19 @@
 			$('#manageGrid').flexigrid
 			(
 			{
-			url: 'index.php?module=billers&view=xml',
+			url: 'index.php?module=user&view=xml',
 			dataType: 'xml',
 			colModel : [
 				{display: 'Actions', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
-				{display: 'ID', name : 'id', width : 10 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Name', name : 'name', width : 40 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Email', name : 'email', width : 20 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Enabled', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'}
+				{display: 'Email', name : 'email', width : 50 * percentage_width, sortable : true, align: 'left'},
+				{display: 'Role', name : 'role', width : 40 * percentage_width, sortable : true, align: 'left'}
 				
 				],
 				
 
 			searchitems : [
-				{display: 'Name', name : 'name', isdefault: true},
-				{display: 'Email', name : 'email'}
+				{display: 'Email', name : 'email', isdefault: true},
+				{display: 'Role', name : 'role'}
 			],
 			sortname: 'name',
 			sortorder: 'asc',
