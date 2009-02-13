@@ -1,14 +1,19 @@
 {*
 /*
 * Script: manage.tpl
-* 	 Manage invoices template
+* 	Biller manage template
+*
 *
 * License:
-*	 GPL v2 or above
-*
-* Website:
-*	http://www.simpleinvoices.org
+*	 GPL v3 or above
 */
 *}
+{if $number_of_rows.count == 0}
+	<p><em>{$LANG.no_billers}</em></p>
+{else}
 
-User management is still a work in progress - should be ready for beta 3 release - March 09
+<hr />
+<table id="manageGrid" style="display:none"></table>
+ {include file='../modules/user/manage.js.php' LANG=$LANG}
+
+{/if}
