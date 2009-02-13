@@ -234,6 +234,8 @@
 	                {$LANG.save}
 	            </button>
 	            
+			</td>
+			<td>
 				<input type=hidden id="max_items" name="max_items" value="{$smarty.section.line.index}">
 	        	<input type=hidden name="type" value="2">
 	        	

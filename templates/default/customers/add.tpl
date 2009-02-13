@@ -177,7 +177,8 @@
                 <img class="button_img" src="./images/common/tick.png" alt=""/> 
                 {$LANG.save}
             </button>
-
+		</td>
+		<td>
             <input type="hidden" name="op" value="insert_customer">
         
             <a href="./index.php?module=customers&view=manage" class="negative">

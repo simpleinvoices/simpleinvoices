@@ -35,12 +35,17 @@
                 <img src="./images/common/add.png" alt=""/>
                 Add a new Invoice {* LANG TODO*}
             </a>
+
+		</td>
+		<td>
             
              <a href="index.php?module=customers&view=add" class="">
                 <img src="./images/common/vcard_add.png" alt=""/>
                  Add a new Client {* LANG TODO*}
             </a>
     
+		</td>
+		<td>
     
            <a href="index.php?module=products&view=add" class="">
                 <img src="./images/common/cart_add.png" alt=""/>
@@ -65,7 +70,8 @@
                 <img src="./images/common/cog_edit.png" alt=""/>
                  Customise the settings {* LANG TODO*}
             </a>
-    
+    	</td>
+		<td>
     
            <a href="./index.php?module=customers&view=manage" class="">
                 <img src="./images/common/database_save.png" alt=""/>

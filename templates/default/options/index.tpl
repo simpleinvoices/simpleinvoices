@@ -34,6 +34,9 @@
                 <img src="./images/common/cog_edit.png" alt=""/>
                 {$LANG.system_preferences}
             </a>
+	
+		</td>
+		<td>
             
             <a href="index.php?module=custom_fields&view=manage" class="">
                 <img src="./images/common/brick_edit.png" alt=""/>
@@ -59,12 +62,16 @@
                 <img src="./images/common/money_delete.png" alt=""/>
                  {$LANG.tax_rates}
             </a>
+
+		</td>
+		<td>
             
              <a href="index.php?module=preferences&view=manage" class="">
                 <img src="./images/common/page_white_edit.png" alt=""/>
                  {$LANG.invoice_preferences}
             </a>
-    
+    	</td>
+		<td>
     
            <a href="index.php?module=payment_types&view=manage" class="">
                 <img src="./images/common/creditcards.png" alt=""/>
@@ -90,7 +97,8 @@
                 <img src="./images/common/database_save.png" alt=""/>
                 {$LANG.backup_database}
             </a>
-    
+    	</td>
+		<td>
     
            <a href="index.php?module=options&view=manage_sqlpatches" class="">
                 <img src="./images/common/database.png" alt=""/>
