@@ -1,4 +1,10 @@
 --------
+BETA 3
+--------
+	- sql patch 163 - tax conversion patch updated
+	- email as pdf working now
+	
+--------
 BETA 2
 --------
 	- Zend Framework upgraded to version 1.7.2

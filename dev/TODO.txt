@@ -43,8 +43,6 @@ Next Release :: Beta 3
 	- php error reports - make work with E_ALL/E_STRICT
 	
 
-	- PDF - change system - instead of url - put everthign in a varieble and send to html2pdf 
-		- email invoice - TODO		
 	- users table admin - JK
 	- add domain_id into system_defaults table - flatten this table - old style - TODO - JK
 	- system defaults/preferences - flatten table and add domain_id - JK

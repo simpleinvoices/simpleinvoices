@@ -193,7 +193,7 @@
 			  href: "index.php?module=export&view=invoice&id="+row_number+"&format=file&filetype="+wordprocessor
 	        });	 
 	      $(".export_xls").attr({ 
-	          href: "index.php?module=export&view=invoice&id="+row_number+"&action=file&filetype="+spreadsheet
+	          href: "index.php?module=export&view=invoice&id="+row_number+"&format=file&filetype="+spreadsheet
 	        });							
 		 $("#export_dialog").dialog({ 
 		   modal: true, 
