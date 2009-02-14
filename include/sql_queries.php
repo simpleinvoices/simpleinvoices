@@ -1627,6 +1627,8 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 	
 	$tax_total = getTaxesPerLineItem($line_item_tax_id,$quantity, $unit_price);
 
+	$logger->log(' ', Zend_Log::INFO);
+	$logger->log(' ', Zend_Log::INFO);
 	$logger->log('Invoice: '.$invoice_id.' Tax '.$line_item_tax_id.' for line item '.$line_number.': '.$tax_total, Zend_Log::INFO);
 	$logger->log('Description: '.$description, Zend_Log::INFO);
 	$logger->log(' ', Zend_Log::INFO);
@@ -1638,7 +1640,7 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 	$total = $gross_total + $tax_total;	
 
 	//Remove jquery auto-fill description - refer jquery.conf.js.tpl autofill section
-	if ($description == $LANG['Description'])
+	if ($description == $LANG['description'])
 	{	
 		$description ="";
 	}
@@ -1806,6 +1808,7 @@ function invoice_item_tax($invoice_item_id,$line_item_tax_id,$unit_price,$quanti
 function updateInvoiceItem($id,$quantity,$product_id,$line_number,$line_item_tax_id,$description,$unit_price) {
 
 	global $logger;
+	global $LANG;
 	//$product = getProduct($product_id);
 	//$tax = getTaxRate($tax_id);
 	
@@ -1820,6 +1823,12 @@ function updateInvoiceItem($id,$quantity,$product_id,$line_number,$line_item_tax
 
 	//line item total
 	$total = $gross_total + $tax_total;	
+
+	//Remove jquery auto-fill description - refer jquery.conf.js.tpl autofill section
+	if ($description == $LANG['description'])
+	{	
+		$description ="";
+	}
 
 
 	if ($db_server == 'mysql' && !_invoice_items_check_fk(

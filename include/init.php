@@ -39,9 +39,6 @@ $auth_session = new Zend_Session_Namespace('Zend_Auth');
  * Zend framework init - end
  */
 
-$writer = new Zend_Log_Writer_Stream('./tmp/log/si.log');
-$logger = new Zend_Log($writer);
-
 
 
 /* 
@@ -50,6 +47,13 @@ $logger = new Zend_Log($writer);
 require_once("smarty/Smarty.class.php");
 
 include_once('./include/functions.php');
+
+$logFile = "./tmp/log/si.log";
+if (!is_writable($logFile)) {
+   simpleInvoicesError('notWriteable',$logFile);
+}
+$writer = new Zend_Log_Writer_Stream($logFile);
+$logger = new Zend_Log($writer);
 
 $smarty = new Smarty();
 

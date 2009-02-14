@@ -132,7 +132,7 @@ $(document).ready(function(){
 		siLog('debug','invoice save');
 		count_invoice_line_items();
 		siLog('debug','invoice save- post count');
-		invoice_save_remove_autofill();
+		//invoice_save_remove_autofill();
 		$('#gmail_loading').hide();
 	});
 

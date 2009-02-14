@@ -331,6 +331,16 @@ switch ($type)
 		===========================================<br>
 		The folder <b>./".$info1."</b> has to be writeable");
 	break;
+
+	case "notWriteable":
+
+		$error = exit("
+		<br>
+		===========================================<br>
+		Simple Invoices error<br>
+		===========================================<br>
+		The file <b>".$info1."</b> has to be writeable");
+	break;
 	
 	case "dbConnection":
 	

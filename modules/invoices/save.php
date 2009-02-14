@@ -11,7 +11,6 @@
 * 	http://www.simpleinvoices.or
 */
 
-
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
@@ -102,12 +101,13 @@ if ($_POST['action'] == "insert" ) {
 //	for($i=0;(!empty($_POST["quantity$i"]) && $i < $_POST['max_items']);$i++) {
 		$logger->log('i='.$i, Zend_Log::INFO);
 		$logger->log('qty='.$_POST["quantity$i"], Zend_Log::INFO);
+		$logger->log('product='.$_POST["products$i"], Zend_Log::INFO);
 
 		if($_POST["delete$i"] == "yes")
 		{
 			delete('invoice_items','id',$_POST["id$i"]);
 		}
-		if($_POST["delete$i"] != "yes")
+		if($_POST["delete$i"] !== "yes")
 		{
 		
 		
@@ -115,17 +115,15 @@ if ($_POST['action'] == "insert" ) {
             {
 	
 				//new line item added in edit page
-				if($_POST["id$i"] == null)
+				if($_POST["line_item$i"] == "")
 				{
-					insertInvoiceItem($id,$_POST["quantity$i"],$product,$i,$_POST["tax_id"][$i],$_POST["description$i"], $_POST["unit_price$i"]);
+					insertInvoiceItem($id,$_POST["quantity$i"],$_POST["products$i"],$i,$_POST["tax_id"][$i],$_POST["description$i"], $_POST["unit_price$i"]);
 				}
 				
-				if ( 
-					$_POST["id$i"] != null
-					AND
-					updateInvoiceItem($_POST["id$i"],$_POST["quantity$i"],$_POST["products$i"],$i,$_POST['tax_id'][$i],$_POST["description$i"],$_POST["unit_price$i"]) && $saved
-					)
+				if($_POST["line_item$i"] != "")
 				{
+					updateInvoiceItem($_POST["line_item$i"],$_POST["quantity$i"],$_POST["products$i"],$i,$_POST['tax_id'][$i],$_POST["description$i"],$_POST["unit_price$i"]);
+					$saved;
 					//$saved =  true;
 /*
 				}	

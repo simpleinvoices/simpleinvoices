@@ -178,7 +178,7 @@
 								value='{$invoiceItem.quantity|number_format:2}' 
 								size="10"
 							>
-							<input type="hidden" name='id{$line}' id='id{$line}' value='{$invoiceItem.id}' size="10"> 
+							<input type="hidden" name='line_item{$line}' id='line_item{$line}' value='{$invoiceItem.id}'> 
 						</td>
 						<td>
 					                
@@ -220,7 +220,7 @@
 								<td>
 								</td>
 								<td colspan=4>
-									<textarea input type=text class="note" name="description{$smarty.section.line.index}" id="description{$smarty.section.line.index}" rows=3 cols=3 WRAP=nowrap>{$invoiceItem.description|unescape}</textarea>
+									<textarea input type=text class="note" name="description{$line}" id="description{$line}" rows=3 cols=3 WRAP=nowrap>{$invoiceItem.description|unescape}</textarea>
 									
 									</td>
 						</tr>

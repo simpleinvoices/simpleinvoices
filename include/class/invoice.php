@@ -4,7 +4,7 @@ class invoice {
 	function getInvoiceItems($id) {
 	
 		global $logger;
-		$sql = "SELECT * FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :id";
+		$sql = "SELECT * FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :id order by id";
 		$sth = dbQuery($sql, ':id', $id);
 		
 		$invoiceItems = null;

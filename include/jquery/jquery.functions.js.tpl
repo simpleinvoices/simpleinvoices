@@ -27,7 +27,7 @@
 	function delete_line_item(row_number)
 	{
 		$('#row'+row_number).hide(); 
-		$('#quantity'+row_number).attr('value','0');
+		$('#quantity'+row_number).removeAttr('value');
 		$('#delete'+row_number).attr('value','yes');
 	}
 	
@@ -144,13 +144,14 @@
 		clonedRow.find("#trash_image"+rowID_old).attr("title", "Delete this row");
 	
 		//edit invoice - newly added line item
-		clonedRow.find("#id"+rowID_old).attr("id", "id"+rowID_new);
-		clonedRow.find("#id"+rowID_new).val('');
+		clonedRow.find("#line_item"+rowID_old).attr("id", "line_item"+rowID_new);
+		clonedRow.find("#line_item"+rowID_new).attr("name", "line_item"+rowID_new);
+		clonedRow.find("#line_item"+rowID_new).val('');
 
 
 		$("#quantity"+rowID_old, clonedRow).attr("id", "quantity"+rowID_new);
 		$("#quantity"+rowID_new, clonedRow).attr("name", "quantity"+rowID_new);
-		$("#quantity"+rowID_new, clonedRow).val('');
+		clonedRow.find("#quantity"+rowID_new).removeAttr("value");
 	
 		//clonedRow.find("#products"+rowID_old).removeAttr("onchange");
 		clonedRow.find("#products"+rowID_old).attr("rel", rowID_new);
@@ -216,6 +217,7 @@
 	 * Function: invoice_save_remove_autofill
 	 * Purpose: remove the autofilled text in the line items ntoes box
 	 */
+	//delete - not used anymore
 	function invoice_save_remove_autofill()
 	{
 		siLog('debug','exectued invoice save remove');
