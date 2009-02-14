@@ -27,7 +27,7 @@ Next Release :: Beta 3
 	- Invoice - Edit old itemised/consultign invoice - test the conversion patch 163 again
     - Invoice - Description issues - JK to investigate
 	- PDF - bottom getting cut off - refer fourm
-	- add system pref for number of taxes per line item - JK
+	- add system pref for number of taxes per line item - done
 	- UI - update all buttons - Edit links etc.. to be new style 
 	- multiple taxes (% and $ based) per line item - JK
 	- update invoice editing with tax rates and dynamical line items - JK
