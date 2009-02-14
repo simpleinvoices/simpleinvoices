@@ -38,5 +38,8 @@
 	<tr>
 		<td class='details_screen'><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=language'>{$LANG.edit}</a></td><td class='details_screen'>{$LANG.language}</td><td>{$defaultLanguage|escape:html}</td>
 	</tr>
+	<tr>
+		<td class='details_screen'><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=tax_per_line_item'>{$LANG.edit}</a></td><td class='details_screen'>{$LANG.number_of_taxes_per_line_item}</td><td>{$defaults.tax_per_line_item|escape:html}</td>
+	</tr>
         </table>
         

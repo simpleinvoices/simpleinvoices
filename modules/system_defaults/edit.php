@@ -278,6 +278,17 @@ else if($_GET['submit'] == "language") {
 	$value .= "</select>";
 	
 }
+elseif ($_GET["submit"] == "tax_per_line_item") {
+
+	$default = "tax_per_line_item";
+
+	$escaped = htmlspecialchars($defaults[tax_per_line_item]);
+	$value = <<<EOD
+<input type="text" size="25" name="value" value="$escaped">
+EOD;
+	$description = "{$LANG['number_of_taxes_per_line_item']}";
+
+}
 else {
 	$description = "{$LANG['no_defaults']}";
 }

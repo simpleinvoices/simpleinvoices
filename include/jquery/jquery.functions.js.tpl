@@ -53,7 +53,14 @@
 				}
 				$("#unit_price"+row_number).attr("value",data['unit_price']);
 				$("#tax_id\\["+row_number+"\\]\\[0\\]").val(data['default_tax_id']);
-				$("#tax_id\\["+row_number+"\\]\\[1\\]").val(data['default_tax_id_2']);
+				if (data['default_tax_id_2']== null)
+				{
+					$("#tax_id\\["+row_number+"\\]\\[1\\]").val('');
+				}
+				if (data['default_tax_id_2'] !== null)
+				{
+					$("#tax_id\\["+row_number+"\\]\\[1\\]").val(data['default_tax_id_2']);
+				}
 			}
 	
    		 });

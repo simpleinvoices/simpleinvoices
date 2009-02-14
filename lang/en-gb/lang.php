@@ -217,6 +217,7 @@ $LANG['no_tax_rates'] = "There are no tax rates in the database, please add one"
 $LANG['note'] = "Note";//1
 $LANG['notes'] = "Notes";//1
 $LANG['notes_opt'] = "Notes (optional)";//1
+$LANG['number_of_taxes_per_line_item'] = "Number of taxes per line item";//1
 $LANG['number_short'] = "No.";//1
 $LANG['optional'] = "optional";//1
 $LANG['options'] = "Options";//1
