@@ -27,23 +27,71 @@ $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
 
 $saved = false;
 
-if ( $op === 'insert_biller') {
-	
-	if($id = insertBiller()) {
- 		$saved = true;
- 		//saveCustomFieldValues($_POST['categorie'],lastInsertId());
- 	}
+if ( $op === 'insert_user') {
+
+    function insertUser() {
+		global $auth_session;
+
+        $sql = "INSERT INTO ".TB_PREFIX."user
+                    (
+                        id,
+                        email,
+                        password,
+                        role,
+                        domain_id
+                    )
+                    VALUES 
+                    (
+                        null,
+                        :email,
+                        MD5(:password),
+                        :role,
+						:domain_id
+                    )
+                ";
+
+        return dbQuery($sql, ':email',$_POST[email],':password',$_POST[password_field],':role',$_POST[role],':domain_id',$auth_session->domain_id);
+
+    }
+    if( insertUser() ) {
+        $saved = true;
+    }
+
 }
 
-if ($op === 'edit_biller' ) {
-	if (isset($_POST['save_biller']) && updateBiller()) {
-		$saved = true;
-		//updateCustomFieldValues($_POST['categorie'],$_GET['id']);
-	}
+if ($op === 'edit_user' ) {
+
+    function editUser() {
+
+	    empty($_POST[password_field]) ? $password = "" : $password = "password = MD5('".$_POST[password_field]."'),"  ;
+
+        $sql = "UPDATE ".TB_PREFIX."user
+                    SET
+                        email
+                        =
+                        :email,
+                        $password
+                        role
+                        =
+                        '$_POST[role]'
+                    WHERE
+                        id
+                        =
+                        '$_GET[id]'
+                        
+                ";
+
+        return dbQuery($sql, ':email',$_POST[email], ':password',$_POST[password_field], ':role',$_POST[role], ':role',$_POST[idrole]);
+
+    }
+    if( editUser() ) {
+        $saved = true;
+    }
+
 }
 
 
 $smarty -> assign('saved',$saved);
 
-$smarty -> assign('pageActive', 'biller');
+$smarty -> assign('pageActive', 'user');
 $smarty -> assign('active_tab', '#people');

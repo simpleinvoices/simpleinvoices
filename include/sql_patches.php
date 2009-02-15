@@ -1153,6 +1153,37 @@ PRIMARY KEY  (`user_id`)) ;
 	    $patch['189']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` DROP `tax`  ;"; 
     }
     $patch['189']['date'] = "20090118";        
+
+    $patch['190']['name'] = "Insert user role - user";
+    $patch['190']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('user');";
+    if ($config->database->adapter == "pdo_pgsql") {
+        $patch['190']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('user');";
+    }
+    $patch['190']['date'] = "20090215";
+
+    $patch['191']['name'] = "Insert user role - viewer";
+	$patch['191']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('viewer');";
+	if ($config->database->adapter == "pdo_pgsql") {
+		$patch['191']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('viewer');";
+	}
+	$patch['191']['date'] = "20090215";
+
+    $patch['192']['name'] = "Insert user role - customer";
+    $patch['192']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('customer');";
+    if ($config->database->adapter == "pdo_pgsql") {
+        $patch['192']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('customer');";
+    }
+    $patch['192']['date'] = "20090215";
+
+    $patch['193']['name'] = "Insert user role - biller";
+    $patch['193']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('biller');";
+    if ($config->database->adapter == "pdo_pgsql") {
+        $patch['193']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('biller');";
+    }
+    $patch['193']['date'] = "20090215";
+
+
+
     //TODO: postgres and sqlite patch        
 
 /*

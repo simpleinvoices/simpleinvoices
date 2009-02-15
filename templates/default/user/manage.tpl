@@ -14,7 +14,7 @@
 
             <a href="index.php?module=user&view=add" class="positive">
                 <img src="./images/common/add.png" alt=""/>
-                Add new User {* TODO $LANG  *}
+                {$LANG.user_add}
             </a>
 
         </td>

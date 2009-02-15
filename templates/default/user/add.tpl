@@ -15,7 +15,7 @@
 	{include file="../templates/default/billers/save.tpl"}
 {else}
 {* if no biller name was inserted *}
-<form name="frmpost" action="index.php?module=user&view=add"	method="post" id="frmpost"><h3>{$LANG.biller_to_add}</h3>
+<form name="frmpost" action="index.php?module=user&view=add"	method="post" id="frmpost"><h3>{$LANG.user_add}</h3>
 
 <table align="center">
 	<tr>
@@ -49,7 +49,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.password}</td>
-		<td><input type=password name="password" value="{$smarty.post.password}"
+		<td><input type=password name="password_field" value="{$smarty.post.password_field}"
 			size=25></td>
 	</tr>
 	<tr>

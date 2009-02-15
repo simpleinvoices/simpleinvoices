@@ -34,7 +34,7 @@ $smarty->assign('files', $files);
 $smarty->assign('customFieldLabel', $customFieldLabel);
 $smarty->assign('save', $save);
 
-$smarty -> assign('pageActive', 'biller');
+$smarty -> assign('pageActive', 'user');
 $smarty -> assign('active_tab', '#people');
 
 ?>

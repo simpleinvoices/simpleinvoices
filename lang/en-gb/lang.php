@@ -364,6 +364,7 @@ $LANG['people'] = "People";//1
 $LANG['money'] = "Money";//1
 $LANG['settings'] = "Settings";//1
 $LANG['users'] = "Users";//1
+$LANG['user_add'] = "Add User";//1
 $LANG['dashboard'] = "Dashboard";//1
 $LANG['all_reports'] = "All reports";//1
 $LANG['new_invoice'] = "New invoice";//1
