@@ -1182,7 +1182,19 @@ PRIMARY KEY  (`user_id`)) ;
     }
     $patch['193']['date'] = "20090215";
 
+    $patch['194']['name'] = "User table - auto increment";
+    $patch['194']['patch'] = "ALTER TABLE ".TB_PREFIX."user CHANGE id id INT( 11 ) NOT NULL AUTO_INCREMENT;";
+    if ($config->database->adapter == "pdo_pgsql") {
+        $patch['194']['patch'] = "ALTER TABLE ".TB_PREFIX."user CHANGE id id INT( 11 ) NOT NULL AUTO_INCREMENT";
+    }
+    $patch['194']['date'] = "20090215";
 
+    $patch['195']['name'] = "User table - add enabled field";
+    $patch['195']['patch'] = "ALTER TABLE ".TB_PREFIX."user ADD enabled INT( 1 ) NOT NULL ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+        $patch['195']['patch'] = "ALTER TABLE ".TB_PREFIX."user ADD enabled INT( 1 ) NOT NULL ;";
+    }
+    $patch['195']['date'] = "20090215";
 
     //TODO: postgres and sqlite patch        
 

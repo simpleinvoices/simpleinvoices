@@ -214,6 +214,7 @@ $LANG['no_payments'] = "There are no payments in the database";//1
 $LANG['no_preferences'] = "There are no invoice preferences in the database, please add one";//1
 $LANG['no_products'] = "There are no products in the database, please add one";//1
 $LANG['no_tax_rates'] = "There are no tax rates in the database, please add one";//1
+$LANG['none'] = "none";//1
 $LANG['note'] = "Note";//1
 $LANG['notes'] = "Notes";//1
 $LANG['notes_opt'] = "Notes (optional)";//1

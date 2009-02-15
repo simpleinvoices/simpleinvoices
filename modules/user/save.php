@@ -34,15 +34,13 @@ if ( $op === 'insert_user') {
 
         $sql = "INSERT INTO ".TB_PREFIX."user
                     (
-                        id,
                         email,
                         password,
-                        role,
+                        role_id,
                         domain_id
                     )
                     VALUES 
                     (
-                        null,
                         :email,
                         MD5(:password),
                         :role,

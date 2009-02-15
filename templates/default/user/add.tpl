@@ -9,13 +9,11 @@
 *	 GPL v3 or above
 *}
 
-{* if bill is updated or saved.*}
 
-{if $smarty.post.name != "" && $smarty.post.submit != null } 
-	{include file="../templates/default/billers/save.tpl"}
+{if $smarty.post.email != null && $smarty.post.submit != null } 
+	{include file="../templates/default/user/save.tpl"}
 {else}
-{* if no biller name was inserted *}
-<form name="frmpost" action="index.php?module=user&view=add"	method="post" id="frmpost"><h3>{$LANG.user_add}</h3>
+<form name="frmpost" action="index.php?module=user&view=add" method="post" id="frmpost"><h3>{$LANG.user_add}</h3>
 
 <table align="center">
 	<tr>
@@ -44,8 +42,14 @@
 			</img> 
 			</a>
 		</td>
-		<td><input type=text name="role"
-			value="{$smarty.post.role}" size=25></td>
+		<td>
+				<select name="role">
+				    <option value='null'>-- {$LANG.none} --</option>
+					{foreach from=$roles item=role}
+						<option  value="{$role.id}">{$role.name}</option>
+					{/foreach}
+				</select>
+		</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.password}</td>
@@ -67,14 +71,14 @@
 <table class="buttons" align="center">
     <tr>
         <td>
-            <button type="submit" class="positive" name="submit" value="{$LANG.insert_biller}">
+            <button type="submit" class="positive" name="submit" value="Insert User">
                 <img class="button_img" src="./images/common/tick.png" alt=""/> 
                 {$LANG.save}
             </button>
 
-            <input type="hidden" name="op" value="insert_biller">
+            <input type="hidden" name="op" value="insert_user">
         
-            <a href="./index.php?module=billers&view=manage" class="negative">
+            <a href="./index.php?module=user&view=manage" class="negative">
                 <img src="./images/common/cross.png" alt=""/>
                 {$LANG.cancel}
             </a>

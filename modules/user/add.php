@@ -19,20 +19,15 @@
 
 checkLogin();
 
-$files = getLogoList();
+//get user roles
+$roles = user::getUserRoles();
 
-$smarty->assign("files", $files);
-
-#get custom field labels
-$customFieldLabel = getCustomFieldLabels();
-
-if ($_POST['name'] != "") {
-	include ("./modules/billers/save.php");
+if ($_POST['email'] != "") {
+	include ("./modules/user/save.php");
 }
 
-$smarty->assign('files', $files);
-$smarty->assign('customFieldLabel', $customFieldLabel);
 $smarty->assign('save', $save);
+$smarty->assign('roles', $roles);
 
 $smarty -> assign('pageActive', 'user');
 $smarty -> assign('active_tab', '#people');
