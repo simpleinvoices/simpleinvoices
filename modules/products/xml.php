@@ -11,6 +11,7 @@ $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 function sql($type='', $dir, $sort, $rp, $page )
 {
 	global $config;
+	global $LANG;
 	global $auth_session;
 	
 	//SC: Safety checking values that will be directly subbed in
