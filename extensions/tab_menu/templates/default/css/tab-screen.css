@@ -622,7 +622,7 @@ button.positive, .buttons a.positive{
 	float:right;
 }
 
-.note
+.note, .note-edit
 {
 width:100%
 }

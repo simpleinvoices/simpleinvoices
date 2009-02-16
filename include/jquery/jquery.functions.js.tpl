@@ -222,7 +222,8 @@
 	
 	/*
 	 * Function: invoice_save_remove_autofill
-	 * Purpose: remove the autofilled text in the line items ntoes box
+	 * Purpose: remove the autofilled text in the line items notes box
+	 * NOTE - might remove this as php can handle this
 	 */
 	//delete - not used anymore
 	function invoice_save_remove_autofill()
