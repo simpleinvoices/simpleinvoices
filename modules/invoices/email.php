@@ -56,10 +56,27 @@ if ($_GET['stage'] == 2 ) {
 	
 	$mail->From = "$_POST[email_from]";
 	$mail->FromName = "$biller[name]";
-	$mail->AddAddress("$_POST[email_to]");
-	if ($_POST[email_bcc]) {
-	$mail->AddBCC("$_POST[email_bcc]");
-	}
+	
+	//allow split of email address via , or ;
+ 	$to_addresses = preg_split('/\s*[,;]\s*/', $_POST['email_to']);
+	if (!empty($to_addresses)) 
+	{
+	   	foreach ($to_addresses as $to) {
+		    $mail->AddAddress($to);
+	   }
+  	}
+  	
+	//allow split of email address via , or ;  	
+	$bccs = preg_split('/\s*[,;]\s*/', $_POST['email_bcc']);
+	if (!empty($bccs)) 
+	{
+		foreach ($bccs as $bcc) 
+		{
+		    $mail->AddBCC($bcc);
+		}
+	}	
+		
+	
 	$mail->WordWrap = 50;                                 // set word wrap to 50 characters
 	$spc2us_pref = str_replace(" ", "_", $preference[pref_inv_wording]); // Ap.Muthu added to accomodate spaces in inv pref name
 	$mail->AddAttachment("./tmp/cache/$spc2us_pref$invoice[id].pdf");  // all tmp in ./cache       // add attachments

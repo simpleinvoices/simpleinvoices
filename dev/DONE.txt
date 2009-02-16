@@ -3,6 +3,7 @@ BETA 3
 --------
 	- sql patch 163 - tax conversion patch updated
 	- email as pdf working now
+	- email - now allow multiple email addresses in to or bcc and can be delimited via , or ; - thanks stella
 	
 --------
 BETA 2

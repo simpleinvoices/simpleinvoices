@@ -42,7 +42,7 @@ Next Release :: Beta 3
 	- merge docs.php into normal index.php
 	- php error reports - make work with E_ALL/E_STRICT
 	
-
+ 	- invoice edit - notes defaqult to closed
 	- users table admin - JK
 	- add domain_id into system_defaults table - flatten this table - old style - TODO - JK
 	- system defaults/preferences - flatten table and add domain_id - JK
