@@ -36,5 +36,3 @@ if ($config->authentication->enabled != 1 )
 		$auth_session->fake_auth = "1";
 
 }
-
-?>

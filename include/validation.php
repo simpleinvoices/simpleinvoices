@@ -180,5 +180,3 @@ function jsValidateRegEx($sName,$regex){
     echo "    return (false);\n";
 	echo "}\n";
 }
-
-?>

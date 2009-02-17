@@ -51,5 +51,3 @@ $acl->allow('domain_administrator');
 
 // Administrator inherits nothing, but is allowed all privileges
 $acl->allow('administrator');
-
-?>

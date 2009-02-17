@@ -12,5 +12,3 @@
 
 	$smarty->assign('pageActive', $pageActive);
 	$smarty->assign('showReport', $showReport);
-
-?>

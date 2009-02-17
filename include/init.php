@@ -2,31 +2,13 @@
 
 /* 
  * Zend framework init - start
-
- *  */
+ */
 set_include_path(get_include_path() . PATH_SEPARATOR . "./include/class");
 set_include_path(get_include_path() . PATH_SEPARATOR . "./library/");
 set_include_path(get_include_path() . PATH_SEPARATOR . "./library/pdf");
 require_once 'Zend/Loader.php';
 
-/*
-Zend_Loader::loadClass('Zend_Db_Table');
-Zend_Loader::loadClass('Zend_Date');
-Zend_Loader::loadClass('Zend_Debug');
-Zend_Loader::loadClass('Zend_Auth');
-Zend_Loader::loadClass('Zend_Session');
-Zend_Loader::loadClass('Zend_Session_Namespace');
-Zend_Loader::loadClass('Zend_Config_Ini');
-Zend_Loader::loadClass('Zend_Acl');
-Zend_Loader::loadClass('Zend_Acl_Role');
-Zend_Loader::loadClass('Zend_Acl_Resource');
-Zend_Loader::loadClass('Zend_Locale');
-Zend_Loader::loadClass('Zend_Locale_Format');
-Zend_Loader::loadClass('Zend_Log');
-Zend_Loader::loadClass('Zend_Log_Writer_Stream');
-*/
 Zend_Loader::registerAutoload();
-
 
 
 //session_start();

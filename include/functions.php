@@ -470,6 +470,3 @@ function si_truncate($string, $max = 20, $rep = '')
     $leave = $max - strlen ($rep);
     return substr_replace($string, $rep, $leave);
 } 
-
-
-?>

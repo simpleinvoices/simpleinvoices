@@ -90,4 +90,3 @@ $LANG = getLanguageArray();
 // then use config lang
 // }
 //
-?>

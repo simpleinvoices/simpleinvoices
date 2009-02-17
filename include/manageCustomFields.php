@@ -233,5 +233,3 @@ function printPlugins() {
 	$out .= "</select>";
 	echo $out."<br />";
 }
-
-?>
