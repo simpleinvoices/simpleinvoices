@@ -16,12 +16,12 @@
 
 {if $saved == true }
 	<br>
-	 {$LANG.save_biller_success}
+	 {$LANG.save_user_success}
 	<br>
 	<br>
 {else}
 	<br>
-	 {$LANG.save_biller_failure}
+	 {$LANG.save_user_failure}
 	<br>
 	<br>
 {/if}

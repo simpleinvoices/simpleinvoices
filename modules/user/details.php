@@ -21,20 +21,14 @@
 checkLogin();
 
 #get the invoice id
-$biller_id = $_GET['id'];
+$id = $_GET['id'];
 
-$biller = getBiller($biller_id);
+$user = user::getUser($id);
+$roles = user::getUserRoles();
 
-/*drop down list code for invoice logo */
 
-$files = getLogoList();
-
-/*end logo stuff */
-
-#get custom field labels
-$customFieldLabel = getCustomFieldLabels();
-
-$smarty->assign('biller', $biller);
+$smarty->assign('user', $user);
+$smarty->assign('roles', $roles);
 /*
 $smarty -> assign('enabled', array(
                                 0 => $LANG[disabled],
@@ -43,8 +37,6 @@ $smarty -> assign('enabled', array(
 		);
  */
  
-$smarty->assign('files', $files);
-$smarty->assign('customFieldLabel', $customFieldLabel);
 
-$smarty -> assign('pageActive', 'biller');
+$smarty -> assign('pageActive', 'user');
 $smarty -> assign('active_tab', '#people');

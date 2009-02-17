@@ -18,128 +18,17 @@
 <hr></hr>
 <table align="center">
 	<tr>
-		<td class="details_screen">{$LANG.biller_id}</td>
-		<td>{$biller.id}</td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG.biller_name}</td>
-		<td>{$biller.name}</td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG.street}</td>
-		<td>{$biller.street_address}</td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG.street2} <a
-			class="cluetip"
-			rel="docs.php?t=help&p=street2"
-			href="#"
-			title="{$LANG.street2}"
-			>
-			<img
-			src="./images/common/help-small.png"></img></a></td>
-		<td>{$biller.street_address2}</td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG.city}</td>
-		<td>{$biller.city}</td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG.zip}</td>
-		<td>{$biller.zip_code}</td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG.state}</td>
-		<td>{$biller.state}</td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG.country}</td>
-		<td>{$biller.country}</td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG.mobile_phone}</td>
-		<td>{$biller.mobile_phone}</td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG.phone}</td>
-		<td>{$biller.phone}</td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG.fax}</td>
-		<td>{$biller.fax}</td>
-	</tr>
-	<tr>
 		<td class="details_screen">{$LANG.email}</td>
-		<td>{$biller.email}</td>
+		<td>{$user.email}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.biller_cf1} <a
-			class="cluetip"
-			rel="docs.php?t=help&p=custom_fields"
-			href="#"
-			title="{$LANG.Custom_Fields}"
-			><img
-			src="./images/common/help-small.png"></img></a></td>
-		<td>{$biller.custom_field1}</td>
+		<td class="details_screen">{$LANG.role}</td>
+		<td>{$user.role_name}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.biller_cf2} 
-		<a
-			class="cluetip"
-			rel="docs.php?t=help&p=custom_fields"
-			href="#"
-			title="{$LANG.Custom_Fields}"
-		>
-		<img
-			src="./images/common/help-small.png"
-		></img>
-		</a>
-		</td>
-		<td>{$biller.custom_field2}</td>
+		<td class="details_screen">{$LANG.password}</td>
+		<td>*********</td>
 	</tr>
-	<tr>
-		<td class="details_screen">{$customFieldLabel.biller_cf3} 
-		<a
-			class="cluetip"
-			rel="docs.php?t=help&p=custom_fields"
-			href="#"
-			title="{$LANG.Custom_Fields}"
-		><img
-			src="./images/common/help-small.png"></img></a></td>
-		<td>{$biller.custom_field3}</td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$customFieldLabel.biller_cf4} <a
-			class="cluetip"
-			rel="docs.php?t=help&p=custom_fields"
-			href="#"
-			title="{$LANG.Custom_Fields}"><img
-			src="./images/common/help-small.png"></img></a></td>
-		<td>{$biller.custom_field4}</td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG.logo_file} 
-			<a
-				class="cluetip"
-				href="#"
-				rel="docs.php?t=help&p=insert_biller_text"
-				title="{$LANG.Logo_File}"
-			>
-			<img src="./images/common/help-small.png">
-			</img></a></td>
-		<td>{$biller.logo}</td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG.invoice_footer}</td>
-		<td>{$biller.footer}</td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG.notes}</td>
-		<td>{$biller.notes}</td>
-	</tr>
-	{*
-		{showCustomFields categorieId="1" itemId=$smarty.get.id }
-	*}
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
 		<td>{$biller.wording_for_enabled}</td>
