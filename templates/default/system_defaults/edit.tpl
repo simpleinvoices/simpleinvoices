@@ -1,7 +1,6 @@
 <form name="frmpost" action="index.php?module=system_defaults&amp;view=save" method="post" onsubmit="return frmpost_Validator(this)">
 
-		<b>{$LANG.system_preferences}</b>
- <hr></hr>
+<h3>{$LANG.edit} {$description}</h3>
 
 <table align="center">
 
