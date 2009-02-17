@@ -7,7 +7,6 @@
 set_include_path(get_include_path() . PATH_SEPARATOR . "./include/class");
 set_include_path(get_include_path() . PATH_SEPARATOR . "./library/");
 set_include_path(get_include_path() . PATH_SEPARATOR . "./library/pdf");
-set_include_path(get_include_path() . PATH_SEPARATOR . "./library/ZendFramework/1.7.2/");
 require_once 'Zend/Loader.php';
 
 /*
