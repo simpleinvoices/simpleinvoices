@@ -26,6 +26,7 @@ Next Release :: Beta 3
 ##############################
 	
 	- users table admin - JK
+		- if user disbaled - if login attempt - give nice message
 	- invoice
 		- invoice edit - notes - if note empty then have closed if not empty then display for edit -JK
 		- multiple taxes (% and $ based) per line item - JK
