@@ -101,13 +101,13 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 		}		
 		if (getNumberOfDoneSQLPatches() >= "184")
 		{
-			$result = $dbAdapter->fetchRow('
+			$result = $dbAdapter->fetchRow("
 				SELECT 
 					u.id, u.email, r.name as role_name, u.domain_id
 				FROM 
 					si_user u,  si_user_role r 
 				WHERE 
-					u.email = ? AND u.role_id = r.id', $userEmail
+					u.email = ? AND u.role_id = r.id AND u.enabled = '".ENABLED."'", $userEmail
 			);
 		}		
 		/*

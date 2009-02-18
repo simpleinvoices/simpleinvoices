@@ -4,8 +4,10 @@
 $acl = new Zend_Acl();
 
 //create the user roles
-$acl->addRole(new Zend_Acl_Role('administrator'));
 $acl->addRole(new Zend_Acl_Role('domain_administrator'));
+$acl->addRole(new Zend_Acl_Role('administrator'));
+$acl->addRole(new Zend_Acl_Role('user'));
+$acl->addRole(new Zend_Acl_Role('viewer'));
 $acl->addRole(new Zend_Acl_Role('customer'));
 $acl->addRole(new Zend_Acl_Role('biller'));
 
@@ -51,3 +53,12 @@ $acl->allow('domain_administrator');
 
 // Administrator inherits nothing, but is allowed all privileges
 $acl->allow('administrator');
+//user - can do everythign except anything in the Settings menu
+$acl->allow('user');
+$acl->deny('user','options');
+$acl->deny('user','system_defaults');
+$acl->deny('user','custom_fields');
+$acl->deny('user','user');
+$acl->deny('user','tax_rates');
+$acl->deny('user','preferences');
+$acl->deny('user','payment_types');
