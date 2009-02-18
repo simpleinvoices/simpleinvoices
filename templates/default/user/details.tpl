@@ -118,7 +118,7 @@
 	<table class="buttons" align="center">
     <tr>
         <td>
-            <button type="submit" class="positive" name="save_biller" value="{$LANG.save_biller}">
+            <button type="submit" class="positive" name="save_user">
                 <img class="button_img" src="./images/common/tick.png" alt=""/> 
                 {$LANG.save}
             </button>
@@ -127,7 +127,7 @@
             <input type="hidden" name="id" value="{$user.id}">
 		</td>
 		<td>
-            <a href="./index.php?module=billers&view=manage" class="negative">
+            <a href="./index.php?module=user&view=manage" class="negative">
                 <img src="./images/common/cross.png" alt=""/>
                 {$LANG.cancel}
             </a>
