@@ -27,7 +27,7 @@
 		<img src="./images/common/required-small.png"></img>
 		</a>	
 		</td>
-		<td><input type=text name="email" value="{$smarty.post.email}" size=25 id="email" class="required" onblur="checkField(this);"></td>
+		<td><input type=text name="email" value="{$smarty.post.email}" size=35 id="email" class="required" onblur="checkField(this);"></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.role} 
@@ -67,7 +67,7 @@
 	</div>
 	</tbody>
 </table>
-
+<br>
 <table class="buttons" align="center">
     <tr>
         <td>

@@ -1196,6 +1196,13 @@ PRIMARY KEY  (`user_id`)) ;
     }
     $patch['195']['date'] = "20090215";
 
+    $patch['196']['name'] = "User table - make all existing users enabled";
+    $patch['196']['patch'] = "UPDATE ".TB_PREFIX."user SET enabled = 1 ;";
+    if ($config->database->adapter == "pdo_pgsql") {
+        $patch['196']['patch'] = "UPDATE ".TB_PREFIX."user SET enabled = 1;";
+    }
+    $patch['196']['date'] = "20090217";
+
     //TODO: postgres and sqlite patch        
 
 /*

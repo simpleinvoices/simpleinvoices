@@ -67,22 +67,15 @@ if ($op === 'edit_user' ) {
 
         $sql = "UPDATE ".TB_PREFIX."user
                     SET
-                        email
-                        =
-                        :email,
+                        email = :email,
                         $password
-                        role
-                        =
-                        '$_POST[role]'.
-                        enabled
+                        role_id = :role,
+                        enabled = :enabled
                     WHERE
-                        id
-                        =
-                        '$_GET[id]'
-                        
+                        id = :id
                 ";
 
-        return dbQuery($sql, ':email',$_POST['email'], ':password',$_POST['password_field'], ':role',$_POST['role'], ':enabled',$_POST['enabled'], ':id',$_POST['id']);
+        return dbQuery($sql, ':email',$_POST['email'], ':role',$_POST['role'], ':enabled',$_POST['enabled'], ':id',$_POST['id']);
 
     }
     if( editUser() ) {

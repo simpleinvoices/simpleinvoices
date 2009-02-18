@@ -205,6 +205,7 @@ $LANG['monthly_sales_per_year'] = "Monthly Sales and Payments per year";//1
 $LANG['new_invoice_consulting'] = "New Invoices - Consulting";//1
 $LANG['new_invoice_itemised'] = "New Invoices - Itemised";//1
 $LANG['new_invoice_total'] = "New Invoices - Total";//1
+$LANG['new_password'] = "New password";//1
 $LANG['no_billers'] = "There are no billers in the database, please add one";//1
 $LANG['no_customers'] = "There are no customers in the database, please add one";//1
 $LANG['no_defaults'] = "There are no defaults";//1
