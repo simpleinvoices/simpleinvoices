@@ -12,6 +12,7 @@ $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 function sql($type='', $dir, $sort, $rp, $page )
 {
 	global $config;
+	global $LANG;
 	global $auth_session;
 	
 	//SC: Safety checking values that will be directly subbed in
@@ -57,7 +58,9 @@ function sql($type='', $dir, $sort, $rp, $page )
 		$sql = "SELECT 
 					u.id, 
 					u.email, 
-					ur.name
+					ur.name as role,
+					(SELECT (CASE WHEN u.enabled = ".ENABLED." THEN '".$LANG['enabled']."' ELSE '".$LANG['disabled']."' END )) AS enabled
+					
 	
 				FROM 
 					".TB_PREFIX."user u,
@@ -90,7 +93,8 @@ foreach ($user as $row) {
 	<a class='index_table' title='$LANG[edit] ".utf8_encode($row['name'])."' href='index.php?module=user&view=details&id=$row[id]&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 	]]></cell>";
 	$xml .= "<cell><![CDATA[".utf8_encode($row['email'])."]]></cell>";
-	$xml .= "<cell><![CDATA[".utf8_encode($row['name'])."]]></cell>";
+	$xml .= "<cell><![CDATA[".utf8_encode($row['role'])."]]></cell>";
+	$xml .= "<cell><![CDATA[".utf8_encode($row['enabled'])."]]></cell>";
 	$xml .= "</row>";		
 }
 

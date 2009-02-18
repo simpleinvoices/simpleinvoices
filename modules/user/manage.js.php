@@ -21,7 +21,8 @@
 			colModel : [
 				{display: 'Actions', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
 				{display: 'Email', name : 'email', width : 50 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Role', name : 'role', width : 40 * percentage_width, sortable : true, align: 'left'}
+				{display: 'Role', name : 'role', width : 20 * percentage_width, sortable : true, align: 'left'},
+				{display: 'Enabled', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'}
 				
 				],
 				

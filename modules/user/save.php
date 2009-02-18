@@ -37,18 +37,20 @@ if ( $op === 'insert_user') {
                         email,
                         password,
                         role_id,
-                        domain_id
+                        domain_id,
+                        enabled
                     )
                     VALUES 
                     (
                         :email,
                         MD5(:password),
                         :role,
-						:domain_id
+						:domain_id,
+						:enabled
                     )
                 ";
 
-        return dbQuery($sql, ':email',$_POST[email],':password',$_POST[password_field],':role',$_POST[role],':domain_id',$auth_session->domain_id);
+        return dbQuery($sql, ':email',$_POST['email'],':password',$_POST['password_field'],':role',$_POST['role'],':domain_id',$auth_session->domain_id,':enabled',$_POST['enabled']);
 
     }
     if( insertUser() ) {
@@ -71,7 +73,8 @@ if ($op === 'edit_user' ) {
                         $password
                         role
                         =
-                        '$_POST[role]'
+                        '$_POST[role]'.
+                        enabled
                     WHERE
                         id
                         =
@@ -79,7 +82,7 @@ if ($op === 'edit_user' ) {
                         
                 ";
 
-        return dbQuery($sql, ':email',$_POST[email], ':password',$_POST[password_field], ':role',$_POST[role], ':role',$_POST[idrole]);
+        return dbQuery($sql, ':email',$_POST['email'], ':password',$_POST['password_field'], ':role',$_POST['role'], ':enabled',$_POST['enabled'], ':id',$_POST['id']);
 
     }
     if( editUser() ) {

@@ -2,13 +2,13 @@
 
 define("TB_PREFIX","si_"); // default table prefix - old var $tb_prefix = "si_";
 
-define("enabled","1"); // default table prefix - old var $tb_prefix = "si_";
-define("disabled","0"); // default table prefix - old var $tb_prefix = "si_";
+define("ENABLED","1"); // 
+define("DISABLED","0"); // 
 
 //invoice styles
-define("total_invoice","1"); // default table prefix - old var $tb_prefix = "si_";
-define("itemised_invoice","2"); // default table prefix - old var $tb_prefix = "si_";
-define("consulting_invoice","3"); // default table prefix - old var $tb_prefix = "si_";
+define("total_invoice","1"); // 
+define("itemised_invoice","2"); // 
+define("consulting_invoice","3"); // 
 
 //To turn logging on set the below to true - not needed as it is set in System Defaults
 define("LOGGING",false);
