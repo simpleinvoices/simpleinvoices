@@ -54,14 +54,12 @@ Next Release :: Beta 3 - current work in progress
 	- customer view info tabs - not happy - need to be redone in jquery UI
 	- can't close yellow text
 	- backup db - once db backed up - menu goes wierd 
-	- IE - buttons not all nice
+	- IE - menu not all nice
 	- no data validation on form input
-	- only 1 tax per line item
 	- postgres version not complete 
 	- no manage users 
 	- total style invoice not selectable
 	- Help link - top right - not working
-	- Email as PDF not working
 	- Reports - not localised - ie. in 6 decimal places
 	- PHP.ini max memory needs to be min 64M to handle new PDF
 
