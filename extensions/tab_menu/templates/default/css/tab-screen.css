@@ -35,10 +35,24 @@ td.columnleft {
 	border-left:5px solid #EEE; }
 
 td.details_screen {
+/*
 	border:1px solid #fff;
 	background-color:#F5F5F5;
 	border-color:#FFF;
-	border-width:1px; }
+	border-width:1px; 
+*/
+
+	border-bottom: 1px dashed #d3d3d3;	
+	line-height:24px;
+	
+/*
+	background:#F9F9F9 none repeat scroll 0 0;
+	border-bottom:1px solid #F1F1F1;
+	line-height:24px;
+	margin:1px 0 2px;
+	border-width:1px;
+*/ 
+	}
 
 /* Credits.html
 -------------------------------------------------*/
@@ -277,10 +291,14 @@ Work around IE/Win code size bug - courtesy Jesper, waffle.wootest.net  */
 div#Container {
 	
 	background:#fff;
-	padding-top:10px;
-	padding-bottom:10px;
+	padding:10px;
 	
 	border-bottom:1px #DADADA solid;
+	border-right:1px #DADADA solid;
+	border-left:1px #DADADA solid;
+	
+	margin: 0 auto;
+	width: 970px;
 	
 /*	margin:13px auto 0;
 	padding:0 23px 0 30px; 
@@ -312,7 +330,7 @@ div#Container {
 --------------------------*/
 .col {
 	text-align:center;
-	padding:0 20px; 
+	/*padding:0 20px;*/ 
 	/*min-height:352px;*/
 	}
 
@@ -599,6 +617,24 @@ button.positive, .buttons a.positive{
 .ui-tabs-hide { display: none; }
 
 .txt_right
+{
+	margin:0 auto;
+	width:970px;
+	text-align:right;
+	/*
+	padding:0pt;
+	padding-top:4px;
+	padding-bottom:4px;
+	
+	padding-right:30px;
+	height:21px;
+	*/
+	/*background:#464646;*/
+	/*background:transparent url(../../../images/top_menu_grey.png) repeat scroll left top;*/
+	color:#EEE;
+	/*color:#999999;*/
+}
+.top_menu
 {
 	margin:0pt;
 	padding:0pt;

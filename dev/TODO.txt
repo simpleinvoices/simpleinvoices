@@ -29,8 +29,6 @@ Next Release :: Beta 3
 		- if user disbaled - if login attempt - give nice message
 	- invoice
 		- invoice edit - notes - if note empty then have closed if not empty then display for edit -JK
-		- multiple taxes (% and $ based) per line item - JK
-		- update invoice editing with tax rates and dynamical line items - JK
 		- Invoice - Edit old itemised/consultign invoice - test the conversion patch 163 again
 	- add domain_id into system_defaults table - flatten this table - old style - TODO - JK
 	- system defaults/preferences - flatten table and add domain_id - JK

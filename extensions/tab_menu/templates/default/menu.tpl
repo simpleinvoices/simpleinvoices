@@ -1,14 +1,16 @@
-<div class="txt_right">
-	Hello {$smarty.session.Zend_Auth.email} | <a href="">Help</a>
-           {if $config->authentication->enabled == 1}
-				|
-                {if $smarty.session.Zend_Auth.id == null}
-                    <a href="index.php?module=auth&view=login">{$LANG.login}</a>
-                {else}
-                    <a href="index.php?module=auth&view=logout">{$LANG.logout}</a>
+<div class="top_menu">
+	<div class="txt_right">
+		Hello {$smarty.session.Zend_Auth.email} | <a href="">Help</a>
+	           {if $config->authentication->enabled == 1}
+					|
+	                {if $smarty.session.Zend_Auth.id == null}
+	                    <a href="index.php?module=auth&view=login">{$LANG.login}</a>
+	                {else}
+	                    <a href="index.php?module=auth&view=logout">{$LANG.logout}</a>
+					{/if}
 				{/if}
-			{/if}
-
+	
+	</div>
 </div>
 
 <!--
