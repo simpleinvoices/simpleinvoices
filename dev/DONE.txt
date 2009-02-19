@@ -5,6 +5,8 @@ BETA 3
 	- email as pdf working now
 	- email - now allow multiple email addresses in to or bcc and can be delimited via , or ; - thanks stella
 	- add system pref for number of taxes per line item - done
+	- users table admin - done
+	- UI updates
 	
 --------
 BETA 2
