@@ -279,9 +279,13 @@ div#Container {
 	background:#fff;
 	padding-top:10px;
 	padding-bottom:10px;
+	
+	border-bottom:1px #DADADA solid;
+	
 /*	margin:13px auto 0;
 	padding:0 23px 0 30px; 
 */
+	
 }
 
 .ClearAll {

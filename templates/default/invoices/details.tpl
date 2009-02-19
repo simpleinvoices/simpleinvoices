@@ -12,11 +12,11 @@
 *	http://www.simpleinvoices.org
 */
 *}
-<b>You are editing {$preference.pref_inv_wording} {$invoice.id}</b>
+<h3>You are editing {$preference.pref_inv_wording} {$invoice.id}</h3>
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
         	<img src="images/common/gmail-loader.gif" alt="Loading ..."/> Loading ...
 </div>
- <hr></hr>
+
 
 <form name="frmpost" action="index.php?module=invoices&view=save" method="post">
 

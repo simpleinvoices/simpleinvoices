@@ -23,6 +23,8 @@
     margin: 0;
     padding: 0 0 0 3px;
     padding-left:20px;
+    
+    border-bottom:1px solid #dadada;
 }
 .ui-tabs-nav:after { /* clearing without presentational markup, IE gets extra treatment */
     display: block;
@@ -42,7 +44,7 @@
 }
 .ui-tabs-nav a {
     margin: 5px 0 0; /* position: relative makes opacity fail for disabled tab in IE */
-    padding-left: 0;
+    padding-left: 5px;
     background-position: 100% 0;
     text-decoration: none;
     white-space: nowrap; /* @ IE 6 */
@@ -59,9 +61,11 @@
 
 background:#fff;
 color:#555555;
+/*
 border-color:#fff;
 border-style:solid;
 border-width:1px;
+*/
 font-weight:bold;
 
 
@@ -69,6 +73,11 @@ font-weight:bold;
 -moz-border-radius-topright:6px;
 -webkit-border-top-left-radius:6px;
 -webkit-border-top-right-radius:6px;
+
+border-color:#DADADA #DADADA #FFFFFF;
+border-style:solid;
+border-width:1px 1px 1px;
+
 
 }
 .ui-tabs-nav a span {
@@ -81,6 +90,9 @@ color:#21759B;
 background:#f1f1f1;
 }
 .ui-tabs-nav .ui-tabs-selected a span {
+	
+	padding-right:3px;
+	
     padding-top: 0;
     height: 27px;
     line-height: 27px;
