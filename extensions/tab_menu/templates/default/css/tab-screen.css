@@ -296,10 +296,19 @@ div#Container {
 	border-bottom:2px #DADADA solid;
 	border-right:2px #DADADA solid;
 	border-left:1px #DADADA solid;
-	
-	margin: 0 auto;
+	border-top:1px #DADADA solid;
+		
+	/*margin: 0 auto;*/
+	margin:-34px auto 0;
+	padding-top:30px;
 	width: 970px;
+	z-index:0;
 
+	-webkit-border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topleft:6px;
+	-moz-border-radius-topright:6px;
+	
 	-webkit-border-bottom-left-radius:6px;
 	-webkit-border-bottom-right-radius:6px;
 	-moz-border-radius-bottomleft:6px;

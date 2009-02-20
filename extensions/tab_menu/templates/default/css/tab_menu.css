@@ -3,25 +3,30 @@
 
 #tabmenu
 {
-background:#f1f1f1 url(../back.gif);
-height:63px;
-padding-top:10px;
-/*padding-bottom:10px;*/
-padding-left:10px;
-padding-right:10px;
-margin: 0 auto;
-width: 970px;
+	/*background:#f1f1f1 url(../back.gif);*/
+	height:63px;
+	padding-top:30px;
+	/*padding-bottom:30px;*/
+	padding-left:10px;
+	padding-right:10px;
+	margin: 0 auto;
+	width: 970px;
+	z-index:1;
+	position:relative;
+
+	
 
 }
 .ui-tabs-hide { display: none; }
 
+	
 .subnav li
 {
-display: inline;
-height:25px;
-list-style-type: none;
-
-padding-right: 20px;
+	display: inline;
+	height:25px;
+	list-style-type: none;
+	
+	padding-right: 20px;
 }
 
 .menu_setting

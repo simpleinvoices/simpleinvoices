@@ -56,11 +56,12 @@
 </table>
 <br>
 
-</div>
+
 <!-- Do stuff menu  - end -->
 
 <!-- Don't forget to menu - start -->
 <h2 class="align_left">Don't forget to</h2>
+
 <table class="buttons" >
     <tr>
         <td>
@@ -81,7 +82,9 @@
     </tr>
 </table>
 <br>
+
 <!-- Don't forget to menu - end -->
+</div>
 
 <!-- Reports menu - start -->
 <div class="align_left">
