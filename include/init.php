@@ -29,19 +29,31 @@ require_once("smarty/Smarty.class.php");
 
 include_once('./include/functions.php');
 
+/*
+ * log file - start
+ */
 $logFile = "./tmp/log/si.log";
+if (!is_file($logFile))
+{
+	$createLogFile = fopen($logFile, 'w') or die(simpleInvoicesError('notWriteable','folder','tmp/log'));
+	fclose($createLogFile);
+}
 if (!is_writable($logFile)) {
-   simpleInvoicesError('notWriteable',$logFile);
+	
+   simpleInvoicesError('notWriteable','file',$logFile);
 }
 $writer = new Zend_Log_Writer_Stream($logFile);
 $logger = new Zend_Log($writer);
+/*
+ * log file - end
+ */
 
 $smarty = new Smarty();
 
 //cache directory. Have to be writeable (chmod 777)
 $smarty -> compile_dir = "tmp/cache";
 if(!is_writable($smarty -> compile_dir)) {
-	simpleInvoicesError("cache", $smarty -> compile_dir);
+	simpleInvoicesError("notWriteable", 'folder', $smarty -> compile_dir);
 	//exit("Simple Invoices Error : The folder <i>".$smarty -> compile_dir."</i> has to be writeable");
 }
 

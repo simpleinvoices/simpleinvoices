@@ -322,15 +322,6 @@ function simpleInvoicesError($type,$info1 = "", $info2 = "")
 
 switch ($type)
 {
-	case "cache":
-
-		$error = exit("
-		<br>
-		===========================================<br>
-		Simple Invoices error<br>
-		===========================================<br>
-		The folder <b>./".$info1."</b> has to be writeable");
-	break;
 
 	case "notWriteable":
 
@@ -339,7 +330,7 @@ switch ($type)
 		===========================================<br>
 		Simple Invoices error<br>
 		===========================================<br>
-		The file <b>".$info1."</b> has to be writeable");
+		The ".$info1." <b>".$info2."</b> has to be writeable");
 	break;
 	
 	case "dbConnection":
