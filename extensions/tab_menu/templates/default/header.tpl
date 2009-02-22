@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<title>{$LANG.simple_invoices}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link REL="SHORTCUT ICON" HREF="./images/common/favicon.ico">
+	<link rel="shortcut icon" href="./images/common/favicon.ico">
+	<meta name="robots" content="no index, no follow" /
 
 {literal}
 	<script type="text/javascript" src="./include/jquery/jquery-1.2.6.min.js"></script>
