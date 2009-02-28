@@ -82,6 +82,14 @@ if($environment != 'production') {
      $config = new Zend_Config_Ini('./config/'.$environment.'.config.ini', $environment);
 }
 
+
+$zendDb = Zend_Db::factory($config->database->adapter, array(
+    'host'     => $config->database->params->host,
+    'username' => $config->database->params->username,
+    'password' => $config->database->params->password,
+    'dbname'   => $config->database->params->dbname)
+);
+
 //include_once("./include/sql_patches.php");
 include_once("./include/sql_queries.php");
 
@@ -128,3 +136,5 @@ switch ($_GET['module'])
 
 //get the url - used for templates / pdf
 $siUrl = getURL();
+//zend db
+

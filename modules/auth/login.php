@@ -18,7 +18,7 @@ echo  substr($_SERVER['SCRIPT_FILENAME'], -9, 5);
 require_once 'include/init.php';
 */
 // Create an in-memory SQLite database connection
-require_once 'Zend/Db/Adapter/Pdo/Mysql.php';
+////require_once 'Zend/Db/Adapter/Pdo/Mysql.php';
 //$dbAdapter = new Zend_Db_Adapter_Pdo_Mysql(array('dbname' => ':memory:'));
 /*
 $dbAdapter = new Zend_Db_Adapter_Pdo_Mysql(array(
@@ -28,23 +28,24 @@ $dbAdapter = new Zend_Db_Adapter_Pdo_Mysql(array(
     'dbname'   => $config->database->params->dbname
 ));
 */
+/*
 $dbAdapter = Zend_Db::factory($config->database->adapter, array(
     'host'     => $config->database->params->host,
     'username' => $config->database->params->username,
     'password' => $config->database->params->password,
     'dbname'   => $config->database->params->dbname)
 );
-
+*/
 $errorMessage = '';
 if (isset($_POST['user']) && isset($_POST['pass'])) {
 
-	require_once 'Zend/Auth/Adapter/DbTable.php';
+////	require_once 'Zend/Auth/Adapter/DbTable.php';
 
 	// Configure the instance with constructor parameters...
 	//$authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter, 'users', 'username', 'password');
 
 	// ...or configure the instance with setter methods
-	$authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
+	$authAdapter = new Zend_Auth_Adapter_DbTable($zendDb);
 
 	//sql patch 161 changes user table name - need to accomodate
 	$user_table = (getNumberOfDoneSQLPatches() < "161") ? "users" : "user";
@@ -77,7 +78,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 		//patch 147 adds user_role table - need to accomodate pre and post patch 147
 		if (getNumberOfDoneSQLPatches() < "147")
 		{
-			$result = $dbAdapter->fetchRow('
+			$result = $zendDb->fetchRow('
 				SELECT 
 					u.user_id as id, u.user_email, u.user_name
 				FROM 
@@ -90,7 +91,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 
 		if ( (getNumberOfDoneSQLPatches() >= "147") && ( getNumberOfDoneSQLPatches() < "184") )
 		{
-			$result = $dbAdapter->fetchRow('
+			$result = $zendDb->fetchRow('
 				SELECT 
 					u.user_id as id, u.user_email, u.user_name, r.name as role_name, u.user_domain_id
 				FROM 
@@ -101,7 +102,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 		}		
 		if (getNumberOfDoneSQLPatches() >= "184")
 		{
-			$result = $dbAdapter->fetchRow("
+			$result = $zendDb->fetchRow("
 				SELECT 
 					u.id, u.email, r.name as role_name, u.domain_id
 				FROM 
