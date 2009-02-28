@@ -19,10 +19,8 @@ Next Release :: Beta 5
 	-- just ask for db details and if you want demo data installer
 	-- just the basics - do rest later
 	
-	-email - uses stella code to allow multlpe people in to and bcc fields in email
-
 ##############################
-Next Release :: Beta 4
+Next Release :: Beta 4 - current work in progress
 ##############################
 	- Products - allow setting 2 or more default taxes pre product
 
@@ -47,7 +45,7 @@ Next Release :: Beta 4
 	- php error reports - make work with E_ALL/E_STRICT
 
 ##############################
-Next Release :: Beta 3 - current work in progress
+Next Release :: Beta 3
 ##############################
 	
 	Known issues

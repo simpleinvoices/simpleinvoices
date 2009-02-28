@@ -1203,6 +1203,95 @@ PRIMARY KEY  (`user_id`)) ;
     }
     $patch['196']['date'] = "20090217";
 
+    $patch['197']['name'] = "User table - make all existing users enabled";
+    $patch['197']['patch'] = "CREATE TABLE ".TB_PREFIX."default (
+		`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+		`domain_id` INT( 11 ) NOT NULL ,
+		`biller` INT( 11 ) NULL ,
+		`customer` INT( 11 ) NULL ,
+		`tax` INT( 11 ) NULL ,
+		`preference` INT( 11 ) NULL ,
+		`line_items` INT( 11 ) NULL ,
+		`template` VARCHAR( 255 ) NULL ,
+		`payment_type` INT( 11 ) NULL ,
+		`language` VARCHAR( 255 ) NULL ,
+		`dateformat` VARCHAR( 255 ) NULL ,
+		`spreadsheet` VARCHAR( 255 ) NULL ,
+		`wordprocessor` VARCHAR( 255 ) NULL ,
+		`pdfscreensize` INT( 11 ) NULL ,
+		`pdfpapesize` VARCHAR( 255 ) NULL ,
+		`pdfleftmargin` INT( 11 ) NULL ,
+		`pdfrightmargin` INT( 11 ) NULL ,
+		`pdftopmargin` INT( 11 ) NULL ,
+		`pdfbottommargin` INT( 11 ) NULL ,
+		`emailhost` VARCHAR( 255 ) NULL ,
+		`emailusername` VARCHAR( 255 ) NULL ,
+		`emailpassword` VARCHAR( 255 ) NULL ,
+		`logging` INT( 1 ) NULL ,
+		`enable_delete` INT( 1 ) NULL ,
+		`tax_per_line_item` INT( 11 ) NULL
+		) ENGINE = MYISAM ;";
+    $patch['197']['date'] = "20090301";	
+
+    $patch['198']['name'] = "User table - make all existing users enabled";
+   	$patch['198']['patch'] = "insert into ".TB_PREFIX."default
+			(
+				domain_id,
+				biller,
+				customer,
+				tax,
+				preference,
+				line_items,
+				template,
+				payment_type,
+				language,
+				dateformat,
+				spreadsheet,
+				wordprocessor,
+				pdfscreensize,
+				pdfpapesize,
+				pdfleftmargin,
+				pdfrightmargin,
+				pdftopmargin,
+				pdfbottommargin,
+				emailhost,
+				emailusername,
+				emailpassword,
+				logging,
+				enable_delete,
+				tax_per_line_item
+			)		
+			VALUES
+			(
+				1,
+				(select value from ".TB_PREFIX."system_defaults where name ='biller'),
+				(select value from ".TB_PREFIX."system_defaults where name ='customer'),
+				(select value from ".TB_PREFIX."system_defaults where name ='tax'),
+				(select value from ".TB_PREFIX."system_defaults where name ='preference'),
+				(select value from ".TB_PREFIX."system_defaults where name ='line_items'),
+				(select value from ".TB_PREFIX."system_defaults where name ='template'),
+				(select value from ".TB_PREFIX."system_defaults where name ='payment_type'),
+				(select value from ".TB_PREFIX."system_defaults where name ='language'),
+				(select value from ".TB_PREFIX."system_defaults where name ='dateformat'),
+				(select value from ".TB_PREFIX."system_defaults where name ='spreadsheet'),
+				(select value from ".TB_PREFIX."system_defaults where name ='wordprocessor'),
+				(select value from ".TB_PREFIX."system_defaults where name ='pdfscreensize'),
+				(select value from ".TB_PREFIX."system_defaults where name ='pdfpapersize'),
+				(select value from ".TB_PREFIX."system_defaults where name ='pdfleftmargin'),
+				(select value from ".TB_PREFIX."system_defaults where name ='pdfrightmargin'),
+				(select value from ".TB_PREFIX."system_defaults where name ='pdftopmargin'),
+				(select value from ".TB_PREFIX."system_defaults where name ='pdfbottommargin'),
+				(select value from ".TB_PREFIX."system_defaults where name ='emailhost'),
+				(select value from ".TB_PREFIX."system_defaults where name ='emailusername'),
+				(select value from ".TB_PREFIX."system_defaults where name ='emailpassword'),
+				(select value from ".TB_PREFIX."system_defaults where name ='logging'),
+				(select value from ".TB_PREFIX."system_defaults where name ='delete'),
+				(select value from ".TB_PREFIX."system_defaults where name ='tax_per_line_item')
+			);";
+    $patch['198']['date'] = "20090301";	
+
+
+
     //TODO: postgres and sqlite patch        
 
 /*
