@@ -3,15 +3,7 @@
 
 {if $smarty.get.action== 'view' }
 
-	<b>{$LANG.products} ::
-	<a href="index.php?module=products&view=details&id={$product.id}&action=edit">{$LANG.edit}</a></b>
-	
- 	<hr></hr>
-
 	<table align="center">
-	<tr>
-		<td class="details_screen">{$LANG.product_id}</td><td>{$product.id}</td>
-	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product_description}</td>
 		<td>{$product.description}</td>
@@ -60,22 +52,27 @@
 		<td class="details_screen">{$LANG.product_enabled}</td>
 		<td>{$product.wording_for_enabled}</td>
 	</tr>
-	</table>
+</table>
+	<br>
+	<table class="buttons" align="center">
+		<tr>
+			<td>
+				<a href="./index.php?module=products&view=details&id={$product.id}&action=edit" class="positive">
+					<img src="./images/famfam/add.png" alt=""/>
+					{$LANG.edit}
+				</a>
 
-<hr></hr>
-<a href="index.php?module=products&view=details&id={$product.id}&action=edit">{$LANG.edit}</a>
+			</td>
+		</tr>
+	</table>
 {/if}
 
 
 {if $smarty.get.action== 'edit' }
 
-	<b>{$LANG.product_edit}</b>
-	<hr></hr>
+	<h3>{$LANG.product_edit}</h3>
 
 	<table align="center">
-	<tr>
-		<td class="details_screen">{$LANG.product_id}</td><td>{$product.id}</td>
-	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product_description}</td>
 		<td><input type="text" name="description" size="50" value="{$product.description}" id="description" class="required" onblur="checkField(this);"/></td>
@@ -132,7 +129,7 @@
 	</table>
 {/if} 
 {if $smarty.get.action== 'edit' }
-	<hr></hr>
+	<br>
 	<table class="buttons" align="center">
 	<tr>
 		<td>
