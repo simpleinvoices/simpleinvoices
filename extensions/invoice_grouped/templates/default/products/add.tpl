@@ -39,7 +39,14 @@
 		<td class="details_screen">{$customFieldLabel.product_cf1} 
 		<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png"></img></a>
 		</td>
-		<td><input type=text class="edit" name="custom_field1" value="{$smarty.post.custom_field1}"  size=50></td>
+		<td>
+		<select name="custom_field1">
+				<option value=""></option>
+			{foreach from=$product_group item=pg}
+				<option value="{$pg.name}">{$pg.name}</option>
+			{/foreach}
+		</select>
+		</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf2} 
