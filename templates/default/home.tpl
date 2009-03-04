@@ -74,7 +74,7 @@
     	</td>
 		<td>
     
-           <a href="./index.php?module=customers&view=manage" class="">
+           <a href="./index.php?module=options&view=backup_database" class="">
                 <img src="./images/common/database_save.png" alt=""/>
                  Backup your Database now {* LANG TODO*}
             </a>
