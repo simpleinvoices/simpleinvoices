@@ -15,6 +15,18 @@
 *}
 {if preferences == null}
 <P><em>{$LANG.no_preferences}.</em></p>
+<table class="buttons" align="center">
+    <tr>
+        <td>
+            <a href="./index.php?module=preferences&view=add" class="positive">
+                <img src="./images/famfam/add.png" alt=""/>
+                {$LANG.add_new_preference}
+            </a>
+
+        </td>
+    </tr>
+ </table>
+
 {else}
 <table class="buttons" align="center">
     <tr>

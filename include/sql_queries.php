@@ -23,6 +23,12 @@ function db_connector() {
 	* strip the pdo_ section from the adapter
 	*/
 	$pdoAdapter = substr($config->database->adapter, 4);
+	
+	if(defined('PDO::MYSQL_ATTR_INIT_COMMAND') AND $pdoAdpater == "mysql")
+	{ 
+		$pdoAdapter ="mysql_utf8";
+	}
+	
 
 /*	$connlink = new PDO(
 					$pdoAdapter.':host='.$config->database->params->host.';	dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password
@@ -44,11 +50,17 @@ function db_connector() {
 					$pdoAdapter.':host='.$config->database->params->host.';	dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password
 				);
 				break;
+			
+		    case "mysql_utf8":
+			   	$connlink = new PDO(
+					$pdoAdapter.':host='.$config->database->params->host.';	dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password,  array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8", PDO::MYSQL_ATTR_INIT_COMMAND=>"SET CHARACTER SET utf8;")
+				);
+				break;
 				
 		    default:
 		    	//mysql
 		    	$connlink = new PDO(
-					$pdoAdapter.':host='.$config->database->params->host.';	dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password,  array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8", PDO::MYSQL_ATTR_INIT_COMMAND=>"SET CHARACTER SET utf8;")
+					$pdoAdapter.':host='.$config->database->params->host.';	dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password
 				);
 				break;
 		}

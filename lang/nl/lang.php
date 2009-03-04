@@ -7,11 +7,8 @@
 * Authors:
 *      Frank Heinen, David (darym3 _at_ hotmail.com), Ruben Bloemgarten (ruben@abubble.nl), Kai (level411@gmail.com)
 *
-* Last edited:
-* 	 2007-05-09
-*
 * License:
-*	 GPL v2 or above
+*	 GPL v3 or above
 */
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
@@ -378,4 +375,3 @@ $LANG['all_reports'] = "Alle rapporten";//1
 $LANG['new_invoice'] = "Nieuwe faktuur";//1
 $LANG['for'] = "voor";//1
 $LANG['as_template'] = "als sjabloon gebruiken";//1
-?>

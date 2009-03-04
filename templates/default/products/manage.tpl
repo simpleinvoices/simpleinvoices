@@ -13,12 +13,23 @@
 *}
 {if $number_of_rows == null }
 	<p><em>{$LANG.no_products}</em></p>
+	<table class="buttons" align="center">
+    <tr>
+        <td>
+            <a href="./index.php?module=products&view=add" class="positive">
+                <img src="./images/famfam/add.png" alt=""/>
+                {$LANG.add_new_product}
+            </a>
+
+        </td>
+    </tr>
+</table>
 {else}
  {include file='../modules/products/manage.js.php' LANG=$LANG}
 <table class="buttons" align="center">
     <tr>
         <td>
-            <a href="./index.php?module=product&view=add" class="positive">
+            <a href="./index.php?module=products&view=add" class="positive">
                 <img src="./images/famfam/add.png" alt=""/>
                 {$LANG.add_new_product}
             </a>
