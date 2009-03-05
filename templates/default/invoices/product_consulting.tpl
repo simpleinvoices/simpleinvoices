@@ -16,7 +16,7 @@
 *	http://www.simpleinvoices.org
 */
 *}
-<form name="frmpost" action="index.php?module=invoices&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=invoices&view=save" method="post" onsubmit="return frmpost_Validator(this)">
 
 <h3>{$LANG.inv} {$LANG.inv_consulting}</h3>
 
@@ -25,7 +25,7 @@
 <tr>
 <td class="details_screen">{$LANG.quantity}</td>
 <td class="details_screen">{$LANG.description}</td>
-<td class="details_screen">Price</td>
+<td class="details_screen">{$LANG.Price}</td>
 
 </tr>
 
@@ -39,7 +39,7 @@
             </tr>
                 
 			<tr class="text{$smarty.section.line.index} hide">
-        		<td colspan="3" ><textarea input type=text class="editor"  name='notes{$smarty.section.line.index}' rows=3 cols=80 WRAP=nowrap></textarea></td>
+        		<td colspan="3" ><textarea input type=text class="editor"  name='notes{$smarty.section.line.index}' rows="3" cols="80" wrap="nowrap"></textarea></td>
 			</tr>
 
         {/section}
@@ -52,14 +52,14 @@
 
 
 <tr>
-        <td colspan=2 class="details_screen">{$LANG.notes}</td>
+        <td colspan="2" class="details_screen">{$LANG.notes}</td>
 </tr>
 
 <tr>
-        <td colspan=2><textarea input type=text class="editor" name="note" rows=5 cols=70 WRAP=nowrap></textarea></td>
+        <td colspan="2"><textarea input type="text" class="editor" name="note" rows="5" cols="70" wrap="nowrap"></textarea></td>
 </tr>
 
-<tr><td class="details_screen">{$LANG.tax}</td><td input type=text name="tax" size=15>
+<tr><td class="details_screen">{$LANG.tax}</td><td> <input type="text" name="tax" size="15" />
 
 {if $taxes == null }
 	<p><em>{$LANG.no_taxes}</em></p>
@@ -75,7 +75,7 @@
 </tr>
 
 <tr>
-<td class="details_screen">{$LANG.inv_pref}</td><td input type=text name="preference_id">
+<td class="details_screen">{$LANG.inv_pref}</td><td input type="text" name="preference_id">
 
 {if $preferences == null }
 	<p><em>{$LANG.no_preferences}</em></p>

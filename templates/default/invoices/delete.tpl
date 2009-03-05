@@ -21,26 +21,26 @@
 	Delete Invoice
 	<hr></hr>
 
-	<br>
+	<br />
     	    {if $invoicePaid == 0}
 				Are you sure you want to delete {$preference.pref_inv_wording} {$invoice.id}
-	<br>
-	<br>
+	<br />
+	<br />
 		<hr></hr>
-		<form name="frmpost" ACTION="index.php?module=invoices&view=delete&stage=2&id={$smarty.get.invoice}" METHOD="post">
-			<input type="submit" name="submit" value="I'm sure"> <input type=button value="Cancel" onCLick="history.back()">
+		<form name="frmpost" action="index.php?module=invoices&view=delete&stage=2&id={$smarty.get.invoice}" method="post">
+			<input type="submit" name="submit" value="I'm sure"> <input type="button" value="Cancel" onCLick="history.back()">
 			<input type="hidden" name="doDelete" value="y">
 		</form>	
 	        {/if}
 	
 	        {if $invoicePaid != 0}
 				{$preference.pref_inv_wording} {$invoice.id} can not be deleted as it has payments of {$preference.pref_currency_sign}{$invoicePaid} recorded against it
-				<br>
+				<br />
 				LANG_TODO: Add help section here!!
-				<br>
+				<br />
 	<hr></hr>
 			<form>
-					<input type=button value="Back" onCLick="history.back()">
+					<input type="button" value="Back" onCLick="history.back()">
 		</form>	
     	    {/if}
 
@@ -52,8 +52,8 @@
 {if $smarty.get.stage == 2 }
 
 	<div id="top"></b></div>
-	<br><br>
+	<br /><br />
 	{$preference.pref_inv_wording} {$id} has been deleted
-	<br><br>
+	<br /><br />
 
 {/if}

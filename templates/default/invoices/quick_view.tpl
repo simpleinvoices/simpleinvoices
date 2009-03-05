@@ -76,7 +76,7 @@
 	{$customField.4}
 
 	<tr>	
-		<td><br></td>
+		<td><br /></td>
 	</tr>
 	<!-- Biller section -->
 
@@ -120,7 +120,7 @@
 	*}
 
 	<tr>
-		<td colspan=5><br></td>
+		<td colspan="5"><br /></td>
 	</tr>	
 	
 	<!-- Customer section -->
@@ -169,16 +169,16 @@
 {if $invoice.type_id == 1 }
 
 	        <tr>
-	                <td colspan=6><br></td>
+	                <td colspan="6"><br></td>
         	</tr>
 	        <tr>
-        	        <td colspan=6><b>{$LANG.description}</b></td>
+        	        <td colspan="6"><b>{$LANG.description}</b></td>
 	        </tr>
 	        <tr>
-	                <td colspan=6>{$invoiceItems.0.description|unescape}</td>
+	                <td colspan="6">{$invoiceItems.0.description|unescape}</td>
         	</tr>
 	        <tr>
-        	        <td colspan=6><br></td>
+        	        <td colspan="6"><br></td>
 	        </tr>
 	        <tr>
 	                <td></td>
@@ -198,10 +198,10 @@
 	        </tr>
 
         	<tr>
-                	<td colspan=6><br><br></td>
+                	<td colspan="6"><br /><br /></td>
 	        </tr>
         	<tr>
-                	<td colspan=6><b>{$preference.pref_inv_detail_heading}</b></td>
+                	<td colspan="6"><b>{$preference.pref_inv_detail_heading}</b></td>
 	        </tr>
 
 
@@ -311,7 +311,7 @@
 							<td width=50% class='details_screen'>{$customFieldLabels.product_cf2}: {$invoiceItem.product.custom_field2}</td>
 						</tr>
 						<tr>       
-                            <td width=50% class='details_screen'>{$customFieldLabels.product_cf3}: {$invoiceItem.product.custom_field3}</td>
+                            <td width="50%" class='details_screen'>{$customFieldLabels.product_cf3}: {$invoiceItem.product.custom_field3}</td>
 							<td width=50% class='details_screen'>{$customFieldLabels.product_cf4}: {$invoiceItem.product.custom_field4}</td>
 						</tr>
 					</table>
@@ -413,7 +413,7 @@
 </table>
 
 <br><br>
-	<table align=center>
+	<table align="center">
 	<tr class='details_screen'>
 		<td class='details_screen' colspan="16">
 		{$LANG.financial_status}
@@ -422,7 +422,7 @@
 	<tr class="account">
 		<td class="account" colspan="8">{$preference.pref_inv_wording} {$invoice.id}</td>
 		<td width=5%></td>
-		<td class="columnleft" width=5%></td>
+		<td class="columnleft" width="5%"></td>
 		<td class="account" colspan="6"><a href='index.php?module=customers&view=details&id={$customer.id}&action=view'>{$LANG.customer_account}</a></td>
 	</tr>
 	<tr>
@@ -446,4 +446,4 @@
 		<td class="account"><u>{$preference.pref_currency_sign}{$customerAccount.owing|number_format:2}</u></td>
 	</tr>
 	</table>
-<br>
+<br />

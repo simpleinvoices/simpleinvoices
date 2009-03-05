@@ -9,8 +9,8 @@
 *	 GPL v3 or above
 *}
 
-<FORM name="frmpost" ACTION="index.php?module=custom_fields&view=save&id={$smarty.get.id}"
- METHOD="POST" onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=custom_fields&view=save&id={$smarty.get.id}"
+ method="POST" onsubmit="return frmpost_Validator(this)">
 
 
 {if $smarty.get.action == "view" }
@@ -18,8 +18,6 @@
 	<h3>{$LANG.custom_fields} ::
 	<a href="index.php?module=custom_fields&view=details&id={$cf.cf_id}&action=edit">{$LANG.edit}</a></h3>
 	<hr />
-
-
 	
 	<table align="center">
 	<tr>
@@ -84,15 +82,8 @@
                 <img src="./images/common/cross.png" alt=""/>
                 {$LANG.cancel}
             </a>
-    
         </td>
     </tr>
- </table>
-
-
-
+</table>
 {/if}
-
-
-
 </form>

@@ -10,7 +10,7 @@
 	*	http://www.simpleinvoices.org
 	*/
 *}
-<input type="hidden" name="action" value="insert">
+<input type="hidden" name="action" value="insert" />
 <table align="center">
 <tr>
 <td>
@@ -20,7 +20,7 @@
 			<td class="details_screen">
 				{$LANG.biller_name}
 			</td>
-			<td input type="text" name="biller_block" size=25>
+			<td input type="text" name="biller_block" size="25">
 				{if $billers == null }
 			<p><em>{$LANG.no_billers}</em></p>
 		{else}
@@ -37,7 +37,7 @@
 			<td class="details_screen">
 				{$LANG.customer_name}
 			</td>
-			<td input type="text" name="customer_block" size=25>
+			<td input type="text" name="customer_block" size="25">
 				
 		{if $customers == null }
 			<p><em>{$LANG.no_customers}</em></p>

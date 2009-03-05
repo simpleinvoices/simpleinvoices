@@ -23,7 +23,7 @@
 
 <tr>
 	<td colspan=6 >
-<textarea input type=text class="editor" name="description" rows=10 cols=100 WRAP=nowrap></textarea></td>
+<textarea input type="text" class="editor" name="description" rows="10" cols="100" wrap="nowrap"></textarea></td>
 </tr>
 
 	{$show_custom_field.1}
@@ -80,25 +80,22 @@
 -->
 </table>
 <!-- </div> -->
-<br>
+<br />
 <table class="buttons" align="center">
-    <tr>
-        <td>
-            <button type="submit" class="positive" name="submit" value="{$LANG.save}">
-                <img class="button_img" src="./images/common/tick.png" alt=""/> 
-                {$LANG.save}
-            </button>
-            
-			<input type=hidden name="max_items" value="{$smarty.section.line.index}">
-        	<input type=hidden name="type" value="1">
-        	
-            <a href="./index.php?module=invoices&view=manage" class="negative">
-                <img src="./images/common/cross.png" alt=""/>
-                {$LANG.cancel}
-            </a>
-    
-        </td>
-    </tr>
- </table>
+	<tr>
+		<td>
+			<button type="submit" class="positive" name="submit" value="{$LANG.save}">
+				<img class="button_img" src="./images/common/tick.png" alt="" /> 
+				{$LANG.save}
+			</button>
+            		<input type="hidden" name="max_items" value="{$smarty.section.line.index}" />
+			<input type="hidden" name="type" value="1" />
+			<a href="./index.php?module=invoices&view=manage" class="negative">
+				<img src="./images/common/cross.png" alt="" />
+				{$LANG.cancel}
+			</a>
+		</td>
+	</tr>
+</table>
 
 </form>

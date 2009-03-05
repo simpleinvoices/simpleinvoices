@@ -31,7 +31,7 @@
 		<td>{$user.lang_enabled}</td>
 	</tr>
 </table>
-<br>
+<br />
 <table class="buttons" align="center">
     <tr>
         <td>
@@ -56,7 +56,6 @@
 
 <h3>{$LANG.edit}</h3>
 <table align="center">
-
 	<tr>
 		<td class="details_screen">{$LANG.email} 
 		<a 
@@ -105,35 +104,32 @@
 			</img> 
 			</a>
 		</td>
-		<td><input type=password name="password_field" value="" size=25></td>
+		<td>
+			<input type=password name="password_field" value="" size=25>
+		</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
+		<td>{html_options name=enabled options=$enabled selected=$user.enabled}</td>
+	</tr>
+</table>
+<br />
+<table class="buttons" align="center">
+	<tr>
 		<td>
-			{html_options name=enabled options=$enabled selected=$user.enabled}
+			<button type="submit" class="positive" name="save_user">
+			<img class="button_img" src="./images/common/tick.png" alt=""/> 
+			{$LANG.save}
+			</button>			<input type="hidden" name="op" value="edit_user">
+			<input type="hidden" name="id" value="{$user.id}">
+		</td>
+		<td>
+			<a href="./index.php?module=user&view=manage" class="negative">
+			<img src="./images/common/cross.png" alt=""/>
+			{$LANG.cancel}
+			</a>
 		</td>
 	</tr>
 </table>
-<br>
-	<table class="buttons" align="center">
-    <tr>
-        <td>
-            <button type="submit" class="positive" name="save_user">
-                <img class="button_img" src="./images/common/tick.png" alt=""/> 
-                {$LANG.save}
-            </button>
-
-            <input type="hidden" name="op" value="edit_user">
-            <input type="hidden" name="id" value="{$user.id}">
-		</td>
-		<td>
-            <a href="./index.php?module=user&view=manage" class="negative">
-                <img src="./images/common/cross.png" alt=""/>
-                {$LANG.cancel}
-            </a>
-    
-        </td>
-    </tr>
-	</table>
 {/if}
 </form>

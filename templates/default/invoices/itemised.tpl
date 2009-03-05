@@ -11,7 +11,7 @@
 */
 *}
 
-<form name="frmpost" action="index.php?module=invoices&view=save" method=POST onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=invoices&view=save" method="POST" onsubmit="return frmpost_Validator(this)">
 
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
         	<img src="images/common/gmail-loader.gif" alt="Loading ..."/> Loading ...
@@ -85,7 +85,7 @@
 							{/if}
 						</td>
 						<td>
-							<input type=text name="quantity{$smarty.section.line.index}" id="quantity{$smarty.section.line.index}" size="5"></td>
+							<input type=text name="quantity{$smarty.section.line.index}" id="quantity{$smarty.section.line.index}" size="5" /></td>
 						<td>
 										
 					{if $products == null }
@@ -124,8 +124,7 @@
 								name="unit_price{$smarty.section.line.index}" 
 								size="7"
 								value=""
-							>
-							</input>
+							/>
 						</td>	
 					</tr>
 							
@@ -172,12 +171,12 @@
 		</td>
 	</tr>
 	<tr>
-	        <td colspan=1 class="details_screen">{$LANG.notes}</td>
+	        <td colspan="1" class="details_screen">{$LANG.notes}</td>
 	</tr>
 	
 	<tr>
-	        <td colspan=4>
-	        	<textarea input type=text class="editor" name="note" rows=5 cols=50 WRAP=nowrap></textarea>
+	        <td colspan="4">
+	        	<textarea input type="text" class="editor" name="note" rows="5" cols="50" wrap="nowrap"></textarea>
 	        	
 	        	</td>
 	</tr>
@@ -201,7 +200,8 @@
 	</tr>
 	
 	<tr>
-	<td class="details_screen">{$LANG.inv_pref}</td><td input type=text name="preference_id">
+	<td class="details_screen">{$LANG.inv_pref}</td>
+	<td> <input type="text" name="preference_id" />
 	
 	{if $preferences == null }
 		<p><em>{$LANG.no_preferences}</em></p>
@@ -217,7 +217,7 @@
 	</tr>	
 	<tr>
 		<td class=""> 
-			<a class="cluetip" href="#"	rel="docs.php?t=help&p=invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="./images/common/help-small.png"></img> {$LANG.want_more_fields}</a>
+			<a class="cluetip" href="#"	rel="docs.php?t=help&p=invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="./images/common/help-small.png" /> {$LANG.want_more_fields}</a>
 		</td>
 	</tr>
 
@@ -230,17 +230,17 @@
 	    <tr>
 	        <td>
 	            <button type="submit" class="invoice_save positive" name="submit" value="{$LANG.save}">
-	                <img class="button_img" src="./images/common/tick.png" alt=""/> 
+	                <img class="button_img" src="./images/common/tick.png" alt="" /> 
 	                {$LANG.save}
 	            </button>
 	            
 			</td>
 			<td>
-				<input type=hidden id="max_items" name="max_items" value="{$smarty.section.line.index}">
-	        	<input type=hidden name="type" value="2">
+				<input type="hidden" id="max_items" name="max_items" value="{$smarty.section.line.index}" />
+	        	<input type="hidden" name="type" value="2" />
 	        	
 	            <a href="./index.php?module=invoices&view=manage" class="negative">
-	                <img src="./images/common/cross.png" alt=""/>
+	                <img src="./images/common/cross.png" alt="" />
 	                {$LANG.cancel}
 	            </a>
 	    

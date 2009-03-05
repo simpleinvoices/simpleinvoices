@@ -31,7 +31,7 @@
 
 			<tr>
 				<td><input type=text  id="quantity{$smarty.section.line.index}" name="quantity{$smarty.section.line.index}" size="5"></td>
-				</td><td input type=text name="description{$smarty.section.line.index}" size="50">
+				</td><td input type="text" name="description{$smarty.section.line.index}" size="50">
 				                
 			{if $products == null }
 				<p><em>{$LANG.no_products}</em></p>
@@ -55,7 +55,7 @@
              </tr>
                 
                 <tr class="text{$smarty.section.line.index} hide">
-      				<td colspan=3 ><textarea input type=text class="editor" name='description{$smarty.section.line.index}' rows=3 cols=80 WRAP=nowrap></textarea></td>
+      				<td colspan=3 ><textarea input type="text" class="editor" name='description{$smarty.section.line.index}' rows="3" cols="80" wrap="nowrap"></textarea></td>
 </tr>
 
         {/section}
@@ -70,14 +70,14 @@
 
 
 <tr>
-        <td colspan=3 class="details_screen">{$LANG.notes}</td>
+        <td colspan="3" class="details_screen">{$LANG.notes}</td>
 </tr>
 
 <tr>
-        <td colspan=3><textarea  input type="text" class="editor" height="60px" name="note" rows=5 cols=70 WRAP=nowrap></textarea></td>
+        <td colspan=3><textarea  input type="text" class="editor" height="60px" name="note" rows="5" cols="70" wrap="nowrap"></textarea></td>
 </tr>
 
-<tr><td class="details_screen">{$LANG.tax}</td><td input type="text" name="tax" size=15>
+<tr><td class="details_screen">{$LANG.tax}</td><td input type="text" name="tax" size="15">
 
 {if $taxes == null }
 	<p><em>{$LANG.no_taxes}</em></p>
@@ -115,30 +115,26 @@
 <!--Add more line items while in an itemeised invoice - Get style - has problems- wipes the current values of the existing rows - not good
 <tr>
 <td>
-<a href="?get_num_line_items=10">Add 5 more line items<a>
+<a href="?get_num_line_items=10">Add 5 more line items</a>
 </tr>
 -->
 </table>
 <!-- </div> -->
 <hr />
 <table class="buttons" align="center">
-    <tr>
-        <td>
-            <button type="submit" class="positive" name="submit" value="{$LANG.save}">
-                <img class="button_img" src="./images/common/tick.png" alt=""/> 
-                {$LANG.save}
-            </button>
-            
-			<input type=hidden name="max_items" value="{$smarty.section.line.index}">
-        	<input type=hidden name="type" value="3">
-        	
-            <a href="./index.php?module=invoices&view=manage" class="negative">
-                <img src="./images/common/cross.png" alt=""/>
-                {$LANG.cancel}
-            </a>
-    
-        </td>
-    </tr>
- </table>
-
+	<tr>
+	        <td>
+			<button type="submit" class="positive" name="submit" value="{$LANG.save}">
+			<img class="button_img" src="./images/common/tick.png" alt=""/> 
+			{$LANG.save}
+			</button>
+			<input type="hidden" name="max_items" value="{$smarty.section.line.index}">
+			<input type="hidden" name="type" value="3">
+			<a href="./index.php?module=invoices&view=manage" class="negative">
+				<img src="./images/common/cross.png" alt="" />
+				{$LANG.cancel}
+			</a>
+		</td>
+	</tr>
+</table>
 </form>

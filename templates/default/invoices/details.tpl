@@ -20,9 +20,9 @@
 
 <form name="frmpost" action="index.php?module=invoices&view=save" method="post">
 
-	<table align=center>
+	<table align="center">
 	<tr>
-		<td colspan=6 align=center></td>
+		<td colspan="6" align="center"></td>
 	</tr>
         <tr>
 		<td class='details_screen'>{$preference.pref_inv_wording} {$LANG.number_short}</td><td> {$invoice.id} </td>
@@ -30,9 +30,9 @@
 	<tr>
 	        <td class="details_screen">{$LANG.date_formatted}</td>
 	{if $invoice.id == null} 
-        	<td><input type="text" class="date-picker" name="date" id="date1" value='{$smarty.now|date_format:"%Y-%m-%d"}'></input></td>
+        	<td><input type="text" class="date-picker" name="date" id="date1" value='{$smarty.now|date_format:"%Y-%m-%d"}' /></td>
 	{else}
-        	<td><input type="text" class="date-picker" name="date" id="date1" value='{$invoice.calc_date}'></input></td>
+        	<td><input type="text" class="date-picker" name="date" id="date1" value='{$invoice.calc_date}' /></td>
 	{/if}
 	</tr>
 	<tr>
@@ -85,10 +85,10 @@
 
 {if $invoice.type_id == 1 }
 	        <tr>
-        	        <td colspan=6 class='details_screen'>{$LANG.description}</td>
+        	        <td colspan="6" class='details_screen'>{$LANG.description}</td>
 	        </tr>
 	        <tr>
-			<td colspan=6 ><textarea input type="text" class="editor" name="description0" rows=10 cols=70 WRAP=nowrap>{$invoiceItems.0.description|unescape}</textarea></td>
+			<td colspan="6" ><textarea input type="text" class="editor" name="description0" rows="10" cols="70" wrap="nowrap">{$invoiceItems.0.description|unescape}</textarea></td>
         	</tr>
 
 	 {$customFields.1}
@@ -101,10 +101,10 @@
 
 	
 		        <tr>       	         
-			<td class='details_screen'>{$LANG.gross_total}</td><td><input type="text" name="unit_price" value="{$invoiceItems.0.unit_price}" size=10 />
-			<input type="hidden" name="quantity0" value="1">
-			<input type="hidden" name="id0" value="{$invoiceItems.0.id}">
-			<input type="hidden" name="products0" value="{$invoiceItems.0.product_id}">
+			<td class='details_screen'>{$LANG.gross_total}</td><td><input type="text" name="unit_price" value="{$invoiceItems.0.unit_price}" size="10" />
+			<input type="hidden" name="quantity0" value="1" />
+			<input type="hidden" name="id0" value="{$invoiceItems.0.id}" />
+			<input type="hidden" name="products0" value="{$invoiceItems.0.product_id}" />
 			
 			</td>
 			
@@ -117,7 +117,7 @@
 
 
 		<tr>
-		<td colspan=6>
+		<td colspan="6">
 		
 		<table id="itemtable">
 			<tr>
@@ -172,15 +172,15 @@
 						{/if}
 						</td>
 						<td>
-							<input type="hidden" id='delete{$line}' name='delete{$line}' size="3">
+							<input type="hidden" id='delete{$line}' name='delete{$line}' size="3" />
 							<input 
 								type="text" 
 								name='quantity{$line}' 
 								id='quantity{$line}' 
 								value='{$invoiceItem.quantity|number_format:2}' 
 								size="10"
-							>
-							<input type="hidden" name='line_item{$line}' id='line_item{$line}' value='{$invoiceItem.id}'> 
+							/>
+							<input type="hidden" name='line_item{$line}' id='line_item{$line}' value='{$invoiceItem.id}' /> 
 						</td>
 						<td>
 					                
@@ -215,7 +215,7 @@
 							</td>
 						{/section}
 						<td>
-							<input id="unit_price{$line}" name="unit_price{$line}" size="7" value="{$invoiceItem.unit_price|number_format:2}"></input>
+							<input id="unit_price{$line}" name="unit_price{$line}" size="7" value="{$invoiceItem.unit_price|number_format:2}" />
 						</td>
 			        </tr>
 		            	<tr colspan="6" class="notem">
@@ -306,32 +306,29 @@
 	<!-- addition close table tag to close invoice itemised/consulting if it has a note -->
 	</table>
 
-<br>
+<br />
 <table class="buttons" align="center">
-    <tr>
-        <td>
-            <button type="submit" class="invoice_save positive" name="submit" value="{$LANG.save}">
-                <img class="button_img" src="./images/common/tick.png" alt=""/> 
-                {$LANG.save}
-            </button>
-
-		{if $invoice.id == null} 
- 			<input type="hidden" name="action" value="insert" />
-		{else}
-			<input type="hidden" name="id" value="{$invoice.id}" />
- 			<input type="hidden" name="action" value="edit" />
-		{/if}
-			<input type="hidden" name="type" value="{$invoice.type_id}";
-            <input type="hidden" name="op" value="insert_preference" />
-        	<input type="hidden" name="max_items" value="{$lines}" />
-        	
-            <a href="./index.php?module=invoices&view=manage" class="negative">
-                <img src="./images/common/cross.png" alt=""/>
-                {$LANG.cancel}
-            </a>
-    
-        </td>
-    </tr>
- </table>
+	<tr>
+		<td>
+			<button type="submit" class="invoice_save positive" name="submit" value="{$LANG.save}">
+				<img class="button_img" src="./images/common/tick.png" alt="" /> 
+				{$LANG.save}
+			</button>
+			{if $invoice.id == null} 
+				<input type="hidden" name="action" value="insert" />
+			{else}
+				<input type="hidden" name="id" value="{$invoice.id}" />
+				<input type="hidden" name="action" value="edit" />
+			{/if}
+			<input type="hidden" name="type" value="{$invoice.type_id}" />
+			<input type="hidden" name="op" value="insert_preference" />
+			<input type="hidden" name="max_items" value="{$lines}" />
+			<a href="./index.php?module=invoices&view=manage" class="negative">
+				<img src="./images/common/cross.png" alt="" />
+				{$LANG.cancel}
+			</a>
+		</td>
+	</tr>
+</table>
  	
 </form>

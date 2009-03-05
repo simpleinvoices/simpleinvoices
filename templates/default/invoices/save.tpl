@@ -15,15 +15,15 @@
 *}
 
 {if $saved == true }
-	<br>
+	<br />
 	 {$LANG.save_invoice_success}
-	<br>
-	<br>
+	<br />
+	<br />
 {else}
-	<br>
+	<br />
 	 {$LANG.save_invoice_failure}
-	<br>
-	<br>
+	<br />
+	<br />
 {/if}
 
-<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=invoices&view=quick_view&id={$id}>
+<meta http-equiv=refresh content=2;URL=index.php?module=invoices&view=quick_view&id={$id}>
