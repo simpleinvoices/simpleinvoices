@@ -10,12 +10,13 @@ body {
 table {
 	background-color:#E5E5E5;
 	border-collapse:collapse;
-	border-color:#000;
 }
 
 td { 
 	font-family: "Lucida Grande", verdana, arial, helvetica, sans-serif; 
-	text-align:left; }
+	text-align:left; 
+	border:1px solid #000; 
+	padding:7px; }
 
 .col ul {
 	border:1px solid #000;
@@ -144,7 +145,7 @@ div#Container {
 
 .bottom {
 	height:7px; }
-	
+
 input,select {
 	border:1px solid #9096A2;
 	width:auto; }

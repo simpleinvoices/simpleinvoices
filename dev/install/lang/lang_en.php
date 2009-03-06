@@ -30,6 +30,7 @@ $LANG['xslt_false'] = "You need PHP built with xslt support to generate document
 $LANG['submit'] = "Submit";
 $LANG['reset'] = "Reset";
 $LANG['continue'] = "continue";
+$LANG['reload'] = "Reload";
 
 $LANG['DBServer'] = "Database Server:";
 $LANG['DBHost'] = "Database Host:";

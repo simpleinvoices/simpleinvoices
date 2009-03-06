@@ -30,6 +30,7 @@ $LANG['xslt_false'] = "Vous avez besoin de l'option xslt pour g&eacute;n&eacute;
 $LANG['submit'] = "Envoyer";
 $LANG['reset'] = "Annuler";
 $LANG['continue'] = "continuer";
+$LANG['reload'] = "Reload";
 
 $LANG['DBServer'] = "Serveur de la BD:";
 $LANG['DBHost'] = "Host de la BD:";
