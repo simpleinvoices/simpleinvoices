@@ -300,11 +300,11 @@ INSERT INTO "si_preferences" ("pref_id", "domain_id", "pref_description", "pref_
 INSERT INTO "si_preferences" ("pref_id", "domain_id", "pref_description", "pref_currency_sign", "pref_inv_heading", "pref_inv_wording", "pref_inv_detail_heading", "pref_inv_detail_line", "pref_inv_payment_method", "pref_inv_payment_line1_name", "pref_inv_payment_line1_value", "pref_inv_payment_line2_name", "pref_inv_payment_line2_value", "pref_enabled") VALUES
 (2, 1, 'Invoice - no payment details', '$', 'Invoice', 'Invoice', NULL, '', '', '', '', '', '', '1');
 INSERT INTO "si_preferences" ("pref_id", "domain_id", "pref_description", "pref_currency_sign", "pref_inv_heading", "pref_inv_wording", "pref_inv_detail_heading", "pref_inv_detail_line", "pref_inv_payment_method", "pref_inv_payment_line1_name", "pref_inv_payment_line1_value", "pref_inv_payment_line2_name", "pref_inv_payment_line2_value", "pref_enabled") VALUES
-(3, 1, 'Receipt - default', '$', 'Receipt', 'Receipt', 'Details', '<br>This transaction has been paid in full, please keep this receipt as proof of purchase.<br> Thank you', '', '', '', '', '', '1');
+(3, 1, 'Receipt - default', '$', 'Receipt', 'Receipt', 'Details', '<br />This transaction has been paid in full, please keep this receipt as proof of purchase.<br /> Thank you', '', '', '', '', '', '1');
 INSERT INTO "si_preferences" ("pref_id", "domain_id", "pref_description", "pref_currency_sign", "pref_inv_heading", "pref_inv_wording", "pref_inv_detail_heading", "pref_inv_detail_line", "pref_inv_payment_method", "pref_inv_payment_line1_name", "pref_inv_payment_line1_value", "pref_inv_payment_line2_name", "pref_inv_payment_line2_value", "pref_enabled") VALUES
-(4, 1, 'Estimate - default', '$', 'Estimate', 'Estimate', 'Details', '<br>This is an estimate of the final value of services rendered.<br>Thank you', '', '', '', '', '', '1');
+(4, 1, 'Estimate - default', '$', 'Estimate', 'Estimate', 'Details', '<br />This is an estimate of the final value of services rendered.<br />Thank you', '', '', '', '', '', '1');
 INSERT INTO "si_preferences" ("pref_id", "domain_id", "pref_description", "pref_currency_sign", "pref_inv_heading", "pref_inv_wording", "pref_inv_detail_heading", "pref_inv_detail_line", "pref_inv_payment_method", "pref_inv_payment_line1_name", "pref_inv_payment_line1_value", "pref_inv_payment_line2_name", "pref_inv_payment_line2_value", "pref_enabled") VALUES
-(5, 1, 'Quote - default', '$', 'Quote', 'Quote', 'Details', '<br>This is a quote of the final value of services rendered.<br>Thank you', '', '', '', '', '', '1');
+(5, 1, 'Quote - default', '$', 'Quote', 'Quote', 'Details', '<br />This is a quote of the final value of services rendered.<br />Thank you', '', '', '', '', '', '1');
 
 
 CREATE TABLE IF NOT EXISTS "si_products" (

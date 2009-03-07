@@ -23,7 +23,7 @@ INSERT INTO `si_customers` (`id`, `domain_id`, `attention`, `name`, `street_addr
 --
 
 INSERT INTO `si_invoices` (`id`, `domain_id`, `biller_id`, `customer_id`, `type_id`, `preference_id`, `date`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `note`) VALUES
-(1, 1, 4, 3, 2, 1, '2008-12-30 00:00:00', NULL, NULL, NULL, NULL, '<br>');
+(1, 1, 4, 3, 2, 1, '2008-12-30 00:00:00', NULL, NULL, NULL, NULL, '<br />');
 
 
 INSERT INTO `si_invoice_items` (`id`, `invoice_id`, `quantity`, `product_id`, `unit_price`, `tax_amount`, `gross_total`, `description`, `total`) VALUES
