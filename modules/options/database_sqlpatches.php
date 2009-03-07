@@ -45,10 +45,10 @@ function runPatches() {
 	$sth = dbQuery($sql);
 	$rows = $sth->fetchAll();
 	$display_block .= <<<EOD
-		<br>
+		<br />
 		<b>Simple Invoices :: Database Upgrade Manager</b><br />
 		<hr />
-		<br>The database patches have now been applied. You can now start working with Simple Invoices.<br />
+		<br />The database patches have now been applied. You can now start working with Simple Invoices.<br />
 		<p align=middle><br /><a href="index.php"><font color="green">HOME</font></a></p>
 <table align='center'>
 EOD;
@@ -76,11 +76,11 @@ EOD;
 
 	} else {
 
-		$display_block .= "\n<tr><td><br><br>Step 1 - This is the first time Database Updates has been run<br></td></tr>";
+		$display_block .= "\n<tr><td><br /><br />Step 1 - This is the first time Database Updates has been run<br /></td></tr>";
 		
 		initialise_sql_patch();
 		
-		$display_block .= "\n<tr><td><br>Now that the Database upgrade table has been initialised, please go back to the Database Upgrade Manger page by clicking <a href='index.php?module=options&amp;view=database_sqlpatches'>HERE</a> to run the remaining patches</td></tr>";
+		$display_block .= "\n<tr><td><br />Now that the Database upgrade table has been initialised, please go back to the Database Upgrade Manger page by clicking <a href='index.php?module=options&amp;view=database_sqlpatches'>HERE</a> to run the remaining patches</td></tr>";
 		$display_block .= "\n</table>";
 
 	}
@@ -94,10 +94,10 @@ EOD;
 function donePatches() {
 		$display_block = "<table align='center'>";
 		$display_block .= <<<EOD
-		<br>
+		<br />
 		<b>Simple Invoices :: Database Upgrade Manager</b><br />
 		<hr />
-		<tr><td><br>The database patches are uptodate. You can continue working with Simple Invoices.<br /><p align=middle><br /><a href="index.php"><font color="green">HOME</font></a></p></tr>
+		<tr><td><br />The database patches are uptodate. You can continue working with Simple Invoices.<br /><p align=middle><br /><a href="index.php"><font color="green">HOME</font></a></p></tr>
 		</table>
 
 EOD;
@@ -116,16 +116,16 @@ function listPatches() {
 		$display_block = <<<EOD
 		<b>Simple Invoices :: Database Upgrade Manager</b><br /><br />
 		
-		Your version of Simple Invoices has been upgraded<br><br>  
-		With this new release there are database patches that need to be applied<br><br>
+		Your version of Simple Invoices has been upgraded<br /><br />  
+		With this new release there are database patches that need to be applied<br /><br />
 		
 		<hr></hr>
 
 		<table align="center">
-			<tr><td><br>The list below describes which patches have and have not been applied to the database, the aim is to have them all applied.  If there are patches that have not been applied to the Simple Invoices database, please run the Update database by clicking update </td></tr>
-			<tr align="center"><td><p class='align_center'><br><a href='index.php?case=run'>UPDATE</a></p></td></tr>
+			<tr><td><br />The list below describes which patches have and have not been applied to the database, the aim is to have them all applied.  If there are patches that have not been applied to the Simple Invoices database, please run the Update database by clicking update </td></tr>
+			<tr align="center"><td><p class='align_center'><br /><a href='index.php?case=run'>UPDATE</a></p></td></tr>
 		</table>
-		<br>
+		<br />
 		<a href="docs.php?t=help&amp;p=text" rel="gb_page_center[450, 450]">
 		<img src="./images/common/important.png"></img><font color="red">Warning:</font>
 		</a>
@@ -229,7 +229,7 @@ function initialise_sql_patch() {
 	$sql_patch_init = "CREATE TABLE ".TB_PREFIX."sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 255 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) TYPE = MYISAM ";
 	dbQuery($sql_patch_init) or die(end($dbh->errorInfo()));
 
-	$display_block = "<tr><td>Step 2 - The SQL patch table has been created<br></td></tr>";
+	$display_block = "<tr><td>Step 2 - The SQL patch table has been created<br /></td></tr>";
 
 	echo $display_block;
 
@@ -238,7 +238,7 @@ function initialise_sql_patch() {
 VALUES ('','1','Create ".TB_PREFIX."sql_patchmanger table','20060514', :patch)";
 	dbQuery($sql_insert, ':patch', $sql_patch_init) or die(end($dbh->errorInfo()));
 
-	$display_block2 = "<tr><td>Step 3 - The SQL patch has been inserted into the SQL patch table<br></td></tr>";
+	$display_block2 = "<tr><td>Step 3 - The SQL patch has been inserted into the SQL patch table<br /></td></tr>";
 	
 	echo $display_block2;
 }

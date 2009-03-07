@@ -30,3 +30,4 @@ $smarty -> assign("cfs",$cfs);
 
 $smarty -> assign('pageActive', 'custom_field');
 $smarty -> assign('active_tab', '#setting');
+?>

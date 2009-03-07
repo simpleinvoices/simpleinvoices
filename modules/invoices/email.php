@@ -115,3 +115,4 @@ $smarty -> assign('preferences',$preference);
 
 $smarty -> assign('pageActive', 'invoice');
 $smarty -> assign('active_tab', '#money');
+?>

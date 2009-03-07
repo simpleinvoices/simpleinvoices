@@ -19,3 +19,4 @@ $smarty -> assign('customFieldLabel',$customFieldLabel);
 
 $smarty -> assign('pageActive', 'product_manage');
 $smarty -> assign('active_tab', '#product');
+?>

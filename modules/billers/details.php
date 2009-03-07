@@ -48,3 +48,4 @@ $smarty->assign('customFieldLabel', $customFieldLabel);
 
 $smarty -> assign('pageActive', 'biller');
 $smarty -> assign('active_tab', '#people');
+?>

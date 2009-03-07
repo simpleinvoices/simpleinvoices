@@ -147,3 +147,4 @@ $smarty -> assign('saved',$saved);
 
 $smarty -> assign('pageActive', 'preference');
 $smarty -> assign('active_tab', '#setting');
+?>

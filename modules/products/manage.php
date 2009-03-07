@@ -12,3 +12,4 @@ $smarty -> assign("number_of_rows",$number_of_rows);
 
 $smarty -> assign('pageActive', 'product_manage');
 $smarty -> assign('active_tab', '#product');
+?>

@@ -17,3 +17,4 @@ $smarty -> assign('taxes',$taxes);
 
 $smarty -> assign('pageActive', 'product_add');
 $smarty -> assign('active_tab', '#product');
+?>

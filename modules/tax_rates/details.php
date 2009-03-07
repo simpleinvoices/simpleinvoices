@@ -25,3 +25,4 @@ $smarty -> assign("types",$types);
 
 $smarty -> assign('pageActive', 'tax_rate');
 $smarty -> assign('active_tab', '#setting');
+?>

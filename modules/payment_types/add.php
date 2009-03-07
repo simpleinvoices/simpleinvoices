@@ -7,3 +7,4 @@ checkLogin();
 
 $smarty -> assign('pageActive', 'payment_type');
 $smarty -> assign('active_tab', '#setting');
+?>

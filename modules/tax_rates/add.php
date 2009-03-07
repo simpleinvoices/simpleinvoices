@@ -16,3 +16,4 @@ $smarty -> assign('save',$save);
 
 $smarty -> assign('pageActive', 'tax_rate');
 $smarty -> assign('active_tab', '#setting');
+?>

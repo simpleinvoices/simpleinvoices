@@ -171,10 +171,4 @@ $count = $sth_count_rows->rowCount();
 	$xml .= "</rows>";
 
 echo $xml;
-
-
-
-
-
-
 ?> 

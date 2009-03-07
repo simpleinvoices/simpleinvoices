@@ -135,3 +135,4 @@ $smarty->assign('years', $years);
 
 $smarty -> assign('pageActive', 'report');
 $smarty -> assign('active_tab', '#home');
+?>

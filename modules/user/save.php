@@ -89,3 +89,4 @@ $smarty -> assign('saved',$saved);
 
 $smarty -> assign('pageActive', 'user');
 $smarty -> assign('active_tab', '#people');
+?>

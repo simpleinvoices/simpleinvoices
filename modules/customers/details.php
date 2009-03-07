@@ -22,9 +22,7 @@ checkLogin();
 
 #get the invoice id
 $customer_id = $_GET['id'];
-
 $customer = getCustomer($customer_id);
-
 $customer['wording_for_enabled'] = $customer['enabled']==1?$LANG['enabled']:$LANG['disabled'];
 
 
@@ -41,13 +39,11 @@ $stuff['owing'] = $stuff['total'] - $stuff['paid'];
 #get custom field labels
 
 
-
 $customFieldLabel = getCustomFieldLabels();
 $invoices = getCustomerInvoices($customer_id);
 
 
 //$customFieldLabel = getCustomFieldLabels("biller");
-
 $smarty -> assign("stuff",$stuff);
 $smarty -> assign('customer',$customer);
 $smarty -> assign('invoices',$invoices);
@@ -55,3 +51,4 @@ $smarty -> assign('customFieldLabel',$customFieldLabel);
 
 $smarty -> assign('pageActive', 'customer');
 $smarty -> assign('active_tab', '#people');
+?>

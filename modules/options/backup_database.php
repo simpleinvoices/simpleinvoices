@@ -51,4 +51,4 @@ EOD;
 }
 
 $smarty->assign('display_block', $display_block);
-
+?>

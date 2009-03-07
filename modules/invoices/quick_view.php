@@ -72,6 +72,4 @@ $smarty -> assign("invoice",$invoice);
 $smarty -> assign("wordprocessor",$config->export->wordprocessor);
 $smarty -> assign("spreadsheet",$config->export->spreadsheet);
 $smarty -> assign("customerAccount",$customerAccount);
-
-
 ?>

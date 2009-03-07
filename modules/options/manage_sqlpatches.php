@@ -10,3 +10,4 @@ getRicoLiveGrid("rico_sqlpatches","{ type:'number', decPlaces:0, ClassName:'alig
 
 $smarty -> assign('pageActive', 'sqlpatch');
 $smarty -> assign('active_tab', '#setting');
+?>

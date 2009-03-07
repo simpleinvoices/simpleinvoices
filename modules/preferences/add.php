@@ -12,3 +12,4 @@ $smarty -> assign('save',$save);
 
 $smarty -> assign('pageActive', 'preference');
 $smarty -> assign('active_tab', '#setting');
+?>

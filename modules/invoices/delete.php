@@ -20,19 +20,14 @@ checkLogin();
 
 #get the invoice id
 $invoice_id = $_GET['id'];
-
 $invoice = getInvoice($invoice_id);
 $preference = getPreference($invoice['preference_id']);
-
 $defaults = getSystemDefaults();
-
 $invoicePaid = calc_invoice_paid($invoice_id);
-
 $invoiceItems = invoice::getInvoiceItems($invoice_id);
 
 $smarty -> assign("invoice",$invoice);
 $smarty -> assign("preference",$preference);
-
 $smarty -> assign("defaults",$defaults);
 $smarty -> assign("invoicePaid",$invoicePaid);
 $smarty -> assign("invoiceItems",$invoiceItems);
@@ -72,11 +67,10 @@ if ( ($_GET['stage'] == 2 ) AND ($_POST['doDelete'] == 'y') ) {
 		$dbh->commit();
 	}
 	//TODO - what about the stuff in the products table for the total style invoices?
-	echo "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=invoices&view=manage>";
+	echo "<meta http-equiv=refresh content=2;URL=index.php?module=invoices&view=manage>";
 
 }
 
-
-
 $smarty -> assign('pageActive', 'invoice');
 $smarty -> assign('active_tab', '#money');
+?>

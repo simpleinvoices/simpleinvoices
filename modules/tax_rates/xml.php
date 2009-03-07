@@ -97,3 +97,4 @@ foreach ($tax as $row) {
 $xml .= "</rows>";
 
 echo $xml;
+?>

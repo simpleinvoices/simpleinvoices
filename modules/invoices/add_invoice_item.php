@@ -34,3 +34,4 @@ $smarty -> assign("type",$type);
 
 $smarty -> assign('pageActive', 'invoice');
 $smarty -> assign('active_tab', '#money');
+?>

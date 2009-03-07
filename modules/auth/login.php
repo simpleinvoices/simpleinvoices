@@ -131,3 +131,4 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 }
 
 $smarty->assign("errorMessage",$errorMessage);
+?>

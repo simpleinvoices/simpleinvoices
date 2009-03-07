@@ -94,8 +94,4 @@ foreach ($preferences as $row) {
 $xml .= "</rows>";
 
 echo $xml;
-
-
-
-
 ?> 

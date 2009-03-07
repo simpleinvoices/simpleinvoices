@@ -47,3 +47,4 @@ $smarty -> assign("lines",count($invoiceItems));
 
 $smarty -> assign('pageActive', 'invoice');
 $smarty -> assign('active_tab', '#money');
+?>

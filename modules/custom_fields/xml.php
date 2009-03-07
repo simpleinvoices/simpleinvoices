@@ -8,8 +8,6 @@ $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "cf_id" ;
 $limit = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
 $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 
-
-
 //SC: Safety checking values that will be directly subbed in
 if (intval($start) != $start) {
 	$start = 0;
@@ -80,9 +78,6 @@ if (in_array($sort, $validFields)) {
 		$number_of_rows = $i;
 	}
 	
-	
-	 
-
 	$xml .= "<rows>";
 	$xml .= "<page>$page</page>";
 	$xml .= "<total>$count</total>";
@@ -101,8 +96,4 @@ if (in_array($sort, $validFields)) {
 	$xml .= "</rows>";
 
 echo $xml;
-
-
-
-
 ?> 

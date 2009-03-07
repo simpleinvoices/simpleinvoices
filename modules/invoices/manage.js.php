@@ -1,4 +1,4 @@
-<script>
+<script type="text/javascript">
 {literal}
 			var columns = 8;
 			var padding = 12;

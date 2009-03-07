@@ -46,13 +46,13 @@ if (  $op === 'edit_custom_field' ) {
 		}
 
 		//header( 'refresh: 2; url=manage_custom_fields.php' );
-		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=custom_fields&view=manage>";
+		$refresh_total = "<meta http-equiv=refresh content=2;URL=index.php?module=custom_fields&view=manage>";
 	}
 
 	else if (isset($_POST['cancel'])) {
 
 		//header( 'refresh: 0; url=manage_custom_fields.php' );
-		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=0;URL=index.php?module=custom_fields&view=manage>";
+		$refresh_total = "<meta http-equiv=refresh content=0;URL=index.php?module=custom_fields&view=manage>";
 	}
 
 
@@ -65,3 +65,4 @@ $smarty -> assign('refresh_total',$refresh_total);
 
 $smarty -> assign('pageActive', 'custom_field');
 $smarty -> assign('active_tab', '#setting');
+?>

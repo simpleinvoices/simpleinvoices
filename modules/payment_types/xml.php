@@ -95,8 +95,4 @@ foreach ($payment_types as $row) {
 $xml .= "</rows>";
 
 echo $xml;
-
-
-
-
 ?> 

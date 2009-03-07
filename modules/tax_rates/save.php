@@ -38,3 +38,4 @@ $smarty -> assign('refresh_total',$refresh_total);
 
 $smarty -> assign('pageActive', 'tax_rate');
 $smarty -> assign('active_tab', '#setting');
+?>

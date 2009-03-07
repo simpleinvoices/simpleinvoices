@@ -20,3 +20,4 @@ $smarty -> assign("saved",$saved);
 
 $smarty -> assign('pageActive', 'system_default');
 $smarty -> assign('active_tab', '#setting');
+?>
