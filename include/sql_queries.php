@@ -24,7 +24,7 @@ function db_connector() {
 	*/
 	$pdoAdapter = substr($config->database->adapter, 4);
 	
-	if(defined('PDO::MYSQL_ATTR_INIT_COMMAND') AND $pdoAdpater == "mysql")
+	if(defined('PDO::MYSQL_ATTR_INIT_COMMAND') AND $pdoAdapter == "mysql")
 	{ 
 		$pdoAdapter ="mysql_utf8";
 	}
