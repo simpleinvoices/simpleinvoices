@@ -139,7 +139,7 @@ $LANG['writingNoSuccess'] = "Impossible to write in the file";
 $LANG['thanks'] = "Thank you to use Simple Invoices";
 
 //troble
-$LANG['trouble'] = "We are sorry.<br> Something is wrong. Contact us.Click <b>HERE</b> to see if you can find help in our troubleshooter."
+$LANG['trouble'] = "We are sorry.<br /> Something is wrong. Contact us.Click <b>HERE</b> to see if you can find help in our troubleshooter."
 
 ?>
 

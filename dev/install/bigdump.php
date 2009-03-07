@@ -441,7 +441,7 @@ if (!$error && isset($_REQUEST["fn"]))
   if ((!$gzipmode && !$file=fopen($_REQUEST["fn"],"rt")) || ($gzipmode && !$file=gzopen($_REQUEST["fn"],"rt")))
   { echo ("<p class=\"error\">Can't open ".$_REQUEST["fn"]." for import</p>\n");
     echo ("<p>Please, check that your dump file name contains only alphanumerical characters, and rename it accordingly, for example: ".
-           $_REQUEST["fn"]." .<br>Or, you have to upload the ".$_REQUEST["fn"]." to the server</p>\n");
+           $_REQUEST["fn"]." .<br />Or, you have to upload the ".$_REQUEST["fn"]." to the server</p>\n");
     $error=true;
   }
 
