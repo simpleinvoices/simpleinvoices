@@ -104,7 +104,7 @@ class matrix_invoice
 			$attr3 = explode("-",$attr3);
 			$attr3 = $attr3[2];
 			//echo "Attr3 : ".$attr3;
-			//echo "<br><br>";
+			//echo "<br /><br />";
 
 		$tax = getTaxRate($tax_id);
 		$product = getProduct($product_id);
@@ -156,7 +156,7 @@ class matrix_invoice
 			$attr3 = explode("-",$attr3);
 			$attr3 = $attr3[2];
 			//echo "Attr3 : ".$attr3;
-			//echo "<br><br>";
+			//echo "<br /><br />";
 
 
 		$product = getProduct($product_id);

@@ -78,7 +78,7 @@
 	</tr>
 	{*	{showCustomFields categorieId="3" itemId=""} *}
 </table>
-<br>
+<br />
 <table class="buttons" align="center">
 	<tr>
 		<td>

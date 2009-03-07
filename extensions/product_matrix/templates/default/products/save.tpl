@@ -15,15 +15,15 @@
 *}
 
 {if $saved == true }
-	<br>
+	<br />
 	 {$LANG.save_product_success}
-	<br>
-	<br>
+	<br />
+	<br />
 {else}
-	<br>
+	<br />
 	 {$LANG.save_product_failure}
-	<br>
-	<br>
+	<br />
+	<br />
 {/if}
 
 {if $smarty.post.cancel == null }

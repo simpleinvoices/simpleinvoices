@@ -34,7 +34,7 @@
 
 
 {$LANG.quick_view_of} {$preference.pref_inv_wording} {$invoice.id}
-<br>
+<br />
 
 
 
@@ -56,18 +56,18 @@
 <!-- #PDF end -->
 	<!-- Invoice Summary section -->
 
-		<b>{$preference.pref_inv_wording} {$LANG.summary}:</b><br>
+		<b>{$preference.pref_inv_wording} {$LANG.summary}:</b><br />
 		{$preference.pref_inv_wording} {$LANG.number_short}: {$invoice.id} :: {$preference.pref_inv_wording} {$LANG.date}: {$invoice.date}
 	{$customField.1}
 	{$customField.2}
 	{$customField.3}
 	{$customField.4}
-<br>
-<br>
+<br />
+<br />
 	<!-- Biller section -->
 
-		<b>{$LANG.biller}:</b> {$biller.name}<br>
-		<b>{$LANG.customer}:</b> {$customer.name}<br>
+		<b>{$LANG.biller}:</b> {$biller.name}<br />
+		<b>{$LANG.customer}:</b> {$customer.name}<br />
 
 	<table width="100%">
 {if $invoice.type_id == 1 }
@@ -79,7 +79,7 @@
 	                <td colspan=6>{$invoiceItems.0.description}</td>
         	</tr>
 	        <tr>
-        	        <td colspan=6><br></td>
+        	        <td colspan=6><br /></td>
 	        </tr>
 	        <tr>
 	                <td></td>
@@ -99,7 +99,7 @@
 	        </tr>
 
         	<tr>
-                	<td colspan=6><br><br></td>
+                	<td colspan=6><br /><br /></td>
 	        </tr>
         	<tr>
                 	<td colspan=6><b>{$preference.pref_inv_detail_heading}</b></td>
@@ -215,7 +215,7 @@
 				<td colspan="6" class='details_screen consulting'>{$invoiceItem.description|truncate:"..."}</td>
 			</tr>
 			<tr class='consulting' >	
-				<td colspan="6" class='details_screen consulting'>{$LANG.description}:<br>{$invoiceItem.description}</td>
+				<td colspan="6" class='details_screen consulting'>{$LANG.description}:<br />{$invoiceItem.description}</td>
 			</tr>
 		{/if}
 	{/if}
@@ -242,9 +242,9 @@
 		</tr>
 		</table>
 		{/if}
-<br>
-		{$LANG.total} {$LANG.tax} {$LANG.included}: {$preference.pref_currency_sign}{$invoice.total_tax|number_format:2}<br>
-		<b>{$preference.pref_inv_wording} {$LANG.amount}</b>: <u>{$preference.pref_currency_sign}{$invoice.total|number_format:2}</u><br>
+<br />
+		{$LANG.total} {$LANG.tax} {$LANG.included}: {$preference.pref_currency_sign}{$invoice.total_tax|number_format:2}<br />
+		<b>{$preference.pref_inv_wording} {$LANG.amount}</b>: <u>{$preference.pref_currency_sign}{$invoice.total|number_format:2}</u><br />
 	</tr>	
 {/if}
 
@@ -252,11 +252,11 @@
 </table>
 
 <hr/>
-		<b>{$LANG.account_info}</b><br>
+		<b>{$LANG.account_info}</b><br />
 		{$LANG.total}: 
 		{$preference.pref_currency_sign}{$invoice.total|number_format:2} :: 
 		<a href='index.php?module=payments&view=manage&id={$invoice.id}'>{$LANG.paid}:</a> {$preference.pref_currency_sign}{$invoice.paid|number_format:2} :: 
 		{$LANG.owing}: <u>{$preference.pref_currency_sign}{$invoice.owing|number_format:2}</u> ::
 		{$LANG.age}: {$invoice_age} 
-		<br>
+		<br />
 <hr/>

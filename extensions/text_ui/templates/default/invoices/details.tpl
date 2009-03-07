@@ -18,8 +18,8 @@
 </div>
 <b>You are editing {$preference.pref_inv_wording} {$invoice.id}</b>
 
-<br>
---<br>
+<br />
+--<br />
 
 
 
@@ -272,7 +272,7 @@
 	</table>
 
 --
-<br>
+<br />
 	<input type="hidden" name="action" value="edit">
 	<input type="hidden" name="type" value="{$invoice.type_id}";
 

@@ -64,16 +64,16 @@ if ($op === 'edit_product' ) {
 		{
 			if ($value == $_POST['attribute_'.$i])
 			{
-			echo "<br><br><b>".$_POST['attribute_'.$i]."in db</b><br>";
+			echo "<br /><br /><b>".$_POST['attribute_'.$i]."in db</b><br />";
 			}
-			echo $key." ".$value>"<br>";
+			echo $key." ".$value>"<br />";
 		}
 
 		print_r($attributes) ;
 */
  		if($_POST['attribute_'.$i] != "")
 		{
-			#echo "<br> Atttr:".$_POST['attribute_'.$i]." is not empty";
+			#echo "<br /> Atttr:".$_POST['attribute_'.$i]." is not empty";
 	
 			$sql = "select count(id) as count from ".TB_PREFIX."products_matrix where product_id = ".$_GET['id']." and product_attribute_number = ".$i;
 			$count_result = dbQuery($sql);
@@ -85,7 +85,7 @@ if ($op === 'edit_product' ) {
 
 			if($number_of_rows > 0)
 			{	
-				#echo "<br> Atttr:".$_POST['attribute_'.$i]." updating";
+				#echo "<br /> Atttr:".$_POST['attribute_'.$i]." updating";
 				$sql = "UPDATE
 								".TB_PREFIX."products_matrix
 				SET
@@ -103,7 +103,7 @@ if ($op === 'edit_product' ) {
 			} 
 			if($number_of_rows == 0)
 			{
-				#echo "<br> Atttr:".$_POST['attribute_'.$i]." insert";
+				#echo "<br /> Atttr:".$_POST['attribute_'.$i]." insert";
 				$sql = "INSERT into
 					".TB_PREFIX."products_matrix
 				VALUES
@@ -123,7 +123,7 @@ if ($op === 'edit_product' ) {
 		} #!empty - end
  		if($_POST['attribute_'.$i] =="")
 		{
-			#echo "<br> Attr:".$_POST['attribute_'.$i]." is empty";
+			#echo "<br /> Attr:".$_POST['attribute_'.$i]." is empty";
 /*
 			function checkRows()
 			{
@@ -135,7 +135,7 @@ if ($op === 'edit_product' ) {
 			if(checkRows())
 			{	
 */
-				#echo "<br>Deleting  Attr:".$_POST['attribute_'.$i];
+				#echo "<br />Deleting  Attr:".$_POST['attribute_'.$i];
 				$sql = "DELETE FROM
 								".TB_PREFIX."products_matrix
 				WHERE 

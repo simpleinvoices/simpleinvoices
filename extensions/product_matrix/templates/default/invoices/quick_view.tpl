@@ -34,7 +34,7 @@
 
 
 {$LANG.quick_view_of} {$preference.pref_inv_wording} {$invoice.id}
-<br>
+<br />
 
 
 
@@ -97,7 +97,7 @@
 		<td colspan="6" class="align_center"><b>{$preference.pref_inv_heading}</b></td>
 	</tr>
     <tr>
-        <td colspan="6"><br></td>
+        <td colspan="6"><br /></td>
     </tr>
 
 	<!-- Invoice Summary section -->
@@ -118,7 +118,7 @@
 	{$customField.4}
 
 	<tr>	
-		<td><br></td>
+		<td><br /></td>
 	</tr>
 	<!-- Biller section -->
 
@@ -160,7 +160,7 @@
 	{*	{showCustomFields categorieId="1" itemId=$biller.id } *}
 
 	<tr>
-		<td colspan=5><br></td>
+		<td colspan=5><br /></td>
 	</tr>	
 	
 	<!-- Customer section -->
@@ -211,7 +211,7 @@
 {if $invoice.type_id == 1 }
 
 	        <tr>
-	                <td colspan=6><br></td>
+	                <td colspan=6><br /></td>
         	</tr>
 	        <tr>
         	        <td colspan=6><b>{$LANG.description}</b></td>
@@ -220,7 +220,7 @@
 	                <td colspan=6>{$invoiceItems.0.description}</td>
         	</tr>
 	        <tr>
-        	        <td colspan=6><br></td>
+        	        <td colspan=6><br /></td>
 	        </tr>
 	        <tr>
 	                <td></td>
@@ -240,7 +240,7 @@
 	        </tr>
 
         	<tr>
-                	<td colspan=6><br><br></td>
+                	<td colspan=6><br /><br /></td>
 	        </tr>
         	<tr>
                 	<td colspan=6><b>{$preference.pref_inv_detail_heading}</b></td>
@@ -252,7 +252,7 @@
 {if $invoice.type_id == 2 || $invoice.type_id == 3  || $invoice.type_id == 4}
 
         <tr>
-                <td colspan=6><br></td>
+                <td colspan=6><br /></td>
         </tr>
 		<tr>
 		<td colspan="6">
@@ -366,7 +366,7 @@
 				<td colspan="6" class='details_screen consulting'>{$invoiceItem.description|truncate:"..."}</td>
 			</tr>
 			<tr class='consulting' >	
-				<td colspan="6" class='details_screen consulting'>{$LANG.description}:<br>{$invoiceItem.description}</td>
+				<td colspan="6" class='details_screen consulting'>{$LANG.description}:<br />{$invoiceItem.description}</td>
 			</tr>
 		{/if}
 	{/if}
@@ -397,7 +397,7 @@
 		{/if}
 
 	<tr>
-		<td colspan="6"><br></td>
+		<td colspan="6"><br /></td>
 	</tr>	
 
     <tr class='details_screen'>
@@ -406,7 +406,7 @@
 		<td colspan="2" class="align_right">{$preference.pref_currency_sign}{$invoice.total_tax|number_format:2}</td>
     </tr>
 	<tr>
-		<td colspan="6"><br></td>
+		<td colspan="6"><br /></td>
 	</tr>
     <tr class='details_screen'>
         <td colspan="3"></td>
@@ -414,7 +414,7 @@
 		<td colspan="2" class="align_right"><u>{$preference.pref_currency_sign}{$invoice.total|number_format:2}</u></td>
     </tr>
 	<tr>
-		<td colspan="6"><br><br></td>
+		<td colspan="6"><br /><br /></td>
 	</tr>	
 	<tr>
 		<td colspan="6"><b>{$preference.pref_inv_detail_heading}</b></td>

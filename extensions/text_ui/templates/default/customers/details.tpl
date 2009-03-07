@@ -123,7 +123,7 @@
 		<td style="text-align:right"><u>{$stuff.owing|number_format:2}</u></td>
 	</tr>	
 	</table>
-<br>
+<br />
 		<b>{$LANG.invoice_listings}</b>
 		<table width="100%" align="center">
 			<tr class="sortHeader">

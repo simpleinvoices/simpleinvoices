@@ -59,6 +59,6 @@
 
 </head>
 <body>
-<a href="index.php">HOME</a><br>
+<a href="index.php">HOME</a><br />
 
 

@@ -18,9 +18,9 @@
 *}
 {if $smarty.post.submit != null}
 	<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=details&invoice={$smarty.post.invoice_id}&type={$smarty.post.type}>
-	<br><br>
+	<br /><br />
 	{$LANG.save_invoice_items_success};
-	<br><br>
+	<br /><br />
 {else}
 <div id="top"><h3>{$LANG.add_invoice_item}</h3>
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">

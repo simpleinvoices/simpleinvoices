@@ -53,7 +53,7 @@
 		<td>{$product.wording_for_enabled}</td>
 	</tr>
 </table>
-	<br>
+	<br />
 	<table class="buttons" align="center">
 		<tr>
 			<td>
@@ -136,7 +136,7 @@
 	</table>
 {/if} 
 {if $smarty.get.action== 'edit' }
-	<br>
+	<br />
 	<table class="buttons" align="center">
 	<tr>
 		<td>
