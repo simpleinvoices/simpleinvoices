@@ -148,6 +148,4 @@ $count = $resultCount[0];
 	$xml .= "</rows>";
 
 echo $xml;
-
-
-?> 
+?>

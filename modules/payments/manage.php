@@ -24,3 +24,4 @@ $smarty -> assign("payments",$payments);
 
 $smarty -> assign('pageActive', 'payment');
 $smarty -> assign('active_tab', '#money');
+?>
