@@ -8,7 +8,7 @@
 	<b>{$LANG.products} ::
 	<a href="index.php?module=products&view=details&id={$product.id}&action=edit">{$LANG.edit}</a></b>
 	
- 	<hr></hr>
+ 	<hr />
 
 	<table align="center">
 	<tr>
@@ -72,7 +72,7 @@
 	</tr>
 	</table>
 
-<hr></hr>
+<hr />
 <a href="index.php?module=products&view=details&id={$product.id}&action=edit">{$LANG.edit}</a>
 {/if}
 
@@ -80,7 +80,7 @@
 {if $smarty.get.action== 'edit' }
 
 	<b>{$LANG.product_edit}</b>
-	<hr></hr>
+	<hr />
 
 	<table align="center">
 	<tr>
@@ -157,7 +157,7 @@
 	</table>
 {/if} 
 {if $smarty.get.action== 'edit' }
-	<hr></hr>
+	<hr />
 		<input type="submit" name="cancel" value="{$LANG.cancel}" /> 
 		<input type="submit" name="save_product" value="{$LANG.save_product}" /> 
 		<input type="hidden" name="op" value="edit_product" /> 

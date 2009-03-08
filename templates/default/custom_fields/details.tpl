@@ -36,7 +36,7 @@
 		<td>{$cf.cf_custom_label}</td>
 	</tr>
 	</table>
-	<hr></hr>
+	<hr />
 
 
 <a href="index.php?module=custom_fields&view=details&id={$cf.cf_id}&action=edit">{$LANG.edit}</a>
@@ -47,7 +47,7 @@
 
 	<b>{$LANG.custom_fields}</b>
 
-	<hr></hr>
+	<hr />
 
 	<table align="center">
         <tr>
@@ -66,7 +66,7 @@
 		<td><input type="text" name="cf_custom_label" size="50" value="{$cf.cf_custom_label}" /></td>
 	</tr>
 	</table>
-	<hr></hr>
+	<hr />
 
 <table class="buttons" align="center">
     <tr>

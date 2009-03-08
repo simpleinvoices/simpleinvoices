@@ -20,7 +20,7 @@
 {if $smarty.get.action == 'view' }
 <b>{$LANG.customer} :: <a href="index.php?module=customers&view=details&id={$customer.id}&action=edit">{$LANG.edit}</a>
 </b>
-<hr></hr>
+<hr />
 <table >
 	<tr>
 		<td colspan="2" align="center" class="align_center"><i>{$LANG.customer_details}</i></td>
@@ -148,7 +148,7 @@
 		</table>	
 
 
-<hr></hr>
+<hr />
 <a href="index.php?module=customers&view=details&id={$customer.id}&action=edit">{$LANG.edit}</a>
 {/if}
 
@@ -159,7 +159,7 @@
 	method="post">
 
 <div id="top"><b>{$LANG.customer_edit}</b></div>
-<hr></hr>
+<hr />
 <table >
 	<tr>
 		<td class="details_screen">{$LANG.customer} {$LANG.id}</td>
@@ -243,7 +243,7 @@
 </table>
 
 
-<hr></hr>
+<hr />
 <input type="submit" name="cancel" value="{$LANG.cancel}" />
 <input type="submit" name="save_customer" value="{$LANG.save_customer}" />
 <input type="hidden" name="op" value="edit_customer" />

@@ -19,14 +19,14 @@
 
 {if $smarty.get.stage == 1 }
 	Delete Invoice
-	<hr></hr>
+	<hr />
 
 	<br />
     	    {if $invoicePaid == 0}
 				Are you sure you want to delete {$preference.pref_inv_wording} {$invoice.id}
 	<br />
 	<br />
-		<hr></hr>
+		<hr />
 		<form name="frmpost" action="index.php?module=invoices&view=delete&stage=2&id={$smarty.get.invoice}" method="post">
 			<input type="submit" name="submit" value="I'm sure"> <input type="button" value="Cancel" onCLick="history.back()">
 			<input type="hidden" name="doDelete" value="y">
@@ -38,7 +38,7 @@
 				<br />
 				LANG_TODO: Add help section here!!
 				<br />
-	<hr></hr>
+	<hr />
 			<form>
 					<input type="button" value="Back" onCLick="history.back()">
 		</form>	

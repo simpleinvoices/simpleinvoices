@@ -17,7 +17,7 @@
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
         	<img src="images/common/gmail-loader.gif" alt="Loading ..."/> Loading ...
 </div>
- <hr></hr>
+ <hr />
 
 <form name="frmpost" action="index.php?module=invoices&view=save" method="post">
 
@@ -266,7 +266,7 @@
 	<!-- addition close table tag to close invoice itemised/consulting if it has a note -->
 	</table>
 
-<hr></hr>
+<hr />
 	<input type="hidden" name="action" value="edit">
 	<input type="hidden" name="type" value="{$invoice.type_id}";
 

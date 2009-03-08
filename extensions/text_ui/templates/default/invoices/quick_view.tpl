@@ -51,7 +51,7 @@
 		{/if}
 
 <!--Actions heading - start-->
-<hr></hr>
+<hr />
 
 <!-- #PDF end -->
 	<!-- Invoice Summary section -->
@@ -251,7 +251,7 @@
 </table>
 </table>
 
-<hr/>
+<hr />
 		<b>{$LANG.account_info}</b><br />
 		{$LANG.total}: 
 		{$preference.pref_currency_sign}{$invoice.total|number_format:2} :: 
@@ -259,4 +259,4 @@
 		{$LANG.owing}: <u>{$preference.pref_currency_sign}{$invoice.owing|number_format:2}</u> ::
 		{$LANG.age}: {$invoice_age} 
 		<br />
-<hr/>
+<hr />

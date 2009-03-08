@@ -49,7 +49,7 @@
 		<td><textarea name='email_notes' class="editor" rows="8" cols="50"></textarea></td>
 	</tr>
 </table>
-<hr></hr>
+<hr />
 <input type="submit" name="submit" value="{$LANG.email}" />
 <input type="hidden" name="op" value="insert_customer" />
 </form>

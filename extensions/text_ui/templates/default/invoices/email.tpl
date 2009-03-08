@@ -46,7 +46,7 @@
 		<td><textarea name='email_notes' rows=3 cols=20></textarea></td>
 	</tr>
 </table>
-<hr></hr>
+<hr />
 <input type="submit" name="submit" value="{$LANG.email}">
 <input type="hidden" name="op" value="insert_customer">
 </form>

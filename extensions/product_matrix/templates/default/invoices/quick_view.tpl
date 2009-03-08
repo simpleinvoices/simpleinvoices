@@ -60,7 +60,7 @@
 		{/if}
 
 <!--Actions heading - start-->
-<hr></hr>
+<hr />
 
 <!-- #PDF end -->
 
@@ -205,7 +205,7 @@
 
 			{*	{showCustomFields categorieId="2" itemId=$customer.id } *}
 
-<hr></hr>
+<hr />
 
 
 {if $invoice.type_id == 1 }

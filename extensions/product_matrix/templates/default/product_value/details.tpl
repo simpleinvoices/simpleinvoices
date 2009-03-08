@@ -5,7 +5,7 @@
 
 {if $smarty.get.action== 'view' }
 	<b>Product Values :: <a href='index.php?module=product_value&view=details&id={$product_value.id}&action=edit'>Edit</a></b>
-	<hr></hr>
+	<hr />
 
 	
 	<table align=center>
@@ -19,7 +19,7 @@
 			<td class='details_screen'>Value</td><td>{$product_value.value}</td>
         </tr>
 		</table>
-		<hr></hr>
+		<hr />
 
 <a href='index.php?module=product_value&view=details&id={$product_value.id}&action=edit'>Edit</a>
 
@@ -28,7 +28,7 @@
 {if $smarty.get.action== 'edit' }
 
 <b>Preferences</b>
-	<hr></hr>
+	<hr />
 
         <table align=center>
                 <tr>
@@ -49,7 +49,7 @@
                 </tr>
 
                 </table>
-		<hr></hr>
+		<hr />
 
 <input type=submit name='save_product_value' value='{$LANG.save}'>
 <input type=hidden name='op' value='edit_product_value'>

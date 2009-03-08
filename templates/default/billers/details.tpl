@@ -15,7 +15,7 @@
 
 <b>{$LANG.biller} :: <a
 	href="index.php?module=billers&view=details&id={$biller.id}&action=edit">{$LANG.edit}</a></b>
-<hr></hr>
+<hr />
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.biller_id}</td>
@@ -149,7 +149,7 @@
 
 
 {if $smarty.get.action== 'view' }
-<hr></hr>
+<hr />
 <a href="?module=billers&view=details&action=edit&id={$biller.id}">{$LANG.edit}</a>
 {/if}
 
@@ -157,7 +157,7 @@
 {if $smarty.get.action== 'edit' }
 
 <b>{$LANG.biller_edit}</b>
-<hr></hr>
+<hr />
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.biller_id}</td>

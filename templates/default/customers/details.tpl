@@ -14,7 +14,7 @@
 {if $smarty.get.action == 'view' }
 <b>{$LANG.customer} :: <a href="index.php?module=customers&view=details&id={$customer.id}&action=edit">{$LANG.edit}</a>
 </b>
-<hr></hr>
+<hr />
 <table align="center">
 	<tr>
 		<td colspan="7" align="center"> </td>
@@ -203,7 +203,7 @@
 </div>
 
 
-<hr></hr>
+<hr />
 <table class="buttons" align="center">
     <tr>
         <td>
@@ -222,7 +222,7 @@
 <form name="frmpost" action="index.php?module=customers&view=save&id={$customer.id}" method="post" id="frmpost" onSubmit="return checkForm(this);">
 
 <div id="top"><b>{$LANG.customer_edit}</b></div>
-<hr></hr>
+<hr />
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.customer} {$LANG.id}</td>
@@ -370,7 +370,7 @@
 </table>
 
 
-<hr></hr>
+<hr />
 
 <table class="buttons" align="center">
     <tr>
