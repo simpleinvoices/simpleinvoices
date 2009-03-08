@@ -25,6 +25,9 @@ $auth_session = new Zend_Session_Namespace('Zend_Auth');
 /* 
  * Smarty inint - start
  */
+
+#ini_set('display_errors',true);
+
 require_once("smarty/Smarty.class.php");
 
 include_once('./include/functions.php');
@@ -49,6 +52,8 @@ $logger = new Zend_Log($writer);
  */
 
 $smarty = new Smarty();
+
+#$smarty->debugging = TRUE;
 
 //cache directory. Have to be writeable (chmod 777)
 $smarty -> compile_dir = "tmp/cache";
