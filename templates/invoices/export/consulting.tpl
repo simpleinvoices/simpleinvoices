@@ -63,7 +63,7 @@
 	{if ( $invoice.note != null  ) }
 
 		<tr>
-			<td class="tbl1-left tbl1-right" colspan="6"><br></td>
+			<td class="tbl1-left tbl1-right" colspan="6"><br /></td>
 		</tr>
 		<tr>
 			<td class="tbl1-left tbl1-right" colspan="6" align="left"><b>{$LANG.notes}:</b></td>
@@ -74,7 +74,7 @@
 	{/if}
 	
 		<tr class="tbl1-left tbl1-right">
-			<td class="tbl1-left tbl1-right" colspan="6" ><br></td>
+			<td class="tbl1-left tbl1-right" colspan="6" ><br /></td>
 		</tr>
 {php}   global $invoice; $this->assign('invoice_gross_total', $invoice[total] - $invoice[total_tax]); {/php}
 		<tr>

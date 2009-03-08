@@ -8,15 +8,11 @@
    <tr>
    <td><b>{$year}</b></td>
    <tr>
-   <td></td><td>Month:<br>Sales:<br>Payments:</td>
+   <td></td><td>Month:<br />Sales:<br />Payments:</td>
      {foreach key=key item=item_sales from=$total_sales.$year}
-	      <td>{$key}<br>{$item_sales}<br>{$total_payments.$year.$key}  </td>
+	      <td>{$key}<br />{$item_sales}<br />{$total_payments.$year.$key}  </td>
      {/foreach}
 
 	</tr>
  {/foreach}
  </table>
-
-
- 
- 

@@ -5,7 +5,7 @@
 <title>{$preference.pref_inv_wording} {$LANG.number_short}: {$invoice.id}</title>
 </head>
 <body>
-<br>
+<br />
 <div id="container">
 	<div id="header">
 	</div>
@@ -309,7 +309,7 @@
                     <td class="t" colspan="6">{$invoiceItem.description|unescape}</td>
                 </tr>
                 <tr class="">
-                    <td colspan="6" class=" "><br></td>
+                    <td colspan="6" class=" "><br /></td>
                 </tr>
 
 		{/foreach}
@@ -318,7 +318,7 @@
 {if ($invoice.type_id == 2 && $invoice.note != "") || ($invoice.type_id == 3 && $invoice.note != "" )  }
 
 		<tr>
-			<td class="" colspan="6"><br></td>
+			<td class="" colspan="6"><br /></td>
 		</tr>
 		<tr>
 			<td class="" colspan="6" align="left"><b>{$LANG.notes}:</b></td>
@@ -330,7 +330,7 @@
 {/if}
 
 	<tr class="">
-		<td class="" colspan="6" ><br></td>
+		<td class="" colspan="6" ><br /></td>
 	</tr>
 
 	{if $invoice.type_id == 1} <!-- Only Type 1 is a single entry - hence last row gross is valid as gross_total - see Invoice 2 in sample data-->
@@ -364,7 +364,7 @@
 	
 	
 	<tr class="">
-		<td class="" colspan="6" ><br></td>
+		<td class="" colspan="6" ><br /></td>
 	</tr>
 	<tr class="">
 		<td class="" colspan="2"></td>
@@ -393,7 +393,7 @@
 		<td class="" colspan="6">{$preference.pref_inv_payment_line2_name} {$preference.pref_inv_payment_line2_value}</td>
 	</tr>
 	<tr>
-		<td><br></td>
+		<td><br /></td>
 	</tr>
 	<tr>
 		<td colspan="6"><div style="font-size:8pt;" align="center">{$biller.footer}</div></td>

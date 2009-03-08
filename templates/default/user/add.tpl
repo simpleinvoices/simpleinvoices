@@ -24,7 +24,7 @@
 				rel="docs.php?t=help&p=required_field"
 				title="{$LANG.Required_Field}"
 		>
-		<img src="./images/common/required-small.png"></img>
+		<img src="./images/common/required-small.png" alt="" />
 		</a>	
 		</td>
 		<td><input type=text name="email" value="{$smarty.post.email}" size=35 id="email" class="required" onblur="checkField(this);"></td>
@@ -37,9 +37,7 @@
 				rel="docs.php?t=help&p=user_role"
 				title="{$LANG.role}"
 			> 
-			<img
-				src="./images/common/help-small.png">
-			</img> 
+			<img src="./images/common/help-small.png" alt="" />
 			</a>
 		</td>
 		<td>
@@ -53,8 +51,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.password}</td>
-		<td><input type=password name="password_field" value="{$smarty.post.password_field}"
-			size=25></td>
+		<td><input type="password" name="password_field" value="{$smarty.post.password_field}" size="25"></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
@@ -67,7 +64,7 @@
 	</div>
 	</tbody>
 </table>
-<br>
+<br />
 <table class="buttons" align="center">
     <tr>
         <td>
@@ -79,7 +76,7 @@
             <input type="hidden" name="op" value="insert_user">
         
             <a href="./index.php?module=user&view=manage" class="negative">
-                <img src="./images/common/cross.png" alt=""/>
+                <img src="./images/common/cross.png" alt="" />
                 {$LANG.cancel}
             </a>
     

@@ -1,16 +1,16 @@
-<br>
+<br />
 {if $saved == true }
-	<br>
+	<br />
 	 {$LANG.save_preference_success}
-	<br>
-	<br>
+	<br />
+	<br />
 {else}
-	<br>
+	<br />
 	 {$LANG.save_preference_failure}
-	<br>
-	<br>
+	<br />
+	<br />
 {/if}
 
 {if $saved == true }
-	<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=preferences&view=manage>
+	<meta http-equiv="refresh" content="2;URL=index.php?module=preferences&view=manage" />
 {/if}

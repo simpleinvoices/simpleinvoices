@@ -19,7 +19,7 @@
 
 <div class="align_center">
 	{$LANG.quick_view_of} {$preference.pref_inv_wording} {$invoice.id}
-	<br><br>
+	<br /><br />
 
 
 	<!--Actions heading - start-->
@@ -45,8 +45,8 @@
 	</span>
 </div>
 <!--Actions heading - start-->
-<br>
-<br>
+<br />
+<br />
 <!-- #PDF end -->
 
 	<table align=center>
@@ -55,7 +55,7 @@
 		<td colspan="6" class="align_center"><b>{$preference.pref_inv_heading}</b></td>
 	</tr>
     <tr>
-        <td colspan="6"><br></td>
+        <td colspan="6"><br /></td>
     </tr>
 *}
 	<!-- Invoice Summary section -->
@@ -169,7 +169,7 @@
 {if $invoice.type_id == 1 }
 
 	        <tr>
-	                <td colspan="6"><br></td>
+	                <td colspan="6"><br /></td>
         	</tr>
 	        <tr>
         	        <td colspan="6"><b>{$LANG.description}</b></td>
@@ -178,7 +178,7 @@
 	                <td colspan="6">{$invoiceItems.0.description|unescape}</td>
         	</tr>
 	        <tr>
-        	        <td colspan="6"><br></td>
+        	        <td colspan="6"><br /></td>
 	        </tr>
 	        <tr>
 	                <td></td>
@@ -210,7 +210,7 @@
 {if $invoice.type_id == 2 || $invoice.type_id == 3  || $invoice.type_id == 4}
 
         <tr>
-                <td colspan=6><br></td>
+                <td colspan=6><br /></td>
         </tr>
 		<tr>
 		<td colspan="6">
@@ -350,7 +350,7 @@
 		{/if}
 
 	<tr>
-		<td colspan="6"><br></td>
+		<td colspan="6"><br /></td>
 	</tr>	
 
 
@@ -374,7 +374,7 @@
 		<td colspan="1" class="align_right"><u>{$preference.pref_currency_sign}{$invoice.total_tax|siLocal_number}</u></td>
     </tr>
 	<tr>
-		<td colspan="6"><br></td>
+		<td colspan="6"><br /></td>
 	</tr>
     <tr class='details_screen'>
         <td colspan="3"></td>
@@ -383,7 +383,7 @@
     </tr>
 {*
 	<tr>
-		<td colspan="6"><br><br></td>
+		<td colspan="6"><br /><br /></td>
 	</tr>	
 
 	<tr>
@@ -412,7 +412,7 @@
 *}
 </table>
 
-<br><br>
+<br /><br />
 	<table align="center">
 	<tr class='details_screen'>
 		<td class='details_screen' colspan="16">

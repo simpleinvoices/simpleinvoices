@@ -12,14 +12,14 @@
                         <td class="tbl1-left tbl1-right" colspan="6">{$invoiceItems[0].description}</td>
                 </tr>
                 <tr class="tbl1-left tbl1-right">
-                        <td class="tbl1-left tbl1-right" colspan="6"><br></td>
+                        <td class="tbl1-left tbl1-right" colspan="6"><br /></td>
                 </tr>
 
 	{*/foreach*}
          
 	
 	<tr class="tbl1-left tbl1-right">
-		<td class="tbl1-left tbl1-right" colspan="6" ><br></td>
+		<td class="tbl1-left tbl1-right" colspan="6" ><br /></td>
 	</tr>
 	
 

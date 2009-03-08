@@ -5,7 +5,7 @@
 <title>{$preference.pref_inv_wording} {$LANG.number_short}: {$invoice.id}</title>
 </head>
 <body>
-<br>
+<br />
 <div id="container">
 <div id="header">
 </div>
@@ -169,7 +169,7 @@
 
 	<!-- Biller section - end -->
 
-	<br>
+	<br />
 		<tr>
 				<td colspan="3"><br /><td>
 		</tr>
@@ -315,7 +315,7 @@
 		<td align="right" >{$preference.pref_currency_sign}{$invoice.total_tax|number_format:2}</td>
 	</tr>
 	<tr >
-		<td colspan="6" ><br></td>
+		<td colspan="6" ><br /></td>
 	</tr>
 	<tr >
 		<td colspan="3"></td>
@@ -343,7 +343,7 @@
 		<td colspan="6">{$preference.pref_inv_payment_line2_name} {$preference.pref_inv_payment_line2_value}</td>
 	</tr>
 	<tr>
-		<td><br></td>
+		<td><br /></td>
 	</tr>
 	<tr>
 		<td colspan="6"><div style="font-size:8pt;" align="center">{$biller.footer}</div></td>

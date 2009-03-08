@@ -30,17 +30,17 @@
 		<td class="details_screen">{$LANG.enabled}</td><td>{$paymentType.enabled|escape:html}</td>
 	</tr>
 	</table>
-		<br>
+		<br />
 	<table class="buttons" align="center">
 		<tr>
 			<td>
 				<a href="./index.php?module=payment_types&view=details&id={$paymentType.pt_id}&action=edit" class="positive">
-					<img src="./images/famfam/report_edit.png" alt=""/>
+					<img src="./images/famfam/report_edit.png" alt="" />
 					{$LANG.edit}
 				</a>
 
 				<a href="./index.php?module=payment_types&view=manage" class="negative">
-					<img src="./images/common/cross.png" alt=""/>
+					<img src="./images/common/cross.png" alt="" />
 					{$LANG.cancel}
 				</a>
 		
@@ -57,7 +57,7 @@
 		<td>{$paymentType.pt_id|escape:html}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.description} <a href="docs.php?t=help&amp;p=required_field" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png" alt="(required)"></img></a></td>
+		<td class="details_screen">{$LANG.description} <a href="docs.php?t=help&amp;p=required_field" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png" alt="(required)" /></a></td>
 		<td><input type="text" name="pt_description" value="{$paymentType.pt_description|escape:html|regex_replace:"/[\\\]/":""}"
 		 size="50" /></td>
 	</tr>
@@ -75,19 +75,19 @@
 		</td>
 	</tr>
 	</table>
-	<br>
+	<br />
 	<table class="buttons" align="center">
 		<tr>
 			<td>
 				<button type="submit" class="positive" name="save_payment_type" value="{$LANG.save}">
-					<img class="button_img" src="./images/common/tick.png" alt=""/> 
+					<img class="button_img" src="./images/common/tick.png" alt="" /> 
 					{$LANG.save}
 				</button>
 
 				<input type="hidden" name="op" value="edit_payment_type">
 			
 				<a href="./index.php?module=preferences&view=manage" class="negative">
-					<img src="./images/common/cross.png" alt=""/>
+					<img src="./images/common/cross.png" alt="" />
 					{$LANG.cancel}
 				</a>
 		

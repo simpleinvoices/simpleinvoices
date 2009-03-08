@@ -19,19 +19,19 @@
 
 {if $saved == true }
 
-<br>
+<br />
 	{$LANG.save_customer_success}
-<br>
-<br>
+<br />
+<br />
 {else}
-<br>
+<br />
 	 {$LANG.save_customer_failure}
-<br>
-<br>
+<br />
+<br />
 {/if}
 
 {if $smarty.post.cancel == null }
-	<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=customers&view=manage>
+	<meta http-equiv="refresh" content="2;URL=index.php?module=customers&view=manage" />
 {else}
-	<META HTTP-EQUIV=REFRESH CONTENT=0;URL=index.php?module=customers&view=manage>
+	<meta http-equiv="refresh" content="0;URL=index.php?module=customers&view=manage" />
 {/if}

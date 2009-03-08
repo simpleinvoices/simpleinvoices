@@ -15,10 +15,10 @@
 <div class="welcome">
 	<h2>System preferences welcome message</h2>
 	
-	Thank you for choosing Simple Invoices! There are just a couple of things to do before you can start invoicing<br><br>
-	1 - Setup yourself up as a biller - <a href="index.php?module=biller&view=add">click here</a><br>
+	Thank you for choosing Simple Invoices! There are just a couple of things to do before you can start invoicing<br /><br />
+	1 - Setup yourself up as a biller - <a href="index.php?module=biller&view=add">click here</a><br />
 	
-	<br><br>
+	<br /><br />
 	Already know Simple Invoices by heart? You can <a href="">hide this text</a> forever then  <a href="">click here</a>
 </div>
 
@@ -31,7 +31,7 @@
         <td>
 
             <a href="index.php?module=system_defaults&view=manage" class="">
-                <img src="./images/common/cog_edit.png" alt=""/>
+                <img src="./images/common/cog_edit.png" alt="" />
                 {$LANG.system_preferences}
             </a>
 	
@@ -39,7 +39,7 @@
 		<td>
             
             <a href="index.php?module=custom_fields&view=manage" class="">
-                <img src="./images/common/brick_edit.png" alt=""/>
+                <img src="./images/common/brick_edit.png" alt="" />
                 {$LANG.custom_fields_upper}
             </a>
     
@@ -48,18 +48,18 @@
         </td>
     </tr>
 </table>
-<br>
+<br />
 
 <!-- Do stuff menu  - end -->
 
 <!-- Don't forget to menu - start -->
 <h2>Invoice settings</h2>
 <table class="buttons" >
-    <tr>
+      <tr>
         <td>
     
            <a href="index.php?module=tax_rates&view=manage" class="">
-                <img src="./images/common/money_delete.png" alt=""/>
+                <img src="./images/common/money_delete.png" alt="" />
                  {$LANG.tax_rates}
             </a>
 
@@ -67,14 +67,14 @@
 		<td>
             
              <a href="index.php?module=preferences&view=manage" class="">
-                <img src="./images/common/page_white_edit.png" alt=""/>
+                <img src="./images/common/page_white_edit.png" alt="" />
                  {$LANG.invoice_preferences}
             </a>
     	</td>
 		<td>
     
            <a href="index.php?module=payment_types&view=manage" class="">
-                <img src="./images/common/creditcards.png" alt=""/>
+                <img src="./images/common/creditcards.png" alt="" />
                  {$LANG.payment_types}
             </a>
         </td>
@@ -82,7 +82,7 @@
 
  
 </table>
-<br>
+<br />
 
 
 <!-- Don't forget to menu - start -->
@@ -94,14 +94,14 @@
 
             
              <a href="index.php?module=options&view=backup_database" class="">
-                <img src="./images/common/database_save.png" alt=""/>
+                <img src="./images/common/database_save.png" alt="" />
                 {$LANG.backup_database}
             </a>
     	</td>
 		<td>
     
            <a href="index.php?module=options&view=manage_sqlpatches" class="">
-                <img src="./images/common/database.png" alt=""/>
+                <img src="./images/common/database.png" alt="" />
                  {$LANG.database_upgrade_manager}
             </a>
         </td>
