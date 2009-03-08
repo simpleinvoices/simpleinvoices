@@ -16,7 +16,7 @@
 *	http://www.simpleinvoices.org
 */
 *}
-<script>
+<script type="text/javascript">
 
 {*  
 This Script has to be inlined so that smarty renders it.

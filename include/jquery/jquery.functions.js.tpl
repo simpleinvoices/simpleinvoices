@@ -1,5 +1,5 @@
 {literal}
-<script>
+<script type="text/javascript">
 	/*
 	* Script: jquery.functions.js
 	* Purpose: jquery/javascript functions for Simple Invoices 
