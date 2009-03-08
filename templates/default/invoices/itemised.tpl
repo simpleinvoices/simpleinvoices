@@ -14,13 +14,13 @@
 <form name="frmpost" action="index.php?module=invoices&view=save" method="POST" onsubmit="return frmpost_Validator(this)">
 
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
-        	<img src="images/common/gmail-loader.gif" alt="Loading ..."/> Loading ...
+        	<img src="images/common/gmail-loader.gif" alt="Loading ..." /> Loading ...
 </div>
 
 {include file="$path/header.tpl" }
 <table align="left">
 	<tr>
-		<td colspan=3">
+		<td colspan="3">
 		
 		<table id="itemtable">
 			<tbody id="itemtable-tbody">
@@ -38,10 +38,10 @@
 						class="show-note" 
 						onClick="$('.note').show();$('.show-note').hide();"
 					>
-						<img src="./images/common/page_white_add.png" title="{$LANG.show_details}">
+						<img src="./images/common/page_white_add.png" title="{$LANG.show_details}" alt="" />
 					</a>
 					<a href='#' class="note" onClick="$('.note').hide();$('.show-note').show();">
-						<img src="./images/common/page_white_delete.png" title="{$LANG.hide_details}"/>
+						<img src="./images/common/page_white_delete.png" title="{$LANG.hide_details}" alt="" />
 					</a>
 				</td>
 			</tr>
@@ -64,6 +64,7 @@
 									height="16px"
 									width="16px"
 									title="The first row can not be deleted"
+									alt=""
 								 />
 							</a>
 							{/if}
@@ -78,14 +79,12 @@
 								href="#" 
 								style="display: inline;"
 							>
-								<img 
-									src="./images/common/delete_item.png"
-								 />
+								<img src="./images/common/delete_item.png" alt="" />
 							</a>
 							{/if}
 						</td>
 						<td>
-							<input type=text name="quantity{$smarty.section.line.index}" id="quantity{$smarty.section.line.index}" size="5" /></td>
+							<input type="text" name="quantity{$smarty.section.line.index}" id="quantity{$smarty.section.line.index}" size="5" /></td>
 						<td>
 										
 					{if $products == null }
@@ -131,8 +130,8 @@
 					<tr class="note">
 							<td>
 							</td>
-							<td colspan=4>
-								<textarea input type=text class="note" name="description{$smarty.section.line.index}" id="description{$smarty.section.line.index}" rows=3 cols=3 WRAP=nowrap></textarea>
+							<td colspan="4">
+								<textarea input type="text" class="note" name="description{$smarty.section.line.index}" id="description{$smarty.section.line.index}" rows=3 cols=3 WRAP=nowrap></textarea>
 								
 								</td>
 					</tr>
@@ -217,7 +216,7 @@
 	</tr>	
 	<tr>
 		<td class=""> 
-			<a class="cluetip" href="#"	rel="docs.php?t=help&p=invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="./images/common/help-small.png" /> {$LANG.want_more_fields}</a>
+			<a class="cluetip" href="#"	rel="docs.php?t=help&p=invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="./images/common/help-small.png" alt="" /> {$LANG.want_more_fields}</a>
 		</td>
 	</tr>
 

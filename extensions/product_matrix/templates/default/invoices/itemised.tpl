@@ -114,11 +114,11 @@
 
 
 <tr>
-        <td colspan=5 class="details_screen">{$LANG.notes}</td>
+        <td colspan="5" class="details_screen">{$LANG.notes}</td>
 </tr>
 
 <tr>
-        <td colspan=5><textarea class="editor" input type=text name="note" height="20px" width="50px" rows=1 cols=60 WRAP=nowrap></textarea></td>
+        <td colspan="5"><textarea class="editor" input type="text" name="note" height="20px" width="50px" rows="1" cols="60" wrap="nowrap"></textarea></td>
 </tr>
 
 <tr><td class="details_screen">{$LANG.tax}</td>
@@ -154,7 +154,7 @@
 </tr>	
 <tr>
 	<td align=left>
-		<a href="docs.php?t=help&p=invoice_custom_fields" rel="gb_page_center[450, 450]">{$LANG.want_more_fields}<img src="./images/common/help-small.png"></img></a>
+		<a href="docs.php?t=help&p=invoice_custom_fields" rel="gb_page_center[450, 450]">{$LANG.want_more_fields}<img src="./images/common/help-small.png" alt="" /></a>
 
 	</td>
 </tr>

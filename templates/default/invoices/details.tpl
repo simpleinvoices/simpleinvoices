@@ -14,7 +14,7 @@
 *}
 <h3>You are editing {$preference.pref_inv_wording} {$invoice.id}</h3>
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
-        	<img src="images/common/gmail-loader.gif" alt="Loading ..."/> Loading ...
+        	<img src="images/common/gmail-loader.gif" alt="Loading ..." /> Loading ...
 </div>
 
 
@@ -134,10 +134,10 @@
 						class="show-note" 
 						onClick="$('.note').show();$('.show-note').hide();"
 					>
-						<img src="./images/common/page_white_add.png" title="{$LANG.show_details}">
+						<img src="./images/common/page_white_add.png" title="{$LANG.show_details}" alt="" />
 					</a>
 					<a href='#' class="note" onClick="$('.note').hide();$('.show-note').show();">
-						<img src="./images/common/page_white_delete.png" title="{$LANG.hide_details}"/>
+						<img src="./images/common/page_white_delete.png" title="{$LANG.hide_details}" alt="" />
 					</a>
 				</td>
 		    </tr>
@@ -155,7 +155,7 @@
 								style="display: inline;"
 								rel="{$line}"
 							>
-								<img id="delete_image{$line}" src="./images/common/delete_item.png" />
+								<img id="delete_image{$line}" src="./images/common/delete_item.png" alt="" />
 							</a>
 						{/if}
 						{if $line == "0"}
@@ -167,7 +167,7 @@
 								style="display: inline;"
 								rel="{$line}"
 							>
-								<img id="delete_image{$line}" src="./images/common/blank.gif" />
+								<img id="delete_image{$line}" src="./images/common/blank.gif" alt="" />
 							</a>
 						{/if}
 						</td>
@@ -221,8 +221,8 @@
 		            	<tr colspan="6" class="notem">
 								<td>
 								</td>
-								<td colspan=4>
-									<textarea input type=text class="note-edit" name="description{$line}" id="description{$line}" rows=3 cols=3 WRAP=nowrap>{$invoiceItem.description|unescape}</textarea>
+								<td colspan="4">
+									<textarea input type=text class="note-edit" name="description{$line}" id="description{$line}" rows="3" cols="3" wrap="nowrap">{$invoiceItem.description|unescape}</textarea>
 									
 									</td>
 						</tr>
@@ -257,7 +257,7 @@
 		{*
 			<tr>
 				<td>
-					<a href="./index.php?module=invoices&view=add_invoice_item&invoice={$invoice.id}&type={$invoice.type_id}&tax_id={$invoiceItems.0.tax_id}"><img src="./images/common/famfamAdd.png"></img>{$LANG.add_invoice_item}</a>
+					<a href="./index.php?module=invoices&view=add_invoice_item&invoice={$invoice.id}&type={$invoice.type_id}&tax_id={$invoiceItems.0.tax_id}"><img src="./images/common/famfamAdd.png" alt="" />{$LANG.add_invoice_item}</a>
 				</td>
 				<td>
 				</td>
@@ -271,10 +271,10 @@
 	 	 {showCustomFields categorieId="4" itemId=$smarty.get.invoice}
 	 *}
 			<tr>
-				<td colspan=6 class='details_screen'>{$LANG.note}:</td>
+				<td colspan="6" class='details_screen'>{$LANG.note}:</td>
 			</tr>
 			<tr>
-	             <td colspan=6 ><textarea input type=text class="editor" name="note" rows=10 cols=70 WRAP=nowrap>{$invoice.note|unescape}</textarea></td>
+	             <td colspan="6" ><textarea input type=text class="editor" name="note" rows=10 cols="70" wrap="nowrap">{$invoice.note|unescape}</textarea></td>
 			</tr>
 			
 

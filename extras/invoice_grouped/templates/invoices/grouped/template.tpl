@@ -12,10 +12,10 @@
 
 	<table width="100%" align="center">
 		<tr>
-			<th align="middle" colspan=6><span class="font1">{$biller.name}</span></th>
+			<th align="middle" colspan="6"><span class="font1">{$biller.name}</span></th>
 		</tr>
 		<tr>
-			<th align="middle" colspan=6><span class="font1">{$preference.pref_inv_heading}</span></th>
+			<th align="middle" colspan="6"><span class="font1">{$preference.pref_inv_heading}</span></th>
 		</tr>
 		<tr>
 			<td colspan="6" class="tbl1-top">&nbsp;</td>
@@ -26,17 +26,17 @@
 	<table width="100%">
 	<tr>
 		<td>To:</td>
-		<td colspan=3>{$customer.name}</td>
-		<td colspan=2></td>
+		<td colspan="3">{$customer.name}</td>
+		<td colspan="2"></td>
 	</tr>
 	<tr>
 		<td>Description:</td>
-		<td colspan=3></td>
+		<td colspan="3"></td>
 		<td>{$customFieldLabels.invoice_cf1}</td>
 		<td>{$invoice.custom_field1}</td>
 	</tr>
 	<tr>
-		<td colspan=4 valign="top" rowspan=4>{$invoice.note}</td>
+		<td colspan=4 valign="top" rowspan="4">{$invoice.note}</td>
 		<td>Job #</td>
 		<td>{$invoice.id}</td>
 	</tr>
@@ -113,27 +113,27 @@
 
     <!-- Biller section - start -->
         <tr>
-                <td class="tbl1-bottom col1" border=1 cellpadding=2 cellspacing=1><b>{$LANG.biller}:</b></td>
-				<td class="col1 tbl1-bottom" border=1 cellpadding=2 cellspacing=1 colspan="3">{$biller.name}</td>
+                <td class="tbl1-bottom col1" border="1" cellpadding="2" cellspacing="1"><b>{$LANG.biller}:</b></td>
+				<td class="col1 tbl1-bottom" border="1" cellpadding="2" cellspacing="1" colspan="3">{$biller.name}</td>
         </tr> 
 
         {if $biller.street_address != null}
 		<tr>
                 <td class=''>{$LANG.address}:</td>
-				<td class='' align=left colspan="3">{$biller.street_address}</td>
+				<td class='' align="left" colspan="3">{$biller.street_address}</td>
 		</tr>
         {/if}
         {if $biller.street_address2 != null }
 			{if $biller.street_address == null }
 		<tr>
                 <td class=''>{$LANG.address}:</td>
-				<td class='' align=left colspan="3">{$biller.street_address2}</td>
+				<td class='' align="left" colspan="3">{$biller.street_address2}</td>
 		</tr>   
 			{/if}
 			{if $biller.street_address != null }
 		<tr>
                 <td class=''></td>
-				<td class='' align=left colspan="3">{$biller.street_address2}</td>
+				<td class='' align="left" colspan="3">{$biller.street_address2}</td>
         </tr>   
 			{/if}
         {/if}
@@ -176,26 +176,26 @@
         {if $customer.attention != null }
     <tr>
             <td class=''>{$LANG.attention_short}:</td>
-			<td align=left class='' colspan="3" >{$customer.attention}</td>
+			<td align="left" class='' colspan="3" >{$customer.attention}</td>
                 </tr>
        {/if}
         {if $customer.street_address != null }
     <tr >
             <td class=''>{$LANG.address}:</td>
-			<td class='' align=left colspan="3">{$customer.street_address}</td>
+			<td class='' align="left" colspan="3">{$customer.street_address}</td>
     </tr>   
         {/if}
         {if $customer.street_address2 != null}
                 {if $customer.street_address == null}
     <tr>
             <td class=''>{$LANG.address}:</td>
-			<td class='' align=left colspan="3">{$customer.street_address2}</td>
+			<td class='' align="left" colspan="3">{$customer.street_address2}</td>
     </tr>   
                 {/if}
                 {if $customer.street_address != null}
     <tr>
 			<td class=''></td>
-			<td class='' align=left colspan="3">{$customer.street_address2}</td>
+			<td class='' align="left" colspan="3">{$customer.street_address2}</td>
     </tr>   
                 {/if}
         {/if}
@@ -234,7 +234,7 @@
 	{if $invoice.type_id == 2 }
 				{foreach from=$product_group key=group_id item=group}
 							<tr>
-								<td class="col1" align="middle" colspan=6>{$group.name}</td>
+								<td class="col1" align="middle" colspan="6">{$group.name}</td>
 							</tr>
 							<tr>
 								<td class="tbl1-bottom col1"><b>{$LANG.quantity_short}</b></td>
@@ -262,7 +262,7 @@
              		{/foreach}
 
 						<tr>
-							<td colspan=5 align="right">
+							<td colspan="5" align="right">
 								Subtotal:
 							</td>
 							<td align="right">
@@ -270,7 +270,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td colspan=5 align="right">
+							<td colspan="5" align="right">
 								Markup {markup_percentage cost=$invoiceItems group=$group.name}%{* {$group.markup} *}:
 							</td>
 							<td align="right">
@@ -278,7 +278,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td colspan=5 align="right">
+							<td colspan="5" align="right">
 								Total:
 							</td>
 							<td align="right">
@@ -346,7 +346,7 @@
 		<td class="" colspan="6" ><br></td>
 	</tr>
 	<tr class="">
-		<th colspan=6 align="middle"><span class="font1 double_underline" >TOTAL {$preference.pref_currency_sign}{$invoice.total|siLocal_number}</span></td>
+		<th colspan="6" align="middle"><span class="font1 double_underline" >TOTAL {$preference.pref_currency_sign}{$invoice.total|siLocal_number}</span></td>
 	</tr>
 {*
 	<tr>
