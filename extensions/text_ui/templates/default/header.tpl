@@ -20,7 +20,7 @@
 	<script type="text/javascript" src="./include/jquery/jquery-1.2.6.min.js"></script>
 	{$extension_jquery_files }
 	<script type="text/javascript" src="./include/jquery/jquery.plugins.js"></script>
-		<script type="text/javascript" src="./include/jquery/rte/jquery.rte.js"></script>
+	<script type="text/javascript" src="./include/jquery/rte/jquery.rte.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.conf.js"></script>
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/flexigrid.css">
 	<link rel="stylesheet" type="text/css" href="./include/jquery/jquery.plugins.css" title="default" media="screen" />
@@ -50,7 +50,7 @@
 	
 	<!-- customer-details -->
 	<!--[if gte IE 5.5]>
-		<script language="JavaScript" src="./modules/include/js/dhtml.js" type="text/JavaScript"></script>
+		<script src="./modules/include/js/dhtml.js" type="text/JavaScript"></script>
 		<link rel="stylesheet" href="./templates/default/css/iehacks.css" type="text/css" />
 	<![endif]-->
 	

@@ -718,7 +718,7 @@ skin_open();
     { if ($delaypersession!=0)
         echo ("<p class=\"centr\">Now I'm <b>waiting $delaypersession milliseconds</b> before starting next session...</p>\n");
         if (!$ajax) 
-          echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".$_SERVER["PHP_SELF"]."?start=$linenumber&fn=".$_REQUEST["fn"]."&foffset=$foffset&totalqueries=$totalqueries\";',500+$delaypersession);</script>\n");
+          echo ("<script type=\"text/javascript\">window.setTimeout('location.href=\"".$_SERVER["PHP_SELF"]."?start=$linenumber&fn=".$_REQUEST["fn"]."&foffset=$foffset&totalqueries=$totalqueries\";',500+$delaypersession);</script>\n");
         echo ("<noscript>\n");
         echo ("<p class=\"centr\"><a href=\"".$_SERVER["PHP_SELF"]."?start=$linenumber&amp;fn=".$_REQUEST["fn"]."&amp;foffset=$foffset&amp;totalqueries=$totalqueries\">Continue from the line $linenumber</a> (Enable JavaScript to do it automatically)</p>\n");
         echo ("</noscript>\n");
@@ -914,7 +914,7 @@ function create_ajax_script()
 {
   global $linenumber, $foffset, $totalqueries, $delaypersession;
 	?>
-	<script type="text/javascript" language="javascript">			
+	<script type="text/javascript">			
 
 	// creates next action url (upload page, or XML response)
 	function get_url(linenumber,fn,foffset,totalqueries) {

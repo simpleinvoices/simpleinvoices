@@ -67,13 +67,13 @@
 	<link rel="stylesheet" href="./templates/default/css/tabs.css" type="text/css" media="print, projection, screen" />
 
 	<!--[if gte IE 5.5]>
-		<script language="JavaScript" src="./modules/include/js/dhtml.js" type="text/JavaScript"></script>
+		<script src="./modules/include/js/dhtml.js" type="text/JavaScript"></script>
 		<link rel="stylesheet" href="./templates/default/css/iehacks.css" type="text/css" />
 	<![endif]-->
 	
 <script type="text/javascript" src="jquery.validate.js">
 </script>
-<script language="javascript">
+<script type="text/javascript">
 	<!--
 
 var demo_mode=false; // set to false to allow form submit

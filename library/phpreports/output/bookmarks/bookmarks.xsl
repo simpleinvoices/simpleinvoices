@@ -32,7 +32,7 @@
 					</xsl:if>	
 				</LINK>
 			</xsl:for-each>
-			<script language="JavaScript">
+			<script type="text/javascript">
 				function goToBookmark(iBookmark) {
 					parent.frames[1].location.hash="#"+iBookmark;
 				}	
