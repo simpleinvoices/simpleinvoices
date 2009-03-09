@@ -27,7 +27,7 @@
 {/if}
 
 {if $smarty.post.cancel == null }
-	<meta http-equiv=refresh content=2;URL=index.php?module=user&view=manage>
+	<meta http-equiv="refresh" content="2;URL=index.php?module=user&view=manage" />
 {else}
-	<meta http-equiv=refresh content=0;URL=index.php?module=user&view=manage>
+	<meta http-equiv="refresh" content="0;URL=index.php?module=user&view=manage" />
 {/if}
