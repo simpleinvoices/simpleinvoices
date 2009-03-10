@@ -37,7 +37,7 @@
 			::
 			<a href="index.php?module=export&view=invoice&id={$invoice.id}&format=file&filetype={$word_processor}">{$LANG.export_as} .{$wordprocessor} </a>
 			::
-			<a href="index.php?module=invoices&view=email&stage=1&invoice={$invoice.id}">{$LANG.email}</a>
+			<a href="index.php?module=invoices&view=email&stage=1&id={$invoice.id}">{$LANG.email}</a>
 			{if $defaults.delete == '1'} 
 				:: 
 				<a href="index.php?module=invoices&view=delete&stage=1&invoice={$invoice.id}">{$LANG.delete}</a>

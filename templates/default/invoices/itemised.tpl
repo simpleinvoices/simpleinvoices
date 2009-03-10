@@ -200,8 +200,7 @@
 	
 	<tr>
 	<td class="details_screen">{$LANG.inv_pref}</td>
-	<td> <input type="text" name="preference_id" />
-	
+	<td> 
 	{if $preferences == null }
 		<p><em>{$LANG.no_preferences}</em></p>
 	{else}
