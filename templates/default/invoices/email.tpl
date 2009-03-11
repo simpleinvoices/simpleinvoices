@@ -19,8 +19,8 @@
 {if $smarty.get.stage == 1 }
 
 <form name="frmpost" action="index.php?module=invoices&view=email&stage=2&id={$smarty.get.id}" method="post">
-<div id="top"><b>Email Invoice to Customer as PDF</b></div>
-<hr />
+<div id="top"><h3>Email Invoice to Customer as PDF</h3></div>
+
 <table align="center">
 	<tr>
 		<td class="details_screen">From
@@ -49,9 +49,21 @@
 		<td><textarea name='email_notes' class="editor" rows="8" cols="50"></textarea></td>
 	</tr>
 </table>
-<hr />
-<input type="submit" name="submit" value="{$LANG.email}" />
-<input type="hidden" name="op" value="insert_customer" />
+
+<br>
+	<table class="buttons" align="center">
+	    <tr>
+	        <td>
+	            <button type="submit" class="invoice_save positive" name="submit" value="{$LANG.email}">
+	                <img class="button_img" src="./images/common/tick.png" alt=""/> 
+	                {$LANG.email}
+	            </button>
+	            <input type="hidden" name="op" value="insert_customer">
+			</td>
+		    </tr>
+	 </table>
+
+
 </form>
 {/if}
 
