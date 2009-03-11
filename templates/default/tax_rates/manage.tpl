@@ -21,7 +21,7 @@
         <td>
 
             <a href="index.php?module=tax_rates&view=add" class="positive">
-                <img src="./images/common/add.png" alt=""/>
+                <img src="./images/common/add.png" alt="" />
                 {$LANG.add_new_tax_rate}
             </a>
 
@@ -55,7 +55,7 @@
 	{foreach from=$taxes item=tax}
 	<tr class="index_table">
 		<td class="index_table"><a title="{$LANG.view}" class="index_table" href="./index.php?module=tax_rates&amp;view=details&amp;submit={$tax.tax_id}&amp;action=view"><img src="images/common/view.png" height="16" border="0" align="absmiddle" alt="{$LANG.view}" /></a>
-			<a title="{$LANG.edit}" class="index_table" href="./index.php?module=tax_rates&amp;view=details&amp;submit={$tax.tax_id}&amp;action=edit"><img src="images/common/edit.png" height="16" border="0" align="absmiddle" alt="{$LANG.edit}" /></a></td>
+			<a title="{$LANG.edit}" class="index_table" href="./index.php?module=tax_rates&amp;view=details&amp;submit={$tax.tax_id}&amp;action=edit"><img src="images/common/edit.png" height="16" border="0" align="absmiddle" alt="{$LANG.edit}" alt="" /></a></td>
 		<td class="index_table">{$tax.tax_id}</td>
 		<td class="index_table">{$tax.tax_description|escape:html}</td>
 		<td class="index_table">{$tax.tax_percentage|escape:html}</td>

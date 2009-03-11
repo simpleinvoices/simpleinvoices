@@ -13,7 +13,7 @@
         <td>
 
             <a href="index.php?module=user&view=add" class="positive">
-                <img src="./images/common/add.png" alt=""/>
+                <img src="./images/common/add.png" alt="" />
                 {$LANG.user_add}
             </a>
 

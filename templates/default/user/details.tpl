@@ -36,12 +36,12 @@
     <tr>
         <td>
             <a href="./index.php?module=user&view=details&id={$user.id}&action=edit" class="positive">
-                <img src="./images/famfam/report_edit.png" alt=""/>
+                <img src="./images/famfam/report_edit.png" alt="" />
                 {$LANG.edit}
             </a>
 
             <a href="./index.php?module=user&view=manage" class="negative">
-                <img src="./images/common/cross.png" alt=""/>
+                <img src="./images/common/cross.png" alt="" />
                 {$LANG.cancel}
             </a>
     
@@ -64,10 +64,10 @@
 				rel="docs.php?t=help&p=required_field"
 				title="{$LANG.Required_Field}"
 		>
-		<img src="./images/common/required-small.png"></img>
+		<img src="./images/common/required-small.png" alt="" />
 		</a>	
 		</td>
-		<td><input type=text name="email" value="{$user.email}" size=35 id="email" class="required"></td>
+		<td><input type=text name="email" value="{$user.email}" size=35 id="email" class="required" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.role} 
@@ -77,9 +77,7 @@
 				rel="docs.php?t=help&p=user_role"
 				title="{$LANG.role}"
 			> 
-			<img
-				src="./images/common/help-small.png">
-			</img> 
+			<img src="./images/common/help-small.png" alt="" />
 			</a>
 		</td>
 		<td>
@@ -99,13 +97,11 @@
 				rel="docs.php?t=help&p=new_password"
 				title="{$LANG.new_password}"
 			> 
-			<img
-				src="./images/common/help-small.png">
-			</img> 
+			<img src="./images/common/help-small.png" alt="" />
 			</a>
 		</td>
 		<td>
-			<input type=password name="password_field" value="" size=25>
+			<input type="password" name="password_field" value="" size="25" />
 		</td>
 	</tr>
 	<tr>
@@ -118,14 +114,14 @@
 	<tr>
 		<td>
 			<button type="submit" class="positive" name="save_user">
-			<img class="button_img" src="./images/common/tick.png" alt=""/> 
+			<img class="button_img" src="./images/common/tick.png" alt="" /> 
 			{$LANG.save}
-			</button>			<input type="hidden" name="op" value="edit_user">
-			<input type="hidden" name="id" value="{$user.id}">
+			</button>			<input type="hidden" name="op" value="edit_user" />
+			<input type="hidden" name="id" value="{$user.id}" />
 		</td>
 		<td>
 			<a href="./index.php?module=user&view=manage" class="negative">
-			<img src="./images/common/cross.png" alt=""/>
+			<img src="./images/common/cross.png" alt="" />
 			{$LANG.cancel}
 			</a>
 		</td>

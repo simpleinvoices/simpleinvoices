@@ -26,7 +26,7 @@
                 {$LANG.save}
             </button>
 			<input type="hidden" name="name" value="{$default}">
-            <input type="hidden" name="op" value="update_system_defaults">
+            <input type="hidden" name="op" value="update_system_defaults" />
         
             <a href="./index.php?module=system_defaults&view=manage" class="negative">
                 <img src="./images/common/cross.png" alt="" />
