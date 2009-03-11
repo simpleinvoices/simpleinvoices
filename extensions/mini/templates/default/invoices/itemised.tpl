@@ -141,7 +141,7 @@ for (var x = 0; x <= {/literal}{$dynamic_line_items}{literal}; x++)
 </tr>
 
 <tr>
-<td class="details_screen">{$LANG.inv_pref}</td><td input type=text name="preference_id">
+<td class="details_screen">{$LANG.inv_pref}</td><td><input type="text" name="preference_id" />
 
 {if $preferences == null }
 	<p><em>{$LANG.no_preferences}</em></p>
@@ -156,7 +156,7 @@ for (var x = 0; x <= {/literal}{$dynamic_line_items}{literal}; x++)
 </td>
 </tr>	
 <tr>
-	<td align=left>
+	<td align="left">
 		<a href="docs.php?t=help&p=invoice_custom_fields" rel="gb_page_center[450, 450]">{$LANG.want_more_fields}<img src="./images/common/help-small.png"></img></a>
 
 	</td>
@@ -171,8 +171,8 @@ for (var x = 0; x <= {/literal}{$dynamic_line_items}{literal}; x++)
 <!-- </div> -->
 <hr />
 <div style="text-align:center;">
-	<input type=hidden name="max_items" value="{$smarty.section.line.index}">
-	<input type=submit name="submit" value="{$LANG.save_invoice}">
-	<input type=hidden name="type" value="2">
+	<input type=hidden name="max_items" value="{$smarty.section.line.index}" />
+	<input type=submit name="submit" value="{$LANG.save_invoice}" />
+	<input type=hidden name="type" value="2" />
 </div>
 </form>

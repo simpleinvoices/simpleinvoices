@@ -28,14 +28,14 @@
 					{$LANG.quantity}
 				</td>
 				<td>
-					<input type="text" id="quantity1"  name="quantity1" size="5">
+					<input type="text" id="quantity1"  name="quantity1" size="5" />
 				</td>
 			</tr>
 			<tr>
 				<td class="details_screen">
 					{$LANG.product}
 				</td>
-				<td input type="text" name="description">
+				<td><input type="text" name="description">
 				                
 				{if $products == null }
 					<p><em>{$LANG.no_products}</em></p>
@@ -58,7 +58,7 @@
 					{$LANG.unit_price}
 				</td>
 				<td>
-					<input id="unit_price1" name="unit_price1" size="7" value="{$invoiceItem.unit_price|number_format:2}"></input>
+					<input id="unit_price1" name="unit_price1" size="7" value="{$invoiceItem.unit_price|number_format:2}" />
 				</td>
 			</tr>
  
@@ -67,16 +67,16 @@
 					<td class="details_screen" colspan="2" >{$LANG.description}</td>
 				</tr>
             	<tr class="text hide">
-					<td colspan="2" ><textarea input type=text class="editor" name='description' rows="3" cols="80" wrap="nowrap"></textarea></td>
+					<td colspan="2" ><textarea input type="text" class="editor" name='description' rows="3" cols="80" wrap="nowrap"></textarea></td>
 				</tr>
 			{/if}
 </table>
 <hr />
 <div style="text-align:center;">
-	<input type="submit" name="submit" value="{$LANG.add_item}">
-	<input type="hidden" name="id" value="{$smarty.get.id}">
-	<input type="hidden" name="type" value="{$smarty.get.type}">
-	<input type="hidden" name="tax_id" value="{$smarty.get.tax_id}">
+	<input type="submit" name="submit" value="{$LANG.add_item}" />
+	<input type="hidden" name="id" value="{$smarty.get.id}" />
+	<input type="hidden" name="type" value="{$smarty.get.type}" />
+	<input type="hidden" name="tax_id" value="{$smarty.get.tax_id}" />
 </div>
 </form>
 {/if}

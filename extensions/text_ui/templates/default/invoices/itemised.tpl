@@ -137,7 +137,7 @@
 </tr>
 
 <tr>
-<td class="details_screen">{$LANG.inv_pref_short}</td><td input type=text name="preference_id">
+<td class="details_screen">{$LANG.inv_pref_short}</td><td><input type="text" name="preference_id" />
 
 {if $preferences == null }
 	<p><em>{$LANG.no_preferences}</em></p>
@@ -161,8 +161,8 @@
 <!-- </div> -->
 <hr />
 <div style="text-align:center;">
-	<input type=hidden name="max_items" value="{$smarty.section.line.index}">
-	<input type=submit name="submit" value="{$LANG.save_invoice}">
-	<input type=hidden name="type" value="2">
+	<input type=hidden name="max_items" value="{$smarty.section.line.index}" />
+	<input type=submit name="submit" value="{$LANG.save_invoice}" />
+	<input type=hidden name="type" value="2" />
 </div>
 </form>

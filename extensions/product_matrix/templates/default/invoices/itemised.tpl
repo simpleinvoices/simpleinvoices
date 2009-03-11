@@ -15,7 +15,7 @@
 
 <h3>{$LANG.inv} {$LANG.inv_itemised}
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
-        	<img src="images/common/gmail-loader.gif" alt="Loading ..."/> Loading ...
+        	<img src="images/common/gmail-loader.gif" alt="Loading ..." /> Loading ...
 </div>
 </h3>
 
@@ -37,7 +37,7 @@
 
 			<tr>
 				<td>
-					<input type=text  id="quantity{$smarty.section.line.index}" name="quantity{$smarty.section.line.index}" size="5"></td>
+					<input type="text"  id="quantity{$smarty.section.line.index}" name="quantity{$smarty.section.line.index}" size="5" /></td>
 				<td>
 				                
 			{if $products == null }
@@ -82,7 +82,7 @@
 			</td>	
 			{/if}
 			<td>
-				<input id="unit_price{$smarty.section.line.index}" name="unit_price{$smarty.section.line.index}" size="7" value=""></input>
+				<input id="unit_price{$smarty.section.line.index}" name="unit_price{$smarty.section.line.index}" size="7" value="" />
 			</td>
 {*
 				<td>
@@ -138,7 +138,7 @@
 </tr>
 
 <tr>
-<td class="details_screen">{$LANG.inv_pref}</td><td input type=text name="preference_id">
+<td class="details_screen">{$LANG.inv_pref}</td><td><input type="text" name="preference_id">
 
 {if $preferences == null }
 	<p><em>{$LANG.no_preferences}</em></p>
@@ -168,8 +168,8 @@
 <!-- </div> -->
 <hr />
 <div style="text-align:center;">
-	<input type=hidden name="max_items" value="{$smarty.section.line.index}">
-	<input type=submit name="submit" value="{$LANG.save_invoice}">
-	<input type=hidden name="type" value="2">
+	<input type=hidden name="max_items" value="{$smarty.section.line.index}" />
+	<input type=submit name="submit" value="{$LANG.save_invoice}" />
+	<input type=hidden name="type" value="2" />
 </div>
 </form>

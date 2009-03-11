@@ -22,7 +22,7 @@
 </tr>
 
 <tr>
-	<td colspan=6 >
+	<td colspan="6" >
 <textarea input type="text" class="editor" name="description" rows="10" cols="100" wrap="nowrap"></textarea></td>
 </tr>
 
@@ -41,7 +41,8 @@
 	<td class="details_screen">{$LANG.gross_total}</td><td class="details_screen">{$LANG.tax}</td><td class="details_screen">{$LANG.inv_pref}</td>
 </tr>
 <tr>
-	<td><input type="text" name="unit_price" size="15"></td><td input type=text name="tax" size=15>
+	<td><input type="text" name="unit_price" size="15" /></td>
+	<td><input type="text" name="tax" size="15" />
 	
 	{if $taxes == null }
 	<p><em>{$LANG.no_taxes}</em></p>
@@ -68,8 +69,8 @@
 </td>
 	
 <tr>
-	<td align=left>
-		<a class="cluetip" href="#"	rel="docs.php?t=help&p=invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="./images/common/help-small.png"></img> {$LANG.want_more_fields}</a>
+	<td align="left">
+		<a class="cluetip" href="#"	rel="docs.php?t=help&p=invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="./images/common/help-small.png" alt="" /> {$LANG.want_more_fields}</a>
 	</td>
 </tr>
 <!--Add more line items while in an itemeised invoice - Get style - has problems- wipes the current values of the existing rows - not good

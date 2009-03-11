@@ -14,7 +14,7 @@
 
 <h3>{$LANG.inv} {$LANG.inv_consulting}
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
-        	<img src="images/common/gmail-loader.gif" alt="Loading ..."/> Loading ...
+        	<img src="images/common/gmail-loader.gif" alt="Loading ..." /> Loading ...
 </div>
 </h3>
 
@@ -31,7 +31,7 @@
 
 			<tr>
 				<td><input type=text  id="quantity{$smarty.section.line.index}" name="quantity{$smarty.section.line.index}" size="5"></td>
-				</td><td input type="text" name="description{$smarty.section.line.index}" size="50">
+				</td><td><input type="text" name="description{$smarty.section.line.index}" size="50" />
 				                
 			{if $products == null }
 				<p><em>{$LANG.no_products}</em></p>
@@ -74,10 +74,10 @@
 </tr>
 
 <tr>
-        <td colspan=3><textarea  input type="text" class="editor" height="60px" name="note" rows="5" cols="70" wrap="nowrap"></textarea></td>
+        <td colspan="3"><textarea  input type="text" class="editor" height="60px" name="note" rows="5" cols="70" wrap="nowrap"></textarea></td>
 </tr>
 
-<tr><td class="details_screen">{$LANG.tax}</td><td input type="text" name="tax" size="15">
+<tr><td class="details_screen">{$LANG.tax}</td><td><input type="text" name="tax" size="15" />
 
 {if $taxes == null }
 	<p><em>{$LANG.no_taxes}</em></p>
@@ -93,7 +93,7 @@
 </tr>
 
 <tr>
-<td class="details_screen">{$LANG.inv_pref}</td><td input type=text name="preference_id">
+<td class="details_screen">{$LANG.inv_pref}</td><td><input type="text" name="preference_id" />
 
 {if $preferences == null }
 	<p><em>{$LANG.no_preferences}</em></p>
@@ -108,8 +108,8 @@
 </td>
 </tr>	
 <tr>
-	<td align=left>
-		<a class="cluetip" href="#"	rel="docs.php?t=help&p=invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="./images/common/help-small.png"></img> {$LANG.want_more_fields}</a>
+	<td align="left">
+		<a class="cluetip" href="#"	rel="docs.php?t=help&p=invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="./images/common/help-small.png" alt="" /> {$LANG.want_more_fields}</a>
 	</td>
 </tr>
 <!--Add more line items while in an itemeised invoice - Get style - has problems- wipes the current values of the existing rows - not good
@@ -125,11 +125,11 @@
 	<tr>
 	        <td>
 			<button type="submit" class="positive" name="submit" value="{$LANG.save}">
-			<img class="button_img" src="./images/common/tick.png" alt=""/> 
+			<img class="button_img" src="./images/common/tick.png" alt="" /> 
 			{$LANG.save}
 			</button>
-			<input type="hidden" name="max_items" value="{$smarty.section.line.index}">
-			<input type="hidden" name="type" value="3">
+			<input type="hidden" name="max_items" value="{$smarty.section.line.index}" />
+			<input type="hidden" name="type" value="3" />
 			<a href="./index.php?module=invoices&view=manage" class="negative">
 				<img src="./images/common/cross.png" alt="" />
 				{$LANG.cancel}
