@@ -58,7 +58,7 @@
 <tr>
         <td class="details_screen">{$LANG.date_formatted}</td>
         <td>
-                        <input type="text" class="date-picker" name="date" id="date1" value='{$smarty.now|date_format:"%Y-%m-%d"}'></input>
+                        <input type="text" class="date-picker" name="date" id="date1" value='{$smarty.now|date_format:"%Y-%m-%d"}' />
         </td>
 </tr>
 

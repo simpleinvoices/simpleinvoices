@@ -73,13 +73,13 @@
 {if $invoice.type_id == 1 }
 
 	        <tr>
-        	        <td colspan=6><b>{$LANG.description}</b></td>
+        	        <td colspan="6"><b>{$LANG.description}</b></td>
 	        </tr>
 	        <tr>
-	                <td colspan=6>{$invoiceItems.0.description}</td>
+	                <td colspan="6">{$invoiceItems.0.description}</td>
         	</tr>
 	        <tr>
-        	        <td colspan=6><br /></td>
+        	        <td colspan="6"><br /></td>
 	        </tr>
 	        <tr>
 	                <td></td>
@@ -99,10 +99,10 @@
 	        </tr>
 
         	<tr>
-                	<td colspan=6><br /><br /></td>
+                	<td colspan="6"><br /><br /></td>
 	        </tr>
         	<tr>
-                	<td colspan=6><b>{$preference.pref_inv_detail_heading}</b></td>
+                	<td colspan="6"><b>{$preference.pref_inv_detail_heading}</b></td>
 	        </tr>
 
 
@@ -121,7 +121,7 @@
             </tr>
 			<tr>
         		    <td><b>{$LANG.quantity_short}</b></td>
-					<td colspan=3><b>{$LANG.description}</b></td>
+					<td colspan="3"><b>{$LANG.description}</b></td>
 			</tr>
 			<tr>
 					<td><i>{$LANG.unit_price}</i></td>
@@ -139,7 +139,7 @@
         	</tr>
 			<tr>
                	 	<td><b>{$LANG.quantity_short}</b></td>
-					<td colspan=3><b>{$LANG.item}</b></td>
+					<td colspan="3"><b>{$LANG.item}</b></td>
 			</tr>
 			<tr>
 					<td ><i>{$LANG.unit_price}</i></td>
@@ -156,7 +156,7 @@
 	
 			<tr>
 	                <td>{$invoiceItem.quantity|number_format:2}</td>
-					<td colspan=3>{$invoiceItem.product.description} {if $invoiceItem.attr1.display != "" } ::{/if} {$invoiceItem.attr1.display}  {$invoiceItem.attr2.display} {$invoiceItem.attr3.display}</td>
+					<td colspan="3">{$invoiceItem.product.description} {if $invoiceItem.attr1.display != "" } ::{/if} {$invoiceItem.attr1.display}  {$invoiceItem.attr2.display} {$invoiceItem.attr3.display}</td>
 			</tr>
 			<tr>
 					<td >{$preference.pref_currency_sign}{$invoiceItem.unit_price|number_format:2}</td>
@@ -168,7 +168,7 @@
 
 			<tr class='itemised'>       
 				<td colspan="6">
-					<table width=100%>
+					<table width="100%">
 						<tr>
 							<td width="50%" class='details_screen'>{$customFieldLabels.product_cf1}: {$invoiceItem.product.custom_field1}</td>
 							<td width="50%" class='details_screen'>{$customFieldLabels.product_cf2}: {$invoiceItem.product.custom_field2}</td>
@@ -196,18 +196,18 @@
 			</tr>
 			<tr  class='consulting' >	
 				<td colspan="6">
-					<table width=100%>
+					<table width="100%">
 						<tr>
-                            <td width=50% class='details_screen'>{$customFieldLabels.product_cf1}: {$invoiceItem.product.custom_field1}</td>
-							<td width=50% class='details_screen'>{$customFieldLabels.product_cf2}: {$invoiceItem.product.custom_field2}</td>
+                            <td width="50%" class='details_screen'>{$customFieldLabels.product_cf1}: {$invoiceItem.product.custom_field1}</td>
+							<td width="50%" class='details_screen'>{$customFieldLabels.product_cf2}: {$invoiceItem.product.custom_field2}</td>
 						</tr>
 						<tr>       
-                            <td width=50% class='details_screen'>{$customFieldLabels.product_cf3}: {$invoiceItem.product.custom_field3}</td>
-							<td width=50% class='details_screen'>{$customFieldLabels.product_cf4}: {$invoiceItem.product.custom_field4}</td>
+                            <td width="50%" class='details_screen'>{$customFieldLabels.product_cf3}: {$invoiceItem.product.custom_field3}</td>
+							<td width="50%" class='details_screen'>{$customFieldLabels.product_cf4}: {$invoiceItem.product.custom_field4}</td>
 						</tr>
 					</table>
 				</td>
-	<!--		<td></td><td colspan=6 class='details_screen consulting'>{$prod_custom_field_label1}: {$product.custom_field1}, {$prod_custom_field_label2}: {$product.custom_field2}, {$prod_custom_field_label3}: {$product.custom_field3}, {$prod_custom_field_label4}: {$product.custom_field4}</td> -->
+	<!--		<td></td><td colspan="6" class='details_screen consulting'>{$prod_custom_field_label1}: {$product.custom_field1}, {$prod_custom_field_label2}: {$product.custom_field2}, {$prod_custom_field_label3}: {$product.custom_field3}, {$prod_custom_field_label4}: {$product.custom_field4}</td> -->
 			</tr>
 		 
 		{if $invoiceItem.description != null}

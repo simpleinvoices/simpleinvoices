@@ -94,7 +94,7 @@ for (var x = 0; x <= {/literal}{$dynamic_line_items}{literal}; x++)
 			</td>	
 			{/if}
 			<td>
-				<input id="unit_price{$smarty.section.line.index}" name="unit_price{$smarty.section.line.index}" size="7" value=""></input>
+				<input id="unit_price{$smarty.section.line.index}" name="unit_price{$smarty.section.line.index}" size="7" value="" />
 			</td>
 {*
 				<td>
@@ -157,7 +157,7 @@ for (var x = 0; x <= {/literal}{$dynamic_line_items}{literal}; x++)
 </tr>	
 <tr>
 	<td align="left">
-		<a href="docs.php?t=help&p=invoice_custom_fields" rel="gb_page_center[450, 450]">{$LANG.want_more_fields}<img src="./images/common/help-small.png"></img></a>
+		<a href="docs.php?t=help&p=invoice_custom_fields" rel="gb_page_center[450, 450]">{$LANG.want_more_fields}<img src="./images/common/help-small.png" alt="" /></a>
 
 	</td>
 </tr>

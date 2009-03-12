@@ -15,22 +15,23 @@
 *}
 <b>You are editing {$preference.pref_inv_wording} {$invoice.id}</b>
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
-        	<img src="images/common/gmail-loader.gif" alt="Loading ..."/> Loading ...
+        	<img src="images/common/gmail-loader.gif" alt="Loading ..." /> Loading ...
 </div>
  <hr />
 
 <form name="frmpost" action="index.php?module=invoices&view=save" method="post">
 
-	<table align=center>
+	<table align="center">
 	<tr>
-		<td colspan=6 align=center></td>
-	</tr>
-        <tr>
-		<td class='details_screen'>{$preference.pref_inv_wording} {$LANG.number_short}</td><td><input type=hidden name="invoice_id" value={$invoice.id}  size=15>{$invoice.id}</td>
+		<td colspan="6" align="center"></td>
 	</tr>
 	<tr>
-	        <td class="details_screen">{$LANG.date_formatted}</td>
-        	<td><input type="text" class="date-picker" name="date" id="date1" value='{$invoice.calc_date}'></input></td>
+		<td class='details_screen'>{$preference.pref_inv_wording} {$LANG.number_short}</td>
+		<td><input type="hidden" name="invoice_id" value="{$invoice.id}" size="15" />{$invoice.id}</td>
+	</tr>
+	<tr>
+		<td class="details_screen">{$LANG.date_formatted}</td>
+		<td><input type="text" class="date-picker" name="date" id="date1" value='{$invoice.calc_date}' /></td>
 	</tr>
 	<tr>
 		<td class='details_screen'>{$LANG.biller}</td><td>
@@ -176,7 +177,7 @@
 			</td>	
 			{/if}
 				<td>
-					<input id="unit_price{$line}" name="unit_price{$line}" size="7" value="{$invoiceItem.unit_price|number_format:2}"></input>
+					<input id="unit_price{$line}" name="unit_price{$line}" size="7" value="{$invoiceItem.unit_price|number_format:2}" />
 				</td>
 	        </tr>
 		
