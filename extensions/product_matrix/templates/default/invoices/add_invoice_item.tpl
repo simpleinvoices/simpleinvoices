@@ -112,10 +112,10 @@
 				</td>
 			</tr> 
 			{if $type == 3}               
-            	<tr class="text hide">
+            	<tr>
 					<td class="details_screen" colspan=2 >{$LANG.description}</td>
 				</tr>
-            	<tr class="text hide">
+            	<tr>
 					<td colspan="2"><textarea input type="text" name='description' rows="3" cols="80" wrap="nowrap"></textarea></td>
 				</tr>
 			{/if}
