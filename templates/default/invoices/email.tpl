@@ -24,25 +24,25 @@
 <table align="center">
 	<tr>
 		<td class="details_screen">From
-		<a class="cluetip" href="#"	rel="docs.php?t=help&p=email_from" title="{$LANG.email_from}"><img src="./images/common/help-small.png" /></a>
+		<a class="cluetip" href="#"	rel="docs.php?t=help&p=email_from" title="{$LANG.email_from}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" name="email_from" size="50" value="{$biller.email}" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">To
-		<a class="cluetip" href="#"	rel="docs.php?t=help&p=email_to" title="{$LANG.email_to}"><img src="./images/common/help-small.png" /></a>
+		<a class="cluetip" href="#"	rel="docs.php?t=help&p=email_to" title="{$LANG.email_to}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" name="email_to" size="50" value="{$customer.email}" /></td>
 	</tr>
 	<tr>
 	<td class="details_screen">BCC
-		<a class="cluetip" href="#"	rel="docs.php?t=help&p=email_bcc" title="{$LANG.email_bcc}"><img src="./images/common/help-small.png" /></a>
+		<a class="cluetip" href="#"	rel="docs.php?t=help&p=email_bcc" title="{$LANG.email_bcc}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 	<td><input type="text" name="email_bcc" size="50" value="{$biller.email}" /></td>
 	</tr>
 	<tr>
 	<td class="details_screen">Subject</td>
-	<td><input type="text" name="email_subject" size="50" value="{$preferences.pref_inv_wording} {$invoice.id} from {$biller.name} is attached"></td>
+	<td><input type="text" name="email_subject" size="50" value="{$preferences.pref_inv_wording} {$invoice.id} from {$biller.name} is attached" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">Message</td>
@@ -50,15 +50,15 @@
 	</tr>
 </table>
 
-<br>
+<br />
 	<table class="buttons" align="center">
 	    <tr>
 	        <td>
 	            <button type="submit" class="invoice_save positive" name="submit" value="{$LANG.email}">
-	                <img class="button_img" src="./images/common/tick.png" alt=""/> 
+	                <img class="button_img" src="./images/common/tick.png" alt="" /> 
 	                {$LANG.email}
 	            </button>
-	            <input type="hidden" name="op" value="insert_customer">
+	            <input type="hidden" name="op" value="insert_customer" />
 			</td>
 		    </tr>
 	 </table>

@@ -67,7 +67,7 @@
 					<td class="details_screen" colspan="2" >{$LANG.description}</td>
 				</tr>
             	<tr class="text hide">
-					<td colspan="2" ><textarea input type="text" class="editor" name='description' rows="3" cols="80" wrap="nowrap"></textarea></td>
+					<td colspan="2"><textarea input type="text" class="editor" name='description' rows="3" cols="80" wrap="nowrap"></textarea></td>
 				</tr>
 			{/if}
 </table>

@@ -101,7 +101,9 @@
 
 	
 		        <tr>       	         
-			<td class='details_screen'>{$LANG.gross_total}</td><td><input type="text" name="unit_price" value="{$invoiceItems.0.unit_price}" size="10" />
+			<td class='details_screen'>{$LANG.gross_total}</td>
+			<td>
+			<input type="text" name="unit_price" value="{$invoiceItems.0.unit_price}" size="10" />
 			<input type="hidden" name="quantity0" value="1" />
 			<input type="hidden" name="id0" value="{$invoiceItems.0.id}" />
 			<input type="hidden" name="products0" value="{$invoiceItems.0.product_id}" />

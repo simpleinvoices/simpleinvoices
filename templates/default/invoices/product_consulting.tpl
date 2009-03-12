@@ -39,7 +39,7 @@
             </tr>
                 
 			<tr class="text{$smarty.section.line.index} hide">
-        		<td colspan="3" ><textarea input type=text class="editor"  name='notes{$smarty.section.line.index}' rows="3" cols="80" wrap="nowrap"></textarea></td>
+        		<td colspan="3" ><textarea input type="text" class="editor"  name='notes{$smarty.section.line.index}' rows="3" cols="80" wrap="nowrap"></textarea></td>
 			</tr>
 
         {/section}
