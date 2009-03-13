@@ -20,7 +20,7 @@
 			<td class="details_screen">
 				{$LANG.biller_name}
 			</td>
-			<td><input type="text" name="biller_block" size="25" />
+			<td>
 				{if $billers == null }
 			<p><em>{$LANG.no_billers}</em></p>
 		{else}
@@ -37,8 +37,7 @@
 			<td class="details_screen">
 				{$LANG.customer_name}
 			</td>
-			<td><input type="text" name="customer_block" size="25" />
-				
+			<td>
 		{if $customers == null }
 			<p><em>{$LANG.no_customers}</em></p>
 		{else}
