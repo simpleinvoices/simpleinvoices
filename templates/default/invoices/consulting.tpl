@@ -30,7 +30,7 @@
         {section name=line start=0 loop=$dynamic_line_items step=1}
 
 			<tr>
-				<td><input type=text  id="quantity{$smarty.section.line.index}" name="quantity{$smarty.section.line.index}" size="5"></td>
+				<td><input type="text" id="quantity{$smarty.section.line.index}" name="quantity{$smarty.section.line.index}" size="5"></td>
 				</td><td><input type="text" name="description{$smarty.section.line.index}" size="50" />
 				                
 			{if $products == null }
@@ -50,7 +50,7 @@
 				                				                
                 </td>
                 <td>
-					<input id="unit_price{$smarty.section.line.index}" name="unit_price{$smarty.section.line.index}" size="7" value=""></input>
+					<input id="unit_price{$smarty.section.line.index}" name="unit_price{$smarty.section.line.index}" size="7" value="" />
 				</td>	
              </tr>
                 
@@ -74,7 +74,7 @@
 </tr>
 
 <tr>
-        <td colspan="3"><textarea  input type="text" class="editor" height="60px" name="note" rows="5" cols="70" wrap="nowrap"></textarea></td>
+        <td colspan="3"><textarea input type="text" class="editor" height="60px" name="note" rows="5" cols="70" wrap="nowrap"></textarea></td>
 </tr>
 
 <tr><td class="details_screen">{$LANG.tax}</td><td><input type="text" name="tax" size="15" />
