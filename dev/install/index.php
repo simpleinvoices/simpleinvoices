@@ -11,7 +11,7 @@
 			<p><?php echo $LANG['intro'] ."<br />"; ?></p>
 			</div>
 			<br /><br />
-			<a href="preferences.php"><input type="submit" name="Continue" value="<?php echo $LANG['continue']; ?>"></a>
+			<a href="preferences.php"><input type="submit" name="Continue" value="<?php echo $LANG['continue']; ?>" /></a>
 			<!--<form method="post" action="preferences.php">
 				<input type="submit" name="Continue" value="<?php echo $LANG['continue']; ?>">
 			</form>-->

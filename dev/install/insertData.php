@@ -105,8 +105,8 @@
 ?>
 			<form name="insertion" method="post" action="insertion.php">
 			<p>
-				<input type="submit" name="submit[insertNo]" value="<?php echo $LANG['insertDataNo'] ?>">
-				<input type="submit" name="submit[insertYes]" value="<?php echo $LANG['insertDataYes'] ?>"> 
+				<input type="submit" name="submit[insertNo]" value="<?php echo $LANG['insertDataNo'] ?>" />
+				<input type="submit" name="submit[insertYes]" value="<?php echo $LANG['insertDataYes'] ?>" /> 
 			</p>
 			</form>				
 				

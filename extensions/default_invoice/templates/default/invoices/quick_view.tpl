@@ -63,10 +63,15 @@
 	<!-- Invoice Summary section -->
 
 	<tr class='details_screen'>
-		<td class='details_screen'><b>{$preference.pref_inv_wording} {$LANG.summary}:</b></td><td colspan="5" align=right class='details_screen align_right'><a href='#' class="show-summary" onClick="$('.summary').show();$('.show-summary').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"</a><a href='#' class="summary" onClick="$('.summary').hide();$('.show-summary').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a> </td>
+		<td class='details_screen'><b>{$preference.pref_inv_wording} {$LANG.summary}:</b></td>
+		<td colspan="5" align=right class='details_screen align_right'>
+			<a href='#' class="show-summary" onClick="$('.summary').show();$('.show-summary').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" alt="" /></a>
+			<a href='#' class="summary" onClick="$('.summary').hide();$('.show-summary').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" alt="" /></a>
+		</td>
 	</tr>
 	<tr class='details_screen summary'>
-		<td class='details_screen'>{$preference.pref_inv_wording} {$LANG.number_short}:</td><td colspan="5" class='details_screen'>{$invoice.id}</td>
+		<td class='details_screen'>{$preference.pref_inv_wording} {$LANG.number_short}:</td>
+		<td colspan="5" class='details_screen'>{$invoice.id}</td>
 	</tr>
 	<tr class='details_screen summary'>
 		<td class='details_screen'>{$preference.pref_inv_wording} {$LANG.date}:</td>
@@ -85,37 +90,55 @@
 	<tr class='details_screen'>
 		<td class='details_screen'><b>{$LANG.biller}:</b></td>
 		<td class='details_screen' colspan="3">{$biller.name}</td>
-		<td colspan="2" class='details_screen align_right'><a href='#' class="show-biller" onClick="$('.biller').show();$('.show-biller').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a><a href='#' class="biller" onClick="$('.biller').hide();$('.show-biller').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a></td>
+		<td colspan="2" class='details_screen align_right'>
+			<a href='#' class="show-biller" onClick="$('.biller').show();$('.show-biller').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" alt="" /></a>
+			<a href='#' class="biller" onClick="$('.biller').hide();$('.show-biller').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" alt="" /></a></td>
 	</tr>
 	<tr class='details_screen biller'>
-		<td class='details_screen'>{$LANG.street}:</td><td class='details_screen' colspan="5">{$biller.street_address}</td>
+		<td class='details_screen'>{$LANG.street}:</td>
+		<td class='details_screen' colspan="5">{$biller.street_address}</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td class='details_screen'>{$LANG.street2}:</td><td class='details_screen' colspan="5">{$biller.street_address2}</td>
+		<td class='details_screen'>{$LANG.street2}:</td>
+		<td class='details_screen' colspan="5">{$biller.street_address2}</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td class='details_screen'>{$LANG.city}:</td><td class='details_screen' colspan="3">{$biller.city}</td><td class='details_screen'>{$LANG.phone_short}:</td><td class='details_screen'>{$biller.phone}</td>
+		<td class='details_screen'>{$LANG.city}:</td>
+		<td class='details_screen' colspan="3">{$biller.city}</td>
+		<td class='details_screen'>{$LANG.phone_short}:</td>
+		<td class='details_screen'>{$biller.phone}</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td class='details_screen'>{$LANG.state}, {$LANG.zip}:</td><td class='details_screen' colspan="3">{$biller.state}, {$biller.zip_code}</td><td class='details_screen'>{$LANG.mobile_short}:</td><td class='details_screen'>{$biller.mobile_phone}</td>
+		<td class='details_screen'>{$LANG.state}, {$LANG.zip}:</td>
+		<td class='details_screen' colspan="3">{$biller.state}, {$biller.zip_code}</td>
+		<td class='details_screen'>{$LANG.mobile_short}:</td>
+		<td class='details_screen'>{$biller.mobile_phone}</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td class='details_screen'>{$LANG.country}:</td><td class='details_screen' colspan="3">{$biller.country}</td><td class='details_screen'>{$LANG.fax}:</td><td class='details_screen'>{$biller.fax}</td>
+		<td class='details_screen'>{$LANG.country}:</td>
+		<td class='details_screen' colspan="3">{$biller.country}</td>
+		<td class='details_screen'>{$LANG.fax}:</td>
+		<td class='details_screen'>{$biller.fax}</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td class='details_screen'>{$LANG.email}:</td><td class='details_screen' colspan="5">{$biller.email}</td>
+		<td class='details_screen'>{$LANG.email}:</td>
+		<td class='details_screen' colspan="5">{$biller.email}</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td class='details_screen'>{$customFieldLabels.biller_cf1}:</td><td class='details_screen' colspan="5">{$biller.custom_field1}</td>
+		<td class='details_screen'>{$customFieldLabels.biller_cf1}:</td>
+		<td class='details_screen' colspan="5">{$biller.custom_field1}</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td class='details_screen'>{$customFieldLabels.biller_cf2}:</td><td class='details_screen' colspan="5">{$biller.custom_field2}</td>
+		<td class='details_screen'>{$customFieldLabels.biller_cf2}:</td>
+		<td class='details_screen' colspan="5">{$biller.custom_field2}</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td class='details_screen'>{$customFieldLabels.biller_cf3}:</td><td class='details_screen' colspan="5">{$biller.custom_field3}</td>
+		<td class='details_screen'>{$customFieldLabels.biller_cf3}:</td>
+		<td class='details_screen' colspan="5">{$biller.custom_field3}</td>
 	</tr>	
 	<tr class='details_screen biller'>
-		<td class='details_screen'>{$customFieldLabels.biller_cf4}:</td><td class='details_screen' colspan="5">{$biller.custom_field4}</td>
+		<td class='details_screen'>{$customFieldLabels.biller_cf4}:</td>
+		<td class='details_screen' colspan="5">{$biller.custom_field4}</td>
 	</tr>
 	{*
 		{showCustomFields categorieId="1" itemId=$biller.id }
@@ -129,41 +152,62 @@
 	<tr class='details_screen'>
 		<td class='details_screen'><b>{$LANG.customer}:</b></td>
 		<td class='details_screen' colspan="3">{$customer.name}</td>
-		<td colspan="2" class='details_screen align_right'><a href='#' class="show-customer" {literal} onClick="$('.customer').show(); $('.show-customer').hide(); {/literal}"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a> <a href='#' class="customer" {literal} onClick="$('.customer').hide(); $('.show-customer').show(); {/literal}"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a></td>
+		<td colspan="2" class='details_screen align_right'>
+			<a href='#' class="show-customer" {literal} onClick="$('.customer').show(); $('.show-customer').hide(); {/literal}"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" alt=""/></a>
+			<a href='#' class="customer" {literal} onClick="$('.customer').hide(); $('.show-customer').show(); {/literal}"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" alt="" /></a>
+		</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>{$LANG.attention_short}:</td><td class='details_screen' colspan="5" align="left">{$customer.attention},</td>
+		<td class='details_screen'>{$LANG.attention_short}:</td>
+		<td class='details_screen' colspan="5" align="left">{$customer.attention},</td>
 	</tr>
 	<tr class='details_screen customer'>
-		<td class='details_screen'>{$LANG.street}:</td><td class='details_screen' colspan="5" align="left">{$customer.street_address}</td>
+		<td class='details_screen'>{$LANG.street}:</td>
+		<td class='details_screen' colspan="5" align="left">{$customer.street_address}</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>{$LANG.street2}:</td><td class='details_screen' colspan="5" align="left">{$customer.street_address2}</td>
+		<td class='details_screen'>{$LANG.street2}:</td>
+		<td class='details_screen' colspan="5" align="left">{$customer.street_address2}</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>{$LANG.city}:</td><td class='details_screen' colspan="3">{$customer.city}</td><td class='details_screen'>Ph:</td><td class='details_screen'>{$customer.phone}</td>
+		<td class='details_screen'>{$LANG.city}:</td>
+		<td class='details_screen' colspan="3">{$customer.city}</td>
+		<td class='details_screen'>Ph:</td>
+		<td class='details_screen'>{$customer.phone}</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>{$LANG.state}, ZIP:</td><td colspan="3" class='details_screen'>{$customer.state}, {$customer.zip_code}</td><td class='details_screen'>{$LANG.fax}:</td><td class='details_screen'>{$customer.fax}</td>
+		<td class='details_screen'>{$LANG.state}, ZIP:</td>
+		<td colspan="3" class='details_screen'>{$customer.state}, {$customer.zip_code}</td>
+		<td class='details_screen'>{$LANG.fax}:</td><td class='details_screen'>{$customer.fax}</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>{$LANG.country}:</td><td class='details_screen' colspan="3">{$customer.country}</td><td class='details_screen'>Mobile:</td><td class='details_screen'>{$customer.mobile_phone}</td>
+		<td class='details_screen'>{$LANG.country}:</td>
+		<td class='details_screen' colspan="3">{$customer.country}</td>
+		<td class='details_screen'>Mobile:</td>
+		<td class='details_screen'>{$customer.mobile_phone}</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>{$LANG.email}:</td><td class='details_screen'colspan="5">{$customer.email}</td>
+		<td class='details_screen'>{$LANG.email}:</td>
+		<td class='details_screen'colspan="5">{$customer.email}</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>{$customFieldLabels.customer_cf1}:</td><td colspan="5" class='details_screen'>{$customer.custom_field1}</td>
+		<td class='details_screen'>{$customFieldLabels.customer_cf1}:</td>
+		<td colspan="5" class='details_screen'>{$customer.custom_field1}</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>{$customFieldLabels.customer_cf2}:</td><td colspan="5" class='details_screen'>{$customer.custom_field2}</td>
+		<td class='details_screen'>{$customFieldLabels.customer_cf2}:</td>
+		<td colspan="5" class='details_screen'>{$customer.custom_field2}</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>{$customFieldLabels.customer_cf3}:</td><td class='details_screen' colspan="5">{$customer.custom_field3}</td>
+		<td class='details_screen'>{$customFieldLabels.customer_cf3}:</td>
+		<td class='details_screen' colspan="5">{$customer.custom_field3}</td>
 	</tr>	
 	<tr class='details_screen customer'>
-		<td class='details_screen'>{$customFieldLabels.customer_cf4}:</td><td class='details_screen' colspan=4>{$customer.custom_field4}</td>
-		<td class='details_screen align_right'><a href="?module=invoices&view=usedefault&action=update_template&id={$invoice.id}&customer_id={$customer.id}"><img src="./images/flexigrid/load.png" title='{$LANG.invoice} {$invoice.id} {$LANG.as_template} {$LANG.for} {$customer.name}'/></a></td>
+		<td class='details_screen'>{$customFieldLabels.customer_cf4}:</td>
+		<td class='details_screen' colspan=4>{$customer.custom_field4}</td>
+		<td class='details_screen align_right'>
+		<a href="?module=invoices&view=usedefault&action=update_template&id={$invoice.id}&customer_id={$customer.id}"><img src="./images/flexigrid/load.png" title='{$LANG.invoice} {$invoice.id} {$LANG.as_template} {$LANG.for} {$customer.name}' alt="" /></a>
+		</td>
 
 	</tr>	
 			{*
@@ -223,7 +267,10 @@
 	{if $invoice.type_id == 2 }
 
             <tr>
-                    <td colspan="6" class="details_screen align_right"><a href='#' class="show-itemised" onClick="$('.itemised').show();$('.show-itemised').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a><a href='#' class="itemised" onClick="$('.itemised').hide();$('.show-itemised').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a></td>
+                    <td colspan="6" class="details_screen align_right">
+                    <a href='#' class="show-itemised" onClick="$('.itemised').show();$('.show-itemised').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
+                    <a href='#' class="itemised" onClick="$('.itemised').hide();$('.show-itemised').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a>
+                    </td>
             </tr>
 			<tr>
         		    <td><b>{$LANG.quantity_short}</b></td>
@@ -238,7 +285,10 @@
     {if $invoice.type_id == 3 }
 
 			<tr>
-					<td colspan="6" class="details_screen align_right"><a href='#' class="show-consulting" onClick="$('.consulting').show();$('.show-consulting').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a><a href='#' class="consulting" onClick="$('.consulting').hide();$('.show-consulting').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a></td>
+					<td colspan="6" class="details_screen align_right">
+					<a href='#' class="show-consulting" onClick="$('.consulting').show();$('.show-consulting').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
+					<a href='#' class="consulting" onClick="$('.consulting').hide();$('.show-consulting').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a>
+					</td>
         	</tr>
 			<tr>
                	 	<td><b>{$LANG.quantity_short}</b></td>
@@ -309,14 +359,14 @@
 			</tr>
 			<tr  class='consulting' >	
 				<td colspan="6">
-					<table width=100%>
+					<table width="100%">
 						<tr>
-                            <td width=50% class='details_screen'>{$customFieldLabels.product_cf1}: {$invoiceItem.product.custom_field1}</td>
+                            <td width="50%" class='details_screen'>{$customFieldLabels.product_cf1}: {$invoiceItem.product.custom_field1}</td>
 							<td width=50% class='details_screen'>{$customFieldLabels.product_cf2}: {$invoiceItem.product.custom_field2}</td>
 						</tr>
 						<tr>       
-                            <td width=50% class='details_screen'>{$customFieldLabels.product_cf3}: {$invoiceItem.product.custom_field3}</td>
-							<td width=50% class='details_screen'>{$customFieldLabels.product_cf4}: {$invoiceItem.product.custom_field4}</td>
+                            <td width="50%" class='details_screen'>{$customFieldLabels.product_cf3}: {$invoiceItem.product.custom_field3}</td>
+							<td width="50%" class='details_screen'>{$customFieldLabels.product_cf4}: {$invoiceItem.product.custom_field4}</td>
 						</tr>
 					</table>
 				</td>
@@ -340,7 +390,10 @@
 		<tr class="details_screen">
 			<td colspan="5"><b>{$LANG.notes}:</b></td>
 				{if ($invoice.note|count_characters:true > 25)}
-					<td class="details_screen align_right"><a href='#' class="show-notes" onClick="$('.notes').show();$('.show-notes').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a><a href='#' class="notes" onClick="$('.notes').hide();$('.show-notes').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a></td>
+					<td class="details_screen align_right">
+						<a href='#' class="show-notes" onClick="$('.notes').show();$('.show-notes').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a>
+						<a href='#' class="notes" onClick="$('.notes').hide();$('.show-notes').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a>
+					</td>
 				{/if}						
 		</tr>
 			<!-- if hide detail click - the stripped note will be displayed -->
@@ -436,7 +489,7 @@
 		<td class="account"><u>{$preference.pref_currency_sign}{$invoice.owing|number_format:2}</u></td>
 		<td class="account">{$LANG.age}:</td>
 		<td class="account" nowrap>{$invoice_age} 
-		<a class="cluetip" href="#"	rel="docs.php?t=help&p=age" title="{$LANG.age}"><img src="./images/common/help-small.png"></img></a>
+		<a class="cluetip" href="#" rel="docs.php?t=help&p=age" title="{$LANG.age}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td></td>
 		<td class="columnleft"></td>

@@ -98,12 +98,14 @@ foreach ($_REQUEST as $key => $val)
 }
 
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
 <title>BigDump ver. <?php echo (VERSION); ?></title>
-<meta http-equiv="CONTENT-TYPE" content="text/html; charset=iso-8859-1"/>
-<meta http-equiv="CONTENT-LANGUAGE" content="EN"/>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1"/>
+<meta http-equiv="content-language" content="EN"/>
 
 <meta http-equiv="Cache-Control" content="no-cache/"/>
 <meta http-equiv="Pragma" content="no-cache"/>
