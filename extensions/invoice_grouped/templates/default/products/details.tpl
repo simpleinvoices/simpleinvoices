@@ -1,4 +1,4 @@
-<form name="frmpost" action="index.php?module=products&view=save&id={$smarty.get.id}" method="post" id="frmpost" onSubmit="return checkForm(this);">
+<form name="frmpost" action="index.php?module=products&amp;view=save&amp;id={$smarty.get.id}" method="post" id="frmpost" onSubmit="return checkForm(this);">
 
 
 {if $smarty.get.action== 'view' }
@@ -20,25 +20,29 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf1} 
-		<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png"></img></a>
+		<a class="cluetip" href="#" rel="docs.php?t=help&amp;p=custom_fields" title="{$LANG.custom_fields}">
+		<img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>{$product.custom_field1}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf2} 
-		<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png"></img></a>
+		<a class="cluetip" href="#" rel="docs.php?t=help&amp;p=custom_fields" title="{$LANG.custom_fields}">
+		<img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>{$product.custom_field2}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf3} 
-		<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png"></img></a>
+		<a class="cluetip" href="#" rel="docs.php?t=help&amp;p=custom_fields" title="{$LANG.custom_fields}">
+		<img src="./images/common/help-small.png" alt=""></a>
 		</td>
 		<td>{$product.custom_field3}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf4} 
-		<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png"></img></a>
+		<a class="cluetip" href="#" rel="docs.php?t=help&amp;p=custom_fields" title="{$LANG.custom_fields}">
+		<img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>{$product.custom_field4}</td>
 	</tr>
@@ -57,7 +61,7 @@
 	<table class="buttons" align="center">
 		<tr>
 			<td>
-				<a href="./index.php?module=products&view=details&id={$product.id}&action=edit" class="positive">
+				<a href="./index.php?module=products&amp;view=details&amp;id={$product.id}&amp;action=edit" class="positive">
 					<img src="./images/famfam/add.png" alt=""/>
 					{$LANG.edit}
 				</a>
@@ -93,7 +97,8 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf1} 
-		<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png"></img></a>
+		<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=custom_fields" title="{$LANG.custom_fields}">
+		<img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>
 		<select name="custom_field1">
@@ -106,19 +111,22 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf2} 
-		<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png"></img></a>
+		<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=custom_fields" title="{$LANG.custom_fields}">
+		<img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" name="custom_field2" size="50" value="{$product.custom_field2}" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf3} 
-		<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png"></img></a>
+		<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=custom_fields" title="{$LANG.custom_fields}">
+		<img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" name="custom_field3" size="50" value="{$product.custom_field3}" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf4} 
-		<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png"></img></a>
+		<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=custom_fields" title="{$LANG.custom_fields}">
+		<img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" name="custom_field4" size="50" value="{$product.custom_field4}" /></td>
 	</tr>
@@ -141,14 +149,14 @@
 	<tr>
 		<td>
 			<button type="submit" class="positive" name="save_product" value="{$LANG.save}">
-			    <img class="button_img" src="./images/common/tick.png" alt=""/> 
+			    <img class="button_img" src="./images/common/tick.png" alt="" /> 
 				{$LANG.save}
 			</button>
 
 			<input type="hidden" name="op" value="edit_product">
 		
-			<a href="./index.php?module=products&view=manage" class="negative">
-		        <img src="./images/common/cross.png" alt=""/>
+			<a href="./index.php?module=products&amp;view=manage" class="negative">
+		        <img src="./images/common/cross.png" alt="" />
 	        	{$LANG.cancel}
     		</a>
 	
