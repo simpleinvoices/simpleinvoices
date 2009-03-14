@@ -92,11 +92,9 @@ function mysqlQuery($sqlQuery) {
 
 function dbQuery($sqlQuery) {
 	global $dbh;
-
 	$argc = func_num_args();
 	$binds = func_get_args();
 	$sth = false;
-
 	// PDO SQL Preparation
 	$sth = $dbh->prepare($sqlQuery);
 	if ($argc > 1) {
@@ -125,7 +123,6 @@ function dbLogger($sqlQuery) {
 	global $auth_session;
 	
 	$userid = $auth_session->id;
-	
 	if(LOGGING && (preg_match('/^\s*select/iD',$sqlQuery) == 0)) {
 		// Only log queries that could result in data/database  modification
 
@@ -839,7 +836,7 @@ function getDefaultLanguage() {
 function getInvoiceTotal($invoice_id) {
 	global $LANG;
 	
-	$sql ="SELECT SUM(total) AS total FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :invoice_id";
+	$sql ="SELECT SUM(total) AS total FROM ".TB_PREFIX."invoice_items WHERE invoice_id =  :invoice_id";
 	$sth = dbQuery($sql, ':invoice_id', $invoice_id);
 	$res = $sth->fetch();
 	//echo "TOTAL".$res['total'];
@@ -849,7 +846,7 @@ function getInvoiceTotal($invoice_id) {
 function setInvoiceStatus($invoice, $status){
 	global $dbh;
 
-	$sql = "UPDATE " . TB_PREFIX . "invoices SET status_id = :status WHERE id = :id";
+	$sql = "UPDATE " . TB_PREFIX . "invoices SET status_id =  :status WHERE id =  :id";
 	$sth  = dbQuery($sql, ':status', $status, ':id', $invoice) or die(htmlspecialchars(end($dbh->errorInfo())));
 }
 
@@ -858,7 +855,7 @@ function getInvoice($id) {
 	global $config;
 	global $auth_session; 
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE id = :id and domain_id = :domain_id";
+	$sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE id =  :id and domain_id =  :domain_id";
 	//echo $sql;
 	
 	$sth  = dbQuery($sql, ':id', $id, ':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
@@ -877,7 +874,7 @@ function getInvoice($id) {
 
 	
 	#invoice total tax
-	$sql ="SELECT SUM(tax_amount) AS total_tax, SUM(total) AS total FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :id";
+	$sql ="SELECT SUM(tax_amount) AS total_tax, SUM(total) AS total FROM ".TB_PREFIX."invoice_items WHERE invoice_id =  :id";
 	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$result = $sth->fetch();
 	//$invoice['total'] = number_format($result['total'],2);
@@ -942,14 +939,36 @@ function taxesGroupedForInvoiceItem($invoice_item_id)
 
 }
 
-function getExtensionID($extname = "none") {
+function statusExtension($extension_id, $status=2) {
+	global $dbh;
+	global $auth_session;
+
+	//status=2 = toggle status
+	if ($status == 2) {
+		$sql = "SELECT enabled FROM ".TB_PREFIX."dev_extensions WHERE id = :id AND domain_id = :domain_id";
+		$sth = dbQuery($sql,':id', $extension_id, ':domain_id', $auth_session->domain_id ) or die(htmlspecialchars(end($dbh->errorInfo())));
+		$extension_info = $sth->fetch();
+		$status = 1 - $extension_info['enabled'];
+	}
+
+	$sql = "UPDATE ".TB_PREFIX."dev_extensions SET enabled =  :status WHERE id =  :id AND domain_id =  :domain_id"; 
+	if (dbQuery($sql, ':status', $status,':id', $extension_id, ':domain_id', $auth_session->domain_id)) {
+		return true;
+	}
+	return false;
+}
+
+function getExtensionID($extension_name = "none") {
 
 	global $dbh;
-	$sth = dbQuery("SELECT * FROM ".TB_PREFIX."dev_extensions WHERE name LIKE '".$extname."'") or die(htmlspecialchars(end($dbh->errorInfo())));
-	$ext_info = $sth->fetch();
-	if (! $ext_info) { return -2; }			// -2 = no result set = extension not found
-	if ($ext_info['enabled'] == 0) { return -1; }	// -1 = extension not enabled
-	return $ext_info['id'];				//  0 = core, >0 is extension id
+	global $auth_session;
+	
+	$sql = "SELECT * FROM ".TB_PREFIX."dev_extensions WHERE name LIKE ':extension_name' AND domain_id =  :domain_id";
+	$sth = dbQuery($sql,':extension_name', $extension_name, ':domain_id', $auth_session->domain_id ) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$extension_info = $sth->fetch();
+	if (! $extension_info) { return -2; }			// -2 = no result set = extension not found
+	if ($extension_info['enabled'] == 0) { return -1; }	// -1 = extension not enabled
+	return $extension_info['id'];				//  0 = core, >0 is extension id
 }
 
 function getSystemDefaults() {
@@ -960,14 +979,15 @@ function getSystemDefaults() {
 
 function getDefaults($extension_name="any") {
 	global $dbh;
+	global $auth_session;
 	
-	$print_defaults = "SELECT * FROM ".TB_PREFIX."system_defaults";
+	$print_defaults = "SELECT * FROM ".TB_PREFIX."system_defaults WHERE domain_id =  :domain_id";
 	if ($extension_name != "any") {
 		$extension_id = getExtensionID($extension_name);
-		if ($extension_id >= 0) { $print_defaults .= " WHERE extension_id = ".$extension_id; } 
+		if ($extension_id >= 0) { $print_defaults .= " AND extension_id = ".$extension_id; } 
 	}
 
-	$sth = dbQuery($print_defaults) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sth = dbQuery($print_defaults, 'domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
 	$defaults = null;
 	$default = null;
@@ -981,6 +1001,7 @@ function getDefaults($extension_name="any") {
 }
 
 function updateDefault($name,$value,$extension_name="any") {
+	global $auth_session;
 	
 	$sql = "UPDATE ".TB_PREFIX."system_defaults SET value =  :value WHERE name = :name"; 
 
