@@ -942,12 +942,31 @@ function taxesGroupedForInvoiceItem($invoice_item_id)
 
 }
 
+function getExtensionID($extname = "none") {
 
+	global $dbh;
+	$sth = dbQuery("SELECT * FROM ".TB_PREFIX."dev_extensions WHERE name LIKE '".$extname."'") or die(htmlspecialchars(end($dbh->errorInfo())));
+	$ext_info = $sth->fetch();
+	if (! $ext_info) { return -2; }			// -2 = no result set = extension not found
+	if ($ext_info['enabled'] == 0) { return -1; }	// -1 = extension not enabled
+	return $ext_info['id'];				//  0 = core, >0 is extension id
+}
 
 function getSystemDefaults() {
+
+	$defaults = getDefaults("core");
+	return $defaults;
+}
+
+function getDefaults($extension_name="any") {
 	global $dbh;
 	
 	$print_defaults = "SELECT * FROM ".TB_PREFIX."system_defaults";
+	if ($extension_name != "any") {
+		$extension_id = getExtensionID($extension_name);
+		if ($extension_id >= 0) { $print_defaults .= " WHERE extension_id = ".$extension_id; } 
+	}
+
 	$sth = dbQuery($print_defaults) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
 	$defaults = null;
@@ -961,12 +980,26 @@ function getSystemDefaults() {
 	return $defaults;
 }
 
-function updateDefault($name,$value) {
+function updateDefault($name,$value,$extension_name="any") {
 	
 	$sql = "UPDATE ".TB_PREFIX."system_defaults SET value =  :value WHERE name = :name"; 
-	//echo $sql;
-	if (dbQuery($sql, ':value', $value, ':name', $name)) {
-		return true;
+
+	if ($extension_name != "any") {				// to preserve backward compatibility
+		$extension_id = getExtensionID($extension_name);
+		if ($extension_id >= 0) { 
+			$sql .= " AND domain_id = :domain_id AND extension_id = :extension_id"; 
+		} else { 
+			die(htmlspecialchars("Invalid extension name: ".$extension)); 
+		}
+		if (dbQuery($sql, ':value', $value, ':name', $name, ':extension_id', $extension_id, ':domain_id', $auth_session->domain_id)) { 
+			return true; 
+		}
+	} else {
+		//echo $sql;
+		//if (dbQuery($sql, ':value', $value, ':name', $name, ':domain_id', $auth_session->domain_id)) { 	// domain_id not yet in defaults table
+		if (dbQuery($sql, ':value', $value, ':name', $name)) {
+			return true;
+		}
 	}
 	return false;
 }
