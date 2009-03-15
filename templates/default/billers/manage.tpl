@@ -13,8 +13,8 @@
 	<table class="buttons" align="center">
     <tr>
         <td>
-            <a href="./index.php?module=billers&view=add" class="positive">
-                <img src="./images/famfam/add.png" alt=""/>
+            <a href="./index.php?module=billers&amp;view=add" class="positive">
+                <img src="./images/famfam/add.png" alt="" />
                 {$LANG.add_new_biller}
             </a>
 
@@ -26,8 +26,8 @@
 	<table class="buttons" align="center">
     <tr>
         <td>
-            <a href="./index.php?module=billers&view=add" class="positive">
-                <img src="./images/famfam/add.png" alt=""/>
+            <a href="./index.php?module=billers&amp;view=add" class="positive">
+                <img src="./images/famfam/add.png" alt="" />
                 {$LANG.add_new_biller}
             </a>
 
