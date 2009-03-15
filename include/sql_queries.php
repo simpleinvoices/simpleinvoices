@@ -981,7 +981,7 @@ function getDefaults($extension_name="any") {
 	global $dbh;
 	global $auth_session;
 	
-	$print_defaults = "SELECT * FROM ".TB_PREFIX."system_defaults";
+	//$print_defaults = "SELECT * FROM ".TB_PREFIX."system_defaults";
 	$print_defaults = "SELECT * FROM ".TB_PREFIX."system_defaults WHERE domain_id =  :domain_id";
 
 	if ($extension_name != "any") {
