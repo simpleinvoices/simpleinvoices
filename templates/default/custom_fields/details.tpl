@@ -9,19 +9,20 @@
 *	 GPL v3 or above
 *}
 
-<form name="frmpost" action="index.php?module=custom_fields&view=save&id={$smarty.get.id}"
- method="POST" onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=custom_fields&amp;view=save&amp;id={$smarty.get.id}"
+ method="POST" onsubmit="return frmpost_Validator(this);">
 
 
 {if $smarty.get.action == "view" }
 
 	<h3>{$LANG.custom_fields} ::
-	<a href="index.php?module=custom_fields&view=details&id={$cf.cf_id}&action=edit">{$LANG.edit}</a></h3>
+	<a href="index.php?module=custom_fields&amp;view=details&amp;id={$cf.cf_id}&amp;action=edit">{$LANG.edit}</a></h3>
 	<hr />
 	
 	<table align="center">
 	<tr>
-		<td class="details_screen">{$LANG.id}</td><td>{$cf.cf_id}</td>
+		<td class="details_screen">{$LANG.id}</td>
+		<td>{$cf.cf_id}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.custom_field_db_field_name}</td>
@@ -39,7 +40,7 @@
 	<hr />
 
 
-<a href="index.php?module=custom_fields&view=details&id={$cf.cf_id}&action=edit">{$LANG.edit}</a>
+<a href="index.php?module=custom_fields&amp;view=details&amp;id={$cf.cf_id}&amp;action=edit">{$LANG.edit}</a>
 
 {/if}
 
@@ -51,7 +52,8 @@
 
 	<table align="center">
         <tr>
-                <td class="details_screen">{$LANG.id}</td><td>{$cf.cf_id}</td>
+                <td class="details_screen">{$LANG.id}</td>
+		<td>{$cf.cf_id}</td>
         </tr>
         <tr>
                 <td class="details_screen">{$LANG.custom_field_db_field_name}</td>
@@ -72,14 +74,14 @@
     <tr>
         <td>
             <button type="submit" class="positive" name="save_custom_field" value="{$LANG.save}">
-                <img class="button_img" src="./images/common/tick.png" alt=""/> 
+                <img class="button_img" src="./images/common/tick.png" alt="" /> 
                 {$LANG.save}
             </button>
 
-            <input type="hidden" name="op" value="edit_custom_field">
+            <input type="hidden" name="op" value="edit_custom_field" />
         
-            <a href="./index.php?module=custom_fields&view=manage" class="negative">
-                <img src="./images/common/cross.png" alt=""/>
+            <a href="./index.php?module=custom_fields&amp;view=manage" class="negative">
+                <img src="./images/common/cross.png" alt="" />
                 {$LANG.cancel}
             </a>
         </td>

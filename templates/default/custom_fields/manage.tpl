@@ -12,8 +12,8 @@
 {else}
 
 <div style="text-align:center;">
-<a class="cluetip" href="#"	rel="docs.php?t=help&p=what_are_custom_fields" title="{$LANG.what_are_custom_fields}">{$LANG.what_are_custom_fields}<img src="./images/common/help-small.png"></img></a> ::
-<a class="cluetip" href="#"	rel="docs.php?t=help&p=manage_custom_fields" title="{$LANG.whats_this_page_about}">{$LANG.whats_this_page_about}<img src="./images/common/help-small.png"></img></a>
+<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=what_are_custom_fields" title="{$LANG.what_are_custom_fields}">{$LANG.what_are_custom_fields}<img src="./images/common/help-small.png" alt="" /></a> ::
+<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=manage_custom_fields" title="{$LANG.whats_this_page_about}">{$LANG.whats_this_page_about}<img src="./images/common/help-small.png" alt="" /></a>
 </div>
 
 <table id="manageGrid" style="display:none"></table>
@@ -38,8 +38,8 @@
 	{foreach from=$cfs item=cf}
 	<tr class="index_table">
 		<td class="index_table">
-			<a title="{$LANG.view}" class="index_table" href="index.php?module=custom_fields&view=details&submit={$cf.cf_id}&action=view"><img src="images/common/view.png" height="16" border="0" align="absmiddle" /></a>
-			<a title="{$LANG.edit}" class="index_table" href="index.php?module=custom_fields&view=details&submit={$cf.cf_id}&action=edit"><img src="images/common/edit.png" height="16" border="0" align="absmiddle" /></a> </td>
+			<a title="{$LANG.view}" class="index_table" href="index.php?module=custom_fields&amp;view=details&submit={$cf.cf_id}&action=view"><img src="images/common/view.png" height="16" border="0" align="absmiddle" alt="" /></a>
+			<a title="{$LANG.edit}" class="index_table" href="index.php?module=custom_fields&amp;view=details&submit={$cf.cf_id}&action=edit"><img src="images/common/edit.png" height="16" border="0" align="absmiddle" alt="" /></a> </td>
 		<td class="index_table">{$cf.cf_id}</td>
 		<td class="index_table">{$cf.filed_name}</td>
 		<td class="index_table">{$cf.cf_custom_label}</td>
