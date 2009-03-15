@@ -1,22 +1,25 @@
-<html>
-<head>
 <?xml version="1.0" encoding="utf-8" ?>
-	<title>Simple Invoices</title>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Simple Invoices</title>
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
-		<link rel="Stylesheet" href="library/WebApp/Design/Render.css" />
-		<script type="text/javascript" src="library/WebApp/Action/Logic.js"></script>
+<link rel="Stylesheet" href="library/WebApp/Design/Render.css" />
+	<script type="text/javascript" src="library/WebApp/Action/Logic.js"></script>
 		<!-- jQuery Files -->
 	<script type="text/javascript" src="./include/jquery/jquery-1.2.6.min.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.flexigrid.1.0b3.pack.js"></script>
 	{$extension_jquery_files }
 	<script type="text/javascript" src="./include/jquery/jquery.plugins.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.conf.js"></script>
-	<link rel="stylesheet" type="text/css" href="./templates/default/css/flexigrid.css">
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/flexigrid.css" />
 	<link rel="stylesheet" type="text/css" href="./include/jquery/jquery.plugins.css" title="default" media="screen" />
 
 
 
-<style>
+<style type="text/css">
 	{literal}
 			body[dir=rtl] #iHeader .iTab {margin-left:40px;margin-right:15px }
 			#iHeader .iTab {margin-right:55px}

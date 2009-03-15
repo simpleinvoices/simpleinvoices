@@ -11,4 +11,4 @@ $product_group[3]['name'] = "Subcontractors";
 //$product_group[3]['markup'] = "12%";
 
 $smarty->assign('product_group',$product_group);
-
+?>
