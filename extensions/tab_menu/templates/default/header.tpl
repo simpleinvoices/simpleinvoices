@@ -50,7 +50,9 @@
 	{literal}
 	<script type="text/javascript" src="jquery.validate.js"></script>
 <script type="text/javascript">
+/*
 <![CDATA[
+*/
 	<!--
 /*
 var demo_mode=false; // set to false to allow form submit
@@ -152,7 +154,9 @@ function offsetAlertDiv (aFieldName) {
 
 */
 // -->
+/*
 ]]>
+*/
 </script>
 
 <style type="text/css">
