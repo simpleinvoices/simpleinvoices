@@ -35,6 +35,6 @@ else {
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- Stylesheets -->
 <link rel="stylesheet" type="text/css" href="./css/screen.css" media="all" />
-<link rel="shortcut icon" type="image/x-icon" href="/images/common/favicon.ico" />
+<link rel="shortcut icon" type="image/x-icon" href="./images/common/favicon.ico" />
 </head>
 <body>

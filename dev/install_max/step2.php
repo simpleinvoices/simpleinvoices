@@ -2,15 +2,15 @@
 <html>
 <head>
 <title>Simple Invoices Setup. Step 2</title>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8">
-<meta http-equiv="content-style-type" content="text/css">
-<meta http-equiv="expires" content="0">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="expires" content="0" />
 <link rel="stylesheet" href="install.css" type="text/css" />
 </head>
 <body>
 <div id="wrapper">
-<img src="./images/Simple_Invoices_Logo.jpg" border="0" alt="">
+<img src="./images/Simple_Invoices_Logo.jpg" border="0" alt="" />
 <div id="header"><div align="left"><b>3 Step</b></div></div>
 		 <div id="leftcolumn">
 			<div id="leftnav">
@@ -55,7 +55,7 @@ if($res==1){
 		echo $LANG['ok_DBexists'];	
 		echo "</font>";
 		echo "</td></tr></table>";
-		echo "<table><tr><td><a href='step1.php'><img src='./images/go-previous.png' border='0' alt=''></a></td></tr></table>";
+		echo "<table><tr><td><a href='step1.php'><img src='./images/go-previous.png' border='0' alt='' /></a></td></tr></table>";
 		}else {
 		echo $LANG['no_DBexists'];
 		echo "</td></tr>";
@@ -79,8 +79,8 @@ if($res==1){
 				echo "<p>";
 				echo $LANG['Msg3'];
 				echo "</p>";
-				echo "<table><tr><td><a href='step1.php'><img src='./images/go-previous.png' border='0' alt=''></a></td>";
-				echo "<td><input type='image' name='ok' src='./images/go-next.png' ></td></tr></table>";
+				echo "<table><tr><td><a href='step1.php'><img src='./images/go-previous.png' border='0' alt='' /></a></td>";
+				echo "<td><input type='image' name='ok' src='./images/go-next.png' alt='' /></td></tr></table>";
 				}else {
 					echo "<font id=\"red\">";
 					echo $LANG['no_TABLES'];
