@@ -38,16 +38,15 @@
 				{$LANG.customer_name}
 			</td>
 			<td>
-		{if $customers == null }
-			<p><em>{$LANG.no_customers}</em></p>
-		{else}
-			<select name="customer_id">
-			{foreach from=$customers item=customer}
-				<option {if $customer.id == $defaultCustomerID} selected {/if} value="{$customer.id}">{$customer.name}</option>
-			{/foreach}
-			</select>
-		{/if}
-		
+				{if $customers == null }
+					<p><em>{$LANG.no_customers}</em></p>
+				{else}
+					<select name="customer_id">
+					{foreach from=$customers item=customer}
+						<option {if $customer.id == $defaultCustomerID} selected {/if} value="{$customer.id}">{$customer.name}</option>
+					{/foreach}
+					</select>
+				{/if}
 			</td>
 		</tr>
 		<tr wrap="nowrap">
