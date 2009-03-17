@@ -107,7 +107,7 @@ function dbQuery($sqlQuery) {
 	if($sth && $sth->execute()) {
 		dbLogger($sqlQuery);
 	} else {
-		echo "Dude, what happened to your query?:<br><br> ".htmlspecialchars($sqlQuery)."<br />".htmlspecialchars(end($sth->errorInfo()));
+		echo "Dude, what happened to your query?:<br /><br /> ".htmlspecialchars($sqlQuery)."<br />".htmlspecialchars(end($sth->errorInfo()));
 	// Earlier implementation did not return the $sth on error
 	}
 // $sth now has the PDO object or false on error.
