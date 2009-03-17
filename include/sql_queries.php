@@ -981,14 +981,18 @@ function getDefaults($extension_name="any") {
 	global $dbh;
 	global $auth_session;
 	
-	//$print_defaults = "SELECT * FROM ".TB_PREFIX."system_defaults";
+	$print_defaults = "SELECT * FROM ".TB_PREFIX."system_defaults";
+	
+	//TODO - uncomment this once new extension defaults table has been created as a sql patch - refer sql_patches.php
+	/*
 	$print_defaults = "SELECT * FROM ".TB_PREFIX."system_defaults WHERE domain_id =  :domain_id";
 
 	if ($extension_name != "any") {
 		$extension_id = getExtensionID($extension_name);
 		if ($extension_id >= 0) { $print_defaults .= " AND extension_id = ".$extension_id; } 
 	}
-
+	*/
+	
 	$sth = dbQuery($print_defaults, 'domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
 	$defaults = null;
