@@ -12,7 +12,7 @@
 *}
 
 {if $smarty.get.action == 'view' }
-<b>{$LANG.customer} :: <a href="index.php?module=customers&view=details&id={$customer.id}&action=edit">{$LANG.edit}</a>
+<b>{$LANG.customer} :: <a href="index.php?module=customers&amp;view=details&amp;id={$customer.id}&amp;action=edit">{$LANG.edit}</a>
 </b>
 <hr />
 <table align="center">
@@ -42,12 +42,12 @@
 	<tr>
 		<td class="details_screen">{$LANG.attention_short}
 		<a
-			rel="docs.php?t=help&p=customer_contact"
+			rel="docs.php?t=help&amp;p=customer_contact"
 			href="#"
 			class="cluetip"
 			title="{$LANG.customer_contact}"
 		>
-		<img src="./images/common/help-small.png"></img></a>
+		<img src="./images/common/help-small.png" alt="" /></a>
 		
 		</td>
 		<td colspan="2">{$customer.attention}</td>
@@ -64,9 +64,9 @@
 			<a
 				class="cluetip"
 				href="#"
-				rel="docs.php?t=help&p=street2"
+				rel="docs.php?t=help&amp;p=street2"
 				title="{$LANG.street2}"
-			> <img src="./images/common/help-small.png"></img></a>
+			> <img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>{$customer.street_address2}</td>
 	</tr>
@@ -115,10 +115,10 @@
  						<a
 							class="cluetip"
 							href="#"
-							rel="docs.php?t=help&p=custom_fields"
+							rel="docs.php?t=help&amp;p=custom_fields"
 							title="{$LANG.Custom_Fields}"
 						> 
-						<img src="./images/common/help-small.png"></img></a>
+						<img src="./images/common/help-small.png" alt="" /></a>
 					</td>
 					<td>{$customer.custom_field1}</td>
 				</tr>
@@ -127,10 +127,10 @@
 					 	<a
 							class="cluetip"
 							href="#"
-							rel="docs.php?t=help&p=custom_fields"
+							rel="docs.php?t=help&amp;p=custom_fields"
 							title="{$LANG.Custom_Fields}"
 						> 
-						<img src="./images/common/help-small.png"></img></a>
+						<img src="./images/common/help-small.png" alt="" /></a>
 					</td>
 					<td>{$customer.custom_field2}</td>
 				</tr>
@@ -139,10 +139,10 @@
 					 	<a
 							class="cluetip"
 							href="#"
-							rel="docs.php?t=help&p=custom_fields"
+							rel="docs.php?t=help&amp;p=custom_fields"
 							title="{$LANG.Custom_Fields}"
 						> 
-						<img src="./images/common/help-small.png"></img></a>
+						<img src="./images/common/help-small.png" alt="" /></a>
 					</td>
 					<td>{$customer.custom_field3}</td>
 				</tr>
@@ -151,10 +151,10 @@
 					 	<a
 							class="cluetip"
 							href="#"
-							rel="docs.php?t=help&p=custom_fields"
+							rel="docs.php?t=help&amp;p=custom_fields"
 							title="{$LANG.Custom_Fields}"
 						> 
-						<img src="./images/common/help-small.png"></img></a>
+						<img src="./images/common/help-small.png" alt="" /></a>
  					</td>
 					<td>{$customer.custom_field4}</td>
 				</tr>
@@ -181,7 +181,7 @@
 			{foreach from=$invoices item=invoice}
 	
 			<tr class="index_table">
-				<td class="details_screen"><a href="index.php?module=invoices&view=quick_view&invoice={$invoice.id}">{$invoice.id}</a></td>
+				<td class="details_screen"><a href="index.php?module=invoices&amp;view=quick_view&invoice={$invoice.id}">{$invoice.id}</a></td>
 				<td style="text-align:right" class="details_screen">{$invoice.total|number_format:2}</td>
 				<td style="text-align:right" class="details_screen">{$invoice.paid|number_format:2}</td>
 				<td style="text-align:right" class="details_screen">{$invoice.owing|number_format:2}</td>
@@ -207,8 +207,8 @@
 <table class="buttons" align="center">
     <tr>
         <td>
-            <a href="./index.php?module=customers&view=details&id={$customer.id}&action=edit" class="positive">
-                <img src="./images/common/tick.png" alt=""/>
+            <a href="./index.php?module=customers&amp;view=details&amp;id={$customer.id}&amp;action=edit" class="positive">
+                <img src="./images/common/tick.png" alt="" />
                 {$LANG.edit}
             </a>
     
@@ -219,7 +219,7 @@
 
 {if $smarty.get.action == 'edit' }
 
-<form name="frmpost" action="index.php?module=customers&view=save&id={$customer.id}" method="post" id="frmpost" onSubmit="return checkForm(this);">
+<form name="frmpost" action="index.php?module=customers&amp;view=save&amp;id={$customer.id}" method="post" id="frmpost" onSubmit="return checkForm(this);">
 
 <div id="top"><b>{$LANG.customer_edit}</b></div>
 <hr />
@@ -233,22 +233,22 @@
 		<a 
 				class="cluetip"
 				href="#"
-				rel="docs.php?t=help&p=required_field"
+				rel="docs.php?t=help&amp;p=required_field"
 				title="{$LANG.Required_Field}"
 		>
-		<img src="./images/common/required-small.png"></img></a>
+		<img src="./images/common/required-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" name="name" value="{$customer.name|regex_replace:"/[\\\]/":""}" size="50" id="name" class="required" onblur="checkField(this);"/></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.attention_short}
 		<a
-			rel="docs.php?t=help&p=customer_contact"
+			rel="docs.php?t=help&amp;p=customer_contact"
 			href="#"
 			class="cluetip"
 			title="{$LANG.customer_contact}"
 		>
-		 <img src="./images/common/help-small.png"></img></a>
+		 <img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" name="attention" value="{$customer.attention}" size="50" /></td>
 	</tr>
@@ -261,10 +261,10 @@
 			<a
 				class="cluetip"
 				href="#"
-				rel="docs.php?t=help&p=street2"
+				rel="docs.php?t=help&amp;p=street2"
 				title="{$LANG.street2}"
 			> 
-				<img src="./images/common/help-small.png"></img>
+				<img src="./images/common/help-small.png" alt="" />
 			</a>
 		</td>
 		<td><input type="text" name="street_address2" value="{$customer.street_address2}" size="50" /></td>
@@ -307,10 +307,10 @@
  			<a
 				class="cluetip"
 				href="#"
-				rel="docs.php?t=help&p=custom_fields"
+				rel="docs.php?t=help&amp;p=custom_fields"
 				title="{$LANG.Custom_Fields}"
 			> 
-		 <img src="./images/common/help-small.png"></img></a>
+		 <img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>
 			<input type="text" name="custom_field1" value="{$customer.custom_field1}" size="50" /></td
@@ -320,10 +320,10 @@
  			<a
 				class="cluetip"
 				href="#"
-				rel="docs.php?t=help&p=custom_fields"
+				rel="docs.php?t=help&amp;p=custom_fields"
 				title="{$LANG.Custom_Fields}"
 			> 
-		 <img src="./images/common/help-small.png"></img></a>
+		 <img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>
 			<input type="text" name="custom_field2" value="{$customer.custom_field2}" size="50" /></td
@@ -333,10 +333,10 @@
  			<a
 				class="cluetip"
 				href="#"
-				rel="docs.php?t=help&p=custom_fields"
+				rel="docs.php?t=help&amp;p=custom_fields"
 				title="{$LANG.Custom_Fields}"
 			> 
-		<img src="./images/common/help-small.png"></img></a>
+		<img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>
 			<input type="text" name="custom_field3" value="{$customer.custom_field3}" size="50" /></td
@@ -346,10 +346,10 @@
  			<a
 				class="cluetip"
 				href="#"
-				rel="docs.php?t=help&p=custom_fields"
+				rel="docs.php?t=help&amp;p=custom_fields"
 				title="{$LANG.Custom_Fields}"
 			> 
-		 <img src="./images/common/help-small.png"></img></a>
+		 <img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>
 			<input type="text" name="custom_field4" value="{$customer.custom_field4}" size="50" /></td
@@ -376,14 +376,14 @@
     <tr>
         <td>
             <button type="submit" class="positive" name="save_customer" value="{$LANG.save_customer}">
-                <img class="button_img" src="./images/common/tick.png" alt=""/> 
+                <img class="button_img" src="./images/common/tick.png" alt="" /> 
                 {$LANG.save}
             </button>
 
             <input type="hidden" name="op" value="edit_customer">
         
-            <a href="./index.php?module=customers&view=manage" class="negative">
-                <img src="./images/common/cross.png" alt=""/>
+            <a href="./index.php?module=customers&amp;view=manage" class="negative">
+                <img src="./images/common/cross.png" alt="" />
                 {$LANG.cancel}
             </a>
     

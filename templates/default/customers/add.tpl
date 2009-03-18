@@ -25,7 +25,7 @@
 	{/if}	
 <form name="frmpost" action="index.php?module=customers&amp;view=add" method="post" id="frmpost" onSubmit="return checkForm(this);">
 
-<table align=center>
+<table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.customer_name}
 		<a 
@@ -155,7 +155,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
-		<td><textarea  name='notes' class="editor" rows="8" cols="50">{$smarty.post.notes|unescape}</textarea></td>
+		<td><textarea  name="notes" class="editor" rows="8" cols="50">{$smarty.post.notes|unescape}</textarea></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
@@ -178,7 +178,7 @@
             </button>
 		</td>
 		<td>
-            <input type="hidden" name="op" value="insert_customer">
+            <input type="hidden" name="op" value="insert_customer" />
         
             <a href="./index.php?module=customers&amp;view=manage" class="negative">
                 <img src="./images/common/cross.png" alt="" />

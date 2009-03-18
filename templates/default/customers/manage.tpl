@@ -17,7 +17,7 @@
     <tr>
         <td>
             <a href="./index.php?module=customers&view=add" class="positive">
-                <img src="./images/famfam/add.png" alt=""/>
+                <img src="./images/famfam/add.png" alt="" />
                 {$LANG.customer_add}
             </a>
 
@@ -30,7 +30,7 @@
     <tr>
         <td>
             <a href="./index.php?module=customers&view=add" class="positive">
-                <img src="./images/famfam/add.png" alt=""/>
+                <img src="./images/famfam/add.png" alt="" />
                 {$LANG.customer_add}
             </a>
 

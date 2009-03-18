@@ -13,7 +13,7 @@
 *	 GPL v2 or above
 */
 *}
-<form method="post" action="index.php?module=customFields&view=manage">
+<form method="post" action="index.php?module=customFields&amp;view=manage">
 
 Plugins:
 {php}printPlugins();{/php}
@@ -22,9 +22,9 @@ Categorie:
 
 
 
-	Name: <input type="text" name="name"><br />
-	Description: <input type="text" name="description"><br />
-	<input type="submit" name="save">
+	Name: <input type="text" name="name" /><br />
+	Description: <input type="text" name="description" /><br />
+	<input type="submit" name="save" />
 	</form>
 
 
