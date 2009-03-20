@@ -16,7 +16,7 @@
 *	http://www.simpleinvoices.org
 */
 *}
-<form name="frmpost" action="index.php?module=invoices&view=save" method="post" onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=invoices&amp;view=save" method="post" onsubmit="return frmpost_Validator(this);">
 
 <h3>{$LANG.inv} {$LANG.inv_consulting}</h3>
 
@@ -91,7 +91,7 @@
 </tr>	
 <tr>
 	<td align=left>
-		<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="{$LANG.Custom_Fields}"><img src="./images/common/help-small.png"></img> {$LANG.want_more_fields}</a>
+		<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=custom_fields" title="{$LANG.Custom_Fields}"><img src="./images/common/help-small.png" alt="" /> {$LANG.want_more_fields}</a>
 	</td>
 </tr>
 <!--Add more line items while in an itemeised invoice - Get style - has problems- wipes the current values of the existing rows - not good

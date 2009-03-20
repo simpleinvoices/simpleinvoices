@@ -19,7 +19,7 @@
     <tr>
         <td>
 
-            <a href="index.php?module=invoices&view=itemised" class="positive">
+            <a href="index.php?module=invoices&amp;view=itemised" class="positive">
                 <img src="./images/common/add.png" alt="" />
                 Add a new Invoice {* TODO $LANG  *}
             </a>
@@ -44,7 +44,7 @@
 					class='export_pdf export_window' 
 				>
 					<img src="./images/common/page_white_acrobat.png" alt="" />
-					Export as PDF {* LANG TODO*}
+					{$LANG.export_pdf}
 				</a>
 			  </td>
 		</tr>
@@ -57,7 +57,7 @@
 					href=''
 			   >
 					<img src="./images/common/page_white_excel.png" alt="" />
-					 Export as .XLS {* LANG TODO*}
+					{$LANG.export_xls}
 				</a>
 				</td>
 		</tr>
@@ -70,7 +70,7 @@
 					href=''         
 			   >
 					<img src="./images/common/page_white_word.png" alt="" />
-					 Export as .DOC {* LANG TODO*}
+					{$LANG.export_doc}
 				</a>
 			</td>
 		</tr>

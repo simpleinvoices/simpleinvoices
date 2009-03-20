@@ -11,7 +11,7 @@
 */
 *}
 {if $smarty.post.submit != null}
-	<meta http-equiv="refresh" content="1;URL=index.php?module=invoices&view=details&id={$smarty.post.id}&type={$smarty.post.type}" />
+	<meta http-equiv="refresh" content="1;URL=index.php?module=invoices&amp;view=details&amp;id={$smarty.post.id}&amp;type={$smarty.post.type}" />
 	<br /><br />
 	{$LANG.save_invoice_items_success};
 	<br /><br />
@@ -21,7 +21,7 @@
 	<img src="images/common/gmail-loader.gif" alt="Loading ..." /> Loading ...
 </div>
 <hr />
-<form name="add_invoice_item" action="index.php?module=invoices&view=add_invoice_item" method="post">
+<form name="add_invoice_item" action="index.php?module=invoices&amp;view=add_invoice_item" method="post">
 	<table align="center">
 		<tr>
 			<td class="details_screen">

@@ -11,7 +11,7 @@
 */
 *}
 
-<form name="frmpost" action="index.php?module=invoices&view=save" method="POST" onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=invoices&amp;view=save" method="POST" onsubmit="return frmpost_Validator(this)">
 
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
         	<img src="images/common/gmail-loader.gif" alt="Loading ..." /> Loading ...
@@ -215,7 +215,7 @@
 	</tr>	
 	<tr>
 		<td class=""> 
-			<a class="cluetip" href="#"	rel="docs.php?t=help&p=invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="./images/common/help-small.png" alt="" /> {$LANG.want_more_fields}</a>
+			<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="./images/common/help-small.png" alt="" /> {$LANG.want_more_fields}</a>
 		</td>
 	</tr>
 
@@ -237,7 +237,7 @@
 				<input type="hidden" id="max_items" name="max_items" value="{$smarty.section.line.index}" />
 	        	<input type="hidden" name="type" value="2" />
 	        	
-	            <a href="./index.php?module=invoices&view=manage" class="negative">
+	            <a href="./index.php?module=invoices&amp;view=manage" class="negative">
 	                <img src="./images/common/cross.png" alt="" />
 	                {$LANG.cancel}
 	            </a>

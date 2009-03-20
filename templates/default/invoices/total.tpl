@@ -11,7 +11,7 @@
 */
 *}
 
-<form name="frmpost" action="index.php?module=invoices&view=save" method=POST onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=invoices&amp;view=save" method="POST" onsubmit="return frmpost_Validator(this);">
 <!--
 <h3>{$LANG.inv} {$LANG.inv_total}</h3>
 -->
@@ -70,7 +70,7 @@
 	
 <tr>
 	<td align="left">
-		<a class="cluetip" href="#"	rel="docs.php?t=help&p=invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="./images/common/help-small.png" alt="" /> {$LANG.want_more_fields}</a>
+		<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="./images/common/help-small.png" alt="" /> {$LANG.want_more_fields}</a>
 	</td>
 </tr>
 <!--Add more line items while in an itemeised invoice - Get style - has problems- wipes the current values of the existing rows - not good
@@ -91,7 +91,7 @@
 			</button>
             		<input type="hidden" name="max_items" value="{$smarty.section.line.index}" />
 			<input type="hidden" name="type" value="1" />
-			<a href="./index.php?module=invoices&view=manage" class="negative">
+			<a href="./index.php?module=invoices&amp;view=manage" class="negative">
 				<img src="./images/common/cross.png" alt="" />
 				{$LANG.cancel}
 			</a>

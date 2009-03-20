@@ -10,7 +10,7 @@
 *	http://www.simpleinvoices.org
 */
 *}
-<form name="frmpost" action="index.php?module=invoices&view=save" METHOD=POST onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=invoices&amp;view=save" method="post" onsubmit="return frmpost_Validator(this);">
 
 <h3>{$LANG.inv} {$LANG.inv_consulting}
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
@@ -30,7 +30,7 @@
         {section name=line start=0 loop=$dynamic_line_items step=1}
 
 			<tr>
-				<td><input type="text" id="quantity{$smarty.section.line.index}" name="quantity{$smarty.section.line.index}" size="5"></td>
+				<td><input type="text" id="quantity{$smarty.section.line.index}" name="quantity{$smarty.section.line.index}" size="5" /></td>
 				</td><td><input type="text" name="description{$smarty.section.line.index}" size="50" />
 				                
 			{if $products == null }

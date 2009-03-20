@@ -18,25 +18,25 @@
 *}
 {if $smarty.get.stage == 1 }
 
-<form name="frmpost" action="index.php?module=invoices&view=email&stage=2&id={$smarty.get.id}" method="post">
+<form name="frmpost" action="index.php?module=invoices&amp;view=email&amp;stage=2&amp;id={$smarty.get.id}" method="post">
 <div id="top"><h3>Email Invoice to Customer as PDF</h3></div>
 
 <table align="center">
 	<tr>
 		<td class="details_screen">From
-		<a class="cluetip" href="#"	rel="docs.php?t=help&p=email_from" title="{$LANG.email_from}"><img src="./images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=email_from" title="{$LANG.email_from}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" name="email_from" size="50" value="{$biller.email}" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">To
-		<a class="cluetip" href="#"	rel="docs.php?t=help&p=email_to" title="{$LANG.email_to}"><img src="./images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=email_to" title="{$LANG.email_to}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" name="email_to" size="50" value="{$customer.email}" /></td>
 	</tr>
 	<tr>
 	<td class="details_screen">BCC
-		<a class="cluetip" href="#"	rel="docs.php?t=help&p=email_bcc" title="{$LANG.email_bcc}"><img src="./images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=email_bcc" title="{$LANG.email_bcc}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 	<td><input type="text" name="email_bcc" size="50" value="{$biller.email}" /></td>
 	</tr>
@@ -46,7 +46,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">Message</td>
-		<td><textarea name='email_notes' class="editor" rows="8" cols="50"></textarea></td>
+		<td><textarea name="email_notes" class="editor" rows="8" cols="50"></textarea></td>
 	</tr>
 </table>
 

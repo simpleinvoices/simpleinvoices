@@ -18,25 +18,25 @@
 </div>
 
 
-<form name="frmpost" action="index.php?module=invoices&view=save" method="post">
+<form name="frmpost" action="index.php?module=invoices&amp;view=save" method="post">
 
 	<table align="center">
 	<tr>
 		<td colspan="6" align="center"></td>
 	</tr>
         <tr>
-		<td class='details_screen'>{$preference.pref_inv_wording} {$LANG.number_short}</td><td> {$invoice.id} </td>
+		<td class="details_screen">{$preference.pref_inv_wording} {$LANG.number_short}</td><td> {$invoice.id} </td>
 	</tr>
 	<tr>
 	        <td class="details_screen">{$LANG.date_formatted}</td>
 	{if $invoice.id == null} 
-        	<td><input type="text" class="date-picker" name="date" id="date1" value='{$smarty.now|date_format:"%Y-%m-%d"}' /></td>
+        	<td><input type="text" class="date-picker" name="date" id="date1" value="{$smarty.now|date_format:"%Y-%m-%d"}" /></td>
 	{else}
-        	<td><input type="text" class="date-picker" name="date" id="date1" value='{$invoice.calc_date}' /></td>
+        	<td><input type="text" class="date-picker" name="date" id="date1" value="{$invoice.calc_date}" /></td>
 	{/if}
 	</tr>
 	<tr>
-		<td class='details_screen'>{$LANG.biller}</td><td>
+		<td class="details_screen">{$LANG.biller}</td><td>
 			
 		{if $billers == null }
 			<p><em>{$LANG.no_billers}</em></p>
@@ -51,7 +51,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>{$LANG.customer}</td><td>
+		<td class="details_screen">{$LANG.customer}</td><td>
 		
 			{if $customers == null}
 	        <p><em>{$LANG.no_customers}</em></p>
@@ -85,7 +85,7 @@
 
 {if $invoice.type_id == 1 }
 	        <tr>
-        	        <td colspan="6" class='details_screen'>{$LANG.description}</td>
+        	        <td colspan="6" class="details_screen">{$LANG.description}</td>
 	        </tr>
 	        <tr>
 			<td colspan="6" ><textarea input type="text" class="editor" name="description0" rows="10" cols="70" wrap="nowrap">{$invoiceItems.0.description|unescape}</textarea></td>
@@ -101,7 +101,7 @@
 
 	
 		        <tr>       	         
-			<td class='details_screen'>{$LANG.gross_total}</td>
+			<td class="details_screen">{$LANG.gross_total}</td>
 			<td>
 			<input type="text" name="unit_price" value="{$invoiceItems.0.unit_price}" size="10" />
 			<input type="hidden" name="quantity0" value="1" />
@@ -123,9 +123,9 @@
 		
 		<table id="itemtable">
 			<tr>
-				<td class='details_screen'></td>
-	        	<td class='details_screen'>{$LANG.quantity_short}</td>
-	        	<td class='details_screen'>{$LANG.description}</td>
+				<td class="details_screen"></td>
+	        	<td class="details_screen">{$LANG.quantity_short}</td>
+	        	<td class="details_screen">{$LANG.description}</td>
 				{section name=tax_header loop=$defaults.tax_per_line_item }
 					<td class="details_screen">{$LANG.tax} {if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1}{/if} </td>
 				{/section}
@@ -174,7 +174,7 @@
 						{/if}
 						</td>
 						<td>
-							<input type="hidden" id='delete{$line}' name='delete{$line}' size="3" />
+							<input type="hidden" id="delete{$line}" name="delete{$line}" size="3" />
 							<input 
 								type="text" 
 								name='quantity{$line}' 
@@ -224,7 +224,7 @@
 								<td>
 								</td>
 								<td colspan="4">
-									<textarea input type=text class="note-edit" name="description{$line}" id="description{$line}" rows="3" cols="3" wrap="nowrap">{$invoiceItem.description|unescape}</textarea>
+									<textarea input type="text" class="note-edit" name="description{$line}" id="description{$line}" rows="3" cols="3" wrap="nowrap">{$invoiceItem.description|unescape}</textarea>
 									
 									</td>
 						</tr>
@@ -259,7 +259,7 @@
 		{*
 			<tr>
 				<td>
-					<a href="./index.php?module=invoices&view=add_invoice_item&invoice={$invoice.id}&type={$invoice.type_id}&tax_id={$invoiceItems.0.tax_id}"><img src="./images/common/famfamAdd.png" alt="" />{$LANG.add_invoice_item}</a>
+					<a href="./index.php?module=invoices&amp;view=add_invoice_item&amp;invoice={$invoice.id}&amp;type={$invoice.type_id}&amp;tax_id={$invoiceItems.0.tax_id}"><img src="./images/common/famfamAdd.png" alt="" />{$LANG.add_invoice_item}</a>
 				</td>
 				<td>
 				</td>
@@ -273,10 +273,10 @@
 	 	 {showCustomFields categorieId="4" itemId=$smarty.get.invoice}
 	 *}
 			<tr>
-				<td colspan="6" class='details_screen'>{$LANG.note}:</td>
+				<td colspan="6" class="details_screen">{$LANG.note}:</td>
 			</tr>
 			<tr>
-	             <td colspan="6" ><textarea input type=text class="editor" name="note" rows=10 cols="70" wrap="nowrap">{$invoice.note|unescape}</textarea></td>
+	             <td colspan="6" ><textarea input type="text" class="editor" name="note" rows="10" cols="70" wrap="nowrap">{$invoice.note|unescape}</textarea></td>
 			</tr>
 			
 
@@ -285,7 +285,7 @@
 	
 
 	<tr>
-		<td class='details_screen'>{$LANG.inv_pref}</td><td>
+		<td class="details_screen">{$LANG.inv_pref}</td><td>
 
 
 		{if $preferences == null }
@@ -325,7 +325,7 @@
 			<input type="hidden" name="type" value="{$invoice.type_id}" />
 			<input type="hidden" name="op" value="insert_preference" />
 			<input type="hidden" name="max_items" value="{$lines}" />
-			<a href="./index.php?module=invoices&view=manage" class="negative">
+			<a href="./index.php?module=invoices&amp;view=manage" class="negative">
 				<img src="./images/common/cross.png" alt="" />
 				{$LANG.cancel}
 			</a>
