@@ -110,6 +110,7 @@ $LANG['description'] = "Beschrijving";//1
 $LANG['description_short'] = "Beschr";//1
 $LANG['details'] = "Details";//1
 $LANG['disabled'] = "Uitgeschakeld";//1
+//$LANG['disabled'] = '<img src="lightbulb_off.png" alt="uitgeschakeld" />';//1
 $LANG['edit'] = "Wijzig";//1
 $LANG['edit_view_tooltip'] = "Wijzig";//1
 $LANG['email'] = "E-mail";//1
@@ -117,6 +118,7 @@ $LANG['email_from'] = "E-mail van";//1
 $LANG['email_to'] = "E-mail naar";//1
 $LANG['email_bcc'] = "Email BCC (Blind Carbon Copy)";//1
 $LANG['email_quick'] = "E-mail";//1
+//$LANG['enabled'] = '<img src="lightbulb.png" alt="ingeschakeld" />';//1
 $LANG['enabled'] = "Ingeschakeld";//1
 $LANG['export_as'] = "Exporteren als";//1
 $LANG['export_doc_tooltip'] = "naar een tekstverwerker als";//1
@@ -375,3 +377,5 @@ $LANG['all_reports'] = "Alle rapporten";//1
 $LANG['new_invoice'] = "Nieuwe faktuur";//1
 $LANG['for'] = "voor";//1
 $LANG['as_template'] = "als sjabloon gebruiken";//1
+$LANG['extensions'] = "Extensies";//1
+?>

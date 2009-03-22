@@ -4,7 +4,7 @@ header("Content-type: text/xml");
 
 $start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
 $dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC" ;
-$sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "name" ;
+$sort = "id" ;
 $limit = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
 $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 
@@ -12,7 +12,7 @@ $extension_dir = './extensions';
 $extension_entries = scandir($extension_dir);
 foreach ($extension_entries as $entry) {
   	if (is_dir($extension_dir."/".$entry) and ! ereg("^\..*",$entry) ) {	//Skip entries starting with a dot
-		$description = file_get_contents($extension_dir."/".$entry."/DESCRIPTION") or $description = "No description available (missing file 'DESCRIPTION')";
+		$description = file_get_contents($extension_dir."/".$entry."/DESCRIPTION") or $description = "DESCRIPTION not available (in $extension_dir/$entry/)";
 		$available_extensions[$entry] = array("name"=>$entry,"enabled"=>0, "registered"=>0, "description"=>$description);
 	}
 }
@@ -46,12 +46,6 @@ if ($query) $where = " WHERE (domain_id = 0 OR domain_id = :domain_id) AND $qtyp
 
 /*Check that the sort field is OK*/
 $validFields = array('id', 'name','description','enabled');
-
-if (in_array($sort, $validFields)) {
-	$sort = $sort;
-} else {
-	$sort = "name";
-}
 
 	$sql = "SELECT 
 				id, 
@@ -93,10 +87,10 @@ if (in_array($sort, $validFields)) {
 	if ($row['id'] == 0 && $row['registered'] ==1) { $xml .= "Always enabled "; }
 	else {
 		if ($row['registered'] == 1) {
-		$xml .="<a class='index_table' title='$LANG[register] $LANG[extensions] ".utf8_encode($row['name'])."' href='index.php?module=extensions&view=register&id=$row[id]'> ".$plugin[3-$row['registered']]."</a>";
+		$xml .="<a class='index_table' title='$LANG[register] $LANG[extensions] ".utf8_encode($row['name'])."' href='index.php?module=extensions&view=register&id=$row[id]&action=unregister'> ".$plugin[3-$row['registered']]."</a>";
 			$xml .= " <a class='index_table' title='$LANG[enable] $LANG[extensions] ".utf8_encode($row['name'])."' href='index.php?module=extensions&view=manage&id=$row[id]&action=toggle'>".$light[2]."</a>";
 		} else {
-		$xml .="<a class='index_table' title='$LANG[register] $LANG[extensions] ".utf8_encode($row['name'])."' href='index.php?module=extensions&view=register&name=$row[name]&description=$row[description]'> ".$plugin[3-$row['registered']]."</a>";
+		$xml .="<a class='index_table' title='$LANG[register] $LANG[extensions] ".utf8_encode($row['name'])."' href='index.php?module=extensions&view=register&name=$row[name]&action=register&description=$row[description]'> ".$plugin[3-$row['registered']]."</a>";
 		}
 	}
 	$xml .= "]]></cell>";

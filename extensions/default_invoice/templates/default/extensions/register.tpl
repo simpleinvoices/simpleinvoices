@@ -1,11 +1,11 @@
-<form name="frmpost" action="index.php?module=extensions&view=manage" method="post" onsubmit="return frmpost_Validator(this)">
-<h1>DEBUG: {$debug}</h1>
-<h3>About to Register: {$name}</h3>
+<form name="frmpost" action="index.php?module=extensions&view=save" method="post" onsubmit="return frmpost_Validator(this)">
+<h3>About to {$action}: {$name}</h3>
+<input name="action" value="{$action}" type="hidden" />
 <hr />
 <table>
  <tr>
   <td>Name</td>
-  <td><input type="text" name="name" readonly="readonly" value="{$name}"</td>
+  <td><input type="text" name="name" readonly="readonly" value="{$name}" /> <input type="text" size="3" name="id" value="{$id}" readonly="readonly" /></td>
  </tr><tr>
   <td>Description</td>
   <td><input type="text" name="description" size="40" value="{$description}" />

@@ -963,7 +963,7 @@ function getExtensionID($extension_name = "none") {
 	global $dbh;
 	global $auth_session;
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."extensions WHERE name LIKE ':extension_name' AND (domain_id =  0 OR domain_id = :domain_id) LIMIT 1";
+	$sql = "SELECT * FROM ".TB_PREFIX."extensions WHERE name LIKE ':extension_name' AND (domain_id =  0 OR domain_id = :domain_id) ORDER BY domain_id DESC LIMIT 1";
 	$sth = dbQuery($sql,':extension_name', $extension_name, ':domain_id', $auth_session->domain_id ) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$extension_info = $sth->fetch();
 	if (! $extension_info) { return -2; }			// -2 = no result set = extension not found
