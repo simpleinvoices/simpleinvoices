@@ -40,14 +40,14 @@
 
 <!--Actions heading - start-->
 {$LANG.actions}: 
-		<a href="index.php?module=invoices&view=details&invoice={$invoice.id}&action=view"> {$LANG.edit}</a>
+		<a href="index.php?module=invoices&amp;view=details&amp;invoice={$invoice.id}&amp;action=view"> {$LANG.edit}</a>
 		 ::
-		 <a href='index.php?module=payments&view=process&invoice={$invoice.id}&op=pay_selected_invoice'> {$LANG.process_payment} </a>
+		 <a href="index.php?module=payments&amp;view=process&amp;invoice={$invoice.id}&amp;op=pay_selected_invoice"> {$LANG.process_payment} </a>
 		 ::
-		<a href="index.php?module=invoices&view=email&stage=1&invoice={$invoice.id}">{$LANG.email}</a>
+		<a href="index.php?module=invoices&amp;view=email&amp;stage=1&amp;invoice={$invoice.id}">{$LANG.email}</a>
 		{if $defaults.delete == '1'} 
 			:: 
-			<a href="index.php?module=invoices&view=delete&stage=1&invoice={$invoice.id}">{$LANG.delete}</a>
+			<a href="index.php?module=invoices&amp;view=delete&amp;stage=1&amp;invoice={$invoice.id}">{$LANG.delete}</a>
 		{/if}
 
 <!--Actions heading - start-->
@@ -117,7 +117,7 @@
 	{if $invoice.type_id == 2 || $invoice.type_id == 4}
 
             <tr>
-                    <td colspan="6" class="details_screen align_right"><a href='#' class="show-itemised" onClick="$('.itemised').show();$('.show-itemised').hide();">{$LANG.show_details}</a><a href='#' class="itemised" onClick="$('.itemised').hide();$('.show-itemised').show();">{$LANG.hide_details}</a></td>
+                    <td colspan="6" class="details_screen align_right"><a href='#' class="show-itemised" onclick="javascript: $('.itemised').show();$('.show-itemised').hide();">{$LANG.show_details}</a><a href='#' class="itemised" onclick="javascript: $('.itemised').hide();$('.show-itemised').show();">{$LANG.hide_details}</a></td>
             </tr>
 			<tr>
         		    <td><b>{$LANG.quantity_short}</b></td>
@@ -135,7 +135,7 @@
     {if $invoice.type_id == 3 }
 
 			<tr>
-					<td colspan="6" class="details_screen align_right"><a href='#' class="show-consulting" onClick="$('.consulting').show();$('.show-consulting').hide();">{$LANG.show_details}</a><a href='#' class="consulting" onClick="$('.consulting').hide();$('.show-consulting').show();">{$LANG.hide_details}</a></td>
+					<td colspan="6" class="details_screen align_right"><a href='#' class="show-consulting" onclick="javascript: $('.consulting').show();$('.show-consulting').hide();">{$LANG.show_details}</a><a href='#' class="consulting" onclick="javascript: $('.consulting').hide();$('.show-consulting').show();">{$LANG.hide_details}</a></td>
         	</tr>
 			<tr>
                	 	<td><b>{$LANG.quantity_short}</b></td>
@@ -170,12 +170,12 @@
 				<td colspan="6">
 					<table width="100%">
 						<tr>
-							<td width="50%" class='details_screen'>{$customFieldLabels.product_cf1}: {$invoiceItem.product.custom_field1}</td>
-							<td width="50%" class='details_screen'>{$customFieldLabels.product_cf2}: {$invoiceItem.product.custom_field2}</td>
+							<td width="50%" class="details_screen">{$customFieldLabels.product_cf1}: {$invoiceItem.product.custom_field1}</td>
+							<td width="50%" class="details_screen">{$customFieldLabels.product_cf2}: {$invoiceItem.product.custom_field2}</td>
 						</tr>
 						<tr>       
-							<td width="50%" class='details_screen'>{$customFieldLabels.product_cf3}: {$invoiceItem.product.custom_field3}</td>
-							<td width="50%" class='details_screen'>{$customFieldLabels.product_cf4}: {$invoiceItem.product.custom_field4}</td>
+							<td width="50%" class="details_screen">{$customFieldLabels.product_cf3}: {$invoiceItem.product.custom_field3}</td>
+							<td width="50%" class="details_screen">{$customFieldLabels.product_cf4}: {$invoiceItem.product.custom_field4}</td>
 						</tr>
 					</table>
 				</td>
@@ -198,12 +198,12 @@
 				<td colspan="6">
 					<table width="100%">
 						<tr>
-                            <td width="50%" class='details_screen'>{$customFieldLabels.product_cf1}: {$invoiceItem.product.custom_field1}</td>
-							<td width="50%" class='details_screen'>{$customFieldLabels.product_cf2}: {$invoiceItem.product.custom_field2}</td>
+                            <td width="50%" class="details_screen">{$customFieldLabels.product_cf1}: {$invoiceItem.product.custom_field1}</td>
+							<td width="50%" class="details_screen">{$customFieldLabels.product_cf2}: {$invoiceItem.product.custom_field2}</td>
 						</tr>
 						<tr>       
-                            <td width="50%" class='details_screen'>{$customFieldLabels.product_cf3}: {$invoiceItem.product.custom_field3}</td>
-							<td width="50%" class='details_screen'>{$customFieldLabels.product_cf4}: {$invoiceItem.product.custom_field4}</td>
+                            <td width="50%" class="details_screen">{$customFieldLabels.product_cf3}: {$invoiceItem.product.custom_field3}</td>
+							<td width="50%" class="details_screen">{$customFieldLabels.product_cf4}: {$invoiceItem.product.custom_field4}</td>
 						</tr>
 					</table>
 				</td>
@@ -230,7 +230,7 @@
 		<b>{$LANG.notes}:</b>
 		<table>
 		<td>
-				<td class="details_screen align_right"><a href='#' class="show-notes" onClick="$('.notes').show();$('.show-notes').hide();">{$LANG.show_details}</a><a href='#' class="notes" onClick="$('.notes').hide();$('.show-notes').show();">{$LANG.hide_details}</a></td>
+				<td class="details_screen align_right"><a href='#' class="show-notes" onclick="javascript: $('.notes').show();$('.show-notes').hide();">{$LANG.show_details}</a><a href='#' class="notes" onclick="javascript: $('.notes').hide();$('.show-notes').show();">{$LANG.hide_details}</a></td>
 		</tr>
 			<!-- if hide detail click - the stripped note will be displayed -->
 		<tr class='show-notes details_screen'>
@@ -255,7 +255,7 @@
 		<b>{$LANG.account_info}</b><br />
 		{$LANG.total}: 
 		{$preference.pref_currency_sign}{$invoice.total|number_format:2} :: 
-		<a href='index.php?module=payments&view=manage&id={$invoice.id}'>{$LANG.paid}:</a> {$preference.pref_currency_sign}{$invoice.paid|number_format:2} :: 
+		<a href='index.php?module=payments&amp;view=manage&amp;id={$invoice.id}'>{$LANG.paid}:</a> {$preference.pref_currency_sign}{$invoice.paid|number_format:2} :: 
 		{$LANG.owing}: <u>{$preference.pref_currency_sign}{$invoice.owing|number_format:2}</u> ::
 		{$LANG.age}: {$invoice_age} 
 		<br />

@@ -11,7 +11,7 @@
 */
 *}
 
-<form name="frmpost" action="index.php?module=invoices&amp;view=save" method="POST" onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=invoices&amp;view=save" method="post" onsubmit="return frmpost_Validator(this)">
 
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
         	<img src="images/common/gmail-loader.gif" alt="Loading ..." /> Loading ...
@@ -36,11 +36,11 @@
 					<a 
 						href='#' 
 						class="show-note" 
-						onClick="$('.note').show();$('.show-note').hide();"
+						onclick="javascript: $('.note').show();$('.show-note').hide();"
 					>
 						<img src="./images/common/page_white_add.png" title="{$LANG.show_details}" alt="" />
 					</a>
-					<a href='#' class="note" onClick="$('.note').hide();$('.show-note').show();">
+					<a href='#' class="note" onclick="javascript: $('.note').hide();$('.show-note').show();">
 						<img src="./images/common/page_white_delete.png" title="{$LANG.hide_details}" alt="" />
 					</a>
 				</td>

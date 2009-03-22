@@ -134,11 +134,11 @@
 					<a 
 						href='#' 
 						class="show-note" 
-						onClick="$('.note').show();$('.show-note').hide();"
+						onclick="javascript: $('.note').show();$('.show-note').hide();"
 					>
 						<img src="./images/common/page_white_add.png" title="{$LANG.show_details}" alt="" />
 					</a>
-					<a href='#' class="note" onClick="$('.note').hide();$('.show-note').show();">
+					<a href='#' class="note" onclick="javascript: $('.note').hide();$('.show-note').show();">
 						<img src="./images/common/page_white_delete.png" title="{$LANG.hide_details}" alt="" />
 					</a>
 				</td>
