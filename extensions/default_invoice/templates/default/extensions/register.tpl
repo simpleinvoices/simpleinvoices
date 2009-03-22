@@ -1,5 +1,5 @@
 <form name="frmpost" action="index.php?module=extensions&view=save" method="post" onsubmit="return frmpost_Validator(this)">
-<h3>About to {$action}: {$name}</h3>
+<h2>About to <i>{$action}</i>: {$name}</h2>
 <input name="action" value="{$action}" type="hidden" />
 <hr />
 <table>
@@ -17,4 +17,7 @@
 	<img src="./images/common/cross.png" alt="{$LANG.cancel}" />{$LANG.cancel}</a></td>
  </tr>
 </table>
+{if ($action=="unregister" & $count > 0)}
+<h3>WARNING: All {$count} extension-specific settings will be deleted!</h3>
+{/if}
 </form>

@@ -11,9 +11,8 @@ define("itemised_invoice","2"); //
 define("consulting_invoice","3"); // 
 
 //To turn logging on set the below to true - not needed as it is set in System Defaults
-define("LOGGING",false);
-#define("LOGGING",true);
-
+#define("LOGGING",false);
+define("LOGGING",true);
 
 
 ####################
@@ -28,6 +27,8 @@ RELEASE TODO: make sure $environment is set back to live
 */
 $environment = "dev"; //test,staging,dev,live etc..
 
+error_reporting(E_STRICT);
+
 if($environment != "production")
 {
     @include("./config/".htmlspecialchars($environment).".define.php");
@@ -41,6 +42,6 @@ if($environment != "production")
 #error_reporting(E_STRICT);
 #error_reporting(E_ALL);
 #error_reporting(E_WARNING);
-error_reporting(E_ERROR);
+#error_reporting(E_ERROR);
 #error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 #error_reporting(0);

@@ -963,7 +963,7 @@ function getExtensionID($extension_name = "none") {
 	global $dbh;
 	global $auth_session;
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."extensions WHERE name LIKE ':extension_name' AND (domain_id =  0 OR domain_id = :domain_id) ORDER BY domain_id DESC LIMIT 1";
+	$sql = "SELECT * FROM ".TB_PREFIX."extensions WHERE name LIKE  :extension_name AND (domain_id =  0 OR domain_id = :domain_id ) ORDER BY domain_id DESC LIMIT 1";
 	$sth = dbQuery($sql,':extension_name', $extension_name, ':domain_id', $auth_session->domain_id ) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$extension_info = $sth->fetch();
 	if (! $extension_info) { return -2; }			// -2 = no result set = extension not found
@@ -1003,27 +1003,19 @@ function getSystemDefaults() {
 	return $defaults;
 }
 
-function updateDefault($name,$value,$extension_name="any") {
+function updateDefault($name,$value,$extension_name="core") {
 	global $auth_session;
 	
 	$sql = "UPDATE ".TB_PREFIX."system_defaults SET value =  :value WHERE name = :name"; 
 
-	if ($extension_name != "any") {				// to preserve backward compatibility
-		$extension_id = getExtensionID($extension_name);
-		if ($extension_id >= 0) { 
-			$sql .= " AND domain_id = :domain_id AND extension_id = :extension_id"; 
-		} else { 
-			die(htmlspecialchars("Invalid extension name: ".$extension)); 
-		}
-		if (dbQuery($sql, ':value', $value, ':name', $name, ':extension_id', $extension_id, ':domain_id', $auth_session->domain_id)) { 
-			return true; 
-		}
-	} else {
-		//echo $sql;
-		//if (dbQuery($sql, ':value', $value, ':name', $name, ':domain_id', $auth_session->domain_id)) { 	// domain_id not yet in defaults table
-		if (dbQuery($sql, ':value', $value, ':name', $name)) {
-			return true;
-		}
+	$extension_id = getExtensionID($extension_name);
+	if ($extension_id >= 0) { 
+		$sql .= " AND extension_id = :extension_id"; 
+	} else { 
+		die(htmlspecialchars("Invalid extension name: ".$extension)); 
+	}
+	if (dbQuery($sql, ':value', $value, ':name', $name, ':extension_id', $extension_id)) { 
+		return true; 
 	}
 	return false;
 }
