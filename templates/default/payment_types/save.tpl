@@ -31,5 +31,5 @@
 {/if}
 
 {if $saved == true }
-	<meta http-equiv="refresh" content="2;URL=index.php?module=payment_types&view=manage" />
+	<meta http-equiv="refresh" content="2;URL=index.php?module=payment_types&amp;view=manage" />
 {/if}

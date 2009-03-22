@@ -21,7 +21,7 @@
 	
 	<table align="center">
 	<tr>
-		<td class="details_screen">{$LANG.payment_type_id}</td><td>{$paymentType.pt_id|escape:html}</td>
+		<td class="details_screen">{$LANG.payment_type_id}</td>	<td>{$paymentType.pt_id|escape:html}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.description}</td><td>{$paymentType.pt_description|escape:html}</td>
@@ -34,12 +34,12 @@
 	<table class="buttons" align="center">
 		<tr>
 			<td>
-				<a href="./index.php?module=payment_types&view=details&id={$paymentType.pt_id}&action=edit" class="positive">
+				<a href="./index.php?module=payment_types&amp;view=details&amp;id={$paymentType.pt_id}&amp;action=edit" class="positive">
 					<img src="./images/famfam/report_edit.png" alt="" />
 					{$LANG.edit}
 				</a>
 
-				<a href="./index.php?module=payment_types&view=manage" class="negative">
+				<a href="./index.php?module=payment_types&amp;view=manage" class="negative">
 					<img src="./images/common/cross.png" alt="" />
 					{$LANG.cancel}
 				</a>
@@ -86,7 +86,7 @@
 
 				<input type="hidden" name="op" value="edit_payment_type">
 			
-				<a href="./index.php?module=preferences&view=manage" class="negative">
+				<a href="./index.php?module=preferences&amp;view=manage" class="negative">
 					<img src="./images/common/cross.png" alt="" />
 					{$LANG.cancel}
 				</a>

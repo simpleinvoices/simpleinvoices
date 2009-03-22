@@ -9,7 +9,8 @@
 <tr>
 	<td class="details_screen">{$LANG.invoice_id}</td>
 	<td><input type="hidden" name="ac_inv_id" value="{$invoice.id|escape:html}" />{$invoice.id|escape:html}</td>
-	<td class="details_screen">{$LANG.total}</td><td>{$invoice.total|number_format:2}</td>
+	<td class="details_screen">{$LANG.total}</td>
+	<td>{$invoice.total|number_format:2}</td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.biller}</td>
@@ -26,7 +27,7 @@
 <tr>
 	<td class="details_screen">{$LANG.amount}</td>
 	<td colspan="5"><input type="text" name="ac_amount" size="25" value="{$invoice.owing|escape:html}" />
-	<a class="cluetip" href="#"	rel="docs.php?t=help&p=process_payment_auto_amount" title="{$LANG.process_payment_auto_amount}"><img src="./images/common/help-small.png"></img></a>
+	<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=process_payment_auto_amount" title="{$LANG.process_payment_auto_amount}"><img src="./images/common/help-small.png" alt="" /></a>
 	</td>
 </tr>
 <tr>
@@ -41,13 +42,13 @@
 	
 <tr>
 	<td class="details_screen">{$LANG.invoice_id}
-	<a class="cluetip" href="#"	rel="docs.php?t=help&p=process_payment_inv_id" title="{$LANG.process_payment_inv_id}"><img src="./images/common/help-small.png"></img></a>
+	<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=process_payment_inv_id" title="{$LANG.process_payment_inv_id}"><img src="./images/common/help-small.png" alt="" /></a>
 	</td>
 	<td><input type="text" id="ac_me" name="ac_inv_id" /></td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.details}
-	<a class="cluetip" href="#"	rel="docs.php?t=help&p=process_payment_details" title="{$LANG.process_payment_details}"><img src="./images/common/help-small.png"></img></a>
+	<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=process_payment_details" title="{$LANG.process_payment_details}"><img src="./images/common/help-small.png" alt="" /></a>
 	</td>
 	<td id="js_total"><i>{$LANG.select_invoice}</i> </td>
 </tr>
@@ -97,14 +98,14 @@
     <tr>
         <td>
             <button type="submit" class="positive" name="process_payment" value="{$LANG.save}">
-                <img class="button_img" src="./images/common/tick.png" alt=""/> 
+                <img class="button_img" src="./images/common/tick.png" alt="" /> 
                 {$LANG.save}
             </button>
 
-            <input type="hidden" name="op" value="edit_preference">
+            <input type="hidden" name="op" value="edit_preference" />
         
-            <a href="./index.php?module=payments&view=manage" class="negative">
-                <img src="./images/common/cross.png" alt=""/>
+            <a href="./index.php?module=payments&amp;view=manage" class="negative">
+                <img src="./images/common/cross.png" alt="" />
                 {$LANG.cancel}
             </a>
     

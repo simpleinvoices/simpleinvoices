@@ -14,12 +14,12 @@
 */
 *}
 {if preferences == null}
-<P><em>{$LANG.no_preferences}.</em></p>
+<p><em>{$LANG.no_preferences}.</em></p>
 <table class="buttons" align="center">
     <tr>
         <td>
-            <a href="./index.php?module=preferences&view=add" class="positive">
-                <img src="./images/famfam/add.png" alt=""/>
+            <a href="./index.php?module=preferences&amp;view=add" class="positive">
+                <img src="./images/famfam/add.png" alt="" />
                 {$LANG.add_new_preference}
             </a>
 
@@ -31,8 +31,8 @@
 <table class="buttons" align="center">
     <tr>
         <td>
-            <a href="./index.php?module=preferences&view=add" class="positive">
-                <img src="./images/famfam/add.png" alt=""/>
+            <a href="./index.php?module=preferences&amp;view=add" class="positive">
+                <img src="./images/famfam/add.png" alt="" />
                 {$LANG.add_new_preference}
             </a>
 
@@ -45,4 +45,4 @@
 
 {/if}
 <br />
-<div style="text-align:center;"><a class="cluetip" href="#"	rel="docs.php?t=help&p=inv_pref_what_the" title="{$LANG.whats_all_this_inv_pref}"><img src="./images/common/help-small.png"></img> {$LANG.whats_all_this_inv_pref} </a></div>
+<div style="text-align:center;"><a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=inv_pref_what_the" title="{$LANG.whats_all_this_inv_pref}"><img src="./images/common/help-small.png" alt="" /> {$LANG.whats_all_this_inv_pref} </a></div>

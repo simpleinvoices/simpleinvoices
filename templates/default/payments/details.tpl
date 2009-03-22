@@ -30,5 +30,5 @@
 </table>
 <hr />
 	<form>
-		<input type="button" value="Back" onCLick="history.back()">
+		<input type="button" value="Back" onCLick="history.back()" />
 	</form>

@@ -12,5 +12,5 @@
 {/if}
 
 {if $saved == true }
-	<meta http-equiv="refresh" content="2;URL=index.php?module=preferences&view=manage" />
+	<meta http-equiv="refresh" content="2;URL=index.php?module=preferences&amp;view=manage" />
 {/if}

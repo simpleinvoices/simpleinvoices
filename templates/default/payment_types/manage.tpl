@@ -23,14 +23,14 @@
 <table class="buttons" align="center">
     <tr>
         <td>
-            <a href="./index.php?module=payment_types&view=add" class="positive">
-                <img src="./images/famfam/add.png" alt=""/>
+            <a href="./index.php?module=payment_types&amp;view=add" class="positive">
+                <img src="./images/famfam/add.png" alt="" />
                 {$LANG.add_new_payment_type}
             </a>
 
         </td>
     </tr>
- </table>
+</table>
 
 <table id="manageGrid" style="display:none"></table>
 
@@ -53,7 +53,8 @@
 	</thead>
 	{foreach from=$paymentTypes item=paymentType}
 	<tr class="index_table">
-		<td class="index_table"><a title="{$LANG.view}" class="index_table" href="index.php?module=payment_types&amp;view=details&amp;submit={$paymentType.pt_id|escape:html}&amp;action=view"><img src="images/common/view.png" height="16" border="0" align="absmiddle" alt="{$LANG.view}" /></a>
+		<td class="index_table">
+			<a title="{$LANG.view}" class="index_table" href="index.php?module=payment_types&amp;view=details&amp;submit={$paymentType.pt_id|escape:html}&amp;action=view"><img src="images/common/view.png" height="16" border="0" align="absmiddle" alt="{$LANG.view}" /></a>
 			<a title="{$LANG.edit}" class="index_table" href="index.php?module=payment_types&amp;view=details&amp;submit={$paymentType.pt_id|escape:html}&amp;action=edit"><img src="images/common/edit.png" height="16" border="0" align="absmiddle" alt="{$LANG.edit}" /></a>
 		</td>
 		<td class="index_table">{$paymentType.pt_id|escape:html}</td>

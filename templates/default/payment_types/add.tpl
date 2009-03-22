@@ -23,12 +23,12 @@
 			<a 
 				class="cluetip"
 				href="#"
-				rel="docs.php?t=help&p=required_field"
+				rel="docs.php?t=help&amp;p=required_field"
 				title="{$LANG.Required_Field}"
 			>
-		<img src="./images/common/required-small.png"></img></a>			
+		<img src="./images/common/required-small.png" alt="" /></a>			
 		</td>
-			<td><input type=text name="pt_description" size="50"></td>
+			<td><input type="text" name="pt_description" size="50" /></td>
 		</tr>
 		<tr>
 			<td class="details_screen">{$LANG.enabled}</td>
@@ -45,14 +45,14 @@
 		<tr>
 			<td>
 				<button type="submit" class="positive" name="insert_preference" value="{$LANG.save}">
-					<img class="button_img" src="./images/common/tick.png" alt=""/> 
+					<img class="button_img" src="./images/common/tick.png" alt="" /> 
 					{$LANG.save}
 				</button>
 
-				<input type="hidden" name="op" value="insert_preference">
+				<input type="hidden" name="op" value="insert_preference" />
 			
-				<a href="./index.php?module=payment_types&view=manage" class="negative">
-					<img src="./images/common/cross.png" alt=""/>
+				<a href="./index.php?module=payment_types&amp;view=manage" class="negative">
+					<img src="./images/common/cross.png" alt="" />
 					{$LANG.cancel}
 				</a>
 		
@@ -60,6 +60,6 @@
 		</tr>
 	 </table>
 	<div style="text-align:center;">
-		<input type="hidden" name="op" value="insert_payment_type">
+		<input type="hidden" name="op" value="insert_payment_type" />
 	</div>
 </form>
