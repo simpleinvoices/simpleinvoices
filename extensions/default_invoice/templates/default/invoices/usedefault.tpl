@@ -14,4 +14,4 @@
 *	 GPL v2 or above
 */
 *}
-  <meta http-equiv="refresh" contentn="0;URL=index.php?module=invoices&view={$view}&{$spec}={$id}" />
+  <meta http-equiv="refresh" content="0;URL=index.php?module=invoices&view={$view}&{$spec}={$id}" />

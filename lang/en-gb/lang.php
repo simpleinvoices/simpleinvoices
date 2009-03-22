@@ -377,4 +377,5 @@ $LANG['all_reports'] = "All reports";//1
 $LANG['new_invoice'] = "New invoice";//1
 $LANG['for'] = "for";//1
 $LANG['as_template'] = "as template";//1
+$LANG['extensions'] = "Extensions";//1
 ?>

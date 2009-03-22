@@ -939,19 +939,19 @@ function taxesGroupedForInvoiceItem($invoice_item_id)
 
 }
 
-function statusExtension($extension_id, $status=2) {
+function setStatusExtension($extension_id, $status=2) {
 	global $dbh;
 	global $auth_session;
 
 	//status=2 = toggle status
 	if ($status == 2) {
-		$sql = "SELECT enabled FROM ".TB_PREFIX."dev_extensions WHERE id = :id AND domain_id = :domain_id";
+		$sql = "SELECT enabled FROM ".TB_PREFIX."extensions WHERE id = :id AND domain_id = :domain_id LIMIT 1";
 		$sth = dbQuery($sql,':id', $extension_id, ':domain_id', $auth_session->domain_id ) or die(htmlspecialchars(end($dbh->errorInfo())));
 		$extension_info = $sth->fetch();
 		$status = 1 - $extension_info['enabled'];
 	}
 
-	$sql = "UPDATE ".TB_PREFIX."dev_extensions SET enabled =  :status WHERE id =  :id AND domain_id =  :domain_id"; 
+	$sql = "UPDATE ".TB_PREFIX."extensions SET enabled =  :status WHERE id =  :id AND domain_id =  :domain_id LIMIT 1"; 
 	if (dbQuery($sql, ':status', $status,':id', $extension_id, ':domain_id', $auth_session->domain_id)) {
 		return true;
 	}
@@ -963,7 +963,7 @@ function getExtensionID($extension_name = "none") {
 	global $dbh;
 	global $auth_session;
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."dev_extensions WHERE name LIKE ':extension_name' AND domain_id =  :domain_id";
+	$sql = "SELECT * FROM ".TB_PREFIX."extensions WHERE name LIKE ':extension_name' AND (domain_id =  0 OR domain_id = :domain_id) LIMIT 1";
 	$sth = dbQuery($sql,':extension_name', $extension_name, ':domain_id', $auth_session->domain_id ) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$extension_info = $sth->fetch();
 	if (! $extension_info) { return -2; }			// -2 = no result set = extension not found
@@ -973,27 +973,16 @@ function getExtensionID($extension_name = "none") {
 
 function getSystemDefaults() {
 
-	$defaults = getDefaults("core");
-	return $defaults;
-}
-
-function getDefaults($extension_name="any") {
 	global $dbh;
 	global $auth_session;
 	
-	$print_defaults = "SELECT * FROM ".TB_PREFIX."system_defaults";
+	$sql  = "SELECT def.name,def.value FROM ".TB_PREFIX."system_defaults def INNER JOIN ".TB_PREFIX."extensions ext ON (def.extension_id = ext.id)";
+	$sql .= " WHERE enabled=1";
+	$sql .= " AND def.domain_id = :domain_id";
+	$sql .= " ORDER BY extension_id ASC";		// order is important for overriding settings
 	
-	//TODO - uncomment this once new extension defaults table has been created as a sql patch - refer sql_patches.php
-	/*
-	$print_defaults = "SELECT * FROM ".TB_PREFIX."system_defaults WHERE domain_id =  :domain_id";
-
-	if ($extension_name != "any") {
-		$extension_id = getExtensionID($extension_name);
-		if ($extension_id >= 0) { $print_defaults .= " AND extension_id = ".$extension_id; } 
-	}
-	*/
-	
-	$sth = dbQuery($print_defaults, 'domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+	// get all settings from default domain (0)
+	$sth = dbQuery($sql.$current_settings.$order, 'domain_id', 0) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
 	$defaults = null;
 	$default = null;
@@ -1001,6 +990,14 @@ function getDefaults($extension_name="any") {
 	
 	while($default = $sth->fetch()) {
 		$defaults["$default[name]"] = $default['value'];
+	}
+
+	// add all settings from current domain
+	$sth = dbQuery($sql.$current_settings.$order, 'domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$default = null;
+
+	while($default = $sth->fetch()) {
+		$defaults["$default[name]"] = $default['value'];	// if setting is redefined, overwrite the previous value
 	}
 
 	return $defaults;

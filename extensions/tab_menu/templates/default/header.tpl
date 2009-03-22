@@ -42,6 +42,7 @@
 	<link rel="stylesheet" type="text/css" href="./include/jquery/rte/rte.css" />	
 	<link rel="stylesheet" type="text/css" href="./include/jquery/cluetip/jquery.cluetip.css" />
 	<link rel="stylesheet" type="text/css" href="./extensions/tab_menu/templates/default/css/default.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/phpreports.css" media="all"/>
 	{/literal}
 	{if $config->debug->level == "All"}
 	<link rel="stylesheet" type="text/css" href="./library/blackbirdjs/blackbird.css" />	

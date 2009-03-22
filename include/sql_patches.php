@@ -1289,6 +1289,26 @@ PRIMARY KEY  (`user_id`)) ;
 				(select value from ".TB_PREFIX."system_defaults where name ='tax_per_line_item')
 			);";
     $patch['198']['date'] = "20090301";	
+    $patch['199']['name'] = "Defaults table - add domain_id and extension_id field";
+    $patch['199']['patch'] = "ALTER TABLE ".TB_PREFIX."system_defaults 
+				ADD `domain_id` INT( 5 ) NOT NULL DEFAULT '0',
+				ADD `extension_id` INT( 5 ) NOT NULL DEFAULT '0',
+				DROP INDEX `name`,
+				ADD INDEX `name` ( `name` );";
+    $patch['199']['date'] = "20090321";	
+    $patch['200']['name'] = "Extension table - create table to hold extension status";
+    $patch['200']['patch'] = "CREATE TABLE ".TB_PREFIX."extensions ( 
+		`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+		`domain_id` INT( 11 ) NOT NULL ,
+		`name` VARCHAR( 255 ) NOT NULL ,
+		`description` VARCHAR( 255 ) NOT NULL ,
+		`enabled` VARCHAR( 1 ) NOT NULL DEFAULT '0');
+    		 INSERT INTO ".TB_PREFIX."extensions (
+			`id`,`domain_id`,`name`,`description`,`enabled`) 
+			VALUES ('0','0','core','Core part of Simple Invoices - always enabled','1');
+		 UPDATE ".TB_PREFIX."extensions SET `id` = '0' WHERE `name` = 'core' LIMIT 1;";
+    $patch['200']['date'] = "20090322";	
+ 
 
 
 
