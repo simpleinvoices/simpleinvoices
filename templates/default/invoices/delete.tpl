@@ -29,7 +29,7 @@
 		<hr />
 		<form name="frmpost" action="index.php?module=invoices&amp;view=delete&amp;stage=2&amp;id={$smarty.get.invoice}" method="post">
 			<input type="submit" name="submit" value="I'm sure" />
-			<input type="button" value="Cancel" onCLick="history.back();" />
+			<input type="button" value="{$LANG.cancel}" onclick="javascript: history.back()" />
 			<input type="hidden" name="doDelete" value="y" />
 		</form>	
 	        {/if}
@@ -41,7 +41,7 @@
 				<br />
 	<hr />
 			<form>
-					<input type="button" value="Back" onCLick="history.back();" />
+					<input type="button" value="{$LANG.back}" onclick="javascript: history.back()" />
 		</form>	
     	    {/if}
 

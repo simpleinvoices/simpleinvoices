@@ -47,6 +47,7 @@ $LANG['amount'] = "Bedrag";//1
 $LANG['attention_short'] = "t.a.v.";//1
 $LANG['attribute'] = "Attribuut";//1
 $LANG['attribute_short'] = "Attr";//1
+$LANG['back'] = "Terug";//1
 $LANG['backup_database'] = "Database Backuppen";//1
 $LANG['biller'] = "Bedrijf";//1
 $LANG['biller_details'] = "Details Bedrijf";//1

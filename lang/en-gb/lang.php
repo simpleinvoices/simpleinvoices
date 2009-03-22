@@ -47,6 +47,7 @@ $LANG['amount'] = "Amount";//1
 $LANG['attention_short'] = "Attn.";//1
 $LANG['attribute'] = "Attribute";//1
 $LANG['attribute_short'] = "Attr";//1
+$LANG['back'] = "Back";//1
 $LANG['backup_database'] = "Backup Database";//1
 $LANG['biller'] = "Biller";//1
 $LANG['biller_details'] = "Biller details";//1
