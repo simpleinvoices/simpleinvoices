@@ -19,7 +19,7 @@
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
         	<img src="images/common/gmail-loader.gif" alt="Loading ..." /> Loading ...
 </div>
-<form name="frmpost" action="index.php?module=invoices&view=save" method="POST" onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=invoices&view=save" method="post" onsubmit="return frmpost_Validator(this)">
 
 {include file="$path/header.tpl" }
 
@@ -37,8 +37,7 @@
         {section name=line start=0 loop=$dynamic_line_items step=1}
 
 			<tr>
-				<td>
-					<input type="text"  id="quantity{$smarty.section.line.index}" name="quantity{$smarty.section.line.index}" size="5"></td>
+				<td><input type="text"  id="quantity{$smarty.section.line.index}" name="quantity{$smarty.section.line.index}" size="5"></td>
 				<td>
 				                
 			{if $products == null }
@@ -62,27 +61,25 @@
 				</select>
 			{/if}
 				                				                
-                </td>
-			<td>
+        		        </td>
+				<td>
 				<select id="attr1-{$smarty.section.line.index}" name="attr1-{$smarty.section.line.index}" class="linkSel" disabled="disabled">
 					<option value="">--  --</option>
 				</select>
-			</td>
-			<td>
+				</td>
+				<td>
 				<select id="attr2-{$smarty.section.line.index}" name="attr2-{$smarty.section.line.index}" class="linkSel" disabled="disabled">
 					<option value="">--  --</option>
 				</select>
-			</td>	
+				</td>	
 			{if $number_of_attributes == "3"}
-			<td>
+				<td>
 				<select id="attr3-{$smarty.section.line.index}" name="attr3-{$smarty.section.line.index}" class="linkSel" disabled="disabled">
 					<option value="">--  --</option>
 				</select>
-			</td>	
+				</td>	
 			{/if}
-			<td>
-				<input id="unit_price{$smarty.section.line.index}" name="unit_price{$smarty.section.line.index}" size="7" value="" />
-			</td>
+				<td><input id="unit_price{$smarty.section.line.index}" name="unit_price{$smarty.section.line.index}" size="7" value="" /></td>
 {*
 				<td>
 					<select name="products{$smarty.section.line.index}">
@@ -113,11 +110,11 @@
 
 {*
 <tr>
-        <td colspan=2 class="details_screen">{$LANG.notes}</td>
+        <td colspan="2" class="details_screen">{$LANG.notes}</td>
 </tr>
 
 <tr>
-        <td colspan=2><textarea input type=text name="note" rows=5 cols=70 WRAP=nowrap></textarea></td>
+        <td colspan="2"><textarea input type="text" name="note" rows="5" cols="70" wrap="nowrap"></textarea></td>
 </tr>
 *}
 <tr><td class="details_screen">{$LANG.tax}</td>
@@ -137,7 +134,8 @@
 </tr>
 
 <tr>
-<td class="details_screen">{$LANG.inv_pref_short}</td><td><input type="text" name="preference_id" />
+<td class="details_screen">{$LANG.inv_pref_short}</td>
+<td><input type="text" name="preference_id" />
 
 {if $preferences == null }
 	<p><em>{$LANG.no_preferences}</em></p>
@@ -154,15 +152,15 @@
 <!--Add more line items while in an itemeised invoice - Get style - has problems- wipes the current values of the existing rows - not good
 <tr>
 <td>
-<a href="?get_num_line_items=10">Add 5 more line items<a>
+<a href="?get_num_line_items=10">Add 5 more line items</a>
 </tr>
 -->
 </table>
 <!-- </div> -->
 <hr />
 <div style="text-align:center;">
-	<input type=hidden name="max_items" value="{$smarty.section.line.index}" />
-	<input type=submit name="submit" value="{$LANG.save_invoice}" />
-	<input type=hidden name="type" value="2" />
+	<input type="hidden" name="max_items" value="{$smarty.section.line.index}" />
+	<input type="submit" name="submit" value="{$LANG.save_invoice}" />
+	<input type="hidden" name="type" value="2" />
 </div>
 </form>

@@ -17,27 +17,21 @@
 */
 *}
 {if $smarty.post.submit != null}
-	<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=details&invoice={$smarty.post.invoice_id}&type={$smarty.post.type}>
+	<meta http-equiv="refresh" content="1;url=index.php?module=invoices&amp;view=details&amp;invoice={$smarty.post.invoice_id}&amp;type={$smarty.post.type}" />
 	<br /><br />
 	{$LANG.save_invoice_items_success};
 	<br /><br />
 {else}
 <div id="top"><h3>{$LANG.add_invoice_item}</h3></div>
  <hr />
-<form name="add_invoice_item" action="index.php?module=invoices&view=add_invoice_item" method="post">
+<form name="add_invoice_item" action="index.php?module=invoices&amp;view=add_invoice_item" method="post">
 	<table align="center">
 			<tr>
-				<td class="details_screen">
-					{$LANG.quantity}
-				</td>
-				<td>
-					<input type="text" id="quantity1" name="quantity1" size="5" />
-				</td>
+				<td class="details_screen">{$LANG.quantity}</td>
+				<td><input type="text" id="quantity1" name="quantity1" size="5" /></td>
 			</tr>
 			<tr>
-				<td class="details_screen">
-					{$LANG.product}
-				</td>
+				<td class="details_screen">{$LANG.product}</td>
 				<td><input type="text" name="description" />
 				                
 				{if $products == null }
@@ -61,57 +55,47 @@
 					</select>
 				{/if}
 					                				                
-                </td>
+                		</td>
 			</tr>
 			<tr>
-				<td class="details_screen">
-					Attr. 1
-				</td>
-			<td>
+				<td class="details_screen">Attr. 1</td>
+				<td>
 				<select id="attr1" name="attr1" class="linkSel" disabled="disabled">
 					<option value="">--  --</option>
 				</select>
-			</td>
+				</td>
 			</tr>
 			<tr>
-				<td class="details_screen">
-					Attr. 2
-				</td>
-			<td>
+				<td class="details_screen">Attr. 2</td>
+				<td>
 				<select id="attr2" name="attr2" class="linkSel" disabled="disabled">
 					<option value="">--  --</option>
 				</select>
-			</td>
+				</td>
 			</tr>	
 			{if $number_of_attributes == "3"}
 			<tr>
-				<td class="details_screen">
-					Attr. 3
-				</td>
-			<td>
+				<td class="details_screen">Attr. 3</td>
+				<td>
 				<select id="attr3" name="attr3" class="linkSel" disabled="disabled">
 					<option value="">--  --</option>
 				</select>
-			</td>	
+				</td>	
 			</tr>	
 			{/if}
 			</tr>
 			<tr>
-				<td class="details_screen">
-					{$LANG.unit_price}
-				</td>
-				<td>
-					<input id="unit_price1" name="unit_price1" size="7" value="{$invoiceItem.unit_price|number_format:2}" />
-				</td>
+				<td class="details_screen">{$LANG.unit_price}</td>
+				<td><input id="unit_price1" name="unit_price1" size="7" value="{$invoiceItem.unit_price|number_format:2}" /></td>
 			</tr>
  
 			{if $type == 3}               
-            	<tr>
-					<td class="details_screen" colspan=2 >{$LANG.description}</td>
-				</tr>
-            	<tr>
-					<td colspan="2" ><textarea input type="text" name='description' rows="3" cols="80" wrap="nowrap" /></textarea></td>
-				</tr>
+           	 	<tr>
+				<td class="details_screen" colspan=2 >{$LANG.description}</td>
+			</tr>
+           	 	<tr>
+				<td colspan="2" ><textarea input type="text" name="description" rows="3" cols="80" wrap="nowrap" /></textarea></td>
+			</tr>
 			{/if}
 </table>
 <hr />

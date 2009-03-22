@@ -15,7 +15,7 @@
 	<p><em>{$LANG.no_customers}</em></p>
 {else}
 
-<b>{$LANG.manage_customers} :: <a href="index.php?module=customers&view=add">{$LANG.customer_add}</a></b>
+<b>{$LANG.manage_customers} :: <a href="index.php?module=customers&amp;view=add">{$LANG.customer_add}</a></b>
 <table id="manageGrid" >
     <tr>
 		<td>Action</td>
@@ -34,9 +34,9 @@
 
 </table>
 	{if $number_of_customers.count > 25}
-		<a href='index.php?module=customers&view=manage&page={$page_prev}'> << </a>
+		<a href='index.php?module=customers&amp;view=manage&amp;page={$page_prev}'> << </a>
 			::
-		<a href='index.php?module=customers&view=manage&page={$page_next}'> >> </a>
+		<a href='index.php?module=customers&amp;view=manage&amp;page={$page_next}'> >> </a>
 	{/if}
 
 {/if}

@@ -18,7 +18,7 @@
 *}
 
 {if $smarty.get.action == 'view' }
-<b>{$LANG.customer} :: <a href="index.php?module=customers&view=details&id={$customer.id}&action=edit">{$LANG.edit}</a>
+<b>{$LANG.customer} :: <a href="index.php?module=customers&amp;view=details&amp;id={$customer.id}&amp;action=edit">{$LANG.edit}</a>
 </b>
 <hr />
 <table >
@@ -34,8 +34,7 @@
 		<td colspan="2">{$customer.name}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.attention_short}
-		</td>
+		<td class="details_screen">{$LANG.attention_short}</td>
 		<td colspan="2">{$customer.attention}</td>
 	</tr>
 	<tr>
@@ -43,8 +42,7 @@
 		<td>{$customer.street_address}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.street2} 
-		</td>
+		<td class="details_screen">{$LANG.street2}</td>
 		<td>{$customer.street_address2}</td>
 	</tr>
 	<tr>
@@ -87,23 +85,19 @@
 
 			<table>
 				<tr>
-					<td class="details_screen">{$customFieldLabel.customer_cf1}
-					</td>
+					<td class="details_screen">{$customFieldLabel.customer_cf1}</td>
 					<td>{$customer.custom_field1}</td>
 				</tr>
 				<tr>
-					<td class="details_screen">{$customFieldLabel.customer_cf2}
-					</td>
+					<td class="details_screen">{$customFieldLabel.customer_cf2}</td>
 					<td>{$customer.custom_field2}</td>
 				</tr>
 				<tr>
-					<td class="details_screen">{$customFieldLabel.customer_cf3}
-					</td>
+					<td class="details_screen">{$customFieldLabel.customer_cf3}</td>
 					<td>{$customer.custom_field3}</td>
 				</tr>
 				<tr>
-					<td class="details_screen">{$customFieldLabel.customer_cf4}
-					</td>
+					<td class="details_screen">{$customFieldLabel.customer_cf4}</td>
 					<td>{$customer.custom_field4}</td>
 				</tr>
 
@@ -138,7 +132,7 @@
 			{foreach from=$invoices item=invoice}
 	
 			<tr class="index_table">
-				<td class="details_screen"><a href="index.php?module=invoices&view=quick_view&invoice={$invoice.id}">{$invoice.id}</a></td>
+				<td class="details_screen"><a href="index.php?module=invoices&amp;view=quick_view&amp;invoice={$invoice.id}">{$invoice.id}</a></td>
 				<td style="text-align:right" class="details_screen">{$invoice.total|number_format:2}</td>
 				<td style="text-align:right" class="details_screen">{$invoice.paid|number_format:2}</td>
 				<td style="text-align:right" class="details_screen">{$invoice.owing|number_format:2}</td>
@@ -149,16 +143,16 @@
 
 
 <hr />
-<a href="index.php?module=customers&view=details&id={$customer.id}&action=edit">{$LANG.edit}</a>
+<a href="index.php?module=customers&amp;view=details&amp;id={$customer.id}&amp;action=edit">{$LANG.edit}</a>
 {/if}
 
 {if $smarty.get.action == 'edit' }
 
 <form name="frmpost"
-	action="index.php?module=customers&view=save&id={$customer.id}"
+	action="index.php?module=customers&amp;view=save&amp;id={$customer.id}"
 	method="post">
 
-<div id="top"><b>{$LANG.customer_edit}</b></div>
+<div id="top"><h3>{$LANG.customer_edit}</h3></div>
 <hr />
 <table >
 	<tr>
@@ -170,8 +164,7 @@
 		<td><input type="text" name="name" value="{$customer.name|regex_replace:"/[\\\]/":""}" size="25" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.attention_short} 
-		</td>
+		<td class="details_screen">{$LANG.attention_short}</td>
 		<td><input type="text" name="attention" value="{$customer.attention}" size="25" /></td>
 	</tr>
 	<tr>
@@ -179,8 +172,7 @@
 		<td><input type="text" name="street_address" value="{$customer.street_address}" size="25" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.street2}
-		</td>
+		<td class="details_screen">{$LANG.street2}</td>
 		<td><input type="text" name="street_address2" value="{$customer.street_address2}" size="25" /></td>
 	</tr>
 	<tr>
@@ -213,33 +205,24 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.email}</td>
-		<td>
-			<input type="text" name="email" value="{$customer.email}" size="25" /></td
-	></tr>
+		<td><input type="text" name="email" value="{$customer.email}" size="25" /></td>
+	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.customer_cf1}
-		</td>
-		<td>
-			<input type="text" name="custom_field1" value="{$customer.custom_field1}" size="25" /></td
-	></tr>
+		<td class="details_screen">{$customFieldLabel.customer_cf1}</td>
+		<td><input type="text" name="custom_field1" value="{$customer.custom_field1}" size="25" /></td>
+	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.customer_cf2}
-		</td>
-		<td>
-			<input type="text" name="custom_field2" value="{$customer.custom_field2}" size="25" /></td
-	></tr>
+		<td class="details_screen">{$customFieldLabel.customer_cf2}</td>
+		<td><input type="text" name="custom_field2" value="{$customer.custom_field2}" size="25" /></td>
+	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.customer_cf3}
-		</td>
-		<td>
-			<input type="text" name="custom_field3" value="{$customer.custom_field3}" size="25" /></td
-	></tr>
+		<td class="details_screen">{$customFieldLabel.customer_cf3}</td>
+		<td><input type="text" name="custom_field3" value="{$customer.custom_field3}" size="25" /></td>
+	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.customer_cf4}
-		</td>
-		<td>
-			<input type="text" name="custom_field4" value="{$customer.custom_field4}" size="25" /></td
-	></tr>
+		<td class="details_screen">{$customFieldLabel.customer_cf4}</td>
+		<td><input type="text" name="custom_field4" value="{$customer.custom_field4}" size="25" /></td>
+	</tr>
 </table>
 
 

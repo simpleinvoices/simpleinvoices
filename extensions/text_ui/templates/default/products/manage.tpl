@@ -14,12 +14,12 @@
 	<p><em>{$LANG.no_products}</em></p>
 {else}
  
-<b>{$LANG.manage_products} :: <a href="index.php?module=products&view=add">{$LANG.add_new_product}</a></b>
+<b>{$LANG.manage_products} :: <a href="index.php?module=products&amp;view=add">{$LANG.add_new_product}</a></b>
 <table id="manageGrid" >
     <tr>
 		<td>Action</td>
 		<td>Name</td>
-		<td>Price</td>
+		<td>{$LANG.price}</td>
 	</tr>
 {foreach from=$xml->row item=cell}
     <tr>
@@ -31,8 +31,8 @@
 
 </table>
 {if $number_of_rows.count > 25}
-	<a href='index.php?module=products&view=manage&page={$page_prev}'> << </a>
+	<a href='index.php?module=products&amp;view=manage&amp;page={$page_prev}'> << </a>
 		::
-	<a href='index.php?module=products&view=manage&page={$page_next}'> >> </a>
+	<a href='index.php?module=products&amp;view=manage&amp;page={$page_next}'> >> </a>
 {/if}
 {/if}

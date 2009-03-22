@@ -1,18 +1,19 @@
 <form name="frmpost"
-	action="index.php?module=products&view=save&id={$smarty.get.id}"
+	action="index.php?module=products&amp;view=save&amp;id={$smarty.get.id}"
 	method="post">
 
 
 {if $smarty.get.action== 'view' }
 
 	<b>{$LANG.products} ::
-	<a href="index.php?module=products&view=details&id={$product.id}&action=edit">{$LANG.edit}</a></b>
+	<a href="index.php?module=products&amp;view=details&amp;id={$product.id}&amp;action=edit">{$LANG.edit}</a></b>
 	
  	<hr />
 
 	<table >
 	<tr>
-		<td class="details_screen">{$LANG.product_id}</td><td>{$product.id}</td>
+		<td class="details_screen">{$LANG.product_id}</td>
+		<td>{$product.id}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product_description}</td>
@@ -38,9 +39,9 @@
 		<td class="details_screen">{$customFieldLabel.product_cf4}</a></td>
 		<td>{$product.custom_field4}</td>
 	</tr>
-		<tr>
+	<tr>
 		<td class="details_screen">Attribute 1</td>
-		<td>
+	<td>
             {foreach from=$attributes item=attribute}
                 {if $matrix1.attribute_id == $attribute.id}{$attribute.name}{/if}
             {/foreach}
