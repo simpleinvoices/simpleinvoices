@@ -12,7 +12,7 @@
 		</div>
 		<hr />
 	{/if}
-<form name="frmpost" ACTION="index.php?module=products&amp;view=add" method="POST" id="frmpost" onSubmit="return checkForm(this);">
+<form name="frmpost" action="index.php?module=products&amp;view=add" method="post" id="frmpost" onsubmit="return checkForm(this);">
 
 
 <table align="center">
@@ -21,7 +21,7 @@
 			<a class="cluetip" href="#" rel="docs.php?t=help&amp;p=required_field" title="{$LANG.Required_Field}">
 			<img src="./images/common/required-small.png" /></a>
 		</td>
-		<td><input type=text name="description" value="{$smarty.post.description}" size=50 id="description" class="required edit" onblur="checkField(this);" /></td>
+		<td><input type="text" name="description" value="{$smarty.post.description}" size="50" id="description" class="required edit" onblur="checkField(this);" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.unit_price}</td>

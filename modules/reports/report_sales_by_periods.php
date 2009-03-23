@@ -123,7 +123,7 @@ while ( $year <= $this_year )
 /*
 echo "Total Sales<pre>";
 print_r($total_sales);
-echo "</pre><br>Total Payments<pre>";
+echo "</pre><br />Total Payments<pre>";
 print_r($total_payments);
 echo "</pre>";
 */

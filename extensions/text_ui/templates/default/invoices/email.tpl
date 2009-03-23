@@ -21,7 +21,7 @@
 <form name="frmpost" action="index.php?module=invoices&amp;view=email&amp;stage=2&amp;invoice={$smarty.get.invoice}" method="post">
 <div id="top"><h3>Email Invoice to Customer as PDF</h3></div>
 <hr />
-<table align=center>
+<table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.from}</td>
 		<td><input type="text" name="email_from" size="50" value="{$biller.email}" /></td>

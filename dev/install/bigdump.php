@@ -405,10 +405,10 @@ if (!$error && !isset($_REQUEST["fn"]) && $filename=="")
     echo ("<p>You can now upload your dump file up to $upload_max_filesize bytes (".round ($upload_max_filesize/1024/1024)." Mbytes)  ");
     echo ("directly from your browser to the server. Alternatively you can upload your dump files of any size via FTP.</p>\n");
 ?>
-<form method="POST" action="<?php echo ($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
-<input type="hidden" name="MAX_FILE_SIZE" value="$upload_max_filesize">
-<p>Dump file: <input type="file" name="dumpfile" accept="*/*" size=60"></p>
-<p><input type="submit" name="uploadbutton" value="Upload"></p>
+<form method="post" action="<?php echo ($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+<input type="hidden" name="MAX_FILE_SIZE" value="$upload_max_filesize" />
+<p>Dump file: <input type="file" name="dumpfile" accept="*/*" size="60" /></p>
+<p><input type="submit" name="uploadbutton" value="Upload" /></p>
 </form>
 <?php
   }

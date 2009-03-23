@@ -29,14 +29,14 @@
 <form name="frmpost" action="index.php?module=customers&view=add" method="post" id="frmpost" onSubmit="return checkForm(this);">
 <h3>{$LANG.customer_add}</h3>
 <hr />
-<table align=center>
+<table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.customer_name}</td>
 		<td><input type="text" name="name" value="{$smarty.post.name}" size="15" id="name" class="required" onblur="checkField(this);" /></td>
 	</tr>
 	</tr>
 		<td class="details_screen">{$LANG.customer_contact}</td>
-		<td><input type="text" name="attention" size=15 value="{$smarty.post.attention}"></td>
+		<td><input type="text" name="attention" value="{$smarty.post.attention}" size="15" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street}</td>

@@ -34,7 +34,7 @@ for (var x = 0; x <= {/literal}{$dynamic_line_items}{literal}; x++)
 </script>
 {/literal}
 
-<form name="frmpost" action="index.php?module=invoices&view=save" method=POST onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=invoices&view=save" method="post" onsubmit="return frmpost_Validator(this)">
 
 <h3>{$LANG.inv} {$LANG.inv_itemised}</h3>
 
@@ -57,7 +57,7 @@ for (var x = 0; x <= {/literal}{$dynamic_line_items}{literal}; x++)
 			<tr>
 
 				<td>
-					<input type=text  id="quantity{$smarty.section.line.index}" name="quantity{$smarty.section.line.index}" size="5"></td>
+					<input type="text"  id="quantity{$smarty.section.line.index}" name="quantity{$smarty.section.line.index}" size="5" /></td>
 				<td>
 				                
 			{if $products == null }
@@ -171,8 +171,8 @@ for (var x = 0; x <= {/literal}{$dynamic_line_items}{literal}; x++)
 <!-- </div> -->
 <hr />
 <div style="text-align:center;">
-	<input type=hidden name="max_items" value="{$smarty.section.line.index}" />
-	<input type=submit name="submit" value="{$LANG.save_invoice}" />
-	<input type=hidden name="type" value="2" />
+	<input type="hidden" name="max_items" value="{$smarty.section.line.index}" />
+	<input type="submit" name="submit" value="{$LANG.save_invoice}" />
+	<input type="hidden" name="type" value="2" />
 </div>
 </form>

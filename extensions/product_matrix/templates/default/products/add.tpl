@@ -15,7 +15,7 @@
 <div id="top"><h3>&nbsp;{$LANG.product_to_add}&nbsp;</h3></div>
  <hr />
 
-<table align=center>
+<table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.product_description} <a href="docs.php?t=help&p=required_field" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png" alt="" /></a></td>
 		<td><input type="text" name="description" value="{$smarty.post.description}" size="50" /></td>

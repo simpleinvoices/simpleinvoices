@@ -92,7 +92,7 @@
 	</table>
 
 
-	<table align=center>
+	<table align="center">
 	<tr>
 		<td colspan="6" class="align_center"><b>{$preference.pref_inv_heading}</b></td>
 	</tr>

@@ -51,7 +51,7 @@
 <br />
 <!-- #PDF end -->
 
-	<table align=center>
+	<table align="center">
 {*
 	<tr>
 		<td colspan="6" class="align_center"><b>{$preference.pref_inv_heading}</b></td>
@@ -64,7 +64,7 @@
 
 	<tr class='details_screen'>
 		<td class='details_screen'><b>{$preference.pref_inv_wording} {$LANG.summary}:</b></td>
-		<td colspan="5" align=right class='details_screen align_right'>
+		<td colspan="5" align="right" class='details_screen align_right'>
 			<a href='#' class="show-summary" onclick="$('.summary').show();$('.show-summary').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" alt="" /></a>
 			<a href='#' class="summary" onclick="$('.summary').hide();$('.show-summary').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" alt="" /></a>
 		</td>

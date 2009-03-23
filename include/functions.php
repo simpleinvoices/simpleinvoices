@@ -308,7 +308,7 @@ EOD;
  
 				</td>
 				<td>
-					<input type=text name="customField$custom_field_number" value="$custom_field_value" size="25" />
+					<input type="text" name="customField$custom_field_number" value="$custom_field_value" size="25" />
 				</td>
 			</tr>
 EOD;

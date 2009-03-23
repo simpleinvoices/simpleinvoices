@@ -21,9 +21,7 @@
 <table align="center">
 
 <tr>
-	<td class="details_screen">
-		Biller
-	</td>
+	<td class="details_screen">{$LANG.biller}</td>
 	<td><input type="text" name="biller_block" size="25" />
 		{if $billers == null }
 	<p><em>{$LANG.no_billers}</em></p>
@@ -38,9 +36,7 @@
 	</td>
 </tr>
 <tr>
-	<td class="details_screen">
-		Customer
-	</td>
+	<td class="details_screen">{$LANG.customer}</td>
 	<td><input type="text" name="customer_block" size="25" />
 		
 {if $customers == null }
@@ -56,7 +52,7 @@
 	</td>
 </tr>
 <tr>
-        <td class="details_screen">Date</td>
+        <td class="details_screen">{$LANG.date_upper}</td>
         <td>
                         <input type="text" class="date-picker" name="date" id="date1" value='{$smarty.now|date_format:"%Y-%m-%d"}' />
         </td>

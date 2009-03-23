@@ -95,8 +95,8 @@ if ($_GET['stage'] == 2 ) {
 	   exit;
 	}
 	unlink("./tmp/cache/$preference[pref_inv_wording]$invoice[id].pdf");
-	$message  = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=invoices&view=manage>";
-	$message .= "<br>$preference[pref_inv_wording] $invoice[id] has been sent as a PDF";
+	$message  = "<meta http-equiv=\"refresh\" content=\"2;URL=index.php?module=invoices&amp;view=manage>\"";
+	$message .= "<br />$preference[pref_inv_wording] $invoice[id] has been sent as a PDF";
 
 	echo $block_stage3;
 
