@@ -238,7 +238,7 @@
 				<table class="buttons" align="left">
 					<tr>
 						<td>
-							{* onClick="add_line_item();" *}
+							{* onclick="add_line_item();" *}
 							<a 
 								href="#" 
 								class="add_line_item"
