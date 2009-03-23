@@ -43,7 +43,7 @@ $display_block = <<<EOD
 <tr><td>Note: this will backup your database to a file into your database_backups directory</td></tr>
 <tr>
 <td>
-<a class="cluetip" href="#"	rel="docs.php?t=help&p=backup_database" title="Database Backup"><img src="./images/common/important.png"></img> <font color="red"> Extra information</font></a>
+<a class="cluetip" href="#"	rel="docs.php?t=help&p=backup_database" title="Database Backup"><img src="./images/common/important.png" alt="" /> <font color="red"> Extra information</font></a>
 </td>
 </tr></table>
 

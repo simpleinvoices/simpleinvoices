@@ -127,7 +127,7 @@ function listPatches() {
 		</table>
 		<br />
 		<a href="docs.php?t=help&amp;p=text" rel="gb_page_center[450, 450]">
-		<img src="./images/common/important.png"></img><font color="red">Warning:</font>
+		<img src="./images/common/important.png" alt="" /><font color="red">Warning:</font>
 		</a>
 
 <table align="center">

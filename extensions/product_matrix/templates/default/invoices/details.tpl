@@ -199,7 +199,7 @@
 
 	<tr>
 		<td>
-			<a href="./index.php?module=invoices&amp;view=add_invoice_item&amp;invoice={$invoice.id}&amp;type={$invoice.type_id}&amp;tax_id={$invoiceItems.0.tax_id}"><img src="./images/common/famfamAdd.png"></img>{$LANG.add_invoice_item}</a>
+			<a href="./index.php?module=invoices&amp;view=add_invoice_item&amp;invoice={$invoice.id}&amp;type={$invoice.type_id}&amp;tax_id={$invoiceItems.0.tax_id}"><img src="./images/common/famfamAdd.png" alt="" />{$LANG.add_invoice_item}</a>
 		</td>
 		<td>
 		</td>

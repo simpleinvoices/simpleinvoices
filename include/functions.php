@@ -304,11 +304,11 @@ EOD;
 		$display_block = <<<EOD
 			<tr>
 				<td class="$css_class1">$custom_label_value
-				<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="Custom Fields"><img src="./images/common/help-small.png"></img></a>
+				<a class="cluetip" href="#"	rel="docs.php?t=help&p=custom_fields" title="Custom Fields"><img src="./images/common/help-small.png" alt="" /></a>
  
 				</td>
 				<td>
-					<input type=text name="customField$custom_field_number" value="$custom_field_value"size=25></input>
+					<input type=text name="customField$custom_field_number" value="$custom_field_value" size="25" />
 				</td>
 			</tr>
 EOD;
@@ -326,25 +326,25 @@ switch ($type)
 	case "notWriteable":
 
 		$error = exit("
-		<br>
-		===========================================<br>
-		Simple Invoices error<br>
-		===========================================<br>
+		<br />
+		===========================================<br />
+		Simple Invoices error<br />
+		===========================================<br />
 		The ".$info1." <b>".$info2."</b> has to be writeable");
 	break;
 	
 	case "dbConnection":
 	
 		$error = exit("
-		<br>
-		===========================================<br>
-		Simple Invoices database connection problem<br>
-		===========================================<br>
-		Could not connect to the Simple Invoices database<br><br>
-		For information on how to fix this pease refer to the following database error: <br> --> <b>$info1</b><br><br>
+		<br />
+		===========================================<br />
+		Simple Invoices database connection problem<br />
+		===========================================<br />
+		Could not connect to the Simple Invoices database<br /><br />
+		For information on how to fix this pease refer to the following database error: <br /> --> <b>$info1</b><br /><br />
 		If this is an Access denied error please make sure that the database.params setting in config/config.ini are correct 
-		<br>
-		===========================================<br>
+		<br />
+		===========================================<br />
 		");
 	break;
 
@@ -360,15 +360,15 @@ function checkConnection() {
 	if(!$dbh) {
 		simpleInvoiceError("dbConnection",$db_server,$dbh->errorInfo());
 /*
-		die('<br>
-		===========================================<br>
-		Simple Invoices database connection problem<br>
-		===========================================<br>
-		Could not connect to the Simple Invoices database<br><br>
-		Please refer to the following database ('.$db_server.') error for for to fix this: <b>ERROR :' . end($dbh->errorInfo()) . '</b><br><br>
+		die('<br />
+		===========================================<br />
+		Simple Invoices database connection problem<br />
+		===========================================<br />
+		Could not connect to the Simple Invoices database<br /><br />
+		Please refer to the following database ('.$db_server.') error for for to fix this: <b>ERROR :' . end($dbh->errorInfo()) . '</b><br /><br />
 		If this is an Access denied error please make sure that the db_host, db_name, db_user, and db_password in config/config.php are correct 
-		<br>
-		===========================================<br>
+		<br />
+		===========================================<br />
 		');
 */
 	}
