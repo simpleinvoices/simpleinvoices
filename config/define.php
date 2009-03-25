@@ -27,8 +27,6 @@ RELEASE TODO: make sure $environment is set back to live
 */
 $environment = "dev"; //test,staging,dev,live etc..
 
-error_reporting(E_STRICT);
-
 if($environment != "production")
 {
     @include("./config/".htmlspecialchars($environment).".define.php");
@@ -42,6 +40,6 @@ if($environment != "production")
 #error_reporting(E_STRICT);
 #error_reporting(E_ALL);
 #error_reporting(E_WARNING);
-#error_reporting(E_ERROR);
+error_reporting(E_ERROR);
 #error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 #error_reporting(0);
