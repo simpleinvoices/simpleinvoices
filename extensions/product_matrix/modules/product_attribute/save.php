@@ -30,7 +30,7 @@ if (  $op === 'insert_product_attribute' ) {
 	}
 
 	//header( 'refresh: 2; url=manage_preferences.php' );
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=product_attribute&view=manage>";
+	$refresh_total = "<meta http-equiv='refresh' content='2;url=index.php?module=product_attribute&amp;view=manage' />";
 
 }
 
@@ -57,14 +57,14 @@ else if (  $op === 'edit_product_attribute' ) {
 			$display_block = "Error occurred with saving";
 		}
 
-		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=product_attribute&view=manage>";
+		$refresh_total = "<meta http-equiv='refresh' content='2;url=index.php?module=product_attribute&amp;view=manage' />";
 
 		}
 
 	else if ($_POST[action] == "Cancel") {
 
 		//header( 'refresh: 0; url=manage_preferences.php' );
-		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=0;URL=index.php?module=product_attribute&view=manage>";
+		$refresh_total = "<meta http-equiv='refresh' content='0;url=index.php?module=product_attribute&amp;view=manage' />";
 	}
 }
 

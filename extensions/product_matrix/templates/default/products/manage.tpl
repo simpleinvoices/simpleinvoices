@@ -21,7 +21,7 @@
 {else}
  {include file='../modules/products/manage.js.php' LANG=$LANG}
  
-<h3>{$LANG.manage_products} :: <a href="index.php?module=products&view=add">{$LANG.add_new_product}</a></h3>
+<h3>{$LANG.manage_products} :: <a href="index.php?module=products&amp;view=add">{$LANG.add_new_product}</a></h3>
 <hr />
 <table id="manageGrid" style="display:none"></table>
 

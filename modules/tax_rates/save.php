@@ -4,7 +4,7 @@
 checkLogin();
 
 $display_block = "";
-$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=tax_rates&view=manage>";
+$refresh_total = "<meta http-equiv='refresh' content='2;URL=index.php?module=tax_rates&amp;view=manage>' />"
 
 # Deal with op and add some basic sanity checking
 

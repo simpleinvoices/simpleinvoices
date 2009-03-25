@@ -17,7 +17,7 @@
 */
 *}
 {if $smarty.post.submit != null}
-	<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=invoices&view=details&invoice={$smarty.post.invoice_id}&type={$smarty.post.type}>
+	<meta http-equiv="refresh" content="1;url=index.php?module=invoices&amp;view=details&amp;invoice={$smarty.post.invoice_id}&amp;type={$smarty.post.type}" />
 	<br /><br />
 	{$LANG.save_invoice_items_success};
 	<br /><br />
@@ -28,14 +28,14 @@
 </div>
 </div>
  <hr />
-<form name="add_invoice_item" action="index.php?module=invoices&view=add_invoice_item" method="post">
+<form name="add_invoice_item" action="index.php?module=invoices&amp;amp;view=add_invoice_item" method="post">
 	<table align="center">
 			<tr>
 				<td class="details_screen">
 					{$LANG.quantity}
 				</td>
 				<td>
-					<input type="text" id="quantity1"  name="quantity1" size="5">
+					<input type="text" id="quantity1"  name="quantity1" size="5" />
 				</td>
 			</tr>
 			<tr>

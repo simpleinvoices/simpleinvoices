@@ -39,7 +39,7 @@
 		<td>{$product.custom_field4}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">Attribute 1</td>
+		<td class="details_screen">{$LANG.attribute} 1</td>
 		<td>
             {foreach from=$attributes item=attribute}
                 {if $matrix1.attribute_id == $attribute.id}{$attribute.name}{/if}
@@ -47,7 +47,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="details_screen">Attribute 2</td>
+		<td class="details_screen">{$LANG.attribute} 2</td>
 		<td>
             {foreach from=$attributes item=attribute}
                 {if $matrix2.attribute_id == $attribute.id}{$attribute.name}{/if}
@@ -55,7 +55,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="details_screen">Attribute 3</td>
+		<td class="details_screen">{$LANG.attribute} 3</td>
 		<td>
             {foreach from=$attributes item=attribute}
                 {if $matrix3.attribute_id == $attribute.id}{$attribute.name}{/if}
@@ -111,7 +111,7 @@
 		<td><input type="text" name="custom_field4" size="50" value="{$product.custom_field4}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">Attribute 1</td>
+		<td class="details_screen">{$LANG.attribute} 1</td>
 		<td>
 		     <select name="attribute_1">
 		     <option value=""></option>
@@ -122,7 +122,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="details_screen">Attribute 2</td>
+		<td class="details_screen">{$LANG.attribute} 2</td>
 		<td>
 		     <select name="attribute_2">
 		     <option value=""></option>
@@ -133,7 +133,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="details_screen">Attribute 3</td>
+		<td class="details_screen">{$LANG.attribute} 3</td>
 		<td>
 		     <select name="attribute_3">
 		     <option value=""></option>

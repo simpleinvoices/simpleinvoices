@@ -73,7 +73,7 @@ if ($op === 'edit_product' ) {
 */
  		if($_POST['attribute_'.$i] != "")
 		{
-			#echo "<br /> Atttr:".$_POST['attribute_'.$i]." is not empty";
+			#echo "<br /> Attr:".$_POST['attribute_'.$i]." is not empty";
 	
 			$sql = "select count(id) as count from ".TB_PREFIX."products_matrix where product_id = ".$_GET['id']." and product_attribute_number = ".$i;
 			$count_result = dbQuery($sql);
@@ -85,7 +85,7 @@ if ($op === 'edit_product' ) {
 
 			if($number_of_rows > 0)
 			{	
-				#echo "<br /> Atttr:".$_POST['attribute_'.$i]." updating";
+				#echo "<br /> Attr:".$_POST['attribute_'.$i]." updating";
 				$sql = "UPDATE
 								".TB_PREFIX."products_matrix
 				SET
@@ -103,7 +103,7 @@ if ($op === 'edit_product' ) {
 			} 
 			if($number_of_rows == 0)
 			{
-				#echo "<br /> Atttr:".$_POST['attribute_'.$i]." insert";
+				#echo "<br /> Attr:".$_POST['attribute_'.$i]." insert";
 				$sql = "INSERT into
 					".TB_PREFIX."products_matrix
 				VALUES
@@ -166,7 +166,7 @@ if ($op === 'edit_product' ) {
 	$display_block = $LANG['save_product_failure'];
 }
 
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=1;URL=index.php?module=products&view=manage>";
+	$refresh_total = "<meta http-equiv='refresh' content='1;URL=index.php?module=products&amp;view=manage' />";
 }
 
 
@@ -186,12 +186,12 @@ else if (  $op === 'edit_product' ) {
 			$display_block = $LANG['save_product_failure'];
 		}
 
-		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=0;URL=index.php?module=products&view=manage>";
+		$refresh_total = "<meta http-equiv='refresh' content='0;url=index.php?module=products&amp;view=manage' />";
 		}
 
 	else if (isset($_POST['cancel'])) {
 	
-		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=0;URL=index.php?module=products&view=manage>";
+		$refresh_total = "<meta http-equiv='refresh' content='0;url=index.php?module=products&amp;view=manage' />";
 	}
 }*/
 

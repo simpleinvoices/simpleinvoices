@@ -30,7 +30,7 @@ if (  $op === 'insert_product_value' ) {
 	}
 
 	//header( 'refresh: 2; url=manage_preferences.php' );
-	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=product_value&view=manage>";
+	$refresh_total = "<meta http-equiv='refresh' content='2;url=index.php?module=product_value&amp;view=manage' />";
 
 }
 
@@ -58,7 +58,7 @@ if (  $op === 'edit_product_value' ) {
 		}
 
 		//header( 'refresh: 2; url=manage_preferences.php' );
-		$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=product_value&view=manage>";
+		$refresh_total = "<meta http-equiv='refresh' content='2;url=index.php?module=product_value&amp;view=manage' />";
 
 		}
 }
