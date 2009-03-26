@@ -28,6 +28,7 @@ Next Release :: Beta 4 - current work in progress
 	- system defaults/preferences - flatten table and add domain_id - JK
 	- custom fields - domain id - stuff - JK
 	- add outstanding invoices in home page - and fix home page
+	- sql port - in pdo config + in auth login.php
 
 	#really shoud
 	- user - if user disbaled - if login attempt - give nice message - later
