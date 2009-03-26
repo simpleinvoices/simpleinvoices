@@ -32,6 +32,7 @@
     content: " ";
 }
 .ui-tabs-nav li {
+    list-style-type: none; 
     float: left;
     margin: 0 0 0 2px;
     font-weight: bold;
