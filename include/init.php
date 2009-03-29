@@ -79,12 +79,12 @@ $install_path = htmlspecialchars($path['dirname']);
 
 include_once('./config/define.php');
 
-$config = new Zend_Config_Ini('./config/config.ini', $environment);
+$config = new Zend_Config_Ini('./config/config.ini', $environment,true);	//added 'true' to allow modifications from db
 /*
  * Include another config file if required
  */
 if($environment != 'production') {
-     $config = new Zend_Config_Ini('./config/'.$environment.'.config.ini', $environment);
+     $config = new Zend_Config_Ini('./config/'.$environment.'.config.ini', $environment,true);
 }
 
 
@@ -142,4 +142,13 @@ switch ($_GET['module'])
 //get the url - used for templates / pdf
 $siUrl = getURL();
 //zend db
+
+// Get extensions from DB, and update config array
+
+$sql="SELECT * from ".TB_PREFIX."extensions WHERE (domain_id = 1 OR domain_id =  0 ) ORDER BY domain_id ASC";
+$sth = dbQuery($sql,':id', $auth_session->domain_id ) or die(htmlspecialchars(end($dbh->errorInfo())));
+
+while ( $this_extension = $sth->fetch()) { $DB_extensions[$this_extension[name]] = $this_extension; }
+$config->extension = $DB_extensions;
+
 
