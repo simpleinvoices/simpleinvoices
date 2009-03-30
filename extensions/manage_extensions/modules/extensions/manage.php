@@ -19,8 +19,8 @@ function getExtensions() {
 	return $exts;
 }
 
-$extension_id = $_GET['id'];
-$action = $_GET['action'];
+isset($_GET['id']) && $extension_id = $_GET['id'];
+isset($_GET['action']) && $action = $_GET['action'];
 
 if ($action == 'toggle') {
 	setStatusExtension($extension_id) or die(htmlspecialchars("Something went wrong with the status change!"));

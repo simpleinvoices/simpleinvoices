@@ -18,7 +18,7 @@
 {else}
 <table id="manageGrid" style="display:none"></table>
 
- {include file='../extensions/default_invoice/modules/extensions/manage.js.php'}
+ {include file='../extensions/manage_extensions/modules/extensions/manage.js.php'}
  
 {*
 <table class="manage" id="live-grid" align="center">

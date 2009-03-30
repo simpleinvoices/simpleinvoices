@@ -145,6 +145,8 @@ $siUrl = getURL();
 
 // Get extensions from DB, and update config array
 
+// For some reason the :id is not substituted. Help?
+// $sql="SELECT * from ".TB_PREFIX."extensions WHERE (domain_id = :id OR domain_id =  0 ) ORDER BY domain_id ASC";
 $sql="SELECT * from ".TB_PREFIX."extensions WHERE (domain_id = 1 OR domain_id =  0 ) ORDER BY domain_id ASC";
 $sth = dbQuery($sql,':id', $auth_session->domain_id ) or die(htmlspecialchars(end($dbh->errorInfo())));
 
