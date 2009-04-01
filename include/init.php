@@ -151,4 +151,6 @@ $sth = dbQuery($sql,':id', $auth_session->domain_id ) or die(htmlspecialchars(en
 while ( $this_extension = $sth->fetch()) { $DB_extensions[$this_extension[name]] = $this_extension; }
 $config->extension = $DB_extensions;
 
+//If using the folowing line, the DB settings should be appended to the config array, instead of replacing it (NOT TESTED!)
+//$config->extension() = $DB_extensions;
 
