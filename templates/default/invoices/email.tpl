@@ -23,29 +23,29 @@
 
 <table align="center">
 	<tr>
-		<td class="details_screen">From
+		<td class="details_screen">{$LANG.email_from}
 		<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=email_from" title="{$LANG.email_from}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" name="email_from" size="50" value="{$biller.email}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">To
-		<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=email_to" title="{$LANG.email_to}"><img src="./images/common/help-small.png" alt="" /></a>
+		<td class="details_screen">{$LANG.email_to}
+		<a class="cluetip" href="#" rel="docs.php?t=help&amp;p=email_to" title="{$LANG.email_to}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" name="email_to" size="50" value="{$customer.email}" /></td>
 	</tr>
 	<tr>
-	<td class="details_screen">BCC
-		<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=email_bcc" title="{$LANG.email_bcc}"><img src="./images/common/help-small.png" alt="" /></a>
+	<td class="details_screen">{$LANG.email_bcc}
+		<a class="cluetip" href="#" rel="docs.php?t=help&amp;p=email_bcc" title="{$LANG.email_bcc}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 	<td><input type="text" name="email_bcc" size="50" value="{$biller.email}" /></td>
 	</tr>
 	<tr>
-	<td class="details_screen">Subject</td>
+	<td class="details_screen">{$LANG.subject}</td>
 	<td><input type="text" name="email_subject" size="50" value="{$preferences.pref_inv_wording} {$invoice.id} from {$biller.name} is attached" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">Message</td>
+		<td class="details_screen">{$LANG.message}</td>
 		<td><textarea name="email_notes" class="editor" rows="8" cols="50"></textarea></td>
 	</tr>
 </table>
