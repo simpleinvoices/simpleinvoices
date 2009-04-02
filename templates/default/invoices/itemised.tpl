@@ -16,12 +16,14 @@
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
         	<img src="images/common/gmail-loader.gif" alt="Loading ..." /> Loading ...
 </div>
-
+<h3>{$LANG.new_invoice}</h3>
+<hr />
 {include file="$path/header.tpl" }
-<table align="left">
+
+<table align="center">
 	<tr>
 		<td colspan="3">
-		
+		<hr />
 		<table id="itemtable">
 			<tbody id="itemtable-tbody">
 			<tr>
@@ -32,18 +34,6 @@
 					<td class="details_screen">{$LANG.tax} {if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1}{/if} </td>
 				{/section}
 				<td class="details_screen">{$LANG.unit_price}</td>
-				<td>
-					<a 
-						href='#' 
-						class="show-note" 
-						onclick="javascript: $('.note').show();$('.show-note').hide();"
-					>
-						<img src="./images/common/page_white_add.png" title="{$LANG.show_details}" alt="" />
-					</a>
-					<a href='#' class="note" onclick="javascript: $('.note').hide();$('.show-note').show();">
-						<img src="./images/common/page_white_delete.png" title="{$LANG.hide_details}" alt="" />
-					</a>
-				</td>
 			</tr>
 			</tbody>
 	
@@ -131,7 +121,7 @@
 							<td>
 							</td>
 							<td colspan="4">
-								<textarea input type="text" class="note" name="description{$smarty.section.line.index}" id="description{$smarty.section.line.index}" rows=3 cols=3 WRAP=nowrap></textarea>
+								<textarea input type="text" class="note" name="description{$smarty.section.line.index}" id="description{$smarty.section.line.index}" rows="3" cols=3 WRAP=nowrap></textarea>
 								
 								</td>
 					</tr>
@@ -165,8 +155,14 @@
 						</a>
 				
 					</td>
+					<td>
+					<a href='#' class="show-note" onclick="javascript: $('.note').show();$('.show-note').hide();">
+						<img src="./images/common/page_white_add.png" title="{$LANG.show_details}" alt="" />{$LANG.show_details}</a>
+					<a href='#' class="note" onclick="javascript: $('.note').hide();$('.show-note').show();">
+						<img src="./images/common/page_white_delete.png" title="{$LANG.hide_details}" alt="" />{$LANG.hide_details}</a>
+					</td>
 				</tr>
-			 </table>
+		 </table>
 		</td>
 	</tr>
 	<tr>
@@ -174,10 +170,9 @@
 	</tr>
 	
 	<tr>
-	        <td colspan="4">
-	        	<textarea input type="text" class="editor" name="note" rows="5" cols="50" wrap="nowrap"></textarea>
-	        	
-	        	</td>
+		<td colspan="4">
+			<textarea input type="text" class="editor" name="note" rows="5" cols="50" wrap="nowrap"></textarea>
+		</td>
 	</tr>
 	{*
 	<tr><td class="details_screen">{$LANG.tax}</td>
@@ -220,34 +215,29 @@
 	</tr>
 
 </table>
-</td>
-</tr>
-<tr>
-<td>
-	<table class="buttons" align="center">
-	    <tr>
-	        <td>
-	            <button type="submit" class="invoice_save positive" name="submit" value="{$LANG.save}">
-	                <img class="button_img" src="./images/common/tick.png" alt="" /> 
-	                {$LANG.save}
-	            </button>
-	            
-			</td>
-			<td>
-				<input type="hidden" id="max_items" name="max_items" value="{$smarty.section.line.index}" />
-	        	<input type="hidden" name="type" value="2" />
-	        	
-	            <a href="./index.php?module=invoices&amp;view=manage" class="negative">
-	                <img src="./images/common/cross.png" alt="" />
-	                {$LANG.cancel}
-	            </a>
-	    
-	        </td>
-	    </tr>
-	 </table>
-	 
-</td>
-</tr>
+
+<hr />	
+
+<table class="buttons" align="center">
+	<tr>
+		<td>
+		<button type="submit" class="invoice_save positive" name="submit" value="{$LANG.save}">
+                <img class="button_img" src="./images/common/tick.png" alt="" /> 
+                {$LANG.save}
+            </button>
+            
+		</td>
+		<td>
+		<input type="hidden" id="max_items" name="max_items" value="{$smarty.section.line.index}" />
+        	<input type="hidden" name="type" value="2" />
+        	
+            <a href="./index.php?module=invoices&amp;view=manage" class="negative">
+                <img src="./images/common/cross.png" alt="" />
+                {$LANG.cancel}
+            </a>
+    
+        </td>
+    </tr>
 </table>
 
 </form>

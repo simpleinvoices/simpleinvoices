@@ -55,5 +55,7 @@
 		                        <input type="text" class="date-picker" size="10" name="date" id="date1" value='{$smarty.now|date_format:"%Y-%m-%d"}' />   
 		        </td>
 		</tr>
-	<table>
-
+	</table>
+</td>
+</tr>
+</table>
