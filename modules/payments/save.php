@@ -45,7 +45,7 @@ if ( isset($_POST['process_payment']) ) {
 		$display_block =  $LANG['save_payment_failure']."<br />".$sql;
 	}
 
-	$refresh_total = "<meta http-equiv="refresh" content="27;URL=index.php?module=payments&view=manage" />";
+	$refresh_total = "<meta http-equiv='refresh' content='27;url=index.php?module=payments&view=manage' />";
 }
 
 $smarty->assign('display_block', $display_block);

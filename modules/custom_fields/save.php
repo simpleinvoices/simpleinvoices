@@ -46,13 +46,13 @@ if (  $op === 'edit_custom_field' ) {
 		}
 
 		//header( 'refresh: 2; url=manage_custom_fields.php' );
-		$refresh_total = "<meta http-equiv="refresh" content="2;URL=index.php?module=custom_fields&view=manage" />";
+		$refresh_total = "<meta http-equiv='refresh' content='2;url=index.php?module=custom_fields&amp;view=manage' />";
 	}
 
 	else if (isset($_POST['cancel'])) {
 
 		//header( 'refresh: 0; url=manage_custom_fields.php' );
-		$refresh_total = "<meta http-equiv="refresh" content="0;URL=index.php?module=custom_fields&view=manage" />";
+		$refresh_total = "<meta http-equiv='refresh' content='0;url=index.php?module=custom_fields&amp;view=manage' />";
 	}
 
 

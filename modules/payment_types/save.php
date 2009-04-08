@@ -68,7 +68,7 @@ else if (  $op === 'edit_payment_type' ) {
 		}
 
 		//header( 'refresh: 2; url=manage_payment_types.php' );
-		//$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=payment_types&view=manage>";
+		//$refresh_total = "<meta http-equiv='refresh' content='2;url=index.php?module=payment_types&amp;view=manage' />";
 
 	} 
 }
