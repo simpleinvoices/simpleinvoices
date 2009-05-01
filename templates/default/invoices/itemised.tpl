@@ -17,13 +17,11 @@
         	<img src="images/common/gmail-loader.gif" alt="Loading ..." /> Loading ...
 </div>
 <h3>{$LANG.new_invoice}</h3>
-<hr />
 {include file="$path/header.tpl" }
 
 <table align="center">
 	<tr>
 		<td colspan="3">
-		<hr />
 		<table id="itemtable">
 			<tbody id="itemtable-tbody">
 			<tr>

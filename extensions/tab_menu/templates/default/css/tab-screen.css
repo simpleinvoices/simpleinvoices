@@ -343,6 +343,15 @@ body.lobby .Full .bottom {
   margin:auto;
   width:50%;
 }
+td.details_screen {
+
+       border:1px solid #fff;
+       background-color:#F5F5F5;
+       border-color:#FFF;
+       border-width:1px;
+}
+
+
 
 label{
   float: left;

@@ -145,6 +145,7 @@ $siUrl = getURL();
 
 // Get extensions from DB, and update config array
 
+//TODO - add this as a function in sql_queries.php or a class file
 $sql="SELECT * from ".TB_PREFIX."extensions WHERE (domain_id = :id OR domain_id =  0 ) ORDER BY domain_id ASC";
 $sth = dbQuery($sql,':id', $auth_session->domain_id ) or die(htmlspecialchars(end($dbh->errorInfo())));
 
