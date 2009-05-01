@@ -16,10 +16,10 @@
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
         	<img src="images/common/gmail-loader.gif" alt="Loading ..." /> Loading ...
 </div>
-<h3>{$LANG.new_invoice}</h3>
+<br>
 {include file="$path/header.tpl" }
 
-<table align="center">
+<table align="left">
 	<tr>
 		<td colspan="3">
 		<table id="itemtable">
@@ -213,9 +213,10 @@
 	</tr>
 
 </table>
-
-<hr />	
-
+</td>
+</tr>
+<tr>
+<td>
 <table class="buttons" align="center">
 	<tr>
 		<td>
@@ -236,6 +237,7 @@
     
         </td>
     </tr>
+</table>
 </table>
 
 </form>

@@ -34,7 +34,7 @@ td, div {
 td.columnleft {
 	border-left:5px solid #EEE; }
 
-label{
+td.details_screen{
 	border-bottom: 1px dashed #d3d3d3;	
 	line-height:24px;
 	}
@@ -339,26 +339,6 @@ body.lobby .Full .bottom {
 .Right .col {
 	padding:0 0 0 9px; }
 
-.details_screen{
-  margin:auto;
-  width:50%;
-}
-td.details_screen {
-
-       border:1px solid #fff;
-       background-color:#F5F5F5;
-       border-color:#FFF;
-       border-width:1px;
-}
-
-
-
-label{
-  float: left;
-  width: 120px;
-  font-weight: bold;
-  border-bottom:dashed 1px #4B7296;
-}
 
 /*
  * For manage tables and no javascript and list of invoices in view customer screen
