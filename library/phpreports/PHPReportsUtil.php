@@ -46,7 +46,7 @@
 		if(!is_null($sPath))
 			return $sPath;
 		// put your distro path here
-		return "/var/htdocs/phpreports/"; 
+		return _SERVER["DOCUMENT_ROOT"]."/library/phpreports/"; 
 	}
 
 	/******************************************************************************

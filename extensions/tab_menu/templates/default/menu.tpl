@@ -50,6 +50,7 @@
 				<ul class="subnav">
 					<li><a { if $pageActive == "customer"} class="active"{/if} href="index.php?module=customers&amp;view=manage">{$LANG.customers}</a></li>
 					<li><a { if $pageActive == "biller"} class="active" {/if} href="index.php?module=billers&amp;view=manage">{$LANG.billers}</a></li>
+					{ if $subPageActive == "biller_add"} <li><a  class="active active_subpage" href="index.php?module=billers&amp;view=manage">{$LANG.add}</a></li>{/if}
 					<li><a { if $pageActive == "user"} class="active" {/if} href="index.php?module=user&amp;view=manage">{$LANG.users}</a></li>
 
 				</ul>

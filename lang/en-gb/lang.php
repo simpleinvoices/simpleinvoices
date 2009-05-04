@@ -21,6 +21,7 @@ $title = "Simple Invoices";//1
 $LANG['about'] = "About";//1
 $LANG['account_info'] = "Account Info";//1
 $LANG['actions'] = "Actions";//1
+$LANG['add'] = "Add";//1
 $LANG['add_biller'] = "Add Biller";//1
 $LANG['add_customer'] = "Add Customer";//1
 $LANG['add_invoice_item'] = "Add Invoice Item";//1

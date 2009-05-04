@@ -16,9 +16,7 @@
 {else}
 {* if no biller name was inserted *}
 <form name="frmpost" action="index.php?module=billers&amp;view=add" method="post" id="frmpost">
-<h3>{$LANG.biller_to_add}</h3>
-<hr />
-
+<br>
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.biller_name} 
@@ -167,8 +165,7 @@
 	</div>
 	</tbody>
 </table>
-<hr />
-
+<br>
 <table class="buttons" align="center">
     <tr>
         <td>

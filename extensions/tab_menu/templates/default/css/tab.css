@@ -1,4 +1,4 @@
-/* Caution! Ensure accessibility in print and other media types... */
+_subpage/* Caution! Ensure accessibility in print and other media types... */
 @media projection, screen { /* Use class for showing/hiding tab content, so that visibility can be better controlled in different media types... */
     .ui-tabs-hide {
         display: none !important;
@@ -161,7 +161,6 @@ color:#555555;
 	-moz-border-radius:9px;
 	-webkit-border-radius:9px;
 	
-	background-color:#21759B;
 	background-color:#D54E21;
 	margin-bottom:10px;
 	margin-top:10px;
@@ -170,4 +169,9 @@ color:#555555;
 a.active
 {
 	color:#fff;
+}
+
+.active_subpage
+{
+    background-color:#21759B;
 }
