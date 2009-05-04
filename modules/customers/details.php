@@ -50,5 +50,10 @@ $smarty -> assign('invoices',$invoices);
 $smarty -> assign('customFieldLabel',$customFieldLabel);
 
 $smarty -> assign('pageActive', 'customer');
+$subPageActive = $_GET['action'] =="view"  ? "customer_view" : "customer_edit" ;
+$smarty -> assign('subPageActive', $subPageActive);
+$smarty -> assign('pageActive', 'customer');
+
+
 $smarty -> assign('active_tab', '#people');
 ?>

@@ -165,6 +165,7 @@ color:#555555;
 	margin-bottom:10px;
 	margin-top:10px;
 	padding:7px;
+    
 }
 a.active
 {
@@ -173,5 +174,13 @@ a.active
 
 .active_subpage
 {
-    background-color:#21759B;
+    background-color:#878484;
 }
+
+a.active_subpage
+{
+/*    color:#21759B;*/
+    color:#fff;
+    margin-left:-19px;
+}
+

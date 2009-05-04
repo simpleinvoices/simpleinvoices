@@ -12,7 +12,8 @@
 *	http://www.simpleinvoices.org
 */
 *}
-<h3>You are editing {$preference.pref_inv_wording} {$invoice.id}</h3>
+{* <h3>You are editing {$preference.pref_inv_wording} {$invoice.id}</h3> *}
+<br>
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
         	<img src="images/common/gmail-loader.gif" alt="Loading ..." /> Loading ...
 </div>

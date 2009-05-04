@@ -13,8 +13,11 @@
 {if $smarty.post.email != null && $smarty.post.submit != null } 
 	{include file="../templates/default/user/save.tpl"}
 {else}
-<form name="frmpost" action="index.php?module=user&view=add" method="post" id="frmpost"><h3>{$LANG.user_add}</h3>
-
+<form name="frmpost" action="index.php?module=user&view=add" method="post" id="frmpost">
+{*
+<h3>{$LANG.user_add}</h3>
+*}
+<br>
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.email} 

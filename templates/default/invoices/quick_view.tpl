@@ -18,8 +18,8 @@
 *}
 
 <div class="align_center">
-	{$LANG.quick_view_of} {$preference.pref_inv_wording} {$invoice.id}
-	<br /><br />
+{*	{$LANG.quick_view_of} {$preference.pref_inv_wording} {$invoice.id} *}
+	<br />
 
 
 	<!--Actions heading - start-->

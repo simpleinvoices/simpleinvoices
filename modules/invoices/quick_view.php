@@ -58,6 +58,7 @@ $customerAccount['paid'] = calc_customer_paid($customer['id']);
 $customerAccount['owing'] = $customerAccount['total'] - $customerAccount['paid'];
 
 $smarty -> assign('pageActive', 'invoice');
+$smarty -> assign('subPageActive', 'invoice_view');
 $smarty -> assign('active_tab', '#money');
 $smarty -> assign("customField",$customField);
 $smarty -> assign("customFieldLabels",$customFieldLabels);

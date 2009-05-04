@@ -46,5 +46,6 @@ $smarty -> assign("customFields",$customFields);
 $smarty -> assign("lines",count($invoiceItems));
 
 $smarty -> assign('pageActive', 'invoice');
+$smarty -> assign('subPageActive', 'invoice_edit');
 $smarty -> assign('active_tab', '#money');
 ?>

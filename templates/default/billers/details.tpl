@@ -13,8 +13,10 @@
 
 {if $smarty.get.action== 'view' }
 
+{*
 <b>{$LANG.biller} :: <a	href="index.php?module=billers&amp;view=details&amp;id={$biller.id}&amp;action=edit">{$LANG.edit}</a></b>
-<hr />
+*}
+<br />
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.biller_id}</td>
@@ -158,15 +160,23 @@
 
 
 {if $smarty.get.action== 'view' }
-<hr />
-<a href="?module=billers&amp;view=details&amp;action=edit&amp;id={$biller.id}">{$LANG.edit}</a>
+	<br />
+	<table class="buttons" align="center">
+		<tr>
+			<td>
+				<a href="./index.php?module=billers&amp;view=details&amp;action=edit&amp;id={$biller.id}" class="positive">
+					<img src="./images/famfam/add.png" alt=""/>
+					{$LANG.edit}
+				</a>
+
+			</td>
+		</tr>
+	</table>
 {/if}
 
 
 {if $smarty.get.action== 'edit' }
-
-<b>{$LANG.biller_edit}</b>
-<hr />
+<br />
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.biller_id}</td>
@@ -323,6 +333,7 @@
 </table>
 {/if} 
 {if $smarty.get.action== 'edit' }
+<br />
 	<table class="buttons" align="center">
     <tr>
         <td>

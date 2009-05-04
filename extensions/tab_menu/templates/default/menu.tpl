@@ -40,6 +40,8 @@
             <div id="money">
 				<ul class="subnav">
 					<li><a { if $pageActive == "invoice"} class="active" {/if} href="index.php?module=invoices&amp;view=manage">{$LANG.invoices}</a></li>
+					{ if $subPageActive == "invoice_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
+					{ if $subPageActive == "invoice_view"} <li><a class="active active_subpage" href="#">{$LANG.quick_view}</a></li>{/if}
 					{* dialog style <li><a { if $pageActive == "invoice_new"} class="active" {/if} id="invoice_dialog" href="#">{$LANG.new_invoice}</a></li> *}
 					<li><a { if $pageActive == "invoice_new"} class="active" {/if} id="invoice_dialogx" href="index.php?module=invoices&amp;view=itemised">{$LANG.new_invoice}</a></li> 
 					<li><a { if $pageActive == "payment"} class="active" {/if} href="index.php?module=payments&amp;view=manage">{$LANG.payments}</a></li>
@@ -49,9 +51,15 @@
             <div id="people">
 				<ul class="subnav">
 					<li><a { if $pageActive == "customer"} class="active"{/if} href="index.php?module=customers&amp;view=manage">{$LANG.customers}</a></li>
+					{ if $subPageActive == "customer_add"} <li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
+					{ if $subPageActive == "customer_view"} <li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
+					{ if $subPageActive == "customer_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
 					<li><a { if $pageActive == "biller"} class="active" {/if} href="index.php?module=billers&amp;view=manage">{$LANG.billers}</a></li>
-					{ if $subPageActive == "biller_add"} <li><a  class="active active_subpage" href="index.php?module=billers&amp;view=manage">{$LANG.add}</a></li>{/if}
+					{ if $subPageActive == "biller_add"} <li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
+					{ if $subPageActive == "biller_view"} <li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
+					{ if $subPageActive == "biller_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
 					<li><a { if $pageActive == "user"} class="active" {/if} href="index.php?module=user&amp;view=manage">{$LANG.users}</a></li>
+					{ if $subPageActive == "user_add"} <li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
 
 				</ul>
 			</div>

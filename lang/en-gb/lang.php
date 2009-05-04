@@ -284,6 +284,7 @@ $LANG['products_sold_total'] = "Products Sold - Total";//1
 $LANG['provision_of'] = "Provision of";//1
 $LANG['quantity'] = "Quantity";//1
 $LANG['quantity_short'] = "Qty";//1
+$LANG['quick_view'] = "Quick View";//1
 $LANG['quick_view_of'] = "This is a Quick View of";//1
 $LANG['quick_view_tooltip'] = "Quick View of";//1
 $LANG['rate'] = "Rate";//1
