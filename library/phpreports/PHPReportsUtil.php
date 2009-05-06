@@ -42,11 +42,14 @@
 	*																										*
 	******************************************************************************/
 	function getPHPReportsFilePath(){
-		$sPath = getPHPReportsIncludePath();
+		/*$sPath = getPHPReportsIncludePath();
 		if(!is_null($sPath))
 			return $sPath;
 		// put your distro path here
-		return _SERVER["DOCUMENT_ROOT"]."/library/phpreports/"; 
+		return $_SERVER["DOCUMENT_ROOT"]."/library/phpreports/"; 
+        */
+        /* SimpleInvoices.org mod*/
+        return dirname(__FILE__)."/"; 
 	}
 
 	/******************************************************************************
