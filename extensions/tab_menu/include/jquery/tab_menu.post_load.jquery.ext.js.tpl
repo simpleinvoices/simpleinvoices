@@ -1,3 +1,4 @@
+{*
 {literal}
 <script type="text/javascript">
 
@@ -28,4 +29,4 @@ console.log('{/literal}{$active_tab}{literal}');
 
  </script>
  {/literal}
- 
+ *}

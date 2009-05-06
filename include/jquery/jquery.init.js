@@ -12,5 +12,24 @@ $(document).ready(function(){
 	$('.itemised').hide();
 	$('.note').hide();
 
+    $("#dialog").hide();
+    $('#invoice_dialog').click(function() 
+		{ 
+				 $("#dialog").show();  								
+				 $("#dialog").dialog({ 
+				   modal: true, 
+				   buttons: { 
+			        "Cancel": function() { 
+			            $(this).dialog("destroy"); 
+			        }
+			        },
+				    overlay: { 
+				        opacity: 0.5, 
+				        background: "black" 
+				    },
+				    close:  function() { $(this).dialog("destroy")}
+				});
+				
+		}); 
 
 });
