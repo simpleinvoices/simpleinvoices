@@ -37,7 +37,7 @@ $plugin[2] = " <img src='images/famfam/plugin_delete.png' alt='Unregister' />";
 $plugin[3] = " <img src='images/famfam/plugin_add.png' alt='Register' />";
 $light[0] = " <img src='images/famfam/lightbulb_off.png' alt='Disabled' />";
 $light[1] = " <img src='images/famfam/lightbulb.png' alt='Enabled' />";
-$light[2] = " <img src='images/famfam/light_switch.png' alt='Toggle status' />";
+$light[2] = " <img src='images/common/lightswitch16x16.png' alt='Toggle status' />";
 
 
 $where = " WHERE domain_id = 0 OR domain_id = :domain_id";
