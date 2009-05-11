@@ -14,7 +14,7 @@
 	<script type="text/javascript" src="./include/jquery/jquery-1.2.6.min.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.init.js"></script>
 
-	<link rel="stylesheet" type="text/css" href="./extensions/tab_menu/templates/default/css/default/default.dialog.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/jquery-ui/default/default.dialog.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/print.css" media="print" />
 	<!-- jQuery Files -->
 	<script type="text/javascript" src="./include/jquery/jquery-ui-personalized-1.6rc2.packed.js"></script>	
@@ -29,9 +29,9 @@
 	{include file='../include/jquery/jquery.functions.js.tpl'}
 	{include file='../include/jquery/jquery.conf.js.tpl'}
 	{literal}
-	<link rel="stylesheet" type="text/css" href="./extensions/tab_menu/templates/default/css/tab-screen.css" media="all" />
-	<link rel="stylesheet" type="text/css" href="./extensions/tab_menu/templates/default/css/tab_menu.css" media="all" />
-	<link rel="stylesheet" type="text/css" href="./extensions/tab_menu/templates/default/css/tab.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/jquery-ui/tab-screen.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="./default/css/jquery-ui/tab_menu.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/jquery-ui/tab.css" media="all" />
 	<!--[if IE]>
 	<link rel="stylesheet" type="text/css" href="./extensions/tab_menu/templates/default/css/iehacks.css" media="all" />
 	<![endif]-->
@@ -42,7 +42,7 @@
 	<link rel="stylesheet" type="text/css" href="./include/jquery/jquery.plugins.css" title="default" media="screen" />
 	<link rel="stylesheet" type="text/css" href="./include/jquery/rte/rte.css" />	
 	<link rel="stylesheet" type="text/css" href="./include/jquery/cluetip/jquery.cluetip.css" />
-	<link rel="stylesheet" type="text/css" href="./extensions/tab_menu/templates/default/css/default.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/jquery-ui/default.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/phpreports.css" media="all"/>
 	{/literal}
 	{if $config->debug->level == "All"}
