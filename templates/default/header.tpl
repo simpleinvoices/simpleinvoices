@@ -30,7 +30,7 @@
 	{include file='../include/jquery/jquery.conf.js.tpl'}
 	{literal}
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/jquery-ui/tab-screen.css" media="all" />
-	<link rel="stylesheet" type="text/css" href="./default/css/jquery-ui/tab_menu.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/jquery-ui/tab_menu.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/jquery-ui/tab.css" media="all" />
 	<!--[if IE]>
 	<link rel="stylesheet" type="text/css" href="./extensions/tab_menu/templates/default/css/iehacks.css" media="all" />
