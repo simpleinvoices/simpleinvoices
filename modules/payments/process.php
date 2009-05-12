@@ -45,5 +45,7 @@ $smarty -> assign("invoice",$invoice);
 $smarty -> assign("today",$today);
 
 $smarty -> assign('pageActive', 'payment');
+$subPageActive =  "payment_process" ;
+$smarty -> assign('subPageActive', $subPageActive);
 $smarty -> assign('active_tab', '#money');
 ?>

@@ -264,6 +264,7 @@ $LANG['prepare_simple_invoices'] = "Prepare Simple Invoices for use";//1
 $LANG['Price'] = "Price";//1
 $LANG['print_preview'] = "Print Preview";//1
 $LANG['print_preview_tooltip'] = "Print Preview of";//1
+$LANG['process'] = "Process";//1
 $LANG['process_payment'] = "Process Payment";//1
 $LANG['process_payment_details'] = "Process Payment Details";//1
 $LANG['process_payment_for'] = "Process Payment for";//1

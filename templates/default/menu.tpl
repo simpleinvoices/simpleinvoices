@@ -45,6 +45,7 @@
 					{* dialog style <li><a { if $pageActive == "invoice_new"} class="active" {/if} id="invoice_dialog" href="#">{$LANG.new_invoice}</a></li> *}
 					<li><a { if $pageActive == "invoice_new"} class="active" {/if} id="invoice_dialogx" href="index.php?module=invoices&amp;view=itemised">{$LANG.new_invoice}</a></li> 
 					<li><a { if $pageActive == "payment"} class="active" {/if} href="index.php?module=payments&amp;view=manage">{$LANG.payments}</a></li>
+					{ if $subPageActive == "payment_process"} <li><a class="active active_subpage" href="#">{$LANG.process}</a></li>{/if}
 					<li><a { if $pageActive == "report_sale"} class="active" {/if} href="index.php?module=reports&amp;view=report_sales_total">{$LANG.sales_report}</a></li>
 				</ul>
             </div>

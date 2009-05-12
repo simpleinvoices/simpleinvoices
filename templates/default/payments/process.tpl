@@ -1,7 +1,5 @@
 <form name="frmpost" action="index.php?module=payments&amp;view=save" method="post" onsubmit="return frmpost_Validator(this)">
-<h3>{$LANG.process_payment}</h3>
- <hr />
- 
+<br /> 
 <table align="center">	
 
 {if $smarty.get.op === "pay_selected_invoice"}
@@ -92,8 +90,8 @@
 </tr>
 </table>
 
+<br />
 
-<hr />
 <table class="buttons" align="center">
     <tr>
         <td>
