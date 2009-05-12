@@ -14,10 +14,7 @@
 	{include file="../templates/default/user/save.tpl"}
 {else}
 <form name="frmpost" action="index.php?module=user&view=add" method="post" id="frmpost">
-{*
-<h3>{$LANG.user_add}</h3>
-*}
-<br>
+<br />
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.email} 

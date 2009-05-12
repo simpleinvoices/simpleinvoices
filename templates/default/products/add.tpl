@@ -11,7 +11,7 @@
 		<hr />
 	{/if}
 <form name="frmpost" action="index.php?module=products&view=add" method="POST" id="frmpost" onSubmit="return checkForm(this);">
-
+<br />
 
 <table align="center">
 	<tr>

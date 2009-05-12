@@ -60,12 +60,16 @@
 					{ if $subPageActive == "biller_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
 					<li><a { if $pageActive == "user"} class="active" {/if} href="index.php?module=user&amp;view=manage">{$LANG.users}</a></li>
 					{ if $subPageActive == "user_add"} <li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
+					{ if $subPageActive == "user_view"} <li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
+					{ if $subPageActive == "user_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
 
 				</ul>
 			</div>
            <div id="product">
                 <ul class="subnav">
 					<li><a { if $pageActive == "product_manage"} class="active"{/if} href="index.php?module=products&amp;view=manage">{$LANG.manage_products}</a></li>
+					{ if $subPageActive == "product_view"} <li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
+					{ if $subPageActive == "product_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
 					<li><a { if $pageActive == "product_add"} class="active"{/if} href="index.php?module=products&amp;view=add">{$LANG.add_product}</a></li>
 				</ul>
             </div>

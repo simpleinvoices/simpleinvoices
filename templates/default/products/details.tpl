@@ -2,7 +2,7 @@
 
 
 {if $smarty.get.action== 'view' }
-
+<br />
 	<table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.product_description}</td>
@@ -69,8 +69,7 @@
 
 
 {if $smarty.get.action== 'edit' }
-
-	<h3>{$LANG.product_edit}</h3>
+<br />
 
 	<table align="center">
 	<tr>

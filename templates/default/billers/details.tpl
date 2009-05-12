@@ -19,10 +19,6 @@
 <br />
 <table align="center">
 	<tr>
-		<td class="details_screen">{$LANG.biller_id}</td>
-		<td>{$biller.id}</td>
-	</tr>
-	<tr>
 		<td class="details_screen">{$LANG.biller_name}</td>
 		<td>{$biller.name}</td>
 	</tr>
@@ -178,10 +174,6 @@
 {if $smarty.get.action== 'edit' }
 <br />
 <table align="center">
-	<tr>
-		<td class="details_screen">{$LANG.biller_id}</td>
-		<td>{$biller.id}</td>
-	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.biller_name} 
 		<a 
