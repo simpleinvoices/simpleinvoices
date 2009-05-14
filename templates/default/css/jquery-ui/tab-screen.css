@@ -670,6 +670,9 @@ width:100%
 #tabs_customer .anchors a
 {
     background-color:#fff;
+    margin-top:2px;
+    padding-top:6px;
+    padding-left;0px;    
 }
 #tabs_customer .ui-tabs-panel a 
 {
@@ -683,7 +686,20 @@ width:100%
     color:#333333;
     border-top: 1px #efefef solid;
 }
+#tabs_customer .anchors .ui-tabs-selected a 
+{
+    background-color:#E9E9DA;
+    padding-left:12px;
+    padding-right:12px;
+    padding-top:4px;
+    padding-bottom:4px;
+}   
 
+#tabs_customer
+{
+    border-bottom: 0px #efefef solid;
+
+}
 .ui-tabs-hide {
 /*     display: none;*/
 }

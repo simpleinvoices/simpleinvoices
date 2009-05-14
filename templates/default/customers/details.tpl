@@ -12,8 +12,6 @@
 *}
 
 {if $smarty.get.action == 'view' }
-<b>{$LANG.customer} :: <a href="index.php?module=customers&amp;view=details&amp;id={$customer.id}&amp;action=edit">{$LANG.edit}</a>
-</b>
 <br />
 <table align="center">
 	<tr>
