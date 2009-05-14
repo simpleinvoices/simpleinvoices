@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+	/*$("#tabmenu").removeClass('ui-tabs-hide');*/
 	$("#tabmenu > ul").tabs();
 
 	/*hide the text for the export dialog on the manage invoices page*/

@@ -22,7 +22,7 @@
 </div>
 -->
 
-       <div id="tabmenu" class="flora">
+       <div id="tabmenu" class="flora" >
             <ul>
 
                 <li ><a href="#home"><span>{$LANG.home}</span></a></li>

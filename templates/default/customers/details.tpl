@@ -14,7 +14,7 @@
 {if $smarty.get.action == 'view' }
 <b>{$LANG.customer} :: <a href="index.php?module=customers&amp;view=details&amp;id={$customer.id}&amp;action=edit">{$LANG.edit}</a>
 </b>
-<hr />
+<br />
 <table align="center">
 	<tr>
 		<td colspan="7" align="center"> </td>
@@ -100,14 +100,13 @@
 	</tr>
 </table>
 <br />
-<div id="container-1">
+<div id="tabs_customer">
 	<ul class="anchors">
 		<li><a href="#section-1" target="_top">{$LANG.custom_fields}</a></li>
 		<li><a href="#section-2" target="_top">{$LANG.customer} {$LANG.invoice_listings}</a></li>
 		<li><a href="#section-3" target="_top">{$LANG.notes}</a></li>
 	</ul>
 	<div id="section-1" class="fragment">
-		<h4><u>{$LANG.customer} {$LANG.custom_fields}</u></h4>
 		<p>
 			<table>
 				<tr>
@@ -165,7 +164,6 @@
 		</p>
 	</div>
 	<div id="section-2" class="fragment">
-		<h4><u>{$LANG.invoice_listings}</u></h4>
 		<p >
 		<table width="100%" align="center">
 			<tr class="sortHeader">
@@ -193,7 +191,7 @@
 		</p>
 	</div>
 	<div id="section-3" class="fragment">
-		<h4><u>{$LANG.customer} {$LANG.notes}</u></h4>
+
 		<p>
 			<div id="left">
 				{$customer.notes}
@@ -203,7 +201,7 @@
 </div>
 
 
-<hr />
+<br />
 <table class="buttons" align="center">
     <tr>
         <td>

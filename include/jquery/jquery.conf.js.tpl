@@ -30,8 +30,8 @@ $(document).ready(function(){
 		$("#ac_me").autocomplete("auto_complete_search.php", { minChars:1, matchSubset:1, matchContains:1, cacheLength:10, onItemSelect:selectItem, formatItem:formatItem, selectOnly:1 });
 	}
 	
-	if ($('#container-1'))
-		$('#container-1').tabs();
+	if ($('#tabs_customer'))
+		$('#tabs_customer').tabs();
 			
 	if($('#trigger-tab'))
 		$('#trigger-tab').after('<p><a href="#" onclick="$(\'#container-1\').triggerTab(3); return false;">Activate third tab</a></p>');
