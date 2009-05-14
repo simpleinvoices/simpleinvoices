@@ -23,19 +23,11 @@
 		<td colspan="2" align="center" class="align_center"><i>{$LANG.summary_of_accounts}</i></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.customer} {$LANG.id}</td>
-		<td>{$customer.id}</td>
-		<td colspan="2"></td>
-		<td></td>
-		<td class="details_screen">{$LANG.total_invoices}</td>
-		<td style="text-align:right">{$stuff.total|number_format:2}</td>
-	</tr>
-	<tr>
 		<td class="details_screen">{$LANG.customer_name}</td>
 		<td colspan="2">{$customer.name}</td>
 		<td colspan="2"></td>
-		<td class="details_screen">{$LANG.total_paid}</td>
-		<td style="text-align:right">{$stuff.paid|number_format:2}</td>
+		<td class="details_screen">{$LANG.total_invoices}</td>
+		<td style="text-align:right">{$stuff.total|number_format:2}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.attention_short}
@@ -50,12 +42,15 @@
 		</td>
 		<td colspan="2">{$customer.attention}</td>
 		<td colspan=2></td>
-		<td class="details_screen">{$LANG.total_owing}</td>
-		<td style="text-align:right"><u>{$stuff.owing|number_format:2}</u></td>
+		<td class="details_screen">{$LANG.total_paid}</td>
+		<td style="text-align:right">{$stuff.paid|number_format:2}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street}</td>
-		<td>{$customer.street_address}</td>
+		<td colspan=2>{$customer.street_address}</td>
+		<td colspan=2></td>
+		<td class="details_screen">{$LANG.total_owing}</td>
+		<td style="text-align:right"><u>{$stuff.owing|number_format:2}</u></td>
 	</tr>
 	<tr>
 		<td class="details_screen" NOWRAP>{$LANG.street2}
@@ -218,10 +213,6 @@
 <form name="frmpost" action="index.php?module=customers&amp;view=save&amp;id={$customer.id}" method="post" id="frmpost" onSubmit="return checkForm(this);">
 <br>
 <table align="center">
-	<tr>
-		<td class="details_screen">{$LANG.customer} {$LANG.id}</td>
-		<td>{$customer.id}</td>
-	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.customer_name}
 		<a 
