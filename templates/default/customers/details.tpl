@@ -41,14 +41,14 @@
 		
 		</td>
 		<td colspan="2">{$customer.attention}</td>
-		<td colspan=2></td>
+		<td colspan="2"></td>
 		<td class="details_screen">{$LANG.total_paid}</td>
 		<td style="text-align:right">{$stuff.paid|number_format:2}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street}</td>
-		<td colspan=2>{$customer.street_address}</td>
-		<td colspan=2></td>
+		<td colspan="2">{$customer.street_address}</td>
+		<td colspan="2"></td>
 		<td class="details_screen">{$LANG.total_owing}</td>
 		<td style="text-align:right"><u>{$stuff.owing|number_format:2}</u></td>
 	</tr>
