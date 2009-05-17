@@ -5,12 +5,8 @@
 
 
 {if $smarty.get.action== 'view' }
-
+<br />
 	<table align="center">
-		<tr>
-			<td class="details_screen">Preference ID</td>
-			<td>{$preference.pref_id}</td>
-		</tr>
 		<tr>	
 			<td class="details_screen">Description 
 				<a class="cluetip" href="#" rel="docs.php?t=help&amp;p=inv_pref_description" title="{$LANG.description}">
@@ -120,12 +116,8 @@
 {/if}
 
 {if $smarty.get.action== 'edit' }
-
+<br />
 	<table align="center">
-		<tr>
-			<td class="details_screen">Preference ID</td>
-			<td>{$preference.pref_id}</td>
-		</tr>
 		<tr>
 			<td class="details_screen">Description 
 				<a class="cluetip" href="#" rel="docs.php?t=help&amp;p=inv_pref_description" title="{$LANG.description}">

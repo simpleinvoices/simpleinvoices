@@ -161,7 +161,7 @@
 		<tr>
 			<td>
 				<a href="./index.php?module=billers&amp;view=details&amp;action=edit&amp;id={$biller.id}" class="positive">
-					<img src="./images/famfam/add.png" alt=""/>
+					<img src="./images/famfam/report_edit.png" alt=""/>
 					{$LANG.edit}
 				</a>
 

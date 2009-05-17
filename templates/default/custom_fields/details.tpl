@@ -15,10 +15,7 @@
 
 {if $smarty.get.action == "view" }
 
-	<h3>{$LANG.custom_fields} ::
-	<a href="index.php?module=custom_fields&amp;view=details&amp;id={$cf.cf_id}&amp;action=edit">{$LANG.edit}</a></h3>
-	<hr />
-	
+	<br />
 	<table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.id}</td>
@@ -37,18 +34,27 @@
 		<td>{$cf.cf_custom_label}</td>
 	</tr>
 	</table>
-	<hr />
 
+<br />
+<table class="buttons" align="center">
+    <tr>
+        <td>
+            <a href="./index.php?module=custom_fields&amp;view=details&amp;id={$cf.cf_id}&amp;action=edit" class="positive">
+                <img src="./images/common/tick.png" alt="" />
+                {$LANG.edit}
+            </a>
+    
+        </td>
+    </tr>
+</table>
 
-<a href="index.php?module=custom_fields&amp;view=details&amp;id={$cf.cf_id}&amp;action=edit">{$LANG.edit}</a>
 
 {/if}
 
 {if $smarty.get.action == "edit" }
 
-	<b>{$LANG.custom_fields}</b>
 
-	<hr />
+	<br />
 
 	<table align="center">
         <tr>
@@ -65,10 +71,12 @@
         </tr>
 	<tr>
 		<td class="details_screen">{$LANG.custom_label}</td>
-		<td><input type="text" name="cf_custom_label" size="50" value="{$cf.cf_custom_label}" /></td>
+		<td><input type="text" name="cf_custom_label" size="25" value="{$cf.cf_custom_label}" /></td>
 	</tr>
 	</table>
-	<hr />
+	<br />
+
+
 
 <table class="buttons" align="center">
     <tr>
@@ -78,12 +86,13 @@
                 {$LANG.save}
             </button>
 
-            <input type="hidden" name="op" value="edit_custom_field" />
+            <input type="hidden" name="op" value="edit_custom_field">
         
             <a href="./index.php?module=custom_fields&amp;view=manage" class="negative">
                 <img src="./images/common/cross.png" alt="" />
                 {$LANG.cancel}
             </a>
+    
         </td>
     </tr>
 </table>

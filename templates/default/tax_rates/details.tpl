@@ -1,14 +1,11 @@
-
 <form name="frmpost" action="index.php?module=tax_rates&amp;view=save&amp;id={$smarty.get.id|escape:html}"
  method="post" onsubmit="return frmpost_Validator(this)">
 
 
 {if $smarty.get.action === 'view' }
+<br />
 
 	<table align="center">
-	<tr>
-		<td class="details_screen">{$LANG.tax_rate_id}</td><td>{$tax.tax_id|escape:html}</td>
-	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.description}</td><td>{$tax.tax_description|escape:html}</td>
 	</tr>
@@ -51,17 +48,13 @@
 
 
 
-        <b>{$LANG.tax_rate}</b> 
-
-	<hr />
+	<br />
 
 	<table align="center">
-	<tr>
-		<td class="details_screen">{$LANG.tax_rate_id}</td><td>{$tax.tax_id|escape:html}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.description}</td>
-		<td><input type="text" name="tax_description" value="{$tax.tax_description|escape:html}" size="50" /></td>
+		<td><input type="text" name="tax_description" value="{$tax.tax_description|escape:html}" size="25" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.rate}
@@ -90,7 +83,8 @@
 
 </td>
 	</tr>
-	</table><br />
+	</table>
+    <br />
 	<table class="buttons" align="center">
     <tr>
         <td>

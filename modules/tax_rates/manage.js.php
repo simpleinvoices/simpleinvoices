@@ -28,10 +28,9 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			dataType: 'xml',
 			colModel : [
 				{display: 'Actions', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
-				{display: 'ID', name : 'tax_id', width : 10 * percentage_width, sortable : true, align: 'left'},
 				{display: 'Description', name : 'tax_description', width : 40 * percentage_width, sortable : true, align: 'left'},
 				{display: LANG_rate, name : 'tax_percentage', width : 30 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Enabled', name : 'enabled', width : 10 * percentage_width, sortable : true, align: 'left'}
+				{display: 'Enabled', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'}
 				
 				],
 				

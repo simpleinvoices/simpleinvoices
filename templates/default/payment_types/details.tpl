@@ -15,14 +15,11 @@
 
 
 
-
+<br />
 {if $smarty.get.action == "view" }
 	
 	
 	<table align="center">
-	<tr>
-		<td class="details_screen">{$LANG.payment_type_id}</td>	<td>{$paymentType.pt_id|escape:html}</td>
-	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.description}</td><td>{$paymentType.pt_description|escape:html}</td>
 	</tr>
@@ -53,13 +50,9 @@
 
 	<table align="center">
 	<tr>
-		<td class="details_screen">{$LANG.payment_type_id}</td>
-		<td>{$paymentType.pt_id|escape:html}</td>
-	</tr>
-	<tr>
 		<td class="details_screen">{$LANG.description} <a href="docs.php?t=help&amp;p=required_field" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png" alt="(required)" /></a></td>
 		<td><input type="text" name="pt_description" value="{$paymentType.pt_description|escape:html|regex_replace:"/[\\\]/":""}"
-		 size="50" /></td>
+		 size="30" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled} </td>

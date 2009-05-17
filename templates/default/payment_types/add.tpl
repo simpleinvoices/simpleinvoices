@@ -17,6 +17,7 @@
 */
 *}
 <form name="frmpost" action="index.php?module=payment_types&amp;view=save" method="post">
+<br />
 	<table align="center">
 		<tr>
 			<td class="details_screen">Payment type description 
@@ -28,7 +29,7 @@
 			>
 		<img src="./images/common/required-small.png" alt="" /></a>			
 		</td>
-			<td><input type="text" name="pt_description" size="50" /></td>
+			<td><input type="text" name="pt_description" size="30" /></td>
 		</tr>
 		<tr>
 			<td class="details_screen">{$LANG.enabled}</td>

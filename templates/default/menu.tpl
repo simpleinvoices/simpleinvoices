@@ -79,9 +79,20 @@
 					<li><a { if $pageActive == "setting"} class="active"{/if} href="index.php?module=options&amp;view=index">{$LANG.settings}</a></li>
 					<li><a { if $pageActive == "system_default"} class="active"{/if} href="index.php?module=system_defaults&amp;view=manage">{$LANG.system_preferences}</a></li>
 					<li><a { if $pageActive == "custom_field"} class="active"{/if} href="index.php?module=custom_fields&amp;view=manage">{$LANG.custom_fields_upper}</a></li>
+					{ if $subPageActive == "custom_fields_view"} <li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
+					{ if $subPageActive == "custom_fields_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
 					<li><a { if $pageActive == "tax_rate"} class="active"{/if} href="index.php?module=tax_rates&amp;view=manage">{$LANG.tax_rates}</a></li>
+					{ if $subPageActive == "tax_rates_add"} <li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
+					{ if $subPageActive == "tax_rates_view"} <li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
+					{ if $subPageActive == "tax_rates_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
 					<li><a { if $pageActive == "preference"} class="active"{/if} href="index.php?module=preferences&amp;view=manage">{$LANG.invoice_preferences}</a></li>
+					{ if $subPageActive == "preferences_add"} <li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
+					{ if $subPageActive == "preferences_view"} <li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
+					{ if $subPageActive == "preferences_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
 					<li><a { if $pageActive == "payment_type"} class="active"{/if} href="index.php?module=payment_types&amp;view=manage">{$LANG.payment_types}</a></li>
+					{ if $subPageActive == "payment_types_add"} <li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
+					{ if $subPageActive == "payment_types_view"} <li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
+					{ if $subPageActive == "payment_types_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
 					<li><a { if $pageActive == "backup"} class="active"{/if} href="index.php?module=options&amp;view=backup_database">{$LANG.backup_database}</a></li>
 				</ul>
             </div>

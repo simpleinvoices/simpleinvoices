@@ -5,7 +5,7 @@
 {/if}
 <form name="frmpost" action="index.php?module=preferences&amp;view=save" method="post">
 
-
+<br />
 <table align="center">
 <tr>
 	<td class="details_screen">{$LANG.description} 

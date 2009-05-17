@@ -17,13 +17,14 @@
 		<hr />
 	{/if}
 
+<br />
 <form name="frmpost" action="index.php?module=tax_rates&amp;view=add" method="POST">
 
 
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.description}</td>
-		<td><input type="text" name="tax_description" value="{$smarty.post.tax_description|escape:html}" size="50" /></td>
+		<td><input type="text" name="tax_description" value="{$smarty.post.tax_description|escape:html}" size="35" /></td>
 		<td></td>
 	</tr>
 	<tr>
