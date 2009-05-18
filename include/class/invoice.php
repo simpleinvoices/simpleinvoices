@@ -1,7 +1,7 @@
 <?php
 class invoice {
 	
-	function getInvoiceItems($id) {
+	public static function getInvoiceItems($id) {
 	
 		global $logger;
 		$sql = "SELECT * FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :id order by id";

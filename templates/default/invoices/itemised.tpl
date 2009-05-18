@@ -125,13 +125,6 @@
 					</tr>
 				</tbody>
 	        {/section}
-			{$show_custom_field.1}
-			{$show_custom_field.2}
-			{$show_custom_field.3}
-			{$show_custom_field.4}
-			{*
-				{showCustomFields categorieId="4" itemId=""}
-			*}
 		</table>
 		</td>
 	</tr>
@@ -163,6 +156,13 @@
 		 </table>
 		</td>
 	</tr>
+			{$show_custom_field.1}
+			{$show_custom_field.2}
+			{$show_custom_field.3}
+			{$show_custom_field.4}
+			{*
+				{showCustomFields categorieId="4" itemId=""}
+			*}
 	<tr>
 	        <td colspan="1" class="details_screen">{$LANG.notes}</td>
 	</tr>
@@ -172,28 +172,12 @@
 			<textarea input type="text" class="editor" name="note" rows="5" cols="50" wrap="nowrap"></textarea>
 		</td>
 	</tr>
-	{*
-	<tr><td class="details_screen">{$LANG.tax}</td>
-	<td>
-	
-	
-	{if $taxes == null }
-		<p><em>{$LANG.no_taxes}</em></p>
-	{else}
-		<select name="tax_id">
-		{foreach from=$taxes item=tax}
-			<option {if $tax.tax_id == $defaults.tax} selected {/if} value="{$tax.tax_id}">{$tax.tax_description}</option>
-		{/foreach}
-		</select>
-	{/if}
-	
-	</td>
-	*}
 	</tr>
 	
 	<tr>
-	<td class="details_screen">{$LANG.inv_pref}</td>
-	<td> 
+	<td class="details_screen">{$LANG.inv_pref}
+	&nbsp; 
+	&nbsp; 
 	{if $preferences == null }
 		<p><em>{$LANG.no_preferences}</em></p>
 	{else}

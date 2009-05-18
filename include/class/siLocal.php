@@ -3,7 +3,7 @@
 class siLocal 
 {
 	/*Function: wrapper function for zend_locale_format::toNumber*/
-	function number($number,$precision="",$locale="")
+	public static function number($number,$precision="",$locale="")
 	{
 		global $config;
 		
@@ -19,7 +19,7 @@ class siLocal
 		return $formatted_number;
 	}
 	
-	function number_trim($number)
+	public static function number_trim($number)
 	{
 		$formatted_number = siLocal::number($number);
 		$formatted_number = rtrim(trim($formatted_number, '0'), '.');
@@ -28,7 +28,7 @@ class siLocal
 	}
 	
 	/*Function: wrapper function for zend_date*/
-	function date($date,$length="",$locale="")
+	public static function date($date,$length="",$locale="")
 	{
 		global $config;
 		

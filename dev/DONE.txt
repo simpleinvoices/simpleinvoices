@@ -1,4 +1,12 @@
 --------
+BETA 4
+--------
+	- sql port number added into config.ini
+    - UI updates
+    - backup db - menu fix
+    - customer view info tabs - redone in jquery UI
+
+--------
 BETA 3
 --------
 	- sql patch 163 - tax conversion patch updated

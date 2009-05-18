@@ -16,16 +16,17 @@ function sql($type='', $dir, $sort, $rp, $page )
 
 
 	//SC: Safety checking values that will be directly subbed in
+/*
 	if (intval($start) != $start) {
 		$start = 0;
 	}
 	if (intval($limit) != $limit) {
 		$limit = 15;
 	}
-
+*/
 	/*SQL Limit - start*/
 	$start = (($page-1) * $rp);
-	$limit = "LIMIT $start, $rp";
+	$limit = "LIMIT ".$start.", ".$rp;
 	/*SQL Limit - end*/
 
 	/*SQL where - start*/
@@ -47,7 +48,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 
 	if($type =="count")
 	{
-		unset($limit);
+		//unset($limit);
+        $limit="";
 	}
 
 
@@ -71,7 +73,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 				  ELSE '90+'
 				 END) AS Aging,
 				 iv.type_id As type_id,
-				 p.pref_description AS Type
+				 p.pref_description AS Type,
+				 p.pref_inv_wording AS invoice_wording
 			FROM
 				 " . TB_PREFIX . "invoices iv
 				 LEFT JOIN " . TB_PREFIX . "payment ap ON ap.ac_inv_id = iv.id
@@ -130,6 +133,7 @@ $sth_count_rows = sql('count',$dir, $sort, $rp, $page);
 
 $invoices = $sth->fetchAll(PDO::FETCH_ASSOC);
 
+$xml ="";
 $count = $sth_count_rows->rowCount();
 
 	$xml .= "<rows>";
@@ -137,12 +141,12 @@ $count = $sth_count_rows->rowCount();
 	$xml .= "<total>$count</total>";
 	
 	foreach ($invoices as $row) {
-		$xml .= "<row id='".$row['iv.id']."'>";
+		$xml .= "<row id='".$row['id']."'>";
 		$xml .= "<cell>
 					<![CDATA[<a class='index_table' title='".$LANG['quick_view_tooltip'].$row['id']."' href='index.php?module=invoices&view=quick_view&id=".$row['id']."'> <img src='images/common/view.png' class='action' /></a>
-		<a class='index_table' title=".$LANG['edit_view_tooltip']." ".$invoices['preference.pref_inv_wording']." ".$row['id']."' href='index.php?module=invoices&view=details&id=".$row['id']."&action=view'><img src='images/common/edit.png' class='action' /></a>
+		<a class='index_table' title=".$LANG['edit_view_tooltip']." ".$row['preference']." ".$row['id']."' href='index.php?module=invoices&view=details&id=".$row['id']."&action=view'><img src='images/common/edit.png' class='action' /></a>
 		<!--2 Print View -->
-			<a class='index_table' title='".$LANG['print_preview_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']."' href='index.php?module=export&view=invoice&id=".$row['id']."&format=print'>
+			<a class='index_table' title='".$LANG['print_preview_tooltip']." ".$row['preference']." ".$row['id']."' href='index.php?module=export&view=invoice&id=".$row['id']."&format=print'>
 				<img src='images/common/printer.png' class='action' /><!-- print -->
 			</a>
 		<!--3 EXPORT DIALOG -->
@@ -151,11 +155,11 @@ $count = $sth_count_rows->rowCount();
 			</a>
 
 		<!--3 EXPORT DIALOG  onclick='export_invoice(".$row['id'].", \"".$config->export->spreadsheet."\", \"".$config->export->wordprocessor."\");'> -->	
-		<!--3 EXPORT TO PDF <a title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_pdf_tooltip']."' class='index_table' href='pdfmaker.php?id=".$row['id']."'><img src='images/common/page_white_acrobat.png' class='action' /></a> -->
-		<!--4 XLS <a title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_xls_tooltip'].$spreadsheet." ".$LANG['format_tooltip']."' class='index_table' href='index.php?module=invoices&view=templates/template&invoice='".$row['id']."&action=view&location=print&export=".$spreadsheet."'><img src='images/common/page_white_excel.png' class='action' /></a> -->
+		<!--3 EXPORT TO PDF <a title='".$LANG['export_tooltip']." ".$row['preference']." ".$row['id']." ".$LANG['export_pdf_tooltip']."' class='index_table' href='pdfmaker.php?id=".$row['id']."'><img src='images/common/page_white_acrobat.png' class='action' /></a> -->
+		<!--4 XLS <a title='".$LANG['export_tooltip']." ".$row['preference']." ".$row['id']." ".$LANG['export_xls_tooltip'].$config->export->spreadsheet." ".$LANG['format_tooltip']."' class='index_table' href='index.php?module=invoices&view=templates/template&invoice='".$row['id']."&action=view&location=print&export=".$config->export->spreadsheet."'><img src='images/common/page_white_excel.png' class='action' /></a> -->
 		
-		<!--6 Payment --><a title='".$LANG['process_payment']." ".$invoice['preference']['pref_inv_wording']." ".$row['id']."' class='index_table' href='index.php?module=payments&view=process&id=".$row['id']."&op=pay_selected_invoice'><img src='images/common/money_dollar.png' class='action' /></a>
-		<!--7 Email --><a title='".$LANG['email']." ".$invoice['preference']['pref_inv_wording']." ".$row['id']."' class='index_table' href='index.php?module=invoices&view=email&stage=1&id=".$row['id']."'><img src='images/common/mail-message-new.png' class='action' /></a>
+		<!--6 Payment --><a title='".$LANG['process_payment']." ".$row['preference']." ".$row['id']."' class='index_table' href='index.php?module=payments&view=process&id=".$row['id']."&op=pay_selected_invoice'><img src='images/common/money_dollar.png' class='action' /></a>
+		<!--7 Email --><a title='".$LANG['email']." ".$row['preference']." ".$row['id']."' class='index_table' href='index.php?module=invoices&view=email&stage=1&id=".$row['id']."'><img src='images/common/mail-message-new.png' class='action' /></a>
 					]]>
 				</cell>";
 		$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";		
@@ -165,7 +169,7 @@ $count = $sth_count_rows->rowCount();
 		$xml .= "<cell><![CDATA[".utf8_encode(siLocal::number_trim($row['invoice_total']))."]]></cell>";
 		$xml .= "<cell><![CDATA[".utf8_encode(siLocal::number_trim($row['owing']))."]]></cell>";
 		$xml .= "<cell><![CDATA[".utf8_encode($row['aging'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode($row['type'])."]]></cell>";				
+		$xml .= "<cell><![CDATA[".utf8_encode($row['preference'])."]]></cell>";				
 		$xml .= "</row>";		
 	}
 	$xml .= "</rows>";

@@ -703,3 +703,8 @@ width:100%
 .ui-tabs-hide {
 /*     display: none;*/
 }
+
+img.action
+{
+    vertical-align:bottom;
+}

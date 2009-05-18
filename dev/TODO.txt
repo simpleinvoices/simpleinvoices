@@ -3,7 +3,7 @@ Simple Invoices todo list
 Disclaimer: if its in the list it may get done sometime in the future if and when someone feels like it
 *************
 ##############################
-Next Release :: Beta 5
+2009.1 :: Beta 5
 ##############################
 
 	- change config.ini back to config.php - but keep ini format and add ;<?php on line 1 and ; exit; on line 2 - this is for sercurity reasons
@@ -18,35 +18,34 @@ Next Release :: Beta 5
 	-- create a mini installer and use Zend_config_writer to write to config.ini
 	-- just ask for db details and if you want demo data installer
 	-- just the basics - do rest later
+	- validation - check/remove the validation on products - has been removed till beta 3 - will add back in and complete
 	
 ##############################
-Next Release :: Beta 4 - current work in progress
+2009.1 :: Beta 4 - current work in progress
 ##############################
-	- Products - allow setting 2 or more default taxes pre product
 
+    - UPGRADE - user table issues!!!
 	- add domain_id into system_defaults table - flatten this table - old style - TODO - JK
 	- system defaults/preferences - flatten table and add domain_id - JK
 	- custom fields - domain id - stuff - JK
 	- add outstanding invoices in home page - and fix home page
-	- sql port - in pdo config + in auth login.php
 
 	#really shoud
+	- Products - allow setting 2 or more default taxes pre product
 	- user - if user disbaled - if login attempt - give nice message - later
 	- invoice
 		- invoice edit - notes - if note empty then have closed if not empty then display for edit -JK
-	- database backup - export as XML - Hannes
-	- again query - if 0 then show 0 not null <- manage invoices
-	- UI - update all buttons - Edit links etc.. to be new style 
-	- validation - check/remove the validation on products - has been removed till beta 3 - will add back in and complete
 	- PDF - bottom getting cut off - refer fourm
 
 	#maybe
+    - move date popup to jquery UI
 	- Reports - localise
+	- database backup - export as XML - Hannes
 	- merge docs.php into normal index.php
 	- php error reports - make work with E_ALL/E_STRICT
 
 ##############################
-Next Release :: Beta 3
+2009.1 :: Beta 3
 ##############################
 	
 	Known issues

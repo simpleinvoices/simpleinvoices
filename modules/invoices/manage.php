@@ -21,10 +21,8 @@ checkLogin();
 
 $pageActive = "invoice";
 
-$smarty -> assign("invoices",$invoices);
+//$smarty -> assign("invoices",$invoices);
 $smarty -> assign("number_of_invoices",$number_of_invoices);
-$smarty -> assign("spreadsheet",$spreadsheet);
-$smarty -> assign("word_processor",$word_processor);
 
 $smarty -> assign('pageActive', $pageActive);
 $smarty -> assign('active_tab', '#money');
