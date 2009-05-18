@@ -1,7 +1,5 @@
 <?php 
 
-include('./include/init.php');
-
 class database{
 	
 	var $db_link;

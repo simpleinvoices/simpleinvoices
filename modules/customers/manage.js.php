@@ -25,11 +25,10 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			dataType: 'xml',
 			colModel : [
 				{display: 'Actions', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
-				{display: 'ID', name : 'id', width : 10 * percentage_width, sortable : true, align: 'left'},
 				{display: 'Name', name : 'name', width : 50 * percentage_width, sortable : true, align: 'left'},
 				{display: 'Total', name : 'customer_total', width : 10 * percentage_width, sortable : true, align: 'left'},
 				{display: 'Owing', name : 'owing', width : 10 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Enabled', name : 'enabled', width : 10 * percentage_width, sortable : true, align: 'left'}
+				{display: 'Enabled', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'}
 				
 				],
 				

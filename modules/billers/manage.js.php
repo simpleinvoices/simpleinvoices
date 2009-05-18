@@ -20,9 +20,8 @@
 			dataType: 'xml',
 			colModel : [
 				{display: 'Actions', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
-				{display: 'ID', name : 'id', width : 10 * percentage_width, sortable : true, align: 'left'},
 				{display: 'Name', name : 'name', width : 40 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Email', name : 'email', width : 20 * percentage_width, sortable : true, align: 'left'},
+				{display: 'Email', name : 'email', width : 30 * percentage_width, sortable : true, align: 'left'},
 				{display: 'Enabled', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'}
 				
 				],

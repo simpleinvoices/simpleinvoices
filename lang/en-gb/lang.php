@@ -142,6 +142,7 @@ $LANG['financial_status'] = "Financial status";//1
 $LANG['format_tooltip'] = "format";//1
 $LANG['for'] = "for";//1
 $LANG['from'] = "From";//1
+$LANG['fwrite_error'] = "Did you get fwrite errors?";//1
 $LANG['get_help'] = "Get Help";//1
 $LANG['getting_started'] ="Getting started";//1
 $LANG['gross_total'] = "Gross";//1
