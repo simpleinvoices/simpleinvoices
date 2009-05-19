@@ -1,6 +1,7 @@
 --------
 BETA 4
 --------
+    - Simple Invoices now works with E_STRICT error reporting (reports still note E_STRICT compliant)
 	- sql port number added into config.ini
     - UI updates
     - backup db - menu fix

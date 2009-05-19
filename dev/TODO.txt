@@ -24,7 +24,6 @@ Disclaimer: if its in the list it may get done sometime in the future if and whe
 2009.1 :: Beta 4 - current work in progress
 ##############################
 
-    - UPGRADE - user table issues!!!
 	- add domain_id into system_defaults table - flatten this table - old style - TODO - JK
 	- system defaults/preferences - flatten table and add domain_id - JK
 	- custom fields - domain id - stuff - JK
@@ -40,9 +39,9 @@ Disclaimer: if its in the list it may get done sometime in the future if and whe
 	#maybe
     - move date popup to jquery UI
 	- Reports - localise
+    - Reports - E_STRICT
 	- database backup - export as XML - Hannes
 	- merge docs.php into normal index.php
-	- php error reports - make work with E_ALL/E_STRICT
 
 ##############################
 2009.1 :: Beta 3
