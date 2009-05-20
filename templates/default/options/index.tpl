@@ -80,8 +80,23 @@
         </td>
     </tr>
 
- 
 </table>
+<br />
+<h2>Extensions stuff</h2>
+<table class="buttons" >
+
+    <tr>
+        <td>
+
+            
+             <a href="index.php?module=extensions&view=manage" class="">
+                <img src="./images/common/brick_edit.png" alt=""/>
+                {$LANG.extensions}
+            </a>
+        </td>
+    </tr>    
+</table>
+ 
 <br />
 
 
