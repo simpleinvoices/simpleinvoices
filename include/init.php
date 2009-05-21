@@ -87,6 +87,12 @@ if($environment != 'production') {
      $config = new Zend_Config_Ini('./config/'.$environment.'.config.ini', $environment,true);
 }
 
+//set up app with relevant php setting
+date_default_timezone_set($config->phpSettings->date->timezone);
+error_reporting($config->debug->error_reporting);
+ini_set('display_startup_errors', $config->phpSettings->display_startup_errors);  
+ini_set('display_errors', $config->phpSettings->display_errors); 
+
 
 $zendDb = Zend_Db::factory($config->database->adapter, array(
     'host'     => $config->database->params->host,

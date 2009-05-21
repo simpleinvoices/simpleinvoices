@@ -22,23 +22,23 @@
 			return mysql_num_fields($oStmt);
 		}
 
-		function db_columnName($oStmt,$iPos) {
+		public static function db_columnName($oStmt,$iPos) {
 			return mysql_field_name($oStmt,$iPos-1);
 		}
 		
-		function db_columnType($oStmt,$iPos) {
+		public static function db_columnType($oStmt,$iPos) {
 			return mysql_field_type($oStmt,$iPos-1);
 		}
 
-		function db_fetch($oStmt) {
+		public static function db_fetch($oStmt) {
 			return mysql_fetch_array($oStmt);
 		}
 
-		function db_free($oStmt) {
+		public static function db_free($oStmt) {
 			return mysql_free_result($oStmt);
 		}
 
-		function db_disconnect($oCon) {
+		public static function db_disconnect($oCon) {
 			return mysql_close($oCon);
 		}
 	}	

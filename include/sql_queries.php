@@ -29,7 +29,6 @@ function db_connector() {
 		$pdoAdapter ="mysql_utf8";
 	}
 	
-
 /*	$connlink = new PDO(
 					$pdoAdapter.':host='.$config->database->params->host.';	dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password
 				);*/

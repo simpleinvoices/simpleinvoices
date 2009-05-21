@@ -39,7 +39,6 @@ Disclaimer: if its in the list it may get done sometime in the future if and whe
 	#maybe
     - move date popup to jquery UI
 	- Reports - localise
-    - Reports - E_STRICT
 	- database backup - export as XML - Hannes
 	- merge docs.php into normal index.php
 

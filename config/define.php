@@ -31,18 +31,3 @@ if($environment != "production")
 {
     @include("./config/".htmlspecialchars($environment).".define.php");
 }
-
-
-#####################
-/* Error reporting */
-#####################
-#
-error_reporting(E_STRICT);
-#error_reporting(E_ALL);
-#error_reporting(E_WARNING);
-#error_reporting(E_ERROR);
-#error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
-#error_reporting(0);
-
-#ini_set('display_startup_errors', 1);  
-#ini_set('display_errors', 1); 

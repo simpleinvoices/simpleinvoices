@@ -35,7 +35,7 @@
 			return $oStmt->columnCount();
 		}
 
-		function db_columnName(&$oStmt,$iPos) {
+		public static function db_columnName(&$oStmt,$iPos) {
 			$meta = $oStmt->getColumnMeta($iPos-1);
 			return $meta['name'];
 		}
