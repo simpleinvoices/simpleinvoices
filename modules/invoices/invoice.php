@@ -26,6 +26,10 @@ $products = getActiveProducts();
 $preferences = getActivePreferences();
 $defaults = getSystemDefaults();
 
+if ($billers == null OR $customers == null OR $taxes == null OR $products == null OR $preferences == null)
+{
+    $first_run_wizard =true;
+}
 
 $defaultBiller = getDefaultBiller();
 $defaultCustomerID = (isset($_GET['customer_id'])) ? $_GET['customer_id'] : getDefaultCustomer();
@@ -55,5 +59,6 @@ $smarty -> assign("defaultCustomerID",$defaultCustomerID['id']);
 $smarty -> assign("defaults",$defaults);
 
 $smarty -> assign('active_tab', '#money');
+$smarty -> assign("first_run_wizard",$first_run_wizard);
 
 ?>

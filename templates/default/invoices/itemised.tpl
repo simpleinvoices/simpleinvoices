@@ -17,6 +17,69 @@
         	<img src="images/common/gmail-loader.gif" alt="Loading ..." /> Loading ...
 </div>
 <br>
+
+
+{if $first_run_wizard == true}
+
+        <br />
+        <div class="welcome">
+                <b>First Run Wizard</b><br />
+            
+           It appears that this is the first time you are creating an invoices.  Before you can create an invoice you need to do a couple of things
+
+<br />In order to create an invoice there must be at least 1 biller, customer, product, tax and invoice preference available
+<br />
+Just click on the below buttons to add a new
+        </div>
+        <br />
+        <br />
+    
+        <table class="buttons" align="center">
+        <tr>
+            <td>
+    {if $biller == null}
+                <a href="./index.php?module=billers&amp;view=add" class="positive">
+                    <img src="./images/famfam/add.png" alt="" />
+                    {$LANG.add_new_biller}
+                </a>
+
+    {/if}
+    {if $customers == null}
+                    <a href="./index.php?module=customers&view=add" class="positive">
+                        <img src="./images/famfam/add.png" alt="" />
+                        {$LANG.customer_add}
+                    </a>
+
+    {/if}
+    {if $products == null}
+                    <a href="./index.php?module=products&view=add" class="positive">
+                        <img src="./images/famfam/add.png" alt=""/>
+                        {$LANG.add_new_product}
+                    </a>
+
+
+    {/if}
+    {if $taxes == null}
+                    <a href="index.php?module=tax_rates&view=add" class="positive">
+                        <img src="./images/common/add.png" alt="" />
+                        {$LANG.add_new_tax_rate}
+                    </a>
+
+    {/if}
+    {if $preferences == null}
+                    <a href="./index.php?module=preferences&amp;view=add" class="positive">
+                        <img src="./images/famfam/add.png" alt="" />
+                        {$LANG.add_new_preference}
+                    </a>
+
+
+    {/if}
+                </td>
+            </tr>
+        </table>
+        <br />
+
+{else}
 {include file="$path/header.tpl" }
 
 <table align="left">
@@ -225,3 +288,4 @@
 </table>
 
 </form>
+{/if}
