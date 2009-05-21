@@ -6,6 +6,8 @@ BETA 4
     - UI updates
     - backup db - menu fix
     - customer view info tabs - redone in jquery UI
+	- Extensions can now be managed within Simple Invoices and not in the config file - thanks Marcel 
+	- System defaults table updated to include both domain_id and extension_id fields - so can have different values for a default depending on extension or domain - thanks Marcel
 
 --------
 BETA 3

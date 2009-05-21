@@ -106,6 +106,18 @@ include_once("./include/sql_queries.php");
 
 $smarty->register_modifier("siLocal_number", array("siLocal", "number"));
 $smarty->register_modifier("siLocal_number_trim", array("siLocal", "number_trim"));
+
+//TODO - add this as a function in sql_queries.php or a class file
+$sql="SELECT * from ".TB_PREFIX."extensions WHERE (domain_id = :id OR domain_id =  0 ) ORDER BY domain_id ASC";
+$sth = dbQuery($sql,':id', $auth_session->domain_id ) or die(htmlspecialchars(end($dbh->errorInfo())));
+
+while ( $this_extension = $sth->fetch() ) 
+{ 
+	$DB_extensions[$this_extension['name']] = $this_extension; 
+}
+$config->extension = $DB_extensions;
+
+
 include_once('./include/language.php');
 
 include_once('./include/functions.php');
@@ -151,12 +163,6 @@ $siUrl = getURL();
 
 // Get extensions from DB, and update config array
 
-//TODO - add this as a function in sql_queries.php or a class file
-$sql="SELECT * from ".TB_PREFIX."extensions WHERE (domain_id = :id OR domain_id =  0 ) ORDER BY domain_id ASC";
-$sth = dbQuery($sql,':id', $auth_session->domain_id ) or die(htmlspecialchars(end($dbh->errorInfo())));
-
-while ( $this_extension = $sth->fetch()) { $DB_extensions[$this_extension[name]] = $this_extension; }
-$config->extension = $DB_extensions;
 
 //If using the folowing line, the DB settings should be appended to the config array, instead of replacing it (NOT TESTED!)
 //$config->extension() = $DB_extensions;

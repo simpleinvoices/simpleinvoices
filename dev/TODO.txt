@@ -24,8 +24,7 @@ Disclaimer: if its in the list it may get done sometime in the future if and whe
 2009.1 :: Beta 4 - current work in progress
 ##############################
 
-	- add domain_id into system_defaults table - flatten this table - old style - TODO - JK
-	- system defaults/preferences - flatten table and add domain_id - JK
+	- merge docs.php into normal index.php
 	- custom fields - domain id - stuff - JK
 	- add outstanding invoices in home page - and fix home page
 
@@ -40,8 +39,7 @@ Disclaimer: if its in the list it may get done sometime in the future if and whe
     - move date popup to jquery UI
 	- Reports - localise
 	- database backup - export as XML - Hannes
-	- merge docs.php into normal index.php
-
+	
 ##############################
 2009.1 :: Beta 3
 ##############################

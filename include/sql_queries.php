@@ -981,7 +981,9 @@ function getSystemDefaults() {
 	$sql .= " ORDER BY extension_id ASC";		// order is important for overriding settings
 	
 	// get all settings from default domain (0)
-	$sth = dbQuery($sql.$current_settings.$order, 'domain_id', 0) or die(htmlspecialchars(end($dbh->errorInfo())));
+	//$sth = dbQuery($sql.$current_settings.$order, 'domain_id', 0) or die(htmlspecialchars(end($dbh->errorInfo())));
+	
+	$sth = dbQuery($sql, 'domain_id', 0) or die(htmlspecialchars(end($dbh->errorInfo())));	
 	
 	$defaults = null;
 	$default = null;
@@ -992,7 +994,8 @@ function getSystemDefaults() {
 	}
 
 	// add all settings from current domain
-	$sth = dbQuery($sql.$current_settings.$order, 'domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+	//$sth = dbQuery($sql.$current_settings.$order, 'domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sth = dbQuery($sql, 'domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$default = null;
 
 	while($default = $sth->fetch()) {
