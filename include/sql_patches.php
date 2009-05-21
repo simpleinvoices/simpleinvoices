@@ -1224,7 +1224,7 @@ PRIMARY KEY  (`user_id`)) ;
 		 UPDATE ".TB_PREFIX."extensions SET `id` = '0' WHERE `name` = 'core' LIMIT 1;";
     $patch['198']['date'] = "20090322";	
  
-
+/*
     $patch['199']['name'] = "Enable tab_menu extension";
     $patch['199']['patch'] = "INSERT INTO ".TB_PREFIX."extensions ('id', 'domain_id', 'name', 'description', 'enabled') VALUES (2, 1, 'tab_menu', 'tab_menu', '1');";
     $patch['199']['date'] = "20090501";
@@ -1232,6 +1232,7 @@ PRIMARY KEY  (`user_id`)) ;
     $patch['200']['name'] = "Enable Manage Extensions extenion";
     $patch['200']['patch'] = "INSERT INTO ".TB_PREFIX."extensions ('id', 'domain_id', 'name', 'description', 'enabled') VALUES (3, 1, 'manage_extensions', 'manage_extensions', '1');";
     $patch['200']['date'] = "20090501";
+*/
 
 /*
     $patch['197']['name'] = "User table - make all existing users enabled";

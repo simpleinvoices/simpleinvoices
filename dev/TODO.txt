@@ -3,7 +3,7 @@ Simple Invoices todo list
 Disclaimer: if its in the list it may get done sometime in the future if and when someone feels like it
 *************
 ##############################
-2009.1 :: Beta 5
+2009.1 :: Beta 5 - next release + 1
 ##############################
 
 	- change config.ini back to config.php - but keep ini format and add ;<?php on line 1 and ; exit; on line 2 - this is for sercurity reasons
@@ -24,11 +24,12 @@ Disclaimer: if its in the list it may get done sometime in the future if and whe
 2009.1 :: Beta 4 - current work in progress
 ##############################
 
+	- fix UI for Manage Extensions
 	- merge docs.php into normal index.php
-	- custom fields - domain id - stuff - JK
 	- add outstanding invoices in home page - and fix home page
 
 	#really shoud
+	- custom fields - domain id - stuff - JK
 	- Products - allow setting 2 or more default taxes pre product
 	- user - if user disbaled - if login attempt - give nice message - later
 	- invoice
@@ -36,9 +37,21 @@ Disclaimer: if its in the list it may get done sometime in the future if and whe
 	- PDF - bottom getting cut off - refer fourm
 
 	#maybe
+	- move all configs (where possible) out of config.ini and into system_defaults
     - move date popup to jquery UI
 	- Reports - localise
 	- database backup - export as XML - Hannes
+	
+	----
+	Known issues
+	----
+	- UI of Manage Extensions needs updating
+	- not all the extensions work
+	- welcome text (in yellow) not complete
+	- front page/dashboard not complete
+	- Total style invoice not selectable
+	
+	
 	
 ##############################
 2009.1 :: Beta 3
@@ -78,7 +91,6 @@ Sometime soon
  - move the stuff in index and home in the LANG files
  - email :
  -- email : html and no html option - maybe??
- -- email: add cc - maybe ??
  -- email: add default signature - maybe - set in biller details ??
  -- email: and add validation
  - customer view - add edit/export etc, back in

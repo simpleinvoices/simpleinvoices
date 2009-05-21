@@ -19,7 +19,7 @@
 {if $smarty.get.stage == 1 }
 
 <form name="frmpost" action="index.php?module=invoices&amp;view=email&amp;stage=2&amp;id={$smarty.get.id}" method="post">
-<div id="top"><h3>Email Invoice to Customer as PDF</h3></div>
+<div id="top"><h3>Email {$preferences.pref_inv_wording} {$invoice.id} to Customer as PDF</h3></div>
 
 <table align="center">
 	<tr>
