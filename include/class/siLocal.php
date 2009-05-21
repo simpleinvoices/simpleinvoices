@@ -63,7 +63,7 @@ class siLocal
 	 * Description: wrapper for php number_format
 	 * Purpose: to format numbers for data entry fields - ie invoice edit/ajax where data is in 6 decimial places but only neex x places in edit view
 	 */
-	function number_formatted($number)
+	public static function number_formatted($number)
 	{
 		global $config;
 		$number_formatted = number_format($number, $config->local->precision, '.', '');
