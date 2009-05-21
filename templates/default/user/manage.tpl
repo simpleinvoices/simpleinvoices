@@ -20,5 +20,18 @@
         </td>
     </tr>
 </table>
-<table id="manageGrid" style="display:none"></table>
- {include file='../modules/user/manage.js.php' LANG=$LANG}
+{if $number_of_rows.count == 0}
+
+	<br />
+	<br />
+	<span class="welcome">{$LANG.no_users}</span>
+	<br />
+	<br />
+	<br />
+	<br />
+
+
+{else}
+	<table id="manageGrid" style="display:none"></table>
+	{include file='../modules/user/manage.js.php' LANG=$LANG}
+{/if}

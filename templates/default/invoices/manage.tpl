@@ -11,10 +11,6 @@
 */
 *}
 
-{if $number_of_invoices.count == 0}
-	<p><em>{$LANG.no_invoices}</em></p>
-{else}
-
 <table class="buttons" align="center">
     <tr>
         <td>
@@ -27,6 +23,17 @@
         </td>
     </tr>
 </table>
+
+{if $number_of_invoices.count == 0}
+	
+	<br />
+	<br />
+	<span class="welcome">{$LANG.no_invoices}</span>
+	<br />
+	<br />
+	<br />
+	<br />
+{else}
 
 <table id="manageGrid" style="display:none"></table>
 

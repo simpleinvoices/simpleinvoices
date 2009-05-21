@@ -14,8 +14,26 @@
 *	http://www.simpleinvoices.org
 */
 *}
+
+	<table class="buttons" align="center">
+    <tr>
+        <td>
+            <a href="./index.php?module=payments&amp;view=process&amp;op=pay_invoice" class="positive">
+                <img src="./images/famfam/add.png" alt=""/>
+                {$LANG.process_payment}
+            </a>
+
+        </td>
+    </tr>
+	</table>
+
 {if $payments == null}
-	<p><em>{$LANG.no_payments}.</em></p>
+	<br />
+	<br />
+	<span class="welcome">{$LANG.no_payments}</span>
+	<br />
+	<br />
+
 {else}
 
  

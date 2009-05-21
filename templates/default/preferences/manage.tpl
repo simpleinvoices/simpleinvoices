@@ -13,8 +13,6 @@
 *	 GPL v2 or above
 */
 *}
-{if preferences == null}
-<p><em>{$LANG.no_preferences}.</em></p>
 <table class="buttons" align="center">
     <tr>
         <td>
@@ -25,23 +23,21 @@
 
         </td>
     </tr>
- </table>
-
+</table>
+ 
+{if $preferences == null}
+	
+	<br />
+	<br />
+	<span class="welcome">{$LANG.no_preferences}</span>
+	<br />
+	<br />
+	<br />
+	
 {else}
-<table class="buttons" align="center">
-    <tr>
-        <td>
-            <a href="./index.php?module=preferences&amp;view=add" class="positive">
-                <img src="./images/famfam/add.png" alt="" />
-                {$LANG.add_new_preference}
-            </a>
 
-        </td>
-    </tr>
- </table>
-<table id="manageGrid" style="display:none"></table>
-
- {include file='../modules/preferences/manage.js.php'}
+	<table id="manageGrid" style="display:none"></table>
+	{include file='../modules/preferences/manage.js.php'}
 
 {/if}
 <br />
