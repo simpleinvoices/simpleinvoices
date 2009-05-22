@@ -5,8 +5,8 @@
 
 <!-- Welcome message - start -->
 <br />
-<br />
 {if $first_run_wizard == true}
+<br />
     <span class="welcome">
         Thank you for choosing Simple Invoices! There are just a couple of things to do before you can start invoicing
     </span>

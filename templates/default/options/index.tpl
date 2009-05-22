@@ -1,17 +1,8 @@
-<div>
+<br />
+<table align="center">
+<tr>
+<td>
 
-{literal}
-<script type="text/javascript">
-<!--
-
-//$(document).ready(function(){
-//	("#tabmenu > ul").tabs({ selected: null });
-//});
-
-//-->
-</script>
-{/literal} 
-<!-- Do stuff menu  - start -->
 <h2>System settings</h2>
 <table class="buttons" >
     <tr>
@@ -95,5 +86,7 @@
     </tr>    
 </table>
 
-
-</div>
+</td>
+</tr>
+</table>
+<br />
