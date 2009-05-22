@@ -54,8 +54,14 @@ $menu = isset($menu)?$menu: true;
 /*
 * File - set which page will be displayed as the start page
 */
-$file = isset($file)?$file: "home";
 
+//If no invoices in db then show home page as default - else show Manage Invoices page
+if ( invoice::are_there_any() > "0" )  
+{
+    $file = "invoices/manage" ;
+} else { 
+    $file = "home";
+}
 
 //if auth - make sure is valid session else skip
 // Check for any unapplied SQL patches when going home

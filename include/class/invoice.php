@@ -33,4 +33,21 @@ class invoice {
 		
 		return $invoiceItems;
 	}
+    
+
+    /**
+    * Function: are_there_any
+    * 
+    * Used to see if there are any invoices in the database for a given domain
+    **/
+    public static function are_there_any()
+    {
+	    global $auth_session;
+
+		$sql = "SELECT count(*) as count FROM ".TB_PREFIX."invoices where domain_id = :domain_id limit 2";
+		$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+
+        $count = $sth->fetch();
+        return $count['count'];
+    }
 }
