@@ -4,18 +4,63 @@
 {/if}
 
 <!-- Welcome message - start -->
-<div class="welcome">
-	<h2>Welcome {$smarty.session.Zend_Auth.email}!</h2>
-	Thank you for choosing Simple Invoices! There are just a couple of things to do before you can start invoicing<br /><br />
-	1 - Setup yourself up as a biller - <a href="index.php?module=billers&amp;view=add">click here</a><br />
-	2 - Add a client - <a href="index.php?module=customers&amp;view=add">click here</a><br />
-	3 - Add some products - <a href="index.php?module=products&amp;view=add">click here</a><br />
-	4 - go nuts creating invoices - <a href="index.php?module=invoices&amp;view=itemised">click here</a><br /><br />
+<br />
+<span class="welcome">
+	Thank you for choosing Simple Invoices! There are just a couple of things to do before you can start invoicing
+</span>
+<br /><br />
+        <table class="buttons" align="center">
+        <tr>
+            <td>
+            	 Setup yourself up as a biller, click &nbsp;  
+            </td>
+            <td>
+                <a href="./index.php?module=billers&amp;view=add" class="positive">
+                    <img src="./images/famfam/add.png" alt="" />
+                    {$LANG.add_new_biller}
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            	 Add a client, click &nbsp;  
+            </td>
+            <td>
+                <a href="./index.php?module=customers&amp;view=add" class="positive">
+                    <img src="./images/famfam/add.png" alt="" />
+                    {$LANG.customer_add}
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            	 Add some products, click &nbsp;  
+            </td>
+            <td>
+                <a href="./index.php?module=products&amp;view=add" class="positive">
+                    <img src="./images/famfam/add.png" alt="" />
+                    {$LANG.add_new_product}
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            	 Go nuts creating invoices, click &nbsp;  
+            </td>
+            <td>
+                <a href="./index.php?module=invoices&amp;view=itemised" class="positive">
+                    <img src="./images/famfam/add.png" alt="" />
+                    {$LANG.new_invoice}
+                </a>
+            </td>
+        </tr>
+        </table>
+        
+
+<br />
 	If you need to customise some of the <a href="index.php?module=options&amp;view=index">settings</a> (ie. language, default items, etc..) <a href="">click here</a> and adjust as required
 	<br /><br />
-	Already know Simple Invoices by heart? You can <a href="">hide this text</a> forever then  <a href="">click here</a>
 
-</div>
 <!-- Welcome message - end -->
 
 <div>

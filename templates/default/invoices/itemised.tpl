@@ -16,21 +16,18 @@
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
         	<img src="images/common/gmail-loader.gif" alt="Loading ..." /> Loading ...
 </div>
-<br>
 
 
 {if $first_run_wizard == true}
 
         <br />
-        <div class="welcome">
-                <b>First Run Wizard</b><br />
+        <br />
+        <span class="welcome">
             
-           It appears that this is the first time you are creating an invoices.  Before you can create an invoice you need to do a couple of things
-
-<br />In order to create an invoice there must be at least 1 biller, customer, product, tax and invoice preference available
-<br />
-Just click on the below buttons to add a new
-        </div>
+            Before you can create an invoice you need to do a couple of things.
+        Just click on the below buttons to setup the required 
+        </span>
+        <br />
         <br />
         <br />
     
