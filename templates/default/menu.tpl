@@ -1,4 +1,19 @@
 <div class="top_menu">
+
+{*
+	<div class="txt_right" style="">
+        <table class="buttons" align="left">
+        <tr>
+            <td>
+                <a href="./index.php?module=billers&amp;view=add" class="positive">
+                    <img src="./images/famfam/add.png" alt="" />
+                </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+*}
+
 	<div class="txt_right">
 		Hello {$smarty.session.Zend_Auth.email} | <a href="">Help</a>
 	           {if $config->authentication->enabled == 1}

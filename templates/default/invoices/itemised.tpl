@@ -24,8 +24,7 @@
         <br />
         <span class="welcome">
             
-            Before you can create an invoice you need to do a couple of things.
-        Just click on the below buttons to setup the required 
+            Before you can create an invoice you need to do a couple of things.  Just click on the below buttons to setup the requirements 
         </span>
         <br />
         <br />

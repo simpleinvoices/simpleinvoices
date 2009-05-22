@@ -7,6 +7,18 @@ $debtor = getTopDebtor();
 $customer = getTopCustomer();
 $biller = getTopBiller();
 
+$billers = getActiveBillers();
+$customers = getActiveCustomers();
+$taxes = getTaxes();
+$products = getActiveProducts();
+$preferences = getActivePreferences();
+$defaults = getSystemDefaults();
+
+if ($billers == null OR $customers == null OR $taxes == null OR $products == null OR $preferences == null)
+{
+    $first_run_wizard =true;
+    $smarty -> assign("first_run_wizard",$first_run_wizard);
+}
 
 $smarty -> assign("mysql",$mysql);
 $smarty -> assign("db_server",$db_server);
