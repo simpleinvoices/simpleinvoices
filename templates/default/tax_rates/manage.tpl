@@ -38,7 +38,7 @@
 	<br />
 
 {else}
-
+	<br />
 	<table id="manageGrid" style="display:none"></table>
 	{include file='../modules/tax_rates/manage.js.php'}
  

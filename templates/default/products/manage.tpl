@@ -32,11 +32,10 @@
 	<br />
 	<br />
 	<br />
-	
-	
+
 {else}
-
-	{include file='../modules/products/manage.js.php' LANG=$LANG}
+	<br />
 	<table id="manageGrid" style="display:none"></table>
-
+	{include file='../modules/products/manage.js.php'}
+	
 {/if}

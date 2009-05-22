@@ -41,6 +41,7 @@
 	
 {else}
 
+	<br />
 	<table id="manageGrid" style="display:none"></table>
 	{include file='../modules/payment_types/manage.js.php'}
 

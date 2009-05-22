@@ -32,6 +32,9 @@
 
 
 {else}
+	
+	<br />
 	<table id="manageGrid" style="display:none"></table>
 	{include file='../modules/user/manage.js.php' LANG=$LANG}
+	
 {/if}

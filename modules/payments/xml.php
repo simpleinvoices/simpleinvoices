@@ -37,8 +37,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 	}
 	/*SQL Limit - end*/
 
-	$where = " WHERE ap. domain_id = :domain_id";
-	if ($query) $where = " WHERE ap.domain_id = :domain_id AND $qtype LIKE '%$query%' ";
+	$where = "";
+	if ($query) $where = " AND $qtype LIKE '%$query%' ";
 
 
 	/*Check that the sort field is OK*/
@@ -57,9 +57,33 @@ function sql($type='', $dir, $sort, $rp, $page )
 		$id = $_GET['id'];
 		//$query = getInvoicePayments($_GET['id']);
 		
-		$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."payment ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b where ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and ap.ac_inv_id = :id ORDER BY ap.id DESC";
+		//$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."payment ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b where ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and ap.ac_inv_id = :id ORDER BY ap.id DESC";
+		$sql = "SELECT 
+				ap.*, 
+				c.name as cname,
+				b.name as bname 
+			from 
+				".TB_PREFIX."payment ap,
+				".TB_PREFIX."invoices iv,
+				".TB_PREFIX."customers c,
+				".TB_PREFIX."biller b
+			where 
+				ap.ac_inv_id = iv.id 
+				and 
+				iv.customer_id = c.id 
+				and 
+				iv.biller_id = b.id 
+				and 
+				ap.ac_inv_id = :invoice_id
+				and 
+				ap.domain_id = :domain_id
+				$where
+			ORDER BY 
+				$sort $dir 
+				$limit";
 		
-		$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
+		
+		$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':invoice_id', $_GET['id']) or die(htmlspecialchars(end($dbh->errorInfo())));
 		
 	}
 	#if coming from another page where you want to filter by just one customer
@@ -67,7 +91,26 @@ function sql($type='', $dir, $sort, $rp, $page )
 		
 		//$query = getCustomerPayments($_GET['c_id']);
 		$id = $_GET['c_id'];
-		$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."payment ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b where ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and c.id = :id ORDER BY ap.id DESC";
+		$sql = "SELECT 
+					ap.*, 
+					c.name as cname, 
+					b.name as bname 
+				from 
+					".TB_PREFIX."payment ap, 
+					".TB_PREFIX."invoices iv, 
+					".TB_PREFIX."customers c, 
+					".TB_PREFIX."biller b 
+				where 
+					ap.ac_inv_id = iv.id 
+					and 
+					iv.customer_id = c.id 
+					and 
+					iv.biller_id = b.id 
+					and 
+					c.id = :id 
+				ORDER BY 
+				$sort $dir  
+				$limit";
 
 		$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
 		
@@ -99,6 +142,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 						ap.ac_payment_type = pt.pt_id 
 					AND
 						ap.domain_id = :domain_id
+					$where
 				ORDER BY 
 					$sort $dir 
 				$limit

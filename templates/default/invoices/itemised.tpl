@@ -37,7 +37,7 @@ Just click on the below buttons to add a new
         <table class="buttons" align="center">
         <tr>
             <td>
-    {if $biller == null}
+    {if $billers == null}
                 <a href="./index.php?module=billers&amp;view=add" class="positive">
                     <img src="./images/famfam/add.png" alt="" />
                     {$LANG.add_new_biller}

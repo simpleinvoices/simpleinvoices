@@ -1,6 +1,4 @@
-<h3>{$LANG.manage_payments}</h3>
-<hr />
-
+<br />
 <table align="center">
 	<tr>
 		<td class='details_screen'>{$LANG.payment_id}</td><td>{$payment.id|escape:html}</td>
@@ -9,7 +7,7 @@
 		<td class='details_screen'>{$LANG.invoice_id}</td><td><a href='index.php?module=invoices&amp;view=quick_view&amp;id={$payment.ac_inv_id|escape:html}&amp;action=view'>{$payment.ac_inv_id|escape:html}</a></td>
 	</tr>
 	<tr>
-		<td class='details_screen'>{$LANG.amount}</td><td>{$payment.ac_amount|escape:html}</td>
+		<td class='details_screen'>{$LANG.amount}</td><td>{$payment.ac_amount|siLocal_number}</td>
 	</tr>
 	<tr>
 		<td class='details_screen'>{$LANG.date_upper}</td><td>{$payment.date|escape:html}</td>
@@ -26,9 +24,19 @@
         <tr>
                 <td class='details_screen'>{$LANG.notes}</td><td>{$payment.ac_notes}
         </tr>
-
 </table>
-<hr />
-	<form>
-		<input type="button" value="{$LANG.back}" onclick="javascript: history.back()" />
-	</form>
+
+<br />
+<table class="buttons" align="center">
+	<tr>
+		<td>
+		
+			<a href="./index.php?module=payments&view=manage" class="negative">
+		        <img src="./images/common/cross.png" alt="" />
+	        	{$LANG.cancel}
+    		</a>
+	
+		</td>
+	</tr>
+</table>
+

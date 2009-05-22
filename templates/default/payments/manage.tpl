@@ -42,13 +42,12 @@
 	{elseif $smarty.get.c_id }
 <h3>{$LANG.payments_filtered_customer} {$smarty.get.c_id|escape:html} :: <a href='index.php?module=payments&amp;view=process&amp;op=pay_invoice'>{$LANG.process_payment}</a></h3>
 	{else}
-<h3>{$LANG.manage_payments} :: <a href='index.php?module=payments&amp;view=process&amp;op=pay_invoice'>{$LANG.process_payment}</a></h3>
+
 	{/if}
-<hr />
 
-<table id="manageGrid" style="display:none"></table>
-
- {include file='../modules/payments/manage.js.php' get=$smarty.get}
+	<br />
+	<table id="manageGrid" style="display:none"></table>
+	{include file='../modules/payments/manage.js.php' get=$smarty.get}
 
 {/if}
 <br />

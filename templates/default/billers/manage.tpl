@@ -32,8 +32,8 @@
 	
 {else}
 
-
-<table id="manageGrid" style="display:none"></table>
- {include file='../modules/billers/manage.js.php' LANG=$LANG}
+	<br />
+	<table id="manageGrid" style="display:none"></table>
+	{include file='../modules/billers/manage.js.php' LANG=$LANG}
 
 {/if}

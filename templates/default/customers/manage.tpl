@@ -34,8 +34,8 @@
 	
 {else}
 
-<table id="manageGrid" style="display:none"></table>
-
- {include file='../modules/customers/manage.js.php'}
+	<br />
+	<table id="manageGrid" style="display:none"></table>
+	{include file='../modules/customers/manage.js.php'}
 
 {/if}
