@@ -65,6 +65,7 @@ if ( invoice::are_there_any() > "0" )
 
 //if auth - make sure is valid session else skip
 // Check for any unapplied SQL patches when going home
+//TODO - redo this code
 if (($module == "options") && ($view == "database_sqlpatches")) {
 	include_once('./modules/options/database_sqlpatches.php');
 	donePatches();

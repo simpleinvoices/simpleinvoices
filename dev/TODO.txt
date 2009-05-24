@@ -25,9 +25,9 @@ Disclaimer: if its in the list it may get done sometime in the future if and whe
 ##############################
 
 	- Wording for Paymenst - if none in db and on manage payments filtered by x
-	- fix UI for Manage Extensions
 	- merge docs.php into normal index.php
 	- add outstanding invoices in home page - and fix home page
+	- fix UI for Manage Extensions
 
 	#really shoud
 	- custom fields - domain id - stuff - JK
