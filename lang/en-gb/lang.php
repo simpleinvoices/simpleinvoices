@@ -149,6 +149,15 @@ $LANG['gross_total'] = "Gross";//1
 $LANG['help'] = "Help";//1
 $LANG['help_custom_fields'] = "This field is a 'Custom Field'. This means that the label can be defined as whatever you want (ie. Barcode, Tax number, MSN, etc...). <br><br>To edit or view existing 'Custom Fields' please select the Custom Fields option from the Options menu.";//1
 $LANG['help_email_to'] = "This field is a mandatory field and gets the default value from the Customers email address.  You can change this email address as you require<br><br><i>Note: You can add multiple email addresses here - just use either , or ; to split the addresses</i>";//1
+$LANG['help_email_from'] = "This field is a mandatory field and gets the default value from the Billers email address.  You can change this email address as you require but cannot add more than 1 email address in this field<br><br><i>Note: There can be only 1 email address in this field</i>";//1
+$LANG['help_email_bcc'] = "This field is not mandatory and gets the default value from the Billers email address. <br><br>
+Its recommended that you BCC yourself onto this email so that you also get a copy of it.  This way you know for sure that the email has been correctly sent and you always have a backup copy of the email.
+<br><br>
+<i>Note: You can add multiple email addresses here - just use eith , or ; to split the addresses</i>
+";//1
+$LANG['help_email_cc'] = "This field is not mandatory.  Here you can specify any email address you want to CC but cannot add more than 1 email address in this field<br><br>
+<i><i>Note: You can add multiple email addresses here - just use eith , or ; to split the addresses</i></i>
+";//1
 $LANG['hide_details'] = "Hide details";//1
 $LANG['home'] = "Home";//1
 $LANG['id'] = "ID";//1

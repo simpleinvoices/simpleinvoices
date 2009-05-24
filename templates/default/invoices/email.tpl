@@ -24,7 +24,7 @@
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.email_from}
-		<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=email_from" title="{$LANG.email_from}"><img src="./images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_email_from" title="{$LANG.email_from}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" name="email_from" size="50" value="{$biller.email}" /></td>
 	</tr>
@@ -36,7 +36,7 @@
 	</tr>
 	<tr>
 	<td class="details_screen">{$LANG.email_bcc}
-		<a class="cluetip" href="#" rel="docs.php?t=help&amp;p=email_bcc" title="{$LANG.email_bcc}"><img src="./images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_email_bcc" title="{$LANG.email_bcc}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 	<td><input type="text" name="email_bcc" size="50" value="{$biller.email}" /></td>
 	</tr>
