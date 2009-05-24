@@ -42,7 +42,7 @@
 		</td>
 		<td colspan="2">{$customer.attention}</td>
 		<td colspan="2"></td>
-		<td class="details_screen">{$LANG.total_paid}</td>
+		<td class="details_screen"><a href="index.php?module=payments&view=manage&c_id={$customer.id}">{$LANG.total_paid}</a></td>
 		<td style="text-align:right">{$stuff.paid|number_format:2}</td>
 	</tr>
 	<tr>
