@@ -38,9 +38,22 @@
 
  
 	{if $smarty.get.id }
-<h3>{$LANG.payments_filtered} {$smarty.get.id|escape:html}</h3> :: <a href='index.php?module=payments&amp;view=process&amp;submit={$_GET.id}&amp;op=pay_selected_invoice'>{$LANG.payments_filtered_invoice}</a>
+	<table class="buttons" align="center">
+    <tr>
+        <td>
+<h3>{$LANG.payments_filtered} {$smarty.get.id|escape:html} &nbsp;</h3>
+        </td>
+        <td>
+            <a href="./index.php?module=payments&amp;view=process&amp;id={$_GET.id}&amp;op=pay_selected_invoice" class="positive">
+                <img src="./images/famfam/money.png" alt=""/>
+                {$LANG.payments_filtered_invoice}
+            </a>
+
+        </td>
+    </tr>
+	</table>
 	{elseif $smarty.get.c_id }
-<h3>{$LANG.payments_filtered_customer} {$smarty.get.c_id|escape:html} :: <a href='index.php?module=payments&amp;view=process&amp;op=pay_invoice'>{$LANG.process_payment}</a></h3>
+<h3>{$LANG.payments_filtered_customer} '{$customer.name|escape:html}'</h3>
 	{else}
 
 	{/if}

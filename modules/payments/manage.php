@@ -11,6 +11,7 @@ if (!empty($_GET['id'])) {
 #if coming from another page where you want to filter by just one customer
 elseif (!empty($_GET['c_id'])) {
 	$query = getCustomerPayments($_GET['c_id']);
+    $customer = getCustomer($_GET['c_id']);
 }
 #if you want to show all invoices - no filters
 else {
@@ -21,6 +22,7 @@ else {
 $payments = progressPayments($query);
 
 $smarty -> assign("payments",$payments);
+$smarty -> assign("customer",$customer);
 
 $smarty -> assign('pageActive', 'payment');
 $smarty -> assign('active_tab', '#money');
