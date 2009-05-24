@@ -366,6 +366,8 @@ if($module == "export")
 * Main : If extension has custom layout use it else use default - start
 */
 
+    if( !in_array($module."_".$view, $early_exit) )
+    {
 		$extensionMain = 0;
 		foreach($config->extension as $extension)
 		{
@@ -388,6 +390,8 @@ if($module == "export")
 		{
 			$smarty -> $smarty_output("../templates/default/main.tpl");
 		}
+    }
+    
 /*
 * Main : If extension has custom menu use it else use default - end
 */
