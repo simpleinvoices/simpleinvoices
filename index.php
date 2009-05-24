@@ -60,7 +60,7 @@ if ( invoice::are_there_any() > "0" )
 {
     $file = "invoices/manage" ;
 } else { 
-    $file = "home";
+    $file = "index/index";
 }
 
 //if auth - make sure is valid session else skip
@@ -68,7 +68,7 @@ if ( invoice::are_there_any() > "0" )
 if (($module == "options") && ($view == "database_sqlpatches")) {
 	include_once('./modules/options/database_sqlpatches.php');
 	donePatches();
-} elseif ($file == 'home') {
+} elseif ($file == 'index/index') {
 	
 	//if auth on must login before upgrade
 	if ( ($config->authentication->enabled == 1 AND isset($auth_session->id)) OR ($config->authentication->enabled == 0) )	

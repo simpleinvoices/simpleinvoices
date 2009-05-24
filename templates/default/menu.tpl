@@ -48,7 +48,7 @@
             </ul>
             <div id="home">
 				<ul class="subnav">
-					<li><a { if $pageActive == "dashboard"} class="active" {/if} href="index.php">{$LANG.dashboard}</a></li>
+					<li><a { if $pageActive == "dashboard"} class="active" {/if} href="index.php?module=index&amp;view=index">{$LANG.dashboard}</a></li>
 					<li><a { if $pageActive == "report"} class="active" {/if} href="index.php?module=reports&amp;view=index">{$LANG.all_reports}</a></li>
 				</ul>
             </div>
