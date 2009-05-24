@@ -158,6 +158,16 @@ Its recommended that you BCC yourself onto this email so that you also get a cop
 $LANG['help_email_cc'] = "This field is not mandatory.  Here you can specify any email address you want to CC but cannot add more than 1 email address in this field<br><br>
 <i><i>Note: You can add multiple email addresses here - just use eith , or ; to split the addresses</i></i>
 ";//1
+$LANG['help_required_field'] = "This is a mandatory field.  You have to enter a value in this field before you can save the form<br><br>";//
+$LANG['help_street2'] = "The field 'Street Address 2' is used when the street address for the biller or customer is either to long to fit one one line or contains multiple parts.<br><br>
+ ie. the street address 'Level 234, 325 South Malvern Road' can be seperated into <br>
+<br>Street: Level 234
+<br>Street Address 2: 325 South Malvern Road";//1
+$LANG['help_insert_biller_text'] = "To select no logo please select '_default_blank_logo.png' from the list
+  </p>
+  <p>
+	To add additional logos into Simple Invoices, copy the logo file into the logo directory in the Simple Invoices folder
+";//1
 $LANG['hide_details'] = "Hide details";//1
 $LANG['home'] = "Home";//1
 $LANG['id'] = "ID";//1

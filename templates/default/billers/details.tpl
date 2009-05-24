@@ -30,7 +30,7 @@
 		<td class="details_screen">{$LANG.street2}
 		<a
 			class="cluetip"
-			rel="docs.php?t=help&amp;p=street2"
+			rel="index.php?module=documentation&amp;view=view&amp;page=help_street2"
 			href="#"
 			title="{$LANG.street2}"
 		>
@@ -75,7 +75,7 @@
 		<td class="details_screen">{$customFieldLabel.biller_cf1}
 		<a
 			class="cluetip"
-			rel="docs.php?t=help&amp;p=custom_fields"
+			rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 			href="#"
 			title="{$LANG.Custom_Fields}"
 		>
@@ -88,7 +88,7 @@
 		<td class="details_screen">{$customFieldLabel.biller_cf2} 
 		<a
 			class="cluetip"
-			rel="docs.php?t=help&amp;p=custom_fields"
+			rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 			href="#"
 			title="{$LANG.Custom_Fields}"
 		>
@@ -101,7 +101,7 @@
 		<td class="details_screen">{$customFieldLabel.biller_cf3} 
 		<a
 			class="cluetip"
-			rel="docs.php?t=help&amp;p=custom_fields"
+			rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 			href="#"
 			title="{$LANG.Custom_Fields}"
 		>
@@ -114,7 +114,7 @@
 		<td class="details_screen">{$customFieldLabel.biller_cf4}
 		<a
 			class="cluetip"
-			rel="docs.php?t=help&amp;p=custom_fields"
+			rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 			href="#"
 			title="{$LANG.Custom_Fields}"
 		>
@@ -128,7 +128,7 @@
 		<a
 			class="cluetip"
 			href="#"
-			rel="docs.php?t=help&amp;p=insert_biller_text"
+			rel="index.php?module=documentation&amp;view=view&amp;page=help_insert_biller_text"
 			title="{$LANG.Logo_File}"
 		>
 		<img src="./images/common/help-small.png" alt="" />
