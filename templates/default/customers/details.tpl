@@ -57,7 +57,7 @@
 			<a
 				class="cluetip"
 				href="#"
-				rel="docs.php?t=help&amp;p=street2"
+				rel="index.php?module=documentation&amp;view=view&amp;page=street2"
 				title="{$LANG.street2}"
 			> <img src="./images/common/help-small.png" alt="" /></a>
 		</td>
@@ -107,7 +107,7 @@
  						<a
 							class="cluetip"
 							href="#"
-							rel="docs.php?t=help&amp;p=custom_fields"
+							rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 							title="{$LANG.Custom_Fields}"
 						> 
 						<img src="./images/common/help-small.png" alt="" /></a>
@@ -119,7 +119,7 @@
 					 	<a
 							class="cluetip"
 							href="#"
-							rel="docs.php?t=help&amp;p=custom_fields"
+							rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 							title="{$LANG.Custom_Fields}"
 						> 
 						<img src="./images/common/help-small.png" alt="" /></a>
@@ -131,7 +131,7 @@
 					 	<a
 							class="cluetip"
 							href="#"
-							rel="docs.php?t=help&amp;p=custom_fields"
+							rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 							title="{$LANG.Custom_Fields}"
 						> 
 						<img src="./images/common/help-small.png" alt="" /></a>
@@ -143,7 +143,7 @@
 					 	<a
 							class="cluetip"
 							href="#"
-							rel="docs.php?t=help&amp;p=custom_fields"
+							rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 							title="{$LANG.Custom_Fields}"
 						> 
 						<img src="./images/common/help-small.png" alt="" /></a>

@@ -145,6 +145,7 @@ $early_exit[] = "auth_logout";
 $early_exit[] = "export_pdf";
 $early_exit[] = "export_invoice";
 $early_exit[] = "invoice_template";
+$early_exit[] = "documentation_view";
 
 
 switch ($_GET['module'])

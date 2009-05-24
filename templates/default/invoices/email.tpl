@@ -30,7 +30,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.email_to}
-		<a class="cluetip" href="#" rel="docs.php?t=help&amp;p=email_to" title="{$LANG.email_to}"><img src="./images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_email_to" title="{$LANG.email_to}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" name="email_to" size="50" value="{$customer.email}" /></td>
 	</tr>
