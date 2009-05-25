@@ -45,7 +45,8 @@ Disclaimer: if its in the list it may get done sometime in the future if and whe
 	- Wording for Paymenst - if none in db and on manage payments filtered by x
 	- merge docs.php into normal index.php 
 	- invoice edit - notes - if note empty then have closed if not empty then display for edit -JK
-
+    - JSON import
+    
 	----
 	Known issues
 	----

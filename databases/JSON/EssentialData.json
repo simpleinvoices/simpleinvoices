@@ -32,5 +32,134 @@
             { "domain_id":"1","pt_description":"Cash","pt_enabled":"1" },
             { "domain_id":"1","pt_description":"Credit Card","pt_enabled":"1" }
         ]   
+    ,
+    "preferences":
+        [
+            { 
+                "pref_id":"1", 
+                "domain_id":"1", 
+                "pref_description":"Invoice", 
+                "pref_currency_sign":"$", 
+                "pref_inv_heading":"Invoice", 
+                "pref_inv_wording":"Invoice", 
+                "pref_inv_detail_heading":"Details",
+                "pref_inv_detail_line":"Payment is to be made within 14 days of the invoice being sent",
+                "pref_inv_payment_method":"Electronic Funds Transfer",
+                "pref_inv_payment_line1_name":"Account name",
+                "pref_inv_payment_line1_value":"H. & M. Simpson",
+                "pref_inv_payment_line2_name":"Account number:",
+                "pref_inv_payment_line2_value":"0123-4567-7890",
+                "pref_enabled":"1"
+            },
+            { 
+                "pref_id":"2", 
+                "domain_id":"1", 
+                "pref_description":"Receipt", 
+                "pref_currency_sign":"$", 
+                "pref_inv_heading":"Receipt", 
+                "pref_inv_wording":"Receipt", 
+                "pref_inv_detail_heading":"Details",
+                "pref_inv_detail_line":"<br />This transaction has been paid in full, please keep this receipt as proof of purchase.<br /> Thank you",
+                "pref_inv_payment_method":"",
+                "pref_inv_payment_line1_name":"",
+                "pref_inv_payment_line1_value":"",
+                "pref_inv_payment_line2_name":"",
+                "pref_inv_payment_line2_value":"",
+                "pref_enabled":"1"
+            },
+            { 
+                "pref_id":"3", 
+                "domain_id":"1", 
+                "pref_description":"Estimate", 
+                "pref_currency_sign":"$", 
+                "pref_inv_heading":"Estimate", 
+                "pref_inv_wording":"Estimate", 
+                "pref_inv_detail_heading":"Details",
+                "pref_inv_detail_line":"<br />This is an estimate of the final value of services rendered.<br />Thank you",
+                "pref_inv_payment_method":"",
+                "pref_inv_payment_line1_name":"",
+                "pref_inv_payment_line1_value":"",
+                "pref_inv_payment_line2_name":"",
+                "pref_inv_payment_line2_value":"",
+                "pref_enabled":"1"
+            },
+            { 
+                "pref_id":"4", 
+                "domain_id":"1", 
+                "pref_description":"Quote", 
+                "pref_currency_sign":"$", 
+                "pref_inv_heading":"Quote", 
+                "pref_inv_wording":"Quote", 
+                "pref_inv_detail_heading":"Details",
+                "pref_inv_detail_line":"<br />This is a quote of the final value of services rendered.<br />Thank you",
+                "pref_inv_payment_method":"",
+                "pref_inv_payment_line1_name":"",
+                "pref_inv_payment_line1_value":"",
+                "pref_inv_payment_line2_name":"",
+                "pref_inv_payment_line2_value":"",
+                "pref_enabled":"1"
+            }
 
+        ],
+    "tax":
+        [   
+            {
+                "tax_id":"1", 
+                "tax_description":"GST", 
+                "tax_percentage":"10.000000", 
+                "type":"%", 
+                "tax_enabled":"1", 
+                "domain_id":"1"
+            },
+            {
+                "tax_id":"2", 
+                "tax_description":"VAT", 
+                "tax_percentage":"10.000000", 
+                "type":"%", 
+                "tax_enabled":"1", 
+                "domain_id":"1"
+            },
+            {
+                "tax_id":"3", 
+                "tax_description":"Sales Tax", 
+                "tax_percentage":"10.000000", 
+                "type":"%", 
+                "tax_enabled":"1", 
+                "domain_id":"1"
+            },
+            {
+                "tax_id":"4", 
+                "tax_description":"No Tax", 
+                "tax_percentage":"0.000000", 
+                "type":"%", 
+                "tax_enabled":"1", 
+                "domain_id":"1"
+            },
+            {
+                "tax_id":"5", 
+                "tax_description":"Postage", 
+                "tax_percentage":"20.000000", 
+                "type":"$", 
+                "tax_enabled":"1", 
+                "domain_id":"1"
+            }
+        ]
 }
+
+INSERT INTO `si_user` (`id`, `email`, `role_id`, `domain_id`, `password`) VALUES
+(1, 'demo@simpleinvoices.org', 1, 1, 'fe01ce2a7fbac8fafaed7c982a04e229');
+
+--
+-- Dumping data for table `si_user_domain`
+--
+
+INSERT INTO `si_user_domain` (`id`, `name`) VALUES
+(1, 'default');
+
+
+--
+-- Dumping data for table `si_user_role`
+--
+
+INSERT INTO `si_user_role` (`id`, `name`) VALUES
+(1, 'administrator');
