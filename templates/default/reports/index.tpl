@@ -1,6 +1,8 @@
+{*
 <div>
 
 <!-- Welcome message - start -->
+
 <div class="welcome">
 	<h2>Reports welcome message</h2>
 	
@@ -12,8 +14,14 @@
 	
 
 </div>
+*}
 <!-- Welcome message - end -->
 <!-- Do stuff menu  - start -->
+<br />
+<table align="center">
+<tr>
+<td>
+
 <h2>{$LANG.sales}<a name="sales" href=""></a></h2>
 <table class="buttons" >
     <tr>
@@ -138,4 +146,8 @@
     </tr>
 </table>
 
-</div>
+
+</td>
+</tr>
+</table>
+<br />
