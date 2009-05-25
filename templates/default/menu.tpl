@@ -92,6 +92,7 @@
            <div style="float: right; " id="setting">
                 <ul class="subnav">
 					<li><a { if $pageActive == "setting"} class="active"{/if} href="index.php?module=options&amp;view=index">{$LANG.settings}</a></li>
+					{ if $subPageActive == "setting_extensions"} <li><a class="active active_subpage" href="#">{$LANG.extensions}</a></li>{/if}
 					<li><a { if $pageActive == "system_default"} class="active"{/if} href="index.php?module=system_defaults&amp;view=manage">{$LANG.system_preferences}</a></li>
 					<li><a { if $pageActive == "custom_field"} class="active"{/if} href="index.php?module=custom_fields&amp;view=manage">{$LANG.custom_fields_upper}</a></li>
 					{ if $subPageActive == "custom_fields_view"} <li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}

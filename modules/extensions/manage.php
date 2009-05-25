@@ -28,6 +28,7 @@ if ($action == 'toggle') {
 
 $smarty -> assign("exts",getExtensions());
 
-$smarty -> assign('pageActive', 'extensions');
-$smarty -> assign('active_tab', '#settings');
+$smarty -> assign('pageActive', 'setting');
+$smarty -> assign('active_tab', '#setting');
+$smarty -> assign('subPageActive', 'setting_extensions');
 ?>

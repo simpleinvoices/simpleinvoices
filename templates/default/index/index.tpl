@@ -190,4 +190,11 @@
         <br />
     </div>
     <!-- Reports menu - end -->
+    <br />
+    <br />
+    <span class="welcome">
+       Note: this page is a work-in-progress
+    </span>
+    <br />
+    <br />
 {/if}
