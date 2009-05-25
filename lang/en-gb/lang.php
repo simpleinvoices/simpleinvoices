@@ -168,6 +168,16 @@ $LANG['help_insert_biller_text'] = "To select no logo please select '_default_bl
   <p>
 	To add additional logos into Simple Invoices, copy the logo file into the logo directory in the Simple Invoices folder
 ";//1
+$LANG['help_customer_contact'] = "The 'Attn.' or Customer Contact field allow you to specify a contact within your customers business.<br><br>This is usefull if you customer has many employees and you need to directly specify on the invoice who within your customers business this invoice is for.<br><br> ie. Within the customer 'Springfield Power Plant'  you may want to specify Mr Burns (or Smithers) as the customer contact as they are the person who gets the invoice.<br><br>
+
+So an Invoice will look like <br>
+<br>
+Customer: Springfield Power Plant<br>
+Attn.: Mr Burns<br>";//1
+$LANG['help_invoice_custom_fields'] = "Need more fields in the invoice screen? Want your own fields like 'Purchase Order', 'Project name' etc..
+<br><br>
+Simple Invoices allows you to add whatever fields you want into the invoices.  These are called 'custom fields', to edit or setup your own fields select Custom Fields from the Options menu.
+";//1
 $LANG['hide_details'] = "Hide details";//1
 $LANG['home'] = "Home";//1
 $LANG['id'] = "ID";//1

@@ -31,7 +31,7 @@
 		<a 
 			class="cluetip"
 			href="#"
-			rel="docs.php?t=help&amp;p=required_field"
+			rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field"
 			title="{$LANG.Required_Field}"
 		>
 		<img src="./images/common/required-small.png" alt="" />
@@ -42,7 +42,7 @@
 	</tr>
 		<td class="details_screen">{$LANG.customer_contact}
 		<a
-			rel="docs.php?t=help&amp;p=customer_contact"
+			rel="index.php?module=documentation&amp;view=view&amp;page=help_customer_contact"
 			href="#"
 			class="cluetip"
 			title="{$LANG.customer_contact}"
@@ -61,7 +61,7 @@
 		<a
 			class="cluetip"
 			href="#"
-			rel="docs.php?t=help&amp;p=street2"
+			rel="index.php?module=documentation&amp;view=view&amp;page=help_street2"
 			title="{$LANG.street2}"
 		> 
 		<img src="./images/common/help-small.png" alt="" />
@@ -106,7 +106,7 @@
  		<a
 			class="cluetip"
 			href="#"
-			rel="docs.php?t=help&amp;p=custom_fields"
+			rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 			title="{$LANG.Custom_Fields}"
 		>
 		<img src="./images/common/help-small.png" alt="" />
@@ -119,7 +119,7 @@
 		<a
 			class="cluetip"
 			href="#"
-			rel="docs.php?t=help&amp;p=custom_fields"
+			rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 			title="{$LANG.Custom_Fields}"
 		> 
 		<img src="./images/common/help-small.png" alt="" />
@@ -132,7 +132,7 @@
 		<a
 			class="cluetip"
 			href="#"
-			rel="docs.php?t=help&amp;p=custom_fields"
+			rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 			title="{$LANG.Custom_Fields}"
 		> 
 		<img src="./images/common/help-small.png" alt="" />
@@ -145,7 +145,7 @@
 		<a
 			class="cluetip"
 			href="#"
-			rel="docs.php?t=help&amp;p=custom_fields"
+			rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 			title="{$LANG.Custom_Fields}"
 		> 
 		<img src="./images/common/help-small.png" alt="" />
