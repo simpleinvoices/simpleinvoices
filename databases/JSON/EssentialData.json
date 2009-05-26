@@ -1,5 +1,4 @@
 {
-
     "custom_fields":
         [
             { "cf_id":"1", "cf_custom_field":"biller_cf1", "cf_custom_label":"NULL", "cf_display":"0", "domain_id":"1" },
@@ -143,23 +142,29 @@
                 "tax_enabled":"1", 
                 "domain_id":"1"
             }
-        ]
+        ],
+	"user":
+        [   
+            {
+				"id":"1",
+				"email":"demo@simpleinvoices.org",
+				"role_id":"1",
+				"domain_id":"1",
+				"password":"fe01ce2a7fbac8fafaed7c982a04e229"
+			}
+		],
+	"user_domain":
+        [   
+            {
+				"id":"1",
+				"name":"default"
+			}
+		],		
+	"user_role":
+        [   
+            {
+				"id":"1",
+				"name":"administrator"
+			}
+		]
 }
-
-INSERT INTO `si_user` (`id`, `email`, `role_id`, `domain_id`, `password`) VALUES
-(1, 'demo@simpleinvoices.org', 1, 1, 'fe01ce2a7fbac8fafaed7c982a04e229');
-
---
--- Dumping data for table `si_user_domain`
---
-
-INSERT INTO `si_user_domain` (`id`, `name`) VALUES
-(1, 'default');
-
-
---
--- Dumping data for table `si_user_role`
---
-
-INSERT INTO `si_user_role` (`id`, `name`) VALUES
-(1, 'administrator');
