@@ -40,7 +40,7 @@ foreach ($a as $k => $v)
 					echo "<br>";
 				}
 				
-			echo "Columns: ".$columms;
+			echo "Columns: ".$columns;
 			$sql = "INSERT into ".$table." (".$columns.") VALUES (".$values.");";
 		}
 	echo "<br>";    
