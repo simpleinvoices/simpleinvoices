@@ -140,7 +140,37 @@ $LANG['get_help'] = "Aiuto";//1
 $LANG['getting_started'] ="Come iniziare";//1
 $LANG['gross_total'] = "Totale netto imposte";//1
 $LANG['help'] = "Aiuto";//1
-$LANG['help_manage_invoices'] = "Cosa faccio con queste colonne?";//1
+$LANG['help_custom_fields'] = "This field is a 'Custom Field'. This means that the label can be defined as whatever you want (ie. Barcode, Tax number, MSN, etc...). <br /><br />To edit or view existing 'Custom Fields' please select the Custom Fields option from the Options menu.";//0
+$LANG['help_email_to'] = "This field is a mandatory field and gets the default value from the Customers email address.  You can change this email address as you require<br /><br /><i>Note: You can add multiple email addresses here - just use either , or ; to split the addresses</i>";//0
+$LANG['help_email_from'] = "This field is a mandatory field and gets the default value from the Billers email address.  You can change this email address as you require but cannot add more than 1 email address in this field<br /><br /><i>Note: There can be only 1 email address in this field</i>";//0
+$LANG['help_email_bcc'] = "This field is not mandatory and gets the default value from the Billers email address. <br /><br />
+Its recommended that you BCC yourself onto this email so that you also get a copy of it.  This way you know for sure that the email has been correctly sent and you always have a backup copy of the email.
+<br /><br />
+<i>Note: You can add multiple email addresses here - just use eith , or ; to split the addresses</i>
+";//0
+$LANG['help_email_cc'] = "This field is not mandatory.  Here you can specify any email address you want to CC but cannot add more than 1 email address in this field<br /><br />
+<i><i>Note: You can add multiple email addresses here - just use eith , or ; to split the addresses</i></i>
+";//0
+$LANG['help_required_field'] = "This is a mandatory field.  You have to enter a value in this field before you can save the form<br /><br />";//0
+$LANG['help_street2'] = "The field 'Street Address 2' is used when the street address for the biller or customer is either to long to fit one one line or contains multiple parts.<br /><br />
+ ie. the street address 'Level 234, 325 South Malvern Road' can be seperated into <br />
+<br />Street: Level 234
+<br />Street Address 2: 325 South Malvern Road";//0
+$LANG['help_insert_biller_text'] = "To select no logo please select '_default_blank_logo.png' from the list
+  </p>
+  <p>
+	To add additional logos into Simple Invoices, copy the logo file into the logo directory in the Simple Invoices folder
+";//0
+$LANG['help_customer_contact'] = "The 'Attn.' or Customer Contact field allow you to specify a contact within your customers business.<br /><br />This is usefull if you customer has many employees and you need to directly specify on the invoice who within your customers business this invoice is for.<br /><br /> ie. Within the customer 'Springfield Power Plant'  you may want to specify Mr Burns (or Smithers) as the customer contact as they are the person who gets the invoice.<br /><br />
+
+So an Invoice will look like <br />
+<br />
+Customer: Springfield Power Plant<br />
+Attn.: Mr Burns<br />";//0
+$LANG['help_invoice_custom_fields'] = "Need more fields in the invoice screen? Want your own fields like 'Purchase Order', 'Project name' etc..
+<br /><br />
+Simple Invoices allows you to add whatever fields you want into the invoices.  These are called 'custom fields', to edit or setup your own fields select Custom Fields from the Options menu.
+";//0
 $LANG['hide_details'] = "Nascondi dettagli";//1
 $LANG['home'] = "Inizio";//1
 $LANG['id'] = "ID";//1
@@ -248,7 +278,7 @@ $LANG['payment_type_to_add'] = "Aggiungi tipo di Pagamento";//1
 $LANG['payment_types'] = "Tipi di Pagamento";//1
 $LANG['payments'] = "Pagamenti";//1
 $LANG['payments_filtered'] = "Pagamenti per ID Fattura";//1
-$LANG['payments_filtered_customer'] = "Pagamenti per ID Cliente";//1
+$LANG['payments_filtered_customer'] = "Payments filtered by customer";//0
 $LANG['payments_filtered_invoice'] = "Elabora Pagamento per questa fattura";//1
 $LANG['people'] = "People";//0
 $LANG['phone'] = "Telefono";//1
