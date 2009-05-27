@@ -25,23 +25,30 @@ foreach ($a as $k => $v)
 foreach ($a as $k => $v) 
 {
 	$table = $k;
-	echo "Table: ".$table;
-	
+
 	echo "<br>";
+	echo "<b>Table: ".$table."</b>";
+	
+	
 	$columns ="";
+	$values="";
 	    foreach ($a[$k] as $v2) 
 		{
 			echo "<br>";
-				
+				$i = "1";
 				foreach ($v2 as $k3 => $v3) 
 				{
-					$columns .= ", ".$k3;	
-					echo $k3 ." => ".$v3;
-					echo "<br>";
+					$i == "1" ? $columns .= $k3 : $columns .= ", ".$k3;
+					$i == "1" ? $values .= "'".$v3."'" : $values .= ", '".$v3."'";
+
+					$i++;
 				}
 				
-			echo "Columns: ".$columns;
+			
 			$sql = "INSERT into ".$table." (".$columns.") VALUES (".$values.");";
+			echo "SQL: ".$sql;
+			$columns ="";
+			$values ="";
 		}
 	echo "<br>";    
 	
