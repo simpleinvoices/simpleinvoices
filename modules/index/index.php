@@ -7,11 +7,11 @@ $debtor = getTopDebtor();
 $customer = getTopCustomer();
 $biller = getTopBiller();
 
-$billers = getActiveBillers();
-$customers = getActiveCustomers();
+$billers = getBillers();
+$customers = getCustomers();
 $taxes = getTaxes();
-$products = getActiveProducts();
-$preferences = getActivePreferences();
+$products = getProducts();
+$preferences = getPreferences();
 $defaults = getSystemDefaults();
 
 if ($billers == null OR $customers == null OR $taxes == null OR $products == null OR $preferences == null)
@@ -27,7 +27,12 @@ $smarty -> assign("patch",count($patch));
 $smarty -> assign("max_patches_applied", $max_patches_applied);
 */
 $smarty -> assign("biller", $biller);
+$smarty -> assign("billers", $billers);
 $smarty -> assign("customer", $customer);
+$smarty -> assign("customers", $customers);
+$smarty -> assign("taxes", $taxes);
+$smarty -> assign("products", $products);
+$smarty -> assign("preferences", $preferences);
 $smarty -> assign("debtor", $debtor);
 $smarty -> assign("title", $title);
 

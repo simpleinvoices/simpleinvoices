@@ -108,14 +108,17 @@ $smarty->register_modifier("siLocal_number", array("siLocal", "number"));
 $smarty->register_modifier("siLocal_number_trim", array("siLocal", "number_trim"));
 
 //TODO - add this as a function in sql_queries.php or a class file
-$sql="SELECT * from ".TB_PREFIX."extensions WHERE (domain_id = :id OR domain_id =  0 ) ORDER BY domain_id ASC";
-$sth = dbQuery($sql,':id', $auth_session->domain_id ) or die(htmlspecialchars(end($dbh->errorInfo())));
+if (getNumberOfDoneSQLPatches() > "196")
+{
+    $sql="SELECT * from ".TB_PREFIX."extensions WHERE (domain_id = :id OR domain_id =  0 ) ORDER BY domain_id ASC";
+    $sth = dbQuery($sql,':id', $auth_session->domain_id ) or die(htmlspecialchars(end($dbh->errorInfo())));
 
-while ( $this_extension = $sth->fetch() ) 
-{ 
-	$DB_extensions[$this_extension['name']] = $this_extension; 
+    while ( $this_extension = $sth->fetch() ) 
+    { 
+    	$DB_extensions[$this_extension['name']] = $this_extension; 
+    }
+    $config->extension = $DB_extensions;
 }
-$config->extension = $DB_extensions;
 
 
 include_once('./include/language.php');

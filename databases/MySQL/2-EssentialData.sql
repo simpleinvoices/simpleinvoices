@@ -1,3 +1,28 @@
+-- phpMyAdmin SQL Dump
+-- version 3.1.2deb1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: May 29, 2009 at 04:51 PM
+-- Server version: 5.0.75
+-- PHP Version: 5.2.6-3ubuntu2
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: `simple_invoices`
+--
+
+--
+-- Dumping data for table `si_biller`
+--
+
+
+--
+-- Dumping data for table `si_customers`
+--
+
+
 --
 -- Dumping data for table `si_custom_fields`
 --
@@ -20,6 +45,27 @@ INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `
 (15, 'invoice_cf3', NULL, '0', 1),
 (16, 'invoice_cf4', NULL, '0', 1);
 
+--
+-- Dumping data for table `si_extensions`
+--
+
+INSERT INTO `si_extensions` (`id`, `domain_id`, `name`, `description`, `enabled`) VALUES
+(0, 0, 'core', 'Core part of Simple Invoices - always enabled', '1');
+
+--
+-- Dumping data for table `si_invoices`
+--
+
+
+--
+-- Dumping data for table `si_invoice_items`
+--
+
+
+--
+-- Dumping data for table `si_invoice_item_tax`
+--
+
 
 --
 -- Dumping data for table `si_invoice_type`
@@ -31,13 +77,41 @@ INSERT INTO `si_invoice_type` (`inv_ty_id`, `inv_ty_description`) VALUES
 (3, 'Consulting');
 
 --
+-- Dumping data for table `si_log`
+--
+
+INSERT INTO `si_log` (`id`, `timestamp`, `userid`, `sqlquerie`, `last_id`) VALUES
+(1, '2009-05-29 16:48:56', '1', 'SHOW TABLES LIKE ''si_sql_patchmanager''', NULL),
+(2, '2009-05-29 16:48:56', '1', 'INSERT INTO si_user_role (name) VALUES (''user'');', NULL),
+(3, '2009-05-29 16:48:56', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (:id, :name, :date, :patch)', NULL),
+(4, '2009-05-29 16:48:56', '1', 'INSERT INTO si_user_role (name) VALUES (''viewer'');', NULL),
+(5, '2009-05-29 16:48:56', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (:id, :name, :date, :patch)', NULL),
+(6, '2009-05-29 16:48:56', '1', 'INSERT INTO si_user_role (name) VALUES (''customer'');', NULL),
+(7, '2009-05-29 16:48:56', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (:id, :name, :date, :patch)', NULL),
+(8, '2009-05-29 16:48:56', '1', 'INSERT INTO si_user_role (name) VALUES (''biller'');', NULL),
+(9, '2009-05-29 16:48:56', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (:id, :name, :date, :patch)', NULL),
+(10, '2009-05-29 16:48:56', '1', 'ALTER TABLE si_user CHANGE id id INT( 11 ) NOT NULL AUTO_INCREMENT;', NULL),
+(11, '2009-05-29 16:48:56', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (:id, :name, :date, :patch)', NULL),
+(12, '2009-05-29 16:48:57', '1', 'ALTER TABLE si_user ADD enabled INT( 1 ) NOT NULL ;', NULL),
+(13, '2009-05-29 16:48:57', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (:id, :name, :date, :patch)', NULL),
+(14, '2009-05-29 16:48:57', '1', 'UPDATE si_user SET enabled = 1 ;', NULL),
+(15, '2009-05-29 16:48:57', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (:id, :name, :date, :patch)', NULL),
+(16, '2009-05-29 16:48:57', '1', 'ALTER TABLE si_system_defaults \n             ADD `domain_id` INT( 5 ) NOT NULL DEFAULT ''0'',\n              ADD `extension_id` INT( 5 ) NOT NULL DEFAULT ''0'',\n               DROP INDEX `name`,\n                ADD INDEX `name` ( `name` );', NULL),
+(17, '2009-05-29 16:48:57', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (:id, :name, :date, :patch)', NULL),
+(18, '2009-05-29 16:48:57', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (:id, :name, :date, :patch)', NULL);
+
+--
+-- Dumping data for table `si_payment`
+--
+
+
+--
 -- Dumping data for table `si_payment_types`
 --
 
 INSERT INTO `si_payment_types` (`pt_id`, `domain_id`, `pt_description`, `pt_enabled`) VALUES
 (1, 1, 'Cash', '1'),
 (2, 1, 'Credit Card', '1');
-
 
 --
 -- Dumping data for table `si_preferences`
@@ -49,6 +123,9 @@ INSERT INTO `si_preferences` (`pref_id`, `domain_id`, `pref_description`, `pref_
 (3, 1, 'Estimate', '$', 'Estimate', 'Estimate', 'Details', '<br />This is an estimate of the final value of services rendered.<br />Thank you', '', '', '', '', '', '1'),
 (4, 1, 'Quote', '$', 'Quote', 'Quote', 'Details', '<br />This is a quote of the final value of services rendered.<br />Thank you', '', '', '', '', '', '1');
 
+--
+-- Dumping data for table `si_products`
+--
 
 
 --
@@ -184,15 +261,15 @@ INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_
 (126, 125, 'Change log table that usernames are also possible as id', '200709', 'ALTER TABLE `si_log` CHANGE `userid` `userid` VARCHAR( 40 ) NOT NULL DEFAULT ''0'''),
 (127, 126, 'Add visible attribute to the products table', '200709', 'ALTER TABLE  `si_products` ADD  `visible` BOOL NOT NULL DEFAULT  ''1'';'),
 (128, 127, 'Add last_id to logging table', '200709', 'ALTER TABLE  `si_log` ADD  `last_id` INT NULL ;'),
-(129, 128, 'Add user table', '200709', 'CREATE TABLE IF NOT EXISTS `si_users` (\n			`user_id` int(11) NOT NULL auto_increment,\n			`user_email` varchar(255) NOT NULL,\n			`user_name` varchar(255) NOT NULL,\n			`user_group` varchar(255) NOT NULL,\n			`user_domain` varchar(255) NOT NULL,\n			`user_password` varchar(255) NOT NULL,\n			PRIMARY KEY  (`user_id`)\n			) ;'),
+(129, 128, 'Add user table', '200709', 'CREATE TABLE IF NOT EXISTS `si_users` (\n           `user_id` int(11) NOT NULL auto_increment,\n            `user_email` varchar(255) NOT NULL,\n           `user_name` varchar(255) NOT NULL,\n            `user_group` varchar(255) NOT NULL,\n           `user_domain` varchar(255) NOT NULL,\n          `user_password` varchar(255) NOT NULL,\n            PRIMARY KEY  (`user_id`)\n          ) ;'),
 (130, 129, 'Fill user table with default values', '200709', 'INSERT INTO `si_users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`) VALUES \n('''', ''demo@simpleinvoices.org'', ''demo'', ''1'', ''1'', MD5(''demo''))'),
-(131, 130, 'Create auth_challenges table', '200709', 'CREATE TABLE IF NOT EXISTS `si_auth_challenges` (\n				`challenges_key` int(11) NOT NULL,\n				`challenges_timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);'),
+(131, 130, 'Create auth_challenges table', '200709', 'CREATE TABLE IF NOT EXISTS `si_auth_challenges` (\n               `challenges_key` int(11) NOT NULL,\n                `challenges_timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);'),
 (132, 131, 'Make tax field 3 decimal places', '200709', 'ALTER TABLE `si_tax` CHANGE `tax_percentage` `tax_percentage` DECIMAL (10,3)  NULL'),
 (133, 132, 'Correct Foreign Key Tax ID Field Type in Invoice Items Table', '20071126', 'ALTER TABLE  `si_invoice_items` CHANGE `tax_id` `tax_id` int  DEFAULT ''0'' NOT NULL ;'),
 (134, 133, 'Correct Foreign Key Invoice ID Field Type in Ac Payments Table', '20071126', 'ALTER TABLE  `si_account_payments` CHANGE `ac_inv_id` `ac_inv_id` int  NOT NULL ;'),
 (135, 134, 'Drop non-int compatible default from si_sql_patchmanager', '20071218', 'SELECT 1+1;'),
 (136, 135, 'Change sql_patch_ref type in sql_patchmanager to int', '20071218', 'ALTER TABLE  `si_sql_patchmanager` change `sql_patch_ref` `sql_patch_ref` int NOT NULL ;'),
-(137, 136, 'Create domain mapping table', '200712', 'CREATE TABLE si_user_domain (\n	    `id` int(11) NOT NULL auto_increment  PRIMARY KEY,\n            `name` varchar(255) UNIQUE NOT NULL\n            ) ENGINE=InnoDB;'),
+(137, 136, 'Create domain mapping table', '200712', 'CREATE TABLE si_user_domain (\n        `id` int(11) NOT NULL auto_increment  PRIMARY KEY,\n            `name` varchar(255) UNIQUE NOT NULL\n            ) ENGINE=InnoDB;'),
 (138, 137, 'Insert default domain', '200712', 'INSERT INTO si_user_domain (name)\n        VALUES (''default'');'),
 (139, 138, 'Add domain_id to payment_types table', '200712', 'ALTER TABLE `si_payment_types` ADD `domain_id` INT DEFAULT ''1'' NOT NULL AFTER `pt_id` ;'),
 (140, 139, 'Add domain_id to preferences table', '200712', 'ALTER TABLE `si_preferences` ADD `domain_id` INT DEFAULT ''1'' NOT NULL AFTER `pref_id` ;'),
@@ -203,7 +280,7 @@ INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_
 (145, 144, 'Change group field to user_role_id in users table', '20080102', 'ALTER TABLE `si_users` CHANGE `user_group` `user_role_id` INT  DEFAULT ''1'' NOT NULL;'),
 (146, 145, 'Change domain field to user_domain_id in users table', '20080102', 'ALTER TABLE `si_users` CHANGE `user_domain` `user_domain_id` INT  DEFAULT ''1'' NOT NULL;'),
 (147, 146, 'Drop old auth_challenges table', '20080102', 'DROP TABLE IF EXISTS `si_auth_challenges`;'),
-(148, 147, 'Create user_role table', '20080102', 'CREATE TABLE si_user_role (\n	    `id` int(11) NOT NULL auto_increment  PRIMARY KEY,\n            `name` varchar(255) UNIQUE NOT NULL\n            ) ENGINE=InnoDB;'),
+(148, 147, 'Create user_role table', '20080102', 'CREATE TABLE si_user_role (\n     `id` int(11) NOT NULL auto_increment  PRIMARY KEY,\n            `name` varchar(255) UNIQUE NOT NULL\n            ) ENGINE=InnoDB;'),
 (149, 148, 'Insert default user group', '20080102', 'INSERT INTO si_user_role (name) VALUES (''administrator'');'),
 (150, 149, 'Table = Account_payments Field = ac_amount : change field type and length to decimal', '20080128', 'ALTER TABLE `si_account_payments` CHANGE `ac_amount` `ac_amount` DECIMAL( 25, 6 ) NOT NULL;'),
 (151, 150, 'Table = Invoice_items Field = quantity : change field type and length to decimal', '20080128', 'ALTER TABLE `si_invoice_items` CHANGE `quantity` `quantity` DECIMAL( 25, 6 ) NOT NULL DEFAULT ''0'' '),
@@ -218,7 +295,7 @@ INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_
 (160, 159, 'Add domain_id to payments table', '20081201', 'ALTER TABLE  `si_payment` ADD  `domain_id` INT NOT NULL ;'),
 (161, 160, 'Add domain_id to tax table', '20081201', 'ALTER TABLE  `si_tax` ADD  `domain_id` INT NOT NULL ;'),
 (162, 161, 'Change user table from si_users to si_user', '20081201', 'RENAME TABLE `si_users` TO  `si_user` ;'),
-(163, 162, 'Add new invoice items tax table', '20081212', 'CREATE TABLE `si_invoice_item_tax` (\n		`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,\n		`invoice_item_id` INT( 11 ) NOT NULL ,\n		`tax_id` INT( 11 ) NOT NULL ,\n		`tax_type` VARCHAR( 1 ) NOT NULL ,\n		`tax_rate` DECIMAL( 25, 6 ) NOT NULL ,\n		`tax_amount` DECIMAL( 25, 6 ) NOT NULL\n		) ENGINE = MYISAM ;'),
+(163, 162, 'Add new invoice items tax table', '20081212', 'CREATE TABLE `si_invoice_item_tax` (\n       `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,\n      `invoice_item_id` INT( 11 ) NOT NULL ,\n        `tax_id` INT( 11 ) NOT NULL ,\n     `tax_type` VARCHAR( 1 ) NOT NULL ,\n        `tax_rate` DECIMAL( 25, 6 ) NOT NULL ,\n        `tax_amount` DECIMAL( 25, 6 ) NOT NULL\n        ) ENGINE = MYISAM ;'),
 (164, 163, 'Concert tax info in si_invoice_items to si_invoice_item_tax', '20081212', 'insert into `si_invoice_item_tax` (invoice_item_id, tax_id, tax_type, tax_rate, tax_amount) select invoice_id, tax_id, ''%'', tax, tax_amount from `si_invoice_items`;'),
 (165, 164, 'Add default tax id into products table', '20081212', 'ALTER TABLE `si_products` ADD `default_tax_id` INT( 11 ) NULL AFTER `unit_price` ;'),
 (166, 165, 'Add default tax id 2 into products table', '20081212', 'ALTER TABLE `si_products` ADD `default_tax_id_2` INT( 11 ) NULL AFTER `default_tax_id` ;'),
@@ -245,56 +322,62 @@ INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_
 (187, 186, 'Set domain_id on customers table to 1', '20081230', 'ALTER TABLE  `si_custom_fields` ADD  `domain_id` INT NOT NULL ;'),
 (188, 187, 'Set domain_id on custom_feilds table to 1', '20081230', 'UPDATE `si_custom_fields` SET `domain_id` = ''1'' ;'),
 (189, 188, 'Drop tax_id column from si_invoice_items table', '20090118', 'ALTER TABLE `si_invoice_items` DROP `tax_id`  ;'),
-(190, 189, 'Drop tax column from si_invoice_items table', '20090118', 'ALTER TABLE `si_invoice_items` DROP `tax`  ;');
-
+(190, 189, 'Drop tax column from si_invoice_items table', '20090118', 'ALTER TABLE `si_invoice_items` DROP `tax`  ;'),
+(191, 190, 'Insert user role - user', '20090215', 'INSERT INTO si_user_role (name) VALUES (''user'');'),
+(192, 191, 'Insert user role - viewer', '20090215', 'INSERT INTO si_user_role (name) VALUES (''viewer'');'),
+(193, 192, 'Insert user role - customer', '20090215', 'INSERT INTO si_user_role (name) VALUES (''customer'');'),
+(194, 193, 'Insert user role - biller', '20090215', 'INSERT INTO si_user_role (name) VALUES (''biller'');'),
+(195, 194, 'User table - auto increment', '20090215', 'ALTER TABLE si_user CHANGE id id INT( 11 ) NOT NULL AUTO_INCREMENT;'),
+(196, 195, 'User table - add enabled field', '20090215', 'ALTER TABLE si_user ADD enabled INT( 1 ) NOT NULL ;'),
+(197, 196, 'User table - make all existing users enabled', '20090217', 'UPDATE si_user SET enabled = 1 ;'),
+(198, 197, 'Defaults table - add domain_id and extension_id field', '20090321', 'ALTER TABLE si_system_defaults \n              ADD `domain_id` INT( 5 ) NOT NULL DEFAULT ''0'',\n              ADD `extension_id` INT( 5 ) NOT NULL DEFAULT ''0'',\n               DROP INDEX `name`,\n                ADD INDEX `name` ( `name` );'),
+(199, 198, 'Extension table - create table to hold extension status', '20090322', 'CREATE TABLE si_extensions ( \n      `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,\n      `domain_id` INT( 11 ) NOT NULL ,\n      `name` VARCHAR( 255 ) NOT NULL ,\n      `description` VARCHAR( 255 ) NOT NULL ,\n       `enabled` VARCHAR( 1 ) NOT NULL DEFAULT ''0'');\n            INSERT INTO si_extensions (\n          `id`,`domain_id`,`name`,`description`,`enabled`) \n         VALUES (''0'',''0'',''core'',''Core part of Simple Invoices - always enabled'',''1'');\n         UPDATE si_extensions SET `id` = ''0'' WHERE `name` = ''core'' LIMIT 1;');
 
 --
 -- Dumping data for table `si_system_defaults`
 --
 
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`) VALUES
-(1, 'biller', '4'),
-(2, 'customer', '3'),
-(3, 'tax', '1'),
-(4, 'preference', '1'),
-(5, 'line_items', '5'),
-(6, 'template', 'default'),
-(7, 'payment_type', '1'),
-(8, 'language', 'en-gb'),
-(9, 'dateformat', 'Y-m-d'),
-(10, 'spreadsheet', 'xls'),
-(11, 'wordprocessor', 'doc'),
-(12, 'pdfscreensize', '800'),
-(13, 'pdfpapersize', 'A4'),
-(14, 'pdfleftmargin', '15'),
-(15, 'pdfrightmargin', '15'),
-(16, 'pdftopmargin', '15'),
-(17, 'pdfbottommargin', '15'),
-(18, 'emailhost', 'localhost'),
-(19, 'emailusername', ''),
-(20, 'emailpassword', ''),
-(21, 'logging', '0'),
-(22, 'delete', 'N'),
-(23, 'tax_per_line_item', '1');
-
-
+INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES
+(1, 'biller', '4', 0, 0),
+(2, 'customer', '3', 0, 0),
+(3, 'tax', '1', 0, 0),
+(4, 'preference', '1', 0, 0),
+(5, 'line_items', '5', 0, 0),
+(6, 'template', 'default', 0, 0),
+(7, 'payment_type', '1', 0, 0),
+(8, 'language', 'en-gb', 0, 0),
+(9, 'dateformat', 'Y-m-d', 0, 0),
+(10, 'spreadsheet', 'xls', 0, 0),
+(11, 'wordprocessor', 'doc', 0, 0),
+(12, 'pdfscreensize', '800', 0, 0),
+(13, 'pdfpapersize', 'A4', 0, 0),
+(14, 'pdfleftmargin', '15', 0, 0),
+(15, 'pdfrightmargin', '15', 0, 0),
+(16, 'pdftopmargin', '15', 0, 0),
+(17, 'pdfbottommargin', '15', 0, 0),
+(18, 'emailhost', 'localhost', 0, 0),
+(19, 'emailusername', '', 0, 0),
+(20, 'emailpassword', '', 0, 0),
+(21, 'logging', '0', 0, 0),
+(22, 'delete', 'N', 0, 0),
+(23, 'tax_per_line_item', '1', 0, 0);
 
 --
 -- Dumping data for table `si_tax`
 --
 
 INSERT INTO `si_tax` (`tax_id`, `tax_description`, `tax_percentage`, `type`, `tax_enabled`, `domain_id`) VALUES
-(1, 'GST', 10.000000, '%', '1', 1),
-(2, 'VAT', 10.000000, '%', '1', 1),
-(3, 'Sales Tax', 10.000000, '%', '1', 1),
-(4, 'No Tax', 0.000000, '%', '1', 1);
+(1, 'GST', '10.000000', '%', '1', 1),
+(2, 'VAT', '10.000000', '%', '1', 1),
+(3, 'Sales Tax', '10.000000', '%', '1', 1),
+(4, 'No Tax', '0.000000', '%', '1', 1);
 
 --
 -- Dumping data for table `si_user`
 --
 
-INSERT INTO `si_user` (`id`, `email`, `role_id`, `domain_id`, `password`) VALUES
-(1, 'demo@simpleinvoices.org', 1, 1, 'fe01ce2a7fbac8fafaed7c982a04e229');
+INSERT INTO `si_user` (`id`, `email`, `role_id`, `domain_id`, `password`, `enabled`) VALUES
+(1, 'demo@simpleinvoices.org', 1, 1, 'fe01ce2a7fbac8fafaed7c982a04e229', 1);
 
 --
 -- Dumping data for table `si_user_domain`
@@ -303,10 +386,14 @@ INSERT INTO `si_user` (`id`, `email`, `role_id`, `domain_id`, `password`) VALUES
 INSERT INTO `si_user_domain` (`id`, `name`) VALUES
 (1, 'default');
 
-
 --
 -- Dumping data for table `si_user_role`
 --
 
 INSERT INTO `si_user_role` (`id`, `name`) VALUES
-(1, 'administrator');
+(1, 'administrator'),
+(2, 'user'),
+(3, 'viewer'),
+(4, 'customer'),
+(5, 'biller');
+

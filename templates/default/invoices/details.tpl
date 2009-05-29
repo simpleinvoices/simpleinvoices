@@ -221,7 +221,7 @@
 							<input id="unit_price{$line}" name="unit_price{$line}" size="7" value="{$invoiceItem.unit_price|number_format:2}" />
 						</td>
 			        </tr>
-		            	<tr colspan="6" class="notem">
+		            	<tr colspan="6" class="note">
 								<td>
 								</td>
 								<td colspan="4">

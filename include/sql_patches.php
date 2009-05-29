@@ -1217,13 +1217,17 @@ PRIMARY KEY  (`user_id`)) ;
 		`domain_id` INT( 11 ) NOT NULL ,
 		`name` VARCHAR( 255 ) NOT NULL ,
 		`description` VARCHAR( 255 ) NOT NULL ,
-		`enabled` VARCHAR( 1 ) NOT NULL DEFAULT '0');
-    		 INSERT INTO ".TB_PREFIX."extensions (
-			`id`,`domain_id`,`name`,`description`,`enabled`) 
-			VALUES ('0','0','core','Core part of Simple Invoices - always enabled','1');
-		 UPDATE ".TB_PREFIX."extensions SET `id` = '0' WHERE `name` = 'core' LIMIT 1;";
+		`enabled` VARCHAR( 1 ) NOT NULL DEFAULT '0');";
     $patch['198']['date'] = "20090322";	
  
+    $patch['199']['name'] = "Defaults table - add domain_id and extension_id field";
+    $patch['199']['patch'] = "INSERT INTO ".TB_PREFIX."extensions (
+			`id`,`domain_id`,`name`,`description`,`enabled`) 
+			VALUES ('0','0','core','Core part of Simple Invoices - always enabled','1');";
+    $patch['199']['date'] = "20090529";
+ /*
+		     UPDATE ".TB_PREFIX."extensions SET `id` = '0' WHERE `name` = 'core' LIMIT 1;";
+*/
 /*
     $patch['199']['name'] = "Enable tab_menu extension";
     $patch['199']['patch'] = "INSERT INTO ".TB_PREFIX."extensions ('id', 'domain_id', 'name', 'description', 'enabled') VALUES (2, 1, 'tab_menu', 'tab_menu', '1');";

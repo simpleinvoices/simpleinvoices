@@ -1,13 +1,16 @@
 --------
 BETA 4
 --------
-    - Simple Invoices now works with E_STRICT error reporting
+    - Simple Invoices now works with E_STRICT error reporting (ie. the 'Manage' pages now work for E_STRICT people)
 	- sql port number added into config.ini
     - UI updates
+    - First Run wizard - work started
+    - Default landing page is Manage Invoices if there is already an invoice in the db
     - backup db - menu fix
     - customer view info tabs - redone in jquery UI
 	- Extensions can now be managed within Simple Invoices and not in the config file - thanks Marcel 
 	- System defaults table updated to include both domain_id and extension_id fields - so can have different values for a default depending on extension or domain - thanks Marcel
+
 
 --------
 BETA 3

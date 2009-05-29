@@ -67,7 +67,7 @@ if ( ($_GET['stage'] == 2 ) AND ($_POST['doDelete'] == 'y') ) {
 		$dbh->commit();
 	}
 	//TODO - what about the stuff in the products table for the total style invoices?
-	echo "<meta http-equiv="refresh" content="2;URL=index.php?module=invoices&view=manage" />";
+	echo "<meta http-equiv='refresh' content='2;URL=index.php?module=invoices&view=manage' />";
 
 }
 

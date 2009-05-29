@@ -47,7 +47,7 @@ INSERT INTO `si_invoice_item_tax` (`id`, `invoice_item_id`, `tax_id`, `tax_type`
 --
 
 INSERT INTO `si_products` (`id`, `domain_id`, `description`, `unit_price`, `default_tax_id`, `default_tax_id_2`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`) VALUES
-(1, 1, 'IBM Netfinity', 150.000000, 1, NULL, NULL, NULL, NULL, NULL, '', '1', 1),
+(1, 1, 'Hourly charge', 150.000000, 1, NULL, NULL, NULL, NULL, NULL, '', '1', 1),
 (2, 1, 'Accounting services', 140.000000, 1, NULL, 'CVF1', '', '', '', '', '1', 1),
 (3, 1, 'Ploughing service', 125.000000, 1, NULL, NULL, NULL, NULL, NULL, '', '1', 1),
 (4, 1, 'Bootleg homebrew', 15.500000, 1, NULL, NULL, NULL, NULL, NULL, '', '1', 1),

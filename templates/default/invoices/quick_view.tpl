@@ -40,7 +40,7 @@
 			<a title="{$LANG.email} {$preference.pref_inv_wording} {$invoice.id}" href="index.php?module=invoices&amp;view=email&amp;stage=1&amp;id={$invoice.id}"><img src='images/common/mail-message-new.png' class='action' />&nbsp;{$LANG.email}</a>
 			{if $defaults.delete == '1'} 
 			 &nbsp;&nbsp; 
-				<a title="{$LANG.delete} {$preference.pref_inv_wording} {$invoice.id}" href="index.php?module=invoices&amp;view=delete&amp;stage=1&amp;invoice={$invoice.id}"><img src='images/common/delete.png' class='action' />&nbsp;{$LANG.delete}</a>
+				<a title="{$LANG.delete} {$preference.pref_inv_wording} {$invoice.id}" href="index.php?module=invoices&amp;view=delete&amp;stage=1&amp;id={$invoice.id}"><img src='images/common/delete.png' class='action' />&nbsp;{$LANG.delete}</a>
 			{/if}
 	</span>
 </div>

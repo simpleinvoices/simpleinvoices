@@ -22,6 +22,14 @@ Disclaimer: if its in the list it may get done sometime in the future if and whe
 2009.1 :: Beta 5 (next release + 1)
 ##############################
 
+    #left over from 2009.1 beta 4
+	- Wording for Paymenst - if none in db and on manage payments filtered by x - work-in-progress
+	- merge docs.php into normal index.php - work-in-progress
+	- invoice edit - notes - if note empty then have closed if not empty then display for edit - work-in-progress
+    - JSON import - work-in-progress
+    - Update UI of System Preferences
+    - Delete invoices - add delete line item taxes
+
 	- change config.ini back to config.php - but keep ini format and add ;<?php on line 1 and ; exit; on line 2 - this is for sercurity reasons
 	-- maybe got to think about this and see if new installer can do it
 	-- using .htaccess to protect against reasding of .ini - done
@@ -41,21 +49,16 @@ Disclaimer: if its in the list it may get done sometime in the future if and whe
 ##############################
 2009.1 :: Beta 4 - current work in progress (next release)
 ##############################
-
-	- Wording for Paymenst - if none in db and on manage payments filtered by x
-	- merge docs.php into normal index.php 
-	- invoice edit - notes - if note empty then have closed if not empty then display for edit -JK
-    - JSON import
     
 	----
 	Known issues
 	----
 	- UI of Manage Extensions needs updating
 	- not all the extensions work
-	- welcome text (in yellow) not complete
 	- front page/dashboard not complete
 	- Total style invoice not selectable
-	
+    - Invoice edit needs work
+
 ##############################
 2009.1 :: Beta 3
 ##############################

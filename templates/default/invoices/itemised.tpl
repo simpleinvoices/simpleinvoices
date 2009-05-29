@@ -23,56 +23,85 @@
         <br />
         <br />
         <span class="welcome">
-            
-            Before you can create an invoice you need to do a couple of things.  Just click on the below buttons to setup the requirements 
+            {$LANG.before_starting}
         </span>
         <br />
         <br />
         <br />
-    
         <table class="buttons" align="center">
-        <tr>
-            <td>
     {if $billers == null}
-                <a href="./index.php?module=billers&amp;view=add" class="positive">
-                    <img src="./images/famfam/add.png" alt="" />
-                    {$LANG.add_new_biller}
-                </a>
-
+        <tr>
+                <td>
+                     Setup yourself up as a biller, click &nbsp;  
+                </td>
+                <td>
+                    <a href="./index.php?module=billers&amp;view=add" class="positive">
+                        <img src="./images/common/user_add.png" alt="" />
+                        {$LANG.add_new_biller}
+                    </a>
+                </td>
+        </tr>
     {/if}
     {if $customers == null}
-                    <a href="./index.php?module=customers&view=add" class="positive">
-                        <img src="./images/famfam/add.png" alt="" />
+            <tr>
+                <td>
+                     Add a client, click &nbsp;  
+                </td>
+                <td>
+                    <a href="./index.php?module=customers&amp;view=add" class="positive">
+                        <img src="./images/common/vcard_add.png" alt="" />
                         {$LANG.customer_add}
                     </a>
-
+                </td>
+            </tr>
     {/if}
     {if $products == null}
-                    <a href="./index.php?module=products&view=add" class="positive">
-                        <img src="./images/famfam/add.png" alt=""/>
+            <tr>
+                <td>
+                     Add some products, click &nbsp;  
+                </td>
+                <td>
+                    <a href="./index.php?module=products&amp;view=add" class="positive">
+                        <img src="./images/common/cart_add.png" alt="" />
                         {$LANG.add_new_product}
                     </a>
-
+                </td>
+            </tr>
 
     {/if}
     {if $taxes == null}
+            <tr>
+                <td>
+                     Add a tax rate, click &nbsp;  
+                </td>
+                <td>
                     <a href="index.php?module=tax_rates&view=add" class="positive">
-                        <img src="./images/common/add.png" alt="" />
+                        <img src="./images/common/money_delete.png" alt="" />
                         {$LANG.add_new_tax_rate}
                     </a>
+                </td>
+            </tr>
 
     {/if}
     {if $preferences == null}
+            <tr>
+                <td>
+                     Add an invoice preference, click &nbsp;  
+                </td>
+                <td>
+                    </a>
                     <a href="./index.php?module=preferences&amp;view=add" class="positive">
-                        <img src="./images/famfam/add.png" alt="" />
+                        <img src="./images/common/page_white_edit.png" alt="" />
                         {$LANG.add_new_preference}
                     </a>
+                </td>
+            </tr>
 
 
     {/if}
                 </td>
             </tr>
-        </table>
+            </table>
         <br />
 
 {else}
