@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 29, 2009 at 04:51 PM
+-- Generation Time: May 29, 2009 at 08:12 PM
 -- Server version: 5.0.75
 -- PHP Version: 5.2.6-3ubuntu2
 
@@ -50,7 +50,8 @@ INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `
 --
 
 INSERT INTO `si_extensions` (`id`, `domain_id`, `name`, `description`, `enabled`) VALUES
-(0, 0, 'core', 'Core part of Simple Invoices - always enabled', '1');
+(0, 0, 'core', 'Core part of Simple Invoices - always enabled', '1'),
+(2, 0, 'core', 'Core part of Simple Invoices - always enabled', '1');
 
 --
 -- Dumping data for table `si_invoices`
@@ -98,7 +99,12 @@ INSERT INTO `si_log` (`id`, `timestamp`, `userid`, `sqlquerie`, `last_id`) VALUE
 (15, '2009-05-29 16:48:57', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (:id, :name, :date, :patch)', NULL),
 (16, '2009-05-29 16:48:57', '1', 'ALTER TABLE si_system_defaults \n             ADD `domain_id` INT( 5 ) NOT NULL DEFAULT ''0'',\n              ADD `extension_id` INT( 5 ) NOT NULL DEFAULT ''0'',\n               DROP INDEX `name`,\n                ADD INDEX `name` ( `name` );', NULL),
 (17, '2009-05-29 16:48:57', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (:id, :name, :date, :patch)', NULL),
-(18, '2009-05-29 16:48:57', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (:id, :name, :date, :patch)', NULL);
+(18, '2009-05-29 16:48:57', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (:id, :name, :date, :patch)', NULL),
+(19, '2009-05-29 20:10:21', '1', 'SHOW TABLES LIKE ''si_sql_patchmanager''', NULL),
+(20, '2009-05-29 20:10:21', '1', 'INSERT INTO si_extensions (\n         `id`,`domain_id`,`name`,`description`,`enabled`) \n         VALUES (''0'',''0'',''core'',''Core part of Simple Invoices - always enabled'',''1'');', NULL),
+(21, '2009-05-29 20:10:21', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (:id, :name, :date, :patch)', NULL),
+(22, '2009-05-29 20:10:21', '1', 'UPDATE si_extensions SET `id` = ''0'' WHERE `name` = ''core'' LIMIT 1;', NULL),
+(23, '2009-05-29 20:10:21', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (:id, :name, :date, :patch)', NULL);
 
 --
 -- Dumping data for table `si_payment`
@@ -331,7 +337,9 @@ INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_
 (196, 195, 'User table - add enabled field', '20090215', 'ALTER TABLE si_user ADD enabled INT( 1 ) NOT NULL ;'),
 (197, 196, 'User table - make all existing users enabled', '20090217', 'UPDATE si_user SET enabled = 1 ;'),
 (198, 197, 'Defaults table - add domain_id and extension_id field', '20090321', 'ALTER TABLE si_system_defaults \n              ADD `domain_id` INT( 5 ) NOT NULL DEFAULT ''0'',\n              ADD `extension_id` INT( 5 ) NOT NULL DEFAULT ''0'',\n               DROP INDEX `name`,\n                ADD INDEX `name` ( `name` );'),
-(199, 198, 'Extension table - create table to hold extension status', '20090322', 'CREATE TABLE si_extensions ( \n      `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,\n      `domain_id` INT( 11 ) NOT NULL ,\n      `name` VARCHAR( 255 ) NOT NULL ,\n      `description` VARCHAR( 255 ) NOT NULL ,\n       `enabled` VARCHAR( 1 ) NOT NULL DEFAULT ''0'');\n            INSERT INTO si_extensions (\n          `id`,`domain_id`,`name`,`description`,`enabled`) \n         VALUES (''0'',''0'',''core'',''Core part of Simple Invoices - always enabled'',''1'');\n         UPDATE si_extensions SET `id` = ''0'' WHERE `name` = ''core'' LIMIT 1;');
+(199, 198, 'Extension table - create table to hold extension status', '20090322', 'CREATE TABLE si_extensions ( \n      `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,\n      `domain_id` INT( 11 ) NOT NULL ,\n      `name` VARCHAR( 255 ) NOT NULL ,\n      `description` VARCHAR( 255 ) NOT NULL ,\n       `enabled` VARCHAR( 1 ) NOT NULL DEFAULT ''0'');\n            INSERT INTO si_extensions (\n          `id`,`domain_id`,`name`,`description`,`enabled`) \n         VALUES (''0'',''0'',''core'',''Core part of Simple Invoices - always enabled'',''1'');\n         UPDATE si_extensions SET `id` = ''0'' WHERE `name` = ''core'' LIMIT 1;'),
+(200, 199, 'Update extensions table', '20090529', 'INSERT INTO si_extensions (\n            `id`,`domain_id`,`name`,`description`,`enabled`) \n         VALUES (''0'',''0'',''core'',''Core part of Simple Invoices - always enabled'',''1'');'),
+(201, 200, 'Update extensions table', '20090529', 'UPDATE si_extensions SET `id` = ''0'' WHERE `name` = ''core'' LIMIT 1;');
 
 --
 -- Dumping data for table `si_system_defaults`

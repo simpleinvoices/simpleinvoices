@@ -1220,13 +1220,16 @@ PRIMARY KEY  (`user_id`)) ;
 		`enabled` VARCHAR( 1 ) NOT NULL DEFAULT '0');";
     $patch['198']['date'] = "20090322";	
  
-    $patch['199']['name'] = "Defaults table - add domain_id and extension_id field";
+    $patch['199']['name'] = "Update extensions table";
     $patch['199']['patch'] = "INSERT INTO ".TB_PREFIX."extensions (
 			`id`,`domain_id`,`name`,`description`,`enabled`) 
 			VALUES ('0','0','core','Core part of Simple Invoices - always enabled','1');";
     $patch['199']['date'] = "20090529";
+
+    $patch['200']['name'] = "Update extensions table";
+    $patch['200']['patch'] = "UPDATE ".TB_PREFIX."extensions SET `id` = '0' WHERE `name` = 'core' LIMIT 1;";
+    $patch['200']['date'] = "20090529";
  /*
-		     UPDATE ".TB_PREFIX."extensions SET `id` = '0' WHERE `name` = 'core' LIMIT 1;";
 */
 /*
     $patch['199']['name'] = "Enable tab_menu extension";
