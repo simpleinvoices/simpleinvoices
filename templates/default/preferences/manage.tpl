@@ -41,4 +41,4 @@
 
 {/if}
 <br />
-<div style="text-align:center;"><a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=inv_pref_what_the" title="{$LANG.whats_all_this_inv_pref}"><img src="./images/common/help-small.png" alt="" /> {$LANG.whats_all_this_inv_pref} </a></div>
+<div style="text-align:center;"><a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_what_the" title="{$LANG.whats_all_this_inv_pref}"><img src="./images/common/help-small.png" alt="" /> {$LANG.whats_all_this_inv_pref} </a></div>
