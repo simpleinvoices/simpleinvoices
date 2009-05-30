@@ -13,7 +13,7 @@
 {if $smarty.post.email != null && $smarty.post.submit != null } 
 	{include file="../templates/default/user/save.tpl"}
 {else}
-<form name="frmpost" action="index.php?module=user&view=add" method="post" id="frmpost">
+<form name="frmpost" action="index.php?module=user&amp;view=add" method="post" id="frmpost">
 <br />
 <table align="center">
 	<tr>
@@ -21,7 +21,7 @@
 		<a 
 				class="cluetip"
 				href="#"
-				rel="docs.php?t=help&p=required_field"
+				rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field"
 				title="{$LANG.Required_Field}"
 		>
 		<img src="./images/common/required-small.png" alt="" />
@@ -34,7 +34,7 @@
 			<a
 				class="cluetip"
 				href="#"
-				rel="docs.php?t=help&p=user_role"
+				rel="index.php?module=documentation&amp;view=view&amp;page=help_user_role"
 				title="{$LANG.role}"
 			> 
 			<img src="./images/common/help-small.png" alt="" />
