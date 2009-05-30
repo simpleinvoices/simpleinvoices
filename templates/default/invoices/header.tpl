@@ -20,7 +20,7 @@
 
                <tr>
                       <td class="details_screen">
-                               {$LANG.biller_name}
+                               {$LANG.biller}
                        </td>
                        <td>
                            {if $billers == null }
@@ -36,7 +36,7 @@
                 </tr>
                 <tr>
                     <td class="details_screen">
-                        {$LANG.customer_name}
+                        {$LANG.customer}
                     </td>
                     <td>
                         {if $customers == null }

@@ -23,18 +23,15 @@ Simple Invoices todo list
 ##############################
 
     #left over from 2009.1 beta 4
-	- merge docs.php into normal index.php - work-in-progress
+	- merge docs.php into normal index.php - work-in-progress - Peter
 	- invoice edit - notes - if note empty then have closed if not empty then display for edit - work-in-progress
     - JSON import - work-in-progress
     - Update UI of System Preferences
+    - Update UI of Manage Extensions
     - Delete invoices - add delete line item taxes
 
-	- change config.ini back to config.php - but keep ini format and add ;<?php on line 1 and ; exit; on line 2 - this is for sercurity reasons
-	-- maybe got to think about this and see if new installer can do it
-	-- using .htaccess to protect against reasding of .ini - done
 	- make search in Manage pages work good for all pages
-	- fix UI for Manage Extensions 
-	- add outstanding invoices in home page - and fix home page
+	- redo home page - Recent Activity and Quick Stats
 	
 	- mini installer
 	-- add checks for php.ini settings, writeable folders etc.. and make pretty
@@ -44,3 +41,7 @@ Simple Invoices todo list
 	-- just the basics - do rest later
 
 	- validation - check/remove the validation on products
+
+	- change config.ini back to config.php - but keep ini format and add ;<?php on line 1 and ; exit; on line 2 - this is for sercurity reasons
+	-- maybe got to think about this and see if new installer can do it
+	-- using .htaccess to protect against reasding of .ini - done
