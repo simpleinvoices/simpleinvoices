@@ -14,7 +14,7 @@
 		<a 
 				class="cluetip"
 				href="#"
-				rel="docs.php?t=help&p=tax_rate_sign"
+				rel="index.php?module=documentation&amp;view=view&amp;page=help_tax_rate_sign"
 				title="{$LANG.tax_rate}"
 		>
 		<img src="./images/common/help-small.png" />
@@ -61,7 +61,7 @@
 		<a 
 			class="cluetip"
 			href="#"
-			rel="docs.php?t=help&p=tax_rate_sign"
+			rel="index.php?module=documentation&amp;view=view&amp;page=help_tax_rate_sign"
 			title="{$LANG.tax_rate}"
 		>
 			<img src="./images/common/help-small.png" />

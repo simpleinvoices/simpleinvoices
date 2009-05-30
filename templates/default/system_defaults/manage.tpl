@@ -24,13 +24,13 @@
 	<tr>
 		<td class="details_screen">
 		<a href='index.php?module=system_defaults&amp;view=edit&amp;submit=delete'><img src="images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td><td class="details_screen">{$LANG.delete}
-		<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=delete" title="{$LANG.delete}"><img src="./images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_delete" title="{$LANG.delete}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>{$defaultDelete|escape:html}</td>
 	</tr>
 	<tr>
 		<td class="details_screen"><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=logging'><img src="images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td><td class="details_screen">{$LANG.logging} 
-		<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=logging" title="{$LANG.logging}"><img src="./images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_logging" title="{$LANG.logging}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>{$defaultLogging|escape:html}</td>
 	</tr>

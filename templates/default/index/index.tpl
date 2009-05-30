@@ -1,6 +1,6 @@
 {if $mysql < 5 && $db_server == 'mysql'}
 
-		NOTE <a href='docs.php?t=help&amp;p=mysql4' rel='gb_page_center[450, 450]' ><img src='./images/common/help-small.png' alt="" /></a> : As you are using Mysql 4 some features have been disabled<br />
+		NOTE <a href='index.php?module=documentation&amp;view=view&amp;page=help_mysql4' rel='gb_page_center[450, 450]' ><img src='./images/common/help-small.png' alt="" /></a> : As you are using Mysql 4 some features have been disabled<br />
 {/if}
 
 <!-- Welcome message - start -->

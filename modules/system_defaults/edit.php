@@ -70,7 +70,7 @@ EOD;
 
 
 	$description = <<<EOD
-	{$LANG['default_inv_template']} <a href='docs.php?t=help&amp;p=default_invoice_template_text' rel='gb_page_center[450, 450]'><img src="images/common/help-small.png" alt="({$LANG['help']})" alt="" /></a>
+	{$LANG['default_inv_template']} <a href='index.php?module=documentation&amp;view=view&amp;page=help_default_invoice_template_text' rel='gb_page_center[450, 450]'><img src="images/common/help-small.png" alt="({$LANG['help']})" alt="" /></a>
 EOD;
 	
 	$value = $display_block_templates_list;

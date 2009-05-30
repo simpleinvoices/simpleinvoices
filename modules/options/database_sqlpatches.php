@@ -126,7 +126,7 @@ function listPatches() {
 			<tr align="center"><td><p class='align_center'><br /><a href='index.php?case=run'>UPDATE</a></p></td></tr>
 		</table>
 		<br />
-		<a href="docs.php?t=help&amp;p=text" rel="gb_page_center[450, 450]">
+		<a href="index.php?module=documentation&amp;view=view&amp;page=help_text" rel="gb_page_center[450, 450]">
 		<img src="./images/common/important.png" alt="" /><font color="red">Warning:</font>
 		</a>
 

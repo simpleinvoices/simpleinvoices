@@ -27,7 +27,7 @@ if ($_GET['op'] == "backup_db") {
 	<tr><td><br /><br />Your database has now been backed up to the file tmp/database_backups/simple_invoices_backup_$today.sql, you can now continue using Simple Invoices as normal</td></tr>
 	<tr><td><br />
 
-			<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=backup_database_fwrite" title="$LANG[fwrite_error]"><img src="./images/common/help-small.png" alt="" />$LANG[fwrite_error]</a>
+			<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_backup_database_fwrite" title="$LANG[fwrite_error]"><img src="./images/common/help-small.png" alt="" />$LANG[fwrite_error]</a>
 
 
 </td></tr></table>
@@ -47,7 +47,7 @@ $display_block = <<<EOD
 <tr><td>Note: this will backup your database to a file into your database_backups directory</td></tr>
 <tr>
 <td>
-<a class="cluetip" href="#"	rel="docs.php?t=help&p=backup_database" title="Database Backup"><img src="./images/common/important.png" alt="" /> <font color="red"> Extra information</font></a>
+<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_backup_database" title="Database Backup"><img src="./images/common/important.png" alt="" /> <font color="red"> Extra information</font></a>
 </td>
 </tr></table>
 
