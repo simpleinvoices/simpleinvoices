@@ -1,4 +1,9 @@
 --------
+BETA 5
+--------
+	- Payments page updated
+
+--------
 BETA 4
 --------
     - Simple Invoices now works with E_STRICT error reporting (ie. the 'Manage' pages now work for E_STRICT people)

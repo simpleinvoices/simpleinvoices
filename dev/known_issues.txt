@@ -1,0 +1,35 @@
+*************
+Simple Invoices known issues with released versions
+Disclaimer: if its in the list it may get done sometime in the future if and when someone feels like it
+*************
+##############################
+2009.1 :: Beta 4 - current work in progress (next release)
+##############################
+    
+	----
+	Known issues
+	----
+	- UI of Manage Extensions needs updating
+	- not all the extensions work
+	- front page/dashboard not complete
+	- Total style invoice not selectable
+    - Invoice edit needs work
+
+##############################
+2009.1 :: Beta 3
+##############################
+	
+	----
+	Known issues
+	----
+	- customer view info tabs - not happy - need to be redone in jquery UI
+	- can't close yellow text
+	- backup db - once db backed up - menu goes wierd 
+	- IE - menu not all nice
+	- no data validation on form input
+	- postgres version not complete 
+	- no manage users 
+	- total style invoice not selectable
+	- Help link - top right - not working
+	- Reports - not localised - ie. in 6 decimal places
+	- PHP.ini max memory needs to be min 64M to handle new PDF

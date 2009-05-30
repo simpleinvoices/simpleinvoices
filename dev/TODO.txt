@@ -1,9 +1,8 @@
 *************
 Simple Invoices todo list
-Disclaimer: if its in the list it may get done sometime in the future if and when someone feels like it
 *************
 ##############################
-2009.1 :: Final (next release + 2) - Next major release
+2009.1 :: Final (next release + 1) - Next major release
 ##############################
 
 	#really shoud
@@ -19,11 +18,11 @@ Disclaimer: if its in the list it may get done sometime in the future if and whe
 	- database backup - export as XML - Hannes
 	
 ##############################
-2009.1 :: Beta 5 (next release + 1)
+2009.1 :: Beta 5 
+- current work in progress (next release)
 ##############################
 
     #left over from 2009.1 beta 4
-	- Wording for Paymenst - if none in db and on manage payments filtered by x - work-in-progress
 	- merge docs.php into normal index.php - work-in-progress
 	- invoice edit - notes - if note empty then have closed if not empty then display for edit - work-in-progress
     - JSON import - work-in-progress
@@ -45,140 +44,3 @@ Disclaimer: if its in the list it may get done sometime in the future if and whe
 	-- just the basics - do rest later
 
 	- validation - check/remove the validation on products
-	
-##############################
-2009.1 :: Beta 4 - current work in progress (next release)
-##############################
-    
-	----
-	Known issues
-	----
-	- UI of Manage Extensions needs updating
-	- not all the extensions work
-	- front page/dashboard not complete
-	- Total style invoice not selectable
-    - Invoice edit needs work
-
-##############################
-2009.1 :: Beta 3
-##############################
-	
-	Known issues
-	- customer view info tabs - not happy - need to be redone in jquery UI
-	- can't close yellow text
-	- backup db - once db backed up - menu goes wierd 
-	- IE - menu not all nice
-	- no data validation on form input
-	- postgres version not complete 
-	- no manage users 
-	- total style invoice not selectable
-	- Help link - top right - not working
-	- Reports - not localised - ie. in 6 decimal places
-	- PHP.ini max memory needs to be min 64M to handle new PDF
-
-
-##############################
-Sometime soon
-##############################
-### maybe some work(or thoughts/planning) has been done but needs to be complete ###
- - Email - if fail to send add error messages etc..
- - Customer Login
- - User admin 
- - Biller login
- - Customer payments - accept via Paypal etc..
- - Product Cost field - http://simpleinvoices.org/forum/discussion/687/product-cost-price-field 
- - Simple Invoices Errors - make a function and make look all pretty (ie cache read only, no PDO, no PHP5.2, can't connect to Db etc..) - AP
- - Address fields in invoice templates - include comma after add 1 or 2 if other address field not null
- - users/groups/domains - make this happen!
- - user admin ui
- - preferences: move rest into db
- - submit : update all refer to submit to better - only some done - all needs to be done and work
- - delete : if delete is enabled allow delete for ALL items - products, billers, etc.. all with their relevant rules ie. if product has been included in an invoice then CAN'T delete etc..
- - move the stuff in index and home in the LANG files
- - email :
- -- email : html and no html option - maybe??
- -- email: add default signature - maybe - set in biller details ??
- -- email: and add validation
- - customer view - add edit/export etc, back in
- -- old ones
- - replce checkLogin with CheckBrowse - check login name assumes something to do with login when its not - not urgent
- - validation:
- -- Add validation to the edit screen - moved to next release - just validate on add for now
- -- make a proper validation function/class
- -- Product Add - add validation on price
- - apply aplysia new drop down list code to others (refer system default: biller)
- - index.php review input if is safe enought
- - Quick view - Note section: show the first 25 characters then follow with ... in the Hide View and full note in Show View
-
-### Below here are mainly ideas we should look at but nothing(or little) has been done ###
-
-############################################
-SOMETIME IN THE NOT TOO DISTANT FUTURE TODOs
-############################################
-
- - blow up phpreports and implement our own reporting tools
- - reports : add export to .xls format 
- - docs.php: merge docs.php into the normal system
- - choose automatic language (need to rename language files/subfolder). We should use this standards (first we can start with only 2 chars variant)
- -- http://www.rfc-editor.org/rfc/rfc4646.txt
- -- http://www.iana.org/assignments/language-subtag-registry
- --- sounds good - aim for NR+1
- ---- use in the installer and i'll think about it for the login page when/if i add a lang drop down box there
- - Localise - look into Zend Locale or similar to handle localising all the formatting of dates, currency etc.
-
-##############################
-SOMETIME IN THE FUTURE TODOs
-##############################
-
-- Reports
--- Date based reports : http://simpleinvoices.org/forum/topic-391.html ( payments received today, invoices made today etc..) - AP
--- Customer : Statement of Accounts : http://simpleinvoices.org/forum/topic-414.html - AP
-- Cache - investigate more cache option - apc, memcache, pdo cache option - cache as much as possible - AP
-- add due date for sending bills via e-mail (cron-script)
-- in pop-down menus the preselected entry is always twice. change it with the selected option
- -- i couldnt do this nicely :) if you could would be great
-- use utf-8 for e-mail sending - check this - AP
-- thinking about user/groups. Extendebal system and connection with other database should be possible -> All throught 1 interface
-- backup to a web directory is not really a good idea. Perhaps the download solution is a better one:
-  -- just mod the existing backup script to dump to screen or download file - same as how phpmyadmin dumps to screeen - in a text box
-  -- mod headers as in your example
-
-		<?php
-		include('config.php');
-
-		$conn = mysql_connect( $host, $user, $password );
-		mysql_select_db( $database, $conn );
-		$name = date("ymd")."_tillbackup.sql";
-		$backupFile = "/tmp/{$name}";
-
-		system("/sw/bin/mysqldump --user=$user --pass=$password $database > $backupFile");
-
-		header("Content-disposition: attachment; filename=$name");
-		header("Content-type: unknown/unknown");
-
-		include($backupFile);
-
-		unlink($backupFile);
-		?>
-
-- Admin-Funtion: Cache Cleanup
-- What happens if a page is longer then 1 page for printing? (header,footer?)
-- Make custom_fields dynamic with the following tables
-	customFieldsCategorie
-	id,name (product,customer,biller,...)
-	
-	customFields
-	id,categorieId,itemId,value
-
-	customFieldsValues
-	id,cateogireId,customFieldId,itemId,value
-
-	customFieldType (can be added as plugin or so...)
-	id, name, 
-
-- Store Menu in the database...
-
-
-- defining for every module an id?
-- customFieldPlugin Id's have to be unique. 0 - 100 for shipping plugins. Other numbers can be choosen with attention (public list?)
-
