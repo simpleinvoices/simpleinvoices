@@ -25,7 +25,7 @@
 <tr>
 	<td class="details_screen">{$LANG.amount}</td>
 	<td colspan="5"><input type="text" name="ac_amount" size="25" value="{$invoice.owing|escape:html}" />
-	<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=process_payment_auto_amount" title="{$LANG.process_payment_auto_amount}"><img src="./images/common/help-small.png" alt="" /></a>
+	<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_auto_amount" title="{$LANG.process_payment_auto_amount}"><img src="./images/common/help-small.png" alt="" /></a>
 	</td>
 </tr>
 <tr>
@@ -40,13 +40,13 @@
 	
 <tr>
 	<td class="details_screen">{$LANG.invoice_id}
-	<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=process_payment_inv_id" title="{$LANG.process_payment_inv_id}"><img src="./images/common/help-small.png" alt="" /></a>
+	<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_inv_id" title="{$LANG.process_payment_inv_id}"><img src="./images/common/help-small.png" alt="" /></a>
 	</td>
 	<td><input type="text" id="ac_me" name="ac_inv_id" /></td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.details}
-	<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=process_payment_details" title="{$LANG.process_payment_details}"><img src="./images/common/help-small.png" alt="" /></a>
+	<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_details" title="{$LANG.process_payment_details}"><img src="./images/common/help-small.png" alt="" /></a>
 	</td>
 	<td id="js_total"><i>{$LANG.select_invoice}</i> </td>
 </tr>

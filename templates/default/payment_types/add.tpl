@@ -24,7 +24,7 @@
 			<a 
 				class="cluetip"
 				href="#"
-				rel="docs.php?t=help&amp;p=required_field"
+				rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field"
 				title="{$LANG.Required_Field}"
 			>
 		<img src="./images/common/required-small.png" alt="" /></a>			

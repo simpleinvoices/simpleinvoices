@@ -467,7 +467,7 @@
 		<td class="account"><u>{$preference.pref_currency_sign}{$invoice.owing|number_format:2}</u></td>
 		<td class="account">{$LANG.age}:</td>
 		<td class="account" nowrap>{$invoice_age} 
-		<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=age" title="{$LANG.age}"><img src="./images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_age" title="{$LANG.age}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td></td>
 		<td class="columnleft"></td>
