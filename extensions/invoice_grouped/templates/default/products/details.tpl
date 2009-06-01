@@ -20,28 +20,28 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf1} 
-		<a class="cluetip" href="#" rel="docs.php?t=help&amp;p=custom_fields" title="{$LANG.custom_fields}">
+		<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
 		<img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>{$product.custom_field1}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf2} 
-		<a class="cluetip" href="#" rel="docs.php?t=help&amp;p=custom_fields" title="{$LANG.custom_fields}">
+		<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
 		<img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>{$product.custom_field2}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf3} 
-		<a class="cluetip" href="#" rel="docs.php?t=help&amp;p=custom_fields" title="{$LANG.custom_fields}">
+		<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
 		<img src="./images/common/help-small.png" alt=""></a>
 		</td>
 		<td>{$product.custom_field3}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf4} 
-		<a class="cluetip" href="#" rel="docs.php?t=help&amp;p=custom_fields" title="{$LANG.custom_fields}">
+		<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
 		<img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>{$product.custom_field4}</td>
@@ -97,7 +97,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf1} 
-		<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=custom_fields" title="{$LANG.custom_fields}">
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
 		<img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>
@@ -111,21 +111,21 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf2} 
-		<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=custom_fields" title="{$LANG.custom_fields}">
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
 		<img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" name="custom_field2" size="50" value="{$product.custom_field2}" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf3} 
-		<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=custom_fields" title="{$LANG.custom_fields}">
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
 		<img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" name="custom_field3" size="50" value="{$product.custom_field3}" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf4} 
-		<a class="cluetip" href="#"	rel="docs.php?t=help&amp;p=custom_fields" title="{$LANG.custom_fields}">
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
 		<img src="./images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" name="custom_field4" size="50" value="{$product.custom_field4}" /></td>
