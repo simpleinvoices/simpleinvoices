@@ -17,7 +17,7 @@
 
 <table align="center">
 	<tr>
-		<td class="details_screen">{$LANG.product_description} <a href="docs.php?t=help&p=required_field" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png" alt="" /></a></td>
+		<td class="details_screen">{$LANG.product_description} <a href="index.php?module=documentation&amp;view=view&amp;page=help_required_field" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png" alt="" /></a></td>
 		<td><input type="text" name="description" value="{$smarty.post.description}" size="50" /></td>
 	</tr>
 	<tr>
