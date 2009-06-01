@@ -41,6 +41,7 @@ Simple Invoices todo list
 	-- just the basics - do rest later
 
 	- validation - check/remove the validation on products
+    -- http://www.position-relative.net/creation/formValidator/
 
 	- change config.ini back to config.php - but keep ini format and add ;<?php on line 1 and ; exit; on line 2 - this is for sercurity reasons
 	-- maybe got to think about this and see if new installer can do it
