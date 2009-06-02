@@ -51,8 +51,9 @@
 	<table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.description} <a href="index.php?module=documentation&amp;view=view&amp;page=help_required_field" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png" alt="(required)" /></a></td>
-		<td><input type="text" name="pt_description" value="{$paymentType.pt_description|escape:html|regex_replace:"/[\\\]/":""}"
-		 size="30" /></td>
+		<td>
+			<input type="text"  class="validate[required]"  name="pt_description" value="{$paymentType.pt_description|escape:html|regex_replace:"/[\\\]/":""}" size="30" />
+		</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled} </td>

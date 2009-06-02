@@ -120,10 +120,19 @@
 	<table align="center">
 		<tr>
 			<td class="details_screen">Description 
+				<a 
+					class="cluetip"
+					href="#"
+					rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field"
+					title="{$LANG.Required_Field}"
+				>
+					<img src="./images/common/required-small.png" alt="" />
+				</a>	
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_description" title="{$LANG.description}">
-				<img src="./images/common/help-small.png" alt="" /></a>
+					<img src="./images/common/help-small.png" alt="" />
+				</a>
 			</td>
-			<td><input type="text" name='pref_description' value="{$preference.pref_description|regex_replace:"/[\\\]/":""}" size="50" /></td>
+			<td><input type="text" class="validate[required]" name='pref_description' value="{$preference.pref_description|regex_replace:"/[\\\]/":""}" size="50" /></td>
 		</tr>
 		<tr>
 			<td class="details_screen">Currency sign 
