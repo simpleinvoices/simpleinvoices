@@ -23,6 +23,9 @@ Simple Invoices todo list
 ##############################
 
     #left over from 2009.1 beta 4
+	- SQL patches - review and make work 100% perfect - Justin
+	-- add Manage SQL patches back in
+	-- add rerun SQL patch button
 	- merge docs.php into normal index.php - work-in-progress - Peter
 	- invoice edit - notes - if note empty then have closed if not empty then display for edit - work-in-progress
     - JSON import - work-in-progress
