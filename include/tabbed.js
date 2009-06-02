@@ -1,3 +1,7 @@
+/*
+* OLD file re extjs - ignore
+*/
+
 // TODO integrate the new layout with the template
 Ext.onReady(function(){
 	    
