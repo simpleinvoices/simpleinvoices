@@ -185,7 +185,7 @@
 		<img src="./images/common/required-small.png" alt="" />
 		</a>
 		</td>
-		<td><input type="text" name="name" value="{$biller.name|regex_replace:"/[\\\]/":""}" size="50" id="name" class="required" onblur="checkField(this);" /></td>
+		<td><input type="text" name="name"  value="{$biller.name|regex_replace:"/[\\\]/":""}" size="50" id="name" class="validate[required]" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street}</td>

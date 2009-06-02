@@ -24,7 +24,7 @@
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.description}</td>
-		<td><input type="text" name="tax_description" value="{$smarty.post.tax_description|escape:html}" size="35" /></td>
+		<td><input type="text"  class="validate[required]" name="tax_description" value="{$smarty.post.tax_description|escape:html}" size="35" /></td>
 		<td></td>
 	</tr>
 	<tr>

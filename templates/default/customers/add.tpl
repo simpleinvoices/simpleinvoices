@@ -37,7 +37,7 @@
 		<img src="./images/common/required-small.png" alt="" />
 		</a>
 		</td>
-		<td><input type="text" name="name" id="name" value="{$smarty.post.name}" size="25"  class="required" /></td>
+		<td><input type="text" name="name" id="name" value="{$smarty.post.name}" size="25" class="validate[required]" /></td>
 	</tr>
 	</tr>
 		<td class="details_screen">{$LANG.customer_contact}

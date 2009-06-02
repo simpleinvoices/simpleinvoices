@@ -74,7 +74,7 @@
 	<table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.product_description}</td>
-		<td><input type="text" name="description" size="50" value="{$product.description}" id="description" class="required" onblur="checkField(this);" /></td>
+		<td><input type="text" name="description" size="50" value="{$product.description}" id="description"  class="validate[required]" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product_unit_price}</td>

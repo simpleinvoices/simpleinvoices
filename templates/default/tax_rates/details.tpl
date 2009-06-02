@@ -54,7 +54,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.description}</td>
-		<td><input type="text" name="tax_description" value="{$tax.tax_description|escape:html}" size="25" /></td>
+		<td><input type="text" name="tax_description" value="{$tax.tax_description|escape:html}"  class="validate[required]" size="25" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.rate}
