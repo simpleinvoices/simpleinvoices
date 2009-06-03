@@ -53,7 +53,7 @@
                 <tr wrap="nowrap">
                         <td class="details_screen">{$LANG.date_formatted}</td>
                         <td wrap="nowrap">
-                            <input type="text" class="date-picker" size="10" name="date" id="date1" value='{$smarty.now|date_format:"%Y-%m-%d"}' />   
+                            <input type="text" class="date-picker validate[required,custom[date],length[0,10]]" size="10" name="date" id="date1" value='{$smarty.now|date_format:"%Y-%m-%d"}' />   
                         </td>
                 </tr>
        </table>

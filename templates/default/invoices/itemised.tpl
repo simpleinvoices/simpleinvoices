@@ -160,7 +160,7 @@
 							{/if}
 						</td>
 						<td>
-							<input type="text" name="quantity{$smarty.section.line.index}" id="quantity{$smarty.section.line.index}" size="5" /></td>
+							<input type="text" {if $smarty.section.line.index == "0"} class="validate[required]" {/if} name="quantity{$smarty.section.line.index}" id="quantity{$smarty.section.line.index}" size="5" /></td>
 						<td>
 										
 					{if $products == null }
@@ -171,8 +171,8 @@
 							id="products{$smarty.section.line.index}"
 							name="products{$smarty.section.line.index}"
 							rel="{$smarty.section.line.index}"
-							class="product_change"
-												>
+							class="product_change {if $smarty.section.line.index == "0"}validate[required]{/if}"						
+                        >
 							<option value=""></option>
 						{foreach from=$products item=product}
 							<option {if $product.id == $defaults.product} selected {/if} value="{$product.id}">{$product.description}</option>
@@ -199,6 +199,7 @@
 								name="unit_price{$smarty.section.line.index}" 
 								size="7"
 								value=""
+                                {if $smarty.section.line.index == "0"} class="validate[required]" {/if}
 							/>
 						</td>	
 					</tr>

@@ -159,6 +159,7 @@
 		$("#quantity"+rowID_old, clonedRow).attr("id", "quantity"+rowID_new);
 		$("#quantity"+rowID_new, clonedRow).attr("name", "quantity"+rowID_new);
 		clonedRow.find("#quantity"+rowID_new).removeAttr("value");
+		clonedRow.find("#quantity"+rowID_new).removeClass("validate[required]");
 	
 		//clonedRow.find("#products"+rowID_old).removeAttr("onchange");
 		clonedRow.find("#products"+rowID_old).attr("rel", rowID_new);
@@ -170,6 +171,7 @@
 		$("#unit_price"+rowID_old, clonedRow).attr("id", "unit_price"+rowID_new);
 		$("#unit_price"+rowID_new, clonedRow).attr("name", "unit_price"+rowID_new);
 		$("#unit_price"+rowID_new, clonedRow).val("");
+		$("#unit_price"+rowID_new, clonedRow).removeClass("validate[required]");
 	
 		$("#description"+rowID_old, clonedRow).attr("id", "description"+rowID_new);
 		$("#description"+rowID_new, clonedRow).attr("name", "description"+rowID_new);

@@ -37,6 +37,9 @@ jQuery.fn.validationEngine = function(settings) {
                         "confirm":{
                             "regex":"none",
                             "alertText":"* Your field is not matching"},        
+                        "date":{
+                            "regex":"/^[0-9]{4}\-\[0-9]{1,2}\-\[0-9]{1,2}$/",
+                            "alertText":"* Invalid date, must be in YYYY-MM-DD format"},  
                         "telephone":{
                             "regex":"/^[0-9\-\(\)]+$/",
                             "alertText":"* Invalid phone number"},  
