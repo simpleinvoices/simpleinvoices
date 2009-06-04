@@ -50,8 +50,7 @@ INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `
 --
 
 INSERT INTO `si_extensions` (`id`, `domain_id`, `name`, `description`, `enabled`) VALUES
-(0, 0, 'core', 'Core part of Simple Invoices - always enabled', '1'),
-(2, 0, 'core', 'Core part of Simple Invoices - always enabled', '1');
+(0, 0, 'core', 'Core part of Simple Invoices - always enabled', '1');
 
 --
 -- Dumping data for table `si_invoices`
