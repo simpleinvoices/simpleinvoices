@@ -171,7 +171,7 @@
 							id="products{$smarty.section.line.index}"
 							name="products{$smarty.section.line.index}"
 							rel="{$smarty.section.line.index}"
-							class="product_change {if $smarty.section.line.index == "0"}validate[required]{/if}"						
+							class="{if $smarty.section.line.index == "0"}validate[required]{/if} product_change"						
                         >
 							<option value=""></option>
 						{foreach from=$products item=product}
