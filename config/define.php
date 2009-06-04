@@ -25,7 +25,7 @@ any config.php setting in this extra file(which wont be kept in svn) will overwr
 - this way everyone can have there own conf setting without messing with anyones setting
 RELEASE TODO: make sure $environment is set back to live
 */
-$environment = "production"; //test,staging,dev,live etc..
+$environment = "dev"; //test,staging,dev,live etc..
 
 if($environment != "production")
 {

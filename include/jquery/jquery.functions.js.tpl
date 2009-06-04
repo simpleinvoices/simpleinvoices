@@ -165,6 +165,7 @@
 		clonedRow.find("#products"+rowID_old).attr("rel", rowID_new);
 		clonedRow.find("#products"+rowID_old).attr("id", "products"+rowID_new);
 		clonedRow.find("#products"+rowID_new).attr("name", "products"+rowID_new);
+		clonedRow.find("#products"+rowID_new).removeClass("validate[required]");
 
 		//clonedRow.find("#products"+rowID_new).attr("onChange", "invoice_product_change_price($(this).val(), "+rowID_new+", jQuery('#quantity"+rowID_new+"').val() )");
 	
