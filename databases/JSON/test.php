@@ -1,5 +1,5 @@
 <?php
-
+/*
 $myFile = "EssentialData.json";
 $json = file_get_contents($myFile, true);
 
@@ -38,24 +38,26 @@ foreach ($a as $k => $v)
 	echo "<br>";    
 	
 }
+*/
 
-$import = new import();
-$import->file = "./database/JSON/EssentialData.json";
-$import->import();
 
 class import {
 
-	pubic function getFile()
+	public $file;
+	
+	public function getFile()
 	{
-		$json = file_get_contents($this->file, true);	
+		$json = file_get_contents($this->file, true);
+		return $json;
 	}
 	
-	function decode()
+	public function decode($json)
 	{
 		$a = json_decode($json,true);	
+		return $a;
 	}
 
-	function process()
+	public function process($a)
 	{
 		
 		foreach ($a as $k => $v) 
@@ -94,15 +96,22 @@ class import {
 	}
 	
 	
-	function import()
+	public function import()
 	{
-		getFile();
-		decode();
-		process();
+		$json = $this->getFile();
+		$decode = $this->decode( $this->getFile() );
+		$this->process($decode);
 	}
 	
 	
 }
+
+
+
+
+$import = new import();
+$import->file = "EssentialData.json";
+$import->import();
 
 
 ?>
