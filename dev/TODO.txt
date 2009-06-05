@@ -22,6 +22,9 @@ Simple Invoices todo list
 - current work in progress (next release)
 ##############################
 
+	- Database log - review
+	- test invoice edit/create more - from new and upgraded db
+	
     #left over from 2009.1 beta 4
 	- SQL patches - review and make work 100% perfect - Justin
 	-- add Manage SQL patches back in
