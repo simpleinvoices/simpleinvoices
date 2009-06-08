@@ -139,7 +139,13 @@
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{$LANG.currency_sign}">
 				<img src="./images/common/help-small.png" alt="" /> </a>
 			</td>
-			<td><input type="text" name='pref_currency_sign' value="{$preference.pref_currency_sign}" size="50" /></td>
+			<td>
+                <input type="text" name='pref_currency_sign' value="{$preference.pref_currency_sign}" size="15" />
+                <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{$LANG.currency_sign}">
+                   {$LANG.currency_sign_non_dollar}
+                    <img src="./images/common/help-small.png" alt="" /> 
+                </a>
+            </td>
 		</tr>
 		<tr>
 			<td class="details_screen">Invoice heading 
