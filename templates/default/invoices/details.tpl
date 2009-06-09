@@ -112,6 +112,24 @@
 			</td>
 			
 		</tr>
+        <tr>
+			<td class="details_screen">{$LANG.tax}</td>
+						{section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
+							<td>				                				                
+								<select 
+									id="tax_id[0][{$smarty.section.tax.index}]"
+									name="tax_id[0][{$smarty.section.tax.index}]"
+								>
+								<option value=""></option>
+								{assign var="index" value=$smarty.section.tax.index}
+								{foreach from=$taxes item=tax}
+									<option {if $tax.tax_id === $invoiceItem.tax.$index} selected {/if} value="{$tax.tax_id}">{$tax.tax_description}</option>
+								{/foreach}
+							</select>
+							</td>
+						{/section}
+						<td>
+        </tr>
 		<tr>
 
 {/if}

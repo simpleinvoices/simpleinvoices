@@ -42,8 +42,8 @@
 </tr>
 <tr>
 	<td><input type="text" name="unit_price" size="15" /></td>
-	<td><input type="text" name="tax" size="15" />
-	
+	<td>
+    
 	{if $taxes == null }
 	<p><em>{$LANG.no_taxes}</em></p>
 {else}
