@@ -122,14 +122,34 @@ function listPatches() {
 		<hr />
 
 		<table align="center">
-			<tr><td><br />The list below describes which patches have and have not been applied to the database, the aim is to have them all applied.  If there are patches that have not been applied to the Simple Invoices database, please run the Update database by clicking update </td></tr>
-			<tr align="center"><td><p class='align_center'><br /><a href='index.php?case=run'>UPDATE</a></p></td></tr>
+			<tr>
+				<td>
+					<br />
+						The list below describes which patches have and have not been applied to the database, the aim is to have them all applied.  If there are patches that have not been applied to the Simple Invoices database, please run the Update database by clicking update 
+				</td>
+			</tr>
 		</table>
-		<br />
-		<a href="index.php?module=documentation&amp;view=view&amp;page=help_text" rel="gb_page_center[450, 450]">
-		<img src="./images/common/important.png" alt="" /><font color="red">Warning:</font>
-		</a>
+		
+		
+		<table class="buttons" align="center">
+	<tr>
+		
+		<td>
 
+            <a href="./index.php?case=run" class="positive">
+                <img src="./images/common/tick.png" alt="" />
+                Update
+            </a>
+    
+        </td>
+    </tr>
+</table>
+		
+		
+		<br />
+		<img src="./images/common/important.png" alt="" /><font color="red">Warning: Please backup your database before upgrading!</font>
+		<br />
+		<br />
 <table align="center">
 EOD;
 

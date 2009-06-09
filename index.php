@@ -71,6 +71,10 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 	donePatches();
 } else {
 	
+	//check db structure - if only structure and no fields then prompt for imports
+	// 1 import essential data
+	// 2 import sample data
+	
 	//if auth on must login before upgrade
 	if ( ($config->authentication->enabled == 1 AND isset($auth_session->id)) OR ($config->authentication->enabled == 0) )	
 	{
