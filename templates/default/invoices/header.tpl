@@ -11,6 +11,17 @@
 	*/
 #$Id$
 *}
+<br />
+
+    <span class="welcome">
+       Itemised Style | Total Style 
+	   <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_types" title="{$LANG.invoice_type}">
+			<img src="./images/common/help-small.png" alt="" />
+	   </a>
+    </span>
+<br />
+<br />
+<br />
 
 <input type="hidden" name="action" value="insert" />
 <table align="center">

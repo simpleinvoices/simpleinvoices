@@ -37,5 +37,6 @@ $logger->log('Itemised invoice created', Zend_Log::INFO);
 include('./modules/invoices/invoice.php');
 
 $smarty -> assign('pageActive', 'invoice_new');
+$smarty -> assign('subPageActive', 'invoice_new_itemised');
 $smarty -> assign('active_tab', '#money');
 ?>
