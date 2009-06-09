@@ -1,5 +1,5 @@
 {
-    "custom_fields":
+    "si_custom_fields":
         [
             { "cf_id":"1", "cf_custom_field":"biller_cf1", "cf_display":"0", "domain_id":"1" },
             { "cf_id":"2", "cf_custom_field":"biller_cf2", "cf_display":"0", "domain_id":"1" },
@@ -19,20 +19,20 @@
             { "cf_id":"16", "cf_custom_field":"invoice_cf4", "cf_display":"0", "domain_id":"1" }
         ]
     ,
-    "invoice_type":
+    "si_invoice_type":
         [
             { "inv_ty_id":"1", "inv_ty_description":"Total" },
             { "inv_ty_id":"2", "inv_ty_description":"Itemised" },
             { "inv_ty_id":"3", "inv_ty_description":"Consulting" }
         ]
     ,
-    "payment_types":
+    "si_payment_types":
         [
             { "domain_id":"1","pt_description":"Cash","pt_enabled":"1" },
             { "domain_id":"1","pt_description":"Credit Card","pt_enabled":"1" }
         ]   
     ,
-    "preferences":
+    "si_preferences":
         [
             { 
                 "pref_id":"1", 
@@ -100,7 +100,7 @@
             }
 
         ],
-    "tax":
+    "si_tax":
         [   
             {
                 "tax_id":"1", 
@@ -143,7 +143,7 @@
                 "domain_id":"1"
             }
         ],
-	"user":
+	"si_user":
         [   
             {
 				"id":"1",
@@ -153,14 +153,14 @@
 				"password":"fe01ce2a7fbac8fafaed7c982a04e229"
 			}
 		],
-	"user_domain":
+	"si_user_domain":
         [   
             {
 				"id":"1",
 				"name":"default"
 			}
 		],		
-	"user_role":
+	"si_user_role":
         [   
             {
 				"id":"1",
