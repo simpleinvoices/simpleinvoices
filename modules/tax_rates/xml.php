@@ -85,12 +85,12 @@ $xml .= "<total>$count</total>";
 foreach ($tax as $row) {
 	$xml .= "<row id='".$row['tax_id']."'>";
 	$xml .= "<cell><![CDATA[
-		<a class='index_table' title='$LANG[view] $LANG[tax_rate] ".utf8_encode($row['tax_description'])."' href='index.php?module=tax_rates&view=details&id=$row[tax_id]&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-		<a class='index_table' title='$LANG[edit] $LANG[tax_rate] ".utf8_encode($row['tax_description'])."' href='index.php?module=tax_rates&view=details&id=$row[tax_id]&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+		<a class='index_table' title='$LANG[view] $LANG[tax_rate] ".$row['tax_description']."' href='index.php?module=tax_rates&view=details&id=$row[tax_id]&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+		<a class='index_table' title='$LANG[edit] $LANG[tax_rate] ".$row['tax_description']."' href='index.php?module=tax_rates&view=details&id=$row[tax_id]&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 	]]></cell>";
-	$xml .= "<cell><![CDATA[".utf8_encode($row['tax_description'])."]]></cell>";
-	$xml .= "<cell><![CDATA[".utf8_encode(siLocal::number($row['tax_percentage']))." ".utf8_encode($row['type'])."]]></cell>";
-	$xml .= "<cell><![CDATA[".utf8_encode($row['enabled'])."]]></cell>";				
+	$xml .= "<cell><![CDATA[".$row['tax_description']."]]></cell>";
+	$xml .= "<cell><![CDATA[".siLocal::number($row['tax_percentage'])." ".utf8_encode($row['type'])."]]></cell>";
+	$xml .= "<cell><![CDATA[".$row['enabled']."]]></cell>";				
 	$xml .= "</row>";		
 }
 $xml .= "</rows>";

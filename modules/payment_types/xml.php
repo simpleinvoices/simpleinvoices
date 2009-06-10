@@ -84,11 +84,11 @@ $xml .= "<total>$count</total>";
 foreach ($payment_types as $row) {
 	$xml .= "<row id='".$row['pref_id']."'>";
 	$xml .= "<cell><![CDATA[
-		<a class='index_table' title='$LANG[view] $LANG[payment_type] ".utf8_encode($row['pt_description'])."' href='index.php?module=payment_types&view=details&id=$row[pt_id]&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-		<a class='index_table' title='$LANG[edit] $LANG[payment_type] ".utf8_encode($row['pt_description'])."' href='index.php?module=payment_types&view=details&id=$row[pt_id]&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+		<a class='index_table' title='$LANG[view] $LANG[payment_type] ".$row['pt_description']."' href='index.php?module=payment_types&view=details&id=$row[pt_id]&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+		<a class='index_table' title='$LANG[edit] $LANG[payment_type] ".$row['pt_description']."' href='index.php?module=payment_types&view=details&id=$row[pt_id]&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 	]]></cell>";
-	$xml .= "<cell><![CDATA[".utf8_encode($row['pt_description'])."]]></cell>";
-	$xml .= "<cell><![CDATA[".utf8_encode($row['enabled'])."]]></cell>";				
+	$xml .= "<cell><![CDATA[".$row['pt_description']."]]></cell>";
+	$xml .= "<cell><![CDATA[".$row['enabled']."]]></cell>";				
 	$xml .= "</row>";		
 }
 $xml .= "</rows>";

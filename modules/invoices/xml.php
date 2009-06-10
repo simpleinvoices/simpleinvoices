@@ -163,13 +163,13 @@ $count = $sth_count_rows->rowCount();
 					]]>
 				</cell>";
 		$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";		
-		$xml .= "<cell><![CDATA[".utf8_encode($row['biller'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode($row['customer'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode(siLocal::date($row['date']))."]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode(siLocal::number_trim($row['invoice_total']))."]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode(siLocal::number_trim($row['owing']))."]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode($row['aging'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode($row['preference'])."]]></cell>";				
+		$xml .= "<cell><![CDATA[".$row['biller']."]]></cell>";
+		$xml .= "<cell><![CDATA[".$row['customer']."]]></cell>";
+		$xml .= "<cell><![CDATA[".siLocal::date($row['date']))."]]></cell>";
+		$xml .= "<cell><![CDATA[".siLocal::number_trim($row['invoice_total']))."]]></cell>";
+		$xml .= "<cell><![CDATA[".siLocal::number_trim($row['owing']))."]]></cell>";
+		$xml .= "<cell><![CDATA[".$row['aging']."]]></cell>";
+		$xml .= "<cell><![CDATA[".$row['preference']."]]></cell>";				
 		$xml .= "</row>";		
 	}
 	$xml .= "</rows>";

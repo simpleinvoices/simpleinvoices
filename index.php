@@ -55,13 +55,6 @@ $menu = isset($menu)?$menu: true;
 * File - set which page will be displayed as the start page
 */
 
-//If no invoices in db then show home page as default - else show Manage Invoices page
-if ( invoice::are_there_any() > "0" )  
-{
-    $file = "invoices/manage" ;
-} else { 
-    $file = "index/index";
-}
 
 //if auth - make sure is valid session else skip
 // Check for any unapplied SQL patches when going home
@@ -89,6 +82,14 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 				listPatches();
 			}
 			$menu = false;
+		} else {
+			//If no invoices in db then show home page as default - else show Manage Invoices page
+			if ( invoice::are_there_any() > "0" )  
+			{
+			    $file = "invoices/manage" ;
+			} else { 
+			    $file = "index/index";
+			}
 		}
 	}
 }

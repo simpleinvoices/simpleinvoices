@@ -87,12 +87,12 @@ $xml .= "<total>$count</total>";
 foreach ($billers as $row) {
 	$xml .= "<row id='".$row['iso']."'>";
 	$xml .= "<cell><![CDATA[
-	<a class='index_table' title='$LANG[view] ".utf8_encode($row['name'])."' href='index.php?module=billers&view=details&id=$row[id]&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-	<a class='index_table' title='$LANG[edit] ".utf8_encode($row['name'])."' href='index.php?module=billers&view=details&id=$row[id]&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+	<a class='index_table' title='$LANG[view] ".$row['name']."' href='index.php?module=billers&view=details&id=$row[id]&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+	<a class='index_table' title='$LANG[edit] ".$row['name']."' href='index.php?module=billers&view=details&id=$row[id]&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 	]]></cell>";
-	$xml .= "<cell><![CDATA[".utf8_encode($row['name'])."]]></cell>";
-	$xml .= "<cell><![CDATA[".utf8_encode($row['email'])."]]></cell>";
-	$xml .= "<cell><![CDATA[".utf8_encode($row['enabled'])."]]></cell>";				
+	$xml .= "<cell><![CDATA[".$row['name']."]]></cell>";
+	$xml .= "<cell><![CDATA[".$row['email']."]]></cell>";
+	$xml .= "<cell><![CDATA[".$row['enabled']."]]></cell>";				
 	$xml .= "</row>";		
 }
 

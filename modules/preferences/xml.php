@@ -83,11 +83,11 @@ $xml .= "<total>$count</total>";
 foreach ($preferences as $row) {
 	$xml .= "<row id='".$row['pref_id']."'>";
 	$xml .= "<cell><![CDATA[
-		<a class='index_table' title='$LANG[view] $LANG[preference] ".utf8_encode($row['pref_description'])."' href='index.php?module=preferences&view=details&id=$row[pref_id]&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-		<a class='index_table' title='$LANG[edit] $LANG[preference] ".utf8_encode($row['pref_description'])."' href='index.php?module=preferences&view=details&id=$row[pref_id]&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+		<a class='index_table' title='$LANG[view] $LANG[preference] ".$row['pref_description']."' href='index.php?module=preferences&view=details&id=$row[pref_id]&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+		<a class='index_table' title='$LANG[edit] $LANG[preference] ".$row['pref_description']."' href='index.php?module=preferences&view=details&id=$row[pref_id]&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 	]]></cell>";
-	$xml .= "<cell><![CDATA[".utf8_encode($row['pref_description'])."]]></cell>";
-	$xml .= "<cell><![CDATA[".utf8_encode($row['enabled'])."]]></cell>";				
+	$xml .= "<cell><![CDATA[".$row['pref_description']."]]></cell>";
+	$xml .= "<cell><![CDATA[".$row['enabled']."]]></cell>";				
 	$xml .= "</row>";		
 }
 $xml .= "</rows>";

@@ -176,16 +176,16 @@ $count = $resultCount[0];
 		$notes = si_truncate($row['ac_notes'],'13','...');
 		$xml .= "<row id='".$row['id']."'>";
 	$xml .= "<cell><![CDATA[
-	<a class='index_table' title='$LANG[view] ".utf8_encode($row['name'])."' href='index.php?module=payments&view=details&id=$row[id]&action=view'>$LANG[view]</a>
+	<a class='index_table' title='$LANG[view] ".$row['name']."' href='index.php?module=payments&view=details&id=$row[id]&action=view'>$LANG[view]</a>
 	]]></cell>";
 		$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode($row['ac_inv_id'])."]]></cell>";		
-		$xml .= "<cell><![CDATA[".utf8_encode($row['cname'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode($row['bname'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode(siLocal::number($row['ac_amount']))."]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode($notes)."]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode($row['description'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode(siLocal::date($row['date']))."]]></cell>";
+		$xml .= "<cell><![CDATA[".$row['ac_inv_id']."]]></cell>";		
+		$xml .= "<cell><![CDATA[".$row['cname']."]]></cell>";
+		$xml .= "<cell><![CDATA[".$row['bname']."]]></cell>";
+		$xml .= "<cell><![CDATA[".siLocal::number($row['ac_amount'])."]]></cell>";
+		$xml .= "<cell><![CDATA[".$notes."]]></cell>";
+		$xml .= "<cell><![CDATA[".$row['description'])."]]></cell>";
+		$xml .= "<cell><![CDATA[".siLocal::date($row['date'])."]]></cell>";
 	
 		$xml .= "</row>";		
 	}
