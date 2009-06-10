@@ -66,9 +66,21 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 	
 	//check db structure - if only structure and no fields then prompt for imports
 	// 1 import essential data
+    $skip_db_patches = false;
+    echo $install_tables_exists = checkTableExists(TB_PREFIX."biller");
+    if ($install_tables_exists == false)
+    { 
+	    $file = "install/index";
+        //do installer
+        echo $skip_db_patches =true;
+    }
+    //count sql_patches
+    // if 0 run import essential data
 	// 2 import sample data
 	
 	//if auth on must login before upgrade
+    if ($skip_db_patches == false)
+    {
 	if ( ($config->authentication->enabled == 1 AND isset($auth_session->id)) OR ($config->authentication->enabled == 0) )	
 	{
 		include_once('./modules/options/database_sqlpatches.php');
@@ -92,6 +104,8 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 			}
 		}
 	}
+    }
+
 }
 
 
