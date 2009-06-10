@@ -87,16 +87,16 @@ $validFields = array('id', 'name','description','enabled');
 	if ($row['id'] == 0 && $row['registered'] ==1) { $xml .= "Always enabled "; }
 	else {
 		if ($row['registered'] == 1) {
-		$xml .="<a class='index_table' title='$LANG[register] $LANG[extensions] ".utf8_encode($row['name'])."' href='index.php?module=extensions&view=register&id=$row[id]&action=unregister'> ".$plugin[3-$row['registered']]."</a>";
-			$xml .= " <a class='index_table' title='$LANG[enable] $LANG[extensions] ".utf8_encode($row['name'])."' href='index.php?module=extensions&view=manage&id=$row[id]&action=toggle'>".$light[2]."</a>";
+		$xml .="<a class='index_table' title='$LANG[register] $LANG[extensions] ".$row['name']."' href='index.php?module=extensions&view=register&id=$row[id]&action=unregister'> ".$plugin[3-$row['registered']]."</a>";
+			$xml .= " <a class='index_table' title='$LANG[enable] $LANG[extensions] ".$row['name']."' href='index.php?module=extensions&view=manage&id=$row[id]&action=toggle'>".$light[2]."</a>";
 		} else {
-		$xml .="<a class='index_table' title='$LANG[register] $LANG[extensions] ".utf8_encode($row['name'])."' href='index.php?module=extensions&view=register&name=$row[name]&action=register&description=$row[description]'> ".$plugin[3-$row['registered']]."</a>";
+		$xml .="<a class='index_table' title='$LANG[register] $LANG[extensions] ".$row['name']."' href='index.php?module=extensions&view=register&name=$row[name]&action=register&description=$row[description]'> ".$plugin[3-$row['registered']]."</a>";
 		}
 	}
 	$xml .= "]]></cell>";
-		$xml .= "<cell><![CDATA[".utf8_encode($row['id'])."]]></cell>";		
-		$xml .= "<cell><![CDATA[".utf8_encode($row['name'])."]]></cell>";		
-		$xml .= "<cell><![CDATA[".utf8_encode($row['description'])."]]></cell>";
+		$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";		
+		$xml .= "<cell><![CDATA[".$row['name']."]]></cell>";		
+		$xml .= "<cell><![CDATA[".$row['description']."]]></cell>";
 		$xml .= "<cell><![CDATA[".$light[$row['enabled']].$plugin[$row['registered']]."]]></cell>";				
 		$xml .= "</row>";		
 	}
