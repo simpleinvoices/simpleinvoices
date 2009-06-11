@@ -17,7 +17,7 @@
 
             <a href="index.php?module=invoices&amp;view=itemised" class="positive">
                 <img src="./images/common/add.png" alt="" />
-                Add a new Invoice {* TODO $LANG  *}
+                {$LANG.new_invoice}
             </a>
 
         </td>

@@ -19,6 +19,17 @@
             { "cf_id":"16", "cf_custom_field":"invoice_cf4", "cf_display":"0", "domain_id":"1" }
         ]
     ,
+    "si_extensions":
+        [
+            { 
+				"id":"1", 
+				"domain_id":"1",
+				"name":"core",
+				"description":"Core part of Simple Invoices - always enabled",
+				"enabled":"1"
+			}
+        ]
+    ,	
     "si_invoice_type":
         [
             { "inv_ty_id":"1", "inv_ty_description":"Total" },
@@ -100,6 +111,170 @@
             }
 
         ],
+	"si_sql_patchmanager":
+		[
+			{
+				"sql_id":"1",
+				"sql_patch_ref":"1",
+				"sql_patch":"Create sql_patchmanger table",
+				"sql_release":"20060514",
+				"sql_statement":"CREATE TABLE si_sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 255 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) ENGINE = MYISAM "
+			},
+			{
+				"sql_id":"2",
+				"sql_patch_ref":"2"
+			},
+			{
+				"sql_id":"3",
+				"sql_patch_ref":"3"
+			},			
+			{
+				"sql_id":"4",
+				"sql_patch_ref":"4"
+			},
+			{
+				"sql_id":"5",
+				"sql_patch_ref":"5"
+			},
+			{
+				"sql_id":"6",
+				"sql_patch_ref":"6"
+			},
+			{
+				"sql_id":"7",
+				"sql_patch_ref":"7"
+			},
+			{
+				"sql_id":"8",
+				"sql_patch_ref":"8"
+			},
+			{
+				"sql_id":"9",
+				"sql_patch_ref":"9"
+			},
+			{
+				"sql_id":"10",
+				"sql_patch_ref":"10"
+			},
+			{
+				"sql_id":"11",
+				"sql_patch_ref":"11"
+			},
+			{
+				"sql_id":"12",
+				"sql_patch_ref":"12"
+			},
+			{
+				"sql_id":"13",
+				"sql_patch_ref":"13"
+			},
+			{
+				"sql_id":"14",
+				"sql_patch_ref":"14"
+			},
+			{
+				"sql_id":"15",
+				"sql_patch_ref":"15"
+			},
+			{
+				"sql_id":"16",
+				"sql_patch_ref":"16"
+			},
+			{
+				"sql_id":"17",
+				"sql_patch_ref":"17"
+			},			
+			{
+				"sql_id":"18",
+				"sql_patch_ref":"18"
+			},
+			{
+				"sql_id":"19",
+				"sql_patch_ref":"19"
+			},
+			{
+				"sql_id":"20",
+				"sql_patch_ref":"20"
+			},
+			{
+				"sql_id":"21",
+				"sql_patch_ref":"21"
+			},
+			{
+				"sql_id":"22",
+				"sql_patch_ref":"22"
+			},			
+			{
+				"sql_id":"23",
+				"sql_patch_ref":"23"
+			},
+			{
+				"sql_id":"24",
+				"sql_patch_ref":"24"
+			},
+			{
+				"sql_id":"25",
+				"sql_patch_ref":"25"
+			},
+			{
+				"sql_id":"26",
+				"sql_patch_ref":"26"
+			},
+			{
+				"sql_id":"27",
+				"sql_patch_ref":"27"
+			},	
+			{
+				"sql_id":"28",
+				"sql_patch_ref":"28"
+			},
+			{
+				"sql_id":"29",
+				"sql_patch_ref":"29"
+			},	
+			{
+				"sql_id":"30",
+				"sql_patch_ref":"30"
+			},
+			{
+				"sql_id":"31",
+				"sql_patch_ref":"31"
+			},
+			{
+				"sql_id":"32",
+				"sql_patch_ref":"32"
+			},
+			{
+				"sql_id":"33",
+				"sql_patch_ref":"33"
+			},
+			{
+				"sql_id":"34",
+				"sql_patch_ref":"34"
+			},
+			{
+				"sql_id":"35",
+				"sql_patch_ref":"35"
+			},
+			{
+				"sql_id":"36",
+				"sql_patch_ref":"36"
+			},			
+			{
+				"sql_id":"37",
+				"sql_patch_ref":"0",
+				"sql_patch":"Start",
+				"sql_release":"20060514",
+				"sql_statement":""
+			},
+			{
+				"sql_id":"201",
+				"sql_patch_ref":"200",
+				"sql_patch":"Update extensions table",
+				"sql_release":"20090529",
+				"sql_statement":"UPDATE si_extensions SET `id` = ''0'' WHERE `name` = ''core'' LIMIT 1;"
+			}
+		],
     "si_tax":
         [   
             {
