@@ -15,6 +15,7 @@ $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 function sql($type='', $dir, $sort, $rp, $page )
 {
 	global $config;
+	global $LANG;
 	global $auth_session;
 
 		
@@ -62,7 +63,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 		$sql = "SELECT 
 					c.id as CID, 
 					c.name as name, 
-					(SELECT (CASE  WHEN c.enabled = 0 THEN 'Disabled' ELSE 'Enabled' END )) AS enabled,
+					(SELECT (CASE  WHEN c.enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled,
 					(
 						SELECT
 				            coalesce(sum(ii.total),  0) AS total 
@@ -114,7 +115,12 @@ $count = $sth_count_rows->rowCount();
 		$xml .= "<cell><![CDATA[".$row['name']."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['customer_total'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['owing'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['enabled']."]]></cell>";				
+		if ($row['enabled']==$LANG['enabled']) {
+			$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".utf8_encode($row['enabled'])."' title='".utf8_encode($row['enabled'])."' />]]></cell>";				
+		}	
+		else {
+			$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".utf8_encode($row['enabled'])."' title='".utf8_encode($row['enabled'])."' />]]></cell>";				
+		}
 		$xml .= "</row>";		
 	}
 	$xml .= "</rows>";

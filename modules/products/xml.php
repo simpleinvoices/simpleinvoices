@@ -102,7 +102,12 @@ foreach ($customers as $row) {
 	$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";		
 	$xml .= "<cell><![CDATA[".$row['description']."]]></cell>";
 	$xml .= "<cell><![CDATA[".siLocal::number($row['unit_price'])."]]></cell>";
-	$xml .= "<cell><![CDATA[".$row['enabled']."]]></cell>";				
+	if ($row['enabled']==$LANG['enabled']) {
+		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".utf8_encode($row['enabled'])."' title='".utf8_encode($row['enabled'])."' />]]></cell>";				
+	}	
+	else {
+		$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".utf8_encode($row['enabled'])."' title='".utf8_encode($row['enabled'])."' />]]></cell>";				
+	}
 	$xml .= "</row>";		
 }
 

@@ -94,7 +94,12 @@ foreach ($user as $row) {
 	]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['email']."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['role']."]]></cell>";
-	$xml .= "<cell><![CDATA[".$row['enabled']."]]></cell>";
+	if ($row['enabled']==$LANG['enabled']) {
+		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".utf8_encode($row['enabled'])."' title='".utf8_encode($row['enabled'])."' />]]></cell>";				
+	}	
+	else {
+		$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".utf8_encode($row['enabled'])."' title='".utf8_encode($row['enabled'])."' />]]></cell>";				
+	}
 	$xml .= "</row>";		
 }
 
