@@ -25,7 +25,11 @@ class import {
 		$replace = $this->replace($json);
 		return $replace;
 	}
-	
+	public function execute()
+	{
+		dbQuery($this->collate());
+	}
+
 }
 
 
