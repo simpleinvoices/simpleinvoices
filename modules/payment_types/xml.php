@@ -88,7 +88,12 @@ foreach ($payment_types as $row) {
 		<a class='index_table' title='$LANG[edit] $LANG[payment_type] ".$row['pt_description']."' href='index.php?module=payment_types&view=details&id=$row[pt_id]&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 	]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['pt_description']."]]></cell>";
-	$xml .= "<cell><![CDATA[".$row['enabled']."]]></cell>";				
+	if ($row['enabled']==$LANG['enabled']) {
+		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".utf8_encode($row['enabled'])."' title='".utf8_encode($row['enabled'])."' />]]></cell>";				
+	}	
+	else {
+		$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".utf8_encode($row['enabled'])."' title='".utf8_encode($row['enabled'])."' />]]></cell>";				
+	}
 	$xml .= "</row>";		
 }
 $xml .= "</rows>";

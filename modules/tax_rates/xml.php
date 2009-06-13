@@ -90,7 +90,12 @@ foreach ($tax as $row) {
 	]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['tax_description']."]]></cell>";
 	$xml .= "<cell><![CDATA[".siLocal::number($row['tax_percentage'])." ".$row['type']."]]></cell>";
-	$xml .= "<cell><![CDATA[".$row['enabled']."]]></cell>";				
+	if ($row['enabled']==$LANG['enabled']) {
+		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".utf8_encode($row['enabled'])."' title='".utf8_encode($row['enabled'])."' />]]></cell>";				
+	}	
+	else {
+		$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".utf8_encode($row['enabled'])."' title='".utf8_encode($row['enabled'])."' />]]></cell>";				
+	}
 	$xml .= "</row>";		
 }
 $xml .= "</rows>";
