@@ -14,9 +14,12 @@
 <br />
 
     <span class="welcome">
-       Itemised Style | Total Style 
+      <a href="index.php?module=invoices&view=itemised"><img class="action" src="./images/common/edit.png"/>&nbsp;Itemised Style</a>
+			 &nbsp;&nbsp; 
+       <a href="index.php?module=invoices&view=total"><img class="action" src="./images/common/page_white_edit.png"/>&nbsp;Total Style</a>
+			 &nbsp;&nbsp; 
 	   <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_types" title="{$LANG.invoice_type}">
-			<img src="./images/common/help-small.png" alt="" />
+			<img class="action" src="./images/common/help-small.png" alt="" />
 	   </a>
     </span>
 <br />
