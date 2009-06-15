@@ -2,6 +2,8 @@
 BETA 5
 --------
 	- Payments page updated
+	- merge docs.php into normal index.php - Done
+	- input validation using http://www.position-relative.net/creation/formValidator/
 
 --------
 BETA 4

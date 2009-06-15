@@ -1,5 +1,5 @@
 <?php
-//JSON import
+$menu = false;
 
 //SQL import
 $import = new import();
@@ -10,7 +10,7 @@ $import->pattern_replace = TB_PREFIX;
 $db1 = new db();
 $db1->query($import->collate());
 
-
+//JSON import
 $importjson = new importjson();
 $importjson->file = "./databases/JSON/EssentialData.json";
 //$importjson->debug = true;
@@ -20,5 +20,3 @@ $importjson->pattern_replace = TB_PREFIX;
 $db2 = new db();
 $db2->query($importjson->collate());
 
-$menu = false;
-?>

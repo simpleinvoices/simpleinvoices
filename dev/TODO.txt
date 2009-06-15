@@ -29,7 +29,6 @@ Simple Invoices todo list
 	- SQL patches - review and make work 100% perfect - Justin
 	-- add Manage SQL patches back in
 	-- add rerun SQL patch button
-	- merge docs.php into normal index.php - work-in-progress - Peter
 	- invoice edit - notes - if note empty then have closed if not empty then display for edit - work-in-progress
     - JSON import - work-in-progress
     - Update UI of System Preferences
@@ -41,14 +40,9 @@ Simple Invoices todo list
 	
 	- mini installer
 	-- add checks for php.ini settings, writeable folders etc.. and make pretty
-	- look at redoign the new buttons using: http://stopdesign.com/archive/2009/02/04/recreating-the-button.html
 	-- create a mini installer and use Zend_config_writer to write to config.ini
-	-- just ask for db details and if you want demo data installer
+	-- just ask if you want demo data installer
 	-- just the basics - do rest later
-
-	- validation - check/remove the validation on products
-    -- http://www.position-relative.net/creation/formValidator/
 
 	- change config.ini back to config.php - but keep ini format and add ;<?php on line 1 and ; exit; on line 2 - this is for sercurity reasons
 	-- maybe got to think about this and see if new installer can do it
-	-- using .htaccess to protect against reasding of .ini - done
