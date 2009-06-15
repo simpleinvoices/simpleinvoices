@@ -24,7 +24,10 @@ Simple Invoices todo list
 
 	- Database log - review
 	- test invoice edit/create more - from new and upgraded db
-	
+	- Total style invoice 
+    -- add/edit review
+    -- multiple tax rates - fix
+    -- make easy way to swap in invoice creation
     #left over from 2009.1 beta 4
 	- SQL patches - review and make work 100% perfect - Justin
 	-- add Manage SQL patches back in
