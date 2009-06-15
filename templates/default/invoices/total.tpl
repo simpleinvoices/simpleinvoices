@@ -11,7 +11,7 @@
 */
 *}
 
-<form name="frmpost" action="index.php?module=invoices&amp;view=save" method="POST" onsubmit="return frmpost_Validator(this);">
+<form name="frmpost" action="index.php?module=invoices&amp;view=save" method="POST">
 <!--
 <h3>{$LANG.inv} {$LANG.inv_total}</h3>
 -->
@@ -41,7 +41,7 @@
 	<td class="details_screen">{$LANG.gross_total}</td><td class="details_screen">{$LANG.tax}</td><td class="details_screen">{$LANG.inv_pref}</td>
 </tr>
 <tr>
-	<td><input type="text" name="unit_price" size="15" /></td>
+	<td><input type="text" class="validate[required]" name="unit_price" size="15" /></td>
 	<td>
     
 	{if $taxes == null }
