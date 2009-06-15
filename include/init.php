@@ -94,6 +94,7 @@ ini_set('display_startup_errors', $config->phpSettings->display_startup_errors);
 ini_set('display_errors', $config->phpSettings->display_errors); 
 
 
+
 $zendDb = Zend_Db::factory($config->database->adapter, array(
     'host'     => $config->database->params->host,
     'username' => $config->database->params->username,
@@ -106,20 +107,23 @@ include_once("./include/sql_queries.php");
 
 $smarty->register_modifier("siLocal_number", array("siLocal", "number"));
 $smarty->register_modifier("siLocal_number_trim", array("siLocal", "number_trim"));
+$install_tables_exists = checkTableExists(TB_PREFIX."biller");
 
 //TODO - add this as a function in sql_queries.php or a class file
-if (getNumberOfDoneSQLPatches() > "196")
+if ($install_tables_exists != false)
 {
-    $sql="SELECT * from ".TB_PREFIX."extensions WHERE (domain_id = :id OR domain_id =  0 ) ORDER BY domain_id ASC";
-    $sth = dbQuery($sql,':id', $auth_session->domain_id ) or die(htmlspecialchars(end($dbh->errorInfo())));
+	if (getNumberOfDoneSQLPatches() > "196")
+	{
+	    $sql="SELECT * from ".TB_PREFIX."extensions WHERE (domain_id = :id OR domain_id =  0 ) ORDER BY domain_id ASC";
+	    $sth = dbQuery($sql,':id', $auth_session->domain_id ) or die(htmlspecialchars(end($dbh->errorInfo())));
 
-    while ( $this_extension = $sth->fetch() ) 
-    { 
-    	$DB_extensions[$this_extension['name']] = $this_extension; 
-    }
-    $config->extension = $DB_extensions;
+	    while ( $this_extension = $sth->fetch() ) 
+	    { 
+	    	$DB_extensions[$this_extension['name']] = $this_extension; 
+	    }
+	    $config->extension = $DB_extensions;
+	}
 }
-
 
 include_once('./include/language.php');
 

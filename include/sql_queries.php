@@ -106,7 +106,7 @@ function dbQuery($sqlQuery) {
 			$sth->bindValue($binds[$i], $binds[++$i]);
 		}
 	}
-	/*
+	
 	// PDO Execution
 	if($sth && $sth->execute()) {
 		//dbLogger($sqlQuery);
@@ -115,14 +115,14 @@ function dbQuery($sqlQuery) {
 	// Earlier implementation did not return the $sth on error
 	}
 // $sth now has the PDO object or false on error.
-	*/
+	/*
 	try {	
 		$sth->execute();
 	} catch(Exception $e){
 		echo $e->getMessage();
 		echo "Dude, what happened to your query?:<br /><br /> ".htmlspecialchars($sqlQuery)."<br />".htmlspecialchars(end($sth->errorInfo()));
 	}
-	
+	*/
 	return $sth;
 	//$sth = null;
 }
