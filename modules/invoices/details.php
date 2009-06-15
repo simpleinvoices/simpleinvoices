@@ -19,6 +19,7 @@ $master_invoice_id = $_GET['id'];
 
 $invoice = getInvoice($master_invoice_id);
 $invoiceItems = invoice::getInvoiceItems($master_invoice_id);
+//var_dump($invoiceItems);
 $customers = getActiveCustomers();
 $preference = getPreference($invoice['preference_id']);
 $billers = getActiveBillers();

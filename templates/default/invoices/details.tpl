@@ -104,7 +104,7 @@
 		        <tr>       	         
 			<td class="details_screen">{$LANG.gross_total}</td>
 			<td>
-			<input type="text" name="unit_price" value="{$invoiceItems.0.unit_price}" size="10" />
+			<input type="text" name="unit_price0" value="{$invoiceItems.0.unit_price}" size="10" />
 			<input type="hidden" name="quantity0" value="1" />
 			<input type="hidden" name="id0" value="{$invoiceItems.0.id}" />
 			<input type="hidden" name="products0" value="{$invoiceItems.0.product_id}" />
@@ -123,7 +123,7 @@
 								<option value=""></option>
 								{assign var="index" value=$smarty.section.tax.index}
 								{foreach from=$taxes item=tax}
-									<option {if $tax.tax_id === $invoiceItem.tax.$index} selected {/if} value="{$tax.tax_id}">{$tax.tax_description}</option>
+									<option {if $tax.tax_id === $invoiceItems.0.tax.$index} selected {/if} value="{$tax.tax_id}">{$tax.tax_description}</option>
 								{/foreach}
 							</select>
 							</td>
@@ -341,6 +341,10 @@
 				<input type="hidden" name="id" value="{$invoice.id}" />
 				<input type="hidden" name="action" value="edit" />
 			{/if}
+            {if $invoice.type_id == 1 }
+                <input id="quantity0" type="hidden" size="10" value="1.00" name="quantity0"/>
+                <input id="line_item0" type="hidden" value="{$invoiceItems.0.id}" name="line_item0"/>
+            {/if}
 			<input type="hidden" name="type" value="{$invoice.type_id}" />
 			<input type="hidden" name="op" value="insert_preference" />
 			<input type="hidden" name="max_items" value="{$lines}" />
