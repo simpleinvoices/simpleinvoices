@@ -1268,7 +1268,21 @@ function insertCustomer() {
 	global $auth_session;
 
 	extract( $_POST );
-	$sql = "INSERT INTO ".TB_PREFIX."customers VALUES ('',:domain_id ,:attention, :name, :street_address, :street_address2, :city, :state, :zip_code, :country, :phone, :mobile_phone, :fax, :email, :notes, :custom_field1, :custom_field2, :custom_field3, :custom_field4, :enabled)";
+	$sql = "INSERT INTO 
+			".TB_PREFIX."customers
+			(
+				domain_id, attention, name, street_address, street_address2,
+				city, state, zip_code, country, phone, mobile_phone,
+				fax, email, notes, custom_field1, custom_field2,
+				custom_field3, custom_field4, enabled
+			)
+			VALUES 
+			(
+				:domain_id ,:attention, :name, :street_address, :street_address2,
+				:city, :state, :zip_code, :country, :phone, :mobile_phone,
+				:fax, :email, :notes, :custom_field1, :custom_field2,
+				:custom_field3, :custom_field4, :enabled
+			)";
 	
 	if ($db_server == 'pgsql') {
 		$sql = "INSERT INTO ".TB_PREFIX."customers (

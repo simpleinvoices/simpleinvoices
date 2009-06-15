@@ -16,6 +16,7 @@ $acl->add(new Zend_Acl_Resource('auth'));
 $acl->add(new Zend_Acl_Resource('export'));
 $acl->add(new Zend_Acl_Resource('customers'));
 $acl->add(new Zend_Acl_Resource('documentation'));
+$acl->add(new Zend_Acl_Resource('index'));
 $acl->add(new Zend_Acl_Resource('invoices'));
 $acl->add(new Zend_Acl_Resource('billers'));
 $acl->add(new Zend_Acl_Resource('products'));
