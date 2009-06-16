@@ -2199,6 +2199,7 @@ function checkTableExists($table = "" ) {
 
 	$table == "" ? TB_PREFIX."biller" : $table;
 	
+  //  echo $table;
 	global $LANG;
 	global $dbh;
 	global $config;

@@ -2,7 +2,11 @@
 
 class db
 {
-	public $connection = null;
+
+    private $_db;
+    static $_instance;
+
+//	public $connection = null;
 
 	function __construct()
 	{
@@ -24,7 +28,7 @@ class db
 			{
 
 			    case "pgsql":
-			    	$this->connection = new PDO(
+			    	$this->_db = new PDO(
 						$pdoAdapter.':host='.$config->database->params->host.';	dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password
 					);
 			    	break;
@@ -36,7 +40,7 @@ class db
 					break;
 				
 			    case "mysql_utf8":
-				   	$this->connection = new PDO(
+				   	$this->_db = new PDO(
 						'mysql:host='.$config->database->params->host.'; port='.$config->database->params->port.'; dbname='.$config->database->params->dbname, $config->database->params->username, $config->database->params->password,  array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8", PDO::MYSQL_ATTR_INIT_COMMAND=>"SET CHARACTER SET utf8;")
 					);
 					break;
@@ -44,14 +48,14 @@ class db
 			    case "mysql":
 			    default:
 			    	//mysql
-			    	$this->connection = new PDO(
+			    	$this->_db = new PDO(
 						$pdoAdapter.':host='.$config->database->params->host.'; port='.$config->database->params->port.'; dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password, array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true)
 					);
 					break;
 			}
 			
-			$this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);		
-			$this->connection->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
+			$this->_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);		
+			$this->_db->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
 			
 		}
 		catch( PDOException $exception )
@@ -66,17 +70,28 @@ class db
 		
 	}
 	
+    //private __clone() {};
+
+    public static function getInstance()
+    {
+        if( ! (self::$_instance instanceof self) )
+        {
+            self::$_instance = new self();
+        }
+    }
+    
+
 	function query($sqlQuery)
 	{
 		//dbQuery($sql);
 		
 		//$dbh = $this->connection;
-		var_dump($this->connection);
+		var_dump($this->_db);
 		$argc = func_num_args();
 		$binds = func_get_args();
 		//$sth = false;
 		// PDO SQL Preparation
-		$sth = $this->connection->prepare($sqlQuery);
+		$sth = $this->_db->prepare($sqlQuery);
 		if ($argc > 1) {
 			array_shift($binds);
 			for ($i = 0; $i < count($binds); $i++) {
@@ -86,11 +101,11 @@ class db
 		
 				
 		try {	
-			var_dump($this->connection);
+			//var_dump($this->_db);
 			$sth->execute();
 		} catch(Exception $e){
 			echo $e->getMessage();
-			echo "Dude, what happened to your query?:<br /><br /> ".htmlspecialchars($sqlQuery)."<br />".htmlspecialchars(end($this->connection->errorInfo()));
+			echo "Dude, what happened to your query?:<br /><br /> ".htmlspecialchars($sqlQuery)."<br />".htmlspecialchars(end($this->_db->errorInfo()));
 		}
 		//$this->connection->closeCursor();
 		$sth->closeCursor();
