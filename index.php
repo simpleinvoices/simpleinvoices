@@ -72,38 +72,38 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
     { 
 	    $file = "install/index";
         //do installer
-        $skip_db_patches =true;
+        $skip_db_patches = true;
     }
     //count sql_patches
     // if 0 run import essential data
 	// 2 import sample data
-	
+	echo $skip_db_patches; 
 	//if auth on must login before upgrade
     if ($skip_db_patches == false)
     {
-	if ( ($config->authentication->enabled == 1 AND isset($auth_session->id)) OR ($config->authentication->enabled == 0) )	
-	{
-		include_once('./modules/options/database_sqlpatches.php');
-		if (getNumberOfPatches() > 0 ) {
-			$view = "database_sqlpatches";
-			$module = "options";
-			
-			if($action == "run") {
-				runPatches();
+		if ( ($config->authentication->enabled == 1 AND isset($auth_session->id)) OR ($config->authentication->enabled == 0) )	
+		{
+			include_once('./modules/options/database_sqlpatches.php');
+			if (getNumberOfPatches() > 0 ) {
+				$view = "database_sqlpatches";
+				$module = "options";
+				
+				if($action == "run") {
+					runPatches();
+				} else {
+					listPatches();
+				}
+				$menu = false;
 			} else {
-				listPatches();
-			}
-			$menu = false;
-		} else {
-			//If no invoices in db then show home page as default - else show Manage Invoices page
-			if ( invoice::are_there_any() > "0" )  
-			{
-			    $file = "invoices/manage" ;
-			} else { 
-			    $file = "index/index";
+				//If no invoices in db then show home page as default - else show Manage Invoices page
+				if ( invoice::are_there_any() > "0" )  
+				{
+				    $file = "invoices/manage" ;
+				} else { 
+				    $file = "index/index";
+				}
 			}
 		}
-	}
     }
 
 }
@@ -496,6 +496,8 @@ if($module == "export")
 		}
 	
 	}
+	
+	
 /*
 * Footer - end 
 */

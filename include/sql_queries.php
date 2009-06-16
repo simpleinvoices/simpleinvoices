@@ -2195,8 +2195,10 @@ function maxInvoice() {
 };
 
 //in this file are functions for all sql queries
-function checkTableExists($table) {
+function checkTableExists($table = "" ) {
 
+	$table == "" ? TB_PREFIX."biller" : $table;
+	
 	global $LANG;
 	global $dbh;
 	global $config;
@@ -2256,6 +2258,15 @@ function checkFieldExists($table,$field) {
 	}
 }
 
+function checkDataExists()
+{
+	echo $test = getNumberOfDoneSQLPatches();
+	if (isset($test)){
+		return true;
+	} else {
+		return false;
+	}
+}
 
 function getURL()
 {
