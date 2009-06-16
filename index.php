@@ -77,7 +77,7 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
     //count sql_patches
     // if 0 run import essential data
 	// 2 import sample data
-	echo $skip_db_patches; 
+	//echo $skip_db_patches; 
 	//if auth on must login before upgrade
     if ($skip_db_patches == false)
     {
