@@ -106,7 +106,7 @@ function dbQuery($sqlQuery) {
 			$sth->bindValue($binds[$i], $binds[++$i]);
 		}
 	}
-	
+	/*
 	// PDO Execution
 	if($sth && $sth->execute()) {
 		//dbLogger($sqlQuery);
@@ -115,14 +115,14 @@ function dbQuery($sqlQuery) {
 	// Earlier implementation did not return the $sth on error
 	}
 // $sth now has the PDO object or false on error.
-	/*
+	*/
 	try {	
 		$sth->execute();
 	} catch(Exception $e){
 		echo $e->getMessage();
-		echo "Dude, what happened to your query?:<br /><br /> ".htmlspecialchars($sqlQuery)."<br />".htmlspecialchars(end($sth->errorInfo()));
+		echo "dbQuery: Dude, what happened to your query?:<br /><br /> ".htmlspecialchars($sqlQuery)."<br />".htmlspecialchars(end($sth->errorInfo()));
 	}
-	*/
+	
 	return $sth;
 	//$sth = null;
 }
@@ -2197,6 +2197,8 @@ function maxInvoice() {
 //in this file are functions for all sql queries
 function checkTableExists($table = "" ) {
 
+	//$db = db::getInstance();
+	//var_dump($db);
 	$table == "" ? TB_PREFIX."biller" : $table;
 	
   //  echo $table;
@@ -2207,27 +2209,25 @@ function checkTableExists($table = "" ) {
 	{
 
 		case "pdo_pgsql":
-			$sql = 'SELECT 1 FROM pg_tables WHERE tablename = :table LIMIT 1';
+			$sql = 'SELECT 1 FROM pg_tables WHERE tablename = '.$table.' LIMIT 1';
 			break;
 
 		case "pdo_sqlite":
-			$sql = 'SELECT * FROM :table LIMIT 1';
+			$sql = 'SELECT * FROM '.$table.'LIMIT 1';
 			break;
 		case "pdo_mysql":
 		default:
 		//mysql
-			$sql = "SELECT 1 FROM INFORMATION_SCHEMA.TABLES where table_name = :table LIMIT 1";
+			//$sql = "SELECT 1 FROM INFORMATION_SCHEMA.TABLES where table_name = :table LIMIT 1";
+			$sql = "SHOW TABLES LIKE '".$table."'";
 			break;
 	}
 
-	$sth = $dbh->prepare($sql);
-	
-	if ($sth && $sth->execute(array(':table' => $table))) {
-		if ($sth->fetch()) {
-			return true;
-		} else {
-			return false;
-		}
+	//$sth = $dbh->prepare($sql);
+	$sth = dbQuery($sql);
+	if ($sth->fetchAll())
+	{
+		return true;
 	} else {
 		return false;
 	}
@@ -2261,8 +2261,8 @@ function checkFieldExists($table,$field) {
 
 function checkDataExists()
 {
-	echo $test = getNumberOfDoneSQLPatches();
-	if (isset($test)){
+	$test = getNumberOfDoneSQLPatches();
+	if ($test > 0 ){
 		return true;
 	} else {
 		return false;

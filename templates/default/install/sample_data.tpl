@@ -12,5 +12,6 @@
 	<br />
 	<br />
 {/if}
-
+{*
 	<meta http-equiv="refresh" content="2;URL=index.php" />
+*}

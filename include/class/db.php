@@ -43,6 +43,8 @@ class db
 				   	$this->_db = new PDO(
 						'mysql:host='.$config->database->params->host.'; port='.$config->database->params->port.'; dbname='.$config->database->params->dbname, $config->database->params->username, $config->database->params->password,  array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8", PDO::MYSQL_ATTR_INIT_COMMAND=>"SET CHARACTER SET utf8;")
 					);
+					$this->_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);		
+					$this->_db->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
 					break;
 					
 			    case "mysql":
@@ -51,11 +53,12 @@ class db
 			    	$this->_db = new PDO(
 						$pdoAdapter.':host='.$config->database->params->host.'; port='.$config->database->params->port.'; dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password, array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true)
 					);
+					$this->_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);		
+					$this->_db->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
 					break;
 			}
 			
-			$this->_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);		
-			$this->_db->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
+
 			
 		}
 		catch( PDOException $exception )
@@ -78,6 +81,8 @@ class db
         {
             self::$_instance = new self();
         }
+		
+		  return self::$_instance; 
     }
     
 
@@ -86,7 +91,7 @@ class db
 		//dbQuery($sql);
 		
 		//$dbh = $this->connection;
-		var_dump($this->_db);
+		//var_dump($this->_db);
 		$argc = func_num_args();
 		$binds = func_get_args();
 		//$sth = false;

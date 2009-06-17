@@ -73,6 +73,13 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 	    $file = "install/index";
         //do installer
         $skip_db_patches = true;
+		
+    }
+	if ( ($install_tables_exists == true) AND ($install_data_exists == false) )
+    { 
+	    $file = "install/essential";
+        //do installer
+        $skip_db_patches = true;
     }
     //count sql_patches
     // if 0 run import essential data

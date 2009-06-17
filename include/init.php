@@ -103,15 +103,21 @@ $zendDb = Zend_Db::factory($config->database->adapter, array(
 );
 
 //include_once("./include/sql_patches.php");
+$db = db::getInstance();
+
 include_once("./include/sql_queries.php");
 
 $smarty->register_modifier("siLocal_number", array("siLocal", "number"));
 $smarty->register_modifier("siLocal_number_trim", array("siLocal", "number_trim"));
 $install_tables_exists = checkTableExists(TB_PREFIX."biller");
-echo $install_data_exists = checkTableExists(TB_PREFIX."biller");
+if ($install_tables_exists == true)
+{
+	$install_data_exists = checkDataExists();
+}
 
 //TODO - add this as a function in sql_queries.php or a class file
-if ( ($install_tables_exists != false) AND ($install_data_exists != false) )
+//if ( ($install_tables_exists != false) AND ($install_data_exists != false) )
+if ( $install_tables_exists != false )
 {
 	if (getNumberOfDoneSQLPatches() > "196")
 	{

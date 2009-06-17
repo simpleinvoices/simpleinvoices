@@ -17,7 +17,7 @@ Password: {$config->database->params->password}<br />
     <tr>
         <td>
         
-            <a href="./index.php?module=install&amp;view=essential" class="positive">
+            <a href="./index.php?module=install&amp;view=structure" class="positive">
                 <img src="./images/common/tick.png" alt="" />
                 Install DB
             </a>

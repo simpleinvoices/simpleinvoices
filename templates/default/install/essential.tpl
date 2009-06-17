@@ -1,5 +1,7 @@
-DB has been setup and essential data import
+<br /><br />
+The Simple Invoices database structure has been import has been setup and essential data import
 
+<br /><br />
 
 <table class="buttons" align="center">
     <tr>
