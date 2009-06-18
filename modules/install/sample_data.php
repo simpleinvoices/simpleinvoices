@@ -8,12 +8,19 @@ $menu = false;
 //	echo "SCHEME";
 	//SQL import
 	//JSON import
-	$importjson = new importjson();
-	$importjson->file = "./databases/JSON/SampleData.json";
-	$importjson->debug = true;
-	$importjson->pattern_find = "si_";
-	$importjson->pattern_replace = TB_PREFIX;
+	$samplejson = new importjson();
+	$samplejson->file = "./databases/JSON/SampleData.json";
+	//$samplejson->debug = true;
+	$samplejson->pattern_find = "si_";
+	$samplejson->pattern_replace = TB_PREFIX;
 	//dbQuery($importjson->collate());
-	$db->query($importjson->collate());
+	if($db->query($samplejson->collate()) )
+	{
+		$saved=true;
+	} else {
+		$saved=false;
+	}
 //}
+
+$smarty -> assign("saved",$saved);
 

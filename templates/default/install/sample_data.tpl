@@ -6,12 +6,12 @@
         Sample data has been imported into Simple Invoics
 	<br />
 	<br />
+	<meta http-equiv="refresh" content="2;URL=index.php" />
 {else}
 	<br />
-        Sample data has NOT been imported into Simple Invoics
+        Something bad happened. Sample data has NOT been imported into Simple Invoics
 	<br />
 	<br />
 {/if}
-{*
-	<meta http-equiv="refresh" content="2;URL=index.php" />
-*}
+
+	
