@@ -72,10 +72,11 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 	// 1 import essential data
     $skip_db_patches = false;
 	//$install_tables_exists = checkTableExists(TB_PREFIX."biller");
-    if ($install_tables_exists == false)
+    if ( $install_tables_exists == false )
     { 
 		$module="install";
-		$view="index";
+		//$view="index";
+		$view == "structure" ? $view ="structure" : $view="index";
         //do installer
         $skip_db_patches = true;
 		
@@ -83,7 +84,8 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 	if ( ($install_tables_exists == true) AND ($install_data_exists == false) )
     { 
 	    $module = "install";
-		$view = "essential";
+		$view == "essential" ? $view ="essential" : $view="structure";
+		//$view = "essential";
         //do installer
         $skip_db_patches = true;
     }
@@ -109,14 +111,17 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 				$menu = false;
 			} else {
 				//If no invoices in db then show home page as default - else show Manage Invoices page
-				if ( invoice::are_there_any() > "0" )  
+				if ($module==null)
 				{
-				    $module = "invoices" ;
-					$view = "manage";
-				
-				} else { 
-				    $module = "index" ;
-					$view = "index";
+					if ( invoice::are_there_any() > "0" )  
+					{
+					    $module = "invoices" ;
+						$view = "manage";
+					
+					} else { 
+					    $module = "index" ;
+						$view = "index";
+					}
 				}
 			}
 		}

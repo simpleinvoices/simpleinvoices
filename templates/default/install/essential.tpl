@@ -1,5 +1,5 @@
 <br /><br />
-The Simple Invoices database structure has been import has been setup and essential data import
+The Simple Invoices essential data has been imported.  You can select to just start using Simple Invoices now or install sample data
 
 <br /><br />
 

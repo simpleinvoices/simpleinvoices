@@ -108,12 +108,14 @@ class db
 		try {	
 			//var_dump($this->_db);
 			$sth->execute();
+			$sth->closeCursor();
 		} catch(Exception $e){
 			echo $e->getMessage();
 			echo "Dude, what happened to your query?:<br /><br /> ".htmlspecialchars($sqlQuery)."<br />".htmlspecialchars(end($this->_db->errorInfo()));
+			$sth = NULL;
 		}
 		//$this->connection->closeCursor();
-		$sth->closeCursor();
+		//$sth->closeCursor();
 		return $sth;
 		
 		$sth = NULL;
