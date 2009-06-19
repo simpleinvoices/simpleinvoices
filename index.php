@@ -16,6 +16,10 @@ $module = isset($_GET['module'])?$_GET['module']:null;
 $view = isset($_GET['view'])?$_GET['view']:null;
 $action = isset($_GET['case'])?$_GET['case']:null;
 
+//TODO
+//validate $module/action/view (only numbers,letters,_-)
+//		preg_match("/^[a-z|A-Z|_]+\/[a-z|A-Z|_]+/",$path,$res);
+
 /*
 * The include configs and requirements stuff section - start
 */
@@ -70,14 +74,16 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 	//$install_tables_exists = checkTableExists(TB_PREFIX."biller");
     if ($install_tables_exists == false)
     { 
-	    $file = "install/index";
+		$module="install";
+		$view="index";
         //do installer
         $skip_db_patches = true;
 		
     }
 	if ( ($install_tables_exists == true) AND ($install_data_exists == false) )
     { 
-	    $file = "install/essential";
+	    $module = "install";
+		$view = "essential";
         //do installer
         $skip_db_patches = true;
     }
@@ -105,9 +111,12 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 				//If no invoices in db then show home page as default - else show Manage Invoices page
 				if ( invoice::are_there_any() > "0" )  
 				{
-				    $file = "invoices/manage" ;
+				    $module = "invoices" ;
+					$view = "manage";
+				
 				} else { 
-				    $file = "index/index";
+				    $module = "index" ;
+					$view = "index";
 				}
 			}
 		}
@@ -191,7 +200,7 @@ if (($module == "invoices" ) && (strstr($view,"template"))) {
 */
 
 
-$path = "$module/$view";
+$file= "$module/$view";
 
 /*
 * Prep the page - load the header stuff - start
@@ -267,14 +276,7 @@ if( !in_array($module."_".$view, $early_exit) )
 * Include the php file for the requested page section - start
 */
 
-		/*Local the requested php file for the module*/
-		preg_match("/^[a-z|A-Z|_]+\/[a-z|A-Z|_]+/",$path,$res);
-
-		if(isset($res[0]) && $res[0] == $path) 
-		{
-			$file = $path;
-		}	
-		
+	
 		/*
 		* If extension is enabled load the extension php file for the module	
 		* Note: this system is probably slow - if you got a better method for handling extensions let me know
@@ -290,15 +292,11 @@ if( !in_array($module."_".$view, $early_exit) )
 
 
 				//echo "Enabled:".$value['name']."<br><br>";
-				if(file_exists("./extensions/$extension->name/modules/$path.php")) {
+				if(file_exists("./extensions/$extension->name/modules/$module/$view.php")) {
 			
-					preg_match("/^[a-z|A-Z|_]+\/[a-z|A-Z|_]+/",$path,$res);
 
-					if(isset($res[0]) && $res[0] == $path) {
-						$file = $path;
-					}	
 
-					include_once("./extensions/$extension->name/modules/$file.php");
+					include_once("./extensions/$extension->name/modules/$module/$view.php");
 					$extensionPHPFile++;
 				}
 			}
@@ -306,9 +304,9 @@ if( !in_array($module."_".$view, $early_exit) )
 		/*
 		* If no extension php file for requested file load the normal php file if it exists
 		*/
-		if( ($extensionPHPFile == 0) AND (file_exists("./modules/$file.php")) ) 
+		if( ($extensionPHPFile == 0) AND (file_exists("./modules/$module/$view.php")) ) 
 		{
-			include_once("./modules/$file.php");
+			include_once("./modules/$module/$view.php");
 		}
 
 /*
@@ -441,7 +439,7 @@ if($module == "export")
 		*/	
 		if($extension->enabled == "1")
 		{
-			if(file_exists("./extensions/$extension->name/templates/default/$file.tpl")) 
+			if(file_exists("./extensions/$extension->name/templates/default/$module/$view.tpl")) 
 			{
 				$path = "../extensions/$extension->name/templates/default/$module/";
 				$tplDirectory = "extensions/$extension->name/";
@@ -454,7 +452,7 @@ if($module == "export")
 	* TODO Note: if more than one extension has got a template for the requested file than thats trouble :(
 	* - we really need a better extensions system
 	*/
-	if( ($extensionTemplates == 0) AND (file_exists("./templates/default/$file.tpl")) ) 
+	if( ($extensionTemplates == 0) AND (file_exists("./templates/default/$module/$view.tpl")) ) 
 	{ 
 				$path = "../templates/default/$module/";
 				$tplDirectory = "";
@@ -462,7 +460,7 @@ if($module == "export")
 	}
 	
 	$smarty->assign("path",$path);
-	$smarty -> $smarty_output("../".$tplDirectory."templates/default/$file.tpl");
+	$smarty -> $smarty_output("../".$tplDirectory."templates/default/$module/$view.tpl");
 	
 	// If no smarty template - add message - onyl uncomment for dev - commented out for release
 	if ($extensionTemplates == 0 )

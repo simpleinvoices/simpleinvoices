@@ -1022,16 +1022,19 @@ function getSystemDefaults() {
 
 	global $dbh;
 	global $auth_session;
+
+	$sql_default  = "SELECT def.name,def.value FROM ".TB_PREFIX."system_defaults def INNER JOIN ".TB_PREFIX."extensions ext ON (def.domain_id = ext.domain_id)";
+	$sql_default .= " WHERE enabled=1";
+	$sql_default .= " AND ext.name = 'core'";
+	$sql_default .= " AND def.domain_id = :domain_id";
+	$sql_default .= " ORDER BY extension_id ASC";		// order is important for overriding settings
 	
-	$sql  = "SELECT def.name,def.value FROM ".TB_PREFIX."system_defaults def INNER JOIN ".TB_PREFIX."extensions ext ON (def.extension_id = ext.id)";
-	$sql .= " WHERE enabled=1";
-	$sql .= " AND def.domain_id = :domain_id";
-	$sql .= " ORDER BY extension_id ASC";		// order is important for overriding settings
 	
+
 	// get all settings from default domain (0)
 	//$sth = dbQuery($sql.$current_settings.$order, 'domain_id', 0) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
-	$sth = dbQuery($sql, 'domain_id', 0) or die(htmlspecialchars(end($dbh->errorInfo())));	
+	$sth = dbQuery($sql_default, ':domain_id', 0) or die(htmlspecialchars(end($dbh->errorInfo())));	
 	
 	$defaults = null;
 	$default = null;
@@ -1041,6 +1044,12 @@ function getSystemDefaults() {
 		$defaults["$default[name]"] = $default['value'];
 	}
 
+	$sql  = "SELECT def.name,def.value FROM ".TB_PREFIX."system_defaults def INNER JOIN ".TB_PREFIX."extensions ext ON (def.extension_id = ext.id)";
+	$sql .= " WHERE enabled=1";
+	$sql .= " AND def.domain_id = :domain_id";
+	$sql .= " ORDER BY extension_id ASC";		// order is important for overriding settings
+	
+	
 	// add all settings from current domain
 	//$sth = dbQuery($sql.$current_settings.$order, 'domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$sth = dbQuery($sql, 'domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));

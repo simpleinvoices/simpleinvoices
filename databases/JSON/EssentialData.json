@@ -100,7 +100,7 @@
     "si_extensions": [
         {
             "id": "0",
-            "domain_id": "1",
+            "domain_id": "0",
             "name": "core",
             "description": "Core part of Simple Invoices - always enabled",
             "enabled": "1"
@@ -122,11 +122,13 @@
     ] ,
     "si_payment_types": [
         {
+			"pt_id": "1",
             "domain_id": "1",
             "pt_description": "Cash",
             "pt_enabled": "1" 
         },
         {
+			"pt_id": "2",
             "domain_id": "1",
             "pt_description": "Credit Card",
             "pt_enabled": "1" 
