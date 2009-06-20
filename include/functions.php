@@ -320,37 +320,63 @@ EOD;
 function simpleInvoicesError($type,$info1 = "", $info2 = "") 
 {
 
-switch ($type)
-{
+    switch ($type)
+    {
 
-	case "notWriteable":
+        case "notWriteable":
 
-		$error = exit("
-		<br />
-		===========================================<br />
-		Simple Invoices error<br />
-		===========================================<br />
-		The ".$info1." <b>".$info2."</b> has to be writeable");
-	break;
-	
-	case "dbConnection":
-	
-		$error = exit("
-		<br />
-		===========================================<br />
-		Simple Invoices database connection problem<br />
-		===========================================<br />
-		Could not connect to the Simple Invoices database<br /><br />
-		For information on how to fix this pease refer to the following database error: <br /> --> <b>$info1</b><br /><br />
-		If this is an Access denied error please make sure that the database.params setting in config/config.ini are correct 
-		<br />
-		===========================================<br />
-		");
-	break;
+            $error = exit("
+            <br />
+            ===========================================<br />
+            Simple Invoices error<br />
+            ===========================================<br />
+            The ".$info1." <b>".$info2."</b> has to be writeable");
+        break;
+        
+        case "dbConnection":
+        
+            $error = exit("
+            <br />
+            ===========================================<br />
+            Simple Invoices database connection problem<br />
+            ===========================================<br />
+            <br />
+            Could not connect to the Simple Invoices database<br /><br />
+            For information on how to fix this pease refer to the following database error: <br /> --> <b>$info1</b><br /><br />
+            If this is an Access denied error please enter the correct database connection details config/config.ini
+            <br />
+            <br />
+            <b>Note:</b> If you are installing Simple Invoices please follow the below steps: 
+            <br />1. Create a blank MySQL database
+            <br />2. Enter the correct database connection details in the config/config.ini file
+            <br />3. Refresh this page
+        
+            <br />
+            <br />
+            ===========================================<br />
+            ");
+        break;
+        case "PDO":
+        
+            $error = exit("
+            <br />
+            ===========================================<br />
+            Simple Invoices - PDO problem<br />
+            ===========================================<br />
+            <br />
+            PDO is not configured in your PHP installation.<br />  
+            This means that Simple Invoices can't be used.<br /><br />
 
-}
+            To fix this please installed the pdo_mysql php extension.<br />
+            If you are using a webhost please email them and get them to <br />
+            install PDO for PHP with the MySQL extension<br /><br />
+            ===========================================<br />
+            ");
+        break;
 
-return $error;
+    }
+
+    return $error;
 
 }
 

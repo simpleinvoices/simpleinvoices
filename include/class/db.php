@@ -10,7 +10,11 @@ class db
 
 	function __construct()
 	{
+
 		global $config;
+        //check if PDO is availbel
+        
+        class_exists('PDO',false) ? "" : simpleInvoicesError("PDO");
 		/*
 		* strip the pdo_ section from the adapter
 		*/
@@ -63,7 +67,7 @@ class db
 		}
 		catch( PDOException $exception )
 		{
-			//simpleInvoicesError("dbConnection",$exception->getMessage());
+			simpleInvoicesError("dbConnection",$exception->getMessage());
 			die($exception->getMessage());
 		}
 			
