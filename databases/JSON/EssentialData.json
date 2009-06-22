@@ -628,6 +628,9 @@
             "sql_patch_ref": "121"
         },
         {
+            "sql_patch_ref": "122"
+        },
+        {
             "sql_patch_ref": "123"
         },
         {
@@ -859,25 +862,22 @@
             "sql_patch_ref": "199"
         },
         {
-            "sql_id": "201",
             "sql_patch_ref": "200",
             "sql_patch": "Update extensions table",
             "sql_release": "20090529",
-            "sql_statement": "UPDATE si_extensions SET `id` = ''0'' WHERE `name` = ''core'' LIMIT 1;"
-        }
+            "sql_statement": "UPDATE si_extensions SET id = 0 WHERE name = core LIMIT 1"
+        },
         {
-            "sql_id": "202",
             "sql_patch_ref": "201",
             "sql_patch": "Set domain_id on system defaults table to 1",
             "sql_release": "20090622",
-            "sql_statement": "UPDATE `".TB_PREFIX."system_defaults` SET `domain_id` = '1';"
-        }
+            "sql_statement": "UPDATE si_system_defaults SET domain_id = 1"
+        },
         {
-            "sql_id": "203",
             "sql_patch_ref": "202",
             "sql_patch": "Set extension_id on system defaults table to 1",
             "sql_release": "20090622",
-            "sql_statement": "UPDATE `".TB_PREFIX."system_defaults` SET `extension_id` = '1' ;"
+            "sql_statement": "UPDATE si_system_defaults SET extension_id = 1"
         }
     ],
     "si_system_defaults": [
