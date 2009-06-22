@@ -142,19 +142,19 @@
             <td>
             <a href="index.php?module=invoices&amp;view=itemised" class="positive">
             <img src="./images/common/add.png" alt=""/>
-            Add a new Invoice {* LANG TODO*}
+            {$LANG.add_new_invoice}
             </a>
         </td>
         <td>
             <a href="index.php?module=customers&amp;view=add" class="">
             <img src="./images/common/vcard_add.png" alt=""/>
-            Add a new Client {* LANG TODO*}
+            {$LANG.add_customer}
             </a>
         </td>
         <td>
             <a href="index.php?module=products&amp;view=add" class="">
             <img src="./images/common/cart_add.png" alt=""/>
-            Add a new Product {* LANG TODO*}
+            {$LANG.add_new_product}
             </a>
             </td>
         </tr>
