@@ -54,6 +54,21 @@
 	</select>
 {/if}
 
+{$defaults.tax_per_line_item}
+						{section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
+						<td>				                				                
+							<select 
+								id="tax_id[0][{$smarty.section.tax.index}]"
+								name="tax_id[0][{$smarty.section.tax.index}]"
+							>
+							<option value=""></option>
+							{foreach from=$taxes item=tax}
+								<option value="{$tax.tax_id}">{$tax.tax_description}</option>
+							{/foreach}
+						</select>
+						</td>
+						{/section}
+
 </td><td>
 
 {if $preferences == null }

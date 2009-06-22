@@ -1205,8 +1205,8 @@ PRIMARY KEY  (`user_id`)) ;
     
     $patch['197']['name'] = "Defaults table - add domain_id and extension_id field";
     $patch['197']['patch'] = "ALTER TABLE ".TB_PREFIX."system_defaults 
-				ADD `domain_id` INT( 5 ) NOT NULL DEFAULT '0',
-				ADD `extension_id` INT( 5 ) NOT NULL DEFAULT '0',
+				ADD `domain_id` INT( 5 ) NOT NULL DEFAULT '1',
+				ADD `extension_id` INT( 5 ) NOT NULL DEFAULT '1',
 				DROP INDEX `name`,
 				ADD INDEX `name` ( `name` );";
     $patch['197']['date'] = "20090321";
@@ -1223,12 +1223,21 @@ PRIMARY KEY  (`user_id`)) ;
     $patch['199']['name'] = "Update extensions table";
     $patch['199']['patch'] = "INSERT INTO ".TB_PREFIX."extensions (
 			`id`,`domain_id`,`name`,`description`,`enabled`) 
-			VALUES ('0','0','core','Core part of Simple Invoices - always enabled','1');";
+			VALUES ('1','1','core','Core part of Simple Invoices - always enabled','1');";
     $patch['199']['date'] = "20090529";
 
     $patch['200']['name'] = "Update extensions table";
-    $patch['200']['patch'] = "UPDATE ".TB_PREFIX."extensions SET `id` = '0' WHERE `name` = 'core' LIMIT 1;";
+    $patch['200']['patch'] = "UPDATE ".TB_PREFIX."extensions SET `id` = '1' WHERE `name` = 'core' LIMIT 1;";
     $patch['200']['date'] = "20090529";
+
+    $patch['201']['name'] = "Set domain_id on system defaults table to 1";
+    $patch['201']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET `domain_id` = '1' ;";
+    $patch['201']['date'] = "20090622";    
+
+    $patch['202']['name'] = "Set extension_id on system defaults table to 1";
+    $patch['202']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET `extension_id` = '1' ;";
+    $patch['202']['date'] = "20090622";    
+
  /*
 */
 /*
