@@ -132,6 +132,19 @@ if ( $install_tables_exists != false )
 	}
 }
 
+// If no extension loaded, load Core
+if (! $config->extension)
+{
+	$extension_core = new Zend_Config(array('core'=>array(
+		'id'=>0,
+		'domain_id'=>0,
+		'name'=>'core',
+		'description'=>'Core part of Simple Invoices - always enabled',
+		'enabled'=>1
+		)));
+	$config->extension = $extension_core;
+}
+
 include_once('./include/language.php');
 
 include_once('./include/functions.php');
@@ -163,7 +176,8 @@ $early_exit[] = "documentation_view";
 //$early_exit[] = "install_index";
 
 
-switch ($_GET['module'])
+$module = isset($_GET['module'])?$_GET['module']:null;
+switch ($module)
 {
 	case "export" :	
 		$smarty_output = "fetch";
@@ -182,6 +196,7 @@ $siUrl = getURL();
 
 //If using the folowing line, the DB settings should be appended to the config array, instead of replacing it (NOT TESTED!)
 //$config->extension() = $DB_extensions;
+
 
 include_once("./include/backup.lib.php");
 

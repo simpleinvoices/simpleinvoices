@@ -34,7 +34,7 @@ $smarty -> assign("taxes", $taxes);
 $smarty -> assign("products", $products);
 $smarty -> assign("preferences", $preferences);
 $smarty -> assign("debtor", $debtor);
-$smarty -> assign("title", $title);
+//$smarty -> assign("title", $title);
 
 $smarty -> assign('pageActive', 'dashboard');
 $smarty -> assign('active_tab', '#home');

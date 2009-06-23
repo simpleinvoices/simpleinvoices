@@ -117,7 +117,7 @@
             <td>
             <a href="index.php?module=options&amp;view=index" class="">
             <img src="./images/common/cog_edit.png" alt=""/>
-            Customise the settings {* LANG TODO*}
+            {$LANG.settings}
             </a>
             </td>
         </tr>
