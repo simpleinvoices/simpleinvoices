@@ -136,8 +136,8 @@ if ( $install_tables_exists != false )
 if (! $config->extension)
 {
 	$extension_core = new Zend_Config(array('core'=>array(
-		'id'=>0,
-		'domain_id'=>0,
+		'id'=>1,
+		'domain_id'=>1,
 		'name'=>'core',
 		'description'=>'Core part of Simple Invoices - always enabled',
 		'enabled'=>1
