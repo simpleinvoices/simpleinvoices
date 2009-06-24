@@ -7,6 +7,7 @@ Simple Invoices todo list
 
 	#really shoud
 	- custom fields - domain id - stuff - JK
+	- make search in Manage pages work good for all pages
 	- Products - allow setting 2 or more default taxes pre product
 	- user - if user disbaled - if login attempt - give nice message - later
 	- PDF - bottom getting cut off - refer fourm
@@ -16,7 +17,11 @@ Simple Invoices todo list
     - move date popup to jquery UI
 	- Reports - localise
 	- database backup - export as XML - Hannes
-	
+
+RC1
+    - language and locale pre invoice preference
+	- locale select in defaults 
+
 ##############################
 2009.1 :: Beta 5 
 - current work in progress (next release)
@@ -25,7 +30,6 @@ Simple Invoices todo list
 	- User Add - fill in info from session 
 	-- http://simpleinvoices.org/forum/discussion/804/adding-new-user-pre-populated/#Item_1
 	- Database log - review
-	- test invoice edit/create more - from new and upgraded db
 	- Total style invoice 
     -- add/edit review
     -- multiple tax rates - fix
@@ -40,14 +44,4 @@ Simple Invoices todo list
     - Update UI of Manage Extensions
     - Delete invoices - add delete line item taxes
 
-	- make search in Manage pages work good for all pages
 	- redo home page - Recent Activity and Quick Stats
-	
-	- mini installer
-	-- add checks for php.ini settings, writeable folders etc.. and make pretty
-	-- create a mini installer and use Zend_config_writer to write to config.ini
-	-- just ask if you want demo data installer
-	-- just the basics - do rest later
-
-	- change config.ini back to config.php - but keep ini format and add ;<?php on line 1 and ; exit; on line 2 - this is for sercurity reasons
-	-- maybe got to think about this and see if new installer can do it

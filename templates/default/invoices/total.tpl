@@ -38,38 +38,39 @@
 
 
 <tr>
-	<td class="details_screen">{$LANG.gross_total}</td><td class="details_screen">{$LANG.tax}</td><td class="details_screen">{$LANG.inv_pref}</td>
+	<td class="details_screen">{$LANG.gross_total}</td>
+    {section name=tax_header loop=$defaults.tax_per_line_item }
+        <td class="details_screen">{$LANG.tax} {if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1}{/if} </td>
+    {/section}
+    <td class="details_screen">{$LANG.inv_pref}</td>
 </tr>
 <tr>
 	<td><input type="text" class="validate[required]" name="unit_price" size="15" /></td>
-	<td>
-    
 	{if $taxes == null }
-	<p><em>{$LANG.no_taxes}</em></p>
-{else}
-	<select name="tax_id[0][0]"">
-	{foreach from=$taxes item=tax}
-		<option {if $tax.tax_id == $defaults.tax} selected {/if} value="{$tax.tax_id}">{$tax.tax_description}</option>
-	{/foreach}
-	</select>
-{/if}
-
-{$defaults.tax_per_line_item}
-						{section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
-						<td>				                				                
-							<select 
-								id="tax_id[0][{$smarty.section.tax.index}]"
-								name="tax_id[0][{$smarty.section.tax.index}]"
-							>
-							<option value=""></option>
-							{foreach from=$taxes item=tax}
-								<option value="{$tax.tax_id}">{$tax.tax_description}</option>
-							{/foreach}
-						</select>
-						</td>
-						{/section}
-
-</td><td>
+	    <td><p><em>{$LANG.no_taxes}</em></p></td>
+    {else}
+    {*
+    	<select name="tax_id[0][0]"">
+    	{foreach from=$taxes item=tax}
+    		<option {if $tax.tax_id == $defaults.tax} selected {/if} value="{$tax.tax_id}">{$tax.tax_description}</option>
+    	{/foreach}
+    	</select>
+    *}
+        {section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
+        <td>				                				                
+            <select 
+                id="tax_id[0][{$smarty.section.tax.index}]"
+                name="tax_id[0][{$smarty.section.tax.index}]"
+            >
+            <option value=""></option>
+            {foreach from=$taxes item=tax}
+                <option {if $tax.tax_id == $defaults.tax AND $smarty.section.tax.index == 0} selected {/if}   value="{$tax.tax_id}">{$tax.tax_description}</option>
+            {/foreach}
+        </select>
+        </td>
+        {/section}
+    {/if}
+<td>
 
 {if $preferences == null }
 	<p><em>{$LANG.no_preferences}</em></p>
