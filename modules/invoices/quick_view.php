@@ -24,7 +24,9 @@ $invoice_id = $_GET['id'];
 
 
 $invoice = getInvoice($invoice_id);
+$invoice_number_of_taxes = numberOfTaxesForInvoice($invoice_id);
 $invoice_type =  getInvoiceType($invoice['type_id']);
+
 $customer = getCustomer($invoice['customer_id']);
 $biller = getBiller($invoice['biller_id']);
 $preference = getPreference($invoice['preference_id']);
@@ -63,6 +65,7 @@ $smarty -> assign('active_tab', '#money');
 $smarty -> assign("customField",$customField);
 $smarty -> assign("customFieldLabels",$customFieldLabels);
 $smarty -> assign("invoice_age",$invoice_age);
+$smarty -> assign("invoice_number_of_taxes",$invoice_number_of_taxes);
 $smarty -> assign("invoiceItems",$invoiceItems);
 $smarty -> assign("defaults",$defaults);
 $smarty -> assign("preference",$preference);

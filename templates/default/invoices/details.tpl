@@ -31,9 +31,9 @@
 	<tr>
 	        <td class="details_screen">{$LANG.date_formatted}</td>
 	{if $invoice.id == null} 
-        	<td><input type="text" class="date-picker" name="date" id="date1" value="{$smarty.now|date_format:"%Y-%m-%d"}" /></td>
+        	<td><input type="text" size="10" class="date-picker" name="date" id="date1" value="{$smarty.now|date_format:"%Y-%m-%d"}" /></td>
 	{else}
-        	<td><input type="text" class="date-picker" name="date" id="date1" value="{$invoice.calc_date}" /></td>
+        	<td><input type="text" size="10" class="date-picker" name="date" id="date1" value="{$invoice.calc_date}" /></td>
 	{/if}
 	</tr>
 	<tr>

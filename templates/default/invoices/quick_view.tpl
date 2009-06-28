@@ -213,23 +213,42 @@
 	        <tr>
         	        <td colspan="6"><br /></td>
 	        </tr>
+	<tr class="details_screen">
+        <td colspan="3"></td>
+		<td colspan="2" class="align_right">{$LANG.gross_total}&nbsp;</td>
+		<td colspan="1" class="align_right">{if $invoice_number_of_taxes.count > 1}<u>{/if}{$preference.pref_currency_sign}{$invoiceItems.0.gross_total|siLocal_number}{if $invoice_number_of_taxes.count > 1}</u>{/if}</td>
+    </tr>
+	{if $invoice_number_of_taxes.count > 1}
 	        <tr>
-	                <td></td>
-					<td></td>
-					<td></td>
-					<td style="text-align:right"><b>{$LANG.gross_total}</b></td>
-					<td style="text-align:right"><b>{$LANG.tax}</b></td>
-					<td style="text-align:right"><b>{$LANG.total_uppercase}</b></td>
-        	</tr>
-	        <tr>
-        	        <td></td>
-					<td></td>
-					<td></td>
-					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItems.0.gross_total|number_format:2}</td>
-					<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItems.0.tax_amount|number_format:2}</td>
-					<td style="text-align:right"><u>{$preference.pref_currency_sign}{$invoiceItems.0.total|number_format:2}</u></td>
+        	        <td colspan="6"><br /></td>
 	        </tr>
-
+    {/if}
+    {section name=line start=0 loop=$invoice.tax_grouped step=1}
+    	{if ($invoice.tax_grouped[line].tax_amount != "0") }
+    	
+    	<tr class="details_screen">
+	        <td colspan="3"></td>
+			<td colspan="2" class="align_right">{$invoice.tax_grouped[line].tax_name}&nbsp;</td>
+			<td colspan="1" class="align_right">{$preference.pref_currency_sign}{$invoice.tax_grouped[line].tax_amount|siLocal_number}</td>
+	    </tr>
+	    {/if}
+	    
+	{/section}
+	{if $invoice_number_of_taxes.count > 1}
+	<tr class="details_screen">
+        <td colspan="3"></td>
+		<td colspan="2" class="align_right">{$LANG.tax_total}&nbsp;</td>
+		<td colspan="1" class="align_right"><u>{$preference.pref_currency_sign}{$invoice.total_tax|siLocal_number}</u></td>
+    </tr>
+    {/if}
+	<tr>
+		<td colspan="6"><br /></td>
+	</tr>
+    <tr class="details_screen">
+        <td colspan="3"></td>
+		<td colspan="2" class="align_right"><b>{$preference.pref_inv_wording} {$LANG.amount}&nbsp;</b></td>
+		<td colspan="2" class="align_right"><span class="double_underline">{$preference.pref_currency_sign}{$invoice.total|siLocal_number}</span></td>
+    </tr>
         	<tr>
                 	<td colspan="6"><br /><br /></td>
 	        </tr>
@@ -240,7 +259,7 @@
 
 {/if}
 
-{if $invoice.type_id == 2 || $invoice.type_id == 3  || $invoice.type_id == 4}
+{if $invoice.type_id == 2 || $invoice.type_id == 3}
 
         <tr>
                 <td colspan="6"><br /></td>
@@ -414,35 +433,7 @@
 		<td colspan="2" class="align_right"><b>{$preference.pref_inv_wording} {$LANG.amount}</b></td>
 		<td colspan="2" class="align_right"><span class="double_underline">{$preference.pref_currency_sign}{$invoice.total|siLocal_number}</span></td>
     </tr>
-{*
-	<tr>
-		<td colspan="6"><br /><br /></td>
-	</tr>	
-
-	<tr>
-		<td colspan="6"><b>{$preference.pref_inv_detail_heading}</b></td>
-	</tr>
-*}
 {/if}
-	{*
-		{showCustomFields categorieId="4" itemId=$invoice.id }
-	*}
-{*
-    <tr>
-        <td colspan="6"><i>{$preference.pref_inv_detail_line}</i></td>
-    </tr>
-	<tr>
-		<td colspan="6">{$preference.pref_inv_payment_method}</td>
-	</tr>
-    <tr>
-        <td>{$preference.pref_inv_payment_line1_name}</td>
-		<td colspan="5">{$preference.pref_inv_payment_line1_value}</td>
-    </tr>
-    <tr>
-        <td>{$preference.pref_inv_payment_line2_name}</td>
-		<td colspan="5">{$preference.pref_inv_payment_line2_value}</td>
-    </tr>
-*}
 </table>
 
 <br /><br />
