@@ -916,6 +916,7 @@ function getInvoice($id) {
 	$invoice['calc_date'] = date('Y-m-d', strtotime( $invoice['date'] ) );
 	$invoice['date'] = siLocal::date( $invoice['date'] );
 	$invoice['total'] = getInvoiceTotal($invoice['id']);
+	$invoice['gross'] = invoice::getInvoiceGross($invoice['id']);
 	$invoice['paid'] = calc_invoice_paid($invoice['id']);
 	$invoice['owing'] = $invoice['total'] - $invoice['paid'];
 
@@ -940,7 +941,7 @@ Purpose: to show a nice summary of total $ for tax for an invoice
 function numberOfTaxesForInvoice($invoice_id)
 {
 	$sql = "select 
-				count(*) as count
+				DISTINCT tax.tax_id
 			from 
 				si_invoice_item_tax item_tax, 
 				si_invoice_items item, 
@@ -952,9 +953,9 @@ function numberOfTaxesForInvoice($invoice_id)
 				AND 
 				item.invoice_id = :invoice_id
 				GROUP BY 
-				item.invoice_id;";
+				tax.tax_id;";
 	$sth = dbQuery($sql, ':invoice_id', $invoice_id) or die(htmlspecialchars(end($dbh->errorInfo())));
-	$result = $sth->fetch();
+	$result = $sth->rowCount();
 
 	return $result;
 

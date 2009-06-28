@@ -58,6 +58,7 @@ class export
 			{
 			
 				$invoice = getInvoice($this->id);
+                $invoice_number_of_taxes = numberOfTaxesForInvoice($this->id);
 				$customer = getCustomer($invoice['customer_id']);
 				$biller = getBiller($invoice['biller_id']);
 				$preference = getPreference($invoice['preference_id']);
@@ -88,6 +89,7 @@ class export
 					$smarty -> assign('biller',$biller);
 					$smarty -> assign('customer',$customer);
 					$smarty -> assign('invoice',$invoice);
+					$smarty -> assign('invoice_number_of_taxes',$invoice_number_of_taxes);
 					$smarty -> assign('preference',$preference);
 					$smarty -> assign('logo',$logo);
 					$smarty -> assign('template',$template);

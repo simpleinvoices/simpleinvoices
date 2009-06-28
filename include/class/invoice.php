@@ -50,4 +50,19 @@ class invoice {
         $count = $sth->fetch();
         return $count['count'];
     }
+
+    /**
+    * Function getInvoiceGross
+    * 
+    * Used to get the gross total for a given invoice number
+    **/
+    public static function getInvoiceGross($invoice_id) {
+        global $LANG;
+        
+        $sql ="SELECT SUM(gross_total) AS gross_total FROM ".TB_PREFIX."invoice_items WHERE invoice_id =  :invoice_id";
+        $sth = dbQuery($sql, ':invoice_id', $invoice_id);
+        $res = $sth->fetch();
+        //echo "TOTAL".$res['total'];
+        return $res['gross_total'];
+    }
 }

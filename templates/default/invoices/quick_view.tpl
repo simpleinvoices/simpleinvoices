@@ -210,45 +210,6 @@
 	        <tr>
 	                <td colspan="6">{$invoiceItems.0.description|unescape}</td>
         	</tr>
-	        <tr>
-        	        <td colspan="6"><br /></td>
-	        </tr>
-	<tr class="details_screen">
-        <td colspan="3"></td>
-		<td colspan="2" class="align_right">{$LANG.gross_total}&nbsp;</td>
-		<td colspan="1" class="align_right">{if $invoice_number_of_taxes.count > 1}<u>{/if}{$preference.pref_currency_sign}{$invoiceItems.0.gross_total|siLocal_number}{if $invoice_number_of_taxes.count > 1}</u>{/if}</td>
-    </tr>
-	{if $invoice_number_of_taxes.count > 1}
-	        <tr>
-        	        <td colspan="6"><br /></td>
-	        </tr>
-    {/if}
-    {section name=line start=0 loop=$invoice.tax_grouped step=1}
-    	{if ($invoice.tax_grouped[line].tax_amount != "0") }
-    	
-    	<tr class="details_screen">
-	        <td colspan="3"></td>
-			<td colspan="2" class="align_right">{$invoice.tax_grouped[line].tax_name}&nbsp;</td>
-			<td colspan="1" class="align_right">{$preference.pref_currency_sign}{$invoice.tax_grouped[line].tax_amount|siLocal_number}</td>
-	    </tr>
-	    {/if}
-	    
-	{/section}
-	{if $invoice_number_of_taxes.count > 1}
-	<tr class="details_screen">
-        <td colspan="3"></td>
-		<td colspan="2" class="align_right">{$LANG.tax_total}&nbsp;</td>
-		<td colspan="1" class="align_right"><u>{$preference.pref_currency_sign}{$invoice.total_tax|siLocal_number}</u></td>
-    </tr>
-    {/if}
-	<tr>
-		<td colspan="6"><br /></td>
-	</tr>
-    <tr class="details_screen">
-        <td colspan="3"></td>
-		<td colspan="2" class="align_right"><b>{$preference.pref_inv_wording} {$LANG.amount}&nbsp;</b></td>
-		<td colspan="2" class="align_right"><span class="double_underline">{$preference.pref_currency_sign}{$invoice.total|siLocal_number}</span></td>
-    </tr>
 {/if}
 
 {if $invoice.type_id == 2 || $invoice.type_id == 3}
@@ -392,40 +353,53 @@
 				<td colspan="6">{$invoice.note|unescape}</td>
 		</tr>
 		{/if}
-
-	<tr>
-		<td colspan="6"><br /></td>
-	</tr>	
-
-
+{* end itemised invoice *}
+{/if} 
+		<tr>
+				<td colspan="6">&nbsp;</td>
+		</tr>
+    {* tax section - start *}
+	{if $invoice_number_of_taxes > 0}
+	<tr class="details_screen">
+        <td colspan="3"></td>
+		<td colspan="2" class="align_right">{$LANG.gross_total}&nbsp;</td>
+		<td colspan="1" class="align_right">{if $invoice_number_of_taxes > 1}<u>{/if}{$preference.pref_currency_sign}{$invoice.gross|siLocal_number}{if $invoice_number_of_taxes > 1}</u>{/if}</td>
+    </tr>
+    {/if}
+	{if $invoice_number_of_taxes > 1 }
+	        <tr>
+        	        <td colspan="6"><br /></td>
+	        </tr>
+    {/if}
     {section name=line start=0 loop=$invoice.tax_grouped step=1}
-    
     	{if ($invoice.tax_grouped[line].tax_amount != "0") }
     	
     	<tr class="details_screen">
 	        <td colspan="3"></td>
-			<td colspan="2" class="align_right">{$invoice.tax_grouped[line].tax_name}</td>
+			<td colspan="2" class="align_right">{$invoice.tax_grouped[line].tax_name}&nbsp;</td>
 			<td colspan="1" class="align_right">{$preference.pref_currency_sign}{$invoice.tax_grouped[line].tax_amount|siLocal_number}</td>
 	    </tr>
-	    
 	    {/if}
 	    
 	{/section}
-	
+	{if $invoice_number_of_taxes > 1}
 	<tr class="details_screen">
         <td colspan="3"></td>
-		<td colspan="2" class="align_right">{$LANG.tax_total}</td>
+		<td colspan="2" class="align_right">{$LANG.tax_total}&nbsp;</td>
 		<td colspan="1" class="align_right"><u>{$preference.pref_currency_sign}{$invoice.total_tax|siLocal_number}</u></td>
     </tr>
+    {/if}
+	{if $invoice_number_of_taxes > 1}
 	<tr>
 		<td colspan="6"><br /></td>
 	</tr>
+    {/if}
     <tr class="details_screen">
         <td colspan="3"></td>
-		<td colspan="2" class="align_right"><b>{$preference.pref_inv_wording} {$LANG.amount}</b></td>
+		<td colspan="2" class="align_right"><b>{$preference.pref_inv_wording} {$LANG.amount}&nbsp;</b></td>
 		<td colspan="2" class="align_right"><span class="double_underline">{$preference.pref_currency_sign}{$invoice.total|siLocal_number}</span></td>
     </tr>
-{/if}
+    {* tax section - end *}
 </table>
 
 <br /><br />
