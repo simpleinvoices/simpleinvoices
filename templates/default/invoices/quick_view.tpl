@@ -249,14 +249,6 @@
 		<td colspan="2" class="align_right"><b>{$preference.pref_inv_wording} {$LANG.amount}&nbsp;</b></td>
 		<td colspan="2" class="align_right"><span class="double_underline">{$preference.pref_currency_sign}{$invoice.total|siLocal_number}</span></td>
     </tr>
-        	<tr>
-                	<td colspan="6"><br /><br /></td>
-	        </tr>
-        	<tr>
-                	<td colspan="6"><b>{$preference.pref_inv_detail_heading}</b></td>
-	        </tr>
-
-
 {/if}
 
 {if $invoice.type_id == 2 || $invoice.type_id == 3}

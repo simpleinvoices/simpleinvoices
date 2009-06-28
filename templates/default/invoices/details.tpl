@@ -114,6 +114,9 @@
 		</tr>
         <tr>
 			<td class="details_screen">{$LANG.tax}</td>
+                <td>
+                    <table>     
+                        <tr>
 						{section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
 							<td>				                				                
 								<select 
@@ -128,9 +131,10 @@
 							</select>
 							</td>
 						{/section}
-						<td>
+                        </tr>
+                    </table>
+				<td>
         </tr>
-		<tr>
 
 {/if}
 
@@ -298,10 +302,7 @@
 	             <td colspan="6" ><textarea input type="text" class="editor" name="note" rows="10" cols="70" wrap="nowrap">{$invoice.note|unescape}</textarea></td>
 			</tr>
 			
-
-	{/if}
-	
-	
+{/if}
 
 	<tr>
 		<td class="details_screen">{$LANG.inv_pref}</td><td>
