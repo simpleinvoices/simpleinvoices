@@ -40,6 +40,7 @@ Simple Invoices todo list
 	-- http://simpleinvoices.org/forum/discussion/804/adding-new-user-pre-populated/#Item_1
 	- Total style invoice 
     -- templates - adjust the export template
+    -- if no taxes select - make this work OK
 	- invoice edit - notes - if note empty then have closed if not empty then display for edit - work-in-progress
     - Delete invoices - add delete line item taxes
     - Email - fix errors

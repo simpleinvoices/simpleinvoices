@@ -369,7 +369,7 @@
     <tr>
         <td colspan="2"></td>
 		<td colspan="3" align="right"><b>{$preference.pref_inv_wording} {$LANG.amount}&nbsp;</b></td>
-		<td colspan="2" align="right"><span class="double_underline">{$preference.pref_currency_sign}{$invoice.total|siLocal_number}</span></td>
+		<td colspan="2" align="right"><span class="double_underline"><u>{$preference.pref_currency_sign}{$invoice.total|siLocal_number}</u></span></td>
     </tr>
     {* tax section - end *}
 {*

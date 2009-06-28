@@ -293,7 +293,50 @@
 	{/if}
 	
 
+    {* tax section - start *}
+	{if $invoice_number_of_taxes > 0}
+	<tr>
+        <td colspan="2"></td>
+		<td colspan="3" align="right">{$LANG.gross_total}&nbsp;</td>
+		<td colspan="1" align="right">{if $invoice_number_of_taxes > 1}<u>{/if}{$preference.pref_currency_sign}{$invoice.gross|siLocal_number}{if $invoice_number_of_taxes > 1}</u>{/if}</td>
+    </tr>
+    {/if}
+	{if $invoice_number_of_taxes > 1 }
+	        <tr>
+        	        <td colspan="6"><br /></td>
+	        </tr>
+    {/if}
+    {section name=line start=0 loop=$invoice.tax_grouped step=1}
+    	{if ($invoice.tax_grouped[line].tax_amount != "0") }
+    	
+    	<tr>
+	        <td colspan="2"></td>
+			<td colspan="3" align="right">{$invoice.tax_grouped[line].tax_name}&nbsp;</td>
+			<td colspan="1" align="right">{$preference.pref_currency_sign}{$invoice.tax_grouped[line].tax_amount|siLocal_number}</td>
+	    </tr>
+	    {/if}
+	    
+	{/section}
+	{if $invoice_number_of_taxes > 1}
+	<tr>
+        <td colspan="2"></td>
+		<td colspan="3" align="right">{$LANG.tax_total}&nbsp;</td>
+		<td colspan="1" align="right"><u>{$preference.pref_currency_sign}{$invoice.total_tax|siLocal_number}</u></td>
+    </tr>
+    {/if}
+	{if $invoice_number_of_taxes > 1}
+	<tr>
+		<td colspan="6"><br /></td>
+	</tr>
+    {/if}
+    <tr>
+        <td colspan="2"></td>
+		<td colspan="3" align="right"><b>{$preference.pref_inv_wording} {$LANG.amount}&nbsp;</b></td>
+		<td colspan="2" align="right"><span class="double_underline">{$preference.pref_currency_sign}{$invoice.total|siLocal_number}</span></td>
+    </tr>
+    {* tax section - end *}
 
+    {*
     {section name=line start=0 loop=$invoice.tax_grouped step=1}
     
     	{if ($invoice.tax_grouped[line].tax_amount != "0") }  
@@ -322,6 +365,7 @@
 		<td align="right" colspan="2"><b>{$preference.pref_inv_wording} {$LANG.amount}</b></td>
 		<td  align="right"><u>{$preference.pref_currency_sign}{$invoice.total|number_format:2}</u></td>
 	</tr>
+    *}
 	<tr>
 		<td colspan="6"><br /><br /></td>
 	</tr>
