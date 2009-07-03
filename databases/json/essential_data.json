@@ -1091,7 +1091,8 @@
             "email": "demo@simpleinvoices.org",
             "role_id": "1",
             "domain_id": "1",
-            "password": "fe01ce2a7fbac8fafaed7c982a04e229"
+            "password": "fe01ce2a7fbac8fafaed7c982a04e229",
+            "enabled":"1"
         }
     ],
     "si_user_domain": [

@@ -21,6 +21,10 @@ Simple Invoices todo list
 ##############################
 2009.1 :: Release Candidate 1 
 ##############################
+	- invoice edit - notes - if note empty then have closed if not empty then display for edit - work-in-progress
+	- Delete invoices - add delete line item taxes
+	- Email - fix errors
+    - write sql patch to move consluting (3) to itemised (2)
     - language and locale pre invoice preference
 	- locale select in defaults 
     - Update UI of System Preferences
@@ -36,11 +40,3 @@ Simple Invoices todo list
 - current work in progress (next release)
 ##############################
 
-	- User Add - fill in info from session 
-	-- http://simpleinvoices.org/forum/discussion/804/adding-new-user-pre-populated/#Item_1
-    -- templates - adjust the export template
-    -- if no taxes select - make this work OK
-	- invoice edit - notes - if note empty then have closed if not empty then display for edit - work-in-progress
-    - Delete invoices - add delete line item taxes
-    - Email - fix errors
-    
