@@ -3,7 +3,23 @@ Simple Invoices known issues with released versions
 Disclaimer: if its in the list it may get done sometime in the future if and when someone feels like it
 *************
 ##############################
-2009.1 :: Beta 4 - current work in progress (next release)
+2009.1 :: Beta 5 
+##############################
+    
+	----
+	Known issues
+	----
+	- Delete invoices - line item taxes arent deleted from db
+    -- invoice edit - notes - if note empty then have closed if not empty then display for edit - work-in-progress
+	- Delete invoices - add delete line item taxes
+	- Email - fix errors
+	- UI of Manage Extensions needs updating
+	- not all the extensions work
+	- front page/dashboard not complete
+    - Invoice edit needs work
+
+##############################
+2009.1 :: Beta 4 
 ##############################
     
 	----

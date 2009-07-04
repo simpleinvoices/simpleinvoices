@@ -7,6 +7,7 @@ BETA 5
     - Input validation using http://www.position-relative.net/creation/formValidator/
 	- User Add - fill in info from session
     - Sql patch to move all consluting invoices to itemised style
+    - Total style invoices is now selectable
 
 --------
 BETA 4

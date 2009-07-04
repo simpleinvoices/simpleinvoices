@@ -34,8 +34,4 @@ Simple Invoices todo list
 	- Database log - review
 	- redo home page - Recent Activity and Quick Stats
 
-##############################
-2009.1 :: Beta 5 
-- current work in progress (next release)
-##############################
 
