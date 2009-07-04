@@ -1238,6 +1238,10 @@ PRIMARY KEY  (`user_id`)) ;
     $patch['202']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET `extension_id` = '1' ;";
     $patch['202']['date'] = "20090622";    
 
+    $patch['203']['name'] = "Move all old consulting style invoices to itemised";
+    $patch['203']['patch'] = "UPDATE `".TB_PREFIX."invoices` SET `type_id` = '2' where `type_id`=3 ;";
+    $patch['203']['date'] = "20090704";    
+
  /*
 */
 /*

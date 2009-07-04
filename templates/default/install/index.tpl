@@ -24,7 +24,11 @@
 </table>
 <br />
 <br />
-To install Simple Invoices please
+<table align="center">
+<tr>
+<td colspan="2">
+<b>To install Simple Invoices please:</b>
+<br />
             <br />1. Create a blank MySQL database
             <br />2. Enter the correct database connection details in the config/config.ini file
             <br />3. Review the connection details below and if correct click the 'Install Database' button
@@ -32,11 +36,22 @@ To install Simple Invoices please
 <br />
 <b>Database</b>
 <br />
-Host: {$config->database->params->host}<br />
-Database: {$config->database->params->dbname}<br />
-Username: {$config->database->params->username}<br />
-Password: {$config->database->params->password}<br />
-<br>
+</td>
+</tr>
+<tr>
+    <td>Host:</td><td>{$config->database->params->host}</td>
+</tr>
+<tr>
+    <td>Database:</td><td>{$config->database->params->dbname}</td>
+</tr>
+<tr>
+    <td>Username:</td><td>{$config->database->params->username}</td>
+</tr>
+<tr>
+    <td>Password:</td><td>{$config->database->params->password}</td>
+</tr>
+</table>
+<br />
 <table class="buttons" align="center">
     <tr>
         <td>

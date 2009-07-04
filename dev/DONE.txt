@@ -3,9 +3,10 @@ BETA 5
 --------
     - Basic installer added
 	- Payments page updated
-	- Merge docs.php into normal index.php - Done
-	- Input validation using http://www.position-relative.net/creation/formValidator/
-	- User Add - fill in info from session - Done
+	- Merge docs.php into normal index.php
+    - Input validation using http://www.position-relative.net/creation/formValidator/
+	- User Add - fill in info from session
+    - Sql patch to move all consluting invoices to itemised style
 
 --------
 BETA 4

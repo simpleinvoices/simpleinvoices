@@ -878,6 +878,12 @@
             "sql_patch": "Set extension_id on system defaults table to 1",
             "sql_release": "20090622",
             "sql_statement": "UPDATE si_system_defaults SET extension_id = 1"
+        },
+        {
+            "sql_patch_ref": "203",
+            "sql_patch": "Move all old consulting style invoices to itemised",
+            "sql_release": "20090704",
+            "sql_statement": "UPDATE si_invoices SET type_id = 2 where type_id = 3"
         }
     ],
     "si_system_defaults": [

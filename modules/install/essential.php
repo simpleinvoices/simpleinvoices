@@ -7,7 +7,7 @@ if ( (checkTableExists("si_customers") == true) AND ($install_data_exists == fal
 //	echo "ESSENTIAL";
 	//JSON import
 	$importjson = new importjson();
-	$importjson->file = "./databases/json/essential_sata.json";
+	$importjson->file = "./databases/json/essential_data.json";
 	//$importjson->debug = true;
 	$importjson->pattern_find = "si_";
 	$importjson->pattern_replace = TB_PREFIX;
