@@ -15,6 +15,7 @@
 	<div class="txt_right">
 		Hello {$smarty.session.Zend_Auth.email} | <a href="">Help</a>
 		{if $config->authentication->enabled == 1}
+			|
 			{if $smarty.session.Zend_Auth.id == null}
 				<a href="index.php?module=auth&amp;view=login">{$LANG.login}</a>
 			{else}
