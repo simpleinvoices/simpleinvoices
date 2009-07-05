@@ -2,7 +2,7 @@
 Simple Invoices todo list
 *************
 ##############################
-2009.1 :: Final (next release + 1) - Next major release
+2009.2 :: Beta 2
 ##############################
 
 	#really shoud
@@ -19,19 +19,23 @@ Simple Invoices todo list
 	- database backup - export as XML - Hannes
 
 ##############################
-2009.1 :: Release Candidate 1 
+2009.2 :: Beta 1 
 ##############################
-	- invoice edit - notes - if note empty then have closed if not empty then display for edit - work-in-progress
-	- Delete invoices - add delete line item taxes
-	- Email - fix errors
     - language and locale pre invoice preference
 	- locale select in defaults 
     - Update UI of System Preferences
-    - Update UI of Manage Extensions
     #maybe
 	- add Manage SQL patches back in
 	- add rerun SQL patch button
 	- Database log - review
+
+
+##############################
+2009.1 :: Final  - Next major release
+##############################
+
+	- invoice edit - notes - if note empty then have closed if not empty then display for edit - work-in-progress
+	- Delete invoices - add delete line item taxes
+	- Email - fix errors
+    - Update UI of Manage Extensions
 	- redo home page - Recent Activity and Quick Stats
-
-
