@@ -2148,11 +2148,20 @@ function delete($module,$idField,$id) {
 	 *     have rows deleted using this function.  This is used for
 	 *     whitelisting deletion targets.
 	 */
-	$valid_tables = array('invoices', 'invoice_items', 'products');
+	$valid_tables = array('invoices', 'invoice_items', 'invoice_item_tax', 'products');
 
 	if (in_array($lctable, $valid_tables)) {
 		// A quick once-over on the dependencies of the possible tables
-		if ($lctable == 'invoice_items') {
+		if ($lctable == 'invoice_item_tax') 
+        {
+			// Not required by any FK relationships
+			if (!in_array($idField, array('invoice_item_id'))) {
+				// Fail, invalid identity field
+				return false;
+			} else {
+				$s_idField = $idField;
+			}
+        } elseif ($lctable == 'invoice_items') {
 			// Not required by any FK relationships
 			if (!in_array($idField, array('id', 'invoice_id'))) {
 				// Fail, invalid identity field

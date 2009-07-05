@@ -44,6 +44,16 @@ if ( ($_GET['stage'] == 2 ) AND ($_POST['doDelete'] == 'y') ) {
 	$dbh->beginTransaction();
 	$error = false;
 
+    
+    //delete line item taxes
+    $invoice_line_items = invoice::getInvoiceItems($invoice_id);
+
+    foreach( $invoice_line_items as $key => $value)
+    {
+            //echo "line item id: ".$invoice_line_items[$key]['id']."<br />";
+            delete('invoice_item_tax','invoice_item_id',$invoice_line_items[$key]['id']);
+    }
+
 	// Start by deleting the line items
 	if (! delete('invoice_items','invoice_id',$invoice_id)) {
 		$error = true;

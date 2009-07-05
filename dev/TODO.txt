@@ -35,7 +35,6 @@ Simple Invoices todo list
 ##############################
 
 	- invoice edit - notes - if note empty then have closed if not empty then display for edit - work-in-progress
-	- Delete invoices - add delete line item taxes
 	- Email - fix errors
     - Update UI of Manage Extensions
 	- redo home page - Recent Activity and Quick Stats

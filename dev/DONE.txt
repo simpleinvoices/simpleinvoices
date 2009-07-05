@@ -1,4 +1,9 @@
 --------
+2009.1
+--------
+    - Delete invoices - add delete line item taxes 
+
+--------
 BETA 5
 --------
     - Basic installer added
