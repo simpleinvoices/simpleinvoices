@@ -110,7 +110,7 @@ if ($_POST['action'] == "insert" ) {
 
 		if($_POST["delete$i"] == "yes")
 		{
-			delete('invoice_items','id',$_POST["id$i"]);
+			delete('invoice_items','id',$_POST["line_item$i"]);
 		}
 		if($_POST["delete$i"] !== "yes")
 		{

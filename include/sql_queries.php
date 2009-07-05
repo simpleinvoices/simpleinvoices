@@ -2138,6 +2138,7 @@ function searchInvoiceByDate($startdate,$enddate) {
 
 function delete($module,$idField,$id) {
 	global $dbh;
+	global $logger;
 	global $auth_session; //TODO add some domain_id stuff in here if requried
 
 	$lctable = strtolower($module);
@@ -2226,6 +2227,7 @@ function delete($module,$idField,$id) {
 		
 	// Tablename and column both pass whitelisting and FK checks
 	$sql = "DELETE FROM ".TB_PREFIX."$module WHERE $s_idField = :id";
+    $logger->log("Item deleted: ".$sql, ZEND_Log::INFO);
 	return dbQuery($sql, ':id', $id);
 }
 

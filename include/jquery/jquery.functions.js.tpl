@@ -75,7 +75,8 @@
 		var lastRow = $('#itemtable tbody.line_item:last'); 
 		var rowID_last = $("input[@id^='quantity']",lastRow).attr("id");
 		rowID_last = parseInt(rowID_last.slice(8)); //using 8 as 'quantity' has eight letters and want to get the number thats after that
-		$("#max_items").val(rowID_last);
+		/*$("#max_items").val(rowID_last);*/
+		$("#max_items").attr('value',rowID_last);
 		siLog('debug', 'Max Items = '+rowID_last );
 		
 	}

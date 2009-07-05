@@ -104,7 +104,7 @@
 		        <tr>       	         
 			<td class="details_screen">{$LANG.gross_total}</td>
 			<td>
-			<input type="text" name="unit_price0" value="{$invoiceItems.0.unit_price}" size="10" />
+			<input type="text" name="unit_price0" value="{$invoiceItems.0.unit_price|siLocal_number_formatted}" size="10" />
 			<input type="hidden" name="quantity0" value="1" />
 			<input type="hidden" name="id0" value="{$invoiceItems.0.id}" />
 			<input type="hidden" name="products0" value="{$invoiceItems.0.product_id}" />
@@ -202,7 +202,7 @@
 								type="text" 
 								name='quantity{$line}' 
 								id='quantity{$line}' 
-								value='{$invoiceItem.quantity|number_format:2}' 
+								value='{$invoiceItem.quantity|siLocal_number_formatted}' 
 								size="10"
 							/>
 							<input type="hidden" name='line_item{$line}' id='line_item{$line}' value='{$invoiceItem.id}' /> 
@@ -240,7 +240,7 @@
 							</td>
 						{/section}
 						<td>
-							<input id="unit_price{$line}" name="unit_price{$line}" size="7" value="{$invoiceItem.unit_price|number_format:2}" />
+							<input id="unit_price{$line}" name="unit_price{$line}" size="7" value="{$invoiceItem.unit_price|siLocal_number_formatted}" />
 						</td>
 			        </tr>
 		            	<tr colspan="6" class="note">
@@ -348,7 +348,7 @@
             {/if}
 			<input type="hidden" name="type" value="{$invoice.type_id}" />
 			<input type="hidden" name="op" value="insert_preference" />
-			<input type="hidden" name="max_items" value="{$lines}" />
+			<input type="hidden" id="max_items" name="max_items" value="{$lines}" />
 			<a href="./index.php?module=invoices&amp;view=manage" class="negative">
 				<img src="./images/common/cross.png" alt="" />
 				{$LANG.cancel}
