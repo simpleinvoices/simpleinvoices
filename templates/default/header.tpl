@@ -7,6 +7,7 @@
 	<title>{$LANG.simple_invoices}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
 	<meta name="robots" content="noindex, nofollow" />
 	<link rel="shortcut icon" href="./images/common/favicon.ico" />
 
