@@ -16,7 +16,7 @@
 			$('#manageGrid').flexigrid
 			(
 			{
-			url: 'index.php?module=user&view=xml',
+			url: 'index.php?module=user&amp;view=xml',
 			dataType: 'xml',
 			colModel : [
 				{display: 'Actions', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},

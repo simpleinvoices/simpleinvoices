@@ -14,7 +14,7 @@
 			(
 			{
 
-			url: 'index.php?module=payments&view=xml',
+			url: 'index.php?module=payments&amp;view=xml',
 			dataType: 'xml',
 			colModel : [
 				{display: 'Actions', name : 'actions', width : 08 * percentage_width, sortable : false, align: 'center'},

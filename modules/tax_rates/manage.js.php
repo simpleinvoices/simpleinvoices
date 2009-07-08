@@ -24,7 +24,7 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			$('#manageGrid').flexigrid
 			(
 			{
-			url: 'index.php?module=tax_rates&view=xml',
+			url: 'index.php?module=tax_rates&amp;view=xml',
 			dataType: 'xml',
 			colModel : [
 				{display: 'Actions', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},

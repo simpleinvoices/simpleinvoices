@@ -24,7 +24,7 @@
 			$("#manageGrid").flexigrid
 			(
 			{
-			url: 'index.php?module=invoices&view=xml',
+			url: 'index.php?module=invoices&amp;view=xml',
 			dataType: 'xml',
 			colModel : [
 				{display: 'Actions', name : 'actions', width : action_menu, sortable : false, align: 'center'},

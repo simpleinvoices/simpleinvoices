@@ -18,7 +18,7 @@ $page_prev = ($page =="1") ? "1" : $page-1 ;
 $page_next =  $page+1 ;
 //$xml_file = './extensions/text_ui/modules/invoices/xml.php';
 $url=getURL();
-$xml_file = $url.'/index.php?module=products&view=xml&page='.$page;
+$xml_file = $url.'/index.php?module=products&amp;view=xml&amp;page='.$page;
 $xml = simplexml_load_file($xml_file);
 
 $smarty -> assign('xml', $xml);
