@@ -345,8 +345,9 @@ if($module == "export")
 	}
 	/*
 	* If no extension php file for requested file load the normal php file if it exists
+	* Don't load it in the authentication module. It's not needed! Generates wrong HTML code.
 	*/
-	if($extensionPostLoadJquery == 0) 
+	if($extensionPostLoadJquery == 0 AND $module !='auth') 
 	{
 		$smarty -> $smarty_output("../include/jquery/post_load.jquery.ext.js.tpl");
 	}
