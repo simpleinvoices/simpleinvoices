@@ -16,18 +16,18 @@
 
 {if $saved == true }
 	<br />
-	 {$LANG.save_product_success}
+	 {$LANG.save_expense_success}
 	<br />
 	<br />
 {else}
 	<br />
-	 {$LANG.save_product_failure}
+	 {$LANG.save_expense_failure}
 	<br />
 	<br />
 {/if}
 
 {if $smarty.post.cancel == null }
-	<meta http-equiv="refresh" content="2;URL=index.php?module=products&view=manage" />
+	<meta http-equiv="refresh" content="2;URL=index.php?module=expense&view=manage" />
 {else}
-	<meta http-equiv="refresh" content="0;URL=index.php?module=products&view=manage" />
+	<meta http-equiv="refresh" content="0;URL=index.php?module=expense&view=manage" />
 {/if}

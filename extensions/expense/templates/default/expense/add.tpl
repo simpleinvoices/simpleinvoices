@@ -1,8 +1,8 @@
 
-{* if bill is updated or saved.*}
+{* if bill is updated or saved. *}
 
-{if $smarty.post.description != "" && $smarty.post.id != null } 
-	{include file="../templates/default/products/save.tpl"}
+{if $smarty.post.expense_account_id != "" && $smarty.post.id != null } 
+	{include file="../extensions/expense/templates/default/expense/save.tpl"}
 {else}
 {* if  name was inserted *} 
 	{if $smarty.post.id !=null} 
@@ -10,66 +10,66 @@
 		You must enter a description for the product</div>
 		<hr />
 	{/if}
-<form name="frmpost" action="index.php?module=products&view=add" method="POST" id="frmpost" onSubmit="return checkForm(this);">
+
+
+<form name="frmpost" action="index.php?module=expense&view=add" method="POST" id="frmpost">
 <br />
 
 <table align="center">
 	<tr>
-		<td class="details_screen">{$LANG.description} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field" title="{$LANG.Required_Field}"><img src="./images/common/required-small.png" alt="" /></a>
-		</td>
-		<td><input type="text" name="description" value="{$smarty.post.description}" size="50" id="description"  class="validate[required]" /></td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG.unit_price}</td>
-		<td><input type="text" class="edit" name="unit_price" value="{$smarty.post.unit_price}"  size="25" /></td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG.default_tax}</td>
+		<td class="details_screen">{$LANG.expense_account}</td>
 		<td>
-		<select name="default_tax_id">
+		<select name="expense_account_id" class="validate[required]">
 		    <option value=''></option>
-			{foreach from=$taxes item=tax}
-				<option value="{$tax.tax_id}">{$tax.tax_description}</option>
+			{foreach from=$expense_add.expense_account_all item=expense_account}
+				<option value="{$expense_account.id}">{$expense_account.name}</option>
+			{/foreach}
+		</select>
+		</td>
+	</tr>
+    <tr wrap="nowrap">
+            <td class="details_screen">{$LANG.date_formatted}</td>
+            <td wrap="nowrap">
+                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="date" id="date" value='{$smarty.now|date_format:"%Y-%m-%d"}' />   
+            </td>
+    </tr>
+	<tr>
+		<td class="details_screen">{$LANG.biller}</td>
+		<td>
+		<select name="biller_id" class="validate[required]">
+		    <option value=''></option>
+			{foreach from=$expense_add.biller_all item=biller}
+				<option {if $biller.id == $defaults.biller} selected {/if} value="{$biller.id}">{$biller.name}</option>
 			{/foreach}
 		</select>
 		</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf1} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
+		<td class="details_screen">{$LANG.customer}</td>
+		<td>
+		<select name="customer_id" class="validate[required]">
+		    <option value=''></option>
+			{foreach from=$expense_add.customer_all item=customer}
+				<option {if $biller.id == $defaults.customer} selected {/if} value="{$customer.id}">{$customer.name}</option>
+			{/foreach}
+		</select>
 		</td>
-		<td><input type="text" class="edit" name="custom_field1" value="{$smarty.post.custom_field1}"  size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf2} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
+		<td class="details_screen">{$LANG.invoice}</td>
+		<td>
+		<select name="invoice_id" class="validate[required]">
+		    <option value=''></option>
+			{foreach from=$expense_add.invoice_all item=invoice}
+				<option value="{$invoice.id}">{$invoice.id}</option>
+			{/foreach}
+		</select>
 		</td>
-		<td><input type="text" class="edit" name="custom_field2" value="{$smarty.post.custom_field2}" size="50" /></td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf3} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
-		</td>
-		<td><input type="text" class="edit" name="custom_field3" value="{$smarty.post.custom_field3}" size="50" /></td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf4} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
-		</td>
-		<td><input type="text" class="edit" name="custom_field4" value="{$smarty.post.custom_field4}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
 		<td><textarea input type="text" class="editor" name='notes' rows="8" cols="50">{$smarty.post.notes|unescape}</textarea></td>
 	</tr>
-	<tr>
-		<td class="details_screen">{$LANG.enabled}</td>
-		<td>
-			{html_options class=edit name=enabled options=$enabled selected=1}
-		</td>
-	</tr>
-	{*	{showCustomFields categorieId="3" itemId=""} *}
 </table>
 <br />
 <table class="buttons" align="center">
@@ -80,9 +80,9 @@
 				{$LANG.save}
 			</button>
 
-			<input type="hidden" name="op" value="insert_product" />
+			<input type="hidden" name="op" value="expense_add" />
 		
-			<a href="./index.php?module=products&view=manage" class="negative">
+			<a href="./index.php?module=expense&view=manage" class="negative">
 		        <img src="./images/common/cross.png" alt="" />
 	        	{$LANG.cancel}
     		</a>

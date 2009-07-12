@@ -1,6 +1,18 @@
 <?php
 class invoice {
 	
+    public static function get_all()
+    {
+		global $logger;
+	    global $auth_session;
+
+		$sql = "SELECT id FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id order by id";
+		$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+
+        return $sth->fetchAll();
+
+    }
+
 	public static function getInvoiceItems($id) {
 	
 		global $logger;
