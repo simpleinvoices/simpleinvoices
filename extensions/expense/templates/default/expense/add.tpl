@@ -17,6 +17,13 @@
 
 <table align="center">
 	<tr>
+		<td class="details_screen">{$LANG.amount}</td>
+		<td>
+		<input name="amount" class="validate[required]">
+		</input>
+		</td>
+	</tr>
+	<tr>
 		<td class="details_screen">{$LANG.expense_account}</td>
 		<td>
 		<select name="expense_account_id" class="validate[required]">
@@ -68,7 +75,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
-		<td><textarea input type="text" class="editor" name='notes' rows="8" cols="50">{$smarty.post.notes|unescape}</textarea></td>
+		<td><textarea input type="text" class="editor" name='note' rows="8" cols="50">{$smarty.post.notes|unescape}</textarea></td>
 	</tr>
 </table>
 <br />

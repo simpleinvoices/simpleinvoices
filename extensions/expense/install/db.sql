@@ -1,6 +1,7 @@
 CREATE TABLE  `si_expense` (
 `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`domain_id` INT( 11 ) NOT NULL ,
+`amount` INT( 11 ) NOT NULL ,
+`domain_id` DECIMAL( 25,6 ) NOT NULL ,
 `expense_account_id` INT( 11 ) NOT NULL ,
 `biller_id` INT( 11 ) NOT NULL ,
 `customer_id` INT( 11 ) NOT NULL ,

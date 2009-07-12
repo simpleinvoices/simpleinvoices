@@ -14,9 +14,9 @@
 <table class="buttons" align="center">
     <tr>
         <td>
-            <a href="./index.php?module=products&view=add" class="positive">
+            <a href="./index.php?module=expense&view=add" class="positive">
                 <img src="./images/famfam/add.png" alt=""/>
-                {$LANG.add_new_product}
+                {$LANG.add_new_expense}
             </a>
 
         </td>
@@ -36,6 +36,6 @@
 {else}
 	<br />
 	<table id="manageGrid" style="display:none"></table>
-	{include file='../modules/products/manage.js.php'}
+	{include file='../extensions/expense/modules/expense/manage.js.php'}
 	
 {/if}

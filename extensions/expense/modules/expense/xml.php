@@ -45,7 +45,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 	
 	
 	/*Check that the sort field is OK*/
-	$validFields = array('id', 'biller_id','customer_id');
+	$validFields = array('id', 'amount', 'expense_account_id','biller_id', 'customer_id', 'invoice_id','date','amount','note');
 	
 	if (in_array($sort, $validFields)) {
 		$sort = $sort;
@@ -53,16 +53,12 @@ function sql($type='', $dir, $sort, $rp, $page )
 		$sort = "id";
 	}
 	
-		$sql = "SELECT 
-					id, 
-					description,
-					unit_price,
-					(SELECT (CASE  WHEN enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
+		$sql = "SELECT
+                    *	
 				FROM 
-					".TB_PREFIX."products  
+					".TB_PREFIX."expense  
 				WHERE 
-					visible = 1
-					AND domain_id = :domain_id
+					domain_id = :domain_id
 					$where
 				ORDER BY 
 					$sort $dir 
@@ -99,15 +95,12 @@ foreach ($customers as $row) {
 			<a class='index_table' title='$LANG[edit] ".$row['description']."' href='index.php?module=products&view=details&id=".$row['id']."&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 		]]></cell>";		
 	
-	$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";		
-	$xml .= "<cell><![CDATA[".$row['description']."]]></cell>";
-	$xml .= "<cell><![CDATA[".siLocal::number($row['unit_price'])."]]></cell>";
-	if ($row['enabled']==$LANG['enabled']) {
-		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".utf8_encode($row['enabled'])."' title='".utf8_encode($row['enabled'])."' />]]></cell>";				
-	}	
-	else {
-		$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".utf8_encode($row['enabled'])."' title='".utf8_encode($row['enabled'])."' />]]></cell>";				
-	}
+	$xml .= "<cell><![CDATA[".siLocal::date($row['date'])."]]></cell>";		
+	$xml .= "<cell><![CDATA[".siLocal::number($row['amount'])."]]></cell>";
+	$xml .= "<cell><![CDATA[".$row['expense_account_id']."]]></cell>";
+	$xml .= "<cell><![CDATA[".$row['biller_id']."]]></cell>";
+	$xml .= "<cell><![CDATA[".$row['customer_id']."]]></cell>";
+	$xml .= "<cell><![CDATA[".$row['invoice_id']."]]></cell>";
 	$xml .= "</row>";		
 }
 

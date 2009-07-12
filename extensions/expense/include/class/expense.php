@@ -51,6 +51,7 @@ class expense
             ".TB_PREFIX."expense
             (
                 domain_id,
+                amount,
                 expense_account_id,
                 biller_id,
                 customer_id,
@@ -61,6 +62,7 @@ class expense
         VALUES
             (	
                 :domain_id,
+                :amount,
                 :expense_account_id,
                 :biller_id,
                 :customer_id,
@@ -71,11 +73,13 @@ class expense
 
         return dbQuery($sql,
             ':domain_id',$auth_session->domain_id,	
+            ':amount', $_POST['amount'],
             ':expense_account_id', $_POST['expense_account_id'],
             ':biller_id', $_POST['biller_id'],
+            ':invoice_id', $_POST['invoice_id'],
             ':customer_id', $_POST['customer_id'],
             ':date', $_POST['date'],
-            ':notes', $_POST['notes']
+            ':note', $_POST['note']
             );
 
     }

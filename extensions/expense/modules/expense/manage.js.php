@@ -16,15 +16,15 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			$('#manageGrid').flexigrid
 			(
 			{
-			url: 'index.php?module=products&view=xml',
+			url: 'index.php?module=expense&view=xml',
 			dataType: 'xml',
 			colModel : [
-				{display: 'Actions', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
-				{display: 'ID', name : 'id', width : 10 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Name', name : 'description', width : 40 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Unit Price', name : 'unit_price', width : 20 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Enabled', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'}
-				
+				{display: 'Actions', name : 'actions', width : 9 * percentage_width, sortable : false, align: 'center'},
+				{display: 'Date', name : 'date', width : 15 * percentage_width, sortable : true, align: 'left'},
+				{display: 'Account', name : 'expense_account_id', width : 15 * percentage_width, sortable : true, align: 'left'},
+				{display: 'Biller', name : 'biller_id', width : 20 * percentage_width, sortable : true, align: 'left'},
+				{display: 'Customer', name : 'customer_id', width : 20 * percentage_width, sortable : true, align: 'left'},
+				{display: 'Invoice', name : 'invoice_id', width : 20 * percentage_width, sortable : true, align: 'left'}
 				],
 				
 

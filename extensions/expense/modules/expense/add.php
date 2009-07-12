@@ -10,8 +10,8 @@ $defaults = getSystemDefaults();
 $taxes = getActiveTaxes();
 
 //if valid then do save
-if ($_POST['description'] != "" ) {
-	include("./modules/products/save.php");
+if ($_POST['expense_account_id'] != "" ) {
+	include("./extensions/expense/modules/expense/save.php");
 }
 
 $smarty -> assign('save',$save);
