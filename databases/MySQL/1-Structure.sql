@@ -7,7 +7,7 @@
 -- Server version: 5.0.75
 -- PHP Version: 5.2.6-3ubuntu2
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+-- SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 --
 -- Database: `simple_invoices`
