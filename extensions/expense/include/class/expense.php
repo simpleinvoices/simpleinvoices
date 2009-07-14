@@ -6,22 +6,22 @@ class expense
     public static function count()
     {
 
-        global $dbh;
+        global $db;
         global $auth_session;
         
         $sql = "SELECT count(id) as count FROM ".TB_PREFIX."expense WHERE domain_id = :domain_id ORDER BY id";
-        $sth  = dbQuery($sql,':domain_id',$auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+        $sth = $db->query($sql,':domain_id',$auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 
         return $sth->fetch();
     }
     public static function get_all()
     {
         
-        global $dbh;
+        global $db;
         global $auth_session;
         
         $sql = "SELECT * FROM ".TB_PREFIX."expense WHERE domain_id = :domain_id ORDER BY id";
-        $sth  = dbQuery($sql,':domain_id',$auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+        $sth  = $db->query($sql,':domain_id',$auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
         
         return $sth->fetchAll();
     
@@ -37,8 +37,39 @@ class expense
         $add['biller_all'] = biller::get_all();
         //get invoices
         $add['invoice_all'] = invoice::get_all();
+        //get products
+        $add['product_all'] = product::get_all();
 
         return $add;
+
+    }
+    public static function get($id)
+    {
+        
+        global $db;
+        global $auth_session;
+        
+        $sql = "SELECT * FROM ".TB_PREFIX."expense WHERE domain_id = :domain_id and id = :id";
+        $sth  = $db->query($sql,':domain_id',$auth_session->domain_id ,':id',$id) or die(htmlspecialchars(end($dbh->errorInfo())));
+        
+        return $sth->fetch();
+    
+    }
+
+    public static function detail()
+    {
+        //get customers
+        $detail['expense_account_all'] = expenseaccount::get_all();
+        //get customers
+        $detail['customer_all'] = customer::get_all();
+        //get billers
+        $detail['biller_all'] = biller::get_all();
+        //get invoices
+        $detail['invoice_all'] = invoice::get_all();
+        //get products
+        $detail['product_all'] = product::get_all();
+
+        return $detail;
 
     }
 
@@ -56,6 +87,7 @@ class expense
                 biller_id,
                 customer_id,
                 invoice_id,
+                product_id,
                 date,
                 note
             )
@@ -67,6 +99,7 @@ class expense
                 :biller_id,
                 :customer_id,
                 :invoice_id,
+                :product_id,
                 :date,
                 :note
             )";
@@ -77,6 +110,7 @@ class expense
             ':expense_account_id', $_POST['expense_account_id'],
             ':biller_id', $_POST['biller_id'],
             ':invoice_id', $_POST['invoice_id'],
+            ':product_id', $_POST['product_id'],
             ':customer_id', $_POST['customer_id'],
             ':date', $_POST['date'],
             ':note', $_POST['note']

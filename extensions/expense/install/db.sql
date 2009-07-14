@@ -6,6 +6,7 @@ CREATE TABLE  `si_expense` (
 `biller_id` INT( 11 ) NOT NULL ,
 `customer_id` INT( 11 ) NOT NULL ,
 `invoice_id` INT( 11 ) NOT NULL ,
+`product_id` INT( 11 ) NOT NULL ,
 `date` DATE NOT NULL ,
 `note` TEXT NOT NULL
 ) ENGINE = INNODB ;

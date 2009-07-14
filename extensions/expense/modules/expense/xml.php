@@ -3,7 +3,7 @@
 header("Content-type: text/xml");
 
 //$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
-$dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC" ;
+$dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "DESC" ;
 $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "id" ;
 $rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
 $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
@@ -54,11 +54,23 @@ function sql($type='', $dir, $sort, $rp, $page )
 	}
 	
 		$sql = "SELECT
-                    *	
+                    e.*,
+                    b.name as biller,
+                    ea.name as expense_account,
+                    c.name as customer,
+                    p.description as product
 				FROM 
-					".TB_PREFIX."expense  
-				WHERE 
-					domain_id = :domain_id
+					".TB_PREFIX."expense e
+                    LEFT OUTER JOIN ".TB_PREFIX."expense_account ea  
+                        ON (e.expense_account_id = ea.id)
+                    LEFT OUTER JOIN ".TB_PREFIX."biller b  
+                        ON (e.biller_id = b.id)
+                    LEFT OUTER JOIN ".TB_PREFIX."customers c  
+                        ON (e.customer_id = c.id)
+                    LEFT OUTER JOIN ".TB_PREFIX."products p  
+                        ON (e.product_id = p.id)
+				WHERE
+                    e.domain_id = :domain_id
 					$where
 				ORDER BY 
 					$sort $dir 
@@ -91,16 +103,17 @@ foreach ($customers as $row) {
 
 	$xml .= "<row id='".$row['iso']."'>";
 	$xml .= "<cell><![CDATA[
-			<a class='index_table' title='$LANG[view] ".$row['description']."' href='index.php?module=products&view=details&id=".$row['id']."&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-			<a class='index_table' title='$LANG[edit] ".$row['description']."' href='index.php?module=products&view=details&id=".$row['id']."&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+			<a class='index_table' title='$LANG[view] ".$row['description']."' href='index.php?module=expense&view=details&id=".$row['id']."&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+			<a class='index_table' title='$LANG[edit] ".$row['description']."' href='index.php?module=expense&view=details&id=".$row['id']."&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 		]]></cell>";		
 	
 	$xml .= "<cell><![CDATA[".siLocal::date($row['date'])."]]></cell>";		
 	$xml .= "<cell><![CDATA[".siLocal::number($row['amount'])."]]></cell>";
-	$xml .= "<cell><![CDATA[".$row['expense_account_id']."]]></cell>";
+	$xml .= "<cell><![CDATA[".$row['expense_account']."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['biller_id']."]]></cell>";
-	$xml .= "<cell><![CDATA[".$row['customer_id']."]]></cell>";
-	$xml .= "<cell><![CDATA[".$row['invoice_id']."]]></cell>";
+	$xml .= "<cell><![CDATA[".$row['customer']."]]></cell>";
+    $xml .= "<cell><![CDATA[".$row['invoice_id']."]]></cell>";
+	$xml .= "<cell><![CDATA[".$row['product']."]]></cell>";
 	$xml .= "</row>";		
 }
 

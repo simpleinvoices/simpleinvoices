@@ -54,7 +54,7 @@
 	<tr>
 		<td class="details_screen">{$LANG.customer}</td>
 		<td>
-		<select name="customer_id" class="validate[required]">
+		<select name="customer_id">
 		    <option value=''></option>
 			{foreach from=$expense_add.customer_all item=customer}
 				<option {if $biller.id == $defaults.customer} selected {/if} value="{$customer.id}">{$customer.name}</option>
@@ -65,10 +65,21 @@
 	<tr>
 		<td class="details_screen">{$LANG.invoice}</td>
 		<td>
-		<select name="invoice_id" class="validate[required]">
+		<select name="invoice_id">
 		    <option value=''></option>
 			{foreach from=$expense_add.invoice_all item=invoice}
 				<option value="{$invoice.id}">{$invoice.id}</option>
+			{/foreach}
+		</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="details_screen">{$LANG.product}</td>
+		<td>
+		<select name="product_id">
+		    <option value=''></option>
+			{foreach from=$expense_add.product_all item=product}
+				<option value="{$product.id}">{$product.description}</option>
 			{/foreach}
 		</select>
 		</td>

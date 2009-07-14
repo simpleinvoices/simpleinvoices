@@ -3,16 +3,14 @@
 checkLogin();
 
 #get the invoice id
-$product_id = $_GET['id'];
+$expense_id = $_GET['id'];
 
-$product = getProduct($product_id);
+$expense = expense::get($expense_id);
 
-#get custom field labels
-$customFieldLabel = getCustomFieldLabels();
 $taxes = getActiveTaxes();
 $tax_selected = getTaxRate($product['default_tax_id']);
 
-$smarty -> assign('product',$product);
+$smarty -> assign('expense',$expense);
 $smarty -> assign('taxes',$taxes);
 $smarty -> assign('tax_selected',$tax_selected);
 $smarty -> assign('customFieldLabel',$customFieldLabel);
