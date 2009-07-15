@@ -61,6 +61,8 @@ class expense
         //get customers
         $detail['expense_account_all'] = expenseaccount::get_all();
         //get customers
+        $detail['customer'] = customer::get();
+
         $detail['customer_all'] = customer::get_all();
         //get billers
         $detail['biller_all'] = biller::get_all();
@@ -105,6 +107,44 @@ class expense
             )";
 
         return dbQuery($sql,
+            ':domain_id',$auth_session->domain_id,	
+            ':amount', $_POST['amount'],
+            ':expense_account_id', $_POST['expense_account_id'],
+            ':biller_id', $_POST['biller_id'],
+            ':invoice_id', $_POST['invoice_id'],
+            ':product_id', $_POST['product_id'],
+            ':customer_id', $_POST['customer_id'],
+            ':date', $_POST['date'],
+            ':note', $_POST['note']
+            );
+
+    }
+
+    public static function update()
+    {
+
+        global $db;
+        global $auth_session;
+        
+        $sql = "UPDATE
+            ".TB_PREFIX."expense
+                SET
+                    amount = :amount,
+                    expense_account_id = :expense_account_id,
+                    biller_id = :biller_id,
+                    customer_id = :customer_id,
+                    invoice_id = :invoice_id,
+                    product_id = :product_id,
+                    date = :date,
+                    note = :note
+                WHERE
+                    id = :id
+                    AND
+                    domain_id = :domain_id
+            ";
+
+        return $db->query($sql,
+            ':id',$_POST['id'],	
             ':domain_id',$auth_session->domain_id,	
             ':amount', $_POST['amount'],
             ':expense_account_id', $_POST['expense_account_id'],

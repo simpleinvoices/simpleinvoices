@@ -11,17 +11,28 @@ $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
 #insert product
 $saved = false;
 
-if (  $op === 'expense_add' ) {
+if (  $op === 'expense_add' ) 
+{
 	
-	if($id = expense::save()) {
+	if( expense::save() ) 
+    {
+
  		$saved = true;
+
  	}
+
 }
 
-if ($op === 'edit_product' ) {
-	if (isset($_POST['save_product']) && updateProduct()) {
+if ($op === 'edit_product' ) 
+{
+
+	if ( expense::update() ) 
+    {
+
 		$saved = true;
+
 	}
+
 }
 
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';

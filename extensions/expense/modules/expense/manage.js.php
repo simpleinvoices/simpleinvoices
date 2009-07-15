@@ -20,13 +20,13 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			dataType: 'xml',
 			colModel : [
 				{display: 'Actions', name : 'actions', width : 9 * percentage_width, sortable : false, align: 'center'},
-				{display: 'Date', name : 'date', width : 15 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Amount', name : 'amount', width : 15 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Account', name : 'expense_account_id', width : 16 * percentage_width, sortable : true, align: 'left'},
+				{display: 'Date', name : 'date', width : 10 * percentage_width, sortable : true, align: 'left'},
+				{display: 'Amount', name : 'amount', width : 7.5 * percentage_width, sortable : true, align: 'left'},
+				{display: 'Account', name : 'expense_account_id', width : 23.5 * percentage_width, sortable : true, align: 'left'},
 				{display: 'Biller', name : 'biller_id', width : 10 * percentage_width, sortable : true, align: 'left'},
 				{display: 'Customer', name : 'customer_id', width : 10 * percentage_width, sortable : true, align: 'left'},
 				{display: 'Invoice', name : 'invoice_id', width : 10 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Product', name : 'product_id', width : 10 * percentage_width, sortable : true, align: 'left'}
+				{display: 'Product', name : 'product_id', width : 15 * percentage_width, sortable : true, align: 'left'}
 				],
 				
 

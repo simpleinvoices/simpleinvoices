@@ -55,6 +55,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 	
 		$sql = "SELECT
                     e.*,
+                    i.id as invoice,
                     b.name as biller,
                     ea.name as expense_account,
                     c.name as customer,
@@ -69,6 +70,8 @@ function sql($type='', $dir, $sort, $rp, $page )
                         ON (e.customer_id = c.id)
                     LEFT OUTER JOIN ".TB_PREFIX."products p  
                         ON (e.product_id = p.id)
+                    LEFT OUTER JOIN ".TB_PREFIX."invoices i  
+                        ON (e.invoice_id = i.id)
 				WHERE
                     e.domain_id = :domain_id
 					$where
@@ -110,9 +113,9 @@ foreach ($customers as $row) {
 	$xml .= "<cell><![CDATA[".siLocal::date($row['date'])."]]></cell>";		
 	$xml .= "<cell><![CDATA[".siLocal::number($row['amount'])."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['expense_account']."]]></cell>";
-	$xml .= "<cell><![CDATA[".$row['biller_id']."]]></cell>";
+	$xml .= "<cell><![CDATA[".$row['biller']."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['customer']."]]></cell>";
-    $xml .= "<cell><![CDATA[".$row['invoice_id']."]]></cell>";
+    $xml .= "<cell><![CDATA[".$row['invoice']."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['product']."]]></cell>";
 	$xml .= "</row>";		
 }

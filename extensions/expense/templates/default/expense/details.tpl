@@ -1,63 +1,47 @@
-<form name="frmpost" action="index.php?module=products&view=save&id={$smarty.get.id}" method="post" id="frmpost" onSubmit="return checkForm(this);">
+<form name="frmpost" action="index.php?module=expense&view=save&id={$smarty.get.id}" method="post">
 
 
 {if $smarty.get.action== 'view' }
 <br />
-	<table align="center">
+<table align="center">
 	<tr>
-		<td class="details_screen">{$LANG.product_description}</td>
-		<td>{$product.description}</td>
+		<td class="details_screen">{$LANG.amount}</td>
+		<td>{$expense.amount|siLocal_number}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.product_unit_price}</td>
-		<td>{$product.unit_price|siLocal_number}</td>
+		<td class="details_screen">{$LANG.expense_account}</td>
+		<td>{$detail.date|siLocal_date}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.default_tax}</td>
-		<td>
-			{$tax_selected.tax_description} {$tax_selected.type}
-		</td>
+		<td class="details_screen">{$LANG.date_upper}</td>
+		<td>{$expense.date|siLocal_date}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf1} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
-		</td>
-		<td>{$product.custom_field1}</td>
+		<td class="details_screen">{$LANG.biller}</td>
+		<td>{$detail.biller.name}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf2} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
-		</td>
-		<td>{$product.custom_field2}</td>
+		<td class="details_screen">{$LANG.customer}</td>
+		<td>{$detail.customer.name}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf3} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
-		</td>
-		<td>{$product.custom_field3}</td>
+		<td class="details_screen">{$LANG.invoice}</td>
+		<td>{$expense.invoice_id}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf4} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
-		</td>
-		<td>{$product.custom_field4}</td>
-	</tr>
-		{*
-			{showCustomFields categorieId="3" itemId=$smarty.get.id } 
-		*}
-	<tr>
-		<td class="details_screen">{$LANG.notes}</td><td>{$product.notes|unescape}</td>
+		<td class="details_screen">{$LANG.product}</td>
+		<td>{$detail.product.description}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.product_enabled}</td>
-		<td>{$product.wording_for_enabled}</td>
+		<td class="details_screen">{$LANG.notes}</td>
+        <td>{$expense.note|unescape}</td>
 	</tr>
 </table>
 	<br />
 	<table class="buttons" align="center">
 		<tr>
 			<td>
-				<a href="./index.php?module=products&view=details&id={$product.id}&action=edit" class="positive">
+				<a href="./index.php?module=expense&view=details&id={$expense.id}&action=edit" class="positive">
 					<img src="./images/famfam/add.png" alt=""/>
 					{$LANG.edit}
 				</a>
@@ -75,7 +59,7 @@
 	<tr>
 		<td class="details_screen">{$LANG.amount}</td>
 		<td>
-		<input name="amount" class="validate[required]" value="{$expense.amount}" />
+		<input name="amount" class="validate[required]" value="{$expense.amount|siLocal_number_trim}" />
 		</td>
 	</tr>
 	<tr>
@@ -112,7 +96,7 @@
 		<select name="customer_id">
 		    <option value=''></option>
 			{foreach from=$detail.customer_all item=customer}
-				<option {if $biller.id == $expense.customer_id} selected {/if} value="{$customer.id}">{$customer.name}</option>
+				<option {if $customer.id == $expense.customer_id} selected {/if} value="{$customer.id}">{$customer.name}</option>
 			{/foreach}
 		</select>
 		</td>
@@ -156,8 +140,9 @@
 			</button>
 
 			<input type="hidden" name="op" value="edit_product">
+			<input type="hidden" name="id" value="{$smarty.get.id}">
 		
-			<a href="./index.php?module=products&view=manage" class="negative">
+			<a href="./index.php?module=expense&view=manage" class="negative">
 		        <img src="./images/common/cross.png" alt="" />
 	        	{$LANG.cancel}
     		</a>

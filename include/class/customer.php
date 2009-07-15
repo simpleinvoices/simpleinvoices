@@ -3,6 +3,19 @@
 class customer
 {
 
+    public static function get($id)
+    {
+        
+        global $db;
+        global $auth_session;
+        
+        
+        $sql = "SELECT * FROM ".TB_PREFIX."customers WHERE domain_id = :domain_id and id = :id";
+        $sth = $db->query($sql,':domain_id', $auth_session->domain_id, ':id', $id ) or die(htmlspecialchars(end($dbh->errorInfo())));
+    
+        return $sth->fetch();
+    }
+
     public static function get_all()
     {
         
