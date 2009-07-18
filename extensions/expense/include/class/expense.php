@@ -117,6 +117,9 @@ class expense
             ':date', $_POST['date'],
             ':note', $_POST['note']
             );
+	
+
+        expense::expense_item_tax(lastInsertId(),$line_item_tax_id,$unit_price,$quantity,"insert");
 
     }
 
@@ -156,6 +159,78 @@ class expense
             ':note', $_POST['note']
             );
 
+    }
+
+    /*
+    Function: invoice_item_tax
+    Purpose: insert/update the multiple taxes per line item into the si_invoice_item_tax table
+    */
+    public static function expense_item_tax($invoice_item_id,$line_item_tax_id,$unit_price,$quantity,$action="") {
+        
+        global $logger;
+
+        //if editing invoice delete all tax info then insert first then do insert again
+        //probably can be done without delete - someone to look into this if required - TODO
+        if ($action =="update")
+        {
+
+            $sql_delete = "DELETE from
+                                ".TB_PREFIX."expense_item_tax
+                           WHERE
+                                espencse_item_id = :expense_item_id";
+            $logger->log("Expense item: ".$invoice_item_id." tax lines deleted", Zend_Log::INFO);
+
+            dbQuery($sql_delete,':expense_item_id',$invoice_item_id);
+
+
+        }
+
+        foreach($line_item_tax_id as $key => $value) 
+        {
+            if($value !== "")
+            {
+                $tax = getTaxRate($value);
+
+                $logger->log("ITEM :: Key: ".$key." Value: ".$value, Zend_Log::INFO);
+                $logger->log('ITEM :: tax rate: '.$tax['tax_percentage'], Zend_Log::INFO);
+
+                $tax_amount = lineItemTaxCalc($tax,$unit_price,$quantity);
+                //get Total tax for line item
+                $tax_total = $tax_total + $tax_amount;
+
+                $logger->log('ITEM :: Qty: '.$quantity.' Unit price: '.$unit_price, Zend_Log::INFO);
+                $logger->log('ITEM :: Tax rate: '.$tax[tax_percentage].' Tax type: '.$tax['type'].' Tax $: '.$tax_amount, Zend_Log::INFO);
+
+                $sql = "INSERT 
+                            INTO 
+                        ".TB_PREFIX."expense_item_tax 
+                        (
+                            expense_item_id, 
+                            tax_id, 
+                            tax_type, 
+                            tax_rate, 
+                            tax_amount
+                        ) 
+                        VALUES 
+                        (
+                            :expense_item_id, 
+                            :tax_id,
+                            :tax_type,
+                            :tax_rate,
+                            :tax_amount
+                        )";
+
+                dbQuery($sql,
+                    ':expense_item_id', $expense_item_id,
+                    ':tax_id', $tax[tax_id],
+                    ':tax_type', $tax[type],
+                    ':tax_rate', $tax[tax_percentage],
+                    ':tax_amount', $tax_amount
+                    );
+            }
+        }
+        //TODO fix this
+        return true;
     }
 }
 

@@ -49,13 +49,6 @@
 	{if $taxes == null }
 	    <td><p><em>{$LANG.no_taxes}</em></p></td>
     {else}
-    {*
-    	<select name="tax_id[0][0]"">
-    	{foreach from=$taxes item=tax}
-    		<option {if $tax.tax_id == $defaults.tax} selected {/if} value="{$tax.tax_id}">{$tax.tax_description}</option>
-    	{/foreach}
-    	</select>
-    *}
         {section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
         <td>				                				                
             <select 

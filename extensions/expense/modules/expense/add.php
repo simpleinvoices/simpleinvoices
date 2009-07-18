@@ -14,6 +14,10 @@ if ($_POST['expense_account_id'] != "" ) {
 	include("./extensions/expense/modules/expense/save.php");
 }
 
+$defaults = getSystemDefaults();
+
+
+
 $smarty -> assign('save',$save);
 $smarty -> assign('taxes',$taxes);
 $smarty -> assign('expense_add',$expense_add);

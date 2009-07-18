@@ -52,6 +52,7 @@
 				{ if $subPageActive == "invoice_new_itemised"} <li><a class="active active_subpage" href="#">{$LANG.itemised}</a></li>{/if}				
 				{ if $subPageActive == "invoice_new_total"} <li><a class="active active_subpage" href="#">{$LANG.total}</a></li>{/if}				
 			<li><a { if $pageActive == "expense"} class="active" {/if} href="index.php?module=expense&amp;view=manage">{$LANG.expense}</a></li>
+			<li><a { if $pageActive == "expense_account"} class="active" {/if} href="index.php?module=expense_account&amp;view=manage">{$LANG.expense}</a></li>
 			<li><a { if $pageActive == "payment"} class="active" {/if} href="index.php?module=payments&amp;view=manage">{$LANG.payments}</a></li>
 				{ if $subPageActive == "payment_process"} <li><a class="active active_subpage" href="#">{$LANG.process}</a></li>{/if}
 				{ if $subPageActive == "payment_filter_invoice"} <li><a class="active active_subpage" href="#">{$LANG.payments_filtered} {$preference.pref_inv_wording} {$smarty.get.id}</a></li>{/if}

@@ -84,6 +84,28 @@
 		</select>
 		</td>
 	</tr>
+        {section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
+        <tr>
+            <td>
+              {$LANG.tax} {if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1}{/if}
+             </td>
+           <td>
+            <select 
+                id="tax_id[0][{$smarty.section.tax.index}]"
+                name="tax_id[0][{$smarty.section.tax.index}]"
+            >
+            <option value=""></option>
+            {foreach from=$taxes item=tax}
+                <option {if $tax.tax_id == $defaults.tax AND $smarty.section.tax.index == 0} selected {/if}   value="{$tax.tax_id}">{$tax.tax_description}</option>
+            {/foreach}
+        </select>
+        </td>
+        </tr>
+        {/section}
+</tr>
+
+
+
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
 		<td><textarea input type="text" class="editor" name='note' rows="8" cols="50">{$smarty.post.notes|unescape}</textarea></td>
