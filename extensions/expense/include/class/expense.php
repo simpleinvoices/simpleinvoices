@@ -119,7 +119,7 @@ class expense
             );
 	
 
-        expense::expense_item_tax(lastInsertId(),$line_item_tax_id,$unit_price,$quantity,"insert");
+        expense::expense_item_tax(lastInsertId(),$_POST['tax_id'][0],$_POST['amount'],"1","insert");
 
     }
 
@@ -168,6 +168,7 @@ class expense
     public static function expense_item_tax($invoice_item_id,$line_item_tax_id,$unit_price,$quantity,$action="") {
         
         global $logger;
+        $logger->log("ITEM :: Key: ".$key." Value: ".$value, Zend_Log::INFO);
 
         //if editing invoice delete all tax info then insert first then do insert again
         //probably can be done without delete - someone to look into this if required - TODO

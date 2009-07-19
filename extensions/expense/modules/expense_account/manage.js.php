@@ -16,15 +16,12 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			$('#manageGrid').flexigrid
 			(
 			{
-			url: 'index.php?module=products&view=xml',
+			url: 'index.php?module=expense_account&view=xml',
 			dataType: 'xml',
 			colModel : [
 				{display: 'Actions', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
 				{display: 'ID', name : 'id', width : 10 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Name', name : 'description', width : 40 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Unit Price', name : 'unit_price', width : 20 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Enabled', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'}
-				
+				{display: 'Name', name : 'name', width : 80 * percentage_width, sortable : true, align: 'left'}
 				],
 				
 

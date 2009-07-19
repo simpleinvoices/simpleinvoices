@@ -55,14 +55,11 @@ function sql($type='', $dir, $sort, $rp, $page )
 	
 		$sql = "SELECT 
 					id, 
-					description,
-					unit_price,
-					(SELECT (CASE  WHEN enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
+					name
 				FROM 
-					".TB_PREFIX."products  
+					".TB_PREFIX."expense_account  
 				WHERE 
-					visible = 1
-					AND domain_id = :domain_id
+					domain_id = :domain_id
 					$where
 				ORDER BY 
 					$sort $dir 
@@ -95,19 +92,12 @@ foreach ($customers as $row) {
 
 	$xml .= "<row id='".$row['iso']."'>";
 	$xml .= "<cell><![CDATA[
-			<a class='index_table' title='$LANG[view] ".$row['description']."' href='index.php?module=products&view=details&id=".$row['id']."&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-			<a class='index_table' title='$LANG[edit] ".$row['description']."' href='index.php?module=products&view=details&id=".$row['id']."&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+			<a class='index_table' title='$LANG[view] ".$row['description']."' href='index.php?module=expense_account&view=details&id=".$row['id']."&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+			<a class='index_table' title='$LANG[edit] ".$row['description']."' href='index.php?module=expense_account&view=details&id=".$row['id']."&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 		]]></cell>";		
 	
 	$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";		
-	$xml .= "<cell><![CDATA[".$row['description']."]]></cell>";
-	$xml .= "<cell><![CDATA[".siLocal::number($row['unit_price'])."]]></cell>";
-	if ($row['enabled']==$LANG['enabled']) {
-		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".utf8_encode($row['enabled'])."' title='".utf8_encode($row['enabled'])."' />]]></cell>";				
-	}	
-	else {
-		$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".utf8_encode($row['enabled'])."' title='".utf8_encode($row['enabled'])."' />]]></cell>";				
-	}
+	$xml .= "<cell><![CDATA[".$row['name']."]]></cell>";
 	$xml .= "</row>";		
 }
 

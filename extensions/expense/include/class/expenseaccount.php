@@ -26,4 +26,29 @@ class expenseaccount
         return $sth->fetchAll();
     
     }
+
+    public static function save()
+    {
+
+        global $auth_session;
+        
+        $sql = "INSERT into
+            ".TB_PREFIX."expense_account
+            (
+                domain_id,
+                name
+            )
+        VALUES
+            (	
+                :domain_id,
+                :name
+            )";
+
+        return dbQuery($sql,
+            ':domain_id',$auth_session->domain_id,	
+            ':name', $_POST['name']
+            );
+
+
+    }
 }
