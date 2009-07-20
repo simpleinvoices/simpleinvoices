@@ -1,16 +1,16 @@
 
 {* if bill is updated or saved.*}
 
-{if $smarty.post.description != "" && $smarty.post.id != null } 
-	{include file="../templates/default/products/save.tpl"}
+{if $smarty.post.name != "" } 
+	{include file="../extensions/expense/templates/default/expense_account/save.tpl"}
 {else}
 {* if  name was inserted *} 
-	{if $smarty.post.id !=null} 
+	{if $smarty.post.name !=null} 
 		<div class="validation_alert"><img src="./images/common/important.png" alt="" />
-		You must enter a description for the product</div>
+		You must enter a name for the account</div>
 		<hr />
 	{/if}
-<form name="frmpost" action="index.php?module=products&view=add" method="POST" id="frmpost" onSubmit="return checkForm(this);">
+<form name="frmpost" action="index.php?module=expense_account&view=add" method="POST" >
 <br />
 
 <table align="center">
@@ -18,7 +18,7 @@
 		<td class="details_screen">{$LANG.description} 
 		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field" title="{$LANG.Required_Field}"><img src="./images/common/required-small.png" alt="" /></a>
 		</td>
-		<td><input type="text" name="name" value="{$smarty.post.name}" size="50" id="description"  class="validate[required]" /></td>
+		<td><input type="text" name="name" value="{$smarty.post.name}" size="50" id="name"  class="validate[required]" /></td>
 	</tr>
 </table>
 <br />
@@ -30,7 +30,7 @@
 				{$LANG.save}
 			</button>
 
-			<input type="hidden" name="op" value="insert_product" />
+			<input type="hidden" name="op" value="insert" />
 		
 			<a href="./index.php?module=products&view=manage" class="negative">
 		        <img src="./images/common/cross.png" alt="" />

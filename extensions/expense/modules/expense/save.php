@@ -11,7 +11,7 @@ $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
 #insert product
 $saved = false;
 
-if (  $op === 'expense_add' ) 
+if (  $op === 'add' ) 
 {
 	
 	if( expense::save() ) 
@@ -23,7 +23,7 @@ if (  $op === 'expense_add' )
 
 }
 
-if ($op === 'edit_product' ) 
+if ($op === 'edit') 
 {
 
 	if ( expense::update() ) 

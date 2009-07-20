@@ -120,7 +120,7 @@
 				{$LANG.save}
 			</button>
 
-			<input type="hidden" name="op" value="expense_add" />
+			<input type="hidden" name="op" value="add" />
 		
 			<a href="./index.php?module=expense&view=manage" class="negative">
 		        <img src="./images/common/cross.png" alt="" />

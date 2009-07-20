@@ -139,7 +139,7 @@
 				{$LANG.save}
 			</button>
 
-			<input type="hidden" name="op" value="edit_product">
+			<input type="hidden" name="op" value="edit">
 			<input type="hidden" name="id" value="{$smarty.get.id}">
 		
 			<a href="./index.php?module=expense&view=manage" class="negative">

@@ -20,20 +20,15 @@ if (  $op === 'insert' ) {
 }
 
 if ($op === 'edit' ) {
-	if (isset($_POST['save_product']) && updateProduct()) {
+	if (expenseaccount::update()) {
 		$saved = true;
-		//updateCustomFieldValues($_POST['categorie'],$_GET['id']);
 	}
 }
 
-
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 
-
 $smarty->assign('saved',$saved);
-//$smarty -> assign('display_block',$display_block); 
-//$smarty -> assign('refresh_total',$refresh_total); 
 
-$smarty -> assign('pageActive', 'product_manage');
-$smarty -> assign('active_tab', '#product');
+$smarty -> assign('pageActive', 'expense_account_manage');
+$smarty -> assign('active_tab', '#money');
 ?>

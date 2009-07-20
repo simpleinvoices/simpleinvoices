@@ -5,16 +5,12 @@ checkLogin();
 
 
 #get custom field labels
-$customFieldLabel = getCustomFieldLabels();
-$taxes = getActiveTaxes();
 //if valid then do save
-if ($_POST['description'] != "" ) {
-	include("./modules/products/save.php");
+if ($_POST['name'] != "" ) {
+	include("./extensions/expense/modules/expense_account/save.php");
 }
-$smarty -> assign('customFieldLabel',$customFieldLabel);
 $smarty -> assign('save',$save);
-$smarty -> assign('taxes',$taxes);
 
-$smarty -> assign('pageActive', 'product_add');
-$smarty -> assign('active_tab', '#product');
+$smarty -> assign('pageActive', 'expense_account_add');
+$smarty -> assign('active_tab', '#money');
 ?>

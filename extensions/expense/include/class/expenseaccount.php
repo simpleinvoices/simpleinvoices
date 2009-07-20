@@ -27,7 +27,20 @@ class expenseaccount
     
     }
 
-    public static function save()
+    public static function select($id)
+    {
+        
+        global $dbh;
+        global $auth_session;
+        
+        $sql = "SELECT * FROM ".TB_PREFIX."expense_account WHERE domain_id = :domain_id and id = :id";
+        $sth  = dbQuery($sql,':domain_id',$auth_session->domain_id, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
+        
+        return $sth->fetch();
+    
+    }
+
+    public static function insert()
     {
 
         global $auth_session;
@@ -48,7 +61,30 @@ class expenseaccount
             ':domain_id',$auth_session->domain_id,	
             ':name', $_POST['name']
             );
+    }
 
+    public static function update()
+    {
+
+        global $db;
+        global $auth_session;
+        
+        $sql = "UPDATE
+            ".TB_PREFIX."expense_account
+                SET
+                    name = :name
+                WHERE
+                    id = :id
+                    AND
+                    domain_id = :domain_id
+            ";
+
+        return $db->query($sql,
+            ':id',$_GET['id'],	
+            ':domain_id',$auth_session->domain_id,	
+            ':name', $_POST['name']
+            );
 
     }
+
 }

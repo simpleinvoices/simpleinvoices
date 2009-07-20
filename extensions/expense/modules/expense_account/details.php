@@ -3,20 +3,11 @@
 checkLogin();
 
 #get the invoice id
-$product_id = $_GET['id'];
+$id = $_GET['id'];
 
-$product = getProduct($product_id);
+$expense_account = expenseaccount::select($id);
 
-#get custom field labels
-$customFieldLabel = getCustomFieldLabels();
-$taxes = getActiveTaxes();
-$tax_selected = getTaxRate($product['default_tax_id']);
-
-$smarty -> assign('product',$product);
-$smarty -> assign('taxes',$taxes);
-$smarty -> assign('tax_selected',$tax_selected);
-$smarty -> assign('customFieldLabel',$customFieldLabel);
-
+$smarty -> assign('expense_account',$expense_account);
 $smarty -> assign('pageActive', 'product_manage');
 $subPageActive = $_GET['action'] =="view"  ? "product_view" : "product_edit" ;
 $smarty -> assign('subPageActive', $subPageActive);
