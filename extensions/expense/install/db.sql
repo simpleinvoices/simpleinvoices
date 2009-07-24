@@ -20,7 +20,7 @@ CREATE TABLE  `si_expense_account` (
 INSERT INTO `si_expense_account` (`id`, `domain_id`, `name`) VALUES (NULL, '1', 'Car expense'), (NULL, '1', 'IT costs');
 
 CREATE TABLE `si_expense_item_tax` (
-`id` INT( 11 ) NOT NULL ,
+`id` INT( 11 ) NOT NULL AUTO_INCREMENT ,
 `expense_id` INT( 11 ) NOT NULL ,
 `tax_id` INT( 11 ) NOT NULL ,
 `tax_type` VARCHAR( 1 ) NOT NULL ,
