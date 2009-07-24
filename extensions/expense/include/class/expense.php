@@ -79,6 +79,8 @@ class expense
     {
 
         global $auth_session;
+        global $logger;
+        global $db;
         
         $sql = "INSERT into
             ".TB_PREFIX."expense
@@ -106,7 +108,7 @@ class expense
                 :note
             )";
 
-        return dbQuery($sql,
+        dbQuery($sql,
             ':domain_id',$auth_session->domain_id,	
             ':amount', $_POST['amount'],
             ':expense_account_id', $_POST['expense_account_id'],
@@ -119,8 +121,10 @@ class expense
             );
 	
 
+        $logger->log("Exp ITEM tax- last insert ID-".lastInsertId(), Zend_Log::INFO);
         expense::expense_item_tax(lastInsertId(),$_POST['tax_id'][0],$_POST['amount'],"1","insert");
 
+        return true;
     }
 
     public static function update()
@@ -165,10 +169,11 @@ class expense
     Function: invoice_item_tax
     Purpose: insert/update the multiple taxes per line item into the si_invoice_item_tax table
     */
-    public static function expense_item_tax($invoice_item_id,$line_item_tax_id,$unit_price,$quantity,$action="") {
+    public static function expense_item_tax($expense_id,$line_item_tax_id,$unit_price,$quantity,$action="") {
         
         global $logger;
-        $logger->log("ITEM :: Key: ".$key." Value: ".$value, Zend_Log::INFO);
+        global $db;
+        $logger->log("Exp ITEM :: Key: ".$key." Value: ".$value, Zend_Log::INFO);
 
         //if editing invoice delete all tax info then insert first then do insert again
         //probably can be done without delete - someone to look into this if required - TODO
@@ -179,9 +184,9 @@ class expense
                                 ".TB_PREFIX."expense_item_tax
                            WHERE
                                 espencse_item_id = :expense_item_id";
-            $logger->log("Expense item: ".$invoice_item_id." tax lines deleted", Zend_Log::INFO);
+            $logger->log("Expense item: ".$expense_id." tax lines deleted", Zend_Log::INFO);
 
-            dbQuery($sql_delete,':expense_item_id',$invoice_item_id);
+            $db->query($sql_delete,':expense_id',$expense_id);
 
 
         }
@@ -192,21 +197,21 @@ class expense
             {
                 $tax = getTaxRate($value);
 
-                $logger->log("ITEM :: Key: ".$key." Value: ".$value, Zend_Log::INFO);
-                $logger->log('ITEM :: tax rate: '.$tax['tax_percentage'], Zend_Log::INFO);
+                $logger->log("Expense - item tax :: Key: ".$key." Value: ".$value, Zend_Log::INFO);
+                $logger->log('Expense - item tax :: tax rate: '.$tax['tax_percentage'], Zend_Log::INFO);
 
                 $tax_amount = lineItemTaxCalc($tax,$unit_price,$quantity);
                 //get Total tax for line item
                 $tax_total = $tax_total + $tax_amount;
 
-                $logger->log('ITEM :: Qty: '.$quantity.' Unit price: '.$unit_price, Zend_Log::INFO);
-                $logger->log('ITEM :: Tax rate: '.$tax[tax_percentage].' Tax type: '.$tax['type'].' Tax $: '.$tax_amount, Zend_Log::INFO);
+                $logger->log('Expense - item tax :: Qty: '.$quantity.' Unit price: '.$unit_price, Zend_Log::INFO);
+                $logger->log('Expense - item tax :: Tax rate: '.$tax[tax_percentage].' Tax type: '.$tax['type'].' Tax $: '.$tax_amount, Zend_Log::INFO);
 
                 $sql = "INSERT 
                             INTO 
                         ".TB_PREFIX."expense_item_tax 
                         (
-                            expense_item_id, 
+                            expense_id, 
                             tax_id, 
                             tax_type, 
                             tax_rate, 
@@ -214,15 +219,15 @@ class expense
                         ) 
                         VALUES 
                         (
-                            :expense_item_id, 
+                            :expense_id, 
                             :tax_id,
                             :tax_type,
                             :tax_rate,
                             :tax_amount
                         )";
 
-                dbQuery($sql,
-                    ':expense_item_id', $expense_item_id,
+                $db->query($sql,
+                    ':expense_id', $expense_id,
                     ':tax_id', $tax[tax_id],
                     ':tax_type', $tax[type],
                     ':tax_rate', $tax[tax_percentage],
