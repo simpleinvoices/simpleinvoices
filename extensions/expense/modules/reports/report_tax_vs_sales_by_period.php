@@ -55,7 +55,7 @@ while ( $year <= $this_year )
 		/*
 		* Sales
 		*/
-		$total_month_sales_sql = "select sum(ii.total) as month_total from ".TB_PREFIX."invoice_items ii, si_invoices i where i.id = ii.invoice_id AND i.date like '$year-$month%'";
+		$total_month_sales_sql = "select sum(iit.tax_amount) as month_total from ".TB_PREFIX."invoice_item_tax iit, si_invoice_items ii, si_invoices i where i.id = ii.invoice_id AND iit.invoice_item_id = ii.id AND i.date like '$year-$month%'";
 		//$total_month_sales = mysqlQuery($total_month_sales_sql);
 		//$total_month_sales_array= mysql_fetch_array($total_month_sales);
 
@@ -71,7 +71,7 @@ while ( $year <= $this_year )
 		/*
 		* Payment
 		*/
-		$total_month_payments_sql = " select sum(ac_amount) as month_total_payments from ".TB_PREFIX."payment where ac_date like '$year-$month%'";
+		$total_month_payments_sql = " select sum(et.tax_amount) as month_total_payments from ".TB_PREFIX."expense_item_tax et, si_expense e where e.id = et.expense_id AND e.date like '$year-$month%'";
 		//$total_month_payments = mysqlQuery($total_month_payments_sql);
 		//$total_month_payments_array= mysql_fetch_array($total_month_payments);
 
@@ -83,12 +83,18 @@ while ( $year <= $this_year )
 		{
 			$total_payments[$year][$month] = "-";
 		}
+
+		$tax_summary[$year][$month] = $total_month_sales_array['month_total'] - $total_month_payments_array['month_total_payments'];
+        
+        $tax_summary[$year][$month] == "0" ? $tax_summary[$year][$month] ="-" :$tax_summary[$year][$month] = $tax_summary[$year][$month] ;
+
 		$month++;
 	}
 	/*
 	* Sales
 	*/
-	$total_year_sales_sql = "select sum(ii.total) as year_total from ".TB_PREFIX."invoice_items ii, si_invoices i where i.id = ii.invoice_id AND i.date like '$year%'";
+	#$total_year_sales_sql = "select sum(ii.total) as year_total from ".TB_PREFIX."invoice_items ii, si_invoices i where i.id = ii.invoice_id AND i.date like '$year%'";
+    $total_year_sales_sql = "select sum(iit.tax_amount) as year_total from ".TB_PREFIX."invoice_item_tax iit, si_invoice_items ii, si_invoices i where i.id = ii.invoice_id AND iit.invoice_item_id = ii.id AND i.date like '$year%'";
 	//$total_year_sales = mysqlQuery($total_year_sales_sql);
 	//$total_year_sales_array= mysql_fetch_array($total_year_sales);
 
@@ -104,7 +110,8 @@ while ( $year <= $this_year )
 	/*
 	* Payment
 	*/
-	$total_year_payments_sql = " select sum(ac_amount) as year_total_payments from ".TB_PREFIX."payment where ac_date like '$year%'";
+	#$total_year_payments_sql = " select sum(ac_amount) as year_total_payments from ".TB_PREFIX."payment where ac_date like '$year%'";
+	$total_year_payments_sql = " select sum(et.tax_amount) as year_total_payments from ".TB_PREFIX."expense_item_tax et, si_expense e where e.id = et.expense_id AND e.date like '$year%'";
 	//$total_year_payments = mysqlQuery($total_year_payments_sql);
 	//$total_year_payments_array= mysql_fetch_array($total_year_payments);
 
@@ -117,6 +124,8 @@ while ( $year <= $this_year )
 			$total_payments[$year]['Total']  = "-";
 		}
 
+    $tax_summary[$year]['Total'] = $total_year_sales_array['year_total']-$total_year_payments_array['year_total_payments'] ;
+    $tax_summary[$year]['Total'] == "0" ? $tax_summary[$year]['Total'] = "-" : $tax_summary[$year]['Total'] = $tax_summary[$year]['Total'] ;
 	$years[]=$year ;
 	$year++;
 }
@@ -129,6 +138,7 @@ echo "</pre>";
 */
 $smarty->assign('total_sales', $total_sales);
 $smarty->assign('total_payments', $total_payments);
+$smarty->assign('tax_summary', $tax_summary);
 //$years = array(2006,2007,2008);
 $years = array_reverse($years);
 $smarty->assign('years', $years);
