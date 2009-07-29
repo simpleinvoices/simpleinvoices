@@ -46,13 +46,13 @@
     <tr>
         <td>
 
-            <a href="index.php?module=reports&view=report_tax_total" class="">
+            <a href="index.php?module=reports&view=report_tax_vs_sales_by_period" class="">
                 <img src="./images/famfam/money_delete.png" alt="" />
-                {$LANG.total_taxes}
+                Monthly tax summary per year
             </a>
-            <a href="index.php?module=reports&view=report_tax_total" class="">
+            <a href="index.php?module=reports&view=report_expense_account_by_period" class="">
                 <img src="./images/famfam/money_delete.png" alt="" />
-                {$LANG.total_taxes}
+                Expense accounts summary
             </a>
             
 
