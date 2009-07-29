@@ -49,9 +49,22 @@ class expense
         global $db;
         global $auth_session;
         
-        $sql = "SELECT * FROM ".TB_PREFIX."expense WHERE domain_id = :domain_id and id = :id";
+        #$sql = "SELECT * FROM ".TB_PREFIX."expense e, ".TB_PREFIX."expense_item_tax et WHERE e.domain_id = :domain_id and e.id = :id and e.id = et";
+		$sql = "SELECT
+                    *
+				FROM 
+					".TB_PREFIX."expense e
+                    LEFT OUTER JOIN ".TB_PREFIX."expense_item_tax et  
+                        ON (e.id = et.expense_id)
+				WHERE
+                    e.domain_id = :domain_id
+					and e.id = :id
+				";
         $sth  = $db->query($sql,':domain_id',$auth_session->domain_id ,':id',$id) or die(htmlspecialchars(end($dbh->errorInfo())));
         
+	
+
+
         return $sth->fetch();
     
     }
@@ -69,6 +82,8 @@ class expense
         //get invoices
         $detail['invoice_all'] = invoice::get_all();
         //get products
+        $detail['product_all'] = product::get_all();
+        //get tax
         $detail['product_all'] = product::get_all();
 
         return $detail;
@@ -150,7 +165,7 @@ class expense
                     domain_id = :domain_id
             ";
 
-        return $db->query($sql,
+        $db->query($sql,
             ':id',$_POST['id'],	
             ':domain_id',$auth_session->domain_id,	
             ':amount', $_POST['amount'],
@@ -162,6 +177,10 @@ class expense
             ':date', $_POST['date'],
             ':note', $_POST['note']
             );
+
+        expense::expense_item_tax($_POST['id'],$_POST['tax_id'][0],$_POST['amount'],"1","update");
+
+        return true;
 
     }
 
@@ -183,7 +202,7 @@ class expense
             $sql_delete = "DELETE from
                                 ".TB_PREFIX."expense_item_tax
                            WHERE
-                                espencse_item_id = :expense_item_id";
+                                espense_id = :expense_id";
             $logger->log("Expense item: ".$expense_id." tax lines deleted", Zend_Log::INFO);
 
             $db->query($sql_delete,':expense_id',$expense_id);

@@ -14,10 +14,12 @@ $detail['product'] = product::get($expense['product_id']);
 
 $taxes = getActiveTaxes();
 #$tax_selected = getTaxRate($product['default_tax_id']);
+$defaults = getSystemDefaults();
 
 $smarty -> assign('expense',$expense);
 $smarty -> assign('detail',$detail);
 $smarty -> assign('taxes',$taxes);
+$smarty -> assign('defaults',$defaults);
 $smarty -> assign('tax_selected',$tax_selected);
 $smarty -> assign('customFieldLabel',$customFieldLabel);
 
