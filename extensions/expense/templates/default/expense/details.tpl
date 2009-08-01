@@ -24,8 +24,8 @@
             </td>
     </tr>
 	<tr>
-		<td class="details_screen">{$LANG.expense_account}</td>
-		<td>{$detail.date|siLocal_date}</td>
+		<td class="details_screen">{$LANG.expense_account}&nbsp; &nbsp;</td>
+		<td>{$detail.expense_account.name}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.date_upper}</td>
