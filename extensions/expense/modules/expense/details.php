@@ -6,11 +6,11 @@ checkLogin();
 $expense_id = $_GET['id'];
 
 $expense = expense::get($expense_id);
-
 $detail = expense::detail();
 $detail['customer'] = customer::get($expense['customer_id']);
 $detail['biller'] = biller::get($expense['biller_id']);
 $detail['product'] = product::get($expense['product_id']);
+$detail['expense_tax'] = expensetax::get_all($expense_id);
 
 $taxes = getActiveTaxes();
 #$tax_selected = getTaxRate($product['default_tax_id']);

@@ -53,13 +53,19 @@ function sql($type='', $dir, $sort, $rp, $page )
 		$sort = "id";
 	}
 	
+                    #coalesce(sum(et.tax_amount),0) as ettax
+                    #LEFT OUTER JOIN ".TB_PREFIX."expense_item_tax et  
+                    #    ON (et.expense_id = e.id)
 		$sql = "SELECT
+                    e.id as EID,
                     e.*,
                     i.id as invoice,
                     b.name as biller,
                     ea.name as expense_account,
                     c.name as customer,
-                    p.description as product
+                    p.description as product,
+                    (select sum(tax_amount) from si_expense_item_tax where expense_id = EID) as tax,
+                    (select tax + e.amount) as total
 				FROM 
 					".TB_PREFIX."expense e
                     LEFT OUTER JOIN ".TB_PREFIX."expense_account ea  
@@ -111,7 +117,9 @@ foreach ($customers as $row) {
 		]]></cell>";		
 	
 	$xml .= "<cell><![CDATA[".siLocal::date($row['date'])."]]></cell>";		
-	$xml .= "<cell><![CDATA[".siLocal::number($row['amount'])."]]></cell>";
+	$xml .= "<cell><![CDATA[".siLocal::number_trim($row['amount'])."]]></cell>";
+	$xml .= "<cell><![CDATA[".siLocal::number_trim($row['tax'])."]]></cell>";
+	$xml .= "<cell><![CDATA[".siLocal::number_trim($row['amount'] + $row['tax'])."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['expense_account']."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['biller']."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['customer']."]]></cell>";

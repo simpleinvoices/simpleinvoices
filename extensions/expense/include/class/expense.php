@@ -49,8 +49,8 @@ class expense
         global $db;
         global $auth_session;
         
-        #$sql = "SELECT * FROM ".TB_PREFIX."expense e, ".TB_PREFIX."expense_item_tax et WHERE e.domain_id = :domain_id and e.id = :id and e.id = et";
-		$sql = "SELECT
+        $sql = "SELECT * FROM ".TB_PREFIX."expense WHERE domain_id = :domain_id and id = :id";
+		/*$sql = "SELECT
                     *
 				FROM 
 					".TB_PREFIX."expense e
@@ -59,7 +59,8 @@ class expense
 				WHERE
                     e.domain_id = :domain_id
 					and e.id = :id
-				";
+				";*/
+
         $sth  = $db->query($sql,':domain_id',$auth_session->domain_id ,':id',$id) or die(htmlspecialchars(end($dbh->errorInfo())));
         
 	
@@ -82,8 +83,6 @@ class expense
         //get invoices
         $detail['invoice_all'] = invoice::get_all();
         //get products
-        $detail['product_all'] = product::get_all();
-        //get tax
         $detail['product_all'] = product::get_all();
 
         return $detail;
@@ -202,7 +201,7 @@ class expense
             $sql_delete = "DELETE from
                                 ".TB_PREFIX."expense_item_tax
                            WHERE
-                                espense_id = :expense_id";
+                                expense_id = :expense_id";
             $logger->log("Expense item: ".$expense_id." tax lines deleted", Zend_Log::INFO);
 
             $db->query($sql_delete,':expense_id',$expense_id);
