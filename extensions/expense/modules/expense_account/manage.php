@@ -7,6 +7,6 @@ $number_of_rows  = expenseaccount::count();
 
 $smarty -> assign("number_of_rows",$number_of_rows);
 
-$smarty -> assign('pageActive', 'expense');
-$smarty -> assign('active_tab', '#expense');
+$smarty -> assign('pageActive', 'expense_account');
+$smarty -> assign('active_tab', '#money');
 ?>

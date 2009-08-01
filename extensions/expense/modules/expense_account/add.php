@@ -11,6 +11,7 @@ if ($_POST['name'] != "" ) {
 }
 $smarty -> assign('save',$save);
 
-$smarty -> assign('pageActive', 'expense_account_add');
+$smarty -> assign('pageActive', 'expense_account');
+$smarty -> assign('subPageActive', 'add');
 $smarty -> assign('active_tab', '#money');
 ?>

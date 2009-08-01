@@ -23,6 +23,7 @@ $smarty -> assign('taxes',$taxes);
 $smarty -> assign('expense_add',$expense_add);
 $smarty -> assign('defaults',$defaults);
 
-$smarty -> assign('pageActive', 'product_add');
-$smarty -> assign('active_tab', '#product');
+$smarty -> assign('pageActive', 'expense');
+$smarty -> assign('subPageActive', 'add');
+$smarty -> assign('active_tab', '#money');
 ?>

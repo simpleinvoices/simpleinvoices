@@ -86,8 +86,8 @@
 	</tr>
         {section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
         <tr>
-            <td>
-              {$LANG.tax} {if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1}{/if}
+            <td class="details_screen">
+              {$LANG.tax} {if $defaults.tax_per_line_item > 1}{$smarty.section.tax.index+1}{/if}
              </td>
            <td>
             <select 
