@@ -8,6 +8,21 @@
 		<td class="details_screen">{$LANG.amount}</td>
 		<td>{$expense.amount|siLocal_number}</td>
 	</tr>
+    <tr>
+		<td class="details_screen">{$LANG.tax}</td>
+            <td>				                				                
+                {foreach from=$detail.expense_tax_grouped item=tax}
+                    {$tax.tax_name}:
+                    {$tax.tax_amount|siLocal_number}
+                {/foreach}
+            </td>
+    </tr>
+    <tr>
+		<td class="details_screen">{$LANG.total}</td>
+            <td>
+                    {$detail.expense_tax_total|siLocal_number}				                				                
+            </td>
+    </tr>
 	<tr>
 		<td class="details_screen">{$LANG.expense_account}</td>
 		<td>{$detail.date|siLocal_date}</td>
