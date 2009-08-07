@@ -68,10 +68,11 @@ if ($_GET['stage'] == 2 ) {
   	}
   	
 	//allow split of email address via , or ;  	
-	$bccs = preg_split('/\s*[,;]\s*/', $_POST['email_bcc']);
-	if (!empty($bccs)) 
+	if (!empty($_POST['email_bcc']))
 	{
-		foreach ($bccs as $bcc) 
+ 	    $bcc_addresses = preg_split('/\s*[,;]\s*/', $_POST['email_bcc']);
+	
+    	foreach ($bcc_addresses as $bcc)
 		{
 		    $mail->AddBCC($bcc);
 		}
@@ -94,8 +95,8 @@ if ($_GET['stage'] == 2 ) {
 	   echo "Mailer Error: " . $mail->ErrorInfo;
 	   exit;
 	}
-	unlink("./tmp/cache/$preference[pref_inv_wording]$invoice[id].pdf");
-	$message  = "<meta http-equiv=\"refresh\" content=\"2;URL=index.php?module=invoices&amp;view=manage>\"";
+	unlink("./tmp/cache/$spc2us_pref$invoice[id].pdf");
+	$message  = "<meta http-equiv=\"refresh\" content=\"2;URL=index.php?module=invoices&amp;view=manage\">";
 	$message .= "<br />$preference[pref_inv_wording] $invoice[id] has been sent as a PDF";
 
 	echo $block_stage3;
