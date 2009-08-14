@@ -99,7 +99,8 @@ $zendDb = Zend_Db::factory($config->database->adapter, array(
     'host'     => $config->database->params->host,
     'username' => $config->database->params->username,
     'password' => $config->database->params->password,
-    'dbname'   => $config->database->params->dbname)
+    'dbname'   => $config->database->params->dbname,
+    'port'     => $config->database->params->port)
 );
 
 //include_once("./include/sql_patches.php");
