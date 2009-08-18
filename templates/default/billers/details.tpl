@@ -8,7 +8,7 @@
 * License:
 *	 GPL v3 or above
 *}
-<form name="frmpost" action="index.php?module=billers&amp;view=save&amp;id={$smarty.get.id}" method="post" id="frmpost" onSubmit="return checkForm(this);">
+<form name="frmpost" action="index.php?module=billers&amp;view=save&amp;id={$smarty.get.id}" method="post" id="frmpost" onsubmit="return checkForm(this);">
 
 
 {if $smarty.get.action== 'view' }

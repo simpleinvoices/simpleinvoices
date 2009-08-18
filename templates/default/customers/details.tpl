@@ -210,8 +210,8 @@
 
 {if $smarty.get.action == 'edit' }
 
-<form name="frmpost" action="index.php?module=customers&amp;view=save&amp;id={$customer.id}" method="post" id="frmpost" onSubmit="return checkForm(this);">
-<br>
+<form name="frmpost" action="index.php?module=customers&amp;view=save&amp;id={$customer.id}" method="post" id="frmpost" onsubmit="return checkForm(this);">
+<br />
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.customer_name}

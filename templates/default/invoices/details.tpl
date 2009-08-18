@@ -13,7 +13,7 @@
 */
 *}
 {* <h3>You are editing {$preference.pref_inv_wording} {$invoice.id}</h3> *}
-<br>
+<br />
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
         	<img src="images/common/gmail-loader.gif" alt="Loading ..." /> Loading ...
 </div>

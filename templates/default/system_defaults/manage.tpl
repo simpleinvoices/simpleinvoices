@@ -1,4 +1,4 @@
-<br>
+<br />
 	<table align="center">
 	<tr>
 		<td class="details_screen"><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=biller'><img src="images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td><td class="details_screen">{$LANG.default_biller}</td><td>{$defaultBiller.name|escape:html}</td>

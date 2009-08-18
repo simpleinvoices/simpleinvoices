@@ -23,7 +23,7 @@
 		<hr />
 *}
 	{/if}	
-<form name="frmpost" action="index.php?module=customers&amp;view=add" method="post" id="frmpost" onSubmit="return checkForm(this);">
+<form name="frmpost" action="index.php?module=customers&amp;view=add" method="post" id="frmpost" onsubmit="return checkForm(this);">
 <br />
 <table align="center">
 	<tr>

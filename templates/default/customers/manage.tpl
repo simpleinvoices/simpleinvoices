@@ -14,7 +14,7 @@
 <table class="buttons" align="center">
     <tr>
         <td>
-            <a href="./index.php?module=customers&view=add" class="positive">
+            <a href="./index.php?module=customers&amp;view=add" class="positive">
                 <img src="./images/famfam/add.png" alt="" />
                 {$LANG.customer_add}
             </a>

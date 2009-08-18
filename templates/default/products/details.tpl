@@ -1,4 +1,4 @@
-<form name="frmpost" action="index.php?module=products&view=save&id={$smarty.get.id}" method="post" id="frmpost" onSubmit="return checkForm(this);">
+<form name="frmpost" action="index.php?module=products&view=save&id={$smarty.get.id}" method="post" id="frmpost" onsubmit="return checkForm(this);">
 
 
 {if $smarty.get.action== 'view' }

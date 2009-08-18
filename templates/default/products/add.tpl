@@ -10,7 +10,7 @@
 		You must enter a description for the product</div>
 		<hr />
 	{/if}
-<form name="frmpost" action="index.php?module=products&view=add" method="POST" id="frmpost" onSubmit="return checkForm(this);">
+<form name="frmpost" action="index.php?module=products&view=add" method="POST" id="frmpost" onsubmit="return checkForm(this);">
 <br />
 
 <table align="center">
