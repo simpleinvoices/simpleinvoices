@@ -1242,6 +1242,20 @@ PRIMARY KEY  (`user_id`)) ;
     $patch['203']['patch'] = "UPDATE `".TB_PREFIX."invoices` SET `type_id` = '2' where `type_id`=3 ;";
     $patch['203']['date'] = "20090704";    
 
+    $patch['204']['name'] = "Create index table to handle new invoice numbering system";
+    $patch['204']['patch'] = "CREATE TABLE `".TB_PREFIX."index` (
+`id` INT( 11 ) NOT NULL ,
+`node` VARCHAR( 255 ) NOT NULL ,
+`sub_node` VARCHAR( 255 ) NULL ,
+`domain_id` INT( 11 ) NOT NULL
+) ENGINE = MYISAM ;";
+    $patch['204']['date'] = "20090818";    
+
+    $patch['205']['name'] = "Add index_id to invoice table - new invoice numbering";
+    $patch['205']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD `index_id` INT( 11 ) NOT NULL AFTER `id`;";
+    $patch['205']['date'] = "200900818";    
+
+
  /*
 */
 /*

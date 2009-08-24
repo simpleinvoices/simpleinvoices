@@ -1,6 +1,20 @@
 <?php
 class invoice {
 	
+
+    public static function select($id)
+    {
+		global $logger;
+		global $db;
+	    global $auth_session;
+
+		$sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id and id = :id";
+		$sth = $db->query($sql, ':id', $id, ':domain_id', $auth_session->domain_id);
+
+        return $sth->fetch();
+
+    }
+
     public static function get_all()
     {
 		global $logger;

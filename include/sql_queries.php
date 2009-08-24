@@ -1672,6 +1672,7 @@ function insertInvoice($type) {
 			INTO
 		".TB_PREFIX."invoices (
 			id, 
+            index_id,
 			domain_id,
 			biller_id, 
 			customer_id, 
@@ -1687,6 +1688,7 @@ function insertInvoice($type) {
 		VALUES
 		(
 			NULL,
+			:index_id,
 			:domain_id,
 			:biller_id,
 			:customer_id,
@@ -1699,10 +1701,12 @@ function insertInvoice($type) {
 			:customField3,
 			:customField4
 			)";
+
 	if ($db_server == 'pgsql') {
 		$sql = "INSERT 
 				INTO
 			".TB_PREFIX."invoices (
+				index_id,
 				domain_id,
 				biller_id, 
 				customer_id, 
@@ -1717,6 +1721,7 @@ function insertInvoice($type) {
 			)
 			VALUES
 			(
+				:index_id,
 				:domain_id,
 				:biller_id,
 				:customer_id,
@@ -1731,7 +1736,8 @@ function insertInvoice($type) {
 				)";
 	}
 	//echo $sql;
-	return dbQuery($sql,
+	$sth= dbQuery($sql,
+		':index_id', index::next('invoice',$_POST[preference_id]),
 		':domain_id', $auth_session->domain_id,
 		':biller_id', $_POST[biller_id],
 		':customer_id', $_POST[customer_id],
@@ -1744,10 +1750,23 @@ function insertInvoice($type) {
 		':customField3', $_POST[customField3],
 		':customField4', $_POST[customField4]
 		);
+
+    index::increment('invoice',$_POST[preference_id]);
+
+    return $sth;
 }
 
 function updateInvoice($invoice_id) {
 	
+    $current_invoice = invoice::select($_POST['id']);
+
+
+    $index_id = $_POST['preference_id'];
+    if ($current_invoice['preference_id'] != $_POST['preference_id'])
+    {
+        $index_id = index::increment('invoice',$_POST['preference_id']);
+    }
+
 	if ($db_server == 'mysql' && !_invoice_check_fk(
 		$_POST['biller_id'], $_POST['customer_id'],
 		$type, $_POST['preference_id'])) {
@@ -1756,6 +1775,7 @@ function updateInvoice($invoice_id) {
 	$sql = "UPDATE
 			".TB_PREFIX."invoices
 		SET
+			index_id = :index_id,
 			biller_id = :biller_id,
 			customer_id = :customer_id,
 			preference_id = :preference_id,
@@ -1769,6 +1789,7 @@ function updateInvoice($invoice_id) {
 			id = :invoice_id";
 			
 	return dbQuery($sql,
+        ':index_id', $index_id,
 		':biller_id', $_POST['biller_id'],
 		':customer_id', $_POST['customer_id'],
 		':preference_id', $_POST['preference_id'],

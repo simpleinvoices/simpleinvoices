@@ -46,8 +46,9 @@
 			*/
 			searchitems : [
 				{display: 'Invoice Number', name : 'iv.id'},
-				{display: 'Biller', name : 'b.name', isdefault: true},
-				{display: 'Customer', name : 'c.name', isdefault: true}
+				{display: 'Biller', name : 'b.name'},
+				{display: 'Customer', name : 'c.name', isdefault: true},
+				{display: 'Aging', name : 'aging'}
 				],
 			sortname: "id",
 			sortorder: "desc",

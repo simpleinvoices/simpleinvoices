@@ -30,8 +30,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 	/*SQL Limit - end*/
 
 	/*SQL where - start*/
-	$query = $_POST['query'];
-	$qtype = $_POST['qtype'];
+	$query = $_REQEUST['query'];
+	$qtype = $_REQUEST['qtype'];
 
 	$where = " WHERE iv.domain_id = :domain_id ";
 	if ($query) $where = " WHERE iv.domain_id = :domain_id AND $qtype LIKE '%$query%' ";

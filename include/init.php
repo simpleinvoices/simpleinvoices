@@ -106,6 +106,7 @@ $zendDb = Zend_Db::factory($config->database->adapter, array(
 //include_once("./include/sql_patches.php");
 
 include_once("./include/class/db.php");
+include_once("./include/class/index.php");
 $db = db::getInstance();
 
 include_once("./include/sql_queries.php");
