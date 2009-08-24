@@ -6,10 +6,11 @@ header("Content-type: text/xml");
 $dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "DESC" ;
 $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "id" ;
 $rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
+$having = (isset($_GET['having'])) ? $_GET['having'] : "" ;
 $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 
 //$sql = "SELECT * FROM ".TB_PREFIX."invoices LIMIT $start, $limit";
-function sql($type='', $dir, $sort, $rp, $page )
+function sql($type='', $dir, $sort, $rp, $page, $having)
 {
 	global $config;
 	global $auth_session;
@@ -52,6 +53,13 @@ function sql($type='', $dir, $sort, $rp, $page )
         $limit="";
 	}
 
+    $having;
+    switch ($having) 
+    {   
+        case "money_owed":
+            $sql_having = "HAVING Age > 0";
+            break;
+    }
 
 	switch ($config->database->adapter)
 	{
@@ -118,6 +126,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 			$where
 			GROUP BY
 				iv.id
+            $sql_having
 			ORDER BY
 			$sort $dir
 			$limit";
@@ -128,8 +137,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 	return $result;
 }
 
-$sth = sql('', $dir, $sort, $rp, $page);
-$sth_count_rows = sql('count',$dir, $sort, $rp, $page);
+$sth = sql('', $dir, $sort, $rp, $page, $having);
+$sth_count_rows = sql('count',$dir, $sort, $rp, $page, $having);
 
 $invoices = $sth->fetchAll(PDO::FETCH_ASSOC);
 

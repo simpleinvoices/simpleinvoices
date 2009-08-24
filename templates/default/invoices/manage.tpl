@@ -35,6 +35,15 @@
 	<br />
 {else}
 
+
+    <br />
+    <span class="welcome">
+       Filters:
+    <a href="index.php?module=invoices&view=manage&having=money_owed">Money Owed</a>    
+
+   </span>
+    <br />
+    <br />
 	<br />
 	<table id="manageGrid" style="display:none"></table>
 	{include file='../modules/invoices/manage.js.php'}
