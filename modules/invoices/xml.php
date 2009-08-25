@@ -45,7 +45,7 @@ $count = $sth_count_rows->rowCount();
 		<!--7 Email --><a title='".$LANG['email']." ".$row['preference']." ".$row['id']."' class='index_table' href='index.php?module=invoices&view=email&stage=1&id=".$row['id']."'><img src='images/common/mail-message-new.png' class='action' /></a>
 					]]>
 				</cell>";
-		$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";		
+		$xml .= "<cell><![CDATA[".$row['preference']." ".$row['index_id']."]]></cell>";		
 		$xml .= "<cell><![CDATA[".$row['biller']."]]></cell>";
 		$xml .= "<cell><![CDATA[".$row['customer']."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::date($row['date'])."]]></cell>";

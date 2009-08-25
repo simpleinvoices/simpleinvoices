@@ -29,9 +29,9 @@
 			dataType: 'xml',
 			colModel : [
 				{display: 'Actions', name : 'actions', width : action_menu, sortable : false, align: 'center'},
-				{display: 'ID', name : 'id', width :05 * percentage_width, sortable : true, align: 'center'},
-				{display: 'Biller', name : 'biller', width :25 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Customer', name : 'customer', width :25 * percentage_width, sortable : true, align: 'left'},
+				{display: 'ID', name : 'id', width :15 * percentage_width, sortable : true, align: 'left'},
+				{display: 'Biller', name : 'biller', width :20 * percentage_width, sortable : true, align: 'left'},
+				{display: 'Customer', name : 'customer', width :20 * percentage_width, sortable : true, align: 'left'},
 				{display: 'Date', name : 'date', width : 15 * percentage_width, sortable : true, align: 'left'},
 				{display: 'Total', name : 'invoice_total', width : 10 * percentage_width, sortable : true, align: 'left'},
 				{display: 'Owing', name : 'owing', width : 10 * percentage_width, sortable : true, align: 'left'},
