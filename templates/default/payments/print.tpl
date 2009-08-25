@@ -25,18 +25,3 @@
                 <td class='details_screen'>{$LANG.notes}</td><td>{$payment.ac_notes}
         </tr>
 </table>
-
-<br />
-<table class="buttons" align="center">
-	<tr>
-		<td>
-		
-			<a href="./index.php?module=payments&view=manage" class="negative">
-		        <img src="./images/common/cross.png" alt="" />
-	        	{$LANG.cancel}
-    		</a>
-	
-		</td>
-	</tr>
-</table>
-

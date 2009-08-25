@@ -22,6 +22,17 @@
 <tr>
 <td>
 
+<h2>Summary<a name="sales" href=""></a></h2>
+<table class="buttons" >
+    <tr>
+        <td>
+            <a href="index.php?module=reports&view=report_summary" class="">
+                <img src="./images/famfam/money.png" alt="" />
+                Summary report
+            </a>
+    </tr>
+</table>
+<br />
 <h2>{$LANG.sales}<a name="sales" href=""></a></h2>
 <table class="buttons" >
     <tr>

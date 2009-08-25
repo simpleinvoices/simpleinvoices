@@ -11,7 +11,7 @@ jsValidateRequired("name","Biller name");
 jsFormValidationEnd();
 jsEnd();
 /*end validation code*/
-
+$menu = false;
 $payment = getPayment($_GET['id']);
 
 /*Code to get the Invoice preference - so can link from this screen back to the invoice - START */
