@@ -64,7 +64,7 @@
 		<td class="details_screen"><b>{$preference.pref_inv_wording} {$LANG.summary}:</b></td><td colspan="5" align="right" class="details_screen align_right"><a href='#' class="show-summary" onclick="$('.summary').show();$('.show-summary').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a><a href='#' class="summary" onclick="$('.summary').hide();$('.show-summary').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a> </td>
 	</tr>
 	<tr class="details_screen summary">
-		<td class="details_screen">{$preference.pref_inv_wording} {$LANG.number_short}:</td><td colspan="5" class="details_screen">{$invoice.id}</td>
+		<td class="details_screen">{$preference.pref_inv_wording} {$LANG.number_short}:</td><td colspan="5" class="details_screen">{$invoice.index_id}</td>
 	</tr>
 	<tr class="details_screen summary">
 		<td class="details_screen">{$preference.pref_inv_wording} {$LANG.date}:</td>
@@ -410,7 +410,7 @@
 		</td>
 	</tr>
 	<tr class="account">
-		<td class="account" colspan="8">{$preference.pref_inv_wording} {$invoice.id}</td>
+		<td class="account" colspan="8">{$preference.pref_inv_wording} {$invoice.index_id}</td>
 		<td width=5%></td>
 		<td class="columnleft" width="5%"></td>
 		<td class="account" colspan="6"><a href="index.php?module=customers&amp;view=details&amp;id={$customer.id}&amp;action=view">{$LANG.customer_account}</a></td>

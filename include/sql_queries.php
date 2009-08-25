@@ -2416,7 +2416,7 @@ function pdfThis($html,$file_location="")
 	$preference = getPreference($invoice['preference_id']);
 	$pdfname = trim($preference['pref_inv_wording']) . $invoice_id;
 
-	#error_reporting(E_ALL & ~E_DEPRECATED);
+	#error_reporting(E_ALL);
 	#ini_set("display_errors","1");
 	@set_time_limit(10000);
 
