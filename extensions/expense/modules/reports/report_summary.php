@@ -48,8 +48,10 @@ $invoice = new invoice();
 $invoice->start_date = $start_date;
 $invoice->end_date = $end_date;
 $invoice->having = "date_between";
-$invoices = $invoice->select_all();
+$invoice->sort = "preference";
+$invoice_all = $invoice->select_all();
 
+$invoices = $invoice_all->fetchAll();
 $smarty -> assign('accounts', $accounts);
 $smarty -> assign('payments', $payments);
 $smarty -> assign('invoices', $invoices);

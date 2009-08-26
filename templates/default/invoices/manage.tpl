@@ -40,6 +40,8 @@
     <span class="welcome">
        Filters:
     <a href="index.php?module=invoices&view=manage&having=money_owed">Money Owed</a> : 
+    <a href="index.php?module=invoices&view=manage&having=draft">Draft</a> : 
+    <a href="index.php?module=invoices&view=manage&having=open">Open</a> : 
     <a href="index.php?module=invoices&view=manage">Clear filter</a> 
 
    </span>

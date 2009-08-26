@@ -29,7 +29,7 @@
 			dataType: 'xml',
 			colModel : [
 				{display: 'Actions', name : 'actions', width : action_menu, sortable : false, align: 'center'},
-				{display: 'ID', name : 'id', width :15 * percentage_width, sortable : true, align: 'left'},
+				{display: 'ID', name : 'index_name', width :15 * percentage_width, sortable : true, align: 'left'},
 				{display: 'Biller', name : 'biller', width :20 * percentage_width, sortable : true, align: 'left'},
 				{display: 'Customer', name : 'customer', width :20 * percentage_width, sortable : true, align: 'left'},
 				{display: 'Date', name : 'date', width : 15 * percentage_width, sortable : true, align: 'left'},

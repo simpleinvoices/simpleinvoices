@@ -11,8 +11,9 @@ $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 
 //$sql = "SELECT * FROM ".TB_PREFIX."invoices LIMIT $start, $limit";
 $invoice = new invoice();
-$sth = $invoice->select_all('', $dir, $sort, $rp, $page, $having);
-$sth_count_rows = $invoice->select_all('count',$dir, $sort, $rp, $page, $having);
+$invoice->sort=$sort;
+$sth = $invoice->select_all('', $dir, $rp, $page, $having);
+$sth_count_rows = $invoice->select_all('count',$dir, $rp, $page, $having);
 
 $invoices = $sth->fetchAll(PDO::FETCH_ASSOC);
 
@@ -45,7 +46,7 @@ $count = $sth_count_rows->rowCount();
 		<!--7 Email --><a title='".$LANG['email']." ".$row['preference']." ".$row['id']."' class='index_table' href='index.php?module=invoices&view=email&stage=1&id=".$row['id']."'><img src='images/common/mail-message-new.png' class='action' /></a>
 					]]>
 				</cell>";
-		$xml .= "<cell><![CDATA[".$row['preference']." ".$row['index_id']."]]></cell>";		
+		$xml .= "<cell><![CDATA[".$row['index_name']."]]></cell>";		
 		$xml .= "<cell><![CDATA[".$row['biller']."]]></cell>";
 		$xml .= "<cell><![CDATA[".$row['customer']."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::date($row['date'])."]]></cell>";

@@ -108,6 +108,17 @@
 	</td>
 </tr>
 	<tr>
+		<td class="details_screen">{$LANG.status}
+			<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_status" title="{$LANG.status}"><img src="./images/common/help-small.png" alt="" /></a>
+		</td>
+		<td>
+			<select name="status">
+			<option value="1" selected>{$LANG.open}</option>
+			<option value="0">{$LANG.draft}</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
 		<td class="details_screen">{$LANG.enabled}
 			<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_enabled" title="{$LANG.enabled}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>

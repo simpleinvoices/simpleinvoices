@@ -27,11 +27,11 @@ $smarty -> assign("number_of_invoices",$number_of_invoices);
 $smarty -> assign('pageActive', $pageActive);
 $smarty -> assign('active_tab', '#money');
 
-$url =  'index.php?module=invoices&view=xml';
-switch ($_GET['having'])
+$having="";
+if(isset($_GET['having']))
 {
-    case "money_owed":
-        $url =  'index.php?module=invoices&view=xml&having=money_owed';
-        break;
+    $having = "&having=".$_GET['having'];
 }
+$url =  'index.php?module=invoices&view=xml'.$having;
+
 $smarty -> assign('url', $url);

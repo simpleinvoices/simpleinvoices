@@ -67,7 +67,7 @@
  {/foreach}
  </table>
 
-<div id="top"><h3>Invoice summary for the period {$start_date} to {$end_date}</h3></div>
+<div id="top"><h3>Invoice/Quote summary for the period {$start_date} to {$end_date}</h3></div>
 
 <table align="center">
     <tr>
@@ -99,26 +99,28 @@
             <b>Amount</b>
         </td>
 	</tr>
- {foreach item=invoice from=$invoices}
+ {section name=invoice loop=$invoices}
+    {if $invoices[invoice].preference != $invoices[invoice.index_prev].preference AND $smarty.section.invoice.index != 0}   
+        <tr><td><br /></td></tr>
+    {/if}
     <tr>
-        <td class="details_screen">
-            {$invoice.preference}
-            {$invoice.id}
-            {$invoice.index_id}
+        <td class="details_screen">{$index}
+            {$invoices[invoice].preference}
+            {$invoices[invoice].index_id}
         </td>
         <td>
             &nbsp;
             &nbsp;
         </td>
         <td class="details_screen">
-            {$invoice.biller}
+            {$invoices[invoice].biller}
         </td>
         <td>
             &nbsp;
             &nbsp;
         </td>
         <td class="details_screen">
-            {$invoice.customer}
+            {$invoices[invoice].customer}
         </td>
         <td>
             &nbsp;
@@ -128,10 +130,10 @@
             &nbsp;
         </td>
         <td  class="details_screen">
-            {$invoice.invoice_total|siLocal_number}
+            {$invoices[invoice].invoice_total|siLocal_number}
         </td>
 	</tr>
- {/foreach}
+ {/section}
  </table>
 
 

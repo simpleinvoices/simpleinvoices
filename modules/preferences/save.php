@@ -28,6 +28,9 @@ if (  $op === 'insert_preference' ) {
 			:payment_line1_value,
 			:payment_line2_name,
 			:payment_line2_value,
+            :status,
+            :locale,
+            :language,
 			:enabled
 		 )";
 	if ($db_server == 'pgsql') {
@@ -78,6 +81,9 @@ if (  $op === 'insert_preference' ) {
 	  ':payment_line1_value', $_POST['p_inv_payment_line1_value'],
 	  ':payment_line2_name', $_POST['p_inv_payment_line2_name'],
 	  ':payment_line2_value', $_POST['p_inv_payment_line2_value'],
+	  ':status', $_POST['status'],
+	  ':locale', $_POST['locale'],
+	  ':language', $_POST['language'],
 	  ':enabled', $_POST['pref_enabled']
 	  )) {
 		$saved = true;
@@ -110,7 +116,10 @@ else if (  $op === 'edit_preference' ) {
 				pref_inv_payment_line1_value = :line1_value,
 				pref_inv_payment_line2_name = :line2_name,
 				pref_inv_payment_line2_value = :line2_value,
-				pref_enabled = :enabled
+				pref_enabled = :enabled,
+				status = :status,
+				locale = :locale,
+				language = :language
 			WHERE
 				pref_id = :id";
 
@@ -127,6 +136,9 @@ else if (  $op === 'edit_preference' ) {
 		  ':line2_name', $_POST['pref_inv_payment_line2_name'],
 		  ':line2_value', $_POST['pref_inv_payment_line2_value'],
 		  ':enabled', $_POST['pref_enabled'],
+		  ':status', $_POST['status'],
+		  ':locale', $_POST['locale'],
+		  ':language', $_POST['language'],
 		  ':id', $_GET['id']))
 	    {
 			$saved =true;

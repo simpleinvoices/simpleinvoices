@@ -80,12 +80,19 @@
 				<img src="./images/common/help-small.png" alt="" /></a>
 			</td>
 			<td>{$preference.pref_inv_payment_line2_value|regex_replace:"/[\\\]/":""}</td>
-		</tr>		<tr>
+		</tr>		
+        <tr>
         	<td class="details_screen">{$LANG.enabled} 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_enabled" title="{$LANG.enabled}">
 				<img src="./images/common/help-small.png" alt="" /></a>
 			</td>
 			<td>{$preference.enabled}</td>		</tr>	
+        <tr>
+        	<td class="details_screen">{$LANG.status} 
+				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_status" title="{$LANG.status}">
+				<img src="./images/common/help-small.png" alt="" /></a>
+			</td>
+			<td>{$preference.status_wording}</td>		</tr>	
 		<tr>
 			<td colspan="2" align="center"></td>
 		</tr>
@@ -208,6 +215,22 @@
 				<img src="./images/common/help-small.png" alt="" /></a>
 			</td>
 			<td><input type="text" name='pref_inv_payment_line2_value' value="{$preference.pref_inv_payment_line2_value|regex_replace:"/[\\\]/":""}" size="50" /></td>
+		</tr>
+		<tr>
+			<td class="details_screen">{$LANG.status} 
+				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_status" title="{$LANG.status}">
+				<img src="./images/common/help-small.png" alt="" /></a>
+			</td>
+			<td>
+				{* enabled block *}
+				<select name="status">
+				<option value="{$preference.status}" selected
+				style="font-weight: bold;">{$preference.status_wording}</option>
+				<option value="1">{$LANG.open}</option>
+				<option value="0">{$LANG.draft}</option>
+				</select>
+				{* /enabled block*}
+			</td>
 		</tr>
 		<tr>
 			<td class="details_screen">{$LANG.enabled} 

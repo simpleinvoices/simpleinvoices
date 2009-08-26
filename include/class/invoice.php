@@ -4,6 +4,7 @@ class invoice {
     public $start_date;
     public $end_date;
     public $having;
+    public $sort;
 
     public static function select($id)
     {
@@ -31,7 +32,7 @@ class invoice {
     }
 
     //change to non-static
-    function select_all($type='', $dir='DESC', $sort='id', $rp='25', $page='1', $having='')
+    function select_all($type='', $dir='DESC', $rp='25', $page='1', $having='')
     {
         global $config;
         global $auth_session;
@@ -40,6 +41,9 @@ class invoice {
         {
             $having = $this->having;
         }
+
+        $sort = $this->sort;
+
         //SC: Safety checking values that will be directly subbed in
     /*
         if (intval($start) != $start) {
@@ -63,7 +67,7 @@ class invoice {
         /*SQL where - end*/
 
         /*Check that the sort field is OK*/
-        $validFields = array('iv.id', 'biller', 'customer', 'invoice_total','owing','date','aging','type');
+        $validFields = array('index_name','iv.id', 'biller', 'customer', 'invoice_total','owing','date','aging','type','preference','type_id');
 
         if (in_array($sort, $validFields)) {
             $sort = $sort;
@@ -84,6 +88,12 @@ class invoice {
                 break;
             case "money_owed":
                 $sql_having = "HAVING owing > 0";
+                break;
+            case "draft":
+                $sql_having = "HAVING status = 0";
+                break;
+            case "open":
+                $sql_having = "HAVING status = 1";
                 break;
         }
 
@@ -129,7 +139,7 @@ class invoice {
                $sql ="
                 SELECT  
                        iv.id,
-                     iv.index_id as index_id,
+                       iv.index_id as index_id,
                        b.name AS biller,
                        c.name AS customer,
                        (SELECT SUM(coalesce(ii.total,  0)) FROM " .
@@ -146,7 +156,9 @@ class invoice {
                                                       WHEN Age <= 90 THEN '61-90'
                                                        ELSE '90+'  END)) AS aging,
                        iv.type_id As type_id,
-                       pf.pref_description AS preference
+                       pf.pref_description AS preference,
+                       pf.status AS status,
+                       (SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
                 FROM   " . TB_PREFIX . "invoices iv
                                LEFT JOIN " . TB_PREFIX . "biller b ON b.id = iv.biller_id
                                LEFT JOIN " . TB_PREFIX . "customers c ON c.id = iv.customer_id

@@ -1255,6 +1255,17 @@ PRIMARY KEY  (`user_id`)) ;
     $patch['205']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD `index_id` INT( 11 ) NOT NULL AFTER `id`;";
     $patch['205']['date'] = "200900818";    
 
+    $patch['206']['name'] = "Add status and locale to preferences";
+    $patch['206']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `status` INT( 1 ) NOT NULL ,
+ADD `locale` VARCHAR( 255 ) NOT NULL ,
+ADD `language` VARCHAR( 255 ) NOT NULL ;";
+    $patch['206']['date'] = "200900826";    
+
+    $patch['207']['name'] = "Populate the status, locale, and language fields in preferences table";
+    $patch['207']['patch'] = "UPDATE `".TB_PREFIX."preferences` SET status = '1', locale = '".$config->local->locale."', language = '".$language."' ;";
+    $patch['207']['date'] = "200900826";    
+
+
 
  /*
 */
