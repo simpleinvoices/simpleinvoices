@@ -40,12 +40,30 @@
         <td>
             &nbsp;
             &nbsp;
-            &nbsp;
+        </td>
+        <td class="details_screen">
+            <b>Amount</b>
+        </td>
+        <td>
             &nbsp;
             &nbsp;
         </td>
         <td class="details_screen">
-            <b>Amount</b>
+            <b>Tax</b>
+        </td>
+        <td>
+            &nbsp;
+            &nbsp;
+        </td>
+        <td class="details_screen">
+            <b>Total</b>
+        <td>
+            &nbsp;
+            &nbsp;
+        </td>
+        <td class="details_screen">
+            <b>Status</b>
+        </td>
         </td>
 	</tr>
  {foreach item=account from=$accounts}
@@ -56,12 +74,36 @@
         <td>
             &nbsp;
             &nbsp;
-            &nbsp;
+        </td>
+        <td  class="details_screen">
+            {$account.expense|siLocal_number}
+        </td>
+        <td>
             &nbsp;
             &nbsp;
         </td>
         <td  class="details_screen">
+            {if $account.tax != ""}
+                {$account.tax|siLocal_number}
+            {/if}
+        </td>
+        <td>
+            &nbsp;
+            &nbsp;
+        </td>
+        <td  class="details_screen">
+        {if $account.total != ""}
+            {$account.total|siLocal_number}
+        {else}
             {$account.expense|siLocal_number}
+        {/if}
+        </td>
+        <td>
+            &nbsp;
+            &nbsp;
+        </td>
+        <td  class="details_screen">
+            {$account.status_wording}
         </td>
 	</tr>
  {/foreach}
@@ -161,7 +203,11 @@
         <td>
             &nbsp;
             &nbsp;
-            &nbsp;
+        </td>
+        <td  class="details_screen">
+            <b>Type</b>
+        </td>
+        <td>
             &nbsp;
             &nbsp;
         </td>
@@ -182,10 +228,11 @@
         <td class="details_screen">
             {$payment.cname}
         </td>
+        <td></td>
+        <td class="details_screen">
+            {$payment.type}
+        </td>
         <td>
-            &nbsp;
-            &nbsp;
-            &nbsp;
             &nbsp;
             &nbsp;
         </td>

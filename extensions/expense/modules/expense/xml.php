@@ -58,6 +58,7 @@ function sql($type='', $dir, $sort, $rp, $page )
                     #    ON (et.expense_id = e.id)
 		$sql = "SELECT
                     e.id as EID,
+                    e.status as status,
                     e.*,
                     i.id as invoice,
                     b.name as biller,
@@ -109,6 +110,8 @@ $xml .= "<page>$page</page>";
 $xml .= "<total>$count</total>";
 
 foreach ($customers as $row) {
+    
+    $status_wording = $row['status']==1?$LANG['paid']:$LANG['not_paid'];
 
 	$xml .= "<row id='".$row['iso']."'>";
 	$xml .= "<cell><![CDATA[
@@ -124,7 +127,7 @@ foreach ($customers as $row) {
 	$xml .= "<cell><![CDATA[".$row['biller']."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['customer']."]]></cell>";
     $xml .= "<cell><![CDATA[".$row['invoice']."]]></cell>";
-	$xml .= "<cell><![CDATA[".$row['product']."]]></cell>";
+	$xml .= "<cell><![CDATA[".$status_wording."]]></cell>";
 	$xml .= "</row>";		
 }
 

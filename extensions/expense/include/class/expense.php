@@ -107,6 +107,7 @@ class expense
                 invoice_id,
                 product_id,
                 date,
+                status,
                 note
             )
         VALUES
@@ -119,6 +120,7 @@ class expense
                 :invoice_id,
                 :product_id,
                 :date,
+                :status,
                 :note
             )";
 
@@ -131,6 +133,7 @@ class expense
             ':product_id', $_POST['product_id'],
             ':customer_id', $_POST['customer_id'],
             ':date', $_POST['date'],
+            ':status', $_POST['status'],
             ':note', $_POST['note']
             );
 	
@@ -157,6 +160,7 @@ class expense
                     invoice_id = :invoice_id,
                     product_id = :product_id,
                     date = :date,
+                    status = :status,
                     note = :note
                 WHERE
                     id = :id
@@ -174,6 +178,7 @@ class expense
             ':product_id', $_POST['product_id'],
             ':customer_id', $_POST['customer_id'],
             ':date', $_POST['date'],
+            ':status', $_POST['status'],
             ':note', $_POST['note']
             );
 

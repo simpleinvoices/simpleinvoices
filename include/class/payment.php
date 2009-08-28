@@ -20,16 +20,20 @@ class payment
                     iv.index_id as index_id,
                     iv.id as invoice_id,
                     pref.pref_description as preference,
+                    pt.pt_description as type,
                     c.name as cname, 
                     b.name as bname 
                 from 
                     ".TB_PREFIX."payment ap, 
+                    ".TB_PREFIX."payment_types pt, 
                     ".TB_PREFIX."invoices iv, 
                     ".TB_PREFIX."customers c, 
                     ".TB_PREFIX."biller b,
                     ".TB_PREFIX."preferences pref
                 WHERE 
                     ap.ac_inv_id = iv.id 
+                    AND 
+                    ap.ac_payment_type = pt.pt_id 
                     AND 
                     iv.customer_id = c.id 
                     and 

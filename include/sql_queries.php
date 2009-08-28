@@ -448,7 +448,7 @@ function getPayment($id) {
 	global $config;
 	global $dbh;
 
-	$sql = "SELECT ap.*, c.name AS customer, b.name AS biller FROM ".TB_PREFIX."payment ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b WHERE ap.ac_inv_id = iv.id AND iv.customer_id = c.id AND iv.biller_id = b.id AND ap.id = :id";
+	$sql = "SELECT ap.*, c.id as customer_id, c.name AS customer, b.id as biller_id, b.name AS biller FROM ".TB_PREFIX."payment ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b WHERE ap.ac_inv_id = iv.id AND iv.customer_id = c.id AND iv.biller_id = b.id AND ap.id = :id";
 
 	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$payment = $sth->fetch();

@@ -104,6 +104,17 @@
         {/section}
 </tr>
 
+     <tr>
+         <td class="details_screen">{$LANG.status}
+         </td>
+         <td>
+             <select name="status">
+             <option value="1" selected>{$LANG.paid}</option>
+             <option value="0">{$LANG.not_paid}</option>
+             </select>
+         </td>
+     </tr>
+
 
 
 	<tr>

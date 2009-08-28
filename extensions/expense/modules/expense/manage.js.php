@@ -28,7 +28,7 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 				{display: 'Biller', name : 'biller_id', width : 10 * percentage_width, sortable : true, align: 'left'},
 				{display: 'Customer', name : 'customer_id', width : 10 * percentage_width, sortable : true, align: 'left'},
 				{display: 'Invoice', name : 'invoice_id', width : 5 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Product', name : 'product_id', width : 15 * percentage_width, sortable : true, align: 'left'}
+				{display: 'Status', name : 'status', width : 15 * percentage_width, sortable : true, align: 'left'}
 				],
 				
 

@@ -48,6 +48,10 @@
 		<td>{$detail.product.description}</td>
 	</tr>
 	<tr>
+		<td class="details_screen">{$LANG.status}</td>
+		<td>{$detail.status_wording}</td>
+	</tr>
+	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
         <td>{$expense.note|unescape}</td>
 	</tr>
@@ -161,6 +165,21 @@
                     </table>
 				<td>
         </tr>
+         <tr>
+             <td class="details_screen">{$LANG.status} 
+             </td>
+             <td>
+                 {* enabled block *}
+                 <select name="status">
+                 <option value="{$expense.status}" selected
+                 style="font-weight: bold;">{$detail.status_wording}</option>
+                 <option value="1">{$LANG.paid}</option>
+                 <option value="0">{$LANG.not_paid}</option>
+                 </select>
+                 {* /enabled block*}
+             </td>
+         </tr>
+
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
 		<td><textarea input type="text" class="editor" name='note' rows="8" cols="50">{$expense.note|unescape}</textarea></td>
