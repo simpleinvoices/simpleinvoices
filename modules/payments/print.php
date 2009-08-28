@@ -19,15 +19,14 @@ $invoice = getInvoice($payment['ac_inv_id']);
 $biller = getBiller($payment['biller_id']);
 $logo = getLogo($biller);
 $logo = str_replace(" ", "%20", $logo);
-$customer = getInvoice($payment['customer_id']);
+$customer = getCustomer($payment['customer_id']);
 $invoiceType = getInvoiceType($invoice['type_id']);
 $paymentType = getPaymentType($payment['ac_payment_type']);
-
 
 $smarty -> assign("payment",$payment);
 $smarty -> assign("invoice",$invoice);
 $smarty -> assign("biller",$biller);
-$smarty -> assign("biller",$logo);
+$smarty -> assign("logo",$logo);
 $smarty -> assign("customer",$customer);
 $smarty -> assign("invoiceType",$invoiceType);
 $smarty -> assign("paymentType",$paymentType);
