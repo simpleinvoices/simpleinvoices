@@ -146,7 +146,7 @@
 
 					<tr>
 				<td class="tbl1-bottom col1"><b>{$LANG.payment_id}</b></td>
-				<td class="tbl1-bottom col1" colspan="3"><b>{$LANG.invoice_id}</b></td>
+				<td class="tbl1-bottom col1" colspan="3"><b>{$preference.pref_description} {$LANG.id}</b></td>
 				<td class="tbl1-bottom col1" align="right"><b>{$LANG.amount}</b></td>
 				<td class="tbl1-bottom col1" align="right"><b>{$LANG.date_upper}</b></td>
 				<td class="tbl1-bottom col1" align="right"><b>{$LANG.payment_type}</b></td>
@@ -156,7 +156,7 @@
 			<tr class="" >
 				<td class="">{$payment.id|escape:html}</td>
 				<td class="" colspan="3">{$payment.ac_inv_id|escape:html}</td>
-				<td class="" align="right">{$payment.ac_amount|siLocal_number}</td>
+				<td class="" align="right">{$preference.pref_currency_sign}{$payment.ac_amount|siLocal_number}</td>
 				<td class="" align="right">{$payment.date|escape:html}</td>
 				<td class="" align="right">{$paymentType.pt_description|escape:html}</td>
 			</tr>
@@ -166,9 +166,11 @@
 		<tr>
 			<td colspan="6"><br /></td>
 		</tr>
+        {if $payment.ac_notes != ""}
         <tr>
                 <td class='tbl1-bottom col1'>{$LANG.notes}:</td><td></td>
         </tr>
+        {/if}
 
 </table>
     <table>
