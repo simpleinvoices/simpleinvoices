@@ -39,8 +39,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 
     $req = array_merge($_GET, $_POST);
 	
-	echo $query = $_REQUEST['query'];
-echo $qtype = $_REQUEST['qtype'];
+	$query = $_REQUEST['query'];
+    $qtype = $_REQUEST['qtype'];
 	
 	$where = "";
 	if (isset($query)) $where = " AND $qtype LIKE '%$query%' ";

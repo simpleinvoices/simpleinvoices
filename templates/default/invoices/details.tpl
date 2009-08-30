@@ -26,7 +26,7 @@
 		<td colspan="6" align="center"></td>
 	</tr>
         <tr>
-		<td class="details_screen">{$preference.pref_inv_wording} {$LANG.number_short}</td><td> {$invoice.id} </td>
+		<td class="details_screen">{$preference.pref_inv_wording} {$LANG.number_short}</td><td> {$invoice.index_id} </td>
 	</tr>
 	<tr>
 	        <td class="details_screen">{$LANG.date_formatted}</td>

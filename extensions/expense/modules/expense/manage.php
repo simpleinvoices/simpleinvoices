@@ -10,7 +10,7 @@ if(isset($_GET['query']))
 {
     $where = "&query=".$_GET['query']."&qtype=".$_GET['qtype'];
 }
-echo $url = "index.php?module=expense&view=xml".$where ;
+$url = "index.php?module=expense&view=xml".$where ;
 
 $smarty -> assign('url', $url);
 
