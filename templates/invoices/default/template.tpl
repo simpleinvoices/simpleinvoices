@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="{$css}" media="all">
-<title>{$preference.pref_inv_wording} {$LANG.number_short}: {$invoice.id}</title>
+<title>{$preference.pref_inv_wording} {$LANG.number_short}: {$invoice.index_id}</title>
 </head>
 <body>
 <br />
@@ -28,7 +28,7 @@
 		</tr>
 		<tr>
 				<td class="">{$preference.pref_inv_wording} {$LANG.number_short}:</td>
-				<td class="" align="right" colspan="3">{$invoice.id}</td>
+				<td class="" align="right" colspan="3">{$invoice.index_id}</td>
 		</tr>
 		<tr>
 				<td nowrap class="">{$preference.pref_inv_wording} {$LANG.date}:</td>

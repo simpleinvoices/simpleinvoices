@@ -67,7 +67,11 @@ echo $qtype = $_REQUEST['qtype'];
                     c.name as customer,
                     p.description as product,
                     (select sum(tax_amount) from si_expense_item_tax where expense_id = EID) as tax,
-                    (select tax + e.amount) as total
+                    (select tax + e.amount) as total,
+                    (CASE WHEN status = 1 THEN '".$LANG['paid']."'
+                          WHEN status = 0 THEN '".$LANG['not_paid']."'
+                    END) AS status_wording
+
 				FROM 
 					".TB_PREFIX."expense e
                     LEFT OUTER JOIN ".TB_PREFIX."expense_account ea  

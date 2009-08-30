@@ -1265,13 +1265,19 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     $patch['207']['patch'] = "UPDATE `".TB_PREFIX."preferences` SET status = '1', locale = '".$config->local->locale."', language = '".$language."' ;";
     $patch['207']['date'] = "200900826";    
 
-
     $patch['208']['name'] = "Populate the status, locale, and language fields in preferences table";
-    $patch['208']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`,`id` );";
+    $patch['208']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `index_group` INT( 11 ) NOT NULL ;";
     $patch['208']['date'] = "200900826";    
 
+    $defaults = getSystemDefaults();
+    $patch['209']['name'] = "Populate the status, locale, and language fields in preferences table";
+    $patch['209']['patch'] = "UPDATE `".TB_PREFIX."preferences` SET index_group = '".$defaults['preference']."' ;";
+    $patch['209']['date'] = "200900826";    
+    unset($defaults);
 
-
+    $patch['210']['name'] = "Populate the status, locale, and language fields in preferences table";
+    $patch['210']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`,`id` );";
+    $patch['210']['date'] = "200900826";    
  /*
 */
 /*

@@ -38,7 +38,10 @@ $sql="select
         e.status as status, 
         ea.name as account,
         (select sum(tax_amount) from si_expense_item_tax where expense_id = e.id) as tax,
-        (select tax + e.amount) as total
+        (select tax + e.amount) as total,
+        (CASE WHEN status = 1 THEN '".$LANG['paid']."'
+              WHEN status = 0 THEN '".$LANG['not_paid']."'
+         END) AS status_wording
     from 
         si_expense e, 
         si_expense_account ea 

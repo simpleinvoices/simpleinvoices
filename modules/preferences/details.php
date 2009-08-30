@@ -11,8 +11,13 @@ if ($_POST['p_description'] != "" ) {
 $preference_id = $_GET['id'];
 
 $preference = getPreference($preference_id);
+$index_group = getPreference($preference['index_group']);
+
+$preferences = getActivePreferences();
 
 $smarty->assign('preference',$preference);
+$smarty->assign('index_group',$index_group);
+$smarty->assign('preferences',$preferences);
 
 $smarty -> assign('pageActive', 'preference');
 $subPageActive = $_GET['action'] =="view"  ? "preferences_view" : "preferences_edit" ;

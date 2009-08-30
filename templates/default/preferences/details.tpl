@@ -93,6 +93,12 @@
 				<img src="./images/common/help-small.png" alt="" /></a>
 			</td>
 			<td>{$preference.status_wording}</td>		</tr>	
+        <tr>
+        	<td class="details_screen">{$LANG.invoice_numbering_group} 
+				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_numbering_group" title="{$LANG.invoice_numbering_group}">
+				<img src="./images/common/help-small.png" alt="" /></a>
+			</td>
+			<td>{$index_group.pref_description}</td>		</tr>	
 		<tr>
 			<td colspan="2" align="center"></td>
 		</tr>
@@ -221,6 +227,39 @@
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_status" title="{$LANG.status}">
 				<img src="./images/common/help-small.png" alt="" /></a>
 			</td>
+			<td>
+				{* enabled block *}
+				<select name="status">
+				<option value="{$preference.status}" selected
+				style="font-weight: bold;">{$preference.status_wording}</option>
+				<option value="1">{$LANG.open}</option>
+				<option value="0">{$LANG.draft}</option>
+				</select>
+				{* /enabled block*}
+			</td>
+		</tr>
+		<tr>
+			<td class="details_screen">{$LANG.invoice_numbering_group} 
+				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_numbering_group" title="{$LANG.invoice_numbering_group}">
+				<img src="./images/common/help-small.png" alt="" /></a>
+			</td>
+
+	<td class="details_screen">{$LANG.inv_pref}
+	&nbsp; 
+	&nbsp; 
+	{if $preferences == null }
+		<p><em>{$LANG.no_preferences}</em></p>
+	{else}
+		<select name="preference_id">
+		{foreach from=$preferences item=preference}
+			<option {if $preference.pref_id == $defaults.preference} selected {/if} value="{$preference.pref_id}">{$preference.pref_description}</option>
+		{/foreach}
+		</select>
+	{/if}
+	
+	</td>
+	</tr>	
+
 			<td>
 				{* enabled block *}
 				<select name="status">
