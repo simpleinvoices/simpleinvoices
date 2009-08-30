@@ -13,30 +13,8 @@ if (  $op === 'insert_preference' ) {
 
 	$sql = "INSERT into
 		".TB_PREFIX."preferences
-	VALUES
 		(
-			NULL,
-			:domain_id,
-			:description,
-			:currency_sign,
-			:heading,
-			:wording,
-			:detail_heading,
-			:detail_line,
-			:payment_method,
-			:payment_line1_name,
-			:payment_line1_value,
-			:payment_line2_name,
-			:payment_line2_value,
-            :status,
-            :locale,
-            :language,
-			:enabled
-		 )";
-	if ($db_server == 'pgsql') {
-		$sql = "INSERT into ".TB_PREFIX."preferences
-		(
-			pref_domain_id,
+			domain_id,
 			pref_description,
 			pref_currency_sign,
 			pref_inv_heading,
@@ -48,9 +26,13 @@ if (  $op === 'insert_preference' ) {
 			pref_inv_payment_line1_value,
 			pref_inv_payment_line2_name,
 			pref_inv_payment_line2_value,
-			pref_enabled
+			pref_enabled,
+            status,
+            locale,
+            language,
+            index_group
 		)
-		VALUES
+	VALUES
 		(
 			:domain_id,
 			:description,
@@ -64,9 +46,12 @@ if (  $op === 'insert_preference' ) {
 			:payment_line1_value,
 			:payment_line2_name,
 			:payment_line2_value,
-			:enabled
-		)";
-	}
+			:enabled,
+            :status,
+            :locale,
+            :language,
+            :index_group
+		 )";
 
 	if (dbQuery($sql,
 	  ':domain_id', $auth_session->domain_id,
@@ -83,7 +68,8 @@ if (  $op === 'insert_preference' ) {
 	  ':payment_line2_value', $_POST['p_inv_payment_line2_value'],
 	  ':status', $_POST['status'],
 	  ':locale', $_POST['locale'],
-	  ':language', $_POST['language'],
+	  ':language', $_POST['locale'],
+	  ':index_group', empty($_POST['index_group']) ? lastInsertId() : $_POST['index_group']  ,
 	  ':enabled', $_POST['pref_enabled']
 	  )) {
 		$saved = true;
@@ -92,7 +78,7 @@ if (  $op === 'insert_preference' ) {
 		$saved = false;
 		//$display_block =  $LANG['save_preference_failure'];
 	}
-
+echo "LASTID ".lastInsertId();
 	//header( 'refresh: 2; url=manage_preferences.php' );
 
 }
@@ -119,7 +105,8 @@ else if (  $op === 'edit_preference' ) {
 				pref_enabled = :enabled,
 				status = :status,
 				locale = :locale,
-				language = :language
+				language = :language,
+                index_group = :index_group
 			WHERE
 				pref_id = :id";
 
@@ -138,7 +125,8 @@ else if (  $op === 'edit_preference' ) {
 		  ':enabled', $_POST['pref_enabled'],
 		  ':status', $_POST['status'],
 		  ':locale', $_POST['locale'],
-		  ':language', $_POST['language'],
+          ':language', $_POST['language'],
+		  ':index_group', $_POST['index_group'],
 		  ':id', $_GET['id']))
 	    {
 			$saved =true;

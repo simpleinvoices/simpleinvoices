@@ -10,6 +10,15 @@ if ($_POST['p_description'] != "" ) {
 }
 $smarty -> assign('save',$save);
 
+$defaults = getSystemDefaults();
+$preferences = getActivePreferences();
+
+$localelist = Zend_Locale::getLocaleList();
+
+$smarty->assign('preferences',$preferences);
+$smarty->assign('defaults',$defaults);
+$smarty->assign('localelist',$localelist);
+
 $smarty -> assign('pageActive', 'preference');
 $smarty -> assign('subPageActive', 'preferences_add');
 $smarty -> assign('active_tab', '#setting');

@@ -118,6 +118,38 @@
 			</select>
 		</td>
 	</tr>
+		<tr>
+			<td class="details_screen">{$LANG.invoice_numbering_group} 
+				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_numbering_group" title="{$LANG.invoice_numbering_group}">
+				<img src="./images/common/help-small.png" alt="" /></a>
+			</td>
+            <td >
+            {if $preferences == null }
+                <p><em>{$LANG.no_preferences}</em></p>
+            {else}
+                <select name="index_group">
+                    <option value="">-user this preference-</option>
+                {foreach from=$preferences item=preference}
+                    <option {if $preference.pref_id == $defaults.preference} selected {/if} value="{$preference.pref_id}">{$preference.pref_description}</option>
+                {/foreach}
+                </select>
+            {/if}
+            
+            </td>
+    	</tr>	
+		<tr>
+			<td class="details_screen">{$LANG.locale} 
+				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_locale" title="{$LANG.locale}">
+				<img src="./images/common/help-small.png" alt="" /></a>
+			</td>
+            <td >
+                <select name="locale">
+                {foreach from=$localelist key=locale item=value}
+                    <option {if $locale == $config->local->locale} selected {/if} value="{$locale}">{$locale}</option>
+                {/foreach}
+                </select>
+            </td>
+    	</tr>	
 	<tr>
 		<td class="details_screen">{$LANG.enabled}
 			<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_enabled" title="{$LANG.enabled}"><img src="./images/common/help-small.png" alt="" /></a>

@@ -1275,9 +1275,13 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     $patch['209']['date'] = "200900826";    
     unset($defaults);
 
-    $patch['210']['name'] = "Populate the status, locale, and language fields in preferences table";
+    $patch['210']['name'] = "Create composite primary key for invoice table";
     $patch['210']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`,`id` );";
     $patch['210']['date'] = "200900826";    
+
+    $patch['211']['name'] = "Reset auto-increment for invoice table";
+    $patch['211']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` AUTO_INCREMENT = 1;";
+    $patch['211']['date'] = "200900826";    
  /*
 */
 /*

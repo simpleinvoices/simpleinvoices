@@ -14,8 +14,10 @@ $preference = getPreference($preference_id);
 $index_group = getPreference($preference['index_group']);
 
 $preferences = getActivePreferences();
+$defaults = getSystemDefaults();
 
 $smarty->assign('preference',$preference);
+$smarty->assign('defaults',$defaults);
 $smarty->assign('index_group',$index_group);
 $smarty->assign('preferences',$preferences);
 

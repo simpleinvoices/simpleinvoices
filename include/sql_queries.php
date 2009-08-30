@@ -1761,16 +1761,21 @@ function insertInvoice($type) {
 
 function updateInvoice($invoice_id) {
 	
+    global $logger;
+
     $current_invoice = invoice::select($_POST['id']);
-    $current_pref_group=getPreference($current_invoice[preference_id]);
+    $current_pref_group = getPreference($current_invoice[preference_id]);
 
     $new_pref_group=getPreference($_POST[preference_id]);
 
-    $index_id = $_POST['preference_id'];
+    $index_id = $current_invoice['index_id'];
 
-    if ($current_pref_group['index_group'] != $new_pref_greoup['index_group'])
+//	$logger->log('Curent Index Group: '.$description, Zend_Log::INFO);
+//	$logger->log('Description: '.$description, Zend_Log::INFO);
+
+    if ($current_pref_group['index_group'] != $new_pref_group['index_group'])
     {
-        $index_id = index::increment('invoice',$pref_group['index_group']);
+        $index_id = index::increment('invoice',$new_pref_group['index_group']);
     }
 
 	if ($db_server == 'mysql' && !_invoice_check_fk(

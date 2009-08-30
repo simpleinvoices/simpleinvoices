@@ -89,6 +89,9 @@ class invoice {
             case "money_owed":
                 $sql_having = "HAVING owing > 0";
                 break;
+            case "paid":
+                $sql_having = "HAVING owing =''";
+                break;
             case "draft":
                 $sql_having = "HAVING status = 0";
                 break;

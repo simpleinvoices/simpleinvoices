@@ -228,14 +228,12 @@
 				<img src="./images/common/help-small.png" alt="" /></a>
 			</td>
 			<td>
-				{* enabled block *}
 				<select name="status">
 				<option value="{$preference.status}" selected
 				style="font-weight: bold;">{$preference.status_wording}</option>
 				<option value="1">{$LANG.open}</option>
 				<option value="0">{$LANG.draft}</option>
 				</select>
-				{* /enabled block*}
 			</td>
 		</tr>
 		<tr>
@@ -243,48 +241,31 @@
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_numbering_group" title="{$LANG.invoice_numbering_group}">
 				<img src="./images/common/help-small.png" alt="" /></a>
 			</td>
-
-	<td class="details_screen">{$LANG.inv_pref}
-	&nbsp; 
-	&nbsp; 
-	{if $preferences == null }
-		<p><em>{$LANG.no_preferences}</em></p>
-	{else}
-		<select name="preference_id">
-		{foreach from=$preferences item=preference}
-			<option {if $preference.pref_id == $defaults.preference} selected {/if} value="{$preference.pref_id}">{$preference.pref_description}</option>
-		{/foreach}
-		</select>
-	{/if}
-	
-	</td>
-	</tr>	
-
-			<td>
-				{* enabled block *}
-				<select name="status">
-				<option value="{$preference.status}" selected
-				style="font-weight: bold;">{$preference.status_wording}</option>
-				<option value="1">{$LANG.open}</option>
-				<option value="0">{$LANG.draft}</option>
-				</select>
-				{* /enabled block*}
-			</td>
-		</tr>
+            <td class="details_screen">
+            {if $preferences == null }
+                <p><em>{$LANG.no_preferences}</em></p>
+            {else}
+                <select name="index_group">
+                {foreach from=$preferences item=p}
+                    <option {if $p.pref_id == $preference.index_group} selected {/if} value="{$p.pref_id}">{$p.pref_description}</option>
+                {/foreach}
+                </select>
+            {/if}
+            
+            </td>
+    	</tr>	
 		<tr>
-			<td class="details_screen">{$LANG.enabled} 
+			<td class="details_screen">{$LANG.enabled}
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_enabled" title="{$LANG.enabled}">
 				<img src="./images/common/help-small.png" alt="" /></a>
 			</td>
 			<td>
-				{* enabled block *}
 				<select name="pref_enabled">
 				<option value="{$preference.pref_enabled}" selected
 				style="font-weight: bold;">{$preference.enabled}</option>
 				<option value="1">{$LANG.enabled}</option>
 				<option value="0">{$LANG.disabled}</option>
 				</select>
-				{* /enabled block*}
 			</td>
 		</tr>
 		<tr>
