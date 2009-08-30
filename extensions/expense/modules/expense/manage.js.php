@@ -32,10 +32,7 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 				],
 				
 
-			searchitems : [
-				{display: 'ID', name : 'id'}
-				],
-			sortname: 'id',
+			sortname: 'EID',
 			sortorder: 'desc',
 			usepager: true,
 			/*title: 'Manage Custom Fields',*/
