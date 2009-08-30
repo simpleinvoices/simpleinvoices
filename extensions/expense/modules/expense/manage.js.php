@@ -16,7 +16,7 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			$('#manageGrid').flexigrid
 			(
 			{
-			url: 'index.php?module=expense&view=xml',
+			url: "{/literal}{$url}{literal}",
 			dataType: 'xml',
 			colModel : [
 				{display: 'Actions', name : 'actions', width : 9 * percentage_width, sortable : false, align: 'center'},
@@ -33,8 +33,7 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 				
 
 			searchitems : [
-				{display: 'ID', name : 'id'},
-				{display: 'Name', name : 'description', isdefault: true}
+				{display: 'ID', name : 'id'}
 				],
 			sortname: 'id',
 			sortorder: 'desc',

@@ -36,16 +36,17 @@ function sql($type='', $dir, $sort, $rp, $page )
 	if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 		$dir = 'DESC';
 	}
+
+    $req = array_merge($_GET, $_POST);
 	
-	$query = $_POST['query'];
-	$qtype = $_POST['qtype'];
+	echo $query = $_REQUEST['query'];
+echo $qtype = $_REQUEST['qtype'];
 	
 	$where = "";
-	if ($query) $where = " AND $qtype LIKE '%$query%' ";
-	
+	if (isset($query)) $where = " AND $qtype LIKE '%$query%' ";
 	
 	/*Check that the sort field is OK*/
-	$validFields = array('id', 'amount', 'expense_account_id','biller_id', 'customer_id', 'invoice_id','date','amount','note');
+	$validFields = array('id', 'status', 'amount', 'expense_account_id','biller_id', 'customer_id', 'invoice_id','date','amount','note');
 	
 	if (in_array($sort, $validFields)) {
 		$sort = $sort;

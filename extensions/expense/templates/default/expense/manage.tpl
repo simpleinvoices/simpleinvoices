@@ -35,6 +35,16 @@
 
 {else}
 	<br />
+    <span class="welcome">
+       Filters:
+    <a href="index.php?module=expense&view=manage&qtype=status&query=0">{$LANG.not_paid}</a> : 
+    <a href="index.php?module=expense&view=manage&qtype=status&query=1">{$LANG.paid}</a> : 
+    <a href="index.php?module=invoices&view=manage">Clear filter</a> 
+
+   </span>
+    <br />
+    <br />
+	<br />
 	<table id="manageGrid" style="display:none"></table>
 	{include file='../extensions/expense/modules/expense/manage.js.php'}
 	

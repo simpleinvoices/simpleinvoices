@@ -123,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
   `custom_field3` varchar(50) collate utf8_unicode_ci default NULL,
   `custom_field4` varchar(50) collate utf8_unicode_ci default NULL,
   `note` text collate utf8_unicode_ci,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`domain_id`,`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------

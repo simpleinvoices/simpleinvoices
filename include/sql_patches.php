@@ -1266,6 +1266,11 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     $patch['207']['date'] = "200900826";    
 
 
+    $patch['208']['name'] = "Populate the status, locale, and language fields in preferences table";
+    $patch['208']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`,`id` );";
+    $patch['208']['date'] = "200900826";    
+
+
 
  /*
 */
