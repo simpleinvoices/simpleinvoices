@@ -41,7 +41,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.invoice}</td>
-		<td>{$expense.invoice_id}</td>
+		<td>{$detail.invoice.index_name}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product}</td>
@@ -126,7 +126,7 @@
 		<select name="invoice_id">
 		    <option value=''></option>
 			{foreach from=$detail.invoice_all item=invoice}
-				<option  {if $invoice.id == $expense.invoice_id} selected {/if} value="{$invoice.id}">{$invoice.id}</option>
+				<option  {if $invoice.id == $expense.invoice_id} selected {/if} value="{$invoice.id}">{$invoice.index_name}</option>
 			{/foreach}
 		</select>
 		</td>

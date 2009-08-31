@@ -68,7 +68,7 @@
 		<select name="invoice_id">
 		    <option value=''></option>
 			{foreach from=$expense_add.invoice_all item=invoice}
-				<option value="{$invoice.id}">{$invoice.id}</option>
+				<option value="{$invoice.id}">{$invoice.index_name}</option>
 			{/foreach}
 		</select>
 		</td>

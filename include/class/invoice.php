@@ -12,7 +12,19 @@ class invoice {
 		global $db;
 	    global $auth_session;
 
-		$sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id and id = :id";
+		$sql = "SELECT 
+                    i.*, 
+                    (SELECT CONCAT(p.pref_inv_wording,' ',i.index_id)) as index_name,
+                    p.status
+                FROM 
+                    ".TB_PREFIX."invoices i, 
+                    ".TB_PREFIX."preferences p 
+                WHERE 
+                    i.domain_id = :domain_id 
+                    and
+                    i.preference_id = p.pref_id
+                    and 
+                    i.id = :id";
 		$sth = $db->query($sql, ':id', $id, ':domain_id', $auth_session->domain_id);
 
         return $sth->fetch();
@@ -24,7 +36,18 @@ class invoice {
 		global $logger;
 	    global $auth_session;
 
-		$sql = "SELECT id FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id order by id";
+		$sql = "SELECT 
+                    i.id as id,
+                    (SELECT CONCAT(p.pref_inv_wording,' ',i.index_id)) as index_name
+                FROM 
+                    ".TB_PREFIX."invoices i, 
+                    ".TB_PREFIX."preferences p 
+                WHERE 
+                    i.domain_id = :domain_id 
+                    and
+                    i.preference_id = p.pref_id
+                order by 
+                    index_name";
 		$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 
         return $sth->fetchAll();

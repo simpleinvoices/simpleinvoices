@@ -9,6 +9,7 @@ $expense = expense::get($expense_id);
 $detail = expense::detail();
 $detail['customer'] = customer::get($expense['customer_id']);
 $detail['biller'] = biller::get($expense['biller_id']);
+$detail['invoice'] = invoice::select($expense['invoice_id']);
 $detail['product'] = product::get($expense['product_id']);
 $detail['expense_account'] = expenseaccount::select($expense['expense_account_id']);
 $detail['expense_tax'] = expensetax::get_all($expense_id);
