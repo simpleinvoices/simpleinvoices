@@ -1273,7 +1273,6 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     $patch['209']['name'] = "Populate the status, locale, and language fields in preferences table";
     $patch['209']['patch'] = "UPDATE `".TB_PREFIX."preferences` SET index_group = '".$defaults['preference']."' ;";
     $patch['209']['date'] = "200900826";    
-    unset($defaults);
 
     $patch['210']['name'] = "Create composite primary key for invoice table";
     $patch['210']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`,`id` );";
@@ -1282,6 +1281,17 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     $patch['211']['name'] = "Reset auto-increment for invoice table";
     $patch['211']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` AUTO_INCREMENT = 1;";
     $patch['211']['date'] = "200900826";    
+
+    $patch['212']['name'] = "Copy invoice.id into invoice.index_id";
+    $patch['212']['patch'] = "update `".TB_PREFIX."invoices` set index_id = id;";
+    $patch['212']['date'] = "20090902";    
+
+    $patch['213']['name'] = "Update the index table with max invoice id";
+    $patch['213']['patch'] = "insert into `".TB_PREFIX."index` (id, node, sub_node, domain_id)  select max(id), 'invoice', '".$defaults['preference']."','1' from ".TB_PREFIX."invoices;";
+    $patch['213']['date'] = "20090902";    
+    unset($defaults);
+
+
  /*
 */
 /*
