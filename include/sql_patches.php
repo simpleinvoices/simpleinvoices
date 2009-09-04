@@ -1253,34 +1253,34 @@ PRIMARY KEY  (`user_id`)) ;
 
     $patch['205']['name'] = "Add index_id to invoice table - new invoice numbering";
     $patch['205']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD `index_id` INT( 11 ) NOT NULL AFTER `id`;";
-    $patch['205']['date'] = "200900818";    
+    $patch['205']['date'] = "20090818";    
 
     $patch['206']['name'] = "Add status and locale to preferences";
     $patch['206']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `status` INT( 1 ) NOT NULL ,
 ADD `locale` VARCHAR( 255 ) NOT NULL ,
 ADD `language` VARCHAR( 255 ) NOT NULL ;";
-    $patch['206']['date'] = "200900826";    
+    $patch['206']['date'] = "20090826";    
 
     $patch['207']['name'] = "Populate the status, locale, and language fields in preferences table";
     $patch['207']['patch'] = "UPDATE `".TB_PREFIX."preferences` SET status = '1', locale = '".$config->local->locale."', language = '".$language."' ;";
-    $patch['207']['date'] = "200900826";    
+    $patch['207']['date'] = "20090826";    
 
     $patch['208']['name'] = "Populate the status, locale, and language fields in preferences table";
     $patch['208']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `index_group` INT( 11 ) NOT NULL ;";
-    $patch['208']['date'] = "200900826";    
+    $patch['208']['date'] = "20090826";    
 
     $defaults = getSystemDefaults();
     $patch['209']['name'] = "Populate the status, locale, and language fields in preferences table";
     $patch['209']['patch'] = "UPDATE `".TB_PREFIX."preferences` SET index_group = '".$defaults['preference']."' ;";
-    $patch['209']['date'] = "200900826";    
+    $patch['209']['date'] = "20090826";    
 
     $patch['210']['name'] = "Create composite primary key for invoice table";
     $patch['210']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`,`id` );";
-    $patch['210']['date'] = "200900826";    
+    $patch['210']['date'] = "20090826";    
 
     $patch['211']['name'] = "Reset auto-increment for invoice table";
     $patch['211']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` AUTO_INCREMENT = 1;";
-    $patch['211']['date'] = "200900826";    
+    $patch['211']['date'] = "20090826";    
 
     $patch['212']['name'] = "Copy invoice.id into invoice.index_id";
     $patch['212']['patch'] = "update `".TB_PREFIX."invoices` set index_id = id;";
