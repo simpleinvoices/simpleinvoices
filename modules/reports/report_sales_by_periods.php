@@ -55,7 +55,7 @@ while ( $year <= $this_year )
 		/*
 		* Sales
 		*/
-		$total_month_sales_sql = "select sum(ii.total) as month_total from ".TB_PREFIX."invoice_items ii, si_invoices i where i.id = ii.invoice_id AND i.date like '$year-$month%'";
+		$total_month_sales_sql = "select sum(ii.total) as month_total from ".TB_PREFIX."invoice_items ii, si_invoices i, si_preferences p where i.id = ii.invoice_id AND i.preference_id = p.pref_id AND p.status = '1' AND i.date like '$year-$month%'";
 		//$total_month_sales = mysqlQuery($total_month_sales_sql);
 		//$total_month_sales_array= mysql_fetch_array($total_month_sales);
 
@@ -88,7 +88,7 @@ while ( $year <= $this_year )
 	/*
 	* Sales
 	*/
-	$total_year_sales_sql = "select sum(ii.total) as year_total from ".TB_PREFIX."invoice_items ii, si_invoices i where i.id = ii.invoice_id AND i.date like '$year%'";
+	$total_year_sales_sql = "select sum(ii.total) as year_total from ".TB_PREFIX."invoice_items ii, si_invoices i, si_preferences p  where i.id = ii.invoice_id AND i.preference_i    d = p.pref_id AND p.status = '1' AND i.date like '$year%'";
 	//$total_year_sales = mysqlQuery($total_year_sales_sql);
 	//$total_year_sales_array= mysql_fetch_array($total_year_sales);
 
