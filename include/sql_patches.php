@@ -1286,10 +1286,17 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     $patch['212']['patch'] = "update `".TB_PREFIX."invoices` set index_id = id;";
     $patch['212']['date'] = "20090902";    
 
-    $patch['213']['name'] = "Update the index table with max invoice id";
-    $patch['213']['patch'] = "insert into `".TB_PREFIX."index` (id, node, sub_node, domain_id)  select max(id), 'invoice', '".$defaults['preference']."','1' from ".TB_PREFIX."invoices;";
+    $max_invoice = invoice::max();
+    $patch['213']['name'] = "Update the index table with max invoice id - if required";
+    if($max_invoice > 0)
+    {
+        $patch['213']['patch'] = "insert into `".TB_PREFIX."index` (id, node, sub_node, domain_id)  VALUES (".$max_invoice.", 'invoice', '".$defaults['preference']."','1');";
+    } else {
+        $patch['213']['patch'] = "select 1 from `".TB_PREFIX."index`;";
+    }
     $patch['213']['date'] = "20090902";    
     unset($defaults);
+    unset($max_invoice);
 
 
  /*

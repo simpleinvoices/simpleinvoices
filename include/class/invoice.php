@@ -283,4 +283,18 @@ class invoice {
         //echo "TOTAL".$res['total'];
         return $res['gross_total'];
     }
+    /**
+    * Function invoice::max
+    * 
+    * Used to get the max invoice id
+    **/
+    public static function max() {
+        global $auth_session;
+        
+        $sql ="SELECT max(id) as max FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id";
+		$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+
+        $count = $sth->fetch();
+        return $count['max'];
+    }
 }
