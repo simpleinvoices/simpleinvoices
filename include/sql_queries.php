@@ -57,15 +57,11 @@ function db_connector() {
 		    default:
 		    	//mysql
 		    	$connlink = new PDO(
-					$pdoAdapter.':host='.$config->database->params->host.'; port='.$config->database->params->port.'; dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password, array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true)
+					$pdoAdapter.':host='.$config->database->params->host.'; port='.$config->database->params->port.'; dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password
 				);
 				break;
 		}
 		
-		
-	$connlink->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);		
-	$connlink->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
-
 		
 	}
 	catch( PDOException $exception )

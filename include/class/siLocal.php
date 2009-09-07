@@ -21,10 +21,12 @@ class siLocal
 	
 	public static function number_trim($number)
 	{
+        /*
 		$formatted_number = siLocal::number($number);
 		$formatted_number = rtrim(trim($formatted_number, '0'), '.');
 		return $formatted_number;
-		
+        */	
+        return siLocal::number($number,'0');	
 	}
 	
 	/*Function: wrapper function for zend_date*/
