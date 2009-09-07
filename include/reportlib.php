@@ -48,6 +48,6 @@ if($db_layer == "pdo")
 }
 
 */
-	$oRpt->setConnection($config->database->params->host);  
+	$oRpt->setConnection($config->database->params->host.':'.$config->database->params->port);  
 	$oRpt->setDatabaseInterface($db_server); // set as $db_server in trunk
 	//$oRpt->setDatabase($db_name);

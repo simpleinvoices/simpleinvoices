@@ -1,5 +1,4 @@
 <?php
-
 /* 
  * Zend framework init - start
  */
@@ -79,12 +78,13 @@ $install_path = htmlspecialchars($path['dirname']);
 
 include_once('./config/define.php');
 
-$config = new Zend_Config_Ini('./config/config.ini', $environment,true);	//added 'true' to allow modifications from db
 /*
  * Include another config file if required
  */
-if($environment != 'production') {
+if( ($environment != 'production') AND (is_file('./config/'.$environment.'.config.ini') ) ){
      $config = new Zend_Config_Ini('./config/'.$environment.'.config.ini', $environment,true);
+} else {
+    $config = new Zend_Config_Ini('./config/config.ini', $environment,true);	//added 'true' to allow modifications from db
 }
 
 //set up app with relevant php setting
