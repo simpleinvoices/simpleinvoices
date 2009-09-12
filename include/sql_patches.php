@@ -1298,6 +1298,11 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     unset($defaults);
     unset($max_invoice);
 
+    $patch['214']['name'] = "Add sub_node_2 to si_index table";
+    $patch['214']['patch'] = "ALTER TABLE  `".TB_PREFIX."index` ADD  `sub_node_2` VARCHAR( 255 ) NOT NULL AFTER  `sub_node`";
+    $patch['214']['date'] = "20090912";    
+
+
 
  /*
 */
