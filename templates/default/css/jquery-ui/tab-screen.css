@@ -3,7 +3,7 @@ Last Edit: $Id$ */
 html, body { padding: 0; margin: 0; font-family:arial,sans-serif;}
 
 body {
-	background:#f1f1f1; }
+	background:#DDDDDD; }
 
 body, .dialog {
 	font-family:arial, verdana, helvetica, sans-serif;
@@ -643,8 +643,9 @@ button.positive, .buttons a.positive{
 	text-align:right;
 	padding-right:30px;
 	height:21px;
+	background:#878484;
 	/*background:#464646;*/
-	background:transparent url(../../../../images/common/top_menu_grey.png) repeat scroll left top;
+	/*background:transparent url(../../../../images/common/top_menu_grey.png) repeat scroll left top;*/
 	color:#EEE;
 	/*color:#999999;*/
 }

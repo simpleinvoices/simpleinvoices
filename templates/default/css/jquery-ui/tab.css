@@ -41,7 +41,7 @@ _subpage/* Caution! Ensure accessibility in print and other media types... */
     float: left; /* fixes dir=ltr problem and other quirks IE */
     padding: 0 12px;
 	color:#21759B;
-	background:#f1f1f1;
+	background:#DDDDDD;
 }
 .ui-tabs-nav a {
     margin: 5px 0 0; /* position: relative makes opacity fail for disabled tab in IE */
@@ -94,7 +94,7 @@ _subpage/* Caution! Ensure accessibility in print and other media types... */
     background-position: 0 0;
     line-height: 20px;
 color:#21759B;
-background:#f1f1f1;
+background:#DDDDDD;
 }
 .ui-tabs-nav .ui-tabs-selected a span {
 	
