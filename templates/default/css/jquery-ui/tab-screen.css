@@ -275,20 +275,23 @@ Work around IE/Win code size bug - courtesy Jesper, waffle.wootest.net  */
 
 div#Container {
 	
-	background:#fff;
+/*	background:#fff;*/
 	padding:10px;
-	
-	border-bottom:2px #DADADA solid;
+    background: #FFFFFF url(../../../../images/common/paper_corner.png) no-repeat scroll right top;
+/*
+border-bottom:2px #DADADA solid;
 	border-right:2px #DADADA solid;
 	border-left:1px #DADADA solid;
-	border-top:1px #DADADA solid;
-		
+	border-top:2px #DDD solid;
+    */
+	border-style:none;
+
 	/*margin: 0 auto;*/
-	margin:-34px auto 0;
+	margin:-33px auto 0;
 	padding-top:42px;
 	width: 970px;
 	z-index:0;
-
+/*
 	-webkit-border-top-left-radius:6px;
 	-webkit-border-top-right-radius:6px;
 	-moz-border-radius-topleft:6px;
@@ -298,7 +301,7 @@ div#Container {
 	-webkit-border-bottom-right-radius:6px;
 	-moz-border-radius-bottomleft:6px;
 	-moz-border-radius-bottomright:6px;
-	
+*/	
 /*	margin:13px auto 0;
 	padding:0 23px 0 30px; 
 */
@@ -621,6 +624,7 @@ button.positive, .buttons a.positive{
 	margin:0 auto;
 	width:970px;
 	text-align:right;
+	padding-top:3px;
 	/*
 	padding:0pt;
 	padding-top:4px;

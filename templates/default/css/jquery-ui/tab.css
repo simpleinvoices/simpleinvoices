@@ -24,7 +24,7 @@ _subpage/* Caution! Ensure accessibility in print and other media types... */
     padding: 0 0 0 3px;
     padding-left:20px;
     
-    border-bottom:1px solid #dadada;
+    border-bottom:1px solid #ddd;
 }
 .ui-tabs-nav:after { /* clearing without presentational markup, IE gets extra treatment */
     display: block;
