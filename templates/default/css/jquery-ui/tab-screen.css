@@ -3,7 +3,7 @@ Last Edit: $Id$ */
 html, body { padding: 0; margin: 0; font-family:arial,sans-serif;}
 
 body {
-	background:#DDDDDD; }
+	background:#ebebeb; }
 
 body, .dialog {
 	font-family:arial, verdana, helvetica, sans-serif;
@@ -277,7 +277,7 @@ div#Container {
 	
 /*	background:#fff;*/
 	padding:10px;
-    background: #FFFFFF url(../../../../images/common/paper_corner.png) no-repeat scroll right top;
+    background: #FFFFFF url(../../../../images/common/paper_corner.gif) no-repeat scroll right top;
 /*
 border-bottom:2px #DADADA solid;
 	border-right:2px #DADADA solid;
