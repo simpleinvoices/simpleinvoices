@@ -373,6 +373,23 @@ function simpleInvoicesError($type,$info1 = "", $info2 = "")
             ===========================================<br />
             ");
         break;
+        case "PDO::mysql_attr":
+        
+            $error = exit("
+            <br />
+            ===========================================<br />
+            Simple Invoices - PDO - MySQL problem<br />
+            ===========================================<br />
+            <br />
+            Your Simple Invoices installation can't use the<br />
+            database adapter 'pdo_mysql_utf8'.<br /><br />  
+
+            To fix this please edit config/config.ini and<br />
+            set 'database.adapter' to 'pdo_mysql'<br />
+            <br />
+            ===========================================<br />
+            ");
+        break;
 
     }
 

@@ -20,11 +20,11 @@ class db
 		*/
 		$pdoAdapter = substr($config->database->adapter, 4);
 		
-		if(defined('PDO::MYSQL_ATTR_INIT_COMMAND') AND $pdoAdapter == "mysql")
+		if(!defined('PDO::MYSQL_ATTR_INIT_COMMAND') AND $pdoAdapter == "mysql_utf8")
 		{ 
-			$pdoAdapter ="mysql_utf8";
+            simpleInvoicesError("PDO::mysql_attr");
 		}
-		
+
 		try
 		{
 			
@@ -45,10 +45,9 @@ class db
 				
 			    case "mysql_utf8":
 				   	$this->_db = new PDO(
-						'mysql:host='.$config->database->params->host.'; port='.$config->database->params->port.'; dbname='.$config->database->params->dbname, $config->database->params->username, $config->database->params->password,  array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8", PDO::MYSQL_ATTR_INIT_COMMAND=>"SET CHARACTER SET utf8;")
+						'mysql:host='.$config->database->params->host.'; port='.$config->database->params->port.'; dbname='.$config->database->params->dbname, $config->database->params->username, $config->database->params->password,  array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8;")
+						#'mysql:host='.$config->database->params->host.'; port='.$config->database->params->port.'; dbname='.$config->database->params->dbname, $config->database->params->username, $config->database->params->password,  array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8", PDO::MYSQL_ATTR_INIT_COMMAND=>"SET CHARACTER SET utf8;")
 					);
-					$this->_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);		
-					$this->_db->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
 					break;
 					
 			    case "mysql":
