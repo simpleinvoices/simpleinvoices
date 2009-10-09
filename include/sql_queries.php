@@ -53,8 +53,7 @@ function db_connector() {
                     case true:
     
         			   	$connlink = new PDO(
-        					'mysql:host='.$config->database->params->host.'; port='.$config->database->params->port.'; dbname='.$config->database->params->dbname, $config->database->params->username, $config->database->params->password,  array PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8;")
-        					#'mysql:host='.$config->database->params->host.'; port='.$config->database->params->port.'; dbname='.$config->database->params->dbname, $config->database->params->username, $config->database->params->password,  array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8", PDO::MYSQL_ATTR_INIT_COMMAND=>"SET CHARACTER SET utf8;")
+        					'mysql:host='.$config->database->params->host.'; port='.$config->database->params->port.'; dbname='.$config->database->params->dbname, $config->database->params->username, $config->database->params->password,  array( PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8;")
         				);
 		        		break;
 				
@@ -66,7 +65,7 @@ function db_connector() {
 		        		);
     				break;
                 }
-    		break;
+    	    	break;
 
 		}
 		

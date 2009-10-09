@@ -277,20 +277,23 @@ div#Container {
 	
 /*	background:#fff;*/
 	padding:10px;
-    background: #FFFFFF url(../../../../images/common/paper_corner.gif) no-repeat scroll right top;
+    background: #FFFFFF;
 /*
+    background: #FFFFFF url(../../../../images/common/paper_corner.gif) no-repeat scroll right top;
 border-bottom:2px #DADADA solid;
 	border-right:2px #DADADA solid;
 	border-left:1px #DADADA solid;
 	border-top:2px #DDD solid;
     */
-	border-style:none;
+	border: 1px solid #ddd;
 
 	/*margin: 0 auto;*/
-	margin:-33px auto 0;
+	margin:-34px auto 0;
 	padding-top:42px;
 	width: 970px;
-	z-index:0;
+	z-index:1;
+    -moz-box-shadow:0 3px 5px #CCCCCC;
+    -webkit-box-shadow:0 3px 5px #CCCCCC;
 /*
 	-webkit-border-top-left-radius:6px;
 	-webkit-border-top-right-radius:6px;

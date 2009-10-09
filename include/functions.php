@@ -356,6 +356,7 @@ function simpleInvoicesError($type,$info1 = "", $info2 = "")
             ===========================================<br />
             ");
         break;
+
         case "PDO":
         
             $error = exit("
@@ -373,7 +374,8 @@ function simpleInvoicesError($type,$info1 = "", $info2 = "")
             ===========================================<br />
             ");
         break;
-        case "PDO::mysql_attr":
+
+        case "PDO_mysql_attr":
         
             $error = exit("
             <br />
@@ -504,3 +506,5 @@ function si_truncate($string, $max = 20, $rep = '')
     $leave = $max - strlen ($rep);
     return substr_replace($string, $rep, $leave);
 } 
+
+?>
