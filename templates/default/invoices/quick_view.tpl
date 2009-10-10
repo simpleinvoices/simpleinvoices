@@ -302,7 +302,7 @@
 	{if $invoice.type_id == 3 }
 
 			<tr>
-	            <td>{$invoiceItem.quantity|number_format:2}</td>
+	            <td>{$invoiceItem.quantity|siLocal_number}</td>
 				<td colspan="2">{$invoiceItem.product.description}</td>
 				<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.unit_price|siLocal_number}</td>
 				<td style="text-align:right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|siLocal_number}</td>
@@ -417,11 +417,11 @@
 	</tr>
 	<tr>
 		<td class="account">{$LANG.total}:</td>
-		<td class="account">{$preference.pref_currency_sign}{$invoice.total|number_format:2}</td>
+		<td class="account">{$preference.pref_currency_sign}{$invoice.total|siLocal_number}</td>
 		<td class="account"><a href="index.php?module=payments&amp;view=manage&amp;id={$invoice.id}">{$LANG.paid}:</a></td>
-		<td class="account">{$preference.pref_currency_sign}{$invoice.paid|number_format:2}</td>
+		<td class="account">{$preference.pref_currency_sign}{$invoice.paid|siLocal_number}</td>
 		<td class="account">{$LANG.owing}:</td>
-		<td class="account"><u>{$preference.pref_currency_sign}{$invoice.owing|number_format:2}</u></td>
+		<td class="account"><u>{$preference.pref_currency_sign}{$invoice.owing|siLocal_number}</u></td>
 		<td class="account">{$LANG.age}:</td>
 		<td class="account" nowrap>{$invoice_age} 
 		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_age" title="{$LANG.age}"><img src="./images/common/help-small.png" alt="" /></a>
@@ -429,11 +429,11 @@
 		<td></td>
 		<td class="columnleft"></td>
 		<td class="account">{$LANG.total}:</td>
-		<td class="account">{$preference.pref_currency_sign}{$customerAccount.total|number_format:2}</td>
+		<td class="account">{$preference.pref_currency_sign}{$customerAccount.total|siLocal_number}</td>
 		<td class="account"><a href="index.php?module=payments&amp;view=manage&amp;c_id={$customer.id}">{$LANG.paid}:</a></td>
-		<td class="account">{$preference.pref_currency_sign}{$customerAccount.paid|number_format:2} </td>
+		<td class="account">{$preference.pref_currency_sign}{$customerAccount.paid|siLocal_number} </td>
 		<td class="account">{$LANG.owing}:</td>
-		<td class="account"><u>{$preference.pref_currency_sign}{$customerAccount.owing|number_format:2}</u></td>
+		<td class="account"><u>{$preference.pref_currency_sign}{$customerAccount.owing|siLocal_number}</u></td>
 	</tr>
 	</table>
 <br />
