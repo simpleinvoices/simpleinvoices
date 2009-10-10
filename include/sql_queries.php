@@ -23,12 +23,12 @@ function db_connector() {
 	* strip the pdo_ section from the adapter
 	*/
 	$pdoAdapter = substr($config->database->adapter, 4);
-	/*
+	
 	if(!defined('PDO::MYSQL_ATTR_INIT_COMMAND') AND $pdoAdapter == "mysql" AND $config->database->adapter->utf8 == true)
 	{ 
         simpleInvoicesError("PDO::mysql_attr");
 	}
-*/
+
 	try
 	{
 		
@@ -59,7 +59,6 @@ function db_connector() {
 				
         		    case false:
 		            default:
-		    	        //mysql
         		    	$connlink = new PDO(
         					$pdoAdapter.':host='.$config->database->params->host.'; port='.$config->database->params->port.'; dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password
 		        		);
