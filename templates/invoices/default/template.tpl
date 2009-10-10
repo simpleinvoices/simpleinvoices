@@ -62,15 +62,15 @@
 
 		<tr>
 				<td class="" >{$LANG.total}: </td>
-				<td class="" align="right" colspan="3">{$preference.pref_currency_sign}{$invoice.total|number_format:2}</td>
+				<td class="" align="right" colspan="3">{$preference.pref_currency_sign}{$invoice.total|siLocal_number}</td>
 		</tr>
 		<tr>
 				<td class="">{$LANG.paid}:</td>
-				<td class="" align="right" colspan="3" >{$preference.pref_currency_sign}{$invoice.paid|number_format:2}</td>
+				<td class="" align="right" colspan="3" >{$preference.pref_currency_sign}{$invoice.paid|siLocal_number}</td>
 		</tr>
 		<tr>
 				<td nowrap class="">{$LANG.owing}:</td>
-				<td class="" align="right" colspan="3" >{$preference.pref_currency_sign}{$invoice.owing|number_format:2}</td>
+				<td class="" align="right" colspan="3" >{$preference.pref_currency_sign}{$invoice.owing|siLocal_number}</td>
 		</tr>
 
 	</table>
