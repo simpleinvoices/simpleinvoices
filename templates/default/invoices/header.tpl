@@ -14,9 +14,9 @@
 <br />
 
     <span class="welcome">
-      <a href="index.php?module=invoices&view=itemised"><img class="action" src="./images/common/edit.png"/>&nbsp;Itemised Style</a>
+      <a href="index.php?module=invoices&amp;view=itemised"><img class="action" src="./images/common/edit.png"/>&nbsp;{$LANG.itemised_style}</a>
 			 &nbsp;&nbsp; 
-       <a href="index.php?module=invoices&view=total"><img class="action" src="./images/common/page_white_edit.png"/>&nbsp;Total Style</a>
+       <a href="index.php?module=invoices&amp;view=total"><img class="action" src="./images/common/page_white_edit.png"/>&nbsp;{$LANG.total_style}</a>
 			 &nbsp;&nbsp; 
 	   <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_types" title="{$LANG.invoice_type}">
 			<img class="action" src="./images/common/help-small.png" alt="" />

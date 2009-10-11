@@ -15,7 +15,7 @@
 {* <h3>You are editing {$preference.pref_inv_wording} {$invoice.id}</h3> *}
 <br />
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
-        	<img src="images/common/gmail-loader.gif" alt="Loading ..." /> Loading ...
+        	<img src="images/common/gmail-loader.gif" alt="{$LANG.loading} ..." /> {$LANG.loading} ...
 </div>
 
 
@@ -175,7 +175,7 @@
 							<a 
 								id="trash_link_edit{$line}"
 								class="trash_link_edit"
-								title="Delete this line item" 
+								title="{$LANG.delete_line_item}" 
 								href="#" 
 								style="display: inline;"
 								rel="{$line}"
@@ -187,7 +187,7 @@
 							<a 
 								id="trash_link_edit{$line}"
 								class="trash_link_edit"
-								title="Delete this line item"
+								title="{$LANG.delete_line_item}"
 								href="#"
 								style="display: inline;"
 								rel="{$line}"
@@ -270,7 +270,7 @@
 									src="./images/common/add.png"
 									alt=""
 								/>
-								Add new row{* $LANG TODO *}
+								{$LANG.add_new_row}
 							</a>
 					
 						</td>

@@ -21,7 +21,7 @@
 
 	<br />
     	    {if $invoicePaid == 0}
-				Are you sure you want to delete {$preference.pref_inv_wording} {$invoice.id}
+				{$LANG.confirm_delete} {$preference.pref_inv_wording} {$invoice.id}
             <br />
             <br />
         <form name="frmpost" action="index.php?module=invoices&amp;view=delete&amp;stage=2&amp;id={$smarty.get.id}" method="post">
@@ -49,7 +49,7 @@
 	
 	        {if $invoicePaid != 0}
             <span class="welcome">
-				{$preference.pref_inv_wording} {$invoice.id} can not be deleted as it has payments of {$preference.pref_currency_sign}{$invoicePaid} recorded against it
+				{$preference.pref_inv_wording} {$invoice.id} {$LANG.delete_has_payments} {$preference.pref_currency_sign}{$invoicePaid} 
     </span>
 				<br />
 				{* LANG_TODO: Add help section here!! *}
@@ -65,7 +65,7 @@
 
 	<div id="top"></b></div>
 	<br /><br />
-	{$preference.pref_inv_wording} {$id} has been deleted
+	{$preference.pref_inv_wording} {$id} {$LANG.deleted}
 	<br /><br />
 
 {/if}

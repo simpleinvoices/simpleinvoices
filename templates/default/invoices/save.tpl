@@ -26,4 +26,4 @@
 	<br />
 {/if}
 
-<meta http-equiv="refresh" content="2;URL=index.php?module=invoices&view=quick_view&id={$id}" />
+<meta http-equiv="refresh" content="2;URL=index.php?module=invoices&amp;view=quick_view&amp;id={$id}" />

@@ -14,7 +14,7 @@
 <form name="frmpost" action="index.php?module=invoices&amp;view=save" method="post" onsubmit="return frmpost_Validator(this)">
 
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
-        	<img src="images/common/gmail-loader.gif" alt="Loading ..." /> Loading ...
+        	<img src="images/common/gmail-loader.gif" alt="{$LANG.loading} ..." /> {$LANG.loading} ...
 </div>
 
 
@@ -32,7 +32,7 @@
     {if $billers == null}
         <tr>
                 <td>
-                     Setup yourself up as a biller, click &nbsp;  
+                     {$LANG.setup_as_biller}&nbsp;  
                 </td>
                 <td>
                     <a href="./index.php?module=billers&amp;view=add" class="positive">
@@ -45,7 +45,7 @@
     {if $customers == null}
             <tr>
                 <td>
-                     Add a client, click &nbsp;  
+                     {$LANG.setup_add_customer}&nbsp;  
                 </td>
                 <td>
                     <a href="./index.php?module=customers&amp;view=add" class="positive">
@@ -58,7 +58,7 @@
     {if $products == null}
             <tr>
                 <td>
-                     Add some products, click &nbsp;  
+                     {$LANG.setup_add_products}&nbsp;  
                 </td>
                 <td>
                     <a href="./index.php?module=products&amp;view=add" class="positive">
@@ -72,10 +72,10 @@
     {if $taxes == null}
             <tr>
                 <td>
-                     Add a tax rate, click &nbsp;  
+                     {$LANG.setup_add_taxrate}&nbsp;  
                 </td>
                 <td>
-                    <a href="index.php?module=tax_rates&view=add" class="positive">
+                    <a href="index.php?module=tax_rates&amp;view=add" class="positive">
                         <img src="./images/common/money_delete.png" alt="" />
                         {$LANG.add_new_tax_rate}
                     </a>
@@ -86,7 +86,7 @@
     {if $preferences == null}
             <tr>
                 <td>
-                     Add an invoice preference, click &nbsp;  
+                     {$LANG.setup_add_inv_pref}&nbsp;  
                 </td>
                 <td>
                     </a>
@@ -132,14 +132,14 @@
 								href="#" 
 								class="trash_link"
 								id="trash_link{$smarty.section.line.index}"
-								title="The first row can not be deleted"
+								title="{$LANG.cannot_delete_first_row}"
 							>
 								<img 
 									id="trash_image{$smarty.section.line.index}"
 									src="./images/common/blank.gif"
 									height="16px"
 									width="16px"
-									title="The first row can not be deleted"
+									title="{$LANG.cannot_delete_first_row}"
 									alt=""
 								 />
 							</a>
@@ -150,7 +150,7 @@
 							<a 
 								id="trash_link{$smarty.section.line.index}"
 								class="trash_link"
-								title="Delete this row" 
+								title="{$LANG.delete_row}" 
 								rel="{$smarty.section.line.index}"
 								href="#" 
 								style="display: inline;"
@@ -231,7 +231,7 @@
 								src="./images/common/add.png"
 								alt=""
 							/>
-							Add new row{* $LANG TODO *}
+							{$LANG.add_new_row}
 						</a>
 				
 					</td>

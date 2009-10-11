@@ -35,6 +35,20 @@ var export_word_tooltip = "{$LANG.export_tooltip} {$invoice.preference.pref_inv_
 var process_payment_tooltip = "{$LANG.process_payment} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim}";
 var email_tooltip = "{$LANG.email}  {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim}";
 
+var table_head_actions = "{$LANG.actions}";
+var table_head_id = "{$LANG.id}";
+var table_head_biller = "{$LANG.biller}";
+var table_head_customer = "{$LANG.customer}";
+var table_head_date = "{$LANG.date_upper}";
+var table_head_total = "{$LANG.total}";
+var table_head_owing = "{$LANG.owing}";
+var table_head_aging = "{$LANG.aging}";
+var table_head_type = "{$LANG.type}";
+
+var table_grid_manage_inv = "{$LANG.manage_inv}";
+
+var table_foot_displaying_inv = "{$LANG.displaying_inv} {ldelim}0{rdelim} - {ldelim}1{rdelim} {$LANG.of} {ldelim}2{rdelim}";
+
 {literal}
 Ext.onReady(function(){
 
@@ -164,15 +178,15 @@ Ext.onReady(function(){
 
 
 	var cm = new Ext.grid.ColumnModel([
-	{header: "Actions", width: 105, dataIndex: 'actions', sortable:false, renderer: renderActions },
-	{header: "ID", width: 50, dataIndex: 'id'},
-	{header: "Biller", width: 180, dataIndex: 'Biller'},
-	{header: "Customer", width: 115, dataIndex: 'Customer'},
-	{header: "Total", width: 75, dataIndex: 'INV_TOTAL'},
-	{header: "Owing", width: 75, dataIndex: 'INV_OWING'},
-	{header: "Date", width: 75, dataIndex: 'Date'},
-	{header: "Aging", width: 75, dataIndex: 'Aging'},
-	{header: "Type", width: 100, dataIndex: 'Type'}
+	{header: table_head_actions, width: 105, dataIndex: 'actions', sortable:false, renderer: renderActions },
+	{header: table_head_id, width: 50, dataIndex: 'id'},
+	{header: table_head_biller, width: 180, dataIndex: 'Biller'},
+	{header: table_head_customer, width: 115, dataIndex: 'Customer'},
+	{header: table_head_total, width: 75, dataIndex: 'INV_TOTAL'},
+	{header: table_head_owing, width: 75, dataIndex: 'INV_OWING'},
+	{header: table_head_date, width: 75, dataIndex: 'Date'},
+	{header: table_head_aging, width: 75, dataIndex: 'Aging'},
+	{header: table_head_type, width: 100, dataIndex: 'Type'}
 	]);
 	cm.defaultSortable = true;
 
@@ -180,7 +194,7 @@ Ext.onReady(function(){
 	var grid = new Ext.grid.GridPanel({
 		ds: ds,
 		cm: cm,
-		title:'Manage Invoices',
+		title: table_grid_manage_inv,
 		renderTo:'manageInvoicesGrid',
 		autoHeight: true,
 		viewConfig: {
@@ -196,7 +210,7 @@ Ext.onReady(function(){
 			pageSize: 25,
 			store: ds,
 			displayInfo: true,
-			displayMsg: 'Displaying invoices {0} - {1} of {2}'
+			displayMsg: table_foot_displaying_inv
 		}),
 		layout:'fit'
 	});

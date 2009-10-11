@@ -14,7 +14,7 @@
 
 <h3>{$LANG.inv} {$LANG.inv_consulting}
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
-        	<img src="images/common/gmail-loader.gif" alt="Loading ..." /> Loading ...
+        	<img src="images/common/gmail-loader.gif" alt="{$LANG.loading} ..." /> {$LANG.loading} ...
 </div>
 </h3>
 
@@ -130,7 +130,7 @@
 			</button>
 			<input type="hidden" name="max_items" value="{$smarty.section.line.index}" />
 			<input type="hidden" name="type" value="3" />
-			<a href="./index.php?module=invoices&view=manage" class="negative">
+			<a href="./index.php?module=invoices&amp;view=manage" class="negative">
 				<img src="./images/common/cross.png" alt="" />
 				{$LANG.cancel}
 			</a>

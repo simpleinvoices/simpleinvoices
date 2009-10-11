@@ -39,11 +39,11 @@
     <br />
     <span class="welcome">
        Filters:
-    <a href="index.php?module=invoices&view=manage&having=money_owed">Due</a> : 
-    <a href="index.php?module=invoices&view=manage&having=paid">Paid</a> : 
-    <a href="index.php?module=invoices&view=manage&having=draft">Draft</a> : 
-    <a href="index.php?module=invoices&view=manage&having=open">Open</a> : 
-    <a href="index.php?module=invoices&view=manage">All</a> 
+    <a href="index.php?module=invoices&amp;view=manage&amp;having=money_owed">Due</a> : 
+    <a href="index.php?module=invoices&amp;view=manage&amp;having=paid">Paid</a> : 
+    <a href="index.php?module=invoices&amp;view=manage&amp;having=draft">Draft</a> : 
+    <a href="index.php?module=invoices&amp;view=manage&amp;having=open">Open</a> : 
+    <a href="index.php?module=invoices&amp;view=manage">All</a> 
 
    </span>
     <br />
