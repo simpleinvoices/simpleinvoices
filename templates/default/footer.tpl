@@ -1,6 +1,6 @@
 </div>
 <div class="col footer align_left">
-	Thank you for invoicing with <a href="http://www.simpleinvoices.org">Simple Invoices</a> | <a href="http://www.simpleinvoices.org/forum">Forum</a> | <a href="http://www.simpleinvoices.org/blog">Blog</a>
+	{$LANG.thank_you_inv}<a href="http://www.simpleinvoices.org">{$LANG.simple_invoices}</a> | <a href="http://www.simpleinvoices.org/forum">{$LANG.forum}</a> | <a href="http://www.simpleinvoices.org/blog">{$LANG.blog}</a>
 </div>
 </body>
 </html>
