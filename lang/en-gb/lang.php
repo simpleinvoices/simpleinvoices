@@ -1,11 +1,11 @@
 <?php
 
 /*
-* Script: english_UK.inc.php
+* Script: lang.php
 * 	English translation file
 *
 * Last edited:
-*    2008-08-25
+*    2009-10-11
 *
 * License:
 *	 GPL v3 or above
@@ -67,7 +67,7 @@ $LANG['biller_to_add'] = "Biller to add";//1
 $LANG['billers'] = "Billers";//1
 $LANG['blog'] = "Blog";//1
 $LANG['cancel'] = "Cancel";//1
-$LANG['cannot_delete_first_row'] = "The first row can not be deleted";//1
+$LANG['cannot_delete_first_row'] = "The first row cannot be deleted";//1
 $LANG['change_log'] = "Change Log";//1
 $LANG['city'] = "City";//1
 $LANG['confirm_delete'] = "Are you sure you want to delete";//1
