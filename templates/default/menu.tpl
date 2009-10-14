@@ -44,7 +44,7 @@
 
 	<div id="money">
 		<ul class="subnav">
-			<li><a { if $pageActive == "invoice"} class="active" {/if} href="index.php?module=invoices&amp;view=manage">{$LANG.invoices}</a></li>
+			<li><img src="./images/famfam/money.png"/><a { if $pageActive == "invoice"} class="active" {/if} href="index.php?module=invoices&amp;view=manage">{$LANG.invoices}</a></li>
 				{ if $subPageActive == "invoice_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
 				{ if $subPageActive == "invoice_view"} <li><a class="active active_subpage" href="#">{$LANG.quick_view}</a></li>{/if}
 				{* dialog style <li><a { if $pageActive == "invoice_new"} class="active" {/if} id="invoice_dialog" href="#">{$LANG.new_invoice}</a></li> *}
