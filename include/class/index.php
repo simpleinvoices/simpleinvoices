@@ -29,7 +29,7 @@ class index
         }
         if ($sub_node_2 !="")
         {
-            $subnode2 = "and sub_node_2 = ".$sub_node_2; 
+            $subnode2 = " and sub_node_2 = ".$sub_node_2; 
         }
     
         $sql = "select 
@@ -77,7 +77,7 @@ class index
         if ($next == 1)
         {
 
-            $sql = "insert into si_index (id, node, sub_node, domain_id) VALUES (:id, :node, :sub_node, :domain_id);";
+            $sql = "insert into si_index (id, node, sub_node, sub_node_2, domain_id) VALUES (:id, :node, :sub_node, :sub_node_2, :domain_id);";
 
         } else {
 
