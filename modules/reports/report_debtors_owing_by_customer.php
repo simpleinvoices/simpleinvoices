@@ -29,12 +29,12 @@ ORDER BY
       $sSQL = "SELECT
         c.id as cid,
         c.name as customer,
-        (select coalesce(sum(ii.total), 0) from ".TB_PREFIX."invoice_items,".TB_PREFIX."invoices where ii2.invoice_id = iv2.id and iv2.customer_id = c.id) as inv_total,
-        (select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."payment ap, ".TB_PREFIX."invoices iv2 where ap.ac_inv_id = iv2.id and iv2.customer_id = c.id) as inv_paid,
+        (select coalesce(sum(ii.total), 0) from ".TB_PREFIX."invoice_items ii2,".TB_PREFIX."invoices iv2 where ii2.invoice_id = iv2.id and iv2.customer_id = c.id) as inv_total,
+        (select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."payment ap, ".TB_PREFIX."invoices iv3 where ap.ac_inv_id = iv3.id and iv3.customer_id = c.id) as inv_paid,
         (select (inv_total - inv_paid)) as inv_owing
 
 FROM
-        ".TB_PREFIX."customers,".TB_PREFIX."invoices,".TB_PREFIX."invoice_items
+        ".TB_PREFIX."customers c,".TB_PREFIX."invoices i,".TB_PREFIX."invoice_items ii
 WHERE
         ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id and ".TB_PREFIX."invoices.customer_id = ".TB_PREFIX."customers.id
 
