@@ -43,6 +43,8 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			pagestat: '{/literal}{$LANG.displaying_items}{literal}',
 			procmsg: '{/literal}{$LANG.processing}{literal}',
 			nomsg: '{/literal}{$LANG.no_items}{literal}',
+			pagemsg: '{/literal}{$LANG.page}{literal}',
+			ofmsg: '{/literal}{$LANG.of}{literal}',
 			useRp: false,
 			rp: 25,
 			showToggleBtn: false,

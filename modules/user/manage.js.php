@@ -38,6 +38,8 @@
 			pagestat: '{/literal}{$LANG.displaying_items}{literal}',
 			procmsg: '{/literal}{$LANG.processing}{literal}',
 			nomsg: '{/literal}{$LANG.no_items}{literal}',
+			pagemsg: '{/literal}{$LANG.page}{literal}',
+			ofmsg: '{/literal}{$LANG.of}{literal}',
 			useRp: false,
 			rp: 25,
 			showToggleBtn: false,

@@ -332,6 +332,7 @@ $LANG['optional'] = "optional";//1
 $LANG['options'] = "Options";//1
 $LANG['Other'] = "Other";//1
 $LANG['owing'] = "Owing";//1
+$LANG['page'] = "Page";//1
 $LANG['paid'] = "Paid";//1
 $LANG['password'] = "Password";//1
 $LANG['payment'] = "Payment";//1
