@@ -45,7 +45,7 @@ var table_head_owing = "{$LANG.owing}";
 var table_head_aging = "{$LANG.aging}";
 var table_head_type = "{$LANG.type}";
 
-var table_grid_manage_inv = "{$LANG.manage_inv}";
+var table_grid_manage_inv = "{$LANG.manage_invoices}";
 
 var table_foot_displaying_inv = "{$LANG.displaying_inv} {ldelim}0{rdelim} - {ldelim}1{rdelim} {$LANG.of} {ldelim}2{rdelim}";
 

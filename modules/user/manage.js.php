@@ -19,22 +19,25 @@
 			url: 'index.php?module=user&view=xml',
 			dataType: 'xml',
 			colModel : [
-				{display: 'Actions', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
-				{display: 'Email', name : 'email', width : 50 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Role', name : 'role', width : 20 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Enabled', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'}
+				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
+				{display: '{/literal}{$LANG.email}{literal}', name : 'email', width : 50 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.role}{literal}', name : 'role', width : 20 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'}
 				
 				],
 				
 
 			searchitems : [
-				{display: 'Email', name : 'email', isdefault: true},
-				{display: 'Role', name : 'role'}
+				{display: '{/literal}{$LANG.email}{literal}', name : 'email', isdefault: true},
+				{display: '{/literal}{$LANG.role}{literal}', name : 'role'}
 			],
 			sortname: 'name',
 			sortorder: 'asc',
 			usepager: true,
 			/*title: 'Manage Custom Fields',*/
+			pagestat: '{/literal}{$LANG.displaying_items}{literal}',
+			procmsg: '{/literal}{$LANG.processing}{literal}',
+			nomsg: '{/literal}{$LANG.no_items}{literal}',
 			useRp: false,
 			rp: 25,
 			showToggleBtn: false,

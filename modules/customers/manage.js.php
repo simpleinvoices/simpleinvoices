@@ -24,23 +24,26 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			url: 'index.php?module=customers&view=xml',
 			dataType: 'xml',
 			colModel : [
-				{display: 'Actions', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
-				{display: 'Name', name : 'name', width : 50 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Total', name : 'customer_total', width : 10 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Owing', name : 'owing', width : 10 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Enabled', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'}
+				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
+				{display: '{/literal}{$LANG.name}{literal}', name : 'name', width : 50 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.total}{literal}', name : 'customer_total', width : 10 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.owing}{literal}', name : 'owing', width : 10 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'}
 				
 				],
 				
 
 			searchitems : [
-				{display: 'ID', name : 'id'},
-				{display: 'Name', name : 'name', isdefault: true}
+				{display: '{/literal}{$LANG.id}{literal}', name : 'id'},
+				{display: '{/literal}{$LANG.name}{literal}', name : 'name', isdefault: true}
 				],
 			sortname: 'name',
 			sortorder: 'asc',
 			usepager: true,
 			/*title: 'Manage Custom Fields',*/
+			pagestat: '{/literal}{$LANG.displaying_items}{literal}',
+			procmsg: '{/literal}{$LANG.processing}{literal}',
+			nomsg: '{/literal}{$LANG.no_items}{literal}',
 			useRp: false,
 			rp: 25,
 			showToggleBtn: false,

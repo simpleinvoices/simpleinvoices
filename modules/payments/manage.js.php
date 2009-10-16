@@ -17,15 +17,15 @@
 			url: 'index.php?module=payments&view=xml',
 			dataType: 'xml',
 			colModel : [
-				{display: 'Actions', name : 'actions', width : 08 * percentage_width, sortable : false, align: 'center'},
-				{display: 'Payment', name : 'id', width :07 * percentage_width, sortable : true, align: 'center'},
-				{display: 'Invoice', name : 'ac_inv_id', width :05 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Customer', name : 'customer', width :15 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Biller', name : 'biller', width :15 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Amount', name : 'ac_amount', width :10 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Notes', name : 'ac_notes', width :15 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Type', name : 'description', width :15 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Date', name : 'date', width : 10 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 08 * percentage_width, sortable : false, align: 'center'},
+				{display: '{/literal}{$LANG.payment}{literal}', name : 'id', width :07 * percentage_width, sortable : true, align: 'center'},
+				{display: '{/literal}{$LANG.invoice}{literal}', name : 'ac_inv_id', width :05 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.customer}{literal}', name : 'customer', width :15 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.biller}{literal}', name : 'biller', width :15 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.amount}{literal}', name : 'ac_amount', width :10 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.notes}{literal}', name : 'ac_notes', width :15 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.type}{literal}', name : 'description', width :15 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.date_upper}{literal}', name : 'date', width : 10 * percentage_width, sortable : true, align: 'left'},
 		
 				],
 				/*
@@ -36,13 +36,16 @@
 				],
 			*/
 			searchitems : [
-				{display: 'ID', name : 'ap.id'},
-				{display: 'Biller ID', name : 'biller_id', isdefault: true}
+				{display: '{/literal}{$LANG.id}{literal}', name : 'ap.id'},
+				{display: '{/literal}{$LANG.biller_id}{literal}', name : 'biller_id', isdefault: true}
 				],
 			sortname: "id",
 			sortorder: "desc",
 			usepager: true,
 			/*title: 'Manage Custom Fields',*/
+			pagestat: '{/literal}{$LANG.displaying_items}{literal}',
+			procmsg: '{/literal}{$LANG.processing}{literal}',
+			nomsg: '{/literal}{$LANG.no_items}{literal}',
 			useRp: false,
 			rp: 25,
 			showToggleBtn: false,

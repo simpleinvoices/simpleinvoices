@@ -24,10 +24,10 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			url: 'index.php?module=custom_fields&view=xml',
 			dataType: 'xml',
 			colModel : [
-				{display: 'Actions', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
-				{display: 'ID', name : 'cf_id', width : 10 * percentage_width, sortable : false, align: 'left'},
-				{display: 'Custom field', name : 'cf_custom_field', width : 40 * percentage_width, sortable : false, align: 'left'},
-				{display: 'Custom label', name : 'cf_custom_label', width : 40 * percentage_width, sortable : false, align: 'left'}
+				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
+				{display: '{/literal}{$LANG.id}{literal}', name : 'cf_id', width : 10 * percentage_width, sortable : false, align: 'left'},
+				{display: '{/literal}{$LANG.custom_field}{literal}', name : 'cf_custom_field', width : 40 * percentage_width, sortable : false, align: 'left'},
+				{display: '{/literal}{$LANG.custom_label}{literal}', name : 'cf_custom_label', width : 40 * percentage_width, sortable : false, align: 'left'}
 				
 				],
 				
@@ -36,6 +36,9 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			sortorder: 'asc',
 			usepager: false,
 			/*title: 'Manage Custom Fields',*/
+			pagestat: '{/literal}{$LANG.displaying_items}{literal}',
+			procmsg: '{/literal}{$LANG.processing}{literal}',
+			nomsg: '{/literal}{$LANG.no_items}{literal}',
 			useRp: false,
 			rp: 25,
 			showToggleBtn: false,

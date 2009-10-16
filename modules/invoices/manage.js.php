@@ -28,14 +28,14 @@
 			url: "{/literal}{$url}{literal}",
 			dataType: 'xml',
 			colModel : [
-				{display: 'Actions', name : 'actions', width : action_menu, sortable : false, align: 'center'},
-				{display: 'ID', name : 'index_name', width :15 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Biller', name : 'biller', width :20 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Customer', name : 'customer', width :20 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Date', name : 'date', width : 15 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Total', name : 'invoice_total', width : 10 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Owing', name : 'owing', width : 10 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Aging', name : 'aging', width : 10 * percentage_width, sortable : true, align: 'left'}
+				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : action_menu, sortable : false, align: 'center'},
+				{display: '{/literal}{$LANG.id}{literal}', name : 'index_name', width :15 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.biller}{literal}', name : 'biller', width :20 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.customer}{literal}', name : 'customer', width :20 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.date_upper}{literal}', name : 'date', width : 15 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.total}{literal}', name : 'invoice_total', width : 10 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.owing}{literal}', name : 'owing', width : 10 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.aging}{literal}', name : 'aging', width : 10 * percentage_width, sortable : true, align: 'left'}
 				
 				],
 				/*
@@ -46,15 +46,18 @@
 				],
 			*/
 			searchitems : [
-				{display: 'Invoice Number', name : 'iv.id'},
-				{display: 'Biller', name : 'b.name'},
-				{display: 'Customer', name : 'c.name', isdefault: true},
-				{display: 'Aging', name : 'aging'}
+				{display: '{/literal}{$LANG.invoice_number}{literal}', name : 'iv.id'},
+				{display: '{/literal}{$LANG.biller}{literal}', name : 'b.name'},
+				{display: '{/literal}{$LANG.customer}{literal}', name : 'c.name', isdefault: true},
+				{display: '{/literal}{$LANG.aging}{literal}', name : 'aging'}
 				],
 			sortname: "id",
 			sortorder: "desc",
 			usepager: true,
 			/*title: 'Manage Custom Fields',*/
+			pagestat: '{/literal}{$LANG.displaying_items}{literal}',
+			procmsg: '{/literal}{$LANG.processing}{literal}',
+			nomsg: '{/literal}{$LANG.no_items}{literal}',
 			useRp: false,
 			rp: 15,
 			showToggleBtn: false,

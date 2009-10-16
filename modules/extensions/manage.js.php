@@ -27,24 +27,27 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			url: 'index.php?module=extensions&view=xml',
 			dataType: 'xml',
 			colModel : [
-				{display: 'Actions', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
-				{display: 'ID', name : 'id', width : 10 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Name', name : 'name', width : 30 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Description', name : 'description', width : 40 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Status', name : 'enabled', width : 10 * percentage_width, sortable : true, align: 'left'}
+				{display: {/literal}'{$LANG.actions}'{literal}, name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
+				{display: {/literal}'{$LANG.id}'{literal}, name : 'id', width : 10 * percentage_width, sortable : true, align: 'left'},
+				{display: {/literal}'{$LANG.name}'{literal}, name : 'name', width : 30 * percentage_width, sortable : true, align: 'left'},
+				{display: {/literal}'{$LANG.description}'{literal}, name : 'description', width : 40 * percentage_width, sortable : true, align: 'left'},
+				{display: {/literal}'{$LANG.status}'{literal}, name : 'enabled', width : 10 * percentage_width, sortable : true, align: 'left'}
 				
 				],
 				
 
 			searchitems : [
-				{display: 'ID', name : 'id'},
-				{display: 'Name', name : 'name'},
-				{display: 'Description', name : 'description', isdefault: true}
+				{display: {/literal}'{$LANG.id}'{literal}, name : 'id'},
+				{display: {/literal}'{$LANG.name}'{literal}, name : 'name'},
+				{display: {/literal}'{$LANG.description}'{literal}, name : 'description', isdefault: true}
 				],
 			sortname: 'name',
 			sortorder: 'asc',
 			usepager: true,
 			/*title: 'Manage Custom Fields',*/
+			pagestat: '{/literal}{$LANG.displaying_items}{literal}',
+			procmsg: '{/literal}{$LANG.processing}{literal}',
+			nomsg: '{/literal}{$LANG.no_items}{literal}',
 			useRp: false,
 			rp: 25,
 			showToggleBtn: false,

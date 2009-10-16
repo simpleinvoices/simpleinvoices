@@ -13,9 +13,6 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			var columns = 5;
 			var padding = 12;
 			var grid_width = $('.col').width();
-
-			//LANG
-			var LANG_rate = {/literal}'{$LANG.rate}'{literal};
 			
 			grid_width = grid_width - (columns * padding);
 			percentage_width = grid_width / 100; 
@@ -27,22 +24,25 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			url: 'index.php?module=tax_rates&view=xml',
 			dataType: 'xml',
 			colModel : [
-				{display: 'Actions', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
-				{display: 'Description', name : 'tax_description', width : 40 * percentage_width, sortable : true, align: 'left'},
-				{display: LANG_rate, name : 'tax_percentage', width : 30 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Enabled', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'}
+				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
+				{display: '{/literal}{$LANG.description}{literal}', name : 'tax_description', width : 40 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.rate}{literal}', name : 'tax_percentage', width : 30 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'}
 				
 				],
 				
 
 			searchitems : [
-				{display: 'ID', name : 'tax_id'},
-				{display: 'Description', name : 'tax_description', isdefault: true}
+				{display: '{/literal}{$LANG.id}{literal}', name : 'tax_id'},
+				{display: '{/literal}{$LANG.description}{literal}', name : 'tax_description', isdefault: true}
 				],
 			sortname: 'tax_description',
 			sortorder: 'asc',
 			usepager: true,
 			/*title: 'Manage Custom Fields',*/
+			pagestat: '{/literal}{$LANG.displaying_items}{literal}',
+			procmsg: '{/literal}{$LANG.processing}{literal}',
+			nomsg: '{/literal}{$LANG.no_items}{literal}',
 			useRp: false,
 			rp: 25,
 			showToggleBtn: false,
