@@ -1303,7 +1303,37 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     $patch['214']['date'] = "20090912";    
 
 
+    $patch['215']['name'] = "si_invoices - add composite primary key";
+    $patch['215']['patch'] = "ALTER TABLE  `".TB_PREFIX."index` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
+    $patch['215']['date'] = "20090912";    
 
+    $patch['216']['name'] = "si_payment - add composite primary key";
+    $patch['216']['patch'] = "ALTER TABLE  `".TB_PREFIX."payment` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
+    $patch['216']['date'] = "20090912";    
+
+    $patch['217']['name'] = "si_payment_types - add composite primary key";
+    $patch['217']['patch'] = "ALTER TABLE  `".TB_PREFIX."payment_types` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `pt_id`)";
+    $patch['217']['date'] = "20090912";    
+
+    $patch['218']['name'] = "si_preferences - add composite primary key";
+    $patch['218']['patch'] = "ALTER TABLE  `".TB_PREFIX."preferences` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `pref_id`)";
+    $patch['218']['date'] = "20090912";    
+
+    $patch['219']['name'] = "si_products - add composite primary key";
+    $patch['219']['patch'] = "ALTER TABLE  `".TB_PREFIX."products` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
+    $patch['219']['date'] = "20090912";    
+    
+    $patch['220']['name'] = "si_tax - add composite primary key";
+    $patch['220']['patch'] = "ALTER TABLE  `".TB_PREFIX."tax` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `tax_id`)";
+    $patch['220']['date'] = "20090912";    
+
+    $patch['221']['name'] = "si_user - add composite primary key";
+    $patch['221']['patch'] = "ALTER TABLE  `".TB_PREFIX."user` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
+    $patch['221']['date'] = "20090912";    
+
+    $patch['217']['name'] = "si_preferences - add composite primary key";
+    $patch['217']['patch'] = "ALTER TABLE  `".TB_PREFIX."preferences` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `pref_id`)";
+    $patch['217']['date'] = "20090912";    
  /*
 */
 /*
