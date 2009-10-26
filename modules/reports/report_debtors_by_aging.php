@@ -36,12 +36,17 @@ ORDER BY
 ";
    } else {
       $sSQL = "SELECT
-        ".TB_PREFIX."invoices.id,
-        (select name from ".TB_PREFIX."biller where ".TB_PREFIX."biller.id = ".TB_PREFIX."invoices.biller_id) as biller,
-        (select name from ".TB_PREFIX."customers where ".TB_PREFIX."customers.id = ".TB_PREFIX."invoices.customer_id) as customer,
-        (select sum(".TB_PREFIX."invoice_items.total) from ".TB_PREFIX."invoice_items WHERE ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id) as inv_total,
-        (select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from ".TB_PREFIX."payment where  ac_inv_id = ".TB_PREFIX."invoices.id ) as inv_paid,
-        (select (INV_TOTAL - INV_PAID)) as inv_owing ,
+        iv.id,
+        (select name from ".TB_PREFIX."biller where ".TB_PREFIX."biller.id = iv.biller_id) as biller,
+        (select name from ".TB_PREFIX."customers where ".TB_PREFIX."customers.id = iv.customer_id) as customer,
+        (select sum(".TB_PREFIX."invoice_items.total) from ".TB_PREFIX."invoice_items WHERE ".TB_PREFIX."invoice_items.invoice_id = iv.id) as inv_total,
+        -- (select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from ".TB_PREFIX."payment where  ac_inv_id = iv.id ) as inv_paid,
+        -- (select (inv_total - inv_paid)) as inv_owing ,
+
+        -- (select coalesce(sum(ii.total), 0) from ".TB_PREFIX."invoice_items ii,".TB_PREFIX."invoices iv where ii.invoice_id = iv.id) as inv_total,
+        (select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."payment ap, ".TB_PREFIX."invoices iv3 where ap.ac_inv_id = iv.id and iv.customer_id = c.id) as inv_paid,
+        (select (inv_total - inv_paid)) as inv_owing,
+
         date_format(date,'%Y-%m-%e') as date ,
         (select datediff(now(),date)) as age,
         (CASE WHEN datediff(now(),date) <= 14 THEN '0-14'
@@ -49,15 +54,22 @@ ORDER BY
                 WHEN datediff(now(),date) <= 60 THEN '31-60'
                 WHEN datediff(now(),date) <= 90 THEN '61-90'
                 ELSE '90+'
-        END ) as aging
+        END ) as Aging
 
 FROM
-        ".TB_PREFIX."invoices,".TB_PREFIX."payment,".TB_PREFIX."invoice_items, ".TB_PREFIX."biller, ".TB_PREFIX."customers
+        ".TB_PREFIX."invoices iv, ".TB_PREFIX."biller b, ".TB_PREFIX."customers c, ".TB_PREFIX."invoice_items, ".TB_PREFIX."preferences
 WHERE
-        ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id
-GROUP BY
-        ".TB_PREFIX."invoices.id;
-
+       ".TB_PREFIX."invoice_items.invoice_id = iv.id
+        and iv.customer_id = c.id AND iv.biller_id = b.id 
+        AND iv.preference_id = ".TB_PREFIX."preferences.pref_id
+        AND ".TB_PREFIX."preferences.status = 1
+GROUP BY 
+    iv.id
+HAVING 
+    inv_owing > 0
+ORDER BY 
+    Aging DESC
+        ;
 ";
 }
 

@@ -35,7 +35,7 @@
          <HEADER>
             <ROW>
                <COL CELLCLASS="GROUP_LAYER">Aging:</COL>
-               <COL CELLCLASS="GROUP_LAYER" TEXTCLASS="BOLD" TYPE="EXPRESSION" COLSPAN="8">$this->getValue("aging")</COL>
+               <COL CELLCLASS="GROUP_LAYER" TEXTCLASS="BOLD" TYPE="EXPRESSION" COLSPAN="8">$this->getValue("Aging")</COL>
             </ROW>
             <ROW>
                                         <COL  CELLCLASS="GROUP_LAYER">id</COL>
@@ -68,7 +68,7 @@
 					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">inv_owing</COL>
 					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">date</COL>
 					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">age</COL>
-					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">aging</COL>
+					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">Aging</COL>
 				</ROW>
 			</FIELDS>
 		</GROUP>
