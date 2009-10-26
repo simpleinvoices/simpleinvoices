@@ -33,8 +33,6 @@ ORDER BY
         (select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."payment ap, ".TB_PREFIX."invoices iv3 where ap.ac_inv_id = iv3.id and iv3.customer_id = c.id) as inv_paid,
         (select (inv_total - inv_paid)) as inv_owing
 
--- FROM
---         ".TB_PREFIX."customers c
 FROM
         ".TB_PREFIX."customers c,".TB_PREFIX."invoices,".TB_PREFIX."invoice_items, ".TB_PREFIX."preferences
 WHERE
