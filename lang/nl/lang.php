@@ -439,6 +439,4 @@ $LANG['whats_this_page_about'] = "Waar gaat deze pagina over?";//1
 $LANG['wheres_the_edit_button'] = "Waar zit de knop om te bewerken?";//1
 $LANG['yes'] = "Ja";//1
 $LANG['zip'] = "Postcode";//1
-
-$LANG['invoice_message'] = "<p>In de bijlage van deze e-mail vind u de factuur als bijlage (in PDF vorm). Neem bij vragen gerust contact op. Voor onze facturen geldt een betalingstermijn van 14 dagen.</p><p>Met vriendelijke groet,</p><p>Wouter Gelderblom<br />Gelderblom Webdesign</p><p>Schildmos 12<br />2661MX Bergschenhoek</p><p>T +31 (0)6 23 588 908<br />E info@gelderblomwebdesign.nl</p><p>KVK 24387915<br />BTW NL049781042B01</p>";//1
 ?>
