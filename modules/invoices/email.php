@@ -10,6 +10,8 @@
 * 	http://www.simpleinvoices.org
  */
 
+error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
+
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
@@ -28,78 +30,74 @@ $invoiceType = $sth->fetch();
 
       
 if ($_GET['stage'] == 2 ) {
+
+	#echo $block_stage2;
 	
-	#get the invoice id
+	// Create invoice
 	$export = new export();
 	$export -> format = "pdf";
 	$export -> file_location = 'file';
 	$export -> module = 'invoice';
 	$export -> id = $invoice_id;
 	$export -> execute();
-		
 
-	echo $block_stage2;
+	// Create authentication with SMTP server
+	$authentication = array();
+	if($config->email->smtp_auth == true) {
+		$authentication = array(
+								'auth' => 'login',
+								'username' => $config->email->username,
+								'password' => $config->email->password,
+								'ssl' => $config->email->secure,
+								'port' => $config->email->smtpport
+								);
+	}
+	$transport = new Zend_Mail_Transport_Smtp($config->email->host, $authentication);
 
-	require("./library/mail/class.phpmailer.php");
-
-	$mail = new PHPMailer();
-
-	$mail->IsSMTP();                                      // set mailer to use SMTP
-	$mail->Host = $config->email->host;  // specify main and backup server - separating with ;
-	$mail->SMTPAuth = $config->email->smtp_auth;     // turn on SMTP authentication
-	$mail->Username = $config->email->username;  // SMTP username
-	$mail->Password = $config->email->password; // SMTP password
-
-	// if statements used for backwards compatibility for old config/config.php - Ap.Muthu
-	if (isset($config->email->smtpport)) { $mail->Port = $config->email->smtpport;     } // SMTP Port
-	if (isset($config->email->secure))   { $mail->SMTPSecure = $config->email->secure; } // Secure SMTP mode - '', 'ssl', or 'tls'
-	if (isset($config->email->ack) && $config->email->ack) { $mail->ConfirmReadingTo = "$_POST[email_from]"; } // Sets Return receipt as Sender EMail ID
-	
-	$mail->From = "$_POST[email_from]";
-	$mail->FromName = "$biller[name]";
-	
-	//allow split of email address via , or ;
+	// Create e-mail message
+	$mail = new Zend_Mail();
+	$mail->setType(Zend_Mime::MULTIPART_MIXED);
+	$mail->setBodyText($_POST[email_notes]);
+	$mail->setBodyHTML($_POST[email_notes]);
+	$mail->setFrom($_POST['email_from'], $biller['name']);
  	$to_addresses = preg_split('/\s*[,;]\s*/', $_POST['email_to']);
-	if (!empty($to_addresses)) 
-	{
+	if (!empty($to_addresses)) {
 	   	foreach ($to_addresses as $to) {
-		    $mail->AddAddress($to);
+		    $mail->addTo($to);
 	   }
   	}
-  	
-	//allow split of email address via , or ;  	
-	if (!empty($_POST['email_bcc']))
-	{
+	if (!empty($_POST['email_bcc'])) {
  	    $bcc_addresses = preg_split('/\s*[,;]\s*/', $_POST['email_bcc']);
-	
-    	foreach ($bcc_addresses as $bcc)
-		{
-		    $mail->AddBCC($bcc);
+    	foreach ($bcc_addresses as $bcc) {
+			$mail->addBcc($bcc);
 		}
-	}	
-		
-	
-	$mail->WordWrap = 50;                                 // set word wrap to 50 characters
-	$spc2us_pref = str_replace(" ", "_", $preference[pref_inv_wording]); // Ap.Muthu added to accomodate spaces in inv pref name
-	$mail->AddAttachment("./tmp/cache/$spc2us_pref$invoice[id].pdf");  // all tmp in ./cache       // add attachments
-
-	$mail->IsHTML(true);                                  // set email format to HTML
-
-	$mail->Subject = "$_POST[email_subject]"; 
-	$mail->Body    = "$_POST[email_notes]";
-	$mail->AltBody = "$_POST[email_notes]";
-
-	if(!$mail->Send())
-	{
-	   echo "Message could not be sent. <p>";
-	   echo "Mailer Error: " . $mail->ErrorInfo;
-	   exit;
 	}
+	$mail->setSubject($_POST['email_subject']);
+
+	// Create attachment
+	$spc2us_pref = str_replace(" ", "_", $preference[pref_inv_wording]);
+	$content = file_get_contents('./tmp/cache/' . $spc2us_pref . $invoice['id'] . '.pdf');
+	$at = $mail->createAttachment($content);
+	$at->type = 'application/pdf';
+	$at->disposition = Zend_Mime::DISPOSITION_ATTACHMENT;
+	$at->filename = $spc2us_pref . $invoice['id'] . '.pdf';
+
+	// Send e-mail through SMTP
+	try {
+		$mail->send($transport);
+	} catch(Zend_Mail_Protocol_Exception $e) {
+		echo '<strong>Zend Mail Protocol Exception:</strong> ' .  $e->getMessage();
+		exit;
+	}
+
+	// Remove temp invoice
 	unlink("./tmp/cache/$spc2us_pref$invoice[id].pdf");
+
+	// Create succes message
 	$message  = "<meta http-equiv=\"refresh\" content=\"2;URL=index.php?module=invoices&amp;view=manage\">";
 	$message .= "<br />$preference[pref_inv_wording] $invoice[id] has been sent as a PDF";
 
-	echo $block_stage3;
+	#echo $block_stage3;
 
 	//setInvoiceStatus($invoice["id"], 1);
 }
