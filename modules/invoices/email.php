@@ -10,8 +10,6 @@
 * 	http://www.simpleinvoices.org
  */
 
-error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
-
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
