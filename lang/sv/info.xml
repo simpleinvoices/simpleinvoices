@@ -2,7 +2,7 @@
 
 <langfile version="1.0.0" type="language">
 	<name>Svenska</name>
-	<shortname>sv</shortname>
+	<shortname>sv-se</shortname>
 	<englishname>Swedish</englishname>
 	<author>Joakim Nyman</author>
 	<authorEmail>joakim@edgefive.com</authorEmail>

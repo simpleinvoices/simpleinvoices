@@ -8,7 +8,7 @@
 *    Joakim Nyman
 *
 * Last edited:
-*    2009-10-11
+*    2009-11-21
 *
 * License:
 *    GPL v3 or above
@@ -36,16 +36,16 @@ $LANG['add_new_payment_type'] = "Lägg till Ny Betalningsform";//1
 $LANG['add_new_preference'] = "Lägg till Nytt Faktura Förval";//1
 $LANG['add_new_product'] = "Lägg till Ny Produkt";//1
 $LANG['add_new_row'] = "Lägg till ny rad";//1
-$LANG['add_new_tax_rate'] = "Lägg till Ny Momssats";//1
+$LANG['add_new_tax_rate'] = "Lägg till Ny Skattesats";//1
 $LANG['add_payment_type'] = "Lägg till Betalningsform";//1
 $LANG['add_product'] = "Lägg till Produkt";//1
-$LANG['add_tax_rate'] = "Lägg till Momssats";//1
+$LANG['add_tax_rate'] = "Lägg till Skattesats";//1
 $LANG['address'] = "Adress";//1
-$LANG['address_city'] = "Adress: Stad";//1
-$LANG['address_country'] = "Adress: Land";//1
-$LANG['address_state'] = "Adress: Region";//1
-$LANG['address_street'] = "Adress: Gata";//1
-$LANG['address_zip'] = "Adress: Postnummer";//1
+$LANG['address_city'] = "Stad";//1
+$LANG['address_country'] = "Land";//1
+$LANG['address_state'] = "Region";//1
+$LANG['address_street'] = "Gata";//1
+$LANG['address_zip'] = "Postnummer";//1
 $LANG['age'] = "Ålder";//1
 $LANG['aging'] = "Betalningsfrist";//1
 $LANG['all_reports'] = "Alla rapporter";//1
@@ -119,7 +119,7 @@ $LANG['default_inv_template'] = "Standard Faktura Mall ";//1
 $LANG['default_invoice_preference'] = "Standard Faktura Inställning";//1
 $LANG['default_number_items'] = "Standard antal linje punkter";//1
 $LANG['default_payment_type'] = "Standard Betalningsform";//1
-$LANG['default_tax'] = "Standard Moms";//1
+$LANG['default_tax'] = "Standard Skattesats";//1
 $LANG['delete'] = "Radera";//1
 $LANG['delete_has_payments1'] = "kan inte raderas eftersom den har betalningar av";//1
 $LANG['delete_has_payments2'] = "registrerade emot den";//1
@@ -204,7 +204,7 @@ $LANG['help_invoice_custom_fields'] = "Behöver du fler fält i faktura vyn? Vil
 $LANG['help_invoice_types'] = "I Simple Invoices finns det 2 typer av fakturor tillgängliga<br /><br />
 En <b>Artikelvis Faktura</b> är en faktura som listar många olika poster på samma faktura, med valfritt antecknings fält för varje post - tänk mataffärs faktura.
 <br/ ><br />
-En <b>Totalt Faktura</b> är t.ex. en faktura från rörmokaren som listar vad som gjorts och sedan har ett slutpris och moms.
+En <b>Totalt Faktura</b> är t.ex. en faktura från rörmokaren som listar vad som gjorts och sedan har ett slutpris och skatt.
 ";//1
 $LANG['help_logging'] = "För att logga handlingar som gör i Simple Invoices aktivera denna inställning. Detta skapar en logg i databasen på vad som gjorts.<br /><br />Obs: För tillfället är det ända sättet att se loggen att logga in i databasen. Vi kommer snart lägga till en snygg logg visare i Simple Invoices.";//1
 $LANG['help_manage_custom_fields'] = "Egendefinierade Fält är speciella fält som du kan namnge efter behov.<br /><br />Denna sida låter dig ange upp till 4 egendefinierade fält för var och en av följande: produkter, kunder, fodringsägare, och fakturor.<br /><br />När du namnger ett av fälten blir det genast öppet för användning. T.ex. om du redigerar 'Faktura :: Egendefinierat fält 1' och ger det namnet 'Projekt namn', nästa gång du skapar en faktura kommer det finnas ett nytt fält i faktura vyn som kallas 'Projekt namn'.";//1
@@ -217,10 +217,10 @@ $LANG['help_reports_xsl'] = "<b>Rapportera fel</b><br />Om du fick ett 'OOOOPS, 
 $LANG['help_required_field'] = "Detta är ett obligatoriskt fält. Du måste ange ett värde i detta fält innan du kan spara formuläret<br /><br />";//1
 $LANG['help_simple_invoices'] = "Simple Invoices är ett simpelt faktureringssystem designat med enkelhet och funktionalitet i tanken. Det tillgodoser behoven för små organisationer och hemma användare.<br /><br />För mera information vänligen hänvisa till Simple Invoices webbsida: <a href='http://www.simpleinvoices.org' target='_blank'><b>http://www.simpleinvoices.org</b></a>";//1
 $LANG['help_street2'] = "Fältet 'Gatuadress 2' används när adressen för fodringsägaren eller kunden är antingen för långt för att rymmas på en rad eller innehåller flera delar.<br /><br />T.ex. gatuadressen 'Level 234, 325 South Malvern Road' kan delas upp till<br /><br />Gatuadress 1: Level 234<br />Gatuadress 2: 325 South Malvern Road";//1
-$LANG['help_tax_rate_sign'] = "En moms kan antingen vara procentbaserad (ex. Försäljnings Moms 10%) eller penga värden (ex. $10 eller £20).<br /><br />$-tecknet i drop down menyn indikerar endast att detta kommer vara en penga värdes skala, inte valuta tecknet. 'Faktura Inställningen' som du använder bestämmer vilken valuta symbol som används på dina fakturor.";//1
+$LANG['help_tax_rate_sign'] = "En skattesats kan antingen vara procentbaserad (ex. Försäljnings Skatt 10%) eller penga värden (ex. $10 eller £20).<br /><br />$-tecknet i drop down menyn indikerar endast att detta kommer vara en penga värdes skala, inte valuta tecknet. 'Faktura Inställningen' som du använder bestämmer vilken valuta symbol som används på dina fakturor.";//1
 $LANG['help_text'] = "<b>Varning</b><br /><br />Vänligen säkerhetskopiera din Simple Invoices databas innan du kör databas uppdateringen, ifall om något dåligt skulle hända.<br /><br />För att säkerhetskopiera databasen, välj 'Säkerhetskopiera Databas' i Inställningar menyn, eller använd phpMyAdmin (om du har detta installerat) för att säkerhetskopiera databasen.";//1
 $LANG['help_user_role'] = "Det finns 3 roller tillgängliga<br /><br />Administrator:<br />som har tillgång till allt i Simple Invoices<br /><br />User:<br />som har läs/skriv rättigheter till allt i Simple Invoices, men inte tillgång till Inställningar menyn<br /><br />Viewer:<br />som endast har läs rättigheter";//1
-$LANG['help_what_are_custom_fields'] = "Egendefinierade Fält är special fält i fodringsägare, produkter, kunder, och fakturor som du kan namnge hur du vill.<br /><br />Om du öskar att det fanns ett Moms ID fält i fodringsägare, gå till Egendefinierade Fält sidan och namnge ett av de blanka Fodringsägare Egendefinierat Fält till Moms ID.<br /><br />Nu när du går och redigerar en Fodringsägare kommer det finnas ett nytt fält kallat Moms ID eller vad annat du döpt det till.";//1
+$LANG['help_what_are_custom_fields'] = "Egendefinierade Fält är special fält i fodringsägare, produkter, kunder, och fakturor som du kan namnge hur du vill.<br /><br />Om du öskar att det fanns ett Skattesats ID fält i fodringsägare, gå till Egendefinierade Fält sidan och namnge ett av de blanka Fodringsägare Egendefinierat Fält till Skattesats ID.<br /><br />Nu när du går och redigerar en Fodringsägare kommer det finnas ett nytt fält kallat Skattesats ID eller vad annat du döpt det till.";//1
 $LANG['help_wheres_the_edit_button'] = "På Behandla Betalning sidan finns det ingen 'Redigera' knapp. Detta är för att ge ett korrekt 'revisions spår' för betalningar som registrerats i Simple Invoices.<br /><br />Om du gjort ett misstag med en betalning är det bästa alternativet att återkalla posten och lägga till en ny post korrekt.<br /><br />Återkalla posten - vad i?<br />Detta betyder helt enkelt bara att lägga till en negativ post på samma summa som original posten.<br /><br />Ex.<br />Om du angav $110<br />men borde ha angivit $1100<br />för att återkalla denna post ange -$110 emot samma faktura och sen ange den rätta summan på $1100";//1
 $LANG['hide_details'] = "Göm detaljer";//1
 $LANG['home'] = "Hem";//1
@@ -232,7 +232,7 @@ $LANG['insert_customer'] = "Spara Kund";//1
 $LANG['insert_payment_type'] = "Spara Betalningsform";//1
 $LANG['insert_preference'] = "Spara Inställning";//1
 $LANG['insert_product'] = "Spara Produkt";//1
-$LANG['insert_tax_rate'] = "Spara Momssats";//1
+$LANG['insert_tax_rate'] = "Spara Skattesats";//1
 $LANG['installation'] = "Installation";//1
 $LANG['inv'] = "Faktura";//1
 $LANG['inv_consulting'] = " - Konsultering";//1
@@ -285,7 +285,7 @@ $LANG['manage_payment_types'] = "Hantera Betalningsformer";//1
 $LANG['manage_payments'] = "Hantera Betalningar";//1
 $LANG['manage_preferences'] = "Hantera Inställningar";//1
 $LANG['manage_products'] = "Hantera Produkter";//1
-$LANG['manage_tax_rates'] = "Hantera Momssatser";//1
+$LANG['manage_tax_rates'] = "Hantera Skattesatser";//1
 $LANG['mandatory_fields'] = "Alla fält är obligatoriska";//1
 $LANG['message'] = "Meddelande";//1
 $LANG['mobile_phone'] = "Mobiltelefon";//1
@@ -311,13 +311,13 @@ $LANG['no_payments_customer'] = "Inga betalningar har registrerats för denna ku
 $LANG['no_payments_invoice'] = "Inga betalningar har registrerats för denna faktura. Klicka på 'Behandla Betalning' ovan för att lägga till en mottagen betalning";//1
 $LANG['no_preferences'] = "Inga faktura inställningar blivit skapade. Klicka på 'Lägg till Faktura Inställning' ovan för att skapa en";//1
 $LANG['no_products'] = "Inga produkter har blivit skapade. Klicka på 'Lägg till Ny Produkt' ovan för att skapa en";//1
-$LANG['no_tax_rates'] = "Inga momssatser har blivit skapade. Klicka på 'Lägg till Ny Momssats' ovan för att skapa en";//1
+$LANG['no_tax_rates'] = "Inga skattesatser har blivit skapade. Klicka på 'Lägg till Ny Skattesats' ovan för att skapa en";//1
 $LANG['no_users'] = "Inga användare har blivit skapade. Klicka på 'Lägg till Användare' ovan för att skapa en";//1
 $LANG['none'] = "inget";//1
 $LANG['note'] = "Notering";//1
 $LANG['notes'] = "Noteringar";//1
 $LANG['notes_opt'] = "Noteringar (valfri)";//1
-$LANG['number_of_taxes_per_line_item'] = "Antal momssatser per linje artikel";//1
+$LANG['number_of_taxes_per_line_item'] = "Antal skattesatser per linje artikel";//1
 $LANG['number_short'] = "Nr.";//1
 $LANG['of'] = "av";//1
 $LANG['open'] = "Öppen";//1
@@ -410,9 +410,9 @@ $LANG['save_preference_success'] = "Faktura inställning sparad,<br /> du kommer
 $LANG['save_product'] = "Spara Produkt";//1
 $LANG['save_product_failure'] = "Någonting blev fel, försök att spara produkten igen";//1
 $LANG['save_product_success'] = "Produkt sparad, <br /> du kommer att bli vidarebefodrad till sidan Hantera Produkter";//1
-$LANG['save_tax_rate'] = "Spara Momssats";//1
-$LANG['save_tax_rate_failure'] = "Någonting blev fel, försök att lägga till momssatsen igen";//1
-$LANG['save_tax_rate_success'] = "Momssats sparad, <br /> du kommer att bli vidarebefodrad till sidan Hantera Momssatser";//1
+$LANG['save_tax_rate'] = "Spara Skattesats";//1
+$LANG['save_tax_rate_failure'] = "Någonting blev fel, försök att lägga till skattesatsen igen";//1
+$LANG['save_tax_rate_success'] = "Skattesats sparad, <br /> du kommer att bli vidarebefodrad till sidan Hantera Skattesatser";//1
 $LANG['save_user_failure'] = "Någonting blev fel, försök att spara användaren igen<br />";//1
 $LANG['save_user_success'] = "Användare sparad, <br /> du kommer att bli vidarebefodrad till sidan Hantera Användare";//1
 $LANG['select_invoice'] = "Välj en faktura";//1
@@ -420,7 +420,7 @@ $LANG['settings'] = "Inställningar";//1
 $LANG['setup_add_customer'] = "Lägg till en kund, klicka ";//1
 $LANG['setup_add_inv_pref'] = "Lägg till en faktura inställning, klicka ";//1
 $LANG['setup_add_products'] = "Lägg till några produkter, klicka ";//1
-$LANG['setup_add_taxrate'] = "Lägg till en momssats, klicka ";//1
+$LANG['setup_add_taxrate'] = "Lägg till en skattesats, klicka ";//1
 $LANG['setup_as_biller'] = "Sätt in dig själv som fodringsägare, klicka ";//1
 $LANG['setup_create_invoices'] = "Börja skapa fakturor, klicka ";//1
 $LANG['setup_customisation'] = "Om du behöver skräddarsy inställningarna (ex. språk, standarder, osv..), klicka ";//1
@@ -443,16 +443,16 @@ $LANG['summary'] = "Sammandrag";//1
 $LANG['summary_of_accounts'] = "Sammandrag av konton";//1
 $LANG['system_defaults'] = "System Förval";//1
 $LANG['system_preferences'] = "System Inställningar";//1
-$LANG['tax'] = "Moms";//1
-$LANG['tax_description'] = "Moms beskrivning";//1
-$LANG['tax_id'] = "Moms ID";//1
-$LANG['tax_percentage'] = "Moms Procentandel";//1
-$LANG['tax_rate'] = "Moms";//1
-$LANG['tax_rate_details'] = "Moms detaljer";//1
-$LANG['tax_rate_id'] = "Moms ID";//1
-$LANG['tax_rate_to_add'] = "Moms som läggs till";//1
-$LANG['tax_rates'] = "Moms";//1
-$LANG['tax_total'] = "Moms Summa";//1
+$LANG['tax'] = "Skatt";//1
+$LANG['tax_description'] = "Skatte beskrivning";//1
+$LANG['tax_id'] = "Skattesats ID";//1
+$LANG['tax_percentage'] = "Skattesats i procent";//1
+$LANG['tax_rate'] = "Skattesats";//1
+$LANG['tax_rate_details'] = "Skattesats detaljer";//1
+$LANG['tax_rate_id'] = "Skattesats ID";//1
+$LANG['tax_rate_to_add'] = "Skattesats som läggs till";//1
+$LANG['tax_rates'] = "Skattesatser";//1
+$LANG['tax_total'] = "Skatte Summa";//1
 $LANG['telephone_short'] = "Tel";//1
 $LANG['thank_you'] = "Tack för att du valt Simple Invoices!";//1
 $LANG['thank_you_inv'] = "Tack för att du fakturerar med ";
@@ -467,7 +467,7 @@ $LANG['total_paid'] = "Totalt Inbetalt";//1
 $LANG['total_sales'] = "Totalt Försäljning";//1
 $LANG['total_sales_by_customer'] = "Totalt Försäljning efter Kund";//1
 $LANG['total_style'] = "Totalt stil";//1
-$LANG['total_taxes'] = "Totalt moms";//1
+$LANG['total_taxes'] = "Totalt skatter";//1
 $LANG['total_uppercase'] = "SUMMA";//1
 $LANG['totals'] = "Summa";//1
 $LANG['type'] = "Typ";//1
