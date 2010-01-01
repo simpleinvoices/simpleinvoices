@@ -5,9 +5,13 @@
 set_include_path(get_include_path() . PATH_SEPARATOR . "./include/class");
 set_include_path(get_include_path() . PATH_SEPARATOR . "./library/");
 set_include_path(get_include_path() . PATH_SEPARATOR . "./library/pdf");
-require_once 'Zend/Loader.php';
+set_include_path(get_include_path() . PATH_SEPARATOR . "./include/");
 
-Zend_Loader::registerAutoload();
+require_once 'Zend/Loader/Autoloader.php';
+
+$autoloader = Zend_Loader_Autoloader::getInstance();
+$autoloader->setFallbackAutoloader(true);
+#Zend_Loader::registerAutoload();
 
 
 //session_start();
