@@ -45,8 +45,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 	
 	
 	/*Check that the sort field is OK*/
-	$validFields = array('id', 'biller_id','customer_id');
-	
+	$validFields = array('id','description','unit_price', 'enabled');
+
 	if (in_array($sort, $validFields)) {
 		$sort = $sort;
 	} else {

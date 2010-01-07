@@ -21,7 +21,7 @@ checkLogin();
 
 $billers = getActiveBillers();
 $customers = getActiveCustomers();
-$taxes = getTaxes();
+$taxes = getActiveTaxes();
 $products = getActiveProducts();
 $preferences = getActivePreferences();
 $defaults = getSystemDefaults();
