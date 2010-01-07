@@ -384,10 +384,10 @@ function simpleInvoicesError($type,$info1 = "", $info2 = "")
             ===========================================<br />
             <br />
             Your Simple Invoices installation can't use the<br />
-            database adapter 'pdo_mysql_utf8'.<br /><br />  
+            database settings 'database.utf8'.<br /><br />  
 
             To fix this please edit config/config.ini and<br />
-            set 'database.adapter' to 'pdo_mysql'<br />
+            set 'database.utf8' to 'false'<br />
             <br />
             ===========================================<br />
             ");
