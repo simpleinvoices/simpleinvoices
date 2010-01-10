@@ -36,8 +36,8 @@ if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 	$dir = 'ASC';
 }
 
-$query = (isset($_POST['query'])) ? $_POST['query'] : "" ; ;
-$qtype = (isset($_POST['qtype'])) ? $_POST['qtype'] : "" ; ;
+$query = (isset($_POST['query'])) ? $_POST['query'] : "" ; 
+$qtype = (isset($_POST['qtype'])) ? $_POST['qtype'] : "" ; 
 
 $plugin[0] = " <img src='images/famfam/plugin_disabled.png' alt='".$LANG['plugin_not_registered']."' />";
 $plugin[1] = " <img src='images/famfam/plugin.png' alt='".$LANG['plugin_registered']."' />";
