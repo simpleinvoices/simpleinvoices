@@ -20,7 +20,8 @@ foreach ($extension_entries as $entry) {
 		} else {
 			$description = "DESCRIPTION not available (in $extension_dir/$entry/)";
 		}
-		$available_extensions[$entry] = array("name"=>$entry,"enabled"=>0, "registered"=>0, "description"=>$description);
+
+		$available_extensions[$entry] = array("name"=>$entry,"enabled"=>0, "registered"=>0, "description"=>$description , "id" =>"");
 	}
 }
 
@@ -29,14 +30,14 @@ if (intval($start) != $start) {
 	$start = 0;
 }
 if (intval($limit) != $limit) {
-	$limit = 25;
+		$limit = 25;
 }
 if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 	$dir = 'ASC';
 }
 
-$query = $_POST['query'];
-$qtype = $_POST['qtype'];
+$query = (isset($_POST['query'])) ? $_POST['query'] : "" ; ;
+$qtype = (isset($_POST['qtype'])) ? $_POST['qtype'] : "" ; ;
 
 $plugin[0] = " <img src='images/famfam/plugin_disabled.png' alt='".$LANG['plugin_not_registered']."' />";
 $plugin[1] = " <img src='images/famfam/plugin.png' alt='".$LANG['plugin_registered']."' />";
