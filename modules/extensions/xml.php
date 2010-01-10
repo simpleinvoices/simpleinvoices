@@ -8,11 +8,18 @@ $sort = "id" ;
 $limit = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
 $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 
+$xml =""; 
+
 $extension_dir = './extensions';
 $extension_entries = scandir($extension_dir);
 foreach ($extension_entries as $entry) {
   	if (is_dir($extension_dir."/".$entry) and ! ereg("^\..*",$entry) ) {	//Skip entries starting with a dot
-		$description = file_get_contents($extension_dir."/".$entry."/DESCRIPTION") or $description = "DESCRIPTION not available (in $extension_dir/$entry/)";
+		if (file_exists ($extension_dir."/".$entry."/DESCRITION"))
+		{
+			$description = file_get_contents($extension_dir."/".$entry."/DESCRIPTION") ;
+		} else {
+			$description = "DESCRIPTION not available (in $extension_dir/$entry/)";
+		}
 		$available_extensions[$entry] = array("name"=>$entry,"enabled"=>0, "registered"=>0, "description"=>$description);
 	}
 }

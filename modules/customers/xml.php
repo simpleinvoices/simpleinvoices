@@ -11,8 +11,9 @@ $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "name" ;
 $rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
 $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 
+$xml ="";
 
-function sql($type='', $dir, $sort, $rp, $page )
+function sql($type='', $start, $dir, $sort, $rp, $page )
 {
 	global $config;
 	global $LANG;
@@ -35,6 +36,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 	if($type =="count")
 	{
 		unset($limit);
+		$limit;
 	}
 	/*SQL Limit - end*/	
 	
@@ -94,8 +96,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 		
 }	
 
-$sth = sql('', $dir, $sort, $rp, $page);
-$sth_count_rows = sql('count',$dir, $sort, $rp, $page);
+$sth = sql('', $start, $dir, $sort, $rp, $page);
+$sth_count_rows = sql('count', $start, $dir, $sort, $rp, $page);
 
 $customers = $sth->fetchAll(PDO::FETCH_ASSOC);
 

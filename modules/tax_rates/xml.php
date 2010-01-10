@@ -8,9 +8,10 @@ $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "tax_description" ;
 $rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
 $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 
+$xml ="";
 
 
-function sql($type='', $dir, $sort, $rp, $page )
+function sql($type='', $start, dir, $sort, $rp, $page )
 {
 	global $config;
 	global $LANG;
@@ -30,6 +31,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 	if($type =="count")
 	{
 		unset($limit);
+		$limit ="";
 	}
 	/*SQL Limit - end*/	
 	if (!preg_match('/^(asc|desc)$/iD', $dir)) {
@@ -75,7 +77,7 @@ $sth = sql('', $dir, $sort, $rp, $page);
 $sth_count_rows = sql('count',$dir, $sort, $rp, $page);
 
 $tax = $sth->fetchAll(PDO::FETCH_ASSOC);
-$count = $sth->rowCount();
+$count = $sth_count_rows->rowCount();
 	 
 
 $xml .= "<rows>";

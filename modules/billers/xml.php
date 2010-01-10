@@ -8,8 +8,9 @@ $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "name" ;
 $rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
 $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 
+$xml ="";
 
-function sql($type='', $dir, $sort, $rp, $page )
+function sql($type='', $start, $dir, $sort, $rp, $page )
 {
 	global $config;
 	global $LANG;
@@ -30,6 +31,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 	if($type =="count")
 	{
 		unset($limit);
+		$limit="";
 	}
 	/*SQL Limit - end*/	
 	
@@ -72,8 +74,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 		return $result;
 }
 
-$sth = sql('', $dir, $sort, $rp, $page);
-$sth_count_rows = sql('count',$dir, $sort, $rp, $page);
+$sth = sql('', $start,  $dir, $sort, $rp, $page);
+$sth_count_rows = sql('count',$start, $dir, $sort, $rp, $page);
 
 $billers = $sth->fetchAll(PDO::FETCH_ASSOC);
 
@@ -85,7 +87,7 @@ $xml .= "<page>$page</page>";
 $xml .= "<total>$count</total>";
 
 foreach ($billers as $row) {
-	$xml .= "<row id='".$row['iso']."'>";
+	$xml .= "<row id='".$row['id']."'>";
 	$xml .= "<cell><![CDATA[
 	<a class='index_table' title='$LANG[view] ".$row['name']."' href='index.php?module=billers&view=details&id=$row[id]&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 	<a class='index_table' title='$LANG[edit] ".$row['name']."' href='index.php?module=billers&view=details&id=$row[id]&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>

@@ -8,6 +8,8 @@ $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "cf_id" ;
 $limit = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
 $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 
+$xml = "";
+
 //SC: Safety checking values that will be directly subbed in
 if (intval($start) != $start) {
 	$start = 0;
