@@ -87,7 +87,10 @@ class invoice {
 
         $where = " WHERE iv.domain_id = :domain_id ";
         if ($query) $where = " WHERE iv.domain_id = :domain_id AND $qtype LIKE '%$query%' ";
+        if ($this->biller) $where .= " AND b.id = '$this->biller' ";
+        if ($this->customer) $where .= " AND c.id = '$this->biller' ";
         /*SQL where - end*/
+	
 
         /*Check that the sort field is OK*/
         $validFields = array('index_name','iv.id', 'biller', 'customer', 'invoice_total','owing','date','aging','type','preference','type_id');
@@ -110,16 +113,35 @@ class invoice {
                 $sql_having = "HAVING date between '$this->start_date' and '$this->end_date'";
                 break;
             case "money_owed":
-                $sql_having = "HAVING owing > 0";
+                $sql_having = "HAVING ( owing > 0 ) ";
                 break;
             case "paid":
-                $sql_having = "HAVING owing =''";
+                $sql_having = "HAVING ( owing ='' )";
                 break;
             case "draft":
-                $sql_having = "HAVING status = 0";
+                $sql_having = "HAVING ( status = 0 )";
                 break;
             case "open":
-                $sql_having = "HAVING status = 1";
+                $sql_having = "HAVING ( status = 1 )";
+                break;
+        }
+
+        switch ($having_and) 
+        {   
+            case "date_between":
+                $sql_having .= "AND ( date between '$this->start_date' and '$this->end_date' )";
+                break;
+            case "money_owed":
+                $sql_having .= "AND ( owing > 0 ) ";
+                break;
+            case "paid":
+                $sql_having .= "AND ( owing ='' )";
+                break;
+            case "draft":
+                $sql_having .= "AND ( status = 0 )";
+                break;
+            case "open":
+                $sql_having .= "AND ( status = 1 )";
                 break;
         }
 
