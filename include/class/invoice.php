@@ -88,7 +88,7 @@ class invoice {
         $where = " WHERE iv.domain_id = :domain_id ";
         if ($query) $where = " WHERE iv.domain_id = :domain_id AND $qtype LIKE '%$query%' ";
         if ($this->biller) $where .= " AND b.id = '$this->biller' ";
-        if ($this->customer) $where .= " AND c.id = '$this->biller' ";
+        if ($this->customer) $where .= " AND c.id = '$this->customer' ";
         /*SQL where - end*/
 	
 
