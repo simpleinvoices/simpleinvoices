@@ -184,6 +184,7 @@ $early_exit[] = "auth_login";
 $early_exit[] = "auth_logout";
 $early_exit[] = "export_pdf";
 $early_exit[] = "export_invoice";
+$early_exit[] = "export_statement";
 $early_exit[] = "invoice_template";
 $early_exit[] = "payments_print";
 $early_exit[] = "documentation_view";

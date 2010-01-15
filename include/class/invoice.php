@@ -4,6 +4,9 @@ class invoice {
     public $start_date;
     public $end_date;
     public $having;
+    public $having_and;
+    public $biller;
+    public $customer;
     public $sort;
 
     public static function select($id)
@@ -54,7 +57,6 @@ class invoice {
 
     }
 
-    //change to non-static
     function select_all($type='', $dir='DESC', $rp='25', $page='1', $having='')
     {
         global $config;
@@ -65,6 +67,7 @@ class invoice {
             $having = $this->having;
         }
 
+        if ($this->having_and) $having_and  = $this->having_and;
         $sort = $this->sort;
 
         //SC: Safety checking values that will be directly subbed in

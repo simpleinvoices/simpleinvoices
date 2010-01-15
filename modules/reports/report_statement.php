@@ -32,43 +32,40 @@ return date("Y-m-d", strtotime('-1 second',strtotime('+1 month',strtotime('01-'.
 isset($_POST['start_date']) ? $start_date = $_POST['start_date'] : $start_date = firstOfMonth() ;
 isset($_POST['end_date']) ? $end_date = $_POST['end_date'] : $end_date = lastOfMonth() ;
 
-
-$sql="select 
-        e.amount as expense, 
-        e.status as status, 
-        ea.name as account,
-        (select sum(tax_amount) from si_expense_item_tax where expense_id = e.id) as tax,
-        (select tax + e.amount) as total,
-        (CASE WHEN status = 1 THEN '".$LANG['paid']."'
-              WHEN status = 0 THEN '".$LANG['not_paid']."'
-         END) AS status_wording
-    from 
-        si_expense e, 
-        si_expense_account ea 
-    where 
-        e.expense_account_id = ea.id 
-        and 
-        e.date between '$start_date' and '$end_date'";
-$sth = $db->query($sql);
-$accounts = $sth->fetchAll();
-
-$payment = new payment();
-$payment->start_date = $start_date;
-$payment->end_date = $end_date;
-$payment->filter = "date";
-$payments = $payment->select_all();
+isset($_POST['biller_id']) ? $biller = $_POST['biller_id'] : $biller = "" ;
+isset($_POST['customer_id']) ? $customer = $_POST['customer_id'] : $customer = "" ;
 
 
 $invoice = new invoice();
 $invoice->start_date = $start_date;
 $invoice->end_date = $end_date;
+$invoice->biller = $biller;
+$invoice->customer = $customer;
 $invoice->having = "date_between";
+
+if ( isset($_POST['only_unpaid_invoices']) )
+{
+	$invoice->having_and = "money_owed";
+	$only_unpaid_invoices = "yes";
+}
+
 $invoice->sort = "preference";
 $invoice_all = $invoice->select_all();
 
 $invoices = $invoice_all->fetchAll();
-$smarty -> assign('accounts', $accounts);
-$smarty -> assign('payments', $payments);
+
+
+$billers = getActiveBillers();
+$customers = getActiveCustomers();
+
+$smarty -> assign('biller', $biller);
+$smarty -> assign('customer', $customer);
+
+$smarty -> assign('only_unpaid_invoices', $only_unpaid_invoices);
+
+$smarty -> assign('billers', $billers);
+$smarty -> assign('customers', $customers);
+
 $smarty -> assign('invoices', $invoices);
 $smarty -> assign('start_date', $start_date);
 $smarty -> assign('end_date', $end_date);
