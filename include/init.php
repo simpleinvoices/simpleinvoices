@@ -187,6 +187,7 @@ $early_exit[] = "export_invoice";
 $early_exit[] = "export_statement";
 $early_exit[] = "invoice_template";
 $early_exit[] = "payments_print";
+#$early_exit[] = "reports_report_statement";
 $early_exit[] = "documentation_view";
 //$early_exit[] = "install_index";
 

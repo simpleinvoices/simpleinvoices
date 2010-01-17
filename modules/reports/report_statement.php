@@ -19,12 +19,15 @@
 
 checkLogin();
 
+#$menu =false;
+
 function firstOfMonth() {
-return date("Y-m-d", strtotime('01-'.date('m').'-'.date('Y').' 00:00:00'));
+	return date("Y-m-d", strtotime('01-01-'.date('Y').' 00:00:00'));
 }
 
 function lastOfMonth() {
-return date("Y-m-d", strtotime('-1 second',strtotime('+1 month',strtotime('01-'.date('m').'-'.date('Y').' 00:00:00'))));
+	return date("Y-m-d", strtotime('31-12-'.date('Y').' 00:00:00'));
+
 }
 
 
@@ -32,36 +35,42 @@ return date("Y-m-d", strtotime('-1 second',strtotime('+1 month',strtotime('01-'.
 isset($_POST['start_date']) ? $start_date = $_POST['start_date'] : $start_date = firstOfMonth() ;
 isset($_POST['end_date']) ? $end_date = $_POST['end_date'] : $end_date = lastOfMonth() ;
 
-isset($_POST['biller_id']) ? $biller = $_POST['biller_id'] : $biller = "" ;
-isset($_POST['customer_id']) ? $customer = $_POST['customer_id'] : $customer = "" ;
+isset($_POST['biller_id']) ? $biller_id = $_POST['biller_id'] : $biller_id = "" ;
+isset($_POST['customer_id']) ? $customer_id = $_POST['customer_id'] : $customer_id = "" ;
 
 
-$invoice = new invoice();
-$invoice->start_date = $start_date;
-$invoice->end_date = $end_date;
-$invoice->biller = $biller;
-$invoice->customer = $customer;
-$invoice->having = "date_between";
-
-if ( isset($_POST['only_unpaid_invoices']) )
+if (isset($_POST['submit']))
 {
-	$invoice->having_and = "money_owed";
-	$only_unpaid_invoices = "yes";
+	$invoice = new invoice();
+	$invoice->start_date = $start_date;
+	$invoice->end_date = $end_date;
+	$invoice->biller = $biller_id;
+	$invoice->customer = $customer_id;
+	$invoice->having = "date_between";
+
+	if ( isset($_POST['show_only_unpaid']) )
+	{
+		$invoice->having_and = "money_owed";
+		$show_only_unpaid = "yes";
+	}
+
+	$invoice->sort = "preference";
+	$invoice_all = $invoice->select_all();
+
+	$invoices = $invoice_all->fetchAll();
 }
-
-$invoice->sort = "preference";
-$invoice_all = $invoice->select_all();
-
-$invoices = $invoice_all->fetchAll();
-
 
 $billers = getActiveBillers();
 $customers = getActiveCustomers();
 
-$smarty -> assign('biller', $biller);
-$smarty -> assign('customer', $customer);
+$biller_details = getBiller($biller_id);
+$customer_details = getCustomer($customer_id);
+$smarty -> assign('biller_id', $biller_id);
+$smarty -> assign('biller_details', $biller_details);
+$smarty -> assign('customer_id', $customer_id);
+$smarty -> assign('customer_details', $customer_details);
 
-$smarty -> assign('only_unpaid_invoices', $only_unpaid_invoices);
+$smarty -> assign('show_only_unpaid', $show_only_unpaid);
 
 $smarty -> assign('billers', $billers);
 $smarty -> assign('customers', $customers);
@@ -72,4 +81,5 @@ $smarty -> assign('end_date', $end_date);
 
 $smarty -> assign('pageActive', 'report');
 $smarty -> assign('active_tab', '#home');
+$smarty -> assign('menu', $menu);
 ?>

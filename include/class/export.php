@@ -7,6 +7,10 @@ class export
 	public $file_location;
 	public $module;
 	public $id;
+	public $start_date;
+	public $end_date;
+	public $biller_id;
+	public $customer_id;
 
 	function showData($data)
 	{
@@ -54,11 +58,59 @@ class export
 		
 		switch ($this->module)
 		{
+			case "statement":
+			{
+				$invoice = new invoice();
+				$invoice->biller = $this->biller_id;
+				$invoice->customer = $this->customer_id;
+				if ( isset($this->start_date) )
+				{
+					$invoice->start_date = $this->start_date;
+				}
+				if ( isset($this->end_date) )
+				{
+					$invoice->end_date = $this->end_date;
+				}
+
+				if ( isset($this->start_date) AND isset($this->end_date) )
+				{
+					$invoice->having = "date_between";
+				}
+
+				if ( $this->show_only_unpaid == "yes") 
+				{
+					$invoice->having_and = "money_owed";
+				}
+
+				$invoice_all = $invoice->select_all();
+
+				$invoices = $invoice_all->fetchAll();
+
+				$templatePath = "./templates/default/reports/report_statement.tpl";
+			
+				$biller_details = getBiller($this->biller_id);
+				$customer_details = getCustomer($this->customer_id);
+				$smarty -> assign('biller_id', $biller_id);
+				$smarty -> assign('biller_details', $biller_details);
+				$smarty -> assign('customer_id', $customer_id);
+				$smarty -> assign('customer_details', $customer_details);
+
+				$smarty -> assign('only_unpaid_invoices', $only_unpaid_invoices);
+
+				$smarty -> assign('invoices', $invoices);
+				$smarty -> assign('start_date', $this->start_date);
+				$smarty -> assign('end_date', $this->end_date);
+
+				$smarty -> assign('invoices',$invoices);
+				$data = $smarty -> fetch(".".$templatePath);
+
+				break;
+			}
 			case "invoice":
 			{
 			
 				$invoice = getInvoice($this->id);
-                $invoice_number_of_taxes = numberOfTaxesForInvoice($this->id);
+ 			        $invoice_number_of_taxes = numberOfTaxesForInvoice($this->id);
 				$customer = getCustomer($invoice['customer_id']);
 				$biller = getBiller($invoice['biller_id']);
 				$preference = getPreference($invoice['preference_id']);
