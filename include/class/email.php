@@ -7,6 +7,7 @@ class email
 	public $notes;
 
 	public $file_location;
+	public $attachment;
 	public $module;
 	public $id;
 	public $start_date;
@@ -64,8 +65,8 @@ class email
 
 		// Create attachment
 		#$spc2us_pref = str_replace(" ", "_", $preference[pref_inv_wording]);
-		#$content = file_get_contents('./tmp/cache/' . $spc2us_pref . $invoice['id'] . '.pdf');
-		$at = $mail->createAttachment($this->attachment);
+		$content = file_get_contents('./tmp/cache/'.$this->attachment);
+		$at = $mail->createAttachment($content);
 		$at->type = 'application/pdf';
 		$at->disposition = Zend_Mime::DISPOSITION_ATTACHMENT;
 		$at->filename = $this->attachment;

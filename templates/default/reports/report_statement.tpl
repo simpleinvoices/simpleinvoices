@@ -87,16 +87,16 @@
 <br />
 	{if $smarty.post.submit != null}
 	<span class="welcome">
-			<a title="{$LANG.print_preview_tooltip} {$preference.pref_inv_wording} {$invoice.id}" href="index.php?module=export&amp;view=statement&amp;biller_id={$biller_id}&amp;customer_id={$customer_id}&amp;start_date={$start_date}&amp;end_date={$end_date}&amp;show_only_unpaid={$show_only_unpaid}&amp;format=print"><img src='images/common/printer.png' class='action' />&nbsp;{$LANG.print_preview}</a>
+			<a title="{$LANG.print_preview_tooltip} {$preference.pref_inv_wording} {$invoice.id}" href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id}&amp;customer_id={$customer_id}&amp;start_date={$start_date}&amp;end_date={$end_date}&amp;show_only_unpaid={$show_only_unpaid}&amp;format=print"><img src='images/common/printer.png' class='action' />&nbsp;{$LANG.print_preview}</a>
 			 &nbsp;&nbsp; 
 			 <!-- EXPORT TO PDF -->
-			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording} {$invoice.id} {$LANG.export_pdf_tooltip}" href="index.php?module=export&amp;view=statement&amp;biller_id={$biller_id}&amp;customer_id={$customer_id}&amp;start_date={$start_date}&amp;end_date={$end_date}&amp;show_only_unpaid={$show_only_unpaid}&amp;format=pdf"><img src='images/common/page_white_acrobat.png' class='action' />&nbsp;{$LANG.export_pdf}</a>
+			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording} {$invoice.id} {$LANG.export_pdf_tooltip}" href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id}&amp;customer_id={$customer_id}&amp;start_date={$start_date}&amp;end_date={$end_date}&amp;show_only_unpaid={$show_only_unpaid}&amp;format=pdf"><img src='images/common/page_white_acrobat.png' class='action' />&nbsp;{$LANG.export_pdf}</a>
 			 &nbsp;&nbsp; 
-			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording} {$invoice.id} {$LANG.export_xls_tooltip} .{$config->export->spreadsheet} {$LANG.format_tooltip}" href="index.php?module=export&amp;view=statement&amp;biller_id={$biller_id}&amp;customer_id={$customer_id}&amp;start_date={$start_date}&amp;end_date={$end_date}&amp;show_only_unpaid={$show_only_unpaid}&amp;format=file&amp;filetype={$config->export->spreadsheet}"><img src='images/common/page_white_excel.png' class='action' />&nbsp;{$LANG.export_as} .{$config->export->spreadsheet}</a>
+			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording} {$invoice.id} {$LANG.export_xls_tooltip} .{$config->export->spreadsheet} {$LANG.format_tooltip}" href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id}&amp;customer_id={$customer_id}&amp;start_date={$start_date}&amp;end_date={$end_date}&amp;show_only_unpaid={$show_only_unpaid}&amp;format=file&amp;filetype={$config->export->spreadsheet}"><img src='images/common/page_white_excel.png' class='action' />&nbsp;{$LANG.export_as} .{$config->export->spreadsheet}</a>
 			 &nbsp;&nbsp; 
-			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording} {$invoice.id} {$LANG.export_doc_tooltip} .{$config->export->wordprocessor} {$LANG.format_tooltip}" href="index.php?module=export&amp;view=statement&amp;biller_id={$biller_id}&amp;customer_id={$customer_id}&amp;start_date={$start_date}&amp;end_date={$end_date}&amp;show_only_unpaid={$show_only_unpaid}&amp;format=file&amp;filetype={$config->export->wordprocessor}"><img src='images/common/page_white_word.png' class='action' />&nbsp;{$LANG.export_as} .{$config->export->wordprocessor} </a>
+			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording} {$invoice.id} {$LANG.export_doc_tooltip} .{$config->export->wordprocessor} {$LANG.format_tooltip}" href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id}&amp;customer_id={$customer_id}&amp;start_date={$start_date}&amp;end_date={$end_date}&amp;show_only_unpaid={$show_only_unpaid}&amp;format=file&amp;filetype={$config->export->wordprocessor}"><img src='images/common/page_white_word.png' class='action' />&nbsp;{$LANG.export_as} .{$config->export->wordprocessor} </a>
 			 &nbsp;&nbsp; 
-			<a title="{$LANG.email} {$preference.pref_inv_wording} {$invoice.id}" href="index.php?module=invoices&amp;view=email&amp;stage=1&amp;id={$invoice.id}"><img src='images/common/mail-message-new.png' class='action' />&nbsp;{$LANG.email}</a>
+			<a title="{$LANG.email} {$preference.pref_inv_wording} {$invoice.id}" href="index.php?module=statement&amp;view=email&amp;stage=1&amp;biller_id={$biller_id}&amp;customer_id={$customer_id}&amp;start_date={$start_date}&amp;end_date={$end_date}&amp;show_only_unpaid={$show_only_unpaid}&amp;format=file"><img src='images/common/mail-message-new.png' class='action' />&nbsp;{$LANG.email}</a>
 	</span>
 	<br />
 	<br />
@@ -104,7 +104,7 @@
 	{/if}
 
 {/if}
-{if $smarty.post.submit != null OR $module == export}
+{if $smarty.post.submit != null OR $view == export}
 
 {if $menu == false}
 <hr />

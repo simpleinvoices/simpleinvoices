@@ -45,6 +45,7 @@ foreach($config->extension as $extension)
 
 $smarty -> assign("config",$config); // to toggle the login / logout button visibility in the menu
 $smarty -> assign("module",$module);
+$smarty -> assign("view",$view);
 $smarty -> assign("siUrl",$siUrl);//used for template css
 
 $smarty -> assign("LANG",$LANG);
@@ -317,7 +318,7 @@ if( !in_array($module."_".$view, $early_exit) )
 /*
 * Include the php file for the requested page section - end
 */
-if($module == "export")
+if($module == "export" OR $view == "export")
 {
 	exit(0);
 

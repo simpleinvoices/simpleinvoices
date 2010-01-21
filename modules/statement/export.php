@@ -10,7 +10,7 @@
 * 	http://www.simpleinvoices.org
  */
 #define("BROWSE","browse");
-
+#$menu=false;
 $biller_id = $_GET['biller_id'];
 $customer_id = $_GET['customer_id'];
 $start_date = $_GET['start_date'];

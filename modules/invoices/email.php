@@ -28,8 +28,7 @@ $invoiceType = $sth->fetch();
 
 #create PDF name
 $spc2us_pref = str_replace(" ", "_", $preference[pref_inv_wording]);
-$pdf_file_name = $spc2us_pref . $invoice['id'] . '.pdf'
-$attachment = file_get_contents('./tmp/cache/' . $pdf_file_name);
+$pdf_file_name = $spc2us_pref . $invoice['id'] . '.pdf';
       
 if ($_GET['stage'] == 2 ) {
 
@@ -43,6 +42,7 @@ if ($_GET['stage'] == 2 ) {
 	$export -> id = $invoice_id;
 	$export -> execute();
 
+	#$attachment = file_get_contents('./tmp/cache/' . $pdf_file_name);
 
 	$email = new email();
 	$email -> format = 'invoice';
@@ -52,7 +52,7 @@ if ($_GET['stage'] == 2 ) {
 	$email -> to = $_POST['email_to'];
 	$email -> bcc = $_POST['email_bcc'];
 	$email -> subject = $_POST['email_subject'];
-	$email -> attachment = $attachment;
+	$email -> attachment = $pdf_file_name;
 	$message = $email -> send ();
 
 }

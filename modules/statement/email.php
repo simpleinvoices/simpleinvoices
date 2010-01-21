@@ -21,8 +21,11 @@ $show_only_unpaid = $_GET['show_only_unpaid'];
 $get_format = $_GET['format'];
 $get_file_type = $_GET['filetype'];
 
+
+$biller = getBiller($_GET['biller_id']);
+$customer = getCustomer($_GET['customer_id']);
+
 #create PDF name
-$attachment = file_get_contents('./tmp/cache/statement_' . $biller_id .'_' . $customer_id . '.pdf');
       
 if ($_GET['stage'] == 2 ) {
 
@@ -31,9 +34,9 @@ if ($_GET['stage'] == 2 ) {
 
 	#get the invoice id
 	$export = new export();
-	$export -> format = $get_format;
+	$export -> format = 'pdf';
 	$export -> file_type = $get_file_type;
-	$export -> file_location = 'download';
+	$export -> file_location = 'file';
 	$export -> module = 'statement';
 	$export -> biller_id = $biller_id;
 	$export -> customer_id = $customer_id;
@@ -41,6 +44,9 @@ if ($_GET['stage'] == 2 ) {
 	$export -> end_date = $end_date;
 	$export -> show_only_unpaid = $show_only_unpaid;
 	$export -> execute();
+
+	#$attachment = file_get_contents('./tmp/cache/statement_'.$biller_id.'_'.$customer_id.'_'.$start_date.'_'.$end_date.'.pdf');
+	$attachment = 'statement_'.$biller_id.'_'.$customer_id.'_'.$start_date.'_'.$end_date.'.pdf';
 
 	$email = new email();
 	$email -> format = 'invoice';
