@@ -2411,7 +2411,7 @@ function getNumberOfDoneSQLPatches() {
 }
 
 
-function pdfThis($html,$file_location="")
+function pdfThis($html,$file_location="",$pdfname)
 {
 
 	global $config;
@@ -2423,15 +2423,15 @@ function pdfThis($html,$file_location="")
 	parse_config_file('./library/pdf/html2ps.config');
 
 	require_once("./include/init.php");	// for getInvoice() and getPreference()
-	$invoice_id = $_GET['id'];
-	$invoice = getInvoice($invoice_id);
+	#$invoice_id = $_GET['id'];
+	#$invoice = getInvoice($invoice_id);
 
-	$preference = getPreference($invoice['preference_id']);
-	$pdfname = trim($preference['pref_inv_wording']) . $invoice_id;
+	#$preference = getPreference($invoice['preference_id']);
+	#$pdfname = trim($preference['pref_inv_wording']) . $invoice_id;
 
 	#error_reporting(E_ALL);
 	#ini_set("display_errors","1");
-	@set_time_limit(10000);
+	#@set_time_limit(10000);
 
 	/**
 	 * Runs the HTML->PDF conversion with default settings

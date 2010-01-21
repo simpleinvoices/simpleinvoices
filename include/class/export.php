@@ -5,6 +5,7 @@ class export
 	public $format;
 	public $file_type;
 	public $file_location;
+	public $file_name;
 	public $module;
 	public $id;
 	public $start_date;
@@ -25,7 +26,7 @@ class export
 			
 			case "pdf":
 			{
-				pdfThis($data, $this->file_location);
+				pdfThis($data, $this->file_location, $this->file_name);
 				$this->file_location == "download" ? exit():"" ;	
 				break;
 			}		
@@ -90,6 +91,9 @@ class export
 			
 				$biller_details = getBiller($this->biller_id);
 				$customer_details = getCustomer($this->customer_id);
+
+				$this->file_name = "statement_".$this->biller_id."_".$this->customer_id."_".$invoice->start_date."_".$invoice->end_date;
+
 				$smarty -> assign('biller_id', $biller_id);
 				$smarty -> assign('biller_details', $biller_details);
 				$smarty -> assign('customer_id', $customer_id);
@@ -118,6 +122,9 @@ class export
 				$logo = getLogo($biller);
 				$logo = str_replace(" ", "%20", $logo);
 				$invoiceItems = invoice::getInvoiceItems($this->id);
+				
+				$spc2us_pref = str_replace(" ", "_", $preference[pref_inv_wording]);
+				$this->file_name = $spc2us_pref . $invoice['id'];
 				
 				$customFieldLabels = getCustomFieldLabels();
 	
