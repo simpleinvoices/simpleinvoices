@@ -40,7 +40,20 @@ class export
 				
 				header("Content-type: application/octet-stream");
 				//header("Content-type: application/x-msdownload");
-				header("Content-Disposition: attachment; filename=$preference[pref_inv_heading]$this->id.$this->file_type");
+				switch ($this->module)
+				{
+					case "statement":
+					{
+						header("Content-Disposition: attachment; filename=statement.$this->file_type");
+						break;
+					}
+					default:
+					{
+						header("Content-Disposition: attachment; filename=$preference[pref_inv_heading]$this->id.$this->file_type");
+						break;
+					}
+				}
+
 				header("Pragma: no-cache");
 				header("Expires: 0");
 				
