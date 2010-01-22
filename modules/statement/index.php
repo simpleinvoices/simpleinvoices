@@ -46,7 +46,11 @@ if (isset($_POST['submit']))
 	$invoice->end_date = $end_date;
 	$invoice->biller = $biller_id;
 	$invoice->customer = $customer_id;
-	$invoice->having = "date_between";
+
+	if ( isset($_POST['filter_by_date']) )
+	{
+		$invoice->having = "date_between";
+	}
 
 	if ( isset($_POST['show_only_unpaid']) )
 	{

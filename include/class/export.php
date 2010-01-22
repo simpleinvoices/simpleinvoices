@@ -64,18 +64,21 @@ class export
 				$invoice = new invoice();
 				$invoice->biller = $this->biller_id;
 				$invoice->customer = $this->customer_id;
-				if ( isset($this->start_date) )
+				if ( isset($this->filter_by_date) )
 				{
-					$invoice->start_date = $this->start_date;
-				}
-				if ( isset($this->end_date) )
-				{
-					$invoice->end_date = $this->end_date;
-				}
+					if ( isset($this->start_date) )
+					{
+						$invoice->start_date = $this->start_date;
+					}
+					if ( isset($this->end_date) )
+					{
+						$invoice->end_date = $this->end_date;
+					}
 
-				if ( isset($this->start_date) AND isset($this->end_date) )
-				{
-					$invoice->having = "date_between";
+					if ( isset($this->start_date) AND isset($this->end_date) )
+					{
+						$invoice->having = "date_between";
+					}
 				}
 
 				if ( $this->show_only_unpaid == "yes") 
