@@ -8,7 +8,7 @@
 {else}
 <div class="">
 {/if}
-<form name="frmpost" action="index.php?module=reports&amp;view=report_statement" method="post">
+<form name="frmpost" action="index.php?module=statement&amp;view=index" method="post">
 
        <table align="center">
 
@@ -118,12 +118,25 @@
 <hr />
 <br />
 {/if}
-<div class="align_left">
-<strong>{$LANG.biller}:</strong> {$biller_details.name} <br />
-<strong>{$LANG.customer}:</strong> {$customer_details.name} <br />
-<br />	
-</div>
-{if $start_date != null AND $end_date != null}
+<table width="100%">
+<tr>
+	<td width="75%" align="left">
+		<strong>{$LANG.biller}:</strong> {$biller_details.name} <br />
+		<strong>{$LANG.customer}:</strong> {$customer_details.name} <br />
+		<br />	
+		<br />	
+	</td>
+	<td width="25%">
+		<strong>Statement Summary:</strong><br />
+		<strong>{$LANG.total}:</strong> {$statement.total|siLocal_number} <br />
+		<strong>{$LANG.owing}:</strong> {$statement.owing|siLocal_number} <br />
+		<strong>{$LANG.paid}:</strong> {$statement.paid|siLocal_number} <br />
+	</td>
+</tr>
+</table>
+<br />
+<br />
+{if $filter_by_date == "yes"} 
 <div class="align_left"><strong>Statement for the period {$start_date} to {$end_date}</strong></div>
 <br />
 {/if}
@@ -170,11 +183,8 @@
         <td>
             &nbsp;
             &nbsp;
-            &nbsp;
-            &nbsp;
-            &nbsp;
         </td>
-        <td class="details_screen">
+        <td class="details_screen" align='right'>
             <b>Owing</b>
         </td>
 	</tr>
@@ -225,14 +235,57 @@
         <td>
             &nbsp;
             &nbsp;
-            &nbsp;
-            &nbsp;
-            &nbsp;
         </td>
-        <td  class="details_screen">
+        <td class="details_screen" align='right'>
             {$invoices[invoice].owing|siLocal_number}
         </td>
 	</tr>
  {/section}
+    <tr>
+        <td class="details_screen">
+        </td>
+        <td>
+            &nbsp;
+            &nbsp;
+        </td>
+        <td class="details_screen">
+        </td>
+        <td>
+            &nbsp;
+            &nbsp;
+        </td>
+        <td class="details_screen">
+        </td>
+        <td>
+            &nbsp;
+            &nbsp;
+        </td>
+        <td class="details_screen">
+        </td>
+        <td>
+            &nbsp;
+            &nbsp;
+        </td>
+        <td class="details_screen">
+	    -----<br />
+            {$statement.total|siLocal_number}
+        </td>
+        <td>
+            &nbsp;
+            &nbsp;
+        </td>
+        <td class="details_screen">
+	    -----<br />
+            {$statement.paid|siLocal_number}
+        </td>
+        <td>
+            &nbsp;
+            &nbsp;
+        </td>
+        <td class="details_screen" align='right'>
+	    -----<br />
+            {$statement.owing|siLocal_number}
+        </td>
+	</tr>
  </table>
 {/if}

@@ -15,10 +15,13 @@ checkLogin();
 
 $biller_id = $_GET['biller_id'];
 $customer_id = $_GET['customer_id'];
-$start_date = $_GET['start_date'];
-$end_date = $_GET['end_date'];
-$show_only_unpaid = $_GET['show_only_unpaid'];
 $filter_by_date = $_GET['filter_by_date'];
+if ( $filter_by_date =="yes" )
+{
+	$start_date = $_GET['start_date'];
+	$end_date = $_GET['end_date'];
+}
+$show_only_unpaid = $_GET['show_only_unpaid'];
 $get_format = $_GET['format'];
 $get_file_type = $_GET['filetype'];
 
@@ -51,7 +54,7 @@ if ($_GET['stage'] == 2 ) {
 	$attachment = 'statement_'.$biller_id.'_'.$customer_id.'_'.$start_date.'_'.$end_date.'.pdf';
 
 	$email = new email();
-	$email -> format = 'invoice';
+	$email -> format = 'statement';
 	$email -> notes = $_POST['email_notes'];
 	$email -> from = $_POST['email_from'];
 	$email -> from_friendly = $biller['name'];

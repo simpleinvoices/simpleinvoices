@@ -50,11 +50,18 @@ if (isset($_POST['submit']))
 	if ( isset($_POST['filter_by_date']) )
 	{
 		$invoice->having = "date_between";
+		$filter_by_date = "yes";
+		$having_count = 1;
 	}
 
 	if ( isset($_POST['show_only_unpaid']) )
 	{
-		$invoice->having_and = "money_owed";
+		if ($having_count == 1) 
+		{
+			$invoice->having_and = "money_owed";
+		} else {
+			$invoice->having = "money_owed";
+		}
 		$show_only_unpaid = "yes";
 	}
 
@@ -62,6 +69,13 @@ if (isset($_POST['submit']))
 	$invoice_all = $invoice->select_all();
 
 	$invoices = $invoice_all->fetchAll();
+
+	foreach ($invoices as $i => $row) {
+		$statement['total'] = $statement['total'] + $row['invoice_total'];
+		$statement['owing'] = $statement['owing'] + $row['owing'] ;
+		$statement['paid'] = $statement['paid'] + $row['INV_PAID'];
+		
+	}
 }
 
 $billers = getActiveBillers();
@@ -75,11 +89,13 @@ $smarty -> assign('customer_id', $customer_id);
 $smarty -> assign('customer_details', $customer_details);
 
 $smarty -> assign('show_only_unpaid', $show_only_unpaid);
+$smarty -> assign('filter_by_date', $filter_by_date);
 
 $smarty -> assign('billers', $billers);
 $smarty -> assign('customers', $customers);
 
 $smarty -> assign('invoices', $invoices);
+$smarty -> assign('statement', $statement);
 $smarty -> assign('start_date', $start_date);
 $smarty -> assign('end_date', $end_date);
 

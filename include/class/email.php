@@ -19,15 +19,6 @@ class email
 	{
 		global $config;
 		//echo "export show data";
-		switch ($this->format)
-		{
-			case "print":
-			{
-				echo($data);
-				break;
-			}	
-		}	
-
 		
 		// Create authentication with SMTP server
 		$authentication = array();
@@ -80,11 +71,31 @@ class email
 		}
 
 		// Remove temp invoice
-		unlink("./tmp/cache/$this->attachment");
+	//	unlink("./tmp/cache/$this->attachment");
 
-		// Create succes message
-		$message  = "<meta http-equiv=\"refresh\" content=\"2;URL=index.php?module=invoices&amp;view=manage\">";
-		$message .= "<br />$this->attachement has been emailed";
+		switch ($this->format)
+		{
+			case "invoice":
+			{
+
+				// Create succes message
+				$message  = "<meta http-equiv=\"refresh\" content=\"2;URL=index.php?module=invoices&amp;view=manage\">";
+				$message .= "<br />$this->attachment has been emailed";
+
+				break;
+			}	
+			case "statement":
+			{
+
+				// Create succes message
+				$message  = "<meta http-equiv=\"refresh\" content=\"2;URL=index.php?module=statement&amp;view=index\">";
+				$message .= "<br />$this->attachment has been emailed";
+
+				break;
+			}	
+		}	
+
+
 
 		return $message;
 	}

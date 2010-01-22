@@ -64,7 +64,8 @@ class export
 				$invoice = new invoice();
 				$invoice->biller = $this->biller_id;
 				$invoice->customer = $this->customer_id;
-				if ( isset($this->filter_by_date) )
+
+				if ( $this->filter_by_date =="yes" )
 				{
 					if ( isset($this->start_date) )
 					{
@@ -79,18 +80,32 @@ class export
 					{
 						$invoice->having = "date_between";
 					}
+					$having_count = 1;
 				}
 
 				if ( $this->show_only_unpaid == "yes") 
 				{
-					$invoice->having_and = "money_owed";
+					if ($having_count == 1) 
+					{
+						$invoice->having_and = "money_owed";
+					} else {
+						$invoice->having = "money_owed";
+	
+					}
 				}
 
-				$invoice_all = $invoice->select_all();
+				$invoice_all = $invoice->select_all('count');
 
 				$invoices = $invoice_all->fetchAll();
 
-				$templatePath = "./templates/default/reports/report_statement.tpl";
+				foreach ($invoices as $i => $row) {
+					$statement['total'] = $statement['total'] + $row['invoice_total'];
+					$statement['owing'] = $statement['owing'] + $row['owing'] ;
+					$statement['paid'] = $statement['paid'] + $row['INV_PAID'];
+					
+				}
+
+				$templatePath = "./templates/default/statement/index.tpl";
 			
 				$biller_details = getBiller($this->biller_id);
 				$customer_details = getCustomer($this->customer_id);
@@ -102,13 +117,15 @@ class export
 				$smarty -> assign('customer_id', $customer_id);
 				$smarty -> assign('customer_details', $customer_details);
 
-				$smarty -> assign('only_unpaid_invoices', $only_unpaid_invoices);
+				$smarty -> assign('show_only_unpaid', $show_only_unpaid);
+				$smarty -> assign('filter_by_date', $this->filter_by_date);
 
 				$smarty -> assign('invoices', $invoices);
 				$smarty -> assign('start_date', $this->start_date);
 				$smarty -> assign('end_date', $this->end_date);
 
 				$smarty -> assign('invoices',$invoices);
+				$smarty -> assign('statement',$statement);
 				$data = $smarty -> fetch(".".$templatePath);
 
 				break;
