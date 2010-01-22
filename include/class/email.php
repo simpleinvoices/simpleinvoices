@@ -71,7 +71,7 @@ class email
 		}
 
 		// Remove temp invoice
-	//	unlink("./tmp/cache/$this->attachment");
+		unlink("./tmp/cache/$this->attachment");
 
 		switch ($this->format)
 		{
