@@ -65,7 +65,7 @@ if (isset($_POST['submit']))
 		$show_only_unpaid = "yes";
 	}
 
-	$invoice->sort = "preference";
+	$invoice->sort = "date";
 	$invoice_all = $invoice->select_all();
 
 	$invoices = $invoice_all->fetchAll();

@@ -202,7 +202,8 @@
             &nbsp;
         </td>
         <td class="details_screen">
-            {$invoices[invoice].date|siLocal_date}
+            {* TODO - JK edit this back in {$invoices[invoice].date|siLocal_date} *}
+            {$invoices[invoice].date|date_format:"%e %h %Y"}
         </td>
         <td>
             &nbsp;
