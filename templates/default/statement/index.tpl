@@ -202,7 +202,7 @@
             &nbsp;
         </td>
         <td class="details_screen">
-            {$invoices[invoice].date}
+            {$invoices[invoice].date|siLocal_date}
         </td>
         <td>
             &nbsp;
