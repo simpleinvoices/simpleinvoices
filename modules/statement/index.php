@@ -46,21 +46,22 @@ if (isset($_POST['submit']))
 	$invoice->end_date = $end_date;
 	$invoice->biller = $biller_id;
 	$invoice->customer = $customer_id;
+	$invoice->having = "open";
 
 	if ( isset($_POST['filter_by_date']) )
 	{
-		$invoice->having = "date_between";
+		$invoice->having_and = "date_between";
 		$filter_by_date = "yes";
-		$having_count = 1;
+		$having_and_count = 1;
 	}
 
 	if ( isset($_POST['show_only_unpaid']) )
 	{
-		if ($having_count == 1) 
+		if ($having_and_count == 1) 
 		{
 			$invoice->having_and = "money_owed";
 		} else {
-			$invoice->having = "money_owed";
+			$invoice->having_and2 = "money_owed";
 		}
 		$show_only_unpaid = "yes";
 	}

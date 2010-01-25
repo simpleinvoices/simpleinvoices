@@ -5,6 +5,7 @@ class invoice {
     public $end_date;
     public $having;
     public $having_and;
+    public $having_and2;
     public $biller;
     public $customer;
     public $sort;
@@ -130,6 +131,25 @@ class invoice {
         }
 
         switch ($having_and) 
+        {   
+            case "date_between":
+                $sql_having .= "AND ( date between '$this->start_date' and '$this->end_date' )";
+                break;
+            case "money_owed":
+                $sql_having .= "AND ( owing > 0 ) ";
+                break;
+            case "paid":
+                $sql_having .= "AND ( owing ='' )";
+                break;
+            case "draft":
+                $sql_having .= "AND ( status = 0 )";
+                break;
+            case "open":
+                $sql_having .= "AND ( status = 1 )";
+                break;
+        }
+
+        switch ($having_and2) 
         {   
             case "date_between":
                 $sql_having .= "AND ( date between '$this->start_date' and '$this->end_date' )";
