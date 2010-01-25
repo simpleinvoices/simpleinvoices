@@ -46,27 +46,29 @@
                 </tr>
 	<tr>
 	<td class="details_screen">
-		Fitler by dates
+		{$LANG.filter_by_dates}
 	</td>
 	<td class="">
 		<input type="checkbox" name="filter_by_date"  {if $filter_by_date == "yes"} checked {/if} value="yes">
 	</td>
 	</tr>
     <tr>
-        <td wrap="nowrap" class="details_screen">Start date (YYYY-MM-DD)
+        <td wrap="nowrap" class="details_screen">
+		{$LANG.start_date}
 	</td><td>
                 <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date1" value='{$start_date}' />   
          </td>
 	</tr>
 	<tr>
-        <td wrap="nowrap" class="details_screen"  >End date (YYYY-MM-DD)
+        <td wrap="nowrap" class="details_screen"  >
+		{$LANG.end_date}
 	</td><td>
                 <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="end_date" id="date1" value='{$end_date}' />   
             </td>
     </tr>
 	<tr>
 	<td class="details_screen">
-		Show only unpaid invoices
+		{$LANG.show_only_unpaid_invoices}
 	</td>
 	<td class="">
 		<input type="checkbox" name="show_only_unpaid"  {if $show_only_unpaid == "yes"} checked {/if} value="yes">
@@ -80,7 +82,7 @@
         <td>
             <button type="submit" class="positive" name="submit" value="statement_report">
                 <img class="button_img" src="./images/common/tick.png" alt="" /> 
-                Run report
+                {$LANG.run_report}
             </button>
 
         </td>
@@ -127,7 +129,7 @@
 		<br />	
 	</td>
 	<td width="25%">
-		<strong>Statement Summary:</strong><br />
+		<strong>{$LANG.statement_summary}:</strong><br />
 		<strong>{$LANG.total}:</strong> {$statement.total|siLocal_number} <br />
 		<strong>{$LANG.owing}:</strong> {$statement.owing|siLocal_number} <br />
 		<strong>{$LANG.paid}:</strong> {$statement.paid|siLocal_number} <br />
@@ -137,34 +139,34 @@
 <br />
 <br />
 {if $filter_by_date == "yes"} 
-<div class="align_left"><strong>Statement for the period {$start_date} to {$end_date}</strong></div>
+<div class="align_left"><strong>{$LANG.statement_for_the_period} {$start_date} {$LANG.to_lowercase} {$end_date}</strong></div>
 <br />
 {/if}
 
 <table align="center" width="100%">
     <tr>
         <td  class="details_screen">
-            <b>ID</b>
+            <b>{$LANG.id}</b>
         </td>
         <td>
             &nbsp;
             &nbsp;
         <td  class="details_screen">
-            <b>Date</b>
-        </td>
-        <td>
-            &nbsp;
-            &nbsp;
-        </td>
-        <td  class="details_screen">
-            <b>Biller</b>
+            <b>{$LANG.date}</b>
         </td>
         <td>
             &nbsp;
             &nbsp;
         </td>
         <td  class="details_screen">
-            <b>Customer</b>
+            <b>{$LANG.biller}</b>
+        </td>
+        <td>
+            &nbsp;
+            &nbsp;
+        </td>
+        <td  class="details_screen">
+            <b>{$LANG.customer}</b>
         </td>
         <td>
             &nbsp;
@@ -185,7 +187,7 @@
             &nbsp;
         </td>
         <td class="details_screen" align='right'>
-            <b>Owing</b>
+            <b>{$LANG.owing}</b>
         </td>
 	</tr>
  {section name=invoice loop=$invoices}

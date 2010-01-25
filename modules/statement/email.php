@@ -77,6 +77,6 @@ $smarty -> assign('customer',$customer);
 $smarty -> assign('invoice',$invoice);
 $smarty -> assign('preferences',$preference);
 
-$smarty -> assign('pageActive', 'invoice');
-$smarty -> assign('active_tab', '#money');
+$smarty -> assign('pageActive', 'report');
+$smarty -> assign('active_tab', '#home');
 ?>

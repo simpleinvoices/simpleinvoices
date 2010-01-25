@@ -22,6 +22,18 @@
 <tr>
 <td>
 
+<h2>{$LANG.statements}<a name="statement" href=""></a></h2>
+<table class="buttons" >
+    <tr>
+        <td>
+            <a href="index.php?module=statement&view=index" class="">
+                <img src="./images/famfam/money.png" alt="" />
+                {$LANG.statement_of_invoices}
+            </a>
+        </td>
+    </tr>
+</table>
+<br />
 <h2>{$LANG.sales}<a name="sales" href=""></a></h2>
 <table class="buttons" >
     <tr>
