@@ -1331,9 +1331,28 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     $patch['221']['patch'] = "ALTER TABLE  `".TB_PREFIX."user` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
     $patch['221']['date'] = "20090912";    
 
-    $patch['217']['name'] = "si_preferences - add composite primary key";
-    $patch['217']['patch'] = "ALTER TABLE  `".TB_PREFIX."preferences` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `pref_id`)";
-    $patch['217']['date'] = "20090912";    
+    $patch['222']['name'] = "si_biller - add composite primary key";
+    $patch['222']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
+    $patch['222']['date'] = "20100209";    
+
+    $patch['223']['name'] = "si_customers - add composite primary key";
+    $patch['223']['patch'] = "ALTER TABLE  `".TB_PREFIX."customer` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
+    $patch['223']['date'] = "20100209";    
+
+    $patch['224']['name'] = "Add paypal business name";
+    $patch['224']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` ADD `paypal_business_name` VARCHAR( 255 ) NOT NULL AFTER  `footer`";
+    $patch['224']['date'] = "20100209";    
+
+    $patch['225']['name'] = "Add paypal notify url";
+    $patch['225']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` ADD `paypal_notify_url` VARCHAR( 255 ) NOT NULL AFTER  `paypal_business_name`";
+    $patch['225']['date'] = "20100209";    
+
+    $patch['226']['name'] = "Define currency in preferences";
+    $patch['226']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `currency` VARCHAR( 25 ) NULL ;";
+    $patch['226']['date'] = "20090826";    
+
+//ALTER TABLE  `si_biller` ADD  `paypal_business_name` VARCHAR( 255 ) NOT NULL AFTER  `footer`
+//ALTER TABLE  `si_biller` ADD  `paypal_notify_url` VARCHAR( 255 ) NOT NULL AFTER  `paypal_business_name`
  /*
 */
 /*

@@ -1135,7 +1135,7 @@ function insertBiller() {
 			)
 		VALUES
 			(
-				:domaain_id, :name, :street_address, :street_address2, :city,
+				:domain_id, :name, :street_address, :street_address2, :city,
 				:state, :zip_code, :country, :phone,
 				:mobile_phone, :fax, :email, :logo, :footer,
 				:notes, :custom_field1, :custom_field2,
@@ -1144,6 +1144,15 @@ function insertBiller() {
 	} else {
 		$sql = "INSERT into
 			".TB_PREFIX."biller
+			(
+				id, domain_id, name, street_address, street_address2, city,
+				state, zip_code, country, phone, mobile_phone,
+				fax, email, logo, footer, paypal_business_name, 
+				paypal_notify_url, notes, custom_field1,
+				custom_field2, custom_field3, custom_field4,
+				enabled
+
+			)
 		VALUES
 			(
 				NULL,
@@ -1161,6 +1170,8 @@ function insertBiller() {
 				:email,
 				:logo,
 				:footer,
+				:paypal_business_name,
+				:paypal_notify_url,
 				:notes,
 				:custom_field1,
 				:custom_field2,
@@ -1185,6 +1196,8 @@ function insertBiller() {
 		':email', $_POST[email],
 		':logo', $_POST[logo],
 		':footer', $_POST[footer],
+		':paypal_business_name', $_POST[paypal_business_name],
+		':paypal_notify_url', $_POST[paypal_notify_url],
 		':notes', $_POST[notes],
 		':custom_field1', $_POST[custom_field1],
 		':custom_field2', $_POST[custom_field2],
@@ -1222,6 +1235,8 @@ function updateBiller() {
 				email = :email,
 				logo = :logo,
 				footer = :footer,
+				paypal_business_name = :paypal_business_name,
+				paypal_notify_url = :paypal_notify_url,
 				notes = :notes,
 				custom_field1 = :custom_field1,
 				custom_field2 = :custom_field2,
@@ -1244,6 +1259,8 @@ function updateBiller() {
 		':email', $_POST[email],
 		':logo', $_POST[logo],
 		':footer', $_POST[footer],
+		':paypal_business_name', $_POST[paypal_business_name],
+		':paypal_notify_url', $_POST[paypal_notify_url],
 		':notes', $_POST[notes],
 		':custom_field1', $_POST[custom_field1],
 		':custom_field2', $_POST[custom_field2],
