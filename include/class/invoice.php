@@ -10,6 +10,74 @@ class invoice {
     public $customer;
     public $sort;
 
+	public function insert()
+	{
+		//insert in si)invoice
+
+		global $dbh;
+		global $db_server;
+		global $auth_session;
+		
+		$sql = "INSERT 
+				INTO
+			".TB_PREFIX."invoices (
+				id, 
+		 		index_id,
+				domain_id,
+				biller_id, 
+				customer_id, 
+				type_id,
+				preference_id, 
+				date, 
+				note,
+				custom_field1,
+				custom_field2,
+				custom_field3,
+				custom_field4
+			)
+			VALUES
+			(
+				NULL,
+				:index_id,
+				:domain_id,
+				:biller_id,
+				:customer_id,
+				:type_id,
+				:preference_id,
+				:date,
+				:note,
+				:custom_field1,
+				:custom_field2,
+				:custom_field3,
+				:custom_field4
+				)";
+
+		$pref_group=getPreference($this->preference_id);
+
+		$sth= dbQuery($sql,
+			':index_id', index::next('invoice',$pref_group[index_group],$this->biller_id),
+			':domain_id', $auth_session->domain_id,
+			':biller_id', $this->biller_id,
+			':customer_id', $this->customer_id,
+			':type_id', $this->type_id,
+			':preference_id', $this->preference_id,
+			':date', $this->date,
+			':note', $this->note,
+			':custom_field1', $this->custom_field,
+			':custom_field2', $this->custom_field2,
+			':custom_field3', $this->custom_field3,
+			':custom_field4', $this->custom_field4
+			);
+
+	    index::increment('invoice',$pref_group[index_group],$this->biller_id);
+
+	    return $sth;
+		//insert into si_invoice_items
+
+		//insert into 
+
+	}
+	
     public static function select($id)
     {
 		global $logger;
@@ -17,7 +85,8 @@ class invoice {
 	    global $auth_session;
 
 		$sql = "SELECT 
-                    i.*, 
+                    i.*,
+		    i.date as date_original, 
                     (SELECT CONCAT(p.pref_inv_wording,' ',i.index_id)) as index_name,
                     p.status
                 FROM 
@@ -31,8 +100,16 @@ class invoice {
                     i.id = :id";
 		$sth = $db->query($sql, ':id', $id, ':domain_id', $auth_session->domain_id);
 
-        return $sth->fetch();
+        $invoice = $sth->fetch();
 
+	$invoice['calc_date'] = date('Y-m-d', strtotime( $invoice['date'] ) );
+	$invoice['date'] = siLocal::date( $invoice['date'] );
+	$invoice['total'] = getInvoiceTotal($invoice['id']);
+	$invoice['gross'] = invoice::getInvoiceGross($invoice['id']);
+	$invoice['paid'] = calc_invoice_paid($invoice['id']);
+	$invoice['owing'] = $invoice['total'] - $invoice['paid'];
+
+	return $invoice;
     }
 
     public static function get_all()

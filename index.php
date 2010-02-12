@@ -174,7 +174,7 @@ if (($module == "invoices" ) && (strstr($view,"template"))) {
 * xml or ajax page requeset - start
 */
 
-	if( (strstr($view,"xml") OR (strstr($view,"ajax")) ) )
+	if( strstr($module,"api") OR (strstr($view,"xml") OR (strstr($view,"ajax")) ) )
 	{	
 		$extensionXml = 0;
 		foreach($config->extension as $extension)
@@ -318,7 +318,7 @@ if( !in_array($module."_".$view, $early_exit) )
 /*
 * Include the php file for the requested page section - end
 */
-if($module == "export" OR $view == "export")
+if($module == "export" OR $view == "export" OR $module == "api")
 {
 	exit(0);
 
