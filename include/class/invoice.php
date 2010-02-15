@@ -71,13 +71,58 @@ class invoice {
 
 	    index::increment('invoice',$pref_group[index_group],$this->biller_id);
 
-	    return $sth;
+	    //return $sth;
+	    return lastInsertID();
 		//insert into si_invoice_items
 
 		//insert into 
 
 	}
-	
+
+	public function insert_item()
+	{	
+		$sql = "INSERT INTO ".TB_PREFIX."invoice_items 
+				(
+					invoice_id, 
+					quantity, 
+					product_id, 
+					unit_price, 
+					tax_amount, 
+					gross_total, 
+					description, 
+					total
+				) 
+				VALUES 
+				(
+					:invoice_id, 
+					:quantity, 
+					:product_id, 
+					:unit_price, 
+					:tax_amount, 
+					:gross_total, 
+					:description, 
+					:total
+				)";
+
+		//echo $sql;
+		dbQuery($sql,
+			':invoice_id', $this->invoice_id,
+			':quantity', $this->quantity,
+			':product_id', $this->product_id,
+			':unit_price', $this->unit_price,
+		//	':tax_id', $tax[tax_id],
+		//	':tax_percentage', $tax[tax_percentage],
+			':tax_amount', $this->tax_amount,
+			':gross_total', $this->gross_total,
+
+			':description', $this->description,
+			':total', $this->total
+
+			);
+
+		invoice_item_tax(lastInsertId(),$this->tax,$this->unit_price,$this->quantity,"insert");
+	}
+
     public static function select($id)
     {
 		global $logger;
@@ -108,6 +153,8 @@ class invoice {
 	$invoice['gross'] = invoice::getInvoiceGross($invoice['id']);
 	$invoice['paid'] = calc_invoice_paid($invoice['id']);
 	$invoice['owing'] = $invoice['total'] - $invoice['paid'];
+
+	$invoice['invoice_items'] = invoice::getInvoiceItems($id);
 
 	return $invoice;
     }
@@ -419,4 +466,38 @@ class invoice {
         $count = $sth->fetch();
         return $count['max'];
     }
+
+	public function recur()
+	{
+		$invoice = invoice::select($this->id);
+		$ni = new invoice();
+		$ni->biller_id = $invoice['biller_id'];
+		$ni->customer_id = $invoice['customer_id'];
+		$ni->type_id = $invoice['type_id'];
+		$ni->preference_id = $invoice['preference_id'];
+		//$ni->date = $invoice['date_original'];
+		$ni->date = date('Y-m-d');
+		$ni->custom_field1 = $invoice['custom_field1'];
+		$ni->custom_field2 = $invoice['custom_field2'];
+		$ni->custom_field3 = $invoice['custom_field3'];
+		$ni->custom_field4 = $invoice['custom_field4'];
+		$ni->note = $invoice['note'];
+		$ni_id = $ni->insert();
+		//insert each line item
+		foreach ($invoice['invoice_items'] as $key => $value)
+		{
+			$nii = new invoice();
+			$nii->invoice_id=$ni_id;
+			$nii->quantity=$invoice['invoice_items'][$key]['quantity'];
+			$nii->product_id=$invoice['invoice_items'][$key]['product_id'];
+			$nii->unit_price=$invoice['invoice_items'][$key]['unit_price'];
+			$nii->tax_amount=$invoice['invoice_items'][$key]['tax_amount'];
+			$nii->gross_total=$invoice['invoice_items'][$key]['gross_total'];
+			$nii->description=$invoice['invoice_items'][$key]['description'];
+			$nii->total=$invoice['invoice_items'][$key]['total'];
+			$nii->tax=$invoice['invoice_items'][$key]['tax'];
+			$nii_id = $nii->insert_item();
+		}
+
+	}
 }

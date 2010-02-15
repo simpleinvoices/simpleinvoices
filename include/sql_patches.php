@@ -1349,7 +1349,20 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
 
     $patch['226']['name'] = "Define currency in preferences";
     $patch['226']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `currency` VARCHAR( 25 ) NULL ;";
-    $patch['226']['date'] = "20090826";    
+    $patch['226']['date'] = "20100209";    
+
+    $patch['227']['name'] = "Create cron table to handle recurrence";
+    $patch['227']['patch'] = "CREATE TABLE `".TB_PREFIX."cron` (
+		`id` INT( 11 ) NOT NULL AUTO_INCREMENT ,
+		`domain_id` INT( 11 ) NOT NULL ,
+		`invoice_id` INT( 11 ) NOT NULL ,
+		`start_date` DATE NOT NULL ,
+		`end_date` DATE NOT NULL ,
+		`email_biller` INT( 1 ) NULL ,
+		`email_customer` INT( 1 ) NULL ,
+		PRIMARY KEY (`domain_id` ,`id`)
+		) ENGINE = MYISAM ;";
+    $patch['227']['date'] = "20100215";    
 
 //ALTER TABLE  `si_biller` ADD  `paypal_business_name` VARCHAR( 255 ) NOT NULL AFTER  `footer`
 //ALTER TABLE  `si_biller` ADD  `paypal_notify_url` VARCHAR( 255 ) NOT NULL AFTER  `paypal_business_name`
