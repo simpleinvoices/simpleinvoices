@@ -1358,6 +1358,8 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
 		`invoice_id` INT( 11 ) NOT NULL ,
 		`start_date` DATE NOT NULL ,
 		`end_date` DATE NOT NULL ,
+		`recurrence` INT( 11 ) NOT NULL ,
+		`recurrence_type` VARCHAR( 11 ) NOT NULL ,
 		`email_biller` INT( 1 ) NULL ,
 		`email_customer` INT( 1 ) NULL ,
 		PRIMARY KEY (`domain_id` ,`id`)
