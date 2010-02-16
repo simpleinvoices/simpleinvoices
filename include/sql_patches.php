@@ -1357,7 +1357,7 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
 		`domain_id` INT( 11 ) NOT NULL ,
 		`invoice_id` INT( 11 ) NOT NULL ,
 		`start_date` DATE NOT NULL ,
-		`end_date` DATE NOT NULL ,
+		`end_date` VARCHAR( 10 ) NULL ,
 		`recurrence` INT( 11 ) NOT NULL ,
 		`recurrence_type` VARCHAR( 11 ) NOT NULL ,
 		`email_biller` INT( 1 ) NULL ,
@@ -1365,6 +1365,15 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
 		PRIMARY KEY (`domain_id` ,`id`)
 		) ENGINE = MYISAM ;";
     $patch['227']['date'] = "20100215";    
+
+    $patch['228']['name'] = "Create cron_log table to handle record when cron was run";
+    $patch['228']['patch'] = "CREATE TABLE `".TB_PREFIX."cron_log` (
+		`id` INT( 11 ) NOT NULL AUTO_INCREMENT ,
+		`domain_id` INT( 11 ) NOT NULL ,
+		`run_date` DATE NOT NULL ,
+		PRIMARY KEY (  `domain_id` ,  `id` )
+		) ENGINE = MYISAM ;";
+    $patch['228']['date'] = "20100216";    
 
 //ALTER TABLE  `si_biller` ADD  `paypal_business_name` VARCHAR( 255 ) NOT NULL AFTER  `footer`
 //ALTER TABLE  `si_biller` ADD  `paypal_notify_url` VARCHAR( 255 ) NOT NULL AFTER  `paypal_business_name`
