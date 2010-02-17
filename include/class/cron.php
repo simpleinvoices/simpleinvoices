@@ -30,7 +30,7 @@ class cron {
 				:email_biller,
 				:email_customer
 			)";
-        	$sth  = $db->query($sql,
+        	$sth = $db->query($sql,
 				':domain_id',$domain_id, 
 				':invoice_id',$this->invoice_id,
 				':start_date',$this->start_date,
@@ -53,6 +53,29 @@ class cron {
 	public function delete()
 	{
 
+	}
+
+	public function get_all()
+	{
+		global $LANG;
+		global $dbh;
+		global $auth_session;
+
+		$sql = "SELECT * FROM ".TB_PREFIX."cron WHERE domain_id = :domain_id ORDER BY id";
+		$sth  = dbQuery($sql,':domain_id',domain_id::get($this->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+		return $sth->fetchAll();
+	}
+
+	public function get()
+	{
+		global $LANG;
+		global $db;
+		global $auth_session;
+
+		$sql = "SELECT * FROM ".TB_PREFIX."biller WHERE domain_id = :domain_id AND id = :id";
+		$sth  = $db->query($sql,':domain_id',$auth_session->domain_id, ':id',$id) or die(htmlspecialchars(end($dbh->errorInfo())));
+
+		return $sth->fetch();
 	}
 
 	public function check()
