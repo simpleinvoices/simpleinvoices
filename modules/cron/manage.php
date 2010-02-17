@@ -19,7 +19,7 @@ checkLogin();
 
 //all funky xml - sql stuff done in xml.php
 
-$pageActive = "invoice";
+$pageActive = "recurrence";
 
 //$smarty -> assign("invoices",$invoices);
 $smarty -> assign("number_of_invoices",$number_of_invoices);
@@ -27,11 +27,6 @@ $smarty -> assign("number_of_invoices",$number_of_invoices);
 $smarty -> assign('pageActive', $pageActive);
 $smarty -> assign('active_tab', '#money');
 
-$having="";
-if(isset($_GET['having']))
-{
-    $having = "&having=".$_GET['having'];
-}
-$url =  'index.php?module=invoices&view=xml'.$having;
+$url =  'index.php?module=cron&view=xml';
 
 $smarty -> assign('url', $url);

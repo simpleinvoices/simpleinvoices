@@ -55,25 +55,72 @@ class cron {
 
 	}
 
-	public function get_all()
-	{
-		global $LANG;
-		global $dbh;
-		global $auth_session;
-
-		$sql = "SELECT * FROM ".TB_PREFIX."cron WHERE domain_id = :domain_id ORDER BY id";
-		$sth  = dbQuery($sql,':domain_id',domain_id::get($this->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
-		return $sth->fetchAll();
-	}
-
-	public function get()
+    	public function select_all($type='', $dir='DESC', $rp='25', $page='1')
 	{
 		global $LANG;
 		global $db;
-		global $auth_session;
+		/*SQL Limit - start*/
+		$start = (($page-1) * $rp);
+		$limit = "LIMIT ".$start.", ".$rp;
+		/*SQL Limit - end*/
+
+		/*SQL where - start*/
+		$query = (isset($_POST['query'])) ? $_POST['query'] : "" ;
+		$qtype = (isset($_POST['qtype'])) ? $_POST['qtype'] : "" ;
+
+		$where = (isset($_POST['query'])) ? "  AND $qtype LIKE '%$query%' " : "";
+		/*SQL where - end*/
+		
+
+		/*Check that the sort field is OK*/
+		if (!empty($this->sort)) {
+		    $sort = $this->sort;
+		} else {
+		    $sort = "id";
+		}
+
+		if($type =="count")
+		{
+		    //unset($limit);
+		    $limit="";
+		}
+
+
+		$sql = "SELECT
+				cron.* ,
+                       		(SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
+			FROM 
+				".TB_PREFIX."cron cron,
+				".TB_PREFIX."invoices iv,
+				".TB_PREFIX."preferences pf
+			 WHERE 
+				cron.domain_id = :domain_id
+				and
+				cron.invoice_id = iv.id
+				and 
+				iv.preference_id = pf.pref_id 
+			GROUP BY
+			    cron.id
+			ORDER BY
+			$sort $dir
+			$limit";
+
+		$sth = $db->query($sql,':domain_id',domain_id::get($this->domain_id)) or die(htmlspecialchars(end($dbh->errorInfo())));
+		if($type =="count")
+		{
+			return $sth->rowCount();
+		} else {
+			return $sth->fetchAll();
+		}
+	}
+
+	public function select()
+	{
+		global $LANG;
+		global $db;
 
 		$sql = "SELECT * FROM ".TB_PREFIX."biller WHERE domain_id = :domain_id AND id = :id";
-		$sth  = $db->query($sql,':domain_id',$auth_session->domain_id, ':id',$id) or die(htmlspecialchars(end($dbh->errorInfo())));
+		$sth = $db->query($sql,':domain_id',domain_id::get($this->domain_id), ':id',$this->id) or die(htmlspecialchars(end($dbh->errorInfo())));
 
 		return $sth->fetch();
 	}
