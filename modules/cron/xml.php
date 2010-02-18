@@ -23,6 +23,8 @@ $count = $sth_count_rows;
 	$xml .= "<total>$count</total>";
 	
 	foreach ($crons as $row) {
+		$row['email_biller_nice'] = $row['email_biller']==1?$LANG['yes']:$LANG['no'];
+		$row['email_customer_nice'] = $row['email_customer']==1?$LANG['yes']:$LANG['no'];
 		$xml .= "<row id='".$row['id']."'>";
 		$xml .= "<cell><![CDATA[
 		<a class='index_table' title='$LANG[view] ".$row['name']."' href='index.php?module=cron&view=details&id=$row[id]&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
@@ -33,10 +35,9 @@ $count = $sth_count_rows;
 		#$xml .= "<cell><![CDATA[".siLocal::date($row['end_date'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".$row['start_date']."]]></cell>";
 		$xml .= "<cell><![CDATA[".$row['end_date']."]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['recurrence']."]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['recurrence_type']."]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['email_biller']."]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['email_customer']."]]></cell>";
+		$xml .= "<cell><![CDATA[".$row['recurrence']." ".$row['recurrence_type']."]]></cell>";
+		$xml .= "<cell><![CDATA[".$row['email_biller_nice']."]]></cell>";
+		$xml .= "<cell><![CDATA[".$row['email_customer_nice']."]]></cell>";
 		$xml .= "</row>";		
 	}
 	$xml .= "</rows>";

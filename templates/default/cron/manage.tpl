@@ -15,7 +15,7 @@
     <tr>
         <td>
 
-            <a href="index.php?module=recurrence&amp;view=add" class="positive">
+            <a href="index.php?module=cron&amp;view=add" class="positive">
                 <img src="./images/common/add.png" alt="" />
                 {$LANG.new_recurrence}
             </a>

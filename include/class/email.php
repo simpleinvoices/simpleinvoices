@@ -8,7 +8,7 @@ class email
 
 	public $file_location;
 	public $attachment;
-	public $module;
+	#ublic $module;
 	public $id;
 	public $start_date;
 	public $end_date;
@@ -92,6 +92,23 @@ class email
 				$message .= "<br />$this->attachment has been emailed";
 
 				break;
+			}	
+			case "cron":
+			{
+
+				// Create succes message
+				$message .= "<br />Cron email for today has been sent";
+
+				break;
+			}
+			case "cron_invoice":
+			{
+
+				// Create succes message
+				$message .= "<br />$this->attachment has been emailed";
+
+				break;
+			
 			}	
 		}	
 

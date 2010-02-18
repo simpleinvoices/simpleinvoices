@@ -30,12 +30,11 @@
 			colModel : [
 				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : action_menu, sortable : false, align: 'center'},
 				{display: '{/literal}{$LANG.id}{literal}', name : 'index_name', width :15 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.start_date}{literal}', name : 'start_date', width :20 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.end_date}{literal}', name : 'end_date', width :20 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.recurrence}{literal}', name : 'recurrence', width : 15 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.recurrence_type}{literal}', name : 'recurrence_type', width : 10 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.start_date_short}{literal}', name : 'start_date', width :25 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.end_date_short}{literal}', name : 'end_date', width :20 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.recur_each}{literal}', name : 'recurrence', width : 15 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.email_biller}{literal}', name : 'email_biller', width : 10 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.email_customer}{literal}', name : 'email_customer', width : 10 * percentage_width, sortable : true, align: 'left'}
+				{display: '{/literal}{$LANG.email_customer}{literal}', name : 'email_customer', width : 15 * percentage_width, sortable : true, align: 'left'}
 				
 				],
 				/*
