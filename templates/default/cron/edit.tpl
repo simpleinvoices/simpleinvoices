@@ -21,7 +21,7 @@
 	{/if}
 
 
-<form name="frmpost" action="index.php?module=cron&view=add" method="POST" id="frmpost">
+<form name="frmpost" action="index.php?module=cron&view=edit" method="POST" id="frmpost">
 <br />	 
 
 <table align="center">
@@ -31,7 +31,7 @@
 		<select name="invoice_id" class="validate[required]">
 		    <option value=''></option>
 			{foreach from=$invoice_all item=invoice}
-				<option value="{$invoice.id}">{$invoice.index_name}</option>
+				<option value="{$invoice.id}" {if $invoice.id == $cron.invoice_id}selected{/if} >{$invoice.index_name}</option>
 			{/foreach}
 		</select>
 		</td>
@@ -39,25 +39,25 @@
     <tr wrap="nowrap">
             <td class="details_screen">{$LANG.start_date}</td>
             <td wrap="nowrap">
-                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date" value='{"+1 days"|date_format:"%Y-%m-%d"}' />   
+                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date" value='{$cron.start_date}' />   
             </td>
     </tr>
     <tr wrap="nowrap">
             <td class="details_screen">{$LANG.end_date}</td>
             <td wrap="nowrap">
-                <input type="text" class="date-picker" size="10" name="end_date" id="date" value='' />   
+                <input type="text" class="date-picker" size="10" name="end_date" id="date" value='{$cron.end_date}' />   
             </td>
     </tr>
 	<tr>
 		<td class="details_screen">{$LANG.recur_each}</td>
 		<td>
-		<input name="recurrence" size="10" class="validate[required]">
+		<input name="recurrence" size="10" class="validate[required]" value='{$cron.recurrence}'>
 		</input>
              <select name="recurrence_type" class="validate[required]">
-             <option value="day">{$LANG.days}</option>
-             <option value="week">{$LANG.weeks}</option>
-             <option value="month">{$LANG.months}</option>
-             <option value="year">{$LANG.years}</option>
+             <option value="day"  {if $cron.recurrence_type == 'day'}selected{/if}  >{$LANG.days}</option>
+             <option value="week" {if $cron.recurrence_type == 'week'}selected{/if} >{$LANG.weeks}</option>
+             <option value="month" {if $cron.recurrence_type == 'month'}selected{/if} >{$LANG.months}</option>
+             <option value="year" {if $cron.recurrence_type == 'year'}selected{/if} >{$LANG.years}</option>
              </select>
          </td>
      </tr>
@@ -65,8 +65,8 @@
 		<td class="details_screen">{$LANG.email_biller_after_cron}</td>
 		<td>
              <select name="email_biller" class="validate[required]">
-             <option value="1">{$LANG.yes}</option>
-             <option value="0">{$LANG.no}</option>
+             <option value="1" {if $cron.email_biller == '1'}selected{/if}>{$LANG.yes}</option>
+             <option value="0" {if $cron.email_biller == '0'}selected{/if}>{$LANG.no}</option>
              </select>
          </td>
      </tr>
@@ -74,8 +74,8 @@
 		<td class="details_screen">{$LANG.email_customer_after_cron}</td>
 		<td>
              <select name="email_customer" class="validate[required]">
-             <option value="1">{$LANG.yes}</option>
-             <option value="0">{$LANG.no}</option>
+             <option value="1" {if $cron.email_customer == '1'}selected{/if}>{$LANG.yes}</option>
+             <option value="0" {if $cron.email_customer == '1'}selected{/if}>{$LANG.no}</option>
              </select>
          </td>
      </tr>
@@ -91,7 +91,7 @@
 				{$LANG.save}
 			</button>
 
-			<input type="hidden" name="op" value="add" />
+			<input type="hidden" name="op" value="edit" />
 		
 			<a href="./index.php?module=cron&view=manage" class="negative">
 		        <img src="./images/common/cross.png" alt="" />

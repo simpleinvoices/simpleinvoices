@@ -1,7 +1,7 @@
 <?php
 
 
-if ($_POST['op'] =='add' AND !empty($_POST['invoice_id']))
+if ($_POST['op'] =='edit' AND !empty($_POST['invoice_id']))
 {
 	$cron = new cron();
 	$cron->domain_id=domain_id::get();
@@ -18,6 +18,10 @@ if ($_POST['op'] =='add' AND !empty($_POST['invoice_id']))
 }      
 
 $invoice_all = invoice::get_all();
+$get_cron = new cron();
+$get_cron->id = $_GET['id'];
+$cron = $get_cron->select();
 
 $smarty -> assign('invoice_all',$invoice_all);
 $smarty -> assign('saved',$saved);
+$smarty -> assign('cron',$cron);

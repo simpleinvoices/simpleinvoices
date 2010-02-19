@@ -144,7 +144,7 @@ class cron {
 		global $LANG;
 		global $db;
 
-		$sql = "SELECT * FROM ".TB_PREFIX."biller WHERE domain_id = :domain_id AND id = :id";
+		$sql = "SELECT * FROM ".TB_PREFIX."cron WHERE domain_id = :domain_id AND id = :id";
 		$sth = $db->query($sql,':domain_id',domain_id::get($this->domain_id), ':id',$this->id) or die(htmlspecialchars(end($dbh->errorInfo())));
 
 		return $sth->fetch();
@@ -296,7 +296,7 @@ class cron {
 							{
 								$email -> to = $biller['email'];
 							}
-							$email -> subject = $data[$key]['start_date']." from ".$biller['name'];
+							$email -> subject = $pdf_file_name." from ".$biller['name'];
 							$email -> attachment = $pdf_file_name;
 							$return['email_message'] = $email -> send ();
 						}
@@ -306,13 +306,6 @@ class cron {
 	
 					}
 			
-					// no crons scheduled for today	
-					if ($run_cron == 'false')
-					{
-						$return['id'] = $i;
-						$return['cron_message'] = "No invoices are scheduled to recur today for domain: ".$domain_id." for the date: ".$today;
-						$return['email_message'] = "";
-					}
 				
 				} else {		
 						#$return .= "<br />NOT RUN: Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." did not recur today :: Info diff=".$diff."<br />";
@@ -322,6 +315,13 @@ class cron {
 				
 			}
 
+			// no crons scheduled for today	
+			if ($run_cron == 'false')
+			{
+				$return['id'] = $i;
+				$return['cron_message'] = "No invoices are scheduled to recur today for domain: ".$domain_id." for the date: ".$today;
+				$return['email_message'] = "";
+			}
 			//insert into cron_log date of run
 			$cron_log = new cronlog();
 			$cron_log->run_date = $today;
@@ -331,12 +331,12 @@ class cron {
 			$email = new email();
 			$email -> format = 'cron';
 			$email -> notes = $return;
-			$email -> from = "simpleinvoices@127.0.0.1";
+			$email -> from = "simpleinvoices@localhost";
 			$email -> from_friendly = "Simple Invoices - Cron";
 			$email -> to = "justin@localhost";
 			#$email -> bcc = $_POST['email_bcc'];
 			$email -> subject = "Cron for Simple Invoices has been run for today:";
-			#$return .= $email -> send ();
+			$email -> send ();
 
 		} else {
 	
