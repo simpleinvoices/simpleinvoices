@@ -45,14 +45,15 @@ class cron {
 
 	}
 
-	public function edit()
+	public function update()
 	{
         	global $db;
 
 		$domain_id = domain_id::get($this->domain_id);
         
-	        $sql = "UPDATE ".TB_PREFIX."cron SET (
-				domain_id = :domain_id,
+	        $sql = "UPDATE 
+				".TB_PREFIX."cron 
+			SET 
 				invoice_id = :invoice_id,
 				start_date = :start_date,
 				end_date = :end_date,
@@ -60,8 +61,13 @@ class cron {
 				recurrence_type = :recurrence_type,
 				email_biller = :email_biller,
 				email_customer = :email_customer
-			)";
+			WHERE 
+				id = :id 
+				AND 
+				domain_id = :domain_id
+			";
         	$sth = $db->query($sql,
+				':id',$this->id, 
 				':domain_id',$domain_id, 
 				':invoice_id',$this->invoice_id,
 				':start_date',$this->start_date,
@@ -144,7 +150,21 @@ class cron {
 		global $LANG;
 		global $db;
 
-		$sql = "SELECT * FROM ".TB_PREFIX."cron WHERE domain_id = :domain_id AND id = :id";
+		$sql = "SELECT
+				cron.* ,
+                       		(SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
+			FROM 
+				".TB_PREFIX."cron cron,
+				".TB_PREFIX."invoices iv,
+				".TB_PREFIX."preferences pf
+			 WHERE 
+				cron.domain_id = :domain_id
+				and
+				cron.invoice_id = iv.id
+				and 
+				iv.preference_id = pf.pref_id 
+				and
+				cron.id = :id;";
 		$sth = $db->query($sql,':domain_id',domain_id::get($this->domain_id), ':id',$this->id) or die(htmlspecialchars(end($dbh->errorInfo())));
 
 		return $sth->fetch();

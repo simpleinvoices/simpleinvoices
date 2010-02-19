@@ -21,7 +21,7 @@
 	{/if}
 
 
-<form name="frmpost" action="index.php?module=cron&view=edit" method="POST" id="frmpost">
+<form name="frmpost" action="index.php?module=cron&view=edit&id={$cron.id}" method="POST" id="frmpost">
 <br />	 
 
 <table align="center">
@@ -75,7 +75,7 @@
 		<td>
              <select name="email_customer" class="validate[required]">
              <option value="1" {if $cron.email_customer == '1'}selected{/if}>{$LANG.yes}</option>
-             <option value="0" {if $cron.email_customer == '1'}selected{/if}>{$LANG.no}</option>
+             <option value="0" {if $cron.email_customer == '0'}selected{/if}>{$LANG.no}</option>
              </select>
          </td>
      </tr>

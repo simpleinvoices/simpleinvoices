@@ -21,3 +21,7 @@ $invoice_all = invoice::get_all();
 
 $smarty -> assign('invoice_all',$invoice_all);
 $smarty -> assign('saved',$saved);
+
+$smarty -> assign('pageActive', 'cron');
+$smarty -> assign('subPageActive', 'cron_add');
+$smarty -> assign('active_tab', '#money');

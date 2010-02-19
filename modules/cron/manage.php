@@ -19,12 +19,11 @@ checkLogin();
 
 //all funky xml - sql stuff done in xml.php
 
-$pageActive = "recurrence";
 
 //$smarty -> assign("invoices",$invoices);
 $smarty -> assign("number_of_invoices",$number_of_invoices);
 
-$smarty -> assign('pageActive', $pageActive);
+$smarty -> assign('pageActive', 'cron');
 $smarty -> assign('active_tab', '#money');
 
 $url =  'index.php?module=cron&view=xml';

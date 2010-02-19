@@ -25,3 +25,6 @@ $cron = $get_cron->select();
 $smarty -> assign('invoice_all',$invoice_all);
 $smarty -> assign('saved',$saved);
 $smarty -> assign('cron',$cron);
+$smarty -> assign('pageActive', 'cron');
+$smarty -> assign('subPageActive', 'cron_view');
+$smarty -> assign('active_tab', '#money');
