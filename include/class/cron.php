@@ -47,7 +47,32 @@ class cron {
 
 	public function edit()
 	{
+        	global $db;
 
+		$domain_id = domain_id::get($this->domain_id);
+        
+	        $sql = "UPDATE ".TB_PREFIX."cron SET (
+				domain_id = :domain_id,
+				invoice_id = :invoice_id,
+				start_date = :start_date,
+				end_date = :end_date,
+				recurrence = :recurrence,
+				recurrence_type = :recurrence_type,
+				email_biller = :email_biller,
+				email_customer = :email_customer
+			)";
+        	$sth = $db->query($sql,
+				':domain_id',$domain_id, 
+				':invoice_id',$this->invoice_id,
+				':start_date',$this->start_date,
+				':end_date',$this->end_date,
+				':recurrence',$this->recurrence,
+				':recurrence_type',$this->recurrence_type,
+				':email_biller',$this->email_biller,
+				':email_customer',$this->email_customer
+			) or die(htmlspecialchars(end($dbh->errorInfo())));
+        
+ 	       return $sth;
 	}
 
 	public function delete()
@@ -132,21 +157,21 @@ class cron {
 
 		$today = date('Y-m-d');
 		$domain_id = domain_id::get($this->domain_id);
-		$return ="";
 
 		$cron_log = new cronlog();
 		$cron_log->run_date = empty($this->run_date) ? $today : $this->run_date;
 		$check_cron_log = $cron_log->check();        	
 
 		//only proceed if cron has not been run for today
+		$i="0";
 		if ($check_cron_log == 0)
 		{
-			$sql = "SELECT * FROM ".TB_PREFIX."cron WHERE domain_id = :domain_id";
-			$sth  = $db->query($sql,':domain_id',$domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+			#$sql = "SELECT * FROM ".TB_PREFIX."cron WHERE domain_id = :domain_id";
+			#$sth  = $db->query($sql,':domain_id',$domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 			$cron = new cron();
 			$data = $cron->select_all('');
-		        $data = $sth->fetchAll();
 			#print_r($data);
+			
 			foreach ($data as $key=>$value)
 			{
 				$run_cron ='false';
@@ -226,12 +251,17 @@ class cron {
 					//run the recurrence for this invoice
 					if ($run_cron == 'true')
 					{
-						$return .= "<br />Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of '".$data[$key]['end_date']."' where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." was run today :: Info diff=".$diff."<br />";
+						$return['id'] = $i;
+						$return['message'] = "Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of '".$data[$key]['end_date']."' where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." was run today :: Info diff=".$diff."<br />";
+						$i++;
 
 						$ni = new invoice();
 						$ni->id = $data[$key]['invoice_id'];
 						$ni->recur();
 
+
+						## email the people
+						
 						$invoice = getInvoice($data[$key]['invoice_id']);
 						$preference = getPreference($invoice['preference_id']);
 						$biller = getBiller($invoice['biller_id']);
@@ -239,35 +269,51 @@ class cron {
 						#print_r($customer);
 						#create PDF nameVj
 						$spc2us_pref = str_replace(" ", "_", $data[$key]['index_name']);
-						$pdf_file_name = $spc2us_pref . '.pdf';
+						$pdf_file_name = $spc2us_pref.".pdf";
 							
 						// Create invoice
-						$export = new export();
-						$export -> format = "pdf";
-						$export -> file_location = 'file';
-						$export -> module = 'invoice';
-						$export -> id = $invoice_id;
-						$export -> execute();
+						if($data[$key]['email_biller'] == "1" OR $data[$key]['email_customer'] == "1")
+						{
+							$export = new export();
+							$export -> format = "pdf";
+							$export -> file_location = 'file';
+							$export -> module = 'invoice';
+							$export -> id = $data[$key]['invoice_id'];
+							$export -> execute();
 
-						#$attachment = file_get_contents('./tmp/cache/' . $pdf_file_name);
+							#$attachment = file_get_contents('./tmp/cache/' . $pdf_file_name);
 
-						$email = new email();
-						$email -> format = 'cron_invoice';
-						$email -> notes = "Hi ".$customer['name'].",<br /><br /> Attached is your PDF copy of ".$data[$key]['index_name']." from ".$biller['name'];
-						$email -> from = $biller['email'];
-						$email -> from_friendly = $biller['name'];
-						$email -> to = $customer['email'];
-						#$email -> bcc = $_POST['email_bcc'];
-						$email -> subject = $data[$key]['start_date']." from ".$biller['name'];
-						$email -> attachment = $pdf_file_name;
-						$return .= $email -> send ();
-
+							$email = new email();
+							$email -> format = 'cron_invoice';
+							$email -> notes = "Hi ".$customer['name'].",<br /><br /> Attached is your PDF copy of ".$data[$key]['index_name']." from ".$biller['name'];
+							$email -> from = $biller['email'];
+							$email -> from_friendly = $biller['name'];
+							if($data[$key]['email_customer'] == "1")
+							{
+								$email -> to = $customer['email'];
+							}
+							if($data[$key]['email_biller'] == "1")
+							{
+								$email -> to = $biller['email'];
+							}
+							$email -> subject = $data[$key]['start_date']." from ".$biller['name'];
+							$email -> attachment = $pdf_file_name;
+							$return['email_message'] = $email -> send ();
+						}
 					} else {
 
 						#$return .= "<br />NOT RUN: Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." did not recur today :: Info diff=".$diff."<br />";
 	
 					}
-
+			
+					// no crons scheduled for today	
+					if ($run_cron == 'false')
+					{
+						$return['id'] = $i;
+						$return['cron_message'] = "No invoices are scheduled to recur today for domain: ".$domain_id." for the date: ".$today;
+						$return['email_message'] = "";
+					}
+				
 				} else {		
 						#$return .= "<br />NOT RUN: Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." did not recur today :: Info diff=".$diff."<br />";
 
@@ -287,14 +333,16 @@ class cron {
 			$email -> notes = $return;
 			$email -> from = "simpleinvoices@127.0.0.1";
 			$email -> from_friendly = "Simple Invoices - Cron";
-			$email -> to = "justin@127.0.0.2";
+			$email -> to = "justin@localhost";
 			#$email -> bcc = $_POST['email_bcc'];
 			$email -> subject = "Cron for Simple Invoices has been run for today:";
 			#$return .= $email -> send ();
 
 		} else {
 	
-			$return .= "Cron has already been run for domain: ".$domain_id." for the date: ".$today;
+			$return['id'] = $i;
+			$return['cron_message'] = "Cron has already been run for domain: ".$domain_id." for the date: ".$today;
+			$return['email_message'] = "";
 		}
 
 		return $return;

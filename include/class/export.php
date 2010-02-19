@@ -146,7 +146,7 @@ class export
 			case "invoice":
 			{
 			
-				$invoice = getInvoice($this->id);
+				$invoice = invoice::select($this->id);
  			        $invoice_number_of_taxes = numberOfTaxesForInvoice($this->id);
 				$customer = getCustomer($invoice['customer_id']);
 				$biller = getBiller($invoice['biller_id']);
@@ -156,8 +156,8 @@ class export
 				$logo = str_replace(" ", "%20", $logo);
 				$invoiceItems = invoice::getInvoiceItems($this->id);
 				
-				$spc2us_pref = str_replace(" ", "_", $preference[pref_inv_wording]);
-				$this->file_name = $spc2us_pref . $invoice['id'];
+				$spc2us_pref = str_replace(" ", "_", $invoice['index_name']);
+				$this->file_name = $spc2us_pref;
 				
 				$customFieldLabels = getCustomFieldLabels();
 	

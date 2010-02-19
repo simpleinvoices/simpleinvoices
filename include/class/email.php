@@ -105,7 +105,7 @@ class email
 			{
 
 				// Create succes message
-				$message .= "<br />$this->attachment has been emailed";
+				$message .= "$this->attachment has been emailed";
 
 				break;
 			
