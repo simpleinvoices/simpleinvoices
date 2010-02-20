@@ -46,6 +46,10 @@
 <table class="buttons" align="center">
 	<tr>
 		<td>
+				<a href="./index.php?module=cron&amp;view=edit&amp;id={$cron.id}" class="positive">
+					<img src="./images/famfam/report_edit.png" alt=""/>
+					{$LANG.edit}
+				</a>
 			<a href="./index.php?module=cron&view=manage" class="negative">
 		        <img src="./images/common/cross.png" alt="" />
 	        	{$LANG.cancel}
