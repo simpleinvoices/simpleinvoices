@@ -181,7 +181,7 @@ Array: Early_exit
 */
 $early_exit = array();
 $early_exit[] = "auth_login";
-$early_exit[] = "api_invoice";
+$early_exit[] = "api_cron";
 $early_exit[] = "auth_logout";
 $early_exit[] = "export_pdf";
 $early_exit[] = "export_invoice";
