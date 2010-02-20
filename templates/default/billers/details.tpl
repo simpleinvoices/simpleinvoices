@@ -72,6 +72,14 @@
 		<td>{$biller.email}</td>
 	</tr>
 	<tr>
+		<td class="details_screen">{$LANG.paypal_business_name}</td>
+		<td>{$biller.paypal_business_name}</td>
+	</tr>
+	<tr>
+		<td class="details_screen">{$LANG.paypal_notify_url}</td>
+		<td>{$biller.paypal_notify_url}</td>
+	</tr>
+	<tr>
 		<td class="details_screen">{$customFieldLabel.biller_cf1}
 		<a
 			class="cluetip"
@@ -235,6 +243,14 @@
 	<tr>
 		<td class="details_screen">{$LANG.email}</td>
 		<td><input type="text" name="email" value="{$biller.email}" size="50" /></td>
+	</tr>
+	<tr>
+		<td class="details_screen">{$LANG.paypal_business_name}</td>
+		<td><input type="text" name="paypal_business_name" value="{$biller.paypal_business_name}" size="25" /></td>
+	</tr>
+	<tr>
+		<td class="details_screen">{$LANG.paypal_notify_url}</td>
+		<td><input type="text" name="paypal_notify_url" value="{$biller.paypal_notify_url}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.biller_cf1}

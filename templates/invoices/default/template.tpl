@@ -437,6 +437,11 @@
 	<tr>
 		<td colspan="6"><div style="font-size:8pt;" align="center">{$biller.footer}</div></td>
 	</tr>
+	<tr>
+		<td>
+			<a href="https://www.paypal.com/xclick/business={$biller.paypal_business_name|urlencode}&item_name={$invoice.index_name}&invoice={$invoice.index_id}&amount={$invoice.total|siLocal_number_formatted}&currency_code=AUD&return=http://vcsweb.com.au&no_shipping=1&no_note=1">Paypal link</a>
+		</td>
+	</tr>
 
 	<!-- invoice details section - end -->
 

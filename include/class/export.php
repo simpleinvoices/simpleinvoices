@@ -149,7 +149,7 @@ class export
 				$invoice = invoice::select($this->id);
  			        $invoice_number_of_taxes = numberOfTaxesForInvoice($this->id);
 				$customer = getCustomer($invoice['customer_id']);
-				$biller = getBiller($invoice['biller_id']);
+				$biller = biller::select($invoice['biller_id']);
 				$preference = getPreference($invoice['preference_id']);
 				$defaults = getSystemDefaults();
 				$logo = getLogo($biller);

@@ -26,7 +26,7 @@ class biller
         return $billers;
     }
 
-    public static function get($id)
+    public static function select($id)
     {
         global $LANG;
         global $db;
@@ -35,6 +35,9 @@ class biller
         $sql = "SELECT * FROM ".TB_PREFIX."biller WHERE domain_id = :domain_id AND id = :id";
         $sth  = $db->query($sql,':domain_id',$auth_session->domain_id, ':id',$id) or die(htmlspecialchars(end($dbh->errorInfo())));
         
-        return $sth->fetch();
+	$biller = $sth->fetch();
+	$biller['wording_for_enabled'] = $biller['enabled']==1?$LANG['enabled']:$LANG['disabled'];
+	return $biller;
+        #return $sth->fetch();
     }
 }

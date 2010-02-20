@@ -66,6 +66,7 @@ class siLocal
 	public static function number_formatted($number)
 	{
 		global $config;
+	
 		$number_formatted = number_format($number, $config->local->precision, '.', '');
 		return $number_formatted;
 	}
