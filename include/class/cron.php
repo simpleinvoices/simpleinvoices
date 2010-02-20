@@ -191,7 +191,8 @@ class cron {
 			$cron = new cron();
 			$data = $cron->select_all('');
 			#print_r($data);
-			
+		
+			$number_of_crons_run = "0";	
 			foreach ($data as $key=>$value)
 			{
 				$run_cron ='false';
@@ -271,6 +272,7 @@ class cron {
 					//run the recurrence for this invoice
 					if ($run_cron == 'true')
 					{
+						$number_of_crons_run++;	
 						$return['id'] = $i;
 						$return['message'] = "Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of '".$data[$key]['end_date']."' where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." was run today :: Info diff=".$diff."<br />";
 						$i++;
@@ -336,7 +338,7 @@ class cron {
 			}
 
 			// no crons scheduled for today	
-			if ($run_cron == 'false')
+			if ($number_of_crons_run  == '0')
 			{
 				$return['id'] = $i;
 				$return['cron_message'] = "No invoices are scheduled to recur today for domain: ".$domain_id." for the date: ".$today;
@@ -350,7 +352,7 @@ class cron {
 
 			$email = new email();
 			$email -> format = 'cron';
-			$email -> notes = $return;
+			#$email -> notes = $return;
 			$email -> from = "simpleinvoices@localhost";
 			$email -> from_friendly = "Simple Invoices - Cron";
 			$email -> to = "justin@localhost";
