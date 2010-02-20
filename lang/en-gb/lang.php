@@ -319,6 +319,7 @@ $LANG['new_invoice_total'] = "New Invoices - Total";//1
 $LANG['new_password'] = "New password";//1
 $LANG['no'] = "No";//1
 $LANG['no_billers'] = "There have been no billers created. Click the 'Add New Biller' button above to create one";//1
+$LANG['no_crons'] = "There have been no invoice recurrences created.  Click the 'New recurrence' buttom above to create one";//1
 $LANG['no_customers'] = "There have been no customers created.  Click the 'Add New Customer' buttom above to create one";//1
 $LANG['no_defaults'] = "There are no defaults";//1
 $LANG['no_invoices'] = "There have been no invoices created. Click the 'Add a new Invoice' button above to create an invoice";//1

@@ -314,9 +314,13 @@ class cron {
 							{
 								$email -> to = $customer['email'];
 							}
-							if($data[$key]['email_biller'] == "1")
+							if($data[$key]['email_biller'] == "1" AND $data[$key]['email_customer'] == "1")
 							{
-								$email -> to = $biller['email'];
+								$email -> to = $customer['email'].";".$biller['email'];
+							}
+							if($data[$key]['email_biller'] == "1" AND $data[$key]['email_customer'] == "0")
+							{
+								$email -> to = $customer['email'];
 							}
 							$email -> subject = $pdf_file_name." from ".$biller['name'];
 							$email -> attachment = $pdf_file_name;

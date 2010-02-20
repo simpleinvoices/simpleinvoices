@@ -24,11 +24,11 @@
     </tr>
 </table>
 
-{if $number_of_invoices.count == 0}
+{if $number_of_crons.count == 0}
 	
 	<br />
 	<br />
-	<span class="welcome">{$LANG.no_invoices}</span>
+	<span class="welcome">{$LANG.no_crons}</span>
 	<br />
 	<br />
 	<br />
