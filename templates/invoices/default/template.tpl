@@ -439,7 +439,13 @@
 	</tr>
 	<tr>
 		<td>
-			<a href="https://www.paypal.com/xclick/business={$biller.paypal_business_name|urlencode}&item_name={$invoice.index_name}&invoice={$invoice.index_id}&amount={$invoice.total|siLocal_number_formatted}&currency_code=AUD&return=http://vcsweb.com.au&no_shipping=1&no_note=1">Paypal link</a>
+			{online_payment_link 
+				type=$preference.include_online_payment business=$biller.paypal_business_name 
+				item_name=$invoice.index_name invoice=$invoice.index_id 
+				amount=$invoice.total currency_code=AUD link_wording=$LANG.paypal_link
+				include_image=true
+			}
+
 		</td>
 	</tr>
 

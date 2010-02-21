@@ -8,6 +8,15 @@ checkLogin();
 $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
 
 
+$include_online_payment ='';
+foreach ($_POST['include_online_payment'] as $k => $v) {
+    $include_online_payment .= $v;
+    if ($k !=  end(array_keys($_POST['include_online_payment'])))
+    {
+    	$include_online_payment .= ','; 
+    }
+}
+
 #insert invoice_preference
 if (  $op === 'insert_preference' ) {
 
@@ -27,10 +36,11 @@ if (  $op === 'insert_preference' ) {
 			pref_inv_payment_line2_name,
 			pref_inv_payment_line2_value,
 			pref_enabled,
-            status,
-            locale,
-            language,
-            index_group
+		        status,
+		        locale,
+		        language,
+		        index_group,
+			include_online_payment
 		)
 	VALUES
 		(
@@ -50,7 +60,8 @@ if (  $op === 'insert_preference' ) {
             :status,
             :locale,
             :language,
-            :index_group
+            :index_group,
+			:include_online_payment
 		 )";
 
 	if (dbQuery($sql,
@@ -70,6 +81,7 @@ if (  $op === 'insert_preference' ) {
 	  ':locale', $_POST['locale'],
 	  ':language', $_POST['locale'],
 	  ':index_group', empty($_POST['index_group']) ? lastInsertId() : $_POST['index_group']  ,
+	  ':include_online_payment', $include_online_payment,
 	  ':enabled', $_POST['pref_enabled']
 	  )) {
 		$saved = true;
@@ -106,7 +118,8 @@ else if (  $op === 'edit_preference' ) {
 				status = :status,
 				locale = :locale,
 				language = :language,
-                index_group = :index_group
+ 		                index_group = :index_group,
+ 		                include_online_payment = :include_online_payment
 			WHERE
 				pref_id = :id";
 
@@ -125,8 +138,9 @@ else if (  $op === 'edit_preference' ) {
 		  ':enabled', $_POST['pref_enabled'],
 		  ':status', $_POST['status'],
 		  ':locale', $_POST['locale'],
-          ':language', $_POST['language'],
+          	  ':language', $_POST['language'],
 		  ':index_group', $_POST['index_group'],
+		  ':include_online_payment', $include_online_payment,
 		  ':id', $_GET['id']))
 	    {
 			$saved =true;

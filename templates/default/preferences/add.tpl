@@ -67,6 +67,15 @@
 	<input type="text" name="p_inv_detail_line"  value="{$smarty.post.p_inv_detail_line}" size="75" />
 	</td>
 </tr>
+		<tr>
+			<td class="details_screen">{$LANG.include_online_payment}
+				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_detail_line" title="{$LANG.invoice_detail_line}">
+				<img src="./images/common/help-small.png" alt="" /></a></td>
+			<td>
+				<input type=checkbox name=include_online_payment[] value='paypal'>{$LANG.paypal}
+				<input type=checkbox name=include_online_payment[] value='eway'>{$LANG.eway}
+			</td>
+		</tr>
 <tr>
 	<td class="details_screen">{$LANG.invoice_payment_method}
 	<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_payment_method" title="{$LANG.invoice_payment_method}"><img src="./images/common/help-small.png" alt="" /></a></td>

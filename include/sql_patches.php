@@ -1375,6 +1375,10 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
 		) ENGINE = MYISAM ;";
     $patch['228']['date'] = "20100216";    
 
+    $patch['229']['name'] = "preferences - add online payment type";
+    $patch['229']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `include_online_payment` VARCHAR( 25 ) NULL ;";
+    $patch['229']['date'] = "20100209";    
+
 //ALTER TABLE  `si_biller` ADD  `paypal_business_name` VARCHAR( 255 ) NOT NULL AFTER  `footer`
 //ALTER TABLE  `si_biller` ADD  `paypal_notify_url` VARCHAR( 255 ) NOT NULL AFTER  `paypal_business_name`
  /*

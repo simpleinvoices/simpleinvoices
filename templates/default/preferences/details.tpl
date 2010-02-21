@@ -43,10 +43,13 @@
 			<td>{$preference.pref_inv_detail_heading|regex_replace:"/[\\\]/":""}</td>
 		</tr>
 		<tr>
-			<td class="details_screen">Invoice detail line 
+			<td class="details_screen">{$LANG.include_online_payment}
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_detail_line" title="{$LANG.invoice_detail_line}">
 				<img src="./images/common/help-small.png" alt="" /></a></td>
-			<td>{$preference.pref_inv_detail_line|regex_replace:"/[\\\]/":""}</td>
+			<td>
+				<input type=checkbox name=include_online_payment[] {if in_array("paypal",explode(",", $preference.include_online_payment)) }checked{/if} value='paypal' DISABLED>{$LANG.paypal}
+				<input type=checkbox name=include_online_payment[] {if in_array("eway",explode(",", $preference.include_online_payment)) }checked{/if} value='eway' DISABLED>{$LANG.eway}
+</td>
 		</tr>
 		<tr>
 			<td class="details_screen">Invoice payment method 
@@ -186,6 +189,15 @@
 				<img src="./images/common/help-small.png" alt="" /></a>
 			</td>
 			<td><input type="text" name='pref_inv_detail_line' value="{$preference.pref_inv_detail_line|regex_replace:"/[\\\]/":""}" size="75" /></td>
+		</tr>
+		<tr>
+			<td class="details_screen">{$LANG.include_online_payment}
+				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_detail_line" title="{$LANG.invoice_detail_line}">
+				<img src="./images/common/help-small.png" alt="" /></a></td>
+			<td>
+				<input type=checkbox name=include_online_payment[] {if in_array("paypal",explode(",", $preference.include_online_payment)) }checked{/if} value='paypal'>{$LANG.paypal}
+				<input type=checkbox name=include_online_payment[] {if in_array("eway",explode(",", $preference.include_online_payment)) }checked{/if} value='eway'>{$LANG.eway}
+			</td>
 		</tr>
 		<tr>
 			<td class="details_screen">Invoice payment method 
