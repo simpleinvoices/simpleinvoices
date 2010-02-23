@@ -1,5 +1,5 @@
 {*
-* Script: details.tpl
+n Script: details.tpl
 * 	Biller details template
 *
 * Last edited:

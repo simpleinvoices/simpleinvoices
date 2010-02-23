@@ -1340,11 +1340,11 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     $patch['223']['date'] = "20100209";    
 
     $patch['224']['name'] = "Add paypal business name";
-    $patch['224']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` ADD `paypal_business_name` VARCHAR( 255 ) NOT NULL AFTER  `footer`";
+    $patch['224']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` ADD `paypal_business_name` VARCHAR( 255 ) NULL AFTER  `footer`";
     $patch['224']['date'] = "20100209";    
 
     $patch['225']['name'] = "Add paypal notify url";
-    $patch['225']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` ADD `paypal_notify_url` VARCHAR( 255 ) NOT NULL AFTER  `paypal_business_name`";
+    $patch['225']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` ADD `paypal_notify_url` VARCHAR( 255 ) NULL AFTER  `paypal_business_name`";
     $patch['225']['date'] = "20100209";    
 
     $patch['226']['name'] = "Define currency in preferences";
@@ -1380,7 +1380,7 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     $patch['229']['date'] = "20100209";    
 
     $patch['230']['name'] = "Add paypal notify url";
-    $patch['230']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` ADD `paypal_return_url` VARCHAR( 255 ) NOT NULL AFTER  `paypal_notify_name`";
+    $patch['230']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` ADD `paypal_return_url` VARCHAR( 255 ) NULL AFTER  `paypal_notify_url`";
     $patch['230']['date'] = "20100223";    
 
 //ALTER TABLE  `si_biller` ADD  `paypal_business_name` VARCHAR( 255 ) NOT NULL AFTER  `footer`
