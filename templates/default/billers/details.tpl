@@ -80,6 +80,10 @@
 		<td>{$biller.paypal_notify_url}</td>
 	</tr>
 	<tr>
+		<td class="details_screen">{$LANG.paypal_return_url}</td>
+		<td>{$biller.paypal_return_url}</td>
+	</tr>
+	<tr>
 		<td class="details_screen">{$customFieldLabel.biller_cf1}
 		<a
 			class="cluetip"
@@ -251,6 +255,10 @@
 	<tr>
 		<td class="details_screen">{$LANG.paypal_notify_url}</td>
 		<td><input type="text" name="paypal_notify_url" value="{$biller.paypal_notify_url}" size="50" /></td>
+	</tr>
+	<tr>
+		<td class="details_screen">{$LANG.paypal_return_url}</td>
+		<td><input type="text" name="paypal_return_url" value="{$biller.paypal_return_url}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.biller_cf1}

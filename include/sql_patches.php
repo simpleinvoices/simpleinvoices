@@ -1379,6 +1379,10 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     $patch['229']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `include_online_payment` VARCHAR( 25 ) NULL ;";
     $patch['229']['date'] = "20100209";    
 
+    $patch['230']['name'] = "Add paypal notify url";
+    $patch['230']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` ADD `paypal_return_url` VARCHAR( 255 ) NOT NULL AFTER  `paypal_notify_name`";
+    $patch['230']['date'] = "20100223";    
+
 //ALTER TABLE  `si_biller` ADD  `paypal_business_name` VARCHAR( 255 ) NOT NULL AFTER  `footer`
 //ALTER TABLE  `si_biller` ADD  `paypal_notify_url` VARCHAR( 255 ) NOT NULL AFTER  `paypal_business_name`
  /*

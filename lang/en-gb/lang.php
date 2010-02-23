@@ -368,6 +368,7 @@ $LANG['paypal'] = "PayPal";//1
 $LANG['paypal_business_name'] = "PayPal business name";//1
 $LANG['paypal_link'] = "PayPal link";//1
 $LANG['paypal_notify_url'] = "PayPal notify url";//1
+$LANG['paypal_return_url'] = "PayPal return url";//1
 $LANG['people'] = "People";//1
 $LANG['phone'] = "Phone";//1
 $LANG['phone_short'] = "Ph.";//1
