@@ -2,6 +2,34 @@
 <script type="text/javascript">
 $(document).ready(function(){
 
+	$("#Container").after(
+	'<div id="confirm_delete_line_item" style="display: hidden;" title="Delete this line item?">' +
+		'<div style="padding-right: 2em;">If you choose "Delete" the line item will be removed on Save.</div>' +
+	'</div>'
+	);
+	
+      	$("#confirm_delete_line_item").dialog({
+			autoOpen: false,
+			bgiframe: true,
+			resizable: false,
+			modal: true,
+			width:300,
+			height:170,
+			overlay: {
+				backgroundColor: '#000',
+				opacity: 0.5
+			},
+			buttons: {
+				Delete: function() {
+					var delete_function = $("#confirm_delete_line_item").data('delete_function');
+					(delete_function)();
+					$(this).dialog('close');
+				},
+				Cancel: function() {
+					$(this).dialog('close');
+				}
+			}
+		});
 	/*
 	Load the jquery datePicker with out config
 	*/
@@ -99,7 +127,7 @@ $(document).ready(function(){
 	/*
 	* Product Change - updates line item with product price info
 	*/
-	$(".product_change").livequery('change',function () { 
+	$(".product_change").livequery('blur',function () { 
       	var $row_number = $(this).attr("rel");
       	var $product = $(this).val();
       	var $quantity = $("#quantity"+$row_number).attr("value");
@@ -110,13 +138,38 @@ $(document).ready(function(){
 	//delete line in invoice
 	$(".trash_link").livequery('click',function () { 
       id = $(this).attr("rel");
-      delete_row(id);
+	{/literal}
+	{if $config->confirm->deleteLineItem}
+	{literal}
+		var delete_function = function() { 
+			delete_row(id); 
+		}
+	{/literal}
+		$("#confirm_delete_line_item").data('delete_function', delete_function);
+		$("#confirm_delete_line_item").dialog('open');
+	{else}
+		delete_row(id);
+	{/if}
+	{literal}
     });
 	
 	//delete line in invoice
 	$(".trash_link_edit").livequery('click',function () { 
       id = $(this).attr("rel");
-      delete_line_item(id);
+
+	{/literal}
+	{if $config->confirm->deleteLineItem}
+	{literal}
+		var delete_function = function() {
+			delete_line_item(id); 
+		}
+	{/literal}
+		$("#confirm_delete_line_item").data('delete_function', delete_function);
+		$("#confirm_delete_line_item").dialog('open');
+	{else}
+		delete_line_item(id);
+	{/if}
+	{literal}
     });
 
 	//add new lien item in invoices
