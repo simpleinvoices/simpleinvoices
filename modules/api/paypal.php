@@ -8,6 +8,7 @@ $p->paypal_url = 'https://www.paypal.com/cgi-bin/webscr';     // paypal url
 $logger->log('Paypal API page called', Zend_Log::INFO);
 if ($p->validate_ipn()) {
 
+	$logger->log('Paypal validate success', Zend_Log::INFO);
 	//insert into payments
 	$paypal_data ="";
 	foreach ($p->ipn_data as $key => $value) { $paypal_data .= "\n$key: $value"; }
@@ -57,6 +58,9 @@ if ($p->validate_ipn()) {
 	$email -> subject = 'Instant Payment Notification - Recieved Payment';
 	$email -> send ();
 
+} else {
+
+	$logger->log('Paypal validate failed', Zend_Log::INFO);
 }
 
 
