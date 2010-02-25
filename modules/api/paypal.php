@@ -10,7 +10,8 @@ if ($p->validate_ipn()) {
 	//insert into payments
 	$paypal_data ="";
 	foreach ($p->ipn_data as $key => $value) { $paypal_data .= "\n$key: $value"; }
-	
+	$logger->log('Paypal Data:', Zend_Log::INFO);
+	$logger->log($paypal_data, Zend_Log::INFO);
 	//get the domain_id from the paypal invoice
 	$custom_array = explode(";", $p->ipn_date['custom']);
 	foreach ($custom_array as $key => $value)
@@ -21,6 +22,8 @@ if ($p->validate_ipn()) {
 			#$domain_id = substr($domain_id, 0, -1);
 		}
 	}
+
+	$logger->log('Paypal - domain_id='.$domain_id, Zend_Log::INFO);
 
 	$payment = new payment();
 	$payment->ac_inv_id = $p->ipn_data['invoice'];
@@ -34,6 +37,7 @@ if ($p->validate_ipn()) {
 	$payment_type->domain_id = $domain_id;
 
 	$payment->ac_payment_type = $payment_type->select_or_insert_where();
+	$logger->log('Paypal - payment_type='.$payment->ac_payment_type, Zend_Log::INFO);
 	$payment->insert();
 
 	$invoice = invoice::select($p->ipn_data['invoice'])
