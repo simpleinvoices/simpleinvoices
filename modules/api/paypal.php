@@ -5,6 +5,7 @@ $p = new paypal_class;             // initiate an instance of the class
 $p->paypal_url = 'https://www.paypal.com/cgi-bin/webscr';     // paypal url
 
 
+$logger->log('Paypal API page called', Zend_Log::INFO);
 if ($p->validate_ipn()) {
 
 	//insert into payments
@@ -16,7 +17,7 @@ if ($p->validate_ipn()) {
 	$custom_array = explode(";", $p->ipn_date['custom']);
 	foreach ($custom_array as $key => $value)
 	{
-		if( strstr($key,"domain:")
+		if( strstr($key,"domain:"))
 		{
 			$domain_id = substr($value, 7);
 			#$domain_id = substr($domain_id, 0, -1);
@@ -40,7 +41,7 @@ if ($p->validate_ipn()) {
 	$logger->log('Paypal - payment_type='.$payment->ac_payment_type, Zend_Log::INFO);
 	$payment->insert();
 
-	$invoice = invoice::select($p->ipn_data['invoice'])
+	$invoice = invoice::select($p->ipn_data['invoice']);
 	$biller = getBiller($invoice['biller_id']);
 
 	//send email
