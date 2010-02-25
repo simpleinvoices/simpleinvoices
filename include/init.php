@@ -32,6 +32,7 @@ $auth_session = new Zend_Session_Namespace('Zend_Auth');
 #ini_set('display_errors',true);
 
 require_once("smarty/Smarty.class.php");
+require_once("library/paypal/paypal.class.php");
 
 include_once('./include/functions.php');
 

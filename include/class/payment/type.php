@@ -1,0 +1,77 @@
+<?php
+
+class payment_type
+{
+
+    public $start_date;
+    public $end_date;
+    public $filter;
+
+    function select_or_insert_where() {
+        global $auth_session;
+        
+	$domain_id = domain_id::get($this->domain_id);
+
+        if($this->filter == "date")
+        {
+            $where = "and ap.ac_date between '$this->start_date' and '$this->end_date'";
+        }
+
+        $sql = "SELECT 
+                    pt_id,
+		    count(*) as count
+                from 
+                    ".TB_PREFIX."payment_types 
+                WHERE 
+                    pt_description = :pt_description
+		AND 
+		    domain_id = :domain_id;";
+        
+        $sth = $db->query($sql,':pt_description',$this->type,':domain_id',$domain_id);
+	$pt = $sth->fetch();
+	
+	if($pt['count'] =="1")
+	{
+		return $pt['pt_id'];
+	}
+	//add new patmeny type if no Paypal type
+	if($pt['count'] =="0")
+	{
+		$new_pt = new payment_type();
+		$new_pt->pt_description = $this->type;
+		$new_pt->pt_enabled = "1";
+		$new_pt->insert();
+
+		$payment_type = new payment_type();
+		$payment_type->type = $this->type;
+		$payment_type->domain_id = $domain_id;
+		return $payment_type->select_where();
+	}
+    }
+
+	public function insert()
+	{
+        	global $db;
+        	global $auth_session;
+
+		$domain_id = domain_id::get($this->domain_id);
+        
+	        $sql = "INSERT INTO ".TB_PREFIX."payment_type (
+				pt_description,
+				pt_enabled,
+				domain_id
+			) VALUES (
+				:pt_description,
+				:pt_enabled,
+				:domain_id
+			)";
+        	$sth = $db->query($sql,
+				':pt_description',$this->pt_description,
+				':pt_enabled',$pt_enabled,
+				':domain_id',$domain_id, 
+			) or die(htmlspecialchars(end($dbh->errorInfo())));
+        
+ 	       return $sth;
+	}
+
+}

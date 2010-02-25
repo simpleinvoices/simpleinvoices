@@ -48,4 +48,38 @@ class payment
         return dbQuery($sql,':domain_id',$auth_session->domain_id);
     }
 
+	public function insert()
+	{
+        	global $db;
+        	global $auth_session;
+
+		$domain_id = domain_id::get($this->domain_id);
+        
+	        $sql = "INSERT INTO ".TB_PREFIX."payment (
+				ac_inv_id,
+				ac_amount,
+				ac_notes,
+				ac_date,
+				ac_payment_type,
+				domain_id
+			) VALUES (
+				:ac_inv_id,
+				:ac_amount,
+				:ac_notes,
+				:ac_date,
+				:ac_payment_type,
+				:domain_id
+			)";
+        	$sth = $db->query($sql,
+				':ac_inv_id',$this->ac_inv_id,
+				':ac_amount',$this->ac_amount,
+				':ac_notes',$this->ac_notes,
+				':ac_date',$this->ac_date,
+				':ac_payment_type',$this->ac_payment_type,
+				':domain_id',$domain_id, 
+			) or die(htmlspecialchars(end($dbh->errorInfo())));
+        
+ 	       return $sth;
+	}
+
 }

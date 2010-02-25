@@ -444,7 +444,7 @@
 				item_name=$invoice.index_name invoice=$invoice.index_id 
 				amount=$invoice.total currency_code=USD link_wording=$LANG.paypal_link
 				notify_url=$biller.paypal_notify_url return_url=$biller.paypal_return_url
-				include_image=true
+				domain_id = $invoice.domain_id include_image=true
 			}
 
 		</td>
