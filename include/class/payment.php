@@ -6,8 +6,9 @@ class payment
     public $start_date;
     public $end_date;
     public $filter;
+    public $online_payment_id;
 
-    function select_all() {
+    public function select_all() {
         global $auth_session;
 	$domain_id = domain_id::get($this->domain_id);
         
@@ -18,6 +19,7 @@ class payment
         if($this->filter == "online_payment_id")
         {
             $where = "and ap.online_payment_id = '$this->online_payment_id'";
+
         }
 
         $sql = "SELECT 

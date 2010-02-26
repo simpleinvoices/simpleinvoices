@@ -8,6 +8,7 @@ $xml_message="";
 
 $logger->log('Paypal API page called', Zend_Log::INFO);
 if ($p->validate_ipn()) {
+#if (!empty($_POST)) {
 
 	$logger->log('Paypal validate success', Zend_Log::INFO);
 
@@ -37,19 +38,20 @@ if ($p->validate_ipn()) {
 
 	$check_payment = new payment();
 	$check_payment->filter='online_payment_id';
-	$check_payment->online_payment_id = $p->ipn_data['tnx_id'];
+	$check_payment->online_payment_id = $p->ipn_data['txn_id'];
+	#$check_payment->online_payment_id = $_POST['txn_id'];
 	$check_payment->domain_id = $domain_id;
 	$sth_payments = $check_payment->select_all();
 	$number_of_payments = $sth_payments->fetchAll();	
-	$logger->log('Paypal - nuumber of times this payment is in the db: '.$number_of_payments['count'], Zend_Log::INFO);
+	$logger->log('Paypal - nuumber of times this payment is in the db: '.$number_of_payments[0]['count'], Zend_Log::INFO);
 	
-	if($number_of_payments['count'] > 0)
+	if($number_of_payments[0]['count'] > 0)
 	{
 		$xml_message .= 'Online payment '.$p->ipn_data['tnx_id'].' has already been entered into Simple Invoices - exiting for domain_id='.$domain_id;
 		$logger->log($xml_message, Zend_Log::INFO);
 	}
 
-	if($number_of_payments['count'] == '0')
+	if($number_of_payments[0]['count'] == '0')
 	{
 
 		$payment = new payment();
