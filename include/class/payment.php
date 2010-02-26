@@ -9,6 +9,7 @@ class payment
 
     function select_all() {
         global $auth_session;
+	$domain_id = domain_id::get($this->domain_id);
         
         if($this->filter == "date")
         {
@@ -50,7 +51,7 @@ class payment
                     $where
                 ORDER BY ap.id DESC";
         
-        return dbQuery($sql,':domain_id',$auth_session->domain_id);
+        return dbQuery($sql,':domain_id',$domain_id);
     }
 
 	public function insert()
