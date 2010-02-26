@@ -29,7 +29,7 @@ if ($p->validate_ipn()) {
 		}
 	}
 
-	$logger->log('Paypal - domain_id='.$domain_id, Zend_Log::INFO);
+	$logger->log('Paypal - domain_id='.$domain_id.'EOM', Zend_Log::INFO);
 
 	$payment = new payment();
 	$payment->ac_inv_id = $p->ipn_data['invoice'];
