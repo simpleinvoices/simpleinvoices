@@ -41,6 +41,7 @@ if ($p->validate_ipn()) {
 	$check_payment->domain_id = $domain_id;
 	$sth_payments = $check_payment->select_all();
 	$number_of_payments = $sth_patments->fetchAll();	
+	$logger->log('Paypal - nuumber of times this payment is in the db: '.$number_of_payments['count'], Zend_Log::INFO);
 	
 	if($number_of_payments['count'] > 0)
 	{
