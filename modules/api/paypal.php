@@ -63,7 +63,7 @@ if ($p->validate_ipn()) {
 		#$payment->ac_notes = $paypal_data;
 		$payment->ac_date = date( 'Y-m-d', strtotime($p->ipn_data['payment_date']));
 		#$payment->ac_date = date( 'Y-m-d', strtotime($_POST['payment_date']));
-		$payment->online_payment_id = $p->ipn_data['tnx_id'];
+		$payment->online_payment_id = $p->ipn_data['txn_id'];
 		$payment->domain_id = $domain_id;
 
 			$payment_type = new payment_type();
