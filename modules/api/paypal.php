@@ -45,7 +45,7 @@ if ($p->validate_ipn()) {
 	if($number_of_payments['count'] > 0)
 	{
 		$xml_message .= 'Online payment '.$p->ipn_data['tnx_id'].' has already been entered into Simple Invoices - exiting for domain_id='.$domain_id;
-		$logger->log($message, Zend_Log::INFO);
+		$logger->log($xml_message, Zend_Log::INFO);
 	}
 
 	if($number_of_payments['count'] == '0')
