@@ -8,7 +8,7 @@ $xml_message="";
 
 $logger->log('Paypal API page called', Zend_Log::INFO);
 if ($p->validate_ipn()) {
-#if (!empty($_POST)) {
+if (!empty($_POST)) {
 
 	$logger->log('Paypal validate success', Zend_Log::INFO);
 
