@@ -16,11 +16,15 @@ if ($p->validate_ipn()) {
 	$logger->log($paypal_data, Zend_Log::INFO);
 	//get the domain_id from the paypal invoice
 	$custom_array = explode(";", $p->ipn_date['custom']);
+	#$custom_array = explode(";", $_POST['custom']);
+
+	$logger->log('Paypal - custom='.$_POST['custom'],Zend_Log::INFO);
 	foreach ($custom_array as $key => $value)
 	{
-		if( strstr($key,"domain:"))
+		if( strstr($value,"domain_id:"))
 		{
-			$domain_id = substr($value, 7);
+			$logger->log('Paypal - value='.$value,Zend_Log::INFO);
+			$domain_id = substr($value, 10);
 			#$domain_id = substr($domain_id, 0, -1);
 		}
 	}
@@ -29,9 +33,13 @@ if ($p->validate_ipn()) {
 
 	$payment = new payment();
 	$payment->ac_inv_id = $p->ipn_data['invoice'];
+	#$payment->ac_inv_id = $_POST['invoice'];
 	$payment->ac_amount = $p->ipn_data['mc_gross'];
+	#$payment->ac_amount = $_POST['mc_gross'];
 	$payment->ac_notes = $paypal_data;
+	#$payment->ac_notes = $paypal_data;
 	$payment->ac_date = date( 'Y-m-d', strtotime($p->ipn_data['payment_date']));
+	#$payment->ac_date = date( 'Y-m-d', strtotime($_POST['payment_date']));
 	$payment->domain_id = $domain_id;
 
 	$payment_type = new payment_type();
@@ -43,6 +51,7 @@ if ($p->validate_ipn()) {
 	$payment->insert();
 
 	$invoice = invoice::select($p->ipn_data['invoice']);
+	#$invoice = invoice::select($_POST['invoice']);
 	$biller = getBiller($invoice['biller_id']);
 
 	//send email

@@ -76,7 +76,7 @@ class payment
 				':ac_notes',$this->ac_notes,
 				':ac_date',$this->ac_date,
 				':ac_payment_type',$this->ac_payment_type,
-				':domain_id',$domain_id, 
+				':domain_id',$domain_id 
 			) or die(htmlspecialchars(end($dbh->errorInfo())));
         
  	       return $sth;

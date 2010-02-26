@@ -9,6 +9,7 @@ class payment_type
 
     function select_or_insert_where() {
         global $auth_session;
+        global $db;
         
 	$domain_id = domain_id::get($this->domain_id);
 
@@ -45,7 +46,7 @@ class payment_type
 		$payment_type = new payment_type();
 		$payment_type->type = $this->type;
 		$payment_type->domain_id = $domain_id;
-		return $payment_type->select_where();
+		return $payment_type->select_or_insert_where();
 	}
     }
 
@@ -56,7 +57,7 @@ class payment_type
 
 		$domain_id = domain_id::get($this->domain_id);
         
-	        $sql = "INSERT INTO ".TB_PREFIX."payment_type (
+	        $sql = "INSERT INTO ".TB_PREFIX."payment_types (
 				pt_description,
 				pt_enabled,
 				domain_id
@@ -67,8 +68,8 @@ class payment_type
 			)";
         	$sth = $db->query($sql,
 				':pt_description',$this->pt_description,
-				':pt_enabled',$pt_enabled,
-				':domain_id',$domain_id, 
+				':pt_enabled',$this->pt_enabled,
+				':domain_id',$domain_id 
 			) or die(htmlspecialchars(end($dbh->errorInfo())));
         
  	       return $sth;
