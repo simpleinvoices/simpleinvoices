@@ -111,7 +111,7 @@ class paypal_class {
       
       $this->last_error = '';
       
-      $this->ipn_log_file = '.ipn_results.log';
+      $this->ipn_log_file = './tmp/log/paypal_ipn_results.log';
       $this->ipn_log = true; 
       $this->ipn_response = '';
       

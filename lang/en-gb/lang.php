@@ -342,6 +342,7 @@ $LANG['notes_opt'] = "Notes (optional)";//1
 $LANG['number_of_taxes_per_line_item'] = "Number of taxes per line item";//1
 $LANG['number_short'] = "No.";//1
 $LANG['of'] = "of";//1
+$LANG['online_payment_id'] = "Online payment ID";//1
 $LANG['open'] = "Open";//1
 $LANG['optional'] = "optional";//1
 $LANG['options'] = "Options";//1

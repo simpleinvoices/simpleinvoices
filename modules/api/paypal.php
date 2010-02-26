@@ -4,11 +4,13 @@ $p = new paypal_class;             // initiate an instance of the class
 #$p->paypal_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';   // testing paypal url
 $p->paypal_url = 'https://www.paypal.com/cgi-bin/webscr';     // paypal url
 
+$xml_message="";
 
 $logger->log('Paypal API page called', Zend_Log::INFO);
 if ($p->validate_ipn()) {
 
 	$logger->log('Paypal validate success', Zend_Log::INFO);
+
 	//insert into payments
 	$paypal_data ="";
 	foreach ($p->ipn_data as $key => $value) { $paypal_data .= "\n$key: $value"; }
@@ -30,46 +32,79 @@ if ($p->validate_ipn()) {
 	}
 
 	$logger->log('Paypal - domain_id='.$domain_id.'EOM', Zend_Log::INFO);
+	
+	//check if payment has already been entered
 
-	$payment = new payment();
-	$payment->ac_inv_id = $p->ipn_data['invoice'];
-	#$payment->ac_inv_id = $_POST['invoice'];
-	$payment->ac_amount = $p->ipn_data['mc_gross'];
-	#$payment->ac_amount = $_POST['mc_gross'];
-	$payment->ac_notes = $paypal_data;
-	#$payment->ac_notes = $paypal_data;
-	$payment->ac_date = date( 'Y-m-d', strtotime($p->ipn_data['payment_date']));
-	#$payment->ac_date = date( 'Y-m-d', strtotime($_POST['payment_date']));
-	$payment->domain_id = $domain_id;
+	$check_payment = new payment();
+	$check_payment->filter='online_payment_id';
+	$check_payment->online_payment_id = $p->ipn_data['tnx_id'];
+	$check_payment->domain_id = $domain_id;
+	$sth_payments = $check_payment->select_all();
+	$number_of_payments = $sth_patments->fetchAll();	
+	
+	if($number_of_payments['count'] > 0)
+	{
+		$xml_message .= 'Online payment '.$p->ipn_data['tnx_id'].' has already been entered into Simple Invoices - exiting for domain_id='.$domain_id;
+		$logger->log($message, Zend_Log::INFO);
+	}
 
-	$payment_type = new payment_type();
-	$payment_type->type = "Paypal";
-	$payment_type->domain_id = $domain_id;
+	if($number_of_payments['count'] == '0')
+	{
 
-	$payment->ac_payment_type = $payment_type->select_or_insert_where();
-	$logger->log('Paypal - payment_type='.$payment->ac_payment_type, Zend_Log::INFO);
-	$payment->insert();
+		$payment = new payment();
+		$payment->ac_inv_id = $p->ipn_data['invoice'];
+		#$payment->ac_inv_id = $_POST['invoice'];
+		$payment->ac_amount = $p->ipn_data['mc_gross'];
+		#$payment->ac_amount = $_POST['mc_gross'];
+		$payment->ac_notes = $paypal_data;
+		#$payment->ac_notes = $paypal_data;
+		$payment->ac_date = date( 'Y-m-d', strtotime($p->ipn_data['payment_date']));
+		#$payment->ac_date = date( 'Y-m-d', strtotime($_POST['payment_date']));
+		$payment->online_payment_id = $p->ipn_data['tnx_id'];
+		$payment->domain_id = $domain_id;
 
-	$invoice = invoice::select($p->ipn_data['invoice']);
-	#$invoice = invoice::select($_POST['invoice']);
-	$biller = getBiller($invoice['biller_id']);
+			$payment_type = new payment_type();
+			$payment_type->type = "Paypal";
+			$payment_type->domain_id = $domain_id;
 
-	//send email
-	$body =  "A Paypal instant payment notification was successfully recieved into Simple Invoices\n";
-	$body .= "from ".$p->ipn_data['payer_email']." on ".date('m/d/Y');
-	$body .= " at ".date('g:i A')."\n\nDetails:\n";
-	$body .= $paypal_data;
+		$payment->ac_payment_type = $payment_type->select_or_insert_where();
+		$logger->log('Paypal - payment_type='.$payment->ac_payment_type, Zend_Log::INFO);
+		$payment->insert();
 
-	$email = new email();
-	$email -> notes = $body;
-	$email -> to = $biller['email'];
-	$email -> from = "simpleinvoice@localhost";
-	$email -> subject = 'Instant Payment Notification - Recieved Payment';
-	$email -> send ();
+		$invoice = invoice::select($p->ipn_data['invoice']);
+		#$invoice = invoice::select($_POST['invoice']);
+		$biller = getBiller($invoice['biller_id']);
 
+		//send email
+		$body =  "A Paypal instant payment notification was successfully recieved into Simple Invoices\n";
+		$body .= "from ".$p->ipn_data['payer_email']." on ".date('m/d/Y');
+		$body .= " at ".date('g:i A')."\n\nDetails:\n";
+		$body .= $paypal_data;
+
+		$email = new email();
+		$email -> notes = $body;
+		$email -> to = $biller['email'];
+		$email -> from = "simpleinvoices@localhost.localdomain";
+		$email -> subject = 'Instant Payment Notification - Recieved Payment';
+		$email -> send ();
+
+		$xml_message['data'] .= $body;
+	}
 } else {
 
+	$xml_message .= "Paypal validate failed" ;
 	$logger->log('Paypal validate failed', Zend_Log::INFO);
 }
 
+header('Content-type: application/xml');
+try 
+{
+    $xml = new encode();
+    $xml->xml( $xml_message );
+    echo $xml;
+} 
+catch (Exception $e) 
+{
+    echo $e->getMessage();
+}
 

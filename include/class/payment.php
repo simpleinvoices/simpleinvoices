@@ -14,6 +14,10 @@ class payment
         {
             $where = "and ap.ac_date between '$this->start_date' and '$this->end_date'";
         }
+        if($this->filter == "online_payment_id")
+        {
+            $where = "and ap.online_payment_id = '$this->online_payment_id'";
+        }
 
         $sql = "SELECT 
                     ap.*, 
@@ -22,7 +26,8 @@ class payment
                     pref.pref_description as preference,
                     pt.pt_description as type,
                     c.name as cname, 
-                    b.name as bname 
+                    b.name as bname,
+		    count(*) as count
                 from 
                     ".TB_PREFIX."payment ap, 
                     ".TB_PREFIX."payment_types pt, 
@@ -61,6 +66,7 @@ class payment
 				ac_notes,
 				ac_date,
 				ac_payment_type,
+				online_payment_id,
 				domain_id
 			) VALUES (
 				:ac_inv_id,
@@ -68,6 +74,7 @@ class payment
 				:ac_notes,
 				:ac_date,
 				:ac_payment_type,
+				:online_payment_id,
 				:domain_id
 			)";
         	$sth = $db->query($sql,
@@ -76,6 +83,7 @@ class payment
 				':ac_notes',$this->ac_notes,
 				':ac_date',$this->ac_date,
 				':ac_payment_type',$this->ac_payment_type,
+				':online_payment_id',$this->online_payment_id,
 				':domain_id',$domain_id 
 			) or die(htmlspecialchars(end($dbh->errorInfo())));
         

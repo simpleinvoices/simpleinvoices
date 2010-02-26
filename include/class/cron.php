@@ -284,7 +284,7 @@ class cron {
 
 						## email the people
 						
-						$invoice = getInvoice($data[$key]['invoice_id']);
+						$invoice= getInvoice($data[$key]['invoice_id']);
 						$preference = getPreference($invoice['preference_id']);
 						$biller = getBiller($invoice['biller_id']);
 						$customer = getCustomer($invoice['customer_id']);
@@ -305,9 +305,17 @@ class cron {
 
 							#$attachment = file_get_contents('./tmp/cache/' . $pdf_file_name);
 
+
+
 							$email = new email();
 							$email -> format = 'cron_invoice';
-							$email -> notes = "Hi ".$customer['name'].",<br /><br /> Attached is your PDF copy of ".$data[$key]['index_name']." from ".$biller['name'];
+
+								$email_body = new email_body();
+								$email_body->customer_name = $customer['name'];
+								$email_body->invoice_name = $data[$key]['index_name'];
+								$email_body->biller_name = $biller['name'];
+							
+							$email -> notes = $email_body->create();
 							$email -> from = $biller['email'];
 							$email -> from_friendly = $biller['name'];
 							if($data[$key]['email_customer'] == "1")
