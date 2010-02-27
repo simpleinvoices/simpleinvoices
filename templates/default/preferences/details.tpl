@@ -22,6 +22,13 @@
 			<td>{$preference.pref_currency_sign|regex_replace:"/[\\\]/":""}</td>
 		</tr>
 		<tr>
+			<td class="details_screen">{$LANG.currency_code}
+				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_currency_code" title="{$LANG.currency_code}">
+				<img src="./images/common/help-small.png" alt="" /> </a>
+			</td>
+			<td>{$preference.currency_code|regex_replace:"/[\\\]/":""}</td>
+		</tr>
+		<tr>
 			<td class="details_screen">Invoice heading 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_heading" title="{$LANG.invoice_heading}">
 				<img src="./images/common/help-small.png" alt="" /> </a> 
@@ -161,6 +168,15 @@
                    {$LANG.currency_sign_non_dollar}
                     <img src="./images/common/help-small.png" alt="" /> 
                 </a>
+            </td>
+		</tr>
+		<tr>
+			<td class="details_screen">{$LANG.currency_code} 
+				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_currency_code" title="{$LANG.currency_code}">
+				<img src="./images/common/help-small.png" alt="" /> </a>
+			</td>
+			<td>
+                <input type="text" name='currency_code' value="{$preference.currency_code}" size="15" />
             </td>
 		</tr>
 		<tr>

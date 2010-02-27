@@ -1,8 +1,4 @@
 <?php
-// -Gates 5/5/2008 added domain_id to parameters 
-//stop the direct browsing to this file - let index.php handle which files get displayed
-checkLogin();
-
 # Deal with op and add some basic sanity checking
 
 $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
@@ -26,6 +22,7 @@ if (  $op === 'insert_preference' ) {
 			domain_id,
 			pref_description,
 			pref_currency_sign,
+			currency_code,
 			pref_inv_heading,
 			pref_inv_wording,
 			pref_inv_detail_heading,
@@ -47,6 +44,7 @@ if (  $op === 'insert_preference' ) {
 			:domain_id,
 			:description,
 			:currency_sign,
+			:currency_code,
 			:heading,
 			:wording,
 			:detail_heading,
@@ -68,6 +66,7 @@ if (  $op === 'insert_preference' ) {
 	  ':domain_id', $auth_session->domain_id,
 	  ':description', $_POST['p_description'],
 	  ':currency_sign', $_POST['p_currency_sign'],
+	  ':currency_code', $_POST['currency_code'],
 	  ':heading', $_POST['p_inv_heading'],
 	  ':wording', $_POST['p_inv_wording'],
 	  ':detail_heading', $_POST['p_inv_detail_heading'],
@@ -86,7 +85,7 @@ if (  $op === 'insert_preference' ) {
 	  )) {
 		$saved = true;
 		//$display_block = $LANG['save_preference_success'];
-	} else {
+	} ELSE {
 		$saved = false;
 		//$display_block =  $LANG['save_preference_failure'];
 	}
@@ -105,6 +104,7 @@ else if (  $op === 'edit_preference' ) {
 			SET
 				pref_description = :description,
 				pref_currency_sign = :currency_sign,
+				currency_code = :currency_code,
 				pref_inv_heading = :heading,
 				pref_inv_wording = :wording,
 				pref_inv_detail_heading = :detail_heading,
@@ -126,6 +126,7 @@ else if (  $op === 'edit_preference' ) {
 		if (dbQuery($sql, 
 		  ':description', $_POST['pref_description'],
 		  ':currency_sign', $_POST['pref_currency_sign'],
+		  ':currency_code', $_POST['currency_code'],
 		  ':heading', $_POST['pref_inv_heading'],
 		  ':wording', $_POST['pref_inv_wording'],
 		  ':detail_heading', $_POST['pref_inv_detail_heading'],

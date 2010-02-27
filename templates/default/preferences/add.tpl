@@ -36,6 +36,14 @@
 	</td>
 </tr>
 <tr>
+	<td class="details_screen">{$LANG.currency_code} 
+	<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_currency_code" title="{$LANG.currency_code}"><img src="./images/common/help-small.png" alt="" /> </a>
+	</td>
+	<td>
+	<input type="text" name="currency_code"  value="{$smarty.post.currency_code}" size="15" />
+	</td>
+</tr>
+<tr>
 	<td class="details_screen">{$LANG.invoice_heading} 
 	<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_heading" title="{$LANG.invoice_heading}"><img src="./images/common/help-small.png" alt="" /> </a>
 	</td>

@@ -1348,7 +1348,7 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     $patch['225']['date'] = "20100209";    
 
     $patch['226']['name'] = "Define currency in preferences";
-    $patch['226']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `currency` VARCHAR( 25 ) NULL ;";
+    $patch['226']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `currency_code` VARCHAR( 25 ) NULL ;";
     $patch['226']['date'] = "20100209";    
 
     $patch['227']['name'] = "Create cron table to handle recurrence";
@@ -1386,6 +1386,10 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     $patch['231']['name'] = "Add paypal payment id into payment table";
     $patch['231']['patch'] = "ALTER TABLE  `".TB_PREFIX."payment` ADD `online_payment_id` VARCHAR( 255 ) NULL AFTER  `domain_id`";
     $patch['231']['date'] = "20100226";    
+
+    $patch['232']['name'] = "Define currency display in preferences";
+    $patch['232']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `currency_position` VARCHAR( 25 ) NULL ;";
+    $patch['232']['date'] = "20100227";    
 
 //ALTER TABLE  `si_biller` ADD  `paypal_business_name` VARCHAR( 255 ) NOT NULL AFTER  `footer`
 //ALTER TABLE  `si_biller` ADD  `paypal_notify_url` VARCHAR( 255 ) NOT NULL AFTER  `paypal_business_name`
