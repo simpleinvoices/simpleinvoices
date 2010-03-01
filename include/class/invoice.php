@@ -498,6 +498,7 @@ class invoice {
 			$nii->tax=$invoice['invoice_items'][$key]['tax'];
 			$nii_id = $nii->insert_item();
 		}
-
+		
+		return $ni_id;
 	}
 }

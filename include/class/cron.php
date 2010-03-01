@@ -279,18 +279,18 @@ class cron {
 
 						$ni = new invoice();
 						$ni->id = $data[$key]['invoice_id'];
-						$ni->recur();
+						$new_invoice_id = $ni->recur();
 
 
 						## email the people
 						
-						$invoice= getInvoice($data[$key]['invoice_id']);
+						$invoice= invoice::select($new_invoice_id);
 						$preference = getPreference($invoice['preference_id']);
 						$biller = getBiller($invoice['biller_id']);
 						$customer = getCustomer($invoice['customer_id']);
 						#print_r($customer);
 						#create PDF nameVj
-						$spc2us_pref = str_replace(" ", "_", $data[$key]['index_name']);
+						$spc2us_pref = str_replace(" ", "_", $invoice['index_name']);
 						$pdf_file_name = $spc2us_pref.".pdf";
 							
 						// Create invoice
@@ -300,7 +300,7 @@ class cron {
 							$export -> format = "pdf";
 							$export -> file_location = 'file';
 							$export -> module = 'invoice';
-							$export -> id = $data[$key]['invoice_id'];
+							$export -> id = $invoice['id'];
 							$export -> execute();
 
 							#$attachment = file_get_contents('./tmp/cache/' . $pdf_file_name);
@@ -312,7 +312,7 @@ class cron {
 
 								$email_body = new email_body();
 								$email_body->customer_name = $customer['name'];
-								$email_body->invoice_name = $data[$key]['index_name'];
+								$email_body->invoice_name = $invoice['index_name'];
 								$email_body->biller_name = $biller['name'];
 							
 							$email -> notes = $email_body->create();
