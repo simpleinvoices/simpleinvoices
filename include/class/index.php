@@ -22,7 +22,9 @@ class index
         global $auth_session;
 
 	$defaults = getSystemDefaults();
-	
+	#
+	#if billnum on  & id = null then check the default incremetn id for that sub_node and use that
+
        # $subnode = "";
 
         if ($sub_node !="")
@@ -47,8 +49,26 @@ class index
         $sth = $db->query($sql,':node',$node,':domain_id',$auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
  
         $index = $sth->fetch();
+        
+        //this handles if numbering by biller turned on after x invoices already created - 
+        if($index['id'] == "" AND $defaults['invoice_numbering_by_biller'] == "1")
+        {
 
-        if($index['id'] == "")
+		$sql2 = "select 
+			    id 
+			from 
+			    si_index 
+			where
+			    domain_id = :domain_id
+			and
+			    node = :node
+		       ".$subnode;
+
+                $sth2 = $db->query($sql2,':node',$node,':domain_id',$auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+                $index2 = $sth2->fetch();
+                $index['id'] = $index2['id'];
+        }
+	if($index['id'] == "")
         {
             $id = "1";
         
@@ -56,7 +76,7 @@ class index
             
             $id = $index['id'] + 1;
         }
-        
+
         return $id;
 
     }
@@ -77,8 +97,8 @@ class index
             $subnode = "and sub_node = ".$sub_node; 
         }
         */
-
-        if ($next == 1)
+	echo "do next:";
+        if ($next == '1')
         {
 
 		if ($defaults['invoice_numbering_by_biller'] == '0')
@@ -135,7 +155,7 @@ class index
 				sub_node = :sub_node;";
 		 } else {
 
-		    $sql ="update
+		    $sql ="update 
 				si_index 
 			    set 
 				id = :id 
@@ -148,16 +168,16 @@ class index
 		           and 	
 				sub_node_2 = :sub_node_2;";
 		}
-
-
-		if ($defaults['invoice_numbering_by_biller'] == '0')
-		{	
-        		$sth = $db->query($sql,':id',$next,':node',$node,':sub_node', $sub_node,':domain_id',$auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
-		} else {
-        		$sth = $db->query($sql,':id',$next,':node',$node,':sub_node', $sub_node,':sub_node_2',$sub_node_2,':domain_id',$auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
-		}
-
+	
 	}
+
+	if ($defaults['invoice_numbering_by_biller'] == '0')
+	{	
+		$sth = $db->query($sql,':id',$next,':node',$node,':sub_node', $sub_node,':domain_id',$auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+	} else {
+		$sth = $db->query($sql,':id',$next,':node',$node,':sub_node', $sub_node,':sub_node_2',$sub_node_2,':domain_id',$auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+	}
+
 
         return $next;
 
