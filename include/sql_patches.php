@@ -1299,7 +1299,7 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     unset($max_invoice);
 
     $patch['214']['name'] = "Add sub_node_2 to si_index table";
-    $patch['214']['patch'] = "ALTER TABLE  `".TB_PREFIX."index` ADD  `sub_node_2` VARCHAR( 255 ) NOT NULL AFTER  `sub_node`";
+    $patch['214']['patch'] = "ALTER TABLE  `".TB_PREFIX."index` ADD  `sub_node_2` VARCHAR( 255 ) NULL AFTER  `sub_node`";
     $patch['214']['date'] = "20090912";    
 
 
@@ -1390,6 +1390,10 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     $patch['232']['name'] = "Define currency display in preferences";
     $patch['232']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `currency_position` VARCHAR( 25 ) NULL ;";
     $patch['232']['date'] = "20100227";    
+
+    $patch['233']['name'] = "Add system default to control invoice number by biller";
+    $patch['233']['patch'] = "INSERT INTO `".TB_PREFIX."system_defaults` (name, value, domain_id, extension_id) VALUES ('invoice_numbering_by_biller','0','1','1') ;";
+    $patch['233']['date'] = "20100302";    
 
 //ALTER TABLE  `si_biller` ADD  `paypal_business_name` VARCHAR( 255 ) NOT NULL AFTER  `footer`
 //ALTER TABLE  `si_biller` ADD  `paypal_notify_url` VARCHAR( 255 ) NOT NULL AFTER  `paypal_business_name`

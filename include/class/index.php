@@ -21,13 +21,15 @@ class index
         global $db;
         global $auth_session;
 
+	$defaults = getSystemDefaults();
+	
        # $subnode = "";
 
         if ($sub_node !="")
         {
             $subnode = "and sub_node = ".$sub_node; 
         }
-        if ($sub_node_2 !="")
+        if ($sub_node_2 !="" and $defaults['invoice_numbering_by_biller'] == "1")
         {
             $subnode2 = " and sub_node_2 = ".$sub_node_2; 
         }
@@ -64,7 +66,9 @@ class index
     
         $next = index::next($node,$sub_node,$sub_node_2);
 
-        global $db;
+	$defaults = getSystemDefaults();
+        
+	global $db;
         global $auth_session;
         
         /*
@@ -77,25 +81,83 @@ class index
         if ($next == 1)
         {
 
-            $sql = "insert into si_index (id, node, sub_node, sub_node_2, domain_id) VALUES (:id, :node, :sub_node, :sub_node_2, :domain_id);";
+		if ($defaults['invoice_numbering_by_biller'] == '0')
+		{	
+		    $sql = "insert 
+				into si_index 
+				(
+					id, 
+					node, 
+					sub_node,
+					domain_id
+				) 
+				VALUES 
+				(
+					:id, 
+					:node, 
+					:sub_node, 
+					:domain_id
+				);";
+		} else {
+		    $sql = "insert 
+				into si_index 
+				(
+					id, 
+					node, 
+					sub_node,
+					sub_node_2,
+					domain_id
+				) 
+				VALUES 
+				(
+					:id, 
+					:node, 
+					:sub_node, 
+					:sub_node_2, 
+					:domain_id
+				);";
+
+		}
 
         } else {
 
-            $sql ="update
-                        si_index 
-                    set 
-                        id = :id 
-                    where
-                        node = :node
-                    and
-                        domain_id = :domain_id
-                    and
-                        sub_node = :sub_node
-                    and
-                        sub_node_2 = :sub_node_2";
-        }
+		if ($defaults['invoice_numbering_by_biller'] == '0')
+		{	
+		    $sql ="update
+				si_index 
+			    set 
+				id = :id 
+			    where
+				node = :node
+			    and
+				domain_id = :domain_id
+			    and
+				sub_node = :sub_node;";
+		 } else {
 
-        $sth = $db->query($sql,':id',$next,':node',$node,':sub_node', $sub_node,':sub_node_2',$sub_node_2,':domain_id',$auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+		    $sql ="update
+				si_index 
+			    set 
+				id = :id 
+			    where
+				node = :node
+			    and
+				domain_id = :domain_id
+			    and
+				sub_node = :sub_node
+		           and 	
+				sub_node_2 = :sub_node_2;";
+		}
+
+
+		if ($defaults['invoice_numbering_by_biller'] == '0')
+		{	
+        		$sth = $db->query($sql,':id',$next,':node',$node,':sub_node', $sub_node,':domain_id',$auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+		} else {
+        		$sth = $db->query($sql,':id',$next,':node',$node,':sub_node', $sub_node,':sub_node_2',$sub_node_2,':domain_id',$auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+		}
+
+	}
 
         return $next;
 

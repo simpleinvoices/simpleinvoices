@@ -13,7 +13,7 @@ $taxes = getTaxes();
 $products = getProducts();
 $preferences = getPreferences();
 $defaults = getSystemDefaults();
-
+print_r($defaults);
 if ($billers == null OR $customers == null OR $taxes == null OR $products == null OR $preferences == null)
 {
     $first_run_wizard =true;
