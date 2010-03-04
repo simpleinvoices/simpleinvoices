@@ -15,6 +15,42 @@ $sub_node_2 = 2nd sub set of the node - ir. this is the 'biller' if node = 'invo
 class index
 {
 
+	
+    public static function select($node, $sub_node="", $sub_node_2="")
+    {
+
+
+        if ($sub_node !="")
+        {
+            $subnode = "and sub_node = ".$sub_node; 
+        }
+        if ($sub_node_2 !="" and $defaults['invoice_numbering_by_biller'] == "1")
+        {
+            $subnode2 = " and sub_node_2 = ".$sub_node_2; 
+        }
+        global $db;
+        $sql = "select 
+                    id 
+                from 
+                    si_index 
+                where
+                    domain_id = :domain_id
+                and
+                    node = :node
+               ".$subnode.$subnode2;
+        
+        $sth = $db->query($sql,':node',$node,':domain_id',$auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+ 
+        $index = $sth->fetch();
+
+	if ( empty($index))
+	{
+        	$index['id'] = '0';
+	}
+	
+        return $index['id'];
+
+   }
     public static function next($node, $sub_node="", $sub_node_2="")
     {
 
@@ -84,8 +120,10 @@ class index
     public static function increment($node,$sub_node="",$sub_node_2="")
     {
     
-        $next = index::next($node,$sub_node,$sub_node_2);
 
+        $next = index::next($node,$sub_node,$sub_node_2);
+        $current = index::select($node,$sub_node,$sub_node_2);
+	echo "next:".$next."current:".$current;
 	$defaults = getSystemDefaults();
         
 	global $db;
@@ -97,8 +135,7 @@ class index
             $subnode = "and sub_node = ".$sub_node; 
         }
         */
-	echo "do next:";
-        if ($next == '1')
+        if ($next == '1' OR ($current = '0' AND ($next != $current +1)) )
         {
 
 		if ($defaults['invoice_numbering_by_biller'] == '0')
@@ -155,6 +192,8 @@ class index
 				sub_node = :sub_node;";
 		 } else {
 
+			## need invoice::get()
+			##if current = "" then do insert not update
 		    $sql ="update 
 				si_index 
 			    set 
