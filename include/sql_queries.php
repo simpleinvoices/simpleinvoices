@@ -1696,7 +1696,7 @@ function insertInvoice($type) {
 			INTO
 		".TB_PREFIX."invoices (
 			id, 
-            index_id,
+            		index_id,
 			domain_id,
 			biller_id, 
 			customer_id, 
@@ -1763,7 +1763,8 @@ function insertInvoice($type) {
     $pref_group=getPreference($_POST[preference_id]);
 
 	$sth= dbQuery($sql,
-		':index_id', index::next('invoice',$pref_group[index_group],$_POST[biller_id]),
+		#':index_id', index::next('invoice',$pref_group[index_group],$_POST[biller_id]),
+		':index_id', index::next('invoice',$pref_group[index_group]),
 		':domain_id', $auth_session->domain_id,
 		':biller_id', $_POST[biller_id],
 		':customer_id', $_POST[customer_id],
@@ -1777,7 +1778,8 @@ function insertInvoice($type) {
 		':customField4', $_POST[customField4]
 		);
 
-    index::increment('invoice',$pref_group[index_group],$_POST[biller_id]);
+    #index::increment('invoice',$pref_group[index_group],$_POST[biller_id]);
+    index::increment('invoice',$pref_group[index_group]);
 
     return $sth;
 }
