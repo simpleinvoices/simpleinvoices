@@ -124,8 +124,8 @@ class db
 			$sth = NULL;
 		}
 		//$this->connection->closeCursor();
-		#return $sth;
-		return $result;
+		return $sth;
+		#return $result;
 
 		$sth->closeCursor();
 		
