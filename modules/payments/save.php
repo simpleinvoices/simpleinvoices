@@ -12,34 +12,18 @@ checkLogin();
 global $db_server;
 global $auth_session;
 if ( isset($_POST['process_payment']) ) {
-
-	$sql = "INSERT into
-			".TB_PREFIX."payment
-		VALUES
-			(	
-				NULL,
-				:invoice,
-				:amount,
-				:notes,
-				:date,
-				:payment_type,
-				:domain_id
-			)";
-	if ($db_server == 'pgsql') {
-		$sql = "INSERT into ".TB_PREFIX."payment
-			(ac_inv_id, ac_amount, ac_notes, ac_date, ac_payment_type, domain_id)
-		VALUES
-			(:invoice, :amount, :notes, :date, :payment_type, :domain_id)";
-	}
-
-	if (dbQuery($sql,
-	  ':invoice', $_POST['ac_inv_id'],
-	  ':amount', $_POST['ac_amount'],
-	  ':notes', $_POST['ac_notes'],
-	  ':date', $_POST['ac_date'],
-	  ':payment_type', $_POST['ac_payment_type'],
-	  ':domain_id', $auth_session->domain_id
-	  )) {
+	
+	$payment = new payment();
+	$payment->ac_inv_id = $_POST['ac_inv_id'];
+	$payment->ac_amount = $_POST['ac_amount'];
+	$payment->ac_notes = $_POST['ac_notes'];
+	$payment->ac_date = $_POST['ac_date'];
+	$payment->ac_payment_type = $_POST['ac_payment_type'];
+	$result = $payment->insert();
+	
+	$saved = !empty($result) ? "true" : "false";
+	if($saved =='true')
+	{
 		$display_block =  $LANG['save_payment_success'];
 	} else {
 		$display_block =  $LANG['save_payment_failure']."<br />".$sql;

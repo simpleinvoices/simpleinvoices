@@ -88,7 +88,7 @@ class payment
 				':ac_payment_type',$this->ac_payment_type,
 				':online_payment_id',$this->online_payment_id,
 				':domain_id',$domain_id 
-			) or die(htmlspecialchars(end($dbh->errorInfo())));
+			) or die();
         
  	       return $sth;
 	}

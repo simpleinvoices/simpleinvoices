@@ -375,6 +375,23 @@ function simpleInvoicesError($type,$info1 = "", $info2 = "")
             ");
         break;
 
+        case "sql":
+        
+            $error = exit("
+            <br />
+            ===========================================<br />
+            Simple Invoices - SQL problem<br />
+            ===========================================<br />
+            <br />
+            The following sql statement:<br />  
+            ".$info2."<br /><br />
+
+            had the following error code: ".$info1['1']."<br />
+            with the message of:".$info1['2']."<br />
+            <br />
+            ===========================================<br />
+            ");
+        break;
         case "PDO_mysql_attr":
         
             $error = exit("

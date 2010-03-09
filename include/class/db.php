@@ -51,6 +51,7 @@ class db
                             $this->_db = new PDO(
                                 'mysql:host='.$config->database->params->host.'; port='.$config->database->params->port.'; dbname='.$config->database->params->dbname, $config->database->params->username, $config->database->params->password,  array( PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8;")
                             );
+				$this->_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                             break;
                     
                         case false:
@@ -94,6 +95,7 @@ class db
 	{
 		//dbQuery($sql);
 		
+		try {	
 		//$dbh = $this->connection;
 		//var_dump($this->_db);
 		$argc = func_num_args();
@@ -109,17 +111,21 @@ class db
 		}
 		
 				
-		try {	
 			//var_dump($this->_db);
-			$sth->execute();
+			$result = $sth->execute();
 			//$sth->closeCursor();
+			if ($sth->errorCode() > '0')
+			{
+				simpleInvoicesError('sql',$sth->errorInfo(),$sqlQuery);
+			}
 		} catch(Exception $e){
 			echo $e->getMessage();
 			echo "Dude, what happened to your query?:<br /><br /> ".htmlspecialchars($sqlQuery)."<br />".htmlspecialchars(end($this->_db->errorInfo()));
 			$sth = NULL;
 		}
 		//$this->connection->closeCursor();
-		return $sth;
+		#return $sth;
+		return $result;
 
 		$sth->closeCursor();
 		
