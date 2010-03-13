@@ -1,48 +1,28 @@
 <center>
-<h2>Statement of Invoices</h2>
+<h2>Sales Report</h2>
 </center>
 {if $menu != false}
 
-{if $smarty.post.submit == null}
 <div class="welcome">
-{else}
-<div class="">
-{/if}
-<form name="frmpost" action="index.php?module=statement&amp;view=index" method="post">
+<form name="frmpost" action="index.php?module=reports&amp;view=custom_field_3" method="post">
 
        <table align="center">
 
                <tr>
                       <td class="details_screen">
-                               {$LANG.biller}
+                               Sales Rep
                        </td>
                        <td>
-                           {if $billers == null }
-                              <p><em>{$LANG.no_billers}</em></p>
+                           {if $cf3 == null }
+                              <p><em>No sales reps</em></p>
                            {else}
-                            <select name="biller_id">
-                            {foreach from=$billers item=list_biller}
-                            <option {if $list_biller.id == $biller_id} selected {/if} value="{$list_biller.id}">{$list_biller.name}</option>
+                            <select name="custom_field3">
+                            {foreach from=$cf3 item=list_biller}
+                            <option {if $list_biller.id == $biller_id} selected {/if} value="{$list_biller.custom_field3}">{$list_biller.custom_field3}</option>
                             {/foreach}
                             </select>
                             {/if}
                         </td>
-                </tr>
-                <tr>
-                    <td class="details_screen">
-                        {$LANG.customer}
-                    </td>
-                    <td>
-                        {if $customers == null }
-                        <em>{$LANG.no_customers}</em>
-                        {else}
-                            <select name="customer_id">
-                            {foreach from=$customers item=list_customer}
-                                <option {if $list_customer.id == $customer_id} selected {/if} value="{$list_customer.id}">{$list_customer.name}</option>
-                            {/foreach}
-                            </select>
-                        {/if}
-                    </td>
                 </tr>
 	<tr>
 	<td class="details_screen">
@@ -66,14 +46,6 @@
                 <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="end_date" id="date1" value='{$end_date}' />   
             </td>
     </tr>
-	<tr>
-	<td class="details_screen">
-		{$LANG.show_only_unpaid_invoices}
-	</td>
-	<td class="">
-		<input type="checkbox" name="show_only_unpaid"  {if $show_only_unpaid == "yes"} checked {/if} value="yes">
-	</td>
-	</tr>
 
 <tr>
 <td colspan="2"><br />
@@ -95,23 +67,6 @@
 </div>
 <br />
 <br />
-	{if $smarty.post.submit != null}
-	<span class="welcome">
-			<a title="{$LANG.print_preview_tooltip} {$preference.pref_inv_wording} {$invoice.id}" href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id}&amp;customer_id={$customer_id}&amp;start_date={$start_date}&amp;end_date={$end_date}&amp;show_only_unpaid={$show_only_unpaid}&amp;filter_by_date={$filter_by_date}&amp;format=print"><img src='images/common/printer.png' class='action' />&nbsp;{$LANG.print_preview}</a>
-			 &nbsp;&nbsp; 
-			 <!-- EXPORT TO PDF -->
-			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording} {$invoice.id} {$LANG.export_pdf_tooltip}" href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id}&amp;customer_id={$customer_id}&amp;start_date={$start_date}&amp;end_date={$end_date}&amp;show_only_unpaid={$show_only_unpaid}&amp;filter_by_date={$filter_by_date}&amp;format=pdf"><img src='images/common/page_white_acrobat.png' class='action' />&nbsp;{$LANG.export_pdf}</a>
-			 &nbsp;&nbsp; 
-			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording} {$invoice.id} {$LANG.export_xls_tooltip} .{$config->export->spreadsheet} {$LANG.format_tooltip}" href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id}&amp;customer_id={$customer_id}&amp;start_date={$start_date}&amp;end_date={$end_date}&amp;show_only_unpaid={$show_only_unpaid}&amp;filter_by_date={$filter_by_date}&amp;format=file&amp;filetype={$config->export->spreadsheet}"><img src='images/common/page_white_excel.png' class='action' />&nbsp;{$LANG.export_as} .{$config->export->spreadsheet}</a>
-			 &nbsp;&nbsp; 
-			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording} {$invoice.id} {$LANG.export_doc_tooltip} .{$config->export->wordprocessor} {$LANG.format_tooltip}" href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id}&amp;customer_id={$customer_id}&amp;start_date={$start_date}&amp;end_date={$end_date}&amp;show_only_unpaid={$show_only_unpaid}&amp;filter_by_date={$filter_by_date}&amp;format=file&amp;filetype={$config->export->wordprocessor}"><img src='images/common/page_white_word.png' class='action' />&nbsp;{$LANG.export_as} .{$config->export->wordprocessor} </a>
-			 &nbsp;&nbsp; 
-			<a title="{$LANG.email} {$preference.pref_inv_wording} {$invoice.id}" href="index.php?module=statement&amp;view=email&amp;stage=1&amp;biller_id={$biller_id}&amp;customer_id={$customer_id}&amp;start_date={$start_date}&amp;end_date={$end_date}&amp;show_only_unpaid={$show_only_unpaid}&amp;filter_by_date={$filter_by_date}&amp;format=file"><img src='images/common/mail-message-new.png' class='action' />&nbsp;{$LANG.email}</a>
-	</span>
-	<br />
-	<br />
-	<br />
-	{/if}
 
 {/if}
 {if $smarty.post.submit != null OR $view == export}
@@ -123,16 +78,12 @@
 <table width="100%">
 <tr>
 	<td width="75%" align="left">
-		<strong>{$LANG.biller}:</strong> {$biller_details.name} <br />
-		<strong>{$LANG.customer}:</strong> {$customer_details.name} <br />
-		<br />	
-		<br />	
+		<strong>Sales Rep:</strong> {$custom_field3} <br />
+		<br />
 	</td>
 	<td width="25%">
-		<strong>{$LANG.statement_summary}:</strong><br />
+		<strong>Sales summary:</strong><br />
 		<strong>{$LANG.total}:</strong> {$statement.total|siLocal_number} <br />
-		<strong>{$LANG.owing}:</strong> {$statement.owing|siLocal_number} <br />
-		<strong>{$LANG.paid}:</strong> {$statement.paid|siLocal_number} <br />
 	</td>
 </tr>
 </table>
@@ -175,20 +126,6 @@
         <td  class="details_screen">
             <b>{$LANG.total}</b>
         </td>
-        <td>
-            &nbsp;
-            &nbsp;
-        </td>
-        <td  class="details_screen">
-            <b>{$LANG.paid}</b>
-        </td>
-        <td>
-            &nbsp;
-            &nbsp;
-        </td>
-        <td class="details_screen" align='right'>
-            <b>{$LANG.owing}</b>
-        </td>
 	</tr>
  {section name=invoice loop=$invoices}
     {if $invoices[invoice].preference != $invoices[invoice.index_prev].preference AND $smarty.section.invoice.index != 0}   
@@ -205,7 +142,8 @@
         </td>
         <td class="details_screen">
             {* TODO - JK edit this back in {$invoices[invoice].date|siLocal_date} *}
-            {$invoices[invoice].date|date_format:"%e %h %Y"}
+            {* $invoices[invoice].date|date_format:"%e %h %Y" *}
+            {$invoices[invoice].date|siLocal_date}
         </td>
         <td>
             &nbsp;
@@ -227,20 +165,6 @@
         </td>
         <td class="details_screen">
             {$invoices[invoice].invoice_total|siLocal_number}
-        </td>
-        <td>
-            &nbsp;
-            &nbsp;
-        </td>
-        <td class="details_screen">
-            {$invoices[invoice].INV_PAID|siLocal_number} 
-        </td>
-        <td>
-            &nbsp;
-            &nbsp;
-        </td>
-        <td class="details_screen" align='right'>
-            {$invoices[invoice].owing|siLocal_number}
         </td>
 	</tr>
  {/section}
@@ -276,18 +200,6 @@
         <td>
             &nbsp;
             &nbsp;
-        </td>
-        <td class="details_screen">
-	    -----<br />
-            {$statement.paid|siLocal_number}
-        </td>
-        <td>
-            &nbsp;
-            &nbsp;
-        </td>
-        <td class="details_screen" align='right'>
-	    -----<br />
-            {$statement.owing|siLocal_number}
         </td>
 	</tr>
  </table>

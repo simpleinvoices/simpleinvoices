@@ -35,8 +35,7 @@ function lastOfMonth() {
 isset($_POST['start_date']) ? $start_date = $_POST['start_date'] : $start_date = firstOfMonth() ;
 isset($_POST['end_date']) ? $end_date = $_POST['end_date'] : $end_date = lastOfMonth() ;
 
-isset($_POST['biller_id']) ? $biller_id = $_POST['biller_id'] : $biller_id = "" ;
-isset($_POST['customer_id']) ? $customer_id = $_POST['customer_id'] : $customer_id = "" ;
+isset($_POST['custom_field3']) ? $custom_field3 = $_POST['custom_field3'] : $custom_field3 = "" ;
 
 
 if (isset($_POST['submit']))
@@ -44,8 +43,8 @@ if (isset($_POST['submit']))
 	$invoice = new invoice();
 	$invoice->start_date = $start_date;
 	$invoice->end_date = $end_date;
-	$invoice->biller = $biller_id;
-	$invoice->customer = $customer_id;
+	$invoice->where_field = 'iv.custom_field3';
+	$invoice->where_value = $custom_field3;
 	$invoice->having = "open";
 
 	if ( isset($_POST['filter_by_date']) )
@@ -53,17 +52,6 @@ if (isset($_POST['submit']))
 		$invoice->having_and = "date_between";
 		$filter_by_date = "yes";
 		$having_and_count = 1;
-	}
-
-	if ( isset($_POST['show_only_unpaid']) )
-	{
-		if ($having_and_count == 1) 
-		{
-			$invoice->having_and = "money_owed";
-		} else {
-			$invoice->having_and2 = "money_owed";
-		}
-		$show_only_unpaid = "yes";
 	}
 
 	$invoice->sort = "date";
@@ -79,8 +67,8 @@ if (isset($_POST['submit']))
 	}
 }
 
-$billers = getActiveBillers();
-$customers = getActiveCustomers();
+$sql = "select DISTINCT(custom_field3) from  " . TB_PREFIX . "invoices where custom_field3 != ''";
+$cf3 = $db->query($sql);
 
 $biller_details = getBiller($biller_id);
 $customer_details = getCustomer($customer_id);
@@ -88,12 +76,11 @@ $smarty -> assign('biller_id', $biller_id);
 $smarty -> assign('biller_details', $biller_details);
 $smarty -> assign('customer_id', $customer_id);
 $smarty -> assign('customer_details', $customer_details);
+$smarty -> assign('cf3', $cf3->fetchAll());
+$smarty -> assign('custom_field3', $custom_field3);
 
-$smarty -> assign('show_only_unpaid', $show_only_unpaid);
 $smarty -> assign('filter_by_date', $filter_by_date);
 
-$smarty -> assign('billers', $billers);
-$smarty -> assign('customers', $customers);
 
 $smarty -> assign('invoices', $invoices);
 $smarty -> assign('statement', $statement);
