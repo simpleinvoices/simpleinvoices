@@ -40,12 +40,11 @@ isset($_POST['custom_field3']) ? $custom_field3 = $_POST['custom_field3'] : $cus
 
 if (isset($_POST['submit']))
 {
-	$invoice = new invoice();
+	$invoice = new invoice2();
 	$invoice->start_date = $start_date;
 	$invoice->end_date = $end_date;
 	$invoice->where_field = 'iv.custom_field3';
 	$invoice->where_value = $custom_field3;
-	$invoice->having = "open";
 
 	if ( isset($_POST['filter_by_date']) )
 	{
