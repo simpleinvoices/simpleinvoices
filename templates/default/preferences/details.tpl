@@ -55,7 +55,7 @@
 				<img src="./images/common/help-small.png" alt="" /></a></td>
 			<td>
 				<input type=checkbox name=include_online_payment[] {if in_array("paypal",explode(",", $preference.include_online_payment)) }checked{/if} value='paypal' DISABLED>{$LANG.paypal}
-				<input type=checkbox name=include_online_payment[] {if in_array("eway",explode(",", $preference.include_online_payment)) }checked{/if} value='eway' DISABLED>{$LANG.eway}
+				<input type=checkbox name=include_online_payment[] {if in_array("eway_merchant_xml",explode(",", $preference.include_online_payment)) }checked{/if} value='eway_merchant_xml' DISABLED>{$LANG.eway_merchant_xml}
 </td>
 		</tr>
 		<tr>
@@ -212,7 +212,7 @@
 				<img src="./images/common/help-small.png" alt="" /></a></td>
 			<td>
 				<input type=checkbox name=include_online_payment[] {if in_array("paypal",explode(",", $preference.include_online_payment)) }checked{/if} value='paypal'>{$LANG.paypal}
-				<input type=checkbox name=include_online_payment[] {if in_array("eway",explode(",", $preference.include_online_payment)) }checked{/if} value='eway'>{$LANG.eway}
+				<input type=checkbox name=include_online_payment[] {if in_array("eway_merchant_xml",explode(",", $preference.include_online_payment)) }checked{/if} value='eway_merchant_xml'>{$LANG.eway_merchant_xml}
 			</td>
 		</tr>
 		<tr>

@@ -1395,6 +1395,27 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     $patch['233']['patch'] = "INSERT INTO `".TB_PREFIX."system_defaults` (name, value, domain_id, extension_id) VALUES ('invoice_numbering_by_biller','0','1','1') ;";
     $patch['233']['date'] = "20100302";    
 
+    $patch['234']['name'] = "Add eway customer ID";
+    $patch['234']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` ADD `eway_customer_id` VARCHAR( 255 ) NULL AFTER `paypal_return_url`;";
+    $patch['234']['date'] = "20100315";    
+
+    $patch['235']['name'] = "Add eway card holder name";
+    $patch['235']['patch'] = "ALTER TABLE  `".TB_PREFIX."customers` ADD `eway_credit_card_holder_name` VARCHAR( 255 ) NULL AFTER `email`;";
+    $patch['235']['date'] = "20100315";    
+
+    $patch['236']['name'] = "Add eway card number";
+    $patch['236']['patch'] = "ALTER TABLE  `".TB_PREFIX."customers` ADD `eway_credit_card_number` VARCHAR( 255 ) NULL AFTER `eway_credit_card_holder_name`;";
+    $patch['236']['date'] = "20100315";    
+
+    $patch['237']['name'] = "Add eway card expiry month";
+    $patch['237']['patch'] = "ALTER TABLE  `".TB_PREFIX."customers` ADD `eway_credit_card_expiry_month` VARCHAR( 02 ) NULL AFTER `eway_credit_card_number`;";
+    $patch['237']['date'] = "20100315";  
+
+    $patch['238']['name'] = "Add eway card expirt year";
+    $patch['238']['patch'] = "ALTER TABLE  `".TB_PREFIX."customers` ADD `eway_credit_card_expiry_year` VARCHAR( 02 ) NULL AFTER `eway_credit_card_expiry_month` ;";
+    $patch['238']['date'] = "20100315";  
+
+  
 //ALTER TABLE  `si_biller` ADD  `paypal_business_name` VARCHAR( 255 ) NOT NULL AFTER  `footer`
 //ALTER TABLE  `si_biller` ADD  `paypal_notify_url` VARCHAR( 255 ) NOT NULL AFTER  `paypal_business_name`
  /*

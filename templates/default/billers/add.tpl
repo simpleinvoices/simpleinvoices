@@ -93,6 +93,10 @@
 		<td><input type="text" name="paypal_return_url" value="{$smarty.post.paypal_return_url}" size="50" /></td>
 	</tr>
 	<tr>
+		<td class="details_screen">{$LANG.eway_customer_id}</td>
+		<td><input type="text" name="eway_customer_id" value="{$smarty.post.eway_customer_id}" size="50" /></td>
+	</tr>
+	<tr>
 		<td class="details_screen">{$customFieldLabel.biller_cf1}
 			<a
 				class="cluetip"

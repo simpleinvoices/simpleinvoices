@@ -81,7 +81,7 @@
 				<img src="./images/common/help-small.png" alt="" /></a></td>
 			<td>
 				<input type=checkbox name=include_online_payment[] value='paypal'>{$LANG.paypal}
-				<input type=checkbox name=include_online_payment[] value='eway'>{$LANG.eway}
+				<input type=checkbox name=include_online_payment[] value='eway_merchant_xml'>{$LANG.eway_merchant_xml}
 			</td>
 		</tr>
 <tr>

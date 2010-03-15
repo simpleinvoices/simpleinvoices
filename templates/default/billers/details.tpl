@@ -84,6 +84,10 @@ n Script: details.tpl
 		<td>{$biller.paypal_return_url}</td>
 	</tr>
 	<tr>
+		<td class="details_screen">{$LANG.eway_customer_id}</td>
+		<td>{$biller.eway_customer_id}</td>
+	</tr>
+	<tr>
 		<td class="details_screen">{$customFieldLabel.biller_cf1}
 		<a
 			class="cluetip"
@@ -259,6 +263,10 @@ n Script: details.tpl
 	<tr>
 		<td class="details_screen">{$LANG.paypal_return_url}</td>
 		<td><input type="text" name="paypal_return_url" value="{$biller.paypal_return_url}" size="50" /></td>
+	</tr>
+	<tr>
+		<td class="details_screen">{$LANG.eway_customer_id}</td>
+		<td><input type="text" name="eway_customer_id" value="{$biller.eway_customer_id}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.biller_cf1}

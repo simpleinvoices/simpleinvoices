@@ -36,7 +36,7 @@ function smarty_function_online_payment_link($params, &$smarty) {
 		echo $link;
 	}
 
-        if (in_array("eway",explode(",", $params['type'])))
+        if (in_array("eway_shared",explode(",", $params['type'])))
 	{
 
 		$link = "<a 
