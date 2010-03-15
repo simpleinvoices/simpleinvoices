@@ -7,6 +7,7 @@
 * License:
 *	 GPL v3 or above
 */
+//
 
 //stop browsing to files directly - all viewing to be handled by index.php
 //if browse not defined then the page will exit
