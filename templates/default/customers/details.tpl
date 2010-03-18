@@ -96,8 +96,9 @@
 <div id="tabs_customer">
 	<ul class="anchors">
 		<li><a href="#section-1" target="_top">{$LANG.custom_fields}</a></li>
-		<li><a href="#section-2" target="_top">{$LANG.customer} {$LANG.invoice_listings}</a></li>
-		<li><a href="#section-3" target="_top">{$LANG.notes}</a></li>
+		<li><a href="#section-2" target="_top">{$LANG.credit_card_details}</a></li>
+		<li><a href="#section-3" target="_top">{$LANG.customer} {$LANG.invoice_listings}</a></li>
+		<li><a href="#section-4" target="_top">{$LANG.notes}</a></li>
 	</ul>
 	<div id="section-1" class="fragment">
 		<p>
@@ -156,7 +157,39 @@
 			</table>
 		</p>
 	</div>
+
 	<div id="section-2" class="fragment">
+		<p>
+			<table>
+
+			<tr>
+				<td class="details_screen">{$LANG.credit_card_holder_name}</td>
+				<td>
+					{$customer.credit_card_holder_name}
+				</td>
+			</tr>
+			<tr>
+				<td class="details_screen">{$LANG.credit_card_number}</td>
+				<td>
+					{$customer.credit_card_number}
+				</td>
+			</tr>
+			<tr>
+				<td class="details_screen">{$LANG.credit_card_expiry_month}</td>
+				<td>
+					{$customer.credit_card_expiry_month}
+				</td>
+			</tr>
+			<tr>
+				<td class="details_screen">{$LANG.credit_card_expiry_year}</td>
+				<td>
+					{$customer.credit_card_expiry_year}
+				</td>
+			</tr>
+		</table>
+		</p>
+	</div>
+	<div id="section-3" class="fragment">
 		<p >
 		<table width="100%" align="center">
 			<tr class="sortHeader">
@@ -183,7 +216,7 @@
 		</table>	
 		</p>
 	</div>
-	<div id="section-3" class="fragment">
+	<div id="section-4" class="fragment">
 
 		<p>
 			<div id="left">
@@ -287,6 +320,42 @@
 		<td>
 			<input type="text" name="email" value="{$customer.email}" size="50" /></td
 	></tr>
+	<tr>
+		<td class="details_screen">{$LANG.credit_card_holder_name}</td>
+		<td>
+			<input
+				type="text" name="credit_card_holder_name"
+			 	value="{$customer.credit_card_holder_name}" size="25"
+			 />
+		</td>
+	</tr>
+	<tr>
+		<td class="details_screen">{$LANG.credit_card_number}</td>
+		<td>
+			<input
+				type="text" name="credit_card_number"
+			 	value="{$customer.credit_card_number}" size="25"
+			 />
+		</td>
+	</tr>
+	<tr>
+		<td class="details_screen">{$LANG.credit_card_expiry_month}</td>
+		<td>
+			<input
+				type="text" name="credit_card_expiry_month"
+			 	value="{$customer.credit_card_expiry_month}" size="5"
+			 />
+		</td>
+	</tr>
+	<tr>
+		<td class="details_screen">{$LANG.credit_card_expiry_year}</td>
+		<td>
+			<input
+				type="text" name="credit_card_expiry_year"
+			 	value="{$customer.credit_card_expiry_year}" size="5"
+			 />
+		</td>
+	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.customer_cf1}
  			<a

@@ -1148,7 +1148,7 @@ function insertBiller() {
 				id, domain_id, name, street_address, street_address2, city,
 				state, zip_code, country, phone, mobile_phone,
 				fax, email, logo, footer, paypal_business_name, 
-				paypal_notify_url, paypal_return_url, notes, custom_field1,
+				paypal_notify_url, paypal_return_url, eway_customer_id, notes, custom_field1,
 				custom_field2, custom_field3, custom_field4,
 				enabled
 
@@ -1173,6 +1173,7 @@ function insertBiller() {
 				:paypal_business_name,
 				:paypal_notify_url,
 				:paypal_return_url,
+				:eway_customer_id,
 				:notes,
 				:custom_field1,
 				:custom_field2,
@@ -1200,6 +1201,7 @@ function insertBiller() {
 		':paypal_business_name', $_POST[paypal_business_name],
 		':paypal_notify_url', $_POST[paypal_notify_url],
 		':paypal_return_url', $_POST[paypal_return_url],
+		':eway_customer_id', $_POST[eway_customer_id],
 		':notes', $_POST[notes],
 		':custom_field1', $_POST[custom_field1],
 		':custom_field2', $_POST[custom_field2],
@@ -1240,6 +1242,7 @@ function updateBiller() {
 				paypal_business_name = :paypal_business_name,
 				paypal_notify_url = :paypal_notify_url,
 				paypal_return_url = :paypal_return_url,
+				eway_customer_id = :eway_customer_id,
 				notes = :notes,
 				custom_field1 = :custom_field1,
 				custom_field2 = :custom_field2,
@@ -1265,6 +1268,7 @@ function updateBiller() {
 		':paypal_business_name', $_POST[paypal_business_name],
 		':paypal_notify_url', $_POST[paypal_notify_url],
 		':paypal_return_url', $_POST[paypal_return_url],
+		':eway_customer_id', $_POST[eway_customer_id],
 		':notes', $_POST[notes],
 		':custom_field1', $_POST[custom_field1],
 		':custom_field2', $_POST[custom_field2],
@@ -1294,6 +1298,10 @@ function updateCustomer() {
 				mobile_phone = :mobile_phone,
 				fax = :fax,
 				email = :email,
+				credit_card_holder_name = :credit_card_holder_name,
+				credit_card_number = :credit_card_number,
+				credit_card_expiry_month = :credit_card_expiry_month,
+				credit_card_expiry_year = :credit_card_expiry_year,
 				notes = :notes,
 				custom_field1 = :custom_field1,
 				custom_field2 = :custom_field2,
@@ -1317,6 +1325,10 @@ function updateCustomer() {
 		':fax', $_POST[fax],
 		':email', $_POST[email],
 		':notes', $_POST[notes],
+		':credit_card_holder_name', $_POST[credit_card_holder_name],
+		':credit_card_number', $_POST[credit_card_number],
+		':credit_card_expiry_month', $_POST[credit_card_expiry_month],
+		':credit_card_expiry_year', $_POST[credit_card_expiry_year],
 		':custom_field1', $_POST[custom_field1],
 		':custom_field2', $_POST[custom_field2],
 		':custom_field3', $_POST[custom_field3],
@@ -1336,29 +1348,22 @@ function insertCustomer() {
 			(
 				domain_id, attention, name, street_address, street_address2,
 				city, state, zip_code, country, phone, mobile_phone,
-				fax, email, notes, custom_field1, custom_field2,
+				fax, email, notes,
+				credit_card_holder_name, credit_card_number,
+				credit_card_expiry_month, credit_card_expiry_year, 
+				custom_field1, custom_field2,
 				custom_field3, custom_field4, enabled
 			)
 			VALUES 
 			(
 				:domain_id ,:attention, :name, :street_address, :street_address2,
 				:city, :state, :zip_code, :country, :phone, :mobile_phone,
-				:fax, :email, :notes, :custom_field1, :custom_field2,
+				:fax, :email, :notes, 
+				:credit_card_holder_name, :credit_card_number,
+				:credit_card_expiry_month, :credit_card_expiry_year, 
+				:custom_field1, :custom_field2,
 				:custom_field3, :custom_field4, :enabled
 			)";
-	
-	if ($db_server == 'pgsql') {
-		$sql = "INSERT INTO ".TB_PREFIX."customers (
-			domain_id, attention, name, street_address, street_address2,
-			city, state, zip_code, country, phone, mobile_phone,
-			fax, email, notes, custom_field1, custom_field2,
-			custom_field3, custom_field4, enabled)
-		VALUES (
-			:domain_id, :attention, :name, :street_address, :street_address2,
-			:city, :state, :zip_code, :country, :phone,
-			:mobile_phone, :fax, :email, :notes, :custom_field1,
-			:custom_field2, :custom_field3, :custom_field4, :enabled)";
-	}
 	
 	return dbQuery($sql,
 		':attention', $attention,
@@ -1374,6 +1379,10 @@ function insertCustomer() {
 		':fax', $fax,
 		':email', $email,
 		':notes', $notes,
+		':credit_card_holder_name', $credit_card_holder_name,
+		':credit_card_number', $credit_card_number,
+		':credit_card_expiry_month', $credit_card_expiry_month,
+		':credit_card_expiry_year', $credit_card_expiry_year,
 		':custom_field1', $custom_field1,
 		':custom_field2', $custom_field2,
 		':custom_field3', $custom_field3,
