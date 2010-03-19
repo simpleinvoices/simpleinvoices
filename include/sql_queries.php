@@ -1280,10 +1280,33 @@ function updateBiller() {
 }
 
 function updateCustomer() {
+	global $db;
+	global $config;
 	
+    if($_POST['credit_card_number_new'] !='')
+    {
+        $credit_card_number = $_POST['credit_card_number_new'];
+        
+        //cc
+        $enc = new encryption();
+        $key = $config->encryption->default->key;	
+        $encrypted_credit_card_number = $enc->encrypt($key, $credit_card_number);
 
-	$sql = "
-			UPDATE
+        $cc_sql ="credit_card_number = '".$encrypted_credit_card_number."',";
+
+    } else {
+
+        $cc_sql ='';
+        $encrypted_credit_card_number = '';
+        $pdo_credit_card_number = '';
+        $comma ='';
+
+    }
+
+	    empty($_POST[password_field]) ? $password = "" : $password = "password = MD5('".$_POST[password_field]."'),"  ;
+
+
+	$sql = "UPDATE
 				".TB_PREFIX."customers
 			SET
 				name = :name,
@@ -1299,7 +1322,7 @@ function updateCustomer() {
 				fax = :fax,
 				email = :email,
 				credit_card_holder_name = :credit_card_holder_name,
-				credit_card_number = :credit_card_number,
+                ".$cc_sql."
 				credit_card_expiry_month = :credit_card_expiry_month,
 				credit_card_expiry_year = :credit_card_expiry_year,
 				notes = :notes,
@@ -1311,7 +1334,8 @@ function updateCustomer() {
 			WHERE
 				id = :id";
 
-	return dbQuery($sql,
+
+	return $db->query($sql,
 		':name', $_POST[name],
 		':attention', $_POST[attention],
 		':street_address', $_POST[street_address],
@@ -1326,7 +1350,6 @@ function updateCustomer() {
 		':email', $_POST[email],
 		':notes', $_POST[notes],
 		':credit_card_holder_name', $_POST[credit_card_holder_name],
-		':credit_card_number', $_POST[credit_card_number],
 		':credit_card_expiry_month', $_POST[credit_card_expiry_month],
 		':credit_card_expiry_year', $_POST[credit_card_expiry_year],
 		':custom_field1', $_POST[custom_field1],
@@ -1341,7 +1364,7 @@ function updateCustomer() {
 function insertCustomer() {
 	global $db_server;
 	global $auth_session;
-
+    global $config;
 	extract( $_POST );
 	$sql = "INSERT INTO 
 			".TB_PREFIX."customers
@@ -1364,7 +1387,11 @@ function insertCustomer() {
 				:custom_field1, :custom_field2,
 				:custom_field3, :custom_field4, :enabled
 			)";
-	
+	//cc
+	$enc = new encryption();
+    $key = $config->encryption->default->key;	
+	$encrypted_credit_card_number = $enc->encrypt($key, $credit_card_number);
+
 	return dbQuery($sql,
 		':attention', $attention,
 		':name', $name,
@@ -1380,7 +1407,7 @@ function insertCustomer() {
 		':email', $email,
 		':notes', $notes,
 		':credit_card_holder_name', $credit_card_holder_name,
-		':credit_card_number', $credit_card_number,
+		':credit_card_number', $encrypted_credit_card_number,
 		':credit_card_expiry_month', $credit_card_expiry_month,
 		':credit_card_expiry_year', $credit_card_expiry_year,
 		':custom_field1', $custom_field1,

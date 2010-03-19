@@ -1,4 +1,7 @@
 <?php
+
+ini_set('max_execution_time', 600); //600 seconds = 10 minutes
+
 $cron = new cron();
 $cron->domain_id=1;
 $message = $cron->run();

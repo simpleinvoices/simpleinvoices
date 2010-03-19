@@ -3,14 +3,6 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-//TODO
-/*validation code*/
-jsBegin();
-jsFormValidationBegin("frmpost");
-jsValidateRequired("name","Biller name");
-jsFormValidationEnd();
-jsEnd();
-/*end validation code*/
 $menu = false;
 $payment = getPayment($_GET['id']);
 

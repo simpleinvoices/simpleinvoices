@@ -293,6 +293,19 @@ class cron {
 						$spc2us_pref = str_replace(" ", "_", $invoice['index_name']);
 						$pdf_file_name = $spc2us_pref.".pdf";
 							
+                        //eway
+                        if (in_array("eway_merchant_xml",explode(",", $preference['include_online_payment'])) )         
+                        {
+                            
+                            // input customerID,  method (REAL_TIME, REAL_TIME_CVN, GEO_IP_ANTI_FRAUD) and liveGateway or not
+                            $eway = new eway();
+                            $eway->invoice = $invoice;
+                            $eway->biller = $biller ;
+                            $eway->customer = $customer;
+                            $eway->payment();       
+
+                        }
+                            
 						// Create invoice
 						if($data[$key]['email_biller'] == "1" OR $data[$key]['email_customer'] == "1")
 						{

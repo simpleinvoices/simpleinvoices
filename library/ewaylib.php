@@ -27,16 +27,16 @@
 	define('EWAY_PAYMENT_HOSTED_REAL_TIME_CVN', 'https://www.eway.com.au/gateway_cvn/payment.asp');
 	define('EWAY_PAYMENT_HOSTED_REAL_TIME_CVN_TESTING_MODE', 'https://www.eway.com.au/gateway_cvn/payment.asp');
 
-class eway {
+class ewaylib {
     var $myGatewayURL;
     var $myCustomerID;
     var $myTransactionData = array();
     var $myCurlPreferences = array();
 
     //Class Constructor
-	function eway($customerID = EWAY_DEFAULT_CUSTOMER_ID, $method = EWAY_DEFAULT_PAYMENT_METHOD ,$liveGateway  = EWAY_DEFAULT_LIVE_GATEWAY) {
+	function ewaylib($customerID = EWAY_DEFAULT_CUSTOMER_ID, $method = EWAY_DEFAULT_PAYMENT_METHOD ,$liveGateway  = EWAY_DEFAULT_LIVE_GATEWAY) {
 		$this->myCustomerID = $customerID;
-	    switch($method){
+        switch($method){
 
 		    case "REAL_TIME";
 

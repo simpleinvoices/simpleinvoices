@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="./templates/invoices/default/style.css" media="all">
+<link rel="stylesheet" type="text/css" href="{$css}" media="all">
 <title>{$preference.pref_inv_wording} {$LANG.number_short}: {$invoice.id}</title>
 </head>
 <body>

@@ -22,7 +22,7 @@
 		<td class='details_screen'>{$LANG.payment_type}</td><td>{$paymentType.pt_description|escape:html}</td>
 	</tr>
 	<tr>
-		<td class='details_screen'>{$LANG.online_payment_id}</td><td>{$paymentType.online_payment_id|escape:html}</td>
+		<td class='details_screen'>{$LANG.online_payment_id}</td><td>{$payment.online_payment_id|escape:html}</td>
 	</tr>
         <tr>
                 <td class='details_screen'>{$LANG.notes}</td><td>{$payment.ac_notes}

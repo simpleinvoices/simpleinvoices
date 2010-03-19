@@ -171,7 +171,8 @@
 			<tr>
 				<td class="details_screen">{$LANG.credit_card_number}</td>
 				<td>
-					{$customer.credit_card_number}
+					{$LANG.credit_card_number_encrypted}
+					{* $customer.credit_card_number *}
 				</td>
 			</tr>
 			<tr>
@@ -332,9 +333,15 @@
 	<tr>
 		<td class="details_screen">{$LANG.credit_card_number}</td>
 		<td>
+					{$LANG.credit_card_number_encrypted}
+		</td>
+	</tr>
+	<tr>
+		<td class="details_screen">{$LANG.credit_card_number_new}</td>
+		<td>
 			<input
-				type="text" name="credit_card_number"
-			 	value="{$customer.credit_card_number}" size="25"
+				type="text" name="credit_card_number_new"
+			 	value="{$customer.credit_card_holder_name_new}" size="25"
 			 />
 		</td>
 	</tr>
