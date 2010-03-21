@@ -1415,6 +1415,10 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     $patch['238']['patch'] = "ALTER TABLE  `".TB_PREFIX."customers` ADD `credit_card_expiry_year` VARCHAR( 04 ) NULL AFTER `credit_card_expiry_month` ;";
     $patch['238']['date'] = "20100315";  
 
+    $patch['239']['name'] = "cronlog - add invoice id";
+    $patch['239']['patch'] = "ALTER TABLE `".TB_PREFIX."cron_log` ADD `invoice_id` VARCHAR( 25 ) NULL AFTER `domain_id` ;";
+    $patch['239']['date'] = "20100321";    
+
   
 //ALTER TABLE  `si_biller` ADD  `paypal_business_name` VARCHAR( 255 ) NOT NULL AFTER  `footer`
 //ALTER TABLE  `si_biller` ADD  `paypal_notify_url` VARCHAR( 255 ) NOT NULL AFTER  `paypal_business_name`

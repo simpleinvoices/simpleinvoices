@@ -172,227 +172,284 @@ class cron {
 
 	public function run()
 	{
-        	global $db;
-        	global $auth_session;
+    global $db;
+    global $auth_session;
 
-		$today = date('Y-m-d');
-		$domain_id = domain_id::get($this->domain_id);
+    $today = date('Y-m-d');
+    $domain_id = domain_id::get($this->domain_id);
 
-		$cron_log = new cronlog();
-		$cron_log->run_date = empty($this->run_date) ? $today : $this->run_date;
-		$check_cron_log = $cron_log->check();        	
+    $cron_log = new cronlog();
+    $cron_log->run_date = empty($this->run_date) ? $today : $this->run_date;
+    $check_cron_log = $cron_log->check();        	
 
-		//only proceed if cron has not been run for today
-		$i="0";
-		if ($check_cron_log == 0)
-		{
-			#$sql = "SELECT * FROM ".TB_PREFIX."cron WHERE domain_id = :domain_id";
-			#$sth  = $db->query($sql,':domain_id',$domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
-			$cron = new cron();
-			$data = $cron->select_all('');
-			#print_r($data);
-		
-			$number_of_crons_run = "0";	
-			foreach ($data as $key=>$value)
-			{
-				$run_cron ='false';
-				$start_date = date('Y-m-d', strtotime( $data[$key]['start_date'] ) );
-				$end_date = $data[$key]['end_date'] ;
+    //only proceed if cron has not been run for today
+    $cron = new cron();
+    $data = $cron->select_all('');
 
-				$diff = number_format((strtotime($today) - strtotime($start_date)) / (60 * 60 * 24),0);
-				
-		
-				//only check if diff is positive
-				if (($diff >= 0) AND ($end_date =="" OR $end_date >= $today))
-				{
+    $number_of_crons_run = "0";	
+    foreach ($data as $key=>$value)
+    {
 
-					if($data[$key]['recurrence_type'] == 'day')
-					{
-						$modulus = $diff % $data[$key]['recurrence'] ;
-						if($modulus == 0)
-						{ 
-							$run_cron ='true';
-						} else {
-							#$return .= "cron does not runs TODAY-days";
+        $cron_log = new cronlog();
+        $cron_log->run_date = empty($this->run_date) ? $today : $this->run_date;
+        $cron_log->invoice_id = $data[$key]['invoice_id'];
+        $check_cron_log = $cron_log->check();        	
 
-						}
+        $i="0";
+        if ($check_cron_log == 0)
+        {
+            $run_cron ='false';
+            $start_date = date('Y-m-d', strtotime( $data[$key]['start_date'] ) );
+            $end_date = $data[$key]['end_date'] ;
 
-					}
-					if($data[$key]['recurrence_type'] == 'week')
-					{
-						$period = 7 * $data[$key]['recurrence'];
-						$modulus = $diff % $period ;
-						if($modulus == 0)
-						{ 
-							$run_cron ='true';
-						} else {
-							#$return .= "cron is not runs TODAY-week";
-						}
+            $diff = number_format((strtotime($today) - strtotime($start_date)) / (60 * 60 * 24),0);
+            
 
-					}
-					if($data[$key]['recurrence_type'] == 'month')
-					{
-						$start_day = date('d', strtotime( $data[$key]['start_date'] ) );
-						$start_month = date('m', strtotime( $data[$key]['start_date'] ) );
-						$start_year = date('Y', strtotime( $data[$key]['start_date'] ) );
-						$today_day = date('d');	
-						$today_month = date('m');	
-						$today_year = date('Y'); 	
+            //only check if diff is positive
+            if (($diff >= 0) AND ($end_date =="" OR $end_date >= $today))
+            {
 
-						$months = ($today_month-$start_month)+12*($today_year-$start_year);
-						$modulus =  $months % $data[$key]['recurrence']  ;
-						if( ($modulus == 0) AND ( $start_day == $today_day ) )
-						{ 
-							$run_cron ='true';
-						} else {
-							#$return .= "cron is not runs TODAY-month";
-						}
+                if($data[$key]['recurrence_type'] == 'day')
+                {
+                    $modulus = $diff % $data[$key]['recurrence'] ;
+                    if($modulus == 0)
+                    { 
+                        $run_cron ='true';
+                    } else {
+                        #$return .= "cron does not runs TODAY-days";
 
-					}
-					if($data[$key]['recurrence_type'] == 'year')
-					{
-						$start_day = date('d', strtotime( $data[$key]['start_date'] ) );
-						$start_month = date('m', strtotime( $data[$key]['start_date'] ) );
-						$start_year = date('Y', strtotime( $data[$key]['start_date'] ) );
-						$today_day = date('d');	
-						$today_month = date('m');	
-						$today_year = date('Y'); 	
+                    }
 
-						$years = $today_year-$start_year;
-						$modulus =  $years % $data[$key]['recurrence']  ;
-						if( ($modulus == 0) AND ( $start_day == $today_day ) AND  ( $start_month == $today_month ) )
-						{ 
-							$run_cron ='true';
-						} else {
-							#$return .= "cron is not runs TODAY-year";
-						}
+                }
+
+                if($data[$key]['recurrence_type'] == 'week')
+                {
+                    $period = 7 * $data[$key]['recurrence'];
+                    $modulus = $diff % $period ;
+                    if($modulus == 0)
+                    { 
+                        $run_cron ='true';
+                    } else {
+                        #$return .= "cron is not runs TODAY-week";
+                    }
+
+                }
+                if($data[$key]['recurrence_type'] == 'month')
+                {
+                    $start_day = date('d', strtotime( $data[$key]['start_date'] ) );
+                    $start_month = date('m', strtotime( $data[$key]['start_date'] ) );
+                    $start_year = date('Y', strtotime( $data[$key]['start_date'] ) );
+                    $today_day = date('d');	
+                    $today_month = date('m');	
+                    $today_year = date('Y'); 	
+
+                    $months = ($today_month-$start_month)+12*($today_year-$start_year);
+                    $modulus =  $months % $data[$key]['recurrence']  ;
+                    if( ($modulus == 0) AND ( $start_day == $today_day ) )
+                    { 
+                        $run_cron ='true';
+                    } else {
+                        #$return .= "cron is not runs TODAY-month";
+                    }
+
+                }
+                if($data[$key]['recurrence_type'] == 'year')
+                {
+                    $start_day = date('d', strtotime( $data[$key]['start_date'] ) );
+                    $start_month = date('m', strtotime( $data[$key]['start_date'] ) );
+                    $start_year = date('Y', strtotime( $data[$key]['start_date'] ) );
+                    $today_day = date('d');	
+                    $today_month = date('m');	
+                    $today_year = date('Y'); 	
+
+                    $years = $today_year-$start_year;
+                    $modulus =  $years % $data[$key]['recurrence']  ;
+                    if( ($modulus == 0) AND ( $start_day == $today_day ) AND  ( $start_month == $today_month ) )
+                    { 
+                        $run_cron ='true';
+                    } else {
+                        #$return .= "cron is not runs TODAY-year";
+                    }
+                }
+                //run the recurrence for this invoice
+                if ($run_cron == 'true')
+                {
+                    $number_of_crons_run++;	
+                    $return['id'] = $i;
+                    $return['message'] = "Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of '".$data[$key]['end_date']."' where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." was run today :: Info diff=".$diff."<br />";
+                    $i++;
+
+                    $ni = new invoice();
+                    $ni->id = $data[$key]['invoice_id'];
+                    $new_invoice_id = $ni->recur();
 
 
-					}
-					//run the recurrence for this invoice
-					if ($run_cron == 'true')
-					{
-						$number_of_crons_run++;	
-						$return['id'] = $i;
-						$return['message'] = "Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of '".$data[$key]['end_date']."' where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." was run today :: Info diff=".$diff."<br />";
-						$i++;
+                    ## email the people
+                    
+                    $invoice= invoice::select($new_invoice_id);
+                    $preference = getPreference($invoice['preference_id']);
+                    $biller = getBiller($invoice['biller_id']);
+                    $customer = getCustomer($invoice['customer_id']);
+                    #print_r($customer);
+                    #create PDF nameVj
+                    $spc2us_pref = str_replace(" ", "_", $invoice['index_name']);
+                    $pdf_file_name = $spc2us_pref.".pdf";
+                        
+                        
+                    // email invoice
+                    if($data[$key]['email_biller'] == "1" OR $data[$key]['email_customer'] == "1")
+                    {
+                        $export = new export();
+                        $export -> format = "pdf";
+                        $export -> file_location = 'file';
+                        $export -> module = 'invoice';
+                        $export -> id = $invoice['id'];
+                        $export -> execute();
 
-						$ni = new invoice();
-						$ni->id = $data[$key]['invoice_id'];
-						$new_invoice_id = $ni->recur();
+                        #$attachment = file_get_contents('./tmp/cache/' . $pdf_file_name);
 
 
-						## email the people
-						
-						$invoice= invoice::select($new_invoice_id);
-						$preference = getPreference($invoice['preference_id']);
-						$biller = getBiller($invoice['biller_id']);
-						$customer = getCustomer($invoice['customer_id']);
-						#print_r($customer);
-						#create PDF nameVj
-						$spc2us_pref = str_replace(" ", "_", $invoice['index_name']);
-						$pdf_file_name = $spc2us_pref.".pdf";
-							
-                        //eway
-                        if (in_array("eway_merchant_xml",explode(",", $preference['include_online_payment'])) )         
+
+                        $email = new email();
+                        $email -> format = 'cron_invoice';
+
+                            $email_body = new email_body();
+                            $email_body->email_type = 'cron_invoice';
+                            $email_body->customer_name = $customer['name'];
+                            $email_body->invoice_name = $invoice['index_name'];
+                            $email_body->biller_name = $biller['name'];
+                        
+                        $email -> notes = $email_body->create();
+                        $email -> from = $biller['email'];
+                        $email -> from_friendly = $biller['name'];
+                        if($data[$key]['email_customer'] == "1")
                         {
+                            $email -> to = $customer['email'];
+                        }
+                        if($data[$key]['email_biller'] == "1" AND $data[$key]['email_customer'] == "1")
+                        {
+                            $email -> to = $customer['email'].";".$biller['email'];
+                        }
+                        if($data[$key]['email_biller'] == "1" AND $data[$key]['email_customer'] == "0")
+                        {
+                            $email -> to = $customer['email'];
+                        }
+                        $email -> subject = $pdf_file_name." from ".$biller['name'];
+                        $email -> attachment = $pdf_file_name;
+                        $return['email_message'] = $email -> send ();
+
+                    }
+
+                    //do eway payment
+                    if (in_array("eway_merchant_xml",explode(",", $preference['include_online_payment'])) )         
+                    {
+                        
+                        // input customerID,  method (REAL_TIME, REAL_TIME_CVN, GEO_IP_ANTI_FRAUD) and liveGateway or not
+                        $eway = new eway();
+                        $eway->invoice = $invoice;
+                        $eway->biller = $biller ;
+                        $eway->customer = $customer;
+                        $payment_done = $eway->payment();  
+                        
+                        $payment_id = $db->lastInsertID();
+
+                        $pdf_file_name = 'payment'.$payment_id.'.pdf';
+                        if ($payment_done !='')
+                        {
+                            //do email of receipt to biller and customer
+
+                            $export = new export();
+                            $export -> format = "pdf";
+                            $export -> file_location = 'file';
+                            $export -> module = 'payment';
+                            $export -> id = $payment_id;
+                            $export -> execute();
+
+                            $email = new email();
+                            $email -> format = 'cron_payment';
+
+                                $email_body = new email_body();
+                                $email_body->email_type = 'cron_payment';
+                                $email_body->customer_name = $customer['name'];
+                                $email_body->invoice_name = 'payment'.$payment_id;
+                                $email_body->biller_name = $biller['name'];
                             
-                            // input customerID,  method (REAL_TIME, REAL_TIME_CVN, GEO_IP_ANTI_FRAUD) and liveGateway or not
-                            $eway = new eway();
-                            $eway->invoice = $invoice;
-                            $eway->biller = $biller ;
-                            $eway->customer = $customer;
-                            $eway->payment();       
+                            $email -> notes = $email_body->create();
+                            $email -> from = $biller['email'];
+                            $email -> from_friendly = $biller['name'];
+                            if($data[$key]['email_customer'] == "1")
+                            {
+                                $email -> to = $customer['email'];
+                            }
+                            if($data[$key]['email_biller'] == "1" AND $data[$key]['email_customer'] == "1")
+                            {
+                                $email -> to = $customer['email'].";".$biller['email'];
+                            }
+                            if($data[$key]['email_biller'] == "1" AND $data[$key]['email_customer'] == "0")
+                            {
+                                $email -> to = $customer['email'];
+                            }
+                            $email -> subject = $pdf_file_name." from ".$biller['name'];
+                            $email -> attachment = $pdf_file_name;
+                            $return['email_message'] = $email->send();
+                        } else {
+                            //do email to biller/admin - say error
+                            
+                            $email = new email();
+                            $email -> format = 'cron_payment';
+                            $email -> from = $biller['email'];
+                            $email -> from_friendly = $biller['name'];
+                            $email -> to = $biller['email'];
+                            $email -> subject = "Payment failed";
+                            $return['email_message'] = $email->send();
 
                         }
-                            
-						// Create invoice
-						if($data[$key]['email_biller'] == "1" OR $data[$key]['email_customer'] == "1")
-						{
-							$export = new export();
-							$export -> format = "pdf";
-							$export -> file_location = 'file';
-							$export -> module = 'invoice';
-							$export -> id = $invoice['id'];
-							$export -> execute();
 
-							#$attachment = file_get_contents('./tmp/cache/' . $pdf_file_name);
+                    }
 
+                } else {
 
+                    #$return .= "<br />NOT RUN: Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." did not recur today :: Info diff=".$diff."<br />";
 
-							$email = new email();
-							$email -> format = 'cron_invoice';
+                }
+        
+            
+            } else {		
+                    #$return .= "<br />NOT RUN: Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." did not recur today :: Info diff=".$diff."<br />";
+            }
+        } else {
+            // cron has already been run for that invoice toda
+               $return['id'] = $i;
+               $return[$i]['cron_message'] = "Cron has already been run for domain: ".$domain_id." for the date: ".$today."for invoice ".$data[$key]['invoice_id'];
+               $return[$i]['email_message'] = "";
+        }
+    }
 
-								$email_body = new email_body();
-								$email_body->customer_name = $customer['name'];
-								$email_body->invoice_name = $invoice['index_name'];
-								$email_body->biller_name = $biller['name'];
-							
-							$email -> notes = $email_body->create();
-							$email -> from = $biller['email'];
-							$email -> from_friendly = $biller['name'];
-							if($data[$key]['email_customer'] == "1")
-							{
-								$email -> to = $customer['email'];
-							}
-							if($data[$key]['email_biller'] == "1" AND $data[$key]['email_customer'] == "1")
-							{
-								$email -> to = $customer['email'].";".$biller['email'];
-							}
-							if($data[$key]['email_biller'] == "1" AND $data[$key]['email_customer'] == "0")
-							{
-								$email -> to = $customer['email'];
-							}
-							$email -> subject = $pdf_file_name." from ".$biller['name'];
-							$email -> attachment = $pdf_file_name;
-							$return['email_message'] = $email -> send ();
-						}
-					} else {
+    // no crons scheduled for today	
+    if ($number_of_crons_run  == '0')
+    {
+        $return['id'] = $i;
+        $return['cron_message'] = "No invoices are scheduled to recur today for domain: ".$domain_id." for the date: ".$today;
+        $return['email_message'] = "";
+    }
+    //insert into cron_log date of run
+    $cron_log = new cronlog();
+    $cron_log->run_date = $today;
+    $cron_log->domain_id = $domain_id;
+    $cron_log->insert();
 
-						#$return .= "<br />NOT RUN: Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." did not recur today :: Info diff=".$diff."<br />";
+    $email = new email();
+    $email -> format = 'cron';
+    #$email -> notes = $return;
+    $email -> from = "simpleinvoices@localhost";
+    $email -> from_friendly = "Simple Invoices - Cron";
+    $email -> to = "justin@localhost";
+    #$email -> bcc = $_POST['email_bcc'];
+    $email -> subject = "Cron for Simple Invoices has been run for today:";
+    $email -> send ();
+
+    return $return;
 	
-					}
-			
-				
-				} else {		
-						#$return .= "<br />NOT RUN: Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." did not recur today :: Info diff=".$diff."<br />";
-
-				}
-							
-				
-			}
-
-			// no crons scheduled for today	
-			if ($number_of_crons_run  == '0')
-			{
-				$return['id'] = $i;
-				$return['cron_message'] = "No invoices are scheduled to recur today for domain: ".$domain_id." for the date: ".$today;
-				$return['email_message'] = "";
-			}
-			//insert into cron_log date of run
-			$cron_log = new cronlog();
-			$cron_log->run_date = $today;
-			$cron_log->domain_id = $domain_id;
-			$cron_log->insert();
-
-			$email = new email();
-			$email -> format = 'cron';
-			#$email -> notes = $return;
-			$email -> from = "simpleinvoices@localhost";
-			$email -> from_friendly = "Simple Invoices - Cron";
-			$email -> to = "justin@localhost";
-			#$email -> bcc = $_POST['email_bcc'];
-			$email -> subject = "Cron for Simple Invoices has been run for today:";
-			$email -> send ();
-
-		} else {
-	
-			$return['id'] = $i;
-			$return['cron_message'] = "Cron has already been run for domain: ".$domain_id." for the date: ".$today;
-			$return['email_message'] = "";
-		}
-
-		return $return;
-	}
+    }
 
 }

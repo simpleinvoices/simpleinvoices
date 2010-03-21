@@ -14,8 +14,13 @@ class eway
         global $logger;
 
         $eway = new ewaylib($this->biller['eway_customer_id'],'REAL_TIME', false);
+function clean_num($num){
+      return trim(trim($num, '0'), '.');
+}
 
-        $eway_invoice_total = $this->invoice['total'] * 100 ;
+        //Eway only accepts whole dollar amounts
+		$value = (round($this->invoice['total'])*100);
+		$eway_invoice_total = htmlentities(trim($value));
 
         $enc = new encryption();
         $key = $config->encryption->default->key;	
@@ -24,9 +29,9 @@ class eway
         $eway->setTransactionData("TotalAmount", $eway_invoice_total); //mandatory field
         $eway->setTransactionData("CustomerFirstName", $this->customer['name']);
     	$eway->setTransactionData("CustomerLastName", "");
-        $eway->setTransactionData("CustomerAddress", "123 Someplace Street, Somewhere ACT");
-        $eway->setTransactionData("CustomerPostcode", "2609");
-        $eway->setTransactionData("CustomerInvoiceDescription", "Testing");
+        $eway->setTransactionData("CustomerAddress", "");
+        $eway->setTransactionData("CustomerPostcode", "");
+        $eway->setTransactionData("CustomerInvoiceDescription", "");
         $eway->setTransactionData("CustomerEmail", $this->customer['email']);
         $eway->setTransactionData("CustomerInvoiceRef", $this->invoice['index_name']);
         $eway->setTransactionData("CardHoldersName", $this->customer['credit_card_holder_name']); //mandatory field
@@ -49,7 +54,8 @@ class eway
                 $message .= "\n<br>\$ewayResponseFields[\"$key\"] = $value";
 			$logger->log("Eway message: " . $message . "<br>\n", Zend_Log::INFO);
             //header("Location: trasnactionerrorpage.php");
-            //exit();		
+            //exit();
+            $return = 'false';		
         }else if($ewayResponseFields["EWAYTRXNSTATUS"]=="True"){
 
 
@@ -62,7 +68,8 @@ class eway
             $payment = new payment();
             $payment->ac_inv_id = $this->invoice['id'];
             #$payment->ac_inv_id = $_POST['invoice'];
-            $payment->ac_amount = $this->invoice['total'];
+            #$payment->ac_amount = $this->invoice['total'];EWAYRETURNAMOUNT
+            $payment->ac_amount = $ewayResponseFields['EWAYRETURNAMOUNT']/100;
             #$payment->ac_amount = $_POST['mc_gross'];
             $payment->ac_notes = $message;
             #$payment->ac_notes = $paypal_data;
@@ -78,9 +85,12 @@ class eway
             $payment->ac_payment_type = $payment_type->select_or_insert_where();
             $logger->log('Paypal - payment_type='.$payment->ac_payment_type, Zend_Log::INFO);
             $payment->insert();
+            #echo $db->lastInsertID();
+            $return = 'false';		
+        }
 
-            }
-
+        return $return ;		
     }
+
 
 }

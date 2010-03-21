@@ -8,8 +8,8 @@ ini_set('display_errors', 1);
 	
 	// input customerID,  method (REAL_TIME, REAL_TIME_CVN, GEO_IP_ANTI_FRAUD) and liveGateway or not
 	#$eway = new EwayPaymentLive('87654321', GEO_IP_ANTI_FRAUD, false);
-	#$eway = new EwayPaymentLive('87654321','REAL_TIME' , false);
-	$eway = new EwayPaymentLive('87654321','REAL_TIME' , true);
+	$eway = new EwayPaymentLive('87654321','REAL_TIME' , false);
+	#$eway = new EwayPaymentLive('87654321','REAL_TIME' , true);
 	
 
 	$eway->setTransactionData("TotalAmount", 1000); //mandatory field

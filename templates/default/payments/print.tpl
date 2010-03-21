@@ -17,7 +17,7 @@
 	<table width="100%" align="center">
 		<tr>
 			<td colspan="5"><img src="{$logo}" border="0" hspace="0" align="left"></td>
-			<th align="right"><span class="font1">Receipt for {$LANG.payment_id} {$payment.id|escape:html}</span></th>
+			<th align="right"><span class="font1">Receipt for {$LANG.payment_id} {$payment.id}</span></th>
 		</tr>
 		<tr>
 			<td colspan="6" class="tbl1-top">&nbsp;</td>
@@ -154,11 +154,11 @@
 			
 
 			<tr class="" >
-				<td class="">{$payment.id|escape:html}</td>
-				<td class="" colspan="3">{$payment.ac_inv_id|escape:html}</td>
+				<td class="">{$payment.id}</td>
+				<td class="" colspan="3">{$payment.ac_inv_id}</td>
 				<td class="" align="right">{$preference.pref_currency_sign}{$payment.ac_amount|siLocal_number}</td>
-				<td class="" align="right">{$payment.date|escape:html}</td>
-				<td class="" align="right">{$paymentType.pt_description|escape:html}</td>
+				<td class="" align="right">{$payment.date}</td>
+				<td class="" align="right">{$paymentType.pt_description}</td>
 			</tr>
 		<tr>
 			<td colspan="6"><br /></td>

@@ -15,6 +15,20 @@ class export
 
 	function showData($data)
 	{
+        
+        if($this->file_name =='')
+        {
+            switch ($this->module)
+            {
+                case "payment":
+                {
+                    $this->file_name = 'payment'.$this->id;
+                    break;
+                }
+            }
+        }
+
+
 		//echo "export show data";
 		switch ($this->format)
 		{
@@ -45,6 +59,11 @@ class export
 					case "statement":
 					{
 						header("Content-Disposition: attachment; filename=statement.$this->file_type");
+						break;
+					}
+					case "payment":
+					{
+						header("Content-Disposition: attachment; filename=payment$this->id.$this->file_type");
 						break;
 					}
 					default:

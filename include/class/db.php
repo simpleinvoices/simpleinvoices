@@ -132,6 +132,27 @@ class db
 		$sth = NULL;
 			
 	}
+    /*
+     * lastInsertId returns the id of the most recently inserted row by the session
+     * used by $dbh whose id was created by AUTO_INCREMENT (MySQL) or a sequence
+     * (PostgreSQL).  This is a convenience function to handle the backend-
+     * specific details so you don't have to.
+     *
+     */
+    function lastInsertId() {
+        global $config;
+        $pdoAdapter = substr($config->database->adapter, 4);
+        
+        if ($pdoAdapter == 'pgsql') {
+            $sql = 'SELECT lastval()';
+        } elseif ($pdoAdapter == 'mysql') {
+            $sql = 'SELECT last_insert_id()';
+        }
+        //echo $sql;
+        $sth = $this->query($sql);
+        return $sth->fetchColumn();
+    }
+
 	
 	function __destruct() 
 	{
