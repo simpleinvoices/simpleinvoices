@@ -50,7 +50,7 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 	if (in_array($sort, $validFields)) {
 		$sort = $sort;
 	} else {
-		$sort = "tx_description";
+		$sort = "tax_description";
 	}
 
 	$sql = "SELECT 
@@ -72,8 +72,8 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 
 }
 
-$sth = sql('', $dir, $sort, $rp, $page);
-$sth_count_rows = sql('count',$dir, $sort, $rp, $page);
+$sth = sql('', $dir, $start, $sort, $rp, $page);
+$sth_count_rows = sql('count',$dir, $start, $sort, $rp, $page);
 
 $tax = $sth->fetchAll(PDO::FETCH_ASSOC);
 $count = $sth_count_rows->rowCount();
