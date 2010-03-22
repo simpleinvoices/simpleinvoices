@@ -10,8 +10,7 @@ $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 
 $xml ="";
 
-
-function sql($type='', $start, dir, $sort, $rp, $page )
+function sql($type='', $start, $dir, $sort, $rp, $page )
 {
 	global $config;
 	global $LANG;
