@@ -212,8 +212,8 @@ class invoice {
         /*SQL Limit - end*/
 
         /*SQL where - start*/
-        $query = $_REQEUST['query'];
-        $qtype = $_REQUEST['qtype'];
+        $query = $this->query;
+        $qtype = $this->qtype;
 
         $where = " WHERE iv.domain_id = :domain_id ";
         if ($query) $where = " WHERE iv.domain_id = :domain_id AND $qtype LIKE '%$query%' ";

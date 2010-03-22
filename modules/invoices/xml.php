@@ -12,6 +12,9 @@ $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 //$sql = "SELECT * FROM ".TB_PREFIX."invoices LIMIT $start, $limit";
 $invoice = new invoice();
 $invoice->sort=$sort;
+$invoice->query=$_REQUEST['query'];
+$invoice->qtype=$_REQUEST['qtype'];
+$invoice->sort=$sort;
 $sth = $invoice->select_all('', $dir, $rp, $page, $having);
 $sth_count_rows = $invoice->select_all('count',$dir, $rp, $page, $having);
 

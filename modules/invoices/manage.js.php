@@ -48,8 +48,7 @@
 			searchitems : [
 				{display: '{/literal}{$LANG.invoice_number}{literal}', name : 'iv.id'},
 				{display: '{/literal}{$LANG.biller}{literal}', name : 'b.name'},
-				{display: '{/literal}{$LANG.customer}{literal}', name : 'c.name', isdefault: true},
-				{display: '{/literal}{$LANG.aging}{literal}', name : 'aging'}
+				{display: '{/literal}{$LANG.customer}{literal}', name : 'c.name', isdefault: true}
 				],
 			sortname: "id",
 			sortorder: "desc",
