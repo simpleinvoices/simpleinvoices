@@ -2539,7 +2539,7 @@ function pdfThis($html,$file_location="",$pdfname)
 		  $pipeline->fetchers[] = new MyFetcherLocalFile($html_to_pdf);
 
 		  $baseurl = "";
-		  $media = Media::predefined("A4");
+		  $media = Media::predefined($config->export->pdf->papersize);
 		  $media->set_landscape(false);
 
 		  global $g_config;
@@ -2595,4 +2595,4 @@ function pdfThis($html,$file_location="",$pdfname)
 	//echo "location: ".$file_location;
 	convert_to_pdf($html, $pdfname, $file_location);
 
-}
+}
