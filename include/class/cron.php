@@ -86,7 +86,7 @@ class cron {
 
 	}
 
-    	public function select_all($type='', $dir='DESC', $rp='25', $page='1')
+    public function select_all($type='', $dir='DESC', $rp='25', $page='1')
 	{
 		global $LANG;
 		global $db;
@@ -119,7 +119,8 @@ class cron {
 
 		$sql = "SELECT
 				cron.* ,
-                       		(SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
+                cron.id as cron_id,
+                (SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
 			FROM 
 				".TB_PREFIX."cron cron,
 				".TB_PREFIX."invoices iv,
@@ -192,7 +193,7 @@ class cron {
 
         $cron_log = new cronlog();
         $cron_log->run_date = empty($this->run_date) ? $today : $this->run_date;
-        $cron_log->invoice_id = $data[$key]['invoice_id'];
+        $cron_log->cron_id = $data[$key]['cron_id'];
         $check_cron_log = $cron_log->check();        	
 
         $i="0";
@@ -340,8 +341,15 @@ class cron {
 
                     }
 
+                    //Check that all details are OK before doing the eway payment
+                    $eway_check = new eway();
+                    $eway_check->customer = $customer;
+                    $eway_check->biller = $biller;
+                    $eway_check->preference = $preference;
+                    $eway_pre_check = $eway_check->pre_check();
+
                     //do eway payment
-                    if (in_array("eway_merchant_xml",explode(",", $preference['include_online_payment'])) )         
+                    if ($eway_pre_check == 'true')         
                     {
                         
                         // input customerID,  method (REAL_TIME, REAL_TIME_CVN, GEO_IP_ANTI_FRAUD) and liveGateway or not
@@ -354,7 +362,7 @@ class cron {
                         $payment_id = $db->lastInsertID();
 
                         $pdf_file_name = 'payment'.$payment_id.'.pdf';
-                        if ($payment_done !='')
+                        if ($payment_done =='true')
                         {
                             //do email of receipt to biller and customer
 
@@ -400,25 +408,40 @@ class cron {
                             $email -> from = $biller['email'];
                             $email -> from_friendly = $biller['name'];
                             $email -> to = $biller['email'];
-                            $email -> subject = "Payment failed";
+                            $email -> subject = "Payment failed for ".$invoice['index_name'];
+                            $error_message ="Invoice:  ".$invoice['index_name']."<br /> Amount: ".$invoice['total']." <br />";
+                            foreach($eway->get_message() as $key => $value)
+                                $error_message .= "\n<br>\$ewayResponseFields[\"$key\"] = $value";
+                            $email -> notes = $error_message;
                             $return['email_message'] = $email->send();
 
                         }
 
                     }
 
+                    //insert into cron_log date of run
+                    $cron_log = new cronlog();
+                    $cron_log->run_date = $today;
+                    $cron_log->domain_id = $domain_id;
+                    $cron_log->cron_id = $data[$key]['cron_id'];
+                    $cron_log->insert();
+
+
                 } else {
 
+                    //cron not run for this cron_id
                     #$return .= "<br />NOT RUN: Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." did not recur today :: Info diff=".$diff."<br />";
 
                 }
         
             
             } else {		
+
+                    //days diff is negaqtive - whats going on
                     #$return .= "<br />NOT RUN: Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." did not recur today :: Info diff=".$diff."<br />";
             }
         } else {
-            // cron has already been run for that invoice toda
+            // cron has already been run for that cron_id toda
                $return['id'] = $i;
                $return[$i]['cron_message'] = "Cron has already been run for domain: ".$domain_id." for the date: ".$today."for invoice ".$data[$key]['invoice_id'];
                $return[$i]['email_message'] = "";
@@ -433,21 +456,26 @@ class cron {
         $return['email_message'] = "";
     }
     //insert into cron_log date of run
-    $cron_log = new cronlog();
+   /* $cron_log = new cronlog();
     $cron_log->run_date = $today;
     $cron_log->domain_id = $domain_id;
-    $cron_log->insert();
+    $cron_log->insert();*/
 
+/*
+* If you want to get an email once cron has been run edit the below details
+*
+*/
+/*
     $email = new email();
     $email -> format = 'cron';
     #$email -> notes = $return;
     $email -> from = "simpleinvoices@localhost";
     $email -> from_friendly = "Simple Invoices - Cron";
-    $email -> to = "justin@localhost";
+    $email -> to = "simpleinvoices@localhost";
     #$email -> bcc = $_POST['email_bcc'];
     $email -> subject = "Cron for Simple Invoices has been run for today:";
     $email -> send ();
-
+*/
     return $return;
 	
     }

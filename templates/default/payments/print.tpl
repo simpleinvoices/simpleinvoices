@@ -166,15 +166,18 @@
 		<tr>
 			<td colspan="6"><br /></td>
 		</tr>
-        {if $payment.ac_notes != ""}
+        {* hide notes if from an online payment *}
+        {if $payment.ac_notes != "" AND $preference.include_online_payment ==""}
         <tr>
                 <td class='tbl1-bottom col1'>{$LANG.notes}:</td><td></td>
         </tr>
         {/if}
 
 </table>
+        {if $payment.ac_notes != "" AND $preference.include_online_payment ==""}
     <table>
         <tr>
                 <td colspan="2">{$payment.ac_notes}</td>
         </tr>
 </table>
+        {/if}

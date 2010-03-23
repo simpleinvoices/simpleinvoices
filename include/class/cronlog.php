@@ -2,6 +2,7 @@
 class cronlog {
 	
 	public $domain_id;
+	public $cron_id;
 
 	public function insert()
 	{
@@ -15,17 +16,17 @@ class cronlog {
 		
 		$sql = "INSERT into ".TB_PREFIX."cron_log (
 				domain_id,
-                invoice_id,
+                cron_id,
 				run_date
 			) VALUES (
 				:domain_id,
-				:invoice_id,
+				:cron_id,
 				:run_date
 			);";
 
         	$sth  = $db->query($sql,
 				':domain_id',$domain_id, 
-				':invoice_id',$invoice_id, 
+				':cron_id',$this->cron_id, 
 				':run_date',$run_date
 			) or die(htmlspecialchars(end($dbh->errorInfo())));
         
@@ -39,10 +40,19 @@ class cronlog {
 		$domain_id = domain_id::get($this->domain_id);
 
 		$run_date = empty($this->run_date) ? $today : $this->run_date;
-		$sql = "SELECT count(*) as count from ".TB_PREFIX."cron_log WHERE domain_id = :domain_id and AND invoice_id = :invoice_id and run_date = :run_date";
+		$sql = "SELECT 
+                    count(*) as count 
+                FROM 
+                    ".TB_PREFIX."cron_log 
+                WHERE 
+                    domain_id = :domain_id 
+                AND 
+                    cron_id = :cron_id 
+                AND
+                    run_date = :run_date";
         	$sth = $db->query($sql,
 				':domain_id',$domain_id, 
-				':invoice_id',$this->invoice_id, 
+				':cron_id',$this->cron_id, 
 				':run_date',$run_date
 			) or die(htmlspecialchars(end($dbh->errorInfo())));
         

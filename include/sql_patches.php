@@ -1376,7 +1376,7 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     $patch['228']['date'] = "20100216";    
 
     $patch['229']['name'] = "preferences - add online payment type";
-    $patch['229']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `include_online_payment` VARCHAR( 25 ) NULL ;";
+    $patch['229']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `include_online_payment` VARCHAR( 255 ) NULL ;";
     $patch['229']['date'] = "20100209";    
 
     $patch['230']['name'] = "Add paypal notify url";
@@ -1416,7 +1416,7 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     $patch['238']['date'] = "20100315";  
 
     $patch['239']['name'] = "cronlog - add invoice id";
-    $patch['239']['patch'] = "ALTER TABLE `".TB_PREFIX."cron_log` ADD `invoice_id` VARCHAR( 25 ) NULL AFTER `domain_id` ;";
+    $patch['239']['patch'] = "ALTER TABLE `".TB_PREFIX."cron_log` ADD `cron_id` VARCHAR( 25 ) NULL AFTER `domain_id` ;";
     $patch['239']['date'] = "20100321";    
 
   

@@ -6,6 +6,28 @@ class eway
     public $biller;
     public $invoice;
     public $customer;
+    public $preference;
+    
+    public function pre_check()
+    {
+    
+        $return = 'false';
+
+        if ($this->biller['eway_customer_id'] != '')
+        {
+            $return = 'true';
+        }
+        if ($this->customer['credit_card_number'] != '')
+        {
+            $return = 'true';
+        }
+        if (in_array("eway_merchant_xml",explode(",", $preference['include_online_payment'])) )         
+        {
+            $return = 'true';
+        }
+
+        return $return;
+    }
 
     public function payment()
     {
@@ -19,7 +41,7 @@ function clean_num($num){
 }
 
         //Eway only accepts whole dollar amounts
-		$value = (round($this->invoice['total'])*100);
+		$value = $this->invoice['total']*100;
 		$eway_invoice_total = htmlentities(trim($value));
 
         $enc = new encryption();
@@ -46,7 +68,7 @@ function clean_num($num){
         //special preferences for php Curl
         $eway->setCurlPreferences(CURLOPT_SSL_VERIFYPEER, 0);  //pass a long that is set to a zero value to stop curl from verifying the peer's certificate 
         $ewayResponseFields = $eway->doPayment();
-        
+        $this->message = $ewayResponseFields;
         $message ="";
         if($ewayResponseFields["EWAYTRXNSTATUS"]=="False"){
 			$logger->log("Transaction Error: " . $ewayResponseFields["EWAYTRXNERROR"] . "<br>\n", Zend_Log::INFO);
@@ -86,11 +108,17 @@ function clean_num($num){
             $logger->log('Paypal - payment_type='.$payment->ac_payment_type, Zend_Log::INFO);
             $payment->insert();
             #echo $db->lastInsertID();
-            $return = 'false';		
+            $return = 'true';		
         }
 
         return $return ;		
     }
 
+    function get_message()
+    {
+    
+        return $this->message;
+
+    }
 
 }
