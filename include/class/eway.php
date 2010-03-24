@@ -35,12 +35,23 @@ class eway
         global $config;
         global $logger;
 
-        $eway = new ewaylib($this->biller['eway_customer_id'],'REAL_TIME', false);
-function clean_num($num){
-      return trim(trim($num, '0'), '.');
-}
+        //set customer,biller and preference if not defined
+        if(empty($this->customer))
+        {
+            $this->customer = getCustomer($invoice['customer_id']);
+        }
+        if(empty($this->biller))
+        {
+            $this->biller = getBiller($this->invoice['biller_id']);
+        }
+        if(empty($this->preference))
+        {
+            $this->preference = getPreference($this->invoice['preference_id']);
+        }
 
-        //Eway only accepts whole dollar amounts
+        $eway = new ewaylib($this->biller['eway_customer_id'],'REAL_TIME', false);
+
+        //Eway only accepts amount in cents - so times 100
 		$value = $this->invoice['total']*100;
 		$eway_invoice_total = htmlentities(trim($value));
 
@@ -90,13 +101,11 @@ function clean_num($num){
             $payment = new payment();
             $payment->ac_inv_id = $this->invoice['id'];
             #$payment->ac_inv_id = $_POST['invoice'];
-            #$payment->ac_amount = $this->invoice['total'];EWAYRETURNAMOUNT
-            $payment->ac_amount = $ewayResponseFields['EWAYRETURNAMOUNT']/100;
+            $payment->ac_amount = $this->invoice['total'];
+            #$payment->ac_amount = $ewayResponseFields['EWAYRETURNAMOUNT']/100;
             #$payment->ac_amount = $_POST['mc_gross'];
             $payment->ac_notes = $message;
-            #$payment->ac_notes = $paypal_data;
             $payment->ac_date = date( 'Y-m-d' );
-            #$payment->ac_date = date( 'Y-m-d', strtotime($_POST['payment_date']));
             $payment->online_payment_id = $ewayResponseFields['EWAYTRXNNUMBER'];
             $payment->domain_id = domain_id::get($this->domain_id);
 
