@@ -59,6 +59,7 @@
 				
 			<li><a { if $pageActive == "payment"} class="active" {/if} href="index.php?module=payments&amp;view=manage">{$LANG.payments}</a></li>
 				{ if $subPageActive == "payment_process"} <li><a class="active active_subpage" href="#">{$LANG.process}</a></li>{/if}
+				{ if $subPageActive == "payment_eway"} <li><a class="active active_subpage" href="#">{$LANG.eway}</a></li>{/if}
 				{ if $subPageActive == "payment_filter_invoice"} <li><a class="active active_subpage" href="#">{$LANG.payments_filtered} {$preference.pref_inv_wording} {$smarty.get.id}</a></li>{/if}
 				{ if $subPageActive == "payment_filter_customer"} <li><a class="active active_subpage" href="#">{$LANG.payments_filtered_customer} '{$customer.name}'</a></li>{/if}
 			<li><a { if $pageActive == "report_sale"} class="active" {/if} href="index.php?module=reports&amp;view=report_sales_total">{$LANG.sales_report}</a></li>

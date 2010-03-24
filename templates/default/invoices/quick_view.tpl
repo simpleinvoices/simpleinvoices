@@ -29,6 +29,10 @@
 			<a title="{$LANG.edit} {$preference.pref_inv_wording} {$invoice.id}" href="index.php?module=invoices&amp;view=details&amp;id={$invoice.id}&amp;action=view"><img src='images/common/edit.png' class='action' />&nbsp;{$LANG.edit}</a>
 			 &nbsp;&nbsp; 
 			 <a title="{$LANG.process_payment_for} {$preference.pref_inv_wording} {$invoice.id}" href="index.php?module=payments&amp;view=process&amp;id={$invoice.id}&amp;op=pay_selected_invoice"><img src='images/common/money_dollar.png' class='action' />&nbsp;{$LANG.process_payment} </a>
+             {if $eway_pre_check == 'true'}
+			 &nbsp;&nbsp; 
+			 <a title="{$LANG.process_payment_for} {$preference.pref_inv_wording} {$invoice.id}" href="index.php?module=payments&amp;view=eway&amp;id={$invoice.id}"><img src='images/common/money_dollar.png' class='action' />&nbsp;{$LANG.process_payment_via_eway} </a>
+             {/if}
 			 &nbsp;&nbsp; 
 			 <!-- EXPORT TO PDF -->
 			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording} {$invoice.id} {$LANG.export_pdf_tooltip}" href="index.php?module=export&amp;view=invoice&amp;id={$invoice.id}&amp;format=pdf"><img src='images/common/page_white_acrobat.png' class='action' />&nbsp;{$LANG.export_pdf}</a>

@@ -33,6 +33,10 @@ $preference = getPreference($invoice['preference_id']);
 $defaults = getSystemDefaults();
 $invoiceItems = invoice::getInvoiceItems($invoice_id);
 
+    $eway_check = new eway();
+    $eway_check->invoice = $invoice;
+    $eway_pre_check = $eway_check->pre_check();
+
 #Invoice Age - number of days - start
 if ($invoice['owing'] > 0 ) {
     $invoice_age_days =  number_format((strtotime(date('Y-m-d')) - strtotime($invoice['calc_date'])) / (60 * 60 * 24),0);
@@ -76,4 +80,5 @@ $smarty -> assign("invoice",$invoice);
 $smarty -> assign("wordprocessor",$config->export->wordprocessor);
 $smarty -> assign("spreadsheet",$config->export->spreadsheet);
 $smarty -> assign("customerAccount",$customerAccount);
+$smarty -> assign("eway_pre_check",$eway_pre_check);
 ?>

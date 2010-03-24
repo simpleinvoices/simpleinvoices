@@ -1,14 +1,21 @@
 {if $saved == 'true' }
 <meta http-equiv="refresh" content="2;URL=index.php?module=payments&amp;view=manage" />
 <br />
-{$LANG.save_cron_success}
+{$LANG.save_eway_success}
+<br />
+<br />
+{/if}
+{if $saved == 'check_failed' }
+<meta http-equiv="refresh" content="2;URL=index.php?module=payments&amp;view=manage" />
+<br />
+{$LANG.save_eway_check_failed}
 <br />
 <br />
 {/if}
 {if $saved == 'false' }
 <meta http-equiv="refresh" content="2;URL=index.php?module=payments&amp;view=manage" />
 <br />
-{$LANG.save_cron_failure}
+{$LANG.save_eway_failure}
 <br />
 <br />
 {/if}
@@ -32,56 +39,18 @@
 <select name="invoice_id" class="validate[required]">
 <option value=''></option>
 {foreach from=$invoice_all item=invoice}
-<option value="{$invoice.id}">{$invoice.index_name}</option>
+<option value="{$invoice.id}" {if $smarty.get.id == $invoice.id} selected {/if} >{$invoice.index_name}</option>
 {/foreach}
 </select>
 </td>
 </tr>
-<tr wrap="nowrap">
-<td class="details_screen">{$LANG.start_date}</td>
-<td wrap="nowrap">
-<input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date" value='{"+1 days"|date_format:"%Y-%m-%d"}' />
-</td>
-</tr>
-<tr wrap="nowrap">
-<td class="details_screen">{$LANG.end_date}</td>
-<td wrap="nowrap">
-<input type="text" class="date-picker" size="10" name="end_date" id="date" value='' />
-</td>
-</tr>
 <tr>
-<td class="details_screen">{$LANG.recur_each}</td>
-<td>
-<input name="recurrence" size="10" class="validate[required]">
-</input>
-<select name="recurrence_type" class="validate[required]">
-<option value="day">{$LANG.days}</option>
-<option value="week">{$LANG.weeks}</option>
-<option value="month">{$LANG.months}</option>
-<option value="year">{$LANG.years}</option>
-</select>
-</td>
+    <td colspan=2>
+        <br />
+        {$LANG.warning_eway}
+        <br />
+    </td>
 </tr>
-<tr>
-<td class="details_screen">{$LANG.email_biller_after_cron}</td>
-<td>
-<select name="email_biller" class="validate[required]">
-<option value="1">{$LANG.yes}</option>
-<option value="0">{$LANG.no}</option>
-</select>
-</td>
-</tr>
-<tr>
-<td class="details_screen">{$LANG.email_customer_after_cron}</td>
-<td>
-<select name="email_customer" class="validate[required]">
-<option value="1">{$LANG.yes}</option>
-<option value="0">{$LANG.no}</option>
-</select>
-</td>
-</tr>
-
-
 </table>
 <br />
 <table class="buttons" align="center">

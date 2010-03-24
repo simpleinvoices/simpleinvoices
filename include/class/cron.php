@@ -343,6 +343,7 @@ class cron {
 
                     //Check that all details are OK before doing the eway payment
                     $eway_check = new eway();
+                    $eway_check->invoice = $invoice;
                     $eway_check->customer = $customer;
                     $eway_check->biller = $biller;
                     $eway_check->preference = $preference;

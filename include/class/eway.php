@@ -10,22 +10,37 @@ class eway
     
     public function pre_check()
     {
-    
+        global $logger;
+
         $return = 'false';
+        
+        //set customer,biller and preference if not defined
+        if(empty($this->customer))
+        {
+            $this->customer = getCustomer($this->invoice['customer_id']);
+        }
+        if(empty($this->biller))
+        {
+            $this->biller = getBiller($this->invoice['biller_id']);
+        }
+        if(empty($this->preference))
+        {
+            $this->preference = getPreference($this->invoice['preference_id']);
+        }
 
-        if ($this->biller['eway_customer_id'] != '')
-        {
-            $return = 'true';
-        }
-        if ($this->customer['credit_card_number'] != '')
-        {
-            $return = 'true';
-        }
-        if (in_array("eway_merchant_xml",explode(",", $preference['include_online_payment'])) )         
+        if (
+                $this->invoice['owing'] > 0 
+                 AND
+                $this->biller['eway_customer_id'] != ''
+                AND
+                $this->customer['credit_card_number'] != ''
+                AND
+                in_array("eway_merchant_xml",explode(",", $this->preference['include_online_payment'])) )         
         {
             $return = 'true';
         }
 
+        $logger->log("eway pre check: " . $return, Zend_Log::INFO);
         return $return;
     }
 
@@ -38,7 +53,7 @@ class eway
         //set customer,biller and preference if not defined
         if(empty($this->customer))
         {
-            $this->customer = getCustomer($invoice['customer_id']);
+            $this->customer = getCustomer($this->invoice['customer_id']);
         }
         if(empty($this->biller))
         {
@@ -54,6 +69,7 @@ class eway
         //Eway only accepts amount in cents - so times 100
 		$value = $this->invoice['total']*100;
 		$eway_invoice_total = htmlentities(trim($value));
+        $logger->log("eway totla: " . $eway_invoice_total, Zend_Log::INFO);
 
         $enc = new encryption();
         $key = $config->encryption->default->key;	
