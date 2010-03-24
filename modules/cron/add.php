@@ -18,6 +18,7 @@ if ($_POST['op'] =='add' AND !empty($_POST['invoice_id']))
 }      
 
 $invoices = new invoice()
+$invoices->sort='id';
 $invoice_all = $invoice->select_all('count');
 
 $smarty -> assign('invoice_all',$invoice_all);
