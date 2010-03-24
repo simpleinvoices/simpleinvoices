@@ -17,7 +17,8 @@ if ($_POST['op'] =='add' AND !empty($_POST['invoice_id']))
 	$saved = !empty($result) ? "true" : "false";
 }      
 
-$invoice_all = invoice::select_all('count');
+$invoices = new invoice()
+$invoice_all = $invoice->select_all('count');
 
 $smarty -> assign('invoice_all',$invoice_all);
 $smarty -> assign('saved',$saved);
