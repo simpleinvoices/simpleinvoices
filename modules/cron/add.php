@@ -17,7 +17,7 @@ if ($_POST['op'] =='add' AND !empty($_POST['invoice_id']))
 	$saved = !empty($result) ? "true" : "false";
 }      
 
-$invoices = new invoice()
+$invoices = new invoice();
 $invoices->sort='id';
 $invoice_all = $invoice->select_all('count');
 
