@@ -20,7 +20,7 @@ if ($_POST['op'] =='edit' AND !empty($_POST['invoice_id']))
 
 $invoices = new invoice();
 $invoices->sort='id';
-$invoice_all = $invoice->select_all('count');
+$invoice_all = $invoices->select_all('count');
 
 $get_cron = new cron();
 $get_cron->id = $_GET['id'];
