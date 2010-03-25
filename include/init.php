@@ -19,6 +19,26 @@ Zend_Session::start();
 $auth_session = new Zend_Session_Namespace('Zend_Auth');
 
 
+//start use of zend_cache   
+$frontendOptions = array(
+    'lifetime' => 7200, // cache lifetime of 2 hours
+    'automatic_serialization' => true
+);
+                   
+$backendOptions = array(
+    'cache_dir' => './tmp/' // Directory where to put the cache files
+);
+                                   
+// getting a Zend_Cache_Core object
+$cache = Zend_Cache::factory('Core',
+                             'File',
+                             $frontendOptions,
+                             $backendOptions);
+
+//required for some servers
+Zend_Date::setOptions(array('cache' => $cache)); // Active aussi pour Zend_Locale
+
+
 /* 
  * Zend framework init - end
  */
