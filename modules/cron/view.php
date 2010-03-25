@@ -18,6 +18,7 @@ if ($_POST['op'] =='edit' AND !empty($_POST['invoice_id']))
 }      
 
 $invoice_all = invoice::get_all();
+
 $get_cron = new cron();
 $get_cron->id = $_GET['id'];
 $cron = $get_cron->select();

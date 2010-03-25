@@ -31,7 +31,9 @@
 		<select name="invoice_id" class="validate[required]">
 		    <option value=''></option>
 			{foreach from=$invoice_all item=invoice}
-				<option value="{$invoice.id}" {if $invoice.id == $cron.invoice_id}selected{/if} >{$invoice.index_name}</option>
+				<option value="{$invoice.id}" {if $invoice.id == $cron.invoice_id}selected{/if} >
+                    {$invoice.index_name} ({$invoice.biller}, {$invoice.customer}, {$invoice.invoice_total|siLocal_number})
+                </option>
 			{/foreach}
 		</select>
 		</td>

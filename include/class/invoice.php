@@ -504,4 +504,4 @@ class invoice {
 		
 		return $ni_id;
 	}
-}
+}

@@ -18,7 +18,10 @@ if ($_POST['op'] =='edit' AND !empty($_POST['invoice_id']))
 	$saved = !empty($result) ? "true" : "false";
 }      
 
-$invoice_all = invoice::get_all();
+$invoices = new invoice();
+$invoices->sort='id';
+$invoice_all = $invoice->select_all('count');
+
 $get_cron = new cron();
 $get_cron->id = $_GET['id'];
 $cron = $get_cron->select();
