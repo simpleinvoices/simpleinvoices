@@ -189,6 +189,7 @@ class cron {
     $cron = new cron();
     $data = $cron->select_all('');
 
+    $return['cron_message'] ="Cron started";
     $number_of_crons_run = "0";	
     foreach ($data as $key=>$value)
     {
@@ -478,7 +479,7 @@ class cron {
     $email -> subject = "Cron for Simple Invoices has been run for today:";
     $email -> send ();
 */
-    return $return;
+        return $return;
 	
     }
 
