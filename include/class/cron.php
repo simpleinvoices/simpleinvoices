@@ -2,6 +2,8 @@
 class cron {
 	
  	public $start_date;
+ 	public $domain_id;
+
 	public function insert()
 	{
         	global $db;
