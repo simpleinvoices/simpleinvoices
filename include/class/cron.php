@@ -443,9 +443,9 @@ class cron {
             }
         } else {
             // cron has already been run for that cron_id toda
-               $return['id'] = $data[$key]['cron_id'];
-               $return[$data[$key]['cron_id']['cron_message']] = "Cron has already been run for domain: ".$domain_id." for the date: ".$today."for invoice ".$data[$key]['invoice_id'];
-               $return[$data[$key]['cron_id']['email_message']] = "";
+               $return[$data[$key]['cron_id']]['cron_message'] = "Cron ID: ".$data[$key]['cron_id'].", Cron has already been run for domain: ".$domain_id." for the date: ".$today." for invoice ".$data[$key]['invoice_id'];
+               $return[$data[$key]['cron_id']]['email_message'] = "";
+               
         }
     }
 
@@ -453,7 +453,7 @@ class cron {
     if ($number_of_crons_run  == '0')
     {
         $return['id'] = $i;
-        $return['cron_message'] = "No invoices are scheduled to recur today for domain: ".$domain_id." for the date: ".$today;
+        $return['cron_message'] = "No invoices recurred for this cron run for domain: ".$domain_id." for the date: ".$today;
         $return['email_message'] = "";
     }
     //insert into cron_log date of run
