@@ -1,4 +1,4 @@
-u?php
+<?php
 class cron {
 	
  	public $start_date;
