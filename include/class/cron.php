@@ -276,8 +276,7 @@ class cron {
                 if ($run_cron == 'true')
                 {
                     $number_of_crons_run++;	
-                    $return['id'] = $i;
-                    $return[$data[$key]['cron_id']]['cron_message'] = "Cron ID: ". $data[$key]['cron_id'] .", Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of '".$data[$key]['end_date']."' where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." was run today :: Info diff=".$diff."<br />";
+                    $return[$data[$key]['cron_id']]['cron_message'] = "Cron ID: ". $data[$key]['cron_id'] .", Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of '".$data[$key]['end_date']."' where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." was run today :: Info diff=".$diff;
                     $i++;
 
                     $ni = new invoice();
@@ -372,41 +371,43 @@ class cron {
                         if ($payment_done =='true')
                         {
                             //do email of receipt to biller and customer
+                            if( ($data[$key]['email_biller']) == "1" OR ($data[$key]['email_customer'] == "0") )
 
-                            $export = new export();
-                            $export -> format = "pdf";
-                            $export -> file_location = 'file';
-                            $export -> module = 'payment';
-                            $export -> id = $payment_id;
-                            $export -> execute();
+                                $export = new export();
+                                $export -> format = "pdf";
+                                $export -> file_location = 'file';
+                                $export -> module = 'payment';
+                                $export -> id = $payment_id;
+                                $export -> execute();
 
-                            $email = new email();
-                            $email -> format = 'cron_payment';
+                                $email = new email();
+                                $email -> format = 'cron_payment';
 
-                                $email_body = new email_body();
-                                $email_body->email_type = 'cron_payment';
-                                $email_body->customer_name = $customer['name'];
-                                $email_body->invoice_name = 'payment'.$payment_id;
-                                $email_body->biller_name = $biller['name'];
-                            
-                            $email -> notes = $email_body->create();
-                            $email -> from = $biller['email'];
-                            $email -> from_friendly = $biller['name'];
-                            if($data[$key]['email_customer'] == "1")
-                            {
-                                $email -> to = $customer['email'];
+                                    $email_body = new email_body();
+                                    $email_body->email_type = 'cron_payment';
+                                    $email_body->customer_name = $customer['name'];
+                                    $email_body->invoice_name = 'payment'.$payment_id;
+                                    $email_body->biller_name = $biller['name'];
+                                
+                                $email -> notes = $email_body->create();
+                                $email -> from = $biller['email'];
+                                $email -> from_friendly = $biller['name'];
+                                if($data[$key]['email_customer'] == "1")
+                                {
+                                    $email -> to = $customer['email'];
+                                }
+                                if($data[$key]['email_biller'] == "1" AND $data[$key]['email_customer'] == "1")
+                                {
+                                    $email -> to = $customer['email'].";".$biller['email'];
+                                }
+                                if($data[$key]['email_biller'] == "1" AND $data[$key]['email_customer'] == "0")
+                                {
+                                    $email -> to = $customer['email'];
+                                }
+                                $email -> subject = $pdf_file_name." from ".$biller['name'];
+                                $email -> attachment = $pdf_file_name;
+                                $return['email_message'] = $email->send();
                             }
-                            if($data[$key]['email_biller'] == "1" AND $data[$key]['email_customer'] == "1")
-                            {
-                                $email -> to = $customer['email'].";".$biller['email'];
-                            }
-                            if($data[$key]['email_biller'] == "1" AND $data[$key]['email_customer'] == "0")
-                            {
-                                $email -> to = $customer['email'];
-                            }
-                            $email -> subject = $pdf_file_name." from ".$biller['name'];
-                            $email -> attachment = $pdf_file_name;
-                            $return['email_message'] = $email->send();
                         } else {
                             //do email to biller/admin - say error
                             
