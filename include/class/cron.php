@@ -372,6 +372,7 @@ class cron {
                         {
                             //do email of receipt to biller and customer
                             if( ($data[$key]['email_biller'] == "1") OR ($data[$key]['email_customer'] == "0") )
+                            {
 
                                 $export = new export();
                                 $export -> format = "pdf";
