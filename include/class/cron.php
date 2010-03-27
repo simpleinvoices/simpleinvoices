@@ -284,6 +284,12 @@ class cron {
                     $ni->id = $data[$key]['invoice_id'];
                     $new_invoice_id = $ni->recur();
 
+                    //insert into cron_log date of run
+                    $cron_log = new cronlog();
+                    $cron_log->run_date = $today;
+                    $cron_log->domain_id = $domain_id;
+                    $cron_log->cron_id = $data[$key]['cron_id'];
+                    $cron_log->insert();
 
                     ## email the people
                     
@@ -420,18 +426,12 @@ class cron {
 
                     }
 
-                    //insert into cron_log date of run
-                    $cron_log = new cronlog();
-                    $cron_log->run_date = $today;
-                    $cron_log->domain_id = $domain_id;
-                    $cron_log->cron_id = $data[$key]['cron_id'];
-                    $cron_log->insert();
 
 
                 } else {
 
                     //cron not run for this cron_id
-                    #$return .= "<br />NOT RUN: Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." did not recur today :: Info diff=".$diff."<br />";
+                    $return[$data[$key]['cron_id']]['cron_message'] = "Cron ID: ". $data[$key]['cron_id'] ." NOT RUN: Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." did not recur today :: Info diff=".$diff."<br />";
 
                 }
         
