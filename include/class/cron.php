@@ -278,7 +278,7 @@ class cron {
                 if ($run_cron == 'true')
                 {
                     $number_of_crons_run++;	
-                    $return[$data[$key]['cron_id']]['cron_message'] = "Cron ID: ". $data[$key]['cron_id'] .", Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of '".$data[$key]['end_date']."' where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." was run today :: Info diff=".$diff;
+                    $return[$data[$key]['cron_id']]['cron_message'] = "Cron ID: ". $data[$key]['cron_id'] .", Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." was run today :: Info diff=".$diff;
                     $i++;
 
                     $ni = new invoice();
