@@ -14,9 +14,7 @@ $message = $cron->run();
 header('Content-type: application/xml');
 try 
 {
-    $xml = new encode();
-    $xml->xml( $message );
-    echo $xml;
+    echo encode::xml( $message );
 } 
 catch (Exception $e) 
 {

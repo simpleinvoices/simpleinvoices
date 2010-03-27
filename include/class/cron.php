@@ -279,7 +279,7 @@ class cron {
                 if ($run_cron == 'true')
                 {
                     $number_of_crons_run++;	
-                    $return[$data[$key]['cron_id']]['cron_message'] = "Cron ID: ". $data[$key]['cron_id'] .", Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." was run today :: Info diff=".$diff;
+                    $return['cron_message'] = "Cron ID: ". $data[$key]['cron_id'] .", Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." was run today :: Info diff=".$diff;
                     $i++;
 
                     $ni = new invoice();
@@ -433,7 +433,7 @@ class cron {
                 } else {
 
                     //cron not run for this cron_id
-                    $return[$data[$key]['cron_id']]['cron_message'] = "Cron ID: ". $data[$key]['cron_id'] ." NOT RUN: Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." did not recur today :: Info diff=".$diff."<br />";
+                    $return['cron_message'] = "Cron ID: ". $data[$key]['cron_id'] ." NOT RUN: Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." did not recur today :: Info diff=".$diff."<br />";
 
                 }
         
@@ -441,12 +441,12 @@ class cron {
             } else {		
 
                     //days diff is negaqtive - whats going on
-                    $return[$data[$key]['cron_id']]['cron_message'] = "Cron ID: ". $data[$key]['cron_id'] ." NOT RUN: - Not cheduled for today - Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." did not recur today :: Info diff=".$diff."<br />";
+                    $return['cron_message'] = "Cron ID: ". $data[$key]['cron_id'] ." NOT RUN: - Not cheduled for today - Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." did not recur today :: Info diff=".$diff."<br />";
             }
         } else {
             // cron has already been run for that cron_id toda
-               $return[$data[$key]['cron_id']]['cron_message'] = "Cron ID: ".$data[$key]['cron_id'].", Cron has already been run for domain: ".$domain_id." for the date: ".$today." for invoice ".$data[$key]['invoice_id'];
-               $return[$data[$key]['cron_id']]['email_message'] = "";
+               $return['cron_message'] = "Cron ID: ".$data[$key]['cron_id'].", Cron has already been run for domain: ".$domain_id." for the date: ".$today." for invoice ".$data[$key]['invoice_id'];
+               $return['email_message'] = "";
                
         }
     }
