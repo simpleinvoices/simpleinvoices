@@ -1,4 +1,4 @@
-<?php
+u?php
 class cron {
 	
  	public $start_date;
@@ -444,8 +444,8 @@ class cron {
         } else {
             // cron has already been run for that cron_id toda
                $return['id'] = $data[$key]['cron_id'];
-               $return[$i]['cron_message'] = "Cron has already been run for domain: ".$domain_id." for the date: ".$today."for invoice ".$data[$key]['invoice_id'];
-               $return[$i]['email_message'] = "";
+               $return[$data[$key]['cron_id']]['cron_message'] = "Cron has already been run for domain: ".$domain_id." for the date: ".$today."for invoice ".$data[$key]['invoice_id'];
+               $return[$data[$key]['cron_id']]['email_message'] = "";
         }
     }
 
