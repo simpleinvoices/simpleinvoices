@@ -439,7 +439,7 @@ class cron {
             } else {		
 
                     //days diff is negaqtive - whats going on
-                    #$return .= "<br />NOT RUN: Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." did not recur today :: Info diff=".$diff."<br />";
+                    $return[$data[$key]['cron_id']]['cron_message'] = "Cron ID: ". $data[$key]['cron_id'] ." NOT RUN: - Not cheduled for today - Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." did not recur today :: Info diff=".$diff."<br />";
             }
         } else {
             // cron has already been run for that cron_id toda
