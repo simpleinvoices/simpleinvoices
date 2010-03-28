@@ -20,8 +20,7 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			dataType: 'xml',
 			colModel : [
 				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
-				{display: '{/literal}{$LANG.id}{literal}', name : 'id', width : 10 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.name}{literal}', name : 'description', width : 40 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.name}{literal}', name : 'description', width : 50 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.unit_price}{literal}', name : 'unit_price', width : 20 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'}
 				
@@ -32,7 +31,7 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 				{display: '{/literal}{$LANG.id}{literal}', name : 'id'},
 				{display: '{/literal}{$LANG.name}{literal}', name : 'description', isdefault: true}
 				],
-			sortname: 'id',
+			sortname: 'description',
 			sortorder: 'asc',
 			usepager: true,
 			/*title: 'Manage Custom Fields',*/

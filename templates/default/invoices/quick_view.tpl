@@ -366,7 +366,7 @@
 	{if $invoice_number_of_taxes > 0}
 	<tr class="details_screen">
         <td colspan="3"></td>
-		<td colspan="2" class="align_right">{$LANG.gross_total}&nbsp;</td>
+		<td colspan="2" class="align_right">{$LANG.sub_total}&nbsp;</td>
 		<td colspan="1" class="align_right">{if $invoice_number_of_taxes > 1}<u>{/if}{$preference.pref_currency_sign}{$invoice.gross|siLocal_number}{if $invoice_number_of_taxes > 1}</u>{/if}</td>
     </tr>
     {/if}
