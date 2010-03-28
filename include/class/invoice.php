@@ -252,7 +252,7 @@ class invoice {
             case "draft":
                 $sql_having = "HAVING ( status = 0 )";
                 break;
-            case "open":
+            case "real":
                 $sql_having = "HAVING ( status = 1 )";
                 break;
         }
@@ -271,7 +271,7 @@ class invoice {
             case "draft":
                 $sql_having .= "AND ( status = 0 )";
                 break;
-            case "open":
+            case "real":
                 $sql_having .= "AND ( status = 1 )";
                 break;
         }
@@ -290,7 +290,7 @@ class invoice {
             case "draft":
                 $sql_having .= "AND ( status = 0 )";
                 break;
-            case "open":
+            case "real":
                 $sql_having .= "AND ( status = 1 )";
                 break;
         }

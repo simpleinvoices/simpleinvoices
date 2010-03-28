@@ -11,10 +11,12 @@ $message = $cron->run();
 //print_r($message);
 //echo json_encode($invoice);
 
-header('Content-type: application/xml');
+//header('Content-type: application/xml');
 try 
 {
-    echo encode::xml( $message );
+    $data = encode::json( $message );
+    echo encode::indent( $data );
+    
 } 
 catch (Exception $e) 
 {
