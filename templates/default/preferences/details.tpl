@@ -260,7 +260,7 @@
 				<option value="{$preference.status}" selected
 				style="font-weight: bold;">{$preference.status_wording}</option>
 				<option value="1">{$LANG.open}</option>
-				<option value="0">{$LANG.draft}</option>
+				<option value="0">{$LANG.real}</option>
 				</select>
 			</td>
 		</tr>

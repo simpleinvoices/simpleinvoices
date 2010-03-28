@@ -130,7 +130,7 @@
 		</td>
 		<td>
 			<select name="status">
-			<option value="1" selected>{$LANG.open}</option>
+			<option value="1" selected>{$LANG.real}</option>
 			<option value="0">{$LANG.draft}</option>
 			</select>
 		</td>

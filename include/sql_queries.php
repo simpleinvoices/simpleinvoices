@@ -280,7 +280,7 @@ function getPreference($id) {
 	$print_preferences = "SELECT * FROM ".TB_PREFIX."preferences WHERE pref_id = :id and domain_id = :domain_id";
 	$sth = dbQuery($print_preferences, ':id', $id,':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	$preference = $sth->fetch();
-	$preference['status_wording'] = $preference['status']==1?$LANG['open']:$LANG['draft'];
+	$preference['status_wording'] = $preference['status']==1?$LANG['real']:$LANG['draft'];
 	$preference['enabled'] = $preference['pref_enabled']==1?$LANG['enabled']:$LANG['disabled'];
 	return $preference;
 }
