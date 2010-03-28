@@ -84,12 +84,26 @@ if (  $op === 'insert_preference' ) {
 	  ':enabled', $_POST['pref_enabled']
 	  )) {
 		$saved = true;
-		//$display_block = $LANG['save_preference_success'];
+        
+        if (empty($_POST['index_group']))
+        {
+            $sql_update = "UPDATE
+                    ".TB_PREFIX."preferences
+                SET
+                    index_group = :index_group
+                WHERE 
+                    pref_id = :pref_id
+            ";
+            dbQuery($sql_update, 
+                ':index_group',lastInsertId(),
+                ':pref_id',lastInsertId()
+            );
+		}
+        //$display_block = $LANG['save_preference_success'];
 	} ELSE {
 		$saved = false;
 		//$display_block =  $LANG['save_preference_failure'];
 	}
-echo "LASTID ".lastInsertId();
 	//header( 'refresh: 2; url=manage_preferences.php' );
 
 }
