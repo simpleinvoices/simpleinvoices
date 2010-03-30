@@ -89,14 +89,14 @@ foreach ($payment_types as $row) {
 	]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['pt_description']."]]></cell>";
 	if ($row['enabled']==$LANG['enabled']) {
-		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".utf8_encode($row['enabled'])."' title='".utf8_encode($row['enabled'])."' />]]></cell>";				
+		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
 	}	
 	else {
-		$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".utf8_encode($row['enabled'])."' title='".utf8_encode($row['enabled'])."' />]]></cell>";				
+		$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled'])"' />]]></cell>";				
 	}
 	$xml .= "</row>";		
 }
 $xml .= "</rows>";
 
 echo $xml;
-?> 
+?> 
