@@ -1,8 +1,17 @@
-Application: Simple Invoices
-Homepage: http://simpleinvoices.org
+Application:
+ * Simple Invoices
 
-Simple Invoices is released under the GPL v3 license - refer license.txt for details
+Homepage:
+ * http://simpleinvoices.org
 
-For installation instructions refer: http://simpleinvoices.org/install
+Documentation:
+ * Installation: http://simpleinvoices.org/install
+ * Frequently Asked Questions: http://simpleinvoices.org/wiki/faqs
+ * Help: http://simpleinvoices.org/help
 
-For any other help or comments jump on our website or post on the forum at http://simpleinvoices.org/forum
+About:
+ * Simple Invoices is released under the GPL v3 license - refer license.txt for details
+ * For installation instructions refer: http://simpleinvoices.org/install
+ * For any other help or comments jump on our website or post on the forum at http://simpleinvoices.org/forum
+
+
