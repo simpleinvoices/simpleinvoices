@@ -433,7 +433,7 @@ class cron {
                 } else {
 
                     //cron not run for this cron_id
-                    $return['cron_message_'.$data[$key]['cron_id']] = "Cron ID: ". $data[$key]['cron_id'] ." NOT RUN: Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." did not recur today :: Info diff=".$diff."<br />";
+                    $return['cron_message_'.$data[$key]['cron_id']] = "Cron ID: ". $data[$key]['cron_id'] ." NOT RUN: Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." did not recur today :: Info diff=".$diff";
 
                 }
         
@@ -441,7 +441,7 @@ class cron {
             } else {		
 
                     //days diff is negaqtive - whats going on
-                    $return['cron_message_'.$data[$key]['cron_id']] = "Cron ID: ". $data[$key]['cron_id'] ." NOT RUN: - Not cheduled for today - Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." did not recur today :: Info diff=".$diff."<br />";
+                    $return['cron_message_'.$data[$key]['cron_id']] = "Cron ID: ". $data[$key]['cron_id'] ." NOT RUN: - Not cheduled for today - Cron for ".$data[$key]['index_name']." with start date of ".$data[$key]['start_date'].", end date of ".$data[$key]['end_date']." where it runs each ".$data[$key]['recurrence']." ".$data[$key]['recurrence_type']." did not recur today :: Info diff=".$diff;
             }
         } else {
             // cron has already been run for that cron_id toda
