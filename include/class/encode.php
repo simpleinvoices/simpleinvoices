@@ -4,7 +4,8 @@ class encode
 {
 
     public static function xml($array, $level=1) {
-            $xml = '';
+
+        $xml = '';
         if ($level==1) {
             $xml .= '<?xml version="1.0" encoding="ISO-8859-1"?>'.
                     "\n<array>\n";

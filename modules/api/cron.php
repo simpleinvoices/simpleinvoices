@@ -9,7 +9,7 @@ $message = $cron->run();
 try 
 {
 
-    ob_clean();
+    ob_end_clean();
     //json
     header('Content-type: application/json');
     echo encode::json( $message, 'pretty' );
