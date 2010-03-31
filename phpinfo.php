@@ -22,10 +22,13 @@ if($secure == true)
     To view your phpinfo contents, edit the file phpinfo.php
     in your Simple Invoices directory and change line 11 from: <br />
     <br />
-    \$secure = true<br /><br />
+    \$secure = true;<br /><br />
     to<br /><br />
-    \$secure = false<br /><br />
-     and refresh this page");
+    \$secure = false;<br /><br />
+     and refresh this page.
+     Once you have finished using the information from phpinfo it
+    is advised to re-edit the phpinfo.php and change it back to \$secure = true;
+");
 } else {
     #print all the PHP info for your system
     phpinfo();
