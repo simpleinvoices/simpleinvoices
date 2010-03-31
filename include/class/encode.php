@@ -60,7 +60,8 @@ class encode
 	public static function json($data,$format='plain')
 	{
 		if($format='pretty') {
-            return Zend_Json::prettyPrint($data, array("indent" => " "));
+            $message = Zend_Json::encode($data);
+            return Zend_Json::prettyPrint($message, array("indent" => " "));
         } else {
             return Zend_Json::encode($data);
         }
