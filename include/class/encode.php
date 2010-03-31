@@ -61,7 +61,7 @@ class encode
 	{
 		if( $format=='pretty' ) {
             $message = Zend_Json::encode($data);
-            return Zend_Json::prettyPrint($message, array("indent" => "     "));
+            return Zend_Json::prettyPrint($message, array("indent" => "&nbsp;&nbsp;&nbsp;&nbsp;"));
         } else {
             return Zend_Json::encode($data);
         }
