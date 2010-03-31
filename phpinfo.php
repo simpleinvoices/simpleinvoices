@@ -1,24 +1,33 @@
 <?php
 
 /*
-* Script: quick_view.tpl
+* Script: phpinfo.php
 * 	Show the servers PHP settings
 *
-* Authors:
-*	 Justin Kelly, Nicolas Ruflin
-*
-* Last edited:
-* 	 2007-07-18
-*
 * License:
-*	 GPL v2 or above
+*	 GPL v3 or above
 */
 
-//define("BROWSE","browse");
+$secure = true;
 
-//include("./include/include_main.php");
+if($secure == true)
+{
+    die("
+    =============================<br/>
+    Simple Invoices security warning<br/>
+    =============================<br/>
+    <br/>
+    PHPINFO is disabled by default for security reasons. 
+    <br/>
+    To view your phpinfo contents, edit the file phpinfo.php
+    in your Simple Invoices directory and change line 11 from: <br />
+    <br />
+    \$secure = true<br /><br />
+    to<br /><br />
+    \$secure = false<br /><br />
+     and refresh this page");
+} else {
+    #print all the PHP info for your system
+    phpinfo();
 
-
-#print all the PHP info for your system
-phpinfo();
-?>
+}
