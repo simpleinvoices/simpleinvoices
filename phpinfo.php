@@ -10,7 +10,7 @@
 
 $secure = true;
 
-if($secure == true)
+if($secure)
 {
     die("
     =============================<br/>
