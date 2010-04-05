@@ -1336,7 +1336,7 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     $patch['222']['date'] = "20100209";    
 
     $patch['223']['name'] = "si_customers - add composite primary key";
-    $patch['223']['patch'] = "ALTER TABLE  `".TB_PREFIX."customer` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
+    $patch['223']['patch'] = "ALTER TABLE  `".TB_PREFIX."customers` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
     $patch['223']['date'] = "20100209";    
 
     $patch['224']['name'] = "Add paypal business name";
@@ -1418,5 +1418,9 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     $patch['239']['name'] = "cronlog - add invoice id";
     $patch['239']['patch'] = "ALTER TABLE `".TB_PREFIX."cron_log` ADD `cron_id` VARCHAR( 25 ) NULL AFTER `domain_id` ;";
     $patch['239']['date'] = "20100321";    
+
+    $patch['240']['name'] = "si_system_defaults - add composite primary key";
+    $patch['240']['patch'] = "ALTER TABLE  `".TB_PREFIX."system_defaults` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
+    $patch['240']['date'] = "2010305";    
 
   
