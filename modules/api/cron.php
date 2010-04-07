@@ -9,14 +9,14 @@ $message = $cron->run();
 try 
 {
 
-    ob_end_clean();
     //json
-    header('Content-type: application/json');
-    echo encode::json( $message, 'pretty' );
+    //header('Content-type: application/json');
+    //echo encode::json( $message, 'pretty' );
     
     //xml
-    //header('Content-type: application/xml');
-    //echo encode::xml( $message );
+    ob_end_clean();
+    header('Content-type: application/xml');
+    echo encode::xml( $message );
 } 
 catch (Exception $e) 
 {

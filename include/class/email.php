@@ -116,4 +116,43 @@ class email
 
 		return $message;
 	}
+
+    public function set_subject($type='')
+    {
+
+		switch ($type)
+		{
+			case "invoice_eway":
+			{
+
+				$message = "$this->invoice_name ready for automatic credit card payment";
+
+				break;
+			}	
+			case "invoice_eway_receipt":
+			{
+
+				$message = "$this->invoice_name secure credit card payment successful";
+
+				break;
+			}	
+			case "invoice_receipt":
+			{
+
+				$message = "$this->attachment has been emailed";
+
+				break;
+			}	
+			case "invoice":
+            default:
+			{
+
+				$message = "$this->attachment from $this->from_friendly";
+
+				break;
+			}	
+        }    
+    
+        return $message;
+    }
 }

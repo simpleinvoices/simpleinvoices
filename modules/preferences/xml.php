@@ -88,7 +88,7 @@ foreach ($preferences as $row) {
 	]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['pref_description']."]]></cell>";
 	if ($row['enabled']==$LANG['enabled']) {
-		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled'])"' />]]></cell>";				
+		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
 	}	
 	else {
 		$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
@@ -98,4 +98,4 @@ foreach ($preferences as $row) {
 $xml .= "</rows>";
 
 echo $xml;
-?> 
+?> 
