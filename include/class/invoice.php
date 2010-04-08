@@ -158,8 +158,18 @@ class invoice {
 
 	$invoice['invoice_items'] = invoice::getInvoiceItems($id);
 
+	#invoice total tax
+	$sql2 ="SELECT SUM(tax_amount) AS total_tax, SUM(total) AS total FROM ".TB_PREFIX."invoice_items WHERE invoice_id =  :id";
+	$sth2 = dbQuery($sql2, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$result2 = $sth2->fetch();
+	//$invoice['total'] = number_format($result['total'],2);
+	$invoice['total_tax'] = $result2['total_tax'];
+		
+	$invoice['tax_grouped'] = taxesGroupedForInvoice($id);
+	
 	return $invoice;
-    }
+    
+	}
 
     public static function get_all()
     {

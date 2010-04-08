@@ -25,19 +25,6 @@ $frontendOptions = array(
     'automatic_serialization' => true
 );
                    
-$backendOptions = array(
-    'cache_dir' => './tmp/' // Directory where to put the cache files
-);
-                                   
-// getting a Zend_Cache_Core object
-$cache = Zend_Cache::factory('Core',
-                             'File',
-                             $frontendOptions,
-                             $backendOptions);
-
-//required for some servers
-Zend_Date::setOptions(array('cache' => $cache)); // Active aussi pour Zend_Locale
-
 
 /* 
  * Zend framework init - end
@@ -73,6 +60,26 @@ $writer = new Zend_Log_Writer_Stream($logFile);
 $logger = new Zend_Log($writer);
 /*
  * log file - end
+ */
+
+/*
+ * Zend Framework cache section - start
+ * -- must come after the tmp dir writeable check
+ */
+$backendOptions = array(
+    'cache_dir' => './tmp/' // Directory where to put the cache files
+);
+                                   
+// getting a Zend_Cache_Core object
+$cache = Zend_Cache::factory('Core',
+                             'File',
+                             $frontendOptions,
+                             $backendOptions);
+
+//required for some servers
+Zend_Date::setOptions(array('cache' => $cache)); // Active aussi pour Zend_Locale
+/*
+ * Zend Framework cache section - end
  */
 
 $smarty = new Smarty();
