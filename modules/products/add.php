@@ -11,6 +11,7 @@ $taxes = getActiveTaxes();
 if ($_POST['description'] != "" ) {
 	include("./modules/products/save.php");
 }
+$smarty -> assign("defaults",getSystemDefaults());
 $smarty -> assign('customFieldLabel',$customFieldLabel);
 $smarty -> assign('save',$save);
 $smarty -> assign('taxes',$taxes);

@@ -686,6 +686,8 @@ function insertProduct($enabled=1,$visible=1) {
 			:domain_id,
 			:description,
 			:unit_price,
+			:cost,
+			:reoreder_level,
 			:custom_field1,
 			:custom_field2,
 			:custom_field3,
@@ -700,6 +702,8 @@ function insertProduct($enabled=1,$visible=1) {
 		':domain_id',$auth_session->domain_id,	
 		':description', $_POST['description'],
 		':unit_price', $_POST['unit_price'],
+		':cost', $_POST['cost'],
+		':reorder_level', $_POST['reorder_level'],
 		':custom_field1', $_POST['custom_field1'],
 		':custom_field2', $_POST['custom_field2'],
 		':custom_field3', $_POST['custom_field3'],
@@ -724,7 +728,9 @@ function updateProduct() {
 				custom_field2 = :custom_field2,
 				custom_field3 = :custom_field3,
 				custom_field4 = :custom_field4,
-				unit_price = :unit_price
+				unit_price = :unit_price,
+				cost = :cost,
+				reorder_level = :reorder_level
 			WHERE
 				id = :id";
 
@@ -738,6 +744,8 @@ function updateProduct() {
 		':custom_field3', $_POST[custom_field3],
 		':custom_field4', $_POST[custom_field4],
 		':unit_price', $_POST[unit_price],
+		':cost', $_POST[cost],
+		':reorder_level', $_POST[reorder_level],
 		':id', $_GET[id]
 		);
 }

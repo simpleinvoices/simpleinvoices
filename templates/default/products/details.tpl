@@ -12,6 +12,18 @@
 		<td class="details_screen">{$LANG.product_unit_price}</td>
 		<td>{$product.unit_price|siLocal_number}</td>
 	</tr>
+    {if $defaults.inventory == '1'}
+        <tr>
+            <td class="details_screen">
+                {$LANG.cost}
+            </td>
+            <td>{$product.cost|siLocal_number}</td>
+        </tr>
+        <tr>
+            <td class="details_screen">{$LANG.reorder_level}</td>
+            <td>{$product.reorder_level}</td>
+        </tr>
+    {/if}
 	<tr>
 		<td class="details_screen">{$LANG.default_tax}</td>
 		<td>
@@ -80,6 +92,24 @@
 		<td class="details_screen">{$LANG.product_unit_price}</td>
 		<td><input type="text" name="unit_price" size="25" value="{$product.unit_price|siLocal_number_formatted}" /></td>
 	</tr>
+    {if $defaults.inventory == '1'}
+        <tr>
+            <td class="details_screen">
+
+                {$LANG.cost}
+
+		        <a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_cost" title="{$LANG.cost}">
+                    <img src="./images/common/help-small.png" alt="" />
+                </a>
+
+            </td>
+            <td><input type="text" class="edit" name="cost" value="{$product.cost|siLocal_number_formatted}"  size="25" /></td>
+        </tr>
+        <tr>
+            <td class="details_screen">{$LANG.reorder_level}</td>
+            <td><input type="text" class="edit" name="reorder_level" value="{$product.reorder_level}"  size="25" /></td>
+        </tr>
+    {/if}
 	<tr>
 		<td class="details_screen">{$LANG.default_tax}</td>
 		<td>

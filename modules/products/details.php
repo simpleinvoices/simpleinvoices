@@ -12,6 +12,7 @@ $customFieldLabel = getCustomFieldLabels();
 $taxes = getActiveTaxes();
 $tax_selected = getTaxRate($product['default_tax_id']);
 
+$smarty -> assign("defaults",getSystemDefaults());
 $smarty -> assign('product',$product);
 $smarty -> assign('taxes',$taxes);
 $smarty -> assign('tax_selected',$tax_selected);

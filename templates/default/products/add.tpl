@@ -24,6 +24,24 @@
 		<td class="details_screen">{$LANG.unit_price}</td>
 		<td><input type="text" class="edit" name="unit_price" value="{$smarty.post.unit_price}"  size="25" /></td>
 	</tr>
+    {if $defaults.inventory == '1'}
+        <tr>
+            <td class="details_screen">
+
+                {$LANG.cost}
+
+		        <a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_cost" title="{$LANG.cost}">
+                    <img src="./images/common/help-small.png" alt="" />
+                </a>
+
+            </td>
+            <td><input type="text" class="edit" name="cost" value="{$smarty.post.cost}"  size="25" /></td>
+        </tr>
+        <tr>
+            <td class="details_screen">{$LANG.reorder_level}</td>
+            <td><input type="text" class="edit" name="reorder_level" value="{$smarty.post.reorder_level}"  size="25" /></td>
+        </tr>
+    {/if}
 	<tr>
 		<td class="details_screen">{$LANG.default_tax}</td>
 		<td>

@@ -8,6 +8,11 @@ $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "description" ;
 $rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
 $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 
+
+
+$defaults = getSystemDefaults();
+$smarty -> assign("defaults",$defaults);
+
 function sql($type='', $dir, $sort, $rp, $page )
 {
 	global $config;
@@ -102,7 +107,11 @@ foreach ($customers as $row) {
 	
 	$xml .= "<cell><![CDATA[".$row['description']."]]></cell>";
 	$xml .= "<cell><![CDATA[".siLocal::number($row['unit_price'])."]]></cell>";
-	$xml .= "<cell><![CDATA[".siLocal::number_trim($row['quantity'])."]]></cell>";
+    if($defaults['inventory'] == '1')
+    {
+      	$xml .= "<cell><![CDATA[".siLocal::number_trim($row['quantity'])."]]></cell>";
+    }
+
 	if ($row['enabled']==$LANG['enabled']) {
 		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
 	}	
