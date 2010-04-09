@@ -873,6 +873,17 @@ function getDefaultLogging() {
 	return $delete;
 }
 
+function getDefaultInventory() {
+	global $LANG;
+	global $dbh;
+
+	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = 'inventory')";
+	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$array = $sth->fetch();
+	$delete = $array['value']==1?$LANG['enabled']:$LANG['disabled'];
+	return $delete;
+}
+
 function getDefaultLanguage() {
 	global $LANG;
 	global $dbh;

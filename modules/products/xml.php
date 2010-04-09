@@ -56,7 +56,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 		$sql = "SELECT 
 					id, 
 					description,
-					unit_price,
+					unit_price, 
+                    (SELECT sum(quantity)*-1 from ".TB_PREFIX."invoice_items where product_id = ".TB_PREFIX."products.id) as quantity ,
 					(SELECT (CASE  WHEN enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
 				FROM 
 					".TB_PREFIX."products  
@@ -101,6 +102,7 @@ foreach ($customers as $row) {
 	
 	$xml .= "<cell><![CDATA[".$row['description']."]]></cell>";
 	$xml .= "<cell><![CDATA[".siLocal::number($row['unit_price'])."]]></cell>";
+	$xml .= "<cell><![CDATA[".siLocal::number_trim($row['quantity'])."]]></cell>";
 	if ($row['enabled']==$LANG['enabled']) {
 		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
 	}	
@@ -114,4 +116,4 @@ $xml .= "</rows>";
 
 echo $xml;
 
-?> 
+?> 

@@ -84,7 +84,7 @@ Zend_Date::setOptions(array('cache' => $cache)); // Active aussi pour Zend_Local
 
 $smarty = new Smarty();
 
-#$smarty->debugging = TRUE;
+$smarty->debugging = TRUE;
 
 //cache directory. Have to be writeable (chmod 777)
 $smarty -> compile_dir = "tmp/cache";

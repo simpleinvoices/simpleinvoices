@@ -1249,7 +1249,7 @@ PRIMARY KEY  (`user_id`)) ;
 `sub_node` VARCHAR( 255 ) NULL ,
 `domain_id` INT( 11 ) NOT NULL
 ) ENGINE = MYISAM ;";
-    $patch['204']['date'] = "20090818";    
+    	$patch['204']['date'] = "20090818";    
 
     $patch['205']['name'] = "Add index_id to invoice table - new invoice numbering";
     $patch['205']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD `index_id` INT( 11 ) NOT NULL AFTER `id`;";
@@ -1422,5 +1422,19 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     $patch['240']['name'] = "si_system_defaults - add composite primary key";
     $patch['240']['patch'] = "ALTER TABLE  `".TB_PREFIX."system_defaults` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
     $patch['240']['date'] = "2010305";    
+
+    $patch['241']['name'] = "si_system_defaults - add composite primary key";
+    $patch['241']['patch'] = "insert into `".TB_PREFIX."system_defaults` values ('','inventory','0','1','1');";
+    $patch['241']['date'] = "2010409";    
+
+    $patch['242']['name'] = "Add cost to products table";
+    $patch['242']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `cost` DECIMAL( 25, 6 ) NULL DEFAULT '0.00' AFTER `default_tax_id_2`;";
+    $patch['242']['date'] = "2010409";    
+    
+    $patch['243']['name'] = "Add reorder_level to products table";
+    $patch['243']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `reorder_level` INT( 11 ) NULL AFTER `cost` ;";
+    $patch['243']['date'] = "2010409";    
+
+    
 
   

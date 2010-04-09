@@ -10,7 +10,7 @@ class payment
 
     public function select_all() {
         global $auth_session;
-	$domain_id = domain_id::get($this->domain_id);
+    $domain_id = domain_id::get($this->domain_id);
         
         if($this->filter == "date")
         {
@@ -30,7 +30,7 @@ class payment
                     pt.pt_description as type,
                     c.name as cname, 
                     b.name as bname,
-		    count(*) as count
+            count(*) as count
                 from 
                     ".TB_PREFIX."payment ap, 
                     ".TB_PREFIX."payment_types pt, 
@@ -56,41 +56,41 @@ class payment
         return dbQuery($sql,':domain_id',$domain_id);
     }
 
-	public function insert()
-	{
-        	global $db;
-        	global $auth_session;
+    public function insert()
+    {
+        global $db;
+        global $auth_session;
 
-		$domain_id = domain_id::get($this->domain_id);
+        $domain_id = domain_id::get($this->domain_id);
         
-	        $sql = "INSERT INTO ".TB_PREFIX."payment (
-				ac_inv_id,
-				ac_amount,
-				ac_notes,
-				ac_date,
-				ac_payment_type,
-				online_payment_id,
-				domain_id
-			) VALUES (
-				:ac_inv_id,
-				:ac_amount,
-				:ac_notes,
-				:ac_date,
-				:ac_payment_type,
-				:online_payment_id,
-				:domain_id
-			)";
-        	$sth = $db->query($sql,
-				':ac_inv_id',$this->ac_inv_id,
-				':ac_amount',$this->ac_amount,
-				':ac_notes',$this->ac_notes,
-				':ac_date',$this->ac_date,
-				':ac_payment_type',$this->ac_payment_type,
-				':online_payment_id',$this->online_payment_id,
-				':domain_id',$domain_id 
-			) or die();
-        
- 	       return $sth;
-	}
+        $sql = "INSERT INTO ".TB_PREFIX."payment (
+            ac_inv_id,
+            ac_amount,
+            ac_notes,
+            ac_date,
+            ac_payment_type,
+            online_payment_id,
+            domain_id
+        ) VALUES (
+            :ac_inv_id,
+            :ac_amount,
+            :ac_notes,
+            :ac_date,
+            :ac_payment_type,
+            :online_payment_id,
+            :domain_id
+        )";
+        $sth = $db->query($sql,
+            ':ac_inv_id',$this->ac_inv_id,
+            ':ac_amount',$this->ac_amount,
+            ':ac_notes',$this->ac_notes,
+            ':ac_date',$this->ac_date,
+            ':ac_payment_type',$this->ac_payment_type,
+            ':online_payment_id',$this->online_payment_id,
+            ':domain_id',$domain_id 
+        ) or die();
+    
+       return $sth;
+    }
 
 }

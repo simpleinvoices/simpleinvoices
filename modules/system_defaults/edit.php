@@ -289,6 +289,13 @@ EOD;
 	$description = "{$LANG['number_of_taxes_per_line_item']}";
 
 }
+else if ($_GET['submit'] == "inventory") {
+
+	$array = array(0 => $LANG['disabled'], 1=>$LANG['enabled']);
+	$default = "inventory";
+	$description = $LANG['inventory'];
+	$value = dropDown($array, $defaults[$default]);
+}
 else {
 	$description = "{$LANG['no_defaults']}";
 }

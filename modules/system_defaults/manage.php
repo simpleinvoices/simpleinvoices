@@ -22,6 +22,7 @@ $smarty -> assign("defaultPreference", getDefaultPreference());
 $smarty -> assign("defaultPaymentType", getDefaultPaymentType());
 $smarty -> assign("defaultDelete", getDefaultDelete());
 $smarty -> assign("defaultLogging", getDefaultLogging());
+$smarty -> assign("defaultInventory", getDefaultInventory());
 $smarty -> assign("defaultLanguage", $lang);
 
 $smarty -> assign('pageActive', 'system_default');

@@ -269,6 +269,7 @@ $LANG['inv_itemised'] = " - Itemised";//1
 $LANG['inv_pref'] = "Invoice Preference";//1
 $LANG['inv_pref_short'] = "Pref";//1
 $LANG['inv_total'] = " - Total";//1
+$LANG['inventory'] = "Inventory";//1
 $LANG['invoice'] = "Invoice";//1
 $LANG['invoice_create'] = "Invoice Create";//1
 $LANG['invoice_detail_heading'] = "Invoice detail heading";//1

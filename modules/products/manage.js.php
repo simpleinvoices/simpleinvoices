@@ -4,6 +4,25 @@
 
 var view_tooltip ="{/literal}{$LANG.quick_view_tooltip} {ldelim}1{rdelim}{literal}";
 var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pref_inv_wording} {ldelim}1{rdelim}{literal}";
+var inventory = "{/literal}{$defaults.inventory}{literal}";
+
+            if(inventory == '1')
+            {
+                col_model = "[ "
+				+ "{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},"
+				+ "{display: '{/literal}{$LANG.name}{literal}', name : 'description', width : 50 * percentage_width, sortable : true, align: 'left'},"
+				+ "{display: '{/literal}{$LANG.unit_price}{literal}', name : 'unit_price', width : 10 * percentage_width, sortable : true, align: 'left'},"
+				+ "{display: '{/literal}{$LANG.quantity}{literal}', name : 'quantity', width : 10 * percentage_width, sortable : true, align: 'left'},"
+				+ "{display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'}"
+				+ "]";
+            } else {
+                col_model = "[ "
+				+ "{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},"
+                + "{display: '{/literal}{$LANG.name}{literal}', name : 'description', width : 50 * percentage_width, sortable : true, align: 'left'},"
+				+ "{display: '{/literal}{$LANG.unit_price}{literal}', name : 'unit_price', width : 20 * percentage_width, sortable : true, align: 'left'},"
+				+ "{display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'}"
+				+ "]";
+            }
 
 			var columns = 5;
 			var padding = 12;
@@ -18,15 +37,7 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			{
 			url: 'index.php?module=products&view=xml',
 			dataType: 'xml',
-			colModel : [
-				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
-				{display: '{/literal}{$LANG.name}{literal}', name : 'description', width : 50 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.unit_price}{literal}', name : 'unit_price', width : 20 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'}
-				
-				],
-				
-
+			colModel : col_model,
 			searchitems : [
 				{display: '{/literal}{$LANG.id}{literal}', name : 'id'},
 				{display: '{/literal}{$LANG.name}{literal}', name : 'description', isdefault: true}
