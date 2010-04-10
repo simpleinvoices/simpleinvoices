@@ -1,12 +1,12 @@
 {if $saved == 'true' }
-	<meta http-equiv="refresh" content="2;URL=index.php?module=cron&amp;view=manage" />
+	<meta http-equiv="refresh" content="2;URL=index.php?module=inventory&amp;view=manage" />
 	<br />
 	 {$LANG.save_cron_success}
 	<br />
 	<br />
 {/if}
 {if $saved == 'false' }
-	<meta http-equiv="refresh" content="2;URL=index.php?module=cron&amp;view=manage" />
+	<meta http-equiv="refresh" content="2;URL=index.php?module=inventory&amp;view=manage" />
 	<br />
 	 {$LANG.save_cron_failure}
 	<br />
@@ -21,67 +21,45 @@
 	{/if}
 
 
-<form name="frmpost" action="index.php?module=cron&view=edit&id={$cron.id}" method="POST" id="frmpost">
+<form name="frmpost" action="index.php?module=inventory&view=edit&id={$inventory.id}" method="POST" id="frmpost">
 <br />	 
 
 <table align="center">
+    <tr wrap="nowrap">
+            <td class="details_screen">{$LANG.date_upper}</td>
+            <td wrap="nowrap">
+                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="date" id="date" value='{$inventory.date}' />   
+            </td>
+    </tr>
 	<tr>
-		<td class="details_screen">{$LANG.invoice}</td>
+		<td class="details_screen">{$LANG.product}</td>
 		<td>
-		<select name="invoice_id" class="validate[required]">
+		<select name="product_id" class="validate[required]">
 		    <option value=''></option>
-			{foreach from=$invoice_all item=invoice}
-				<option value="{$invoice.id}" {if $invoice.id == $cron.invoice_id}selected{/if} >
-                    {$invoice.index_name} ({$invoice.biller}, {$invoice.customer}, {$invoice.invoice_total|siLocal_number})
+			{foreach from=$product_all item=product}
+				<option value="{$product.id}" {if $product.id == $inventory.product_id}selected{/if} >
+                    {$inventory.description}
                 </option>
 			{/foreach}
 		</select>
 		</td>
 	</tr>
-    <tr wrap="nowrap">
-            <td class="details_screen">{$LANG.start_date}</td>
-            <td wrap="nowrap">
-                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date" value='{$cron.start_date}' />   
-            </td>
-    </tr>
-    <tr wrap="nowrap">
-            <td class="details_screen">{$LANG.end_date}</td>
-            <td wrap="nowrap">
-                <input type="text" class="date-picker" size="10" name="end_date" id="date" value='{$cron.end_date}' />   
-            </td>
-    </tr>
 	<tr>
-		<td class="details_screen">{$LANG.recur_each}</td>
+		<td class="details_screen">{$LANG.quantity}</td>
 		<td>
-		<input name="recurrence" size="10" class="validate[required]" value='{$cron.recurrence}'>
-		</input>
-             <select name="recurrence_type" class="validate[required]">
-             <option value="day"  {if $cron.recurrence_type == 'day'}selected{/if}  >{$LANG.days}</option>
-             <option value="week" {if $cron.recurrence_type == 'week'}selected{/if} >{$LANG.weeks}</option>
-             <option value="month" {if $cron.recurrence_type == 'month'}selected{/if} >{$LANG.months}</option>
-             <option value="year" {if $cron.recurrence_type == 'year'}selected{/if} >{$LANG.years}</option>
-             </select>
-         </td>
+		    <input name="quantity" size="10" class="validate[required]" value='{$inventory.quantity|siLocal_number_formatted}'>
+        </td>
      </tr>
 	<tr>
-		<td class="details_screen">{$LANG.email_biller_after_cron}</td>
+		<td class="details_screen">{$LANG.cost}</td>
 		<td>
-             <select name="email_biller" class="validate[required]">
-             <option value="1" {if $cron.email_biller == '1'}selected{/if}>{$LANG.yes}</option>
-             <option value="0" {if $cron.email_biller == '0'}selected{/if}>{$LANG.no}</option>
-             </select>
-         </td>
+		    <input name="quantity" size="10" class="validate[required]" value='{$inventory.cost|siLocal_number_formatted}'>
+        </td>
      </tr>
 	<tr>
-		<td class="details_screen">{$LANG.email_customer_after_cron}</td>
-		<td>
-             <select name="email_customer" class="validate[required]">
-             <option value="1" {if $cron.email_customer == '1'}selected{/if}>{$LANG.yes}</option>
-             <option value="0" {if $cron.email_customer == '0'}selected{/if}>{$LANG.no}</option>
-             </select>
-         </td>
-     </tr>
-
+		<td class="details_screen">{$LANG.notes}</td>
+		<td><textarea  name="note"  class="editor" rows="8" cols="50">{$inventory.note|unescape}</textarea></td>
+	</tr>
 
 </table>
 <br />
@@ -95,7 +73,7 @@
 
 			<input type="hidden" name="op" value="edit" />
 		
-			<a href="./index.php?module=cron&view=manage" class="negative">
+			<a href="./index.php?module=inventory&view=manage" class="negative">
 		        <img src="./images/common/cross.png" alt="" />
 	        	{$LANG.cancel}
     		</a>
