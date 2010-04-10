@@ -1435,6 +1435,19 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
     $patch['243']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `reorder_level` INT( 11 ) NULL AFTER `cost` ;";
     $patch['243']['date'] = "2010409";    
 
+    $patch['244']['name'] = "Create inventory table";
+    $patch['244']['patch'] = "CREATE TABLE  `".TB_PREFIX."inventory` (
+`id` INT( 11 ) NOT NULL AUTO_INCREMENT ,
+`domain_id` INT( 11 ) NOT NULL ,
+`product_id` INT( 11 ) NOT NULL ,
+`quantity` DECIMAL( 25, 6 ) NOT NULL ,
+`cost` DECIMAL( 25, 6 ) NULL ,
+`date` DATE NOT NULL ,
+`note` TEXT NULL ,
+PRIMARY KEY ( `domain_id`, `id` )
+) ENGINE = MYISAM ;";
+    $patch['244']['date'] = "2010409";    
+
     
 
   

@@ -62,7 +62,9 @@ function sql($type='', $dir, $sort, $rp, $page )
 					id, 
 					description,
 					unit_price, 
-                    (SELECT sum(quantity)*-1 from ".TB_PREFIX."invoice_items where product_id = ".TB_PREFIX."products.id) as quantity ,
+                    (SELECT coalesce(sum(quantity),0) from ".TB_PREFIX."invoice_items where product_id = ".TB_PREFIX."products.id) as qty_out ,
+                    (SELECT coalesce(sum(quantity),0) from ".TB_PREFIX."inventory where product_id = ".TB_PREFIX."products.id) as qty_in ,
+                    (SELECT qty_in - qty_out ) as quantity,
 					(SELECT (CASE  WHEN enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
 				FROM 
 					".TB_PREFIX."products  

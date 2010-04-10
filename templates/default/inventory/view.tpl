@@ -2,55 +2,46 @@
 
 <table align="center">
 	<tr>
-		<td class="details_screen">{$LANG.invoice}</td>
+		<td class="details_screen">{$LANG.date_upper}</td>
 		<td>
-				{$cron.index_name}
+				{$inventory.date}
+		</td>
+	</tr>
+	<tr>
+		<td class="details_screen">{$LANG.product}</td>
+		<td>
+				{$inventory.description}
 		</td>
 	</tr>
     <tr wrap="nowrap">
-            <td class="details_screen">{$LANG.start_date}</td>
+            <td class="details_screen">{$LANG.quantity}</td>
             <td>
-                {$cron.start_date}    
+                {$inventory.quantity|siLocal_number}    
             </td>
     </tr>
     <tr wrap="nowrap">
-            <td class="details_screen">{$LANG.end_date}</td>
+            <td class="details_screen">{$LANG.cost}</td>
             <td >
-                {$cron.end_date}   
+                {$inventory.cost|siLocal_number}   
             </td>
     </tr>
 	<tr>
-		<td class="details_screen">{$LANG.recur_each}</td>
+		<td class="details_screen">{$LANG.notes}</td>
 		<td>
-		{$cron.recurrence} {$cron.recurrence_type}
+		{$inventory.note}
          </td>
      </tr>
-	<tr>
-		<td class="details_screen">{$LANG.email_biller_after_cron}</td>
-		<td>
-             {if $cron.email_biller == '1'}{$LANG.yes}{/if}</option>
-             {if $cron.email_biller == '0'}{$LANG.no}{/if}</option>
-         </td>
-     </tr>
-	<tr>
-		<td class="details_screen">{$LANG.email_customer_after_cron}</td>
-		<td>
-             {if $cron.email_customer == '1'}{$LANG.yes}{/if}</option>
-             {if $cron.email_customer == '0'}{$LANG.no}{/if}</option>
-         </td>
-     </tr>
-
 
 </table>
 <br />
 <table class="buttons" align="center">
 	<tr>
 		<td>
-				<a href="./index.php?module=cron&amp;view=edit&amp;id={$cron.id}" class="positive">
+				<a href="./index.php?module=inventory&amp;view=edit&amp;id={$cron.id}" class="positive">
 					<img src="./images/famfam/report_edit.png" alt=""/>
 					{$LANG.edit}
 				</a>
-			<a href="./index.php?module=cron&view=manage" class="negative">
+			<a href="./index.php?module=inventory&view=manage" class="negative">
 		        <img src="./images/common/cross.png" alt="" />
 	        	{$LANG.cancel}
     		</a>

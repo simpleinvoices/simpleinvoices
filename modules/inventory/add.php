@@ -1,29 +1,25 @@
 <?php
 
 
-if ($_POST['op'] =='add' AND !empty($_POST['invoice_id']))
+if ($_POST['op'] =='add' AND !empty($_POST['product_id']))
 {
-	$cron = new cron();
-	$cron->domain_id=domain_id::get();
-	$cron->invoice_id=$_POST['invoice_id'];
-	$cron->start_date=$_POST['start_date'];
-	$cron->end_date=$_POST['end_date'];
-	$cron->recurrence=$_POST['recurrence'];
-	$cron->recurrence_type=$_POST['recurrence_type'];
-	$cron->email_biller=$_POST['email_biller'];
-	$cron->email_customer=$_POST['email_customer'];
-	$result = $cron->insert();
+	$inventory = new inventory();
+	$inventory->domain_id=domain_id::get();
+	$inventory->product_id=$_POST['product_id'];
+	$inventory->quantity=$_POST['quantity'];
+	$inventory->cost=$_POST['cost'];
+	$inventory->date=$_POST['date'];
+	$inventory->note=$_POST['note'];
+	$result = $inventory->insert();
 
 	$saved = !empty($result) ? "true" : "false";
 }      
 
-$invoices = new invoice();
-$invoices->sort='id';
-$invoice_all = $invoices->select_all('count');
+$product_all = product::get_all();
 
-$smarty -> assign('invoice_all',$invoice_all);
+$smarty -> assign('product_all',$product_all);
 $smarty -> assign('saved',$saved);
 
-$smarty -> assign('pageActive', 'cron');
-$smarty -> assign('subPageActive', 'cron_add');
-$smarty -> assign('active_tab', '#money');
+$smarty -> assign('pageActive', 'inventory');
+$smarty -> assign('subPageActive', 'inventory_add');
+$smarty -> assign('active_tab', '#product');

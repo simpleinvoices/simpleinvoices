@@ -1,5 +1,5 @@
 <?php
-class cron {
+class inventory {
 	
  	public $start_date;
  	public $domain_id;
@@ -10,37 +10,30 @@ class cron {
         	global $auth_session;
 
 		$domain_id = domain_id::get($this->domain_id);
-		$today = date('Y-m-d');
 
         
-	        $sql = "INSERT INTO ".TB_PREFIX."cron (
+	        $sql = "INSERT INTO ".TB_PREFIX."inventory (
 				domain_id,
-				invoice_id,
-				start_date,
-				end_date,
-				recurrence,
-				recurrence_type,
-				email_biller,
-				email_customer
+				product_id,
+				quantity,
+				cost,
+				date,
+				note
 			) VALUES (
 				:domain_id,
-				:invoice_id,
-				:start_date,
-				:end_date,
-				:recurrence,
-				:recurrence_type,
-				:email_biller,
-				:email_customer
+				:product_id,
+				:quantity,
+				:cost,
+				:date,
+				:note
 			)";
         	$sth = $db->query($sql,
 				':domain_id',$domain_id, 
-				':invoice_id',$this->invoice_id,
-				':start_date',$this->start_date,
-				':end_date',$this->end_date,
-				':recurrence',$this->recurrence,
-				':recurrence_type',$this->recurrence_type,
-				':email_biller',$this->email_biller,
-				':email_customer',$this->email_customer
+				':product_id',$this->product_id,
+				':quantity',$this->quantity,
+				':cost',$this->cost,
+				':date',$this->date,
+				':note',$this->note
 			) or die(htmlspecialchars(end($dbh->errorInfo())));
         
  	       return $sth;
@@ -120,21 +113,20 @@ class cron {
 
 
 		$sql = "SELECT
-				cron.* ,
-                cron.id as cron_id,
-                (SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
+				iv.id as id,
+				iv.product_id ,
+				iv.date ,
+				iv.quantity ,
+                p.description
 			FROM 
-				".TB_PREFIX."cron cron,
-				".TB_PREFIX."invoices iv,
-				".TB_PREFIX."preferences pf
+				".TB_PREFIX."products p,
+				".TB_PREFIX."inventory iv
 			 WHERE 
-				cron.domain_id = :domain_id
+				iv.domain_id = :domain_id
 				and
-				cron.invoice_id = iv.id
-				and 
-				iv.preference_id = pf.pref_id 
+                p.id = iv.product_id
 			GROUP BY
-			    cron.id
+			    iv.id
 			ORDER BY
 			$sort $dir
 			$limit";
@@ -154,20 +146,17 @@ class cron {
 		global $db;
 
 		$sql = "SELECT
-				cron.* ,
-                       		(SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
+				iv.*,
+                p.description
 			FROM 
-				".TB_PREFIX."cron cron,
-				".TB_PREFIX."invoices iv,
-				".TB_PREFIX."preferences pf
+				".TB_PREFIX."products p,
+				".TB_PREFIX."inventory iv
 			 WHERE 
-				cron.domain_id = :domain_id
+				iv.domain_id = :domain_id
 				and
-				cron.invoice_id = iv.id
-				and 
-				iv.preference_id = pf.pref_id 
+                p.id = iv.product_id
 				and
-				cron.id = :id;";
+                iv.id = :id;";
 		$sth = $db->query($sql,':domain_id',domain_id::get($this->domain_id), ':id',$this->id) or die(htmlspecialchars(end($dbh->errorInfo())));
 
 		return $sth->fetch();

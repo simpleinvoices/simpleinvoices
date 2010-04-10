@@ -24,7 +24,7 @@
     </tr>
 </table>
 
-{if $number_of_crons.count == 0}
+{if $number_of_rows.count == 0}
 	
 	<br />
 	<br />
@@ -38,7 +38,7 @@
 
 	<br />
 	<table id="manageGrid" style="display:none"></table>
-	{include file='../modules/cron/manage.js.php'}
+	{include file='../modules/inventory/manage.js.php'}
 
 {/if}
 

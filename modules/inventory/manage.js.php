@@ -1,6 +1,6 @@
 <script type="text/javascript">
 {literal}
-			var columns = 8;
+			var columns = 4;
 			var padding = 12;
 			var action_menu = 140;
 			var grid_width = $('.col').width();
@@ -29,12 +29,9 @@
 			dataType: 'xml',
 			colModel : [
 				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : action_menu, sortable : false, align: 'center'},
-				{display: '{/literal}{$LANG.id}{literal}', name : 'index_name', width :15 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.start_date_short}{literal}', name : 'start_date', width :25 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.end_date_short}{literal}', name : 'end_date', width :20 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.recur_each}{literal}', name : 'recurrence', width : 15 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.email_biller}{literal}', name : 'email_biller', width : 10 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.email_customer}{literal}', name : 'email_customer', width : 15 * percentage_width, sortable : true, align: 'left'}
+				{display: '{/literal}{$LANG.date_upper}{literal}', name : 'date', width :30 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.product}{literal}', name : 'description', width :35 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.quantity}{literal}', name : 'quantity', width :35 * percentage_width, sortable : true, align: 'left'}
 				
 				],
 				/*
