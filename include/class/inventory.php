@@ -114,7 +114,7 @@ class inventory {
 				iv.date ,
 				iv.quantity ,
                 p.description,
-                p.reorder_level
+                (select coalesce(p.reorder_level,0) as reorder_level)
 			FROM 
 				".TB_PREFIX."products p,
 				".TB_PREFIX."inventory iv
@@ -159,6 +159,8 @@ class inventory {
 		return $sth->fetch();
 	}
 
+
+
 	public function check_reorder_level()
 	{
         global $db;
@@ -168,31 +170,28 @@ class inventory {
 
         //sellect qty and reorder level
 
-        $inventory = new inventory();
-        $inventory_all = $inventory->select_all('count');
+        $inventory = new product();
+        $sth = $inventory->select_all('count');
 
+        $inventory_all = $sth->fetchAll(PDO::FETCH_ASSOC);
+        
+        $email="";
         foreach ($inventory_all as $row) 
         {
              if($row['quantity'] <= $row['reorder_level'])
              {
 
-                $return[$row['id']]['message'] = "The quantity of Product: ".$row['description']." is below the reorder level of ".$row['reorder_level'];
-                 
+                $message = "The quantity of Product: ".$row['description']." is ".siLocal::number($row['quantity']).", which is equal to or below its reorder level of ".$row['reorder_level'];
+                $return['row_'.$row['id']]['message'] = $message;
+                $email_message .= $message . "<br />\n";
              }
 
         }
 
-        print_r($return);
+        //print_r($return);
         #$attachment = file_get_contents('./tmp/cache/' . $pdf_file_name);
         $email = new email();
-
-            $email_body = new email_body();
-            $email_body->email_type = 'cron_invoice';
-            $email_body->customer_name = $customer['name'];
-            $email_body->invoice_name = $invoice['index_name'];
-            $email_body->biller_name = $biller['name'];
-        
-        $email -> notes = print_r($return);
+        $email -> notes = $email_message;
         $email -> from = "simpleinvoices@localhost";
         $email -> to = "justin@localhost";
         $email -> subject = "Simple Invoices reorder level email";

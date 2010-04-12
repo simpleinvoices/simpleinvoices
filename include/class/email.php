@@ -54,14 +54,16 @@ class email
 		}
 		$mail->setSubject($this->subject);
 
-		// Create attachment
-		#$spc2us_pref = str_replace(" ", "_", $preference[pref_inv_wording]);
-		$content = file_get_contents('./tmp/cache/'.$this->attachment);
-		$at = $mail->createAttachment($content);
-		$at->type = 'application/pdf';
-		$at->disposition = Zend_Mime::DISPOSITION_ATTACHMENT;
-		$at->filename = $this->attachment;
-
+        if($this->attachment)
+        {
+            // Create attachment
+            #$spc2us_pref = str_replace(" ", "_", $preference[pref_inv_wording]);
+            $content = file_get_contents('./tmp/cache/'.$this->attachment);
+            $at = $mail->createAttachment($content);
+            $at->type = 'application/pdf';
+            $at->disposition = Zend_Mime::DISPOSITION_ATTACHMENT;
+            $at->filename = $this->attachment;
+        }
 		// Send e-mail through SMTP
 		try {
 			$mail->send($transport);

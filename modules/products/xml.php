@@ -13,79 +13,11 @@ $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 $defaults = getSystemDefaults();
 $smarty -> assign("defaults",$defaults);
 
-function sql($type='', $dir, $sort, $rp, $page )
-{
-	global $config;
-	global $LANG;
-	global $auth_session;
-	
-	//SC: Safety checking values that will be directly subbed in
-	if (intval($start) != $start) {
-		$start = 0;
-	}
-	$start = (($page-1) * $limit);
-	
-	if (intval($limit) != $limit) {
-		$limit = 25;
-	}
-	/*SQL Limit - start*/
-	$start = (($page-1) * $rp);
-	$limit = "LIMIT $start, $rp";
+$products = new product();
+$sth = $products->select_all('', $dir, $sort, $rp, $page);
+$sth_count_rows = $products->select_all('count',$dir, $sort, $rp, $page);
 
-	if($type =="count")
-	{
-		unset($limit);
-	}
-	/*SQL Limit - end*/	
-		
-	if (!preg_match('/^(asc|desc)$/iD', $dir)) {
-		$dir = 'DESC';
-	}
-	
-	$query = $_POST['query'];
-	$qtype = $_POST['qtype'];
-	
-	$where = "";
-	if ($query) $where = " AND $qtype LIKE '%$query%' ";
-	
-	
-	/*Check that the sort field is OK*/
-	$validFields = array('id','description','unit_price', 'enabled');
-
-	if (in_array($sort, $validFields)) {
-		$sort = $sort;
-	} else {
-		$sort = "id";
-	}
-	
-		$sql = "SELECT 
-					id, 
-					description,
-					unit_price, 
-                    (SELECT coalesce(sum(quantity),0) from ".TB_PREFIX."invoice_items where product_id = ".TB_PREFIX."products.id) as qty_out ,
-                    (SELECT coalesce(sum(quantity),0) from ".TB_PREFIX."inventory where product_id = ".TB_PREFIX."products.id) as qty_in ,
-                    (SELECT qty_in - qty_out ) as quantity,
-					(SELECT (CASE  WHEN enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
-				FROM 
-					".TB_PREFIX."products  
-				WHERE 
-					visible = 1
-					AND domain_id = :domain_id
-					$where
-				ORDER BY 
-					$sort $dir 
-				$limit";
-	
-	
-	$result = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
-
-	return $result;
-}
-
-$sth = sql('', $dir, $sort, $rp, $page);
-$sth_count_rows = sql('count',$dir, $sort, $rp, $page);
-
-$customers = $sth->fetchAll(PDO::FETCH_ASSOC);
+$products_all = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 $count = $sth_count_rows->rowCount();
 
@@ -99,7 +31,7 @@ $xml .= "<page>$page</page>";
 
 $xml .= "<total>$count</total>";
 
-foreach ($customers as $row) {
+foreach ($products_all as $row) {
 
 	$xml .= "<row id='".$row['iso']."'>";
 	$xml .= "<cell><![CDATA[

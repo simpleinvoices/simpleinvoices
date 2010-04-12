@@ -11,7 +11,7 @@ try
 
     //json
     //header('Content-type: application/json');
-    //echo encode::json( $message, 'pretty' );
+    #echo encode::json( $message, 'pretty' );
     
     //xml
     ob_end_clean();
