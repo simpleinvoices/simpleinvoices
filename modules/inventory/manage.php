@@ -23,8 +23,8 @@ checkLogin();
 //$smarty -> assign("invoices",$invoices);
 $smarty -> assign("number_of_rows",$number_of_rows);
 
-$smarty -> assign('pageActive', 'cron');
-$smarty -> assign('active_tab', '#money');
+$smarty -> assign('pageActive', 'inventory');
+$smarty -> assign('active_tab', '#product');
 
 $url =  'index.php?module=inventory&view=xml';
 

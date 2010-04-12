@@ -245,4 +245,7 @@ $siUrl = getURL();
 
 include_once("./include/backup.lib.php");
 
+$defaults = getSystemDefaults();
+$smarty -> assign("defaults",$defaults);
+
 ?>

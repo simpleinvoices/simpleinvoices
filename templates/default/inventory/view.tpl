@@ -37,7 +37,7 @@
 <table class="buttons" align="center">
 	<tr>
 		<td>
-				<a href="./index.php?module=inventory&amp;view=edit&amp;id={$cron.id}" class="positive">
+				<a href="./index.php?module=inventory&amp;view=edit&amp;id={$inventory.id}" class="positive">
 					<img src="./images/famfam/report_edit.png" alt=""/>
 					{$LANG.edit}
 				</a>

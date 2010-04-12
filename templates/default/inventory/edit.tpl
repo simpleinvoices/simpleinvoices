@@ -1,22 +1,22 @@
 {if $saved == 'true' }
 	<meta http-equiv="refresh" content="2;URL=index.php?module=inventory&amp;view=manage" />
 	<br />
-	 {$LANG.save_cron_success}
+	 {$LANG.save_inventory_success}
 	<br />
 	<br />
 {/if}
 {if $saved == 'false' }
 	<meta http-equiv="refresh" content="2;URL=index.php?module=inventory&amp;view=manage" />
 	<br />
-	 {$LANG.save_cron_failure}
+	 {$LANG.save_inventory_failure}
 	<br />
 	<br />
 {/if}
 
 {if $saved ==false}
-	{if $smarty.post.op == 'add' AND $smarty.post.invoice_id == ''} 
+	{if $smarty.post.op == 'add' AND $smarty.post.product_id == ''} 
 		<div class="validation_alert"><img src="./images/common/important.png" alt="" />
-		You must select an invoice</div>
+		You must select a product</div>
 		<hr />
 	{/if}
 
@@ -38,7 +38,7 @@
 		    <option value=''></option>
 			{foreach from=$product_all item=product}
 				<option value="{$product.id}" {if $product.id == $inventory.product_id}selected{/if} >
-                    {$inventory.description}
+                    {$product.description}
                 </option>
 			{/foreach}
 		</select>
@@ -53,7 +53,7 @@
 	<tr>
 		<td class="details_screen">{$LANG.cost}</td>
 		<td>
-		    <input name="quantity" size="10" class="validate[required]" value='{$inventory.cost|siLocal_number_formatted}'>
+		    <input name="cost" size="10" class="" value='{$inventory.cost|siLocal_number_formatted}'>
         </td>
      </tr>
 	<tr>
