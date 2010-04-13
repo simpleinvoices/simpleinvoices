@@ -52,6 +52,23 @@
             </a>                              </td>
     </tr>
 </table>
+{if $defaults.inventory == "1"}
+    <br />
+    <h2>{$LANG.profit}</h2>
+    <table class="buttons" >
+        <tr>
+            <td>
+
+                <a href="index.php?module=reports&view=report_invoice_profit" class="">
+                    <img src="./images/famfam/money.png" alt="" />
+                    {$LANG.profit_per_invoice}
+                </a>
+                
+
+            </td>
+        </tr>
+    </table>
+{/if}
 <br />
 <h2>{$LANG.tax}</h2>
 <table class="buttons" >

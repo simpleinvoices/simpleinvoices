@@ -94,6 +94,12 @@
 				{ if $subPageActive == "product_view"} <li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
 				{ if $subPageActive == "product_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
 			<li><a { if $pageActive == "product_add"} class="active"{/if} href="index.php?module=products&amp;view=add">{$LANG.add_product}</a></li>
+            {if $defaults.inventory == "1"}
+    			<li><a { if $pageActive == "inventory"} class="active"{/if} href="index.php?module=inventory&amp;view=manage">{$LANG.inventory}</a></li>
+	    			{ if $subPageActive == "inventory_view"} <li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
+		    		{ if $subPageActive == "inventory_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
+			    	{ if $subPageActive == "inventory_add"} <li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
+            {/if}
 		</ul>
 	</div>
 

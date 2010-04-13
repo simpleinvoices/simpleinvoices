@@ -192,8 +192,9 @@ class inventory {
         #$attachment = file_get_contents('./tmp/cache/' . $pdf_file_name);
         $email = new email();
         $email -> notes = $email_message;
-        $email -> from = "simpleinvoices@localhost";
-        $email -> to = "justin@localhost";
+        $email -> from = $email->get_admin_email();
+        $email -> to = $email->get_admin_email();
+        #$email -> bcc = "justin@localhost";
         $email -> subject = "Simple Invoices reorder level email";
         $email -> send ();
 

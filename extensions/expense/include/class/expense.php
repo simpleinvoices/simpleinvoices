@@ -34,7 +34,7 @@ class expense
         //get customers
         $add['customer_all'] = customer::get_all();
         //get billers
-        $add['biller_all'] = biller::select_all();
+        $add['biller_all'] = biller::get_all();
         //get invoices
         $add['invoice_all'] = invoice::get_all();
         //get products

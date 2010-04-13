@@ -67,6 +67,28 @@
      };
     
 	/*
+	* Product Change -Inventory  - updates cost from  product info
+	*/
+	function product_inventory_change(product,existing_cost){
+	
+      	$('#gmail_loading').show();
+		$.ajax({
+			type: 'GET',
+			url: './index.php?module=invoices&view=product_inventory_ajax&id='+product,
+			data: "id: "+product,
+			dataType: "json",
+			success: function(data){
+				$('#gmail_loading').hide();
+                if(existing_cost !==null)
+                {
+				    $("#cost").attr("value",data['cost']);
+                }
+			}
+	
+   		 });
+     };
+
+	/*
 	 * Function: count_invoice_line_items
 	 * Purpose: find the last line item and update max_items so /modules/invoice/save.php can access it
 	 */

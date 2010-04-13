@@ -157,4 +157,18 @@ class email
     
         return $message;
     }
+
+    public function get_admin_email()
+    {
+    
+        global $db;
+		$domain_id = domain_id::get($this->domain_id);
+    
+        $sql = "select email from si_user where role_id = '1' and domain_id =:domain_id LIMIT 1";
+        $sth  = $db->query($sql,':domain_id',$domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+ 
+        return $sth->fetchColumn();
+
+    }
+
 }

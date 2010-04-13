@@ -127,14 +127,25 @@ $(document).ready(function(){
 	/*
 	* Product Change - updates line item with product price info
 	*/
-	$(".product_change").livequery('blur',function () { 
+	$(".product_change").livequery('change',function () { 
       	var $row_number = $(this).attr("rel");
       	var $product = $(this).val();
       	var $quantity = $("#quantity"+$row_number).attr("value");
  		invoice_product_change($product, $row_number, $quantity);
 		siLog('debug','{/literal}{$LANG.description}{literal}');
      });
-     
+ 
+
+	/*
+	* Product Inventory Change - updates line item with product price info
+	*/
+	$(".product_inventory_change").livequery('change',function () { 
+      	var $product = $(this).val();
+      	var $existing_cost = $("#cost").val();
+ 		product_inventory_change($product,$existing_cost);
+     });
+ 
+    
 	//delete line in invoice
 	$(".trash_link").livequery('click',function () { 
       id = $(this).attr("rel");

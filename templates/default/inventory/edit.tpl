@@ -20,6 +20,9 @@
 		<hr />
 	{/if}
 
+<div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
+        	<img src="images/common/gmail-loader.gif" alt="{$LANG.loading} ..." /> {$LANG.loading} ...
+</div>
 
 <form name="frmpost" action="index.php?module=inventory&view=edit&id={$inventory.id}" method="POST" id="frmpost">
 <br />	 
@@ -34,7 +37,7 @@
 	<tr>
 		<td class="details_screen">{$LANG.product}</td>
 		<td>
-		<select name="product_id" class="validate[required]">
+		<select name="product_id" class="validate[required] product_inventory_change">
 		    <option value=''></option>
 			{foreach from=$product_all item=product}
 				<option value="{$product.id}" {if $product.id == $inventory.product_id}selected{/if} >
@@ -53,7 +56,7 @@
 	<tr>
 		<td class="details_screen">{$LANG.cost}</td>
 		<td>
-		    <input name="cost" size="10" class="" value='{$inventory.cost|siLocal_number_formatted}'>
+		    <input id="cost" name="cost" size="10" class="validate[required]" value='{$inventory.cost|siLocal_number_formatted}'>
         </td>
      </tr>
 	<tr>
