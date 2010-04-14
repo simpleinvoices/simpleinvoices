@@ -79,7 +79,7 @@ class expense
 
         $detail['customer_all'] = customer::get_all();
         //get billers
-        $detail['biller_all'] = biller::select_all();
+        $detail['biller_all'] = biller::get_all();
         //get invoices
         $detail['invoice_all'] = invoice::get_all();
         //get products
