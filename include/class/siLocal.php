@@ -21,9 +21,22 @@ class siLocal
 	
 	public static function number_trim($number)
 	{
+        
+        global $config;        
+
 		$formatted_number = siLocal::number($number);
-		$formatted_number = rtrim(trim($formatted_number, '0'), '.');
-        $formatted_number = rtrim(trim($formatted_number, '0'), ','); /* Added to deal with "," */	
+    
+        //get the precision and add 1 - for the decimal place and reverse the sign
+        $position = ($config->local->precision + 1 ) * -1;
+
+        if(substr($formatted_number,$position,'1') == ".")
+        {
+		    $formatted_number = rtrim(trim($formatted_number, '0'), '.');
+        }
+        if(substr($formatted_number,$position,'1') == ",")
+        {
+            $formatted_number = rtrim(trim($formatted_number, '0'), ','); /* Added to deal with "," */
+        }	
         return $formatted_number;
 	}
 	
