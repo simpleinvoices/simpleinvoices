@@ -42,7 +42,6 @@
 		</td>
 		<td>
 				<select name="role">
-				    <option value='null'>-- {$LANG.none} --</option>
 					{foreach from=$roles item=role}
 						<option  value="{$role.id}">{$role.name}</option>
 					{/foreach}
