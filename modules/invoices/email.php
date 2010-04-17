@@ -28,7 +28,7 @@ $invoiceType = $sth->fetch();
 
 #create PDF name
 $spc2us_pref = str_replace(" ", "_", $preference[pref_inv_wording]);
-$pdf_file_name = $spc2us_pref . $invoice['id'] . '.pdf';
+$pdf_file_name = $spc2us_pref . "_" . $invoice['id'] . '.pdf';
       
 if ($_GET['stage'] == 2 ) {
 

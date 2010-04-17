@@ -132,8 +132,8 @@ else if (  $op === 'edit_preference' ) {
 				status = :status,
 				locale = :locale,
 				language = :language,
- 		                index_group = :index_group,
- 		                include_online_payment = :include_online_payment
+ 		        index_group = :index_group,
+ 		        include_online_payment = :include_online_payment
 			WHERE
 				pref_id = :id";
 

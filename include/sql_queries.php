@@ -678,8 +678,19 @@ function insertProduct($enabled=1,$visible=1) {
 	$sql = "INSERT into
 		".TB_PREFIX."products
 		(
-			domain_id, description, unit_price, custom_field1, custom_field2,
-			custom_field3, custom_field4, notes, default_tax_id, enabled, visible
+			domain_id, 
+            description, 
+            unit_price, 
+            cost,
+            reorder_level,
+            custom_field1, 
+            custom_field2,
+			custom_field3,
+            custom_field4, 
+            notes, 
+            default_tax_id, 
+            enabled, 
+            visible
 		)
 	VALUES
 		(	
@@ -687,7 +698,7 @@ function insertProduct($enabled=1,$visible=1) {
 			:description,
 			:unit_price,
 			:cost,
-			:reoreder_level,
+			:reorder_level,
 			:custom_field1,
 			:custom_field2,
 			:custom_field3,
