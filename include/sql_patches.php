@@ -1257,8 +1257,8 @@ PRIMARY KEY  (`user_id`)) ;
 
     $patch['206']['name'] = "Add status and locale to preferences";
     $patch['206']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `status` INT( 1 ) NOT NULL ,
-ADD `locale` VARCHAR( 255 ) NOT NULL ,
-ADD `language` VARCHAR( 255 ) NOT NULL ;";
+ADD `locale` VARCHAR( 255 ) NULL ,
+ADD `language` VARCHAR( 255 ) NULL ;";
     $patch['206']['date'] = "20090826";    
 
     $patch['207']['name'] = "Populate the status, locale, and language fields in preferences table";
@@ -1421,19 +1421,19 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
 
     $patch['240']['name'] = "si_system_defaults - add composite primary key";
     $patch['240']['patch'] = "ALTER TABLE  `".TB_PREFIX."system_defaults` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
-    $patch['240']['date'] = "2010305";    
+    $patch['240']['date'] = "20100305";    
 
     $patch['241']['name'] = "si_system_defaults - add composite primary key";
     $patch['241']['patch'] = "insert into `".TB_PREFIX."system_defaults` values ('','inventory','0','1','1');";
-    $patch['241']['date'] = "2010409";    
+    $patch['241']['date'] = "20100409";    
 
     $patch['242']['name'] = "Add cost to products table";
     $patch['242']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `cost` DECIMAL( 25, 6 ) NULL DEFAULT '0.00' AFTER `default_tax_id_2`;";
-    $patch['242']['date'] = "2010409";    
+    $patch['242']['date'] = "20100409";    
     
     $patch['243']['name'] = "Add reorder_level to products table";
     $patch['243']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `reorder_level` INT( 11 ) NULL AFTER `cost` ;";
-    $patch['243']['date'] = "2010409";    
+    $patch['243']['date'] = "20100409";    
 
     $patch['244']['name'] = "Create inventory table";
     $patch['244']['patch'] = "CREATE TABLE  `".TB_PREFIX."inventory` (
@@ -1446,8 +1446,34 @@ ADD `language` VARCHAR( 255 ) NOT NULL ;";
 `note` TEXT NULL ,
 PRIMARY KEY ( `domain_id`, `id` )
 ) ENGINE = MYISAM ;";
-    $patch['244']['date'] = "2010409";    
+    $patch['244']['date'] = "20100409";    
 
-    
+    $patch['245']['name'] = "Preferences - make locale null field";
+    $patch['245']['patch'] = "ALTER TABLE  `".TB_PREFIX."preferences` CHANGE  `locale`  `locale` VARCHAR( 255 ) NULL ;";
+    $patch['245']['date'] = "20100419";    
 
-  
+    $patch['246']['name'] = "Preferences - make language a null field";
+    $patch['246']['patch'] = "ALTER TABLE  `".TB_PREFIX."preferences` CHANGE  `language`  `language` VARCHAR( 255 ) NULL;";
+    $patch['246']['date'] = "20100419";    
+
+    $patch['247']['name'] = "Custom fields - make sure domain_id is 1";
+    $patch['247']['patch'] = "update ".TB_PREFIX."custom_fields set domain_id = '1';";
+    $patch['247']['date'] = "20100419";    
+
+    $patch['248']['name'] = "Make Simple Invoices faster - add index";
+    $patch['248']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD INDEX(`domain_id`);";
+    $patch['248']['date'] = "20100419";    
+
+    $patch['249']['name'] = "Make Simple Invoices faster - add index";
+    $patch['249']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD INDEX(`biller_id`) ;";
+    $patch['249']['date'] = "20100419";    
+
+    $patch['250']['name'] = "Make Simple Invoices faster - add index";
+    $patch['250']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD INDEX(`customer_id`);";
+    $patch['250']['date'] = "20100419";    
+
+    $patch['251']['name'] = "Make Simple Invoices faster - add index";
+    $patch['251']['patch'] = "ALTER TABLE `".TB_PREFIX."payment` ADD INDEX(`domain_id`);";
+    $patch['251']['date'] = "20100419";    
+
+
