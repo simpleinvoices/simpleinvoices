@@ -9,8 +9,8 @@ if ( (checkTableExists("si_customers") == true) AND ($install_data_exists == fal
 	$importjson = new importjson();
 	$importjson->file = "./databases/json/essential_data.json";
 	//$importjson->debug = true;
-	$importjson->pattern_find = "si_";
-	$importjson->pattern_replace = TB_PREFIX;
+	$importjson->pattern_find = array('si_','DOMAIN-ID');
+	$importjson->pattern_replace = array(TB_PREFIX,'1');
 	//dbQuery($importjson->collate());
 	$db->query($importjson->collate());
 }

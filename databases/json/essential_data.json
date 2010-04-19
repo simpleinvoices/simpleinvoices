@@ -891,161 +891,161 @@
             "id": "1",
             "name": "biller",
             "value": "4",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         },
         {
             "id": "2",
             "name": "customer",
             "value": "3",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         },
         {
             "id": "3",
             "name": "tax",
             "value": "1",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         },
         {
             "id": "4",
             "name": "preference",
             "value": "1",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         },
         {
             "id": "5",
             "name": "line_items",
             "value": "5",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         },
         {
             "id": "6",
             "name": "template",
             "value": "default",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         },
         {
             "id": "7",
             "name": "payment_type",
             "value": "1",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         },
         {
             "id": "8",
             "name": "language",
             "value": "en-gb",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         },
         {
             "id": "9",
             "name": "dateformate",
             "value": "Y-m-d",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         },
         {
             "id": "10",
             "name": "spreadsheet",
             "value": "xls",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         },
         {
             "id": "11",
             "name": "wordprocessor",
             "value": "doc",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         },
         {
             "id": "12",
             "name": "pdfscreensize",
             "value": "800",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         },
         {
             "id": "13",
             "name": "pdfpapersize",
             "value": "A4",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         },
         {
             "id": "14",
             "name": "pdfleftmargin",
             "value": "15",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         },
         {
             "id": "15",
             "name": "pdfrightmargin",
             "value": "15",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         },
         {
             "id": "16",
             "name": "pdftopmargin",
             "value": "15",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         },
         {
             "id": "17",
             "name": "pdfbottommargin",
             "value": "15",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         },
         {
             "id": "18",
             "name": "emailhost",
             "value": "localhost",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         },
         {
             "id": "19",
             "name": "emailusername",
             "value": "",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         },
         {
             "id": "20",
             "name": "emailpassword",
             "value": "",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         },
         {
             "id": "21",
             "name": "logging",
             "value": "0",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         },
         {
             "id": "22",
             "name": "delete",
             "value": "N",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         },
         {
             "id": "23",
             "name": "tax_per_line_item",
             "value": "1",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         }
     ],
@@ -1056,7 +1056,7 @@
             "tax_percentage": "10.000000",
             "type": "%",
             "tax_enabled": "1",
-            "domain_id": "1" 
+            "domain_id": "DOMAIN-ID" 
         },
         {
             "tax_id": "2",
@@ -1064,7 +1064,7 @@
             "tax_percentage": "10.000000",
             "type": "%",
             "tax_enabled": "1",
-            "domain_id": "1" 
+            "domain_id": "DOMAIN-ID" 
         },
         {
             "tax_id": "3",
@@ -1072,7 +1072,7 @@
             "tax_percentage": "10.000000",
             "type": "%",
             "tax_enabled": "1",
-            "domain_id": "1" 
+            "domain_id": "DOMAIN-ID" 
         },
         {
             "tax_id": "4",
@@ -1080,7 +1080,7 @@
             "tax_percentage": "0.000000",
             "type": "%",
             "tax_enabled": "1",
-            "domain_id": "1" 
+            "domain_id": "DOMAIN-ID" 
         },
         {
             "tax_id": "5",
@@ -1088,7 +1088,7 @@
             "tax_percentage": "20.000000",
             "type": "$",
             "tax_enabled": "1",
-            "domain_id": "1" 
+            "domain_id": "DOMAIN-ID" 
         } 
     ],
     "si_user": [
@@ -1096,7 +1096,7 @@
             "id": "1",
             "email": "demo@simpleinvoices.org",
             "role_id": "1",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "password": "fe01ce2a7fbac8fafaed7c982a04e229",
             "enabled":"1"
         }

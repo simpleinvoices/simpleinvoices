@@ -15,8 +15,20 @@ class import {
 	
     public function replace($string)
     {
-        $string_replaced = str_replace($this->pattern_find, $this->pattern_replace, $string);
+/*        if(is_array($this->pattern_find))
+        {
+            $string_replaced ="";
+            foreach($this->pattern_find as $key=>$value)
+            {
+                echo $this->pattern_find[$key] . $this->pattern_replace[$key];
+                $string_replaced .= str_replace($this->pattern_find[$key], $this->pattern_replace[$key], $string);
+            }
+            
+        } else {
+*/
+            $string_replaced = str_replace($this->pattern_find, $this->pattern_replace, $string);
 
+   #     }
         return $string_replaced;
     }
 	public function collate()

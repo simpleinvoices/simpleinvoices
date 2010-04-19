@@ -2,6 +2,8 @@
 
 class importjson extends import
 {
+	public $pattern_find;
+	public $pattern_replace;
 
 	public function decode($json)
 	{
@@ -54,9 +56,9 @@ class importjson extends import
 	public function collate()
 	{
 		$json = $this->getFile();
-		$decode = $this->decode($json);
-		$replace = $this->replace($decode);
-		return $this->process($replace);
+        $replace = $this->replace($json);
+		$decode = $this->decode($replace);
+		return $this->process($decode);
 
 	}
 

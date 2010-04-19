@@ -8,8 +8,8 @@ if (checkTableExists() == false)
 	//SQL import
 	$import = new import();
 	$import->file = "./databases/mysql/structure.sql";
-	$import->pattern_find = "si_";
-	$import->pattern_replace = TB_PREFIX;
+	$import->pattern_find = array('si_','DOMAIN-ID');
+	$import->pattern_replace = array(TB_PREFIX,'1');
 	//dbQuery($import->collate());
 	$db->query($import->collate());
 }
