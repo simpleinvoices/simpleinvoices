@@ -18,7 +18,7 @@ if ($p->validate_ipn()) {
 	$logger->log('Paypal Data:', Zend_Log::INFO);
 	$logger->log($paypal_data, Zend_Log::INFO);
 	//get the domain_id from the paypal invoice
-	$custom_array = explode(";", $p->ipn_date['custom']);
+	$custom_array = explode(";", $p->ipn_data['custom']);
 	#$custom_array = explode(";", $_POST['custom']);
 
 	$logger->log('Paypal - custom='.$_POST['custom'],Zend_Log::INFO);
@@ -39,19 +39,17 @@ if ($p->validate_ipn()) {
 	$check_payment = new payment();
 	$check_payment->filter='online_payment_id';
 	$check_payment->online_payment_id = $p->ipn_data['txn_id'];
-	#$check_payment->online_payment_id = $_POST['txn_id'];
 	$check_payment->domain_id = $domain_id;
-	$sth_payments = $check_payment->select_all();
-	$number_of_payments = $sth_payments->fetchAll();	
-	$logger->log('Paypal - nuumber of times this payment is in the db: '.$number_of_payments[0]['count'], Zend_Log::INFO);
+    $number_of_payments = $check_payment->count();
+	$logger->log('Paypal - number of times this payment is in the db: '.$number_of_payments, Zend_Log::INFO);
 	
-	if($number_of_payments[0]['count'] > 0)
+	if($number_of_payments > 0)
 	{
 		$xml_message .= 'Online payment '.$p->ipn_data['tnx_id'].' has already been entered into Simple Invoices - exiting for domain_id='.$domain_id;
 		$logger->log($xml_message, Zend_Log::INFO);
 	}
 
-	if($number_of_payments[0]['count'] == '0')
+	if($number_of_payments == '0')
 	{
 
 		$payment = new payment();

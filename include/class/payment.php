@@ -7,10 +7,38 @@ class payment
     public $end_date;
     public $filter;
     public $online_payment_id;
+    public $domain_id;
+
+    public function count()
+    {
+        global $auth_session;
+
+        $domain_id = domain_id::get($this->domain_id);
+
+        if($this->filter == "online_payment_id")
+        {
+            $where = "and ap.online_payment_id = '$this->online_payment_id'";
+        }
+
+        $sql = "SELECT 
+                    COUNT(DISTINCT ap.id) AS count
+                FROM 
+                    ".TB_PREFIX."payment ap
+                WHERE 
+                    domain_id = :domain_id
+        $where";
+
+        $sth = dbQuery($sql, ':domain_id', $domain_id);
+        $payment = $sth->fetch();
+
+        return $payment['count'];
+    }
+
 
     public function select_all() {
+
         global $auth_session;
-    $domain_id = domain_id::get($this->domain_id);
+        $domain_id = domain_id::get($this->domain_id);
         
         if($this->filter == "date")
         {
@@ -29,8 +57,7 @@ class payment
                     pref.pref_description as preference,
                     pt.pt_description as type,
                     c.name as cname, 
-                    b.name as bname,
-            count(*) as count
+                    b.name as bname
                 from 
                     ".TB_PREFIX."payment ap, 
                     ".TB_PREFIX."payment_types pt, 

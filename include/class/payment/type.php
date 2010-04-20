@@ -20,13 +20,15 @@ class payment_type
 
         $sql = "SELECT 
                     pt_id,
-		    count(*) as count
+		            count(DISTINCE pt_id)
                 from 
                     ".TB_PREFIX."payment_types 
                 WHERE 
                     pt_description = :pt_description
-		AND 
-		    domain_id = :domain_id;";
+		        AND 
+		            domain_id = :domain_id
+                GROUP BY
+                    pt_id;";
         
         $sth = $db->query($sql,':pt_description',$this->type,':domain_id',$domain_id);
 	$pt = $sth->fetch();
