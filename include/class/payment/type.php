@@ -20,7 +20,7 @@ class payment_type
 
         $sql = "SELECT 
                     pt_id,
-		            count(DISTINCE pt_id)
+		            count(DISTINCT pt_id)
                 from 
                     ".TB_PREFIX."payment_types 
                 WHERE 
