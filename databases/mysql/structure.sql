@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 05, 2010 at 09:09 PM
+-- Generation Time: Apr 20, 2010 at 08:28 PM
 -- Server version: 5.1.37
 -- PHP Version: 5.2.10-2ubuntu6
 
@@ -162,6 +162,23 @@ CREATE TABLE IF NOT EXISTS `si_index` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `si_inventory`
+--
+
+CREATE TABLE IF NOT EXISTS `si_inventory` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `domain_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` decimal(25,6) NOT NULL,
+  `cost` decimal(25,6) DEFAULT NULL,
+  `date` date NOT NULL,
+  `note` text,
+  PRIMARY KEY (`domain_id`,`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `si_invoices`
 --
 
@@ -179,7 +196,10 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
   `custom_field3` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `custom_field4` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `note` text COLLATE utf8_unicode_ci,
-  PRIMARY KEY (`domain_id`,`id`)
+  PRIMARY KEY (`domain_id`,`id`),
+  KEY `domain_id` (`domain_id`),
+  KEY `biller_id` (`biller_id`),
+  KEY `customer_id` (`customer_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -259,7 +279,8 @@ CREATE TABLE IF NOT EXISTS `si_payment` (
   `ac_payment_type` int(10) NOT NULL DEFAULT '1',
   `domain_id` int(11) NOT NULL,
   `online_payment_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`domain_id`,`id`)
+  PRIMARY KEY (`domain_id`,`id`),
+  KEY `domain_id` (`domain_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -298,8 +319,8 @@ CREATE TABLE IF NOT EXISTS `si_preferences` (
   `pref_inv_payment_line2_value` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `pref_enabled` varchar(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
   `status` int(1) NOT NULL,
-  `locale` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `language` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `locale` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `language` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `index_group` int(11) NOT NULL,
   `currency_code` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
   `include_online_payment` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -320,6 +341,8 @@ CREATE TABLE IF NOT EXISTS `si_products` (
   `unit_price` decimal(25,6) DEFAULT '0.000000',
   `default_tax_id` int(11) DEFAULT NULL,
   `default_tax_id_2` int(11) DEFAULT NULL,
+  `cost` decimal(25,6) DEFAULT '0.000000',
+  `reorder_level` int(11) DEFAULT NULL,
   `custom_field1` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `custom_field2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `custom_field3` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -343,7 +366,7 @@ CREATE TABLE IF NOT EXISTS `si_sql_patchmanager` (
   `sql_release` varchar(25) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `sql_statement` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`sql_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=389 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=400 ;
 
 -- --------------------------------------------------------
 

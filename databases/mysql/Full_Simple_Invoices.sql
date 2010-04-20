@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 05, 2010 at 09:07 PM
+-- Generation Time: Apr 20, 2010 at 08:27 PM
 -- Server version: 5.1.37
 -- PHP Version: 5.2.10-2ubuntu6
 
@@ -227,6 +227,28 @@ INSERT INTO `si_index` (`id`, `node`, `sub_node`, `sub_node_2`, `domain_id`) VAL
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `si_inventory`
+--
+
+CREATE TABLE IF NOT EXISTS `si_inventory` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `domain_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` decimal(25,6) NOT NULL,
+  `cost` decimal(25,6) DEFAULT NULL,
+  `date` date NOT NULL,
+  `note` text,
+  PRIMARY KEY (`domain_id`,`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `si_inventory`
+--
+
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `si_invoices`
 --
 
@@ -244,7 +266,10 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
   `custom_field3` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `custom_field4` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `note` text COLLATE utf8_unicode_ci,
-  PRIMARY KEY (`domain_id`,`id`)
+  PRIMARY KEY (`domain_id`,`id`),
+  KEY `domain_id` (`domain_id`),
+  KEY `biller_id` (`biller_id`),
+  KEY `customer_id` (`customer_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
@@ -367,7 +392,8 @@ CREATE TABLE IF NOT EXISTS `si_payment` (
   `ac_payment_type` int(10) NOT NULL DEFAULT '1',
   `domain_id` int(11) NOT NULL,
   `online_payment_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`domain_id`,`id`)
+  PRIMARY KEY (`domain_id`,`id`),
+  KEY `domain_id` (`domain_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
@@ -419,8 +445,8 @@ CREATE TABLE IF NOT EXISTS `si_preferences` (
   `pref_inv_payment_line2_value` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `pref_enabled` varchar(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
   `status` int(1) NOT NULL,
-  `locale` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `language` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `locale` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `language` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `index_group` int(11) NOT NULL,
   `currency_code` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
   `include_online_payment` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -451,6 +477,8 @@ CREATE TABLE IF NOT EXISTS `si_products` (
   `unit_price` decimal(25,6) DEFAULT '0.000000',
   `default_tax_id` int(11) DEFAULT NULL,
   `default_tax_id_2` int(11) DEFAULT NULL,
+  `cost` decimal(25,6) DEFAULT '0.000000',
+  `reorder_level` int(11) DEFAULT NULL,
   `custom_field1` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `custom_field2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `custom_field3` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -465,11 +493,11 @@ CREATE TABLE IF NOT EXISTS `si_products` (
 -- Dumping data for table `si_products`
 --
 
-INSERT INTO `si_products` (`id`, `domain_id`, `description`, `unit_price`, `default_tax_id`, `default_tax_id_2`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`) VALUES
-(1, 1, 'Hourly charge', '150.000000', 1, 0, '', '', '', '', '', '1', 1),
-(2, 1, 'Accounting services', '140.000000', 1, 0, '', '', '', '', '', '1', 1),
-(3, 1, 'Ploughing service', '125.000000', 1, 0, '', '', '', '', '', '1', 1),
-(4, 1, 'Bootleg homebrew', '15.500000', 1, 0, '', '', '', '', '', '1', 1);
+INSERT INTO `si_products` (`id`, `domain_id`, `description`, `unit_price`, `default_tax_id`, `default_tax_id_2`, `cost`, `reorder_level`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`) VALUES
+(1, 1, 'Hourly charge', '150.000000', 1, 0, '0.000000', NULL, '', '', '', '', '', '1', 1),
+(2, 1, 'Accounting services', '140.000000', 1, 0, '0.000000', NULL, '', '', '', '', '', '1', 1),
+(3, 1, 'Ploughing service', '125.000000', 1, 0, '0.000000', NULL, '', '', '', '', '', '1', 1),
+(4, 1, 'Bootleg homebrew', '15.500000', 1, 0, '0.000000', NULL, '', '', '', '', '', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -484,7 +512,7 @@ CREATE TABLE IF NOT EXISTS `si_sql_patchmanager` (
   `sql_release` varchar(25) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `sql_statement` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`sql_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=389 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=400 ;
 
 --
 -- Dumping data for table `si_sql_patchmanager`
@@ -731,7 +759,18 @@ INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_
 (385, 237, 'Add eway card expiry month', '20100315', 'ALTER TABLE  `si_customers` ADD `credit_card_expiry_month` VARCHAR( 02 ) NULL AFTER `credit_card_number`;'),
 (386, 238, 'Add eway card expirt year', '20100315', 'ALTER TABLE  `si_customers` ADD `credit_card_expiry_year` VARCHAR( 04 ) NULL AFTER `credit_card_expiry_month` ;'),
 (387, 239, 'cronlog - add invoice id', '20100321', 'ALTER TABLE `si_cron_log` ADD `cron_id` VARCHAR( 25 ) NULL AFTER `domain_id` ;'),
-(388, 240, 'si_system_defaults - add composite primary key', '2010305', 'ALTER TABLE  `si_system_defaults` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)');
+(388, 240, 'si_system_defaults - add composite primary key', '2010305', 'ALTER TABLE  `si_system_defaults` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)'),
+(389, 241, 'si_system_defaults - add composite primary key', '20100409', 'insert into `si_system_defaults` values ('''',''inventory'',''0'',''1'',''1'');'),
+(390, 242, 'Add cost to products table', '20100409', 'ALTER TABLE `si_products` ADD `cost` DECIMAL( 25, 6 ) NULL DEFAULT ''0.00'' AFTER `default_tax_id_2`;'),
+(391, 243, 'Add reorder_level to products table', '20100409', 'ALTER TABLE `si_products` ADD `reorder_level` INT( 11 ) NULL AFTER `cost` ;'),
+(392, 244, 'Create inventory table', '20100409', 'CREATE TABLE  `si_inventory` (\n`id` INT( 11 ) NOT NULL AUTO_INCREMENT ,\n`domain_id` INT( 11 ) NOT NULL ,\n`product_id` INT( 11 ) NOT NULL ,\n`quantity` DECIMAL( 25, 6 ) NOT NULL ,\n`cost` DECIMAL( 25, 6 ) NULL ,\n`date` DATE NOT NULL ,\n`note` TEXT NULL ,\nPRIMARY KEY ( `domain_id`, `id` )\n) ENGINE = MYISAM ;'),
+(393, 245, 'Preferences - make locale null field', '20100419', 'ALTER TABLE  `si_preferences` CHANGE  `locale`  `locale` VARCHAR( 255 ) NULL ;'),
+(394, 246, 'Preferences - make language a null field', '20100419', 'ALTER TABLE  `si_preferences` CHANGE  `language`  `language` VARCHAR( 255 ) NULL;'),
+(395, 247, 'Custom fields - make sure domain_id is 1', '20100419', 'update si_custom_fields set domain_id = ''1'';'),
+(396, 248, 'Make Simple Invoices faster - add index', '20100419', 'ALTER TABLE `si_invoices` ADD INDEX(`domain_id`);'),
+(397, 249, 'Make Simple Invoices faster - add index', '20100419', 'ALTER TABLE `si_invoices` ADD INDEX(`biller_id`) ;'),
+(398, 250, 'Make Simple Invoices faster - add index', '20100419', 'ALTER TABLE `si_invoices` ADD INDEX(`customer_id`);'),
+(399, 251, 'Make Simple Invoices faster - add index', '20100419', 'ALTER TABLE `si_payment` ADD INDEX(`domain_id`);');
 
 -- --------------------------------------------------------
 
@@ -776,7 +815,8 @@ INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension
 (20, 'emailpassword', '', 1, 1),
 (21, 'logging', '0', 1, 1),
 (22, 'delete', 'N', 1, 1),
-(23, 'tax_per_line_item', '1', 1, 1);
+(23, 'tax_per_line_item', '1', 1, 1),
+(24, 'inventory', '0', 1, 1);
 
 -- --------------------------------------------------------
 
