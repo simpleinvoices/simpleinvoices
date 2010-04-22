@@ -144,6 +144,7 @@ $db = db::getInstance();
 include_once("./include/sql_queries.php");
 
 $smarty->register_modifier("siLocal_number", array("siLocal", "number"));
+$smarty->register_modifier("siLocal_number_clean", array("siLocal", "number_clean"));
 $smarty->register_modifier("siLocal_number_trim", array("siLocal", "number_trim"));
 $smarty->register_modifier("siLocal_number_formatted", array("siLocal", "number_formatted"));
 $smarty->register_modifier("siLocal_date", array("siLocal", "date"));

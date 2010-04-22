@@ -240,7 +240,7 @@
 							</td>
 						{/section}
 						<td>
-							<input id="unit_price{$line}" name="unit_price{$line}" size="7" value="{$invoiceItem.unit_price|siLocal_number_formatted}" />
+							<input id="unit_price{$line}" name="unit_price{$line}" size="7" value="{$invoiceItem.unit_price|siLocal_number_clean}" />
 						</td>
 			        </tr>
 		            	<tr colspan="6" class="note">

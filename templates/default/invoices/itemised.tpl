@@ -166,7 +166,6 @@
 					{if $products == null }
 						<p><em>{$LANG.no_products}</em></p>
 					{else}
-					{* onchange="invoice_product_change_price($(this).val(), {$smarty.section.line.index}, jQuery('#quantity{$smarty.section.line.index}').val() );" *}
 						<select 
 							id="products{$smarty.section.line.index}"
 							name="products{$smarty.section.line.index}"

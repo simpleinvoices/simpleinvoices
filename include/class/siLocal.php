@@ -19,6 +19,16 @@ class siLocal
 		return $formatted_number;
 	}
 	
+    /*
+    * Function: number_clean
+    * Purpose: Remove trailing zeros - just to return cleaner number in invoice creation from ajax product change
+    */
+    public function number_clean($num){
+
+        return trim(trim($num, '0'), '.');
+
+    }
+
 	public static function number_trim($number)
 	{
         
