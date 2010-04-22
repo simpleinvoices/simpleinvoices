@@ -113,8 +113,8 @@ include_once('./config/define.php');
 /*
  * Include another config file if required
  */
-if( ($environment != 'production') AND (is_file('./config/'.$environment.'.config.ini') ) ){
-     $config = new Zend_Config_Ini('./config/'.$environment.'.config.ini', $environment,true);
+if( (is_file('./config/custom.config.ini') ){
+     $config = new Zend_Config_Ini('./config/custom.config.ini', $environment,true);
 } else {
     $config = new Zend_Config_Ini('./config/config.ini', $environment,true);	//added 'true' to allow modifications from db
 }
