@@ -62,6 +62,10 @@ $logger = new Zend_Log($writer);
  * log file - end
  */
 
+if (!is_writable('./tmp/cache')) {
+    
+   simpleInvoicesError('notWriteable','file','./tmp/cache');
+}
 /*
  * Zend Framework cache section - start
  * -- must come after the tmp dir writeable check
@@ -113,7 +117,7 @@ include_once('./config/define.php');
 /*
  * Include another config file if required
  */
-if( (is_file('./config/custom.config.ini') ){
+if( is_file('./config/custom.config.ini') ){
      $config = new Zend_Config_Ini('./config/custom.config.ini', $environment,true);
 } else {
     $config = new Zend_Config_Ini('./config/config.ini', $environment,true);	//added 'true' to allow modifications from db
