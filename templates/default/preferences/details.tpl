@@ -257,10 +257,9 @@
 			</td>
 			<td>
 				<select name="status">
-				<option value="{$preference.status}" selected
-				style="font-weight: bold;">{$preference.status_wording}</option>
-				<option value="1">{$LANG.open}</option>
-				<option value="0">{$LANG.real}</option>
+                {foreach from=$status item=s}
+                    <option {if $s.id == $preference.status} selected {/if} value="{$s.id}">{$s.status}</option>
+                {/foreach}
 				</select>
 			</td>
 		</tr>

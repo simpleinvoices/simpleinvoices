@@ -16,7 +16,7 @@ checkLogin();
 #get the invoice id
 $invoice_id = $_GET['id'];
 
-$invoice = getInvoice($invoice_id);
+$invoice = invoice::select($invoice_id);
 $preference = getPreference($invoice['preference_id']);
 $biller = getBiller($invoice['biller_id']);
 $customer = getCustomer($invoice['customer_id']);
@@ -27,8 +27,8 @@ $sth = dbQuery($sql, ':type', $invoice['type_id']);
 $invoiceType = $sth->fetch();
 
 #create PDF name
-$spc2us_pref = str_replace(" ", "_", $preference[pref_inv_wording]);
-$pdf_file_name = $spc2us_pref . "_" . $invoice['id'] . '.pdf';
+$spc2us_pref = str_replace(" ", "_", $invoice['index_name']);
+$pdf_file_name = $spc2us_pref  . '.pdf';
       
 if ($_GET['stage'] == 2 ) {
 

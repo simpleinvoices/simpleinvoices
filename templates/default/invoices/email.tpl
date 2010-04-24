@@ -19,7 +19,7 @@
 {if $smarty.get.stage == 1 }
 
 <form name="frmpost" action="index.php?module=invoices&amp;view=email&amp;stage=2&amp;id={$smarty.get.id}" method="post">
-<div id="top"><h3>Email {$preferences.pref_inv_wording} {$invoice.id} to Customer as PDF</h3></div>
+<div id="top"><h3>Email {$invoice.index_name} to Customer as PDF</h3></div>
 
 <table align="center">
 	<tr>
@@ -42,7 +42,7 @@
 	</tr>
 	<tr>
 	<td class="details_screen">{$LANG.subject}</td>
-	<td><input type="text" name="email_subject" size="50" value="{$preferences.pref_inv_wording} {$invoice.id} from {$biller.name} is attached" /></td>
+	<td><input type="text" name="email_subject" size="50" value="{$invoice.index_name} from {$biller.name} is attached" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.message}</td>
