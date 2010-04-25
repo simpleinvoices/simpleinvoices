@@ -7,7 +7,7 @@
 </head>
 <body class="login" >
 <div class="Container">
-{if $errorMessage != ''}
+{if $errorMessage }
 <p align="center"><strong><font color="#990000">{$errorMessage}</font></strong></p>
 {/if}
 	<div id="Dialog">

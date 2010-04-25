@@ -37,7 +37,7 @@ $dbAdapter = Zend_Db::factory($config->database->adapter, array(
 );
 */
 $errorMessage = '';
-if (isset($_POST['user']) && isset($_POST['pass'])) {
+if (!empty($_POST['user']) && !empty($_POST['pass'])) {
 
 ////	require_once 'Zend/Auth/Adapter/DbTable.php';
 
@@ -128,6 +128,9 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 	
 	}
 
+} else {
+
+        $errorMessage = 'Username and password required';
 }
 
 $smarty->assign("errorMessage",$errorMessage);
