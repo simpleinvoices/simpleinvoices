@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /*
 * Script: francais_french.inc.php
@@ -17,6 +17,8 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
 
 #all
 $title = "Simple Invoices (factures &agrave; l'aise)";//1
+
+
 
 $LANG['about'] = "&Agrave;-propos";//1
 $LANG['account_info'] = "Informations sur le compte";//1
@@ -437,4 +439,3 @@ $LANG['whats_this_page_about'] = "&Agrave;-propos de cette page&nbsp;";//1
 $LANG['wheres_the_edit_button'] = "O&ugrave;est le bouton edit ";//1
 $LANG['yes'] = "Yes";//0
 $LANG['zip'] = "Code postal";//1
-?>
