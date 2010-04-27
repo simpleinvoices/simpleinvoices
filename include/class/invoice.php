@@ -65,7 +65,7 @@ class invoice {
 			':preference_id', $this->preference_id,
 			':date', $this->date,
 			':note', $this->note,
-			':custom_field1', $this->custom_field,
+			':custom_field1', $this->custom_field1,
 			':custom_field2', $this->custom_field2,
 			':custom_field3', $this->custom_field3,
 			':custom_field4', $this->custom_field4
