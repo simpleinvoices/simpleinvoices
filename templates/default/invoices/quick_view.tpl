@@ -18,7 +18,6 @@
 *}
 
 <div class="align_center">
-{*	{$LANG.quick_view_of} {$preference.pref_inv_wording} {$invoice.id} *}
 	<br />
 
 
@@ -39,7 +38,7 @@
 			 &nbsp;&nbsp; 
 			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording} {$invoice.id} {$LANG.export_xls_tooltip} .{$config->export->spreadsheet} {$LANG.format_tooltip}" href="index.php?module=export&amp;view=invoice&amp;id={$invoice.id}&amp;format=file&amp;filetype={$spreadsheet}"><img src='images/common/page_white_excel.png' class='action' />&nbsp;{$LANG.export_as} .{$spreadsheet}</a>
 			 &nbsp;&nbsp; 
-			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording} {$invoice.id} {$LANG.export_doc_tooltip} .{$config->export->wordprocessor} {$LANG.format_tooltip}" href="index.php?module=export&amp;view=invoice&amp;id={$invoice.id}&amp;format=file&amp;filetype={$word_processor}"><img src='images/common/page_white_word.png' class='action' />&nbsp;{$LANG.export_as} .{$wordprocessor} </a>
+			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording} {$invoice.id} {$LANG.export_doc_tooltip} .{$config->export->wordprocessor} {$LANG.format_tooltip}" href="index.php?module=export&amp;view=invoice&amp;id={$invoice.id}&amp;format=file&amp;filetype={$wordprocessor}"><img src='images/common/page_white_word.png' class='action' />&nbsp;{$LANG.export_as} .{$wordprocessor} </a>
 			 &nbsp;&nbsp; 
 			<a title="{$LANG.email} {$preference.pref_inv_wording} {$invoice.id}" href="index.php?module=invoices&amp;view=email&amp;stage=1&amp;id={$invoice.id}"><img src='images/common/mail-message-new.png' class='action' />&nbsp;{$LANG.email}</a>
 			{if $defaults.delete == '1'} 
