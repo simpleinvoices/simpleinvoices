@@ -8,24 +8,45 @@
 <body class="login" >
 <div class="Container">
 {if $errorMessage }
-<p align="center"><strong><font color="#990000">{$errorMessage}</font></strong></p>
+<p align="center"><strong><font color="#990000">{$errorMessage}</font></strong><br /><br /></p>
 {/if}
 	<div id="Dialog">
-		<h1>Simple Invoices</h1>
+		<center>
+            <h1>{$LANG.simple_invoices}</h1>
 		<form action="" method="post" id="frmLogin">
-	 	<fieldset>
 	        <input type="hidden" name="action" value="login" />
 		<dl>
-  		<dt>{$LANG.email}:</dt>
-  		<dd><input name="user" type="text" title="user" value="" /></dd>
-  		<dt>{$LANG.password}:</dt>
-  		<dd><input name="pass" type="password" title="password" value="" /></dd>
-		<dd><input type="submit" value="login" /></dd>
-	  	</dl>
-		</fieldset>
+        <table>
+  		<tr>
+            <td>
+                {$LANG.email}:
+            </td>
+            <td>
+  		        <input name="user" type="text" title="user" value="" />
+            </td>
+        </tr>       
+  		<tr>
+            <td>
+                {$LANG.password}:
+            </td>
+            <td>
+  		        <input name="pass" type="password" title="password" value="" />
+            </td>
+        </tr>       
+  		<tr>
+            <td>
+            </td>
+            <td>
+                <input type="submit" value="login" />
+            </td>
+        </tr>       
+        </table>
 		</form>
+        </center>
+        <br/>
 	</div>
-        Powered by <a href="http://www.simpleinvoices.org">Simple Invoices</a>
+    <br/>
+        <a href="http://www.simpleinvoices.org">{$LANG.simple_invoices_powered_by}</a>
 </div>
 </body>
 </html>

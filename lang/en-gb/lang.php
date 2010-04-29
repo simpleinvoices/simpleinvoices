@@ -16,8 +16,6 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
-$title = "Simple Invoices";//1
-
 $LANG['about'] = "About";//1
 $LANG['account_info'] = "Account Info";//1
 $LANG['actions'] = "Actions";//1
@@ -498,6 +496,7 @@ $LANG['shortcut'] =" Shortcut menu";//1
 $LANG['show_details'] = "Show details";//1
 $LANG['show_only_unpaid_invoices'] = "Show only unpaid invoices";//1
 $LANG['simple_invoices'] = "Simple Invoices";//1
+$LANG['simple_invoices_powered_by'] = "Powered by Simple Invoices";//1
 $LANG['start_date'] = "Start date (YYYY-MM-DD)";
 $LANG['start_date_short'] = "Start date";
 $LANG['start_working'] = "Start working";//1

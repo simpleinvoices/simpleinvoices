@@ -37,7 +37,8 @@ $dbAdapter = Zend_Db::factory($config->database->adapter, array(
 );
 */
 $errorMessage = '';
-if (!empty($_POST['user']) && !empty($_POST['pass'])) {
+if (!empty($_POST['user']) && !empty($_POST['pass'])) 
+{
 
 ////	require_once 'Zend/Auth/Adapter/DbTable.php';
 
@@ -128,7 +129,10 @@ if (!empty($_POST['user']) && !empty($_POST['pass'])) {
 	
 	}
 
-} else {
+} 
+
+if($_POST['action'] == 'login' && (empty($_POST['user']) OR empty($_POST['pass'])))
+{
 
         $errorMessage = 'Username and password required';
 }
