@@ -22,7 +22,7 @@
                 {$LANG.email}:
             </td>
             <td>
-  		        <input name="user" type="text" title="user" value="" />
+  		        <input name="user" size="25" type="text" title="user" value="" />
             </td>
         </tr>       
   		<tr>
@@ -30,7 +30,7 @@
                 {$LANG.password}:
             </td>
             <td>
-  		        <input name="pass" type="password" title="password" value="" />
+  		        <input name="pass" size="25" type="password" title="password" value="" />
             </td>
         </tr>       
   		<tr>
