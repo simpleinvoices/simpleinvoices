@@ -55,7 +55,7 @@ $(document).ready(function(){
 			})
 	}
 	if($("#ac_me")){
-		$("#ac_me").autocomplete("auto_complete_search.php", { minChars:1, matchSubset:1, matchContains:1, cacheLength:10, onItemSelect:selectItem, formatItem:formatItem, selectOnly:1 });
+		$("#ac_me").autocomplete("index.php?module=payments&view=process_ajax", { minChars:1, matchSubset:1, matchContains:1, cacheLength:10, onItemSelect:selectItem, formatItem:formatItem, selectOnly:1 });
 	}
 	
 	if ($('#tabs_customer'))
