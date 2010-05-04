@@ -239,7 +239,7 @@ $.autocomplete = function(wrapper, options) {
 	};
 
 	function makeUrl(q) {
-		var url = options.url + "?q=" + q;
+		var url = options.url + "&q=" + q;
 		for (var i in options.extraParams) {
 			url += "&" + i + "=" + options.extraParams[i];
 		}
