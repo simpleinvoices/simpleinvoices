@@ -21,12 +21,18 @@ class siLocal
 	
     /*
     * Function: number_clean
-    * Purpose: Remove trailing zeros - just to return cleaner number in invoice creation from ajax product change
+    * Purpose: Remove trailing and leading zeros - just to return cleaner number in invoice creation from ajax product change
     */
     public function number_clean($num){
 
-        return trim(trim($num, '0'), '.');
+        //remove zeros from end of number ie. 140.00000 becomes 140.
+        $clean = rtrim($num, '0');
+        //remove zeros from front of number ie. 0.33 becomes .33
+        $clean = ltrim($clean, '0');
+        //remove decimal point if an integer ie. 140. becomes 140
+        $clean = rtrim($clean, '.');
 
+        return $clean;
     }
 
 	public static function number_trim($number)
