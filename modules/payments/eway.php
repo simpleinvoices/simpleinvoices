@@ -2,7 +2,7 @@
 
 $saved = false;
 
-if ($_POST['op'] =='add' AND !empty($_POST['invoice_id']))
+if ( ($_POST['op'] =='add') AND (!empty($_POST['invoice_id'])) )
 {
 
     $invoice= invoice::select($_POST['invoice_id']);

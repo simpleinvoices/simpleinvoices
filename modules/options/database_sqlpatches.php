@@ -7,10 +7,13 @@ include('./include/sql_patches.php');
 
 // Made it into 2 functions to get rid of the old defaults table
 
+$db = new db();
 function getNumberOfDonePatches() {
 
+
+    $db = new db();
 	$check_patches_sql = "SELECT count(sql_patch) AS count FROM ".TB_PREFIX."sql_patchmanager ";
-	$sth = dbQuery($check_patches_sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sth = $db->query($check_patches_sql) or die(htmlspecialchars(end($dbh->errorInfo())));
 		
 	$patches = $sth->fetch();
 	
@@ -34,6 +37,7 @@ function runPatches() {
 	global $patch;
 	global $db_server;
 	global $dbh;
+    $db = new db();
 	#DEFINE SQL PATCH
 
 	$display_block = "";
@@ -42,7 +46,7 @@ function runPatches() {
 	if ($db_server == 'pgsql') {
 		$sql = "SELECT 1 FROM pg_tables WHERE tablename ='".TB_PREFIX."sql_patchmanager'";
 	}
-	$sth = dbQuery($sql);
+	$sth = $db->query($sql);
 	$rows = $sth->fetchAll();
 	$display_block .= <<<EOD
 		<br />
@@ -174,9 +178,10 @@ EOD;
 
 function check_sql_patch($check_sql_patch_ref, $check_sql_patch_field) {
 
+    $db = new db();
    	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager WHERE sql_patch_ref = :patch" ;
 
-	$sth = dbQuery($sql, ':patch', $check_sql_patch_ref) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sth = $db->query($sql, ':patch', $check_sql_patch_ref) or die(htmlspecialchars(end($dbh->errorInfo())));
 
 	if(count($sth->fetchAll()) > 0) {
 		return true;
@@ -191,10 +196,11 @@ function check_sql_patch($check_sql_patch_ref, $check_sql_patch_field) {
 function run_sql_patch($id, $patch) {
 	global $dbh;
 	global $db_server;
+    $db = new db();
 	$display_block = "";
 
 	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager WHERE sql_patch_ref = :id" ;
-	$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sth = $db->query($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
 	
 	//echo $sql;
 	$escaped_id = htmlspecialchars($id);
@@ -208,7 +214,7 @@ function run_sql_patch($id, $patch) {
 		
 		//patch hasn't been run
 		#so do the bloody patch
-		dbQuery($patch['patch']) or die(htmlspecialchars(end($dbh->errorInfo())));
+		$db->query($patch['patch']) or die(htmlspecialchars(end($dbh->errorInfo())));
 		
 
 		$display_block  = "\n	<tr><td>SQL patch $escaped_id, $patch_name <i>has</i> been applied to the database</td></tr>";
@@ -220,7 +226,7 @@ function run_sql_patch($id, $patch) {
 		
 		/*echo $sql_update;*/
 
-		dbQuery($sql_update, ':id', $id, ':name', $patch['name'], ':date', $patch['date'], ':patch', $patch['patch']) or die(htmlspecialchars(end($dbh->errorInfo())));
+		$db->query($sql_update, ':id', $id, ':name', $patch['name'], ':date', $patch['date'], ':patch', $patch['patch']) or die(htmlspecialchars(end($dbh->errorInfo())));
 
 		if($id == 126) {
 			patch126();
@@ -244,6 +250,7 @@ function run_sql_patch($id, $patch) {
 function initialise_sql_patch() {
 	//SC: MySQL-only function, not porting to PostgreSQL
 	global $dbh;
+    $db = new db();
 
 	#check sql patch 1
 	$sql_patch_init = "CREATE TABLE ".TB_PREFIX."sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 255 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) TYPE = MYISAM ";
@@ -256,7 +263,7 @@ function initialise_sql_patch() {
 	$sql_insert = "INSERT INTO ".TB_PREFIX."sql_patchmanager
  ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement )
 VALUES ('','1','Create ".TB_PREFIX."sql_patchmanger table','20060514', :patch)";
-	dbQuery($sql_insert, ':patch', $sql_patch_init) or die(end($dbh->errorInfo()));
+	$db->query($sql_insert, ':patch', $sql_patch_init) or die(end($dbh->errorInfo()));
 
 	$display_block2 = "<tr><td>Step 3 - The SQL patch has been inserted into the SQL patch table<br /></td></tr>";
 	
@@ -265,18 +272,19 @@ VALUES ('','1','Create ".TB_PREFIX."sql_patchmanger table','20060514', :patch)";
 
 function patch126() {
 	//SC: MySQL-only function, not porting to PostgreSQL
+    $db = new db();
 	$sql = "SELECT * FROM ".TB_PREFIX."invoice_items WHERE product_id = 0";
-	$sth = dbQuery($sql);
+	$sth = $db->query($sql);
 	
 	while($res = $sth->fetch()) {
 		$sql = "INSERT INTO ".TB_PREFIX."products (id, description, unit_price, enabled, visible) 
 			VALUES (NULL, :description, :gross_total, '0',  '0')";
-		dbQuery($sql, ':description', $res[description], ':total', $res[gross_total]);
+		$db->query($sql, ':description', $res[description], ':total', $res[gross_total]);
 		$id = lastInsertId();
 
 		$sql = "UPDATE  ".TB_PREFIX."invoice_items SET product_id = :id, unit_price = :price WHERE ".TB_PREFIX."invoice_items.id = :item";
 
-		dbQuery($sql,
+		$db->query($sql,
 			':id', $id[0],
 			':price', $res[gross_total],
 			':item', $res[id]
@@ -290,6 +298,7 @@ function convertInitCustomFields() {
 // This function is exactly the same as convertCustomFields() in ./include/customFieldConversion.php but without the print_r and echo output while storing
 	/* check if any value set -> keeps all data for sure */
 	global $dbh;
+    $db = new db();
 	$sql = "SELECT * FROM ".TB_PREFIX."custom_fields";
 	$sth = $dbh->prepare($sql);
 	$sth->execute();
@@ -372,9 +381,10 @@ function convertInitCustomFields() {
 
 function saveInitCustomField($id, $category, $name, $description) {
 // This function is exactly same as saveCustomField() in ./include/manageCustomFields.php but without the final echo output
+    $db = new db();
 	$sql = "INSERT INTO ".TB_PREFIX."customFields  (pluginId, categorieId, name, description) 
 		VALUES (:id, :category, :name, :description)";
-	dbQuery($sql, ':id', $id, ':category', $category, ':name', $name, ':description', $description);
+	$db->query($sql, ':id', $id, ':category', $category, ':name', $name, ':description', $description);
 //	echo "SAVED<br />";
 }
 ?>

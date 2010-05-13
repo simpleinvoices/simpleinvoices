@@ -20,7 +20,7 @@ class payment_type
 
         $sql = "SELECT 
                     pt_id,
-		            count(DISTINCT pt_id)
+		            count(DISTINCT pt_id) as count
                 from 
                     ".TB_PREFIX."payment_types 
                 WHERE 
@@ -38,7 +38,7 @@ class payment_type
 		return $pt['pt_id'];
 	}
 	//add new patmeny type if no Paypal type
-	if($pt['count'] =="0")
+	if($pt =="")
 	{
 		$new_pt = new payment_type();
 		$new_pt->pt_description = $this->type;
