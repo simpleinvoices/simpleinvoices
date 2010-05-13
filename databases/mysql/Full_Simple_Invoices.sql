@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 20, 2010 at 08:27 PM
+-- Generation Time: May 14, 2010 at 07:43 AM
 -- Server version: 5.1.37
 -- PHP Version: 5.2.10-2ubuntu6
 
@@ -214,7 +214,8 @@ CREATE TABLE IF NOT EXISTS `si_index` (
   `node` varchar(255) NOT NULL,
   `sub_node` varchar(255) DEFAULT NULL,
   `sub_node_2` varchar(255) DEFAULT NULL,
-  `domain_id` int(11) NOT NULL
+  `domain_id` int(11) NOT NULL,
+  PRIMARY KEY (`domain_id`,`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
