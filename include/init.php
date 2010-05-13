@@ -128,6 +128,8 @@ date_default_timezone_set($config->phpSettings->date->timezone);
 error_reporting($config->debug->error_reporting);
 ini_set('display_startup_errors', $config->phpSettings->display_startup_errors);  
 ini_set('display_errors', $config->phpSettings->display_errors); 
+ini_set('log_errors', $config->phpSettings->log_errors); 
+ini_set('error_log', $config->phpSettings->error_log); 
 
 
 
