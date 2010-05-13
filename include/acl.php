@@ -35,6 +35,7 @@ $acl->add(new Zend_Acl_Resource('user'));
 $acl->add(new Zend_Acl_Resource('tax_rates'));
 $acl->add(new Zend_Acl_Resource('preferences'));
 $acl->add(new Zend_Acl_Resource('payment_types'));
+$acl->add(new Zend_Acl_Resource('statement'));
 
 //assign roels to resoruces
 
