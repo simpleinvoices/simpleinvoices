@@ -149,6 +149,9 @@
             "pref_inv_payment_line1_value": "H. & M. Simpson",
             "pref_inv_payment_line2_name": "Account number:",
             "pref_inv_payment_line2_value": "0123-4567-7890",
+            "status":"1",
+            "locale":"LOCALE",
+            "language":"LANGUAGE",
             "pref_enabled": "1" 
         },
         {
@@ -165,6 +168,9 @@
             "pref_inv_payment_line1_value": "",
             "pref_inv_payment_line2_name": "",
             "pref_inv_payment_line2_value": "",
+            "status":"1",
+            "locale":"LOCALE",
+            "language":"LANGUAGE",
             "pref_enabled": "1" 
         },
         {
@@ -181,6 +187,9 @@
             "pref_inv_payment_line1_value": "",
             "pref_inv_payment_line2_name": "",
             "pref_inv_payment_line2_value": "",
+            "status":"1",
+            "locale":"LOCALE",
+            "language":"LANGUAGE",
             "pref_enabled": "1" 
         },
         {
@@ -197,6 +206,9 @@
             "pref_inv_payment_line1_value": "",
             "pref_inv_payment_line2_name": "",
             "pref_inv_payment_line2_value": "",
+            "status":"1",
+            "locale":"LOCALE",
+            "language":"LANGUAGE",
             "pref_enabled": "1" 
         } 
     ],
@@ -884,7 +896,52 @@
             "sql_patch": "Move all old consulting style invoices to itemised",
             "sql_release": "20090704",
             "sql_statement": "UPDATE si_invoices SET type_id = 2 where type_id = 3"
-        }
+        },
+        {
+            "sql_patch_ref": "204"
+        },
+        {
+            "sql_patch_ref": "205"
+        },
+        {
+            "sql_patch_ref": "206"
+        },
+        {
+            "sql_patch_ref": "199"
+        },
+        {
+            "sql_patch_ref": "199"
+        },
+        {
+            "sql_patch_ref": "199"
+        },
+        {
+            "sql_patch_ref": "199"
+        },
+        {
+            "sql_patch_ref": "199"
+        },
+        {
+            "sql_patch_ref": "199"
+        },
+        {
+            "sql_patch_ref": "199"
+        },
+        {
+            "sql_patch_ref": "199"
+        },
+        {
+            "sql_patch_ref": "199"
+        },
+        {
+            "sql_patch_ref": "199"
+        },
+        {
+            "sql_patch_ref": "199"
+        },
+        {
+            "sql_patch_ref": "199"
+        },
     ],
     "si_system_defaults": [
         {
