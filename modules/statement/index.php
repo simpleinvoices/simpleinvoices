@@ -61,7 +61,7 @@ if (isset($_POST['submit']))
 		{
 			$invoice->having_and = "money_owed";
 		} else {
-			$invoice->having_and2 = "money_owed";
+			$invoice->having = "money_owed";
 		}
 		$show_only_unpaid = "yes";
 	}
