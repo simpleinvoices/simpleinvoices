@@ -207,15 +207,6 @@ class invoice {
         if ($this->having_and) $having_and  = $this->having_and;
         $sort = $this->sort;
 
-        //SC: Safety checking values that will be directly subbed in
-    /*
-        if (intval($start) != $start) {
-            $start = 0;
-        }
-        if (intval($limit) != $limit) {
-            $limit = 15;
-        }
-    */
         /*SQL Limit - start*/
         $start = (($page-1) * $rp);
         $limit = "LIMIT ".$start.", ".$rp;

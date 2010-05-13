@@ -50,7 +50,7 @@ if (isset($_POST['submit']))
 
 	if ( isset($_POST['filter_by_date']) )
 	{
-		$invoice->having_and = "date_between";
+		$invoice->having = "date_between";
 		$filter_by_date = "yes";
 		$having_and_count = 1;
 	}
