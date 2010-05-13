@@ -114,7 +114,9 @@ class inventory {
 				iv.date ,
 				iv.quantity ,
                 p.description,
-                (select coalesce(p.reorder_level,0) as reorder_level)
+                (select coalesce(p.reorder_level,0) as reorder_level),
+				iv.cost,
+				iv.quantity * iv.cost as total_cost
 			FROM 
 				".TB_PREFIX."products p,
 				".TB_PREFIX."inventory iv
@@ -122,6 +124,7 @@ class inventory {
 				iv.domain_id = :domain_id
 				and
                 p.id = iv.product_id
+			$where
 			GROUP BY
 			    iv.id
 			ORDER BY
