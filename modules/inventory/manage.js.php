@@ -28,10 +28,12 @@
 			url: "{/literal}{$url}{literal}",
 			dataType: 'xml',
 			colModel : [
-				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : action_menu, sortable : false, align: 'center'},
-				{display: '{/literal}{$LANG.date_upper}{literal}', name : 'date', width :30 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : action_menu - 50, sortable : false, align: 'center'},
+				{display: '{/literal}{$LANG.date_upper}{literal}', name : 'date', width :15 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.product}{literal}', name : 'description', width :35 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.quantity}{literal}', name : 'quantity', width :35 * percentage_width, sortable : true, align: 'left'}
+				{display: '{/literal}{$LANG.quantity}{literal}', name : 'quantity', width :15 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.cost_price}{literal}', name : 'cost', width :15 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.total_cost}{literal}', name : 'total_cost', width :20 * percentage_width, sortable : true, align: 'left'}
 				
 				],
 				/*
@@ -42,10 +44,11 @@
 				],
 			*/
 			searchitems : [
-				{display: '{/literal}{$LANG.invoice_number}{literal}', name : 'iv.id'},
-				{display: '{/literal}{$LANG.biller}{literal}', name : 'b.name'},
-				{display: '{/literal}{$LANG.customer}{literal}', name : 'id', isdefault: true},
-				{display: '{/literal}{$LANG.aging}{literal}', name : 'aging'}
+				{display: '{/literal}{$LANG.product}{literal}', name : 'p.description', isdefault: true},
+				{display: '{/literal}{$LANG.date_upper}{literal}', name : 'iv.date'},
+				{display: '{/literal}{$LANG.quantity}{literal}', name : 'iv.quantity'},
+				{display: '{/literal}{$LANG.cost_price}{literal}', name : 'iv.cost'},
+				{display: '{/literal}{$LANG.total_cost}{literal}', name : 'iv.quantity * iv.cost'}
 				],
 			sortname: "id",
 			sortorder: "desc",
