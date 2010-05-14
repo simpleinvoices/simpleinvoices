@@ -24,7 +24,7 @@ $master_invoice_id = $_GET['id'];
 $invoice = null;
 
 if(isset($_GET['id'])) {
-	$invoice = getInvoice($master_invoice_id);
+	$invoice = invoice::select($master_invoice_id);
 }
 else {
 	$sth = dbQuery("SELECT * FROM ".TB_PREFIX."invoices");

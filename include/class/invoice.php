@@ -133,7 +133,7 @@ class invoice {
 
 		$sql = "SELECT 
                     i.*,
-		    i.date as date_original, 
+        		    i.date as date_original, 
                     (SELECT CONCAT(p.pref_inv_wording,' ',i.index_id)) as index_name,
                     p.status
                 FROM 

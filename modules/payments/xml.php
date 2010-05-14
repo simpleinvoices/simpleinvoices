@@ -61,11 +61,13 @@ function sql($type='', $dir, $sort, $rp, $page )
 		$sql = "SELECT 
 				ap.*, 
 				c.name as cname,
+                    (SELECT CONCAT(p.pref_inv_wording,' ',iv.index_id)) as index_name,
 				b.name as bname 
 			from 
 				".TB_PREFIX."payment ap,
 				".TB_PREFIX."invoices iv,
 				".TB_PREFIX."customers c,
+				".TB_PREFIX."preferences p,
 				".TB_PREFIX."biller b
 			where 
 				ap.ac_inv_id = iv.id 
@@ -77,6 +79,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 				ap.ac_inv_id = :invoice_id
 				and 
 				ap.domain_id = :domain_id
+                    and
+                    iv.preference_id = p.pref_id
 				$where
 			ORDER BY 
 				$sort $dir 
@@ -94,11 +98,13 @@ function sql($type='', $dir, $sort, $rp, $page )
 		$sql = "SELECT 
 					ap.*, 
 					c.name as cname, 
+                    (SELECT CONCAT(p.pref_inv_wording,' ',iv.index_id)) as index_name,
 					b.name as bname 
 				from 
 					".TB_PREFIX."payment ap, 
 					".TB_PREFIX."invoices iv, 
 					".TB_PREFIX."customers c, 
+				".TB_PREFIX."preferences p,
 					".TB_PREFIX."biller b 
 				where 
 					ap.ac_inv_id = iv.id 
@@ -108,6 +114,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 					iv.biller_id = b.id 
 					and 
 					c.id = :id 
+                    and
+                    iv.preference_id = p.pref_id
 				ORDER BY 
 				$sort $dir  
 				$limit";
@@ -125,11 +133,13 @@ function sql($type='', $dir, $sort, $rp, $page )
 					b.name as bname,
 					pt.pt_description AS description,
 					ac_notes AS notes,
+                    (SELECT CONCAT(p.pref_inv_wording,' ',iv.index_id)) as index_name,
 					DATE_FORMAT(ac_date,'%Y-%m-%d') AS date
 				FROM 
 					".TB_PREFIX."payment ap, 
 					".TB_PREFIX."invoices iv, 
 					".TB_PREFIX."customers c, 
+				".TB_PREFIX."preferences p,
 					".TB_PREFIX."biller b ,
 					".TB_PREFIX."payment_types pt 
 				WHERE 
@@ -142,6 +152,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 						ap.ac_payment_type = pt.pt_id 
 					AND
 						ap.domain_id = :domain_id
+                    and
+                        iv.preference_id = p.pref_id
 					$where
 				ORDER BY 
 					$sort $dir 
@@ -180,7 +192,7 @@ $count = $resultCount[0];
 	<a class='index_table' title='$LANG[print_preview_tooltip] ".$row['id']."' href='index.php?module=payments&view=print&id=$row[id]'><img src='images/common/printer.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 	]]></cell>";
 		$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['ac_inv_id']."]]></cell>";		
+		$xml .= "<cell><![CDATA[".$row['index_name']."]]></cell>";		
 		$xml .= "<cell><![CDATA[".$row['cname']."]]></cell>";
 		$xml .= "<cell><![CDATA[".$row['bname']."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['ac_amount'])."]]></cell>";

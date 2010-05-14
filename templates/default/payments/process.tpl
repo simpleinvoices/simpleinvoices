@@ -5,8 +5,8 @@
 {if $smarty.get.op === "pay_selected_invoice"}
 
 <tr>
-	<td class="details_screen">{$LANG.invoice_id}</td>
-	<td><input type="hidden" name="ac_inv_id" value="{$invoice.id|escape:html}" />{$invoice.id|escape:html}</td>
+	<td class="details_screen">{$LANG.invoice}</td>
+	<td><input type="hidden" name="ac_inv_id" value="{$invoice.id|escape:html}" />{$invoice.index_name|escape:html}</td>
 	<td class="details_screen">{$LANG.total}</td>
 	<td>{$invoice.total|number_format:2}</td>
 </tr>
