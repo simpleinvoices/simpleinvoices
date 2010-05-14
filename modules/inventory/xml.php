@@ -31,6 +31,8 @@ $count = $sth_count_rows;
 		$xml .= "<cell><![CDATA[".$row['date']."]]></cell>";		
 		$xml .= "<cell><![CDATA[".$row['description']."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['quantity'])."]]></cell>";
+		$xml .= "<cell><![CDATA[".siLocal::number($row['cost'])."]]></cell>";
+		$xml .= "<cell><![CDATA[".siLocal::number($row['total_cost'])."]]></cell>";
 		$xml .= "</row>";		
 	}
 	$xml .= "</rows>";
