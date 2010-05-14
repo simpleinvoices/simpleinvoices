@@ -2625,4 +2625,4 @@ function pdfThis($html,$file_location="",$pdfname)
 	//echo "location: ".$file_location;
 	convert_to_pdf($html, $pdfname, $file_location);
 
-}
+}

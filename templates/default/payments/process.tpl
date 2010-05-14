@@ -5,8 +5,8 @@
 {if $smarty.get.op === "pay_selected_invoice"}
 
 <tr>
-	<td class="details_screen">{$LANG.invoice}</td>
-	<td><input type="hidden" name="ac_inv_id" value="{$invoice.id|escape:html}" />{$invoice.index_name|escape:html}</td>
+	<td class="details_screen">{$invoice.preference}</td>
+	<td><input type="hidden" name="ac_inv_id" value="{$invoice.id|escape:html}" />{$invoice.index_id|escape:html}</td>
 	<td class="details_screen">{$LANG.total}</td>
 	<td>{$invoice.total|number_format:2}</td>
 </tr>
@@ -42,14 +42,16 @@
 	<td class="details_screen">{$LANG.invoice_id}
 	<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_inv_id" title="{$LANG.process_payment_inv_id}"><img src="./images/common/help-small.png" alt="" /></a>
 	</td>
-	<td><input type="text" id="ac_me" name="ac_inv_id" /></td>
+	<td>
+<select name="invoice_id" class="validate[required]">
+    <option value=''></option>
+    {foreach from=$invoice_all item=invoice}
+        <option value="{$invoice.id}">{$invoice.index_name} ({$invoice.biller}, {$invoice.customer}, {$LANG.total} {$invoice.invoice_total|siLocal_number} : {$LANG.owing} {$invoice.owing|siLocal_number})</option>
+    {/foreach}
+</select>
+
 </tr>
 <tr>
-	<td class="details_screen">{$LANG.details}
-	<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_details" title="{$LANG.process_payment_details}"><img src="./images/common/help-small.png" alt="" /></a>
-	</td>
-	<td id="js_total"><i>{$LANG.select_invoice}</i> </td>
-</tr>
 <tr>
 	<td class="details_screen">{$LANG.amount}</td>
 	<td colspan="5"><input type="text" name="ac_amount" size="25" /></td>

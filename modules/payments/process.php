@@ -9,7 +9,7 @@ $maxInvoice = maxInvoice();
 jsBegin();
 jsFormValidationBegin("frmpost");
 #jsValidateifNum("ac_inv_id",$LANG['invoice_id']);
-jsPaymentValidation("ac_inv_id",$LANG['invoice_id'],1,$maxInvoice['maxId']);
+#jsPaymentValidation("ac_inv_id",$LANG['invoice_id'],1,$maxInvoice['maxId']);
 jsValidateifNum("ac_amount",$LANG['amount']);
 jsValidateifNum("ac_date",$LANG['date']);
 jsFormValidationEnd();
@@ -28,13 +28,21 @@ if(isset($_GET['id'])) {
 }
 else {
 	$sth = dbQuery("SELECT * FROM ".TB_PREFIX."invoices");
-	$invoice = $sth->fetch();
+    $invoice = $sth->fetch();
+    #$sth = new invoice();
+    #$invoice = $sth->select_all();
 }
 $customer = getCustomer($invoice['customer_id']);
 $biller = getBiller($invoice['biller_id']);
 $defaults = getSystemDefaults();
 $pt = getPaymentType($defaults['payment_type']);
 
+$invoices = new invoice();
+$invoices->sort='id';
+$invoices->having='money_owed';
+$invoice_all = $invoices->select_all('count');
+
+$smarty -> assign('invoice_all',$invoice_all);
 $paymentTypes = getActivePaymentTypes();
 
 $smarty -> assign("paymentTypes",$paymentTypes);

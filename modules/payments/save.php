@@ -14,7 +14,7 @@ global $auth_session;
 if ( isset($_POST['process_payment']) ) {
 	
 	$payment = new payment();
-	$payment->ac_inv_id = $_POST['ac_inv_id'];
+	$payment->ac_inv_id = $_POST['invoice_id'];
 	$payment->ac_amount = $_POST['ac_amount'];
 	$payment->ac_notes = $_POST['ac_notes'];
 	$payment->ac_date = $_POST['ac_date'];

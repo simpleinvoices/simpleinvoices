@@ -133,7 +133,7 @@ class invoice {
 
 		$sql = "SELECT 
                     i.*,
-        		    i.date as date_original, 
+		    i.date as date_original, 
                     (SELECT CONCAT(p.pref_inv_wording,' ',i.index_id)) as index_name,
                     p.status
                 FROM 
@@ -151,6 +151,7 @@ class invoice {
 
 	$invoice['calc_date'] = date('Y-m-d', strtotime( $invoice['date'] ) );
 	$invoice['date'] = siLocal::date( $invoice['date'] );
+	$invoice['total'] = getInvoiceTotal($invoice['id']);
 	$invoice['total'] = getInvoiceTotal($invoice['id']);
 	$invoice['gross'] = invoice::getInvoiceGross($invoice['id']);
 	$invoice['paid'] = calc_invoice_paid($invoice['id']);
@@ -505,4 +506,4 @@ class invoice {
 		
 		return $ni_id;
 	}
-}
+}
