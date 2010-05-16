@@ -194,8 +194,8 @@
 	{if $invoice.type_id == 2 }
 					<tr>
 				<td class="tbl1-bottom col1"><b>{$LANG.quantity_short}</b></td>
-				<td class="tbl1-bottom col1" ><b>Measurement</b></td>
-				<td class="tbl1-bottom col1" colspan="3"><b>{$LANG.item}</b></td>
+				<td class="tbl1-bottom col1" ></td>
+				<td class="tbl1-bottom col1" colspan="3"><b>mm</b></td>
 				<td class="tbl1-bottom col1" align="right"><b>{$LANG.total}</b></td>
 			</tr>
 			
@@ -203,8 +203,8 @@
 
 			<tr class="" >
 				<td class="">{$invoiceItem.quantity|siLocal_number_trim}</td>
-				<td class="" >{$invoiceItem.unit_price|siLocal_number} mm</td>
-				<td class="" colspan="3">{$invoiceItem.product.description}</td>
+				<td class="" >*</td>
+				<td class="" colspan="3">{$invoiceItem.unit_price|siLocal_number}</td>
 				<td class="" align="right">{$invoiceItem.gross_total|siLocal_number} mm</td>
 			</tr>
 			{if $invoiceItem.description != null}
