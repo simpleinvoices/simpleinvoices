@@ -156,9 +156,8 @@ CREATE TABLE IF NOT EXISTS `si_index` (
   `node` varchar(255) NOT NULL,
   `sub_node` varchar(255) DEFAULT NULL,
   `sub_node_2` varchar(255) DEFAULT NULL,
-  `domain_id` int(11) NOT NULL,
-  PRIMARY KEY (`domain_id`,`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `domain_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 

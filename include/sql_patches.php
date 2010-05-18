@@ -1303,9 +1303,10 @@ ADD `language` VARCHAR( 255 ) NULL ;";
     $patch['214']['date'] = "20090912";    
 
 
-    $patch['215']['name'] = "si_invoices - add composite primary key";
+    $patch['215']['name'] = "si_invoices - add composite primary key - patch removed";
     #$patch['215']['patch'] = "ALTER TABLE  `".TB_PREFIX."index` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
-    $patch['215']['patch'] = "ALTER TABLE  `".TB_PREFIX."index` ADD PRIMARY KEY(`domain_id`, `id`)";
+    #$patch['215']['patch'] = "ALTER TABLE  `".TB_PREFIX."index` ADD PRIMARY KEY(`domain_id`, `id`)";
+    $patch['215']['patch'] = "select 1 from `".TB_PREFIX."index`;";
     $patch['215']['date'] = "20090912";    
 
     $patch['216']['name'] = "si_payment - add composite primary key";
