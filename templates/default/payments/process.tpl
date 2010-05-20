@@ -6,7 +6,7 @@
 
 <tr>
 	<td class="details_screen">{$invoice.preference}</td>
-	<td><input type="hidden" name="ac_inv_id" value="{$invoice.id|escape:html}" />{$invoice.index_id|escape:html}</td>
+	<td><input type="hidden" name="invoice_id" value="{$invoice.id|escape:html}" />{$invoice.index_id|escape:html}</td>
 	<td class="details_screen">{$LANG.total}</td>
 	<td>{$invoice.total|number_format:2}</td>
 </tr>
@@ -39,8 +39,7 @@
 {if $smarty.get.op === "pay_invoice"}
 	
 <tr>
-	<td class="details_screen">{$LANG.invoice_id}
-	<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_inv_id" title="{$LANG.process_payment_inv_id}"><img src="./images/common/help-small.png" alt="" /></a>
+	<td class="details_screen">{$LANG.invoice}
 	</td>
 	<td>
 <select name="invoice_id" class="validate[required]">

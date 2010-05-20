@@ -93,7 +93,7 @@
 
             <a href="index.php?module=reports&view=report_products_sold_total" class="">
                 <img src="./images/famfam/cart.png" alt="" />
-                {$LANG.product_sales
+                {$LANG.product_sales}
             </a>
 
             <a href="index.php?module=reports&view=report_products_sold_by_customer" class="">

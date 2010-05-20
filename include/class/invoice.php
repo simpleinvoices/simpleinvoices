@@ -133,8 +133,9 @@ class invoice {
 
 		$sql = "SELECT 
                     i.*,
-		    i.date as date_original, 
+		            i.date as date_original, 
                     (SELECT CONCAT(p.pref_inv_wording,' ',i.index_id)) as index_name,
+                    p.pref_inv_wording AS preference,
                     p.status
                 FROM 
                     ".TB_PREFIX."invoices i, 
@@ -358,7 +359,7 @@ class invoice {
                        iv.type_id As type_id,
                        pf.pref_description AS preference,
                        pf.status AS status,
-                       (SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
+                       (SELECT CONCAT(pf.pref_inv_wording,' ',iv.index_id)) as index_name
                 FROM   " . TB_PREFIX . "invoices iv
                                LEFT JOIN " . TB_PREFIX . "biller b ON b.id = iv.biller_id
                                LEFT JOIN " . TB_PREFIX . "customers c ON c.id = iv.customer_id
@@ -464,11 +465,13 @@ class invoice {
     **/
     public static function max() {
         global $auth_session;
+        global $logger;
         
         $sql ="SELECT max(id) as max FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id";
 		$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 
         $count = $sth->fetch();
+		$logger->log('Max Invoice: '.$count['max'], Zend_Log::INFO);
         return $count['max'];
     }
 

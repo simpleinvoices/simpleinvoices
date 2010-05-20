@@ -1285,115 +1285,115 @@ ADD `language` VARCHAR( 255 ) NULL ;";
     $patch['212']['name'] = "Copy invoice.id into invoice.index_id";
     $patch['212']['patch'] = "update `".TB_PREFIX."invoices` set index_id = id;";
     $patch['212']['date'] = "20090902";    
-
+    
     $max_invoice = invoice::max();
     $patch['213']['name'] = "Update the index table with max invoice id - if required";
-    if($max_invoice > 0)
+    if($max_invoice > '0')
     {
         $patch['213']['patch'] = "insert into `".TB_PREFIX."index` (id, node, sub_node, domain_id)  VALUES (".$max_invoice.", 'invoice', '".$defaults['preference']."','1');";
     } else {
         $patch['213']['patch'] = "select 1 from `".TB_PREFIX."index`;";
     }
     $patch['213']['date'] = "20090902";    
-    unset($defaults);
-    unset($max_invoice);
+            unset($defaults);
+            unset($max_invoice);
 
-    $patch['214']['name'] = "Add sub_node_2 to si_index table";
-    $patch['214']['patch'] = "ALTER TABLE  `".TB_PREFIX."index` ADD  `sub_node_2` VARCHAR( 255 ) NULL AFTER  `sub_node`";
-    $patch['214']['date'] = "20090912";    
+            $patch['214']['name'] = "Add sub_node_2 to si_index table";
+            $patch['214']['patch'] = "ALTER TABLE  `".TB_PREFIX."index` ADD  `sub_node_2` VARCHAR( 255 ) NULL AFTER  `sub_node`";
+            $patch['214']['date'] = "20090912";    
 
 
-    $patch['215']['name'] = "si_invoices - add composite primary key - patch removed";
-    #$patch['215']['patch'] = "ALTER TABLE  `".TB_PREFIX."index` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
-    #$patch['215']['patch'] = "ALTER TABLE  `".TB_PREFIX."index` ADD PRIMARY KEY(`domain_id`, `id`)";
-    $patch['215']['patch'] = "select 1 from `".TB_PREFIX."index`;";
-    $patch['215']['date'] = "20090912";    
+            $patch['215']['name'] = "si_invoices - add composite primary key - patch removed";
+            #$patch['215']['patch'] = "ALTER TABLE  `".TB_PREFIX."index` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
+            #$patch['215']['patch'] = "ALTER TABLE  `".TB_PREFIX."index` ADD PRIMARY KEY(`domain_id`, `id`)";
+            $patch['215']['patch'] = "select 1 from `".TB_PREFIX."index`;";
+            $patch['215']['date'] = "20090912";    
 
-    $patch['216']['name'] = "si_payment - add composite primary key";
-    $patch['216']['patch'] = "ALTER TABLE  `".TB_PREFIX."payment` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
-    $patch['216']['date'] = "20090912";    
+            $patch['216']['name'] = "si_payment - add composite primary key";
+            $patch['216']['patch'] = "ALTER TABLE  `".TB_PREFIX."payment` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
+            $patch['216']['date'] = "20090912";    
 
-    $patch['217']['name'] = "si_payment_types - add composite primary key";
-    $patch['217']['patch'] = "ALTER TABLE  `".TB_PREFIX."payment_types` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `pt_id`)";
-    $patch['217']['date'] = "20090912";    
+            $patch['217']['name'] = "si_payment_types - add composite primary key";
+            $patch['217']['patch'] = "ALTER TABLE  `".TB_PREFIX."payment_types` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `pt_id`)";
+            $patch['217']['date'] = "20090912";    
 
-    $patch['218']['name'] = "si_preferences - add composite primary key";
-    $patch['218']['patch'] = "ALTER TABLE  `".TB_PREFIX."preferences` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `pref_id`)";
-    $patch['218']['date'] = "20090912";    
+            $patch['218']['name'] = "si_preferences - add composite primary key";
+            $patch['218']['patch'] = "ALTER TABLE  `".TB_PREFIX."preferences` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `pref_id`)";
+            $patch['218']['date'] = "20090912";    
 
-    $patch['219']['name'] = "si_products - add composite primary key";
-    $patch['219']['patch'] = "ALTER TABLE  `".TB_PREFIX."products` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
-    $patch['219']['date'] = "20090912";    
-    
-    $patch['220']['name'] = "si_tax - add composite primary key";
-    $patch['220']['patch'] = "ALTER TABLE  `".TB_PREFIX."tax` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `tax_id`)";
-    $patch['220']['date'] = "20090912";    
+            $patch['219']['name'] = "si_products - add composite primary key";
+            $patch['219']['patch'] = "ALTER TABLE  `".TB_PREFIX."products` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
+            $patch['219']['date'] = "20090912";    
+            
+            $patch['220']['name'] = "si_tax - add composite primary key";
+            $patch['220']['patch'] = "ALTER TABLE  `".TB_PREFIX."tax` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `tax_id`)";
+            $patch['220']['date'] = "20090912";    
 
-    $patch['221']['name'] = "si_user - add composite primary key";
-    $patch['221']['patch'] = "ALTER TABLE  `".TB_PREFIX."user` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
-    $patch['221']['date'] = "20090912";    
+            $patch['221']['name'] = "si_user - add composite primary key";
+            $patch['221']['patch'] = "ALTER TABLE  `".TB_PREFIX."user` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
+            $patch['221']['date'] = "20090912";    
 
-    $patch['222']['name'] = "si_biller - add composite primary key";
-    $patch['222']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
-    $patch['222']['date'] = "20100209";    
+            $patch['222']['name'] = "si_biller - add composite primary key";
+            $patch['222']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
+            $patch['222']['date'] = "20100209";    
 
-    $patch['223']['name'] = "si_customers - add composite primary key";
-    $patch['223']['patch'] = "ALTER TABLE  `".TB_PREFIX."customers` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
-    $patch['223']['date'] = "20100209";    
+            $patch['223']['name'] = "si_customers - add composite primary key";
+            $patch['223']['patch'] = "ALTER TABLE  `".TB_PREFIX."customers` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
+            $patch['223']['date'] = "20100209";    
 
-    $patch['224']['name'] = "Add paypal business name";
-    $patch['224']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` ADD `paypal_business_name` VARCHAR( 255 ) NULL AFTER  `footer`";
-    $patch['224']['date'] = "20100209";    
+            $patch['224']['name'] = "Add paypal business name";
+            $patch['224']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` ADD `paypal_business_name` VARCHAR( 255 ) NULL AFTER  `footer`";
+            $patch['224']['date'] = "20100209";    
 
-    $patch['225']['name'] = "Add paypal notify url";
-    $patch['225']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` ADD `paypal_notify_url` VARCHAR( 255 ) NULL AFTER  `paypal_business_name`";
-    $patch['225']['date'] = "20100209";    
+            $patch['225']['name'] = "Add paypal notify url";
+            $patch['225']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` ADD `paypal_notify_url` VARCHAR( 255 ) NULL AFTER  `paypal_business_name`";
+            $patch['225']['date'] = "20100209";    
 
-    $patch['226']['name'] = "Define currency in preferences";
-    $patch['226']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `currency_code` VARCHAR( 25 ) NULL ;";
-    $patch['226']['date'] = "20100209";    
+            $patch['226']['name'] = "Define currency in preferences";
+            $patch['226']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `currency_code` VARCHAR( 25 ) NULL ;";
+            $patch['226']['date'] = "20100209";    
 
-    $patch['227']['name'] = "Create cron table to handle recurrence";
-    $patch['227']['patch'] = "CREATE TABLE `".TB_PREFIX."cron` (
-		`id` INT( 11 ) NOT NULL AUTO_INCREMENT ,
-		`domain_id` INT( 11 ) NOT NULL ,
-		`invoice_id` INT( 11 ) NOT NULL ,
-		`start_date` DATE NOT NULL ,
-		`end_date` VARCHAR( 10 ) NULL ,
-		`recurrence` INT( 11 ) NOT NULL ,
-		`recurrence_type` VARCHAR( 11 ) NOT NULL ,
-		`email_biller` INT( 1 ) NULL ,
-		`email_customer` INT( 1 ) NULL ,
-		PRIMARY KEY (`domain_id` ,`id`)
-		) ENGINE = MYISAM ;";
-    $patch['227']['date'] = "20100215";    
+            $patch['227']['name'] = "Create cron table to handle recurrence";
+            $patch['227']['patch'] = "CREATE TABLE `".TB_PREFIX."cron` (
+                `id` INT( 11 ) NOT NULL AUTO_INCREMENT ,
+                `domain_id` INT( 11 ) NOT NULL ,
+                `invoice_id` INT( 11 ) NOT NULL ,
+                `start_date` DATE NOT NULL ,
+                `end_date` VARCHAR( 10 ) NULL ,
+                `recurrence` INT( 11 ) NOT NULL ,
+                `recurrence_type` VARCHAR( 11 ) NOT NULL ,
+                `email_biller` INT( 1 ) NULL ,
+                `email_customer` INT( 1 ) NULL ,
+                PRIMARY KEY (`domain_id` ,`id`)
+            ) ENGINE = MYISAM ;";
+        $patch['227']['date'] = "20100215";    
 
-    $patch['228']['name'] = "Create cron_log table to handle record when cron was run";
-    $patch['228']['patch'] = "CREATE TABLE `".TB_PREFIX."cron_log` (
-		`id` INT( 11 ) NOT NULL AUTO_INCREMENT ,
-		`domain_id` INT( 11 ) NOT NULL ,
-		`run_date` DATE NOT NULL ,
-		PRIMARY KEY (  `domain_id` ,  `id` )
-		) ENGINE = MYISAM ;";
-    $patch['228']['date'] = "20100216";    
+        $patch['228']['name'] = "Create cron_log table to handle record when cron was run";
+        $patch['228']['patch'] = "CREATE TABLE `".TB_PREFIX."cron_log` (
+            `id` INT( 11 ) NOT NULL AUTO_INCREMENT ,
+            `domain_id` INT( 11 ) NOT NULL ,
+            `run_date` DATE NOT NULL ,
+            PRIMARY KEY (  `domain_id` ,  `id` )
+            ) ENGINE = MYISAM ;";
+        $patch['228']['date'] = "20100216";    
 
-    $patch['229']['name'] = "preferences - add online payment type";
-    $patch['229']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `include_online_payment` VARCHAR( 255 ) NULL ;";
-    $patch['229']['date'] = "20100209";    
+        $patch['229']['name'] = "preferences - add online payment type";
+        $patch['229']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `include_online_payment` VARCHAR( 255 ) NULL ;";
+        $patch['229']['date'] = "20100209";    
 
-    $patch['230']['name'] = "Add paypal notify url";
-    $patch['230']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` ADD `paypal_return_url` VARCHAR( 255 ) NULL AFTER  `paypal_notify_url`";
-    $patch['230']['date'] = "20100223";    
+        $patch['230']['name'] = "Add paypal notify url";
+        $patch['230']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` ADD `paypal_return_url` VARCHAR( 255 ) NULL AFTER  `paypal_notify_url`";
+        $patch['230']['date'] = "20100223";    
 
-    $patch['231']['name'] = "Add paypal payment id into payment table";
-    $patch['231']['patch'] = "ALTER TABLE  `".TB_PREFIX."payment` ADD `online_payment_id` VARCHAR( 255 ) NULL AFTER  `domain_id`";
-    $patch['231']['date'] = "20100226";    
+        $patch['231']['name'] = "Add paypal payment id into payment table";
+        $patch['231']['patch'] = "ALTER TABLE  `".TB_PREFIX."payment` ADD `online_payment_id` VARCHAR( 255 ) NULL AFTER  `domain_id`";
+        $patch['231']['date'] = "20100226";    
 
-    $patch['232']['name'] = "Define currency display in preferences";
-    $patch['232']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `currency_position` VARCHAR( 25 ) NULL ;";
-    $patch['232']['date'] = "20100227";    
+        $patch['232']['name'] = "Define currency display in preferences";
+        $patch['232']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `currency_position` VARCHAR( 25 ) NULL ;";
+        $patch['232']['date'] = "20100227";    
 
-    $patch['233']['name'] = "Add system default to control invoice number by biller -- dummy patch -- this sql was removed";
+        $patch['233']['name'] = "Add system default to control invoice number by biller -- dummy patch -- this sql was removed";
     $patch['233']['patch'] = "select 1+1;";
     $patch['233']['date'] = "20100302";    
 
@@ -1422,7 +1422,8 @@ ADD `language` VARCHAR( 255 ) NULL ;";
     $patch['239']['date'] = "20100321";    
 
     $patch['240']['name'] = "si_system_defaults - add composite primary key";
-    $patch['240']['patch'] = "ALTER TABLE  `".TB_PREFIX."system_defaults` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
+    #$patch['240']['patch'] = "ALTER TABLE  `".TB_PREFIX."system_defaults` DROP INDEX `name`, DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
+    $patch['240']['patch'] = "select +1 from `".TB_PREFIX."system_defaults`";
     $patch['240']['date'] = "20100305";    
 
     $patch['241']['name'] = "si_system_defaults - add composite primary key";
