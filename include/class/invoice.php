@@ -466,9 +466,15 @@ class invoice {
     public static function max() {
         global $auth_session;
         global $logger;
-        
-        $sql ="SELECT max(id) as max FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id";
-		$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+        $db=new db();
+        if ( getNumberOfDonePatches() < '179')
+        {
+            $sql ="SELECT max(id) as max FROM ".TB_PREFIX."invoices";
+		    $sth = $db->query($sql);
+        } else {
+            $sql ="SELECT max(id) as max FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id";
+		    $sth = $db->query($sql, ':domain_id', $auth_session->domain_id);
+        }
 
         $count = $sth->fetch();
 		$logger->log('Max Invoice: '.$count['max'], Zend_Log::INFO);

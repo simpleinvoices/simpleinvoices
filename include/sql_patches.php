@@ -1288,16 +1288,17 @@ ADD `language` VARCHAR( 255 ) NULL ;";
     
     $max_invoice = invoice::max();
     $patch['213']['name'] = "Update the index table with max invoice id - if required";
-    if($max_invoice > '0')
+    if($max_invoice > "0")
     {
         $patch['213']['patch'] = "insert into `".TB_PREFIX."index` (id, node, sub_node, domain_id)  VALUES (".$max_invoice.", 'invoice', '".$defaults['preference']."','1');";
     } else {
         $patch['213']['patch'] = "select 1 from `".TB_PREFIX."index`;";
     }
-    $patch['213']['date'] = "20090902";    
-            unset($defaults);
-            unset($max_invoice);
-
+    $patch['213']['date'] = "20090902";
+    
+ #           unset($defaults);
+ #           unset($max_invoice);
+#die();
             $patch['214']['name'] = "Add sub_node_2 to si_index table";
             $patch['214']['patch'] = "ALTER TABLE  `".TB_PREFIX."index` ADD  `sub_node_2` VARCHAR( 255 ) NULL AFTER  `sub_node`";
             $patch['214']['date'] = "20090912";    
@@ -1479,4 +1480,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['251']['patch'] = "ALTER TABLE `".TB_PREFIX."payment` ADD INDEX(`domain_id`);";
     $patch['251']['date'] = "20100419";    
 
+/*
+ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );
 
+*/
