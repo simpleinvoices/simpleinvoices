@@ -29,7 +29,7 @@
 
 			searchitems : [
 				{display: '{/literal}{$LANG.email}{literal}', name : 'email', isdefault: true},
-				{display: '{/literal}{$LANG.role}{literal}', name : 'role'}
+				{display: '{/literal}{$LANG.role}{literal}', name : 'ur.name'}
 			],
 			sortname: 'name',
 			sortorder: 'asc',

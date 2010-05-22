@@ -37,11 +37,11 @@ function sql($type='', $dir, $sort, $rp, $page )
 		$dir = 'ASC';
 	}
 	
-	$query = $_POST['query'];
-	$qtype = $_POST['qtype'];
+	$query = $_REQUEST['query'];
+	$qtype = $_REQUEST['qtype'];
 	
 	$where = " WHERE u.domain_id = :domain_id AND u.role_id = ur.id";
-	if ($query) $where = " WHERE u.domain_id = :domain_id AND AND u.role_id = ur.id $qtype LIKE '%$query%' ";
+	if ($query) $where = " WHERE u.domain_id = :domain_id AND u.role_id = ur.id AND $qtype LIKE '%$query%' ";
 	
 	
 	
