@@ -13,7 +13,7 @@
 	<div id="Dialog">
 		<center>
             <h1>{$LANG.simple_invoices}</h1>
-		<form action="" method="post" id="frmLogin">
+		<form action="" method="post" id="frmLogin" name="frmLogin">
 	        <input type="hidden" name="action" value="login" />
 		<dl>
         <table>
@@ -48,5 +48,12 @@
     <br/>
         <a href="http://www.simpleinvoices.org">{$LANG.simple_invoices_powered_by}</a>
 </div>
+
+<script language="JavaScript">
+	<!--
+	document.frmLogin.user.focus();
+	//-->
+</script>
+
 </body>
 </html>
