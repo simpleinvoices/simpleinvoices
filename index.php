@@ -12,9 +12,15 @@
 //if browse not defined then the page will exit
 define("BROWSE","browse");
 
-$module = isset($_GET['module'])?$_GET['module']:null;
-$view = isset($_GET['view'])?$_GET['view']:null;
-$action = isset($_GET['case'])?$_GET['case']:null;
+function filenameEscape($str)
+{
+    // Returns an escaped value.
+    return preg_replace('/[^a-z0-9\-_\.]/i','_',$str);
+}
+
+$module = isset($_GET['module'])?filenameEscape($_GET['module']):null;
+$view   = isset($_GET['view'])  ?filenameEscape($_GET['view'])  :null;
+$action = isset($_GET['case'])  ?filenameEscape($_GET['case'])  :null;
 
 //TODO
 //validate $module/action/view (only numbers,letters,_-)
