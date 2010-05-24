@@ -541,4 +541,16 @@ function filenameEscape($str)
     return preg_replace('/[^a-z0-9\-_\.]/i','_',$str);
 }
 
+
+/* For Smarty */
+function htmlsafe($str) {
+    return htmlentities($str, ENT_QUOTES, 'UTF-8');
+}
+
+/* For Smarty */
+function urlsafe($str) {
+    $str = preg_replace('/[^a-zA-Z0-9@;:%_\+\.~#\?\/\=\&\/]/','',$str);
+    $str = htmlescape($str);
+    return $str;
+}
 ?>
