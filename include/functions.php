@@ -542,15 +542,15 @@ function filenameEscape($str)
 }
 
 
-/* For Smarty */
+/* Escapes HTML stuff */
 function htmlsafe($str) {
     return htmlentities($str, ENT_QUOTES, 'UTF-8');
 }
 
-/* For Smarty */
+/* Makes a string to be put inside a href="" safe */
 function urlsafe($str) {
     $str = preg_replace('/[^a-zA-Z0-9@;:%_\+\.~#\?\/\=\&\/]/','',$str);
-    $str = htmlescape($str);
+    $str = htmlsafe($str);
     return $str;
 }
 ?>
