@@ -22,7 +22,7 @@
                            {else}
                             <select name="biller_id">
                             {foreach from=$billers item=list_biller}
-                            <option {if $list_biller.id == $biller_id} selected {/if} value="{$list_biller.id}">{$list_biller.name}</option>
+                            <option {if $list_biller.id == $biller_id} selected {/if} value="{$list_biller.id|escape:'html':'UTF-8'}">{$list_biller.name|escape:'html':'UTF-8'}</option>
                             {/foreach}
                             </select>
                             {/if}
@@ -38,7 +38,7 @@
                         {else}
                             <select name="customer_id">
                             {foreach from=$customers item=list_customer}
-                                <option {if $list_customer.id == $customer_id} selected {/if} value="{$list_customer.id}">{$list_customer.name}</option>
+                                <option {if $list_customer.id == $customer_id} selected {/if} value="{$list_customer.id|escape:'html':'UTF-8'}">{$list_customer.name|escape:'html':'UTF-8'}</option>
                             {/foreach}
                             </select>
                         {/if}
@@ -56,14 +56,14 @@
         <td wrap="nowrap" class="details_screen">
 		{$LANG.start_date}
 	</td><td>
-                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date1" value='{$start_date}' />   
+                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date1" value='{$start_date|escape:'html':'UTF-8'}' />   
          </td>
 	</tr>
 	<tr>
         <td wrap="nowrap" class="details_screen"  >
 		{$LANG.end_date}
 	</td><td>
-                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="end_date" id="date1" value='{$end_date}' />   
+                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="end_date" id="date1" value='{$end_date|escape:'html':'UTF-8'}' />   
             </td>
     </tr>
 	<tr>
@@ -97,16 +97,16 @@
 <br />
 	{if $smarty.post.submit != null}
 	<span class="welcome">
-			<a title="{$LANG.print_preview_tooltip} {$preference.pref_inv_wording} {$invoice.id}" href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id}&amp;customer_id={$customer_id}&amp;start_date={$start_date}&amp;end_date={$end_date}&amp;show_only_unpaid={$show_only_unpaid}&amp;filter_by_date={$filter_by_date}&amp;format=print"><img src='images/common/printer.png' class='action' />&nbsp;{$LANG.print_preview}</a>
+			<a title="{$LANG.print_preview_tooltip} {$preference.pref_inv_wording|escape:'html':'UTF-8'} {$invoice.id|escape:'html':'UTF-8'}" href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id|escape:'url':'UTF-8'}&amp;customer_id={$customer_id}&amp;start_date={$start_date|escape:'url':'UTF-8'}&amp;end_date={$end_date|escape:'url':'UTF-8'}&amp;show_only_unpaid={$show_only_unpaid|escape:'url':'UTF-8'}&amp;filter_by_date={$filter_by_date|escape:'url':'UTF-8'}&amp;format=print"><img src='images/common/printer.png' class='action' />&nbsp;{$LANG.print_preview}</a>
 			 &nbsp;&nbsp; 
 			 <!-- EXPORT TO PDF -->
-			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording} {$invoice.id} {$LANG.export_pdf_tooltip}" href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id}&amp;customer_id={$customer_id}&amp;start_date={$start_date}&amp;end_date={$end_date}&amp;show_only_unpaid={$show_only_unpaid}&amp;filter_by_date={$filter_by_date}&amp;format=pdf"><img src='images/common/page_white_acrobat.png' class='action' />&nbsp;{$LANG.export_pdf}</a>
+			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording|escape:'html':'UTF-8'} {$invoice.id|escape:'html':'UTF-8'} {$LANG.export_pdf_tooltip}" href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id|escape:'url':'UTF-8'}&amp;customer_id={$customer_id|escape:'url':'UTF-8'}&amp;start_date={$start_date|escape:'url':'UTF-8'}&amp;end_date={$end_date|escape:'url':'UTF-8'}&amp;show_only_unpaid={$show_only_unpaid|escape:'url':'UTF-8'}&amp;filter_by_date={$filter_by_date|escape:'url':'UTF-8'}&amp;format=pdf"><img src='images/common/page_white_acrobat.png' class='action' />&nbsp;{$LANG.export_pdf}</a>
 			 &nbsp;&nbsp; 
-			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording} {$invoice.id} {$LANG.export_xls_tooltip} .{$config->export->spreadsheet} {$LANG.format_tooltip}" href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id}&amp;customer_id={$customer_id}&amp;start_date={$start_date}&amp;end_date={$end_date}&amp;show_only_unpaid={$show_only_unpaid}&amp;filter_by_date={$filter_by_date}&amp;format=file&amp;filetype={$config->export->spreadsheet}"><img src='images/common/page_white_excel.png' class='action' />&nbsp;{$LANG.export_as} .{$config->export->spreadsheet}</a>
+			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording|escape:'html':'UTF-8'} {$invoice.id|escape:'html':'UTF-8'} {$LANG.export_xls_tooltip} .{$config->export->spreadsheet} {$LANG.format_tooltip}" href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id|escape:'url':'UTF-8'}&amp;customer_id={$customer_id|escape:'url':'UTF-8'}&amp;start_date={$start_date|escape:'url':'UTF-8'}&amp;end_date={$end_date|escape:'url':'UTF-8'}&amp;show_only_unpaid={$show_only_unpaid|escape:'url':'UTF-8'}&amp;filter_by_date={$filter_by_date|escape:'url':'UTF-8'}&amp;format=file&amp;filetype={$config->export->spreadsheet}"><img src='images/common/page_white_excel.png' class='action' />&nbsp;{$LANG.export_as} .{$config->export->spreadsheet}</a>
 			 &nbsp;&nbsp; 
-			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording} {$invoice.id} {$LANG.export_doc_tooltip} .{$config->export->wordprocessor} {$LANG.format_tooltip}" href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id}&amp;customer_id={$customer_id}&amp;start_date={$start_date}&amp;end_date={$end_date}&amp;show_only_unpaid={$show_only_unpaid}&amp;filter_by_date={$filter_by_date}&amp;format=file&amp;filetype={$config->export->wordprocessor}"><img src='images/common/page_white_word.png' class='action' />&nbsp;{$LANG.export_as} .{$config->export->wordprocessor} </a>
+			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording|escape:'html':'UTF-8'} {$invoice.id|escape:'html':'UTF-8'} {$LANG.export_doc_tooltip} .{$config->export->wordprocessor} {$LANG.format_tooltip}" href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id|escape:'url':'UTF-8'}&amp;customer_id={$customer_id|escape:'url':'UTF-8'}&amp;start_date={$start_date|escape:'url':'UTF-8'}&amp;end_date={$end_date|escape:'url':'UTF-8'}&amp;show_only_unpaid={$show_only_unpaid|escape:'url':'UTF-8'}&amp;filter_by_date={$filter_by_date|escape:'url':'UTF-8'}&amp;format=file&amp;filetype={$config->export->wordprocessor}"><img src='images/common/page_white_word.png' class='action' />&nbsp;{$LANG.export_as} .{$config->export->wordprocessor} </a>
 			 &nbsp;&nbsp; 
-			<a title="{$LANG.email} {$preference.pref_inv_wording} {$invoice.id}" href="index.php?module=statement&amp;view=email&amp;stage=1&amp;biller_id={$biller_id}&amp;customer_id={$customer_id}&amp;start_date={$start_date}&amp;end_date={$end_date}&amp;show_only_unpaid={$show_only_unpaid}&amp;filter_by_date={$filter_by_date}&amp;format=file"><img src='images/common/mail-message-new.png' class='action' />&nbsp;{$LANG.email}</a>
+			<a title="{$LANG.email} {$preference.pref_inv_wording|escape:'html':'UTF-8'} {$invoice.id|escape:'html':'UTF-8'}" href="index.php?module=statement&amp;view=email&amp;stage=1&amp;biller_id={$biller_id|escape:'url':'UTF-8'}&amp;customer_id={$customer_id|escape:'url':'UTF-8'}&amp;start_date={$start_date|escape:'url':'UTF-8'}&amp;end_date={$end_date|escape:'url':'UTF-8'}&amp;show_only_unpaid={$show_only_unpaid|escape:'url':'UTF-8'}&amp;filter_by_date={$filter_by_date|escape:'url':'UTF-8'}&amp;format=file"><img src='images/common/mail-message-new.png' class='action' />&nbsp;{$LANG.email}</a>
 	</span>
 	<br />
 	<br />
@@ -123,8 +123,8 @@
 <table width="100%">
 <tr>
 	<td width="75%" align="left">
-		<strong>{$LANG.biller}:</strong> {$biller_details.name} <br />
-		<strong>{$LANG.customer}:</strong> {$customer_details.name} <br />
+		<strong>{$LANG.biller}:</strong> {$biller_details.name|escape:'html':'UTF-8'} <br />
+		<strong>{$LANG.customer}:</strong> {$customer_details.name|escape:'html':'UTF-8'} <br />
 		<br />	
 		<br />	
 	</td>
@@ -139,7 +139,7 @@
 <br />
 <br />
 {if $filter_by_date == "yes"} 
-<div class="align_left"><strong>{$LANG.statement_for_the_period} {$start_date} {$LANG.to_lowercase} {$end_date}</strong></div>
+<div class="align_left"><strong>{$LANG.statement_for_the_period} {$start_date|escape:'html':'UTF-8'} {$LANG.to_lowercase} {$end_date|escape:'html':'UTF-8'}</strong></div>
 <br />
 {/if}
 
@@ -212,14 +212,14 @@
             &nbsp;
         </td>
         <td class="details_screen">
-            {$invoices[invoice].biller}
+            {$invoices[invoice].biller|escape:'html':'UTF-8'}
         </td>
         <td>
             &nbsp;
             &nbsp;
         </td>
         <td class="details_screen">
-            {$invoices[invoice].customer}
+            {$invoices[invoice].customer|escape:'html':'UTF-8'}
         </td>
         <td>
             &nbsp;
