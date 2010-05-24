@@ -112,7 +112,7 @@ class ewaylib {
 	function setTransactionData($field, $value) {
 		//if($field=="TotalAmount")
 		//	$value = round($value*100);
-		$this->myTransactionData["eway" . $field] = htmlentities(trim($value));
+		$this->myTransactionData["eway" . $field] = htmlsafe(trim($value));
 	}
 	
 	

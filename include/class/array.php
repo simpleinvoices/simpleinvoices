@@ -39,7 +39,7 @@ class si_array
             } else {
 
                 // add single node.
-                $value = htmlentities( $value );
+                $value = htmlsafe( $value );
                 $xml->addChild( $key, $value );
             }
         }
