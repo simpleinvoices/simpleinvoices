@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<title>{$preference.pref_inv_wording} {$LANG.number_short}: {$invoice.index_id}</title>
+<title>{$preference.pref_inv_wording|htmlsafe} {$LANG.number_short}: {$invoice.index_id|htmlsafe}</title>
 </head>
 <body>
 <br />
@@ -13,8 +13,8 @@
 
 <table width="100%" align="center">
 		<tr>
-	   		<td colspan="5"><img src="{$logo}" border="0" hspace="0" align="left"></td>
-			<th align="right"><span>{$preference.pref_inv_heading}</span></th>
+	   		<td colspan="5"><img src="{$logo|urlsafe}" border="0" hspace="0" align="left"></td>
+			<th align="right"><span>{$preference.pref_inv_heading|htmlsafe}</span></th>
 		</tr>
 		<tr>
 			<td colspan="6"><hr size="1"></td>
@@ -24,39 +24,39 @@
 
 <table >
 		<tr>
-				<td colspan="4"><b>{$preference.pref_inv_wording} {$LANG.summary}</b></td>
+				<td colspan="4"><b>{$preference.pref_inv_wording|htmlsafe} {$LANG.summary}</b></td>
 		</tr>
 		<tr>
-				<td >{$preference.pref_inv_wording} {$LANG.number_short}:</td>
-				<td colspan="3">{$invoice.index_id}</td>
+				<td >{$preference.pref_inv_wording|htmlsafe} {$LANG.number_short}:</td>
+				<td colspan="3">{$invoice.index_id|htmlsafe}</td>
 		</tr>
 		<tr>
-				<td nowrap >{$preference.pref_inv_wording} {$LANG.date}:</td>
-				<td colspan="3">{$invoice.date}</td>
+				<td nowrap >{$preference.pref_inv_wording|htmlsafe} {$LANG.date}:</td>
+				<td colspan="3">{$invoice.date|htmlsafe}</td>
 		</tr>
 	<!-- Show the Invoice Custom Fields if valid -->
 		{ if $invoice.custom_field1 != null}
 		<tr>
-				<td nowrap>{$customFieldLabels.invoice_cf1}:</td>
-				<td colspan="3">{$invoice.custom_field1}</td>
+				<td nowrap>{$customFieldLabels.invoice_cf1|htmlsafe}:</td>
+				<td colspan="3">{$invoice.custom_field1|htmlsafe}</td>
 		</tr>
 		{/if}
 		{ if $invoice.custom_field2 != null}
 		<tr>
-				<td nowrap>{$customFieldLabels.invoice_cf2}:</td>
-				<td colspan="3">{$invoice.custom_field2}</td>
+				<td nowrap>{$customFieldLabels.invoice_cf2|htmlsafe}:</td>
+				<td colspan="3">{$invoice.custom_field2|htmlsafe}</td>
 		</tr>
 		{/if}
 		{ if $invoice.custom_field3 != null}
 		<tr>
-				<td nowrap>{$customFieldLabels.invoice_cf3}:</td>
-				<td colspan="3">{$invoice.custom_field3}</td>
+				<td nowrap>{$customFieldLabels.invoice_cf3|htmlsafe}:</td>
+				<td colspan="3">{$invoice.custom_field3|htmlsafe}</td>
 		</tr>
 		{/if}
 		{ if $invoice.custom_field4 != null}
 		<tr>
-				<td nowrap>{$customFieldLabels.invoice_cf4}:</td>
-				<td colspan="3">{$invoice.custom_field4}</td>
+				<td nowrap>{$customFieldLabels.invoice_cf4|htmlsafe}:</td>
+				<td colspan="3">{$invoice.custom_field4|htmlsafe}</td>
 		</tr>
 		{/if}
 
@@ -82,26 +82,26 @@
 	<!-- Biller section - start -->
         <tr>
                 <td border=1 cellpadding=2 cellspacing=1><b>{$LANG.biller}:</b></td>
-				<td border=1 cellpadding=2 cellspacing=1 colspan="3">{$biller.name}</td>
+				<td border=1 cellpadding=2 cellspacing=1 colspan="3">{$biller.name|htmlsafe}</td>
         </tr> 
 
         {if $biller.street_address != null}
 		<tr>
 				<td >{$LANG.address}:</td>
-				<td  align="left" colspan="3">{$biller.street_address}</td>
+				<td  align="left" colspan="3">{$biller.street_address|htmlsafe}</td>
 		</tr>   
         {/if}
         {if $biller.street_address2 != null }
 			{if $biller.street_address == null }
 		<tr>
 				<td >{$LANG.address}:</td>
-				<td align="left" colspan="3">{$biller.street_address2}</td>
+				<td align="left" colspan="3">{$biller.street_address2|htmlsafe}</td>
 		</tr>   
 			{/if}
 			{if $biller.street_address != null}
 		<tr>
 				<td></td>
-				<td align="left" colspan="3">{$biller.street_address2}</td>
+				<td align="left" colspan="3">{$biller.street_address2|htmlsafe}</td>
 		</tr>   
 			{/if}
 		{/if}
@@ -111,56 +111,56 @@
 	    {if $biller.country != null }
         <tr>
         		<td></td>
-				<td colspan="3">{$biller.country}</td>
+				<td colspan="3">{$biller.country|htmlsafe}</td>
         </tr>
    		{/if}
 
         {if $biller.phone != null }
         <tr>
                 <td >{$LANG.phone_short}:</td>
-				<td colspan="3">{$biller.phone}</td>
+				<td colspan="3">{$biller.phone|htmlsafe}</td>
         </tr>
    		{/if}
         {if $biller.fax != null }
 		<tr>
 				<td >{$LANG.fax}:</td>
-				<td colspan="3">{$biller.fax}</td>
+				<td colspan="3">{$biller.fax|htmlsafe}</td>
 		</tr>
    		{/if}
         {if $biller.mobile_phone != null }
 		<tr>
                 <td >{$LANG.mobile_short}:</td>
-				<td colspan="3">{$biller.mobile_phone}</td>
+				<td colspan="3">{$biller.mobile_phone|htmlsafe}</td>
 		</tr>
    		{/if}
         {if $biller.email != null }
         <tr>
                 <td >{$LANG.email}:</td>
-				<td colspan="3">{$biller.email}</td>
+				<td colspan="3">{$biller.email|htmlsafe}</td>
         </tr>
 		{/if}
         {if $biller.custom_field1 != null }
         <tr>
-                <td >{$customFieldLabels.biller_cf1}:</td>
-				<td colspan="3">{$biller.custom_field1}</td>
+                <td >{$customFieldLabels.biller_cf1|htmlsafe}:</td>
+				<td colspan="3">{$biller.custom_field1|htmlsafe}</td>
         </tr>	
 		{/if}
         {if $biller.custom_field2 != null }
         <tr>
-                <td >{$customFieldLabels.biller_cf2}:</td>
-				<td  colspan="3">{$biller.custom_field2}</td>
+                <td >{$customFieldLabels.biller_cf2|htmlsafe}:</td>
+				<td  colspan="3">{$biller.custom_field2|htmlsafe}</td>
         </tr>	
 		{/if}
         {if $biller.custom_field3 != null }
         <tr>
-                <td >{$customFieldLabels.biller_cf3}:</td>
-				<td  colspan="3">{$biller.custom_field3}</td>
+                <td >{$customFieldLabels.biller_cf3|htmlsafe}:</td>
+				<td  colspan="3">{$biller.custom_field3|htmlsafe}</td>
         </tr>	
 		{/if}
         {if $biller.custom_field4 != null }
         <tr>
-                <td >{$customFieldLabels.biller_cf4}:</td>
-				<td  colspan="3">{$biller.custom_field4}</td>
+                <td >{$customFieldLabels.biller_cf4|htmlsafe}:</td>
+				<td  colspan="3">{$biller.custom_field4|htmlsafe}</td>
         </tr>	
 		{/if}
 		<tr>
@@ -178,19 +178,19 @@
 
 	<tr>
 		<td><b>{$LANG.customer}:</b></td>
-		<td colspan="3">{$customer.name}</td>
+		<td colspan="3">{$customer.name|htmlsafe}</td>
 	</tr>
 
         {if $customer.attention != null}
     <tr>
 			<td >{$LANG.attention_short}:</td>
-			<td align="left"  colspan="3" >{$customer.attention}</td>
+			<td align="left"  colspan="3" >{$customer.attention|htmlsafe}</td>
     </tr>
         {/if}
         {if $customer.street_address != null }
     <tr>
 			<td >{$LANG.address}:</td>
-			<td  align="left" colspan="3">{$customer.street_address}</td>
+			<td  align="left" colspan="3">{$customer.street_address|htmlsafe}</td>
     </tr>   
         {/if}
         
@@ -199,13 +199,13 @@
 			{if $customer.street_address == null }
                 <tr >
                         <td >{$LANG.address}:</td>
-						<td  align="left" colspan="3">{$customer.street_address2}</td>
+						<td  align="left" colspan="3">{$customer.street_address2|htmlsafe}</td>
                 </tr>   
 			{/if}
 			{if $customer.street_address != null}
                 <tr >
                         <td ></td>
-						<td  align="left" colspan="3">{$customer.street_address2}</td>
+						<td  align="left" colspan="3">{$customer.street_address2|htmlsafe}</td>
                 </tr>   
             {/if}
         {/if}
@@ -215,55 +215,55 @@
             {if $customer.country != null }
                 <tr>
                         <td ></td>
-						<td  colspan="3">{$customer.country}</td>
+						<td  colspan="3">{$customer.country|htmlsafe}</td>
                 </tr>
        		{/if}
             {if $customer.phone != null }
                 <tr>
                         <td >{$LANG.phone_short}:</td>
-						<td  colspan="3">{$customer.phone}</td>
+						<td  colspan="3">{$customer.phone|htmlsafe}</td>
                 </tr>
        		{/if}
             {if $customer.fax != null }
                 <tr>
                         <td >{$LANG.fax}:</td>
-						<td  colspan="3">{$customer.fax}</td>
+						<td  colspan="3">{$customer.fax|htmlsafe}</td>
                 </tr>
        		{/if}
             {if $customer.mobile_phone != null }
                 <tr>
                         <td >{$LANG.mobile_short}:</td>
-						<td  colspan="3">{$customer.mobile_phone}</td>
+						<td  colspan="3">{$customer.mobile_phone|htmlsafe}</td>
                 </tr>
        		{/if}
             {if $customer.email != null }
                 <tr>
                         <td >{$LANG.email}:</td>
-						<td  colspan="3">{$customer.email}</td>
+						<td  colspan="3">{$customer.email|htmlsafe}</td>
                 </tr>
 			{/if}
         	{if $customer.custom_field1 != null }
                 <tr>
-                        <td >{$customFieldLabels.customer_cf1}:</td>
-						<td  colspan="3">{$customer.custom_field1}</td>
+                        <td >{$customFieldLabels.customer_cf1|htmlsafe}:</td>
+						<td  colspan="3">{$customer.custom_field1|htmlsafe}</td>
                 </tr>	
 			{/if}
         	{if $customer.custom_field2 != null }
                 <tr>
-                        <td >{$customFieldLabels.customer_cf2}:</td>
-						<td  colspan="3">{$customer.custom_field2}</td>
+                        <td >{$customFieldLabels.customer_cf2|htmlsafe}:</td>
+						<td  colspan="3">{$customer.custom_field2|htmlsafe}</td>
                 </tr>	
 			{/if}
         	{if $customer.custom_field3 != null }
                 <tr>
-                        <td >{$customFieldLabels.customer_cf3}:</td>
-						<td  colspan="3">{$customer.custom_field3}</td>
+                        <td >{$customFieldLabels.customer_cf3|htmlsafe}:</td>
+						<td  colspan="3">{$customer.custom_field3|htmlsafe}</td>
                 </tr>	
 			{/if}
         	{if $customer.custom_field4 != null }
                 <tr>
-                        <td >{$customFieldLabels.customer_cf4}:</td>
-						<td  colspan="3">{$customer.custom_field4}</td>
+                        <td >{$customFieldLabels.customer_cf4|htmlsafe}:</td>
+						<td  colspan="3">{$customer.custom_field4|htmlsafe}</td>
                 </tr>	
 			{/if}
                 
@@ -298,7 +298,7 @@
 	<tr>
         <td colspan="2"></td>
 		<td colspan="3" align="right">{$LANG.sub_total}&nbsp;</td>
-		<td colspan="1" align="right">{if $invoice_number_of_taxes > 1}<u>{/if}{$preference.pref_currency_sign}{$invoice.gross|siLocal_number}{if $invoice_number_of_taxes > 1}</u>{/if}</td>
+		<td colspan="1" align="right">{if $invoice_number_of_taxes > 1}<u>{/if}{$preference.pref_currency_sign|htmlsafe}{$invoice.gross|siLocal_number|htmlsafe}{if $invoice_number_of_taxes > 1}</u>{/if}</td>
     </tr>
     {/if}
 	{if $invoice_number_of_taxes > 1 }
@@ -311,8 +311,8 @@
     	
     	<tr>
 	        <td colspan="2"></td>
-			<td colspan="3" align="right">{$invoice.tax_grouped[line].tax_name}&nbsp;</td>
-			<td colspan="1" align="right">{$preference.pref_currency_sign}{$invoice.tax_grouped[line].tax_amount|siLocal_number}</td>
+			<td colspan="3" align="right">{$invoice.tax_grouped[line].tax_name|htmlsafe}&nbsp;</td>
+			<td colspan="1" align="right">{$preference.pref_currency_sign|htmlsafe}{$invoice.tax_grouped[line].tax_amount|siLocal_number|htmlsafe}</td>
 	    </tr>
 	    {/if}
 	    
@@ -321,7 +321,7 @@
 	<tr>
         <td colspan="2"></td>
 		<td colspan="3" align="right">{$LANG.tax_total}&nbsp;</td>
-		<td colspan="1" align="right"><u>{$preference.pref_currency_sign}{$invoice.total_tax|siLocal_number}</u></td>
+		<td colspan="1" align="right"><u>{$preference.pref_currency_sign|htmlsafe}{$invoice.total_tax|siLocal_number}</u></td>
     </tr>
     {/if}
 	{if $invoice_number_of_taxes > 1}
@@ -331,8 +331,8 @@
     {/if}
     <tr>
         <td colspan="2"></td>
-		<td colspan="3" align="right"><b>{$preference.pref_inv_wording} {$LANG.amount}&nbsp;</b></td>
-		<td colspan="1" align="right"><span class="double_underline">{$preference.pref_currency_sign}{$invoice.total|siLocal_number}</span></td>
+		<td colspan="3" align="right"><b>{$preference.pref_inv_wording|htmlsafe} {$LANG.amount}&nbsp;</b></td>
+		<td colspan="1" align="right"><span class="double_underline">{$preference.pref_currency_sign|htmlsafe}{$invoice.total|siLocal_number}</span></td>
     </tr>
     {* tax section - end *}
 
@@ -343,8 +343,8 @@
     	
     	<tr class='details_screen'>
 	        <td colspan="2"></td>
-			<td colspan="3" align="right">{$invoice.tax_grouped[line].tax_name}</td>
-			<td colspan="1" align="right">{$preference.pref_currency_sign}{$invoice.tax_grouped[line].tax_amount|siLocal_number}</td>
+			<td colspan="3" align="right">{$invoice.tax_grouped[line].tax_name|htmlsafe}</td>
+			<td colspan="1" align="right">{$preference.pref_currency_sign|htmlsafe}{$invoice.tax_grouped[line].tax_amount|siLocal_number}</td>
 	    </tr>
 	    
 	    {/if}
@@ -355,15 +355,15 @@
 	<tr >
 		<td colspan="3"></td>
 		<td align="right" colspan="2">{$LANG.tax_total}</td>
-		<td align="right" >{$preference.pref_currency_sign}{$invoice.total_tax|number_format:2}</td>
+		<td align="right" >{$preference.pref_currency_sign|htmlsafe}{$invoice.total_tax|number_format:2}</td>
 	</tr>
 	<tr >
 		<td colspan="6" ><br /></td>
 	</tr>
 	<tr >
 		<td colspan="3"></td>
-		<td align="right" colspan="2"><b>{$preference.pref_inv_wording} {$LANG.amount}</b></td>
-		<td  align="right"><u>{$preference.pref_currency_sign}{$invoice.total|number_format:2}</u></td>
+		<td align="right" colspan="2"><b>{$preference.pref_inv_wording|htmlsafe} {$LANG.amount}</b></td>
+		<td  align="right"><u>{$preference.pref_currency_sign|htmlsafe}{$invoice.total|number_format:2}</u></td>
 	</tr>
     *}
 	<tr>
@@ -372,19 +372,19 @@
 	
 		<!-- invoice details section - start -->
 	<tr>
-		<td colspan="6"><b>{$preference.pref_inv_detail_heading}</b></td>
+		<td colspan="6"><b>{$preference.pref_inv_detail_heading|htmlsafe}</b></td>
 	</tr>
 	<tr>
-		<td colspan="6"><i>{$preference.pref_inv_detail_line}</i></td>
+		<td colspan="6"><i>{$preference.pref_inv_detail_line|htmlsafe}</i></td>
 	</tr>
 	<tr>
-		<td colspan="6">{$preference.pref_inv_payment_method}</td>
+		<td colspan="6">{$preference.pref_inv_payment_method|htmlsafe}</td>
 	</tr>
 	<tr>
-		<td colspan="6">{$preference.pref_inv_payment_line1_name} {$preference.pref_inv_payment_line1_value}</td>
+		<td colspan="6">{$preference.pref_inv_payment_line1_name|htmlsafe} {$preference.pref_inv_payment_line1_value|htmlsafe}</td>
 	</tr>
 	<tr>
-		<td colspan="6">{$preference.pref_inv_payment_line2_name} {$preference.pref_inv_payment_line2_value}</td>
+		<td colspan="6">{$preference.pref_inv_payment_line2_name|htmlsafe} {$preference.pref_inv_payment_line2_value|htmlsafe}</td>
 	</tr>
 	<tr>
 		<td><br /></td>
