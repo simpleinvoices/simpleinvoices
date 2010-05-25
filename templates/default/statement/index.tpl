@@ -195,9 +195,9 @@
         <tr><td><br /></td></tr>
     {/if}
     <tr>
-        <td class="details_screen">{$index}
-            {$invoices[invoice].preference}
-            {$invoices[invoice].index_id}
+        <td class="details_screen">{$index|htmlsafe}
+            {$invoices[invoice].preference|htmlsafe}
+            {$invoices[invoice].index_id|htmlsafe}
         </td>
         <td>
             &nbsp;
