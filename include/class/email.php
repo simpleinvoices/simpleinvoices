@@ -34,7 +34,7 @@ class email
 		$transport = new Zend_Mail_Transport_Smtp($config->email->host, $authentication);
 
 		// Create e-mail message
-		$mail = new Zend_Mail();
+		$mail = new Zend_Mail('utf-8');
 		$mail->setType(Zend_Mime::MULTIPART_MIXED);
 		$mail->setBodyText($this->notes);
 		$mail->setBodyHTML($this->notes);
