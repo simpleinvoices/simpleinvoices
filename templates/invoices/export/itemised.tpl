@@ -10,14 +10,14 @@
 	{foreach from=$invoiceItems item=invoiceItem}
 			<tr>
 				<td>{$invoiceItem.quantity|siLocal_number_trim}</td>
-				<td colspan="3">{$invoiceItem.product.description}</td>
-				<td>{$preference.pref_currency_sign}{$invoiceItem.unit_price|siLocal_number}</td>
-				<td align="right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|siLocal_number}</td>
+				<td colspan="3">{$invoiceItem.product.description|htmlsafe}</td>
+				<td>{$preference.pref_currency_sign|htmlsafe}{$invoiceItem.unit_price|siLocal_number}</td>
+				<td align="right">{$preference.pref_currency_sign|htmlsafe}{$invoiceItem.gross_total|siLocal_number}</td>
 			</tr>
 			{if $invoiceItem.description != null}
 				<tr >
 					<td ></td>
-					<td colspan="5">{$LANG.description}: {$invoiceItem.description}</td>
+					<td colspan="5">{$LANG.description}: {$invoiceItem.description|htmlsafe}</td>
 				</tr>
 			{/if}
 			
