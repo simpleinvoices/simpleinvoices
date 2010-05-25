@@ -13,19 +13,14 @@
 define("BROWSE","browse");
 
 
-
-//TODO
-//validate $module/action/view (only numbers,letters,_-)
-//		preg_match("/^[a-z|A-Z|_]+\/[a-z|A-Z|_]+/",$path,$res);
-
 /*
 * The include configs and requirements stuff section - start
 */
 require_once("./include/init.php");
 
-$module = isset($_GET['module'])?filenameEscape($_GET['module']):null;
-$view   = isset($_GET['view'])  ?filenameEscape($_GET['view'])  :null;
-$action = isset($_GET['case'])  ?filenameEscape($_GET['case'])  :null;
+$module = isset($_GET['module']) ? filenameEscape($_GET['module']) : null;
+$view   = isset($_GET['view'])  ? filenameEscape($_GET['view'])    : null;
+$action = isset($_GET['case'])  ? filenameEscape($_GET['case'])    : null;
 
 foreach($config->extension as $extension)
 {
