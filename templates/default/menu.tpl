@@ -13,7 +13,7 @@
 	</div>
 *}
 	<div class="txt_right">
-		{$LANG.hello} {$smarty.session.Zend_Auth.email} | <a href="http://www.simpleinvoices.org/help" target="blank">{$LANG.help}</a>
+		{$LANG.hello} {$smarty.session.Zend_Auth.email|htmlsafe} | <a href="http://www.simpleinvoices.org/help" target="blank">{$LANG.help}</a>
 		{if $config->authentication->enabled == 1}
 			|
 			{if $smarty.session.Zend_Auth.id == null}
