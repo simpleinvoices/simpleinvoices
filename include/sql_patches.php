@@ -1296,9 +1296,9 @@ ADD `language` VARCHAR( 255 ) NULL ;";
     }
     $patch['213']['date'] = "20090902";
     
- #           unset($defaults);
- #           unset($max_invoice);
-#die();
+            unset($defaults);
+            unset($max_invoice);
+
             $patch['214']['name'] = "Add sub_node_2 to si_index table";
             $patch['214']['patch'] = "ALTER TABLE  `".TB_PREFIX."index` ADD  `sub_node_2` VARCHAR( 255 ) NULL AFTER  `sub_node`";
             $patch['214']['date'] = "20090912";    
@@ -1480,6 +1480,9 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['251']['patch'] = "ALTER TABLE `".TB_PREFIX."payment` ADD INDEX(`domain_id`);";
     $patch['251']['date'] = "20100419";    
 
+    $patch['252']['name'] = "Language - reset to en_GB - due to folder renaming";
+    $patch['252']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value ='en_GB' where name='language';";
+    $patch['252']['date'] = "20100419";    
 /*
 ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );
 

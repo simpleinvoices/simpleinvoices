@@ -107,7 +107,7 @@ print "\n";
 
 
 // The main language. Needed to compare the % done of the other languages.
-$en_lang = process_lang_file('en-gb');
+$en_lang = process_lang_file('en_GB');
 //echo "debug: en-gb, $en_lang[0], $en_lang[1]\n";
 
 // Lets process the language folders.

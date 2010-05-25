@@ -22,7 +22,7 @@ if(in_array(TB_PREFIX.'system_defaults',$tables))
 {
 	$language = getDefaultLanguage();
 } else {
- 	$language = "en-gb";
+ 	$language = "en_GB";
 }  
 
 function getLanguageArray() {
@@ -35,7 +35,7 @@ function getLanguageArray() {
 	//$language = getDefaultLanguage();
 
 	//include english as default - so if the selected lang doesnt have the required lang then it still loads
-	include($langPath."en-gb".$langFile);
+	include($langPath."en_GB".$langFile);
 
 	include($langPath.$language.$langFile);
 
