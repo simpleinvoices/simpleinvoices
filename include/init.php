@@ -154,6 +154,9 @@ $smarty->register_modifier("siLocal_number_clean", array("siLocal", "number_clea
 $smarty->register_modifier("siLocal_number_trim", array("siLocal", "number_trim"));
 $smarty->register_modifier("siLocal_number_formatted", array("siLocal", "number_formatted"));
 $smarty->register_modifier("siLocal_date", array("siLocal", "date"));
+$smarty->register_modifier('htmlsafe', 'htmlsafe');
+$smarty->register_modifier('urlsafe', 'urlsafe');
+$smarty->register_modifier('urlencode', 'urlencode');
 $install_tables_exists = checkTableExists(TB_PREFIX."biller");
 if ($install_tables_exists == true)
 {
