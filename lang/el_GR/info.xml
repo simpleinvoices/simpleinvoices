@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <langfile version="1.0.0" type="language">
 	<name>Greek</name>
-	<shortname>gr</shortname>
-	<englishname>GR</englishname>
+	<shortname>el_GR</shortname>
+	<englishname>Greek</englishname>
 	<version>1.0.0</version>
 	<creationDate>2008-04-20</creationDate>
 	<author>Panos Milis</author>
