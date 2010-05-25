@@ -1,4 +1,4 @@
-IndexIgnore */*
+IndexIgnore *
 
 <FilesMatch "\.(htaccess|htpasswd|ini|phps|fla|psd|log|sh)$"> 
 	Order Allow,Deny 
