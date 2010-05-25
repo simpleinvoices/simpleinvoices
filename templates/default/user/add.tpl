@@ -27,7 +27,7 @@
 		<img src="./images/common/required-small.png" alt="" />
 		</a>	
 		</td>
-		<td><input type="text" name="email" value="{$smarty.post.email}" size="35" id="email" autocomplete="off" class="validate[required]"  /></td>
+		<td><input type="text" name="email" value="{$smarty.post.email|htmlsafe}" size="35" id="email" autocomplete="off" class="validate[required]"  /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.role} 
@@ -43,14 +43,14 @@
 		<td>
 				<select name="role">
 					{foreach from=$roles item=role}
-						<option  value="{$role.id}">{$role.name}</option>
+						<option  value="{$role.id|htmlsafe}">{$role.name|htmlsafe}</option>
 					{/foreach}
 				</select>
 		</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.password}</td>
-		<td><input type="password" name="password_field" value="{$smarty.post.password_field}" size="25" /></td>
+		<td><input type="password" name="password_field" value="{$smarty.post.password_field|htmlsafe}" size="25" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
