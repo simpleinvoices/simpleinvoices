@@ -1,4 +1,4 @@
-<form name="frmpost" action="index.php?module=products&view=save&id={$smarty.get.id}" method="post" id="frmpost" onsubmit="return checkForm(this);">
+<form name="frmpost" action="index.php?module=products&view=save&id={$smarty.get.id|urlencode}" method="post" id="frmpost" onsubmit="return checkForm(this);">
 
 
 {if $smarty.get.action== 'view' }
@@ -6,7 +6,7 @@
 	<table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.product_description}</td>
-		<td>{$product.description}</td>
+		<td>{$product.description|htmlsafe}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product_unit_price}</td>
@@ -27,32 +27,32 @@
 	<tr>
 		<td class="details_screen">{$LANG.default_tax}</td>
 		<td>
-			{$tax_selected.tax_description} {$tax_selected.type}
+			{$tax_selected.tax_description|htmlsafe} {$tax_selected.type|htmlsafe}
 		</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf1} 
+		<td class="details_screen">{$customFieldLabel.product_cf1|htmlsafe} 
 		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
-		<td>{$product.custom_field1}</td>
+		<td>{$product.custom_field1|htmlsafe}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf2} 
+		<td class="details_screen">{$customFieldLabel.product_cf2|htmlsafe} 
 		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
-		<td>{$product.custom_field2}</td>
+		<td>{$product.custom_field2|htmlsafe}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf3} 
+		<td class="details_screen">{$customFieldLabel.product_cf3|htmlsafe} 
 		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
-		<td>{$product.custom_field3}</td>
+		<td>{$product.custom_field3|htmlsafe}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf4} 
+		<td class="details_screen">{$customFieldLabel.product_cf4|htmlsafe} 
 		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
-		<td>{$product.custom_field4}</td>
+		<td>{$product.custom_field4|htmlsafe}</td>
 	</tr>
 		{*
 			{showCustomFields categorieId="3" itemId=$smarty.get.id } 
@@ -62,14 +62,14 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product_enabled}</td>
-		<td>{$product.wording_for_enabled}</td>
+		<td>{$product.wording_for_enabled|htmlsafe}</td>
 	</tr>
 </table>
 	<br />
 	<table class="buttons" align="center">
 		<tr>
 			<td>
-				<a href="./index.php?module=products&view=details&id={$product.id}&action=edit" class="positive">
+				<a href="./index.php?module=products&view=details&id={$product.id|htmlsafe}&action=edit" class="positive">
 					<img src="./images/famfam/add.png" alt=""/>
 					{$LANG.edit}
 				</a>
@@ -86,7 +86,7 @@
 	<table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.product_description}</td>
-		<td><input type="text" name="description" size="50" value="{$product.description}" id="description"  class="validate[required]" /></td>
+		<td><input type="text" name="description" size="50" value="{$product.description|htmlsafe}" id="description"  class="validate[required]" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product_unit_price}</td>
@@ -107,7 +107,7 @@
         </tr>
         <tr>
             <td class="details_screen">{$LANG.reorder_level}</td>
-            <td><input type="text" class="edit" name="reorder_level" value="{$product.reorder_level}"  size="25" /></td>
+            <td><input type="text" class="edit" name="reorder_level" value="{$product.reorder_level|htmlsafe}"  size="25" /></td>
         </tr>
     {/if}
 	<tr>
@@ -115,34 +115,34 @@
 		<td>
 		<select name="default_tax_id">
 			{foreach from=$taxes item=tax}
-				<option value="{$tax.tax_id}" {if $tax.tax_id == $product.default_tax_id}selected{/if}>{$tax.tax_description}</option>
+				<option value="{$tax.tax_id|htmlsafe}" {if $tax.tax_id == $product.default_tax_id}selected{/if}>{$tax.tax_description|htmlsafe}</option>
 			{/foreach}
 		</select>
 		</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf1} 
+		<td class="details_screen">{$customFieldLabel.product_cf1|htmlsafe} 
 		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
-		<td><input type="text" name="custom_field1" size="50" value="{$product.custom_field1}" /></td>
+		<td><input type="text" name="custom_field1" size="50" value="{$product.custom_field1|htmlsafe}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf2} 
+		<td class="details_screen">{$customFieldLabel.product_cf2|htmlsafe} 
 		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
-		<td><input type="text" name="custom_field2" size="50" value="{$product.custom_field2}" /></td>
+		<td><input type="text" name="custom_field2" size="50" value="{$product.custom_field2|htmlsafe}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf3} 
+		<td class="details_screen">{$customFieldLabel.product_cf3|htmlsafe} 
 		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
-		<td><input type="text" name="custom_field3" size="50" value="{$product.custom_field3}" /></td>
+		<td><input type="text" name="custom_field3" size="50" value="{$product.custom_field3|htmlsafe}" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf4} 
+		<td class="details_screen">{$customFieldLabel.product_cf4|htmlsafe} 
 		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
-		<td><input type="text" name="custom_field4" size="50" value="{$product.custom_field4}" /></td>
+		<td><input type="text" name="custom_field4" size="50" value="{$product.custom_field4|htmlsafe}" /></td>
 	</tr>
 	{*	{showCustomFields categorieId="3" itemId=$smarty.get.id } *}
 	<tr>

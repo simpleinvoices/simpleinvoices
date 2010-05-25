@@ -18,11 +18,11 @@
 		<td class="details_screen">{$LANG.description} 
 		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field" title="{$LANG.Required_Field}"><img src="./images/common/required-small.png" alt="" /></a>
 		</td>
-		<td><input type="text" name="description" value="{$smarty.post.description}" size="50" id="description"  class="validate[required]" /></td>
+		<td><input type="text" name="description" value="{$smarty.post.description|htmlsafe}" size="50" id="description"  class="validate[required]" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.unit_price}</td>
-		<td><input type="text" class="edit" name="unit_price" value="{$smarty.post.unit_price}"  size="25" /></td>
+		<td><input type="text" class="edit" name="unit_price" value="{$smarty.post.unit_price|htmlsafe}"  size="25" /></td>
 	</tr>
     {if $defaults.inventory == '1'}
         <tr>
@@ -35,11 +35,11 @@
                 </a>
 
             </td>
-            <td><input type="text" class="edit" name="cost" value="{$smarty.post.cost}"  size="25" /></td>
+            <td><input type="text" class="edit" name="cost" value="{$smarty.post.cost|htmlsafe}"  size="25" /></td>
         </tr>
         <tr>
             <td class="details_screen">{$LANG.reorder_level}</td>
-            <td><input type="text" class="edit" name="reorder_level" value="{$smarty.post.reorder_level}"  size="25" /></td>
+            <td><input type="text" class="edit" name="reorder_level" value="{$smarty.post.reorder_level|htmlsafe}"  size="25" /></td>
         </tr>
     {/if}
 	<tr>
@@ -48,34 +48,34 @@
 		<select name="default_tax_id">
 		    <option value=''></option>
 			{foreach from=$taxes item=tax}
-				<option value="{$tax.tax_id}">{$tax.tax_description}</option>
+				<option value="{$tax.tax_id|htmlsafe}">{$tax.tax_description|htmlsafe}</option>
 			{/foreach}
 		</select>
 		</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf1} 
+		<td class="details_screen">{$customFieldLabel.product_cf1|htmlsafe} 
 		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
-		<td><input type="text" class="edit" name="custom_field1" value="{$smarty.post.custom_field1}"  size="50" /></td>
+		<td><input type="text" class="edit" name="custom_field1" value="{$smarty.post.custom_field1|htmlsafe}"  size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf2} 
+		<td class="details_screen">{$customFieldLabel.product_cf2|htmlsafe} 
 		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
-		<td><input type="text" class="edit" name="custom_field2" value="{$smarty.post.custom_field2}" size="50" /></td>
+		<td><input type="text" class="edit" name="custom_field2" value="{$smarty.post.custom_field2|htmlsafe}" size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf3} 
+		<td class="details_screen">{$customFieldLabel.product_cf3|htmlsafe} 
 		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
-		<td><input type="text" class="edit" name="custom_field3" value="{$smarty.post.custom_field3}" size="50" /></td>
+		<td><input type="text" class="edit" name="custom_field3" value="{$smarty.post.custom_field3|htmlsafe}" size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf4} 
+		<td class="details_screen">{$customFieldLabel.product_cf4|htmlsafe} 
 		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
 		</td>
-		<td><input type="text" class="edit" name="custom_field4" value="{$smarty.post.custom_field4}" size="50" /></td>
+		<td><input type="text" class="edit" name="custom_field4" value="{$smarty.post.custom_field4|htmlsafe}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
