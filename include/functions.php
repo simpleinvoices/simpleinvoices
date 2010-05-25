@@ -544,12 +544,12 @@ function filenameEscape($str)
 
 /* Escapes HTML stuff */
 function htmlsafe($str) {
-    if (get_magic_quotes_gpc())
-    {
-        return stripslashes(htmlentities($str, ENT_QUOTES, 'UTF-8'));
-    } else {
+#    if (get_magic_quotes_gpc())
+#    {
+#        return stripslashes(htmlentities($str, ENT_QUOTES, 'UTF-8'));
+#    } else {
         return htmlentities($str, ENT_QUOTES, 'UTF-8');
-    }
+#    }
 }
 
 /* Makes a string to be put inside a href="" safe */
