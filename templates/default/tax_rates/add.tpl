@@ -24,7 +24,7 @@
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.description}</td>
-		<td><input type="text"  class="validate[required]" name="tax_description" value="{$smarty.post.tax_description|escape:html}" size="35" /></td>
+		<td><input type="text"  class="validate[required]" name="tax_description" value="{$smarty.post.tax_description|htmlsafe}" size="35" /></td>
 		<td></td>
 	</tr>
 	<tr>
@@ -39,7 +39,7 @@
 		</a>
 		</td>
 		<td>
-			<input type="text" name="tax_percentage" value="{$smarty.post.tax_percentage|escape:html}"  size="25" />
+			<input type="text" name="tax_percentage" value="{$smarty.post.tax_percentage|htmlsafe}"  size="25" />
 			{html_options name=type options=$types selected=$tax.type}
 		</td>
 		<td>{$LANG.ie_10_for_10}</td>
@@ -47,7 +47,7 @@
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
 		<td>
-			<select name="tax_enabled" value="{$smarty.post.tax_enabled|escape:html}">
+			<select name="tax_enabled" value="{$smarty.post.tax_enabled|htmlsafe}">
 			<option value="1" selected>{$LANG.enabled}</option>
 			<option value="0">{$LANG.disabled}</option>
 			</select>
