@@ -2474,7 +2474,9 @@ function getURL()
 
 	$port = "";
 	$dir = dirname($_SERVER['PHP_SELF']);
-
+	//remove incorrenct slashes for WinXP etc.
+ $dir = str_replace('\\','',$dir);
+ 
 	//set the port of http(s) section
 	if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on') {
 		$_SERVER['FULL_URL'] = "https://";
