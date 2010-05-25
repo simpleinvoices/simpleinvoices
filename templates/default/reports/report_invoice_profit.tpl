@@ -3,7 +3,7 @@
 <table align="center">
     <tr>
         <td wrap="nowrap">Start date (YYYY-MM-DD)
-                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date1" value='{$start_date}' />   
+                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date1" value='{$start_date|htmlsafe}' />   
          </td>
         <td>
             &nbsp;
@@ -13,7 +13,7 @@
             &nbsp;
         </td>
         <td wrap="nowrap" >End date (YYYY-MM-DD)
-                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="end_date" id="date1" value='{$end_date}' />   
+                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="end_date" id="date1" value='{$end_date|htmlsafe}' />   
             </td>
     </tr>
 </table>
@@ -31,7 +31,7 @@
 </table>
 </form>
 
-<div id="top"><h3>Profit per Invoice based on average product cost summary for the period {$start_date} to {$end_date}</h3></div>
+<div id="top"><h3>Profit per Invoice based on average product cost summary for the period {$start_date|htmlsafe} to {$end_date|htmlsafe}</h3></div>
 
 <table align="center">
     <tr>
@@ -82,23 +82,23 @@
         <tr><td><br /></td></tr>
     {/if}
     <tr>
-        <td class="details_screen">{$index}
-            {$invoices[invoice].preference}
-            {$invoices[invoice].index_id}
+        <td class="details_screen">{$index|htmlsafe}
+            {$invoices[invoice].preference|htmlsafe}
+            {$invoices[invoice].index_id|htmlsafe}
         </td>
         <td>
             &nbsp;
             &nbsp;
         </td>
         <td class="details_screen">
-            {$invoices[invoice].biller}
+            {$invoices[invoice].biller|htmlsafe}
         </td>
         <td>
             &nbsp;
             &nbsp;
         </td>
         <td class="details_screen">
-            {$invoices[invoice].customer}
+            {$invoices[invoice].customer|htmlsafe}
         </td>
         <td>
             &nbsp;
