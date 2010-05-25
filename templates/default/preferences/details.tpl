@@ -274,7 +274,7 @@
             {else}
                 <select name="index_group">
                 {foreach from=$preferences item=p}
-                    <option {if $p.pref_id == $preference.index_group} selected {/if} value="{$p.pref_id}">{$p.pref_description}</option>
+                    <option {if $p.pref_id == $preference.index_group} selected {/if} value="{$p.pref_id|htmlsafe}">{$p.pref_description|htmlsafe}</option>
                 {/foreach}
                 </select>
             {/if}
@@ -288,8 +288,8 @@
 			</td>
 			<td>
 				<select name="pref_enabled">
-				<option value="{$preference.pref_enabled}" selected
-				style="font-weight: bold;">{$preference.enabled}</option>
+				<option value="{$preference.pref_enabled|htmlsafe}" selected
+				style="font-weight: bold;">{$preference.enabled|htmlsafe}</option>
 				<option value="1">{$LANG.enabled}</option>
 				<option value="0">{$LANG.disabled}</option>
 				</select>
