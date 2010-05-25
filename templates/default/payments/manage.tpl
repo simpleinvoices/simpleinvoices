@@ -34,7 +34,7 @@
         <tr>
             </td>
             <td>
-                <a href="./index.php?module=payments&amp;view=process&amp;id={$smarty.get.id}&amp;op=pay_selected_invoice" class="positive">
+                <a href="./index.php?module=payments&amp;view=process&amp;id={$smarty.get.id|urlencode}&amp;op=pay_selected_invoice" class="positive">
                     <img src="./images/famfam/money.png" alt=""/>
                     {$LANG.payments_filtered_invoice}
                 </a>
