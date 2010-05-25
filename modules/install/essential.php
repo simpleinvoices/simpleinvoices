@@ -2,7 +2,7 @@
 
 $menu = false;
 
-if ( (checkTableExists("si_customers") == true) AND ($install_data_exists == false) )
+if ( (checkTableExists(TB_PREFIX."customers") == true) AND ($install_data_exists == false) )
 {
 //	echo "ESSENTIAL";
 	//JSON import

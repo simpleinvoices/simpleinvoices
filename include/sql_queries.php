@@ -1088,6 +1088,10 @@ function getSystemDefaults() {
     $db = new db();
 
     #get sql patch level - if less than 198 do sql with no exntesion table
+    if ((checkTableExists(TB_PREFIX."system_defaults") == false))
+    {
+        return null;
+    }
     if (getNumberOfDoneSQLPatches() < "198")
     {
 
@@ -1099,8 +1103,9 @@ function getSystemDefaults() {
         
         $sth = $db->query($sql_default) or die(htmlspecialchars(end($dbh->errorInfo())));	
 
-    } else {
-
+    }
+    if (getNumberOfDoneSQLPatches() >= "198")
+    {
         $sql_default  = "SELECT 
                                 def.name,
                                 def.value
