@@ -1,6 +1,6 @@
 <form name="frmpost" action="index.php?module=system_defaults&amp;view=save" method="post" onsubmit="return frmpost_Validator(this)">
 
-<h3>{$LANG.edit} {$description}</h3>
+<h3>{$LANG.edit} {$description|htmlsafe}</h3>
 
 <table align="center">
 
@@ -8,7 +8,7 @@
                 <td><br /></td>
         </tr>
         <tr>
-        <td class="details_screen">{$description}</td><td>{$value}</td>
+        <td class="details_screen">{$description|htmlsafe}</td><td>{$value|htmlsafe}</td>
         </tr>
         <tr>
                 <td><br /></td>
@@ -25,7 +25,7 @@
                 <img class="button_img" src="./images/common/tick.png" alt="" /> 
                 {$LANG.save}
             </button>
-			<input type="hidden" name="name" value="{$default}">
+			<input type="hidden" name="name" value="{$default|htmlsafe}">
             <input type="hidden" name="op" value="update_system_defaults" />
         
             <a href="./index.php?module=system_defaults&view=manage" class="negative">
