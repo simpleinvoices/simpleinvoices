@@ -1,18 +1,4 @@
 <?php
-/**
-* Function: print_if_not_null
-* 
-* Used in the print preview to determine if a row/field gets printed, basically if the field is null dont print it else do
-*
-* Arguments:
-* label		- The name of the field, ie. Custom Field 1, Email, etc..
-* field		- The actual value from the db ie, test@test.com for email etc...
-* class1	- the css class of the first td
-* class2	- the css class of the second td
-* colspan	- the colspan of the last td
-**/
-//function print_if_not_null($label,$field,$class1,$class2,$colspan) {
-	
 function smarty_function_online_payment_link($params, &$smarty) {
 	global $LANG;
 	$domain_id = domain_id::get($params['domain_id']);
