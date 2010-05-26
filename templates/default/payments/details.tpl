@@ -25,7 +25,7 @@
 		<td class='details_screen'>{$LANG.online_payment_id}</td><td>{$payment.online_payment_id|htmlsafe}</td>
 	</tr>
         <tr>
-                <td class='details_screen'>{$LANG.notes}</td><td>{$payment.ac_notes}
+                <td class='details_screen'>{$LANG.notes}</td><td>{$payment.ac_notes|outhtml}
         </tr>
 </table>
 

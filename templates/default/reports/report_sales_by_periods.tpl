@@ -10,7 +10,7 @@
    <tr>
    <td></td><td>Month:<br />Sales:<br />Payments:</td>
      {foreach key=key item=item_sales from=$total_sales.$year}
-	      <td>{$key}
+	      <td>{$key|htmlsafe}
 		  <br />{if $item_sales > 0}{$item_sales|siLocal_number}{else}{$item_sales|htmlsafe}{/if}
 		  <br />{if $total_payments.$year.$key > 0}{$total_payments.$year.$key|siLocal_number}{else}{$total_payments.$year.$key|htmlsafe}{/if}</td>
      {/foreach}

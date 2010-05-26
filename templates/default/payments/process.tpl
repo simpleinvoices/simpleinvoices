@@ -5,32 +5,32 @@
 {if $smarty.get.op === "pay_selected_invoice"}
 
 <tr>
-	<td class="details_screen">{$invoice.preference}</td>
-	<td><input type="hidden" name="invoice_id" value="{$invoice.id|escape:html}" />{$invoice.index_id|escape:html}</td>
+	<td class="details_screen">{$invoice.preference|htmlsafe}</td>
+	<td><input type="hidden" name="invoice_id" value="{$invoice.id|htmlsafe}" />{$invoice.index_id|htmlsafe}</td>
 	<td class="details_screen">{$LANG.total}</td>
 	<td>{$invoice.total|number_format:2}</td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.biller}</td>
-	<td>{$biller.name|escape:html}</td>
+	<td>{$biller.name|htmlsafe}</td>
 	<td class="details_screen">{$LANG.paid}</td>
 	<td>{$invoice.paid|number_format:2}</td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.customer}</td>
-	<td>{$customer.name|escape:html}</td>
+	<td>{$customer.name|htmlsafe}</td>
 	<td class="details_screen">{$LANG.owing}</td>
 	<td><u>{$invoice.owing|number_format:2}</u></td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.amount}</td>
-	<td colspan="5"><input type="text" name="ac_amount" size="25" value="{$invoice.owing|escape:html}" />
+	<td colspan="5"><input type="text" name="ac_amount" size="25" value="{$invoice.owing|htmlsafe}" />
 	<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_auto_amount" title="{$LANG.process_payment_auto_amount}"><img src="./images/common/help-small.png" alt="" /></a>
 	</td>
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.date_formatted}</td>
-	<td><input type="text" class="date-picker" name="ac_date" id="date1" value="{$today|escape:html}" /></td>
+	<td><input type="text" class="date-picker" name="ac_date" id="date1" value="{$today|htmlsafe}" /></td>
 </tr>
 
 {/if}
@@ -45,7 +45,7 @@
 <select name="invoice_id" class="validate[required]">
     <option value=''></option>
     {foreach from=$invoice_all item=invoice}
-        <option value="{$invoice.id}">{$invoice.index_name} ({$invoice.biller}, {$invoice.customer}, {$LANG.total} {$invoice.invoice_total|siLocal_number} : {$LANG.owing} {$invoice.owing|siLocal_number})</option>
+        <option value="{$invoice.id|htmlsafe}">{$invoice.index_name|htmlsafe} ({$invoice.biller|htmlsafe}, {$invoice.customer|htmlsafe}, {$LANG.total} {$invoice.invoice_total|siLocal_number} : {$LANG.owing} {$invoice.owing|siLocal_number})</option>
     {/foreach}
 </select>
 
@@ -58,7 +58,7 @@
 <tr>
 	<div class="demo-holder">
 		<td class="details_screen">{$LANG.date_formatted}</td>
-		<td><input type="text" class="date-picker" name="ac_date" id="date1" value="{$today|escape:html}" /></td>
+		<td><input type="text" class="date-picker" name="ac_date" id="date1" value="{$today|htmlsafe}" /></td>
 	</div>
 </tr>
 
@@ -76,8 +76,8 @@
 
 	<select name="ac_payment_type">
 		{foreach from=$paymentTypes item=paymentType}
-			<option value="{$paymentType.pt_id|escape:html}" {if $paymentType.pt_id == $defaults.payment_type}selected{/if}>
-				{$paymentType.pt_description|escape:html}
+			<option value="{$paymentType.pt_id|htmlsafe}" {if $paymentType.pt_id == $defaults.payment_type}selected{/if}>
+				{$paymentType.pt_description|htmlsafe}
 			</option>
 		{/foreach}
 	</select>

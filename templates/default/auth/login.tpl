@@ -8,7 +8,7 @@
 <body class="login" >
 <div class="Container">
 {if $errorMessage }
-<p align="center"><strong><font color="#990000">{$errorMessage}</font></strong><br /><br /></p>
+<p align="center"><strong><font color="#990000">{$errorMessage|outhtml}</font></strong><br /><br /></p>
 {/if}
 	<div id="Dialog">
 		<center>

@@ -211,7 +211,7 @@
         	        <td colspan="6"><b>{$LANG.description}</b></td>
 	        </tr>
 	        <tr>
-	                <td colspan="6">{$invoiceItems.0.description|unescape}</td>
+	                <td colspan="6">{$invoiceItems.0.description|outhtml}</td>
         	</tr>
 {/if}
 
@@ -353,7 +353,7 @@
 		</tr>
 			<!-- if show detail click - the full note will be displayed -->
 		<tr class="notes details_screen">
-				<td colspan="6">{$invoice.note|unescape}</td>
+				<td colspan="6">{$invoice.note|outhtml}</td>
 		</tr>
 		{/if}
 {* end itemised invoice *}

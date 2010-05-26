@@ -57,7 +57,7 @@
      </tr>
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
-		<td><textarea  name="note"  class="editor" rows="8" cols="50">{$customer.notes|unescape}</textarea></td>
+		<td><textarea  name="note"  class="editor" rows="8" cols="50">{$customer.notes|outhtml}</textarea></td>
 	</tr>
 
 </table>

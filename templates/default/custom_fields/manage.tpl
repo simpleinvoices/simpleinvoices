@@ -38,11 +38,11 @@
 	{foreach from=$cfs item=cf}
 	<tr class="index_table">
 		<td class="index_table">
-			<a title="{$LANG.view}" class="index_table" href="index.php?module=custom_fields&amp;view=details&submit={$cf.cf_id}&action=view"><img src="images/common/view.png" height="16" border="0" align="absmiddle" alt="" /></a>
-			<a title="{$LANG.edit}" class="index_table" href="index.php?module=custom_fields&amp;view=details&submit={$cf.cf_id}&action=edit"><img src="images/common/edit.png" height="16" border="0" align="absmiddle" alt="" /></a> </td>
-		<td class="index_table">{$cf.cf_id}</td>
-		<td class="index_table">{$cf.filed_name}</td>
-		<td class="index_table">{$cf.cf_custom_label}</td>
+			<a title="{$LANG.view}" class="index_table" href="index.php?module=custom_fields&amp;view=details&submit={$cf.cf_id|urlencode}&action=view"><img src="images/common/view.png" height="16" border="0" align="absmiddle" alt="" /></a>
+			<a title="{$LANG.edit}" class="index_table" href="index.php?module=custom_fields&amp;view=details&submit={$cf.cf_id|urlencode}&action=edit"><img src="images/common/edit.png" height="16" border="0" align="absmiddle" alt="" /></a> </td>
+		<td class="index_table">{$cf.cf_id|htmlsafe}</td>
+		<td class="index_table">{$cf.filed_name|htmlsafe}</td>
+		<td class="index_table">{$cf.cf_custom_label|htmlsafe}</td>
 	</tr>
 	{/foreach}
 </table>

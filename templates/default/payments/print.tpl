@@ -177,7 +177,7 @@
         {if $payment.ac_notes != "" AND $preference.include_online_payment ==""}
     <table>
         <tr>
-                <td colspan="2">{$payment.ac_notes}</td>
+                <td colspan="2">{$payment.ac_notes|outhtml}</td>
         </tr>
 </table>
         {/if}

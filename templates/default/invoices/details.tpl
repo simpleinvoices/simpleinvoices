@@ -89,7 +89,7 @@
         	        <td colspan="6" class="details_screen">{$LANG.description}</td>
 	        </tr>
 	        <tr>
-			<td colspan="6" ><textarea input type="text" class="editor" name="description0" rows="10" cols="70" wrap="nowrap">{$invoiceItems.0.description|unescape}</textarea></td>
+			<td colspan="6" ><textarea input type="text" class="editor" name="description0" rows="10" cols="70" wrap="nowrap">{$invoiceItems.0.description|outhtml}</textarea></td>
         	</tr>
 
 	 {$customFields.1|htmlsafe}
@@ -247,7 +247,7 @@
 								<td>
 								</td>
 								<td colspan="4">
-									<textarea input type="text" class="note-edit" name="description{$line|htmlsafe}" id="description{$line|htmlsafe}" rows="3" cols="3" wrap="nowrap">{$invoiceItem.description|unescape}</textarea>
+									<textarea input type="text" class="note-edit" name="description{$line|htmlsafe}" id="description{$line|htmlsafe}" rows="3" cols="3" wrap="nowrap">{$invoiceItem.description|ouhtml}</textarea>
 									
 									</td>
 						</tr>
@@ -299,7 +299,7 @@
 				<td colspan="6" class="details_screen">{$LANG.note}:</td>
 			</tr>
 			<tr>
-	             <td colspan="6" ><textarea input type="text" class="editor" name="note" rows="10" cols="70" wrap="nowrap">{$invoice.note|unescape}</textarea></td>
+	             <td colspan="6" ><textarea input type="text" class="editor" name="note" rows="10" cols="70" wrap="nowrap">{$invoice.note|outhtml}</textarea></td>
 			</tr>
 			
 {/if}

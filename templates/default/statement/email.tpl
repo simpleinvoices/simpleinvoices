@@ -73,7 +73,7 @@
 
 <table align="center">
 	<tr>
-		<td>{$message}</td>
+		<td>{$message|outhtml}</td>
 	</tr>
 </table>
 

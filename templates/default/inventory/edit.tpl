@@ -61,7 +61,7 @@
      </tr>
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
-		<td><textarea  name="note"  class="editor" rows="8" cols="50">{$inventory.note|unescape}</textarea></td>
+		<td><textarea  name="note"  class="editor" rows="8" cols="50">{$inventory.note|outhtml}</textarea></td>
 	</tr>
 
 </table>

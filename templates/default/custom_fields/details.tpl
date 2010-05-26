@@ -9,7 +9,7 @@
 *	 GPL v3 or above
 *}
 
-<form name="frmpost" action="index.php?module=custom_fields&amp;view=save&amp;id={$smarty.get.id}"
+<form name="frmpost" action="index.php?module=custom_fields&amp;view=save&amp;id={$smarty.get.id|urlencode}"
  method="POST" onsubmit="return frmpost_Validator(this);">
 
 
@@ -19,19 +19,19 @@
 	<table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.id}</td>
-		<td>{$cf.cf_id}</td>
+		<td>{$cf.cf_id|htmlsafe}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.custom_field_db_field_name}</td>
-		<td>{$cf.cf_custom_field}</td>
+		<td>{$cf.cf_custom_field|htmlsafe}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.custom_field}</td>
-		<td>{$cf.name}</td>
+		<td>{$cf.name|htmlsafe}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.custom_label}</td>
-		<td>{$cf.cf_custom_label}</td>
+		<td>{$cf.cf_custom_label|htmlsafe}</td>
 	</tr>
 	</table>
 
@@ -39,7 +39,7 @@
 <table class="buttons" align="center">
     <tr>
         <td>
-            <a href="./index.php?module=custom_fields&amp;view=details&amp;id={$cf.cf_id}&amp;action=edit" class="positive">
+            <a href="./index.php?module=custom_fields&amp;view=details&amp;id={$cf.cf_id|urlencode}&amp;action=edit" class="positive">
                 <img src="./images/common/tick.png" alt="" />
                 {$LANG.edit}
             </a>
@@ -59,19 +59,19 @@
 	<table align="center">
         <tr>
                 <td class="details_screen">{$LANG.id}</td>
-		<td>{$cf.cf_id}</td>
+		<td>{$cf.cf_id|htmlsafe}</td>
         </tr>
         <tr>
                 <td class="details_screen">{$LANG.custom_field_db_field_name}</td>
-                <td>{$cf.cf_custom_field}</td>
+                <td>{$cf.cf_custom_field|htmlsafe}</td>
         </tr>
         <tr>
                 <td class="details_screen">{$LANG.custom_field}</td>
-                <td>{$cf.name}</td>
+                <td>{$cf.name|htmlsafe}</td>
         </tr>
 	<tr>
 		<td class="details_screen">{$LANG.custom_label}</td>
-		<td><input type="text" name="cf_custom_label" size="25" value="{$cf.cf_custom_label}" /></td>
+		<td><input type="text" name="cf_custom_label" size="25" value="{$cf.cf_custom_label|htmlsafe}" /></td>
 	</tr>
 	</table>
 	<br />
