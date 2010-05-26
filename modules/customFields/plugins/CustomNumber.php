@@ -31,7 +31,7 @@ class CustomNumber extends CustomField {
 		$value = rand();
 		$name = $this->getFormName($id);
 		
-		echo "<tr><input type='hidden' name='$name' value='$value'><td>$description:</td><td>$value</td></tr>";
+		echo "<tr><input type='hidden' name='".htmlsafe($name)."' value='".htmlsafe($value)."'><td>".htmlsafe($description).":</td><td>".htmlsafe($value)."</td></tr>";
 	}
 }
 

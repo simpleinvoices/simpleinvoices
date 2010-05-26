@@ -56,7 +56,7 @@ class DropDown extends CustomField {
 			$value = $this->getList("",$name);
 		}
 		
-		echo "<tr><td>$description</td><td>".$value."</td></tr>";
+		echo "<tr><td>".htmlsafe($description)."</td><td>".htmlsafe($value)."</td></tr>";
 	}
 }
 

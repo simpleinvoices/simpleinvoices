@@ -53,7 +53,7 @@ class InvoiceNumber extends CustomField {
 				
 		}
 		
-		echo "<tr><td>$description</td><td><input name='$name' value='$value' type='hidden'>$value</td></tr>";
+		echo "<tr><td>".htmlsafe($description)."</td><td><input name='".htmlsafe($name)."' value='".htmlsafe($value)."' type='hidden'>".htmlsafe($value)."</td></tr>";
 	}
 	
 	function getLastValue() {
