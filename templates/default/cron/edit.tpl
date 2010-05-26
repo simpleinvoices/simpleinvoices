@@ -21,7 +21,7 @@
 	{/if}
 
 
-<form name="frmpost" action="index.php?module=cron&view=edit&id={$cron.id}" method="POST" id="frmpost">
+<form name="frmpost" action="index.php?module=cron&view=edit&id={$cron.id|urlencode}" method="POST" id="frmpost">
 <br />	 
 
 <table align="center">
@@ -31,8 +31,8 @@
 		<select name="invoice_id" class="validate[required]">
 		    <option value=''></option>
 			{foreach from=$invoice_all item=invoice}
-				<option value="{$invoice.id}" {if $invoice.id == $cron.invoice_id}selected{/if} >
-                    {$invoice.index_name} ({$invoice.biller}, {$invoice.customer}, {$invoice.invoice_total|siLocal_number})
+				<option value="{$invoice.id|htmlsafe}" {if $invoice.id == $cron.invoice_id}selected{/if} >
+                    {$invoice.index_nam|htmlsafee} ({$invoice.biller|htmlsafe}, {$invoice.customer|htmlsafe}, {$invoice.invoice_total|siLocal_number})
                 </option>
 			{/foreach}
 		</select>
@@ -41,19 +41,19 @@
     <tr wrap="nowrap">
             <td class="details_screen">{$LANG.start_date}</td>
             <td wrap="nowrap">
-                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date" value='{$cron.start_date}' />   
+                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date" value='{$cron.start_date|htmlsafe}' />   
             </td>
     </tr>
     <tr wrap="nowrap">
             <td class="details_screen">{$LANG.end_date}</td>
             <td wrap="nowrap">
-                <input type="text" class="date-picker" size="10" name="end_date" id="date" value='{$cron.end_date}' />   
+                <input type="text" class="date-picker" size="10" name="end_date" id="date" value='{$cron.end_date|htmlsafe}' />   
             </td>
     </tr>
 	<tr>
 		<td class="details_screen">{$LANG.recur_each}</td>
 		<td>
-		<input name="recurrence" size="10" class="validate[required]" value='{$cron.recurrence}'>
+		<input name="recurrence" size="10" class="validate[required]" value='{$cron.recurrence|htmlsafe}'>
 		</input>
              <select name="recurrence_type" class="validate[required]">
              <option value="day"  {if $cron.recurrence_type == 'day'}selected{/if}  >{$LANG.days}</option>

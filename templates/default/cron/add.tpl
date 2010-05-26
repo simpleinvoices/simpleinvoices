@@ -31,7 +31,7 @@
 		<select name="invoice_id" class="validate[required]">
 		    <option value=''></option>
 			{foreach from=$invoice_all item=invoice}
-				<option value="{$invoice.id}">{$invoice.index_name} ({$invoice.biller}, {$invoice.customer}, {$invoice.invoice_total|siLocal_number})</option>
+				<option value="{$invoice.id|htmlsafe}">{$invoice.index_name|htmlsafe} ({$invoice.biller|htmlsafe}, {$invoice.customer|htmlsafe}, {$invoice.invoice_total|siLocal_number})</option>
 			{/foreach}
 		</select>
 		</td>

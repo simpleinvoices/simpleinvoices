@@ -4,25 +4,25 @@
 	<tr>
 		<td class="details_screen">{$LANG.invoice}</td>
 		<td>
-				{$cron.index_name}
+				{$cron.index_name|htmlsafe}
 		</td>
 	</tr>
     <tr wrap="nowrap">
             <td class="details_screen">{$LANG.start_date}</td>
             <td>
-                {$cron.start_date}    
+                {$cron.start_date|htmlsafe}    
             </td>
     </tr>
     <tr wrap="nowrap">
             <td class="details_screen">{$LANG.end_date}</td>
             <td >
-                {$cron.end_date}   
+                {$cron.end_date|htmlsafe}   
             </td>
     </tr>
 	<tr>
 		<td class="details_screen">{$LANG.recur_each}</td>
 		<td>
-		{$cron.recurrence} {$cron.recurrence_type}
+		{$cron.recurrence|htmlsafe} {$cron.recurrence_type|htmlsafe}
          </td>
      </tr>
 	<tr>
@@ -46,7 +46,7 @@
 <table class="buttons" align="center">
 	<tr>
 		<td>
-				<a href="./index.php?module=cron&amp;view=edit&amp;id={$cron.id}" class="positive">
+				<a href="./index.php?module=cron&amp;view=edit&amp;id={$cron.id|urlencode}" class="positive">
 					<img src="./images/famfam/report_edit.png" alt=""/>
 					{$LANG.edit}
 				</a>
