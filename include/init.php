@@ -158,6 +158,7 @@ $smarty->register_modifier('htmlsafe', 'htmlsafe');
 $smarty->register_modifier('urlsafe', 'urlsafe');
 $smarty->register_modifier('urlencode', 'urlencode');
 $smarty->register_modifier('outhtml', 'outhtml');
+$smarty->register_modifier('htmlout', 'outhtml'); //common typo
 $install_tables_exists = checkTableExists(TB_PREFIX."biller");
 if ($install_tables_exists == true)
 {
