@@ -390,7 +390,7 @@
 		<td><br /></td>
 	</tr>
 	<tr>
-		<td colspan="6"><div style="font-size:8pt;" align="center">{$biller.footer}</div></td>
+		<td colspan="6"><div style="font-size:8pt;" align="center">{$biller.footer|outhtml}</div></td>
 	</tr>
 </table>
 
