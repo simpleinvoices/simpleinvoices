@@ -117,16 +117,16 @@ function printCustomFieldsList() {
 EOD;
 
 	while($customField = $sth->fetch()) {
-		echo <<<EOD
+		echo '
 		<tr>
-			<td>$customField[id]</td>
-			<td>$customField[name]</td>
-			<td>$customField[description]</td>
-			<td>$customField[categorieId]</td>
-			<td>$customField[pluginId]</td>
-			<td>$customField[active]</td>
+			<td>'.htmlsafe($customField[id]).'</td>
+			<td>'.htmlsafe($customField[name]).'</td>
+			<td>'.htmlsafe($customField[description]).'</td>
+			<td>'.htmlsafe($customField[categorieId]).'</td>
+			<td>'.htmlsafe($customField[pluginId]).'</td>
+			<td>'.htmlsafe($customField[active]).'</td>
 		</tr>
-EOD;
+';
 	}
 	
 	echo "</table>";
@@ -168,7 +168,7 @@ function printCategories() {
 	$out = '<select name="categorie">';
 	
 	foreach($cats as $cat) {
-		$out .= "<option value='$cat[id]' >$cat[name]</option>";
+		$out .= "<option value='".htmlsafe($cat[id])."' >".htmlsafe($cat[name])."</option>";
 	}
 	
 	$out .= "</select>";
@@ -227,7 +227,7 @@ function printPlugins() {
 	$out = '<select name="plugin">';
 	
 	foreach($plugins as $plugin) {		
-		$out .= "<option value='$plugin->id'>$plugin->name</option>";
+		$out .= "<option value='".htmlsafe($plugin->id)."'>".htmlsafe($plugin->name)."</option>";
 	}
 	
 	$out .= "</select>";
