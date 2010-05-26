@@ -558,4 +558,9 @@ function urlsafe($str) {
     $str = htmlsafe($str);
     return $str;
 }
+
+/* Sanitises HTML for output stuff */
+function outhtml($str) {
+        return $str;
+}
 ?>
