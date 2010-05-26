@@ -26,10 +26,10 @@
 <textarea input type="text" class="editor" name="description" rows="10" cols="100" wrap="nowrap"></textarea></td>
 </tr>
 
-	{$show_custom_field.1}
-	{$show_custom_field.2}
-	{$show_custom_field.3}
-	{$show_custom_field.4}
+	{$show_custom_field.1|htmlsafe}
+	{$show_custom_field.2|htmlsafe}
+	{$show_custom_field.3|htmlsafe}
+	{$show_custom_field.4|htmlsafe}
 	{*
 		{showCustomFields categorieId="4"}
 	*}
@@ -40,7 +40,7 @@
 <tr>
 	<td class="details_screen">{$LANG.gross_total}</td>
     {section name=tax_header loop=$defaults.tax_per_line_item }
-        <td class="details_screen">{$LANG.tax} {if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1}{/if} </td>
+        <td class="details_screen">{$LANG.tax} {if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1|htmlsafe}{/if} </td>
     {/section}
     <td class="details_screen">{$LANG.inv_pref}</td>
 </tr>
@@ -52,12 +52,12 @@
         {section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
         <td>				                				                
             <select 
-                id="tax_id[0][{$smarty.section.tax.index}]"
-                name="tax_id[0][{$smarty.section.tax.index}]"
+                id="tax_id[0][{$smarty.section.tax.index|htmlsafe}]"
+                name="tax_id[0][{$smarty.section.tax.index|htmlsafe}]"
             >
             <option value=""></option>
             {foreach from=$taxes item=tax}
-                <option {if $tax.tax_id == $defaults.tax AND $smarty.section.tax.index == 0} selected {/if}   value="{$tax.tax_id}">{$tax.tax_description}</option>
+                <option {if $tax.tax_id == $defaults.tax AND $smarty.section.tax.index == 0} selected {/if}   value="{$tax.tax_id|htmlsafe}">{$tax.tax_description|htmlsafe}</option>
             {/foreach}
         </select>
         </td>
@@ -70,7 +70,7 @@
 {else}
 	<select name="preference_id">
 	{foreach from=$preferences item=preference}
-		<option {if $preference.pref_id == $defaults.preference} selected {/if} value="{$preference.pref_id}">{$preference.pref_description}</option>
+		<option {if $preference.pref_id == $defaults.preference} selected {/if} value="{$preference.pref_id|htmlsafe}">{$preference.pref_description|htmlsafe}</option>
 	{/foreach}
 	</select>
 {/if}
@@ -98,7 +98,7 @@
 				<img class="button_img" src="./images/common/tick.png" alt="" /> 
 				{$LANG.save}
 			</button>
-            		<input type="hidden" name="max_items" value="{$smarty.section.line.index}" />
+            		<input type="hidden" name="max_items" value="{$smarty.section.line.index|htmlsafe}" />
 			<input type="hidden" name="type" value="1" />
 			<a href="./index.php?module=invoices&amp;view=manage" class="negative">
 				<img src="./images/common/cross.png" alt="" />

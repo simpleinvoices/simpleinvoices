@@ -42,7 +42,7 @@
                            {else}
                             <select name="biller_id">
                             {foreach from=$billers item=biller}
-                            <option {if $biller.id == $defaults.biller} selected {/if} value="{$biller.id}">{$biller.name}</option>
+                            <option {if $biller.id == $defaults.biller} selected {/if} value="{$biller.id|htmlsafe}">{$biller.name|htmlsafe}</option>
                             {/foreach}
                             </select>
                             {/if}
@@ -58,7 +58,7 @@
                         {else}
                             <select name="customer_id">
                             {foreach from=$customers item=customer}
-                                <option {if $customer.id == $defaultCustomerID} selected {/if} value="{$customer.id}">{$customer.name}</option>
+                                <option {if $customer.id == $defaultCustomerID} selected {/if} value="{$customer.id|htmlsafe}">{$customer.name|htmlsafe}</option>
                             {/foreach}
                             </select>
                         {/if}

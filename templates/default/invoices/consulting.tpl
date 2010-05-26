@@ -30,39 +30,39 @@
         {section name=line start=0 loop=$dynamic_line_items step=1}
 
 			<tr>
-				<td><input type="text" id="quantity{$smarty.section.line.index}" name="quantity{$smarty.section.line.index}" size="5" /></td>
-				</td><td><input type="text" name="description{$smarty.section.line.index}" size="50" />
+				<td><input type="text" id="quantity{$smarty.section.line.index|htmlsafe}" name="quantity{$smarty.section.line.index|htmlsafe}" size="5" /></td>
+				</td><td><input type="text" name="description{$smarty.section.line.index|htmlsafe}" size="50" />
 				                
 			{if $products == null }
 				<p><em>{$LANG.no_products}</em></p>
 			{else}
 				<select 
-					name="products{$smarty.section.line.index}"
-					onchange="invoice_product_change_price($(this).val(), {$smarty.section.line.index}, jQuery('#quantity{$smarty.section.line.index}').val() );"
+					name="products{$smarty.section.line.index|htmlsafe}"
+					onchange="invoice_product_change_price($(this).val(), {$smarty.section.line.index|htmlsafe}, jQuery('#quantity{$smarty.section.line.index|htmlsafe}').val() );"
 				>
 				
 					<option value=""></option>
 				{foreach from=$products item=product}
-					<option {if $product.id == $defaults.product} selected {/if} value="{$product.id}">{$product.description}</option>
+					<option {if $product.id == $defaults.product} selected {/if} value="{$product.id|htmlsafe}">{$product.description|htmlsafe}</option>
 				{/foreach}
 				</select>
 			{/if}
 				                				                
                 </td>
                 <td>
-					<input id="unit_price{$smarty.section.line.index}" name="unit_price{$smarty.section.line.index}" size="7" value="" />
+					<input id="unit_price{$smarty.section.line.index|htmlsafe}" name="unit_price{$smarty.section.line.index|htmlsafe}" size="7" value="" />
 				</td>	
              </tr>
                 
-                <tr class="text{$smarty.section.line.index} hide">
-      				<td colspan="3"><textarea input type="text" class="editor" name='description{$smarty.section.line.index}' rows="3" cols="80" wrap="nowrap"></textarea></td>
+                <tr class="text{$smarty.section.line.index|htmlsafe} hide">
+      				<td colspan="3"><textarea input type="text" class="editor" name='description{$smarty.section.line.index|htmlsafe}' rows="3" cols="80" wrap="nowrap"></textarea></td>
 </tr>
 
         {/section}
-	{$show_custom_field.1}
-	{$show_custom_field.2}
-	{$show_custom_field.3}
-	{$show_custom_field.4}
+	{$show_custom_field.1|htmlsafe}
+	{$show_custom_field.2|htmlsafe}
+	{$show_custom_field.3|htmlsafe}
+	{$show_custom_field.4|htmlsafe}
 	{* 
 		{showCustomFields categorieId="4"}
 	*}
@@ -84,7 +84,7 @@
 {else}
 	<select name="tax_id">
 	{foreach from=$taxes item=tax}
-		<option {if $tax.tax_id == $defaults.tax} selected {/if} value="{$tax.tax_id}">{$tax.tax_description}</option>
+		<option {if $tax.tax_id == $defaults.tax} selected {/if} value="{$tax.tax_id|htmlsafe}">{$tax.tax_description|htmlsafe}</option>
 	{/foreach}
 	</select>
 {/if}
@@ -100,7 +100,7 @@
 {else}
 	<select name="preference_id">
 	{foreach from=$preferences item=preference}
-		<option {if $preference.pref_id == $defaults.preference} selected {/if} value="{$preference.pref_id}">{$preference.pref_description}</option>
+		<option {if $preference.pref_id == $defaults.preference} selected {/if} value="{$preference.pref_id|htmlsafe}">{$preference.pref_description|htmlsafe}</option>
 	{/foreach}
 	</select>
 {/if}
@@ -128,7 +128,7 @@
 			<img class="button_img" src="./images/common/tick.png" alt="" /> 
 			{$LANG.save}
 			</button>
-			<input type="hidden" name="max_items" value="{$smarty.section.line.index}" />
+			<input type="hidden" name="max_items" value="{$smarty.section.line.index|htmlsafe}" />
 			<input type="hidden" name="type" value="3" />
 			<a href="./index.php?module=invoices&amp;view=manage" class="negative">
 				<img src="./images/common/cross.png" alt="" />

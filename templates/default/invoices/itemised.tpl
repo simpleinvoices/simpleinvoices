@@ -117,25 +117,25 @@
 				<td class="details_screen">{$LANG.quantity}</td>
 				<td class="details_screen">{$LANG.item}</td>
 				{section name=tax_header loop=$defaults.tax_per_line_item }
-					<td class="details_screen">{$LANG.tax} {if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1}{/if} </td>
+					<td class="details_screen">{$LANG.tax} {if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1|htmlsafe}{/if} </td>
 				{/section}
 				<td class="details_screen">{$LANG.unit_price}</td>
 			</tr>
 			</tbody>
 	
 	        {section name=line start=0 loop=$dynamic_line_items step=1}
-				<tbody class="line_item" id="row{$smarty.section.line.index}">
+				<tbody class="line_item" id="row{$smarty.section.line.index|htmlsafe}">
 					<tr>
 						<td>
 							{if $smarty.section.line.index == "0"}
 							<a 
 								href="#" 
 								class="trash_link"
-								id="trash_link{$smarty.section.line.index}"
-								title="{$LANG.cannot_delete_first_row}"
+								id="trash_link{$smarty.section.line.index|htmlsafe}"
+								title="{$LANG.cannot_delete_first_row|htmlsafe}"
 							>
 								<img 
-									id="trash_image{$smarty.section.line.index}"
+									id="trash_image{$smarty.section.line.index|htmlsafe}"
 									src="./images/common/blank.gif"
 									height="16px"
 									width="16px"
@@ -146,12 +146,12 @@
 							{/if}
 							{if $smarty.section.line.index != 0}
 							{* can't delete line 0 *}
-							<!-- onclick="delete_row({$smarty.section.line.index});" --> 
+							<!-- onclick="delete_row({$smarty.section.line.index|htmlsafe});" --> 
 							<a 
-								id="trash_link{$smarty.section.line.index}"
+								id="trash_link{$smarty.section.line.index|htmlsafe}"
 								class="trash_link"
 								title="{$LANG.delete_row}" 
-								rel="{$smarty.section.line.index}"
+								rel="{$smarty.section.line.index|htmlsafe}"
 								href="#" 
 								style="display: inline;"
 							>
@@ -160,21 +160,21 @@
 							{/if}
 						</td>
 						<td>
-							<input type="text" {if $smarty.section.line.index == "0"} class="validate[required]" {/if} name="quantity{$smarty.section.line.index}" id="quantity{$smarty.section.line.index}" size="5" /></td>
+							<input type="text" {if $smarty.section.line.index == "0"} class="validate[required]" {/if} name="quantity{$smarty.section.line.index|htmlsafe}" id="quantity{$smarty.section.line.index|htmlsafe}" size="5" /></td>
 						<td>
 										
 					{if $products == null }
 						<p><em>{$LANG.no_products}</em></p>
 					{else}
 						<select 
-							id="products{$smarty.section.line.index}"
-							name="products{$smarty.section.line.index}"
-							rel="{$smarty.section.line.index}"
+							id="products{$smarty.section.line.index|htmlsafe}"
+							name="products{$smarty.section.line.index|htmlsafe}"
+							rel="{$smarty.section.line.index|htmlsafe}"
 							class="{if $smarty.section.line.index == "0"}validate[required]{/if} product_change"						
                         >
 							<option value=""></option>
 						{foreach from=$products item=product}
-							<option {if $product.id == $defaults.product} selected {/if} value="{$product.id}">{$product.description}</option>
+							<option {if $product.id == $defaults.product} selected {/if} value="{$product.id|htmlsafe}">{$product.description|htmlsafe}</option>
 						{/foreach}
 						</select>
 					{/if}
@@ -182,20 +182,20 @@
 						{section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
 						<td>				                				                
 							<select 
-								id="tax_id[{$smarty.section.line.index}][{$smarty.section.tax.index}]"
-								name="tax_id[{$smarty.section.line.index}][{$smarty.section.tax.index}]"
+								id="tax_id[{$smarty.section.line.index|htmlsafe}][{$smarty.section.tax.index|htmlsafe}]"
+								name="tax_id[{$smarty.section.line.index|htmlsafe}][{$smarty.section.tax.index|htmlsafe}]"
 							>
 							<option value=""></option>
 							{foreach from=$taxes item=tax}
-								<option value="{$tax.tax_id}">{$tax.tax_description}</option>
+								<option value="{$tax.tax_id|htmlsafe}">{$tax.tax_description|htmlsafe}</option>
 							{/foreach}
 						</select>
 						</td>
 						{/section}
 						<td>
 							<input 
-								id="unit_price{$smarty.section.line.index}" 
-								name="unit_price{$smarty.section.line.index}" 
+								id="unit_price{$smarty.section.line.index|htmlsafe}" 
+								name="unit_price{$smarty.section.line.index|htmlsafe}" 
 								size="7"
 								value=""
                                 {if $smarty.section.line.index == "0"} class="validate[required]" {/if}
@@ -207,7 +207,7 @@
 							<td>
 							</td>
 							<td colspan="4">
-								<textarea input type="text" class="note" name="description{$smarty.section.line.index}" id="description{$smarty.section.line.index}" rows="3" cols=3 WRAP=nowrap></textarea>
+								<textarea input type="text" class="note" name="description{$smarty.section.line.index|htmlsafe}" id="description{$smarty.section.line.index|htmlsafe}" rows="3" cols=3 WRAP=nowrap></textarea>
 								
 								</td>
 					</tr>
@@ -244,10 +244,10 @@
 		 </table>
 		</td>
 	</tr>
-			{$show_custom_field.1}
-			{$show_custom_field.2}
-			{$show_custom_field.3}
-			{$show_custom_field.4}
+			{$show_custom_field.1|htmlsafe}
+			{$show_custom_field.2|htmlsafe}
+			{$show_custom_field.3|htmlsafe}
+			{$show_custom_field.4|htmlsafe}
 			{*
 				{showCustomFields categorieId="4" itemId=""}
 			*}
@@ -271,7 +271,7 @@
 	{else}
 		<select name="preference_id">
 		{foreach from=$preferences item=preference}
-			<option {if $preference.pref_id == $defaults.preference} selected {/if} value="{$preference.pref_id}">{$preference.pref_description}</option>
+			<option {if $preference.pref_id == $defaults.preference} selected {/if} value="{$preference.pref_id|htmlsafe}">{$preference.pref_description|htmlsafe}</option>
 		{/foreach}
 		</select>
 	{/if}
@@ -299,7 +299,7 @@
             
 		</td>
 		<td>
-		<input type="hidden" id="max_items" name="max_items" value="{$smarty.section.line.index}" />
+		<input type="hidden" id="max_items" name="max_items" value="{$smarty.section.line.index|htmlsafe}" />
         	<input type="hidden" name="type" value="2" />
         	
             <a href="./index.php?module=invoices&amp;view=manage" class="negative">

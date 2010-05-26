@@ -30,8 +30,8 @@ var quick_view_tooltip = "{$LANG.quick_view_tooltip} {$invoice.preference.pref_i
 var edit_view_tooltip = "{$LANG.edit_view_tooltip} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim}";
 var print_preview_tooltip = "{$LANG.print_preview_tooltip} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim}";
 var export_tooltip = "{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim} {$LANG.export_pdf_tooltip}";
-var export_xls_tooltip = "{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim} {$LANG.export_xls_tooltip} {$spreadsheet} {$LANG.format_tooltip}"
-var export_word_tooltip = "{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim} {$LANG.export_doc_tooltip} {$word_processor} {$LANG.format_tooltip}";
+var export_xls_tooltip = "{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim} {$LANG.export_xls_tooltip} {$spreadsheet|htmlsafe} {$LANG.format_tooltip}"
+var export_word_tooltip = "{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim} {$LANG.export_doc_tooltip} {$word_processor|htmlsafe} {$LANG.format_tooltip}";
 var process_payment_tooltip = "{$LANG.process_payment} {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim}";
 var email_tooltip = "{$LANG.email}  {$invoice.preference.pref_inv_wording} {ldelim}1{rdelim}";
 
@@ -143,14 +143,14 @@ Ext.onReady(function(){
 		record.data.forumid);
 
 		var xlsLink = String.format(
-		'<!--4 XLS --><a title="'+ export_xls_tooltip +'" class="index_table" href="index.php?module=invoices&amp;view=templates/template&amp;invoice={1}&amp;action=view&amp;location=print&amp;export={$spreadsheet}"><img src="images/common/page_white_excel.png" height="16" border="0" padding="-4px" valign="bottom" alt="" /><!-- $spreadsheet --></a>',
+		'<!--4 XLS --><a title="'+ export_xls_tooltip +'" class="index_table" href="index.php?module=invoices&amp;view=templates/template&amp;invoice={1}&amp;action=view&amp;location=print&amp;export={$spreadsheet|urlencode}"><img src="images/common/page_white_excel.png" height="16" border="0" padding="-4px" valign="bottom" alt="" /><!-- $spreadsheet --></a>',
 		value,
 		record.id,
 		record.data.type_id,
 		record.data.forumid);
 
 		var docLink = String.format(
-		'<!--5 DOC --><a title="'+ export_word_tooltip +'" class="index_table" href="index.php?module=invoices&amp;view=templates/template&amp;invoice={1}&amp;action=view&amp;location=print&amp;export={$word_processor}"><img src="images/common/page_white_word.png" height="16" border="0" padding="-4px" valign="bottom" alt="" /><!-- $word_processor --></a>',
+		'<!--5 DOC --><a title="'+ export_word_tooltip +'" class="index_table" href="index.php?module=invoices&amp;view=templates/template&amp;invoice={1}&amp;action=view&amp;location=print&amp;export={$word_processor|urlencode}"><img src="images/common/page_white_word.png" height="16" border="0" padding="-4px" valign="bottom" alt="" /><!-- $word_processor --></a>',
 		value,
 		record.id,
 		record.data.type_id,

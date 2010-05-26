@@ -11,7 +11,7 @@
 */
 *}
 {if $smarty.post.submit != null}
-	<meta http-equiv="refresh" content="1;URL=index.php?module=invoices&amp;view=details&amp;id={$smarty.post.id}&amp;type={$smarty.post.type}" />
+	<meta http-equiv="refresh" content="1;URL=index.php?module=invoices&amp;view=details&amp;id={$smarty.post.id|urlencode}&amp;type={$smarty.post.type|urlencode}" />
 	<br /><br />
 	{$LANG.save_invoice_items_success};
 	<br /><br />
@@ -46,7 +46,7 @@
 					>
 						<option value=""></option>
 					{foreach from=$products item=product}
-						<option {if $product.id == $defaults.product} selected {/if} value="{$product.id}">{$product.description}</option>
+						<option {if $product.id == $defaults.product} selected {/if} value="{$product.id|htmlsafe}">{$product.description|htmlsafe}</option>
 					{/foreach}
 					</select>
 				{/if}
@@ -73,10 +73,10 @@
 	</table>
 	<hr />
 	<div style="text-align:center;">
-		<input type="submit" name="submit" value="{$LANG.add_item}" />
-		<input type="hidden" name="id" value="{$smarty.get.id}" />
-		<input type="hidden" name="type" value="{$smarty.get.type}" />
-		<input type="hidden" name="tax_id" value="{$smarty.get.tax_id}" />
+		<input type="submit" name="submit" value="{$LANG.add_item|htmlsafe}" />
+		<input type="hidden" name="id" value="{$smarty.get.id|htmlsafe}" />
+		<input type="hidden" name="type" value="{$smarty.get.type|htmlsafe}" />
+		<input type="hidden" name="tax_id" value="{$smarty.get.tax_id|htmlsafe}" />
 	</div>
 </form>
 {/if}
