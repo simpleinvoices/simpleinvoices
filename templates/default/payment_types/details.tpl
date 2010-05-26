@@ -11,7 +11,7 @@
 */
 *}
 
-<form name="frmpost" action="index.php?module=payment_types&amp;view=save&amp;id={$smarty.get.id|escape:html}" method="post" onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=payment_types&amp;view=save&amp;id={$smarty.get.id|htmlsafe}" method="post" onsubmit="return frmpost_Validator(this)">
 
 
 
@@ -21,10 +21,10 @@
 	
 	<table align="center">
 	<tr>
-		<td class="details_screen">{$LANG.description}</td><td>{$paymentType.pt_description|escape:html}</td>
+		<td class="details_screen">{$LANG.description}</td><td>{$paymentType.pt_description|htmlsafe}</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.enabled}</td><td>{$paymentType.enabled|escape:html}</td>
+		<td class="details_screen">{$LANG.enabled}</td><td>{$paymentType.enabled|htmlsafe}</td>
 	</tr>
 	</table>
 		<br />
@@ -52,7 +52,7 @@
 	<tr>
 		<td class="details_screen">{$LANG.description} <a href="index.php?module=documentation&amp;view=view&amp;page=help_required_field" rel="gb_page_center[350, 150]"><img src="./images/common/required-small.png" alt="(required)" /></a></td>
 		<td>
-			<input type="text"  class="validate[required]"  name="pt_description" value="{$paymentType.pt_description|escape:html|regex_replace:"/[\\\]/":""}" size="30" />
+			<input type="text"  class="validate[required]"  name="pt_description" value="{$paymentType.pt_description|htmlsafe|regex_replace:"/[\\\]/":""}" size="30" />
 		</td>
 	</tr>
 	<tr>
@@ -60,7 +60,7 @@
 		<td>
 		{*displayblock enabled*}
 		<select name="pt_enabled">
-			<option value="{$paymentType.pt_enabled|escape:html}" selected style="font-weight: bold">{$paymentType.enabled|escape:html}</option>
+			<option value="{$paymentType.pt_enabled|htmlsafe}" selected style="font-weight: bold">{$paymentType.enabled|htmlsafe}</option>
 			<option value="1">{$LANG.enabled}</option>
 			<option value="0">{$LANG.disabled}</option>
 		</select>
