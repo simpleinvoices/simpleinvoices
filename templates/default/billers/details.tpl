@@ -201,11 +201,11 @@ n Script: details.tpl
 		<img src="./images/common/required-small.png" alt="" />
 		</a>
 		</td>
-		<td><input type="text" name="name"  value="{$biller.name|regex_replace:"/[\\\]/":""}" size="50" id="name" class="validate[required]" /></td>
+		<td><input type="text" name="name"  value="{$biller.name|htmlsafe}" size="50" id="name" class="validate[required]" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street}</td>
-		<td><input type="text" name="street_address" value="{$biller.street_address}" size="50" /></td>
+		<td><input type="text" name="street_address" value="{$biller.street_address|htmlsafe}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.street2}
@@ -218,58 +218,58 @@ n Script: details.tpl
 		<img src="./images/common/help-small.png" alt="" />
 		</a>
 		</td>
-		<td><input type="text" name="street_address2" value="{$biller.street_address2}" size="50" /></td>
+		<td><input type="text" name="street_address2" value="{$biller.street_address2|htmlsafe}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.city}</td>
-		<td><input type="text" name="city" value="{$biller.city}" size="50" /></td>
+		<td><input type="text" name="city" value="{$biller.city|htmlsafe}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.zip}</td>
-		<td><input type="text" name="zip_code" value="{$biller.zip_code}" size="50" /></td>
+		<td><input type="text" name="zip_code" value="{$biller.zip_code|htmlsafe}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.state}</td>
-		<td><input type="text" name="state" value="{$biller.state}" size="50" /></td>
+		<td><input type="text" name="state" value="{$biller.state|htmlsafe}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.country}</td>
-		<td><input type="text" name="country" value="{$biller.country}" size="50" /></td>
+		<td><input type="text" name="country" value="{$biller.country|htmlsafe}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.mobile_phone}</td>
-		<td><input type="text" name="mobile_phone" value="{$biller.mobile_phone}" size="50" /></td>
+		<td><input type="text" name="mobile_phone" value="{$biller.mobile_phone|htmlsafe}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.phone}</td>
-		<td><input type="text" name="phone" value="{$biller.phone}" size="50" /></td>
+		<td><input type="text" name="phone" value="{$biller.phone|htmlsafe}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.fax}</td>
-		<td><input type="text" name="fax" value="{$biller.fax}" size="50" /></td>
+		<td><input type="text" name="fax" value="{$biller.fax|htmlsafe}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.email}</td>
-		<td><input type="text" name="email" value="{$biller.email}" size="50" /></td>
+		<td><input type="text" name="email" value="{$biller.email|htmlsafe}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.paypal_business_name}</td>
-		<td><input type="text" name="paypal_business_name" value="{$biller.paypal_business_name}" size="25" /></td>
+		<td><input type="text" name="paypal_business_name" value="{$biller.paypal_business_name|htmlsafe}" size="25" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.paypal_notify_url}</td>
-		<td><input type="text" name="paypal_notify_url" value="{$biller.paypal_notify_url}" size="50" /></td>
+		<td><input type="text" name="paypal_notify_url" value="{$biller.paypal_notify_url|htmlsafe}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.paypal_return_url}</td>
-		<td><input type="text" name="paypal_return_url" value="{$biller.paypal_return_url}" size="50" /></td>
+		<td><input type="text" name="paypal_return_url" value="{$biller.paypal_return_url|htmlsafe}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.eway_customer_id}</td>
-		<td><input type="text" name="eway_customer_id" value="{$biller.eway_customer_id}" size="50" /></td>
+		<td><input type="text" name="eway_customer_id" value="{$biller.eway_customer_id|htmlsafe}" size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.biller_cf1}
+		<td class="details_screen">{$customFieldLabel.biller_cf1|htmlsafe}
 		<a
 			class="cluetip"
 			href="#"
@@ -279,7 +279,7 @@ n Script: details.tpl
 		<img src="./images/common/help-small.png" alt="" />
 		</a>
 		</td>
-		<td><input type="text" name="custom_field1" value="{$biller.custom_field1}" size="50"</td>
+		<td><input type="text" name="custom_field1" value="{$biller.custom_field1|htmlsafe}" size="50"</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.biller_cf2}
@@ -295,20 +295,20 @@ n Script: details.tpl
 		<td><input type="text" name="custom_field2" value="{$biller.custom_field2}" size="50"</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.biller_cf3}
+		<td class="details_screen">{$customFieldLabel.biller_cf3|htmlsafe}
 		<a
 			class="cluetip"
 			href="#"
 			rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-			title="{$LANG.Custom_Fields}"
+			title="{$LANG.Custom_Fields|htmlsafe}"
 		> 
 		<img src="./images/common/help-small.png" alt="" />
 		</a>
 		</td>
-		<td><input type="text" name="custom_field3" value="{$biller.custom_field3}" size="50"</td>
+		<td><input type="text" name="custom_field3" value="{$biller.custom_field3|htmlsafe}" size="50"</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.biller_cf4}
+		<td class="details_screen">{$customFieldLabel.biller_cf4|htmlsafe}
 		<a
 			class="cluetip"
 			href="#"
@@ -318,7 +318,7 @@ n Script: details.tpl
 		<img src="./images/common/help-small.png" alt="" />
 		</a>
 		</td>
-		<td><input type="text" name="custom_field4" value="{$biller.custom_field4}" size="50"</td>
+		<td><input type="text" name="custom_field4" value="{$biller.custom_field4|htmlsafe}" size="50"</td>
 	</tr>
 	<tr>
 		<td class="details_screen">
@@ -338,11 +338,11 @@ n Script: details.tpl
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.invoice_footer}</td>
-		<td><textarea  name="footer" class="editor" rows="4" cols="50">{$biller.footer|unescape}</textarea></td>
+		<td><textarea  name="footer" class="editor" rows="4" cols="50">{$biller.footer|htmlsafe}</textarea></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
-		<td><textarea  name="notes"class="editor" rows="8" cols="50">{$biller.notes|unescape}</textarea></td>
+		<td><textarea  name="notes"class="editor" rows="8" cols="50">{$biller.notes|htmlsafe}</textarea></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>

@@ -257,7 +257,7 @@
 		>
 		<img src="./images/common/required-small.png" alt="" /></a>
 		</td>
-		<td><input type="text" name="name" value="{$customer.name|regex_replace:"/[\\\]/":""}" size="50" id="name" class="validate[required]" /></td>
+		<td><input type="text" name="name" value="{$customer.name|htmlsafe}" size="50" id="name" class="validate[required]" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.attention_short}
