@@ -24,14 +24,14 @@
         	<img src="images/common/gmail-loader.gif" alt="{$LANG.loading} ..." /> {$LANG.loading} ...
 </div>
 
-<form name="frmpost" action="index.php?module=inventory&view=edit&id={$inventory.id}" method="POST" id="frmpost">
+<form name="frmpost" action="index.php?module=inventory&view=edit&id={$inventory.id|urlencode}" method="POST" id="frmpost">
 <br />	 
 
 <table align="center">
     <tr wrap="nowrap">
             <td class="details_screen">{$LANG.date_upper}</td>
             <td wrap="nowrap">
-                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="date" id="date" value='{$inventory.date}' />   
+                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="date" id="date" value='{$inventory.date|htmlsafe}' />   
             </td>
     </tr>
 	<tr>
@@ -40,8 +40,8 @@
 		<select name="product_id" class="validate[required] product_inventory_change">
 		    <option value=''></option>
 			{foreach from=$product_all item=product}
-				<option value="{$product.id}" {if $product.id == $inventory.product_id}selected{/if} >
-                    {$product.description}
+				<option value="{$product.id|htmlsafe}" {if $product.id == $inventory.product_id}selected{/if} >
+                    {$product.description|htmlsafe}
                 </option>
 			{/foreach}
 		</select>

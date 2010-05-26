@@ -34,7 +34,7 @@
 		<select name="product_id" class="validate[required] product_inventory_change">
 		    <option value=''></option>
 			{foreach from=$product_all item=product}
-				<option value="{$product.id}">{$product.description}</option>
+				<option value="{$product.id|htmlsafe}">{$product.description|htmlsafe}</option>
 			{/foreach}
 		</select>
 		</td>

@@ -4,13 +4,13 @@
 	<tr>
 		<td class="details_screen">{$LANG.date_upper}</td>
 		<td>
-				{$inventory.date}
+				{$inventory.date|htmlsafe}
 		</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product}</td>
 		<td>
-				{$inventory.description}
+				{$inventory.description|htmlsafe}
 		</td>
 	</tr>
     <tr wrap="nowrap">
@@ -37,7 +37,7 @@
 <table class="buttons" align="center">
 	<tr>
 		<td>
-				<a href="./index.php?module=inventory&amp;view=edit&amp;id={$inventory.id}" class="positive">
+				<a href="./index.php?module=inventory&amp;view=edit&amp;id={$inventory.id|urlencode}" class="positive">
 					<img src="./images/famfam/report_edit.png" alt=""/>
 					{$LANG.edit}
 				</a>
