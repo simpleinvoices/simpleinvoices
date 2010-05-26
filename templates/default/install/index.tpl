@@ -48,7 +48,7 @@
     <td>Username:</td><td>{$config->database->params->username}</td>
 </tr>
 <tr>
-    <td>Password:</td><td>{$config->database->params->password}</td>
+    <td>Password:</td><td>**********</td>
 </tr>
 </table>
 <br />
