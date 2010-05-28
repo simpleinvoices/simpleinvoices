@@ -1,8 +1,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="{$css}" media="all">
-<title>{$preference.pref_inv_wording} {$LANG.number_short}: {$invoice.id}</title>
+<link rel="stylesheet" type="text/css" href="{$css|urlsafe}" media="all">
+<title>{$preference.pref_inv_wording|htmlsafe} {$LANG.number_short}: {$invoice.id|htmlsafe}</title>
 </head>
 <body>
 <br>
@@ -12,10 +12,10 @@
 
 	<table width="100%" align="center">
 		<tr>
-			<th align="middle" colspan="6"><span class="font1">{$biller.name}</span></th>
+			<th align="middle" colspan="6"><span class="font1">{$biller.name|htmlsafe}</span></th>
 		</tr>
 		<tr>
-			<th align="middle" colspan="6"><span class="font1">{$preference.pref_inv_heading}</span></th>
+			<th align="middle" colspan="6"><span class="font1">{$preference.pref_inv_heading|htmlsafe}</span></th>
 		</tr>
 		<tr>
 			<td colspan="6" class="tbl1-top">&nbsp;</td>
@@ -26,83 +26,83 @@
 	<table width="100%">
 	<tr>
 		<td>To:</td>
-		<td colspan="3">{$customer.name}</td>
+		<td colspan="3">{$customer.name|htmlsafe}</td>
 		<td colspan="2"></td>
 	</tr>
 	<tr>
 		<td>Description:</td>
 		<td colspan="3"></td>
-		<td>{$customFieldLabels.invoice_cf1}</td>
-		<td>{$invoice.custom_field1}</td>
+		<td>{$customFieldLabels.invoice_cf1|htmlsafe}</td>
+		<td>{$invoice.custom_field1|htmlsafe}</td>
 	</tr>
 	<tr>
-		<td colspan=4 valign="top" rowspan="4">{$invoice.note}</td>
+		<td colspan=4 valign="top" rowspan="4">{$invoice.note|outhtml}</td>
 		<td>Job #</td>
-		<td>{$invoice.id}</td>
+		<td>{$invoice.id|htmlsafe}</td>
 	</tr>
 	<tr>
 		<td>Date</td>
-		<td>{$invoice.date}</td>
+		<td>{$invoice.date|htmlsafe}</td>
 	</tr>
 	<tr>
-		<td>{$customFieldLabels.invoice_cf2}</td>
-		<td>{$invoice.custom_field2}</td>
+		<td>{$customFieldLabels.invoice_cf2|htmlsafe}</td>
+		<td>{$invoice.custom_field2|htmlsafe}</td>
 	</tr>
 	<tr>
-		<td>{$customFieldLabels.invoice_cf3}</td>
-		<td>{$invoice.custom_field3}</td>
+		<td>{$customFieldLabels.invoice_cf3|htmlsafe}</td>
+		<td>{$invoice.custom_field3|htmlsafe}</td>
 	</tr>
 	</table>
 {*
 	<table class="right">
 		<tr>
-				<td class="col1 tbl1-bottom" colspan="4" ><b>{$preference.pref_inv_wording} {$LANG.summary}</b></td>
+				<td class="col1 tbl1-bottom" colspan="4" ><b>{$preference.pref_inv_wording|htmlsafe} {$LANG.summary}</b></td>
 		</tr>
 		<tr>
-				<td class="">{$preference.pref_inv_wording} {$LANG.number_short}:</td>
-				<td class="" align="right" colspan="3">{$invoice.id}</td>
+				<td class="">{$preference.pref_inv_wording|htmlsafe} {$LANG.number_short}:</td>
+				<td class="" align="right" colspan="3">{$invoice.id|htmlsafe}</td>
 		</tr>
 		<tr>
-				<td nowrap class="">{$preference.pref_inv_wording} {$LANG.date}:</td>
-				<td class="" align="right" colspan="3">{$invoice.date}</td>
+				<td nowrap class="">{$preference.pref_inv_wording|htmlsafe} {$LANG.date}:</td>
+				<td class="" align="right" colspan="3">{$invoice.date|htmlsafe}</td>
 		</tr>
 	<!-- Show the Invoice Custom Fields if valid -->
 		{ if $invoice.custom_field1 != null}
 		<tr>
-				<td nowrap class="">{$customFieldLabels.invoice_cf1}:</td>
-				<td class="" align="right" colspan="3">{$invoice.custom_field1}</td>
+				<td nowrap class="">{$customFieldLabels.invoice_cf1|htmlsafe}:</td>
+				<td class="" align="right" colspan="3">{$invoice.custom_field1|htmlsafe}</td>
 		</tr>
 		{/if}
 		{ if $invoice.custom_field2 != null}
 		<tr>
-				<td nowrap class="">{$customFieldLabels.invoice_cf2}:</td>
-				<td class="" align="right"  colspan="3">{$invoice.custom_field2}</td>
+				<td nowrap class="">{$customFieldLabels.invoice_cf2|htmlsafe}:</td>
+				<td class="" align="right"  colspan="3">{$invoice.custom_field2|htmlsafe}</td>
 		</tr>
 		{/if}
 		{ if $invoice.custom_field3 != null}
 		<tr>
-				<td nowrap class="">{$customFieldLabels.invoice_cf3}:</td>
-				<td class="" align="right" colspan="3">{$invoice.custom_field3}</td>
+				<td nowrap class="">{$customFieldLabels.invoice_cf3|htmlsafe}:</td>
+				<td class="" align="right" colspan="3">{$invoice.custom_field3|htmlsafe}</td>
 		</tr>
 		{/if}
 		{ if $invoice.custom_field4 != null}
 		<tr>
-				<td nowrap class="">{$customFieldLabels.invoice_cf4}:</td>
-				<td class="" align="right" colspan="3">{$invoice.custom_field4}</td>
+				<td nowrap class="">{$customFieldLabels.invoice_cf4|htmlsafe}:</td>
+				<td class="" align="right" colspan="3">{$invoice.custom_field4|htmlsafe}</td>
 		</tr>
 		{/if}
 
 		<tr>
 				<td class="" >{$LANG.total}: </td>
-				<td class="" align="right" colspan="3">{$preference.pref_currency_sign}{$invoice.total|number_format:2}</td>
+				<td class="" align="right" colspan="3">{$preference.pref_currency_sign|htmlsafe}{$invoice.total|number_format:2}</td>
 		</tr>
 		<tr>
 				<td class="">{$LANG.paid}:</td>
-				<td class="" align="right" colspan="3" >{$preference.pref_currency_sign}{$invoice.paid|number_format:2}</td>
+				<td class="" align="right" colspan="3" >{$preference.pref_currency_sign|htmlsafe}{$invoice.paid|number_format:2}</td>
 		</tr>
 		<tr>
 				<td nowrap class="">{$LANG.owing}:</td>
-				<td class="" align="right" colspan="3" >{$preference.pref_currency_sign}{$invoice.owing|number_format:2}</td>
+				<td class="" align="right" colspan="3" >{$preference.pref_currency_sign|htmlsafe}{$invoice.owing|number_format:2}</td>
 		</tr>
 
 	</table>
@@ -114,26 +114,26 @@
     <!-- Biller section - start -->
         <tr>
                 <td class="tbl1-bottom col1" border="1" cellpadding="2" cellspacing="1"><b>{$LANG.biller}:</b></td>
-				<td class="col1 tbl1-bottom" border="1" cellpadding="2" cellspacing="1" colspan="3">{$biller.name}</td>
+				<td class="col1 tbl1-bottom" border="1" cellpadding="2" cellspacing="1" colspan="3">{$biller.name|htmlsafe}</td>
         </tr> 
 
         {if $biller.street_address != null}
 		<tr>
                 <td class=''>{$LANG.address}:</td>
-				<td class='' align="left" colspan="3">{$biller.street_address}</td>
+				<td class='' align="left" colspan="3">{$biller.street_address|htmlsafe}</td>
 		</tr>
         {/if}
         {if $biller.street_address2 != null }
 			{if $biller.street_address == null }
 		<tr>
                 <td class=''>{$LANG.address}:</td>
-				<td class='' align="left" colspan="3">{$biller.street_address2}</td>
+				<td class='' align="left" colspan="3">{$biller.street_address2|htmlsafe}</td>
 		</tr>   
 			{/if}
 			{if $biller.street_address != null }
 		<tr>
                 <td class=''></td>
-				<td class='' align="left" colspan="3">{$biller.street_address2}</td>
+				<td class='' align="left" colspan="3">{$biller.street_address2|htmlsafe}</td>
         </tr>   
 			{/if}
         {/if}
@@ -143,7 +143,7 @@
 		{if $biller.country != null }
 		<tr>
 				<td class=''></td>
-				<td class='' colspan="3">{$biller.country}</td>
+				<td class='' colspan="3">{$biller.country|htmlsafe}</td>
 		</tr>
        	{/if}
 
@@ -176,26 +176,26 @@
         {if $customer.attention != null }
     <tr>
             <td class=''>{$LANG.attention_short}:</td>
-			<td align="left" class='' colspan="3" >{$customer.attention}</td>
+			<td align="left" class='' colspan="3" >{$customer.attention|htmlsafe}</td>
                 </tr>
        {/if}
         {if $customer.street_address != null }
     <tr >
             <td class=''>{$LANG.address}:</td>
-			<td class='' align="left" colspan="3">{$customer.street_address}</td>
+			<td class='' align="left" colspan="3">{$customer.street_address|htmlsafe}</td>
     </tr>   
         {/if}
         {if $customer.street_address2 != null}
                 {if $customer.street_address == null}
     <tr>
             <td class=''>{$LANG.address}:</td>
-			<td class='' align="left" colspan="3">{$customer.street_address2}</td>
+			<td class='' align="left" colspan="3">{$customer.street_address2|htmlsafe}</td>
     </tr>   
                 {/if}
                 {if $customer.street_address != null}
     <tr>
 			<td class=''></td>
-			<td class='' align="left" colspan="3">{$customer.street_address2}</td>
+			<td class='' align="left" colspan="3">{$customer.street_address2|htmlsafe}</td>
     </tr>   
                 {/if}
         {/if}
@@ -205,7 +205,7 @@
          {if $customer.country != null}
     <tr>
             <td class=''></td>
-			<td class='' colspan="3">{$customer.country}</td>
+			<td class='' colspan="3">{$customer.country|htmlsafe}</td>
     </tr>
         {/if}
 
@@ -234,7 +234,7 @@
 	{if $invoice.type_id == 2 }
 				{foreach from=$product_group key=group_id item=group}
 							<tr>
-								<td class="col1" align="middle" colspan="6">{$group.name}</td>
+								<td class="col1" align="middle" colspan="6">{$group.name|htmlsafe}</td>
 							</tr>
 							<tr>
 								<td class="tbl1-bottom col1"><b>{$LANG.quantity_short}</b></td>
@@ -247,7 +247,7 @@
 
 							<tr class="" >
 								<td class="">{$invoiceItem.quantity|siLocal_number_trim}</td>
-								<td class="" colspan="3">{$invoiceItem.product.description}</td>
+								<td class="" colspan="3">{$invoiceItem.product.description|htmlsafe}</td>
 								<td class="" align="right">{$preference.pref_currency_sign}{$invoiceItem.unit_price|siLocal_number}</td>
 								<td class="" align="right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|siLocal_number}</td>
 							</tr>
@@ -255,7 +255,7 @@
 							{if $invoiceItem.description != null}
 							<tr class="">
 								<td class=""></td>
-								<td class="" colspan="5">{$LANG.description}: {$invoiceItem.description}</td>
+								<td class="" colspan="5">{$LANG.description}: {$invoiceItem.description|htmlsafe}</td>
 							</tr>
 							{/if}
 						{/if}
@@ -266,15 +266,15 @@
 								Subtotal:
 							</td>
 							<td align="right">
-								{$preference.pref_currency_sign}{subtotal cost=$invoiceItems group=$group.name}
+								{$preference.pref_currency_sign|htmlsafe}{subtotal cost=$invoiceItems group=$group.name}
 							</td>
 						</tr>
 						<tr>
 							<td colspan="5" align="right">
-								Markup {markup_percentage cost=$invoiceItems group=$group.name}%{* {$group.markup} *}:
+								Markup {markup_percentage cost=$invoiceItems group=$group.name}%{* {$group.markup|htmlsafe} *}:
 							</td>
 							<td align="right">
-								 {$preference.pref_currency_sign}{markup cost=$invoiceItems group=$group.name}
+								 {$preference.pref_currency_sign|htmlsafe}{markup cost=$invoiceItems group=$group.name}
 							</td>
 						</tr>
 						<tr>
@@ -282,7 +282,7 @@
 								Total:
 							</td>
 							<td align="right">
-								{$preference.pref_currency_sign}{total cost=$invoiceItems group=$group.name}
+								{$preference.pref_currency_sign|htmlsafe}{total cost=$invoiceItems group=$group.name}
 							</td>
 						</tr>
 						<tr>
@@ -302,7 +302,7 @@
 			<td class="" colspan="6" align="left"><b>{$LANG.notes}:</b></td>
 		</tr>
 		<tr>
-			<td class="" colspan="6">{$invoice.note|unescape}</td>
+			<td class="" colspan="6">{$invoice.note|outhtml}</td>
 		</tr>
 
 {/if}
@@ -316,7 +316,7 @@
 		<tr>
 			<td class="" colspan="2"></td>
 			<td align="right" colspan="3">{$LANG.gross_total}</td>
-			<td align="right" class="">{$preference.pref_currency_sign}{$invoiceItems.0.gross_total|siLocal_number}</td>
+			<td align="right" class="">{$preference.pref_currency_sign|htmlsafe}{$invoiceItems.0.gross_total|siLocal_number}</td>
 		</tr>
 	{/if}
 	
@@ -327,8 +327,8 @@
 		
 		<tr class=''>
 	        <td colspan="2"></td>
-			<td colspan="3" align="right">{$invoice.tax_grouped[line].tax_name}</td>
-			<td colspan="1" align="right">{$preference.pref_currency_sign}{$invoice.tax_grouped[line].tax_amount|siLocal_number}</td>
+			<td colspan="3" align="right">{$invoice.tax_grouped[line].tax_name|htmlsafe}</td>
+			<td colspan="1" align="right">{$preference.pref_currency_sign|htmlsafe}{$invoice.tax_grouped[line].tax_amount|siLocal_number}</td>
 	    </tr>
 	    
 	    {/if}
@@ -338,7 +338,7 @@
 	<tr class=''>
         <td colspan="2"></td>
 		<td colspan="3" align="right">{$LANG.tax_total}</td>
-		<td colspan="1" align="right"><u>{$preference.pref_currency_sign}{$invoice.total_tax|siLocal_number}</u></td>
+		<td colspan="1" align="right"><u>{$preference.pref_currency_sign|htmlsafe}{$invoice.total_tax|siLocal_number}</u></td>
     </tr>
 *}	
 	
@@ -346,7 +346,7 @@
 		<td class="" colspan="6" ><br></td>
 	</tr>
 	<tr class="">
-		<th colspan="6" align="middle"><span class="font1 double_underline" >TOTAL {$preference.pref_currency_sign}{$invoice.total|siLocal_number}</span></td>
+		<th colspan="6" align="middle"><span class="font1 double_underline" >TOTAL {$preference.pref_currency_sign|htmlsafe}{$invoice.total|siLocal_number}</span></td>
 	</tr>
 {*
 	<tr>
@@ -355,25 +355,25 @@
 	
 	<!-- invoice details section - start -->
 	<tr>
-		<td class="tbl1-bottom col1" colspan="6"><b>{$preference.pref_inv_detail_heading}</b></td>
+		<td class="tbl1-bottom col1" colspan="6"><b>{$preference.pref_inv_detail_heading|htmlsafe}</b></td>
 	</tr>
 	<tr>
-		<td class="" colspan="6"><i>{$preference.pref_inv_detail_line}</i></td>
+		<td class="" colspan="6"><i>{$preference.pref_inv_detail_line|htmlsafe}</i></td>
 	</tr>
 	<tr>
-		<td class="" colspan="6">{$preference.pref_inv_payment_method}</td>
+		<td class="" colspan="6">{$preference.pref_inv_payment_method|htmlsafe}</td>
 	</tr>
 	<tr>
-		<td class="" colspan="6">{$preference.pref_inv_payment_line1_name} {$preference.pref_inv_payment_line1_value}</td>
+		<td class="" colspan="6">{$preference.pref_inv_payment_line1_name|htmlsafe} {$preference.pref_inv_payment_line1_value|htmlsafe}</td>
 	</tr>
 	<tr>
-		<td class="" colspan="6">{$preference.pref_inv_payment_line2_name} {$preference.pref_inv_payment_line2_value}</td>
+		<td class="" colspan="6">{$preference.pref_inv_payment_line2_name|htmlsafe} {$preference.pref_inv_payment_line2_value|htmlsafe}</td>
 	</tr>
 	<tr>
 		<td><br></td>
 	</tr>
 	<tr>
-		<td colspan="6"><div style="font-size:8pt;" align="center">{$biller.footer}</div></td>
+		<td colspan="6"><div style="font-size:8pt;" align="center">{$biller.footer|outhtml}</div></td>
 	</tr>
 *}
 	<!-- invoice details section - end -->
