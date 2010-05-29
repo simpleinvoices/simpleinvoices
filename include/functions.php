@@ -561,8 +561,7 @@ function urlsafe($str) {
 
 /* Sanitises HTML for output stuff */
 function outhtml($html) {
-    return $html;
-    include_once '../library/HTMLPurifier.standalone.php' or die('woot');
+    require_once '../library/HTMLPurifier.standalone.php';
 
     $config = HTMLPurifier_Config::createDefault();
 
