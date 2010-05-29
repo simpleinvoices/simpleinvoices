@@ -60,7 +60,7 @@
 				<td>
 
 					<a
-				{*     	title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_pdf_tooltip']."' *}
+				     	title='{$LANG.export_tooltip} {$LANG.export_pdf_tooltip}'
 						class='export_pdf export_window' 
 					>
 						<img src="./images/common/page_white_acrobat.png" alt="" />
@@ -72,9 +72,8 @@
 				<td>  
 					
 					<a 
-						title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_xls_tooltip'].$spreadsheet." ".$LANG['format_tooltip']."' 
+						title='{$LANG.export_tooltip} {$LANG.export_xls_tooltip}' 
 						class='export_xls export_window'
-						href=''
 				   >
 						<img src="./images/common/page_white_excel.png" alt="" />
 						{$LANG.export_xls}
@@ -85,9 +84,8 @@
 				<td>    
 			
 				   <a 
-						title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_xls_tooltip'].$spreadsheet." ".$LANG['format_tooltip']."' 
+						title='{$LANG.export_tooltip} {$LANG.export_doc_tooltip}' 
 						class='export_doc export_window' 
-						href=''         
 				   >
 						<img src="./images/common/page_white_word.png" alt="" />
 						{$LANG.export_doc}
