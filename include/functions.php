@@ -554,13 +554,23 @@ function htmlsafe($str) {
 
 /* Makes a string to be put inside a href="" safe */
 function urlsafe($str) {
-    $str = preg_replace('/[^a-zA-Z0-9@;:%_\+\.~#\?\/\=\&\/]/','',$str);
+    $str = preg_replace('/[^a-zA-Z0-9@;:%_\+\.~#\?\/\=\&\/\-]/','',$str);
     $str = htmlsafe($str);
     return $str;
 }
 
 /* Sanitises HTML for output stuff */
-function outhtml($str) {
-        return $str;
+function outhtml($html) {
+    return $html;
+    include_once '../library/HTMLPurifier.standalone.php' or die('woot');
+
+    $config = HTMLPurifier_Config::createDefault();
+
+    // configuration goes here:
+    $config->set('Core.Encoding', 'UTF-8'); // replace with your encoding
+    $config->set('HTML.Doctype', 'XHTML 1.0 Strict'); // replace with your doctype
+
+    $purifier = new HTMLPurifier($config);
+    return $purifier->purify($html);
 }
 ?>
