@@ -72,7 +72,7 @@
 				<td>  
 					
 					<a 
-						title='{$LANG.export_tooltip} {$LANG.export_xls_tooltip}' 
+						title='{$LANG.export_tooltip} {$LANG.export_xls_tooltip} .xls' 
 						class='export_xls export_window'
 				   >
 						<img src="./images/common/page_white_excel.png" alt="" />
@@ -84,7 +84,7 @@
 				<td>    
 			
 				   <a 
-						title='{$LANG.export_tooltip} {$LANG.export_doc_tooltip}' 
+						title='{$LANG.export_tooltip} {$LANG.export_doc_tooltip} .doc'
 						class='export_doc export_window' 
 				   >
 						<img src="./images/common/page_white_word.png" alt="" />
