@@ -60,7 +60,7 @@
 				<td>
 
 					<a
-				{*     	title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_pdf_tooltip']."' *}
+				{*     	title='{$LANG['export_tooltip']} {$invoice['preference.pref_inv_wording']|htmlsafe} {$row['id']|htmlsafe} {$LANG['export_pdf_tooltip']}' *}
 						class='export_pdf export_window' 
 					>
 						<img src="./images/common/page_white_acrobat.png" alt="" />
@@ -72,7 +72,7 @@
 				<td>  
 					
 					<a 
-						title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_xls_tooltip'].$spreadsheet." ".$LANG['format_tooltip']."' 
+						title='{$LANG['export_tooltip']} {$invoice['preference.pref_inv_wording']|htmlsafe} {$row['id']|htmlsafe} {$LANG['export_xls_tooltip']}{$spreadsheet|htmlsafe} {$LANG['format_tooltip']}' 
 						class='export_xls export_window'
 						href=''
 				   >
@@ -85,7 +85,7 @@
 				<td>    
 			
 				   <a 
-						title='".$LANG['export_tooltip']." ".$invoice['preference.pref_inv_wording']." ".$row['id']." ".$LANG['export_xls_tooltip'].$spreadsheet." ".$LANG['format_tooltip']."' 
+						title='{$LANG['export_tooltip']} {$invoice['preference.pref_inv_wording']|htmlsafe} {$row['id']|htmlsafe} {$LANG['export_xls_tooltip']}{$spreadsheet|htmlsafe} {$LANG['format_tooltip']}' 
 						class='export_doc export_window' 
 						href=''         
 				   >
