@@ -561,7 +561,7 @@ function urlsafe($str) {
 
 /* Sanitises HTML for output stuff */
 function outhtml($html) {
-    require_once('./library/HTMLPurifier/HTMLPurifier.standalone.php');
+
     $config = HTMLPurifier_Config::createDefault();
 
     // configuration goes here:
@@ -570,5 +570,5 @@ function outhtml($html) {
 
     $purifier = new HTMLPurifier($config);
     return $purifier->purify($html);
+
 }
-?>

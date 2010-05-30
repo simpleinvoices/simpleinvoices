@@ -104,7 +104,7 @@
 	</tr>	
 	<tr class="details_screen biller">
 		<td class="details_screen">{$LANG.state}, {$LANG.zip}:</td>
-		<td class="details_screen" colspan="3">{$biller.state|htmlsafe}, {$biller.zip_cod|htmlsafee}</td>
+		<td class="details_screen" colspan="3">{$biller.state|htmlsafe}, {$biller.zip_cod|htmlsafe}</td>
 		<td class="details_screen">{$LANG.mobile_short}:</td>
 		<td class="details_screen">{$biller.mobile_phone|htmlsafe}</td>
 	</tr>	
