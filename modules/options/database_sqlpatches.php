@@ -13,7 +13,7 @@ function getNumberOfDonePatches() {
 
     $db = new db();
 	$check_patches_sql = "SELECT count(sql_patch) AS count FROM ".TB_PREFIX."sql_patchmanager ";
-	$sth = $db->query($check_patches_sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sth = $db->query($check_patches_sql) or die(htmlsafe(end($dbh->errorInfo())));
 		
 	$patches = $sth->fetch();
 	
@@ -159,8 +159,8 @@ EOD;
 
 
 		for($p = 0; $p < count($patch);$p++) {
-			$patch_name = htmlspecialchars($patch[$p]['name']);
-			$patch_date = htmlspecialchars($patch[$p]['date']);
+			$patch_name = htmlsafe($patch[$p]['name']);
+			$patch_date = htmlsafe($patch[$p]['date']);
 			if(check_sql_patch($p,$patch[$p]['name'])) {
 				$display_block .= "\n<tr><td>SQL patch $p, $patch_name <i>has</i> already been applied in release $patch_date</td></tr>";
 			}
@@ -181,7 +181,7 @@ function check_sql_patch($check_sql_patch_ref, $check_sql_patch_field) {
     $db = new db();
    	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager WHERE sql_patch_ref = :patch" ;
 
-	$sth = $db->query($sql, ':patch', $check_sql_patch_ref) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sth = $db->query($sql, ':patch', $check_sql_patch_ref) or die(htmlsafe(end($dbh->errorInfo())));
 
 	if(count($sth->fetchAll()) > 0) {
 		return true;
@@ -200,11 +200,11 @@ function run_sql_patch($id, $patch) {
 	$display_block = "";
 
 	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager WHERE sql_patch_ref = :id" ;
-	$sth = $db->query($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sth = $db->query($sql, ':id', $id) or die(htmlsafe(end($dbh->errorInfo())));
 	
 	//echo $sql;
-	$escaped_id = htmlspecialchars($id);
-	$patch_name = htmlspecialchars($patch['name']);
+	$escaped_id = htmlsafe($id);
+	$patch_name = htmlsafe($patch['name']);
 	#forget about it!! the patch as its already been run
 	if (count($sth->fetchAll()) != 0)  {
 
@@ -214,7 +214,7 @@ function run_sql_patch($id, $patch) {
 		
 		//patch hasn't been run
 		#so do the bloody patch
-		$db->query($patch['patch']) or die(htmlspecialchars(end($dbh->errorInfo())));
+		$db->query($patch['patch']) or die(htmlsafe(end($dbh->errorInfo())));
 		
 
 		$display_block  = "\n	<tr><td>SQL patch $escaped_id, $patch_name <i>has</i> been applied to the database</td></tr>";
@@ -226,7 +226,7 @@ function run_sql_patch($id, $patch) {
 		
 		/*echo $sql_update;*/
 
-		$db->query($sql_update, ':id', $id, ':name', $patch['name'], ':date', $patch['date'], ':patch', $patch['patch']) or die(htmlspecialchars(end($dbh->errorInfo())));
+		$db->query($sql_update, ':id', $id, ':name', $patch['name'], ':date', $patch['date'], ':patch', $patch['patch']) or die(htmlsafe(end($dbh->errorInfo())));
 
 		if($id == 126) {
 			patch126();

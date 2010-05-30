@@ -51,7 +51,7 @@ if (in_array($sort, $validFields)) {
 				$start, $limit";
 
 
-	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
 	$payment_types = $sth->fetchAll(PDO::FETCH_ASSOC);
 	$count = $sth->rowCount();
 */

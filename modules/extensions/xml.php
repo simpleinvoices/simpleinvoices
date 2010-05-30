@@ -69,7 +69,7 @@ $validFields = array('id', 'name','description','enabled');
 			LIMIT 
 				$start, $limit";
 
-	$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 
 	$registered_extensions = $sth->fetchAll(PDO::FETCH_ASSOC);
 

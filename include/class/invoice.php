@@ -161,7 +161,7 @@ class invoice {
 
 	#invoice total tax
 	$sql2 ="SELECT SUM(tax_amount) AS total_tax, SUM(total) AS total FROM ".TB_PREFIX."invoice_items WHERE invoice_id =  :id";
-	$sth2 = dbQuery($sql2, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sth2 = dbQuery($sql2, ':id', $id) or die(htmlsafe(end($dbh->errorInfo())));
 	$result2 = $sth2->fetch();
 	//$invoice['total'] = number_format($result['total'],2);
 	$invoice['total_tax'] = $result2['total_tax'];
@@ -410,7 +410,7 @@ class invoice {
 			$invoiceItem['total'] = $invoiceItem['total'];
 			
 			$sql = "SELECT * FROM ".TB_PREFIX."products WHERE id = :id";
-			$tth = dbQuery($sql, ':id', $invoiceItem['product_id']) or die(htmlspecialchars(end($dbh->errorInfo())));
+			$tth = dbQuery($sql, ':id', $invoiceItem['product_id']) or die(htmlsafe(end($dbh->errorInfo())));
 			$invoiceItem['product'] = $tth->fetch();	
 
 			$tax = taxesGroupedForInvoiceItem($invoiceItem['id']);

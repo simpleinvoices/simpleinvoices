@@ -109,7 +109,7 @@ $smarty->register_modifier("unescape","stripslashes");
 
 $path = pathinfo($_SERVER['REQUEST_URI']);
 //SC: Install path handling will need changes if used in non-HTML contexts
-$install_path = htmlspecialchars($path['dirname']);
+$install_path = htmlsafe($path['dirname']);
 
 
 include_once('./config/define.php');
@@ -173,7 +173,7 @@ if ( $install_tables_exists != false )
 	if (getNumberOfDoneSQLPatches() > "196")
 	{
 	    $sql="SELECT * from ".TB_PREFIX."extensions WHERE (domain_id = :id OR domain_id =  0 ) ORDER BY domain_id ASC";
-	    $sth = dbQuery($sql,':id', $auth_session->domain_id ) or die(htmlspecialchars(end($dbh->errorInfo())));
+	    $sth = dbQuery($sql,':id', $auth_session->domain_id ) or die(htmlsafe(end($dbh->errorInfo())));
 
 	    while ( $this_extension = $sth->fetch() ) 
 	    { 

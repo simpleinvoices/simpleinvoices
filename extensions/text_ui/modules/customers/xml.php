@@ -74,7 +74,7 @@ if (in_array($sort, $validFields)) {
 			$sort $dir 
 			$limit";
 
-	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
 	$customers = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 global $dbh;

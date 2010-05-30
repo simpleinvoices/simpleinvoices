@@ -10,7 +10,7 @@ class expenseaccount
         global $auth_session;
         
         $sql = "SELECT count(id) as count FROM ".TB_PREFIX."expense_account WHERE domain_id = :domain_id ORDER BY id";
-        $sth  = dbQuery($sql,':domain_id',$auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+        $sth  = dbQuery($sql,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 
         return $sth->fetch();
     }
@@ -21,7 +21,7 @@ class expenseaccount
         global $auth_session;
         
         $sql = "SELECT * FROM ".TB_PREFIX."expense_account WHERE domain_id = :domain_id ORDER BY id";
-        $sth  = dbQuery($sql,':domain_id',$auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+        $sth  = dbQuery($sql,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
         
         return $sth->fetchAll();
     
@@ -34,7 +34,7 @@ class expenseaccount
         global $auth_session;
         
         $sql = "SELECT * FROM ".TB_PREFIX."expense_account WHERE domain_id = :domain_id and id = :id";
-        $sth  = dbQuery($sql,':domain_id',$auth_session->domain_id, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
+        $sth  = dbQuery($sql,':domain_id',$auth_session->domain_id, ':id', $id) or die(htmlsafe(end($dbh->errorInfo())));
         
         return $sth->fetch();
     

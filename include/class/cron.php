@@ -42,7 +42,7 @@ class cron {
 				':recurrence_type',$this->recurrence_type,
 				':email_biller',$this->email_biller,
 				':email_customer',$this->email_customer
-			) or die(htmlspecialchars(end($dbh->errorInfo())));
+			) or die(htmlsafe(end($dbh->errorInfo())));
         
  	       return $sth;
 
@@ -79,7 +79,7 @@ class cron {
 				':recurrence_type',$this->recurrence_type,
 				':email_biller',$this->email_biller,
 				':email_customer',$this->email_customer
-			) or die(htmlspecialchars(end($dbh->errorInfo())));
+			) or die(htmlsafe(end($dbh->errorInfo())));
         
  	       return $sth;
 	}
@@ -140,7 +140,7 @@ class cron {
 			$sort $dir
 			$limit";
 
-		$sth = $db->query($sql,':domain_id',domain_id::get($this->domain_id)) or die(htmlspecialchars(end($dbh->errorInfo())));
+		$sth = $db->query($sql,':domain_id',domain_id::get($this->domain_id)) or die(htmlsafe(end($dbh->errorInfo())));
 		if($type =="count")
 		{
 			return $sth->rowCount();
@@ -169,7 +169,7 @@ class cron {
 				iv.preference_id = pf.pref_id 
 				and
 				cron.id = :id;";
-		$sth = $db->query($sql,':domain_id',domain_id::get($this->domain_id), ':id',$this->id) or die(htmlspecialchars(end($dbh->errorInfo())));
+		$sth = $db->query($sql,':domain_id',domain_id::get($this->domain_id), ':id',$this->id) or die(htmlsafe(end($dbh->errorInfo())));
 
 		return $sth->fetch();
 	}

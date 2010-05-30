@@ -17,7 +17,7 @@ if ($_GET["submit"] == "line_items") {
 
 	$default = "line_items";
 
-	$escaped = htmlspecialchars($defaults[line_items]);
+	$escaped = htmlsafe($defaults[line_items]);
 	$value = <<<EOD
 <input type="text" size="25" name="value" value="$escaped">
 EOD;
@@ -38,7 +38,7 @@ else if ($_GET["submit"] == "def_inv_template") {
 	closedir($handle);
 	sort($files);
 
-	$escaped = htmlspecialchars($defaults[template]);
+	$escaped = htmlsafe($defaults[template]);
 	$display_block_templates_list = <<<EOD
 	<select name="value">
 EOD;
@@ -49,7 +49,7 @@ EOD;
 
 	foreach ( $files as $var )
 	{
-		$var = htmlspecialchars($var);
+		$var = htmlsafe($var);
 		$display_block_templates_list .= "<option value='$var' >";
 		$display_block_templates_list .= $var;
 		$display_block_templates_list .= "</option>";
@@ -97,7 +97,7 @@ else if ($_GET["submit"] == "biller") {
 
 			$selected = $biller['id'] == $defaults['biller']?"selected style='font-weight: bold'":"";
 			
-			$escaped = htmlspecialchars($biller['name']);
+			$escaped = htmlsafe($biller['name']);
 			$display_block_biller .= <<<EOD
 			<option $selected value="$biller[id]">$escaped</option>
 EOD;
@@ -130,7 +130,7 @@ else if ($_GET["submit"] == "customer") {
 			$selected = $customer['id'] == $defaults['customer']?"selected style='font-weight: bold'":"";
 			
 
-			$escaped = htmlspecialchars($customer['name']);
+			$escaped = htmlsafe($customer['name']);
 			$display_block_customer .= <<<EOD
 			<option $selected value="$customer[id]">$escaped</option>
 EOD;
@@ -165,7 +165,7 @@ EOD;
 
 			$selected = $tax['tax_id'] == $defaults['tax']?"selected style='font-weight: bold'":"";
 
-			$escaped = htmlspecialchars($tax['tax_description']);
+			$escaped = htmlsafe($tax['tax_description']);
 			$display_block_tax .= <<<EOD
 			<option $selected value="$tax[tax_id]">$escaped</option>
 EOD;
@@ -197,7 +197,7 @@ EOD;
 
 			$selected = $preference['pref_id'] == $defaults['preference']?"selected style='font-weight: bold'":"";
 
-			$escaped = htmlspecialchars($preference['pref_description']);
+			$escaped = htmlsafe($preference['pref_description']);
 			$display_block_preferences .= <<<EOD
 			<option $selected value="{$preference['pref_id']}">
 	                        $escaped</option>
@@ -231,7 +231,7 @@ EOD;
 		foreach($payments as $payment) {
 
 			$selected = $payment['pt_id'] == $defaults['payment_type']?"selected style='font-weight: bold'":"";
-			$escaped = htmlspecialchars($payment['pt_description']);
+			$escaped = htmlsafe($payment['pt_description']);
 			$display_block_payment_type .= <<<EOD
 			<option $selected value="{$payment['pt_id']}">
                         $escaped</option>
@@ -273,7 +273,7 @@ else if($_GET['submit'] == "language") {
 		if($language->shortname == $lang) {
 			$selected = " selected ";
 		}
-		$value .= "<option $selected value='".htmlspecialchars($language->shortname)."'>".htmlspecialchars("$language->name ($language->englishname) ($language->shortname)")."</option>";
+		$value .= "<option $selected value='".htmlsafe($language->shortname)."'>".htmlsafe("$language->name ($language->englishname) ($language->shortname)")."</option>";
 	}
 	$value .= "</select>";
 	
@@ -282,7 +282,7 @@ elseif ($_GET["submit"] == "tax_per_line_item") {
 
 	$default = "tax_per_line_item";
 
-	$escaped = htmlspecialchars($defaults[tax_per_line_item]);
+	$escaped = htmlsafe($defaults[tax_per_line_item]);
 	$value = <<<EOD
 <input type="text" size="25" name="value" value="$escaped">
 EOD;

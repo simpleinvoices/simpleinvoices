@@ -28,7 +28,7 @@ class cronlog {
 				':domain_id',$domain_id, 
 				':cron_id',$this->cron_id, 
 				':run_date',$run_date
-			) or die(htmlspecialchars(end($dbh->errorInfo())));
+			) or die(htmlsafe(end($dbh->errorInfo())));
         
  	       return $sth;
 	}
@@ -54,7 +54,7 @@ class cronlog {
 				':domain_id',$domain_id, 
 				':cron_id',$this->cron_id, 
 				':run_date',$run_date
-			) or die(htmlspecialchars(end($dbh->errorInfo())));
+			) or die(htmlsafe(end($dbh->errorInfo())));
         
  	       return $sth->fetchColumn();
 	}

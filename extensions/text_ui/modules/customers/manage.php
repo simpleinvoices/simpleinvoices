@@ -14,7 +14,7 @@
 checkLogin();
 
 	$sql = "SELECT count(*) as count FROM ".TB_PREFIX."customers";
-	$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
 	$number_of_customers  = $sth->fetch(PDO::FETCH_ASSOC);
 
 $pageActive = "customers";

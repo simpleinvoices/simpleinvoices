@@ -26,7 +26,7 @@ class system_default {
 		if ($extension_id >= 0) { 
 			$sql .= " AND extension_id = :extension_id"; 
 		} else { 
-			die(htmlspecialchars("Invalid extension name: ".$extension)); 
+			die(htmlsafe("Invalid extension name: ".$extension)); 
 		}
 		if ($db->query($sql, ':value', $this->value, ':name', $this->name, ':extension_id', $extension_id)) { 
 			return true; 

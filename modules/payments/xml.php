@@ -87,7 +87,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 				$limit";
 		
 		
-		$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':invoice_id', $_GET['id']) or die(htmlspecialchars(end($dbh->errorInfo())));
+		$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':invoice_id', $_GET['id']) or die(htmlsafe(end($dbh->errorInfo())));
 		
 	}
 	#if coming from another page where you want to filter by just one customer
@@ -120,7 +120,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 				$sort $dir  
 				$limit";
 
-		$sth = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
+		$sth = dbQuery($sql, ':id', $id) or die(htmlsafe(end($dbh->errorInfo())));
 		
 	}
 	#if you want to show all invoices - no filters

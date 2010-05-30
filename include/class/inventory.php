@@ -34,7 +34,7 @@ class inventory {
 				':cost',$this->cost,
 				':date',$this->date,
 				':note',$this->note
-			) or die(htmlspecialchars(end($dbh->errorInfo())));
+			) or die(htmlsafe(end($dbh->errorInfo())));
         
  	       return $sth;
 
@@ -67,7 +67,7 @@ class inventory {
 				':cost',$this->cost,
 				':date',$this->date,
 				':note',$this->note
-			) or die(htmlspecialchars(end($dbh->errorInfo())));
+			) or die(htmlsafe(end($dbh->errorInfo())));
         
  	       return $sth;
 	}
@@ -131,7 +131,7 @@ class inventory {
 			$sort $dir
 			$limit";
 
-		$sth = $db->query($sql,':domain_id',domain_id::get($this->domain_id)) or die(htmlspecialchars(end($dbh->errorInfo())));
+		$sth = $db->query($sql,':domain_id',domain_id::get($this->domain_id)) or die(htmlsafe(end($dbh->errorInfo())));
 		if($type =="count")
 		{
 			return $sth->rowCount();
@@ -157,7 +157,7 @@ class inventory {
                 p.id = iv.product_id
 				and
                 iv.id = :id;";
-		$sth = $db->query($sql,':domain_id',domain_id::get($this->domain_id), ':id',$this->id) or die(htmlspecialchars(end($dbh->errorInfo())));
+		$sth = $db->query($sql,':domain_id',domain_id::get($this->domain_id), ':id',$this->id) or die(htmlsafe(end($dbh->errorInfo())));
 
 		return $sth->fetch();
 	}

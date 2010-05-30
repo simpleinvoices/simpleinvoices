@@ -8,7 +8,7 @@ function getExtensions() {
 	global $auth_session;
 	
 	$sql = "SELECT * FROM si_extensions WHERE domain_id = 0 OR domain_id = :domain_id ORDER BY name";
-	$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 	
 	$exts = null;
 	
@@ -23,7 +23,7 @@ isset($_GET['id']) && $extension_id = $_GET['id'];
 isset($_GET['action']) && $action = $_GET['action'];
 
 if ($action == 'toggle') {
-	setStatusExtension($extension_id) or die(htmlspecialchars("Something went wrong with the status change!"));
+	setStatusExtension($extension_id) or die(htmlsafe("Something went wrong with the status change!"));
 }
 
 $smarty -> assign("exts",getExtensions());

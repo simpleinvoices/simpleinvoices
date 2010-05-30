@@ -22,7 +22,7 @@ class encode
                         $multi_tags = true;
                     } else {
                         if (trim($value2)!='') {
-                            if (htmlspecialchars($value2)!=$value2) {
+                            if (htmlsafe($value2)!=$value2) {
                                 $xml .= str_repeat("\t",$level).
                                         "<$key><![CDATA[$value2]]>".
                                         "</$key>\n";
@@ -41,7 +41,7 @@ class encode
                 }
             } else {
                 if (trim($value)!='') {
-                    if (htmlspecialchars($value)!=$value) {
+                    if (htmlsafe($value)!=$value) {
                         $xml .= str_repeat("\t",$level)."<$key>".
                                 "<![CDATA[$value]]></$key>\n";
                     } else {

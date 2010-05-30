@@ -491,7 +491,7 @@ function sql2xml($sth, $count) {
 		{
 		//	$tag = mysql_field_name( $query4xml, $i );
 		//	$xml .= ("<$tag>". $row[$i]. "</$tag>");
-			$xml .= ("<$key>". htmlspecialchars($value). "</$key>");
+			$xml .= ("<$key>". htmlsafe($value). "</$key>");
 		}
 		$xml .= ("</tablerow>");
 	}

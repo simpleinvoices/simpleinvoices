@@ -120,7 +120,7 @@ class db
 			}
 		} catch(Exception $e){
 			echo $e->getMessage();
-			echo "Dude, what happened to your query?:<br /><br /> ".htmlspecialchars($sqlQuery)."<br />".htmlspecialchars(end($this->_db->errorInfo()));
+			echo "Dude, what happened to your query?:<br /><br /> ".htmlsafe($sqlQuery)."<br />".htmlsafe(end($this->_db->errorInfo()));
 			$sth = NULL;
 		}
 		//$this->connection->closeCursor();

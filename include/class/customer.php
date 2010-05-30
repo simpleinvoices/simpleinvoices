@@ -11,7 +11,7 @@ class customer
         
         
         $sql = "SELECT * FROM ".TB_PREFIX."customers WHERE domain_id = :domain_id and id = :id";
-        $sth = $db->query($sql,':domain_id', $auth_session->domain_id, ':id', $id ) or die(htmlspecialchars(end($dbh->errorInfo())));
+        $sth = $db->query($sql,':domain_id', $auth_session->domain_id, ':id', $id ) or die(htmlsafe(end($dbh->errorInfo())));
     
         return $sth->fetch();
     }
@@ -26,7 +26,7 @@ class customer
         $customer = null;
         
         $sql = "SELECT * FROM ".TB_PREFIX."customers WHERE domain_id = :domain_id";
-        $sth = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+        $sth = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 
         $customers = null;
 

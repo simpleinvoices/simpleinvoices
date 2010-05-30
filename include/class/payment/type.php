@@ -72,7 +72,7 @@ class payment_type
 				':pt_description',$this->pt_description,
 				':pt_enabled',$this->pt_enabled,
 				':domain_id',$domain_id 
-			) or die(htmlspecialchars(end($dbh->errorInfo())));
+			) or die(htmlsafe(end($dbh->errorInfo())));
         
  	       return $sth;
 	}

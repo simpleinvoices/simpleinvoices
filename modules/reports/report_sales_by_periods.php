@@ -24,7 +24,7 @@ checkLogin();
 * Get earliest invoice date
 */
 $sql="select min(date) as date from ".TB_PREFIX."invoices";
-$sth = dbQuery($sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
 $invoice_start_array = $sth->fetch();
 
 //$invoice_start = dbQuery($sql);
@@ -59,7 +59,7 @@ while ( $year <= $this_year )
 		//$total_month_sales = mysqlQuery($total_month_sales_sql);
 		//$total_month_sales_array= mysql_fetch_array($total_month_sales);
 
-		$total_month_sales = dbQuery($total_month_sales_sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+		$total_month_sales = dbQuery($total_month_sales_sql) or die(htmlsafe(end($dbh->errorInfo())));
 		$total_month_sales_array = $total_month_sales -> fetch();
 
 		$total_sales[$year][$month] = $total_month_sales_array['month_total'];
@@ -75,7 +75,7 @@ while ( $year <= $this_year )
 		//$total_month_payments = mysqlQuery($total_month_payments_sql);
 		//$total_month_payments_array= mysql_fetch_array($total_month_payments);
 
-		$total_month_payments = dbQuery($total_month_payments_sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+		$total_month_payments = dbQuery($total_month_payments_sql) or die(htmlsafe(end($dbh->errorInfo())));
 		$total_month_payments_array = $total_month_payments -> fetch();
 
 		$total_payments[$year][$month] = $total_month_payments_array['month_total_payments'];
@@ -92,7 +92,7 @@ while ( $year <= $this_year )
 	//$total_year_sales = mysqlQuery($total_year_sales_sql);
 	//$total_year_sales_array= mysql_fetch_array($total_year_sales);
 
-	$total_year_sales = dbQuery($total_year_sales_sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$total_year_sales = dbQuery($total_year_sales_sql) or die(htmlsafe(end($dbh->errorInfo())));
 	$total_year_sales_array = $total_year_sales -> fetch();
 
 	$total_sales[$year]['Total'] = $total_year_sales_array['year_total'];
@@ -108,7 +108,7 @@ while ( $year <= $this_year )
 	//$total_year_payments = mysqlQuery($total_year_payments_sql);
 	//$total_year_payments_array= mysql_fetch_array($total_year_payments);
 
-	$total_year_payments = dbQuery($total_year_payments_sql) or die(htmlspecialchars(end($dbh->errorInfo())));
+	$total_year_payments = dbQuery($total_year_payments_sql) or die(htmlsafe(end($dbh->errorInfo())));
 	$total_year_payments_array = $total_year_payments -> fetch();
 
 	$total_payments[$year]['Total'] = $total_year_payments_array['year_total_payments'];

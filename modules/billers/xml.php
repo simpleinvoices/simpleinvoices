@@ -70,7 +70,7 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 					$sort $dir 
 				$limit";
 	
-		$result = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+		$result = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 		return $result;
 }
 

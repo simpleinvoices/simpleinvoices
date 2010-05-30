@@ -9,7 +9,7 @@ class product
          global $auth_session;
  
          $sql = "SELECT count(id) as count FROM ".TB_PREFIX."products WHERE domain_id = :domain_id ORDER BY id";
-         $sth  = $db->query($sql,':domain_id',$auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+         $sth  = $db->query($sql,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
  
          return $sth->fetch();
 
@@ -22,7 +22,7 @@ class product
          global $db;
  
          $sql = "SELECT * FROM ".TB_PREFIX."products WHERE domain_id = :domain_id and visible = 1 ORDER BY id";
-         $sth  = $db->query($sql,':domain_id',$auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+         $sth  = $db->query($sql,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
  
          return $sth->fetchAll();
 
@@ -35,7 +35,7 @@ class product
          global $db;
  
          $sql = "SELECT * FROM ".TB_PREFIX."products WHERE domain_id = :domain_id and id = :id";
-         $sth  = $db->query($sql,':domain_id',$auth_session->domain_id, ':id',$id) or die(htmlspecialchars(end($dbh->errorInfo())));
+         $sth  = $db->query($sql,':domain_id',$auth_session->domain_id, ':id',$id) or die(htmlsafe(end($dbh->errorInfo())));
  
          return $sth->fetch();
 
@@ -106,7 +106,7 @@ class product
                     $limit";
         
         
-        $result = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlspecialchars(end($dbh->errorInfo())));
+        $result = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
     
         return $result;
     }

@@ -22,9 +22,9 @@ $smarty -> display("../templates/default/menu.tpl");
 $smarty -> display("../templates/default/main.tpl");
 
 	$startdate = (isset($_POST['startdate'])) ? $_POST['startdate'] : date("Y-m-d",strtotime("last Year"));
-	$startdate = htmlspecialchars($startdate);
+	$startdate = htmlsafe($startdate);
 	$enddate   = (isset($_POST['enddate']))   ? $_POST['enddate']   : date("Y-m-d",strtotime("now"));
-	$enddate = htmlspecialchars($enddate);
+	$enddate = htmlsafe($enddate);
 
 
 

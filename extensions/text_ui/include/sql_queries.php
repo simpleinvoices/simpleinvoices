@@ -16,7 +16,7 @@ class text_ui_invoice extends invoice {
             $invoiceItem['total'] = $invoiceItem['total'];
 
             $sql = "SELECT * FROM ".TB_PREFIX."products WHERE id = :id";
-            $tth = dbQuery($sql, ':id', $invoiceItem['product_id']) or die(htmlspecialchars(end($dbh->errorInfo())));
+            $tth = dbQuery($sql, ':id', $invoiceItem['product_id']) or die(htmlsafe(end($dbh->errorInfo())));
             $invoiceItem['product'] = $tth->fetch();
 			$attr_sql = "select 
                     CONCAT(a.display_name, '-',v.value) as display
@@ -27,11 +27,11 @@ class text_ui_invoice extends invoice {
                     a.id = v.attribute_id 
                     and
                     v.id = :attr_id";
-			$attr1 = dbQuery($attr_sql, ':attr_id', $invoiceItem['attribute_1']) or die(htmlspecialchars(end($dbh->errorInfo())));
+			$attr1 = dbQuery($attr_sql, ':attr_id', $invoiceItem['attribute_1']) or die(htmlsafe(end($dbh->errorInfo())));
             $invoiceItem['attr1'] = $attr1->fetch();
-			$attr2 = dbQuery($attr_sql, ':attr_id', $invoiceItem['attribute_2']) or die(htmlspecialchars(end($dbh->errorInfo())));
+			$attr2 = dbQuery($attr_sql, ':attr_id', $invoiceItem['attribute_2']) or die(htmlsafe(end($dbh->errorInfo())));
             $invoiceItem['attr2'] = $attr2->fetch();
-			$attr3 = dbQuery($attr_sql, ':attr_id', $invoiceItem['attribute_3']) or die(htmlspecialchars(end($dbh->errorInfo())));
+			$attr3 = dbQuery($attr_sql, ':attr_id', $invoiceItem['attribute_3']) or die(htmlsafe(end($dbh->errorInfo())));
             $invoiceItem['attr3'] = $attr3->fetch();
 		
             $invoiceItems[$i] = $invoiceItem;

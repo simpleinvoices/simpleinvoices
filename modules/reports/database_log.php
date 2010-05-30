@@ -9,9 +9,9 @@ $smarty -> assign('active_tab', '#home');
 	$smarty -> display("../templates/default/main.tpl");
 	
 	$startdate	= (isset($_POST['startdate'])) ? $_POST['startdate'] : date("Y-m-d",strtotime("last Year"));
-	$startdate = htmlspecialchars($startdate);
+	$startdate = htmlsafe($startdate);
 	$enddate	= (isset($_POST['enddate']))   ? $_POST['enddate']   : date("Y-m-d",strtotime("now"));
-	$enddate = htmlspecialchars($enddate);
+	$enddate = htmlsafe($enddate);
 	
 	$sql = "SELECT l.*, u.user_name
 	FROM
@@ -38,7 +38,7 @@ EOD;
 		$pattern = "/.*INSERT\s+INTO\s+".TB_PREFIX."invoices\s+/im";
 		
 		if(preg_match($pattern,$sql['sqlquerie'])) {
-			$user = htmlspecialchars($sql['user_name']).' (id '.htmlspecialchars($sql['userid']).')';
+			$user = htmlsafe($sql['user_name']).' (id '.htmlsafe($sql['userid']).')';
 			echo "User $user created invoice $sql[last_id] on $sql[timestamp].<br />";
 		}
 	}
@@ -47,7 +47,7 @@ EOD;
 	foreach($sqls as $sql) {
 		$pattern = "/.*UPDATE\s+".TB_PREFIX."invoices\s+SET/im";
 		if(preg_match($pattern,$sql['sqlquerie'],$match)) {
-			$user = htmlspecialchars($sql['user_name']).' (id '.htmlspecialchars($sql['userid']).')';
+			$user = htmlsafe($sql['user_name']).' (id '.htmlsafe($sql['userid']).')';
 			echo "User $user modified invoice $match[1] on $sql[timestamp].<br />";
 		}
 	}
@@ -61,7 +61,7 @@ EOD;
 			$pattern = "/.*INSERT\s+INTO\s+".TB_PREFIX."payment\s+/im";
 		}
 		if(preg_match($pattern,$sql['sqlquerie'],$match)) {
-			$user = htmlspecialchars($sql['user_name']).' (id '.htmlspecialchars($sql['userid']).')';
+			$user = htmlsafe($sql['user_name']).' (id '.htmlsafe($sql['userid']).')';
 			echo "User $user processed invoice $match[1] on $sql[timestamp] with amount $match[2].<br />";
 		}
 	}
