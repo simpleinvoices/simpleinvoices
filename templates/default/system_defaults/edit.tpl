@@ -8,7 +8,7 @@
                 <td><br /></td>
         </tr>
         <tr>
-        <td class="details_screen">{$description|htmlsafe}</td><td>{$value|htmlsafe}</td>
+        <td class="details_screen">{$description|htmlsafe}</td><td>{$value}</td>
         </tr>
         <tr>
                 <td><br /></td>
