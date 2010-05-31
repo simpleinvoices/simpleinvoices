@@ -524,23 +524,6 @@ function si_truncate($string, $max = 20, $rep = '')
     return substr_replace($string, $rep, $leave);
 }
 
-/**
-* Function: filenameEscape
-* 
-* Escapes a filename
-* 
-* Parameters:
-* str		- the string to escape
-*
-* Returns:
-* The escaped string.
-**/
-function filenameEscape($str)
-{
-    // Returns an escaped value.
-    return preg_replace('/[^a-z0-9\-_\.]/i','_',$str);
-}
-
 
 /* Escapes HTML stuff */
 function htmlsafe($str) {

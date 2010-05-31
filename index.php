@@ -16,11 +16,17 @@ define("BROWSE","browse");
 /*
 * The include configs and requirements stuff section - start
 */
-require_once("./include/init.php");
+
+/*
+* Load stuff required before init.php
+*/
+require_once("./include/init_pre.php");
 
 $module = isset($_GET['module']) ? filenameEscape($_GET['module']) : null;
 $view   = isset($_GET['view'])  ? filenameEscape($_GET['view'])    : null;
 $action = isset($_GET['case'])  ? filenameEscape($_GET['case'])    : null;
+
+require_once("./include/init.php");
 
 foreach($config->extension as $extension)
 {
