@@ -459,10 +459,10 @@ CREATE TABLE IF NOT EXISTS `si_preferences` (
 --
 
 INSERT INTO `si_preferences` (`pref_id`, `domain_id`, `pref_description`, `pref_currency_sign`, `pref_inv_heading`, `pref_inv_wording`, `pref_inv_detail_heading`, `pref_inv_detail_line`, `pref_inv_payment_method`, `pref_inv_payment_line1_name`, `pref_inv_payment_line1_value`, `pref_inv_payment_line2_name`, `pref_inv_payment_line2_value`, `pref_enabled`, `status`, `locale`, `language`, `index_group`, `currency_code`, `include_online_payment`, `currency_position`) VALUES
-(1, 1, 'Invoice', '$', 'Invoice', 'Invoice', 'Details', 'Payment is to be made within 14 days of the invoice being sent', 'Electronic Funds Transfer', 'Account name', 'H. & M. Simpson', 'Account number:', '0123-4567-7890', '1', 1, 'en-gb', 'en-gb', 1, NULL, NULL, NULL),
-(2, 1, 'Receipt', '$', 'Receipt', 'Receipt', 'Details', '<br />This transaction has been paid in full, please keep this receipt as proof of purchase.<br /> Thank you', '', '', '', '', '', '1', 1, 'en-gb', 'en-gb', 1, NULL, NULL, NULL),
-(3, 1, 'Estimate', '$', 'Estimate', 'Estimate', 'Details', '<br />This is an estimate of the final value of services rendered.<br />Thank you', '', '', '', '', '', '1', 1, 'en-gb', 'en-gb', 1, NULL, NULL, NULL),
-(4, 1, 'Quote', '$', 'Quote', 'Quote', 'Details', '<br />This is a quote of the final value of services rendered.<br />Thank you', '', '', '', '', '', '1', 1, 'en-gb', 'en-gb', 1, NULL, NULL, NULL);
+(1, 1, 'Invoice', '$', 'Invoice', 'Invoice', 'Details', 'Payment is to be made within 14 days of the invoice being sent', 'Electronic Funds Transfer', 'Account name', 'H. & M. Simpson', 'Account number:', '0123-4567-7890', '1', 1, 'en_GB', 'en_GB', 1, NULL, NULL, NULL),
+(2, 1, 'Receipt', '$', 'Receipt', 'Receipt', 'Details', '<br />This transaction has been paid in full, please keep this receipt as proof of purchase.<br /> Thank you', '', '', '', '', '', '1', 1, 'en_GB', 'en_GB', 1, NULL, NULL, NULL),
+(3, 1, 'Estimate', '$', 'Estimate', 'Estimate', 'Details', '<br />This is an estimate of the final value of services rendered.<br />Thank you', '', '', '', '', '', '1', 1, 'en_GB', 'en_GB', 1, NULL, NULL, NULL),
+(4, 1, 'Quote', '$', 'Quote', 'Quote', 'Details', '<br />This is a quote of the final value of services rendered.<br />Thank you', '', '', '', '', '', '1', 1, 'en_GB', 'en_GB', 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -800,7 +800,7 @@ INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension
 (5, 'line_items', '5', 1, 1),
 (6, 'template', 'default', 1, 1),
 (7, 'payment_type', '1', 1, 1),
-(8, 'language', 'en-gb', 1, 1),
+(8, 'language', 'en_GB', 1, 1),
 (9, 'dateformate', 'Y-m-d', 1, 1),
 (10, 'spreadsheet', 'xls', 1, 1),
 (11, 'wordprocessor', 'doc', 1, 1),
