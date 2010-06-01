@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.2.1deb1
+-- version 3.2.3
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 14, 2010 at 07:43 AM
--- Server version: 5.1.37
--- PHP Version: 5.2.10-2ubuntu6
+-- Generation Time: Jun 01, 2010 at 07:47 AM
+-- Server version: 5.1.36
+-- PHP Version: 5.2.9
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -211,9 +211,9 @@ INSERT INTO `si_extensions` (`id`, `domain_id`, `name`, `description`, `enabled`
 
 CREATE TABLE IF NOT EXISTS `si_index` (
   `id` int(11) NOT NULL,
-  `node` varchar(255) NOT NULL,
-  `sub_node` varchar(255) DEFAULT NULL,
-  `sub_node_2` varchar(255) DEFAULT NULL,
+  `node` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `sub_node` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sub_node_2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `domain_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -303,11 +303,11 @@ CREATE TABLE IF NOT EXISTS `si_invoice_items` (
 --
 
 INSERT INTO `si_invoice_items` (`id`, `invoice_id`, `quantity`, `product_id`, `unit_price`, `tax_amount`, `gross_total`, `description`, `total`) VALUES
-(1, 1, '1.000000', 5, '125.000000', '12.500000', '125.000000', '', '137.500000'),
-(2, 1, '1.000000', 3, '125.000000', '12.500000', '125.000000', '', '137.500000'),
-(3, 1, '1.000000', 2, '140.000000', '0.000000', '140.000000', '', '140.000000'),
-(4, 1, '1.000000', 2, '140.000000', '14.000000', '140.000000', '', '154.000000'),
-(5, 1, '1.000000', 1, '150.000000', '0.000000', '150.000000', '', '150.000000');
+(1, 1, 1.000000, 5, 125.000000, 12.500000, 125.000000, '', 137.500000),
+(2, 1, 1.000000, 3, 125.000000, 12.500000, 125.000000, '', 137.500000),
+(3, 1, 1.000000, 2, 140.000000, 0.000000, 140.000000, '', 140.000000),
+(4, 1, 1.000000, 2, 140.000000, 14.000000, 140.000000, '', 154.000000),
+(5, 1, 1.000000, 1, 150.000000, 0.000000, 150.000000, '', 150.000000);
 
 -- --------------------------------------------------------
 
@@ -330,11 +330,11 @@ CREATE TABLE IF NOT EXISTS `si_invoice_item_tax` (
 --
 
 INSERT INTO `si_invoice_item_tax` (`id`, `invoice_item_id`, `tax_id`, `tax_type`, `tax_rate`, `tax_amount`) VALUES
-(1, 1, 3, '%', '10.000000', '12.500000'),
-(2, 2, 1, '%', '10.000000', '12.500000'),
-(3, 3, 4, '%', '0.000000', '0.000000'),
-(4, 4, 1, '%', '10.000000', '14.000000'),
-(5, 5, 4, '%', '0.000000', '0.000000');
+(1, 1, 3, '%', 10.000000, 12.500000),
+(2, 2, 1, '%', 10.000000, 12.500000),
+(3, 3, 4, '%', 0.000000, 0.000000),
+(4, 4, 1, '%', 10.000000, 14.000000),
+(5, 5, 4, '%', 0.000000, 0.000000);
 
 -- --------------------------------------------------------
 
@@ -494,10 +494,10 @@ CREATE TABLE IF NOT EXISTS `si_products` (
 --
 
 INSERT INTO `si_products` (`id`, `domain_id`, `description`, `unit_price`, `default_tax_id`, `default_tax_id_2`, `cost`, `reorder_level`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`) VALUES
-(1, 1, 'Hourly charge', '150.000000', 1, 0, '0.000000', NULL, '', '', '', '', '', '1', 1),
-(2, 1, 'Accounting services', '140.000000', 1, 0, '0.000000', NULL, '', '', '', '', '', '1', 1),
-(3, 1, 'Ploughing service', '125.000000', 1, 0, '0.000000', NULL, '', '', '', '', '', '1', 1),
-(4, 1, 'Bootleg homebrew', '15.500000', 1, 0, '0.000000', NULL, '', '', '', '', '', '1', 1);
+(1, 1, 'Hourly charge', 150.000000, 1, 0, 0.000000, NULL, '', '', '', '', '', '1', 1),
+(2, 1, 'Accounting services', 140.000000, 1, 0, 0.000000, NULL, '', '', '', '', '', '1', 1),
+(3, 1, 'Ploughing service', 125.000000, 1, 0, 0.000000, NULL, '', '', '', '', '', '1', 1),
+(4, 1, 'Bootleg homebrew', 15.500000, 1, 0, 0.000000, NULL, '', '', '', '', '', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -512,7 +512,7 @@ CREATE TABLE IF NOT EXISTS `si_sql_patchmanager` (
   `sql_release` varchar(25) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `sql_statement` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`sql_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=400 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=401 ;
 
 --
 -- Dumping data for table `si_sql_patchmanager`
@@ -770,7 +770,8 @@ INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_
 (396, 248, 'Make Simple Invoices faster - add index', '20100419', 'ALTER TABLE `si_invoices` ADD INDEX(`domain_id`);'),
 (397, 249, 'Make Simple Invoices faster - add index', '20100419', 'ALTER TABLE `si_invoices` ADD INDEX(`biller_id`) ;'),
 (398, 250, 'Make Simple Invoices faster - add index', '20100419', 'ALTER TABLE `si_invoices` ADD INDEX(`customer_id`);'),
-(399, 251, 'Make Simple Invoices faster - add index', '20100419', 'ALTER TABLE `si_payment` ADD INDEX(`domain_id`);');
+(399, 251, 'Make Simple Invoices faster - add index', '20100419', 'ALTER TABLE `si_payment` ADD INDEX(`domain_id`);'),
+(400, 252, 'Language - reset to en_GB - due to folder renaming', '20100419', 'UPDATE `si_system_defaults` SET value =''en_GB'' where name=''language'';');
 
 -- --------------------------------------------------------
 
@@ -839,11 +840,11 @@ CREATE TABLE IF NOT EXISTS `si_tax` (
 --
 
 INSERT INTO `si_tax` (`tax_id`, `tax_description`, `tax_percentage`, `type`, `tax_enabled`, `domain_id`) VALUES
-(1, 'GST', '10.000000', '%', '1', 1),
-(2, 'VAT', '10.000000', '%', '1', 1),
-(3, 'Sales Tax', '10.000000', '%', '1', 1),
-(4, 'No Tax', '0.000000', '%', '1', 1),
-(5, 'Postage', '20.000000', '$', '1', 1);
+(1, 'GST', 10.000000, '%', '1', 1),
+(2, 'VAT', 10.000000, '%', '1', 1),
+(3, 'Sales Tax', 10.000000, '%', '1', 1),
+(4, 'No Tax', 0.000000, '%', '1', 1),
+(5, 'Postage', 20.000000, '$', '1', 1);
 
 -- --------------------------------------------------------
 
