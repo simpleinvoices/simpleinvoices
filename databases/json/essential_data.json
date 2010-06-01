@@ -1110,7 +1110,7 @@
         {
             "id": "8",
             "name": "language",
-            "value": "en-gb",
+            "value": "en_GB",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1" 
         },
