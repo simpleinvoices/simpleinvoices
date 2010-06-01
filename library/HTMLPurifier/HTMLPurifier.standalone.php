@@ -7,7 +7,7 @@
  * primary concern and you are using an opcode cache. PLEASE DO NOT EDIT THIS
  * FILE, changes will be overwritten the next time the script is run.
  *
- * @version 4.1.0
+ * @version 4.1.1
  *
  * @warning
  *      You must *not* include any other HTML Purifier files before this file,
@@ -39,7 +39,7 @@
  */
 
 /*
-    HTML Purifier 4.1.0 - Standards Compliant HTML Filtering
+    HTML Purifier 4.1.1 - Standards Compliant HTML Filtering
     Copyright (C) 2006-2008 Edward Z. Yang
 
     This library is free software; you can redistribute it and/or
@@ -75,10 +75,10 @@ class HTMLPurifier
 {
 
     /** Version of HTML Purifier */
-    public $version = '4.1.0';
+    public $version = '4.1.1';
 
     /** Constant with version of HTML Purifier */
-    const VERSION = '4.1.0';
+    const VERSION = '4.1.1';
 
     /** Global configuration object */
     public $config;
@@ -467,6 +467,42 @@ abstract class HTMLPurifier_AttrDef
      */
     protected function mungeRgb($string) {
         return preg_replace('/rgb\((\d+)\s*,\s*(\d+)\s*,\s*(\d+)\)/', 'rgb(\1,\2,\3)', $string);
+    }
+
+    /**
+     * Parses a possibly escaped CSS string and returns the "pure" 
+     * version of it.
+     */
+    protected function expandCSSEscape($string) {
+        // flexibly parse it
+        $ret = '';
+        for ($i = 0, $c = strlen($string); $i < $c; $i++) {
+            if ($string[$i] === '\\') {
+                $i++;
+                if ($i >= $c) {
+                    $ret .= '\\';
+                    break;
+                }
+                if (ctype_xdigit($string[$i])) {
+                    $code = $string[$i];
+                    for ($a = 1, $i++; $i < $c && $a < 6; $i++, $a++) {
+                        if (!ctype_xdigit($string[$i])) break;
+                        $code .= $string[$i];
+                    }
+                    // We have to be extremely careful when adding
+                    // new characters, to make sure we're not breaking
+                    // the encoding.
+                    $char = HTMLPurifier_Encoder::unichr(hexdec($code));
+                    if (HTMLPurifier_Encoder::cleanUTF8($char) === '') continue;
+                    $ret .= $char;
+                    if ($i < $c && trim($string[$i]) !== '') $i--;
+                    continue;
+                }
+                if ($string[$i] === "\n") continue;
+            }
+            $ret .= $string[$i];
+        }
+        return $ret;
     }
 
 }
@@ -1275,7 +1311,7 @@ class HTMLPurifier_Config
     /**
      * HTML Purifier's version
      */
-    public $version = '4.1.0';
+    public $version = '4.1.1';
 
     /**
      * Bool indicator whether or not to automatically finalize
@@ -6065,7 +6101,15 @@ class HTMLPurifier_Lexer
 
         // extract body from document if applicable
         if ($config->get('Core.ConvertDocumentToFragment')) {
-            $html = $this->extractBody($html);
+            $e = false;
+            if ($config->get('Core.CollectErrors')) {
+                $e =& $context->get('ErrorCollector');
+            }
+            $new_html = $this->extractBody($html);
+            if ($e && $new_html != $html) {
+                $e->send(E_WARNING, 'Lexer: Extracted body');
+            }
+            $html = $new_html;
         }
 
         // expand entities that aren't the big five
@@ -8275,7 +8319,8 @@ class HTMLPurifier_AttrDef_CSS_BackgroundPosition extends HTMLPurifier_AttrDef
         $keywords = array();
         $keywords['h'] = false; // left, right
         $keywords['v'] = false; // top, bottom
-        $keywords['c'] = false; // center
+        $keywords['ch'] = false; // center (first word)
+        $keywords['cv'] = false; // center (second word)
         $measures = array();
 
         $i = 0;
@@ -8295,6 +8340,13 @@ class HTMLPurifier_AttrDef_CSS_BackgroundPosition extends HTMLPurifier_AttrDef
             $lbit = ctype_lower($bit) ? $bit : strtolower($bit);
             if (isset($lookup[$lbit])) {
                 $status = $lookup[$lbit];
+                if ($status == 'c') {
+                    if ($i == 0) {
+                        $status = 'ch';
+                    } else {
+                        $status = 'cv';
+                    }
+                }
                 $keywords[$status] = $lbit;
                 $i++;
             }
@@ -8317,20 +8369,19 @@ class HTMLPurifier_AttrDef_CSS_BackgroundPosition extends HTMLPurifier_AttrDef
 
         if (!$i) return false; // no valid values were caught
 
-
         $ret = array();
 
         // first keyword
         if     ($keywords['h'])     $ret[] = $keywords['h'];
-        elseif (count($measures))   $ret[] = array_shift($measures);
-        elseif ($keywords['c']) {
-            $ret[] = $keywords['c'];
-            $keywords['c'] = false; // prevent re-use: center = center center
+        elseif ($keywords['ch']) {
+            $ret[] = $keywords['ch'];
+            $keywords['cv'] = false; // prevent re-use: center = center center
         }
+        elseif (count($measures))   $ret[] = array_shift($measures);
 
         if     ($keywords['v'])     $ret[] = $keywords['v'];
+        elseif ($keywords['cv'])    $ret[] = $keywords['cv'];
         elseif (count($measures))   $ret[] = array_shift($measures);
-        elseif ($keywords['c'])     $ret[] = $keywords['c'];
 
         if (empty($ret)) return false;
         return implode(' ', $ret);
@@ -8773,37 +8824,10 @@ class HTMLPurifier_AttrDef_CSS_FontFamily extends HTMLPurifier_AttrDef
                 $quote = $font[0];
                 if ($font[$length - 1] !== $quote) continue;
                 $font = substr($font, 1, $length - 2);
-
-                $new_font = '';
-                for ($i = 0, $c = strlen($font); $i < $c; $i++) {
-                    if ($font[$i] === '\\') {
-                        $i++;
-                        if ($i >= $c) {
-                            $new_font .= '\\';
-                            break;
-                        }
-                        if (ctype_xdigit($font[$i])) {
-                            $code = $font[$i];
-                            for ($a = 1, $i++; $i < $c && $a < 6; $i++, $a++) {
-                                if (!ctype_xdigit($font[$i])) break;
-                                $code .= $font[$i];
-                            }
-                            // We have to be extremely careful when adding
-                            // new characters, to make sure we're not breaking
-                            // the encoding.
-                            $char = HTMLPurifier_Encoder::unichr(hexdec($code));
-                            if (HTMLPurifier_Encoder::cleanUTF8($char) === '') continue;
-                            $new_font .= $char;
-                            if ($i < $c && trim($font[$i]) !== '') $i--;
-                            continue;
-                        }
-                        if ($font[$i] === "\n") continue;
-                    }
-                    $new_font .= $font[$i];
-                }
-
-                $font = $new_font;
             }
+
+            $font = $this->expandCSSEscape($font);
+
             // $font is a pure representation of the font name
 
             if (ctype_alnum($font) && $font !== '') {
@@ -8812,12 +8836,21 @@ class HTMLPurifier_AttrDef_CSS_FontFamily extends HTMLPurifier_AttrDef
                 continue;
             }
 
-            // complicated font, requires quoting
+            // bugger out on whitespace.  form feed (0C) really
+            // shouldn't show up regardless
+            $font = str_replace(array("\n", "\t", "\r", "\x0C"), ' ', $font);
 
-            // armor single quotes and new lines
-            $font = str_replace("\\", "\\\\", $font);
-            $font = str_replace("'", "\\'", $font);
-            $final .= "'$font', ";
+            // These ugly transforms don't pose a security
+            // risk (as \\ and \" might).  We could try to be clever and
+            // use single-quote wrapping when there is a double quote
+            // present, but I have choosen not to implement that.
+            // (warning: this code relies on the selection of quotation
+            // mark below)
+            $font = str_replace('\\', '\\5C ', $font);
+            $font = str_replace('"',  '\\22 ', $font);
+
+            // complicated font, requires quoting
+            $final .= "\"$font\", "; // note that this will later get turned into &quot;
         }
         $final = rtrim($final, ', ');
         if ($final === '') return false;
@@ -9171,20 +9204,16 @@ class HTMLPurifier_AttrDef_CSS_URI extends HTMLPurifier_AttrDef_URI
             $uri = substr($uri, 1, $new_length - 1);
         }
 
-        $keys   = array(  '(',   ')',   ',',   ' ',   '"',   "'");
-        $values = array('\\(', '\\)', '\\,', '\\ ', '\\"', "\\'");
-        $uri = str_replace($values, $keys, $uri);
+        $uri = $this->expandCSSEscape($uri);
 
         $result = parent::validate($uri, $config, $context);
 
         if ($result === false) return false;
 
-        // escape necessary characters according to CSS spec
-        // except for the comma, none of these should appear in the
-        // URI at all
-        $result = str_replace($keys, $values, $result);
+        // extra sanity check; should have been done by URI
+        $result = str_replace(array('"', "\\", "\n", "\x0c", "\r"), "", $result);
 
-        return "url('$result')";
+        return "url(\"$result\")";
 
     }
 
@@ -14059,7 +14088,7 @@ class HTMLPurifier_Lexer_DirectLex extends HTMLPurifier_Lexer
                 }
             }
             if ($value === false) $value = '';
-            return array($key => $value);
+            return array($key => $this->parseData($value));
         }
 
         // setup loop environment
@@ -14705,6 +14734,7 @@ class HTMLPurifier_Strategy_MakeWellFormed extends HTMLPurifier_Strategy
             $token = $tokens[$t];
 
             //echo '<br>'; printTokens($tokens, $t); printTokens($this->stack);
+            //flush();
 
             // quick-check: if it's not a tag, no need to process
             if (empty($token->is_tag)) {
@@ -14761,11 +14791,14 @@ class HTMLPurifier_Strategy_MakeWellFormed extends HTMLPurifier_Strategy
                     }
 
                     if ($autoclose && $definition->info[$token->name]->wrap) {
-                        // check if this is actually a wrap (mmm wraps!)
+                        // Check if an element can be wrapped by another 
+                        // element to make it valid in a context (for 
+                        // example, <ul><ul> needs a <li> in between)
                         $wrapname = $definition->info[$token->name]->wrap;
                         $wrapdef = $definition->info[$wrapname];
                         $elements = $wrapdef->child->getAllowedElements($config);
-                        if (isset($elements[$token->name])) {
+                        $parent_elements = $definition->info[$parent->name]->child->getAllowedElements($config);
+                        if (isset($elements[$token->name]) && isset($parent_elements[$wrapname])) {
                             $newtoken = new HTMLPurifier_Token_Start($wrapname);
                             $this->insertBefore($newtoken);
                             $reprocess = true;
