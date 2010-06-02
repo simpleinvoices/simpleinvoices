@@ -61,6 +61,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 		$sql = "SELECT 
 					ap.*, 
 					c.name as cname, 
+					(SELECT CONCAT(p.pref_inv_wording,' ',iv.index_id)) as index_name,
 					b.name as bname,
 					pt.pt_description AS description,
 					ac_notes AS notes,
@@ -69,6 +70,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 				".TB_PREFIX."payment ap,
 				".TB_PREFIX."invoices iv,
 				".TB_PREFIX."customers c,
+				".TB_PREFIX."preferences p,
 				".TB_PREFIX."biller b ,
 				".TB_PREFIX."payment_types pt 
 			where 
@@ -83,13 +85,15 @@ function sql($type='', $dir, $sort, $rp, $page )
 				ap.ac_inv_id = :invoice_id
 				and 
 				ap.domain_id = :domain_id
+				and 
+				iv.preference_id = p.pref_id
 				$where
 			ORDER BY 
 				$sort $dir 
 				$limit";
 		
 		
-		$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':invoice_id', $_GET['id']) or die(htmlspecialchars(end($dbh->errorInfo())));
+		$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':invoice_id', $_GET['id']) or die(htmlsafe(end($dbh->errorInfo())));
 		
 	}
 	#if coming from another page where you want to filter by just one customer
@@ -100,6 +104,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 		$sql = "SELECT 
 					ap.*, 
 					c.name as cname, 
+					(SELECT CONCAT(p.pref_inv_wording,' ',iv.index_id)) as index_name,
 					b.name as bname,
 					pt.pt_description AS description,
 					ac_notes AS notes,
@@ -108,6 +113,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 					".TB_PREFIX."payment ap, 
 					".TB_PREFIX."invoices iv, 
 					".TB_PREFIX."customers c, 
+					".TB_PREFIX."preferences p,
 					".TB_PREFIX."biller b  ,
 					".TB_PREFIX."payment_types pt 
 				where 
@@ -120,11 +126,13 @@ function sql($type='', $dir, $sort, $rp, $page )
 					ap.ac_payment_type = pt.pt_id 
 					and 
 					c.id = :id 
+					and 
+					iv.preference_id = p.pref_id
 				ORDER BY 
 				$sort $dir  
 				$limit";
 
-		$result = dbQuery($sql, ':id', $id) or die(htmlspecialchars(end($dbh->errorInfo())));
+		$result = dbQuery($sql, ':id', $id) or die(htmlsafe(end($dbh->errorInfo())));
 		
 	}
 	#if you want to show all invoices - no filters
@@ -137,12 +145,14 @@ function sql($type='', $dir, $sort, $rp, $page )
 					b.name as bname,
 					pt.pt_description AS description,
 					ac_notes AS notes,
+					(SELECT CONCAT(p.pref_inv_wording,' ',iv.index_id)) as index_name,
 					DATE_FORMAT(ac_date,'%Y-%m-%d') AS date
 				FROM 
 					".TB_PREFIX."payment ap, 
 					".TB_PREFIX."invoices iv, 
 					".TB_PREFIX."customers c, 
 					".TB_PREFIX."biller b ,
+					".TB_PREFIX."preferences p,
 					".TB_PREFIX."payment_types pt 
 				WHERE 
 					ap.ac_inv_id = iv.id 
@@ -154,6 +164,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 						ap.ac_payment_type = pt.pt_id 
 					AND
 						ap.domain_id = :domain_id
+					and 
+					iv.preference_id = p.pref_id
 					$where
 				ORDER BY 
 					$sort $dir 
