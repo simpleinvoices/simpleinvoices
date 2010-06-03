@@ -5,7 +5,7 @@
 	$patch['0']['date'] = "20060514";
 
 	$patch['1']['name'] = "Create sql_patchmanger table";
-	$patch['1']['patch'] = "CREATE TABLE ".TB_PREFIX."sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL, sql_patch VARCHAR( 255 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL, sql_statement TEXT NOT NULL) ENGINE = MYISAM)";
+	$patch['1']['patch'] = "CREATE TABLE ".TB_PREFIX."sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL, sql_patch VARCHAR( 255 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL, sql_statement TEXT NOT NULL) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 	$patch['1']['date'] = "20060514";
 	
 	$patch['2']['name'] = "Update invoice no details to have a default currency sign";
@@ -70,7 +70,7 @@
 `ac_inv_id` VARCHAR( 10 ) NOT NULL ,
 `ac_amount` DOUBLE( 25, 2 ) NOT NULL ,
 `ac_notes` TEXT NOT NULL ,
-`ac_date` DATETIME NOT NULL);
+`ac_date` DATETIME NOT NULL) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ";
 	$patch['16']['date'] = "20060827";
 
@@ -79,7 +79,7 @@
 	$patch['17']['date'] = "20060827";
 
 	$patch['18']['name'] = "Create Payment Types table";
-	$patch['18']['patch'] = "CREATE TABLE `".TB_PREFIX."payment_types` (`pt_id` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,`pt_description` VARCHAR( 250 ) NOT NULL ,`pt_enabled` VARCHAR( 1 ) NOT NULL DEFAULT '1')";
+	$patch['18']['patch'] = "CREATE TABLE `".TB_PREFIX."payment_types` (`pt_id` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,`pt_description` VARCHAR( 250 ) NOT NULL ,`pt_enabled` VARCHAR( 1 ) NOT NULL DEFAULT '1') DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 	$patch['18']['date'] = "20060909";
 	
 	$patch['19']['name'] = "Add info into the Payment Type table";
@@ -141,7 +141,7 @@ ADD `b_custom_field4` VARCHAR( 50 ) AFTER `b_custom_field3` ;
 `cf_custom_field` VARCHAR( 50 ) NOT NULL ,
 `cf_custom_label` VARCHAR( 50 ) ,
 `cf_display` VARCHAR( 1 ) DEFAULT '1' NOT NULL ,
-PRIMARY KEY ( `cf_id` )	);
+PRIMARY KEY ( `cf_id` )	) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ";
 	$patch['30']['date'] = "20061211";
 
@@ -304,7 +304,7 @@ ADD `invoice_custom_field4` VARCHAR( 50 ) AFTER `invoice_custom_field3` ;
 `name` varchar(30) NOT NULL,
 `value` varchar(30) NOT NULL,
 PRIMARY KEY  (`id`),
-UNIQUE KEY `name` (`name`))
+UNIQUE KEY `name` (`name`)) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 ";
 	$patch['62']['date'] = "20070523";
 
@@ -543,7 +543,7 @@ INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
 `userid` INT NOT NULL ,
 `sqlquerie` TEXT NOT NULL
-) ENGINE = MYISAM ;
+) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ";
 	$patch['114']['date'] = "20070523";
 
@@ -635,7 +635,7 @@ INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 `user_group` varchar(255) NOT NULL,
 `user_domain` varchar(255) NOT NULL,
 `user_password` varchar(255) NOT NULL,
-PRIMARY KEY  (`user_id`)) ;
+PRIMARY KEY  (`user_id`)) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ";
 		}
 	$patch['128']['date'] = "200709";
@@ -713,7 +713,7 @@ PRIMARY KEY  (`user_id`)) ;
         	$patch['136']['patch'] = "CREATE TABLE ".TB_PREFIX."user_domain (
 	    		`id` int(11) NOT NULL auto_increment  PRIMARY KEY,
             	`name` varchar(255) UNIQUE NOT NULL
-            	)";
+            	) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
     }
     $patch['136']['date'] = "200712";
     
@@ -807,7 +807,7 @@ PRIMARY KEY  (`user_id`)) ;
     $patch['147']['patch'] = "CREATE TABLE ".TB_PREFIX."user_role (
 	    `id` int(11) NOT NULL auto_increment  PRIMARY KEY,
             `name` varchar(255) UNIQUE NOT NULL
-            ) ENGINE=InnoDB;";
+            ) ENGINE=MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
     if ($config->database->adapter == "pdo_pgsql") {
         $patch['147']['patch'] = "CREATE TABLE ".TB_PREFIX."user_role (
             id serial PRIMARY KEY,
@@ -935,7 +935,7 @@ PRIMARY KEY  (`user_id`)) ;
 		`tax_type` VARCHAR( 1 ) NOT NULL ,
 		`tax_rate` DECIMAL( 25, 6 ) NOT NULL ,
 		`tax_amount` DECIMAL( 25, 6 ) NOT NULL
-		) ENGINE = MYISAM ;";
+		) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
     if ($config->database->adapter == "pdo_pgsql") {
 	    $patch['162']['patch'] = "CREATE TABLE `".TB_PREFIX."invoice_item_tax` (
 			`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
@@ -1217,7 +1217,7 @@ PRIMARY KEY  (`user_id`)) ;
 		`domain_id` INT( 11 ) NOT NULL ,
 		`name` VARCHAR( 255 ) NOT NULL ,
 		`description` VARCHAR( 255 ) NOT NULL ,
-		`enabled` VARCHAR( 1 ) NOT NULL DEFAULT '0');";
+		`enabled` VARCHAR( 1 ) NOT NULL DEFAULT '0') DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
     $patch['198']['date'] = "20090322";	
  
     $patch['199']['name'] = "Update extensions table";
@@ -1248,7 +1248,7 @@ PRIMARY KEY  (`user_id`)) ;
 `node` VARCHAR( 255 ) NOT NULL ,
 `sub_node` VARCHAR( 255 ) NULL ,
 `domain_id` INT( 11 ) NOT NULL
-) ENGINE = MYISAM ;";
+) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
     	$patch['204']['date'] = "20090818";    
 
     $patch['205']['name'] = "Add index_id to invoice table - new invoice numbering";
@@ -1366,7 +1366,7 @@ ADD `language` VARCHAR( 255 ) NULL ;";
                 `email_biller` INT( 1 ) NULL ,
                 `email_customer` INT( 1 ) NULL ,
                 PRIMARY KEY (`domain_id` ,`id`)
-            ) ENGINE = MYISAM ;";
+            ) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
         $patch['227']['date'] = "20100215";    
 
         $patch['228']['name'] = "Create cron_log table to handle record when cron was run";
@@ -1375,7 +1375,7 @@ ADD `language` VARCHAR( 255 ) NULL ;";
             `domain_id` INT( 11 ) NOT NULL ,
             `run_date` DATE NOT NULL ,
             PRIMARY KEY (  `domain_id` ,  `id` )
-            ) ENGINE = MYISAM ;";
+            ) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
         $patch['228']['date'] = "20100216";    
 
         $patch['229']['name'] = "preferences - add online payment type";
@@ -1449,7 +1449,7 @@ ADD `language` VARCHAR( 255 ) NULL ;";
 `date` DATE NOT NULL ,
 `note` TEXT NULL ,
 PRIMARY KEY ( `domain_id`, `id` )
-) ENGINE = MYISAM ;";
+) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
     $patch['244']['date'] = "20100409";    
 
     $patch['245']['name'] = "Preferences - make locale null field";

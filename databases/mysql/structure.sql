@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 14, 2010 at 07:44 AM
+-- Generation Time: Jun 03, 2010 at 09:50 PM
 -- Server version: 5.1.37
 -- PHP Version: 5.2.10-2ubuntu6
 
@@ -59,13 +59,13 @@ CREATE TABLE IF NOT EXISTS `si_cron` (
   `domain_id` int(11) NOT NULL,
   `invoice_id` int(11) NOT NULL,
   `start_date` date NOT NULL,
-  `end_date` varchar(10) DEFAULT NULL,
+  `end_date` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `recurrence` int(11) NOT NULL,
-  `recurrence_type` varchar(11) NOT NULL,
+  `recurrence_type` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
   `email_biller` int(1) DEFAULT NULL,
   `email_customer` int(1) DEFAULT NULL,
   PRIMARY KEY (`domain_id`,`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -76,10 +76,10 @@ CREATE TABLE IF NOT EXISTS `si_cron` (
 CREATE TABLE IF NOT EXISTS `si_cron_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL,
-  `cron_id` varchar(25) DEFAULT NULL,
+  `cron_id` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
   `run_date` date NOT NULL,
   PRIMARY KEY (`domain_id`,`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -153,9 +153,9 @@ CREATE TABLE IF NOT EXISTS `si_extensions` (
 
 CREATE TABLE IF NOT EXISTS `si_index` (
   `id` int(11) NOT NULL,
-  `node` varchar(255) NOT NULL,
-  `sub_node` varchar(255) DEFAULT NULL,
-  `sub_node_2` varchar(255) DEFAULT NULL,
+  `node` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `sub_node` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sub_node_2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `domain_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -172,9 +172,9 @@ CREATE TABLE IF NOT EXISTS `si_inventory` (
   `quantity` decimal(25,6) NOT NULL,
   `cost` decimal(25,6) DEFAULT NULL,
   `date` date NOT NULL,
-  `note` text,
+  `note` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`domain_id`,`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -366,7 +366,7 @@ CREATE TABLE IF NOT EXISTS `si_sql_patchmanager` (
   `sql_release` varchar(25) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `sql_statement` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`sql_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=400 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=599 ;
 
 -- --------------------------------------------------------
 
