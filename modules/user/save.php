@@ -63,7 +63,7 @@ if ($op === 'edit_user' ) {
 
     function editUser() {
 
-	    empty($_POST[password_field]) ? $password = "" : $password = "password = MD5('".$_POST[password_field]."'),"  ;
+	    empty($_POST[password_field]) ? $password = "" : $password = "password = '".md5($_POST[password_field])."',"  ;
 
         $sql = "UPDATE ".TB_PREFIX."user
                     SET
