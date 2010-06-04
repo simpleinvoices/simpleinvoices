@@ -555,3 +555,30 @@ function outhtml($html) {
     return $purifier->purify($html);
 
 }
+
+//Generates a token to be used on forms that change something
+function siNonce($userid = 0, $action = false, $tickTock = false)
+{
+    global $config;
+    
+    $tickTock = ($tickTock) ? $tickTock : floor(time()/$config->nonce->timelimit);
+    
+    $hash = md5($tickTock.':'.$config->nonce->key.':'.$userid.':'.$action);
+    
+    return $hash;
+}
+
+//Verify a nonce token
+function verifySiNonce($hash, $userid, $action)
+{
+    global $config;
+    
+    $tickTock = floor(time()/$config->nonce->timelimit);
+    if(!isempty($hash) AND $hash === siNonce($userid, $action) OR $hash === siNonce($userid, $action, $tickTock-1))
+    {
+        return true;
+    }
+    
+    //else
+    return false;
+}
