@@ -557,11 +557,17 @@ function outhtml($html) {
 }
 
 //Generates a token to be used on forms that change something
-function siNonce($userid = 0, $action = false, $tickTock = false)
+function siNonce($action = false, $userid = false, $tickTock = false)
 {
     global $config;
+    global $auth_session;
     
     $tickTock = ($tickTock) ? $tickTock : floor(time()/$config->nonce->timelimit);
+    
+    if(!$userid)
+    {
+        $userid = $auth_session->id; 
+    }
     
     $hash = md5($tickTock.':'.$config->nonce->key.':'.$userid.':'.$action);
     
@@ -569,12 +575,12 @@ function siNonce($userid = 0, $action = false, $tickTock = false)
 }
 
 //Verify a nonce token
-function verifySiNonce($hash, $userid, $action)
+function verifySiNonce($hash, $action, $userid = false)
 {
     global $config;
     
     $tickTock = floor(time()/$config->nonce->timelimit);
-    if(!isempty($hash) AND $hash === siNonce($userid, $action) OR $hash === siNonce($userid, $action, $tickTock-1))
+    if(!isempty($hash) AND ($hash === siNonce($action, $userid) OR $hash === siNonce($action, $userid, $tickTock-1)))
     {
         return true;
     }
