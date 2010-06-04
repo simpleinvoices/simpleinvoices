@@ -538,7 +538,7 @@ function htmlsafe($str) {
 /* Makes a string to be put inside a href="" safe */
 function urlsafe($str) {
     $str = preg_replace('/[^a-zA-Z0-9@;:%_\+\.~#\?\/\=\&\/\-]/','',$str);
-    if(preg_match('/^\s*javascript/i', $subject)) //no javascript urls
+    if(preg_match('/^\s*javascript/i', $str)) //no javascript urls
     {
         return false;
     }
