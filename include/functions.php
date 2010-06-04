@@ -592,3 +592,51 @@ function verifySiNonce($hash, $action, $userid = false)
     //else
     return false;
 }
+
+//Put this before an action is commited make sure to put a unique $action
+function requireCSRFProtection($action = 'all', $userid = false)
+{
+    verifySiNonce($_REQUEST['csrfprotectionbysr'], $action, $userid) or die('CSRF Attack Detected');      
+}
+
+function addCSRFToken($matches)
+{
+    $token = siNonce('all');
+    $action = $matches[1];
+    //We need to work out if it is offsite.
+    //If not offsite then add protection.
+    //otherwise just return
+    $isOnSite = false;
+    if(strpos($action, ':') === false) //is not full URL
+    {
+        $isOnSite = true;
+    }
+    elseif(parse_url($action, PHP_URL_HOST) === $_SERVER['HTTP_HOST'] OR parse_url($action, PHP_URL_HOST) === $_SERVER['SERVER_NAME'])
+    {
+        $isOnSite = true;
+    }
+    
+    return $matches[0].(($isOnSite) ? '<input type="hidden" name="csrfprotectionbysr" value="'.htmlsafe($token).'" />' : '');
+}
+
+function addCSRFProtection($buffer)
+{
+    $rawheaders = headers_list();
+    $headers = array();
+    foreach($rawheaders as $header)
+    {
+        $header = explode(':', $header, 2);
+        $headers[strtolower($header[0])] = $header[1];
+    }
+    
+    /* if not html then leave alone */
+    if($headers['content-type'] AND strpos($headers['content-type'], 'html') === false)
+    {
+        return $buffer;
+    }
+     
+    return preg_replace_callback('/<form.+?action=[\'"]?([^\'"\s]+)[\'"\s].*?>/i', 'addCSRFToken', $buffer);
+}
+
+//Do it
+ob_start('addCSRFProtection');
