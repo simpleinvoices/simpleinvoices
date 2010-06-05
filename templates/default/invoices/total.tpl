@@ -26,10 +26,10 @@
 <textarea input type="text" class="editor" name="description" rows="10" cols="100" wrap="nowrap"></textarea></td>
 </tr>
 
-	{$show_custom_field.1|htmlsafe}
-	{$show_custom_field.2|htmlsafe}
-	{$show_custom_field.3|htmlsafe}
-	{$show_custom_field.4|htmlsafe}
+	{$show_custom_field.1}
+	{$show_custom_field.2}
+	{$show_custom_field.3}
+	{$show_custom_field.4}
 	{*
 		{showCustomFields categorieId="4"}
 	*}
