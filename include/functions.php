@@ -284,7 +284,7 @@ function show_custom_field($custom_field,$custom_field_value,$permission,$css_cl
 	*/	
 	if ( (($has_custom_label_value != null) AND ( $permission == "write")) OR ($custom_field_value != null)) {
 
-		$custom_label_value = get_custom_field_label($custom_field);
+		$custom_label_value = htmlsafe(get_custom_field_label($custom_field));
 
 		if ($permission == "read") {
 			$display_block = <<<EOD
