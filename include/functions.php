@@ -599,7 +599,12 @@ function requireCSRFProtection($action = 'all', $userid = false)
     verifySiNonce($_REQUEST['csrfprotectionbysr'], $action, $userid) or die('CSRF Attack Detected');      
 }
 
-function addCSRFToken($matches)
+function antiCSRFHiddenInput($action = 'all', $userid = false)
+{
+    return '<input type="hidden" name="csrfprotectionbysr" value="'.htmlsafe(siNonce($action, $userid)).'" />';
+}
+
+/*function addCSRFToken($matches)
 {
     if(!preg_match('/method=[\'"]?post[\'"\s>]/i', $action[0])) //post only
     {
@@ -634,11 +639,11 @@ function addCSRFProtection($buffer)
         $headers[strtolower($header[0])] = $header[1];
     }
     
-    /* if not html then leave alone */
+    // if not html then leave alone
     if($headers['content-type'] AND strpos($headers['content-type'], 'html') === false)
     {
         return $buffer;
     }
      
     return preg_replace_callback('/<form.+?action=[\'"]?([^\'"\s]+)[\'"\s].*?>/i', 'addCSRFToken', $buffer);
-}
+}*/
