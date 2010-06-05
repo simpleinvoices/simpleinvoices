@@ -26,7 +26,7 @@
 		<td colspan="6" align="center"></td>
 	</tr>
         <tr>
-		<td class="details_screen">{$preference.pref_inv_wording} {$LANG.number_short}</td><td> {$invoice.index_id|htmlsafe} </td>
+		<td class="details_screen">{$preference.pref_inv_wording|htmlsafe} {$LANG.number_short}</td><td> {$invoice.index_id|htmlsafe} </td>
 	</tr>
 	<tr>
 	        <td class="details_screen">{$LANG.date_formatted}</td>
@@ -92,10 +92,10 @@
 			<td colspan="6" ><textarea input type="text" class="editor" name="description0" rows="10" cols="70" wrap="nowrap">{$invoiceItems.0.description|outhtml}</textarea></td>
         	</tr>
 
-	 {$customFields.1|htmlsafe}
-	 {$customFields.2|htmlsafe}
-	 {$customFields.3|htmlsafe}
-	 {$customFields.4|htmlsafe}
+	 {$customFields.1}
+	 {$customFields.2}
+	 {$customFields.3}
+	 {$customFields.4}
 	 {*
 	 	{showCustomFields categorieId="4" itemId=$smarty.get.invoice}
 	 *}
@@ -282,16 +282,16 @@
 		{*
 			<tr>
 				<td>
-					<a href="./index.php?module=invoices&amp;view=add_invoice_item&amp;invoice={$invoice.id|htmlsafe}&amp;type={$invoice.type_id|htmlsafe}&amp;tax_id={$invoiceItems.0.tax_id|htmlsafe}"><img src="./images/common/famfamAdd.png" alt="" />{$LANG.add_invoice_item}</a>
+					<a href="./index.php?module=invoices&amp;view=add_invoice_item&amp;invoice={$invoice.id|urlencode}&amp;type={$invoice.type_id|urlencode}&amp;tax_id={$invoiceItems.0.tax_id|urlencode}"><img src="./images/common/famfamAdd.png" alt="" />{$LANG.add_invoice_item}</a>
 				</td>
 				<td>
 				</td>
 			</tr>
 		*}
-	 {$customFields.1|htmlsafe}
-	 {$customFields.2|htmlsafe}
-	 {$customFields.3|htmlsafe}
-	 {$customFields.4|htmlsafe}
+	 {$customFields.1}
+	 {$customFields.2}
+	 {$customFields.3}
+	 {$customFields.4}
 	 {*
 	 	 {showCustomFields categorieId="4" itemId=$smarty.get.invoice}
 	 *}
