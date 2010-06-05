@@ -601,6 +601,11 @@ function requireCSRFProtection($action = 'all', $userid = false)
 
 function addCSRFToken($matches)
 {
+    if(!preg_match('/method=[\'"]?post[\'"\s>]/i', $action[0])) //post only
+    {
+        return $matches[0];
+    }
+    
     $token = siNonce('all');
     $action = $matches[1];
     //We need to work out if it is offsite.
