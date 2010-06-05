@@ -44,6 +44,8 @@ require_once("library/paypal/paypal.class.php");
 require_once('./library/HTMLPurifier/HTMLPurifier.standalone.php');
 include_once('./include/functions.php');
 
+//ob_start('addCSRFProtection');
+
 /*
  * log file - start
  */

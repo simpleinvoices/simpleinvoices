@@ -637,6 +637,3 @@ function addCSRFProtection($buffer)
      
     return preg_replace_callback('/<form.+?action=[\'"]?([^\'"\s]+)[\'"\s].*?>/i', 'addCSRFToken', $buffer);
 }
-
-//Do it
-ob_start('addCSRFProtection');
