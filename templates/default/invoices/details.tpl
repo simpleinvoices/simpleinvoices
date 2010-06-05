@@ -247,7 +247,7 @@
 								<td>
 								</td>
 								<td colspan="4">
-									<textarea input type="text" class="note-edit" name="description{$line|htmlsafe}" id="description{$line|htmlsafe}" rows="3" cols="3" wrap="nowrap">{$invoiceItem.description|ouhtml}</textarea>
+									<textarea input type="text" class="note-edit" name="description{$line|htmlsafe}" id="description{$line|htmlsafe}" rows="3" cols="3" wrap="nowrap">{$invoiceItem.description|outhtml}</textarea>
 									
 									</td>
 						</tr>
