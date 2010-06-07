@@ -287,7 +287,7 @@ class invoice {
                 $sql_having .= "AND ( owing > 0 ) ";
                 break;
             case "paid":
-                $sql_having .= "AND ( owing ='' ) ";
+                $sql_having .= "AND ( owing ='' ) OR ( owing < 0 )";
                 break;
             case "draft":
                 $sql_having .= "AND ( status = 0 )";
