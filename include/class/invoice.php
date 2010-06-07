@@ -249,7 +249,7 @@ class invoice {
                 $sql_having = "HAVING ( owing > 0 ) ";
                 break;
             case "paid":
-                $sql_having = "HAVING ( owing ='' )";
+                $sql_having = "HAVING ( owing ='' )  OR ( owing < 0 )";
                 break;
             case "draft":
                 $sql_having = "HAVING ( status = 0 )";
