@@ -58,17 +58,17 @@ class export
 				{
 					case "statement":
 					{
-						header("Content-Disposition: attachment; filename=statement.".str_replace(' ', '_', $this->file_type));
+						header('Content-Disposition: attachment; filename="statement.'.addslashes($this->file_type).'"');
 						break;
 					}
 					case "payment":
 					{
-						header("Content-Disposition: attachment; filename=payment".str_replace(' ', '_', $this->id.'.'.$this->file_type));
+						header('Content-Disposition: attachment; filename="payment'.addslashes($this->id.'.'.$this->file_type).'"');
 						break;
 					}
 					default:
 					{
-						header("Content-Disposition: attachment; filename=".str_replace(' ', '_', $preference[pref_inv_heading].$this->id.'.'.$this->file_type));
+						header('Content-Disposition: attachment; filename="'.addslashes($preference[pref_inv_heading].$this->id.'.'.$this->file_type).'"');
 						break;
 					}
 				}
