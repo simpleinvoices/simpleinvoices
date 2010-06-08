@@ -420,7 +420,7 @@
 		<td class="tbl1-bottom col1" colspan="6"><b>{$preference.pref_inv_detail_heading|htmlsafe}</b></td>
 	</tr>
 	<tr>
-		<td class="" colspan="6"><i>{$preference.pref_inv_detail_line|htmlsafe}</i></td>
+		<td class="" colspan="6"><i>{$preference.pref_inv_detail_line|outhtml}</i></td>
 	</tr>
 	<tr>
 		<td class="" colspan="6">{$preference.pref_inv_payment_method|htmlsafe}</td>
@@ -441,7 +441,7 @@
 		<td>
 			{online_payment_link 
 				type=$preference.include_online_payment business=$biller.paypal_business_name 
-				item_name=$invoice.index_name invoice=$invoice.index_id 
+				item_name=$invoice.index_name invoice=$invoice.id 
 				amount=$invoice.total currency_code=$preference.currency_code
 				link_wording=$LANG.paypal_link
 				notify_url=$biller.paypal_notify_url return_url=$biller.paypal_return_url
