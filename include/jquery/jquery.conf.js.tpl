@@ -93,6 +93,11 @@ $(document).ready(function(){
 
 	//load the configs for the html editor
 	//$('.editor').livequery(function(){ $(this).wysiwyg({
+	if($('.editor') && $('.editor')[0] && typeof($('.editor')[0].contentEditable) != 'undefined'
+	&& !(
+	(navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/iPad/i))
+	&& navigator.userAgent.match(/CPU\sOS\s[0123]_\d/i))) //only if it is supported | iPhone OS <= 3.2 incorrectly report it
+	{
 	$('.editor').wysiwyg({
     controls : {
 	    html : { visible : true },
@@ -120,6 +125,7 @@ $(document).ready(function(){
         insertUnorderedList : { visible : true }
     }
 	});
+	}
 
 	//hide the description field for each line item on invoice creation
 	$('.notes').hide();
