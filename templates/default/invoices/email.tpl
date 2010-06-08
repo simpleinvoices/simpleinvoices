@@ -68,6 +68,7 @@
 {/if}
 
 {if $smarty.get.stage == 2}
+<meta http-equiv="refresh" content="2;URL=index.php?module=invoices&amp;view=manage" />
 
 <div id="top"></b></div>
 
