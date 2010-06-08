@@ -349,7 +349,7 @@
 		</tr>
 			<!-- if hide detail click - the stripped note will be displayed -->
 		<tr class="show-notes details_screen">
-				<td colspan="6">{$invoice.note|truncate:25:"...":true|htmlsafe}</td>
+				<td colspan="6">{$invoice.note|truncate:25:"...":true|outhtml}</td>
 		</tr>
 			<!-- if show detail click - the full note will be displayed -->
 		<tr class="notes details_screen">
