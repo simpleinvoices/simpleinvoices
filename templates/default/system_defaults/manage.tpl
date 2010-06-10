@@ -16,7 +16,9 @@
 		<td class="details_screen"><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=line_items'><img src="images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td><td class="details_screen">{$LANG.default_number_items}</td><td>{$defaults.line_items|htmlsafe}</td>
 	</tr>
 	<tr>
-		<td class="details_screen"><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=def_inv_template'><img src="images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td><td class="details_screen">{$LANG.default_inv_template}</td><td>{$defaults.template|htmlsafe}</td>
+		<td class="details_screen"><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=def_inv_template'><img src="images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td><td class="details_screen">{$LANG.default_inv_template}
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_default_invoice_template_text" title="{$LANG.default_inv_template}"><img src="./images/common/help-small.png" alt="" /></a>
+        </td><td>{$defaults.template|htmlsafe}</td>
 	</tr>
 	<tr>
 		<td class="details_screen"><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=def_payment_type'><img src="images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td><td class="details_screen">{$LANG.default_payment_type}</td><td>{$defaultPaymentType.pt_description|htmlsafe}</td>
