@@ -10,5 +10,8 @@ IndexIgnore *
 </FilesMatch>
 
 RewriteEngine on
-RewriteRule ^/?([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)?$ index.php?module=$1&view=$2&id=$3 
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^/?([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)?$ index.php?module=$1&view=$2&id=$3
+
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^/?([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)$ index.php?module=$1&view=$2 [L]
