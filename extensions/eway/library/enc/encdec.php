@@ -23,7 +23,7 @@ if (isset($HTTP_POST_VARS['encrypt'])) {
 	
 <BODY>
 
-<FORM action = '<?php echo $_SERVER['PHP_SELF'] ?>' method = 'post'>
+<FORM action = '<?php echo urlsafe($_SERVER['PHP_SELF']) ?>' method = 'post'>
 <BR>Original Text<BR>
 <TEXTAREA name = 'text' cols="40" rows="8" wrap="soft">Welcome to the Real World.</TEXTAREA>
 <BR>Enter Key String<BR>
@@ -32,13 +32,13 @@ if (isset($HTTP_POST_VARS['encrypt'])) {
 <BR>Encrypted Text<BR>
 <TEXTAREA name = 'enctext' cols="40" rows="8" wrap="soft"><?php
 if (isset($HTTP_POST_VARS['encrypt']) || isset($HTTP_POST_VARS['decrypt']))
-    echo $encstr;
+    echo htmlsafe($encstr);
 
 ?></TEXTAREA>
 <BR>Decrypted Text<BR>
 <TEXTAREA name = 'dectext' cols="40" rows="8" wrap="soft"><?php
 if (isset($HTTP_POST_VARS['encrypt']) || isset($HTTP_POST_VARS['decrypt']))
-    echo $decstr;
+    echo htmlsafe($decstr);
 
 ?></TEXTAREA>
 </FORM>
