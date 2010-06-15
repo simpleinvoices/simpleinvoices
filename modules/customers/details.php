@@ -42,7 +42,6 @@ $stuff['owing'] = $stuff['total'] - $stuff['paid'];
 $customFieldLabel = getCustomFieldLabels();
 $invoices = getCustomerInvoices($customer_id);
 
-
 //$customFieldLabel = getCustomFieldLabels("biller");
 $smarty -> assign("stuff",$stuff);
 $smarty -> assign('customer',$customer);
