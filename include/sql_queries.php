@@ -1364,7 +1364,7 @@ function updateCustomer() {
 
     }
 
-	    empty($_POST[password_field]) ? $password = "" : $password = "password = MD5('".$_POST[password_field]."'),"  ;
+	    empty($_POST[password_field]) ? $password = "" : $password = "password = '".md5($_POST[password_field])."',"  ;
 
 
 	$sql = "UPDATE
@@ -1383,7 +1383,7 @@ function updateCustomer() {
 				fax = :fax,
 				email = :email,
 				credit_card_holder_name = :credit_card_holder_name,
-                ".$cc_sql."
+                credit_card_number = :credit_card_number,
 				credit_card_expiry_month = :credit_card_expiry_month,
 				credit_card_expiry_year = :credit_card_expiry_year,
 				notes = :notes,
@@ -1411,6 +1411,7 @@ function updateCustomer() {
 		':email', $_POST[email],
 		':notes', $_POST[notes],
 		':credit_card_holder_name', $_POST[credit_card_holder_name],
+        ':credit_card_number', $encrypted_credit_card_number,
 		':credit_card_expiry_month', $_POST[credit_card_expiry_month],
 		':credit_card_expiry_year', $_POST[credit_card_expiry_year],
 		':custom_field1', $_POST[custom_field1],
