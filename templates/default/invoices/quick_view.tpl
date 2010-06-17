@@ -73,10 +73,10 @@
 		<td class="details_screen">{$preference.pref_inv_wording|htmlsafe} {$LANG.date}:</td>
 		<td class="details_screen" colspan="5">{$invoice.date|htmlsafe}</td>
 	</tr>
-	{$customField.1|htmlout}
-	{$customField.2|htmlsafe}
-	{$customField.3|htmlsafe}
-	{$customField.4|htmlsafe}
+	{$customField.1}
+	{$customField.2}
+	{$customField.3}
+	{$customField.4}
 
 	<tr>	
 		<td><br /></td>
