@@ -1353,11 +1353,14 @@ function updateCustomer() {
         $key = $config->encryption->default->key;	
         $encrypted_credit_card_number = $enc->encrypt($key, $credit_card_number);
 
-        $cc_sql = 'credit_card_number = :credit_card_number,';
+        $cc_sql ="credit_card_number = :credit_card_number,";
+        $cc_pdo_name = ":credit_card_number";
+        $cc_pdo = $encrypted_credit_card_number;
 
     } else {
 
         $cc_sql ='';
+        $cc_pdo ='';
         $encrypted_credit_card_number = '';
         $pdo_credit_card_number = '';
         $comma ='';
@@ -1407,7 +1410,7 @@ function updateCustomer() {
 		':fax', $_POST[fax],
 		':email', $_POST[email],
 		':notes', $_POST[notes],
-        ':credit_card_number', $encrypted_credit_card_number,
+        $cc_pdo_name, $cc_pdo ,
 		':credit_card_holder_name', $_POST[credit_card_holder_name],
 		':credit_card_expiry_month', $_POST[credit_card_expiry_month],
 		':credit_card_expiry_year', $_POST[credit_card_expiry_year],
