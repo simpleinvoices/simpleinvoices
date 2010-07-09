@@ -1360,6 +1360,7 @@ function updateCustomer() {
     } else {
 
         $cc_sql ='';
+        $cc_pdo_name ='';
         $cc_pdo ='';
         $encrypted_credit_card_number = '';
         $pdo_credit_card_number = '';
