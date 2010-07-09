@@ -1343,6 +1343,9 @@ function updateBiller() {
 function updateCustomer() {
 	global $db;
 	global $config;
+
+	//ugly hack with conditional sql - but couldn't get it working without this :(
+	//TODO - make this just 1 query - refer svn history for info on past versions
 	
     if($_POST['credit_card_number_new'] !='')
     {
