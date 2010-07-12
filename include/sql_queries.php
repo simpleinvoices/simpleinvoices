@@ -976,9 +976,9 @@ function numberOfTaxesForInvoice($invoice_id)
 	$sql = "select 
 				DISTINCT tax.tax_id
 			from 
-				si_invoice_item_tax item_tax, 
-				si_invoice_items item, 
-				si_tax tax 
+				".TB_PREFIX."invoice_item_tax item_tax, 
+				".TB_PREFIX."invoice_items item, 
+				".TB_PREFIX."tax tax 
 			where 
 				item.id = item_tax.invoice_item_id 
 				AND 
@@ -1005,9 +1005,9 @@ function taxesGroupedForInvoice($invoice_id)
 				sum(item_tax.tax_amount) as tax_amount,
 				count(*) as count
 			from 
-				si_invoice_item_tax item_tax, 
-				si_invoice_items item, 
-				si_tax tax 
+				".TB_PREFIX."invoice_item_tax item_tax, 
+				".TB_PREFIX."invoice_items item, 
+				".TB_PREFIX."tax tax 
 			where 
 				item.id = item_tax.invoice_item_id 
 				AND 
@@ -1034,8 +1034,8 @@ function taxesGroupedForInvoiceItem($invoice_item_id)
 				tax.tax_description as tax_name, 
 				tax.tax_id as tax_id 
 			from 
-				si_invoice_item_tax item_tax, 
-				si_tax tax 
+				".TB_PREFIX."invoice_item_tax item_tax, 
+				".TB_PREFIX."tax tax 
 			where 
 				item_tax.invoice_item_id = :invoice_item_id 
 				AND 
