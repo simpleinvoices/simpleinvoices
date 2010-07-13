@@ -24,6 +24,7 @@ $acl->add(new Zend_Acl_Resource('expense_account'));
 $acl->add(new Zend_Acl_Resource('index'));
 $acl->add(new Zend_Acl_Resource('inventory'));
 $acl->add(new Zend_Acl_Resource('invoices'));
+$acl->add(new Zend_Acl_Resource('install'));
 $acl->add(new Zend_Acl_Resource('billers'));
 $acl->add(new Zend_Acl_Resource('products'));
 $acl->add(new Zend_Acl_Resource('payments'));
