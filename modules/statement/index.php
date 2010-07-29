@@ -7,8 +7,11 @@
 * Authors:
 *	 Justin Kelly
 *
+* Contributors:
+*	 Matt West
+*
 * Last edited:
-* 	 2008-05-13
+* 	 2010-07-29
 *
 * License:
 *	 GPL v3
@@ -65,6 +68,17 @@ if (isset($_POST['submit']))
 		}
 		$show_only_unpaid = "yes";
 	}
+	
+	if ( isset($_POST['show_only_real']) )
+	{
+		if ($having_and_count == 1) 
+		{
+			$invoice->having_and = "real";
+		} else {
+			$invoice->having = "real";
+		}
+		$show_only_real = "yes";
+	}
 
 	$invoice->sort = "date";
 	$invoice_all = $invoice->select_all();
@@ -90,6 +104,7 @@ $smarty -> assign('customer_id', $customer_id);
 $smarty -> assign('customer_details', $customer_details);
 
 $smarty -> assign('show_only_unpaid', $show_only_unpaid);
+$smarty -> assign('show_only_real', $show_only_real);
 $smarty -> assign('filter_by_date', $filter_by_date);
 
 $smarty -> assign('billers', $billers);

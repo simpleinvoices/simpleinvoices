@@ -16,6 +16,7 @@ $customer_id = $_GET['customer_id'];
 $start_date = $_GET['start_date'];
 $end_date = $_GET['end_date'];
 $show_only_unpaid = $_GET['show_only_unpaid'];
+$show_only_real = $_GET['show_only_real'];
 $filter_by_date = $_GET['filter_by_date'];
 $get_format = $_GET['format'];
 $get_file_type = $_GET['filetype'];
