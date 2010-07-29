@@ -125,6 +125,17 @@ class export
 	
 					}
 				}
+				
+				if ( $this->show_only_real == "yes") 
+				{
+					if ($having_count == 1) 
+					{
+						$invoice->having_and = "real";
+					} else {
+						$invoice->having = "real";
+	
+					}
+				}
 
 				$invoice_all = $invoice->select_all('count');
 
@@ -150,6 +161,7 @@ class export
 				$smarty -> assign('customer_details', $customer_details);
 
 				$smarty -> assign('show_only_unpaid', $show_only_unpaid);
+				$smarty -> assign('show_only_real', $show_only_real);
 				$smarty -> assign('filter_by_date', $this->filter_by_date);
 
 				$smarty -> assign('invoices', $invoices);
