@@ -74,6 +74,14 @@
 		<input type="checkbox" name="show_only_unpaid"  {if $show_only_unpaid == "yes"} checked {/if} value="yes">
 	</td>
 	</tr>
+	<tr>
+	<td class="details_screen">
+		{$LANG.show_only_real_invoices}
+	</td>
+	<td class="">
+		<input type="checkbox" name="show_only_real"  {if $show_only_real == "yes"} checked {/if} value="yes">
+	</td>
+	</tr>
 
 <tr>
 <td colspan="2"><br />
