@@ -18,7 +18,7 @@
 *}
 {if $smarty.get.stage == 1 }
 
-<form name="frmpost" action="index.php?module=statement&amp;view=email&amp;stage=2&amp;biller_id={$smarty.get.biller_id|urlencode}&amp;customer_id={$smarty.get.customer_id|urlencode}&amp;start_date={$smarty.get.start_date|urlencode}&amp;end_date={$smarty.get.end_date|urlencode}&amp;show_only_unpaid={$smarty.get.show_only_unpaid|urlencode}&amp;format=file" method="post">
+<form name="frmpost" action="index.php?module=statement&amp;view=email&amp;stage=2&amp;biller_id={$smarty.get.biller_id|urlencode}&amp;customer_id={$smarty.get.customer_id|urlencode}&amp;start_date={$smarty.get.start_date|urlencode}&amp;end_date={$smarty.get.end_date|urlencode}&amp;show_only_unpaid={$smarty.get.show_only_unpaid|urlencode}&amp;show_only_real={$smarty.get.show_only_real|urlencode}&amp;format=file" method="post">
 <div id="top"><h3>{$LANG.email_statement_as_pdf}</h3></div>
 
 <table align="center">
