@@ -53,6 +53,10 @@
 	{literal}
 	<script type="text/javascript" src="./include/jquery/jquery.validationEngine.js"></script>
     {/literal}
+    <!-- Javascript for Flot Graphs -->
+    {literal}
+    <script type="text/javascript" src="./library/flot/jquery.flot.js"></script>
+    {/literal}
 
 </head>
 <body>
