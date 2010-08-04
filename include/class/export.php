@@ -183,7 +183,7 @@ class export
                 $biller = getBiller($payment['biller_id']);
                 $logo = getLogo($biller);
                 $logo = str_replace(" ", "%20", $logo);
-                $customer = customer:get($payment['customer_id']);
+                $customer = customer::get($payment['customer_id']);
                 $invoiceType = getInvoiceType($invoice['type_id']);
                 $customFieldLabels = getCustomFieldLabels();
                 $paymentType = getPaymentType($payment['ac_payment_type']);
