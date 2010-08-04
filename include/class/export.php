@@ -183,7 +183,7 @@ class export
                 $biller = getBiller($payment['biller_id']);
                 $logo = getLogo($biller);
                 $logo = str_replace(" ", "%20", $logo);
-                $customer = getCustomer($payment['customer_id']);
+                $customer = customer:get($payment['customer_id']);
                 $invoiceType = getInvoiceType($invoice['type_id']);
                 $customFieldLabels = getCustomFieldLabels();
                 $paymentType = getPaymentType($payment['ac_payment_type']);
@@ -214,7 +214,7 @@ class export
 			
 				$invoice = invoice::select($this->id);
  			        $invoice_number_of_taxes = numberOfTaxesForInvoice($this->id);
-				$customer = getCustomer($invoice['customer_id']);
+				$customer = customer::get($invoice['customer_id']);
 				$biller = biller::select($invoice['biller_id']);
 				$preference = getPreference($invoice['preference_id']);
 				$defaults = getSystemDefaults();
