@@ -151,7 +151,7 @@ class export
 				$templatePath = "./templates/default/statement/index.tpl";
 			
 				$biller_details = getBiller($this->biller_id);
-				$customer_details = getCustomer($this->customer_id);
+				$customer_details = customer::get($this->customer_id);
 
 				$this->file_name = "statement_".$this->biller_id."_".$this->customer_id."_".$invoice->start_date."_".$invoice->end_date;
 

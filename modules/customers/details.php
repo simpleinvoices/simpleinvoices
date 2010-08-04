@@ -22,7 +22,7 @@ checkLogin();
 
 #get the invoice id
 $customer_id = $_GET['id'];
-$customer = getCustomer($customer_id);
+$customer = customer::get($customer_id);
 $customer['wording_for_enabled'] = $customer['enabled']==1?$LANG['enabled']:$LANG['disabled'];
 
 

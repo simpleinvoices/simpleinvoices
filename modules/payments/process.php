@@ -32,7 +32,7 @@ else {
     #$sth = new invoice();
     #$invoice = $sth->select_all();
 }
-$customer = getCustomer($invoice['customer_id']);
+$customer = customer::get($invoice['customer_id']);
 $biller = getBiller($invoice['biller_id']);
 $defaults = getSystemDefaults();
 $pt = getPaymentType($defaults['payment_type']);

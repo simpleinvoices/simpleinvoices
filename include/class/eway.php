@@ -17,7 +17,7 @@ class eway
         //set customer,biller and preference if not defined
         if(empty($this->customer))
         {
-            $this->customer = getCustomer($this->invoice['customer_id']);
+            $this->customer = customer::get($this->invoice['customer_id']);
         }
         if(empty($this->biller))
         {
@@ -53,7 +53,7 @@ class eway
         //set customer,biller and preference if not defined
         if(empty($this->customer))
         {
-            $this->customer = getCustomer($this->invoice['customer_id']);
+            $this->customer = customer::get($this->invoice['customer_id']);
         }
         if(empty($this->biller))
         {

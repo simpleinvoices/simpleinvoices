@@ -8,7 +8,7 @@ $customer = getTopCustomer();
 $biller = getTopBiller();
 
 $billers = getBillers();
-$customers = getCustomers();
+$customers = customer::get_all();
 $taxes = getTaxes();
 $products = getProducts();
 $preferences = getPreferences();

@@ -28,7 +28,7 @@ $get_file_type = $_GET['filetype'];
 
 
 $biller = getBiller($_GET['biller_id']);
-$customer = getCustomer($_GET['customer_id']);
+$customer = customer::get($_GET['customer_id']);
 
 #create PDF name
       

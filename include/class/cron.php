@@ -299,7 +299,7 @@ class cron {
                         $invoice= invoice::select($new_invoice_id);
                         $preference = getPreference($invoice['preference_id']);
                         $biller = getBiller($invoice['biller_id']);
-                        $customer = getCustomer($invoice['customer_id']);
+                        $customer = customer::get($invoice['customer_id']);
                         #print_r($customer);
                         #create PDF nameVj
                         $spc2us_pref = str_replace(" ", "_", $invoice['index_name']);
