@@ -69,55 +69,16 @@ while ( $year <= $this_year )
 		{
 			$total_sales[$year][$month] = "-";
 		}
-
-		/*
-		* Payment
-		*/
-		$total_month_payments_sql = " select sum(ac_amount) as month_total_payments from ".TB_PREFIX."payment where ac_date like '$year-$month%'";
-		//$total_month_payments = mysqlQuery($total_month_payments_sql);
-		//$total_month_payments_array= mysql_fetch_array($total_month_payments);
-
-		$total_month_payments = dbQuery($total_month_payments_sql) or die(htmlsafe(end($dbh->errorInfo())));
-		$total_month_payments_array = $total_month_payments -> fetch();
-
-		$total_payments[$year][$month] = $total_month_payments_array['month_total_payments'];
-		if ($total_payments[$year][$month] == "" ) 
-		{
-			$total_payments[$year][$month] = "-";
-		}
 		$month++;
 	}
-		/*
-	* Payment
-	*/
-	$total_year_payments_sql = " select sum(ac_amount) as year_total_payments from ".TB_PREFIX."payment where ac_date like '$year%'";
-	//$total_year_payments = mysqlQuery($total_year_payments_sql);
-	//$total_year_payments_array= mysql_fetch_array($total_year_payments);
-
-	$total_year_payments = dbQuery($total_year_payments_sql) or die(htmlsafe(end($dbh->errorInfo())));
-	$total_year_payments_array = $total_year_payments -> fetch();
-
-	$total_payments[$year]['Total'] = $total_year_payments_array['year_total_payments'];
-		if ($total_payments[$year]['Total']  == "" ) 
-		{
-			$total_payments[$year]['Total']  = "-";
-		}
+		
 
 	$years[]=$year ;
 	$year++;
 }
-/*
-echo "Total Sales<pre>";
-print_r($total_sales);
-echo "</pre><br />Total Payments<pre>";
-print_r($total_payments);
-echo "</pre>";
-*/
+
 $smarty->assign('total_sales', $total_sales);
 //$years = array(2006,2007,2008);
 $years = array_reverse($years);
 $smarty->assign('years', $years);
-
-$smarty -> assign('pageActive', 'report');
-$smarty -> assign('active_tab', '#home');
 ?>
