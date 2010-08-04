@@ -27,6 +27,8 @@ $view   = isset($_GET['view'])  ? filenameEscape($_GET['view'])    : null;
 $action = isset($_GET['case'])  ? filenameEscape($_GET['case'])    : null;
 
 require_once("./include/init.php");
+//load data for flot graphs
+require_once("./modules/flot/index.php");
 
 foreach($config->extension as $extension)
 {
