@@ -66,12 +66,16 @@ if (isset($_POST['submit']))
 		} else {
 			$invoice->having = "money_owed";
 		}
+		$having_and_count = 2;
 		$show_only_unpaid = "yes";
 	}
 	
 	if ( isset($_POST['show_only_real']) )
 	{
-		if ($having_and_count == 1) 
+		if ($having_and_count == 2) 
+		{
+			$invoice->having_and = "real";
+		} else if ($having_and_count == 1)
 		{
 			$invoice->having_and = "real";
 		} else {
