@@ -32,6 +32,7 @@ $export -> customer_id = $customer_id;
 $export -> start_date = $start_date;
 $export -> end_date = $end_date;
 $export -> show_only_unpaid = $show_only_unpaid;
+$export -> show_only_real = $show_only_real;
 $export -> filter_by_date = $filter_by_date;
 $export -> execute();
 
