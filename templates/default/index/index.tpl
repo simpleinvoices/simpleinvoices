@@ -159,7 +159,7 @@
     <div class="align_left">
         <h2>{$LANG.your_reports}</h2>
         	<div class="graphName" style="height: auto; width:600px; text-align: center;">
-			{$LANG.monthly_sales_per_year_flot}
+			<b>{$LANG.monthly_sales_per_year_flot}</b>
 			</div>
 			<!-- Flot integration -->
 			<div id="placeholder" style="width:600px;height:200px;">
