@@ -119,9 +119,12 @@ class export
 				{
 					if ($having_count == '1') 
 					{
+
 						$invoice->having_and = "money_owed";
 					    $having_count = '2';
+
 					} else {
+
 						$invoice->having = "money_owed";
 					    $having_count = '1';
 	
@@ -132,12 +135,17 @@ class export
 				{
 					if ($having_count == '2') 
 					{
+
 						$invoice->having_and2 = "real";
-					} else if ($having_count == '1')
-					{
+
+					} elseif ($having_count == '1') {
+
 						$invoice->having_and = "real";
+
 					} else {
+
 						$invoice->having = "real";
+                        
 					}
 				}
 

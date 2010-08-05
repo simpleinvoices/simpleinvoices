@@ -53,25 +53,31 @@ if (isset($_POST['submit']))
 
 	if ( isset($_POST['filter_by_date']) )
 	{
+
 		$invoice->having = "date_between";
 		$filter_by_date = "yes";
 		$having_count = '1';
+
 	}
 
 	if ( isset($_POST['show_only_unpaid']) )
 	{
 		if ($having_count == '1') 
 		{
+
 			$invoice->having_and = "money_owed";
 		    $having_count = '2';
+
 		} else {
+
 			$invoice->having = "money_owed";
 		    $having_count = '1';
+
 		}
+
 		$show_only_unpaid = "yes";
 	}
 	
-    echo $_POST['show_only_real']."  ".$having_count;
 	if ( isset($_POST['show_only_real']) )
 	{
 		if ($having_count == '2') 
