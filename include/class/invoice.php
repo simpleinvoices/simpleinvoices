@@ -367,7 +367,7 @@ class invoice {
                 $where
                 GROUP BY
                     iv.id
-                $sql_having $sql_having2
+                $sql_having
                 ORDER BY
                 $sort $dir
                 $limit";
