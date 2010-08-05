@@ -234,8 +234,8 @@ CREATE TABLE IF NOT EXISTS `si_inventory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `quantity` decimal(25,2) NOT NULL,
-  `cost` decimal(25,2) DEFAULT NULL,
+  `quantity` decimal(25,6) NOT NULL,
+  `cost` decimal(25,6) DEFAULT NULL,
   `date` date NOT NULL,
   `note` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`domain_id`,`id`)
@@ -288,13 +288,13 @@ INSERT INTO `si_invoices` (`id`, `index_id`, `domain_id`, `biller_id`, `customer
 CREATE TABLE IF NOT EXISTS `si_invoice_items` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `invoice_id` int(10) NOT NULL DEFAULT '0',
-  `quantity` decimal(25,2) NOT NULL DEFAULT '0.00',
+  `quantity` decimal(25,6) NOT NULL DEFAULT '0.000000',
   `product_id` int(10) DEFAULT '0',
-  `unit_price` decimal(25,2) DEFAULT '0.00',
-  `tax_amount` decimal(25,2) DEFAULT '0.00',
-  `gross_total` decimal(25,2) DEFAULT '0.00',
+  `unit_price` decimal(25,6) DEFAULT '0.000000',
+  `tax_amount` decimal(25,6) DEFAULT '0.000000',
+  `gross_total` decimal(25,6) DEFAULT '0.000000',
   `description` text COLLATE utf8_unicode_ci,
-  `total` decimal(25,2) DEFAULT '0.00',
+  `total` decimal(25,6) DEFAULT '0.000000',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
@@ -303,11 +303,11 @@ CREATE TABLE IF NOT EXISTS `si_invoice_items` (
 --
 
 INSERT INTO `si_invoice_items` (`id`, `invoice_id`, `quantity`, `product_id`, `unit_price`, `tax_amount`, `gross_total`, `description`, `total`) VALUES
-(1, 1, '1.00', 5, '125.00', '12.50', '125.00', '', '137.50'),
-(2, 1, '1.00', 3, '125.00', '12.50', '125.00', '', '137.50'),
-(3, 1, '1.00', 2, '140.00', '0.00', '140.00', '', '140.00'),
-(4, 1, '1.00', 2, '140.00', '14.00', '140.00', '', '154.00'),
-(5, 1, '1.00', 1, '150.00', '0.00', '150.00', '', '150.00');
+(1, 1, '1.000000', 5, '125.000000', '12.500000', '125.000000', '', '137.500000'),
+(2, 1, '1.000000', 3, '125.000000', '12.500000', '125.000000', '', '137.500000'),
+(3, 1, '1.000000', 2, '140.000000', '0.000000', '140.000000', '', '140.000000'),
+(4, 1, '1.000000', 2, '140.000000', '14.000000', '140.000000', '', '154.000000'),
+(5, 1, '1.000000', 1, '150.000000', '0.000000', '150.000000', '', '150.000000');
 
 -- --------------------------------------------------------
 
@@ -320,8 +320,8 @@ CREATE TABLE IF NOT EXISTS `si_invoice_item_tax` (
   `invoice_item_id` int(11) NOT NULL,
   `tax_id` int(11) NOT NULL,
   `tax_type` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
-  `tax_rate` decimal(25,2) NOT NULL,
-  `tax_amount` decimal(25,2) NOT NULL,
+  `tax_rate` decimal(25,6) NOT NULL,
+  `tax_amount` decimal(25,6) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
@@ -330,11 +330,11 @@ CREATE TABLE IF NOT EXISTS `si_invoice_item_tax` (
 --
 
 INSERT INTO `si_invoice_item_tax` (`id`, `invoice_item_id`, `tax_id`, `tax_type`, `tax_rate`, `tax_amount`) VALUES
-(1, 1, 3, '%', '10.00', '12.50'),
-(2, 2, 1, '%', '10.00', '12.50'),
-(3, 3, 4, '%', '0.00', '0.00'),
-(4, 4, 1, '%', '10.00', '14.00'),
-(5, 5, 4, '%', '0.00', '0.00');
+(1, 1, 3, '%', '10.000000', '12.500000'),
+(2, 2, 1, '%', '10.000000', '12.500000'),
+(3, 3, 4, '%', '0.000000', '0.000000'),
+(4, 4, 1, '%', '10.000000', '14.000000'),
+(5, 5, 4, '%', '0.000000', '0.000000');
 
 -- --------------------------------------------------------
 
@@ -386,7 +386,7 @@ CREATE TABLE IF NOT EXISTS `si_log` (
 CREATE TABLE IF NOT EXISTS `si_payment` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `ac_inv_id` int(11) NOT NULL,
-  `ac_amount` decimal(25,0) NOT NULL,
+  `ac_amount` decimal(25,6) NOT NULL,
   `ac_notes` text COLLATE utf8_unicode_ci NOT NULL,
   `ac_date` datetime NOT NULL,
   `ac_payment_type` int(10) NOT NULL DEFAULT '1',
@@ -474,10 +474,10 @@ CREATE TABLE IF NOT EXISTS `si_products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL DEFAULT '1',
   `description` text COLLATE utf8_unicode_ci NOT NULL,
-  `unit_price` decimal(25,2) DEFAULT '0.00',
+  `unit_price` decimal(25,6) DEFAULT '0.000000',
   `default_tax_id` int(11) DEFAULT NULL,
   `default_tax_id_2` int(11) DEFAULT NULL,
-  `cost` decimal(25,2) DEFAULT '0.00',
+  `cost` decimal(25,6) DEFAULT '0.000000',
   `reorder_level` int(11) DEFAULT NULL,
   `custom_field1` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `custom_field2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -494,11 +494,11 @@ CREATE TABLE IF NOT EXISTS `si_products` (
 --
 
 INSERT INTO `si_products` (`id`, `domain_id`, `description`, `unit_price`, `default_tax_id`, `default_tax_id_2`, `cost`, `reorder_level`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`) VALUES
-(1, 1, 'Hourly charge', '150.00', 1, 0, '0.00', 0, '', '', '', '', '', '1', 1),
-(2, 1, 'Accounting services', '140.00', 1, 0, '0.00', 0, '', '', '', '', '', '1', 1),
-(3, 1, 'Ploughing service', '125.00', 1, 0, '0.00', 0, '', '', '', '', '', '1', 1),
-(4, 1, 'Bootleg homebrew', '15.50', 1, 0, '0.00', 0, '', '', '', '', '', '1', 1),
-(5, 1, 'Accomodation', '125.50', 1, 0, '0.00', 0, '', '', '', '', '', '1', 1);
+(1, 1, 'Hourly charge', '150.000000', 1, 0, '0.000000', 0, '', '', '', '', '', '1', 1),
+(2, 1, 'Accounting services', '140.000000', 1, 0, '0.000000', 0, '', '', '', '', '', '1', 1),
+(3, 1, 'Ploughing service', '125.000000', 1, 0, '0.000000', 0, '', '', '', '', '', '1', 1),
+(4, 1, 'Bootleg homebrew', '15.500000', 1, 0, '0.000000', 0, '', '', '', '', '', '1', 1),
+(5, 1, 'Accomodation', '125.500000', 1, 0, '0.000000', 0, '', '', '', '', '', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -829,7 +829,7 @@ INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension
 CREATE TABLE IF NOT EXISTS `si_tax` (
   `tax_id` int(11) NOT NULL AUTO_INCREMENT,
   `tax_description` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `tax_percentage` decimal(25,2) DEFAULT '0.00',
+  `tax_percentage` decimal(25,6) DEFAULT '0.000000',
   `type` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tax_enabled` varchar(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
   `domain_id` int(11) NOT NULL,
@@ -841,11 +841,11 @@ CREATE TABLE IF NOT EXISTS `si_tax` (
 --
 
 INSERT INTO `si_tax` (`tax_id`, `tax_description`, `tax_percentage`, `type`, `tax_enabled`, `domain_id`) VALUES
-(1, 'GST', '10.00', '%', '1', 1),
-(2, 'VAT', '10.00', '%', '1', 1),
-(3, 'Sales Tax', '10.00', '%', '1', 1),
-(4, 'No Tax', '0.00', '%', '1', 1),
-(5, 'Postage', '20.00', '$', '1', 1);
+(1, 'GST', '10.000000', '%', '1', 1),
+(2, 'VAT', '10.000000', '%', '1', 1),
+(3, 'Sales Tax', '10.000000', '%', '1', 1),
+(4, 'No Tax', '0.000000', '%', '1', 1),
+(5, 'Postage', '20.000000', '$', '1', 1);
 
 -- --------------------------------------------------------
 
