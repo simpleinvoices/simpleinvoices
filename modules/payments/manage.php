@@ -16,7 +16,7 @@ if (!empty($_GET['id'])) {
 elseif (!empty($_GET['c_id'])) {
 	$c_id = $_GET['c_id'];
 	$query = getCustomerPayments($_GET['c_id']);
-    $customer = customer:get($_GET['c_id']);
+    $customer = customer::get($_GET['c_id']);
     $subPageActive = "payment_filter_customer";
 }
 #if you want to show all invoices - no filters
