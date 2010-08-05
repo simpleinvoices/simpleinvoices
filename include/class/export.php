@@ -124,16 +124,19 @@ class export
 						$invoice->having = "money_owed";
 	
 					}
+					$having_and_count = 2;
 				}
 				
 				if ( $this->show_only_real == "yes") 
 				{
-					if ($having_count == 1) 
+					if ($having_and_count == 2) 
+					{
+						$invoice->having_and = "real";
+					} else if ($having_and_count == 1)
 					{
 						$invoice->having_and = "real";
 					} else {
 						$invoice->having = "real";
-	
 					}
 				}
 
