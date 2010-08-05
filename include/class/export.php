@@ -112,27 +112,28 @@ class export
 					{
 						$invoice->having = "date_between";
 					}
-					$having_count = 1;
+					$having_count = '1';
 				}
 
 				if ( $this->show_only_unpaid == "yes") 
 				{
-					if ($having_count == 1) 
+					if ($having_count == '1') 
 					{
 						$invoice->having_and = "money_owed";
+					    $having_count = '2';
 					} else {
 						$invoice->having = "money_owed";
+					    $having_count = '1';
 	
 					}
-					$having_and_count = 2;
 				}
 				
 				if ( $this->show_only_real == "yes") 
 				{
-					if ($having_and_count == 2) 
+					if ($having_count == '2') 
 					{
-						$invoice->having_and = "real";
-					} else if ($having_and_count == 1)
+						$invoice->having_and2 = "real";
+					} else if ($having_count == '1')
 					{
 						$invoice->having_and = "real";
 					} else {
