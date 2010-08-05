@@ -1231,7 +1231,7 @@
         {
             "tax_id": "1",
             "tax_description": "GST",
-            "tax_percentage": "10.00",
+            "tax_percentage": "10.000000",
             "type": "%",
             "tax_enabled": "1",
             "domain_id": "DOMAIN-ID" 
@@ -1239,7 +1239,7 @@
         {
             "tax_id": "2",
             "tax_description": "VAT",
-            "tax_percentage": "17.50",
+            "tax_percentage": "10.000000",
             "type": "%",
             "tax_enabled": "1",
             "domain_id": "DOMAIN-ID" 
@@ -1247,7 +1247,7 @@
         {
             "tax_id": "3",
             "tax_description": "Sales Tax",
-            "tax_percentage": "10.00",
+            "tax_percentage": "10.000000",
             "type": "%",
             "tax_enabled": "1",
             "domain_id": "DOMAIN-ID" 
@@ -1255,7 +1255,7 @@
         {
             "tax_id": "4",
             "tax_description": "No Tax",
-            "tax_percentage": "0.00",
+            "tax_percentage": "0.000000",
             "type": "%",
             "tax_enabled": "1",
             "domain_id": "DOMAIN-ID" 
@@ -1263,7 +1263,7 @@
         {
             "tax_id": "5",
             "tax_description": "Postage",
-            "tax_percentage": "20.00",
+            "tax_percentage": "20.000000",
             "type": "$",
             "tax_enabled": "1",
             "domain_id": "DOMAIN-ID" 
