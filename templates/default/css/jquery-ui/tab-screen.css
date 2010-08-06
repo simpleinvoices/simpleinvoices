@@ -769,3 +769,16 @@ img.action
 .formError .formErrorArrow .line5{width:5px;height:1px; background:#000;margin:0 auto;display:block;} 
 .formError .formErrorArrow .line4{width:3px;height:1px; background:#000;margin:0 auto;display:block;} 
 .formError .formErrorArrow .line3{width:1px;height:1px; background:#000;margin:0 auto;display:block;} 
+
+/* upload logo file - people - billers */
+.logobuttonuploader{
+background-image:url(../../../../images/common/download.png);
+background-repeat:no-repeat;
+padding-left:20px;
+}
+
+#uploadlogowrapper{
+width:150px; 
+float:right; 
+padding:5px;
+}

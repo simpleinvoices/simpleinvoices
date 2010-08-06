@@ -247,7 +247,43 @@ $(document).ready(function(){
 		siLog('debug',"{/literal}$config->export->spreadsheet{literal}");
 		export_invoice($row_number, '{/literal}{$config->export->spreadsheet}{literal}','{/literal}{$config->export->wordprocessor}{literal}');
      });
-
+	
+	/* 
+	* Upload logo file for billers
+	*/
+	// only load when upload button on screen	
+	if ($('#uploadlogobutton').length != 0)
+	{
+		var button = $('#uploadlogobutton'), interval;
+		new AjaxUpload(button, {
+		action: './include/upload-handler.php',
+		name: 'myfile',
+		onSubmit : function(file, ext){
+		// change button text, when user selects file
+		button.text('Uploading');
+		// If you want to allow uploading only 1 file at time,
+		// you can disable upload button
+		this.disable();
+		// Uploading -> Uploading. -> Uploading...
+		interval = window.setInterval(function(){
+		var text = button.text();
+		if (text.length < 13){
+		button.text(text + '.');
+		} else {
+		button.text('Uploading');
+		}
+		}, 200);
+		},
+		onComplete: function(file, response){
+		button.text('File Uploaded');
+		window.clearInterval(interval);
+		// enable upload button
+		this.enable();
+		// add file to the list
+		$('<option label="' + file + '" value="' + file + '"></option>').appendTo('#logofiles').text(file);		
+		}
+		});
+	}
 });
 
 </script>
