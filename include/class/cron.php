@@ -339,7 +339,7 @@ class cron {
                             }
                             if($data[$key]['email_biller'] == "1" AND $data[$key]['email_customer'] == "0")
                             {
-                                $email -> to = $customer['email'];
+                                $email -> to = $biller['email'];
                             }
                             $email -> invoice_name = $invoice['index_name'];
                             $email -> subject = $email->set_subject();
