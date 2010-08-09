@@ -527,7 +527,7 @@ function si_truncate($string, $max = 20, $rep = '')
 
 /* Escapes HTML stuff */
 function htmlsafe($str) {
-        return str_replace(array('{', '}', '@'), array('&#123','&#125','#64;'), htmlentities($str, ENT_QUOTES, 'UTF-8'));
+        return str_replace(array('{', '}', '+'), array('&#123','&#125', '&#43;'), htmlentities($str, ENT_QUOTES, 'UTF-8'));
 }
 
 /* Makes a string to be put inside a href="" safe */
