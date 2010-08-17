@@ -1,0 +1,41 @@
+
+
+
+Quick overview/usage
+--------------------
+
+This extension allows you to define an invoice to be used as a template for new invoices.
+
+If you do so, the new invoice is filled with the same biller, customer, invoice items and comments as the template one.
+Only the date will be today, and the invoice-number is omitted, allowing to create a new one.
+
+For this to work, an action is added to the manage customers page. 
+
+When clicking on this link, 3 things can happen:
+
+1) If the customer has it's own default template, it is used
+2) If the customer does not have a template, but a system-default is defined, it is used.
+3) Otherwise a blank invoice is used (customer-prefilled, though).
+
+There is a sanity check: if the template invoice does not exist (anymore), an empty invoice is presented.
+
+There are 2 ways to set the default invoice for a customer:
+
+1) edit the customer details, and put the invoice id in 'custom_field4'
+2) Quick view an invoice and expand the 'customer' section.
+   Use the button besides 'custom_field4' to set the current invoice as the template for this user.
+
+For convenience, the last invoice for each customer is also added to the 'manage customers' list. 
+Clicking on the invoice will bring you directly into 'quick view' mode of this invoice.
+
+If you like, you can rename the customer.custom_field 4 to 'default_invoice' or 'template invoice' or whatever suits you.
+
+Currently there is no GUI way to set a system-wide default. You can, however, use phpmyadmin to open the 
+TB_prefix."system_defaults" table, and add a default named 'default_invoice'. 
+The value is the invoice id used as a system-wide default.
+
+There are also a few additions to the language file, but only en-gb and nl are populated at this time.
+
+Enjoy!
+
+Marcel

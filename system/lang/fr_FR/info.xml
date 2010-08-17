@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<langfile version="1.0.0" type="language">
+	<name>Français</name>
+	<shortname>fr_FR</shortname>
+	<englishname>French</englishname>
+	<version>1.0.0</version>
+	<creationDate>2004-09-20</creationDate>
+	<author>Catherine, Lionel</author>
+	<authorEmail></authorEmail>
+</langfile>

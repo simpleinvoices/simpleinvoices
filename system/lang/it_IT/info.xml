@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<langfile version="1.0.0" type="language">
+	<name>Italian</name>
+	<shortname>it_IT</shortname>
+	<englishname>IT</englishname>
+	<version>1.0.0</version>
+	<creationDate>2008-07-02</creationDate>
+	<author>Fabio Utili</author>
+	<authorEmail>fabio.utili@email.it</authorEmail>
+</langfile>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<langfile version="1.0.0" type="language">
+	<name>Catala</name>
+	<shortname>ca_ES</shortname>
+	<englishname>Catalan</englishname>
+	<version>1.0.0</version>
+	<creationDate>2004-09-20</creationDate>
+	<author>Nicolas Ruflin</author>
+	<authorEmail>justin@kelly.org.au</authorEmail>
+</langfile>

@@ -1,0 +1,640 @@
+/* PAGE BODY
+Last Edit Gates 03/09/2008------------------------------------------------*/
+html, body { padding: 0; margin: 0; }
+
+body {
+	background:#e5e5e5; }
+
+body, .dialog {
+	font-family:verdana, arial, helvetica, sans-serif;
+	font-size:12px;
+	color:#333; }
+	
+table.manage {
+	font-size:12px; }
+
+td.account {
+	font-size:12px;	}
+
+	
+	
+	
+/* tables */
+table.ricoLiveGrid {
+	font-family:arial;
+	background-color: #CDCDCD;
+	margin:10px 0pt 15px;
+	font-size: 8pt;
+	width: 100%;
+	text-align: left;
+}
+table.ricoLiveGrid thead tr th, table.ricoLiveGrid tfoot tr th {
+	background-color: #e6EEEE;
+	border: 1px solid #FFF;
+	font-size: 8pt;
+	padding: 4px;
+}
+table.ricoLiveGrid thead tr .header {
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+table.ricoLiveGrid tbody td {
+	color: #3D3D3D;
+	padding: 4px;
+	background-color: #FFF;
+	vertical-align: top;
+}
+table.ricoLiveGrid tbody tr.odd td {
+	background-color:#F1F1F1;
+}
+table.ricoLiveGrid thead tr .headerSortUp {
+	background-image: url(../../../images/common/desc.png);
+}
+table.ricoLiveGrid thead tr .headerSortDown {
+	background-image: url(../../../images/common/asc.png);
+}
+table.ricoLiveGrid thead tr .headerSortDown, table.ricoLiveGrid thead tr .headerSortUp {
+	background-color: #8dbdd8;
+}
+	
+	
+/* Tablesorter table styling - end
+td for the manage screen - start */
+td.index_table {
+	background-color:#F5F5F5;
+	border:1px solid #fff;
+	font-style:normal;
+	font-weight:400;
+	text-decoration:none;
+	border-color:#FFF;
+	border-style:none; }
+
+td, div {
+	font-family:verdana, arial, helvetica, sans-serif;
+	text-align:left; }
+
+td.columnleft {
+	border-left:5px solid #EEE; }
+
+td.details_screen {
+	border:1px solid #fff;
+	background-color:#F5F5F5;
+	border-color:#FFF;
+	border-width:1px; }
+
+/* Credits.html
+-------------------------------------------------*/
+.credit_names li {
+	font-weight:700;
+}
+.credit_names li ul {
+	font-weight:normal;
+	padding:0.2em 0 1.3em 0;
+}
+
+.solutionTable {
+	margin:20px 0;
+}
+
+.solutionTable td, .solutionTable th  {
+	padding:3px 10px;
+}
+
+/* GLOBALS & GENERAL CASES
+-------------------------------------------------*/
+.print_only {
+	display:none; }
+/*
+a:hover {
+	color:#fff;
+	background-color:#900;
+	text-decoration:none; }
+*/
+a.image:link,a.image:visited,a.image:hover {
+	border:none;
+	background:none;
+	padding:0; }
+
+a.toggle.active:link,a.toggle.active:visited,a.toggle.active:hover {
+	background:#999 !important;
+	color:#03c !important;
+	text-decoration:none;
+	font-weight:400 !important; }
+
+p {
+	font:11px Arial, Helvetica, sans-serif;
+	margin:0 0 15px; }
+
+hr {
+	background-color:#000;
+	height:1px;
+	border:0;
+	margin:10px 0; }
+
+a img {
+	border:0; }
+
+a.image img {
+	border:none;
+	margin:0;
+	padding:0; }
+
+table tr.shaded td {
+	background-color:#edf3fe; }
+
+a.anchor:link,a.anchor:visited,a.anchor:hover {
+	color:#fff;
+	background:#fff;
+	font-size:0;
+	text-decoration:none;
+	padding:0; }
+
+div.notice {
+	background:#080; }
+
+div.alert {
+	background:red; }
+
+h1 {
+	font:bold 32px Arial, Helvetica, sans-serif;
+	letter-spacing:normal;
+	color:#000;
+	position:relative;
+	margin:5px 0 15px;
+	padding:0 0 5px; }
+
+/* TYPOGRAPHY
+-------------------------------------------------*/
+h1.admin {
+	margin-bottom:2px; }
+
+h2 {
+	font-size:18px;
+	font-family:helvetica;
+	margin:0 0 15px; }
+	
+h3 {
+	font-size:1em;
+	text-align:center;
+	margin:4pt;
+}
+h4 {
+	font-size:11px;
+	margin:0; }
+
+h5 {
+	font-size:80%;
+	font-style:italic;
+	font-family:georgia;
+	font-weight:400;
+	text-align:left;
+	padding-top:3px;
+	color:#6FC0DE;
+	border-bottom:1px solid #C2DDE7;
+	margin:0 0 20px; }
+
+h5 strong {
+	color:#4F9DBA; }
+
+form {
+	margin:0;
+	padding:0; }
+
+.red {
+	color:#c00; }
+
+.blue {
+	color:#06c; }
+
+.green {
+	color:#390; }
+
+.highlight {
+	background-color:#ffc; }
+
+ins {
+	background-color:#cfc;
+	text-decoration:none; }
+
+del {
+	color:#999; }
+
+code,pre {
+	font-family:"Bitstream Vera Sans Mono", monaco, "Courier New", courier, monospace;
+	background:inherit;
+	color:#333;
+	font-size:80%; }
+
+table {
+	border-collapse:collapse; }
+
+/* Old PHP Reports CSS  - uses class="reportTable" */
+	
+table.reportTable {
+	border:1px solid #000; }
+
+*+html table.reportTable {
+	border-collapse:separate; }
+
+*+html td.PAGE_LAYER {
+	border-width:thin;
+	border:1px solid #000;
+	border-collapse:separate; }
+
+*+html table.reportTable tr {
+	border:1px solid #000;
+	border-collapse:separate; }
+	
+table.reportTable td.PAGE_LAYER {
+	background-color:#ccc;
+	border-color:#000; }
+
+/* New PHPreports CSS - uses ID="pg2" or "pg1"  - Although HEADER and FOOTER are used now instead of PAGE_LAYER, it is left as is for compatibility */
+
+
+table#pg1 {
+	border:1px solid #000; }
+
+*+html table#pg1 {
+	border-collapse:separate; }
+
+*+html td.PAGE_LAYER {
+	border-width:thin;
+	border:1px solid #000;
+	border-collapse:separate; }
+
+*+html table#pg1 tr {
+	border:1px solid #000;
+	border-collapse:separate; }
+
+table#pg1 td.PAGE_LAYER {
+	background-color:#ccc;
+	border-color:#000; }
+
+table#pg1 td.GROUP_LAYER {
+	background-color:#fff;
+	border-color:#000; }
+
+
+table#pg2 {
+	border:1px solid #000; }
+
+*+html table#pg2 {
+	border-collapse:separate; }
+
+*+html td.PAGE_LAYER {
+	border-width:thin;
+	border:1px solid #000;
+	border-collapse:separate; }
+
+*+html table#pg2 tr {
+	border:1px solid #000;
+	border-collapse:separate; }
+
+table#pg2 td.PAGE_LAYER {
+	background-color:#ccc;
+	border-color:#000; }
+
+table#pg2 td.GROUP_LAYER {
+	background-color:#fff;
+	border-color:#000; }
+
+/*
+tr {
+	border:1px solid #fff; }
+	
+td {
+	border:1px solid #fff; }
+
+Work around IE/Win code size bug - courtesy Jesper, waffle.wootest.net  */
+* html code {
+	font-size:105%; }
+
+/* STRUCTURE
+-------------------------------------------------*/
+
+div#Container {
+	margin:13px auto 0;
+	padding:0 23px 0 30px; }
+
+.ClearAll {
+	clear:both;
+	font-size:1px;
+	margin:0;
+	padding:0; }
+
+.Left {
+	text-align:left;
+	width:70%;
+	float:left;
+	margin:0;
+	padding:0; }
+
+.Right {
+	text-align:left;
+	float:left;
+	width:30%;
+	margin:0;
+	padding:0; }
+
+/* FOR PROPORTIONAL WIDTH 
+--------------------------*/
+.col {
+	text-align:center;
+	padding:0 20px; 
+	min-height:352px;
+	}
+
+.contentLeft {
+background:transparent url(../../../images/common/bgLeft.png) top left no-repeat;
+margin-left:-10px;
+padding-left:10px;
+
+}
+.contentRight {
+background:transparent url(../../../images/common/bgRight.png) top right no-repeat;
+padding-right:10px;
+min-height:400px;
+}
+.Left .col,.Full .col {
+	background:#fff;
+	padding:10px 20px 20px 20px; 
+}
+	
+.Left .col .showhide {
+	margin-top:8px; }
+
+.Full .bottom,.Left .bottom {
+/*	background:url(../../../images/common/bottom-bg.gif) top right no-repeat; */}
+
+body.lobby .Full .bottom {
+	margin-bottom:0; }
+
+.Right .col {
+	padding:0 0 0 9px; }
+
+/*
+ * For manage tables and no javascript and list of invoices in view customer screen
+ * */
+table.sortable {
+	border-spacing:0;
+	border:1px solid #fff;
+	border-collapse:collapse; }
+
+th.sortable {
+	text-align:left;
+	background-color:#e9e9da;
+	border-bottom:1px solid #CBC7B8;
+	border-right:1px solid #D6D2C2;
+	font-weight:400;
+	padding:2px; }
+	
+th.sortable_rt {
+	text-align:right;
+	background-color:#e9e9da;
+	border-bottom:1px solid #CBC7B8;
+	border-right:1px solid #D6D2C2;
+	font-weight:400;
+	padding:2px; }
+
+/*
+ * Accordian css - start
+ * */
+
+#accordian {
+	width:auto;
+	min-height:22em;
+}
+
+* html #accordian {
+	height:22em; }
+	
+#accordian td {
+	width:10%;
+	height:3em;
+}
+#list1 {
+	width:49%;
+	float:right; }
+
+* html #list1 {
+		width:49% }
+		
+*+html #list1 {
+		width:49% }
+		
+#list2 {
+	width:49%;
+	float:left; }
+
+* html #list2 {
+		width:50% }
+		
+*+html #list2 {
+		width:50% }
+		
+/*
+ * Accordian css - end
+ * 
+
+ * left rigth - define text align for tables here
+ * */
+.align_right {
+	text-align:right; }
+
+.align_center {
+	text-align:center; }
+
+.validation_alert {
+	font-weight:700;
+	color:#FFF;
+	background-color:red;
+	padding:10px; }
+
+#left,.Full,.align_left {
+	text-align:left; }
+
+a:link,a:visited {
+	/*color:#03c;*/
+	text-decoration:none; }
+
+.title,.mytitle {
+	text-align:center;
+	cursor:pointer;
+	border:1px solid #CCC;
+	margin-top:0.5em;
+	padding:0.1em; }
+
+.on1 .title,.on .mytitle {
+	background-color:#E4EFC7; }
+
+.off1 .title,.off .mytitle {
+	background-color:#E0E0E0; }
+
+.content,.mycontent {
+	background-color:#FFF;
+	border:1px solid silver;
+	border-top-width:0;
+	padding:0.1em; }
+	
+.si_grey_background 
+{
+	background:#e5e5e5; 
+}
+
+.gmailLoader
+{
+   background-color:#CF4342;
+   color:#fff;
+   top:0px;
+   right:0px;
+   position:fixed;
+   padding: 3px
+}
+
+/* extjs/doukiwki style input boes */
+input, select
+{
+	background:#FFFFFF url(../../../images/common/text-bg.gif) repeat-x scroll center top;
+	/*border:1px solid #B5B8C8;*/
+	border:1px solid #CCCCCC;
+	/*padding:1px 3px;*/
+	margin:1px;
+	padding:0.2em 0.3em;
+}
+
+.xxbutton {
+		background:#FFFFFF url(../../../images/common/text-bg-rotate.gif) repeat-x scroll center bottom;
+
+}
+
+.xxbutton{
+
+    border-top:1px solid #eee;
+    border-left:1px solid #eee;
+
+	/*border:1px solid #8CACBB;*/
+	color:#000000;
+	cursor:pointer;
+	/*font-size:100%;*/
+	margin:1px;
+	/*padding:0.125em 0.4em;*/
+	text-decoration:none;
+	vertical-align:middle;
+	
+	
+	font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+    font-size:100%;
+    line-height:130%;
+    text-decoration:none;
+    font-weight:bold;
+    color:#565656;
+    cursor:pointer;
+    padding:5px 10px 6px 7px; /* Links */
+}
+
+.xxbutton_img {
+	border:medium none;
+	height:16px;
+	margin:0 3px -3px 0 !important;
+	padding:0;
+	width:16px;
+}
+
+
+/* BUTTONS */
+
+.buttons a, .buttons button{
+    display:block;
+    float:left;
+    margin:0 7px 0 0;
+    background:#FFFFFF url(../../../images/common/text-bg-rotate.gif) repeat-x scroll center bottom;
+   /* background-color:#f5f5f5;*/
+    border:1px solid #ccc;
+    border-top:1px solid #eee;
+    border-left:1px solid #eee;
+
+    font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+    font-size:100%;
+    line-height:130%;
+    text-decoration:none;
+    font-weight:bold;
+    color:#565656;
+    cursor:pointer;
+    /*padding:5px 10px 6px 7px;*/ /* OLD Links */
+    padding:5px 10px 7px 7px; /* Links */
+}
+.buttons button{
+    width:auto;
+    overflow:visible;
+    padding:4px 10px 3px 7px; /* IE6 */
+}
+.buttons button[type]{
+    padding:5px 10px 5px 7px; /* Firefox */
+    line-height:17px; /* Safari */
+}
+*:first-child+html button[type]{
+    padding:4px 10px 3px 7px; /* IE7 */
+}
+.buttons button img, .buttons a img{
+    margin:0 3px -3px 0 !important;
+    padding:0;
+    border:none;
+    width:16px;
+    height:16px;
+}
+
+/* STANDARD */
+
+button:hover, .buttons a:hover{
+
+    border:1px solid #c2e1ef;
+    color:#336699;
+}
+.buttons a:active{
+
+    border:1px solid #6299c5;
+    color:#fff;
+}
+
+/* POSITIVE */
+
+button.positive, .buttons a.positive{
+   /* color:#529214;*/
+}
+.buttons a.positive:hover, button.positive:hover{
+
+    border:1px solid #C6D880;
+    color:#529214;
+}
+.buttons a.positive:active{
+
+    border:1px solid #529214;
+    color:#fff;
+}
+
+/* NEGATIVE */
+
+.buttons a.negative, button.negative{
+ /*   color:#d12f19;*/
+}
+.buttons a.negative:hover, button.negative:hover{
+
+    border:1px solid #fbc2c4;
+    color:#d12f19;
+}
+.buttons a.negative:active{
+
+    border:1px solid #d12f19;
+    color:#fff;
+}
+
+/*top of form*/
+#top
+{
+	text-align:center;
+}
+	
+.ui-tabs-hide { display: none; }
+

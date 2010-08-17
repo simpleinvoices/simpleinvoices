@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<langfile version="1.0.0" type="language">
+	<name>Greek</name>
+	<shortname>el_GR</shortname>
+	<englishname>Greek</englishname>
+	<version>1.0.0</version>
+	<creationDate>2008-04-20</creationDate>
+	<author>Panos Milis</author>
+	<authorEmail>milis@milis.gr</authorEmail>
+</langfile>

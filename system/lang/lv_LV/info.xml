@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<langfile version="1.0.0" type="language">
+	<name>Latviesu</name>
+	<shortname>lv_LV</shortname>
+	<englishname>Latvian</englishname>
+	<version>1.0.0</version>
+	<creationDate>2007-12-01</creationDate>
+	<author>Translation by Iveta N. Thetford</author>
+	<authorEmail></authorEmail>
+</langfile>

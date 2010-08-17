@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<langfile version="1.0.0" type="language">
+	<name>Dansk</name>
+	<shortname>da_DK</shortname>
+	<englishname>Danish</englishname>
+	<version>1.0.0</version>
+	<creationDate>2004-11-10</creationDate>
+	<author>Claus Mølgaard Nielsen, Michael Larsen</author>
+	<authorEmail>claus@cmn-service.dk,-</authorEmail>
+</langfile>

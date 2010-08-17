@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<langfile version="1.0.0" type="language">
+	<name>Norsk</name>
+	<shortname>nb_NO</shortname>
+	<englishname>Norwegian</englishname>
+	<version>2.0</version>
+	<creationDate>2004-09-20</creationDate>
+	<author>Jon Kristian Nilsen</author>
+	<authorEmail>jokr.nilsen@gmail.com</authorEmail>
+</langfile>

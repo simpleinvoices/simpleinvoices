@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<langfile version="1.0.0" type="language">
+	<name>Svenska</name>
+	<shortname>sv_SE</shortname>
+	<englishname>Swedish</englishname>
+	<author>Joakim Nyman</author>
+	<authorEmail>joakim@edgefive.com</authorEmail>
+</langfile>

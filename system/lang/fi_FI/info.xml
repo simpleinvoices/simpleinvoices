@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<langfile version="1.0.0" type="language">
+	<name>Suomi</name>
+	<shortname>fi_FI</shortname>
+	<englishname>Finnish</englishname>
+	<version>1.0.0</version>
+	<creationDate>2004-09-20</creationDate>
+	<author>Petri Hartoma, Joakim Nyman</author>
+	<authorEmail>, joakim@edgefive.com</authorEmail>
+</langfile>

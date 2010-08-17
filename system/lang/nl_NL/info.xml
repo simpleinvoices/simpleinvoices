@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<langfile version="1.0.0" type="language">
+	<name>Nederlands</name>
+	<shortname>nl_NL</shortname>
+	<englishname>Dutch</englishname>
+	<version>1.0.0</version>
+	<creationDate>2004-09-20</creationDate>
+	<author>Frank Heinen, David, Ruben Bloemgarten, Wouter Gelderblom</author>
+	<authorEmail>'',darym3 _at_ hotmail.com, ruben@abubble.nl, wjgelderblom@gmail.com</authorEmail>
+</langfile>

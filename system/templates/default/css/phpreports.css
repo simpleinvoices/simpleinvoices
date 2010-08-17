@@ -1,0 +1,22 @@
+.HEADER {
+	background-color: #204040;
+	color		: #FFFFC4;
+	font-size	: 12px;
+	font-weight	: bold;
+}
+
+.FOOTER {
+	background-color: #300020;
+	color		: #FFFFC4;
+	font-size	: 12px;
+	font-weight	: bold;
+}
+
+.EVEN	{
+	background-color: #FFFFC4;
+	color		: #300020;
+}
+.ODD	{
+	background-color: #FFFFFF;
+	color		: #300020;
+}
