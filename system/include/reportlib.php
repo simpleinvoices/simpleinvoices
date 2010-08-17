@@ -8,7 +8,7 @@ $val = ini_get("include_path");
 $val = $val . PATH_SEPARATOR . "../library/phpreports";
 ini_set("include_path", $val);
 
-$db_server=substr($config->database->adapter, 4);;
+$db_server=substr($config->database->adapter, 4);
 require_once("../library/phpreports/PHPReportMaker.php");
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
