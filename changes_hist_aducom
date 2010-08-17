@@ -1,0 +1,28 @@
+Aangepast:
+
+footer.tpl -> aanloggen cust
+lang.php -> vertalingen
+index.tpl??
+c_auth.php -> nieuw -> aanloggen customers
+auth.php -> taalcode toegevoegd
+login.php -> taalcode toegevoegd
+login.tpl -> taalcode toegevoegd
+$cust_language toegevoegd
+language.php aangepast voor multilanguage
+
+Changes:
+
+added 'lang=<language>' to header. 
+The language pulldown is generated on the logon page default with the
+given language. If omitted it will be en_GB. This $cust_language will override all if defined. If not defined
+then all will work as previous.
+example: http://localhost/simpleinvoices/system/index.php?module=auth&view=login&lang=nl_NL
+
+The errormessages on login have been translated. Now there's an english message on every selected language
+
+added customer role (changed user.php select query)
+added unique key on email address
+changed sql_queries, no error on duplicate key!!! added global $errm for database errormessages.
+changed save.php and save.tpl of users.
+
+
