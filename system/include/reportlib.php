@@ -5,11 +5,11 @@ require_once("./include/init.php");
 // needed for /library/phpreports to function
 $val = ini_get("include_path");
 // PATH_SEPARATOR is ":" for non-windows and ":" for windows
-$val = $val . PATH_SEPARATOR . "./library/phpreports";
+$val = $val . PATH_SEPARATOR . "../library/phpreports";
 ini_set("include_path", $val);
 
 $db_server=substr($config->database->adapter, 4);;
-require_once("PHPReportMaker.php");
+require_once("../library/phpreports/PHPReportMaker.php");
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 if (!defined("BROWSE")) {
