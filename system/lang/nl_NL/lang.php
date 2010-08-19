@@ -5,8 +5,8 @@
 * 	Nederland - Dutch translation file
 *
 * Authors:
-*      Frank Heinen, David (darym3 _at_ hotmail.com), Ruben Bloemgarten (ruben@abubble.nl), Kai (level411@gmail.com), Wouter Gelderblom (wjgelderblom@gmail.com)
-*     Albert Drent (aducomsoftware@gmail.com)
+*     Frank Heinen, David (darym3 _at_ hotmail.com), Ruben Bloemgarten (ruben@abubble.nl), Kai (level411@gmail.com), Wouter Gelderblom (wjgelderblom@gmail.com)
+*     Albert Drent (www.aducom.com)
 * License:
 *	 GPL v3 or above
 */
@@ -17,7 +17,6 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
 
 #all
 $title = "Simple Invoices";//1
-
 $LANG['about'] = "Over Simple Invoices";//1
 $LANG['account_info'] = "Account informatie";//1
 $LANG['actions'] = "Acties";//1
@@ -32,6 +31,7 @@ $LANG['add_new_invoice'] = "Nieuwe factuur toevoegen";//1
 $LANG['add_new_payment_type'] = "Nieuwe betaalmethode toevoegen";//1
 $LANG['add_new_preference'] = "Nieuwe factuur voorkeur toevoegen";//1
 $LANG['add_new_product'] = "Nieuw product toevoegen";//1
+$LANG['add_new_row'] = "Nieuwe regel toevoegen";//1
 $LANG['add_new_tax_rate'] = "Nieuw BTW tarief toevoegen";//1
 $LANG['add_payment_type'] = "Betaalmethode toevoegen";//1
 $LANG['add_product'] = "Product toevoegen";//1
@@ -44,6 +44,7 @@ $LANG['address_street'] = "Straat";//1
 $LANG['address_zip'] = "Postcode";//1
 $LANG['age'] = "Leeftijd";//1
 $LANG['aging'] = "Leeftijd";//1
+$LANG['all'] = "Alles";//1
 $LANG['all_reports'] = "Alle rapporten";//1
 $LANG['amount'] = "Bedrag";//1
 $LANG['as_template'] = "als sjabloon gebruiken";//1
@@ -116,6 +117,9 @@ $LANG['description'] = "Beschrijving";//1
 $LANG['description_short'] = "Beschr";//1
 $LANG['details'] = "Details";//1
 $LANG['disabled'] = "Uitgeschakeld";//1
+$LANG['displaying_items'] =  "Toont {from} t/m {to} van in totaal {total} items";//1
+$LANG['draft'] = "Voorlopig";
+$LANG['due'] = "Schuldig";//1
 $LANG['edit'] = "Wijzig";//1
 $LANG['edit_view_tooltip'] = "Wijzig";//1
 $LANG['email'] = "E-mail";//1
@@ -261,34 +265,39 @@ $LANG['mobile_short'] = "Mob.";//1
 $LANG['monthly_sales_per_year'] = "Maandelijkse verkoopcijfers en betalingen per jaar";//1
 $LANG['money'] = "Geld";//1
 $LANG['name'] = "Naam";//1
+$LANG['new_recurrence'] = "Nieuwe herhaling";//1
+$LANG['new_inventory_movement'] = "Nieuwe inventaris verplaatsing";//1
 $LANG['new_invoice'] = "Nieuwe factuur";//1
 $LANG['new_invoice_consulting'] = "Nieuwe factuur - Informatief";//1
 $LANG['new_invoice_itemised'] = "Nieuwe Factuur- Gedetailleerd";//1
 $LANG['new_invoice_total'] = "Nieuwe Factuur - Totaal";//1
 $LANG['new_password'] = "Nieuw wachtwoord";//1
-$LANG['no_billers'] = "There have been no billers created. Click the 'Add New Biller' button above to create one";//0
-$LANG['no_customers'] = "There have been no customers created.  Click the 'Add New Customer' buttom above to create one";//0
+$LANG['no_billers'] = "Er zijn nog geen bedrijven aangemaakt. Klik op 'nieuw bedrijf' knop om er een aan te maken";//0
+$LANG['no_crons'] = "Er zijn nog geen herhalingsfacturen aangemaakt.  Klik op 'nieuwe herhaling' knop om er een aan te maken";//1
+$LANG['no_customers'] = "Er zijn nog geen klanten aangemaakt. Klik op 'nieuwe klant' knop om er een aan te maken";//0
 $LANG['no_defaults'] = "Er zijn geen standaard waarden";//1
-$LANG['no_invoices'] = "There have been no invoices created. Click the 'Add a new Invoice' button above to create an invoice";//0
-$LANG['no_help_page'] = "There is no help page created for the requested topic";//0
-$LANG['no_payment_types'] = "There have been no payment types created.  Click the 'Add New Payment Type' button above to create one";//0
-$LANG['no_payments'] = "There are no payments recorded. Click the 'Process Payment' button above to enter a payment received";//0
-$LANG['no_preferences'] = "There have been no invoice preferences created.  Click the 'Add Invoice Preference' button above to create one";//0
-$LANG['no_products'] = "There have been no products created. Click the 'Add New Product' button above to create one";//0
-$LANG['no_tax_rates'] = "There have been no tax rates created.  Click the 'Add New Tax Rate' button above to create one";//0
-$LANG['no_users'] = "There have been no users created. Click the 'Add User' button above to create one";//0
+$LANG['no_invoices'] = "Er zijn nog geen facturen aangemaakt. Klik op 'nieuwe factuur' om er een aan te maken.";//0
+$LANG['no_help_page'] = "Er bestaat geen help pagina voor het gevraagde onderwerp.";//0
+$LANG['no_payment_types'] = "Er zijn nog geen betaaltypes aangemaakt. Klik op 'nieuwe betaal type' knop om er een aan te maken.";//0
+$LANG['no_payments'] = "Er zijn nog geen geregistreerde betalingen. Klik op 'Betalingen verwerken' knop om er een aan te maken.";//0
+$LANG['no_preferences'] = "Er zijn nog geen factuurinstellingen aangemaakt. Klik op 'Nieuwe instelling' knop om er een aan te maken.";//0
+$LANG['no_products'] = "Er zijn nog geen producten aangemaakt. Klik op 'nieuw product' knop om er een aan te maken.";//0
+$LANG['no_tax_rates'] = "Er zijn nog geen belastingpercentages gedefinieerd. Klik op 'nieuw tarief' om er een aan te maken.";//0
+$LANG['no_users'] = "Er zijn nog geen gebruikers aangemaakt. Klik op 'nieuwe gebruiker' knop om er een aan te maken.";//0
 $LANG['none'] = "geen";//1
 $LANG['note'] = "Opmerking";//1
 $LANG['notes'] = "Opmerkingen";//1
 $LANG['notes_opt'] = "Opmerkingen (optioneel)";//1
-$LANG['number_of_taxes_per_line_item'] = "Number of taxes per line item";//0
+$LANG['number_of_taxes_per_line_item'] = "Aantal belastingmaatregelen per item regel";//0
 $LANG['number_short'] = "Nr.";//1
 $LANG['number_short_lc'] = "nr.";//1
+$LANG['of'] = "van";//1
 $LANG['optional'] = "optioneel";//1
 $LANG['options'] = "Opties";//1
 $LANG['Other'] = "Overig";//1
 $LANG['owing'] = "Schuldig";//1
 $LANG['paid'] = "Betaald";//1
+$LANG['page'] = "pagina";//1
 $LANG['password'] = "Wachtwoord";//1
 $LANG['payment_id'] = "Betaling ID";//1
 $LANG['payment_type'] = "Betaalmethode";//1
@@ -315,6 +324,7 @@ $LANG['print_preview'] = "Afdruk voorbeeld";//1
 $LANG['print_preview_tooltip'] = "Afdruk voorbeeld van";//1
 $LANG['process'] = "Verwerken";//1
 $LANG['process_payment'] = "Betalingen verwerken";//1
+$LANG['processing'] = "verwerkt";//1
 $LANG['process_payment_details'] = "Betalingen verwerkingsdetails";//1
 $LANG['process_payment_for'] = "Verwerk betaling voor";//1
 $LANG['process_payment_inv_id'] = "Verwerk betaling factuur ID";//1
@@ -338,6 +348,12 @@ $LANG['quick_view'] = "Voorbeeld weergave";//1
 $LANG['quick_view_of'] = "Dit is een voorbeeld weergave van";//1
 $LANG['quick_view_tooltip'] = "Voorbeeld weergave van";//1
 $LANG['rate'] = "Verhouding";//1
+$LANG['real'] = "Werkelijk";//
+$LANG['recur_each'] = "herhaal ieder";//1
+$LANG['recurrence'] = "Herhalingsfacturen";//1
+$LANG['recurrence_type'] = "Herhalings type";//1
+$LANG['register'] = "Registreer";//1
+$LANG['reorder_level'] = "Sorteer niveau";//1
 $LANG['reports'] = "Rapporten";//1
 $LANG['Required_Field'] = "Verplicht veld";//1
 $LANG['role'] = "Rol";//1
@@ -437,7 +453,7 @@ $LANG['welcome'] = "Welkom bij ";//1
 $LANG['what_are_custom_fields'] = "Wat zijn voorkeur velden?";//1
 $LANG['whats_all_this_inv_pref'] = "Waar gaat deze Factuur Voorkeur pagina over?";//1
 $LANG['whats_this_page_about'] = "Waar gaat deze pagina over?";//1
-$LANG['wheres_the_edit_button'] = "Waar zit de knop om te bewerken?";//1
+$LANG['wheres_the_edit_button'] = "Waar is de bewerken knop? ";//1
 $LANG['yes'] = "Ja";//1
 $LANG['zip'] = "Postcode";//1
 ?>
