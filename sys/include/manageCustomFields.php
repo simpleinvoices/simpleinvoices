@@ -12,7 +12,7 @@
 * License:
 *	 GPL v2 or above
 */
-include("./include/CustomField.php");
+include($include_dir . "sys/include/CustomField.php");
 
 
 function saveCustomField($id, $category, $name, $description) {

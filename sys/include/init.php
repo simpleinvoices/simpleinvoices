@@ -2,10 +2,10 @@
 /* 
  * Zend framework init - start
  */
-set_include_path(get_include_path() . PATH_SEPARATOR . "./include/class");
+set_include_path(get_include_path() . PATH_SEPARATOR . "./sys/include/class");
 set_include_path(get_include_path() . PATH_SEPARATOR . "../lib/");
 set_include_path(get_include_path() . PATH_SEPARATOR . "../lib/pdf");
-set_include_path(get_include_path() . PATH_SEPARATOR . "./include/");
+set_include_path(get_include_path() . PATH_SEPARATOR . "./sys/include/");
 
 require_once 'Zend/Loader/Autoloader.php';
 
@@ -39,20 +39,20 @@ $frontendOptions = array(
 #ini_set('display_errors',true);
 
 require_once("smarty/Smarty.class.php");
-require_once("../lib/paypal/paypal.class.php");
+require_once("lib/paypal/paypal.class.php");
 
-require_once('../lib/HTMLPurifier/HTMLPurifier.standalone.php');
-include_once('./include/functions.php');
+require_once('lib/HTMLPurifier/HTMLPurifier.standalone.php');
+include_once('sys/include/functions.php');
 
 //ob_start('addCSRFProtection');
 
 /*
  * log file - start
  */
-$logFile = "./tmp/log/si.log";
+$logFile = $app_folder . "/tmp/log/si.log";
 if (!is_file($logFile))
 {
-	$createLogFile = fopen($logFile, 'w') or die(simpleInvoicesError('notWriteable','folder','tmp/log'));
+	$createLogFile = fopen($logFile, 'w') or die(simpleInvoicesError('notWriteable','folder', $app_folder . '/tmp/log'));
 	fclose($createLogFile);
 }
 if (!is_writable($logFile)) {
@@ -65,16 +65,16 @@ $logger = new Zend_Log($writer);
  * log file - end
  */
 
-if (!is_writable('./tmp/cache')) {
+if (!is_writable( $app_folder . '/tmp/cache')) {
     
-   simpleInvoicesError('notWriteable','file','./tmp/cache');
+   simpleInvoicesError('notWriteable','file', $app_folder . '/tmp/cache');
 }
 /*
  * Zend Framework cache section - start
  * -- must come after the tmp dir writeable check
  */
 $backendOptions = array(
-    'cache_dir' => './tmp/' // Directory where to put the cache files
+    'cache_dir' => $app_folder . '/tmp/' // Directory where to put the cache files
 );
                                    
 // getting a Zend_Cache_Core object
@@ -94,7 +94,7 @@ $smarty = new Smarty();
 $smarty->debugging = false;
 
 //cache directory. Have to be writeable (chmod 777)
-$smarty -> compile_dir = "tmp/cache";
+$smarty -> compile_dir = $app_folder . "/tmp/cache";
 if(!is_writable($smarty -> compile_dir)) {
 	simpleInvoicesError("notWriteable", 'folder', $smarty -> compile_dir);
 	//exit("Simple Invoices Error : The folder <i>".$smarty -> compile_dir."</i> has to be writeable");
@@ -115,15 +115,15 @@ $path = pathinfo($_SERVER['REQUEST_URI']);
 $install_path = htmlsafe($path['dirname']);
 
 
-include_once('./config/define.php');
+include_once($app_folder . '/config/define.php');
 
 /*
  * Include another config file if required
  */
-if( is_file('./config/custom.config.ini') ){
-     $config = new Zend_Config_Ini('./config/custom.config.ini', $environment,true);
+if( is_file($app_folder . '/config/custom.config.ini') ){
+     $config = new Zend_Config_Ini( $app_folder . '/config/custom.config.ini', $environment,true);
 } else {
-    $config = new Zend_Config_Ini('./config/config.ini', $environment,true);	//added 'true' to allow modifications from db
+    $config = new Zend_Config_Ini( $app_folder . '/config/config.ini', $environment,true);	//added 'true' to allow modifications from db
 }
 
 //set up app with relevant php setting
@@ -146,11 +146,11 @@ $zendDb = Zend_Db::factory($config->database->adapter, array(
 
 //include_once("./include/sql_patches.php");
 
-include_once("./include/class/db.php");
-include_once("./include/class/index.php");
+include_once("sys/include/class/db.php");
+include_once("sys/include/class/index.php");
 $db = db::getInstance();
 
-include_once("./include/sql_queries.php");
+include_once("sys/include/sql_queries.php");
 
 $smarty->register_modifier("siLocal_number", array("siLocal", "number"));
 $smarty->register_modifier("siLocal_number_clean", array("siLocal", "number_clean"));
@@ -199,24 +199,24 @@ if (! $config->extension)
 	$config->extension = $extension_core;
 }
 
-include_once('./include/language.php');
+include_once($include_dir . 'sys/include/language.php');
 
-include_once('./include/functions.php');
+include_once($include_dir . 'sys/include/functions.php');
 
 //add class files for extensions
 
 
 checkConnection();
 
-include('./include/include_auth.php');
-include_once('./include/manageCustomFields.php');
-include_once("./include/validation.php");
+include($include_dir . 'sys/include/include_auth.php');
+include_once($include_dir . 'sys/include/manageCustomFields.php');
+include_once($include_dir . "sys/include/validation.php");
 
 //if authentication enabled then do acl check etc..
 if ($config->authentication->enabled == 1 )
 {
-	include_once("./include/acl.php");
-	include_once("./include/check_permission.php");
+	include_once($include_dir . "sys/include/acl.php");
+	include_once($include_dir . "sys/include/check_permission.php");
 }
 
 /*
@@ -259,7 +259,7 @@ $siUrl = getURL();
 //$config->extension() = $DB_extensions;
 
 
-include_once("./include/backup.lib.php");
+include_once($include_dir . "sys/include/backup.lib.php");
 
 $defaults = getSystemDefaults();
 $smarty -> assign("defaults",$defaults);

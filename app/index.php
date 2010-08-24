@@ -12,14 +12,24 @@
 //if browse not defined then the page will exit
 define("BROWSE","browse");
 
+$include_dir = isset($include_dir) ? $include_dir : '../';
+$smarty_include_dir = isset($smarty_include_dir) ? $smarty_include_dir : '../../../';
+$app = isset($app) ? $app : 'app';
+$app_folder = $include_dir . $app;
+
 /*
 * The include configs and requirements stuff section - start
 */
 
+set_include_path(get_include_path() . PATH_SEPARATOR . $include_dir);
+set_include_path(get_include_path() . PATH_SEPARATOR . $include_dir . "sys/include/class");
+set_include_path(get_include_path() . PATH_SEPARATOR . $include_dir . "lib/");
+set_include_path(get_include_path() . PATH_SEPARATOR . $include_dir ."lib/pdf");
+set_include_path(get_include_path() . PATH_SEPARATOR . $include_dir ."sys/include/");
 /*
 * Load stuff required before init.php
 */
-require_once("./include/init_pre.php");
+require_once("sys/include/init_pre.php");
 global $cust_language;
 
 $module = isset($_GET['module']) ? filenameEscape($_GET['module']) : null;
@@ -30,7 +40,7 @@ if (!isset($cust_language)) {
     $cust_language =  isset($_GET['lang'])  ? filenameEscape($_GET['lang'])    : null;                                                                               
 }
 
-require_once("./include/init.php");
+require_once("sys/include/init.php");
 
 foreach($config->extension as $extension)
 {
@@ -40,9 +50,9 @@ foreach($config->extension as $extension)
 	if($extension->enabled == "1")
 	{
 		//echo "Enabled:".$value['name']."<br><br>";
-		if(file_exists("./extensions/$extension->name/include/init.php"))
+		if(file_exists("sys/extensions/$extension->name/include/init.php"))
 		{
-			require_once("./extensions/$extension->name/include/init.php");
+			require_once("sys/extensions/$extension->name/include/init.php");
 		}
 	}
 }
@@ -72,7 +82,7 @@ $menu = isset($menu)?$menu: true;
 // Check for any unapplied SQL patches when going home
 //TODO - redo this code
 if (($module == "options") && ($view == "database_sqlpatches")) {
-	include_once('./modules/options/database_sqlpatches.php');
+	include_once('sys/modules/options/database_sqlpatches.php');
 	donePatches();
 } else {
 	
@@ -106,7 +116,7 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
     {
 		if ( ($config->authentication->enabled == 1 AND isset($auth_session->id)) OR ($config->authentication->enabled == 0) )	
 		{
-			include_once('./modules/options/database_sqlpatches.php');
+			include_once('sys/modules/options/database_sqlpatches.php');
 			if (getNumberOfPatches() > 0 ) {
 				$view = "database_sqlpatches";
 				$module = "options";
@@ -158,9 +168,9 @@ if (($module == "invoices" ) && (strstr($view,"template"))) {
 			if($extension->enabled == "1")
 			{
 				//echo "Enabled:".$value['name']."<br><br>";
-				if(file_exists("./extensions/$extension->name/modules/invoices/template.php")) {
+				if(file_exists("sys/extensions/$extension->name/modules/invoices/template.php")) {
 			
-					include_once("./extensions/$extension->name/modules/invoices/template.php");
+					include_once("sys/extensions/$extension->name/modules/invoices/template.php");
 					$extensionInvoiceTemplateFile++;
 				}
 			}
@@ -168,9 +178,9 @@ if (($module == "invoices" ) && (strstr($view,"template"))) {
 		/*
 		* If no extension php file for requested file load the normal php file if it exists
 		*/
-		if( ($extensionInvoiceTemplateFile == 0) AND (file_exists("./modules/invoices/template.php")) ) 
+		if( ($extensionInvoiceTemplateFile == 0) AND (file_exists("sys/modules/invoices/template.php")) ) 
 		{
-			include_once("./modules/invoices/template.php");
+			include_once("sys/modules/invoices/template.php");
 		}
 
 
@@ -191,9 +201,9 @@ if (($module == "invoices" ) && (strstr($view,"template"))) {
 			*/	
 			if($extension->enabled == "1")
 			{
-				if(file_exists("./extensions/$extension->name/modules/$module/$view.php")) 
+				if(file_exists("sys/extensions/$extension->name/modules/$module/$view.php")) 
 				{
-					include("./extensions/$extension->name/modules/$module/$view.php");
+					include("sys/extensions/$extension->name/modules/$module/$view.php");
 					$extensionXml++;
 				}
 			}
@@ -203,7 +213,7 @@ if (($module == "invoices" ) && (strstr($view,"template"))) {
 		*/
 		if($extensionXml == 0) 
 		{
-			include("./modules/$module/$view.php");
+			include("sys/modules/$module/$view.php");
 		}
 
 		exit(0);
@@ -239,8 +249,8 @@ $file= "$module/$view";
 		*/	
 		if($extension->enabled == "1")
 		{
-			if(file_exists("./extensions/$extension->name/include/jquery/$extension->name.jquery.ext.js")) {
-				$extension_jquery_files .= "<script type=\"text/javascript\" src=\"./extensions/$extension->name/include/jquery/$extension->name.jquery.ext.js\"></script>";
+			if(file_exists("sys/extensions/$extension->name/include/jquery/$extension->name.jquery.ext.js")) {
+				$extension_jquery_files .= "<script type=\"text/javascript\" src=\"sys/extensions/$extension->name/include/jquery/$extension->name.jquery.ext.js\"></script>";
 			}
 		}
 	}
@@ -263,9 +273,9 @@ if( !in_array($module."_".$view, $early_exit) )
 			*/	
 			if($extension->enabled == "1")
 			{
-				if(file_exists("./extensions/$extension->name/templates/default/header.tpl")) 
+				if(file_exists("sys/extensions/$extension->name/templates/default/header.tpl")) 
 				{
-					$smarty -> $smarty_output("../extensions/$extension->name/templates/default/header.tpl");
+					$smarty -> $smarty_output($smarty_include_dir . "sys/extensions/$extension->name/templates/default/header.tpl");
 
 					$extensionHeader++;
 				}
@@ -276,7 +286,7 @@ if( !in_array($module."_".$view, $early_exit) )
 		*/
 		if($extensionHeader == 0) 
 		{
-			$smarty -> $smarty_output("../templates/default/header.tpl");
+			$smarty -> $smarty_output($smarty_include_dir . 'sys/templates/default/header.tpl');
 		}
 		
 }
@@ -305,11 +315,11 @@ if( !in_array($module."_".$view, $early_exit) )
 
 
 				//echo "Enabled:".$value['name']."<br><br>";
-				if(file_exists("./extensions/$extension->name/modules/$module/$view.php")) {
+				if(file_exists("sys/extensions/$extension->name/modules/$module/$view.php")) {
 			
 
 
-					include_once("./extensions/$extension->name/modules/$module/$view.php");
+					include_once("sys/extensions/$extension->name/modules/$module/$view.php");
 					$extensionPHPFile++;
 				}
 			}
@@ -317,9 +327,9 @@ if( !in_array($module."_".$view, $early_exit) )
 		/*
 		* If no extension php file for requested file load the normal php file if it exists
 		*/
-		if( ($extensionPHPFile == 0) AND (file_exists("./modules/$module/$view.php")) ) 
+		if( ($extensionPHPFile == 0) AND (file_exists("sys/modules/$module/$view.php")) ) 
 		{
-			include_once("./modules/$module/$view.php");
+			include_once("sys/modules/$module/$view.php");
 		}
 
 /*
@@ -345,8 +355,8 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		*/	
 		if($extension->enabled == "1")
 		{
-			if(file_exists("./extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.tpl")) {
-					$smarty -> $smarty_output("../extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.tpl");
+			if(file_exists("sys/extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.tpl")) {
+					$smarty -> $smarty_output($smarty_include_dir . "sys/extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.tpl");
 			}
 		}
 		
@@ -357,7 +367,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 	*/
 	if($extensionPostLoadJquery == 0 AND $module !='auth') 
 	{
-		$smarty -> $smarty_output("../include/jquery/post_load.jquery.ext.js.tpl");
+		$smarty -> $smarty_output( $smarty_include_dir . "sys/include/jquery/post_load.jquery.ext.js.tpl");
 	}
 
 /*
@@ -381,9 +391,9 @@ if($module == "export" OR $view == "export" OR $module == "api")
 			*/	
 			if($extension->enabled == "1")
 			{
-				if(file_exists("./extensions/$extension->name/templates/default/menu.tpl")) 
+				if(file_exists("sys/extensions/$extension->name/templates/default/menu.tpl")) 
 				{
-					$smarty -> $smarty_output("../extensions/$extension->name/templates/default/menu.tpl");
+					$smarty -> $smarty_output($smarty_include_dir . "sys/extensions/$extension->name/templates/default/menu.tpl");
 					$extensionMenu++;
 				}
 			}
@@ -393,7 +403,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		*/
 		if($extensionMenu == "0") 
 		{
-			$smarty -> $smarty_output("../templates/default/menu.tpl");
+			$smarty -> $smarty_output($smarty_include_dir . "sys/templates/default/menu.tpl");
 		}
 	}
 /*
@@ -415,9 +425,9 @@ if($module == "export" OR $view == "export" OR $module == "api")
 			*/	
 			if($extension->enabled == "1")
 			{
-				if(file_exists("./extensions/$extension->name/templates/default/main.tpl")) 
+				if(file_exists("sys/extensions/$extension->name/templates/default/main.tpl")) 
 				{
-					$smarty -> $smarty_output("../extensions/$extension->name/templates/default/main.tpl");
+					$smarty -> $smarty_output($smarty_include_dir . "sys/extensions/$extension->name/templates/default/main.tpl");
 					$extensionMain++;
 				}
 			}
@@ -427,7 +437,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		*/
 		if($extensionMain == "0") 
 		{
-			$smarty -> $smarty_output("../templates/default/main.tpl");
+			$smarty -> $smarty_output($smarty_include_dir . "sys/templates/default/main.tpl");
 		}
     }
     
@@ -445,6 +455,8 @@ if($module == "export" OR $view == "export" OR $module == "api")
 	* use the $extensionTemplates variable to count the number of applicable extensions template
 	* --if = 0 after checking all extensions then show default
 	*/
+	$tplDirectory = "";
+	$smarty_path = $smarty_include_dir . "/sys/templates/default";
 	$extensionTemplates = 0;
 	foreach($config->extension as $extension)
 	{
@@ -453,9 +465,9 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		*/	
 		if($extension->enabled == "1")
 		{
-			if(file_exists("./extensions/$extension->name/templates/default/$module/$view.tpl")) 
+			if(file_exists("sys/extensions/$extension->name/templates/default/$module/$view.tpl")) 
 			{
-				$path = "../extensions/$extension->name/templates/default/$module/";
+				$smarty_path = "$smarty_include_dir/sys/extensions/$extension->name/templates/default/$module/";
 				$tplDirectory = "extensions/$extension->name/";
 				$extensionTemplates++;
 			}	
@@ -466,15 +478,15 @@ if($module == "export" OR $view == "export" OR $module == "api")
 	* TODO Note: if more than one extension has got a template for the requested file than thats trouble :(
 	* - we really need a better extensions system
 	*/
-	if( ($extensionTemplates == 0) AND (file_exists("./templates/default/$module/$view.tpl")) ) 
+	if( ($extensionTemplates == 0) AND (file_exists("sys/templates/default/$module/$view.tpl")) ) 
 	{ 
-				$path = "../templates/default/$module/";
+				$smarty_path = "$smarty_include_dir/sys/templates/default/$module/";
 				$tplDirectory = "";
 				$extensionTemplates++;
 	}
-	
-	$smarty->assign("path",$path);
-	$smarty -> $smarty_output("../".$tplDirectory."templates/default/$module/$view.tpl");
+
+	$smarty->assign("smarty_path",$smarty_path);
+	$smarty -> $smarty_output($smarty_include_dir . "sys/".$tplDirectory."templates/default/$module/$view.tpl");
 	
 	// If no smarty template - add message - onyl uncomment for dev - commented out for release
 	if ($extensionTemplates == 0 )
@@ -499,9 +511,9 @@ if($module == "export" OR $view == "export" OR $module == "api")
 			*/	
 			if($extension->enabled == "1")
 			{
-				if(file_exists("./extensions/$extension->name/templates/default/footer.tpl")) 
+				if(file_exists("sys/extensions/$extension->name/templates/default/footer.tpl")) 
 				{
-					$smarty -> $smarty_output("../extensions/$extension->name/templates/default/footer.tpl");
+					$smarty -> $smarty_output($smarty_include_dir . "sys/extensions/$extension->name/templates/default/footer.tpl");
 					$extensionFooter++;
 				}
 			}
@@ -511,7 +523,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		*/
 		if($extensionFooter == 0) 
 		{
-			$smarty -> $smarty_output("../templates/default/footer.tpl");
+			$smarty -> $smarty_output($smarty_include_dir . "sys/templates/default/footer.tpl");
 		}
 	
 	}

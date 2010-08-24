@@ -23,7 +23,7 @@ $pageActive = "invoices";
 
 $logger->log('Itemised invoice created', Zend_Log::INFO);
 
-include('./modules/invoices/invoice.php');
+include($include_dir .'sys/modules/invoices/invoice.php');
 
 $smarty -> assign('pageActive', 'invoice_new');
 $smarty -> assign('subPageActive', 'invoice_new_itemised');

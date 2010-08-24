@@ -105,7 +105,7 @@
         <br />
 
 {else}
-{include file="$path/header.tpl" }
+{include file="$smarty_path/header.tpl" }
 
 <table align="left">
 	<tr>

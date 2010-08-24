@@ -31,8 +31,8 @@
 	<script type="text/javascript" src="./include/jquery/ajaxupload/ajaxupload.js"></script>
 	
 	{/literal}
-	{include file='../include/jquery/jquery.functions.js.tpl'}
-	{include file='../include/jquery/jquery.conf.js.tpl'}
+	{include file='../../../sys/include/jquery/jquery.functions.js.tpl'}
+	{include file='../../../sys/include/jquery/jquery.conf.js.tpl'}
 	{literal}
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/jquery-ui/tab-screen.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/jquery-ui/tab_menu.css" media="all" />
