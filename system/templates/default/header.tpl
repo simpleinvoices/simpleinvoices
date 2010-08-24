@@ -51,15 +51,15 @@
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/phpreports.css" media="all"/>
 	{/literal}
 	{if $config->debug->level == "All"}
-	<link rel="stylesheet" type="text/css" href="./library/blackbirdjs/blackbird.css" />	
-	<script type="text/javascript" src="./library/blackbirdjs/blackbird.js"></script>
+	<link rel="stylesheet" type="text/css" href="./lib/blackbirdjs/blackbird.css" />	
+	<script type="text/javascript" src="./lib/blackbirdjs/blackbird.js"></script>
 	{/if}
 	{literal}
 	<script type="text/javascript" src="./include/jquery/jquery.validationEngine.js"></script>
     {/literal}
     <!-- Javascript for Flot Graphs -->
     {literal}
-    <script type="text/javascript" src="./library/flot/jquery.flot.js"></script>
+    <script type="text/javascript" src="./lib/flot/jquery.flot.js"></script>
     {/literal}
 
 </head>

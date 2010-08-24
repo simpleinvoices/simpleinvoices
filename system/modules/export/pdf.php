@@ -37,7 +37,7 @@ curl_close($curl_handle);
 header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 	// Date in the past
 
-$myloc  = "library/pdf/html2ps.php";  // This file must be in the root of the application folder where the index.php resides
+$myloc  = "lib/pdf/html2ps.php";  // This file must be in the root of the application folder where the index.php resides
 $myloc .= "?";
 $myloc .= "&process_mode=single";
 $myloc .= "&renderfields=1";

@@ -2597,11 +2597,11 @@ function pdfThis($html,$file_location="",$pdfname)
 
 	global $config;
 
-//	set_include_path("../../../../library/pdf/");
-	require_once('../library/pdf/config.inc.php');
-	require_once('../library/pdf/pipeline.factory.class.php');
-	require_once('../library/pdf/pipeline.class.php');
-	parse_config_file('../library/pdf/html2ps.config');
+//	set_include_path("../../../../lib/pdf/");
+	require_once('../lib/pdf/config.inc.php');
+	require_once('../lib/pdf/pipeline.factory.class.php');
+	require_once('../lib/pdf/pipeline.class.php');
+	parse_config_file('../lib/pdf/html2ps.config');
 
 	require_once("./include/init.php");	// for getInvoice() and getPreference()
 	#$invoice_id = $_GET['id'];
