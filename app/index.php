@@ -66,6 +66,7 @@ $smarty -> assign("module",$module);
 $smarty -> assign("view",$view);
 $smarty -> assign("siUrl",$siUrl);//used for template css
 	$smarty->assign("smarty_embed_path",$smarty_embed_path);
+	$smarty->assign("include_dir",$include_dir);
 
 $smarty -> assign("LANG",$LANG);
 //For Making easy enabled pop-menus (see biller)
