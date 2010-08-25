@@ -14,6 +14,7 @@ define("BROWSE","browse");
 
 $include_dir = isset($include_dir) ? $include_dir : '../';
 $smarty_include_dir = isset($smarty_include_dir) ? $smarty_include_dir : '../../../';
+$smarty_embed_path = isset($smarty_embed_path) ? $smarty_embed_path : '../../../';
 $app = isset($app) ? $app : 'app';
 $app_folder = $include_dir . $app;
 
@@ -50,7 +51,7 @@ foreach($config->extension as $extension)
 	if($extension->enabled == "1")
 	{
 		//echo "Enabled:".$value['name']."<br><br>";
-		if(file_exists("sys/extensions/$extension->name/include/init.php"))
+		if(file_exists($include_dir . "sys/extensions/$extension->name/include/init.php"))
 		{
 			require_once("sys/extensions/$extension->name/include/init.php");
 		}
@@ -64,6 +65,7 @@ $smarty -> assign("config",$config); // to toggle the login / logout button visi
 $smarty -> assign("module",$module);
 $smarty -> assign("view",$view);
 $smarty -> assign("siUrl",$siUrl);//used for template css
+	$smarty->assign("smarty_embed_path",$smarty_embed_path);
 
 $smarty -> assign("LANG",$LANG);
 //For Making easy enabled pop-menus (see biller)
@@ -168,7 +170,7 @@ if (($module == "invoices" ) && (strstr($view,"template"))) {
 			if($extension->enabled == "1")
 			{
 				//echo "Enabled:".$value['name']."<br><br>";
-				if(file_exists("sys/extensions/$extension->name/modules/invoices/template.php")) {
+				if(file_exists($include_dir . "sys/extensions/$extension->name/modules/invoices/template.php")) {
 			
 					include_once("sys/extensions/$extension->name/modules/invoices/template.php");
 					$extensionInvoiceTemplateFile++;
@@ -178,7 +180,7 @@ if (($module == "invoices" ) && (strstr($view,"template"))) {
 		/*
 		* If no extension php file for requested file load the normal php file if it exists
 		*/
-		if( ($extensionInvoiceTemplateFile == 0) AND (file_exists("sys/modules/invoices/template.php")) ) 
+		if( ($extensionInvoiceTemplateFile == 0) AND (file_exists($include_dir . "sys/modules/invoices/template.php")) ) 
 		{
 			include_once("sys/modules/invoices/template.php");
 		}
@@ -201,7 +203,7 @@ if (($module == "invoices" ) && (strstr($view,"template"))) {
 			*/	
 			if($extension->enabled == "1")
 			{
-				if(file_exists("sys/extensions/$extension->name/modules/$module/$view.php")) 
+				if(file_exists($include_dir . "sys/extensions/$extension->name/modules/$module/$view.php")) 
 				{
 					include("sys/extensions/$extension->name/modules/$module/$view.php");
 					$extensionXml++;
@@ -249,7 +251,7 @@ $file= "$module/$view";
 		*/	
 		if($extension->enabled == "1")
 		{
-			if(file_exists("sys/extensions/$extension->name/include/jquery/$extension->name.jquery.ext.js")) {
+			if(file_exists($include_dir . "sys/extensions/$extension->name/include/jquery/$extension->name.jquery.ext.js")) {
 				$extension_jquery_files .= "<script type=\"text/javascript\" src=\"sys/extensions/$extension->name/include/jquery/$extension->name.jquery.ext.js\"></script>";
 			}
 		}
@@ -273,7 +275,7 @@ if( !in_array($module."_".$view, $early_exit) )
 			*/	
 			if($extension->enabled == "1")
 			{
-				if(file_exists("sys/extensions/$extension->name/templates/default/header.tpl")) 
+				if(file_exists($include_dir . "sys/extensions/$extension->name/templates/default/header.tpl")) 
 				{
 					$smarty -> $smarty_output($smarty_include_dir . "sys/extensions/$extension->name/templates/default/header.tpl");
 
@@ -315,7 +317,7 @@ if( !in_array($module."_".$view, $early_exit) )
 
 
 				//echo "Enabled:".$value['name']."<br><br>";
-				if(file_exists("sys/extensions/$extension->name/modules/$module/$view.php")) {
+				if(file_exists($include_dir . "sys/extensions/$extension->name/modules/$module/$view.php")) {
 			
 
 
@@ -327,7 +329,7 @@ if( !in_array($module."_".$view, $early_exit) )
 		/*
 		* If no extension php file for requested file load the normal php file if it exists
 		*/
-		if( ($extensionPHPFile == 0) AND (file_exists("sys/modules/$module/$view.php")) ) 
+		if( ($extensionPHPFile == 0) AND (file_exists($include_dir . "sys/modules/$module/$view.php")) ) 
 		{
 			include_once("sys/modules/$module/$view.php");
 		}
@@ -355,7 +357,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		*/	
 		if($extension->enabled == "1")
 		{
-			if(file_exists("sys/extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.tpl")) {
+			if(file_exists($include_dir . "sys/extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.tpl")) {
 					$smarty -> $smarty_output($smarty_include_dir . "sys/extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.tpl");
 			}
 		}
@@ -391,7 +393,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 			*/	
 			if($extension->enabled == "1")
 			{
-				if(file_exists("sys/extensions/$extension->name/templates/default/menu.tpl")) 
+				if(file_exists($include_dir . "sys/extensions/$extension->name/templates/default/menu.tpl")) 
 				{
 					$smarty -> $smarty_output($smarty_include_dir . "sys/extensions/$extension->name/templates/default/menu.tpl");
 					$extensionMenu++;
@@ -425,7 +427,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 			*/	
 			if($extension->enabled == "1")
 			{
-				if(file_exists("sys/extensions/$extension->name/templates/default/main.tpl")) 
+				if(file_exists($include_dir . "sys/extensions/$extension->name/templates/default/main.tpl")) 
 				{
 					$smarty -> $smarty_output($smarty_include_dir . "sys/extensions/$extension->name/templates/default/main.tpl");
 					$extensionMain++;
@@ -456,7 +458,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 	* --if = 0 after checking all extensions then show default
 	*/
 	$tplDirectory = "";
-	$smarty_path = $smarty_include_dir . "/sys/templates/default";
+	$smarty_path = $smarty_include_dir . "sys/templates/default";
 	$extensionTemplates = 0;
 	foreach($config->extension as $extension)
 	{
@@ -465,7 +467,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		*/	
 		if($extension->enabled == "1")
 		{
-			if(file_exists("sys/extensions/$extension->name/templates/default/$module/$view.tpl")) 
+			if(file_exists($include_dir . "sys/extensions/$extension->name/templates/default/$module/$view.tpl")) 
 			{
 				$smarty_path = "$smarty_include_dir/sys/extensions/$extension->name/templates/default/$module/";
 				$tplDirectory = "extensions/$extension->name/";
@@ -478,7 +480,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 	* TODO Note: if more than one extension has got a template for the requested file than thats trouble :(
 	* - we really need a better extensions system
 	*/
-	if( ($extensionTemplates == 0) AND (file_exists("sys/templates/default/$module/$view.tpl")) ) 
+	if( ($extensionTemplates == 0) AND (file_exists($include_dir . "sys/templates/default/$module/$view.tpl")) ) 
 	{ 
 				$smarty_path = "$smarty_include_dir/sys/templates/default/$module/";
 				$tplDirectory = "";
@@ -511,7 +513,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 			*/	
 			if($extension->enabled == "1")
 			{
-				if(file_exists("sys/extensions/$extension->name/templates/default/footer.tpl")) 
+				if(file_exists($include_dir . "sys/extensions/$extension->name/templates/default/footer.tpl")) 
 				{
 					$smarty -> $smarty_output($smarty_include_dir . "sys/extensions/$extension->name/templates/default/footer.tpl");
 					$extensionFooter++;

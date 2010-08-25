@@ -50,7 +50,7 @@
     <br />
 	<br />
 	<table id="manageGrid" style="display:none"></table>
-	{include file='../modules/invoices/manage.js.php'}
+	{include file="$smarty_embed_path/sys/modules/invoices/manage.js.php"}
 
 
 	<div id="export_dialog" class="flora" title="Export">

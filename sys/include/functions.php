@@ -20,8 +20,8 @@ function checkLogin() {
 	}
 }
 
-function getLogoList() {
-	$dirname="./templates/invoices/logos";
+function getLogoList($folder) {
+	$dirname=$folder . "/logos";
 	$ext = array("jpg", "png", "jpeg", "gif");
 	$files = array();
 	if($handle = opendir($dirname)) {

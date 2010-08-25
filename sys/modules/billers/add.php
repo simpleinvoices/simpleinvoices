@@ -19,7 +19,7 @@
 
 checkLogin();
 
-$files = getLogoList();
+$files = getLogoList($app_folder);
 
 $smarty->assign("files", $files);
 
@@ -27,7 +27,7 @@ $smarty->assign("files", $files);
 $customFieldLabel = getCustomFieldLabels();
 
 if ($_POST['name'] != "") {
-	include ("./modules/billers/save.php");
+	include("modules/billers/save.php");
 }
 
 $smarty->assign('files', $files);

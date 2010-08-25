@@ -12,7 +12,7 @@
 {* if bill is updated or saved.*}
 
 {if $smarty.post.name != "" && $smarty.post.submit != null } 
-	{include file="../templates/default/billers/save.tpl"}
+	{include file="$smarty_embed_path/sys/templates/default/billers/save.tpl"}
 {else}
 {* if no biller name was inserted *}
 <form name="frmpost" action="index.php?module=billers&amp;view=add" method="post" id="frmpost">

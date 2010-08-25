@@ -105,7 +105,7 @@
         <br />
 
 {else}
-{include file="$smarty_path/header.tpl" }
+{include file="$smarty_embed_path/sys/templates/default/invoices/header.tpl" }
 
 <table align="left">
 	<tr>
