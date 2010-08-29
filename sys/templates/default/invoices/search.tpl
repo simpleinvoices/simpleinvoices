@@ -136,7 +136,7 @@ Ext.onReady(function(){
 		record.data.forumid);
 
 		var pdfLink = String.format(
-		'<!--3 EXPORT TO PDF --><a title="'+export_tooltip+'"	class="index_table" href="pdfmaker.php?id={1}"><img src="images/common/page_white_acrobat.png" height="16" padding="-4px" border="-5px" valign="bottom" alt="" /><!-- pdf --></a>',
+		'<!--3 EXPORT TO PDF --><a title="'+export_tooltip+'"	class="index_table" href="pdfmaker.php?id={1}"><img src="../sys/images/common/page_white_acrobat.png" height="16" padding="-4px" border="-5px" valign="bottom" alt="" /><!-- pdf --></a>',
 		value,
 		record.id,
 		record.data.type_id,
