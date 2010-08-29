@@ -18,7 +18,8 @@ if ($config->authentication->enabled == 1 ) {
 		$auth_session->domain_id = "1";
 	}
 
-	include('./include/auth/auth.php');
+//	include('./include/auth/auth.php');     aducom
+    include('/auth/auth.php');
 }
 
 /*If auth not on - use default domain and user id of 1*/
