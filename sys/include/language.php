@@ -65,7 +65,8 @@ function getLanguageArray() {
 
 function getLanguageList() {
 	$xmlFile = "info.xml";
-	$langPath = "lang/";
+///	$langPath = "lang/";  aducom
+    $langPath = "../sys/lang/";
 	$folders = null;
 	
 	if($handle = opendir($langPath)) {
