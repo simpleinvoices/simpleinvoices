@@ -30,11 +30,11 @@ $count = $sth_count_rows->rowCount();
 	foreach ($invoices as $row) {
 		$xml .= "<row id='".$row['id']."'>";
 		$xml .= "<cell>
-					<![CDATA[<a class='index_table' title='".$LANG['quick_view_tooltip']." ".$row['preference']." ".$row['id']."' href='index.php?module=invoices&view=quick_view&id=".$row['id']."'> <img src='images/common/view.png' class='action' /></a>
-		<a class='index_table' title='".$LANG['edit_view_tooltip']." ".$row['preference']." ".$row['id']."' href='index.php?module=invoices&view=details&id=".$row['id']."&action=view'><img src='images/common/edit.png' class='action' /></a>
+					<![CDATA[<a class='index_table' title='".$LANG['quick_view_tooltip']." ".$row['preference']." ".$row['id']."' href='index.php?module=invoices&view=quick_view&id=".$row['id']."'> <img src='../sys/images/common/view.png' class='action' /></a>
+		<a class='index_table' title='".$LANG['edit_view_tooltip']." ".$row['preference']." ".$row['id']."' href='index.php?module=invoices&view=details&id=".$row['id']."&action=view'><img src='../sys/images/common/edit.png' class='action' /></a>
 		<!--2 Print View -->
 			<a class='index_table' title='".$LANG['print_preview_tooltip']." ".$row['preference']." ".$row['id']."' href='index.php?module=export&view=invoice&id=".$row['id']."&format=print' target='_blank'>
-				<img src='images/common/printer.png' class='action' /><!-- print -->
+				<img src='../sys/images/common/printer.png' class='action' /><!-- print -->
 			</a>
 		<!--3 EXPORT DIALOG -->
 			<a title='".$LANG['export_tooltip']." ".$row['preference']." ".$row['id']."' class='invoice_export_dialog' href='#' rel='".$row['id']."'>
@@ -46,7 +46,7 @@ $count = $sth_count_rows->rowCount();
 		<!--4 XLS <a title='".$LANG['export_tooltip']." ".$row['preference']." ".$row['id']." ".$LANG['export_xls_tooltip'].$config->export->spreadsheet." ".$LANG['format_tooltip']."' class='index_table' href='index.php?module=invoices&view=templates/template&invoice='".$row['id']."&action=view&location=print&export=".$config->export->spreadsheet."'><img src='../sys/images/common/page_white_excel.png' class='action' /></a> -->
 		
 		<!--6 Payment --><a title='".$LANG['process_payment_for']." ".$row['preference']." ".$row['id']."' class='index_table' href='index.php?module=payments&view=process&id=".$row['id']."&op=pay_selected_invoice'><img src='../sys/images/common/money_dollar.png' class='action' /></a>
-		<!--7 Email --><a title='".$LANG['email']." ".$row['preference']." ".$row['id']."' class='index_table' href='index.php?module=invoices&view=email&stage=1&id=".$row['id']."'><img src='images/common/mail-message-new.png' class='action' /></a>
+		<!--7 Email --><a title='".$LANG['email']." ".$row['preference']." ".$row['id']."' class='index_table' href='index.php?module=invoices&view=email&stage=1&id=".$row['id']."'><img src='../sys/images/common/mail-message-new.png' class='action' /></a>
 					]]>
 				</cell>";
 		$xml .= "<cell><![CDATA[".$row['index_name']."]]></cell>";		
