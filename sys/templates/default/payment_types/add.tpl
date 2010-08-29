@@ -27,7 +27,7 @@
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field"
 				title="{$LANG.Required_Field}"
 			>
-		<img src="./images/common/required-small.png" alt="" /></a>			
+		<img src="../sys/images/common/required-small.png" alt="" /></a>			
 		</td>
 			<td><input class="validate[required]" type="text" name="pt_description" size="30" /></td>
 		</tr>
@@ -46,14 +46,14 @@
 		<tr>
 			<td>
 				<button type="submit" class="positive" name="insert_preference" value="{$LANG.save}">
-					<img class="button_img" src="./images/common/tick.png" alt="" /> 
+					<img class="button_img" src="../sys/images/common/tick.png" alt="" /> 
 					{$LANG.save}
 				</button>
 
 				<input type="hidden" name="op" value="insert_preference" />
 			
 				<a href="./index.php?module=payment_types&amp;view=manage" class="negative">
-					<img src="./images/common/cross.png" alt="" />
+					<img src="../sys/images/common/cross.png" alt="" />
 					{$LANG.cancel}
 				</a>
 		

@@ -89,7 +89,7 @@
     <tr>
         <td>
             <button type="submit" class="positive" name="submit" value="statement_report">
-                <img class="button_img" src="./images/common/tick.png" alt="" /> 
+                <img class="button_img" src="../sys/images/common/tick.png" alt="" /> 
                 {$LANG.run_report}
             </button>
 

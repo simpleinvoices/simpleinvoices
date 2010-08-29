@@ -159,10 +159,10 @@
 						class="show-note" 
 						onclick="javascript: $('.note').show();$('.show-note').hide();"
 					>
-						<img src="./images/common/page_white_add.png" title="{$LANG.show_details}" alt="" />
+						<img src="../sys/images/common/page_white_add.png" title="{$LANG.show_details}" alt="" />
 					</a>
 					<a href='#' class="note" onclick="javascript: $('.note').hide();$('.show-note').show();">
-						<img src="./images/common/page_white_delete.png" title="{$LANG.hide_details}" alt="" />
+						<img src="../sys/images/common/page_white_delete.png" title="{$LANG.hide_details}" alt="" />
 					</a>
 				</td>
 		    </tr>
@@ -180,7 +180,7 @@
 								style="display: inline;"
 								rel="{$line|htmlsafe}"
 							>
-								<img id="delete_image{$line|htmlsafe}" src="./images/common/delete_item.png" alt="" />
+								<img id="delete_image{$line|htmlsafe}" src="../sys/images/common/delete_item.png" alt="" />
 							</a>
 						{/if}
 						{if $line == "0"}
@@ -192,7 +192,7 @@
 								style="display: inline;"
 								rel="{$line|htmlsafe}"
 							>
-								<img id="delete_image{$line|htmlsafe}" src="./images/common/blank.gif" alt="" />
+								<img id="delete_image{$line|htmlsafe}" src="../sys/images/common/blank.gif" alt="" />
 							</a>
 						{/if}
 						</td>
@@ -267,7 +267,7 @@
 								class="add_line_item"
 							>
 								<img 
-									src="./images/common/add.png"
+									src="../sys/images/common/add.png"
 									alt=""
 								/>
 								{$LANG.add_new_row}
@@ -282,7 +282,7 @@
 		{*
 			<tr>
 				<td>
-					<a href="./index.php?module=invoices&amp;view=add_invoice_item&amp;invoice={$invoice.id|urlencode}&amp;type={$invoice.type_id|urlencode}&amp;tax_id={$invoiceItems.0.tax_id|urlencode}"><img src="./images/common/famfamAdd.png" alt="" />{$LANG.add_invoice_item}</a>
+					<a href="./index.php?module=invoices&amp;view=add_invoice_item&amp;invoice={$invoice.id|urlencode}&amp;type={$invoice.type_id|urlencode}&amp;tax_id={$invoiceItems.0.tax_id|urlencode}"><img src="../sys/images/common/famfamAdd.png" alt="" />{$LANG.add_invoice_item}</a>
 				</td>
 				<td>
 				</td>
@@ -333,7 +333,7 @@
 	<tr>
 		<td>
 			<button type="submit" class="invoice_save positive" name="submit" value="{$LANG.save}">
-				<img class="button_img" src="./images/common/tick.png" alt="" /> 
+				<img class="button_img" src="../sys/images/common/tick.png" alt="" /> 
 				{$LANG.save}
 			</button>
 			{if $invoice.id == null} 
@@ -350,7 +350,7 @@
 			<input type="hidden" name="op" value="insert_preference" />
 			<input type="hidden" id="max_items" name="max_items" value="{$lines|htmlsafe}" />
 			<a href="./index.php?module=invoices&amp;view=manage" class="negative">
-				<img src="./images/common/cross.png" alt="" />
+				<img src="../sys/images/common/cross.png" alt="" />
 				{$LANG.cancel}
 			</a>
 		</td>

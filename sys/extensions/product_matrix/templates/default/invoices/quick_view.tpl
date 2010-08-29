@@ -79,7 +79,7 @@
 		<td class="account">{$LANG.owing}:</td>
 		<td class="account"><u>{$preference.pref_currency_sign}{$invoice.owing|number_format:2}</u></td>
 		<td class="account">{$LANG.age}:</td>
-		<td class="account" nowrap>{$invoice_age} <a href='index.php?module=documentation&amp;view=view&amp;page=help_age' rel='gb_page_center[450, 450]'><img src="./images/common/help-small.png" alt="" /></a></td>
+		<td class="account" nowrap>{$invoice_age} <a href='index.php?module=documentation&amp;view=view&amp;page=help_age' rel='gb_page_center[450, 450]'><img src="../sys/images/common/help-small.png" alt="" /></a></td>
 		<td></td>
 		<td class="columnleft"></td>
 		<td class="account">{$LANG.total}:</td>

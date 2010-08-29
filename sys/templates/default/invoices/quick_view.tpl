@@ -27,10 +27,10 @@
 			 &nbsp;&nbsp; 
 			<a title="{$LANG.edit} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=invoices&amp;view=details&amp;id={$invoice.id|urlencode}&amp;action=view"><img src='images/common/edit.png' class='action' />&nbsp;{$LANG.edit}</a>
 			 &nbsp;&nbsp; 
-			 <a title="{$LANG.process_payment_for} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=payments&amp;view=process&amp;id={$invoice.id|urlencode}&amp;op=pay_selected_invoice"><img src='images/common/money_dollar.png' class='action' />&nbsp;{$LANG.process_payment} </a>
+			 <a title="{$LANG.process_payment_for} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=payments&amp;view=process&amp;id={$invoice.id|urlencode}&amp;op=pay_selected_invoice"><img src='../sys/images/common/money_dollar.png' class='action' />&nbsp;{$LANG.process_payment} </a>
              {if $eway_pre_check == 'true'}
 			 &nbsp;&nbsp; 
-			 <a title="{$LANG.process_payment_for} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=payments&amp;view=eway&amp;id={$invoice.id|urlencode}"><img src='images/common/money_dollar.png' class='action' />&nbsp;{$LANG.process_payment_via_eway} </a>
+			 <a title="{$LANG.process_payment_for} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=payments&amp;view=eway&amp;id={$invoice.id|urlencode}"><img src='../sys/images/common/money_dollar.png' class='action' />&nbsp;{$LANG.process_payment_via_eway} </a>
              {/if}
 			 &nbsp;&nbsp; 
 			 <!-- EXPORT TO PDF -->
@@ -64,7 +64,7 @@
 	<!-- Invoice Summary section -->
 
 	<tr class="details_screen">
-		<td class="details_screen"><b>{$preference.pref_inv_wording|htmlsafe} {$LANG.summary}:</b></td><td colspan="5" align="right" class="details_screen align_right"><a href='#' class="show-summary" onclick="$('.summary').show();$('.show-summary').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a><a href='#' class="summary" onclick="$('.summary').hide();$('.show-summary').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a> </td>
+		<td class="details_screen"><b>{$preference.pref_inv_wording|htmlsafe} {$LANG.summary}:</b></td><td colspan="5" align="right" class="details_screen align_right"><a href='#' class="show-summary" onclick="$('.summary').show();$('.show-summary').hide();"><img src="../sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a><a href='#' class="summary" onclick="$('.summary').hide();$('.show-summary').show();"><img src="../sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a> </td>
 	</tr>
 	<tr class="details_screen summary">
 		<td class="details_screen">{$preference.pref_inv_wording|htmlsafe} {$LANG.number_short}:</td><td colspan="5" class="details_screen">{$invoice.index_id|htmlsafe}</td>
@@ -86,7 +86,7 @@
 	<tr class="details_screen">
 		<td class="details_screen"><b>{$LANG.biller}:</b></td>
 		<td class="details_screen" colspan="3">{$biller.name|htmlsafe}</td>
-		<td colspan="2" class="details_screen align_right"><a href='#' class="show-biller" onclick="$('.biller').show();$('.show-biller').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a><a href='#' class="biller" onclick="$('.biller').hide();$('.show-biller').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a></td>
+		<td colspan="2" class="details_screen align_right"><a href='#' class="show-biller" onclick="$('.biller').show();$('.show-biller').hide();"><img src="../sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a><a href='#' class="biller" onclick="$('.biller').hide();$('.show-biller').show();"><img src="../sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a></td>
 	</tr>
 	<tr class="details_screen biller">
 		<td class="details_screen">{$LANG.street}:</td>
@@ -146,7 +146,7 @@
 	<tr class="details_screen">
 		<td class="details_screen"><b>{$LANG.customer}:</b></td>
 		<td class="details_screen" colspan="3">{$customer.name|htmlsafe}</td>
-		<td colspan="2" class="details_screen align_right"><a href='#' class="show-customer" {literal} onclick="$('.customer').show(); $('.show-customer').hide(); {/literal}"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a> <a href='#' class="customer" {literal} onclick="$('.customer').hide(); $('.show-customer').show(); {/literal}"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a></td>
+		<td colspan="2" class="details_screen align_right"><a href='#' class="show-customer" {literal} onclick="$('.customer').show(); $('.show-customer').hide(); {/literal}"><img src="../sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a> <a href='#' class="customer" {literal} onclick="$('.customer').hide(); $('.show-customer').show(); {/literal}"><img src="../sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a></td>
 	</tr>	
 	<tr class="details_screen customer">
 		<td class="details_screen">{$LANG.attention_short}:</td>
@@ -227,7 +227,7 @@
 	{if $invoice.type_id == 2 }
 
             <tr>
-                    <td colspan="6" class="details_screen align_right"><a href='#' class="show-itemised" onclick="$('.itemised').show();$('.show-itemised').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a><a href='#' class="itemised" onclick="$('.itemised').hide();$('.show-itemised').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a></td>
+                    <td colspan="6" class="details_screen align_right"><a href='#' class="show-itemised" onclick="$('.itemised').show();$('.show-itemised').hide();"><img src="../sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a><a href='#' class="itemised" onclick="$('.itemised').hide();$('.show-itemised').show();"><img src="../sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a></td>
             </tr>
 			<tr>
         		    <td><b>{$LANG.quantity_short}</b></td>
@@ -242,7 +242,7 @@
     {if $invoice.type_id == 3 }
 
 			<tr>
-					<td colspan="6" class="details_screen align_right"><a href='#' class="show-consulting" onclick="$('.consulting').show();$('.show-consulting').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a><a href='#' class="consulting" onclick="$('.consulting').hide();$('.show-consulting').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a></td>
+					<td colspan="6" class="details_screen align_right"><a href='#' class="show-consulting" onclick="$('.consulting').show();$('.show-consulting').hide();"><img src="../sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a><a href='#' class="consulting" onclick="$('.consulting').hide();$('.show-consulting').show();"><img src="../sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a></td>
         	</tr>
 			<tr>
                	 	<td><b>{$LANG.quantity_short}</b></td>
@@ -344,7 +344,7 @@
 		<tr class="details_screen">
 			<td colspan="5"><b>{$LANG.notes}:</b></td>
 				{if ($invoice.note|count_characters:true > 25)}
-					<td class="details_screen align_right"><a href='#' class="show-notes" onclick="$('.notes').show();$('.show-notes').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a><a href='#' class="notes" onclick="$('.notes').hide();$('.show-notes').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a></td>
+					<td class="details_screen align_right"><a href='#' class="show-notes" onclick="$('.notes').show();$('.show-notes').hide();"><img src="../sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a><a href='#' class="notes" onclick="$('.notes').hide();$('.show-notes').show();"><img src="../sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a></td>
 				{/if}						
 		</tr>
 			<!-- if hide detail click - the stripped note will be displayed -->
@@ -427,7 +427,7 @@
 		<td class="account"><u>{$preference.pref_currency_sign|htmlsafe}{$invoice.owing|siLocal_number}</u></td>
 		<td class="account">{$LANG.age}:</td>
 		<td class="account" nowrap>{$invoice_age|htmlsafe} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_age" title="{$LANG.age}"><img src="./images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_age" title="{$LANG.age}"><img src="../sys/images/common/help-small.png" alt="" /></a>
 		</td>
 		<td></td>
 		<td class="columnleft"></td>

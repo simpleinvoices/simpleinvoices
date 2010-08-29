@@ -52,7 +52,8 @@ _subpage/* Caution! Ensure accessibility in print and other media types... */
     outline: 0; /* @ Firefox, prevent dotted border after click */    
 }
 .ui-tabs-nav a:link, .ui-tabs-nav a:visited {
-/*    color: #fff;**/
+/*    color: #fff;
+**/
 }
 .ui-tabs-nav .ui-tabs-selected a {
     position: relative;
@@ -93,7 +94,8 @@ _subpage/* Caution! Ensure accessibility in print and other media types... */
     background-position: 0 0;
     line-height: 20px;
 color:#21759B;
-/*background:#DDDDDD;*/
+/*background:#DDDDDD;
+*/
 background:#ebebeb;
 }
 .ui-tabs-nav .ui-tabs-selected a span {
@@ -155,7 +157,7 @@ color:#555555;
 
 .active
 {
-	/*	background:#fff url(../../../../../images/common/bullet_arrow_up.png) no-repeat bottom;*/
+	/*	background:#fff url(../../../../.../sys/images/common/bullet_arrow_up.png) no-repeat bottom;*/
 	/*	padding-bottom:5px;*/
 	font-weight:bold;
 	

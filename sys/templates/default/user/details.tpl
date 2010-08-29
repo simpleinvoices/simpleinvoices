@@ -34,12 +34,12 @@
     <tr>
         <td>
             <a href="./index.php?module=user&view=details&id={$user.id|urlencode}&action=edit" class="positive">
-                <img src="./images/famfam/report_edit.png" alt="" />
+                <img src="../sys/images/famfam/report_edit.png" alt="" />
                 {$LANG.edit}
             </a>
 
             <a href="./index.php?module=user&view=manage" class="negative">
-                <img src="./images/common/cross.png" alt="" />
+                <img src="../sys/images/common/cross.png" alt="" />
                 {$LANG.cancel}
             </a>
     
@@ -63,7 +63,7 @@
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field"
 				title="{$LANG.Required_Field}"
 		>
-		<img src="./images/common/required-small.png" alt="" />
+		<img src="../sys/images/common/required-small.png" alt="" />
 		</a>	
 		</td>
 		<td><input type="text" name="email" autocomplete="off" value="{$user.email|htmlsafe}" size="35" id="email"  class="validate[required]"  /></td>
@@ -76,7 +76,7 @@
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_user_role"
 				title="{$LANG.role}"
 			> 
-			<img src="./images/common/help-small.png" alt="" />
+			<img src="../sys/images/common/help-small.png" alt="" />
 			</a>
 		</td>
 		<td>
@@ -96,7 +96,7 @@
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_new_password"
 				title="{$LANG.new_password}"
 			> 
-			<img src="./images/common/help-small.png" alt="" />
+			<img src="../sys/images/common/help-small.png" alt="" />
 			</a>
 		</td>
 		<td>
@@ -113,14 +113,15 @@
 	<tr>
 		<td>
 			<button type="submit" class="positive" name="save_user">
-			<img class="button_img" src="./images/common/tick.png" alt="" /> 
+			<img class="button_img" src="../sys/images/common/tick.png" alt="" /> 
 			{$LANG.save}
-			</button>			<input type="hidden" name="op" value="edit_user" />
+			</button>
+			<input type="hidden" name="op" value="edit_user" />
 			<input type="hidden" name="id" value="{$user.id|htmlsafe}" />
 		</td>
 		<td>
 			<a href="./index.php?module=user&view=manage" class="negative">
-			<img src="./images/common/cross.png" alt="" />
+			<img src="../sys/images/common/cross.png" alt="" />
 			{$LANG.cancel}
 			</a>
 		</td>

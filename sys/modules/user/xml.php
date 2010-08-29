@@ -89,8 +89,8 @@ $xml .= "<total>$count</total>";
 foreach ($user as $row) {
 	$xml .= "<row id='".$row['iso']."'>";
 	$xml .= "<cell><![CDATA[
-	<a class='index_table' title='$LANG[view] ".$row['name']."' href='index.php?module=user&view=details&id=$row[id]&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-	<a class='index_table' title='$LANG[edit] ".$row['name']."' href='index.php?module=user&view=details&id=$row[id]&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+	<a class='index_table' title='$LANG[view] ".$row['name']."' href='index.php?module=user&view=details&id=$row[id]&action=view'><img src='../sys/images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+	<a class='index_table' title='$LANG[edit] ".$row['name']."' href='index.php?module=user&view=details&id=$row[id]&action=edit'><img src='../sys/images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 	]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['email']."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['role']."]]></cell>";
@@ -106,4 +106,4 @@ foreach ($user as $row) {
 $xml .= "</rows>";
 echo $xml;
 
-?> 
+?> 

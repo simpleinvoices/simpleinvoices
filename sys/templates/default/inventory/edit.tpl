@@ -15,7 +15,7 @@
 
 {if $saved ==false}
 	{if $smarty.post.op == 'add' AND $smarty.post.product_id == ''} 
-		<div class="validation_alert"><img src="./images/common/important.png" alt="" />
+		<div class="validation_alert"><img src="../sys/images/common/important.png" alt="" />
 		You must select a product</div>
 		<hr />
 	{/if}
@@ -70,14 +70,14 @@
 	<tr>
 		<td>
 			<button type="submit" class="positive" name="id" value="{$LANG.save}">
-			    <img class="button_img" src="./images/common/tick.png" alt="" /> 
+			    <img class="button_img" src="../sys/images/common/tick.png" alt="" /> 
 				{$LANG.save}
 			</button>
 
 			<input type="hidden" name="op" value="edit" />
 		
 			<a href="./index.php?module=inventory&view=manage" class="negative">
-		        <img src="./images/common/cross.png" alt="" />
+		        <img src="../sys/images/common/cross.png" alt="" />
 	        	{$LANG.cancel}
     		</a>
 	

@@ -57,7 +57,7 @@
         <td>
         
             <a href="./index.php?module=install&amp;view=structure" class="positive">
-                <img src="./images/common/tick.png" alt="" />
+                <img src="../sys/images/common/tick.png" alt="" />
                 Install Database
             </a>
     

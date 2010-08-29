@@ -12,7 +12,7 @@
     <tr>
         <td>
             <a href="./index.php?module=billers&amp;view=add" class="positive">
-                <img src="./images/famfam/add.png" alt="" />
+                <img src="../sys/images/famfam/add.png" alt="" />
                 {$LANG.add_new_biller}
             </a>
 

@@ -47,7 +47,7 @@
 		<td>
 		
 			<a href="./index.php?module=payments&view=manage" class="negative">
-		        <img src="./images/common/cross.png" alt="" />
+		        <img src="../sys/images/common/cross.png" alt="" />
 	        	{$LANG.cancel}
     		</a>
 	

@@ -27,7 +27,7 @@ if ($_GET['op'] == "backup_db") {
 	<tr><td><br /><br />".sprintf($LANG['backup_done'],$oBack->filename)."</td></tr>
 	<tr><td><br />
 
-			<a class=\"cluetip\" href=\"#\"	rel=\"index.php?module=documentation&amp;view=view&amp;page=help_backup_database_fwrite\" title=\"".$LANG['fwrite_error']."\"><img src=\"./images/common/help-small.png\" alt=\"\" />".$LANG['fwrite_error']."</a>
+			<a class=\"cluetip\" href=\"#\"	rel=\"index.php?module=documentation&amp;view=view&amp;page=help_backup_database_fwrite\" title=\"".$LANG['fwrite_error']."\"><img src=\"../sys/images/common/help-small.png\" alt=\"\" />".$LANG['fwrite_error']."</a>
 
 
 </td></tr></table>
@@ -47,7 +47,7 @@ $display_block = "
 <tr><td>".$LANG['note'].": ".$LANG['backup_note_to_file']."</td></tr>
 <tr>
 <td>
-<a class=\"cluetip\" href=\"#\"	rel=\"index.php?module=documentation&amp;view=view&amp;page=help_backup_database\" title=\"".$LANG['database_backup']."\"><img src=\"./images/common/important.png\" alt=\"\" /> <font color=\"red\"> ".$LANG['more_info']."</font></a>
+<a class=\"cluetip\" href=\"#\"	rel=\"index.php?module=documentation&amp;view=view&amp;page=help_backup_database\" title=\"".$LANG['database_backup']."\"><img src=\"../sys/images/common/important.png\" alt=\"\" /> <font color=\"red\"> ".$LANG['more_info']."</font></a>
 </td>
 </tr></table>
 

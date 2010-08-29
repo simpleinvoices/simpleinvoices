@@ -17,7 +17,7 @@
     <tr>
         <td>
             <a href="./index.php?module=preferences&amp;view=add" class="positive">
-                <img src="./images/famfam/add.png" alt="" />
+                <img src="../sys/images/famfam/add.png" alt="" />
                 {$LANG.add_new_preference}
             </a>
 
@@ -41,4 +41,4 @@
 
 {/if}
 <br />
-<div style="text-align:center;"><a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_what_the" title="{$LANG.whats_all_this_inv_pref}"><img src="./images/common/help-small.png" alt="" /> {$LANG.whats_all_this_inv_pref} </a></div>
+<div style="text-align:center;"><a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_what_the" title="{$LANG.whats_all_this_inv_pref}"><img src="../sys/images/common/help-small.png" alt="" /> {$LANG.whats_all_this_inv_pref} </a></div>

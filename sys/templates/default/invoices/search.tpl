@@ -115,21 +115,21 @@ Ext.onReady(function(){
 	function renderActions(value, p, record){
 		
 		var quickViewLink = String.format(
-		'<!--0 Quick View --><a class="index_table" title="'+ quick_view_tooltip +'" href="index.php?module=invoices&amp;view=quick_view&amp;invoice={1}"> <img src="images/common/view.png" height="16" border="-5px" padding="-4px" valign="bottom" alt="" /></a>',
+		'<!--0 Quick View --><a class="index_table" title="'+ quick_view_tooltip +'" href="index.php?module=invoices&amp;view=quick_view&amp;invoice={1}"> <img src="../sys/images/common/view.png" height="16" border="-5px" padding="-4px" valign="bottom" alt="" /></a>',
 		value,
 		record.id,
 		record.data.type_id,
 		record.data.forumid);
 
 		var editViewLink = String.format(
-		'<!--1 Edit View --><a class="index_table" title="'+ edit_view_tooltip +'" href="index.php?module=invoices&amp;view=details&amp;invoice={1}&amp;action=view"><img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" alt="" /><!-- print --></a>',
+		'<!--1 Edit View --><a class="index_table" title="'+ edit_view_tooltip +'" href="index.php?module=invoices&amp;view=details&amp;invoice={1}&amp;action=view"><img src="../sys/images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" alt="" /><!-- print --></a>',
 		value,
 		record.id,
 		record.data.type_id,
 		record.data.forumid);
 
 		var printViewLink = String.format(
-		'<!--2 Print View --><a class="index_table" title="'+ print_preview_tooltip +'" href="index.php?module=invoices&amp;view=templates/template&amp;invoice={1}&amp;action=view&amp;location=print"><img src="images/common/printer.png" height="16" border="-5px" padding="-4px" valign="bottom" alt="" /><!-- print --></a>',
+		'<!--2 Print View --><a class="index_table" title="'+ print_preview_tooltip +'" href="index.php?module=invoices&amp;view=templates/template&amp;invoice={1}&amp;action=view&amp;location=print"><img src="../sys/images/common/printer.png" height="16" border="-5px" padding="-4px" valign="bottom" alt="" /><!-- print --></a>',
 		value,
 		record.id,
 		record.data.type_id,
@@ -143,21 +143,21 @@ Ext.onReady(function(){
 		record.data.forumid);
 
 		var xlsLink = String.format(
-		'<!--4 XLS --><a title="'+ export_xls_tooltip +'" class="index_table" href="index.php?module=invoices&amp;view=templates/template&amp;invoice={1}&amp;action=view&amp;location=print&amp;export={$spreadsheet|urlencode}"><img src="images/common/page_white_excel.png" height="16" border="0" padding="-4px" valign="bottom" alt="" /><!-- $spreadsheet --></a>',
+		'<!--4 XLS --><a title="'+ export_xls_tooltip +'" class="index_table" href="index.php?module=invoices&amp;view=templates/template&amp;invoice={1}&amp;action=view&amp;location=print&amp;export={$spreadsheet|urlencode}"><img src="../sys/images/common/page_white_excel.png" height="16" border="0" padding="-4px" valign="bottom" alt="" /><!-- $spreadsheet --></a>',
 		value,
 		record.id,
 		record.data.type_id,
 		record.data.forumid);
 
 		var docLink = String.format(
-		'<!--5 DOC --><a title="'+ export_word_tooltip +'" class="index_table" href="index.php?module=invoices&amp;view=templates/template&amp;invoice={1}&amp;action=view&amp;location=print&amp;export={$word_processor|urlencode}"><img src="images/common/page_white_word.png" height="16" border="0" padding="-4px" valign="bottom" alt="" /><!-- $word_processor --></a>',
+		'<!--5 DOC --><a title="'+ export_word_tooltip +'" class="index_table" href="index.php?module=invoices&amp;view=templates/template&amp;invoice={1}&amp;action=view&amp;location=print&amp;export={$word_processor|urlencode}"><img src="../sys/images/common/page_white_word.png" height="16" border="0" padding="-4px" valign="bottom" alt="" /><!-- $word_processor --></a>',
 		value,
 		record.id,
 		record.data.type_id,
 		record.data.forumid);
 
 		var paymentLink = String.format(
-		'<!--6 Payment --><a title="'+ process_payment_tooltip +'" class="index_table" href="index.php?module=payments&amp;view=process&amp;invoice={1}&amp;op=pay_selected_invoice"><img src="images/common/money_dollar.png" height="16" border="0" padding="-4px" valign="bottom" alt="" /></a>',
+		'<!--6 Payment --><a title="'+ process_payment_tooltip +'" class="index_table" href="index.php?module=payments&amp;view=process&amp;invoice={1}&amp;op=pay_selected_invoice"><img src="../sys/images/common/money_dollar.png" height="16" border="0" padding="-4px" valign="bottom" alt="" /></a>',
 		value,
 		record.id,
 		record.data.type_id,
@@ -165,7 +165,7 @@ Ext.onReady(function(){
 
 
 		var emailLink = String.format(
-		'<!--7 Email --><a href="index.php?module=invoices&amp;view=email&amp;stage=1&amp;invoice={1}" title="'+ email_tooltip +'"><img src="images/common/mail-message-new.png" height="16" border="0" padding="-4px" valign="bottom" alt="" /></a>',
+		'<!--7 Email --><a href="index.php?module=invoices&amp;view=email&amp;stage=1&amp;invoice={1}" title="'+ email_tooltip +'"><img src="../sys/images/common/mail-message-new.png" height="16" border="0" padding="-4px" valign="bottom" alt="" /></a>',
 		value,
 		record.id,
 		record.data.type_id,

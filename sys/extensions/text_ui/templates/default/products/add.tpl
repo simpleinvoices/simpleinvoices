@@ -6,7 +6,7 @@
 {else}
 {* if  name was inserted *} 
 	{if $smarty.post.id !=null} 
-		<div class="validation_alert"><img src="./images/common/important.png" alt="" />
+		<div class="validation_alert"><img src="../sys/images/common/important.png" alt="" />
 		You must enter a description for the product</div>
 		<hr />
 	{/if}

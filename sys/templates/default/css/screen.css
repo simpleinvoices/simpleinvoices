@@ -49,10 +49,10 @@ table.ricoLiveGrid tbody tr.odd td {
 	background-color:#F1F1F1;
 }
 table.ricoLiveGrid thead tr .headerSortUp {
-	background-image: url(../../../images/common/desc.png);
+	background-image: url(../../.../sys/images/common/desc.png);
 }
 table.ricoLiveGrid thead tr .headerSortDown {
-	background-image: url(../../../images/common/asc.png);
+	background-image: url(../../.../sys/images/common/asc.png);
 }
 table.ricoLiveGrid thead tr .headerSortDown, table.ricoLiveGrid thead tr .headerSortUp {
 	background-color: #8dbdd8;
@@ -347,13 +347,13 @@ div#Container {
 	}
 
 .contentLeft {
-background:transparent url(../../../images/common/bgLeft.png) top left no-repeat;
+background:transparent url(../../.../sys/images/common/bgLeft.png) top left no-repeat;
 margin-left:-10px;
 padding-left:10px;
 
 }
 .contentRight {
-background:transparent url(../../../images/common/bgRight.png) top right no-repeat;
+background:transparent url(../../.../sys/images/common/bgRight.png) top right no-repeat;
 padding-right:10px;
 min-height:400px;
 }
@@ -366,7 +366,7 @@ min-height:400px;
 	margin-top:8px; }
 
 .Full .bottom,.Left .bottom {
-/*	background:url(../../../images/common/bottom-bg.gif) top right no-repeat; */}
+/*	background:url(../../.../sys/images/common/bottom-bg.gif) top right no-repeat; */}
 
 body.lobby .Full .bottom {
 	margin-bottom:0; }
@@ -496,7 +496,7 @@ a:link,a:visited {
 /* extjs/doukiwki style input boes */
 input, select
 {
-	background:#FFFFFF url(../../../images/common/text-bg.gif) repeat-x scroll center top;
+	background:#FFFFFF url(../../.../sys/images/common/text-bg.gif) repeat-x scroll center top;
 	/*border:1px solid #B5B8C8;*/
 	border:1px solid #CCCCCC;
 	/*padding:1px 3px;*/
@@ -505,7 +505,7 @@ input, select
 }
 
 .xxbutton {
-		background:#FFFFFF url(../../../images/common/text-bg-rotate.gif) repeat-x scroll center bottom;
+		background:#FFFFFF url(../../.../sys/images/common/text-bg-rotate.gif) repeat-x scroll center bottom;
 
 }
 
@@ -549,7 +549,7 @@ input, select
     display:block;
     float:left;
     margin:0 7px 0 0;
-    background:#FFFFFF url(../../../images/common/text-bg-rotate.gif) repeat-x scroll center bottom;
+    background:#FFFFFF url(../../.../sys/images/common/text-bg-rotate.gif) repeat-x scroll center bottom;
    /* background-color:#f5f5f5;*/
     border:1px solid #ccc;
     border-top:1px solid #eee;
