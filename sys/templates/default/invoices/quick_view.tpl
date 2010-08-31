@@ -23,24 +23,24 @@
 
 	<!--Actions heading - start-->
 	<span class="welcome">
-			<a title="{$LANG.print_preview_tooltip} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=export&amp;view=invoice&amp;id={$invoice.id|urlencode}&amp;format=print" target="_blank"><img src='images/common/printer.png' class='action' />&nbsp;{$LANG.print_preview}</a>
+			<a title="{$LANG.print_preview_tooltip} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=export&amp;view=invoice&amp;id={$invoice.id|urlencode}&amp;format=print" target="_blank"><img src='{$include_dir}/sys/images/common/printer.png' class='action' />&nbsp;{$LANG.print_preview}</a>
 			 &nbsp;&nbsp; 
-			<a title="{$LANG.edit} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=invoices&amp;view=details&amp;id={$invoice.id|urlencode}&amp;action=view"><img src='images/common/edit.png' class='action' />&nbsp;{$LANG.edit}</a>
+			<a title="{$LANG.edit} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=invoices&amp;view=details&amp;id={$invoice.id|urlencode}&amp;action=view"><img src='{$include_dir}/sys/images/common/edit.png' class='action' />&nbsp;{$LANG.edit}</a>
 			 &nbsp;&nbsp; 
-			 <a title="{$LANG.process_payment_for} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=payments&amp;view=process&amp;id={$invoice.id|urlencode}&amp;op=pay_selected_invoice"><img src='../sys/images/common/money_dollar.png' class='action' />&nbsp;{$LANG.process_payment} </a>
+			 <a title="{$LANG.process_payment_for} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=payments&amp;view=process&amp;id={$invoice.id|urlencode}&amp;op=pay_selected_invoice"><img src='{$include_dir}/sys/images/common/money_dollar.png' class='action' />&nbsp;{$LANG.process_payment} </a>
              {if $eway_pre_check == 'true'}
 			 &nbsp;&nbsp; 
-			 <a title="{$LANG.process_payment_for} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=payments&amp;view=eway&amp;id={$invoice.id|urlencode}"><img src='../sys/images/common/money_dollar.png' class='action' />&nbsp;{$LANG.process_payment_via_eway} </a>
+			 <a title="{$LANG.process_payment_for} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=payments&amp;view=eway&amp;id={$invoice.id|urlencode}"><img src='{$include_dir}/sys/images/common/money_dollar.png' class='action' />&nbsp;{$LANG.process_payment_via_eway} </a>
              {/if}
 			 &nbsp;&nbsp; 
 			 <!-- EXPORT TO PDF -->
-			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe} {$LANG.export_pdf_tooltip}" href="index.php?module=export&amp;view=invoice&amp;id={$invoice.id}&amp;format=pdf"><img src='../sys/images/common/page_white_acrobat.png' class='action' />&nbsp;{$LANG.export_pdf}</a>
+			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe} {$LANG.export_pdf_tooltip}" href="index.php?module=export&amp;view=invoice&amp;id={$invoice.id}&amp;format=pdf"><img src='{$include_dir}/sys/images/common/page_white_acrobat.png' class='action' />&nbsp;{$LANG.export_pdf}</a>
 			 &nbsp;&nbsp; 
-			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe} {$LANG.export_xls_tooltip} .{$config->export->spreadsheet|htmlsafe} {$LANG.format_tooltip}" href="index.php?module=export&amp;view=invoice&amp;id={$invoice.id}&amp;format=file&amp;filetype={$spreadsheet|urlencode}"><img src='../sys/images/common/page_white_excel.png' class='action' />&nbsp;{$LANG.export_as} .{$spreadsheet|htmlsafe}</a>
+			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe} {$LANG.export_xls_tooltip} .{$config->export->spreadsheet|htmlsafe} {$LANG.format_tooltip}" href="index.php?module=export&amp;view=invoice&amp;id={$invoice.id}&amp;format=file&amp;filetype={$spreadsheet|urlencode}"><img src='{$include_dir}/sys/images/common/page_white_excel.png' class='action' />&nbsp;{$LANG.export_as} .{$spreadsheet|htmlsafe}</a>
 			 &nbsp;&nbsp; 
-			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording} {$invoice.id|htmlsafe} {$LANG.export_doc_tooltip} .{$config->export->wordprocessor|htmlsafe} {$LANG.format_tooltip}" href="index.php?module=export&amp;view=invoice&amp;id={$invoice.id}&amp;format=file&amp;filetype={$wordprocessor|urlencode}"><img src='../sys/images/common/page_white_word.png' class='action' />&nbsp;{$LANG.export_as} .{$wordprocessor|htmlsafe} </a>
+			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording} {$invoice.id|htmlsafe} {$LANG.export_doc_tooltip} .{$config->export->wordprocessor|htmlsafe} {$LANG.format_tooltip}" href="index.php?module=export&amp;view=invoice&amp;id={$invoice.id}&amp;format=file&amp;filetype={$wordprocessor|urlencode}"><img src='{$include_dir}/sys/images/common/page_white_word.png' class='action' />&nbsp;{$LANG.export_as} .{$wordprocessor|htmlsafe} </a>
 			 &nbsp;&nbsp; 
-			<a title="{$LANG.email} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=invoices&amp;view=email&amp;stage=1&amp;id={$invoice.id|urlencode}"><img src='images/common/mail-message-new.png' class='action' />&nbsp;{$LANG.email}</a>
+			<a title="{$LANG.email} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=invoices&amp;view=email&amp;stage=1&amp;id={$invoice.id|urlencode}"><img src='{$include_dir}/sys/images/common/mail-message-new.png' class='action' />&nbsp;{$LANG.email}</a>
 			{if $defaults.delete == '1'} 
 			 &nbsp;&nbsp; 
 				<a title="{$LANG.delete} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=invoices&amp;view=delete&amp;stage=1&amp;id={$invoice.id|urlencode}"><img src='images/common/delete.png' class='action' />&nbsp;{$LANG.delete}</a>
@@ -64,7 +64,7 @@
 	<!-- Invoice Summary section -->
 
 	<tr class="details_screen">
-		<td class="details_screen"><b>{$preference.pref_inv_wording|htmlsafe} {$LANG.summary}:</b></td><td colspan="5" align="right" class="details_screen align_right"><a href='#' class="show-summary" onclick="$('.summary').show();$('.show-summary').hide();"><img src="../sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a><a href='#' class="summary" onclick="$('.summary').hide();$('.show-summary').show();"><img src="../sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a> </td>
+		<td class="details_screen"><b>{$preference.pref_inv_wording|htmlsafe} {$LANG.summary}:</b></td><td colspan="5" align="right" class="details_screen align_right"><a href='#' class="show-summary" onclick="$('.summary').show();$('.show-summary').hide();"><img src="{$include_dir}/sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a><a href='#' class="summary" onclick="$('.summary').hide();$('.show-summary').show();"><img src="{$include_dir}/sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a> </td>
 	</tr>
 	<tr class="details_screen summary">
 		<td class="details_screen">{$preference.pref_inv_wording|htmlsafe} {$LANG.number_short}:</td><td colspan="5" class="details_screen">{$invoice.index_id|htmlsafe}</td>
@@ -86,7 +86,7 @@
 	<tr class="details_screen">
 		<td class="details_screen"><b>{$LANG.biller}:</b></td>
 		<td class="details_screen" colspan="3">{$biller.name|htmlsafe}</td>
-		<td colspan="2" class="details_screen align_right"><a href='#' class="show-biller" onclick="$('.biller').show();$('.show-biller').hide();"><img src="../sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a><a href='#' class="biller" onclick="$('.biller').hide();$('.show-biller').show();"><img src="../sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a></td>
+		<td colspan="2" class="details_screen align_right"><a href='#' class="show-biller" onclick="$('.biller').show();$('.show-biller').hide();"><img src="{$include_dir}/sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a><a href='#' class="biller" onclick="$('.biller').hide();$('.show-biller').show();"><img src="{$include_dir}/sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a></td>
 	</tr>
 	<tr class="details_screen biller">
 		<td class="details_screen">{$LANG.street}:</td>
@@ -146,7 +146,7 @@
 	<tr class="details_screen">
 		<td class="details_screen"><b>{$LANG.customer}:</b></td>
 		<td class="details_screen" colspan="3">{$customer.name|htmlsafe}</td>
-		<td colspan="2" class="details_screen align_right"><a href='#' class="show-customer" {literal} onclick="$('.customer').show(); $('.show-customer').hide(); {/literal}"><img src="../sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a> <a href='#' class="customer" {literal} onclick="$('.customer').hide(); $('.show-customer').show(); {/literal}"><img src="../sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a></td>
+		<td colspan="2" class="details_screen align_right"><a href='#' class="show-customer" {literal} onclick="$('.customer').show(); $('.show-customer').hide(); {/literal}"><img src="{$include_dir}/sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a> <a href='#' class="customer" {literal} onclick="$('.customer').hide(); $('.show-customer').show(); {/literal}"><img src="{$include_dir}/sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a></td>
 	</tr>	
 	<tr class="details_screen customer">
 		<td class="details_screen">{$LANG.attention_short}:</td>
@@ -227,7 +227,7 @@
 	{if $invoice.type_id == 2 }
 
             <tr>
-                    <td colspan="6" class="details_screen align_right"><a href='#' class="show-itemised" onclick="$('.itemised').show();$('.show-itemised').hide();"><img src="../sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a><a href='#' class="itemised" onclick="$('.itemised').hide();$('.show-itemised').show();"><img src="../sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a></td>
+                    <td colspan="6" class="details_screen align_right"><a href='#' class="show-itemised" onclick="$('.itemised').show();$('.show-itemised').hide();"><img src="{$include_dir}/sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a><a href='#' class="itemised" onclick="$('.itemised').hide();$('.show-itemised').show();"><img src="{$include_dir}/sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a></td>
             </tr>
 			<tr>
         		    <td><b>{$LANG.quantity_short}</b></td>
@@ -242,7 +242,7 @@
     {if $invoice.type_id == 3 }
 
 			<tr>
-					<td colspan="6" class="details_screen align_right"><a href='#' class="show-consulting" onclick="$('.consulting').show();$('.show-consulting').hide();"><img src="../sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a><a href='#' class="consulting" onclick="$('.consulting').hide();$('.show-consulting').show();"><img src="../sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a></td>
+					<td colspan="6" class="details_screen align_right"><a href='#' class="show-consulting" onclick="$('.consulting').show();$('.show-consulting').hide();"><img src="{$include_dir}/sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a><a href='#' class="consulting" onclick="$('.consulting').hide();$('.show-consulting').show();"><img src="{$include_dir}/sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a></td>
         	</tr>
 			<tr>
                	 	<td><b>{$LANG.quantity_short}</b></td>
@@ -344,7 +344,7 @@
 		<tr class="details_screen">
 			<td colspan="5"><b>{$LANG.notes}:</b></td>
 				{if ($invoice.note|count_characters:true > 25)}
-					<td class="details_screen align_right"><a href='#' class="show-notes" onclick="$('.notes').show();$('.show-notes').hide();"><img src="../sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a><a href='#' class="notes" onclick="$('.notes').hide();$('.show-notes').show();"><img src="../sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a></td>
+					<td class="details_screen align_right"><a href='#' class="show-notes" onclick="$('.notes').show();$('.show-notes').hide();"><img src="{$include_dir}/sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a><a href='#' class="notes" onclick="$('.notes').hide();$('.show-notes').show();"><img src="{$include_dir}/sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a></td>
 				{/if}						
 		</tr>
 			<!-- if hide detail click - the stripped note will be displayed -->
@@ -427,7 +427,7 @@
 		<td class="account"><u>{$preference.pref_currency_sign|htmlsafe}{$invoice.owing|siLocal_number}</u></td>
 		<td class="account">{$LANG.age}:</td>
 		<td class="account" nowrap>{$invoice_age|htmlsafe} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_age" title="{$LANG.age}"><img src="../sys/images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_age" title="{$LANG.age}"><img src="{$include_dir}/sys/images/common/help-small.png" alt="" /></a>
 		</td>
 		<td></td>
 		<td class="columnleft"></td>
