@@ -127,7 +127,7 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 // must be rebuild (aducom)
 
 $default = "language";
-$languages = getLanguageList();
+$languages = getLanguageList($include_dir . 'sys/lang/');
 $lang = getDefaultLanguage();
     
 usort($languages,"compareNameIndex");

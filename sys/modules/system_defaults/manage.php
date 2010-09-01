@@ -5,7 +5,7 @@ checkLogin();
 
 //gets the long language name out of the short name
 $lang = getDefaultLanguage();
-$languages = getLanguageList();
+$languages = getLanguageList($include_dir . 'sys/lang/');
 foreach($languages as $language) {
 	if($language->shortname == $lang) {
 		$lang = $language->name;

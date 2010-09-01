@@ -199,24 +199,24 @@ if (! $config->extension)
 	$config->extension = $extension_core;
 }
 
-include_once($include_dir . 'sys/include/language.php');
+require_once($include_dir . 'sys/include/language.php');
 
-include_once($include_dir . 'sys/include/functions.php');
+require_once($include_dir . 'sys/include/functions.php');
 
 //add class files for extensions
 
 
 checkConnection();
 
-include($include_dir . 'sys/include/include_auth.php');
-include_once($include_dir . 'sys/include/manageCustomFields.php');
-include_once($include_dir . "sys/include/validation.php");
+require_once($include_dir . 'sys/include/include_auth.php');
+require_once($include_dir . 'sys/include/manageCustomFields.php');
+require_once($include_dir . "sys/include/validation.php");
 
 //if authentication enabled then do acl check etc..
 if ($config->authentication->enabled == 1 )
 {
-	include_once($include_dir . "sys/include/acl.php");
-	include_once($include_dir . "sys/include/check_permission.php");
+	require_once($include_dir . "sys/include/acl.php");
+	require_once($include_dir . "sys/include/check_permission.php");
 }
 
 /*

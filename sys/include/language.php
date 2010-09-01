@@ -35,7 +35,7 @@ function getLanguageArray() {
 	global $language;
 	global $config;
 
-	$langPath =  "sys/lang/";
+	$langPath =  $include_dir . "sys/lang/";
 	$langFile = "/lang.php";
 	//$getLanguage = getenv("HTTP_ACCEPT_LANGUAGE");
 	//$language = getDefaultLanguage();
@@ -63,10 +63,16 @@ function getLanguageArray() {
 	return $LANG;
 }
 
-function getLanguageList() {
+function getLanguageList($path) {
 	$xmlFile = "info.xml";
-///	$langPath = "lang/";  aducom   
-    $langPath = "../sys/lang/";
+///	$langPath = "lang/";  aducom 
+      
+    if(empty($path)){
+        $langPath =  "sys/lang/";
+    } else {
+
+        $langPath =  $path;
+    }
 	$folders = null;
 	
 	if($handle = opendir($langPath)) {

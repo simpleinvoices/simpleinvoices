@@ -258,7 +258,7 @@ else if ($_GET['submit'] == "logging") {
 
 else if($_GET['submit'] == "language") {
     $default = "language";
-    $languages = getLanguageList();
+    $languages = getLanguageList($include_dir . 'sys/lang/');
     $lang = getDefaultLanguage();
     
     usort($languages,"compareNameIndex");

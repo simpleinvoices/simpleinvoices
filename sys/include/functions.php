@@ -444,7 +444,7 @@ function menuIsActive($module,$requestedModule) {
 
 
 function getLangList() {
- $startdir = './lang/';
+ $startdir = './sys/lang/';
  $ignoredDirectory[] = '.';
  $ignoredDirectory[] = '..';
  $ignoredDirectory[] = '.svn';
