@@ -2,7 +2,7 @@
 {* if bill is updated or saved.*}
 
 {if $smarty.post.description != "" && $smarty.post.id != null } 
-	{include file="../templates/default/products/save.tpl"}
+	{include file="$smarty_embed_path/sys/templates/default/products/save.tpl"}
 {else}
 {* if  name was inserted *} 
 	{if $smarty.post.id !=null} 
