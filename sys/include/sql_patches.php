@@ -1483,6 +1483,10 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['252']['name'] = "Language - reset to en_GB - due to folder renaming";
     $patch['252']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value ='en_GB' where name='language';";
     $patch['252']['date'] = "20100419";    
+    
+    $patch['253']['name'] = "Insert invoice_creator user group";
+    $patch['253']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('invoice_creator');";
+    $patch['253']['date'] = "20080102";
 /*
 ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );
 

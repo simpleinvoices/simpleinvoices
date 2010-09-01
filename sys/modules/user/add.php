@@ -23,7 +23,7 @@ checkLogin();
 $roles = user::getUserRoles();
 
 if ($_POST['email'] != "") {
-	include ("./modules/user/save.php");
+	require_once ($include_dir . "sys/modules/user/save.php");
 }
 
 $smarty->assign('save', $save);

@@ -9,6 +9,7 @@ $acl->addRole(new Zend_Acl_Role('administrator'));
 $acl->addRole(new Zend_Acl_Role('user'));
 $acl->addRole(new Zend_Acl_Role('viewer'));
 $acl->addRole(new Zend_Acl_Role('customer'));
+$acl->addRole(new Zend_Acl_Role('invoice_creator'));
 $acl->addRole(new Zend_Acl_Role('biller'));
 
 //create the resources
@@ -52,10 +53,18 @@ $acl->allow('guest', null, 'view');
 $acl->allow(null,'auth');
 $acl->allow(null,'api');
 //TODO: not good !!! - no acl for invoiecs as can't get html2pdf to work with zend_auth :(
-$acl->allow(null,'invoices');
+$acl->allow('administrator','invoices');
 
 //students only see student page
 $acl->allow('customer', 'customers', 'view');
+$acl->allow('invoice_creator', 'invoices', 'manage');
+$acl->allow('invoice_creator', 'invoices', 'itemised');
+$acl->allow('invoice_creator', 'invoices', 'total');
+$acl->allow('invoice_creator', 'invoices', 'save');
+$acl->allow('invoice_creator', 'invoices', 'quick_view');
+$acl->allow('invoice_creator', 'invoices', 'xml');
+$acl->allow('invoice_creator', 'export', 'invoice');
+$acl->deny('invoice_creator', 'invoices', 'details');
 
 // Editor inherits view, edit, submit, and revise privileges from staff,
 // but also needs additional privileges
