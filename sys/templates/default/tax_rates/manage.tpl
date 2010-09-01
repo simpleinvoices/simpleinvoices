@@ -40,6 +40,6 @@
 {else}
 	<br />
 	<table id="manageGrid" style="display:none"></table>
-	{include file='../modules/tax_rates/manage.js.php'}
+	{include file="$smarty_embed_path/sys/modules/tax_rates/manage.js.php"}
  
 {/if}

@@ -35,6 +35,6 @@
 	
 	<br />
 	<table id="manageGrid" style="display:none"></table>
-	{include file='../modules/user/manage.js.php' LANG=$LANG}
+	{include file="$smarty_embed_path/sys/modules/user/manage.js.php" LANG=$LANG}
 	
 {/if}

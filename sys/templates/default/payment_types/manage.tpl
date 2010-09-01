@@ -43,6 +43,6 @@
 
 	<br />
 	<table id="manageGrid" style="display:none"></table>
-	{include file='../modules/payment_types/manage.js.php'}
+	{include file="$smarty_embed_path/sys/modules/payment_types/manage.js.php"}
 
 {/if}

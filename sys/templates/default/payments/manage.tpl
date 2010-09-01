@@ -51,7 +51,7 @@
         {else}
             <br />
         	<table id="manageGrid" style="display:none"></table>
-        	{include file='../modules/payments/manage.js.php' get=$smarty.get}
+        	{include file="$smarty_embed_path/sys/modules/payments/manage.js.php" get=$smarty.get}
         {/if}
 
 	{elseif $smarty.get.c_id }
@@ -66,7 +66,7 @@
         {else}
         	<br />
     	    <table id="manageGrid" style="display:none"></table>
-        	{include file='../modules/payments/manage.js.php' get=$smarty.get}
+        	{include file="$smarty_embed_path/sys/modules/payments/manage.js.php" get=$smarty.get}
         {/if}
 
 	{else}
@@ -80,7 +80,7 @@
         {else}
         	<br />
         	<table id="manageGrid" style="display:none"></table>
-        	{include file='../modules/payments/manage.js.php' get=$smarty.get}
+        	{include file="$smarty_embed_path/sys/modules/payments/manage.js.php" get=$smarty.get}
         {/if}
 
 	{/if}

@@ -38,7 +38,7 @@
 
 	<br />
 	<table id="manageGrid" style="display:none"></table>
-	{include file='../modules/inventory/manage.js.php'}
+	{include file="$smarty_embed_path/sys/modules/inventory/manage.js.php"}
 
 {/if}
 

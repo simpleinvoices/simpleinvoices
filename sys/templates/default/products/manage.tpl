@@ -36,6 +36,6 @@
 {else}
 	<br />
 	<table id="manageGrid" style="display:none"></table>
-	{include file='../modules/products/manage.js.php'}
+	{include file="$smarty_embed_path/sys/modules/products/manage.js.php"}
 	
 {/if}

@@ -18,7 +18,7 @@
 
 <table id="manageGrid" style="display:none"></table>
 
- {include file='../modules/custom_fields/manage.js.php'}
+ {include file="$smarty_embed_path/sys/modules/custom_fields/manage.js.php"}
 {*
 <table class="manage" id="live-grid" align="center">
 	<colgroup>
