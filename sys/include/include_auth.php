@@ -19,7 +19,7 @@ if ($config->authentication->enabled == 1 ) {
 	}
 
 //	include('./include/auth/auth.php');     aducom
-    include('/auth/auth.php');
+    require_once('auth/auth.php');
 }
 
 /*If auth not on - use default domain and user id of 1*/
