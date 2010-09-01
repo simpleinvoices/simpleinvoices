@@ -1,6 +1,7 @@
 <?php
 	// MUST be in the include path
-	require_once("PHPReportOutputObject.php");
+	//JK MOD JKMOD
+	require_once("lib/phpreports/PHPReportOutputObject.php");
 	
 	/**
 		PHPReports default plugin - renders the page
