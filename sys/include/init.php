@@ -40,7 +40,6 @@ $frontendOptions = array(
 
 require_once("smarty/Smarty.class.php");
 require_once("lib/paypal/paypal.class.php");
-require_once($include_dir . 'sys/include/include_auth.php');
 
 require_once('lib/HTMLPurifier/HTMLPurifier.standalone.php');
 require_once('sys/include/functions.php');
@@ -145,7 +144,8 @@ $zendDb = Zend_Db::factory($config->database->adapter, array(
     'port'     => $config->database->params->port)
 );
 
-//include_once("./include/sql_patches.php");
+//after config is loaded - do auth
+require_once($include_dir . 'sys/include/include_auth.php');
 
 include_once("sys/include/class/db.php");
 include_once("sys/include/class/index.php");
@@ -202,7 +202,6 @@ if (! $config->extension)
 
 require_once($include_dir . 'sys/include/language.php');
 
-require_once($include_dir . 'sys/include/functions.php');
 
 //add class files for extensions
 
