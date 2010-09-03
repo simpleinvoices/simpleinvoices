@@ -6,7 +6,7 @@
 {else}
 {* if  name was inserted *} 
 	{if $smarty.post.id !=null} 
-		<div class="validation_alert"><img src="../sys/images/common/important.png" alt="" />
+		<div class="validation_alert"><img src="{$smarty_embed_path}/sys/images/common/important.png" alt="" />
 		You must enter a description for the product</div>
 		<hr />
 	{/if}
@@ -127,14 +127,14 @@
 	<tr>
 		<td>
 			<button type="submit" class="positive" name="id" value="{$LANG.save}">
-			    <img class="button_img" src="../sys/images/common/tick.png" alt="" /> 
+			    <img class="button_img" src="{$smarty_embed_path}/sys/images/common/tick.png" alt="" /> 
 				{$LANG.save}
 			</button>
 
 			<input type="hidden" name="op" value="add" />
 		
 			<a href="./index.php?module=expense&view=manage" class="negative">
-		        <img src="../sys/images/common/cross.png" alt="" />
+		        <img src="{$smarty_embed_path}/sys/images/common/cross.png" alt="" />
 	        	{$LANG.cancel}
     		</a>
 	

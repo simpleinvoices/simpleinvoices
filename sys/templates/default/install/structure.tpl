@@ -35,7 +35,7 @@ Click the 'Install Essential Data' button below to continue the installation of 
         <td>
         
             <a href="./index.php?module=install&amp;view=essential" class="positive">
-                <img src="../sys/images/common/tick.png" alt="" />
+                <img src="{$smarty_embed_path}/sys/images/common/tick.png" alt="" />
                 Install Essential Data
             </a>
     
@@ -43,7 +43,7 @@ Click the 'Install Essential Data' button below to continue the installation of 
         <td>
         
             <a href="./index.php" class="negative">
-                <img src="../sys/images/common/cross.png" alt="" />
+                <img src="{$smarty_embed_path}/sys/images/common/cross.png" alt="" />
                 Cancel
             </a>
     

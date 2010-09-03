@@ -9,7 +9,7 @@
 	<meta http-equiv="Content-Script-Type" content="text/javascript" />
 	<meta http-equiv="Content-Style-Type" content="text/css" />
 	<meta name="robots" content="noindex, nofollow" />
-	<link rel="shortcut icon" href="../sys/images/common/favicon.ico" />
+	<link rel="shortcut icon" href="{$smarty_embed_path}/sys/images/common/favicon.ico" />
 
 {literal}
 	<script type="text/javascript" src="{/literal}{$include_dir}{literal}sys/include/jquery/jquery-1.2.6.min.js"></script>
@@ -31,8 +31,8 @@
 	<script type="text/javascript" src="{/literal}{$include_dir}{literal}sys/include/jquery/ajaxupload/ajaxupload.js"></script>
 	
 	{/literal}
-	{include file='../../../sys/include/jquery/jquery.functions.js.tpl'}
-	{include file='../../../sys/include/jquery/jquery.conf.js.tpl'}
+	{include file='{$smarty_embed_path}/sys/include/jquery/jquery.functions.js.tpl'}
+	{include file='{$smarty_embed_path}/sys/include/jquery/jquery.conf.js.tpl'}
 	{literal}
 	<link rel="stylesheet" type="text/css" href="{/literal}{$include_dir}{literal}sys/templates/default/css/jquery-ui/tab-screen.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="{/literal}{$include_dir}{literal}sys/templates/default/css/jquery-ui/tab_menu.css" media="all" />

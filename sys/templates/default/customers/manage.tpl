@@ -15,7 +15,7 @@
     <tr>
         <td>
             <a href="./index.php?module=customers&amp;view=add" class="positive">
-                <img src="../sys/images/famfam/add.png" alt="" />
+                <img src="{$smarty_embed_path}/sys/images/famfam/add.png" alt="" />
                 {$LANG.customer_add}
             </a>
 

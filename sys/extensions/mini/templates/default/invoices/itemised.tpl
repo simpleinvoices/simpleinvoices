@@ -157,7 +157,7 @@ for (var x = 0; x <= {/literal}{$dynamic_line_items}{literal}; x++)
 </tr>	
 <tr>
 	<td align="left">
-		<a href="index.php?module=documentation&amp;view=view&amp;page=help_invoice_custom_fields" rel="gb_page_center[450, 450]">{$LANG.want_more_fields}<img src="../sys/images/common/help-small.png" alt="" /></a>
+		<a href="index.php?module=documentation&amp;view=view&amp;page=help_invoice_custom_fields" rel="gb_page_center[450, 450]">{$LANG.want_more_fields}<img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" /></a>
 
 	</td>
 </tr>

@@ -29,14 +29,14 @@
             <tr>
                 <td>
                     <button type="submit" class="positive" name="submit">
-                        <img class="button_img" src="../sys/images/common/tick.png" alt="" /> 
+                        <img class="button_img" src="{$smarty_embed_path}/sys/images/common/tick.png" alt="" /> 
                         {$LANG.yes}
                     </button>
 
                     <input type="hidden" name="doDelete" value="y" />
                 
                     <a href="./index.php?module=invoices&amp;view=manage" class="negative">
-                        <img src="../sys/images/common/cross.png" alt="" />
+                        <img src="{$smarty_embed_path}/sys/images/common/cross.png" alt="" />
                         {$LANG.cancel}
                     </a>
             

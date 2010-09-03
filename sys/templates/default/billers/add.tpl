@@ -26,7 +26,7 @@
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field"
 				title="{$LANG.Required_Field}"
 		>
-		<img src="../sys/images/common/required-small.png" alt="" />
+		<img src="{$smarty_embed_path}/sys/images/common/required-small.png" alt="" />
 		</a>	
 		</td>
 		<td><input type="text" name="name" value="{$smarty.post.name|htmlsafe}" size="25" id="name" class="validate[required]"></td>
@@ -43,7 +43,7 @@
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_street2"
 				title="{$LANG.street2}"
 			> 
-			<img src="../sys/images/common/help-small.png" alt="" /> 
+			<img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" /> 
 			</a>
 		</td>
 		<td><input type="text" name="street_address2" value="{$smarty.post.street_address2|htmlsafe}" size="25" /></td>
@@ -104,7 +104,7 @@
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 				title="{$LANG.Custom_Fields}"
 			> 
-			<img src="../sys/images/common/help-small.png" alt="" /> </a>
+			<img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" /> </a>
 		</td>
 		<td><input type="text" name="custom_field1" value="{$smarty.post.custom_field1}" size="25" /></td>
 	</tr>
@@ -116,7 +116,7 @@
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 				title="{$LANG.Custom_Fields}"
 			> 
-			<img src="../sys/images/common/help-small.png" alt="" /> </a>
+			<img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" /> </a>
 		</td>
 		<td><input type="text" name="custom_field2" value="{$smarty.post.custom_field2|htmlsafe}" size="25" /></td>
 	</tr>
@@ -128,7 +128,7 @@
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 				title="{$LANG.Custom_Fields}"
 			> 
-			<img src="../sys/images/common/help-small.png" alt="" /> </a>
+			<img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" /> </a>
 		</td>
 		<td><input type="text" name="custom_field3" value="{$smarty.post.custom_field3|htmlsafe}" size="25" /></td>
 	</tr>
@@ -140,7 +140,7 @@
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 				title="{$LANG.Custom_Fields}"
 			> 
-			<img src="../sys/images/common/help-small.png" alt="" /> </a>
+			<img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" /> </a>
 
 		</td>
 		<td><input type="text" name="custom_field4" value="{$smarty.post.custom_field4|htmlsafe}" size="25" /></td>
@@ -153,7 +153,7 @@
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_insert_biller_text"
 				title="{$LANG.Logo_File}"
 			> 
-			<img src="../sys/images/common/help-small.png" alt="" /> </a>
+			<img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" /> </a>
 			</td>
 		<td>
 			{html_options name=logo output=$files values=$files selected=$files[0] }
@@ -186,14 +186,14 @@
     <tr>
         <td>
             <button type="submit" class="positive" name="submit" value="{$LANG.insert_biller}">
-                <img class="button_img" src="../sys/images/common/tick.png" alt="" /> 
+                <img class="button_img" src="{$smarty_embed_path}/sys/images/common/tick.png" alt="" /> 
                 {$LANG.save}
             </button>
 
             <input type="hidden" name="op" value="insert_biller" />
         
             <a href="./index.php?module=billers&amp;view=manage" class="negative">
-                <img src="../sys/images/common/cross.png" alt="" />
+                <img src="{$smarty_embed_path}/sys/images/common/cross.png" alt="" />
                 {$LANG.cancel}
             </a>
     

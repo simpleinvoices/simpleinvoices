@@ -17,7 +17,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen"><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=def_inv_template'><img src="images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td><td class="details_screen">{$LANG.default_inv_template}
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_default_invoice_template_text" title="{$LANG.default_inv_template}"><img src="../sys/images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_default_invoice_template_text" title="{$LANG.default_inv_template}"><img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" /></a>
         </td><td>{$defaults.template|htmlsafe}</td>
 	</tr>
 	<tr>
@@ -26,13 +26,13 @@
 	<tr>
 		<td class="details_screen">
 		<a href='index.php?module=system_defaults&amp;view=edit&amp;submit=delete'><img src="images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td><td class="details_screen">{$LANG.delete}
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_delete" title="{$LANG.delete}"><img src="../sys/images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_delete" title="{$LANG.delete}"><img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>{$defaultDelete|htmlsafe}</td>
 	</tr>
 	<tr>
 		<td class="details_screen"><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=logging'><img src="images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td><td class="details_screen">{$LANG.logging} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_logging" title="{$LANG.logging}"><img src="../sys/images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_logging" title="{$LANG.logging}"><img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>{$defaultLogging|htmlsafe}</td>
 	</tr>

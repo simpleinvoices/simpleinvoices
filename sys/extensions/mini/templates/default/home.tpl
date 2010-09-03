@@ -5,17 +5,17 @@
 		<div class="iMenu">
 			<h3>Main Menu</h3>
 			<ul class="iArrow">
-				<li><a href="#_Create"><img src="../sys/images/mini/itemised.png" width="29" height="29" /><span>Create Invoices</span></a></li>
-				<li><a href="mini.php?module=invoices&view=manage"><img src="../sys/images/mini/manage.png" width="29" height="29" /><span>Manage Invoices</span></a></li>
-				<li><a href="mini.php?module=payments&view=manage"><img src="../sys/images/mini/payment.png" width="29" height="29" /><span>Payments</span></a></li>
-				<li><a href="#_Data"><img src="../sys/images/mini/add.png" width="29" height="29" /><span>Manage Data</span></a></li>
-				<li><a href="mini.php?module=system_defaults&view=manage"><img src="../sys/images/mini/defaults.png" width="29" height="29" /><span>Options</span></a></li>
-				<li><a href="#_Help"><img src="../sys/images/mini/help.png" width="29" height="29" /><span>Help</span></a></li>
+				<li><a href="#_Create"><img src="{$smarty_embed_path}/sys/images/mini/itemised.png" width="29" height="29" /><span>Create Invoices</span></a></li>
+				<li><a href="mini.php?module=invoices&view=manage"><img src="{$smarty_embed_path}/sys/images/mini/manage.png" width="29" height="29" /><span>Manage Invoices</span></a></li>
+				<li><a href="mini.php?module=payments&view=manage"><img src="{$smarty_embed_path}/sys/images/mini/payment.png" width="29" height="29" /><span>Payments</span></a></li>
+				<li><a href="#_Data"><img src="{$smarty_embed_path}/sys/images/mini/add.png" width="29" height="29" /><span>Manage Data</span></a></li>
+				<li><a href="mini.php?module=system_defaults&view=manage"><img src="{$smarty_embed_path}/sys/images/mini/defaults.png" width="29" height="29" /><span>Options</span></a></li>
+				<li><a href="#_Help"><img src="{$smarty_embed_path}/sys/images/mini/help.png" width="29" height="29" /><span>Help</span></a></li>
 			</ul>
 			<h3>Reports</h3>
 			<ul class="iArrow">
 				
-				<li><a href="#_Reports"><img src="../sys/images/mini/reports.png" width="29" height="29" /><span>Reports</span></a></li>
+				<li><a href="#_Reports"><img src="{$smarty_embed_path}/sys/images/mini/reports.png" width="29" height="29" /><span>Reports</span></a></li>
 			</ul>
 		</div>
 		<div class="iFooter">
@@ -27,9 +27,9 @@
 		<div class="iList">
 			<h2>Create New</h2>
 			<ul class="iArrow">
-				<li><a href="mini.php?module=invoices&view=itemised"><img src="../sys/images/mini/itemised.png" width="29" height="29" /><span>New Itemised</span><small>Create a new Itemised Invoice</small></a></li>
-				<li><a href="mini.php?module=invoices&view=total"><img src="../sys/images/mini/total.png" width="29" height="29" /><span>New Total</span><small>Create a new Total Invoice</small></a></li>
-				<li><a href="mini.php?module=invoices&view=consulting"><img src="../sys/images/mini/consulting.png" width="29" height="29" /><span>New Consultancy</span><small>Create a new Consultant Invoice</small></a></li>
+				<li><a href="mini.php?module=invoices&view=itemised"><img src="{$smarty_embed_path}/sys/images/mini/itemised.png" width="29" height="29" /><span>New Itemised</span><small>Create a new Itemised Invoice</small></a></li>
+				<li><a href="mini.php?module=invoices&view=total"><img src="{$smarty_embed_path}/sys/images/mini/total.png" width="29" height="29" /><span>New Total</span><small>Create a new Total Invoice</small></a></li>
+				<li><a href="mini.php?module=invoices&view=consulting"><img src="{$smarty_embed_path}/sys/images/mini/consulting.png" width="29" height="29" /><span>New Consultancy</span><small>Create a new Consultant Invoice</small></a></li>
 
 			</ul>
 		</div>
@@ -39,9 +39,9 @@
 		<div class="iList">
 			<h2>Manage Data</h2>
 			<ul class="iArrow">
-				<li><a href="mini.php?module=customers&view=manage"><img src="../sys/images/mini/customers.png" width="29" height="29" /><span>Manage Customers</span><small>Manage your clients and customers</small></a></li>
-				<li><a href="mini.php?module=billers&view=manage"><img src="../sys/images/mini/biller.png" width="29" height="29" /><span>Manage Billers</span><small>Manage existing billers</small></a></li>
-				<li><a href="mini.php?module=products&view=manage"><img src="../sys/images/mini/products.png" width="29" height="29" /><span>Insert Products</span><small>Manage existing product or services</small></a></li>
+				<li><a href="mini.php?module=customers&view=manage"><img src="{$smarty_embed_path}/sys/images/mini/customers.png" width="29" height="29" /><span>Manage Customers</span><small>Manage your clients and customers</small></a></li>
+				<li><a href="mini.php?module=billers&view=manage"><img src="{$smarty_embed_path}/sys/images/mini/biller.png" width="29" height="29" /><span>Manage Billers</span><small>Manage existing billers</small></a></li>
+				<li><a href="mini.php?module=products&view=manage"><img src="{$smarty_embed_path}/sys/images/mini/products.png" width="29" height="29" /><span>Insert Products</span><small>Manage existing product or services</small></a></li>
 				
 
 			</ul>

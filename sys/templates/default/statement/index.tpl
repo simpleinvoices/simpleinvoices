@@ -89,7 +89,7 @@
     <tr>
         <td>
             <button type="submit" class="positive" name="submit" value="statement_report">
-                <img class="button_img" src="../sys/images/common/tick.png" alt="" /> 
+                <img class="button_img" src="{$smarty_embed_path}/sys/images/common/tick.png" alt="" /> 
                 {$LANG.run_report}
             </button>
 
@@ -108,7 +108,7 @@
 			<a title="{$LANG.print_preview_tooltip} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id|urlencode}&amp;customer_id={$customer_id}&amp;start_date={$start_date|urlencode}&amp;end_date={$end_date|urlencode}&amp;show_only_unpaid={$show_only_unpaid|urlencode}&amp;show_only_real={$show_only_real|urlencode}&amp;filter_by_date={$filter_by_date|urlencode}&amp;format=print" target='_blank'><img src='images/common/printer.png' class='action' />&nbsp;{$LANG.print_preview}</a>
 			 &nbsp;&nbsp; 
 			 <!-- EXPORT TO PDF -->
-			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe} {$LANG.export_pdf_tooltip}" href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id|urlencode}&amp;customer_id={$customer_id|urlencode}&amp;start_date={$start_date|urlencode}&amp;end_date={$end_date|urlencode}&amp;show_only_unpaid={$show_only_unpaid|urlencode}&amp;show_only_real={$show_only_real|urlencode}&amp;filter_by_date={$filter_by_date|urlencode}&amp;format=pdf"><img src='../sys/images/common/page_white_acrobat.png' class='action' />&nbsp;{$LANG.export_pdf}</a>
+			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe} {$LANG.export_pdf_tooltip}" href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id|urlencode}&amp;customer_id={$customer_id|urlencode}&amp;start_date={$start_date|urlencode}&amp;end_date={$end_date|urlencode}&amp;show_only_unpaid={$show_only_unpaid|urlencode}&amp;show_only_real={$show_only_real|urlencode}&amp;filter_by_date={$filter_by_date|urlencode}&amp;format=pdf"><img src='{$smarty_embed_path}/sys/images/common/page_white_acrobat.png' class='action' />&nbsp;{$LANG.export_pdf}</a>
 			 &nbsp;&nbsp; 
 			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe} {$LANG.export_xls_tooltip} .{$config->export->spreadsheet} {$LANG.format_tooltip}" href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id|urlencode}&amp;customer_id={$customer_id|urlencode}&amp;start_date={$start_date|urlencode}&amp;end_date={$end_date|urlencode}&amp;show_only_unpaid={$show_only_unpaid|urlencode}&amp;show_only_real={$show_only_real|urlencode}&amp;filter_by_date={$filter_by_date|urlencode}&amp;format=file&amp;filetype={$config->export->spreadsheet}"><img src='images/common/page_white_excel.png' class='action' />&nbsp;{$LANG.export_as} .{$config->export->spreadsheet}</a>
 			 &nbsp;&nbsp; 
