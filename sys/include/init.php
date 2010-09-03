@@ -40,9 +40,10 @@ $frontendOptions = array(
 
 require_once("smarty/Smarty.class.php");
 require_once("lib/paypal/paypal.class.php");
+require_once($include_dir . 'sys/include/include_auth.php');
 
 require_once('lib/HTMLPurifier/HTMLPurifier.standalone.php');
-include_once('sys/include/functions.php');
+require_once('sys/include/functions.php');
 
 //ob_start('addCSRFProtection');
 
@@ -208,7 +209,6 @@ require_once($include_dir . 'sys/include/functions.php');
 
 checkConnection();
 
-require_once($include_dir . 'sys/include/include_auth.php');
 require_once($include_dir . 'sys/include/manageCustomFields.php');
 require_once($include_dir . "sys/include/validation.php");
 
