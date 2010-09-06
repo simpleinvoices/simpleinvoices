@@ -31,8 +31,8 @@
 	<script type="text/javascript" src="{/literal}{$include_dir}{literal}sys/include/jquery/ajaxupload/ajaxupload.js"></script>
 	
 	{/literal}
-	{include file='{$smarty_embed_path}/sys/include/jquery/jquery.functions.js.tpl'}
-	{include file='{$smarty_embed_path}/sys/include/jquery/jquery.conf.js.tpl'}
+	{include file="$smarty_embed_path/sys/include/jquery/jquery.functions.js.tpl"}
+	{include file="$smarty_embed_path/sys/include/jquery/jquery.conf.js.tpl"}
 	{literal}
 	<link rel="stylesheet" type="text/css" href="{/literal}{$include_dir}{literal}sys/templates/default/css/jquery-ui/tab-screen.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="{/literal}{$include_dir}{literal}sys/templates/default/css/jquery-ui/tab_menu.css" media="all" />
