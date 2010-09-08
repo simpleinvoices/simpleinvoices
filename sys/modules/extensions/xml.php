@@ -39,13 +39,13 @@ if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 $query = (isset($_POST['query'])) ? $_POST['query'] : "" ; 
 $qtype = (isset($_POST['qtype'])) ? $_POST['qtype'] : "" ; 
 
-$plugin[0] = " <img src='images/famfam/plugin_disabled.png' alt='".$LANG['plugin_not_registered']."' />";
-$plugin[1] = " <img src='images/famfam/plugin.png' alt='".$LANG['plugin_registered']."' />";
-$plugin[2] = " <img src='images/famfam/plugin_delete.png' alt='".$LANG['plugin_unregister']."' />";
-$plugin[3] = " <img src='images/famfam/plugin_add.png' alt='".$LANG['plugin_register']."' />";
-$light[0] = " <img src='images/famfam/lightbulb_off.png' alt='".$LANG['disabled']."' />";
-$light[1] = " <img src='images/famfam/lightbulb.png' alt='".$LANG['enabled']."' />";
-$light[2] = " <img src='images/common/lightswitch16x16.png' alt='".$LANG['toggle_status']."' />";
+$plugin[0] = " <img src='$include_dir/sys/images/famfam/plugin_disabled.png' alt='".$LANG['plugin_not_registered']."' />";
+$plugin[1] = " <img src='$include_dir/sys/images/famfam/plugin.png' alt='".$LANG['plugin_registered']."' />";
+$plugin[2] = " <img src='$include_dir/sys/images/famfam/plugin_delete.png' alt='".$LANG['plugin_unregister']."' />";
+$plugin[3] = " <img src='$include_dir/sys/images/famfam/plugin_add.png' alt='".$LANG['plugin_register']."' />";
+$light[0] = " <img src='$include_dir/sys/images/famfam/lightbulb_off.png' alt='".$LANG['disabled']."' />";
+$light[1] = " <img src='$include_dir/sys/images/famfam/lightbulb.png' alt='".$LANG['enabled']."' />";
+$light[2] = " <img src='$include_dir/sys/images/common/lightswitch16x16.png' alt='".$LANG['toggle_status']."' />";
 
 
 $where = " WHERE domain_id = 0 OR domain_id = :domain_id";
