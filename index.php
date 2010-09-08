@@ -19,7 +19,6 @@
    ============================================================================================================================
 */
 
-
 global $cust_language;
 
 set_include_path(get_include_path() . PATH_SEPARATOR . ".");
@@ -44,7 +43,6 @@ if (!isset($app)) {
     $app =  isset($_GET['app'])  ? filenameEscape($_GET['app'])    : 'app';                                                                               
 }
 
-//$app = 'app';
 $app_folder = $include_dir . $app;
 
 include($app .'/index.php');
