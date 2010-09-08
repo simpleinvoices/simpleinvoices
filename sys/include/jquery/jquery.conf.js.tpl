@@ -86,7 +86,7 @@ $(document).ready(function(){
     			},
   				arrows: true,
   				closePosition: 'title',			
-  				closeText: '<img src="{$smarty_embed_path}/sys/images/common/cross.png" alt="" />'
+  				closeText: '<img src="{$smarty_embed_pathx}sys/images/common/cross.png" alt="" />'
 			}
 		);
 	}
