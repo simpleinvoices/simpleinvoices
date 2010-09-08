@@ -65,8 +65,8 @@
 	<tr class='details_screen'>
 		<td class='details_screen'><b>{$preference.pref_inv_wording} {$LANG.summary}:</b></td>
 		<td colspan="5" align="right" class='details_screen align_right'>
-			<a href='#' class="show-summary" onclick="$('.summary').show();$('.show-summary').hide();"><img src="{$smarty_embed_path}/sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" alt="" /></a>
-			<a href='#' class="summary" onclick="$('.summary').hide();$('.show-summary').show();"><img src="{$smarty_embed_path}/sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" alt="" /></a>
+			<a href='#' class="show-summary" onclick="$('.summary').show();$('.show-summary').hide();"><img src="{$smarty_embed_pathx}sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" alt="" /></a>
+			<a href='#' class="summary" onclick="$('.summary').hide();$('.show-summary').show();"><img src="{$smarty_embed_pathx}sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" alt="" /></a>
 		</td>
 	</tr>
 	<tr class='details_screen summary'>
@@ -91,8 +91,8 @@
 		<td class='details_screen'><b>{$LANG.biller}:</b></td>
 		<td class='details_screen' colspan="3">{$biller.name}</td>
 		<td colspan="2" class='details_screen align_right'>
-			<a href='#' class="show-biller" onclick="$('.biller').show();$('.show-biller').hide();"><img src="{$smarty_embed_path}/sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" alt="" /></a>
-			<a href='#' class="biller" onclick="$('.biller').hide();$('.show-biller').show();"><img src="{$smarty_embed_path}/sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" alt="" /></a></td>
+			<a href='#' class="show-biller" onclick="$('.biller').show();$('.show-biller').hide();"><img src="{$smarty_embed_pathx}sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" alt="" /></a>
+			<a href='#' class="biller" onclick="$('.biller').hide();$('.show-biller').show();"><img src="{$smarty_embed_pathx}sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" alt="" /></a></td>
 	</tr>
 	<tr class='details_screen biller'>
 		<td class='details_screen'>{$LANG.street}:</td>
@@ -153,8 +153,8 @@
 		<td class='details_screen'><b>{$LANG.customer}:</b></td>
 		<td class='details_screen' colspan="3">{$customer.name}</td>
 		<td colspan="2" class='details_screen align_right'>
-			<a href='#' class="show-customer" {literal} onclick="$('.customer').show(); $('.show-customer').hide(); {/literal}"><img src="{$smarty_embed_path}/sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" alt=""/></a>
-			<a href='#' class="customer" {literal} onclick="$('.customer').hide(); $('.show-customer').show(); {/literal}"><img src="{$smarty_embed_path}/sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" alt="" /></a>
+			<a href='#' class="show-customer" {literal} onclick="$('.customer').show(); $('.show-customer').hide(); {/literal}"><img src="{$smarty_embed_pathx}sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" alt=""/></a>
+			<a href='#' class="customer" {literal} onclick="$('.customer').hide(); $('.show-customer').show(); {/literal}"><img src="{$smarty_embed_pathx}sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" alt="" /></a>
 		</td>
 	</tr>	
 	<tr class='details_screen customer'>
@@ -206,7 +206,7 @@
 		<td class='details_screen'>{$customFieldLabels.customer_cf4}:</td>
 		<td class='details_screen' colspan=4>{$customer.custom_field4}</td>
 		<td class='details_screen align_right'>
-		<a href="?module=invoices&view=usedefault&action=update_template&id={$invoice.id}&customer_id={$customer.id}"><img src="{$smarty_embed_path}/sys/images/flexigrid/load.png" title='{$LANG.invoice} {$invoice.id} {$LANG.as_template} {$LANG.for} {$customer.name}' alt="" /></a>
+		<a href="?module=invoices&view=usedefault&action=update_template&id={$invoice.id}&customer_id={$customer.id}"><img src="{$smarty_embed_pathx}sys/images/flexigrid/load.png" title='{$LANG.invoice} {$invoice.id} {$LANG.as_template} {$LANG.for} {$customer.name}' alt="" /></a>
 		</td>
 
 	</tr>	
@@ -268,8 +268,8 @@
 
             <tr>
                     <td colspan="6" class="details_screen align_right">
-                    <a href='#' class="show-itemised" onclick="$('.itemised').show();$('.show-itemised').hide();"><img src="{$smarty_embed_path}/sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
-                    <a href='#' class="itemised" onclick="$('.itemised').hide();$('.show-itemised').show();"><img src="{$smarty_embed_path}/sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a>
+                    <a href='#' class="show-itemised" onclick="$('.itemised').show();$('.show-itemised').hide();"><img src="{$smarty_embed_pathx}sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
+                    <a href='#' class="itemised" onclick="$('.itemised').hide();$('.show-itemised').show();"><img src="{$smarty_embed_pathx}sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a>
                     </td>
             </tr>
 			<tr>
@@ -286,8 +286,8 @@
 
 			<tr>
 					<td colspan="6" class="details_screen align_right">
-					<a href='#' class="show-consulting" onclick="$('.consulting').show();$('.show-consulting').hide();"><img src="{$smarty_embed_path}/sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
-					<a href='#' class="consulting" onclick="$('.consulting').hide();$('.show-consulting').show();"><img src="{$smarty_embed_path}/sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a>
+					<a href='#' class="show-consulting" onclick="$('.consulting').show();$('.show-consulting').hide();"><img src="{$smarty_embed_pathx}sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
+					<a href='#' class="consulting" onclick="$('.consulting').hide();$('.show-consulting').show();"><img src="{$smarty_embed_pathx}sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a>
 					</td>
         	</tr>
 			<tr>
@@ -391,8 +391,8 @@
 			<td colspan="5"><b>{$LANG.notes}:</b></td>
 				{if ($invoice.note|count_characters:true > 25)}
 					<td class="details_screen align_right">
-						<a href='#' class="show-notes" onclick="$('.notes').show();$('.show-notes').hide();"><img src="{$smarty_embed_path}/sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a>
-						<a href='#' class="notes" onclick="$('.notes').hide();$('.show-notes').show();"><img src="{$smarty_embed_path}/sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a>
+						<a href='#' class="show-notes" onclick="$('.notes').show();$('.show-notes').hide();"><img src="{$smarty_embed_pathx}sys/images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a>
+						<a href='#' class="notes" onclick="$('.notes').hide();$('.show-notes').show();"><img src="{$smarty_embed_pathx}sys/images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a>
 					</td>
 				{/if}						
 		</tr>
@@ -489,7 +489,7 @@
 		<td class="account"><u>{$preference.pref_currency_sign}{$invoice.owing|number_format:2}</u></td>
 		<td class="account">{$LANG.age}:</td>
 		<td class="account" nowrap>{$invoice_age} 
-		<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_age" title="{$LANG.age}"><img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_age" title="{$LANG.age}"><img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" /></a>
 		</td>
 		<td></td>
 		<td class="columnleft"></td>

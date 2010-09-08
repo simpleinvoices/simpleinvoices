@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<title>Simple Invoices</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link REL="SHORTCUT ICON" HREF="{$smarty_embed_path}/sys/images/common/favicon.ico">
+	<link REL="SHORTCUT ICON" HREF="{$smarty_embed_pathx}sys/images/common/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="./extensions/text_ui/templates/default/css/default.css">
 	<!-- extJs2 Files 
 	<link rel="stylesheet" type="text/css" href="./include/ext2/resources/css/ext-all.css" />

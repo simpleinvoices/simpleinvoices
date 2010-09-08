@@ -6,7 +6,7 @@
 {else}
 {* if  name was inserted *} 
 	{if $smarty.post.id !=null} 
-		<div class="validation_alert"><img src="{$smarty_embed_path}/sys/images/common/important.png" alt="" />
+		<div class="validation_alert"><img src="{$smarty_embed_pathx}sys/images/common/important.png" alt="" />
 		You must enter a description for the product</div>
 		<hr />
 	{/if}
@@ -17,7 +17,7 @@
 
 <table align="center">
 	<tr>
-		<td class="details_screen">{$LANG.product_description} <a href="index.php?module=documentation&amp;view=view&amp;page=help_required_field" rel="gb_page_center[350, 150]"><img src="{$smarty_embed_path}/sys/images/common/required-small.png" alt="" /></a></td>
+		<td class="details_screen">{$LANG.product_description} <a href="index.php?module=documentation&amp;view=view&amp;page=help_required_field" rel="gb_page_center[350, 150]"><img src="{$smarty_embed_pathx}sys/images/common/required-small.png" alt="" /></a></td>
 		<td><input type="text" name="description" value="{$smarty.post.description}" size="50" /></td>
 	</tr>
 	<tr>
@@ -25,19 +25,19 @@
 		<td><input type="text" name="unit_price" value="{$smarty.post.unit_price}" size="25" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf1} <a href="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" rel="gb_page_center[450, 450]"><img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" /></a></td>
+		<td class="details_screen">{$customFieldLabel.product_cf1} <a href="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" rel="gb_page_center[450, 450]"><img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" /></a></td>
 		<td><input type="text" name="custom_field1" value="{$smarty.post.custom_field1}" size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf2} <a href="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" rel="gb_page_center[450, 450]"><img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" /></a></td>
+		<td class="details_screen">{$customFieldLabel.product_cf2} <a href="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" rel="gb_page_center[450, 450]"><img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" /></a></td>
 		<td><input type="text" name="custom_field2" value="{$smarty.post.custom_field2}" size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf3} <a href="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" rel="gb_page_center[450, 450]"><img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" /></a></td>
+		<td class="details_screen">{$customFieldLabel.product_cf3} <a href="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" rel="gb_page_center[450, 450]"><img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" /></a></td>
 		<td><input type="text" name="custom_field3" value="{$smarty.post.custom_field3}" size="50" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf4} <a href="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" rel="gb_page_center[450, 450]"><img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" /></a></td>
+		<td class="details_screen">{$customFieldLabel.product_cf4} <a href="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" rel="gb_page_center[450, 450]"><img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" /></a></td>
 		<td><input type="text" name="custom_field4" value="{$smarty.post.custom_field4}" size="50" /></td>
 	</tr>
 	<tr>
