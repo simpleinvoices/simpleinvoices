@@ -47,11 +47,11 @@
 	<tr>
 		<td>
 				<a href="./index.php?module=cron&amp;view=edit&amp;id={$cron.id|urlencode}" class="positive">
-					<img src="{$smarty_embed_path}/sys/images/famfam/report_edit.png" alt=""/>
+					<img src="{$smarty_embed_pathx}sys/images/famfam/report_edit.png" alt=""/>
 					{$LANG.edit}
 				</a>
 			<a href="./index.php?module=cron&view=manage" class="negative">
-		        <img src="{$smarty_embed_path}/sys/images/common/cross.png" alt="" />
+		        <img src="{$smarty_embed_pathx}sys/images/common/cross.png" alt="" />
 	        	{$LANG.cancel}
     		</a>
 	

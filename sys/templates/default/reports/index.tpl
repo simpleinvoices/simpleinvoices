@@ -27,7 +27,7 @@
     <tr>
         <td>
             <a href="index.php?module=statement&view=index" class="">
-                <img src="{$smarty_embed_path}/sys/images/famfam/money.png" alt="" />
+                <img src="{$smarty_embed_pathx}sys/images/famfam/money.png" alt="" />
                 {$LANG.statement_of_invoices}
             </a>
         </td>
@@ -39,15 +39,15 @@
     <tr>
         <td>
             <a href="index.php?module=reports&view=report_sales_total" class="">
-                <img src="{$smarty_embed_path}/sys/images/famfam/money.png" alt="" />
+                <img src="{$smarty_embed_pathx}sys/images/famfam/money.png" alt="" />
                 {$LANG.total_sales}
             </a>
             <a href="index.php?module=reports&view=report_sales_by_periods" class="">
-                <img src="{$smarty_embed_path}/sys/images/famfam/money.png" alt="" />
+                <img src="{$smarty_embed_pathx}sys/images/famfam/money.png" alt="" />
                 {$LANG.monthly_sales_per_year}
             </a>
             <a href="index.php?module=reports&view=report_sales_customers_total" class="">
-                <img src="{$smarty_embed_path}/sys/images/famfam/money.png" alt="" />
+                <img src="{$smarty_embed_pathx}sys/images/famfam/money.png" alt="" />
                 {$LANG.sales_by_customers} 
             </a>                      
         </td>
@@ -61,7 +61,7 @@
             <td>
 
                 <a href="index.php?module=reports&view=report_invoice_profit" class="">
-                    <img src="{$smarty_embed_path}/sys/images/famfam/money.png" alt="" />
+                    <img src="{$smarty_embed_pathx}sys/images/famfam/money.png" alt="" />
                     {$LANG.profit_per_invoice}
                 </a>
                 
@@ -77,7 +77,7 @@
         <td>
 
             <a href="index.php?module=reports&view=report_tax_total" class="">
-                <img src="{$smarty_embed_path}/sys/images/famfam/money_delete.png" alt="" />
+                <img src="{$smarty_embed_pathx}sys/images/famfam/money_delete.png" alt="" />
                 {$LANG.total_taxes}
             </a>
             
@@ -93,12 +93,12 @@
         <td>
 
             <a href="index.php?module=reports&view=report_products_sold_total" class="">
-                <img src="{$smarty_embed_path}/sys/images/famfam/cart.png" alt="" />
+                <img src="{$smarty_embed_pathx}sys/images/famfam/cart.png" alt="" />
                 {$LANG.product_sales}
             </a>
 
             <a href="index.php?module=reports&view=report_products_sold_by_customer" class="">
-                <img src="{$smarty_embed_path}/sys/images/famfam/cart.png" alt="" />
+                <img src="{$smarty_embed_pathx}sys/images/famfam/cart.png" alt="" />
                 {$LANG.products_by_customer}
             </a>            
 
@@ -113,12 +113,12 @@
         <td>
 
             <a href="index.php?module=reports&view=report_biller_total" class="">
-                <img src="{$smarty_embed_path}/sys/images/famfam/user_suit.png" alt="" />
+                <img src="{$smarty_embed_pathx}sys/images/famfam/user_suit.png" alt="" />
                 {$LANG.biller_sales}
             </a>
 
             <a href="index.php?module=reports&view=report_biller_by_customer" class="">
-                <img src="{$smarty_embed_path}/sys/images/famfam/user_suit.png" alt="" />
+                <img src="{$smarty_embed_pathx}sys/images/famfam/user_suit.png" alt="" />
                 {$LANG.biller_sales_by_customer_totals} {* TODO change this - remove total *}
             </a>            
 
@@ -135,24 +135,24 @@
     <tr>
         <td>
              <a href="index.php?module=reports&view=report_debtors_by_amount" class="">
-                <img src="{$smarty_embed_path}/sys/images/famfam/vcard.png" alt="" />
+                <img src="{$smarty_embed_pathx}sys/images/famfam/vcard.png" alt="" />
                 {$LANG.debtors_by_amount_owed}
             </a>
     
     
            <a href="index.php?module=reports&view=report_debtors_by_aging" class="">
-                <img src="{$smarty_embed_path}/sys/images/famfam/vcard.png" alt="" />
+                <img src="{$smarty_embed_pathx}sys/images/famfam/vcard.png" alt="" />
                  {$LANG.debtors_by_aging_periods}
             </a>
             
              <a href="index.php?module=reports&view=report_debtors_owing_by_customer" class="">
-                <img src="{$smarty_embed_path}/sys/images/famfam/vcard.png" alt="" />
+                <img src="{$smarty_embed_pathx}sys/images/famfam/vcard.png" alt="" />
                  {$LANG.total_owed_per_customer}
             </a>
     
     
            <a href="index.php?module=reports&view=report_debtors_aging_total" class="">
-                <img src="{$smarty_embed_path}/sys/images/famfam/vcard.png" alt="" />
+                <img src="{$smarty_embed_pathx}sys/images/famfam/vcard.png" alt="" />
                  {$LANG.total_by_aging_periods}
             </a>
         </td>
@@ -168,7 +168,7 @@
         <td>
 
             <a href="index.php?module=reports&view=database_log" class="">
-                <img src="{$smarty_embed_path}/sys/images/famfam/database.png" alt="" />
+                <img src="{$smarty_embed_pathx}sys/images/famfam/database.png" alt="" />
                 {$LANG.database_log}
             </a>
 

@@ -34,7 +34,7 @@ n Script: details.tpl
 			href="#"
 			title="{$LANG.street2}"
 		>
-		<img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" />
+		<img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" />
 		</a>
 		</td>
 		<td>{$biller.street_address2}</td>
@@ -95,7 +95,7 @@ n Script: details.tpl
 			href="#"
 			title="{$LANG.Custom_Fields}"
 		>
-		<img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" />
+		<img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" />
 		</a>
 		</td>
 		<td>{$biller.custom_field1}</td>
@@ -108,7 +108,7 @@ n Script: details.tpl
 			href="#"
 			title="{$LANG.Custom_Fields}"
 		>
-		<img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" />
+		<img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" />
 		</a>
 		</td>
 		<td>{$biller.custom_field2}</td>
@@ -121,7 +121,7 @@ n Script: details.tpl
 			href="#"
 			title="{$LANG.Custom_Fields}"
 		>
-		<img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" />
+		<img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" />
 		</a>
 		</td>
 		<td>{$biller.custom_field3}</td>
@@ -134,7 +134,7 @@ n Script: details.tpl
 			href="#"
 			title="{$LANG.Custom_Fields}"
 		>
-		<img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" />
+		<img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" />
 		</a>
 		</td>
 		<td>{$biller.custom_field4}</td>
@@ -147,7 +147,7 @@ n Script: details.tpl
 			rel="index.php?module=documentation&amp;view=view&amp;page=help_insert_biller_text"
 			title="{$LANG.Logo_File}"
 		>
-		<img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" />
+		<img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" />
 		</a>
 		</td>
 		<td>{$biller.logo}</td>
@@ -177,7 +177,7 @@ n Script: details.tpl
 		<tr>
 			<td>
 				<a href="./index.php?module=billers&amp;view=details&amp;action=edit&amp;id={$biller.id}" class="positive">
-					<img src="{$smarty_embed_path}/sys/images/famfam/report_edit.png" alt=""/>
+					<img src="{$smarty_embed_pathx}sys/images/famfam/report_edit.png" alt=""/>
 					{$LANG.edit}
 				</a>
 
@@ -198,7 +198,7 @@ n Script: details.tpl
 			rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field"
 			title="{$LANG.Required_Field}"
 		>
-		<img src="{$smarty_embed_path}/sys/images/common/required-small.png" alt="" />
+		<img src="{$smarty_embed_pathx}sys/images/common/required-small.png" alt="" />
 		</a>
 		</td>
 		<td><input type="text" name="name"  value="{$biller.name|htmlsafe}" size="50" id="name" class="validate[required]" /></td>
@@ -215,7 +215,7 @@ n Script: details.tpl
 			rel="index.php?module=documentation&amp;view=view&amp;page=help_street2"
 			title="{$LANG.street2}"
 		> 
-		<img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" />
+		<img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" />
 		</a>
 		</td>
 		<td><input type="text" name="street_address2" value="{$biller.street_address2|htmlsafe}" size="50" /></td>
@@ -276,7 +276,7 @@ n Script: details.tpl
 			rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 			title="{$LANG.Custom_Fields}"
 		> 
-		<img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" />
+		<img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" />
 		</a>
 		</td>
 		<td><input type="text" name="custom_field1" value="{$biller.custom_field1|htmlsafe}" size="50"</td>
@@ -289,7 +289,7 @@ n Script: details.tpl
 			rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 			title="{$LANG.Custom_Fields}"
 		> 
-		<img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" />
+		<img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" />
 		</a>
 		</td>
 		<td><input type="text" name="custom_field2" value="{$biller.custom_field2}" size="50"</td>
@@ -302,7 +302,7 @@ n Script: details.tpl
 			rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 			title="{$LANG.Custom_Fields|htmlsafe}"
 		> 
-		<img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" />
+		<img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" />
 		</a>
 		</td>
 		<td><input type="text" name="custom_field3" value="{$biller.custom_field3|htmlsafe}" size="50"</td>
@@ -315,7 +315,7 @@ n Script: details.tpl
 			rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 			title="{$LANG.Custom_Fields}"
 		> 
-		<img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" />
+		<img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" />
 		</a>
 		</td>
 		<td><input type="text" name="custom_field4" value="{$biller.custom_field4|htmlsafe}" size="50"</td>
@@ -329,7 +329,7 @@ n Script: details.tpl
 			rel="index.php?module=documentation&amp;view=view&amp;page=help_insert_biller_text"
 			title="{$LANG.Logo_File}"
 		>
-		<img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" />
+		<img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" />
 		</a>
 		</td>
 		<td>
@@ -368,7 +368,7 @@ n Script: details.tpl
     <tr>
         <td>
             <button type="submit" class="positive" name="save_biller" value="{$LANG.save_biller}">
-                <img class="button_img" src="{$smarty_embed_path}/sys/images/common/tick.png" alt="" /> 
+                <img class="button_img" src="{$smarty_embed_pathx}sys/images/common/tick.png" alt="" /> 
                 {$LANG.save}
             </button>
 
@@ -376,7 +376,7 @@ n Script: details.tpl
    			<input type="hidden" name="categorie" value="1" />
 
             <a href="./index.php?module=billers&amp;view=manage" class="negative">
-                <img src="{$smarty_embed_path}/sys/images/common/cross.png" alt="" />
+                <img src="{$smarty_embed_pathx}sys/images/common/cross.png" alt="" />
                 {$LANG.cancel}
             </a>
     

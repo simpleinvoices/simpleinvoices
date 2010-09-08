@@ -109,7 +109,7 @@
 </tr>	
 <tr>
 	<td align="left">
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" /> {$LANG.want_more_fields}</a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" /> {$LANG.want_more_fields}</a>
 	</td>
 </tr>
 <!--Add more line items while in an itemeised invoice - Get style - has problems- wipes the current values of the existing rows - not good
@@ -125,13 +125,13 @@
 	<tr>
 	        <td>
 			<button type="submit" class="positive" name="submit" value="{$LANG.save}">
-			<img class="button_img" src="{$smarty_embed_path}/sys/images/common/tick.png" alt="" /> 
+			<img class="button_img" src="{$smarty_embed_pathx}sys/images/common/tick.png" alt="" /> 
 			{$LANG.save}
 			</button>
 			<input type="hidden" name="max_items" value="{$smarty.section.line.index|htmlsafe}" />
 			<input type="hidden" name="type" value="3" />
 			<a href="./index.php?module=invoices&amp;view=manage" class="negative">
-				<img src="{$smarty_embed_path}/sys/images/common/cross.png" alt="" />
+				<img src="{$smarty_embed_pathx}sys/images/common/cross.png" alt="" />
 				{$LANG.cancel}
 			</a>
 		</td>

@@ -11,10 +11,10 @@
   <td><input type="text" name="description" size="40" value="{$description|htmlsafe}" />
  </tr><tr>
   <td><button type="submit" class="positive" name="submit" value="{$LANG.save}">
-	<img class="button_img" src="{$smarty_embed_path}/sys/images/common/tick.png" alt="{$LANG.save}" />{$LANG.save}
+	<img class="button_img" src="{$smarty_embed_pathx}sys/images/common/tick.png" alt="{$LANG.save}" />{$LANG.save}
       </button></td>
   <td><a href="./index.php?module=extensions&view=manage" class="negative">
-	<img src="{$smarty_embed_path}/sys/images/common/cross.png" alt="{$LANG.cancel}" />{$LANG.cancel}</a></td>
+	<img src="{$smarty_embed_pathx}sys/images/common/cross.png" alt="{$LANG.cancel}" />{$LANG.cancel}</a></td>
  </tr>
 </table>
 {if ($action=="unregister" & $count > 0)}

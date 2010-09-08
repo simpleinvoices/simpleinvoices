@@ -33,7 +33,7 @@ The Simple Invoices essential data has been imported.  You can select to just st
         <td>
         
             <a href="./index.php" class="positive">
-                <img src="{$smarty_embed_path}/sys/images/common/tick.png" alt="" />
+                <img src="{$smarty_embed_pathx}sys/images/common/tick.png" alt="" />
                 Start using Simple Invoices
             </a>
     
@@ -41,7 +41,7 @@ The Simple Invoices essential data has been imported.  You can select to just st
         <td>
         
             <a href="./index.php?module=install&amp;view=sample_data" class="positive">
-                <img src="{$smarty_embed_path}/sys/images/common/tick.png" alt="" />
+                <img src="{$smarty_embed_pathx}sys/images/common/tick.png" alt="" />
                 Install Sample Data
             </a>
     

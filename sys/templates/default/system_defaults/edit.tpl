@@ -22,14 +22,14 @@
     <tr>
         <td>
             <button type="submit" class="positive" name="submit" value="{$LANG.save}">
-                <img class="button_img" src="{$smarty_embed_path}/sys/images/common/tick.png" alt="" /> 
+                <img class="button_img" src="{$smarty_embed_pathx}sys/images/common/tick.png" alt="" /> 
                 {$LANG.save}
             </button>
 			<input type="hidden" name="name" value="{$default|htmlsafe}">
             <input type="hidden" name="op" value="update_system_defaults" />
         
             <a href="./index.php?module=system_defaults&view=manage" class="negative">
-                <img src="{$smarty_embed_path}/sys/images/common/cross.png" alt="" />
+                <img src="{$smarty_embed_pathx}sys/images/common/cross.png" alt="" />
                 {$LANG.cancel}
             </a>
     

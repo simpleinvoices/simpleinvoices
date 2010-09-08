@@ -12,7 +12,7 @@
 {else}
 {* if  name was inserted *} 
 	{if $smarty.post.submit !=null} 
-		<div class="validation_alert"><img src="{$smarty_embed_path}/sys/images/common/important.png" alt="" />
+		<div class="validation_alert"><img src="{$smarty_embed_pathx}sys/images/common/important.png" alt="" />
 		You must enter a Tax description</div>
 		<hr />
 	{/if}
@@ -35,7 +35,7 @@
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_tax_rate_sign"
 				title="{$LANG.tax_rate}"
 		>
-		<img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" />
+		<img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" />
 		</a>
 		</td>
 		<td>
@@ -60,14 +60,14 @@
     <tr>
         <td>
             <button type="submit" class="positive" name="submit" value="{$LANG.insert_tax_rate}">
-                <img class="button_img" src="{$smarty_embed_path}/sys/images/common/tick.png" alt="" /> 
+                <img class="button_img" src="{$smarty_embed_pathx}sys/images/common/tick.png" alt="" /> 
                 {$LANG.save}
             </button>
 
 			<input type="hidden" name="op" value="insert_tax_rate" />
 
             <a href="./index.php?module=tax_rates&view=manage" class="negative">
-                <img src="{$smarty_embed_path}/sys/images/common/cross.png" alt="" />
+                <img src="{$smarty_embed_pathx}sys/images/common/cross.png" alt="" />
                 {$LANG.cancel}
             </a>
     

@@ -91,7 +91,7 @@
 </tr>	
 <tr>
 	<td align=left>
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.Custom_Fields}"><img src="{$smarty_embed_path}/sys/images/common/help-small.png" alt="" /> {$LANG.want_more_fields}</a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.Custom_Fields}"><img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" /> {$LANG.want_more_fields}</a>
 	</td>
 </tr>
 <!--Add more line items while in an itemeised invoice - Get style - has problems- wipes the current values of the existing rows - not good
