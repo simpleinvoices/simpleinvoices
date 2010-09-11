@@ -1,6 +1,6 @@
 <?php
 //   include phpreports library
-require_once("./include/reportlib.php");
+require_once($include_dir . "sys/include/reportlib.php");
 
    if ($db_server == 'pgsql') {
       $sSQL = "SELECT
@@ -41,10 +41,10 @@ ORDER BY
 ";
    }
 
-   $oRpt->setXML("./modules/reports/report_debtors_by_amount.xml");
+   $oRpt->setXML($include_dir . "sys/modules/reports/report_debtors_by_amount.xml");
 
 //   include phpreports run code
-	include("./include/reportrunlib.php");
+	include($include_dir . "sys/include/reportrunlib.php");
 
 $smarty -> assign('pageActive', 'report');
 $smarty -> assign('active_tab', '#home');
