@@ -24,7 +24,7 @@
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field"
 				title="{$LANG.Required_Field}"
 		>
-		<img src="{$smarty_embed_path}}/sys/images/common/required-small.png" alt="" />
+		<img src="{$smarty_embed_pathx}sys/images/common/required-small.png" alt="" />
 		</a>	
 		</td>
 		<td><input type="text" name="email" value="{$smarty.post.email|htmlsafe}" size="35" id="email" autocomplete="off" class="validate[required]"  /></td>
