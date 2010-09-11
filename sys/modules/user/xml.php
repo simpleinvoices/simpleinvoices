@@ -89,16 +89,16 @@ $xml .= "<total>$count</total>";
 foreach ($user as $row) {
 	$xml .= "<row id='".$row['iso']."'>";
 	$xml .= "<cell><![CDATA[
-	<a class='index_table' title='$LANG[view] ".$row['name']."' href='index.php?module=user&view=details&id=$row[id]&action=view'><img src='../sys/images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-	<a class='index_table' title='$LANG[edit] ".$row['name']."' href='index.php?module=user&view=details&id=$row[id]&action=edit'><img src='../sys/images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+	<a class='index_table' title='$LANG[view] ".$row['name']."' href='index.php?module=user&view=details&id=$row[id]&action=view'><img src='".$include_dir."sys/images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+	<a class='index_table' title='$LANG[edit] ".$row['name']."' href='index.php?module=user&view=details&id=$row[id]&action=edit'><img src='".$include_dir."sys/images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 	]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['email']."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['role']."]]></cell>";
 	if ($row['enabled']==$LANG['enabled']) {
-		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
+		$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
 	}	
 	else {
-		$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
+		$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
 	}
 	$xml .= "</row>";		
 }
