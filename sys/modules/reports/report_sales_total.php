@@ -18,7 +18,7 @@ require_once($include_dir . "sys/include/reportlib.php");
    $oRpt->setXML($include_dir . "sys/modules/reports/report_sales_total.xml");
 
 //   include phpreports run code
-	include($include_dir . "/include/reportrunlib.php");
+	include($include_dir . "sys/include/reportrunlib.php");
 
 $smarty -> assign('pageActive', 'report_sale');
 $smarty -> assign('active_tab', '#money');
