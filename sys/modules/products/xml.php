@@ -20,10 +20,7 @@ $sth_count_rows = $products->select_all('count',$dir, $sort, $rp, $page);
 $products_all = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 $count = $sth_count_rows->rowCount();
-
-
-
-
+                                              
 //echo sql2xml($customers, $count);
 $xml .= "<rows>";
 
@@ -35,8 +32,8 @@ foreach ($products_all as $row) {
 
 	$xml .= "<row id='".$row['iso']."'>";
 	$xml .= "<cell><![CDATA[
-			<a class='index_table' title='$LANG[view] ".$row['description']."' href='index.php?module=products&view=details&id=".$row['id']."&action=view'><img src='../sys/images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-			<a class='index_table' title='$LANG[edit] ".$row['description']."' href='index.php?module=products&view=details&id=".$row['id']."&action=edit'><img src='../sys/images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+			<a class='index_table' title='$LANG[view] ".$row['description']."' href='index.php?module=products&view=details&id=".$row['id']."&action=view'><img src='".$include_dir."sys/images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+			<a class='index_table' title='$LANG[edit] ".$row['description']."' href='index.php?module=products&view=details&id=".$row['id']."&action=edit'><img src='".$include_dir."sys/images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 		]]></cell>";		
 	
 	$xml .= "<cell><![CDATA[".$row['description']."]]></cell>";
@@ -47,10 +44,10 @@ foreach ($products_all as $row) {
     }
 
 	if ($row['enabled']==$LANG['enabled']) {
-		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
+		$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
 	}	
 	else {
-		$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
+		$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
 	}
 	$xml .= "</row>";		
 }
