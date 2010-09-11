@@ -1,5 +1,5 @@
 <?php
-require_once("./include/reportlib.php");
+require_once($include_dir . "sys/include/reportlib.php");
 
    $sSQL = "SELECT sum(ii.quantity) as sum_quantity, c.name, p.description
       FROM ".TB_PREFIX."customers c INNER JOIN
@@ -10,9 +10,9 @@ require_once("./include/reportlib.php");
       GROUP BY p.description, c.name
       ORDER BY c.name";
 
-   $oRpt->setXML("./modules/reports/report_products_sold_by_customer.xml");
+   $oRpt->setXML($include_dir . "sys/modules/reports/report_products_sold_by_customer.xml");
 
-	include("./include/reportrunlib.php");
+	include($include_dir . "sys/include/reportrunlib.php");
 
 $smarty -> assign('pageActive', 'report');
 $smarty -> assign('active_tab', '#home');
