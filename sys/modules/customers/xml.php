@@ -111,17 +111,17 @@ $count = $sth_count_rows->rowCount();
 	foreach ($customers as $row) {
 		$xml .= "<row id='".$row['CID']."'>";
 		$xml .= "<cell><![CDATA[
-			<a class='index_table' title='$LANG[view] $LANG[customer] ".$row['name']."' href='index.php?module=customers&view=details&id=$row[CID]&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-			<a class='index_table' title='$LANG[edit] $LANG[customer] ".$row['name']."' href='index.php?module=customers&view=details&id=$row[CID]&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+			<a class='index_table' title='$LANG[view] $LANG[customer] ".$row['name']."' href='index.php?module=customers&view=details&id=$row[CID]&action=view'><img src='".$include_dir."sys/images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+			<a class='index_table' title='$LANG[edit] $LANG[customer] ".$row['name']."' href='index.php?module=customers&view=details&id=$row[CID]&action=edit'><img src='".$include_dir."sys/images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 		]]></cell>";		
 		$xml .= "<cell><![CDATA[".$row['name']."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['customer_total'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['owing'])."]]></cell>";
 		if ($row['enabled']==$LANG['enabled']) {
-			$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
+			$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
 		}	
 		else {
-			$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
+			$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
 		}
 		$xml .= "</row>";		
 	}
