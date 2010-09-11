@@ -91,11 +91,11 @@
 </tr>
 
 <tr>
-		<td>{LANG.distribute}</td>
+		<td>{$LANG.distribute}</td>
 
 		<td><select name="distribute">
-		<option value="1" style="font-weight: bold;" selected="">{LANG.yes}</option>
-		<option value="0" selected="">{LANG.no}</option></select>
+		<option value="1" style="font-weight: bold;" selected="">{$LANG.yes}</option>
+		<option value="0" selected="">{$LANG.no}</option></select>
 		</td> 
 </tr>
 
