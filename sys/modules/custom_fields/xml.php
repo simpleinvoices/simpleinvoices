@@ -87,8 +87,8 @@ if (in_array($sort, $validFields)) {
 	foreach ($cfs as $row) {
 		$xml .= "<row id='".htmlsafe($row['cf_id'])."'>";
 		$xml .= "<cell><![CDATA[
-			<a class='index_table' title='$LANG[view] $LANG[custom_field] ".htmlsafe($row['field_name_nice'])."' href='index.php?module=custom_fields&view=details&id=$row[cf_id]&action=view'><img src='../sys/images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-			<a class='index_table' title='$LANG[edit] $LANG[custom_field] ".htmlsafe($row['field_name_nice'])."' href='index.php?module=custom_fields&view=details&id=$row[cf_id]&action=edit'><img src='../sys/images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+			<a class='index_table' title='$LANG[view] $LANG[custom_field] ".htmlsafe($row['field_name_nice'])."' href='index.php?module=custom_fields&view=details&id=$row[cf_id]&action=view'><img src='".$include_dir."sys/images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+			<a class='index_table' title='$LANG[edit] $LANG[custom_field] ".htmlsafe($row['field_name_nice'])."' href='index.php?module=custom_fields&view=details&id=$row[cf_id]&action=edit'><img src='".$include_dir."sys/images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 		]]></cell>";
 		$xml .= "<cell><![CDATA[".htmlsafe($row['cf_id'])."]]></cell>";		
 		$xml .= "<cell><![CDATA[".htmlsafe($row['field_name_nice'])."]]></cell>";
