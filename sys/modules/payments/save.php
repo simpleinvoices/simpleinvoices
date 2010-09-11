@@ -48,7 +48,7 @@ if ( isset($_POST['process_payment']) ) {
 		$payment->ac_amount = $invoicetotal;
 		
 		//grab the customer ID so we can look at the other invoices we can process payments for
-		$sql = "SELECT customer_id from si_invoices where id = :ac_inv_id";
+		$sql = "SELECT customer_id from ".TB_PREFIX."invoices where id = :ac_inv_id";
 				$sth = $db->query($sql,
         ':ac_inv_id',$payment->ac_inv_id) or die();
 		$cust_id = $sth->fetch();
@@ -63,26 +63,23 @@ if ( isset($_POST['process_payment']) ) {
 		$sql = "
 				SELECT * from
 
-				(SELECT invoice_id, customer_id, sum(total) as all_charge FROM si_invoices
-				inner join si_invoice_items
+				(SELECT invoice_id, customer_id, sum(total) as all_charge FROM ".TB_PREFIX."invoices
+				inner join ".TB_PREFIX."invoice_items
 				on
-				si_invoices.id = si_invoice_items.invoice_id
-				GROUP BY si_invoices.id ) charge
+				".TB_PREFIX."invoices.id = ".TB_PREFIX."invoice_items.invoice_id
+				GROUP BY ".TB_PREFIX."invoices.id ) charge
 
 				left join
 
-				(SELECT si_invoices.id, sum(ac_amount) as all_pay FROM si_invoices
-				inner join si_payment
+				(SELECT ".TB_PREFIX."invoices.id, sum(ac_amount) as all_pay FROM ".TB_PREFIX."invoices
+				inner join ".TB_PREFIX."payment
 				on
-				si_invoices.id = si_payment.ac_inv_id
-				GROUP BY si_invoices.id ) pay
+				".TB_PREFIX."invoices.id = ".TB_PREFIX."payment.ac_inv_id
+				GROUP BY ".TB_PREFIX."invoices.id ) pay
 				on charge.invoice_id = pay.id
 				where all_charge > ifnull(all_pay,0) and customer_id=:cust_id and charge.invoice_id <> :ac_inv_id
 				";
-		
-
-		
-		
+			
 		$sth = $db->query($sql, ':cust_id',$cust_id,':ac_inv_id',$payment->ac_inv_id) or die();
 		
 
