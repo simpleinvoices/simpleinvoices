@@ -91,11 +91,11 @@
 </tr>
 
 <tr>
-		<td>Distribute overpayments amongst other outsdanding invoices?</td>
+		<td>{LANG.distribute}</td>
 
 		<td><select name="distribute">
-		<option value="1" style="font-weight: bold;" selected="">Yes</option>
-		<option value="0" selected="">No</option></select>
+		<option value="1" style="font-weight: bold;" selected="">{LANG.yes}</option>
+		<option value="0" selected="">{LANG.no}</option></select>
 		</td> 
 </tr>
 
