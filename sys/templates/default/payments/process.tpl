@@ -25,7 +25,7 @@
 <tr>
 	<td class="details_screen">{$LANG.amount}</td>
 	<td colspan="5"><input type="text" name="ac_amount" size="25" value="{$invoice.owing|htmlsafe}" />
-	<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_auto_amount" title="{$LANG.process_payment_auto_amount}"><img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" /></a>
+	<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_auto_amount" title="{$LANG.process_payment_auto_amount}"><img src="./images/common/help-small.png" alt="" /></a>
 	</td>
 </tr>
 <tr>
@@ -89,22 +89,35 @@
 	<td class="details_screen">{$LANG.note}</td>
 	<td colspan="5"><textarea class="editor" name="ac_notes" rows="5" cols="50"></textarea></td>
 </tr>
+
+<tr>
+		<td>Distribute overpayments amongst other outsdanding invoices?</td>
+
+		<td><select name="distribute">
+		<option value="1" style="font-weight: bold;" selected="">Yes</option>
+		<option value="0" selected="">No</option></select>
+		</td> 
+</tr>
+
 </table>
 
 <br />
 
 <table class="buttons" align="center">
+
+
+
     <tr>
         <td>
             <button type="submit" class="positive" name="process_payment" value="{$LANG.save}">
-                <img class="button_img" src="{$smarty_embed_pathx}sys/images/common/tick.png" alt="" /> 
+                <img class="button_img" src="./images/common/tick.png" alt="" /> 
                 {$LANG.save}
             </button>
 
             <input type="hidden" name="op" value="edit_preference" />
         
             <a href="./index.php?module=payments&amp;view=manage" class="negative">
-                <img src="{$smarty_embed_pathx}sys/images/common/cross.png" alt="" />
+                <img src="./images/common/cross.png" alt="" />
                 {$LANG.cancel}
             </a>
     
