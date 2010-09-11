@@ -1,6 +1,6 @@
 <?php
 //   include phpreports library
-require_once("./include/reportlib.php");
+require_once($include_dir . "sys/include/reportlib.php");
 
 // Adjusted for NULL on computation with NULL values
  /*  $sSQL = "SELECT
@@ -20,10 +20,10 @@ require_once("./include/reportlib.php");
 	$sSQL .= "GROUP BY b.name, c.name";
 
 	
-	$oRpt->setXML("./modules/reports/report_biller_by_customer.xml");
+	$oRpt->setXML($include_dir . "sys/modules/reports/report_biller_by_customer.xml");
 
 //   include phpreports run code
-	include("./include/reportrunlib.php");
+	include($include_dir . "sys/include/reportrunlib.php");
 
 $smarty -> assign('pageActive', 'report');
 $smarty -> assign('active_tab', '#home');
