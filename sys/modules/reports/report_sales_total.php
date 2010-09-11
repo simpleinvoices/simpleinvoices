@@ -1,6 +1,6 @@
 <?php 
 //   include phpreports library
-require_once("./include/reportlib.php");
+require_once($include_dir . "sys/include/reportlib.php");
 
    $sSQL = "select sum(ii.total) as total 
             from 
@@ -15,10 +15,10 @@ require_once("./include/reportlib.php");
                 p.status = '1';
                 ";
 
-   $oRpt->setXML("./modules/reports/report_sales_total.xml");
+   $oRpt->setXML($include_dir . "sys/modules/reports/report_sales_total.xml");
 
 //   include phpreports run code
-	include("./include/reportrunlib.php");
+	include($include_dir . "/include/reportrunlib.php");
 
 $smarty -> assign('pageActive', 'report_sale');
 $smarty -> assign('active_tab', '#money');
