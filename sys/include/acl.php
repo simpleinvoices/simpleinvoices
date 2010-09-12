@@ -24,7 +24,8 @@ $acl->add(new Zend_Acl_Resource('expense'));
 $acl->add(new Zend_Acl_Resource('expense_account'));
 $acl->add(new Zend_Acl_Resource('index'));
 $acl->add(new Zend_Acl_Resource('inventory'));
-$acl->add(new Zend_Acl_Resource('invoices'));
+$acl->add(new Zend_Acl_Resource('invoices'));   
+$acl->add(new Zend_Acl_Resource('customer_invoices'));
 $acl->add(new Zend_Acl_Resource('install'));
 $acl->add(new Zend_Acl_Resource('billers'));
 $acl->add(new Zend_Acl_Resource('products'));
@@ -57,6 +58,8 @@ $acl->allow('administrator','invoices');
 
 //students only see student page
 $acl->allow('customer', 'customers', 'view');
+$acl->allow('customer', 'customer_invoices', 'manage');
+
 $acl->allow('invoice_creator', 'invoices', 'manage');
 $acl->allow('invoice_creator', 'invoices', 'itemised');
 $acl->allow('invoice_creator', 'invoices', 'total');
@@ -72,7 +75,7 @@ $acl->allow('domain_administrator');
 
 // Administrator inherits nothing, but is allowed all privileges
 $acl->allow('administrator');
-//user - can do everythign except anything in the Settings menu
+//user - can do everything except anything in the Settings menu
 $acl->allow('user');
 $acl->deny('user','options');
 $acl->deny('user','system_defaults');
