@@ -35,7 +35,8 @@ class invoice {
 				custom_field1,
 				custom_field2,
 				custom_field3,
-				custom_field4
+				custom_field4,
+                locked
 			)
 			VALUES
 			(
@@ -51,7 +52,8 @@ class invoice {
 				:custom_field1,
 				:custom_field2,
 				:custom_field3,
-				:custom_field4
+				:custom_field4,
+                0
 				)";
 
 		$pref_group=getPreference($this->preference_id);
