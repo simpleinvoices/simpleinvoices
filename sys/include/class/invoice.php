@@ -227,7 +227,7 @@ class invoice {
 	
 
         /*Check that the sort field is OK*/
-        $validFields = array('index_name','iv.id', 'biller', 'customer', 'invoice_total','owing','date','aging','type','preference','type_id');
+        $validFields = array('index_name','iv.id', 'biller', 'customer', 'invoice_total','owing','date','aging','type','preference','type_id','locked');
 
         if (in_array($sort, $validFields)) {
             $sort = $sort;
@@ -305,6 +305,7 @@ class invoice {
                 SELECT
                      iv.id,
                      iv.index_id as index_id,
+                     iv.locked as locked,
                      b.name AS Biller,
                      c.name AS Customer,
                      sum(ii.total) AS INV_TOTAL,
@@ -339,8 +340,9 @@ class invoice {
             default:
                $sql ="
                 SELECT  
-                       iv.id,
+                       iv.id,       
                        iv.index_id as index_id,
+                       iv.locked as locked, 
                        b.name AS biller,
                        c.name AS customer,
                        (SELECT coalesce(SUM(ii.total), 0) FROM " .
