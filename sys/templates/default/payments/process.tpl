@@ -85,18 +85,24 @@
 	
 	</td>
 </tr>
+
+<!-- If payment amount is greater than invoice amount owed the option to distirbute payment will appear. -->
+<tr>
+		<td>
+			<div class="distribute" style="border-bottom: 1px dashed lightGrey; line-height: 24px;">{$LANG.distribute}</div>
+		</td>
+		<td>
+			<div class="distribute">
+				<select name="distribute">
+					<option value="1" style="font-weight: bold;" selected="">{$LANG.yes}</option>
+					<option value="0" selected="">{$LANG.no}</option>
+				</select>
+			</div>
+		</td> 
+</tr>
 <tr>
 	<td class="details_screen">{$LANG.note}</td>
 	<td colspan="5"><textarea class="editor" name="ac_notes" rows="5" cols="50"></textarea></td>
-</tr>
-
-<tr>
-		<td>{$LANG.distribute}</td>
-
-		<td><select name="distribute">
-		<option value="1" style="font-weight: bold;" selected="">{$LANG.yes}</option>
-		<option value="0" selected="">{$LANG.no}</option></select>
-		</td> 
 </tr>
 
 </table>
@@ -125,4 +131,21 @@
     </tr>
  </table>
  </form>
-
+ 
+ <!-- Javascript that will display the 'distribute payment' option -->
+{literal}
+<script type="text/javascript"> 
+ 
+	$(document).ready(function(){
+	    $(".distribute").css("display","none");
+		$(".ac_amount").bind('change', function () {
+		if ($('input[name=ac_amount]').val() > "{/literal}{$invoice.owing|htmlsafe}{literal}" ) {
+			$(".distribute").slideDown("fast"); //Slide Down Effect
+		} else {
+			$(".distribute").slideUp("fast");	//Slide Up Effect
+		}
+		});
+	});
+ 
+</script> 
+{/literal}
