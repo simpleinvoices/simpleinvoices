@@ -36,7 +36,7 @@ class invoice {
 				custom_field2,
 				custom_field3,
 				custom_field4,
-                locked
+                inv_status,
 			)
 			VALUES
 			(
@@ -53,7 +53,7 @@ class invoice {
 				:custom_field2,
 				:custom_field3,
 				:custom_field4,
-                0
+                'draft'
 				)";
 
 		$pref_group=getPreference($this->preference_id);
@@ -229,7 +229,7 @@ class invoice {
 	
 
         /*Check that the sort field is OK*/
-        $validFields = array('index_name','iv.id', 'biller', 'customer', 'invoice_total','owing','date','aging','type','preference','type_id','locked');
+        $validFields = array('index_name','iv.id', 'biller', 'customer', 'invoice_total','owing','date','aging','type','preference','type_id','inv_status');
 
         if (in_array($sort, $validFields)) {
             $sort = $sort;
@@ -307,7 +307,7 @@ class invoice {
                 SELECT
                      iv.id,
                      iv.index_id as index_id,
-                     iv.locked as locked,
+                     iv.inv_status as inv_status,
                      b.name AS Biller,
                      c.name AS Customer,
                      sum(ii.total) AS INV_TOTAL,
@@ -344,7 +344,7 @@ class invoice {
                 SELECT  
                        iv.id,       
                        iv.index_id as index_id,
-                       iv.locked as locked, 
+                       iv.inv_status as inv_status, 
                        b.name AS biller,
                        c.name AS customer,
                        (SELECT coalesce(SUM(ii.total), 0) FROM " .
