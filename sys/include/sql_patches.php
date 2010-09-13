@@ -1487,6 +1487,14 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['253']['name'] = "Insert invoice_creator user group";
     $patch['253']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('invoice_creator');";
     $patch['253']['date'] = "20080102";
+
+    $patch['254']['name'] = "Add invoice_status to invoice table";
+    $patch['254']['patch'] = "ALTER TABLE ".TB_PREFIX."invoices ADD inv_status varchar(10) default 'draft' ;";
+    $patch['254']['date'] = "20100913";
+
+    $patch['255']['name'] = "Create unique index on user email, duplicate email addresses are not allowed as username";
+    $patch['255']['patch'] = "CREATE UNIQUE INDEX ref_idx_email on ".TB_PREFIX."user (email) ;";  
+    $patch['255']['date'] = "20100913";
 /*
 ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );
 
