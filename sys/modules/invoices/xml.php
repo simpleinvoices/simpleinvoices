@@ -32,13 +32,21 @@ $count = $sth_count_rows->rowCount();
 		$xml .= "<cell>
 					<![CDATA[<a class='index_table' title='".$LANG['quick_view_tooltip']." ".$row['preference']." ".$row['id']."' href='index.php?module=invoices&view=quick_view&id=".$row['id']."'> <img src='".$include_dir."sys/images/common/view.png' class='action' /></a>";
         
-        if ($row['locked']==0) {            
-            $xml .= "
-              <a class='index_table' title='".$LANG['edit_view_tooltip']." ".$row['preference']." ".$row['id']."' href='index.php?module=invoices&view=details&id=".$row['id']."&action=view'><img src='".$include_dir."sys/images/common/edit.png' class='action' /></a>";
-        } else {
-            $xml .= "
-              <a class='index_table' title='".$LANG['quick_view_tooltip']." ".$row['preference']." ".$row['id']."' href='index.php?module=invoices&view=quick_view&id=".$row['id']."'><img src='".$include_dir."sys/images/common/lock.gif' class='action' /></a>";           
-        }
+        switch($row['inv_status'])
+         {
+            case "draft":
+               $xml .= "<a class='index_table' title='".$LANG['edit_view_tooltip']." ".$row['preference']." ".$row['id']."' href='index.php?module=invoices&view=details&id=".$row['id']."&action=view'><img src='".$include_dir."sys/images/common/edit.png' class='action' /></a>";
+               break;
+               
+            case "final":
+               $xml .= "<a class='index_table' title='".$LANG['quick_view_tooltip']." ".$row['preference']." ".$row['id']."' href='index.php?module=invoices&view=quick_view&id=".$row['id']."'><img src='".$include_dir."sys/images/common/lock.gif' class='action' /></a>";           
+               break;
+               
+            case "void":
+               $xml .= "<a class='index_table' title='".$LANG['quick_view_tooltip']." ".$row['preference']." ".$row['id']."' href='index.php?module=invoices&view=quick_view&id=".$row['id']."'><img src='".$include_dir."sys/images/common/lock.gif' class='action' /></a>";           
+               break; 
+         }
+         
         $xml .="
 		<!--2 Print View -->
 			<a class='index_table' title='".$LANG['print_preview_tooltip']." ".$row['preference']." ".$row['id']."' href='index.php?module=export&view=invoice&id=".$row['id']."&format=print' target='_blank'>
