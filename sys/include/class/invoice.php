@@ -344,7 +344,7 @@ class invoice {
                 SELECT  
                        iv.id,       
                        iv.index_id as index_id,
-                       -- iv.locked as locked, 
+		       iv.inv_status as inv_status,
                        b.name AS biller,
                        c.name AS customer,
                        (SELECT coalesce(SUM(ii.total), 0) FROM " .
