@@ -29,7 +29,7 @@ set_include_path(get_include_path() . PATH_SEPARATOR . "./sys/include/");
 
 require_once("sys/include/init_pre.php");    
 
-$include_dir ='';
+$include_dir ='./';
 $smarty_include_dir = '../../../';
 $smarty_embed_path = '../../../';
 
