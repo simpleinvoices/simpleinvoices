@@ -32,25 +32,25 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf1|htmlsafe} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$include_dir}sys/images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>{$product.custom_field1|htmlsafe}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf2|htmlsafe} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$include_dir}sys/images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>{$product.custom_field2|htmlsafe}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf3|htmlsafe} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$include_dir}sys/images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>{$product.custom_field3|htmlsafe}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf4|htmlsafe} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$include_dir}sys/images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>{$product.custom_field4|htmlsafe}</td>
 	</tr>
@@ -70,7 +70,7 @@
 		<tr>
 			<td>
 				<a href="./index.php?module=products&view=details&id={$product.id|htmlsafe}&action=edit" class="positive">
-					<img src="{$smarty_embed_pathx}sys/images/famfam/add.png" alt=""/>
+					<img src="{$include_dir}sys/images/famfam/add.png" alt=""/>
 					{$LANG.edit}
 				</a>
 
@@ -99,7 +99,7 @@
                 {$LANG.cost}
 
 		        <a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_cost" title="{$LANG.cost}">
-                    <img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" />
+                    <img src="{$include_dir}sys/images/common/help-small.png" alt="" />
                 </a>
 
             </td>
@@ -122,25 +122,25 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf1|htmlsafe} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$include_dir}sys/images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" name="custom_field1" size="50" value="{$product.custom_field1|htmlsafe}" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf2|htmlsafe} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$include_dir}sys/images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" name="custom_field2" size="50" value="{$product.custom_field2|htmlsafe}" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf3|htmlsafe} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$include_dir}sys/images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" name="custom_field3" size="50" value="{$product.custom_field3|htmlsafe}" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf4|htmlsafe} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$include_dir}sys/images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" name="custom_field4" size="50" value="{$product.custom_field4|htmlsafe}" /></td>
 	</tr>
@@ -163,14 +163,14 @@
 	<tr>
 		<td>
 			<button type="submit" class="positive" name="save_product" value="{$LANG.save}">
-			    <img class="button_img" src="{$smarty_embed_pathx}sys/images/common/tick.png" alt="" /> 
+			    <img class="button_img" src="{$include_dir}sys/images/common/tick.png" alt="" /> 
 				{$LANG.save}
 			</button>
 
 			<input type="hidden" name="op" value="edit_product">
 		
 			<a href="./index.php?module=products&view=manage" class="negative">
-		        <img src="{$smarty_embed_pathx}sys/images/common/cross.png" alt="" />
+		        <img src="{$include_dir}sys/images/common/cross.png" alt="" />
 	        	{$LANG.cancel}
     		</a>
 	

@@ -16,7 +16,7 @@
         <td>
 
             <a href="index.php?module=inventory&amp;view=add" class="positive">
-                <img src="{$smarty_embed_pathx}sys/images/common/add.png" alt="" />
+                <img src="{$include_dir}sys/images/common/add.png" alt="" />
                 {$LANG.new_inventory_movement}
             </a>
 

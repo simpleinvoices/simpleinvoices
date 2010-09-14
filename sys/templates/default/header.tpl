@@ -9,7 +9,7 @@
 	<meta http-equiv="Content-Script-Type" content="text/javascript" />
 	<meta http-equiv="Content-Style-Type" content="text/css" />
 	<meta name="robots" content="noindex, nofollow" />
-	<link rel="shortcut icon" href="{$smarty_embed_pathx}sys/images/common/favicon.ico" />
+	<link rel="shortcut icon" href="{$include_dir}sys/images/common/favicon.ico" />
 
 {literal}
 	<script type="text/javascript" src="{/literal}{$include_dir}{literal}sys/include/jquery/jquery-1.2.6.min.js"></script>
