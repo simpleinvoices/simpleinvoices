@@ -214,11 +214,15 @@ function run_sql_patch($id, $patch) {
 		
 		//patch hasn't been run
 		#so do the bloody patch
-		$db->query($patch['patch']) or die(htmlsafe(end($dbh->errorInfo())));
+        try {
+		  $db->query($patch['patch']); // or die(htmlsafe(end($dbh->errorInfo())));
+          $display_block  = "\n    <tr><td>SQL patch $escaped_id, $patch_name <i>has</i> been applied to the database</td></tr>";
+        } catch (Exception $e){
+          $display_block  = "\n    <tr><td>SQL patch $escaped_id, $patch_name <i>has</i>><b> NOT </b>been applied to the database due to $e </td></tr>";
+        }
 		
 
-		$display_block  = "\n	<tr><td>SQL patch $escaped_id, $patch_name <i>has</i> been applied to the database</td></tr>";
-
+		
 		# now update the ".TB_PREFIX."sql_patchmanager table
 		
 		
