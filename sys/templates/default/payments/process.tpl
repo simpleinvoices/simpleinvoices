@@ -24,7 +24,7 @@
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.amount}</td>
-	<td colspan="5"><input type="text" id='ac_amount' name="ac_amount" size="25" value="{$invoice.owing|htmlsafe}" />
+	<td colspan="5"><input type="text" id='ac_amount' name="ac_amount" size="25" value="{$invoice.owing|htmlsafe}"  onchange="checkOverpayments()" />
 	<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_auto_amount" title="{$LANG.process_payment_auto_amount}"><img src="{$include_dir}sys/images/common/help-small.png" alt="" /></a>
 	</td>
 </tr>
@@ -42,7 +42,7 @@
 	<td class="details_screen">{$LANG.invoice}
 	</td>
 	<td>
-<select name="invoice_id" class="validate[required]">
+<select name="invoice_id" class="validate[required]" onchange="payment_item_change($(this).val());">
     <option value=''></option>
     {foreach from=$invoice_all item=invoice}
         <option value="{$invoice.id|htmlsafe}">{$invoice.index_name|htmlsafe} ({$invoice.biller|htmlsafe}, {$invoice.customer|htmlsafe}, {$LANG.total} {$invoice.invoice_total|siLocal_number} : {$LANG.owing} {$invoice.owing|siLocal_number})</option>
@@ -53,7 +53,7 @@
 <tr>
 <tr>
 	<td class="details_screen">{$LANG.amount}</td>
-	<td colspan="5"><input type="text" id='ac_amount' name="ac_amount" size="25" /></td>
+	<td colspan="5"><input type="text" id='ac_amount' name="ac_amount" size="25" onchange="checkOverpayments()" /></td>
 </tr>
 <tr>
 	<div class="demo-holder">
@@ -138,14 +138,34 @@
  
 	$(document).ready(function(){
 	    $(".distribute").css("display","none");
-		$("#ac_amount").bind('change', function () {
+	});
+	
+	function checkOverpayments() {
 		if ($('input[name=ac_amount]').val() > "{/literal}{$invoice.owing|htmlsafe}{literal}" ) {
 			$(".distribute").slideDown("fast"); //Slide Down Effect
 		} else {
 			$(".distribute").slideUp("fast");	//Slide Up Effect
 		}
-		});
-	});
+	};
+	
+	/*
+	* Payment Change - updates payment details AJAX
+	*/
+	function payment_item_change(payment){
+	
+      	$('#gmail_loading').show();
+		$.ajax({
+			type: 'GET',
+			url: './index.php?module=payments&view=payment_ajax&id='+payment,
+			data: "id: "+payment,
+			dataType: "json",
+			success: function(data){
+				$('#gmail_loading').hide();
+				$('input[name=ac_amount]').attr("value",data['owing']);
+			}
+	
+   		 });
+     };
  
 </script> 
 {/literal}
