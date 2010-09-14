@@ -116,12 +116,15 @@ class db
 			//$sth->closeCursor();
 			if ($sth->errorCode() > '0')
 			{
-				simpleInvoicesError('sql',$sth->errorInfo(),$sqlQuery);
+//				simpleInvoicesError('sql',$sth->errorInfo(),$sqlQuery);
+                throw new Exception($sth->errorInfo().' '.$sqlQuery);
 			}
 		} catch(Exception $e){
 			echo $e->getMessage();
 			echo "Dude, what happened to your query?:<br /><br /> ".htmlsafe($sqlQuery)."<br />".htmlsafe(end($this->_db->errorInfo()));
 			$sth = NULL;
+            // re- throw
+            throw new Exception($e->getMessage);
 		}
 		//$this->connection->closeCursor();
 		return $sth;
