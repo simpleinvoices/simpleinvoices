@@ -24,7 +24,7 @@
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.amount}</td>
-	<td colspan="5"><input type="text" name="ac_amount" size="25" value="{$invoice.owing|htmlsafe}" />
+	<td colspan="5"><input type="text" id='ac_amount' name="ac_amount" size="25" value="{$invoice.owing|htmlsafe}" />
 	<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_auto_amount" title="{$LANG.process_payment_auto_amount}"><img src="{$smarty_embed_pathx}sys/images/common/help-small.png" alt="" /></a>
 	</td>
 </tr>
@@ -53,7 +53,7 @@
 <tr>
 <tr>
 	<td class="details_screen">{$LANG.amount}</td>
-	<td colspan="5"><input type="text" name="ac_amount" size="25" /></td>
+	<td colspan="5"><input type="text" id='ac_amount' name="ac_amount" size="25" /></td>
 </tr>
 <tr>
 	<div class="demo-holder">
@@ -138,7 +138,7 @@
  
 	$(document).ready(function(){
 	    $(".distribute").css("display","none");
-		$(".ac_amount").bind('change', function () {
+		$("#ac_amount").bind('change', function () {
 		if ($('input[name=ac_amount]').val() > "{/literal}{$invoice.owing|htmlsafe}{literal}" ) {
 			$(".distribute").slideDown("fast"); //Slide Down Effect
 		} else {
