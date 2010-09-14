@@ -15,6 +15,7 @@ define("BROWSE","browse");
 $include_dir = isset($include_dir) ? $include_dir : '../';
 $smarty_include_dir = isset($smarty_include_dir) ? $smarty_include_dir : '../../../';
 $smarty_embed_path = isset($smarty_embed_path) ? $smarty_embed_path : '../../../';
+$tpl_path = isset($tpl_path) ? $tpl_path : '../';
 $app = isset($app) ? $app : 'app';
 $app_folder = $include_dir . $app;
 

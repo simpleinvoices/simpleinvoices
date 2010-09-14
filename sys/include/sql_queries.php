@@ -2596,14 +2596,15 @@ function pdfThis($html,$file_location="",$pdfname)
 {
 
 	global $config;
+	global $include_dir;
 
 //	set_include_path("../../../../lib/pdf/");
-	require_once('../lib/pdf/config.inc.php');
-	require_once('../lib/pdf/pipeline.factory.class.php');
-	require_once('../lib/pdf/pipeline.class.php');
-	parse_config_file('../lib/pdf/html2ps.config');
+	require_once($include_dir . 'lib/pdf/config.inc.php');
+	require_once($include_dir . 'lib/pdf/pipeline.factory.class.php');
+	require_once($include_dir . 'lib/pdf/pipeline.class.php');
+	parse_config_file($include_dir . 'lib/pdf/html2ps.config');
 
-	require_once("./include/init.php");	// for getInvoice() and getPreference()
+	require_once($include_dir . "sys/include/init.php");	// for getInvoice() and getPreference()
 	#$invoice_id = $_GET['id'];
 	#$invoice = getInvoice($invoice_id);
 

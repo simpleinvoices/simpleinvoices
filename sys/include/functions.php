@@ -39,13 +39,15 @@ function getLogoList($folder) {
 
 function getLogo($biller) {
 
+    global $app;
+
 	$url = getURL();
 
 	if(!empty($biller['logo'])) {
-		return $url."/templates/invoices/logos/$biller[logo]";
+		return $url."/".$app."/logos/$biller[logo]";
 	}
 	else {
-		return $url."/templates/invoices/logos/_default_blank_logo.png";
+		return $url."/".$app."/logos/_default_blank_logo.png";
 	}
 }
 

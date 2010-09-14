@@ -32,6 +32,7 @@ require_once("sys/include/init_pre.php");
 $include_dir ='./';
 $smarty_include_dir = '../../../';
 $smarty_embed_path = '../../../';
+$tpl_path = '../';
 
 // look to see if there's another language in the parameter list
 if (!isset($cust_language)) {

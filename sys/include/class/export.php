@@ -88,6 +88,9 @@ class export
 		//echo "export - get data";
 		global $smarty;
 		global $siUrl;
+		global $include_dir;
+		global $smarty_include_dir;
+		global $tpl_path;
 		
 		switch ($this->module)
 		{
@@ -160,7 +163,7 @@ class export
 					
 				}
 
-				$templatePath = "./templates/default/statement/index.tpl";
+				$templatePath = $include_dir . "/templates/default/statement/index.tpl";
 			
 				$biller_details = getBiller($this->biller_id);
 				$customer_details = customer::get($this->customer_id);
@@ -217,7 +220,7 @@ class export
 				$css = $siUrl."/templates/invoices/default/style.css";
 				$smarty -> assign('css',$css);
 				
-                $templatePath = "./templates/default/payments/print.tpl";
+                $templatePath = $include_dir . "/templates/default/payments/print.tpl";
 				$data = $smarty -> fetch(".".$templatePath);
                 break;
             }
@@ -242,10 +245,11 @@ class export
 				/*Set the template to the default*/
 				$template = $defaults['template'];
 			
-				$templatePath = "./templates/invoices/${template}/template.tpl";
-				$template_path = "../templates/invoices/${template}";
-				$css = $siUrl."/templates/invoices/${template}/style.css";
-				$pluginsdir = "./templates/invoices/${template}/plugins/";
+				$templatePath = $include_dir . "sys/templates/invoices/${template}/template.tpl";
+				$template_dir = $tpl_path . "sys/templates/invoices/${template}/template.tpl";
+				$template_path = $include_dir . "sys/templates/invoices/${template}";
+				$css = $siUrl ."/sys/templates/invoices/${template}/style.css";
+				$pluginsdir =  $include_dir ."sys/templates/invoices/${template}/plugins/";
 
 				//$smarty = new Smarty();
 				
@@ -268,7 +272,7 @@ class export
 					$smarty -> assign('css',$css);
 					$smarty -> assign('customFieldLabels',$customFieldLabels);
 					
-					$data = $smarty -> fetch(".".$templatePath);
+					$data = $smarty -> fetch($template_dir);
 				
 				}
 				
