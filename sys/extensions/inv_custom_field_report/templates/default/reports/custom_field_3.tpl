@@ -53,7 +53,7 @@
     <tr>
         <td>
             <button type="submit" class="positive" name="submit" value="statement_report">
-                <img class="button_img" src="{$smarty_embed_pathx}sys/images/common/tick.png" alt="" /> 
+                <img class="button_img" src="{$include_dir}sys/images/common/tick.png" alt="" /> 
                 Run report
             </button>
 
