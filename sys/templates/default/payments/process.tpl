@@ -24,7 +24,7 @@
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.amount}</td>
-	<td colspan="5"><input type="text" id='ac_amount' name="ac_amount" size="25" value="{$invoice.owing|htmlsafe}" />
+	<td colspan="5"><input type="text" id='ac_amount' name="ac_amount" size="25" rel='{$invoice.owing|htmlsafe}' value="{$invoice.owing|htmlsafe}" />
 	<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_auto_amount" title="{$LANG.process_payment_auto_amount}"><img src="{$include_dir}sys/images/common/help-small.png" alt="" /></a>
 	</td>
 </tr>
