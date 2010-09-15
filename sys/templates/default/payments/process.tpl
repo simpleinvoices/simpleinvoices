@@ -24,7 +24,7 @@
 </tr>
 <tr>
 	<td class="details_screen">{$LANG.amount}</td>
-	<td colspan="5"><input type="text" id='ac_amount' name="ac_amount" size="25" value="{$invoice.owing|htmlsafe}"  onchange="checkOverpayments()" />
+	<td colspan="5"><input type="text" id='ac_amount' name="ac_amount" size="25" value="{$invoice.owing|htmlsafe}" />
 	<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_auto_amount" title="{$LANG.process_payment_auto_amount}"><img src="{$include_dir}sys/images/common/help-small.png" alt="" /></a>
 	</td>
 </tr>
@@ -53,7 +53,7 @@
 <tr>
 <tr>
 	<td class="details_screen">{$LANG.amount}</td>
-	<td colspan="5"><input type="text" id='ac_amount' name="ac_amount" size="25" onchange="checkOverpayments()" /></td>
+	<td colspan="5"><input type="text" id='ac_amount' name="ac_amount" size="25" /></td>
 </tr>
 <tr>
 	<div class="demo-holder">
@@ -140,6 +140,21 @@
 	    $(".distribute").css("display","none");
 	});
 	
+
+	/*
+	* Overpayments check
+	*/
+	$('#ac_amount').change(function() {
+		//  alert('{/literal}{$invoice.owing|htmlsafe}{literal}  | called. ' + $('input[name=ac_amount]').attr("rel" ));
+
+		if ($('input[name=ac_amount]').val() >  $('input[name=ac_amount]').attr("rel" )) {
+			$(".distribute").slideDown("fast"); //Slide Down Effect
+		} else {
+			$(".distribute").slideUp("fast");	//Slide Up Effect
+		}
+
+	});
+/*
 	function checkOverpayments() {
 		if ($('input[name=ac_amount]').val() > "{/literal}{$invoice.owing|htmlsafe}{literal}" ) {
 			$(".distribute").slideDown("fast"); //Slide Down Effect
@@ -147,7 +162,7 @@
 			$(".distribute").slideUp("fast");	//Slide Up Effect
 		}
 	};
-	
+*/	
 	/*
 	* Payment Change - updates payment details AJAX
 	*/
@@ -162,6 +177,7 @@
 			success: function(data){
 				$('#gmail_loading').hide();
 				$('input[name=ac_amount]').attr("value",data['owing']);
+				$('input[name=ac_amount]').attr("rel",data['owing']);
 			}
 	
    		 });
