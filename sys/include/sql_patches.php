@@ -1495,6 +1495,11 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['255']['name'] = "Create unique index on user email, duplicate email addresses are not allowed as username";
     $patch['255']['patch'] = "CREATE UNIQUE INDEX ref_idx_email on ".TB_PREFIX."user (email) ;";  
     $patch['255']['date'] = "20100913";
+
+    $patch['256']['name'] = "Create unique customer role";
+    $patch['256']['patch'] = "insert into ".TB_PREFIX."user_role values ('customer') ;";  
+    $patch['256']['date'] = "20100914";
+    
 /*
 ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );
 
