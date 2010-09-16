@@ -19,19 +19,20 @@ checkLogin();
 
 //all funky xml - sql stuff done in xml.php
 
-$pageActive = "invoice";
+$pageActive = "customer_invoice";
 
 //$smarty -> assign("invoices",$invoices);
 $smarty -> assign("number_of_invoices",$number_of_invoices);
 
 $smarty -> assign('pageActive', $pageActive);
 $smarty -> assign('active_tab', '#money');
+$smarty -> assign('userRole', $auth_session -> role_name);
 
 $having="";
 if(isset($_GET['having']))
 {
     $having = "&having=".$_GET['having'];
 }
-$url =  'index.php?module=invoices&view=xml'.$having;
+$url =  'index.php?module=customer_invoices&view=xml'.$having;
 
 $smarty -> assign('url', $url);
