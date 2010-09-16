@@ -26,13 +26,29 @@
 	</div>
 </div>
 
-<div id="tabmenu" class="flora" >
+{ if $userRole == "customer"}
+  <div id="tabmenu" class="flora" >
+    <ul>
+        <li><a href="#myinvoices"><span>{$LANG.myinvoices}</span></a></li>
+        <li style="float:right" class="menu_setting"><a href="#setting"><span>{$LANG.settings}</span></a></li>
+    </ul>
+
+    <div id="myinvoices">
+        <ul class="subnav">
+            <li><a { if $pageActive == "due"} class="active" {/if} href="index.php?module=index&amp;view=index">{$LANG.invoices_due}</a></li>
+            <li><a { if $pageActive == "payed"} class="active" {/if} href="index.php?module=reports&amp;view=index">{$LANG.invoices_payed}</a></li>
+        </ul>
+    </div>
+{/if}
+
+
+{ if $userRole != "customer"}
+  <div id="tabmenu" class="flora" >
 	<ul>
 		<li><a href="#home"><span>{$LANG.home}</span></a></li>
 		<li><a href="#money"><span>{$LANG.money}</span></a></li>
 		<li><a href="#people"><span>{$LANG.people}</span></a></li>
 		<li><a href="#product"><span>{$LANG.products}</span></a></li>
-        <li><a href="#myinvoices"><span>{$LANG.myinvoices}</span></a></li>
         <li style="float:right" class="menu_setting"><a href="#setting"><span>{$LANG.settings}</span></a></li>
 	</ul>
 
@@ -42,13 +58,6 @@
 			<li><a { if $pageActive == "report"} class="active" {/if} href="index.php?module=reports&amp;view=index">{$LANG.all_reports}</a></li>
 		</ul>
 	</div>
-
-    <div id="myinvoices">
-        <ul class="subnav">
-            <li><a { if $pageActive == "due"} class="active" {/if} href="index.php?module=index&amp;view=index">{$LANG.invoices_due}</a></li>
-            <li><a { if $pageActive == "payed"} class="active" {/if} href="index.php?module=reports&amp;view=index">{$LANG.invoices_payed}</a></li>
-        </ul>
-    </div>
 
 	<div id="money">
 		<ul class="subnav">
@@ -129,7 +138,7 @@
 			<li><a { if $pageActive == "backup"} class="active"{/if} href="index.php?module=options&amp;view=backup_database">{$LANG.backup_database}</a></li>
 		</ul>
 	</div>
-    
+  {/if}  
 
 </div>
 
