@@ -55,6 +55,7 @@ $acl->allow(null,'auth');
 $acl->allow(null,'api');
 //TODO: not good !!! - no acl for invoiecs as can't get html2pdf to work with zend_auth :(
 $acl->allow('administrator','invoices');
+$acl->allow('customer','invoices');      
 
 //students only see student page
 $acl->allow('customer', 'customers', 'view');
@@ -75,6 +76,7 @@ $acl->allow('domain_administrator');
 
 // Administrator inherits nothing, but is allowed all privileges
 $acl->allow('administrator');
+$acl->allow('customer');
 //user - can do everything except anything in the Settings menu
 $acl->allow('user');
 $acl->deny('user','options');
