@@ -6,7 +6,6 @@
 * License:
 *	 GPL v3 or above
 */
-
 $menu = false;
 // we must never forget to start the session
 //so config.php works ok without using index.php define browse
@@ -84,6 +83,12 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 
         $usertable = TB_PREFIX.'user';
         $userroletable = TB_PREFIX.'user_role';
+        // find out if the role is customer
+        $result = $zendDb->fetchRow('
+            select urt.name as name from '.$userroletable.' urt, '.$usertable.' ut where ut.email= ? and urt.id=ut.role_id', $userEmail);      
+        $userRoleId = $result['name'];
+        
+        
         
 		//patch 147 adds user_role table - need to accomodate pre and post patch 147
 		if (getNumberOfDoneSQLPatches() < "147")
@@ -111,6 +116,7 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 		* chuck the user details sans password into the Zend_auth session
 		*/
 		$authNamespace = new Zend_Session_Namespace('Zend_Auth');
+        
 		foreach ($result as $key => $value)
 		{
 			$authNamespace->$key = $value;
