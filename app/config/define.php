@@ -1,6 +1,6 @@
 <?php
 
-define("TB_PREFIX","si_"); // default table prefix - old var $tb_prefix = "si_";
+define("TB_PREFIX","six_"); // default table prefix - old var $tb_prefix = "si_";
 
 define("ENABLED","1"); // 
 define("DISABLED","0"); // 
@@ -9,6 +9,19 @@ define("DISABLED","0"); //
 define("total_invoice","1"); // 
 define("itemised_invoice","2"); // 
 define("consulting_invoice","3"); // 
+
+//===============================================================================
+// CUSTOMER LOGIN SECION
+//===============================================================================
+//Customer login -- enable to allow customers to login
+define("ENABLE_CUSTOMER_LOGIN","true"); //
+// For eu regulations only 'locked' invoices are allowed to communicate to 
+// customers. By setting option below to true means that customers can 
+// look at their invoices, but that the invoice might change at any
+// time. 
+define("VIEW_DRAFT_INVOICES","false");
+//============================================== end customer login section =====
+
 
 //To turn logging on set the below to true - not needed as it is set in System Defaults
 #define("LOGGING",false);
