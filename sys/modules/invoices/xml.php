@@ -15,6 +15,12 @@ $invoice->sort=$sort;
 $invoice->query=$_REQUEST['query'];
 $invoice->qtype=$_REQUEST['qtype'];
 $invoice->sort=$sort;
+
+// if role is customer then select only on customer!!!
+if ($auth_session -> role_name == "customer") {
+    $invoice->customer = $auth_session -> email;
+}
+
 $sth = $invoice->select_all('', $dir, $rp, $page, $having);
 $sth_count_rows = $invoice->select_all('count',$dir, $rp, $page, $having);
 
