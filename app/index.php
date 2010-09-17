@@ -133,12 +133,24 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 				}
 				$menu = false;
 			} else {
-				//If no invoices in db then show home page as default - else show Manage Invoices page
+				//If no invoices in db then show home page as default - else show Manage Invoices page  
+                // depending on the user role it's the main menu or the customer menu'
+                // albert --- count should be depending on role
 				if ($module==null)
 				{
-					//if ( invoice::are_there_any() > "0" )  
-					$module = "invoices" ;
-					$view = "manage";
+					if ( invoice::are_there_any() > "0" )  
+					{                        
+   			            $module = "invoices" ;
+						$view = "manage";
+					} else { 
+					    $module = "index" ;
+						$view = "index";
+					}
+
+//					//if ( invoice::are_there_any() > "0" )  
+////					$module = "invoices" ;
+//					$view = "manage";
+
 				}
 			}
 		}
