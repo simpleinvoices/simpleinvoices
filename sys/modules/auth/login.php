@@ -143,7 +143,7 @@ foreach($languages as $language) {
     if($language->shortname == $cust_language) {
         $selected = " selected ";
     }
-    $value .= "<option $selected value='".htmlsafe($language->shortname)."'>".htmlsafe("$language->name ($language->englishname) ($language->shortname)")."</option>";
+    $value .= "<option $selected value='".htmlsafe($language->shortname)."'>".htmlsafe("$language->name")."</option>";
 }
 $value .= "</select>";
 
