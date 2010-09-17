@@ -27,4 +27,5 @@ require_once($include_dir .'sys/modules/invoices/invoice.php');
 $smarty -> assign('pageActive', 'invoice_new');
 $smarty -> assign('subPageActive', 'invoice_new_itemised');
 $smarty -> assign('active_tab', '#money');
+$smarty -> assign('userRole', $auth_session -> role_name);     
 ?>
