@@ -81,8 +81,8 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 		* grab user data  from the datbase
 		*/
 
-        	$usertable = TB_PREFIX.'user';
-	        $userroletable = TB_PREFIX.'user_role';
+        $usertable = TB_PREFIX.'user';
+        $userroletable = TB_PREFIX.'user_role';
         
 		//patch 147 adds user_role table - need to accomodate pre and post patch 147
 		if (getNumberOfDoneSQLPatches() < "147")
