@@ -26,24 +26,25 @@
 	</div>
 </div>
 
-{ if $userRole == "customer"}
-  <div id="tabmenu" class="flora" >
-    <ul>
+
+<div id="tabmenu" class="flora" >
+
+    {if $auth_session->role_name == "customer"}
+
+        <ul>
         <li><a href="#myinvoices"><span>{$LANG.myinvoices}</span></a></li>
-        <li style="float:right" class="menu_setting"><a href="#setting"><span>{$LANG.settings}</span></a></li>
-    </ul>
+	<li style="float:right" class="menu_setting"><a href="#setting"><span>{$LANG.settings}</span></a></li>
+	    </ul>
 
-    <div id="myinvoices">
-        <ul class="subnav">
-            <li><a { if $pageActive == "due"} class="active" {/if} href="index.php?module=index&amp;view=index">{$LANG.invoices_due}</a></li>
-            <li><a { if $pageActive == "payed"} class="active" {/if} href="index.php?module=reports&amp;view=index">{$LANG.invoices_payed}</a></li>
-        </ul>
-    </div>
-{/if}
+	    <div id="myinvoices">
+		<ul class="subnav">
+		    <li><a { if $pageActive == "due"} class="active" {/if} href="index.php?module=index&amp;view=index">{$LANG.invoices_due}</a></li>
+		    <li><a { if $pageActive == "payed"} class="active" {/if} href="index.php?module=reports&amp;view=index">{$LANG.invoices_payed}</a></li>
+		</ul>
+	    </div>
 
+   {else}
 
-{ if $userRole != "customer"}
-  <div id="tabmenu" class="flora" >
 	<ul>
 		<li><a href="#home"><span>{$LANG.home}</span></a></li>
 		<li><a href="#money"><span>{$LANG.money}</span></a></li>
@@ -138,7 +139,7 @@
 			<li><a { if $pageActive == "backup"} class="active"{/if} href="index.php?module=options&amp;view=backup_database">{$LANG.backup_database}</a></li>
 		</ul>
 	</div>
-  {/if}  
+	{/if}  
 
 </div>
 

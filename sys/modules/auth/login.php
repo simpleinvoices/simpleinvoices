@@ -81,14 +81,8 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 		* grab user data  from the datbase
 		*/
 
-        $usertable = TB_PREFIX.'user';
-        $userroletable = TB_PREFIX.'user_role';
-        // find out if the role is customer
-        $result = $zendDb->fetchRow('
-            select urt.name as name from '.$userroletable.' urt, '.$usertable.' ut where ut.email= ? and urt.id=ut.role_id', $userEmail);      
-        $userRoleId = $result['name'];
-        
-        
+        	$usertable = TB_PREFIX.'user';
+	        $userroletable = TB_PREFIX.'user_role';
         
 		//patch 147 adds user_role table - need to accomodate pre and post patch 147
 		if (getNumberOfDoneSQLPatches() < "147")
