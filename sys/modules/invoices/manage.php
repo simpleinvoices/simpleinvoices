@@ -26,6 +26,8 @@ $smarty -> assign("number_of_invoices",$number_of_invoices);
 
 $smarty -> assign('pageActive', $pageActive);
 $smarty -> assign('active_tab', '#money');
+$smarty -> assign('userRole', $auth_session -> role_name);
+
 
 $having="";
 if(isset($_GET['having']))
