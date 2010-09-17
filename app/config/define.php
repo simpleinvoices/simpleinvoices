@@ -1,6 +1,6 @@
 <?php
 
-define("TB_PREFIX","six_"); // default table prefix - old var $tb_prefix = "si_";
+define("TB_PREFIX","si_"); // default table prefix - old var $tb_prefix = "si_";
 
 define("ENABLED","1"); // 
 define("DISABLED","0"); // 
