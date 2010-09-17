@@ -21,6 +21,8 @@
 			{else}
 				<a href="index.php?module=auth&amp;view=logout">{$LANG.logout}</a>
 			{/if}
+        {else}
+             |<b>{$LANG.auth_disabled}</b>
 		{/if}
 	
 	</div>
@@ -33,13 +35,13 @@
 
         <ul>
         <li><a href="#myinvoices"><span>{$LANG.myinvoices}</span></a></li>
-	<li style="float:right" class="menu_setting"><a href="#setting"><span>{$LANG.settings}</span></a></li>
+	<li style="float:right" class="menu_setting"><span>{$invoiceStatus}</span></a></li>
 	    </ul>
 
 	    <div id="myinvoices">
 		<ul class="subnav">
-		    <li><a { if $pageActive == "due"} class="active" {/if} href="index.php?module=index&amp;view=index">{$LANG.invoices_due}</a></li>
-		    <li><a { if $pageActive == "payed"} class="active" {/if} href="index.php?module=reports&amp;view=index">{$LANG.invoices_payed}</a></li>
+		    <li><a { if $pageActive == "due"} class="active" {/if} href="index.php?module=invoices&amp;view=manage&amp;having=money_owed">{$LANG.invoices_due}</a></li>
+		    <li><a { if $pageActive == "paid"} class="active" {/if} href="index.php?module=invoices&amp;view=manage&amp;having=money_paid">{$LANG.invoices_paid}</a></li>
 		</ul>
 	    </div>
 
