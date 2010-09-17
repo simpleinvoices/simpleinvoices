@@ -46,19 +46,11 @@
    {else}
 
 	<ul>
-		<li><a href="#home"><span>{$LANG.home}</span></a></li>
 		<li><a href="#money"><span>{$LANG.money}</span></a></li>
 		<li><a href="#people"><span>{$LANG.people}</span></a></li>
 		<li><a href="#product"><span>{$LANG.products}</span></a></li>
         <li style="float:right" class="menu_setting"><a href="#setting"><span>{$LANG.settings}</span></a></li>
 	</ul>
-
-	<div id="home">
-		<ul class="subnav">
-			<li><a { if $pageActive == "dashboard"} class="active" {/if} href="index.php?module=index&amp;view=index">{$LANG.dashboard}</a></li>
-			<li><a { if $pageActive == "report"} class="active" {/if} href="index.php?module=reports&amp;view=index">{$LANG.all_reports}</a></li>
-		</ul>
-	</div>
 
 	<div id="money">
 		<ul class="subnav">
@@ -80,7 +72,7 @@
 				{ if $subPageActive == "payment_eway"} <li><a class="active active_subpage" href="#">{$LANG.eway}</a></li>{/if}
 				{ if $subPageActive == "payment_filter_invoice"} <li><a class="active active_subpage" href="#">{$LANG.payments_filtered} {$preference.pref_inv_wording|htmlsafe} {$smarty.get.id|htmlsafe}</a></li>{/if}
 				{ if $subPageActive == "payment_filter_customer"} <li><a class="active active_subpage" href="#">{$LANG.payments_filtered_customer} '{$customer.name}'</a></li>{/if}
-			<li><a { if $pageActive == "report_sale"} class="active" {/if} href="index.php?module=reports&amp;view=report_sales_total">{$LANG.sales_report}</a></li>
+			<li><a { if $pageActive == "report"} class="active" {/if} href="index.php?module=reports&amp;view=index">{$LANG.reports}</a></li>
 		</ul>
 	</div>
 

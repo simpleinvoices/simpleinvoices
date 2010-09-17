@@ -21,6 +21,22 @@
 					}			
 			}
 
+			function do_filter_due(){
+			    window.location = 'index.php?module=invoices&view=manage&having=money_owed';
+			}
+			function do_filter_paid(){
+			    window.location = 'index.php?module=invoices&view=manage&having=paid';
+			}
+			function do_filter_draft(){
+			    window.location = 'index.php?module=invoices&view=manage&having=draft';
+			}
+			function do_filter_real(){
+			    window.location = 'index.php?module=invoices&view=manage&having=real';
+			}
+			function do_filter_all(){
+			    window.location = 'index.php?module=invoices&view=manage';
+			}
+
 
 			$("#manageGrid").flexigrid
 			(
@@ -38,13 +54,17 @@
 				{display: '{/literal}{$LANG.aging}{literal}', name : 'aging', width : 10 * percentage_width, sortable : true, align: 'left'}
 				
 				],
-				/*
+				
 			buttons : [
-				{name: 'Add', bclass: 'add', onpress : test},
-				{name: 'Delete', bclass: 'delete', onpress : test},
-				{separator: true}
+				{name: '{/literal}{$LANG.filters}{literal}'},
+				{separator: true},
+				{name: '{/literal}{$LANG.due}{literal}', bclass: 'filter_due', onpress : do_filter_due},
+				{name: '{/literal}{$LANG.paid}{literal}', bclass: 'filter_paid', onpress : do_filter_paid},
+				{name: '{/literal}{$LANG.draft}{literal}', bclass: 'filter_draft', onpress : do_filter_draft},
+				{name: '{/literal}{$LANG.real}{literal}', bclass: 'filter_real', onpress : do_filter_real},
+				{name: '{/literal}{$LANG.all}{literal}', bclass: 'filter_all', onpress : do_filter_all}
 				],
-			*/
+			
 			searchitems : [
 				{display: '{/literal}{$LANG.invoice_number}{literal}', name : 'iv.id'},
 				{display: '{/literal}{$LANG.biller}{literal}', name : 'b.name'},

@@ -336,6 +336,7 @@ $LANG['need_help'] = "Need help?";//1
 $LANG['new_recurrence'] = "New recurrence";//1
 $LANG['new_inventory_movement'] = "New inventory movement";//1
 $LANG['new_invoice'] = "New invoice";//1
+$LANG['New_Invoice'] = "New Invoice";//1
 $LANG['new_invoice_consulting'] = "New Invoices - Consulting";//1
 $LANG['new_invoice_itemised'] = "New Invoices - Itemised";//1
 $LANG['new_invoice_total'] = "New Invoices - Total";//1
