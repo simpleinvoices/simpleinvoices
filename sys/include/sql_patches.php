@@ -1497,7 +1497,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['255']['date'] = "20100913";
 
     $patch['256']['name'] = "Create unique customer role";
-    $patch['256']['patch'] = "insert into ".TB_PREFIX."user_role values ('customer') ;";  
+    $patch['256']['patch'] = "insert into ".TB_PREFIX."user_role (name) values ('customer') ;";  
     $patch['256']['date'] = "20100914";
     
 /*
