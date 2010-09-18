@@ -12,18 +12,30 @@
 *}
 
 {if ($userRole != "customer")} 
-  <table class="buttons" align="center">
-      <tr>
-          <td>
-        
-              <a href="index.php?module=invoices&amp;view=itemised" class="positive">
-                  <img src="{$include_dir}sys/images/common/add.png" alt="" />
-                  {$LANG.new_invoice}
-              </a>
+        <table class="buttons" align="center">
+        <tr>
+            <td>
+            <a href="index.php?module=invoices&amp;view=itemised" class="positive">
+            <img src="{$include_dir}sys/images/common/add.png" alt=""/>
+            {$LANG.New_Invoice}
+            </a>
+        </td>
+        <td>
+            <a href="index.php?module=customers&amp;view=add" class="">
+            <img src="{$include_dir}sys/images/common/vcard_add.png" alt=""/>
+            {$LANG.add_customer}
+            </a>
+        </td>
+        <td>
+            <a href="index.php?module=products&amp;view=add" class="">
+            <img src="{$include_dir}sys/images/common/cart_add.png" alt=""/>
+            {$LANG.add_product}
+            </a>
+            </td>
+        </tr>
+        </table>
+    <br />
 
-          </td>
-      </tr>
-  </table>
 {/if}
 
 {if $number_of_invoices.count == 0}
@@ -37,22 +49,6 @@
 	<br />
 {else}
 
-   {if ($userRole != "customer")} 
-      <br />
-      <span class="welcome">
-         {$LANG.filters}:
-      <a href="index.php?module=invoices&amp;view=manage&amp;having=money_owed">{$LANG.due}</a> : 
-      <a href="index.php?module=invoices&amp;view=manage&amp;having=paid">{$LANG.paid}</a> : 
-      <a href="index.php?module=invoices&amp;view=manage&amp;having=draft">{$LANG.draft}</a> : 
-      <a href="index.php?module=invoices&amp;view=manage&amp;having=real">{$LANG.real}</a> : 
-      <a href="index.php?module=invoices&amp;view=manage">{$LANG.all}</a> 
-
-      </span>
-      <br />
-      <br />
-      <br />
-    {/if}
-  
 	<table id="manageGrid" style="display:none"></table>
 	{include file="$smarty_embed_path/sys/modules/invoices/manage.js.php"}
 
