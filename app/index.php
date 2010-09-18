@@ -133,23 +133,14 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 				}
 				$menu = false;
 			} else {
-				//If no invoices in db then show home page as default - else show Manage Invoices page  
-                // depending on the user role it's the main menu or the customer menu'
-                // albert --- count should be depending on role
+				// JK-Manage Invoice now the default home page - old index page wasnt any good 
+                // albert-depending on the user role it's the main menu or the customer menu'
+                // JK-this affects the page displayed - not the menu
 				if ($module==null)
 				{
-					if ( invoice::are_there_any() > "0" )  
-					{                        
-   			            $module = "invoices" ;
-						$view = "manage";
-					} else { 
-					    $module = "index" ;
-						$view = "index";
-					}
-
-//					//if ( invoice::are_there_any() > "0" )  
-////					$module = "invoices" ;
-//					$view = "manage";
+					//if ( invoice::are_there_any() > "0" ) 
+					$module = "invoices" ;
+					$view = "manage";
 
 				}
 			}
