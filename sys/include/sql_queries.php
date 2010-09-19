@@ -923,6 +923,15 @@ function getDefaultLanguage() {
 	return $entry['value'];
 }
 
+function setDefaultLanguage($language) {
+    global $LANG;
+    global $dbh;
+
+    $sql = "UPDATE ".TB_PREFIX."system_defaults SET value = '".$language."' WHERE name = 'language'";
+    $sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
+    return 0;
+}
+
 function getInvoiceTotal($invoice_id) {
 	global $LANG;
 	
