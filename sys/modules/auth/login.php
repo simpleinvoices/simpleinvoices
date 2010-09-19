@@ -44,7 +44,7 @@ if (!empty($_POST['value'])) {
 
 if (!empty($_POST['user']) && !empty($_POST['pass'])) 
 {
-
+    $errorMessage = setDefaultLanguage($_POST['value']);  
 ////	require_once 'Zend/Auth/Adapter/DbTable.php';
 
 	// Configure the instance with constructor parameters...
