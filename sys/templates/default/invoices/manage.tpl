@@ -10,7 +10,16 @@
 *	http://www.simpleinvoices.org
 */
 *}
+{literal}
+<style>
+                                                                                            
+.flexigrid div.fbutton .filter_all
+{
+/*     background: url(sys/images/common/tag-right.png) no-repeat center left;*/
+}
 
+                                                                                                                                                                       </style>
+                                                                                                                                                                       {/literal}
 {if ($userRole != "customer")} 
         <table class="buttons" align="center">
         <tr>

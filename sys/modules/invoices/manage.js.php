@@ -5,23 +5,29 @@
 			var action_menu = 140;
 			var grid_width = $('.col').width();
 			
+            var filter_type ='all';
 			grid_width = grid_width - (columns * padding) - action_menu;
 			percentage_width = grid_width / 100; 
 			
 			function do_filter_due(){
 			    window.location = 'index.php?module=invoices&view=manage&having=money_owed';
+                filter_type ='due';
 			}
 			function do_filter_paid(){
 			    window.location = 'index.php?module=invoices&view=manage&having=paid';
+                filter_type ='paid';
 			}
 			function do_filter_draft(){
 			    window.location = 'index.php?module=invoices&view=manage&having=draft';
+                filter_type ='draft';
 			}
 			function do_filter_real(){
 			    window.location = 'index.php?module=invoices&view=manage&having=real';
+                filter_type ='real';
 			}
 			function do_filter_all(){
 			    window.location = 'index.php?module=invoices&view=manage';
+                filter_type ='all';
 			}
 
 			$("#manageGrid").flexigrid
@@ -73,6 +79,38 @@
 			height: 'auto'
 			}
 			);
+
+
+
+
+
+$(document).ready(function() {
+      //Build your CSS.
+       var get_filter = $.getUrlParam("having"); 
+       if($get_filter = 'money_owed')
+       {
+            filter_type = 'due';
+       }
+       if($get_filter = 'paid')
+       {
+            filter_type = 'paid';
+       }
+       if($get_filter = 'draft')
+       {
+            filter_type = 'draft';
+       }
+       if($get_filter = 'real')
+       {
+            filter_type = 'real';
+       }
+       if($get_filter = '')
+       {
+            filter_type = 'all';
+       }
+            
+      $('.filter_'+filter_type).css('background','url(sys/images/common/tag-right.png) no-repeat center left');
+});
+
 {/literal}
 
 </script>
