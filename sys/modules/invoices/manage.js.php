@@ -9,18 +9,6 @@
 			grid_width = grid_width - (columns * padding) - action_menu;
 			percentage_width = grid_width / 100; 
 			
-			function test(com,grid)
-			{
-				if (com=='Delete')
-					{
-						confirm('Delete ' + $('.trSelected',grid).length + ' items?')
-					}
-				else if (com=='Add')
-					{
-						alert('Add New Item');
-					}			
-			}
-
 			function do_filter_due(){
 			    window.location = 'index.php?module=invoices&view=manage&having=money_owed';
 			}
