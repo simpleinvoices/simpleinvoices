@@ -8,7 +8,7 @@
  * Not in each translated file need to be each all translations, only in the default-lang-file (english)
  */
 
-
+global $cust_language;  
 //http_negotiate_language($langs, $result);
 //print_r($result);
 unset($LANG);
