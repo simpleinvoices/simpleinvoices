@@ -51,7 +51,7 @@ $count = $sth_count_rows->rowCount();
               </a>
 
           <!--3 EXPORT DIALOG  onclick='export_invoice(".$row['id'].", \"".$config->export->spreadsheet."\", \"".$config->export->wordprocessor."\");'> -->    
-          <!--3 EXPORT TO PDF <a title='".$LANG['export_tooltip']." ".$row['preference']." ".$row['id']."' class='index_tab0le' href='pdfmaker.php?id=".$row['id']."'><img src='".$include_dir."sys/images/common/page_white_acrobat.png' class='action' /></a> -->
+          <!--3 EXPORT TO PDF <a title='".$LANG['export_tooltip']." ".$row['preference']." ".$row['id']."' class='index_table' href='pdfmaker.php?id=".$row['id']."'><img src='".$include_dir."sys/images/common/page_white_acrobat.png' class='action' /></a> -->
           <!--4 XLS <a title='".$LANG['export_tooltip']." ".$row['preference']." ".$row['id']." ".$LANG['export_xls_tooltip'].$config->export->spreadsheet." ".$LANG['format_tooltip']."' class='index_table' href='index.php?module=invoices&view=templates/template&invoice='".$row['id']."&action=view&location=print&export=".$config->export->spreadsheet."'><img src='".$include_dir."sys/images/common/page_white_excel.png' class='action' /></a> -->
           ";
          }
@@ -63,6 +63,10 @@ $count = $sth_count_rows->rowCount();
                $xml .= "<a class='index_table' title='".$LANG['edit_view_tooltip']." ".$row['preference']." ".$row['id']."' href='index.php?module=invoices&view=details&id=".$row['id']."&action=view'><img src='".$include_dir."sys/images/common/edit.png' class='action' /></a>";
                break;
                
+            case "proposal":
+               $xml .= "<a class='index_table' title='".$LANG['quick_view_tooltip']." ".$row['preference']." ".$row['id']."' href='index.php?module=invoices&view=quick_view&id=".$row['id']."'><img src='".$include_dir."sys/images/common/openlock.gif' class='action' /></a>";           
+               break;
+
             case "final":
                $xml .= "<a class='index_table' title='".$LANG['quick_view_tooltip']." ".$row['preference']." ".$row['id']."' href='index.php?module=invoices&view=quick_view&id=".$row['id']."'><img src='".$include_dir."sys/images/common/lock.gif' class='action' /></a>";           
                break;
@@ -83,7 +87,7 @@ $count = $sth_count_rows->rowCount();
 			  </a>
 
 		  <!--3 EXPORT DIALOG  onclick='export_invoice(".$row['id'].", \"".$config->export->spreadsheet."\", \"".$config->export->wordprocessor."\");'> -->	
-		  <!--3 EXPORT TO PDF <a title='".$LANG['export_tooltip']." ".$row['preference']." ".$row['id']."' class='index_tab0le' href='pdfmaker.php?id=".$row['id']."'><img src='".$include_dir."sys/images/common/page_white_acrobat.png' class='action' /></a> -->
+		  <!--3 EXPORT TO PDF <a title='".$LANG['export_tooltip']." ".$row['preference']." ".$row['id']."' class='index_table' href='pdfmaker.php?id=".$row['id']."'><img src='".$include_dir."sys/images/common/page_white_acrobat.png' class='action' /></a> -->
 		  <!--4 XLS <a title='".$LANG['export_tooltip']." ".$row['preference']." ".$row['id']." ".$LANG['export_xls_tooltip'].$config->export->spreadsheet." ".$LANG['format_tooltip']."' class='index_table' href='index.php?module=invoices&view=templates/template&invoice='".$row['id']."&action=view&location=print&export=".$config->export->spreadsheet."'><img src='".$include_dir."sys/images/common/page_white_excel.png' class='action' /></a> -->
 		
 		  <!--6 Payment --><a title='".$LANG['process_payment_for']." ".$row['preference']." ".$row['id']."' class='index_table' href='index.php?module=payments&view=process&id=".$row['id']."&op=pay_selected_invoice'><img src='".$include_dir."sys/images/common/money_dollar.png' class='action' /></a>
