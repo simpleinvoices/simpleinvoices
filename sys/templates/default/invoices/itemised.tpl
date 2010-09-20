@@ -42,8 +42,7 @@
                 </td>
         </tr>
     {/if}
-    {if $userRole != "customer"}
-       {if $customers == null}
+    {if $customers == null}
             <tr>
                 <td>
                      {$LANG.setup_add_customer}&nbsp;  
@@ -55,7 +54,6 @@
                     </a>
                 </td>
             </tr>
-       {/if}
     {/if}
     {if $products == null}
             <tr>
