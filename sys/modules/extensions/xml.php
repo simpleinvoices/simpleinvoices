@@ -10,7 +10,7 @@ $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 
 $xml =""; 
 
-$extension_dir = './extensions';
+$extension_dir = $incldue_dir . 'sys/extensions';
 $extension_entries = scandir($extension_dir);
 foreach ($extension_entries as $entry) {
   	if (is_dir($extension_dir."/".$entry) and ! ereg("^\..*",$entry) ) {	//Skip entries starting with a dot
