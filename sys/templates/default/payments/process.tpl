@@ -97,6 +97,7 @@
 					<option value="1" style="font-weight: bold;" selected="">{$LANG.yes}</option>
 					<option value="0" selected="">{$LANG.no}</option>
 				</select>
+				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_distribute_overpayment" title="{$LANG.help_distribute_overpayment_title}"><img src="{$include_dir}sys/images/common/help-small.png" alt="" /></a>
 			</div>
 		</td> 
 </tr>
