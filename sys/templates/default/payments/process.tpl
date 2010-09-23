@@ -147,7 +147,10 @@
 	$('#ac_amount').change(function() {
 		//  alert('{/literal}{$invoice.owing|htmlsafe}{literal}  | called. ' + $('input[name=ac_amount]').attr("rel" ));
 
-		if ($('input[name=ac_amount]').val() >  $('input[name=ac_amount]').attr("rel" )) {
+        var input_amount = $('input[name=ac_amount]').val();
+        var owing_amount = $('input[name=ac_amount]').attr('rel');
+
+		if ( parseInt(input_amount) > parseInt(owing_amount) ) {
 			$(".distribute").slideDown("fast"); //Slide Down Effect
 		} else {
 			$(".distribute").slideUp("fast");	//Slide Up Effect
