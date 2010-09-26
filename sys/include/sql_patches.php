@@ -1503,6 +1503,24 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['257']['name'] = "Add translation field for preferences";
     $patch['257']['patch'] = "alter table ".TB_PREFIX."preferences add (translation varchar(50)) ;";
     $patch['257']['date'] = "20100926";
+
+    $patch['258']['name'] = "Add translation field for preferences";
+    $patch['258']['patch'] = "update ".TB_PREFIX."preferences set translation = 'invoice' where pref_description = 'Invoice' ;" ;
+    $patch['258']['date'] = "20100926";
+
+    $patch['259']['name'] = "Add translation field for preferences";
+    $patch['259']['patch'] = "update ".TB_PREFIX."preferences set translation = 'receipt' where pref_description = 'Receipt' ;" ;
+    $patch['259']['date'] = "20100926";
+    
+    $patch['260']['name'] = "Add translation field for preferences";
+    $patch['260']['patch'] = "update ".TB_PREFIX."preferences set translation = 'estimate' where pref_description = 'Estimate' ;" ;
+    $patch['260']['date'] = "20100926";
+
+    $patch['261']['name'] = "Add translation field for preferences";
+    $patch['261']['patch'] = "update ".TB_PREFIX."preferences set translation = 'quote' where pref_description = 'Quote' ;" ;
+    $patch['261']['date'] = "20100926";
+
+
 /*
 ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );
 
