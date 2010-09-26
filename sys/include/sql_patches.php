@@ -1500,6 +1500,9 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['256']['patch'] = "insert into ".TB_PREFIX."user_role (name) values ('customer') ;";  
     $patch['256']['date'] = "20100914";
     
+    $patch['257']['name'] = "Add translation field for preferences";
+    $patch['257']['patch'] = "alter table ".TB_PREFIX."preferences add (translation varchar(50)) ;";
+    $patch['257']['date'] = "20100926";
 /*
 ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );
 
