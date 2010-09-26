@@ -56,6 +56,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 		$sql = "SELECT 
 					pref_id, 
 					pref_description,
+                    translation,
 					(SELECT (CASE  WHEN pref_enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
 				FROM 
 					".TB_PREFIX."preferences 
@@ -86,7 +87,12 @@ foreach ($preferences as $row) {
 		<a class='index_table' title='$LANG[view] $LANG[preference] ".$row['pref_description']."' href='index.php?module=preferences&view=details&id=$row[pref_id]&action=view'><img src='".$include_dir."sys/images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 		<a class='index_table' title='$LANG[edit] $LANG[preference] ".$row['pref_description']."' href='index.php?module=preferences&view=details&id=$row[pref_id]&action=edit'><img src='".$include_dir."sys/images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 	]]></cell>";
-	$xml .= "<cell><![CDATA[".$row['pref_description']."]]></cell>";
+//	$xml .= "<cell><![CDATA[".$row['pref_description']."]]></cell>";
+
+    $dsc = $LANG[$row['translation']];
+    if ($dsc=='') {$dsc=$row['pref_description'];}
+    
+    $xml .= "<cell><![CDATA[".$dsc."]]></cell>";
 	if ($row['enabled']==$LANG['enabled']) {
 		$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
 	}	                                                        
