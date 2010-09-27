@@ -45,7 +45,6 @@ if ( isset($_POST['process_payment']) ) {
 				$sth = $db->query($sql,
         ':ac_inv_id',$payment->ac_inv_id) or die();
 		$cust_id = $sth->fetch();
-		$cust_id = $cust_id['customer_id'];
 		
 		// query to get unpaid invoices from the customer whose payment is being recorded
 		$sql = "
@@ -68,7 +67,7 @@ if ( isset($_POST['process_payment']) ) {
 				where all_charge > ifnull(all_pay,0) and customer_id=:cust_id and charge.invoice_id <> :ac_inv_id
 				";
 			
-		$sth = $db->query($sql, ':cust_id',$cust_id,':ac_inv_id',$payment->ac_inv_id) or die();
+		$sth = $db->query($sql, ':cust_id',$cust_id['customer_id'],':ac_inv_id',$payment->ac_inv_id) or die();
 		
 
                 $paid_to = array(); //init array for tracking payment ID's
@@ -154,7 +153,7 @@ if ( isset($_POST['process_payment']) ) {
         $inv_info .= "</ul>";
 
         //Append distribution information to pmt notes
-        foreach ($paid_to as $sub_pmt_inv_id => $sub_amt)
+        foreach ($paid_to as $sub_pmt_id => $sub_amt)
         {
 
         $paid_formatted = sprintf("<br /><br />This payment of %f was part of a larger payment of %f and has been automatically split over the following invoices:",$sub_amt,$orig_amt);
@@ -163,7 +162,7 @@ if ( isset($_POST['process_payment']) ) {
         $sql_notes = "UPDATE ".TB_PREFIX."payment SET ac_notes=concat(ac_notes,:extra_notes) WHERE id=:id;";
         $result = $db->query($sql_notes,
             ':extra_notes',$paid_formatted,
-            ':id',$sub_pmt_inv_id
+            ':id',$sub_pmt_id
         ) or die();
 
         }
