@@ -135,7 +135,7 @@ if ( isset($_POST['process_payment']) ) {
 	}
         elseif ($saved == 'false' && $_POST['distribute'] == '1')
         {
-        $display_block = sprintf('An error ocurred! %f of your total payment of %f was not recorded in the database.<br />%s',$payment->ac_amount,$orig_amt,$sql);
+        $display_block = sprintf('%s %f %s %f %s<br />%s',$LANG['something_went_wrong'],$payment->ac_amount,$LANG['of'],$orig_amt,$LANG['save_payment_failure_distribute'],$sql);
         }
         else {
 		$display_block =  $LANG['save_payment_failure']."<br />".$sql;
