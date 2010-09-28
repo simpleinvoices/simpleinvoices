@@ -22,7 +22,8 @@
 				<a href="index.php?module=auth&amp;view=logout">{$LANG.logout}</a>
 			{/if}
         {else}
-             |<b>{$LANG.auth_disabled}</b>
+             |
+             <a href='http://www.simpleinvoices.org/wiki/how_do_i_enable_authentification_ie_a_login_system_in_simple_invoices'>{$LANG.auth_disabled}</a>
 		{/if}
 	
 	</div>
