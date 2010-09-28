@@ -186,7 +186,7 @@
 		<tr>
 			<td class="details_screen">Invoice heading 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_heading" title="{$LANG.invoice_heading}">
-				<img src="{$smarty_embed_path}./sys/images/common/help-small.png" alt="" /> </a> 
+				<img src="{$include_dir}sys/images/common/help-small.png" alt="" /> </a> 
 			<td><input type="text" name='pref_inv_heading' value="{$preference.pref_inv_heading|htmlsafe}" size="50" /></td>
 		</tr>
 		<tr>
