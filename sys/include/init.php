@@ -105,6 +105,7 @@ $smarty->plugins_dir = array("plugins","include/smarty_plugins");
 
 //add stripslash smarty function
 $smarty->register_modifier("unescape","stripslashes");
+$smarty->register_modifier("capitalise","ucwords");
 /* 
  * Smarty inint - end
  */

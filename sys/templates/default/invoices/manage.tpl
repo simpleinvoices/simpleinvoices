@@ -26,7 +26,7 @@
             <td>
             <a href="index.php?module=invoices&amp;view=itemised" class="positive">
             <img src="{$include_dir}sys/images/common/add.png" alt=""/>
-            {$LANG.new_invoice}
+            {$LANG.new_invoice|capitalise}
             </a>
         </td>
         <td>
