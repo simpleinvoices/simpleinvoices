@@ -3,7 +3,7 @@
 <tr>
 <td>
 
-<h2>System settings</h2>
+<h2>{$LANG.system_settings}</h2>
 <table class="buttons" >
     <tr>
         <td>
@@ -33,7 +33,7 @@
 <!-- Do stuff menu  - end -->
 
 <!-- Don't forget to menu - start -->
-<h2>Invoice settings</h2>
+<h2>{$LANG.invoice_settings}</h2>
 <table class="buttons" >
       <tr>
         <td>
@@ -56,6 +56,27 @@
            <a href="index.php?module=payment_types&amp;view=manage" class="">
                 <img src="{$include_dir}sys/images/common/creditcards.png" alt="" />
                  {$LANG.payment_types}
+            </a>
+        </td>
+    </tr>
+
+</table>
+<br />
+
+<h2>{$LANG.version_control}</h2>
+<table class="buttons" >
+      <tr>
+         <td>         
+             <a href="index.php?module=preferences&amp;view=manage" class="">
+                <img src="{$include_dir}sys/images/common/page_white_edit.png" alt="" />
+                 {$LANG.version_check}
+            </a>
+        </td>
+        <td>
+    
+           <a href="index.php?module=payment_types&amp;view=manage" class="">
+                <img src="{$include_dir}sys/images/common/creditcards.png" alt="" />
+                 {$LANG.download}
             </a>
         </td>
     </tr>
