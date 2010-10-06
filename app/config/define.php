@@ -1,6 +1,6 @@
 <?php
 
-define("TB_PREFIX","six_"); // default table prefix - old var $tb_prefix = "si_";
+define("TB_PREFIX","si_"); // default table prefix - old var $tb_prefix = "si_";
 
 define("ENABLED","1"); // 
 define("DISABLED","0"); // 
@@ -15,6 +15,7 @@ define("consulting_invoice","3"); //
 define("LOGGING",true);
 define("SI_VERSION_TITLE","2010.10.3");
 define("SI_VERSION_ID","20101001");
+define("SI_VERSION","2010.2 update 1");
 
 
 ####################
