@@ -476,7 +476,15 @@ $LANG['value'] = "Waarde";//1
 $LANG['version'] = "versie";
 $LANG['version_check'] = "Controleer versie";
 $LANG['version_control'] = "Versie controle";
-$LANG['view'] = "Bekijk";//1
+$LANG['version_installed'] = "Het nummer van uw geinstalleerde versie is"; 
+$LANG['version_latest'] = "Beschikbare versie";
+$LANG['version_notreq'] = ", maar er is een optionele update beschikbaar";
+$LANG['version_outofdate'] = "Uw versie is verouderd, upgraden wordt geadviseerd.";
+$LANG['version_ok'] = "U versie is up to date";
+$LANG['version_current'] = "Uw geinstalleerde versie van Simple Invoices is";
+$LANG['version_server'] = "De beschikbare versie in het downloadgebied is";
+$LANG['version_server_installed'] = "Het nummer van de beschikbare versie in het downloadgebied is";
+$LANG['version_notes'] = "Release notes:";$LANG['view'] = "Bekijk";//1
 $LANG['want_more_fields'] = "wilt u meer velden?";//1
 $LANG['weeks'] = "weken";//1
 $LANG['welcome'] = "Welkom bij ";//1
