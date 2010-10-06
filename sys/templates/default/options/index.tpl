@@ -70,7 +70,7 @@
 <table class="buttons" >
     <tr>
          <td>         
-             <a href="index.php?module=preferences&amp;view=manage" class="">
+             <a href="index.php?module=options&amp;view=version" class="">
                 <img src="{$include_dir}sys/images/common/page_white_edit.png" alt="" />
                  {$LANG.version_check}
             </a>
