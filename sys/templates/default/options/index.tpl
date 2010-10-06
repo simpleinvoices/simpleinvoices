@@ -75,13 +75,7 @@
                  {$LANG.version_check}
             </a>
         </td>
-        <td>
-    
-           <a href="index.php?module=payment_types&amp;view=manage" class="">
-                <img src="{$include_dir}sys/images/common/creditcards.png" alt="" />
-                 {$LANG.download}
-            </a>
-        </td>
+
     </tr>
 
 </table>
