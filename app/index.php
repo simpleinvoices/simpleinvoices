@@ -69,7 +69,7 @@ $smarty -> assign("siUrl",$siUrl);//used for template css
 $smarty -> assign("smarty_embed_path",$smarty_embed_path);
 $smarty -> assign("include_dir",$include_dir);
 $smarty -> assign("auth_session",$auth_session);
-$smarty->assign("version_id", SI_VERSION_TITLE);
+$smarty -> assign("si_version", SI_VERSION);
 
 $smarty -> assign("LANG",$LANG);
 //For Making easy enabled pop-menus (see biller)

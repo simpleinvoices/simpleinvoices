@@ -577,6 +577,7 @@ $LANG['value'] = "Value";//1
 $LANG['version'] = "version";
 $LANG['version_check'] = "Check version";
 $LANG['version_control'] = "Version control";
+$LANG['version_current'] = "Your current version of Simple Invoices is";
 $LANG['view'] = "View";//1
 $LANG['want_more_fields'] = "Want more fields";//1
 $LANG['warning_eway'] = "<b>Note:</b> You are about to charge your customers credit card<br /> - make sure you know what you're doing!!";

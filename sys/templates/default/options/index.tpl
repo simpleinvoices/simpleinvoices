@@ -64,8 +64,11 @@
 <br />
 
 <h2>{$LANG.version_control}</h2>
+            {$LANG.version_current}: {$si_version}
+            <br />
+            <br />
 <table class="buttons" >
-      <tr>
+    <tr>
          <td>         
              <a href="index.php?module=preferences&amp;view=manage" class="">
                 <img src="{$include_dir}sys/images/common/page_white_edit.png" alt="" />

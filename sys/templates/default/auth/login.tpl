@@ -56,7 +56,7 @@
         <br/>
 	</div>
     <br/>
-        <a href="http://www.simpleinvoices.org">{$LANG.simple_invoices_powered_by}</a> (V{$version_id})
+        <a href="http://www.simpleinvoices.org">{$LANG.simple_invoices_powered_by}</a>
 </div>
 
 <script language="JavaScript">
