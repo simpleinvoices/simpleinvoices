@@ -154,5 +154,4 @@ if($_POST['action'] == 'login' && (empty($_POST['user']) OR empty($_POST['pass']
 
 $smarty->assign("errorMessage",$errorMessage);
 $smarty->assign("value",$value);
-$smarty->assign("version_id", SI_VERSION_TITLE);
 ?>
