@@ -6,7 +6,7 @@ checkLogin();
 
 //if valid then do save
 if ($_POST['p_description'] != "" ) {
-	include("./modules/preferences/save.php");
+	include("sys/modules/preferences/save.php");
 }
 $smarty -> assign('save',$save);
 
