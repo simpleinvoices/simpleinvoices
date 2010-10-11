@@ -9,7 +9,7 @@ $customFieldLabel = getCustomFieldLabels();
 $taxes = getActiveTaxes();
 //if valid then do save
 if ($_POST['description'] != "" ) {
-	include("./modules/products/save.php");
+	include("sys/modules/products/save.php");
 }
 $smarty -> assign("defaults",getSystemDefaults());
 $smarty -> assign('customFieldLabel',$customFieldLabel);
