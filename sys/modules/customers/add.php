@@ -23,7 +23,7 @@ $customFieldLabel = getCustomFieldLabels();
 
 //if valid then do save
 if ($_POST['name'] != "" ) {
-	include("./modules/customers/save.php");
+	include("sys/modules/customers/save.php");
 }
 $smarty -> assign('customFieldLabel',$customFieldLabel);
 
