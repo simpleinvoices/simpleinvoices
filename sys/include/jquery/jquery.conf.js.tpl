@@ -128,7 +128,14 @@ $(document).ready(function(){
 	}
 
 	//hide the description field for each line item on invoice creation
-	$('.notes').hide();
+    {/literal}
+    {if $config->ui->line_item_details_by_default}
+            $('.show-note').hide();
+    {else}
+            $('.notes').hide();
+        
+    {/if}
+    {literal}
 
 	/*
 	* Product Change - updates line item with product price info

@@ -11,7 +11,7 @@ $(document).ready(function(){
 	$('.customer').hide();
 	$('.consulting').hide();
 	$('.itemised').hide();
-	$('.note').hide();
+	//$('.note').hide();
 
     $("#dialog").hide();
     $('#invoice_dialog').click(function() 
