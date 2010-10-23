@@ -18,7 +18,9 @@ $invoice->sort=$sort;
 
 // if role is customer then select only on customer!!!
 if ($auth_session -> role_name == "customer") {
-    $invoice->customer = $auth_session -> email;
+   // find 'id' from customer table, based upon the email
+   $id = $invoice->select_customer_id($auth_session->email);
+   $invoice->customer = $id;
 }
 
 $sth = $invoice->select_all('', $dir, $rp, $page, $having);
