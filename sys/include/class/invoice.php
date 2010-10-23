@@ -196,6 +196,14 @@ class invoice {
         return $sth->fetchAll();
 
     }
+    
+    function select_customer_id($email='')
+    {
+     $sql = "select id from ".TB_PREFIX."customers where email=:email";
+     $sth = dbQuery($sql, ':email', $email);
+     $res = $sth->fetch();
+     return $res['id'];
+    }
 
     function select_all($type='', $dir='DESC', $rp='25', $page='1', $having='')
     {
