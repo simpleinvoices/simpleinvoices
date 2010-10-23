@@ -219,7 +219,7 @@ class invoice {
         /*SQL where - start*/
         $query = $this->query;
         $qtype = $this->qtype;
-
+      
         $where = " WHERE iv.domain_id = :domain_id ";
         if ($query) $where = " WHERE iv.domain_id = :domain_id AND $qtype LIKE '%$query%' ";
         if ($this->biller) $where .= " AND b.id = '$this->biller' ";
