@@ -48,7 +48,16 @@ if ($_POST['action'] == "insert" ) {
 		insertProduct(0,0);
 		$product_id = lastInsertId();
 
-		if (insertInvoiceItem($id,1,$product_id,1,$_POST['tax_id'][0],$_POST['description'],$_POST['unit_price'])) {
+        $ii = new invoice;
+        $ii->invoice_id = $id;
+        $ii->quantity = '1';
+        $ii->product_id = $product_id;
+        $ii->line_number = '1';
+        $ii->line_item_tax_id = $_POST['tax_id'][0];
+        $ii->description = $_POST['description'];
+        $ii->unit_price = $_POST['unit_price'];
+
+		if ($ii->insert_item()) {
 			//$saved = true;
 		}
 		else {
@@ -64,8 +73,17 @@ if ($_POST['action'] == "insert" ) {
 			$logger->log('qty='.$_POST["quantity$i"], Zend_Log::INFO);
 			if($_POST["quantity$i"] != null)
 			{
+                $ii = new invoice;
+                $ii->invoice_id = $id;
+                $ii->quantity = $_POST["quantity$i"];
+                $ii->product_id = $_POST["products$i"];
+                $ii->line_number = $i;
+                $ii->line_item_tax_id = $_POST["tax_id"][$i];
+                $ii->description = $_POST["description$i"];
+                $ii->unit_price = $_POST["unit_price$i"] ;
+
 				if (
-						insertInvoiceItem($id,$_POST["quantity$i"],$_POST["products$i"],$i,$_POST["tax_id"][$i],$_POST["description$i"], $_POST["unit_price$i"] )
+                        $ii->insert_item()
 					) 
 				{
 		//			insert_invoice_item_tax(lastInsertId(), )
@@ -122,7 +140,15 @@ if ($_POST['action'] == "insert" ) {
 				//new line item added in edit page
 				if($_POST["line_item$i"] == "")
 				{
-					insertInvoiceItem($id,$_POST["quantity$i"],$_POST["products$i"],$i,$_POST["tax_id"][$i],$_POST["description$i"], $_POST["unit_price$i"]);
+                    $ii = new invoice;
+                    $ii->invoice_id = $id;
+                    $ii->quantity = $_POST["quantity$i"];
+                    $ii->product_id = $_POST["products$i"];
+                    $ii->line_number = $i;
+                    $ii->line_item_tax_id = $_POST["tax_id"][$i];
+                    $ii->description = $_POST["description$i"];
+                    $ii->unit_price = $_POST["unit_price$i"] ;
+                    $ii->insert_item();
 				}
 				
 				if($_POST["line_item$i"] != "")

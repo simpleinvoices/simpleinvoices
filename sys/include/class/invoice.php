@@ -84,7 +84,29 @@ class invoice {
 	}
 
 	public function insert_item()
-	{	
+	{
+
+        global $LANG;
+
+        $tax_total = getTaxesPerLineItem($this->line_item_tax_id,$this->quantity, $this->unit_price);
+
+        //line item gross total
+        $gross_total = $this->unit_price * $this->quantity;
+
+        //line item total
+        $total = $gross_total + $tax_total;
+
+        //Remove jquery auto-fill description - refer jquery.conf.js.tpl autofill section
+        if ($this->description == $LANG['description'])
+        {
+            $this->description ="";
+        }
+
+        if ($db_server == 'mysql' && !_invoice_items_check_fk(
+            $invoice_id, $product_id, $tax['tax_id'])) {
+            return null;
+        }
+	
 		$sql = "INSERT INTO ".TB_PREFIX."invoice_items 
 				(
 					invoice_id, 
@@ -116,15 +138,16 @@ class invoice {
 			':unit_price', $this->unit_price,
 		//	':tax_id', $tax[tax_id],
 		//	':tax_percentage', $tax[tax_percentage],
-			':tax_amount', $this->tax_amount,
-			':gross_total', $this->gross_total,
-
-			':description', $this->description,
-			':total', $this->total
+            ':tax_amount', $tax_total,
+            ':gross_total', $gross_total,
+            ':description', $this->description,
+            ':total', $total,
 
 			);
 
 		invoice_item_tax(lastInsertId(),$this->tax,$this->unit_price,$this->quantity,"insert");
+
+        return true;
 	}
 
     public static function select($id)
