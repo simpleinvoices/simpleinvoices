@@ -56,6 +56,12 @@ for($i=1;$i<=4;$i++) {
 	$customField[$i] = show_custom_field("invoice_cf$i",$invoice["custom_field$i"],"read",'details_screen summary', 'details_screen','details_screen',5,':');
 }
 
+//Set locked status on locked invoices
+if ($invoice['status']=='final') {
+    $invoicelocked = 'true';
+} else {
+    $invoicelocked = 'false';
+}
 
 //Customer accounts sections
 $customerAccount = null;
@@ -81,4 +87,5 @@ $smarty -> assign("wordprocessor",$config->export->wordprocessor);
 $smarty -> assign("spreadsheet",$config->export->spreadsheet);
 $smarty -> assign("customerAccount",$customerAccount);
 $smarty -> assign("eway_pre_check",$eway_pre_check);
+$smarty -> assign("invoicelocked", $invoicelocked);
 ?>
