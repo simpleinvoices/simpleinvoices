@@ -6,7 +6,7 @@
    
    Version control
  
-   This file will retrieve the version xml file and perform a version check:
+   This file will retrieve the version file and perform a version check:
       if the version id numeric (in the format yyyymmdd) match then the version is up to date
       BUT if the description differ then the version is up to date but there is an optional (minor) update
       if the version id numeric differ then there's an advised update
@@ -28,20 +28,22 @@ checkLogin();
  $contents = curl_exec($c);
  curl_close($c);
 
- $doc = new SimpleXMLElement($contents);
+ //$doc = new SimpleXMLElement($contents);
+ // we now do it the text way
+ $varray = explode(chr(10),$contents);
 
  $smarty->Assign("localVersion", SI_VERSION_ID);
- $smarty->Assign("serverVersion", $doc->versionId);
- $smarty->Assign("si_serverversion", $doc->versionTitle);
- $smarty->Assign("downloadurl",$doc->downloadLink);
+ $smarty->Assign("serverVersion", $varray[6]);
+ $smarty->Assign("si_serverversion", $varray[3]);
+ $smarty->Assign("downloadurl",$varray[9]);
  $result = '';                            
  // if the version identifier is not equal then there's a new version on the server
- if (SI_VERSION_ID == $doc->versionId) {
+ if (SI_VERSION_ID ==$varray[6]) {
    // version is ok  
    $result.="<b>".$LANG['version_ok']."</b>";  
    // but if description differ then there's a minor update available
       
-   if ($SI_VERSION != $doc->versionTitle) {
+   if (strcasecmp(SI_VERSION, $varray[3])!=0) {
        $result.=$LANG['version_notreq']."<br>";
    }   
  }
@@ -52,11 +54,11 @@ checkLogin();
    $result .= '<a href="'.$doc->downloadLink.'">download</a><br>';
  }
    
- $result.="<br><br>".$LANG['version_notes']."<br><br>";  
- foreach ($doc->releaseNotes->note as $r)
-    {
-      $result .= $r."<br>";   
-    }
+// $result.="<br><br>".$LANG['version_notes']."<br><br>";  
+// foreach ($doc->releaseNotes->note as $r)
+//    {
+//      $result .= $r."<br>";   
+//    }
  
  $smarty->Assign("versionControl", $result); 
 
