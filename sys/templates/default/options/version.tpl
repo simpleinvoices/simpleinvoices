@@ -24,7 +24,7 @@
 {$LANG.version_current}: {$si_version} <br> 
 {$LANG.version_installed}: {$localVersion} <br><br> 
 {$LANG.version_server}: {$si_serverversion} <br>    
-{$LANG.version_server_installed}: {$serverVersion} <br><br>
+{$LANG.version_server_installed}: {$serverVersion} <br><br>      
 
 <table class="buttons" >
     <tr>
