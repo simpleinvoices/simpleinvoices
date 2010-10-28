@@ -971,6 +971,7 @@ function getInvoice($id) {
 	$invoice['gross'] = invoice::getInvoiceGross($invoice['id']);
 	$invoice['paid'] = calc_invoice_paid($invoice['id']);
 	$invoice['owing'] = $invoice['total'] - $invoice['paid'];
+    $invoice['status'] = $invoice['inv_status'];
 
 	
 	#invoice total tax
