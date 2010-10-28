@@ -23,11 +23,13 @@
 
 	<!--Actions heading - start-->
 	<span class="welcome">
-			<a title="{$LANG.print_preview_tooltip} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=export&amp;view=invoice&amp;id={$invoice.id|urlencode}&amp;format=print" target="_blank"><img src='{$include_dir}/sys/images/common/printer.png' class='action' />&nbsp;{$LANG.print_preview}</a>
+			 <a title="{$LANG.print_preview_tooltip} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=export&amp;view=invoice&amp;id={$invoice.id|urlencode}&amp;format=print" target="_blank"><img src='{$include_dir}/sys/images/common/printer.png' class='action' />&nbsp;{$LANG.print_preview}</a>
 			 &nbsp;&nbsp; 
-			<a title="{$LANG.edit} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=invoices&amp;view=details&amp;id={$invoice.id|urlencode}&amp;action=view"><img src='{$include_dir}/sys/images/common/edit.png' class='action' />&nbsp;{$LANG.edit}</a>
-			 &nbsp;&nbsp; 
-			 <a title="{$LANG.process_payment_for} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=payments&amp;view=process&amp;id={$invoice.id|urlencode}&amp;op=pay_selected_invoice"><img src='{$include_dir}/sys/images/common/money_dollar.png' class='action' />&nbsp;{$LANG.process_payment} </a>
+             {if $invoicelocked == 'false'}
+             <a title="{$LANG.edit} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=invoices&amp;view=details&amp;id={$invoice.id|urlencode}&amp;action=view"><img src='{$include_dir}/sys/images/common/edit.png' class='action' />&nbsp;{$LANG.edit}</a>
+			 &nbsp;&nbsp;
+             {/if}
+  			 <a title="{$LANG.process_payment_for} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=payments&amp;view=process&amp;id={$invoice.id|urlencode}&amp;op=pay_selected_invoice"><img src='{$include_dir}/sys/images/common/money_dollar.png' class='action' />&nbsp;{$LANG.process_payment} </a>
              {if $eway_pre_check == 'true'}
 			 &nbsp;&nbsp; 
 			 <a title="{$LANG.process_payment_for} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=payments&amp;view=eway&amp;id={$invoice.id|urlencode}"><img src='{$include_dir}/sys/images/common/money_dollar.png' class='action' />&nbsp;{$LANG.process_payment_via_eway} </a>
