@@ -1520,6 +1520,9 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['261']['patch'] = "update ".TB_PREFIX."preferences set translation = 'quote' where pref_description = 'Quote' ;" ;
     $patch['261']['date'] = "20100926";
 
+    $patch['262']['name'] = "Add translation field for preferences";
+    $patch['262']['patch'] = "ALTER TABLE  ".TB_PREFIX."_products` ADD `details` TEXT NOT NULL AFTER  `description` ;" ;
+    $patch['262']['date'] = "20100926";
 
 /*
 ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );
