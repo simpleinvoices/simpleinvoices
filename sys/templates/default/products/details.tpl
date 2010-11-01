@@ -9,6 +9,13 @@
 		<td>{$product.description|htmlsafe}</td>
 	</tr>
 	<tr>
+		<td class="details_screen">{$LANG.details}
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_product_detail" title="{$LANG.details}"><img src="./images/common/help-small.png" alt="" /></a>
+
+        </td>
+		<td>{$product.detail|htmlsafe}</td>
+	</tr>
+	<tr>
 		<td class="details_screen">{$LANG.product_unit_price}</td>
 		<td>{$product.unit_price|siLocal_number_clean}</td>
 	</tr>
@@ -87,6 +94,15 @@
 	<tr>
 		<td class="details_screen">{$LANG.product_description}</td>
 		<td><input type="text" name="description" size="50" value="{$product.description|htmlsafe}" id="description"  class="validate[required]" /></td>
+	</tr>
+	<tr>
+		<td class="details_screen">{$LANG.details} 
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_product_detail" title="{$LANG.details}"><img src="./images/common/help-small.png" alt="" /></a>
+		</td>
+        <td>
+            <textarea input type="text" name='detail|htmlsafe' rows="3" cols="50">{$product.detail|unescape}</textarea>
+        </td>
+
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product_unit_price}</td>

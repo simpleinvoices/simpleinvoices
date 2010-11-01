@@ -21,6 +21,15 @@
 		<td><input type="text" name="description" value="{$smarty.post.description|htmlsafe}" size="50" id="description"  class="validate[required]" /></td>
 	</tr>
 	<tr>
+		<td class="details_screen">{$LANG.details} 
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_product_detail" title="{$LANG.details}"><img src="./images/common/help-small.png" alt="" /></a>
+		</td>
+        <td>
+            <textarea input type="text" name='detail|htmlsafe' rows="3" cols="50">{$smarty.post.detail|unescape}</textarea>
+        </td>
+
+	</tr>
+	<tr>
 		<td class="details_screen">{$LANG.unit_price}</td>
 		<td><input type="text" class="edit" name="unit_price" value="{$smarty.post.unit_price|htmlsafe}"  size="25" /></td>
 	</tr>
