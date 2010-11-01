@@ -690,6 +690,7 @@ function insertProduct($enabled=1,$visible=1) {
 		(
 			domain_id, 
             description, 
+            detail, 
             unit_price, 
             cost,
             reorder_level,
@@ -706,6 +707,7 @@ function insertProduct($enabled=1,$visible=1) {
 		(	
 			:domain_id,
 			:description,
+			:detail,
 			:unit_price,
 			:cost,
 			:reorder_level,
@@ -722,6 +724,7 @@ function insertProduct($enabled=1,$visible=1) {
 	return dbQuery($sql,
 		':domain_id',$auth_session->domain_id,	
 		':description', $_POST['description'],
+		':detail', $_POST['detail'],
 		':unit_price', $_POST['unit_price'],
 		':cost', $_POST['cost'],
 		':reorder_level', $_POST['reorder_level'],
@@ -742,6 +745,7 @@ function updateProduct() {
 	$sql = "UPDATE ".TB_PREFIX."products
 			SET
 				description = :description,
+				detail = :detail,
 				enabled = :enabled,
 				default_tax_id = :default_tax_id,
 				notes = :notes,
@@ -757,6 +761,7 @@ function updateProduct() {
 
 	return dbQuery($sql,
 		':description', $_POST[description],
+		':detail', $_POST[detail],
 		':enabled', $_POST['enabled'],
 		':notes', $_POST[notes],
 		':default_tax_id', $_POST['default_tax_id'],
