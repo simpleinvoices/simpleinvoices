@@ -61,6 +61,8 @@
 				{
 					$("#tax_id\\["+row_number+"\\]\\[1\\]").val(data['default_tax_id_2']);
 				}
+				$("#description"+row_number).val(data['detail']);
+	            $("#description"+row_number).css({ color: "#333" });
 			}
 	
    		 });

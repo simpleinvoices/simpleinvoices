@@ -4,7 +4,7 @@
 if($_GET['id'])
 {
 	//sleep(2);
-	$sql = sprintf('SELECT unit_price, default_tax_id, default_tax_id_2 FROM '.TB_PREFIX.'products WHERE id = %d LIMIT 1', $_GET['id']);
+	$sql = sprintf('SELECT unit_price, default_tax_id, default_tax_id_2, detail FROM '.TB_PREFIX.'products WHERE id = %d LIMIT 1', $_GET['id']);
 	$states = dbQuery($sql);
 //	$output = '';
 	if($states->rowCount() > 0)
@@ -17,6 +17,7 @@ if($_GET['id'])
 			$output['unit_price'] = siLocal::number_clean($row['unit_price']);
 			$output['default_tax_id'] = $row['default_tax_id'];
 			$output['default_tax_id_2'] = $row['default_tax_id_2'];
+			$output['detail'] = $row['detail'];
 	//		$output .= $_POST['id'];
 		
 	}
