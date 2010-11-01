@@ -141,7 +141,7 @@ class invoice {
             ':tax_amount', $tax_total,
             ':gross_total', $gross_total,
             ':description', $this->description,
-            ':total', $total,
+            ':total', $total
 
 			);
 
