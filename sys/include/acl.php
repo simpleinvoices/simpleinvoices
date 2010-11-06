@@ -40,6 +40,9 @@ $acl->add(new Zend_Acl_Resource('preferences'));
 $acl->add(new Zend_Acl_Resource('payment_types'));
 $acl->add(new Zend_Acl_Resource('statement'));
 
+/*extensions*/
+$acl->add(new Zend_Acl_Resource('timetracker'));
+
 //assign roels to resoruces
 
 /* alternatively, the above could be written:

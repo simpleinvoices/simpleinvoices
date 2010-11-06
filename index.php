@@ -46,6 +46,8 @@ if (!isset($app)) {
 
 $app_folder = $include_dir . $app;
 
+$pdf_dir = '../../' . $app;
+
 include($app .'/index.php');
 
 ?>

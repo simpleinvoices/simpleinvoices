@@ -249,7 +249,7 @@ switch ($module)
 }
 
 //get the url - used for templates / pdf
-$siUrl = getURL();
+$siUrl = getURL($app);
 //zend db
 
 // Get extensions from DB, and update config array

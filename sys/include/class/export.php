@@ -246,7 +246,7 @@ class export
 				$template = $defaults['template'];
 			
 				$templatePath = $include_dir . "sys/templates/invoices/${template}/template.tpl";
-				$template_dir = $tpl_path . "sys/templates/invoices/${template}/template.tpl";
+				$template_dir = $smarty_include_dir . "sys/templates/invoices/${template}/template.tpl";
 				$template_path = $include_dir . "sys/templates/invoices/${template}";
 				$css = $siUrl ."/sys/templates/invoices/${template}/style.css";
 				$pluginsdir =  $include_dir ."sys/templates/invoices/${template}/plugins/";

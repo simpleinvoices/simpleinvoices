@@ -2547,14 +2547,17 @@ function checkDataExists()
 	}
 }
 
-function getURL()
+function getURL($app = 'app')
 {
 	global $config;
 
 	$port = "";
 	$dir = dirname($_SERVER['PHP_SELF']);
 	//remove incorrenct slashes for WinXP etc.
- $dir = str_replace('\\','',$dir);
+    $dir = str_replace('\\','',$dir);
+
+    $dir = str_replace($app,'',$dir);
+//    $dir = str_replace('//','',$dir);
  
 	//set the port of http(s) section
 	if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on') {

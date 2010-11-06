@@ -18,6 +18,13 @@ $smarty_embed_path = isset($smarty_embed_path) ? $smarty_embed_path : '../../../
 $tpl_path = isset($tpl_path) ? $tpl_path : '../';
 $app = isset($app) ? $app : 'app';
 $app_folder = $include_dir . $app;
+$pdf_dir = isset($pdf_dir) ? $pdf_dir : '../../../' . $app;
+
+
+//PDF configs
+define('CACHE_DIR', HTML2PS_DIR . $pdf_dir . '/tmp/cache/');
+define('OUTPUT_FILE_DIRECTORY', HTML2PS_DIR . $pdf_dir . '/tmp/cache/');
+define('WRITER_TEMPDIR', HTML2PS_DIR . $pdf_dir . '/tmp/cache');
 
 /*
 * The include configs and requirements stuff section - start
