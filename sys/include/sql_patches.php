@@ -1521,7 +1521,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['261']['date'] = "20100926";
 
     $patch['262']['name'] = "Add details field to products table";
-    $patch['262']['patch'] = "ALTER TABLE  ".TB_PREFIX."products` ADD `detail` TEXT NOT NULL AFTER  `description` ;" ;
+    $patch['262']['patch'] = "ALTER TABLE  ".TB_PREFIX."products ADD `detail` TEXT NOT NULL AFTER  `description` ;" ;
     $patch['262']['date'] = "20100926";
 
 /*
