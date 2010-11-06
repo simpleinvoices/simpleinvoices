@@ -120,6 +120,11 @@ class db
                 throw new Exception($sth->errorInfo().' '.$sqlQuery);
 			}
 		} catch(Exception $e){
+
+            /*Simple Invoice to stop if sql error*/
+			simpleInvoicesError('sql',$sth->errorInfo(),$sqlQuery);
+            die(0);
+
 			echo $e->getMessage();
 			echo "Dude, what happened to your query?:<br /><br /> ".htmlsafe($sqlQuery)."<br />".htmlsafe(end($this->_db->errorInfo()));
 			$sth = NULL;
