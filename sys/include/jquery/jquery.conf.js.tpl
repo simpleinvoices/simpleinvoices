@@ -133,6 +133,7 @@ $(document).ready(function(){
             $('.show-note').hide();
     {else}
             $('.notes').hide();
+            $('.note').hide();
         
     {/if}
     {literal}
