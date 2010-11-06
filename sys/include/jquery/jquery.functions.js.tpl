@@ -165,14 +165,14 @@
 		//update the delete icon
 		clonedRow.find("#delete_image"+rowID_old).attr("id", "delete_image"+rowID_new);
 		clonedRow.find("#delete_image"+rowID_new).attr("name", "delete_image"+rowID_new);
-		clonedRow.find("#delete_image"+rowID_new).attr("src", "{$include_dir}sys/images/common/delete_item.png");
+		clonedRow.find("#delete_image"+rowID_new).attr("src", "{/literal}{$include_dir}{literal}sys/images/common/delete_item.png");
 
 		clonedRow.find("#trash_link"+rowID_new).attr("href", "#");
 		clonedRow.find("#trash_link"+rowID_new).attr("rel", rowID_new);
 		clonedRow.find("#trash_link_edit"+rowID_new).attr("href", "#");
 		clonedRow.find("#trash_link_edit"+rowID_new).attr("rel", rowID_new);
 	
-		clonedRow.find("#trash_image"+rowID_old).attr("src", "{$include_dir}sys/images/common/delete_item.png");
+		clonedRow.find("#trash_image"+rowID_old).attr("src", "{/literal}{$include_dir}{literal}sys/images/common/delete_item.png");
 		clonedRow.find("#trash_image"+rowID_old).attr("title", "Delete this row");
 	
 		//edit invoice - newly added line item
