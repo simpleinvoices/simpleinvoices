@@ -262,34 +262,35 @@ $(document).ready(function(){
 	// only load when upload button on screen	
 	if ($('#uploadlogobutton').length != 0)
 	{
+
 		var button = $('#uploadlogobutton'), interval;
 		new AjaxUpload(button, {
-		action: './index.php?module=billers&view=logo-upload',
-		name: 'myfile',
-		onSubmit : function(file, ext){
-		// change button text, when user selects file
-		button.text('Uploading');
-		// If you want to allow uploading only 1 file at time,
-		// you can disable upload button
-		this.disable();
-		// Uploading -> Uploading. -> Uploading...
-		interval = window.setInterval(function(){
-		var text = button.text();
-		if (text.length < 13){
-		button.text(text + '.');
-		} else {
-		button.text('Uploading');
-		}
-		}, 200);
-		},
-		onComplete: function(file, response){
-		button.text('File Uploaded');
-		window.clearInterval(interval);
-		// enable upload button
-		this.enable();
-		// add file to the list
-		$('<option label="' + file + '" value="' + file + '"></option>').appendTo('#logofiles').text(file);		
-		}
+            action: './index.php?module=billers&view=upload-logo',
+            name: 'myfile',
+            onSubmit : function(file, ext){
+                // change button text, when user selects file
+                button.text('Uploading');
+                // If you want to allow uploading only 1 file at time,
+                // you can disable upload button
+                this.disable();
+                // Uploading -> Uploading. -> Uploading...
+                interval = window.setInterval(function(){
+                    var text = button.text();
+                    if (text.length < 13){
+                        button.text(text + '.');
+                    } else {
+                        button.text('Uploading');
+                    }
+                }, 200);
+            },
+            onComplete: function(file, response){
+                button.text('File Uploaded');
+                window.clearInterval(interval);
+                // enable upload button
+                this.enable();
+                // add file to the list
+                $('#logo').append('<option label="' + file + '" value="' + file + '">' + file + '</option>');
+            }
 		});
 	}
 });

@@ -333,7 +333,7 @@ n Script: details.tpl
 		</a>
 		</td>
 		<td>
-			{html_options name=logo output=$files values=$files selected=$biller.logo }
+			{html_options id=logo name=logo output=$files values=$files selected=$biller.logo }
 			<div id="uploadlogowrapper">
 			    <div class="wrapper">
 			        <div id="uploadlogobutton" class="logobuttonuploader" >Upload File</div>
