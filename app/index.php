@@ -201,7 +201,7 @@ if (($module == "invoices" ) && (strstr($view,"template"))) {
 * xml or ajax page requeset - start
 */
 
-	if( strstr($module,"api") OR (strstr($view,"xml") OR (strstr($view,"ajax")) ) )
+	if( strstr($module,"api") OR (strstr($view,"xml") OR (strstr($view,"ajax")) OR (strstr($view,"upload")) ) )
 	{	
 		$extensionXml = 0;
 		foreach($config->extension as $extension)

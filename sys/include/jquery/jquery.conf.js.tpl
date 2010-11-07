@@ -264,7 +264,7 @@ $(document).ready(function(){
 	{
 		var button = $('#uploadlogobutton'), interval;
 		new AjaxUpload(button, {
-		action: './include/upload-handler.php',
+		action: './index.php?module=billers&view=logo-upload',
 		name: 'myfile',
 		onSubmit : function(file, ext){
 		// change button text, when user selects file

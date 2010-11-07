@@ -1,8 +1,8 @@
 <?php
-$uploaddir="../templates/invoices/logos/";
+
+$uploaddir="../app/logos/";
 
 $uploadfile = $uploaddir . $_FILES["myfile"]["name"];
-
 
 	if (move_uploaded_file($_FILES["myfile"]["tmp_name"], $uploadfile)) 
 		{

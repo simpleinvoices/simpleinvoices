@@ -234,6 +234,7 @@ $early_exit[] = "invoice_template";
 $early_exit[] = "payments_print";
 #$early_exit[] = "reports_report_statement";
 $early_exit[] = "documentation_view";
+$early_exit[] = "biller_upload-logo";
 //$early_exit[] = "install_index";
 
 
