@@ -156,7 +156,13 @@
 			<img src="{$include_dir}sys/images/common/help-small.png" alt="" /> </a>
 			</td>
 		<td>
-			{html_options name=logo output=$files values=$files selected=$files[0] }
+			{html_options id=logo name=logo output=$files values=$files selected=$files[0] }
+			<div id="uploadlogowrapper">
+			    <div class="wrapper">
+			        <div id="uploadlogobutton" class="logobuttonuploader" >Upload File</div>
+			    </div>
+			    <div class="files"></div>
+			</div>
 		</td>
 	</tr>
 	<tr>
