@@ -23,7 +23,7 @@ checkLogin();
 $pageActive = "invoices";
 $smarty->assign('pageActive', $pageActive);
 
-include('./modules/invoices/invoice.php');
+require_once($include_dir .'sys/modules/invoices/invoice.php');
 
 $smarty -> assign('pageActive', 'invoice_new');
 $smarty -> assign('subPageActive', 'invoice_new_total');

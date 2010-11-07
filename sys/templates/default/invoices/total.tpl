@@ -15,7 +15,7 @@
 <!--
 <h3>{$LANG.inv} {$LANG.inv_total}</h3>
 -->
-{include file="$path/header.tpl" }
+{include file="$smarty_embed_path/sys/templates/default/invoices/header.tpl" }
 
 <tr>
 <td class="details_screen">{$LANG.description}</td>
