@@ -1484,22 +1484,35 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['252']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value ='en_GB' where name='language';";
     $patch['252']['date'] = "20100419";    
     
+    $patch['253']['name'] = "Add details field to products table";
+    $patch['253']['patch'] = "ALTER TABLE  ".TB_PREFIX."products ADD `detail` TEXT NOT NULL AFTER  `description` ;" ;
+    $patch['253']['date'] = "20100926";
+
+    $patch['254']['name'] = "Create unique index on user email, duplicate email addresses are not allowed as username";
+    $patch['254']['patch'] = "CREATE UNIQUE INDEX ref_idx_email on ".TB_PREFIX."user (email) ;";  
+    $patch['254']['date'] = "20100913";
+/*
+** comment out so can get beta of 2010.3 - to be added in later 
     $patch['253']['name'] = "Insert invoice_creator user group";
     $patch['253']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('invoice_creator');";
     $patch['253']['date'] = "20080102";
 
-    $patch['254']['name'] = "Add invoice_status to invoice table";
-    $patch['254']['patch'] = "ALTER TABLE ".TB_PREFIX."invoices ADD inv_status varchar(10) default 'draft' ;";
-    $patch['254']['date'] = "20100913";
-
-    $patch['255']['name'] = "Create unique index on user email, duplicate email addresses are not allowed as username";
-    $patch['255']['patch'] = "CREATE UNIQUE INDEX ref_idx_email on ".TB_PREFIX."user (email) ;";  
-    $patch['255']['date'] = "20100913";
-
     $patch['256']['name'] = "Create unique customer role";
     $patch['256']['patch'] = "insert into ".TB_PREFIX."user_role (name) values ('customer') ;";  
     $patch['256']['date'] = "20100914";
+*/
+
+/*
+** commented out so can get beta of 2010.3 out - to be added back in later once more work done on inv_status
+    $patch['254']['name'] = "Add invoice_status to invoice table";
+    $patch['254']['patch'] = "ALTER TABLE ".TB_PREFIX."invoices ADD inv_status varchar(10) default 'draft' ;";
+    $patch['254']['date'] = "20100913";
+*/
+
+
+/*
     
+** comment out so can get beta of 2010.3 - to be added in later once more work done on translations via db
     $patch['257']['name'] = "Add translation field for preferences";
     $patch['257']['patch'] = "alter table ".TB_PREFIX."preferences add (translation varchar(50)) ;";
     $patch['257']['date'] = "20100926";
@@ -1519,11 +1532,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['261']['name'] = "Add translation field for preferences";
     $patch['261']['patch'] = "update ".TB_PREFIX."preferences set translation = 'quote' where pref_description = 'Quote' ;" ;
     $patch['261']['date'] = "20100926";
-
-    $patch['262']['name'] = "Add details field to products table";
-    $patch['262']['patch'] = "ALTER TABLE  ".TB_PREFIX."products ADD `detail` TEXT NOT NULL AFTER  `description` ;" ;
-    $patch['262']['date'] = "20100926";
-
+*/
 /*
 ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );
 
