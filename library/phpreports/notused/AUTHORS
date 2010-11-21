@@ -1,0 +1,34 @@
+Author/Project Leader:
+	Eustaquio "TaQ" Rangel <eustaquiorangel@yahoo.com>
+
+Contributors:
+	Matthew Palmer <mpalmer@hezmatt.org>
+		Suggestions, some code, patches, Debian packaging, PEAR DB backend	
+	
+	Keith Willis <keith@net-soft.com.au>
+		Suggestions, some code, patches and a lot of testing on 
+		Windows (tm) environments
+	
+	Luis Gustavo <suporte@emar.com.br>
+		Interbase database code and testing
+	
+	Robin Marlowe <robin.marlowe@macltd.com>
+		Patch for PHP5
+	
+	David Cavanaugh <david.cavanaugh@strus.com>
+		Suggestions and bug reports
+	
+	Bertrand Revenaz <revenazb@fusemail.com>
+		Suggestions
+
+	Aztek <aztek@box.sk>
+		PostgreSQL interface, ADO DB interface
+
+	Patrice W. <patrice@sden.org>
+		TSV output plugin		
+
+	Langis Gagnon
+		SQLite interface
+
+	David Sowers
+		Suggestions

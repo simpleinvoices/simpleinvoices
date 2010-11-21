@@ -1,0 +1,1294 @@
+{
+    "si_custom_fields": [
+        {
+            "cf_id": "1",
+            "cf_custom_field": "biller_cf1",
+            "cf_display": "0",
+            "domain_id": "DOMAIN-ID" 
+        },
+        {
+            "cf_id": "2",
+            "cf_custom_field": "biller_cf2",
+            "cf_display": "0",
+            "domain_id": "DOMAIN-ID" 
+        },
+        {
+            "cf_id": "3",
+            "cf_custom_field": "biller_cf3",
+            "cf_display": "0",
+            "domain_id": "DOMAIN-ID" 
+        },
+        {
+            "cf_id": "4",
+            "cf_custom_field": "biller_cf4",
+            "cf_display": "0",
+            "domain_id": "DOMAIN-ID" 
+        },
+        {
+            "cf_id": "5",
+            "cf_custom_field": "customer_cf1",
+            "cf_display": "0",
+            "domain_id": "DOMAIN-ID" 
+        },
+        {
+            "cf_id": "6",
+            "cf_custom_field": "customer_cf2",
+            "cf_display": "0",
+            "domain_id": "DOMAIN-ID" 
+        },
+        {
+            "cf_id": "7",
+            "cf_custom_field": "customer_cf3",
+            "cf_display": "0",
+            "domain_id": "DOMAIN-ID" 
+        },
+        {
+            "cf_id": "8",
+            "cf_custom_field": "customer_cf4",
+            "cf_display": "0",
+            "domain_id": "DOMAIN-ID" 
+        },
+        {
+            "cf_id": "9",
+            "cf_custom_field": "product_cf1",
+            "cf_display": "0",
+            "domain_id": "DOMAIN-ID" 
+        },
+        {
+            "cf_id": "10",
+            "cf_custom_field": "product_cf2",
+            "cf_display": "0",
+            "domain_id": "DOMAIN-ID" 
+        },
+        {
+            "cf_id": "11",
+            "cf_custom_field": "product_cf3",
+            "cf_display": "0",
+            "domain_id": "DOMAIN-ID" 
+        },
+        {
+            "cf_id": "12",
+            "cf_custom_field": "product_cf4",
+            "cf_display": "0",
+            "domain_id": "DOMAIN-ID" 
+        },
+        {
+            "cf_id": "13",
+            "cf_custom_field": "invoice_cf1",
+            "cf_display": "0",
+            "domain_id": "DOMAIN-ID" 
+        },
+        {
+            "cf_id": "14",
+            "cf_custom_field": "invoice_cf2",
+            "cf_display": "0",
+            "domain_id": "DOMAIN-ID" 
+        },
+        {
+            "cf_id": "15",
+            "cf_custom_field": "invoice_cf3",
+            "cf_display": "0",
+            "domain_id": "DOMAIN-ID" 
+        },
+        {
+            "cf_id": "16",
+            "cf_custom_field": "invoice_cf4",
+            "cf_display": "0",
+            "domain_id": "DOMAIN-ID" 
+        } 
+    ] ,
+    "si_extensions": [
+        {
+            "id": "1",
+            "domain_id": "0",
+            "name": "core",
+            "description": "Core part of Simple Invoices - always enabled",
+            "enabled": "1"
+        } 
+    ] ,
+    "si_invoice_type": [
+        {
+            "inv_ty_id": "1",
+            "inv_ty_description": "Total" 
+        },
+        {
+            "inv_ty_id": "2",
+            "inv_ty_description": "Itemised" 
+        },
+        {
+            "inv_ty_id": "3",
+            "inv_ty_description": "Consulting" 
+        } 
+    ] ,
+    "si_payment_types": [
+        {
+			"pt_id": "1",
+            "domain_id": "DOMAIN-ID",
+            "pt_description": "Cash",
+            "pt_enabled": "1" 
+        },
+        {
+			"pt_id": "2",
+            "domain_id": "1",
+            "pt_description": "Credit Card",
+            "pt_enabled": "1" 
+        } 
+    ] ,
+    "si_preferences": [
+        {
+            "pref_id": "1",
+            "domain_id": "1",
+            "pref_description": "Invoice",
+            "pref_currency_sign": "$",
+            "pref_inv_heading": "Invoice",
+            "pref_inv_wording": "Invoice",
+            "pref_inv_detail_heading": "Details",
+            "pref_inv_detail_line": "Payment is to be made within 14 days of the invoice being sent",
+            "pref_inv_payment_method": "Electronic Funds Transfer",
+            "pref_inv_payment_line1_name": "Account name",
+            "pref_inv_payment_line1_value": "H. & M. Simpson",
+            "pref_inv_payment_line2_name": "Account number:",
+            "pref_inv_payment_line2_value": "0123-4567-7890",
+            "status":"1",
+            "locale":"LOCALE",
+            "language":"LANGUAGE",
+            "index_group":"1",
+            "currency_code":"USD",
+            "currency_position":"left",
+            "pref_enabled": "1" 
+        },
+        {
+            "pref_id": "2",
+            "domain_id": "1",
+            "pref_description": "Receipt",
+            "pref_currency_sign": "$",
+            "pref_inv_heading": "Receipt",
+            "pref_inv_wording": "Receipt",
+            "pref_inv_detail_heading": "Details",
+            "pref_inv_detail_line": "<br />This transaction has been paid in full, please keep this receipt as proof of purchase.<br /> Thank you",
+            "pref_inv_payment_method": "",
+            "pref_inv_payment_line1_name": "",
+            "pref_inv_payment_line1_value": "",
+            "pref_inv_payment_line2_name": "",
+            "pref_inv_payment_line2_value": "",
+            "status":"1",
+            "locale":"LOCALE",
+            "language":"LANGUAGE",
+            "index_group":"1",
+            "currency_code":"USD",
+            "currency_position":"left",
+            "pref_enabled": "1" 
+        },
+        {
+            "pref_id": "3",
+            "domain_id": "1",
+            "pref_description": "Estimate",
+            "pref_currency_sign": "$",
+            "pref_inv_heading": "Estimate",
+            "pref_inv_wording": "Estimate",
+            "pref_inv_detail_heading": "Details",
+            "pref_inv_detail_line": "<br />This is an estimate of the final value of services rendered.<br />Thank you",
+            "pref_inv_payment_method": "",
+            "pref_inv_payment_line1_name": "",
+            "pref_inv_payment_line1_value": "",
+            "pref_inv_payment_line2_name": "",
+            "pref_inv_payment_line2_value": "",
+            "status":"1",
+            "locale":"LOCALE",
+            "language":"LANGUAGE",
+            "index_group":"1",
+            "currency_code":"USD",
+            "currency_position":"left",
+            "pref_enabled": "1" 
+        },
+        {
+            "pref_id": "4",
+            "domain_id": "1",
+            "pref_description": "Quote",
+            "pref_currency_sign": "$",
+            "pref_inv_heading": "Quote",
+            "pref_inv_wording": "Quote",
+            "pref_inv_detail_heading": "Details",
+            "pref_inv_detail_line": "<br />This is a quote of the final value of services rendered.<br />Thank you",
+            "pref_inv_payment_method": "",
+            "pref_inv_payment_line1_name": "",
+            "pref_inv_payment_line1_value": "",
+            "pref_inv_payment_line2_name": "",
+            "pref_inv_payment_line2_value": "",
+            "status":"1",
+            "locale":"LOCALE",
+            "language":"LANGUAGE",
+            "index_group":"1",
+            "currency_code":"USD",
+            "currency_position":"left",
+            "pref_enabled": "1" 
+        } 
+    ],
+    "si_sql_patchmanager": [
+        {
+            "sql_id": "1",
+            "sql_patch_ref": "1",
+            "sql_patch": "Create sql_patchmanger table",
+            "sql_release": "20060514",
+            "sql_statement": "CREATE TABLE si_sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 255 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) ENGINE = MYISAM "
+        },
+        {
+            "sql_id": "2",
+            "sql_patch_ref": "2"
+        },
+        {
+            "sql_id": "3",
+            "sql_patch_ref": "3"
+        },
+        {
+            "sql_id": "4",
+            "sql_patch_ref": "4"
+        },
+        {
+            "sql_id": "5",
+            "sql_patch_ref": "5"
+        },
+        {
+            "sql_id": "6",
+            "sql_patch_ref": "6"
+        },
+        {
+            "sql_id": "7",
+            "sql_patch_ref": "7"
+        },
+        {
+            "sql_id": "8",
+            "sql_patch_ref": "8"
+        },
+        {
+            "sql_id": "9",
+            "sql_patch_ref": "9"
+        },
+        {
+            "sql_id": "10",
+            "sql_patch_ref": "10"
+        },
+        {
+            "sql_id": "11",
+            "sql_patch_ref": "11"
+        },
+        {
+            "sql_id": "12",
+            "sql_patch_ref": "12"
+        },
+        {
+            "sql_id": "13",
+            "sql_patch_ref": "13"
+        },
+        {
+            "sql_id": "14",
+            "sql_patch_ref": "14"
+        },
+        {
+            "sql_id": "15",
+            "sql_patch_ref": "15"
+        },
+        {
+            "sql_id": "16",
+            "sql_patch_ref": "16"
+        },
+        {
+            "sql_id": "17",
+            "sql_patch_ref": "17"
+        },
+        {
+            "sql_id": "18",
+            "sql_patch_ref": "18"
+        },
+        {
+            "sql_id": "19",
+            "sql_patch_ref": "19"
+        },
+        {
+            "sql_id": "20",
+            "sql_patch_ref": "20"
+        },
+        {
+            "sql_id": "21",
+            "sql_patch_ref": "21"
+        },
+        {
+            "sql_id": "22",
+            "sql_patch_ref": "22"
+        },
+        {
+            "sql_id": "23",
+            "sql_patch_ref": "23"
+        },
+        {
+            "sql_id": "24",
+            "sql_patch_ref": "24"
+        },
+        {
+            "sql_id": "25",
+            "sql_patch_ref": "25"
+        },
+        {
+            "sql_id": "26",
+            "sql_patch_ref": "26"
+        },
+        {
+            "sql_id": "27",
+            "sql_patch_ref": "27"
+        },
+        {
+            "sql_id": "28",
+            "sql_patch_ref": "28"
+        },
+        {
+            "sql_id": "29",
+            "sql_patch_ref": "29"
+        },
+        {
+            "sql_id": "30",
+            "sql_patch_ref": "30"
+        },
+        {
+            "sql_id": "31",
+            "sql_patch_ref": "31"
+        },
+        {
+            "sql_id": "32",
+            "sql_patch_ref": "32"
+        },
+        {
+            "sql_id": "33",
+            "sql_patch_ref": "33"
+        },
+        {
+            "sql_id": "34",
+            "sql_patch_ref": "34"
+        },
+        {
+            "sql_id": "35",
+            "sql_patch_ref": "35"
+        },
+        {
+            "sql_id": "36",
+            "sql_patch_ref": "36"
+        },
+        {
+            "sql_id": "37",
+            "sql_patch_ref": "0",
+            "sql_patch": "Start",
+            "sql_release": "20060514",
+            "sql_statement": ""
+        },
+        {
+            "sql_id": "38",
+            "sql_patch_ref": "37"
+        },
+        {
+            "sql_id": "39",
+            "sql_patch_ref": "38"
+        },
+        {
+            "sql_id": "40",
+            "sql_patch_ref": "39"
+        },
+        {
+            "sql_id": "41",
+            "sql_patch_ref": "40"
+        },
+        {
+            "sql_id": "42",
+            "sql_patch_ref": "41"
+        },
+        {
+            "sql_id": "43",
+            "sql_patch_ref": "42"
+        },
+        {
+            "sql_id": "44",
+            "sql_patch_ref": "43"
+        },
+        {
+            "sql_id": "45",
+            "sql_patch_ref": "44"
+        },
+        {
+            "sql_id": "46",
+            "sql_patch_ref": "45"
+        },
+        {
+            "sql_id": "47",
+            "sql_patch_ref": "46"
+        },
+        {
+            "sql_id": "48",
+            "sql_patch_ref": "47"
+        },
+        {
+            "sql_id": "49",
+            "sql_patch_ref": "48"
+        },
+        {
+            "sql_id": "50",
+            "sql_patch_ref": "49"
+        },
+        {
+            "sql_id": "51",
+            "sql_patch_ref": "50"
+        },
+        {
+            "sql_id": "52",
+            "sql_patch_ref": "51"
+        },
+        {
+            "sql_id": "53",
+            "sql_patch_ref": "52"
+        },
+        {
+            "sql_id": "54",
+            "sql_patch_ref": "53"
+        },
+        {
+            "sql_patch_ref": "54"
+        },
+        {
+            "sql_patch_ref": "55"
+        },
+        {
+            "sql_patch_ref": "56"
+        },
+        {
+            "sql_patch_ref": "57"
+        },
+        {
+            "sql_patch_ref": "58"
+        },
+        {
+            "sql_patch_ref": "59"
+        },
+        {
+            "sql_patch_ref": "60"
+        },
+        {
+            "sql_patch_ref": "61"
+        },
+        {
+            "sql_patch_ref": "62"
+        },
+        {
+            "sql_patch_ref": "63"
+        },
+        {
+            "sql_patch_ref": "64"
+        },
+        {
+            "sql_patch_ref": "65"
+        },
+        {
+            "sql_patch_ref": "66"
+        },
+        {
+            "sql_patch_ref": "67"
+        },
+        {
+            "sql_patch_ref": "68"
+        },
+        {
+            "sql_patch_ref": "69"
+        },
+        {
+            "sql_patch_ref": "70"
+        },
+        {
+            "sql_patch_ref": "71"
+        },
+        {
+            "sql_patch_ref": "72"
+        },
+        {
+            "sql_patch_ref": "73"
+        },
+        {
+            "sql_patch_ref": "74"
+        },
+        {
+            "sql_patch_ref": "75"
+        },
+        {
+            "sql_patch_ref": "76"
+        },
+        {
+            "sql_patch_ref": "77"
+        },
+        {
+            "sql_patch_ref": "78"
+        },
+        {
+            "sql_patch_ref": "79"
+        },
+        {
+            "sql_patch_ref": "80"
+        },
+        {
+            "sql_patch_ref": "81"
+        },
+        {
+            "sql_patch_ref": "82"
+        },
+        {
+            "sql_patch_ref": "83"
+        },
+        {
+            "sql_patch_ref": "84"
+        },
+        {
+            "sql_patch_ref": "85"
+        },
+        {
+            "sql_patch_ref": "86"
+        },
+        {
+            "sql_patch_ref": "87"
+        },
+        {
+            "sql_patch_ref": "88"
+        },
+        {
+            "sql_patch_ref": "89"
+        },
+        {
+            "sql_patch_ref": "90"
+        },
+        {
+            "sql_patch_ref": "91"
+        },
+        {
+            "sql_patch_ref": "92"
+        },
+        {
+            "sql_patch_ref": "93"
+        },
+        {
+            "sql_patch_ref": "94"
+        },
+        {
+            "sql_patch_ref": "95"
+        },
+        {
+            "sql_patch_ref": "96"
+        },
+        {
+            "sql_patch_ref": "97"
+        },
+        {
+            "sql_patch_ref": "98"
+        },
+        {
+            "sql_patch_ref": "99"
+        },
+        {
+            "sql_patch_ref": "100"
+        },
+        {
+            "sql_patch_ref": "101"
+        },
+        {
+            "sql_patch_ref": "102"
+        },
+        {
+            "sql_patch_ref": "103"
+        },
+        {
+            "sql_patch_ref": "104"
+        },
+        {
+            "sql_patch_ref": "105"
+        },
+        {
+            "sql_patch_ref": "106"
+        },
+        {
+            "sql_patch_ref": "107"
+        },
+        {
+            "sql_patch_ref": "108"
+        },
+        {
+            "sql_patch_ref": "109"
+        },
+        {
+            "sql_patch_ref": "110"
+        },
+        {
+            "sql_patch_ref": "111"
+        },
+        {
+            "sql_patch_ref": "112"
+        },
+        {
+            "sql_patch_ref": "113"
+        },
+        {
+            "sql_patch_ref": "114"
+        },
+        {
+            "sql_patch_ref": "115"
+        },
+        {
+            "sql_patch_ref": "116"
+        },
+        {
+            "sql_patch_ref": "117"
+        },
+        {
+            "sql_patch_ref": "118"
+        },
+        {
+            "sql_patch_ref": "119"
+        },
+        {
+            "sql_patch_ref": "120"
+        },
+        {
+            "sql_patch_ref": "121"
+        },
+        {
+            "sql_patch_ref": "122"
+        },
+        {
+            "sql_patch_ref": "123"
+        },
+        {
+            "sql_patch_ref": "124"
+        },
+        {
+            "sql_patch_ref": "125"
+        },
+        {
+            "sql_patch_ref": "126"
+        },
+        {
+            "sql_patch_ref": "127"
+        },
+        {
+            "sql_patch_ref": "128"
+        },
+        {
+            "sql_patch_ref": "129"
+        },
+        {
+            "sql_patch_ref": "130"
+        },
+        {
+            "sql_patch_ref": "131"
+        },
+        {
+            "sql_patch_ref": "132"
+        },
+        {
+            "sql_patch_ref": "133"
+        },
+        {
+            "sql_patch_ref": "134"
+        },
+        {
+            "sql_patch_ref": "135"
+        },
+        {
+            "sql_patch_ref": "136"
+        },
+        {
+            "sql_patch_ref": "137"
+        },
+        {
+            "sql_patch_ref": "138"
+        },
+        {
+            "sql_patch_ref": "139"
+        },
+        {
+            "sql_patch_ref": "140"
+        },
+        {
+            "sql_patch_ref": "141"
+        },
+        {
+            "sql_patch_ref": "142"
+        },
+        {
+            "sql_patch_ref": "143"
+        },
+        {
+            "sql_patch_ref": "144"
+        },
+        {
+            "sql_patch_ref": "145"
+        },
+        {
+            "sql_patch_ref": "146"
+        },
+        {
+            "sql_patch_ref": "147"
+        },
+        {
+            "sql_patch_ref": "148"
+        },
+        {
+            "sql_patch_ref": "149"
+        },
+        {
+            "sql_patch_ref": "150"
+        },
+        {
+            "sql_patch_ref": "151"
+        },
+        {
+            "sql_patch_ref": "152"
+        },
+        {
+            "sql_patch_ref": "153"
+        },
+        {
+            "sql_patch_ref": "154"
+        },
+        {
+            "sql_patch_ref": "155"
+        },
+        {
+            "sql_patch_ref": "156"
+        },
+        {
+            "sql_patch_ref": "157"
+        },
+        {
+            "sql_patch_ref": "158"
+        },
+        {
+            "sql_patch_ref": "159"
+        },
+        {
+            "sql_patch_ref": "160"
+        },
+        {
+            "sql_patch_ref": "161"
+        },
+        {
+            "sql_patch_ref": "162"
+        },
+        {
+            "sql_patch_ref": "163"
+        },
+        {
+            "sql_patch_ref": "164"
+        },
+        {
+            "sql_patch_ref": "165"
+        },
+        {
+            "sql_patch_ref": "166"
+        },
+        {
+            "sql_patch_ref": "167"
+        },
+        {
+            "sql_patch_ref": "168"
+        },
+        {
+            "sql_patch_ref": "169"
+        },
+        {
+            "sql_patch_ref": "170"
+        },
+        {
+            "sql_patch_ref": "171"
+        },
+        {
+            "sql_patch_ref": "172"
+        },
+        {
+            "sql_patch_ref": "173"
+        },
+        {
+            "sql_patch_ref": "174"
+        },
+        {
+            "sql_patch_ref": "175"
+        },
+        {
+            "sql_patch_ref": "176"
+        },
+        {
+            "sql_patch_ref": "177"
+        },
+        {
+            "sql_patch_ref": "178"
+        },
+        {
+            "sql_patch_ref": "179"
+        },
+        {
+            "sql_patch_ref": "180"
+        },
+        {
+            "sql_patch_ref": "181"
+        },
+        {
+            "sql_patch_ref": "182"
+        },
+        {
+            "sql_patch_ref": "183"
+        },
+        {
+            "sql_patch_ref": "184"
+        },
+        {
+            "sql_patch_ref": "185"
+        },
+        {
+            "sql_patch_ref": "186"
+        },
+        {
+            "sql_patch_ref": "187"
+        },
+        {
+            "sql_patch_ref": "188"
+        },
+        {
+            "sql_patch_ref": "189"
+        },
+        {
+            "sql_patch_ref": "190"
+        },
+        {
+            "sql_patch_ref": "191"
+        },
+        {
+            "sql_patch_ref": "192"
+        },
+        {
+            "sql_patch_ref": "193"
+        },
+        {
+            "sql_patch_ref": "194"
+        },
+        {
+            "sql_patch_ref": "195"
+        },
+        {
+            "sql_patch_ref": "196"
+        },
+        {
+            "sql_patch_ref": "197"
+        },
+        {
+            "sql_patch_ref": "198"
+        },
+        {
+            "sql_patch_ref": "199"
+        },
+        {
+            "sql_patch_ref": "200",
+            "sql_patch": "Update extensions table",
+            "sql_release": "20090529",
+            "sql_statement": "UPDATE si_extensions SET id = 0 WHERE name = core LIMIT 1"
+        },
+        {
+            "sql_patch_ref": "201",
+            "sql_patch": "Set domain_id on system defaults table to 1",
+            "sql_release": "20090622",
+            "sql_statement": "UPDATE si_system_defaults SET domain_id = 1"
+        },
+        {
+            "sql_patch_ref": "202",
+            "sql_patch": "Set extension_id on system defaults table to 1",
+            "sql_release": "20090622",
+            "sql_statement": "UPDATE si_system_defaults SET extension_id = 1"
+        },
+        {
+            "sql_patch_ref": "203",
+            "sql_patch": "Move all old consulting style invoices to itemised",
+            "sql_release": "20090704",
+            "sql_statement": "UPDATE si_invoices SET type_id = 2 where type_id = 3"
+        },
+        {
+            "sql_patch_ref": "204"
+        },
+        {
+            "sql_patch_ref": "205"
+        },
+        {
+            "sql_patch_ref": "206"
+        },
+        {
+            "sql_patch_ref": "207"
+        },
+        {
+            "sql_patch_ref": "208"
+        },
+        {
+            "sql_patch_ref": "209"
+        },
+        {
+            "sql_patch_ref": "210"
+        },
+        {
+            "sql_patch_ref": "210"
+        },
+        {
+            "sql_patch_ref": "211"
+        },
+        {
+            "sql_patch_ref": "212"
+        },
+        {
+            "sql_patch_ref": "213"
+        },
+        {
+            "sql_patch_ref": "214"
+        },
+        {
+            "sql_patch_ref": "215"
+        },
+        {
+            "sql_patch_ref": "216"
+        },
+        {
+            "sql_patch_ref": "217"
+        },
+        {
+            "sql_patch_ref": "218"
+        },
+        {
+            "sql_patch_ref": "219"
+        },
+        {
+            "sql_patch_ref": "220"
+        },
+        {
+            "sql_patch_ref": "221"
+        },
+        {
+            "sql_patch_ref": "222"
+        },
+        {
+            "sql_patch_ref": "223"
+        },
+        {
+            "sql_patch_ref": "224"
+        },
+        {
+            "sql_patch_ref": "225"
+        },
+        {
+            "sql_patch_ref": "226"
+        },
+        {
+            "sql_patch_ref": "227"
+        },
+        {
+            "sql_patch_ref": "228"
+        },
+        {
+            "sql_patch_ref": "229"
+        },
+        {
+            "sql_patch_ref": "230"
+        },
+        {
+            "sql_patch_ref": "231"
+        },
+        {
+            "sql_patch_ref": "232"
+        },
+        {
+            "sql_patch_ref": "233"
+        },
+        {
+            "sql_patch_ref": "234"
+        },
+        {
+            "sql_patch_ref": "235"
+        },
+        {
+            "sql_patch_ref": "236"
+        },
+        {
+            "sql_patch_ref": "237"
+        },
+        {
+            "sql_patch_ref": "238"
+        },
+        {
+            "sql_patch_ref": "239"
+        },
+        {
+            "sql_patch_ref": "240"
+        },
+        {
+            "sql_patch_ref": "241"
+        },
+        {
+            "sql_patch_ref": "242"
+        },
+        {
+            "sql_patch_ref": "243"
+        },
+        {
+            "sql_patch_ref": "244"
+        },
+        {
+            "sql_patch_ref": "245"
+        },
+        {
+            "sql_patch_ref": "246"
+        },
+        {
+            "sql_patch_ref": "247"
+        },
+        {
+            "sql_patch_ref": "248"
+        },
+        {
+            "sql_patch_ref": "249"
+        },
+        {
+            "sql_patch_ref": "250"
+        },
+        {
+            "sql_patch_ref": "251"
+        }
+    ],
+    "si_system_defaults": [
+        {
+            "id": "1",
+            "name": "biller",
+            "value": "4",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        },
+        {
+            "id": "2",
+            "name": "customer",
+            "value": "3",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        },
+        {
+            "id": "3",
+            "name": "tax",
+            "value": "1",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        },
+        {
+            "id": "4",
+            "name": "preference",
+            "value": "1",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        },
+        {
+            "id": "5",
+            "name": "line_items",
+            "value": "5",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        },
+        {
+            "id": "6",
+            "name": "template",
+            "value": "default",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        },
+        {
+            "id": "7",
+            "name": "payment_type",
+            "value": "1",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        },
+        {
+            "id": "8",
+            "name": "language",
+            "value": "en_GB",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        },
+        {
+            "id": "9",
+            "name": "dateformate",
+            "value": "Y-m-d",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        },
+        {
+            "id": "10",
+            "name": "spreadsheet",
+            "value": "xls",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        },
+        {
+            "id": "11",
+            "name": "wordprocessor",
+            "value": "doc",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        },
+        {
+            "id": "12",
+            "name": "pdfscreensize",
+            "value": "800",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        },
+        {
+            "id": "13",
+            "name": "pdfpapersize",
+            "value": "A4",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        },
+        {
+            "id": "14",
+            "name": "pdfleftmargin",
+            "value": "15",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        },
+        {
+            "id": "15",
+            "name": "pdfrightmargin",
+            "value": "15",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        },
+        {
+            "id": "16",
+            "name": "pdftopmargin",
+            "value": "15",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        },
+        {
+            "id": "17",
+            "name": "pdfbottommargin",
+            "value": "15",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        },
+        {
+            "id": "18",
+            "name": "emailhost",
+            "value": "localhost",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        },
+        {
+            "id": "19",
+            "name": "emailusername",
+            "value": "",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        },
+        {
+            "id": "20",
+            "name": "emailpassword",
+            "value": "",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        },
+        {
+            "id": "21",
+            "name": "logging",
+            "value": "0",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        },
+        {
+            "id": "22",
+            "name": "delete",
+            "value": "N",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        },
+        {
+            "id": "23",
+            "name": "tax_per_line_item",
+            "value": "1",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        },
+        {
+            "id": "24",
+            "name": "inventory",
+            "value": "0",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1" 
+        }
+    ],
+    "si_tax": [
+        {
+            "tax_id": "1",
+            "tax_description": "GST",
+            "tax_percentage": "10.000000",
+            "type": "%",
+            "tax_enabled": "1",
+            "domain_id": "DOMAIN-ID" 
+        },
+        {
+            "tax_id": "2",
+            "tax_description": "VAT",
+            "tax_percentage": "10.000000",
+            "type": "%",
+            "tax_enabled": "1",
+            "domain_id": "DOMAIN-ID" 
+        },
+        {
+            "tax_id": "3",
+            "tax_description": "Sales Tax",
+            "tax_percentage": "10.000000",
+            "type": "%",
+            "tax_enabled": "1",
+            "domain_id": "DOMAIN-ID" 
+        },
+        {
+            "tax_id": "4",
+            "tax_description": "No Tax",
+            "tax_percentage": "0.000000",
+            "type": "%",
+            "tax_enabled": "1",
+            "domain_id": "DOMAIN-ID" 
+        },
+        {
+            "tax_id": "5",
+            "tax_description": "Postage",
+            "tax_percentage": "20.000000",
+            "type": "$",
+            "tax_enabled": "1",
+            "domain_id": "DOMAIN-ID" 
+        } 
+    ],
+    "si_user": [
+        {
+            "id": "1",
+            "email": "demo@simpleinvoices.org",
+            "role_id": "1",
+            "domain_id": "DOMAIN-ID",
+            "password": "fe01ce2a7fbac8fafaed7c982a04e229",
+            "enabled":"1"
+        }
+    ],
+    "si_user_domain": [
+        {
+            "id": "1",
+            "name": "default"
+        }
+    ],
+    "si_user_role": [
+        {
+            "id": "1",
+            "name": "administrator"
+        }
+    ]
+}

@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>html2ps/html2pdf directives</title>
+<link rel="stylesheet" type="text/css" medial="all" title="Default" href="css/help.css"/>
+</head>
+<body>
+<h1>html2ps/pdf directives</h1>
+<a href="index.html">Back to table of contents</a>
+<h2>Page-breaking commands</h2>
+<p> You can force a page break by inserting any one of the following commands 
+  into the HTML page: 
+<pre>
+&lt;!--NewPage--&gt;
+&lt;pagebreak/&gt;
+&lt;?page-break&gt;
+</pre>
+
+<p> It is highly NOT RECOMMENDED to use these directives inside table cells, as 
+  you can get unpredictable results.
+
+<h2>Special fields</h2>
+
+<p>Note that these fields are processed by separate filter 
+(<a href="api.html#filter-pre-html2ps-fields">PreTreeFilterHTML2PSFields</a>). 
+If you're using HTML2PS API, you should install this filter using the following code:
+<pre>
+pipeline->pre_tree_filters[] = new PreTreeFilterHTML2PSFields();
+</pre>
+
+<table>
+<tbody>
+<tr class="odd">
+<th>Name</th>
+<th>Replaced with</th>
+</tr>
+
+<tr class="even">
+<td>##PAGE##</td>
+<td>Number of current page</td>
+</tr>
+
+<tr class="odd">
+<td>##PAGES##</td>
+<td>
+Total number of pages in the generated PDF file. Note that this directive 
+will show number of pages in current source file when the script is run in batch mode.
+</td>
+</tr>
+
+<tr class="event">
+<td>##FILENAME##</td>
+<td>Filename (URL) of the source HTML</td>
+</tr>
+
+<tr class="odd">
+<td>##FILESIZE##</td>
+<td>Size of the source file (without included files)</td>
+</tr>
+
+<tr class="event">
+<td>##TIMESTAMP##</td>
+<td>Date/time the PDF file have been generated</td>
+</tr>
+
+</tbody>
+
+</body>
+</html>              

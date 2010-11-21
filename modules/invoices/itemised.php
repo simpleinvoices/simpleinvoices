@@ -1,21 +1,31 @@
 <?php
-
+/*
+* Script: itemised.php
+* 	itemised invoice page
+*
+* Authors:
+*	 Justin Kelly, Nicolas Ruflin
+*
+* Last edited:
+* 	 2007-07-19
+*
+* License:
+*	 GPL v2 or above
+*
+* Website:
+* 	http://www.simpleinvoices.org
+ */
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-jsBegin();
-jsFormValidationBegin("frmpost");
-jsTextValidation("sel_id","Biller Name",1,100);
-jsTextValidation("select_customer","Customer Name",1,100);
-jsValidateifNumZero("i_quantity0","Quantity");
-jsValidateifNum("i_quantity0","Quantity");
-jsValidateRequired("select_products0","Product");
-jsTextValidation("select_tax","Tax Rate",1,100);
-jsPreferenceValidation("select_preferences","Invoice Preference",1,100);
-jsFormValidationEnd();
-jsEnd();
 
+$pageActive = "invoices";
+
+$logger->log('Itemised invoice created', Zend_Log::INFO);
 
 include('./modules/invoices/invoice.php');
 
+$smarty -> assign('pageActive', 'invoice_new');
+$smarty -> assign('subPageActive', 'invoice_new_itemised');
+$smarty -> assign('active_tab', '#money');
 ?>

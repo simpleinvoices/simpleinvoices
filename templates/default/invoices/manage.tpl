@@ -1,99 +1,98 @@
-{if $invoices == null }
-	<P><em>{$LANG.no_invoices}.</em></p>
+{*
+/*
+* Script: manage.tpl
+* 	 Manage invoices template
+*
+* License:
+*	 GPL v2 or above
+*
+* Website:
+*	http://www.simpleinvoices.org
+*/
+*}
+
+<table class="buttons" align="center">
+    <tr>
+        <td>
+
+            <a href="index.php?module=invoices&amp;view=itemised" class="positive">
+                <img src="./images/common/add.png" alt="" />
+                {$LANG.new_invoice}
+            </a>
+
+        </td>
+    </tr>
+</table>
+
+{if $number_of_invoices.count == 0}
+	
+	<br />
+	<br />
+	<span class="welcome">{$LANG.no_invoices}</span>
+	<br />
+	<br />
+	<br />
+	<br />
 {else}
 
-<div style="text-align:center;">
-<b>{$LANG.manage_invoices}</b> ::
-<a href="index.php?module=invoices&view=total">{$LANG.add_new_invoice} - {$LANG.total_style}</a> ::
-<a href="index.php?module=invoices&view=itemised">{$LANG.add_new_invoice} - {$LANG.itemised_style}</a> ::
-<a href="index.php?module=invoices&view=consulting">{$LANG.add_new_invoice} - {$LANG.consulting_style}</a>
-</div><hr />
+
+    <br />
+    <span class="welcome">
+       {$LANG.filters}:
+    <a href="index.php?module=invoices&amp;view=manage&amp;having=money_owed">{$LANG.due}</a> : 
+    <a href="index.php?module=invoices&amp;view=manage&amp;having=paid">{$LANG.paid}</a> : 
+    <a href="index.php?module=invoices&amp;view=manage&amp;having=draft">{$LANG.draft}</a> : 
+    <a href="index.php?module=invoices&amp;view=manage&amp;having=real">{$LANG.real}</a> : 
+    <a href="index.php?module=invoices&amp;view=manage">{$LANG.all}</a> 
+
+   </span>
+    <br />
+    <br />
+	<br />
+	<table id="manageGrid" style="display:none"></table>
+	{include file='../modules/invoices/manage.js.php'}
 
 
-<table align="center" id="ex1" class="ricoLiveGrid manage" >
-<colgroup>
-	<col style='width:15%;' />
-	<col style='width:5%;' />
-	<col style='width:10%;' />
-	<col style='width:10%;' />
-	<col style='width:10%;' />
-	<col style='width:10%;' />
-	<col style='width:5%;' />
-	<col style='width:5%;' />
-	<col style='width:10%;' />
-</colgroup>
-<thead> 
-	<tr class="sortHeader">
-		<th class="noFilter sortable" >{$LANG.actions} </th>
-		<th class="noFilter sortable">{$LANG.id}</th>
-		<th class="selectFilter index_table sortable">{$LANG.biller}</th>
-		<th class="selectFilter index_table sortable">{$LANG.customer}</th>
-		<th class="noFilter sortable">{$LANG.total}</th>
-		<th class="noFilter sortable">{$LANG.owing}</th>
-		<th class="selectFilter index_table sortable">{$LANG.aging}</th>
-		<th class="noFilter sortable">{$LANG.invoice_type}</th>
-		<th class="noFilter sortable">{$LANG.date_upper}</th>
-	</tr>
-</thead>
+	<div id="export_dialog" class="flora" title="Export">
 
-{foreach from=$invoices item=invoice}
+		<table class="buttons">
+			<tr>
+				<td>
 
-	
-	<tr class="index_table">
-	<td class="index_table" nowrap>
-	<!-- Quick View -->
-	<a class="index_table"
-	 title="{$LANG.quick_view_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}"
-	 href="index.php?module=invoices&view=quick_view&submit={$invoice.invoice.id}&invoice_style={$invoice.invoiceType.inv_ty_description}">
-		<img src="images/common/view.png" height="16" border="-5px0" padding="-4px" valign="bottom" /><!-- print --></a>
-	</a>
-	
-	<!-- Edit View -->
-	<a class="index_table" title="{$LANG.edit_view_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}"
-	 href="index.php?module=invoices&view=details&submit={$invoice.invoice.id}&action=view&invoice_style={$invoice.invoiceType.inv_ty_description}">
-		<img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>
-	</a> 
-	
-	<!-- Print View -->
-	<a class="index_table" title="{$LANG.print_preview_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}"
-	href="index.php?module=invoices&view=templates/template&submit={$invoice.invoice.id}&action=view&location=print&invoice_style={$invoice.invoiceType.inv_ty_description}">
-	<img src="images/common/printer.gif" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>
- 
-	<!-- EXPORT TO PDF -->
-	<a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id} {$LANG.export_pdf_tooltip}"
-	class="index_table" href="{$invoice.url_for_pdf}"><img src="images/common/pdf.jpg" height="16" padding="-4px" border="-5px" valign="bottom" /><!-- pdf --></a>
-
-	<!--XLS -->
-	<a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording}{$invoice.invoice.id} {$LANG.export_xls_tooltip} {$spreadsheet} {$LANG.format_tooltip}"
-	 class="index_table" href="index.php?module=invoices&view=templates/template&submit={$invoice.invoice.id}&action=view&invoice_style={$invoice.invoiceType.inv_ty_description}&location=print&export={$spreadsheet}">
-	 <img src="images/common/xls.gif" height="16" border="0" padding="-4px" valign="bottom" /><!-- $spreadsheet --></a>
-
-	<!-- DOC -->
-	<a title="{$LANG.export_tooltip} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id} {$LANG.export_doc_tooltip} {$word_processor} {$LANG.format_tooltip}"
-	 class="index_table" href="index.php?module=invoices&view=templates/template&submit={$invoice.invoice.id}&action=view&invoice_style={$invoice.invoiceType.inv_ty_description}&location=print&export={$word_processor}">
-	 <img src="images/common/doc.png" height="16" border="0" padding="-4px" valign="bottom" /><!-- $word_processor --></a>
-
-  <!-- Payment --><a title="{$LANG.process_payment} {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}"
-   class="index_table" href="index.php?module=payments&view=process&submit={$invoice.invoice.id}&op=pay_selected_invoice">$</a>
-	<!-- Email -->
-	<a href="index.php?module=invoices&view=email&stage=1&submit={$invoice.invoice.id}" title="{$LANG.email}  {$invoice.preference.pref_inv_wording} {$invoice.invoice.id}"><img src="images/common/mail-message-new.png" height="16" border="0" padding="-4px" valign="bottom" /></a>
-
-	</td>
-	<td class="index_table">{$invoice.invoice.id}</td>
-	<td class="index_table">{$invoice.biller.name}</td>
-	<td class="index_table">{$invoice.customer.name}</td>
-	<td class="index_table">{$invoice.invoice.total}</td>
-	<!--
-	<td class="index_table">{$invoice.paid_format}</td>
-	-->
-	<td class="index_table">{$invoice.invoice.owing}</td>
-	<td class="index_table">{$invoice.overdue}</td>
-	<td class="index_table">{$invoice.preference.pref_inv_wording}</td>
-	<td class="index_table">{$invoice.invoice.date}</td>
-	</tr>
-
-									
-	{/foreach}					
-
-</table>
+					<a
+				     	title='{$LANG.export_tooltip} {$LANG.export_pdf_tooltip}'
+						class='export_pdf export_window' 
+					>
+						<img src="./images/common/page_white_acrobat.png" alt="" />
+						{$LANG.export_pdf}
+					</a>
+				  </td>
+			</tr>
+			<tr>
+				<td>  
+					
+					<a 
+						title='{$LANG.export_tooltip} {$LANG.export_xls_tooltip} .{$config->export->spreadsheet}' 
+						class='export_xls export_window'
+				   >
+						<img src="./images/common/page_white_excel.png" alt="" />
+						{$LANG.export_xls}
+					</a>
+					</td>
+			</tr>
+			<tr>
+				<td>    
+			
+				   <a 
+						title='{$LANG.export_tooltip} {$LANG.export_doc_tooltip} .{$config->export->wordprocessor}'
+						class='export_doc export_window' 
+				   >
+						<img src="./images/common/page_white_word.png" alt="" />
+						{$LANG.export_doc}
+					</a>
+				</td>
+			</tr>
+		</table>
+	</div>
 {/if}
+

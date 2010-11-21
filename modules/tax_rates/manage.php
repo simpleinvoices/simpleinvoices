@@ -5,8 +5,6 @@ checkLogin();
 
 $smarty -> assign("taxes",getTaxes());
 
-getRicoLiveGrid("rico_tax_rates","{ type:'number', decPlaces:0, ClassName:'alignleft' },
-	,
-	{ type:'number', decPlaces:2, ClassName:'alignleft' }");
-
+$smarty -> assign('pageActive', 'tax_rate');
+$smarty -> assign('active_tab', '#setting');
 ?>

@@ -1,59 +1,58 @@
-<?php 
-include("./include/include_main.php"); 
-
-//stop the direct browsing to this file - let index.php handle which files get displayed
-if (!defined("BROWSE")) {
-   echo "You Cannot Access This Script Directly, Have a Nice Day.";
-   exit();
-}
-
-?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-</head>
-<body>
-<b>Debtors - Amount owing per Customer</b>
-<hr></hr>
-<div id="container">
-
 <?php
-   // include the PHPReports classes on the PHP path! configure your path here
-   include "./modules/reports/PHPReportMaker.php";
-   include "config/config.php";
+//   include phpreports library
+require_once("./include/reportlib.php");
 
-   $sSQL = "SELECT
-        {$tb_prefix}customers.id as CID,
-        {$tb_prefix}customers.name as Customer,
-        (select IF ( isnull(sum({$tb_prefix}invoice_items.total)), '0', sum({$tb_prefix}invoice_items.total)) from {$tb_prefix}invoice_items,{$tb_prefix}invoices where  {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = CID) as INV_TOTAL,
-        (select IF ( isnull(sum(ac_amount)), '0', sum(ac_amount)) from {$tb_prefix}account_payments,{$tb_prefix}invoices where {$tb_prefix}account_payments.ac_inv_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = CID) as INV_PAID,
-        (select (INV_TOTAL - INV_PAID)) as INV_OWING
+   if ($db_server == 'pgsql') {
+      $sSQL = "SELECT
+        c.id AS cid,
+        c.name AS customer,
+        sum(coalesce(ii.total, 0)) AS inv_total,
+        sum(coalesce(ap.ac_amount, 0)) AS inv_paid,
+        sum(coalesce(ii.total, 0)) -
+        sum(coalesce(ap.ac_amount, 0)) AS inv_owing
 
 FROM
-        {$tb_prefix}customers,{$tb_prefix}invoices,{$tb_prefix}invoice_items
-WHERE
-        {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id and {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id
-
+        ".TB_PREFIX."customers c LEFT JOIN
+        ".TB_PREFIX."invoices iv ON (c.id = iv.customer_id) LEFT JOIN
+	(SELECT i.invoice_id, coalesce(sum(i.total), 0) AS total
+         FROM ".TB_PREFIX."invoice_items i GROUP BY i.invoice_id
+        ) ii ON (iv.id = ii.invoice_id) LEFT JOIN
+	(SELECT p.ac_inv_id, coalesce(sum(p.ac_amount), 0) AS ac_amount
+         FROM ".TB_PREFIX."payment p GROUP BY p.ac_inv_id
+        ) ap ON (iv.id = ap.ac_inv_id)
 GROUP BY
-        {$tb_prefix}customers.id
+        c.id, c.name
 ORDER BY
-        INV_OWING DESC;
+        inv_owing DESC;
+   ";
+   } else {
+      $sSQL = "SELECT
+        c.id as cid,
+        c.name as customer,
+        (select coalesce(sum(ii2.total), 0) from ".TB_PREFIX."invoice_items ii2,".TB_PREFIX."invoices iv2 where ii2.invoice_id = iv2.id and iv2.customer_id = c.id) as inv_total,
+        (select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."payment ap, ".TB_PREFIX."invoices iv3 where ap.ac_inv_id = iv3.id and iv3.customer_id = c.id) as inv_paid,
+        (select (inv_total - inv_paid)) as inv_owing
 
+FROM
+        ".TB_PREFIX."customers c,".TB_PREFIX."invoices,".TB_PREFIX."invoice_items, ".TB_PREFIX."preferences
+WHERE
+        ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id and ".TB_PREFIX."invoices.customer_id = c.id
+        AND ".TB_PREFIX."invoices.preference_id = ".TB_PREFIX."preferences.pref_id
+        AND ".TB_PREFIX."preferences.status = 1
+GROUP BY
+        c.id
+HAVING
+        inv_owing > 0 
+ORDER BY
+        inv_owing DESC;
+   ";
+}
 
-   ";	
-   $oRpt = new PHPReportMaker();
+   $oRpt->setXML("./modules/reports/report_debtors_owing_by_customer.xml");
 
-   $oRpt->setXML("./modules/reports/xml/report_debtors_owing_by_customer.xml");
-   $oRpt->setUser("$db_user");
-   $oRpt->setPassword("$db_password");
-   $oRpt->setConnection("$db_host");
-   $oRpt->setDatabaseInterface("mysql");
-   $oRpt->setSQL($sSQL);
-   $oRpt->setDatabase("$db_name");
-   $oRpt->run();
+//   include phpreports run code
+	include("./include/reportrunlib.php");
+
+$smarty -> assign('pageActive', 'report');
+$smarty -> assign('active_tab', '#home');
 ?>
-
-<hr></hr>
-</div>
-<div id="footer"></div>

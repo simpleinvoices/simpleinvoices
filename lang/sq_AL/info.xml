@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<langfile version="1.0.0" type="language">
+	<name>Shqip</name>
+	<shortname>sq_AL</shortname>
+	<englishname>Albanian</englishname>
+	<version>1.0.0</version>
+	<creationDate>2004-09-20</creationDate>
+	<author>Gjergj Sheldija</author>
+	<authorEmail>gjergj.sheldija@gmail.com</authorEmail>
+</langfile>

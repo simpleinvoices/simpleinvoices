@@ -1,40 +1,54 @@
-<?php 
-include("./include/include_main.php"); 
-
-//stop the direct browsing to this file - let index.php handle which files get displayed
-if (!defined("BROWSE")) {
-   echo "You Cannot Access This Script Directly, Have a Nice Day.";
-   exit();
-}
-
-?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-
-</head>
-<body>
-<br>
-<b>Debtor invoices ordered by aging</b>
-<hr></hr>
-<div id="container">
-
 <?php
-include('./config/config.php');
+//   include phpreports library
+require_once("./include/reportlib.php");
 
-   // include the PHPReports classes on the PHP path! configure your path here
-   include "./modules/reports/PHPReportMaker.php";
+   if ($db_server == 'pgsql') {
+      $sSQL = "SELECT
+        iv.id,
+        b.name AS biller,
+        c.name AS customer,
 
-   $sSQL = "SELECT
-        {$tb_prefix}invoices.id,
-        (select name from {$tb_prefix}biller where {$tb_prefix}biller.id = {$tb_prefix}invoices.biller_id) as Biller,
-        (select name from {$tb_prefix}customers where {$tb_prefix}customers.id = {$tb_prefix}invoices.customer_id) as Customer,
-        (select sum({$tb_prefix}invoice_items.total) from {$tb_prefix}invoice_items WHERE {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id) as INV_TOTAL,
-        ( select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from {$tb_prefix}account_payments where  ac_inv_id = {$tb_prefix}invoices.id ) as INV_PAID,
-        (select (INV_TOTAL - INV_PAID)) as INV_OWING ,
-        date_format(date,'%Y-%m-%e') as Date ,
-        (select datediff(now(),date)) as Age,
+        coalesce(ii.total, 0) AS inv_total,
+        coalesce(ap.total, 0) AS inv_paid,
+        coalesce(ii.total, 0) - coalesce(ap.total, 0) as inv_owing,
+
+        to_char(iv.date,'YYYY-MM-DD') as date,
+        age(iv.date) as age,
+        (CASE   WHEN age(iv.date) <= '14 days'::interval THEN '0-14'
+                WHEN age(iv.date) <= '30 days'::interval THEN '15-30'
+                WHEN age(iv.date) <= '60 days'::interval THEN '31-60'
+                WHEN age(iv.date) <= '90 days'::interval THEN '61-90'
+                ELSE '90+'
+        END) as aging
+
+FROM
+        ".TB_PREFIX."invoices iv INNER JOIN
+	".TB_PREFIX."biller b ON (b.id = iv.biller_id) INNER JOIN
+	".TB_PREFIX."customers c ON (c.id = iv.customer_id) LEFT JOIN
+        (SELECT i.invoice_id, sum(i.total) AS total
+         FROM ".TB_PREFIX."invoice_items i GROUP BY i.invoice_id
+        ) ii ON (iv.id = ii.invoice_id) LEFT JOIN
+        (SELECT p.ac_inv_id, sum(p.ac_amount) AS total
+         FROM ".TB_PREFIX."payments p GROUP BY p.ac_inv_id
+        ) ap ON (iv.id = ap.ac_inv_id)
+ORDER BY
+        age DESC;
+";
+   } else {
+      $sSQL = "SELECT
+        iv.id,
+        (select name from ".TB_PREFIX."biller where ".TB_PREFIX."biller.id = iv.biller_id) as biller,
+        (select name from ".TB_PREFIX."customers where ".TB_PREFIX."customers.id = iv.customer_id) as customer,
+        (select sum(".TB_PREFIX."invoice_items.total) from ".TB_PREFIX."invoice_items WHERE ".TB_PREFIX."invoice_items.invoice_id = iv.id) as inv_total,
+        -- (select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from ".TB_PREFIX."payment where  ac_inv_id = iv.id ) as inv_paid,
+        -- (select (inv_total - inv_paid)) as inv_owing ,
+
+        -- (select coalesce(sum(ii.total), 0) from ".TB_PREFIX."invoice_items ii,".TB_PREFIX."invoices iv where ii.invoice_id = iv.id) as inv_total,
+        (select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."payment ap, ".TB_PREFIX."invoices iv3 where ap.ac_inv_id = iv.id and iv.customer_id = c.id) as inv_paid,
+        (select (inv_total - inv_paid)) as inv_owing,
+
+        date_format(date,'%Y-%m-%e') as date ,
+        (select datediff(now(),date)) as age,
         (CASE WHEN datediff(now(),date) <= 14 THEN '0-14'
                 WHEN datediff(now(),date) <= 30 THEN '15-30'
                 WHEN datediff(now(),date) <= 60 THEN '31-60'
@@ -43,25 +57,27 @@ include('./config/config.php');
         END ) as Aging
 
 FROM
-        {$tb_prefix}invoices,{$tb_prefix}account_payments,{$tb_prefix}invoice_items, {$tb_prefix}biller, {$tb_prefix}customers
+        ".TB_PREFIX."invoices iv, ".TB_PREFIX."biller b, ".TB_PREFIX."customers c, ".TB_PREFIX."invoice_items, ".TB_PREFIX."preferences
 WHERE
-        {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id
-GROUP BY
-        {$tb_prefix}invoices.id;
-
+       ".TB_PREFIX."invoice_items.invoice_id = iv.id
+        and iv.customer_id = c.id AND iv.biller_id = b.id 
+        AND iv.preference_id = ".TB_PREFIX."preferences.pref_id
+        AND ".TB_PREFIX."preferences.status = 1
+GROUP BY 
+    iv.id
+HAVING 
+    inv_owing > 0
+ORDER BY 
+    Aging DESC
+        ;
 ";
-   $oRpt = new PHPReportMaker();
+}
 
-   $oRpt->setXML("./modules/reports/xml/report_debtors_by_aging.xml");
-   $oRpt->setUser("$db_user");
-   $oRpt->setPassword("$db_password");
-   $oRpt->setConnection("$db_host");
-   $oRpt->setDatabaseInterface("mysql");
-   $oRpt->setSQL($sSQL);
-   $oRpt->setDatabase("$db_name");
-   $oRpt->run();
+   $oRpt->setXML("./modules/reports/report_debtors_by_aging.xml");
+
+	//   include phpreports run code
+	include("./include/reportrunlib.php");
+
+$smarty -> assign('pageActive', 'report');
+$smarty -> assign('active_tab', '#home');
 ?>
-
-<hr></hr>
-</div>
-<div id="footer"></div>

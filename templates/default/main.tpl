@@ -1,7 +1,6 @@
- 
-  
-<div id="Wrapper">
-<div id="Container">
- 
-<div class="Full">
-<div class="col">
+<!--
+TODO : delete this file
+-->
+
+
+<div id="Container" class="col">

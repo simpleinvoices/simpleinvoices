@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>html2ps/html2pdf installation notes</title>
+<link rel="stylesheet" type="text/css" medial="all" title="Default" href="css/help.css"/>
+</head>
+<body>
+<h1>html2ps/pdf installation notes</h1>
+<p><a href="index.html">Back to table of contents</a></p>
+
+<p>To install HTML2PS, follow these simple steps:</p>
+<ol>
+<li>Unpack zip package contents to some directory on your web server</li>
+<li>Edit config.inc.php to suit your needs; most probably you'll need to update values of GS_PATH and TYPE1_FONTS_REPOSITORY constants</li>
+<li>Ensure script files and directories have correct permissions:
+<ul>
+<li>All files and folders should be readable by webserver user account</li>
+<li>Directories 'out','tmp' and 'cache' should be writeable by webserver user account</li>
+<li>If you're going to use FPDF output method, please copy .ttf files from your Windows distribution (or any other source) to 
+fonts subdirectory! Due the size of TrueType fonts files, they're not distibuted with the scripts, but still needed by some output methods.</li>
+</ul>
+</ol>
+
+<p><span style="color: red">Important:</span> if you're upgrading from older script version, remove all files 
+from 'cache' subdirectory!</p>
+
+<h1>Warning:</h1>
+The default distribution includes several sample script files and script web interface; they may be easily used for DoS attack on your server!
+It is highly recommended that you remove 'sample' and 'demo' subdirectories from publicly available script installation.
+
+</body>
+</html>              

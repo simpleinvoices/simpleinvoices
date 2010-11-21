@@ -1,45 +1,30 @@
 <?php
-include("./include/include_main.php"); 
+//   include phpreports library
+require_once("./include/reportlib.php");
 
-//stop the direct browsing to this file - let index.php handle which files get displayed
-if (!defined("BROWSE")) {
-   echo "You Cannot Access This Script Directly, Have a Nice Day.";
-   exit();
-}
+// Adjusted for NULL on computation with NULL values
+ /*  $sSQL = "SELECT
+      sum(ii.total) AS sum_total,
+         b.name AS bname,
+         c.name AS cname
+      FROM ".TB_PREFIX."biller b INNER JOIN
+      ".TB_PREFIX."invoices iv ON (b.id = iv.biller_id) INNER JOIN
+      ".TB_PREFIX."customers c ON (c.id = iv.customer_id) INNER JOIN
+      ".TB_PREFIX."invoice_items ii ON (iv.id = ii.invoice_id)
+      GROUP BY b.name, c.name";
+*/
+	$sSQL  = "SELECT sum(ivt.total) as SUM_TOTAL, b.name as Biller, c.name as Customer ";
+	$sSQL .= "FROM ".TB_PREFIX."biller b, ".TB_PREFIX."customers c, ";
+	$sSQL .= 		 TB_PREFIX."invoice_items ivt, ".TB_PREFIX."invoices iv ";
+	$sSQL .= "WHERE iv.customer_id = c.id AND iv.biller_id = b.id AND iv.id = ivt.invoice_id ";
+	$sSQL .= "GROUP BY b.name, c.name";
 
-?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-<!-- CSS -->
-
-</head>
-<body>
-
-<b>Sales by Customer - Group by Customer - Total</b>
-<hr />
-<div class=container>
-
-<?php
-   // include the PHPReports classes on the PHP path! configure your path here
-   include "./modules/reports/PHPReportMaker.php";
-   include "config/config.php";
-
-   $sSQL = "select sum({$tb_prefix}invoice_items.total) as SUM_TOTAL, {$tb_prefix}biller.name as BNAME, {$tb_prefix}customers.name as CNAME from {$tb_prefix}biller, {$tb_prefix}customers, {$tb_prefix}invoice_items, {$tb_prefix}invoices where {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.biller_id = {$tb_prefix}biller.id and {$tb_prefix}invoices.id = {$tb_prefix}invoice_items.invoice_id GROUP BY {$tb_prefix}invoice_items.total ORDER BY {$tb_prefix}biller.name";
-
-   $oRpt = new PHPReportMaker();
-
-   $oRpt->setXML("./modules/reports/xml/report_biller_by_customer.xml");
-   $oRpt->setUser("$db_user");
-   $oRpt->setPassword("$db_password");
-   $oRpt->setConnection("$db_host");
-   $oRpt->setDatabaseInterface("mysql");
-   $oRpt->setSQL($sSQL);
-   $oRpt->setDatabase("$db_name");
-   $oRpt->run();
-?>
 	
-<hr></hr>
-</div>
-<div id="footer"></div>
+	$oRpt->setXML("./modules/reports/report_biller_by_customer.xml");
+
+//   include phpreports run code
+	include("./include/reportrunlib.php");
+
+$smarty -> assign('pageActive', 'report');
+$smarty -> assign('active_tab', '#home');
+?>

@@ -6,6 +6,9 @@ checkLogin();
 
 $saved = false;
 
+
+error_log($_POST['name']."  ".$_POST['value']);
+
 //echo $_POST['value']."VAL";
 if (isset($_POST['op']) && $_POST['op'] == 'update_system_defaults' ) {
 	
@@ -13,7 +16,8 @@ if (isset($_POST['op']) && $_POST['op'] == 'update_system_defaults' ) {
 		$saved = true;
 	}
 }
-
 $smarty -> assign("saved",$saved);
 
+$smarty -> assign('pageActive', 'system_default');
+$smarty -> assign('active_tab', '#setting');
 ?>

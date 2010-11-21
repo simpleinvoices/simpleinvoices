@@ -1,39 +1,14 @@
-<?php 
-include("./include/include_main.php"); 
-
-//stop the direct browsing to this file - let index.php handle which files get displayed
-if (!defined("BROWSE")) {
-   echo "You Cannot Access This Script Directly, Have a Nice Day.";
-   exit();
-}
-
-?>
-<html>
-<head>
-</head>
-<body>
-<b>Taxes in total</b>
-<hr></hr>
-<div id="container">
-
 <?php
-   // include the PHPReports classes on the PHP path! configure your path here
-   include "./modules/reports/PHPReportMaker.php";
-   include "config/config.php";
+//   include phpreports library
+require_once("./include/reportlib.php");
 
-   $sSQL = "select sum({$tb_prefix}invoice_items.tax_amount) as SUM_TAX_AMOUNT from {$tb_prefix}invoice_items";
-   $oRpt = new PHPReportMaker();
+   $sSQL = "select sum(ii.tax_amount) as sum_tax_total from ".TB_PREFIX."invoice_items ii";
 
-   $oRpt->setXML("./modules/reports/xml/report_tax_total.xml");
-   $oRpt->setUser("$db_user");
-   $oRpt->setPassword("$db_password");
-   $oRpt->setConnection("$db_host");
-   $oRpt->setDatabaseInterface("mysql");
-   $oRpt->setSQL($sSQL);
-   $oRpt->setDatabase("$db_name");
-   $oRpt->run();
+   $oRpt->setXML("./modules/reports/report_tax_total.xml");
+
+//   include phpreports run code
+	include("./include/reportrunlib.php");
+
+$smarty -> assign('pageActive', 'report');
+$smarty -> assign('active_tab', '#home');
 ?>
-
-<hr></hr>
-</div>
-<div id="footer"></div>

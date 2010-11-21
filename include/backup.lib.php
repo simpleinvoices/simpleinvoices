@@ -1,8 +1,24 @@
 <?php 
 
-
 class database{
-    var $db_link;
+	
+	var $db_link;
+
+	function sqlQuery($sqlQuery,$conn) {
+
+	//error_log($sqlQuery);
+	$this->database();	
+	if($query = mysql_query($sqlQuery)) {
+		
+		//error_log("Insert_id: ".mysql_insert_id($conn));
+
+		return $query;
+	}
+		else {
+			echo "Dude, what happened to your query?:<br><br> ".$sqlQuery."<br />".mysql_error();
+		}
+	}
+
     #-- Class Constructor ------------------------------------------------
     function database(){
         $this->db_link = $this->open_database();
@@ -13,10 +29,12 @@ class database{
     # creates a connection to the mysql database
     #-------------------------------------------------------------------
     function open_database(){
-	include('./config/config.php');
-        $db        = mysql_connect("$db_host","$db_user","$db_password")
+    	
+		global $config;
+    	
+        $db = mysql_connect($config->database->params->host.':'.$config->database->params->port,$config->database->params->username,$config->database->params->password)
             or die("<font color=\"#ff0000\">There was an error connecting to the database server</font>");
-        mysql_select_db("$db_name")
+        mysql_select_db($config->database->params->dbname)
             or die("<font color=\"#ff0000\">There was an error selecting the database</font>");
         
         return $db;
@@ -52,7 +70,7 @@ class backup_db{
         $oDB         = new database(); 
         $file_handle    = fopen($this->filename,"w"); 
         $query            = "SHOW TABLES"; 
-        $result            = mysqlQuery($query,$oDB->db_link); 
+        $result            = $oDB->sqlQuery($query,$oDB->db_link); 
         while($row = mysql_fetch_array($result)){ 
             $tablename    = $row[0]; 
             $this->_show_create($tablename,$oDB->db_link,$file_handle); 
@@ -69,8 +87,9 @@ class backup_db{
     # calls $this->_retrieve_data($tablename, $db_link) 
     #------------------------------------------------------------------- 
     function _show_create($tablename,$db_link,$fh){ 
+        $oDB         = new database(); 
         $query = "SHOW CREATE TABLE `".$tablename."`"; 
-        $result = mysqlQuery($query,$db_link); 
+        $result = $oDB->sqlQuery($query,$db_link); 
         if ($row = mysql_fetch_array($result)) { 
             fwrite($fh,$row[1] . ";\n"); 
             $insert           = $this->_retrieve_data($tablename, $db_link); 
@@ -85,8 +104,9 @@ class backup_db{
     # retrieves the data and creates insert statement 
     #------------------------------------------------------------------- 
     function _retrieve_data($tablename,$db_link){ 
+        $oDB         = new database(); 
         $query         = "SHOW COLUMNS FROM `" . $tablename . "`"; 
-        $result        = mysqlQuery($query,$db_link); 
+        $result        = $oDB->sqlQuery($query,$db_link); 
         $i            = 0; 
         while($row = mysql_fetch_array($result)){ 
             $columns[$i][0] = $row[0]; 
@@ -94,7 +114,7 @@ class backup_db{
         } // while 
          
         $query     = "SELECT * FROM `" . $tablename . "`"; 
-        $result = mysqlQuery($query,$db_link) ; 
+        $result = $oDB->sqlQuery($query,$db_link) ; 
         $tmp_query = ""; 
         while($row = mysql_fetch_array($result)){ 
             $tmp_query     .= "INSERT INTO `" . $tablename . "` VALUES("; // create a temporary holder; 
@@ -108,4 +128,4 @@ class backup_db{
         } // while     
         return $tmp_query; 
     } 
-} ?>
+}

@@ -1,59 +1,51 @@
-<?php 
-include("./include/include_main.php");
-
-//stop the direct browsing to this file - let index.php handle which files get displayed
-if (!defined("BROWSE")) {
-   echo "You Cannot Access This Script Directly, Have a Nice Day.";
-   exit();
-}
-
-?>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-</head>
-<body>
-<b>Debtor invoices ordered by amount owed</b>
-<hr></hr>
-<div id="container">
-
 <?php
-include('./config/config.php');
+//   include phpreports library
+require_once("./include/reportlib.php");
 
-   // include the PHPReports classes on the PHP path! configure your path here
-   include "./modules/reports/PHPReportMaker.php";
+   if ($db_server == 'pgsql') {
+      $sSQL = "SELECT
+        iv.id,
+        b.name AS biller,
+        c.name AS customer,
 
-   $sSQL = "SELECT
-        {$tb_prefix}invoices.id,
-        (select name from {$tb_prefix}biller where {$tb_prefix}biller.id = {$tb_prefix}invoices.biller_id) as Biller,
-        (select name from {$tb_prefix}customers where id = {$tb_prefix}invoices.customer_id) as Customer,
-        (select sum({$tb_prefix}invoice_items.total) from {$tb_prefix}invoice_items WHERE {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id) as INV_TOTAL,
-        ( select IF ( isnull(sum(ac_amount)) , '0', sum(ac_amount)) from {$tb_prefix}account_payments where  ac_inv_id = {$tb_prefix}invoices.id ) as INV_PAID,
-        (select (INV_TOTAL - INV_PAID)) as INV_OWING ,
+        coalesce(ii.total, 0) AS inv_total,
+        coalesce(ap.total, 0) AS inv_paid,
+        coalesce(ii.total, 0) - coalesce(ap.total, 0) AS inv_owing,
+        iv.date
+FROM
+        ".TB_PREFIX."invoices iv INNER JOIN
+	".TB_PREFIX."customers c ON (c.id = iv.customer_id) INNER JOIN
+	".TB_PREFIX."biller b ON (b.id = iv.biller_id) LEFT JOIN
+        (SELECT i.invoice_id, sum(i.total) AS total
+         FROM ".TB_PREFIX."invoice_items i GROUP BY i.invoice_id
+        ) ii ON (iv.id = ii.invoice_id) LEFT JOIN
+        (SELECT p.ac_inv_id, sum(p.ac_amount) AS total
+         FROM ".TB_PREFIX."payment p GROUP BY p.ac_inv_id
+        ) ap ON (iv.id = ap.ac_inv_id)
+ORDER BY
+        inv_owing DESC;
+";
+   } else {
+      $sSQL = "SELECT
+        i.id,
+        (select name from " . TB_PREFIX . "biller b where b.id = i.biller_id) as biller,
+        (select name from " . TB_PREFIX . "customers c where c.id = i.customer_id) as customer,
+        (select sum(coalesce(ii.total, 0)) from " . TB_PREFIX . "invoice_items ii WHERE ii.invoice_id = i.id) as inv_total,
+        (select sum(coalesce(ap.ac_amount, 0)) from " . TB_PREFIX . "payment ap where  ap.ac_inv_id = i.id ) as inv_paid,
+        (select coalesce(INV_TOTAL,0) - coalesce(INV_PAID,0)) as inv_owing ,
         date
 FROM
-        {$tb_prefix}invoices,{$tb_prefix}account_payments,{$tb_prefix}invoice_items, {$tb_prefix}biller, {$tb_prefix}customers
-WHERE
-        {$tb_prefix}invoice_items.invoice_id = {$tb_prefix}invoices.id
-GROUP BY
-        {$tb_prefix}invoices.id
+        " . TB_PREFIX . "invoices i
 ORDER BY
-        INV_OWING DESC;
-
+        inv_owing DESC;
 ";
-   $oRpt = new PHPReportMaker();
+   }
 
-   $oRpt->setXML("./modules/reports/xml/report_debtors_by_amount.xml");
-   $oRpt->setUser("$db_user");
-   $oRpt->setPassword("$db_password");
-   $oRpt->setConnection("$db_host");
-   $oRpt->setDatabaseInterface("mysql");
-   $oRpt->setSQL($sSQL);
-   $oRpt->setDatabase("$db_name");
-   $oRpt->run();
+   $oRpt->setXML("./modules/reports/report_debtors_by_amount.xml");
+
+//   include phpreports run code
+	include("./include/reportrunlib.php");
+
+$smarty -> assign('pageActive', 'report');
+$smarty -> assign('active_tab', '#home');
 ?>
-
-<hr></hr>
-</div>
-<div id="footer"></div>

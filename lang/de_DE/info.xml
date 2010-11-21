@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<langfile version="1.0.0" type="language">
+	<name>Deutsch</name>
+	<shortname>de_DE</shortname>
+	<englishname>German</englishname>
+	<version>1.0.0</version>
+	<creationDate>2004-09-20</creationDate>
+	<author>Herz Hermann</author>
+	<authorEmail>heart1010@gmail.com</authorEmail>
+</langfile>

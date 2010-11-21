@@ -1,16 +1,13 @@
 <?php
+
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
-
-
-
 
 #system defaults query
 
 $defaults = getSystemDefaults();
 
-
-if ($_GET[submit] == "line_items") {
+if ($_GET["submit"] == "line_items") {
 
 	jsBegin();
 	jsFormValidationBegin("frmpost");
@@ -20,49 +17,44 @@ if ($_GET[submit] == "line_items") {
 
 	$default = "line_items";
 
-		$display_block = <<<EOD
-	<tr>
-		<td><br></td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG['default_number_items']}</td>
-		<td><input type=text size=25 name="value" value=$defaults[line_items]></td>
-	</tr>
-	<tr>
-		<td><br></td>
-	</tr>
+	$escaped = htmlsafe($defaults[line_items]);
+	$value = <<<EOD
+<input type="text" size="25" name="value" value="$escaped">
 EOD;
+	$description = "{$LANG['default_number_items']}";
+
 }
-
-else if ($_GET[submit] == "def_inv_template") {
-
+else if ($_GET["submit"] == "def_inv_template") {
+	
 	$default = "template";
 	/*drop down list code for invoice template - only show the folder names in src/invoices/templates*/
 
 	$handle=opendir("./templates/invoices/");
-	while ($file = readdir($handle)) {
-		if ($file != ".." && $file != "." && $file !="logos" && $file !=".svn" && $file !="template.php" && $file !="template.php~" ) {
-			$files[] = $file;
+	while ($template = readdir($handle)) {
+		if ($template != ".." && $template != "." && $template !="logos" && $template !=".svn" && $template !="template.php" && $template !="template.php~" ) {
+			$files[] = $template;
 		}
 	}
 	closedir($handle);
-
 	sort($files);
 
+	$escaped = htmlsafe($defaults[template]);
 	$display_block_templates_list = <<<EOD
 	<select name="value">
 EOD;
 
 	$display_block_templates_list .= <<<EOD
-	<option selected value='$defaults[template]' style="font-weight: bold" >$defaults[template]</option>
+	<option selected value='$escaped' style="font-weight: bold" >$escaped</option>
 EOD;
 
 	foreach ( $files as $var )
 	{
+		$var = htmlsafe($var);
 		$display_block_templates_list .= "<option value='$var' >";
 		$display_block_templates_list .= $var;
 		$display_block_templates_list .= "</option>";
 	}
+
 
 	$display_block_templates_list .= "</select>";
 
@@ -76,269 +68,152 @@ EOD;
 	jsEnd();
 	/*end validataion section */
 
-	/*$default = "def_inv_template";
-	$def_inv_template = "select def_inv_template from {$tb_prefix}defaults where def_id=1";
-	$result_def_inv_template = mysqlQuery($def_inv_template, $conn) or die(mysql_error());
 
-	while ($Array = mysql_fetch_array($result_def_inv_template) ) {
-		$def_inv_templateField = $Array['def_inv_template'];*/
+	$description = $LANG['default_inv_template'];
+	
+	$value = $display_block_templates_list;
+	//error_log($value);
 
-
-		$display_block = <<<EOD
-	<tr>
-		<td><br></td>
-	</tr>
-	<!--
-	<tr>
-		<td colspan=2><a href='text/default_invoice_template_text.html' class='lbOn'>Note</a></td>
-	</tr>
-	-->
-	<tr>
-		<td class="details_screen">{$LANG['default_inv_template']} <a href='docs.php?t=help&p=default_invoice_template_text' rel='gb_page_center[450, 450]'><img src="images/common/help-small.png"></img></a></td>
-		<td>$display_block_templates_list</td>
-	</tr>
-	<tr>
-		<td><br></td>
-	</tr>
-EOD;
-	//}
 }
 
-else if ($_GET[submit] == "biller") {
+else if ($_GET["submit"] == "biller") {
 
 	$default = "biller";
 
 	#biller query
-	$sql = "SELECT * FROM {$tb_prefix}biller WHERE enabled  ORDER BY name";
-	$query = mysqlQuery($sql) or die(mysql_error());
+	$billers = getActiveBillers();
 
-	#biller selector
-
-	if (mysql_num_rows($query) == 0) {
-		//no records
-		$display_block = "<p><em>{$LANG['no_billers']}</em></p>";
-
-	} else {
+	if ($billers == null) {
+		$display_block_biller = "<p><em>{$LANG['no_billers']}</em></p>";
+	}
+	else {
 
 		$display_block_biller = '<select name="value">
-			<option value=0> </option>
-			';
+			<option value="0"> </option>';
 
-		while ($result = mysql_fetch_array($query)) {
+		foreach($billers as $biller) {
 
-			$selected = $result['id'] == $defaults['biller']?"selected style='font-weight: bold'":"";
+			$selected = $biller['id'] == $defaults['biller']?"selected style='font-weight: bold'":"";
 			
+			$escaped = htmlsafe($biller['name']);
 			$display_block_biller .= <<<EOD
-			<option $selected value="$result[id]">$result[name]</option>
+			<option $selected value="$biller[id]">$escaped</option>
 EOD;
 		}
 		$display_block_biller .= "</select>";
 	}
 
-	$display_block = <<<EOD
-	<tr>
-		<td><br></td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG['biller_name']}</th><td>$display_block_biller</td>
-	</tr>
-	<tr>
-		<td><br></td>
-	</tr>
-EOD;
-
+	$description = "{$LANG['biller_name']}";
+	$value = $display_block_biller;
 }
 
 
-else if ($_GET[submit] == "customer") {
+else if ($_GET["submit"] == "customer") {
 
-	#customer query
+	$default = "customer";
+	$customers = getActiveCustomers();
 
-	#customer
-	$sql_customer = "SELECT * FROM {$tb_prefix}customers where enabled != 0 ORDER BY name";
-	$result_customer = mysqlQuery($sql_customer, $conn) or die(mysql_error());
-
-
-	#customer selector
-
-	if (mysql_num_rows($result_customer) == 0) {
+	if ($customers == null) {
 		//no records
 		$display_block_customer = "<p><em>{$LANG['no_customers']}</em></p>";
 
 	} else {
-		$default = "customer";
 		//has records, so display them
-		$display_block_customer = <<<EOD
-	        <select name="value">
-                <option selected value="$defaults[customer]" style="font-weight: bold">$c_nameField</option>
-                <option value='0'> </option>
-EOD;
+		$display_block_customer = '<select name="value">
+                <option value="0"> </option>';
 
-		while ($recs_customer = mysql_fetch_array($result_customer)) {
-			$id_customer = $recs_customer['id'];
-			$display_name_customer = $recs_customer['name'];
 
+		foreach($customers as $customer) {
+
+			$selected = $customer['id'] == $defaults['customer']?"selected style='font-weight: bold'":"";
+			
+
+			$escaped = htmlsafe($customer['name']);
 			$display_block_customer .= <<<EOD
-			<option value="$id_customer">
-                        $display_name_customer</option>
+			<option $selected value="$customer[id]">$escaped</option>
 EOD;
 		}
+		$display_block_customer .= "</select>";
+		
 	}
 
-	$display_block = <<<EOD
-	<tr>
-		<td><br></td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG['customer_name']}</th><td>$display_block_customer</td>
-	</tr>
-	<tr>
-		<td><br></td>
-	</tr>
-EOD;
-
+	$description = "{$LANG['customer_name']}";
+	$value = $display_block_customer;
 }
-
-
-
 else if ($_GET['submit'] == "tax") {
-
 	$default = "tax";
-	#tax query
-	$print_tax = "SELECT * FROM {$tb_prefix}tax WHERE tax_id = $defaults[tax]";
-	$result_print_tax = mysqlQuery($print_tax, $conn) or die(mysql_error());
 
+	$taxes = getActiveTaxes();
 
-	while ($Array_tax = mysql_fetch_array($result_print_tax)) {
-		$tax_idField = $Array_tax['tax_id'];
-		$tax_descriptionField = $Array_tax['tax_description'];
-	}
-
-
-	#tax query
-	$sql_tax = "SELECT * FROM {$tb_prefix}tax where tax_enabled != 0 ORDER BY tax_description";
-	$result_tax = mysqlQuery($sql_tax, $conn) or die(mysql_error());
-
-
-	#tax selector
-
-	if (mysql_num_rows($result_tax) == 0) {
+	if ($taxes == null) {
 		//no records
 		$display_block_tax = "<p><em>{$LANG['no_tax_rates']}</em></p>";
 
 	} else {
 		//has records, so display them
+
 		$display_block_tax = <<<EOD
 	        <select name="value">
 
-                <option selected value="$defaults[tax]" style="font-weight: bold">$tax_descriptionField</option>
                 <option value='0'> </option>
 EOD;
 
-		while ($recs_tax = mysql_fetch_array($result_tax)) {
-			$id_tax = $recs_tax['tax_id'];
-			$display_name_tax = $recs_tax['tax_description'];
 
+		foreach($taxes as $tax) {
+
+			$selected = $tax['tax_id'] == $defaults['tax']?"selected style='font-weight: bold'":"";
+
+			$escaped = htmlsafe($tax['tax_description']);
 			$display_block_tax .= <<<EOD
-			<option  value="$id_tax">
-                        $display_name_tax</option>
+			<option $selected value="$tax[tax_id]">$escaped</option>
 EOD;
 		}
 	}
 
-	$display_block = <<<EOD
-	<tr>
-		<td><br></td>
-	</tr>
-	<tr>
-	<td class="details_screen">{$LANG['tax']}</td><td>$display_block_tax</td>
-	</tr>
-	<tr>
-		<td><br></td>
-	</tr>
-EOD;
+	$description = "{$LANG['tax']}";
+	$value = $display_block_tax;
 }
+else if ($_GET["submit"] == "preference_id") {
+	
+	$pref = getPreference($defaults['preference']);
+	$preferences = getActivePreferences();
 
-else if ($_GET[submit] == "preference_id") {
-
-	#invoice preference query
-	$print_inv_preference = "SELECT * FROM {$tb_prefix}preferences WHERE pref_id = $defaults[preference]";
-	$result_inv_preference = mysqlQuery($print_inv_preference, $conn) or die(mysql_error());
-
-
-	while ($Array_inv_preference = mysql_fetch_array($result_inv_preference)) {
-		$pref_descriptionField = $Array_inv_preference['pref_description'];
-	}
-
-
-
-	#invoice preference query
-	$sql_preferences = "SELECT * FROM {$tb_prefix}preferences where pref_enabled != 0 ORDER BY pref_description";
-	$result_preferences = mysqlQuery($sql_preferences, $conn) or die(mysql_error());
-
-
-	#invoice_preference selector
-
-	if (mysql_num_rows($result_preferences) == 0) {
+	if ($preferences == null) {
 		//no records
 		$display_block_preferences = "<p><em>{$LANG['no_preferences']}</em></p>";
 
 	} else {
-		$default = "invoice";
+		$default = "preference";
 		//has records, so display them
 		$display_block_preferences = <<<EOD
 	        <select name="value">
 
-                <option selected value="$defaults[preference]" style="font-weight: bold">$pref_descriptionField</option>
                 <option value='0'> </option>
 EOD;
 
-		while ($recs_preferences = mysql_fetch_array($result_preferences)) {
-			$id_preferences = $recs_preferences['pref_id'];
-			$display_name_preferences = $recs_preferences['pref_description'];
+		foreach($preferences as $preference) {
 
+			$selected = $preference['pref_id'] == $defaults['preference']?"selected style='font-weight: bold'":"";
+
+			$escaped = htmlsafe($preference['pref_description']);
 			$display_block_preferences .= <<<EOD
-			<option value="$id_preferences">
-	                        $display_name_preferences</option>
+			<option $selected value="{$preference['pref_id']}">
+	                        $escaped</option>
 EOD;
 		}
 	}
 
-	$display_block = <<<EOD
-	<tr>
-		<td><br></td>
-	</tr>
-	<tr>
-		<td class="details_screen">{$LANG['inv_pref']}</td><td>$display_block_preferences</td>
-	</tr>
-	<tr>
-		<td><br></td>
-	</tr>
-EOD;
+	$value = $display_block_preferences;
+	$description = "{$LANG['inv_pref']}";
 
 }
+else if ($_GET["submit"] == "def_payment_type") {
 
-else if ($_GET[submit] == "def_payment_type") {
+	$defpay = getDefaultPaymentType();
+	$payments = getActivePaymentTypes();
+	
 
-	#payment type query
-	$print_payment_type = "SELECT * FROM {$tb_prefix}payment_types WHERE pt_id = $defaults[payment_type]";
-	$result_print_payment_type = mysqlQuery($print_payment_type, $conn) or die(mysql_error());
-
-
-	while ($Array_payment_type = mysql_fetch_array($result_print_payment_type)) {
-		$pt_idField = $Array_payment_type['pt_id'];
-		$pt_descriptionField = $Array_payment_type['pt_description'];
-	}
-
-
-	#payment type query
-	$sql_payment_type = "SELECT * FROM {$tb_prefix}payment_types where pt_enabled != 0 ORDER BY pt_description";
-	$result_payment_type = mysqlQuery($sql_payment_type, $conn) or die(mysql_error());
-
-
-	#payment type selector
-
-	if (mysql_num_rows($result_payment_type) == 0) {
+	if ($payments == null) {
 		//no records
 		$display_block_payment_type = "<p><em>{$LANG['payment_type']}</em></p>";
 
@@ -348,59 +223,108 @@ else if ($_GET[submit] == "def_payment_type") {
 		$display_block_payment_type = <<<EOD
                 <select name="value">
 
-                <option selected value="$defaults[payment_type]" style="font-weight: bold">$pt_descriptionField</option>
+                <option value='0'> </option>
 EOD;
 
-		while ($recs_payment_type = mysql_fetch_array($result_payment_type)) {
-			$id_payment_type = $recs_payment_type['pt_id'];
-			$display_name_payment_type = $recs_payment_type['pt_description'];
+		foreach($payments as $payment) {
 
+			$selected = $payment['pt_id'] == $defaults['payment_type']?"selected style='font-weight: bold'":"";
+			$escaped = htmlsafe($payment['pt_description']);
 			$display_block_payment_type .= <<<EOD
-			<option value="$id_payment_type">
-                        $display_name_payment_type</option>
+			<option $selected value="{$payment['pt_id']}">
+                        $escaped</option>
 EOD;
 		}
 	}
 
-	$display_block = <<<EOD
-        <tr>
-                <td><br></td>
-        </tr>
-        <tr>
-        <td class="details_screen">{$LANG['payment_type']}</td><td>$display_block_payment_type</td>
-        </tr>
-        <tr>
-                <td><br></td>
-        </tr>
-EOD;
+	$description = "{$LANG['payment_type']}";
+	$value = $display_block_payment_type;
 
 }
+else if ($_GET["submit"] == "delete") {
 
+	$array = array(0 => $LANG['disabled'], 1=>$LANG['enabled']);
+	$default = "delete";
+	$description = $LANG['delete'];
+	$value = dropDown($array, $defaults['delete']);
+}
+else if ($_GET['submit'] == "logging") {
 
+	$array = array(0 => $LANG['disabled'], 1=>$LANG['enabled']);
+	$default = "logging";
+	$description = $LANG['logging'];
+	$value = dropDown($array, $defaults[$default]);
+}
+
+else if($_GET['submit'] == "language") {
+	$default = "language";
+	$languages = getLanguageList();
+	$lang = getDefaultLanguage();
+	
+	usort($languages,"compareNameIndex");
+	
+	$description = $LANG[language];
+	//print_r($languages);
+	$value = "<select name='value'>";
+	foreach($languages as $language) {
+		$selected = "";
+		if($language->shortname == $lang) {
+			$selected = " selected ";
+		}
+		$value .= "<option $selected value='".htmlsafe($language->shortname)."'>".htmlsafe("$language->name ($language->englishname) ($language->shortname)")."</option>";
+	}
+	$value .= "</select>";
+	
+}
+elseif ($_GET["submit"] == "tax_per_line_item") {
+
+	$default = "tax_per_line_item";
+
+	$escaped = htmlsafe($defaults[tax_per_line_item]);
+	$value = <<<EOD
+<input type="text" size="25" name="value" value="$escaped">
+EOD;
+	$description = "{$LANG['number_of_taxes_per_line_item']}";
+
+}
+else if ($_GET['submit'] == "inventory") {
+
+	$array = array(0 => $LANG['disabled'], 1=>$LANG['enabled']);
+	$default = "inventory";
+	$description = $LANG['inventory'];
+	$value = dropDown($array, $defaults[$default]);
+}
 else {
-	$display_block = "{$LANG['no_defaults']}";
+	$description = "{$LANG['no_defaults']}";
 }
 
 
-echo <<<EOD
+/*$smarty->assign('pageActive', $pageActive);
+$smarty->assign('files', $files);
+$smarty->assign('customFieldLabel', $customFieldLabel);
+$smarty->assign('save', $save);
+$smarty->assign('lang', $lang);
+$smarty->assign('billers',$billers);*/
+$smarty->assign('defaults', $defaults);
+$smarty->assign('value',$value);
+$smarty->assign('description',$description);
+$smarty->assign('default',$default);
 
-<form name="frmpost" action="index.php?module=system_defaults&view=save" method="post" onsubmit="return frmpost_Validator(this)">
 
-		<b>{$LANG['system_defaults']}</b>
- <hr></hr>
 
-<table align=center>
+/**
+ * Help function for sorting the language array by name
+ */
+function compareNameIndex($a,$b) {
+	$a = $a->name."";
+	$b = $b->name."";
+	
+	if($a > $b) {
+		return 1;
+	}
+	return -1;
+}
 
-$display_block
-
-</tr>
-</tr>
-</table>
-<!-- </div> -->
-	<input type="hidden" name="name" value="$default">
-	<input type=submit name="submit" value="{$LANG['save_defaults']}">
-	<input type=hidden name="op" value="update_system_defaults">
-
-</form>
-EOD;
+$smarty -> assign('pageActive', 'system_default');
+$smarty -> assign('active_tab', '#setting');
 ?>

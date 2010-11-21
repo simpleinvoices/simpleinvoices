@@ -1,22 +1,33 @@
 <?php
+/*
+* Script: manage.php
+* 	Custom fields manage page
+*
+* License:
+*	 GPL v3 or above
+*
+* Website:
+* 	http://www.simpleinvoices.org
+ */
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-
-$sql = "select * from {$tb_prefix}custom_fields ORDER BY cf_custom_field";
-
-$result = mysqlQuery($sql, $conn) or die(mysql_error());
-$number_of_rows = mysql_num_rows($result);
+global $dbh;
+$sql = "SELECT * FROM ".TB_PREFIX."custom_fields ORDER BY cf_custom_field";
+$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
 
 $cfs = null;
 
-for($i=0; $cf = mysql_fetch_array($result);$i++) {
+$number_of_rows = 0;
+for($i=0; $cf = $sth->fetch();$i++) {
 	$cfs[$i] = $cf;
 	$cfs[$i]['filed_name'] = get_custom_field_name($cf['cf_custom_field']);
+	$number_of_rows = $i;
 }
 
 $smarty -> assign("cfs",$cfs);
 
-getRicoLiveGrid("rico_custom_fields","{ type:'number', decPlaces:0, ClassName:'alignleft' }");
+$smarty -> assign('pageActive', 'custom_field');
+$smarty -> assign('active_tab', '#setting');
 ?>

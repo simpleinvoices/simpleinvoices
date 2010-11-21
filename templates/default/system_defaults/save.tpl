@@ -1,6 +1,6 @@
-<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=system_defaults&view=manage>
+<meta http-equiv="refresh" content="2;URL=index.php?module=system_defaults&amp;view=manage" />
 
-<br>
+<br />
 
 {if $saved }
 	{$LANG.save_defaults_success}<br />

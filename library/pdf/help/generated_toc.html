@@ -1,0 +1,122 @@
+<html>
+<head>
+<title>Generated Content: Table of Contents</title>
+<link rel="stylesheet" type="text/css" medial="all" title="Default" href="css/help.css"/>
+</head>
+<body>
+<h1>Generated Content: Table of Contents</h1>
+<h2>Features and limitations</h2>
+<p>The TOC is generated using H1-H9 tags from the original document; you don't need to 
+do anything specific with these tags, they're included automatically. If you've enabled 
+hyperlinks rendering, TOC items will be clickable, pointing to the appropriate pages.<p>
+<p>TOC may be placed at the beginning or at the end of the document on separate page or 
+it may be inserted at the appropriate place <strong>in</strong> the document. In the latter 
+case you should insert the following code in the document:
+<pre>
+&lt;div id="html2ps-toc"&gt;&lt;/div&gt;
+</pre>
+If this DIV is not empty, TOC will be rendered after content (it is not replaced).
+</p>
+<p>Note that TOC feature will <strong>not</strong> work in batch mode from the same reasons
+page numbering doesn't. In batch mode TOC will be generated for <strong>each</strong> document 
+in batch.</p>
+
+<h2>How can I control TOC appearance?</h2>
+<p>TOC appearance may be controlled by following CSS selectors:</p>
+<table>
+<tbody>
+<tr>
+<td>.html2ps-toc</td>
+<td>Applies to the TOC as a whole</td>
+</tr>
+<tr>
+<td>.html2ps-toc-wrapper</td>
+<td>Applies to every TOC item</td>
+</tr>
+<tr>
+<td>.html2ps-toc-L-wrapper</td>
+<td>Applies to TOC item of the given level of nesting</td>
+</tr>
+<tr>
+<td>.html2ps-toc-name</td>
+<td>Applies to the textual TOC item name</td>
+</tr>
+<tr>
+<td>.html2ps-toc-L-name</td>
+<td>Applies to the textual TOC item name on the Lth level of nesting</td>
+</tr>
+<tr>
+<td>.html2ps-toc-page</td>
+<td>Applies to TOC page number</td>
+</tr>
+<tr>
+<td>.html2ps-toc-L-page</td>
+<td>Applies to TOC page number on the Lth level of nesting</td>
+</tr>
+<tr>
+<td>#html2ps-toc-X</td>
+<td>Applies to Xth TOC item as a whole</td>
+</tr>
+<tr>
+<td>#html2ps-toc-name-X</td>
+<td>Applies to Xth TOC item name</td>
+</tr>
+<tr>
+<td>#html2ps-toc-page-X</td>
+<td>Applies to Xth TOC item page number</td>
+</tr>
+</tbody>
+</table>
+<p>Note that every TOC item may be represented by a following code:<p>
+<pre>
+&lt;div id="html2ps-toc-X" class="html2ps-toc-wrapper html2ps-toc-L-wrapper"&gt;
+&lt;div id="html2ps-toc-name-X" class="html2ps-toc-name html2ps-toc-L-name"&gt;NAME&lt;/div&gt;
+&lt;div id="html2ps-toc-page-X" class="html2ps-toc-page html2ps-toc-L-page"&gt;PAGE NUMBER&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<h2>How can I generate TOC using the webinterface?</h2>
+<p>Provide 'toc' parameter (set the "Table of contents" flag) and choose one of 'after', 'before' or 'placeholder' values for 'toc-location' parameter
+(select appropriate value from "Place TOC at" pull-down).</p>
+
+<h2>How can I generate TOC using API?</h2>
+<p>
+Use the following PHP code:
+<pre>
+$pipeline->add_feature('toc', array('location' => $location_code);
+</pre>
+where $location_code should contains one of the 'after', 'before' or 'placeholder' values. 
+</p>
+
+<h2>How can I override the default TOC generator behaviour?</h2>
+<p>You may override the following:</p>
+<ol>
+<li>items being selected as TOC items;</li>
+<li>how document is being modified (the place TOC is added to);</li>
+</ol>
+<p>First of all, access the feature object:
+<pre>
+$toc_feature =& FeatureFactory::get('toc');
+</pre>
+(note that it is bad-bad-bad idea to create feature objects by yourself; 
+use FeatureFactory factory class instead).</P>
+<p>
+After this, you may use 'set_anchor_locator' and 'set_document_updater' to override 
+these behaviours. Both methods accepts single parameter: an behaviour (strategy) object.
+It should implement one 'run' method taking $toc_box (preparent document element for the TOC), 
+$media and $document as parameters. Anchor locating strategy object should return an array, 
+every element of which is an associative array containing the following items:
+<ul>
+<li>'name' &mdash; TOC item text</li>
+<li>'level' &mdash; nesting level</li>
+<li>'anchor' &mdash; ID of the target element</li>
+<li>'element' &mdash; target element itself</li>
+</ul>
+Document updater strategy object does not need to return anything.
+</p>
+<p>
+For sample code refer to features/toc.php file.
+</p>
+
+</body>
+</html>              

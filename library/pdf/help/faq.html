@@ -1,0 +1,433 @@
+<html>
+<head>
+<title>html2ps/html2pdf FAQ</title>
+<link rel="stylesheet" type="text/css" medial="all" title="Default" href="css/help.css"/>
+</head>
+<body>
+<h1>html2ps/pdf FAQ</h1>
+<a href="index.html">Back to table of contents</a>
+
+<ul>
+<li><a href="#installation">Installation</a>
+<ul>
+<li><a href="#installation-utilities">Does html2ps require any external utilities like ghostscript?</a></li>
+<li><a href="#installation-commandline">Can I call this script from the command line?</a></li>
+<li><a href="#installation-version">How can I determine the script version?</a></li>
+</ul></li>
+<li><a href="#nooutput">No output at all. Broken output.</a>
+<ul>
+<li><a href="#nooutput-regexp">I'm getting "Warning: DOMDocument::loadXML() [function.DOMDocument-loadXML]: Empty string supplied as input" error message in PHP 5.2.0</a></li>
+<li><a href="#nooutput-php442">HTML2PS returns blank page. There's some strange messages in PHP error log&hellip;</a></li>
+<li><a href="#nooutput-memory">All I'm getting is a blank page; no error messages in PHP error log. Whats happened?</a></li>
+<li><a href="#nooutput-memory2">I got the following error message: <tt>Fatal error: Allowed memory size of &hellip; bytes exhausted (tried to allocate &hellip; bytes) in&hellip</tt></a></li>
+<li><a href="#nooutput-php440">The script just hangs when converting page containing images! With &quot;render images&quot; options disabled it works!</a></li>
+<li><a href="#nooutput-limits">I've increased limits, but still sometimes get a blank page immediately after the script starts! Some sites are parsed, though...</a></li>
+<li><a href="#nooutput-firefox">I'm getting &quot;PDF doesn't start with &quot;%PDF-&quot; message from Acrobat Reader. Nevertheless, when I save file to my hard drive, it opens perfectly. I'm using Firefox. </a></li>
+<li><a href="#nooutput-cache">Some characters are displayed incorrectly or missing.</a></li>
+<li><a href="#nooutput-file-protocol">I cannot fetch files from local hard disk using 'file' procolol.</a></li>
+</ul></li>
+<li><a href="#layout-broken">Broken layout.</a></li>
+<ul>
+<li><a href="#layout-broken-missing-characters">Some characters are missing in my PDFs on some Acrobat Reader versions / different OSes</a></li>
+<li><a href="#layout-broken-width">Sites are cut-off on the right side when I'm using 640 pixels page width. What can I do?</a></li>
+<li><a href="#layout-broken-pixelpoint-ratio">I've disabled the &quot;Keep screen pixel/point ratio&quot; option and the page layout is completely broken! What can I do?</a></li>
+<li><a href="#layout-broken-black-images">Some images are rendered inside black rectangles!</a></li>
+<li><a href="#layout-broken-horizontal-lines">Horizontal lines (e.g. line under the text) look like they consist of several parts with slightly different width.</a></li>
+<li><a href="#layout-broken-absolute-positioned">My absolute-positioned content is cut at the last page</a></li>
+</ul>
+<li><a href="#output-customize">Customizing output.</a>
+<ul>
+<li><a href="#explicit-break">How could I make an explicit page break?</a></li>
+<li><a href="#headers-footers">How could I add headers or footers to generated Postscript / PDF files?</a></li>
+<li><a href="#hide-headers">I've added headers and footers to my HTML pages, but how I can prevent them from showing up in the browser?</a></li>
+<li><a href="#hires-images">Is there a possibility to create pdf documents with more than 72dpi using html2ps?</a></li>
+<li><a href="#css-media">Can I control media size / margins via CSS?</a></li>
+</ul>
+</li>
+<li><a href="#api">Using script API.</a>
+<ul>
+<li><a href="#api-localfile">How could I convert HTML file from my local drive?</a></li>
+<li><a href="#api-frommemory">How could I convert HTML contained in variable?</a></li>
+<li><a href="#api-security">Can I convert a page using some authentication mechanism using the html2ps webinterface?</a></li>
+<li><a href="#api-relative-path">I'm using API to convert files and images and / or CSS files seems to be ignored.</a></li>
+</ul>
+</li>
+<li><a href="#fonts">Fonts. National symbols.</a>
+<ul>
+<li><a href="#fonts-nonstandard">How can I use fonts other than standard (Times, Helvetica and Courier)?</a></li>
+<li><a href="#fonts-euro">Euro symbol is not displayed. </a></li>
+<li><a href="#fonts-cyrillic-ps">Cyrillic symbols are not displayed in PS output</a></li>
+<li><a href="#fonts-greek-tonos">Greek symbols with tonos are not displayed in PS output; all other greek symbols rendered normally.</a></li>
+<li><a href="#fonts-eastern">Chinese (Japanese, Arabic, etc...) symbols do not show on the page. What I need to do?</a></li>
+<li><a href="#fonts-ttf-cache">I've installed/updated True-Type fonts, but it seems that ... (some mysterious problem) ... happens</a></li>
+</ul>
+</li>
+<li><a href="#forms">Interactive forms.</a></li>
+<li><a href="#frames">Frames.</a></li>
+<li><a href="#misc">Miscellaneous.</a>
+<ul>
+<li><a href="#misc-size">Is it possible to reduce the size of output PDF file?</a></li>
+<li><a href="#misc-filename">Is it possible to use a custom file name when outputting the pdf file?</a></li>
+</ul>
+</li>
+</ul>
+
+<div style="border-top: solid black 1px; border-bottom: solid black 1px;">
+<h2 style="text-decoration: underline;">How would I report a bug?</h2>
+<p>
+Use the <a href="http://www.tufat.com/forum/forumdisplay.php?f=59">support forum</a> of tufat.com.
+</p>
+<p> 
+Please, provide the following:
+<ul>
+<li><code>phpinfo()</code> output;</li>
+<li>script version (and information about applied patches, if any);</li>
+<li>script parameters you're using for conversion;</li>
+<li><b>full</b> HTML code of the page you're trying to convert.</li>
+</ul>
+The will greatly reduce the time required for solving your issue. Thank you for understanding.
+</p>
+</div>
+
+<h2 id="installation">Installation.</h2>
+<dl>
+<dt id="installation-utilities">Does html2ps require any external utilities like ghostscript?</dt>
+<dd>No. PHP with GD extension is sufficient to run conversion. You <em>may</em> use additional 
+extensions/utilities to use alternative output methods or to boost conversion speed a little bit, though.</dd>
+<dt id="installation-commandline">Can I call this script from the command line?</dt>
+<dd>Probably yes; check if your PHP support command line interface. Also, consider 
+reading this article on php.net: 
+<a title="Click to open article in new window" href="http://www.php.net/manual/en/features.commandline.php" target="_blank">
+Using PHP from the command line</a> 
+</dd>
+<dt id="installation-version">How can I determine the script version?</dt>
+<dd>Look in config.inc.php for HTML2PS_VERSION_MAJOR, HTML2PS_VERSION_MINOR and HTML2PS_SUBVERSION constants. The full version number is
+ MAJOR.MINOR.SUBVERSION. If you cannot find these constants, you're using <em>very old</em> html2ps release.</dd>
+</dl>
+
+<h2 id="nooutput">No output at all. Broken output.</h2>
+<dl>
+<dt id="nooutput-regexp">I'm getting "Warning: DOMDocument::loadXML() [function.DOMDocument-loadXML]: Empty string supplied as input" error message in PHP 5.2.0 when attemting to convert some files</dt>
+<dd>A new configuration parameter <tt>pcre.backtrack_limit</tt> was introduced in PHP 5.2.0. html2ps does the excessive
+regexp usage; it is recommended to increase pcre.backtrack_limit value to 1000000. 
+</dd>
+
+<dl>
+<dt id="nooutput-php442">HTML2PS returns blank page. There's some strange messages in PHP error log, for example:
+<pre>
+Parent: child process exited with status 3221225477 -- Restarting.
+</pre>
+I'm using PHP 4.4.2 </dt>
+<dd>It is a PHP 4.4.2 bug <a href="http://bugs.php.net/bug.php?id=36017">#36017</a>; there's no workarounds 
+except changing PHP version or writing your own fetcher without 'fopen' function calls. 
+I would recommend either downgrading to earlier 4.4.x versions or installing PHP 5.
+</dd>
+
+<dt id="nooutput-memory">All I'm getting is a blank page; no error messages in PHP error log. Whats happened?</dt>
+  <dd>The script is probably running out of memory or execution time. Try increasing 
+    the values of <code>max_execution_time</code> and/or <code>memory_limit</code> PHP configuration variables. 
+    Recommended values are <strong>120</strong> seconds and <strong>32</strong> megabytes. Nevertheless, if you're 
+    using <em>VERY</em> big images, you'll probably need to increase these values 
+    even more.</dd>
+
+<dd>
+Another cause may be a JavaScript or META redirect on page you're trying to convert. As HTML2PS script is not designed 
+as interactive user agent, it will not follow such redirects for you. You may try to open the url in question in your browser
+and check if the URL will change when page finishes loading. In this case, just supply the final URL to the script.
+</dd>
+<dd>
+Also, please note that domain.com and www.domain.com <em>may</em> point to different sites. In the worst case, 
+domain.com (without 'www' part) may just ignore HTTP requests. On the other side, popular browsers try to guess correct
+URL; for example, when you enter 'something' to the address bar, they may try to get something.com or www.something.com. 
+This may lead to problem similar to one described in previous paragraph; the solution is the same: open URL in browser and
+check it will change.
+</dd>
+
+<dt id="nooutput-memory2">I got the following error message: <tt>Fatal error: Allowed memory size of &hellip; bytes exhausted (tried to allocate &hellip; bytes) in&hellip</tt></dt>
+  <dd>The script is running out of memory. Please refer to <a href="php.net/ini.core">memory_limit PHP.net documentation</a> regarding increasing memory limit.</dd>
+
+<dt id="nooutput-php440">The script just hangs when converting page containing images! With &quot;render images&quot; options disabled it works!</dt>
+<dd>There were reports on this problem on Windows recently. A quick investigation showed that for some reason PHP 4.4.0
+sometimes hangs indefinitely <em>inside</em> the 'fsockopen' call. Consider upgrading your PHP version in this case.</dd>
+
+<dt id="nooutput-limits">I've increased limits, but still sometimes get a blank page immediately 
+  after the script starts! Some sites are parsed, though...</dt>
+<dd>Some users encountered this problem using the GD library bundled with PHP. 
+  While it matched the GD version requirement, it sometimes caused PHP to silently 
+  die on some images. The problem is solved by recompiling the PHP using the 
+  external (recent enough) GD library. Note that NOT ALL PHP configurations 
+  are subject to this problem.</dd>
+
+<dt id="nooutput-firefox">I'm getting &quot;PDF doesn't start with &quot;%PDF-&quot; message from 
+  Acrobat Reader. Nevertheless, when I save file to my hard drive, it opens 
+  perfectly. I'm using Firefox. 
+<dd> There were user reports on issues related to Firefox/Acrobat Reader plugin 
+  incompatibility. In particular, this problem appeared with Firefox 1.0.7 and 
+  Reader 6.0.2 PL. You may consider upgrading your software to latest versions 
+  in this case.</dd>
+
+<dt id="nooutput-cache">Some characters are displayed incorrectly or missing.</dt>
+<dd>
+<p>If you've installed, removed or changed font files, you may need to clear
+<tt>cache</tt> subdirectory. HTML2PS do store information extracted from file fonts
+there to reduce script initialization overhead. See also 
+&quot;<a href="#fonts-ttf-cache">I've installed/updated True-Type fonts, but it seems that ... (some mysterious problem) ... happens</a>&quot;
+<p>Another cause of this problem may be incorrect source encoding; when encoding is not explicilty specified,
+html2ps tries to take encoding from HTTP headers and META tags. If no encoding information found, 
+html2ps assumes iso-8851-1.
+</dd>
+
+<dt id="nooutput-file-protocol">I cannot fetch files from local hard disk using 'file' procolol.</dt>
+<dd>
+<p>First of all, please ensure you're providing URL, not the file path; for example, if you're trying to use
+image from <tt>c:\foo\bar\baz.gif</tt>, you'll need to use the following URL: <tt>file:///C:/foo/bar/baz.gif</tt>.</p>
+<p>Second, due the security reasons, files accessed via 'file' protocol are limited to html2ps directory by default. This restriction
+is controlled by <tt>FILE_PROTOCOL_RESTRICT</tt> constant in the <tt>config.inc.php</tt> file. Note that this constant 
+contains <em>file path prefix</em>; for example, to use files from <tt>C:\images</tt> directory you'll need to 
+store <tt>C:\images\</tt> value in this constant.
+</dd>
+</dl>
+
+<h2><a name="layout-broken"></a>Broken layout.</h2>
+<dl>
+<dt id="layout-broken-missing-characters">Some characters are missing in my PDFs on some Acrobat Reader versions / different OSes</dt>
+<dd>Try enabling font embedding (set 'embed' property in html2ps.config to value 1 for fonts used in your documents).</dd>
+
+<dt id="layout-broken-width">Sites are cut-off on the right side when I'm using 640 pixels page width. What can I do?</dt>
+<dd> Nothing. Treat this as a feature. Just increase the page width. Most sites 
+  are <b>NOT</b> designed for such small resolutions and will cause a horizontal 
+  scrollbar to appear in browser in such cases. </dd>
+
+<dt id="layout-broken-pixelpoint-ratio">I've disabled the &quot;Keep screen pixel/point ratio&quot; option and the 
+  page layout is completely broken! What can I do?</dt>
+<dd> Nothing. Treat this as a feature. If you want to get the layout close to 
+  the image rendered by the browser, <b>never</b> disable this option. The only 
+  time you'll need it is when you need to render text having the <b>exact</b> 
+  size specified in points.</dd>
+
+<dt id="layout-broken-black-images">Some images are rendered inside black rectangles!</dt>
+<dd>PNG images with alpha channel are NOT supported. Swicth to single-color transparency, if you need it.</dd>
+
+<dt id="layout-broken-horizontal-lines">Horizontal lines (e.g. line under the text) look like they consist of several parts with slightly different width.</dt>
+<dd>Try disabling antialiasing in your PDF reader.</dd>
+
+<dt id="layout-broken-absolute-positioned">My absolute-positioned content is cut at the last page</dt>
+<dd>Note that absolute and fixed-positioned content do not generate page breaks (see CSS 2.1. 13.2.3 Content outside the page box). The simplest 
+workaround is to add static-positioned div with fixed height.</dd>
+
+</dl>
+
+<h2><a name="output-customize"></a>Customizing output.</h2>
+<dl>
+<dt><a name="explicit-break"></a>How can I make an explicit page break?</dt>
+<dd>
+You may use <em>one</em> of the following HTML2PS script-specific commands:
+<pre>
+&lt;!--NewPage--&gt;
+&lt;pagebreak/&gt;
+&lt;?page-break&gt;
+</pre>
+Or CSS <em>page-break-after</em> property:
+<pre>
+&lt;div style=&quot;page-break-after: always&quot;&gt;
+... some content ...
+&lt;/div&gt;
+</pre> 
+</dd>
+
+<dt><a name="headers-footers">How should I add headers or footers to generated Postscript / PDF files?</a></dt>
+<dd>
+You may use one of the following options:
+<ul>
+<li>Use blocks with 'position: fixed'. Pleas note that you probably want to 
+set 'top' and 'bottom' properties to negative values to avoid overlapping with
+main content; it is an expected behavior according to HTML/CSS standards. 
+(see also a simple <a href="samples/headfoot.html">sample</a>)</li>
+<li>Use &quot;Header&quot; and &quot;Footer&quot; options in web interface or 
+PreTreeFilterHeaderFooter filter in API</li>
+<li>Use <a href="compatibility.css.3.html#marginboxes">CSS 3 margin boxes</a>.</li>
+</ul>
+Note that when you use PreTreeFilterHeaderFooter or Header/Footer fields in web interface,
+content is implicitly placed in fixed-positioned div; you may thing of this as follows:
+<pre>
+...
+&lt;body&gt;
+&lt;!--header starts--&gt;
+&lt;div style="position: fixed; ...."&gt;...your header content...&lt;/div&gt;
+&lt;!--header ends--&gt;
+...
+your HTML content
+...
+&lt;!--footer starts--&gt;
+&lt;div style="position: fixed; ...."&gt;...your footer content...&lt;/div&gt;
+&lt;!--footer ends--&gt;
+&lt;/body&gt;
+...
+</pre>
+</dd>
+
+<dt><a name="hide-headers">I've added headers and footers to my HTML pages, but how I can prevent them from showing up in the browser?</a></dt>
+<dd>
+Use @media css rules setting 'display: none' or 'display: block' for header/footer blocks on different media.
+</dd>
+
+<dt><a name="hires-images"></a>Is there a possibility to create pdf documents with more than 72dpi using html2ps?</dt>
+<dd>You may make a page with high-resolution images and set their on-page height and width using 
+<code>height</code> and <code>width</code> attributes. 
+HTML2PS does not resample images, just outputs them to PDF and provides the scaling factor. 
+</dd>
+
+<dt id="css-media">Can I control media size / margins via CSS?</dt>
+<dd>
+Yes. Use <a href="compatibility.css.3.html#media">CSS 3 'size' and 'margin'</a> properties. In addition,
+html2ps provides '-html2ps-pixels' property which allows you to override 'pixels' value specified 
+in pipeline configuration code.
+</dd>
+
+
+<dt><a name="pages-batch"></a>##PAGES## directive always displays 1 in batch mode!</dt>
+<dd>Yes, it is a documented feature. ##PAGES## always refer to the number of pages in file being processed.
+</dd>
+
+</dl>
+
+<h2 id="api">API</h2>
+<dl>
+<dt id="api-localfile">How could I convert HTML file from my local drive?</dt>
+<dd>Use example file in <tt>samples/sample.simplest.from.file.php</tt> as a starting point.</dd>
+<dt id="api-frommemory">How could I convert HTML code contained in a variable?</dt>
+<dd>Use example file in <tt>samples/sample.simplest.from.memory.php</tt> as a starting point.</dd>
+<dt id="api-security">Can I convert a page using some authentication mechanism using the html2ps webinterface?</dt>
+<dd>Out-of-the-box &ndash; no. Depending on the type of the authentication you <em>may</em> override the fetcher
+object with your custom one able to bypass authentication. Still, the <strong>recommended</strong> approach
+is html2ps API usage; in this case, you store your HTML code in a PHP variable instead of outputting it to the browser
+and call conversion engine directly.</dd>
+<dt id="api-relative-path">I'm using API to convert files and images and / or CSS files seems to be ignored.</dt>
+<dd>
+Most likely, you're using relative URLs and, at the same time, converting either HTML string from memory or 
+local file. In this case script doesn't know the base URL to use while resolving relative paths, so 
+these URLs are ignored. You have two options in this case:
+<ul>
+<li>Change relative URI to absolute in your HTML code</li>
+<li>Implement 'get_base_url' function in the fetcher object you're using so it return valid meaningful value.</li>
+</ul>
+</dd>
+
+</dl>
+
+<h2 id="fonts">Fonts. National symbols.</h2>
+<dl>
+
+<dt id="fonts-nonstandard">How can I use fonts other than standard (Times, Helvetica and Courier)?</dt>
+<dd>Follow these <a href="howto_fonts.html" target="_blank">instructions</a></dd>
+
+<dt id="fonts-euro">Euro symbol is not displayed</dt>
+<dd>First of all, check if you provided correct information on the file encoding to html2ps; encoding vectors containing euro symbol are
+'iso-8859-15', 'windows-1250', 'windows-1251' or 'windows-1252'. Alternatively, you may use UTF-8 or HTML entities                          
+&amp;euro; or &amp;8364;.
+</dd>
+
+<dt id="fonts-cyrillic-ps">Cyrillic symbols are not displayed in PS output</dt>
+<dd>Install <tt>sharatype-fonts</tt> package to your Ghostscript; 
+the script is configured to use these fonts out-of-the-box.
+</dd>
+
+<dt id="fonts-greek-tonos">Greek symbols with tonos are not displayed in PS output; all other greek symbols rendered normally.</dt>
+<dd>
+<ul>
+<li>install the unicode postscript .pfb fonts (for example, from <a href="http://canopus.iacp.dvo.ru/~panov/cm-unicode/">http://canopus.iacp.dvo.ru/~panov/cm-unicode/</a>)</li>
+<li>remove the following default 'encoding-override' section from .html2ps.config, as it make greek text to use by default 'Symbol' font lacking 'tonos' symbols:
+<pre>
+&lt;encoding-override name="iso-8859-7"&gt;
+  &lt;normal normal="Symbol" italic="Symbol" oblique="Symbol"/&gt;
+  &lt;bold normal="Symbol" italic="Symbol" oblique="Symbol"/&gt;
+&lt;/encoding-override&gt;
+</pre>
+</li>
+<li>
+update "fonts" (NOT "fonts-pdf") section to point to installed fonts, for example:
+<pre>
+&lt;fonts&gt;
+  &lt;family name=&quot;times&quot;&gt;
+    &lt;normal normal=&quot;CMUSansSerif&quot; italic=&quot;CMUSansSerif-Oblique&quot; oblique=&quot;CMUSansSerif-Oblique&quot;/&gt;
+</pre>
+</li>
+</ul>
+</dd>
+
+<dt id="fonts-eastern">Chinese (Japanese, Arabic, etc...) symbols do not show on the page. What I need to do?</dt>
+  <dd>First of all, you'll need fonts containing these symbols; in most cases 
+    default fonts bundled with Ghostscript or PDFLIB will contain only Western/Central 
+    European symbols. After you find fonts containing characters you need, you 
+    should install them instead of the standard fonts, using the answer for this 
+    question <a href="#fonts">&laquo;How can I use fonts other than standard (Times, 
+    Helvetica and Courier)?&raquo;</a></dd>
+
+<dt id="fonts-ttf-cache">I've installed/updated True-Type fonts, but it seems that ... (some mysterious problem) ... happens</dt>
+<dd>First of all, clean a "parsed fonts" cache in 'fpdf/font' subdirectory (just remove all files). This could
+solve most font-related issues.</dd>
+</dl>
+
+<h2><a name="forms"></a>Interactive forms</h2>
+<dl>
+<dt>When I try to submit the form, Acrobat responds with a &quot;Cannot handle content type: &hellip;&quot; message.</dt>
+<dt>Every time I submit the form, I get a strange-looking result page in by browser.</dt>
+<dd>
+PDF interactive forms are not like HTML forms; you MUST modify the server-side script so it return FDF file 
+instead of normal HTML in this case.
+See <a href="http://partners.adobe.com/public/developer/pdf/index_reference.html" title="Opens PDF specifications download page at Adobe.com in new window">PDF Reference, v 1.6</a>, page 1026, par. 134 for futher information.
+Also, you may check <a href=""></a> for a brief outline of PDF forms.
+</dd>
+</dl>
+
+<h2><a name="frames"></a>Frames</h2>
+<dl>
+<dt>I have a page with frames containing a lot of text, but generated PDF contains only 1 page. Where's my content?</dt>
+<dd>
+As produced PDFs are static, you have no ways to scroll frame content. Thus, only initially visible frame content will be available. 
+It is a feature.
+</dd>
+<dt>Some links inside the frames are not active even when I enable &quot;Render Hyperlinks&quot; option.</dt>
+<dd>
+As was stated previously, script may render only a part of frame content. So, if rendered part contains a local hyperlink
+pointing to non-rendered part, this hyperlink will be disabled, as it points to nowhere.
+</dd>
+</dl>
+
+<h2><a name="misc"></a>Miscellaneous</h2>
+
+<dl>
+<dt id="misc-size">Is it possible to reduce the size of output PDF file?</dt>
+<dd>Yes. By default HTML2PS embeds fonts used during conversion in the generated PDF. You may disable this option by 
+setting 'embed' attribute to '0' for these fonts in html2ps.config. Note that it will probably cause problems 
+with national symbols on older versions of Acrobat Reader; also, this assumes that users have all fonts used in PDF 
+files on their machines.</dd>
+
+<dt>Is it possible to use a custom file name when outputting the pdf file? As of right now, the filename is long ugly string and doesn't look very clean.
+Can I pass the script a varible such as &amp;saveas=thispdffile.pdf and use that for the file name when saving in the browser?</dt>
+
+<dd>Yes. If you're using the web interface (html2ps.php file from distribution) you would need to replace 
+<code>$g_baseurl</code> with <code>$_REQUEST['saveas']</code>  in the following piece of code near the end of html2ps.php:
+<pre>
+switch ($g_config['output']) {
+case 0:
+   $pipeline->destination = new DestinationBrowser($g_baseurl);
+   break;
+case 1:
+   $pipeline->destination = new DestinationDownload($g_baseurl);
+   break;
+case 2:
+   $pipeline->destination = new DestinationFile($g_baseurl);
+   break;
+}; 
+</pre>
+Also please note that by default output file name can contain only latin letters, digits, '-' and '_' signs, 
+any other symbols will be replaced by underscores; 
+you may change this behavior by hacking the <code>filename_escape</code> function in <code>destination._interface.class.php</code>.
+<p>
+If you're using API, refer to DestinationBrowser/DestinationDownload/DestinationFile class documentation.
+</dd>
+</dl>
+
+</body>
+</html>              

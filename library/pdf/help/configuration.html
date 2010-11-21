@@ -1,0 +1,277 @@
+<html>
+<head>
+<title>html2ps/html2pdf configuration files and options</title>
+<link rel="stylesheet" type="text/css" medial="all" title="Default" href="css/help.css"/>
+</head>
+<body>
+<h1>html2ps/pdf configuration files and options</h1>
+<p><a href="index.html">Back to table of contents</a></p>
+
+<p>Currently, configuration is done both via configuration file (<tt>html2ps.config</tt>) 
+  and configuration constants inside the <tt>config.inc.php</tt> file. 
+<h2><a name="common"></a>html2ps.config, Common configuration options</h2>
+<table class="description_table">
+  <caption><p>Common directives in <tt>html2ps.config<br>
+  </tt></p></caption>
+  <tr class="odd"> 
+    <th style="width: 10%;">Option</th>
+    <th style="width: 10%;">Appears&nbsp;at</th>
+    <th style="width: 90%;">Description</th>
+  </tr>
+  <tr class="even"> 
+    <td><tt>media</tt></td>
+    <td>Top level</td>
+    <td> Defines the output media size. This tag should have three arguments: 
+      <ul>
+        <li><tt>name</tt> &ndash; media name; you'll be able to refer to this media 
+          by name while calling the script;</li>
+        <li><tt>width</tt> &ndash; media width in millimetres;</li>
+        <li><tt>height</tt> &ndash; media height in millimetres.</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+<h2><a name="postscript"></a>html2ps.config, Postscript and Ghotscript configuration</h2>
+<table class="description_table">
+  <caption><p>Postscript-specific directives in <tt>html2ps.config<br></tt></p>
+  </caption>
+  <tr class="odd"> 
+    <th style="width: 10%;">Option</th>
+    <th style="width: 10%;">Appears&nbsp;at</th>
+    <th style="width: 90%;">Description</th>
+  </tr>
+  <tr class="even"> 
+    <td><tt>fonts</tt></td>
+    <td>Top level</td>
+    <td>Contains information about font-family value to Postscript font name mappings. 
+      See descrripton of nested directives.</td>
+  </tr>
+  <tr class="odd"> 
+    <td><tt>family</tt></td>
+    <td>/fonts</td>
+    <td>Contains information about particular font-family value mapping. Attributes: 
+      <ul>
+        <li><tt>name</tt> &ndash; value of 'font-family' property being mapped.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr class="even"> 
+    <td><tt>encoding-override</tt></td>
+    <td>/fonts, /fonts/family</td>
+    <td>Contains information about exceptions in font-family mappings. Attributes: 
+      <ul>
+        <li><tt>name</tt> &ndash; comma-separated list of encodings to apply this rule 
+          for.</li>
+      </ul>
+      For example, normally 'times' family is mapped to /Times-Roman font. On 
+      the other hand, this standard font does not contain cyrillic symbols, so 
+      when one of the cyrillic encodings is met, 'times' will be mapped to /TimesCyr-Medium.</td>
+  </tr>
+  <tr class="odd"> 
+    <td><tt>alias</tt></td>
+    <td>/fonts</td>
+    <td>List of font-family aliases. Attributes: 
+      <ul>
+        <li><tt>alias</tt> &ndash; font family alias to be translated</li>
+        <li><tt>family</tt> &ndash; real font family name for this alias</li>
+      </ul>
+      Note that alias resolving is done once, so there's not much use of constructions 
+      similar to 
+      <pre>
+  &lt;alias alias=&quot;verdana&quot; family=&quot;arial&quot;/&gt;
+  &lt;alias alias=&quot;arial&quot; family=&quot;helvetica&quot;/&gt;
+</pre>
+    </td>
+  </tr>
+
+  <tr class="even"> 
+    <td><tt>metrics</tt></td>
+    <td>/fonts</td>
+    <td>
+      Reference to a font metric file for this font family. Attributes: 
+      <ul>
+      <li><tt>typeface</tt> &ndash; typeface name (refers to the ones used in <tt>normal</tt>, 
+          <tt>italic</tt> and <tt>oblique</tt> attributes)</li>
+      <li><tt>file</tt> &ndash; name of the font metric (AFM) file (searched in TYPE1_FONT_REPOSITORY directory)</li>
+      </ul>
+    </td>
+  </tr>
+
+  <tr class="odd"> 
+    <td><tt>normal</tt></td>
+    <td>/fonts/family, /fonts/family/encoding-override, /encoding-override</td>
+    <td>System font names for normal font variant. Attributes: 
+      <ul>
+        <li><tt>normal</tt> &ndash; font name for roman (non-italic) font</li>
+        <li><tt>italic</tt> &ndash; font name for italic font</li>
+        <li><tt>oblique</tt> &ndash; font name for oblique font</li>
+      </ul>
+    </td>
+  </tr>
+  <tr class="even"> 
+    <td><tt>bold</tt></td>
+    <td>/fonts/family, /fonts/family/encoding-override, /encoding-override</td>
+    <td>System font names for bold font variant. Attributes: 
+      <ul>
+        <li><tt>normal</tt> &ndash; font name for bold roman (non-italic) font</li>
+        <li><tt>italic</tt> &ndash; font name for bold italic font</li>
+        <li><tt>oblique</tt> &ndash; font name for bold oblique font</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+<h2><a name="pdflib"></a>html2ps, config PDFLIB/FPDF configuration</h2>
+<table class="description_table">
+<caption><p>PDFLIB-specific directives in <tt>html2ps.config</tt></p></caption>
+<tr class="odd">
+<th style="width: 10%;">Option</th>
+<th style="width: 10%;">Appears&nbsp;at</th>
+<th style="width: 90%;">Description</th>
+</tr>
+
+<tr class="even">
+<td><tt>fonts-pdf</tt></td>
+<td>Top level</td>
+    <td>Contains information about font-family value to PDF font name mappings. 
+      Note that nested directives and their meanings are the same as for the <tt>fonts</tt> 
+      directive, except that they're applied when PDFLIB is used.</td>
+</tr>
+
+<tr class="odd">
+<td><tt>ttf</tt></td>
+<td>fonts-pdf</td>
+<td>Defines mapping of typefaces to available TrueType fonts. Attributes:
+<ul>
+<li><tt>typeface</tt> &ndash; typeface name (refers to the ones used in <tt>normal</tt>, <tt>italic</tt> and <tt>oblique</tt> attributes)</li>
+<li><tt>file</tt> &ndash; name of the TTF file (searched in TTF_FONTS_REPOSITORY directory) 
+<li><tt>embed</tt> &ndash; flag indicating whether this font file should be embedded in generated PDF (0 - not embedded, 1 - embedded).</ul>
+</td>
+</tr>
+</table>
+
+<h2><a name="constants-common"></a>config.inc.php, Common configuration options</h2>
+
+<table class="description_table">
+<caption><p>Common configuration constants</p></caption>
+<tr class="odd">
+<th>Name</th>
+<th>Description</th>
+</tr>
+
+<tr class="even">
+<td>HTML2PS_DIR</td>
+<td>
+Path to directory on server where HTML2PS script files reside. All HTML2PS-specific directories and 
+paths are relative to this directory.
+</td>
+</tr>
+
+<tr class="odd">
+<td>DEFAULT_USER_AGENT</td>
+<td>
+Value of the 'User-Agent' HTTP header which will be sent by PHP when fetching files from remote server. 
+</td>
+</tr>
+
+<tr class="even">
+<td>OUTPUT_DEFAULT_NAME</td>
+<td>
+Default PDF or PS file name to use when no filename have been specified via API.
+</td>
+</tr>
+
+<tr class="odd">
+<td>DEFAULT_ENCODING</td>
+<td>
+Default encoding to use when no encoding information is available (e.g. encoding was specified neither in 
+HTTP headers nor in META tag of HTML page).
+</td>
+</tr>
+
+<tr class="even">
+<td>FILE_PROTOCOL_RESTRICT</td>
+<td>
+Determines the prefix of the filesystem path allowed to be referred via 'file' protocol. By default,
+you may refer files in html2ps directory and below; to use files from <tt>C:\images</tt> directory you'll need to 
+store <tt>C:\images\</tt> value in this constant. Note the trailing backslash; if it is omitted, the prefix may match several directories, 
+e.g. both <tt><b>C:\images</b>\</tt> and <tt><b>C:\images</b>-private\</tt>.
+</td>
+</tr>
+
+<tr class="odd">
+<td>FONT_EMBEDDING_MODE</td>
+<td>
+Determines how font files are embedded. May be:
+<ul>
+<li>'all' &mdash; embed all fonts</li>
+<li>'none' &mdash; do not embed any fonts</li>
+<li>'config' &mdash; whether font is embedded is determined by html2ps.config 'embed' attribute value for this font</li>
+</ul>
+</td>
+</tr>
+
+</table>
+
+<h2><a name="constants-ps"></a>config.inc.php, Postscript options</h2>
+<table class="description_table">
+<caption><p>Postscript-related constants</p></caption>
+<tr class="odd">
+<th>Name</th>
+<th>Description</th>
+</tr>
+
+<tr class="even">
+<td>GS_PATH</td>
+<td>
+Path to your Ghostscript executable. Note to Windows users! Ghostscript distribution includes two executables: gswin32.exe
+(GUI version) and gswin32c.exe (command-line version). You should provide path to <strong>command-line</strong> version
+only! 
+</td>
+</tr>
+
+<tr class="odd">
+<td>TYPE1_FONTS_REPOSITORY</td>
+<td>
+Path to font metric (AFM) files. Usually AFM files are packaged together with Ghostscript in 'fonts' subdirectory; 
+in some Linux distibutions you should install 'ghostscript-fonts' package to get font metrics. 
+</td>
+</tr>
+
+</table>
+
+<h2><a name="constants-pdflib"></a>config.inc.php, PDFLIB options</h2>
+<table class="description_table">
+<caption><p>PDFLIB-related constants</p></caption>
+<tr class="odd">
+<th>Name</th>
+<th>Description</th>
+</tr>
+
+<tr class="even">
+<td>PDFLIB_DL_PATH</td>
+<td>
+Path to PDFLIB dynamically loaded library. If no "pdf" extension loaded, script attempts to call "dl" with 
+PDFLIB_DF_PATH as argument.
+</td>
+</tr>
+
+<tr class="odd">
+<td>PDFLIB_LICENSE</td>
+<td>
+Your PDFLIB license key. 
+</td>
+</tr>
+
+<tr class="even">
+<td>TTF_FONTS_REPOSITORY</td>
+<td>
+Path to directory containing a set of True-Type font files to be used by PDFLIB.
+</td>
+</tr>
+
+</table>
+
+</body>
+</html>              

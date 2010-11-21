@@ -1,0 +1,107 @@
+<html>
+<head>
+<title>html2ps/html2pdf CSS 3 Compatibility List</title>
+<link rel="stylesheet" type="text/css" medial="all" title="Default" href="css/help.css"/>
+</head>
+<body>
+<h1>html2ps/pdf CSS 3 Compatibility List</h1>
+
+<p><a href="index.html">Back to table of contents</a></p> 
+
+<h2 id="media">Media parameters</h2>
+<p>
+CSS 3 paged media module provides a means of controlling media size and margins. 
+html2ps understangs 'size' and 'margin' properties when they're used in @page context; thus,
+you can set page size and margins in your CSS file, overriding defaults. For example:
+<pre>
+@page {
+  size: 100mm 200mm;
+  margin: 10mm;
+}
+</pre>
+or
+<pre>
+@page {
+  size: A4 landscape;
+  margin: 5% 10mm;
+}
+</pre>
+</p>
+<p><a href="http://www.w3.org/TR/css3-page/#page-size">More complete information on 'size' and 'margin' value formats</a> is available on w3c.org.</p>
+
+
+<h2 id="marginboxes">Margin boxes</h2>
+<p>
+html2ps supports margin boxes in accordance to CSS 3. For example, you may render a header
+using the following CSS code:
+<pre>
+@page {
+  @top-left {
+    content: &quot;My Page&quot;;
+  }
+  @top-right {
+    content: &quot;Page &quot; counter(page) &quot; of &quot; counter(pages);
+  }
+}
+</pre>
+</p>
+<p>
+As an extension of the margin box specification, html2ps provides '-html2ps-html-content' 
+property. In general, it is similar to 'content' property, except the resulting string 
+is processed by HTML parser. Thus, you may use HTML tags in this property value. 
+<pre>
+@page {
+  @top-left {
+    -html2ps-html-content: &quot;&amp;lt;span style=&amp;quot;font-weight: bold;&amp;quot;&amp;gt;My&amp;lt;/span&amp;gt; Page&quot;;
+  }
+  @top-right {
+    content: &quot;Page &quot; counter(page) &quot; of &quot; counter(pages);
+  }
+}
+</pre>
+</p>
+<p>
+Note that you may set text formatting using usual CSS propeties in margin box context:
+<pre>
+@page {
+  @top-left {
+    color: red;
+    content: &quot;My Page&quot;;
+  }
+  @top-right {
+    content: &quot;Page &quot; counter(page) &quot; of &quot; counter(pages);
+  }
+}
+</pre>
+</p>
+<p>
+For further information please refer to
+<a href="http://www.w3.org/TR/css3-page/#margin-boxes">CSS 3 Paged Media Module</a>.
+</p>
+
+<h2 id="footnotes">Footnotes</h2>
+
+<h2 id="properties">Properties</h2>
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Support</th>
+<th>Note</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+</tbody>
+</table>
+
+html2ps/pdf (c) <a href="http;//www.tufat.com/">TUFaT.com</a> 
+</body>
+</html>              

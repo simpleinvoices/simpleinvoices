@@ -1,0 +1,147 @@
+
+/*dialog*/
+.ui-dialog {
+	/*resets*/margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none;
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 1.1em;
+	background: #ffffff url(images/ffffff_40x100_textures_01_flat_0.png) 0 0 repeat-x;
+	color: #222222;
+	border: 4px solid #dddddd;
+	position: relative;
+}
+.ui-resizable-handle {
+	position: absolute;
+	font-size: 0.1px;
+	z-index: 99999;
+}
+.ui-resizable .ui-resizable-handle {
+	display: block; 
+}
+body .ui-resizable-disabled .ui-resizable-handle { display: none; } /* use 'body' to make it more specific (css order) */
+body .ui-resizable-autohide .ui-resizable-handle { display: none; } /* use 'body' to make it more specific (css order) */
+.ui-resizable-n { 
+	cursor: n-resize; 
+	height: 7px; 
+	width: 100%; 
+	top: -5px; 
+	left: 0px;  
+}
+.ui-resizable-s { 
+	cursor: s-resize; 
+	height: 7px; 
+	width: 100%; 
+	bottom: -5px; 
+	left: 0px; 
+}
+.ui-resizable-e { 
+	cursor: e-resize; 
+	width: 7px; 
+	right: -5px; 
+	top: 0px; 
+	height: 100%; 
+}
+.ui-resizable-w { 
+	cursor: w-resize; 
+	width: 7px; 
+	left: -5px; 
+	top: 0px; 
+	height: 100%;
+}
+.ui-resizable-se { 
+	cursor: se-resize; 
+	width: 13px; 
+	height: 13px; 
+	right: 0px; 
+	bottom: 0px; 
+	background: url(images/222222_11x11_icon_resize_se.gif) no-repeat 0 0;
+}
+.ui-resizable-sw { 
+	cursor: sw-resize; 
+	width: 9px; 
+	height: 9px; 
+	left: 0px; 
+	bottom: 0px;  
+}
+.ui-resizable-nw { 
+	cursor: nw-resize; 
+	width: 9px; 
+	height: 9px; 
+	left: 0px; 
+	top: 0px; 
+}
+.ui-resizable-ne { 
+	cursor: ne-resize; 
+	width: 9px; 
+	height: 9px; 
+	right: 0px; 
+	top: 0px; 
+}
+.ui-dialog-titlebar {
+	/*resets*/margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none;
+	padding: .5em 1.5em .5em 1em;
+	color: #555555;
+	background: #e6e6e6 url(images/e6e6e6_40x100_textures_02_glass_75.png) 0 50% repeat-x;
+	border-bottom: 1px solid #d3d3d3;
+	font-size: 1em;
+	font-weight: normal;
+	position: relative;
+}
+.ui-dialog-title {}
+.ui-dialog-titlebar-close {
+	/*resets*/margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none;
+	background: url(images/888888_11x11_icon_close.gif) 0 0 no-repeat;
+	position: absolute;
+	right: 8px;
+	top: .7em;
+	width: 11px;
+	height: 11px;
+	z-index: 100;
+}
+.ui-dialog-titlebar-close-hover, .ui-dialog-titlebar-close:hover {
+	background: url(images/454545_11x11_icon_close.gif) 0 0 no-repeat;
+}
+.ui-dialog-titlebar-close:active {
+	background: url(images/222222_11x11_icon_close.gif) 0 0 no-repeat;
+}
+.ui-dialog-titlebar-close span {
+	display: none;
+}
+.ui-dialog-content {
+	/*resets*/margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none;
+	color: #222222;
+	padding: 1.5em 1.7em;	
+}
+.ui-dialog-buttonpane {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	text-align: left;
+	border-top: 1px solid #dddddd;
+	background: #ffffff;
+}
+.ui-dialog-buttonpane button {
+	margin: .5em 0 .5em 8px;
+	color: #555555;
+	background: #e6e6e6 url(images/e6e6e6_40x100_textures_02_glass_75.png) 0 50% repeat-x;
+	font-size: 1em;
+	border: 1px solid #d3d3d3;
+	cursor: pointer;
+	padding: .2em .6em .3em .6em;
+	line-height: 1.4em;
+}
+.ui-dialog-buttonpane button:hover {
+	color: #212121;
+	background: #dadada url(images/dadada_40x100_textures_02_glass_75.png) 0 50% repeat-x;
+	border: 1px solid #999999;
+}
+.ui-dialog-buttonpane button:active {
+	color: #222222;
+	background: #ffffff url(images/ffffff_40x100_textures_02_glass_65.png) 0 50% repeat-x;
+	border: 1px solid #dddddd;
+}
+/* This file skins dialog */
+.ui-dialog.ui-draggable .ui-dialog-titlebar,
+.ui-dialog.ui-draggable .ui-dialog-titlebar {
+	cursor: move;
+}
+

@@ -1,35 +1,30 @@
 <?php 
-include("./include/include_main.php"); 
+//   include phpreports library
+require_once("./include/reportlib.php");
 
-//stop the direct browsing to this file - let index.php handle which files get displayed
-if (!defined("BROWSE")) {
-   echo "You Cannot Access This Script Directly, Have a Nice Day.";
-   exit();
-}
+   $sSQL = "SELECT c.name, sum(ii.total) as sum_total
+      FROM 
+            ".TB_PREFIX."customers c, 
+            ".TB_PREFIX."invoices i,
+            ".TB_PREFIX."invoice_items ii, 
+            ".TB_PREFIX."preferences p
+    where
+        i.customer_id = c.id
+        AND
+        ii.invoice_id = i.id
+        AND 
+        i.preference_id = p.pref_id
+        AND
+            p.status = '1'
+      GROUP BY c.name 
 
+";
+
+   $oRpt->setXML("./modules/reports/report_sales_customers_total.xml");
+
+//   include phpreports run code
+	include("./include/reportrunlib.php");
+
+$smarty -> assign('pageActive', 'report');
+$smarty -> assign('active_tab', '#home');
 ?>
-<b>Sales in total by Customer</b>
-<hr></hr>
-<div id="container">
-
-<?php
-   // include the PHPReports classes on the PHP path! configure your path here
-   include "./modules/reports/PHPReportMaker.php";
-   include "config/config.php";
-
-   $sSQL = "select  {$tb_prefix}customers.name,  sum({$tb_prefix}invoice_items.total) as SUM_TOTAL  from {$tb_prefix}customers, {$tb_prefix}invoice_items, {$tb_prefix}invoices where {$tb_prefix}invoices.customer_id = {$tb_prefix}customers.id and {$tb_prefix}invoices.id = {$tb_prefix}invoice_items.invoice_id GROUP BY {$tb_prefix}customers.name ";
-   $oRpt = new PHPReportMaker();
-
-   $oRpt->setXML("./modules/reports/xml/report_sales_customers_total.xml");
-   $oRpt->setUser("$db_user");
-   $oRpt->setPassword("$db_password");
-   $oRpt->setConnection("$db_host");
-   $oRpt->setDatabaseInterface("mysql");
-   $oRpt->setSQL($sSQL);
-   $oRpt->setDatabase("$db_name");
-   $oRpt->run();
-?>
-<hr></hr>
-
-</div>
-<div id="footer"></div>

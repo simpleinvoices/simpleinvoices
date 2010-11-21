@@ -4,9 +4,9 @@
 checkLogin();
 
 $preferences = getPreferences();
+
 $smarty -> assign("preferences",$preferences);
-	
-getRicoLiveGrid("rico_preferences","{ type:'number', decPlaces:0, ClassName:'alignleft' }");
 
-
+$smarty -> assign('pageActive', 'preference');
+$smarty -> assign('active_tab', '#setting');
 ?>
