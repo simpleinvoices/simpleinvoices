@@ -53,7 +53,7 @@ class invoice {
 				:custom_field2,
 				:custom_field3,
 				:custom_field4,
-                'draft'
+                NULL
 				)";
 
 		$pref_group=getPreference($this->preference_id);
