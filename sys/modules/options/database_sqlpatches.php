@@ -141,7 +141,7 @@ function listPatches() {
 		<td>
 
             <a href="./index.php?case=run" class="positive">
-                <img src="../sys/images/common/tick.png" alt="" />
+                <img src="{$include_dir}sys/images/common/tick.png" alt="" />
                 Update
             </a>
     
@@ -151,7 +151,7 @@ function listPatches() {
 		
 		
 		<br />
-		<img src="../sys/images/common/important.png" alt="" /><font color="red">Warning: Please backup your database before upgrading!</font>
+		<img src="{$include_dir}sys/images/common/important.png" alt="" /><font color="red">Warning: Please backup your database before upgrading!</font>
 		<br />
 		<br />
 <table align="center">
