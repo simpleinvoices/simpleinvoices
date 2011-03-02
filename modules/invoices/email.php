@@ -19,7 +19,7 @@ $invoice_id = $_GET['id'];
 $invoice = invoice::select($invoice_id);
 $preference = getPreference($invoice['preference_id']);
 $biller = getBiller($invoice['biller_id']);
-$customer = customer::get($invoice['customer_id']);
+$customer = getCustomer($invoice['customer_id']);
 
 
 $sql = "SELECT inv_ty_description AS type FROM ".TB_PREFIX."invoice_type WHERE inv_ty_id = :type";

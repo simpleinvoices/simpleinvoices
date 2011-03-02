@@ -62,7 +62,7 @@ $validFields = array('id', 'name','description','enabled');
 				1 AS registered,
 				enabled
 			FROM 
-				".TB_PREFIX."extensions
+				si_extensions
 			$where
 			ORDER BY 
 				$sort $dir 
@@ -95,14 +95,10 @@ $validFields = array('id', 'name','description','enabled');
 	if ($row['id'] == 0 && $row['registered'] ==1) { $xml .= "Always enabled "; }
 	else {
 		if ($row['registered'] == 1) {
-			$xml .="<a class='index_table' title='$LANG[plugin_unregister] $LANG[extensions] ".$row['name']."' href='index.php?module=extensions&view=register&id=$row[id]&action=unregister'> ".$plugin[3-$row['registered']]."</a>";
-			if ($row['enabled'] == 1) {
-				$xml .= " <a class='index_table' title='$LANG[disable] $LANG[extensions] ".$row['name']."' href='index.php?module=extensions&view=manage&id=$row[id]&action=toggle'>".$light[2]."</a>";
-			} else {
-				$xml .= " <a class='index_table' title='$LANG[enable] $LANG[extensions] ".$row['name']."' href='index.php?module=extensions&view=manage&id=$row[id]&action=toggle'>".$light[2]."</a>";
-			}
+		$xml .="<a class='index_table' title='$LANG[plugin_register] $LANG[extensions] ".$row['name']."' href='index.php?module=extensions&view=register&id=$row[id]&action=unregister'> ".$plugin[3-$row['registered']]."</a>";
+			$xml .= " <a class='index_table' title='$LANG[enable] $LANG[extensions] ".$row['name']."' href='index.php?module=extensions&view=manage&id=$row[id]&action=toggle'>".$light[2]."</a>";
 		} else {
-			$xml .="<a class='index_table' title='$LANG[plugin_register] $LANG[extensions] ".$row['name']."' href='index.php?module=extensions&view=register&name=$row[name]&action=register&description=$row[description]'> ".$plugin[3-$row['registered']]."</a>";
+		$xml .="<a class='index_table' title='$LANG[plugin_register] $LANG[extensions] ".$row['name']."' href='index.php?module=extensions&view=register&name=$row[name]&action=register&description=$row[description]'> ".$plugin[3-$row['registered']]."</a>";
 		}
 	}
 	$xml .= "]]></cell>";

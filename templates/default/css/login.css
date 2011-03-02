@@ -149,9 +149,7 @@ LOGIN SCREEN (.login is body class)
 	margin:10px 0 20px; }
 
 .login div#Dialog {
-	border:5px solid #ccc;
-		-webkit-border-radius: 15px;    /* Safari */
-	    -moz-border-radius: 15px;       /* Firefox */
+	border:10px solid #ccc;
 	text-align:left;
 	background:#fff;
 	padding:15px 20px 10px; }

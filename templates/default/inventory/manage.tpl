@@ -28,7 +28,7 @@
 	
 	<br />
 	<br />
-	<span class="welcome">{$LANG.no_inventory_movements}</span>
+	<span class="welcome">{$LANG.no_crons}</span>
 	<br />
 	<br />
 	<br />

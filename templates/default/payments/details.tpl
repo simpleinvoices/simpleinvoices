@@ -1,15 +1,3 @@
-<div class="align_center">
-	<br />
-
-
-	<!--Actions heading - start-->
-	<span class="welcome">
-			<a title="{$LANG.print_preview_tooltip} {$preference.pref_inv_wording|htmlsafe} {$payment.id|htmlsafe}" href="index.php?module=export&amp;view=payment&amp;id={$payment.id|urlencode}&amp;format=print" target="_blank"><img src='images/common/printer.png' class='action' />&nbsp;{$LANG.print_preview}</a>
-			 &nbsp;&nbsp; 
-			 <!-- EXPORT TO PDF -->
-			<a title="{$LANG.export_tooltip} {$preference.pref_inv_wording|htmlsafe} {$payment.id|htmlsafe} {$LANG.export_pdf_tooltip}" href="index.php?module=export&amp;view=payment&amp;id={$payment.id}&amp;format=pdf"><img src='images/common/page_white_acrobat.png' class='action' />&nbsp;{$LANG.export_pdf}</a>
-	</span>
-</div>
 <br />
 <table align="center">
 	<tr>

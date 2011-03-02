@@ -4,7 +4,7 @@
 if($_GET['id'])
 {
 	//sleep(2);
-	$sql = sprintf("SELECT unit_price, default_tax_id, default_tax_id_2 FROM ".TB_PREFIX."products WHERE id = %d LIMIT 1", $_GET['id']);
+	$sql = sprintf('SELECT unit_price, default_tax_id, default_tax_id_2 FROM si_products WHERE id = %d LIMIT 1', $_GET['id']);
 	$states = dbQuery($sql);
 //	$output = '';
 	if($states->rowCount() > 0)

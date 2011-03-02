@@ -128,6 +128,14 @@
 
     <div>
         <!-- Do stuff menu  - start -->
+        <!-- Need help mini menu  - start -->
+        <div class="floatRight">
+            <h2>{$LANG.need_help}</h2>
+            <a href="">{$LANG.help_si_help} &gt;</a><br />
+            <a href="http://www.simpleinvoices.org/forum">{$LANG.help_community_forums} &gt;</a><br />
+            <a href="http://www.simpleinvoices.org/blog">{$LANG.help_blog} &gt;</a>
+        </div>
+        <!-- Need help mini menu  - end -->
         <h2>{$LANG.start_working}</h2>
         <table class="buttons">
         <tr>
@@ -153,42 +161,40 @@
         </table>
         <br />
         <!-- Do stuff menu  - end -->
+        <!-- Don't forget to menu - start -->
+        <h2 class="align_left">{$LANG.dont_forget_to}</h2>
+        <table class="buttons" >
+        <tr>
+            <td>
+            <a href="index.php?module=options&amp;view=index" class="">
+            <img src="./images/common/cog_edit.png" alt=""/>
+            {$LANG.customise_settings}
+            </a>
+        </td>
+        <td>
+            <a href="./index.php?module=options&amp;view=backup_database" class="">
+            <img src="./images/common/database_save.png" alt=""/>
+            {$LANG.backup_your_database}
+            </a>
+        </td>
+        </tr>
+        </table>
+        <br />
+        <!-- Don't forget to menu - end -->
     </div>
 
     <!-- Reports menu - start -->
     <div class="align_left">
         <h2>{$LANG.your_reports}</h2>
-        	<div class="graphName" style="height: auto; width:600px; text-align: center;">
-			<b>{$LANG.monthly_sales_per_year_flot}</b>
-			</div>
-			<!-- Flot integration -->
-			<div id="placeholder" style="width:600px;height:200px;">
-			</div>
-        	{literal}
-        	<script id="source" language="javascript" type="text/javascript"> 
-			$(function () {
-				{/literal}
-				{foreach item=year from=$years}
-					var d{$year|htmlsafe} = [{foreach key=key item=item_sales from=$total_sales.$year}[{$key|htmlsafe}, {if $item_sales > 0}{$item_sales|siLocal_number}{else}0{/if}],{/foreach}];
-				 {/foreach}
-			 	
-			     $.plot($("#placeholder"), [
-			        {foreach item=year from=$years}
-			        {literal}
-			        {
-			        	{/literal}
-			            data: d{$year|htmlsafe},
-			            label: "{$year|htmlsafe}",
-			            lines: {literal} { show: true } 
-			        },
-			        {/literal}
-			         {/foreach}
-			         {literal}
-			    ]);
-			});
-			</script> 
-			{/literal}
+        --fancy graph here-- --some links on the right--
         <br />
     </div>
     <!-- Reports menu - end -->
+    <br />
+    <br />
+    <span class="welcome">
+       Note: this page is a work-in-progress
+    </span>
+    <br />
+    <br />
 {/if}

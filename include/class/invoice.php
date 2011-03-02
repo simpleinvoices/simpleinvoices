@@ -206,7 +206,6 @@ class invoice {
         }
 
         if ($this->having_and) $having_and  = $this->having_and;
-        if ($this->having_and2) $having_and2  = $this->having_and2;
         $sort = $this->sort;
 
         /*SQL Limit - start*/
@@ -263,41 +262,41 @@ class invoice {
         switch ($having_and) 
         {   
             case "date_between":
-                $sql_having .= " AND ( date between '$this->start_date' and '$this->end_date' )";
+                $sql_having .= "AND ( date between '$this->start_date' and '$this->end_date' )";
                 break;
             case "money_owed":
-                $sql_having .= " AND ( owing > 0 ) ";
+                $sql_having .= "AND ( owing > 0 ) ";
                 break;
             case "paid":
-                $sql_having .= " AND ( owing ='' ) OR ( owing < 0 )";
+                $sql_having .= "AND ( owing ='' ) OR ( owing < 0 )";
                 break;
             case "draft":
-                $sql_having .= " AND ( status = 0 )";
+                $sql_having .= "AND ( status = 0 )";
                 break;
             case "real":
-                $sql_having .= " AND ( status = 1 )";
+                $sql_having .= "AND ( status = 1 )";
                 break;
         }
 
         switch ($having_and2) 
         {   
             case "date_between":
-                $sql_having .= " AND ( date between '$this->start_date' and '$this->end_date' )";
+                $sql_having .= "AND ( date between '$this->start_date' and '$this->end_date' )";
                 break;
             case "money_owed":
-                $sql_having .= " AND ( owing > 0 ) ";
+                $sql_having .= "AND ( owing > 0 ) ";
                 break;
             case "paid":
-                $sql_having .= " AND ( owing ='' ) OR ( owing < 0 )";
+                $sql_having .= "AND ( owing ='' ) OR ( owing < 0 )";
                 break;
             case "draft":
-                $sql_having .= " AND ( status = 0 )";
+                $sql_having .= "AND ( status = 0 )";
                 break;
             case "real":
-                $sql_having .= " AND ( status = 1 )";
+                $sql_having .= "AND ( status = 1 )";
                 break;
         }
-        
+
         switch ($config->database->adapter)
         {
             case "pdo_pgsql":

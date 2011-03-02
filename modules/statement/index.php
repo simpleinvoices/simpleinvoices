@@ -7,11 +7,8 @@
 * Authors:
 *	 Justin Kelly
 *
-* Contributors:
-*	 Matt West
-*
 * Last edited:
-* 	 2010-07-29
+* 	 2008-05-13
 *
 * License:
 *	 GPL v3
@@ -53,48 +50,20 @@ if (isset($_POST['submit']))
 
 	if ( isset($_POST['filter_by_date']) )
 	{
-
 		$invoice->having = "date_between";
 		$filter_by_date = "yes";
-		$having_count = '1';
-
+		$having_and_count = 1;
 	}
 
 	if ( isset($_POST['show_only_unpaid']) )
 	{
-		if ($having_count == '1') 
+		if ($having_and_count == 1) 
 		{
-
 			$invoice->having_and = "money_owed";
-		    $having_count = '2';
-
 		} else {
-
 			$invoice->having = "money_owed";
-		    $having_count = '1';
-
 		}
-
 		$show_only_unpaid = "yes";
-	}
-	
-	if ( isset($_POST['show_only_real']) )
-	{
-		if ($having_count == '2') 
-		{
-
-			$invoice->having_and2 = "real";
-
-		} elseif ($having_count == '1') {
-
-			$invoice->having_and = "real";
-
-		} else {
-
-			$invoice->having = "real";
-            
-		}
-		$show_only_real = "yes";
 	}
 
 	$invoice->sort = "date";
@@ -121,7 +90,6 @@ $smarty -> assign('customer_id', $customer_id);
 $smarty -> assign('customer_details', $customer_details);
 
 $smarty -> assign('show_only_unpaid', $show_only_unpaid);
-$smarty -> assign('show_only_real', $show_only_real);
 $smarty -> assign('filter_by_date', $filter_by_date);
 
 $smarty -> assign('billers', $billers);

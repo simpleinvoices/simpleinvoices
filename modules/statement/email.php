@@ -22,13 +22,12 @@ if ( $filter_by_date =="yes" )
 	$end_date = $_GET['end_date'];
 }
 $show_only_unpaid = $_GET['show_only_unpaid'];
-$show_only_real = $_GET['show_only_real'];
 $get_format = $_GET['format'];
 $get_file_type = $_GET['filetype'];
 
 
 $biller = getBiller($_GET['biller_id']);
-$customer = customer::get($_GET['customer_id']);
+$customer = getCustomer($_GET['customer_id']);
 
 #create PDF name
       
@@ -48,7 +47,6 @@ if ($_GET['stage'] == 2 ) {
 	$export -> start_date = $start_date;
 	$export -> end_date = $end_date;
 	$export -> show_only_unpaid = $show_only_unpaid;
-	$export -> show_only_real = $show_only_real;
 	$export -> filter_by_date = $filter_by_date;
 	$export -> execute();
 

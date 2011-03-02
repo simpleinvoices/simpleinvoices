@@ -113,7 +113,7 @@ class cron {
 		    $sort = "id";
 		}
 
-		if($type =="count" OR $type =="no_limit")
+		if($type =="count")
 		{
 		    //unset($limit);
 		    $limit="";
@@ -188,7 +188,7 @@ class cron {
 
         //only proceed if cron has not been run for today
         $cron = new cron();
-        $data = $cron->select_all('no_limit');
+        $data = $cron->select_all('');
 
         $return['cron_message'] ="Cron started";
         $number_of_crons_run = "0";	
@@ -299,7 +299,7 @@ class cron {
                         $invoice= invoice::select($new_invoice_id);
                         $preference = getPreference($invoice['preference_id']);
                         $biller = getBiller($invoice['biller_id']);
-                        $customer = customer::get($invoice['customer_id']);
+                        $customer = getCustomer($invoice['customer_id']);
                         #print_r($customer);
                         #create PDF nameVj
                         $spc2us_pref = str_replace(" ", "_", $invoice['index_name']);
@@ -339,7 +339,7 @@ class cron {
                             }
                             if($data[$key]['email_biller'] == "1" AND $data[$key]['email_customer'] == "0")
                             {
-                                $email -> to = $biller['email'];
+                                $email -> to = $customer['email'];
                             }
                             $email -> invoice_name = $invoice['index_name'];
                             $email -> subject = $email->set_subject();

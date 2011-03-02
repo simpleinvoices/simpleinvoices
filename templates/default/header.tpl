@@ -26,10 +26,6 @@
 	<script type="text/javascript" src="./include/jquery/jquery.plugins.js"></script>
 	<script type="text/javascript" src="./include/jquery/wysiwyg/wysiwyg.modified.packed.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.livequery.pack.js"></script>
-	
-	<!-- AJAX Uploader script for people - billers -->
-	<script type="text/javascript" src="./include/jquery/ajaxupload/ajaxupload.js"></script>
-	
 	{/literal}
 	{include file='../include/jquery/jquery.functions.js.tpl'}
 	{include file='../include/jquery/jquery.conf.js.tpl'}
@@ -56,10 +52,6 @@
 	{/if}
 	{literal}
 	<script type="text/javascript" src="./include/jquery/jquery.validationEngine.js"></script>
-    {/literal}
-    <!-- Javascript for Flot Graphs -->
-    {literal}
-    <script type="text/javascript" src="./library/flot/jquery.flot.js"></script>
     {/literal}
 
 </head>

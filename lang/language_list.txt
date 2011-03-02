@@ -79,7 +79,7 @@ function languages()
 	'ka' => 'Georgian',
 	'de-at' => 'German (Austria)',
 	'de-li' => 'German (Liechtenstein)',
-	'de-lu' => 'German (Luxembourg)',
+	'de-lu' => 'German (lexumbourg)',
 	'de-ch' => 'German (Switzerland)',
 	'de' => 'German (Germany)',
 	'el' => 'Greek',

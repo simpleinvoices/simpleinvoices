@@ -39,7 +39,7 @@ foreach($invoices as $k=>$v)
 {
 
     //get list of all products
-    $sql = "select distinct(product_id) from ".TB_PREFIX."invoice_items where invoice_id = :id";
+    $sql = "select distinct(product_id) from si_invoice_items where invoice_id = :id";
     $sth = $db->query($sql, ':id',$v['id']);
         
     $products = $sth->fetchAll();
@@ -51,12 +51,12 @@ foreach($invoices as $k=>$v)
         $cost="";
         $product_total_cost="";
 
-        $sqlp="select sum(quantity) from ".TB_PREFIX."invoice_items where product_id = :product_id and invoice_id = :invoice_id";
+        $sqlp="select sum(quantity) from si_invoice_items where product_id = :product_id and invoice_id = :invoice_id";
         $sthp = $db->query($sqlp, ':product_id',$pv['product_id'], ':invoice_id',$v['id']);
         $quantity = $sthp->fetchColumn();
 
         #$sqlc="select (SELECT sum(cost) / sum(quantity)) as avg_cost  from si_inventory where product_id = :product_id";
-        $sqlc="select (SELECT (sum(cost * quantity) / sum(quantity)  )) as avg_cost  from ".TB_PREFIX."inventory where product_id = :product_id;";
+        $sqlc="select (SELECT (sum(cost * quantity) / sum(quantity)  )) as avg_cost  from si_inventory where product_id = :product_id;";
         $sthp = $db->query($sqlc, ':product_id',$pv['product_id']);
         $cost = $sthp->fetchColumn();
 

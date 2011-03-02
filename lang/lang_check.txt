@@ -1,27 +1,26 @@
 ==========================================================================================================
 Lang. Code | Lang. name                    | New strings | Strings in file | Total translated |   % Done | 
 ==========================================================================================================
-ca_ES      | Catala (Catalan)              | 133         |             418 |              288 |   52.27% | 
-cs_CZ      | Cestina (Czech)               | 133         |             418 |              255 |   46.28% | 
-da_DK      | Dansk (Danish)                | 132         |             419 |              324 |   58.80% | 
-de_CH      | Schwizerdütsch (Swiss German) | 133         |             418 |              254 |   46.10% | 
-de_DE      | Deutsch (German)              | 133         |             418 |              303 |   54.99% | 
-el_GR      | Greek (Greek)                 | 133         |             418 |              303 |   54.99% | 
-en_GB      | English (UK)                  | All Done    |             551 |              543 |   98.55% | 
-es_ES      | Castellano (Spanish)          | 132         |             419 |              359 |   65.15% | 
-fi_FI      | Suomi (Finnish)               | 132         |             419 |              322 |   58.44% | 
-fr_FR      | Français (French)             | 91          |             460 |              396 |   71.87% | 
-gl_ES      | Galego (Galician)             | 133         |             418 |              200 |   36.30% | 
-it_IT      | Italian (IT)                  | 133         |             418 |              303 |   54.99% | 
-lv_LV      | Latviesu (Latvian)            | 133         |             418 |              163 |   29.58% | 
-mt_MT      | Maltese (MT)                  | 133         |             418 |              303 |   54.99% | 
-nb_NO      | Norsk (Norwegian)             | 70          |             481 |              458 |   83.12% | 
-nl_NL      | Nederlands (Dutch)            | 130         |             421 |              363 |   65.88% | 
-pt_PT      | Portugues (Portuguese)        | 132         |             419 |              314 |   56.99% | 
-ro_RO      | Romana (Romanian)             | 134         |             417 |              353 |   64.07% | 
-sk_SK      | Slovensky (Slovak)            | 133         |             418 |              256 |   46.46% | 
-sl_SI      | Sloven??ina (Slovenian)       | 133         |             418 |              287 |   52.09% | 
-sq_AL      | Shqip (Albanian)              | 133         |             418 |              303 |   54.99% | 
-sv_SE      | Svenska (Swedish)             | 88          |             463 |              459 |   83.30% | 
-tr_TR      | Türkçe (Turkish)              | 133         |             418 |              303 |   54.99% | 
+ca         | Catala (Catalan)              | 10          |             313 |              298 |   92.26% | 
+cs         | Cestina (Czech)               | 10          |             313 |              261 |   80.80% | 
+da         | Dansk (Danish)                | 10          |             313 |              310 |   95.98% | 
+de         | Deutsch (German)              | 10          |             313 |              313 |   96.90% | 
+de-ch      | Schwizerdütsch (Swiss German) | 10          |             313 |              259 |   80.19% | 
+en-gb      | English (UK)                  | All Done    |             323 |              323 |  100.00% | 
+es         | Castellano (Spanish)          | 10          |             313 |              310 |   95.98% | 
+fi         | Suomi (Finnish)               | 10          |             313 |              296 |   91.64% | 
+fr         | Français (French)             | 10          |             313 |              291 |   90.09% | 
+gl         | Galego (Galician)             | 10          |             313 |              205 |   63.47% | 
+gr         | Greek (GR)                    | 10          |             313 |              313 |   96.90% | 
+it-it      | Italian (IT)                  | 10          |             313 |              313 |   96.90% | 
+ls         | Sloven??ina (Slovenian)       | 10          |             313 |              297 |   91.95% | 
+lv         | Latviesu (Latvian)            | 10          |             313 |              165 |   51.08% | 
+nl         | Nederland (Dutch)             | 10          |             313 |              313 |   96.90% | 
+no-nb      | Norsk NB (Norwegian NB)       | 10          |             313 |              300 |   92.88% | 
+pt         | Portugues (Portuguese)        | All Done    |             323 |              323 |  100.00% | 
+ro         | Romana (Romanian)             | 10          |             313 |              300 |   92.88% | 
+sk         | Slovensky (Slovak)            | 10          |             313 |              261 |   80.80% | 
+sq         | Shqip (SQ)                    | 10          |             313 |              313 |   96.90% | 
+sv         | Svenska (Swedish)             | 10          |             313 |              310 |   95.98% | 
+tr         | Turkish (Türkçe)              | 10          |             313 |              313 |   96.90% | 
 ----------------------------------------------------------------------------------------------------------

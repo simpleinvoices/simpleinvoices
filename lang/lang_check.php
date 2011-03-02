@@ -39,8 +39,8 @@ function get_defined_langs() {
 
   if ($dh = opendir($dir)) {
     while (($lang_dir = readdir($dh)) !== false) {
-	  if (! ereg("^[a-z]{2}_[A-Z]{2}$", $lang_dir)) {
-		continue;
+      if (! ereg("^[a-z]{2,3}$|^[a-z]{2,3}-[a-z]{2,3}$", $lang_dir)) {
+	continue;
       }
       
       //echo "debug: language folder: $lang_dir\n";

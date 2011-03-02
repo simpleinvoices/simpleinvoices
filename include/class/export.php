@@ -112,40 +112,17 @@ class export
 					{
 						$invoice->having = "date_between";
 					}
-					$having_count = '1';
+					$having_count = 1;
 				}
 
 				if ( $this->show_only_unpaid == "yes") 
 				{
-					if ($having_count == '1') 
+					if ($having_count == 1) 
 					{
-
 						$invoice->having_and = "money_owed";
-					    $having_count = '2';
-
 					} else {
-
 						$invoice->having = "money_owed";
-					    $having_count = '1';
 	
-					}
-				}
-				
-				if ( $this->show_only_real == "yes") 
-				{
-					if ($having_count == '2') 
-					{
-
-						$invoice->having_and2 = "real";
-
-					} elseif ($having_count == '1') {
-
-						$invoice->having_and = "real";
-
-					} else {
-
-						$invoice->having = "real";
-                        
 					}
 				}
 
@@ -163,7 +140,7 @@ class export
 				$templatePath = "./templates/default/statement/index.tpl";
 			
 				$biller_details = getBiller($this->biller_id);
-				$customer_details = customer::get($this->customer_id);
+				$customer_details = getCustomer($this->customer_id);
 
 				$this->file_name = "statement_".$this->biller_id."_".$this->customer_id."_".$invoice->start_date."_".$invoice->end_date;
 
@@ -173,7 +150,6 @@ class export
 				$smarty -> assign('customer_details', $customer_details);
 
 				$smarty -> assign('show_only_unpaid', $show_only_unpaid);
-				$smarty -> assign('show_only_real', $show_only_real);
 				$smarty -> assign('filter_by_date', $this->filter_by_date);
 
 				$smarty -> assign('invoices', $invoices);
@@ -195,7 +171,7 @@ class export
                 $biller = getBiller($payment['biller_id']);
                 $logo = getLogo($biller);
                 $logo = str_replace(" ", "%20", $logo);
-                $customer = customer::get($payment['customer_id']);
+                $customer = getCustomer($payment['customer_id']);
                 $invoiceType = getInvoiceType($invoice['type_id']);
                 $customFieldLabels = getCustomFieldLabels();
                 $paymentType = getPaymentType($payment['ac_payment_type']);
@@ -226,7 +202,7 @@ class export
 			
 				$invoice = invoice::select($this->id);
  			        $invoice_number_of_taxes = numberOfTaxesForInvoice($this->id);
-				$customer = customer::get($invoice['customer_id']);
+				$customer = getCustomer($invoice['customer_id']);
 				$biller = biller::select($invoice['biller_id']);
 				$preference = getPreference($invoice['preference_id']);
 				$defaults = getSystemDefaults();

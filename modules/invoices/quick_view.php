@@ -27,7 +27,7 @@ $invoice = getInvoice($invoice_id);
 $invoice_number_of_taxes = numberOfTaxesForInvoice($invoice_id);
 $invoice_type =  getInvoiceType($invoice['type_id']);
 
-$customer = customer::get($invoice['customer_id']);
+$customer = getCustomer($invoice['customer_id']);
 $biller = getBiller($invoice['biller_id']);
 $preference = getPreference($invoice['preference_id']);
 $defaults = getSystemDefaults();
