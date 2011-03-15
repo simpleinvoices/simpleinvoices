@@ -66,6 +66,12 @@ class export
 						header('Content-Disposition: attachment; filename="payment'.addslashes($this->id.'.'.$this->file_type).'"');
 						break;
 					}
+					case "database":
+					{
+						$today = date("YmdGisa");
+						header('Content-Disposition: attachment; filename="simple_invoices_backup_'.$today.'.'.$this->file_type.'"');
+						break;
+					}
 					default:
 					{
 						header('Content-Disposition: attachment; filename="'.addslashes($preference[pref_inv_heading].$this->id.'.'.$this->file_type).'"');
@@ -94,6 +100,14 @@ class export
 		
 		switch ($this->module)
 		{
+			case "database":
+			{
+				$oBack = new backup_db;
+				$oBack->start_backup();
+				$data = $oBack->output;
+
+				break;
+			}
 			case "statement":
 			{
 				$invoice = new invoice();

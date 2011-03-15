@@ -53,10 +53,12 @@ class database{
 
 class backup_db{ 
     var $output; 
+    var $results;
     var $filename; 
     #-- Class Constructor ------------------------------------------------ 
     function backup_db(){ 
         $this->output = ""; 
+        $this->results = "";
         if (!isset($this->filename)) { 
             $this->filename = "db_backup.sql"; 
         } 
@@ -68,14 +70,12 @@ class backup_db{
     #------------------------------------------------------------------- 
     function start_backup(){ 
         $oDB         = new database(); 
-        $file_handle    = fopen($this->filename,"w"); 
         $query            = "SHOW TABLES"; 
         $result            = $oDB->sqlQuery($query,$oDB->db_link); 
         while($row = mysql_fetch_array($result)){ 
             $tablename    = $row[0]; 
-            $this->_show_create($tablename,$oDB->db_link,$file_handle); 
+            $this->_show_create($tablename,$oDB->db_link);
         } // while 
-        fclose($file_handle); 
         $oDB->close_database(); 
     } 
     #-------------------------------------------------------------------- 
@@ -86,15 +86,15 @@ class backup_db{
     # executes the "SHOW CREATE TABLE statement to retrieve the table structure 
     # calls $this->_retrieve_data($tablename, $db_link) 
     #------------------------------------------------------------------- 
-    function _show_create($tablename,$db_link,$fh){ 
+    function _show_create($tablename,$db_link){
         $oDB         = new database(); 
         $query = "SHOW CREATE TABLE `".$tablename."`"; 
         $result = $oDB->sqlQuery($query,$db_link); 
         if ($row = mysql_fetch_array($result)) { 
-            fwrite($fh,$row[1] . ";\n"); 
+            $this->output .= $row[1] . ";\n";
             $insert           = $this->_retrieve_data($tablename, $db_link); 
-            fwrite($fh,$insert); 
-            $this->output .= "<tr><td>Table: $tablename backed up successfully</td></tr>" ; 
+            $this->output .= $insert;
+            $this->results .= "<tr><td>Table: $tablename backed up successfully</td></tr>" ;
         } 
     } 
     #-------------------------------------------------------------------- 
