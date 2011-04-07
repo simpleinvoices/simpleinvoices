@@ -45,7 +45,7 @@
 			<a title="{$LANG.email} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=invoices&amp;view=email&amp;stage=1&amp;id={$invoice.id|urlencode}"><img src='{$include_dir}/sys/images/common/mail-message-new.png' class='action' />&nbsp;{$LANG.email}</a>
 			{if $defaults.delete == '1'} 
 			 &nbsp;&nbsp; 
-				<a title="{$LANG.delete} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=invoices&amp;view=delete&amp;stage=1&amp;id={$invoice.id|urlencode}"><img src='images/common/delete.png' class='action' />&nbsp;{$LANG.delete}</a>
+				<a title="{$LANG.delete} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=invoices&amp;view=delete&amp;stage=1&amp;id={$invoice.id|urlencode}"><img src='{$include_dir}/sys/images/common/delete.png' class='action' />&nbsp;{$LANG.delete}</a>
 			{/if}
 	</span>
 </div>
