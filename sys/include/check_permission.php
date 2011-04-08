@@ -6,16 +6,35 @@ $auth_session = new Zend_Session_Namespace('Zend_Auth');
 
 $checkPermission = $acl->isAllowed($auth_session->role_name, $module, $view) ?  "allowed" : "denied"; // allowed
 
-//sbasic customer page check 
+//sbasic customer page check - exmaple
+/*
 if( ($auth_session->role_name =='customer') AND ($module == 'customers') AND ($_GET['id'] != $auth_session->user_id) )
 {
 	$checkPermission = "denied";
 }
-/*
-if( ($auth_session->role_name =='invoice_creator') AND ($module != 'invoice') AND ($view != 'itemised') )
-{
-	$checkPermission = "denied";
-}
 */
-//echo $module." :: ".$_GET['action'];
+
+/*
+ * Check customer
+ */
+if( ($auth_session->role_name =='customer') AND ($module == 'invoices') AND ($_GET['id']) )
+{
+
+   // Check invoice ID belongs to customer
+   $invoice = invoice::select($_GET['id']);
+   if($invoice['customer_id'] != $auth_session->role_link_id)
+   {
+        $checkPermission = "denied";
+   }
+
+   // Stop customer from creating doing stuff not supposed to
+   if( ($view == 'itemised') OR ($view== 'total') OR ($view == 'details') OR ($view== 'delete') OR ($view == 'email')   )
+   {
+        $checkPermission = "denied";
+   }
+
+
+
+}
+
 $checkPermission == "denied" ? exit($LANG['denied_page']) :"" ;

@@ -188,6 +188,24 @@ if ( $install_tables_exists != false )
 	}
 }
 
+/*
+ * Moved the extensions init loop out of index so can load extensions stuff before acl code
+ */
+foreach($config->extension as $extension)
+{
+	/*
+	* If extension is enabled then continue and include the requested file for that extension if it exists
+	*/	
+	if($extension->enabled == "1")
+	{
+		//echo "Enabled:".$value['name']."<br><br>";
+		if(file_exists($include_dir . "sys/extensions/$extension->name/include/init.php"))
+		{
+			require_once("sys/extensions/$extension->name/include/init.php");
+		}
+	}
+}
+
 // If no extension loaded, load Core
 if (! $config->extension)
 {

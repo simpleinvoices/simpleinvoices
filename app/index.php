@@ -51,20 +51,6 @@ if (!isset($cust_language)) {
 
 require_once("sys/include/init.php");
 
-foreach($config->extension as $extension)
-{
-	/*
-	* If extension is enabled then continue and include the requested file for that extension if it exists
-	*/	
-	if($extension->enabled == "1")
-	{
-		//echo "Enabled:".$value['name']."<br><br>";
-		if(file_exists($include_dir . "sys/extensions/$extension->name/include/init.php"))
-		{
-			require_once("sys/extensions/$extension->name/include/init.php");
-		}
-	}
-}
 /*
 * The include configs and requirements stuff section - end
 */
