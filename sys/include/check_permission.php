@@ -27,14 +27,6 @@ if( ($auth_session->role_name =='customer') AND ($module == 'invoices') AND ($_G
         $checkPermission = "denied";
    }
 
-   // Stop customer from creating doing stuff not supposed to
-   if( ($view == 'itemised') OR ($view== 'total') OR ($view == 'details') OR ($view== 'delete') OR ($view == 'email')   )
-   {
-        $checkPermission = "denied";
-   }
-
-
-
 }
 
 $checkPermission == "denied" ? exit($LANG['denied_page']) :"" ;

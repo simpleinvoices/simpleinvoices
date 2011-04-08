@@ -58,6 +58,11 @@ $acl->allow(null,'auth');
 $acl->allow(null,'api');
 
 //Customer permissions
+$acl->deny('customer', 'invoices', 'itemised');
+$acl->deny('customer', 'invoices', 'total');
+$acl->deny('customer', 'invoices', 'email');
+$acl->deny('customer', 'invoices', 'delete');
+$acl->deny('customer', 'invoices', 'details');
 $acl->allow('customer', 'invoices');      
 $acl->allow('customer', 'customers', 'view');
 $acl->allow('customer', 'export', 'invoice');
