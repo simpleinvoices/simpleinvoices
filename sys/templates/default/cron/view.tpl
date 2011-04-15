@@ -1,5 +1,4 @@
 <br />	 
-
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.invoice}</td>
@@ -54,9 +53,9 @@
 		        <img src="{$include_dir}sys/images/common/cross.png" alt="" />
 	        	{$LANG.cancel}
     		</a>
-	
+		{if $defaults.delete == '1'}
+                	<a title="{$LANG.delete} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=cron&amp;view=delete&amp;stage=1&amp;id={$cron.id|urlencode}"><img src='{$include_dir}/sys/images/common/delete.png' class='action' />&nbsp;{$LANG.delete}</a>
+                {/if}
 		</td>
 	</tr>
 </table>
-
-

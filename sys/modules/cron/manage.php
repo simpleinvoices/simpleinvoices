@@ -17,6 +17,9 @@ checkLogin();
 	$sth = dbQuery($sql, ':domain_id',domain_id::get()) or die(htmlsafe(end($dbh->errorInfo())));
 	$number_of_crons  = $sth->fetch(PDO::FETCH_ASSOC);
 
+//get defaults
+$defaults = getSystemDefaults();
+
 //all funky xml - sql stuff done in xml.php
 
 
@@ -26,6 +29,7 @@ $smarty -> assign("number_of_crons",$number_of_crons);
 $smarty -> assign('pageActive', 'cron');
 $smarty -> assign('active_tab', '#money');
 
-$url =  'index.php?module=cron&view=xml';
+//get xml grid passing delete attribute
+$url =  'index.php?module=cron&view=xml&delete='.$defaults['delete'];
 
 $smarty -> assign('url', $url);

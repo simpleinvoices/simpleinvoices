@@ -2,6 +2,9 @@
 
 header("Content-type: text/xml");
 
+//get value for if delete option should be shown
+$delete = $_GET['delete'];
+
 //$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
 $dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "DESC" ;
 $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "id" ;
@@ -13,7 +16,6 @@ $cron = new cron();
 $cron->sort=$sort;
 $crons = $cron->select_all('', $dir, $rp, $page);
 $sth_count_rows = $cron->select_all('count',$dir, $rp, $page);
-
 
 $xml ="";
 $count = $sth_count_rows;
@@ -28,8 +30,12 @@ $count = $sth_count_rows;
 		$xml .= "<row id='".$row['id']."'>";
 		$xml .= "<cell><![CDATA[
 		<a class='index_table' title='$LANG[view] ".$row['name']."' href='index.php?module=cron&view=view&id=$row[id]'><img src='".$include_dir."sys/images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-		<a class='index_table' title='$LANG[edit] ".$row['name']."' href='index.php?module=cron&view=edit&id=$row[id]'><img src='".$include_dir."sys/images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-		]]></cell>";
+		<a class='index_table' title='$LANG[edit] ".$row['name']."' href='index.php?module=cron&view=edit&id=$row[id]'><img src='".$include_dir."sys/images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>";
+		/*If delete is disabled - dont allow people to view this page*/
+		if ( $delete == 1 ) {
+			$xml .= "<a class='index_table' title='$LANG[edit] ".$row['name']."' href='index.php?module=cron&view=delete&stage=1&id=$row[id]'><img src='".$include_dir."sys/images/common/delete.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>";
+		}
+		$xml .= "]]></cell>";
 		$xml .= "<cell><![CDATA[".$row['index_name']."]]></cell>";		
 		#$xml .= "<cell><![CDATA[".siLocal::date($row['start_date'])."]]></cell>";
 		#$xml .= "<cell><![CDATA[".siLocal::date($row['end_date'])."]]></cell>";
