@@ -197,7 +197,12 @@
 								id="unit_price{$smarty.section.line.index|htmlsafe}" 
 								name="unit_price{$smarty.section.line.index|htmlsafe}" 
 								size="7"
-								value=""
+{ assign var="lineNumber" value=$smarty.section.line.index } 
+								{if $smarty.get.unit_price.$lineNumber}
+								    value="{$smarty.get.unit_price.$lineNumber}"
+								{else}
+								   value=""
+								{/if}
                                 {if $smarty.section.line.index == "0"} class="validate[required]" {/if}
 							/>
 						</td>	
