@@ -32,8 +32,8 @@ if ($billers == null OR $customers == null OR $taxes == null OR $products == nul
     $smarty -> assign("first_run_wizard",$first_run_wizard);
 }
 
-$defaultBiller = getDefaultBiller();
-$defaultCustomerID = (isset($_GET['customer_id'])) ? $_GET['customer_id'] : getDefaultCustomer();
+$defaults['biller'] = (isset($_GET['biller_id'])) ? $_GET['biller_id'] : $defaults['biller'];
+$defaults['customer'] = (isset($_GET['customer_id'])) ? $_GET['customer_id'] : $defaults['customer'];
 $defaultTax = getDefaultTax();
 $defaultPreference = getDefaultPreference();
 
