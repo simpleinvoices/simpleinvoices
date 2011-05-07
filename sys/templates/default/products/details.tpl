@@ -10,7 +10,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.details}
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_product_detail" title="{$LANG.details}"><img src="./images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_product_detail" title="{$LANG.details}"><img src="{$include_dir}sys/images/common/help-small.png" alt="" /></a>
 
         </td>
 		<td>{$product.detail|htmlsafe}</td>
@@ -97,7 +97,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.details} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_product_detail" title="{$LANG.details}"><img src="./images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_product_detail" title="{$LANG.details}"><img src="{$include_dir}/sys/images/common/help-small.png" alt="" /></a>
 		</td>
         <td>
             <textarea input type="text" name='detail' rows="3" cols="50">{$product.detail|unescape}</textarea>
