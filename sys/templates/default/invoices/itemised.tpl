@@ -124,6 +124,7 @@
 			</tbody>
 	
 	        {section name=line start=0 loop=$dynamic_line_items step=1}
+		{ assign var="lineNumber" value=$smarty.section.line.index } 
 				<tbody class="line_item" id="row{$smarty.section.line.index|htmlsafe}">
 					<tr>
 						<td>
@@ -174,7 +175,16 @@
                         >
 							<option value=""></option>
 						{foreach from=$products item=product}
-							<option {if $product.id == $defaults.product} selected {/if} value="{$product.id|htmlsafe}">{$product.description|htmlsafe}</option>
+							<option 
+								{if $smarty.get.product.$lineNumber}
+								    value="{$smarty.get.product.$lineNumber}"
+								    selected
+								{else}
+								    value="{$product.id|htmlsafe}"
+								{/if}
+							>
+								{$product.description|htmlsafe}
+							</option>
 						{/foreach}
 						</select>
 					{/if}
@@ -197,7 +207,6 @@
 								id="unit_price{$smarty.section.line.index|htmlsafe}" 
 								name="unit_price{$smarty.section.line.index|htmlsafe}" 
 								size="7"
-{ assign var="lineNumber" value=$smarty.section.line.index } 
 								{if $smarty.get.unit_price.$lineNumber}
 								    value="{$smarty.get.unit_price.$lineNumber}"
 								{else}
