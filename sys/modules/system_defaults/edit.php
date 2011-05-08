@@ -36,6 +36,26 @@ else if ($_GET["submit"] == "def_inv_template") {
 		}
 	}
 	closedir($handle);
+
+    foreach($config->extension as $extension)
+    {
+        /*
+        * If extension is enabled then continue and include the requested file for that extension if it exists
+        */
+        if($extension->enabled == "1")
+        {
+            //echo "Enabled:".$value['name']."<br><br>";
+            $handle=opendir("./extensions/$extension->name/templates/invoices/");
+            while ($template = readdir($handle)) {
+                if ($template != ".." && $template != "." && $template !="logos" && $template !=".svn" && $template !="template.php" && $template !="template.php~" ) {
+                    $files[] = $template;
+                }
+            }
+            closedir($handle);
+        }
+    }
+
+
 	sort($files);
 
 	$escaped = htmlsafe($defaults[template]);
