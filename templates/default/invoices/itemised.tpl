@@ -124,6 +124,7 @@
 			</tbody>
 	
 	        {section name=line start=0 loop=$dynamic_line_items step=1}
+		{ assign var="lineNumber" value=$smarty.section.line.index } 
 				<tbody class="line_item" id="row{$smarty.section.line.index|htmlsafe}">
 					<tr>
 						<td>
@@ -160,7 +161,18 @@
 							{/if}
 						</td>
 						<td>
-							<input type="text" {if $smarty.section.line.index == "0"} class="validate[required]" {/if} name="quantity{$smarty.section.line.index|htmlsafe}" id="quantity{$smarty.section.line.index|htmlsafe}" size="5" /></td>
+							<input 
+                                type="text" 
+                                {if $smarty.section.line.index == "0"} 
+                                    class="validate[required]" 
+                                {/if} 
+                                name="quantity{$smarty.section.line.index|htmlsafe}" 
+                                id="quantity{$smarty.section.line.index|htmlsafe}" size="5" 
+								{if $smarty.get.quantity.$lineNumber}
+								    value="{$smarty.get.quantity.$lineNumber}"
+                                {/if}
+                                />
+						</td>
 						<td>
 										
 					{if $products == null }
@@ -174,12 +186,22 @@
                         >
 							<option value=""></option>
 						{foreach from=$products item=product}
-							<option {if $product.id == $defaults.product} selected {/if} value="{$product.id|htmlsafe}">{$product.description|htmlsafe}</option>
+							<option 
+								{if $product.id == $smarty.get.product.$lineNumber}
+								    value="{$smarty.get.product.$lineNumber}"
+								    selected
+								{else}
+								    value="{$product.id|htmlsafe}"
+								{/if}
+							>
+								{$product.description|htmlsafe}
+							</option>
 						{/foreach}
 						</select>
 					{/if}
 						</td>
 						{section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
+		                    		{ assign var="taxNumber" value=$smarty.section.tax.index } 
 						<td>				                				                
 							<select 
 								id="tax_id[{$smarty.section.line.index|htmlsafe}][{$smarty.section.tax.index|htmlsafe}]"
@@ -187,7 +209,16 @@
 							>
 							<option value=""></option>
 							{foreach from=$taxes item=tax}
-								<option value="{$tax.tax_id|htmlsafe}">{$tax.tax_description|htmlsafe}</option>
+								<option 
+								    {if $tax.tax_id == $smarty.get.tax.$lineNumber.$taxNumber}
+									value="{$smarty.get.tax.$lineNumber.$taxNumber}"
+									selected
+								    {else}
+								       value="{$tax.tax_id|htmlsafe}"
+								    {/if}
+								>
+								    {$tax.tax_description|htmlsafe}
+								</option>
 							{/foreach}
 						</select>
 						</td>
@@ -197,7 +228,11 @@
 								id="unit_price{$smarty.section.line.index|htmlsafe}" 
 								name="unit_price{$smarty.section.line.index|htmlsafe}" 
 								size="7"
-								value=""
+								{if $smarty.get.unit_price.$lineNumber}
+								    value="{$smarty.get.unit_price.$lineNumber}"
+								{else}
+								   value=""
+								{/if}
                                 {if $smarty.section.line.index == "0"} class="validate[required]" {/if}
 							/>
 						</td>	
@@ -257,7 +292,9 @@
 	
 	<tr>
 		<td colspan="4">
-			<textarea input type="text" class="editor" name="note" rows="5" cols="50" wrap="nowrap"></textarea>
+			<textarea input type="text" class="editor" name="note" rows="5" cols="50" wrap="nowrap">
+				{$smarty.get.note}
+			</textarea>
 		</td>
 	</tr>
 	</tr>

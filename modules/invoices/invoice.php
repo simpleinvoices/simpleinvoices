@@ -32,13 +32,14 @@ if ($billers == null OR $customers == null OR $taxes == null OR $products == nul
     $smarty -> assign("first_run_wizard",$first_run_wizard);
 }
 
-$defaultBiller = getDefaultBiller();
-$defaultCustomerID = (isset($_GET['customer_id'])) ? $_GET['customer_id'] : getDefaultCustomer();
+$defaults['biller'] = (isset($_GET['biller'])) ? $_GET['biller'] : $defaults['biller'];
+$defaults['customer'] = (isset($_GET['customer'])) ? $_GET['customer'] : $defaults['customer'];
+$defaults['preference'] = (isset($_GET['preference'])) ? $_GET['preference'] : $defaults['preference'];
 $defaultTax = getDefaultTax();
 $defaultPreference = getDefaultPreference();
 
-if (!empty( $_GET['get_num_line_items'] )) {
-	$dynamic_line_items = $_GET['get_num_line_items'];
+if (!empty( $_GET['line_items'] )) {
+	$dynamic_line_items = $_GET['line_items'];
 } 
 else {
 	$dynamic_line_items = $defaults['line_items'] ;
