@@ -113,7 +113,7 @@ class cron {
 		    $sort = "id";
 		}
 
-		if($type =="count")
+		if($type =="count" OR $type =="no_limit)
 		{
 		    //unset($limit);
 		    $limit="";
@@ -188,7 +188,7 @@ class cron {
 
         //only proceed if cron has not been run for today
         $cron = new cron();
-        $data = $cron->select_all('');
+        $data = $cron->select_all('no_limit');
 
         $return['cron_message'] ="Cron started";
         $number_of_crons_run = "0";	
