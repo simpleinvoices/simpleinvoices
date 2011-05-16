@@ -22,10 +22,10 @@
 	<script type="text/javascript" src="{/literal}{$include_dir}{literal}sys/include/jquery/cluetip/jquery.hoverIntent.minified.js"></script>
 	<script type="text/javascript" src="{/literal}{$include_dir}{literal}sys/include/jquery/cluetip/jquery.cluetip.js"></script>
 	<script type="text/javascript" src="{/literal}{$include_dir}{literal}sys/include/jquery/jquery.flexigrid.1.0b3.pack.js"></script>
-	{/literal}{$extension_jquery_files }{literal}
 	<script type="text/javascript" src="{/literal}{$include_dir}{literal}sys/include/jquery/jquery.plugins.js"></script>
 	<script type="text/javascript" src="{/literal}{$include_dir}{literal}sys/include/jquery/wysiwyg/wysiwyg.modified.packed.js"></script>
 	<script type="text/javascript" src="{/literal}{$include_dir}{literal}sys/include/jquery/jquery.livequery.pack.js"></script>
+	{/literal}{$extension_jquery_files }{literal}
 	
 	<!-- AJAX Uploader script for people - billers -->
 	<script type="text/javascript" src="{/literal}{$include_dir}{literal}sys/include/jquery/ajaxupload/ajaxupload.js"></script>
