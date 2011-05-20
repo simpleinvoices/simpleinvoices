@@ -190,6 +190,7 @@
 		clonedRow.find("#products"+rowID_old).attr("rel", rowID_new);
 		clonedRow.find("#products"+rowID_old).attr("id", "products"+rowID_new);
 		clonedRow.find("#products"+rowID_new).attr("name", "products"+rowID_new);
+		clonedRow.find("#products"+rowID_new).attr("selectedIndex","-1");
 		clonedRow.find("#products"+rowID_new).removeClass("validate[required]");
 
 		//clonedRow.find("#products"+rowID_new).attr("onChange", "invoice_product_change_price($(this).val(), "+rowID_new+", jQuery('#quantity"+rowID_new+"').val() )");
@@ -206,8 +207,10 @@
 	
 		$("#tax_id\\["+rowID_old+"\\]\\[0\\]", clonedRow).attr("id", "tax_id["+rowID_new+"][0]");
 		$("#tax_id\\["+rowID_new+"\\]\\[0\\]", clonedRow).attr("name", "tax_id["+rowID_new+"][0]");
+		$("#tax_id\\["+rowID_new+"\\]\\[0\\]", clonedRow).attr("selectedIndex", "-1");
 		$("#tax_id\\["+rowID_old+"\\]\\[1\\]", clonedRow).attr("id", "tax_id["+rowID_new+"][1]");
 		$("#tax_id\\["+rowID_new+"\\]\\[1\\]", clonedRow).attr("name", "tax_id["+rowID_new+"][1]");
+		$("#tax_id\\["+rowID_new+"\\]\\[1\\]", clonedRow).attr("selectedIndex", "-1");
 	
 		$('#itemtable').append(clonedRow);
 		
