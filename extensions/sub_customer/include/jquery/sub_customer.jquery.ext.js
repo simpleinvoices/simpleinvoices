@@ -21,7 +21,7 @@
 				$('#gmail_loading').hide();
 
                 //document.getElementById('product'+row_number ).innerHTML=data;
-                $("#customField4" ).html(data);
+                $("#customField1" ).html(data);
 			},
             complete: function() { $('#gmail_loading').hide(); }
 	

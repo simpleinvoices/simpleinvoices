@@ -16,7 +16,7 @@ function getSubCustomer($parent_customer_id='') {
 
     foreach($code as $key=>$value)
     {
-                $output .= "<option value='" . $value['id'] . "'>". $value['attention'] . "</option>";
+                $output .= "<option value='" . $value['id'] . "'>". $value['name'] . "</option>";
 	
     }
 	echo json_encode($output);

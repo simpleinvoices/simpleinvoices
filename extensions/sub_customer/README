@@ -8,3 +8,5 @@ When you create an invoice you select which parent company to invoice - then a d
 You can also use this have various 'locations' for one customer - the invoice template can be adjsuted to print the sub customer info on it for whatever purposes you want
 
 run the sql in ./database/changes
+
+Invoice.custom_field1 is used to store teh sub customer ID in the invoice

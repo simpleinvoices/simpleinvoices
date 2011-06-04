@@ -72,7 +72,7 @@
                         {if $customers == null }
                         <em>{$LANG.no_customers}</em>
                         {else}
-                            <select name="customField4" id="customField4">
+                            <select name="customField1" id="customField1">
                                 <option/>
                             {foreach from=$sub_customers item=customer}
                                 <option {if $customer.id == $defaultCustomerID} selected {/if} value="{$customer.id|htmlsafe}">{$customer.attention|htmlsafe}</option>
