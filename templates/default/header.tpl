@@ -22,11 +22,11 @@
 	<script type="text/javascript" src="./include/jquery/cluetip/jquery.hoverIntent.minified.js"></script>
 	<script type="text/javascript" src="./include/jquery/cluetip/jquery.cluetip.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.flexigrid.1.0b3.pack.js"></script>
-	{/literal}{$extension_jquery_files }{literal}
 	<script type="text/javascript" src="./include/jquery/jquery.plugins.js"></script>
 	<script type="text/javascript" src="./include/jquery/wysiwyg/wysiwyg.modified.packed.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.livequery.pack.js"></script>
 	{/literal}
+        {$extension_jquery_files }
 	{include file='../include/jquery/jquery.functions.js.tpl'}
 	{include file='../include/jquery/jquery.conf.js.tpl'}
 	{literal}
