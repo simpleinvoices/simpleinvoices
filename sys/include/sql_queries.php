@@ -1274,7 +1274,7 @@ function insertBiller() {
 
 
 	return dbQuery($sql,
-		':name', strip_tags($_POST[name]),
+		':name', $_POST[name],
 		':street_address', $_POST[street_address],
 		':street_address2', $_POST[street_address2],
 		':city', $_POST[city],
