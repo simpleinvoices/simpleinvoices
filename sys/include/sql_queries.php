@@ -100,6 +100,10 @@ function dbQuery($sqlQuery) {
     global $errm;
 	$argc = func_num_args();
 	$binds = func_get_args();
+	//Use strip_tags to cleanup any possibly malicious code
+	foreach ($binds as &$value) {
+		$value = strip_tags($value);
+	}
 	$sth = false;
 	// PDO SQL Preparation
 	$sth = $dbh->prepare($sqlQuery);
@@ -1270,7 +1274,7 @@ function insertBiller() {
 
 
 	return dbQuery($sql,
-		':name', $_POST[name],
+		':name', strip_tags($_POST[name]),
 		':street_address', $_POST[street_address],
 		':street_address2', $_POST[street_address2],
 		':city', $_POST[city],
