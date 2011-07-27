@@ -100,20 +100,39 @@ function dbQuery($sqlQuery) {
     global $errm;
 	$argc = func_num_args();
 	$binds = func_get_args();
-	$sth = false;
-	// PDO SQL Preparation
-	$sth = $dbh->prepare($sqlQuery);
-	if ($argc > 1) {
+    $sth = false;
+    // PDO SQL Preparation
+    $sth = $dbh->prepare($sqlQuery);
+    if ($argc > 1) {
 		array_shift($binds);
+		
+		// HTML Tags that are allowed in certain fields
+		$allowed_tags = '<p><i><b><strong><div><ul><ol><li>';
+		// Fields that can have HTML tags
+		$fields = '/note|footer/';
+		
 		for ($i = 0; $i < count($binds); $i++) {
-			//Use strip_tags to cleanup any possibly malicious code excluding footer and note fields
-			if (strpos($binds[$i], "note") or strpos($binds[$i], "footer")) {
-				$sth->bindValue($binds[$i], $binds[++$i]);
-			} else {
-				$sth->bindValue($binds[$i], strip_tags($binds[++$i]));
-			}
+			/*
+			 * Strip out tags that could be malicious
+			 * If the HTML tags are allowed for this field, strip out any banned tags otherwise strip out all the tags
+			 */
+			// Set the current field
+			$field = $binds[$i];
+			
+			if (preg_match($fields, $field)) {
+				// htmlspecialchars_decode is needed here to enusre that tags can be found
+				$val = strip_tags(htmlspecialchars_decode($binds[++$i]), $allowed_tags);
+				
+				// Encode any tags again before putting them back
+		        $sth->bindValue($field, htmlspecialchars($val));
+	        } else {
+	        	$val = strip_tags(htmlspecialchars_decode($binds[++$i]));
+	        	
+	        	$sth->bindValue($field, htmlspecialchars($val));
+	        }
 		}
-	}
+    }
+    /*
 	/*
 	// PDO Execution
 	if($sth && $sth->execute()) {
@@ -1089,6 +1108,7 @@ function setStatusExtension($extension_id, $status=2) {
 		$extension_info = $sth->fetch();
 		$status = 1 - $extension_info['enabled'];
 	}
+
 
 	$sql = "UPDATE ".TB_PREFIX."extensions SET enabled =  :status WHERE id =  :id AND domain_id =  :domain_id LIMIT 1"; 
 	if (dbQuery($sql, ':status', $status,':id', $extension_id, ':domain_id', $auth_session->domain_id)) {
