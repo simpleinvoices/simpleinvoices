@@ -100,17 +100,18 @@ function dbQuery($sqlQuery) {
     global $errm;
 	$argc = func_num_args();
 	$binds = func_get_args();
-	//Use strip_tags to cleanup any possibly malicious code
-	foreach ($binds as &$value) {
-		$value = strip_tags($value);
-	}
 	$sth = false;
 	// PDO SQL Preparation
 	$sth = $dbh->prepare($sqlQuery);
 	if ($argc > 1) {
 		array_shift($binds);
 		for ($i = 0; $i < count($binds); $i++) {
-			$sth->bindValue($binds[$i], $binds[++$i]);
+			//Use strip_tags to cleanup any possibly malicious code excluding footer and note fields
+			if (strpos($binds[$i], "note") or strpos($binds[$i], "footer")) {
+				$sth->bindValue($binds[$i], $binds[++$i]);
+			} else {
+				$sth->bindValue($binds[$i], strip_tags($binds[++$i]));
+			}
 		}
 	}
 	/*
