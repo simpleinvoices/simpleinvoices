@@ -38,16 +38,16 @@ if (in_array($sort, $validFields)) {
 }
 
 /*
-	$sql = "SELECT 
+	$sql = "SELECT
 				pt_id,
-				pt_description, 
+				pt_description,
 				(SELECT (CASE  WHEN pt_enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
-		FROM 
+		FROM
 				".TB_PREFIX."payment_types
 		$where
-		ORDER BY 
-				$sort $dir 
-		LIMIT 
+		ORDER BY
+				$sort $dir
+		LIMIT
 				$start, $limit";
 
 
@@ -55,22 +55,22 @@ if (in_array($sort, $validFields)) {
 	$payment_types = $sth->fetchAll(PDO::FETCH_ASSOC);
 	$count = $sth->rowCount();
 */
-	
-	$sql = "SELECT 
+
+	$sql = "SELECT
 				cf_id,
 				cf_custom_field,
 				cf_custom_label
-			FROM 
+			FROM
 				".TB_PREFIX."custom_fields
 			$where
-			ORDER BY 
-				$sort $dir 
-			LIMIT 
+			ORDER BY
+				$sort $dir
+			LIMIT
 				$start, $limit";
-			
+
 	$sth = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(end($dbh->errorInfo()));
 	$count = $sth->rowCount();
-	
+
 	$cfs = null;
 
 	$number_of_rows = 0;
@@ -79,23 +79,22 @@ if (in_array($sort, $validFields)) {
 		$cfs[$i]['field_name_nice'] = get_custom_field_name($cf['cf_custom_field']);
 		$number_of_rows = $i;
 	}
-	
+
 	$xml .= "<rows>";
 	$xml .= "<page>$page</page>";
 	$xml .= "<total>$count</total>";
-	
+
 	foreach ($cfs as $row) {
 		$xml .= "<row id='".htmlsafe($row['cf_id'])."'>";
 		$xml .= "<cell><![CDATA[
 			<a class='index_table' title='$LANG[view] $LANG[custom_field] ".htmlsafe($row['field_name_nice'])."' href='index.php?module=custom_fields&view=details&id=$row[cf_id]&action=view'><img src='".$include_dir."sys/images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 			<a class='index_table' title='$LANG[edit] $LANG[custom_field] ".htmlsafe($row['field_name_nice'])."' href='index.php?module=custom_fields&view=details&id=$row[cf_id]&action=edit'><img src='".$include_dir."sys/images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 		]]></cell>";
-		$xml .= "<cell><![CDATA[".htmlsafe($row['cf_id'])."]]></cell>";		
+		$xml .= "<cell><![CDATA[".htmlsafe($row['cf_id'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".htmlsafe($row['field_name_nice'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".htmlsafe($row['cf_custom_label'])."]]></cell>";				
-		$xml .= "</row>";		
+		$xml .= "<cell><![CDATA[".htmlsafe($row['cf_custom_label'])."]]></cell>";
+		$xml .= "</row>";
 	}
 	$xml .= "</rows>";
 
 echo $xml;
-?> 

@@ -22,4 +22,3 @@ $smarty->assign('localelist',$localelist);
 $smarty -> assign('pageActive', 'preference');
 $smarty -> assign('subPageActive', 'preferences_add');
 $smarty -> assign('active_tab', '#setting');
-?>

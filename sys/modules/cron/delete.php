@@ -41,7 +41,7 @@ if ( ($_GET['stage'] == 2 ) AND ($_POST['doDelete'] == 'y') ) {
 	//delete the info from the cron table
 	if (! delete('cron','id',$cron_id)) {
 		$error = true;
-	} 
+	}
 
 	if ($error) {
 		$dbh->rollBack();
@@ -56,4 +56,3 @@ $smarty -> assign('cron',$cron);
 $smarty -> assign('pageActive', 'cron');
 $smarty -> assign('subPageActive', 'cron_edit');
 $smarty -> assign('active_tab', '#money');
-?>

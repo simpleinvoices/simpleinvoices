@@ -17,10 +17,9 @@
  */
 
 if(isset($_POST['save'])) {
-	saveCustomField($_POST[plugin],$_POST[categorie],$_POST[name],$_POST[description]);
+	saveCustomField($_POST['plugin'],$_POST['categorie'],$_POST['name'],$_POST['description']);
 }
 
 ini_set("display_errors","On");
 //Note: If input is language specific it has to be in the form: {$LANG['value']} or {$LANG["value"]}
 
-?>

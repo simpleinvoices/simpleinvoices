@@ -25,7 +25,7 @@ EOD;
 
 }
 else if ($_GET["submit"] == "def_inv_template") {
-	
+
 	$default = "template";
 	/*drop down list code for invoice template - only show the folder names in src/invoices/templates*/
 
@@ -90,7 +90,7 @@ EOD;
 
 
 	$description = $LANG['default_inv_template'];
-	
+
 	$value = $display_block_templates_list;
 	//error_log($value);
 
@@ -114,7 +114,7 @@ else if ($_GET["submit"] == "biller") {
 		foreach($billers as $biller) {
 
 			$selected = $biller['id'] == $defaults['biller']?"selected style='font-weight: bold'":"";
-			
+
 			$escaped = htmlsafe($biller['name']);
 			$display_block_biller .= <<<EOD
 			<option $selected value="$biller[id]">$escaped</option>
@@ -146,7 +146,7 @@ else if ($_GET["submit"] == "customer") {
 		foreach($customers as $customer) {
 
 			$selected = $customer['id'] == $defaults['customer']?"selected style='font-weight: bold'":"";
-			
+
 
 			$escaped = htmlsafe($customer['name']);
 			$display_block_customer .= <<<EOD
@@ -154,7 +154,7 @@ else if ($_GET["submit"] == "customer") {
 EOD;
 		}
 		$display_block_customer .= "</select>";
-		
+
 	}
 
 	$description = "{$LANG['customer_name']}";
@@ -194,7 +194,7 @@ EOD;
 	$value = $display_block_tax;
 }
 else if ($_GET["submit"] == "preference_id") {
-	
+
 	$pref = getPreference($defaults['preference']);
 	$preferences = getActivePreferences();
 
@@ -231,7 +231,7 @@ else if ($_GET["submit"] == "def_payment_type") {
 
 	$defpay = getDefaultPaymentType();
 	$payments = getActivePaymentTypes();
-	
+
 
 	if ($payments == null) {
 		//no records
@@ -280,9 +280,9 @@ else if($_GET['submit'] == "language") {
     $default = "language";
     $languages = getLanguageList($include_dir . 'sys/lang/');
     $lang = getDefaultLanguage();
-    
+
     usort($languages,"compareNameIndex");
-    
+
     $description = $LANG[language];
     //print_r($languages);
     $value = "<select name='value'>";
@@ -337,7 +337,7 @@ $smarty->assign('default',$default);
 function compareNameIndex($a,$b) {
 	$a = $a->name."";
 	$b = $b->name."";
-	
+
 	if($a > $b) {
 		return 1;
 	}
@@ -346,4 +346,3 @@ function compareNameIndex($a,$b) {
 
 $smarty -> assign('pageActive', 'system_default');
 $smarty -> assign('active_tab', '#setting');
-?>

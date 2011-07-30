@@ -40,7 +40,7 @@ $defaultPreference = getDefaultPreference();
 
 if (!empty( $_GET['line_items'] )) {
 	$dynamic_line_items = $_GET['line_items'];
-} 
+}
 else {
 	$dynamic_line_items = $defaults['line_items'] ;
 }
@@ -61,5 +61,3 @@ $smarty -> assign("defaultCustomerID",$defaultCustomerID['id']);
 $smarty -> assign("defaults",$defaults);
 
 $smarty -> assign('active_tab', '#money');
-
-?>

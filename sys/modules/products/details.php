@@ -22,4 +22,3 @@ $smarty -> assign('pageActive', 'product_manage');
 $subPageActive = $_GET['action'] =="view"  ? "product_view" : "product_edit" ;
 $smarty -> assign('subPageActive', $subPageActive);
 $smarty -> assign('active_tab', '#product');
-?>

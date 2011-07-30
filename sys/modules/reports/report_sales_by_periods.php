@@ -40,7 +40,7 @@ $year = $first_invoice_year ;
 * loop for each year
 */
 while ( $year <= $this_year )
-{	
+{
 	/*
 	* loop for each month
 	*/
@@ -49,7 +49,7 @@ while ( $year <= $this_year )
 	{
 		//make month nice for mysql - accounts table doesnt like it if not 08 etc..
 		if ( $month < 10 )
-		{ 
+		{
 			$month="0".$month;
 		};
 		/*
@@ -63,7 +63,7 @@ while ( $year <= $this_year )
 		$total_month_sales_array = $total_month_sales -> fetch();
 
 		$total_sales[$year][$month] = $total_month_sales_array['month_total'];
-		if ($total_sales[$year][$month] == "" ) 
+		if ($total_sales[$year][$month] == "" )
 		{
 			$total_sales[$year][$month] = "-";
 		}
@@ -79,7 +79,7 @@ while ( $year <= $this_year )
 		$total_month_payments_array = $total_month_payments -> fetch();
 
 		$total_payments[$year][$month] = $total_month_payments_array['month_total_payments'];
-		if ($total_payments[$year][$month] == "" ) 
+		if ($total_payments[$year][$month] == "" )
 		{
 			$total_payments[$year][$month] = "-";
 		}
@@ -96,7 +96,7 @@ while ( $year <= $this_year )
 	$total_year_sales_array = $total_year_sales -> fetch();
 
 	$total_sales[$year]['Total'] = $total_year_sales_array['year_total'];
-		if ($total_sales[$year]['Total']  == "" ) 
+		if ($total_sales[$year]['Total']  == "" )
 		{
 			$total_sales[$year]['Total']  = "-";
 		}
@@ -112,7 +112,7 @@ while ( $year <= $this_year )
 	$total_year_payments_array = $total_year_payments -> fetch();
 
 	$total_payments[$year]['Total'] = $total_year_payments_array['year_total_payments'];
-		if ($total_payments[$year]['Total']  == "" ) 
+		if ($total_payments[$year]['Total']  == "" )
 		{
 			$total_payments[$year]['Total']  = "-";
 		}
@@ -135,4 +135,3 @@ $smarty->assign('years', $years);
 
 $smarty -> assign('pageActive', 'report');
 $smarty -> assign('active_tab', '#home');
-?>

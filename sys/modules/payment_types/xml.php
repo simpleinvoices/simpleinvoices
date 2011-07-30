@@ -32,7 +32,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 	{
 		unset($limit);
 	}
-	/*SQL Limit - end*/	
+	/*SQL Limit - end*/
 
 	if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 		$dir = 'ASC';
@@ -54,15 +54,15 @@ function sql($type='', $dir, $sort, $rp, $page )
 		$sort = "pt_description";
 	}
 
-		$sql = "SELECT 
+		$sql = "SELECT
 					pt_id,
-					pt_description, 
+					pt_description,
 					(SELECT (CASE  WHEN pt_enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
-			FROM 
+			FROM
 					".TB_PREFIX."payment_types
 			$where
-			ORDER BY 
-					$sort $dir 
+			ORDER BY
+					$sort $dir
 			$limit";
 
 	$result = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
@@ -70,7 +70,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 	return $result;
 }
 
- 
+
 $sth = sql('', $dir, $sort, $rp, $page);
 $sth_count_rows = sql('count',$dir, $sort, $rp, $page);
 
@@ -89,14 +89,13 @@ foreach ($payment_types as $row) {
 	]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['pt_description']."]]></cell>";
 	if ($row['enabled']==$LANG['enabled']) {
-		$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
-	}	
-	else {
-		$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
+		$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";
 	}
-	$xml .= "</row>";		
+	else {
+		$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";
+	}
+	$xml .= "</row>";
 }
 $xml .= "</rows>";
 
 echo $xml;
-?> 

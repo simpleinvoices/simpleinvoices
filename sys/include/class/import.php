@@ -6,13 +6,13 @@ class import {
 	public $debug;
 	public $pattern_find;
 	public $pattern_replace;
-	
+
 	public function getFile()
 	{
 		$json = file_get_contents($this->file, true);
 		return $json;
 	}
-	
+
     public function replace($string)
     {
 /*        if(is_array($this->pattern_find))
@@ -23,7 +23,7 @@ class import {
                 echo $this->pattern_find[$key] . $this->pattern_replace[$key];
                 $string_replaced .= str_replace($this->pattern_find[$key], $this->pattern_replace[$key], $string);
             }
-            
+
         } else {
 */
             $string_replaced = str_replace($this->pattern_find, $this->pattern_replace, $string);
@@ -43,8 +43,3 @@ class import {
 	}
 
 }
-
-
-
-
-?>

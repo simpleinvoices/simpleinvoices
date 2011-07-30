@@ -14,7 +14,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 	global $config;
 	global $LANG;
 	global $auth_session;
-	
+
 	//SC: Safety checking values that will be directly subbed in
 	if (intval($start) != $start) {
 		$start = 0;
@@ -22,7 +22,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 	if (intval($rp) != $rp) {
 		$rp = 25;
 	}
-	
+
 	/*SQL Limit - start*/
 	$start = (($page-1) * $rp);
 	$limit = "LIMIT $start, $rp";
@@ -31,45 +31,45 @@ function sql($type='', $dir, $sort, $rp, $page )
 	{
 		unset($limit);
 	}
-	/*SQL Limit - end*/	
-	
+	/*SQL Limit - end*/
+
 	if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 		$dir = 'ASC';
 	}
-	
+
 	$query = $_REQUEST['query'];
 	$qtype = $_REQUEST['qtype'];
-	
+
 	$where = " WHERE u.domain_id = :domain_id AND u.role_id = ur.id";
 	if ($query) $where = " WHERE u.domain_id = :domain_id AND u.role_id = ur.id AND $qtype LIKE '%$query%' ";
-	
-	
-	
+
+
+
 	/*Check that the sort field is OK*/
 	$validFields = array('id', 'role', 'email');
-	
+
 	if (in_array($sort, $validFields)) {
 		$sort = $sort;
 	} else {
 		$sort = "email";
 	}
-	
+
 		//$sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY $sort $dir LIMIT $start, $limit";
-		$sql = "SELECT 
-					u.id, 
-					u.email, 
+		$sql = "SELECT
+					u.id,
+					u.email,
 					ur.name as role,
 					(SELECT (CASE WHEN u.enabled = ".ENABLED." THEN '".$LANG['enabled']."' ELSE '".$LANG['disabled']."' END )) AS enabled
-					
-	
-				FROM 
+
+
+				FROM
 					".TB_PREFIX."user u,
 					".TB_PREFIX."user_role ur
 				$where
-				ORDER BY 
-					$sort $dir 
+				ORDER BY
+					$sort $dir
 				$limit";
-	
+
 		$result = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 		return $result;
 }
@@ -95,15 +95,13 @@ foreach ($user as $row) {
 	$xml .= "<cell><![CDATA[".$row['email']."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['role']."]]></cell>";
 	if ($row['enabled']==$LANG['enabled']) {
-		$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
-	}	
-	else {
-		$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
+		$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";
 	}
-	$xml .= "</row>";		
+	else {
+		$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";
+	}
+	$xml .= "</row>";
 }
 
 $xml .= "</rows>";
 echo $xml;
-
-?> 

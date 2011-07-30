@@ -19,7 +19,7 @@ require_once($include_dir . "sys/include/reportlib.php");
 	$sSQL .= "WHERE iv.customer_id = c.id AND iv.biller_id = b.id AND iv.id = ivt.invoice_id ";
 	$sSQL .= "GROUP BY b.name, c.name";
 
-	
+
 	$oRpt->setXML($include_dir . "sys/modules/reports/report_biller_by_customer.xml");
 
 //   include phpreports run code
@@ -27,4 +27,3 @@ require_once($include_dir . "sys/include/reportlib.php");
 
 $smarty -> assign('pageActive', 'report');
 $smarty -> assign('active_tab', '#home');
-?>

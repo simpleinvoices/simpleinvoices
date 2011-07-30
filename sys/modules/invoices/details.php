@@ -9,7 +9,7 @@
 * Website:
 * 	http://www.simpleinvoices.org
  */
-#table 
+#table
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
@@ -49,4 +49,3 @@ $smarty -> assign("lines",count($invoiceItems));
 $smarty -> assign('pageActive', 'invoice');
 $smarty -> assign('subPageActive', 'invoice_edit');
 $smarty -> assign('active_tab', '#money');
-?>

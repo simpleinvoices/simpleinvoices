@@ -1,7 +1,7 @@
 <?php
-// Author 
+// Author
 //		Ap.Muthu
-// Last Edited on 
+// Last Edited on
 //		2008-01-04
 /*
 require_once("./include/init.php");	// for getInvoice() and getPreference()
@@ -59,4 +59,3 @@ $myloc .= "&URL=" 			. $url_pdf_encoded;
 
 header("Location: $myloc");
 */
-?>

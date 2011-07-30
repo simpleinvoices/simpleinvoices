@@ -9,4 +9,3 @@ $smarty -> assign("preferences",$preferences);
 
 $smarty -> assign('pageActive', 'preference');
 $smarty -> assign('active_tab', '#setting');
-?>

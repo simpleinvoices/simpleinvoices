@@ -1,22 +1,22 @@
-<?php 
+<?php
 //   include phpreports library
 require_once($include_dir . "sys/include/reportlib.php");
 
    $sSQL = "SELECT c.name, sum(ii.total) as sum_total
-      FROM 
-            ".TB_PREFIX."customers c, 
+      FROM
+            ".TB_PREFIX."customers c,
             ".TB_PREFIX."invoices i,
-            ".TB_PREFIX."invoice_items ii, 
+            ".TB_PREFIX."invoice_items ii,
             ".TB_PREFIX."preferences p
     where
         i.customer_id = c.id
         AND
         ii.invoice_id = i.id
-        AND 
+        AND
         i.preference_id = p.pref_id
         AND
             p.status = '1'
-      GROUP BY c.name 
+      GROUP BY c.name
 
 ";
 
@@ -27,4 +27,3 @@ require_once($include_dir . "sys/include/reportlib.php");
 
 $smarty -> assign('pageActive', 'report');
 $smarty -> assign('active_tab', '#home');
-?>

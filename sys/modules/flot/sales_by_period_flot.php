@@ -42,7 +42,7 @@ $year = $first_invoice_year ;
 * loop for each year
 */
 while ( $year <= $this_year )
-{	
+{
 	/*
 	* loop for each month
 	*/
@@ -51,7 +51,7 @@ while ( $year <= $this_year )
 	{
 		//make month nice for mysql - accounts table doesnt like it if not 08 etc..
 		if ( $month < 10 )
-		{ 
+		{
 			$month="0".$month;
 		};
 		/*
@@ -65,13 +65,13 @@ while ( $year <= $this_year )
 		$total_month_sales_array = $total_month_sales -> fetch();
 
 		$total_sales[$year][$month] = $total_month_sales_array['month_total'];
-		if ($total_sales[$year][$month] == "" ) 
+		if ($total_sales[$year][$month] == "" )
 		{
 			$total_sales[$year][$month] = "-";
 		}
 		$month++;
 	}
-		
+
 
 	$years[]=$year ;
 	$year++;
@@ -81,4 +81,3 @@ $smarty->assign('total_sales', $total_sales);
 //$years = array(2006,2007,2008);
 $years = array_reverse($years);
 $smarty->assign('years', $years);
-?>

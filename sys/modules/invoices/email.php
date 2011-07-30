@@ -29,11 +29,11 @@ $invoiceType = $sth->fetch();
 #create PDF name
 $spc2us_pref = str_replace(" ", "_", $invoice['index_name']);
 $pdf_file_name = $spc2us_pref  . '.pdf';
-      
+
 if ($_GET['stage'] == 2 ) {
 
 	#echo $block_stage2;
-	
+
 	// Create invoice
 	$export = new export();
 	$export -> format = "pdf";
@@ -70,4 +70,3 @@ $smarty -> assign('preferences',$preference);
 
 $smarty -> assign('pageActive', 'invoice');
 $smarty -> assign('active_tab', '#money');
-?>

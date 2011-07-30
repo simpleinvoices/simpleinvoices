@@ -36,5 +36,3 @@ $export -> show_only_real = $show_only_real;
 $export -> filter_by_date = $filter_by_date;
 $export -> execute();
 
-
-?>

@@ -35,5 +35,3 @@ jsEnd();
 $pageActive = "invoices";
 
 include('./modules/invoices/invoice.php');
-
-?>

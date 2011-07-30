@@ -30,4 +30,3 @@ $smarty -> assign('customFieldLabel',$customFieldLabel);
 $smarty -> assign('pageActive', 'customer');
 $smarty -> assign('subPageActive', 'customer_add');
 $smarty -> assign('active_tab', '#people');
-?>

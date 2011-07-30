@@ -20,4 +20,3 @@ $display_block = "
 ";
 
 $smarty->assign('display_block', $display_block);
-?>

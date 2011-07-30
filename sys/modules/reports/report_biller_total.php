@@ -2,11 +2,11 @@
 //   include phpreports library
 require_once($include_dir . "sys/include/reportlib.php");
 
-   $sSQL = "SELECT 
-                b.name, 
+   $sSQL = "SELECT
+                b.name,
                 sum(ii.total) AS sum_total
-            FROM 
-                ".TB_PREFIX."biller b 
+            FROM
+                ".TB_PREFIX."biller b
             INNER JOIN
               ".TB_PREFIX."invoices iv ON (b.id = iv.biller_id)
             INNER JOIN
@@ -15,9 +15,9 @@ require_once($include_dir . "sys/include/reportlib.php");
               ".TB_PREFIX."preferences p ON (p.pref_id = iv.preference_id)
             WHERE
                 p.status ='1'
-            GROUP BY 
+            GROUP BY
                 b.name";
-                
+
    $oRpt->setXML($include_dir . "sys/modules/reports/report_biller_total.xml");
 
 //   include phpreports run code
@@ -25,4 +25,3 @@ require_once($include_dir . "sys/include/reportlib.php");
 
 $smarty -> assign('pageActive', 'report');
 $smarty -> assign('active_tab', '#home');
-?>

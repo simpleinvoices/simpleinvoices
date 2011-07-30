@@ -4,9 +4,6 @@
 
 $invoice = invoice::select('1');
 //echo json_encode($invoice);
-/header('Content-type: application/xml');
+//header('Content-type: application/xml');
 echo encode::xml($invoice);
-print_r($invoice);
-
-
-
+//print_r($invoice);

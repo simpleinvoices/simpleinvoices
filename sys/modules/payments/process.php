@@ -56,4 +56,3 @@ $smarty -> assign('pageActive', 'payment');
 $subPageActive =  "payment_process" ;
 $smarty -> assign('subPageActive', $subPageActive);
 $smarty -> assign('active_tab', '#money');
-?>

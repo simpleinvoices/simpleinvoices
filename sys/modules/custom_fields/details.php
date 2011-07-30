@@ -35,4 +35,3 @@ $smarty -> assign('pageActive', 'custom_field');
 $subPageActive = $_GET['action'] =="view"  ? "custom_fields_view" : "custom_fields_edit" ;
 $smarty -> assign('subPageActive', $subPageActive);
 $smarty -> assign('active_tab', '#setting');
-?>

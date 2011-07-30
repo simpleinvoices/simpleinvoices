@@ -38,7 +38,7 @@ if ($op === "insert_customer") {
 if ( $op === 'edit_customer' ) {
 
 	if (isset($_POST['save_customer'])) {
-		
+
 		if (updateCustomer()) {
 
 			$saved = true;
@@ -47,8 +47,7 @@ if ( $op === 'edit_customer' ) {
 	}
 }
 
-$smarty -> assign('saved',$saved); 
+$smarty -> assign('saved',$saved);
 
 $smarty -> assign('pageActive', 'customer');
 $smarty -> assign('active_tab', '#people');
-?>

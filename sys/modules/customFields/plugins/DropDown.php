@@ -18,16 +18,16 @@
  */
 
 class DropDown extends CustomField {
-		
+
 	function DropDown() {
 		parent::CustomField(5,"DropDown");
 	}
-	
+
 	function printOutput($id) {
 		$values = getCustomFieldValues($id);
 		echo $name.": ".$this->getList();
 	}
-	
+
 	function getList($value = "",$name) {
 
 		$array = array("hans","john","getrud","jonathan","fabian");
@@ -42,10 +42,10 @@ class DropDown extends CustomField {
 			}
 		}
 		$t .= "</select>";
-		
+
 		return $t;
 	}
-	
+
 	function printInputField($id,$itemId) {
 		$name = $this->getFormName($id);
 
@@ -55,9 +55,7 @@ class DropDown extends CustomField {
 		else {
 			$value = $this->getList("",$name);
 		}
-		
+
 		echo "<tr><td>".htmlsafe($description)."</td><td>".htmlsafe($value)."</td></tr>";
 	}
 }
-
-?>

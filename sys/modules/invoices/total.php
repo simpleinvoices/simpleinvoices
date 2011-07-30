@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
 * Script: total.php
 * 	total invoice page
 *
@@ -28,4 +28,3 @@ require_once($include_dir .'sys/modules/invoices/invoice.php');
 $smarty -> assign('pageActive', 'invoice_new');
 $smarty -> assign('subPageActive', 'invoice_new_total');
 $smarty -> assign('active_tab', '#money');
-?>

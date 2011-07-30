@@ -18,20 +18,20 @@
  */
 
 class TextCustomField extends CustomField {
-	
+
 	function TextCustomField() {
 		parent::CustomField(3,"TextCustomField");
 	}
-	
+
 	function printOutput($id) {
 		$values = getCustomFieldValues($id);
 		echo $name.": ".$values['description'];
 	}
-	
-	function printInputField($id,$itemId) {		
+
+	function printInputField($id,$itemId) {
 		$description = $this->getDescription($id);
 		$name = $this->getFormName($id);
-		
+
 		if($itemId != "") {
 			//Sould be replace by customFieldId and Itemid
 			$value = $this->getFieldValue($id,$itemId);
@@ -39,9 +39,7 @@ class TextCustomField extends CustomField {
 		else {
 			$value = "";
 		}
-		
+
 		echo "<tr><td>".htmlsafe($description)."</td><td><input name='".htmlsafe($name)."' value='".htmlsafe($value)."' type='hidden'>".htmlsafe($value)."</td></tr>";
 	}
 }
-
-?>

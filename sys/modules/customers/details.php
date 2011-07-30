@@ -55,4 +55,3 @@ $smarty -> assign('pageActive', 'customer');
 
 
 $smarty -> assign('active_tab', '#people');
-?>

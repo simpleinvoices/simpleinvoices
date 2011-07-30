@@ -29,4 +29,3 @@ $smarty -> assign("customFieldLabels",$customFieldLabels);
 
 $smarty -> assign('pageActive', 'payment');
 $smarty -> assign('active_tab', '#money');
-?>

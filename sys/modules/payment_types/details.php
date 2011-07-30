@@ -22,4 +22,3 @@ $smarty -> assign('pageActive', 'payment_type');
 $subPageActive = $_GET['action'] =="view"  ? "payment_types_view" : "payment_types_edit" ;
 $smarty -> assign('subPageActive', $subPageActive);
 $smarty -> assign('active_tab', '#setting');
-?>

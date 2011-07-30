@@ -27,4 +27,3 @@ $smarty -> assign("defaultLanguage", $lang);
 
 $smarty -> assign('pageActive', 'system_default');
 $smarty -> assign('active_tab', '#setting');
-?>

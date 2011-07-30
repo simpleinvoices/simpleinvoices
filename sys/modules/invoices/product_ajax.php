@@ -8,7 +8,7 @@ if($_GET['id'])
 	$states = dbQuery($sql);
 //	$output = '';
 	if($states->rowCount() > 0)
-	{	
+	{
 		$row = $states->fetch();
 
 	//	print_r($row);
@@ -19,7 +19,7 @@ if($_GET['id'])
 			$output['default_tax_id_2'] = $row['default_tax_id_2'];
 			$output['detail'] = $row['detail'];
 	//		$output .= $_POST['id'];
-		
+
 	}
 	else
 	{
@@ -27,7 +27,7 @@ if($_GET['id'])
 	}
 
 	echo json_encode($output);
-	
+
 	exit();
 } else {
 
@@ -37,6 +37,3 @@ echo "";
 // Perform teh Queries!
 //$sql = 'SELECT * FROM si_products';
 //$country = mysqlQuery($sql) or die('Query Failed:' . mysql_error());
-
-
-?>

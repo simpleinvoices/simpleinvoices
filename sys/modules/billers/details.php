@@ -42,7 +42,7 @@ $smarty -> assign('enabled', array(
 			)
 		);
  */
- 
+
 $smarty->assign('files', $files);
 $smarty->assign('customFieldLabel', $customFieldLabel);
 
@@ -50,4 +50,3 @@ $smarty -> assign('pageActive', 'biller');
 $subPageActive = $_GET['action'] =="view"  ? "biller_view" : "biller_edit" ;
 $smarty -> assign('subPageActive', $subPageActive);
 $smarty -> assign('active_tab', '#people');
-?>

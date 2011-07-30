@@ -23,6 +23,3 @@ $export -> file_location = 'download';
 $export -> module = 'payment';
 $export -> id = $invoiceID;
 $export -> execute();
-
-
-?>

@@ -25,4 +25,3 @@ checkLogin();
 $smarty -> assign("number_of_rows",$number_of_rows);
 $smarty -> assign('pageActive', 'biller');
 $smarty -> assign('active_tab', '#people');
-?>

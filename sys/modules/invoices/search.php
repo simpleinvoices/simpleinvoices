@@ -112,5 +112,3 @@ Initially the invoice manage will display blank screen with only options to sear
 4. Type
 5. Owing greater than zero
 6. All"*/
-
-?>

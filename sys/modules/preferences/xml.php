@@ -31,7 +31,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 	{
 		unset($limit);
 	}
-	/*SQL Limit - end*/	
+	/*SQL Limit - end*/
 
 	if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 		$dir = 'ASC';
@@ -53,16 +53,16 @@ function sql($type='', $dir, $sort, $rp, $page )
 		$sort = "pref_description";
 	}
 
-		$sql = "SELECT 
-					pref_id, 
+		$sql = "SELECT
+					pref_id,
 					pref_description,
                     translation,
 					(SELECT (CASE  WHEN pref_enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
-				FROM 
-					".TB_PREFIX."preferences 
+				FROM
+					".TB_PREFIX."preferences
 				$where
-				ORDER BY 
-					$sort $dir 
+				ORDER BY
+					$sort $dir
 				$limit";
 
 
@@ -75,7 +75,7 @@ $sth_count_rows = sql('count',$dir, $sort, $rp, $page);
 
 $preferences = $sth->fetchAll(PDO::FETCH_ASSOC);
 $count = $sth->rowCount();
- 
+
 
 $xml .= "<rows>";
 $xml .= "<page>$page</page>";
@@ -91,17 +91,16 @@ foreach ($preferences as $row) {
 
     $dsc = $LANG[$row['translation']];
     if ($dsc=='') {$dsc=$row['pref_description'];}
-    
+
     $xml .= "<cell><![CDATA[".$dsc."]]></cell>";
 	if ($row['enabled']==$LANG['enabled']) {
-		$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
-	}	                                                        
-	else {
-		$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
+		$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";
 	}
-	$xml .= "</row>";		
+	else {
+		$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";
+	}
+	$xml .= "</row>";
 }
 $xml .= "</rows>";
 
 echo $xml;
-?> 

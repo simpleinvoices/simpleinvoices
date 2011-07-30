@@ -15,7 +15,7 @@ class export
 
 	function showData($data)
 	{
-        
+
         if($this->file_name =='')
         {
             switch ($this->module)
@@ -36,14 +36,14 @@ class export
 			{
 				echo($data);
 				break;
-			}	
-			
+			}
+
 			case "pdf":
 			{
 				pdfThis($data, $this->file_location, $this->file_name);
-				$this->file_location == "download" ? exit():"" ;	
+				$this->file_location == "download" ? exit():"" ;
 				break;
-			}		
+			}
 			case "file":
 			{
 				$invoice = getInvoice($this->id);
@@ -51,7 +51,7 @@ class export
 
 				//xls/doc export no longer uses the export template
 				//$template = "export";
-				
+
 				header("Content-type: application/octet-stream");
 				//header("Content-type: application/x-msdownload");
 				switch ($this->module)
@@ -81,14 +81,14 @@ class export
 
 				header("Pragma: no-cache");
 				header("Expires: 0");
-				
+
 				echo($data);
-				
+
 				break;
 			}
 		}
 	}
-	
+
 	function getData()
 	{
 		//echo "export - get data";
@@ -97,7 +97,7 @@ class export
 		global $include_dir;
 		global $smarty_include_dir;
 		global $tpl_path;
-		
+
 		switch ($this->module)
 		{
 			case "database":
@@ -132,9 +132,9 @@ class export
 					$having_count = '1';
 				}
 
-				if ( $this->show_only_unpaid == "yes") 
+				if ( $this->show_only_unpaid == "yes")
 				{
-					if ($having_count == '1') 
+					if ($having_count == '1')
 					{
 
 						$invoice->having_and = "money_owed";
@@ -144,13 +144,13 @@ class export
 
 						$invoice->having = "money_owed";
 					    $having_count = '1';
-	
+
 					}
 				}
-				
-				if ( $this->show_only_real == "yes") 
+
+				if ( $this->show_only_real == "yes")
 				{
-					if ($having_count == '2') 
+					if ($having_count == '2')
 					{
 
 						$invoice->having_and2 = "real";
@@ -162,7 +162,7 @@ class export
 					} else {
 
 						$invoice->having = "real";
-                        
+
 					}
 				}
 
@@ -174,11 +174,11 @@ class export
 					$statement['total'] = $statement['total'] + $row['invoice_total'];
 					$statement['owing'] = $statement['owing'] + $row['owing'] ;
 					$statement['paid'] = $statement['paid'] + $row['INV_PAID'];
-					
+
 				}
 
 				$templatePath = $include_dir . "/templates/default/statement/index.tpl";
-			
+
 				$biller_details = getBiller($this->biller_id);
 				$customer_details = customer::get($this->customer_id);
 
@@ -233,14 +233,14 @@ class export
 
 				$css = $siUrl."/templates/invoices/default/style.css";
 				$smarty -> assign('css',$css);
-				
+
                 $templatePath = $include_dir . "/templates/default/payments/print.tpl";
 				$data = $smarty -> fetch(".".$templatePath);
                 break;
             }
 			case "invoice":
 			{
-			
+
 				$invoice = invoice::select($this->id);
  			        $invoice_number_of_taxes = numberOfTaxesForInvoice($this->id);
 				$customer = customer::get($invoice['customer_id']);
@@ -250,15 +250,15 @@ class export
 				$logo = getLogo($biller);
 				$logo = str_replace(" ", "%20", $logo);
 				$invoiceItems = invoice::getInvoiceItems($this->id);
-				
+
 				$spc2us_pref = str_replace(" ", "_", $invoice['index_name']);
 				$this->file_name = $spc2us_pref;
-				
+
 				$customFieldLabels = getCustomFieldLabels();
-	
+
 				/*Set the template to the default*/
 				$template = $defaults['template'];
-			
+
 				$templatePath = $include_dir . "sys/templates/invoices/${template}/template.tpl";
 				$template_dir = $smarty_include_dir . "sys/templates/invoices/${template}/template.tpl";
 				$template_path = $include_dir . "sys/templates/invoices/${template}";
@@ -266,12 +266,12 @@ class export
 				$pluginsdir =  $include_dir ."sys/templates/invoices/${template}/plugins/";
 
 				//$smarty = new Smarty();
-				
+
 				$smarty -> plugins_dir = $pluginsdir;
-				 
+
 				$pageActive = "invoices";
 				$smarty->assign('pageActive', $pageActive);
-				
+
 				if(file_exists($templatePath)) {
 					//echo "test";
 					$smarty -> assign('biller',$biller);
@@ -285,24 +285,23 @@ class export
 					$smarty -> assign('template_path',$template_path);
 					$smarty -> assign('css',$css);
 					$smarty -> assign('customFieldLabels',$customFieldLabels);
-					
+
 					$data = $smarty -> fetch($template_dir);
-				
+
 				}
-				
-				break;			
+
+				break;
 			}
-			
+
 		}
-		
+
 		return $data;
-		
+
 	}
-	
+
 	function execute()
 	{
-		$this->showData( $this->getData() );	
+		$this->showData( $this->getData() );
 	}
-	
+
 }
-?>

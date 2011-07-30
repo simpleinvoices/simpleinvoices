@@ -20,6 +20,3 @@ $export -> format = $get_format;
 $export -> file_type = $get_file_type;
 $export -> module = 'database';
 $export -> execute();
-
-
-?>

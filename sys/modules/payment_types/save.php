@@ -28,7 +28,7 @@ $sql = "INSERT INTO ".TB_PREFIX."tax VALUES ('$_POST[tax_description]','$_POST[t
 			VALUES
 				(NULL, :domain_id, :description, :enabled)";
 	}
-	
+
 	if (dbQuery($sql, ':domain_id', $auth_session->domain_id, ':description', $_POST['pt_description'], ':enabled', $_POST['pt_enabled'])) {
 		$saved = true;
 		//$display_block = $LANG['save_payment_type_success'];
@@ -36,7 +36,7 @@ $sql = "INSERT INTO ".TB_PREFIX."tax VALUES ('$_POST[tax_description]','$_POST[t
 		$saved = false;
 		//$display_block =  $LANG['save_payment_type_failure'];
 	}
-	
+
 	//header( 'refresh: 2; url=manage_payment_types.php' );
 
 
@@ -70,7 +70,7 @@ else if (  $op === 'edit_payment_type' ) {
 		//header( 'refresh: 2; url=manage_payment_types.php' );
 		//$refresh_total = "<meta http-equiv='refresh' content='2;url=index.php?module=payment_types&amp;view=manage' />";
 
-	} 
+	}
 }
 
 //TODO: Make redirection with php..
@@ -79,10 +79,9 @@ else if (  $op === 'edit_payment_type' ) {
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 
 
-$smarty -> assign('display_block',$display_block); 
-$smarty -> assign('refresh_total',$refresh_total); 
-$smarty -> assign('saved',$saved); 
+$smarty -> assign('display_block',$display_block);
+$smarty -> assign('refresh_total',$refresh_total);
+$smarty -> assign('saved',$saved);
 
 $smarty -> assign('pageActive', 'payment_type');
 $smarty -> assign('active_tab', '#setting');
-?>

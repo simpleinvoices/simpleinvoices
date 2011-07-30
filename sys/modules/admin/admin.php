@@ -24,5 +24,3 @@ echo <<<EOD
 	<li>Cache Cleanup</li>
 </ul>
 EOD;
-
-?>

@@ -32,5 +32,3 @@ $smarty->assign('roles', $roles);
 $smarty -> assign('pageActive', 'user');
 $smarty -> assign('subPageActive', 'user_add');
 $smarty -> assign('active_tab', '#people');
-
-?>

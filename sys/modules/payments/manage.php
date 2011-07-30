@@ -37,4 +37,3 @@ $smarty -> assign("inv_id",$inv_id);
 $smarty -> assign('subPageActive', $subPageActive);
 $smarty -> assign('pageActive', 'payment');
 $smarty -> assign('active_tab', '#money');
-?>

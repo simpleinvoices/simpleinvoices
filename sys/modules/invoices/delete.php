@@ -44,7 +44,7 @@ if ( ($_GET['stage'] == 2 ) AND ($_POST['doDelete'] == 'y') ) {
 	$dbh->beginTransaction();
 	$error = false;
 
-    
+
     //delete line item taxes
     $invoice_line_items = invoice::getInvoiceItems($invoice_id);
 
@@ -60,7 +60,7 @@ if ( ($_GET['stage'] == 2 ) AND ($_POST['doDelete'] == 'y') ) {
 	}
 
 	//delete products from producsts table for total style
-	if ($invoice['type_id'] == 1) 
+	if ($invoice['type_id'] == 1)
 	{
 		if ($error || ! delete('products','id',$invoiceItems['0']['product']['id'])) {
 			$error = true;
@@ -70,7 +70,7 @@ if ( ($_GET['stage'] == 2 ) AND ($_POST['doDelete'] == 'y') ) {
 	//delete the info from the invoice table
 	if ($error || ! delete('invoices','id',$invoice_id)) {
 		$error = true;
-	} 
+	}
 	if ($error) {
 		$dbh->rollBack();
 	} else {
@@ -83,4 +83,3 @@ if ( ($_GET['stage'] == 2 ) AND ($_POST['doDelete'] == 'y') ) {
 
 $smarty -> assign('pageActive', 'invoice');
 $smarty -> assign('active_tab', '#money');
-?>

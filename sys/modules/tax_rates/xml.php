@@ -32,7 +32,7 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 		unset($limit);
 		$limit ="";
 	}
-	/*SQL Limit - end*/	
+	/*SQL Limit - end*/
 	if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 		$dir = 'ASC';
 	}
@@ -53,17 +53,17 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 		$sort = "tax_description";
 	}
 
-	$sql = "SELECT 
-					tax_id, 
+	$sql = "SELECT
+					tax_id,
 					tax_description,
 					tax_percentage,
 					type,
 					(SELECT (CASE  WHEN tax_enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
-				FROM 
+				FROM
 					".TB_PREFIX."tax
 				$where
-				ORDER BY 
-					$sort $dir 
+				ORDER BY
+					$sort $dir
 			    $limit";
 
 
@@ -77,7 +77,7 @@ $sth_count_rows = sql('count',$dir, $start, $sort, $rp, $page);
 
 $tax = $sth->fetchAll(PDO::FETCH_ASSOC);
 $count = $sth_count_rows->rowCount();
-	 
+
 
 $xml .= "<rows>";
 $xml .= "<page>$page</page>";
@@ -92,14 +92,13 @@ foreach ($tax as $row) {
 	$xml .= "<cell><![CDATA[".$row['tax_description']."]]></cell>";
 	$xml .= "<cell><![CDATA[".siLocal::number($row['tax_percentage'])." ".$row['type']."]]></cell>";
 	if ($row['enabled']==$LANG['enabled']) {
-		$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/tick.png' alt='".utf8_encode($row['enabled'])."' title='".utf8_encode($row['enabled'])."' />]]></cell>";				
-	}	
-	else {
-		$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/cross.png' alt='".utf8_encode($row['enabled'])."' title='".utf8_encode($row['enabled'])."' />]]></cell>";				
+		$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/tick.png' alt='".utf8_encode($row['enabled'])."' title='".utf8_encode($row['enabled'])."' />]]></cell>";
 	}
-	$xml .= "</row>";		
+	else {
+		$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/cross.png' alt='".utf8_encode($row['enabled'])."' title='".utf8_encode($row['enabled'])."' />]]></cell>";
+	}
+	$xml .= "</row>";
 }
 $xml .= "</rows>";
 
 echo $xml;
-?>

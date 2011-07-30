@@ -12,7 +12,7 @@
 *
 * License:
 *	 GPL v2 or above
-*	 
+*
 * Website:
 * 	http://www.simpleinvoices.or
  */
@@ -47,7 +47,7 @@ else {
 }
 
 	$url_for_pdf = "./index.php?module=export&view=pdf&id=" . $invoice['id'];
-        
+
 	$invoice['url_for_pdf'] = $url_for_pdf;
 
 $customFieldLabels = getCustomFieldLabels();
@@ -88,4 +88,3 @@ $smarty -> assign("spreadsheet",$config->export->spreadsheet);
 $smarty -> assign("customerAccount",$customerAccount);
 $smarty -> assign("eway_pre_check",$eway_pre_check);
 $smarty -> assign("invoicelocked", $invoicelocked);
-?>

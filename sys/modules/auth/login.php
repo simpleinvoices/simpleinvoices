@@ -42,9 +42,9 @@ if (!empty($_POST['value'])) {
     $smarty -> assign("LANG",getLanguageArray());
 }
 
-if (!empty($_POST['user']) && !empty($_POST['pass'])) 
+if (!empty($_POST['user']) && !empty($_POST['pass']))
 {
-    $errorMessage = setDefaultLanguage($_POST['value']);  
+    $errorMessage = setDefaultLanguage($_POST['value']);
 ////	require_once 'Zend/Auth/Adapter/DbTable.php';
 
 	// Configure the instance with constructor parameters...
@@ -74,7 +74,7 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 	$result = $authAdapter->authenticate();
 
 	if ($result->isValid()) {
-		
+
 		Zend_Session::start();
 
 		/*
@@ -83,7 +83,7 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 
         $usertable = TB_PREFIX.'user';
         $userroletable = TB_PREFIX.'user_role';
-        
+
 		//patch 147 adds user_role table - need to accomodate pre and post patch 147
 		if (getNumberOfDoneSQLPatches() < "147")
 		{
@@ -95,22 +95,22 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 		if ( (getNumberOfDoneSQLPatches() >= "147") && ( getNumberOfDoneSQLPatches() < "184") )
 		{
 			$result = $zendDb->fetchRow('
-				SELECT u.user_id as id, u.user_email, u.user_name, r.name as role_name, u.user_domain_id FROM '.$usertable.' u, '.$userroletable.' r 
+				SELECT u.user_id as id, u.user_email, u.user_name, r.name as role_name, u.user_domain_id FROM '.$usertable.' u, '.$userroletable.' r
 				WHERE u.user_email = ? AND u.user_role_id = r.id', $userEmail
 			);
-		}		
+		}
 		if (getNumberOfDoneSQLPatches() >= "184")
 		{
 			$result = $zendDb->fetchRow("
-				SELECT u.id, u.email, r.name as role_name, u.domain_id FROM ".$usertable." u, ".$userroletable." r 
+				SELECT u.id, u.email, r.name as role_name, u.domain_id FROM ".$usertable." u, ".$userroletable." r
 				WHERE u.email = ? AND u.role_id = r.id AND u.enabled = '".ENABLED."'", $userEmail
 			);
-		}		
+		}
 		/*
 		* chuck the user details sans password into the Zend_auth session
 		*/
 		$authNamespace = new Zend_Session_Namespace('Zend_Auth');
-        
+
 		foreach ($result as $key => $value)
 		{
 			$authNamespace->$key = $value;
@@ -129,13 +129,13 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 $default = "language";
 $languages = getLanguageList($include_dir . 'sys/lang/');
 $lang = getDefaultLanguage();
-    
+
 usort($languages,"compareNameIndex");
-    
+
 //print_r($languages);
 $value = "<select name='value'>";
 if (!isset($cust_language)) {
-    $cust_language=$lang; 
+    $cust_language=$lang;
 }
 
 foreach($languages as $language) {
@@ -143,7 +143,7 @@ foreach($languages as $language) {
     if($language->shortname == $cust_language) {
         $selected = " selected ";
     }
-    $value .= "<option $selected value='".htmlsafe($language->shortname)."'>".htmlsafe("$language->name")."</option>";
+    $value .= "<option $selected value='".htmlsafe($language->shortname)."'>".htmlsafe($language->name)."</option>";
 }
 $value .= "</select>";
 
@@ -154,4 +154,3 @@ if($_POST['action'] == 'login' && (empty($_POST['user']) OR empty($_POST['pass']
 
 $smarty->assign("errorMessage",$errorMessage);
 $smarty->assign("value",$value);
-?>

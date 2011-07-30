@@ -3,7 +3,7 @@
 function smarty_function_total($params, &$smarty)
 {
 
-	
+
 	$subtotal = 0;
 	foreach ($params['cost'] as $key=>$value)
 	{
@@ -13,10 +13,7 @@ function smarty_function_total($params, &$smarty)
 			$subtotal = $value['total'] + $subtotal;
 		}
 	}
-	$subtotal = siLocal::number($subtotal);	
-	return $subtotal;	
+	$subtotal = siLocal::number($subtotal);
+	return $subtotal;
 
 }
-
-
-?>

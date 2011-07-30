@@ -12,23 +12,23 @@ checkLogin();
 global $db_server;
 global $auth_session;
 if ( isset($_POST['process_payment']) ) {
-	
+
 	$payment = new payment();
 	$payment->ac_inv_id = $_POST['invoice_id'];
 	$payment->ac_amount = $_POST['ac_amount'];
 	$payment->ac_notes = $_POST['ac_notes'];
 	$payment->ac_date = $_POST['ac_date'];
 	$payment->ac_payment_type = $_POST['ac_payment_type'];
-		
+
 		//works out any funds that are in excess of invoice total:
 		$invoicetotal = getInvoiceTotal($payment->ac_inv_id);
                 $orig_amt = $payment->ac_amount;
                	$extrapayment = $payment->ac_amount - $invoicetotal;
 
-		
+
 		if (  $extrapayment > 0.0 && $_POST['distribute'] == '1' ) { //is there any money left over to distribute to other invoices?
                                                                              //and check for user preference
-		
+
                     //reduce original payment variable to the invoice total:
                     $payment->ac_amount = $invoicetotal;
 
@@ -117,14 +117,14 @@ if ( isset($_POST['process_payment']) ) {
 
                     // return any unused funds to be paid to the original invoice
                     $payment->ac_amount = $payment->ac_amount + $extrapayment;
-                
+
 	}
 
-	
+
 	$result = $payment->insert();
 
 
-        
+
 	$saved = !empty($result) ? "true" : "false";
 	if($saved =='true')
 	{
@@ -165,4 +165,3 @@ $smarty->assign('display_block', $display_block);
 
 $smarty -> assign('pageActive', 'payment');
 $smarty -> assign('active_tab', '#money');
-?>

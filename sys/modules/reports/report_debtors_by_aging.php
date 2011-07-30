@@ -60,14 +60,14 @@ FROM
         ".TB_PREFIX."invoices iv, ".TB_PREFIX."biller b, ".TB_PREFIX."customers c, ".TB_PREFIX."invoice_items, ".TB_PREFIX."preferences
 WHERE
        ".TB_PREFIX."invoice_items.invoice_id = iv.id
-        and iv.customer_id = c.id AND iv.biller_id = b.id 
+        and iv.customer_id = c.id AND iv.biller_id = b.id
         AND iv.preference_id = ".TB_PREFIX."preferences.pref_id
         AND ".TB_PREFIX."preferences.status = 1
-GROUP BY 
+GROUP BY
     iv.id
-HAVING 
+HAVING
     inv_owing > 0
-ORDER BY 
+ORDER BY
     Aging DESC
         ;
 ";
@@ -80,4 +80,3 @@ ORDER BY
 
 $smarty -> assign('pageActive', 'report');
 $smarty -> assign('active_tab', '#home');
-?>

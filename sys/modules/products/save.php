@@ -12,7 +12,7 @@ $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
 $saved = false;
 
 if (  $op === 'insert_product' ) {
-	
+
 	if($id = insertProduct()) {
  		$saved = true;
  		//saveCustomFieldValues($_POST['categorie'], lastInsertId());
@@ -33,9 +33,8 @@ $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 
 
 $smarty->assign('saved',$saved);
-//$smarty -> assign('display_block',$display_block); 
-//$smarty -> assign('refresh_total',$refresh_total); 
+//$smarty -> assign('display_block',$display_block);
+//$smarty -> assign('refresh_total',$refresh_total);
 
 $smarty -> assign('pageActive', 'product_manage');
 $smarty -> assign('active_tab', '#product');
-?>

@@ -27,9 +27,9 @@ class PCLEscapeSequence {
 
 /**
  * Two-character escape sequences have the following form:
- * 
+ *
  * <Escape> X
- * 
+ *
  * where  “X”  is  a  character  that  defines  the  operation  to  be
  * performed. “X” may be any character from the ASCII table within the
  * range 48-126 decimal (“0” through “~” - see Appendix A).
@@ -43,15 +43,15 @@ class PCLEscapeGenericSimple {
 
 /**
  * Parameterized escape sequences have the following form:
- * 
+ *
  * <Escape> X y z1 # z2 # z3 ... # Zn[data]
- * 
+ *
  * where  y,  #,  zi (z1,  z2,  z3...)  and  [data] may  be  optional,
  * depending on the command.
  */
 class PCLEscapeGenericParametric {
   function getSequenceString() {
-    $result = 
+    $result =
       $this->_getEscapedCharacter().
       $this->_getGroupCharacter();
     $groups = $this->_getGroups();
@@ -93,7 +93,7 @@ class PCLEscapeGroup {
  * Environment, deletes  temporary fonts, macros,  user-defined symbol
  * sets and patterns.  It also prints any partial  pages of data which
  * may have been received.
- * 
+ *
  * <Escape> E
  */
 class PCLEscapeReset extends PCLEscapeGenericSimple {
@@ -126,7 +126,7 @@ class PCLEscapeUEL extends PCLEscapeGenericParametric {
 
 /**
  * The Number of Copies command designates the number of printed copies of each page.
- * 
+ *
  * <Escape> & l # X
  *
  * # = Number of copies (1 to 32767 maximum)
@@ -227,7 +227,7 @@ class PCLPrintJobPreamble {
 }
 
 class PCLPrintJobPage {
-  var $_control
+  var $_control;
   var $_data;
 
   function output(&$stream) {

@@ -1,12 +1,12 @@
 <?php
 
 /*
-* Script: save.php 
+* Script: save.php
 * 	Invoice save file
 *
 * License:
 *	 GPL v3 or above
-*	 
+*
 * Website:
 * 	http://www.simpleinvoices.or
 */
@@ -30,7 +30,7 @@ $type = $_POST['type'];
 
 
 if ($_POST['action'] == "insert" ) {
-	
+
 	if(insertInvoice($type)) {
 		$id = lastInsertId();
 		//saveCustomFieldValues($_POST['categorie'],$invoice_id);
@@ -65,7 +65,7 @@ if ($_POST['action'] == "insert" ) {
 		}
 	}
 	elseif ($saved) {
-		
+
 		$logger->log('Max items:'.$_POST['max_items'], Zend_Log::INFO);
 		$i = 0;
 		while ($i <= $_POST['max_items']) {
@@ -84,7 +84,7 @@ if ($_POST['action'] == "insert" ) {
 
 				if (
                         $ii->insert_item()
-					) 
+					)
 				{
 		//			insert_invoice_item_tax(lastInsertId(), )
 					//$saved = true;
@@ -100,7 +100,7 @@ if ($_POST['action'] == "insert" ) {
 	//Get type id - so do add into redirector header
 
 	$id = $_POST['id'];
-	
+
 	if (updateInvoice($_POST['id'])) {
 		//updateCustomFieldValues($_POST['categorie'],$_POST['invoice_id']);
 		$saved = true;
@@ -116,10 +116,10 @@ if ($_POST['action'] == "insert" ) {
 			);
 	}
 
-    
+
 	$logger->log('Max items:'.$_POST['max_items'], Zend_Log::INFO);
 	$i = 0;
-	while ($i <= $_POST['max_items']) 
+	while ($i <= $_POST['max_items'])
 	{
 //	for($i=0;(!empty($_POST["quantity$i"]) && $i < $_POST['max_items']);$i++) {
 		$logger->log('i='.$i, Zend_Log::INFO);
@@ -132,11 +132,11 @@ if ($_POST['action'] == "insert" ) {
 		}
 		if($_POST["delete$i"] !== "yes")
 		{
-		
-		
+
+
 			if($_POST["quantity$i"] != null)
             {
-	
+
 				//new line item added in edit page
 				if($_POST["line_item$i"] == "")
 				{
@@ -150,14 +150,14 @@ if ($_POST['action'] == "insert" ) {
                     $ii->unit_price = $_POST["unit_price$i"] ;
                     $ii->insert_item();
 				}
-				
+
 				if($_POST["line_item$i"] != "")
 				{
 					updateInvoiceItem($_POST["line_item$i"],$_POST["quantity$i"],$_POST["products$i"],$i,$_POST['tax_id'][$i],$_POST["description$i"],$_POST["unit_price$i"]);
 					$saved;
 					//$saved =  true;
 /*
-				}	
+				}
 				else {
 					die(end($dbh->errorInfo()));
 */
@@ -174,5 +174,3 @@ if ($_POST['action'] == "insert" ) {
 //Get type id - so do add into redirector header
 $smarty->assign('saved', $saved);
 $smarty->assign('id', $id);
-
-?>

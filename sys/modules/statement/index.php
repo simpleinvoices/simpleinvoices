@@ -62,7 +62,7 @@ if (isset($_POST['submit']))
 
 	if ( isset($_POST['show_only_unpaid']) )
 	{
-		if ($having_count == '1') 
+		if ($having_count == '1')
 		{
 
 			$invoice->having_and = "money_owed";
@@ -77,10 +77,10 @@ if (isset($_POST['submit']))
 
 		$show_only_unpaid = "yes";
 	}
-	
+
 	if ( isset($_POST['show_only_real']) )
 	{
-		if ($having_count == '2') 
+		if ($having_count == '2')
 		{
 
 			$invoice->having_and2 = "real";
@@ -92,7 +92,7 @@ if (isset($_POST['submit']))
 		} else {
 
 			$invoice->having = "real";
-            
+
 		}
 		$show_only_real = "yes";
 	}
@@ -106,7 +106,7 @@ if (isset($_POST['submit']))
 		$statement['total'] = $statement['total'] + $row['invoice_total'];
 		$statement['owing'] = $statement['owing'] + $row['owing'] ;
 		$statement['paid'] = $statement['paid'] + $row['INV_PAID'];
-		
+
 	}
 }
 
@@ -135,4 +135,4 @@ $smarty -> assign('end_date', $end_date);
 $smarty -> assign('pageActive', 'report');
 $smarty -> assign('active_tab', '#home');
 $smarty -> assign('menu', $menu);
-?>
+

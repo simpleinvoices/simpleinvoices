@@ -12,10 +12,7 @@ function smarty_function_subtotal($params, &$smarty)
 			$subtotal = $value['gross_total'] + $subtotal;
 		}
 	}
-	$subtotal = siLocal::number($subtotal);	
-	return $subtotal;	
+	$subtotal = siLocal::number($subtotal);
+	return $subtotal;
 
 }
-
-
-?>

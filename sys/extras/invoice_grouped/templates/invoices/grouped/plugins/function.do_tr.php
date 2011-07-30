@@ -1,18 +1,7 @@
 <?php
 
-function smarty_function_do_tr($params, &$smarty)
-{
-	if ($params['number'] == 2 ) {
-		$new_tr = "</tr><tr class='".htmlsafe($params[class])."'>";
-		return $new_tr;
+function smarty_function_do_tr($params, &$smarty) {
+	if ($params['number'] == 2 || $params['number'] == 4) {
+		return "</tr><tr class='" . htmlsafe($params['class']) . "'>";
 	}
-	
-        if ($params['number'] == 4 ) {
-                $new_tr = "</tr><tr class='".htmlsafe($params[class])."'>";
-                return $new_tr;
-        }
-
 }
-
-
-?>

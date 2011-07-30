@@ -41,7 +41,7 @@ foreach($invoices as $k=>$v)
     //get list of all products
     $sql = "select distinct(product_id) from ".TB_PREFIX."invoice_items where invoice_id = :id";
     $sth = $db->query($sql, ':id',$v['id']);
-        
+
     $products = $sth->fetchAll();
     $invoice_total_cost = "0";
 
@@ -61,7 +61,7 @@ foreach($invoices as $k=>$v)
         $cost = $sthp->fetchColumn();
 
         $product_total_cost = $quantity * $cost;
-        
+
         $invoice_total_cost = $invoice_total_cost + $product_total_cost;
     }
     $invoices[$k]['cost'] =  $invoice_total_cost;
@@ -79,4 +79,3 @@ $smarty -> assign('end_date', $end_date);
 
 $smarty -> assign('pageActive', 'report');
 $smarty -> assign('active_tab', '#home');
-?>

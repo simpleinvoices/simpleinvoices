@@ -29,9 +29,8 @@ $products = getActiveProducts();
 $smarty -> assign("products",$products);
 }
 
-$type = $_GET[type];
+$type = $_GET['type'];
 $smarty -> assign("type",$type);
 
 $smarty -> assign('pageActive', 'invoice');
 $smarty -> assign('active_tab', '#money');
-?>

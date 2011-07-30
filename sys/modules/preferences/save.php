@@ -9,7 +9,7 @@ foreach ($_POST['include_online_payment'] as $k => $v) {
     $include_online_payment .= $v;
     if ($k !=  end(array_keys($_POST['include_online_payment'])))
     {
-    	$include_online_payment .= ','; 
+    	$include_online_payment .= ',';
     }
 }
 
@@ -84,17 +84,17 @@ if (  $op === 'insert_preference' ) {
 	  ':enabled', $_POST['pref_enabled']
 	  )) {
 		$saved = true;
-        
+
         if (empty($_POST['index_group']))
         {
             $sql_update = "UPDATE
                     ".TB_PREFIX."preferences
                 SET
                     index_group = :index_group
-                WHERE 
+                WHERE
                     pref_id = :pref_id
             ";
-            dbQuery($sql_update, 
+            dbQuery($sql_update,
                 ':index_group',lastInsertId(),
                 ':pref_id',lastInsertId()
             );
@@ -137,7 +137,7 @@ else if (  $op === 'edit_preference' ) {
 			WHERE
 				pref_id = :id";
 
-		if (dbQuery($sql, 
+		if (dbQuery($sql,
 		  ':description', $_POST['pref_description'],
 		  ':currency_sign', $_POST['pref_currency_sign'],
 		  ':currency_code', $_POST['currency_code'],
@@ -172,8 +172,7 @@ else if (  $op === 'edit_preference' ) {
 
 }
 
-$smarty -> assign('saved',$saved); 
+$smarty -> assign('saved',$saved);
 
 $smarty -> assign('pageActive', 'preference');
 $smarty -> assign('active_tab', '#setting');
-?>

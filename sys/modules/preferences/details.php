@@ -27,4 +27,3 @@ $smarty -> assign('pageActive', 'preference');
 $subPageActive = $_GET['action'] =="view"  ? "preferences_view" : "preferences_edit" ;
 $smarty -> assign('subPageActive', $subPageActive);
 $smarty -> assign('active_tab', '#setting');
-?>

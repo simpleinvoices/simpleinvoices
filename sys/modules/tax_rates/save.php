@@ -20,7 +20,7 @@ switch ($op) {
 
 	case "edit_tax_rate":
 		#edit tax rate
-		if (isset($_POST['save_tax_rate'])) 
+		if (isset($_POST['save_tax_rate']))
 			$display_block = updateTaxRate();
 		else
 			$refresh_total = '&nbsp';
@@ -33,9 +33,8 @@ switch ($op) {
 		$refresh_total = '&nbsp';
 }
 
-$smarty -> assign('display_block',$display_block); 
-$smarty -> assign('refresh_total',$refresh_total); 
+$smarty -> assign('display_block',$display_block);
+$smarty -> assign('refresh_total',$refresh_total);
 
 $smarty -> assign('pageActive', 'tax_rate');
 $smarty -> assign('active_tab', '#setting');
-?>

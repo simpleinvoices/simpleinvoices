@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Zend framework init - start
  */
 set_include_path(get_include_path() . PATH_SEPARATOR . "./sys/include/class");
@@ -19,20 +19,20 @@ Zend_Session::start();
 $auth_session = new Zend_Session_Namespace('Zend_Auth');
 
 
-//start use of zend_cache   
+//start use of zend_cache
 $frontendOptions = array(
     'lifetime' => 7200, // cache lifetime of 2 hours
     'automatic_serialization' => true
 );
-                   
 
-/* 
+
+/*
  * Zend framework init - end
  */
 
 
 
-/* 
+/*
  * Smarty inint - start
  */
 
@@ -56,7 +56,7 @@ if (!is_file($logFile))
 	fclose($createLogFile);
 }
 if (!is_writable($logFile)) {
-	
+
    simpleInvoicesError('notWriteable','file',$logFile);
 }
 $writer = new Zend_Log_Writer_Stream($logFile);
@@ -66,7 +66,7 @@ $logger = new Zend_Log($writer);
  */
 
 if (!is_writable( $app_folder . '/tmp/cache')) {
-    
+
    simpleInvoicesError('notWriteable','file', $app_folder . '/tmp/cache');
 }
 /*
@@ -76,7 +76,7 @@ if (!is_writable( $app_folder . '/tmp/cache')) {
 $backendOptions = array(
     'cache_dir' => $app_folder . '/tmp/' // Directory where to put the cache files
 );
-                                   
+
 // getting a Zend_Cache_Core object
 $cache = Zend_Cache::factory('Core',
                              'File',
@@ -106,7 +106,7 @@ $smarty->plugins_dir = array("plugins","include/smarty_plugins");
 //add stripslash smarty function
 $smarty->register_modifier("unescape","stripslashes");
 $smarty->register_modifier("capitalise","ucwords");
-/* 
+/*
  * Smarty inint - end
  */
 
@@ -130,10 +130,10 @@ if( is_file($app_folder . '/config/custom.config.ini') ){
 //set up app with relevant php setting
 date_default_timezone_set($config->phpSettings->date->timezone);
 error_reporting($config->debug->error_reporting);
-ini_set('display_startup_errors', $config->phpSettings->display_startup_errors);  
-ini_set('display_errors', $config->phpSettings->display_errors); 
-ini_set('log_errors', $config->phpSettings->log_errors); 
-ini_set('error_log', $config->phpSettings->error_log); 
+ini_set('display_startup_errors', $config->phpSettings->display_startup_errors);
+ini_set('display_errors', $config->phpSettings->display_errors);
+ini_set('log_errors', $config->phpSettings->log_errors);
+ini_set('error_log', $config->phpSettings->error_log);
 
 
 
@@ -164,7 +164,7 @@ $smarty->register_modifier('urlsafe', 'urlsafe');
 $smarty->register_modifier('urlencode', 'urlencode');
 $smarty->register_modifier('outhtml', 'outhtml');
 $smarty->register_modifier('htmlout', 'outhtml'); //common typo
-$smarty->register_modifier('urlescape', 'urlencode'); //common typo 
+$smarty->register_modifier('urlescape', 'urlencode'); //common typo
 $install_tables_exists = checkTableExists(TB_PREFIX."biller");
 if ($install_tables_exists == true)
 {
@@ -180,9 +180,9 @@ if ( $install_tables_exists != false )
 	    $sql="SELECT * from ".TB_PREFIX."extensions WHERE (domain_id = :id OR domain_id =  0 ) ORDER BY domain_id ASC";
 	    $sth = dbQuery($sql,':id', $auth_session->domain_id ) or die(htmlsafe(end($dbh->errorInfo())));
 
-	    while ( $this_extension = $sth->fetch() ) 
-	    { 
-	    	$DB_extensions[$this_extension['name']] = $this_extension; 
+	    while ( $this_extension = $sth->fetch() )
+	    {
+	    	$DB_extensions[$this_extension['name']] = $this_extension;
 	    }
 	    $config->extension = $DB_extensions;
 	}
@@ -195,7 +195,7 @@ foreach($config->extension as $extension)
 {
 	/*
 	* If extension is enabled then continue and include the requested file for that extension if it exists
-	*/	
+	*/
 	if($extension->enabled == "1")
 	{
 		//echo "Enabled:".$value['name']."<br><br>";
@@ -259,7 +259,7 @@ $early_exit[] = "biller_upload-logo";
 $module = isset($_GET['module'])?$_GET['module']:null;
 switch ($module)
 {
-	case "export" :	
+	case "export" :
 		$smarty_output = "fetch";
 		break;
 	default :
@@ -282,5 +282,3 @@ include_once($include_dir . "sys/include/backup.lib.php");
 
 $defaults = getSystemDefaults();
 $smarty -> assign("defaults",$defaults);
-
-?>

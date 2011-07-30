@@ -3,7 +3,7 @@
 function smarty_function_markup_percentage($params, &$smarty)
 {
 
-	
+
 	$subtotal_tax = 0;
 	$subtotal_total = 0;
 	foreach ($params['cost'] as $key=>$value)
@@ -15,11 +15,8 @@ function smarty_function_markup_percentage($params, &$smarty)
 			$subtotal_total = $value['gross_total'] + $subtotal_total;
 		}
 	}
-	$subtotal = round(($subtotal_tax/$subtotal_total)*100,0);	
-	//$subtotal = siLocal::number($subtotal);	
-	return htmlsafe($subtotal);	
+	$subtotal = round(($subtotal_tax/$subtotal_total)*100,0);
+	//$subtotal = siLocal::number($subtotal);
+	return htmlsafe($subtotal);
 
 }
-
-
-?>

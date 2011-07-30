@@ -31,11 +31,11 @@ $biller = getBiller($_GET['biller_id']);
 $customer = customer::get($_GET['customer_id']);
 
 #create PDF name
-      
+
 if ($_GET['stage'] == 2 ) {
 
 	#echo $block_stage2;
-	
+
 
 	#get the invoice id
 	$export = new export();
@@ -81,4 +81,3 @@ $smarty -> assign('preferences',$preference);
 
 $smarty -> assign('pageActive', 'report');
 $smarty -> assign('active_tab', '#home');
-?>

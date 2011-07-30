@@ -16,5 +16,3 @@ if ($_POST['action'] == "register") {
 
   die("Dude, this action is unknown to me!");
 }
-
-?>

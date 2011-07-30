@@ -42,7 +42,7 @@ WHERE
 GROUP BY
         c.id
 HAVING
-        inv_owing > 0 
+        inv_owing > 0
 ORDER BY
         inv_owing DESC;
    ";
@@ -55,4 +55,3 @@ ORDER BY
 
 $smarty -> assign('pageActive', 'report');
 $smarty -> assign('active_tab', '#home');
-?>

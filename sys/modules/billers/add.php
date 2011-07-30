@@ -37,5 +37,3 @@ $smarty->assign('save', $save);
 $smarty -> assign('pageActive', 'biller');
 $smarty -> assign('subPageActive', 'biller_add');
 $smarty -> assign('active_tab', '#people');
-
-?>

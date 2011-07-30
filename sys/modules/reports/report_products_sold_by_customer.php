@@ -16,4 +16,3 @@ require_once($include_dir . "sys/include/reportlib.php");
 
 $smarty -> assign('pageActive', 'report');
 $smarty -> assign('active_tab', '#home');
-?>
