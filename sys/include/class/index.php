@@ -20,6 +20,7 @@ class index
 
         global $db;
         global $auth_session;
+        global $dbh;
 
        # $subnode = "";
 
@@ -62,6 +63,7 @@ class index
 
         global $db;
         global $auth_session;
+        global $dbh;
         
         /*
         if ($sub_node !="") 
@@ -101,6 +103,7 @@ class index
 
         global $db;
         global $auth_session;
+        global $dbh;
         
         if ($sub_node !="")
         {

@@ -8,6 +8,7 @@ class expense
 
         global $db;
         global $auth_session;
+        global $dbh;
         
         $sql = "SELECT count(id) as count FROM ".TB_PREFIX."expense WHERE domain_id = :domain_id ORDER BY id";
         $sth = $db->query($sql,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
@@ -19,6 +20,7 @@ class expense
         
         global $db;
         global $auth_session;
+        global $dbh;
         
         $sql = "SELECT * FROM ".TB_PREFIX."expense WHERE domain_id = :domain_id ORDER BY id";
         $sth  = $db->query($sql,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
@@ -48,6 +50,7 @@ class expense
         
         global $db;
         global $auth_session;
+        global $dbh;
         
         $sql = "SELECT * FROM ".TB_PREFIX."expense WHERE domain_id = :domain_id and id = :id";
 		/*$sql = "SELECT

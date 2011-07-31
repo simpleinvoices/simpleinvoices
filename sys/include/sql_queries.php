@@ -256,6 +256,7 @@ function _invoice_check_fk($biller, $customer, $type, $preference) {
 	return true;
 }
 
+
 /*
  * _invoice_items_check_fk performs some manual FK checks on tables that the
  *     invoice items table refers to.   Under normal conditions, this function
@@ -1022,6 +1023,8 @@ Purpose: to show a nice summary of total $ for tax for an invoice
 */
 function numberOfTaxesForInvoice($invoice_id)
 {
+	global $dbh;
+	
 	$sql = "select
 				DISTINCT tax.tax_id
 			from ".TB_PREFIX."invoice_item_tax item_tax,
@@ -1048,6 +1051,8 @@ Purpose: to show a nice summary of total $ for tax for an invoice
 */
 function taxesGroupedForInvoice($invoice_id)
 {
+	global $dbh;
+	
 	$sql = "select
 				tax.tax_description as tax_name,
 				sum(item_tax.tax_amount) as tax_amount,
@@ -1077,6 +1082,8 @@ Purpose: to show a nice summary of total $ for tax for an invoice item - used fo
 */
 function taxesGroupedForInvoiceItem($invoice_item_id)
 {
+	global $dbh;
+	
 	$sql = "select
 				item_tax.id as row_id,
 				tax.tax_description as tax_name,
@@ -2631,7 +2638,8 @@ function sql2array($strSql) {
 
 
 function getNumberOfDoneSQLPatches() {
-
+	global $dbh;
+	
 	$check_patches_sql = "SELECT count(sql_patch) AS count FROM ".TB_PREFIX."sql_patchmanager ";
 	$sth = dbQuery($check_patches_sql) or die(htmlsafe(end($dbh->errorInfo())));
 

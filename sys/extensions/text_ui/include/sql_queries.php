@@ -1,6 +1,7 @@
 <?php
 class text_ui_invoice extends invoice {
     function getInvoiceItems($id) {
+    		global $dbh;
 
         $sql = "SELECT * FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :id";
         $sth = dbQuery($sql, ':id', $id);

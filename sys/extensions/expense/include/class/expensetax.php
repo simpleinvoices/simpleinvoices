@@ -6,6 +6,7 @@ class expensetax
     {
         
         global $db;
+        global $dbh;
         
         $sql = "SELECT * FROM ".TB_PREFIX."expense_item_tax WHERE  expense_id = :expense_id order by id";
         $sth  = $db->query($sql,':expense_id',$expense_id ) or die(htmlsafe(end($dbh->errorInfo())));
@@ -18,6 +19,7 @@ class expensetax
     {
         
         global $db;
+        global $dbh;
         
         $sql = "SELECT sum(tax_amount) as sum FROM ".TB_PREFIX."expense_item_tax WHERE  expense_id = :expense_id order by id";
         $sth  = $db->query($sql,':expense_id',$expense_id ) or die(htmlsafe(end($dbh->errorInfo())));
@@ -28,6 +30,8 @@ class expensetax
 
     function grouped($expense_id)
     {
+    		global $dbh;
+    		
         $sql = "select 
                     t.tax_description as tax_name, 
                     sum(et.tax_amount) as tax_amount,

@@ -6,8 +6,9 @@ class cronlog {
 
 	public function insert()
 	{
-        	global $db;
-        	global $auth_session;
+  	global $db;
+  	global $auth_session;
+  	global $dbh;
 
 		$domain_id = domain_id::get($this->domain_id);
 
@@ -35,7 +36,8 @@ class cronlog {
 
 	public function check()
 	{
-        	global $db;
+  	global $db;
+  	global $dbh;
 		
 		$domain_id = domain_id::get($this->domain_id);
 

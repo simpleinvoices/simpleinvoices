@@ -8,7 +8,7 @@ class customer
         
         global $db;
         global $auth_session;
-        
+        global $dbh;
         
         $sql = "SELECT * FROM ".TB_PREFIX."customers WHERE domain_id = :domain_id and id = :id";
         $sth = $db->query($sql,':domain_id', $auth_session->domain_id, ':id', $id ) or die(htmlsafe(end($dbh->errorInfo())));

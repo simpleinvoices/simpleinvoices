@@ -14,7 +14,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 	global $config;
 	global $auth_session;
 	global $LANG;
-
+	global $dbh;
 
 	//SC: Safety checking values that will be directly subbed in
 	if (intval($start) != $start) {

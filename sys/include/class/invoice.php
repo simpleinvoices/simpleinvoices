@@ -154,7 +154,8 @@ class invoice {
     {
 		global $logger;
 		global $db;
-	    global $auth_session;
+    global $auth_session;
+    global $dbh;
 
 		$sql = "SELECT 
                     i.*,
@@ -232,6 +233,7 @@ class invoice {
     {
         global $config;
         global $auth_session;
+        global $dbh;
 
         if(empty($having))
         {
@@ -432,6 +434,8 @@ class invoice {
 	public static function getInvoiceItems($id) {
 	
 		global $logger;
+		global $dbh;
+		
 		$sql = "SELECT * FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :id order by id";
 		$sth = dbQuery($sql, ':id', $id);
 		

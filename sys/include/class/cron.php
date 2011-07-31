@@ -9,6 +9,7 @@ class cron {
 	{
         	global $db;
         	global $auth_session;
+        	global $dbh;
 
 		$domain_id = domain_id::get($this->domain_id);
 		$today = date('Y-m-d');
@@ -51,6 +52,7 @@ class cron {
 	public function update()
 	{
         	global $db;
+        	global $dbh;
 
 		$domain_id = domain_id::get($this->domain_id);
         
@@ -93,6 +95,8 @@ class cron {
 	{
 		global $LANG;
 		global $db;
+		global $dbh;
+		
 		/*SQL Limit - start*/
 		$start = (($page-1) * $rp);
 		$limit = "LIMIT ".$start.", ".$rp;
@@ -153,6 +157,7 @@ class cron {
 	{
 		global $LANG;
 		global $db;
+		global $dbh;
 
 		$sql = "SELECT
 				cron.* ,

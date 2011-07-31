@@ -6,13 +6,14 @@ class inventory {
 
 	public function insert()
 	{
-        	global $db;
-        	global $auth_session;
+    	global $db;
+    	global $auth_session;
+    	global $dbh;
 
-		$domain_id = domain_id::get($this->domain_id);
+			$domain_id = domain_id::get($this->domain_id);
 
         
-	        $sql = "INSERT INTO ".TB_PREFIX."inventory (
+      $sql = "INSERT INTO ".TB_PREFIX."inventory (
 				domain_id,
 				product_id,
 				quantity,
@@ -42,11 +43,12 @@ class inventory {
 
 	public function update()
 	{
-        	global $db;
+    	global $db;
+    	global $dbh;
 
-		$domain_id = domain_id::get($this->domain_id);
+			$domain_id = domain_id::get($this->domain_id);
         
-	        $sql = "UPDATE 
+      $sql = "UPDATE 
 				".TB_PREFIX."inventory
 			SET 
 				product_id = :product_id,
@@ -81,6 +83,8 @@ class inventory {
 	{
 		global $LANG;
 		global $db;
+		global $dbh;
+		
 		/*SQL Limit - start*/
 		$start = (($page-1) * $rp);
 		$limit = "LIMIT ".$start.", ".$rp;
@@ -144,6 +148,7 @@ class inventory {
 	{
 		global $LANG;
 		global $db;
+		global $dbh;
 
 		$sql = "SELECT
 				iv.*,

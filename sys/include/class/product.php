@@ -5,8 +5,9 @@ class product
     public static function count()
     {
 
-        global $db;
+ 	       global $db;
          global $auth_session;
+         global $dbh;
  
          $sql = "SELECT count(id) as count FROM ".TB_PREFIX."products WHERE domain_id = :domain_id ORDER BY id";
          $sth  = $db->query($sql,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
@@ -20,6 +21,7 @@ class product
 
          global $auth_session;
          global $db;
+         global $dbh;
  
          $sql = "SELECT * FROM ".TB_PREFIX."products WHERE domain_id = :domain_id and visible = 1 ORDER BY id";
          $sth  = $db->query($sql,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
@@ -33,6 +35,7 @@ class product
 
          global $auth_session;
          global $db;
+         global $dbh;
  
          $sql = "SELECT * FROM ".TB_PREFIX."products WHERE domain_id = :domain_id and id = :id";
          $sth  = $db->query($sql,':domain_id',$auth_session->domain_id, ':id',$id) or die(htmlsafe(end($dbh->errorInfo())));
@@ -46,6 +49,7 @@ class product
         global $config;
         global $LANG;
         global $auth_session;
+        global $dbh;
         
         //SC: Safety checking values that will be directly subbed in
         if (intval($start) != $start) {

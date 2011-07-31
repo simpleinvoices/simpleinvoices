@@ -10,8 +10,9 @@ require($include_dir . 'sys/include/sql_patches.php');
 $db = new db();
 function getNumberOfDonePatches() {
 
-
-    $db = new db();
+	global $dbh;
+	
+  $db = new db();
 	$check_patches_sql = "SELECT count(sql_patch) AS count FROM ".TB_PREFIX."sql_patchmanager ";
 	$sth = $db->query($check_patches_sql) or die(htmlsafe(end($dbh->errorInfo())));
 
@@ -177,7 +178,7 @@ EOD;
 
 
 function check_sql_patch($check_sql_patch_ref, $check_sql_patch_field) {
-
+		global $dbh;
     $db = new db();
    	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager WHERE sql_patch_ref = :patch" ;
 

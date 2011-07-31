@@ -54,12 +54,13 @@ class payment_type
 
 	public function insert()
 	{
-        	global $db;
-        	global $auth_session;
+  	global $db;
+  	global $auth_session;
+  	global $dbh;
 
 		$domain_id = domain_id::get($this->domain_id);
         
-	        $sql = "INSERT INTO ".TB_PREFIX."payment_types (
+    $sql = "INSERT INTO ".TB_PREFIX."payment_types (
 				pt_description,
 				pt_enabled,
 				domain_id
