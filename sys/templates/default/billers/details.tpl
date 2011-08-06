@@ -72,6 +72,10 @@ n Script: details.tpl
 		<td>{$biller.email}</td>
 	</tr>
 	<tr>
+		<td class="details_screen">{$LANG.tax_id}</td>
+		<td>{$biller.tax_id}</td>
+	</tr>
+	<tr>
 		<td class="details_screen">{$LANG.paypal_business_name}</td>
 		<td>{$biller.paypal_business_name}</td>
 	</tr>

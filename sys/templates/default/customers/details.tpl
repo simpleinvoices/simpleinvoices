@@ -91,6 +91,11 @@
 		<td class="details_screen">{$LANG.email}</td>
 		<td>{$customer.email|htmlsafe}</td>
 	</tr>
+	<tr>
+		<td class="details_screen">{$LANG.tax_id}</td>
+		<td>{$customer.tax_id|htmlsafe}</td>
+		<td colspan="2"></td>
+	</tr>
 </table>
 <br />
 <div id="tabs_customer">
