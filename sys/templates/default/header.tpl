@@ -49,18 +49,16 @@
 	<link rel="stylesheet" type="text/css" href="{/literal}{$include_dir}{literal}sys/include/jquery/cluetip/jquery.cluetip.css" />
 	<link rel="stylesheet" type="text/css" href="{/literal}{$include_dir}{literal}sys/templates/default/css/jquery-ui/default.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="{/literal}{$include_dir}{literal}sys/templates/default/css/phpreports.css" media="all"/>
+
+	<script type="text/javascript" src="{/literal}{$include_dir}{literal}sys/include/jquery/jquery.validationEngine.js"></script>
+  <!-- Javascript for Flot Graphs -->
+  <script type="text/javascript" src="{/literal}{$include_dir}{literal}lib/flot/jquery.flot.js"></script>
+	
 	{/literal}
 	{if $config->debug->level == "All"}
 	<link rel="stylesheet" type="text/css" href="{$include_dir}lib/blackbirdjs/blackbird.css" />	
 	<script type="text/javascript" src="{$include_dir}lib/blackbirdjs/blackbird.js"></script>
 	{/if}
-	{literal}
-	<script type="text/javascript" src="{/literal}{$include_dir}{literal}sys/include/jquery/jquery.validationEngine.js"></script>
-    {/literal}
-    <!-- Javascript for Flot Graphs -->
-    {literal}
-    <script type="text/javascript" src="{/literal}{$include_dir}{literal}lib/flot/jquery.flot.js"></script>
-    {/literal}
 
 </head>
 <body>
