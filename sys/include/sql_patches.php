@@ -1491,6 +1491,14 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['254']['name'] = "Create unique index on user email, duplicate email addresses are not allowed as username";
     $patch['254']['patch'] = "CREATE UNIQUE INDEX ref_idx_email on ".TB_PREFIX."user (email) ;";  
     $patch['254']['date'] = "20100913";
+    
+    $patch['255']['name'] = "Add a Tax ID field to the billers table";
+    $patch['255']['patch'] = "ALTER TABLE ".TB_PREFIX."biller ADD tax_id VARCHAR(16) AFTER `name`;";
+    $patch['255']['date'] = "20110806";
+    
+    $patch['256']['name'] = "Add a Tax ID field to the customers table";
+    $patch['256']['patch'] = "ALTER TABLE ".TB_PREFIX."customers ADD tax_id VARCHAR(16) AFTER `name`;";
+    $patch['256']['date'] = "20110806";
 /*
 ** comment out so can get beta of 2010.3 - to be added in later 
     $patch['253']['name'] = "Insert invoice_creator user group";

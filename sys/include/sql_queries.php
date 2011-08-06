@@ -257,6 +257,7 @@ function _invoice_check_fk($biller, $customer, $type, $preference) {
 }
 
 
+
 /*
  * _invoice_items_check_fk performs some manual FK checks on tables that the
  *     invoice items table refers to.   Under normal conditions, this function
@@ -1244,7 +1245,7 @@ function insertBiller() {
 	if ($db_server == 'pgsql') {
 		$sql = "INSERT into
 			".TB_PREFIX."biller (
-				domain_id, name, street_address, street_address2, city,
+				domain_id, name, tax_id, street_address, street_address2, city,
 				state, zip_code, country, phone, mobile_phone,
 				fax, email, logo, footer, notes, custom_field1,
 				custom_field2, custom_field3, custom_field4,
@@ -1252,7 +1253,7 @@ function insertBiller() {
 			)
 		VALUES
 			(
-				:domain_id, :name, :street_address, :street_address2, :city,
+				:domain_id, :name, :tax_id, :street_address, :street_address2, :city,
 				:state, :zip_code, :country, :phone,
 				:mobile_phone, :fax, :email, :logo, :footer,
 				:notes, :custom_field1, :custom_field2,
@@ -1262,7 +1263,7 @@ function insertBiller() {
 		$sql = "INSERT into
 			".TB_PREFIX."biller
 			(
-				id, domain_id, name, street_address, street_address2, city,
+				id, domain_id, name, tax_id, street_address, street_address2, city,
 				state, zip_code, country, phone, mobile_phone,
 				fax, email, logo, footer, paypal_business_name,
 				paypal_notify_url, paypal_return_url, eway_customer_id, notes, custom_field1,
@@ -1275,6 +1276,7 @@ function insertBiller() {
 				NULL,
 				:domain_id,
 				:name,
+				:tax_id,
 				:street_address,
 				:street_address2,
 				:city,
@@ -1303,6 +1305,7 @@ function insertBiller() {
 
 	return dbQuery($sql,
 		':name', $_POST['name'],
+		':tax_id', $_POST['tax_id'],
 		':street_address', $_POST['street_address'],
 		':street_address2', $_POST['street_address2'],
 		':city', $_POST['city'],
@@ -1344,6 +1347,7 @@ function updateBiller() {
 				".TB_PREFIX."biller
 			SET
 				name = :name,
+				tax_id = :tax_id,
 				street_address = :street_address,
 				street_address2 = :street_address2,
 				city = :city,
@@ -1370,6 +1374,7 @@ function updateBiller() {
 				id = :id";
 	return dbQuery($sql,
 		':name', $_POST['name'],
+		':tax_id', $_POST['tax_id'],
 		':street_address', $_POST['street_address'],
 		':street_address2', $_POST['street_address2'],
 		':city', $_POST['city'],
@@ -1420,6 +1425,7 @@ function updateCustomer() {
                                 ".TB_PREFIX."customers
                         SET
                                 name = :name,
+                                tax_id = :tax_id,
                                 attention = :attention,
                                 street_address = :street_address,
                                 street_address2 = :street_address2,
@@ -1446,6 +1452,7 @@ function updateCustomer() {
 
         return $db->query($sql,
                 ':name', $_POST['name'],
+                ':tax_id', $_POST['tax_id'],
                 ':attention', $_POST['attention'],
                 ':street_address', $_POST['street_address'],
                 ':street_address2', $_POST['street_address2'],
@@ -1477,6 +1484,7 @@ function updateCustomer() {
 				".TB_PREFIX."customers
 			SET
 				name = :name,
+				tax_id = :tax_id,
 				attention = :attention,
 				street_address = :street_address,
 				street_address2 = :street_address2,
@@ -1503,6 +1511,7 @@ function updateCustomer() {
 
 	return $db->query($sql,
 		':name', $_POST['name'],
+		':tax_id', $_POST['tax_id'],
 		':attention', $_POST['attention'],
 		':street_address', $_POST['street_address'],
 		':street_address2', $_POST['street_address2'],
@@ -1536,7 +1545,7 @@ function insertCustomer() {
 	$sql = "INSERT INTO
 			".TB_PREFIX."customers
 			(
-				domain_id, attention, name, street_address, street_address2,
+				domain_id, attention, name, tax_id, street_address, street_address2,
 				city, state, zip_code, country, phone, mobile_phone,
 				fax, email, notes,
 				credit_card_holder_name, credit_card_number,
@@ -1546,7 +1555,7 @@ function insertCustomer() {
 			)
 			VALUES
 			(
-				:domain_id ,:attention, :name, :street_address, :street_address2,
+				:domain_id ,:attention, :name, :tax_id, :street_address, :street_address2,
 				:city, :state, :zip_code, :country, :phone, :mobile_phone,
 				:fax, :email, :notes,
 				:credit_card_holder_name, :credit_card_number,
@@ -1562,6 +1571,7 @@ function insertCustomer() {
 	return dbQuery($sql,
 		':attention', $attention,
 		':name', $name,
+		':tax_id', $tax_id,
 		':street_address', $street_address,
 		':street_address2', $street_address2,
 		':city', $city,

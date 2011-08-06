@@ -81,6 +81,10 @@
 		<td><input type="text" name="email" value="{$smarty.post.email|htmlsafe}" size="25" /></td>
 	</tr>
 	<tr>
+		<td class="details_screen">{$LANG.tax_id}</td>
+		<td><input type="text" name="tax_id" value="{$smarty.post.tax_id|htmlsafe}" size="25" /></td>
+	</tr>
+	<tr>
 		<td class="details_screen">{$LANG.paypal_business_name}</td>
 		<td><input type="text" name="paypal_business_name" value="{$smarty.post.paypal_business_name|htmlsafe}" size="25" /></td>
 	</tr>

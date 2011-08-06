@@ -65,14 +65,14 @@ class customer
 		$sql = "INSERT INTO 
 				".TB_PREFIX."customers
 				(
-					domain_id, attention, name, street_address, street_address2,
+					domain_id, attention, name, tax_id, street_address, street_address2,
 					city, state, zip_code, country, phone, mobile_phone,
 					fax, email, notes, custom_field1, custom_field2,
 					custom_field3, custom_field4, enabled
 				)
 				VALUES 
 				(
-					:domain_id ,:attention, :name, :street_address, :street_address2,
+					:domain_id ,:attention, :name, :tax_id, :street_address, :street_address2,
 					:city, :state, :zip_code, :country, :phone, :mobile_phone,
 					:fax, :email, :notes, :custom_field1, :custom_field2,
 					:custom_field3, :custom_field4, :enabled
@@ -81,6 +81,7 @@ class customer
 		return $db->query($sql,
 			':attention', $this->attention,
 			':name', $this->name,
+			':tax_id', $this->tax_id,
 			':street_address', $this->street_address,
 			':street_address2', $this->street_address2,
 			':city', $this->city,

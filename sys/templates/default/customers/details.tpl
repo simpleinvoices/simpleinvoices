@@ -322,6 +322,10 @@
 			<input type="text" name="email" value="{$customer.email|htmlsafe}" size="50" /></td
 	></tr>
 	<tr>
+		<td class="details_screen">{$LANG.tax_id}</td>
+		<td><input type="text" name="tax_id" value="{$customer.tax_id|htmlsafe}" size="25" /></td>
+	</tr>
+	<tr>
 		<td class="details_screen">{$LANG.credit_card_holder_name}</td>
 		<td>
 			<input

@@ -253,6 +253,10 @@ n Script: details.tpl
 		<td><input type="text" name="email" value="{$biller.email|htmlsafe}" size="50" /></td>
 	</tr>
 	<tr>
+		<td class="details_screen">{$LANG.tax_id}</td>
+		<td><input type="text" name="tax_id" value="{$biller.tax_id|htmlsafe}" size="25" /></td>
+	</tr>
+	<tr>
 		<td class="details_screen">{$LANG.paypal_business_name}</td>
 		<td><input type="text" name="paypal_business_name" value="{$biller.paypal_business_name|htmlsafe}" size="25" /></td>
 	</tr>
