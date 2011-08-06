@@ -118,7 +118,9 @@
 	</tr>	
 	<tr class="details_screen biller">
 		<td class="details_screen">{$LANG.email}:</td>
-		<td class="details_screen" colspan="5">{$biller.email|htmlsafe}</td>
+		<td class="details_screen" colspan="3">{$biller.email|htmlsafe}</td>
+		<td class="details_screen">{$LANG.tax_id}:</td>
+		<td class="details_screen">{$biller.tax_id|htmlsafe}</td>
 	</tr>	
 	<tr class="details_screen biller">
 		<td class="details_screen">{$customFieldLabels.biller_cf1|htmlsafe}:</td>
@@ -182,8 +184,10 @@
 	</tr>	
 	<tr class="details_screen customer">
 		<td class="details_screen">{$LANG.email}:</td>
-		<td class="details_screen"colspan="5">{$customer.email|htmlsafe}</td>
-	</tr>	
+		<td class="details_screen"colspan="3">{$customer.email|htmlsafe}</td>
+		<td class="details_screen">{$LANG.tax_id}:</td>
+		<td class="details_screen">{$customer.tax_id|htmlsafe}</td>
+	</tr>
 	<tr class="details_screen customer">
 		<td class="details_screen">{$customFieldLabels.customer_cf1}:</td>
 		<td colspan="5" class="details_screen">{$customer.custom_field1|htmlsafe}</td>
