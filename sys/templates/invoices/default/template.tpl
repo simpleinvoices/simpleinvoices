@@ -119,6 +119,7 @@
 	{print_if_not_null label=$LANG.fax field=$biller.fax class1='' class2='' colspan="3"}
 	{print_if_not_null label=$LANG.mobile_short field=$biller.mobile_phone class1='' class2='' colspan="3"}
 	{print_if_not_null label=$LANG.email field=$biller.email class1='' class2='' colspan="3"}
+	{print_if_not_null label=$LANG.tax_id field=$biller.tax_id class1='' class2='' colspan="3"}
 	
 	{print_if_not_null label=$customFieldLabels.biller_cf1 field=$biller.custom_field1 class1='' class2='' colspan="3"}
 	{print_if_not_null label=$customFieldLabels.biller_cf2 field=$biller.custom_field2 class1='' class2='' colspan="3"}
@@ -181,6 +182,7 @@
 	{print_if_not_null label=$LANG.fax field=$customer.fax class1='' class2='' colspan="3"}
 	{print_if_not_null label=$LANG.mobile_short field=$customer.mobile_phone class1='' class2='' colspan="3"}
 	{print_if_not_null label=$LANG.email field=$customer.email class1='' class2='' colspan="3"}
+	{print_if_not_null label=$LANG.tax_id field=$customer.tax_id class1='' class2='' colspan="3"}
 	
 	{print_if_not_null label=$customFieldLabels.customer_cf1 field=$customer.custom_field1 class1='' class2='' colspan="3"}
 	{print_if_not_null label=$customFieldLabels.customer_cf2 field=$customer.custom_field2 class1='' class2='' colspan="3"}

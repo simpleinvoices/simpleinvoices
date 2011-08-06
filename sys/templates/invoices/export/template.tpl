@@ -133,12 +133,18 @@
 				<td colspan="3">{$biller.mobile_phone|htmlsafe}</td>
 		</tr>
    		{/if}
-        {if $biller.email != null }
+      {if $biller.email != null }
         <tr>
                 <td >{$LANG.email}:</td>
 				<td colspan="3">{$biller.email|htmlsafe}</td>
         </tr>
-		{/if}
+			{/if}
+			{if $biller.tax_id != null }
+        <tr>
+		      <td >{$LANG.tax_id}:</td>
+					<td colspan="3">{$biller.tax_id|htmlsafe}</td>
+        </tr>
+			{/if}
         {if $biller.custom_field1 != null }
         <tr>
                 <td >{$customFieldLabels.biller_cf1|htmlsafe}:</td>
@@ -236,12 +242,18 @@
 						<td  colspan="3">{$customer.mobile_phone|htmlsafe}</td>
                 </tr>
        		{/if}
-            {if $customer.email != null }
-                <tr>
-                        <td >{$LANG.email}:</td>
-						<td  colspan="3">{$customer.email|htmlsafe}</td>
-                </tr>
-			{/if}
+          {if $customer.email != null }
+            <tr>
+              <td >{$LANG.email}:</td>
+							<td  colspan="3">{$customer.email|htmlsafe}</td>
+            </tr>
+					{/if}
+					{if $customer.tax_id != null }
+            <tr>
+              <td >{$LANG.tax_id}:</td>
+							<td  colspan="3">{$customer.tax_id|htmlsafe}</td>
+            </tr>
+					{/if}
         	{if $customer.custom_field1 != null }
                 <tr>
                         <td >{$customFieldLabels.customer_cf1|htmlsafe}:</td>
