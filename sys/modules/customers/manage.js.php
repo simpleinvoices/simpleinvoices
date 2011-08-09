@@ -13,11 +13,11 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			var columns = 6;
 			var padding = 12;
 			var grid_width = $('.col').width();
-			
+
 			grid_width = grid_width - (columns * padding);
-			percentage_width = grid_width / 100; 
-		
-			
+			percentage_width = grid_width / 100;
+
+
 			$('#manageGrid').flexigrid
 			(
 			{
@@ -25,13 +25,13 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			dataType: 'xml',
 			colModel : [
 				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
-				{display: '{/literal}{$LANG.name}{literal}', name : 'name', width : 50 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.name}{literal}', name : 'name', width : 40 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.customer_contact}{literal}', name : 'contact_person', width : 20 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.total}{literal}', name : 'customer_total', width : 10 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.owing}{literal}', name : 'owing', width : 10 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'}
-				
+				{display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled', width : 10 * percentage_width, sortable : true, align: 'left'}
 				],
-				
+
 
 			searchitems : [
 				{display: '{/literal}{$LANG.id}{literal}', name : 'id'},

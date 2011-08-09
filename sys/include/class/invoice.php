@@ -1,6 +1,6 @@
 <?php
 class invoice {
-	
+
     public $start_date;
     public $end_date;
     public $having;
@@ -19,18 +19,18 @@ class invoice {
 		global $dbh;
 		global $db_server;
 		global $auth_session;
-		
-		$sql = "INSERT 
+
+		$sql = "INSERT
 				INTO
 			".TB_PREFIX."invoices (
-				id, 
+				id,
 		 		index_id,
 				domain_id,
-				biller_id, 
-				customer_id, 
+				biller_id,
+				customer_id,
 				type_id,
-				preference_id, 
-				date, 
+				preference_id,
+				date,
 				note,
 				custom_field1,
 				custom_field2,
@@ -79,7 +79,7 @@ class invoice {
 	    return lastInsertID();
 		//insert into si_invoice_items
 
-		//insert into 
+		//insert into
 
 	}
 
@@ -106,27 +106,27 @@ class invoice {
             $invoice_id, $product_id, $tax['tax_id'])) {
             return null;
         }
-	
-		$sql = "INSERT INTO ".TB_PREFIX."invoice_items 
+
+		$sql = "INSERT INTO ".TB_PREFIX."invoice_items
 				(
-					invoice_id, 
-					quantity, 
-					product_id, 
-					unit_price, 
-					tax_amount, 
-					gross_total, 
-					description, 
+					invoice_id,
+					quantity,
+					product_id,
+					unit_price,
+					tax_amount,
+					gross_total,
+					description,
 					total
-				) 
-				VALUES 
+				)
+				VALUES
 				(
-					:invoice_id, 
-					:quantity, 
-					:product_id, 
-					:unit_price, 
-					:tax_amount, 
-					:gross_total, 
-					:description, 
+					:invoice_id,
+					:quantity,
+					:product_id,
+					:unit_price,
+					:tax_amount,
+					:gross_total,
+					:description,
 					:total
 				)";
 
@@ -157,20 +157,20 @@ class invoice {
     global $auth_session;
     global $dbh;
 
-		$sql = "SELECT 
+		$sql = "SELECT
                     i.*,
-		            i.date as date_original, 
+		            i.date as date_original,
                     (SELECT CONCAT(p.pref_inv_wording,' ',i.index_id)) as index_name,
                     p.pref_inv_wording AS preference,
                     p.status
-                FROM 
-                    ".TB_PREFIX."invoices i, 
-                    ".TB_PREFIX."preferences p 
-                WHERE 
-                    i.domain_id = :domain_id 
+                FROM
+                    ".TB_PREFIX."invoices i,
+                    ".TB_PREFIX."preferences p
+                WHERE
+                    i.domain_id = :domain_id
                     and
                     i.preference_id = p.pref_id
-                    and 
+                    and
                     i.id = :id";
 		$sth = $db->query($sql, ':id', $id, ':domain_id', $auth_session->domain_id);
 
@@ -191,11 +191,11 @@ class invoice {
 	$result2 = $sth2->fetch();
 	//$invoice['total'] = number_format($result['total'],2);
 	$invoice['total_tax'] = $result2['total_tax'];
-		
+
 	$invoice['tax_grouped'] = taxesGroupedForInvoice($id);
-	
+
 	return $invoice;
-    
+
 	}
 
     public static function get_all()
@@ -203,24 +203,24 @@ class invoice {
 		global $logger;
 	    global $auth_session;
 
-		$sql = "SELECT 
+		$sql = "SELECT
                     i.id as id,
                     (SELECT CONCAT(p.pref_inv_wording,' ',i.index_id)) as index_name
-                FROM 
-                    ".TB_PREFIX."invoices i, 
-                    ".TB_PREFIX."preferences p 
-                WHERE 
-                    i.domain_id = :domain_id 
+                FROM
+                    ".TB_PREFIX."invoices i,
+                    ".TB_PREFIX."preferences p
+                WHERE
+                    i.domain_id = :domain_id
                     and
                     i.preference_id = p.pref_id
-                order by 
+                order by
                     index_name";
 		$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 
         return $sth->fetchAll();
 
     }
-    
+
     function select_customer_id($email='')
     {
      $sql = "select id from ".TB_PREFIX."customers where email=:email";
@@ -252,14 +252,14 @@ class invoice {
         /*SQL where - start*/
         $query = $this->query;
         $qtype = $this->qtype;
-      
+
         $where = " WHERE iv.domain_id = :domain_id ";
         if ($query) $where = " WHERE iv.domain_id = :domain_id AND $qtype LIKE '%$query%' ";
         if ($this->biller) $where .= " AND b.id = '$this->biller' ";
         if ($this->customer) $where .= " AND c.id = '$this->customer' ";
         if ($this->where_field) $where .= " AND $this->where_field = '$this->where_value' ";
         /*SQL where - end*/
-	
+
 
         /*Check that the sort field is OK*/
         $validFields = array('index_name','iv.id', 'biller', 'customer', 'invoice_total','owing','date','aging','type','preference','type_id','inv_status');
@@ -276,8 +276,8 @@ class invoice {
             $limit="";
         }
 
-        switch ($having) 
-        {   
+        switch ($having)
+        {
             case "date_between":
                 $sql_having = "HAVING date between '$this->start_date' and '$this->end_date'";
                 break;
@@ -295,8 +295,8 @@ class invoice {
                 break;
         }
 
-        switch ($having_and) 
-        {   
+        switch ($having_and)
+        {
             case "date_between":
                 $sql_having .= " AND ( date between '$this->start_date' and '$this->end_date' )";
                 break;
@@ -314,8 +314,8 @@ class invoice {
                 break;
         }
 
-        switch ($having_and2) 
-        {   
+        switch ($having_and2)
+        {
             case "date_between":
                 $sql_having .= " AND ( date between '$this->start_date' and '$this->end_date' )";
                 break;
@@ -332,7 +332,7 @@ class invoice {
                 $sql_having .= " AND ( status = 1 )";
                 break;
         }
-        
+
         switch ($config->database->adapter)
         {
             case "pdo_pgsql":
@@ -342,6 +342,7 @@ class invoice {
                      iv.index_id as index_id,
                      iv.inv_status as inv_status,
                      b.name AS Biller,
+                     c.attention AS Customer_attention,
                      c.name AS Customer,
                      sum(ii.total) AS INV_TOTAL,
                      coalesce(SUM(ap.ac_amount), 0)  AS INV_PAID,
@@ -374,11 +375,12 @@ class invoice {
             case "pdo_mysql":
             default:
                $sql ="
-                SELECT  
-                       iv.id,       
+                SELECT
+                       iv.id,
                        iv.index_id as index_id,
 	        	      -- iv.inv_status as inv_status,
                        b.name AS biller,
+                       c.attention AS customer_attention,
                        c.name AS customer,
                        (SELECT coalesce(SUM(ii.total), 0) FROM " .
                 TB_PREFIX . "invoice_items ii WHERE ii.invoice_id = iv.id) AS invoice_total,
@@ -410,7 +412,7 @@ class invoice {
                 $limit";
                 break;
         }
-        
+
         $result =  dbQuery($sql,':domain_id', $auth_session->domain_id) or die(end($dbh->errorInfo()));
         return $result;
     }
@@ -432,26 +434,26 @@ class invoice {
     }
 
 	public static function getInvoiceItems($id) {
-	
+
 		global $logger;
 		global $dbh;
-		
+
 		$sql = "SELECT * FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :id order by id";
 		$sth = dbQuery($sql, ':id', $id);
-		
+
 		$invoiceItems = null;
-		
+
 		for($i=0;$invoiceItem = $sth->fetch();$i++) {
-		
+
 			$invoiceItem['quantity'] = $invoiceItem['quantity'];
 			$invoiceItem['unit_price'] = $invoiceItem['unit_price'];
 			$invoiceItem['tax_amount'] = $invoiceItem['tax_amount'];
 			$invoiceItem['gross_total'] = $invoiceItem['gross_total'];
 			$invoiceItem['total'] = $invoiceItem['total'];
-			
+
 			$sql = "SELECT * FROM ".TB_PREFIX."products WHERE id = :id";
 			$tth = dbQuery($sql, ':id', $invoiceItem['product_id']) or die(htmlsafe(end($dbh->errorInfo())));
-			$invoiceItem['product'] = $tth->fetch();	
+			$invoiceItem['product'] = $tth->fetch();
 
 			$tax = taxesGroupedForInvoiceItem($invoiceItem['id']);
 
@@ -462,14 +464,14 @@ class invoice {
 			}
 			$invoiceItems[$i] = $invoiceItem;
 		}
-		
+
 		return $invoiceItems;
 	}
-    
+
 
     /**
     * Function: are_there_any
-    * 
+    *
     * Used to see if there are any invoices in the database for a given domain
     **/
     public static function are_there_any()
@@ -485,12 +487,12 @@ class invoice {
 
     /**
     * Function getInvoiceGross
-    * 
+    *
     * Used to get the gross total for a given invoice number
     **/
     public static function getInvoiceGross($invoice_id) {
         global $LANG;
-        
+
         $sql ="SELECT SUM(gross_total) AS gross_total FROM ".TB_PREFIX."invoice_items WHERE invoice_id =  :invoice_id";
         $sth = dbQuery($sql, ':invoice_id', $invoice_id);
         $res = $sth->fetch();
@@ -499,7 +501,7 @@ class invoice {
     }
     /**
     * Function invoice::max
-    * 
+    *
     * Used to get the max invoice id
     **/
     public static function max() {
@@ -551,7 +553,7 @@ class invoice {
 			$nii->tax=$invoice['invoice_items'][$key]['tax'];
 			$nii_id = $nii->insert_item();
 		}
-		
+
 		return $ni_id;
 	}
 }

@@ -22,9 +22,9 @@ $pdf_dir = isset($pdf_dir) ? $pdf_dir : '../../../' . $app;
 
 
 //PDF configs
-define('CACHE_DIR', HTML2PS_DIR . $pdf_dir . '/tmp/cache/');
-define('OUTPUT_FILE_DIRECTORY', HTML2PS_DIR . $pdf_dir . '/tmp/cache/');
-define('WRITER_TEMPDIR', HTML2PS_DIR . $pdf_dir . '/tmp/cache');
+define('CACHE_DIR', $pdf_dir . '/tmp/cache/');
+define('OUTPUT_FILE_DIRECTORY', $pdf_dir . '/tmp/cache/');
+define('WRITER_TEMPDIR', $pdf_dir . '/tmp/cache');
 
 /*
 * The include configs and requirements stuff section - start
@@ -43,10 +43,10 @@ global $cust_language;
 
 $module = isset($_GET['module']) ? filenameEscape($_GET['module']) : null;
 $view   = isset($_GET['view'])  ? filenameEscape($_GET['view'])    : null;
-$action = isset($_GET['case'])  ? filenameEscape($_GET['case'])    : null;  
+$action = isset($_GET['case'])  ? filenameEscape($_GET['case'])    : null;
 
 if (!isset($cust_language)) {
-    $cust_language =  isset($_GET['lang'])  ? filenameEscape($_GET['lang'])    : null;                                                                               
+    $cust_language =  isset($_GET['lang'])  ? filenameEscape($_GET['lang'])    : null;
 }
 
 require_once("sys/include/init.php");
@@ -84,22 +84,22 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 	include_once('sys/modules/options/database_sqlpatches.php');
 	donePatches();
 } else {
-	
+
 	//check db structure - if only structure and no fields then prompt for imports
 	// 1 import essential data
     $skip_db_patches = false;
 	//$install_tables_exists = checkTableExists(TB_PREFIX."biller");
     if ( $install_tables_exists == false )
-    { 
+    {
 		$module="install";
 		//$view="index";
 		$view == "structure" ? $view ="structure" : $view="index";
         //do installer
         $skip_db_patches = true;
-		
+
     }
 	if ( ($install_tables_exists == true) AND ($install_data_exists == false) )
-    { 
+    {
 	    $module = "install";
 		$view == "essential" ? $view ="essential" : $view="structure";
 		//$view = "essential";
@@ -109,17 +109,17 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
     //count sql_patches
     // if 0 run import essential data
 	// 2 import sample data
-	//echo $skip_db_patches; 
+	//echo $skip_db_patches;
 	//if auth on must login before upgrade
     if ($skip_db_patches == false)
     {
-		if ( ($config->authentication->enabled == 1 AND isset($auth_session->id)) OR ($config->authentication->enabled == 0) )	
+		if ( ($config->authentication->enabled == 1 AND isset($auth_session->id)) OR ($config->authentication->enabled == 0) )
 		{
 			include_once('sys/modules/options/database_sqlpatches.php');
 			if (getNumberOfPatches() > 0 ) {
 				$view = "database_sqlpatches";
 				$module = "options";
-				
+
 				if($action == "run") {
 					runPatches();
 				} else {
@@ -127,12 +127,12 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 				}
 				$menu = false;
 			} else {
-				// JK-Manage Invoice now the default home page - old index page wasnt any good 
+				// JK-Manage Invoice now the default home page - old index page wasnt any good
                 // albert-depending on the user role it's the main menu or the customer menu'
                 // JK-this affects the page displayed - not the menu
 				if ($module==null)
 				{
-					//if ( invoice::are_there_any() > "0" ) 
+					//if ( invoice::are_there_any() > "0" )
 					$module = "invoices" ;
 					$view = "manage";
 
@@ -145,14 +145,14 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 
 
 /*
-* dont include the header if requested file is an invoice template - for print preview etc.. header is not needed 
+* dont include the header if requested file is an invoice template - for print preview etc.. header is not needed
 */
 
 if (($module == "invoices" ) && (strstr($view,"template"))) {
 
 
 		/*
-		* If extension is enabled load the extension php file for the module	
+		* If extension is enabled load the extension php file for the module
 		* Note: this system is probably slow - if you got a better method for handling extensions let me know
 		*/
 		$extensionInvoiceTemplateFile = 0;
@@ -160,12 +160,12 @@ if (($module == "invoices" ) && (strstr($view,"template"))) {
 		{
 			/*
 			* If extension is enabled then continue and include the requested file for that extension if it exists
-			*/	
+			*/
 			if($extension->enabled == "1")
 			{
 				//echo "Enabled:".$value['name']."<br><br>";
 				if(file_exists($include_dir . "sys/extensions/$extension->name/modules/invoices/template.php")) {
-			
+
 					include_once("sys/extensions/$extension->name/modules/invoices/template.php");
 					$extensionInvoiceTemplateFile++;
 				}
@@ -174,7 +174,7 @@ if (($module == "invoices" ) && (strstr($view,"template"))) {
 		/*
 		* If no extension php file for requested file load the normal php file if it exists
 		*/
-		if( ($extensionInvoiceTemplateFile == 0) AND (file_exists($include_dir . "sys/modules/invoices/template.php")) ) 
+		if( ($extensionInvoiceTemplateFile == 0) AND (file_exists($include_dir . "sys/modules/invoices/template.php")) )
 		{
 			include_once("sys/modules/invoices/template.php");
 		}
@@ -188,16 +188,16 @@ if (($module == "invoices" ) && (strstr($view,"template"))) {
 */
 
 	if( strstr($module,"api") OR (strstr($view,"xml") OR (strstr($view,"ajax")) OR (strstr($view,"upload")) ) )
-	{	
+	{
 		$extensionXml = 0;
 		foreach($config->extension as $extension)
 		{
 			/*
 			* If extension is enabled then continue and include the requested file for that extension if it exists
-			*/	
+			*/
 			if($extension->enabled == "1")
 			{
-				if(file_exists($include_dir . "sys/extensions/$extension->name/modules/$module/$view.php")) 
+				if(file_exists($include_dir . "sys/extensions/$extension->name/modules/$module/$view.php"))
 				{
 					include("sys/extensions/$extension->name/modules/$module/$view.php");
 					$extensionXml++;
@@ -207,7 +207,7 @@ if (($module == "invoices" ) && (strstr($view,"template"))) {
 		/*
 		* If no extension php file for requested file load the normal php file if it exists
 		*/
-		if($extensionXml == 0) 
+		if($extensionXml == 0)
 		{
 			include("sys/modules/$module/$view.php");
 		}
@@ -225,8 +225,8 @@ $file= "$module/$view";
 * Prep the page - load the header stuff - start
 */
 
-	// To remove the js error due to multiple document.ready.function() 
-	// 	in jquery.datePicker.js, jquery.autocomplete.conf.js and jquery.accordian.js 
+	// To remove the js error due to multiple document.ready.function()
+	// 	in jquery.datePicker.js, jquery.autocomplete.conf.js and jquery.accordian.js
 	//	 without instances in manage pages - Ap.Muthu
 	/*
 	* TODO: fix the javascript or move datapicker to extjs to fix this hack - not nice
@@ -237,12 +237,12 @@ $file= "$module/$view";
 * Note: this system is probably slow - if you got a better method for handling extensions let me know
 */
 	$extension_jquery_files = "";
-	
+
 	foreach($config->extension as $extension)
 	{
 		/*
 		* If extension is enabled then continue and include the requested file for that extension if it exists
-		*/	
+		*/
 		if($extension->enabled == "1")
 		{
 			if(file_exists($include_dir . "sys/extensions/$extension->name/include/jquery/$extension->name.jquery.ext.js")) {
@@ -250,14 +250,14 @@ $file= "$module/$view";
 			}
 		}
 	}
-	
+
 	$smarty -> assign("extension_jquery_files",$extension_jquery_files);
 /*
 * If extension is enabled load its javascript files	- end
 */
 
 /*
-* Header - start 
+* Header - start
 */
 if( !in_array($module."_".$view, $early_exit) )
 {
@@ -266,10 +266,10 @@ if( !in_array($module."_".$view, $early_exit) )
 		{
 			/*
 			* If extension is enabled then continue and include the requested file for that extension if it exists
-			*/	
+			*/
 			if($extension->enabled == "1")
 			{
-				if(file_exists($include_dir . "sys/extensions/$extension->name/templates/default/header.tpl")) 
+				if(file_exists($include_dir . "sys/extensions/$extension->name/templates/default/header.tpl"))
 				{
 					$smarty -> $smarty_output($smarty_include_dir . "sys/extensions/$extension->name/templates/default/header.tpl");
 
@@ -280,11 +280,11 @@ if( !in_array($module."_".$view, $early_exit) )
 		/*
 		* If no extension php file for requested file load the normal php file if it exists
 		*/
-		if($extensionHeader == 0) 
+		if($extensionHeader == 0)
 		{
 			$smarty -> $smarty_output($smarty_include_dir . 'sys/templates/default/header.tpl');
 		}
-		
+
 }
 /*
 * Prep the page - load the header stuff - end
@@ -295,9 +295,9 @@ if( !in_array($module."_".$view, $early_exit) )
 * Include the php file for the requested page section - start
 */
 
-	
+
 		/*
-		* If extension is enabled load the extension php file for the module	
+		* If extension is enabled load the extension php file for the module
 		* Note: this system is probably slow - if you got a better method for handling extensions let me know
 		*/
 		$extensionPHPFile = 0;
@@ -305,14 +305,14 @@ if( !in_array($module."_".$view, $early_exit) )
 		{
 			/*
 			* If extension is enabled then continue and include the requested file for that extension if it exists
-			*/	
+			*/
 			if($extension->enabled == "1")
 			{
 
 
 				//echo "Enabled:".$value['name']."<br><br>";
 				if(file_exists($include_dir . "sys/extensions/$extension->name/modules/$module/$view.php")) {
-			
+
 
 
 					include_once("sys/extensions/$extension->name/modules/$module/$view.php");
@@ -323,7 +323,7 @@ if( !in_array($module."_".$view, $early_exit) )
 		/*
 		* If no extension php file for requested file load the normal php file if it exists
 		*/
-		if( ($extensionPHPFile == 0) AND (file_exists($include_dir . "sys/modules/$module/$view.php")) ) 
+		if( ($extensionPHPFile == 0) AND (file_exists($include_dir . "sys/modules/$module/$view.php")) )
 		{
 			include_once("sys/modules/$module/$view.php");
 		}
@@ -336,7 +336,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 	exit(0);
 
 
-}	
+}
 
 /*
 * If extension is enabled load its post load javascript files	- start
@@ -348,20 +348,20 @@ if($module == "export" OR $view == "export" OR $module == "api")
 	{
 		/*
 		* If extension is enabled then continue and include the requested file for that extension if it exists
-		*/	
+		*/
 		if($extension->enabled == "1")
 		{
 			if(file_exists($include_dir . "sys/extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.tpl")) {
 					$smarty -> $smarty_output($smarty_include_dir . "sys/extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.tpl");
 			}
 		}
-		
+
 	}
 	/*
 	* If no extension php file for requested file load the normal php file if it exists
 	* Don't load it in the authentication module. It's not needed! Generates wrong HTML code.
 	*/
-	if($extensionPostLoadJquery == 0 AND $module !='auth') 
+	if($extensionPostLoadJquery == 0 AND $module !='auth')
 	{
 		$smarty -> $smarty_output( $smarty_include_dir . "sys/include/jquery/post_load.jquery.ext.js.tpl");
 	}
@@ -369,25 +369,25 @@ if($module == "export" OR $view == "export" OR $module == "api")
 /*
 * If extension is enabled load its javascript files	- end
 */
-		
-		
-		
+
+
+
 
 /*
 * Menu : If extension has custom menu use it else use default - start
 */
 
 	if($menu == "true")
-	{	
+	{
 		$extensionMenu = 0;
 		foreach($config->extension as $extension)
 		{
 			/*
 			* If extension is enabled then continue and include the requested file for that extension if it exists
-			*/	
+			*/
 			if($extension->enabled == "1")
 			{
-				if(file_exists($include_dir . "sys/extensions/$extension->name/templates/default/menu.tpl")) 
+				if(file_exists($include_dir . "sys/extensions/$extension->name/templates/default/menu.tpl"))
 				{
 					$smarty -> $smarty_output($smarty_include_dir . "sys/extensions/$extension->name/templates/default/menu.tpl");
 					$extensionMenu++;
@@ -397,7 +397,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		/*
 		* If no extension php file for requested file load the normal php file if it exists
 		*/
-		if($extensionMenu == "0") 
+		if($extensionMenu == "0")
 		{
 			$smarty -> $smarty_output($smarty_include_dir . "sys/templates/default/menu.tpl");
 		}
@@ -418,10 +418,10 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		{
 			/*
 			* If extension is enabled then continue and include the requested file for that extension if it exists
-			*/	
+			*/
 			if($extension->enabled == "1")
 			{
-				if(file_exists($include_dir . "sys/extensions/$extension->name/templates/default/main.tpl")) 
+				if(file_exists($include_dir . "sys/extensions/$extension->name/templates/default/main.tpl"))
 				{
 					$smarty -> $smarty_output($smarty_include_dir . "sys/extensions/$extension->name/templates/default/main.tpl");
 					$extensionMain++;
@@ -431,12 +431,12 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		/*
 		* If no extension php file for requested file load the normal php file if it exists
 		*/
-		if($extensionMain == "0") 
+		if($extensionMain == "0")
 		{
 			$smarty -> $smarty_output($smarty_include_dir . "sys/templates/default/main.tpl");
 		}
     }
-    
+
 /*
 * Main : If extension has custom menu use it else use default - end
 */
@@ -458,15 +458,15 @@ if($module == "export" OR $view == "export" OR $module == "api")
 	{
 		/*
 		* If extension is enabled then continue and include the requested file for that extension if it exists
-		*/	
+		*/
 		if($extension->enabled == "1")
 		{
-			if(file_exists($include_dir . "sys/extensions/$extension->name/templates/default/$module/$view.tpl")) 
+			if(file_exists($include_dir . "sys/extensions/$extension->name/templates/default/$module/$view.tpl"))
 			{
 				$smarty_path = "$smarty_include_dir/sys/extensions/$extension->name/templates/default/$module/";
 				$tplDirectory = "extensions/$extension->name/";
 				$extensionTemplates++;
-			}	
+			}
 		}
 	}
 	/*
@@ -474,8 +474,8 @@ if($module == "export" OR $view == "export" OR $module == "api")
 	* TODO Note: if more than one extension has got a template for the requested file than thats trouble :(
 	* - we really need a better extensions system
 	*/
-	if( ($extensionTemplates == 0) AND (file_exists($include_dir . "sys/templates/default/$module/$view.tpl")) ) 
-	{ 
+	if( ($extensionTemplates == 0) AND (file_exists($include_dir . "sys/templates/default/$module/$view.tpl")) )
+	{
 				$smarty_path = "$smarty_include_dir/sys/templates/default/$module/";
 				$tplDirectory = "";
 				$extensionTemplates++;
@@ -483,7 +483,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 
 	$smarty->assign("smarty_path",$smarty_path);
 	$smarty -> $smarty_output($smarty_include_dir . "sys/".$tplDirectory."templates/default/$module/$view.tpl");
-	
+
 	// If no smarty template - add message - onyl uncomment for dev - commented out for release
 	if ($extensionTemplates == 0 )
 	{
@@ -493,9 +493,9 @@ if($module == "export" OR $view == "export" OR $module == "api")
 /*
 * Include the template for the requested page section - end
 */
-	
+
 /*
-* Footer - start 
+* Footer - start
 */
 	if( !in_array($module."_".$view, $early_exit) )
 	{
@@ -504,10 +504,10 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		{
 			/*
 			* If extension is enabled then continue and include the requested file for that extension if it exists
-			*/	
+			*/
 			if($extension->enabled == "1")
 			{
-				if(file_exists($include_dir . "sys/extensions/$extension->name/templates/default/footer.tpl")) 
+				if(file_exists($include_dir . "sys/extensions/$extension->name/templates/default/footer.tpl"))
 				{
 					$smarty -> $smarty_output($smarty_include_dir . "sys/extensions/$extension->name/templates/default/footer.tpl");
 					$extensionFooter++;
@@ -517,13 +517,13 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		/*
 		* If no extension php file for requested file load the normal php file if it exists
 		*/
-		if($extensionFooter == 0) 
+		if($extensionFooter == 0)
 		{
 			$smarty -> $smarty_output($smarty_include_dir . "sys/templates/default/footer.tpl");
 		}
-	
+
 	}
-	
+
 /*
-* Footer - end 
+* Footer - end
 */

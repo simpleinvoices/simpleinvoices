@@ -98,8 +98,8 @@ $count = $sth_count_rows->rowCount();
 				  </cell>";
          }
 		$xml .= "<cell><![CDATA[".$row['index_name']."]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['biller']."]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['customer']."]]></cell>";
+		$xml .= "<cell><![CDATA[".$row['biller']. "]]></cell>";
+		$xml .= "<cell><![CDATA[".$row['customer']. ' / ' .$row['customer_attention']. "]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::date($row['date'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number_trim($row['invoice_total'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number_trim($row['owing'])."]]></cell>";

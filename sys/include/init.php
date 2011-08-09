@@ -73,18 +73,25 @@ if (!is_writable( $app_folder . '/tmp/cache')) {
  * Zend Framework cache section - start
  * -- must come after the tmp dir writeable check
  */
-$backendOptions = array(
-    'cache_dir' => $app_folder . '/tmp/' // Directory where to put the cache files
-);
 
 // getting a Zend_Cache_Core object
-$cache = Zend_Cache::factory('Core',
+try {
+	$backendOptions = array(
+		'cache_dir' => $app_folder . '/tmp/cache/' // Directory where to put the cache files
+	);
+	$cache = Zend_Cache::factory('Core',
                              'File',
                              $frontendOptions,
                              $backendOptions);
 
-//required for some servers
-Zend_Date::setOptions(array('cache' => $cache)); // Active aussi pour Zend_Locale
+    //required for some servers
+    // This makes it active for Zend_Locale as well
+	Zend_Date::setOptions(array('cache' => $cache));
+}
+catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
+
 /*
  * Zend Framework cache section - end
  */

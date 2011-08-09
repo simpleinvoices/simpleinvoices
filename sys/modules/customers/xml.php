@@ -66,6 +66,7 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 		$sql = "SELECT
 					c.id as CID,
 					c.name as name,
+					c.attention as attention,
 					(SELECT (CASE  WHEN c.enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled,
 					(
 						SELECT
@@ -115,6 +116,7 @@ $count = $sth_count_rows->rowCount();
 			<a class='index_table' title='$LANG[view] $LANG[customer] ".$row['name']."' href='index.php?module=customers&view=details&id=$row[CID]&action=view'><img src='".$include_dir."sys/images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 			<a class='index_table' title='$LANG[edit] $LANG[customer] ".$row['name']."' href='index.php?module=customers&view=details&id=$row[CID]&action=edit'><img src='".$include_dir."sys/images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 		]]></cell>";
+		$xml .= "<cell><![CDATA[".$row['attention']."]]></cell>";
 		$xml .= "<cell><![CDATA[".$row['name']."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['customer_total'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['owing'])."]]></cell>";

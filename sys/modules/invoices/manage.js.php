@@ -4,10 +4,10 @@
 			var padding = 12;
 			var action_menu = 140;
 			var grid_width = $('.col').width();
-			
+
 			grid_width = grid_width - (columns * padding) - action_menu;
-			percentage_width = grid_width / 100; 
-			
+			percentage_width = grid_width / 100;
+
 			function do_filter_due(){
 			    window.location = 'index.php?module=invoices&view=manage&having=money_owed';
 			}
@@ -31,16 +31,16 @@
 			dataType: 'xml',
 			colModel : [
 				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : action_menu, sortable : false, align: 'center'},
-				{display: '{/literal}{$LANG.id}{literal}', name : 'index_name', width :15 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.id}{literal}', name : 'index_name', width :10 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.biller}{literal}', name : 'biller', width :20 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.customer}{literal}', name : 'customer', width :20 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.date_upper}{literal}', name : 'date', width : 15 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.customer}{literal}', name : 'customer', width :30 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.date_upper}{literal}', name : 'date', width : 10 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.total}{literal}', name : 'invoice_total', width : 10 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.owing}{literal}', name : 'owing', width : 10 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.aging}{literal}', name : 'aging', width : 10 * percentage_width, sortable : true, align: 'left'}
-				
+
 				],
-				
+
 			buttons : [
 				{name: '{/literal}{$LANG.filters}{literal}'},
 				{separator: true},
@@ -50,7 +50,7 @@
 				{name: '{/literal}{$LANG.real}{literal}', bclass: 'filter_real', onpress : do_filter_real},
 				{name: '{/literal}{$LANG.all}{literal}', bclass: 'filter_all', onpress : do_filter_all}
 				],
-			
+
 			searchitems : [
 				{display: '{/literal}{$LANG.invoice_number}{literal}', name : 'iv.id'},
 				{display: '{/literal}{$LANG.biller}{literal}', name : 'b.name'},
@@ -103,7 +103,7 @@ $(document).ready(function() {
        {
             filter_type = 'all';
        }
-            
+
       $('.filter_'+filter_type).css('background',"url({/literal}{$include_dir}{literal}sys/images/common/tag-right.png) no-repeat center left");
 });
 
