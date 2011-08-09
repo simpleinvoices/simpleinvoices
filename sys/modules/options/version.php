@@ -28,36 +28,36 @@ checkLogin();
  $contents = curl_exec($c);
  curl_close($c);
 
- //$doc = new SimpleXMLElement($contents);
- // we now do it the text way
- $varray = explode(chr(10),$contents);
+ $doc = new SimpleXMLElement($contents);
 
  $smarty->Assign("localVersion", SI_VERSION_ID);
- $smarty->Assign("serverVersion", $varray[6]);
- $smarty->Assign("si_serverversion", $varray[3]);
- $smarty->Assign("downloadurl",$varray[9]);
- $result = '';
+ $smarty->Assign("serverVersion", $doc->versionId);
+ $smarty->Assign("si_serverversion", $doc->versionTitle);
+ $smarty->Assign("downloadurl",$doc->downloadLink);
+ $result = '';                            
  // if the version identifier is not equal then there's a new version on the server
- if (SI_VERSION_ID ==$varray[6]) {
-   // version is ok
-   $result.="<b>".$LANG['version_ok']."</b>";
+ if (SI_VERSION_ID == $doc->versionId) {
+   // version is ok  
+   $result.="<b>".$LANG['version_ok']."</b>";  
    // but if description differ then there's a minor update available
-
-   if (strcasecmp(SI_VERSION, $varray[3])!=0) {
+      
+   if ($SI_VERSION != $doc->versionTitle) {
        $result.=$LANG['version_notreq']."<br>";
-   }
+   }   
  }
- else
- {
+ else 
+ { 
    // version is out-of-date
    $result = "<b>".$LANG['version_outofdate']."</b><br>";
-   $result .= '<a href="'.$doc->downloadLink.'">download</a><br>';
  }
-
-// $result.="<br><br>".$LANG['version_notes']."<br><br>";
-// foreach ($doc->releaseNotes->note as $r)
-//    {
-//      $result .= $r."<br>";
-//    }
-
- $smarty->Assign("versionControl", $result);
+   
+ $notes = "<br><br>".$LANG['version_notes']."<br><br>";  
+ foreach ($doc->releaseNotes->note as $r)
+    {
+      $notes .= $r."<br>";   
+    }
+ 
+ $smarty->Assign("versionControl", $result); 
+ $smarty->Assign("versionNotes", $notes);
+ $smarty -> assign('pageActive', 'setting');
+ $smarty -> assign('active_tab', '#setting');

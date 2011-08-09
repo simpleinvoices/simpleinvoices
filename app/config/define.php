@@ -14,7 +14,7 @@ define("consulting_invoice","3"); //
 #define("LOGGING",false);
 define("LOGGING",true);
 // this is the url of the version file on the server needs to point to www.simpleinvoices.org
-define("SI_VERSION_FILE","http://www.aducom.com/siversion.xml");
+define("SI_VERSION_FILE","http://simpleinvoices.googlecode.com/svn/assets/siversion.xml");
 
 define("SI_VERSION_ID","20101001");
 define("SI_VERSION","2010.2 update 1");

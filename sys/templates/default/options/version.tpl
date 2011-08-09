@@ -26,18 +26,20 @@
 {$LANG.version_server}: {$si_serverversion} <br>    
 {$LANG.version_server_installed}: {$serverVersion} <br><br>      
 
+{$versionControl}
+
+<br>  
 <table class="buttons" >
     <tr>
         <td>
-            <a href="{$downloadurl}" class="">
+            <a href="http://simpleinvoices.googlecode.com/files/{$downloadurl}" class="">
                 <img src="{$include_dir}sys/images/mini/rtl-check.png" alt="" />
                 download
             </a>
         </td>
     </tr>
 </table>
-<br>
 
-{$versionControl}   
-
+{$versionNotes}
+<br/>
 </div>
