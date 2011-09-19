@@ -13,7 +13,7 @@ function getNumberOfDonePatches() {
 	global $dbh;
 	
   $db = new db();
-	$check_patches_sql = "SELECT count(sql_patch) AS count FROM ".TB_PREFIX."sql_patchmanager ";
+	$check_patches_sql = "SELECT max(sql_patch_ref) AS count FROM ".TB_PREFIX."sql_patchmanager ";
 	$sth = $db->query($check_patches_sql) or die(htmlsafe(end($dbh->errorInfo())));
 
 	$patches = $sth->fetch();
@@ -27,7 +27,9 @@ function getNumberOfPatches() {
 	#Max patches applied - start
 
 	$patches = getNumberOfDonePatches();
-	$patch_count = count($patch);
+
+	//$patch_count = count($patch);
+    $patch_count = max( array_keys( $patch ) );
 
 	//Returns number of patches to be applied
 	return $patch_count - $patches;
