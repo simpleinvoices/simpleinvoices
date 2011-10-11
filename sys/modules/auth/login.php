@@ -9,7 +9,7 @@
 $menu = false;
 // we must never forget to start the session
 //so config.php works ok without using index.php define browse
-if (!is_defined('BROWSE')) {
+if (!defined('BROWSE')) {
 	define("BROWSE","browse");
 }
 

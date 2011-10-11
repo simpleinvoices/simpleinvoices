@@ -1,8 +1,6 @@
 <?php
 
-
-if ($_POST['op'] =='add' AND !empty($_POST['invoice_id']))
-{
+if ($_POST['op'] == 'add' AND !empty($_POST['invoice_id'])) {
 	$cron = new cron();
 	$cron->domain_id=domain_id::get();
 	$cron->invoice_id=$_POST['invoice_id'];
@@ -15,7 +13,7 @@ if ($_POST['op'] =='add' AND !empty($_POST['invoice_id']))
 	$result = $cron->insert();
 
 	$saved = !empty($result) ? "true" : "false";
-}      
+}
 
 $invoices = new invoice();
 $invoices->sort='id';

@@ -88,7 +88,7 @@ while ( $year <= $this_year )
 	/*
 	* Sales
 	*/
-	$total_year_sales_sql = "select sum(ii.total) as year_total from ".TB_PREFIX."invoice_items ii, ".TB_PREFIX."invoices i, ".TB_PREFIX."si_preferences p  where i.id = ii.invoice_id AND i.preference_id = p.pref_id AND p.status = '1' AND i.date like '$year%'";
+	$total_year_sales_sql = "select sum(ii.total) as year_total from ".TB_PREFIX."invoice_items ii, ".TB_PREFIX."invoices i, ".TB_PREFIX."preferences p  where i.id = ii.invoice_id AND i.preference_id = p.pref_id AND p.status = '1' AND i.date like '$year%'";
 	//$total_year_sales = mysqlQuery($total_year_sales_sql);
 	//$total_year_sales_array= mysql_fetch_array($total_year_sales);
 
