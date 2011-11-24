@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `si_biller` (
   `paypal_notify_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `paypal_return_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `eway_customer_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `notes` text COLLATE utf8_unicode_ci,
+  `paymentsgateway_api_id` VARCHAR( 255 ) COLLATE utf8_unicode_ci DEFAULT NULL,
   `custom_field1` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `custom_field2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `custom_field3` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,

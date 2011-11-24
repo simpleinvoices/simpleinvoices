@@ -1483,22 +1483,26 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['252']['name'] = "Language - reset to en_GB - due to folder renaming";
     $patch['252']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value ='en_GB' where name='language';";
     $patch['252']['date'] = "20100419";    
-    
-    $patch['253']['name'] = "Add details field to products table";
-    $patch['253']['patch'] = "ALTER TABLE  ".TB_PREFIX."products ADD `detail` TEXT NOT NULL AFTER  `description` ;" ;
-    $patch['253']['date'] = "20100926";
 
-    $patch['254']['name'] = "Create unique index on user email, duplicate email addresses are not allowed as username";
-    $patch['254']['patch'] = "CREATE UNIQUE INDEX ref_idx_email on ".TB_PREFIX."user (email) ;";  
-    $patch['254']['date'] = "20100913";
+    $patch['253']['name'] = "Add PaymentsGateway API ID field";
+    $patch['253']['patch'] = "ALTER TABLE `".TB_PREFIX."biller` ADD  `paymentsgateway_api_id` VARCHAR( 255 ) NULL AFTER `eway_customer_id`;";
+    $patch['253']['date'] = "20110918";   
     
-    $patch['255']['name'] = "Add a Tax ID field to the billers table";
-    $patch['255']['patch'] = "ALTER TABLE ".TB_PREFIX."biller ADD tax_id VARCHAR(16) AFTER `name`;";
-    $patch['255']['date'] = "20110806";
+    $patch['254']['name'] = "Add details field to products table";
+    $patch['254']['patch'] = "ALTER TABLE  ".TB_PREFIX."products ADD `detail` TEXT NOT NULL AFTER  `description` ;" ;
+    $patch['254']['date'] = "20100926";
+
+    $patch['255']['name'] = "Create unique index on user email, duplicate email addresses are not allowed as username";
+    $patch['255']['patch'] = "CREATE UNIQUE INDEX ref_idx_email on ".TB_PREFIX."user (email) ;";  
+    $patch['255']['date'] = "20100913";
     
-    $patch['256']['name'] = "Add a Tax ID field to the customers table";
-    $patch['256']['patch'] = "ALTER TABLE ".TB_PREFIX."customers ADD tax_id VARCHAR(16) AFTER `name`;";
+    $patch['256']['name'] = "Add a Tax ID field to the billers table";
+    $patch['256']['patch'] = "ALTER TABLE ".TB_PREFIX."biller ADD tax_id VARCHAR(16) AFTER `name`;";
     $patch['256']['date'] = "20110806";
+    
+    $patch['257']['name'] = "Add a Tax ID field to the customers table";
+    $patch['257']['patch'] = "ALTER TABLE ".TB_PREFIX."customers ADD tax_id VARCHAR(16) AFTER `name`;";
+    $patch['257']['date'] = "20110806";
 /*
 ** comment out so can get beta of 2010.3 - to be added in later 
     $patch['253']['name'] = "Insert invoice_creator user group";
