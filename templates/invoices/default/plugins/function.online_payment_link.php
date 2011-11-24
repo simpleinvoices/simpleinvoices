@@ -67,7 +67,7 @@ function smarty_function_online_payment_link($params, &$smarty) {
         //$hash = hash_hmac('md5', $hash_info, $params['transaction_password']) ;
 
         $link = "<a 
-            href='https://sandbox.paymentsgateway.net/SWP/co/default.aspx?pg_api_login_id=". 
+            href='https://swp.paymentsgateway.net/co/default.aspx?pg_api_login_id=". 
             urlencode($params['api_id'])
             . "&pg_billto_postal_name_company=". urlencode($params['customer']['name'])
             . "&pg_version_number=1.0&pg_total_amount=" .
