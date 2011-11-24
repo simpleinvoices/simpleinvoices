@@ -97,6 +97,10 @@
 		<td><input type="text" name="eway_customer_id" value="{$smarty.post.eway_customer_id|htmlsafe}" size="50" /></td>
 	</tr>
 	<tr>
+		<td class="details_screen">{$LANG.paymentsgateway_api_id}</td>
+		<td><input type="text" name="paymentsgateway_api_id" value="{$smarty.post.paymentsgateway_api_id|htmlsafe}" size="50" /></td>
+	</tr>
+	<tr>
 		<td class="details_screen">{$customFieldLabel.biller_cf1|htmlsafe}
 			<a
 				class="cluetip"
