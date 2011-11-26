@@ -8,7 +8,7 @@
 * - translate "help" strings
 *
 * Authors:
-*      Frank Heinen, David (darym3 _at_ hotmail.com), Ruben Bloemgarten (ruben@abubble.nl), Kai (level411@gmail.com), Wouter Gelderblom (wjgelderblom@gmail.com), Bart Cockheyt (info@eumedia.nl)
+*      Frank Heinen, David (darym3 _at_ hotmail.com), Ruben Bloemgarten (ruben@abubble.nl), Kai (level411@gmail.com), Wouter Gelderblom (wjgelderblom@gmail.com), Albert Drent (www.aducom.com), Bart Cockheyt (info@eumedia.nl)
 *
 * License:
 *	 GPL v3 or above
