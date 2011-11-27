@@ -415,7 +415,7 @@ class cron {
                                     }
                                     if($data[$key]['email_biller'] == "1" AND $data[$key]['email_customer'] == "0")
                                     {
-                                        $email_rec -> to = $customer['email'];
+                                        $email_rec -> to = $biller['email'];
                                     }
                                     $email_rec -> invoice_name = $invoice['index_name'];
                                     $email_rec -> attachment = $pdf_file_name_invoice;
