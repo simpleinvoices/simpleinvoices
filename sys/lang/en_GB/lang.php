@@ -351,6 +351,7 @@ $LANG['no_billers'] = "There have been no billers created. Click the 'Add New Bi
 $LANG['no_crons'] = "There have been no invoice recurrences created.  Click the 'New recurrence' buttom above to create one";//1
 $LANG['no_customers'] = "There have been no customers created.  Click the 'Add New Customer' buttom above to create one";//1
 $LANG['no_defaults'] = "There are no defaults";//1
+$LANG['no_inventory_movements'] = "There have been no invenory movements recorded. Click the 'New Inventory movement' button above to create one";//1
 $LANG['no_invoices'] = "There have been no invoices created. Click the 'Add a new Invoice' button above to create an invoice";//1
 $LANG['no_items'] = "No items found";//1
 $LANG['no_help_page'] = "There is no help page created for the requested topic";//1
