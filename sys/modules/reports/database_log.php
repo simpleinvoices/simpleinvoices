@@ -17,11 +17,16 @@ $smarty -> assign('active_tab', '#home');
 	FROM
 	".TB_PREFIX."log l INNER JOIN
 	".TB_PREFIX."users u ON (u.user_id = l.userid)
-	WHERE l.timestamp BETWEEN :start AND :end ORDER BY l.timestamp";
+	WHERE l.timestamp BETWEEN $startdate AND $enddate ORDER BY l.timestamp";
 
-	$sth = dbQuery($sql, ':start', $startdate, ':end', $enddate);
-	$sqls = null;
-	$sqls = $sth->fetchAll();
+	$sth = dbQuery($sql);
+	if ($sth == null) {
+		echo 'ERROR: ' . $errm;
+	}
+	else {
+		$sqls = $sth->fetchAll();
+	}
+
 
 	echo <<<EOD
 		<div style="text-align:left;">

@@ -11,7 +11,7 @@ $db = new db();
 function getNumberOfDonePatches() {
 
 	global $dbh;
-	
+
   $db = new db();
 	$check_patches_sql = "SELECT max(sql_patch_ref) AS count FROM ".TB_PREFIX."sql_patchmanager ";
 	$sth = $db->query($check_patches_sql) or die(htmlsafe(end($dbh->errorInfo())));
@@ -117,8 +117,7 @@ EOD;
 
 function listPatches() {
 		global $patch;
-
-	//if(mysql_num_rows(mysqlQuery("SHOW TABLES LIKE '".TB_PREFIX."sql_patchmanager'")) == 1) {
+		global $include_dir;
 
 		$display_block = <<<EOD
 		<b>Simple Invoices :: Database Upgrade Manager</b><br /><br />
