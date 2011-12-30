@@ -53,9 +53,11 @@ function getLanguageArray() {
 		if($extension->enabled == "1")
 		{
 			//echo "Enabled:".$value['name']."<br><br>";
-			if(file_exists("./extensions/$extension->name/lang/$language/lang.php"))
+			$name = $extension->get('name');
+			$file = "./sys/extensions/{$name}/lang/{$language}{$langFile}";
+			if(file_exists($file))
 			{
-				include_once("./extensions/$extension->name/lang/$language/lang.php");
+				include_once($file);
 			}
 		}
 	}
