@@ -155,12 +155,11 @@ function dbQuery($sqlQuery) {
     // for errordisplay.
     if ($sth->errorCode() !=0) {
        $errm = $sth->errorInfo();
-       $sth = null;
+       return null;
     }
     else {
      	return $sth;
     }
-	//$sth = null;
 }
 
 // Used for logging all queries
@@ -1002,7 +1001,14 @@ function getInvoice($id) {
 	$invoice['gross'] = invoice::getInvoiceGross($invoice['id']);
 	$invoice['paid'] = calc_invoice_paid($invoice['id']);
 	$invoice['owing'] = $invoice['total'] - $invoice['paid'];
-    $invoice['status'] = $invoice['inv_status'];
+    if (isset($invoice['inv_status'])) {
+		// This seems to be a thing of the past.
+		// I think we could delete the whole "if".
+		$invoice['status'] = $invoice['inv_status'];
+	}
+	else {
+		$invoice['status'] = '';
+	}
 
 
 	#invoice total tax
@@ -1025,7 +1031,7 @@ Purpose: to show a nice summary of total $ for tax for an invoice
 function numberOfTaxesForInvoice($invoice_id)
 {
 	global $dbh;
-	
+
 	$sql = "select
 				DISTINCT tax.tax_id
 			from ".TB_PREFIX."invoice_item_tax item_tax,
@@ -1053,7 +1059,7 @@ Purpose: to show a nice summary of total $ for tax for an invoice
 function taxesGroupedForInvoice($invoice_id)
 {
 	global $dbh;
-	
+
 	$sql = "select
 				tax.tax_description as tax_name,
 				sum(item_tax.tax_amount) as tax_amount,
@@ -1084,7 +1090,7 @@ Purpose: to show a nice summary of total $ for tax for an invoice item - used fo
 function taxesGroupedForInvoiceItem($invoice_item_id)
 {
 	global $dbh;
-	
+
 	$sql = "select
 				item_tax.id as row_id,
 				tax.tax_description as tax_name,
@@ -2649,7 +2655,7 @@ function sql2array($strSql) {
 
 function getNumberOfDoneSQLPatches() {
 	global $dbh;
-	
+
 	$check_patches_sql = "SELECT count(sql_patch) AS count FROM ".TB_PREFIX."sql_patchmanager ";
 	$sth = dbQuery($check_patches_sql) or die(htmlsafe(end($dbh->errorInfo())));
 
@@ -2664,126 +2670,69 @@ function pdfThis($html,$file_location="",$pdfname)
 {
 
 	global $config;
-	global $include_dir;
 
-//	set_include_path("../../../../lib/pdf/");
-	require_once($include_dir . 'lib/pdf/config.inc.php');
-	require_once($include_dir . 'lib/pdf/pipeline.factory.class.php');
-	require_once($include_dir . 'lib/pdf/pipeline.class.php');
-	parse_config_file($include_dir . 'lib/pdf/html2ps.config');
+						//	'pixels'     => $config->export->pdf->screensize,
+						//	'media'     => $config->export->pdf->papersize,
 
-	require_once($include_dir . "sys/include/init.php");	// for getInvoice() and getPreference()
-	#$invoice_id = $_GET['id'];
-	#$invoice = getInvoice($invoice_id);
 
-	#$preference = getPreference($invoice['preference_id']);
-	#$pdfname = trim($preference['pref_inv_wording']) . $invoice_id;
 
-	#error_reporting(E_ALL);
-	#ini_set("display_errors","1");
-	#@set_time_limit(10000);
 
-	/**
-	 * Runs the HTML->PDF conversion with default settings
-	 *
-	 * Warning: if you have any files (like CSS stylesheets and/or images referenced by this file,
-	 * use absolute links (like http://my.host/image.gif).
-	 *
-	 * @param $path_to_html String path to source html file.
-	 * @param $path_to_pdf  String path to file to save generated PDF to.
-	 */
-	if(!function_exists(convert_to_pdf))
-	{
-		function convert_to_pdf($html_to_pdf, $pdfname, $file_location="") {
+require_once(getcwd() . '/lib/tcpdf/tcpdf.php');
 
-			global $config;
+// create new PDF document
+$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-			$destination = $file_location=="download" ? "DestinationDownload" : "DestinationFile";
-		  /**
-		   * Handles the saving generated PDF to user-defined output file on server
-		   */
+// set document information
+$pdf->SetCreator('Simple Invoice');
+$pdf->SetAuthor('Simple Invoice');
+$pdf->SetTitle('Invoice');
 
-		 if(!class_exists(MyFetcherLocalFile))
-		 {
-		  class MyFetcherLocalFile extends Fetcher {
-			var $_content;
+// set default header data
+//$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 061', PDF_HEADER_STRING);
 
-			function MyFetcherLocalFile($html_to_pdf) {
-			  //$this->_content = file_get_contents($file);
-			  $this->_content = $html_to_pdf;
-			}
+// set header and footer fonts
+//$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+//$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 
-			function get_data($dummy1) {
-			  return new FetchedDataURL($this->_content, array(), "");
-			}
+// set default monospaced font
+//$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
-			function get_base_url() {
-			  return "";
-			}
-		  }
-		 }
+//set margins
+$pdf->SetMargins(
+	$config->export->pdf->leftmargin,
+	$config->export->pdf->topmargin,
+	$config->export->pdf->rightmargin
+);
+//$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+//$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
-		  $pipeline = PipelineFactory::create_default_pipeline("", // Attempt to auto-detect encoding
-															   "");
+//set auto page breaks
+$pdf->SetAutoPageBreak(TRUE, $config->export->pdf->bottommargin);
 
-		  // Override HTML source
-		  $pipeline->fetchers[] = new MyFetcherLocalFile($html_to_pdf);
+//set image scale factor
+//$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
-		  $baseurl = "";
-		  $media = Media::predefined($config->export->pdf->papersize);
-		  $media->set_landscape(false);
+//set some language-dependent strings
+//$pdf->setLanguageArray($l);
 
-		  global $g_config;
-		  $g_config = array(
-							'cssmedia'     => 'screen',
-							'renderimages' => true,
-							'renderlinks'  => true,
-							'renderfields' => true,
-							'renderforms'  => false,
-							'mode'         => 'html',
-							'encoding'     => '',
-							'debugbox'     => false,
-							'pdfversion'    => '1.4',
+// ---------------------------------------------------------
 
-							'process_mode'     => 'single',
-							//'output'     => 1,
-							//'location'     => 'pdf',
-							'pixels'     => $config->export->pdf->screensize,
-							'media'     => $config->export->pdf->papersize,
-				'margins'       => array(
-							      'left'    => $config->export->pdf->leftmargin,
-							      'right'   => $config->export->pdf->rightmargin,
-							      'top'     => $config->export->pdf->topmargin,
-							      'bottom'  => $config->export->pdf->bottommargin,
-							      ),
-							'transparency_workaround'     => 1,
-							'imagequality_workaround'     => 1,
+// set font
+$pdf->SetFont('helvetica', '', 10);
 
-							'draw_page_border' => false
-							);
+// add a page
+$pdf->AddPage();
 
-			$media->set_margins($g_config['margins']);
-			$media->set_pixels($config->export->pdf->screensize);
+// output the HTML content
+$pdf->writeHTML($html, true, false, true, false, '');
 
-	/*
-	header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
-	header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 	// Date in the past
+// reset pointer to the last page
+$pdf->lastPage();
 
-	header("Location: $myloc");
-	*/
-		  global $g_px_scale;
-		  $g_px_scale = mm2pt($media->width() - $media->margins['left'] - $media->margins['right']) / $media->pixels;
-		  global $g_pt_scale;
-		  $g_pt_scale = $g_px_scale * 1.43;
+// ---------------------------------------------------------
 
-		  $pipeline->configure($g_config);
-		  $pipeline->data_filters[] = new DataFilterUTF8("");
-		  $pipeline->destination = new $destination($pdfname);
-		  $pipeline->process($baseurl, $media);
-		}
-	}
+//Close and output PDF document
+$pdf->Output($pdfname, 'I');
 
-	//echo "location: ".$file_location;
-	convert_to_pdf($html, $pdfname, $file_location);
 
 }
