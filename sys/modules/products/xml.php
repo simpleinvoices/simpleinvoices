@@ -22,6 +22,7 @@ $products_all = $sth->fetchAll(PDO::FETCH_ASSOC);
 $count = $sth_count_rows->rowCount();
 
 //echo sql2xml($customers, $count);
+$xml = '';
 $xml .= "<rows>";
 
 $xml .= "<page>$page</page>";
@@ -29,7 +30,7 @@ $xml .= "<page>$page</page>";
 $xml .= "<total>$count</total>";
 
 foreach ($products_all as $row) {
-
+	$row['iso'] = (isset($row['iso']))? $row['iso'] : '';
 	$xml .= "<row id='".$row['iso']."'>";
 	$xml .= "<cell><![CDATA[
 			<a class='index_table' title='$LANG[view] ".$row['description']."' href='index.php?module=products&view=details&id=".$row['id']."&action=view'><img src='".$include_dir."sys/images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>

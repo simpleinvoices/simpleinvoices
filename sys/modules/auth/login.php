@@ -150,10 +150,24 @@ foreach($languages as $language) {
 }
 $value .= "</select>";
 
-if($_POST['action'] == 'login' && (empty($_POST['user']) OR empty($_POST['pass'])))
+if(isset($_POST['action']) && $_POST['action'] == 'login' && (empty($_POST['user']) OR empty($_POST['pass'])))
 {
    $errorMessage = $LANG['Required_UIDPWD'];
 }
 
 $smarty->assign("errorMessage",$errorMessage);
 $smarty->assign("value",$value);
+
+
+/**
+ * Help function for sorting the language array by name
+ */
+function compareNameIndex($a,$b) {
+	$a = $a->name."";
+	$b = $b->name."";
+
+	if($a > $b) {
+		return 1;
+	}
+	return -1;
+}

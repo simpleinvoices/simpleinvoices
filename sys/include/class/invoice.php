@@ -240,9 +240,10 @@ class invoice {
             $having = $this->having;
         }
 
-        if ($this->having_and) $having_and  = $this->having_and;
-        if ($this->having_and2) $having_and2  = $this->having_and2;
+		$having_and = ($this->having_and)? $this->having_and : '' ;
+		$having_and2 = ($this->having_and2)? $this->having_and2 : '' ;
         $sort = $this->sort;
+        $sql_having = '';
 
         /*SQL Limit - start*/
         $start = (($page-1) * $rp);

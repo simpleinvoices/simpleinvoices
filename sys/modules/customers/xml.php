@@ -37,7 +37,7 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 	if($type =="count")
 	{
 		unset($limit);
-		$limit;
+		$limit = '';
 	}
 	/*SQL Limit - end*/
 

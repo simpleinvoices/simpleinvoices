@@ -59,6 +59,8 @@ $count = $sth_count_rows->rowCount();
          }
         else
          {
+         $row['inv_status'] = (isset($row['inv_status']))? $row['inv_status'] : 'draft';	
+         	
           switch($row['inv_status'])
            {
             case "draft":

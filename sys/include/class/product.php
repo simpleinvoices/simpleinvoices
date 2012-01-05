@@ -50,7 +50,8 @@ class product
         global $LANG;
         global $auth_session;
         global $dbh;
-        
+        $start = (isset($start))? $start : "0";
+        $limit = (isset($limit))? $limit : "0";
         //SC: Safety checking values that will be directly subbed in
         if (intval($start) != $start) {
             $start = 0;
@@ -67,6 +68,7 @@ class product
         if($type =="count")
         {
             unset($limit);
+            $limit = '';
         }
         /*SQL Limit - end*/	
             

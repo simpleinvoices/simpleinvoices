@@ -11,6 +11,8 @@ $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 
 function sql($type='', $dir, $sort, $rp, $page )
 {
+	$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
+	
 	global $config;
 	global $LANG;
 	global $auth_session;
@@ -31,6 +33,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 	if($type =="count")
 	{
 		unset($limit);
+		$limit = '';
 	}
 	/*SQL Limit - end*/
 
@@ -83,11 +86,15 @@ $user = $sth->fetchAll(PDO::FETCH_ASSOC);
 $count = $sth_count_rows->rowCount();
 
 //echo sql2xml($customers, $count);
+$xml = '';
 $xml .= "<rows>";
 $xml .= "<page>$page</page>";
 $xml .= "<total>$count</total>";
 
 foreach ($user as $row) {
+	$row['iso'] = (isset($row['iso']))?$row['iso']:'';
+	$row['name'] = (isset($row['name']))?$row['name']:'';
+	
 	$xml .= "<row id='".$row['iso']."'>";
 	$xml .= "<cell><![CDATA[
 	<a class='index_table' title='$LANG[view] ".$row['name']."' href='index.php?module=user&view=details&id=$row[id]&action=view'><img src='".$include_dir."sys/images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>

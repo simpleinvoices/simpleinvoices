@@ -11243,9 +11243,10 @@ class HTMLPurifier_DefinitionCache_Serializer extends
                 E_USER_WARNING);
         } else {
             // generic error message
-            trigger_error('Directory '.$dir.' not writable, '.
-                'please alter file permissions',
-                E_USER_WARNING);
+            if($_SERVER['OS'] != "Windows_NT")
+				trigger_error('Directory '.$dir.' not writable, '.
+	                'please alter file permissions',
+	                E_USER_WARNING);
         }
         return false;
     }

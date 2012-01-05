@@ -23,7 +23,7 @@ if ($cust_language != '') {
 } 
 else 
 {
-  if(in_array(TB_PREFIX.'system_defaults',$tables))
+  if(in_array(TB_PREFIX.'system_defaults',$tables) && getDefaultLanguage() != null)
   {
 	$language = getDefaultLanguage();
   } else {

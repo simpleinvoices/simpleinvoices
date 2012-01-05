@@ -15,7 +15,7 @@
 {* <h3>You are editing {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}</h3> *}
 <br />
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
-        	<img src="images/common/gmail-loader.gif" alt="{$LANG.loading} ..." /> {$LANG.loading} ...
+        	<img src="./sys/images/common/gmail-loader.gif" alt="{$LANG.loading} ..." /> {$LANG.loading} ...
 </div>
 
 

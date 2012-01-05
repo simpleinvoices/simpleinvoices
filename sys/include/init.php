@@ -198,21 +198,23 @@ if ( $install_tables_exists != false )
 /*
  * Moved the extensions init loop out of index so can load extensions stuff before acl code
  */
-foreach($config->extension as $extension)
+if ($config->extension != null)
 {
-	/*
-	* If extension is enabled then continue and include the requested file for that extension if it exists
-	*/
-	if($extension->enabled == "1")
+	foreach($config->extension as $extension)
 	{
-		//echo "Enabled:".$value['name']."<br><br>";
-		if(file_exists($include_dir . "sys/extensions/$extension->name/include/init.php"))
+		/*
+		* If extension is enabled then continue and include the requested file for that extension if it exists
+		*/
+		if($extension->enabled == "1")
 		{
-			require_once("sys/extensions/$extension->name/include/init.php");
+			//echo "Enabled:".$value['name']."<br><br>";
+			if(file_exists($include_dir . "sys/extensions/$extension->name/include/init.php"))
+			{
+				require_once("sys/extensions/$extension->name/include/init.php");
+			}
 		}
 	}
 }
-
 // If no extension loaded, load Core
 if (! $config->extension)
 {
@@ -288,4 +290,4 @@ $siUrl = getURL($app);
 include_once($include_dir . "sys/include/backup.lib.php");
 
 $defaults = getSystemDefaults();
-$smarty -> assign("defaults",$defaults);
+$smarty->assign("defaults",$defaults);

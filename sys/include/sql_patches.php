@@ -561,7 +561,7 @@ INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 		$sth = dbQuery($sql_defaults);
 		$defaults = $sth->fetch();
 	}
-
+	
 	$patch['116']['name'] = "System defaults conversion patch - set default biller";
 	$patch['116']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = $defaults[def_biller] where name = 'biller'";
 	$patch['116']['date'] = "20070523";

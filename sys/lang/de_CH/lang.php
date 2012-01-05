@@ -85,6 +85,9 @@ $LANG['custom_field4'] = "Benutzerdefiniertes Feld 4";//1
 $LANG['custom_fields'] = "Benutzerdefinierte Felder";//1
 $LANG['custom_fields_upper'] = "Benutzerdefinierte Felder";//1
 $LANG['custom_label'] = "Benutzerdefinierte Bezeichnung";//1
+
+$LANG['credit_card_holder_name'] = "Kreditkarten Halter";//1
+
 $LANG['customer'] = "Kunde";//1
 $LANG['customer_account'] = "Kunden-Konto";//1
 $LANG['customer_add'] = "Neuen Kunden hinzuf&uuml;gen";//1
@@ -95,7 +98,8 @@ $LANG['customer_id'] = "Kunden-Nr";//1
 $LANG['customer_name'] = "Kundenname";//1
 $LANG['customer_short'] = "Cust";//0
 $LANG['customers'] = "Kunden";//1
-$LANG['dashboard'] = "Dashboard";//0$LANG['database_log'] = "Database Log";//0
+$LANG['dashboard'] = "Dashboard";//0
+$LANG['database_log'] = "Database Log";//0
 $LANG['database_upgrade_manager'] = "Datenbank Upgrade-Manager";//1
 $LANG['date'] = "Datum";//1
 $LANG['date_created'] = "Re-Datum";//1
