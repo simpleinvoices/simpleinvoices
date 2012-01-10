@@ -255,6 +255,7 @@ class export
 				$this->file_name = $spc2us_pref;
 
 				$customFieldLabels = getCustomFieldLabels();
+				$customFieldDisplay = getCustomFieldDisplay();
 
 				/*Set the template to the default*/
 				$template = $defaults['template'];
@@ -285,6 +286,7 @@ class export
 					$smarty -> assign('template_path',$template_path);
 					$smarty -> assign('css',$css);
 					$smarty -> assign('customFieldLabels',$customFieldLabels);
+					$smarty -> assign('customFieldDisplay',$customFieldDisplay);
 
 					$data = $smarty -> fetch($template_dir);
 

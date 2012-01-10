@@ -15,7 +15,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 	global $auth_session;
 	global $LANG;
 	global $dbh;
-
+	$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
+	$limit = (isset($limit))? $limit: "";
 	//SC: Safety checking values that will be directly subbed in
 	if (intval($start) != $start) {
 		$start = 0;
@@ -31,6 +32,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 	if($type =="count")
 	{
 		unset($limit);
+		$limit = "";
 	}
 	/*SQL Limit - end*/
 
@@ -77,11 +79,13 @@ $sth_count_rows = sql('count',$dir, $sort, $rp, $page);
 $payment_types = $sth->fetchAll(PDO::FETCH_ASSOC);
 $count = $sth_count_rows->rowCount();
 
+$xml = "";
 $xml .= "<rows>";
 $xml .= "<page>$page</page>";
 $xml .= "<total>$count</total>";
 
 foreach ($payment_types as $row) {
+	$row['pref_id'] = (isset($row['pref_id']))? $row['pref_id'] : "";
 	$xml .= "<row id='".$row['pref_id']."'>";
 	$xml .= "<cell><![CDATA[
 		<a class='index_table' title='$LANG[view] $LANG[payment_type] ".$row['pt_description']."' href='index.php?module=payment_types&view=details&id=$row[pt_id]&action=view'><img src='".$include_dir."sys/images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>

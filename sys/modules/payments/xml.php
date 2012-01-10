@@ -203,7 +203,9 @@ $count = $resultCount[0];
 	$xml .= "<cell><![CDATA[
 	<a class='index_table' title='$LANG[view] ".$row['name']."' href='index.php?module=payments&view=details&id=$row[id]&action=view'><img src='".$include_dir."sys/images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 	<a class='index_table' title='$LANG[print_preview_tooltip] ".$row['id']."' href='index.php?module=payments&view=print&id=$row[id]' target='_blank'><img src='".$include_dir."sys/images/common/printer.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-	<a title='".$LANG['export_tooltip']." ".$row['preference']." ".$row['id']."' class='index_table' href='index.php?module=export&view=payment&id=$row[id]&format=pdf'><img src='".$include_dir."sys/images/common/page_white_acrobat.png' class='action' /></a>
+	<a class='index_table' title='$LANG[print_preview_tooltip] ".$row['id']."' href='index.php?module=export&view=payment&id=$row[id]&format=pdf'><img src='sys/images/common/page_white_acrobat.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+<!--
+	<a title='".$LANG['export_tooltip']." ".$row['preference']." ".$row['id']."' class='index_table' href='index.php?module=export&view=payment&id=$row[id]&format=pdf'><img src='".$include_dir."sys/images/common/page_white_acrobat.png' class='action' /></a>-->
 	]]></cell>";
 		$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";
 		$xml .= "<cell><![CDATA[".$row['index_name']."]]></cell>";

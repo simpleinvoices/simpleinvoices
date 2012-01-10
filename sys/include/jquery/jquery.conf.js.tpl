@@ -86,7 +86,7 @@ $(document).ready(function(){
     			},
   				arrows: true,
   				closePosition: 'title',			
-  				closeText: '<img src="{$include_dir}sys/images/common/cross.png" alt="" />'
+  				closeText: '<img src="./sys/images/common/cross.png" alt="" />'
 			}
 		);
 	}

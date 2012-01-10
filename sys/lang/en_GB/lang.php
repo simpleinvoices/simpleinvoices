@@ -102,6 +102,7 @@ $LANG['custom_field4'] = "Custom field 4";//1
 $LANG['custom_fields'] = "Custom fields";//1
 $LANG['custom_fields_upper'] = "Custom Fields";//1
 $LANG['custom_label'] = "Custom label";//1
+$LANG['custom_display'] = "Custom display";//1
 $LANG['customer'] = "Customer";//1
 $LANG['customer_account'] = "Customer Account";//1
 $LANG['customer_add'] = "Add New Customer";//1

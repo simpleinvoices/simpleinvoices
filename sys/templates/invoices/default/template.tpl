@@ -21,7 +21,6 @@
 	</table>
 	
 	<!-- Summary - start -->
-
 	<table class="right">
 		<tr>
 				<td class="col1 tbl1-bottom" colspan="4" ><b>{$preference.pref_inv_wording|htmlsafe} {$LANG.summary}</b></td>
@@ -35,25 +34,25 @@
 				<td class="" align="right" colspan="3">{$invoice.date}</td>
 		</tr>
 	<!-- Show the Invoice Custom Fields if valid -->
-		{ if $invoice.custom_field1 != null}
+		{ if $invoice.custom_field1 != null && $customFieldDisplay.invoice_cf1}
 		<tr>
 				<td nowrap class="">{$customFieldLabels.invoice_cf1|htmlsafe}:</td>
 				<td class="" align="right" colspan="3">{$invoice.custom_field1|htmlsafe}</td>
 		</tr>
 		{/if}
-		{ if $invoice.custom_field2 != null}
+		{ if $invoice.custom_field2 != null && $customFieldDisplay.invoice_cf2}
 		<tr>
 				<td nowrap class="">{$customFieldLabels.invoice_cf2|htmlsafe}:</td>
 				<td class="" align="right"  colspan="3">{$invoice.custom_field2|htmlsafe}</td>
 		</tr>
 		{/if}
-		{ if $invoice.custom_field3 != null}
+		{ if $invoice.custom_field3 != null && $customFieldDisplay.invoice_cf3}
 		<tr>
 				<td nowrap class="">{$customFieldLabels.invoice_cf3|htmlsafe}:</td>
 				<td class="" align="right" colspan="3">{$invoice.custom_field3|htmlsafe}</td>
 		</tr>
 		{/if}
-		{ if $invoice.custom_field4 != null}
+		{ if $invoice.custom_field4 != null && $customFieldDisplay.invoice_cf4}
 		<tr>
 				<td nowrap class="">{$customFieldLabels.invoice_cf4|htmlsafe}:</td>
 				<td class="" align="right" colspan="3">{$invoice.custom_field4|htmlsafe}</td>
@@ -120,12 +119,18 @@
 	{print_if_not_null label=$LANG.mobile_short field=$biller.mobile_phone class1='' class2='' colspan="3"}
 	{print_if_not_null label=$LANG.email field=$biller.email class1='' class2='' colspan="3"}
 	{print_if_not_null label=$LANG.tax_id field=$biller.tax_id class1='' class2='' colspan="3"}
-	
-	{print_if_not_null label=$customFieldLabels.biller_cf1 field=$biller.custom_field1 class1='' class2='' colspan="3"}
-	{print_if_not_null label=$customFieldLabels.biller_cf2 field=$biller.custom_field2 class1='' class2='' colspan="3"}
-	{print_if_not_null label=$customFieldLabels.biller_cf3 field=$biller.custom_field3 class1='' class2='' colspan="3"}
-	{print_if_not_null label=$customFieldLabels.biller_cf4 field=$biller.custom_field4 class1='' class2='' colspan="3"}
-
+	{if $customFieldDisplay.biller_cf1}
+		{print_if_not_null label=$customFieldLabels.biller_cf1 field=$biller.custom_field1 class1='' class2='' colspan="3"}
+	{/if}
+	{if $customFieldDisplay.biller_cf2}
+		{print_if_not_null label=$customFieldLabels.biller_cf2 field=$biller.custom_field2 class1='' class2='' colspan="3"}
+	{/if}
+	{if $customFieldDisplay.biller_cf3}
+		{print_if_not_null label=$customFieldLabels.biller_cf3 field=$biller.custom_field3 class1='' class2='' colspan="3"}
+	{/if}
+	{if $customFieldDisplay.biller_cf4}
+		{print_if_not_null label=$customFieldLabels.biller_cf4 field=$biller.custom_field4 class1='' class2='' colspan="3"}
+	{/if}
 		<tr>
 				<td class="" colspan="4"> </td>
 		</tr>
@@ -184,10 +189,18 @@
 	{print_if_not_null label=$LANG.email field=$customer.email class1='' class2='' colspan="3"}
 	{print_if_not_null label=$LANG.tax_id field=$customer.tax_id class1='' class2='' colspan="3"}
 	
-	{print_if_not_null label=$customFieldLabels.customer_cf1 field=$customer.custom_field1 class1='' class2='' colspan="3"}
-	{print_if_not_null label=$customFieldLabels.customer_cf2 field=$customer.custom_field2 class1='' class2='' colspan="3"}
-	{print_if_not_null label=$customFieldLabels.customer_cf3 field=$customer.custom_field3 class1='' class2='' colspan="3"}
-	{print_if_not_null label=$customFieldLabels.customer_cf4 field=$customer.custom_field4 class1='' class2='' colspan="3"}
+	{if $customFieldDisplay.customer_cf1}
+		{print_if_not_null label=$customFieldLabels.customer_cf1 field=$customer.custom_field1 class1='' class2='' colspan="3"}
+	{/if}
+	{if $customFieldDisplay.customer_cf2}
+		{print_if_not_null label=$customFieldLabels.customer_cf2 field=$customer.custom_field2 class1='' class2='' colspan="3"}
+	{/if}
+	{if $customFieldDisplay.customer_cf3}
+		{print_if_not_null label=$customFieldLabels.customer_cf3 field=$customer.custom_field3 class1='' class2='' colspan="3"}
+	{/if}
+	{if $customFieldDisplay.customer_cf4}
+		{print_if_not_null label=$customFieldLabels.customer_cf4 field=$customer.custom_field4 class1='' class2='' colspan="3"}
+	{/if}
 
 		<tr>
 			<td class="" colspan="4"></td>
@@ -229,15 +242,27 @@
 				<td class="" colspan="5">
 					<table width="100%">
 						<tr>
-
-					{inv_itemised_cf label=$customFieldLabels.product_cf1 field=$invoiceItem.product.custom_field1}
-					{do_tr number=1 class="blank-class"}
-					{inv_itemised_cf label=$customFieldLabels.product_cf2 field=$invoiceItem.product.custom_field2}
-					{do_tr number=2 class="blank-class"}
-					{inv_itemised_cf label=$customFieldLabels.product_cf3 field=$invoiceItem.product.custom_field3}
-					{do_tr number=3 class="blank-class"}
-					{inv_itemised_cf label=$customFieldLabels.product_cf4 field=$invoiceItem.product.custom_field4}
-					{do_tr number=4 class="blank-class"}
+					{$i = 0}
+					{if $customFieldDisplay.product_cf1}
+						{$i = $i+1}
+						{inv_itemised_cf label=$customFieldLabels.product_cf1 field=$invoiceItem.product.custom_field1}
+						{do_tr number=$i class="blank-class"}
+					{/if}
+					{if $customFieldDisplay.product_cf2}
+						{$i = $i+1}
+						{inv_itemised_cf label=$customFieldLabels.product_cf2 field=$invoiceItem.product.custom_field2}
+						{do_tr number=$i class="blank-class"}
+					{/if}
+					{if $customFieldDisplay.product_cf3}
+						{$i = $i+1}
+						{inv_itemised_cf label=$customFieldLabels.product_cf3 field=$invoiceItem.product.custom_field3}
+						{do_tr number=$i class="blank-class"}
+					{/if}
+					{if $customFieldDisplay.product_cf4}
+						{$i = $i+1}
+						{inv_itemised_cf label=$customFieldLabels.product_cf4 field=$invoiceItem.product.custom_field4}
+						{do_tr number=$i class="blank-class"}
+					{/if}
  
 						</tr>
 					</table>
@@ -268,7 +293,7 @@
 				<td class="" colspan="5">
                     <table width="100%">
                         <tr>
-
+			
 					{inv_itemised_cf label=$customFieldLabels.product_cf1 field=$invoiceItem.product.custom_field1}
 					{do_tr number=1 class="blank-class"}
 					{inv_itemised_cf label=$customFieldLabels.product_cf2 field=$invoiceItem.product.custom_field2}

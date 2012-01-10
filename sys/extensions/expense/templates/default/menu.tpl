@@ -5,7 +5,7 @@
 		<tr>
 		<td>
 			<a href="./index.php?module=billers&amp;view=add" class="positive">
-			<img src="../sys/images/famfam/add.png" alt="" />
+			<img src="./images/famfam/add.png" alt="" />
 			</a>
 		</td>
 		</tr>
@@ -13,7 +13,7 @@
 	</div>
 *}
 	<div class="txt_right">
-		Hello {$smarty.session.Zend_Auth.email} | <a href="">Help</a>
+		{$LANG.hello} {$smarty.session.Zend_Auth.email|htmlsafe} | <a href="http://www.simpleinvoices.org/help" target="blank">{$LANG.help}</a>
 		{if $config->authentication->enabled == 1}
 			|
 			{if $smarty.session.Zend_Auth.id == null}
@@ -48,9 +48,13 @@
 				{ if $subPageActive == "invoice_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
 				{ if $subPageActive == "invoice_view"} <li><a class="active active_subpage" href="#">{$LANG.quick_view}</a></li>{/if}
 				{* dialog style <li><a { if $pageActive == "invoice_new"} class="active" {/if} id="invoice_dialog" href="#">{$LANG.new_invoice}</a></li> *}
-			<li><a { if $pageActive == "invoice_new"} class="active" {/if} id="invoice_dialogx" href="index.php?module=invoices&amp;view=itemised">{$LANG.new_invoice}</a></li> 
+			<li><a { if $pageActive == "invoice_new"} class="active" {/if} id="invoice_dialogx" href="index.php?module=invoices&amp;view=itemised">{$LANG.new_invoice}</a></li>
 				{ if $subPageActive == "invoice_new_itemised"} <li><a class="active active_subpage" href="#">{$LANG.itemised}</a></li>{/if}				
-				{ if $subPageActive == "invoice_new_total"} <li><a class="active active_subpage" href="#">{$LANG.total}</a></li>{/if}				
+				{ if $subPageActive == "invoice_new_total"} <li><a class="active active_subpage" href="#">{$LANG.total}</a></li>{/if}
+                                <li><a { if $pageActive == "cron"} class="active" {/if} href="index.php?module=cron&amp;view=manage">{$LANG.recurrence}</a></li>
+				{ if $subPageActive == "cron_add"} <li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}				
+				{ if $subPageActive == "cron_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
+				{ if $subPageActive == "cron_view"} <li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
 			<li><a { if $pageActive == "expense"} class="active" {/if} href="index.php?module=expense&amp;view=manage">{$LANG.expense}</a></li>
                 { if $pageActive == "expense"}
                     { if $subPageActive == "edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}

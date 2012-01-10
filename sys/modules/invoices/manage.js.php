@@ -52,7 +52,7 @@
 				],
 
 			searchitems : [
-				{display: '{/literal}{$LANG.invoice_number}{literal}', name : 'iv.id'},
+				{display: '{/literal}{$LANG.invoice_number}{literal}', name : 'index_id'},
 				{display: '{/literal}{$LANG.biller}{literal}', name : 'b.name'},
 				{display: '{/literal}{$LANG.customer}{literal}', name : 'c.name', isdefault: true}
 				],

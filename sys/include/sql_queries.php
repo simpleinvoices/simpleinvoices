@@ -409,6 +409,21 @@ function getCustomFieldLabels() {
 	return $customFields;
 }
 
+function getCustomFieldDisplay() {
+	global $LANG;
+	global $dbh;
+	global $auth_session;
+	
+	$sql = "SELECT * FROM ".TB_PREFIX."custom_fields WHERE domain_id = :domain_id ORDER BY cf_custom_field";
+	$sth = dbQuery($sql,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+	$customFieldsDisplay = array();
+	for($i=0;$customField = $sth->fetch();$i++) {
+		$customFieldsDisplay[$customField['cf_custom_field']] = $customField['cf_display'];
+	}
+
+	return $customFieldsDisplay;
+}
+
 function getBillers() {
 	global $LANG;
 	global $dbh;

@@ -51,6 +51,7 @@ else {
 	$invoice['url_for_pdf'] = $url_for_pdf;
 
 $customFieldLabels = getCustomFieldLabels();
+$customFieldDisplay = getCustomFieldDisplay();
 
 for($i=1;$i<=4;$i++) {
 	$customField[$i] = show_custom_field("invoice_cf$i",$invoice["custom_field$i"],"read",'details_screen summary', 'details_screen','details_screen',5,':');
@@ -74,6 +75,7 @@ $smarty -> assign('subPageActive', 'invoice_view');
 $smarty -> assign('active_tab', '#money');
 $smarty -> assign("customField",$customField);
 $smarty -> assign("customFieldLabels",$customFieldLabels);
+$smarty -> assign("customFieldDisplay",$customFieldDisplay);
 $smarty -> assign("invoice_age",$invoice_age);
 $smarty -> assign("invoice_number_of_taxes",$invoice_number_of_taxes);
 $smarty -> assign("invoiceItems",$invoiceItems);

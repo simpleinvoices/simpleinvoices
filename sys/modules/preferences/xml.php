@@ -15,7 +15,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 	global $LANG;
 	global $auth_session;
 	global $dbh;
-
+	$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
+	$limit = (isset($limit))? $limit : "";
 	//SC: Safety checking values that will be directly subbed in
 	if (intval($start) != $start) {
 		$start = 0;
@@ -31,6 +32,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 	if($type =="count")
 	{
 		unset($limit);
+		$limit = "";
 	}
 	/*SQL Limit - end*/
 
@@ -57,7 +59,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 		$sql = "SELECT
 					pref_id,
 					pref_description,
-                    translation,
+                    pref_description as translation,
 					(SELECT (CASE  WHEN pref_enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
 				FROM
 					".TB_PREFIX."preferences
@@ -66,18 +68,19 @@ function sql($type='', $dir, $sort, $rp, $page )
 					$sort $dir
 				$limit";
 
-
 	$result = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+	
 	return $result;
 }
 
 $sth = sql('', $dir, $sort, $rp, $page);
+
 $sth_count_rows = sql('count',$dir, $sort, $rp, $page);
 
 $preferences = $sth->fetchAll(PDO::FETCH_ASSOC);
 $count = $sth->rowCount();
 
-
+$xml = "";
 $xml .= "<rows>";
 $xml .= "<page>$page</page>";
 $xml .= "<total>$count</total>";
@@ -90,7 +93,7 @@ foreach ($preferences as $row) {
 	]]></cell>";
 //	$xml .= "<cell><![CDATA[".$row['pref_description']."]]></cell>";
 
-    $dsc = $LANG[$row['translation']];
+    $dsc = (isset($LANG[$row['translation']]))? $LANG[$row['translation']] : $row['translation'] ;
     if ($dsc=='') {$dsc=$row['pref_description'];}
 
     $xml .= "<cell><![CDATA[".$dsc."]]></cell>";

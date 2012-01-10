@@ -28,16 +28,16 @@ $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
 #edit custom field
 
 if (  $op === 'edit_custom_field' ) {
-
 	if (isset($_POST['save_custom_field'])) {
 		$sql = "UPDATE
                                 ".TB_PREFIX."custom_fields
                         SET
-                                cf_custom_label = :label
+                                cf_custom_label = :label,
+                                cf_display = :display
                         WHERE
                                 cf_id = :id";
-
-		if (dbQuery($sql, ':id', $_GET['id'], ':label', $_POST['cf_custom_label'])) {
+		$display = (isset($_POST['cf_display']))? 1: 0;
+		if (dbQuery($sql, ':id', $_GET['id'], ':label', $_POST['cf_custom_label'], ':display', $display)) {
 			$display_block =  $LANG['save_custom_field_success'];
 		} else {
 			$display_block =  $LANG['save_custom_field_success'];

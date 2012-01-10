@@ -122,22 +122,30 @@
 		<td class="details_screen">{$LANG.tax_id}:</td>
 		<td class="details_screen">{$biller.tax_id|htmlsafe}</td>
 	</tr>	
-	<tr class="details_screen biller">
-		<td class="details_screen">{$customFieldLabels.biller_cf1|htmlsafe}:</td>
-		<td class="details_screen" colspan="5">{$biller.custom_field1|htmlsafe}</td>
-	</tr>	
-	<tr class="details_screen biller">
-		<td class="details_screen">{$customFieldLabels.biller_cf2|htmlsafe}:</td>
-		<td class="details_screen" colspan="5">{$biller.custom_field2|htmlsafe}</td>
-	</tr>	
-	<tr class="details_screen biller">
-		<td class="details_screen">{$customFieldLabels.biller_cf3|htmlsafe}:</td>
-		<td class="details_screen" colspan="5">{$biller.custom_field3|htmlsafe}</td>
-	</tr>	
-	<tr class="details_screen biller">
-		<td class="details_screen">{$customFieldLabels.biller_cf4|htmlsafe}:</td>
-		<td class="details_screen" colspan="5">{$biller.custom_field4|htmlsafe}</td>
-	</tr>
+	{if $customFieldDisplay.biller_cf1}
+		<tr class="details_screen biller">
+			<td class="details_screen">{$customFieldLabels.biller_cf1|htmlsafe}:</td>
+			<td class="details_screen" colspan="5">{$biller.custom_field1|htmlsafe}</td>
+		</tr>
+	{/if}	
+	{if $customFieldDisplay.biller_cf2}
+		<tr class="details_screen biller">
+			<td class="details_screen">{$customFieldLabels.biller_cf2|htmlsafe}:</td>
+			<td class="details_screen" colspan="5">{$biller.custom_field2|htmlsafe}</td>
+		</tr>	
+	{/if}
+	{if $customFieldDisplay.biller_cf3}
+		<tr class="details_screen biller">
+			<td class="details_screen">{$customFieldLabels.biller_cf3|htmlsafe}:</td>
+			<td class="details_screen" colspan="5">{$biller.custom_field3|htmlsafe}</td>
+		</tr>	
+	{/if}
+	{if $customFieldDisplay.biller_cf4}
+		<tr class="details_screen biller">
+			<td class="details_screen">{$customFieldLabels.biller_cf4|htmlsafe}:</td>
+			<td class="details_screen" colspan="5">{$biller.custom_field4|htmlsafe}</td>
+		</tr>
+	{/if}
 	{*
 		{showCustomFields categorieId="1" itemId=$biller.id }
 	*}
@@ -188,22 +196,30 @@
 		<td class="details_screen">{$LANG.tax_id}:</td>
 		<td class="details_screen">{$customer.tax_id|htmlsafe}</td>
 	</tr>
-	<tr class="details_screen customer">
-		<td class="details_screen">{$customFieldLabels.customer_cf1}:</td>
-		<td colspan="5" class="details_screen">{$customer.custom_field1|htmlsafe}</td>
-	</tr>	
-	<tr class="details_screen customer">
-		<td class="details_screen">{$customFieldLabels.customer_cf2}:</td>
-		<td colspan="5" class="details_screen">{$customer.custom_field2|htmlsafe}</td>
-	</tr>	
-	<tr class="details_screen customer">
-		<td class="details_screen">{$customFieldLabels.customer_cf3}:</td>
-		<td class="details_screen" colspan="5">{$customer.custom_field3|htmlsafe}</td>
-	</tr>	
-	<tr class="details_screen customer">
-		<td class="details_screen">{$customFieldLabels.customer_cf4}:</td>
-		<td class="details_screen" colspan="5">{$customer.custom_field4|htmlsafe}</td>
-	</tr>	
+	{if $customFieldDisplay.customer_cf1}
+		<tr class="details_screen customer">
+			<td class="details_screen">{$customFieldLabels.customer_cf1}:</td>
+			<td colspan="5" class="details_screen">{$customer.custom_field1|htmlsafe}</td>
+		</tr>	
+	{/if}
+	{if $customFieldDisplay.customer_cf2}
+		<tr class="details_screen customer">
+			<td class="details_screen">{$customFieldLabels.customer_cf2}:</td>
+			<td colspan="5" class="details_screen">{$customer.custom_field2|htmlsafe}</td>
+		</tr>	
+	{/if}
+	{if $customFieldDisplay.customer_cf3}
+		<tr class="details_screen customer">
+			<td class="details_screen">{$customFieldLabels.customer_cf3}:</td>
+			<td class="details_screen" colspan="5">{$customer.custom_field3|htmlsafe}</td>
+		</tr>	
+	{/if}
+	{if $customFieldDisplay.customer_cf4}
+		<tr class="details_screen customer">
+			<td class="details_screen">{$customFieldLabels.customer_cf4}:</td>
+			<td class="details_screen" colspan="5">{$customer.custom_field4|htmlsafe}</td>
+		</tr>	
+	{/if}
 			{*
 				{showCustomFields categorieId="2" itemId=$customer.id }
 			*}
@@ -289,12 +305,30 @@
 				<td colspan="6">
 					<table width=100%>
 						<tr>
+							{$i = 0}
+							{if $customFieldDisplay.product_cf1}
 							<td width="50%" class="details_screen">{$customFieldLabels.product_cf1|htmlsafe}: {$invoiceItem.product.custom_field1|htmlsafe}</td>
+							{$i = $i+1}
+							{/if}
+							{if $customFieldDisplay.product_cf2}
 							<td width="50%" class="details_screen">{$customFieldLabels.product_cf2|htmlsafe}: {$invoiceItem.product.custom_field2|htmlsafe}</td>
-						</tr>
-						<tr>       
+							{$i = $i+1}
+							{/if}
+						{if $i == 2}
+							</tr>
+							<tr> 
+						{/if}    
+							{if $customFieldDisplay.product_cf3}  
 							<td width="50%" class="details_screen">{$customFieldLabels.product_cf3|htmlsafe}: {$invoiceItem.product.custom_field3|htmlsafe}</td>
-							<td width="50%" class="details_screen">{$customFieldLabels.product_cf4|htmlsafe}: {$invoiceItem.product.custom_field4|htmlsafe}</td>
+							{$i = $i+1}
+							{/if}
+						{if $i == 2}
+							</tr>
+							<tr> 
+						{/if}  
+							{if $customFieldDisplay.product_cf4}
+							<td width="50%" class="details_screen">{$customFieldLabels.product_cf4|htmlsafe}: {$invoiceItem.product.custom_field4|htmlsafe}</td>{$i = $i+1}
+							{/if}
 						</tr>
 					</table>
 				</td>

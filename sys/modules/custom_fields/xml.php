@@ -59,7 +59,8 @@ if (in_array($sort, $validFields)) {
 	$sql = "SELECT
 				cf_id,
 				cf_custom_field,
-				cf_custom_label
+				cf_custom_label,
+				cf_display
 			FROM
 				".TB_PREFIX."custom_fields
 			$where
@@ -93,6 +94,7 @@ if (in_array($sort, $validFields)) {
 		$xml .= "<cell><![CDATA[".htmlsafe($row['cf_id'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".htmlsafe($row['field_name_nice'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".htmlsafe($row['cf_custom_label'])."]]></cell>";
+		$xml .= "<cell><![CDATA[".htmlsafe($row['cf_display'])."]]></cell>";
 		$xml .= "</row>";
 	}
 	$xml .= "</rows>";

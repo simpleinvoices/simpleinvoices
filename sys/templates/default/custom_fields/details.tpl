@@ -33,6 +33,10 @@
 		<td class="details_screen">{$LANG.custom_label}</td>
 		<td>{$cf.cf_custom_label|htmlsafe}</td>
 	</tr>
+	<tr>
+		<td class="details_screen">{$LANG.custom_display}</td>
+		<td>{$cf.cf_display|htmlsafe}</td>
+	</tr>
 	</table>
 
 <br />
@@ -72,6 +76,10 @@
 	<tr>
 		<td class="details_screen">{$LANG.custom_label}</td>
 		<td><input type="text" name="cf_custom_label" size="25" value="{$cf.cf_custom_label|htmlsafe}" /></td>
+	</tr>
+	<tr>
+		<td class="details_screen">{$LANG.custom_display}</td>
+		<td><input type="checkbox" name="cf_display" {if $cf.cf_display } checked {/if} /></td>
 	</tr>
 	</table>
 	<br />

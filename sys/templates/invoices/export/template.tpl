@@ -11,6 +11,7 @@
 </div>
 
 
+
 <table width="100%" align="center">
 		<tr>
 	   		<td colspan="5"><img src="{$logo|urlsafe}" border="0" hspace="0" align="left"></td>
@@ -21,7 +22,6 @@
 		</tr>
 </table>
 	
-
 <table >
 		<tr>
 				<td colspan="4"><b>{$preference.pref_inv_wording|htmlsafe} {$LANG.summary}</b></td>
