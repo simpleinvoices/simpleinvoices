@@ -5,6 +5,8 @@ checkLogin();
 //TODO - replace get..Payments with simple count - as data is got by xml.php now
 $query = null;$inv_id = null;$c_id = null;
 #if coming from another page where you want to filter by just one invoice
+$preference = 0;
+$customer = 0;
 if (!empty($_GET['id'])) {
 	$inv_id = $_GET['id'];
 	$query = getInvoicePayments($_GET['id']);

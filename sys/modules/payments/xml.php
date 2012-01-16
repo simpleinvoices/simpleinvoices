@@ -13,6 +13,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 	global $config;
 	global $auth_session;
 	global $dbh;
+	$start = (isset($start))?$start: 0;
+	$limit = (isset($limit))?$limit: 0;
 
 	//SC: Safety checking values that will be directly subbed in
 	if (intval($start) != $start) {
@@ -35,6 +37,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 	if($type =="count")
 	{
 		unset($limit);
+		$limit = '';
 	}
 	/*SQL Limit - end*/
 
@@ -191,17 +194,17 @@ $resultCount = $tth->fetch();
 $count = $resultCount[0];
 //echo sql2xml($customers, $count);
 */
-
+	$xml = '';
 	$xml .= "<rows>";
 	$xml .= "<page>$page</page>";
 	$xml .= "<total>$count</total>";
 
 	foreach ($payments as $row) {
-
+		$row['preference'] = (isset($row['preference']))?$row['preference']:'';
 		$notes = si_truncate($row['ac_notes'],'13','...');
 		$xml .= "<row id='".$row['id']."'>";
 	$xml .= "<cell><![CDATA[
-	<a class='index_table' title='$LANG[view] ".$row['name']."' href='index.php?module=payments&view=details&id=$row[id]&action=view'><img src='".$include_dir."sys/images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+	<a class='index_table' title='$LANG[view] ".$row['bname']."' href='index.php?module=payments&view=details&id=$row[id]&action=view'><img src='".$include_dir."sys/images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 	<a class='index_table' title='$LANG[print_preview_tooltip] ".$row['id']."' href='index.php?module=payments&view=print&id=$row[id]' target='_blank'><img src='".$include_dir."sys/images/common/printer.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 	<a class='index_table' title='$LANG[print_preview_tooltip] ".$row['id']."' href='index.php?module=export&view=payment&id=$row[id]&format=pdf'><img src='sys/images/common/page_white_acrobat.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 <!--
