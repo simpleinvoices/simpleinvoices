@@ -56,8 +56,8 @@ $smarty -> assign("products",$products);
 $smarty -> assign("preferences",$preferences);
 $smarty -> assign("dynamic_line_items",$dynamic_line_items);
 $smarty -> assign("show_custom_field",$show_custom_field);
-
-$smarty -> assign("defaultCustomerID",$defaultCustomerID['id']);
+$defaultCustomerID = (isset($defaultCustomerID['id']))? $defaultCustomerID['id']: $defaults['customer']['id'];
+$smarty -> assign("defaultCustomerID", $defaultCustomerID);
 $smarty -> assign("defaults",$defaults);
 
 $smarty -> assign('active_tab', '#money');

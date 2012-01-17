@@ -16,6 +16,7 @@ $acl->addRole(new Zend_Acl_Role('biller'));
 $acl->add(new Zend_Acl_Resource('api'));
 $acl->add(new Zend_Acl_Resource('auth'));
 $acl->add(new Zend_Acl_Resource('export'));
+$acl->add(new Zend_Acl_Resource('error'));
 $acl->add(new Zend_Acl_Resource('customers'));
 $acl->add(new Zend_Acl_Resource('cron'));
 $acl->add(new Zend_Acl_Resource('documentation'));
@@ -56,6 +57,8 @@ $acl->allow('guest', null, 'view');
 // everyone see auth page
 $acl->allow(null,'auth');
 $acl->allow(null,'api');
+
+$acl->allow(null,'error');
 
 //Customer permissions
 $acl->allow('customer', 'invoices');      

@@ -29,4 +29,7 @@ if( ($auth_session->role_name =='customer') AND ($module == 'invoices') AND ($_G
 
 }
 
-$checkPermission == "denied" ? exit($LANG['denied_page']) :"" ;
+//$checkPermission == "denied" ? exit($LANG['denied_page']) :"" ;
+
+$checkPermission == "denied" ?  header("Location: index.php?module=error&amp;view=401") : false;
+

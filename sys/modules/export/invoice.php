@@ -13,7 +13,7 @@
 
 $invoiceID = $_GET['id'];
 $get_format = $_GET['format'];
-$get_file_type = $_GET['filetype'];
+$get_file_type = (isset($_GET['filetype']))?$_GET['filetype']:'file';
 
 #get the invoice id
 $export = new export();
