@@ -30,8 +30,8 @@ set_include_path(get_include_path() . PATH_SEPARATOR . "./sys/include/");
 require_once("sys/include/init_pre.php");
 
 $include_dir ='./';
-$smarty_include_dir = '../../../';
-$smarty_embed_path = '../../../';
+$smarty_include_dir = getcwd() . '/';
+$smarty_embed_path = getcwd() . '/';
 $tpl_path = '../';
 
 // look to see if there's another language in the parameter list
