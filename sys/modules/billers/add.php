@@ -26,7 +26,7 @@ $smarty->assign("files", $files);
 #get custom field labels
 $customFieldLabel = getCustomFieldLabels();
 
-if ($_POST['name'] != "") {
+if (isset($_POST['name']) && $_POST['name'] != "") {
 	include("sys/modules/billers/save.php");
 }
 
