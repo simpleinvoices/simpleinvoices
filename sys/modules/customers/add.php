@@ -22,7 +22,7 @@ checkLogin();
 $customFieldLabel = getCustomFieldLabels();
 
 //if valid then do save
-if ($_POST['name'] != "" ) {
+if (isset($_POST['name']) && $_POST['name'] != "" ) {
 	include("sys/modules/customers/save.php");
 }
 $smarty -> assign('customFieldLabel',$customFieldLabel);
