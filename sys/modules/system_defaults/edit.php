@@ -24,6 +24,23 @@ EOD;
 	$description = "{$LANG['default_number_items']}";
 
 }
+else if ($_GET["submit"] == "rows_per_page") {
+
+	jsBegin();
+	jsFormValidationBegin("frmpost");
+	jsValidateifNum("def_num_rows_per_page","Define number of rows per page");
+	jsFormValidationEnd();
+	jsEnd();
+
+	$default = "rows_per_page";
+
+	$escaped = htmlsafe($defaults[rows_per_page]);
+	$value = <<<EOD
+<input type="text" size="25" name="value" value="$escaped">
+EOD;
+	$description = "{$LANG['default_rows_per_page']}";
+
+}
 else if ($_GET["submit"] == "def_inv_template") {
 
 	$default = "template";

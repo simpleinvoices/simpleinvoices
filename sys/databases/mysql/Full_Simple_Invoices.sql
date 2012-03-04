@@ -772,7 +772,8 @@ INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_
 (595, 248, '', '', ''),
 (596, 249, '', '', ''),
 (597, 250, '', '', ''),
-(598, 251, '', '', '');
+(598, 251, '', '', ''),
+(599, 252, 'Create variable rows_per_page for system preferences', '20120303', 'UPDATE create variable rows_per_page and set value to 25');
 
 -- --------------------------------------------------------
 
@@ -818,7 +819,8 @@ INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension
 (21, 'logging', '0', 1, 1),
 (22, 'delete', 'N', 1, 1),
 (23, 'tax_per_line_item', '1', 1, 1),
-(24, 'inventory', '0', 1, 1);
+(24, 'inventory', '0', 1, 1),
+(25, 'rows_per_page', '25', 1, 1);
 
 -- --------------------------------------------------------
 

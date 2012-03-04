@@ -16,6 +16,11 @@
 		<td class="details_screen"><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=line_items'><img src="{$include_dir}sys/images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td><td class="details_screen">{$LANG.default_number_items}</td><td>{$defaults.line_items|htmlsafe}</td>
 	</tr>
 	<tr>
+		<td class="details_screen"><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=rows_per_page'><img src="{$include_dir}sys/images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td><td class="details_screen">{$LANG.default_rows_per_page}
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_default_rows_per_page_text" title="{$LANG.default_rows_per_page}"><img src="{$include_dir}sys/images/common/help-small.png" alt="" /></a>
+		</td><td>{$defaults.rows_per_page|htmlsafe}</td>
+	</tr>
+	<tr>
 		<td class="details_screen"><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=def_inv_template'><img src="{$include_dir}sys/images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td><td class="details_screen">{$LANG.default_inv_template}
 		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_default_invoice_template_text" title="{$LANG.default_inv_template}"><img src="{$include_dir}sys/images/common/help-small.png" alt="" /></a>
         </td><td>{$defaults.template|htmlsafe}</td>

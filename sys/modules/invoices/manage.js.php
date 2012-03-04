@@ -66,7 +66,7 @@
 			pagemsg: '{/literal}{$LANG.page}{literal}',
 			ofmsg: '{/literal}{$LANG.of}{literal}',
 			useRp: false,
-			rp: 15,
+			rp: '{/literal}{$defaults.rows_per_page|htmlsafe}{literal}',
 			showToggleBtn: false,
 			showTableToggleBtn: false,
 			width: 'auto',
