@@ -1,9 +1,9 @@
 <meta http-equiv="refresh" content="2;URL=index.php?module=system_defaults&amp;view=manage" />
 
-<br />
-
+<div class="ui-feedback">
 {if $saved }
-	{$LANG.save_defaults_success}<br />
+	{$LANG.save_defaults_success}
 {else}
-	{$LANG.save_defaults_failure}<br />
+	{$LANG.save_defaults_failure}
 {/if}
+</div>

@@ -499,7 +499,9 @@ div.colCopy {
 			margin-bottom: -24px;
 			}
 
-
+		.flexigrid div.bDiv td {
+			padding:0;
+		}
 		.flexigrid div.bDiv td div
 			{
 			border-top: 0px solid #fff;

@@ -2,20 +2,10 @@
 
 <h3>{$LANG.edit} {$description|htmlsafe}</h3>
 
-<table align="center">
-
-        <tr>
-                <td><br /></td>
-        </tr>
-        <tr>
+<table align="center" style="margin:3em auto;">
+    <tr>
         <td class="details_screen">{$description|htmlsafe}</td><td>{$value}</td>
-        </tr>
-        <tr>
-                <td><br /></td>
-        </tr>
-
-</tr>
-</tr>
+    </tr>
 </table>
 <!-- </div> -->
 <table class="buttons" align="center">

@@ -144,4 +144,14 @@ body .ui-resizable-autohide .ui-resizable-handle { display: none; } /* use 'body
 .ui-dialog.ui-draggable .ui-dialog-titlebar {
 	cursor: move;
 }
-
+div.ui-feedback {
+	display:block;
+	width:60%;
+	margin:2em auto;
+	padding:2em;
+	background-color:#FFFCD9;
+	border:1px solid #EEDE9C;
+	border-radius:6px;
+	line-height:140%;
+	text-align:center;
+}
