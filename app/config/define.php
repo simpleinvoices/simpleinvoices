@@ -16,8 +16,8 @@ define("LOGGING",true);
 // this is the url of the version file on the server needs to point to www.simpleinvoices.org
 define("SI_VERSION_FILE","http://simpleinvoices.googlecode.com/svn/assets/siversion.xml");
 
-define("SI_VERSION_ID","20101001");
-define("SI_VERSION","2010.2 update 1");
+define("SI_VERSION_ID","20110513");
+define("SI_VERSION","2011.1 update 0");
 
 
 ####################
