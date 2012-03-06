@@ -111,7 +111,19 @@ LOGIN SCREEN (.login is body class)
 .login div.Container {
 	width:500px;
 	min-width:inherit;
-	margin:60px auto 20px; }
+	margin:60px auto 20px;
+}
+
+.login div.login-logo {
+	text-align: center;
+	padding: 15px 0;
+}
+
+.login a {
+	font-size: 0.8em;
+	text-decoration: none;
+	color: #999;
+}
 
 .login h1 {
 	margin-bottom:20px; }
@@ -131,6 +143,13 @@ LOGIN SCREEN (.login is body class)
 .login input {
 	font-size:14px; }
 
+.login input[type="text"],
+.login input[type="password"] {
+	border: 1px solid #BABABA;
+	padding: 6px;
+	width: 345px;
+}
+
 .login dd span {
 	color:#ccc; }
 
@@ -149,12 +168,51 @@ LOGIN SCREEN (.login is body class)
 	margin:10px 0 20px; }
 
 .login div#Dialog {
-	border:5px solid #ccc;
-		-webkit-border-radius: 15px;    /* Safari */
-	    -moz-border-radius: 15px;       /* Firefox */
+	box-shadow: 0 0 10px rgba(0,0,0,0.25);
+	-webkit-box-shadow: 0 0 10px rgba(0,0,0,0.25);
+	-moz-box-shadow: 0 0 10px rgba(0,0,0,0.25);
 	text-align:left;
 	background:#fff;
-	padding:15px 20px 10px; }
+	padding:15px 20px 10px;
+	background: rgb(255,255,255); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(248,248,248,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(248,248,248,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(248,248,248,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(248,248,248,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(248,248,248,1) 100%); /* IE10+ */
+	background: linear-gradient(top, rgba(255,255,255,1) 0%,rgba(248,248,248,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f8f8f8',GradientType=0 ); /* IE6-9 */
+}
+
+.login table#login-form-table {
+	width: 100%;
+}
+
+.login div.login-submit {
+	margin-top: 15px;
+	text-align: center;
+}
+
+.login div.login-submit button {
+	border: 1px solid #BABABA;
+	background: #EEE;
+	padding: 8px 16px;
+	font-size: 0.8em;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+.login div.login-submit button:hover,
+.login div.login-submit button:focus {
+	cursor: pointer;
+	background: #D6D6D6;
+}
+
+.login form label {
+	font-size: 0.8em;
+	padding-right: 20px;
+}
 
 body.login div#Dialog h2 {
 	margin:0;

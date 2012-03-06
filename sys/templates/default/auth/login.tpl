@@ -11,16 +11,16 @@
 <p align="center"><strong><font color="#990000">{$errorMessage|outhtml}</font></strong><br /><br /></p>
 {/if}
 	<div id="Dialog">
-		<center>
-            <h1>{$LANG.simple_invoices}</h1>
-        </center>
+		<div class="login-logo">
+            <img src="sys/images/common/si_logo.png" alt="Simple Invoices"/>
+        </div>
 		<form action="" method="post" id="frmLogin" name="frmLogin">
 	        <input type="hidden" name="action" value="login" />
 		<dl>
-        <table>
+        <table id="login-form-table">
   		<tr>
             <td>
-                {$LANG.email}:
+                <label>{$LANG.email}:</label>
             </td>
             <td>
   		        <input name="user" size="25" type="text" title="user" value="" />
@@ -28,7 +28,7 @@
         </tr>       
   		<tr>
             <td>
-                {$LANG.password}:
+                <label>{$LANG.password}:</label>
             </td>
             <td>
   		        <input name="pass" size="25" type="password" title="password" value="" />
@@ -36,20 +36,16 @@
         </tr>            
           <tr>
             <td>
-                {$LANG.language}:
+                <label>{$LANG.language}:</label>
             </td>
             <td>
                 {$value}
             </td>   
-        </tr>            
-  		<tr>
-            <td>
-            </td>
-            <td>
-                <input type="submit" value="login" />
-            </td>
-        </tr>       
+        </tr>                
         </table>
+        <div class="login-submit">
+            <button>{$LANG.login}</button>
+        </div>
         <input type="hidden" name="name" value="{$default|htmlsafe}">
 		</form>
         </center>
