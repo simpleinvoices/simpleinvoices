@@ -26,7 +26,7 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			colModel : [
 				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
 				{display: '{/literal}{$LANG.name}{literal}', name : 'name', width : 40 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.customer_contact}{literal}', name : 'contact_person', width : 20 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.customer_contact}{literal}', name : 'attention', width : 20 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.total}{literal}', name : 'customer_total', width : 10 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.owing}{literal}', name : 'owing', width : 10 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled', width : 10 * percentage_width, sortable : true, align: 'left'}
