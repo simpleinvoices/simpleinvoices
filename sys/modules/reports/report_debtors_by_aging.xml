@@ -25,8 +25,9 @@
       </HEADER>		
       <FOOTER>
          <ROW>
-            <COL ALIGN="RIGHT" COLSPAN="8" CELLCLASS="PAGE_LAYER">Total Owed</COL>
+            <COL ALIGN="RIGHT" COLSPAN="5" CELLCLASS="PAGE_LAYER">Total Owed</COL>
             <COL ALIGN="LEFT" NUMBERFORMATEX="2" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD" TYPE="EXPRESSION">$this->getSum("inv_owing")</COL>
+            <COL COLSPAN="3" CELLCLASS="PAGE_LAYER"></COL>
          </ROW>
       </FOOTER>		
    </PAGE>
@@ -54,6 +55,7 @@
             <ROW>
                <COL ALIGN="RIGHT" COLSPAN="5" CELLCLASS="GROUP_LAYER">Sum</COL>
                <COL ALIGN="LEFT" CELLCLASS="GROUP_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" TYPE="EXPRESSION">$this->getSum("inv_owing")</COL>
+               <COL COLSPAN="3"></COL>
             </ROW>
          </FOOTER>
 
