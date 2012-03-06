@@ -515,6 +515,7 @@ $LANG['setup_customisation'] = "If you need to customise some of the settings (i
 $LANG['shortcut'] =" Shortcut menu";//1
 $LANG['show_details'] = "Show details";//1
 $LANG['show_only_unpaid_invoices'] = "Show only unpaid invoices";//1
+$LANG['show_only_real_invoices'] = "Show only real invoices";//1
 $LANG['simple_invoices'] = "Simple Invoices";//1
 $LANG['simple_invoices_powered_by'] = "Powered by Simple Invoices";//1
 $LANG['something_went_wrong'] = "Something went wrong.";//1
