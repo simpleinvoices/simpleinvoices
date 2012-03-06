@@ -1500,9 +1500,9 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['256']['patch'] = "ALTER TABLE ".TB_PREFIX."biller ADD tax_id VARCHAR(16) AFTER `name`;";
     $patch['256']['date'] = "20110806";
     
-    /*$patch['257']['name'] = "Add a Tax ID field to the customers table";
+  	$patch['257']['name'] = "Add a Tax ID field to the customers table";
     $patch['257']['patch'] = "ALTER TABLE ".TB_PREFIX."customers ADD tax_id VARCHAR(16) AFTER `name`;";
-    $patch['257']['date'] = "20110806";*/
+    $patch['257']['date'] = "20110806";
 /*
 ** comment out so can get beta of 2010.3 - to be added in later 
     $patch['253']['name'] = "Insert invoice_creator user group";
