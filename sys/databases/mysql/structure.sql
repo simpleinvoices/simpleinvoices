@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS `si_biller` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL DEFAULT '1',
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tax_id` VARCHAR(16) COLLATE utf8_unicode_ci DEFAULT NULL, 
   `street_address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `street_address2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `city` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -39,6 +40,7 @@ CREATE TABLE IF NOT EXISTS `si_biller` (
   `paypal_notify_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `paypal_return_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `eway_customer_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `paymentsgateway_api_id` VARCHAR( 255 ) COLLATE utf8_unicode_ci DEFAULT NULL,
   `notes` text COLLATE utf8_unicode_ci,
   `custom_field1` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `custom_field2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -92,6 +94,7 @@ CREATE TABLE IF NOT EXISTS `si_customers` (
   `domain_id` int(11) NOT NULL DEFAULT '1',
   `attention` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tax_id` VARCHAR(16) COLLATE utf8_unicode_ci DEFAULT NULL, 
   `street_address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `street_address2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `city` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -338,6 +341,7 @@ CREATE TABLE IF NOT EXISTS `si_products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL DEFAULT '1',
   `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `detail` text COLLATE utf8_unicode_ci NOT NULL,
   `unit_price` decimal(25,6) DEFAULT '0.000000',
   `default_tax_id` int(11) DEFAULT NULL,
   `default_tax_id_2` int(11) DEFAULT NULL,
@@ -415,6 +419,8 @@ CREATE TABLE IF NOT EXISTS `si_user` (
   `enabled` int(1) NOT NULL,
   PRIMARY KEY (`domain_id`,`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+CREATE UNIQUE INDEX ref_idx_email on `si_user` (email) ;
 
 -- --------------------------------------------------------
 
