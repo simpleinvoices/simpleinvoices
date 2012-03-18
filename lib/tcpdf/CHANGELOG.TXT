@@ -1,3 +1,29 @@
+5.9.150 (2012-03-16)
+	- A bug related to form fields in PDF/A mode was fixed.
+
+5.9.149 (2012-02-21)
+	- Bug item #3489933 "SVG Parser treats tspan like text" was fixed.
+
+5.9.148 (2012-02-17)
+	- Bug item #3488600 "Multiple radiobutton sets get first set value" was fixed.
+
+5.9.147 (2012-02-14)
+	- A problem with SVG gradients has been fixed.
+
+5.9.146 (2012-02-12)
+	- Bug item #3486880 "$filehash undefine error" was fixed.
+	- The default font is now the one specified at PDF_FONT_NAME_MAIN constant.
+
+5.9.145 (2012-01-28)
+	- Japanese language file was added.
+	- TCPDF license and README.TXT files were updated.
+
+5.9.144 (2012-01-12)
+	- HTML output on barcode classes was improved.
+
+5.9.143 (2012-01-08)
+	- Bug item #3471057 "setCreator() has no effect" was fixed.
+
 5.9.142 (2011-12-23)
 	- Source code documentation was updated.
 

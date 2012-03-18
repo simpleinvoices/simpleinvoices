@@ -1,11 +1,11 @@
 <?php
 //============================================================+
 // File name   : tcpdf.php
-// Version     : 5.9.142
+// Version     : 5.9.150
 // Begin       : 2002-08-03
-// Last Update : 2011-12-14
+// Last Update : 2012-03-16
 // Author      : Nicola Asuni - Tecnick.com LTD - Manor Coach House, Church Hill, Aldershot, Hants, GU12 4RQ, UK - www.tecnick.com - info@tecnick.com
-// License     : http://www.tecnick.com/pagefiles/tcpdf/LICENSE.TXT GNU-LGPLv3 + YOU CAN'T REMOVE ANY TCPDF COPYRIGHT NOTICE OR LINK FROM THE GENERATED PDF DOCUMENTS.
+// License     : http://www.tecnick.com/pagefiles/tcpdf/LICENSE.TXT GNU-LGPLv3
 // -------------------------------------------------------------------
 // Copyright (C) 2002-2012 Nicola Asuni - Tecnick.com LTD
 //
@@ -14,9 +14,7 @@
 // TCPDF is free software: you can redistribute it and/or modify it
 // under the terms of the GNU Lesser General Public License as
 // published by the Free Software Foundation, either version 3 of the
-// License, or (at your option) any later version. Additionally,
-// YOU CAN'T REMOVE ANY TCPDF COPYRIGHT NOTICE OR LINK FROM THE
-// GENERATED PDF DOCUMENTS.
+// License, or (at your option) any later version.
 //
 // TCPDF is distributed in the hope that it will be useful, but
 // WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -139,7 +137,7 @@
  * Tools to encode your unicode fonts are on fonts/utils directory.</p>
  * @package com.tecnick.tcpdf
  * @author Nicola Asuni
- * @version 5.9.142
+ * @version 5.9.150
  */
 
 // Main configuration file. Define the K_TCPDF_EXTERNAL_CONFIG constant to skip this file.
@@ -151,7 +149,7 @@ require_once(dirname(__FILE__).'/config/tcpdf_config.php');
  * TCPDF project (http://www.tcpdf.org) has been originally derived in 2002 from the Public Domain FPDF class by Olivier Plathey (http://www.fpdf.org), but now is almost entirely rewritten.<br>
  * @package com.tecnick.tcpdf
  * @brief PHP class for generating PDF documents without requiring external extensions.
- * @version 5.9.142
+ * @version 5.9.150
  * @author Nicola Asuni - info@tecnick.com
  */
 class TCPDF {
@@ -162,7 +160,7 @@ class TCPDF {
 	 * Current TCPDF version.
 	 * @private
 	 */
-	private $tcpdf_version = '5.9.142';
+	private $tcpdf_version = '5.9.150';
 
 	// Protected properties
 
@@ -1898,7 +1896,7 @@ class TCPDF {
 		$this->gradients = array();
 		$this->InFooter = false;
 		$this->lasth = 0;
-		$this->FontFamily = 'helvetica';
+		$this->FontFamily = defined('PDF_FONT_NAME_MAIN')?PDF_FONT_NAME_MAIN:'helvetica';
 		$this->FontStyle = '';
 		$this->FontSizePt = 12;
 		$this->underline = false;
@@ -3753,7 +3751,8 @@ class TCPDF {
 		$this->y = $this->h - (1 / $this->k);
 		$this->lMargin = 0;
 		$this->_out('q');
-		$this->SetFont('helvetica', '', 1);
+		$font = defined('PDF_FONT_NAME_MAIN')?PDF_FONT_NAME_MAIN:'helvetica';
+		$this->SetFont($font, '', 1);
 		$this->setTextRenderingMode(0, false, false);
 		$msg = "\x50\x6f\x77\x65\x72\x65\x64\x20\x62\x79\x20\x54\x43\x50\x44\x46\x20\x28\x77\x77\x77\x2e\x74\x63\x70\x64\x66\x2e\x6f\x72\x67\x29";
 		$lnk = "\x68\x74\x74\x70\x3a\x2f\x2f\x77\x77\x77\x2e\x74\x63\x70\x64\x66\x2e\x6f\x72\x67";
@@ -7581,6 +7580,8 @@ class TCPDF {
 				$this->Error('[Image] Unable to get image: '.$file);
 			}
 		}
+		// file hash
+		$filehash = md5($file);
 		// get original image width and height in pixels
 		list($pixw, $pixh) = $imsize;
 		// calculate image width and height on document
@@ -7679,7 +7680,6 @@ class TCPDF {
 			}
 		} elseif (substr($file, 0, -34) != K_PATH_CACHE.'msk') {
 			// check for cached images with alpha channel
-			$filehash = md5($file);
 			$tempfile_plain = K_PATH_CACHE.'mskp_'.$filehash;
 			$tempfile_alpha = K_PATH_CACHE.'mska_'.$filehash;
 			if (in_array($tempfile_plain, $this->imagekeys)) {
@@ -9091,6 +9091,7 @@ class TCPDF {
 						$annots .= ' /T '.$this->_datastring($pl['txt'], $radio_button_obj_id);
 						$annots .= ' /FT /Btn';
 						$annots .= ' /Kids [';
+						$defval = '';
 						foreach ($this->radiobutton_groups[$n][$pl['txt']] as $key => $data) {
 							if (isset($data['kid'])) {
 								$annots .= ' '.$data['kid'].' 0 R';
@@ -9100,7 +9101,7 @@ class TCPDF {
 							}
 						}
 						$annots .= ' ]';
-						if (isset($defval)) {
+						if (!empty($defval)) {
 							$annots .= ' /V /'.$defval;
 						}
 						$annots .= ' >>';
@@ -12287,7 +12288,7 @@ class TCPDF {
 		$docdate = $this->_escapeXML($docdate);
 		$xmp .= "\t\t".'<rdf:Description rdf:about="" xmlns:xmp="http://ns.adobe.com/xap/1.0/">'."\n";
 		$xmp .= "\t\t\t".'<xmp:CreateDate>'.$docdate.'</xmp:CreateDate>'."\n";
-		$xmp .= "\t\t\t".'<xmp:CreatorTool>TCPDF</xmp:CreatorTool>'."\n";
+		$xmp .= "\t\t\t".'<xmp:CreatorTool>'.$this->creator.'</xmp:CreatorTool>'."\n";
 		$xmp .= "\t\t\t".'<xmp:ModifyDate>'.$docdate.'</xmp:ModifyDate>'."\n";
 		$xmp .= "\t\t\t".'<xmp:MetadataDate>'.$docdate.'</xmp:MetadataDate>'."\n";
 		$xmp .= "\t\t".'</rdf:Description>'."\n";
@@ -15380,7 +15381,7 @@ class TCPDF {
 	 * @param $w (float) Width.
 	 * @param $h (float) Height.
 	 * @param $r (float) the radius of the circle used to round off the corners of the rectangle.
-	 * @param $round_corner (string) Draws rounded corner or not. String with a 0 (not rounded i-corner) or 1 (rounded i-corner) in i-position. Positions are, in order and begin to 0: top left, top right, bottom right and bottom left. Default value: all rounded corner ("1111").
+	 * @param $round_corner (string) Draws rounded corner or not. String with a 0 (not rounded i-corner) or 1 (rounded i-corner) in i-position. Positions are, in order and begin to 0: top right, bottom right, bottom left and top left. Default value: all rounded corner ("1111").
 	 * @param $style (string) Style of rendering. See the getPathPaintOperator() function for more information.
 	 * @param $border_style (array) Border style of rectangle. Array like for SetLineStyle(). Default value: default line style (empty array).
 	 * @param $fill_color (array) Fill color. Format: array(GREY) or array(R,G,B) or array(C,M,Y,K). Default value: default color (empty array).
@@ -15399,7 +15400,7 @@ class TCPDF {
 	 * @param $h (float) Height.
 	 * @param $rx (float) the x-axis radius of the ellipse used to round off the corners of the rectangle.
 	 * @param $ry (float) the y-axis radius of the ellipse used to round off the corners of the rectangle.
-	 * @param $round_corner (string) Draws rounded corner or not. String with a 0 (not rounded i-corner) or 1 (rounded i-corner) in i-position. Positions are, in order and begin to 0: top left, top right, bottom right and bottom left. Default value: all rounded corner ("1111").
+	 * @param $round_corner (string) Draws rounded corner or not. String with a 0 (not rounded i-corner) or 1 (rounded i-corner) in i-position. Positions are, in order and begin to 0: top right, bottom right, bottom left and top left. Default value: all rounded corner ("1111").
 	 * @param $style (string) Style of rendering. See the getPathPaintOperator() function for more information.
 	 * @param $border_style (array) Border style of rectangle. Array like for SetLineStyle(). Default value: default line style (empty array).
 	 * @param $fill_color (array) Fill color. Format: array(GREY) or array(R,G,B) or array(C,M,Y,K). Default value: default color (empty array).
@@ -17045,6 +17046,10 @@ class TCPDF {
 		}
 		// set font
 		$font = 'zapfdingbats';
+		if ($this->pdfa_mode) {
+			// all fonts must be embedded
+			$font = 'pdfa'.$font;
+		}
 		$this->AddFont($font);
 		$tmpfont = $this->getFontBuffer($font);
 		// set data for parent group
@@ -17300,6 +17305,10 @@ class TCPDF {
 		$popt = $this->getAnnotOptFromJSProp($prop);
 		// set additional default options
 		$font = 'zapfdingbats';
+		if ($this->pdfa_mode) {
+			// all fonts must be embedded
+			$font = 'pdfa'.$font;
+		}
 		$this->AddFont($font);
 		$tmpfont = $this->getFontBuffer($font);
 		$this->annotation_fonts[$tmpfont['fontkey']] = $tmpfont['i'];
@@ -27686,6 +27695,12 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 				if (isset($gradient['coords'][4])) {
 					$gradient['coords'][4] = $this->getHTMLUnitToUnits($gradient['coords'][4], 0, $this->svgunit, false);
 				}
+				if ($w <= $minlen) {
+					$w = $minlen;
+				}
+				if ($h <= $minlen) {
+					$h = $minlen;
+				}
 				// shift units
 				if ($gradient['gradientUnits'] == 'objectBoundingBox') {
 					// convert to SVG coordinate system
@@ -27693,12 +27708,6 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 					$gradient['coords'][1] += $y;
 					$gradient['coords'][2] += $x;
 					$gradient['coords'][3] += $y;
-				}
-				if ($w <= $minlen) {
-					$w = $minlen;
-				}
-				if ($h <= $minlen) {
-					$h = $minlen;
 				}
 				// calculate percentages
 				$gradient['coords'][0] = ($gradient['coords'][0] - $x) / $w;
@@ -27711,14 +27720,11 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 			} elseif ($gradient['mode'] == 'percentage') {
 				foreach($gradient['coords'] as $key => $val) {
 					$gradient['coords'][$key] = (intval($val) / 100);
-				}
-			}
-			// fix values
-			foreach($gradient['coords'] as $key => $val) {
-				if ($val < 0) {
-					$gradient['coords'][$key] = 0;
-				} elseif ($val > 1) {
-					$gradient['coords'][$key] = 1;
+					if ($val < 0) {
+						$gradient['coords'][$key] = 0;
+					} elseif ($val > 1) {
+						$gradient['coords'][$key] = 1;
+					}
 				}
 			}
 			if (($gradient['type'] == 2) AND ($gradient['coords'][0] == $gradient['coords'][2]) AND ($gradient['coords'][1] == $gradient['coords'][3])) {
@@ -27734,7 +27740,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 			$gradient['coords'][3] = $tmp;
 			// set transformation map for gradient
 			if ($gradient['type'] == 3) {
-				// gradient is always circular
+				// circular gradient
 				$cy = $this->h - $y - ($gradient['coords'][1] * ($w + $h));
 				$this->_out(sprintf('%.3F 0 0 %.3F %.3F %.3F cm', $w*$this->k, $w*$this->k, $x*$this->k, $cy*$this->k));
 			} else {
@@ -28752,9 +28758,10 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 					break;
 				}
 				// print text
-				$text = $this->stringTrim($this->svgtext);
+				$text = $this->svgtext;
+				//$text = $this->stringTrim($text);
+				$textlen = $this->GetStringWidth($text);
 				if ($this->svgtextmode['text-anchor'] != 'start') {
-					$textlen = $this->GetStringWidth($text);
 					// check if string is RTL text
 					if ($this->svgtextmode['text-anchor'] == 'end') {
 						if ($this->svgtextmode['rtl']) {
@@ -28773,7 +28780,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 				$textrendermode = $this->textrendermode;
 				$textstrokewidth = $this->textstrokewidth;
 				$this->setTextRenderingMode($this->svgtextmode['stroke'], true, false);
-				$this->Cell(0, 0, $text, 0, 0, '', false, '', 0, false, 'L', 'T');
+				$this->Cell($textlen, 0, $text, 0, 0, '', false, '', 0, false, 'L', 'T');
 				// restore previous rendering mode
 				$this->textrendermode = $textrendermode;
 				$this->textstrokewidth = $textstrokewidth;

@@ -177,7 +177,7 @@ class export
 
 				}
 
-				$templatePath = $include_dir . "/templates/default/statement/index.tpl";
+				$templatePath = $include_dir . "/sys/templates/default/statement/index.tpl";
 
 				$biller_details = getBiller($this->biller_id);
 				$customer_details = customer::get($this->customer_id);
@@ -231,10 +231,10 @@ class export
                 $smarty -> assign('pageActive', 'payment');
                 $smarty -> assign('active_tab', '#money');
 
-				$css = $siUrl."/templates/invoices/default/style.css";
+				$css = $siUrl."/sys/templates/invoices/default/style.css";
 				$smarty -> assign('css',$css);
 
-                $templatePath = $include_dir . "/templates/default/payments/print.tpl";
+                $templatePath = $include_dir . "/sys/templates/default/payments/print.tpl";
 				$data = $smarty -> fetch(".".$templatePath);
                 break;
             }

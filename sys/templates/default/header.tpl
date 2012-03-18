@@ -52,7 +52,7 @@
 
 	<script type="text/javascript" src="{/literal}{$include_dir}{literal}sys/include/jquery/jquery.validationEngine.js"></script>
   <!-- Javascript for Flot Graphs -->
-  <script type="text/javascript" src="{/literal}{$include_dir}{literal}lib/flot/jquery.flot.js"></script>
+  <script type="text/javascript" src="{/literal}{$include_dir}{literal}sys/include/jquery/flot/jquery.flot.js"></script>
 	
 	{/literal}
 	{if $config->debug->level == "All"}
