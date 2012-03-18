@@ -263,6 +263,7 @@ $early_exit[] = "payments_print";
 $early_exit[] = "documentation_view";
 $early_exit[] = "biller_upload-logo";
 //$early_exit[] = "install_index";
+$early_exit[] = "export_payment";
 
 
 $module = isset($_GET['module'])?$_GET['module']:null;

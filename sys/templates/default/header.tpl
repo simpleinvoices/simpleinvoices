@@ -41,7 +41,7 @@
 	<link rel="stylesheet" type="text/css" href="{/literal}{$include_dir}{literal}sys/extensions/tab_menu/templates/default/css/iehacks.css" media="all" />
 	<![endif]-->
 
-	<!--<script type="text/javascript" src="./include/jquery/jquery.conf.js.tpl"></script>-->
+	<!--<script type="text/javascript" src="./sys/include/jquery/jquery.conf.js.tpl"></script>-->
 	<link rel="stylesheet" type="text/css" href="{/literal}{$include_dir}{literal}sys/templates/default/css/flexigrid.css" />
 	<link rel="stylesheet" type="text/css" href="{/literal}{$include_dir}{literal}sys/include/jquery/wysiwyg/wysiwyg.css" />
 	<link rel="stylesheet" type="text/css" href="{/literal}{$include_dir}{literal}sys/include/jquery/jquery.plugins.css" title="default" media="screen" />

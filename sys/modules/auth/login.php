@@ -14,7 +14,6 @@ if (!defined('BROWSE')) {
 }
 
 
-Zend_Session::start();
 /*
 echo  substr($_SERVER['SCRIPT_FILENAME'], -9, 5);
 require_once 'include/init.php';
@@ -78,7 +77,7 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 
 	if ($result->isValid()) {
 
-		Zend_Session::start();
+		Zend_Session::regenerateId();
 
 		/*
 		* grab user data  from the datbase

@@ -2692,62 +2692,64 @@ function pdfThis($html,$file_location="",$pdfname)
 
 
 
-require_once(getcwd() . '/lib/tcpdf/tcpdf.php');
+    require_once(getcwd() . '/lib/tcpdf/tcpdf.php');
 
-// create new PDF document
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+    // create new PDF document
+    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-// set document information
-$pdf->SetCreator('Simple Invoice');
-$pdf->SetAuthor('Simple Invoice');
-$pdf->SetTitle('Invoice');
+    // set document information
+    $pdf->SetCreator('Simple Invoice');
+    $pdf->SetAuthor('Simple Invoice');
+    $pdf->SetTitle('Invoice');
 
-// set default header data
-//$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 061', PDF_HEADER_STRING);
+    // remove default header/footer
+    $pdf->setPrintHeader(false);
+    $pdf->setPrintFooter(false);
 
-// set header and footer fonts
-//$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-//$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+    // set default monospaced font
+    //$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
-// set default monospaced font
-//$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+    //set margins
+    $pdf->SetMargins(
+	    $config->export->pdf->leftmargin,
+	    $config->export->pdf->topmargin,
+	    $config->export->pdf->rightmargin
+    );
+    //$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+    //$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
-//set margins
-$pdf->SetMargins(
-	$config->export->pdf->leftmargin,
-	$config->export->pdf->topmargin,
-	$config->export->pdf->rightmargin
-);
-//$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-//$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+    //set auto page breaks
+    $pdf->SetAutoPageBreak(TRUE, $config->export->pdf->bottommargin);
 
-//set auto page breaks
-$pdf->SetAutoPageBreak(TRUE, $config->export->pdf->bottommargin);
+    //set image scale factor
+    //$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
-//set image scale factor
-//$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+    //set some language-dependent strings
+    //$pdf->setLanguageArray($l);
 
-//set some language-dependent strings
-//$pdf->setLanguageArray($l);
+    // ---------------------------------------------------------
 
-// ---------------------------------------------------------
+    // set font
+    $pdf->SetFont('helvetica', '', 10);
 
-// set font
-$pdf->SetFont('helvetica', '', 10);
+    // add a page
+    $pdf->AddPage();
 
-// add a page
-$pdf->AddPage();
+    // output the HTML content
+    $pdf->writeHTML($html, true, false, true, false, '');
 
-// output the HTML content
-$pdf->writeHTML($html, true, false, true, false, '');
+    // reset pointer to the last page
+    $pdf->lastPage();
 
-// reset pointer to the last page
-$pdf->lastPage();
+    // ---------------------------------------------------------
 
-// ---------------------------------------------------------
-
-//Close and output PDF document
-$pdf->Output($pdfname, 'I');
-
-
+    //Close and output PDF document
+    if ($file_location == "download") {
+        // I: send the file inline to the browser. The plug-in is used if available. The name given by filename is used when one selects the "Save as" option on the link generating the PDF.
+        // D: send to the browser and force a file download with the name given by filename.
+        $pdf->Output($pdfname, 'I');    
+    } else {
+        // Destination is file
+        $pdf->Output('./tmp/cache/' . $pdfname . '.pdf', 'F');
+    }
 }

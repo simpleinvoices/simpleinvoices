@@ -124,7 +124,7 @@
 			</tbody>
 	
 	        {section name=line start=0 loop=$dynamic_line_items step=1}
-		{ assign var="lineNumber" value=$smarty.section.line.index } 
+		{assign var="lineNumber" value=$smarty.section.line.index} 
 				<tbody class="line_item" id="row{$smarty.section.line.index|htmlsafe}">
 					<tr>
 						<td>
@@ -201,7 +201,7 @@
 					{/if}
 						</td>
 						{section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
-		                    { assign var="taxNumber" value=$smarty.section.tax.index } 
+		                    {assign var="taxNumber" value=$smarty.section.tax.index} 
 						<td>				                				                
 							<select 
 								id="tax_id[{$smarty.section.line.index|htmlsafe}][{$smarty.section.tax.index|htmlsafe}]"

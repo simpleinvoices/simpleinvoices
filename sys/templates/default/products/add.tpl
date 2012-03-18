@@ -57,7 +57,7 @@
 		<select name="default_tax_id">
 		    <option value=''></option>
 			{foreach from=$taxes item=tax}
-				<option value="{$tax.tax_id|htmlsafe}">{$tax.tax_description|htmlsafe}</option>
+				<option {if $tax.tax_id == $defaults.tax}selected{/if} value="{$tax.tax_id|htmlsafe}">{$tax.tax_description|htmlsafe}</option>
 			{/foreach}
 		</select>
 		</td>

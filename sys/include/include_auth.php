@@ -4,7 +4,6 @@
 //if user logged into Simple Invoices with auth off then auth turned on - id via fake_auth and kill session
 if ( ($config->authentication->enabled == 1 ) AND ($auth_session->fake_auth =="1" ) )
 {
-	Zend_Session::start();
 	Zend_Session::destroy(true);
 	header('Location: .');
 }
@@ -18,7 +17,7 @@ if ($config->authentication->enabled == 1 ) {
 		$auth_session->domain_id = "1";
 	}
 
-//	include('./include/auth/auth.php');     aducom
+//	include('./sys/include/auth/auth.php');     aducom
     require_once('auth/auth.php');
 }
 

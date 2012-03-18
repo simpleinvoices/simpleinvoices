@@ -58,7 +58,11 @@
                         {else}
                             <select name="customer_id">
                             {foreach from=$customers item=customer}
+                                {if !$customer.attention}   
+                                <option {if $customer.id == $defaults.customer} selected {/if} value="{$customer.id|htmlsafe}">{$customer.name|htmlsafe}</option>
+                                {else}    
                                 <option {if $customer.id == $defaults.customer} selected {/if} value="{$customer.id|htmlsafe}">{$customer.name|htmlsafe} / {$customer.attention|htmlsafe}</option>
+                                {/if}
                             {/foreach}
                             </select>
                         {/if}

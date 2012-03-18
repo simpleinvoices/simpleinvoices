@@ -35,25 +35,25 @@
 				<td class="" align="right" colspan="3">{$invoice.date}</td>
 		</tr>
 	<!-- Show the Invoice Custom Fields if valid -->
-		{ if $invoice.custom_field1 != null}
+		{if $invoice.custom_field1 != null}
 		<tr>
 				<td nowrap class="">{$customFieldLabels.invoice_cf1}:</td>
 				<td class="" align="right" colspan="3">{$invoice.custom_field1}</td>
 		</tr>
 		{/if}
-		{ if $invoice.custom_field2 != null}
+		{if $invoice.custom_field2 != null}
 		<tr>
 				<td nowrap class="">{$customFieldLabels.invoice_cf2}:</td>
 				<td class="" align="right"  colspan="3">{$invoice.custom_field2}</td>
 		</tr>
 		{/if}
-		{ if $invoice.custom_field3 != null}
+		{if $invoice.custom_field3 != null}
 		<tr>
 				<td nowrap class="">{$customFieldLabels.invoice_cf3}:</td>
 				<td class="" align="right" colspan="3">{$invoice.custom_field3}</td>
 		</tr>
 		{/if}
-		{ if $invoice.custom_field4 != null}
+		{if $invoice.custom_field4 != null}
 		<tr>
 				<td nowrap class="">{$customFieldLabels.invoice_cf4}:</td>
 				<td class="" align="right" colspan="3">{$invoice.custom_field4}</td>

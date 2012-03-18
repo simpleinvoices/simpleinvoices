@@ -4,7 +4,7 @@
 // Last Edited on
 //		2008-01-04
 /*
-require_once("./include/init.php");	// for getInvoice() and getPreference()
+require_once("./sys/include/init.php");	// for getInvoice() and getPreference()
 */
 $invoice_id = $_GET['id'];
 $invoice = getInvoice($invoice_id);

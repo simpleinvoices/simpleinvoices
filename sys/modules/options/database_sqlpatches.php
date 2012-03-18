@@ -301,7 +301,7 @@ function patch126() {
 
 
 function convertInitCustomFields() {
-// This function is exactly the same as convertCustomFields() in ./include/customFieldConversion.php but without the print_r and echo output while storing
+// This function is exactly the same as convertCustomFields() in ./sys/include/customFieldConversion.php but without the print_r and echo output while storing
 	/* check if any value set -> keeps all data for sure */
 	global $dbh;
     $db = new db();
@@ -386,7 +386,7 @@ function convertInitCustomFields() {
 }
 
 function saveInitCustomField($id, $category, $name, $description) {
-// This function is exactly same as saveCustomField() in ./include/manageCustomFields.php but without the final echo output
+// This function is exactly same as saveCustomField() in ./sys/include/manageCustomFields.php but without the final echo output
     $db = new db();
 	$sql = "INSERT INTO ".TB_PREFIX."customFields  (pluginId, categorieId, name, description)
 		VALUES (:id, :category, :name, :description)";

@@ -1,6 +1,6 @@
 <?php 
 //   include phpreports library
-require_once("./include/reportlib.php");
+require_once("./sys/include/reportlib.php");
 
 $myParms=Array();
 
@@ -31,7 +31,7 @@ $myParms["SQL"] = $sSQL;
    $oRpt->setParameters($myParms);
 
 //   include phpreports run code
-	include("./include/reportrunlib.php");
+	include("./sys/include/reportrunlib.php");
 
 $smarty -> assign('pageActive', 'report');
 $smarty -> assign('active_tab', '#home');

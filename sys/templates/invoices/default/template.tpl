@@ -34,25 +34,25 @@
 				<td class="" align="right" colspan="3">{$invoice.date}</td>
 		</tr>
 	<!-- Show the Invoice Custom Fields if valid -->
-		{ if $invoice.custom_field1 != null && $customFieldDisplay.invoice_cf1}
+		{if $invoice.custom_field1 != null && $customFieldDisplay.invoice_cf1}
 		<tr>
 				<td nowrap class="">{$customFieldLabels.invoice_cf1|htmlsafe}:</td>
 				<td class="" align="right" colspan="3">{$invoice.custom_field1|htmlsafe}</td>
 		</tr>
 		{/if}
-		{ if $invoice.custom_field2 != null && $customFieldDisplay.invoice_cf2}
+		{if $invoice.custom_field2 != null && $customFieldDisplay.invoice_cf2}
 		<tr>
 				<td nowrap class="">{$customFieldLabels.invoice_cf2|htmlsafe}:</td>
 				<td class="" align="right"  colspan="3">{$invoice.custom_field2|htmlsafe}</td>
 		</tr>
 		{/if}
-		{ if $invoice.custom_field3 != null && $customFieldDisplay.invoice_cf3}
+		{if $invoice.custom_field3 != null && $customFieldDisplay.invoice_cf3}
 		<tr>
 				<td nowrap class="">{$customFieldLabels.invoice_cf3|htmlsafe}:</td>
 				<td class="" align="right" colspan="3">{$invoice.custom_field3|htmlsafe}</td>
 		</tr>
 		{/if}
-		{ if $invoice.custom_field4 != null && $customFieldDisplay.invoice_cf4}
+		{if $invoice.custom_field4 != null && $customFieldDisplay.invoice_cf4}
 		<tr>
 				<td nowrap class="">{$customFieldLabels.invoice_cf4|htmlsafe}:</td>
 				<td class="" align="right" colspan="3">{$invoice.custom_field4|htmlsafe}</td>
