@@ -168,10 +168,6 @@
 			</td>
 			<td>
                 <input type="text" name='pref_currency_sign' value="{$preference.pref_currency_sign}" size="15" />
-                <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{$LANG.currency_sign}">
-                   {$LANG.currency_sign_non_dollar}
-                    <img src="{$include_dir}sys/images/common/help-small.png" alt="" /> 
-                </a>
             </td>
 		</tr>
 		<tr>
