@@ -6,7 +6,7 @@
 {else}
 {* if  name was inserted *} 
 	{if $smarty.post.id !=null} 
-		<div class="validation_alert"><img src="{$include_dir}sys/images/common/important.png" alt="" />
+		<div class="validation_alert"><img src="{$baseUrl}sys/images/common/important.png" alt="" />
 		You must enter a description for the product</div>
 		<hr />
 	{/if}
@@ -16,7 +16,7 @@
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.description} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field" title="{$LANG.Required_Field}"><img src="{$include_dir}sys/images/common/required-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field" title="{$LANG.Required_Field}"><img src="{$baseUrl}sys/images/common/required-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" name="description" value="{$smarty.post.description|htmlsafe}" size="50" id="description"  class="validate[required]" /></td>
 	</tr>
@@ -40,7 +40,7 @@
                 {$LANG.cost}
 
 		        <a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_cost" title="{$LANG.cost}">
-                    <img src="{$include_dir}sys/images/common/help-small.png" alt="" />
+                    <img src="{$baseUrl}sys/images/common/help-small.png" alt="" />
                 </a>
 
             </td>
@@ -64,25 +64,25 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf1|htmlsafe} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$include_dir}sys/images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$baseUrl}sys/images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" class="edit" name="custom_field1" value="{$smarty.post.custom_field1|htmlsafe}"  size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf2|htmlsafe} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$include_dir}sys/images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$baseUrl}sys/images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" class="edit" name="custom_field2" value="{$smarty.post.custom_field2|htmlsafe}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf3|htmlsafe} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$include_dir}sys/images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$baseUrl}sys/images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" class="edit" name="custom_field3" value="{$smarty.post.custom_field3|htmlsafe}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf4|htmlsafe} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$include_dir}sys/images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$baseUrl}sys/images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" class="edit" name="custom_field4" value="{$smarty.post.custom_field4|htmlsafe}" size="50" /></td>
 	</tr>
@@ -103,14 +103,14 @@
 	<tr>
 		<td>
 			<button type="submit" class="positive" name="id" value="{$LANG.save}">
-			    <img class="button_img" src="{$include_dir}sys/images/common/tick.png" alt="" /> 
+			    <img class="button_img" src="{$baseUrl}sys/images/common/tick.png" alt="" /> 
 				{$LANG.save}
 			</button>
 
 			<input type="hidden" name="op" value="insert_product" />
 		
 			<a href="./index.php?module=products&view=manage" class="negative">
-		        <img src="{$include_dir}sys/images/common/cross.png" alt="" />
+		        <img src="{$baseUrl}sys/images/common/cross.png" alt="" />
 	        	{$LANG.cancel}
     		</a>
 	

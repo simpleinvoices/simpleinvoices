@@ -25,19 +25,19 @@
         <tr>
             <td>
             <a href="index.php?module=invoices&amp;view=itemised" class="positive">
-            <img src="{$include_dir}sys/images/common/add.png" alt=""/>
+            <img src="{$baseUrl}sys/images/common/add.png" alt=""/>
             {$LANG.new_invoice|capitalise}
             </a>
         </td>
         <td>
             <a href="index.php?module=customers&amp;view=add" class="">
-            <img src="{$include_dir}sys/images/common/vcard_add.png" alt=""/>
+            <img src="{$baseUrl}sys/images/common/vcard_add.png" alt=""/>
             {$LANG.add_customer}
             </a>
         </td>
         <td>
             <a href="index.php?module=products&amp;view=add" class="">
-            <img src="{$include_dir}sys/images/common/cart_add.png" alt=""/>
+            <img src="{$baseUrl}sys/images/common/cart_add.png" alt=""/>
             {$LANG.add_product}
             </a>
             </td>
@@ -72,7 +72,7 @@
 				     	title='{$LANG.export_tooltip} {$LANG.export_pdf_tooltip}'
 						class='export_pdf export_window' 
 					>
-						<img src="{$include_dir}sys/images/common/page_white_acrobat.png" alt="" />
+						<img src="{$baseUrl}sys/images/common/page_white_acrobat.png" alt="" />
 						{$LANG.export_pdf}
 					</a>
 				  </td>
@@ -84,7 +84,7 @@
 						title='{$LANG.export_tooltip} {$LANG.export_xls_tooltip} .{$config->export->spreadsheet}' 
 						class='export_xls export_window'
 				   >
-						<img src="{$include_dir}sys/images/common/page_white_excel.png" alt="" />
+						<img src="{$baseUrl}sys/images/common/page_white_excel.png" alt="" />
 						{$LANG.export_xls}
 					</a>
 					</td>
@@ -96,7 +96,7 @@
 						title='{$LANG.export_tooltip} {$LANG.export_doc_tooltip} .{$config->export->wordprocessor}'
 						class='export_doc export_window' 
 				   >
-						<img src="{$include_dir}sys/images/common/page_white_word.png" alt="" />
+						<img src="{$baseUrl}sys/images/common/page_white_word.png" alt="" />
 						{$LANG.export_doc}
 					</a>
 				</td>

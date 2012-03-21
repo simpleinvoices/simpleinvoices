@@ -15,7 +15,7 @@
     <tr>
         <td>
             <a href="./index.php?module=customers&amp;view=add" class="positive">
-                <img src="{$include_dir}sys/images/famfam/add.png" alt="" />
+                <img src="{$baseUrl}sys/images/famfam/add.png" alt="" />
                 {$LANG.customer_add}
             </a>
 

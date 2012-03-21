@@ -33,7 +33,7 @@
     <tr>
         <td>
             <a href="http://simpleinvoices.googlecode.com/files/{$downloadurl}" class="">
-                <img src="{$include_dir}sys/images/mini/rtl-check.png" alt="" />
+                <img src="{$baseUrl}sys/images/mini/rtl-check.png" alt="" />
                 download
             </a>
         </td>

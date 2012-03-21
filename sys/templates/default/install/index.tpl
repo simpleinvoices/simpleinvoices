@@ -1,4 +1,4 @@
-<img src="{$include_dir}sys/images/common/simple_invoices_logo.jpg"/>
+<img src="{$baseUrl}sys/images/common/simple_invoices_logo.jpg"/>
 <br/>
 <br/>
 
@@ -57,7 +57,7 @@
         <td>
         
             <a href="./index.php?module=install&amp;view=structure" class="positive">
-                <img src="{$include_dir}sys/images/common/tick.png" alt="" />
+                <img src="{$baseUrl}sys/images/common/tick.png" alt="" />
                 Install Database
             </a>
     

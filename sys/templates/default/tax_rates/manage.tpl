@@ -19,7 +19,7 @@
         <td>
 
             <a href="index.php?module=tax_rates&view=add" class="positive">
-                <img src="{$include_dir}sys/images/common/add.png" alt="" />
+                <img src="{$baseUrl}sys/images/common/add.png" alt="" />
                 {$LANG.add_new_tax_rate}
             </a>
 

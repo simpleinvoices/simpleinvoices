@@ -9,20 +9,20 @@
         <td>
 
             <a href="index.php?module=system_defaults&amp;view=manage" class="">
-                <img src="{$include_dir}sys/images/common/cog_edit.png" alt="" />
+                <img src="{$baseUrl}sys/images/common/cog_edit.png" alt="" />
                 {$LANG.system_preferences}
             </a>
 	
 		</td>
 		<td>
             <a href="index.php?module=custom_fields&amp;view=manage" class="">
-                <img src="{$include_dir}sys/images/common/brick_edit.png" alt="" />
+                <img src="{$baseUrl}sys/images/common/brick_edit.png" alt="" />
                 {$LANG.custom_fields_upper}
             </a>
         </td>
 		<td>
              <a href="index.php?module=extensions&view=manage" class="">
-                <img src="{$include_dir}sys/images/common/brick_edit.png" alt=""/>
+                <img src="{$baseUrl}sys/images/common/brick_edit.png" alt=""/>
                 {$LANG.extensions}
             </a>
         </td>
@@ -39,7 +39,7 @@
         <td>
     
            <a href="index.php?module=tax_rates&amp;view=manage" class="">
-                <img src="{$include_dir}sys/images/common/money_delete.png" alt="" />
+                <img src="{$baseUrl}sys/images/common/money_delete.png" alt="" />
                  {$LANG.tax_rates}
             </a>
 
@@ -47,14 +47,14 @@
 		<td>
             
              <a href="index.php?module=preferences&amp;view=manage" class="">
-                <img src="{$include_dir}sys/images/common/page_white_edit.png" alt="" />
+                <img src="{$baseUrl}sys/images/common/page_white_edit.png" alt="" />
                  {$LANG.invoice_preferences}
             </a>
     	</td>
 		<td>
     
            <a href="index.php?module=payment_types&amp;view=manage" class="">
-                <img src="{$include_dir}sys/images/common/creditcards.png" alt="" />
+                <img src="{$baseUrl}sys/images/common/creditcards.png" alt="" />
                  {$LANG.payment_types}
             </a>
         </td>
@@ -71,7 +71,7 @@
     <tr>
          <td>         
              <a href="index.php?module=options&amp;view=version" class="">
-                <img src="{$include_dir}sys/images/common/page_white_edit.png" alt="" />
+                <img src="{$baseUrl}sys/images/common/page_white_edit.png" alt="" />
                  {$LANG.version_check}
             </a>
         </td>
@@ -90,7 +90,7 @@
 
             
              <a href="index.php?module=options&amp;view=backup_database" class="">
-                <img src="{$include_dir}sys/images/common/database_save.png" alt="" />
+                <img src="{$baseUrl}sys/images/common/database_save.png" alt="" />
                 {$LANG.backup_database}
             </a>
     	</td>

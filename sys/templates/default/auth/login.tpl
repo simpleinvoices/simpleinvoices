@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <title>Simple Invoices - Login</title>
-<link rel="stylesheet" type="text/css" href="{$include_dir}sys/templates/default/css/login.css" />
+<link rel="stylesheet" type="text/css" href="{$baseUrl}sys/templates/default/css/login.css" />
 </head>
 <body class="login" >
 <div class="Container">

@@ -1,4 +1,4 @@
-<img src="{$include_dir}sys/images/common/simple_invoices_logo.jpg"/>
+<img src="{$baseUrl}sys/images/common/simple_invoices_logo.jpg"/>
 <br/>
 <br/>
 <table align="center">

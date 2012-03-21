@@ -24,7 +24,7 @@
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field"
 				title="{$LANG.Required_Field}"
 		>
-		<img src="{$include_dir}sys/images/common/required-small.png" alt="" />
+		<img src="{$baseUrl}sys/images/common/required-small.png" alt="" />
 		</a>	
 		</td>
 		<td><input type="text" name="email" value="{$smarty.post.email|htmlsafe}" size="35" id="email" autocomplete="off" class="validate[required]"  /></td>
@@ -37,7 +37,7 @@
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_user_role"
 				title="{$LANG.role}"
 			> 
-			<img src="{$include_dir}sys/images/common/help-small.png" alt="" />
+			<img src="{$baseUrl}sys/images/common/help-small.png" alt="" />
 			</a>
 		</td>
 		<td>
@@ -68,14 +68,14 @@
     <tr>
         <td>
             <button type="submit" class="positive" name="submit" value="Insert User">
-                <img class="button_img" src="{$include_dir}sys/images/common/tick.png" alt="" /> 
+                <img class="button_img" src="{$baseUrl}sys/images/common/tick.png" alt="" /> 
                 {$LANG.save}
             </button>
 
             <input type="hidden" name="op" value="insert_user" />
         
             <a href="./index.php?module=user&view=manage" class="negative">
-                <img src="{$include_dir}sys/images/common/cross.png" alt="" />
+                <img src="{$baseUrl}sys/images/common/cross.png" alt="" />
                 {$LANG.cancel}
             </a>
     

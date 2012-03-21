@@ -38,11 +38,11 @@
 	<tr>
 		<td>
 				<a href="./index.php?module=inventory&amp;view=edit&amp;id={$inventory.id|urlencode}" class="positive">
-					<img src="{$include_dir}sys/images/famfam/report_edit.png" alt=""/>
+					<img src="{$baseUrl}sys/images/famfam/report_edit.png" alt=""/>
 					{$LANG.edit}
 				</a>
 			<a href="./index.php?module=inventory&view=manage" class="negative">
-		        <img src="{$include_dir}sys/images/common/cross.png" alt="" />
+		        <img src="{$baseUrl}sys/images/common/cross.png" alt="" />
 	        	{$LANG.cancel}
     		</a>
 	

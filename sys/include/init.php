@@ -309,3 +309,5 @@ include_once($include_dir . "sys/include/backup.lib.php");
 
 $defaults = getSystemDefaults();
 $smarty->assign("defaults",$defaults);
+$smarty->assign('baseUrl', $config->resources->frontController->baseUrl);
+?>
