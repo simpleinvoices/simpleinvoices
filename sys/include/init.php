@@ -50,6 +50,16 @@ require_once('sys/include/functions.php');
  * log file - start
  */
 $logFile = $app_folder . "/tmp/log/si.log";
+// Create tmp log if it does not exist
+if (!file_exists(dirname($logFile))) {
+    if (!mkdir(dirname($logFile), 0770, true)) {
+        simpleInvoicesError('notWriteable','folder', dirname($logFile));
+    }
+} elseif(!is_writeable(dirname($logFile))) {
+    if(!chmod(dirname($logFile), 0770)) {
+        simpleInvoicesError('notWriteable','folder', dirname($logFile));
+    }
+}
 if (!is_file($logFile))
 {
 	$createLogFile = fopen($logFile, 'w') or die(simpleInvoicesError('notWriteable','folder', $app_folder . '/tmp/log'));
@@ -65,10 +75,17 @@ $logger = new Zend_Log($writer);
  * log file - end
  */
 
-if (!is_writable( $app_folder . '/tmp/cache')) {
-
-   simpleInvoicesError('notWriteable','file', $app_folder . '/tmp/cache');
+// Create the cache folder if it does not exist
+if (!file_exists($app_folder . '/tmp/cache')) {
+    if (!mkdir($app_folder . '/tmp/cache', 0770, true)) {
+        simpleInvoicesError('notWriteable','folder', $app_folder . '/tmp/cache');
+    }
+} elseif(!is_writeable($app_folder . '/tmp/cache')) {
+    if(!chmod($app_folder . '/tmp/cache', 0770)) {
+        simpleInvoicesError('notWriteable','folder', $app_folder . '/tmp/cache');
+    }
 }
+
 /*
  * Zend Framework cache section - start
  * -- must come after the tmp dir writeable check
