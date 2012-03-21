@@ -27,7 +27,7 @@ $biller = getBiller($biller_id);
 
 /*drop down list code for invoice logo */
 
-$files = getLogoList($app_folder);
+$files = getLogoList();
 
 /*end logo stuff */
 

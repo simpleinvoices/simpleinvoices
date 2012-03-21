@@ -177,7 +177,8 @@ class export
 
 				}
 
-				$templatePath = $include_dir . "/sys/templates/default/statement/index.tpl";
+                // ToDo: THIS FILE IS MISSING!!
+				$templatePath = $include_dir . "sys/templates/default/statement/index.tpl";
 
 				$biller_details = getBiller($this->biller_id);
 				$customer_details = customer::get($this->customer_id);
@@ -234,7 +235,8 @@ class export
 				$css = $siUrl."/sys/templates/invoices/default/style.css";
 				$smarty -> assign('css',$css);
 
-                $templatePath = $include_dir . "/sys/templates/default/payments/print.tpl";
+                // ToDo: THIS FILE IS MISSING!!
+                $templatePath = $include_dir . "sys/templates/default/payments/print.tpl";
 				$data = $smarty -> fetch(".".$templatePath);
                 break;
             }

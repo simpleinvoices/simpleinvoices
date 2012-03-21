@@ -144,6 +144,7 @@ $LANG['denied_page'] = "You are not allowed to view this page";//1
 $LANG['description'] = "Description";//1
 $LANG['description_short'] = "Desc";//1
 $LANG['details'] = "Details";//1
+$LANG['disable'] = "Disable";//1
 $LANG['disabled'] = "Disabled";//1
 $LANG['displaying_inv'] = "Displaying invoices";//1
 $LANG['displaying_items'] = "Displaying {from} to {to} of {total} items";//1

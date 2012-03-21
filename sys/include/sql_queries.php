@@ -2617,16 +2617,17 @@ function checkDataExists()
 	}
 }
 
-function getURL($app = 'app')
+function getURL()
 {
 	global $config;
-
+    $baseUrl = Zend_Registry::get('baseUrl');
+    
 	$port = "";
 	$dir = dirname($_SERVER['PHP_SELF']);
 	//remove incorrenct slashes for WinXP etc.
     $dir = str_replace('\\','',$dir);
 
-    $dir = str_replace($app,'',$dir);
+    $dir = str_replace($baseUrl,'',$dir);
 //    $dir = str_replace('//','',$dir);
 
 	//set the port of http(s) section

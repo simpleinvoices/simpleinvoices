@@ -7,7 +7,7 @@ $dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC" ;
 $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "description" ;
 $rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
 $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
-
+$baseUrl = Zend_Registry::get('baseUrl');
 
 
 $defaults = getSystemDefaults();
@@ -33,8 +33,8 @@ foreach ($products_all as $row) {
 	$row['iso'] = (isset($row['iso']))? $row['iso'] : '';
 	$xml .= "<row id='".$row['iso']."'>";
 	$xml .= "<cell><![CDATA[
-			<a class='index_table' title='$LANG[view] ".$row['description']."' href='index.php?module=products&view=details&id=".$row['id']."&action=view'><img src='".$include_dir."sys/images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-			<a class='index_table' title='$LANG[edit] ".$row['description']."' href='index.php?module=products&view=details&id=".$row['id']."&action=edit'><img src='".$include_dir."sys/images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+			<a class='index_table' title='$LANG[view] ".$row['description']."' href='index.php?module=products&view=details&id=".$row['id']."&action=view'><img src='" . $baseUrl . "sys/images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+			<a class='index_table' title='$LANG[edit] ".$row['description']."' href='index.php?module=products&view=details&id=".$row['id']."&action=edit'><img src='" . $baseUrl . "sys/images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 		]]></cell>";
 
 	$xml .= "<cell><![CDATA[".$row['description']."]]></cell>";
@@ -45,10 +45,10 @@ foreach ($products_all as $row) {
     }
 
 	if ($row['enabled']==$LANG['enabled']) {
-		$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";
+		$xml .= "<cell><![CDATA[<img src='" . $baseUrl . "sys/images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";
 	}
 	else {
-		$xml .= "<cell><![CDATA[<img src='".$include_dir."sys/images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";
+		$xml .= "<cell><![CDATA[<img src='" . $baseUrl . "sys/images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";
 	}
 	$xml .= "</row>";
 }

@@ -7,13 +7,14 @@ $dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC" ;
 $sort = "id" ;
 $limit = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
 $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
+$baseUrl = Zend_Registry::get('baseUrl');
 
 $xml =""; 
 
-$extension_dir = $incldue_dir . 'sys/extensions';
+$extension_dir = $include_dir . 'sys/extensions';
 $extension_entries = scandir($extension_dir);
 foreach ($extension_entries as $entry) {
-  	if (is_dir($extension_dir."/".$entry) and ! ereg("^\..*",$entry) ) {	//Skip entries starting with a dot
+  	if (is_dir($extension_dir."/".$entry) and ! preg_match("/^\..*/",$entry) ) {	//Skip entries starting with a dot
 		if (file_exists ($extension_dir."/".$entry."/DESCRIPTION"))
 		{
 			$description = file_get_contents($extension_dir."/".$entry."/DESCRIPTION") ;
@@ -39,13 +40,13 @@ if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 $query = (isset($_POST['query'])) ? $_POST['query'] : "" ; 
 $qtype = (isset($_POST['qtype'])) ? $_POST['qtype'] : "" ; 
 
-$plugin[0] = " <img src='$include_dir/sys/images/famfam/plugin_disabled.png' alt='".$LANG['plugin_not_registered']."' />";
-$plugin[1] = " <img src='$include_dir/sys/images/famfam/plugin.png' alt='".$LANG['plugin_registered']."' />";
-$plugin[2] = " <img src='$include_dir/sys/images/famfam/plugin_delete.png' alt='".$LANG['plugin_unregister']."' />";
-$plugin[3] = " <img src='$include_dir/sys/images/famfam/plugin_add.png' alt='".$LANG['plugin_register']."' />";
-$light[0] = " <img src='$include_dir/sys/images/famfam/lightbulb_off.png' alt='".$LANG['disabled']."' />";
-$light[1] = " <img src='$include_dir/sys/images/famfam/lightbulb.png' alt='".$LANG['enabled']."' />";
-$light[2] = " <img src='$include_dir/sys/images/common/lightswitch16x16.png' alt='".$LANG['toggle_status']."' />";
+$plugin[0] = " <img src='$baseUrl/sys/images/famfam/plugin_disabled.png' alt='".$LANG['plugin_not_registered']."' />";
+$plugin[1] = " <img src='$baseUrl/sys/images/famfam/plugin.png' alt='".$LANG['plugin_registered']."' />";
+$plugin[2] = " <img src='$baseUrl/sys/images/famfam/plugin_delete.png' alt='".$LANG['plugin_unregister']."' />";
+$plugin[3] = " <img src='$baseUrl/sys/images/famfam/plugin_add.png' alt='".$LANG['plugin_register']."' />";
+$light[0] = " <img src='$baseUrl/sys/images/famfam/lightbulb_off.png' alt='".$LANG['disabled']."' />";
+$light[1] = " <img src='$baseUrl/sys/images/famfam/lightbulb.png' alt='".$LANG['enabled']."' />";
+$light[2] = " <img src='$baseUrl/sys/images/common/lightswitch16x16.png' alt='".$LANG['toggle_status']."' />";
 
 
 $where = " WHERE domain_id = 0 OR domain_id = :domain_id";
@@ -97,9 +98,9 @@ $validFields = array('id', 'name','description','enabled');
 		if ($row['registered'] == 1) {
 			$xml .="<a class='index_table' title='$LANG[plugin_unregister] $LANG[extensions] ".$row['name']."' href='index.php?module=extensions&view=register&id=$row[id]&action=unregister'> ".$plugin[3-$row['registered']]."</a>";
 			if ($row['enabled'] == 1) {
-				$xml .= " <a class='index_table' title='$LANG[disable] $LANG[extensions] ".$row['name']."' href='index.php?module=extensions&view=manage&id=$row[id]&action=toggle'>".$light[2]."</a>";
+				$xml .= " <a class='index_table' title='" . $LANG['disable'] . " " . $LANG['extensions'] . " " . $row['name'] . "' href='index.php?module=extensions&view=manage&id=$row[id]&action=toggle'>".$light[2]."</a>";
 			} else {
-				$xml .= " <a class='index_table' title='$LANG[enable] $LANG[extensions] ".$row['name']."' href='index.php?module=extensions&view=manage&id=$row[id]&action=toggle'>".$light[2]."</a>";
+				$xml .= " <a class='index_table' title='" . $LANG['enable'] . " " . $LANG['extensions'] . " " . $row['name'] . "' href='index.php?module=extensions&view=manage&id=$row[id]&action=toggle'>".$light[2]."</a>";
 			}
 		} else {
 			$xml .="<a class='index_table' title='$LANG[plugin_register] $LANG[extensions] ".$row['name']."' href='index.php?module=extensions&view=register&name=$row[name]&action=register&description=$row[description]'> ".$plugin[3-$row['registered']]."</a>";

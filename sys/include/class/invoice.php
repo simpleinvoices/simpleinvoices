@@ -251,11 +251,13 @@ class invoice {
         /*SQL Limit - end*/
 
         /*SQL where - start*/
-        $query = $this->query;
-        $qtype = $this->qtype;
+        // ToDo: Returns errors as they are not defined.
+        //$query = $this->query;
+        //$qtype = $this->qtype;
 
+        
         $where = " WHERE iv.domain_id = :domain_id ";
-        if ($query) $where = " WHERE iv.domain_id = :domain_id AND $qtype LIKE '%$query%' ";
+        //if ($query) $where = " WHERE iv.domain_id = :domain_id AND $qtype LIKE '%$query%' ";
         if ($this->biller) $where .= " AND b.id = '$this->biller' ";
         if ($this->customer) $where .= " AND c.id = '$this->customer' ";
         if ($this->where_field) $where .= " AND $this->where_field = '$this->where_value' ";

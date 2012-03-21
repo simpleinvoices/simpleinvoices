@@ -10,7 +10,7 @@ $dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC" ;
 $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "name" ;
 $rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
 $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
-
+$baseUrl = Zend_Registry::get('baseUrl');
 
 function sql($type='', $dir, $sort, $rp, $page )
 {
@@ -112,9 +112,9 @@ $count = $sth_count_rows->rowCount();
 	foreach ($customers as $row) {
 		$xml .= "<row id='".$row['CID']."'>";
 		$xml .= "<cell><![CDATA[
-			<a class='index_table' title='$LANG[view] $LANG[customer] ".utf8_encode($row['name'])."' href='index.php?module=customers&view=details&id=$row[CID]&action=view'><img src='".$include_dir."sys/images/common/view.png' class='action' /></a>
-			<a class='index_table' title='$LANG[edit] $LANG[customer] ".utf8_encode($row['name'])."' href='index.php?module=customers&view=details&id=$row[CID]&action=edit'><img src='".$include_dir."sys/images/common/edit.png' class='action' /></a>
-			<a class='index_table' title='$LANG[new_invoice] $LANG[for] $LANG[customer] ".utf8_encode($row['name'])."' href='index.php?module=invoices&view=usedefault&customer_id=$row[CID]&action=edit'><img src='".$include_dir."sys/images/famfam/page_add.png' class='action' /></a>
+			<a class='index_table' title='$LANG[view] $LANG[customer] ".utf8_encode($row['name'])."' href='index.php?module=customers&view=details&id=$row[CID]&action=view'><img src='" . $baseUrl . "sys/images/common/view.png' class='action' /></a>
+			<a class='index_table' title='$LANG[edit] $LANG[customer] ".utf8_encode($row['name'])."' href='index.php?module=customers&view=details&id=$row[CID]&action=edit'><img src='" . $baseUrl . "sys/images/common/edit.png' class='action' /></a>
+			<a class='index_table' title='$LANG[new_invoice] $LANG[for] $LANG[customer] ".utf8_encode($row['name'])."' href='index.php?module=invoices&view=usedefault&customer_id=$row[CID]&action=edit'><img src='" . $baseUrl . "sys/images/famfam/page_add.png' class='action' /></a>
 		]]></cell>";		
 		$xml .= "<cell><![CDATA[".$row['CID']."]]></cell>";		
 		$xml .= "<cell><![CDATA[".utf8_encode($row['name'])."]]></cell>";

@@ -20,11 +20,10 @@ jsEnd();
 
 $today = date("Y-m-d");
 
-$master_invoice_id = $_GET['id'];
 $invoice = null;
 
 if(isset($_GET['id'])) {
-	$invoice = invoice::select($master_invoice_id);
+	$invoice = invoice::select($_GET['id']);
 }
 else {
 	$sth = dbQuery("SELECT * FROM ".TB_PREFIX."invoices");

@@ -2,7 +2,7 @@
 {* if bill is updated or saved.*}
 
 {if $smarty.post.name != "" } 
-	{include file="../extensions/expense/templates/default/expense_account/save.tpl"}
+	{include './save.tpl'}
 {else}
 {* if  name was inserted *} 
 	{if $smarty.post.name !=null} 

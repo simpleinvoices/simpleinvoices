@@ -19,7 +19,7 @@
 
 checkLogin();
 
-$files = getLogoList($app_folder);
+$files = getLogoList();
 
 $smarty->assign("files", $files);
 
@@ -32,7 +32,11 @@ if (isset($_POST['name']) && $_POST['name'] != "") {
 
 $smarty->assign('files', $files);
 $smarty->assign('customFieldLabel', $customFieldLabel);
-$smarty->assign('save', $save);
+if (isset($save)) {
+    $smarty->assign('save', $save);
+} else {
+    $smarty->assign('save', '');
+}
 
 $smarty -> assign('pageActive', 'biller');
 $smarty -> assign('subPageActive', 'biller_add');

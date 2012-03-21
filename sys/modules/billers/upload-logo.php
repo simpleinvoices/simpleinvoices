@@ -1,6 +1,6 @@
 <?php
 
-$uploaddir="$app/logos/";
+$uploaddir= "images/logos/";
 
 $uploadfile = $uploaddir . $_FILES["myfile"]["name"];
 

@@ -8,12 +8,19 @@ checkLogin();
 $customFieldLabel = getCustomFieldLabels();
 $taxes = getActiveTaxes();
 //if valid then do save
-if ($_POST['description'] != "" ) {
-	include("sys/modules/products/save.php");
+if (array_key_exists('description', $_POST)) {
+    if ($_POST['description'] != "" ) {
+        include("sys/modules/products/save.php");
+    }    
 }
+
 $smarty -> assign("defaults",getSystemDefaults());
 $smarty -> assign('customFieldLabel',$customFieldLabel);
-$smarty -> assign('save',$save);
+if (isset($save)) {
+    $smarty -> assign('save',$save);
+} else {
+    $smarty -> assign('save','');
+}
 $smarty -> assign('taxes',$taxes);
 
 $smarty -> assign('pageActive', 'product_add');

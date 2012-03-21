@@ -2,16 +2,34 @@
 /*
  * Zend framework init - start
  */
+
+// ToDo: Remove this include
 set_include_path(get_include_path() . PATH_SEPARATOR . "./sys/include/class");
-set_include_path(get_include_path() . PATH_SEPARATOR . "../lib/");
-set_include_path(get_include_path() . PATH_SEPARATOR . "../lib/pdf");
-set_include_path(get_include_path() . PATH_SEPARATOR . "./sys/include/");
 
 require_once 'Zend/Loader/Autoloader.php';
 
 $autoloader = Zend_Loader_Autoloader::getInstance();
 $autoloader->setFallbackAutoloader(true);
+// Avoid conflicts with Smarty autoloader
+$autoloader->pushAutoloader(NULL, 'Smarty_' );
 #Zend_Loader::registerAutoload();
+
+// Need the configuration beforehand
+include_once(APPLICATION_PATH . '/config/define.php');
+
+/*
+ * Include another config file if required
+ */
+if( is_file($app_folder . '/config/custom.config.ini') ){
+    $config = new Zend_Config_Ini(APPLICATION_PATH . '/config/custom.config.ini', $environment,true);
+} else {
+    $config = new Zend_Config_Ini( APPLICATION_PATH . '/config/config.ini', $environment,true);    //added 'true' to allow modifications from db
+}
+
+// ToDo: Delete this once it can be fetched in another way
+$baseUrl = $config->resources->frontController->baseUrl;
+if ($baseUrl == '/') $baseUrl = '';
+Zend_Registry::set('baseUrl', $baseUrl);
 
 
 //session_start();
@@ -24,7 +42,6 @@ $frontendOptions = array(
     'lifetime' => 7200, // cache lifetime of 2 hours
     'automatic_serialization' => true
 );
-
 
 /*
  * Zend framework init - end
@@ -94,7 +111,7 @@ if (!file_exists($app_folder . '/tmp/cache')) {
 // getting a Zend_Cache_Core object
 try {
 	$backendOptions = array(
-		'cache_dir' => $app_folder . '/tmp/cache/' // Directory where to put the cache files
+		'cache_dir' => APPLICATION_PATH . '/tmp/cache/' // Directory where to put the cache files
 	);
 	$cache = Zend_Cache::factory('Core',
                              'File',
@@ -116,20 +133,17 @@ catch (Exception $e) {
 $smarty = new Smarty();
 
 $smarty->debugging = false;
+$smarty->cache_lifetime = 0;
 
-//cache directory. Have to be writeable (chmod 777)
-$smarty -> compile_dir = $app_folder . "/tmp/cache";
-if(!is_writable($smarty -> compile_dir)) {
-	simpleInvoicesError("notWriteable", 'folder', $smarty -> compile_dir);
-	//exit("Simple Invoices Error : The folder <i>".$smarty -> compile_dir."</i> has to be writeable");
-}
+// Set paths for Smarty
+$smarty->setTemplateDir(realpath(dirname(APPLICATION_PATH) . '/sys/templates/'));
+$smarty->setCacheDir(realpath(APPLICATION_PATH . '/tmp/cache/'));
+$smarty->setCompileDir(realpath(APPLICATION_PATH . '/tmp/cache/'));
 
 //adds own smarty plugins
-$smarty->plugins_dir = array("plugins","include/smarty_plugins");
+$smarty->addPluginsDir(dirname(__FILE__) . '/smarty_plugins/');
 
-//add stripslash smarty function
-$smarty->register_modifier("unescape","stripslashes");
-$smarty->register_modifier("capitalise","ucwords");
+
 /*
  * Smarty inint - end
  */
@@ -139,17 +153,6 @@ $path = pathinfo($_SERVER['REQUEST_URI']);
 //SC: Install path handling will need changes if used in non-HTML contexts
 $install_path = htmlsafe($path['dirname']);
 
-
-include_once($app_folder . '/config/define.php');
-
-/*
- * Include another config file if required
- */
-if( is_file($app_folder . '/config/custom.config.ini') ){
-     $config = new Zend_Config_Ini( $app_folder . '/config/custom.config.ini', $environment,true);
-} else {
-    $config = new Zend_Config_Ini( $app_folder . '/config/config.ini', $environment,true);	//added 'true' to allow modifications from db
-}
 
 //set up app with relevant php setting
 date_default_timezone_set($config->phpSettings->date->timezone);
@@ -178,17 +181,22 @@ $db = db::getInstance();
 
 include_once("sys/include/sql_queries.php");
 
-$smarty->register_modifier("siLocal_number", array("siLocal", "number"));
-$smarty->register_modifier("siLocal_number_clean", array("siLocal", "number_clean"));
-$smarty->register_modifier("siLocal_number_trim", array("siLocal", "number_trim"));
-$smarty->register_modifier("siLocal_number_formatted", array("siLocal", "number_formatted"));
-$smarty->register_modifier("siLocal_date", array("siLocal", "date"));
-$smarty->register_modifier('htmlsafe', 'htmlsafe');
-$smarty->register_modifier('urlsafe', 'urlsafe');
-$smarty->register_modifier('urlencode', 'urlencode');
-$smarty->register_modifier('outhtml', 'outhtml');
-$smarty->register_modifier('htmlout', 'outhtml'); //common typo
-$smarty->register_modifier('urlescape', 'urlencode'); //common typo
+//add stripslash smarty function
+$smarty->registerPlugin('modifier', 'unescape', 'stripslashes');
+$smarty->registerPlugin('modifier', 'capitalise', 'ucwords');
+
+$smarty->registerPlugin('modifier', "siLocal_number", array("siLocal", "number"));
+$smarty->registerPlugin('modifier', "siLocal_number_clean", array("siLocal", "number_clean"));
+$smarty->registerPlugin('modifier', "siLocal_number_trim", array("siLocal", "number_trim"));
+$smarty->registerPlugin('modifier', "siLocal_number_formatted", array("siLocal", "number_formatted"));
+$smarty->registerPlugin('modifier', "siLocal_date", array("siLocal", "date"));
+$smarty->registerPlugin('modifier', 'htmlsafe', 'htmlsafe');
+$smarty->registerPlugin('modifier', 'urlsafe', 'urlsafe');
+$smarty->registerPlugin('modifier', 'urlencode', 'urlencode');
+$smarty->registerPlugin('modifier', 'outhtml', 'outhtml');
+$smarty->registerPlugin('modifier', 'htmlout', 'outhtml'); //common typo
+$smarty->registerPlugin('modifier', 'urlescape', 'urlencode'); //common typo
+
 $install_tables_exists = checkTableExists(TB_PREFIX."biller");
 if ($install_tables_exists == true)
 {
@@ -308,6 +316,8 @@ $siUrl = getURL($app);
 include_once($include_dir . "sys/include/backup.lib.php");
 
 $defaults = getSystemDefaults();
-$smarty->assign("defaults",$defaults);
-$smarty->assign('baseUrl', $config->resources->frontController->baseUrl);
+$smarty->assignGlobal("defaults",$defaults);
+$smarty->assignGlobal('baseUrl', $config->resources->frontController->baseUrl);
+// Get rid of some errors
+$smarty->assign('subPageActive','');
 ?>

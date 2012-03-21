@@ -20,8 +20,10 @@ function checkLogin() {
 	}
 }
 
-function getLogoList($folder) {
-	$dirname=$folder . "/logos";
+function getLogoList() {
+    $baseUrl = Zend_Registry::get('baseUrl');
+    
+	$dirname= dirname(APPLICATION_PATH) . '/' . $baseUrl . "/images/logos";
 	$ext = array("jpg", "png", "jpeg", "gif");
 	$files = array();
 	if($handle = opendir($dirname)) {
@@ -38,16 +40,13 @@ function getLogoList($folder) {
 }
 
 function getLogo($biller) {
-
-    global $app;
-
 	$url = getURL();
 
 	if(!empty($biller['logo'])) {
-		return $url."/".$app."/logos/$biller[logo]";
+		return $url."/images/logos/$biller[logo]";
 	}
 	else {
-		return $url."/".$app."/logos/_default_blank_logo.png";
+		return $url."/images/logos/_default_blank_logo.png";
 	}
 }
 

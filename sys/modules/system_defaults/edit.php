@@ -298,7 +298,7 @@ else if($_GET['submit'] == "language") {
 
     usort($languages,"compareNameIndex");
 
-    $description = $LANG[language];
+    $description = $LANG['language'];
     //print_r($languages);
     $value = "<select name='value'>";
     foreach($languages as $language) {

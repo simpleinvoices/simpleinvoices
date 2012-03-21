@@ -42,3 +42,4 @@ $smarty -> assign('pageActive', 'user');
 $subPageActive = $_GET['action'] =="view"  ? "user_view" : "user_edit" ;
 $smarty -> assign('subPageActive', $subPageActive);
 $smarty -> assign('active_tab', '#people');
+?>
