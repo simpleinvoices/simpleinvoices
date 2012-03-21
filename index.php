@@ -20,18 +20,17 @@
 */
 
 // Define path to application directory
-defined('APPLICATION_PATH') || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/application'));
+defined('APPLICATION_PATH') || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/app'));
  
 // Define application environment
 defined('APPLICATION_ENV') || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
 global $cust_language;
 
-set_include_path(get_include_path() . PATH_SEPARATOR . ".");
-set_include_path(get_include_path() . PATH_SEPARATOR . "./sys/include/class");
-set_include_path(get_include_path() . PATH_SEPARATOR . "./lib/");
-set_include_path(get_include_path() . PATH_SEPARATOR . "./lib/pdf");
-set_include_path(get_include_path() . PATH_SEPARATOR . "./sys/include/");
+// SYS
+set_include_path(get_include_path() . PATH_SEPARATOR . realpath(dirname(APPLICATION_PATH)));
+// Libraries
+set_include_path(get_include_path() . PATH_SEPARATOR . realpath(dirname(APPLICATION_PATH) . '/lib'));
 
 require_once("sys/include/init_pre.php");
 
