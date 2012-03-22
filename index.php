@@ -35,7 +35,6 @@ set_include_path(get_include_path() . PATH_SEPARATOR . realpath(dirname(APPLICAT
 require_once("sys/include/init_pre.php");
 
 $include_dir ='./';
-$smarty_include_dir = getcwd() . '/';
 $smarty_embed_path = getcwd() . '/';
 $tpl_path = '../';
 

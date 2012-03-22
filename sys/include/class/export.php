@@ -95,7 +95,6 @@ class export
 		global $smarty;
 		global $siUrl;
 		global $include_dir;
-		global $smarty_include_dir;
 		global $tpl_path;
 
 		switch ($this->module)
@@ -244,7 +243,7 @@ class export
 			{
 
 				$invoice = invoice::select($this->id);
- 			        $invoice_number_of_taxes = numberOfTaxesForInvoice($this->id);
+ 			    $invoice_number_of_taxes = numberOfTaxesForInvoice($this->id);
 				$customer = customer::get($invoice['customer_id']);
 				$biller = biller::select($invoice['biller_id']);
 				$preference = getPreference($invoice['preference_id']);
@@ -262,21 +261,27 @@ class export
 				/*Set the template to the default*/
 				$template = $defaults['template'];
 
-				$templatePath = $include_dir . "sys/templates/invoices/${template}/template.tpl";
-				$template_dir = $smarty_include_dir . "sys/templates/invoices/${template}/template.tpl";
-				$template_path = $include_dir . "sys/templates/invoices/${template}";
-				$css = $siUrl ."/sys/templates/invoices/${template}/style.css";
-				$pluginsdir =  $include_dir ."sys/templates/invoices/${template}/plugins/";
+                // Instead of appending the CSS we are going to inject it allowing
+                // a cleaner hierarchy tree while allowing public directories
+				$css_file = $include_dir ."/sys/templates/invoices/${template}/style.css";
+                
+                if (file_exists($css_file)) {
+                    $css = file_get_contents($css_file);
+                    if ($css) {
+                        // Create the tags
+                        $css = '<style type="text/css" media="all">' . $css . '</style>';
+                    }
+                } else {
+                    $css = '';
+                }
 
-				//$smarty = new Smarty();
-
-				$smarty -> plugins_dir = $pluginsdir;
+                $smarty->addTemplateDir($include_dir . "sys/templates/invoices/${template}/", 'Invoice_' . $template);
+				$smarty->addPluginsDir($include_dir ."sys/templates/invoices/${template}/plugins/");
 
 				$pageActive = "invoices";
 				$smarty->assign('pageActive', $pageActive);
 
-				if(file_exists($templatePath)) {
-					//echo "test";
+                if ($smarty->templateExists('file:[Invoice_' . $template . ']template.tpl')) {
 					$smarty -> assign('biller',$biller);
 					$smarty -> assign('customer',$customer);
 					$smarty -> assign('invoice',$invoice);
@@ -285,13 +290,11 @@ class export
 					$smarty -> assign('logo',$logo);
 					$smarty -> assign('template',$template);
 					$smarty -> assign('invoiceItems',$invoiceItems);
-					$smarty -> assign('template_path',$template_path);
 					$smarty -> assign('css',$css);
 					$smarty -> assign('customFieldLabels',$customFieldLabels);
 					$smarty -> assign('customFieldDisplay',$customFieldDisplay);
 
-					$data = $smarty -> fetch($template_dir);
-
+					$data = $smarty->fetch('file:[Invoice_' . $template . ']template.tpl');
 				}
 
 				break;

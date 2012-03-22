@@ -15,7 +15,6 @@ define("BROWSE","browse");
 // Backward compatibility
 // ToDo: Shall be removed sooner or later 
 $include_dir = dirname(APPLICATION_PATH) . '/';
-$smarty_include_dir = isset($smarty_include_dir) ? $smarty_include_dir : '../../../';
 $smarty_embed_path = isset($smarty_embed_path) ? $smarty_embed_path : '../../../';
 $tpl_path = isset($tpl_path) ? $tpl_path : '../';
 $app = APPLICATION_PATH . '/';
@@ -357,9 +356,6 @@ if($module == "export" OR $view == "export" OR $module == "api")
             {
                 $smarty->$smarty_output('file:[extension_' . $extension->name . ']default/jquery/' . $extension->name . '.post_load.jquery.ext.js.tpl');
             }
-			//if(file_exists($include_dir . "sys/extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.tpl")) {
-			//		$smarty -> $smarty_output($smarty_include_dir . "sys/extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.tpl");
-			//}
 		}
 
 	}
@@ -458,7 +454,6 @@ if($module == "export" OR $view == "export" OR $module == "api")
 	* --if = 0 after checking all extensions then show default
 	*/
 	$tplDirectory = "";
-	$smarty_path = $smarty_include_dir . "sys/templates/default";
 	$extensionTemplates = 0;
 	foreach($config->extension as $extension)
 	{
