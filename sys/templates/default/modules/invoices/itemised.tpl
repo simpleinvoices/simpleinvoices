@@ -14,7 +14,7 @@
 <form name="frmpost" action="index.php?module=invoices&amp;view=save" method="post" onsubmit="return frmpost_Validator(this)">
 
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
-        	<img src="{$baseUrl}sys/images/common/gmail-loader.gif" alt="{$LANG.loading} ..." /> {$LANG.loading} ...
+        	<img src="{$baseUrl}images/common/gmail-loader.gif" alt="{$LANG.loading} ..." /> {$LANG.loading} ...
 </div>
 
 
@@ -36,7 +36,7 @@
                 </td>
                 <td>
                     <a href="./index.php?module=billers&amp;view=add" class="positive">
-                        <img src="{$baseUrl}sys/images/common/user_add.png" alt="" />
+                        <img src="{$baseUrl}images/common/user_add.png" alt="" />
                         {$LANG.add_new_biller}
                     </a>
                 </td>
@@ -49,7 +49,7 @@
                 </td>
                 <td>
                     <a href="./index.php?module=customers&amp;view=add" class="positive">
-                        <img src="{$baseUrl}sys/images/common/vcard_add.png" alt="" />
+                        <img src="{$baseUrl}images/common/vcard_add.png" alt="" />
                         {$LANG.customer_add}
                     </a>
                 </td>
@@ -62,7 +62,7 @@
                 </td>
                 <td>
                     <a href="./index.php?module=products&amp;view=add" class="positive">
-                        <img src="{$baseUrl}sys/images/common/cart_add.png" alt="" />
+                        <img src="{$baseUrl}images/common/cart_add.png" alt="" />
                         {$LANG.add_new_product}
                     </a>
                 </td>
@@ -76,7 +76,7 @@
                 </td>
                 <td>
                     <a href="index.php?module=tax_rates&amp;view=add" class="positive">
-                        <img src="{$baseUrl}sys/images/common/money_delete.png" alt="" />
+                        <img src="{$baseUrl}images/common/money_delete.png" alt="" />
                         {$LANG.add_new_tax_rate}
                     </a>
                 </td>
@@ -91,7 +91,7 @@
                 <td>
                     </a>
                     <a href="./index.php?module=preferences&amp;view=add" class="positive">
-                        <img src="{$baseUrl}sys/images/common/page_white_edit.png" alt="" />
+                        <img src="{$baseUrl}images/common/page_white_edit.png" alt="" />
                         {$LANG.add_new_preference}
                     </a>
                 </td>
@@ -137,7 +137,7 @@
 							>
 								<img 
 									id="trash_image{$smarty.section.line.index|htmlsafe}"
-									src="{$baseUrl}sys/images/common/blank.gif"
+									src="{$baseUrl}images/common/blank.gif"
 									height="16px"
 									width="16px"
 									title="{$LANG.cannot_delete_first_row}"
@@ -156,7 +156,7 @@
 								href="#" 
 								style="display: inline;"
 							>
-								<img src="{$baseUrl}sys/images/common/delete_item.png" alt="" />
+								<img src="{$baseUrl}images/common/delete_item.png" alt="" />
 							</a>
 							{/if}
 						</td>
@@ -262,7 +262,7 @@
 							class="add_line_item"
 						>
 							<img 
-								src="{$baseUrl}sys/images/common/add.png"
+								src="{$baseUrl}images/common/add.png"
 								alt=""
 							/>
 							{$LANG.add_new_row}
@@ -271,9 +271,9 @@
 					</td>
 					<td>
 					<a href='#' class="show-note" onclick="javascript: $('.note').show();$('.show-note').hide();">
-						<img src="{$baseUrl}sys/images/common/page_white_add.png" title="{$LANG.show_details}" alt="" />{$LANG.show_details}</a>
+						<img src="{$baseUrl}images/common/page_white_add.png" title="{$LANG.show_details}" alt="" />{$LANG.show_details}</a>
 					<a href='#' class="note" onclick="javascript: $('.note').hide();$('.show-note').show();">
-						<img src="{$baseUrl}sys/images/common/page_white_delete.png" title="{$LANG.hide_details}" alt="" />{$LANG.hide_details}</a>
+						<img src="{$baseUrl}images/common/page_white_delete.png" title="{$LANG.hide_details}" alt="" />{$LANG.hide_details}</a>
 					</td>
 				</tr>
 		 </table>
@@ -322,7 +322,7 @@
 	</tr>	
 	<tr>
 		<td class=""> 
-			<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="{$baseUrl}sys/images/common/help-small.png" alt="" /> {$LANG.want_more_fields}</a>
+			<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="{$baseUrl}images/common/help-small.png" alt="" /> {$LANG.want_more_fields}</a>
 		</td>
 	</tr>
 
@@ -335,7 +335,7 @@
 	<tr>
 		<td>
 		<button type="submit" class="invoice_save positive" name="submit" value="{$LANG.save}">
-                <img class="button_img" src="{$baseUrl}sys/images/common/tick.png" alt="" /> 
+                <img class="button_img" src="{$baseUrl}images/common/tick.png" alt="" /> 
                 {$LANG.save}
             </button>
             
@@ -345,7 +345,7 @@
         	<input type="hidden" name="type" value="2" />
         	
             <a href="./index.php?module=invoices&amp;view=manage" class="negative">
-                <img src="{$baseUrl}sys/images/common/cross.png" alt="" />
+                <img src="{$baseUrl}images/common/cross.png" alt="" />
                 {$LANG.cancel}
             </a>
     

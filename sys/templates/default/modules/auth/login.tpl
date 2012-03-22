@@ -12,7 +12,7 @@
 {/if}
 	<div id="Dialog">
 		<div class="login-logo">
-            <img src="sys/images/common/si_logo.png" alt="Simple Invoices"/>
+            <img src="images/common/si_logo.png" alt="Simple Invoices"/>
         </div>
 		<form action="" method="post" id="frmLogin" name="frmLogin">
 	        <input type="hidden" name="action" value="login" />

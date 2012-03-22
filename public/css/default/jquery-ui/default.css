@@ -1,0 +1,33 @@
+h1, h2, h3
+{
+color:#4B7296;
+} 
+
+.welcome
+{
+	padding:10px;
+	margin-top:10px;
+	margin-bottom:10px;
+	/*
+	background-color:#FFFFCC;
+	border: 1px solid #FFFF00;
+	*/
+	background-color:#FFFCD9;
+	border: 1px solid #EEDE9C;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+}
+
+.footer
+{
+	font-size: 11px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin: 0 auto;
+	width: 970px;
+}
+
+.double_underline
+{
+	border-bottom: 3px double #555;
+}

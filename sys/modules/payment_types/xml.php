@@ -88,15 +88,15 @@ foreach ($payment_types as $row) {
 	$row['pref_id'] = (isset($row['pref_id']))? $row['pref_id'] : "";
 	$xml .= "<row id='".$row['pref_id']."'>";
 	$xml .= "<cell><![CDATA[
-		<a class='index_table' title='$LANG[view] $LANG[payment_type] ".$row['pt_description']."' href='index.php?module=payment_types&view=details&id=$row[pt_id]&action=view'><img src='" . $baseUrl . "sys/images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-		<a class='index_table' title='$LANG[edit] $LANG[payment_type] ".$row['pt_description']."' href='index.php?module=payment_types&view=details&id=$row[pt_id]&action=edit'><img src='" . $baseUrl . "sys/images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+		<a class='index_table' title='$LANG[view] $LANG[payment_type] ".$row['pt_description']."' href='index.php?module=payment_types&view=details&id=$row[pt_id]&action=view'><img src='" . $baseUrl . "images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+		<a class='index_table' title='$LANG[edit] $LANG[payment_type] ".$row['pt_description']."' href='index.php?module=payment_types&view=details&id=$row[pt_id]&action=edit'><img src='" . $baseUrl . "images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 	]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['pt_description']."]]></cell>";
 	if ($row['enabled']==$LANG['enabled']) {
-		$xml .= "<cell><![CDATA[<img src='" . $baseUrl . "sys/images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";
+		$xml .= "<cell><![CDATA[<img src='" . $baseUrl . "images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";
 	}
 	else {
-		$xml .= "<cell><![CDATA[<img src='" . $baseUrl . "sys/images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";
+		$xml .= "<cell><![CDATA[<img src='" . $baseUrl . "images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";
 	}
 	$xml .= "</row>";
 }

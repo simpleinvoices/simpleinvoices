@@ -10,7 +10,7 @@
 {else}
 {* if  name was inserted *} 
 	{if $smarty.post.submit !=null} 
-		<div class="validation_alert"><img src="{$baseUrl}sys/images/common/important.png" alt="" />
+		<div class="validation_alert"><img src="{$baseUrl}images/common/important.png" alt="" />
 		You must enter a value</div>
 		<hr />
 	{/if}

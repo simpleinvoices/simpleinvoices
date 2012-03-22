@@ -5,7 +5,7 @@
 		<tr>
 		<td>
 			<a href="./index.php?module=billers&amp;view=add" class="positive">
-			<img src="{$baseUrl}sys/images/famfam/add.png" alt="" />
+			<img src="{$baseUrl}images/famfam/add.png" alt="" />
 			</a>
 		</td>
 		</tr>

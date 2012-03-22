@@ -104,7 +104,7 @@ $(document).ready(function() {
             filter_type = 'all';
        }
 
-      $('.filter_'+filter_type).css('background',"url({/literal}{$include_dir}{literal}sys/images/common/tag-right.png) no-repeat center left");
+      $('.filter_'+filter_type).css('background',"url({/literal}{$include_dir}{literal}images/common/tag-right.png) no-repeat center left");
 });
 
 {/literal}

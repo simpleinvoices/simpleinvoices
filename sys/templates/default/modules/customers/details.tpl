@@ -37,7 +37,7 @@
 			class="cluetip"
 			title="{$LANG.customer_contact}"
 		>
-		<img src="{$baseUrl}sys/images/common/help-small.png" alt="" /></a>
+		<img src="{$baseUrl}images/common/help-small.png" alt="" /></a>
 		
 		</td>
 		<td colspan="2">{$customer.attention|htmlsafe}</td>
@@ -59,7 +59,7 @@
 				href="#"
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_street2"
 				title="{$LANG.street2}"
-			> <img src="{$baseUrl}sys/images/common/help-small.png" alt="" /></a>
+			> <img src="{$baseUrl}images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>{$customer.street_address2|htmlsafe}</td>
 	</tr>
@@ -116,7 +116,7 @@
 							rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 							title="{$LANG.Custom_Fields}"
 						> 
-						<img src="{$baseUrl}sys/images/common/help-small.png" alt="" /></a>
+						<img src="{$baseUrl}images/common/help-small.png" alt="" /></a>
 					</td>
 					<td>{$customer.custom_field1|htmlsafe}</td>
 				</tr>
@@ -128,7 +128,7 @@
 							rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 							title="{$LANG.Custom_Fields}"
 						> 
-						<img src="{$baseUrl}sys/images/common/help-small.png" alt="" /></a>
+						<img src="{$baseUrl}images/common/help-small.png" alt="" /></a>
 					</td>
 					<td>{$customer.custom_field2|htmlsafe}</td>
 				</tr>
@@ -140,7 +140,7 @@
 							rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 							title="{$LANG.Custom_Fields}"
 						> 
-						<img src="{$baseUrl}sys/images/common/help-small.png" alt="" /></a>
+						<img src="{$baseUrl}images/common/help-small.png" alt="" /></a>
 					</td>
 					<td>{$customer.custom_field3|htmlsafe}</td>
 				</tr>
@@ -152,7 +152,7 @@
 							rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 							title="{$LANG.Custom_Fields}"
 						> 
-						<img src="{$baseUrl}sys/images/common/help-small.png" alt="" /></a>
+						<img src="{$baseUrl}images/common/help-small.png" alt="" /></a>
  					</td>
 					<td>{$customer.custom_field4|htmlsafe}</td>
 				</tr>
@@ -238,7 +238,7 @@
     <tr>
         <td>
             <a href="./index.php?module=customers&amp;view=details&amp;id={$customer.id|urlencode}&amp;action=edit" class="positive">
-                <img src="{$baseUrl}sys/images/common/tick.png" alt="" />
+                <img src="{$baseUrl}images/common/tick.png" alt="" />
                 {$LANG.edit}
             </a>
     
@@ -260,7 +260,7 @@
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field"
 				title="{$LANG.Required_Field}"
 		>
-		<img src="{$baseUrl}sys/images/common/required-small.png" alt="" /></a>
+		<img src="{$baseUrl}images/common/required-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" name="name" value="{$customer.name|htmlsafe}" size="50" id="name" class="validate[required]" /></td>
 	</tr>
@@ -272,7 +272,7 @@
 			class="cluetip"
 			title="{$LANG.customer_contact}"
 		>
-		 <img src="{$baseUrl}sys/images/common/help-small.png" alt="" /></a>
+		 <img src="{$baseUrl}images/common/help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" name="attention" value="{$customer.attention|htmlsafe}" size="50" /></td>
 	</tr>
@@ -288,7 +288,7 @@
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_street2"
 				title="{$LANG.street2}"
 			> 
-				<img src="{$baseUrl}sys/images/common/help-small.png" alt="" />
+				<img src="{$baseUrl}images/common/help-small.png" alt="" />
 			</a>
 		</td>
 		<td><input type="text" name="street_address2" value="{$customer.street_address2|htmlsafe}" size="50" /></td>
@@ -378,7 +378,7 @@
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 				title="{$LANG.Custom_Fields}"
 			> 
-		 <img src="{$baseUrl}sys/images/common/help-small.png" alt="" /></a>
+		 <img src="{$baseUrl}images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>
 			<input type="text" name="custom_field1" value="{$customer.custom_field1|htmlsafe}" size="50" /></td
@@ -391,7 +391,7 @@
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 				title="{$LANG.Custom_Fields}"
 			> 
-		 <img src="{$baseUrl}sys/images/common/help-small.png" alt="" /></a>
+		 <img src="{$baseUrl}images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>
 			<input type="text" name="custom_field2" value="{$customer.custom_field2|htmlsafe}" size="50" /></td
@@ -404,7 +404,7 @@
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 				title="{$LANG.Custom_Fields}"
 			> 
-		<img src="{$baseUrl}sys/images/common/help-small.png" alt="" /></a>
+		<img src="{$baseUrl}images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>
 			<input type="text" name="custom_field3" value="{$customer.custom_field3|htmlsafe}" size="50" /></td
@@ -417,7 +417,7 @@
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 				title="{$LANG.Custom_Fields}"
 			> 
-		 <img src="{$baseUrl}sys/images/common/help-small.png" alt="" /></a>
+		 <img src="{$baseUrl}images/common/help-small.png" alt="" /></a>
 		</td>
 		<td>
 			<input type="text" name="custom_field4" value="{$customer.custom_field4|htmlsafe}" size="50" /></td
@@ -444,14 +444,14 @@
     <tr>
         <td>
             <button type="submit" class="positive" name="save_customer" value="{$LANG.save_customer}">
-                <img class="button_img" src="{$baseUrl}sys/images/common/tick.png" alt="" /> 
+                <img class="button_img" src="{$baseUrl}images/common/tick.png" alt="" /> 
                 {$LANG.save}
             </button>
 
             <input type="hidden" name="op" value="edit_customer">
         
             <a href="./index.php?module=customers&amp;view=manage" class="negative">
-                <img src="{$baseUrl}sys/images/common/cross.png" alt="" />
+                <img src="{$baseUrl}images/common/cross.png" alt="" />
                 {$LANG.cancel}
             </a>
     

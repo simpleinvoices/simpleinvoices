@@ -32,12 +32,12 @@
 		<tr>
 			<td>
 				<a href="./index.php?module=payment_types&amp;view=details&amp;id={$paymentType.pt_id}&amp;action=edit" class="positive">
-					<img src="{$baseUrl}sys/images/famfam/report_edit.png" alt="" />
+					<img src="{$baseUrl}images/famfam/report_edit.png" alt="" />
 					{$LANG.edit}
 				</a>
 
 				<a href="./index.php?module=payment_types&amp;view=manage" class="negative">
-					<img src="{$baseUrl}sys/images/common/cross.png" alt="" />
+					<img src="{$baseUrl}images/common/cross.png" alt="" />
 					{$LANG.cancel}
 				</a>
 		
@@ -50,7 +50,7 @@
 
 	<table align="center">
 	<tr>
-		<td class="details_screen">{$LANG.description} <a href="index.php?module=documentation&amp;view=view&amp;page=help_required_field" rel="gb_page_center[350, 150]"><img src="{$baseUrl}sys/images/common/required-small.png" alt="(required)" /></a></td>
+		<td class="details_screen">{$LANG.description} <a href="index.php?module=documentation&amp;view=view&amp;page=help_required_field" rel="gb_page_center[350, 150]"><img src="{$baseUrl}images/common/required-small.png" alt="(required)" /></a></td>
 		<td>
 			<input type="text"  class="validate[required]"  name="pt_description" value="{$paymentType.pt_description|htmlsafe|htmlsafe}" size="30" />
 		</td>
@@ -74,14 +74,14 @@
 		<tr>
 			<td>
 				<button type="submit" class="positive" name="save_payment_type" value="{$LANG.save}">
-					<img class="button_img" src="{$baseUrl}sys/images/common/tick.png" alt="" /> 
+					<img class="button_img" src="{$baseUrl}images/common/tick.png" alt="" /> 
 					{$LANG.save}
 				</button>
 
 				<input type="hidden" name="op" value="edit_payment_type">
 			
 				<a href="./index.php?module=preferences&amp;view=manage" class="negative">
-					<img src="{$baseUrl}sys/images/common/cross.png" alt="" />
+					<img src="{$baseUrl}images/common/cross.png" alt="" />
 					{$LANG.cancel}
 				</a>
 		

@@ -25,7 +25,7 @@
 <tr>
 	<td class="details_screen">{$LANG.amount}</td>
 	<td colspan="5"><input type="text" id='ac_amount' name="ac_amount" size="25" rel='{$invoice.owing|htmlsafe}' value="{$invoice.owing|htmlsafe}" />
-	<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_auto_amount" title="{$LANG.process_payment_auto_amount}"><img src="{$baseUrl}sys/images/common/help-small.png" alt="" /></a>
+	<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_auto_amount" title="{$LANG.process_payment_auto_amount}"><img src="{$baseUrl}images/common/help-small.png" alt="" /></a>
 	</td>
 </tr>
 <tr>
@@ -97,7 +97,7 @@
 					<option value="1" style="font-weight: bold;" selected="">{$LANG.yes}</option>
 					<option value="0" selected="">{$LANG.no}</option>
 				</select>
-				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_distribute_overpayment" title="{$LANG.help_distribute_overpayment_title}"><img src="{$baseUrl}sys/images/common/help-small.png" alt="" /></a>
+				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_distribute_overpayment" title="{$LANG.help_distribute_overpayment_title}"><img src="{$baseUrl}images/common/help-small.png" alt="" /></a>
 			</div>
 		</td> 
 </tr>
@@ -117,14 +117,14 @@
     <tr>
         <td>
             <button type="submit" class="positive" name="process_payment" value="{$LANG.save}">
-                <img class="button_img" src="{$baseUrl}sys/images/common/tick.png" alt="" /> 
+                <img class="button_img" src="{$baseUrl}images/common/tick.png" alt="" /> 
                 {$LANG.save}
             </button>
 
             <input type="hidden" name="op" value="edit_preference" />
         
             <a href="./index.php?module=payments&amp;view=manage" class="negative">
-                <img src="{$baseUrl}sys/images/common/cross.png" alt="" />
+                <img src="{$baseUrl}images/common/cross.png" alt="" />
                 {$LANG.cancel}
             </a>
     

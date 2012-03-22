@@ -15,7 +15,7 @@
 {* <h3>You are editing {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}</h3> *}
 <br />
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
-        	<img src="./sys/images/common/gmail-loader.gif" alt="{$LANG.loading} ..." /> {$LANG.loading} ...
+        	<img src="./images/common/gmail-loader.gif" alt="{$LANG.loading} ..." /> {$LANG.loading} ...
 </div>
 
 
@@ -159,10 +159,10 @@
 						class="show-note" 
 						onclick="javascript: $('.note').show();$('.show-note').hide();"
 					>
-						<img src="{$baseUrl}sys/images/common/page_white_add.png" title="{$LANG.show_details}" alt="" />
+						<img src="{$baseUrl}images/common/page_white_add.png" title="{$LANG.show_details}" alt="" />
 					</a>
 					<a href='#' class="note" onclick="javascript: $('.note').hide();$('.show-note').show();">
-						<img src="{$baseUrl}sys/images/common/page_white_delete.png" title="{$LANG.hide_details}" alt="" />
+						<img src="{$baseUrl}images/common/page_white_delete.png" title="{$LANG.hide_details}" alt="" />
 					</a>
 				</td>
 		    </tr>
@@ -180,7 +180,7 @@
 								style="display: inline;"
 								rel="{$line|htmlsafe}"
 							>
-								<img id="delete_image{$line|htmlsafe}" src="{$baseUrl}sys/images/common/delete_item.png" alt="" />
+								<img id="delete_image{$line|htmlsafe}" src="{$baseUrl}images/common/delete_item.png" alt="" />
 							</a>
 						{/if}
 						{if $line == "0"}
@@ -192,7 +192,7 @@
 								style="display: inline;"
 								rel="{$line|htmlsafe}"
 							>
-								<img id="delete_image{$line|htmlsafe}" src="{$baseUrl}sys/images/common/blank.gif" alt="" />
+								<img id="delete_image{$line|htmlsafe}" src="{$baseUrl}images/common/blank.gif" alt="" />
 							</a>
 						{/if}
 						</td>
@@ -267,7 +267,7 @@
 								class="add_line_item"
 							>
 								<img 
-									src="{$baseUrl}sys/images/common/add.png"
+									src="{$baseUrl}images/common/add.png"
 									alt=""
 								/>
 								{$LANG.add_new_row}
@@ -282,7 +282,7 @@
 		{*
 			<tr>
 				<td>
-					<a href="./index.php?module=invoices&amp;view=add_invoice_item&amp;invoice={$invoice.id|urlencode}&amp;type={$invoice.type_id|urlencode}&amp;tax_id={$invoiceItems.0.tax_id|urlencode}"><img src="{$baseUrl}sys/images/common/famfamAdd.png" alt="" />{$LANG.add_invoice_item}</a>
+					<a href="./index.php?module=invoices&amp;view=add_invoice_item&amp;invoice={$invoice.id|urlencode}&amp;type={$invoice.type_id|urlencode}&amp;tax_id={$invoiceItems.0.tax_id|urlencode}"><img src="{$baseUrl}images/common/famfamAdd.png" alt="" />{$LANG.add_invoice_item}</a>
 				</td>
 				<td>
 				</td>
@@ -333,7 +333,7 @@
 	<tr>
 		<td>
 			<button type="submit" class="invoice_save positive" name="submit" value="{$LANG.save}">
-				<img class="button_img" src="{$baseUrl}sys/images/common/tick.png" alt="" /> 
+				<img class="button_img" src="{$baseUrl}images/common/tick.png" alt="" /> 
 				{$LANG.save}
 			</button>
 			{if $invoice.id == null} 
@@ -350,7 +350,7 @@
 			<input type="hidden" name="op" value="insert_preference" />
 			<input type="hidden" id="max_items" name="max_items" value="{$lines|htmlsafe}" />
 			<a href="./index.php?module=invoices&amp;view=manage" class="negative">
-				<img src="{$baseUrl}sys/images/common/cross.png" alt="" />
+				<img src="{$baseUrl}images/common/cross.png" alt="" />
 				{$LANG.cancel}
 			</a>
 		</td>

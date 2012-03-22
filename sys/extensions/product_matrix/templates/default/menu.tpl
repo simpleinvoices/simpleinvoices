@@ -173,7 +173,7 @@
 
 				</ul>
 			</li>
-			<li> <a href="#"><img src="{$baseUrl}sys/images/common/help-small.png"></a>
+			<li> <a href="#"><img src="{$baseUrl}images/common/help-small.png"></a>
 				<ul>
 					<li>
 						<a href="docs.php?p=ReadMe">{$LANG.help} +</a>

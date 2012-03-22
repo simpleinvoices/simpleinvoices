@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<title>Simple Invoices</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link REL="SHORTCUT ICON" HREF="{$baseUrl}sys/images/common/favicon.ico">
+	<link REL="SHORTCUT ICON" HREF="{$baseUrl}images/common/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="./extensions/text_ui/templates/default/css/default.css">
 	<!-- extJs2 Files 
 	<link rel="stylesheet" type="text/css" href="./sys/include/ext2/resources/css/ext-all.css" />
@@ -17,14 +17,14 @@
 
 
 		<!-- jQuery Files -->
-	<script type="text/javascript" src="./sys/include/jquery/jquery-1.2.6.min.js"></script>
+	<script type="text/javascript" src="./js/jquery-1.2.6.min.js"></script>
 	{$extension_jquery_files }
-	<script type="text/javascript" src="./sys/include/jquery/jquery.plugins.js"></script>
-	<script type="text/javascript" src="./sys/include/jquery/rte/jquery.rte.js"></script>
-	<script type="text/javascript" src="./sys/include/jquery/jquery.conf.js"></script>
+	<script type="text/javascript" src="./js/jquery.plugins.js"></script>
+	<script type="text/javascript" src="./js/rte/jquery.rte.js"></script>
+	<script type="text/javascript" src="./js/jquery.conf.js"></script>
 	<link rel="stylesheet" type="text/css" href="./sys/templates/default/css/flexigrid.css">
-	<link rel="stylesheet" type="text/css" href="./sys/include/jquery/jquery.plugins.css" title="default" media="screen" />
-		<link rel="stylesheet" type="text/css" href="./sys/include/jquery/rte/rte.css" />
+	<link rel="stylesheet" type="text/css" href="./css/default/jquery.plugins.css" title="default" media="screen" />
+		<link rel="stylesheet" type="text/css" href="./js/rte/rte.css" />
 {literal}
 	<!-- Menu header -->
 	<!--[if lte IE 6]>

@@ -61,7 +61,7 @@
 		<tr>
 			<td>
 				<a href="./index.php?module=expense&view=details&id={$expense.id}&action=edit" class="positive">
-					<img src="{$baseUrl}sys/images/famfam/add.png" alt=""/>
+					<img src="{$baseUrl}images/famfam/add.png" alt=""/>
 					{$LANG.edit}
 				</a>
 
@@ -192,7 +192,7 @@
 	<tr>
 		<td>
 			<button type="submit" class="positive" name="save_product" value="{$LANG.save}">
-			    <img class="button_img" src="{$baseUrl}sys/images/common/tick.png" alt="" /> 
+			    <img class="button_img" src="{$baseUrl}images/common/tick.png" alt="" /> 
 				{$LANG.save}
 			</button>
 
@@ -200,7 +200,7 @@
 			<input type="hidden" name="id" value="{$smarty.get.id}">
 		
 			<a href="./index.php?module=expense&view=manage" class="negative">
-		        <img src="{$baseUrl}sys/images/common/cross.png" alt="" />
+		        <img src="{$baseUrl}images/common/cross.png" alt="" />
 	        	{$LANG.cancel}
     		</a>
 	

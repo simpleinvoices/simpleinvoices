@@ -2686,7 +2686,7 @@ function pdfThis($html,$file_location="",$pdfname)
 
 
 
-    require_once(getcwd() . '/lib/tcpdf/tcpdf.php');
+    require_once(dirname(APPLICATION_PATH) . '/lib/tcpdf/tcpdf.php');
 
     // create new PDF document
     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);

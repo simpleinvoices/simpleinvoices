@@ -1,6 +1,6 @@
 {if $mysql < 5 && $db_server == 'mysql'}
 
-		{$LANG.note} <a href='index.php?module=documentation&amp;view=view&amp;page=help_mysql4' rel='gb_page_center[450, 450]' ><img src='{$baseUrl}sys/images/common/help-small.png' alt="" /></a> : {$LANG.mysql4_features_disabled}<br />
+		{$LANG.note} <a href='index.php?module=documentation&amp;view=view&amp;page=help_mysql4' rel='gb_page_center[450, 450]' ><img src='{$baseUrl}images/common/help-small.png' alt="" /></a> : {$LANG.mysql4_features_disabled}<br />
 {/if}
 
 <!-- Welcome message - start -->
@@ -22,7 +22,7 @@
                 </td>
                 <td>
                     <a href="./index.php?module=billers&amp;view=add" class="positive">
-                        <img src="{$baseUrl}sys/images/common/user_add.png" alt="" />
+                        <img src="{$baseUrl}images/common/user_add.png" alt="" />
                         {$LANG.add_new_biller}
                     </a>
                 </td>
@@ -35,7 +35,7 @@
                 </td>
                 <td>
                     <a href="./index.php?module=customers&amp;view=add" class="positive">
-                        <img src="{$baseUrl}sys/images/common/vcard_add.png" alt="" />
+                        <img src="{$baseUrl}images/common/vcard_add.png" alt="" />
                         {$LANG.customer_add}
                     </a>
                 </td>
@@ -48,7 +48,7 @@
                 </td>
                 <td>
                     <a href="./index.php?module=products&amp;view=add" class="positive">
-                        <img src="{$baseUrl}sys/images/common/cart_add.png" alt="" />
+                        <img src="{$baseUrl}images/common/cart_add.png" alt="" />
                         {$LANG.add_new_product}
                     </a>
                 </td>
@@ -62,7 +62,7 @@
                 </td>
                 <td>
                     <a href="index.php?module=tax_rates&amp;view=add" class="positive">
-                        <img src="{$baseUrl}sys/images/common/money_delete.png" alt="" />
+                        <img src="{$baseUrl}images/common/money_delete.png" alt="" />
                         {$LANG.add_new_tax_rate}
                     </a>
                 </td>
@@ -77,7 +77,7 @@
                 <td>
                     </a>
                     <a href="./index.php?module=preferences&amp;view=add" class="positive">
-                        <img src="{$baseUrl}sys/images/common/page_white_edit.png" alt="" />
+                        <img src="{$baseUrl}images/common/page_white_edit.png" alt="" />
                         {$LANG.add_new_preference}
                     </a>
                 </td>
@@ -99,7 +99,7 @@
                 </td>
                 <td>
                     <a href="./index.php?module=invoices&amp;view=itemised" class="positive">
-                        <img src="{$baseUrl}sys/images/famfam/add.png" alt="" />
+                        <img src="{$baseUrl}images/famfam/add.png" alt="" />
                         {$LANG.new_invoice}
                     </a>
                 </td>
@@ -116,7 +116,7 @@
             </td>
             <td>
             <a href="index.php?module=options&amp;view=index" class="">
-            <img src="{$baseUrl}sys/images/common/cog_edit.png" alt=""/>
+            <img src="{$baseUrl}images/common/cog_edit.png" alt=""/>
             {$LANG.settings}
             </a>
             </td>
@@ -133,19 +133,19 @@
         <tr>
             <td>
             <a href="index.php?module=invoices&amp;view=itemised" class="positive">
-            <img src="{$baseUrl}sys/images/common/add.png" alt=""/>
+            <img src="{$baseUrl}images/common/add.png" alt=""/>
             {$LANG.add_new_invoice}
             </a>
         </td>
         <td>
             <a href="index.php?module=customers&amp;view=add" class="">
-            <img src="{$baseUrl}sys/images/common/vcard_add.png" alt=""/>
+            <img src="{$baseUrl}images/common/vcard_add.png" alt=""/>
             {$LANG.add_customer}
             </a>
         </td>
         <td>
             <a href="index.php?module=products&amp;view=add" class="">
-            <img src="{$baseUrl}sys/images/common/cart_add.png" alt=""/>
+            <img src="{$baseUrl}images/common/cart_add.png" alt=""/>
             {$LANG.add_new_product}
             </a>
             </td>

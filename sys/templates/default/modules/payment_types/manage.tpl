@@ -21,7 +21,7 @@
     <tr>
         <td>
             <a href="./index.php?module=payment_types&amp;view=add" class="positive">
-                <img src="{$baseUrl}sys/images/famfam/add.png" alt="" />
+                <img src="{$baseUrl}images/famfam/add.png" alt="" />
                 {$LANG.add_new_payment_type}
             </a>
 

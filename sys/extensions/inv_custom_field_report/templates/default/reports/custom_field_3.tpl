@@ -53,7 +53,7 @@
     <tr>
         <td>
             <button type="submit" class="positive" name="submit" value="statement_report">
-                <img class="button_img" src="{$baseUrl}sys/images/common/tick.png" alt="" /> 
+                <img class="button_img" src="{$baseUrl}images/common/tick.png" alt="" /> 
                 Run report
             </button>
 

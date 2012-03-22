@@ -305,7 +305,7 @@ EOD;
 		$display_block = <<<EOD
 			<tr>
 				<td class="$css_class1">$custom_label_value
-				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="Custom Fields"><img src="./sys/images/common/help-small.png" alt="" /></a>
+				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="Custom Fields"><img src="./images/common/help-small.png" alt="" /></a>
  
 				</td>
 				<td>

@@ -30,11 +30,11 @@ $count = $sth_count_rows;
 		$row['email_customer_nice'] = $row['email_customer']==1?$LANG['yes']:$LANG['no'];
 		$xml .= "<row id='".$row['id']."'>";
 		$xml .= "<cell><![CDATA[
-		<a class='index_table' title='$LANG[view] ".$row['index_name']."' href='index.php?module=cron&view=view&id=$row[id]'><img src='" . $baseUrl . "sys/images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-		<a class='index_table' title='$LANG[edit] ".$row['index_name']."' href='index.php?module=cron&view=edit&id=$row[id]'><img src='" . $baseUrl . "sys/images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>";
+		<a class='index_table' title='$LANG[view] ".$row['index_name']."' href='index.php?module=cron&view=view&id=$row[id]'><img src='" . $baseUrl . "images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+		<a class='index_table' title='$LANG[edit] ".$row['index_name']."' href='index.php?module=cron&view=edit&id=$row[id]'><img src='" . $baseUrl . "images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>";
 		/*If delete is disabled - dont allow people to view this page*/
 		if ( $delete == 1 ) {
-			$xml .= "<a class='index_table' title='$LANG[edit] ".$row['name']."' href='index.php?module=cron&view=delete&stage=1&id=$row[id]'><img src='" . $baseUrl . "sys/images/common/delete.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>";
+			$xml .= "<a class='index_table' title='$LANG[edit] ".$row['name']."' href='index.php?module=cron&view=delete&stage=1&id=$row[id]'><img src='" . $baseUrl . "images/common/delete.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>";
 		}
 		$xml .= "]]></cell>";
 		$xml .= "<cell><![CDATA[".$row['index_name']."]]></cell>";		

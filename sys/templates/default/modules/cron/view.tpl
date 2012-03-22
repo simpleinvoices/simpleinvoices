@@ -46,15 +46,15 @@
 	<tr>
 		<td>
 				<a href="./index.php?module=cron&amp;view=edit&amp;id={$cron.id|urlencode}" class="positive">
-					<img src="{$baseUrl}sys/images/famfam/report_edit.png" alt=""/>
+					<img src="{$baseUrl}images/famfam/report_edit.png" alt=""/>
 					{$LANG.edit}
 				</a>
 			<a href="./index.php?module=cron&view=manage" class="negative">
-		        <img src="{$baseUrl}sys/images/common/cross.png" alt="" />
+		        <img src="{$baseUrl}images/common/cross.png" alt="" />
 	        	{$LANG.cancel}
     		</a>
 		{if $defaults.delete == '1'}
-                	<a title="{$LANG.delete} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=cron&amp;view=delete&amp;stage=1&amp;id={$cron.id|urlencode}"><img src='{$baseUrl}/sys/images/common/delete.png' class='action' />&nbsp;{$LANG.delete}</a>
+                	<a title="{$LANG.delete} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}" href="index.php?module=cron&amp;view=delete&amp;stage=1&amp;id={$cron.id|urlencode}"><img src='{$baseUrl}/images/common/delete.png' class='action' />&nbsp;{$LANG.delete}</a>
                 {/if}
 		</td>
 	</tr>

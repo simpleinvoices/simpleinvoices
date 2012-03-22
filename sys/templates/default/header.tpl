@@ -9,50 +9,50 @@
 	<meta http-equiv="Content-Script-Type" content="text/javascript" />
 	<meta http-equiv="Content-Style-Type" content="text/css" />
 	<meta name="robots" content="noindex, nofollow" />
-	<link rel="shortcut icon" href="{$baseUrl}sys/images/common/favicon.ico" />
+	<link rel="shortcut icon" href="{$baseUrl}images/common/favicon.ico" />
 
 {literal}
-	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}sys/include/jquery/jquery-1.2.6.min.js"></script>
-	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}sys/include/jquery/jquery.init.js"></script>
+	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}js/jquery-1.2.6.min.js"></script>
+	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}js/jquery.init.js"></script>
 
-	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}sys/templates/default/css/jquery-ui/default/default.dialog.css" media="all" />
-	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}sys/templates/default/css/print.css" media="print" />
+	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}css/default/jquery-ui/default/default.dialog.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}css/default/print.css" media="print" />
 	<!-- jQuery Files -->
-	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}sys/include/jquery/jquery-ui-personalized-1.6rc2.packed.js"></script>	
-	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}sys/include/jquery/cluetip/jquery.hoverIntent.minified.js"></script>
-	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}sys/include/jquery/cluetip/jquery.cluetip.js"></script>
-	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}sys/include/jquery/jquery.flexigrid.1.0b3.pack.js"></script>
-	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}sys/include/jquery/jquery.plugins.js"></script>
-	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}sys/include/jquery/wysiwyg/wysiwyg.modified.packed.js"></script>
-	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}sys/include/jquery/jquery.livequery.pack.js"></script>
+	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}js/jquery-ui-personalized-1.6rc2.packed.js"></script>	
+	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}js/cluetip/jquery.hoverIntent.minified.js"></script>
+	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}js/cluetip/jquery.cluetip.js"></script>
+	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}js/jquery.flexigrid.1.0b3.pack.js"></script>
+	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}js/jquery.plugins.js"></script>
+	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}js/wysiwyg/wysiwyg.modified.packed.js"></script>
+	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}js/jquery.livequery.pack.js"></script>
 	{/literal}{$extension_jquery_files }{literal}
 	
 	<!-- AJAX Uploader script for people - billers -->
-	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}sys/include/jquery/ajaxupload/ajaxupload.js"></script>
+	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}js/ajaxupload/ajaxupload.js"></script>
 	
 	{/literal}
 	{include file="./jquery/jquery.functions.js.tpl"}
 	{include file="./jquery/jquery.conf.js.tpl"}
 	{literal}
-	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}sys/templates/default/css/jquery-ui/tab-screen.css" media="all" />
-	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}sys/templates/default/css/jquery-ui/tab_menu.css" media="all" />
-	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}sys/templates/default/css/jquery-ui/tab.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}css/default/jquery-ui/tab-screen.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}css/default/jquery-ui/tab_menu.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}css/default/jquery-ui/tab.css" media="all" />
 	<!--[if IE]>
 	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}sys/extensions/tab_menu/templates/default/css/iehacks.css" media="all" />
 	<![endif]-->
 
-	<!--<script type="text/javascript" src="./sys/include/jquery/jquery.conf.js.tpl"></script>-->
-	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}sys/templates/default/css/flexigrid.css" />
-	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}sys/include/jquery/wysiwyg/wysiwyg.css" />
-	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}sys/include/jquery/jquery.plugins.css" title="default" media="screen" />
-	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}sys/include/jquery/rte/rte.css" />	
-	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}sys/include/jquery/cluetip/jquery.cluetip.css" />
-	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}sys/templates/default/css/jquery-ui/default.css" media="all" />
-	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}sys/templates/default/css/phpreports.css" media="all"/>
+	<!--<script type="text/javascript" src="./js/jquery.conf.js.tpl"></script>-->
+	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}css/default/flexigrid.css" />
+	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}js/wysiwyg/wysiwyg.css" />
+	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}css/default/jquery.plugins.css" title="default" media="screen" />
+	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}js/rte/rte.css" />	
+	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}js/cluetip/jquery.cluetip.css" />
+	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}css/default/jquery-ui/default.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}css/default/phpreports.css" media="all"/>
 
-	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}sys/include/jquery/jquery.validationEngine.js"></script>
+	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}js/jquery.validationEngine.js"></script>
   <!-- Javascript for Flot Graphs -->
-  <script type="text/javascript" src="{/literal}{$baseUrl}{literal}sys/include/jquery/flot/jquery.flot.js"></script>
+  <script type="text/javascript" src="{/literal}{$baseUrl}{literal}js/flot/jquery.flot.js"></script>
 	
 	{/literal}
 	{if $config->debug->level == "All"}

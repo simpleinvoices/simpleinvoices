@@ -28,14 +28,14 @@
             <tr>
                 <td>
                     <button type="submit" class="positive" name="submit">
-                        <img class="button_img" src="{$baseUrl}sys/images/common/tick.png" alt="" /> 
+                        <img class="button_img" src="{$baseUrl}images/common/tick.png" alt="" /> 
                         {$LANG.yes}
                     </button>
 
                     <input type="hidden" name="doDelete" value="y" />
                 
                     <a href="./index.php?module=cron&amp;view=manage" class="negative">
-                        <img src="{$baseUrl}sys/images/common/cross.png" alt="" />
+                        <img src="{$baseUrl}images/common/cross.png" alt="" />
                         {$LANG.cancel}
                     </a>
             

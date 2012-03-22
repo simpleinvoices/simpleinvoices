@@ -1,4 +1,4 @@
-<img src="{$baseUrl}sys/images/common/simple_invoices_logo.jpg"/>
+<img src="{$baseUrl}images/common/simple_invoices_logo.jpg"/>
 <br/>
 <br/>
 <table align="center">
@@ -35,7 +35,7 @@ Click the 'Install Essential Data' button below to continue the installation of 
         <td>
         
             <a href="./index.php?module=install&amp;view=essential" class="positive">
-                <img src="{$baseUrl}sys/images/common/tick.png" alt="" />
+                <img src="{$baseUrl}images/common/tick.png" alt="" />
                 Install Essential Data
             </a>
     
@@ -43,7 +43,7 @@ Click the 'Install Essential Data' button below to continue the installation of 
         <td>
         
             <a href="./index.php" class="negative">
-                <img src="{$baseUrl}sys/images/common/cross.png" alt="" />
+                <img src="{$baseUrl}images/common/cross.png" alt="" />
                 Cancel
             </a>
     
