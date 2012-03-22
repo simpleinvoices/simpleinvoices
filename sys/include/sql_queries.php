@@ -22,9 +22,9 @@ function db_connector() {
 	/*
 	* strip the pdo_ section from the adapter
 	*/
-	$pdoAdapter = substr($config->database->adapter, 4);
+	$pdoAdapter = substr($config->resources->db->adapter, 4);
 
-	if(!defined('PDO::MYSQL_ATTR_INIT_COMMAND') AND $pdoAdapter == "mysql" AND $config->database->adapter->utf8 == true)
+	if(!defined('PDO::MYSQL_ATTR_INIT_COMMAND') AND $pdoAdapter == "mysql" AND $config->resources->db->adapter->utf8 == true)
 	{
         simpleInvoicesError("PDO::mysql_attr");
 	}
@@ -37,32 +37,25 @@ function db_connector() {
 
 		    case "pgsql":
 		    	$connlink = new PDO(
-					$pdoAdapter.':host='.$config->database->params->host.';	dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password
+					$pdoAdapter.':host='.$config->resources->db->params->host.';	dbname='.$config->resources->db->params->dbname,	$config->resources->db->params->username, $config->resources->db->params->password
 				);
 		    	break;
 
 		    case "sqlite":
 		    	$connlink = new PDO(
-					$pdoAdapter.':host='.$config->database->params->host.';	dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password
+					$pdoAdapter.':host='.$config->resources->db->params->host.';	dbname='.$config->resources->db->params->dbname,	$config->resources->db->params->username, $config->resources->db->params->password
 				);
 				break;
 
 		    case "mysql":
-                switch ($config->database->utf8)
-                {
-                    case true:
-
-        			   	$connlink = new PDO(
-        					'mysql:host='.$config->database->params->host.'; port='.$config->database->params->port.'; dbname='.$config->database->params->dbname, $config->database->params->username, $config->database->params->password,  array( PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8;")
-        				);
-		        		break;
-
-        		    case false:
-		            default:
-        		    	$connlink = new PDO(
-        					$pdoAdapter.':host='.$config->database->params->host.'; port='.$config->database->params->port.'; dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password
-		        		);
-    				break;
+                if ($config->resources->db->params->charset === 'utf8') {
+                    $connlink = new PDO(
+                        'mysql:host='.$config->resources->db->params->host.'; port='.$config->resources->db->params->port.'; dbname='.$config->resources->db->params->dbname, $config->resources->db->params->username, $config->resources->db->params->password,  array( PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8;")
+                    );
+                } else {
+                    $connlink = new PDO(
+                        $pdoAdapter.':host='.$config->resources->db->params->host.'; port='.$config->resources->db->params->port.'; dbname='.$config->resources->db->params->dbname,    $config->resources->db->params->username, $config->resources->db->params->password
+                    );
                 }
     	    	break;
 
@@ -208,7 +201,7 @@ function dbLogger($sqlQuery) {
 function lastInsertId() {
 	global $config;
 	global $dbh;
-	$pdoAdapter = substr($config->database->adapter, 4);
+	$pdoAdapter = substr($config->resources->db->adapter, 4);
 
 	if ($pdoAdapter == 'pgsql') {
 		$sql = 'SELECT lastval()';
@@ -2553,7 +2546,7 @@ function checkTableExists($table = "" ) {
 	global $LANG;
 	global $dbh;
 	global $config;
-	switch ($config->database->adapter)
+	switch ($config->resources->db->adapter)
 	{
 
 		case "pdo_pgsql":

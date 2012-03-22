@@ -26,12 +26,6 @@ define('OUTPUT_FILE_DIRECTORY', APPLICATION_PATH . '/tmp/cache/');
 define('WRITER_TEMPDIR', APPLICATION_PATH . '/tmp/cache');
 
 
-// Backward compatibility
-if (!isset($cust_language)) {
-    $cust_language =  isset($_GET['lang'])  ? filenameEscape($_GET['lang'])    : null;
-}
-
-
 /*
 * Load stuff required before init.php
 */

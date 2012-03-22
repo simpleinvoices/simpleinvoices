@@ -677,7 +677,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
     $patch['133']['date'] = "20071126";
 
     $patch['134']['name'] = "Drop non-int compatible default from si_sql_patchmanager";
-    switch ($config->database->adapter)
+    switch ($config->resources->db->adapter)
     {
 		case "pdo_pgsql" :
         	$patch['134']['patch'] = "ALTER TABLE ".TB_PREFIX."sql_patchmanager ALTER COLUMN sql_patch_ref DROP DEFAULT;";
@@ -689,7 +689,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
     $patch['134']['date'] = "20071218";
 
     $patch['135']['name'] = "Change sql_patch_ref type in sql_patchmanager to int";
-    switch ($config->database->adapter)
+    switch ($config->resources->db->adapter)
     {
 		case "pdo_pgsql" :
         	$patch['135']['patch'] = "ALTER TABLE  ".TB_PREFIX."sql_patchmanager ALTER COLUMN sql_patch_ref TYPE int USING to_number(sql_patch_ref, '999');";
@@ -701,7 +701,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
     $patch['135']['date'] = "20071218";
 	
     $patch['136']['name'] = "Create domain mapping table";
-    switch ($config->database->adapter)
+    switch ($config->resources->db->adapter)
     {
 		case "pdo_pgsql" :
 			$patch['136']['patch'] = "CREATE TABLE ".TB_PREFIX."user_domain (
@@ -719,7 +719,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
     
 
     $patch['137']['name'] = "Insert default domain";
-    switch ($config->database->adapter)
+    switch ($config->resources->db->adapter)
     {
 		case "pdo_pgsql" :
 			$patch['137']['patch'] = "INSERT INTO ".TB_PREFIX."user_domain (name) VALUES ('default');";
@@ -732,7 +732,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
     //TODO postgres patch 
 
     $patch['138']['name'] = "Add domain_id to payment_types table";
-    switch ($config->database->adapter)
+    switch ($config->resources->db->adapter)
     {
 		case "pdo_pgsql" :
 			$patch['138']['patch'] = "ALTER TABLE ".TB_PREFIX."payment_types ADD COLUMN domain_id int NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
@@ -745,35 +745,35 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['139']['name'] = "Add domain_id to preferences table";
     $patch['139']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `domain_id` INT  NOT NULL AFTER `pref_id` ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['139']['patch'] = "ALTER TABLE ".TB_PREFIX."preferences ADD COLUMN domain_id int NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
     $patch['139']['date'] = "200712";
 
     $patch['140']['name'] = "Add domain_id to products table";
     $patch['140']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `domain_id` INT  NOT NULL AFTER `id` ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['140']['patch'] = "ALTER TABLE ".TB_PREFIX."products ADD COLUMN domain_id int NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
     $patch['140']['date'] = "200712"; 
     
     $patch['141']['name'] = "Add domain_id to billers table";
     $patch['141']['patch'] = "ALTER TABLE `".TB_PREFIX."biller` ADD `domain_id` INT  NOT NULL AFTER `id` ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['141']['patch'] = "ALTER TABLE ".TB_PREFIX."biller ADD COLUMN domain_id int NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
     $patch['141']['date'] = "200712";
 
     $patch['142']['name'] = "Add domain_id to invoices table";
     $patch['142']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD `domain_id` INT NOT NULL AFTER `id` ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['142']['patch'] = "ALTER TABLE ".TB_PREFIX."invoices ADD COLUMN domain_id int NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
     $patch['142']['date'] = "200712";
 
     $patch['143']['name'] = "Add domain_id to customers table";
     $patch['143']['patch'] = "ALTER TABLE `".TB_PREFIX."customers` ADD `domain_id` INT NOT NULL AFTER `id` ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['143']['patch'] = "ALTER TABLE ".TB_PREFIX."customers ADD COLUMN domain_id int NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
     $patch['143']['date'] = "200712";
@@ -781,21 +781,21 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['144']['name'] = "Change group field to user_role_id in users table";
     $patch['144']['patch'] = "ALTER TABLE `".TB_PREFIX."users` CHANGE `user_group` `user_role_id` INT  DEFAULT '1' NOT NULL;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['144']['patch'] = "ALTER TABLE ".TB_PREFIX."users RENAME COLUMN user_group TO user_role_id;";
     }
     $patch['144']['date'] = "20080102";
     
     $patch['145']['name'] = "Change domain field to user_domain_id in users table";
     $patch['145']['patch'] = "ALTER TABLE `" . TB_PREFIX . "users` CHANGE `user_domain` `user_domain_id` INT  DEFAULT '1' NOT NULL;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['145']['patch'] = "ALTER TABLE " . TB_PREFIX . "users RENAME COLUMN user_domain TO user_domain_id;";
     }
     $patch['145']['date'] = "20080102";
 
     $patch['146']['name'] = "Drop old auth_challenges table";
     $patch['146']['patch'] = "DROP TABLE IF EXISTS `".TB_PREFIX."auth_challenges`;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         /* SC: auth_challenges creation was already removed from the postgres
          *     schema before this patch
          */
@@ -808,7 +808,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 	    `id` int(11) NOT NULL auto_increment  PRIMARY KEY,
             `name` varchar(255) UNIQUE NOT NULL
             ) ENGINE=MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['147']['patch'] = "CREATE TABLE ".TB_PREFIX."user_role (
             id serial PRIMARY KEY,
             name text UNIQUE NOT NULL
@@ -818,7 +818,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
     
     $patch['148']['name'] = "Insert default user group";
     $patch['148']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('administrator');";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['148']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('administrator');";
     }
     $patch['148']['date'] = "20080102";
@@ -826,7 +826,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['149']['name'] = "Table = Account_payments Field = ac_amount : change field type and length to decimal";
     $patch['149']['patch'] = "ALTER TABLE `".TB_PREFIX."account_payments` CHANGE `ac_amount` `ac_amount` DECIMAL( 25, 6 ) NOT NULL;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['149']['name'] = "Widen ac_amount field of account_payments";
         $patch['149']['patch'] = "ALTER TABLE ".TB_PREFIX."account_payments ALTER COLUMN ac_amount TYPE numeric(25, 6)";
     }
@@ -834,7 +834,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['150']['name'] = "Table = Invoice_items Field = quantity : change field type and length to decimal";
     $patch['150']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `quantity` `quantity` DECIMAL( 25, 6 ) NOT NULL DEFAULT '0' ";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['150']['name'] = "Widen quantity field of invoice_items";
         $patch['150']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN quantity TYPE numeric(25, 6)";
     }
@@ -842,7 +842,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['151']['name'] = "Table = Invoice_items Field = unit_price : change field type and length to decimal";
     $patch['151']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `unit_price` `unit_price` DECIMAL( 25, 6 ) NULL DEFAULT '0.00' ";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['151']['name'] = "Widen unit_price field of invoice_items";
         $patch['151']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN unit_price TYPE numeric(25, 6)";
     }
@@ -850,7 +850,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['152']['name'] = "Table = Invoice_items Field = tax : change field type and length to decimal";
     $patch['152']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `tax` `tax` DECIMAL( 25, 6 ) NULL DEFAULT '0.00' ";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['152']['name'] = "Widen tax field of invoice_items";
         $patch['152']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN tax TYPE numeric(25, 6)";
     }
@@ -858,7 +858,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['153']['name'] = "Table = Invoice_items Field = tax_amount : change field type and length to decimal";
     $patch['153']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `tax_amount` `tax_amount` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['153']['name'] = "Widen tax_amount field of invoice_items";
         $patch['153']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN tax_amount TYPE numeric(25, 6)";
     }
@@ -866,7 +866,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['154']['name'] = "Table = Invoice_items Field = gross_total : change field type and length to decimal";
     $patch['154']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `gross_total` `gross_total` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['154']['name'] = "Widen gross_total field of invoice_items";
         $patch['154']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN gross_total TYPE numeric(25, 6)";
     }
@@ -874,7 +874,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['155']['name'] = "Table = Invoice_items Field = total : change field type and length to decimal";
     $patch['155']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `total` `total` DECIMAL( 25, 6 ) NULL DEFAULT '0.00' ";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['155']['name'] = "Widen total field of invoice_items";
         $patch['155']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN total TYPE numeric(25, 6)";
     }
@@ -882,7 +882,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['156']['name'] = "Table = Products Field = unit_price : change field type and length to decimal";
     $patch['156']['patch'] = "ALTER TABLE `".TB_PREFIX."products` CHANGE `unit_price` `unit_price` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['156']['name'] = "Widen unit_price field of products";
         $patch['156']['patch'] = "ALTER TABLE ".TB_PREFIX."products ALTER COLUMN unit_price TYPE numeric(25, 6)";
     }
@@ -890,7 +890,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['157']['name'] = "Table = Tax Field = quantity : change field type and length to decimal";
     $patch['157']['patch'] = "ALTER TABLE `".TB_PREFIX."tax` CHANGE `tax_percentage` `tax_percentage` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['157']['name'] = "Widen tax_percentage field of tax";
         $patch['157']['patch'] = "ALTER TABLE ".TB_PREFIX."tax ALTER COLUMN tax_percentage TYPE numeric(25, 6)";
     }
@@ -898,7 +898,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
    
     $patch['158']['name'] = "Rename table si_account_payments to si_payment";
     $patch['158']['patch'] = "RENAME TABLE `".TB_PREFIX."account_payments` TO  `".TB_PREFIX."payment`;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['158']['patch'] = "RENAME TABLE `".TB_PREFIX."account_payments` TO  `".TB_PREFIX."payment`";
     }
     $patch['158']['date'] = "20081201";
@@ -906,7 +906,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
     
     $patch['159']['name'] = "Add domain_id to payments table";
     $patch['159']['patch'] = "ALTER TABLE  `".TB_PREFIX."payment` ADD  `domain_id` INT NOT NULL ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['159']['patch'] = "ALTER TABLE  `".TB_PREFIX."payment` ADD  `domain_id` INT NOT NULL ";
     }
     $patch['159']['date'] = "20081201";
@@ -914,7 +914,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['160']['name'] = "Add domain_id to tax table";
     $patch['160']['patch'] = "ALTER TABLE  `".TB_PREFIX."tax` ADD  `domain_id` INT NOT NULL ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['160']['patch'] = "ALTER TABLE  `".TB_PREFIX."tax` ADD  `domain_id` INT NOT NULL ";
     }
     $patch['160']['date'] = "20081201";
@@ -922,7 +922,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
     
     $patch['161']['name'] = "Change user table from si_users to si_user";
     $patch['161']['patch'] = "RENAME TABLE `".TB_PREFIX."users` TO  `".TB_PREFIX."user` ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['161']['patch'] = "RENAME TABLE `".TB_PREFIX."users` TO  `".TB_PREFIX."user`";
     }
     $patch['161']['date'] = "20081201";
@@ -936,7 +936,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 		`tax_rate` DECIMAL( 25, 6 ) NOT NULL ,
 		`tax_amount` DECIMAL( 25, 6 ) NOT NULL
 		) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
 	    $patch['162']['patch'] = "CREATE TABLE `".TB_PREFIX."invoice_item_tax` (
 			`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 			`invoice_item_id` INT( 11 ) NOT NULL ,
@@ -951,7 +951,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 	//do conversion
     $patch['163']['name'] = "Convert tax info in si_invoice_items to si_invoice_item_tax";
     $patch['163']['patch'] = "insert into `".TB_PREFIX."invoice_item_tax` (invoice_item_id, tax_id, tax_type, tax_rate, tax_amount) select id, tax_id, '%', tax, tax_amount from `".TB_PREFIX."invoice_items`;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
     	$patch['163']['patch'] = "insert into `".TB_PREFIX."invoice_item_tax` (invoice_item_id, tax_id, tax_type, tax_rate, tax_amount) select id, tax_id, '%', tax, tax_amount from `".TB_PREFIX."invoice_items;";
     }
     $patch['163']['date'] = "20081212";
@@ -959,42 +959,42 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['164']['name'] = "Add default tax id into products table";
     $patch['164']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `default_tax_id` INT( 11 ) NULL AFTER `unit_price` ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
     	$patch['164']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `default_tax_id` INT( 11 ) NULL AFTER `unit_price` ;";
     }
     $patch['164']['date'] = "20081212";
 
     $patch['165']['name'] = "Add default tax id 2 into products table";
     $patch['165']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `default_tax_id_2` INT( 11 ) NULL AFTER `default_tax_id` ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
     	$patch['165']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `default_tax_id_2` INT( 11 ) NULL AFTER `default_tax_id` ;";
     }
     $patch['165']['date'] = "20081212";
 
     $patch['166']['name'] = "Add default tax into product items";
     $patch['166']['patch'] = "update `".TB_PREFIX."products` set default_tax_id = (select value from `".TB_PREFIX."system_defaults` where name ='tax');";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
     	$patch['166']['patch'] = "update `".TB_PREFIX."products` set default_tax_id = (select value from `".TB_PREFIX."system_defaults` where name ='tax');";
     }
     $patch['166']['date'] = "20081212";
 
     $patch['167']['name'] = "Add default number of taxes per line item into system_defaults";
     $patch['167']['patch'] = "insert into `".TB_PREFIX."system_defaults` values ('','tax_per_line_item','1')";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
     	$patch['167']['patch'] = "insert into `".TB_PREFIX."system_defaults` values ('','tax_per_line_item','1')";
     }
     $patch['167']['date'] = "20081212";
 
     $patch['168']['name'] = "Add tax type";
     $patch['168']['patch'] = "ALTER TABLE `".TB_PREFIX."tax` ADD `type` VARCHAR( 1 ) NULL AFTER `tax_percentage` ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
 	    $patch['168']['patch'] = "ALTER TABLE `".TB_PREFIX."tax` ADD `type` VARCHAR( 1 ) NULL AFTER `tax_percentage` ;";
     }
     $patch['168']['date'] = "20081212";
 
     $patch['169']['name'] = "Set tax type on current taxes to %";
     $patch['169']['patch'] = "UPDATE `".TB_PREFIX."tax` SET `type` = '%' ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
 	    $patch['169']['patch'] = "UPDATE `".TB_PREFIX."tax` SET `type` = '%';"; 
     }
     $patch['169']['date'] = "20081212";
@@ -1005,63 +1005,63 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
     
     $patch['170']['name'] = "Set domain_id on tax table to 1";
     $patch['170']['patch'] = "UPDATE `".TB_PREFIX."tax` SET `domain_id` = '1' ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
 	    $patch['170']['patch'] = "UPDATE `".TB_PREFIX."tax` SET `domain_id` = '1';"; 
     }
     $patch['170']['date'] = "20081229";
 
     $patch['171']['name'] = "Set domain_id on payment table to 1";
     $patch['171']['patch'] = "UPDATE `".TB_PREFIX."payment` SET `domain_id` = '1' ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
 	    $patch['171']['patch'] = "UPDATE `".TB_PREFIX."payment` SET `domain_id` = '1';"; 
     }
     $patch['171']['date'] = "20081229";
   
     $patch['172']['name'] = "Set domain_id on payment_types table to 1";
     $patch['172']['patch'] = "UPDATE `".TB_PREFIX."payment_types` SET `domain_id` = '1' ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
 	    $patch['172']['patch'] = "UPDATE `".TB_PREFIX."payment_types` SET `domain_id` = '1';"; 
     }
     $patch['172']['date'] = "20081229";    
   
     $patch['173']['name'] = "Set domain_id on preference table to 1";
     $patch['173']['patch'] = "UPDATE `".TB_PREFIX."preferences` SET `domain_id` = '1' ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
 	    $patch['173']['patch'] = "UPDATE `".TB_PREFIX."preferences` SET `domain_id` = '1';"; 
     }
     $patch['173']['date'] = "20081229";        
     
     $patch['174']['name'] = "Set domain_id on products table to 1";
     $patch['174']['patch'] = "UPDATE `".TB_PREFIX."products` SET `domain_id` = '1' ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
 	    $patch['174']['patch'] = "UPDATE `".TB_PREFIX."products` SET `domain_id` = '1';"; 
     }
     $patch['174']['date'] = "20081229";        
 
     $patch['175']['name'] = "Set domain_id on biller table to 1";
     $patch['175']['patch'] = "UPDATE `".TB_PREFIX."biller` SET `domain_id` = '1' ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
 	    $patch['175']['patch'] = "UPDATE `".TB_PREFIX."biller` SET `domain_id` = '1';"; 
     }
     $patch['175']['date'] = "20081229";  
           
     $patch['176']['name'] = "Set domain_id on invoices table to 1";
     $patch['176']['patch'] = "UPDATE `".TB_PREFIX."invoices` SET `domain_id` = '1' ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
 	    $patch['176']['patch'] = "UPDATE `".TB_PREFIX."invoices` SET `domain_id` = '1';"; 
     }
     $patch['176']['date'] = "20081229";        
 
     $patch['177']['name'] = "Set domain_id on customers table to 1";
     $patch['177']['patch'] = "UPDATE `".TB_PREFIX."customers` SET `domain_id` = '1' ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
 	    $patch['177']['patch'] = "UPDATE `".TB_PREFIX."customers` SET `domain_id` = '1';"; 
     }
     $patch['177']['date'] = "20081229";        
         
     $patch['178']['name'] = "Rename si_user.user_id to si_user.id";
     $patch['178']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_id` `id` int(11) ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
 	    $patch['178']['patch'] = "UPDATE `".TB_PREFIX."user` CHANGE `user_id` `id` int(11);"; 
     }
     $patch['178']['date'] = "20081229";        
@@ -1069,7 +1069,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['179']['name'] = "Rename si_user.user_email to si_user.email";
     $patch['179']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_email` `email` VARCHAR( 255 );";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
 	    $patch['179']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_email` `email` VARCHAR( 255 );"; 
     }
     $patch['179']['date'] = "20081229";        
@@ -1077,7 +1077,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
      
     $patch['180']['name'] = "Rename si_user.user_name to si_user.name";
     $patch['180']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_name` `name` VARCHAR( 255 );";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
 	    $patch['180']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_name` `name` VARCHAR( 255 );"; 
     }
     $patch['180']['date'] = "20081229";        
@@ -1085,7 +1085,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
      
     $patch['181']['name'] = "Rename si_user.user_role_id to si_user.role_id";
     $patch['181']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_role_id` `role_id` int(11);";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
 	    $patch['181']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_role_id` `role_id` int(11);"; 
     }
     $patch['181']['date'] = "20081229";        
@@ -1093,7 +1093,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
      
     $patch['182']['name'] = "Rename si_user.user_domain_id to si_user.domain_id";
     $patch['182']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_domain_id` `domain_id` int(11) ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
 	    $patch['182']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_domain_id` `domain_id` int(11) ;"; 
     }
     $patch['182']['date'] = "20081229";        
@@ -1101,7 +1101,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
      
     $patch['183']['name'] = "Rename si_user.user_password to si_user.password";
     $patch['183']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_password` `password` VARCHAR( 255 )  ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
 	    $patch['183']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_password` `password` VARCHAR( 255 ) ;"; 
     }
     $patch['183']['date'] = "20081229";        
@@ -1109,7 +1109,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
         
     $patch['184']['name'] = "Drop name column from si_user table";
     $patch['184']['patch'] = "ALTER TABLE `".TB_PREFIX."user` DROP `name`  ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
 	    $patch['184']['patch'] = "ALTER TABLE `".TB_PREFIX."user` DROP `name`  ;"; 
     }
     $patch['184']['date'] = "20081230";        
@@ -1117,7 +1117,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['185']['name'] = "Drop old defaults table";
     $patch['185']['patch'] = "DROP TABLE `".TB_PREFIX."defaults` ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
 	    $patch['185']['patch'] = "DROP TABLE `".TB_PREFIX."defaults`  ;"; 
     }
     $patch['185']['date'] = "20081230";        
@@ -1125,7 +1125,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
      
     $patch['186']['name'] = "Set domain_id on customers table to 1";
     $patch['186']['patch'] = "ALTER TABLE  `".TB_PREFIX."custom_fields` ADD  `domain_id` INT NOT NULL ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
 	    $patch['186']['patch'] = "ALTER TABLE  `".TB_PREFIX."custom_fields` ADD  `domain_id` INT NOT NULL ;"; 
     }
     $patch['186']['date'] = "20081230";        
@@ -1133,7 +1133,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
               
     $patch['187']['name'] = "Set domain_id on custom_feilds table to 1";
     $patch['187']['patch'] = "UPDATE `".TB_PREFIX."custom_fields` SET `domain_id` = '1' ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
 	    $patch['187']['patch'] = "UPDATE `".TB_PREFIX."custom_fields` SET `domain_id` = '1';"; 
     }
     $patch['187']['date'] = "20081230"; 
@@ -1141,7 +1141,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
     
     $patch['188']['name'] = "Drop tax_id column from si_invoice_items table";
     $patch['188']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` DROP `tax_id`  ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
 	    $patch['188']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` DROP `tax_id`  ;"; 
     }
     $patch['188']['date'] = "20090118";        
@@ -1149,56 +1149,56 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
     //TODO: postgres and sqlite patch        
     $patch['189']['name'] = "Drop tax column from si_invoice_items table";
     $patch['189']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` DROP `tax`  ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
 	    $patch['189']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` DROP `tax`  ;"; 
     }
     $patch['189']['date'] = "20090118";        
 
     $patch['190']['name'] = "Insert user role - user";
     $patch['190']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('user');";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['190']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('user');";
     }
     $patch['190']['date'] = "20090215";
 
     $patch['191']['name'] = "Insert user role - viewer";
 	$patch['191']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('viewer');";
-	if ($config->database->adapter == "pdo_pgsql") {
+	if ($config->resources->db->adapter == "pdo_pgsql") {
 		$patch['191']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('viewer');";
 	}
 	$patch['191']['date'] = "20090215";
 
     $patch['192']['name'] = "Insert user role - customer";
     $patch['192']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('customer');";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['192']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('customer');";
     }
     $patch['192']['date'] = "20090215";
 
     $patch['193']['name'] = "Insert user role - biller";
     $patch['193']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('biller');";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['193']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('biller');";
     }
     $patch['193']['date'] = "20090215";
 
     $patch['194']['name'] = "User table - auto increment";
     $patch['194']['patch'] = "ALTER TABLE ".TB_PREFIX."user CHANGE id id INT( 11 ) NOT NULL AUTO_INCREMENT;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['194']['patch'] = "ALTER TABLE ".TB_PREFIX."user CHANGE id id INT( 11 ) NOT NULL AUTO_INCREMENT";
     }
     $patch['194']['date'] = "20090215";
 
     $patch['195']['name'] = "User table - add enabled field";
     $patch['195']['patch'] = "ALTER TABLE ".TB_PREFIX."user ADD enabled INT( 1 ) NOT NULL ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['195']['patch'] = "ALTER TABLE ".TB_PREFIX."user ADD enabled INT( 1 ) NOT NULL ;";
     }
     $patch['195']['date'] = "20090215";
 
     $patch['196']['name'] = "User table - make all existing users enabled";
     $patch['196']['patch'] = "UPDATE ".TB_PREFIX."user SET enabled = 1 ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($config->resources->db->adapter == "pdo_pgsql") {
         $patch['196']['patch'] = "UPDATE ".TB_PREFIX."user SET enabled = 1;";
     }
     $patch['196']['date'] = "20090217";

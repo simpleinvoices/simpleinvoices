@@ -8,7 +8,7 @@ $val = ini_get("include_path");
 $val = $val . PATH_SEPARATOR . "../lib/phpreports";
 ini_set("include_path", $val);
 
-$db_server=substr($config->database->adapter, 4);
+$db_server=substr($config->resources->db->adapter, 4);
 require_once($include_dir . "lib/phpreports/PHPReportMaker.php");
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
@@ -19,9 +19,9 @@ if (!defined("BROWSE")) {
 
 	$oRpt = new PHPReportMaker();
 
-	$oRpt->setUser($config->database->params->username);
-	$oRpt->setPassword($config->database->params->password);
-	$oRpt->setDatabase($config->database->params->dbname);
+	$oRpt->setUser($config->resources->db->params->username);
+	$oRpt->setPassword($config->resources->db->params->password);
+	$oRpt->setDatabase($config->resources->db->params->dbname);
 
 /*	
 if($db_layer == "")
@@ -38,9 +38,9 @@ if($db_layer == "pdo")
 // PDO Usage
    $oRpt->setDatabaseInterface("pdo");
    if ($db_server == 'pgsql') {
-	  $connect = "pgsql:host=".$config->database->params->host;
+	  $connect = "pgsql:host=".$config->resources->db->params->host;
    } else {
-	 echo $connect = "mysql:host=".$config->database->params->host;
+	 echo $connect = "mysql:host=".$config->resources->db->params->host;
    }
    $oRpt->setConnection($connect);
 // End PDO Usage
@@ -48,6 +48,6 @@ if($db_layer == "pdo")
 }
 
 */
-	$oRpt->setConnection($config->database->params->host.':'.$config->database->params->port);  
+	$oRpt->setConnection($config->resources->db->params->host.':'.$config->resources->db->params->port);  
 	$oRpt->setDatabaseInterface($db_server); // set as $db_server in trunk
 	//$oRpt->setDatabase($db_name);

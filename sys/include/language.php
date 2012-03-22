@@ -14,7 +14,7 @@ global $cust_language;
 unset($LANG);
 
 
-$tables = $zendDb->listTables(); //TEST: print db tables 
+$tables = Zend_Db_Table::getDefaultAdapter()->listTables(); //TEST: print db tables 
 
 
 /*if upgrading from old version then getDefaultLang wont work during install*/

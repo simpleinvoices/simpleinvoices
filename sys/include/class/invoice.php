@@ -336,7 +336,7 @@ class invoice {
                 break;
         }
 
-        switch ($config->database->adapter)
+        switch ($config->resources->db->adapter)
         {
             case "pdo_pgsql":
                $sql = "

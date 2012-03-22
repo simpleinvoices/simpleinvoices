@@ -4,38 +4,78 @@
  */
 
 // ToDo: Remove this include
-set_include_path(get_include_path() . PATH_SEPARATOR . "./sys/include/class");
-
-require_once 'Zend/Loader/Autoloader.php';
-
-$autoloader = Zend_Loader_Autoloader::getInstance();
-$autoloader->setFallbackAutoloader(true);
-// Avoid conflicts with Smarty autoloader
-$autoloader->pushAutoloader(NULL, 'Smarty_' );
-#Zend_Loader::registerAutoload();
+set_include_path(get_include_path() . PATH_SEPARATOR . realpath(dirname(APPLICATION_PATH ) . "/sys/include/class"));
 
 // Need the configuration beforehand
 include_once(APPLICATION_PATH . '/config/define.php');
 
 /*
- * Include another config file if required
+ * Make sure the logging folder and file exist
  */
-if( is_file(APPLICATION_PATH . '/config/custom.config.ini') ){
-    $config = new Zend_Config_Ini(APPLICATION_PATH . '/config/custom.config.ini', $environment,true);
-} else {
-    $config = new Zend_Config_Ini( APPLICATION_PATH . '/config/config.ini', $environment,true);    //added 'true' to allow modifications from db
+$logFile = APPLICATION_PATH . "/tmp/log/si.log";
+// Create tmp log if it does not exist
+if (!file_exists(dirname($logFile))) {
+    if (!mkdir(dirname($logFile), 0770, true)) {
+        simpleInvoicesError('notWriteable','folder', dirname($logFile));
+    }
+} elseif(!is_writeable(dirname($logFile))) {
+    if(!chmod(dirname($logFile), 0770)) {
+        simpleInvoicesError('notWriteable','folder', dirname($logFile));
+    }
 }
+if (!is_file($logFile))
+{
+    $createLogFile = fopen($logFile, 'w') or die(simpleInvoicesError('notWriteable','folder', APPLICATION_PATH . '/tmp/log'));
+    fclose($createLogFile);
+}
+if (!is_writable($logFile)) {
+
+   simpleInvoicesError('notWriteable','file',$logFile);
+}
+
+/*
+ * Make sure the cache folder exists
+ */
+if (!file_exists(APPLICATION_PATH . '/tmp/cache')) {
+    if (!mkdir(APPLICATION_PATH . '/tmp/cache', 0770, true)) {
+        simpleInvoicesError('notWriteable','folder', APPLICATION_PATH . '/tmp/cache');
+    }
+} elseif(!is_writeable(APPLICATION_PATH . '/tmp/cache')) {
+    if(!chmod(APPLICATION_PATH . '/tmp/cache', 0770)) {
+        simpleInvoicesError('notWriteable','folder', APPLICATION_PATH . '/tmp/cache');
+    }
+}
+
+/*
+ * Make sure the sessions folder exists
+ */
+if (isset($config->resources->session->save_path)) {
+    if (!file_exists($config->resources->session->save_path)) {
+        if (!mkdir($config->resources->session->save_path, 0770, true)) {
+            simpleInvoicesError('notWriteable','folder', $config->resources->session->save_path);
+        }
+    } elseif(!is_writeable($config->resources->session->save_path)) {
+        if(!chmod($config->resources->session->save_path, 0770)) {
+            simpleInvoicesError('notWriteable','folder', $config->resources->session->save_path);
+        }
+    }    
+}
+
+/**
+* Backward compatibility
+* 
+* Gateway between Bootstrap and Init
+* Some global variables may be removed, however, to get a fast start
+* we just get them from the Zend_Registry and go along as up until now
+*/
+$config = Zend_Registry::get('config');
+$auth_session = Zend_Registry::get('auth_session');
+$logger = Zend_Registry::get('logger');
 
 // ToDo: Delete this once it can be fetched in another way
 $baseUrl = $config->resources->frontController->baseUrl;
 if ($baseUrl == '/') $baseUrl = '';
 Zend_Registry::set('baseUrl', $baseUrl);
-
-
-//session_start();
-Zend_Session::start();
-$auth_session = new Zend_Session_Namespace('Zend_Auth');
-
 
 //start use of zend_cache
 $frontendOptions = array(
@@ -63,45 +103,6 @@ require_once('sys/include/functions.php');
 
 //ob_start('addCSRFProtection');
 
-/*
- * log file - start
- */
-$logFile = APPLICATION_PATH . "/tmp/log/si.log";
-// Create tmp log if it does not exist
-if (!file_exists(dirname($logFile))) {
-    if (!mkdir(dirname($logFile), 0770, true)) {
-        simpleInvoicesError('notWriteable','folder', dirname($logFile));
-    }
-} elseif(!is_writeable(dirname($logFile))) {
-    if(!chmod(dirname($logFile), 0770)) {
-        simpleInvoicesError('notWriteable','folder', dirname($logFile));
-    }
-}
-if (!is_file($logFile))
-{
-	$createLogFile = fopen($logFile, 'w') or die(simpleInvoicesError('notWriteable','folder', APPLICATION_PATH . '/tmp/log'));
-	fclose($createLogFile);
-}
-if (!is_writable($logFile)) {
-
-   simpleInvoicesError('notWriteable','file',$logFile);
-}
-$writer = new Zend_Log_Writer_Stream($logFile);
-$logger = new Zend_Log($writer);
-/*
- * log file - end
- */
-
-// Create the cache folder if it does not exist
-if (!file_exists(APPLICATION_PATH . '/tmp/cache')) {
-    if (!mkdir(APPLICATION_PATH . '/tmp/cache', 0770, true)) {
-        simpleInvoicesError('notWriteable','folder', APPLICATION_PATH . '/tmp/cache');
-    }
-} elseif(!is_writeable(APPLICATION_PATH . '/tmp/cache')) {
-    if(!chmod(APPLICATION_PATH . '/tmp/cache', 0770)) {
-        simpleInvoicesError('notWriteable','folder', APPLICATION_PATH . '/tmp/cache');
-    }
-}
 
 /*
  * Zend Framework cache section - start
@@ -130,7 +131,7 @@ catch (Exception $e) {
  * Zend Framework cache section - end
  */
 
-$smarty = new Smarty();
+ $smarty = new Smarty();
 
 $smarty->debugging = false;
 $smarty->cache_lifetime = 0;
@@ -142,44 +143,6 @@ $smarty->setCompileDir(realpath(APPLICATION_PATH . '/tmp/cache/'));
 
 //adds own smarty plugins
 $smarty->addPluginsDir(dirname(__FILE__) . '/smarty_plugins/');
-
-
-/*
- * Smarty inint - end
- */
-
-
-$path = pathinfo($_SERVER['REQUEST_URI']);
-//SC: Install path handling will need changes if used in non-HTML contexts
-$install_path = htmlsafe($path['dirname']);
-
-
-//set up app with relevant php setting
-date_default_timezone_set($config->phpSettings->date->timezone);
-error_reporting($config->debug->error_reporting);
-ini_set('display_startup_errors', $config->phpSettings->display_startup_errors);
-ini_set('display_errors', $config->phpSettings->display_errors);
-ini_set('log_errors', $config->phpSettings->log_errors);
-ini_set('error_log', $config->phpSettings->error_log);
-
-
-
-$zendDb = Zend_Db::factory($config->database->adapter, array(
-    'host'     => $config->database->params->host,
-    'username' => $config->database->params->username,
-    'password' => $config->database->params->password,
-    'dbname'   => $config->database->params->dbname,
-    'port'     => $config->database->params->port)
-);
-
-//after config is loaded - do auth
-require_once($include_dir . 'sys/include/include_auth.php');
-
-include_once("sys/include/class/db.php");
-include_once("sys/include/class/index.php");
-$db = db::getInstance();
-
-include_once("sys/include/sql_queries.php");
 
 //add stripslash smarty function
 $smarty->registerPlugin('modifier', 'unescape', 'stripslashes');
@@ -196,6 +159,30 @@ $smarty->registerPlugin('modifier', 'urlencode', 'urlencode');
 $smarty->registerPlugin('modifier', 'outhtml', 'outhtml');
 $smarty->registerPlugin('modifier', 'htmlout', 'outhtml'); //common typo
 $smarty->registerPlugin('modifier', 'urlescape', 'urlencode'); //common typo
+
+
+$path = pathinfo($_SERVER['REQUEST_URI']);
+//SC: Install path handling will need changes if used in non-HTML contexts
+$install_path = htmlsafe($path['dirname']);
+
+
+//set up app with relevant php setting
+date_default_timezone_set($config->phpSettings->date->timezone);
+error_reporting($config->debug->error_reporting);
+ini_set('display_startup_errors', $config->phpSettings->display_startup_errors);
+ini_set('display_errors', $config->phpSettings->display_errors);
+ini_set('log_errors', $config->phpSettings->log_errors);
+ini_set('error_log', $config->phpSettings->error_log);
+
+//after config is loaded - do auth
+require_once($include_dir . 'sys/include/include_auth.php');
+
+include_once("sys/include/class/db.php");
+include_once("sys/include/class/index.php");
+$db = db::getInstance();
+
+include_once("sys/include/sql_queries.php");
+
 
 $install_tables_exists = checkTableExists(TB_PREFIX."biller");
 if ($install_tables_exists == true)

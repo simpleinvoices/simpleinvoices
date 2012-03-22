@@ -30,7 +30,21 @@ set_include_path(get_include_path() . PATH_SEPARATOR . realpath(dirname(APPLICAT
 // Libraries
 set_include_path(get_include_path() . PATH_SEPARATOR . realpath(dirname(APPLICATION_PATH) . '/lib'));
 
+require_once 'Zend/Application.php';
 
+/**
+* To start up SI with another instance just point to a new configuration ini file.
+*/
+$application = new Zend_Application( APPLICATION_ENV, APPLICATION_PATH . '/config/config.ini' );
+$application->bootstrap();
+//$application->run();
 
+/**
+* Ugly, ugly! 
+* All the code should be in the application but we _MUST_
+* make this work ASAP.
+* 
+* ToDo: Make it cleaner!
+*/
 include(APPLICATION_PATH .'/index.php');
 ?>

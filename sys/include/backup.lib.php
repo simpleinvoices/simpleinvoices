@@ -32,9 +32,9 @@ class database{
     	
 		global $config;
     	
-        $db = mysql_connect($config->database->params->host.':'.$config->database->params->port,$config->database->params->username,$config->database->params->password)
+        $db = mysql_connect($config->resources->db->params->host.':'.$config->resources->db->params->port,$config->resources->db->params->username,$config->resources->db->params->password)
             or die("<font color=\"#ff0000\">There was an error connecting to the database server</font>");
-        mysql_select_db($config->database->params->dbname)
+        mysql_select_db($config->resources->db->params->dbname)
             or die("<font color=\"#ff0000\">There was an error selecting the database</font>");
         
         return $db;

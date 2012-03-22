@@ -12,7 +12,7 @@ $menu = false;
 //so config.php works ok without using index.php define browse
 define("BROWSE","browse");
 
-Zend_Auth::clearIdentity();
+//Zend_Auth::clearIdentity();
 Zend_Session::forgetMe();
 Zend_Session::destroy(true);
 header('Location: .');

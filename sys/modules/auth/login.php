@@ -23,18 +23,18 @@ require_once 'include/init.php';
 //$dbAdapter = new Zend_Db_Adapter_Pdo_Mysql(array('dbname' => ':memory:'));
 /*
 $dbAdapter = new Zend_Db_Adapter_Pdo_Mysql(array(
-    'host'     => $config->database->params->host,
-    'username' => $config->database->params->username,
-    'password' => $config->database->params->password,
-    'dbname'   => $config->database->params->dbname
+    'host'     => $config->resources->db->params->host,
+    'username' => $config->resources->db->params->username,
+    'password' => $config->resources->db->params->password,
+    'dbname'   => $config->resources->db->params->dbname
 ));
 */
 /*
-$dbAdapter = Zend_Db::factory($config->database->adapter, array(
-    'host'     => $config->database->params->host,
-    'username' => $config->database->params->username,
-    'password' => $config->database->params->password,
-    'dbname'   => $config->database->params->dbname)
+$dbAdapter = Zend_Db::factory($config->resources->db->adapter, array(
+    'host'     => $config->resources->db->params->host,
+    'username' => $config->resources->db->params->username,
+    'password' => $config->resources->db->params->password,
+    'dbname'   => $config->resources->db->params->dbname)
 );
 */
 $errorMessage = '';
@@ -53,7 +53,7 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 	//$authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter, 'users', 'username', 'password');
 
 	// ...or configure the instance with setter methods
-	$authAdapter = new Zend_Auth_Adapter_DbTable($zendDb);
+	$authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
 
 	//sql patch 161 changes user table name - need to accomodate
 	$user_table = (getNumberOfDoneSQLPatches() < "161") ? "users" : "user";
@@ -82,7 +82,8 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 		/*
 		* grab user data  from the datbase
 		*/
-
+        $zendDb = Zend_Db_Table::getDefaultAdapter();
+        
         $usertable = TB_PREFIX.'user';
         $userroletable = TB_PREFIX.'user_role';
 
