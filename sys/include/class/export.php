@@ -95,7 +95,6 @@ class export
 		global $smarty;
 		global $siUrl;
 		global $include_dir;
-		global $tpl_path;
 
 		switch ($this->module)
 		{

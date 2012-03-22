@@ -25,31 +25,12 @@ defined('APPLICATION_PATH') || define('APPLICATION_PATH', realpath(dirname(__FIL
 // Define application environment
 defined('APPLICATION_ENV') || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
-global $cust_language;
-
 // SYS
 set_include_path(get_include_path() . PATH_SEPARATOR . realpath(dirname(APPLICATION_PATH)));
 // Libraries
 set_include_path(get_include_path() . PATH_SEPARATOR . realpath(dirname(APPLICATION_PATH) . '/lib'));
 
-require_once("sys/include/init_pre.php");
 
-$include_dir ='./';
-$smarty_embed_path = getcwd() . '/';
-$tpl_path = '../';
 
-// look to see if there's another language in the parameter list
-if (!isset($cust_language)) {
-    $cust_language =  isset($_GET['lang'])  ? filenameEscape($_GET['lang'])    : null;
-}
-
-// look to see if there's another instance to run
-if (!isset($app)) {
-    $app =  isset($_GET['app'])  ? filenameEscape($_GET['app'])    : 'app';
-}
-
-$app_folder = $include_dir . $app;
-
-$pdf_dir = '../../' . $app;
-
-include($app .'/index.php');
+include(APPLICATION_PATH .'/index.php');
+?>

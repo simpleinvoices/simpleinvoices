@@ -20,7 +20,7 @@ include_once(APPLICATION_PATH . '/config/define.php');
 /*
  * Include another config file if required
  */
-if( is_file($app_folder . '/config/custom.config.ini') ){
+if( is_file(APPLICATION_PATH . '/config/custom.config.ini') ){
     $config = new Zend_Config_Ini(APPLICATION_PATH . '/config/custom.config.ini', $environment,true);
 } else {
     $config = new Zend_Config_Ini( APPLICATION_PATH . '/config/config.ini', $environment,true);    //added 'true' to allow modifications from db
@@ -66,7 +66,7 @@ require_once('sys/include/functions.php');
 /*
  * log file - start
  */
-$logFile = $app_folder . "/tmp/log/si.log";
+$logFile = APPLICATION_PATH . "/tmp/log/si.log";
 // Create tmp log if it does not exist
 if (!file_exists(dirname($logFile))) {
     if (!mkdir(dirname($logFile), 0770, true)) {
@@ -79,7 +79,7 @@ if (!file_exists(dirname($logFile))) {
 }
 if (!is_file($logFile))
 {
-	$createLogFile = fopen($logFile, 'w') or die(simpleInvoicesError('notWriteable','folder', $app_folder . '/tmp/log'));
+	$createLogFile = fopen($logFile, 'w') or die(simpleInvoicesError('notWriteable','folder', APPLICATION_PATH . '/tmp/log'));
 	fclose($createLogFile);
 }
 if (!is_writable($logFile)) {
@@ -93,13 +93,13 @@ $logger = new Zend_Log($writer);
  */
 
 // Create the cache folder if it does not exist
-if (!file_exists($app_folder . '/tmp/cache')) {
-    if (!mkdir($app_folder . '/tmp/cache', 0770, true)) {
-        simpleInvoicesError('notWriteable','folder', $app_folder . '/tmp/cache');
+if (!file_exists(APPLICATION_PATH . '/tmp/cache')) {
+    if (!mkdir(APPLICATION_PATH . '/tmp/cache', 0770, true)) {
+        simpleInvoicesError('notWriteable','folder', APPLICATION_PATH . '/tmp/cache');
     }
-} elseif(!is_writeable($app_folder . '/tmp/cache')) {
-    if(!chmod($app_folder . '/tmp/cache', 0770)) {
-        simpleInvoicesError('notWriteable','folder', $app_folder . '/tmp/cache');
+} elseif(!is_writeable(APPLICATION_PATH . '/tmp/cache')) {
+    if(!chmod(APPLICATION_PATH . '/tmp/cache', 0770)) {
+        simpleInvoicesError('notWriteable','folder', APPLICATION_PATH . '/tmp/cache');
     }
 }
 
@@ -303,7 +303,7 @@ switch ($module)
 }
 
 //get the url - used for templates / pdf
-$siUrl = getURL($app);
+$siUrl = getURL();
 //zend db
 
 // Get extensions from DB, and update config array

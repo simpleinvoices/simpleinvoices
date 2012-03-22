@@ -12,20 +12,25 @@
 //if browse not defined then the page will exit
 define("BROWSE","browse");
 
+require_once("sys/include/init_pre.php");
+
 // Backward compatibility
 // ToDo: Shall be removed sooner or later 
 $include_dir = dirname(APPLICATION_PATH) . '/';
-$smarty_embed_path = isset($smarty_embed_path) ? $smarty_embed_path : '../../../';
-$tpl_path = isset($tpl_path) ? $tpl_path : '../';
-$app = APPLICATION_PATH . '/';
-$app_folder = APPLICATION_PATH . '/';
-$pdf_dir = isset($pdf_dir) ? $pdf_dir : '../../../' . $app;
+$smarty_embed_path = dirname(APPLICATION_PATH) . '/';
 
 
 //PDF configs
-define('CACHE_DIR', $pdf_dir . '/tmp/cache/');
-define('OUTPUT_FILE_DIRECTORY', $pdf_dir . '/tmp/cache/');
-define('WRITER_TEMPDIR', $pdf_dir . '/tmp/cache');
+define('CACHE_DIR', APPLICATION_PATH . '/tmp/cache/');
+define('OUTPUT_FILE_DIRECTORY', APPLICATION_PATH . '/tmp/cache/');
+define('WRITER_TEMPDIR', APPLICATION_PATH . '/tmp/cache');
+
+
+// Backward compatibility
+if (!isset($cust_language)) {
+    $cust_language =  isset($_GET['lang'])  ? filenameEscape($_GET['lang'])    : null;
+}
+
 
 /*
 * Load stuff required before init.php
@@ -55,7 +60,7 @@ $smarty -> assign("include_dir",$include_dir);
 $smarty -> assign("auth_session",$auth_session);
 $smarty -> assign("si_version", SI_VERSION);
 
-$smarty -> assign("LANG",$LANG);
+$smarty->assignGlobal("LANG",$LANG);
 //For Making easy enabled pop-menus (see biller)
 $smarty -> assign("enabled",array($LANG['disabled'],$LANG['enabled']));
 
