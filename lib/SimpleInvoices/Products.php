@@ -5,6 +5,22 @@ class SimpleInvoices_Products extends SimpleInvoices_Db_Table_Abstract
     protected $_primary = array('domain_id', 'id');
     
     /**
+    * Delete method
+    * 
+    * @param mixed $id
+    */
+    public function delete($id)
+    {
+        $auth_session = Zend_Registry::get('auth_session');
+        
+        $where = array();
+        $where[] = $this->getAdapter()->quoteInto('id = ?', $id);
+        $where[] = $this->getAdapter()->quoteInto('domain_id = ?', $auth_session->domain_id);
+        
+        parent::delete($where);
+    }
+    
+    /**
     * Replaces getProducts
     * 
     */

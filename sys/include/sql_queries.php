@@ -753,6 +753,7 @@ function getTaxes() {
 	return $taxes;
 }
 
+// ToDo: Create this in a class
 function getDefaultCustomer() {
 	global $dbh;
 	global $auth_session;
@@ -762,6 +763,7 @@ function getDefaultCustomer() {
 	return $sth->fetch();
 }
 
+// ToDo: Create this in a class
 function getDefaultPaymentType() {
 	global $dbh;
 	global $auth_session;
@@ -771,6 +773,7 @@ function getDefaultPaymentType() {
 	return $sth->fetch();
 }
 
+// ToDo: Create this in a class
 function getDefaultPreference() {
 	global $dbh;
 	global $auth_session;
@@ -780,6 +783,7 @@ function getDefaultPreference() {
 	return $sth->fetch();
 }
 
+// ToDo: Create this in a class
 function getDefaultBiller() {
 	global $dbh;
 	global $auth_session;
@@ -789,6 +793,7 @@ function getDefaultBiller() {
 	return $sth->fetch();
 }
 
+// ToDo: Create this in a class
 function getDefaultTax() {
 	global $dbh;
 	global $auth_session;
@@ -800,56 +805,42 @@ function getDefaultTax() {
 
 function getDefaultDelete() {
 	global $LANG;
-	global $dbh;
-	global $auth_session;
-	//domain id TODO
-
-	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = 'delete')";
-	$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
-	$array = $sth->fetch();
-	$delete = $array['value']==1?$LANG['enabled']:$LANG['disabled'];
-	return $delete;
+	
+    $system_defaults = new SimpleInvoices_SystemDefaults();
+    $value = $system_defaults->findByName('delete');
+    
+    $value = $value==1?$LANG['enabled']:$LANG['disabled'];
+    return $value;
 }
 
 function getDefaultLogging() {
 	global $LANG;
-	global $dbh;
-
-	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = 'logging')";
-	$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
-	$array = $sth->fetch();
-	$delete = $array['value']==1?$LANG['enabled']:$LANG['disabled'];
-	return $delete;
+	
+    $system_defaults = new SimpleInvoices_SystemDefaults();
+    $value = $system_defaults->findByName('logging');
+    
+	$value = $value==1?$LANG['enabled']:$LANG['disabled'];
+	return $value;
 }
 
 function getDefaultInventory() {
 	global $LANG;
-	global $dbh;
-
-	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = 'inventory')";
-	$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
-	$array = $sth->fetch();
-	$delete = $array['value']==1?$LANG['enabled']:$LANG['disabled'];
-	return $delete;
+	
+    $system_defaults = new SimpleInvoices_SystemDefaults();
+    $value = $system_defaults->findByName('inventory');
+    
+    $value = $value==1?$LANG['enabled']:$LANG['disabled'];
+    return $value;
 }
 
 function getDefaultLanguage() {
-	global $LANG;
-	global $dbh;
-
-	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = 'language')";
-	$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
-	$entry = $sth->fetch();
-	return $entry['value'];
+    $system_defaults = new SimpleInvoices_SystemDefaults();
+    return $system_defaults->findByName('language');
 }
 
 function setDefaultLanguage($language) {
-    global $LANG;
-    global $dbh;
-
-    $sql = "UPDATE ".TB_PREFIX."system_defaults SET value = '".$language."' WHERE name = 'language'";
-    $sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
-    return 0;
+    $system_defaults = new SimpleInvoices_SystemDefaults();
+    return $system_defaults->update('language', $language);
 }
 
 function getInvoiceTotal($invoice_id) {
@@ -1002,128 +993,33 @@ function taxesGroupedForInvoiceItem($invoice_item_id)
 }
 
 function setStatusExtension($extension_id, $status=2) {
-	global $dbh;
-	global $auth_session;
+    $extensions = new SimpleInvoices_Extensions();
 
 	//status=2 = toggle status
 	if ($status == 2) {
-		$sql = "SELECT enabled FROM ".TB_PREFIX."extensions WHERE id = :id AND domain_id = :domain_id LIMIT 1";
-		$sth = dbQuery($sql,':id', $extension_id, ':domain_id', $auth_session->domain_id ) or die(htmlsafe(end($dbh->errorInfo())));
-		$extension_info = $sth->fetch();
-		$status = 1 - $extension_info['enabled'];
-	}
-
-
-	$sql = "UPDATE ".TB_PREFIX."extensions SET enabled =  :status WHERE id =  :id AND domain_id =  :domain_id LIMIT 1";
-	if (dbQuery($sql, ':status', $status,':id', $extension_id, ':domain_id', $auth_session->domain_id)) {
-		return true;
-	}
-	return false;
+		return $extensions->toggleStatus($extension_id);
+	} elseif ($status == 0) {
+        return $extensions->setStatus(false, $extension_id);
+    } else {
+        return $extensions->setStatus(true, $extension_id);    
+    }
 }
 
-function getExtensionID($extension_name = "none") {
-
-	global $dbh;
-	global $auth_session;
-
-	$sql = "SELECT * FROM ".TB_PREFIX."extensions WHERE name LIKE  :extension_name AND (domain_id =  0 OR domain_id = :domain_id ) ORDER BY domain_id DESC LIMIT 1";
-	$sth = dbQuery($sql,':extension_name', $extension_name, ':domain_id', $auth_session->domain_id ) or die(htmlsafe(end($dbh->errorInfo())));
-	$extension_info = $sth->fetch();
-	if (! $extension_info) { return -2; }			// -2 = no result set = extension not found
-	if ($extension_info['enabled'] == 0) { return -1; }	// -1 = extension not enabled
-	return $extension_info['id'];				//  0 = core, >0 is extension id
+function getExtensionID($extension_name = "none") 
+{
+    $extensions = new SimpleInvoices_Extensions();
+    return $extensions->findByName($extension_name);
 }
 
-function getSystemDefaults() {
-
-	global $dbh;
-	global $auth_session;
-    $db = new db();
-
-    #get sql patch level - if less than 198 do sql with no exntesion table
-    if ((checkTableExists(TB_PREFIX."system_defaults") == false))
-    {
-        return null;
-    }
-    if (getNumberOfDoneSQLPatches() < "198")
-    {
-
-        $sql_default  = "SELECT
-                                def.name,
-                                def.value
-                         FROM
-                            ".TB_PREFIX."system_defaults def";
-
-        $sth = $db->query($sql_default) or die(htmlsafe(end($dbh->errorInfo())));
-
-    }
-    if (getNumberOfDoneSQLPatches() >= "198")
-    {
-        $sql_default  = "SELECT
-                                def.name,
-                                def.value
-                         FROM
-                            ".TB_PREFIX."system_defaults def
-                         INNER JOIN
-                             ".TB_PREFIX."extensions ext ON (def.domain_id = ext.domain_id)";
-        $sql_default .= " WHERE enabled=1";
-        $sql_default .= " AND ext.name = 'core'";
-        $sql_default .= " AND def.domain_id = :domain_id";
-        $sql_default .= " ORDER BY extension_id ASC";		// order is important for overriding settings
-
-
-
-        // get all settings from default domain (0)
-        //$sth = dbQuery($sql.$current_settings.$order, 'domain_id', 0) or die(htmlsafe(end($dbh->errorInfo())));
-
-        $sth = $db->query($sql_default, ':domain_id', 0) or die(htmlsafe(end($dbh->errorInfo())));
-	}
-
-	$defaults = null;
-	$default = null;
-
-
-	while($default = $sth->fetch()) {
-		$defaults["$default[name]"] = $default['value'];
-	}
-
-    if (getNumberOfDoneSQLPatches() > "198")
-    {
-        $sql  = "SELECT def.name,def.value FROM ".TB_PREFIX."system_defaults def INNER JOIN ".TB_PREFIX."extensions ext ON (def.extension_id = ext.id)";
-        $sql .= " WHERE enabled=1";
-        $sql .= " AND def.domain_id = :domain_id";
-        $sql .= " ORDER BY extension_id ASC";		// order is important for overriding settings
-
-
-        // add all settings from current domain
-        //$sth = dbQuery($sql.$current_settings.$order, 'domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
-        $sth = $db->query($sql, 'domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
-        $default = null;
-
-        while($default = $sth->fetch()) {
-            $defaults["$default[name]"] = $default['value'];	// if setting is redefined, overwrite the previous value
-        }
-    }
-
-	return $defaults;
-
+function getSystemDefaults() 
+{
+    $system_defaults = new SimpleInvoices_SystemDefaults();
+    return $system_defaults->fetchAll();
 }
 
 function updateDefault($name,$value,$extension_name="core") {
-	global $auth_session;
-
-	$sql = "UPDATE ".TB_PREFIX."system_defaults SET value =  :value WHERE name = :name";
-
-	$extension_id = getExtensionID($extension_name);
-	if ($extension_id >= 0) {
-		$sql .= " AND extension_id = :extension_id";
-	} else {
-		die(htmlsafe("Invalid extension name: ".$extension));
-	}
-	if (dbQuery($sql, ':value', $value, ':name', $name, ':extension_id', $extension_id)) {
-		return true;
-	}
-	return false;
+	$system_defaults = new SimpleInvoices_SystemDefaults();
+    return $system_defaults->update($name, $value, $extension_name);
 }
 
 function getInvoiceType($id) {
