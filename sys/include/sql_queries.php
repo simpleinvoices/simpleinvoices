@@ -639,213 +639,95 @@ function getActivePaymentTypes() {
 }
 
 function getProduct($id) {
-	global $LANG;
-	global $dbh;
-	global $auth_session;
-
-	$sql = "SELECT * FROM ".TB_PREFIX."products WHERE id = :id and domain_id = :domain_id";
-	$sth = dbQuery($sql, ':id', $id, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
-	$product = $sth->fetch();
-	$product['wording_for_enabled'] = $product['enabled']==1?$LANG['enabled']:$LANG['disabled'];
-	return $product;
+	// ToDo: Cleanup
+    $products = new SimpleInvoices_Products();
+    return $products->find($id);
 }
 
-/*function insertProduct($description,$unit_price,$enabled=1,$visible=1,$notes="",$custom_field1="",$custom_field2="",$custom_field3="",$custom_field4="") {
-	$sql = "INSERT INTO ".TB_PREFIX."products
-		(`description`,`unit_price`,`notes`,`enabled`,`visible`,`custom_field1`,`custom_field2`,`custom_field3`,`custom_field4`)
-		VALUES('$description','$unit_price','$notes',$enabled,$visible,'$custom_field1','$custom_field2','$custom_field3','$custom_field4');";
 
-	return mysqlQuery($sql);
-}*/
-
-function insertProductComplete($enabled=1,$visible=1,$description,
-		$unit_price, $custom_field1 = NULL, $custom_field2, $custom_field3, $custom_field4, $notes) {
-
-	global $auth_session;
-	/*if(isset($enabled)) {
-		$enabled=$enabled;
-	}*/
-
-	if ($db_server == 'pgsql') {
-		$sql = "INSERT into
-			".TB_PREFIX."products
-			(domain_id, description, unit_price, custom_field1, custom_field2,
-			custom_field3, custom_field4, notes, enabled, visible)
-		VALUES
-			(
-				:domain_id, :description, :unit_price, :custom_field1,
-				:custom_field2, :custom_field3, :custom_field4,
-				:notes, :enabled, :visible
-			)";
-	} else {
-		$sql = "INSERT into
-			".TB_PREFIX."products
-			(
-				domain_id, description, unit_price, custom_field1, custom_field2,
-				custom_field3, custom_field4, notes, enabled, visible
-			)
-		VALUES
-			(
-				:domain_id,
-				:description,
-				:unit_price,
-				:custom_field1,
-				:custom_field2,
-				:custom_field3,
-				:custom_field4,
-				:notes,
-				:enabled,
-				:visible
-			)";
-	}
-	return dbQuery($sql,
-		':domain_id',$auth_session->domain_id,
-		':description', $description,
-		':unit_price', $unit_price,
-		':custom_field1', $custom_field1,
-		':custom_field2', $custom_field2,
-		':custom_field3', $custom_field3,
-		':custom_field4', $custom_field4,
-		':notes', "".$notes,
-		':enabled', $enabled,
-		':visible', $visible
-		);
+function insertProductComplete($enabled=1,$visible=1,$description, $unit_price, $custom_field1 = NULL, $custom_field2, $custom_field3, $custom_field4, $notes) 
+{
+    $data = array(
+        'description'       => $description,
+        'detail'            => NULL,
+        'unit_price'        => $unit_price,
+        'default_tax_id'    => NULL,
+        'default_tax_id_2'  => NULL,
+        'cost'              => NULL,
+        'reorder_level'     => NULL,
+        'custom_field1'     => $custom_field1,
+        'custom_field2'     => $custom_field2,
+        'custom_field3'     => $custom_field3,
+        'custom_field4'     => $custom_field4,
+        'notes'             => $notes,
+        'enabled'           => $enabled,
+        'visible'           => $visible
+    );
+	
+    $products = new SimpleInvoices_Products();
+    return $products->insert($data);
 }
 
 
 function insertProduct($enabled=1,$visible=1) {
-	global $auth_session;
-
 	(isset($_POST['enabled'])) ? $enabled = $_POST['enabled']  : $enabled = $enabled ;
-
-	$sql = "INSERT into
-		".TB_PREFIX."products
-		(
-			domain_id,
-            description,
-            detail,
-            unit_price,
-            cost,
-            reorder_level,
-            custom_field1,
-            custom_field2,
-			custom_field3,
-            custom_field4,
-            notes,
-            default_tax_id,
-            enabled,
-            visible
-		)
-	VALUES
-		(
-			:domain_id,
-			:description,
-			:detail,
-			:unit_price,
-			:cost,
-			:reorder_level,
-			:custom_field1,
-			:custom_field2,
-			:custom_field3,
-			:custom_field4,
-			:notes,
-			:default_tax_id,
-			:enabled,
-			:visible
-		)";
-
-	return dbQuery($sql,
-		':domain_id',$auth_session->domain_id,
-		':description', $_POST['description'],
-		':detail', $_POST['detail'],
-		':unit_price', $_POST['unit_price'],
-		':cost', $_POST['cost'],
-		':reorder_level', $_POST['reorder_level'],
-		':custom_field1', $_POST['custom_field1'],
-		':custom_field2', $_POST['custom_field2'],
-		':custom_field3', $_POST['custom_field3'],
-		':custom_field4', $_POST['custom_field4'],
-		':notes', "".$_POST['notes'],
-		':default_tax_id', $_POST['default_tax_id'],
-		':enabled', $enabled,
-		':visible', $visible
-		);
+    (isset($_POST['visible'])) ? $visible = $_POST['visible']  : $visible = $visible ;
+    
+    $data = array(
+        'description'       => $_POST['description'],
+        'detail'            => $_POST['detail'],
+        'unit_price'        => $_POST['unit_price'],
+        'default_tax_id'    => $_POST['default_tax_id'],
+        'default_tax_id_2'  => NULL,
+        'cost'              => $_POST['cost'],
+        'reorder_level'     => $_POST['reoder_level'],
+        'custom_field1'     => $_POST['custom_field1'],
+        'custom_field2'     => $_POST['custom_field2'],
+        'custom_field3'     => $_POST['custom_field3'],
+        'custom_field4'     => $_POST['custom_field4'],
+        'notes'             => $_POST['notes'],
+        'enabled'           => $enabled,
+        'visible'           => $visible
+    );
+    
+    $products = new SimpleInvoices_Products();
+    return $products->insert($data);
 }
 
 
-function updateProduct() {
-
-	$sql = "UPDATE ".TB_PREFIX."products
-			SET
-				description = :description,
-				detail = :detail,
-				enabled = :enabled,
-				default_tax_id = :default_tax_id,
-				notes = :notes,
-				custom_field1 = :custom_field1,
-				custom_field2 = :custom_field2,
-				custom_field3 = :custom_field3,
-				custom_field4 = :custom_field4,
-				unit_price = :unit_price,
-				cost = :cost,
-				reorder_level = :reorder_level
-			WHERE
-				id = :id";
-
-	return dbQuery($sql,
-		':description', $_POST['description'],
-		':detail', $_POST['detail'],
-		':enabled', $_POST['enabled'],
-		':notes', $_POST['notes'],
-		':default_tax_id', $_POST['default_tax_id'],
-		':custom_field1', $_POST['custom_field1'],
-		':custom_field2', $_POST['custom_field2'],
-		':custom_field3', $_POST['custom_field3'],
-		':custom_field4', $_POST['custom_field4'],
-		':unit_price', $_POST['unit_price'],
-		':cost', $_POST['cost'],
-		':reorder_level', $_POST['reorder_level'],
-		':id', $_GET['id']
-		);
+function updateProduct() 
+{
+    $data = array(
+        'description'       => $_POST['description'],
+        'detail'            => $_POST['detail'],
+        'unit_price'        => $_POST['unit_price'],
+        'default_tax_id'    => $_POST['default_tax_id'],
+        /*'default_tax_id_2'  => NULL,*/
+        'cost'              => $_POST['cost'],
+        'reorder_level'     => $_POST['reoder_level'],
+        'custom_field1'     => $_POST['custom_field1'],
+        'custom_field2'     => $_POST['custom_field2'],
+        'custom_field3'     => $_POST['custom_field3'],
+        'custom_field4'     => $_POST['custom_field4'],
+        'notes'             => $_POST['notes'],
+        'enabled'           => $_POST['enabled']
+        /*'visible'           => $visible*/
+    ); 
+	
+	$products = new SimpleInvoices_Products();
+    return $products->update($data, $_GET['id']);
 }
 
 function getProducts() {
-	global $LANG;
-	global $dbh;
-	global $db_server;
-	global $auth_session;
-
-	$sql = "SELECT * FROM ".TB_PREFIX."products WHERE visible = 1 AND domain_id = :domain_id ORDER BY description";
-	if ($db_server == 'pgsql') {
-		$sql = "SELECT * FROM ".TB_PREFIX."products WHERE visible and domain_id = :domain_id ORDER BY description";
-	}
-	$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
-
-	$products = null;
-
-	for($i=0;$product = $sth->fetch();$i++) {
-
-		if ($product['enabled'] == 1) {
-			$product['enabled'] = $LANG['enabled'];
-		} else {
-			$product['enabled'] = $LANG['disabled'];
-		}
-
-		$products[$i] = $product;
-	}
-
-	return $products;
+	// ToDo: Cleanup
+    $products = new SimpleInvoices_Products();
+    return $products->fetchAll();
 }
 
 function getActiveProducts() {
-	global $dbh;
-	global $db_server;
-	global $auth_session;
-
-	$sql = "SELECT * FROM ".TB_PREFIX."products WHERE enabled and domain_id = :domain_id ORDER BY description";
-	$sth = dbQuery($sql, ':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
-
-	return $sth->fetchAll();
+	// ToDo: Cleanup
+    $products = new SimpleInvoices_Products();
+    return $products->findActive();
 }
 
 function getTaxes() {

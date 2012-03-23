@@ -25,6 +25,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $config = new Zend_Config($this->getOptions(), true);
         Zend_Registry::set('config', $config);
+        
+        if( isset($config->simpleinvoices->db->table_prefix)) {
+            Zend_Registry::set('tbl_prefix', $config->simpleinvoices->db->table_prefix);
+        }
+        
         return $config;
     }
     
