@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <title>Simple Invoices - Login</title>
-<link rel="stylesheet" type="text/css" href="{$baseUrl}sys/templates/default/css/login.css" />
+<link rel="stylesheet" type="text/css" href="{$baseUrl}css/default/login.css" />
 </head>
 <body class="login" >
 <div class="Container">
@@ -12,7 +12,7 @@
 {/if}
 	<div id="Dialog">
 		<div class="login-logo">
-            <img src="images/common/si_logo.png" alt="Simple Invoices"/>
+            <img src="{$baseUrl}images/common/si_logo.png" alt="Simple Invoices"/>
         </div>
 		<form action="" method="post" id="frmLogin" name="frmLogin">
 	        <input type="hidden" name="action" value="login" />
@@ -46,7 +46,8 @@
         <div class="login-submit">
             <button>{$LANG.login}</button>
         </div>
-        <input type="hidden" name="name" value="{$default|htmlsafe}">
+        {* ToDo: Default is not set *}
+        <!-- <input type="hidden" name="name" value="{$default|htmlsafe}"> -->
 		</form>
         </center>
         <br/>

@@ -833,11 +833,6 @@ function getDefaultInventory() {
     return $value;
 }
 
-function getDefaultLanguage() {
-    $system_defaults = new SimpleInvoices_SystemDefaults();
-    return $system_defaults->findByName('language');
-}
-
 function setDefaultLanguage($language) {
     $system_defaults = new SimpleInvoices_SystemDefaults();
     return $system_defaults->update('language', $language);

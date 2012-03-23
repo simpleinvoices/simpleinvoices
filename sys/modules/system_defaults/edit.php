@@ -294,7 +294,8 @@ else if ($_GET['submit'] == "logging") {
 else if($_GET['submit'] == "language") {
     $default = "language";
     $languages = getLanguageList($include_dir . 'sys/lang/');
-    $lang = getDefaultLanguage();
+    $system_defaults = new SimpleInvoices_SystemDefaults();
+    $lang = $system_defaults->findByName('language');
 
     usort($languages,"compareNameIndex");
 

@@ -23,11 +23,13 @@ if ($cust_language != '') {
 } 
 else 
 {
-  if(in_array(TB_PREFIX.'system_defaults',$tables) && getDefaultLanguage() != null)
+  if(in_array(TB_PREFIX.'system_defaults',$tables))
   {
-	$language = getDefaultLanguage();
+      $system_defaults = new SimpleInvoices_SystemDefaults();
+      $language = $system_defaults->findByName('language');
+      if ($language === NULL) $language = "en_GB";
   } else {
- 	$language = "en_GB";
+      $language = "en_GB";
   }  
 }  
 
@@ -38,7 +40,8 @@ function getLanguageArray() {
 	$langPath =  "sys/lang/";
 	$langFile = "/lang.php";
 	//$getLanguage = getenv("HTTP_ACCEPT_LANGUAGE");
-	//$language = getDefaultLanguage();
+    //$system_defaults = new SimpleInvoices_SystemDefaults();
+    //$language = $system_defaults->findByName('language');
 
 	//include english as default - so if the selected lang doesnt have the required lang then it still loads
 	include($langPath."en_GB".$langFile);

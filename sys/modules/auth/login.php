@@ -131,7 +131,8 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 
 $default = "language";
 $languages = getLanguageList($include_dir . 'sys/lang/');
-$lang = getDefaultLanguage();
+$system_defaults = new SimpleInvoices_SystemDefaults();
+$lang = $system_defaults->findByName('language');
 
 usort($languages,"compareNameIndex");
 

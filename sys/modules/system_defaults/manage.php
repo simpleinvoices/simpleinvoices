@@ -4,7 +4,8 @@
 checkLogin();
 
 //gets the long language name out of the short name
-$lang = getDefaultLanguage();
+$system_defaults = new SimpleInvoices_SystemDefaults();
+$lang = $system_defaults->findByName('language');
 $languages = getLanguageList($include_dir . 'sys/lang/');
 foreach($languages as $language) {
 	if($language->shortname == $lang) {
