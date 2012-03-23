@@ -9,7 +9,7 @@
 <link rel="Stylesheet" href="lib/WebApp/Design/Render.css" />
 	<script type="text/javascript" src="lib/WebApp/Action/Logic.js"></script>
 		<!-- jQuery Files -->
-	<script type="text/javascript" src="./js/jquery-1.2.6.min.js"></script>
+	<script type="text/javascript" src="./js/jquery-1.7.2.min.js"></script>
 	<script type="text/javascript" src="./js/jquery.flexigrid.1.0b3.pack.js"></script>
 	{$extension_jquery_files }
 	<script type="text/javascript" src="./js/jquery.plugins.js"></script>

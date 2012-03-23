@@ -13,13 +13,14 @@
 	width: 970px;
 	z-index:1;
 	position:relative;
-
-	
-
+    /* Changes */
+    /*padding:0px;*/
+    background: none !important;
+    border-width: 0px;
+    border:none!important;
 }
 .ui-tabs-hide { display: none; }
 
-	
 .subnav li
 {
 	display: inline;

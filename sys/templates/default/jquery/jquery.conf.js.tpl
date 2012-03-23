@@ -33,11 +33,8 @@ $(document).ready(function(){
 	/*
 	Load the jquery datePicker with out config
 	*/
-	if($.datePicker){
-		$.datePicker.setDateFormat('ymd','-');
-		$('input.date-picker').datePicker({startDate:'01/01/1970'});
-		$('input#date2').datePicker({endDate:'01/01/1970'});
-	}
+	$(".date-picker").datepicker({dateFormat:'yy-mm-dd'});
+    
 	if($(".showdownloads")){
 		$(".showdownloads").click(function(){
 				var offset = $(this).offset();

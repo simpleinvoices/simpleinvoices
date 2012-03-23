@@ -127,15 +127,14 @@
 	 * */
 	function add_line_item()
 	{
-		$('#gmail_loading').show();
-		
 		//clone the last tr in the item table
 		var clonedRow = $('#itemtable tbody.line_item:first').clone(); 
 		var lastRow = $('#itemtable tbody.line_item:last').clone(); 
 	
 		//find the Id for the row from the quantity if
-		var rowID_old = $("input[@id^='quantity']",clonedRow).attr("id");
-		var rowID_last = $("input[@id^='quantity']",lastRow).attr("id");
+		rowID_old = clonedRow.find("input[id^='quantity']").attr("id");
+        rowID_last = lastRow.find("input[id^='quantity']").attr("id");
+        
 		rowID_old = parseInt(rowID_old.slice(8)); //using 8 as 'quantity' has eight letters and want to get the number thats after that
 		rowID_last = parseInt(rowID_last.slice(8)); //using 8 as 'quantity' has eight letters and want to get the number thats after that
 	
@@ -143,14 +142,8 @@
 		var rowID_new = rowID_last + 1;
 		
 		siLog('debug','Line item '+rowID_new+'added');
-		//log.debug( 'Line item '+rowID_new+'added');
-	
-		//console.log("Old row ID: "+rowID_old);
-		//console.log("New row ID:"+rowID_new);
-		//console.log("Last row ID:"+rowID_last);
-	
+		
 		//update all the row items
-		//
 	
 		clonedRow.attr("id","row"+rowID_new);
 		//trash image
@@ -202,6 +195,7 @@
 	
 		$("#description"+rowID_old, clonedRow).attr("id", "description"+rowID_new);
 		$("#description"+rowID_new, clonedRow).attr("name", "description"+rowID_new);
+        $("#description"+rowID_new, clonedRow).attr("value","");
 		//$("#description"+rowID_new, clonedRow).attr("value","{/literal}{$LANG.description}{literal}");
 		//$("#description"+rowID_new, clonedRow).css({ color: "#b2adad" });
 	
@@ -213,9 +207,6 @@
 		$("#tax_id\\["+rowID_new+"\\]\\[1\\]", clonedRow).attr("selectedIndex", "-1");
 	
 		$('#itemtable').append(clonedRow);
-		
-		$('#gmail_loading').hide();
-	
 	}
 	
 	//the export dialog in the manage invoices page

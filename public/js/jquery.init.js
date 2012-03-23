@@ -1,7 +1,8 @@
 $(document).ready(function(){
 
 	/*$("#tabmenu").removeClass('ui-tabs-hide');*/
-	$("#tabmenu > ul").tabs();
+	//$("#tabmenu > ul").tabs();
+    $("#tabmenu").tabs();
 
 	/*hide the text for the export dialog on the manage invoices page*/
 	$('#export_dialog').hide();
@@ -14,23 +15,22 @@ $(document).ready(function(){
 	//$('.note').hide();
 
     $("#dialog").hide();
-    $('#invoice_dialog').click(function() 
-		{ 
-				 $("#dialog").show();  								
-				 $("#dialog").dialog({ 
-				   modal: true, 
-				   buttons: { 
-			        "Cancel": function() { 
-			            $(this).dialog("destroy"); 
-			        }
-			        },
-				    overlay: { 
-				        opacity: 0.5, 
-				        background: "black" 
-				    },
-				    close:  function() { $(this).dialog("destroy")}
-				});
+    $('#invoice_dialog').click(function() { 
+	    $("#dialog").show();  								
+		$("#dialog").dialog({ 
+		    modal: true, 
+			buttons: { 
+			    "Cancel": function() { 
+			        $(this).dialog("destroy"); 
+			    }
+			},
+			overlay: { 
+			    opacity: 0.5, 
+				background: "black" 
+			},
+			close:  function() { $(this).dialog("destroy")}
+		});
 				
-		}); 
+	}); 
 
 });

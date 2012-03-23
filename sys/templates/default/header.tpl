@@ -12,13 +12,14 @@
 	<link rel="shortcut icon" href="{$baseUrl}images/common/favicon.ico" />
 
 {literal}
-	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}js/jquery-1.2.6.min.js"></script>
+	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="{/literal}{$baseUrl}{literal}js/jquery-ui-1.8.18.custom.min.js"></script>
 	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}js/jquery.init.js"></script>
-
+             
+    <link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}css/default/jquery-ui/smoothness/jquery-ui-1.8.18.custom.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}css/default/jquery-ui/default/default.dialog.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}css/default/print.css" media="print" />
 	<!-- jQuery Files -->
-	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}js/jquery-ui-personalized-1.6rc2.packed.js"></script>	
 	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}js/cluetip/jquery.hoverIntent.minified.js"></script>
 	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}js/cluetip/jquery.cluetip.js"></script>
 	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}js/jquery.flexigrid.1.0b3.pack.js"></script>
@@ -33,7 +34,7 @@
 	{/literal}
 	{include file="./jquery/jquery.functions.js.tpl"}
 	{include file="./jquery/jquery.conf.js.tpl"}
-	{literal}
+	{literal}                                                           
 	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}css/default/jquery-ui/tab-screen.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}css/default/jquery-ui/tab_menu.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}css/default/jquery-ui/tab.css" media="all" />
