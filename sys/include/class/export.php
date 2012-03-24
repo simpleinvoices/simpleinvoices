@@ -216,7 +216,7 @@ class export
                 $customer = customer::get($payment['customer_id']);
                 $invoiceType = getInvoiceType($invoice['type_id']);
                 $customFieldLabels = getCustomFieldLabels();
-                $paymentType = $SI_PAYMENT_TYPES->($payment['ac_payment_type']);
+                $paymentType = $SI_PAYMENT_TYPES->find($payment['ac_payment_type']);
                 $preference = getPreference($invoice['preference_id']);
 
                 $smarty -> assign("payment",$payment);
@@ -314,3 +314,4 @@ class export
 	}
 
 }
+?>

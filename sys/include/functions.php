@@ -612,7 +612,6 @@ function lineItemTaxCalc($tax,$unit_price,$quantity)
 
 function pdfThis($html,$file_location="",$pdfname)
 {
-
     global $config;
 
                         //    'pixels'     => $config->export->pdf->screensize,
@@ -666,7 +665,7 @@ function pdfThis($html,$file_location="",$pdfname)
 
     // output the HTML content
     $pdf->writeHTML($html, true, false, true, false, '');
-
+    
     // reset pointer to the last page
     $pdf->lastPage();
 
@@ -676,7 +675,7 @@ function pdfThis($html,$file_location="",$pdfname)
     if ($file_location == "download") {
         // I: send the file inline to the browser. The plug-in is used if available. The name given by filename is used when one selects the "Save as" option on the link generating the PDF.
         // D: send to the browser and force a file download with the name given by filename.
-        $pdf->Output($pdfname, 'I');    
+        $pdf->Output($pdfname, 'D');    
     } else {
         // Destination is file
         $pdf->Output('./tmp/cache/' . $pdfname . '.pdf', 'F');
