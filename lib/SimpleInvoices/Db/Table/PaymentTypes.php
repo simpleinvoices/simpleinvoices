@@ -12,7 +12,7 @@ class SimpleInvoices_Db_Table_PaymentTypes extends SimpleInvoices_Db_Table_Abstr
         
         $select = $this->select();
         $select->where('domain_id = ?', $auth_session->domain_id);
-        $select()->order('pt_description');
+        $select->order('pt_description');
         
         $result = $this->getAdapter()->fetchAll($select);
         
@@ -71,9 +71,31 @@ class SimpleInvoices_Db_Table_PaymentTypes extends SimpleInvoices_Db_Table_Abstr
         $select->where('pt_id = ?', $id);
         $select->where('domain_id = ?', $auth_session->domain_id);
         
-        $payment = $this->getAdapter()->fetchRow($select);
+        $payment_type = $this->getAdapter()->fetchRow($select);
         
-        $payment['wording_for_enabled'] = $payment['enabled']==1?$LANG['enabled']:$LANG['disabled'];
+        if($payment_type) {
+            $payment_type['wording_for_enabled'] = $payment_type['enabled']==1?$LANG['enabled']:$LANG['disabled'];    
+        }
+        
+        return $payment_type;
+    }
+    
+    public function findByName($name)
+    {
+        global $LANG;
+        
+        $auth_session = Zend_Registry::get('auth_session');
+        
+        $select = $this->select();
+        $select->where('pt_description = ?', $name);
+        $select->where('domain_id = ?', $auth_session->domain_id);
+        
+        $payment_type = $this->getAdapter()->fetchRow($select);
+        
+        if($payment_type) {
+            $payment_type['wording_for_enabled'] = $payment_type['enabled']==1?$LANG['enabled']:$LANG['disabled'];    
+        }
+        
         return $payment;
     }
     

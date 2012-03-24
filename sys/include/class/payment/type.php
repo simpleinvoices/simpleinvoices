@@ -37,13 +37,16 @@ class payment_type
 	{
 		return $pt['pt_id'];
 	}
-	//add new patmeny type if no Paypal type
+	//add new payment type if no Paypal type
 	if($pt =="")
 	{
-		$new_pt = new payment_type();
-		$new_pt->pt_description = $this->type;
-		$new_pt->pt_enabled = "1";
-		$new_pt->insert();
+        $SI_PAYMENT_TYPES = new SimpleInvoices_Db_Table_PaymentTypes();
+        
+        $new_payment_type_data = array(
+            'pt_description'    => $this->type,
+            'pt_enabled'        => 1
+        );
+		$SI_PAYMENT_TYPES->insert($new_payment_type_data);
 
 		$payment_type = new payment_type();
 		$payment_type->type = $this->type;

@@ -19,5 +19,13 @@ class SimpleInvoices_Db_Table_Abstract extends Zend_Db_Table_Abstract
             $this->_name = Zend_Registry::get('tbl_prefix') . $this->_name;
         }
     }
+    
+    /**
+    * Get the last insert id for the current table
+    * 
+    */
+    public function getLastInsertId() {
+        return $this->getAdapter()->lastInsertId($this->_name);
+    }
 }
 ?>

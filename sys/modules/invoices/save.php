@@ -192,3 +192,4 @@ if ($_POST['action'] == "insert" ) {
 //Get type id - so do add into redirector header
 $smarty->assign('saved', $saved);
 $smarty->assign('id', $id);
+?>

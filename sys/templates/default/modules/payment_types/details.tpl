@@ -60,9 +60,8 @@
 		<td>
 		{*displayblock enabled*}
 		<select name="pt_enabled">
-			<option value="{$paymentType.pt_enabled|htmlsafe}" selected style="font-weight: bold">{$paymentType.enabled|htmlsafe}</option>
-			<option value="1">{$LANG.enabled}</option>
-			<option value="0">{$LANG.disabled}</option>
+			<option value="1"{if $paymentType.pt_enabled == 1} selected{/if}>{$LANG.enabled}</option>
+			<option value="0"{if $paymentType.pt_enabled == 0} selected{/if}>{$LANG.disabled}</option>
 		</select>
 		{*/displayblock enabled*}
 		

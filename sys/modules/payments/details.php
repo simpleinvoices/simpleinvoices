@@ -19,7 +19,7 @@ $payment = getPayment($_GET['id']);
 /*Code to get the Invoice preference - so can link from this screen back to the invoice - START */
 $invoice = getInvoice($payment['ac_inv_id']);
 $invoiceType = getInvoiceType($invoice['type_id']);
-$paymentType = $SI_PAYMENT_TYPES->fi($payment['ac_payment_type']);
+$paymentType = $SI_PAYMENT_TYPES->find($payment['ac_payment_type']);
 
 
 $smarty -> assign("payment",$payment);
@@ -29,3 +29,4 @@ $smarty -> assign("paymentType",$paymentType);
 
 $smarty -> assign('pageActive', 'payment');
 $smarty -> assign('active_tab', '#money');
+?>

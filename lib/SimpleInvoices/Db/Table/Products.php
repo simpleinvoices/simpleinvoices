@@ -108,11 +108,6 @@ class SimpleInvoices_Db_Table_Products extends SimpleInvoices_Db_Table_Abstract
         return($row['amount']);
     }
     
-    public function getLastInsertId()
-    {
-        return $this->getAdapter()->lastInsertId();
-    }
-    
     /**
     * Replaces insertProduct and insertProductComplete
     * 

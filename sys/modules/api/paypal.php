@@ -51,26 +51,36 @@ if ($p->validate_ipn()) {
 
 	if($number_of_payments == '0')
 	{
-
-		$payment = new payment();
-		$payment->ac_inv_id = $p->ipn_data['invoice'];
-		#$payment->ac_inv_id = $_POST['invoice'];
-		$payment->ac_amount = $p->ipn_data['mc_gross'];
-		#$payment->ac_amount = $_POST['mc_gross'];
-		$payment->ac_notes = $paypal_data;
-		#$payment->ac_notes = $paypal_data;
-		$payment->ac_date = date( 'Y-m-d', strtotime($p->ipn_data['payment_date']));
-		#$payment->ac_date = date( 'Y-m-d', strtotime($_POST['payment_date']));
-		$payment->online_payment_id = $p->ipn_data['txn_id'];
-		$payment->domain_id = $domain_id;
+        $SI_PAYMENTS = new SimpleInvoices_Db_Table_Payment();
+        $SI_PAYMENT_TYPES = new SimpleInvoices_Db_Table_PaymentTypes();
+        
+        $payment_data = array(
+            'ac_inv_id'         => $p->ipn_data['invoice'],
+            'ac_amount'         => $p->ipn_data['mc_gross'],
+            'ac_notes'          => $paypal_data,
+            'ac_date'           => date( 'Y-m-d', strtotime($p->ipn_data['payment_date'])),
+            'online_payment_id' => $p->ipn_data['txn_id']
+        );
 
 			$payment_type = new payment_type();
 			$payment_type->type = "Paypal";
 			$payment_type->domain_id = $domain_id;
+            
+        $payment_type_data = array(
+            'type'  => 'Paypal'
+        );
 
-		$payment->ac_payment_type = $payment_type->select_or_insert_where();
-		$logger->log('Paypal - payment_type='.$payment->ac_payment_type, Zend_Log::INFO);
-		$payment->insert();
+        $db_payment_type = $SI_PAYMENT_TYPES->findByName($payment_type_data['type']);
+        if (!$db_payment_type) {
+            $SI_PAYMENT_TYPES->insert($payment_type_data);
+            $db_payment_type = $SI_PAYMENT_TYPES->findByName($payment_type_data['type']);
+        }
+        $payment_data['ac_payment_type'] = $db_payment_type['pt_id'];
+        
+		$logger->log('Paypal - payment_type='.$payment_data['ac_payment_type'], Zend_Log::INFO);
+		
+        // Insert the payment
+        $SI_PAYMENTS->insert($payment_data);
 
 		$invoice = invoice::select($p->ipn_data['invoice']);
 		#$invoice = invoice::select($_POST['invoice']);
@@ -92,7 +102,6 @@ if ($p->validate_ipn()) {
 		$xml_message['data'] .= $body;
 	}
 } else {
-
 	$xml_message .= "Paypal validate failed" ;
 	$logger->log('Paypal validate failed', Zend_Log::INFO);
 }
@@ -108,4 +117,4 @@ catch (Exception $e)
 {
     echo $e->getMessage();
 }
-
+?>

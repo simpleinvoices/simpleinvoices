@@ -23,3 +23,4 @@ $smarty -> assign('saved',$saved);
 $smarty -> assign('pageActive', 'inventory');
 $smarty -> assign('subPageActive', 'inventory_add');
 $smarty -> assign('active_tab', '#product');
+?>
