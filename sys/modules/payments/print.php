@@ -3,6 +3,8 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$SI_PAYMENT_TYPES = new SimpleInvoices_PaymentTypes();
+
 $menu = false;
 $payment = getPayment($_GET['id']);
 
@@ -14,7 +16,7 @@ $logo = str_replace(" ", "%20", $logo);
 $customer = customer::get($payment['customer_id']);
 $invoiceType = getInvoiceType($invoice['type_id']);
 $customFieldLabels = getCustomFieldLabels();
-$paymentType = getPaymentType($payment['ac_payment_type']);
+$paymentType = $SI_PAYMENT_TYPES->find($payment['ac_payment_type']);
 $preference = getPreference($invoice['preference_id']);
 
 $smarty -> assign("payment",$payment);

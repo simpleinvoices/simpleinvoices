@@ -204,6 +204,8 @@ class export
 			}
             case "payment":
             {
+                $SI_PAYMENT_TYPES = new SimpleInvoices_PaymentTypes();
+                
                 $payment = getPayment($this->id);
 
                 /*Code to get the Invoice preference - so can link from this screen back to the invoice - START */
@@ -214,7 +216,7 @@ class export
                 $customer = customer::get($payment['customer_id']);
                 $invoiceType = getInvoiceType($invoice['type_id']);
                 $customFieldLabels = getCustomFieldLabels();
-                $paymentType = getPaymentType($payment['ac_payment_type']);
+                $paymentType = $SI_PAYMENT_TYPES->($payment['ac_payment_type']);
                 $preference = getPreference($invoice['preference_id']);
 
                 $smarty -> assign("payment",$payment);

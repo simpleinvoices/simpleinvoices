@@ -5,6 +5,7 @@
 checkLogin();
 
 $SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+$SI_PAYMENT_TYPES = new SimpleInvoices_PaymentTypes();
 
 $maxInvoice = maxInvoice();
 
@@ -36,7 +37,7 @@ else {
 $customer = customer::get($invoice['customer_id']);
 $biller = getBiller($invoice['biller_id']);
 $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
-$pt = getPaymentType($defaults['payment_type']);
+$pt = $SI_PAYMENT_TYPES->find($defaults['payment_type']);
 
 $invoices = new invoice();
 $invoices->sort='id';
@@ -44,7 +45,7 @@ $invoices->having='money_owed';
 $invoice_all = $invoices->select_all('count');
 
 $smarty -> assign('invoice_all',$invoice_all);
-$paymentTypes = getActivePaymentTypes();
+$paymentTypes = $SI_PAYMENT_TYPES->fetchAllActive();
 
 $smarty -> assign("paymentTypes",$paymentTypes);
 $smarty -> assign("defaults",$defaults);

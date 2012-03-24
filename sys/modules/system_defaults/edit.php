@@ -4,6 +4,7 @@
 checkLogin();
 
 $SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+$SI_PAYMENT_TYPES = new SimpleInvoices_PaymentTypes();
 
 #system defaults query
 
@@ -246,8 +247,8 @@ EOD;
 }
 else if ($_GET["submit"] == "def_payment_type") {
 
-	$defpay = getDefaultPaymentType();
-	$payments = getActivePaymentTypes();
+	$defpay = $SI_PAYMENT_TYPES->getDefault();
+	$payments = $SI_PAYMENT_TYPES->fetchAllActive();
 
 
 	if ($payments == null) {

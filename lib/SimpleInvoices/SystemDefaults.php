@@ -83,14 +83,28 @@ class SimpleInvoices_SystemDefaults extends SimpleInvoices_Db_Table_Abstract
     */
     public function findByName($name)
     {
-        $auth_session = Zend_Registry::get('auth_session');
+        switch($name)
+        {
+            case 'payment_type':
+            {
+                $SI_PAYMENT_TYPES = new SimpleInvoices_PaymentTypes();
+                return $SI_PAYMENT_TYPES->getDefault();
+                break;
+            }
+            default:
+            {
+                $auth_session = Zend_Registry::get('auth_session');
         
-        $select = $this->select();
-        $select->where('name = ?', $name);
-        $select->where('domain_id = ?', $auth_session->domain_id);
+                $select = $this->select();
+                $select->where('name = ?', $name);
+                $select->where('domain_id = ?', $auth_session->domain_id);
+                
+                $result = $this->getAdapter()->fetchRow($select);
+                return $result['value'];        
+                break;
+            }
+        }
         
-        $result = $this->getAdapter()->fetchRow($select);
-        return $result['value'];
     }
     
     /**

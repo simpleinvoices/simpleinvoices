@@ -5,6 +5,8 @@ checkLogin();
 
 //gets the long language name out of the short name
 $SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+$SI_PAYMENT_TYPES = new SimpleInvoices_PaymentTypes();
+
 $lang = $SI_SYSTEM_DEFAULTS->findByName('language');
 $languages = getLanguageList($include_dir . 'sys/lang/');
 foreach($languages as $language) {
@@ -32,7 +34,7 @@ $smarty -> assign("defaultBiller", getDefaultBiller());
 $smarty -> assign("defaultCustomer", getDefaultCustomer());
 $smarty -> assign("defaultTax", getDefaultTax());
 $smarty -> assign("defaultPreference", getDefaultPreference());
-$smarty -> assign("defaultPaymentType", getDefaultPaymentType());
+$smarty -> assign("defaultPaymentType", $SI_PAYMENT_TYPES->getDefault());
 $smarty -> assign("defaultDelete", $defaults['delete']);
 $smarty -> assign("defaultLogging", $defaults['logging']);
 $smarty -> assign("defaultInventory", $defaults['inventory']);
@@ -40,3 +42,4 @@ $smarty -> assign("defaultLanguage", $lang);
 
 $smarty -> assign('pageActive', 'system_default');
 $smarty -> assign('active_tab', '#setting');
+?>

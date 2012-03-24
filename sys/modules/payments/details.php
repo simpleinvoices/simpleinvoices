@@ -3,6 +3,8 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$SI_PAYMENT_TYPES = new SimpleInvoices_PaymentTypes();
+
 //TODO
 /*validation code*/
 jsBegin();
@@ -17,7 +19,7 @@ $payment = getPayment($_GET['id']);
 /*Code to get the Invoice preference - so can link from this screen back to the invoice - START */
 $invoice = getInvoice($payment['ac_inv_id']);
 $invoiceType = getInvoiceType($invoice['type_id']);
-$paymentType = getPaymentType($payment['ac_payment_type']);
+$paymentType = $SI_PAYMENT_TYPES->fi($payment['ac_payment_type']);
 
 
 $smarty -> assign("payment",$payment);
