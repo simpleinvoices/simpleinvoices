@@ -123,7 +123,6 @@
 									id="tax_id[0][{$smarty.section.tax.index|htmlsafe}]"
 									name="tax_id[0][{$smarty.section.tax.index|htmlsafe}]"
 								>
-								<option value=""></option>
 								{assign var="index" value=$smarty.section.tax.index}
 								{foreach from=$taxes item=tax}
 									<option {if $tax.tax_id === $invoiceItems.0.tax.$index} selected {/if} value="{$tax.tax_id|htmlsafe}">{$tax.tax_description|htmlsafe}</option>
@@ -231,7 +230,6 @@
 									id="tax_id[{$line|htmlsafe}][{$smarty.section.tax.index|htmlsafe}]"
 									name="tax_id[{$line|htmlsafe}][{$smarty.section.tax.index|htmlsafe}]"
 								>
-								<option value=""></option>
 								{assign var="index" value=$smarty.section.tax.index}
 								{foreach from=$taxes item=tax}
 									<option {if $tax.tax_id === $invoiceItem.tax.$index} selected {/if} value="{$tax.tax_id|htmlsafe}">{$tax.tax_description|htmlsafe}</option>

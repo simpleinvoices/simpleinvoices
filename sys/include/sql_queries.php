@@ -1,9 +1,12 @@
 <?php
 
+/**
+* $log_dbh is used by dbLogger, but dbLogger is unused throughout the project 
 if(LOGGING) {
 	//Logging connection to prevent mysql_insert_id problems. Need to be called before the second connect...
 	$log_dbh = db_connector();
 }
+*/
 
 $dbh = db_connector();
 
@@ -71,10 +74,6 @@ function db_connector() {
 
 
 	return $connlink;
-}
-
-function mysqlQuery($sqlQuery) {
-	dbQuery($sqlQuery);
 }
 
 /*
@@ -155,6 +154,7 @@ function dbQuery($sqlQuery) {
     }
 }
 
+/* Not used
 // Used for logging all queries
 function dbLogger($sqlQuery) {
 	global $log_dbh;
@@ -169,16 +169,16 @@ function dbLogger($sqlQuery) {
 		$tth = null;
 		$sql = "INSERT INTO ".TB_PREFIX."log (timestamp, userid, sqlquerie, last_id) VALUES (CURRENT_TIMESTAMP , ?, ?, ?)";
 
-		/* SC: Check for the patch manager patch loader.  If a
-		 *     patch is being run, avoid $log_dbh due to the
-		 *     risk of deadlock.
-		 */
+		// SC: Check for the patch manager patch loader.  If a
+		//     patch is being run, avoid $log_dbh due to the
+		//     risk of deadlock.
+		//
 		$call_stack = debug_backtrace();
 		//SC: XXX Change the number back to 1 if returned to directly
 		//    within dbQuery.  The joys of dealing with the call stack.
 
 		if ($call_stack[2]['function'] == 'run_sql_patch') {
-		/* Running the patch manager, avoid deadlock */
+		// Running the patch manager, avoid deadlock 
 			$tth = $dbh->prepare($sql);
 		} elseif (preg_match('/^(update|insert)/iD', $sqlQuery)) {
 			$last = lastInsertId();
@@ -190,6 +190,7 @@ function dbLogger($sqlQuery) {
 		$tth = null;
 	}
 }
+*/
 
 /*
  * lastInsertId returns the id of the most recently inserted row by the session
@@ -278,39 +279,22 @@ function _invoice_items_check_fk($invoice, $product, $tax, $update) {
 	return true;
 }
 
+// ToDo: Replace in code
 function getCustomer($id) {
-	global $db_server;
-	global $dbh;
-	global $auth_session;
-
-	$print_customer = "SELECT * FROM ".TB_PREFIX."customers WHERE id = :id and domain_id = :domain_id";
-	$sth = dbQuery($print_customer, ':id', $id, ':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
-	return $sth->fetch();
+	$SI_CUSTOMER = new SimpleInvoices_Db_Table_Customers();
+    return $SI_CUSTOMER->find($id);
 }
 
+// ToDo: Replace in code
 function getBiller($id) {
-	global $LANG;
-	global $dbh;
-	global $auth_session;
-
-	$print_biller = "SELECT * FROM ".TB_PREFIX."biller WHERE id = :id and domain_id = :domain_id";
-	$sth = dbQuery($print_biller, ':id', $id, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
-	$biller = $sth->fetch();
-	$biller['wording_for_enabled'] = $biller['enabled']==1?$LANG['enabled']:$LANG['disabled'];
-	return $biller;
+	$SI_BILLER = new SimpleInvoices_Db_Table_Biller();
+    return $SI_BILLER->find($id);
 }
 
+// ToDo: Replace in code
 function getPreference($id) {
-	global $LANG;
-	global $dbh;
-	global $auth_session;
-
-	$print_preferences = "SELECT * FROM ".TB_PREFIX."preferences WHERE pref_id = :id and domain_id = :domain_id";
-	$sth = dbQuery($print_preferences, ':id', $id,':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
-	$preference = $sth->fetch();
-	$preference['status_wording'] = $preference['status']==1?$LANG['real']:$LANG['draft'];
-	$preference['enabled'] = $preference['pref_enabled']==1?$LANG['enabled']:$LANG['disabled'];
-	return $preference;
+	$SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
+    return $SI_PREFERENCES->find($id);
 }
 
 function getSQLPatches() {
@@ -321,28 +305,10 @@ function getSQLPatches() {
 	return $sth->fetchAll();
 }
 
+// ToDo: Replace in code
 function getPreferences() {
-	global $LANG;
-	global $dbh;
-	global $auth_session;
-
-	$sql = "SELECT * FROM ".TB_PREFIX."preferences WHERE domain_id = :domain_id ORDER BY pref_description";
-	$sth  = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
-
-	$preferences = null;
-
-	for($i=0;$preference = $sth->fetch();$i++) {
-
-  		if ($preference['pref_enabled'] == 1) {
-  			$preference['enabled'] = $LANG['enabled'];
-  		} else {
-  			$preference['enabled'] = $LANG['disabled'];
-  		}
-
-		$preferences[$i] = $preference;
-	}
-
-	return $preferences;
+	$SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
+    return $SI_PREFERENCES->fetchAll();
 }
 
 function getActiveTaxes() {
@@ -372,14 +338,10 @@ function getActiveTaxes() {
 	return $taxes;
 }
 
+// ToDo: Replace in code
 function getActivePreferences() {
-	global $dbh;
-	global $auth_session;
-
-	$sql = "SELECT * FROM ".TB_PREFIX."preferences WHERE pref_enabled and domain_id = :domain_id ORDER BY pref_description";
-	$sth  = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
-
-	return $sth->fetchAll();
+	$SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
+    return $SI_PREFERENCES->fetchAllActive();
 }
 
 function getCustomFieldLabels() {

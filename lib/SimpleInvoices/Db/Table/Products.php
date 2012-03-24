@@ -33,7 +33,7 @@ class SimpleInvoices_Db_Table_Products extends SimpleInvoices_Db_Table_Abstract
         $select = $this->select();
         $select->where('domain_id = ?', $auth_session->domain_id);
         $select->where('visible = 1');
-        $select()->order('description');
+        $select->order('description');
         
         $result = $this->getAdapter()->fetchAll($select);
         
