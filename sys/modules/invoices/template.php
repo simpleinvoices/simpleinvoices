@@ -16,6 +16,8 @@
  * 
  */
 /*
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+
 #get the invoice id
 $invoiceID = $_GET['id'];
 
@@ -27,7 +29,7 @@ $invoice = getInvoice($invoiceID);
 $customer = getCustomer($invoice['customer_id']);
 $biller = getBiller($invoice['biller_id']);
 $preference = getPreference($invoice['preference_id']);
-$defaults = getSystemDefaults();
+$defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 $logo = getLogo($biller);
 $logo = str_replace(" ", "%20", $logo);
 $invoiceItems = invoice::getInvoiceItems($invoiceID);

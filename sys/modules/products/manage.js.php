@@ -3,7 +3,7 @@
 {literal}
 
 var view_tooltip ="{/literal}{$LANG.quick_view_tooltip} {ldelim}1{rdelim}{literal}";
-var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pref_inv_wording} {ldelim}1{rdelim}{literal}";
+var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {ldelim}1{rdelim}{literal}";
 var inventory = "{/literal}{$defaults.inventory}{literal}";
 
 

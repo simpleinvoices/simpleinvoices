@@ -1,5 +1,7 @@
 <?php
 
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+
 header("Content-type: text/xml");
 
 //$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
@@ -10,7 +12,7 @@ $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 $baseUrl = Zend_Registry::get('baseUrl');
 
 
-$defaults = getSystemDefaults();
+$defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 $smarty -> assign("defaults",$defaults);
 
 $products = new product();

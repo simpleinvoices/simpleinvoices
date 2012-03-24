@@ -14,6 +14,9 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$SI_PRODUCTS = new SimpleInvoices_Products();
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+
 #get the invoice id
 $master_invoice_id = $_GET['id'];
 
@@ -24,10 +27,10 @@ $customers = getActiveCustomers();
 $preference = getPreference($invoice['preference_id']);
 $billers = getActiveBillers();
 //$taxes = getActiveTaxes(); <--- look into this
-$defaults = getSystemDefaults();
+$defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 $taxes = getTaxes();
 $preferences = getActivePreferences();
-$products = getActiveProducts();
+$products = $SI_PRODUCTS->findActive();
 
 
 for($i=1;$i<=4;$i++) {

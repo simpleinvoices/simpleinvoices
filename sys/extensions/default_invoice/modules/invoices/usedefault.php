@@ -20,8 +20,9 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
 #get the invoice id
-$defaults = getSystemDefaults();
+$defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 $master_customer_id = $_GET['customer_id'];
 $customer = getCustomer($master_customer_id);
 

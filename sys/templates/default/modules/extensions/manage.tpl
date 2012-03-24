@@ -19,7 +19,7 @@
     </span>
 <br />
 <br />
-{if $exts == null}
+{if $exts < 1}
 <p><em>No extensions registered</em></p>
 {else}
 <table id="manageGrid" style="display:none"></table>

@@ -5,14 +5,17 @@ checkLogin();
 #get the invoice id
 $product_id = $_GET['id'];
 
-$product = getProduct($product_id);
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+$SI_PRODUCTS = new SimpleInvoices_Products();
+
+$product = $SI_PRODUCTS->find($product_id);
 
 #get custom field labels
 $customFieldLabel = getCustomFieldLabels();
 $taxes = getActiveTaxes();
 $tax_selected = getTaxRate($product['default_tax_id']);
 
-$smarty -> assign("defaults",getSystemDefaults());
+$smarty -> assign("defaults",$SI_SYSTEM_DEFAULTS->fetchAll());
 $smarty -> assign('product',$product);
 $smarty -> assign('taxes',$taxes);
 $smarty -> assign('tax_selected',$tax_selected);
@@ -22,3 +25,4 @@ $smarty -> assign('pageActive', 'product_manage');
 $subPageActive = $_GET['action'] =="view"  ? "product_view" : "product_edit" ;
 $smarty -> assign('subPageActive', $subPageActive);
 $smarty -> assign('active_tab', '#product');
+?>

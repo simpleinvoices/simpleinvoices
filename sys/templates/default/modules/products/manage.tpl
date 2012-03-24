@@ -23,7 +23,7 @@
     </tr>
 </table>
 
-{if $number_of_rows.count == 0 }
+{if $number_of_rows == 0 }
 
 	<br />
 	<br />

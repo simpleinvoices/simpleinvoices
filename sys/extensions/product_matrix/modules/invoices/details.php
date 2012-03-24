@@ -23,6 +23,8 @@ checkLogin();
 #get the invoice id
 $master_invoice_id = $_GET['invoice'];
 
+$SI_PRODUCTS = new SimpleInvoices_Products();
+
 $invoice = getInvoice($master_invoice_id);
 $invoiceItems = matrix_invoice::getInvoiceItems($master_invoice_id);
 $customers = getActiveCustomers();
@@ -30,7 +32,7 @@ $preference = getPreference($invoice['preference_id']);
 $billers = getActiveBillers();
 $taxes = getActiveTaxes();
 $preferences = getActivePreferences();
-$products = getActiveProducts();
+$products = $SI_PRODUCTS->findActive();
 
 
 for($i=1;$i<=4;$i++) {

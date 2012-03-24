@@ -3,6 +3,7 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
 
 #get custom field labels
 $customFieldLabel = getCustomFieldLabels();
@@ -14,7 +15,7 @@ if (array_key_exists('description', $_POST)) {
     }    
 }
 
-$smarty -> assign("defaults",getSystemDefaults());
+$smarty -> assign("defaults",$SI_SYSTEM_DEFAULTS->fetchAll());
 $smarty -> assign('customFieldLabel',$customFieldLabel);
 if (isset($save)) {
     $smarty -> assign('save',$save);

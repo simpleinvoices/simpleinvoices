@@ -16,7 +16,7 @@
 *	http://www.simpleinvoices.org
 */
 *}
-{if $number_of_rows == null }
+{if $number_of_rows == 0}
 	<p><em>{$LANG.no_products}</em></p>
 {else}
  {include file='../modules/products/manage.js.php' LANG=$LANG}

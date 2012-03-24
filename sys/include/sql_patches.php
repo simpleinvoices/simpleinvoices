@@ -1,5 +1,7 @@
 <?php
 
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+
 	$patch['0']['name'] = "Start";
 	$patch['0']['patch'] = "SHOW TABLES LIKE 'test'";
 	$patch['0']['date'] = "20060514";
@@ -1269,7 +1271,7 @@ ADD `language` VARCHAR( 255 ) NULL ;";
     $patch['208']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `index_group` INT( 11 ) NOT NULL ;";
     $patch['208']['date'] = "20090826";    
 
-    $defaults = getSystemDefaults();
+    $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
     $patch['209']['name'] = "Populate the status, locale, and language fields in preferences table";
     $patch['209']['patch'] = "UPDATE `".TB_PREFIX."preferences` SET index_group = '".$defaults['preference']."' ;";
     $patch['209']['date'] = "20090826";    

@@ -15,6 +15,8 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$SI_PRODUCTS = new SimpleInvoices_Products();
+
 $pageActive = "invoices";
 
 $smarty->assign('pageActive', $pageActive);
@@ -44,8 +46,28 @@ if ($_POST['action'] == "insert" ) {
     */
 
 	if($type==1 && $saved) {
-		insertProduct(0,0);
-		$product_id = lastInsertId();
+		(isset($_POST['enabled'])) ? $enabled = $_POST['enabled']  : $enabled = $enabled ;
+        (isset($_POST['visible'])) ? $visible = $_POST['visible']  : $visible = $visible ;
+        
+        $data = array(
+            'description'       => $_POST['description'],
+            'detail'            => $_POST['detail'],
+            'unit_price'        => $_POST['unit_price'],
+            'default_tax_id'    => $_POST['default_tax_id'],
+            'default_tax_id_2'  => NULL,
+            'cost'              => $_POST['cost'],
+            'reorder_level'     => $_POST['reoder_level'],
+            'custom_field1'     => $_POST['custom_field1'],
+            'custom_field2'     => $_POST['custom_field2'],
+            'custom_field3'     => $_POST['custom_field3'],
+            'custom_field4'     => $_POST['custom_field4'],
+            'notes'             => $_POST['notes'],
+            'enabled'           => 0,
+            'visible'           => 0
+        );
+        
+        $SI_PRODUCTS->insert($data);
+		$product_id = $SI_PRODUCTS->getLastInsertId();
 
 		if (matrix_invoice::insertInvoiceItem($invoice_id,1,$product_id,$_POST['tax_id'],$_POST['description'])) {
 			//$saved = true;
@@ -58,8 +80,26 @@ if ($_POST['action'] == "insert" ) {
 		for($i=0;!empty($_POST["quantity$i"]) && $i < $_POST['max_items']; $i++) {
 
 			if($type == 4) {
-				insertProductComplete(0,0,$_POST["description$i"],$_POST["price$i"],NULL,NULL,NULL,NULL,$_POST["notes$i"]);
-				$product = lastInsertId();
+                $data = array(
+                    'description'       => $_POST["description$i"],
+                    'detail'            => NULL,
+                    'unit_price'        => $_POST["price$i"],
+                    'default_tax_id'    => NULL,
+                    'default_tax_id_2'  => NULL,
+                    'cost'              => NULL,
+                    'reorder_level'     => NULL,
+                    'custom_field1'     => NULL,
+                    'custom_field2'     => NULL,
+                    'custom_field3'     => NULL,
+                    'custom_field4'     => NULL,
+                    'notes'             => $_POST["notes$i"],
+                    'enabled'           => 0,
+                    'visible'           => 0
+                );
+                
+                
+                $SI_PRODUCTS->insert($data);
+				$product = $SI_PRODUCTS->getLastInsertId();
 			}
 			else {
 				$product = $_POST["products$i"];

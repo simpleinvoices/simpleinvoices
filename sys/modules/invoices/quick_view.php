@@ -19,6 +19,8 @@
 
 checkLogin();
 
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+
 #get the invoice id
 $invoice_id = $_GET['id'];
 
@@ -30,7 +32,7 @@ $invoice_type =  getInvoiceType($invoice['type_id']);
 $customer = customer::get($invoice['customer_id']);
 $biller = getBiller($invoice['biller_id']);
 $preference = getPreference($invoice['preference_id']);
-$defaults = getSystemDefaults();
+$defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 $invoiceItems = invoice::getInvoiceItems($invoice_id);
 
     $eway_check = new eway();

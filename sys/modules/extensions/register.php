@@ -3,26 +3,30 @@
 checkLogin();
 
 
-$extension_id = $_GET['id'];
-$extension_name = $_GET['name'];
+if (isset($_GET['id'])) $extension_id = $_GET['id'];
+else $extension_id = NULL;
+
+if (isset($_GET['name'])) $extension_name = $_GET['name'];
+else $extension_name = NULL;
+
 $action = $_GET['action'];
-$extension_desc = $_GET['description'];
+
+if (isset($_GET['description'])) $extension_desc = $_GET['description'];
+else $extension_desc = NULL;
+
+
 
 if ($extension_id == null) {	// extension not yet registered
-
+    $count = 0;
 } else {
-  //retrieve name and description from DB
-  $sql = "SELECT name, description FROM ".TB_PREFIX."extensions WHERE id = :id;";
-  $sth = dbQuery($sql,':id',$extension_id);
-  $info = $sth->fetchAll(PDO::FETCH_ASSOC);
+    $extensions = new SimpleInvoices_Extensions();
+    $info = $extensions->find($extension_id);
+    $extension_name = $info['name'];
+    $extension_desc = $info['description'];
 
-  $extension_name = $info[0]['name'];
-  $extension_desc = $info[0]['description'];
-
-  $sql = "SELECT * FROM ".TB_PREFIX."system_defaults WHERE extension_id = :id;";
-  $sth = dbQuery($sql,':id',$extension_id);
-  $info = $sth->fetchAll(PDO::FETCH_ASSOC);
-  $count = count($info);
+    $system_defaults = new SimpleInvoices_SystemDefaults();
+    $extension_defaults = $system_defaults->fetchAllForExtension($extension_id);
+    $count = count($extension_defaults);
 }
 
 $smarty-> assign('id',$extension_id);
@@ -32,3 +36,4 @@ $smarty-> assign('count',$count);
 $smarty-> assign('description',$extension_desc);
 $smarty-> assign('pageActive','extensions');
 $smarty-> assign('active_tab','#settings');
+?>

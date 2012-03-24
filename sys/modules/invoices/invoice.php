@@ -18,18 +18,22 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$SI_PRODUCTS = new SimpleInvoices_Products();
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
 
 $billers = getActiveBillers();
 $customers = getActiveCustomers();
 $taxes = getActiveTaxes();
-$products = getActiveProducts();
+$products = $SI_PRODUCTS->findActive();
 $preferences = getActivePreferences();
-$defaults = getSystemDefaults();
+$defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 
 if ($billers == null OR $customers == null OR $taxes == null OR $products == null OR $preferences == null)
 {
     $first_run_wizard =true;
     $smarty -> assign("first_run_wizard",$first_run_wizard);
+} else {
+    $smarty -> assign("first_run_wizard",false);
 }
 
 $defaults['biller'] = (isset($_GET['biller'])) ? $_GET['biller'] : $defaults['biller'];
@@ -61,3 +65,4 @@ $smarty -> assign("defaultCustomerID", $defaultCustomerID);
 $smarty -> assign("defaults",$defaults);
 
 $smarty -> assign('active_tab', '#money');
+?>

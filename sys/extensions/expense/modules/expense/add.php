@@ -3,20 +3,18 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+
 $expense_add = expense::add();
 
-$defaults = getSystemDefaults();
+$defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 
 $taxes = getActiveTaxes();
 
 //if valid then do save
 if ($_POST['expense_account_id'] != "" ) {
-	include("./extensions/expense/modules/expense/save.php");
+	include("sys/extensions/expense/modules/expense/save.php");
 }
-
-$defaults = getSystemDefaults();
-
-
 
 $smarty -> assign('save',$save);
 $smarty -> assign('taxes',$taxes);

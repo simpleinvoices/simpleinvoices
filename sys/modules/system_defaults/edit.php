@@ -3,9 +3,11 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+
 #system defaults query
 
-$defaults = getSystemDefaults();
+$defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 
 if ($_GET["submit"] == "line_items") {
 

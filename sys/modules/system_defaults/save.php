@@ -4,17 +4,13 @@ checkLogin();
 
 # Deal with op and add some basic sanity checking
 
-$saved = false;
-
-
 error_log($_POST['name']."  ".$_POST['value']);
 
-//echo $_POST['value']."VAL";
-if (isset($_POST['op']) && $_POST['op'] == 'update_system_defaults' ) {
+$saved = false;
 
-	if(updateDefault($_POST['name'],$_POST['value'])) {
-		$saved = true;
-	}
+if (isset($_POST['op']) && $_POST['op'] == 'update_system_defaults' ) {
+    $system_defaults = new SimpleInvoices_SystemDefaults();
+    $saved = $system_defaults->update($_POST['name'], $_POST['value']);
 }
 $smarty -> assign("saved",$saved);
 

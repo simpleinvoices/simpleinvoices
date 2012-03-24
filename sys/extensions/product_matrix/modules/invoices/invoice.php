@@ -18,13 +18,15 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$SI_PRODUCTS = new SimpleInvoices_Products();
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
 
 $billers = getActiveBillers();
 $customers = getActiveCustomers();
 $taxes = getTaxes();
-$products = getActiveProducts();
+$products = $SI_PRODUCTS->findActive();
 $preferences = getActivePreferences();
-$defaults = getSystemDefaults();
+$defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 
 
 $defaultBiller = getDefaultBiller();

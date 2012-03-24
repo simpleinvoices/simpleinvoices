@@ -240,13 +240,14 @@ class export
             }
 			case "invoice":
 			{
-
+                $SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+                
 				$invoice = invoice::select($this->id);
  			    $invoice_number_of_taxes = numberOfTaxesForInvoice($this->id);
 				$customer = customer::get($invoice['customer_id']);
 				$biller = biller::select($invoice['biller_id']);
 				$preference = getPreference($invoice['preference_id']);
-				$defaults = getSystemDefaults();
+				$defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 				$logo = getLogo($biller);
 				$logo = str_replace(" ", "%20", $logo);
 				$invoiceItems = invoice::getInvoiceItems($this->id);

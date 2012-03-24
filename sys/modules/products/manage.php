@@ -2,12 +2,11 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-//$products = getProducts();
-$sql = "SELECT count(*) as count FROM ".TB_PREFIX."products";
-$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
-$number_of_rows  = $sth->fetch(PDO::FETCH_ASSOC);
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+$SI_PRODUCTS = new SimpleInvoices_Products();
+$number_of_rows = $SI_PRODUCTS->getCount();
 
-$defaults = getSystemDefaults();
+$defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 $smarty -> assign("defaults",$defaults);
 $smarty -> assign("number_of_rows",$number_of_rows);
 

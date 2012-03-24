@@ -91,7 +91,9 @@ class matrix_invoice
 	}
 
 	function insertInvoiceItem($invoice_id,$quantity,$product_id,$tax_id,$description="",$attr1="",$attr2="",$attr3="", $unit_price=""  ) {
-		
+	
+        $SI_PRODUCTS = new SimpleInvoices_Products();
+    
 		/*strip attri of unneeded info - only need the last section - the attribute id*/
 		
 			$attr1 = explode("-",$attr1);
@@ -108,7 +110,7 @@ class matrix_invoice
 			//echo "<br /><br />";
 
 		$tax = getTaxRate($tax_id);
-		$product = getProduct($product_id);
+		$product = $SI_PRODUCTS->find($product_id);
 		
 		($unit_price =="") ? $product_unit_price = $product['unit_price'] : $product_unit_price = $unit_price ;
 		//print_r($product);
@@ -145,7 +147,9 @@ class matrix_invoice
 	}
 
 	function updateInvoiceItem($id,$quantity,$product_id,$tax_id,$description,$attr1="",$attr2="",$attr3="", $unit_price="") {
-
+        
+        $SI_PRODUCTS = new SimpleInvoices_Products();
+        
 			$attr1 = explode("-",$attr1);
 			$attr1 = $attr1[2];
 			//echo "Attr1: ".$attr1." ";
@@ -160,7 +164,7 @@ class matrix_invoice
 			//echo "<br /><br />";
 
 
-		$product = getProduct($product_id);
+		$product = $SI_PRODUCTS->find($product_id);
 		($unit_price == "") ? $product_unit_price = $product['unit_price'] : $product_unit_price = $unit_price ;
 		$tax = getTaxRate($tax_id);
 		

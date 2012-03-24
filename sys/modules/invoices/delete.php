@@ -18,11 +18,13 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+
 #get the invoice id
 $invoice_id = $_GET['id'];
 $invoice = getInvoice($invoice_id);
 $preference = getPreference($invoice['preference_id']);
-$defaults = getSystemDefaults();
+$defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 $invoicePaid = calc_invoice_paid($invoice_id);
 $invoiceItems = invoice::getInvoiceItems($invoice_id);
 
@@ -33,7 +35,7 @@ $smarty -> assign("invoicePaid",$invoicePaid);
 $smarty -> assign("invoiceItems",$invoiceItems);
 
 /*If delete is disabled - dont allow people to view this page*/
-if ( $defaults['delete'] == 'N' ) {
+if ( $defaults['delete'] === 0 ) {
 	die('Invoice deletion has been disabled, you are not supposed to be here');
 }
 
@@ -83,3 +85,4 @@ if ( ($_GET['stage'] == 2 ) AND ($_POST['doDelete'] == 'y') ) {
 
 $smarty -> assign('pageActive', 'invoice');
 $smarty -> assign('active_tab', '#money');
+?>

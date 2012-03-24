@@ -103,9 +103,14 @@ class SimpleInvoices_Products extends SimpleInvoices_Db_Table_Abstract
         //$select->where('enabled');
         $select->where('domain_id = ?', $auth_session->domain_id);
         
-        $rows = $this->fetchAll($select);
+        $row = $this->getAdapter()->fetchRow($select);
         
-        return($rows[0]->amount);
+        return($row['amount']);
+    }
+    
+    public function getLastInsertId()
+    {
+        return $this->getAdapter()->lastInsertId();
     }
     
     /**

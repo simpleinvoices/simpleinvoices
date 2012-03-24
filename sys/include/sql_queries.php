@@ -638,37 +638,6 @@ function getActivePaymentTypes() {
 	return $paymentTypes;
 }
 
-function getProduct($id) {
-	// ToDo: Cleanup
-    $products = new SimpleInvoices_Products();
-    return $products->find($id);
-}
-
-
-function insertProductComplete($enabled=1,$visible=1,$description, $unit_price, $custom_field1 = NULL, $custom_field2, $custom_field3, $custom_field4, $notes) 
-{
-    $data = array(
-        'description'       => $description,
-        'detail'            => NULL,
-        'unit_price'        => $unit_price,
-        'default_tax_id'    => NULL,
-        'default_tax_id_2'  => NULL,
-        'cost'              => NULL,
-        'reorder_level'     => NULL,
-        'custom_field1'     => $custom_field1,
-        'custom_field2'     => $custom_field2,
-        'custom_field3'     => $custom_field3,
-        'custom_field4'     => $custom_field4,
-        'notes'             => $notes,
-        'enabled'           => $enabled,
-        'visible'           => $visible
-    );
-	
-    $products = new SimpleInvoices_Products();
-    return $products->insert($data);
-}
-
-
 function insertProduct($enabled=1,$visible=1) {
 	(isset($_POST['enabled'])) ? $enabled = $_POST['enabled']  : $enabled = $enabled ;
     (isset($_POST['visible'])) ? $visible = $_POST['visible']  : $visible = $visible ;
@@ -716,18 +685,6 @@ function updateProduct()
 	
 	$products = new SimpleInvoices_Products();
     return $products->update($data, $_GET['id']);
-}
-
-function getProducts() {
-	// ToDo: Cleanup
-    $products = new SimpleInvoices_Products();
-    return $products->fetchAll();
-}
-
-function getActiveProducts() {
-	// ToDo: Cleanup
-    $products = new SimpleInvoices_Products();
-    return $products->findActive();
 }
 
 function getTaxes() {
@@ -801,41 +758,6 @@ function getDefaultTax() {
 	$sql = "SELECT * FROM ".TB_PREFIX."tax t, ".TB_PREFIX."system_defaults s WHERE (s.name = 'tax' AND t.tax_id = s.value) AND t.domain_id = :domain_id";
 	$sth = dbQuery($sql,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 	return $sth->fetch();
-}
-
-function getDefaultDelete() {
-	global $LANG;
-	
-    $system_defaults = new SimpleInvoices_SystemDefaults();
-    $value = $system_defaults->findByName('delete');
-    
-    $value = $value==1?$LANG['enabled']:$LANG['disabled'];
-    return $value;
-}
-
-function getDefaultLogging() {
-	global $LANG;
-	
-    $system_defaults = new SimpleInvoices_SystemDefaults();
-    $value = $system_defaults->findByName('logging');
-    
-	$value = $value==1?$LANG['enabled']:$LANG['disabled'];
-	return $value;
-}
-
-function getDefaultInventory() {
-	global $LANG;
-	
-    $system_defaults = new SimpleInvoices_SystemDefaults();
-    $value = $system_defaults->findByName('inventory');
-    
-    $value = $value==1?$LANG['enabled']:$LANG['disabled'];
-    return $value;
-}
-
-function setDefaultLanguage($language) {
-    $system_defaults = new SimpleInvoices_SystemDefaults();
-    return $system_defaults->update('language', $language);
 }
 
 function getInvoiceTotal($invoice_id) {
@@ -985,36 +907,6 @@ function taxesGroupedForInvoiceItem($invoice_item_id)
 
 	return $result;
 
-}
-
-function setStatusExtension($extension_id, $status=2) {
-    $extensions = new SimpleInvoices_Extensions();
-
-	//status=2 = toggle status
-	if ($status == 2) {
-		return $extensions->toggleStatus($extension_id);
-	} elseif ($status == 0) {
-        return $extensions->setStatus(false, $extension_id);
-    } else {
-        return $extensions->setStatus(true, $extension_id);    
-    }
-}
-
-function getExtensionID($extension_name = "none") 
-{
-    $extensions = new SimpleInvoices_Extensions();
-    return $extensions->findByName($extension_name);
-}
-
-function getSystemDefaults() 
-{
-    $system_defaults = new SimpleInvoices_SystemDefaults();
-    return $system_defaults->fetchAll();
-}
-
-function updateDefault($name,$value,$extension_name="core") {
-	$system_defaults = new SimpleInvoices_SystemDefaults();
-    return $system_defaults->update($name, $value, $extension_name);
 }
 
 function getInvoiceType($id) {

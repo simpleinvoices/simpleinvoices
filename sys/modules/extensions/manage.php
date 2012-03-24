@@ -22,11 +22,12 @@ function getExtensions() {
 isset($_GET['id']) && $extension_id = $_GET['id'];
 isset($_GET['action']) && $action = $_GET['action'];
 
+$extensions = new SimpleInvoices_Extensions();
 if ($action == 'toggle') {
-	setStatusExtension($extension_id) or die(htmlsafe("Something went wrong with the status change!"));
+    $extensions->toggleStatus($extension_id) or die(htmlsafe("Something went wrong with the status change!"));
 }
 
-$smarty -> assign("exts",getExtensions());
+$smarty -> assign("exts",$extensions->getCount());
 
 $smarty -> assign('pageActive', 'setting');
 $smarty -> assign('active_tab', '#setting');

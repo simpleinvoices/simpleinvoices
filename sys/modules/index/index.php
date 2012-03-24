@@ -3,6 +3,9 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$SI_PRODUCTS = new SimpleInvoices_Products();
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+
 $debtor = getTopDebtor();
 $customer = getTopCustomer();
 $biller = getTopBiller();
@@ -10,9 +13,9 @@ $biller = getTopBiller();
 $billers = getBillers();
 $customers = customer::get_all();
 $taxes = getTaxes();
-$products = getProducts();
+$products = $SI_PRODUCTS->fetchAll();
 $preferences = getPreferences();
-$defaults = getSystemDefaults();
+$defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 
 if ($billers == null OR $customers == null OR $taxes == null OR $products == null OR $preferences == null)
 {

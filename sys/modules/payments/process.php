@@ -4,6 +4,8 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+
 $maxInvoice = maxInvoice();
 
 jsBegin();
@@ -33,7 +35,7 @@ else {
 }
 $customer = customer::get($invoice['customer_id']);
 $biller = getBiller($invoice['biller_id']);
-$defaults = getSystemDefaults();
+$defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 $pt = getPaymentType($defaults['payment_type']);
 
 $invoices = new invoice();

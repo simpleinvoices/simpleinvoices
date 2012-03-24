@@ -22,11 +22,9 @@ if(isset($_POST['submit'])) {
 	);
 }
 else {
-
-$products = getActiveProducts();
-
-
-$smarty -> assign("products",$products);
+    $SI_PRODUCTS = new SimpleInvoices_Products();
+    $products = $SI_PRODUCTS->findActive();
+    $smarty -> assign("products",$products);
 }
 
 $type = $_GET['type'];
@@ -34,3 +32,4 @@ $smarty -> assign("type",$type);
 
 $smarty -> assign('pageActive', 'invoice');
 $smarty -> assign('active_tab', '#money');
+?>

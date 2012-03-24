@@ -2,6 +2,8 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+
 #get the invoice id
 $expense_id = $_GET['id'];
 
@@ -19,7 +21,7 @@ $detail['status_wording'] = $expense['status']==1?$LANG['paid']:$LANG['not_paid'
 
 $taxes = getActiveTaxes();
 #$tax_selected = getTaxRate($product['default_tax_id']);
-$defaults = getSystemDefaults();
+$defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 
 $smarty -> assign('expense',$expense);
 $smarty -> assign('detail',$detail);

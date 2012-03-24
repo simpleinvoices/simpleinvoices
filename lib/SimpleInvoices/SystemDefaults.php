@@ -48,6 +48,34 @@ class SimpleInvoices_SystemDefaults extends SimpleInvoices_Db_Table_Abstract
     }
     
     /**
+    * Fetch all system defaults for a given extension
+    * 
+    */
+    public function fetchAllForExtension($extension_id)
+    {
+        $tbl_extensions = Zend_Registry::get('tbl_prefix') . 'extensions';
+        $auth_session = Zend_Registry::get('auth_session');
+        
+        $select = $this->select();
+        $select->from($this->_name, array('name', 'value'))
+            ->joinInner($tbl_extensions, $tbl_extensions.'.id = ' . $this->_name . '.extension_id', array());
+        $select->where($tbl_extensions . ".enabled = 1");
+        $select->where($this->_name . '.domain_id = ?', $auth_session->domain_id);
+        $select->where($this->_name . '.extension_id = ?', $extension_id);
+        $select->order($this->_name . '.extension_id ASC'); // order is important for overriding settings
+        
+        $result = $this->getAdapter()->fetchAll($select);
+        
+        $default = array();
+        
+        foreach($result as $row) {
+            $default[$row['name']] = $row['value'];    
+        }
+        
+        return $default;
+    }
+    
+    /**
     * Get a system default value
     * 
     * @param mixed $name

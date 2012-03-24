@@ -2,6 +2,8 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+
 //if valid then do save
 if ($_POST['p_description'] != "" ) {
 	include("sys/modules/preferences/save.php");
@@ -14,7 +16,7 @@ $preference = getPreference($preference_id);
 $index_group = getPreference($preference['index_group']);
 
 $preferences = getActivePreferences();
-$defaults = getSystemDefaults();
+$defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 $status = array(array('id'=>'0','status'=>$LANG['draft']), array('id'=>'1','status'=>$LANG['real']));
 
 $smarty->assign('preference',$preference);

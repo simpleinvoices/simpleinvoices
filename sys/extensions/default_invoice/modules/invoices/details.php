@@ -23,15 +23,18 @@ IsSet($_GET['template']) && $master_invoice_id = $_GET['template'];
 $invoice = getInvoice($master_invoice_id);
 IsSet($_GET['template']) && $invoice['id']=null;
 
+$SI_PRODUCTS = new SimpleInvoices_Products();
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+
 $invoiceItems = invoice::getInvoiceItems($master_invoice_id);
 $customers = getActiveCustomers();
 $preference = getPreference($invoice['preference_id']);
 $billers = getActiveBillers();
 //$taxes = getActiveTaxes(); <--- look into this
-$defaults = getSystemDefaults();
+$defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 $taxes = getTaxes();
 $preferences = getActivePreferences();
-$products = getActiveProducts();
+$products = $SI_PRODUCTS->findActive();
 
 
 for($i=1;$i<=4;$i++) {

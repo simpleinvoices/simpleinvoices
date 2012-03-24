@@ -2,10 +2,12 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$SI_PRODUCTS = new SimpleInvoices_Products();
+
 #get the invoice id
 $product_id = $_GET['id'];
 
-$product = getProduct($product_id);
+$product = $SI_PRODUCTS->find($product_id);
 
 #get custom field labels
 $customFieldLabel = getCustomFieldLabels();

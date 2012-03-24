@@ -4,8 +4,8 @@
 checkLogin();
 
 //gets the long language name out of the short name
-$system_defaults = new SimpleInvoices_SystemDefaults();
-$lang = $system_defaults->findByName('language');
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+$lang = $SI_SYSTEM_DEFAULTS->findByName('language');
 $languages = getLanguageList($include_dir . 'sys/lang/');
 foreach($languages as $language) {
 	if($language->shortname == $lang) {
@@ -14,16 +14,28 @@ foreach($languages as $language) {
 	}
 }
 
+// Default delete
+$defaults['delete'] = $system_defaults->findByName('delete');
+$defaults['delete'] = $defaults['delete']==1?$LANG['enabled']:$LANG['disabled'];
 
-$smarty -> assign("defaults", getSystemDefaults());
+// Default Logging
+$defaults['logging'] = $system_defaults->findByName('logging');
+$defaults['logging'] = $defaults['logging']==1?$LANG['enabled']:$LANG['disabled'];
+
+// Default inventory
+$defaults['inventory'] = $system_defaults->findByName('inventory');
+$defaults['inventory'] = $defaults['inventory']==1?$LANG['enabled']:$LANG['disabled'];
+
+
+$smarty -> assign("defaults", $SI_SYSTEM_DEFAULTS->fetchAll());
 $smarty -> assign("defaultBiller", getDefaultBiller());
 $smarty -> assign("defaultCustomer", getDefaultCustomer());
 $smarty -> assign("defaultTax", getDefaultTax());
 $smarty -> assign("defaultPreference", getDefaultPreference());
 $smarty -> assign("defaultPaymentType", getDefaultPaymentType());
-$smarty -> assign("defaultDelete", getDefaultDelete());
-$smarty -> assign("defaultLogging", getDefaultLogging());
-$smarty -> assign("defaultInventory", getDefaultInventory());
+$smarty -> assign("defaultDelete", $defaults['delete']);
+$smarty -> assign("defaultLogging", $defaults['logging']);
+$smarty -> assign("defaultInventory", $defaults['inventory']);
 $smarty -> assign("defaultLanguage", $lang);
 
 $smarty -> assign('pageActive', 'system_default');

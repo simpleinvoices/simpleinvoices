@@ -44,9 +44,12 @@ if (!empty($_POST['value'])) {
     $smarty -> assign("LANG",getLanguageArray());
 }
 
+// System defaults are needed in several places
+$system_defaults = new SimpleInvoices_SystemDefaults();
+
 if (!empty($_POST['user']) && !empty($_POST['pass']))
-{
-    $errorMessage = setDefaultLanguage($_POST['value']);
+{ 
+    $errorMessage = $system_defaults->update('language', $language);
 ////	require_once 'Zend/Auth/Adapter/DbTable.php';
 
 	// Configure the instance with constructor parameters...
@@ -131,7 +134,6 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 
 $default = "language";
 $languages = getLanguageList($include_dir . 'sys/lang/');
-$system_defaults = new SimpleInvoices_SystemDefaults();
 $lang = $system_defaults->findByName('language');
 
 usort($languages,"compareNameIndex");
