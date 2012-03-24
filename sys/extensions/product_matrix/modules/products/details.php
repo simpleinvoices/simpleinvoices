@@ -2,7 +2,7 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$SI_PRODUCTS = new SimpleInvoices_Products();
+$SI_PRODUCTS = new SimpleInvoices_Db_Table_Products();
 
 #get the invoice id
 $product_id = $_GET['id'];

@@ -3,8 +3,8 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$SI_PRODUCTS = new SimpleInvoices_Products();
-$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+$SI_PRODUCTS = new SimpleInvoices_Db_Table_Products();
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
 
 $debtor = getTopDebtor();
 $customer = getTopCustomer();

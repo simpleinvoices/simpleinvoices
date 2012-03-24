@@ -23,8 +23,8 @@ IsSet($_GET['template']) && $master_invoice_id = $_GET['template'];
 $invoice = getInvoice($master_invoice_id);
 IsSet($_GET['template']) && $invoice['id']=null;
 
-$SI_PRODUCTS = new SimpleInvoices_Products();
-$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+$SI_PRODUCTS = new SimpleInvoices_Db_Table_Products();
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
 
 $invoiceItems = invoice::getInvoiceItems($master_invoice_id);
 $customers = getActiveCustomers();

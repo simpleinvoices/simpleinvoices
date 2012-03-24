@@ -302,7 +302,7 @@ $siUrl = getURL();
 
 include_once($include_dir . "sys/include/backup.lib.php");
 
-$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
 $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 $smarty->assignGlobal("defaults",$defaults);
 $smarty->assignGlobal('baseUrl', $config->resources->frontController->baseUrl);

@@ -5,8 +5,8 @@ checkLogin();
 #get the invoice id
 $product_id = $_GET['id'];
 
-$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
-$SI_PRODUCTS = new SimpleInvoices_Products();
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
+$SI_PRODUCTS = new SimpleInvoices_Db_Table_Products();
 
 $product = $SI_PRODUCTS->find($product_id);
 

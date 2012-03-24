@@ -19,7 +19,7 @@
 
 checkLogin();
 
-$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
 
 #get the invoice id
 $invoice_id = $_GET['id'];

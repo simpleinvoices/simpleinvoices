@@ -9,7 +9,7 @@ error_log($_POST['name']."  ".$_POST['value']);
 $saved = false;
 
 if (isset($_POST['op']) && $_POST['op'] == 'update_system_defaults' ) {
-    $system_defaults = new SimpleInvoices_SystemDefaults();
+    $system_defaults = new SimpleInvoices_Db_Table_SystemDefaults();
     $saved = $system_defaults->update($_POST['name'], $_POST['value']);
 }
 $smarty -> assign("saved",$saved);

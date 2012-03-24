@@ -3,7 +3,7 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$SI_PAYMENT_TYPES = new SimpleInvoices_PaymentTypes();
+$SI_PAYMENT_TYPES = new SimpleInvoices_Db_Table_PaymentTypes();
 
 $paymentTypes = $SI_PAYMENT_TYPES->fetchAll();
 

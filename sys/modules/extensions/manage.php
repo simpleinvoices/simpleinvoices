@@ -22,7 +22,7 @@ function getExtensions() {
 isset($_GET['id']) && $extension_id = $_GET['id'];
 isset($_GET['action']) && $action = $_GET['action'];
 
-$extensions = new SimpleInvoices_Extensions();
+$extensions = new SimpleInvoices_Db_Table_Extensions();
 if ($action == 'toggle') {
     $extensions->toggleStatus($extension_id) or die(htmlsafe("Something went wrong with the status change!"));
 }

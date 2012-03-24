@@ -1,6 +1,6 @@
 <?php
 
-$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
 
 	$patch['0']['name'] = "Start";
 	$patch['0']['patch'] = "SHOW TABLES LIKE 'test'";

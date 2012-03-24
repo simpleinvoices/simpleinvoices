@@ -16,7 +16,7 @@
  * 
  */
 /*
-$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
 
 #get the invoice id
 $invoiceID = $_GET['id'];

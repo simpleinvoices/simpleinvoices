@@ -1,6 +1,6 @@
 <?php
 
-$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
 
 header("Content-type: text/xml");
 

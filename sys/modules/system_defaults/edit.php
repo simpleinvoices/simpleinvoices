@@ -3,8 +3,8 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
-$SI_PAYMENT_TYPES = new SimpleInvoices_PaymentTypes();
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
+$SI_PAYMENT_TYPES = new SimpleInvoices_Db_Table_PaymentTypes();
 
 #system defaults query
 
@@ -297,7 +297,7 @@ else if ($_GET['submit'] == "logging") {
 else if($_GET['submit'] == "language") {
     $default = "language";
     $languages = getLanguageList($include_dir . 'sys/lang/');
-    $system_defaults = new SimpleInvoices_SystemDefaults();
+    $system_defaults = new SimpleInvoices_Db_Table_SystemDefaults();
     $lang = $system_defaults->findByName('language');
 
     usort($languages,"compareNameIndex");

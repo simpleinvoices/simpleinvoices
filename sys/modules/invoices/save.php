@@ -14,7 +14,7 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$SI_PRODUCTS = new SimpleInvoices_Products();
+$SI_PRODUCTS = new SimpleInvoices_Db_Table_Products();
 
 $smarty -> assign('pageActive', 'invoice_new');
 $smarty -> assign('active_tab', '#money');

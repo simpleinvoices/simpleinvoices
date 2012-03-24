@@ -204,7 +204,7 @@ class export
 			}
             case "payment":
             {
-                $SI_PAYMENT_TYPES = new SimpleInvoices_PaymentTypes();
+                $SI_PAYMENT_TYPES = new SimpleInvoices_Db_Table_PaymentTypes();
                 
                 $payment = getPayment($this->id);
 
@@ -242,7 +242,7 @@ class export
             }
 			case "invoice":
 			{
-                $SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+                $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
                 
 				$invoice = invoice::select($this->id);
  			    $invoice_number_of_taxes = numberOfTaxesForInvoice($this->id);

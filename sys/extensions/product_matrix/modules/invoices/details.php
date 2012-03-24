@@ -23,7 +23,7 @@ checkLogin();
 #get the invoice id
 $master_invoice_id = $_GET['invoice'];
 
-$SI_PRODUCTS = new SimpleInvoices_Products();
+$SI_PRODUCTS = new SimpleInvoices_Db_Table_Products();
 
 $invoice = getInvoice($master_invoice_id);
 $invoiceItems = matrix_invoice::getInvoiceItems($master_invoice_id);

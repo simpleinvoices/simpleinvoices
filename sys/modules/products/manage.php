@@ -2,8 +2,8 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
-$SI_PRODUCTS = new SimpleInvoices_Products();
+$SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
+$SI_PRODUCTS = new SimpleInvoices_Db_Table_Products();
 $number_of_rows = $SI_PRODUCTS->getCount();
 
 $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();

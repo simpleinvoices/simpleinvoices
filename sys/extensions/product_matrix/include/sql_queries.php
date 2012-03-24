@@ -92,7 +92,7 @@ class matrix_invoice
 
 	function insertInvoiceItem($invoice_id,$quantity,$product_id,$tax_id,$description="",$attr1="",$attr2="",$attr3="", $unit_price=""  ) {
 	
-        $SI_PRODUCTS = new SimpleInvoices_Products();
+        $SI_PRODUCTS = new SimpleInvoices_Db_Table_Products();
     
 		/*strip attri of unneeded info - only need the last section - the attribute id*/
 		
@@ -148,7 +148,7 @@ class matrix_invoice
 
 	function updateInvoiceItem($id,$quantity,$product_id,$tax_id,$description,$attr1="",$attr2="",$attr3="", $unit_price="") {
         
-        $SI_PRODUCTS = new SimpleInvoices_Products();
+        $SI_PRODUCTS = new SimpleInvoices_Db_Table_Products();
         
 			$attr1 = explode("-",$attr1);
 			$attr1 = $attr1[2];

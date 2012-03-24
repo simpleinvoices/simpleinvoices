@@ -45,7 +45,7 @@ if (!empty($_POST['value'])) {
 }
 
 // System defaults are needed in several places
-$system_defaults = new SimpleInvoices_SystemDefaults();
+$system_defaults = new SimpleInvoices_Db_Table_SystemDefaults();
 
 if (!empty($_POST['user']) && !empty($_POST['pass']))
 { 

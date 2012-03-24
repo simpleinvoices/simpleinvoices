@@ -176,7 +176,7 @@ class index
         global $db;
         global $auth_session;
 
-        $SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+        $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
 	    $defaults = $si_system_defaults->fetchAll();
 	#
 	#if billnum on  & id = null then check the default incremetn id for that sub_node and use that
@@ -244,7 +244,7 @@ class index
         $next = index::next($node,$sub_node,$sub_node_2);
         $current = index::select($node,$sub_node,$sub_node_2);
 	#echo "next:".$next."current:".$current;
-    $SI_SYSTEM_DEFAULTS = new SimpleInvoices_SystemDefaults();
+    $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
     $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
         
 	global $db;

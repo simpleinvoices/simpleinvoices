@@ -22,7 +22,7 @@ if(isset($_POST['submit'])) {
 	);
 }
 else {
-    $SI_PRODUCTS = new SimpleInvoices_Products();
+    $SI_PRODUCTS = new SimpleInvoices_Db_Table_Products();
     $products = $SI_PRODUCTS->findActive();
     $smarty -> assign("products",$products);
 }
