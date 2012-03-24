@@ -226,7 +226,8 @@
 	          href: "index.php?module=export&view=invoice&id="+row_number+"&format=file&filetype="+spreadsheet
 	        });							
 		 $("#export_dialog").dialog({ 
-		   modal: true, 
+		   modal: true,
+           resizable:false, 
 		   buttons: { 
 	        "Cancel": function() { 
 	            $(this).dialog("destroy"); 

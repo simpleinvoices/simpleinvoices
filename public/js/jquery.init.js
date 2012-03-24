@@ -18,7 +18,8 @@ $(document).ready(function(){
     $('#invoice_dialog').click(function() { 
 	    $("#dialog").show();  								
 		$("#dialog").dialog({ 
-		    modal: true, 
+		    modal: true,
+            resizable:false, 
 			buttons: { 
 			    "Cancel": function() { 
 			        $(this).dialog("destroy"); 

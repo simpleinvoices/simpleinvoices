@@ -17,7 +17,7 @@
 	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}js/jquery.init.js"></script>
              
     <link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}css/default/jquery-ui/smoothness/jquery-ui-1.8.18.custom.css" media="all" />
-	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}css/default/jquery-ui/default/default.dialog.css" media="all" />
+	<!-- <link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}css/default/jquery-ui/default/default.dialog.css" media="all" /> -->
 	<link rel="stylesheet" type="text/css" href="{/literal}{$baseUrl}{literal}css/default/print.css" media="print" />
 	<!-- jQuery Files -->
 	<script type="text/javascript" src="{/literal}{$baseUrl}{literal}js/cluetip/jquery.hoverIntent.minified.js"></script>

@@ -525,6 +525,163 @@ function si_truncate($string, $max = 20, $rep = '')
     return substr_replace($string, $rep, $leave);
 }
 
+function getURL()
+{
+    global $config;
+    $baseUrl = Zend_Registry::get('baseUrl');
+    
+    $port = "";
+    $dir = dirname($_SERVER['PHP_SELF']);
+    //remove incorrenct slashes for WinXP etc.
+    $dir = str_replace('\\','',$dir);
+
+    $dir = str_replace($baseUrl,'',$dir);
+//    $dir = str_replace('//','',$dir);
+
+    //set the port of http(s) section
+    if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on') {
+        $_SERVER['FULL_URL'] = "https://";
+    } else {
+        $_SERVER['FULL_URL'] = "http://";
+
+    }
+
+    $_SERVER['FULL_URL'] .= $config->authentication->http.$_SERVER['HTTP_HOST'].$dir;
+
+    return $_SERVER['FULL_URL'];
+
+}
+
+/* No Longer used. Was used with html2pdf
+function urlPDF($invoiceID) {
+
+    $url = getURL();
+//    html2ps does not like &amp; and htmlcharacters encoding - latter useless since InvoiceID comes from an integer field
+//    $script = "/index.php?module=invoices&amp;view=templates/template&amp;invoice=".htmlsafe($invoiceID)."&amp;action=view&amp;location=pdf";
+    $script = "/index.php?module=invoices&view=template&id=$invoiceID&action=view&location=pdf";
+
+    $full_url=$url.$script;
+
+    return $full_url;
+}
+*/
+
+/*
+Function: getTaxesPerLineItem
+Purpose: get the total tax for the line item
+*/
+function getTaxesPerLineItem($line_item_tax_id,$quantity, $unit_price)
+{
+    global $logger;
+
+    foreach($line_item_tax_id as $key => $value)
+    {
+        $logger->log("Key: ".$key." Value: ".$value, Zend_Log::INFO);
+        $tax = getTaxRate($value);
+        $logger->log('tax rate: '.$tax['tax_percentage'], Zend_Log::INFO);
+
+        $tax_amount = lineItemTaxCalc($tax,$unit_price,$quantity);
+        //get Total tax for line item
+        $tax_total = $tax_total + $tax_amount;
+
+        //$logger->log('Qty: '.$quantity.' Unit price: '.$unit_price, Zend_Log::INFO);
+        //$logger->log('Tax rate: '.$tax[tax_percentage].' Tax type: '.$tax['tax_type'].' Tax $: '.$tax_amount, Zend_Log::INFO);
+
+    }
+    return $tax_total;
+}
+
+
+/*
+Function: lineItemTaxCalc
+Purpose: do the calc for the tax for tax x on line item y
+*/
+function lineItemTaxCalc($tax,$unit_price,$quantity)
+{
+    if($tax['type'] == "%")
+    {
+        $tax_amount = ( ($tax['tax_percentage'] / 100)  * $unit_price ) * $quantity;
+    }
+    if($tax['type'] == "$")
+    {
+        $tax_amount = $tax['tax_percentage'] * $quantity;
+    }
+
+    return $tax_amount;
+}
+
+function pdfThis($html,$file_location="",$pdfname)
+{
+
+    global $config;
+
+                        //    'pixels'     => $config->export->pdf->screensize,
+                        //    'media'     => $config->export->pdf->papersize,
+
+
+
+
+    require_once(dirname(APPLICATION_PATH) . '/lib/tcpdf/tcpdf.php');
+
+    // create new PDF document
+    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+    // set document information
+    $pdf->SetCreator('Simple Invoice');
+    $pdf->SetAuthor('Simple Invoice');
+    $pdf->SetTitle('Invoice');
+
+    // remove default header/footer
+    $pdf->setPrintHeader(false);
+    $pdf->setPrintFooter(false);
+
+    // set default monospaced font
+    //$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
+    //set margins
+    $pdf->SetMargins(
+        $config->export->pdf->leftmargin,
+        $config->export->pdf->topmargin,
+        $config->export->pdf->rightmargin
+    );
+    //$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+    //$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+
+    //set auto page breaks
+    $pdf->SetAutoPageBreak(TRUE, $config->export->pdf->bottommargin);
+
+    //set image scale factor
+    //$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+    //set some language-dependent strings
+    //$pdf->setLanguageArray($l);
+
+    // ---------------------------------------------------------
+
+    // set font
+    $pdf->SetFont('helvetica', '', 10);
+
+    // add a page
+    $pdf->AddPage();
+
+    // output the HTML content
+    $pdf->writeHTML($html, true, false, true, false, '');
+
+    // reset pointer to the last page
+    $pdf->lastPage();
+
+    // ---------------------------------------------------------
+
+    //Close and output PDF document
+    if ($file_location == "download") {
+        // I: send the file inline to the browser. The plug-in is used if available. The name given by filename is used when one selects the "Save as" option on the link generating the PDF.
+        // D: send to the browser and force a file download with the name given by filename.
+        $pdf->Output($pdfname, 'I');    
+    } else {
+        // Destination is file
+        $pdf->Output('./tmp/cache/' . $pdfname . '.pdf', 'F');
+    }
+}
 
 /* Escapes HTML stuff */
 function htmlsafe($str) {

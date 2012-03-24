@@ -65,7 +65,25 @@ if (  $op === 'insert_product' ) {
 }
 
 if ($op === 'edit_product' ) {
-	if (isset($_POST['save_product']) && updateProduct()) {
+    
+    $product_data = array(
+        'description'       => $_POST['description'],
+        'detail'            => $_POST['detail'],
+        'unit_price'        => $_POST['unit_price'],
+        'default_tax_id'    => $_POST['default_tax_id'],
+        /*'default_tax_id_2'  => NULL,*/
+        'cost'              => $_POST['cost'],
+        'reorder_level'     => $_POST['reoder_level'],
+        'custom_field1'     => $_POST['custom_field1'],
+        'custom_field2'     => $_POST['custom_field2'],
+        'custom_field3'     => $_POST['custom_field3'],
+        'custom_field4'     => $_POST['custom_field4'],
+        'notes'             => $_POST['notes'],
+        'enabled'           => $_POST['enabled']
+        /*'visible'           => $visible*/
+    );
+    
+	if (isset($_POST['save_product']) && $SI_PRODUCTS->update($product_data,$_GET['id'])) {
 		$saved = true;
 		updateCustomFieldValues($_POST['categorie'],$_GET['id']);
 	}
