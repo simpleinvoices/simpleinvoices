@@ -1,6 +1,6 @@
 <?php
 
-class SimpleInvoices_Extensions extends SimpleInvoices_Db_Table_Abstract
+class SimpleInvoices_Db_Table_Extensions extends SimpleInvoices_Db_Table_Abstract
 {
     protected $_name = "extensions";
     protected $_primary = array('domain_id', 'id');

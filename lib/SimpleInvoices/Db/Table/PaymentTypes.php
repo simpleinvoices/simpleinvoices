@@ -1,5 +1,5 @@
 <?php
-class SimpleInvoices_PaymentTypes extends SimpleInvoices_Db_Table_Abstract
+class SimpleInvoices_Db_Table_PaymentTypes extends SimpleInvoices_Db_Table_Abstract
 {
     protected $_name = "payment_types";
     protected $_primary = array('domain_id', 'pt_id');

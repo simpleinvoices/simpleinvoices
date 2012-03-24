@@ -1,5 +1,5 @@
 <?php
-class SimpleInvoices_SystemDefaults extends SimpleInvoices_Db_Table_Abstract
+class SimpleInvoices_Db_Table_SystemDefaults extends SimpleInvoices_Db_Table_Abstract
 {
     protected $_name = "system_defaults";
     protected $_primary = array('domain_id', 'id');
@@ -87,7 +87,7 @@ class SimpleInvoices_SystemDefaults extends SimpleInvoices_Db_Table_Abstract
         {
             case 'payment_type':
             {
-                $SI_PAYMENT_TYPES = new SimpleInvoices_PaymentTypes();
+                $SI_PAYMENT_TYPES = new SimpleInvoices_Db_Table_PaymentTypes();
                 return $SI_PAYMENT_TYPES->getDefault();
                 break;
             }
@@ -121,7 +121,7 @@ class SimpleInvoices_SystemDefaults extends SimpleInvoices_Db_Table_Abstract
         $where = array();
         $where[] = $this->getAdapter()->quoteInto('name = ?', $name);
         
-        $extensions = new SimpleInvoices_Extensions();
+        $extensions = new SimpleInvoices_Db_Table_Extensions();
         $extension_id = $extensions->findByName($extension_name);
         if ($extension_id >= 0) {
             $where[] = $this->getAdapter()->quoteInto('extension_id = ?', $extension_id);
