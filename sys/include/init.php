@@ -302,8 +302,12 @@ $siUrl = getURL();
 
 include_once($include_dir . "sys/include/backup.lib.php");
 
-$SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
-$defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
+if (isset($install_data_exists) && $install_data_exists) {
+    $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
+    $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
+} else {
+    $defaults = array();
+}
 $smarty->assignGlobal("defaults",$defaults);
 $smarty->assignGlobal('baseUrl', $config->resources->frontController->baseUrl);
 // Get rid of some errors

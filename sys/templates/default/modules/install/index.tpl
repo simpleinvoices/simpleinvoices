@@ -39,13 +39,13 @@
 </td>
 </tr>
 <tr>
-    <td>Host:</td><td>{$config->database->params->host}</td>
+    <td>Host:</td><td>{$config->resources->db->params->host}</td>
 </tr>
 <tr>
-    <td>Database:</td><td>{$config->database->params->dbname}</td>
+    <td>Database:</td><td>{$config->resources->db->params->dbname}</td>
 </tr>
 <tr>
-    <td>Username:</td><td>{$config->database->params->username}</td>
+    <td>Username:</td><td>{$config->resources->db->params->username}</td>
 </tr>
 <tr>
     <td>Password:</td><td>**********</td>
