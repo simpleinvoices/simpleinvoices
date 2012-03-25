@@ -295,7 +295,8 @@ CREATE TABLE IF NOT EXISTS `si_invoice_items` (
   `gross_total` decimal(25,6) DEFAULT '0.000000',
   `description` text COLLATE utf8_unicode_ci,
   `total` decimal(25,6) DEFAULT '0.000000',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `idx_invoice` (`invoice_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
