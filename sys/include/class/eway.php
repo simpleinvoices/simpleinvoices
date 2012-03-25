@@ -12,6 +12,8 @@ class eway
     {
         global $logger;
 
+        $SI_BILLER = new SimpleInvoices_Db_Table_Biller();
+        
         $return = 'false';
         
         //set customer,biller and preference if not defined
@@ -21,7 +23,7 @@ class eway
         }
         if(empty($this->biller))
         {
-            $this->biller = getBiller($this->invoice['biller_id']);
+            $this->biller = $SI_BILLER->getBiller($this->invoice['biller_id']);
         }
         if(empty($this->preference))
         {
@@ -49,6 +51,8 @@ class eway
     
         global $config;
         global $logger;
+        
+        $SI_BILLER = new SimpleInvoices_Db_Table_Biller();
 
         //set customer,biller and preference if not defined
         if(empty($this->customer))
@@ -57,7 +61,7 @@ class eway
         }
         if(empty($this->biller))
         {
-            $this->biller = getBiller($this->invoice['biller_id']);
+            $this->biller = $SI_BILLER->getBiller($this->invoice['biller_id']);
         }
         if(empty($this->preference))
         {

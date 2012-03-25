@@ -13,6 +13,8 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$SI_BILLER = new SimpleInvoices_Db_Table_Biller();
+
 $biller_id = $_GET['biller_id'];
 $customer_id = $_GET['customer_id'];
 $filter_by_date = $_GET['filter_by_date'];
@@ -27,7 +29,7 @@ $get_format = $_GET['format'];
 $get_file_type = $_GET['filetype'];
 
 
-$biller = getBiller($_GET['biller_id']);
+$biller = $SI_BILLER->getBiller($_GET['biller_id']);
 $customer = customer::get($_GET['customer_id']);
 
 #create PDF name

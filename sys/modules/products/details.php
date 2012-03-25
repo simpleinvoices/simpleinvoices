@@ -7,12 +7,13 @@ $product_id = $_GET['id'];
 
 $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
 $SI_PRODUCTS = new SimpleInvoices_Db_Table_Products();
+$SI_TAX = new SimpleInvoices_Db_Table_Tax();
 
 $product = $SI_PRODUCTS->find($product_id);
 
 #get custom field labels
 $customFieldLabel = getCustomFieldLabels();
-$taxes = getActiveTaxes();
+$taxes = $SI_TAX->fetchAllActive();
 $tax_selected = getTaxRate($product['default_tax_id']);
 
 $smarty -> assign("defaults",$SI_SYSTEM_DEFAULTS->fetchAll());

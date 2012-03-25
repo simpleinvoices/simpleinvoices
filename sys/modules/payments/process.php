@@ -6,8 +6,9 @@ checkLogin();
 
 $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
 $SI_PAYMENT_TYPES = new SimpleInvoices_Db_Table_PaymentTypes();
+$SI_BILLER = new SimpleInvoices_Db_Table_Biller();
 
-$maxInvoice = maxInvoice();
+//$maxInvoice = maxInvoice();
 
 jsBegin();
 jsFormValidationBegin("frmpost");
@@ -28,14 +29,15 @@ $invoice = null;
 if(isset($_GET['id'])) {
 	$invoice = invoice::select($_GET['id']);
 }
-else {
-	$sth = dbQuery("SELECT * FROM ".TB_PREFIX."invoices");
-    $invoice = $sth->fetch();
-    #$sth = new invoice();
-    #$invoice = $sth->select_all();
-}
+// NOTE: Doesn't this mess up payments?
+//else {
+//	$sth = dbQuery("SELECT * FROM ".TB_PREFIX."invoices");
+//    $invoice = $sth->fetch();
+//    #$sth = new invoice();
+//    #$invoice = $sth->select_all();
+//}
 $customer = customer::get($invoice['customer_id']);
-$biller = getBiller($invoice['biller_id']);
+$biller = $SI_BILLER->getBiller($invoice['biller_id']);
 $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 $pt = $SI_PAYMENT_TYPES->find($defaults['payment_type']);
 
@@ -58,3 +60,4 @@ $smarty -> assign('pageActive', 'payment');
 $subPageActive =  "payment_process" ;
 $smarty -> assign('subPageActive', $subPageActive);
 $smarty -> assign('active_tab', '#money');
+?>

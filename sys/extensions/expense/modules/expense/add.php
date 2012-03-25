@@ -4,12 +4,13 @@
 checkLogin();
 
 $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
+$SI_TAX = new SimpleInvoices_Db_Table_Tax();
 
 $expense_add = expense::add();
 
 $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 
-$taxes = getActiveTaxes();
+$taxes = $SI_TAX->fetchAllActive();
 
 //if valid then do save
 if ($_POST['expense_account_id'] != "" ) {

@@ -85,10 +85,34 @@ class SimpleInvoices_Db_Table_SystemDefaults extends SimpleInvoices_Db_Table_Abs
     {
         switch($name)
         {
+            case 'biller':
+            {
+                $SI_BILLER = new SimpleInvoices_Db_Table_Biller();
+                return $SI_BILLER->getDefault();
+                break;
+            }
+            case 'customer':
+            {
+                $SI_CUSTOMERS = new SimpleInvoices_Db_Table_Customers();
+                return $SI_CUSTOMERS->getDefault();
+                break;
+            }
             case 'payment_type':
             {
                 $SI_PAYMENT_TYPES = new SimpleInvoices_Db_Table_PaymentTypes();
                 return $SI_PAYMENT_TYPES->getDefault();
+                break;
+            }
+            case 'preference':
+            {
+                $SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
+                return $SI_PREFERENCES->getDefault();
+                break;
+            }
+            case 'tax':
+            {
+                $SI_TAX = new SimpleInvoices_Db_Table_Tax();
+                return $SI_TAX->getDefault();
                 break;
             }
             default:

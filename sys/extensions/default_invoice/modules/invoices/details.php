@@ -16,6 +16,11 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$SI_TAX = new SimpleInvoices_Db_Table_Tax();
+$SI_CUSTOMERS = new SimpleInvoices_Db_Table_Customers();
+$SI_BILLER = new SimpleInvoices_Db_Table_Biller();
+$SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
+
 #get the invoice id
 $master_invoice_id = $_GET['id'];
 IsSet($_GET['template']) && $master_invoice_id = $_GET['template'];
@@ -27,13 +32,12 @@ $SI_PRODUCTS = new SimpleInvoices_Db_Table_Products();
 $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
 
 $invoiceItems = invoice::getInvoiceItems($master_invoice_id);
-$customers = getActiveCustomers();
+$customers = $SI_CUSTOMERS->fetchAllActive();
 $preference = getPreference($invoice['preference_id']);
-$billers = getActiveBillers();
-//$taxes = getActiveTaxes(); <--- look into this
+$billers = $SI_BILLER->fetchAllActive();
 $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
-$taxes = getTaxes();
-$preferences = getActivePreferences();
+$taxes = $SI_TAX->fetchAllActive();
+$preferences = $SI_PREFERENCES->fetchAllActive();
 $products = $SI_PRODUCTS->findActive();
 
 

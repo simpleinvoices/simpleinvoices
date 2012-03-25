@@ -24,14 +24,18 @@ checkLogin();
 $master_invoice_id = $_GET['invoice'];
 
 $SI_PRODUCTS = new SimpleInvoices_Db_Table_Products();
+$SI_CUSTOMERS = new SimpleInvoices_Db_Table_Customers();
+$SI_TAX = new SimpleInvoices_Db_Table_Tax();
+$SI_BILLER = new SimpleInvoices_Db_Table_Biller();
+$SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
 
 $invoice = getInvoice($master_invoice_id);
 $invoiceItems = matrix_invoice::getInvoiceItems($master_invoice_id);
-$customers = getActiveCustomers();
+$customers = $SI_CUSTOMERS->fetchAllActive();
 $preference = getPreference($invoice['preference_id']);
-$billers = getActiveBillers();
-$taxes = getActiveTaxes();
-$preferences = getActivePreferences();
+$billers = $SI_BILLER->fetchAllActive();
+$taxes = $SI_TAX->fetchAllActive();
+$preferences = $SI_PREFERENCES->fetchAllActive();
 $products = $SI_PRODUCTS->findActive();
 
 

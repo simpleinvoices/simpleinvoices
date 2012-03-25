@@ -20,15 +20,18 @@
 checkLogin();
 
 $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
+$SI_CUSTOMERS = new SimpleInvoices_Db_Table_Customers();
+$SI_INVOICE_TYPE = new SimpleInvoices_Db_Table_InvoiceType();
+$SI_BILLER = new SimpleInvoices_Db_Table_Biller();
 
 #get the invoice id
 $invoice_id = $_GET['invoice'];
 
 
 $invoice = getInvoice($invoice_id);
-$invoice_type =  getInvoiceType($invoice['type_id']);
-$customer = getCustomer($invoice['customer_id']);
-$biller = getBiller($invoice['biller_id']);
+$invoice_type = $SI_INVOICE_TYPE->getInvoiceType($invoice['type_id']);
+$customer = $SI_CUSTOMERS->getCustomerById($invoice['customer_id']);
+$biller = $SI_BILLER->getBiller($invoice['biller_id']);
 $preference = getPreference($invoice['preference_id']);
 $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 $invoiceItems = text_ui_invoice::getInvoiceItems($invoice_id);

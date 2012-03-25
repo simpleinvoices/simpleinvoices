@@ -11,6 +11,8 @@
 define("BROWSE","browse");
 //if this page has error with auth remove the above line and figure out how to do it right
 
+$SI_INVOICE_TYPE = new SimpleInvoices_Db_Table_InvoiceType();
+
 $domain_id = domain_id::get();
 
 #$sql = "SELECT * FROM ".TB_PREFIX."invoices where domain_id = ".$domain_id;
@@ -27,7 +29,7 @@ if (!$q) return;
 
 while ($invoice = getInvoices($sth)) {
 
-	$invoiceType = getInvoiceType($invoice['type_id']);
+	$invoiceType = $SI_INVOICE_TYPE->getInvoiceType($invoice['type_id']);
 
 	if (strpos(strtolower($invoice['index_id']), $q) !== false) {
 		$invoice['id'] = htmlsafe($invoice['id']);

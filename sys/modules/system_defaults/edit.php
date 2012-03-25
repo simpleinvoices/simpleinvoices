@@ -5,6 +5,10 @@ checkLogin();
 
 $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
 $SI_PAYMENT_TYPES = new SimpleInvoices_Db_Table_PaymentTypes();
+$SI_CUSTOMERS = new SimpleInvoices_Db_Table_Customers();
+$SI_TAX = new SimpleInvoices_Db_Table_Tax();
+$SI_BILLER = new SimpleInvoices_Db_Table_Biller();
+$SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
 
 #system defaults query
 
@@ -119,7 +123,7 @@ else if ($_GET["submit"] == "biller") {
 	$default = "biller";
 
 	#biller query
-	$billers = getActiveBillers();
+	$billers = $SI_BILLER->fetchAllActive();
 
 	if ($billers == null) {
 		$display_block_biller = "<p><em>{$LANG['no_billers']}</em></p>";
@@ -149,7 +153,7 @@ EOD;
 else if ($_GET["submit"] == "customer") {
 
 	$default = "customer";
-	$customers = getActiveCustomers();
+	$customers = $SI_CUSTOMERS->fetchAllActive();
 
 	if ($customers == null) {
 		//no records
@@ -181,7 +185,7 @@ EOD;
 else if ($_GET['submit'] == "tax") {
 	$default = "tax";
 
-	$taxes = getActiveTaxes();
+	$taxes = $SI_TAX->fetchAllActive();
 
 	if ($taxes == null) {
 		//no records
@@ -214,7 +218,7 @@ EOD;
 else if ($_GET["submit"] == "preference_id") {
 
 	$pref = getPreference($defaults['preference']);
-	$preferences = getActivePreferences();
+	$preferences = $SI_PREFERENCES->fetchAllActive();
 
 	if ($preferences == null) {
 		//no records

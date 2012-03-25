@@ -5,12 +5,62 @@ class SimpleInvoices_Db_Table_Biller extends SimpleInvoices_Db_Table_Abstract
     protected $_primary = array('domain_id', 'id');
     
     /**
+    * Fetch all active customers
+    * 
+    */
+    public function fetchAll()
+    {
+        global $LANG;
+        
+        $auth_session = Zend_Registry::get('auth_session');
+        
+        $select = $this->select();
+        $select->where('domain_id = ?', $auth_session->domain_id);
+        $select->order('name');
+        
+        $result =  $this->getAdapter()->fetchAll($select);
+        
+        $billers = array();
+
+        foreach ($result as $biller) {
+            if ($biller['enabled'] == 1) {
+                $biller['enabled'] = $LANG['enabled'];
+            } else {
+                $biller['enabled'] = $LANG['disabled'];
+            }
+          
+            // Add to billers array
+            $billers[] = $biller;
+        }
+
+        return $billers;
+    }
+    
+    /**
+    * Fetch all active billers
+    * 
+    */
+    public function fetchAllActive()
+    {
+        global $LANG;
+        
+        $auth_session = Zend_Registry::get('auth_session');
+        
+        $select = $this->select();
+        $select->where('domain_id = ?', $auth_session->domain_id);
+        $select->where('enabled = 1');
+        $select->order('name');
+        
+        return $this->getAdapter()->fetchAll($select);
+    }
+    
+    /**
     * Find a biller by the given ID
     * 
     * @param mixed $id
     * @return Zend_Db_Table_Rowset_Abstract
     */
-    public function find($id)
+    public function getBiller($id)
     {
         global $LANG;
         
@@ -26,6 +76,24 @@ class SimpleInvoices_Db_Table_Biller extends SimpleInvoices_Db_Table_Abstract
         }
         
         return $biller;
+    }
+    
+    /**
+    * Get default biller
+    * 
+    */
+    public function getDefault()
+    {
+        $tbl_system_defaults = Zend_Registry::get('tbl_prefix') . 'system_defaults';
+        $auth_session = Zend_Registry::get('auth_session');
+        
+        $select = $this->select();
+        $select->from($this->_name)
+            ->joinInner($tbl_system_defaults, $tbl_system_defaults.'.value = ' . $this->_name . '.id', array());
+        $select->where($tbl_system_defaults . ".name = ?", "biller");
+        $select->where($this->_name . '.domain_id = ?', $auth_session->domain_id);
+        
+        return $this->getAdapter()->fetchRow($select);
     }
     
     /**

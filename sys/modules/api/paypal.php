@@ -1,5 +1,7 @@
 <?php
 
+$SI_BILLER = new SimpleInvoices_Db_Table_Biller();
+
 $p = new paypal_class;             // initiate an instance of the class
 #$p->paypal_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';   // testing paypal url
 $p->paypal_url = 'https://www.paypal.com/cgi-bin/webscr';     // paypal url
@@ -84,7 +86,7 @@ if ($p->validate_ipn()) {
 
 		$invoice = invoice::select($p->ipn_data['invoice']);
 		#$invoice = invoice::select($_POST['invoice']);
-		$biller = getBiller($invoice['biller_id']);
+		$biller = $SI_BILLER->getBiller($invoice['biller_id']);
 
 		//send email
 		$body =  "A Paypal instant payment notification was successfully recieved into Simple Invoices\n";

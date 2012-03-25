@@ -20,10 +20,12 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$SI_BILLER = new SimpleInvoices_Db_Table_Biller();
+
 #get the invoice id
 $biller_id = $_GET['id'];
 
-$biller = getBiller($biller_id);
+$biller = $SI_BILLER->getBiller($biller_id);
 
 /*drop down list code for invoice logo */
 
@@ -50,3 +52,4 @@ $smarty -> assign('pageActive', 'biller');
 $subPageActive = $_GET['action'] =="view"  ? "biller_view" : "biller_edit" ;
 $smarty -> assign('subPageActive', $subPageActive);
 $smarty -> assign('active_tab', '#people');
+?>

@@ -3,6 +3,8 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$SI_INVOICE_ITEMS = new SimpleInvoices_Db_Table_InvoiceItems();
+
 # Deal with op and add some basic sanity checking
 
 #insert - process payment
@@ -24,7 +26,7 @@ if ( isset($_POST['process_payment']) ) {
     );
     
 	//works out any funds that are in excess of invoice total:
-	$invoicetotal = getInvoiceTotal($payment_data['ac_inv_id']);
+	$invoicetotal = $SI_INVOICE_ITEMS->getInvoiceTotal($payment_data['ac_inv_id']);
     $orig_amt = $payment_data['ac_amount'];
     $extrapayment = $payment_data['ac_amount']; - $invoicetotal;
 

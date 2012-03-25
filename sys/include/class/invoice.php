@@ -154,8 +154,10 @@ class invoice {
     {
 		global $logger;
 		global $db;
-    global $auth_session;
-    global $dbh;
+        global $auth_session;
+        global $dbh;
+        
+        $SI_INVOICE_ITEMS = new SimpleInvoices_Db_Table_InvoiceItems();
 
 		$sql = "SELECT
                     i.*,
@@ -178,7 +180,7 @@ class invoice {
 
 	$invoice['calc_date'] = date('Y-m-d', strtotime( $invoice['date'] ) );
 	$invoice['date'] = siLocal::date( $invoice['date'] );
-	$invoice['total'] = getInvoiceTotal($invoice['id']);
+	$invoice['total'] = $SI_INVOICE_ITEMS->getInvoiceTotal($invoice['id']);
 	$invoice['gross'] = invoice::getInvoiceGross($invoice['id']);
 	$invoice['paid'] = calc_invoice_paid($invoice['id']);
 	$invoice['owing'] = $invoice['total'] - $invoice['paid'];

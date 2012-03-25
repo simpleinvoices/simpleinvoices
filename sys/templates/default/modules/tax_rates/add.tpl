@@ -1,6 +1,6 @@
 {* if tax rate is updated or saved.*} 
 
-{if $smarty.post.tax_description != "" && $smarty.post.submit != null } 
+{if isset($smarty.post.tax_description) != "" && isset($smarty.post.submit) } 
 {$refresh_total}
 
 <br />
@@ -11,7 +11,7 @@
 
 {else}
 {* if  name was inserted *} 
-	{if $smarty.post.submit !=null} 
+	{if isset($smarty.post.submit)} 
 		<div class="validation_alert"><img src="{$baseUrl}images/common/important.png" alt="" />
 		You must enter a Tax description</div>
 		<hr />
@@ -24,7 +24,7 @@
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.description}</td>
-		<td><input type="text"  class="validate[required]" name="tax_description" value="{$smarty.post.tax_description|htmlsafe}" size="35" /></td>
+		<td><input type="text"  class="validate[required]" name="tax_description" value="{if isset($smarty.post.tax_description)}{$smarty.post.tax_description|htmlsafe}{/if}" size="35" /></td>
 		<td></td>
 	</tr>
 	<tr>
@@ -39,7 +39,7 @@
 		</a>
 		</td>
 		<td>
-			<input type="text" name="tax_percentage" value="{$smarty.post.tax_percentage|htmlsafe}"  size="25" />
+			<input type="text" name="tax_percentage" value="{if isset($smarty.post.tax_percentage)}{$smarty.post.tax_percentage|htmlsafe}{/if}"  size="25" />
 			{html_options name=type options=$types selected=$tax.type}
 		</td>
 		<td>{$LANG.ie_10_for_10}</td>
@@ -47,7 +47,7 @@
 	<tr>
 		<td class="details_screen">{$LANG.enabled}</td>
 		<td>
-			<select name="tax_enabled" value="{$smarty.post.tax_enabled|htmlsafe}">
+			<select name="tax_enabled" value="{if isset($smarty.post.tax_enabled)}{$smarty.post.tax_enabled|htmlsafe}{/if}">
 			<option value="1" selected>{$LANG.enabled}</option>
 			<option value="0">{$LANG.disabled}</option>
 			</select>

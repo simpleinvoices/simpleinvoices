@@ -3,6 +3,7 @@
 checkLogin();
 
 $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
+$SI_TAX = new SimpleInvoices_Db_Table_Tax();
 
 #get the invoice id
 $expense_id = $_GET['id'];
@@ -19,7 +20,7 @@ $detail['expense_tax_total'] = $expense['amount'] + expensetax::get_sum($expense
 $detail['expense_tax_grouped'] = expensetax::grouped($expense_id);
 $detail['status_wording'] = $expense['status']==1?$LANG['paid']:$LANG['not_paid'];
 
-$taxes = getActiveTaxes();
+$taxes = $SI_TAX->fetchAllActive();
 #$tax_selected = getTaxRate($product['default_tax_id']);
 $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 

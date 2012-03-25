@@ -22,6 +22,9 @@
 
 checkLogin();
 
+$SI_CUSTOMERS = new SimpleInvoices_Db_Table_Customers();
+$SI_BILLER = new SimpleInvoices_Db_Table_Biller();
+
 #$menu =false;
 
 function firstOfMonth() {
@@ -110,11 +113,11 @@ if (isset($_POST['submit']))
 	}
 }
 
-$billers = getActiveBillers();
-$customers = getActiveCustomers();
+$billers = $SI_BILLER->fetchAllActive();
+$customers = $SI_CUSTOMERS->fetchAllActive();
 
-$biller_details = getBiller($biller_id);
-$customer_details = getCustomer($customer_id);
+$biller_details = $SI_BILLER->getBiller($biller_id);
+$customer_details = $SI_CUSTOMERS->getCustomerById($customer_id);
 $smarty -> assign('biller_id', $biller_id);
 $smarty -> assign('biller_details', $biller_details);
 $smarty -> assign('customer_id', $customer_id);

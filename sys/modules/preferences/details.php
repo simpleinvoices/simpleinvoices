@@ -3,6 +3,7 @@
 checkLogin();
 
 $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
+$SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
 
 //if valid then do save
 if ($_POST['p_description'] != "" ) {
@@ -15,7 +16,7 @@ $preference_id = $_GET['id'];
 $preference = getPreference($preference_id);
 $index_group = getPreference($preference['index_group']);
 
-$preferences = getActivePreferences();
+$preferences = $SI_PREFERENCES->fetchAllActive();
 $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 $status = array(array('id'=>'0','status'=>$LANG['draft']), array('id'=>'1','status'=>$LANG['real']));
 
@@ -29,3 +30,4 @@ $smarty -> assign('pageActive', 'preference');
 $subPageActive = $_GET['action'] =="view"  ? "preferences_view" : "preferences_edit" ;
 $smarty -> assign('subPageActive', $subPageActive);
 $smarty -> assign('active_tab', '#setting');
+?>

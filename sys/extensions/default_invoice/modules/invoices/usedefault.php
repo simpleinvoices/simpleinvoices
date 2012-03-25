@@ -21,10 +21,12 @@
 checkLogin();
 
 $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
+$SI_CUSTOMERS = new SimpleInvoices_Db_Table_Customers();
+
 #get the invoice id
 $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 $master_customer_id = $_GET['customer_id'];
-$customer = getCustomer($master_customer_id);
+$customer = $SI_CUSTOMERS->getCustomerById($master_customer_id);
 
 if ($_GET['action'] == 'update_template') {	/* update default template for customer */
 

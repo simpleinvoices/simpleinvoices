@@ -18,12 +18,16 @@ jsEnd();
 $tax_rate_id = $_GET['id'];
 
 $tax = getTaxRate($tax_rate_id);
-$types = getTaxTypes();
+
+$types = $types = array(
+    '%' => '%',
+    '$' => '$'
+);
 
 $smarty -> assign("tax",$tax);
 $smarty -> assign("types",$types);
-
 $smarty -> assign('pageActive', 'tax_rate');
 $subPageActive = $_GET['action'] =="view"  ? "tax_rates_view" : "tax_rates_edit" ;
 $smarty -> assign('subPageActive', $subPageActive);
 $smarty -> assign('active_tab', '#setting');
+?>

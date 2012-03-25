@@ -5,14 +5,16 @@ checkLogin();
 
 $SI_PRODUCTS = new SimpleInvoices_Db_Table_Products();
 $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
+$SI_TAX = new SimpleInvoices_Db_Table_Tax();
+$SI_BILLER = new SimpleInvoices_Db_Table_Biller();
 
 $debtor = getTopDebtor();
 $customer = getTopCustomer();
 $biller = getTopBiller();
 
-$billers = getBillers();
+$billers = $SI_BILLER->fetchAll();
 $customers = customer::get_all();
-$taxes = getTaxes();
+$taxes = $SI_TAX->fetchAll();
 $products = $SI_PRODUCTS->fetchAll();
 $preferences = getPreferences();
 $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
@@ -41,3 +43,4 @@ $smarty -> assign("debtor", $debtor);
 
 $smarty -> assign('pageActive', 'dashboard');
 $smarty -> assign('active_tab', '#home');
+?>

@@ -5,6 +5,7 @@
 checkLogin();
 
 $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
+$SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
 
 //if valid then do save
 if ($_POST['p_description'] != "" ) {
@@ -13,7 +14,7 @@ if ($_POST['p_description'] != "" ) {
 $smarty -> assign('save',$save);
 
 $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
-$preferences = getActivePreferences();
+$preferences = $SI_PREFERENCES->fetchAllActive();
 
 $localelist = Zend_Locale::getLocaleList();
 

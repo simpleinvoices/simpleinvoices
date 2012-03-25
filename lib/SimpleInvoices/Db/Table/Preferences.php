@@ -92,6 +92,24 @@ class SimpleInvoices_Db_Table_Preferences extends SimpleInvoices_Db_Table_Abstra
     }
     
     /**
+    * Get default preference
+    * 
+    */
+    public function getDefault()
+    {
+        $tbl_system_defaults = Zend_Registry::get('tbl_prefix') . 'system_defaults';
+        $auth_session = Zend_Registry::get('auth_session');
+        
+        $select = $this->select();
+        $select->from($this->_name)
+            ->joinInner($tbl_system_defaults, $tbl_system_defaults.'.value = ' . $this->_name . '.pref_id', array());
+        $select->where($tbl_system_defaults . ".name = ?", "preference");
+        $select->where($this->_name . '.domain_id = ?', $auth_session->domain_id);
+        
+        return $this->getAdapter()->fetchRow($select);
+    }
+    
+    /**
     * Insert a new preference
     * 
     * @param mixed $data

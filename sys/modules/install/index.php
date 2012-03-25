@@ -17,3 +17,4 @@ $import->pattern_replace = TB_PREFIX;
 //dbQuery($import->collate());
 */
 $menu = false;
+?>

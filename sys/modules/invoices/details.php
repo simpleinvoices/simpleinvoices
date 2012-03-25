@@ -16,6 +16,10 @@ checkLogin();
 
 $SI_PRODUCTS = new SimpleInvoices_Db_Table_Products();
 $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
+$SI_TAX = new SimpleInvoices_Db_Table_Tax();
+$SI_CUSTOMERS = new SimpleInvoices_Db_Table_Customers();
+$SI_BILLER = new SimpleInvoices_Db_Table_Biller();
+$SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
 
 #get the invoice id
 $master_invoice_id = $_GET['id'];
@@ -23,13 +27,13 @@ $master_invoice_id = $_GET['id'];
 $invoice = getInvoice($master_invoice_id);
 $invoiceItems = invoice::getInvoiceItems($master_invoice_id);
 //var_dump($invoiceItems);
-$customers = getActiveCustomers();
+$customers = $SI_CUSTOMERS->fetchAllActive();
 $preference = getPreference($invoice['preference_id']);
-$billers = getActiveBillers();
-//$taxes = getActiveTaxes(); <--- look into this
+$billers = $SI_BILLER->fetchAllActive();
+//$taxes = $SI_TAX->fetchAllActive();
 $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
-$taxes = getTaxes();
-$preferences = getActivePreferences();
+$taxes = $SI_TAX->fetchAll();
+$preferences = $SI_PREFERENCES->fetchAllActive();
 $products = $SI_PRODUCTS->findActive();
 
 

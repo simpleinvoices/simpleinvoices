@@ -20,19 +20,23 @@ checkLogin();
 
 $SI_PRODUCTS = new SimpleInvoices_Db_Table_Products();
 $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
+$SI_CUSTOMERS = new SimpleInvoices_Db_Table_Customers();
+$SI_TAX = new SimpleInvoices_Db_Table_Tax();
+$SI_BILLER = new SimpleInvoices_Db_Table_Biller();
+$SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
 
-$billers = getActiveBillers();
-$customers = getActiveCustomers();
-$taxes = getTaxes();
+$billers = $SI_BILLER->fetchAllActive();
+$customers = $SI_CUSTOMERS->fetchAllActive();
+$taxes = $SI_TAX->fetchAllActive();
 $products = $SI_PRODUCTS->findActive();
-$preferences = getActivePreferences();
+$preferences = $SI_PREFERENCES->fetchAllActive();
 $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 
 
-$defaultBiller = getDefaultBiller();
-$defaultCustomerID = (isset($_GET['customer_id'])) ? $_GET['customer_id'] : getDefaultCustomer();
-$defaultTax = getDefaultTax();
-$defaultPreference = getDefaultPreference();
+$defaultBiller = $SI_BILLER->getDefault();
+$defaultCustomerID = (isset($_GET['customer_id'])) ? $_GET['customer_id'] : $SI_CUSTOMERS->getDefault();
+$defaultTax = $SI_TAX->getDefault();
+$defaultPreference = $SI_PREFERENCES->getDefault();
 
 if (!empty( $_GET['get_num_line_items'] )) {
 	$dynamic_line_items = $_GET['get_num_line_items'];

@@ -95,7 +95,9 @@ class export
 		global $smarty;
 		global $siUrl;
 		global $include_dir;
-
+        
+        $SI_BILLER = new SimpleInvoices_Db_Table_Biller();
+        
 		switch ($this->module)
 		{
 			case "database":
@@ -178,7 +180,7 @@ class export
                 // ToDo: THIS FILE IS MISSING!!
 				$templatePath = $include_dir . "sys/templates/default/statement/index.tpl";
 
-				$biller_details = getBiller($this->biller_id);
+				$biller_details = $SI_BILLER->getBiller($this->biller_id);
 				$customer_details = customer::get($this->customer_id);
 
 				$this->file_name = "statement_".$this->biller_id."_".$this->customer_id."_".$invoice->start_date."_".$invoice->end_date;
@@ -205,16 +207,17 @@ class export
             case "payment":
             {
                 $SI_PAYMENT_TYPES = new SimpleInvoices_Db_Table_PaymentTypes();
+                $SI_INVOICE_TYPE = new SimpleInvoices_Db_Table_InvoiceType();
                 
                 $payment = getPayment($this->id);
 
                 /*Code to get the Invoice preference - so can link from this screen back to the invoice - START */
                 $invoice = getInvoice($payment['ac_inv_id']);
-                $biller = getBiller($payment['biller_id']);
+                $biller = $SI_BILLER->getBiller($payment['biller_id']);
                 $logo = getLogo($biller);
                 $logo = str_replace(" ", "%20", $logo);
                 $customer = customer::get($payment['customer_id']);
-                $invoiceType = getInvoiceType($invoice['type_id']);
+                $invoiceType = $SI_INVOICE_TYPE->getInvoiceType($invoice['type_id']);
                 $customFieldLabels = getCustomFieldLabels();
                 $paymentType = $SI_PAYMENT_TYPES->find($payment['ac_payment_type']);
                 $preference = getPreference($invoice['preference_id']);
