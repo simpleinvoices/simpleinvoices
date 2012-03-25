@@ -156,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `si_custom_fields` (
   `cf_custom_label` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `cf_display` varchar(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
   `domain_id` int(11) NOT NULL,
-  PRIMARY KEY (`cf_id`)
+  PRIMARY KEY (`domain_id`,`cf_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
 
 --
