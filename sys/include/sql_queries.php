@@ -279,42 +279,6 @@ function _invoice_items_check_fk($invoice, $product, $tax, $update) {
 	return true;
 }
 
-// ToDo: Replace in code
-function getPreference($id) {
-	$SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
-    return $SI_PREFERENCES->find($id);
-}
-
-function getSQLPatches() {
-	global $dbh;
-
-	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager ORDER BY sql_release";
-	$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
-	return $sth->fetchAll();
-}
-
-// ToDo: Replace in code
-function getPreferences() {
-	$SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
-    return $SI_PREFERENCES->fetchAll();
-}
-
-function getCustomFieldLabels() {
-	$SI_CUSTOM_FIELDS = new SimpleInvoices_Db_Table_CustomFields();
-    return $SI_CUSTOM_FIELDS->fetchLabels();
-}
-
-function getCustomFieldDisplay() {
-	$SI_CUSTOM_FIELDS = new SimpleInvoices_Db_Table_CustomFields();
-    return $SI_CUSTOM_FIELDS->fetchDisplays();
-}
-
-function getTaxRate($id) {
-	$SI_TAX = new SimpleInvoices_Db_Table_Tax();
-    return $SI_TAX->find($id);
-}
-
-
 function getPayment($id) {
 	global $config;
 	global $dbh;
@@ -509,7 +473,6 @@ function taxesGroupedForInvoice($invoice_id)
 	$result = $sth->fetchAll();
 
 	return $result;
-
 }
 
 /*
@@ -537,7 +500,6 @@ function taxesGroupedForInvoiceItem($invoice_item_id)
 	$result = $sth->fetchAll();
 
 	return $result;
-
 }
 
 function searchCustomers($search) {
@@ -619,7 +581,6 @@ function getCustomerInvoices($id) {
 		$invoices[] = $invoice;
 	}
 	return $invoices;
-
 }
 
 function getCustomers() {
@@ -774,6 +735,8 @@ function insertInvoice($type) {
 	global $dbh;
 	global $db_server;
 	global $auth_session;
+    
+    $SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
 
 	if ($db_server == 'mysql' && !_invoice_check_fk(
 		$_POST['biller_id'], $_POST['customer_id'],
@@ -848,7 +811,7 @@ function insertInvoice($type) {
 				)";
 	}
 	//echo $sql;
-    $pref_group=getPreference($_POST[preference_id]);
+    $pref_group= $SI_PREFERENCES->getPreferenceById($_POST[preference_id]);
 
 	$sth= dbQuery($sql,
 		#':index_id', index::next('invoice',$pref_group[index_group],$_POST[biller_id]),
@@ -875,11 +838,12 @@ function insertInvoice($type) {
 function updateInvoice($invoice_id) {
 
     global $logger;
-
+    $SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
+    
     $current_invoice = invoice::select($_POST['id']);
-    $current_pref_group = getPreference($current_invoice[preference_id]);
+    $current_pref_group = $SI_PREFERENCES->getPreferenceById($current_invoice[preference_id]);
 
-    $new_pref_group=getPreference($_POST[preference_id]);
+    $new_pref_group= $SI_PREFERENCES->getPreferenceById($_POST[preference_id]);
 
     $index_id = $current_invoice['index_id'];
 
@@ -1010,6 +974,8 @@ function invoice_item_tax($invoice_item_id,$line_item_tax_id,$unit_price,$quanti
 
 	global $logger;
 
+    $SI_TAX = new SimpleInvoices_Db_Table_Tax();
+    
 	//if editing invoice delete all tax info then insert first then do insert again
 	//probably can be done without delete - someone to look into this if required - TODO
 	if ($action =="update")
@@ -1030,7 +996,7 @@ function invoice_item_tax($invoice_item_id,$line_item_tax_id,$unit_price,$quanti
 	{
 		if($value !== "")
 		{
-			$tax = getTaxRate($value);
+			$tax = $SI_TAX->getTaxRateById($value);
 
 			$logger->log("ITEM :: Key: ".$key." Value: ".$value, Zend_Log::INFO);
 			$logger->log('ITEM :: tax rate: '.$tax['tax_percentage'], Zend_Log::INFO);

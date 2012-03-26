@@ -19,12 +19,14 @@
 
 checkLogin();
 
+$SI_CUSTOM_FIELDS = new SimpleInvoices_Db_Table_CustomFields();
+
 $files = getLogoList();
 
 $smarty->assign("files", $files);
 
 #get custom field labels
-$customFieldLabel = getCustomFieldLabels();
+$customFieldLabel = $SI_CUSTOM_FIELDS->getLabels();
 
 if (isset($_POST['name']) && $_POST['name'] != "") {
 	include("sys/modules/billers/save.php");
@@ -41,3 +43,4 @@ if (isset($save)) {
 $smarty -> assign('pageActive', 'biller');
 $smarty -> assign('subPageActive', 'biller_add');
 $smarty -> assign('active_tab', '#people');
+?>

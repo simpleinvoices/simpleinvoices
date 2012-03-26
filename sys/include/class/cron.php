@@ -185,6 +185,7 @@ class cron {
         global $auth_session;
         
         $SI_BILLER = new SimpleInvoices_Db_Table_Biller();
+        $SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
 
         $today = date('Y-m-d');
         $domain_id = domain_id::get($this->domain_id);
@@ -304,7 +305,7 @@ class cron {
                         ## email the people
                         
                         $invoice= invoice::select($new_invoice_id);
-                        $preference = getPreference($invoice['preference_id']);
+                        $preference = $SI_PREFERENCES->getPreferenceById($invoice['preference_id']);
                         $biller = $_SI_BILLER->getBiller($invoice['biller_id']);
                         $customer = customer::get($invoice['customer_id']);
                         #print_r($customer);

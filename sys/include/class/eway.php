@@ -11,8 +11,9 @@ class eway
     public function pre_check()
     {
         global $logger;
-
+        
         $SI_BILLER = new SimpleInvoices_Db_Table_Biller();
+        $SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
         
         $return = 'false';
         
@@ -27,7 +28,7 @@ class eway
         }
         if(empty($this->preference))
         {
-            $this->preference = getPreference($this->invoice['preference_id']);
+            $this->preference = $SI_PREFERENCES->getPreferenceById($this->invoice['preference_id']);
         }
 
         if (
@@ -53,7 +54,8 @@ class eway
         global $logger;
         
         $SI_BILLER = new SimpleInvoices_Db_Table_Biller();
-
+        $SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
+        
         //set customer,biller and preference if not defined
         if(empty($this->customer))
         {
@@ -65,7 +67,7 @@ class eway
         }
         if(empty($this->preference))
         {
-            $this->preference = getPreference($this->invoice['preference_id']);
+            $this->preference = $SI_PREFERENCES->getPreferenceById($this->invoice['preference_id']);
         }
 
         $eway = new ewaylib($this->biller['eway_customer_id'],'REAL_TIME', false);

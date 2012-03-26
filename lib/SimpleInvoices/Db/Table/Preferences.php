@@ -91,6 +91,25 @@ class SimpleInvoices_Db_Table_Preferences extends SimpleInvoices_Db_Table_Abstra
         return $preference;
     }
     
+    public function getPreferenceById($id)
+    {
+        global $LANG;
+        
+        $auth_session = Zend_Registry::get('auth_session');
+        
+        $select = $this->select();
+        $select->where('pref_id = ?', $id);
+        $select->where('domain_id = ?', $auth_session->domain_id);
+        
+        $preference =  $this->getAdapter()->fetchRow($select);
+        if ($preference) {
+            $preference['status_wording'] = $preference['status']==1?$LANG['real']:$LANG['draft'];
+            $preference['enabled'] = $preference['pref_enabled']==1?$LANG['enabled']:$LANG['disabled'];
+        }
+        
+        return $preference;
+    }
+    
     /**
     * Get default preference
     * 

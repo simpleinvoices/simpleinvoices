@@ -23,6 +23,8 @@ $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
 $SI_CUSTOMERS = new SimpleInvoices_Db_Table_Customers();
 $SI_INVOICE_TYPE = new SimpleInvoices_Db_Table_InvoiceType();
 $SI_BILLER = new SimpleInvoices_Db_Table_Biller();
+$SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
+$SI_CUSTOM_FIELDS = new SimpleInvoices_Db_Table_CustomFields();
 
 #get the invoice id
 $invoice_id = $_GET['invoice'];
@@ -32,7 +34,7 @@ $invoice = getInvoice($invoice_id);
 $invoice_type = $SI_INVOICE_TYPE->getInvoiceType($invoice['type_id']);
 $customer = $SI_CUSTOMERS->getCustomerById($invoice['customer_id']);
 $biller = $SI_BILLER->getBiller($invoice['biller_id']);
-$preference = getPreference($invoice['preference_id']);
+$preference = $SI_PREFERENCES->getPreferenceById($invoice['preference_id']);
 $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 $invoiceItems = matrix_invoice::getInvoiceItems($invoice_id);
 
@@ -49,7 +51,7 @@ else {
         
 	$invoice['url_for_pdf'] = $url_for_pdf;
 
-$customFieldLabels = getCustomFieldLabels();
+$customFieldLabels = $SI_CUSTOM_FIELDS->getLabels();
 
 for($i=1;$i<=4;$i++) {
 	$customField[$i] = show_custom_field("invoice_cf$i",$invoice["custom_field$i"],"read",'details_screen summary', 'details_screen','details_screen',5,':');

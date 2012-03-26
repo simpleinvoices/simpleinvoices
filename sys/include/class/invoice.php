@@ -19,6 +19,7 @@ class invoice {
 		global $dbh;
 		global $db_server;
 		global $auth_session;
+        $SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
 
 		$sql = "INSERT
 				INTO
@@ -56,7 +57,7 @@ class invoice {
                 NULL
 				)";
 
-		$pref_group=getPreference($this->preference_id);
+		$pref_group= $SI_PREFERENCES->getPreferenceById($this->preference_id);
 
 		$sth= dbQuery($sql,
 			':index_id', index::next('invoice',$pref_group[index_group],$this->biller_id),

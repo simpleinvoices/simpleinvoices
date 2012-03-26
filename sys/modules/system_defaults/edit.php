@@ -217,7 +217,7 @@ EOD;
 }
 else if ($_GET["submit"] == "preference_id") {
 
-	$pref = getPreference($defaults['preference']);
+	$pref = $SI_PREFERENCES->getPreferenceById($defaults['preference']);
 	$preferences = $SI_PREFERENCES->fetchAllActive();
 
 	if ($preferences == null) {

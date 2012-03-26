@@ -68,7 +68,7 @@ class SimpleInvoices_Db_Table_Tax extends SimpleInvoices_Db_Table_Abstract
     /**
     * Find a given tax given it's ID   
     */
-    public function find($id)
+    public function getTaxRateById($id)
     {
         global $LANG;
         

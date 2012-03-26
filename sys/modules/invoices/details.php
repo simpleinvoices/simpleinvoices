@@ -28,7 +28,7 @@ $invoice = getInvoice($master_invoice_id);
 $invoiceItems = invoice::getInvoiceItems($master_invoice_id);
 //var_dump($invoiceItems);
 $customers = $SI_CUSTOMERS->fetchAllActive();
-$preference = getPreference($invoice['preference_id']);
+$preference =  $SI_PREFERENCES->getPreferenceById($invoice['preference_id']);
 $billers = $SI_BILLER->fetchAllActive();
 //$taxes = $SI_TAX->fetchAllActive();
 $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();

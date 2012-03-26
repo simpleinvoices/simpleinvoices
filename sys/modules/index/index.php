@@ -7,6 +7,7 @@ $SI_PRODUCTS = new SimpleInvoices_Db_Table_Products();
 $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
 $SI_TAX = new SimpleInvoices_Db_Table_Tax();
 $SI_BILLER = new SimpleInvoices_Db_Table_Biller();
+$SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
 
 $debtor = getTopDebtor();
 $customer = getTopCustomer();
@@ -16,7 +17,7 @@ $billers = $SI_BILLER->fetchAll();
 $customers = customer::get_all();
 $taxes = $SI_TAX->fetchAll();
 $products = $SI_PRODUCTS->fetchAll();
-$preferences = getPreferences();
+$preferences = $SI_PREFERENCES->fetchAll();
 $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 
 if ($billers == null OR $customers == null OR $taxes == null OR $products == null OR $preferences == null)

@@ -9,7 +9,7 @@ class SimpleInvoices_Db_Table_CustomFields extends SimpleInvoices_Db_Table_Abstr
     * Fetch all custom field labels
     * 
     */
-    public function fetchDisplays()
+    public function getDisplay()
     {
         global $LANG;
         
@@ -34,7 +34,7 @@ class SimpleInvoices_Db_Table_CustomFields extends SimpleInvoices_Db_Table_Abstr
     * Fetch all custom field labels
     * 
     */
-    public function fetchLabels()
+    public function getLabels()
     {
         global $LANG;
         
@@ -53,6 +53,7 @@ class SimpleInvoices_Db_Table_CustomFields extends SimpleInvoices_Db_Table_Abstr
             // If not set, don't show
             if (!empty($customField['cf_custom_label'])) {
                 $customFields[$customField['cf_custom_field']] = $customField['cf_custom_label'];
+            } else {
                 $customFields[$customField['cf_custom_field']] = $LANG["custom_field"].' '.($i%4+1);
             }
             $i++;

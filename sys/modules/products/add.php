@@ -5,9 +5,10 @@ checkLogin();
 
 $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
 $SI_TAX = new SimpleInvoices_Db_Table_Tax();
+$SI_CUSTOM_FIELDS = new SimpleInvoices_Db_Table_CustomFields();
 
 #get custom field labels
-$customFieldLabel = getCustomFieldLabels();
+$customFieldLabel = $SI_CUSTOM_FIELDS->getLabels();
 $taxes = $SI_TAX->fetchAllActive();
 //if valid then do save
 if (array_key_exists('description', $_POST)) {

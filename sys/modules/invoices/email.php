@@ -14,12 +14,13 @@
 checkLogin();
 
 $SI_BILLER = new SimpleInvoices_Db_Table_Biller();
+$SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
 
 #get the invoice id
 $invoice_id = $_GET['id'];
 
 $invoice = invoice::select($invoice_id);
-$preference = getPreference($invoice['preference_id']);
+$preference = $SI_PREFERENCES->getPreferenceById($invoice['preference_id']);
 $biller = $SI_BILLER->getBiller($invoice['biller_id']);
 $customer = customer::get($invoice['customer_id']);
 

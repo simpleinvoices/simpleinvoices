@@ -3,6 +3,8 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$SI_TAX = new SimpleInvoices_Db_Table_Tax();
+
 #table
 
 jsBegin();
@@ -17,7 +19,7 @@ jsEnd();
 #get the invoice id
 $tax_rate_id = $_GET['id'];
 
-$tax = getTaxRate($tax_rate_id);
+$tax = $SI_TAX->getTaxRateById($tax_rate_id);
 
 $types = $types = array(
     '%' => '%',

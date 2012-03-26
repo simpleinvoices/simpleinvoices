@@ -93,6 +93,7 @@ class matrix_invoice
 	function insertInvoiceItem($invoice_id,$quantity,$product_id,$tax_id,$description="",$attr1="",$attr2="",$attr3="", $unit_price=""  ) {
 	
         $SI_PRODUCTS = new SimpleInvoices_Db_Table_Products();
+        $SI_TAX = new SimpleInvoices_Db_Table_Tax();
     
 		/*strip attri of unneeded info - only need the last section - the attribute id*/
 		
@@ -109,7 +110,7 @@ class matrix_invoice
 			//echo "Attr3 : ".$attr3;
 			//echo "<br /><br />";
 
-		$tax = getTaxRate($tax_id);
+		$tax = $SI_TAX->getTaxRateById($tax_id);
 		$product = $SI_PRODUCTS->find($product_id);
 		
 		($unit_price =="") ? $product_unit_price = $product['unit_price'] : $product_unit_price = $unit_price ;
@@ -149,6 +150,7 @@ class matrix_invoice
 	function updateInvoiceItem($id,$quantity,$product_id,$tax_id,$description,$attr1="",$attr2="",$attr3="", $unit_price="") {
         
         $SI_PRODUCTS = new SimpleInvoices_Db_Table_Products();
+        $SI_TAX = new SimpleInvoices_Db_Table_Tax();
         
 			$attr1 = explode("-",$attr1);
 			$attr1 = $attr1[2];
@@ -166,7 +168,7 @@ class matrix_invoice
 
 		$product = $SI_PRODUCTS->find($product_id);
 		($unit_price == "") ? $product_unit_price = $product['unit_price'] : $product_unit_price = $unit_price ;
-		$tax = getTaxRate($tax_id);
+		$tax = $SI_TAX->getTaxRateById($tax_id);
 		
 		$total_invoice_item_tax = $product_unit_price * $tax['tax_percentage'] / 100;	//:100?
 		$tax_amount = $total_invoice_item_tax * $quantity;

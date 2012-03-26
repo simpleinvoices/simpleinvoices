@@ -6,6 +6,8 @@ checkLogin();
 $SI_PAYMENT_TYPES = new SimpleInvoices_Db_Table_PaymentTypes();
 $SI_INVOICE_TYPE = new SimpleInvoices_Db_Table_InvoiceType();
 $SI_BILLER = new SimpleInvoices_Db_Table_Biller();
+$SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
+$SI_CUSTOM_FIELDS = new SimpleInvoices_Db_Table_CustomFields();
 
 $menu = false;
 $payment = getPayment($_GET['id']);
@@ -17,9 +19,9 @@ $logo = getLogo($biller);
 $logo = str_replace(" ", "%20", $logo);
 $customer = customer::get($payment['customer_id']);
 $invoiceType = $SI_INVOICE_TYPE->getInvoiceType($invoice['type_id']);
-$customFieldLabels = getCustomFieldLabels();
+$customFieldLabels = $SI_CUSTOM_FIELDS->getLabels();
 $paymentType = $SI_PAYMENT_TYPES->find($payment['ac_payment_type']);
-$preference = getPreference($invoice['preference_id']);
+$preference = $SI_PREFERENCES->getPreferenceById($invoice['preference_id']);
 
 $smarty -> assign("payment",$payment);
 $smarty -> assign("invoice",$invoice);

@@ -3,9 +3,10 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$SI_CUSTOM_FIELDS = new SimpleInvoices_Db_Table_CustomFields();
 
 #get custom field labels
-$customFieldLabel = getCustomFieldLabels();
+$customFieldLabel = $SI_CUSTOM_FIELDS->getLabels();
 
 //if valid then do save
 if ($_POST['description'] != "" ) {

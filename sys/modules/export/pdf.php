@@ -6,10 +6,13 @@
 /*
 require_once("./sys/include/init.php");	// for getInvoice() and getPreference()
 */
+
+$SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
+
 $invoice_id = $_GET['id'];
 $invoice = getInvoice($invoice_id);
 
-$preference = getPreference($invoice['preference_id']);
+$preference = $SI_PREFERENCES->getPreferenceById($invoice['preference_id']);
 $pdfname = trim($preference['pref_inv_wording']) . $invoice_id;
 
 /*$url_pdf = urlPDF($invoice_id);

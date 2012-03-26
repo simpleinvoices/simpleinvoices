@@ -16,6 +16,8 @@ class export
 	function showData($data)
 	{
 
+        $SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
+        
         if($this->file_name =='')
         {
             switch ($this->module)
@@ -47,7 +49,7 @@ class export
 			case "file":
 			{
 				$invoice = getInvoice($this->id);
-				$preference = getPreference($invoice['preference_id']);
+				$preference = $SI_PREFERENCES->getPreferenceById($invoice['preference_id']);
 
 				//xls/doc export no longer uses the export template
 				//$template = "export";
@@ -97,6 +99,8 @@ class export
 		global $include_dir;
         
         $SI_BILLER = new SimpleInvoices_Db_Table_Biller();
+        $SI_CUSTOM_FIELDS = new SimpleInvoices_Db_Table_CustomFields();
+        $SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
         
 		switch ($this->module)
 		{
@@ -218,9 +222,9 @@ class export
                 $logo = str_replace(" ", "%20", $logo);
                 $customer = customer::get($payment['customer_id']);
                 $invoiceType = $SI_INVOICE_TYPE->getInvoiceType($invoice['type_id']);
-                $customFieldLabels = getCustomFieldLabels();
+                $customFieldLabels = $SI_CUSTOM_FIELDS->getLabels();
                 $paymentType = $SI_PAYMENT_TYPES->find($payment['ac_payment_type']);
-                $preference = getPreference($invoice['preference_id']);
+                $preference = $SI_PREFERENCES->getPreferenceById($invoice['preference_id']);
 
                 $smarty -> assign("payment",$payment);
                 $smarty -> assign("invoice",$invoice);
@@ -251,7 +255,7 @@ class export
  			    $invoice_number_of_taxes = numberOfTaxesForInvoice($this->id);
 				$customer = customer::get($invoice['customer_id']);
 				$biller = biller::select($invoice['biller_id']);
-				$preference = getPreference($invoice['preference_id']);
+				$preference = $SI_PREFERENCES->getPreferenceById($invoice['preference_id']);
 				$defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 				$logo = getLogo($biller);
 				$logo = str_replace(" ", "%20", $logo);
@@ -260,8 +264,8 @@ class export
 				$spc2us_pref = str_replace(" ", "_", $invoice['index_name']);
 				$this->file_name = $spc2us_pref;
 
-				$customFieldLabels = getCustomFieldLabels();
-				$customFieldDisplay = getCustomFieldDisplay();
+				$customFieldLabels = $SI_CUSTOM_FIELDS->getLabels();
+				$customFieldDisplay = $SI_CUSTOM_FIELDS->getDisplay();
 
 				/*Set the template to the default*/
 				$template = $defaults['template'];

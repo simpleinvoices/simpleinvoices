@@ -19,7 +19,9 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$customFieldLabel = getCustomFieldLabels();
+$SI_CUSTOM_FIELDS = new SimpleInvoices_Db_Table_CustomFields();
+
+$customFieldLabel = $SI_CUSTOM_FIELDS->getLabels();
 
 //if valid then do save
 if (isset($_POST['name']) && $_POST['name'] != "" ) {
@@ -30,3 +32,4 @@ $smarty -> assign('customFieldLabel',$customFieldLabel);
 $smarty -> assign('pageActive', 'customer');
 $smarty -> assign('subPageActive', 'customer_add');
 $smarty -> assign('active_tab', '#people');
+?>

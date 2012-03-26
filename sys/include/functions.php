@@ -573,11 +573,13 @@ Purpose: get the total tax for the line item
 function getTaxesPerLineItem($line_item_tax_id,$quantity, $unit_price)
 {
     global $logger;
-
+    
+    $SI_TAX = new SimpleInvoices_Db_Table_Tax();
+    
     foreach($line_item_tax_id as $key => $value)
     {
         $logger->log("Key: ".$key." Value: ".$value, Zend_Log::INFO);
-        $tax = getTaxRate($value);
+        $tax = $SI_TAX->getTaxRateById($value);
         $logger->log('tax rate: '.$tax['tax_percentage'], Zend_Log::INFO);
 
         $tax_amount = lineItemTaxCalc($tax,$unit_price,$quantity);

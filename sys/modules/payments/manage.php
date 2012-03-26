@@ -2,6 +2,9 @@
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
+
+$SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
+
 //TODO - replace get..Payments with simple count - as data is got by xml.php now
 $query = null;$inv_id = null;$c_id = null;
 #if coming from another page where you want to filter by just one invoice
@@ -11,7 +14,7 @@ if (!empty($_GET['id'])) {
 	$inv_id = $_GET['id'];
 	$query = getInvoicePayments($_GET['id']);
 	$invoice = getInvoice($_GET['id']);
-	$preference = getPreference($invoice['preference_id']);
+	$preference = $SI_PREFERENCES->getPreferenceById($invoice['preference_id']);
     $subPageActive = "payment_filter_invoice";
 }
 #if coming from another page where you want to filter by just one customer

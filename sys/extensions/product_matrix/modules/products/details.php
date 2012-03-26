@@ -3,6 +3,7 @@
 checkLogin();
 
 $SI_PRODUCTS = new SimpleInvoices_Db_Table_Products();
+$SI_CUSTOM_FIELDS = new SimpleInvoices_Db_Table_CustomFields();
 
 #get the invoice id
 $product_id = $_GET['id'];
@@ -10,7 +11,7 @@ $product_id = $_GET['id'];
 $product = $SI_PRODUCTS->find($product_id);
 
 #get custom field labels
-$customFieldLabel = getCustomFieldLabels();
+$customFieldLabel = $SI_CUSTOM_FIELDS->getLabels();
 
 $pageActive = "products";
 

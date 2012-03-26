@@ -13,8 +13,8 @@ if ($_POST['p_description'] != "" ) {
 #get the invoice id
 $preference_id = $_GET['id'];
 
-$preference = getPreference($preference_id);
-$index_group = getPreference($preference['index_group']);
+$preference = $SI_PREFERENCES->getPreferenceById($preference_id);
+$index_group = $SI_PREFERENCES->getPreferenceById($preference['index_group']);
 
 $preferences = $SI_PREFERENCES->fetchAllActive();
 $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();

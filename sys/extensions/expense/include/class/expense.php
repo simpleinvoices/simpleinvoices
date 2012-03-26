@@ -199,6 +199,9 @@ class expense
         
         global $logger;
         global $db;
+        
+        $SI_TAX = new SimpleInvoices_Db_Table_Tax();
+        
         $logger->log("Exp ITEM :: Key: ".$key." Value: ".$value, Zend_Log::INFO);
 
         //if editing invoice delete all tax info then insert first then do insert again
@@ -221,7 +224,7 @@ class expense
         {
             if($value !== "")
             {
-                $tax = getTaxRate($value);
+                $tax = $SI_TAX->getTaxRateById($value);
 
                 $logger->log("Expense - item tax :: Key: ".$key." Value: ".$value, Zend_Log::INFO);
                 $logger->log('Expense - item tax :: tax rate: '.$tax['tax_percentage'], Zend_Log::INFO);

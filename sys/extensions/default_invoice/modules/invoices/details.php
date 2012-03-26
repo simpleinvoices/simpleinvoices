@@ -33,7 +33,7 @@ $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
 
 $invoiceItems = invoice::getInvoiceItems($master_invoice_id);
 $customers = $SI_CUSTOMERS->fetchAllActive();
-$preference = getPreference($invoice['preference_id']);
+$preference = $SI_PREFERENCES->getPreferenceById($invoice['preference_id']);
 $billers = $SI_BILLER->fetchAllActive();
 $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 $taxes = $SI_TAX->fetchAllActive();

@@ -19,11 +19,12 @@
 checkLogin();
 
 $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
+$SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
 
 #get the invoice id
 $invoice_id = $_GET['id'];
 $invoice = getInvoice($invoice_id);
-$preference = getPreference($invoice['preference_id']);
+$preference = $SI_PREFERENCES->getPreferenceById($invoice['preference_id']);
 $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 $invoicePaid = calc_invoice_paid($invoice_id);
 $invoiceItems = invoice::getInvoiceItems($invoice_id);
