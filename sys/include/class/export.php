@@ -48,9 +48,6 @@ class export
 			}
 			case "file":
 			{
-				$invoice = getInvoice($this->id);
-				$preference = $SI_PREFERENCES->getPreferenceById($invoice['preference_id']);
-
 				//xls/doc export no longer uses the export template
 				//$template = "export";
 
@@ -76,6 +73,8 @@ class export
 					}
 					default:
 					{
+                        $invoice = getInvoice($this->id);
+                        $preference = $SI_PREFERENCES->getPreferenceById($invoice['preference_id']);
 						header('Content-Disposition: attachment; filename="'.addslashes($preference[pref_inv_heading].$this->id.'.'.$this->file_type).'"');
 						break;
 					}
@@ -85,7 +84,6 @@ class export
 				header("Expires: 0");
 
 				echo($data);
-
 				break;
 			}
 		}
@@ -106,10 +104,7 @@ class export
 		{
 			case "database":
 			{
-				$oBack = new backup_db;
-				$oBack->start_backup();
-				$data = $oBack->output;
-
+                $data = SimpleInvoices_Db::performBackup();
 				break;
 			}
 			case "statement":
@@ -223,7 +218,7 @@ class export
                 $customer = customer::get($payment['customer_id']);
                 $invoiceType = $SI_INVOICE_TYPE->getInvoiceType($invoice['type_id']);
                 $customFieldLabels = $SI_CUSTOM_FIELDS->getLabels();
-                $paymentType = $SI_PAYMENT_TYPES->find($payment['ac_payment_type']);
+                $paymentType = $SI_PAYMENT_TYPES->getPaymentTypeById($payment['ac_payment_type']);
                 $preference = $SI_PREFERENCES->getPreferenceById($invoice['preference_id']);
 
                 $smarty -> assign("payment",$payment);

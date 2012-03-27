@@ -145,8 +145,8 @@ class SimpleInvoices_Db_Table_SystemDefaults extends SimpleInvoices_Db_Table_Abs
         $where = array();
         $where[] = $this->getAdapter()->quoteInto('name = ?', $name);
         
-        $extensions = new SimpleInvoices_Db_Table_Extensions();
-        $extension_id = $extensions->findByName($extension_name);
+        $SI_EXTENSIONS = new SimpleInvoices_Db_Table_Extensions();
+        $extension_id = $SI_EXTENSIONS->findByName($extension_name);
         if ($extension_id >= 0) {
             $where[] = $this->getAdapter()->quoteInto('extension_id = ?', $extension_id);
         } else {

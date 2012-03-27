@@ -183,19 +183,26 @@ $db = db::getInstance();
 
 include_once("sys/include/sql_queries.php");
 
-
-$install_tables_exists = checkTableExists(TB_PREFIX."biller");
+$install_tables_exists = SimpleInvoices_Db::tableExists("biller");
 if ($install_tables_exists == true)
 {
-	$install_data_exists = checkDataExists();
+	$install_data_exists = SimpleInvoices_Db::dataExists();
 }
 
 //TODO - add this as a function in sql_queries.php or a class file
 //if ( ($install_tables_exists != false) AND ($install_data_exists != false) )
 if ( $install_tables_exists != false )
 {
-	if (getNumberOfDoneSQLPatches() > "196")
+	if (SimpleInvoices_Db_Table_SQLPatchManager::getNumberOfDoneSQLPatches() > "196")
 	{
+        $SI_EXTENSIONS = new SimpleInvoices_Db_Table_Extensions();
+        // ToDo: Watch out! This get's translated while the original doesn't!!!
+        $extensions = $SI_EXTENSIONS->fetchAll();
+        $DB_extensions = array();
+        foreach($extensions as $this_extension) {
+            $DB_extensions[$this_extension['name']] = $this_extension;
+        }
+        /*
 	    $sql="SELECT * from ".TB_PREFIX."extensions WHERE (domain_id = :id OR domain_id =  0 ) ORDER BY domain_id ASC";
 	    $sth = dbQuery($sql,':id', $auth_session->domain_id ) or die(htmlsafe(end($dbh->errorInfo())));
 
@@ -203,6 +210,7 @@ if ( $install_tables_exists != false )
 	    {
 	    	$DB_extensions[$this_extension['name']] = $this_extension;
 	    }
+        */
 	    $config->extension = $DB_extensions;
 	}
 }
@@ -219,7 +227,6 @@ if ($config->extension != null)
 		*/
 		if($extension->enabled == "1")
 		{
-			//echo "Enabled:".$value['name']."<br><br>";
 			if(file_exists($include_dir . "sys/extensions/$extension->name/include/init.php"))
 			{
 				require_once("sys/extensions/$extension->name/include/init.php");
@@ -246,7 +253,7 @@ require_once($include_dir . 'sys/include/language.php');
 //add class files for extensions
 
 
-checkConnection();
+//checkConnection();
 
 require_once($include_dir . 'sys/include/manageCustomFields.php');
 require_once($include_dir . "sys/include/validation.php");
@@ -298,9 +305,6 @@ $siUrl = getURL();
 
 //If using the folowing line, the DB settings should be appended to the config array, instead of replacing it (NOT TESTED!)
 //$config->extension() = $DB_extensions;
-
-
-include_once($include_dir . "sys/include/backup.lib.php");
 
 if (isset($install_data_exists) && $install_data_exists) {
     $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();

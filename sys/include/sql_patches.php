@@ -615,20 +615,18 @@ INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 	$patch['127']['date'] = "200709";
 	
 	$patch['128']['name'] = "Add user table";
-		if(checkTableExists(TB_PREFIX.'users') == true) 
+		if(SimpleInvoices_Db::tableExists('users') == true) 
 		{
-			if(checkFieldExists(TB_PREFIX.'users','user_domain') == true) 
+            if (SimpleInvoices_Db_Table_User::fieldExists('user_domain')) 
 			{	
 				//dummy patch - if table and domain field exists do nothing
 				$patch['128']['patch'] = "select * from ".TB_PREFIX."users ;";
-			}
-			if(checkFieldExists(TB_PREFIX.'users','user_domain') == false) 
-			{	
+			} else {
 				//alter existing table to add domain
 				$patch['128']['patch'] = "ALTER TABLE `".TB_PREFIX."users` ADD `user_domain` VARCHAR( 255 ) NOT NULL AFTER `user_group` ;";				
 			}	
 		}
-		if(checkTableExists(TB_PREFIX.'users') == false) 
+		if(SimpleInvoices_Db::tableExists('users') == false) 
 		{
 			$patch['128']['patch'] = "CREATE TABLE IF NOT EXISTS `".TB_PREFIX."users` (
 `user_id` int(11) NOT NULL auto_increment,
@@ -649,12 +647,12 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 	
 	$patch['130']['name'] = "Create auth_challenges table";
 	
-			if(checkTableExists(TB_PREFIX.'auth_challenges') == true)
+			if(SimpleInvoices_Db::tableExists('auth_challenges') == true)
 			{
 				//a do nothing patch cause the table already exists
 			$patch['130']['patch'] = "select * from ".TB_PREFIX."auth_challenges";
 			}
-			if(checkTableExists(TB_PREFIX.'auth_challenges') == false)
+			if(SimpleInvoices_Db::tableExists('auth_challenges') == false)
 			{
 				$patch['130']['patch'] = "CREATE TABLE IF NOT EXISTS `".TB_PREFIX."auth_challenges` (
 `challenges_key` int(11) NOT NULL,

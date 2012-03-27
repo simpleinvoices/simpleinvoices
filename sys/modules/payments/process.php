@@ -39,7 +39,7 @@ if(isset($_GET['id'])) {
 $customer = customer::get($invoice['customer_id']);
 $biller = $SI_BILLER->getBiller($invoice['biller_id']);
 $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
-$pt = $SI_PAYMENT_TYPES->find($defaults['payment_type']);
+$pt = $SI_PAYMENT_TYPES->getPaymentTypeById($defaults['payment_type']);
 
 $invoices = new invoice();
 $invoices->sort='id';

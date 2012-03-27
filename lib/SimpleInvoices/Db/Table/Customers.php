@@ -5,6 +5,20 @@ class SimpleInvoices_Db_Table_Customers extends SimpleInvoices_Db_Table_Abstract
     protected $_primary = array('domain_id', 'id');
     
     /**
+    * Fetch all customers
+    */
+    public function fetchAll()
+    {
+        $auth_session = Zend_Registry::get('auth_session');
+        
+        $select = $this->select();
+        $select->where('domain_id = ?', $auth_session->domain_id);
+        $select->order('name');
+        
+        return $this->getAdapter()->fetchAll($select);    
+    }
+    
+    /**
     * Fetch all active customers
     * 
     */

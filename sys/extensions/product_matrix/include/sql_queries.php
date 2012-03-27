@@ -111,7 +111,7 @@ class matrix_invoice
 			//echo "<br /><br />";
 
 		$tax = $SI_TAX->getTaxRateById($tax_id);
-		$product = $SI_PRODUCTS->find($product_id);
+		$product = $SI_PRODUCTS->getProductById($product_id);
 		
 		($unit_price =="") ? $product_unit_price = $product['unit_price'] : $product_unit_price = $unit_price ;
 		//print_r($product);
@@ -166,7 +166,7 @@ class matrix_invoice
 			//echo "<br /><br />";
 
 
-		$product = $SI_PRODUCTS->find($product_id);
+		$product = $SI_PRODUCTS->getProductById($product_id);
 		($unit_price == "") ? $product_unit_price = $product['unit_price'] : $product_unit_price = $unit_price ;
 		$tax = $SI_TAX->getTaxRateById($tax_id);
 		

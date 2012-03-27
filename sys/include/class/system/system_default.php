@@ -18,8 +18,8 @@ class system_default {
 		//dont worry about checking db if were using the core extension
 		if (  $this->extension_name != "core" )
 		{
-            $extensions = new SimpleInvoices_Db_Table_Extensions();
-            $extension_id = $extensions->findByName($extension_name);
+            $SI_EXTENSIONS = new SimpleInvoices_Db_Table_Extensions();
+            $extension_id = $SI_EXTENSIONS->findByName($extension_name);
 		} else {
 			$extension_id = 0;
 		}

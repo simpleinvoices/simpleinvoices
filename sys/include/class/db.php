@@ -10,7 +10,7 @@ class db
 
 	function __construct()
 	{
-
+                                                      
 		global $config;
         //check if PDO is availbel
         

@@ -61,7 +61,7 @@ class SimpleInvoices_Db_Table_PaymentTypes extends SimpleInvoices_Db_Table_Abstr
         return $payment_types;
     }
     
-    public function find($id)
+    public function getPaymentTypeById($id)
     {
         global $LANG;
         

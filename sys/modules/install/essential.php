@@ -2,7 +2,7 @@
 
 $menu = false;
 
-if ( (checkTableExists(TB_PREFIX."customers") == true) AND ($install_data_exists == false) )
+if ( (SimpleInvoices_Db::tableExists("customers") == true) AND ($install_data_exists == false) )
 {
 //	echo "ESSENTIAL";
 	//JSON import

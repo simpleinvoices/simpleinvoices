@@ -16,10 +16,9 @@ class SimpleInvoices_Db_Table_Extensions extends SimpleInvoices_Db_Table_Abstrac
         $auth_session = Zend_Registry::get('auth_session');
         
         $select = $this->select();
-        $domains = array();
-        $domains[] = $this->getAdapter()->quoteInto('domain_id = ?', 0);
-        $domains[] = $this->getAdapter()->quoteInto('domain_id = ?', $auth_session->domain_id);
-        $select->where("(" . implode(' OR ', $domains) . ")");
+        $select->where('domain_id = ?', 0)
+            ->orWhere('domain_id = ?', $auth_session->domain_id);
+            
         $select->order('name');
         
         $result = $this->getAdapter()->fetchAll($select);
@@ -43,7 +42,7 @@ class SimpleInvoices_Db_Table_Extensions extends SimpleInvoices_Db_Table_Abstrac
     /**
     * Find an extension by id
     */
-    public function find($id)
+    public function getExtensionById($id)
     {
         $auth_session = Zend_Registry::get('auth_session');
 

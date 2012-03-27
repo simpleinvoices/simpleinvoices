@@ -56,7 +56,7 @@ class SimpleInvoices_Db_Table_Products extends SimpleInvoices_Db_Table_Abstract
     /**
     * Replaces getProduct
     */
-    public function find($id)
+    public function getProductById($id)
     {
         global $LANG;
         

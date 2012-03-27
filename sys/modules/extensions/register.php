@@ -19,8 +19,8 @@ else $extension_desc = NULL;
 if ($extension_id == null) {	// extension not yet registered
     $count = 0;
 } else {
-    $extensions = new SimpleInvoices_Db_Table_Extensions();
-    $info = $extensions->find($extension_id);
+    $SI_EXTENSIONS = new SimpleInvoices_Db_Table_Extensions();
+    $info = $SI_EXTENSIONS->getExtensionById($extension_id);
     $extension_name = $info['name'];
     $extension_desc = $info['description'];
 

@@ -2,7 +2,7 @@
 $menu = false;
 
 
-if (checkTableExists() == false)
+if (SimpleInvoices_Db::tableExists("billers") == false)
 {
 //	echo "SCHEME";
 	//SQL import

@@ -2,32 +2,16 @@
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
-function getExtensions() {
-	global $LANG;
-	global $dbh;
-	global $auth_session;
-
-	$sql = "SELECT * FROM ".TB_PREFIX."extensions WHERE domain_id = 0 OR domain_id = :domain_id ORDER BY name";
-	$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
-
-	$exts = null;
-
-	for($i=0; $ext = $sth->fetch(); $i++) {
-		$exts[$i] = $ext;
-	}
-
-	return $exts;
-}
 
 isset($_GET['id']) && $extension_id = $_GET['id'];
 isset($_GET['action']) && $action = $_GET['action'];
 
-$extensions = new SimpleInvoices_Db_Table_Extensions();
+$SI_EXTENSIONS = new SimpleInvoices_Db_Table_Extensions();
 if ($action == 'toggle') {
-    $extensions->toggleStatus($extension_id) or die(htmlsafe("Something went wrong with the status change!"));
+    $SI_EXTENSIONS->toggleStatus($extension_id) or die(htmlsafe("Something went wrong with the status change!"));
 }
 
-$smarty -> assign("exts",$extensions->getCount());
+$smarty -> assign("exts",$SI_EXTENSIONS->getCount());
 
 $smarty -> assign('pageActive', 'setting');
 $smarty -> assign('active_tab', '#setting');

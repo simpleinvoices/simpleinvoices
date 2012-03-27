@@ -584,18 +584,14 @@ function getCustomerInvoices($id) {
 }
 
 function getCustomers() {
-	global $dbh;
 	global $LANG;
-	global $auth_session;
 
-	$customer = null;
+    $SI_CUSTOMERS = new SimpleInvoices_Db_Table_Customers();
+    $result = $SI_CUSTOMERS->fetchAll();
+	
+	$customers = array();
 
-	$sql = "SELECT * FROM ".TB_PREFIX."customers WHERE domain_id = :domain_id";
-	$sth = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
-
-	$customers = null;
-
-	for($i=0; $customer = $sth->fetch(); $i++) {
+    foreach($result as $customer) {
 		if ($customer['enabled'] == 1) {
 			$customer['enabled'] = $LANG['enabled'];
 		} else {
@@ -614,8 +610,7 @@ function getCustomers() {
 		$customer['owing'] = $customer['total'] - $customer['paid'];
 
 		#amount owing calc - end
-		$customers[$i] = $customer;
-
+		$customers[] = $customer;
 	}
 
 	return $customers;
@@ -1253,105 +1248,4 @@ function delete($module,$idField,$id) {
 	return dbQuery($sql, ':id', $id);
 }
 
-/* Not used
-function maxInvoice() {
-
-	global $LANG;
-
-	$sql = "SELECT max(id) as maxId FROM ".TB_PREFIX."invoices";
-
-	$sth = dbQuery($sql);
-	return $sth->fetch();
-
-//while ($Array_max = mysql_fetch_array($result_max) ) {
-//$max_invoice_id = $Array_max['max_inv_id'];
-};
-*/
-
-//in this file are functions for all sql queries
-function checkTableExists($table = "" ) {
-
-	//$db = db::getInstance();
-	//var_dump($db);
-	$table == "" ? TB_PREFIX."biller" : $table;
-
-  //  echo $table;
-	global $LANG;
-	global $dbh;
-	global $config;
-	switch ($config->resources->db->adapter)
-	{
-
-		case "pdo_pgsql":
-			$sql = 'SELECT 1 FROM pg_tables WHERE tablename = '.$table.' LIMIT 1';
-			break;
-
-		case "pdo_sqlite":
-			$sql = 'SELECT * FROM '.$table.'LIMIT 1';
-			break;
-		case "pdo_mysql":
-		default:
-		//mysql
-			//$sql = "SELECT 1 FROM INFORMATION_SCHEMA.TABLES where table_name = :table LIMIT 1";
-			$sql = "SHOW TABLES LIKE '".$table."'";
-			break;
-	}
-
-	//$sth = $dbh->prepare($sql);
-	$sth = dbQuery($sql);
-	if ($sth->fetchAll())
-	{
-		return true;
-	} else {
-		return false;
-	}
-
-}
-
-function checkFieldExists($table,$field) {
-
-	global $LANG;
-	global $dbh;
-	global $db_server;
-
-	$sql = "SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE column_name = :field AND table_name = :table LIMIT 1";
-	if ($db_server == 'pgsql') {
-		// Use a nicer syntax
-		$sql = "SELECT 1 FROM pg_attribute a INNER JOIN pg_class c ON (a.attrelid = c.oid)  WHERE c.relkind = 'r' AND c.relname = :table AND a.attname = :field AND NOT a.attisdropped AND a.attnum > 0 LIMIT 1";
-	}
-
-	$sth = $dbh->prepare($sql);
-
-	if ($sth && $sth->execute(array(':field' => $field, ':table' => $table))) {
-		if ($sth->fetch()) {
-			return true;
-		} else {
-			return false;
-		}
-	} else {
-		return false;
-	}
-}
-
-function checkDataExists()
-{
-	$test = getNumberOfDoneSQLPatches();
-	if ($test > 0 ){
-		return true;
-	} else {
-		return false;
-	}
-}
-
-function getNumberOfDoneSQLPatches() {
-	global $dbh;
-
-	$check_patches_sql = "SELECT count(sql_patch) AS count FROM ".TB_PREFIX."sql_patchmanager ";
-	$sth = dbQuery($check_patches_sql) or die(htmlsafe(end($dbh->errorInfo())));
-
-	$patches = $sth->fetch();
-
-	//Returns number of patches applied
-	return $patches['count'];
-}
 ?>

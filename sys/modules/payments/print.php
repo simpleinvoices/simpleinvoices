@@ -20,7 +20,7 @@ $logo = str_replace(" ", "%20", $logo);
 $customer = customer::get($payment['customer_id']);
 $invoiceType = $SI_INVOICE_TYPE->getInvoiceType($invoice['type_id']);
 $customFieldLabels = $SI_CUSTOM_FIELDS->getLabels();
-$paymentType = $SI_PAYMENT_TYPES->find($payment['ac_payment_type']);
+$paymentType = $SI_PAYMENT_TYPES->getPaymentTypeById($payment['ac_payment_type']);
 $preference = $SI_PREFERENCES->getPreferenceById($invoice['preference_id']);
 
 $smarty -> assign("payment",$payment);

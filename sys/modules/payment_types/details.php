@@ -16,7 +16,7 @@ jsEnd();
 #get the invoice id
 $payment_type_id = $_GET['id'];
 
-$paymentType = $SI_PAYMENT_TYPES->find($payment_type_id);
+$paymentType = $SI_PAYMENT_TYPES->getPaymentTypeById($payment_type_id);
 $smarty->assign('paymentType',$paymentType);
 
 $smarty -> assign('pageActive', 'payment_type');

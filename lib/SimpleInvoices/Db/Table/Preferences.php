@@ -66,30 +66,6 @@ class SimpleInvoices_Db_Table_Preferences extends SimpleInvoices_Db_Table_Abstra
     }
     
     
-    /**
-    * Find a preference by the given ID
-    * 
-    * @param mixed $id
-    * @return Zend_Db_Table_Rowset_Abstract
-    */
-    public function find($id)
-    {
-        global $LANG;
-        
-        $auth_session = Zend_Registry::get('auth_session');
-        
-        $select = $this->select();
-        $select->where('pref_id = ?', $id);
-        $select->where('domain_id = ?', $auth_session->domain_id);
-        
-        $preference =  $this->getAdapter()->fetchRow($select);
-        if ($preference) {
-            $preference['status_wording'] = $preference['status']==1?$LANG['real']:$LANG['draft'];
-            $preference['enabled'] = $preference['pref_enabled']==1?$LANG['enabled']:$LANG['disabled'];
-        }
-        
-        return $preference;
-    }
     
     public function getPreferenceById($id)
     {
