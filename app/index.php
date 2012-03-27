@@ -78,7 +78,7 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 	//check db structure - if only structure and no fields then prompt for imports
 	// 1 import essential data
     $skip_db_patches = false;
-	//$install_tables_exists = checkTableExists(TB_PREFIX."biller");
+	//$install_tables_exists = SimpleInvoices_Db::tableExists(TB_PREFIX."biller");
     if ( $install_tables_exists == false )
     {
 		$module="install";
