@@ -1562,10 +1562,15 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['271']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD INDEX `idx_visible`(`domain_id`, `visible`);";
     $patch['271']['date'] = "20120327";
     
-    // Sub_node should also be there but causes an error
     $patch['272']['name'] = "Make Simple Invoices faster - add index";
-    $patch['272']['patch'] = "ALTER TABLE `".TB_PREFIX."index` ADD INDEX `idx_node`(`domain_id`, `node`);";
+    $patch['272']['patch'] = "ALTER TABLE `".TB_PREFIX."index` ADD PRIMARY KEY (`id` ,`domain_id`);" ;
     $patch['272']['date'] = "20120327";
+    
+    
+    // Sub_node should also be there but causes an error
+    $patch['273']['name'] = "Make Simple Invoices faster - add index";
+    $patch['273']['patch'] = "ALTER TABLE `".TB_PREFIX."index` ADD INDEX `idx_node`(`domain_id`, `node`);";
+    $patch['273']['date'] = "20120327";
     
 /*
 ** comment out so can get beta of 2010.3 - to be added in later 

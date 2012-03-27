@@ -59,7 +59,7 @@ class index
     public static function increment($node,$sub_node="")
     {
     
-        $next = index::next($node,$sub_node);
+        $next = SimpleInvoices_Db_Table_Index::NEXT($node,$sub_node);
 
         global $db;
         global $auth_session;
@@ -241,7 +241,7 @@ class index
     {
     
 
-        $next = index::next($node,$sub_node,$sub_node_2);
+        $next = SimpleInvoices_Db_Table_Index::NEXT($node,$sub_node,$sub_node_2);
         $current = index::select($node,$sub_node,$sub_node_2);
 	#echo "next:".$next."current:".$current;
     $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();

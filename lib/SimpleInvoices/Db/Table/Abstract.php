@@ -39,5 +39,14 @@ class SimpleInvoices_Db_Table_Abstract extends Zend_Db_Table_Abstract
         $cols = $table->info(SimpleInvoices_Db_Table_Abstract::COLS);
         return in_array($fieldName, $cols);
     }
+    
+    /**
+    * Returns last inserted id statically
+    */
+    public static function LAST_INSERT_ID()
+    {
+        $table = new static();
+        return $table->getLastInsertedId();
+    }
 }
 ?>

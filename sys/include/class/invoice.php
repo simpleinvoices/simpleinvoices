@@ -60,7 +60,7 @@ class invoice {
 		$pref_group= $SI_PREFERENCES->getPreferenceById($this->preference_id);
 
 		$sth= dbQuery($sql,
-			':index_id', index::next('invoice',$pref_group[index_group],$this->biller_id),
+			':index_id', SimpleInvoices_Db_Table_Index::NEXT('invoice',$pref_group[index_group],$this->biller_id),
 			':domain_id', $auth_session->domain_id,
 			':biller_id', $this->biller_id,
 			':customer_id', $this->customer_id,
@@ -74,10 +74,10 @@ class invoice {
 			':custom_field4', $this->custom_field4
 			);
 
-	    index::increment('invoice',$pref_group[index_group],$this->biller_id);
+	    SimpleInvoices_Db_Table_Index::INCREMENT('invoice',$pref_group[index_group],$this->biller_id);
 
 	    //return $sth;
-	    return lastInsertID();
+        return SimpleInvoices_Db_Table_Invoices::LAST_INSERT_ID();
 		//insert into si_invoice_items
 
 		//insert into

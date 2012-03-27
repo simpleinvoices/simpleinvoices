@@ -806,11 +806,11 @@ function insertInvoice($type) {
 				)";
 	}
 	//echo $sql;
-    $pref_group= $SI_PREFERENCES->getPreferenceById($_POST[preference_id]);
+    $pref_group= $SI_PREFERENCES->getPreferenceById($_POST['preference_id']);
 
 	$sth= dbQuery($sql,
-		#':index_id', index::next('invoice',$pref_group[index_group],$_POST[biller_id]),
-		':index_id', index::next('invoice',$pref_group['index_group']),
+		#':index_id', SimpleInvoices_Db_Table_Index::NEXT('invoice',$pref_group[index_group],$_POST[biller_id]),
+		':index_id', SimpleInvoices_Db_Table_Index::NEXT('invoice',$pref_group['index_group']),
 		':domain_id', $auth_session->domain_id,
 		':biller_id', $_POST['biller_id'],
 		':customer_id', $_POST['customer_id'],
@@ -824,9 +824,9 @@ function insertInvoice($type) {
 		':customField4', $_POST['customField4']
 		);
 
-    #index::increment('invoice',$pref_group[index_group],$_POST[biller_id]);
-    index::increment('invoice',$pref_group['index_group']);
-
+    #SimpleInvoices_Db_Table_Index::INCREMENT('invoice',$pref_group[index_group],$_POST[biller_id]);
+    SimpleInvoices_Db_Table_Index::INCREMENT('invoice',$pref_group['index_group']);
+           
     return $sth;
 }
 
@@ -847,7 +847,7 @@ function updateInvoice($invoice_id) {
 
     if ($current_pref_group['index_group'] != $new_pref_group['index_group'])
     {
-        $index_id = index::increment('invoice',$new_pref_group['index_group']);
+        $index_id = SimpleInvoices_Db_Table_Index::INCREMENT('invoice',$new_pref_group['index_group']);
     }
 
 	if ($db_server == 'mysql' && !_invoice_check_fk(
