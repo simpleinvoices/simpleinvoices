@@ -1503,6 +1503,70 @@ PRIMARY KEY ( `domain_id`, `id` )
   	$patch['257']['name'] = "Add a Tax ID field to the customers table";
     $patch['257']['patch'] = "ALTER TABLE ".TB_PREFIX."customers ADD tax_id VARCHAR(16) AFTER `name`;";
     $patch['257']['date'] = "20110806";
+    
+    // --
+    
+    $patch['258']['name'] = "Make Simple Invoices faster - add index";
+    $patch['258']['patch'] = "ALTER TABLE `".TB_PREFIX."extensions` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
+    $patch['258']['date'] = "20120327";
+    
+    $patch['259']['name'] = "Make Simple Invoices faster - add index";
+    $patch['259']['patch'] = "ALTER TABLE `".TB_PREFIX."system_defaults` ADD INDEX `idx_name_domain_id`(`domain_id`, `name`);";
+    $patch['259']['date'] = "20120327";
+    
+    $patch['260']['name'] = "Make Simple Invoices faster - add index";
+    $patch['260']['patch'] = "ALTER TABLE `".TB_PREFIX."custom_fields` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `cf_id`)";
+    $patch['260']['date'] = "20120327";
+    
+    $patch['261']['name'] = "Make Simple Invoices faster - add index";
+    $patch['261']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` ADD INDEX `idx_invoice_id`(`invoice_id`);";
+    $patch['261']['date'] = "20120327";
+    
+    $patch['262']['name'] = "Make Simple Invoices faster - add index";
+    $patch['262']['patch'] = "ALTER TABLE `".TB_PREFIX."biller` ADD INDEX `idx_enabled`(`domain_id`, `enabled`);";
+    $patch['262']['date'] = "20120327";
+    
+    $patch['263']['name'] = "Make Simple Invoices faster - add index";
+    $patch['263']['patch'] = "ALTER TABLE `".TB_PREFIX."customers` ADD INDEX `idx_enabled`(`domain_id`, `enabled`);";
+    $patch['263']['date'] = "20120327";
+    
+    $patch['264']['name'] = "Make Simple Invoices faster - add index";
+    $patch['264']['patch'] = "ALTER TABLE `".TB_PREFIX."custom_fields` ADD INDEX `idx_domain_id`(`domain_id`);";
+    $patch['264']['date'] = "20120327";
+    
+    $patch['265']['name'] = "Make Simple Invoices faster - add index";
+    $patch['265']['patch'] = "ALTER TABLE `".TB_PREFIX."extensions` ADD INDEX `idx_domain_id`(`domain_id`);";
+    $patch['265']['date'] = "20120327";
+    
+    $patch['266']['name'] = "Avoid extension duplicates";
+    $patch['266']['patch'] = "ALTER TABLE `".TB_PREFIX."extensions` ADD UNIQUE `idx_unique_extension`(`domain_id`, `name`);";
+    $patch['266']['date'] = "20120327";
+    
+    $patch['267']['name'] = "Make Simple Invoices faster - add index";
+    $patch['267']['patch'] = "ALTER TABLE `".TB_PREFIX."payment_types` ADD INDEX `idx_enabled`(`domain_id`, `pt_enabled`);";
+    $patch['267']['date'] = "20120327";
+    
+    $patch['268']['name'] = "Avoid payment type duplicates";
+    $patch['268']['patch'] = "ALTER TABLE `".TB_PREFIX."payment_types` ADD UNIQUE `idx_unique_description`(`domain_id`, `pt_description`);";
+    $patch['268']['date'] = "20120327";
+    
+    $patch['269']['name'] = "Make Simple Invoices faster - add index";
+    $patch['269']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD INDEX `idx_enabled`(`domain_id`, `enabled`);";
+    $patch['269']['date'] = "20120327";
+    
+    $patch['270']['name'] = "Make Simple Invoices faster - add index";
+    $patch['270']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD INDEX `idx_domain_id`(`domain_id`);";
+    $patch['270']['date'] = "20120327";
+    
+    $patch['271']['name'] = "Make Simple Invoices faster - add index";
+    $patch['271']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD INDEX `idx_visible`(`domain_id`, `visible`);";
+    $patch['271']['date'] = "20120327";
+    
+    // Sub_node should also be there but causes an error
+    $patch['272']['name'] = "Make Simple Invoices faster - add index";
+    $patch['272']['patch'] = "ALTER TABLE `".TB_PREFIX."index` ADD INDEX `idx_node`(`domain_id`, `node`);";
+    $patch['272']['date'] = "20120327";
+    
 /*
 ** comment out so can get beta of 2010.3 - to be added in later 
     $patch['253']['name'] = "Insert invoice_creator user group";

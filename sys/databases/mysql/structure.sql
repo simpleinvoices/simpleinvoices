@@ -164,7 +164,8 @@ CREATE TABLE IF NOT EXISTS `si_index` (
   `node` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `sub_node` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `sub_node_2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `domain_id` int(11) NOT NULL
+  `domain_id` int(11) NOT NULL,
+  KEY `idx_node` (`domain_id`,`node`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
