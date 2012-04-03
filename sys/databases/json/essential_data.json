@@ -1057,10 +1057,7 @@
             "sql_patch_ref": "251"
         },
         {
-            "sql_patch_ref": "252",
-            "sql_patch": "Create variable rows_per_page for system preferences",
-            "sql_release": "20120303",
-            "sql_statement": "UPDATE create variable rows_per_page and set value to 25"
+            "sql_patch_ref": "252"
         },
         {
             "sql_patch_ref": "253"
@@ -1124,6 +1121,10 @@
         },
         {
             "sql_patch_ref": "273"
+        },
+        {
+            "sql_patch_ref": "274",
+            "sql_patch": "Create variable rows_per_page for system preferences"
         }
     ],
     "si_system_defaults": [

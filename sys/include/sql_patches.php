@@ -1572,6 +1572,11 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['273']['patch'] = "ALTER TABLE `".TB_PREFIX."index` ADD INDEX `idx_node`(`domain_id`, `node`);";
     $patch['273']['date'] = "20120327";
     
+    // Rows per page - Reported by PureWhite2010
+    $patch['274']['name'] = "Create variable rows_per_page for system preferences";
+    $patch['274']['patch'] = "INSERT INTO `".TB_PREFIX."system_preferences` (`name`, `value`, `domain_id`, `extension_id`) VALUES (`rows_per_page`, `25`, `1`, `1`);";
+    $patch['274']['date'] = "20120404";
+    
 /*
 ** comment out so can get beta of 2010.3 - to be added in later 
     $patch['253']['name'] = "Insert invoice_creator user group";
