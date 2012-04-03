@@ -1574,7 +1574,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     
     // Rows per page - Reported by PureWhite2010
     $patch['274']['name'] = "Create variable rows_per_page for system preferences";
-    $patch['274']['patch'] = "INSERT INTO `".TB_PREFIX."system_preferences` (`name`, `value`, `domain_id`, `extension_id`) VALUES (`rows_per_page`, `25`, `1`, `1`);";
+    $patch['274']['patch'] = "INSERT INTO `".TB_PREFIX."system_defaults` (`name`, `value`, `domain_id`, `extension_id`) VALUES ('rows_per_page', '25', '1', '1');";
     $patch['274']['date'] = "20120404";
     
 /*
