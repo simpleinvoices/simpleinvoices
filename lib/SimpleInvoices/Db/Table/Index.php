@@ -2,6 +2,7 @@
 class SimpleInvoices_Db_Table_Index extends SimpleInvoices_Db_Table_Abstract
 {
     protected $_name = "index";
+    protected $_primary = array('domain_id', 'id');
     
     /**
     * Insert method
