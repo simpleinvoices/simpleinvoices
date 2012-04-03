@@ -1076,6 +1076,54 @@
         },
         {
             "sql_patch_ref": "257"
+        },
+        {
+            "sql_patch_ref": "258"
+        },
+        {
+            "sql_patch_ref": "259"
+        },
+        {
+            "sql_patch_ref": "260"
+        },
+        {
+            "sql_patch_ref": "261"
+        },
+        {
+            "sql_patch_ref": "262"
+        },
+        {
+            "sql_patch_ref": "263"
+        },
+        {
+            "sql_patch_ref": "264"
+        },
+        {
+            "sql_patch_ref": "265"
+        },
+        {
+            "sql_patch_ref": "266"
+        },
+        {
+            "sql_patch_ref": "267"
+        },
+        {
+            "sql_patch_ref": "268"
+        },
+        {
+            "sql_patch_ref": "269"
+        },
+        {
+            "sql_patch_ref": "270"
+        },
+        {
+            "sql_patch_ref": "271"
+        },
+        {
+            "sql_patch_ref": "272"
+        },
+        {
+            "sql_patch_ref": "273"
         }
     ],
     "si_system_defaults": [
