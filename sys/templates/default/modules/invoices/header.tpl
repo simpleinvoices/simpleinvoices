@@ -28,25 +28,24 @@
 
 <input type="hidden" name="action" value="insert" />
 <table align="center">
-<tr>
-<td>
-       <table align="left">
-
-               <tr>
-                      <td class="details_screen">
-                               {$LANG.biller}
-                       </td>
-                       <td>
-                           {if $billers == null }
-                              <p><em>{$LANG.no_billers}</em></p>
-                           {else}
-                            <select name="biller_id">
-                            {foreach from=$billers item=biller}
+	<tr>
+		<td>
+       		<table align="left">
+				<tr>
+                	<td class="details_screen">
+                    	{$LANG.biller}
+                    </td>
+                    <td>
+                    	{if $billers == null }
+                        <p><em>{$LANG.no_billers}</em></p>
+                        {else}
+                        <select name="biller_id">
+                        {foreach from=$billers item=biller}
                             <option {if $biller.id == $defaults.biller} selected {/if} value="{$biller.id|htmlsafe}">{$biller.name|htmlsafe}</option>
-                            {/foreach}
-                            </select>
-                            {/if}
-                        </td>
+                        {/foreach}
+                        </select>
+                        {/if}
+                    </td>
                 </tr>
                 <tr>
                     <td class="details_screen">
@@ -77,7 +76,7 @@
                                 size="10"
                                 name="date"
                                 id="date1"
-								{if $smarty.get.date}
+								{if isset($smarty.get.date)}
 								    value="{$smarty.get.date}"
 								{else}
                                     value='{$smarty.now|date_format:"%Y-%m-%d"}'

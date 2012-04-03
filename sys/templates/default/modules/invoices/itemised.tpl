@@ -129,71 +129,30 @@
 					<tr>
 						<td>
 							{if $smarty.section.line.index == "0"}
-							<a 
-								href="#" 
-								class="trash_link"
-								id="trash_link{$smarty.section.line.index|htmlsafe}"
-								title="{$LANG.cannot_delete_first_row|htmlsafe}"
-							>
-								<img 
-									id="trash_image{$smarty.section.line.index|htmlsafe}"
-									src="{$baseUrl}images/common/blank.gif"
-									height="16px"
-									width="16px"
-									title="{$LANG.cannot_delete_first_row}"
-									alt=""
-								 />
+							<a href="#" class="trash_link" id="trash_link{$smarty.section.line.index|htmlsafe}" title="{$LANG.cannot_delete_first_row|htmlsafe}">
+								<img id="trash_image{$smarty.section.line.index|htmlsafe}" src="{$baseUrl}images/common/blank.gif" height="16px" width="16px" title="{$LANG.cannot_delete_first_row}" alt="" />
 							</a>
 							{/if}
 							{if $smarty.section.line.index != 0}
 							{* can't delete line 0 *}
 							<!-- onclick="delete_row({$smarty.section.line.index|htmlsafe});" --> 
-							<a 
-								id="trash_link{$smarty.section.line.index|htmlsafe}"
-								class="trash_link"
-								title="{$LANG.delete_row}" 
-								rel="{$smarty.section.line.index|htmlsafe}"
-								href="#" 
-								style="display: inline;"
-							>
+							<a id="trash_link{$smarty.section.line.index|htmlsafe}" class="trash_link" title="{$LANG.delete_row}" rel="{$smarty.section.line.index|htmlsafe}" href="#" style="display: inline;">
 								<img src="{$baseUrl}images/common/delete_item.png" alt="" />
 							</a>
 							{/if}
 						</td>
 						<td>
-							<input 
-                                type="text" 
-                                {if $smarty.section.line.index == "0"} 
-                                    class="validate[required]" 
-                                {/if} 
-                                name="quantity{$smarty.section.line.index|htmlsafe}" 
-                                id="quantity{$smarty.section.line.index|htmlsafe}" size="5" 
-								{if $smarty.get.quantity.$lineNumber}
-								    value="{$smarty.get.quantity.$lineNumber}"
-                                {/if}
-                                />
+							<input type="text" {if $smarty.section.line.index == "0"}class="validate[required]"{/if} name="quantity{$smarty.section.line.index|htmlsafe}" id="quantity{$smarty.section.line.index|htmlsafe}" size="5" {if isset($smarty.get.quantity.$lineNumber)}value="{$smarty.get.quantity.$lineNumber}"{else}value=""{/if} />
                         </td>
 						<td>
 										
 					{if $products == null }
 						<p><em>{$LANG.no_products}</em></p>
 					{else}
-						<select 
-							id="products{$smarty.section.line.index|htmlsafe}"
-							name="products{$smarty.section.line.index|htmlsafe}"
-							rel="{$smarty.section.line.index|htmlsafe}"
-							class="{if $smarty.section.line.index == "0"}validate[required]{/if} product_change"						
-                        >
+						<select id="products{$smarty.section.line.index|htmlsafe}" name="products{$smarty.section.line.index|htmlsafe}" rel="{$smarty.section.line.index|htmlsafe}" class="{if $smarty.section.line.index == "0"}validate[required]{/if} product_change">
 							<option value=""></option>
 						{foreach from=$products item=product}
-							<option 
-								{if $product.id == $smarty.get.product.$lineNumber}
-								    value="{$smarty.get.product.$lineNumber}"
-								    selected
-								{else}
-								    value="{$product.id|htmlsafe}"
-								{/if}
-							>
+							<option {if isset($smarty.get.product.$lineNumber) && $product.id == $smarty.get.product.$lineNumber}value="{$smarty.get.product.$lineNumber}" selected{else}value="{$product.id|htmlsafe}"{/if}>
 								{$product.description|htmlsafe}
 							</option>
 						{/foreach}
@@ -210,7 +169,7 @@
 							<option value=""></option>
 							{foreach from=$taxes item=tax}
 								<option 
-                                    {if $tax.tax_id == $smarty.get.tax.$lineNumber.$taxNumber}
+								{if isset($smarty.get.tax.$lineNumber.$taxNumber) && $tax.tax_id == $smarty.get.tax.$lineNumber.$taxNumber}
                                         value="{$smarty.get.tax.$lineNumber.$taxNumber}"
                                         selected
                                     {else}
@@ -228,7 +187,7 @@
 								id="unit_price{$smarty.section.line.index|htmlsafe}" 
 								name="unit_price{$smarty.section.line.index|htmlsafe}" 
 								size="7"
-								{if $smarty.get.unit_price.$lineNumber}
+								{if isset($smarty.get.unit_price.$lineNumber)}
 								    value="{$smarty.get.unit_price.$lineNumber}"
 								{else}
 								   value=""
@@ -242,7 +201,7 @@
 							<td>
 							</td>
 							<td colspan="4">
-								<textarea input type="text" class="note" name="description{$smarty.section.line.index|htmlsafe}" id="description{$smarty.section.line.index|htmlsafe}" rows="3" cols=3 WRAP=nowrap></textarea>
+								<textarea input type="text" class="note" name="description{$smarty.section.line.index|htmlsafe}" id="description{$smarty.section.line.index|htmlsafe}" rows="3" cols="3" WRAP="nowrap"></textarea>
 								
 								</td>
 					</tr>
@@ -293,7 +252,7 @@
 	<tr>
 		<td colspan="4">
 			<textarea input type="text" class="editor" name="note" rows="5" cols="50" wrap="nowrap">
-								{$smarty.get.note}
+				{if isset($smarty.get.note)}{$smarty.get.note}{/if}
             </textarea>
 		</td>
 	</tr>

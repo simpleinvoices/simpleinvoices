@@ -287,7 +287,7 @@ n Script: details.tpl
 		<img src="{$baseUrl}images/common/help-small.png" alt="" />
 		</a>
 		</td>
-		<td><input type="text" name="custom_field1" value="{$biller.custom_field1|htmlsafe}" size="50"</td>
+		<td><input type="text" name="custom_field1" value="{$biller.custom_field1|htmlsafe}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.biller_cf2}
@@ -300,7 +300,7 @@ n Script: details.tpl
 		<img src="{$baseUrl}images/common/help-small.png" alt="" />
 		</a>
 		</td>
-		<td><input type="text" name="custom_field2" value="{$biller.custom_field2}" size="50"</td>
+		<td><input type="text" name="custom_field2" value="{$biller.custom_field2}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.biller_cf3|htmlsafe}
@@ -313,7 +313,7 @@ n Script: details.tpl
 		<img src="{$baseUrl}images/common/help-small.png" alt="" />
 		</a>
 		</td>
-		<td><input type="text" name="custom_field3" value="{$biller.custom_field3|htmlsafe}" size="50"</td>
+		<td><input type="text" name="custom_field3" value="{$biller.custom_field3|htmlsafe}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.biller_cf4|htmlsafe}
@@ -326,7 +326,7 @@ n Script: details.tpl
 		<img src="{$baseUrl}images/common/help-small.png" alt="" />
 		</a>
 		</td>
-		<td><input type="text" name="custom_field4" value="{$biller.custom_field4|htmlsafe}" size="50"</td>
+		<td><input type="text" name="custom_field4" value="{$biller.custom_field4|htmlsafe}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">
