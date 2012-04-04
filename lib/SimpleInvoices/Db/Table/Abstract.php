@@ -35,6 +35,7 @@ class SimpleInvoices_Db_Table_Abstract extends Zend_Db_Table_Abstract
     */
     public static function fieldExists($fieldName)
     {
+    	
         $table = new static();
         $cols = $table->info(SimpleInvoices_Db_Table_Abstract::COLS);
         return in_array($fieldName, $cols);

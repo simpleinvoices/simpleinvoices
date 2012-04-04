@@ -15,6 +15,8 @@
 checkLogin();
 
 $SI_PRODUCTS = new SimpleInvoices_Db_Table_Products();
+$SI_INVOICES = new SimpleInvoices_Db_Table_Invoices();
+$SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
 
 $smarty -> assign('pageActive', 'invoice_new');
 $smarty -> assign('active_tab', '#money');
@@ -32,12 +34,24 @@ $type = $_POST['type'];
 
 
 if ($_POST['action'] == "insert" ) {
-
-	if(insertInvoice($type)) {
-		$id = lastInsertId();
-		//saveCustomFieldValues($_POST['categorie'],$invoice_id);
-		$saved = true;
-	}
+	// INSERT FUNCTION START
+    $insert_data = array(
+		'biller_id'		=> $_POST['biller_id'],
+		'customer_id'	=> $_POST['customer_id'],
+		'type_id'		=> $type,
+		'preference_id'	=> $_POST['preference_id'],
+		'date'			=> $_POST['date'],
+		'note'			=> $_POST['note'],
+		'custom_field1'	=> $_POST['customField1'],
+		'custom_field2'	=> $_POST['customField2'],
+		'custom_field3' => $_POST['customField3'],
+		'custom_field4' => $_POST['customField4']
+    );
+    $saved = $SI_INVOICES->insert($insert_data);
+    
+    if ($saved) {
+    	$id = $SI_INVOICES->getLastInsertId();
+    }
 
     /*
     * 1 = Total Invoices
