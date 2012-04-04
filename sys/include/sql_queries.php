@@ -726,6 +726,7 @@ function getTopBiller() {
   return $biller;
 }
 
+/*
 function insertInvoice($type) {
 	global $dbh;
 	global $db_server;
@@ -829,6 +830,7 @@ function insertInvoice($type) {
            
     return $sth;
 }
+*/
 
 function updateInvoice($invoice_id) {
 
