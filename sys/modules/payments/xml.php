@@ -60,7 +60,6 @@ function sql($type='', $dir, $sort, $rp, $page )
 	if (!empty($_GET['id'])) {
 
 		$id = $_GET['id'];
-		//$query = getInvoicePayments($_GET['id']);
 
 		//$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."payment ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b where ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and ap.ac_inv_id = :id ORDER BY ap.id DESC";
 		$sql = "SELECT

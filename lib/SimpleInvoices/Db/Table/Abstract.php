@@ -7,7 +7,6 @@
 */
 class SimpleInvoices_Db_Table_Abstract extends Zend_Db_Table_Abstract
 {
-    
     /**
      * This will automatically set table name with prefix from bootstrap file
      * @return void
@@ -20,6 +19,18 @@ class SimpleInvoices_Db_Table_Abstract extends Zend_Db_Table_Abstract
         }
     }
     
+    /**
+     * Get the table prefix.
+     * @return string A string representing the table prefix
+     */
+    public static function getTablePrefix()
+    {
+    	if (Zend_Registry::isRegistered('tbl_prefix')) {
+    		return Zend_Registry::get('tbl_prefix');
+    	} else {
+    		return "";
+    	}
+    }
     
     /**
     * Get the last insert id for the current table

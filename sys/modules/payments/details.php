@@ -3,9 +3,6 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$SI_PAYMENT_TYPES = new SimpleInvoices_Db_Table_PaymentTypes();
-$SI_INVOICE_TYPE = new SimpleInvoices_Db_Table_InvoiceType();
-
 //TODO
 /*validation code*/
 jsBegin();
@@ -15,16 +12,19 @@ jsFormValidationEnd();
 jsEnd();
 /*end validation code*/
 
-$payment = getPayment($_GET['id']);
+if (isset($_GET['id'])) {
+	$payment = new SimpleInvoices_Payment($_GET['id']);
+	$paymentType = $payment->getType();
+	$invoice = $payment->getInvoice();
+	$invoiceType = $invoice->getType();
+} else {
+	throw new SimpleInvoices_Exception('Invalid payment identifier.');
+}
 
 /*Code to get the Invoice preference - so can link from this screen back to the invoice - START */
-$invoice = getInvoice($payment['ac_inv_id']);
-$invoiceType = $SI_INVOICE_TYPE->getInvoiceType($invoice['type_id']);
-$paymentType = $SI_PAYMENT_TYPES->getPaymentTypeById($payment['ac_payment_type']);
 
-
-$smarty -> assign("payment",$payment);
-$smarty -> assign("invoice",$invoice);
+$smarty -> assign("payment",$payment->toArray());
+$smarty -> assign("invoice",$invoice->toArray());
 $smarty -> assign("invoiceType",$invoiceType);
 $smarty -> assign("paymentType",$paymentType);
 

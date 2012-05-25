@@ -1,28 +1,36 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.2.1deb1
+-- version 3.5.0
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jun 03, 2010 at 09:48 PM
--- Server version: 5.1.37
--- PHP Version: 5.2.10-2ubuntu6
+-- Servidor: localhost
+-- Tiempo de generación: 24-05-2012 a las 12:22:59
+-- Versión del servidor: 5.5.23
+-- Versión de PHP: 5.4.0
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
 --
--- Database: `simple_invoices`
+-- Base de datos: `simple_invoices`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_biller`
+-- Estructura de tabla para la tabla `si_biller`
 --
 
 CREATE TABLE IF NOT EXISTS `si_biller` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL DEFAULT '1',
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tax_id` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL,
   `street_address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `street_address2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `city` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -39,6 +47,7 @@ CREATE TABLE IF NOT EXISTS `si_biller` (
   `paypal_notify_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `paypal_return_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `eway_customer_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `paymentsgateway_api_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `notes` text COLLATE utf8_unicode_ci,
   `custom_field1` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `custom_field2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -46,23 +55,23 @@ CREATE TABLE IF NOT EXISTS `si_biller` (
   `custom_field4` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `enabled` varchar(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
   PRIMARY KEY (`domain_id`,`id`),
-  KEY `idx_enabled` (`domain_id`, `enabled`)
+  KEY `idx_enabled` (`domain_id`,`enabled`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
--- Dumping data for table `si_biller`
+-- Volcado de datos para la tabla `si_biller`
 --
 
-INSERT INTO `si_biller` (`id`, `domain_id`, `name`, `street_address`, `street_address2`, `city`, `state`, `zip_code`, `country`, `phone`, `mobile_phone`, `fax`, `email`, `logo`, `footer`, `paypal_business_name`, `paypal_notify_url`, `paypal_return_url`, `eway_customer_id`, `notes`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `enabled`) VALUES
-(1, 1, 'Mr Plough', '43 Evergreen Terace', '', 'Springfield', 'NY', '90245', '', '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'homer@mrplough.com', 'ubuntulogo.png', '', '', '', '', '', '', '', '', '7898-87987-87', '', '1'),
-(2, 1, 'Homer Simpson', '43 Evergreen Terace', NULL, 'Springfield', 'NY', '90245', NULL, '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'homer@yahoo.com', NULL, NULL, '', '', '', '', NULL, NULL, NULL, NULL, NULL, '1'),
-(3, 1, 'The Beer Baron', '43 Evergreen Terace', NULL, 'Springfield', 'NY', '90245', NULL, '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'beerbaron@yahoo.com', NULL, NULL, '', '', '', '', NULL, NULL, NULL, NULL, NULL, '1'),
-(4, 1, 'Fawlty Towers', '13 Seaside Drive', NULL, 'Torquay', 'Brixton on Avon', '65894', 'United Kingdom', '089 6985 4569', '0425 5477 8789', '089 6985 4568', 'penny@fawltytowers.co.uk', NULL, NULL, '', '', '', '', NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `si_biller` (`id`, `domain_id`, `name`, `tax_id`, `street_address`, `street_address2`, `city`, `state`, `zip_code`, `country`, `phone`, `mobile_phone`, `fax`, `email`, `logo`, `footer`, `paypal_business_name`, `paypal_notify_url`, `paypal_return_url`, `eway_customer_id`, `paymentsgateway_api_id`, `notes`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `enabled`) VALUES
+(1, 1, 'Mr Plough', NULL, '43 Evergreen Terace', '', 'Springfield', 'NY', '90245', '', '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'homer@mrplough.com', 'ubuntulogo.png', '', '', '', '', '', NULL, '', '', '', '7898-87987-87', '', '1'),
+(2, 1, 'Homer Simpson', NULL, '43 Evergreen Terace', NULL, 'Springfield', 'NY', '90245', NULL, '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'homer@yahoo.com', NULL, NULL, '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, '1'),
+(3, 1, 'The Beer Baron', NULL, '43 Evergreen Terace', NULL, 'Springfield', 'NY', '90245', NULL, '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'beerbaron@yahoo.com', NULL, NULL, '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, '1'),
+(4, 1, 'Fawlty Towers', NULL, '13 Seaside Drive', NULL, 'Torquay', 'Brixton on Avon', '65894', 'United Kingdom', '089 6985 4569', '0425 5477 8789', '089 6985 4568', 'penny@fawltytowers.co.uk', NULL, NULL, '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, '1');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_cron`
+-- Estructura de tabla para la tabla `si_cron`
 --
 
 CREATE TABLE IF NOT EXISTS `si_cron` (
@@ -78,15 +87,10 @@ CREATE TABLE IF NOT EXISTS `si_cron` (
   PRIMARY KEY (`domain_id`,`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
---
--- Dumping data for table `si_cron`
---
-
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_cron_log`
+-- Estructura de tabla para la tabla `si_cron_log`
 --
 
 CREATE TABLE IF NOT EXISTS `si_cron_log` (
@@ -97,15 +101,10 @@ CREATE TABLE IF NOT EXISTS `si_cron_log` (
   PRIMARY KEY (`domain_id`,`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
---
--- Dumping data for table `si_cron_log`
---
-
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_customers`
+-- Estructura de tabla para la tabla `si_customers`
 --
 
 CREATE TABLE IF NOT EXISTS `si_customers` (
@@ -113,6 +112,7 @@ CREATE TABLE IF NOT EXISTS `si_customers` (
   `domain_id` int(11) NOT NULL DEFAULT '1',
   `attention` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tax_id` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL,
   `street_address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `street_address2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `city` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -134,22 +134,22 @@ CREATE TABLE IF NOT EXISTS `si_customers` (
   `custom_field4` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `enabled` varchar(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
   PRIMARY KEY (`domain_id`,`id`),
-  KEY `idx_enabled` (`domain_id`, `enabled`)
+  KEY `idx_enabled` (`domain_id`,`enabled`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `si_customers`
+-- Volcado de datos para la tabla `si_customers`
 --
 
-INSERT INTO `si_customers` (`id`, `domain_id`, `attention`, `name`, `street_address`, `street_address2`, `city`, `state`, `zip_code`, `country`, `phone`, `mobile_phone`, `fax`, `email`, `credit_card_holder_name`, `credit_card_number`, `credit_card_expiry_month`, `credit_card_expiry_year`, `notes`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `enabled`) VALUES
-(1, 1, 'Moe Sivloski', 'Moes Tavern', '45 Main Road', '', 'Springfield', 'NY', '65891', '', '04 1234 5698', '', '04 5689 4566', 'moe@moestavern.com', '', '', '', '', '<p><strong>Moe&#39;s Tavern</strong> is a fictional <a href=&#39;http://en.wikipedia.org/wiki/Bar_%28establishment%29&#39; title=&#39;Bar (establishment)&#39;>bar</a> seen on <em><a href=&#39;http://en.wikipedia.org/wiki/The_Simpsons&#39; title=&#39;The Simpsons&#39;>The Simpsons</a></em>. The owner of the bar is <a href=&#39;http://en.wikipedia.org/wiki/Moe_Szyslak&#39; title=&#39;Moe Szyslak&#39;>Moe Szyslak</a>.</p> <p>In The Simpsons world, it is located on the corner of Walnut Street, neighboring King Toot&#39;s Music Store, across the street is the Moeview Motel, and a factory formerly owned by <a href=&#39;http://en.wikipedia.org/wiki/Bart_Simpson&#39; title=&#39;Bart Simpson&#39;>Bart Simpson</a>, until it collapsed. The inside of the bar has a few pool tables and a dartboard. It is very dank and &quot;smells like <a href=&#39;http://en.wikipedia.org/wiki/Urine&#39; title=&#39;Urine&#39;>tinkle</a>.&quot; Because female customers are so rare, Moe frequently uses the women&#39;s restroom as an office. Moe claimed that there haven&#39;t been any ladies at Moe&#39;s since <a href=&#39;http://en.wikipedia.org/wiki/1979&#39; title=&#39;1979&#39;>1979</a> (though earlier episodes show otherwise). A jar of pickled eggs perpetually stands on the bar. Another recurring element is a rat problem. This can be attributed to the episode <a href=&#39;http://en.wikipedia.org/wiki/Homer%27s_Enemy&#39; title=&#39;Homer&#39;s Enemy&#39;>Homer&#39;s Enemy</a> in which Bart&#39;s factory collapses, and the rats are then shown to find a new home at Moe&#39;s. In &quot;<a href=&#39;http://en.wikipedia.org/wiki/Who_Shot_Mr._Burns&#39; title=&#39;Who Shot Mr. Burns&#39;>Who Shot Mr. Burns</a>,&quot; Moe&#39;s Tavern was forced to close down because Mr. Burns&#39; slant-drilling operation near the tavern caused unsafe pollution. It was stated in the &quot;<a href=&#39;http://en.wikipedia.org/wiki/Flaming_Moe%27s&#39; title=&#39;Flaming Moe&#39;s&#39;>Flaming Moe&#39;s</a>&quot; episode that Moe&#39;s Tavern was on Walnut Street. The phone number would be 76484377, since in &quot;<a href=&#39;http://en.wikipedia.org/wiki/Homer_the_Smithers&#39; title=&#39;Homer the Smithers&#39;>Homer the Smithers</a>,&quot; Mr. Burns tried to call Smithers but did not know his phone number. He tried the buttons marked with the letters for Smithers and called Moe&#39;s. In &quot;<a href=&#39;http://en.wikipedia.org/wiki/Principal_Charming&#39; title=&#39;Principal Charming&#39;>Principal Charming</a>&quot; Bart is asked to call Homer by Principal Skinner, the number visible on the card is WORK: KLondike 5-6832 HOME: KLondike 5-6754 MOE&#39;S TAVERN: KLondike 5-1239 , Moe answers the phone and Bart asks for Homer Sexual. The bar serves <a href=&#39;http://en.wikipedia.org/wiki/Duff_Beer&#39; title=&#39;Duff Beer&#39;>Duff Beer</a> and Red Tick Beer, a beer flavored with dogs.</p>', '', '', '', '', '1'),
-(2, 1, 'Mr Burns', 'Springfield Power Plant', '4 Power Plant Drive', '', 'Springfield', 'NY', '90210', '', '04 1235 5698', '', '04 5678 7899', 'mburns@spp.com', '', '', '', '', '<p><strong>Springfield Nuclear Power Plant</strong> is a fictional electricity generating facility in the <a href=&#39;http://en.wikipedia.org/wiki/Television&#39; title=&#39;Television&#39;>television</a> <a href=&#39;http://en.wikipedia.org/wiki/Animated_cartoon&#39; title=&#39;Animated cartoon&#39;>animated cartoon</a> series <em><a href=&#39;http://en.wikipedia.org/wiki/The_Simpsons&#39; title=&#39;The Simpsons&#39;>The Simpsons</a></em>. The plant has a <a href=&#39;http://en.wikipedia.org/wiki/Monopoly&#39; title=&#39;Monopoly&#39;>monopoly</a> on the city of <a href=&#39;http://en.wikipedia.org/wiki/Springfield_%28The_Simpsons%29&#39; title=&#39;Springfield (The Simpsons)&#39;>Springfield&#39;s</a> energy supply, but is sometimes mismanaged and endangers much of the town with its presence.</p> <p>Based on the plant&#39;s appearance and certain episode plots, it likely houses only a single &quot;unit&quot; or reactor (although, judging from the number of <a href=&#39;http://en.wikipedia.org/wiki/Containment_building&#39; title=&#39;Containment building&#39;>containment buildings</a> and <a href=&#39;http://en.wikipedia.org/wiki/Cooling_tower&#39; title=&#39;Cooling tower&#39;>cooling towers</a>, there is a chance it may have two). In one episode an emergency occurs and Homer resorts to the manual, which begins &quot;Congratulations on your purchase of a Fissionator 1952 Slow-Fission Reactor&quot;.</p> <p>The plant is poorly maintained, largely due to owner Montgomery Burns&#39; miserliness. Its <a href=&#39;http://en.wikipedia.org/wiki/Nuclear_safety&#39; title=&#39;Nuclear safety&#39;>safety record</a> is appalling, with various episodes showing luminous rats in the bowels of the building, pipes and drums leaking radioactive waste, the disposal of waste in a children&#39;s playground, <a href=&#39;http://en.wikipedia.org/wiki/Plutonium&#39; title=&#39;Plutonium&#39;>plutonium</a> used as a paperweight, cracked cooling towers (fixed in one episode using a piece of <a href=&#39;http://en.wikipedia.org/wiki/Chewing_gum&#39; title=&#39;Chewing gum&#39;>Chewing gum</a>), dangerously high <a href=&#39;http://en.wikipedia.org/wiki/Geiger_counter&#39; title=&#39;Geiger counter&#39;>Geiger counter</a> readings around the perimeter of the plant, and even a giant spider. In the opening credits a bar of some <a href=&#39;http://en.wikipedia.org/wiki/Radioactive&#39; title=&#39;Radioactive&#39;>radioactive</a> substance is trapped in Homer&#39;s overalls and later disposed of in the street.</p>', '13245-789798', '', '', '', '1'),
-(3, 1, 'Kath Day-Knight', 'Kath and Kim Pty Ltd', '82 Fountain Drive', '', 'Fountain Lakes', 'VIC', '3567', 'Australia', '03 9658 7456', '', '03 9658 7457', 'kath@kathandkim.com.au', '', '', '', '', 'Kath Day-Knight (<a href=&#39;http://en.wikipedia.org/wiki/Jane_Turner&#39; title=&#39;Jane Turner&#39;>Jane Turner</a>) is an &#39;empty nester&#39; divorc&eacute;e who wants to enjoy time with her &quot;hunk o&#39; spunk&quot; Kel Knight (<a href=&#39;http://en.wikipedia.org/wiki/Glenn_Robbins&#39; title=&#39;Glenn Robbins&#39;>Glenn Robbins</a>), a local &quot;purveyor of fine meats&quot;, but whose lifestyle is often cramped by the presence of her self-indulgent and spoilt rotten twenty-something daughter Kim Craig <a href=&#39;http://en.wikipedia.org/wiki/List_of_French_phrases_used_by_English_speakers#I_.E2.80.93_Q&#39; title=&#39;List of French phrases used by English speakers&#39;>n&eacute;e</a> Day (<a href=&#39;http://en.wikipedia.org/wiki/Gina_Riley&#39; title=&#39;Gina Riley&#39;>Gina Riley</a>). Kim enjoys frequent and lengthy periods of spiteful estrangement from her forgiving husband Brett Craig (<a href=&#39;http://en.wikipedia.org/wiki/Peter_Rowsthorn&#39; title=&#39;Peter Rowsthorn&#39;>Peter Rowsthorn</a>) for imagined slights and misdemeanors, followed by loving reconciliations with him. During Kim and Brett&#39;s frequent rough patches Kim usually seeks solace from her servile &quot;second best friend&quot; Sharon Strzelecki (<a href=&#39;http://en.wikipedia.org/wiki/Magda_Szubanski&#39; title=&#39;Magda Szubanski&#39;>Magda Szubanski</a>), screaming abuse at Sharon for minor infractions while issuing her with intricately-instructed tasks, such as stalking Brett. Kim and Brett had a baby in the final episode of the second series whom they named Epponnee-Raelene Kathleen Darlene Charlene Craig, shortened to Epponnee-Rae.', '13245-789798', '', '', '', '1');
+INSERT INTO `si_customers` (`id`, `domain_id`, `attention`, `name`, `tax_id`, `street_address`, `street_address2`, `city`, `state`, `zip_code`, `country`, `phone`, `mobile_phone`, `fax`, `email`, `credit_card_holder_name`, `credit_card_number`, `credit_card_expiry_month`, `credit_card_expiry_year`, `notes`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `enabled`) VALUES
+(1, 1, 'Moe Sivloski', 'Moes Tavern', NULL, '45 Main Road', '', 'Springfield', 'NY', '65891', '', '04 1234 5698', '', '04 5689 4566', 'moe@moestavern.com', '', '', '', '', '<p><strong>Moe&#39;s Tavern</strong> is a fictional <a href=&#39;http://en.wikipedia.org/wiki/Bar_%28establishment%29&#39; title=&#39;Bar (establishment)&#39;>bar</a> seen on <em><a href=&#39;http://en.wikipedia.org/wiki/The_Simpsons&#39; title=&#39;The Simpsons&#39;>The Simpsons</a></em>. The owner of the bar is <a href=&#39;http://en.wikipedia.org/wiki/Moe_Szyslak&#39; title=&#39;Moe Szyslak&#39;>Moe Szyslak</a>.</p> <p>In The Simpsons world, it is located on the corner of Walnut Street, neighboring King Toot&#39;s Music Store, across the street is the Moeview Motel, and a factory formerly owned by <a href=&#39;http://en.wikipedia.org/wiki/Bart_Simpson&#39; title=&#39;Bart Simpson&#39;>Bart Simpson</a>, until it collapsed. The inside of the bar has a few pool tables and a dartboard. It is very dank and &quot;smells like <a href=&#39;http://en.wikipedia.org/wiki/Urine&#39; title=&#39;Urine&#39;>tinkle</a>.&quot; Because female customers are so rare, Moe frequently uses the women&#39;s restroom as an office. Moe claimed that there haven&#39;t been any ladies at Moe&#39;s since <a href=&#39;http://en.wikipedia.org/wiki/1979&#39; title=&#39;1979&#39;>1979</a> (though earlier episodes show otherwise). A jar of pickled eggs perpetually stands on the bar. Another recurring element is a rat problem. This can be attributed to the episode <a href=&#39;http://en.wikipedia.org/wiki/Homer%27s_Enemy&#39; title=&#39;Homer&#39;s Enemy&#39;>Homer&#39;s Enemy</a> in which Bart&#39;s factory collapses, and the rats are then shown to find a new home at Moe&#39;s. In &quot;<a href=&#39;http://en.wikipedia.org/wiki/Who_Shot_Mr._Burns&#39; title=&#39;Who Shot Mr. Burns&#39;>Who Shot Mr. Burns</a>,&quot; Moe&#39;s Tavern was forced to close down because Mr. Burns&#39; slant-drilling operation near the tavern caused unsafe pollution. It was stated in the &quot;<a href=&#39;http://en.wikipedia.org/wiki/Flaming_Moe%27s&#39; title=&#39;Flaming Moe&#39;s&#39;>Flaming Moe&#39;s</a>&quot; episode that Moe&#39;s Tavern was on Walnut Street. The phone number would be 76484377, since in &quot;<a href=&#39;http://en.wikipedia.org/wiki/Homer_the_Smithers&#39; title=&#39;Homer the Smithers&#39;>Homer the Smithers</a>,&quot; Mr. Burns tried to call Smithers but did not know his phone number. He tried the buttons marked with the letters for Smithers and called Moe&#39;s. In &quot;<a href=&#39;http://en.wikipedia.org/wiki/Principal_Charming&#39; title=&#39;Principal Charming&#39;>Principal Charming</a>&quot; Bart is asked to call Homer by Principal Skinner, the number visible on the card is WORK: KLondike 5-6832 HOME: KLondike 5-6754 MOE&#39;S TAVERN: KLondike 5-1239 , Moe answers the phone and Bart asks for Homer Sexual. The bar serves <a href=&#39;http://en.wikipedia.org/wiki/Duff_Beer&#39; title=&#39;Duff Beer&#39;>Duff Beer</a> and Red Tick Beer, a beer flavored with dogs.</p>', '', '', '', '', '1'),
+(2, 1, 'Mr Burns', 'Springfield Power Plant', NULL, '4 Power Plant Drive', '', 'Springfield', 'NY', '90210', '', '04 1235 5698', '', '04 5678 7899', 'mburns@spp.com', '', '', '', '', '<p><strong>Springfield Nuclear Power Plant</strong> is a fictional electricity generating facility in the <a href=&#39;http://en.wikipedia.org/wiki/Television&#39; title=&#39;Television&#39;>television</a> <a href=&#39;http://en.wikipedia.org/wiki/Animated_cartoon&#39; title=&#39;Animated cartoon&#39;>animated cartoon</a> series <em><a href=&#39;http://en.wikipedia.org/wiki/The_Simpsons&#39; title=&#39;The Simpsons&#39;>The Simpsons</a></em>. The plant has a <a href=&#39;http://en.wikipedia.org/wiki/Monopoly&#39; title=&#39;Monopoly&#39;>monopoly</a> on the city of <a href=&#39;http://en.wikipedia.org/wiki/Springfield_%28The_Simpsons%29&#39; title=&#39;Springfield (The Simpsons)&#39;>Springfield&#39;s</a> energy supply, but is sometimes mismanaged and endangers much of the town with its presence.</p> <p>Based on the plant&#39;s appearance and certain episode plots, it likely houses only a single &quot;unit&quot; or reactor (although, judging from the number of <a href=&#39;http://en.wikipedia.org/wiki/Containment_building&#39; title=&#39;Containment building&#39;>containment buildings</a> and <a href=&#39;http://en.wikipedia.org/wiki/Cooling_tower&#39; title=&#39;Cooling tower&#39;>cooling towers</a>, there is a chance it may have two). In one episode an emergency occurs and Homer resorts to the manual, which begins &quot;Congratulations on your purchase of a Fissionator 1952 Slow-Fission Reactor&quot;.</p> <p>The plant is poorly maintained, largely due to owner Montgomery Burns&#39; miserliness. Its <a href=&#39;http://en.wikipedia.org/wiki/Nuclear_safety&#39; title=&#39;Nuclear safety&#39;>safety record</a> is appalling, with various episodes showing luminous rats in the bowels of the building, pipes and drums leaking radioactive waste, the disposal of waste in a children&#39;s playground, <a href=&#39;http://en.wikipedia.org/wiki/Plutonium&#39; title=&#39;Plutonium&#39;>plutonium</a> used as a paperweight, cracked cooling towers (fixed in one episode using a piece of <a href=&#39;http://en.wikipedia.org/wiki/Chewing_gum&#39; title=&#39;Chewing gum&#39;>Chewing gum</a>), dangerously high <a href=&#39;http://en.wikipedia.org/wiki/Geiger_counter&#39; title=&#39;Geiger counter&#39;>Geiger counter</a> readings around the perimeter of the plant, and even a giant spider. In the opening credits a bar of some <a href=&#39;http://en.wikipedia.org/wiki/Radioactive&#39; title=&#39;Radioactive&#39;>radioactive</a> substance is trapped in Homer&#39;s overalls and later disposed of in the street.</p>', '13245-789798', '', '', '', '1'),
+(3, 1, 'Kath Day-Knight', 'Kath and Kim Pty Ltd', NULL, '82 Fountain Drive', '', 'Fountain Lakes', 'VIC', '3567', 'Australia', '03 9658 7456', '', '03 9658 7457', 'kath@kathandkim.com.au', '', '', '', '', 'Kath Day-Knight (<a href=&#39;http://en.wikipedia.org/wiki/Jane_Turner&#39; title=&#39;Jane Turner&#39;>Jane Turner</a>) is an &#39;empty nester&#39; divorc&eacute;e who wants to enjoy time with her &quot;hunk o&#39; spunk&quot; Kel Knight (<a href=&#39;http://en.wikipedia.org/wiki/Glenn_Robbins&#39; title=&#39;Glenn Robbins&#39;>Glenn Robbins</a>), a local &quot;purveyor of fine meats&quot;, but whose lifestyle is often cramped by the presence of her self-indulgent and spoilt rotten twenty-something daughter Kim Craig <a href=&#39;http://en.wikipedia.org/wiki/List_of_French_phrases_used_by_English_speakers#I_.E2.80.93_Q&#39; title=&#39;List of French phrases used by English speakers&#39;>n&eacute;e</a> Day (<a href=&#39;http://en.wikipedia.org/wiki/Gina_Riley&#39; title=&#39;Gina Riley&#39;>Gina Riley</a>). Kim enjoys frequent and lengthy periods of spiteful estrangement from her forgiving husband Brett Craig (<a href=&#39;http://en.wikipedia.org/wiki/Peter_Rowsthorn&#39; title=&#39;Peter Rowsthorn&#39;>Peter Rowsthorn</a>) for imagined slights and misdemeanors, followed by loving reconciliations with him. During Kim and Brett&#39;s frequent rough patches Kim usually seeks solace from her servile &quot;second best friend&quot; Sharon Strzelecki (<a href=&#39;http://en.wikipedia.org/wiki/Magda_Szubanski&#39; title=&#39;Magda Szubanski&#39;>Magda Szubanski</a>), screaming abuse at Sharon for minor infractions while issuing her with intricately-instructed tasks, such as stalking Brett. Kim and Brett had a baby in the final episode of the second series whom they named Epponnee-Raelene Kathleen Darlene Charlene Craig, shortened to Epponnee-Rae.', '13245-789798', '', '', '', '1');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_custom_fields`
+-- Estructura de tabla para la tabla `si_custom_fields`
 --
 
 CREATE TABLE IF NOT EXISTS `si_custom_fields` (
@@ -163,7 +163,7 @@ CREATE TABLE IF NOT EXISTS `si_custom_fields` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
 
 --
--- Dumping data for table `si_custom_fields`
+-- Volcado de datos para la tabla `si_custom_fields`
 --
 
 INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`, `domain_id`) VALUES
@@ -187,7 +187,7 @@ INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_extensions`
+-- Estructura de tabla para la tabla `si_extensions`
 --
 
 CREATE TABLE IF NOT EXISTS `si_extensions` (
@@ -196,13 +196,13 @@ CREATE TABLE IF NOT EXISTS `si_extensions` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `enabled` varchar(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`,`domain_id`),
-  KEY `idx_domain_id` (`domain_id`),
-  UNIQUE KEY `idx_unique_extension` (`domain_id`,`name`)
+  PRIMARY KEY (`domain_id`,`id`),
+  UNIQUE KEY `idx_unique_extension` (`domain_id`,`name`),
+  KEY `idx_domain_id` (`domain_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `si_extensions`
+-- Volcado de datos para la tabla `si_extensions`
 --
 
 INSERT INTO `si_extensions` (`id`, `domain_id`, `name`, `description`, `enabled`) VALUES
@@ -211,7 +211,7 @@ INSERT INTO `si_extensions` (`id`, `domain_id`, `name`, `description`, `enabled`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_index`
+-- Estructura de tabla para la tabla `si_index`
 --
 
 CREATE TABLE IF NOT EXISTS `si_index` (
@@ -220,11 +220,12 @@ CREATE TABLE IF NOT EXISTS `si_index` (
   `sub_node` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `sub_node_2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `domain_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`,`domain_id`),
   KEY `idx_node` (`domain_id`,`node`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `si_index`
+-- Volcado de datos para la tabla `si_index`
 --
 
 INSERT INTO `si_index` (`id`, `node`, `sub_node`, `sub_node_2`, `domain_id`) VALUES
@@ -233,7 +234,7 @@ INSERT INTO `si_index` (`id`, `node`, `sub_node`, `sub_node_2`, `domain_id`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_inventory`
+-- Estructura de tabla para la tabla `si_inventory`
 --
 
 CREATE TABLE IF NOT EXISTS `si_inventory` (
@@ -247,15 +248,10 @@ CREATE TABLE IF NOT EXISTS `si_inventory` (
   PRIMARY KEY (`domain_id`,`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
---
--- Dumping data for table `si_inventory`
---
-
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_invoices`
+-- Estructura de tabla para la tabla `si_invoices`
 --
 
 CREATE TABLE IF NOT EXISTS `si_invoices` (
@@ -279,7 +275,7 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `si_invoices`
+-- Volcado de datos para la tabla `si_invoices`
 --
 
 INSERT INTO `si_invoices` (`id`, `index_id`, `domain_id`, `biller_id`, `customer_id`, `type_id`, `preference_id`, `date`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `note`) VALUES
@@ -288,7 +284,7 @@ INSERT INTO `si_invoices` (`id`, `index_id`, `domain_id`, `biller_id`, `customer
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_invoice_items`
+-- Estructura de tabla para la tabla `si_invoice_items`
 --
 
 CREATE TABLE IF NOT EXISTS `si_invoice_items` (
@@ -302,11 +298,12 @@ CREATE TABLE IF NOT EXISTS `si_invoice_items` (
   `description` text COLLATE utf8_unicode_ci,
   `total` decimal(25,6) DEFAULT '0.000000',
   PRIMARY KEY (`id`),
-  KEY `idx_invoice` (`invoice_id`)
+  KEY `idx_invoice` (`invoice_id`),
+  KEY `idx_invoice_id` (`invoice_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
--- Dumping data for table `si_invoice_items`
+-- Volcado de datos para la tabla `si_invoice_items`
 --
 
 INSERT INTO `si_invoice_items` (`id`, `invoice_id`, `quantity`, `product_id`, `unit_price`, `tax_amount`, `gross_total`, `description`, `total`) VALUES
@@ -319,7 +316,7 @@ INSERT INTO `si_invoice_items` (`id`, `invoice_id`, `quantity`, `product_id`, `u
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_invoice_item_tax`
+-- Estructura de tabla para la tabla `si_invoice_item_tax`
 --
 
 CREATE TABLE IF NOT EXISTS `si_invoice_item_tax` (
@@ -333,7 +330,7 @@ CREATE TABLE IF NOT EXISTS `si_invoice_item_tax` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
--- Dumping data for table `si_invoice_item_tax`
+-- Volcado de datos para la tabla `si_invoice_item_tax`
 --
 
 INSERT INTO `si_invoice_item_tax` (`id`, `invoice_item_id`, `tax_id`, `tax_type`, `tax_rate`, `tax_amount`) VALUES
@@ -346,7 +343,7 @@ INSERT INTO `si_invoice_item_tax` (`id`, `invoice_item_id`, `tax_id`, `tax_type`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_invoice_type`
+-- Estructura de tabla para la tabla `si_invoice_type`
 --
 
 CREATE TABLE IF NOT EXISTS `si_invoice_type` (
@@ -356,7 +353,7 @@ CREATE TABLE IF NOT EXISTS `si_invoice_type` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `si_invoice_type`
+-- Volcado de datos para la tabla `si_invoice_type`
 --
 
 INSERT INTO `si_invoice_type` (`inv_ty_id`, `inv_ty_description`) VALUES
@@ -367,7 +364,7 @@ INSERT INTO `si_invoice_type` (`inv_ty_id`, `inv_ty_description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_log`
+-- Estructura de tabla para la tabla `si_log`
 --
 
 CREATE TABLE IF NOT EXISTS `si_log` (
@@ -379,15 +376,10 @@ CREATE TABLE IF NOT EXISTS `si_log` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=24 ;
 
---
--- Dumping data for table `si_log`
---
-
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_payment`
+-- Estructura de tabla para la tabla `si_payment`
 --
 
 CREATE TABLE IF NOT EXISTS `si_payment` (
@@ -403,15 +395,10 @@ CREATE TABLE IF NOT EXISTS `si_payment` (
   KEY `domain_id` (`domain_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
---
--- Dumping data for table `si_payment`
---
-
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_payment_types`
+-- Estructura de tabla para la tabla `si_payment_types`
 --
 
 CREATE TABLE IF NOT EXISTS `si_payment_types` (
@@ -420,12 +407,13 @@ CREATE TABLE IF NOT EXISTS `si_payment_types` (
   `pt_description` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `pt_enabled` varchar(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
   PRIMARY KEY (`domain_id`,`pt_id`),
-  UNIQUE KEY `idx_description` (`domain_id`, `pt_description`),
-  KEY `idx_enabled` (`domain_id`, `pt_enabled`)
+  UNIQUE KEY `idx_description` (`domain_id`,`pt_description`),
+  UNIQUE KEY `idx_unique_description` (`domain_id`,`pt_description`),
+  KEY `idx_enabled` (`domain_id`,`pt_enabled`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `si_payment_types`
+-- Volcado de datos para la tabla `si_payment_types`
 --
 
 INSERT INTO `si_payment_types` (`pt_id`, `domain_id`, `pt_description`, `pt_enabled`) VALUES
@@ -435,7 +423,7 @@ INSERT INTO `si_payment_types` (`pt_id`, `domain_id`, `pt_description`, `pt_enab
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_preferences`
+-- Estructura de tabla para la tabla `si_preferences`
 --
 
 CREATE TABLE IF NOT EXISTS `si_preferences` (
@@ -464,7 +452,7 @@ CREATE TABLE IF NOT EXISTS `si_preferences` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
--- Dumping data for table `si_preferences`
+-- Volcado de datos para la tabla `si_preferences`
 --
 
 INSERT INTO `si_preferences` (`pref_id`, `domain_id`, `pref_description`, `pref_currency_sign`, `pref_inv_heading`, `pref_inv_wording`, `pref_inv_detail_heading`, `pref_inv_detail_line`, `pref_inv_payment_method`, `pref_inv_payment_line1_name`, `pref_inv_payment_line1_value`, `pref_inv_payment_line2_name`, `pref_inv_payment_line2_value`, `pref_enabled`, `status`, `locale`, `language`, `index_group`, `currency_code`, `include_online_payment`, `currency_position`) VALUES
@@ -476,13 +464,14 @@ INSERT INTO `si_preferences` (`pref_id`, `domain_id`, `pref_description`, `pref_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_products`
+-- Estructura de tabla para la tabla `si_products`
 --
 
 CREATE TABLE IF NOT EXISTS `si_products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL DEFAULT '1',
   `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `detail` text COLLATE utf8_unicode_ci NOT NULL,
   `unit_price` decimal(25,6) DEFAULT '0.000000',
   `default_tax_id` int(11) DEFAULT NULL,
   `default_tax_id_2` int(11) DEFAULT NULL,
@@ -496,26 +485,26 @@ CREATE TABLE IF NOT EXISTS `si_products` (
   `enabled` varchar(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
   `visible` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`domain_id`,`id`),
+  KEY `idx_enabled` (`domain_id`,`enabled`),
   KEY `idx_domain_id` (`domain_id`),
-  KEY `idx_enabled` (`domain_id`, `enabled`),
-  KEY `idx_visible` (`domain_id`, `visible`)
+  KEY `idx_visible` (`domain_id`,`visible`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
--- Dumping data for table `si_products`
+-- Volcado de datos para la tabla `si_products`
 --
 
-INSERT INTO `si_products` (`id`, `domain_id`, `description`, `unit_price`, `default_tax_id`, `default_tax_id_2`, `cost`, `reorder_level`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`) VALUES
-(1, 1, 'Hourly charge', '150.000000', 1, 0, '0.000000', 0, '', '', '', '', '', '1', 1),
-(2, 1, 'Accounting services', '140.000000', 1, 0, '0.000000', 0, '', '', '', '', '', '1', 1),
-(3, 1, 'Ploughing service', '125.000000', 1, 0, '0.000000', 0, '', '', '', '', '', '1', 1),
-(4, 1, 'Bootleg homebrew', '15.500000', 1, 0, '0.000000', 0, '', '', '', '', '', '1', 1),
-(5, 1, 'Accomodation', '125.500000', 1, 0, '0.000000', 0, '', '', '', '', '', '1', 1);
+INSERT INTO `si_products` (`id`, `domain_id`, `description`, `detail`, `unit_price`, `default_tax_id`, `default_tax_id_2`, `cost`, `reorder_level`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`) VALUES
+(1, 1, 'Hourly charge', '', '150.000000', 1, 0, '0.000000', 0, '', '', '', '', '', '1', 1),
+(2, 1, 'Accounting services', '', '140.000000', 1, 0, '0.000000', 0, '', '', '', '', '', '1', 1),
+(3, 1, 'Ploughing service', '', '125.000000', 1, 0, '0.000000', 0, '', '', '', '', '', '1', 1),
+(4, 1, 'Bootleg homebrew', '', '15.500000', 1, 0, '0.000000', 0, '', '', '', '', '', '1', 1),
+(5, 1, 'Accomodation', '', '125.500000', 1, 0, '0.000000', 0, '', '', '', '', '', '1', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_sql_patchmanager`
+-- Estructura de tabla para la tabla `si_sql_patchmanager`
 --
 
 CREATE TABLE IF NOT EXISTS `si_sql_patchmanager` (
@@ -525,10 +514,10 @@ CREATE TABLE IF NOT EXISTS `si_sql_patchmanager` (
   `sql_release` varchar(25) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `sql_statement` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`sql_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=599 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=622 ;
 
 --
--- Dumping data for table `si_sql_patchmanager`
+-- Volcado de datos para la tabla `si_sql_patchmanager`
 --
 
 INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES
@@ -785,12 +774,34 @@ INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_
 (596, 249, '', '', ''),
 (597, 250, '', '', ''),
 (598, 251, '', '', ''),
-(599, 252, 'Create variable rows_per_page for system preferences', '20120303', 'UPDATE create variable rows_per_page and set value to 25');
+(599, 252, 'Create variable rows_per_page for system preferences', '20120303', 'UPDATE create variable rows_per_page and set value to 25'),
+(600, 253, 'Add PaymentsGateway API ID field', '20110918', 'ALTER TABLE `si_biller` ADD  `paymentsgateway_api_id` VARCHAR( 255 ) NULL AFTER `eway_customer_id`;'),
+(601, 254, 'Add details field to products table', '20100926', 'ALTER TABLE  si_products ADD `detail` TEXT NOT NULL AFTER  `description` ;'),
+(602, 255, 'Create unique index on user email, duplicate email addresses are not allowed as username', '20100913', 'CREATE UNIQUE INDEX ref_idx_email on si_user (email) ;'),
+(603, 256, 'Add a Tax ID field to the billers table', '20110806', 'ALTER TABLE si_biller ADD tax_id VARCHAR(16) AFTER `name`;'),
+(604, 257, 'Add a Tax ID field to the customers table', '20110806', 'ALTER TABLE si_customers ADD tax_id VARCHAR(16) AFTER `name`;'),
+(605, 258, 'Make Simple Invoices faster - add index', '20120327', 'ALTER TABLE `si_extensions` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)'),
+(606, 259, 'Make Simple Invoices faster - add index', '20120327', 'ALTER TABLE `si_system_defaults` ADD INDEX `idx_name_domain_id`(`domain_id`, `name`);'),
+(607, 260, 'Make Simple Invoices faster - add index', '20120327', 'ALTER TABLE `si_custom_fields` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `cf_id`)'),
+(608, 261, 'Make Simple Invoices faster - add index', '20120327', 'ALTER TABLE `si_invoice_items` ADD INDEX `idx_invoice_id`(`invoice_id`);'),
+(609, 262, 'Make Simple Invoices faster - add index', '20120327', 'ALTER TABLE `si_biller` ADD INDEX `idx_enabled`(`domain_id`, `enabled`);'),
+(610, 263, 'Make Simple Invoices faster - add index', '20120327', 'ALTER TABLE `si_customers` ADD INDEX `idx_enabled`(`domain_id`, `enabled`);'),
+(611, 264, 'Make Simple Invoices faster - add index', '20120327', 'ALTER TABLE `si_custom_fields` ADD INDEX `idx_domain_id`(`domain_id`);'),
+(612, 265, 'Make Simple Invoices faster - add index', '20120327', 'ALTER TABLE `si_extensions` ADD INDEX `idx_domain_id`(`domain_id`);'),
+(613, 266, 'Avoid extension duplicates', '20120327', 'ALTER TABLE `si_extensions` ADD UNIQUE `idx_unique_extension`(`domain_id`, `name`);'),
+(614, 267, 'Make Simple Invoices faster - add index', '20120327', 'ALTER TABLE `si_payment_types` ADD INDEX `idx_enabled`(`domain_id`, `pt_enabled`);'),
+(615, 268, 'Avoid payment type duplicates', '20120327', 'ALTER TABLE `si_payment_types` ADD UNIQUE `idx_unique_description`(`domain_id`, `pt_description`);'),
+(616, 269, 'Make Simple Invoices faster - add index', '20120327', 'ALTER TABLE `si_products` ADD INDEX `idx_enabled`(`domain_id`, `enabled`);'),
+(617, 270, 'Make Simple Invoices faster - add index', '20120327', 'ALTER TABLE `si_products` ADD INDEX `idx_domain_id`(`domain_id`);'),
+(618, 271, 'Make Simple Invoices faster - add index', '20120327', 'ALTER TABLE `si_products` ADD INDEX `idx_visible`(`domain_id`, `visible`);'),
+(619, 272, 'Make Simple Invoices faster - add index', '20120327', 'ALTER TABLE `si_index` ADD PRIMARY KEY (`id` ,`domain_id`);'),
+(620, 273, 'Make Simple Invoices faster - add index', '20120327', 'ALTER TABLE `si_index` ADD INDEX `idx_node`(`domain_id`, `node`);'),
+(621, 274, 'Create variable rows_per_page for system preferences', '20120404', 'INSERT INTO `si_system_defaults` (`name`, `value`, `domain_id`, `extension_id`) VALUES (''rows_per_page'', ''25'', ''1'', ''1'');');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_system_defaults`
+-- Estructura de tabla para la tabla `si_system_defaults`
 --
 
 CREATE TABLE IF NOT EXISTS `si_system_defaults` (
@@ -800,12 +811,13 @@ CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `domain_id` int(5) NOT NULL DEFAULT '0',
   `extension_id` int(5) NOT NULL DEFAULT '0',
   PRIMARY KEY (`domain_id`,`id`),
-  KEY `name` (`domain_id`, `name`),
-  KEY `idx_name` (`name`)
+  KEY `name` (`domain_id`,`name`),
+  KEY `idx_name` (`name`),
+  KEY `idx_name_domain_id` (`domain_id`,`name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=24 ;
 
 --
--- Dumping data for table `si_system_defaults`
+-- Volcado de datos para la tabla `si_system_defaults`
 --
 
 INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES
@@ -833,12 +845,13 @@ INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension
 (22, 'delete', 'N', 1, 1),
 (23, 'tax_per_line_item', '1', 1, 1),
 (24, 'inventory', '0', 1, 1),
-(25, 'rows_per_page', '25', 1, 1);
+(25, 'rows_per_page', '25', 1, 1),
+(26, 'rows_per_page', '25', 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_tax`
+-- Estructura de tabla para la tabla `si_tax`
 --
 
 CREATE TABLE IF NOT EXISTS `si_tax` (
@@ -852,7 +865,7 @@ CREATE TABLE IF NOT EXISTS `si_tax` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
--- Dumping data for table `si_tax`
+-- Volcado de datos para la tabla `si_tax`
 --
 
 INSERT INTO `si_tax` (`tax_id`, `tax_description`, `tax_percentage`, `type`, `tax_enabled`, `domain_id`) VALUES
@@ -865,7 +878,7 @@ INSERT INTO `si_tax` (`tax_id`, `tax_description`, `tax_percentage`, `type`, `ta
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_user`
+-- Estructura de tabla para la tabla `si_user`
 --
 
 CREATE TABLE IF NOT EXISTS `si_user` (
@@ -875,11 +888,12 @@ CREATE TABLE IF NOT EXISTS `si_user` (
   `domain_id` int(11) NOT NULL DEFAULT '0',
   `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `enabled` int(1) NOT NULL,
-  PRIMARY KEY (`domain_id`,`id`)
+  PRIMARY KEY (`domain_id`,`id`),
+  UNIQUE KEY `ref_idx_email` (`email`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
--- Dumping data for table `si_user`
+-- Volcado de datos para la tabla `si_user`
 --
 
 INSERT INTO `si_user` (`id`, `email`, `role_id`, `domain_id`, `password`, `enabled`) VALUES
@@ -888,7 +902,7 @@ INSERT INTO `si_user` (`id`, `email`, `role_id`, `domain_id`, `password`, `enabl
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_user_domain`
+-- Estructura de tabla para la tabla `si_user_domain`
 --
 
 CREATE TABLE IF NOT EXISTS `si_user_domain` (
@@ -899,7 +913,7 @@ CREATE TABLE IF NOT EXISTS `si_user_domain` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
--- Dumping data for table `si_user_domain`
+-- Volcado de datos para la tabla `si_user_domain`
 --
 
 INSERT INTO `si_user_domain` (`id`, `name`) VALUES
@@ -908,7 +922,7 @@ INSERT INTO `si_user_domain` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_user_role`
+-- Estructura de tabla para la tabla `si_user_role`
 --
 
 CREATE TABLE IF NOT EXISTS `si_user_role` (
@@ -919,9 +933,12 @@ CREATE TABLE IF NOT EXISTS `si_user_role` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
--- Dumping data for table `si_user_role`
+-- Volcado de datos para la tabla `si_user_role`
 --
 
 INSERT INTO `si_user_role` (`id`, `name`) VALUES
 (1, 'administrator');
 
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

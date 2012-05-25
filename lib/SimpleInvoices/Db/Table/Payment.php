@@ -24,5 +24,19 @@ class SimpleInvoices_Db_Table_Payment extends SimpleInvoices_Db_Table_Abstract
         // Call parent
         parent::update($data, $where);
     }
+    
+    /**
+     * Replaces calc_invoice_paid()
+     * 
+     * @param int $invoice
+     */
+	public function getPaidAmountForInvoice($invoice) 
+	{
+		$select = new Zend_Db_Select($this->getAdapter());
+		$select->from($this->_name, array('amount' => new Zend_Db_Expr("COALESCE(SUM(ac_amount), 0)")));
+		$select->where('ac_inv_id=?', $invoice);
+		
+		return $this->getAdapter()->fetchOne($select);
+	}
 }
 ?>

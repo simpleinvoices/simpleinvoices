@@ -124,8 +124,7 @@ function dbQuery($sqlQuery) {
 	        }
 		}
     }
-    /*
-	/*
+   /*
 	// PDO Execution
 	if($sth && $sth->execute()) {
 		//dbLogger($sqlQuery);
@@ -134,7 +133,7 @@ function dbQuery($sqlQuery) {
 	// Earlier implementation did not return the $sth on error
 	}
 // $sth now has the PDO object or false on error.
-	*/
+*/
 	try {
 		$sth->execute();
 	} catch(Exception $e){
@@ -147,6 +146,7 @@ function dbQuery($sqlQuery) {
     // for errordisplay.
     if ($sth->errorCode() !=0) {
        $errm = $sth->errorInfo();
+       throw new Zend_Exception($errm[2]);
        return null;
     }
     else {

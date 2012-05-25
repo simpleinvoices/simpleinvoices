@@ -26,9 +26,12 @@ $today = date("Y-m-d");
 
 $invoice = null;
 
-if(isset($_GET['id'])) {
-	$invoice = invoice::select($_GET['id']);
+if(!isset($_GET['id'])) {
+	throw new SimpleInvoices_Exception('Invalid invoice identifier.');
 }
+//$invoice = invoice::select($_GET['id']);
+$invoice = new SimpleInvoices_Invoice($_GET['id']);
+	
 // NOTE: Doesn't this mess up payments?
 //else {
 //	$sth = dbQuery("SELECT * FROM ".TB_PREFIX."invoices");
@@ -36,8 +39,10 @@ if(isset($_GET['id'])) {
 //    #$sth = new invoice();
 //    #$invoice = $sth->select_all();
 //}
-$customer = customer::get($invoice['customer_id']);
-$biller = $SI_BILLER->getBiller($invoice['biller_id']);
+
+$customer = $invoice->getCustomer();
+$biller = $invoice->getBiller();
+
 $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
 $pt = $SI_PAYMENT_TYPES->getPaymentTypeById($defaults['payment_type']);
 
@@ -51,9 +56,9 @@ $paymentTypes = $SI_PAYMENT_TYPES->fetchAllActive();
 
 $smarty -> assign("paymentTypes",$paymentTypes);
 $smarty -> assign("defaults",$defaults);
-$smarty -> assign("biller",$biller);
-$smarty -> assign("customer",$customer);
-$smarty -> assign("invoice",$invoice);
+$smarty -> assign("biller",$biller->toArray());
+$smarty -> assign("customer",$customer->toArray());
+$smarty -> assign("invoice",$invoice->toArray());
 $smarty -> assign("today",$today);
 
 $smarty -> assign('pageActive', 'payment');

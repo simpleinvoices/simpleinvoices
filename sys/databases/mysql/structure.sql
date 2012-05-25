@@ -1,29 +1,36 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.2.1deb1
+-- version 3.5.0
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jun 03, 2010 at 09:50 PM
--- Server version: 5.1.37
--- PHP Version: 5.2.10-2ubuntu6
+-- Servidor: localhost
+-- Tiempo de generación: 24-05-2012 a las 12:24:12
+-- Versión del servidor: 5.5.23
+-- Versión de PHP: 5.4.0
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
 --
--- Database: `simple_invoices`
+-- Base de datos: `simple_invoices`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_biller`
+-- Estructura de tabla para la tabla `si_biller`
 --
 
 CREATE TABLE IF NOT EXISTS `si_biller` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL DEFAULT '1',
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `tax_id` VARCHAR(16) COLLATE utf8_unicode_ci DEFAULT NULL, 
+  `tax_id` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL,
   `street_address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `street_address2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `city` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -40,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `si_biller` (
   `paypal_notify_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `paypal_return_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `eway_customer_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `paymentsgateway_api_id` VARCHAR( 255 ) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `paymentsgateway_api_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `notes` text COLLATE utf8_unicode_ci,
   `custom_field1` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `custom_field2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -48,13 +55,13 @@ CREATE TABLE IF NOT EXISTS `si_biller` (
   `custom_field4` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `enabled` varchar(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
   PRIMARY KEY (`domain_id`,`id`),
-  KEY `idx_enabled` (`domain_id`, `enabled`)
+  KEY `idx_enabled` (`domain_id`,`enabled`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_cron`
+-- Estructura de tabla para la tabla `si_cron`
 --
 
 CREATE TABLE IF NOT EXISTS `si_cron` (
@@ -73,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `si_cron` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_cron_log`
+-- Estructura de tabla para la tabla `si_cron_log`
 --
 
 CREATE TABLE IF NOT EXISTS `si_cron_log` (
@@ -87,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `si_cron_log` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_customers`
+-- Estructura de tabla para la tabla `si_customers`
 --
 
 CREATE TABLE IF NOT EXISTS `si_customers` (
@@ -95,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `si_customers` (
   `domain_id` int(11) NOT NULL DEFAULT '1',
   `attention` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `tax_id` VARCHAR(16) COLLATE utf8_unicode_ci DEFAULT NULL, 
+  `tax_id` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL,
   `street_address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `street_address2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `city` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -117,13 +124,13 @@ CREATE TABLE IF NOT EXISTS `si_customers` (
   `custom_field4` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `enabled` varchar(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
   PRIMARY KEY (`domain_id`,`id`),
-  KEY `idx_enabled` (`domain_id`, `enabled`)
+  KEY `idx_enabled` (`domain_id`,`enabled`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_custom_fields`
+-- Estructura de tabla para la tabla `si_custom_fields`
 --
 
 CREATE TABLE IF NOT EXISTS `si_custom_fields` (
@@ -139,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `si_custom_fields` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_extensions`
+-- Estructura de tabla para la tabla `si_extensions`
 --
 
 CREATE TABLE IF NOT EXISTS `si_extensions` (
@@ -148,15 +155,15 @@ CREATE TABLE IF NOT EXISTS `si_extensions` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `enabled` varchar(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`,`domain_id`),
-  KEY `idx_domain_id` (`domain_id`),
-  UNIQUE KEY `idx_unique_extension` (`domain_id`,`name`)
+  PRIMARY KEY (`domain_id`,`id`),
+  UNIQUE KEY `idx_unique_extension` (`domain_id`,`name`),
+  KEY `idx_domain_id` (`domain_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_index`
+-- Estructura de tabla para la tabla `si_index`
 --
 
 CREATE TABLE IF NOT EXISTS `si_index` (
@@ -165,13 +172,14 @@ CREATE TABLE IF NOT EXISTS `si_index` (
   `sub_node` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `sub_node_2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `domain_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`,`domain_id`),
   KEY `idx_node` (`domain_id`,`node`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_inventory`
+-- Estructura de tabla para la tabla `si_inventory`
 --
 
 CREATE TABLE IF NOT EXISTS `si_inventory` (
@@ -188,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `si_inventory` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_invoices`
+-- Estructura de tabla para la tabla `si_invoices`
 --
 
 CREATE TABLE IF NOT EXISTS `si_invoices` (
@@ -214,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_invoice_items`
+-- Estructura de tabla para la tabla `si_invoice_items`
 --
 
 CREATE TABLE IF NOT EXISTS `si_invoice_items` (
@@ -228,13 +236,14 @@ CREATE TABLE IF NOT EXISTS `si_invoice_items` (
   `description` text COLLATE utf8_unicode_ci,
   `total` decimal(25,6) DEFAULT '0.000000',
   PRIMARY KEY (`id`),
-  KEY `idx_invoice` (`invoice_id`)
+  KEY `idx_invoice` (`invoice_id`),
+  KEY `idx_invoice_id` (`invoice_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_invoice_item_tax`
+-- Estructura de tabla para la tabla `si_invoice_item_tax`
 --
 
 CREATE TABLE IF NOT EXISTS `si_invoice_item_tax` (
@@ -250,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `si_invoice_item_tax` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_invoice_type`
+-- Estructura de tabla para la tabla `si_invoice_type`
 --
 
 CREATE TABLE IF NOT EXISTS `si_invoice_type` (
@@ -262,7 +271,7 @@ CREATE TABLE IF NOT EXISTS `si_invoice_type` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_log`
+-- Estructura de tabla para la tabla `si_log`
 --
 
 CREATE TABLE IF NOT EXISTS `si_log` (
@@ -277,7 +286,7 @@ CREATE TABLE IF NOT EXISTS `si_log` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_payment`
+-- Estructura de tabla para la tabla `si_payment`
 --
 
 CREATE TABLE IF NOT EXISTS `si_payment` (
@@ -296,7 +305,7 @@ CREATE TABLE IF NOT EXISTS `si_payment` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_payment_types`
+-- Estructura de tabla para la tabla `si_payment_types`
 --
 
 CREATE TABLE IF NOT EXISTS `si_payment_types` (
@@ -305,14 +314,15 @@ CREATE TABLE IF NOT EXISTS `si_payment_types` (
   `pt_description` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `pt_enabled` varchar(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
   PRIMARY KEY (`domain_id`,`pt_id`),
-  UNIQUE KEY `idx_description` (`domain_id`, `pt_description`),
-  KEY `idx_enabled` (`domain_id`, `pt_enabled`)
+  UNIQUE KEY `idx_description` (`domain_id`,`pt_description`),
+  UNIQUE KEY `idx_unique_description` (`domain_id`,`pt_description`),
+  KEY `idx_enabled` (`domain_id`,`pt_enabled`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_preferences`
+-- Estructura de tabla para la tabla `si_preferences`
 --
 
 CREATE TABLE IF NOT EXISTS `si_preferences` (
@@ -343,7 +353,7 @@ CREATE TABLE IF NOT EXISTS `si_preferences` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_products`
+-- Estructura de tabla para la tabla `si_products`
 --
 
 CREATE TABLE IF NOT EXISTS `si_products` (
@@ -364,15 +374,15 @@ CREATE TABLE IF NOT EXISTS `si_products` (
   `enabled` varchar(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
   `visible` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`domain_id`,`id`),
+  KEY `idx_enabled` (`domain_id`,`enabled`),
   KEY `idx_domain_id` (`domain_id`),
-  KEY `idx_enabled` (`domain_id`, `enabled`),
-  KEY `idx_visible` (`domain_id`, `visible`)
+  KEY `idx_visible` (`domain_id`,`visible`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_sql_patchmanager`
+-- Estructura de tabla para la tabla `si_sql_patchmanager`
 --
 
 CREATE TABLE IF NOT EXISTS `si_sql_patchmanager` (
@@ -382,12 +392,12 @@ CREATE TABLE IF NOT EXISTS `si_sql_patchmanager` (
   `sql_release` varchar(25) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `sql_statement` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`sql_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=599 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=622 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_system_defaults`
+-- Estructura de tabla para la tabla `si_system_defaults`
 --
 
 CREATE TABLE IF NOT EXISTS `si_system_defaults` (
@@ -397,14 +407,15 @@ CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `domain_id` int(5) NOT NULL DEFAULT '0',
   `extension_id` int(5) NOT NULL DEFAULT '0',
   PRIMARY KEY (`domain_id`,`id`),
-  KEY `name` (`name`,`domain_id`),
-  KEY `idx_name` (`name`)
+  KEY `name` (`domain_id`,`name`),
+  KEY `idx_name` (`name`),
+  KEY `idx_name_domain_id` (`domain_id`,`name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=24 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_tax`
+-- Estructura de tabla para la tabla `si_tax`
 --
 
 CREATE TABLE IF NOT EXISTS `si_tax` (
@@ -420,7 +431,7 @@ CREATE TABLE IF NOT EXISTS `si_tax` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_user`
+-- Estructura de tabla para la tabla `si_user`
 --
 
 CREATE TABLE IF NOT EXISTS `si_user` (
@@ -430,15 +441,14 @@ CREATE TABLE IF NOT EXISTS `si_user` (
   `domain_id` int(11) NOT NULL DEFAULT '0',
   `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `enabled` int(1) NOT NULL,
-  PRIMARY KEY (`domain_id`,`id`)
+  PRIMARY KEY (`domain_id`,`id`),
+  UNIQUE KEY `ref_idx_email` (`email`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
-
-CREATE UNIQUE INDEX ref_idx_email on `si_user` (email) ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_user_domain`
+-- Estructura de tabla para la tabla `si_user_domain`
 --
 
 CREATE TABLE IF NOT EXISTS `si_user_domain` (
@@ -451,7 +461,7 @@ CREATE TABLE IF NOT EXISTS `si_user_domain` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `si_user_role`
+-- Estructura de tabla para la tabla `si_user_role`
 --
 
 CREATE TABLE IF NOT EXISTS `si_user_role` (
@@ -461,3 +471,6 @@ CREATE TABLE IF NOT EXISTS `si_user_role` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

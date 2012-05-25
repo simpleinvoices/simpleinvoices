@@ -4,6 +4,18 @@ class SimpleInvoices_Db_Table_InvoiceItems extends SimpleInvoices_Db_Table_Abstr
     protected $_name = "invoice_items";
     protected $_primary = array('id');
 
+	/**
+    * Function getInvoiceGross
+    *
+    * Used to get the gross total for a given invoice number
+    **/
+    public function getGrossForInvoice($invoice_id) {
+    	$select = $this->select();
+    	$select->from($this->_name, array('gross_total' => new Zend_Db_Expr('SUM(gross_total)')));
+    	$select->where('invoice_id=?', $invoice_id);
+        return $this->getAdapter()->fetchOne($select);
+    }
+    
     /**
     * Get the invoice total
     * 

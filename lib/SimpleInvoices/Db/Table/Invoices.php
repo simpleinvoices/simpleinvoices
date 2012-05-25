@@ -10,13 +10,13 @@ class SimpleInvoices_Db_Table_Invoices extends SimpleInvoices_Db_Table_Abstract
     */
     public function getInvoice($id)
     {
-        $auth_session = Zend_Registry::get('auth_session');
+    	$auth_session = Zend_Registry::get('auth_session');
         
-        $select = $this->select();
-        $select->where('id = ?', $id);
-        $select->where('domain_id = ?', $auth_session->domain_id);
-        
-        return $this->getAdapter()->fetchRow($select);    
+	    $select = $this->select();
+	    $select->where('id=?', $id);
+	    $select->where('domain_id=?', $auth_session->domain_id);
+	        
+	    return $this->getAdapter()->fetchRow($select);	    
     }
     
     /**

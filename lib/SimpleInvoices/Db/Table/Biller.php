@@ -128,5 +128,6 @@ class SimpleInvoices_Db_Table_Biller extends SimpleInvoices_Db_Table_Abstract
         
         return parent::update($data, $where);
     }
+    
 }
 ?>

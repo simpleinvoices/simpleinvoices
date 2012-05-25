@@ -20,51 +20,49 @@
 checkLogin();
 
 $SI_SYSTEM_DEFAULTS = new SimpleInvoices_Db_Table_SystemDefaults();
-$SI_INVOICE_TYPE = new SimpleInvoices_Db_Table_InvoiceType();
-$SI_BILLER = new SimpleInvoices_Db_Table_Biller();
 $SI_CUSTOM_FIELDS = new SimpleInvoices_Db_Table_CustomFields();
-$SI_PREFERENCES = new SimpleInvoices_Db_Table_Preferences();
 
-#get the invoice id
-$invoice_id = $_GET['id'];
+if (!isset($_GET['id'])) {
+	throw new SimpleInvoices_Exception('Invalid invoice');
+}
 
+$invoice = new SimpleInvoices_Invoice($_GET['id']);
+$invoice_number_of_taxes = $invoice->getNumberOfTaxes();
+$invoice_type = $invoice->getType();
+$customer = $invoice->getCustomer();
+$biller = $invoice->getBiller();
+$preference = $invoice->getPreference();
 
-$invoice = getInvoice($invoice_id);
-$invoice_number_of_taxes = numberOfTaxesForInvoice($invoice_id);
-$invoice_type = $SI_INVOICE_TYPE->getInvoiceType($invoice['type_id']);
-
-$customer = customer::get($invoice['customer_id']);
-$biller = $SI_BILLER->getBiller($invoice['biller_id']);
-$preference = $SI_PREFERENCES->getPreferenceById($invoice['preference_id']);
 $defaults = $SI_SYSTEM_DEFAULTS->fetchAll();
-$invoiceItems = invoice::getInvoiceItems($invoice_id);
+$invoiceItems = invoice::getInvoiceItems($invoice->getId());
 
     $eway_check = new eway();
-    $eway_check->invoice = $invoice;
+    $eway_check->invoice = $invoice->toArray();
     $eway_pre_check = $eway_check->pre_check();
+    
+	#Invoice Age - number of days - start
+	if ($invoice->owing > 0 ) {
+	    $invoice_age_days =  number_format((strtotime(date('Y-m-d')) - strtotime($invoice->calc_date)) / (60 * 60 * 24),0);
+		$invoice_age = "$invoice_age_days {$LANG['days']}";
+	}
+	else {
+	    $invoice_age ="";
+	}
 
-#Invoice Age - number of days - start
-if ($invoice['owing'] > 0 ) {
-    $invoice_age_days =  number_format((strtotime(date('Y-m-d')) - strtotime($invoice['calc_date'])) / (60 * 60 * 24),0);
-	$invoice_age = "$invoice_age_days {$LANG['days']}";
-}
-else {
-    $invoice_age ="";
-}
+	$url_for_pdf = "./index.php?module=export&view=pdf&id=" . $invoice->getId();
 
-	$url_for_pdf = "./index.php?module=export&view=pdf&id=" . $invoice['id'];
-
-	$invoice['url_for_pdf'] = $url_for_pdf;
+	$invoice->url_for_pdf = $url_for_pdf;
 
     $customFieldLabels = $SI_CUSTOM_FIELDS->getLabels();
     $customFieldDisplay = $SI_CUSTOM_FIELDS->getDisplay();
 
+    $invoice_array = $invoice->toArray();
 for($i=1;$i<=4;$i++) {
-	$customField[$i] = show_custom_field("invoice_cf$i",$invoice["custom_field$i"],"read",'details_screen summary', 'details_screen','details_screen',5,':');
+	$customField[$i] = show_custom_field("invoice_cf$i",$invoice_array["custom_field$i"],"read",'details_screen summary', 'details_screen','details_screen',5,':');
 }
 
 //Set locked status on locked invoices
-if ($invoice['status']=='final') {
+if ($invoice->status=='final') {
     $invoicelocked = 'true';
 } else {
     $invoicelocked = 'false';
@@ -72,8 +70,8 @@ if ($invoice['status']=='final') {
 
 //Customer accounts sections
 $customerAccount = null;
-$customerAccount['total'] = calc_customer_total($customer['id']);
-$customerAccount['paid'] = calc_customer_paid($customer['id']);
+$customerAccount['total'] = $customer->getTotal();
+$customerAccount['paid'] = $customer->getPaidAmount();
 $customerAccount['owing'] = $customerAccount['total'] - $customerAccount['paid'];
 
 $smarty -> assign('pageActive', 'invoice');
@@ -87,10 +85,10 @@ $smarty -> assign("invoice_number_of_taxes",$invoice_number_of_taxes);
 $smarty -> assign("invoiceItems",$invoiceItems);
 $smarty -> assign("defaults",$defaults);
 $smarty -> assign("preference",$preference);
-$smarty -> assign("biller",$biller);
-$smarty -> assign("customer",$customer);
+$smarty -> assign("biller",$biller->toArray());
+$smarty -> assign("customer",$customer->toArray());
 $smarty -> assign("invoice_type",$invoice_type);
-$smarty -> assign("invoice",$invoice);
+$smarty -> assign("invoice",$invoice->toArray());
 $smarty -> assign("wordprocessor",$config->export->wordprocessor);
 $smarty -> assign("spreadsheet",$config->export->spreadsheet);
 $smarty -> assign("customerAccount",$customerAccount);
