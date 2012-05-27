@@ -20,25 +20,6 @@ function checkLogin() {
 	}
 }
 
-function getLogoList() {
-    $baseUrl = Zend_Registry::get('baseUrl');
-    
-	$dirname= dirname(APPLICATION_PATH) . '/' . $baseUrl . "/images/logos";
-	$ext = array("jpg", "png", "jpeg", "gif");
-	$files = array();
-	if($handle = opendir($dirname)) {
-		while(false !== ($file = readdir($handle)))
-		for($i=0;$i<sizeof($ext);$i++)
-		if(stristr($file, ".".$ext[$i])) //NOT case sensitive: OK with JpeG, JPG, ecc.
-		$files[] = $file;
-		closedir($handle);
-	}
-
-	sort($files);
-	
-	return $files;
-}
-
 function getLogo($biller) {
 	$url = getURL();
 

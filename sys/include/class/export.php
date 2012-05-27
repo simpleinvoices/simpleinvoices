@@ -205,30 +205,23 @@ class export
 			}
             case "payment":
             {
-                $SI_PAYMENT_TYPES = new SimpleInvoices_Db_Table_PaymentTypes();
-                $SI_INVOICE_TYPE = new SimpleInvoices_Db_Table_InvoiceType();
-                
-                $payment = getPayment($this->id);
-
-                /*Code to get the Invoice preference - so can link from this screen back to the invoice - START */
-                $invoice = getInvoice($payment['ac_inv_id']);
-                $biller = $SI_BILLER->getBiller($payment['biller_id']);
-                $logo = getLogo($biller);
-                $logo = str_replace(" ", "%20", $logo);
-                $customer = customer::get($payment['customer_id']);
-                $invoiceType = $SI_INVOICE_TYPE->getInvoiceType($invoice['type_id']);
                 $customFieldLabels = $SI_CUSTOM_FIELDS->getLabels();
-                $paymentType = $SI_PAYMENT_TYPES->getPaymentTypeById($payment['ac_payment_type']);
-                $preference = $SI_PREFERENCES->getPreferenceById($invoice['preference_id']);
-
-                $smarty -> assign("payment",$payment);
-                $smarty -> assign("invoice",$invoice);
-                $smarty -> assign("biller",$biller);
+                
+                $payment = new SimpleInvoices_Payment($this->id);
+                $invoice = $payment->getInvoice();
+                $biller = $invoice->getBiller();
+                $logo = $biller->getLogo();
+                $logo = str_replace(" ", "%20", $logo);
+                $customer = $invoice->getCustomer();
+                
+                $smarty -> assign("payment",$payment->toArray());
+                $smarty -> assign("invoice",$invoice->toArray());
+                $smarty -> assign("biller",$biller->toArray());
                 $smarty -> assign("logo",$logo);
-                $smarty -> assign("customer",$customer);
-                $smarty -> assign("invoiceType",$invoiceType);
-                $smarty -> assign("paymentType",$paymentType);
-                $smarty -> assign("preference",$preference);
+                $smarty -> assign("customer",$customer->toArray());
+                $smarty -> assign("invoiceType",$invoice->getType());
+                $smarty -> assign("paymentType",$payment->getType());
+                $smarty -> assign("preference",$invoice->getPreference());
                 $smarty -> assign("customFieldLabels",$customFieldLabels);
 
                 $smarty -> assign('pageActive', 'payment');
@@ -237,9 +230,9 @@ class export
 				$css = $siUrl."/sys/templates/invoices/default/style.css";
 				$smarty -> assign('css',$css);
 
-                // ToDo: THIS FILE IS MISSING!!
-                $templatePath = $include_dir . "sys/templates/default/payments/print.tpl";
-				$data = $smarty -> fetch(".".$templatePath);
+                $templatePath = $include_dir . "sys/templates/default/modules/payments/print.tpl";
+				$data = $smarty -> fetch($templatePath);
+				
                 break;
             }
 			case "invoice":

@@ -114,13 +114,17 @@ class SimpleInvoices_Invoice
 	
 	/**
 	 * Get the customer for this invoice.
+	 * @return SimpleInvoices_Customer
 	 */
 	public function getCustomer()
 	{
 		return new SimpleInvoices_Customer($this->_data['customer_id']);
 	}
 	
-	
+	/**
+	 * Get the current invoice identifier.
+	 * @return int
+	 */
 	public function getId()
 	{
 		return $this->_id;
@@ -128,24 +132,6 @@ class SimpleInvoices_Invoice
 	
 	public function getNumberOfTaxes()
 	{
-		/*
-		 $sql = "select
-				DISTINCT tax.tax_id
-			from ".TB_PREFIX."invoice_item_tax item_tax,
-				 ".TB_PREFIX."invoice_items item,
-				 ".TB_PREFIX."tax tax
-			where
-				item.id = item_tax.invoice_item_id
-				AND
-				tax.tax_id = item_tax.tax_id
-				AND
-				item.invoice_id = :invoice_id
-				GROUP BY
-				tax.tax_id;";
-	$sth = dbQuery($sql, ':invoice_id', $invoice_id) or die(htmlsafe(end($dbh->errorInfo())));
-	$result = $sth->rowCount();
-
-		 */
 		$tbl_prefix = SimpleInvoices_Db_Table_Abstract::getTablePrefix();
 		
 		$select = new Zend_Db_Select($this->_db);

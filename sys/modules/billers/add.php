@@ -21,7 +21,7 @@ checkLogin();
 
 $SI_CUSTOM_FIELDS = new SimpleInvoices_Db_Table_CustomFields();
 
-$files = getLogoList();
+$files = SimpleInvoices_Biller::getLogoList();
 
 $smarty->assign("files", $files);
 

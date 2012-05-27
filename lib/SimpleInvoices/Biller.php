@@ -97,7 +97,40 @@ class SimpleInvoices_Biller
 		}	
 	}
 	
+	/**
+	 * Get a list of logo image files.
+	 * @return Array An array containing the paths to the logo files.
+	 */
+	public static function getLogoList()
+	{
+		$baseUrl = Zend_Registry::get('baseUrl');
+    
+		// ToDo: Probably this could go into the bootstrap
+		if (!Zend_Registry::isRegistered('SI_Folders')) {
+			$dirname= APPLICATION_PATH . '/../' . $baseUrl . "/images/logos";
+		} else {
+			$folders = Zend_Registry::get('SI_Folders');
+			if (isset($folders['images'])) {
+				$dirname = $folders['images'] . "/logos/";
+			} else {
+				$dirname= APPLICATION_PATH . '/../' . $baseUrl . "/images/logos";
+			}
+		}
+		
+		$ext = array("jpg", "png", "jpeg", "gif");
+		$files = array();
+		if($handle = opendir($dirname)) {
+			while(false !== ($file = readdir($handle)))
+			for($i=0;$i<sizeof($ext);$i++)
+			if(stristr($file, ".".$ext[$i])) //NOT case sensitive: OK with JpeG, JPG, ecc.
+			$files[] = $file;
+			closedir($handle);
+		}
 	
+		sort($files);
+		
+		return $files;
+	}
 	
 	/**
      * Backward compatibility

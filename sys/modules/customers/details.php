@@ -19,33 +19,26 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$SI_CUSTOM_FIELDS = new SimpleInvoices_Db_Table_CustomFields();
+if (!isset($_GET['id'])) {
+	throw new SimpleInvoices_Exception('Invalid customer identifier.');
+}
 
-#get the invoice id
-$customer_id = $_GET['id'];
-$customer = customer::get($customer_id);
-$customer['wording_for_enabled'] = $customer['enabled']==1?$LANG['enabled']:$LANG['disabled'];
-
-
-//TODO: Perhaps possible a bit nicer?
-$stuff = null;
-$stuff['total'] = calc_customer_total($customer['id']);
-
-#amount paid calc - start
-$stuff['paid'] = calc_customer_paid($customer['id']);;
-#amount paid calc - end
-
-#amount owing calc - start
+$customer = new SimpleInvoices_Customer($_GET['id']);
+$stuff['total'] = $customer->getTotal();
+$stuff['paid'] = $customer->getPaidAmount();
 $stuff['owing'] = $stuff['total'] - $stuff['paid'];
-#get custom field labels
 
+#get custom field labels
+$SI_CUSTOM_FIELDS = new SimpleInvoices_Db_Table_CustomFields();
 
 $customFieldLabel = $SI_CUSTOM_FIELDS->getLabels();
 $invoices = getCustomerInvoices($customer_id);
 
-//$customFieldLabel = getCustomFieldLabels("biller");
+$customerData = $customer->toArray();
+$customerData['wording_for_enabled'] = $customerData['enabled']==1?$LANG['enabled']:$LANG['disabled'];
+
 $smarty -> assign("stuff",$stuff);
-$smarty -> assign('customer',$customer);
+$smarty -> assign('customer',$customerData);
 $smarty -> assign('invoices',$invoices);
 $smarty -> assign('customFieldLabel',$customFieldLabel);
 

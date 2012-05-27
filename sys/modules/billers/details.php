@@ -20,24 +20,23 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$SI_BILLER = new SimpleInvoices_Db_Table_Biller();
-$SI_CUSTOM_FIELDS = new SimpleInvoices_Db_Table_CustomFields();
+if (!isset($_GET['id'])) {
+	throw new SimpleInvoices_Exception('Invalid biller id');
+}
 
-#get the invoice id
-$biller_id = $_GET['id'];
-
-$biller = $SI_BILLER->getBiller($biller_id);
+$biller = new SimpleInvoices_Biller($_GET['id']);
 
 /*drop down list code for invoice logo */
 
-$files = getLogoList();
+$files = SimpleInvoices_Biller::getLogoList();
 
 /*end logo stuff */
 
 #get custom field labels
+$SI_CUSTOM_FIELDS = new SimpleInvoices_Db_Table_CustomFields();
 $customFieldLabel = $SI_CUSTOM_FIELDS->getLabels();
 
-$smarty->assign('biller', $biller);
+$smarty->assign('biller', $biller->toArray());
 /*
 $smarty -> assign('enabled', array(
                                 0 => $LANG[disabled],

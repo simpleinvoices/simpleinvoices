@@ -32,6 +32,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             Zend_Registry::set('tbl_prefix', '');
         }
         
+        if (isset($config->simpleinvoices->folders)) {
+        	Zend_Registry::set('SI_Folders', $config->simpleinvoices->folders->toArray());
+        }
+        
         return $config;
     }
     

@@ -279,6 +279,7 @@ function _invoice_items_check_fk($invoice, $product, $tax, $update) {
 	return true;
 }
 
+/*
 function getPayment($id) {
 	global $config;
 	global $dbh;
@@ -290,6 +291,7 @@ function getPayment($id) {
 	$payment['date'] = siLocal::date($payment['ac_date']);
 	return $payment;
 }
+*/
 
 function getInvoicePayments($id) {
 	$sql = "SELECT
