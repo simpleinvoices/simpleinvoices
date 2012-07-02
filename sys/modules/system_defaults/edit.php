@@ -53,7 +53,7 @@ else if ($_GET["submit"] == "def_inv_template") {
 	$default = "template";
 	/*drop down list code for invoice template - only show the folder names in src/invoices/templates*/
 
-	$handle=opendir("./sys/templates/invoices/");
+    $handle=opendir(APPLICATION_PATH."/../sys/templates/invoices/");
 	while ($template = readdir($handle)) {
 		if ($template != ".." && $template != "." && $template !="logos" && $template !=".svn" && $template !="template.php" && $template !="template.php~" ) {
 			$files[] = $template;
@@ -67,7 +67,7 @@ else if ($_GET["submit"] == "def_inv_template") {
         * If extension is enabled then continue and include the requested file for that extension if it exists
         */
         if($extension->enabled == "1") {
-            $handle=opendir('./sys/extensions/' . $extension->name . '/templates/invoices/');
+            $handle=opendir(APPLICATION_PATH.'/../sys/extensions/' . $extension->name . '/templates/invoices/');
             while ($template = readdir($handle)) {
                 if ($template != ".." && $template != "." && $template !="logos" && $template !=".svn" && $template !="template.php" && $template !="template.php~" ) {
                     $files[] = $template;
