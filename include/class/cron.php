@@ -113,7 +113,7 @@ class cron {
 		    $sort = "id";
 		}
 
-		if($type =="count" OR $type =="no_limit)
+		if($type =="count" OR $type =="no_limit")
 		{
 		    //unset($limit);
 		    $limit="";

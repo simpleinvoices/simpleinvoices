@@ -51,6 +51,7 @@ $acl->allow('guest', null, 'view');
 // everyone see auth page
 $acl->allow(null,'auth');
 $acl->allow(null,'api');
+$acl->allow(null,'payments','ach');
 //TODO: not good !!! - no acl for invoiecs as can't get html2pdf to work with zend_auth :(
 $acl->allow(null,'invoices');
 
