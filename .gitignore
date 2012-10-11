@@ -1,2 +1,5 @@
-tmp/log/*
-tmp/cache/*
+custom.config.ini
+%%*
+*.tpl.php
+zend_cache---*
+*.log
