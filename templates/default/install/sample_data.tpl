@@ -12,7 +12,7 @@
             <a href="index.php?module=install&view=structure">Step 1: Install Database</a>
         </li>
         <li>
-            <a href="index.php?module=install&view=essential">Step 2: Import essentail data</a>
+            <a href="index.php?module=install&view=essential">Step 2: Import essential data</a>
         </li>
         <li>
             <a class="active active_subpage" href="index.php?module=install&view=sample_data">Step 3: Import sample data</a>
