@@ -295,8 +295,10 @@ border-bottom:2px #DADADA solid;
 	padding-top:42px;
 	width: 970px;
 	z-index:1;
-    -moz-box-shadow:0 3px 5px #CCCCCC;
-    -webkit-box-shadow:0 3px 5px #CCCCCC;
+
+  -moz-box-shadow:0 3px 5px #CCCCCC;
+  -webkit-box-shadow:0 3px 5px #CCCCCC;
+  box-shadow:0 3px 5px #CCCCCC;
 
 	-webkit-border-top-left-radius:6px;
 	-webkit-border-top-right-radius:6px;
@@ -308,6 +310,7 @@ border-bottom:2px #DADADA solid;
 	-moz-border-radius-bottomleft:6px;
 	-moz-border-radius-bottomright:6px;
 
+	border-radius: 6px;
 /*	margin:13px auto 0;
 	padding:0 23px 0 30px; 
 */
@@ -532,6 +535,7 @@ table.buttons{
 	
 	-moz-border-radius:6px;
 	-webkit-border-radius:6px;
+	border-radius: 6px;
     display:block;
     float:left;
     margin:0 7px 0 0;
