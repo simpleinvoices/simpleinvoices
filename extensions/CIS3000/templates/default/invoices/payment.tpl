@@ -114,12 +114,12 @@
 			<tbody id="itemtable-tbody">
 			<tr>
 				<td class="details_screen"></td>
-				<td class="details_screen">{$LANG.quantity}</td>
-				<td class="details_screen">{$LANG.item}</td>
+				<td class="details_screen">{$LANG.date_formatted}</td>
+				<td class="details_screen">{$LANG.amount}</td>
 				{section name=tax_header loop=$defaults.tax_per_line_item }
-					<td class="details_screen">{$LANG.tax} {if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1|htmlsafe}{/if} </td>
+					<td class="details_screen">Pay Tax {if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1|htmlsafe}{/if} </td>
 				{/section}
-				<td class="details_screen">{$LANG.unit_price}</td>
+				<td class="details_screen">{$LANG.item}</td>
 			</tr>
 			</tbody>
 	
@@ -162,17 +162,61 @@
 						</td>
 						<td>
 							<input 
-                                type="text" 
+                                type="hidden" 
                                 {if $smarty.section.line.index == "0"} 
                                     class="validate[required]" 
                                 {/if} 
                                 name="quantity{$smarty.section.line.index|htmlsafe}" 
                                 id="quantity{$smarty.section.line.index|htmlsafe}" size="5" 
 								{if $smarty.get.quantity.$lineNumber}
-								    value="{$smarty.get.quantity.$lineNumber}"
+								    value="1"
                                 {/if}
                                 />
+							<input 
+                                type="text" 
+				size="10" 
+				class="date-picker" 
+                                name="item_date{$smarty.section.line.index|htmlsafe}" 
+                                id="item_date{$smarty.section.line.index|htmlsafe}" size="5" 
+                                value='{$smarty.now|date_format:"%Y-%m-%d"}' 
+                                />
 						</td>
+						<td>
+							<input 
+								id="unit_price{$smarty.section.line.index|htmlsafe}" 
+								name="unit_price{$smarty.section.line.index|htmlsafe}" 
+								size="7"
+								{if $smarty.get.unit_price.$lineNumber}
+								    value="{$smarty.get.unit_price.$lineNumber}"
+								{else}
+								   value=""
+								{/if}
+                                {if $smarty.section.line.index == "0"} class="validate[required]" {/if}
+							/>
+						</td>	
+						{section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
+		                    		{ assign var="taxNumber" value=$smarty.section.tax.index } 
+						<td>				                				                
+							<select 
+								id="tax_id[{$smarty.section.line.index|htmlsafe}][{$smarty.section.tax.index|htmlsafe}]"
+								name="tax_id[{$smarty.section.line.index|htmlsafe}][{$smarty.section.tax.index|htmlsafe}]"
+							>
+							<option value=""></option>
+							{foreach from=$taxes item=tax}
+								<option 
+								    {if $tax.tax_id == $smarty.get.tax.$lineNumber.$taxNumber}
+									value="{$smarty.get.tax.$lineNumber.$taxNumber}"
+									selected
+								    {else}
+								       value="{$tax.tax_id|htmlsafe}"
+								    {/if}
+								>
+								    {$tax.tax_description|htmlsafe}
+								</option>
+							{/foreach}
+						</select>
+						</td>
+						{/section}
 						<td>
 										
 					{if $products == null }
@@ -200,42 +244,6 @@
 						</select>
 					{/if}
 						</td>
-						{section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
-		                    		{ assign var="taxNumber" value=$smarty.section.tax.index } 
-						<td>				                				                
-							<select 
-								id="tax_id[{$smarty.section.line.index|htmlsafe}][{$smarty.section.tax.index|htmlsafe}]"
-								name="tax_id[{$smarty.section.line.index|htmlsafe}][{$smarty.section.tax.index|htmlsafe}]"
-							>
-							<option value=""></option>
-							{foreach from=$taxes item=tax}
-								<option 
-								    {if $tax.tax_id == $smarty.get.tax.$lineNumber.$taxNumber}
-									value="{$smarty.get.tax.$lineNumber.$taxNumber}"
-									selected
-								    {else}
-								       value="{$tax.tax_id|htmlsafe}"
-								    {/if}
-								>
-								    {$tax.tax_description|htmlsafe}
-								</option>
-							{/foreach}
-						</select>
-						</td>
-						{/section}
-						<td>
-							<input 
-								id="unit_price{$smarty.section.line.index|htmlsafe}" 
-								name="unit_price{$smarty.section.line.index|htmlsafe}" 
-								size="7"
-								{if $smarty.get.unit_price.$lineNumber}
-								    value="{$smarty.get.unit_price.$lineNumber}"
-								{else}
-								   value=""
-								{/if}
-                                {if $smarty.section.line.index == "0"} class="validate[required]" {/if}
-							/>
-						</td>	
 					</tr>
 							
 					<tr class="note">
