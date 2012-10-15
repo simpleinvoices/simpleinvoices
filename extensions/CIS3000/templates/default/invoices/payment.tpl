@@ -119,7 +119,8 @@
 				{section name=tax_header loop=$defaults.tax_per_line_item }
 					<td class="details_screen">Pay Tax {if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1|htmlsafe}{/if} </td>
 				{/section}
-				<td class="details_screen">{$LANG.item}</td>
+				<td class="details_screen">{$LANG.total} &nbsp; &nbsp;</td>
+				<td class="details_screen">{$LANG.payment_type}</td>
 			</tr>
 			</tbody>
 	
@@ -204,6 +205,8 @@
 							<select 
 								id="tax_id[{$smarty.section.line.index|htmlsafe}][{$smarty.section.tax.index|htmlsafe}]"
 								name="tax_id[{$smarty.section.line.index|htmlsafe}][{$smarty.section.tax.index|htmlsafe}]"
+								rel="{$smarty.section.line.index|htmlsafe}"
+								class="tax_change"
 							>
 							<option value=""></option>
 							{foreach from=$taxes item=tax}
@@ -221,6 +224,11 @@
 						</select>
 						</td>
 						{/section}
+						<td>
+							<span 
+								id="total{$smarty.section.line.index}"
+							></span>						
+						</td>
 						<td>
 										
 					{if $products == null }
