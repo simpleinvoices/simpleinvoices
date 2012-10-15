@@ -173,13 +173,17 @@
                                 {/if}
                                 />
 							<input 
-                                type="text" 
-				size="10" 
-				class="date-picker" 
-                                name="item_date{$smarty.section.line.index|htmlsafe}" 
-                                id="item_date{$smarty.section.line.index|htmlsafe}" size="5" 
-                                value='{$smarty.now|date_format:"%Y-%m-%d"}' 
-                                />
+								type="text" 
+								size="10" 
+								class="date-picker" 
+								name="item_date{$smarty.section.line.index|htmlsafe}" 
+								id="item_date{$smarty.section.line.index|htmlsafe}" size="5" 
+								{if $smarty.section.line.index == 0 }
+								   value='{$smarty.now|date_format:"%Y-%m-%d"}' 
+								{else}
+								   value=""
+								{/if}
+							/>
 						</td>
 						<td>
 							<input 
@@ -223,22 +227,21 @@
 						<p><em>{$LANG.no_products}</em></p>
 					{else}
 						<select 
-							id="products{$smarty.section.line.index|htmlsafe}"
-							name="products{$smarty.section.line.index|htmlsafe}"
+							id="payment_type{$smarty.section.line.index|htmlsafe}"
+							name="payment_type{$smarty.section.line.index|htmlsafe}"
 							rel="{$smarty.section.line.index|htmlsafe}"
-							class="{if $smarty.section.line.index == "0"}validate[required]{/if} product_change"						
+							class="{if $smarty.section.line.index == "0"}validate[required]{/if} payment_type_change"						
                         >
 							<option value=""></option>
-						{foreach from=$products item=product}
+						{foreach from=$paymentTypes item=product}
 							<option 
 								{if $product.id == $smarty.get.product.$lineNumber}
 								    value="{$smarty.get.product.$lineNumber}"
-								    selected
 								{else}
 								    value="{$product.id|htmlsafe}"
 								{/if}
 							>
-								{$product.description|htmlsafe}
+								{$product.pt_description|htmlsafe}
 							</option>
 						{/foreach}
 						</select>

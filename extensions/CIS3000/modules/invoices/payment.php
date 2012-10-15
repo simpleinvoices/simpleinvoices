@@ -25,6 +25,15 @@ $logger->log('Itemised invoice created', Zend_Log::INFO);
 
 include('./modules/invoices/invoice.php');
 
+$defaults = getSystemDefaults();
+/*
+ * $pt = getPaymentType($defaults['payment_type']);
+$smarty -> assign('pt', $pt);
+ */
+
+$paymentTypes = getActivePaymentTypes();
+$smarty -> assign("paymentTypes",$paymentTypes);
+
 $smarty -> assign('pageActive', 'invoice_new');
 $smarty -> assign('subPageActive', 'invoice_new_itemised');
 $smarty -> assign('active_tab', '#money');
