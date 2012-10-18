@@ -11,7 +11,7 @@
 */
 *}
 
-<form name="frmpost" action="index.php?module=invoices&amp;view=save" method="post" onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=invoices&amp;view=save_payment" method="post" onsubmit="return frmpost_Validator(this)">
 
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
         	<img src="images/common/gmail-loader.gif" alt="{$LANG.loading} ..." /> {$LANG.loading} ...
@@ -235,21 +235,17 @@
 						<p><em>{$LANG.no_products}</em></p>
 					{else}
 						<select 
-							id="payment_type{$smarty.section.line.index|htmlsafe}"
-							name="payment_type{$smarty.section.line.index|htmlsafe}"
+							id="item_payment_type{$smarty.section.line.index|htmlsafe}"
+							name="item_payment_type{$smarty.section.line.index|htmlsafe}"
 							rel="{$smarty.section.line.index|htmlsafe}"
-							class="{if $smarty.section.line.index == "0"}validate[required]{/if} payment_type_change"						
-                        >
-							<option value=""></option>
-						{foreach from=$paymentTypes item=product}
+			                                {if $smarty.section.line.index == "0"}class="validate[required]"{/if}
+						>
+						<option value=""></option>
+						{foreach from=$paymentTypes item=pt}
 							<option 
-								{if $product.id == $smarty.get.product.$lineNumber}
-								    value="{$smarty.get.product.$lineNumber}"
-								{else}
-								    value="{$product.id|htmlsafe}"
-								{/if}
+								    value="{$pt.pt_id}"
 							>
-								{$product.pt_description|htmlsafe}
+							{$pt.pt_description|htmlsafe}
 							</option>
 						{/foreach}
 						</select>
