@@ -323,7 +323,7 @@
 	{else}
 		<select name="preference_id">
 		{foreach from=$preferences item=preference}
-			<option {if $preference.pref_id == $defaults.preference} selected {/if} value="{$preference.pref_id|htmlsafe}">{$preference.pref_description|htmlsafe}</option>
+			<option {if $preference.pref_id == '6'} selected {/if} value="{$preference.pref_id|htmlsafe}">{$preference.pref_description|htmlsafe}</option>
 		{/foreach}
 		</select>
 	{/if}

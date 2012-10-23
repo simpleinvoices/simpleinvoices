@@ -4,7 +4,7 @@
 if($_GET['id'])
 {
 	//sleep(2);
-	$sql = sprintf('SELECT tax_percentage FROM si_tax WHERE tax_id = %d LIMIT 1', $_GET['id']);
+	$sql = sprintf('SELECT tax_percentage , type FROM si_tax WHERE tax_id = %d LIMIT 1', $_GET['id']);
 	$states = dbQuery($sql);
 //	$output = '';
 	if($states->rowCount() > 0)
@@ -16,6 +16,7 @@ if($_GET['id'])
 			/*Format with decimal places with precision as defined in config.ini*/
 	//		$output['unit_price'] = siLocal::number_clean($row['unit_price']);
 			$output['tax_percentage'] = $row['tax_percentage'];
+			$output['type'] = $row['type'];
 	//		$output .= $_POST['id'];
 		
 	}

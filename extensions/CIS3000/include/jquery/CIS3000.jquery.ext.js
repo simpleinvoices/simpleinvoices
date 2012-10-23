@@ -12,7 +12,14 @@ function invoice_payment_type_change(row_number, tax){
 		success: function(data){
 			$('#gmail_loading').hide();
 			$price = $("#unit_price"+row_number).val();
-			$total = $price * ( data['tax_percentage'] /100 + 1);
+			$price = parseFloat($price);
+			if(data['type'] =='%')
+			{
+				$total = $price * ( data['tax_percentage'] /100 + 1);
+			} else {
+				$total = $price + parseFloat(data['tax_percentage']);
+
+			}
 			$total =$total.toFixed(2);
 			$("#total"+row_number).html($total);
 		}

@@ -11,8 +11,13 @@ INSERT INTO `si_preferences` (`pref_id`, `domain_id`, `pref_description`, `pref_
 
 
 ALTER TABLE  `si_invoice_items` ADD  `date` DATETIME NULL ,
-ADD  `type` VARCHAR( 10 ) NULL
+ADD  `type` VARCHAR( 10 ) NULL;
 
 INSERT INTO `si_products` (`id`, `domain_id`, `description`, `unit_price`, `default_tax_id`, `default_tax_id_2`, `cost`, `reorder_level`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`) VALUES
 (6, 1, 'Sub-contractor payment', 0.000000, 0, NULL, NULL, NULL, '', '', '', '', '', '1', 1);
+
+INSERT INTO `si_extensions` (`id`, `domain_id`, `name`, `description`, `enabled`) VALUES
+(3, 1, 'CIS3000', 'DESCRIPTION not available (in ./extensions/CIS3000/)', '1');
+
+
 
