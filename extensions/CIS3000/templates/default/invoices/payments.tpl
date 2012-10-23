@@ -50,7 +50,7 @@
     <br />
 	<br />
 	<table id="manageGrid" style="display:none"></table>
-	{include file='../modules/invoices/manage.js.php'}
+	{include file='../extensions/CIS3000/modules/invoices/payments.js.php'}
 
 
 	<div id="export_dialog" class="flora" title="Export">

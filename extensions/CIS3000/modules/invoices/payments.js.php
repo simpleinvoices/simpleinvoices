@@ -4,7 +4,7 @@
 			var padding = 12;
 			var action_menu = 140;
 			var grid_width = $('.col').width();
-			//var url = 'index.php?module=invoices&view=xml';
+			var url = 'index.php?module=invoices&view=payments_xml';
 			
 			grid_width = grid_width - (columns * padding) - action_menu;
 			percentage_width = grid_width / 100; 
@@ -25,7 +25,7 @@
 			$("#manageGrid").flexigrid
 			(
 			{
-			url: "{/literal}{$url}{literal}",
+			url: url,
 			dataType: 'xml',
 			colModel : [
 				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : action_menu, sortable : false, align: 'center'},
