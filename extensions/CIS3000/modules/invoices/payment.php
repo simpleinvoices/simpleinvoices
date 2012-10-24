@@ -32,6 +32,13 @@ $smarty -> assign('pt', $pt);
  */
 
 $paymentTypes = getActivePaymentTypes();
+$customers = CIS3000::getActiveCustomers();
+$sub_contractors = CIS3000::getActiveSubContractors();
+
+$smarty -> assign("customers",$customers);
+
+$smarty -> assign("sub_contractors",$sub_contractors);
+
 $smarty -> assign("paymentTypes",$paymentTypes);
 
 $smarty -> assign('pageActive', 'invoice_new');

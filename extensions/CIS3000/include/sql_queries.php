@@ -81,4 +81,35 @@ function insertInvoiceItem_payment($invoice_id,$quantity='1',$product_id='6',$li
 	return true;
 }
 
+
+function cis3000_getActiveCustomers() {
+	global $LANG;
+	global $dbh;
+	global $db_server;
+	global $auth_session;
+	
+	
+	$sql = "SELECT * FROM ".TB_PREFIX."customers WHERE enabled != 0 AND is_sub_contractor != 1 AND domain_id = :domain_id ORDER BY name";
+	if ($db_server == 'pgsql') {
+		$sql = "SELECT * FROM ".TB_PREFIX."customers WHERE enabled and domain_id = :domain_id ORDER BY name";
+	}
+	$sth = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+
+	return $sth->fetchAll();
+}
+function cis3000_getActiveSubContractors() {
+	global $LANG;
+	global $dbh;
+	global $db_server;
+	global $auth_session;
+	
+	
+	$sql = "SELECT * FROM ".TB_PREFIX."customers WHERE enabled != 0 and is_sub_contractor = 1 domain_id = :domain_id ORDER BY name";
+	if ($db_server == 'pgsql') {
+		$sql = "SELECT * FROM ".TB_PREFIX."customers WHERE enabled and domain_id = :domain_id ORDER BY name";
+	}
+	$sth = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+
+	return $sth->fetchAll();
+}
 ?>
