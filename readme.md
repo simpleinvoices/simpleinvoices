@@ -16,4 +16,17 @@ When cloning the repository use the `--recursive` option to ensure that Zend is 
 * For installation instructions refer: http://simpleinvoices.org/install
 * For any other help or comments jump on our website or post on the forum at http://simpleinvoices.org/forum
 
-##just testing the commit email system
+## Get Involved
+The developer mailing list is hosted on [Librelist](http://librelist.com/).
+Subscribe by sending an email to `simpleinvoices@librelist.com`.
+
+Email archives can be accessed at http://librelist.com/browser/simpleinvoices/.
+
+We also have a mailing list for tracking commit activity. This is hosted on Google Groups (sigh). You can find it here: https://groups.google.com/forum/?fromgroups#!forum/simpleinvoices-trac
+
+
+## Reporting Bugs
+Please use the issue tracker on GitHub when reporting bugs.
+https://github.com/simpleinvoices/simpleinvoices/issues
+
+**Developers**: There are still a number of open issues on the old Google Code issue tracker if you are looking for something to fix. http://code.google.com/p/simpleinvoices/issues/list
