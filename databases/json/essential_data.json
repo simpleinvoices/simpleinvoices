@@ -4,98 +4,98 @@
             "cf_id": "1",
             "cf_custom_field": "biller_cf1",
             "cf_display": "0",
-            "domain_id": "DOMAIN-ID" 
+            "domain_id": "DOMAIN-ID"
         },
         {
             "cf_id": "2",
             "cf_custom_field": "biller_cf2",
             "cf_display": "0",
-            "domain_id": "DOMAIN-ID" 
+            "domain_id": "DOMAIN-ID"
         },
         {
             "cf_id": "3",
             "cf_custom_field": "biller_cf3",
             "cf_display": "0",
-            "domain_id": "DOMAIN-ID" 
+            "domain_id": "DOMAIN-ID"
         },
         {
             "cf_id": "4",
             "cf_custom_field": "biller_cf4",
             "cf_display": "0",
-            "domain_id": "DOMAIN-ID" 
+            "domain_id": "DOMAIN-ID"
         },
         {
             "cf_id": "5",
             "cf_custom_field": "customer_cf1",
             "cf_display": "0",
-            "domain_id": "DOMAIN-ID" 
+            "domain_id": "DOMAIN-ID"
         },
         {
             "cf_id": "6",
             "cf_custom_field": "customer_cf2",
             "cf_display": "0",
-            "domain_id": "DOMAIN-ID" 
+            "domain_id": "DOMAIN-ID"
         },
         {
             "cf_id": "7",
             "cf_custom_field": "customer_cf3",
             "cf_display": "0",
-            "domain_id": "DOMAIN-ID" 
+            "domain_id": "DOMAIN-ID"
         },
         {
             "cf_id": "8",
             "cf_custom_field": "customer_cf4",
             "cf_display": "0",
-            "domain_id": "DOMAIN-ID" 
+            "domain_id": "DOMAIN-ID"
         },
         {
             "cf_id": "9",
             "cf_custom_field": "product_cf1",
             "cf_display": "0",
-            "domain_id": "DOMAIN-ID" 
+            "domain_id": "DOMAIN-ID"
         },
         {
             "cf_id": "10",
             "cf_custom_field": "product_cf2",
             "cf_display": "0",
-            "domain_id": "DOMAIN-ID" 
+            "domain_id": "DOMAIN-ID"
         },
         {
             "cf_id": "11",
             "cf_custom_field": "product_cf3",
             "cf_display": "0",
-            "domain_id": "DOMAIN-ID" 
+            "domain_id": "DOMAIN-ID"
         },
         {
             "cf_id": "12",
             "cf_custom_field": "product_cf4",
             "cf_display": "0",
-            "domain_id": "DOMAIN-ID" 
+            "domain_id": "DOMAIN-ID"
         },
         {
             "cf_id": "13",
             "cf_custom_field": "invoice_cf1",
             "cf_display": "0",
-            "domain_id": "DOMAIN-ID" 
+            "domain_id": "DOMAIN-ID"
         },
         {
             "cf_id": "14",
             "cf_custom_field": "invoice_cf2",
             "cf_display": "0",
-            "domain_id": "DOMAIN-ID" 
+            "domain_id": "DOMAIN-ID"
         },
         {
             "cf_id": "15",
             "cf_custom_field": "invoice_cf3",
             "cf_display": "0",
-            "domain_id": "DOMAIN-ID" 
+            "domain_id": "DOMAIN-ID"
         },
         {
             "cf_id": "16",
             "cf_custom_field": "invoice_cf4",
             "cf_display": "0",
-            "domain_id": "DOMAIN-ID" 
-        } 
+            "domain_id": "DOMAIN-ID"
+        }
     ] ,
     "si_extensions": [
         {
@@ -104,35 +104,35 @@
             "name": "core",
             "description": "Core part of Simple Invoices - always enabled",
             "enabled": "1"
-        } 
+        }
     ] ,
     "si_invoice_type": [
         {
             "inv_ty_id": "1",
-            "inv_ty_description": "Total" 
+            "inv_ty_description": "Total"
         },
         {
             "inv_ty_id": "2",
-            "inv_ty_description": "Itemised" 
+            "inv_ty_description": "Itemised"
         },
         {
             "inv_ty_id": "3",
-            "inv_ty_description": "Consulting" 
-        } 
+            "inv_ty_description": "Consulting"
+        }
     ] ,
     "si_payment_types": [
         {
 			"pt_id": "1",
             "domain_id": "DOMAIN-ID",
             "pt_description": "Cash",
-            "pt_enabled": "1" 
+            "pt_enabled": "1"
         },
         {
 			"pt_id": "2",
             "domain_id": "1",
             "pt_description": "Credit Card",
-            "pt_enabled": "1" 
-        } 
+            "pt_enabled": "1"
+        }
     ] ,
     "si_preferences": [
         {
@@ -155,7 +155,7 @@
             "index_group":"1",
             "currency_code":"USD",
             "currency_position":"left",
-            "pref_enabled": "1" 
+            "pref_enabled": "1"
         },
         {
             "pref_id": "2",
@@ -177,7 +177,7 @@
             "index_group":"1",
             "currency_code":"USD",
             "currency_position":"left",
-            "pref_enabled": "1" 
+            "pref_enabled": "1"
         },
         {
             "pref_id": "3",
@@ -199,7 +199,7 @@
             "index_group":"1",
             "currency_code":"USD",
             "currency_position":"left",
-            "pref_enabled": "1" 
+            "pref_enabled": "1"
         },
         {
             "pref_id": "4",
@@ -221,8 +221,8 @@
             "index_group":"1",
             "currency_code":"USD",
             "currency_position":"left",
-            "pref_enabled": "1" 
-        } 
+            "pref_enabled": "1"
+        }
     ],
     "si_sql_patchmanager": [
         {
@@ -1055,6 +1055,12 @@
         },
         {
             "sql_patch_ref": "251"
+        },
+        {
+            "sql_patch_ref": "252"
+        },
+        {
+            "sql_patch_ref": "253"
         }
     ],
     "si_system_defaults": [
@@ -1063,168 +1069,168 @@
             "name": "biller",
             "value": "4",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         },
         {
             "id": "2",
             "name": "customer",
             "value": "3",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         },
         {
             "id": "3",
             "name": "tax",
             "value": "1",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         },
         {
             "id": "4",
             "name": "preference",
             "value": "1",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         },
         {
             "id": "5",
             "name": "line_items",
             "value": "5",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         },
         {
             "id": "6",
             "name": "template",
             "value": "default",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         },
         {
             "id": "7",
             "name": "payment_type",
             "value": "1",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         },
         {
             "id": "8",
             "name": "language",
             "value": "en_GB",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         },
         {
             "id": "9",
             "name": "dateformate",
             "value": "Y-m-d",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         },
         {
             "id": "10",
             "name": "spreadsheet",
             "value": "xls",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         },
         {
             "id": "11",
             "name": "wordprocessor",
             "value": "doc",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         },
         {
             "id": "12",
             "name": "pdfscreensize",
             "value": "800",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         },
         {
             "id": "13",
             "name": "pdfpapersize",
             "value": "A4",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         },
         {
             "id": "14",
             "name": "pdfleftmargin",
             "value": "15",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         },
         {
             "id": "15",
             "name": "pdfrightmargin",
             "value": "15",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         },
         {
             "id": "16",
             "name": "pdftopmargin",
             "value": "15",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         },
         {
             "id": "17",
             "name": "pdfbottommargin",
             "value": "15",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         },
         {
             "id": "18",
             "name": "emailhost",
             "value": "localhost",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         },
         {
             "id": "19",
             "name": "emailusername",
             "value": "",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         },
         {
             "id": "20",
             "name": "emailpassword",
             "value": "",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         },
         {
             "id": "21",
             "name": "logging",
             "value": "0",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         },
         {
             "id": "22",
             "name": "delete",
             "value": "N",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         },
         {
             "id": "23",
             "name": "tax_per_line_item",
             "value": "1",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         },
         {
             "id": "24",
             "name": "inventory",
             "value": "0",
             "domain_id": "DOMAIN-ID",
-            "extension_id": "1" 
+            "extension_id": "1"
         }
     ],
     "si_tax": [
@@ -1234,7 +1240,7 @@
             "tax_percentage": "10.000000",
             "type": "%",
             "tax_enabled": "1",
-            "domain_id": "DOMAIN-ID" 
+            "domain_id": "DOMAIN-ID"
         },
         {
             "tax_id": "2",
@@ -1242,7 +1248,7 @@
             "tax_percentage": "10.000000",
             "type": "%",
             "tax_enabled": "1",
-            "domain_id": "DOMAIN-ID" 
+            "domain_id": "DOMAIN-ID"
         },
         {
             "tax_id": "3",
@@ -1250,7 +1256,7 @@
             "tax_percentage": "10.000000",
             "type": "%",
             "tax_enabled": "1",
-            "domain_id": "DOMAIN-ID" 
+            "domain_id": "DOMAIN-ID"
         },
         {
             "tax_id": "4",
@@ -1258,7 +1264,7 @@
             "tax_percentage": "0.000000",
             "type": "%",
             "tax_enabled": "1",
-            "domain_id": "DOMAIN-ID" 
+            "domain_id": "DOMAIN-ID"
         },
         {
             "tax_id": "5",
@@ -1266,8 +1272,8 @@
             "tax_percentage": "20.000000",
             "type": "$",
             "tax_enabled": "1",
-            "domain_id": "DOMAIN-ID" 
-        } 
+            "domain_id": "DOMAIN-ID"
+        }
     ],
     "si_user": [
         {

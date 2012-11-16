@@ -7,31 +7,31 @@
 	$patch['1']['name'] = "Create sql_patchmanger table";
 	$patch['1']['patch'] = "CREATE TABLE ".TB_PREFIX."sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL, sql_patch VARCHAR( 255 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL, sql_statement TEXT NOT NULL) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 	$patch['1']['date'] = "20060514";
-	
+
 	$patch['2']['name'] = "Update invoice no details to have a default currency sign";
 	$patch['2']['patch'] = "UPDATE ".TB_PREFIX."preferences SET pref_currency_sign = '$' WHERE pref_id =2 LIMIT 1";
 	$patch['2']['date'] = "20060514";
-	
+
 	$patch['3']['name'] = "Add a row into the defaults table to handle the default number of line items";
 	$patch['3']['patch'] = "ALTER TABLE ".TB_PREFIX."defaults ADD def_number_line_items INT( 25 ) NOT NULL";
 	$patch['3']['date'] = "20060514";
-	
+
 	$patch['4']['name'] = "Set the default number of line items to 5";
 	$patch['4']['patch'] = "UPDATE ".TB_PREFIX."defaults SET def_number_line_items = 5 WHERE def_id =1 LIMIT 1";
 	$patch['4']['date'] = "20060514";
-	
+
 	$patch['5']['name'] = "Add logo and invoice footer support to biller";
 	$patch['5']['patch'] = "ALTER TABLE ".TB_PREFIX."biller ADD b_co_logo VARCHAR( 50 ), ADD b_co_footer TEXT";
 	$patch['5']['date'] = "20060514";
-	
+
 	$patch['6']['name'] = "Add default invoice template option";
 	$patch['6']['patch'] = "ALTER TABLE ".TB_PREFIX."defaults ADD def_inv_template VARCHAR( 25 ) DEFAULT 'print_preview.php' NOT NULL";
 	$patch['6']['date'] = "20060514";
-	
+
 	$patch['7']['name'] = "Edit tax description field lenght to 50";
 	$patch['7']['patch'] = "ALTER TABLE ".TB_PREFIX."tax CHANGE tax_description tax_description VARCHAR( 50 ) DEFAULT NULL";
 	$patch['7']['date'] = "20060526";
-	
+
 	$patch['8']['name'] = "Edit default invoice template field lenght to 50";
 	$patch['8']['patch'] = "ALTER TABLE ".TB_PREFIX."defaults CHANGE def_inv_template def_inv_template VARCHAR( 50 ) DEFAULT NULL";
 	$patch['8']['date'] = "20060526";
@@ -81,7 +81,7 @@
 	$patch['18']['name'] = "Create Payment Types table";
 	$patch['18']['patch'] = "CREATE TABLE `".TB_PREFIX."payment_types` (`pt_id` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,`pt_description` VARCHAR( 250 ) NOT NULL ,`pt_enabled` VARCHAR( 1 ) NOT NULL DEFAULT '1') ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 	$patch['18']['date'] = "20060909";
-	
+
 	$patch['19']['name'] = "Add info into the Payment Type table";
 	$patch['19']['patch'] = "INSERT INTO `".TB_PREFIX."payment_types` ( `pt_id` , `pt_description` ) VALUES (NULL , 'Cash'), (NULL , 'Credit Card')";
 	$patch['19']['date'] = "20060909";
@@ -89,7 +89,7 @@
 	$patch['20']['name'] = "Adjust accounts payments table to add a type field";
 	$patch['20']['patch'] = "ALTER TABLE `".TB_PREFIX."account_payments` ADD `ac_payment_type` INT( 10 ) NOT NULL DEFAULT '1'";
 	$patch['20']['date'] = "20060909";
-	
+
 	$patch['21']['name'] = "Adjust the defautls table to add a payment type field";
 	$patch['21']['patch'] = "ALTER TABLE `".TB_PREFIX."defaults` ADD `def_payment_type` VARCHAR( 25 ) DEFAULT '1'";
 	$patch['21']['date'] = "20060909";
@@ -110,7 +110,7 @@
 	$patch['25']['name'] = "Add street address 2 to customers";
 	$patch['25']['patch'] = "ALTER TABLE `".TB_PREFIX."customers` ADD `c_street_address2` VARCHAR( 50 ) AFTER `c_street_address` ";
 	$patch['25']['date'] = "20061211";
-	
+
 	$patch['26']['name'] = "Add custom fields to customers";
 	$patch['26']['patch'] = "ALTER TABLE `".TB_PREFIX."customers` ADD `c_custom_field1` VARCHAR( 50 ) AFTER `c_notes` ,
 ADD `c_custom_field2` VARCHAR( 50 ) AFTER `c_custom_field1` ,
@@ -146,7 +146,7 @@ PRIMARY KEY ( `cf_id` )	) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 	$patch['30']['date'] = "20061211";
 
 	$patch['31']['name'] = "Adding data to the custom fields table";
-	$patch['31']['patch'] = "INSERT INTO `".TB_PREFIX."custom_fields` ( `cf_id` , `cf_custom_field` , `cf_custom_label` , `cf_display` ) VALUES 
+	$patch['31']['patch'] = "INSERT INTO `".TB_PREFIX."custom_fields` ( `cf_id` , `cf_custom_field` , `cf_custom_label` , `cf_display` ) VALUES
 (NULL, 'biller_cf1', NULL , '0'),
 (NULL, 'biller_cf2', NULL , '0'),
 (NULL, 'biller_cf3', NULL , '0'),
@@ -163,7 +163,7 @@ PRIMARY KEY ( `cf_id` )	) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 	$patch['31']['date'] = "20061211";
 
 	$patch['32']['name'] = "Adding custom fields to products";
-	$patch['32']['patch'] = "ALTER TABLE `".TB_PREFIX."products` 
+	$patch['32']['patch'] = "ALTER TABLE `".TB_PREFIX."products`
 ADD `prod_custom_field1` VARCHAR( 50 ) AFTER `prod_unit_price` ,
 ADD `prod_custom_field2` VARCHAR( 50 ) AFTER `prod_custom_field1` ,
 ADD `prod_custom_field3` VARCHAR( 50 ) AFTER `prod_custom_field2` ,
@@ -180,7 +180,7 @@ ADD `prod_custom_field4` VARCHAR( 50 ) AFTER `prod_custom_field3` ;
 	$patch['34']['date'] = "20070125";
 
 	$patch['35']['name'] = "Adding data to the custom fields table for invoices";
-	$patch['35']['patch'] = "INSERT INTO `".TB_PREFIX."custom_fields` ( `cf_id` , `cf_custom_field` , `cf_custom_label` , `cf_display` ) VALUES 
+	$patch['35']['patch'] = "INSERT INTO `".TB_PREFIX."custom_fields` ( `cf_id` , `cf_custom_field` , `cf_custom_label` , `cf_display` ) VALUES
 (NULL, 'invoice_cf1', NULL , '0'),
 (NULL, 'invoice_cf2', NULL , '0'),
 (NULL, 'invoice_cf3', NULL , '0'),
@@ -189,7 +189,7 @@ ADD `prod_custom_field4` VARCHAR( 50 ) AFTER `prod_custom_field3` ;
 	$patch['35']['date'] = "20070204";
 
 	$patch['36']['name'] = "Adding custom fields to the invoices table";
-	$patch['36']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` 
+	$patch['36']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices`
 ADD `invoice_custom_field1` VARCHAR( 50 ) AFTER `inv_date` ,
 ADD `invoice_custom_field2` VARCHAR( 50 ) AFTER `invoice_custom_field1` ,
 ADD `invoice_custom_field3` VARCHAR( 50 ) AFTER `invoice_custom_field2` ,
@@ -200,11 +200,11 @@ ADD `invoice_custom_field4` VARCHAR( 50 ) AFTER `invoice_custom_field3` ;
 	$patch['37']['name'] = "Reset invoice template to default due to new invoice template system";
 	$patch['37']['patch'] = "UPDATE `".TB_PREFIX."defaults` SET `def_inv_template` = 'default' WHERE `def_id` =1 LIMIT 1 ;";
 	$patch['37']['date'] = "20070523";
-        
+
 	$patch['38']['name'] = "Alter custom field table - field length now 255 for field name";
 	$patch['38']['patch'] = "ALTER TABLE `".TB_PREFIX."custom_fields` CHANGE `cf_custom_field` `cf_custom_field` VARCHAR( 255 )";
 	$patch['38']['date'] = "20070523";
-        
+
 	$patch['39']['name'] = "Alter custom field table - field length now 255 for field label";
 	$patch['39']['patch'] = "ALTER TABLE `".TB_PREFIX."custom_fields` CHANGE `cf_custom_label` `cf_custom_label` VARCHAR( 255 )";
 	$patch['39']['date'] = "20070523";
@@ -213,11 +213,11 @@ ADD `invoice_custom_field4` VARCHAR( 50 ) AFTER `invoice_custom_field3` ;
 	$patch['40']['name'] = "Alter field name in sql_patchmanager";
 	$patch['40']['patch'] = "ALTER TABLE `".TB_PREFIX."sql_patchmanager` CHANGE `sql_patch` `sql_patch` VARCHAR( 255 ) NOT NULL";
 	$patch['40']['date'] = "20070523";
-	
+
 	$patch['41']['name'] = "Alter field name in ".TB_PREFIX."account_payments";
 	$patch['41']['patch'] = "ALTER TABLE  `".TB_PREFIX."account_payments` CHANGE  `ac_id`  `id` INT( 10 ) NOT NULL AUTO_INCREMENT";
 	$patch['41']['date'] = "20070523";
-                
+
 	$patch['42']['name'] = "Alter field name b_name to name";
 	$patch['42']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` CHANGE  `b_name`  `name` VARCHAR( 255 ) NULL DEFAULT NULL;";
 	$patch['42']['date'] = "20070523";
@@ -237,7 +237,7 @@ ADD `invoice_custom_field4` VARCHAR( 50 ) AFTER `invoice_custom_field3` ;
 	$patch['46']['name'] = "Alter field name b_city to city";
 	$patch['46']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` CHANGE  `b_city`  `city` VARCHAR( 255 ) NULL DEFAULT NULL";
 	$patch['46']['date'] = "20070523";
-	
+
 	$patch['47']['name'] = "Alter field name b_state to state";
 	$patch['47']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` CHANGE  `b_state`  `state` VARCHAR( 255 ) NULL DEFAULT NULL";
 	$patch['47']['date'] = "20070523";
@@ -281,7 +281,7 @@ ADD `invoice_custom_field4` VARCHAR( 50 ) AFTER `invoice_custom_field3` ;
 	$patch['57']['name'] = "Alter field name b_enabled to enabled";
 	$patch['57']['patch'] = "ALTER TABLE `".TB_PREFIX."biller` CHANGE `b_enabled` `enabled` VARCHAR( 1 ) NOT NULL DEFAULT '1'";
 	$patch['57']['date'] = "20070523";
-	
+
 	$patch['58']['name'] = "Alter field name b_custom_field1 to custom_field1";
 	$patch['58']['patch'] = "ALTER TABLE `".TB_PREFIX."biller` CHANGE `b_custom_field1` `custom_field1` VARCHAR( 255 ) NULL DEFAULT NULL";
 	$patch['58']['date'] = "20070523";
@@ -297,7 +297,7 @@ ADD `invoice_custom_field4` VARCHAR( 50 ) AFTER `invoice_custom_field3` ;
 	$patch['61']['name'] = "Alter field name b_custom_field4 to custom_field4";
 	$patch['61']['patch'] = "ALTER TABLE `".TB_PREFIX."biller` CHANGE `b_custom_field4` `custom_field4` VARCHAR( 255 ) NULL DEFAULT NULL";
 	$patch['61']['date'] = "20070523";
-	
+
 	$patch['62']['name'] = "Introduce system_defaults table";
 	$patch['62']['patch'] = "CREATE TABLE `".TB_PREFIX."system_defaults` (
 `id` int(11) NOT NULL auto_increment,
@@ -310,7 +310,7 @@ UNIQUE KEY `name` (`name`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_un
 
 	$patch['63']['name'] = "Insert date into the system_defaults table";
 	$patch['63']['patch'] = "
-INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES 
+INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 (1, 'biller', '4'),
 (2, 'customer', '3'),
 (3, 'tax', '1'),
@@ -333,7 +333,7 @@ INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 (20, 'emailpassword', '');
 ";
 	$patch['63']['date'] = "20070523";
-		
+
 	$patch['64']['name'] = "Alter field name prod_id to id";
 	$patch['64']['patch'] = "ALTER TABLE `".TB_PREFIX."products` CHANGE `prod_id` `id` INT( 11 ) NOT NULL AUTO_INCREMENT";
 	$patch['64']['date'] = "20070523";
@@ -341,7 +341,7 @@ INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 	$patch['65']['name'] = "Alter field name prod_description to description";
 	$patch['65']['patch'] = "ALTER TABLE `".TB_PREFIX."products` CHANGE `prod_description` `description` TEXT NOT NULL ";
 	$patch['65']['date'] = "20070523";
-		
+
 	$patch['66']['name'] = "Alter field name prod_unit_price to unit_price";
 	$patch['66']['patch'] = " ALTER TABLE `".TB_PREFIX."products` CHANGE `prod_unit_price` `unit_price` DECIMAL( 25, 2 ) NULL DEFAULT NULL";
 	$patch['66']['date'] = "20070523";
@@ -361,7 +361,7 @@ INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 	$patch['70']['name'] = "Alter field name prod_custom_field4 to custom_field4";
 	$patch['70']['patch'] = "ALTER TABLE `".TB_PREFIX."products` CHANGE `prod_custom_field4` `custom_field4` VARCHAR( 255 ) NULL DEFAULT NULL";
 	$patch['70']['date'] = "20070523";
-		
+
 	$patch['71']['name'] = "Alter field name prod_notes to notes";
 	$patch['71']['patch'] = "ALTER TABLE `".TB_PREFIX."products` CHANGE `prod_notes` `notes` TEXT NOT NULL";
 	$patch['71']['date'] = "20070523";
@@ -553,7 +553,7 @@ INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 
 	$numpatchesdone = getNumberOfDonePatches();
 	$defaults = null;
-	
+
 	if ($numpatchesdone < 124) {
 		// system defaults conversion patch
 		// defaults query and DEFAULT NUMBER OF LINE ITEMS
@@ -590,12 +590,12 @@ INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 	$patch['122']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = $defaults[def_payment_type] where name = 'payment_type'";
 	$patch['122']['date'] = "20070523";
 
-	//sept release 
+	//sept release
 
 	$patch['123']['name'] = "Add option to delete invoices into the system_defaults table";
 	$patch['123']['patch'] = "INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES (NULL, 'delete', 'N');";
 	$patch['123']['date'] = "200709";
-	
+
 	$patch['124']['name'] = "Set default language in new lang system";
 	$patch['124']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = 'en-gb' where name ='language';";
 	$patch['124']['date'] = "200709";
@@ -603,7 +603,7 @@ INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 	$patch['125']['name'] = "Change log table that usernames are also possible as id";
 	$patch['125']['patch'] = "ALTER TABLE `".TB_PREFIX."log` CHANGE `userid` `userid` VARCHAR( 40 ) NOT NULL DEFAULT '0'";
 	$patch['125']['date'] = "200709";
-	
+
 	$patch['126']['name'] = "Add visible attribute to the products table";
 	$patch['126']['patch'] = "ALTER TABLE  `".TB_PREFIX."products` ADD  `visible` BOOL NOT NULL DEFAULT  '1';";
 	$patch['126']['date'] = "200709";
@@ -611,22 +611,22 @@ INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 	$patch['127']['name'] = "Add last_id to logging table";
 	$patch['127']['patch'] = "ALTER TABLE  `".TB_PREFIX."log` ADD  `last_id` INT NULL ;";
 	$patch['127']['date'] = "200709";
-	
+
 	$patch['128']['name'] = "Add user table";
-		if(checkTableExists(TB_PREFIX.'users') == true) 
+		if(checkTableExists(TB_PREFIX.'users') == true)
 		{
-			if(checkFieldExists(TB_PREFIX.'users','user_domain') == true) 
-			{	
+			if(checkFieldExists(TB_PREFIX.'users','user_domain') == true)
+			{
 				//dummy patch - if table and domain field exists do nothing
 				$patch['128']['patch'] = "select * from ".TB_PREFIX."users ;";
 			}
-			if(checkFieldExists(TB_PREFIX.'users','user_domain') == false) 
-			{	
+			if(checkFieldExists(TB_PREFIX.'users','user_domain') == false)
+			{
 				//alter existing table to add domain
-				$patch['128']['patch'] = "ALTER TABLE `".TB_PREFIX."users` ADD `user_domain` VARCHAR( 255 ) NOT NULL AFTER `user_group` ;";				
-			}	
+				$patch['128']['patch'] = "ALTER TABLE `".TB_PREFIX."users` ADD `user_domain` VARCHAR( 255 ) NOT NULL AFTER `user_group` ;";
+			}
 		}
-		if(checkTableExists(TB_PREFIX.'users') == false) 
+		if(checkTableExists(TB_PREFIX.'users') == false)
 		{
 			$patch['128']['patch'] = "CREATE TABLE IF NOT EXISTS `".TB_PREFIX."users` (
 `user_id` int(11) NOT NULL auto_increment,
@@ -639,14 +639,14 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 ";
 		}
 	$patch['128']['date'] = "200709";
-	
-	
+
+
 	$patch['129']['name'] = "Fill user table with default values";
 	$patch['129']['patch'] = "INSERT INTO `".TB_PREFIX."users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`) VALUES (NULL, 'demo@simpleinvoices.org', 'demo', '1', '1', MD5('demo'))";
 	$patch['129']['date'] = "200709";
-	
+
 	$patch['130']['name'] = "Create auth_challenges table";
-	
+
 			if(checkTableExists(TB_PREFIX.'auth_challenges') == true)
 			{
 				//a do nothing patch cause the table already exists
@@ -658,20 +658,20 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 `challenges_key` int(11) NOT NULL,
 `challenges_timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);
 ";
-			}  
+			}
 	$patch['130']['date'] = "200709";
-	
+
 	$patch['131']['name'] = "Make tax field 3 decimal places";
 	$patch['131']['patch'] = "ALTER TABLE `".TB_PREFIX."tax` CHANGE `tax_percentage` `tax_percentage` DECIMAL (10,3)  NULL";
 	$patch['131']['date'] = "200709";
 
 //2008 09 26 - Beta release patches start
 
- 
+
     $patch['132']['name'] = "Correct Foreign Key Tax ID Field Type in Invoice Items Table";
     $patch['132']['patch'] = "ALTER TABLE  `".TB_PREFIX."invoice_items` CHANGE `tax_id` `tax_id` int  DEFAULT '0' NOT NULL ;";
     $patch['132']['date'] = "20071126";
-	
+
     $patch['133']['name'] = "Correct Foreign Key Invoice ID Field Type in Ac Payments Table";
     $patch['133']['patch'] = "ALTER TABLE  `".TB_PREFIX."account_payments` CHANGE `ac_inv_id` `ac_inv_id` int  NOT NULL ;";
     $patch['133']['date'] = "20071126";
@@ -685,7 +685,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 		case "pdo_mysql" :
 		default :
 			$patch['134']['patch'] = "SELECT 1+1;";
-    } 
+    }
     $patch['134']['date'] = "20071218";
 
     $patch['135']['name'] = "Change sql_patch_ref type in sql_patchmanager to int";
@@ -697,9 +697,9 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 		case "pdo_mysql" :
 		default :
    			$patch['135']['patch'] = "ALTER TABLE  `".TB_PREFIX."sql_patchmanager` change `sql_patch_ref` `sql_patch_ref` int NOT NULL ;";
-    } 
+    }
     $patch['135']['date'] = "20071218";
-	
+
     $patch['136']['name'] = "Create domain mapping table";
     switch ($config->database->adapter)
     {
@@ -716,7 +716,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
             	) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
     }
     $patch['136']['date'] = "200712";
-    
+
 
     $patch['137']['name'] = "Insert default domain";
     switch ($config->database->adapter)
@@ -729,7 +729,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 			$patch['137']['patch'] = "INSERT INTO ".TB_PREFIX."user_domain (name) VALUES ('default');";
     }
     $patch['137']['date'] = "200712";
-    //TODO postgres patch 
+    //TODO postgres patch
 
     $patch['138']['name'] = "Add domain_id to payment_types table";
     switch ($config->database->adapter)
@@ -739,7 +739,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 			break;
 		case "pdo_mysql" :
 		default:
-   			$patch['138']['patch'] = "ALTER TABLE `".TB_PREFIX."payment_types` ADD `domain_id` INT  NOT NULL AFTER `pt_id` ;";     
+   			$patch['138']['patch'] = "ALTER TABLE `".TB_PREFIX."payment_types` ADD `domain_id` INT  NOT NULL AFTER `pt_id` ;";
     }
     $patch['138']['date'] = "200712";
 
@@ -755,8 +755,8 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
     if ($config->database->adapter == "pdo_pgsql") {
         $patch['140']['patch'] = "ALTER TABLE ".TB_PREFIX."products ADD COLUMN domain_id int NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
-    $patch['140']['date'] = "200712"; 
-    
+    $patch['140']['date'] = "200712";
+
     $patch['141']['name'] = "Add domain_id to billers table";
     $patch['141']['patch'] = "ALTER TABLE `".TB_PREFIX."biller` ADD `domain_id` INT  NOT NULL AFTER `id` ;";
     if ($config->database->adapter == "pdo_pgsql") {
@@ -785,7 +785,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
         $patch['144']['patch'] = "ALTER TABLE ".TB_PREFIX."users RENAME COLUMN user_group TO user_role_id;";
     }
     $patch['144']['date'] = "20080102";
-    
+
     $patch['145']['name'] = "Change domain field to user_domain_id in users table";
     $patch['145']['patch'] = "ALTER TABLE `" . TB_PREFIX . "users` CHANGE `user_domain` `user_domain_id` INT  DEFAULT '1' NOT NULL;";
     if ($config->database->adapter == "pdo_pgsql") {
@@ -802,7 +802,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
         $patch['146']['patch'] = "SELECT 1+1";
     }
     $patch['146']['date'] = "20080102";
-    
+
     $patch['147']['name'] = "Create user_role table";
     $patch['147']['patch'] = "CREATE TABLE ".TB_PREFIX."user_role (
 	    `id` int(11) NOT NULL auto_increment  PRIMARY KEY,
@@ -815,7 +815,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
             );";
     }
     $patch['147']['date'] = "20080102";
-    
+
     $patch['148']['name'] = "Insert default user group";
     $patch['148']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('administrator');";
     if ($config->database->adapter == "pdo_pgsql") {
@@ -895,7 +895,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
         $patch['157']['patch'] = "ALTER TABLE ".TB_PREFIX."tax ALTER COLUMN tax_percentage TYPE numeric(25, 6)";
     }
     $patch['157']['date'] = "20080128";
-   
+
     $patch['158']['name'] = "Rename table si_account_payments to si_payment";
     $patch['158']['patch'] = "RENAME TABLE `".TB_PREFIX."account_payments` TO  `".TB_PREFIX."payment`;";
     if ($config->database->adapter == "pdo_pgsql") {
@@ -903,14 +903,14 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
     }
     $patch['158']['date'] = "20081201";
     //TODO: postgres and sqlite patch
-    
+
     $patch['159']['name'] = "Add domain_id to payments table";
     $patch['159']['patch'] = "ALTER TABLE  `".TB_PREFIX."payment` ADD  `domain_id` INT NOT NULL ;";
     if ($config->database->adapter == "pdo_pgsql") {
         $patch['159']['patch'] = "ALTER TABLE  `".TB_PREFIX."payment` ADD  `domain_id` INT NOT NULL ";
     }
     $patch['159']['date'] = "20081201";
-    //TODO: postgres and sqlite patch  
+    //TODO: postgres and sqlite patch
 
     $patch['160']['name'] = "Add domain_id to tax table";
     $patch['160']['patch'] = "ALTER TABLE  `".TB_PREFIX."tax` ADD  `domain_id` INT NOT NULL ;";
@@ -918,8 +918,8 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
         $patch['160']['patch'] = "ALTER TABLE  `".TB_PREFIX."tax` ADD  `domain_id` INT NOT NULL ";
     }
     $patch['160']['date'] = "20081201";
-    //TODO: postgres and sqlite patch  
-    
+    //TODO: postgres and sqlite patch
+
     $patch['161']['name'] = "Change user table from si_users to si_user";
     $patch['161']['patch'] = "RENAME TABLE `".TB_PREFIX."users` TO  `".TB_PREFIX."user` ;";
     if ($config->database->adapter == "pdo_pgsql") {
@@ -995,164 +995,164 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
     $patch['169']['name'] = "Set tax type on current taxes to %";
     $patch['169']['patch'] = "UPDATE `".TB_PREFIX."tax` SET `type` = '%' ;";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['169']['patch'] = "UPDATE `".TB_PREFIX."tax` SET `type` = '%';"; 
+	    $patch['169']['patch'] = "UPDATE `".TB_PREFIX."tax` SET `type` = '%';";
     }
     $patch['169']['date'] = "20081212";
 	//delete the old fields in si_invoice_items
 
-    //TODO: postgres and sqlite patch      
+    //TODO: postgres and sqlite patch
 
-    
+
     $patch['170']['name'] = "Set domain_id on tax table to 1";
     $patch['170']['patch'] = "UPDATE `".TB_PREFIX."tax` SET `domain_id` = '1' ;";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['170']['patch'] = "UPDATE `".TB_PREFIX."tax` SET `domain_id` = '1';"; 
+	    $patch['170']['patch'] = "UPDATE `".TB_PREFIX."tax` SET `domain_id` = '1';";
     }
     $patch['170']['date'] = "20081229";
 
     $patch['171']['name'] = "Set domain_id on payment table to 1";
     $patch['171']['patch'] = "UPDATE `".TB_PREFIX."payment` SET `domain_id` = '1' ;";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['171']['patch'] = "UPDATE `".TB_PREFIX."payment` SET `domain_id` = '1';"; 
+	    $patch['171']['patch'] = "UPDATE `".TB_PREFIX."payment` SET `domain_id` = '1';";
     }
     $patch['171']['date'] = "20081229";
-  
+
     $patch['172']['name'] = "Set domain_id on payment_types table to 1";
     $patch['172']['patch'] = "UPDATE `".TB_PREFIX."payment_types` SET `domain_id` = '1' ;";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['172']['patch'] = "UPDATE `".TB_PREFIX."payment_types` SET `domain_id` = '1';"; 
+	    $patch['172']['patch'] = "UPDATE `".TB_PREFIX."payment_types` SET `domain_id` = '1';";
     }
-    $patch['172']['date'] = "20081229";    
-  
+    $patch['172']['date'] = "20081229";
+
     $patch['173']['name'] = "Set domain_id on preference table to 1";
     $patch['173']['patch'] = "UPDATE `".TB_PREFIX."preferences` SET `domain_id` = '1' ;";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['173']['patch'] = "UPDATE `".TB_PREFIX."preferences` SET `domain_id` = '1';"; 
+	    $patch['173']['patch'] = "UPDATE `".TB_PREFIX."preferences` SET `domain_id` = '1';";
     }
-    $patch['173']['date'] = "20081229";        
-    
+    $patch['173']['date'] = "20081229";
+
     $patch['174']['name'] = "Set domain_id on products table to 1";
     $patch['174']['patch'] = "UPDATE `".TB_PREFIX."products` SET `domain_id` = '1' ;";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['174']['patch'] = "UPDATE `".TB_PREFIX."products` SET `domain_id` = '1';"; 
+	    $patch['174']['patch'] = "UPDATE `".TB_PREFIX."products` SET `domain_id` = '1';";
     }
-    $patch['174']['date'] = "20081229";        
+    $patch['174']['date'] = "20081229";
 
     $patch['175']['name'] = "Set domain_id on biller table to 1";
     $patch['175']['patch'] = "UPDATE `".TB_PREFIX."biller` SET `domain_id` = '1' ;";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['175']['patch'] = "UPDATE `".TB_PREFIX."biller` SET `domain_id` = '1';"; 
+	    $patch['175']['patch'] = "UPDATE `".TB_PREFIX."biller` SET `domain_id` = '1';";
     }
-    $patch['175']['date'] = "20081229";  
-          
+    $patch['175']['date'] = "20081229";
+
     $patch['176']['name'] = "Set domain_id on invoices table to 1";
     $patch['176']['patch'] = "UPDATE `".TB_PREFIX."invoices` SET `domain_id` = '1' ;";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['176']['patch'] = "UPDATE `".TB_PREFIX."invoices` SET `domain_id` = '1';"; 
+	    $patch['176']['patch'] = "UPDATE `".TB_PREFIX."invoices` SET `domain_id` = '1';";
     }
-    $patch['176']['date'] = "20081229";        
+    $patch['176']['date'] = "20081229";
 
     $patch['177']['name'] = "Set domain_id on customers table to 1";
     $patch['177']['patch'] = "UPDATE `".TB_PREFIX."customers` SET `domain_id` = '1' ;";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['177']['patch'] = "UPDATE `".TB_PREFIX."customers` SET `domain_id` = '1';"; 
+	    $patch['177']['patch'] = "UPDATE `".TB_PREFIX."customers` SET `domain_id` = '1';";
     }
-    $patch['177']['date'] = "20081229";        
-        
+    $patch['177']['date'] = "20081229";
+
     $patch['178']['name'] = "Rename si_user.user_id to si_user.id";
     $patch['178']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_id` `id` int(11) ;";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['178']['patch'] = "UPDATE `".TB_PREFIX."user` CHANGE `user_id` `id` int(11);"; 
+	    $patch['178']['patch'] = "UPDATE `".TB_PREFIX."user` CHANGE `user_id` `id` int(11);";
     }
-    $patch['178']['date'] = "20081229";        
-     //TODO: postgres and sqlite patch  
+    $patch['178']['date'] = "20081229";
+     //TODO: postgres and sqlite patch
 
     $patch['179']['name'] = "Rename si_user.user_email to si_user.email";
     $patch['179']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_email` `email` VARCHAR( 255 );";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['179']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_email` `email` VARCHAR( 255 );"; 
+	    $patch['179']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_email` `email` VARCHAR( 255 );";
     }
-    $patch['179']['date'] = "20081229";        
-     //TODO: postgres and sqlite patch  
-     
+    $patch['179']['date'] = "20081229";
+     //TODO: postgres and sqlite patch
+
     $patch['180']['name'] = "Rename si_user.user_name to si_user.name";
     $patch['180']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_name` `name` VARCHAR( 255 );";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['180']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_name` `name` VARCHAR( 255 );"; 
+	    $patch['180']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_name` `name` VARCHAR( 255 );";
     }
-    $patch['180']['date'] = "20081229";        
-     //TODO: postgres and sqlite patch      
-     
+    $patch['180']['date'] = "20081229";
+     //TODO: postgres and sqlite patch
+
     $patch['181']['name'] = "Rename si_user.user_role_id to si_user.role_id";
     $patch['181']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_role_id` `role_id` int(11);";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['181']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_role_id` `role_id` int(11);"; 
+	    $patch['181']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_role_id` `role_id` int(11);";
     }
-    $patch['181']['date'] = "20081229";        
-     //TODO: postgres and sqlite patch      
-     
+    $patch['181']['date'] = "20081229";
+     //TODO: postgres and sqlite patch
+
     $patch['182']['name'] = "Rename si_user.user_domain_id to si_user.domain_id";
     $patch['182']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_domain_id` `domain_id` int(11) ;";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['182']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_domain_id` `domain_id` int(11) ;"; 
+	    $patch['182']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_domain_id` `domain_id` int(11) ;";
     }
-    $patch['182']['date'] = "20081229";        
-     //TODO: postgres and sqlite patch        
-     
+    $patch['182']['date'] = "20081229";
+     //TODO: postgres and sqlite patch
+
     $patch['183']['name'] = "Rename si_user.user_password to si_user.password";
     $patch['183']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_password` `password` VARCHAR( 255 )  ;";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['183']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_password` `password` VARCHAR( 255 ) ;"; 
+	    $patch['183']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_password` `password` VARCHAR( 255 ) ;";
     }
-    $patch['183']['date'] = "20081229";        
-     //TODO: postgres and sqlite patch     
-        
+    $patch['183']['date'] = "20081229";
+     //TODO: postgres and sqlite patch
+
     $patch['184']['name'] = "Drop name column from si_user table";
     $patch['184']['patch'] = "ALTER TABLE `".TB_PREFIX."user` DROP `name`  ;";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['184']['patch'] = "ALTER TABLE `".TB_PREFIX."user` DROP `name`  ;"; 
+	    $patch['184']['patch'] = "ALTER TABLE `".TB_PREFIX."user` DROP `name`  ;";
     }
-    $patch['184']['date'] = "20081230";        
-    //TODO: postgres and sqlite patch        
+    $patch['184']['date'] = "20081230";
+    //TODO: postgres and sqlite patch
 
     $patch['185']['name'] = "Drop old defaults table";
     $patch['185']['patch'] = "DROP TABLE `".TB_PREFIX."defaults` ;";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['185']['patch'] = "DROP TABLE `".TB_PREFIX."defaults`  ;"; 
+	    $patch['185']['patch'] = "DROP TABLE `".TB_PREFIX."defaults`  ;";
     }
-    $patch['185']['date'] = "20081230";        
-    //TODO: postgres and sqlite patch  
-     
+    $patch['185']['date'] = "20081230";
+    //TODO: postgres and sqlite patch
+
     $patch['186']['name'] = "Set domain_id on customers table to 1";
     $patch['186']['patch'] = "ALTER TABLE  `".TB_PREFIX."custom_fields` ADD  `domain_id` INT NOT NULL ;";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['186']['patch'] = "ALTER TABLE  `".TB_PREFIX."custom_fields` ADD  `domain_id` INT NOT NULL ;"; 
+	    $patch['186']['patch'] = "ALTER TABLE  `".TB_PREFIX."custom_fields` ADD  `domain_id` INT NOT NULL ;";
     }
-    $patch['186']['date'] = "20081230";        
-    //TODO: postgres and sqlite patch 
-              
+    $patch['186']['date'] = "20081230";
+    //TODO: postgres and sqlite patch
+
     $patch['187']['name'] = "Set domain_id on custom_feilds table to 1";
     $patch['187']['patch'] = "UPDATE `".TB_PREFIX."custom_fields` SET `domain_id` = '1' ;";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['187']['patch'] = "UPDATE `".TB_PREFIX."custom_fields` SET `domain_id` = '1';"; 
+	    $patch['187']['patch'] = "UPDATE `".TB_PREFIX."custom_fields` SET `domain_id` = '1';";
     }
-    $patch['187']['date'] = "20081230"; 
-    //TODO: postgres and sqlite patch     
-    
+    $patch['187']['date'] = "20081230";
+    //TODO: postgres and sqlite patch
+
     $patch['188']['name'] = "Drop tax_id column from si_invoice_items table";
     $patch['188']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` DROP `tax_id`  ;";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['188']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` DROP `tax_id`  ;"; 
+	    $patch['188']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` DROP `tax_id`  ;";
     }
-    $patch['188']['date'] = "20090118";        
+    $patch['188']['date'] = "20090118";
 
-    //TODO: postgres and sqlite patch        
+    //TODO: postgres and sqlite patch
     $patch['189']['name'] = "Drop tax column from si_invoice_items table";
     $patch['189']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` DROP `tax`  ;";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['189']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` DROP `tax`  ;"; 
+	    $patch['189']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` DROP `tax`  ;";
     }
-    $patch['189']['date'] = "20090118";        
+    $patch['189']['date'] = "20090118";
 
     $patch['190']['name'] = "Insert user role - user";
     $patch['190']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('user');";
@@ -1202,27 +1202,27 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
         $patch['196']['patch'] = "UPDATE ".TB_PREFIX."user SET enabled = 1;";
     }
     $patch['196']['date'] = "20090217";
-    
+
     $patch['197']['name'] = "Defaults table - add domain_id and extension_id field";
-    $patch['197']['patch'] = "ALTER TABLE ".TB_PREFIX."system_defaults 
+    $patch['197']['patch'] = "ALTER TABLE ".TB_PREFIX."system_defaults
 				ADD `domain_id` INT( 5 ) NOT NULL DEFAULT '1',
 				ADD `extension_id` INT( 5 ) NOT NULL DEFAULT '1',
 				DROP INDEX `name`,
 				ADD INDEX `name` ( `name` );";
     $patch['197']['date'] = "20090321";
-    	
+
     $patch['198']['name'] = "Extension table - create table to hold extension status";
-    $patch['198']['patch'] = "CREATE TABLE ".TB_PREFIX."extensions ( 
+    $patch['198']['patch'] = "CREATE TABLE ".TB_PREFIX."extensions (
 		`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 		`domain_id` INT( 11 ) NOT NULL ,
 		`name` VARCHAR( 255 ) NOT NULL ,
 		`description` VARCHAR( 255 ) NOT NULL ,
 		`enabled` VARCHAR( 1 ) NOT NULL DEFAULT '0') ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
-    $patch['198']['date'] = "20090322";	
- 
+    $patch['198']['date'] = "20090322";
+
     $patch['199']['name'] = "Update extensions table";
     $patch['199']['patch'] = "INSERT INTO ".TB_PREFIX."extensions (
-			`id`,`domain_id`,`name`,`description`,`enabled`) 
+			`id`,`domain_id`,`name`,`description`,`enabled`)
 			VALUES ('1','1','core','Core part of Simple Invoices - always enabled','1');";
     $patch['199']['date'] = "20090529";
 
@@ -1232,15 +1232,15 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['201']['name'] = "Set domain_id on system defaults table to 1";
     $patch['201']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET `domain_id` = '1' ;";
-    $patch['201']['date'] = "20090622";    
+    $patch['201']['date'] = "20090622";
 
     $patch['202']['name'] = "Set extension_id on system defaults table to 1";
     $patch['202']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET `extension_id` = '1' ;";
-    $patch['202']['date'] = "20090622";    
+    $patch['202']['date'] = "20090622";
 
     $patch['203']['name'] = "Move all old consulting style invoices to itemised";
     $patch['203']['patch'] = "UPDATE `".TB_PREFIX."invoices` SET `type_id` = '2' where `type_id`=3 ;";
-    $patch['203']['date'] = "20090704";    
+    $patch['203']['date'] = "20090704";
 
     $patch['204']['name'] = "Create index table to handle new invoice numbering system";
     $patch['204']['patch'] = "CREATE TABLE `".TB_PREFIX."index` (
@@ -1249,43 +1249,43 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 `sub_node` VARCHAR( 255 ) NULL ,
 `domain_id` INT( 11 ) NOT NULL
 ) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
-    	$patch['204']['date'] = "20090818";    
+    	$patch['204']['date'] = "20090818";
 
     $patch['205']['name'] = "Add index_id to invoice table - new invoice numbering";
     $patch['205']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD `index_id` INT( 11 ) NOT NULL AFTER `id`;";
-    $patch['205']['date'] = "20090818";    
+    $patch['205']['date'] = "20090818";
 
     $patch['206']['name'] = "Add status and locale to preferences";
     $patch['206']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `status` INT( 1 ) NOT NULL ,
 ADD `locale` VARCHAR( 255 ) NULL ,
 ADD `language` VARCHAR( 255 ) NULL ;";
-    $patch['206']['date'] = "20090826";    
+    $patch['206']['date'] = "20090826";
 
     $patch['207']['name'] = "Populate the status, locale, and language fields in preferences table";
     $patch['207']['patch'] = "UPDATE `".TB_PREFIX."preferences` SET status = '1', locale = '".$config->local->locale."', language = '".$language."' ;";
-    $patch['207']['date'] = "20090826";    
+    $patch['207']['date'] = "20090826";
 
     $patch['208']['name'] = "Populate the status, locale, and language fields in preferences table";
     $patch['208']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `index_group` INT( 11 ) NOT NULL ;";
-    $patch['208']['date'] = "20090826";    
+    $patch['208']['date'] = "20090826";
 
     $defaults = getSystemDefaults();
     $patch['209']['name'] = "Populate the status, locale, and language fields in preferences table";
     $patch['209']['patch'] = "UPDATE `".TB_PREFIX."preferences` SET index_group = '".$defaults['preference']."' ;";
-    $patch['209']['date'] = "20090826";    
+    $patch['209']['date'] = "20090826";
 
     $patch['210']['name'] = "Create composite primary key for invoice table";
     $patch['210']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`,`id` );";
-    $patch['210']['date'] = "20090826";    
+    $patch['210']['date'] = "20090826";
 
     $patch['211']['name'] = "Reset auto-increment for invoice table";
     $patch['211']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` AUTO_INCREMENT = 1;";
-    $patch['211']['date'] = "20090826";    
+    $patch['211']['date'] = "20090826";
 
     $patch['212']['name'] = "Copy invoice.id into invoice.index_id";
     $patch['212']['patch'] = "update `".TB_PREFIX."invoices` set index_id = id;";
-    $patch['212']['date'] = "20090902";    
-    
+    $patch['212']['date'] = "20090902";
+
     $max_invoice = invoice::max();
     $patch['213']['name'] = "Update the index table with max invoice id - if required";
     if($max_invoice > "0")
@@ -1295,64 +1295,64 @@ ADD `language` VARCHAR( 255 ) NULL ;";
         $patch['213']['patch'] = "select 1 from `".TB_PREFIX."index`;";
     }
     $patch['213']['date'] = "20090902";
-    
+
             unset($defaults);
             unset($max_invoice);
 
             $patch['214']['name'] = "Add sub_node_2 to si_index table";
             $patch['214']['patch'] = "ALTER TABLE  `".TB_PREFIX."index` ADD  `sub_node_2` VARCHAR( 255 ) NULL AFTER  `sub_node`";
-            $patch['214']['date'] = "20090912";    
+            $patch['214']['date'] = "20090912";
 
 
             $patch['215']['name'] = "si_invoices - add composite primary key - patch removed";
             #$patch['215']['patch'] = "ALTER TABLE  `".TB_PREFIX."index` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
             #$patch['215']['patch'] = "ALTER TABLE  `".TB_PREFIX."index` ADD PRIMARY KEY(`domain_id`, `id`)";
             $patch['215']['patch'] = "select 1 from `".TB_PREFIX."index`;";
-            $patch['215']['date'] = "20090912";    
+            $patch['215']['date'] = "20090912";
 
             $patch['216']['name'] = "si_payment - add composite primary key";
             $patch['216']['patch'] = "ALTER TABLE  `".TB_PREFIX."payment` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
-            $patch['216']['date'] = "20090912";    
+            $patch['216']['date'] = "20090912";
 
             $patch['217']['name'] = "si_payment_types - add composite primary key";
             $patch['217']['patch'] = "ALTER TABLE  `".TB_PREFIX."payment_types` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `pt_id`)";
-            $patch['217']['date'] = "20090912";    
+            $patch['217']['date'] = "20090912";
 
             $patch['218']['name'] = "si_preferences - add composite primary key";
             $patch['218']['patch'] = "ALTER TABLE  `".TB_PREFIX."preferences` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `pref_id`)";
-            $patch['218']['date'] = "20090912";    
+            $patch['218']['date'] = "20090912";
 
             $patch['219']['name'] = "si_products - add composite primary key";
             $patch['219']['patch'] = "ALTER TABLE  `".TB_PREFIX."products` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
-            $patch['219']['date'] = "20090912";    
-            
+            $patch['219']['date'] = "20090912";
+
             $patch['220']['name'] = "si_tax - add composite primary key";
             $patch['220']['patch'] = "ALTER TABLE  `".TB_PREFIX."tax` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `tax_id`)";
-            $patch['220']['date'] = "20090912";    
+            $patch['220']['date'] = "20090912";
 
             $patch['221']['name'] = "si_user - add composite primary key";
             $patch['221']['patch'] = "ALTER TABLE  `".TB_PREFIX."user` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
-            $patch['221']['date'] = "20090912";    
+            $patch['221']['date'] = "20090912";
 
             $patch['222']['name'] = "si_biller - add composite primary key";
             $patch['222']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
-            $patch['222']['date'] = "20100209";    
+            $patch['222']['date'] = "20100209";
 
             $patch['223']['name'] = "si_customers - add composite primary key";
             $patch['223']['patch'] = "ALTER TABLE  `".TB_PREFIX."customers` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
-            $patch['223']['date'] = "20100209";    
+            $patch['223']['date'] = "20100209";
 
             $patch['224']['name'] = "Add paypal business name";
             $patch['224']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` ADD `paypal_business_name` VARCHAR( 255 ) NULL AFTER  `footer`";
-            $patch['224']['date'] = "20100209";    
+            $patch['224']['date'] = "20100209";
 
             $patch['225']['name'] = "Add paypal notify url";
             $patch['225']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` ADD `paypal_notify_url` VARCHAR( 255 ) NULL AFTER  `paypal_business_name`";
-            $patch['225']['date'] = "20100209";    
+            $patch['225']['date'] = "20100209";
 
             $patch['226']['name'] = "Define currency in preferences";
             $patch['226']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `currency_code` VARCHAR( 25 ) NULL ;";
-            $patch['226']['date'] = "20100209";    
+            $patch['226']['date'] = "20100209";
 
             $patch['227']['name'] = "Create cron table to handle recurrence";
             $patch['227']['patch'] = "CREATE TABLE `".TB_PREFIX."cron` (
@@ -1367,7 +1367,7 @@ ADD `language` VARCHAR( 255 ) NULL ;";
                 `email_customer` INT( 1 ) NULL ,
                 PRIMARY KEY (`domain_id` ,`id`)
             ) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
-        $patch['227']['date'] = "20100215";    
+        $patch['227']['date'] = "20100215";
 
         $patch['228']['name'] = "Create cron_log table to handle record when cron was run";
         $patch['228']['patch'] = "CREATE TABLE `".TB_PREFIX."cron_log` (
@@ -1376,68 +1376,68 @@ ADD `language` VARCHAR( 255 ) NULL ;";
             `run_date` DATE NOT NULL ,
             PRIMARY KEY (  `domain_id` ,  `id` )
             ) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
-        $patch['228']['date'] = "20100216";    
+        $patch['228']['date'] = "20100216";
 
         $patch['229']['name'] = "preferences - add online payment type";
         $patch['229']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `include_online_payment` VARCHAR( 255 ) NULL ;";
-        $patch['229']['date'] = "20100209";    
+        $patch['229']['date'] = "20100209";
 
         $patch['230']['name'] = "Add paypal notify url";
         $patch['230']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` ADD `paypal_return_url` VARCHAR( 255 ) NULL AFTER  `paypal_notify_url`";
-        $patch['230']['date'] = "20100223";    
+        $patch['230']['date'] = "20100223";
 
         $patch['231']['name'] = "Add paypal payment id into payment table";
         $patch['231']['patch'] = "ALTER TABLE  `".TB_PREFIX."payment` ADD `online_payment_id` VARCHAR( 255 ) NULL AFTER  `domain_id`";
-        $patch['231']['date'] = "20100226";    
+        $patch['231']['date'] = "20100226";
 
         $patch['232']['name'] = "Define currency display in preferences";
         $patch['232']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `currency_position` VARCHAR( 25 ) NULL ;";
-        $patch['232']['date'] = "20100227";    
+        $patch['232']['date'] = "20100227";
 
         $patch['233']['name'] = "Add system default to control invoice number by biller -- dummy patch -- this sql was removed";
     $patch['233']['patch'] = "select 1+1;";
-    $patch['233']['date'] = "20100302";    
+    $patch['233']['date'] = "20100302";
 
     $patch['234']['name'] = "Add eway customer ID";
     $patch['234']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` ADD `eway_customer_id` VARCHAR( 255 ) NULL AFTER `paypal_return_url`;";
-    $patch['234']['date'] = "20100315";    
+    $patch['234']['date'] = "20100315";
 
     $patch['235']['name'] = "Add eway card holder name";
     $patch['235']['patch'] = "ALTER TABLE  `".TB_PREFIX."customers` ADD `credit_card_holder_name` VARCHAR( 255 ) NULL AFTER `email`;";
-    $patch['235']['date'] = "20100315";    
+    $patch['235']['date'] = "20100315";
 
     $patch['236']['name'] = "Add eway card number";
     $patch['236']['patch'] = "ALTER TABLE  `".TB_PREFIX."customers` ADD `credit_card_number` VARCHAR( 255 ) NULL AFTER `credit_card_holder_name`;";
-    $patch['236']['date'] = "20100315";    
+    $patch['236']['date'] = "20100315";
 
     $patch['237']['name'] = "Add eway card expiry month";
     $patch['237']['patch'] = "ALTER TABLE  `".TB_PREFIX."customers` ADD `credit_card_expiry_month` VARCHAR( 02 ) NULL AFTER `credit_card_number`;";
-    $patch['237']['date'] = "20100315";  
+    $patch['237']['date'] = "20100315";
 
     $patch['238']['name'] = "Add eway card expirt year";
     $patch['238']['patch'] = "ALTER TABLE  `".TB_PREFIX."customers` ADD `credit_card_expiry_year` VARCHAR( 04 ) NULL AFTER `credit_card_expiry_month` ;";
-    $patch['238']['date'] = "20100315";  
+    $patch['238']['date'] = "20100315";
 
     $patch['239']['name'] = "cronlog - add invoice id";
     $patch['239']['patch'] = "ALTER TABLE `".TB_PREFIX."cron_log` ADD `cron_id` VARCHAR( 25 ) NULL AFTER `domain_id` ;";
-    $patch['239']['date'] = "20100321";    
+    $patch['239']['date'] = "20100321";
 
     $patch['240']['name'] = "si_system_defaults - add composite primary key";
     #$patch['240']['patch'] = "ALTER TABLE  `".TB_PREFIX."system_defaults` DROP INDEX `name`, DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
     $patch['240']['patch'] = "select +1 from `".TB_PREFIX."system_defaults`";
-    $patch['240']['date'] = "20100305";    
+    $patch['240']['date'] = "20100305";
 
     $patch['241']['name'] = "si_system_defaults - add composite primary key";
     $patch['241']['patch'] = "insert into `".TB_PREFIX."system_defaults` values ('','inventory','0','1','1');";
-    $patch['241']['date'] = "20100409";    
+    $patch['241']['date'] = "20100409";
 
     $patch['242']['name'] = "Add cost to products table";
     $patch['242']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `cost` DECIMAL( 25, 6 ) NULL DEFAULT '0.00' AFTER `default_tax_id_2`;";
-    $patch['242']['date'] = "20100409";    
-    
+    $patch['242']['date'] = "20100409";
+
     $patch['243']['name'] = "Add reorder_level to products table";
     $patch['243']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `reorder_level` INT( 11 ) NULL AFTER `cost` ;";
-    $patch['243']['date'] = "20100409";    
+    $patch['243']['date'] = "20100409";
 
     $patch['244']['name'] = "Create inventory table";
     $patch['244']['patch'] = "CREATE TABLE  `".TB_PREFIX."inventory` (
@@ -1450,43 +1450,43 @@ ADD `language` VARCHAR( 255 ) NULL ;";
 `note` TEXT NULL ,
 PRIMARY KEY ( `domain_id`, `id` )
 ) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
-    $patch['244']['date'] = "20100409";    
+    $patch['244']['date'] = "20100409";
 
     $patch['245']['name'] = "Preferences - make locale null field";
     $patch['245']['patch'] = "ALTER TABLE  `".TB_PREFIX."preferences` CHANGE  `locale`  `locale` VARCHAR( 255 ) NULL ;";
-    $patch['245']['date'] = "20100419";    
+    $patch['245']['date'] = "20100419";
 
     $patch['246']['name'] = "Preferences - make language a null field";
     $patch['246']['patch'] = "ALTER TABLE  `".TB_PREFIX."preferences` CHANGE  `language`  `language` VARCHAR( 255 ) NULL;";
-    $patch['246']['date'] = "20100419";    
+    $patch['246']['date'] = "20100419";
 
     $patch['247']['name'] = "Custom fields - make sure domain_id is 1";
     $patch['247']['patch'] = "update ".TB_PREFIX."custom_fields set domain_id = '1';";
-    $patch['247']['date'] = "20100419";    
+    $patch['247']['date'] = "20100419";
 
     $patch['248']['name'] = "Make Simple Invoices faster - add index";
     $patch['248']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD INDEX(`domain_id`);";
-    $patch['248']['date'] = "20100419";    
+    $patch['248']['date'] = "20100419";
 
     $patch['249']['name'] = "Make Simple Invoices faster - add index";
     $patch['249']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD INDEX(`biller_id`) ;";
-    $patch['249']['date'] = "20100419";    
+    $patch['249']['date'] = "20100419";
 
     $patch['250']['name'] = "Make Simple Invoices faster - add index";
     $patch['250']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD INDEX(`customer_id`);";
-    $patch['250']['date'] = "20100419";    
+    $patch['250']['date'] = "20100419";
 
     $patch['251']['name'] = "Make Simple Invoices faster - add index";
     $patch['251']['patch'] = "ALTER TABLE `".TB_PREFIX."payment` ADD INDEX(`domain_id`);";
-    $patch['251']['date'] = "20100419";    
+    $patch['251']['date'] = "20100419";
 
     $patch['252']['name'] = "Language - reset to en_GB - due to folder renaming";
     $patch['252']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value ='en_GB' where name='language';";
-    $patch['252']['date'] = "20100419";    
+    $patch['252']['date'] = "20100419";
 
     $patch['253']['name'] = "Add PaymentsGateway API ID field";
     $patch['253']['patch'] = "ALTER TABLE `".TB_PREFIX."biller` ADD  `paymentsgateway_api_id` VARCHAR( 255 ) NULL AFTER `eway_customer_id`;";
-    $patch['253']['date'] = "20110918";    
+    $patch['253']['date'] = "20110918";
 /*
 ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );
 

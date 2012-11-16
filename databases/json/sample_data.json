@@ -1,13 +1,13 @@
 {
     "si_biller":
         [
-            { 
-				"id":"1", 
-				"domain_id":"DOMAIN-ID", 
-				"name":"Mr Plough", 
-				"street_address":"43 Evergreen Terace", 
-				"street_address2":"", 
-				"city":"Springfield", 
+            {
+				"id":"1",
+				"domain_id":"DOMAIN-ID",
+				"name":"Mr Plough",
+				"street_address":"43 Evergreen Terace",
+				"street_address2":"",
+				"city":"Springfield",
 				"state":"NY",
 				"zip_code":"90245",
 				"country":"",
@@ -21,6 +21,7 @@
                 "paypal_notify_url":"",
                 "paypal_return_url":"",
                 "eway_customer_id":"",
+                "paymentsgateway_api_id":"",
 				"notes":"",
 				"custom_field1":"",
 				"custom_field2":"",
@@ -28,12 +29,12 @@
 				"custom_field4":"",
 				"enabled":"1"
 			},
-            { 
-				"id":"2", 
-				"domain_id":"DOMAIN-ID", 
-				"name":"Homer Simpson", 
-				"street_address":"43 Evergreen Terace", 
-				"city":"Springfield", 
+            {
+				"id":"2",
+				"domain_id":"DOMAIN-ID",
+				"name":"Homer Simpson",
+				"street_address":"43 Evergreen Terace",
+				"city":"Springfield",
 				"state":"NY",
 				"zip_code":"90245",
 				"phone":"04 5689 0456",
@@ -44,14 +45,15 @@
                 "paypal_notify_url":"",
                 "paypal_return_url":"",
                 "eway_customer_id":"",
+                "paymentsgateway_api_id":"",
 				"enabled":"1"
-			},			
-            { 
-				"id":"3", 
-				"domain_id":"DOMAIN-ID", 
-				"name":"The Beer Baron", 
-				"street_address":"43 Evergreen Terace", 
-				"city":"Springfield", 
+			},
+            {
+				"id":"3",
+				"domain_id":"DOMAIN-ID",
+				"name":"The Beer Baron",
+				"street_address":"43 Evergreen Terace",
+				"city":"Springfield",
 				"state":"NY",
 				"zip_code":"90245",
 				"phone":"04 5689 0456",
@@ -62,14 +64,15 @@
                 "paypal_notify_url":"",
                 "paypal_return_url":"",
                 "eway_customer_id":"",
+                "paymentsgateway_api_id":"",
 				"enabled":"1"
-			},				
-            { 
-				"id":"4", 
-				"domain_id":"DOMAIN-ID", 
-				"name":"Fawlty Towers", 
-				"street_address":"13 Seaside Drive", 
-				"city":"Torquay", 
+			},
+            {
+				"id":"4",
+				"domain_id":"DOMAIN-ID",
+				"name":"Fawlty Towers",
+				"street_address":"13 Seaside Drive",
+				"city":"Torquay",
 				"state":"Brixton on Avon",
 				"zip_code":"65894",
 				"country":"United Kingdom",
@@ -81,20 +84,21 @@
                 "paypal_notify_url":"",
                 "paypal_return_url":"",
                 "eway_customer_id":"",
+                "paymentsgateway_api_id":"",
 				"enabled":"1"
-			}			
+			}
 		]
 	,
 	"si_customers":
         [
-            { 
-				"id":"1", 
-				"domain_id":"DOMAIN-ID", 
-				"attention":"Moe Sivloski", 
-				"name":"Moes Tavern", 
-				"street_address":"45 Main Road", 
-				"street_address2":"", 
-				"city":"Springfield", 
+            {
+				"id":"1",
+				"domain_id":"DOMAIN-ID",
+				"attention":"Moe Sivloski",
+				"name":"Moes Tavern",
+				"street_address":"45 Main Road",
+				"street_address2":"",
+				"city":"Springfield",
 				"state":"NY",
 				"zip_code":"65891",
 				"country":"",
@@ -113,14 +117,14 @@
 				"custom_field4":"",
 				"enabled":"1"
 			},
-            { 
-				"id":"2", 
-				"domain_id":"DOMAIN-ID", 
-				"attention":"Mr Burns", 
-				"name":"Springfield Power Plant", 
-				"street_address":"4 Power Plant Drive", 
-				"street_address2":"", 
-				"city":"Springfield", 
+            {
+				"id":"2",
+				"domain_id":"DOMAIN-ID",
+				"attention":"Mr Burns",
+				"name":"Springfield Power Plant",
+				"street_address":"4 Power Plant Drive",
+				"street_address2":"",
+				"city":"Springfield",
 				"state":"NY",
 				"zip_code":"90210",
 				"country":"",
@@ -139,14 +143,14 @@
 				"custom_field4":"",
 				"enabled":"1"
 			},
-            { 
-				"id":"3", 
-				"domain_id":"DOMAIN-ID", 
-				"attention":"Kath Day-Knight", 
-				"name":"Kath and Kim Pty Ltd", 
-				"street_address":"82 Fountain Drive", 
-				"street_address2":"", 
-				"city":"Fountain Lakes", 
+            {
+				"id":"3",
+				"domain_id":"DOMAIN-ID",
+				"attention":"Kath Day-Knight",
+				"name":"Kath and Kim Pty Ltd",
+				"street_address":"82 Fountain Drive",
+				"street_address2":"",
+				"city":"Fountain Lakes",
 				"state":"VIC",
 				"zip_code":"3567",
 				"country":"Australia",
@@ -164,12 +168,12 @@
 				"custom_field3":"",
 				"custom_field4":"",
 				"enabled":"1"
-			}			
+			}
         ]
     ,
 	"si_index":
         [
-            { 
+            {
 				"id":"1",
 				"domain_id":"DOMAIN-ID",
 				"node":"invoice",
@@ -180,7 +184,7 @@
     ,
 	"si_invoices":
         [
-            { 
+            {
 				"id":"1",
 				"domain_id":"DOMAIN-ID",
 				"index_id":"1",
@@ -199,7 +203,7 @@
     ,
 	"si_invoice_items":
         [
-            { 
+            {
 				"id":"1",
 				"invoice_id":"1",
 				"quantity":"1",
@@ -210,7 +214,7 @@
 				"description":"",
 				"total":"137.5"
 			},
-			{ 
+			{
 				"id":"2",
 				"invoice_id":"1",
 				"quantity":"1",
@@ -221,7 +225,7 @@
 				"description":"",
 				"total":"137.5"
 			},
-			{ 
+			{
 				"id":"3",
 				"invoice_id":"1",
 				"quantity":"1",
@@ -231,8 +235,8 @@
 				"gross_total":"140",
 				"description":"",
 				"total":"140"
-			},	
-			{ 
+			},
+			{
 				"id":"4",
 				"invoice_id":"1",
 				"quantity":"1",
@@ -242,8 +246,8 @@
 				"gross_total":"140",
 				"description":"",
 				"total":"154"
-			},	
-			{ 
+			},
+			{
 				"id":"5",
 				"invoice_id":"1",
 				"quantity":"1",
@@ -258,7 +262,7 @@
 	,
 		 "si_invoice_item_tax":
         [
-            { 
+            {
 				"id":"1",
 				"invoice_item_id":"1",
 				"tax_id":"3",
@@ -266,7 +270,7 @@
 				"tax_rate":"10",
 				"tax_amount":"12.5"
 			},
-			{ 
+			{
 				"id":"2",
 				"invoice_item_id":"2",
 				"tax_id":"1",
@@ -274,7 +278,7 @@
 				"tax_rate":"10",
 				"tax_amount":"12.5"
 			},
-			{ 
+			{
 				"id":"3",
 				"invoice_item_id":"3",
 				"tax_id":"4",
@@ -282,7 +286,7 @@
 				"tax_rate":"0",
 				"tax_amount":"0"
 			},
-			{ 
+			{
 				"id":"4",
 				"invoice_item_id":"4",
 				"tax_id":"1",
@@ -290,7 +294,7 @@
 				"tax_rate":"10",
 				"tax_amount":"14"
 			},
-			{ 
+			{
 				"id":"5",
 				"invoice_item_id":"5",
 				"tax_id":"4",
@@ -302,7 +306,7 @@
 	,
 	"si_products":
         [
-            { 
+            {
 				"id":"1",
 				"domain_id":"DOMAIN-ID",
 				"description":"Hourly charge",
@@ -318,7 +322,7 @@
 				"enabled":"1",
 				"visible":"1"
 			},
-			{ 
+			{
 				"id":"2",
 				"domain_id":"DOMAIN-ID",
 				"description":"Accounting services",
@@ -334,7 +338,7 @@
 				"enabled":"1",
 				"visible":"1"
 			},
-			{ 
+			{
 				"id":"3",
 				"domain_id":"DOMAIN-ID",
 				"description":"Ploughing service",
@@ -350,7 +354,7 @@
 				"enabled":"1",
 				"visible":"1"
 			},
-			{ 
+			{
 				"id":"4",
 				"domain_id":"DOMAIN-ID",
 				"description":"Bootleg homebrew",
@@ -366,7 +370,7 @@
 				"enabled":"1",
 				"visible":"1"
 			},
-			{ 
+			{
 				"id":"5",
 				"domain_id":"DOMAIN-ID",
 				"description":"Accomodation",
@@ -381,7 +385,7 @@
 				"custom_field4":"",
 				"enabled":"1",
 				"visible":"1"
-			}			
+			}
         ]
-        
+
 }
