@@ -25,9 +25,15 @@ if(in_array(TB_PREFIX.'system_defaults',$tables))
  	$language = "en_GB";
 }  
 
-function getLanguageArray() {
-	global $language;
+function getLanguageArray($lang='') {
 	global $config;
+
+	if($lang){
+		$language=$lang;
+	}
+	else{
+		global $language;
+	}
 
 	$langPath = "./lang/";
 	$langFile = "/lang.php";
