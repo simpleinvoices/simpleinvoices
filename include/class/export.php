@@ -177,7 +177,9 @@ class export
                 $paymentType = getPaymentType($payment['ac_payment_type']);
                 $preference = getPreference($invoice['preference_id']);
 
-                $smarty -> assign("payment",$payment);
+				//$this->assignTemplateLanguage($preference); //Not tested at this time
+ 
+               $smarty -> assign("payment",$payment);
                 $smarty -> assign("invoice",$invoice);
                 $smarty -> assign("biller",$biller);
                 $smarty -> assign("logo",$logo);
@@ -232,6 +234,8 @@ class export
 				
 				if(file_exists($templatePath)) {
 					//echo "test";
+					$this->assignTemplateLanguage($preference);
+
 					$smarty -> assign('biller',$biller);
 					$smarty -> assign('customer',$customer);
 					$smarty -> assign('invoice',$invoice);
@@ -242,8 +246,8 @@ class export
 					$smarty -> assign('invoiceItems',$invoiceItems);
 					$smarty -> assign('template_path',$template_path);
 					$smarty -> assign('css',$css);
-					$smarty -> assign('customFieldLabels',$customFieldLabels);
-					
+					$smarty -> assign('customFieldLabels',$customFieldLabels);					
+
 					$data = $smarty -> fetch(".".$templatePath);
 				
 				}
@@ -260,6 +264,22 @@ class export
 	function execute()
 	{
 		$this->showData( $this->getData() );	
+	}
+	
+	
+	//assign the language and set the locale from the preference
+	function assignTemplateLanguage($preference)
+	{
+		//get and assign the language file from the preference table
+		if($pref_language=$preference['language'] and $LANG=getLanguageArray($pref_language) and is_array($LANG) and count($LANG) ){
+			global $smarty;
+			$smarty -> assign('LANG',$LANG);
+		}
+		//overide the config's locale with the one assigned from the preference table
+		if($pref_locale=$preference['locale'] and strlen($pref_locale) > 4 ){
+			global $config;
+			$config->local->locale=$pref_locale;
+		}
 	}
 	
 }
