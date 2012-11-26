@@ -59,5 +59,5 @@
 {/literal}
 
 </head>
-<body>
+<body class="body_si body_module_{$module} body_view_{$view}">
 <div class="si_grey_background"></div>
