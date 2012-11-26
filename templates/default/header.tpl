@@ -5,8 +5,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 {strip}
+	{include file='../custom/hooks.tpl'}
 	{assign var='tmp_lang_module' value="title_module_`$module`"}{assign var='tmp_lang_module' value=$LANG.$tmp_lang_module|default:$LANG.$module|default:$module}
 	{assign var='tmp_lang_view' value="title_view_`$view`"}{assign var='tmp_lang_view' value=$LANG.$tmp_lang_view|default:$LANG.$view|default:$view}
+	{$smarty.capture.hook_head_start}
 {/strip}
 	<title>{$tmp_lang_module} : {$tmp_lang_view} - {$LANG.simple_invoices} </title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -58,6 +60,8 @@
 	<script type="text/javascript" src="./include/jquery/jquery.validationEngine.js"></script>
 {/literal}
 
+{$smarty.capture.hook_head_end}
 </head>
 <body class="body_si body_module_{$module} body_view_{$view}">
+{$smarty.capture.hook_body_start}
 <div class="si_grey_background"></div>

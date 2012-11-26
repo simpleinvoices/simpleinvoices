@@ -1,4 +1,6 @@
 <div class="top_menu">
+{$smarty.capture.hook_topmenu_start}
+
 {*
 	<div class="txt_right" style="">
 		<table class="buttons" align="left">
@@ -24,14 +26,18 @@
 		{/if}
 	
 	</div>
+{$smarty.capture.hook_topmenu_end}
 </div>
 
 <div id="tabmenu" class="flora" >
+{$smarty.capture.hook_tabmenu_start}
 	<ul>
+{$smarty.capture.hook_tabmenu_main_start}
 		<li><a href="#home"><span>{$LANG.home}</span></a></li>
 		<li><a href="#money"><span>{$LANG.money}</span></a></li>
 		<li><a href="#people"><span>{$LANG.people}</span></a></li>
 		<li><a href="#product"><span>{$LANG.products}</span></a></li>
+{$smarty.capture.hook_tabmenu_main_end}
 		<li style="float:right" class="menu_setting"><a href="#setting"><span>{$LANG.settings}</span></a></li>
 	</ul>
 
@@ -121,5 +127,6 @@
 			<li><a { if $pageActive == "backup"} class="active"{/if} href="index.php?module=options&amp;view=backup_database">{$LANG.backup_database}</a></li>
 		</ul>
 	</div>
+{$smarty.capture.hook_tabmenu_end}
 </div>
 
