@@ -30,6 +30,37 @@ $action = isset($_GET['case'])  ? filenameEscape($_GET['case'])    : null;
 
 require_once("./include/init.php");
 
+
+/*
+	GetCustomPath: override template or module with custom one if it exists, else return default path if it exists
+	---------------------------------------------
+	@name: name or dir/name of the module or template (without extension)
+	@mode: template or module
+*/
+
+function GetCustomPath($name,$mode='template'){
+	$my_custom_path="./custom/";
+	$use_custom=1;
+	if($mode=='template'){
+		if($use_custom and file_exists("{$my_custom_path}default_template/{$name}.tpl")){
+			$out=".{$my_custom_path}default_template/{$name}.tpl";
+		}
+		elseif(file_exists("./templates/default/{$name}.tpl")){
+			$out="../templates/default/{$name}.tpl";
+		}
+	}
+	if($mode=='module'){
+		if($use_custom and file_exists("{$my_custom_path}modules/{$name}.php")){
+			$out="{$my_custom_path}modules/{$name}.php";
+		}
+		elseif(file_exists("./modules/{$name}.php")){
+			$out="./modules/{$name}.php";
+		}
+	}
+	return $out;
+}
+	
+
 foreach($config->extension as $extension)
 {
 	/*
@@ -166,9 +197,11 @@ if (($module == "invoices" ) && (strstr($view,"template"))) {
 		/*
 		* If no extension php file for requested file load the normal php file if it exists
 		*/
-		if( ($extensionInvoiceTemplateFile == 0) AND (file_exists("./modules/invoices/template.php")) ) 
+		
+		if( ($extensionInvoiceTemplateFile == 0) AND ($my_path=GetCustomPath("invoices/template",'module') ) ) 
 		{
-			include_once("./modules/invoices/template.php");
+			/* (soif) This /modules/invoices/template.php is empty : Should we really keep it? */
+			include_once($my_path);
 		}
 
 
@@ -199,9 +232,8 @@ if (($module == "invoices" ) && (strstr($view,"template"))) {
 		/*
 		* If no extension php file for requested file load the normal php file if it exists
 		*/
-		if($extensionXml == 0) 
-		{
-			include("./modules/$module/$view.php");
+		if($extensionXml == 0 and $my_path=GetCustomPath("$module/$view",'module')){
+			include($my_path);
 		}
 
 		exit(0);
@@ -209,7 +241,6 @@ if (($module == "invoices" ) && (strstr($view,"template"))) {
 /*
 * xml or ajax page request - end
 */
-
 
 $file= "$module/$view";
 
@@ -247,7 +278,6 @@ $file= "$module/$view";
 /*
 * If extension is enabled load its javascript files	- end
 */
-
 /*
 * Header - start 
 */
@@ -270,11 +300,12 @@ if( !in_array($module."_".$view, $early_exit) )
 			}
 		}
 		/*
-		* If no extension php file for requested file load the normal php file if it exists
+		* If no extension php file for requested file load the normal template file if it exists
 		*/
+		
 		if($extensionHeader == 0) 
 		{
-			$smarty -> $smarty_output("../templates/default/header.tpl");
+			$smarty -> $smarty_output(GetCustomPath('header'));
 		}
 		
 }
@@ -304,8 +335,6 @@ if( !in_array($module."_".$view, $early_exit) )
 
 				//echo "Enabled:".$value['name']."<br><br>";
 				if(file_exists("./extensions/$extension->name/modules/$module/$view.php")) {
-			
-
 
 					include_once("./extensions/$extension->name/modules/$module/$view.php");
 					$extensionPHPFile++;
@@ -315,9 +344,8 @@ if( !in_array($module."_".$view, $early_exit) )
 		/*
 		* If no extension php file for requested file load the normal php file if it exists
 		*/
-		if( ($extensionPHPFile == 0) AND (file_exists("./modules/$module/$view.php")) ) 
-		{
-			include_once("./modules/$module/$view.php");
+		if( ($extensionPHPFile == 0) and  $my_path=GetCustomPath("$module/$view",'module') ){
+			include($my_path);
 		}
 
 /*
@@ -391,7 +419,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		*/
 		if($extensionMenu == "0") 
 		{
-			$smarty -> $smarty_output("../templates/default/menu.tpl");
+			$smarty -> $smarty_output(GetCustomPath('menu'));
 		}
 	}
 /*
@@ -425,7 +453,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		*/
 		if($extensionMain == "0") 
 		{
-			$smarty -> $smarty_output("../templates/default/main.tpl");
+			$smarty -> $smarty_output(GetCustomPath('main'));
 		}
     }
     
@@ -444,6 +472,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 	* --if = 0 after checking all extensions then show default
 	*/
 	$extensionTemplates = 0;
+	$my_tpl_path='';
 	foreach($config->extension as $extension)
 	{
 		/*
@@ -453,8 +482,8 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		{
 			if(file_exists("./extensions/$extension->name/templates/default/$module/$view.tpl")) 
 			{
-				$path = "../extensions/$extension->name/templates/default/$module/";
-				$tplDirectory = "extensions/$extension->name/";
+				$path 		= "../extensions/$extension->name/templates/default/$module/";
+				$my_tpl_path="../extensions/{$extension->name}/templates/default/$module/$view.tpl";
 				$extensionTemplates++;
 			}	
 		}
@@ -464,15 +493,17 @@ if($module == "export" OR $view == "export" OR $module == "api")
 	* TODO Note: if more than one extension has got a template for the requested file than thats trouble :(
 	* - we really need a better extensions system
 	*/
-	if( ($extensionTemplates == 0) AND (file_exists("./templates/default/$module/$view.tpl")) ) 
+
+	if( $extensionTemplates == 0 ) 
 	{ 
-				$path = "../templates/default/$module/";
-				$tplDirectory = "";
-				$extensionTemplates++;
+		if($my_tpl_path=GetCustomPath("$module/$view")){
+			$path = dirname($my_tpl_path).'/';
+			$extensionTemplates++;
+		}
 	}
 	
 	$smarty->assign("path",$path);
-	$smarty -> $smarty_output("../".$tplDirectory."templates/default/$module/$view.tpl");
+	$smarty -> $smarty_output($my_tpl_path);
 	
 	// If no smarty template - add message - onyl uncomment for dev - commented out for release
 	if ($extensionTemplates == 0 )
@@ -509,12 +540,15 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		*/
 		if($extensionFooter == 0) 
 		{
-			$smarty -> $smarty_output("../templates/default/footer.tpl");
+			$smarty -> $smarty_output(GetCustomPath('footer'));
 		}
 	
 	}
-	
+
 	
 /*
 * Footer - end 
 */
+
+
+
