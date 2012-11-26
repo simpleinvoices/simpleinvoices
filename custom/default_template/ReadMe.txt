@@ -1,0 +1,1 @@
+Any template file(s) placed here will override the SimpleInvoices default template file(s) located in /templates/default/

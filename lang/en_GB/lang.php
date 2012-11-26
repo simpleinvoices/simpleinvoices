@@ -573,4 +573,22 @@ $LANG['years'] = "years";//1
 $LANG['yes'] = "Yes";//1
 $LANG['your_reports'] = "Your reports";//1
 $LANG['zip'] = "Zip code";//1
+
+$LANG['title_module_index']			="Home";//
+$LANG['title_module_reports']		="Home / Reports";//
+$LANG['title_module_invoices']		="Money / Invoices";//
+$LANG['title_module_cron']			="Money / Recurence";//
+$LANG['title_module_payments']		="Money / Payments";//
+$LANG['title_module_billers']		="People / Billers";//
+$LANG['title_module_customers']		="People / Customers";//
+$LANG['title_module_user']			="People / Users";//
+$LANG['title_module_producs']		="Products";//
+$LANG['title_module_options']		="Settings";//
+$LANG['title_module_system_defaults']	="Settings / System Preferences";//
+$LANG['title_module_custom_fields']	="Settings / Custom Fields";//
+$LANG['title_module_tax_rates']		="Settings / Tax Rates";//
+$LANG['title_module_preferences']	="Settings / Invoice Preferences";//
+$LANG['title_module_payment_types']	="Settings / Payment Types";//
+$LANG['title_view_index']			="Dashboard";//
+
 ?>

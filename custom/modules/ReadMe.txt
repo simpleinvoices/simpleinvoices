@@ -1,0 +1,1 @@
+Any php module file(s) placed here will override the SimpleInvoices default module file(s)  located in /modules/
