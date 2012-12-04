@@ -346,7 +346,7 @@ class invoice {
                 TB_PREFIX . "invoice_items ii WHERE ii.invoice_id = iv.id) AS invoice_total,
                        (SELECT coalesce(SUM(ac_amount), 0) FROM " .
                 TB_PREFIX . "payment ap WHERE ap.ac_inv_id = iv.id) AS INV_PAID,
-                       (SELECT (coalesce(invoice_total,0) - coalesce(INV_PAID,0))) As owing,
+                       ROUND( (SELECT (coalesce(invoice_total,0) - coalesce(INV_PAID,0))) ,2) As owing,
                        DATE_FORMAT(date,'%Y-%m-%d') AS date,
                        (SELECT IF((owing = 0 OR owing < 0), 0, DateDiff(now(), date))) AS Age,
                        (SELECT (CASE   WHEN Age = 0 THEN ''
