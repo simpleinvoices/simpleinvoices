@@ -29,7 +29,7 @@
 			dataType: 'xml',
 			colModel : [
 				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : action_menu, sortable : false, align: 'center'},
-				{display: '{/literal}{$LANG.id}{literal}', name : 'index_name', width :15 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.id}{literal}', name : 'index_id', width :15 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.biller}{literal}', name : 'biller', width :20 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.customer}{literal}', name : 'customer', width :20 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.date_upper}{literal}', name : 'date', width : 15 * percentage_width, sortable : true, align: 'left'},
@@ -46,10 +46,11 @@
 				],
 			*/
 			searchitems : [
-				{display: '{/literal}{$LANG.invoice_number}{literal}', name : 'iv.id'},
+				{display: '{/literal}{$LANG.invoice_number}{literal}', name : 'iv.index_id'},
 				{display: '{/literal}{$LANG.biller}{literal}', name : 'b.name'},
 				{display: '{/literal}{$LANG.customer}{literal}', name : 'c.name', isdefault: true}
 				],
+
 			sortname: "{/literal}{$smarty.request.sortname|default:'index_id'}{literal}",
 			sortorder: "{/literal}{$smarty.request.sortorder|default:'desc'}{literal}",
 			usepager: true,
