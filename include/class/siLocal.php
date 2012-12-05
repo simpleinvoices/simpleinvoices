@@ -82,11 +82,19 @@ class siLocal
 			case "short":
 			    return $formatted_date->get(Zend_Date::DATE_SHORT,$locale);
 			    break;
+			case "month":
+			    return $formatted_date->get(Zend_Date::MONTH_NAME,$locale);
+			    break;
+			case "month_short":
+			    return $formatted_date->get(Zend_Date::MONTH_NAME_SHORT,$locale);
+			    break;
 			default:
 				return $formatted_date->get(Zend_Date::DATE_SHORT,$locale);
 		}
 		
 	}
+
+
 	/*
 	 * Function: number_formatted
 	 * Description: wrapper for php number_format
