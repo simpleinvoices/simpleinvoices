@@ -270,6 +270,130 @@ Work around IE/Win code size bug - courtesy Jesper, waffle.wootest.net  */
 * html code {
 	font-size:105%; }
 
+/* @group Si Reports
+------------------------------------------- */
+.si_report_title1{
+	color:#4B7296;
+	font-size: 15px;
+	font-weight: bold;
+	margin: 10px 0 20px 0;	
+	padding:3px;
+}
+
+.si_report_title2{
+	font-weight: bold;
+	border-bottom: 1px solid #EEE;
+	margin: 10px 0 15px 0;	
+	padding:5px;
+	color: #888;
+}
+
+.si_report_table{
+	border:1px solid #ddd;
+	border-width: 0 1px 0 0;
+	margin-bottom: 20px;
+}
+.si_report_table TD,
+.si_report_table TH{
+	text-align:right;
+	padding: 2px 5px 2px 10px;
+	border-left:1px solid #ddd;
+	border-top:1px solid #FAFAFA;
+	border-bottom:1px solid #ddd;
+	font-size:12px;
+}
+.si_report_table THEAD TH{
+	color: #666;
+	font-weight:bold;
+	background: #fafafa url(../../../../images/flexigrid/fhbg.gif) repeat-x bottom;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	border-top:1px solid #DDD;
+	border-bottom: 0px;
+	text-align: center;
+	vertical-align: middle;
+}
+.si_report_table TBODY TH{
+	color: #666;
+	font-weight:normal;
+}
+
+.si_report_table .tr_A{
+	background: #F7F7F7;
+}
+
+.si_report_table TFOOT TH,
+.si_report_table TFOOT TD{
+	color: #000;
+	font-weight:bold;
+	background: #F0F0F0 url(../../../../images/flexigrid/fhbg.gif) repeat-x bottom;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	border-bottom: 0;
+}
+.si_report_table .rate{
+	font-size: 9px;
+	color: #00b900;
+	border-left-width:0;
+	padding-left: 5px;
+	display: none;
+}
+.si_report_table .neg_rate{
+	color: #da100d;
+}
+
+.si_button_mini{
+	display: inline-block;
+	font-size: 9px;
+	margin: 1px 3px;
+	line-height: 9px;
+	color: #00703a;
+	padding: 2px 5px;
+	background: -moz-linear-gradient(
+		top,
+		#ffffff 0%,
+		#d6d6d6);
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#ffffff),
+		to(#d6d6d6));
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+	-moz-box-shadow:
+		1px 1px 1px rgba(000,000,000,0.1),
+		inset 0px 0px 3px rgba(255,255,255,1);
+	-webkit-box-shadow:
+		1px 1px 1px rgba(000,000,000,0.1),
+		inset 0px 0px 3px rgba(255,255,255,1);
+	box-shadow:
+		1px 1px 1px rgba(000,000,000,0.1),
+		inset 0px 0px 3px rgba(255,255,255,1);
+	text-shadow:
+		0px -1px 0px rgba(000,000,000,0.1),
+		0px 1px 0px rgba(255,255,255,1);
+}
+.si_button_mini:hover{
+	color: #000;
+	-moz-box-shadow:
+		1px 1px 1px rgba(000,000,000,0.1),
+		inset 0px 0px 3px rgba(255,255,255,1);
+	-webkit-box-shadow:
+		1px 1px 1px rgba(000,000,000,0.1),
+		inset 0px 0px 3px rgba(255,255,255,1);
+	box-shadow:
+		-1px -1px 1px rgba(000,000,000,0.1),
+		inset 0px 0px 3px rgba(255,255,255,1);
+	
+}
+/* @end */
+
+
+
+
+
+
 /* STRUCTURE
 -------------------------------------------------*/
 
