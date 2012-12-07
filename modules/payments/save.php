@@ -14,11 +14,11 @@ global $auth_session;
 if ( isset($_POST['process_payment']) ) {
 	
 	$payment = new payment();
-	$payment->ac_inv_id = $_POST['invoice_id'];
-	$payment->ac_amount = $_POST['ac_amount'];
-	$payment->ac_notes = $_POST['ac_notes'];
-	$payment->ac_date = $_POST['ac_date'];
-	$payment->ac_payment_type = $_POST['ac_payment_type'];
+	$payment->ac_inv_id 		= $_POST['invoice_id'];
+	$payment->ac_amount 		= $_POST['ac_amount'];
+	$payment->ac_notes			= $_POST['ac_notes'];
+	$payment->ac_date			= SqlDateWithTime($_POST['ac_date']);
+	$payment->ac_payment_type	= $_POST['ac_payment_type'];
 	$result = $payment->insert();
 	
 	$saved = !empty($result) ? "true" : "false";
