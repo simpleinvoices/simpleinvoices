@@ -1834,6 +1834,18 @@ function updateTaxRate() {
 	return $display_block;
 }
 
+//ensure we have a time, else add the current time to the date (to be sure invoices can be sorted by 'date desc')	
+function SqlDateWithTime($in_date){
+	list($date,$time)=explode(' ', $in_date);
+	if(!$time or $time == '00:00:00'){
+		$time=date('H:i:s');
+	}
+	$out_date="$date $time";
+	return $out_date;
+}
+
+
+
 function insertInvoice($type) {
 	global $dbh;
 	global $db_server;
@@ -1914,20 +1926,23 @@ function insertInvoice($type) {
 	//echo $sql;
     $pref_group=getPreference($_POST[preference_id]);
 
+	//also set the current time (if null or =00:00:00)
+	$clean_date=SqlDateWithTime($_POST['date']);
+
 	$sth= dbQuery($sql,
 		#':index_id', index::next('invoice',$pref_group[index_group],$_POST[biller_id]),
-		':index_id', index::next('invoice',$pref_group[index_group]),
-		':domain_id', $auth_session->domain_id,
-		':biller_id', $_POST[biller_id],
-		':customer_id', $_POST[customer_id],
-		':type', $type,
-		':preference_id', $_POST[preference_id],
-		':date', $_POST[date],
-		':note', $_POST[note],
-		':customField1', $_POST[customField1],
-		':customField2', $_POST[customField2],
-		':customField3', $_POST[customField3],
-		':customField4', $_POST[customField4]
+		':index_id',		index::next('invoice',$pref_group[index_group]),
+		':domain_id',		$auth_session->domain_id,
+		':biller_id',		$_POST[biller_id],
+		':customer_id', 	$_POST[customer_id],
+		':type', 			$type,
+		':preference_id',	$_POST[preference_id],
+		':date', 			$clean_date,
+		':note', 			$_POST[note],
+		':customField1',	$_POST[customField1],
+		':customField2',	$_POST[customField2],
+		':customField3',	$_POST[customField3],
+		':customField4',	$_POST[customField4]
 		);
 
     #index::increment('invoice',$pref_group[index_group],$_POST[biller_id]);
