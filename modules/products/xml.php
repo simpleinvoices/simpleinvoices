@@ -40,7 +40,7 @@ foreach ($products_all as $row) {
 		]]></cell>";		
 	
 	$xml .= "<cell><![CDATA[".$row['description']."]]></cell>";
-	$xml .= "<cell><![CDATA[".siLocal::number_clean($row['unit_price'])."]]></cell>";
+	$xml .= "<cell><![CDATA[".siLocal::number($row['unit_price'])."]]></cell>";
     if($defaults['inventory'] == '1')
     {
       	$xml .= "<cell><![CDATA[".siLocal::number_trim($row['quantity'])."]]></cell>";
