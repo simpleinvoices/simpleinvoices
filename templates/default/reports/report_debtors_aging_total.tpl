@@ -1,5 +1,3 @@
+<h3 class="si_report_title">Totals by Aging periods</h3>
 
-<h3>Totals by Aging periods</h3>
-<hr />
-
-  {$showReport}
+{include file=$path|cat:'inc_phpreport.tpl'}
