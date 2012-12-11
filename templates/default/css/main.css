@@ -1,10 +1,24 @@
 
+/*
+	SimpleInvoice Main CSS stylesheet.
+
+	by Soif
+
+	merged from all previous CSS files 
+	(work in Progress)
+ 	------------------------------------------
+	
+	Please dont remove the |* @group name *| (css block) |* end *| 
+	comments, used by the amazing CSSEdit application
+*/
+
+
+/* ------------------------------------------------------------ */
 
 /*
 Fix webkit 'black background on text input bug (mostly in Mac IDEs):
 http://stackoverflow.com/questions/10587916/black-input-backgrounds-cocoa-webview/10601156#10601156
 */
-
 INPUT[type=text] {
 	-webkit-appearance: none;
 }
@@ -12,7 +26,7 @@ INPUT[type=text] {
 
 
 
-/* Main CSS For SimpleInvoice
+/* Main CSS
 ##################################################################  */
 
 
@@ -26,6 +40,8 @@ html, body {
 	padding: 0;
 	margin: 0;
 	font-family: arial,sans-serif;
+}
+html{
 }
 /*
 Work around IE/Win code size bug - courtesy Jesper, waffle.wootest.net  
@@ -52,10 +68,6 @@ table {
 td, div {
 	font-family: verdana, arial, helvetica, sans-serif;
 	text-align: left;
-}
-
-table tr.shaded td {
-	background-color: #edf3fe;
 }
 
 .print_only {
@@ -141,6 +153,17 @@ pre {
 	color: #333;
 	font-size: 80%;
 }
+
+
+input, select, textarea {
+	background: #FFFFFF url(../../../images/common/text-bg.gif) repeat-x scroll center top;
+	border: 1px solid #CCCCCC;
+	margin: 1px;
+	padding: 0.2em 0.3em;
+}
+
+
+/*certainly unused... */
 .red {
 	color: #c00;
 }
@@ -148,16 +171,28 @@ pre {
 .blue {
 	color: #06c;
 }
-
 .green {
 	color: #390;
 }
 
+
+
+/*
 .highlight {
 	background-color: #ffc;
 }
 .double_underline{
+
 	border-bottom: 3px double #555;
+
+}
+
+
+div.notice {
+	background: #080;
+}
+div.alert {
+	background: red;
 }
 
 .floatLeft {
@@ -167,120 +202,8 @@ pre {
 .floatRight {
 	float: right;
 }
-
-div.notice {
-	background: #080;
-}
-
-div.alert {
-	background: red;
-}
-
-/* TYPOGRAPHY
--------------------------------------------------*/
-
-/*
-h1 {
-	font:bold 32px Arial, Helvetica, sans-serif;
-	letter-spacing:normal;
-	color:#000;
-	position:relative;
-	margin:5px 0 15px;
-	padding:0 0 5px; }
-*/
-
-h1.admin {
-	margin-bottom: 2px;
-}
-
-h2 {
-
-
-/*	font-size:18px;
-	font-family:helvetica;
-*/
-	margin: 0 0 15px;
-}
-
-/*	
-h3 {
-	font-size:1em;
-	text-align:center;
-	margin:4pt;
-}
-h4 {
-	font-size:11px;
-	margin:0; }
-
-h5 {
-	font-size:80%;
-	font-style:italic;
-	font-family:georgia;
-	font-weight:400;
-	text-align:left;
-	padding-top:3px;
-	color:#6FC0DE;
-	border-bottom:1px solid #C2DDE7;
-	margin:0 0 20px; }
-
-h5 strong {
-	color:#4F9DBA; }
-*/
-
-h1, h2, h3
-{
-color:#4B7296;
-} 
-
-
-
-
-/* @end */
-
-
-
-/* @group Structure
-------------------------------------------------------------------- */
-.welcome{
-	padding:10px;
-	margin-top:10px;
-	margin-bottom:10px;
-	background-color:#FFFCD9;
-	border: 1px solid #EEDE9C;
-	border-radius: 6px;
-	-moz-border-radius:6px;
-	-webkit-border-radius:6px;
-}
-
-.footer{
-	font-size: 11px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	margin: 0 auto;
-	width: 970px;
-}
-
-
-div#Container {
-	padding: 10px;
-	background: #FFFFFF;
-	border: 1px solid #ddd;
-	margin: -34px auto 0;
-	padding-top: 42px;
-	width: 970px;
-	z-index: 1;
-	-moz-box-shadow: 0 3px 5px #CCCCCC;
-	-webkit-box-shadow: 0 3px 5px #CCCCCC;
-	box-shadow: 0 3px 5px #CCCCCC;
-	-webkit-border-top-left-radius: 6px;
-	-webkit-border-top-right-radius: 6px;
-	-moz-border-radius-topleft: 6px;
-	-moz-border-radius-topright: 6px;
-	-webkit-border-bottom-left-radius: 6px;
-	-webkit-border-bottom-right-radius: 6px;
-	-moz-border-radius-bottomleft: 6px;
-	-moz-border-radius-bottomright: 6px;
-	border-radius: 6px;
+table tr.shaded td {
+	background-color: #edf3fe;
 }
 
 .ClearAll {
@@ -303,11 +226,6 @@ div#Container {
 	margin: 0;
 	padding: 0;
 }
-
-.col {
-	text-align: center;
-}
-
 body.lobby 
 .Full .bottom {
 	margin-bottom: 0;
@@ -315,184 +233,598 @@ body.lobby
 .Right .col {
 	padding: 0 0 0 9px;
 }
+
+*/
+.si_center{
+	text-align: center;
+}
+.si_right{
+	text-align: right;
+}
+
+
+
+/* TYPOGRAPHY  ------------------------------*/
+
+/*
+h1 {
+	font:bold 32px Arial, Helvetica, sans-serif;
+	letter-spacing:normal;
+	color:#000;
+	position:relative;
+	margin:5px 0 15px;
+	padding:0 0 5px; }
+*/
+
+h1.admin {
+	margin-bottom: 2px;
+}
+
+h2 {
+	margin: 0 0 15px;
+}
+
+h1, h2, h3{
+	color:#4B7296;
+} 
+
+
 /* @end */
 
-/* @group Top
+
+
+/* @group Si Wrap
 ------------------------------------------------------------------- */
+.si_wrap{
+	width: 990px;
+
+	margin: 0 auto;	
+}
+/* @end */
+
+
+
+
+/* @group Si Header
+------------------------------------------------------------------- */
+#si_header {
+	margin: 0px;
+	padding: 0px;
+	line-height: 240%;
+	text-align: right;
+	background: #878484;
+	color: #EEE;
+	border-bottom: 1px solid #666;
+	font-size: 11px;
+}
+#si_header A{
+	color: #CCF;	
+}
+
+#si_header .si_wrap {
+	padding-right: 30px;
+	text-align: right;
+}
+
+.gmailLoader {
+	background-color: #CF4342;
+	color: #fff;
+	top: 0px;
+	right: 0px;
+	position: fixed;
+	padding: 3px
+}
+/*
 .si_grey_background {
 	background: #e5e5e5;
 }
-.txt_right {
-	margin: 0 auto;
-	width: 970px;
-	text-align: right;
-	padding-top: 3px;
-	color: #EEE;
-}
+
+
 #top {
+	text-align: center;
+}
+
+.col {
+	text-align: center;
+}*/
+
+/* @end */
+
+
+
+/* @group Si Footer
+------------------------------------------------------------------- */
+#si_footer{
+	font-size: 10px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	color: #888;
+}
+#si_footer A{
+	color: #333;
+}
+#si_footer .si_wrap{
 	text-align: center;
 }
 /* @end */
 
-/* @group ui dialog
+
+
+
+/* @group Structure  (To SI-Fi)
+------------------------------------------------------------------- */
+div#Container {
+	padding: 10px;
+	margin-top: -54px;
+	padding-top: 62px;
+	padding-bottom: 30px;
+	background: #FFFFFF;
+	border: 1px solid #ddd;
+	z-index: 1;
+	-moz-box-shadow: 0 3px 5px #CCCCCC;
+	-webkit-box-shadow: 0 3px 5px #CCCCCC;
+	box-shadow: 0 3px 5px #CCCCCC;
+
+	-webkit-border-top-left-radius: 6px;
+	-webkit-border-top-right-radius: 6px;
+	-moz-border-radius-topleft: 6px;
+	-moz-border-radius-topright: 6px;
+	-webkit-border-bottom-left-radius: 6px;
+	-webkit-border-bottom-right-radius: 6px;
+	-moz-border-radius-bottomleft: 6px;
+	-moz-border-radius-bottomright: 6px;
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+/* @end */
+
+
+
+/* @group Si Buttons
+------------------------------------------------------------------- */
+.si_toolbar_top{
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+.si_toolbar{
+	text-align: center;
+}
+
+.si_toolbar_form{
+	margin: 10px 0;
+}
+
+.si_toolbar BUTTON,
+.si_toolbar A{
+	margin: 0 2px;
+	padding: 4px 7px;
+	display: inline-block;
+	line-height: 16px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #050505;
+	background: -moz-linear-gradient(
+		top,
+		#ffffff 0%,
+		#ebebeb 50%,
+		#dbdbdb 50%,
+		#b5b5b5);
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#ffffff),
+		color-stop(0.50, #ebebeb),
+		color-stop(0.50, #dbdbdb),
+		to(#b5b5b5));
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	border: 1px solid #949494;
+	-moz-box-shadow:
+		0px 1px 2px rgba(000,000,000,0.3),
+		inset 0px 0px 2px rgba(255,255,255,1);
+	-webkit-box-shadow:
+		0px 1px 2px rgba(000,000,000,0.3),
+		inset 0px 0px 2px rgba(255,255,255,1);
+	box-shadow:
+		0px 1px 2px rgba(000,000,000,0.3),
+		inset 0px 0px 2px rgba(255,255,255,1);
+	text-shadow:
+		0px -1px 0px rgba(000,000,000,0.2),
+		0px 1px 0px rgba(255,255,255,1);	
+}
+.si_toolbar BUTTON:hover,
+.si_toolbar A:hover{
+	color: #666;
+	-moz-box-shadow:
+		-1px -1px 1px rgba(000,000,000,0.2),
+		inset 0px 0px 2px rgba(255,255,255,1);
+	-webkit-box-shadow:
+		-1px -1px 1px rgba(000,000,000,0.2),
+		inset 0px 0px 2px rgba(255,255,255,1);
+	box-shadow:
+		-1px -1px 1px rgba(000,000,000,0.2),
+		inset 0px 0px 2px rgba(255,255,255,1);
+}
+
+.si_toolbar BUTTON IMG,
+.si_toolbar A IMG{
+	vertical-align: bottom;	
+	margin-right: 3px;
+}
+
+.si_toolbar .positive{
+	font-weight: bold;	
+}
+.si_toolbar .negative{
+	opacity: 0.7;
+}
+
+.si_toolbar_form BUTTON,
+.si_toolbar_form A{
+	padding: 8px 15px;
+	margin-left: 10px;
+}
+
+.si_toolbar_inform{
+	text-align: left;
+	margin: 10px 0;
+}
+.si_toolbar_inform BUTTON,
+.si_toolbar_inform A{
+	font-size: 10px;
+	padding: 2px 6px;
+	line-height: 15px;
+	background: #ddf;
+}
+.si_toolbar_inform IMG{
+	height: 15px;
+	
+}
+
+.si_toolbar_dialog A{
+	display: block;
+	margin: 0 0 9px 11px;
+	width: 220px;
+}
+
+/*
+*:first-child+html button[type] {
+	padding: 4px 10px 3px 7px;
+}
+
+.buttons button img, .buttons a img {
+	margin: 0 3px -3px 0 !important;
+	padding: 0;
+	border: none;
+	width: 16px;
+	height: 16px;
+}
+
+button:hover, 
+.buttons a:hover {
+	border: 1px solid #c2e1ef;
+	color: #336699;
+}
+
+.buttons a:active {
+	border: 1px solid #6299c5;
+	color: #fff;
+}
+.buttons a.positive:hover, 
+button.positive:hover {
+	border: 1px solid #C6D880;
+	color: #529214;
+}
+.buttons a.positive:active {
+	border: 1px solid #529214;
+	color: #fff;
+}
+.buttons a.negative:hover, 
+button.negative:hover {
+	border: 1px solid #fbc2c4;
+	color: #d12f19;
+}
+.buttons a.negative:active {
+	border: 1px solid #d12f19;
+	color: #fff;
+}
+*/
+
+/* old ---------- BUTTONS */
+
+
+/*
+table.buttons {
+	border-collapse: none;
+}
+.buttons a, .buttons button {
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	display: block;
+	float: left;
+	margin: 0 7px 0 0;
+	background: #FFFFFF url(../../../../images/common/text-bg-rotate.gif) repeat-x scroll center bottom;
+    border: 1px solid #ccc;
+	border-top: 1px solid #eee;
+	border-left: 1px solid #eee;
+	font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+	font-size: 100%;
+	line-height: 130%;
+	text-decoration: none;
+	font-weight: bold;
+	color: #565656;
+	cursor: pointer;
+    padding: 5px 10px 7px 7px;
+}
+.buttons button {
+	width: auto;
+	overflow: visible;
+	padding: 4px 10px 3px 7px;
+}
+.buttons button[type] {
+	padding: 5px 10px 5px 7px;
+    line-height: 17px;
+}
+*/
+
+/* @end */
+
+
+/* @group Si messages
+------------------------------------------------------------------- */
+/*.welcome{
+	padding:10px;
+	margin-top:10px;
+	margin-bottom:10px;
+	background-color:#FFFCD9;
+	border: 1px solid #EEDE9C;
+	border-radius: 6px;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+}*/
+
+.si_message,
+.si_message_ok,
+.si_message_error{
+	padding:50px 30px;
+	padding-left: 158px;	
+	margin: 50px 30px;
+	text-align: center;
+	border: 1px solid #ccc;
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	border-radius: 8px;
+	min-height: 58px;
+	font-size: 16px;
+	line-height: 140%;
+	-moz-box-shadow: 2px 2px 4px rgba(000,000,000,0.1);
+	-webkit-box-shadow: 2px 2px 4px rgba(000,000,000,0.1);
+	box-shadow: 2px 2px 4px rgba(000,000,000,0.1);
+}
+.si_message{
+	background-color: #d0fefe;
+	border: 1px solid #afd7fb;
+	padding:18px;
+	min-height: 0;
+	font-size: 12px;
+}
+
+.si_message_ok{
+	background: #c0fcbf url(../../../images/common/mess_ok.png) no-repeat 15px 10px;
+}
+
+.si_message_error{
+	border: 2px solid #900;
+	background: #ff1713 url(../../../images/common/mess_error.png) no-repeat 15px 20px;
+	color: #fff;
+}
+
+/* @end */
+
+
+
+/* @group Si Help Div
+------------------------------------------------------------------- */
+.si_help_div{
+	margin: 40px auto 10px auto;
+	text-align: center;
+	border: 1px solid #CCC;
+	padding: 6px 10px;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius: 6px;
+	width: 500px;
+	background-color: #fefdd0;
+	-moz-box-shadow: -2px -2px 4px rgba(000,000,000,0.1);
+	-webkit-box-shadow: -2px -2px 4px rgba(000,000,000,0.1);
+	box-shadow: -2px -2px 4px rgba(000,000,000,0.1);
+}
+.si_help_div A{
+	color: #666;
+}
+.si_help_div A:hover{
+	color: #000;
+}
+.si_help_div IMG{
+	vertical-align: bottom;
+	line-height: 24px;
+	margin-right: 2px;
+}
+/* @end */
+
+
+
+
+
+/* @group Si Error Line
 ------------------------------------------------------------------- */
 
-/*dialog*/
-.ui-dialog {
-	/*resets*/margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none;
-	font-family: Verdana, Arial, sans-serif;
-	font-size: 1.1em;
-	background: #ffffff url(../../../images/jquery-ui/ffffff_40x100_textures_01_flat_0.png) 0 0 repeat-x;
-	color: #222222;
-	border: 4px solid #dddddd;
-	position: relative;
+.si_error_line{
+	color: #fff;
+	padding: 2px 8px 2px 27px;
+	line-height: 16px;
+	text-align: center;
+	display: inline-block;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	background: #fc0004 url(../../../images/common/important.png) no-repeat 5px 2px;
+	
 }
-.ui-resizable-handle {
-	position: absolute;
-	font-size: 0.1px;
-	z-index: 99999;
+/* @end */
+
+
+
+/* @group ClueTip
+------------------------------------------------------------------- */
+A.cluetip IMG{
+	opacity: 0.8;
 }
-.ui-resizable .ui-resizable-handle {
-	display: block; 
+A.cluetip:hover IMG{
+	opacity: 1;
 }
-body .ui-resizable-disabled .ui-resizable-handle { display: none; } /* use 'body' to make it more specific (css order) */
-body .ui-resizable-autohide .ui-resizable-handle { display: none; } /* use 'body' to make it more specific (css order) */
-.ui-resizable-n { 
-	cursor: n-resize; 
-	height: 7px; 
-	width: 100%; 
-	top: -5px; 
-	left: 0px;  
+
+/* @end */
+
+
+
+
+/* @group Si Filters
+------------------------------------------------------------------- */
+.si_filters{
+	margin: 10px 3px 25px 3px;
+	padding: 0;
+	overflow: hidden;
 }
-.ui-resizable-s { 
-	cursor: s-resize; 
-	height: 7px; 
-	width: 100%; 
-	bottom: -5px; 
-	left: 0px; 
+.si_filters_links{
+	float: left;
+	display: inline-block;
+	overflow: hidden;
+	border: 1px solid #AAA;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	border-radius: 7px;
+	background: rgb(249,249,249);
+	background: -moz-linear-gradient(top,  rgba(249,249,249,1) 0%, rgba(224,224,224,1) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(249,249,249,1)), color-stop(100%,rgba(224,224,224,1)));
+	background: -webkit-linear-gradient(top,  rgba(249,249,249,1) 0%,rgba(224,224,224,1) 100%);
+	background: -o-linear-gradient(top,  rgba(249,249,249,1) 0%,rgba(224,224,224,1) 100%);
+	background: -ms-linear-gradient(top,  rgba(249,249,249,1) 0%,rgba(224,224,224,1) 100%);
+	background: linear-gradient(to bottom,  rgba(249,249,249,1) 0%,rgba(224,224,224,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', endColorstr='#e0e0e0',GradientType=0 );
 }
-.ui-resizable-e { 
-	cursor: e-resize; 
-	width: 7px; 
-	right: -5px; 
-	top: 0px; 
-	height: 100%; 
+.si_filters_links A{
+	float: left;
+	border-left: 1px solid #ccc;
+	display: inline-block;
+	margin: 0;
+	padding: 8px 10px;
+	min-width: 30px;
+	text-align: center;
+	color: #333;
+	text-shadow:
+		0px -1px 0px rgba(000,000,000,0.2),
+		0px 1px 0px rgba(255,255,255,1);
 }
-.ui-resizable-w { 
-	cursor: w-resize; 
-	width: 7px; 
-	left: -5px; 
-	top: 0px; 
-	height: 100%;
+.si_filters_links A.first{
+	border-left: none;
 }
-.ui-resizable-se { 
-	cursor: se-resize; 
-	width: 13px; 
-	height: 13px; 
-	right: 0px; 
-	bottom: 0px; 
-	background: url(../../../images/jquery-ui/222222_11x11_icon_resize_se.gif) no-repeat 0 0;
+.si_filters_links A.selected{
+	background: #F5F5F5;
+	color: #444;
+	text-shadow:
+		0px -1px 1px rgba(255,255,255,0.9),
+		0px 1px 0px rgba(255,255,255,1);
 }
-.ui-resizable-sw { 
-	cursor: sw-resize; 
-	width: 9px; 
-	height: 9px; 
-	left: 0px; 
-	bottom: 0px;  
+.si_filters_links IMG{
+	margin-right: 7px;
 }
-.ui-resizable-nw { 
-	cursor: nw-resize; 
-	width: 9px; 
-	height: 9px; 
-	left: 0px; 
-	top: 0px; 
+.si_filters_title{
+	color: #AAA;
+	line-height: 25px;
+	float: left;
+	margin: 0 10px;
 }
-.ui-resizable-ne { 
-	cursor: ne-resize; 
-	width: 9px; 
-	height: 9px; 
-	right: 0px; 
-	top: 0px; 
-}
-.ui-dialog-titlebar {
-	/*resets*/margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none;
-	padding: .5em 1.5em .5em 1em;
-	color: #555555;
-	background: #e6e6e6 url(../../../images/jquery-ui/e6e6e6_40x100_textures_02_glass_75.png) 0 50% repeat-x;
-	border-bottom: 1px solid #d3d3d3;
-	font-size: 1em;
-	font-weight: normal;
-	position: relative;
-}
-.ui-dialog-title {}
-.ui-dialog-titlebar-close {
-	/*resets*/
-	margin: 0; 
-	padding: 0; 
-	border: 0; 
-	outline: 0; 
-	line-height: 1.3; 
-	text-decoration: none; 
-	font-size: 100%; 
-	list-style: none;
-	background: url(../../../images/jquery-ui/888888_11x11_icon_close.gif) 0 0 no-repeat;
-	position: absolute;
-	right: 8px;
-	top: .7em;
-	width: 11px;
-	height: 11px;
-	z-index: 100;
-}
-.ui-dialog-titlebar-close-hover, .ui-dialog-titlebar-close:hover {
-	background: url(../../../images/jquery-ui/454545_11x11_icon_close.gif) 0 0 no-repeat;
-}
-.ui-dialog-titlebar-close:active {
-	background: url(../../../images/jquery-ui/222222_11x11_icon_close.gif) 0 0 no-repeat;
-}
-.ui-dialog-titlebar-close span {
-	display: none;
-}
-.ui-dialog-content {
-	/*resets*/margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none;
-	color: #222222;
-	padding: 1.5em 1.7em;	
-}
-.ui-dialog-buttonpane {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
+
+/* @end */
+
+
+
+/* @group Si Index
+------------------------------------------------------------------- */
+.si_index .si_toolbar,
+.si_index_reports .si_toolbar{
 	text-align: left;
-	border-top: 1px solid #dddddd;
-	background: #ffffff;
+	padding-left: 20px;
+	padding-bottom: 30px;
 }
-.ui-dialog-buttonpane button {
-	margin: .5em 0 .5em 8px;
-	color: #555555;
-	background: #e6e6e6 url(../../../images/jquery-ui/e6e6e6_40x100_textures_02_glass_75.png) 0 50% repeat-x;
-	font-size: 1em;
-	border: 1px solid #d3d3d3;
-	cursor: pointer;
-	padding: .2em .6em .3em .6em;
-	line-height: 1.4em;
+
+.si_index_help{
+	float: right;
+	padding: 15px;
+	background: #F5F5FF;
+	border: 1px solid #ddd;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	border-radius: 7px;
+	line-height: 150%;
 }
-.ui-dialog-buttonpane button:hover {
-	color: #212121;
-	background: #dadada url(../../../images/jquery-ui/dadada_40x100_textures_02_glass_75.png) 0 50% repeat-x;
-	border: 1px solid #999999;
-}
-.ui-dialog-buttonpane button:active {
-	color: #222222;
-	background: #ffffff url(../../../images/jquery-ui/ffffff_40x100_textures_02_glass_65.png) 0 50% repeat-x;
-	border: 1px solid #dddddd;
-}
-/* This file skins dialog */
-.ui-dialog.ui-draggable .ui-dialog-titlebar,
-.ui-dialog.ui-draggable .ui-dialog-titlebar {
-	cursor: move;
-}
+
+/* @end */
 
 
 
+/* @group Si Form
+------------------------------------------------------------------- */
+
+.si_form{
+	display: block;
+	margin: 20px auto;
+	width: 650px;
+	overflow: hidden;
+}
+#si_form_cron{
+	width: 880px;
+}
+.si_form TABLE{
+	border-top: 1px dotted #ddd;
+	margin: 0 auto;
+}
+.si_form_view TABLE{
+	border: 1px solid #ddd;
+}
+
+.si_form_view{
+	padding: 10px 5px;
+}
+
+.si_form TH,
+.si_form TD{
+	padding: 3px;
+	border-bottom: 1px dotted #ddd;
+}
+.si_form TBODY TH{
+	text-align: right;
+	white-space: nowrap;
+	font-weight: normal;
+	color: #777;
+	padding-left: 5px;
+	padding-right: 7px;
+	vertical-align: top;
+	line-height: 20px;
+}
+.si_form H4{
+	font-size: 12px;
+	color: #666;
+	padding: 0;
+	margin: 5px 0 5px 0;	
+}
+.si_form INPUT{
+	margin-left: 6px;
+	margin-right: 5px;	
+}
 
 /* @end */
 
@@ -500,69 +832,588 @@ body .ui-resizable-autohide .ui-resizable-handle { display: none; } /* use 'body
 
 
 
-/* @group Tabs
+/* @group Si Cust View
 ------------------------------------------------------------------- */
-
-.ui-wrapper { 
-	border: 1px solid #50A029; 
+#si_form_cust{
+	width: 100%
 }
-.ui-wrapper input,
-.ui-wrapper textarea { 
-	border: 0;
+#si_form_cust H4{
+	margin-bottom: 10px;
 }
 
-#tabmenu{
-	height:63px;
-	padding-top:10px;
-	padding-left:10px;
-	padding-right:10px;
-	margin: 0 auto;
-	width: 970px;
-	z-index:1;
-	position:relative;
+.si_cust_account{
+	float: right;
+	width: 300px;
 }
-.ui-tabs-hide { 
+.si_cust_invoices TABLE,
+.si_cust_account TABLE{
+	margin: 0;
+}
+.si_cust_card{
+	float: right;
+	width: 300px;
+	margin-top: 20px;
+}
+.si_cust_info{
+	float: left;
+	margin-right: 10px;
+}
+.si_clear{
+	clear: both;
+}
+.si_cust_notes{
+	margin: 20px 0 20px 0;
+}
+.si_cust_invoices TH,
+.si_cust_invoices TD{
+	text-align: right;
+	padding-left: 30px;
+	padding-right: 5px;
+}
+.si_cust_invoices TH{
+	color: #666;
+	font-weight: bold;
+	background: #fafafa url(../../../images/flexigrid/fhbg.gif) repeat-x bottom;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	border-top: 1px solid #DDD;
+	border-bottom: 0px;
+	text-align: center;
+	vertical-align: middle;
+}
+.si_cust_invoices TD{
+	border-left: 1px solid #eee;	
+}
+.si_cust_invoices TH.first{
+	border-left: none;
+}
+/* @end */
+
+
+
+
+/* @group Si Statement
+------------------------------------------------------------------- */
+.si_statement_info1{
+	float: left;
+}
+.si_statement_info2{
+	float: right;
+}
+/* @end */
+
+
+
+/* @group Si Form Search
+------------------------------------------------------------------- */
+.si_form_search{
+	margin-bottom: 30px;
+	border: 1px solid #ccc;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	background: #F5F5F5;
+	padding: 20px 0 13px 0;
+}
+/* @end */
+
+
+
+/* @group Si List
+------------------------------------------------------------------- */
+.si_list TABLE{
+	border: 1px solid #ddd;
+	border-top: none;
+	width: 100%;
+}
+.si_rep_head,
+.si_list THEAD TH {
+	color: #666;
+	font-weight: bold;
+	background: #fafafa url(../../../images/flexigrid/fhbg.gif) repeat-x bottom;
+	padding: 6px 5px;
+	border-top: 1px solid #DDD;
+	border-bottom: 0px;
+	vertical-align: middle;
+}
+.si_rep_td,
+.si_rep_th,
+.si_list  TD {
+	padding: 3px 5px;
+	border-bottom: 1px solid #DDD;
+}
+.si_rep_foot,
+.si_list TFOOT TH,
+.si_list TFOOT TD{
+	color: #000;
+	font-weight: bold;
+	background: #F0F0F0 url(../../../images/flexigrid/fhbg.gif) repeat-x bottom;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+/* @end */
+
+
+
+/* @group Si Reports
+------------------------------------------------------------------- */
+.si_report_title{
+	text-align: center;
+	font-size: 18px ;
+	padding: 0;
+	margin: 0;
+	margin-bottom: 15px;
+}
+.si_reports TABLE{
+	margin: auto;
+	border: 1px solid #ddd;
+	border-width: 0 1px ;
+}
+.body_view_report_sales_total .si_reports TABLE,
+.body_view_report_tax_total .si_reports TABLE{
+	border: none;
+}
+
+.si_reports{
+	overflow: hidden;
+	margin-bottom: 100px;
+}
+.si_rep_th{
+	color: #666;
+}
+.si_rep_td{
+	text-align: right;
+}
+.si_rep_foot{
+	padding: 3px 5px;	
+}
+.si_rep_big{
+	font-size: 28px;
+	padding: 10px 10px 10px 10px;
+}
+.si_rep_group_head{
+	background: #CCC;
+	padding: 5px 5px;
+	font-weight: bold;	
+}
+.si_rep_group_foot{
+	background: #F0F0F0;
+	padding: 2px 5px;
+	text-align: right;
+	border-bottom: 1px solid #888;
+}
+.si_rep_group_foot_total{
+	font-weight: bold;
+	
+}
+/* @end */
+
+
+
+/* @group Si Reports (sales by month)
+------------------------------------------- */
+
+.si_report_title1 {
+	color: #4B7296;
+	font-size: 15px;
+	font-weight: bold;
+	margin: 10px 0 20px 0;
+	padding: 3px;
+}
+
+.si_report_title2 {
+	font-weight: bold;
+	border-bottom: 1px solid #EEE;
+	margin: 10px 0 15px 0;
+	padding: 5px;
+	color: #888;
+}
+
+.si_report_table {
+	border: 1px solid #ddd;
+	border-width: 0 1px 0 0;
+	margin-bottom: 20px;
+}
+
+.si_report_table TD,
+.si_report_table TH {
+	text-align: right;
+	padding: 2px 5px 2px 10px;
+	border-left: 1px solid #ddd;
+	border-top: 1px solid #FAFAFA;
+	border-bottom: 1px solid #ddd;
+	font-size: 12px;
+}
+
+.si_report_table THEAD TH {
+	color: #666;
+	font-weight: bold;
+	background: #fafafa url(../../../images/flexigrid/fhbg.gif) repeat-x bottom;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	border-top: 1px solid #DDD;
+	border-bottom: 0px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.si_report_table TBODY TH {
+	color: #666;
+	font-weight: normal;
+}
+
+.si_report_table .tr_A {
+	background: #F7F7F7;
+}
+
+.si_report_table TFOOT TH,
+.si_report_table TFOOT TD {
+	color: #000;
+	font-weight: bold;
+	background: #F0F0F0 url(../../../images/flexigrid/fhbg.gif) repeat-x bottom;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	border-bottom: 0;
+}
+
+.si_report_table .rate {
+	font-size: 9px;
+	color: #00b900;
+	border-left-width: 0;
+	padding-left: 5px;
 	display: none;
 }
 
+.si_report_table .neg_rate {
+	color: #da100d;
+}
+
+.si_button_mini {
+	display: inline-block;
+	font-size: 9px;
+	margin: 1px 3px;
+	line-height: 9px;
+	color: #00703a;
+	padding: 2px 5px;
+	background: -moz-linear-gradient(
+		top,
+		#ffffff 0%,
+		#d6d6d6);
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#ffffff),
+		to(#d6d6d6));
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+	-moz-box-shadow: 1px 1px 1px rgba(000,000,000,0.1),
+		inset 0px 0px 3px rgba(255,255,255,1);
+	-webkit-box-shadow: 1px 1px 1px rgba(000,000,000,0.1),
+		inset 0px 0px 3px rgba(255,255,255,1);
+	box-shadow: 1px 1px 1px rgba(000,000,000,0.1),
+		inset 0px 0px 3px rgba(255,255,255,1);
+	text-shadow: 0px -1px 0px rgba(000,000,000,0.1),
+		0px 1px 0px rgba(255,255,255,1);
+}
+
+.si_button_mini:hover {
+	color: #000;
+	-moz-box-shadow: 1px 1px 1px rgba(000,000,000,0.1),
+		inset 0px 0px 3px rgba(255,255,255,1);
+	-webkit-box-shadow: 1px 1px 1px rgba(000,000,000,0.1),
+		inset 0px 0px 3px rgba(255,255,255,1);
+	box-shadow: -1px -1px 1px rgba(000,000,000,0.1),
+		inset 0px 0px 3px rgba(255,255,255,1);
+}
+
+/* @end */
+
+
+
+/* @group Si Invoice View
+------------------------------------------------------------------- */
+.si_invoice_view{
+	margin: auto;
+	width: 600px;
+}
+.si_invoice_view TH,
+.si_invoice_view TD{
+	padding: 3px 2px;
+}
+.si_invoice_view .tr_head TH{
+	text-align: left;
+	font-weight: bold;
+	color: #000;
+	width: 180px;
+}
+
+.si_invoice_view .tr_head TH,
+.si_invoice_view .tr_head TD{
+	padding-top: 10px;
+	border-bottom: 1px dashed #aaa;
+}
+.si_invoice_view TH{
+	text-align: right;
+	font-weight: normal;
+	padding-right: 10px;
+	color: #888;
+}
+.si_invoice_view .si_switch{
+	text-align: right;
+}
+.si_invoice_view_items .si_switch{
+	padding-right: 0;
+}
+
+.si_invoice_view_items{
+	width: 100%;
+	border-bottom: 1px solid #ddd;
+}
+.tr_head_items TH{
+	font-size: 11px;
+	text-align: left;
+	padding: 10px 10px 2px 0;
+}
+.si_invoice_view_items TD{
+	padding: 2px 10px 2px 0;
+	border-top: 1px solid #ddd;
+	white-space: nowrap;
+	vertical-align: top;
+}
+.si_invoice_view_items TD.td_product{
+	width: 80%;
+	white-space: normal;
+}
+.si_invoice_view_items .tr_desc TD{
+	border-top: none;
+	color: #666;
+	font-size: 11px;
+	padding: 0 0 5px 0;
+}
+.si_invoice_view_items .tr_custom TD{
+	border-top: none;	
+}
+.si_right{
+	text-align: right;
+}
+.tr_head_items .si_right,
+.si_invoice_view_items .si_right{
+	text-align: right;
+	padding: 2px 0 2px 10px;
+}
+.si_invoice_view_items .si_quantity{
+	text-align: right;
+}
+.si_invoice_view_custom_items{
+	width: 100%;
+	margin-bottom: 15px;
+}
+.si_invoice_view_custom_items TH,
+.si_invoice_view_custom_items TD{
+	font-size: 11px;
+	color: #666;
+	border-top: none;
+	padding: 1px 3px;
+}
+.si_invoice_view_custom_items TH{
+	color: #888;
+	text-align: right;
+	width: auto;
+	min-width: auto;
+	padding-left: 15px;
+	padding-right: 8px;
+	white-space: nowrap;
+}
+.si_invoice_view_custom_items TD{
+	width: 30%;
+}
+
+.si_invoice_view .tr_notes TD{
+	padding-bottom: 20px;
+}
+
+.si_invoice_view .tr_total TD{
+	font-weight: bold;
+}
+.si_invoice_account{
+	overflow: hidden;
+	display: inline-block;
+	margin: 0 auto;
+	margin-top: 60px;
+}
+.si_invoice_account H4{
+	font-size: 13px;
+	text-align: center;
+	padding: 0;
+	margin: 0 0 7px 0;
+	color: #888;
+	font-weight: bold;
+}
+.si_invoice_account H5{
+	font-size: 12px;
+	font-weight: bold;
+	padding: 0 0 8px 0;
+	margin: 0;
 	
+}
+.si_invoice_account DIV{
+	float: left;
+	border: 1px solid #ccc;
+	height: 70px;
+	padding: 10px;
+	margin-right: 10px;
+}
+
+.si_invoice_account  TH,
+.si_invoice_account  TD{
+	padding: 2px 15px;
+	text-align: right;
+}
+.si_invoice_account  TH{
+	font-weight: normal;
+	color: #666;
+	text-align: center;
+}
+/* @end */
+
+
+
+/* @group Si Invoice Itemised + Total
+------------------------------------------------------------------- */
+A.si_hide,
+.si_hide{
+	display: none;
+}
+
+.si_invoice_form{
+	display: block;
+	margin: 0 auto;
+	width: 650px;
+}
+.si_invoice_top,
+.si_invoice_bot {
+	margin-bottom: 10px;
+}
+.si_invoice_bot{
+	width: 100%;
+}
+.si_invoice_top TH,
+.si_invoice_bot TH{
+	color: #666;
+	text-align: right;
+	font-weight: normal;
+	padding: 7px 15px 7px 0;
+	width: 160px;
+}
+.si_invoice_total TH{
+	width: auto;
+	text-align: left;
+	padding-bottom: 2px;
+}
+.si_invoice_total TD{
+	padding-bottom: 10px;
+}
+.si_invoice_items THEAD TD{
+	font-size: 10px;
+	color: #888;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 3px;
+}
+.si_invoice_items TD{
+	padding: 2px 8px;
+	border-bottom: 1px dotted #ddd;
+}
+.si_invoice_items .tr_A{
+	background: #F6F6F6;
+}
+
+.si_invoice_items .details TEXTAREA{
+	width: 100%;
+	font-size: 10px;
+	color:  #555;
+}
+TD.si_invoice_notes{
+	color: #666;
+	margin-bottom: 3px;
+	padding: 0;
+	padding-bottom: 10px;
+}
+.si_invoice_notes H5{
+	padding: 0;
+	margin: 0 0 4px 0;
+	font-size: 12px;
+	font-weight: normal;
+}
+div.wysiwyg input{
+	width: 600px;
+	background: red;
+}
+
+/* @end */
+
+
+
+/* @group Tabs (To SI-Fi)
+------------------------------------------------------------------- */
+#tabmenu{
+	height:83px;
+	padding-top:15px;
+	padding-left:10px;
+	padding-right:10px;
+	z-index:1;
+	position:relative;
+	overflow: hidden;
+}
+#si_tab_settings{
+	padding-right: 20px;
+	float: right;
+}
+
+.subnav {
+	padding-top: 10px;
+}	
 .subnav li{
 	display: inline;
 	height:25px;
 	list-style-type: none;
-	
 	padding-right: 20px;
 }
 
-.menu_setting{
-	padding-right: 20px;
-	float:right;
+
+
+#tabmenu .subnav .active{
+	font-weight:bold;
+	-moz-border-radius:9px;
+	-webkit-border-radius:9px;
+    border-radius: 9px;
+	background-color:#D54E21;
+	margin-bottom:10px;
+	margin-top:10px;
+	padding:7px;
 }
 
-.top_menu {
-	margin: 0pt;
-	padding: 0pt;
-	padding-top: 4px;
-	padding-bottom: 4px;
-	text-align: right;
-	padding-right: 30px;
-	height: 21px;
-	background: #878484;
-	color: #EEE;
+#tabmenu .subnav a.active{
+	color:#fff;
 }
 
-.settings {
+#tabmenu .subnav .active_subpage{
+    background-color:#878484;
+}
+
+#tabmenu .subnav a.active_subpage{
+    color:#fff;
+    margin-left:-19px;
+}
+
+/*.settings {
 	float: right;
 	margin-top: 10px;
 	padding-right: 30px;
-}
+}*/
 
-.ui-tabs-hide {
-	display: none;
-}
-
-
-#tabs_customer .anchors a {
+/*#tabs_customer .anchors a {
 	background-color: #fff;
 	margin-top: 2px;
 	padding-top: 6px;
@@ -591,15 +1442,34 @@ padding-left;0px;
 
 #tabs_customer {
 	border-bottom: 0px #efefef solid;
+}*/
+
+
+.ui-wrapper { 
+	border: 1px solid #50A029; 
+}
+.ui-wrapper input,
+.ui-wrapper textarea { 
+	border: 0;
 }
 
+.ui-tabs-hide { 
+	display: none;
+}
+
+
+
 @media projection, screen { /* Use class for showing/hiding tab content, so that visibility can be better controlled in different media types... */
+
     .ui-tabs-hide {
         display: none !important;
     }
 }
 
+
+
 /* Hide useless elements in print layouts... */
+
 @media print {
     .ui-tabs-nav {
         display: none;
@@ -611,6 +1481,7 @@ padding-left;0px;
     font-family: "Trebuchet MS", Trebuchet, Verdana, Helvetica, Arial, sans-serif;
     font-size: 12px;
 }
+
 .ui-tabs-nav {
 	font-size:14px;
     list-style: none;
@@ -618,24 +1489,29 @@ padding-left;0px;
     padding: 0 0 0 4px;
     padding-left:20px;
 }
+
 .ui-tabs-nav:after { 
 /* clearing without presentational markup, IE gets extra treatment */
     display: block;
     clear: both;
     content: " ";
 }
+
 .ui-tabs-nav li {
+
     list-style-type: none; 
     float: left;
     margin: 0 0 0 2px;
     font-weight: bold;
 }
+
 .ui-tabs-nav a, .ui-tabs-nav a span {
     float: left; /* fixes dir=ltr problem and other quirks IE */
     padding: 0 12px;
 	color:#21759B;
 	background:#ebebeb;
 }
+
 .ui-tabs-nav a {
     margin: 5px 0 0; /* position: relative makes opacity fail for disabled tab in IE */
     padding-left: 5px;
@@ -644,11 +1520,9 @@ padding-left;0px;
     white-space: nowrap; /* @ IE 6 */
     outline: 0; /* @ Firefox, prevent dotted border after click */    
 }
-.ui-tabs-nav a:link, .ui-tabs-nav a:visited {
-/*    color: #fff;
-**/
-}
+
 .ui-tabs-nav .ui-tabs-selected a {
+
     position: relative;
     top: 1px;
     margin-top: 0;
@@ -671,6 +1545,7 @@ padding-left;0px;
 	border-right-width:1px;
 	border-left-width:1px;
 }
+
 .ui-tabs-nav a span {
     padding-top: 1px;
     padding-right: 0;
@@ -680,6 +1555,7 @@ padding-left;0px;
 	color:#21759B;
 	background:#ebebeb;
 }
+
 .ui-tabs-nav .ui-tabs-selected a span {
 	padding-right:3px;
     padding-top: 0;
@@ -688,184 +1564,73 @@ padding-left;0px;
 	background:#fff;
 	color:#555555;
 }
+
 .ui-tabs-nav .ui-tabs-selected a:link, .ui-tabs-nav .ui-tabs-selected a:visited,
-.ui-tabs-nav .ui-tabs-disabled a:link, .ui-tabs-nav .ui-tabs-disabled a:visited { /* @ Opera, use pseudo classes otherwise it confuses cursor... */
+
+.ui-tabs-nav .ui-tabs-disabled a:link, 
+.ui-tabs-nav .ui-tabs-disabled a:visited { 
+/* @ Opera, use pseudo classes otherwise it confuses cursor... */
     cursor: text;
 }
-.ui-tabs-nav a:hover, .ui-tabs-nav a:focus, .ui-tabs-nav a:active,
-.ui-tabs-nav .ui-tabs-unselect a:hover, .ui-tabs-nav .ui-tabs-unselect a:focus, .ui-tabs-nav .ui-tabs-unselect a:active { /* @ Opera, we need to be explicit again here now... */
+
+.ui-tabs-nav a:hover, 
+.ui-tabs-nav a:focus, 
+.ui-tabs-nav a:active,
+.ui-tabs-nav .ui-tabs-unselect a:hover, 
+.ui-tabs-nav .ui-tabs-unselect a:focus, 
+.ui-tabs-nav .ui-tabs-unselect a:active { 
+/* @ Opera, we need to be explicit again here now... */
     cursor: pointer;
 }
+
 .ui-tabs-disabled {
     opacity: .4;
     filter: alpha(opacity=40);
 }
-.ui-tabs-nav .ui-tabs-disabled a:link, .ui-tabs-nav .ui-tabs-disabled a:visited {
+
+.ui-tabs-nav .ui-tabs-disabled a:link, 
+.ui-tabs-nav .ui-tabs-disabled a:visited{
     color: #000;
 }
 
 .ui-tabs-panel a {
 	color: #D54E21;
 }
+
 .ui-tabs-panel {
     z-index:4;
 	clear:both;
 	color: #D54E21;
-
-/*    background: #fff;*/ /* declare background color for container to avoid distorted fonts in IE while fading */
 }
-/*.ui-tabs-loading em {
+
+/*
+.ui-tabs-loading em {
     padding: 0 0 0 20px;
     background: url(loading.gif) no-repeat 0 50%;
-}*/
+}
+*/
+
 
 /* Additional IE specific bug fixes... */
-* html .ui-tabs-nav { /* auto clear @ IE 6 & IE 7 Quirks Mode */
+
+* html .ui-tabs-nav { 
+/* auto clear @ IE 6 & IE 7 Quirks Mode */
+    display: inline-block;
+
+}
+
+*:first-child+html .ui-tabs-nav  { 
+/* auto clear @ IE 7 Standards Mode - do not group selectors, otherwise IE 6 will ignore complete rule (because of the unknown + combinator)... */
     display: inline-block;
 }
-*:first-child+html .ui-tabs-nav  { /* auto clear @ IE 7 Standards Mode - do not group selectors, otherwise IE 6 will ignore complete rule (because of the unknown + combinator)... */
-    display: inline-block;
-}
 
-.active{
-	font-weight:bold;
-	-moz-border-radius:9px;
-	-webkit-border-radius:9px;
-    border-radius: 9px;
-	
-	background-color:#D54E21;
-	margin-bottom:10px;
-	margin-top:10px;
-	padding:7px;
-    
-}
-a.active{
-	color:#fff;
-}
 
-.active_subpage{
-    background-color:#878484;
-}
-
-a.active_subpage{
-    color:#fff;
-    margin-left:-19px;
-}
 /* @end */
 
 
 
 
-
-/* @group Buttons
-------------------------------------------------------------------- */
-
-
-/* BUTTONS */
-
-table.buttons {
-	border-collapse: none;
-}
-
-.buttons a, .buttons button {
-	-moz-border-radius: 6px;
-	-webkit-border-radius: 6px;
-	border-radius: 6px;
-	display: block;
-	float: left;
-	margin: 0 7px 0 0;
-	background: #FFFFFF url(../../../../images/common/text-bg-rotate.gif) repeat-x scroll center bottom;
-    border: 1px solid #ccc;
-	border-top: 1px solid #eee;
-	border-left: 1px solid #eee;
-	font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
-	font-size: 100%;
-	line-height: 130%;
-	text-decoration: none;
-	font-weight: bold;
-	color: #565656;
-	cursor: pointer;
-
-/* OLD Links */
-    padding: 5px 10px 7px 7px;
-}
-
-.buttons button {
-	width: auto;
-	overflow: visible;
-	padding: 4px 10px 3px 7px;
-}
-
-.buttons button[type] {
-	padding: 5px 10px 5px 7px;
-/* Firefox */
-    line-height: 17px;
-/* Safari */
-}
-
-*:first-child+html button[type] {
-	padding: 4px 10px 3px 7px;
-}
-
-.buttons button img, .buttons a img {
-	margin: 0 3px -3px 0 !important;
-	padding: 0;
-	border: none;
-	width: 16px;
-	height: 16px;
-}
-
-/* STANDARD */
-
-button:hover, 
-.buttons a:hover {
-	border: 1px solid #c2e1ef;
-	color: #336699;
-}
-
-.buttons a:active {
-	border: 1px solid #6299c5;
-	color: #fff;
-}
-
-/* POSITIVE */
-
-button.positive, 
-.buttons a.positive {
-}
-
-.buttons a.positive:hover, 
-button.positive:hover {
-	border: 1px solid #C6D880;
-	color: #529214;
-}
-
-.buttons a.positive:active {
-	border: 1px solid #529214;
-	color: #fff;
-}
-
-/* NEGATIVE */
-
-.buttons a.negative, 
-button.negative {
-
-
-}
-
-.buttons a.negative:hover, 
-button.negative:hover {
-	border: 1px solid #fbc2c4;
-	color: #d12f19;
-}
-
-.buttons a.negative:active {
-	border: 1px solid #d12f19;
-	color: #fff;
-}
-/* @end */
-
-/* @group Form validation errors
+/* @group formError (to SI-fi)
 ------------------------------------------------------------------- */
 
 .formError {
@@ -975,135 +1740,162 @@ button.negative:hover {
 
 /* @end */
 
-/* @group Si Reports
-------------------------------------------- */
 
-.si_report_title1 {
-	color: #4B7296;
-	font-size: 15px;
-	font-weight: bold;
-	margin: 10px 0 20px 0;
-	padding: 3px;
+
+
+/* @group Si Page Login
+------------------------------------------------------------------- */
+.body_module_auth .si_wrap{
+	width: 500px;
 }
-
-.si_report_title2 {
-	font-weight: bold;
-	border-bottom: 1px solid #EEE;
-	margin: 10px 0 15px 0;
-	padding: 5px;
-	color: #888;
+.body_module_auth TH{
+	font-size: 14px;
 }
+.si_box{
+	margin: 110px auto 10px;
+	padding:20px 20px 30px 20px;
+	border:10px solid #bbb;
+	text-align:left;
+	background:#fff;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+    border-radius: 10px;
+	-moz-box-shadow: 6px 6px 15px rgba(0,0,0,0.4);
+	-webkit-box-shadow: 6px 6px 15px rgba(0,0,0,0.4);
+	box-shadow: 6px 6px 15px rgba(0,0,0,0.4);
+	overflow: hidden;
+	position: relative;
 
-.si_report_table {
-	border: 1px solid #ddd;
-	border-width: 0 1px 0 0;
-	margin-bottom: 20px;
+background: rgb(249,249,249);
+background: -moz-linear-gradient(top,  rgba(249,249,249,1) 0%, rgba(234,234,234,1) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(249,249,249,1)), color-stop(100%,rgba(234,234,234,1)));
+background: -webkit-linear-gradient(top,  rgba(249,249,249,1) 0%,rgba(234,234,234,1) 100%);
+background: -o-linear-gradient(top,  rgba(249,249,249,1) 0%,rgba(234,234,234,1) 100%);
+background: -ms-linear-gradient(top,  rgba(249,249,249,1) 0%,rgba(234,234,234,1) 100%);
+background: linear-gradient(to bottom,  rgba(249,249,249,1) 0%,rgba(234,234,234,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', endColorstr='#eaeaea',GradientType=0 );
+
+
 }
-
-.si_report_table TD,
-.si_report_table TH {
-	text-align: right;
-	padding: 2px 5px 2px 10px;
-	border-left: 1px solid #ddd;
-	border-top: 1px solid #FAFAFA;
-	border-bottom: 1px solid #ddd;
-	font-size: 12px;
-}
-
-.si_report_table THEAD TH {
-	color: #666;
-	font-weight: bold;
-	background: #fafafa url(../../../../images/flexigrid/fhbg.gif) repeat-x bottom;
-	padding-top: 6px;
-	padding-bottom: 6px;
-	border-top: 1px solid #DDD;
-	border-bottom: 0px;
-	text-align: center;
-	vertical-align: middle;
-}
-
-.si_report_table TBODY TH {
-	color: #666;
+.si_box TD,
+.si_box TH{
 	font-weight: normal;
+	padding: 6px 0;
+	color: #666;
+}
+.si_box TH{
+	text-align: right;
+	padding-right: 6px;	
 }
 
-.si_report_table .tr_A {
-	background: #F7F7F7;
+.si_box TABLE input {
+	font-size:20px;
+	width: 240px;
+	padding: 5px 6px;
 }
 
-.si_report_table TFOOT TH,
-.si_report_table TFOOT TD {
-	color: #000;
-	font-weight: bold;
-	background: #F0F0F0 url(../../../../images/flexigrid/fhbg.gif) repeat-x bottom;
-	padding-top: 4px;
-	padding-bottom: 4px;
-	border-bottom: 0;
+.si_box h1{
+	font-size: 24px;
+	text-align: center;
+	padding: 0;
+	margin: 0 0 30px 0; 
+	
 }
 
-.si_report_table .rate {
-	font-size: 9px;
-	color: #00b900;
-	border-left-width: 0;
-	padding-left: 5px;
-	display: none;
+.si_box_auth_pad{
+	padding-right: 50px;	
 }
 
-.si_report_table .neg_rate {
-	color: #da100d;
+.si_box_auth_pad TABLE{
+	float: right;
+	margin-bottom: 1px;
 }
 
-.si_button_mini {
-	display: inline-block;
-	font-size: 9px;
-	margin: 1px 3px;
-	line-height: 9px;
-	color: #00703a;
-	padding: 2px 5px;
-	background: -moz-linear-gradient(
-		top,
-		#ffffff 0%,
-		#d6d6d6);
-	background: -webkit-gradient(
-		linear, left top, left bottom, 
-		from(#ffffff),
-		to(#d6d6d6));
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
-	border: 1px solid #ccc;
-	-moz-box-shadow: 1px 1px 1px rgba(000,000,000,0.1),
-		inset 0px 0px 3px rgba(255,255,255,1);
-	-webkit-box-shadow: 1px 1px 1px rgba(000,000,000,0.1),
-		inset 0px 0px 3px rgba(255,255,255,1);
-	box-shadow: 1px 1px 1px rgba(000,000,000,0.1),
-		inset 0px 0px 3px rgba(255,255,255,1);
-	text-shadow: 0px -1px 0px rgba(000,000,000,0.1),
-		0px 1px 0px rgba(255,255,255,1);
+.si_box_auth_pad .si_toolbar{
+	clear: both;
+	text-align: right;
 }
 
-.si_button_mini:hover {
-	color: #000;
-	-moz-box-shadow: 1px 1px 1px rgba(000,000,000,0.1),
-		inset 0px 0px 3px rgba(255,255,255,1);
-	-webkit-box-shadow: 1px 1px 1px rgba(000,000,000,0.1),
-		inset 0px 0px 3px rgba(255,255,255,1);
-	box-shadow: -1px -1px 1px rgba(000,000,000,0.1),
-		inset 0px 0px 3px rgba(255,255,255,1);
+.body_module_auth .si_toolbar BUTTON{
+	padding: 8px 20px;
+	margin: 0 0 0 10px;
+	font-size: 15px;
+}
+
+.body_module_auth .td_error{
+	text-align: center;
+}
+.body_module_auth .si_error_line{
+	margin-bottom: 5px;
 }
 
 /* @end */
 
+
+
+/* @group ToSort
+------------------------------------------------------------------- */
+.note, .note-edit {
+	width: 100%
+}
+
+
+.title,.mytitle {
+	text-align: center;
+	cursor: pointer;
+	border: 1px solid #CCC;
+	margin-top: 0.5em;
+	padding: 0.1em;
+}
+
+
+.validation_alert {
+	font-weight: 700;
+	color: #FFF;
+	background-color: red;
+	padding: 10px;
+}
+
+.on1 .title,.on .mytitle {
+	background-color: #E4EFC7;
+}
+
+.off1 .title,.off .mytitle {
+	background-color: #E0E0E0;
+}
+
+.content,
+.mycontent {
+	background-color: #FFF;
+	border: 1px solid silver;
+	border-top-width: 0;
+	padding: 0.1em;
+}
+
+
+
+/* @end */
+
+
+
+
+
+
+
+
+
+/* SEEMS UNUSED
+##################################################################  */
+
+
+
+
+
+
+
 /* @group Sortable Tables
 ------------------------------------------------------------------- */
 
-table.manage {
-	font-size: 12px;
-}
-
-td.account {
-	font-size: 12px;
-}
 
 /* Tablesorter table styling - end td for the manage screen - start */
 td.index_table {
@@ -1114,6 +1906,13 @@ td.index_table {
 	text-decoration: none;
 	border-color: #FFF;
 	border-style: none;
+}
+table.manage {
+	font-size: 12px;
+}
+
+td.account {
+	font-size: 12px;
 }
 
 td.columnleft {
@@ -1126,9 +1925,6 @@ td.details_screen {
 }
 
 /*
- * For manage tables and no javascript and list of invoices in view customer screen
- * */
-
 table.sortable {
 	border-spacing: 0;
 	border: 1px solid #fff;
@@ -1153,11 +1949,6 @@ th.sortable_rt {
 	padding: 2px;
 }
 
-
-/*
- * left rigth - define text align for tables here
- * */
-
 .align_right {
 	text-align: right;
 }
@@ -1170,7 +1961,12 @@ th.sortable_rt {
 .align_left {
 	text-align: left;
 }
+
+*/
 /* @end */
+
+
+
 
 /* @group Accordian
 ------------------------------------------------------------------- */
@@ -1216,6 +2012,9 @@ th.sortable_rt {
 
 /* @end */
 
+
+
+
 /* @group Credits.html
 ------------------------------------------------------------------- */
 .credit_names li {
@@ -1233,77 +2032,9 @@ th.sortable_rt {
 }
 /* @end */
 
-/* @group ToSort
-------------------------------------------------------------------- */
-.note, .note-edit {
-	width: 100%
-}
-img.action {
-	vertical-align: bottom;
-}
-
-
-.title,.mytitle {
-	text-align: center;
-	cursor: pointer;
-	border: 1px solid #CCC;
-	margin-top: 0.5em;
-	padding: 0.1em;
-}
-
-
-.validation_alert {
-	font-weight: 700;
-	color: #FFF;
-	background-color: red;
-	padding: 10px;
-}
-
-.on1 .title,.on .mytitle {
-	background-color: #E4EFC7;
-}
-
-.off1 .title,.off .mytitle {
-	background-color: #E0E0E0;
-}
-
-.content,.mycontent {
-	background-color: #FFF;
-	border: 1px solid silver;
-	border-top-width: 0;
-	padding: 0.1em;
-}
-
-
-.gmailLoader {
-	background-color: #CF4342;
-	color: #fff;
-	top: 0px;
-	right: 0px;
-	position: fixed;
-	padding: 3px
-}
-
-/* @end */
-
-
-
-
-
-
-/* EXTERNAL LIBRARIES
-##################################################################  */
-
 /* @group Doukiwki
 ------------------------------------------------------------------- */
 /* extjs/doukiwki style input boes */
-
-input, select, textarea {
-	background: #FFFFFF url(../../../../images/common/text-bg.gif) repeat-x scroll center top;
-	border: 1px solid #CCCCCC;
-	margin: 1px;
-	padding: 0.2em 0.3em;
-}
 
 .xxbutton {
 	background: #FFFFFF url(../../../../images/common/text-bg-rotate.gif) repeat-x scroll center bottom;
@@ -1335,11 +2066,9 @@ xbutton_img {
 /* @end */
 
 
-
-
 /* @group PhpReports
 ------------------------------------------------------------------- */
-.HEADER {
+/*.HEADER {
 	background-color: #204040;
 	color		: #FFFFC4;
 	font-size	: 12px;
@@ -1362,8 +2091,6 @@ xbutton_img {
 	color		: #300020;
 }
 
-
-/* Old PHP Reports CSS  - uses class="reportTable" */
 
 table.reportTable {
 	border: 1px solid #000;
@@ -1388,8 +2115,6 @@ table.reportTable td.PAGE_LAYER {
 	background-color: #ccc;
 	border-color: #000;
 }
-
-/* New PHPreports CSS - uses ID="pg2" or "pg1"  - Although HEADER and FOOTER are used now instead of PAGE_LAYER, it is left as is for compatibility */
 
 table#pg1 {
 	border: 1px solid #000;
@@ -1447,7 +2172,208 @@ table#pg2 td.PAGE_LAYER {
 table#pg2 td.GROUP_LAYER {
 	background-color: #fff;
 	border-color: #000;
+}*/
+/* @end */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* EXTERNAL LIBRARIES
+##################################################################  */
+
+
+
+
+
+/* @group ui dialog
+------------------------------------------------------------------- */
+
+/*dialog*/
+
+.ui-dialog {
+
+	/*resets*/margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none;
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 1.1em;
+	background: #ffffff url(../../../images/jquery-ui/ffffff_40x100_textures_01_flat_0.png) 0 0 repeat-x;
+	color: #222222;
+	border: 4px solid #dddddd;
+	position: relative;
 }
+
+.ui-resizable-handle {
+	position: absolute;
+	font-size: 0.1px;
+	z-index: 99999;
+}
+
+.ui-resizable .ui-resizable-handle {
+	display: block; 
+}
+
+body .ui-resizable-disabled .ui-resizable-handle { display: none; } /* use 'body' to make it more specific (css order) */
+body .ui-resizable-autohide .ui-resizable-handle { display: none; } /* use 'body' to make it more specific (css order) */
+.ui-resizable-n { 
+	cursor: n-resize; 
+	height: 7px; 
+	width: 100%; 
+	top: -5px; 
+	left: 0px;  
+}
+
+.ui-resizable-s { 
+	cursor: s-resize; 
+	height: 7px; 
+	width: 100%; 
+	bottom: -5px; 
+	left: 0px; 
+}
+
+.ui-resizable-e { 
+	cursor: e-resize; 
+	width: 7px; 
+	right: -5px; 
+	top: 0px; 
+	height: 100%; 
+}
+
+.ui-resizable-w { 
+	cursor: w-resize; 
+	width: 7px; 
+	left: -5px; 
+	top: 0px; 
+	height: 100%;
+}
+
+.ui-resizable-se { 
+	cursor: se-resize; 
+	width: 13px; 
+	height: 13px; 
+	right: 0px; 
+	bottom: 0px; 
+	background: url(../../../images/jquery-ui/222222_11x11_icon_resize_se.gif) no-repeat 0 0;
+}
+
+.ui-resizable-sw { 
+	cursor: sw-resize; 
+	width: 9px; 
+	height: 9px; 
+	left: 0px; 
+	bottom: 0px;  
+}
+
+.ui-resizable-nw { 
+	cursor: nw-resize; 
+	width: 9px; 
+	height: 9px; 
+	left: 0px; 
+	top: 0px; 
+}
+
+.ui-resizable-ne { 
+	cursor: ne-resize; 
+	width: 9px; 
+	height: 9px; 
+	right: 0px; 
+	top: 0px; 
+
+}
+.ui-dialog-titlebar {
+	/*resets*/margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none;
+	padding: .5em 1.5em .5em 1em;
+	color: #555555;
+	background: #e6e6e6 url(../../../images/jquery-ui/e6e6e6_40x100_textures_02_glass_75.png) 0 50% repeat-x;
+	border-bottom: 1px solid #d3d3d3;
+	font-size: 1em;
+	font-weight: normal;
+	position: relative;
+}
+
+.ui-dialog-title {}
+.ui-dialog-titlebar-close {
+
+	/*resets*/
+	margin: 0; 
+	padding: 0; 
+	border: 0; 
+	outline: 0; 
+	line-height: 1.3; 
+	text-decoration: none; 
+	font-size: 100%; 
+	list-style: none;
+	background: url(../../../images/jquery-ui/888888_11x11_icon_close.gif) 0 0 no-repeat;
+	position: absolute;
+	right: 8px;
+	top: .7em;
+	width: 11px;
+	height: 11px;
+	z-index: 100;
+}
+
+.ui-dialog-titlebar-close-hover, .ui-dialog-titlebar-close:hover {
+	background: url(../../../images/jquery-ui/454545_11x11_icon_close.gif) 0 0 no-repeat;
+}
+
+.ui-dialog-titlebar-close:active {
+	background: url(../../../images/jquery-ui/222222_11x11_icon_close.gif) 0 0 no-repeat;
+}
+
+.ui-dialog-titlebar-close span {
+	display: none;
+}
+
+.ui-dialog-content {
+	/*resets*/margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none;
+	color: #222222;
+	padding: 1.5em 1.7em;	
+}
+
+.ui-dialog-buttonpane {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	text-align: left;
+	border-top: 1px solid #dddddd;
+	background: #ffffff;
+}
+.ui-dialog-buttonpane button {
+	margin: .5em 0 .5em 8px;
+	color: #555555;
+	background: #e6e6e6 url(../../../images/jquery-ui/e6e6e6_40x100_textures_02_glass_75.png) 0 50% repeat-x;
+	font-size: 1em;
+	border: 1px solid #d3d3d3;
+	cursor: pointer;
+	padding: .2em .6em .3em .6em;
+	line-height: 1.4em;
+}
+.ui-dialog-buttonpane button:hover {
+	color: #212121;
+	background: #dadada url(../../../images/jquery-ui/dadada_40x100_textures_02_glass_75.png) 0 50% repeat-x;
+	border: 1px solid #999999;
+}
+.ui-dialog-buttonpane button:active {
+	color: #222222;
+	background: #ffffff url(../../../images/jquery-ui/ffffff_40x100_textures_02_glass_65.png) 0 50% repeat-x;
+	border: 1px solid #dddddd;
+}
+/* This file skins dialog */
+.ui-dialog.ui-draggable .ui-dialog-titlebar,
+.ui-dialog.ui-draggable .ui-dialog-titlebar {
+	cursor: move;
+}
+
+
 /* @end */
 
 
@@ -1457,6 +2383,15 @@ table#pg2 td.GROUP_LAYER {
 
 @charset "UTF-8";
 
+img.action {
+	vertical-align: bottom;
+	height: 15px;
+	margin-top: -1px;
+	margin-bottom: -1px;
+	margin-left: 3px;
+}
+
+
 .flexigrid {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 11px;
@@ -1465,7 +2400,6 @@ table#pg2 td.GROUP_LAYER {
 	overflow: hidden;
 	color: #000;
 }
-
 .flexigrid.hideBody {
 	height: 26px !important;
 	border-bottom: 1px solid #ccc;
@@ -1511,7 +2445,8 @@ table#pg2 td.GROUP_LAYER {
 	cursor: default;
 }
 
-.flexigrid div.nDiv tr:hover td, .flexigrid div.nDiv tr.ndcolover td {
+.flexigrid div.nDiv tr:hover td, 
+.flexigrid div.nDiv tr.ndcolover td {
 	background: #d5effc url(../../../images/flexigrid/hl.png) repeat-x top;
 	border: 1px solid #a8d8eb;
 }
@@ -1525,11 +2460,13 @@ table#pg2 td.GROUP_LAYER {
 	padding-right: 10px;
 }
 
-.flexigrid div.nDiv tr:hover td.ndcol1, .flexigrid div.nDiv tr.ndcolover td.ndcol1 {
+.flexigrid div.nDiv tr:hover td.ndcol1, 
+.flexigrid div.nDiv tr.ndcolover td.ndcol1 {
 	border-right: 1px solid #d2e3ec;
 }
 
-.flexigrid div.nDiv tr:hover td.ndcol2, .flexigrid div.nDiv tr.ndcolover td.ndcol2 {
+.flexigrid div.nDiv tr:hover td.ndcol2, 
+.flexigrid div.nDiv tr.ndcolover td.ndcol2 {
 	border-left: 1px solid #eef8ff;
 }
 
@@ -1608,11 +2545,8 @@ table#pg2 td.GROUP_LAYER {
 	background: url(../../../images/flexigrid/ddn.png) no-repeat center;
 }
 
-.flexigrid div.tDiv 
-
-
-
-/*toolbar*/ {
+/*toolbar*/
+.flexigrid div.tDiv{
 	background: #fafafa url(../../../images/flexigrid/bg.gif) repeat-x top;
 	position: relative;
 	border: 1px solid #ccc;
@@ -1626,11 +2560,8 @@ table#pg2 td.GROUP_LAYER {
 	padding: 1px;
 }
 
-.flexigrid div.sDiv 
-
-
-
-/*toolbar*/ {
+/*toolbar*/
+.flexigrid div.sDiv{
 	background: #fafafa url(../../../images/flexigrid/bg.gif) repeat-x top;
 	position: relative;
 	border: 1px solid #ccc;
@@ -1677,12 +2608,14 @@ table#pg2 td.GROUP_LAYER {
 	padding: 3px;
 }
 
-.flexigrid div.fbutton:hover, .flexigrid div.fbutton.fbOver {
+.flexigrid div.fbutton:hover, 
+.flexigrid div.fbutton.fbOver {
 	padding: 0px;
 	border: 1px solid #ccc;
 }
 
-.flexigrid div.fbutton:hover div, .flexigrid div.fbutton.fbOver div {
+.flexigrid div.fbutton:hover div, 
+.flexigrid div.fbutton.fbOver div {
 	padding: 0px 2px;
 	border-left: 1px solid #fff;
 	border-top: 1px solid #fff;
@@ -1691,6 +2624,7 @@ table#pg2 td.GROUP_LAYER {
 }
 
 /* end toolbar*/
+
 
 .flexigrid div.hDiv {
 	background: #fafafa url(../../../images/flexigrid/fhbg.gif) repeat-x bottom;
@@ -1742,7 +2676,6 @@ table#pg2 td.GROUP_LAYER {
 	padding: 0px;
 	width: 100%;
 	height: 100%;
-	padding: 0px;
 	background: none;
 }
 
@@ -1796,30 +2729,30 @@ table#pg2 td.GROUP_LAYER {
 	background: none;
 }
 
-.flexigrid div.hDiv th, .flexigrid  div.bDiv td  
-
-
-
-/* common cell properties*/ {
+/* common cell properties*/ 
+.flexigrid div.hDiv th, 
+.flexigrid  div.bDiv td {
 	text-align: left;
 	border-right: 1px solid #ddd;
 	border-left: 1px solid #fff;
 	overflow: hidden;
 	vertical-align: top !important;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #ddd;
 }
 
-.flexigrid div.hDiv th div, .flexigrid  div.bDiv td  div, div.colCopy div
-
-
-
-/* common inner cell properties*/ {
-	padding: 5px;
+/* common inner cell properties*/
+.flexigrid div.hDiv th div, 
+.flexigrid  div.bDiv td  div, 
+div.colCopy div{
+	padding: 3px 5px;
 	border-left: 0px solid #fff;
 }
 
-.flexigrid div.hDiv th, div.colCopy {
+.flexigrid div.hDiv th, 
+div.colCopy {
 	font-weight: normal;
-	height: 24px;
+	height: 21px;
 	cursor: default;
 	white-space: nowrap;
 	overflow: hidden;
@@ -1835,7 +2768,7 @@ div.colCopy {
 }
 
 .flexigrid div.hDiv th.sorted {
-	background: url(../../../images/flexigrid/wbg.gif) repeat-x 0px -1px;
+	background: url(../../../images/flexigrid/wbg.gif) repeat-x 0px -3px;
 	border-bottom: 0px solid #ccc;
 }
 
@@ -1843,14 +2776,15 @@ div.colCopy {
 	
 }
 
-.flexigrid div.hDiv th.thOver div, .flexigrid div.hDiv th.sorted.thOver div {
+.flexigrid div.hDiv th.thOver div, 
+.flexigrid div.hDiv th.sorted.thOver div {
 	border-bottom: 1px solid orange;
 	padding-bottom: 4px;
 }
 
 .flexigrid div.hDiv th.sorted div {
 	border-bottom: 0px solid #ccc;
-	padding-bottom: 5px;
+	/*padding-bottom: 5px;*/
 }
 
 .flexigrid div.hDiv th.thMove {
@@ -1876,7 +2810,6 @@ div.colCopy {
 }
 
 .flexigrid div.bDiv td {
-	border-bottom: 1px solid #fff;
 	vertical-align: top;
 	white-space: nowrap;
 }
@@ -1915,7 +2848,7 @@ div.colCopy {
 .flexigrid tr td.sorted {
 	background: #f3f3f3;
 	border-right: 1px solid #ddd;
-	border-bottom: 1px solid #f3f3f3;
+	border-bottom: 1px solid #D0D0D0;
 }
 
 .flexigrid tr td.sorted div {
@@ -1924,12 +2857,11 @@ div.colCopy {
 
 .flexigrid tr.erow td {
 	background: #f7f7f7;
-	border-bottom: 1px solid #f7f7f7;
 }
 
 .flexigrid tr.erow td.sorted {
 	background: #e3e3e3;
-	border-bottom: 1px solid #e3e3e3;
+	border-bottom: 1px solid #D0D0D0;
 }
 
 .flexigrid tr.erow td.sorted div {
@@ -1937,20 +2869,20 @@ div.colCopy {
 }
 
 .flexigrid div.bDiv tr:hover td, 
-		.flexigrid div.bDiv tr:hover td.sorted,
-		.flexigrid div.bDiv tr.trOver td.sorted, 
-		.flexigrid div.bDiv tr.trOver td {
+.flexigrid div.bDiv tr:hover td.sorted,
+.flexigrid div.bDiv tr.trOver td.sorted, 
+.flexigrid div.bDiv tr.trOver td {
 	background: #d9ebf5;
 	border-left: 1px solid #eef8ff;
 	border-bottom: 1px dotted #a8d8eb;
 }
 
 .flexigrid div.bDiv tr.trSelected:hover td, 
-		.flexigrid div.bDiv tr.trSelected:hover td.sorted,
-		.flexigrid div.bDiv tr.trOver.trSelected td.sorted, 
-		.flexigrid div.bDiv tr.trOver.trSelected td,
-		.flexigrid tr.trSelected td.sorted, 
-		.flexigrid tr.trSelected td {
+.flexigrid div.bDiv tr.trSelected:hover td.sorted,
+.flexigrid div.bDiv tr.trOver.trSelected td.sorted, 
+.flexigrid div.bDiv tr.trOver.trSelected td,
+.flexigrid tr.trSelected td.sorted, 
+.flexigrid tr.trSelected td {
 	background: #d5effc url(../../../images/flexigrid/hl.png) repeat-x top;
 	border-right: 1px solid #d2e3ec;
 	border-left: 1px solid #eef8ff;
@@ -1982,10 +2914,15 @@ div.colCopy {
 }
 
 .flexigrid.novstripe div.bDiv tr.trSelected:hover td, 
+
 		.flexigrid.novstripe div.bDiv tr.trSelected:hover td.sorted,
+
 		.flexigrid.novstripe div.bDiv tr.trOver.trSelected td.sorted, 
+
 		.flexigrid.novstripe div.bDiv tr.trOver.trSelected td,
+
 		.flexigrid.novstripe tr.trSelected td.sorted, 
+
 		.flexigrid.novstripe tr.trSelected td {
 	border-right: 1px solid #0066FF;
 	border-left: 1px solid #0066FF;
@@ -2021,7 +2958,8 @@ div.pGroup {
 	margin: 0px 5px;
 }
 
-.flexigrid div.pDiv .pPageStat, .flexigrid div.pDiv .pcontrol {
+.flexigrid div.pDiv .pPageStat, 
+.flexigrid div.pDiv .pcontrol {
 	position: relative;
 	top: 5px;
 	overflow: visible;
@@ -2042,7 +2980,8 @@ div.pGroup {
 	overflow: hidden;
 }
 
-.flexigrid div.pDiv  div.pButton:hover, .flexigrid div.pDiv  div.pButton.pBtnOver {
+.flexigrid div.pDiv  div.pButton:hover, 
+.flexigrid div.pDiv  div.pButton.pBtnOver {
 	width: 20px;
 	height: 20px;
 	border: 1px solid #ccc;
@@ -2056,7 +2995,8 @@ div.pGroup {
 	float: left;
 }
 
-.flexigrid div.pDiv  div.pButton:hover span, .flexigrid div.pDiv  div.pButton.pBtnOver span {
+.flexigrid div.pDiv  div.pButton:hover span, 
+.flexigrid div.pDiv  div.pButton.pBtnOver span {
 	width: 19px;
 	height: 19px;
 	border-top: 1px solid #fff;
@@ -2093,11 +3033,10 @@ div.pGroup {
 
 /* ie adjustments */
 
-.flexigrid.ie div.hDiv th div, .flexigrid.ie  div.bDiv td  div, div.colCopy.ie div
-
-
-
-/* common inner cell properties*/ {
+.flexigrid.ie div.hDiv th div, 
+.flexigrid.ie  div.bDiv td  div, 
+div.colCopy.ie div{
+/* common inner cell properties*/ 
 	overflow: hidden;
 }
 
