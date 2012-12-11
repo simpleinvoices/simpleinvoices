@@ -18,16 +18,16 @@
 	<link rel="shortcut icon" href="./images/common/favicon.ico" />
 
 {literal}
-	<link rel="stylesheet" type="text/css" href="./templates/default/css/main.css" media="all"/>
-	<link rel="stylesheet" type="text/css" href="./templates/default/css/print.css" media="print" />
 	<link rel="stylesheet" type="text/css" href="./include/jquery/wysiwyg/wysiwyg.css" />
 	<link rel="stylesheet" type="text/css" href="./include/jquery/jquery.plugins.css" title="default" media="screen" />
 	<link rel="stylesheet" type="text/css" href="./include/jquery/rte/rte.css" />	
 	<link rel="stylesheet" type="text/css" href="./include/jquery/cluetip/jquery.cluetip.css" />
 
-	<!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/main.css" media="all"/>
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/print.css" media="print" />
+<!--[if IE]>
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/main_ie.css" media="all" />
-	<![endif]-->
+<![endif]-->
 
 	<script type="text/javascript" src="./include/jquery/jquery-1.2.6.min.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.init.js"></script>
