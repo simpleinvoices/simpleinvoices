@@ -8,32 +8,19 @@
 *	 GPL v3 or above
 */
 *}
-<table class="buttons" align="center">
-    <tr>
-        <td>
-
-            <a href="index.php?module=user&view=add" class="positive">
+	<div class="si_toolbar si_toolbar_top">
+            <a href="index.php?module=user&view=add" class="">
                 <img src="./images/common/add.png" alt="" />
                 {$LANG.user_add}
             </a>
+	</div>
 
-        </td>
-    </tr>
-</table>
 {if $number_of_rows.count == 0}
 
-	<br />
-	<br />
-	<span class="welcome">{$LANG.no_users}</span>
-	<br />
-	<br />
-	<br />
-	<br />
-
+	<div class="si_message">{$LANG.no_users}</div>
 
 {else}
 	
-	<br />
 	<table id="manageGrid" style="display:none"></table>
 	{include file='../modules/user/manage.js.php' LANG=$LANG}
 	

@@ -8,17 +8,24 @@
 */
 *}
 {if $cfs == null}
-<p><em>{$LANG.no_invoices}.</em></p>
+
+	<div class="si_message">{$LANG.no_invoices}.</div>
+
 {else}
 
-<div style="text-align:center;">
-<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_what_are_custom_fields" title="{$LANG.what_are_custom_fields}">{$LANG.what_are_custom_fields}<img src="./images/common/help-small.png" alt="" /></a> ::
-<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_manage_custom_fields" title="{$LANG.whats_this_page_about}">{$LANG.whats_this_page_about}<img src="./images/common/help-small.png" alt="" /></a>
-</div>
 
 <table id="manageGrid" style="display:none"></table>
-
  {include file='../modules/custom_fields/manage.js.php'}
+
+
+<div class="si_help_div">
+	<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_what_are_custom_fields" title="{$LANG.what_are_custom_fields}">{$LANG.what_are_custom_fields}<img src="./images/common/help-small.png" alt="" /></a> ::
+	<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_manage_custom_fields" title="{$LANG.whats_this_page_about}">{$LANG.whats_this_page_about}<img src="./images/common/help-small.png" alt="" /></a>
+</div>
+
+
+
+
 {*
 <table class="manage" id="live-grid" align="center">
 	<colgroup>

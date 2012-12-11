@@ -11,27 +11,18 @@
 */
 *}
 
-<table class="buttons" align="center">
-    <tr>
-        <td>
-            <a href="./index.php?module=customers&amp;view=add" class="positive">
+	<div class="si_toolbar si_toolbar_top">
+            <a href="./index.php?module=customers&amp;view=add" class="">
                 <img src="./images/famfam/add.png" alt="" />
                 {$LANG.customer_add}
             </a>
-
-        </td>
-    </tr>
- </table>
+	</div>
  
 {if $number_of_customers.count == 0}
-	<br />
-	<br />
-	<span class="welcome">{$LANG.no_customers}</span>
-	<br />
-	<br />
-	<br />
-	<br />
-	
+	<div class="si_message">
+		{$LANG.no_customers}
+	</div>
+
 {else}
 
 	<br />
