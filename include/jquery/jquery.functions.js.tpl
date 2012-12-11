@@ -199,8 +199,8 @@
 	
 		$("#description"+rowID_old, clonedRow).attr("id", "description"+rowID_new);
 		$("#description"+rowID_new, clonedRow).attr("name", "description"+rowID_new);
-		//$("#description"+rowID_new, clonedRow).attr("value","{/literal}{$LANG.description}{literal}");
-		//$("#description"+rowID_new, clonedRow).css({ color: "#b2adad" });
+		$("#description"+rowID_new, clonedRow).attr("value","{/literal}{$LANG.description}{literal}");
+		$("#description"+rowID_new, clonedRow).css({ color: "#b2adad" });
 	
 		$("#tax_id\\["+rowID_old+"\\]\\[0\\]", clonedRow).attr("id", "tax_id["+rowID_new+"][0]");
 		$("#tax_id\\["+rowID_new+"\\]\\[0\\]", clonedRow).attr("name", "tax_id["+rowID_new+"][0]");
