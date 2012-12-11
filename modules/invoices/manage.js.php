@@ -51,8 +51,8 @@
 				{display: '{/literal}{$LANG.customer}{literal}', name : 'c.name', isdefault: true}
 				],
 
-			sortname: "{/literal}{$smarty.request.sortname|default:'index_id'}{literal}",
-			sortorder: "{/literal}{$smarty.request.sortorder|default:'desc'}{literal}",
+			sortname: "{/literal}{$smarty.get.sortname|default:'index_id'}{literal}",
+			sortorder: "{/literal}{$smarty.get.sortorder|default:'desc'}{literal}",
 			usepager: true,
 			/*title: 'Manage Custom Fields',*/
 			pagestat: '{/literal}{$LANG.displaying_items}{literal}',
@@ -61,7 +61,7 @@
 			pagemsg: '{/literal}{$LANG.page}{literal}',
 			ofmsg: '{/literal}{$LANG.of}{literal}',
 			useRp: false,
-			rp: {/literal}{$smarty.request.rp|default:'15'}{literal},
+			rp: {/literal}{$smarty.get.rp|default:'15'}{literal},
 			showToggleBtn: false,
 			showTableToggleBtn: false,
 			width: 'auto',
