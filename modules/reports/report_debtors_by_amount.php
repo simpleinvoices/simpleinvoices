@@ -5,6 +5,7 @@ require_once("./include/reportlib.php");
    if ($db_server == 'pgsql') {
       $sSQL = "SELECT
         iv.id,
+        iv.index_id AS index_id,
         b.name AS biller,
         c.name AS customer,
 
@@ -28,6 +29,7 @@ ORDER BY
    } else {
       $sSQL = "SELECT
         i.id,
+        i.index_id AS index_id,
         (select name from " . TB_PREFIX . "biller b where b.id = i.biller_id) as biller,
         (select name from " . TB_PREFIX . "customers c where c.id = i.customer_id) as customer,
         (select sum(coalesce(ii.total, 0)) from " . TB_PREFIX . "invoice_items ii WHERE ii.invoice_id = i.id) as inv_total,
