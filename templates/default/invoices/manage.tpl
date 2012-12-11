@@ -1,4 +1,5 @@
 {*
+
 /*
 * Script: manage.tpl
 * 	 Manage invoices template
@@ -9,90 +10,51 @@
 * Website:
 *	http://www.simpleinvoices.org
 */
+
 *}
 
-<table class="buttons" align="center">
-    <tr>
-        <td>
+	<div class="si_toolbar si_toolbar_top">
+		<a href="index.php?module=invoices&amp;view=itemised" class=""><img src="./images/common/add.png" alt="" />{$LANG.new_invoice}</a>
+	</div>
 
-            <a href="index.php?module=invoices&amp;view=itemised" class="positive">
-                <img src="./images/common/add.png" alt="" />
-                {$LANG.new_invoice}
-            </a>
 
-        </td>
-    </tr>
-</table>
+{if $number_of_invoices.count == 0}	
+	<div class="si_message">
+		{$LANG.no_invoices}
+	</div>
 
-{if $number_of_invoices.count == 0}
-	
-	<br />
-	<br />
-	<span class="welcome">{$LANG.no_invoices}</span>
-	<br />
-	<br />
-	<br />
-	<br />
 {else}
 
+	<div class="si_filters">
+		<span class='si_filters_title'>{$LANG.filters}:</span>
+		<span class='si_filters_links'>
+			<a href="index.php?module=invoices&amp;view=manage" class="first{if $smarty.get.having==''} selected{/if}">{$LANG.all}</a>
+			<a href="index.php?module=invoices&amp;view=manage&amp;having=money_owed" class="{if $smarty.get.having=='money_owed'}selected{/if}">{$LANG.due}</a>
+			<a href="index.php?module=invoices&amp;view=manage&amp;having=paid"  class="{if $smarty.get.having=='paid'}selected{/if}">{$LANG.paid}</a>
+			<a href="index.php?module=invoices&amp;view=manage&amp;having=draft" class="{if $smarty.get.having=='draft'}selected{/if}">{$LANG.draft}</a>
+			<a href="index.php?module=invoices&amp;view=manage&amp;having=real"  class="{if $smarty.get.having=='real'}selected{/if}">{$LANG.real}</a>
+		</span>
+	</div>
 
-    <br />
-    <span class="welcome">
-       {$LANG.filters}:
-    <a href="index.php?module=invoices&amp;view=manage&amp;having=money_owed">{$LANG.due}</a> : 
-    <a href="index.php?module=invoices&amp;view=manage&amp;having=paid">{$LANG.paid}</a> : 
-    <a href="index.php?module=invoices&amp;view=manage&amp;having=draft">{$LANG.draft}</a> : 
-    <a href="index.php?module=invoices&amp;view=manage&amp;having=real">{$LANG.real}</a> : 
-    <a href="index.php?module=invoices&amp;view=manage">{$LANG.all}</a> 
 
-   </span>
-    <br />
-    <br />
-	<br />
 	<table id="manageGrid" style="display:none"></table>
 	{include file='../modules/invoices/manage.js.php'}
 
 
 	<div id="export_dialog" class="flora" title="Export">
-
-		<table class="buttons">
-			<tr>
-				<td>
-
-					<a
-				     	title='{$LANG.export_tooltip} {$LANG.export_pdf_tooltip}'
-						class='export_pdf export_window' 
-					>
-						<img src="./images/common/page_white_acrobat.png" alt="" />
+		<div class="si_toolbar si_toolbar_dialog">
+					<a title='{$LANG.export_tooltip} {$LANG.export_pdf_tooltip}' ><img src="./images/common/page_white_acrobat.png" alt="" />
 						{$LANG.export_pdf}
 					</a>
-				  </td>
-			</tr>
-			<tr>
-				<td>  
-					
-					<a 
-						title='{$LANG.export_tooltip} {$LANG.export_xls_tooltip} .{$config->export->spreadsheet}' 
-						class='export_xls export_window'
-				   >
-						<img src="./images/common/page_white_excel.png" alt="" />
+
+					<a title='{$LANG.export_tooltip} {$LANG.export_xls_tooltip} .{$config->export->spreadsheet}' class='export_xls export_window'><img src="./images/common/page_white_excel.png" alt="" />
 						{$LANG.export_xls}
 					</a>
-					</td>
-			</tr>
-			<tr>
-				<td>    
-			
-				   <a 
-						title='{$LANG.export_tooltip} {$LANG.export_doc_tooltip} .{$config->export->wordprocessor}'
-						class='export_doc export_window' 
-				   >
-						<img src="./images/common/page_white_word.png" alt="" />
+
+				   <a title='{$LANG.export_tooltip} {$LANG.export_doc_tooltip} .{$config->export->wordprocessor}' class='export_doc export_window' ><img src="./images/common/page_white_word.png" alt="" />
 						{$LANG.export_doc}
 					</a>
-				</td>
-			</tr>
-		</table>
+		</div>
 	</div>
 {/if}
 
