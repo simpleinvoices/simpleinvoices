@@ -29,7 +29,7 @@
 			dataType: 'xml',
 			colModel : [
 				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : action_menu, sortable : false, align: 'center'},
-				{display: '{/literal}{$LANG.id}{literal}', name : 'index_name', width :15 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.id}{literal}', name : 'index_id', width :15 * percentage_width, sortable : true, align: 'right'},
 				{display: '{/literal}{$LANG.biller}{literal}', name : 'biller', width :20 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.customer}{literal}', name : 'customer', width :20 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.date_upper}{literal}', name : 'date', width : 15 * percentage_width, sortable : true, align: 'right'},
@@ -46,12 +46,13 @@
 				],
 			*/
 			searchitems : [
-				{display: '{/literal}{$LANG.invoice_number}{literal}', name : 'iv.id'},
+				{display: '{/literal}{$LANG.invoice_number}{literal}', name : 'iv.index_id'},
 				{display: '{/literal}{$LANG.biller}{literal}', name : 'b.name'},
 				{display: '{/literal}{$LANG.customer}{literal}', name : 'c.name', isdefault: true}
 				],
-			sortname: "id",
-			sortorder: "desc",
+
+			sortname: "{/literal}{$smarty.get.sortname|default:'index_id'}{literal}",
+			sortorder: "{/literal}{$smarty.get.sortorder|default:'desc'}{literal}",
 			usepager: true,
 			/*title: 'Manage Custom Fields',*/
 			pagestat: '{/literal}{$LANG.displaying_items}{literal}',
@@ -60,7 +61,7 @@
 			pagemsg: '{/literal}{$LANG.page}{literal}',
 			ofmsg: '{/literal}{$LANG.of}{literal}',
 			useRp: false,
-			rp: 15,
+			rp: {/literal}{$smarty.get.rp|default:'15'}{literal},
 			showToggleBtn: false,
 			showTableToggleBtn: false,
 			width: 'auto',
