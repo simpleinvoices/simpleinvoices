@@ -7,8 +7,9 @@
 	</thead>
 	<tfoot>
 		<tr>
-			<th colspan="8">{$LANG.total_owed}</th>
+			<th colspan="5">{$LANG.total_owed}</th>
 			<td>{$total_owed|siLocal_number:'2'|default:'-'}</td>
+			<td colspan="3"></td>
 		</tr>
 	</tfoot>
 	<tbody>

@@ -123,6 +123,7 @@ $LANG['days'] = "days";//1
 $LANG['debtors'] = "Debtors";//1
 $LANG['debtors_by_aging_periods'] = "Debtors by Aging periods";//1
 $LANG['debtors_by_amount_owed'] = "Debtors by amount owed";//1
+$LANG['debtors_by_amount_owing_customer'] = "Debtors by Amount Owing per Customer";//1
 $LANG['default_biller'] = "Default Biller";//1
 $LANG['default_customer'] = "Default Customer";//1
 $LANG['default_inv_template'] = "Default Invoice Template ";//1
