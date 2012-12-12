@@ -182,19 +182,4 @@
         <br />
         <!-- Don't forget to menu - end -->
     </div>
-
-    <!-- Reports menu - start -->
-    <div class="align_left">
-        <h2>{$LANG.your_reports}</h2>
-        --fancy graph here-- --some links on the right--
-        <br />
-    </div>
-    <!-- Reports menu - end -->
-    <br />
-    <br />
-    <span class="welcome">
-       Note: this page is a work-in-progress
-    </span>
-    <br />
-    <br />
 {/if}
