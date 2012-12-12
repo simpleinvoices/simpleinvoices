@@ -1,14 +1,9 @@
 <?php
-//   include phpreports library
-require_once("./include/reportlib.php");
+  $sql = "select sum(ii.tax_amount) as sum_tax_total from ".TB_PREFIX."invoice_items ii";
 
-   $sSQL = "select sum(ii.tax_amount) as sum_tax_total from ".TB_PREFIX."invoice_items ii";
+  $sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
 
-   $oRpt->setXML("./modules/reports/report_tax_total.xml");
-
-//   include phpreports run code
-	include("./include/reportrunlib.php");
-
-$smarty -> assign('pageActive', 'report');
-$smarty -> assign('active_tab', '#home');
+  $smarty->assign('total_taxes', $sth->fetchColumn());
+	$smarty -> assign('pageActive', 'report');
+	$smarty -> assign('active_tab', '#home');
 ?>
