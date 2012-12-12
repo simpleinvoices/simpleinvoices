@@ -292,6 +292,7 @@ Work around IE/Win code size bug - courtesy Jesper, waffle.wootest.net  */
 	border:1px solid #ddd;
 	border-width: 0 1px 0 0;
 	margin-bottom: 20px;
+	width: 100%;
 }
 .si_report_table TD,
 .si_report_table TH{
