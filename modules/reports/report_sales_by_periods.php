@@ -95,6 +95,7 @@ while ( $year <= $this_year ){
 	$data['payments']['total'][$year] 			= $total_year_payments_array['year_total_payments'];
 	$data['payments']['total_rate'][$year]		= _myRate($data['payments']['total'][$year],	$data['payments']['total'][$year -1]);
 
+	$years=array_reverse($years);
 	$years[]=$year ;
 	$year++;
 }
