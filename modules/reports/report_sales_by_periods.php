@@ -98,7 +98,7 @@ while ( $year <= $this_year ){
 	$years[]=$year ;
 	$year++;
 }
-$years=array_reverse($years);
+
 $smarty->assign('data',		$data);
 $smarty->assign('all_years',$years);
 
