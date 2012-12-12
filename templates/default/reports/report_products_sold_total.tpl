@@ -8,6 +8,12 @@
 			<th colspan="2">{$LANG.products_sold_total}</th>
 		</tr>
 	</thead>
+	<tfoot>
+		<tr>
+			<td align="RIGHT" class="PAGE_LAYER">{$LANG.total}</td>
+			<td align="LEFT" class="PAGE_LAYER"><span class="BOLD">{$total_quantity|siLocal_number:'0'|default:'-'}</span></td>
+		</tr>
+	</tfoot>
 	<tbody>
 	{foreach item=customer from=$data}
 		<tr class="tr_{cycle values="A,B"}">
@@ -15,10 +21,5 @@
 			<td>{$customer.sum_quantity|siLocal_number:'0'|default:'-'}</td>
 		</tr>
 	{/foreach}
-
-		<tr>
-			<td align="RIGHT" class="PAGE_LAYER">{$LANG.total}</td>
-			<td align="LEFT" class="PAGE_LAYER"><span class="BOLD">{$total_quantity|siLocal_number:'0'|default:'-'}</span></td>
-		</tr>
 	</tbody>
 </table>

@@ -17,6 +17,20 @@
 		</tr>
 	</thead>
 
+	<tfoot>
+		<tr>
+			<th>{$LANG.total}</th>
+
+		{foreach item=year from=$years}
+			<td>{$this_data.total.$year|siLocal_number:'0'|default:'-'}</td>
+{if $show_rates}
+			<td class="rate{if $this_data.total_rate.$year < 0} neg_rate{/if}">{if $this_data.total_rate.$year}{$this_data.total_rate.$year|siLocal_number:$rate_precision}%{/if}</td>
+{/if}
+		{/foreach}
+
+		</tr>
+	</tfoot>
+
 	<tbody>
 	{foreach key=month item=amount from=$this_data.months}
 		<tr class="tr_{cycle values="A,B"}">
@@ -32,19 +46,5 @@
 	{/foreach}
 
 	</tbody>
-
-	<tfoot>
-		<tr>
-			<th>{$LANG.total}</th>
-
-		{foreach item=year from=$years}
-			<td>{$this_data.total.$year|siLocal_number:'0'|default:'-'}</td>
-{if $show_rates}
-			<td class="rate{if $this_data.total_rate.$year < 0} neg_rate{/if}">{if $this_data.total_rate.$year}{$this_data.total_rate.$year|siLocal_number:$rate_precision}%{/if}</td>
-{/if}
-		{/foreach}
-
-		</tr>
-	</tfoot>
 </table>
 

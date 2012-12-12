@@ -15,6 +15,12 @@
 			<th>{$LANG.owing}</th>
 		</tr>
 	</thead>
+	<tfoot>
+		<tr>
+			<td align="RIGHT" colspan="5" class="PAGE_LAYER">{$LANG.total_owed}</td>
+			<td align="LEFT" class="PAGE_LAYER"><span class="BOLD">{$total_owed|siLocal_number:'2'|default:'-'}</span></td>
+		</tr>
+	</tfoot>
 	<tbody>
 	{foreach item=invoice from=$data}
 		<tr>
@@ -26,10 +32,5 @@
 			<td>{$invoice.inv_owing|siLocal_number:'2'|default:'0'}</td>
 		</tr>
 	{/foreach}
-
-		<tr>
-			<td align="RIGHT" colspan="5" class="PAGE_LAYER">{$LANG.total_owed}</td>
-			<td align="LEFT" class="PAGE_LAYER"><span class="BOLD">{$total_owed|siLocal_number:'2'|default:'-'}</span></td>
-		</tr>
 	</tbody>
 </table>
