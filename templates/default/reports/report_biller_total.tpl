@@ -1,5 +1,25 @@
 
-<h3>Sales in total by Biller</h3>
+<h3>{$LANG.biller_sales_total}</h3>
 <hr />
 
-  {$showReport}
+<table class="si_report_table">
+	<thead>
+		<tr>
+			<th colspan="2">{$LANG.biller_sales_total}</th>
+		</tr>
+	</thead>
+	<tbody>
+	{foreach item=biller from=$data}
+		<tr class="tr_{cycle values="A,B"}">
+			<td>{$biller.name|htmlsafe}</td>
+			<td>{$biller.sum_total|siLocal_number:'2'|default:'-'}</td>
+		</tr>
+	{/foreach}
+
+		<tr>
+			<td align="RIGHT" class="PAGE_LAYER">{$LANG.total_sales}</td>
+			<td align="LEFT" class="PAGE_LAYER"><span class="BOLD">{$total_sales|siLocal_number:'2'|default:'-'}</span></td>
+		</tr>
+	</tbody>
+</table>
+
