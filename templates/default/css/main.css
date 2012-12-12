@@ -125,7 +125,7 @@ a.toggle.active:hover {
 }
 
 p {
-	font: 11px Arial, Helvetica, sans-serif;
+	/*font: 11px Arial, Helvetica, sans-serif;*/
 	margin: 0 0 15px;
 }
 
@@ -1830,6 +1830,69 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', end
 }
 
 /* @end */
+
+.si_message_warning{
+	padding: 2px 10px 2px 27px;
+	margin: 10px auto;
+	background-color: #F00;
+	color: #FFF;
+	font-weight: bold;
+	background:  #F00 url(../../../images/common/important.png) 6px 2px no-repeat;
+	-moz-border-radius:5px
+	-webkit-border-radius:5px
+	border-radius:5px
+}
+
+/* @group Si Page Home (FirstRun)
+------------------------------------------------------------------- */
+.si_table_toolbar TH,
+.si_table_toolbar TD{
+	padding-bottom: 10px;
+	vertical-align: middle;
+}
+.si_table_toolbar TH{
+	font-weight: normal;
+	text-align: right;
+}
+.si_table_toolbar TD{
+	text-align: left;
+	padding-left: 20px;
+}
+/* @end */
+
+
+
+/* @group Si Page Updates
+------------------------------------------------------------------- */
+#si_page_updates .si_list LI{
+	list-style: none;
+	padding: 1px 0 1px 30px;
+	margin: 0;
+	border-bottom: 1px dotted #ccc;
+	font-size: 11px;
+	line-height: 14px;
+}
+#si_page_updates .si_list LI.li_skip{
+	background: url(../../../images/common/tick.png) 6px 0 no-repeat;
+	opacity: 0.7;
+}
+#si_page_updates .si_list LI.li_todo{
+	color: #006;
+}
+#si_page_updates .si_list LI.li_done{
+	background: url(../../../images/common/tick.png) 6px 0 no-repeat;
+	color: #000;
+}
+#si_page_updates HR{
+	margin: 20px 0;
+}
+#si_page_updates UL{
+	margin: 0;
+	padding: 0;
+}
+/* @end */
+
+
 
 
 
