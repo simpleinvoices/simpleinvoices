@@ -1,7 +1,6 @@
 <h3>{$LANG.debtors_by_amount_owed}</h3>
 <hr />
 
-
 <table class="si_report_table">
 	<thead>
 		<tr>

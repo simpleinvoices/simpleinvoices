@@ -14,31 +14,19 @@
 */
 *}
 
-<table class="buttons" align="center">
-    <tr>
-        <td>
-
-            <a href="index.php?module=tax_rates&view=add" class="positive">
+	<div class="si_toolbar si_toolbar_top">
+            <a href="index.php?module=tax_rates&view=add" class="">
                 <img src="./images/common/add.png" alt="" />
                 {$LANG.add_new_tax_rate}
             </a>
-
-        </td>
-    </tr>
-</table>
+	</div>
 
 {if $taxes == null}
 
-	<br />
-	<br />
-	<span class="welcome">{$LANG.no_tax_rates}</span>
-	<br />
-	<br />
-	<br />
-	<br />
+	<div class="si_message">{$LANG.no_tax_rates}</div>
 
 {else}
-	<br />
+
 	<table id="manageGrid" style="display:none"></table>
 	{include file='../modules/tax_rates/manage.js.php'}
  

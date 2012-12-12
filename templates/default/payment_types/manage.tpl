@@ -17,31 +17,19 @@
 */
 *}
 
-<table class="buttons" align="center">
-    <tr>
-        <td>
-            <a href="./index.php?module=payment_types&amp;view=add" class="positive">
+	<div class="si_toolbar si_toolbar_top">
+            <a href="./index.php?module=payment_types&amp;view=add" class="">
                 <img src="./images/famfam/add.png" alt="" />
                 {$LANG.add_new_payment_type}
             </a>
-
-        </td>
-    </tr>
-</table>
+	</div>
 
 {if $paymentTypes==null }
 
-	<br />
-	<br />
-	<span class="welcome">{$LANG.no_payment_types}</span>
-	<br />
-	<br />
-	<br />
-	<br />
-	
+	<div class="si_message">{$LANG.no_payment_types}</div>
+
 {else}
 
-	<br />
 	<table id="manageGrid" style="display:none"></table>
 	{include file='../modules/payment_types/manage.js.php'}
 

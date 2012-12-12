@@ -4,7 +4,7 @@
 * 	Biller save template
 *
 * Authors:
-*	 Justin Kelly, Nicolas Ruflin
+*	 Justin Kelly, Nicolas Ruflin, Soif
 *
 * Last edited:
 * 	 2007-07-18
@@ -15,16 +15,11 @@
 *}
 
 {if $saved == true }
-	<br />
-	 {$LANG.save_biller_success}
-	<br />
-	<br />
+	<div class="si_message_ok">{$LANG.save_biller_success}</div>
 {else}
-	<br />
-	 {$LANG.save_biller_failure}
-	<br />
-	<br />
+	<div class="si_message_error">{$LANG.save_biller_failure}</div>
 {/if}
+
 
 {if $smarty.post.cancel == null }
 	<meta http-equiv="refresh" content="2;URL=index.php?module=billers&amp;view=manage" />

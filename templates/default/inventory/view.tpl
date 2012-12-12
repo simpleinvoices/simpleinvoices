@@ -1,53 +1,47 @@
-<br />	 
-
-<table align="center">
+<div class="si_form si_form_view">	
+	<table>
 	<tr>
-		<td class="details_screen">{$LANG.date_upper}</td>
+		<th>{$LANG.date_upper}</th>
 		<td>
 				{$inventory.date|htmlsafe}
 		</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.product}</td>
+		<th>{$LANG.product}</th>
 		<td>
 				{$inventory.description|htmlsafe}
 		</td>
 	</tr>
-    <tr wrap="nowrap">
-            <td class="details_screen">{$LANG.quantity}</td>
-            <td>
-                {$inventory.quantity|siLocal_number}    
-            </td>
-    </tr>
-    <tr wrap="nowrap">
-            <td class="details_screen">{$LANG.cost}</td>
-            <td >
-                {$inventory.cost|siLocal_number}   
-            </td>
-    </tr>
 	<tr>
-		<td class="details_screen">{$LANG.notes}</td>
+		 <th>{$LANG.quantity}</th>
 		<td>
-		{$inventory.note}
-         </td>
-     </tr>
+				{$inventory.quantity|siLocal_number}	
+		</td>
+	</tr>
+	<tr>
+		<th>{$LANG.cost}</th>
+		<td >
+				{$inventory.cost|siLocal_number}   
+		</td>
+	</tr>
+	<tr>
+		<th>{$LANG.notes}</th>
+		<td>
+				{$inventory.note}
+		</td>
+	</tr>
+	</table>
+</div>
 
-</table>
-<br />
-<table class="buttons" align="center">
-	<tr>
-		<td>
-				<a href="./index.php?module=inventory&amp;view=edit&amp;id={$inventory.id|urlencode}" class="positive">
-					<img src="./images/famfam/report_edit.png" alt=""/>
-					{$LANG.edit}
-				</a>
+		<div class="si_toolbar si_toolbar_form">
+			<a href="./index.php?module=inventory&amp;view=edit&amp;id={$inventory.id|urlencode}" class="positive">
+				<img src="./images/famfam/report_edit.png" alt=""/>
+				{$LANG.edit}
+			</a>
+
 			<a href="./index.php?module=inventory&view=manage" class="negative">
 		        <img src="./images/common/cross.png" alt="" />
 	        	{$LANG.cancel}
     		</a>
-	
-		</td>
-	</tr>
-</table>
-
+		</div>
 

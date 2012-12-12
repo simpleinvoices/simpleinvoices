@@ -1,3 +1,4 @@
+<h3 class="si_report_title">Sales in total by Biller</h3>
 
 <h3>{$LANG.biller_sales_total}</h3>
 <hr />
@@ -22,4 +23,3 @@
 		</tr>
 	</tbody>
 </table>
-

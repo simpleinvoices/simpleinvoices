@@ -43,7 +43,10 @@ function getLanguageArray($lang='') {
 	//include english as default - so if the selected lang doesnt have the required lang then it still loads
 	include($langPath."en_GB".$langFile);
 
-	include($langPath.$language.$langFile);
+	if(	file_exists($langPath.$language.$langFile) ){
+		include($langPath.$language.$langFile);
+	}
+
 
 	foreach($config->extension as $extension)
 	{

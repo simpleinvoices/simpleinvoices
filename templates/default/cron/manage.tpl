@@ -11,32 +11,18 @@
 */
 *}
 
-<table class="buttons" align="center">
-    <tr>
-        <td>
+<div class="si_toolbar si_toolbar_top">
+    <a href="index.php?module=cron&amp;view=add" class=""><img src="./images/common/add.png" alt="" />{$LANG.new_recurrence}</a>
+</div>
 
-            <a href="index.php?module=cron&amp;view=add" class="positive">
-                <img src="./images/common/add.png" alt="" />
-                {$LANG.new_recurrence}
-            </a>
-
-        </td>
-    </tr>
-</table>
 
 {if $number_of_crons.count == 0}
 	
-	<br />
-	<br />
-	<span class="welcome">{$LANG.no_crons}</span>
-	<br />
-	<br />
-	<br />
-	<br />
+	<div class="si_message">
+		{$LANG.no_crons}
+	</div>
 {else}
 
-
-	<br />
 	<table id="manageGrid" style="display:none"></table>
 	{include file='../modules/cron/manage.js.php'}
 

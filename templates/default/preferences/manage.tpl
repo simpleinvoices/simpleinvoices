@@ -13,32 +13,25 @@
 *	 GPL v2 or above
 */
 *}
-<table class="buttons" align="center">
-    <tr>
-        <td>
-            <a href="./index.php?module=preferences&amp;view=add" class="positive">
+	<div class="si_toolbar si_toolbar_top">
+            <a href="./index.php?module=preferences&amp;view=add" class="">
                 <img src="./images/famfam/add.png" alt="" />
                 {$LANG.add_new_preference}
             </a>
+	</div>
 
-        </td>
-    </tr>
-</table>
- 
 {if $preferences == null}
 	
-	<br />
-	<br />
-	<span class="welcome">{$LANG.no_preferences}</span>
-	<br />
-	<br />
-	<br />
+	<div class="si_message">{$LANG.no_preferences}</div>
 	
 {else}
-	<br />
+
 	<table id="manageGrid" style="display:none"></table>
 	{include file='../modules/preferences/manage.js.php'}
 
 {/if}
-<br />
-<div style="text-align:center;"><a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_what_the" title="{$LANG.whats_all_this_inv_pref}"><img src="./images/common/help-small.png" alt="" /> {$LANG.whats_all_this_inv_pref} </a></div>
+
+
+<div class="si_help_div">
+	<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_what_the" title="{$LANG.whats_all_this_inv_pref}"><img src="./images/common/help-small.png" alt="" /> {$LANG.whats_all_this_inv_pref} </a>
+</div>

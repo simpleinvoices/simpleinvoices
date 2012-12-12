@@ -29,5 +29,3 @@
 	{/foreach}
 	</tbody>
 </table>
-
- 

@@ -1589,6 +1589,7 @@ function getCustomerInvoices($id) {
 // tested for MySQL	
 	$sql = "SELECT	
 		i.id, 
+		i.index_id, 
 		i.date, 
 		i.type_id, 
 		(SELECT sum( COALESCE(ii.total, 0)) FROM " . TB_PREFIX . "invoice_items ii where ii.invoice_id = i.id) As invd,

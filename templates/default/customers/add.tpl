@@ -24,10 +24,10 @@
 *}
 	{/if}	
 <form name="frmpost" action="index.php?module=customers&amp;view=add" method="post" id="frmpost" onsubmit="return checkForm(this);">
-<br />
-<table align="center">
+<div class="si_form">
+	<table>
 	<tr>
-		<td class="details_screen">{$LANG.customer_name}
+		<th>{$LANG.customer_name}
 		<a 
 			class="cluetip"
 			href="#"
@@ -36,11 +36,11 @@
 		>
 		<img src="./images/common/required-small.png" alt="" />
 		</a>
-		</td>
+		</th>
 		<td><input type="text" name="name" id="name" value="{$smarty.post.name|htmlsafe}" size="25" class="validate[required]" /></td>
 	</tr>
 	</tr>
-		<td class="details_screen">{$LANG.customer_contact}
+		<th>{$LANG.customer_contact}
 		<a
 			rel="index.php?module=documentation&amp;view=view&amp;page=help_customer_contact"
 			href="#"
@@ -49,15 +49,15 @@
 		>
 		<img src="./images/common/help-small.png" alt="" />
 		</a>
-		</td>
+		</th>
 		<td><input type="text" name="attention" value="{$smarty.post.attention|htmlsafe}" size="25" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.street}</td>
+		<th>{$LANG.street}</th>
 		<td><input type="text" name="street_address" value="{$smarty.post.street_address|htmlsafe}" size="25" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.street2}
+		<th>{$LANG.street2}
 		<a
 			class="cluetip"
 			href="#"
@@ -66,43 +66,43 @@
 		> 
 		<img src="./images/common/help-small.png" alt="" />
 		</a>
-		</td>
+		</th>
 		<td><input type="text" name="street_address2" value="{$smarty.post.street_address2|htmlsafe}" size="25" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.city}</td>
+		<th>{$LANG.city}</th>
 		<td><input type="text" name="city" value="{$smarty.post.city|htmlsafe}" size="25" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.state}</td>
+		<th>{$LANG.state}</th>
 		<td><input type="text" name="state" value="{$smarty.post.state|htmlsafe}" size="25" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.zip}</td>
+		<th>{$LANG.zip}</th>
 		<td><input type="text" name="zip_code" value="{$smarty.post.zip_code|htmlsafe}" size="25" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.country}</td>
-		<td><input type="text" name="country" value="{$smarty.post.country|htmlsafe}" size="50" /></td>
+		<th>{$LANG.country}</th>
+		<td><input type="text" name="country" value="{$smarty.post.country|htmlsafe}" size="25" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.phone}</td>
+		<th>{$LANG.phone}</th>
 		<td><input type="text" name="phone" value="{$smarty.post.phone|htmlsafe}" size="25" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.mobile_phone}</td>
+		<th>{$LANG.mobile_phone}</th>
 		<td><input type="text" name="mobile_phone" value="{$smarty.post.mobile_phone|htmlsafe}" size="25" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.fax}</td>
+		<th>{$LANG.fax}</th>
 		<td><input type="text" name="fax" value="{$smarty.post.fax|htmlsafe}" size="25" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.email}</td>
+		<th>{$LANG.email}</th>
 		<td><input type="text" name="email" value="{$smarty.post.email|htmlsafe}" size="25" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.credit_card_holder_name}</td>
+		<th>{$LANG.credit_card_holder_name}</th>
 		<td>
 			<input
 				type="text" name="credit_card_holder_name"
@@ -111,7 +111,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.credit_card_number}</td>
+		<th>{$LANG.credit_card_number}</th>
 		<td>
 			<input
 				type="text" name="credit_card_number"
@@ -120,7 +120,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.credit_card_expiry_month}</td>
+		<th>{$LANG.credit_card_expiry_month}</th>
 		<td>
 			<input
 				type="text" name="credit_card_expiry_month"
@@ -129,7 +129,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.credit_card_expiry_year}</td>
+		<th>{$LANG.credit_card_expiry_year}</th>
 		<td>
 			<input
 				type="text" name="credit_card_expiry_year"
@@ -138,7 +138,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.customer_cf1|htmlsafe}
+		<th>{$customFieldLabel.customer_cf1|htmlsafe}
  		<a
 			class="cluetip"
 			href="#"
@@ -147,11 +147,11 @@
 		>
 		<img src="./images/common/help-small.png" alt="" />
 		</a>
-		</td>
+		</th>
 		<td><input type="text" name="custom_field1" value="{$smarty.post.custom_field1|htmlsafe}" size="25" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.customer_cf2|htmlsafe}
+		<th>{$customFieldLabel.customer_cf2|htmlsafe}
 		<a
 			class="cluetip"
 			href="#"
@@ -160,11 +160,11 @@
 		> 
 		<img src="./images/common/help-small.png" alt="" />
 		</a>
-		</td>
+		</th>
 		<td><input type="text" name="custom_field2" value="{$smarty.post.custom_field2|htmlsafe}" size="25" /></td> 
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.customer_cf3|htmlsafe}
+		<th>{$customFieldLabel.customer_cf3|htmlsafe}
 		<a
 			class="cluetip"
 			href="#"
@@ -173,11 +173,11 @@
 		> 
 		<img src="./images/common/help-small.png" alt="" />
 		</a>
-		</td>
+		</th>
 		<td><input type="text" name="custom_field3" value="{$smarty.post.custom_field3|htmlsafe}" size="25" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$customFieldLabel.customer_cf4|htmlsafe}
+		<th>{$customFieldLabel.customer_cf4|htmlsafe}
 		<a
 			class="cluetip"
 			href="#"
@@ -186,15 +186,15 @@
 		> 
 		<img src="./images/common/help-small.png" alt="" />
 		</a>
-		</td>
+		</th>
 		<td><input type="text" name="custom_field4" value="{$smarty.post.custom_field4|htmlsafe}" size="25" /></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.notes}</td>
+		<th>{$LANG.notes}</th>
 		<td><textarea  name="notes" class="editor" rows="8" cols="50">{$smarty.post.notes|outhtml}</textarea></td>
 	</tr>
 	<tr>
-		<td class="details_screen">{$LANG.enabled}</td>
+		<th>{$LANG.enabled}</th>
 		<td>
 			{html_options name=enabled options=$enabled selected=1}
 		</td>
@@ -204,26 +204,22 @@
 		{showCustomFields categorieId="2"}
 	*}
 
-</table>
-<br />
-<table class="buttons" align="center">
-    <tr>
-        <td>
+	</table>
+
+	<div class="si_toolbar si_toolbar_form">
             <button type="submit" class="positive" name="id" value="{$LANG.save}">
                 <img class="button_img" src="./images/common/tick.png" alt="" /> 
                 {$LANG.save}
             </button>
-		</td>
-		<td>
-            <input type="hidden" name="op" value="insert_customer" />
-        
+
             <a href="./index.php?module=customers&amp;view=manage" class="negative">
                 <img src="./images/common/cross.png" alt="" />
                 {$LANG.cancel}
             </a>
-    
-        </td>
-    </tr>
-</table>
+	</div>
+
+</div>
+
+<input type="hidden" name="op" value="insert_customer" />
 </form>
 {/if}
