@@ -544,10 +544,10 @@ th.sortable_rt {
  * left rigth - define text align for tables here
  * */
 .align_right {
-	text-align:right; }
+	text-align:right !important; }
 
 .align_center {
-	text-align:center; }
+	text-align:center !important; }
 
 .validation_alert {
 	font-weight:700;
