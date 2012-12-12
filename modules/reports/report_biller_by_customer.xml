@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <!DOCTYPE REPORT SYSTEM "PHPReport.dtd">
 <REPORT NUMBERFORMATEX="2">
-<TITLE>Sales Report</TITLE>
-<BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
-<!-- <CSS>phpreports.css</CSS> -->
-
-	<PAGE BORDER="1" SIZE="2500" CELLSPACING="0" CELLPADDING="5" ALIGN="CENTER" WIDTH="700">
+	<PAGE CELLSPACING="0" CELLPADDING="0" ALIGN="" SIZE="2000">
 		<HEADER>
 			<ROW>
-				<COL COLSPAN="4" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">Sales by Customer - Group by Customer - Total</COL>
+				<COL CELLCLASS="si_rep_head">Customer</COL>
+				<COL CELLCLASS="si_rep_head">Sales</COL>
 			</ROW>
 		</HEADER>
 		<FOOTER>
 			<ROW>
-				<COL COLSPAN="3" ALIGN="RIGHT" CELLCLASS="PAGE_LAYER">Page Total</COL>
-				<COL ALIGN="LEFT" NUMBERFORMATEX="2" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD" TYPE="EXPRESSION">$this->getSum("SUM_TOTAL")</COL>
+				<COL CELLCLASS="si_rep_foot">Page Total</COL>
+				<COL CELLCLASS="si_rep_foot si_rep_foot_total" NUMBERFORMATEX="2" TYPE="EXPRESSION">$this->getSum("SUM_TOTAL")</COL>
 			</ROW>
 		</FOOTER>
 	</PAGE>
@@ -22,23 +19,19 @@
 		<GROUP NAME="billergroup" EXPRESSION="Biller">
 			<HEADER>
 				<ROW>
-					<COL COLSPAN="4" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD" TYPE="EXPRESSION">"Biller Name: " . $this->getValue("Biller")</COL>
-				</ROW>
-				<ROW>
-					<COL COLSPAN="2" CELLCLASS="PAGE_LAYER">Customer Name</COL>
-					<COL CELLCLASS="PAGE_LAYER">Sales</COL>
+					<COL COLSPAN="2" CELLCLASS="si_rep_group_head" TYPE="EXPRESSION">$this->getValue("Biller")</COL>
 				</ROW>
 			</HEADER>
 			<FOOTER>
 				<ROW>
-					<COL COLSPAN="3" ALIGN="RIGHT" CELLCLASS="GROUP_LAYER">Total</COL>
-					<COL ALIGN="LEFT" CELLCLASS="GROUP_LAYER" TEXTCLASS="BOLD" NUMBERFORMATEX="2" TYPE="EXPRESSION">$this->getSum("SUM_TOTAL")</COL>
+					<COL CELLCLASS="si_rep_group_foot">Total</COL>
+					<COL CELLCLASS="si_rep_group_foot si_rep_group_foot_total" NUMBERFORMATEX="2" TYPE="EXPRESSION">$this->getSum("SUM_TOTAL")</COL>
 				</ROW>
 			</FOOTER>
 			<FIELDS>
 				<ROW>
-					<COL COLSPAN="2" TYPE="FIELD" CELLCLASS="GROUP_LAYER" >Customer</COL>
-					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER" NUMBERFORMATEX="2">SUM_TOTAL</COL>
+					<COL TYPE="FIELD" CELLCLASS="si_rep_th" >Customer</COL>
+					<COL TYPE="FIELD" CELLCLASS="si_rep_td" NUMBERFORMATEX="2">SUM_TOTAL</COL>
 				</ROW>
 			</FIELDS>
 		</GROUP>

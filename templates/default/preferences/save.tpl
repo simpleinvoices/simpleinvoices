@@ -1,15 +1,12 @@
-<br />
+
+
+
 {if $saved == true }
-	<br />
-	 {$LANG.save_preference_success}
-	<br />
-	<br />
+	<div class="si_message_ok">{$LANG.save_preference_success}</div>
 {else}
-	<br />
-	 {$LANG.save_preference_failure}
-	<br />
-	<br />
+	<div class="si_message_error">{$LANG.save_preference_failure}</div>
 {/if}
+
 
 {if $saved == true }
 	<meta http-equiv="refresh" content="2;URL=index.php?module=preferences&amp;view=manage" />

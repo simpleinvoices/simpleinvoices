@@ -15,77 +15,50 @@
 */
 *}
 
-	<table class="buttons" align="center">
-    <tr>
-        <td>
-            <a href="./index.php?module=payments&amp;view=process&amp;op=pay_invoice" class="positive">
-                <img src="./images/famfam/add.png" alt=""/>
-                {$LANG.process_payment}
-            </a>
-
-        </td>
-    </tr>
-	</table>
+	<div class="si_toolbar si_toolbar_top">
+		<a href="./index.php?module=payments&amp;view=process&amp;op=pay_invoice" class=""><img src="./images/famfam/add.png" alt=""/>{$LANG.process_payment}</a>
 
  
 	{if $smarty.get.id }
-
-        <table class="buttons" align="center">
-        <tr>
-            </td>
-            <td>
-                <a href="./index.php?module=payments&amp;view=process&amp;id={$smarty.get.id|urlencode}&amp;op=pay_selected_invoice" class="positive">
-                    <img src="./images/famfam/money.png" alt=""/>
-                    {$LANG.payments_filtered_invoice}
-                </a>
-
-            </td>
-        </tr>
-        </table>
+        <a href="./index.php?module=payments&amp;view=process&amp;id={$smarty.get.id|urlencode}&amp;op=pay_selected_invoice" class=""><img src="./images/famfam/money.png" alt=""/>{$LANG.payments_filtered_invoice}</a>
+	</div>
+        
         {if $payments == null}
-        	<br />
-        	<br />
-        	<span class="welcome">{$LANG.no_payments_invoice}</span>
-        	<br />
-        	<br />
+			<div class="si_message">
+        		{$LANG.no_payments_invoice}
+			</div>        		
         {else}
-            <br />
         	<table id="manageGrid" style="display:none"></table>
         	{include file='../modules/payments/manage.js.php' get=$smarty.get}
         {/if}
 
 	{elseif $smarty.get.c_id }
-
+	</div>
 
         {if $payments == null}
-        	<br />
-        	<br />
-        	<span class="welcome">{$LANG.no_payments_customer}</span>
-        	<br />
-        	<br />
+			<div class="si_message">
+				{$LANG.no_payments_customer}
+			</div>        		
         {else}
-        	<br />
     	    <table id="manageGrid" style="display:none"></table>
         	{include file='../modules/payments/manage.js.php' get=$smarty.get}
         {/if}
 
 	{else}
+	</div>
 
         {if $payments == null}
-        	<br />
-        	<br />
-        	<span class="welcome">{$LANG.no_payments}</span>
-        	<br />
-        	<br />
+			<div class="si_message">
+        		{$LANG.no_payments}
+			</div>        		
         {else}
-        	<br />
         	<table id="manageGrid" style="display:none"></table>
         	{include file='../modules/payments/manage.js.php' get=$smarty.get}
         {/if}
 
 	{/if}
 
-<br />
-<div style="text-align:center;">
-<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_wheres_the_edit_button" title="{$LANG.wheres_the_edit_button}"><img src="./images/common/help-small.png" alt="" /> Wheres the Edit button?</a>
+
+<div class="si_help_div">
+	<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_wheres_the_edit_button" title="{$LANG.wheres_the_edit_button}"><img src="./images/common/help-small.png" alt="" /> Wheres the Edit button?</a>
 </div>

@@ -6,35 +6,21 @@
 *
 * License:
 *	 GPL v3 or above
-*
-* Website:
-*	http://www.simpleinvoices.org
 */
 *}
-<table class="buttons" align="center">
-    <tr>
-        <td>
-            <a href="./index.php?module=products&view=add" class="positive">
+	<div class="si_toolbar si_toolbar_top">
+            <a href="./index.php?module=products&view=add" class="">
                 <img src="./images/famfam/add.png" alt=""/>
                 {$LANG.add_new_product}
             </a>
-
-        </td>
-    </tr>
-</table>
+	</div>
 
 {if $number_of_rows.count == 0 }
 
-	<br />
-	<br />
-	<span class="welcome">{$LANG.no_products}</span>
-	<br />
-	<br />
-	<br />
-	<br />
+	<div class="si_message">{$LANG.no_products}</div>
 
 {else}
-	<br />
+
 	<table id="manageGrid" style="display:none"></table>
 	{include file='../modules/products/manage.js.php'}
 	

@@ -1,4 +1,3 @@
-<h3>Products sold in total by Product</h3>
-<hr />
+<h3 class="si_report_title">Products sold in total by Product</h3>
 
-{$showReport}
+{include file=$path|cat:'inc_phpreport.tpl'}

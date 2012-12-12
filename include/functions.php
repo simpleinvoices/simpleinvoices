@@ -289,9 +289,9 @@ function show_custom_field($custom_field,$custom_field_value,$permission,$css_cl
 		if ($permission == "read") {
 			$display_block = <<<EOD
 			<tr class="$css_class_tr" >
-				<td class="$css_class1">
+				<th class="$css_class1">
 					$custom_label_value$seperator
-				</td>
+				</th>
 				<td class="$css_class2" colspan="$td_col_span" >
 					$custom_field_value
 				</td>
@@ -303,10 +303,9 @@ EOD;
 
 		$display_block = <<<EOD
 			<tr>
-				<td class="$css_class1">$custom_label_value
-				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="Custom Fields"><img src="./images/common/help-small.png" alt="" /></a>
- 
-				</td>
+				<th class="$css_class1">$custom_label_value
+					<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="Custom Fields"><img src="./images/common/help-small.png" alt="" /></a>
+				</th>
 				<td>
 					<input type="text" name="customField$custom_field_number" value="$custom_field_value" size="25" />
 				</td>

@@ -21,7 +21,7 @@ class product
          global $auth_session;
          global $db;
  
-         $sql = "SELECT * FROM ".TB_PREFIX."products WHERE domain_id = :domain_id and visible = 1 ORDER BY id";
+         $sql = "SELECT * FROM ".TB_PREFIX."products WHERE domain_id = :domain_id and visible = 1 ORDER BY description, id";
          $sth  = $db->query($sql,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
  
          return $sth->fetchAll();

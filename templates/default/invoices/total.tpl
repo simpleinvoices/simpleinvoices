@@ -15,97 +15,82 @@
 <!--
 <h3>{$LANG.inv} {$LANG.inv_total}</h3>
 -->
+
+<div class="si_invoice_form">
+
+
 {include file="$path/header.tpl" }
 
-<tr>
-<td class="details_screen">{$LANG.description}</td>
-</tr>
+	<table id="itemtable" class="si_invoice_items">
+		<tr>
+			<td class="si_invoice_notes" colspan="5">
+				<h5>{$LANG.description}</h5>
+				<textarea input type="text" class="editor" name="description" rows="10" cols="100" wrap="nowrap"></textarea>
+			</td>
+		</tr>
+	</table>
 
-<tr>
-	<td colspan="6" >
-<textarea input type="text" class="editor" name="description" rows="10" cols="100" wrap="nowrap"></textarea></td>
-</tr>
+	<table class="si_invoice_bot">
+
+		<tr class="si_invoice_total">
+			<th class="">{$LANG.gross_total}</th>
+			{section name=tax_header loop=$defaults.tax_per_line_item }
+				<th class="">{$LANG.tax} {if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1|htmlsafe}{/if} </th>
+			{/section}
+			<th class="">{$LANG.inv_pref}</th>
+		</tr>
+
+		<tr class="si_invoice_total">
+			<td><input type="text" class="validate[required]" name="unit_price" size="15" /></td>
+		{if $taxes == null }
+			<td><p><em>{$LANG.no_taxes}</em></p></td>
+		{else}
+			{section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
+			<td>				                				                
+				<select id="tax_id[0][{$smarty.section.tax.index|htmlsafe}]" name="tax_id[0][{$smarty.section.tax.index|htmlsafe}]">
+					<option value=""></option>
+				{foreach from=$taxes item=tax}
+					<option {if $tax.tax_id == $defaults.tax AND $smarty.section.tax.index == 0} selected {/if}   value="{$tax.tax_id|htmlsafe}">{$tax.tax_description|htmlsafe}</option>
+				{/foreach}
+				</select>
+			</td>
+			{/section}
+		{/if}
+		
+			<td>
+		{if $preferences == null }
+				<p><em>{$LANG.no_preferences}</em></p>
+		{else}
+				<select name="preference_id">
+			{foreach from=$preferences item=preference}
+					<option {if $preference.pref_id == $defaults.preference} selected {/if} value="{$preference.pref_id|htmlsafe}">{$preference.pref_description|htmlsafe}</option>
+			{/foreach}
+				</select>
+		{/if}		
+			</td>		
+		</tr>
 
 	{$show_custom_field.1}
 	{$show_custom_field.2}
 	{$show_custom_field.3}
 	{$show_custom_field.4}
-	{*
-		{showCustomFields categorieId="4"}
-	*}
+
+
+	</table>
 
 
 
+	<div class="si_toolbar si_toolbar_form">
+			<button type="submit" class="positive" name="submit" value="{$LANG.save}"><img class="button_img" src="./images/common/tick.png" alt="" />{$LANG.save}</button>
+			<a href="./index.php?module=invoices&amp;view=manage" class="negative"><img src="./images/common/cross.png" alt="" />{$LANG.cancel}</a>
+	</div>
 
-<tr>
-	<td class="details_screen">{$LANG.gross_total}</td>
-    {section name=tax_header loop=$defaults.tax_per_line_item }
-        <td class="details_screen">{$LANG.tax} {if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1|htmlsafe}{/if} </td>
-    {/section}
-    <td class="details_screen">{$LANG.inv_pref}</td>
-</tr>
-<tr>
-	<td><input type="text" class="validate[required]" name="unit_price" size="15" /></td>
-	{if $taxes == null }
-	    <td><p><em>{$LANG.no_taxes}</em></p></td>
-    {else}
-        {section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
-        <td>				                				                
-            <select 
-                id="tax_id[0][{$smarty.section.tax.index|htmlsafe}]"
-                name="tax_id[0][{$smarty.section.tax.index|htmlsafe}]"
-            >
-            <option value=""></option>
-            {foreach from=$taxes item=tax}
-                <option {if $tax.tax_id == $defaults.tax AND $smarty.section.tax.index == 0} selected {/if}   value="{$tax.tax_id|htmlsafe}">{$tax.tax_description|htmlsafe}</option>
-            {/foreach}
-        </select>
-        </td>
-        {/section}
-    {/if}
-<td>
-
-{if $preferences == null }
-	<p><em>{$LANG.no_preferences}</em></p>
-{else}
-	<select name="preference_id">
-	{foreach from=$preferences item=preference}
-		<option {if $preference.pref_id == $defaults.preference} selected {/if} value="{$preference.pref_id|htmlsafe}">{$preference.pref_description|htmlsafe}</option>
-	{/foreach}
-	</select>
-{/if}
-
-</td>
-	
-<tr>
-	<td align="left">
+	<div class="si_help_div">
 		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="./images/common/help-small.png" alt="" /> {$LANG.want_more_fields}</a>
-	</td>
-</tr>
-<!--Add more line items while in an itemeised invoice - Get style - has problems- wipes the current values of the existing rows - not good
-<tr>
-<td>
-<a href="?get_num_line_items=10">Add 5 more line items<a>
-</tr>
--->
-</table>
-<!-- </div> -->
-<br />
-<table class="buttons" align="center">
-	<tr>
-		<td>
-			<button type="submit" class="positive" name="submit" value="{$LANG.save}">
-				<img class="button_img" src="./images/common/tick.png" alt="" /> 
-				{$LANG.save}
-			</button>
-            		<input type="hidden" name="max_items" value="{$smarty.section.line.index|htmlsafe}" />
-			<input type="hidden" name="type" value="1" />
-			<a href="./index.php?module=invoices&amp;view=manage" class="negative">
-				<img src="./images/common/cross.png" alt="" />
-				{$LANG.cancel}
-			</a>
-		</td>
-	</tr>
-</table>
+	</div>
+
+</div>
+<input type="hidden" name="max_items" value="{$smarty.section.line.index|htmlsafe}" />
+<input type="hidden" name="type" value="1" />
 
 </form>

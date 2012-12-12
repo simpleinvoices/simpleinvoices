@@ -4,10 +4,7 @@
 * 	 Customer save template
 *
 * Authors:
-*	 Justin Kelly, Nicolas Ruflin
-*
-* Last edited:
-* 	 2007-07-18
+*	 Justin Kelly, Nicolas Ruflin, Soif
 *
 * License:
 *	 GPL v2 or above
@@ -18,17 +15,11 @@
 *}
 
 {if $saved == true }
-
-<br />
-	{$LANG.save_customer_success}
-<br />
-<br />
+	<div class="si_message_ok">{$LANG.save_customer_success}</div>
 {else}
-<br />
-	 {$LANG.save_customer_failure}
-<br />
-<br />
+	<div class="si_message_error">{$LANG.save_customer_failure}</div>
 {/if}
+
 
 {if $smarty.post.cancel == null }
 	<meta http-equiv="refresh" content="2;url=index.php?module=customers&amp;view=manage" />

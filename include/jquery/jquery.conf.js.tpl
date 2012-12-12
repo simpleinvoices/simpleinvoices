@@ -128,7 +128,8 @@ $(document).ready(function(){
 	}
 
 	//hide the description field for each line item on invoice creation
-	$('.notes').hide();
+	// not needed anymore (si_hide CSS class used)
+	//$('.notes').hide();
 
 	/*
 	* Product Change - updates line item with product price info
@@ -153,7 +154,8 @@ $(document).ready(function(){
  
     
 	//delete line in invoice
-	$(".trash_link").livequery('click',function () { 
+	$(".trash_link").livequery('click',function (e) { 
+		e.preventDefault();
       id = $(this).attr("rel");
 	{/literal}
 	{if $config->confirm->deleteLineItem}
@@ -171,7 +173,8 @@ $(document).ready(function(){
     });
 	
 	//delete line in invoice
-	$(".trash_link_edit").livequery('click',function () { 
+	$(".trash_link_edit").livequery('click',function (e) { 
+		e.preventDefault();
       id = $(this).attr("rel");
 
 	{/literal}
@@ -190,9 +193,11 @@ $(document).ready(function(){
     });
 
 	//add new lien item in invoices
-	$("a.add_line_item").click(function () { 
+	$("a.add_line_item").click(function (e) { 
+		e.preventDefault();
 		add_line_item();
-		//autoFill($(".note"), "Description");
+		//(unused) already done in the add_line_item fn
+		//autoFill($(".details"), "Description");
     });
 
 
@@ -208,24 +213,24 @@ $(document).ready(function(){
 
 	
 	//Autofill "Description" into the invoice items description/notes textarea
-	$(".note").livequery(function(){
+	$(".detail").livequery(function(){
 			
-			$description = $(".note").val();
+			var description = $(".detail").val();
 		
-			if ($description == "")
+			if ( description == "")
 			{
-				$(".note").val('{/literal}{$LANG.description}{literal}');
-				//$(this).val("").css({ color: '#333'});
+				$(".detail").val('{/literal}{$LANG.description}{literal}');
+				$(".detail").css({ color: '#b2adad'});
 			}
 	
-			$(".note").focus(function(){
+			$(".detail").focus(function(){
 	            if($(this).val()=="{/literal}{$LANG.description}{literal}"){
 	               $(this).val("").css({ color: '#333' });
-            }
+            	}
+			});
 	});
-	});
-	$(".note").css({ color: "#b2adad" });
-
+	//(unused) the color is now correctly handled
+    //$(".detail").css({ color: "#b2adad" });
 
 
 	//Export dialog window - onclick export button close window

@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <!DOCTYPE REPORT SYSTEM "PHPReport.dtd"> 
 <REPORT NUMBERFORMATEX="2">
-	<TITLE>Sales Report</TITLE>
-   <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
- <!--  <CSS>phpreports.css</CSS>  -->
-   <PAGE BORDER="1" SIZE="2500" CELLSPACING="0" CELLPADDING="5" ALIGN="CENTER" WIDTH="500">
+	<PAGE CELLSPACING="0" CELLPADDING="0" ALIGN="" SIZE="2000">
       <HEADER>
          <ROW>
-            <COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">Debtors - Amount owing per Customer</COL>
-         </ROW>
-         <ROW>
-            <COL COLSPAN="1" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">ID</COL>
-            <COL COLSPAN="1" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">Customer</COL>
-            <COL COLSPAN="1" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">Total</COL>
-            <COL COLSPAN="1" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">Paid</COL>
-            <COL COLSPAN="1" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">Owing</COL>
+            <COL CELLCLASS="si_rep_head">Customer</COL>
+            <COL CELLCLASS="si_rep_head">Total</COL>
+            <COL CELLCLASS="si_rep_head">Paid</COL>
+            <COL CELLCLASS="si_rep_head">Owing</COL>
          </ROW>
       </HEADER>		
       <FOOTER>
          <ROW>
-            <COL ALIGN="RIGHT" COLSPAN="4" CELLCLASS="PAGE_LAYER">Total Owing</COL>
-            <COL ALIGN="LEFT" NUMBERFORMATEX="2" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD" TYPE="EXPRESSION">$this->getSum("inv_owing")</COL>
+            <COL CELLCLASS="si_rep_foot" COLSPAN="3">Total</COL>
+            <COL CELLCLASS="si_rep_foot si_rep_foot_total" NUMBERFORMATEX="2" TYPE="EXPRESSION">$this->getSum("inv_owing")</COL>
          </ROW>
       </FOOTER>		
    </PAGE>
@@ -29,11 +22,10 @@
 
 			<FIELDS>
 				<ROW>
-					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">cid</COL>
-					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">customer</COL>
-					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">inv_total</COL>
-					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">inv_paid</COL>
-					<COL TYPE="FIELD" CELLCLASS="GROUP_LAYER">inv_owing</COL>
+					<COL TYPE="FIELD" CELLCLASS="si_rep_th">customer</COL>
+					<COL TYPE="FIELD" CELLCLASS="si_rep_td" NUMBERFORMATEX="2">inv_total</COL>
+					<COL TYPE="FIELD" CELLCLASS="si_rep_td" NUMBERFORMATEX="2">inv_paid</COL>
+					<COL TYPE="FIELD" CELLCLASS="si_rep_td" NUMBERFORMATEX="2">inv_owing</COL>
 				</ROW>
 			</FIELDS>
 		</GROUP>

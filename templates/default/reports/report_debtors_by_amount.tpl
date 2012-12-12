@@ -1,5 +1,4 @@
 
-<h3>Debtor invoices ordered by amount owed</h3>
-<hr />
+<h3 class="si_report_title">Debtor invoices ordered by amount owed</h3>
 
-{$showReport}
+{include file=$path|cat:'inc_phpreport.tpl'}

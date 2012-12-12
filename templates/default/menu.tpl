@@ -1,20 +1,8 @@
-<div class="top_menu">
+
+<div id="si_header">
 {$smarty.capture.hook_topmenu_start}
 
-{*
-	<div class="txt_right" style="">
-		<table class="buttons" align="left">
-		<tr>
-		<td>
-			<a href="./index.php?module=billers&amp;view=add" class="positive">
-			<img src="./images/famfam/add.png" alt="" />
-			</a>
-		</td>
-		</tr>
-		</table>
-	</div>
-*}
-	<div class="txt_right">
+	<div class="si_wrap">
 		{$LANG.hello} {$smarty.session.Zend_Auth.email|htmlsafe} | <a href="http://www.simpleinvoices.org/help" target="blank">{$LANG.help}</a>
 		{if $config->authentication->enabled == 1}
 			|
@@ -24,13 +12,17 @@
 				<a href="index.php?module=auth&amp;view=logout">{$LANG.logout}</a>
 			{/if}
 		{/if}
-	
 	</div>
 {$smarty.capture.hook_topmenu_end}
 </div>
 
-<div id="tabmenu" class="flora" >
+
+
+
+
+<div id="tabmenu" class="flora si_wrap" >
 {$smarty.capture.hook_tabmenu_start}
+
 	<ul>
 {$smarty.capture.hook_tabmenu_main_start}
 		<li><a href="#home"><span>{$LANG.home}</span></a></li>
@@ -38,7 +30,7 @@
 		<li><a href="#people"><span>{$LANG.people}</span></a></li>
 		<li><a href="#product"><span>{$LANG.products}</span></a></li>
 {$smarty.capture.hook_tabmenu_main_end}
-		<li style="float:right" class="menu_setting"><a href="#setting"><span>{$LANG.settings}</span></a></li>
+		<li id="si_tab_settings"><a href="#setting"><span>{$LANG.settings}</span></a></li>
 	</ul>
 
 	<div id="home">
@@ -129,4 +121,6 @@
 	</div>
 {$smarty.capture.hook_tabmenu_end}
 </div>
+
+
 
