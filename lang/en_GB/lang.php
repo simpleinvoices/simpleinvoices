@@ -543,6 +543,7 @@ $LANG['total'] = "Total";//1
 $LANG['total_amount'] = "Total amount";//1
 $LANG['total_by_aging_periods'] = "Total by Aging periods";//1
 $LANG['total_invoices'] = "Total Invoices";//1
+$LANG['total_owed'] = "Total Owed";//1
 $LANG['total_owed_per_customer'] = "Total Owed per Customer";//1
 $LANG['total_owing'] = "Total Owing";//1
 $LANG['total_paid'] = "Total Paid";//1

@@ -1,9 +1,7 @@
 <?php
-//   include phpreports library
-require_once("./include/reportlib.php");
 
    if ($db_server == 'pgsql') {
-      $sSQL = "SELECT
+      $sql = "SELECT
         iv.id,
         b.name AS biller,
         c.name AS customer,
@@ -26,7 +24,7 @@ ORDER BY
         inv_owing DESC;
 ";
    } else {
-      $sSQL = "SELECT
+      $sql = "SELECT
         i.id,
         (select name from " . TB_PREFIX . "biller b where b.id = i.biller_id) as biller,
         (select name from " . TB_PREFIX . "customers c where c.id = i.customer_id) as customer,
@@ -41,11 +39,19 @@ ORDER BY
 ";
    }
 
-   $oRpt->setXML("./modules/reports/report_debtors_by_amount.xml");
+  $invoice_results = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
 
-//   include phpreports run code
-	include("./include/reportrunlib.php");
+  $total_owed = 0;
+  $invoices = array();
 
-$smarty -> assign('pageActive', 'report');
-$smarty -> assign('active_tab', '#home');
+  while($invoice = $invoice_results->fetch()) {
+    $total_owed += $invoice['inv_owing'];
+    array_push($invoices, $invoice);
+  }
+
+  $smarty -> assign('data', $invoices);
+  $smarty -> assign('total_owed', $total_owed);   
+
+  $smarty -> assign('pageActive', 'report');
+  $smarty -> assign('active_tab', '#home');
 ?>
