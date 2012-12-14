@@ -43,7 +43,7 @@
 
 	<div id="export_dialog" class="flora" title="Export">
 		<div class="si_toolbar si_toolbar_dialog">
-					<a title='{$LANG.export_tooltip} {$LANG.export_pdf_tooltip}' ><img src="./images/common/page_white_acrobat.png" alt="" />
+					<a title='{$LANG.export_tooltip} {$LANG.export_pdf_tooltip}' class='export_pdf export_window'><img src="./images/common/page_white_acrobat.png" alt="" />
 						{$LANG.export_pdf}
 					</a>
 
