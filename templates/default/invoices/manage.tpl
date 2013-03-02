@@ -13,9 +13,6 @@
 
 *}
 
-	<div class="si_toolbar si_toolbar_top">
-		<a href="index.php?module=invoices&amp;view=itemised" class=""><img src="./images/common/add.png" alt="" />{$LANG.new_invoice}</a>
-	</div>
 
 
 {if $number_of_invoices.count == 0}	
@@ -25,7 +22,7 @@
 
 {else}
 
-	<div class="si_filters">
+	<div class="si_filters_invoices">
 		<span class='si_filters_title'>{$LANG.filters}:</span>
 		<span class='si_filters_links'>
 			<a href="index.php?module=invoices&amp;view=manage" class="first{if $smarty.get.having==''} selected{/if}">{$LANG.all}</a>
@@ -34,6 +31,9 @@
 			<a href="index.php?module=invoices&amp;view=manage&amp;having=draft" class="{if $smarty.get.having=='draft'}selected{/if}">{$LANG.draft}</a>
 			<a href="index.php?module=invoices&amp;view=manage&amp;having=real"  class="{if $smarty.get.having=='real'}selected{/if}">{$LANG.real}</a>
 		</span>
+	</div>
+	<div class="si_toolbar si_toolbar_top si_toolbar_top_left">
+		<a href="index.php?module=invoices&amp;view=itemised" class=""><img src="./images/common/add.png" alt="" />{$LANG.new_invoice}</a>
 	</div>
 
 

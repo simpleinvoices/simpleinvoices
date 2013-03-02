@@ -525,6 +525,7 @@ $LANG['summary_of_accounts'] = "Summary of accounts";//1
 $LANG['system_defaults'] = "System Defaults";//1
 $LANG['system_preferences'] = "System Preferences";//1
 $LANG['tax'] = "Tax";//1
+$LANG['tax_amount'] = "Tax amount";//1
 $LANG['tax_description'] = "Tax description";//1
 $LANG['tax_id'] = "Tax ID";//1
 $LANG['tax_percentage'] = "Tax Percentage";//1
