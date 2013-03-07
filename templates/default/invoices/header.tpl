@@ -14,13 +14,13 @@
 
 	<input type="hidden" name="action" value="insert" />
 
-    <div class="si_filters">
+    <div class="si_filters si_buttons_invoice_header">
     	<span class="si_filters_links">
 	    	<a href="index.php?module=invoices&amp;view=itemised" class="first{if $view=='itemised'} selected{/if}"><img class="action" src="./images/common/edit.png"/>{$LANG.itemised_style}</a>
 	    	<a href="index.php?module=invoices&amp;view=total" class="{if $view=='total'}selected{/if}"><img class="action" src="./images/common/page_white_edit.png"/>{$LANG.total_style}</a>
 		</span>
     	<span class="si_filters_title">
-			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_types" title="{$LANG.invoice_type}"><img class="action" src="./images/common/help-small.png" alt="" /></a>
+			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_types" title="{$LANG.invoice_type}"><img class="" src="./images/common/help-small.png" alt="" /></a>
 		</span>
 	</div>
 

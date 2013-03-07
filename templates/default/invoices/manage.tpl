@@ -22,7 +22,7 @@
 
 {else}
 
-	<div class="si_filters_invoices">
+	<div class="si_filters_invoices si_buttons_manage_invoices">
 		<span class='si_filters_title'>{$LANG.filters}:</span>
 		<span class='si_filters_links'>
 			<a href="index.php?module=invoices&amp;view=manage" class="first{if $smarty.get.having==''} selected{/if}">{$LANG.all}</a>
