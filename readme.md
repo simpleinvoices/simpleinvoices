@@ -7,7 +7,7 @@ When cloning the repository use the `--recursive` option to ensure that Zend is 
 `git clone --recursive git@github.com:simpleinvoices/simpleinvoices.git`
 
 ## Downloads
-Latest Beta Release: [2013.1-beta1](https://github.com/simpleinvoices/simpleinvoices/archive/2013.1-beta1.zip) (.zip)
+Latest Beta Release: [2013.1-beta1](https://github.com/simpleinvoices/simpleinvoices/archive/2013.1-beta1.zip) (.zip)  
 Latest Stable Release: [2011.1](http://simpleinvoices.googlecode.com/files/simpleinvoices.2011.1.zip) (.zip)
 
 ## Documentation
