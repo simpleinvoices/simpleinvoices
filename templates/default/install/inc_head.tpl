@@ -1,4 +1,6 @@
-<img src="images/common/simple_invoices_logo.jpg" class="si_install_logo"/>
+<div id="si_install_logo">
+	<img src="images/common/simple_invoices_logo.jpg" class="si_install_logo" width="300"/>
+</div>
 
 <div id="tabmenu" class="si_install_steps">
 	<div id="money" class="ui-tabs-panel si_center" style="">
