@@ -1,8 +1,10 @@
 {include file=$path|cat:'inc_head.tpl'}
 
 
-<div class="si_message_ok">
-The Simple Invoices essential data has been imported.<br />
+<div class="si_form si_message_install">
+The Simple Invoices essential data has been imported.
+<br />
+<br />
 You can select to just start using Simple Invoices now or install sample data.
 </div>
 

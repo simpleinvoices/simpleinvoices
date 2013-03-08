@@ -640,11 +640,21 @@ table.buttons {
 	border-radius: 8px;
 }
 .si_message{
-	background-color: #d0fefe;
-	border: 1px solid #afd7fb;
 	padding:18px;
 	min-height: 0;
 	font-size: 12px;
+/*
+ * twitter blue
+    color: #3a87ad;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+*/
+    color: #c09853;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    background-color: #fcf8e3;
+    border: 1px solid #fbeed5;
+
+
 }
 
 .si_message_ok{
@@ -660,6 +670,13 @@ table.buttons {
     border-color: #eed3d7;
 }
 
+.si_message_install{
+    margin:30px;
+    padding: 3px;
+    border-bottom: 1px dotted #ddd;
+    border-top: 1px dotted #ddd;
+}
+}
 /* @end */
 
 

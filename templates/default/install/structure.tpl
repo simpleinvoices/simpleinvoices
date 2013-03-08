@@ -1,8 +1,10 @@
 {include file=$path|cat:'inc_head.tpl'}
 
 
-<div class="si_message_ok">
-	The Simple Invoices database has now been installed.<br/>
+<div class="si_form si_message_install">
+	The Simple Invoices database has now been installed.
+    <br/>
+    <br/>
 	The next step is to import the essential data.<br />
 	<br />
 	Click the 'Install Essential Data' button below to continue the installation.
