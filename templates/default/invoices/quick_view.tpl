@@ -51,7 +51,7 @@
 			</td>
 		</tr>
 		<tr class="summary">
-			<th class="">{$LANG.date}:</th>
+			<th class="">{$LANG.date_upper}:</th>
 			<td colspan="5">{$invoice.date|htmlsafe}</td>
 		</tr>
 	
