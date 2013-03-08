@@ -630,6 +630,7 @@ table.buttons {
 
 .si_message,
 .si_message_ok,
+.si_message_warning,
 .si_message_error{
 	padding:10px;
 	margin: 10px;
@@ -643,17 +644,9 @@ table.buttons {
 	padding:18px;
 	min-height: 0;
 	font-size: 12px;
-/*
- * twitter blue
     color: #3a87ad;
     background-color: #d9edf7;
     border-color: #bce8f1;
-*/
-    color: #c09853;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-    background-color: #fcf8e3;
-    border: 1px solid #fbeed5;
-
 
 }
 
@@ -670,12 +663,18 @@ table.buttons {
     border-color: #eed3d7;
 }
 
+.si_message_warning{
+    color: #c09853;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    background-color: #fcf8e3;
+    border: 1px solid #fbeed5;
+}
+
 .si_message_install{
     margin:30px;
     padding: 3px;
     border-bottom: 1px dotted #ddd;
     border-top: 1px dotted #ddd;
-}
 }
 /* @end */
 
@@ -1909,18 +1908,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', end
 }
 
 /* @end */
-
-.si_message_warning{
-	padding: 2px 10px 2px 27px;
-	margin: 10px auto;
-	background-color: #F00;
-	color: #FFF;
-	font-weight: bold;
-	background:  #F00 url(../../../images/common/important.png) 6px 2px no-repeat;
-	-moz-border-radius:5px
-	-webkit-border-radius:5px
-	border-radius:5px
-}
 
 /* @group Si Page Home (FirstRun)
 ------------------------------------------------------------------- */
