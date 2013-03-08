@@ -625,20 +625,13 @@ table.buttons {
 .si_message,
 .si_message_ok,
 .si_message_error{
-	padding:50px 30px;
-	padding-left: 158px;	
-	margin: 50px 30px;
+	padding:10px;
+	margin: 10px;
 	text-align: center;
 	border: 1px solid #ccc;
 	-moz-border-radius:8px;
 	-webkit-border-radius:8px;
 	border-radius: 8px;
-	min-height: 58px;
-	font-size: 16px;
-	line-height: 140%;
-	-moz-box-shadow: 2px 2px 4px rgba(000,000,000,0.1);
-	-webkit-box-shadow: 2px 2px 4px rgba(000,000,000,0.1);
-	box-shadow: 2px 2px 4px rgba(000,000,000,0.1);
 }
 .si_message{
 	background-color: #d0fefe;
@@ -649,13 +642,16 @@ table.buttons {
 }
 
 .si_message_ok{
-	background: #c0fcbf url(../../../images/common/mess_ok.png) no-repeat 15px 10px;
+   background: #dff0d8 url(../../../images/common/tick.png) 47px 16px no-repeat;
+   border-color: #d6e9c6;
+   color: #468847;
 }
 
 .si_message_error{
-	border: 2px solid #900;
-	background: #ff1713 url(../../../images/common/mess_error.png) no-repeat 15px 20px;
-	color: #fff;
+	background: url(../../../images/common/cross.png) no-repeat 47px 16px;
+    color: #b94a48;
+    background-color: #f2dede;
+    border-color: #eed3d7;
 }
 
 /* @end */

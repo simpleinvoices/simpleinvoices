@@ -101,7 +101,7 @@ $menu = isset($menu)?$menu: true;
 // Check for any unapplied SQL patches when going home
 //TODO - redo this code
 if (($module == "options") && ($view == "database_sqlpatches")) {
-	include_once('./modules/options/database_sqlpatches.php');
+	include_once('./include/sql_patches.php');
 	donePatches();
 } else {
 	
@@ -135,7 +135,7 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
     {
 		if ( ($config->authentication->enabled == 1 AND isset($auth_session->id)) OR ($config->authentication->enabled == 0) )	
 		{
-			include_once('./modules/options/database_sqlpatches.php');
+			include_once('./include/sql_patches.php');
 			if (getNumberOfPatches() > 0 ) {
 				$view = "database_sqlpatches";
 				$module = "options";
