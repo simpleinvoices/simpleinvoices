@@ -1487,6 +1487,21 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['253']['name'] = "Add PaymentsGateway API ID field";
     $patch['253']['patch'] = "ALTER TABLE `".TB_PREFIX."biller` ADD  `paymentsgateway_api_id` VARCHAR( 255 ) NULL AFTER `eway_customer_id`;";
     $patch['253']['date'] = "20110918";
+
+    $patch['254']['name'] = "Product Matrix - update line items table";
+    $patch['254']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` ADD `attribute` VARCHAR( 255 ) NULL ;";
+    $patch['254']['date'] = "20110918";
+
+    $patch['255']['name'] = "Product Matrix - update line items table";
+    $patch['255']['patch'] = " 
+        CREATE TABLE `".TB_PREFIX."products_attributes` (
+            `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+            `name` VARCHAR( 255 ) NOT NULL,
+            `display_name` VARCHAR( 255 ) NOT NULL,
+            `type` VARCHAR( 255 ) NOT NULL
+            ) ENGINE = MYISAM ;";
+        $patch['255']['date'] = "20110918";
+/*
 /*
 ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );
 
