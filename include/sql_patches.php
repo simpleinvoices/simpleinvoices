@@ -1501,6 +1501,60 @@ PRIMARY KEY ( `domain_id`, `id` )
             `type` VARCHAR( 255 ) NOT NULL
             ) ENGINE = MYISAM ;";
         $patch['255']['date'] = "20110918";
+
+
+
+    $patch['254']['name'] = "Product Matrix - update line items table";
+    $patch['254']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` ADD `attribute` VARCHAR( 255 ) NULL ;";
+    $patch['254']['date'] = "20110918";
+
+
+    $patch['254']['name'] = "Product Matrix - update line items table";
+    $patch['254']['patch'] = "INSERT INTO `". TB_PREFIX ."products_attributes` (`id`, `name`, `display_name`) VALUES (NULL, 'Bottle Size','Size'), (NULL,'T-shirt Colour', 'Colour');";
+    $patch['254']['date'] = "20110918";
+
+
+
+    $patch['254']['name'] = "Product Matrix - update line items table";
+    $patch['254']['patch'] = "CREATE TABLE `". TB_PREFIX ."products_values` (
+`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`attribute_id` INT( 11 ) NOT NULL ,
+`value` VARCHAR( 255 ) NOT NULL
+) ENGINE = MYISAM ;";
+    $patch['254']['date'] = "20110918";
+
+
+
+    $patch['254']['name'] = "Product Matrix - update line items table";
+    $patch['254']['patch'] = "INSERT INTO `". TB_PREFIX ."products_values` (`id`, `attribute_id`,`value`) VALUES (NULL,'1', 'S'),  (NULL,'1', 'M'), (NULL,'1', 'L'),  (NULL,'2', 'Red'),  (NULL,'2', 'White');";
+    $patch['254']['date'] = "20110918";
+
+
+    $patch['254']['name'] = "Product Matrix - update line items table";
+    $patch['254']['patch'] = "CREATE TABLE `". TB_PREFIX ."products_matrix` (
+`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`product_id` INT( 11 ) NOT NULL ,
+`attribute_id` INT( 11 ) NOT NULL
+) ENGINE = MYISAM ;";
+    $patch['254']['date'] = "20110918";
+
+
+    $patch['254']['name'] = "Product Matrix - update line items table";
+    $patch['254']['patch'] =" ALTER TABLE `". TB_PREFIX ."products_matrix` ADD `product_attribute_number` INT( 11 ) NOT NULL AFTER `product_id` ;";
+    $patch['254']['date'] = "20110918";
+
+
+    $patch['254']['name'] = "Product Matrix - update line items table";
+    $patch['254']['patch'] =" INSERT INTO `". TB_PREFIX ."products_matrix` (`id`, `product_id`,`product_attribute_number`, `attribute_id`) VALUES (NULL,'1', '1', '1'),  (NULL,'1', '2', '2'), (NULL,'2', '1', '2');";
+    $patch['254']['date'] = "20110918";
+
+
+    $patch['254']['name'] = "Product Matrix - update line items table";
+    $patch['254']['patch'] ="ALTER TABLE `". TB_PREFIX ."products_attributes` ADD `display_name` VARCHAR( 255 ) NOT NULL ;";
+    $patch['254']['date'] = "20110918";
+
+
+
 /*
 /*
 ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );
