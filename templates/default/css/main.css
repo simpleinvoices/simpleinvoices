@@ -889,6 +889,9 @@ A.cluetip:hover IMG{
 	vertical-align: top;
 	line-height: 26px;
 }
+.si_form TBODY TH.product_attribute{
+    text-align:left;
+}
 .si_form H4{
 	font-size: 12px;
 	color: #666;

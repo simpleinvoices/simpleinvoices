@@ -93,6 +93,16 @@
 		    		{ if $subPageActive == "inventory_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
 			    	{ if $subPageActive == "inventory_add"} <li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
             {/if}
+            {if $defaults.product_attributes}
+    			<li><a { if $pageActive == "inventory"} class="active"{/if} href="index.php?module=product_attribute&amp;view=manage">{$LANG.product_attributes}</a></li>
+	    			{ if $subPageActive == "inventory_view"} <li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
+		    		{ if $subPageActive == "inventory_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
+			    	{ if $subPageActive == "inventory_add"} <li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
+    			<li><a { if $pageActive == "inventory"} class="active"{/if} href="index.php?module=product_value&amp;view=manage">{$LANG.product_values}</a></li>
+	    			{ if $subPageActive == "inventory_view"} <li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
+		    		{ if $subPageActive == "inventory_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
+			    	{ if $subPageActive == "inventory_add"} <li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
+            {/if}
 		</ul>
 	</div>
 

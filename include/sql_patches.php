@@ -1534,6 +1534,13 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['261']['patch'] =" INSERT INTO `". TB_PREFIX ."products_matrix` (`id`, `product_id`,`product_attribute_number`, `attribute_id`) VALUES (NULL,'1', '1', '1'),  (NULL,'1', '2', '2'), (NULL,'2', '1', '2');";
     $patch['261']['date'] = "20130313";
 
+	$patch['262']['name'] = "Add product attributes system preference";
+	$patch['262']['patch'] = "INSERT INTO ".TB_PREFIX."system_defaults (id, name ,value ,domain_id ,extension_id ) VALUES (NULL , 'product_attributes', '0', '1', '1');";
+	$patch['262']['date'] = "20130313";
+
+    $patch['263']['name'] = "Product Matrix - update line items table";
+    $patch['263']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `attribute` VARCHAR( 255 ) NULL ;";
+    $patch['263']['date'] = "20130313";
 
 /*
 /*

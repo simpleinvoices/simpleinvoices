@@ -75,6 +75,22 @@
 			</th>
 			<td><input type="text" class="edit" name="custom_field4" value="{$smarty.post.custom_field4|htmlsafe}" size="50" /></td>
 		</tr>
+        {if $defaults.product_attributes}
+            <tr>
+                <th class="details_screen">{$LANG.product_attributes}</th>
+                <td>
+                </td>
+            </tr>
+            {foreach from=$attributes item=attribute}
+                <tr>
+                    <td></td>
+                    <th class="details_screen product_attribute">
+                    <input type="checkbox" name="vehicle" value="{$attribute.id}"/>
+                    {$attribute.name}
+                    </th>
+                </tr>
+            {/foreach}
+        {/if}
 		<tr>
 			<th>{$LANG.notes}</th>
 			<td><textarea input type="text" class="editor" name='notes' rows="8" cols="50">{$smarty.post.notes|unescape}</textarea></td>
