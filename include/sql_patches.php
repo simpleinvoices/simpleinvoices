@@ -1503,44 +1503,37 @@ PRIMARY KEY ( `domain_id`, `id` )
         $patch['255']['date'] = "20130313";
 
     $patch['256']['name'] = "Product Matrix - update line items table";
-    $patch['256']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` ADD `attribute` VARCHAR( 255 ) NULL ;";
+    $patch['256']['patch'] = "INSERT INTO `". TB_PREFIX ."products_attributes` (`id`, `name`, `display_name`, `type`) VALUES (NULL, 'Bottle Size','Size','list'), (NULL,'T-shirt Colour', 'Colour','list');";
     $patch['256']['date'] = "20130313";
 
     $patch['257']['name'] = "Product Matrix - update line items table";
-    $patch['257']['patch'] = "INSERT INTO `". TB_PREFIX ."products_attributes` (`id`, `name`, `display_name`) VALUES (NULL, 'Bottle Size','Size'), (NULL,'T-shirt Colour', 'Colour');";
-    $patch['257']['date'] = "20130313";
-
-    $patch['258']['name'] = "Product Matrix - update line items table";
-    $patch['258']['patch'] = "CREATE TABLE `". TB_PREFIX ."products_values` (
+    $patch['257']['patch'] = "CREATE TABLE `". TB_PREFIX ."products_values` (
 `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `attribute_id` INT( 11 ) NOT NULL ,
 `value` VARCHAR( 255 ) NOT NULL
 ) ENGINE = MYISAM ;";
+    $patch['257']['date'] = "20130313";
+
+    $patch['258']['name'] = "Product Matrix - update line items table";
+    $patch['258']['patch'] = "INSERT INTO `". TB_PREFIX ."products_values` (`id`, `attribute_id`,`value`) VALUES (NULL,'1', 'S'),  (NULL,'1', 'M'), (NULL,'1', 'L'),  (NULL,'2', 'Red'),  (NULL,'2', 'White');";
     $patch['258']['date'] = "20130313";
 
     $patch['259']['name'] = "Product Matrix - update line items table";
-    $patch['259']['patch'] = "INSERT INTO `". TB_PREFIX ."products_values` (`id`, `attribute_id`,`value`) VALUES (NULL,'1', 'S'),  (NULL,'1', 'M'), (NULL,'1', 'L'),  (NULL,'2', 'Red'),  (NULL,'2', 'White');";
-    $patch['259']['date'] = "20130313";
-
-    $patch['260']['name'] = "Product Matrix - update line items table";
-    $patch['260']['patch'] = "CREATE TABLE `". TB_PREFIX ."products_matrix` (
+    $patch['259']['patch'] = "CREATE TABLE `". TB_PREFIX ."products_matrix` (
 `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `product_id` INT( 11 ) NOT NULL ,
 `attribute_id` INT( 11 ) NOT NULL
 ) ENGINE = MYISAM ;";
+    $patch['259']['date'] = "20130313";
+
+    $patch['260']['name'] = "Product Matrix - update line items table";
+    $patch['260']['patch'] =" ALTER TABLE `". TB_PREFIX ."products_matrix` ADD `product_attribute_number` INT( 11 ) NOT NULL AFTER `product_id` ;";
     $patch['260']['date'] = "20130313";
 
     $patch['261']['name'] = "Product Matrix - update line items table";
-    $patch['261']['patch'] =" ALTER TABLE `". TB_PREFIX ."products_matrix` ADD `product_attribute_number` INT( 11 ) NOT NULL AFTER `product_id` ;";
+    $patch['261']['patch'] =" INSERT INTO `". TB_PREFIX ."products_matrix` (`id`, `product_id`,`product_attribute_number`, `attribute_id`) VALUES (NULL,'1', '1', '1'),  (NULL,'1', '2', '2'), (NULL,'2', '1', '2');";
     $patch['261']['date'] = "20130313";
 
-    $patch['262']['name'] = "Product Matrix - update line items table";
-    $patch['262']['patch'] =" INSERT INTO `". TB_PREFIX ."products_matrix` (`id`, `product_id`,`product_attribute_number`, `attribute_id`) VALUES (NULL,'1', '1', '1'),  (NULL,'1', '2', '2'), (NULL,'2', '1', '2');";
-    $patch['262']['date'] = "20130313";
-
-    $patch['263']['name'] = "Product Matrix - update line items table";
-    $patch['263']['patch'] ="ALTER TABLE `". TB_PREFIX ."products_attributes` ADD `display_name` VARCHAR( 255 ) NOT NULL ;";
-    $patch['263']['date'] = "20130313";
 
 /*
 /*
