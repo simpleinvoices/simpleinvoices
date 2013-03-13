@@ -2913,7 +2913,7 @@ div.colCopy {
 .flexigrid div.hDiv th.thOver div, 
 .flexigrid div.hDiv th.sorted.thOver div {
 	border-bottom: 1px solid orange;
-	padding-bottom: 4px;
+	padding-bottom: 3px;
 }
 
 .flexigrid div.hDiv th.sorted div {
@@ -2982,7 +2982,6 @@ div.colCopy {
 .flexigrid tr td.sorted {
 	background: #f3f3f3;
 	border-right: 1px solid #ddd;
-/*	border-bottom: 1px solid #D0D0D0;*/
 }
 
 .flexigrid tr td.sorted div {
@@ -3008,7 +3007,7 @@ div.colCopy {
 .flexigrid div.bDiv tr.trOver td {
 	background: #d9ebf5;
 	border-left: 1px solid #eef8ff;
-	border-bottom: 1px dotted #a8d8eb;
+	/* border-bottom: 1px dotted #a8d8eb; */
 }
 
 .flexigrid div.bDiv tr.trSelected:hover td, 
