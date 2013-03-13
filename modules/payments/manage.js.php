@@ -22,7 +22,7 @@
 				{display: '{/literal}{$LANG.invoice}{literal}', name : 'ac_inv_id', width :10 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.customer}{literal}', name : 'customer', width :15 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.biller}{literal}', name : 'biller', width :15 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.amount}{literal}', name : 'ac_amount', width :10 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.amount}{literal}', name : 'ac_amount', width :10 * percentage_width, sortable : true, align: 'right'},
 				{display: '{/literal}{$LANG.notes}{literal}', name : 'ac_notes', width :15 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.type}{literal}', name : 'description', width :10 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.date_upper}{literal}', name : 'date', width : 10 * percentage_width, sortable : true, align: 'left'}
@@ -39,8 +39,8 @@
 				{display: '{/literal}{$LANG.id}{literal}', name : 'ap.id'},
 				{display: '{/literal}{$LANG.biller_id}{literal}', name : 'biller_id', isdefault: true}
 				],
-			sortname: "id",
-			sortorder: "desc",
+			sortname: "{/literal}{$smarty.get.sortname|default:'id'}{literal}",
+			sortorder: "{/literal}{$smarty.get.sortorder|default:'desc'}{literal}",
 			usepager: true,
 			/*title: 'Manage Custom Fields',*/
 			pagestat: '{/literal}{$LANG.displaying_items}{literal}',
@@ -49,7 +49,7 @@
 			pagemsg: '{/literal}{$LANG.page}{literal}',
 			ofmsg: '{/literal}{$LANG.of}{literal}',
 			useRp: false,
-			rp: 25,
+			rp: {/literal}{$smarty.get.rp|default:'25'}{literal},
 			showToggleBtn: false,
 			showTableToggleBtn: false,
 			width: 'auto',

@@ -1,8 +1,5 @@
 <?php 
-//   include phpreports library
-require_once("./include/reportlib.php");
-
-   $sSQL = "select sum(ii.total) as total 
+    $sql = "select sum(ii.total) as total 
             from 
                 ".TB_PREFIX."invoice_items ii,
                 ".TB_PREFIX."invoices i,
@@ -15,11 +12,9 @@ require_once("./include/reportlib.php");
                 p.status = '1';
                 ";
 
-   $oRpt->setXML("./modules/reports/report_sales_total.xml");
+    $sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
 
-//   include phpreports run code
-	include("./include/reportrunlib.php");
-
-$smarty -> assign('pageActive', 'report_sale');
-$smarty -> assign('active_tab', '#money');
+    $smarty->assign('total_sales', $sth->fetchColumn());
+    $smarty -> assign('pageActive', 'report_sale');
+    $smarty -> assign('active_tab', '#money');
 ?>

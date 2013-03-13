@@ -30,8 +30,11 @@ class email
 				'ssl' => $config->email->secure,
 				'port' => $config->email->smtpport
 				);
-		}
-		$transport = new Zend_Mail_Transport_Smtp($config->email->host, $authentication);
+        }
+        if($config->email->use_local_sendmail == false)
+        {
+    		$transport = new Zend_Mail_Transport_Smtp($config->email->host, $authentication);
+        }
 
 		// Create e-mail message
 		$mail = new Zend_Mail('utf-8');
@@ -66,7 +69,12 @@ class email
         }
 		// Send e-mail through SMTP
 		try {
-			$mail->send($transport);
+            if($config->email->use_local_sendmail == false)
+            {
+                $mail->send($transport);
+            } else{
+                $mail->send();
+            }
 		} catch(Zend_Mail_Protocol_Exception $e) {
 			echo '<strong>Zend Mail Protocol Exception:</strong> ' .  $e->getMessage();
 			exit;

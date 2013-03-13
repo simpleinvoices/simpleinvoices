@@ -1,59 +1,69 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-<title>Simple Invoices - Login</title>
-<link rel="stylesheet" type="text/css" href="./templates/default/css/login.css" />
-</head>
-<body class="login" >
-<div class="Container">
+{* preload the headers (for faster browsing) *}
+
+{include file=$path|cat:'../header.tpl'}
+
+<div class="si_wrap">
+
+<form action="" method="post" id="frmLogin" name="frmLogin">
+	<input type="hidden" name="action" value="login" />	
+	
+	<div class="si_box">
+		<h1>{$LANG.simple_invoices}</h1>
+	
+		<div class="si_box_auth_pad">
+			<table>
+				<tr>
+					<th>{$LANG.email}</th>
+					<td>
+						<input name="user" size="25" type="text" title="user" value="" />
+					</td>
+				</tr>       
+				<tr>
+					<th>{$LANG.password}</th>
+					<td>
+						<input name="pass" size="25" type="password" title="password" value="" />
+					</td>
+				</tr>       
+				<tr>
+					<th></th>
+					<td class='td_error'>
+
+
 {if $errorMessage }
-<p align="center"><strong><font color="#990000">{$errorMessage|outhtml}</font></strong><br /><br /></p>
+
+		<div class="si_error_line">{$errorMessage|outhtml}</div>
+	
 {/if}
-	<div id="Dialog">
-		<center>
-            <h1>{$LANG.simple_invoices}</h1>
-		<form action="" method="post" id="frmLogin" name="frmLogin">
-	        <input type="hidden" name="action" value="login" />
-		<dl>
-        <table>
-  		<tr>
-            <td>
-                {$LANG.email}:
-            </td>
-            <td>
-  		        <input name="user" size="25" type="text" title="user" value="" />
-            </td>
-        </tr>       
-  		<tr>
-            <td>
-                {$LANG.password}:
-            </td>
-            <td>
-  		        <input name="pass" size="25" type="password" title="password" value="" />
-            </td>
-        </tr>       
-  		<tr>
-            <td>
-            </td>
-            <td>
-                <input type="submit" value="login" />
-            </td>
-        </tr>       
-        </table>
-		</form>
-        </center>
-        <br/>
+
+					</td>
+				</tr>       
+			</table>
+		
+			<div class="si_toolbar">
+					<button type="submit" value="login">Login</button>
+			</div>
+		</div>
 	</div>
-    <br/>
-        <a href="http://www.simpleinvoices.org">{$LANG.simple_invoices_powered_by}</a>
+
+</form>
+
 </div>
 
+<div id="si_footer">
+	<div class="si_wrap">
+	    <a href="http://www.simpleinvoices.org">{$LANG.simple_invoices_powered_by}</a>
+	</div>
+</div>
+
+{literal}
 <script language="JavaScript">
-	<!--
+	$(document).ready(function(){
+		$('.si_box').hide();
+		$('.si_box').slideDown(500);
+	});
 	document.frmLogin.user.focus();
-	//-->
 </script>
+{/literal}
 
 </body>
 </html>

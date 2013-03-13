@@ -1,4 +1,15 @@
-<h3>Taxes in total</h3>
+<h3>{$LANG.total_taxes}</h3>
 <hr />
 
-{$showReport}
+<table class="si_report_table">
+	<thead>
+		<tr>
+			<th>{$LANG.total_taxes}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="align_center">{$total_taxes|siLocal_number:'2'|default:'-'}</td>
+		</tr>
+	</tbody>
+</table>

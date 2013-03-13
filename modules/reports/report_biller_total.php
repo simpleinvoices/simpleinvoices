@@ -1,8 +1,5 @@
 <?php
-//   include phpreports library
-require_once("./include/reportlib.php");
-
-   $sSQL = "SELECT 
+  $sql = "SELECT 
                 b.name, 
                 sum(ii.total) AS sum_total
             FROM 
@@ -17,12 +14,20 @@ require_once("./include/reportlib.php");
                 p.status ='1'
             GROUP BY 
                 b.name";
-                
-   $oRpt->setXML("./modules/reports/report_biller_total.xml");
 
-//   include phpreports run code
-	include("./include/reportrunlib.php");
+  $biller_sales = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
 
-$smarty -> assign('pageActive', 'report');
-$smarty -> assign('active_tab', '#home');
+  $total_sales = 0;
+  $billers = array();
+
+  while($biller = $biller_sales->fetch()) {
+    $total_sales += $biller['sum_total'];
+    array_push($billers, $biller);
+  }
+
+  $smarty -> assign('data', $billers);
+  $smarty -> assign('total_sales', $total_sales);
+
+  $smarty -> assign('pageActive', 'report');
+  $smarty -> assign('active_tab', '#home');
 ?>

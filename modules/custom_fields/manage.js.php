@@ -26,8 +26,8 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			colModel : [
 				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
 				{display: '{/literal}{$LANG.id}{literal}', name : 'cf_id', width : 10 * percentage_width, sortable : false, align: 'left'},
-				{display: '{/literal}{$LANG.custom_field}{literal}', name : 'cf_custom_field', width : 40 * percentage_width, sortable : false, align: 'left'},
-				{display: '{/literal}{$LANG.custom_label}{literal}', name : 'cf_custom_label', width : 40 * percentage_width, sortable : false, align: 'left'}
+				{display: "{/literal}{$LANG.custom_field}{literal}", name : 'cf_custom_field', width : 40 * percentage_width, sortable : false, align: 'left'},
+				{display: "{/literal}{$LANG.custom_label}{literal}", name : 'cf_custom_label', width : 40 * percentage_width, sortable : false, align: 'left'}
 				
 				],
 				
