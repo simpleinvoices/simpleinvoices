@@ -6,7 +6,7 @@ checkLogin();
 
 //if valid then do save
 if ($_POST['name'] != "" ) {
-	include("./extensions/product_matrix/modules/product_attribute/save.php");
+	include("./modules/product_attribute/save.php");
 }
 $pageActive = "options";
 
