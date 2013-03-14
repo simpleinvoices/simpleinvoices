@@ -16,6 +16,14 @@
 
 <form name="frmpost" action="index.php?module=products&view=add" method="POST" id="frmpost" onsubmit="return checkForm(this);">
 <div class="si_form">
+    <div id="tabs_customer">
+	<ul class="anchors">
+		<li><a href="#section-1" target="_top">{$LANG.details}</a></li>
+		<li><a href="#section-2" target="_top">{$LANG.custom_fields}</a></li>
+		<li><a href="#section-3" target="_top">{$LANG.notes}</a></li>
+	</ul>
+    </div>
+	<div id="section-1" class="fragment">
 
 	<table>
 		<tr>
@@ -51,6 +59,16 @@
 			</select>
 			</td>
 		</tr>
+		<tr>
+			<th>{$LANG.enabled}</th>
+			<td>
+				{html_options class=edit name=enabled options=$enabled selected=1}
+			</td>
+		</tr>
+	</table>
+        </div>
+	<div id="section-2" class="fragment">
+    <table>
 		<tr>
 			<th>{$customFieldLabel.product_cf1|htmlsafe} 
 				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
@@ -91,6 +109,10 @@
                 </tr>
             {/foreach}
         {/if}
+	</table>
+        </div>
+	<div id="section-3" class="fragment">
+    <table>
 		<tr>
 			<th>{$LANG.notes}</th>
 			<td><textarea input type="text" class="editor" name='notes' rows="8" cols="50">{$smarty.post.notes|unescape}</textarea></td>
@@ -114,14 +136,10 @@
                     {$LANG.note_expand}
                     </th>
                 </tr>
-		<tr>
-			<th>{$LANG.enabled}</th>
-			<td>
-				{html_options class=edit name=enabled options=$enabled selected=1}
-			</td>
-		</tr>
 	</table>
 
+        </div>
+        </div>
 	<div class="si_toolbar si_toolbar_form">
 			<button type="submit" class="positive" name="id" value="{$LANG.save}">
 			    <img class="button_img" src="./images/common/tick.png" alt="" /> 
