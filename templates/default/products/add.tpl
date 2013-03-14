@@ -95,13 +95,31 @@
 			<th>{$LANG.notes}</th>
 			<td><textarea input type="text" class="editor" name='notes' rows="8" cols="50">{$smarty.post.notes|unescape}</textarea></td>
 		</tr>
+            <tr>
+                <th class="details_screen">{$LANG.note_attributes}</th>
+                <td>
+                </td>
+            </tr>
+                <tr>
+                    <td></td>
+                    <th class="details_screen product_attribute">
+                    <input type="checkbox" name="vehicle" value="{$attribute.id}"/>
+                    {$LANG.note_as_description}
+                    </th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <th class="details_screen product_attribute">
+                    <input type="checkbox" name="vehicle" value="{$attribute.id}"/>
+                    {$LANG.note_expand}
+                    </th>
+                </tr>
 		<tr>
 			<th>{$LANG.enabled}</th>
 			<td>
 				{html_options class=edit name=enabled options=$enabled selected=1}
 			</td>
 		</tr>
-		{*	{showCustomFields categorieId="3" itemId=""} *}
 	</table>
 
 	<div class="si_toolbar si_toolbar_form">

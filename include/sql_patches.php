@@ -1542,6 +1542,16 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['263']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `attribute` VARCHAR( 255 ) NULL ;";
     $patch['263']['date'] = "20130313";
 
+
+    $patch['264']['name'] = "Product - use notes as default line item description";
+    $patch['264']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `notes_as_description` VARCHAR( 1 ) NULL ;";
+    $patch['264']['date'] = "20130314";
+
+
+    $patch['265']['name'] = "Product - expand/show line item description";
+    $patch['265']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `show_description` VARCHAR( 1 ) NULL ;";
+    $patch['265']['date'] = "20130314";
+
 /*
 /*
 ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );
