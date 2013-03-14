@@ -26,6 +26,11 @@ Developer Discussion now takes place on the [Simple Invoices Google+ Community](
 We also have a mailing list for tracking commit activity. This is hosted on Google Groups (sigh). You can find it here: https://groups.google.com/forum/?fromgroups#!forum/simpleinvoices-trac
 
 
+## Translations
+We are proud that SimpleInvoices is currently available in 25 different languages but we would love for that number to be even bigger!  
+
+If you would like to help translate SimpleInvoices into your language check out our [translation project](https://www.transifex.com/projects/p/SimpleInvoices/).
+
 ## Reporting Bugs
 Please use the issue tracker on GitHub when reporting bugs.
 https://github.com/simpleinvoices/simpleinvoices/issues
