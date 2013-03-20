@@ -61,6 +61,26 @@
 				{
 					$("#tax_id\\["+row_number+"\\]\\[1\\]").val(data['default_tax_id_2']);
 				}
+                //do the product matric code
+				if (data['show_description'] =="Y") 
+				{	
+					$("tbody#row"+row_number+" tr.details").show();
+				} else {
+					$("tbody#row"+row_number+" tr.details").hide();
+
+                }
+                if($("#description"+row_number).val() == $("#description"+row_number).attr('rel') || $("#description"+row_number).val() =='{/literal}{$LANG.description}{literal}')
+                {
+                    if (data['notes_as_description'] =="Y") 
+                    {	
+                        $("#description"+row_number).val(data['notes']);
+                        $("#description"+row_number).attr('rel',data['notes']);
+                    } else {
+                        $("#description"+row_number).val('{/literal}{$LANG.description}{literal}');
+                        $("#description"+row_number).attr('rel','{/literal}{$LANG.description}{literal}');
+
+                    }
+				} 
 			}
 	
    		 });
