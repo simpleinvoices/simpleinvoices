@@ -81,6 +81,10 @@
 
                     }
 				} 
+				if (data['json_html'] !=="") 
+				{	
+					$("tbody#row"+row_number+" tr.details").before(data['json_html']);
+				} 
 			}
 	
    		 });

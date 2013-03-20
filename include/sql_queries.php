@@ -687,8 +687,12 @@ function insertProduct($enabled=1,$visible=1) {
     	$logger->log('Attr key: '.$k, Zend_Log::INFO);
     	$logger->log('Attr value: '.var_export($v,true), Zend_Log::INFO);
     	$logger->log('Attr set value: '.$k, Zend_Log::INFO);
-        //$attr[$k]['attr_id'] = $v['id'];
-        $attr[$v['id']] = $_POST['attribute'.$v[id]];
+        if($_POST['attribute'.$v[id]] == 'true')
+        {
+            //$attr[$k]['attr_id'] = $v['id'];
+            $attr[$v['id']] = $_POST['attribute'.$v[id]];
+//            $attr[$k]['a$v['id']] = $_POST['attribute'.$v[id]];
+        }
         
     }
 	$logger->log('Attr array: '.var_export($attr,true), Zend_Log::INFO);
