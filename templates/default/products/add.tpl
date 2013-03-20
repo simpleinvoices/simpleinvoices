@@ -103,7 +103,7 @@
                 <tr>
                     <td></td>
                     <th class="details_screen product_attribute">
-                    <input type="checkbox" name="vehicle" value="{$attribute.id}"/>
+                    <input type="checkbox" name="attribute{$attribute.id}" value="true"/>
                     {$attribute.name}
                     </th>
                 </tr>
@@ -125,14 +125,14 @@
                 <tr>
                     <td></td>
                     <th class="details_screen product_attribute">
-                    <input type="checkbox" name="vehicle" value="{$attribute.id}"/>
+                    <input type="checkbox" name="notes_as_description" value='true'/>
                     {$LANG.note_as_description}
                     </th>
                 </tr>
                 <tr>
                     <td></td>
                     <th class="details_screen product_attribute">
-                    <input type="checkbox" name="vehicle" value="{$attribute.id}"/>
+                    <input type="checkbox" name="show_description" value='true'/>
                     {$LANG.note_expand}
                     </th>
                 </tr>

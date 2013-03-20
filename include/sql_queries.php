@@ -672,8 +672,28 @@ function insertProductComplete($enabled=1,$visible=1,$description,
 
 function insertProduct($enabled=1,$visible=1) {
 	global $auth_session;
+    global $logger;
 	
 	(isset($_POST['enabled'])) ? $enabled = $_POST['enabled']  : $enabled = $enabled ;
+    //select all attribts
+    $sql = "select * from ".TB_PREFIX."products_attributes";
+    $sth =  dbQuery($sql);
+    $attributes = $sth->fetchAll();
+
+	$logger->log('Attr: '.var_export($attributes,true), Zend_Log::INFO);
+    $attr = array();
+    foreach($attributes as $k=>$v)
+    {
+    	$logger->log('Attr key: '.$k, Zend_Log::INFO);
+    	$logger->log('Attr value: '.var_export($v,true), Zend_Log::INFO);
+    	$logger->log('Attr set value: '.$k, Zend_Log::INFO);
+        //$attr[$k]['attr_id'] = $v['id'];
+        $attr[$v['id']] = $_POST['attribute'.$v[id]];
+        
+    }
+	$logger->log('Attr array: '.var_export($attr,true), Zend_Log::INFO);
+	$notes_as_description = ($_POST['notes_as_description'] == 'true' ? 'Y' : NULL) ;
+    $show_description =  ($_POST['show_description'] == 'true' ? 'Y' : NULL) ;
 
 	$sql = "INSERT into
 		".TB_PREFIX."products
@@ -690,7 +710,10 @@ function insertProduct($enabled=1,$visible=1) {
             notes, 
             default_tax_id, 
             enabled, 
-            visible
+            visible,
+            attribute,
+            notes_as_description,
+            show_description
 		)
 	VALUES
 		(	
@@ -706,7 +729,10 @@ function insertProduct($enabled=1,$visible=1) {
 			:notes,
 			:default_tax_id,
 			:enabled,
-			:visible
+			:visible,
+            :attribute,
+            :notes_as_description,
+            :show_description
 		)";
 
 	return dbQuery($sql,
@@ -722,7 +748,10 @@ function insertProduct($enabled=1,$visible=1) {
 		':notes', "".$_POST['notes'],
 		':default_tax_id', $_POST['default_tax_id'],
 		':enabled', $enabled,
-		':visible', $visible
+		':visible', $visible,
+		':attribute', json_encode($attr),
+		':notes_as_description', $notes_as_description,
+		':show_description', $show_description
 		);
 }
 
