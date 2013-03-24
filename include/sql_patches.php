@@ -1552,6 +1552,14 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['265']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `show_description` VARCHAR( 1 ) NULL ;";
     $patch['265']['date'] = "20130314";
 
+    $patch['266']['name'] = "Product - expand/show line item description";
+    $patch['266']['patch'] = "CREATE TABLE `".TB_PREFIX."product_attribute_type` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+                `name` varchar(255) NOT NULL,
+                  PRIMARY KEY (`id`)
+              ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
+    $patch['266']['date'] = "20130322";
+
 /*
 /*
 ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );
