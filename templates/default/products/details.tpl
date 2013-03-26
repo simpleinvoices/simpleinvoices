@@ -49,10 +49,46 @@
 			{*
 				{showCustomFields categorieId="3" itemId=$smarty.get.id } 
 			*}
+        {if $defaults.product_attributes}
+            <tr>
+                <th class="details_screen">{$LANG.product_attributes}</th>
+                <td>
+                </td>
+            </tr>
+            {foreach from=$attributes item=attribute}
+                {assign var="i" value=$attribute.id}
+                <tr>
+                    <td></td>
+                    <th class="details_screen product_attribute"> 
+                    <input type="checkbox" disabled="disabled" name="attribute{$i}" {if $product.attribute_decode[$i] == 'true'} checked {/if} value="true"/>
+                    {$attribute.name}
+                    </th>
+                </tr>
+            {/foreach}
+        {/if}
 		<tr>
 			<th>{$LANG.notes}</th>
 			<td>{$product.notes|unescape}</td>
 		</tr>
+            <tr>
+                <th class="details_screen">{$LANG.note_attributes}</th>
+                <td>
+                </td>
+            </tr>
+                <tr>
+                    <td></td>
+                    <th class="details_screen product_attribute">
+                    <input type="checkbox"  disabled="disabled" name="notes_as_description" {if $product.notes_as_description== 'Y'} checked {/if} value='true'/>
+                    {$LANG.note_as_description}
+                    </th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <th class="details_screen product_attribute">
+                    <input type="checkbox" disabled="disabled" name="show_description"  {if $product.show_description == 'Y'} checked {/if} value='true'/>
+                    {$LANG.note_expand}
+                    </th>
+                </tr>
 		<tr>
 			<th>{$LANG.product_enabled}</th>
 			<td>{$product.wording_for_enabled|htmlsafe}</td>
@@ -134,12 +170,47 @@
 		</th>
 		<td><input type="text" name="custom_field4" size="50" value="{$product.custom_field4|htmlsafe}" /></td>
 	</tr>
-	{*	{showCustomFields categorieId="3" itemId=$smarty.get.id } *}
+        {if $defaults.product_attributes}
+            <tr>
+                <th class="details_screen">{$LANG.product_attributes}</th>
+                <td>
+                </td>
+            </tr>
+            {foreach from=$attributes item=attribute}
+                {assign var="i" value=$attribute.id}
+                <tr>
+                    <td></td>
+                    <th class="details_screen product_attribute">
+                    <input type="checkbox" name="attribute{$i}" {if $product.attribute_decode[$i] } == 'true'} checked{/if} value="true"/>
+                    {$attribute.name}
+                    </th>
+                </tr>
+            {/foreach}
+        {/if}
 	<tr>
 		<th>{$LANG.notes}</th>
 		<td><textarea name="notes" class="editor" rows="8" cols="50">{$product.notes|unescape}</textarea></td>
 	</tr>
 	<tr>
+            <tr>
+                <th class="details_screen">{$LANG.note_attributes}</th>
+                <td>
+                </td>
+            </tr>
+                <tr>
+                    <td></td>
+                    <th class="details_screen product_attribute">
+                    <input type="checkbox" name="notes_as_description" {if $product.notes_as_description== 'Y'} checked {/if} value='true'/>
+                    {$LANG.note_as_description}
+                    </th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <th class="details_screen product_attribute">
+                    <input type="checkbox" name="show_description"  {if $product.show_description == 'Y'} checked {/if} value='true'/>
+                    {$LANG.note_expand}
+                    </th>
+                </tr>
 		<th>{$LANG.product_enabled}</th>
 		<td>
 			{html_options name=enabled options=$enabled selected=$product.enabled}

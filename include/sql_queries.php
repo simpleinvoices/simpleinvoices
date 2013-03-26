@@ -762,6 +762,23 @@ function insertProduct($enabled=1,$visible=1) {
 
 function updateProduct() {
 	
+    //select all attribts
+    $sql = "select * from ".TB_PREFIX."products_attributes";
+    $sth =  dbQuery($sql);
+    $attributes = $sth->fetchAll();
+
+    $attr = array();
+    foreach($attributes as $k=>$v)
+    {
+        if($_POST['attribute'.$v[id]] == 'true')
+        {
+            $attr[$v['id']] = $_POST['attribute'.$v[id]];
+        }
+        
+    }
+	$notes_as_description = ($_POST['notes_as_description'] == 'true' ? 'Y' : NULL) ;
+    $show_description =  ($_POST['show_description'] == 'true' ? 'Y' : NULL) ;
+
 	$sql = "UPDATE ".TB_PREFIX."products
 			SET
 				description = :description,
@@ -774,7 +791,10 @@ function updateProduct() {
 				custom_field4 = :custom_field4,
 				unit_price = :unit_price,
 				cost = :cost,
-				reorder_level = :reorder_level
+				reorder_level = :reorder_level,
+                attribute = :attribute,
+                notes_as_description = :notes_as_description,
+                show_description = :show_description
 			WHERE
 				id = :id";
 
@@ -790,6 +810,9 @@ function updateProduct() {
 		':unit_price', $_POST[unit_price],
 		':cost', $_POST[cost],
 		':reorder_level', $_POST[reorder_level],
+		':attribute', json_encode($attr),
+		':notes_as_description', $notes_as_description,
+		':show_description', $show_description,
 		':id', $_GET[id]
 		);
 }
