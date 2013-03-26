@@ -1560,6 +1560,11 @@ PRIMARY KEY ( `domain_id`, `id` )
               ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
     $patch['266']['date'] = "20130322";
 
+    $patch['267']['name'] = "Product Matrix - insert attribute types";
+    $patch['267']['patch'] = "INSERT INTO `". TB_PREFIX ."product_attribute_type` (`id`, `name`) VALUES (NULL,'list'),  (NULL,'decimal'), (NULL,'free');";
+    $patch['267']['date'] = "20130325";
+
+
 /*
 /*
 ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );

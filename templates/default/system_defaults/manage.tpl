@@ -67,5 +67,10 @@
 			<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=inventory'><img src="images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td>
 			<td>{$defaultInventory|htmlsafe}</td>
 		</tr>
+		<tr>
+			<th>{$LANG.product_attributes}</th>
+			<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=product_attributes'><img src="images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td>
+			<td>{$defaultProductAttributes|htmlsafe}</td>
+		</tr>
 	</table>
 </div> 

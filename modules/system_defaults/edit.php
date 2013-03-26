@@ -294,6 +294,13 @@ else if ($_GET['submit'] == "inventory") {
 	$description = $LANG['inventory'];
 	$value = dropDown($array, $defaults[$default]);
 }
+else if ($_GET['submit'] == "product_attributes") {
+
+	$array = array(0 => $LANG['disabled'], 1=>$LANG['enabled']);
+	$default = "product_attributes";
+	$description = $LANG['product_attributes'];
+	$value = dropDown($array, $defaults[$default]);
+}
 else {
 	$description = "{$LANG['no_defaults']}";
 }
