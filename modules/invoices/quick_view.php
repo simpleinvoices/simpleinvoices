@@ -57,6 +57,10 @@ for($i=1;$i<=4;$i++) {
 }
 
 
+$sql = "select * from ".TB_PREFIX."products_attributes";
+$sth =  dbQuery($sql);
+$attributes = $sth->fetchAll();
+$smarty -> assign("attributes", $attributes);
 //Customer accounts sections
 $customerAccount = null;
 $customerAccount['total'] = calc_customer_total($customer['id']);

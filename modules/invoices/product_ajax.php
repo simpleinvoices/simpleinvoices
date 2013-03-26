@@ -27,10 +27,10 @@ if($_GET['id'])
 
                 $sql2 = sprintf('select a.name as name, v.id as id, v.value as value from si_products_attributes a, si_products_values v where a.id = v.attribute_id AND a.id = %d', $k);
                 $states2 = dbQuery($sql2);
-                $html .= "<td>".$attr_name['name']."<select name='attribute".$k."'>";
+                $html .= "<td>".$attr_name['name']."<select name='attribute[".$row_id."][".$k."]'>";
                 foreach($states2 as $att_key=>$att_val)
                 {
-                    $html .= "<option value='". $att_val['value']. "'>".$att_val['value']."</option>";
+                    $html .= "<option value='". $att_val['id']. "'>".$att_val['value']."</option>";
                 }
                     $html .= "</select></td>";
             }

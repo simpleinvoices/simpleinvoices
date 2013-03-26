@@ -1498,12 +1498,12 @@ PRIMARY KEY ( `domain_id`, `id` )
             `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
             `name` VARCHAR( 255 ) NOT NULL,
             `display_name` VARCHAR( 255 ) NOT NULL,
-            `type` VARCHAR( 255 ) NOT NULL
+            `type_id` VARCHAR( 255 ) NOT NULL
             ) ENGINE = MYISAM ;";
         $patch['255']['date'] = "20130313";
 
     $patch['256']['name'] = "Product Matrix - update line items table";
-    $patch['256']['patch'] = "INSERT INTO `". TB_PREFIX ."products_attributes` (`id`, `name`, `display_name`, `type`) VALUES (NULL, 'Bottle Size','Size','list'), (NULL,'T-shirt Colour', 'Colour','list');";
+    $patch['256']['patch'] = "INSERT INTO `". TB_PREFIX ."products_attributes` (`id`, `name`, `display_name`, `type_id`) VALUES (NULL, 'Bottle Size','Size','1'), (NULL,'T-shirt Colour', 'Colour','1');";
     $patch['256']['date'] = "20130313";
 
     $patch['257']['name'] = "Product Matrix - update line items table";
@@ -1553,7 +1553,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['265']['date'] = "20130314";
 
     $patch['266']['name'] = "Product - expand/show line item description";
-    $patch['266']['patch'] = "CREATE TABLE `".TB_PREFIX."product_attribute_type` (
+    $patch['266']['patch'] = "CREATE TABLE `".TB_PREFIX."products_attribute_type` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
                 `name` varchar(255) NOT NULL,
                   PRIMARY KEY (`id`)
@@ -1561,7 +1561,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['266']['date'] = "20130322";
 
     $patch['267']['name'] = "Product Matrix - insert attribute types";
-    $patch['267']['patch'] = "INSERT INTO `". TB_PREFIX ."product_attribute_type` (`id`, `name`) VALUES (NULL,'list'),  (NULL,'decimal'), (NULL,'free');";
+    $patch['267']['patch'] = "INSERT INTO `". TB_PREFIX ."products_attribute_type` (`id`, `name`) VALUES (NULL,'list'),  (NULL,'decimal'), (NULL,'free');";
     $patch['267']['date'] = "20130325";
 
 

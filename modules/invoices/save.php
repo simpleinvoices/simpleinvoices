@@ -65,7 +65,7 @@ if ($_POST['action'] == "insert" ) {
 			if($_POST["quantity$i"] != null)
 			{
 				if (
-						insertInvoiceItem($id,$_POST["quantity$i"],$_POST["products$i"],$i,$_POST["tax_id"][$i],$_POST["description$i"], $_POST["unit_price$i"] )
+						insertInvoiceItem($id,$_POST["quantity$i"],$_POST["products$i"],$i,$_POST["tax_id"][$i],$_POST["description$i"], $_POST["unit_price$i"],$_POST["attribute"][$i] )
 					) 
 				{
 		//			insert_invoice_item_tax(lastInsertId(), )

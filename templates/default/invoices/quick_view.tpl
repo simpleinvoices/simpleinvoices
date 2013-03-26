@@ -234,6 +234,22 @@
 							<td class="si_right">{$preference.pref_currency_sign}{$invoiceItem.unit_price|siLocal_number}</td>
 							<td class="si_right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|siLocal_number}</td>
 					</tr>
+					{if $invoiceItem.attribute != null}
+                            <tr class="si_product_attribute">
+                                <td></td>
+                                <td>
+                                <table>
+                                    <tr class="si_product_attribute">
+                                    {foreach from=$invoiceItem.attribute_json key=k item=v}
+                                        <td class="si_product_attribute">
+                                       {$v.name} : {$v.value} 
+                                        </td>
+                                    {/foreach}
+                                    </tr>
+                                </table>
+                                </td>
+                            </tr>
+					{/if}
 					
 					{if $invoiceItem.description != null}
 					<tr class="show-itemised tr_desc" >

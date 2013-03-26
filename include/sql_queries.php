@@ -2074,11 +2074,22 @@ function updateInvoice($invoice_id) {
 		);
 }
 
-function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_item_tax_id,$description="", $unit_price="") {
+function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_item_tax_id,$description="", $unit_price="", $attribute="") {
 
 	global $logger;
 	global $LANG;
-	//do taxes
+    //do taxes
+
+    $attr = array();
+	$logger->log('Line item attributes: '.var_export($attribute,true), Zend_Log::INFO);
+    foreach($attribute as $k=>$v)
+    {
+        if($attribute[$v] !== '')
+        {
+            $attr[$k] = $v;
+        }
+        
+    }
 
 	
 	$tax_total = getTaxesPerLineItem($line_item_tax_id,$quantity, $unit_price);
@@ -2115,7 +2126,8 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 				tax_amount, 
 				gross_total, 
 				description, 
-				total
+                total,
+                attribute
 			) 
 			VALUES 
 			(
@@ -2126,7 +2138,8 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 				:tax_amount, 
 				:gross_total, 
 				:description, 
-				:total
+                :total,
+                :attribute
 			)";
 
 	//echo $sql;
@@ -2140,7 +2153,8 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 		':tax_amount', $tax_total,
 		':gross_total', $gross_total,
 		':description', $description,
-		':total', $total
+        ':total', $total,
+        ':attribute',json_encode($attr)
 		);
 	
 	invoice_item_tax(lastInsertId(),$line_item_tax_id,$unit_price,$quantity,"insert");

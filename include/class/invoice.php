@@ -408,6 +408,12 @@ class invoice {
 			$invoiceItem['tax_amount'] = $invoiceItem['tax_amount'];
 			$invoiceItem['gross_total'] = $invoiceItem['gross_total'];
 			$invoiceItem['total'] = $invoiceItem['total'];
+			$invoiceItem['attribute_decode'] = json_decode($invoiceItem['attribute'],true);
+			foreach ($invoiceItem['attribute_decode'] as $key => $value)
+			{
+				$invoiceItem['attribute_json'][$key]['name'] = product_attributes::getName($key);
+				$invoiceItem['attribute_json'][$key]['value'] = product_attributes::getValue($key,$value);
+			}
 			
 			$sql = "SELECT * FROM ".TB_PREFIX."products WHERE id = :id";
 			$tth = dbQuery($sql, ':id', $invoiceItem['product_id']) or die(htmlsafe(end($dbh->errorInfo())));

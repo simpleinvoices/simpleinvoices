@@ -1357,6 +1357,13 @@ A.cluetip:hover IMG{
 	color: #666;
 	text-align: center;
 }
+TD.si_product_attribute , .si_product_attribute TD
+{
+    padding-right: 15px;
+	color: #666;
+    border-top:none;
+	font-size: 11px;
+}
 /* @end */
 
 
