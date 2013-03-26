@@ -1,5 +1,6 @@
 <?php
 
+$row_id = $_GET['row'];
 if($_GET['id'])
 {
 	//sleep(2);
@@ -13,9 +14,9 @@ if($_GET['id'])
 		$row = $states->fetch();
 
         $json_att = json_decode($row['attribute']);
-        if($json_att !== '')
+        if($json_att !== null)
         {
-        $html ="<tr><td></td><td colspan='5'><table><tr>";
+        $html ="<tr id='json_html". $row_id ."'><td></td><td colspan='5'><table><tr>";
         foreach($json_att as $k=>$v)
         {
             if($v == 'true')

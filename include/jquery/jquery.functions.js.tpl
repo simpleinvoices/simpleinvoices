@@ -40,13 +40,14 @@
       	$('#gmail_loading').show();
 		$.ajax({
 			type: 'GET',
-			url: './index.php?module=invoices&view=product_ajax&id='+product,
+			url: './index.php?module=invoices&view=product_ajax&id='+product+'&row='+row_number,
 			data: "id: "+product,
 			dataType: "json",
 			success: function(data){
 				$('#gmail_loading').hide();
 				/*$('#state').html(data);*/
 				/*if ( (quantity.length==0) || (quantity.value==null) ) */
+				$("#json_html"+row_number).remove();
 				if (quantity=="") 
 				{	
 					$("#quantity"+row_number).attr("value","1");
@@ -225,12 +226,15 @@
 		$("#description"+rowID_new, clonedRow).attr("name", "description"+rowID_new);
 		$("#description"+rowID_new, clonedRow).attr("value","{/literal}{$LANG.description}{literal}");
 		$("#description"+rowID_new, clonedRow).css({ color: "#b2adad" });
+		$(".details",clonedRow).hide();
 	
 		$("#tax_id\\["+rowID_old+"\\]\\[0\\]", clonedRow).attr("id", "tax_id["+rowID_new+"][0]");
 		$("#tax_id\\["+rowID_new+"\\]\\[0\\]", clonedRow).attr("name", "tax_id["+rowID_new+"][0]");
 		$("#tax_id\\["+rowID_old+"\\]\\[1\\]", clonedRow).attr("id", "tax_id["+rowID_new+"][1]");
 		$("#tax_id\\["+rowID_new+"\\]\\[1\\]", clonedRow).attr("name", "tax_id["+rowID_new+"][1]");
 	
+		$("#json_html"+rowID_old, clonedRow).remove();
+
 		$('#itemtable').append(clonedRow);
 		
 		$('#gmail_loading').hide();
