@@ -57,6 +57,8 @@
             </tr>
             {foreach from=$attributes item=attribute}
                 {assign var="i" value=$attribute.id}
+
+                {if $attribute.enabled == '1' OR $product.attribute_decode[$i] == 'true'}
                 <tr>
                     <td></td>
                     <th class="details_screen product_attribute"> 
@@ -64,6 +66,7 @@
                     {$attribute.name}
                     </th>
                 </tr>
+                {/if}
             {/foreach}
         {/if}
 		<tr>
@@ -178,6 +181,7 @@
             </tr>
             {foreach from=$attributes item=attribute}
                 {assign var="i" value=$attribute.id}
+                {if $attribute.enabled == '1' OR $product.attribute_decode[$i] == 'true'}
                 <tr>
                     <td></td>
                     <th class="details_screen product_attribute">
@@ -185,6 +189,7 @@
                     {$attribute.name}
                     </th>
                 </tr>
+                {/if}
             {/foreach}
         {/if}
 	<tr>
