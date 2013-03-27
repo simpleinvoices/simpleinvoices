@@ -16,7 +16,7 @@ $smarty -> assign('customFieldLabel',$customFieldLabel);
 $smarty -> assign('save',$save);
 $smarty -> assign('taxes',$taxes);
 
-$sql = "select * from ".TB_PREFIX."products_attributes";
+$sql = "select * from ".TB_PREFIX."products_attributes where enabled ='1'";
 $sth =  dbQuery($sql);
 $attributes = $sth->fetchAll();
 

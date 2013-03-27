@@ -17,12 +17,14 @@ if (  $op === 'insert_product_attribute' ) {
 		(
 			NULL,
 			:name,
+			:type_id,
 			:enabled,
 			:visible
 		 )";
 
 	if (dbQuery($sql,
 	  ':name', $_POST['name'],
+	  ':type_id', $_POST['type_id'],
 	  ':enabled', $_POST['enabled'],
 	  ':visible', $_POST['visible']
 	  )) {
@@ -45,13 +47,15 @@ else if (  $op === 'edit_product_attribute' ) {
 				".TB_PREFIX."products_attributes
 			SET
 				name = :name,
+				type_id = :type_id,
 				enabled = :enabled,
-				visible = :visibl
+				visible = :visible
 			WHERE
 				id = :id";
 
 		if (dbQuery($sql, 
 		  ':name', $_POST['name'],
+		  ':type_id', $_POST['type_id'],
 		  ':enabled', $_POST['enabled'],
 		  ':visible', $_POST['visible'],
 		  ':id', $_GET['id']))

@@ -26,7 +26,7 @@
 		</tr>
 		<tr>
 			<th>{$LANG.visible}</th>
-			<td>{$product_attribute.wording_for_enabled|htmlsafe}</td>
+			<td>{$product_attribute.wording_for_visible|htmlsafe}</td>
 		</tr>
 		</table>
 		<hr />

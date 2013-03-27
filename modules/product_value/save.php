@@ -24,7 +24,7 @@ if (  $op === 'insert_product_value' ) {
 	if (dbQuery($sql,
 	  ':attribute_id', $_POST['attribute_id'],
 	  ':value', $_POST['value'],
-	  ':enaled', $_POST['enalbed']
+	  ':enabled', $_POST['enabled']
 	  )) {
 		$display_block = "Successfully saved";
 	} else {
@@ -32,7 +32,7 @@ if (  $op === 'insert_product_value' ) {
 	}
 
 	//header( 'refresh: 2; url=manage_preferences.php' );
-	$refresh_total = "<meta http-equiv='refresh' content='2;url=index.php?module=product_value&amp;view=manage' />";
+	$refresh_total = "<meta http-equiv='refresh' content='20;url=index.php?module=product_value&amp;view=manage' />";
 
 }
 

@@ -24,6 +24,7 @@ $smarty -> assign("types", $types);
 
 
 $product_attribute['wording_for_enabled'] = $product_attribute['enabled']==1?$LANG['enabled']:$LANG['disabled'];
+$product_attribute['wording_for_visible'] = $product_attribute['visible']==1?$LANG['enabled']:$LANG['disabled'];
 $pageActive = "options";
 $smarty->assign('pageActive', $pageActive);
 $smarty->assign('product_attribute',$product_attribute);

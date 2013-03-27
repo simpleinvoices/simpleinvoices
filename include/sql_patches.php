@@ -1569,9 +1569,9 @@ PRIMARY KEY ( `domain_id`, `id` )
         ADD  `visible` VARCHAR( 1 ) NULL DEFAULT  '1';";
     $patch['268']['date'] = "20130327";
 
-    $patch['268']['name'] = "Product Matrix - insert attribute types";
-    $patch['268']['patch'] = "ALTER TABLE  `". TB_PREFIX ."products_values` ADD  `enabled` VARCHAR( 1 ) NULL DEFAULT  '1';";
-    $patch['268']['date'] = "20130327";
+    $patch['269']['name'] = "Product Matrix - insert attribute types";
+    $patch['269']['patch'] = "ALTER TABLE  `". TB_PREFIX ."products_values` ADD  `enabled` VARCHAR( 1 ) NULL DEFAULT  '1';";
+    $patch['269']['date'] = "20130327";
 
 
 /*
