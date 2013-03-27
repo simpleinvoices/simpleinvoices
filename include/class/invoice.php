@@ -413,6 +413,7 @@ class invoice {
 			{
 				$invoiceItem['attribute_json'][$key]['name'] = product_attributes::getName($key);
 				$invoiceItem['attribute_json'][$key]['value'] = product_attributes::getValue($key,$value);
+				$invoiceItem['attribute_json'][$key]['visible'] = product_attributes::getVisible($key);
 			}
 			
 			$sql = "SELECT * FROM ".TB_PREFIX."products WHERE id = :id";

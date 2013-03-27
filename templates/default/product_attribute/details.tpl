@@ -16,9 +16,18 @@
 		<tr>	
 			<td class="details_screen">{$LANG.name}</td><td>{$product_attribute.name}</td>
         </tr>
-        <tr>	
-			<td class="details_screen">Display Name</td><td>{$product_attribute.display_name}</td>
-        </tr>
+		<tr>
+			<th>{$LANG.type}</th>
+			<td>{$product_attribute.type|capitalize|htmlsafe}</td>
+		</tr>
+		<tr>
+			<th>{$LANG.enabled}</th>
+			<td>{$product_attribute.wording_for_enabled|htmlsafe}</td>
+		</tr>
+		<tr>
+			<th>{$LANG.visible}</th>
+			<td>{$product_attribute.wording_for_enabled|htmlsafe}</td>
+		</tr>
 		</table>
 		<hr />
 
@@ -38,8 +47,27 @@
                 <tr>
                         <td class="details_screen">{$LANG.name}</td><td><input type="text" name="name" value="{$product_attribute.name}" size="50" /></td>
                 </tr>
+		<tr>
+			<th>{$LANG.type}</th>
+			<td>
+                <select name="type_id">
+                    {foreach from=$types key=k item=v}
+        				<option value="{$v.id}" {if $product_attribute.type_id == $v.id} selected {/if}>{$v.name|capitalize}</option>
+                    {/foreach}
+                </select>
+			</td>
+		</tr>
                 <tr>
-                        <td class="details_screen">Display Name</td><td><input type="text" name="display_name" value="{$product_attribute.display_name}" size="50" /></td>
+		<th>{$LANG.enabled}</th>
+		<td>
+			{html_options name=enabled options=$enabled selected=$product_attribute.enabled}
+		</td>
+                </tr>
+                <tr>
+		<th>{$LANG.visible}</th>
+		<td>
+			{html_options name=visible options=$enabled selected=$product_attribute.visible}
+		</td>
                 </tr>
                 </table>
 		<hr />

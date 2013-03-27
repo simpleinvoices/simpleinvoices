@@ -5,7 +5,7 @@
 checkLogin();
 
 //if valid then do save
-if ($_POST['value'] != "" ) {
+if ($_POST['value'] !== '' ) {
 	include("./modules/product_value/save.php");
 }
 $pageActive = "options";

@@ -39,6 +39,19 @@ class product_attributes
         }
 
     }
+    public function getVisible($id)
+    {
+        $sql = "select * from ".TB_PREFIX."products_attributes where id = :id";
+        $sth =  dbQuery($sql,':id',$id);
+        $attribute = $sth->fetch();
+        if($attribute['visible'] =='1')
+        {
+             return true;
+        } else {
+            return false;
+        }
+
+    }
     public function getAll()
     {
         $sql = "select * from ".TB_PREFIX."products_attributes";

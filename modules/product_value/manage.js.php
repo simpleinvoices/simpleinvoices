@@ -16,8 +16,9 @@
 			colModel : [
 				{display: 'Actions', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
 				{display: 'ID', name : 'id', width : 10 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Attribute', name : 'name', width : 40 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Value', name : 'value', width : 40 * percentage_width, sortable : true, align: 'left'}
+				{display: 'Attribute', name : 'name', width : 30 * percentage_width, sortable : true, align: 'left'},
+				{display: 'Value', name : 'value', width : 30 * percentage_width, sortable : true, align: 'left'},
+				{display: 'Enabled', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'}
 				],
 
 			searchitems : [

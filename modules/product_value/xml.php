@@ -30,7 +30,7 @@ if ($query) $where = " AND $qtype LIKE '%$query%' ";
 
 
 /*Check that the sort field is OK*/
-$validFields = array('id', 'name', 'value' );
+$validFields = array('id', 'name', 'value','enabled');
 
 if (in_array($sort, $validFields)) {
 	$sort = $sort;
@@ -41,7 +41,8 @@ if (in_array($sort, $validFields)) {
 	$sql = "SELECT 
 				v.id as id, 
 				a.name as name,
-				v.value as value
+                v.value as value,
+                v.enabled as enabled
 			FROM 
 				".TB_PREFIX."products_attributes a,
 				".TB_PREFIX."products_values v
@@ -88,6 +89,12 @@ foreach ($customers as $row) {
 
 	$xml .= "<cell><![CDATA[".utf8_encode($row['name'])."]]></cell>";
 	$xml .= "<cell><![CDATA[".utf8_encode($row['value'])."]]></cell>";
+	if ($row['enabled']=='1') {
+		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
+	}	
+	else {
+		$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
+	}
 
 
 	$xml .= "</row>";		

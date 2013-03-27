@@ -1,6 +1,6 @@
 <script type="text/javascript">
 {literal}
-			var columns = 4;
+			var columns = 5;
 			var padding = 12;
 			var grid_width = $('.col').width();
 			
@@ -17,7 +17,8 @@
 				{display: 'Actions', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
 				{display: 'ID', name : 'id', width : 10 * percentage_width, sortable : true, align: 'left'},
 				{display: 'Name', name : 'name', width : 40 * percentage_width, sortable : true, align: 'left'},
-				{display: 'Display Name', name : 'display_name', width : 40 * percentage_width, sortable : true, align: 'left'}
+				{display: 'Enabled', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'},
+				{display: 'Visible', name : 'visible', width : 20 * percentage_width, sortable : true, align: 'left'}
 				],
 
 			searchitems : [

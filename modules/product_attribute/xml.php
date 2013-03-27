@@ -30,7 +30,7 @@ if ($query) $where = " WHERE $qtype LIKE '%$query%' ";
 
 
 /*Check that the sort field is OK*/
-$validFields = array('id', 'name');
+$validFields = array('id', 'name','enabled','visible');
 
 if (in_array($sort, $validFields)) {
 	$sort = $sort;
@@ -42,7 +42,8 @@ if (in_array($sort, $validFields)) {
 	$sql = "SELECT 
 				id, 
 				name,
-				display_name
+                enabled,
+                visible
 			FROM 
 				".TB_PREFIX."products_attributes
 			$where
@@ -82,7 +83,18 @@ foreach ($customers as $row) {
 	$xml .= "<cell><![CDATA[<a href='index.php?module=product_attribute&view=details&action=view&id=".$row['id']."'>View</a> :: <a href='index.php?module=product_attribute&view=details&action=edit&id=".$row['id']."'>Edit</a>]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";		
 	$xml .= "<cell><![CDATA[".utf8_encode($row['name'])."]]></cell>";
-	$xml .= "<cell><![CDATA[".utf8_encode($row['display_name'])."]]></cell>";
+	if ($row['enabled']=='1') {
+		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
+	}	
+	else {
+		$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
+	}
+	if ($row['visible']=='1') {
+		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['visible']."' title='".$row['visible']."' />]]></cell>";				
+	}	
+	else {
+		$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".$row['visible']."' title='".$row['visible']."' />]]></cell>";				
+	}
 
 
 	$xml .= "</row>";		

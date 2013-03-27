@@ -242,7 +242,7 @@
                                     <tr class="si_product_attribute">
                                     {foreach from=$invoiceItem.attribute_json key=k item=v}
                                         <td class="si_product_attribute">
-                                       {$v.name} : {$v.value} 
+                                       {$v.name} : {$v.value} ;
                                         </td>
                                     {/foreach}
                                     </tr>

@@ -21,18 +21,25 @@ if($_GET['id'])
         {
             if($v == 'true')
             {
-                $attr_name_sql = sprintf('select name from si_products_attributes WHERE id = %d', $k);
+                $attr_name_sql = sprintf('select * from si_products_attributes WHERE id = %d', $k);
                 $attr_name = dbQuery($attr_name_sql);
                 $attr_name = $attr_name->fetch();
 
-                $sql2 = sprintf('select a.name as name, v.id as id, v.value as value from si_products_attributes a, si_products_values v where a.id = v.attribute_id AND a.id = %d', $k);
+                $sql2 = sprintf('select a.name as name, v.id as id, v.value as value, v.enabled as enabled from si_products_attributes a, si_products_values v where a.id = v.attribute_id AND a.id = %d', $k);
                 $states2 = dbQuery($sql2);
-                $html .= "<td>".$attr_name['name']."<select name='attribute[".$row_id."][".$k."]'>";
-                foreach($states2 as $att_key=>$att_val)
+
+                if($attr_name['enabled'] =='1')
                 {
-                    $html .= "<option value='". $att_val['id']. "'>".$att_val['value']."</option>";
-                }
+                    $html .= "<td>".$attr_name['name']."<select name='attribute[".$row_id."][".$k."]'>";
+                    foreach($states2 as $att_key=>$att_val)
+                    {
+                        if($att_val['enabled'] == '1')
+                        {
+                            $html .= "<option value='". $att_val['id']. "'>".$att_val['value']."</option>";
+                        }
+                    }
                     $html .= "</select></td>";
+                }
             }
         }
                     $html .= "</tr></table></td></tr>";

@@ -36,6 +36,12 @@
 	<td class="details_screen">Value</td>
 	<td><input type="text" name="value" value="{$smarty.post.value}" size="25" /></td>
 </tr>
+		<tr>
+			<th>{$LANG.enabled}</th>
+			<td>
+				{html_options class=edit name=enabled options=$enabled selected=1}
+			</td>
+		</tr>
 </table>
 <!-- </div> -->
 <hr />

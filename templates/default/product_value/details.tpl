@@ -18,6 +18,10 @@
 		<tr>	
 			<td class="details_screen">{$LANG.value}</td><td>{$product_value.value}</td>
 		</tr>
+		<tr>
+			<th>{$LANG.enabled}</th>
+			<td>{$product.wording_for_enabled|htmlsafe}</td>
+		</tr>
 		</table>
 		<hr />
 
@@ -46,6 +50,12 @@
 		<tr>
 			<td class="details_screen">Value</td><td><input type="text" name="value" value="{$product_value.value}" size="50" /></td>
 		</tr>
+		<th>{$LANG.enabled}</th>
+		<td>
+			{html_options name=enabled options=$enabled selected=$product_attribute.enabled}
+		</td>
+                </tr>
+                <tr>
 
 	</table>
 	<hr />

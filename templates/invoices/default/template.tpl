@@ -222,9 +222,11 @@
                                 <table>
                                     <tr class="si_product_attribute">
                                     {foreach from=$invoiceItem.attribute_json key=k item=v}
+                                       {if $v.visible ==true }
                                         <td class="si_product_attribute">
-                                       {$v.name}: {$v.value} 
+                                       {$v.name}: {$v.value} ;
                                         </td>
+                                        {/if}
                                     {/foreach}
                                     </tr>
                                 </table>

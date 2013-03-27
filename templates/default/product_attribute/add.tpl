@@ -29,10 +29,28 @@
 	<td class="details_screen">Attribute name</td>
 	<td><input type="text" name="name" value="{$smarty.post.name}" size="25" /></td>
 </tr>
-<tr>
-	<td class="details_screen">Display name</td>
-	<td><input type="text" name="display_name" value="{$smarty.post.display_name}" size="25" /></td>
-</tr>
+		<tr>
+			<th>{$LANG.type}</th>
+			<td>
+                <select name="type_id">
+                    {foreach from=$types key=k item=v}
+        				<option value="{$v.id}">{$v.name|capitalize}</option>
+                    {/foreach}
+                </select>
+			</td>
+		</tr>
+		<tr>
+			<th>{$LANG.enabled}</th>
+			<td>
+				{html_options class=edit name=enabled options=$enabled selected=1}
+			</td>
+		</tr>
+		<tr>
+			<th>{$LANG.visible}</th>
+			<td>
+				{html_options class=edit name=visible options=$enabled selected=1}
+			</td>
+		</tr>
 </table>
 
 <hr />

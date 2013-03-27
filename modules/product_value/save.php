@@ -17,12 +17,14 @@ if (  $op === 'insert_product_value' ) {
 		(
 			NULL,
 			:attribute_id,
-			:value
+            :value,
+            :enabled
 		 )";
 
 	if (dbQuery($sql,
 	  ':attribute_id', $_POST['attribute_id'],
-	  ':value', $_POST['value']
+	  ':value', $_POST['value'],
+	  ':enaled', $_POST['enalbed']
 	  )) {
 		$display_block = "Successfully saved";
 	} else {
@@ -43,13 +45,15 @@ if (  $op === 'edit_product_value' ) {
 				".TB_PREFIX."products_values
 			SET
 				attribute_id = :attribute_id,
-				value = :value
+				value = :value,
+				enabled = :enabled
 			WHERE
 				id = :id";
 
 		if (dbQuery($sql, 
 		  ':attribute_id', $_POST['attribute_id'],
 		  ':value', $_POST['value'],
+		  ':enabled', $_POST['enabled'],
 		  ':id', $_GET['id'])) 
 	    {
 			$display_block = "Successfully saved";
