@@ -31,16 +31,16 @@ $products = getActiveProducts();
 
 
 for($i=1;$i<=4;$i++) {
-	$customFields[$i] = show_custom_field("invoice_cf$i",$invoice["custom_field$i"],"write",'',"details_screen",'','','');
+    $customFields[$i] = show_custom_field("invoice_cf$i",$invoice["custom_field$i"],"write",'',"details_screen",'','','');
 }
 
 foreach($invoiceItems as $key=>$value)
 {
     //get list of attributes
-        $prod = getProduct($value['product_id']);
-        $json_att = json_decode($prod['attribute']);
-        if($json_att !== null)
-        {
+    $prod = getProduct($value['product_id']);
+    $json_att = json_decode($prod['attribute']);
+    if($json_att !== null)
+    {
         $html ="<tr id='json_html". $key."'><td></td><td colspan='5'><table><tr>";
         foreach($json_att as $k=>$v)
         {
@@ -56,18 +56,23 @@ foreach($invoiceItems as $key=>$value)
                 if($attr_name['enabled'] =='1')
                 {
                     $html .= "<td>".$attr_name['name']."<select name='attribute[".$row_id."][".$k."]'>";
-                            $html .= "<option value=''></option>";
+                    $html .= "<option value=''></option>";
                     foreach($states2 as $att_key=>$att_val)
                     {
                         if($att_val['enabled'] == '1')
                         {
-
                             foreach ($value['attribute_decode'] as $a_key => $a_value)
                             {
-
+                                /*
+                                echo "k: $k";
+                                echo "key: $a_key";
+                                echo "att value: ".$att_val['id'];
+                                echo "value: $a_value";
+                                 */
                                 if($k == $a_key AND $a_value == $att_val['id'])
                                 {
                                     $selected = "selected";
+                                    break;
                                 } else {
                                     $selected = "";
                                 }
@@ -80,9 +85,9 @@ foreach($invoiceItems as $key=>$value)
                 }
             }
         }
-                    $html .= "</tr></table></td></tr>";
+        $html .= "</tr></table></td></tr>";
         $invoiceItems[$key]['html'] = $html;
-}
+    }
 }
 
 //var_dump($invoiceItems);
