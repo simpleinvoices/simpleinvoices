@@ -228,6 +228,7 @@
 						<input class="si_right" id="unit_price{$line|htmlsafe}" name="unit_price{$line|htmlsafe}" size="7" value="{$invoiceItem.unit_price|siLocal_number_clean}" />
 					</td>
 				</tr>
+					{$invoiceItem.html}
 				<tr class="details si_hide">
 					<td>
 					</td>
