@@ -2275,13 +2275,24 @@ function invoice_item_tax($invoice_item_id,$line_item_tax_id,$unit_price,$quanti
 	//TODO fix this
 	return true;
 }
-function updateInvoiceItem($id,$quantity,$product_id,$line_number,$line_item_tax_id,$description,$unit_price) {
+function updateInvoiceItem($id,$quantity,$product_id,$line_number,$line_item_tax_id,$description,$unit_price,$attribute="") {
 
 	global $logger;
 	global $LANG;
 	//$product = getProduct($product_id);
 	//$tax = getTaxRate($tax_id);
 	
+    $attr = array();
+	$logger->log('Line item attributes: '.var_export($attribute,true), Zend_Log::INFO);
+    foreach($attribute as $k=>$v)
+    {
+        if($attribute[$v] !== '')
+        {
+            $attr[$k] = $v;
+        }
+        
+    }
+
 	$tax_total = getTaxesPerLineItem($line_item_tax_id,$quantity, $unit_price);
 
 	$logger->log('Invoice: '.$invoice_id.' Tax '.$line_item_tax_id.' for line item '.$line_number.': '.$tax_total, Zend_Log::INFO);
@@ -2313,7 +2324,8 @@ function updateInvoiceItem($id,$quantity,$product_id,$line_number,$line_item_tax
 	tax_amount = :tax_amount,
 	gross_total = :gross_total,
 	description = :description,
-	total = :total			
+	total = :total,			
+	attribute = :attribute			
 	WHERE id = :id";
 	
 	//echo $sql;
@@ -2326,6 +2338,7 @@ function updateInvoiceItem($id,$quantity,$product_id,$line_number,$line_item_tax
 		':gross_total', $gross_total,
 		':description', $description,
 		':total', $total,
+        ':attribute',json_encode($attr),
 		':id', $id
 		);
 
