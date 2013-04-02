@@ -46,14 +46,31 @@ foreach($invoiceItems as $key=>$value)
         {
             if($v == 'true')
             {
-                $attr_name_sql = sprintf('select * from si_products_attributes WHERE id = %d', $k);
+                $attr_name_sql = sprintf('select 
+                    a.name as name, a.enabled as enabled,  t.name type 
+                    from 
+                        si_products_attributes as a, 
+                        si_products_attribute_type as t 
+                   where 
+                        a.type_id = t.id
+                        AND a.id = %d', $k);
                 $attr_name = dbQuery($attr_name_sql);
                 $attr_name = $attr_name->fetch();
 
-                $sql2 = sprintf('select a.name as name, v.id as id, v.value as value, v.enabled as enabled from si_products_attributes a, si_products_values v where a.id = v.attribute_id AND a.id = %d', $k);
+                $sql2 = sprintf('select 
+                        a.name as name, 
+                        v.id as id, 
+                        v.value as value, 
+                        v.enabled as enabled 
+                   from 
+                        si_products_attributes a, 
+                        si_products_values v 
+                   where 
+                        a.id = v.attribute_id 
+                        AND a.id = %d', $k);
                 $states2 = dbQuery($sql2);
 
-                if($attr_name['enabled'] =='1')
+                if($attr_name['enabled'] =='1' AND $attr_name['type'] == 'list')
                 {
                     $html .= "<td>".$attr_name['name']."<select name='attribute[".$key."][".$k."]'>";
                     $html .= "<option value=''></option>";
@@ -63,12 +80,6 @@ foreach($invoiceItems as $key=>$value)
                         {
                             foreach ($value['attribute_decode'] as $a_key => $a_value)
                             {
-                                /*
-                                echo "k: $k";
-                                echo "key: $a_key";
-                                echo "att value: ".$att_val['id'];
-                                echo "value: $a_value";
-                                 */
                                 if($k == $a_key AND $a_value == $att_val['id'])
                                 {
                                     $selected = "selected";
@@ -82,6 +93,24 @@ foreach($invoiceItems as $key=>$value)
                         }
                     }
                     $html .= "</select></td>";
+                }
+                if($attr_name['enabled'] =='1' AND $attr_name['type'] == 'free'  )
+                {
+                            $attribute_value ='';
+                            foreach ($value['attribute_decode'] as $a_key => $a_value)
+                            {
+                                if($k == $a_key){ $attribute_value = $a_value;}
+                            }
+                    $html .= "<td>".$attr_name['name']."<input name='attribute[".$key."][".$k."]'  value='". $attribute_value ."' /></td>";
+                }
+                if($attr_name['enabled'] =='1' AND $attr_name['type'] == 'decimal' )
+                {
+                            $attribute_value ='';
+                            foreach ($value['attribute_decode'] as $a_key => $a_value)
+                            {
+                                if($k == $a_key){ $attribute_value = $a_value;}
+                            }
+                    $html .= "<td>".$attr_name['name']."<input name='attribute[".$key."][".$k."]' size='5' value='". $attribute_value ."' /></td>";
                 }
             }
         }

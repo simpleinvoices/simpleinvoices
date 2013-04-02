@@ -215,6 +215,7 @@
 		clonedRow.find("#products"+rowID_new).attr("name", "products"+rowID_new);
 		clonedRow.find("#products"+rowID_new).find('option:selected').removeAttr("selected");
 		clonedRow.find("#products"+rowID_new).prepend(new Option("", ""));
+        clonedRow.find("#products"+rowID_new).find('option:eq(0)').attr('selected', true)
 		clonedRow.find("#products"+rowID_new).removeClass("validate[required]");
 
 		//clonedRow.find("#products"+rowID_new).attr("onChange", "invoice_product_change_price($(this).val(), "+rowID_new+", jQuery('#quantity"+rowID_new+"').val() )");
