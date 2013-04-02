@@ -55,7 +55,7 @@ foreach($invoiceItems as $key=>$value)
 
                 if($attr_name['enabled'] =='1')
                 {
-                    $html .= "<td>".$attr_name['name']."<select name='attribute[".$row_id."][".$k."]'>";
+                    $html .= "<td>".$attr_name['name']."<select name='attribute[".$key."][".$k."]'>";
                     $html .= "<option value=''></option>";
                     foreach($states2 as $att_key=>$att_val)
                     {
