@@ -242,7 +242,11 @@
                                     <tr class="si_product_attribute">
                                     {foreach from=$invoiceItem.attribute_json key=k item=v}
                                         <td class="si_product_attribute">
-                                       {$v.name} : {$v.value} ;
+                                            {if $v.type == 'decimal'}
+                                              {$v.name}: {$preference.pref_currency_sign|htmlsafe}{$v.value|siLocal_number} ;
+                                             {else}
+                                               {$v.name}: {$v.value} ;
+                                            {/if}
                                         </td>
                                     {/foreach}
                                     </tr>

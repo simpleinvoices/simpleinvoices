@@ -22,6 +22,20 @@ class product_attributes
         $attribute = $sth->fetch();
         return $attribute['name'];
     }
+    public function getType($id)
+    {
+        $sql = "select 
+                    t.name as type 
+                from 
+                    ".TB_PREFIX."products_attributes as a, 
+                    ".TB_PREFIX."products_attribute_type as t 
+                where 
+                    a.id = :id 
+                    and a.type_id = t.id";
+        $sth =  dbQuery($sql,':id',$id);
+        $attribute = $sth->fetch();
+        return $attribute['type'];
+    }
     public function getValue($attribute_id, $value_id)
     {
        

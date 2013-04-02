@@ -34,7 +34,7 @@
 			<td>
                 <select name="type_id">
                     {foreach from=$types key=k item=v}
-        				<option value="{$v.id}">{$v.name|capitalize}</option>
+        				<option value="{$v.id}">{$LANG[$v.name]}</option>
                     {/foreach}
                 </select>
 			</td>
