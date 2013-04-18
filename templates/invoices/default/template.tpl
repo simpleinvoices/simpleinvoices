@@ -225,9 +225,9 @@
                                        {if $v.visible ==true }
                                         <td class="si_product_attribute">
                                             {if $v.type == 'decimal'}
-                                              {$v.name}: {$preference.pref_currency_sign|htmlsafe}{$v.value|siLocal_number} ;
-                                             {else}
-                                               {$v.name}: {$v.value} ;
+                                              {$v.name}: {$preference.pref_currency_sign|htmlsafe}{$v.value|siLocal_number};
+                                             {else if $v.value !=''}
+                                               {$v.name}: {$v.value};
                                             {/if}
                                         </td>
                                         {/if}
