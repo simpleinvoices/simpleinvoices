@@ -1574,8 +1574,20 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['269']['date'] = "20130327";
 
 
+
+    $patch['270']['name'] = "Make Simple Invoices faster - add index";
+    $patch['270']['patch'] = "ALTER TABLE `".TB_PREFIX."payment` ADD INDEX(`ac_inv_id`);";
+    $patch['270']['date'] = "20100419";
+
+    $patch['271']['name'] = "Make Simple Invoices faster - add index";
+    $patch['271']['patch'] = "ALTER TABLE `".TB_PREFIX."payment` ADD INDEX(`ac_amount`);";
+    $patch['271']['date'] = "20100419";
+
+    $patch['272']['name'] = "Add product attributes system preference";
+    $patch['272']['patch'] = "INSERT INTO ".TB_PREFIX."system_defaults (id, name ,value ,domain_id ,extension_id ) VALUES (NULL , 'large_dataset', '0', '1', '1');";
+    $patch['272']['date'] = "20130313";
 /*
 /*
 ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );
 
-*/
+ */

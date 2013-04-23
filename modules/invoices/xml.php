@@ -15,17 +15,25 @@ $invoice->sort=$sort;
 $invoice->query=$_REQUEST['query'];
 $invoice->qtype=$_REQUEST['qtype'];
 $invoice->sort=$sort;
-$sth = $invoice->select_all('', $dir, $rp, $page, $having);
-$sth_count_rows = $invoice->select_all('count',$dir, $rp, $page, $having);
+$large_dataset = getDefaultLargeDataset();
+if($large_dataset == $LANG['enabled'])
+{
+  $sth = $invoice->select_all('large', $dir, $rp, $page, $having);
+  $sth_count_rows = invoice::count();
+  $invoice_count = $sth_count_rows->fetch(PDO::FETCH_ASSOC);
+  $invoice_count = $invoice_count['count'];
+} else {
+  $sth = $invoice->select_all('', $dir, $rp, $page, $having);
+  $sth_count_rows = $invoice->select_all('count',$dir, $rp, $page, $having);
+  $invoices_count = $sth_count_rows->rowCount();
 
+}
 $invoices = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 $xml ="";
-$count = $sth_count_rows->rowCount();
-
 	$xml .= "<rows>";
 	$xml .= "<page>$page</page>";
-	$xml .= "<total>$count</total>";
+	$xml .= "<total>". $invoice_count ."</total>";
 	
 	foreach ($invoices as $row) {
 		$xml .= "<row id='".$row['id']."'>";

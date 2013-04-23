@@ -72,5 +72,10 @@
 			<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=product_attributes'><img src="images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td>
 			<td>{$defaultProductAttributes|htmlsafe}</td>
 		</tr>
+		<tr>
+			<th>{$LANG.large_dataset}</th>
+			<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=large_dataset'><img src="images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td>
+			<td>{$defaultLargeDataset|htmlsafe}</td>
+		</tr>
 	</table>
 </div> 

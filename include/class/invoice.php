@@ -195,6 +195,23 @@ class invoice {
 
     }
 
+    public static function count()
+    {
+		global $logger;
+	    global $auth_session;
+
+		$sql = "SELECT 
+                    count(id) as count
+                FROM 
+                    ".TB_PREFIX."invoices 
+                WHERE 
+                    domain_id = :domain_id 
+                    ";
+		$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+
+        return $sth;
+
+    }
     function select_all($type='', $dir='DESC', $rp='25', $page='1', $having='')
     {
         global $config;
@@ -342,20 +359,34 @@ class invoice {
                        iv.index_id as index_id,
                        b.name AS biller,
                        c.name AS customer,
-                       (SELECT coalesce(SUM(ii.total), 0) FROM " .
+                       DATE_FORMAT(date,'%Y-%m-%d') AS date,";
+
+
+                $sql .="(SELECT coalesce(SUM(ii.total), 0) FROM " .
                 TB_PREFIX . "invoice_items ii WHERE ii.invoice_id = iv.id) AS invoice_total,
                        (SELECT coalesce(SUM(ac_amount), 0) FROM " .
                 TB_PREFIX . "payment ap WHERE ap.ac_inv_id = iv.id) AS INV_PAID,
-                       ROUND( (SELECT (coalesce(invoice_total,0) - coalesce(INV_PAID,0))) ,2) As owing,
-                       DATE_FORMAT(date,'%Y-%m-%d') AS date,
+                       (SELECT invoice_total - INV_PAID) As owing,
+                       ";
+
+              //only run aging for real query
+               if($type == '')
+               {
+                    $sql .="
                        (SELECT IF((owing = 0 OR owing < 0), 0, DateDiff(now(), date))) AS Age,
                        (SELECT (CASE   WHEN Age = 0 THEN ''
                                                        WHEN Age <= 14 THEN '0-14'
                                                        WHEN Age <= 30 THEN '15-30'
                                                        WHEN Age <= 60 THEN '31-60'
                                                       WHEN Age <= 90 THEN '61-90'
-                                                       ELSE '90+'  END)) AS aging,
-                       iv.type_id As type_id,
+                                                      ELSE '90+'  END)) AS aging,";
+               } else {
+                   $sql .="
+                            (SELECT '') as Age,
+                            (SELECT '') as aging,
+                            ";
+               }
+               $sql .="iv.type_id As type_id,
                        pf.pref_description AS preference,
                        pf.status AS status,
                        (SELECT CONCAT(pf.pref_inv_wording,' ',iv.index_id)) as index_name
