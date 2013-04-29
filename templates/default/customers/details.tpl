@@ -132,15 +132,9 @@
                 </tr>
             </table>
         </div>
+        </div>
 	
 	<div id="section-3" class="fragment">
-
-        <div class="si_cust_notes">
-            <h4>{$LANG.notes}</h4>
-            {$customer.notes|outhtml}
-        </div>
-    </div>
-	<div id="section-4" class="fragment">
         <div class="si_cust_invoices">
             <h4>{$LANG.invoice_listings}</h4>
             <table>
@@ -167,6 +161,13 @@
             </table>
         </div>
 	</div>
+	<div id="section-4" class="fragment">
+
+        <div class="si_cust_notes">
+            <h4>{$LANG.notes}</h4>
+            {$customer.notes|outhtml}
+        </div>
+    	</div>
 	</div>
 </div>
 

@@ -923,7 +923,6 @@ A.cluetip:hover IMG{
 }
 
 .si_cust_account{
-	float: right;
 	width: 300px;
 }
 .si_cust_invoices TABLE,
@@ -931,13 +930,13 @@ A.cluetip:hover IMG{
 	margin: 0;
 }
 .si_cust_card{
-	float: right;
 	width: 300px;
 	margin-top: 20px;
 }
 .si_cust_info{
 	float: left;
 	margin-right: 10px;
+	width:100%;
 }
 .si_clear{
 	clear: both;
