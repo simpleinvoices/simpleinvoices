@@ -442,7 +442,7 @@
 			{online_payment_link 
 				type=$preference.include_online_payment business=$biller.paypal_business_name 
 				item_name=$invoice.index_name invoice=$invoice.id 
-				amount=$invoice.total currency_code=$preference.currency_code
+				amount=$invoice.owing currency_code=$preference.currency_code
 				link_wording=$LANG.paypal_link
 				notify_url=$biller.paypal_notify_url return_url=$biller.paypal_return_url
 				domain_id = $invoice.domain_id include_image=true
