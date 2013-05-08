@@ -567,6 +567,7 @@ $LANG['totals'] = "Totals";//1
 $LANG['type'] = "Type";//1
 $LANG['Unit_Cost'] = "Unit Cost";//1
 $LANG['unit_price'] = "Unit Price";//1
+$LANG['unpaid_invoices'] = "Unpaid Invoices";//1
 $LANG['upgrading_simple_invoices'] = "Upgrading Simple Invoices";//1
 $LANG['user_add'] = "Add User";//1
 $LANG['users'] = "Users";//1

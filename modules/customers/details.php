@@ -42,10 +42,34 @@ $stuff['owing'] = $stuff['total'] - $stuff['paid'];
 $customFieldLabel = getCustomFieldLabels();
 $invoices = getCustomerInvoices($customer_id);
 
+//$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
+$dir =  "DESC" ;
+$sort =  "id" ;
+$rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
+$having = 'money_owed' ;
+$page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
+
+//$sql = "SELECT * FROM ".TB_PREFIX."invoices LIMIT $start, $limit";
+$invoice_owing = new invoice();
+$invoice_owing->sort=$sort;
+$invoice_owing->query=$_REQUEST['query'];
+$invoice_owing->qtype=$_REQUEST['qtype'];
+
+$large_dataset = getDefaultLargeDataset();
+if($large_dataset == $LANG['enabled'])
+{
+  $sth = $invoice_owing->select_all('large_count', $dir, $rp, $page, $having);
+} else {
+  $sth = $invoice_owing->select_all('', $dir, $rp, $page, $having);
+
+}
+$invoices_owing = $sth->fetchAll(PDO::FETCH_ASSOC);
+
 //$customFieldLabel = getCustomFieldLabels("biller");
 $smarty -> assign("stuff",$stuff);
 $smarty -> assign('customer',$customer);
 $smarty -> assign('invoices',$invoices);
+$smarty -> assign('invoices_owing',$invoices_owing);
 $smarty -> assign('customFieldLabel',$customFieldLabel);
 
 $smarty -> assign('pageActive', 'customer');

@@ -85,8 +85,9 @@
 	<ul class="anchors">
 		<li><a href="#section-1" target="_top">{$LANG.custom_fields}</a></li>
 		<li><a href="#section-2" target="_top">{$LANG.credit_card_details}</a></li>
-		<li><a href="#section-3" target="_top">{$LANG.customer} {$LANG.invoice_listings}</a></li>
-		<li><a href="#section-4" target="_top">{$LANG.notes}</a></li>
+		<li><a href="#section-3" target="_top">{$LANG.unpaid_invoices}</a></li>
+		<li><a href="#section-4" target="_top">{$LANG.customer} {$LANG.invoice_listings}</a></li>
+		<li><a href="#section-5" target="_top">{$LANG.notes}</a></li>
 	</ul>
     </div>
 	<div id="section-1" class="fragment">
@@ -140,6 +141,40 @@
             <table>
                 <thead>
                     <tr class="tr_head">
+                        <th class="first">
+		<!--6 Payment -->{$LANG.actions}
+			</th>
+                        <th>{$LANG.id}</th>
+                        <th>{$LANG.date_created}</th>
+                        <th>{$LANG.total}</th>
+                        <th>{$LANG.paid}</th>
+                        <th>{$LANG.owing}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {foreach from=$invoices item=invoice}
+                    <tr class="index_table">
+                        <td class="first">
+		<!--6 Payment --><a title="{$LANG.process_payment_for} {$invoice.preference} {$invoice.id}"  href='index.php?module=payments&view=process&id={$invoice.id}&op=pay_selected_invoice'><img src='images/common/money_dollar.png' class='action' /></a>
+                        <a href="index.php?module=invoices&amp;view=quick_view&id={$invoice.id|urlencode}"><img src='images/common/view.png' class='action' /></a>
+			</td>
+                        <td ><a href="index.php?module=invoices&amp;view=quick_view&id={$invoice.id|urlencode}">{$invoice.index_id|htmlsafe}</a></td>
+                        <td>{$invoice.date|htmlsafe}</td>
+                        <td>{$invoice.total|number_format:2}</td>
+                        <td>{$invoice.paid|number_format:2}</td>
+                        <td>{$invoice.owing|number_format:2}</td>
+                    </tr>
+                {/foreach}
+                </tbody>
+            </table>
+        </div>
+	</div>
+	<div id="section-4" class="fragment">
+        <div class="si_cust_invoices">
+            <h4>{$LANG.invoice_listings}</h4>
+            <table>
+                <thead>
+                    <tr class="tr_head">
                         <th class="first">{$LANG.id}</th>
                         <th>{$LANG.date_created}</th>
                         <th>{$LANG.total}</th>
@@ -161,7 +196,7 @@
             </table>
         </div>
 	</div>
-	<div id="section-4" class="fragment">
+	<div id="section-5" class="fragment">
 
         <div class="si_cust_notes">
             <h4>{$LANG.notes}</h4>
