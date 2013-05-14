@@ -82,7 +82,7 @@
 
 <div id="tabs_customer">
 	<ul class="anchors">
-		<li><a href="#section-1" target="_top">{$LANG.custom_fields}</a></li>
+		<li><a href="#section-1" target="_top">{$LANG.summary_of_accounts}</a></li>
 		<li><a href="#section-2" target="_top">{$LANG.credit_card_details}</a></li>
 		<li><a href="#section-3" target="_top">{$LANG.unpaid_invoices}</a></li>
 		<li><a href="#section-4" target="_top">{$LANG.customer} {$LANG.invoice_listings}</a></li>
@@ -90,7 +90,6 @@
 	</ul>
 	<div id="section-1" class="fragment">
 		<div class="si_cust_account">
-		    <h4>{$LANG.summary_of_accounts}</h4>
 		    <table>
 			<tr>
 			    <th>{$LANG.total_invoices}</th>

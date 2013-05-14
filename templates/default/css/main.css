@@ -927,11 +927,11 @@ A.cluetip:hover IMG{
 }
 .si_cust_invoices TABLE,
 .si_cust_account TABLE{
-	margin: 0;
+	margin-top:10px;
 }
 .si_cust_card{
 	width: 300px;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 .si_cust_info{
 	float: left;
@@ -946,7 +946,7 @@ A.cluetip:hover IMG{
 }
 .si_cust_invoices TH,
 .si_cust_invoices TD{
-	text-align: right;
+	text-align: left;
 	padding-left: 30px;
 	padding-right: 5px;
 }
@@ -958,7 +958,7 @@ A.cluetip:hover IMG{
 	padding-bottom: 6px;
 	border-top: 1px solid #DDD;
 	border-bottom: 0px;
-	text-align: center;
+	text-align: left;
 	vertical-align: middle;
 }
 .si_cust_invoices TD{
@@ -969,7 +969,6 @@ A.cluetip:hover IMG{
 }
 .si_cust_invoices TABLE{
 	width:100%;
-	margin-top:10px;
 }
 /* @end */
 
