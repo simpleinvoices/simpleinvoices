@@ -15,7 +15,6 @@
 <div class="si_form si_form_view" id="si_form_cust">
 
 	<div class="si_cust_info">
-		<h4>{$LANG.customer_details}</h4>
 		<table>
 			<tr>
 				<th>{$LANG.customer_name}</th>
@@ -89,121 +88,115 @@
 		<li><a href="#section-4" target="_top">{$LANG.customer} {$LANG.invoice_listings}</a></li>
 		<li><a href="#section-5" target="_top">{$LANG.notes}</a></li>
 	</ul>
-    </div>
 	<div id="section-1" class="fragment">
-        <div class="si_cust_account">
-            <h4>{$LANG.summary_of_accounts}</h4>
-            <table>
-                <tr>
-                    <th>{$LANG.total_invoices}</th>
-                    <td class="si_right">{$stuff.total|number_format:2}</td>
-                </tr>
-                <tr>
-                    <th><a href="index.php?module=payments&view=manage&c_id={$customer.id|urlencode}">{$LANG.total_paid}</a></th>
-                    <td class="si_right">{$stuff.paid|number_format:2}</td>
-                </tr>
-                <tr>
-                    <th>{$LANG.total_owing}</th>
-                    <td class="si_right"><u>{$stuff.owing|number_format:2}</u></td>
-                </tr>
-            </table>
-        </div>
+		<div class="si_cust_account">
+		    <h4>{$LANG.summary_of_accounts}</h4>
+		    <table>
+			<tr>
+			    <th>{$LANG.total_invoices}</th>
+			    <td class="si_right">{$stuff.total|number_format:2}</td>
+			</tr>
+			<tr>
+			    <th><a href="index.php?module=payments&view=manage&c_id={$customer.id|urlencode}">{$LANG.total_paid}</a></th>
+			    <td class="si_right">{$stuff.paid|number_format:2}</td>
+			</tr>
+			<tr>
+			    <th>{$LANG.total_owing}</th>
+			    <td class="si_right"><u>{$stuff.owing|number_format:2}</u></td>
+			</tr>
+		    </table>
+		</div>
 	</div>
 
 	<div id="section-2" class="fragment">
 
-        <div class="si_cust_card">
-            <h4>{$LANG.credit_card_details}</h4>
-            <table>
-                <tr>
-                    <th>{$LANG.credit_card_holder_name}</th>
-                    <td>{$customer.credit_card_holder_name|htmlsafe}</td>
-                </tr>
-                <tr>
-                    <th>{$LANG.credit_card_number}</th>
-                    <td>{$customer.credit_card_number|regex_replace:'/^............/':"************"|htmlsafe}</td>
-                </tr>
-                <tr>
-                    <th>{$LANG.credit_card_expiry_month}</th>
-                    <td>{$customer.credit_card_expiry_month|htmlsafe}</td>
-                </tr>
-                <tr>
-                    <th>{$LANG.credit_card_expiry_year}</th>
-                    <td>{$customer.credit_card_expiry_year|htmlsafe}</td>
-                </tr>
-            </table>
-        </div>
+		<div class="si_cust_card">
+		    <table>
+			<tr>
+			    <th>{$LANG.credit_card_holder_name}</th>
+			    <td>{$customer.credit_card_holder_name|htmlsafe}</td>
+			</tr>
+			<tr>
+			    <th>{$LANG.credit_card_number}</th>
+			    <td>{$customer.credit_card_number|regex_replace:'/^............/':"************"|htmlsafe}</td>
+			</tr>
+			<tr>
+			    <th>{$LANG.credit_card_expiry_month}</th>
+			    <td>{$customer.credit_card_expiry_month|htmlsafe}</td>
+			</tr>
+			<tr>
+			    <th>{$LANG.credit_card_expiry_year}</th>
+			    <td>{$customer.credit_card_expiry_year|htmlsafe}</td>
+			</tr>
+		    </table>
+		</div>
         </div>
 	
 	<div id="section-3" class="fragment">
-        <div class="si_cust_invoices">
-            <h4>{$LANG.invoice_listings}</h4>
-            <table>
-                <thead>
-                    <tr class="tr_head">
-                        <th class="first">
-		<!--6 Payment -->{$LANG.actions}
-			</th>
-                        <th>{$LANG.id}</th>
-                        <th>{$LANG.date_created}</th>
-                        <th>{$LANG.total}</th>
-                        <th>{$LANG.paid}</th>
-                        <th>{$LANG.owing}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {foreach from=$invoices item=invoice}
-                    <tr class="index_table">
-                        <td class="first">
-		<!--6 Payment --><a title="{$LANG.process_payment_for} {$invoice.preference} {$invoice.id}"  href='index.php?module=payments&view=process&id={$invoice.id}&op=pay_selected_invoice'><img src='images/common/money_dollar.png' class='action' /></a>
-                        <a href="index.php?module=invoices&amp;view=quick_view&id={$invoice.id|urlencode}"><img src='images/common/view.png' class='action' /></a>
-			</td>
-                        <td ><a href="index.php?module=invoices&amp;view=quick_view&id={$invoice.id|urlencode}">{$invoice.index_id|htmlsafe}</a></td>
-                        <td>{$invoice.date|htmlsafe}</td>
-                        <td>{$invoice.total|number_format:2}</td>
-                        <td>{$invoice.paid|number_format:2}</td>
-                        <td>{$invoice.owing|number_format:2}</td>
-                    </tr>
-                {/foreach}
-                </tbody>
-            </table>
-        </div>
+		<div class="si_cust_invoices">
+		    <table>
+			<thead>
+			    <tr class="tr_head">
+				<th class="first">
+			<!--6 Payment -->{$LANG.actions}
+				</th>
+				<th>{$LANG.id}</th>
+				<th>{$LANG.date_created}</th>
+				<th>{$LANG.total}</th>
+				<th>{$LANG.paid}</th>
+				<th>{$LANG.owing}</th>
+			    </tr>
+			</thead>
+			<tbody>
+			{foreach from=$invoices item=invoice}
+			    <tr class="index_table">
+				<td class="first">
+			<!--6 Payment --><a title="{$LANG.process_payment_for} {$invoice.preference} {$invoice.id}"  href='index.php?module=payments&view=process&id={$invoice.id}&op=pay_selected_invoice'><img src='images/common/money_dollar.png' class='action' /></a>
+				<a href="index.php?module=invoices&amp;view=quick_view&id={$invoice.id|urlencode}"><img src='images/common/view.png' class='action' /></a>
+				</td>
+				<td ><a href="index.php?module=invoices&amp;view=quick_view&id={$invoice.id|urlencode}">{$invoice.index_id|htmlsafe}</a></td>
+				<td>{$invoice.date|htmlsafe}</td>
+				<td>{$invoice.total|number_format:2}</td>
+				<td>{$invoice.paid|number_format:2}</td>
+				<td>{$invoice.owing|number_format:2}</td>
+			    </tr>
+			{/foreach}
+			</tbody>
+		    </table>
+		</div>
 	</div>
 	<div id="section-4" class="fragment">
-        <div class="si_cust_invoices">
-            <h4>{$LANG.invoice_listings}</h4>
-            <table>
-                <thead>
-                    <tr class="tr_head">
-                        <th class="first">{$LANG.id}</th>
-                        <th>{$LANG.date_created}</th>
-                        <th>{$LANG.total}</th>
-                        <th>{$LANG.paid}</th>
-                        <th>{$LANG.owing}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {foreach from=$invoices item=invoice}
-                    <tr class="index_table">
-                        <td class="first"><a href="index.php?module=invoices&amp;view=quick_view&id={$invoice.id|urlencode}">{$invoice.index_id|htmlsafe}</a></td>
-                        <td>{$invoice.date|htmlsafe}</td>
-                        <td>{$invoice.total|number_format:2}</td>
-                        <td>{$invoice.paid|number_format:2}</td>
-                        <td>{$invoice.owing|number_format:2}</td>
-                    </tr>
-                {/foreach}
-                </tbody>
-            </table>
-        </div>
+		<div class="si_cust_invoices">
+		    <table>
+			<thead>
+			    <tr class="tr_head">
+				<th class="first">{$LANG.id}</th>
+				<th>{$LANG.date_created}</th>
+				<th>{$LANG.total}</th>
+				<th>{$LANG.paid}</th>
+				<th>{$LANG.owing}</th>
+			    </tr>
+			</thead>
+			<tbody>
+			{foreach from=$invoices item=invoice}
+			    <tr class="index_table">
+				<td class="first"><a href="index.php?module=invoices&amp;view=quick_view&id={$invoice.id|urlencode}">{$invoice.index_id|htmlsafe}</a></td>
+				<td>{$invoice.date|htmlsafe}</td>
+				<td>{$invoice.total|number_format:2}</td>
+				<td>{$invoice.paid|number_format:2}</td>
+				<td>{$invoice.owing|number_format:2}</td>
+			    </tr>
+			{/foreach}
+			</tbody>
+		    </table>
+		</div>
 	</div>
 	<div id="section-5" class="fragment">
 
-        <div class="si_cust_notes">
-            <h4>{$LANG.notes}</h4>
-            {$customer.notes|outhtml}
-        </div>
+		<div class="si_cust_notes">
+		    {$customer.notes|outhtml}
+		</div>
     	</div>
-	</div>
 </div>
 
 <div class="si_toolbar si_toolbar_form">
