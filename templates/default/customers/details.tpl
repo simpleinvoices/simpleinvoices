@@ -201,6 +201,7 @@
 <div class="si_toolbar si_toolbar_form">
 	<a href="./index.php?module=customers&amp;view=details&amp;id={$customer.id|urlencode}&amp;action=edit" class="positive"><img src="./images/common/tick.png" alt="" />{$LANG.edit}</a>
 </div>
+</div>
 {/if}
 
 
