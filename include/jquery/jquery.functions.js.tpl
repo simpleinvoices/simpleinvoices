@@ -40,13 +40,14 @@
       	$('#gmail_loading').show();
 		$.ajax({
 			type: 'GET',
-			url: './index.php?module=invoices&view=product_ajax&id='+product,
+			url: './index.php?module=invoices&view=product_ajax&id='+product+'&row='+row_number,
 			data: "id: "+product,
 			dataType: "json",
 			success: function(data){
 				$('#gmail_loading').hide();
 				/*$('#state').html(data);*/
 				/*if ( (quantity.length==0) || (quantity.value==null) ) */
+				$("#json_html"+row_number).remove();
 				if (quantity=="") 
 				{	
 					$("#quantity"+row_number).attr("value","1");
@@ -61,6 +62,30 @@
 				{
 					$("#tax_id\\["+row_number+"\\]\\[1\\]").val(data['default_tax_id_2']);
 				}
+                //do the product matric code
+				if (data['show_description'] =="Y") 
+				{	
+					$("tbody#row"+row_number+" tr.details").show();
+				} else {
+					$("tbody#row"+row_number+" tr.details").hide();
+
+                }
+                if($("#description"+row_number).val() == $("#description"+row_number).attr('rel') || $("#description"+row_number).val() =='{/literal}{$LANG.description}{literal}')
+                {
+                    if (data['notes_as_description'] =="Y") 
+                    {	
+                        $("#description"+row_number).val(data['notes']);
+                        $("#description"+row_number).attr('rel',data['notes']);
+                    } else {
+                        $("#description"+row_number).val('{/literal}{$LANG.description}{literal}');
+                        $("#description"+row_number).attr('rel','{/literal}{$LANG.description}{literal}');
+
+                    }
+				} 
+				if (data['json_html'] !=="") 
+				{	
+					$("tbody#row"+row_number+" tr.details").before(data['json_html']);
+				} 
 			}
 	
    		 });
@@ -188,6 +213,9 @@
 		clonedRow.find("#products"+rowID_old).attr("rel", rowID_new);
 		clonedRow.find("#products"+rowID_old).attr("id", "products"+rowID_new);
 		clonedRow.find("#products"+rowID_new).attr("name", "products"+rowID_new);
+		clonedRow.find("#products"+rowID_new).find('option:selected').removeAttr("selected");
+		clonedRow.find("#products"+rowID_new).prepend(new Option("", ""));
+        clonedRow.find("#products"+rowID_new).find('option:eq(0)').attr('selected', true)
 		clonedRow.find("#products"+rowID_new).removeClass("validate[required]");
 
 		//clonedRow.find("#products"+rowID_new).attr("onChange", "invoice_product_change_price($(this).val(), "+rowID_new+", jQuery('#quantity"+rowID_new+"').val() )");
@@ -201,12 +229,15 @@
 		$("#description"+rowID_new, clonedRow).attr("name", "description"+rowID_new);
 		$("#description"+rowID_new, clonedRow).attr("value","{/literal}{$LANG.description}{literal}");
 		$("#description"+rowID_new, clonedRow).css({ color: "#b2adad" });
+		$(".details",clonedRow).hide();
 	
 		$("#tax_id\\["+rowID_old+"\\]\\[0\\]", clonedRow).attr("id", "tax_id["+rowID_new+"][0]");
 		$("#tax_id\\["+rowID_new+"\\]\\[0\\]", clonedRow).attr("name", "tax_id["+rowID_new+"][0]");
 		$("#tax_id\\["+rowID_old+"\\]\\[1\\]", clonedRow).attr("id", "tax_id["+rowID_new+"][1]");
 		$("#tax_id\\["+rowID_new+"\\]\\[1\\]", clonedRow).attr("name", "tax_id["+rowID_new+"][1]");
 	
+		$("#json_html"+rowID_old, clonedRow).remove();
+
 		$('#itemtable').append(clonedRow);
 		
 		$('#gmail_loading').hide();

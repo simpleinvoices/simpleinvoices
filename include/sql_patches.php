@@ -1487,7 +1487,107 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['253']['name'] = "Add PaymentsGateway API ID field";
     $patch['253']['patch'] = "ALTER TABLE `".TB_PREFIX."biller` ADD  `paymentsgateway_api_id` VARCHAR( 255 ) NULL AFTER `eway_customer_id`;";
     $patch['253']['date'] = "20110918";
+
+    $patch['254']['name'] = "Product Matrix - update line items table";
+    $patch['254']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` ADD `attribute` VARCHAR( 255 ) NULL ;";
+    $patch['254']['date'] = "20130313";
+
+    $patch['255']['name'] = "Product Matrix - update line items table";
+    $patch['255']['patch'] = " 
+        CREATE TABLE `".TB_PREFIX."products_attributes` (
+            `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+            `name` VARCHAR( 255 ) NOT NULL,
+            `type_id` VARCHAR( 255 ) NOT NULL
+            ) ENGINE = MYISAM ;";
+        $patch['255']['date'] = "20130313";
+
+    $patch['256']['name'] = "Product Matrix - update line items table";
+    $patch['256']['patch'] = "INSERT INTO `". TB_PREFIX ."products_attributes` (`id`, `name`, `type_id`) VALUES (NULL, 'Size','1'), (NULL,'Colour','1');";
+    $patch['256']['date'] = "20130313";
+
+    $patch['257']['name'] = "Product Matrix - update line items table";
+    $patch['257']['patch'] = "CREATE TABLE `". TB_PREFIX ."products_values` (
+`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`attribute_id` INT( 11 ) NOT NULL ,
+`value` VARCHAR( 255 ) NOT NULL
+) ENGINE = MYISAM ;";
+    $patch['257']['date'] = "20130313";
+
+    $patch['258']['name'] = "Product Matrix - update line items table";
+    $patch['258']['patch'] = "INSERT INTO `". TB_PREFIX ."products_values` (`id`, `attribute_id`,`value`) VALUES (NULL,'1', 'S'),  (NULL,'1', 'M'), (NULL,'1', 'L'),  (NULL,'2', 'Red'),  (NULL,'2', 'White');";
+    $patch['258']['date'] = "20130313";
+
+    $patch['259']['name'] = "Product Matrix - update line items table";
+    $patch['259']['patch'] = "CREATE TABLE `". TB_PREFIX ."products_matrix` (
+`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`product_id` INT( 11 ) NOT NULL ,
+`attribute_id` INT( 11 ) NOT NULL
+) ENGINE = MYISAM ;";
+    $patch['259']['date'] = "20130313";
+
+    $patch['260']['name'] = "Product Matrix - update line items table";
+    $patch['260']['patch'] =" ALTER TABLE `". TB_PREFIX ."products_matrix` ADD `product_attribute_number` INT( 11 ) NOT NULL AFTER `product_id` ;";
+    $patch['260']['date'] = "20130313";
+
+    $patch['261']['name'] = "Product Matrix - update line items table";
+    $patch['261']['patch'] =" INSERT INTO `". TB_PREFIX ."products_matrix` (`id`, `product_id`,`product_attribute_number`, `attribute_id`) VALUES (NULL,'1', '1', '1'),  (NULL,'1', '2', '2'), (NULL,'2', '1', '2');";
+    $patch['261']['date'] = "20130313";
+
+	$patch['262']['name'] = "Add product attributes system preference";
+	$patch['262']['patch'] = "INSERT INTO ".TB_PREFIX."system_defaults (id, name ,value ,domain_id ,extension_id ) VALUES (NULL , 'product_attributes', '0', '1', '1');";
+	$patch['262']['date'] = "20130313";
+
+    $patch['263']['name'] = "Product Matrix - update line items table";
+    $patch['263']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `attribute` VARCHAR( 255 ) NULL ;";
+    $patch['263']['date'] = "20130313";
+
+
+    $patch['264']['name'] = "Product - use notes as default line item description";
+    $patch['264']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `notes_as_description` VARCHAR( 1 ) NULL ;";
+    $patch['264']['date'] = "20130314";
+
+
+    $patch['265']['name'] = "Product - expand/show line item description";
+    $patch['265']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `show_description` VARCHAR( 1 ) NULL ;";
+    $patch['265']['date'] = "20130314";
+
+    $patch['266']['name'] = "Product - expand/show line item description";
+    $patch['266']['patch'] = "CREATE TABLE `".TB_PREFIX."products_attribute_type` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+                `name` varchar(255) NOT NULL,
+                  PRIMARY KEY (`id`)
+              ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
+    $patch['266']['date'] = "20130322";
+
+    $patch['267']['name'] = "Product Matrix - insert attribute types";
+    $patch['267']['patch'] = "INSERT INTO `". TB_PREFIX ."products_attribute_type` (`id`, `name`) VALUES (NULL,'list'),  (NULL,'decimal'), (NULL,'free');";
+    $patch['267']['date'] = "20130325";
+
+
+    $patch['268']['name'] = "Product Matrix - insert attribute types";
+    $patch['268']['patch'] = "ALTER TABLE  `". TB_PREFIX ."products_attributes` ADD  `enabled` VARCHAR( 1 ) NULL DEFAULT  '1',
+        ADD  `visible` VARCHAR( 1 ) NULL DEFAULT  '1';";
+    $patch['268']['date'] = "20130327";
+
+    $patch['269']['name'] = "Product Matrix - insert attribute types";
+    $patch['269']['patch'] = "ALTER TABLE  `". TB_PREFIX ."products_values` ADD  `enabled` VARCHAR( 1 ) NULL DEFAULT  '1';";
+    $patch['269']['date'] = "20130327";
+
+
+
+    $patch['270']['name'] = "Make Simple Invoices faster - add index";
+    $patch['270']['patch'] = "ALTER TABLE `".TB_PREFIX."payment` ADD INDEX(`ac_inv_id`);";
+    $patch['270']['date'] = "20100419";
+
+    $patch['271']['name'] = "Make Simple Invoices faster - add index";
+    $patch['271']['patch'] = "ALTER TABLE `".TB_PREFIX."payment` ADD INDEX(`ac_amount`);";
+    $patch['271']['date'] = "20100419";
+
+    $patch['272']['name'] = "Add product attributes system preference";
+    $patch['272']['patch'] = "INSERT INTO ".TB_PREFIX."system_defaults (id, name ,value ,domain_id ,extension_id ) VALUES (NULL , 'large_dataset', '0', '1', '1');";
+    $patch['272']['date'] = "20130313";
+/*
 /*
 ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );
 
-*/
+ */

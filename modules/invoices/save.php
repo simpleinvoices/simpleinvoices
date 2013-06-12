@@ -65,7 +65,7 @@ if ($_POST['action'] == "insert" ) {
 			if($_POST["quantity$i"] != null)
 			{
 				if (
-						insertInvoiceItem($id,$_POST["quantity$i"],$_POST["products$i"],$i,$_POST["tax_id"][$i],$_POST["description$i"], $_POST["unit_price$i"] )
+						insertInvoiceItem($id,$_POST["quantity$i"],$_POST["products$i"],$i,$_POST["tax_id"][$i],$_POST["description$i"], $_POST["unit_price$i"],$_POST["attribute"][$i] )
 					) 
 				{
 		//			insert_invoice_item_tax(lastInsertId(), )
@@ -122,12 +122,12 @@ if ($_POST['action'] == "insert" ) {
 				//new line item added in edit page
 				if($_POST["line_item$i"] == "")
 				{
-					insertInvoiceItem($id,$_POST["quantity$i"],$_POST["products$i"],$i,$_POST["tax_id"][$i],$_POST["description$i"], $_POST["unit_price$i"]);
+					insertInvoiceItem($id,$_POST["quantity$i"],$_POST["products$i"],$i,$_POST["tax_id"][$i],$_POST["description$i"], $_POST["unit_price$i"],$_POST["attribute"][$i]);
 				}
 				
 				if($_POST["line_item$i"] != "")
 				{
-					updateInvoiceItem($_POST["line_item$i"],$_POST["quantity$i"],$_POST["products$i"],$i,$_POST['tax_id'][$i],$_POST["description$i"],$_POST["unit_price$i"]);
+					updateInvoiceItem($_POST["line_item$i"],$_POST["quantity$i"],$_POST["products$i"],$i,$_POST['tax_id'][$i],$_POST["description$i"],$_POST["unit_price$i"],$_POST["attribute"][$i]);
 					$saved;
 					//$saved =  true;
 /*

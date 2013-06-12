@@ -856,7 +856,6 @@ A.cluetip:hover IMG{
 .si_form{
 	display: block;
 	margin: 20px auto;
-	width: 650px;
 	overflow: hidden;
 }
 #si_form_cron{
@@ -867,11 +866,11 @@ A.cluetip:hover IMG{
 	margin: 0 auto;
 }
 .si_form_view TABLE{
-	border: 1px solid #ddd;
+	/*border: 1px solid #ddd;*/
 }
 
 .si_form_view{
-	padding: 10px 5px;
+	/*padding: 10px 5px;*/
 }
 
 .si_form TH,
@@ -880,7 +879,7 @@ A.cluetip:hover IMG{
 	border-bottom: 1px dotted #ddd;
 }
 .si_form TBODY TH{
-	text-align: right;
+	text-align: left;
 	white-space: nowrap;
 	font-weight: normal;
 	color: #777;
@@ -888,6 +887,9 @@ A.cluetip:hover IMG{
 	padding-right: 7px;
 	vertical-align: top;
 	line-height: 26px;
+}
+.si_form TBODY TH.product_attribute{
+    text-align:left;
 }
 .si_form H4{
 	font-size: 12px;
@@ -920,21 +922,20 @@ A.cluetip:hover IMG{
 }
 
 .si_cust_account{
-	float: right;
 	width: 300px;
 }
 .si_cust_invoices TABLE,
 .si_cust_account TABLE{
-	margin: 0;
+	margin-top:10px;
 }
 .si_cust_card{
-	float: right;
 	width: 300px;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 .si_cust_info{
 	float: left;
-	margin-right: 10px;
+	width:100%;
+	margin-bottom:20px;
 }
 .si_clear{
 	clear: both;
@@ -944,7 +945,7 @@ A.cluetip:hover IMG{
 }
 .si_cust_invoices TH,
 .si_cust_invoices TD{
-	text-align: right;
+	text-align: left;
 	padding-left: 30px;
 	padding-right: 5px;
 }
@@ -956,7 +957,7 @@ A.cluetip:hover IMG{
 	padding-bottom: 6px;
 	border-top: 1px solid #DDD;
 	border-bottom: 0px;
-	text-align: center;
+	text-align: left;
 	vertical-align: middle;
 }
 .si_cust_invoices TD{
@@ -964,6 +965,9 @@ A.cluetip:hover IMG{
 }
 .si_cust_invoices TH.first{
 	border-left: none;
+}
+.si_cust_invoices TABLE{
+	width:100%;
 }
 /* @end */
 
@@ -1354,6 +1358,13 @@ A.cluetip:hover IMG{
 	color: #666;
 	text-align: center;
 }
+TD.si_product_attribute , .si_product_attribute TD
+{
+    padding-right: 15px;
+	color: #666;
+    border-top:none;
+	font-size: 11px;
+}
 /* @end */
 
 
@@ -1517,11 +1528,46 @@ padding-left;0px;
 	padding-top: 4px;
 	padding-bottom: 4px;
 }
-
 #tabs_customer {
 	border-bottom: 0px #efefef solid;
-}*/
+}
 
+*/
+
+
+#tabs_customer .anchors a
+{
+    background-color:#fff;
+    margin-top:2px;
+    padding-top:6px;
+    padding-left;0px;    
+}
+#tabs_customer .ui-tabs-panel a 
+{
+    float:none;
+    background:#fff;
+    padding:0;
+    margin:0;   
+}
+#tabs_customer .ui-tabs-panel
+{
+    color:#333333;
+    border-top: 1px #efefef solid;
+}
+#tabs_customer .anchors .ui-tabs-selected a 
+{
+    background-color:#E9E9DA;
+    padding-left:12px;
+    padding-right:12px;
+    padding-top:4px;
+    padding-bottom:4px;
+}   
+
+#tabs_customer
+{
+    border-bottom: 0px #efefef solid;
+
+}
 
 .ui-wrapper { 
 	border: 1px solid #50A029; 
@@ -1531,6 +1577,9 @@ padding-left;0px;
 	border: 0;
 }
 
+.ui-tabs-panel { 
+/*	padding-top:10px;*/
+}
 .ui-tabs-hide { 
 	display: none;
 }
@@ -1566,6 +1615,7 @@ padding-left;0px;
     margin: 0;
     padding: 0 0 0 4px;
     padding-left:20px;
+    padding-right:20px;
 }
 
 .ui-tabs-nav:after { 

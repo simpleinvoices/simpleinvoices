@@ -16,6 +16,14 @@
 
 <form name="frmpost" action="index.php?module=products&view=add" method="POST" id="frmpost" onsubmit="return checkForm(this);">
 <div class="si_form">
+    <div id="tabs_customer">
+	<ul class="anchors">
+		<li><a href="#section-1" target="_top">{$LANG.details}</a></li>
+		<li><a href="#section-2" target="_top">{$LANG.custom_fields}</a></li>
+		<li><a href="#section-3" target="_top">{$LANG.notes}</a></li>
+	</ul>
+    </div>
+	<div id="section-1" class="fragment">
 
 	<table>
 		<tr>
@@ -52,6 +60,16 @@
 			</td>
 		</tr>
 		<tr>
+			<th>{$LANG.enabled}</th>
+			<td>
+				{html_options class=edit name=enabled options=$enabled selected=1}
+			</td>
+		</tr>
+	</table>
+        </div>
+	<div id="section-2" class="fragment">
+    <table>
+		<tr>
 			<th>{$customFieldLabel.product_cf1|htmlsafe} 
 				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
 			</th>
@@ -75,19 +93,53 @@
 			</th>
 			<td><input type="text" class="edit" name="custom_field4" value="{$smarty.post.custom_field4|htmlsafe}" size="50" /></td>
 		</tr>
+        {if $defaults.product_attributes}
+            <tr>
+                <th class="details_screen">{$LANG.product_attributes}</th>
+                <td>
+                </td>
+            </tr>
+            {foreach from=$attributes item=attribute}
+                <tr>
+                    <td></td>
+                    <th class="details_screen product_attribute">
+                    <input type="checkbox" name="attribute{$attribute.id}" value="true"/>
+                    {$attribute.name}
+                    </th>
+                </tr>
+            {/foreach}
+        {/if}
+	</table>
+        </div>
+	<div id="section-3" class="fragment">
+    <table>
 		<tr>
 			<th>{$LANG.notes}</th>
 			<td><textarea input type="text" class="editor" name='notes' rows="8" cols="50">{$smarty.post.notes|unescape}</textarea></td>
 		</tr>
-		<tr>
-			<th>{$LANG.enabled}</th>
-			<td>
-				{html_options class=edit name=enabled options=$enabled selected=1}
-			</td>
-		</tr>
-		{*	{showCustomFields categorieId="3" itemId=""} *}
+            <tr>
+                <th class="details_screen">{$LANG.note_attributes}</th>
+                <td>
+                </td>
+            </tr>
+                <tr>
+                    <td></td>
+                    <th class="details_screen product_attribute">
+                    <input type="checkbox" name="notes_as_description" value='true'/>
+                    {$LANG.note_as_description}
+                    </th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <th class="details_screen product_attribute">
+                    <input type="checkbox" name="show_description" value='true'/>
+                    {$LANG.note_expand}
+                    </th>
+                </tr>
 	</table>
 
+        </div>
+        </div>
 	<div class="si_toolbar si_toolbar_form">
 			<button type="submit" class="positive" name="id" value="{$LANG.save}">
 			    <img class="button_img" src="./images/common/tick.png" alt="" /> 

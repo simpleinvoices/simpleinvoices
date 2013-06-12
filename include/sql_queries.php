@@ -672,8 +672,32 @@ function insertProductComplete($enabled=1,$visible=1,$description,
 
 function insertProduct($enabled=1,$visible=1) {
 	global $auth_session;
+    global $logger;
 	
 	(isset($_POST['enabled'])) ? $enabled = $_POST['enabled']  : $enabled = $enabled ;
+    //select all attribts
+    $sql = "select * from ".TB_PREFIX."products_attributes";
+    $sth =  dbQuery($sql);
+    $attributes = $sth->fetchAll();
+
+	$logger->log('Attr: '.var_export($attributes,true), Zend_Log::INFO);
+    $attr = array();
+    foreach($attributes as $k=>$v)
+    {
+    	$logger->log('Attr key: '.$k, Zend_Log::INFO);
+    	$logger->log('Attr value: '.var_export($v,true), Zend_Log::INFO);
+    	$logger->log('Attr set value: '.$k, Zend_Log::INFO);
+        if($_POST['attribute'.$v[id]] == 'true')
+        {
+            //$attr[$k]['attr_id'] = $v['id'];
+            $attr[$v['id']] = $_POST['attribute'.$v[id]];
+//            $attr[$k]['a$v['id']] = $_POST['attribute'.$v[id]];
+        }
+        
+    }
+	$logger->log('Attr array: '.var_export($attr,true), Zend_Log::INFO);
+	$notes_as_description = ($_POST['notes_as_description'] == 'true' ? 'Y' : NULL) ;
+    $show_description =  ($_POST['show_description'] == 'true' ? 'Y' : NULL) ;
 
 	$sql = "INSERT into
 		".TB_PREFIX."products
@@ -690,7 +714,10 @@ function insertProduct($enabled=1,$visible=1) {
             notes, 
             default_tax_id, 
             enabled, 
-            visible
+            visible,
+            attribute,
+            notes_as_description,
+            show_description
 		)
 	VALUES
 		(	
@@ -706,7 +733,10 @@ function insertProduct($enabled=1,$visible=1) {
 			:notes,
 			:default_tax_id,
 			:enabled,
-			:visible
+			:visible,
+            :attribute,
+            :notes_as_description,
+            :show_description
 		)";
 
 	return dbQuery($sql,
@@ -722,13 +752,33 @@ function insertProduct($enabled=1,$visible=1) {
 		':notes', "".$_POST['notes'],
 		':default_tax_id', $_POST['default_tax_id'],
 		':enabled', $enabled,
-		':visible', $visible
+		':visible', $visible,
+		':attribute', json_encode($attr),
+		':notes_as_description', $notes_as_description,
+		':show_description', $show_description
 		);
 }
 
 
 function updateProduct() {
 	
+    //select all attribts
+    $sql = "select * from ".TB_PREFIX."products_attributes";
+    $sth =  dbQuery($sql);
+    $attributes = $sth->fetchAll();
+
+    $attr = array();
+    foreach($attributes as $k=>$v)
+    {
+        if($_POST['attribute'.$v[id]] == 'true')
+        {
+            $attr[$v['id']] = $_POST['attribute'.$v[id]];
+        }
+        
+    }
+	$notes_as_description = ($_POST['notes_as_description'] == 'true' ? 'Y' : NULL) ;
+    $show_description =  ($_POST['show_description'] == 'true' ? 'Y' : NULL) ;
+
 	$sql = "UPDATE ".TB_PREFIX."products
 			SET
 				description = :description,
@@ -741,7 +791,10 @@ function updateProduct() {
 				custom_field4 = :custom_field4,
 				unit_price = :unit_price,
 				cost = :cost,
-				reorder_level = :reorder_level
+				reorder_level = :reorder_level,
+                attribute = :attribute,
+                notes_as_description = :notes_as_description,
+                show_description = :show_description
 			WHERE
 				id = :id";
 
@@ -757,6 +810,9 @@ function updateProduct() {
 		':unit_price', $_POST[unit_price],
 		':cost', $_POST[cost],
 		':reorder_level', $_POST[reorder_level],
+		':attribute', json_encode($attr),
+		':notes_as_description', $notes_as_description,
+		':show_description', $show_description,
 		':id', $_GET[id]
 		);
 }
@@ -897,6 +953,27 @@ function getDefaultInventory() {
 	global $dbh;
 
 	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = 'inventory')";
+	$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
+	$array = $sth->fetch();
+	$delete = $array['value']==1?$LANG['enabled']:$LANG['disabled'];
+	return $delete;
+}
+
+function getDefaultProductAttributes() {
+	global $LANG;
+	global $dbh;
+
+	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = 'product_attributes')";
+	$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
+	$array = $sth->fetch();
+	$delete = $array['value']==1?$LANG['enabled']:$LANG['disabled'];
+	return $delete;
+}
+function getDefaultLargeDataset() {
+	global $LANG;
+	global $dbh;
+
+	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = 'large_dataset')";
 	$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
 	$array = $sth->fetch();
 	$delete = $array['value']==1?$LANG['enabled']:$LANG['disabled'];
@@ -2007,11 +2084,22 @@ function updateInvoice($invoice_id) {
 		);
 }
 
-function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_item_tax_id,$description="", $unit_price="") {
+function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_item_tax_id,$description="", $unit_price="", $attribute="") {
 
 	global $logger;
 	global $LANG;
-	//do taxes
+    //do taxes
+
+    $attr = array();
+	$logger->log('Line item attributes: '.var_export($attribute,true), Zend_Log::INFO);
+    foreach($attribute as $k=>$v)
+    {
+        if($attribute[$v] !== '')
+        {
+            $attr[$k] = $v;
+        }
+        
+    }
 
 	
 	$tax_total = getTaxesPerLineItem($line_item_tax_id,$quantity, $unit_price);
@@ -2048,7 +2136,8 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 				tax_amount, 
 				gross_total, 
 				description, 
-				total
+                total,
+                attribute
 			) 
 			VALUES 
 			(
@@ -2059,7 +2148,8 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 				:tax_amount, 
 				:gross_total, 
 				:description, 
-				:total
+                :total,
+                :attribute
 			)";
 
 	//echo $sql;
@@ -2073,7 +2163,8 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 		':tax_amount', $tax_total,
 		':gross_total', $gross_total,
 		':description', $description,
-		':total', $total
+        ':total', $total,
+        ':attribute',json_encode($attr)
 		);
 	
 	invoice_item_tax(lastInsertId(),$line_item_tax_id,$unit_price,$quantity,"insert");
@@ -2194,13 +2285,24 @@ function invoice_item_tax($invoice_item_id,$line_item_tax_id,$unit_price,$quanti
 	//TODO fix this
 	return true;
 }
-function updateInvoiceItem($id,$quantity,$product_id,$line_number,$line_item_tax_id,$description,$unit_price) {
+function updateInvoiceItem($id,$quantity,$product_id,$line_number,$line_item_tax_id,$description,$unit_price,$attribute="") {
 
 	global $logger;
 	global $LANG;
 	//$product = getProduct($product_id);
 	//$tax = getTaxRate($tax_id);
 	
+    $attr = array();
+	$logger->log('Line item attributes: '.var_export($attribute,true), Zend_Log::INFO);
+    foreach($attribute as $k=>$v)
+    {
+        if($attribute[$v] !== '')
+        {
+            $attr[$k] = $v;
+        }
+        
+    }
+
 	$tax_total = getTaxesPerLineItem($line_item_tax_id,$quantity, $unit_price);
 
 	$logger->log('Invoice: '.$invoice_id.' Tax '.$line_item_tax_id.' for line item '.$line_number.': '.$tax_total, Zend_Log::INFO);
@@ -2232,7 +2334,8 @@ function updateInvoiceItem($id,$quantity,$product_id,$line_number,$line_item_tax
 	tax_amount = :tax_amount,
 	gross_total = :gross_total,
 	description = :description,
-	total = :total			
+	total = :total,			
+	attribute = :attribute			
 	WHERE id = :id";
 	
 	//echo $sql;
@@ -2245,6 +2348,7 @@ function updateInvoiceItem($id,$quantity,$product_id,$line_number,$line_item_tax
 		':gross_total', $gross_total,
 		':description', $description,
 		':total', $total,
+        ':attribute',json_encode($attr),
 		':id', $id
 		);
 

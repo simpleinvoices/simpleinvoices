@@ -13,10 +13,16 @@ $taxes = getActiveTaxes();
 $tax_selected = getTaxRate($product['default_tax_id']);
 
 $smarty -> assign("defaults",getSystemDefaults());
+$product['attribute_decode'] = json_decode($product['attribute'],true);
 $smarty -> assign('product',$product);
 $smarty -> assign('taxes',$taxes);
 $smarty -> assign('tax_selected',$tax_selected);
 $smarty -> assign('customFieldLabel',$customFieldLabel);
+
+$sql = "select * from ".TB_PREFIX."products_attributes";
+$sth =  dbQuery($sql);
+$attributes = $sth->fetchAll();
+$smarty -> assign("attributes", $attributes);
 
 $smarty -> assign('pageActive', 'product_manage');
 $subPageActive = $_GET['action'] =="view"  ? "product_view" : "product_edit" ;

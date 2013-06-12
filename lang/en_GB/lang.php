@@ -124,6 +124,7 @@ $LANG['debtors'] = "Debtors";//1
 $LANG['debtors_by_aging_periods'] = "Debtors by Aging periods";//1
 $LANG['debtors_by_amount_owed'] = "Debtors by amount owed";//1
 $LANG['debtors_by_amount_owing_customer'] = "Debtors by Amount Owing per Customer";//1
+$LANG['decimal'] = "Decimal";//1
 $LANG['default_biller'] = "Default Biller";//1
 $LANG['default_customer'] = "Default Customer";//1
 $LANG['default_inv_template'] = "Default Invoice Template ";//1
@@ -187,6 +188,7 @@ $LANG['financial_status'] = "Financial status";//1
 $LANG['format_tooltip'] = "format";//1
 $LANG['for'] = "for";//1
 $LANG['forum'] = "Forum";//1
+$LANG['free'] = "Free";//1
 $LANG['from'] = "From";//1
 $LANG['fwrite_error'] = "Did you get fwrite errors?";//1
 $LANG['get_help'] = "Get Help";//1
@@ -230,10 +232,10 @@ $LANG['help_inv_pref_what_the'] = "Invoice Preferences allows you to define the 
 $LANG['help_invoice_create'] = "Creating invoices is easy.  Once a biller and customer have been entered into Simple Invoices all you need to do is select an invoice type from the 'Invoice +' menu, fill in the details and click 'Save Invoice'.";//1
 $LANG['help_invoice_custom_fields'] = "Need more fields in the invoice screen? Want your own fields like 'Purchase Order', 'Project name' etc..<br /><br />Simple Invoices allows you to add whatever fields you want into the invoices.  These are called 'custom fields', to edit or setup your own fields select Custom Fields from the Options menu.";//1
 $LANG['help_invoice_types'] = "In Simple Invoices there are 2 types of invoices available<br /><br />
-An <b>Itemised Invoice</b> is an invoice that list many different items in the same invoice, with optional notes area for each line item - think accounting/legal firms or a grocery store invoice.
-<br/ ><br />
-A <b>Total Invoice</b> is an invoice that - think an invoice from a plumber that lists the actions and then has one price and the tax associated.
-";//1
+  An <b>Itemised Invoice</b> is an invoice that list many different items in the same invoice, with optional notes area for each line item - think accounting/legal firms or a grocery store invoice.
+  <br/ ><br />
+  A <b>Total Invoice</b> is an invoice that - think an invoice from a plumber that lists the actions and then has one price and the tax associated.
+  ";//1
 $LANG['help_logging'] = "To log actions performed in Simple Invoices enable this option. This creates a log in the database of what actions were performed.<br /><br />Note: At the moment the only way to view the log is in the database, soon we'll incorparte a nice log viewer into Simple Invoices.";//1
 $LANG['help_manage_custom_fields'] = "Custom Fields are special fields that you can label as whatever you need.<br /><br />This page allows you to define up to 4 custom fields for each of the following: products, customers, billers, and invoices.<br /><br />Once you define a label of one of the fields, this field will become available for use.  Ie. if you edit 'Invoice :: Custom field 1' and set the label as 'Project name', the next time you create an invoice there'll be a new field in the invoice screen called 'Project name'";//1
 $LANG['help_mysql4'] = "As you are using MySQL 4 or below as your database server some features of Simple Invoices have been disabled. Some sql queries in Simple Invoices have taken advantage of new features in MySQL 5, so things like the quick reports here on the start page, some debtors reports and a few other features of Simple Invoices have been disabled.";//1
@@ -297,7 +299,9 @@ $LANG['item'] = "Item";//1
 $LANG['itemised'] = "Itemised";//1
 $LANG['itemised_style'] = "Itemised style";//1
 $LANG['language'] = "Language";//1
+$LANG['large_dataset'] = "Large dataset";//1
 $LANG['license'] = "License";//1
+$LANG['list'] = "List";//1
 $LANG['loading'] = "Loading";//1
 $LANG['locale'] = "Locale";//1
 $LANG['logging'] = "Logging";//1
@@ -355,6 +359,9 @@ $LANG['no_tax_rates'] = "There have been no tax rates created.  Click the 'Add N
 $LANG['no_users'] = "There have been no users created. Click the 'Add User' button above to create one";//1
 $LANG['none'] = "none";//1
 $LANG['note'] = "Note";//1
+$LANG['note_attributes'] = "Note Attributes";//1
+$LANG['note_as_description'] = "Use note as line item description";//1
+$LANG['note_expand'] = "Show line item description by default";//1
 $LANG['notes'] = "Notes";//1
 $LANG['notes_opt'] = "Notes (optional)";//1
 $LANG['number_of_taxes_per_line_item'] = "Number of taxes per line item";//1
@@ -413,6 +420,7 @@ $LANG['process_payment_auto_amount'] = "Process Payment Auto Amount";//1
 $LANG['process_payment_via_eway'] = "Process Payment via Eway";//1
 $LANG['processing'] = "Processing, please wait ...";//1
 $LANG['product'] = "Product";//1
+$LANG['product_attributes'] = "Product Attributes";//1
 $LANG['product_description'] = "Product Description";//1
 $LANG['product_edit'] = "Edit Product";//1
 $LANG['product_enabled'] = "Product Enabled";//1
@@ -420,6 +428,7 @@ $LANG['product_id'] = "Product ID";//1
 $LANG['product_sales'] = "Product Sales";//1
 $LANG['product_to_add'] = "Product to add";//1
 $LANG['product_unit_price'] = "Product Unit Price";//1
+$LANG['product_values'] = "Product Values";//1
 $LANG['products'] = "Products";//1
 $LANG['products_by_customer'] = "Products by Customer";//1
 $LANG['products_sold_customer_total'] = "Products Sold - Customer - Total";//1
@@ -558,12 +567,14 @@ $LANG['totals'] = "Totals";//1
 $LANG['type'] = "Type";//1
 $LANG['Unit_Cost'] = "Unit Cost";//1
 $LANG['unit_price'] = "Unit Price";//1
+$LANG['unpaid_invoices'] = "Unpaid Invoices";//1
 $LANG['upgrading_simple_invoices'] = "Upgrading Simple Invoices";//1
 $LANG['user_add'] = "Add User";//1
 $LANG['users'] = "Users";//1
 $LANG['using_simple_invoices'] = "Using Simple Invoices";//1
 $LANG['value'] = "Value";//1
 $LANG['view'] = "View";//1
+$LANG['visible'] = "Visible";//1
 $LANG['want_more_fields'] = "Want more fields";//1
 $LANG['warning_eway'] = "<b>Note:</b> You are about to charge your customers credit card<br /> - make sure you know what you're doing!!";
 $LANG['weeks'] = "weeks";//1
