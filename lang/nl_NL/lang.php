@@ -44,6 +44,7 @@ $LANG['address_street'] = "Straat";//1
 $LANG['address_zip'] = "Postcode";//1
 $LANG['age'] = "Leeftijd";//1
 $LANG['aging'] = "Leeftijd";//1
+$LANG['all'] = "Alles";//1
 $LANG['all_reports'] = "Alle rapporten";//1
 $LANG['amount'] = "Bedrag";//1
 $LANG['as_template'] = "als sjabloon gebruiken";//1
@@ -116,6 +117,11 @@ $LANG['description'] = "Beschrijving";//1
 $LANG['description_short'] = "Beschr";//1
 $LANG['details'] = "Details";//1
 $LANG['disabled'] = "Uitgeschakeld";//1
+$LANG['displaying_inv'] = "Displaying invoices";//0
+$LANG['displaying_items'] = "Displaying {from} to {to} of {total} items";//0
+$LANG['dont_forget_to'] = "Don't forget to";//0
+$LANG['draft'] = "Concept";//0
+$LANG['due'] = "Due";//0
 $LANG['edit'] = "Wijzig";//1
 $LANG['edit_view_tooltip'] = "Wijzig";//1
 $LANG['email'] = "E-mail";//1
@@ -439,4 +445,23 @@ $LANG['whats_this_page_about'] = "Waar gaat deze pagina over?";//1
 $LANG['wheres_the_edit_button'] = "Waar zit de knop om te bewerken?";//1
 $LANG['yes'] = "Ja";//1
 $LANG['zip'] = "Postcode";//1
+
+$LANG['title_module_index']  ="Home";//0
+$LANG['title_module_reports']	="Home / Reports";//0
+$LANG['title_module_invoices']	="Money / Invoices";//0
+$LANG['title_module_cron']	="Money / Recurence";//0
+$LANG['title_module_payments']	="Money / Payments";//0
+$LANG['title_module_billers']	="People / Billers";//0
+$LANG['title_module_customers']	="People / Customers";//0
+$LANG['title_module_user']	="People / Users";//0
+$LANG['title_module_producs']	="Products";//0
+$LANG['title_module_options']	="Settings";//0
+$LANG['title_module_system_defaults']	="Settings / System Preferences";//0
+$LANG['title_module_custom_fields']	="Settings / Custom Fields";//0
+$LANG['title_module_tax_rates']	="Settings / Tax Rates";//0
+$LANG['title_module_preferences']	="Settings / Invoice Preferences";//0
+$LANG['title_module_payment_types']	="Settings / Payment Types";//0
+$LANG['title_view_index']	="Dashboard";//0
+
+
 ?>
