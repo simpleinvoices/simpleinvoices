@@ -25,8 +25,7 @@ if($large_dataset == $LANG['enabled'])
 } else {
   $sth = $invoice->select_all('', $dir, $rp, $page, $having);
   $sth_count_rows = $invoice->select_all('count',$dir, $rp, $page, $having);
-  $invoices_count = $sth_count_rows->rowCount();
-
+  $invoice_count = $sth_count_rows->rowCount();
 }
 $invoices = $sth->fetchAll(PDO::FETCH_ASSOC);
 
