@@ -1080,6 +1080,7 @@ function taxesGroupedForInvoice($invoice_id)
 	$sql = "select 
 				tax.tax_description as tax_name, 
 				sum(item_tax.tax_amount) as tax_amount,
+				item_tax.tax_rate as tax_rate,
 				count(*) as count
 			from 
 				si_invoice_item_tax item_tax, 
