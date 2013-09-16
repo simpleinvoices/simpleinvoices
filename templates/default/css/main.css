@@ -4,11 +4,11 @@
 
 	by Soif
 
-	merged from all previous CSS files 
+	merged from all previous CSS files
 	(work in Progress)
  	------------------------------------------
-	
-	Please dont remove the |* @group name *| (css block) |* end *| 
+
+	Please dont remove the |* @group name *| (css block) |* end *|
 	comments, used by the amazing CSSEdit application
 */
 
@@ -44,7 +44,7 @@ html, body {
 html{
 }
 /*
-Work around IE/Win code size bug - courtesy Jesper, waffle.wootest.net  
+Work around IE/Win code size bug - courtesy Jesper, waffle.wootest.net
 */
 
 * html code {
@@ -226,7 +226,7 @@ table tr.shaded td {
 	margin: 0;
 	padding: 0;
 }
-body.lobby 
+body.lobby
 .Full .bottom {
 	margin-bottom: 0;
 }
@@ -266,7 +266,7 @@ h2 {
 
 h1, h2, h3{
 	color:#4B7296;
-} 
+}
 
 
 /* @end */
@@ -284,7 +284,7 @@ h1, h2, h3{
 .si_wrap{
 	width: 990px;
 
-	margin: 0 auto;	
+	margin: 0 auto;
 }
 /* @end */
 
@@ -304,7 +304,7 @@ h1, h2, h3{
 	font-size: 11px;
 }
 #si_header A{
-	color: #CCF;	
+	color: #CCF;
 }
 
 #si_header .si_wrap {
@@ -407,7 +407,6 @@ div#Container {
 
 .si_toolbar BUTTON, .si_toolbar A{
 	display: inline-block;
-	overflow: hidden;
 	border: 1px solid #AAA;
 	-moz-border-radius: 7px;
 	-webkit-border-radius: 7px;
@@ -461,7 +460,7 @@ div#Container {
 		#dbdbdb 50%,
 		#b5b5b5);
 	background: -webkit-gradient(
-		linear, left top, left bottom, 
+		linear, left top, left bottom,
 		from(#ffffff),
 		color-stop(0.50, #ebebeb),
 		color-stop(0.50, #dbdbdb),
@@ -481,7 +480,7 @@ div#Container {
 		inset 0px 0px 2px rgba(255,255,255,1);
 	text-shadow:
 		0px -1px 0px rgba(000,000,000,0.2),
-		0px 1px 0px rgba(255,255,255,1);	
+		0px 1px 0px rgba(255,255,255,1);
 }
 */
 .si_toolbar BUTTON:hover,
@@ -492,12 +491,12 @@ div#Container {
 
 .si_toolbar BUTTON IMG,
 .si_toolbar A IMG{
-	vertical-align: bottom;	
+	vertical-align: bottom;
 	margin-right: 3px;
 }
 
 .si_toolbar .positive{
-	font-weight: bold;	
+	font-weight: bold;
 }
 .si_toolbar .negative{
 	opacity: 0.7;
@@ -522,7 +521,7 @@ div#Container {
 }
 .si_toolbar_inform IMG{
 	height: 15px;
-	
+
 }
 
 .si_toolbar_dialog A{
@@ -544,7 +543,7 @@ div#Container {
 	height: 16px;
 }
 
-button:hover, 
+button:hover,
 .buttons a:hover {
 	border: 1px solid #c2e1ef;
 	color: #336699;
@@ -554,7 +553,7 @@ button:hover,
 	border: 1px solid #6299c5;
 	color: #fff;
 }
-.buttons a.positive:hover, 
+.buttons a.positive:hover,
 button.positive:hover {
 	border: 1px solid #C6D880;
 	color: #529214;
@@ -563,7 +562,7 @@ button.positive:hover {
 	border: 1px solid #529214;
 	color: #fff;
 }
-.buttons a.negative:hover, 
+.buttons a.negative:hover,
 button.negative:hover {
 	border: 1px solid #fbc2c4;
 	color: #d12f19;
@@ -720,7 +719,7 @@ table.buttons {
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 	background: #fc0004 url(../../../images/common/important.png) no-repeat 5px 2px;
-	
+
 }
 /* @end */
 
@@ -895,11 +894,11 @@ A.cluetip:hover IMG{
 	font-size: 12px;
 	color: #666;
 	padding: 0;
-	margin: 5px 0 5px 0;	
+	margin: 5px 0 5px 0;
 }
 .si_form INPUT{
 	margin-left: 6px;
-	margin-right: 5px;	
+	margin-right: 5px;
 }
 
 .si_form TH a.cluetip img{
@@ -961,7 +960,7 @@ A.cluetip:hover IMG{
 	vertical-align: middle;
 }
 .si_cust_invoices TD{
-	border-left: 1px solid #eee;	
+	border-left: 1px solid #eee;
 }
 .si_cust_invoices TH.first{
 	border-left: none;
@@ -1068,7 +1067,7 @@ A.cluetip:hover IMG{
 	text-align: right;
 }
 .si_rep_foot{
-	padding: 3px 5px;	
+	padding: 3px 5px;
 }
 .si_rep_big{
 	font-size: 28px;
@@ -1077,7 +1076,7 @@ A.cluetip:hover IMG{
 .si_rep_group_head{
 	background: #CCC;
 	padding: 5px 5px;
-	font-weight: bold;	
+	font-weight: bold;
 }
 .si_rep_group_foot{
 	background: #F0F0F0;
@@ -1087,7 +1086,7 @@ A.cluetip:hover IMG{
 }
 .si_rep_group_foot_total{
 	font-weight: bold;
-	
+
 }
 /* @end */
 
@@ -1183,7 +1182,7 @@ A.cluetip:hover IMG{
 		#ffffff 0%,
 		#d6d6d6);
 	background: -webkit-gradient(
-		linear, left top, left bottom, 
+		linear, left top, left bottom,
 		from(#ffffff),
 		to(#d6d6d6));
 	-moz-border-radius: 3px;
@@ -1275,7 +1274,7 @@ A.cluetip:hover IMG{
 	padding: 0 0 5px 0;
 }
 .si_invoice_view_items .tr_custom TD{
-	border-top: none;	
+	border-top: none;
 }
 .si_right{
 	text-align: right;
@@ -1338,7 +1337,7 @@ A.cluetip:hover IMG{
 	font-weight: bold;
 	padding: 0 0 8px 0;
 	margin: 0;
-	
+
 }
 .si_invoice_account DIV{
 	float: left;
@@ -1462,7 +1461,7 @@ div.wysiwyg input{
 
 .subnav {
 	padding-top: 10px;
-}	
+}
 .subnav li{
 	display: inline;
 	height:25px;
@@ -1540,28 +1539,28 @@ padding-left;0px;
     background-color:#fff;
     margin-top:2px;
     padding-top:6px;
-    padding-left;0px;    
+    padding-left;0px;
 }
-#tabs_customer .ui-tabs-panel a 
+#tabs_customer .ui-tabs-panel a
 {
     float:none;
     background:#fff;
     padding:0;
-    margin:0;   
+    margin:0;
 }
 #tabs_customer .ui-tabs-panel
 {
     color:#333333;
     border-top: 1px #efefef solid;
 }
-#tabs_customer .anchors .ui-tabs-selected a 
+#tabs_customer .anchors .ui-tabs-selected a
 {
     background-color:#E9E9DA;
     padding-left:12px;
     padding-right:12px;
     padding-top:4px;
     padding-bottom:4px;
-}   
+}
 
 #tabs_customer
 {
@@ -1569,18 +1568,18 @@ padding-left;0px;
 
 }
 
-.ui-wrapper { 
-	border: 1px solid #50A029; 
+.ui-wrapper {
+	border: 1px solid #50A029;
 }
 .ui-wrapper input,
-.ui-wrapper textarea { 
+.ui-wrapper textarea {
 	border: 0;
 }
 
-.ui-tabs-panel { 
+.ui-tabs-panel {
 /*	padding-top:10px;*/
 }
-.ui-tabs-hide { 
+.ui-tabs-hide {
 	display: none;
 }
 
@@ -1603,7 +1602,7 @@ padding-left;0px;
     }
 }
 
-.ui-tabs-nav, 
+.ui-tabs-nav,
 .ui-tabs-panel {
     font-family: "Trebuchet MS", Trebuchet, Verdana, Helvetica, Arial, sans-serif;
     font-size: 12px;
@@ -1618,7 +1617,7 @@ padding-left;0px;
     padding-right:20px;
 }
 
-.ui-tabs-nav:after { 
+.ui-tabs-nav:after {
 /* clearing without presentational markup, IE gets extra treatment */
     display: block;
     clear: both;
@@ -1627,7 +1626,7 @@ padding-left;0px;
 
 .ui-tabs-nav li {
 
-    list-style-type: none; 
+    list-style-type: none;
     float: left;
     margin: 0 0 0 2px;
     font-weight: bold;
@@ -1646,7 +1645,7 @@ padding-left;0px;
     background-position: 100% 0;
     text-decoration: none;
     white-space: nowrap; /* @ IE 6 */
-    outline: 0; /* @ Firefox, prevent dotted border after click */    
+    outline: 0; /* @ Firefox, prevent dotted border after click */
 }
 
 .ui-tabs-nav .ui-tabs-selected a {
@@ -1695,18 +1694,18 @@ padding-left;0px;
 
 .ui-tabs-nav .ui-tabs-selected a:link, .ui-tabs-nav .ui-tabs-selected a:visited,
 
-.ui-tabs-nav .ui-tabs-disabled a:link, 
-.ui-tabs-nav .ui-tabs-disabled a:visited { 
+.ui-tabs-nav .ui-tabs-disabled a:link,
+.ui-tabs-nav .ui-tabs-disabled a:visited {
 /* @ Opera, use pseudo classes otherwise it confuses cursor... */
     cursor: text;
 }
 
-.ui-tabs-nav a:hover, 
-.ui-tabs-nav a:focus, 
+.ui-tabs-nav a:hover,
+.ui-tabs-nav a:focus,
 .ui-tabs-nav a:active,
-.ui-tabs-nav .ui-tabs-unselect a:hover, 
-.ui-tabs-nav .ui-tabs-unselect a:focus, 
-.ui-tabs-nav .ui-tabs-unselect a:active { 
+.ui-tabs-nav .ui-tabs-unselect a:hover,
+.ui-tabs-nav .ui-tabs-unselect a:focus,
+.ui-tabs-nav .ui-tabs-unselect a:active {
 /* @ Opera, we need to be explicit again here now... */
     cursor: pointer;
 }
@@ -1716,7 +1715,7 @@ padding-left;0px;
     filter: alpha(opacity=40);
 }
 
-.ui-tabs-nav .ui-tabs-disabled a:link, 
+.ui-tabs-nav .ui-tabs-disabled a:link,
 .ui-tabs-nav .ui-tabs-disabled a:visited{
     color: #000;
 }
@@ -1741,13 +1740,13 @@ padding-left;0px;
 
 /* Additional IE specific bug fixes... */
 
-* html .ui-tabs-nav { 
+* html .ui-tabs-nav {
 /* auto clear @ IE 6 & IE 7 Quirks Mode */
     display: inline-block;
 
 }
 
-*:first-child+html .ui-tabs-nav  { 
+*:first-child+html .ui-tabs-nav  {
 /* auto clear @ IE 7 Standards Mode - do not group selectors, otherwise IE 6 will ignore complete rule (because of the unknown + combinator)... */
     display: inline-block;
 }
@@ -1913,7 +1912,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', end
 }
 .si_box TH{
 	text-align: right;
-	padding-right: 6px;	
+	padding-right: 6px;
 }
 
 .si_box TABLE input {
@@ -1926,12 +1925,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', end
 	font-size: 24px;
 	text-align: center;
 	padding: 0;
-	margin: 0 0 30px 0; 
-	
+	margin: 0 0 30px 0;
+
 }
 
 .si_box_auth_pad{
-	padding-right: 50px;	
+	padding-right: 50px;
 }
 
 .si_box_auth_pad TABLE{
@@ -2398,74 +2397,74 @@ table#pg2 td.GROUP_LAYER {
 }
 
 .ui-resizable .ui-resizable-handle {
-	display: block; 
+	display: block;
 }
 
 body .ui-resizable-disabled .ui-resizable-handle { display: none; } /* use 'body' to make it more specific (css order) */
 body .ui-resizable-autohide .ui-resizable-handle { display: none; } /* use 'body' to make it more specific (css order) */
-.ui-resizable-n { 
-	cursor: n-resize; 
-	height: 7px; 
-	width: 100%; 
-	top: -5px; 
-	left: 0px;  
+.ui-resizable-n {
+	cursor: n-resize;
+	height: 7px;
+	width: 100%;
+	top: -5px;
+	left: 0px;
 }
 
-.ui-resizable-s { 
-	cursor: s-resize; 
-	height: 7px; 
-	width: 100%; 
-	bottom: -5px; 
-	left: 0px; 
+.ui-resizable-s {
+	cursor: s-resize;
+	height: 7px;
+	width: 100%;
+	bottom: -5px;
+	left: 0px;
 }
 
-.ui-resizable-e { 
-	cursor: e-resize; 
-	width: 7px; 
-	right: -5px; 
-	top: 0px; 
-	height: 100%; 
-}
-
-.ui-resizable-w { 
-	cursor: w-resize; 
-	width: 7px; 
-	left: -5px; 
-	top: 0px; 
+.ui-resizable-e {
+	cursor: e-resize;
+	width: 7px;
+	right: -5px;
+	top: 0px;
 	height: 100%;
 }
 
-.ui-resizable-se { 
-	cursor: se-resize; 
-	width: 13px; 
-	height: 13px; 
-	right: 0px; 
-	bottom: 0px; 
+.ui-resizable-w {
+	cursor: w-resize;
+	width: 7px;
+	left: -5px;
+	top: 0px;
+	height: 100%;
+}
+
+.ui-resizable-se {
+	cursor: se-resize;
+	width: 13px;
+	height: 13px;
+	right: 0px;
+	bottom: 0px;
 	background: url(../../../images/jquery-ui/222222_11x11_icon_resize_se.gif) no-repeat 0 0;
 }
 
-.ui-resizable-sw { 
-	cursor: sw-resize; 
-	width: 9px; 
-	height: 9px; 
-	left: 0px; 
-	bottom: 0px;  
+.ui-resizable-sw {
+	cursor: sw-resize;
+	width: 9px;
+	height: 9px;
+	left: 0px;
+	bottom: 0px;
 }
 
-.ui-resizable-nw { 
-	cursor: nw-resize; 
-	width: 9px; 
-	height: 9px; 
-	left: 0px; 
-	top: 0px; 
+.ui-resizable-nw {
+	cursor: nw-resize;
+	width: 9px;
+	height: 9px;
+	left: 0px;
+	top: 0px;
 }
 
-.ui-resizable-ne { 
-	cursor: ne-resize; 
-	width: 9px; 
-	height: 9px; 
-	right: 0px; 
-	top: 0px; 
+.ui-resizable-ne {
+	cursor: ne-resize;
+	width: 9px;
+	height: 9px;
+	right: 0px;
+	top: 0px;
 
 }
 .ui-dialog-titlebar {
@@ -2483,13 +2482,13 @@ body .ui-resizable-autohide .ui-resizable-handle { display: none; } /* use 'body
 .ui-dialog-titlebar-close {
 
 	/*resets*/
-	margin: 0; 
-	padding: 0; 
-	border: 0; 
-	outline: 0; 
-	line-height: 1.3; 
-	text-decoration: none; 
-	font-size: 100%; 
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	line-height: 1.3;
+	text-decoration: none;
+	font-size: 100%;
 	list-style: none;
 	background: url(../../../images/jquery-ui/888888_11x11_icon_close.gif) 0 0 no-repeat;
 	position: absolute;
@@ -2515,7 +2514,7 @@ body .ui-resizable-autohide .ui-resizable-handle { display: none; } /* use 'body
 .ui-dialog-content {
 	/*resets*/margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none;
 	color: #222222;
-	padding: 1.5em 1.7em;	
+	padding: 1.5em 1.7em;
 }
 
 .ui-dialog-buttonpane {
@@ -2628,7 +2627,7 @@ img.action {
 	cursor: default;
 }
 
-.flexigrid div.nDiv tr:hover td, 
+.flexigrid div.nDiv tr:hover td,
 .flexigrid div.nDiv tr.ndcolover td {
 	background: #d5effc url(../../../images/flexigrid/hl.png) repeat-x top;
 	border: 1px solid #a8d8eb;
@@ -2643,12 +2642,12 @@ img.action {
 	padding-right: 10px;
 }
 
-.flexigrid div.nDiv tr:hover td.ndcol1, 
+.flexigrid div.nDiv tr:hover td.ndcol1,
 .flexigrid div.nDiv tr.ndcolover td.ndcol1 {
 	border-right: 1px solid #d2e3ec;
 }
 
-.flexigrid div.nDiv tr:hover td.ndcol2, 
+.flexigrid div.nDiv tr:hover td.ndcol2,
 .flexigrid div.nDiv tr.ndcolover td.ndcol2 {
 	border-left: 1px solid #eef8ff;
 }
@@ -2791,13 +2790,13 @@ img.action {
 	padding: 3px;
 }
 
-.flexigrid div.fbutton:hover, 
+.flexigrid div.fbutton:hover,
 .flexigrid div.fbutton.fbOver {
 	padding: 0px;
 	border: 1px solid #ccc;
 }
 
-.flexigrid div.fbutton:hover div, 
+.flexigrid div.fbutton:hover div,
 .flexigrid div.fbutton.fbOver div {
 	padding: 0px 2px;
 	border-left: 1px solid #fff;
@@ -2912,8 +2911,8 @@ img.action {
 	background: none;
 }
 
-/* common cell properties*/ 
-.flexigrid div.hDiv th, 
+/* common cell properties*/
+.flexigrid div.hDiv th,
 .flexigrid  div.bDiv td {
 	text-align: left;
 	border-right: 1px solid #ddd;
@@ -2926,14 +2925,14 @@ img.action {
 }
 
 /* common inner cell properties*/
-.flexigrid div.hDiv th div, 
-.flexigrid  div.bDiv td  div, 
+.flexigrid div.hDiv th div,
+.flexigrid  div.bDiv td  div,
 div.colCopy div{
 	padding: 3px 5px;
 	border-left: 0px solid #fff;
 }
 
-.flexigrid div.hDiv th, 
+.flexigrid div.hDiv th,
 div.colCopy {
 	font-weight: normal;
 	height: 24px;
@@ -2957,10 +2956,10 @@ div.colCopy {
 }
 
 .flexigrid div.hDiv th.thOver {
-	
+
 }
 
-.flexigrid div.hDiv th.thOver div, 
+.flexigrid div.hDiv th.thOver div,
 .flexigrid div.hDiv th.sorted.thOver div {
 	border-bottom: 1px solid orange;
 	padding-bottom: 3px;
@@ -2999,7 +2998,7 @@ div.colCopy {
 }
 
 .flexigrid div.hDiv th div {
-	
+
 }
 
 .flexigrid span.cdropleft {
@@ -3035,7 +3034,7 @@ div.colCopy {
 }
 
 .flexigrid tr td.sorted div {
-	
+
 }
 
 .flexigrid tr.erow td {
@@ -3048,23 +3047,23 @@ div.colCopy {
 }
 
 .flexigrid tr.erow td.sorted div {
-	
+
 }
 
-.flexigrid div.bDiv tr:hover td, 
+.flexigrid div.bDiv tr:hover td,
 .flexigrid div.bDiv tr:hover td.sorted,
-.flexigrid div.bDiv tr.trOver td.sorted, 
+.flexigrid div.bDiv tr.trOver td.sorted,
 .flexigrid div.bDiv tr.trOver td {
 	background: #d9ebf5;
 	border-left: 1px solid #eef8ff;
 	/* border-bottom: 1px dotted #a8d8eb; */
 }
 
-.flexigrid div.bDiv tr.trSelected:hover td, 
+.flexigrid div.bDiv tr.trSelected:hover td,
 .flexigrid div.bDiv tr.trSelected:hover td.sorted,
-.flexigrid div.bDiv tr.trOver.trSelected td.sorted, 
+.flexigrid div.bDiv tr.trOver.trSelected td.sorted,
 .flexigrid div.bDiv tr.trOver.trSelected td,
-.flexigrid tr.trSelected td.sorted, 
+.flexigrid tr.trSelected td.sorted,
 .flexigrid tr.trSelected td {
 	background: #d5effc url(../../../images/flexigrid/hl.png) repeat-x top;
 	border-right: 1px solid #d2e3ec;
@@ -3096,15 +3095,15 @@ div.colCopy {
 	border-left-color: #f7f7f7;
 }
 
-.flexigrid.novstripe div.bDiv tr.trSelected:hover td, 
+.flexigrid.novstripe div.bDiv tr.trSelected:hover td,
 
 		.flexigrid.novstripe div.bDiv tr.trSelected:hover td.sorted,
 
-		.flexigrid.novstripe div.bDiv tr.trOver.trSelected td.sorted, 
+		.flexigrid.novstripe div.bDiv tr.trOver.trSelected td.sorted,
 
 		.flexigrid.novstripe div.bDiv tr.trOver.trSelected td,
 
-		.flexigrid.novstripe tr.trSelected td.sorted, 
+		.flexigrid.novstripe tr.trSelected td.sorted,
 
 		.flexigrid.novstripe tr.trSelected td {
 	border-right: 1px solid #0066FF;
@@ -3141,7 +3140,7 @@ div.pGroup {
 	margin: 0px 5px;
 }
 
-.flexigrid div.pDiv .pPageStat, 
+.flexigrid div.pDiv .pPageStat,
 .flexigrid div.pDiv .pcontrol {
 	position: relative;
 	top: 5px;
@@ -3163,7 +3162,7 @@ div.pGroup {
 	overflow: hidden;
 }
 
-.flexigrid div.pDiv  div.pButton:hover, 
+.flexigrid div.pDiv  div.pButton:hover,
 .flexigrid div.pDiv  div.pButton.pBtnOver {
 	width: 20px;
 	height: 20px;
@@ -3178,7 +3177,7 @@ div.pGroup {
 	float: left;
 }
 
-.flexigrid div.pDiv  div.pButton:hover span, 
+.flexigrid div.pDiv  div.pButton:hover span,
 .flexigrid div.pDiv  div.pButton.pBtnOver span {
 	width: 19px;
 	height: 19px;
@@ -3216,10 +3215,10 @@ div.pGroup {
 
 /* ie adjustments */
 
-.flexigrid.ie div.hDiv th div, 
-.flexigrid.ie  div.bDiv td  div, 
+.flexigrid.ie div.hDiv th div,
+.flexigrid.ie  div.bDiv td  div,
 div.colCopy.ie div{
-/* common inner cell properties*/ 
+/* common inner cell properties*/
 	overflow: hidden;
 }
 
