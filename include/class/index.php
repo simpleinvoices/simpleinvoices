@@ -31,7 +31,7 @@ class index
         $sql = "select 
                     id 
                 from 
-                    si_index 
+                    ".TB_PREFIX."index 
                 where
                     domain_id = :domain_id
                 and
@@ -73,12 +73,12 @@ class index
         if ($next == 1)
         {
 
-            $sql = "insert into si_index (id, node, sub_node, domain_id) VALUES (:id, :node, :sub_node, :domain_id);";
+            $sql = "insert into ".TB_PREFIX."index (id, node, sub_node, domain_id) VALUES (:id, :node, :sub_node, :domain_id);";
 
         } else {
 
             $sql ="update
-                        si_index 
+                        ".TB_PREFIX."index 
                     set 
                         id = :id 
                     where
@@ -108,7 +108,7 @@ class index
         }
 
         $sql ="update
-                    si_index 
+                    ".TB_PREFIX."index 
                 set 
                     id = (id - 1) 
                 where

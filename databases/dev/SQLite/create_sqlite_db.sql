@@ -780,3 +780,7 @@ CREATE TABLE IF NOT EXISTS "si_user_role" (
 
 INSERT INTO "si_user_role" ("id", "name") VALUES
 (1, 'administrator');
+INSERT INTO "si_user_role" ("id", "name") VALUES
+(2, 'user');
+INSERT INTO "si_user_role" ("id", "name") VALUES
+(3, 'viewer');
