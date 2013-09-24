@@ -4,7 +4,7 @@ $row_id = $_GET['row'];
 if($_GET['id'])
 {
 	//sleep(2);
-	$sql = sprintf('SELECT unit_price, default_tax_id, default_tax_id_2,attribute,notes,notes_as_description,show_description FROM ".TB_PREFIX."products WHERE id = %d LIMIT 1', $_GET['id']);
+	$sql = sprintf("SELECT unit_price, default_tax_id, default_tax_id_2,attribute,notes,notes_as_description,show_description FROM ".TB_PREFIX."products WHERE id = %d LIMIT 1", $_GET['id']);
 	$states = dbQuery($sql);
     //	$output = '';
 
@@ -32,7 +32,7 @@ if($_GET['id'])
                 $attr_name = dbQuery($attr_name_sql);
                 $attr_name = $attr_name->fetch();
 
-                $sql2 = sprintf('select a.name as name, v.id as id, v.value as value, v.enabled as enabled from si_products_attributes a, si_products_values v where a.id = v.attribute_id AND a.id = %d', $k);
+                $sql2 = sprintf("select a.name as name, v.id as id, v.value as value, v.enabled as enabled from ".TB_PREFIX."products_attributes a, ".TB_PREFIX."products_values v where a.id = v.attribute_id AND a.id = %d", $k);
                 $states2 = dbQuery($sql2);
 
                 if($attr_name['enabled'] =='1' AND $attr_name['type'] == 'list')
