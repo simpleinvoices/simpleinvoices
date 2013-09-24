@@ -1427,9 +1427,7 @@ function updateCustomer() {
 	global $db;
 	global $config;
 
-	//ugly hack with conditional sql - but couldn't get it working without this :(
-	//TODO - make this just 1 query - refer svn history for info on past versions
-	
+
     if($_POST['credit_card_number_new'] !='')
     {
         $credit_card_number = $_POST['credit_card_number_new'];
@@ -1443,62 +1441,15 @@ function updateCustomer() {
         $cc_pdo_name = ":credit_card_number";
         $cc_pdo = $encrypted_credit_card_number;
 
-        $sql = "UPDATE
-                                ".TB_PREFIX."customers
-                        SET
-                                name = :name,
-                                attention = :attention,
-                                street_address = :street_address,
-                                street_address2 = :street_address2,
-                                city = :city,
-                                state = :state,
-                                zip_code = :zip_code,
-                                country = :country,
-                                phone = :phone,
-                                mobile_phone = :mobile_phone,
-                                fax = :fax,
-                                email = :email,
-                                credit_card_holder_name = :credit_card_holder_name,
-                ".$cc_sql."
-                                credit_card_expiry_month = :credit_card_expiry_month,
-                                credit_card_expiry_year = :credit_card_expiry_year,
-                                notes = :notes,
-                                custom_field1 = :custom_field1,
-                                custom_field2 = :custom_field2,
-                                custom_field3 = :custom_field3,
-                                custom_field4 = :custom_field4,
-                                enabled = :enabled
-                        WHERE
-                                id = :id";
-
-        return $db->query($sql,
-                ':name', $_POST[name],
-                ':attention', $_POST[attention],
-                ':street_address', $_POST[street_address],
-                ':street_address2', $_POST[street_address2],
-                ':city', $_POST[city],
-                ':state', $_POST[state],
-                ':zip_code', $_POST[zip_code],
-                ':country', $_POST[country],
-                ':phone', $_POST[phone],
-                ':mobile_phone', $_POST[mobile_phone],
-                ':fax', $_POST[fax],
-                ':email', $_POST[email],
-                ':notes', $_POST[notes],
-        $cc_pdo_name, $cc_pdo ,
-                ':credit_card_holder_name', $_POST[credit_card_holder_name],
-                ':credit_card_expiry_month', $_POST[credit_card_expiry_month],
-                ':credit_card_expiry_year', $_POST[credit_card_expiry_year],
-                ':custom_field1', $_POST[custom_field1],
-                ':custom_field2', $_POST[custom_field2],
-                ':custom_field3', $_POST[custom_field3],
-                ':custom_field4', $_POST[custom_field4],
-                ':enabled', $_POST['enabled'],
-                ':id', $_GET['id']
-                );
-
     } else {
 
+        $cc_sql ='';
+        $cc_pdo ='';
+        $encrypted_credit_card_number = '';
+        $pdo_credit_card_number = '';
+        $comma ='';
+
+    }
 
 	$sql = "UPDATE
 				".TB_PREFIX."customers
@@ -1516,6 +1467,7 @@ function updateCustomer() {
 				fax = :fax,
 				email = :email,
 				credit_card_holder_name = :credit_card_holder_name,
+                ".$cc_sql."
 				credit_card_expiry_month = :credit_card_expiry_month,
 				credit_card_expiry_year = :credit_card_expiry_year,
 				notes = :notes,
@@ -1542,6 +1494,7 @@ function updateCustomer() {
 		':fax', $_POST[fax],
 		':email', $_POST[email],
 		':notes', $_POST[notes],
+        $cc_pdo_name, $cc_pdo ,
 		':credit_card_holder_name', $_POST[credit_card_holder_name],
 		':credit_card_expiry_month', $_POST[credit_card_expiry_month],
 		':credit_card_expiry_year', $_POST[credit_card_expiry_year],
@@ -1552,7 +1505,6 @@ function updateCustomer() {
 		':enabled', $_POST['enabled'],
 		':id', $_GET['id']
 		);
-	}
 }
 
 function insertCustomer() {
