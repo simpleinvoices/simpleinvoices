@@ -172,7 +172,7 @@ class email
         global $db;
 		$domain_id = domain_id::get($this->domain_id);
     
-        $sql = "select email from si_user where role_id = '1' and domain_id =:domain_id LIMIT 1";
+        $sql = "select email from ".TB_PREFIX."user where role_id = '1' and domain_id =:domain_id LIMIT 1";
         $sth  = $db->query($sql,':domain_id',$domain_id) or die(htmlsafe(end($dbh->errorInfo())));
  
         return $sth->fetchColumn();

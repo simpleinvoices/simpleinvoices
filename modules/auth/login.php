@@ -79,26 +79,26 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 		//patch 147 adds user_role table - need to accomodate pre and post patch 147
 		if (getNumberOfDoneSQLPatches() < "147")
 		{
-			$result = $zendDb->fetchRow('
+			$result = $zendDb->fetchRow("
 				SELECT 
 					u.user_id as id, u.user_email, u.user_name
 				FROM 
-					si_users u
+					".TB_PREFIX."users u
 				WHERE 
-					user_email = ?', $userEmail
+					user_email = ?", $userEmail
 			);
 			$result['role_name']="administrator";
 		}
 
 		if ( (getNumberOfDoneSQLPatches() >= "147") && ( getNumberOfDoneSQLPatches() < "184") )
 		{
-			$result = $zendDb->fetchRow('
+			$result = $zendDb->fetchRow("
 				SELECT 
 					u.user_id as id, u.user_email, u.user_name, r.name as role_name, u.user_domain_id
 				FROM 
-					si_user u,  si_user_role r 
+					".TB_PREFIX."user u,  ".TB_PREFIX."user_role r 
 				WHERE 
-					u.user_email = ? AND u.user_role_id = r.id', $userEmail
+					u.user_email = ? AND u.user_role_id = r.id", $userEmail
 			);
 		}		
 		if (getNumberOfDoneSQLPatches() >= "184")
@@ -107,7 +107,7 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 				SELECT 
 					u.id, u.email, r.name as role_name, u.domain_id
 				FROM 
-					si_user u,  si_user_role r 
+					".TB_PREFIX."user u,  ".TB_PREFIX."user_role r 
 				WHERE 
 					u.email = ? AND u.role_id = r.id AND u.enabled = '".ENABLED."'", $userEmail
 			);
