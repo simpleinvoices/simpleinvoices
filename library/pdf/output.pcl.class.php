@@ -227,7 +227,7 @@ class PCLPrintJobPreamble {
 }
 
 class PCLPrintJobPage {
-  var $_control
+  var $_control;
   var $_data;
 
   function output(&$stream) {
