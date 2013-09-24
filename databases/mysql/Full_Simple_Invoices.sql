@@ -868,5 +868,5 @@ CREATE TABLE IF NOT EXISTS `si_user_role` (
 -- Dumping data for table `si_user_role`
 --
 
-INSERT INTO `si_user_role` (`id`, `name`) VALUES(1, 'administrator');
+INSERT INTO `si_user_role` (`id`, `name`) VALUES(1, 'administrator'),(2,'user'),(3,'viewer');
 
