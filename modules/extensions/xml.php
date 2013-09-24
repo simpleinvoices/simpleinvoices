@@ -62,7 +62,7 @@ $validFields = array('id', 'name','description','enabled');
 				1 AS registered,
 				enabled
 			FROM 
-				si_extensions
+				".TB_PREFIX."extensions
 			$where
 			ORDER BY 
 				$sort $dir 

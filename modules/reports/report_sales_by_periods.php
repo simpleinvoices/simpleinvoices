@@ -51,7 +51,7 @@ $data=array();
 while ( $year <= $this_year ){
 
 	// loop for each month
-	$month = 01;
+	$month = 1;
 
 	while ($month <= 12){
 		//make month nice for mysql - accounts table doesnt like it if not 08 etc..
@@ -60,7 +60,7 @@ while ( $year <= $this_year ){
 		};
 		
 		// Sales ----------------------------
-		$total_month_sales_sql = "select sum(ii.total) as month_total from ".TB_PREFIX."invoice_items ii, si_invoices i, si_preferences p where i.id = ii.invoice_id AND i.preference_id = p.pref_id AND p.status = '1' AND i.date like '$year-$month%'";
+		$total_month_sales_sql = "select sum(ii.total) as month_total from ".TB_PREFIX."invoice_items ii, ".TB_PREFIX."invoices i, ".TB_PREFIX."preferences p where i.id = ii.invoice_id AND i.preference_id = p.pref_id AND p.status = '1' AND i.date like '$year-$month%'";
 		$total_month_sales = dbQuery($total_month_sales_sql) or die(htmlsafe(end($dbh->errorInfo())));
 		$total_month_sales_array = $total_month_sales -> fetch();
 
