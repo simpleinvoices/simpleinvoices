@@ -27,6 +27,8 @@ $acl->add(new Zend_Acl_Resource('inventory'));
 $acl->add(new Zend_Acl_Resource('invoices'));
 $acl->add(new Zend_Acl_Resource('billers'));
 $acl->add(new Zend_Acl_Resource('products'));
+$acl->add(new Zend_Acl_Resource('product_attribute'));
+$acl->add(new Zend_Acl_Resource('product_value'));
 $acl->add(new Zend_Acl_Resource('payments'));
 $acl->add(new Zend_Acl_Resource('reports'));
 $acl->add(new Zend_Acl_Resource('options'));
@@ -52,7 +54,7 @@ $acl->allow('guest', null, 'view');
 $acl->allow(null,'auth');
 $acl->allow(null,'api');
 $acl->allow(null,'payments','ach');
-//TODO: not good !!! - no acl for invoiecs as can't get html2pdf to work with zend_auth :(
+//TODO: not good !!! - no acl for invoices as can't get html2pdf to work with zend_auth :(
 $acl->allow(null,'invoices');
 
 //students only see student page
@@ -64,7 +66,7 @@ $acl->allow('domain_administrator');
 
 // Administrator inherits nothing, but is allowed all privileges
 $acl->allow('administrator');
-//user - can do everythign except anything in the Settings menu
+//user - can do everything except anything in the Settings menu
 $acl->allow('user');
 $acl->deny('user','options');
 $acl->deny('user','system_defaults');
