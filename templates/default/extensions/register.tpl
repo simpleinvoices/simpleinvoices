@@ -6,14 +6,14 @@
 <div class="si_form">
 	<table>
 		 <tr>
-			<td>Name</td>
+			<td>{$LANG.name}</td>
 			<td>
 				<input type="text" name="name" readonly="readonly" value="{$name|htmlsafe}" /> 
 				<input type="text" size="3" name="id" value="{$id|htmlsafe}" readonly="readonly" />
 			</td>
 		</tr>
 		<tr>
-			<td>Description</td>
+			<td>{$LANG.description}</td>
 			<td>
 				<input type="text" name="description" size="40" value="{$description|htmlsafe}" />
 			</td>

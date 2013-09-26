@@ -83,9 +83,9 @@ function process_lang_file($lang_code) {
     if (preg_match('/^\$LANG\[/', $line)) {
       $count++;
     }
-	# Old method: preg_match('/^\$LANG\[.*;\s*\/\/\s*1/', $line)
-	# Accomodate multi-line string with strict line ending - Ap.Muthu
-    if (preg_match('/.*;\s*\/\/\s*1$/', $line)) {
+	# Each LANG string in one line only, use Current Method: preg_match('/^\$LANG\[.*;\s*\/\/\s*1/', $line)
+	# Accomodate multi-line string with strict line ending, use Alt Method: preg_match('/.*;\s*\/\/\s*1$/', $line)
+    if (preg_match('/^\$LANG\[.*;\s*\/\/\s*1/', $line)) {
 		$count_translated++;
     } else {
 	// Not translated string. Just to be sure.
