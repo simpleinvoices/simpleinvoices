@@ -1,6 +1,8 @@
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_biller` (
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+
+CREATE TABLE IF NOT EXISTS `si_biller` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL DEFAULT '1',
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -29,10 +31,8 @@ CREATE TABLE `si_biller` (
   `enabled` varchar(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
   PRIMARY KEY (`domain_id`,`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_cron` (
+
+CREATE TABLE IF NOT EXISTS `si_cron` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL,
   `invoice_id` int(11) NOT NULL,
@@ -44,20 +44,16 @@ CREATE TABLE `si_cron` (
   `email_customer` int(1) DEFAULT NULL,
   PRIMARY KEY (`domain_id`,`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_cron_log` (
+
+CREATE TABLE IF NOT EXISTS `si_cron_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL,
   `cron_id` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
   `run_date` date NOT NULL,
   PRIMARY KEY (`domain_id`,`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_custom_fields` (
+
+CREATE TABLE IF NOT EXISTS `si_custom_fields` (
   `cf_id` int(11) NOT NULL AUTO_INCREMENT,
   `cf_custom_field` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `cf_custom_label` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -65,10 +61,8 @@ CREATE TABLE `si_custom_fields` (
   `domain_id` int(11) NOT NULL,
   PRIMARY KEY (`cf_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_customers` (
+
+CREATE TABLE IF NOT EXISTS `si_customers` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL DEFAULT '1',
   `attention` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -95,10 +89,8 @@ CREATE TABLE `si_customers` (
   `enabled` varchar(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
   PRIMARY KEY (`domain_id`,`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_extensions` (
+
+CREATE TABLE IF NOT EXISTS `si_extensions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -106,20 +98,16 @@ CREATE TABLE `si_extensions` (
   `enabled` varchar(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_index` (
+
+CREATE TABLE IF NOT EXISTS `si_index` (
   `id` int(11) NOT NULL,
   `node` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `sub_node` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `sub_node_2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `domain_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_inventory` (
+
+CREATE TABLE IF NOT EXISTS `si_inventory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
@@ -129,10 +117,8 @@ CREATE TABLE `si_inventory` (
   `note` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`domain_id`,`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_invoice_item_tax` (
+
+CREATE TABLE IF NOT EXISTS `si_invoice_item_tax` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `invoice_item_id` int(11) NOT NULL,
   `tax_id` int(11) NOT NULL,
@@ -141,10 +127,8 @@ CREATE TABLE `si_invoice_item_tax` (
   `tax_amount` decimal(25,6) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_invoice_items` (
+
+CREATE TABLE IF NOT EXISTS `si_invoice_items` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `invoice_id` int(10) NOT NULL DEFAULT '0',
   `quantity` decimal(25,6) NOT NULL DEFAULT '0.000000',
@@ -158,18 +142,13 @@ CREATE TABLE `si_invoice_items` (
   PRIMARY KEY (`id`),
   KEY `invoice_id` (`invoice_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_invoice_type` (
+
+CREATE TABLE IF NOT EXISTS `si_invoice_type` (
   `inv_ty_id` int(11) NOT NULL AUTO_INCREMENT,
   `inv_ty_description` varchar(25) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`inv_ty_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_invoices` (
+CREATE TABLE IF NOT EXISTS `si_invoices` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `index_id` int(11) NOT NULL,
   `domain_id` int(11) NOT NULL DEFAULT '1',
@@ -188,10 +167,8 @@ CREATE TABLE `si_invoices` (
   KEY `biller_id` (`biller_id`),
   KEY `customer_id` (`customer_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_log` (
+
+CREATE TABLE IF NOT EXISTS `si_log` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `userid` varchar(40) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
@@ -199,10 +176,8 @@ CREATE TABLE `si_log` (
   `last_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_payment` (
+
+CREATE TABLE IF NOT EXISTS `si_payment` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `ac_inv_id` int(11) NOT NULL,
   `ac_amount` decimal(25,6) NOT NULL,
@@ -216,20 +191,16 @@ CREATE TABLE `si_payment` (
   KEY `ac_inv_id` (`ac_inv_id`),
   KEY `ac_amount` (`ac_amount`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_payment_types` (
+
+CREATE TABLE IF NOT EXISTS `si_payment_types` (
   `pt_id` int(10) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL DEFAULT '1',
   `pt_description` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `pt_enabled` varchar(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
   PRIMARY KEY (`domain_id`,`pt_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_preferences` (
+
+CREATE TABLE IF NOT EXISTS `si_preferences` (
   `pref_id` int(11) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL DEFAULT '1',
   `pref_description` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -253,10 +224,8 @@ CREATE TABLE `si_preferences` (
   `currency_position` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`domain_id`,`pref_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_products` (
+
+CREATE TABLE IF NOT EXISTS `si_products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL DEFAULT '1',
   `description` text COLLATE utf8_unicode_ci NOT NULL,
@@ -277,18 +246,14 @@ CREATE TABLE `si_products` (
   `show_description` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`domain_id`,`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_products_attribute_type` (
+
+CREATE TABLE IF NOT EXISTS `si_products_attribute_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_products_attributes` (
+
+CREATE TABLE IF NOT EXISTS `si_products_attributes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `type_id` varchar(255) NOT NULL,
@@ -296,30 +261,24 @@ CREATE TABLE `si_products_attributes` (
   `visible` varchar(1) DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_products_matrix` (
+
+CREATE TABLE IF NOT EXISTS `si_products_matrix` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
   `product_attribute_number` int(11) NOT NULL,
   `attribute_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_products_values` (
+
+CREATE TABLE IF NOT EXISTS `si_products_values` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `attribute_id` int(11) NOT NULL,
   `value` varchar(255) NOT NULL,
   `enabled` varchar(1) DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_sql_patchmanager` (
+
+CREATE TABLE IF NOT EXISTS `si_sql_patchmanager` (
   `sql_id` int(11) NOT NULL AUTO_INCREMENT,
   `sql_patch_ref` int(11) NOT NULL,
   `sql_patch` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -327,10 +286,8 @@ CREATE TABLE `si_sql_patchmanager` (
   `sql_statement` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`sql_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_system_defaults` (
+
+CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `value` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
@@ -339,10 +296,8 @@ CREATE TABLE `si_system_defaults` (
   PRIMARY KEY (`domain_id`,`id`),
   KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_tax` (
+
+CREATE TABLE IF NOT EXISTS `si_tax` (
   `tax_id` int(11) NOT NULL AUTO_INCREMENT,
   `tax_description` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tax_percentage` decimal(25,6) DEFAULT '0.000000',
@@ -351,10 +306,8 @@ CREATE TABLE `si_tax` (
   `domain_id` int(11) NOT NULL,
   PRIMARY KEY (`domain_id`,`tax_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_user` (
+
+CREATE TABLE IF NOT EXISTS `si_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
@@ -363,22 +316,19 @@ CREATE TABLE `si_user` (
   `enabled` int(1) NOT NULL,
   PRIMARY KEY (`domain_id`,`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_user_domain` (
+
+CREATE TABLE IF NOT EXISTS `si_user_domain` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `si_user_role` (
+
+CREATE TABLE IF NOT EXISTS `si_user_role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+SET character_set_client = @saved_cs_client
