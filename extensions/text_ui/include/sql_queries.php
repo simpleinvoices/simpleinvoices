@@ -20,10 +20,10 @@ class text_ui_invoice extends invoice {
             $invoiceItem['product'] = $tth->fetch();
 			$attr_sql = "select 
                     CONCAT(a.display_name, '-',v.value) as display
-                from
-                    si_products_attributes a,
-                    si_products_values v
-                where
+                FROM
+                    ".TB_PREFIX."products_attributes a,
+                    ".TB_PREFIX."products_values v
+                WHERE
                     a.id = v.attribute_id 
                     and
                     v.id = :attr_id";
