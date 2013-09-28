@@ -26,10 +26,10 @@ class matrix_invoice
 					CONCAT(p.id, '-', a.id, '-', v.id) as id, 
 					a.id as aid 
                 from
-                    si_products_attributes a,
-                    si_products_values v,
-					si_products_matrix m,
-					si_products p
+                    ".TB_PREFIX."products_attributes a,
+                    ".TB_PREFIX."products_values v,
+					".TB_PREFIX."products_matrix m,
+					".TB_PREFIX."products p
                 where
 					p.id = m.product_id 
 					and 
@@ -46,10 +46,10 @@ class matrix_invoice
 					CONCAT(p.id, '-', a.id, '-', v.id) as id 
 				
                 from
-                    si_products_attributes a,
-                    si_products_values v,
-					si_products_matrix m,
-					si_products p
+                    ".TB_PREFIX."products_attributes a,
+                    ".TB_PREFIX."products_values v,
+					".TB_PREFIX."products_matrix m,
+					".TB_PREFIX."products p
                 where
 					p.id = m.product_id 
 					and 
