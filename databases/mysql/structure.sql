@@ -148,6 +148,7 @@ CREATE TABLE IF NOT EXISTS `si_invoice_type` (
   `inv_ty_description` varchar(25) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`inv_ty_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS `si_invoices` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `index_id` int(11) NOT NULL,
