@@ -331,4 +331,5 @@ CREATE TABLE IF NOT EXISTS `si_user_role` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-SET character_set_client = @saved_cs_client
+SET character_set_client = @saved_cs_client;
+
