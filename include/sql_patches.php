@@ -1518,19 +1518,18 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['258']['date'] = "20130313";
 
     $patch['259']['name'] = "Product Matrix - update line items table";
-    $patch['259']['patch'] = "CREATE TABLE `". TB_PREFIX ."products_matrix` (
-`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`product_id` INT( 11 ) NOT NULL ,
-`attribute_id` INT( 11 ) NOT NULL
-) ENGINE = MYISAM ;";
+    //remove matrix code
+	$patch['259']['patch'] = "SELECT 1+1;";
     $patch['259']['date'] = "20130313";
 
     $patch['260']['name'] = "Product Matrix - update line items table";
-    $patch['260']['patch'] =" ALTER TABLE `". TB_PREFIX ."products_matrix` ADD `product_attribute_number` INT( 11 ) NOT NULL AFTER `product_id` ;";
+    //remove matrix code
+	$patch['260']['patch'] = "SELECT 1+1;";
     $patch['260']['date'] = "20130313";
 
     $patch['261']['name'] = "Product Matrix - update line items table";
-    $patch['261']['patch'] =" INSERT INTO `". TB_PREFIX ."products_matrix` (`id`, `product_id`,`product_attribute_number`, `attribute_id`) VALUES (NULL,'1', '1', '1'),  (NULL,'1', '2', '2'), (NULL,'2', '1', '2');";
+    //remove matrix code
+	$patch['261']['patch'] = "SELECT 1+1;";
     $patch['261']['date'] = "20130313";
 
 	$patch['262']['name'] = "Add product attributes system preference";
@@ -1586,6 +1585,11 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['272']['name'] = "Add product attributes system preference";
     $patch['272']['patch'] = "INSERT INTO ".TB_PREFIX."system_defaults (id, name ,value ,domain_id ,extension_id ) VALUES (NULL , 'large_dataset', '0', '1', '1');";
     $patch['272']['date'] = "20130313";
+
+    $patch['273']['name'] = "Make Simple Invoices faster - add index";
+    $patch['273']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` ADD INDEX(`invoice_id`);";
+    $patch['273']['date'] = "20130927";
+
 /*
 /*
 ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );

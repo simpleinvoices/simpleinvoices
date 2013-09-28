@@ -224,6 +224,17 @@
             "pref_enabled": "1"
         }
     ],
+    "si_products_attribute_type": [
+        {
+            "name": "list"
+        },
+        {
+            "name": "decimal"
+        },
+        {
+            "name": "free"
+        }
+    ],
     "si_sql_patchmanager": [
         {
             "sql_id": "1",
@@ -1061,6 +1072,66 @@
         },
         {
             "sql_patch_ref": "253"
+        },
+        {
+            "sql_patch_ref": "254"
+        },
+        {
+            "sql_patch_ref": "255"
+        },
+        {
+            "sql_patch_ref": "256"
+        },
+        {
+            "sql_patch_ref": "257"
+        },
+        {
+            "sql_patch_ref": "258"
+        },
+        {
+            "sql_patch_ref": "259"
+        },
+        {
+            "sql_patch_ref": "260"
+        },
+        {
+            "sql_patch_ref": "261"
+        },
+        {
+            "sql_patch_ref": "262"
+        },
+        {
+            "sql_patch_ref": "263"
+        },
+        {
+            "sql_patch_ref": "264"
+        },
+        {
+            "sql_patch_ref": "265"
+        },
+        {
+            "sql_patch_ref": "266"
+        },
+        {
+            "sql_patch_ref": "267"
+        },
+        {
+            "sql_patch_ref": "268"
+        },
+        {
+            "sql_patch_ref": "269"
+        },
+        {
+            "sql_patch_ref": "270"
+        },
+        {
+            "sql_patch_ref": "271"
+        },
+        {
+            "sql_patch_ref": "272"
+        },
+        {
+            "sql_patch_ref": "273"
         }
     ],
     "si_system_defaults": [
@@ -1228,6 +1299,13 @@
         {
             "id": "24",
             "name": "inventory",
+            "value": "0",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1"
+        },
+        {
+            "id": "24",
+            "name": "product_attributes",
             "value": "0",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
