@@ -174,7 +174,9 @@ CREATE TABLE IF NOT EXISTS `si_invoice_items` (
   `gross_total` decimal(25,6) DEFAULT '0.000000',
   `description` text,
   `total` decimal(25,6) DEFAULT '0.000000',
-  PRIMARY KEY (`id`)
+  `attribute` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `invoice_id` (`invoice_id`)
 ) ENGINE=MyISAM;
 
 INSERT INTO `si_invoice_items` (`id`, `invoice_id`, `quantity`, `product_id`, `unit_price`, `tax_amount`, `gross_total`, `description`, `total`) VALUES(1, 1, 1.000000, 5, 125.000000, 12.500000, 125.000000, '', 137.500000);
@@ -234,7 +236,9 @@ CREATE TABLE IF NOT EXISTS `si_payment` (
   `domain_id` int(11) NOT NULL,
   `online_payment_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`domain_id`,`id`),
-  KEY `domain_id` (`domain_id`)
+  KEY `domain_id` (`domain_id`),
+  KEY `ac_inv_id` (`ac_inv_id`),
+  KEY `ac_amount` (`ac_amount`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_payment_types` (
@@ -294,15 +298,69 @@ CREATE TABLE IF NOT EXISTS `si_products` (
   `notes` text NOT NULL,
   `enabled` varchar(1) NOT NULL DEFAULT '1',
   `visible` tinyint(1) NOT NULL DEFAULT '1',
+  `attribute` varchar(255) DEFAULT NULL,
+  `notes_as_description` varchar(1) DEFAULT NULL,
+  `show_description` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`domain_id`,`id`)
 ) ENGINE=MyISAM;
 
-INSERT INTO `si_products` (`id`, `domain_id`, `description`, `unit_price`, `default_tax_id`, `default_tax_id_2`, `cost`, `reorder_level`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`) VALUES(1, 1, 'Hourly charge', 150.000000, 1, 0, 0.000000, 0, '', '', '', '', '', '1', 1);
-INSERT INTO `si_products` (`id`, `domain_id`, `description`, `unit_price`, `default_tax_id`, `default_tax_id_2`, `cost`, `reorder_level`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`) VALUES(2, 1, 'Accounting services', 140.000000, 1, 0, 0.000000, 0, '', '', '', '', '', '1', 1);
-INSERT INTO `si_products` (`id`, `domain_id`, `description`, `unit_price`, `default_tax_id`, `default_tax_id_2`, `cost`, `reorder_level`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`) VALUES(3, 1, 'Ploughing service', 125.000000, 1, 0, 0.000000, 0, '', '', '', '', '', '1', 1);
-INSERT INTO `si_products` (`id`, `domain_id`, `description`, `unit_price`, `default_tax_id`, `default_tax_id_2`, `cost`, `reorder_level`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`) VALUES(4, 1, 'Bootleg homebrew', 15.500000, 1, 0, 0.000000, 0, '', '', '', '', '', '1', 1);
-INSERT INTO `si_products` (`id`, `domain_id`, `description`, `unit_price`, `default_tax_id`, `default_tax_id_2`, `cost`, `reorder_level`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`) VALUES(5, 1, 'Accomodation', 125.500000, 1, 0, 0.000000, 0, '', '', '', '', '', '1', 1);
+INSERT INTO `si_products` (`id`, `domain_id`, `description`, `unit_price`, `default_tax_id`, `default_tax_id_2`, `cost`, `reorder_level`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`, `attribute`, `notes_as_description`, `show_description`) VALUES(1, 1, 'Hourly charge', 150.000000, 1, 0, 0.000000, 0, '', '', '', '', '', '1', 1, '', '', '');
+INSERT INTO `si_products` (`id`, `domain_id`, `description`, `unit_price`, `default_tax_id`, `default_tax_id_2`, `cost`, `reorder_level`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`, `attribute`, `notes_as_description`, `show_description`) VALUES(2, 1, 'Accounting services', 140.000000, 1, 0, 0.000000, 0, '', '', '', '', '', '1', 1, '', '', '');
+INSERT INTO `si_products` (`id`, `domain_id`, `description`, `unit_price`, `default_tax_id`, `default_tax_id_2`, `cost`, `reorder_level`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`, `attribute`, `notes_as_description`, `show_description`) VALUES(3, 1, 'Ploughing service', 125.000000, 1, 0, 0.000000, 0, '', '', '', '', '', '1', 1, '', '', '');
+INSERT INTO `si_products` (`id`, `domain_id`, `description`, `unit_price`, `default_tax_id`, `default_tax_id_2`, `cost`, `reorder_level`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`, `attribute`, `notes_as_description`, `show_description`) VALUES(4, 1, 'Bootleg homebrew', 15.500000, 1, 0, 0.000000, 0, '', '', '', '', '', '1', 1, '', '', '');
+INSERT INTO `si_products` (`id`, `domain_id`, `description`, `unit_price`, `default_tax_id`, `default_tax_id_2`, `cost`, `reorder_level`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`, `attribute`, `notes_as_description`, `show_description`) VALUES(5, 1, 'Accomodation', 125.500000, 1, 0, 0.000000, 0, '', '', '', '', '', '1', 1, '', '', '');
 
+CREATE TABLE `si_products_attribute_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM;
+
+INSERT INTO `si_products_attribute_type` VALUES
+('1','list'),
+('2','decimal'),
+('3','free');
+
+CREATE TABLE `si_products_attributes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `type_id` varchar(255) NOT NULL,
+  `enabled` varchar(1) DEFAULT '1',
+  `visible` varchar(1) DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM;
+
+INSERT INTO `si_products_attributes` VALUES
+('1','Size',  '1','1','1'),
+('2','Colour','1','1','1');
+
+CREATE TABLE `si_products_matrix` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `product_attribute_number` int(11) NOT NULL,
+  `attribute_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM;
+
+INSERT INTO `si_products_matrix` VALUES
+('1','1','1','1'),
+('2','1','2','2'),
+('3','2','1','2');
+
+CREATE TABLE `si_products_values` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `attribute_id` int(11) NOT NULL,
+  `value` varchar(255) NOT NULL,
+  `enabled` varchar(1) DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM;
+
+INSERT INTO `si_products_values` VALUES
+('1','1','S','1'),
+('2','1','M','1'),
+('3','1','L','1'),
+('4','2','Red','1'),
+('5','2','White','1');
 
 CREATE TABLE IF NOT EXISTS `si_sql_patchmanager` (
   `sql_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -313,264 +371,280 @@ CREATE TABLE IF NOT EXISTS `si_sql_patchmanager` (
   PRIMARY KEY (`sql_id`)
 ) ENGINE=MyISAM;
 
---
--- Dumping data for table `si_sql_patchmanager`
---
-
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(1, 1, 'Create sql_patchmanger table', '20060514', 'CREATE TABLE si_sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 255 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) ENGINE = MYISAM ');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(2, 2, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(3, 3, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(4, 4, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(5, 5, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(6, 6, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(7, 7, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(8, 8, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(9, 9, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(10, 10, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(11, 11, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(12, 12, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(13, 13, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(14, 14, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(15, 15, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(16, 16, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(17, 17, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(18, 18, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(19, 19, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(20, 20, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(21, 21, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(22, 22, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(23, 23, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(24, 24, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(25, 25, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(26, 26, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(27, 27, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(28, 28, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(29, 29, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(30, 30, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(31, 31, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(32, 32, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(33, 33, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(34, 34, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(35, 35, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(36, 36, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(37, 0, 'Start', '20060514', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(38, 37, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(39, 38, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(40, 39, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(41, 40, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(42, 41, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(43, 42, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(44, 43, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(45, 44, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(46, 45, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(47, 46, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(48, 47, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(49, 48, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(50, 49, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(51, 50, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(52, 51, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(53, 52, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(54, 53, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(599, 54, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(600, 55, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(601, 56, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(602, 57, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(603, 58, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(604, 59, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(605, 60, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(606, 61, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(607, 62, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(608, 63, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(609, 64, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(610, 65, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(611, 66, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(612, 67, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(613, 68, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(614, 69, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(615, 70, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(616, 71, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(617, 72, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(618, 73, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(619, 74, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(620, 75, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(621, 76, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(622, 77, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(623, 78, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(624, 79, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(625, 80, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(626, 81, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(627, 82, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(628, 83, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(629, 84, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(630, 85, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(631, 86, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(632, 87, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(633, 88, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(634, 89, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(635, 90, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(636, 91, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(637, 92, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(638, 93, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(639, 94, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(640, 95, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(641, 96, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(642, 97, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(643, 98, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(644, 99, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(645, 100, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(646, 101, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(647, 102, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(648, 103, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(649, 104, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(650, 105, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(651, 106, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(652, 107, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(653, 108, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(654, 109, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(655, 110, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(656, 111, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(657, 112, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(658, 113, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(659, 114, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(660, 115, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(661, 116, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(662, 117, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(663, 118, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(664, 119, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(665, 120, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(666, 121, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(667, 122, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(668, 123, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(669, 124, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(670, 125, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(671, 126, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(672, 127, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(673, 128, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(674, 129, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(675, 130, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(676, 131, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(677, 132, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(678, 133, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(679, 134, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(680, 135, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(681, 136, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(682, 137, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(683, 138, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(684, 139, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(685, 140, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(686, 141, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(687, 142, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(688, 143, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(689, 144, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(690, 145, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(691, 146, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(692, 147, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(693, 148, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(694, 149, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(695, 150, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(696, 151, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(697, 152, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(698, 153, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(699, 154, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(700, 155, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(701, 156, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(702, 157, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(703, 158, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(704, 159, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(705, 160, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(706, 161, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(707, 162, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(708, 163, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(709, 164, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(710, 165, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(711, 166, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(712, 167, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(713, 168, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(714, 169, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(715, 170, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(716, 171, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(717, 172, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(718, 173, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(719, 174, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(720, 175, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(721, 176, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(722, 177, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(723, 178, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(724, 179, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(725, 180, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(726, 181, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(727, 182, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(728, 183, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(729, 184, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(730, 185, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(731, 186, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(732, 187, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(733, 188, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(734, 189, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(735, 190, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(736, 191, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(737, 192, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(738, 193, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(739, 194, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(740, 195, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(741, 196, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(742, 197, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(743, 198, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(744, 199, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(745, 200, 'Update extensions table', '20090529', 'UPDATE si_extensions SET id = 0 WHERE name = core LIMIT 1');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(746, 201, 'Set domain_id on system defaults table to 1', '20090622', 'UPDATE si_system_defaults SET domain_id = 1');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(747, 202, 'Set extension_id on system defaults table to 1', '20090622', 'UPDATE si_system_defaults SET extension_id = 1');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(748, 203, 'Move all old consulting style invoices to itemised', '20090704', 'UPDATE si_invoices SET type_id = 2 where type_id = 3');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(749, 204, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(750, 205, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(751, 206, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(752, 207, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(753, 208, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(754, 209, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(755, 210, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(757, 211, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(758, 212, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(759, 213, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(760, 214, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(761, 215, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(762, 216, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(763, 217, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(764, 218, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(765, 219, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(766, 220, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(767, 221, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(768, 222, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(769, 223, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(770, 224, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(771, 225, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(772, 226, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(773, 227, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(774, 228, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(775, 229, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(776, 230, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(777, 231, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(778, 232, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(779, 233, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(780, 234, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(781, 235, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(782, 236, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(783, 237, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(784, 238, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(785, 239, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(786, 240, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(787, 241, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(788, 242, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(789, 243, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(790, 244, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(791, 245, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(792, 246, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(793, 247, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(794, 248, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(795, 249, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(796, 250, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(797, 251, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(798, 252, '', '', '');
-INSERT INTO `si_sql_patchmanager` (`sql_id`, `sql_patch_ref`, `sql_patch`, `sql_release`, `sql_statement`) VALUES(799, 253, '', '', '');
+INSERT INTO `si_sql_patchmanager`  VALUES  (1,1,'Create sql_patchmanger table','20060514','CREATE TABLE si_sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 255 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) ENGINE = MYISAM ');
+INSERT INTO `si_sql_patchmanager`  VALUES  (2,2,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (3,3,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (4,4,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (5,5,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (6,6,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (7,7,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (8,8,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (9,9,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (10,10,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (11,11,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (12,12,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (13,13,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (14,14,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (15,15,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (16,16,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (17,17,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (18,18,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (19,19,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (20,20,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (21,21,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (22,22,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (23,23,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (24,24,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (25,25,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (26,26,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (27,27,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (28,28,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (29,29,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (30,30,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (31,31,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (32,32,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (33,33,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (34,34,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (35,35,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (36,36,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (37,0,'Start','20060514','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (38,37,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (39,38,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (40,39,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (41,40,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (42,41,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (43,42,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (44,43,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (45,44,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (46,45,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (47,46,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (48,47,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (49,48,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (50,49,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (51,50,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (52,51,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (53,52,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (54,53,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (55,54,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (56,55,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (57,56,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (58,57,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (59,58,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (60,59,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (61,60,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (62,61,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (63,62,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (64,63,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (65,64,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (66,65,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (67,66,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (68,67,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (69,68,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (70,69,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (71,70,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (72,71,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (73,72,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (74,73,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (75,74,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (76,75,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (77,76,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (78,77,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (79,78,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (80,79,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (81,80,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (82,81,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (83,82,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (84,83,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (85,84,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (86,85,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (87,86,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (88,87,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (89,88,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (90,89,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (91,90,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (92,91,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (93,92,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (94,93,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (95,94,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (96,95,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (97,96,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (98,97,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (99,98,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (100,99,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (101,100,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (102,101,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (103,102,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (104,103,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (105,104,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (106,105,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (107,106,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (108,107,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (109,108,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (110,109,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (111,110,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (112,111,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (113,112,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (114,113,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (115,114,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (116,115,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (117,116,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (118,117,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (119,118,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (120,119,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (121,120,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (122,121,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (123,122,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (124,123,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (125,124,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (126,125,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (127,126,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (128,127,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (129,128,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (130,129,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (131,130,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (132,131,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (133,132,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (134,133,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (135,134,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (136,135,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (137,136,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (138,137,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (139,138,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (140,139,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (141,140,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (142,141,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (143,142,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (144,143,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (145,144,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (146,145,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (147,146,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (148,147,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (149,148,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (150,149,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (151,150,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (152,151,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (153,152,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (154,153,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (155,154,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (156,155,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (157,156,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (158,157,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (159,158,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (160,159,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (161,160,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (162,161,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (163,162,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (164,163,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (165,164,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (166,165,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (167,166,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (168,167,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (169,168,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (170,169,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (171,170,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (172,171,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (173,172,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (174,173,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (175,174,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (176,175,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (177,176,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (178,177,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (179,178,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (180,179,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (181,180,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (182,181,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (183,182,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (184,183,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (185,184,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (186,185,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (187,186,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (188,187,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (189,188,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (190,189,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (191,190,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (192,191,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (193,192,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (194,193,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (195,194,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (196,195,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (197,196,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (198,197,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (199,198,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (200,199,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (201,200,'Update extensions table','20090529','UPDATE si_extensions SET id = 0 WHERE name = core LIMIT 1');
+INSERT INTO `si_sql_patchmanager`  VALUES  (202,201,'Set domain_id on system defaults table to 1','20090622','UPDATE si_system_defaults SET domain_id = 1');
+INSERT INTO `si_sql_patchmanager`  VALUES  (203,202,'Set extension_id on system defaults table to 1','20090622','UPDATE si_system_defaults SET extension_id = 1');
+INSERT INTO `si_sql_patchmanager`  VALUES  (204,203,'Move all old consulting style invoices to itemised','20090704','UPDATE si_invoices SET type_id = 2 where type_id = 3');
+INSERT INTO `si_sql_patchmanager`  VALUES  (205,204,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (206,205,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (207,206,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (208,207,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (209,208,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (210,209,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (211,210,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (212,211,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (213,212,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (214,213,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (215,214,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (216,215,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (217,216,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (218,217,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (219,218,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (220,219,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (221,220,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (222,221,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (223,222,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (224,223,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (225,224,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (226,225,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (227,226,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (228,227,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (229,228,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (230,229,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (231,230,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (232,231,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (233,232,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (234,233,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (235,234,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (236,235,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (237,236,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (238,237,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (239,238,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (240,239,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (241,240,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (242,241,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (243,242,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (244,243,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (245,244,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (246,245,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (247,246,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (248,247,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (249,248,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (250,249,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (251,250,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (252,251,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (253,252,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (254,253,'','','');
+INSERT INTO `si_sql_patchmanager`  VALUES  (255,254,'Product Matrix - update line items table','20130313','ALTER TABLE `si_invoice_items` ADD `attribute` VARCHAR( 255 ) NULL ;');
+INSERT INTO `si_sql_patchmanager`  VALUES  (256,255,'Product Matrix - update line items table','20130313',' \n        CREATE TABLE `si_products_attributes` (\n            `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,\n            `name` VARCHAR( 255 ) NOT NULL,\n            `type_id` VARCHAR( 255 ) NOT NULL\n            ) ENGINE = MYISAM ;');
+INSERT INTO `si_sql_patchmanager`  VALUES  (257,256,'Product Matrix - update line items table','20130313','INSERT INTO `si_products_attributes` (`id`, `name`, `type_id`) VALUES (NULL, \'Size\',\'1\'), (NULL,\'Colour\',\'1\');');
+INSERT INTO `si_sql_patchmanager`  VALUES  (258,257,'Product Matrix - update line items table','20130313','CREATE TABLE `si_products_values` (\n`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,\n`attribute_id` INT( 11 ) NOT NULL ,\n`value` VARCHAR( 255 ) NOT NULL\n) ENGINE = MYISAM ;');
+INSERT INTO `si_sql_patchmanager`  VALUES  (259,258,'Product Matrix - update line items table','20130313','INSERT INTO `si_products_values` (`id`, `attribute_id`,`value`) VALUES (NULL,\'1\', \'S\'),  (NULL,\'1\', \'M\'), (NULL,\'1\', \'L\'),  (NULL,\'2\', \'Red\'),  (NULL,\'2\', \'White\');');
+INSERT INTO `si_sql_patchmanager`  VALUES  (260,259,'Product Matrix - update line items table','20130313','CREATE TABLE `si_products_matrix` (\n`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,\n`product_id` INT( 11 ) NOT NULL ,\n`attribute_id` INT( 11 ) NOT NULL\n) ENGINE = MYISAM ;');
+INSERT INTO `si_sql_patchmanager`  VALUES  (261,260,'Product Matrix - update line items table','20130313','ALTER TABLE `si_products_matrix` ADD `product_attribute_number` INT( 11 ) NOT NULL AFTER `product_id` ;');
+INSERT INTO `si_sql_patchmanager`  VALUES  (262,261,'Product Matrix - update line items table','20130313','INSERT INTO `si_products_matrix` (`id`, `product_id`,`product_attribute_number`, `attribute_id`) VALUES (NULL,\'1\', \'1\', \'1\'),  (NULL,\'1\', \'2\', \'2\'), (NULL,\'2\', \'1\', \'2\');');
+INSERT INTO `si_sql_patchmanager`  VALUES  (263,262,'Add product attributes system preference','20130313','INSERT INTO si_system_defaults (id, name ,value ,domain_id ,extension_id ) VALUES (NULL , \'product_attributes\', \'0\', \'1\', \'1\');');
+INSERT INTO `si_sql_patchmanager`  VALUES  (264,263,'Product Matrix - update line items table','20130313','ALTER TABLE `si_products` ADD `attribute` VARCHAR( 255 ) NULL ;');
+INSERT INTO `si_sql_patchmanager`  VALUES  (265,264,'Product - use notes as default line item description','20130314','ALTER TABLE `si_products` ADD `notes_as_description` VARCHAR( 1 ) NULL ;');
+INSERT INTO `si_sql_patchmanager`  VALUES  (266,265,'Product - expand/show line item description','20130314','ALTER TABLE `si_products` ADD `show_description` VARCHAR( 1 ) NULL ;');
+INSERT INTO `si_sql_patchmanager`  VALUES  (267,266,'Product - expand/show line item description','20130322','CREATE TABLE `si_products_attribute_type` (\n            `id` int(11) NOT NULL AUTO_INCREMENT,\n                `name` varchar(255) NOT NULL,\n                  PRIMARY KEY (`id`)\n              ) ENGINE=MyISAM;');
+INSERT INTO `si_sql_patchmanager`  VALUES  (268,267,'Product Matrix - insert attribute types','20130325','INSERT INTO `si_products_attribute_type` (`id`, `name`) VALUES (NULL,\'list\'),  (NULL,\'decimal\'), (NULL,\'free\');');
+INSERT INTO `si_sql_patchmanager`  VALUES  (269,268,'Product Matrix - insert attribute types','20130327','ALTER TABLE  `si_products_attributes` ADD  `enabled` VARCHAR( 1 ) NULL DEFAULT  \'1\',\n        ADD  `visible` VARCHAR( 1 ) NULL DEFAULT  \'1\';');
+INSERT INTO `si_sql_patchmanager`  VALUES  (270,269,'Product Matrix - insert attribute types','20130327','ALTER TABLE  `si_products_values` ADD  `enabled` VARCHAR( 1 ) NULL DEFAULT  \'1\';');
+INSERT INTO `si_sql_patchmanager`  VALUES  (271,270,'Make Simple Invoices faster - add index','20100419','ALTER TABLE `si_payment` ADD INDEX(`ac_inv_id`);');
+INSERT INTO `si_sql_patchmanager`  VALUES  (272,271,'Make Simple Invoices faster - add index','20100419','ALTER TABLE `si_payment` ADD INDEX(`ac_amount`);');
+INSERT INTO `si_sql_patchmanager`  VALUES  (273,272,'Add product attributes system preference','20130313','INSERT INTO si_system_defaults (id, name ,value ,domain_id ,extension_id ) VALUES (NULL , \'large_dataset\', \'0\', \'1\', \'1\');');
+INSERT INTO `si_sql_patchmanager`  VALUES  (274,273,'Make Simple Invoices faster - add index','20130927','ALTER TABLE `si_invoice_items` ADD INDEX(`invoice_id`);');
 
 CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -582,30 +656,33 @@ CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   KEY `name` (`name`)
 ) ENGINE=MyISAM;
 
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(1, 'biller', '4', 1, 1);
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(2, 'customer', '3', 1, 1);
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(3, 'tax', '1', 1, 1);
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(4, 'preference', '1', 1, 1);
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(5, 'line_items', '5', 1, 1);
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(6, 'template', 'default', 1, 1);
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(7, 'payment_type', '1', 1, 1);
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(8, 'language', 'en_GB', 1, 1);
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(9, 'dateformate', 'Y-m-d', 1, 1);
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(10, 'spreadsheet', 'xls', 1, 1);
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(11, 'wordprocessor', 'doc', 1, 1);
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(12, 'pdfscreensize', '800', 1, 1);
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(13, 'pdfpapersize', 'A4', 1, 1);
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(14, 'pdfleftmargin', '15', 1, 1);
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(15, 'pdfrightmargin', '15', 1, 1);
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(16, 'pdftopmargin', '15', 1, 1);
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(17, 'pdfbottommargin', '15', 1, 1);
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(18, 'emailhost', 'localhost', 1, 1);
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(19, 'emailusername', '', 1, 1);
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(20, 'emailpassword', '', 1, 1);
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(21, 'logging', '0', 1, 1);
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(22, 'delete', 'N', 1, 1);
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(23, 'tax_per_line_item', '1', 1, 1);
-INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES(24, 'inventory', '0', 1, 1);
+INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES
+('1','biller','4','1','1'),
+('2','customer','3','1','1'),
+('3','tax','1','1','1'),
+('4','preference','1','1','1'),
+('5','line_items','5','1','1'),
+('6','template','default','1','1'),
+('7','payment_type','1','1','1'),
+('8','language','en_GB','1','1'),
+('9','dateformate','Y-m-d','1','1'),
+('10','spreadsheet','xls','1','1'),
+('11','wordprocessor','doc','1','1'),
+('12','pdfscreensize','800','1','1'),
+('13','pdfpapersize','A4','1','1'),
+('14','pdfleftmargin','15','1','1'),
+('15','pdfrightmargin','15','1','1'),
+('16','pdftopmargin','15','1','1'),
+('17','pdfbottommargin','15','1','1'),
+('18','emailhost','localhost','1','1'),
+('19','emailusername','','1','1'),
+('20','emailpassword','','1','1'),
+('21','logging','0','1','1'),
+('22','delete','N','1','1'),
+('23','tax_per_line_item','1','1','1'),
+('24','inventory','0','1','1'),
+('25','product_attributes','0','1','1'),
+('26','large_dataset','0','1','1');
 
 CREATE TABLE IF NOT EXISTS `si_tax` (
   `tax_id` int(11) NOT NULL AUTO_INCREMENT,
