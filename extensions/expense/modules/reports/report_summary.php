@@ -33,22 +33,22 @@ isset($_POST['start_date']) ? $start_date = $_POST['start_date'] : $start_date =
 isset($_POST['end_date']) ? $end_date = $_POST['end_date'] : $end_date = lastOfMonth() ;
 
 
-$sql="select 
-        e.amount as expense, 
-        e.status as status, 
-        ea.name as account,
-        (select sum(tax_amount) from si_expense_item_tax where expense_id = e.id) as tax,
-        (select tax + e.amount) as total,
+$sql="SELECT 
+        e.amount AS expense, 
+        e.status AS status, 
+        ea.name AS account,
+        (SELECT sum(tax_amount) FROM ".TB_PREFIX."expense_item_tax WHERE expense_id = e.id) AS tax,
+        (SELECT tax + e.amount) AS total,
         (CASE WHEN status = 1 THEN '".$LANG['paid']."'
               WHEN status = 0 THEN '".$LANG['not_paid']."'
          END) AS status_wording
-    from 
-        si_expense e, 
-        si_expense_account ea 
-    where 
+    FROM 
+        ".TB_PREFIX."expense e, 
+        ".TB_PREFIX."expense_account ea 
+    WHERE 
         e.expense_account_id = ea.id 
-        and 
-        e.date between '$start_date' and '$end_date'";
+        AND 
+        e.date BETWEEN '$start_date' AND '$end_date'";
 $sth = $db->query($sql);
 $accounts = $sth->fetchAll();
 

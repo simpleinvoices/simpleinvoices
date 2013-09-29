@@ -22,10 +22,10 @@ switch ($search) {
 					CONCAT(p.id, '-', a.id, '-', v.id) as id, 
 					CONCAT(a.display_name, '-',v.value) as display 
 				from 
-					si_products_attributes a, 
-					si_products_values v,
-					si_products_matrix m,
-					si_products p
+					".TB_PREFIX."products_attributes a, 
+					".TB_PREFIX."products_values v,
+					".TB_PREFIX."products_matrix m,
+					".TB_PREFIX."products p
 
 				where 
 					p.id = m.product_id 
@@ -58,10 +58,10 @@ switch ($search) {
 					CONCAT(p.id, '-', a.id, '-', v.id) as id, 
 					CONCAT(a.display_name, '-',v.value) as display 
 				from 
-					si_products_matrix m, 
-					si_products_attributes a, 
-					si_products p, 
-					si_products_values v 
+					".TB_PREFIX."products_matrix m, 
+					".TB_PREFIX."products_attributes a, 
+					".TB_PREFIX."products p, 
+					".TB_PREFIX."products_values v 
 				where 
 					p.id = m.product_id 
 					and 
@@ -90,10 +90,10 @@ switch ($search) {
 					CONCAT(p.id, '-', a.id, '-', v.id) as id, 
 					CONCAT(a.display_name, '-',v.value) as display 
 				from 
-					si_products_matrix m, 
-					si_products_attributes a, 
-					si_products p, 
-					si_products_values v 
+					".TB_PREFIX."products_matrix m, 
+					".TB_PREFIX."products_attributes a, 
+					".TB_PREFIX."products p, 
+					".TB_PREFIX."products_values v 
 				where 
 					p.id = m.product_id 
 					and 

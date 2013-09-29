@@ -33,9 +33,9 @@ class expensetax
                     sum(et.tax_amount) as tax_amount,
                     count(*) as count
                 from 
-                    si_expense_item_tax et, 
-                    si_expense e,
-                    si_tax t 
+                    ".TB_PREFIX."expense_item_tax et, 
+                    ".TB_PREFIX."expense e,
+                    ".TB_PREFIX."tax t 
                 where 
                     e.id = et.expense_id 
                 AND 
