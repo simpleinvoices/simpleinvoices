@@ -942,9 +942,6 @@
             "sql_patch_ref": "210"
         },
         {
-            "sql_patch_ref": "210"
-        },
-        {
             "sql_patch_ref": "211"
         },
         {
@@ -1304,8 +1301,15 @@
             "extension_id": "1"
         },
         {
-            "id": "24",
+            "id": "25",
             "name": "product_attributes",
+            "value": "0",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1"
+        },
+        {
+            "id": "26",
+            "name": "large_dataset",
             "value": "0",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
