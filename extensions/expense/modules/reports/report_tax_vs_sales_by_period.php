@@ -55,7 +55,7 @@ while ( $year <= $this_year )
 		/*
 		* Sales
 		*/
-		$total_month_sales_sql = "select sum(iit.tax_amount) as month_total from ".TB_PREFIX."invoice_item_tax iit, si_invoice_items ii, si_invoices i, si_preferences p where i.id = ii.invoice_id AND iit.invoice_item_id = ii.id AND i.preference_id = p.pref_id AND p.status = '1' AND i.date like '$year-$month%'";
+		$total_month_sales_sql = "SELECT sum(iit.tax_amount) AS month_total FROM ".TB_PREFIX."invoice_item_tax iit, ".TB_PREFIX."invoice_items ii, ".TB_PREFIX."invoices i, ".TB_PREFIX."preferences p WHERE i.id = ii.invoice_id AND iit.invoice_item_id = ii.id AND i.preference_id = p.pref_id AND p.status = '1' AND i.date LIKE '$year-$month%'";
 		//$total_month_sales = mysqlQuery($total_month_sales_sql);
 		//$total_month_sales_array= mysql_fetch_array($total_month_sales);
 
@@ -71,7 +71,7 @@ while ( $year <= $this_year )
 		/*
 		* Payment
 		*/
-		$total_month_payments_sql = " select sum(et.tax_amount) as month_total_payments from ".TB_PREFIX."expense_item_tax et, si_expense e where e.id = et.expense_id AND e.date like '$year-$month%'";
+		$total_month_payments_sql = "SELECT sum(et.tax_amount) AS month_total_payments FROM ".TB_PREFIX."expense_item_tax et, ".TB_PREFIX."expense e WHERE e.id = et.expense_id AND e.date LIKE '$year-$month%'";
 		//$total_month_payments = mysqlQuery($total_month_payments_sql);
 		//$total_month_payments_array= mysql_fetch_array($total_month_payments);
 
@@ -94,7 +94,7 @@ while ( $year <= $this_year )
 	* Sales
 	*/
 	#$total_year_sales_sql = "select sum(ii.total) as year_total from ".TB_PREFIX."invoice_items ii, si_invoices i where i.id = ii.invoice_id AND i.date like '$year%'";
-    $total_year_sales_sql = "select sum(iit.tax_amount) as year_total from ".TB_PREFIX."invoice_item_tax iit, si_invoice_items ii, si_invoices i, si_preferences p where i.id = ii.invoice_id AND iit.invoice_item_id = ii.id AND i.preference_id = p.pref_id AND p.status = '1' AND i.date like '$year%'";
+    $total_year_sales_sql = "SELECT sum(iit.tax_amount) AS year_total FROM ".TB_PREFIX."invoice_item_tax iit, ".TB_PREFIX."invoice_items ii, ".TB_PREFIX."invoices i, ".TB_PREFIX."preferences p where i.id = ii.invoice_id AND iit.invoice_item_id = ii.id AND i.preference_id = p.pref_id AND p.status = '1' AND i.date LIKE '$year%'";
 	//$total_year_sales = mysqlQuery($total_year_sales_sql);
 	//$total_year_sales_array= mysql_fetch_array($total_year_sales);
 
@@ -111,7 +111,7 @@ while ( $year <= $this_year )
 	* Payment
 	*/
 	#$total_year_payments_sql = " select sum(ac_amount) as year_total_payments from ".TB_PREFIX."payment where ac_date like '$year%'";
-	$total_year_payments_sql = " select sum(et.tax_amount) as year_total_payments from ".TB_PREFIX."expense_item_tax et, si_expense e where e.id = et.expense_id AND e.date like '$year%'";
+	$total_year_payments_sql = "SELECT sum(et.tax_amount) AS year_total_payments FROM ".TB_PREFIX."expense_item_tax et, ".TB_PREFIX."expense e WHERE e.id = et.expense_id AND e.date LIKE '$year%'";
 	//$total_year_payments = mysqlQuery($total_year_payments_sql);
 	//$total_year_payments_array= mysql_fetch_array($total_year_payments);
 

@@ -33,7 +33,7 @@ isset($_POST['start_date']) ? $start_date = $_POST['start_date'] : $start_date =
 isset($_POST['end_date']) ? $end_date = $_POST['end_date'] : $end_date = lastOfMonth() ;
 
 
-$sql="select e.amount as expense, ea.name as account from si_expense e, si_expense_account ea where e.expense_account_id = ea.id and e.date between '$start_date' and '$end_date' group by account order by account asc;";
+$sql="SELECT e.amount as expense, ea.name as account FROM ".TB_PREFIX."expense e, ".TB_PREFIX."expense_account ea where e.expense_account_id = ea.id AND e.date BETWEEN '$start_date' AND '$end_date' GROUP BY account ORDER BY account ASC;";
 $sth = $db->query($sql);
 $accounts = $sth->fetchAll();
 

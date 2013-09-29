@@ -66,7 +66,7 @@ function sql($type='', $dir, $sort, $rp, $page )
                     ea.name as expense_account,
                     c.name as customer,
                     p.description as product,
-                    (select sum(tax_amount) from si_expense_item_tax where expense_id = EID) as tax,
+                    (select sum(tax_amount) from ".TB_PREFIX."expense_item_tax where expense_id = EID) as tax,
                     (select tax + e.amount) as total,
                     (CASE WHEN status = 1 THEN '".$LANG['paid']."'
                           WHEN status = 0 THEN '".$LANG['not_paid']."'
