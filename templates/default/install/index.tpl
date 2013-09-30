@@ -6,10 +6,7 @@
 		<td colspan="2">
 			<b>To install Simple Invoices please:</b>
 			<br />
-			<br />1. Create a blank MySQL database preferably with (use your preferred db name):
-			<br />&nbsp;&nbsp;&nbsp; CREATE DATABASE IF NOT EXISTS `simple_invoices` 
-			<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFAULT CHARACTER SET utf8 
-			<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFAULT COLLATE utf8_general_ci;
+			<br />1. Create a blank MySQL database
 			<br />2. Enter the correct database connection details in the config/config.ini file
 			<br />3. Review the connection details below and if correct click the 'Install Database' button
 			<br />
