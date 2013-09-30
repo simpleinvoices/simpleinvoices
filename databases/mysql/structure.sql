@@ -1,6 +1,4 @@
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
 
 CREATE TABLE IF NOT EXISTS `si_biller` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
@@ -331,6 +329,4 @@ CREATE TABLE IF NOT EXISTS `si_user_role` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-SET character_set_client = @saved_cs_client;
 
