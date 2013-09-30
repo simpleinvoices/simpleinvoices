@@ -251,7 +251,7 @@ class invoice {
             $sort = "id";
         }
 
-        if(substr($type,"count"))
+        if(strstr($type,"count"))
         {
             //unset($limit);
             $limit="";
