@@ -5,7 +5,7 @@
 * 	English translation file
 *
 * Last edited:
-*    2009-10-11
+*    2013-10-01
 *
 * License:
 *	 GPL v3 or above
@@ -545,7 +545,7 @@ $LANG['telephone_short'] = "Tel";//1
 $LANG['thank_you'] = "Thank you for choosing Simple Invoices!";//1
 $LANG['thank_you_inv'] = "Thank you for invoicing with ";//1
 $LANG['to'] = "To";//1
-$LANG['to_lowercase'] = "To";//1
+$LANG['to_lowercase'] = "to";//1
 $LANG['toggle_status'] = "Toggle status";//1
 $LANG['total'] = "Total";//1
 $LANG['total_amount'] = "Total amount";//1
@@ -585,21 +585,23 @@ $LANG['yes'] = "Yes";//1
 $LANG['your_reports'] = "Your reports";//1
 $LANG['zip'] = "Zip code";//1
 
-$LANG['title_module_index']			="Home";//1
-$LANG['title_module_reports']		="Home / Reports";//1
-$LANG['title_module_invoices']		="Money / Invoices";//1
-$LANG['title_module_cron']			="Money / Recurence";//1
-$LANG['title_module_payments']		="Money / Payments";//1
-$LANG['title_module_billers']		="People / Billers";//1
-$LANG['title_module_customers']		="People / Customers";//1
-$LANG['title_module_user']			="People / Users";//1
-$LANG['title_module_producs']		="Products";//1
-$LANG['title_module_options']		="Settings";//1
+$LANG['title_module_index']				="Home";//1
+$LANG['title_module_reports']			="Home / Reports";//1
+$LANG['title_module_invoices']			="Money / Invoices";//1
+$LANG['title_module_cron']				="Money / Recurence";//1
+$LANG['title_module_payments']			="Money / Payments";//1
+$LANG['title_module_billers']			="People / Billers";//1
+$LANG['title_module_customers']			="People / Customers";//1
+$LANG['title_module_user']				="People / Users";//1
+$LANG['title_module_products']			="Products";//1
+$LANG['title_module_product_attribute']	="Products / Product Attributes";//1
+$LANG['title_module_product_value']		="Products / Product Values";//1
+$LANG['title_module_options']			="Settings";//1
 $LANG['title_module_system_defaults']	="Settings / System Preferences";//1
-$LANG['title_module_custom_fields']	="Settings / Custom Fields";//1
-$LANG['title_module_tax_rates']		="Settings / Tax Rates";//1
-$LANG['title_module_preferences']	="Settings / Invoice Preferences";//1
-$LANG['title_module_payment_types']	="Settings / Payment Types";//1
-$LANG['title_view_index']			="Dashboard";//1
+$LANG['title_module_custom_fields']		="Settings / Custom Fields";//1
+$LANG['title_module_tax_rates']			="Settings / Tax Rates";//1
+$LANG['title_module_preferences']		="Settings / Invoice Preferences";//1
+$LANG['title_module_payment_types']		="Settings / Payment Types";//1
+$LANG['title_view_index']				="Dashboard";//1
 
 ?>

@@ -8,7 +8,7 @@
 *  	Antoni Bertran (3&Punt Sol Informatiques), Anton Meixome
 *
 * Last edited:
-*    2007-12-22
+*    2013-10-01
 *
 * License:
 *	 GPL v2 or above
@@ -19,8 +19,6 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
-$title = "Simple Invoices";//1
-
 $LANG['about'] = "En quan a";//1
 $LANG['account_info'] = "Informaci&oacute; compte";//1
 $LANG['actions'] = "Accions";//1
@@ -95,7 +93,8 @@ $LANG['customer_id'] = "ID Client";//1
 $LANG['customer_name'] = "Nom Client";//1
 $LANG['customer_short'] = "Cust";//0
 $LANG['customers'] = "Clients";//1
-$LANG['dashboard'] = "Dashboard";//0$LANG['database_log'] = "Database Log";//0
+$LANG['dashboard'] = "Dashboard";//0
+$LANG['database_log'] = "Database Log";//0
 $LANG['database_upgrade_manager'] = "Gestor d'Actualitzacions de la Base de Dades";//1
 $LANG['date'] = "data";//1
 $LANG['date_created'] = "Data creaci&oacute;";//1
@@ -380,10 +379,10 @@ $LANG['save_tax_rate_success'] = "Impost de tarifes salvat, <br /> es redirigir&
 $LANG['save_user_failure'] = "Something went wrong, please try saving the user again<br />";//0
 $LANG['save_user_success'] = "User successfully saved, <br /> you will be redirected to the Manage Users page";//0
 $LANG['select_invoice'] = "Sis plau seleccioni una factura";//1
-$LANG['settings'] = "Settings";//0
+$LANG['settings'] = "Configuración";//1
 $LANG['shortcut'] ="Drecera a menu";//1
 $LANG['show_details'] = "Mostrar Detalls";//1
-$LANG['simple_invoices'] = "Simple Invoices";//0
+$LANG['simple_invoices'] = "Simple Invoices";//1
 $LANG['state'] = "Prov&iacute;ncia";//1
 $LANG['stats'] =" Estad&iacute;stiques";//1
 $LANG['stats_biller'] ="Millor Facturador - per total facturat";//1
@@ -392,12 +391,12 @@ $LANG['stats_debtor'] ="Grans Deudors";//1
 $LANG['street'] = "Carrer";//1
 $LANG['street2'] = "Carrer 2";//1
 $LANG['sub_total'] = "Sub Total";//1
-$LANG['subject'] = "Subject";//0
+$LANG['subject'] = "Asunto";//1
 $LANG['sum'] = "Suma";//1
 $LANG['summary'] = "Resum";//1
 $LANG['summary_of_accounts'] = "Resum de comptes";//1
 $LANG['system_defaults'] = "Valors per Defecte";//1
-$LANG['system_preferences'] = "System Preferences";//0
+$LANG['system_preferences'] = "Preferencias del Sistema";//1
 $LANG['tax'] = "Impost";//1
 $LANG['tax_description'] = "Descripci&oacute; Impost";//1
 $LANG['tax_id'] = "ID Impost";//1
@@ -409,8 +408,8 @@ $LANG['tax_rate_to_add'] = "Tarifa Impost per afegir";//1
 $LANG['tax_rates'] = "Tarifes Impostos";//1
 $LANG['tax_total'] = "IVA incl&ograve;s";//1
 $LANG['telephone_short'] = "Tel";//1
-$LANG['thank_you'] = "Thank you for choosing Simple Invoices!";//0
-$LANG['to'] = "To";//0
+$LANG['thank_you'] = "Gracias por elegir Simple Invoices usted!";//1
+$LANG['to'] = "Para";//1
 $LANG['total'] = "Total";//1
 $LANG['total_amount'] = "Quantitat Total";//1
 $LANG['total_by_aging_periods'] = "Total per per&iacute;odes d'antiguitat";//1
@@ -424,11 +423,11 @@ $LANG['total_style'] = "Estil Total";//1
 $LANG['total_taxes'] = "Total impostos";//1
 $LANG['total_uppercase'] = "TOTAL";//1
 $LANG['totals'] = "Totals";//1
-$LANG['Unit_Cost'] = "Unit Cost";//0
+$LANG['Unit_Cost'] = "Costo Unitario";//1
 $LANG['unit_price'] = "Preu Unitari";//1
 $LANG['upgrading_simple_invoices'] = "Actualitzant Simple Invoices";//1
-$LANG['user_add'] = "Add User";//0
-$LANG['users'] = "Users";//0
+$LANG['user_add'] = "Agregar Usuarios";//1
+$LANG['users'] = "Usuarios";//1
 $LANG['using_simple_invoices'] = "Usant Simple Invoices";//1
 $LANG['view'] = "Veure";//1
 $LANG['want_more_fields'] = "desitja m&eacute;s camps";//1
@@ -436,7 +435,27 @@ $LANG['welcome'] ="Benvingut a ";//1
 $LANG['what_are_custom_fields'] = "Qu&egrave; s&oacute;n els camps personalitzats";//1
 $LANG['whats_all_this_inv_pref'] = "What's all this Invoice Preference stuff about ";//0
 $LANG['whats_this_page_about'] = "Qu&egrave; hi ha en quant a la p&agrave;gina";//1
-$LANG['wheres_the_edit_button'] = "Where's the 'Edit' button ";//0
-$LANG['yes'] = "Yes";//0
+$LANG['wheres_the_edit_button'] = "Dónde está el botón Editar ";//1
+$LANG['yes'] = "Si";//1
 $LANG['zip'] = "Codi Postal";//1
+
+$LANG['title_module_index']				="Inici";//1
+$LANG['title_module_reports']			="Home / Reports";//0
+$LANG['title_module_invoices']			="Money / Invoices";//0
+$LANG['title_module_cron']				="Money / Recurence";//0
+$LANG['title_module_payments']			="Money / Payments";//0
+$LANG['title_module_billers']			="People / Billers";//0
+$LANG['title_module_customers']			="People / Customers";//0
+$LANG['title_module_user']				="People / Users";//0
+$LANG['title_module_products']			="Products";//0
+$LANG['title_module_product_attribute']	="Products / Product Attributes";//0
+$LANG['title_module_product_value']		="Products / Product Values";//0
+$LANG['title_module_options']			="Configuración";//1
+$LANG['title_module_system_defaults']	="Configuración / Preferencias del Sistema";//1
+$LANG['title_module_custom_fields']		="Settings / Custom Fields";//0
+$LANG['title_module_tax_rates']			="Settings / Tax Rates";//0
+$LANG['title_module_preferences']		="Settings / Invoice Preferences";//0
+$LANG['title_module_payment_types']		="Settings / Payment Types";//0
+$LANG['title_view_index']				="Dashboard";//0
+
 ?>

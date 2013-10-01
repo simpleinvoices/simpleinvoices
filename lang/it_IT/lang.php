@@ -1,8 +1,18 @@
 <?php
-/* *** Authors: Fabio Utili ***
-* Last edited: 2008-07-02
-* License: GPL v2 or above
-**************************** */
+/* 
+* Script: italian.inc.php
+* 	Italian translation file
+*
+* Authors: 
+*   Fabio Utili
+*
+* Last edited: 
+*   2013-10-01
+*
+* License:
+*   GPL v2 or above
+* 
+*/
 
 /*    // 1 means that the variable has been translated and //0 means it hasnt been translated 
 - this is used by a script to calculate how much of each file has been done
@@ -10,8 +20,6 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
-$title = "Fattura semplice";//1
-
 $LANG['about'] = "Informazioni";//1
 $LANG['account_info'] = "Informazioni conto";//1
 $LANG['actions'] = "Azioni";//1
@@ -430,4 +438,24 @@ $LANG['whats_this_page_about'] = "A cosa serve questa pagina ";//1
 $LANG['wheres_the_edit_button'] = "Dove è il pulsante di Edit ";//1
 $LANG['yes'] = "Yes";//0
 $LANG['zip'] = "CAP";//1
+
+$LANG['title_module_index']				="Home";//0
+$LANG['title_module_reports']			="Home / Reports";//0
+$LANG['title_module_invoices']			="Money / Invoices";//0
+$LANG['title_module_cron']				="Money / Recurence";//0
+$LANG['title_module_payments']			="Money / Payments";//0
+$LANG['title_module_billers']			="People / Billers";//0
+$LANG['title_module_customers']			="People / Customers";//0
+$LANG['title_module_user']				="People / Users";//0
+$LANG['title_module_products']			="Products";//0
+$LANG['title_module_product_attribute']	="Products / Product Attributes";//0
+$LANG['title_module_product_value']		="Products / Product Values";//0
+$LANG['title_module_options']			="Settings";//0
+$LANG['title_module_system_defaults']	="Settings / System Preferences";//0
+$LANG['title_module_custom_fields']		="Settings / Custom Fields";//0
+$LANG['title_module_tax_rates']			="Settings / Tax Rates";//0
+$LANG['title_module_preferences']		="Settings / Invoice Preferences";//0
+$LANG['title_module_payment_types']		="Settings / Payment Types";//0
+$LANG['title_view_index']				="Dashboard";//0
+
 ?>

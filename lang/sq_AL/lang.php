@@ -8,7 +8,7 @@
 *	 Gjergj Sheldija
 *
 * Last edited:
-*    2008-05-08
+*    2013-10-01
 *
 * License:
 *	 GPL v2 or above
@@ -19,8 +19,6 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
-$title = "Fatura te Thjeshta";//1
-
 $LANG['about'] = "Rreth";//1
 $LANG['account_info'] = "Info per llogarine";//1
 $LANG['actions'] = "Veprime";//1
@@ -439,4 +437,24 @@ $LANG['whats_this_page_about'] = "Per cfare sherben kjo ";//1
 $LANG['wheres_the_edit_button'] = "Ku eshte butoni i editimit ";//1
 $LANG['yes'] = "Yes";//0
 $LANG['zip'] = "Kodi Postar";//1
+
+$LANG['title_module_index']				="Home";//0
+$LANG['title_module_reports']			="Home / Reports";//0
+$LANG['title_module_invoices']			="Money / Invoices";//0
+$LANG['title_module_cron']				="Money / Recurence";//0
+$LANG['title_module_payments']			="Money / Payments";//0
+$LANG['title_module_billers']			="People / Billers";//0
+$LANG['title_module_customers']			="People / Customers";//0
+$LANG['title_module_user']				="People / Users";//0
+$LANG['title_module_products']			="Products";//0
+$LANG['title_module_product_attribute']	="Products / Product Attributes";//0
+$LANG['title_module_product_value']		="Products / Product Values";//0
+$LANG['title_module_options']			="Settings";//0
+$LANG['title_module_system_defaults']	="Settings / System Preferences";//0
+$LANG['title_module_custom_fields']		="Settings / Custom Fields";//0
+$LANG['title_module_tax_rates']			="Settings / Tax Rates";//0
+$LANG['title_module_preferences']		="Settings / Invoice Preferences";//0
+$LANG['title_module_payment_types']		="Settings / Payment Types";//0
+$LANG['title_view_index']				="Dashboard";//0
+
 ?>
