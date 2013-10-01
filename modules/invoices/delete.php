@@ -59,7 +59,7 @@ if ( ($_GET['stage'] == 2 ) AND ($_POST['doDelete'] == 'y') ) {
 		$error = true;
 	}
 
-	//delete products from producsts table for total style
+	//delete products from products table for total style
 	if ($invoice['type_id'] == 1) 
 	{
 		if ($error || ! delete('products','id',$invoiceItems['0']['product']['id'])) {
