@@ -9,7 +9,7 @@
 * 	 Ali Akar [ali_akar@gmx.de]
 *
 * Last edited:
-* 	 2008-05-01
+* 	 2013-10-01
 *
 * License:
 *	 GPL v2 or above
@@ -20,8 +20,6 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
 */
 
 #all
-$title = "Rechnungsverwaltung";//1
-
 $LANG['about'] = "&Uuml;ber";//1
 $LANG['account_info'] = "Konto-Information";//1
 $LANG['actions'] = "Aktion";//1
@@ -440,4 +438,24 @@ $LANG['whats_this_page_about'] = "Wozu ist diese Seite gut";//1
 $LANG['wheres_the_edit_button'] = "Wo ist der edit Button";//1
 $LANG['yes'] = "Yes";//0
 $LANG['zip'] = "PLZ";//1
+
+$LANG['title_module_index']				="Home";//0
+$LANG['title_module_reports']			="Home / Reports";//0
+$LANG['title_module_invoices']			="Money / Invoices";//0
+$LANG['title_module_cron']				="Money / Recurence";//0
+$LANG['title_module_payments']			="Money / Payments";//0
+$LANG['title_module_billers']			="People / Billers";//0
+$LANG['title_module_customers']			="People / Customers";//0
+$LANG['title_module_user']				="People / Users";//0
+$LANG['title_module_products']			="Products";//0
+$LANG['title_module_product_attribute']	="Products / Product Attributes";//0
+$LANG['title_module_product_value']		="Products / Product Values";//0
+$LANG['title_module_options']			="Settings";//0
+$LANG['title_module_system_defaults']	="Settings / System Preferences";//0
+$LANG['title_module_custom_fields']		="Settings / Custom Fields";//0
+$LANG['title_module_tax_rates']			="Settings / Tax Rates";//0
+$LANG['title_module_preferences']		="Settings / Invoice Preferences";//0
+$LANG['title_module_payment_types']		="Settings / Payment Types";//0
+$LANG['title_view_index']				="Dashboard";//0
+
 ?>
