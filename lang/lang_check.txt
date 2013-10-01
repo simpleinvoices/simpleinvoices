@@ -1,28 +1,28 @@
 ==========================================================================================================
 Lang. Code | Lang. name                    | New strings | Strings in file | Total translated |   % Done | 
 ==========================================================================================================
-ca_ES      | Catala (Catalan)              | 166         |             418 |              288 |   49.32% | 
-cs_CZ      | Cestina (Czech)               | 166         |             418 |              255 |   43.66% | 
-da_DK      | Dansk (Danish)                | 165         |             419 |              324 |   55.48% | 
-de_CH      | Schwizerdütsch (Swiss German) | 166         |             418 |              254 |   43.49% | 
-de_DE      | Deutsch (German)              | 166         |             418 |              303 |   51.88% | 
-el_GR      | Greek (Greek)                 | 166         |             418 |              303 |   51.88% | 
-en_GB      | English (UK)                  | All Done    |             584 |              584 |  100.00% | 
-es_ES      | Castellano (Spanish)          | 165         |             419 |              359 |   61.47% | 
-fi_FI      | Suomi (Finnish)               | 165         |             419 |              322 |   55.14% | 
-fr_FR      | Français (French)             | 124         |             460 |              396 |   67.81% | 
-gl_ES      | Galego (Galician)             | 166         |             418 |              200 |   34.25% | 
-it_IT      | Italian (IT)                  | 166         |             418 |              303 |   51.88% | 
-lv_LV      | Latviesu (Latvian)            | 166         |             418 |              163 |   27.91% | 
-mt_MT      | Maltese (MT)                  | 166         |             418 |              303 |   51.88% | 
-nb_NO      | Norsk (Norwegian)             | 103         |             481 |              458 |   78.42% | 
-nl_NL      | Nederlands (Dutch)            | 134         |             450 |              367 |   62.84% | 
-pt_PT      | Portugues (Portuguese)        | 165         |             419 |              314 |   53.77% | 
-ro_RO      | Romana (Romanian)             | 167         |             417 |              353 |   60.45% | 
-sk_SK      | Slovensky (Slovak)            | 34          |             550 |              472 |   80.82% | 
-sl_SI      | Sloven??ina (Slovenian)       | 166         |             418 |              287 |   49.14% | 
-sq_AL      | Shqip (Albanian)              | 166         |             418 |              303 |   51.88% | 
-sv_SE      | Svenska (Swedish)             | 121         |             463 |              459 |   78.60% | 
-tr_TR      | Türkçe (Turkish)              | 166         |             418 |              303 |   51.88% | 
-vi_VN      | Vietnam (Vietnam)             | 31          |             553 |              545 |   93.32% | 
+ca_ES      | Catala (Catalan)              | 149         |             437 |              302 |   51.54% | 
+cs_CZ      | Cestina (Czech)               | 150         |             436 |              255 |   43.52% | 
+da_DK      | Dansk (Danish)                | 149         |             437 |              324 |   55.29% | 
+de_CH      | Schwizerdütsch (Swiss German) | 150         |             436 |              254 |   43.34% | 
+de_DE      | Deutsch (German)              | 150         |             436 |              303 |   51.71% | 
+el_GR      | Greek (Greek)                 | 150         |             436 |              303 |   51.71% | 
+en_GB      | English (UK)                  | All Done    |             586 |              586 |  100.00% | 
+es_ES      | Castellano (Spanish)          | 149         |             437 |              359 |   61.26% | 
+fi_FI      | Suomi (Finnish)               | 149         |             437 |              322 |   54.95% | 
+fr_FR      | Français (French)             | 108         |             478 |              396 |   67.58% | 
+gl_ES      | Galego (Galician)             | 150         |             436 |              200 |   34.13% | 
+it_IT      | Italian (IT)                  | 150         |             436 |              303 |   51.71% | 
+lv_LV      | Latviesu (Latvian)            | 150         |             436 |              163 |   27.82% | 
+mt_MT      | Maltese (MT)                  | 150         |             436 |              303 |   51.71% | 
+nb_NO      | Norsk (Norwegian)             | 87          |             499 |              458 |   78.16% | 
+nl_NL      | Nederlands (Dutch)            | All Done    |             586 |              366 |   62.46% | 
+pt_PT      | Portugues (Portuguese)        | 149         |             437 |              314 |   53.58% | 
+ro_RO      | Romana (Romanian)             | 151         |             435 |              353 |   60.24% | 
+sk_SK      | Slovensky (Slovak)            | 18          |             568 |              472 |   80.55% | 
+sl_SI      | Sloven??ina (Slovenian)       | 150         |             436 |              287 |   48.98% | 
+sq_AL      | Shqip (Albanian)              | 150         |             436 |              303 |   51.71% | 
+sv_SE      | Svenska (Swedish)             | 105         |             481 |              459 |   78.33% | 
+tr_TR      | Türkçe (Turkish)              | 150         |             436 |              303 |   51.71% | 
+vi_VN      | Vietnam (Vietnam)             | 18          |             568 |              542 |   92.49% | 
 ----------------------------------------------------------------------------------------------------------
