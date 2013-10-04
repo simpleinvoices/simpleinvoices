@@ -9,4 +9,13 @@ You can also use this have various 'locations' for one customer - the invoice te
 
 run the sql in ./database/changes
 
-Invoice.custom_field1 is used to store teh sub customer ID in the invoice
+Invoice.custom_field1 is used to store the sub customer ID in the invoice
+
+The install of this extension will cause changes to the customers table and hence all inserts / updates will have to address all relevent fields fully.
+
+It may be considered experimental as it was done for a specific client of the lead developer and not updated thereafter.
+
+The Mailing list:
+https://groups.google.com/forum/#!forum/simpleinvoices
+has a post on this extension at:
+https://groups.google.com/forum/#!topic/simpleinvoices/IhuRt0y8aRY
