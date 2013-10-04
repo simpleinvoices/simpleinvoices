@@ -27,8 +27,9 @@ $count = $sth_count_rows;
 		$row['email_customer_nice'] = $row['email_customer']==1?$LANG['yes']:$LANG['no'];
 		$xml .= "<row id='".$row['id']."'>";
 		$xml .= "<cell><![CDATA[
-		<a class='index_table' title='$LANG[view] ".$row['name']."' href='index.php?module=cron&view=view&id=$row[id]'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-		<a class='index_table' title='$LANG[edit] ".$row['name']."' href='index.php?module=cron&view=edit&id=$row[id]'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+			<a class='index_table' title='$LANG[view] "  .$row['name']."' href='index.php?module=cron&view=view&id=$row[id]'>  <img src='images/common/view.png'   height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+			<a class='index_table' title='$LANG[edit] "  .$row['name']."' href='index.php?module=cron&view=edit&id=$row[id]'>  <img src='images/common/edit.png'   height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+			<a class='index_table' title='$LANG[delete] ".$row['name']."' href='index.php?module=cron&view=delete&id=$row[id]'><img src='images/common/delete.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 		]]></cell>";
 		$xml .= "<cell><![CDATA[".$row['index_name']."]]></cell>";		
 		#$xml .= "<cell><![CDATA[".siLocal::date($row['start_date'])."]]></cell>";
