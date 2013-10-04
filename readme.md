@@ -22,7 +22,9 @@ When cloning the repository use the `--recursive` option to ensure that Zend is 
 * For any other help or comments jump on our website or post on the forum at http://simpleinvoices.org/forum
 
 ## Get Involved
-Developer Discussion now takes place on the [Simple Invoices Google+ Community](https://plus.google.com/communities/102476804981627142204).
+* Developer Discussion: [Simple Invoices Google+ Community](https://plus.google.com/communities/102476804981627142204)
+* Developer Mailing List: [Simple Invoices Google Groups](https://groups.google.com/forum/#!forum/simpleinvoices)
+Although the Developer Mailing List header states that it is no longer used, it is active as it affords more privacy than Google+ affords.
 
 We also have a mailing list for tracking commit activity. This is hosted on Google Groups (sigh). You can find it here: https://groups.google.com/forum/?fromgroups#!forum/simpleinvoices-trac
 
