@@ -2435,7 +2435,9 @@ function searchInvoiceByDate($startdate,$enddate) {
 function delete($module,$idField,$id) {
 	global $dbh;
 	global $logger;
-	global $auth_session; //TODO add some domain_id stuff in here if requried
+	global $auth_session;
+
+	$has_domain_id = false;
 
 	$lctable = strtolower($module);
 	$s_idField = ''; // Presetting the whitelisted column to fail 
@@ -2467,6 +2469,7 @@ function delete($module,$idField,$id) {
 				$s_idField = $idField;
 			}
 		} elseif ($lctable == 'products') {
+			$has_domain_id = true;
 			// Check for use of product
 			$sth = $dbh->prepare('SELECT count(*)
 				FROM '.TB_PREFIX.'invoice_items
@@ -2486,6 +2489,7 @@ function delete($module,$idField,$id) {
 				$s_idField = $idField;
 			}
 		} elseif ($lctable == 'invoices') {
+			$has_domain_id = true;
 			// Check for existant payments and line items
 			$sth = $dbh->prepare('SELECT count(*) FROM (
 				SELECT id FROM '.TB_PREFIX.'invoice_items
@@ -2523,8 +2527,12 @@ function delete($module,$idField,$id) {
 		
 	// Tablename and column both pass whitelisting and FK checks
 	$sql = "DELETE FROM ".TB_PREFIX."$module WHERE $s_idField = :id";
+	if ($has_domain_id) $sql .= " AND domain_id = :domain_id";
     $logger->log("Item deleted: ".$sql, ZEND_Log::INFO);
-	return dbQuery($sql, ':id', $id);
+	if ($has_domain_id) 
+		return dbQuery($sql, ':id', $id, ':domain_id',$auth_session->domain_id);
+	else
+		return dbQuery($sql, ':id', $id);
 }
 
 function maxInvoice() {

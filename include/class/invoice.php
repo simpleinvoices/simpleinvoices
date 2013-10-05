@@ -64,7 +64,7 @@ class invoice {
 			':type_id', $this->type_id,
 			':preference_id', $this->preference_id,
 			':date', $this->date,
-			':note', $this->note,
+			':note', trim($this->note),
 			':custom_field1', $this->custom_field1,
 			':custom_field2', $this->custom_field2,
 			':custom_field3', $this->custom_field3,
@@ -117,7 +117,7 @@ class invoice {
 			':tax_amount', $this->tax_amount,
 			':gross_total', $this->gross_total,
 
-			':description', $this->description,
+			':description', trim($this->description),
 			':total', $this->total
 
 			);
