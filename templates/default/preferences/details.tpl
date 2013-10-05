@@ -11,14 +11,14 @@
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_description" title="{$LANG.description}">
 				<img src="./images/common/help-small.png" alt="" /> </a>
 			</th>
-			<td>{$preference.pref_description|htmlsafe}</td>
+			<td>{$preference.pref_description}</td>
 		</tr>
 		<tr>
 			<th>Currency sign 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{$LANG.currency_sign}">
 				<img src="./images/common/help-small.png" alt="" /> </a>
 			</th>
-			<td>{$preference.pref_currency_sign|htmlsafe}</td>
+			<td>{$preference.pref_currency_sign}</td>
 		</tr>
 		<tr>
 			<th>{$LANG.currency_code}

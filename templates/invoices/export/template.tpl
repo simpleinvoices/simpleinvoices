@@ -298,7 +298,7 @@
 	<tr>
         <td colspan="2"></td>
 		<td colspan="3" align="right">{$LANG.sub_total}&nbsp;</td>
-		<td colspan="1" align="right">{if $invoice_number_of_taxes > 1}<u>{/if}{$preference.pref_currency_sign|htmlsafe}{$invoice.gross|siLocal_number|htmlsafe}{if $invoice_number_of_taxes > 1}</u>{/if}</td>
+		<td colspan="1" align="right">{if $invoice_number_of_taxes > 1}<u>{/if}{$preference.pref_currency_sign} {$invoice.gross|siLocal_number|htmlsafe}{if $invoice_number_of_taxes > 1}</u>{/if}</td>
     </tr>
     {/if}
 	{if $invoice_number_of_taxes > 1 }
@@ -312,7 +312,7 @@
     	<tr>
 	        <td colspan="2"></td>
 			<td colspan="3" align="right">{$invoice.tax_grouped[line].tax_name|htmlsafe}&nbsp;</td>
-			<td colspan="1" align="right">{$preference.pref_currency_sign|htmlsafe}{$invoice.tax_grouped[line].tax_amount|siLocal_number|htmlsafe}</td>
+			<td colspan="1" align="right">{$preference.pref_currency_sign} {$invoice.tax_grouped[line].tax_amount|siLocal_number|htmlsafe}</td>
 	    </tr>
 	    {/if}
 	    
@@ -321,7 +321,7 @@
 	<tr>
         <td colspan="2"></td>
 		<td colspan="3" align="right">{$LANG.tax_total}&nbsp;</td>
-		<td colspan="1" align="right"><u>{$preference.pref_currency_sign|htmlsafe}{$invoice.total_tax|siLocal_number}</u></td>
+		<td colspan="1" align="right"><u>{$preference.pref_currency_sign} {$invoice.total_tax|siLocal_number}</u></td>
     </tr>
     {/if}
 	{if $invoice_number_of_taxes > 1}
@@ -332,7 +332,7 @@
     <tr>
         <td colspan="2"></td>
 		<td colspan="3" align="right"><b>{$preference.pref_inv_wording|htmlsafe} {$LANG.amount}&nbsp;</b></td>
-		<td colspan="1" align="right"><span class="double_underline">{$preference.pref_currency_sign|htmlsafe}{$invoice.total|siLocal_number}</span></td>
+		<td colspan="1" align="right"><span class="double_underline">{$preference.pref_currency_sign} {$invoice.total|siLocal_number}</span></td>
     </tr>
     {* tax section - end *}
 
@@ -344,7 +344,7 @@
     	<tr class='details_screen'>
 	        <td colspan="2"></td>
 			<td colspan="3" align="right">{$invoice.tax_grouped[line].tax_name|htmlsafe}</td>
-			<td colspan="1" align="right">{$preference.pref_currency_sign|htmlsafe}{$invoice.tax_grouped[line].tax_amount|siLocal_number}</td>
+			<td colspan="1" align="right">{$preference.pref_currency_sign} {$invoice.tax_grouped[line].tax_amount|siLocal_number}</td>
 	    </tr>
 	    
 	    {/if}
@@ -355,7 +355,7 @@
 	<tr >
 		<td colspan="3"></td>
 		<td align="right" colspan="2">{$LANG.tax_total}</td>
-		<td align="right" >{$preference.pref_currency_sign|htmlsafe}{$invoice.total_tax|number_format:2}</td>
+		<td align="right" >{$preference.pref_currency_sign} {$invoice.total_tax|number_format:2}</td>
 	</tr>
 	<tr >
 		<td colspan="6" ><br /></td>
@@ -363,7 +363,7 @@
 	<tr >
 		<td colspan="3"></td>
 		<td align="right" colspan="2"><b>{$preference.pref_inv_wording|htmlsafe} {$LANG.amount}</b></td>
-		<td  align="right"><u>{$preference.pref_currency_sign|htmlsafe}{$invoice.total|number_format:2}</u></td>
+		<td  align="right"><u>{$preference.pref_currency_sign} {$invoice.total|number_format:2}</u></td>
 	</tr>
     *}
 	<tr>
