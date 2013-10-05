@@ -412,15 +412,15 @@
 					<th>{$LANG.total}</th>
 					<th><a href="index.php?module=payments&amp;view=manage&amp;id={$invoice.id|urlencode}">{$LANG.paid}</a></th>
 					<th>{$LANG.owing}</th>
-					<th>{$LANG.age}</th>
+					<th>{$LANG.age}
+						<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_age" title="{$LANG.age}"><img src="./images/common/help-small.png" alt="" /></a>
+					</th>
 				</tr>
 				<tr>
 					<td>{$preference.pref_currency_sign} {$invoice.total|siLocal_number}</td>
 					<td>{$preference.pref_currency_sign|htmlsafe} {$invoice.paid|siLocal_number}</td>
 					<td>{$preference.pref_currency_sign|htmlsafe} {$invoice.owing|siLocal_number}</td>
-					<td>{$invoice_age|htmlsafe} 
-						<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_age" title="{$LANG.age}"><img src="./images/common/help-small.png" alt="" /></a>
-					</td>
+					<td>{$invoice_age|htmlsafe}</td>
 				</tr>
 			</table>
 		</div>
