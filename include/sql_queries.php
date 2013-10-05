@@ -2469,6 +2469,7 @@ function delete($module,$idField,$id) {
 				$s_idField = $idField;
 			}
 		} elseif ($lctable == 'products') {
+			$has_domain_id = true;
 			// Check for use of product
 			$sth = $dbh->prepare('SELECT count(*)
 				FROM '.TB_PREFIX.'invoice_items
