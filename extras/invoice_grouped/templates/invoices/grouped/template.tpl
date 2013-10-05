@@ -94,15 +94,15 @@
 
 		<tr>
 				<td class="" >{$LANG.total}: </td>
-				<td class="" align="right" colspan="3">{$preference.pref_currency_sign|htmlsafe}{$invoice.total|number_format:2}</td>
+				<td class="" align="right" colspan="3">{$preference.pref_currency_sign} {$invoice.total|number_format:2}</td>
 		</tr>
 		<tr>
 				<td class="">{$LANG.paid}:</td>
-				<td class="" align="right" colspan="3" >{$preference.pref_currency_sign|htmlsafe}{$invoice.paid|number_format:2}</td>
+				<td class="" align="right" colspan="3" >{$preference.pref_currency_sign} {$invoice.paid|number_format:2}</td>
 		</tr>
 		<tr>
 				<td nowrap class="">{$LANG.owing}:</td>
-				<td class="" align="right" colspan="3" >{$preference.pref_currency_sign|htmlsafe}{$invoice.owing|number_format:2}</td>
+				<td class="" align="right" colspan="3" >{$preference.pref_currency_sign} {$invoice.owing|number_format:2}</td>
 		</tr>
 
 	</table>
@@ -248,8 +248,8 @@
 							<tr class="" >
 								<td class="">{$invoiceItem.quantity|siLocal_number_trim}</td>
 								<td class="" colspan="3">{$invoiceItem.product.description|htmlsafe}</td>
-								<td class="" align="right">{$preference.pref_currency_sign}{$invoiceItem.unit_price|siLocal_number}</td>
-								<td class="" align="right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|siLocal_number}</td>
+								<td class="" align="right">{$preference.pref_currency_sign} {$invoiceItem.unit_price|siLocal_number}</td>
+								<td class="" align="right">{$preference.pref_currency_sign} {$invoiceItem.gross_total|siLocal_number}</td>
 							</tr>
 
 							{if $invoiceItem.description != null}
@@ -266,7 +266,7 @@
 								Subtotal:
 							</td>
 							<td align="right">
-								{$preference.pref_currency_sign|htmlsafe}{subtotal cost=$invoiceItems group=$group.name}
+								{$preference.pref_currency_sign} {subtotal cost=$invoiceItems group=$group.name}
 							</td>
 						</tr>
 						<tr>
@@ -274,7 +274,7 @@
 								Markup {markup_percentage cost=$invoiceItems group=$group.name}%{* {$group.markup|htmlsafe} *}:
 							</td>
 							<td align="right">
-								 {$preference.pref_currency_sign|htmlsafe}{markup cost=$invoiceItems group=$group.name}
+								 {$preference.pref_currency_sign} {markup cost=$invoiceItems group=$group.name}
 							</td>
 						</tr>
 						<tr>
@@ -282,7 +282,7 @@
 								Total:
 							</td>
 							<td align="right">
-								{$preference.pref_currency_sign|htmlsafe}{total cost=$invoiceItems group=$group.name}
+								{$preference.pref_currency_sign} {total cost=$invoiceItems group=$group.name}
 							</td>
 						</tr>
 						<tr>
@@ -316,7 +316,7 @@
 		<tr>
 			<td class="" colspan="2"></td>
 			<td align="right" colspan="3">{$LANG.gross_total}</td>
-			<td align="right" class="">{$preference.pref_currency_sign|htmlsafe}{$invoiceItems.0.gross_total|siLocal_number}</td>
+			<td align="right" class="">{$preference.pref_currency_sign} {$invoiceItems.0.gross_total|siLocal_number}</td>
 		</tr>
 	{/if}
 	
@@ -328,7 +328,7 @@
 		<tr class=''>
 	        <td colspan="2"></td>
 			<td colspan="3" align="right">{$invoice.tax_grouped[line].tax_name|htmlsafe}</td>
-			<td colspan="1" align="right">{$preference.pref_currency_sign|htmlsafe}{$invoice.tax_grouped[line].tax_amount|siLocal_number}</td>
+			<td colspan="1" align="right">{$preference.pref_currency_sign} {$invoice.tax_grouped[line].tax_amount|siLocal_number}</td>
 	    </tr>
 	    
 	    {/if}
@@ -338,7 +338,7 @@
 	<tr class=''>
         <td colspan="2"></td>
 		<td colspan="3" align="right">{$LANG.tax_total}</td>
-		<td colspan="1" align="right"><u>{$preference.pref_currency_sign|htmlsafe}{$invoice.total_tax|siLocal_number}</u></td>
+		<td colspan="1" align="right"><u>{$preference.pref_currency_sign} {$invoice.total_tax|siLocal_number}</u></td>
     </tr>
 *}	
 	
@@ -346,7 +346,7 @@
 		<td class="" colspan="6" ><br></td>
 	</tr>
 	<tr class="">
-		<th colspan="6" align="middle"><span class="font1 double_underline" >TOTAL {$preference.pref_currency_sign|htmlsafe}{$invoice.total|siLocal_number}</span></td>
+		<th colspan="6" align="middle"><span class="font1 double_underline" >TOTAL {$preference.pref_currency_sign} {$invoice.total|siLocal_number}</span></td>
 	</tr>
 {*
 	<tr>

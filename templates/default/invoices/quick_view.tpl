@@ -231,8 +231,8 @@
 					<tr>
 							<td class="si_quantity">{$invoiceItem.quantity|siLocal_number_trim}</td>
 							<td class="td_product" colspan="2">{$invoiceItem.product.description|htmlsafe}</td>
-							<td class="si_right">{$preference.pref_currency_sign}{$invoiceItem.unit_price|siLocal_number}</td>
-							<td class="si_right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|siLocal_number}</td>
+							<td class="si_right">{$preference.pref_currency_sign} {$invoiceItem.unit_price|siLocal_number}</td>
+							<td class="si_right">{$preference.pref_currency_sign} {$invoiceItem.gross_total|siLocal_number}</td>
 					</tr>
 					{if $invoiceItem.attribute != null}
                             <tr class="si_product_attribute">
@@ -243,7 +243,7 @@
                                     {foreach from=$invoiceItem.attribute_json key=k item=v}
                                         <td class="si_product_attribute">
                                             {if $v.type == 'decimal'}
-                                              {$v.name}: {$preference.pref_currency_sign|htmlsafe}{$v.value|siLocal_number} ;
+                                              {$v.name}: {$preference.pref_currency_sign} {$v.value|siLocal_number} ;
                                              {else}
                                                {$v.name}: {$v.value} ;
                                             {/if}
@@ -300,8 +300,8 @@
 					<tr>
 							<td class="si_quantity">{$invoiceItem.quantity|siLocal_number}</td>
 							<td class="td_product" colspan="2">{$invoiceItem.product.description|htmlsafe}</td>
-							<td class="si_right">{$preference.pref_currency_sign}{$invoiceItem.unit_price|siLocal_number}</td>
-							<td class="si_right">{$preference.pref_currency_sign}{$invoiceItem.gross_total|siLocal_number}</td>		
+							<td class="si_right">{$preference.pref_currency_sign} {$invoiceItem.unit_price|siLocal_number}</td>
+							<td class="si_right">{$preference.pref_currency_sign} {$invoiceItem.gross_total|siLocal_number}</td>		
 					</tr>
 
 					<tr  class="consulting tr_custom" >	
@@ -363,7 +363,7 @@
 		<tr class="tr_tax">
 	        <td colspan="4"></td>
 			<th>{$LANG.sub_total}</th>
-			<td class="si_right">{if $invoice_number_of_taxes > 1}<u>{/if}{$preference.pref_currency_sign|htmlsafe}{$invoice.gross|siLocal_number}{if $invoice_number_of_taxes > 1}</u>{/if}</td>
+			<td class="si_right">{if $invoice_number_of_taxes > 1}<u>{/if}{$preference.pref_currency_sign} {$invoice.gross|siLocal_number}{if $invoice_number_of_taxes > 1}</u>{/if}</td>
     	</tr>
     {/if}
 	
@@ -377,7 +377,7 @@
 		<tr class="tr_tax">
 	        <td colspan="4"></td>
 			<th>{$invoice.tax_grouped[line].tax_name|htmlsafe}</th>
-			<td class="si_right">{$preference.pref_currency_sign|htmlsafe}{$invoice.tax_grouped[line].tax_amount|siLocal_number}</td>
+			<td class="si_right">{$preference.pref_currency_sign} {$invoice.tax_grouped[line].tax_amount|siLocal_number}</td>
 	    </tr>
 	    {/if}
 	    
@@ -386,7 +386,7 @@
 		<tr class="tr_tax">
 	        <td colspan="4"></td>
 			<th>{$LANG.tax_total}</th>
-			<td class="si_right"><u>{$preference.pref_currency_sign|htmlsafe}{$invoice.total_tax|siLocal_number}</u></td>
+			<td class="si_right"><u>{$preference.pref_currency_sign} {$invoice.total_tax|siLocal_number}</u></td>
     	</tr>
     {/if}
 	{if $invoice_number_of_taxes > 1}
@@ -395,7 +395,7 @@
 		<tr class="tr_total">
 	        <td colspan="4"></td>
 			<th>{$preference.pref_inv_wording|htmlsafe} {$LANG.amount}</th>
-			<td class="si_right">{$preference.pref_currency_sign|htmlsafe}{$invoice.total|siLocal_number}</td>
+			<td class="si_right">{$preference.pref_currency_sign} {$invoice.total|siLocal_number}</td>
 	    </tr>
     {* tax section - end *}
 	</table>
@@ -418,8 +418,8 @@
 				</tr>
 				<tr>
 					<td>{$preference.pref_currency_sign} {$invoice.total|siLocal_number}</td>
-					<td>{$preference.pref_currency_sign|htmlsafe} {$invoice.paid|siLocal_number}</td>
-					<td>{$preference.pref_currency_sign|htmlsafe} {$invoice.owing|siLocal_number}</td>
+					<td>{$preference.pref_currency_sign} {$invoice.paid|siLocal_number}</td>
+					<td>{$preference.pref_currency_sign} {$invoice.owing|siLocal_number}</td>
 					<td>{$invoice_age|htmlsafe}</td>
 				</tr>
 			</table>
@@ -433,9 +433,9 @@
 					<th>{$LANG.owing}</th>
 				</tr>
 				<tr>
-					<td>{$preference.pref_currency_sign|htmlsafe} {$customerAccount.total|siLocal_number}</td>
-					<td>{$preference.pref_currency_sign|htmlsafe} {$customerAccount.paid|siLocal_number}</td>
-					<td>{$preference.pref_currency_sign|htmlsafe} {$customerAccount.owing|siLocal_number}</td>
+					<td>{$preference.pref_currency_sign} {$customerAccount.total|siLocal_number}</td>
+					<td>{$preference.pref_currency_sign} {$customerAccount.paid|siLocal_number}</td>
+					<td>{$preference.pref_currency_sign} {$customerAccount.owing|siLocal_number}</td>
 				</tr>
 			</table>
 		</div>
