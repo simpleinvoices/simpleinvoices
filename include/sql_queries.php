@@ -879,6 +879,18 @@ function getTaxes() {
 	return $taxes;
 }
 
+function getDefaultGeneric($param, $bool=true) {
+	global $LANG;
+	global $dbh;
+	global $auth_session;
+
+	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = :param AND s.domain_id = :domain_id)";
+	$sth = dbQuery($sql, ':param', $param, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+	$array = $sth->fetch();
+	$paramval = (($bool) ? ($array['value']==1?$LANG['enabled']:$LANG['disabled']) : $array['value']);
+	return $paramval;
+}
+
 function getDefaultCustomer() {
 	global $dbh;
 	global $auth_session;
@@ -925,69 +937,26 @@ function getDefaultTax() {
 }
 
 function getDefaultDelete() {
-	global $LANG;
-	global $dbh;
-	global $auth_session;
-	//domain id TODO
-	
-	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = 'delete')";
-	$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
-	$array = $sth->fetch();
-	$delete = $array['value']==1?$LANG['enabled']:$LANG['disabled'];
-	return $delete;
+	return getDefaultGeneric('delete');
 }
 
 function getDefaultLogging() {
-	global $LANG;
-	global $dbh;
-
-	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = 'logging')";
-	$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
-	$array = $sth->fetch();
-	$delete = $array['value']==1?$LANG['enabled']:$LANG['disabled'];
-	return $delete;
+	return getDefaultGeneric('logging');
 }
 
 function getDefaultInventory() {
-	global $LANG;
-	global $dbh;
-
-	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = 'inventory')";
-	$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
-	$array = $sth->fetch();
-	$delete = $array['value']==1?$LANG['enabled']:$LANG['disabled'];
-	return $delete;
+	return getDefaultGeneric('inventory');
 }
 
 function getDefaultProductAttributes() {
-	global $LANG;
-	global $dbh;
-
-	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = 'product_attributes')";
-	$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
-	$array = $sth->fetch();
-	$delete = $array['value']==1?$LANG['enabled']:$LANG['disabled'];
-	return $delete;
+	return getDefaultGeneric('product_attributes');
 }
 function getDefaultLargeDataset() {
-	global $LANG;
-	global $dbh;
-
-	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = 'large_dataset')";
-	$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
-	$array = $sth->fetch();
-	$delete = $array['value']==1?$LANG['enabled']:$LANG['disabled'];
-	return $delete;
+	return getDefaultGeneric('large_dataset');
 }
 
 function getDefaultLanguage() {
-	global $LANG;
-	global $dbh;
-
-	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = 'language')";
-	$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
-	$entry = $sth->fetch();
-	return $entry['value'];
+	return getDefaultGeneric('language', false);
 }
 
 function getInvoiceTotal($invoice_id) {
@@ -1151,7 +1120,7 @@ function getExtensionID($extension_name = "none") {
 	global $dbh;
 	global $auth_session;
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."extensions WHERE name LIKE  :extension_name AND (domain_id =  0 OR domain_id = :domain_id ) ORDER BY domain_id DESC LIMIT 1";
+	$sql = "SELECT * FROM ".TB_PREFIX."extensions WHERE name = :extension_name AND (domain_id =  0 OR domain_id = :domain_id ) ORDER BY domain_id DESC LIMIT 1";
 	$sth = dbQuery($sql,':extension_name', $extension_name, ':domain_id', $auth_session->domain_id ) or die(htmlsafe(end($dbh->errorInfo())));
 	$extension_info = $sth->fetch();
 	if (! $extension_info) { return -2; }			// -2 = no result set = extension not found
@@ -1236,18 +1205,33 @@ function getSystemDefaults() {
 
 function updateDefault($name,$value,$extension_name="core") {
 	global $auth_session;
-	
-	$sql = "UPDATE ".TB_PREFIX."system_defaults SET value =  :value WHERE name = :name"; 
+	$domain_id = $auth_session->domain_id;
 
 	$extension_id = getExtensionID($extension_name);
-	if ($extension_id >= 0) { 
-		$sql .= " AND extension_id = :extension_id"; 
-	} else { 
+	if (!($extension_id >= 0))
+	{
 		die(htmlsafe("Invalid extension name: ".$extension)); 
 	}
-	if (dbQuery($sql, ':value', $value, ':name', $name, ':extension_id', $extension_id)) { 
-		return true; 
-	}
+
+	$sql = "INSERT INTO 
+		`".TB_PREFIX."system_defaults`
+		(
+			`name`, `value`, domain_id, extension_id
+		)
+		VALUES 
+		(
+			:name, :value, :domain_id, :extension_id
+		) 
+		ON DUPLICATE KEY UPDATE
+			`value` =  :value";
+
+	if (dbQuery($sql, 
+		':value', $value, 
+		':domain_id', $domain_id, 
+		':name', $name, 
+		':extension_id', $extension_id
+		)
+	) return true; 
 	return false;
 }
 

@@ -411,6 +411,7 @@ $LANG['product'] = "Produkt";//1
 $LANG['product_description'] = "Popis produktu";//1
 $LANG['product_edit'] = "Upraviť produkt";//1
 $LANG['product_enabled'] = "Aktívny produkt";//1
+$LANG['product_description_prompt'] = "You must enter a description for the product";//0
 $LANG['product_id'] = "ID produktu";//1
 $LANG['product_sales'] = "Predaj produktov";//1
 $LANG['product_to_add'] = "Produkt na pridanie";//1
