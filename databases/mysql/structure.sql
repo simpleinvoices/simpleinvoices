@@ -263,7 +263,7 @@ CREATE TABLE IF NOT EXISTS `si_products_attributes` (
   `enabled` varchar(1) DEFAULT '1',
   `visible` varchar(1) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_products_matrix` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -271,7 +271,7 @@ CREATE TABLE IF NOT EXISTS `si_products_matrix` (
   `product_attribute_number` int(11) NOT NULL,
   `attribute_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_products_values` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -279,7 +279,7 @@ CREATE TABLE IF NOT EXISTS `si_products_values` (
   `value` varchar(255) NOT NULL,
   `enabled` varchar(1) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_sql_patchmanager` (
   `sql_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -297,6 +297,7 @@ CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `domain_id` int(5) NOT NULL DEFAULT '0',
   `extension_id` int(5) NOT NULL DEFAULT '0',
   PRIMARY KEY (`domain_id`,`id`),
+  UNIQUE KEY `UnqNameInDomain` (`domain_id`, `name`),
   KEY `name` (`name`)
 ) ENGINE=MyISAM;
 
@@ -315,9 +316,10 @@ CREATE TABLE IF NOT EXISTS `si_user` (
   `email` varchar(255) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
   `domain_id` int(11) NOT NULL DEFAULT '0',
-  `password` varchar(255) DEFAULT NULL,
+  `password` varchar(64) DEFAULT NULL,
   `enabled` int(1) NOT NULL,
-  PRIMARY KEY (`domain_id`,`id`)
+  PRIMARY KEY (`domain_id`,`id`),
+  UNIQUE KEY `UnqEMailPwd` (`email`, `password`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_user_domain` (
