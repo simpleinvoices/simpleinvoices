@@ -412,6 +412,7 @@ $LANG['product'] = "Sản phẩm";//1
 $LANG['product_description'] = "Mô tả Sản phẩm";//1
 $LANG['product_edit'] = "Sửa đổi Sản phẩm";//1
 $LANG['product_enabled'] = "Bật Sản phẩm";//1
+$LANG['product_description_prompt'] = "You must enter a description for the product";//0
 $LANG['product_id'] = "ID Sản phẩm";//1
 $LANG['product_sales'] = "Sản phẩm Bán hàng";//1
 $LANG['product_to_add'] = "Sản phẩm để thêm";//1

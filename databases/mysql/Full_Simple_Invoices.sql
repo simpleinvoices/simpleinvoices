@@ -308,7 +308,7 @@ INSERT INTO `si_products` (`id`, `domain_id`, `description`, `unit_price`, `defa
 INSERT INTO `si_products` (`id`, `domain_id`, `description`, `unit_price`, `default_tax_id`, `default_tax_id_2`, `cost`, `reorder_level`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`, `attribute`, `notes_as_description`, `show_description`) VALUES(4, 1, 'Bootleg homebrew', 15.500000, 1, 0, 0.000000, 0, '', '', '', '', '', '1', 1, '', '', '');
 INSERT INTO `si_products` (`id`, `domain_id`, `description`, `unit_price`, `default_tax_id`, `default_tax_id_2`, `cost`, `reorder_level`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `notes`, `enabled`, `visible`, `attribute`, `notes_as_description`, `show_description`) VALUES(5, 1, 'Accomodation', 125.500000, 1, 0, 0.000000, 0, '', '', '', '', '', '1', 1, '', '', '');
 
-CREATE TABLE `si_products_attribute_type` (
+CREATE TABLE IF NOT EXISTS `si_products_attribute_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
@@ -319,7 +319,7 @@ INSERT INTO `si_products_attribute_type` VALUES
 ('2','decimal'),
 ('3','free');
 
-CREATE TABLE `si_products_attributes` (
+CREATE TABLE IF NOT EXISTS `si_products_attributes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `type_id` varchar(255) NOT NULL,
@@ -332,7 +332,7 @@ INSERT INTO `si_products_attributes` VALUES
 ('1','Size',  '1','1','1'),
 ('2','Colour','1','1','1');
 
-CREATE TABLE `si_products_matrix` (
+CREATE TABLE IF NOT EXISTS `si_products_matrix` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
   `product_attribute_number` int(11) NOT NULL,
@@ -345,7 +345,7 @@ INSERT INTO `si_products_matrix` VALUES
 ('2','1','2','2'),
 ('3','2','1','2');
 
-CREATE TABLE `si_products_values` (
+CREATE TABLE IF NOT EXISTS `si_products_values` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `attribute_id` int(11) NOT NULL,
   `value` varchar(255) NOT NULL,
@@ -643,6 +643,8 @@ INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_rele
 INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_release`,`sql_statement`) VALUES (272,271,'','','');
 INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_release`,`sql_statement`) VALUES (273,272,'','','');
 INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_release`,`sql_statement`) VALUES (274,273,'','','');
+INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_release`,`sql_statement`) VALUES (275,274,'','','');
+INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_release`,`sql_statement`) VALUES (276,275,'','','');
 
 CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -651,6 +653,7 @@ CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `domain_id` int(5) NOT NULL DEFAULT '0',
   `extension_id` int(5) NOT NULL DEFAULT '0',
   PRIMARY KEY (`domain_id`,`id`),
+  UNIQUE KEY `UnqNameInDomain` (`domain_id`, `name`),
   KEY `name` (`name`)
 ) ENGINE=MyISAM;
 
@@ -703,9 +706,10 @@ CREATE TABLE IF NOT EXISTS `si_user` (
   `email` varchar(255) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
   `domain_id` int(11) NOT NULL DEFAULT '0',
-  `password` varchar(255) DEFAULT NULL,
+  `password` varchar(64) DEFAULT NULL,
   `enabled` int(1) NOT NULL,
-  PRIMARY KEY (`domain_id`,`id`)
+  PRIMARY KEY (`domain_id`,`id`),
+  UNIQUE KEY `UnqEMailPwd` (`email`, `password`)
 ) ENGINE=MyISAM;
 
 INSERT INTO `si_user` (`id`, `email`, `role_id`, `domain_id`, `password`, `enabled`) VALUES(1, 'demo@simpleinvoices.org', 1, 1, 'fe01ce2a7fbac8fafaed7c982a04e229', 1);

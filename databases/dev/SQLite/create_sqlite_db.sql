@@ -748,7 +748,7 @@ CREATE TABLE IF NOT EXISTS "si_users" (
   "user_name" varchar(255) NOT NULL,
   "user_role_id" int(11) NOT NULL default '1',
   "user_domain_id" int(11) NOT NULL default '1',
-  "user_password" varchar(255) NOT NULL
+  "user_password" varchar(64) NOT NULL
 )  ;
 
 

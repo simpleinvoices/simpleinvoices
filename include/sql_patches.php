@@ -1590,6 +1590,14 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['273']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` ADD INDEX(`invoice_id`);";
     $patch['273']['date'] = "20130927";
 
+    $patch['274']['name'] = "Only One Default Variable name per domain allowed - add unique index";
+    $patch['274']['patch'] = "ALTER TABLE `".TB_PREFIX."system_defaults` ADD UNIQUE INDEX `UnqNameInDomain` (`domain_id`, `name`);";
+    $patch['274']['date'] = "20131007";
+
+    $patch['275']['name'] = "Make EMail / Password pair unique per domain - add unique index";
+    $patch['275']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `password` `password` VARCHAR(64) NULL, ADD UNIQUE INDEX `UnqEMailPwd` (`email`, `password`);";
+    $patch['275']['date'] = "20131007";
+
 /*
 /*
 ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );

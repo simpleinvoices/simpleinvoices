@@ -370,6 +370,7 @@ $LANG['product'] = "Produkt";//1
 $LANG['product_description'] = "Produktbeskrivelse";//1
 $LANG['product_edit'] = "Rediger produkt";//1
 $LANG['product_enabled'] = "Produkt aktivert";//1
+$LANG['product_description_prompt'] = "You must enter a description for the product";//0
 $LANG['product_id'] = "Produkt ID";//1
 $LANG['product_sales'] = "Produktsalg";//1
 $LANG['product_to_add'] = "Produkt å legge til";//1

@@ -323,6 +323,7 @@ $LANG['product'] = "Tuote";//1
 $LANG['product_description'] = "Tuotteen kuvaus";//1
 $LANG['product_edit'] = "Muokkaa tuotetta";//1
 $LANG['product_enabled'] = "Tuotteen myynti";//1
+$LANG['product_description_prompt'] = "You must enter a description for the product";//0
 $LANG['product_id'] = "Tuotenumero";//1
 $LANG['product_sales'] = "Tuotteen myyntiluvut";//1
 $LANG['product_to_add'] = "Lisättävä tuote";//1
