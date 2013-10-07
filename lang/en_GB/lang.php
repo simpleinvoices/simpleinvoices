@@ -421,6 +421,7 @@ $LANG['product_attributes'] = "Product Attributes";//1
 $LANG['product_description'] = "Product Description";//1
 $LANG['product_edit'] = "Edit Product";//1
 $LANG['product_enabled'] = "Product Enabled";//1
+$LANG['product_description_prompt'] = "You must enter a description for the product";//1
 $LANG['product_id'] = "Product ID";//1
 $LANG['product_sales'] = "Product Sales";//1
 $LANG['product_to_add'] = "Product to add";//1

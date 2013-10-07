@@ -358,6 +358,7 @@ $LANG['product'] = "Produkt";//1
 $LANG['product_description'] = "Produkt Beskrivning";//1
 $LANG['product_edit'] = "Redigera Produkt";//1
 $LANG['product_enabled'] = "Produkt Aktiverad";//1
+$LANG['product_description_prompt'] = "You must enter a description for the product";//0
 $LANG['product_id'] = "Produkt ID";//1
 $LANG['product_sales'] = "Produkt Försäljning";//1
 $LANG['product_to_add'] = "Produkt som skall läggas till";//1
