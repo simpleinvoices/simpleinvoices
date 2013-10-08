@@ -103,7 +103,8 @@
             <h2>{$LANG.need_help}</h2>
             <a href="">{$LANG.help_si_help} &gt;</a><br />
             <a href="http://www.simpleinvoices.org/forum">{$LANG.help_community_forums} &gt;</a><br />
-            <a href="http://www.simpleinvoices.org/blog">{$LANG.help_blog} &gt;</a>
+            <a href="http://www.simpleinvoices.org/blog">{$LANG.help_blog} &gt;</a><br />
+            <a href="https://groups.google.com/forum/#!forum/simpleinvoices">{$LANG.help_mailing_list} &gt;</a>
         </div>
 
         <h2>{$LANG.start_working}</h2>
