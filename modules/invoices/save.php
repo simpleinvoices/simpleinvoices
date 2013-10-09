@@ -90,11 +90,12 @@ if ($_POST['action'] == "insert" ) {
 
 	if($type == total_invoice && $saved) {
 		$logger->log('Total style invoice updated, product ID: '.$_POST['products0'], Zend_Log::INFO);
-		$sql = "UPDATE ".TB_PREFIX."products SET unit_price = :price, description = :description WHERE id = :id";
+		$sql = "UPDATE ".TB_PREFIX."products SET unit_price = :price, description = :description WHERE id = :id AND domain_id = :domain_id";
 		dbQuery($sql,
 			':price', $_POST['unit_price'],
 			':description', $_POST['description0'],
-			':id', $_POST['products0']
+			':id', $_POST['products0'],
+			':domain_id', $auth_session->domain_id
 			);
 	}
 

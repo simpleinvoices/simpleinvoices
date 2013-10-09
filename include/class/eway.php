@@ -69,7 +69,7 @@ class eway
         //Eway only accepts amount in cents - so times 100
 		$value = $this->invoice['total']*100;
 		$eway_invoice_total = htmlsafe(trim($value));
-        $logger->log("eway totla: " . $eway_invoice_total, Zend_Log::INFO);
+        $logger->log("eway total: " . $eway_invoice_total, Zend_Log::INFO);
 
         $enc = new encryption();
         $key = $config->encryption->default->key;	

@@ -127,12 +127,14 @@ CREATE TABLE IF NOT EXISTS `si_invoice_item_tax` (
   `tax_type` varchar(1) NOT NULL,
   `tax_rate` decimal(25,6) NOT NULL,
   `tax_amount` decimal(25,6) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UnqInvTax` (`invoice_item_id`, `tax_id`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_invoice_items` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `invoice_id` int(10) NOT NULL DEFAULT '0',
+  `domain_id` int(11) NOT NULL DEFAULT '1',
   `quantity` decimal(25,6) NOT NULL DEFAULT '0.000000',
   `product_id` int(10) DEFAULT '0',
   `unit_price` decimal(25,6) DEFAULT '0.000000',
@@ -142,7 +144,8 @@ CREATE TABLE IF NOT EXISTS `si_invoice_items` (
   `total` decimal(25,6) DEFAULT '0.000000',
   `attribute` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `invoice_id` (`invoice_id`)
+  KEY `invoice_id` (`invoice_id`),
+  KEY `DomainInv` (`invoice_id`, `domain_id`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_invoice_type` (
@@ -262,14 +265,6 @@ CREATE TABLE IF NOT EXISTS `si_products_attributes` (
   `type_id` varchar(255) NOT NULL,
   `enabled` varchar(1) DEFAULT '1',
   `visible` varchar(1) DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
-
-CREATE TABLE IF NOT EXISTS `si_products_matrix` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `product_id` int(11) NOT NULL,
-  `product_attribute_number` int(11) NOT NULL,
-  `attribute_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM;
 

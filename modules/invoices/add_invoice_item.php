@@ -17,7 +17,7 @@ if(isset($_POST['submit'])) {
 		$_POST['quantity1'],
 		$_POST['product1'],
 		$_POST['tax_id'],
-		$_POST['description'],
+		trim($_POST['description']),
 		$_POST['unit_price1']
 	);
 }

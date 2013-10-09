@@ -4,7 +4,7 @@
 if($_GET['id'])
 {
 	//sleep(2);
-	$sql = sprintf("SELECT cost FROM ".TB_PREFIX."products WHERE id = %d LIMIT 1", $_GET['id']);
+	$sql = sprintf("SELECT cost FROM ".TB_PREFIX."products WHERE id = %d AND domain_id = %d LIMIT 1", $_GET['id'], $auth_session->domain_id);
 	$states = dbQuery($sql);
 //	$output = '';
 	if($states->rowCount() > 0)
