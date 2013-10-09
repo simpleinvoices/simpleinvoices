@@ -10,19 +10,21 @@ if ($_POST['value'] != "" ) {
 #get the invoice id
 $id = $_GET['id'];
 
-$sql = "select * from ".TB_PREFIX."products_values where id = $id";
+$sql = "SELECT * FROM ".TB_PREFIX."products_values WHERE id = $id";
 $sth =  dbQuery($sql);
 $product_value = $sth->fetch();
 $smarty -> assign("product_value", $product_value);
 
-$sql_attr_sel = "select * from ".TB_PREFIX."products_attributes where id = ".$product_value['id'];
+$sql_attr_sel = "SELECT * FROM ".TB_PREFIX."products_attributes WHERE id = ".$product_value['id'];
 $sth_attr_sel =  dbQuery($sql_attr_sel);
 $product_attribute = $sth_attr_sel->fetch();
 $smarty -> assign("product_attribute", $product_attribute['name']);
 
 
-$pageActive = "options";
+$pageActive = "product_value_manage";
 $smarty->assign('pageActive', $pageActive);
+$smarty -> assign('active_tab', '#product');
+
 $smarty->assign('preference',$preference);
 
 $sql_attr = "select * from ".TB_PREFIX."products_attributes";
