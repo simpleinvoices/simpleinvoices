@@ -200,22 +200,24 @@ function lastInsertId() {
 
 function _invoice_check_fk($biller, $customer, $type, $preference) {
 	global $dbh;
+	global $auth_session;
+	$domain_id = $auth_session->domain_id;
 
 	//Check biller
-	$sth = $dbh->prepare('SELECT count(id) FROM '.TB_PREFIX.'biller WHERE id = :id');
-	$sth->execute(array(':id' => $biller));
+	$sth = $dbh->prepare('SELECT count(id) FROM '.TB_PREFIX.'biller WHERE id = :id AND domain_id = :domain_id');
+	$sth->execute(array(':id' => $biller, ':domain_id' => $domain_id));
 	if ($sth->fetchColumn() == 0) { return false; }
 	//Check customer
-	$sth = $dbh->prepare('SELECT count(id) FROM '.TB_PREFIX.'customers WHERE id = :id');
-	$sth->execute(array(':id' => $customer));
+	$sth = $dbh->prepare('SELECT count(id) FROM '.TB_PREFIX.'customers WHERE id = :id AND domain_id = :domain_id');
+	$sth->execute(array(':id' => $customer, ':domain_id' => $domain_id));
 	if ($sth->fetchColumn() == 0) { return false; }
 	//Check invoice type
 	$sth = $dbh->prepare('SELECT count(inv_ty_id) FROM '.TB_PREFIX.'invoice_type WHERE inv_ty_id = :id');
 	$sth->execute(array(':id' => $type));
 	if ($sth->fetchColumn() == 0) { return false; }
 	//Check preferences
-	$sth = $dbh->prepare('SELECT count(pref_id) FROM '.TB_PREFIX.'preferences WHERE pref_id = :id');
-	$sth->execute(array(':id' => $preference));
+	$sth = $dbh->prepare('SELECT count(pref_id) FROM '.TB_PREFIX.'preferences WHERE pref_id = :id AND domain_id = :domain_id');
+	$sth->execute(array(':id' => $preference, ':domain_id' => $domain_id));
 	if ($sth->fetchColumn() == 0) { return false; }
 	
 	//All good
@@ -233,17 +235,17 @@ function _invoice_items_check_fk($invoice, $product, $tax, $update) {
 
 	//Check invoice
 	if (is_null($update) || !is_null($invoice)) {
-		$sth = $dbh->prepare('SELECT count(id) FROM '.TB_PREFIX.'invoices WHERE id = :id');
-		$sth->execute(array(':id' => $invoice));
+		$sth = $dbh->prepare('SELECT count(id) FROM '.TB_PREFIX.'invoices WHERE id = :id AND domain_id = :domain_id');
+		$sth->execute(array(':id' => $invoice, ':domain_id' => $domain_id));
 		if ($sth->fetchColumn() == 0) { return false; }
 	}
 	//Check product
-	$sth = $dbh->prepare('SELECT count(id) FROM '.TB_PREFIX.'products WHERE id = :id');
-	$sth->execute(array(':id' => $product));
+	$sth = $dbh->prepare('SELECT count(id) FROM '.TB_PREFIX.'products WHERE id = :id AND domain_id = :domain_id');
+	$sth->execute(array(':id' => $product, ':domain_id' => $domain_id));
 	if ($sth->fetchColumn() == 0) { return false; }
 	//Check tax id
-	$sth = $dbh->prepare('SELECT count(tax_id) FROM '.TB_PREFIX.'tax WHERE tax_id = :id');
-	$sth->execute(array(':id' => $tax));
+	$sth = $dbh->prepare('SELECT count(tax_id) FROM '.TB_PREFIX.'tax WHERE tax_id = :id AND domain_id = :domain_id');
+	$sth->execute(array(':id' => $tax, ':domain_id' => $domain_id));
 	if ($sth->fetchColumn() == 0) { return false; }
 
 	//All good
@@ -327,7 +329,7 @@ function getActiveTaxes() {
 	if ($db_server == 'pgsql') {
 		$sql = "SELECT * FROM ".TB_PREFIX."tax WHERE tax_enabled ORDER BY tax_description";
 	}
-	$sth = dbQuery($sql, ':domain_id',$auth_session->domain_id ) or die(htmlsafe(end($dbh->errorInfo())));
+	$sth = dbQuery($sql, ':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 	
 	$taxes = null;
 	
@@ -449,59 +451,83 @@ function getPaymentType($id) {
 function getPayment($id) {
 	global $config;
 	global $dbh;
+	global $auth_session;
 
-	$sql = "SELECT ap.*, c.id as customer_id, c.name AS customer, b.id as biller_id, b.name AS biller FROM ".TB_PREFIX."payment ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b WHERE ap.ac_inv_id = iv.id AND iv.customer_id = c.id AND iv.biller_id = b.id AND ap.id = :id";
+	$sql = "SELECT 
+		ap.*, 
+		c.id as customer_id, 
+		c.name AS customer, 
+		b.id as biller_id, 
+		b.name AS biller 
+	FROM ".TB_PREFIX."payment ap, 
+		 ".TB_PREFIX."invoices iv, 
+		 ".TB_PREFIX."customers c, 
+		 ".TB_PREFIX."biller b 
+	WHERE 
+		ap.ac_inv_id = iv.id 
+	AND iv.customer_id = c.id 
+	AND iv.biller_id = b.id 
+	AND ap.id = :id
+	AND ap.domain_id = :domain_id";
 
-	$sth = dbQuery($sql, ':id', $id) or die(htmlsafe(end($dbh->errorInfo())));
+	$sth = dbQuery($sql, ':id', $id, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 	$payment = $sth->fetch();
 	$payment['date'] = siLocal::date($payment['ac_date']);
 	return $payment;
 }
 
 function getInvoicePayments($id) {
+	global $auth_session;
+
 	$sql = "SELECT 
 				ap.*, 
-				c.name as cname,
-				b.name as bname 
-			from 
+				c.name AS cname,
+				b.name AS bname 
+			FROM 
 				".TB_PREFIX."payment ap,
 				".TB_PREFIX."invoices iv,
 				".TB_PREFIX."customers c,
 				".TB_PREFIX."biller b
-			where 
-				ap.ac_inv_id = iv.id 
-				and 
-				iv.customer_id = c.id 
-				and 
-				iv.biller_id = b.id 
-				and 
+			WHERE 
 				ap.ac_inv_id = :id 
+			AND ap.domain_id = :domain_id 
+			AND ap.ac_inv_id = iv.id 
+			AND iv.domain_id = ap.domain_id
+			AND iv.customer_id = c.id
+			AND c.domain_id = iv.domain_id
+			AND iv.biller_id = b.id 
+			AND b.domain_id = iv.domain_id
 			ORDER BY 
 				ap.id DESC";
-	return dbQuery($sql, ':id', $id);
+
+	return dbQuery($sql, ':id', $id, ':domain_id', $auth_session->domain_id);
 }
 
 function getCustomerPayments($id) {
+	global $auth_session;
+
 	$sql = "SELECT 
 				ap.*, 
-				c.name as cname, 
-				b.name as bname 
-			from 
+				c.name AS cname, 
+				b.name AS bname 
+			FROM 
 				".TB_PREFIX."payment ap, 
 				".TB_PREFIX."invoices iv, 
 				".TB_PREFIX."customers c, 
 				".TB_PREFIX."biller b 
-			where 
-				ap.ac_inv_id = iv.id 
-				and 
-				iv.customer_id = c.id 
-				and 
-				iv.biller_id = b.id 
-				and 
+			WHERE 
 				c.id = :id 
+			AND ap.domain_id = :domain_id 
+			AND ap.ac_inv_id = iv.id 
+			AND iv.domain_id = ap.domain_id
+			AND iv.customer_id = c.id 
+			AND c.domain_id = iv.domain_id
+			AND iv.biller_id = b.id 
+			AND b.domain_id = iv.domain_id
 			ORDER BY 
 				ap.id DESC";
-	return dbQuery($sql, ':id', $id);
+
+	return dbQuery($sql, ':id', $id, ':domain_id', $auth_session->domain_id);
 }
 
 function getPayments() {
@@ -509,22 +535,23 @@ function getPayments() {
 	
 	$sql = "SELECT 
 				ap.*, 
-				c.name as cname, 
-				b.name as bname 
-			from 
+				c.name AS cname, 
+				b.name AS bname 
+			FROM 
 				".TB_PREFIX."payment ap, 
 				".TB_PREFIX."invoices iv, 
 				".TB_PREFIX."customers c, 
 				".TB_PREFIX."biller b 
 			WHERE 
-				ap.ac_inv_id = iv.id 
-				AND 
-				iv.customer_id = c.id 
-				and 
-				iv.biller_id = b.id 
-				and 
-				ap.domain_id = :domain_id
-			ORDER BY ap.id DESC";
+				ap.domain_id = :domain_id 
+			AND ap.ac_inv_id = iv.id 
+			AND iv.domain_id = ap.domain_id
+			AND iv.customer_id = c.id 
+			AND c.domain_id = iv.domain_id
+			AND iv.biller_id = b.id 
+			AND b.domain_id = iv.domain_id
+			ORDER BY
+				ap.id DESC";
 	
 	return dbQuery($sql,':domain_id',$auth_session->domain_id);
 }
@@ -761,7 +788,9 @@ function insertProduct($enabled=1,$visible=1) {
 
 
 function updateProduct() {
-	
+
+	global $auth_session;
+
     //select all attribts
     $sql = "select * from ".TB_PREFIX."products_attributes";
     $sth =  dbQuery($sql);
@@ -796,9 +825,11 @@ function updateProduct() {
                 notes_as_description = :notes_as_description,
                 show_description = :show_description
 			WHERE
-				id = :id";
+				id = :id
+			AND domain_id = :domain_id";
 
 	return dbQuery($sql,
+		':domain_id',$auth_session->domain_id, 
 		':description', $_POST[description],
 		':enabled', $_POST['enabled'],
 		':notes', $_POST[notes],
@@ -961,9 +992,10 @@ function getDefaultLanguage() {
 
 function getInvoiceTotal($invoice_id) {
 	global $LANG;
-	
-	$sql ="SELECT SUM(total) AS total FROM ".TB_PREFIX."invoice_items WHERE invoice_id =  :invoice_id";
-	$sth = dbQuery($sql, ':invoice_id', $invoice_id);
+	global $auth_session;
+
+	$sql ="SELECT SUM(total) AS total FROM ".TB_PREFIX."invoice_items WHERE invoice_id =  :invoice_id AND domain_id = :domain_id";
+	$sth = dbQuery($sql, ':invoice_id', $invoice_id,':domain_id', $auth_session->domain_id);
 	$res = $sth->fetch();
 	//echo "TOTAL".$res['total'];
 	return $res['total'];
@@ -980,11 +1012,12 @@ function getInvoice($id) {
 	global $dbh;
 	global $config;
 	global $auth_session; 
+	$domain_id = $auth_session->domain_id;
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE id =  :id and domain_id =  :domain_id";
+	$sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE id =  :id AND domain_id =  :domain_id";
 	//echo $sql;
 	
-	$sth  = dbQuery($sql, ':id', $id, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+	$sth  = dbQuery($sql, ':id', $id, ':domain_id', $domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 
 	//print_r($query);
 	$invoice = $sth->fetch();
@@ -1001,8 +1034,8 @@ function getInvoice($id) {
 
 	
 	#invoice total tax
-	$sql ="SELECT SUM(tax_amount) AS total_tax, SUM(total) AS total FROM ".TB_PREFIX."invoice_items WHERE invoice_id =  :id";
-	$sth = dbQuery($sql, ':id', $id) or die(htmlsafe(end($dbh->errorInfo())));
+	$sql ="SELECT SUM(tax_amount) AS total_tax, SUM(total) AS total FROM ".TB_PREFIX."invoice_items WHERE invoice_id =  :id AND domain_id =  :domain_id";
+	$sth = dbQuery($sql, ':id', $id, ':domain_id', $domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 	$result = $sth->fetch();
 	//$invoice['total'] = number_format($result['total'],2);
 	$invoice['total_tax'] = $result['total_tax'];
@@ -1019,21 +1052,23 @@ Purpose: to show a nice summary of total $ for tax for an invoice
 */
 function numberOfTaxesForInvoice($invoice_id)
 {
-	$sql = "select 
+	global $auth_session;
+
+	$sql = "SELECT 
 				DISTINCT tax.tax_id
-			from 
+			FROM 
 				".TB_PREFIX."invoice_item_tax item_tax, 
 				".TB_PREFIX."invoice_items item, 
 				".TB_PREFIX."tax tax 
-			where 
+			WHERE 
 				item.id = item_tax.invoice_item_id 
-				AND 
-				tax.tax_id = item_tax.tax_id 
-				AND 
-				item.invoice_id = :invoice_id
-				GROUP BY 
+			AND tax.tax_id = item_tax.tax_id 
+			AND tax.domain_id = item.domain_id
+			AND item.invoice_id = :invoice_id
+			AND tax.domain_id = :domain_id
+			GROUP BY 
 				tax.tax_id;";
-	$sth = dbQuery($sql, ':invoice_id', $invoice_id) or die(htmlsafe(end($dbh->errorInfo())));
+	$sth = dbQuery($sql, ':invoice_id', $invoice_id, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 	$result = $sth->rowCount();
 
 	return $result;
@@ -1046,24 +1081,26 @@ Purpose: to show a nice summary of total $ for tax for an invoice
 */
 function taxesGroupedForInvoice($invoice_id)
 {
-	$sql = "select 
+	global $auth_session;
+
+	$sql = "SELECT 
 				tax.tax_description as tax_name, 
-				sum(item_tax.tax_amount) as tax_amount,
+				SUM(item_tax.tax_amount) as tax_amount,
 				item_tax.tax_rate as tax_rate,
 				count(*) as count
-			from 
+			FROM 
 				".TB_PREFIX."invoice_item_tax item_tax, 
 				".TB_PREFIX."invoice_items item, 
 				".TB_PREFIX."tax tax 
-			where 
+			WHERE 
 				item.id = item_tax.invoice_item_id 
-				AND 
-				tax.tax_id = item_tax.tax_id 
-				AND 
-				item.invoice_id = :invoice_id
-				GROUP BY 
+			AND tax.tax_id = item_tax.tax_id 
+			AND tax.domain_id = item.domain_id
+			AND item.invoice_id = :invoice_id
+			AND tax.domain_id = :domain_id
+			GROUP BY 
 				tax.tax_id;";
-	$sth = dbQuery($sql, ':invoice_id', $invoice_id) or die(htmlsafe(end($dbh->errorInfo())));
+	$sth = dbQuery($sql, ':invoice_id', $invoice_id, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 	$result = $sth->fetchAll();
 
 	return $result;
@@ -1076,6 +1113,8 @@ Purpose: to show a nice summary of total $ for tax for an invoice item - used fo
 */
 function taxesGroupedForInvoiceItem($invoice_item_id)
 {
+	global $auth_session; 
+
 	$sql = "select 
 				item_tax.id as row_id, 
 				tax.tax_description as tax_name, 
@@ -1085,11 +1124,11 @@ function taxesGroupedForInvoiceItem($invoice_item_id)
 				".TB_PREFIX."tax tax 
 			where 
 				item_tax.invoice_item_id = :invoice_item_id 
-				AND 
-				tax.tax_id = item_tax.tax_id 
-				ORDER BY 
+			AND tax.tax_id = item_tax.tax_id 
+			AND tax.domain_id = :domain_id
+			ORDER BY 
 				row_id ASC;";
-	$sth = dbQuery($sql, ':invoice_item_id', $invoice_item_id) or die(htmlsafe(end($dbh->errorInfo())));
+	$sth = dbQuery($sql, ':invoice_item_id', $invoice_item_id, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 	$result = $sth->fetchAll();
 
 	return $result;
@@ -1620,8 +1659,8 @@ function getCustomerInvoices($id) {
 		i.index_id, 
 		i.date, 
 		i.type_id, 
-		(SELECT sum( COALESCE(ii.total, 0)) FROM " . TB_PREFIX . "invoice_items ii where ii.invoice_id = i.id) As invd,
-		(SELECT sum( COALESCE(ap.ac_amount, 0)) FROM " . TB_PREFIX . "payment ap where ap.ac_inv_id = i.id) As pmt,
+		(SELECT SUM( COALESCE(ii.total, 0))     FROM " . TB_PREFIX . "invoice_items ii WHERE ii.invoice_id = i.id AND ii.domain_id = i.domain_id) AS invd,
+		(SELECT SUM( COALESCE(ap.ac_amount, 0)) FROM " . TB_PREFIX . "payment ap       WHERE ap.ac_inv_id = i.id  AND ap.domain_id = i.domain_id) AS pmt,
 		(SELECT COALESCE(invd, 0)) As total, 
 		(SELECT COALESCE(pmt, 0)) As paid, 
 		(select (total - paid)) as owing 
@@ -1712,11 +1751,11 @@ function getTopDebtor() {
   #Largest debtor query - start
   
 	$sql = "SELECT	
-	        	c.id as \"CID\",
-	        	c.name as \"Customer\",
-	        	sum(ii.total) as \"Total\",
-	        	(select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."payment ap INNER JOIN ".TB_PREFIX."invoices iv2 ON (ap.ac_inv_id = iv2.id) where iv2.customer_id = c.id) as \"Paid\",
-	        	sum(ii.total) - (select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."payment ap INNER JOIN ".TB_PREFIX."invoices iv2 ON (ap.ac_inv_id = iv2.id) where iv2.customer_id = c.id) as \"Owing\"
+			c.id AS \"CID\",
+	        c.name AS \"Customer\",
+       		SUM(ii.total) AS \"Total\",
+	        (SELECT COALESCE(SUM(ap.ac_amount), 0) FROM ".TB_PREFIX."payment ap INNER JOIN ".TB_PREFIX."invoices iv2 ON (ap.ac_inv_id = iv2.id AND ap.domain_id = iv2.domain_id) WHERE iv2.customer_id = c.id AND iv2.domain_id = c.domain_id) AS \"Paid\",
+	        SUM(ii.total) - (SELECT COALESCE(SUM(ap.ac_amount), 0) FROM ".TB_PREFIX."payment ap INNER JOIN ".TB_PREFIX."invoices iv2 ON (ap.ac_inv_id = iv2.id AND ap.domain_id = iv2.domain_id) WHERE iv2.customer_id = c.id AND iv2.domain_id = c.domain_id) AS \"Owing\"
 	FROM
 	        ".TB_PREFIX."customers c INNER JOIN
 		".TB_PREFIX."invoices iv ON (c.id = iv.customer_id) INNER JOIN
@@ -1750,16 +1789,15 @@ function getTopCustomer() {
   #Top customer query - start
   
 	$sql2 = "SELECT
-			c.id as \"CID\",
-	        	c.name as \"Customer\",
-       			sum(ii.total) as \"Total\",
-	        	(select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."payment ap INNER JOIN ".TB_PREFIX."invoices iv2 ON (ap.ac_inv_id = iv2.id) where iv2.customer_id = c.id) as \"Paid\",
-	        	sum(ii.total) - (select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."payment ap INNER JOIN ".TB_PREFIX."invoices iv2 ON (ap.ac_inv_id = iv2.id) where iv2.customer_id = c.id) as \"Owing\"
-
+			c.id AS \"CID\",
+	        c.name AS \"Customer\",
+       		SUM(ii.total) AS \"Total\",
+	        (SELECT COALESCE(SUM(ap.ac_amount), 0) FROM ".TB_PREFIX."payment ap INNER JOIN ".TB_PREFIX."invoices iv2 ON (ap.ac_inv_id = iv2.id AND ap.domain_id = iv2.domain_id) WHERE iv2.customer_id = c.id AND iv2.domain_id = c.domain_id) AS \"Paid\",
+	        SUM(ii.total) - (SELECT COALESCE(SUM(ap.ac_amount), 0) FROM ".TB_PREFIX."payment ap INNER JOIN ".TB_PREFIX."invoices iv2 ON (ap.ac_inv_id = iv2.id AND ap.domain_id = iv2.domain_id) WHERE iv2.customer_id = c.id AND iv2.domain_id = c.domain_id) AS \"Owing\"
 	FROM
-       		".TB_PREFIX."customers c INNER JOIN
-		".TB_PREFIX."invoices iv ON (c.id = iv.customer_id) INNER JOIN
-		".TB_PREFIX."invoice_items ii ON (iv.id = ii.invoice_id)
+       	".TB_PREFIX."customers c INNER JOIN
+		".TB_PREFIX."invoices iv ON (c.id = iv.customer_id AND iv.domain_id = c.domain_id) INNER JOIN
+		".TB_PREFIX."invoice_items ii ON (iv.id = ii.invoice_id AND iv.domain_id = ii.domain_id)
 	WHERE
 		c.domain_id = :domain_id
 	GROUP BY
@@ -1844,8 +1882,7 @@ function updateTaxRate() {
 				tax_enabled = :enabled
 			WHERE
 				tax_id = :id
-			AND
-				domain_id = :domain_id
+			AND domain_id = :domain_id
 			";
 
 	$display_block = $LANG['save_tax_rate_success'];
@@ -1967,7 +2004,7 @@ function insertInvoice($type) {
 		':type', 			$type,
 		':preference_id',	$_POST[preference_id],
 		':date', 			$clean_date,
-		':note', 			$_POST[note],
+		':note', 			trim($_POST[note]),
 		':customField1',	$_POST[customField1],
 		':customField2',	$_POST[customField2],
 		':customField3',	$_POST[customField3],
@@ -2026,7 +2063,7 @@ function updateInvoice($invoice_id) {
 		':customer_id', $_POST['customer_id'],
 		':preference_id', $_POST['preference_id'],
 		':date', $_POST['date'],
-		':note', $_POST['note'],
+		':note', trim($_POST['note']),
 		':customField1', $_POST['customField1'],
 		':customField2', $_POST['customField2'],
 		':customField3', $_POST['customField3'],
@@ -2039,6 +2076,8 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 
 	global $logger;
 	global $LANG;
+	global $auth_session;
+
     //do taxes
 
     $attr = array();
@@ -2081,6 +2120,7 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 	$sql = "INSERT INTO ".TB_PREFIX."invoice_items 
 			(
 				invoice_id, 
+				domain_id, 
 				quantity, 
 				product_id, 
 				unit_price, 
@@ -2093,6 +2133,7 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 			VALUES 
 			(
 				:invoice_id, 
+				:domain_id,
 				:quantity, 
 				:product_id, 
 				:unit_price, 
@@ -2106,6 +2147,7 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 	//echo $sql;
 	dbQuery($sql,
 		':invoice_id', $invoice_id,
+		':domain_id', $auth_session->domain_id,
 		':quantity', $quantity,
 		':product_id', $product_id,
 		':unit_price', $unit_price,
@@ -2113,16 +2155,16 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 	//	':tax_percentage', $tax[tax_percentage],
 		':tax_amount', $tax_total,
 		':gross_total', $gross_total,
-		':description', $description,
+		':description', trim($description),
         ':total', $total,
         ':attribute',json_encode($attr)
 		);
-	
-	invoice_item_tax(lastInsertId(),$line_item_tax_id,$unit_price,$quantity,"insert");
 
+	invoice_item_tax(lastInsertId(),$line_item_tax_id,$unit_price,$quantity,"insert");
 	//TODO fix this
 	return true;
 }
+
 /*
 Function: getTaxesPerLineItem
 Purpose: get the total tax for the line item
@@ -2130,6 +2172,8 @@ Purpose: get the total tax for the line item
 function getTaxesPerLineItem($line_item_tax_id,$quantity, $unit_price)
 {
 	global $logger;
+
+	$tax_total = 0;
 
 	foreach($line_item_tax_id as $key => $value) 
 	{
@@ -2226,9 +2270,9 @@ function invoice_item_tax($invoice_item_id,$line_item_tax_id,$unit_price,$quanti
 
 			dbQuery($sql,
 				':invoice_item_id', $invoice_item_id,
-				':tax_id', $tax[tax_id],
-				':tax_type', $tax[type],
-				':tax_rate', $tax[tax_percentage],
+				':tax_id', $tax['tax_id'],
+				':tax_type', $tax['type'],
+				':tax_rate', $tax['tax_percentage'],
 				':tax_amount', $tax_amount
 				);
 		}
@@ -2240,6 +2284,8 @@ function updateInvoiceItem($id,$quantity,$product_id,$line_number,$line_item_tax
 
 	global $logger;
 	global $LANG;
+	global $auth_session;
+
 	//$product = getProduct($product_id);
 	//$tax = getTaxRate($tax_id);
 	
@@ -2287,7 +2333,7 @@ function updateInvoiceItem($id,$quantity,$product_id,$line_number,$line_item_tax
 	description = :description,
 	total = :total,			
 	attribute = :attribute			
-	WHERE id = :id";
+	WHERE id = :id AND domain_id = :domain_id";
 	
 	//echo $sql;
 		
@@ -2300,7 +2346,8 @@ function updateInvoiceItem($id,$quantity,$product_id,$line_number,$line_item_tax
 		':description', $description,
 		':total', $total,
         ':attribute',json_encode($attr),
-		':id', $id
+		':id', $id,
+		':domain_id', $auth_session->domain_id
 		);
 
 	//if from a new invoice item in the edit page user lastInsertId()
@@ -2521,11 +2568,13 @@ function delete($module,$idField,$id) {
 
 function maxInvoice() {
 
-	global $LANG;	
+	global $LANG;
+	global $auth_session;
+	$domain_id = $auth_session->domain_id;
 	
-	$sql = "SELECT max(id) as maxId FROM ".TB_PREFIX."invoices";
+	$sql = "SELECT max(id) as maxId FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id";
 
-	$sth = dbQuery($sql);
+	$sth = dbQuery($sql, ':domain_id', $domain_id);
 	return $sth->fetch();
 	
 //while ($Array_max = mysql_fetch_array($result_max) ) {

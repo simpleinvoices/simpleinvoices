@@ -49,7 +49,7 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 	$qtype = $_POST['qtype'];
 	
 	$where = "  WHERE c.domain_id = :domain_id";
-	if ($query) $where = " WHERE c.domain_id = :domain_id AND $qtype LIKE '%$query%' ";
+	if ($query) $where .= " AND $qtype LIKE '%$query%' ";
 	
 	
 	/*Check that the sort field is OK*/
@@ -71,17 +71,17 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 				            coalesce(sum(ii.total),  0) AS total 
 				        FROM
 				            ".TB_PREFIX."invoice_items ii INNER JOIN
-				            ".TB_PREFIX."invoices iv ON (iv.id = ii.invoice_id)
+				            ".TB_PREFIX."invoices iv ON (iv.id = ii.invoice_id iv.domain_id = ii.domain_id)
 				        WHERE  
-				            iv.customer_id  = CID ) as customer_total,
+				            iv.customer_id  = CID AND iv.domain_id = c.domain_id ) as customer_total,
 	                (
 	                    SELECT 
 	                        coalesce(sum(ap.ac_amount), 0) AS amount 
 	                    FROM
 	                        ".TB_PREFIX."payment ap INNER JOIN
-	                        ".TB_PREFIX."invoices iv ON (iv.id = ap.ac_inv_id)
+	                        ".TB_PREFIX."invoices iv ON (iv.id = ap.ac_inv_id iv.domain_id = ap.domain_id)
 	                    WHERE 
-	                        iv.customer_id = CID) AS paid,
+	                        iv.customer_id = CID AND iv.domain_id = c.domain_id ) AS paid,
 	                ( select customer_total - paid ) AS owing
 	
 				FROM 

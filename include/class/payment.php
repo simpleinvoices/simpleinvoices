@@ -9,6 +9,12 @@ class payment
     public $online_payment_id;
     public $domain_id;
 
+	public function __construct()
+	{
+        global $auth_session;
+		$this->domain_id = $auth_session->domain_id;
+	}
+
     public function count()
     {
         global $auth_session;
@@ -88,7 +94,7 @@ class payment
         global $db;
         global $auth_session;
 
-        $domain_id = domain_id::get($this->domain_id);
+        $domain_id = $auth_session->domain_id;
         
         $sql = "INSERT INTO ".TB_PREFIX."payment (
             ac_inv_id,

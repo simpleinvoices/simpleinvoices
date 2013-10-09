@@ -153,10 +153,11 @@ function get_custom_field_name($field) {
 function calc_invoice_paid($inv_idField) {
 	global $LANG;
 	global $dbh;
+	global $auth_session;
 
 	#amount paid calc - start
-	$x1 = "SELECT coalesce(sum(ac_amount), 0) AS amount FROM ".TB_PREFIX."payment WHERE ac_inv_id = :inv_id";
-	$sth = dbQuery($x1, ':inv_id', $inv_idField) or die(end($dbh->errorInfo()));
+	$x1 = "SELECT COALESCE(SUM(ac_amount), 0) AS amount FROM ".TB_PREFIX."payment WHERE ac_inv_id = :inv_id AND domain_id = :domain_id";
+	$sth = dbQuery($x1, ':inv_id', $inv_idField, ':domain_id',$auth_session->domain_id) or die(end($dbh->errorInfo()));
 	while ($result_x1Array = $sth->fetch()) {
 		$invoice_paid_Field = $result_x1Array['amount'];
 		$invoice_paid_Field_format = number_format($result_x1Array['amount'],2);
@@ -169,17 +170,18 @@ function calc_invoice_paid($inv_idField) {
 function calc_customer_total($customer_id) {
 	global $LANG;
 	global $dbh;
+	global $auth_session;
 	
     $sql ="SELECT
-		coalesce(sum(ii.total),  0) AS total 
+		COALESCE(SUM(ii.total),  0) AS total 
 	FROM
 		".TB_PREFIX."invoice_items ii INNER JOIN
-		".TB_PREFIX."invoices iv ON (iv.id = ii.invoice_id)
+		".TB_PREFIX."invoices iv ON (iv.id = ii.invoice_id AND iv.domain_id = ii.domain_id)
 	WHERE  
 		iv.customer_id  = :customer
-	";
+	AND ii.domain_id = :domain_id";
 	
-    $sth = dbQuery($sql, ':customer', $customer_id) or die(end($dbh->errorInfo()));
+    $sth = dbQuery($sql, ':customer', $customer_id, ':domain_id',$auth_session->domain_id) or die(end($dbh->errorInfo()));
 	$invoice = $sth->fetch();
 
 	//return number_format($invoice['total'],"#########.##");
@@ -188,16 +190,19 @@ function calc_customer_total($customer_id) {
 
 function calc_customer_paid($customer_id) {
 	global $LANG;
+	global $auth_session;
 		
 #amount paid calc - start
 	$sql = "
-	SELECT coalesce(sum(ap.ac_amount), 0) AS amount 
+	SELECT COALESCE(SUM(ap.ac_amount), 0) AS amount 
 	FROM
 		".TB_PREFIX."payment ap INNER JOIN
-		".TB_PREFIX."invoices iv ON (iv.id = ap.ac_inv_id)
-	WHERE iv.customer_id = :customer";
+		".TB_PREFIX."invoices iv ON (iv.id = ap.ac_inv_id AND iv.domain_id = ap.domain_id)
+	WHERE 
+		iv.customer_id = :customer
+	AND ap.domain_id = :domain_id";
 	
-	$sth = dbQuery($sql, ':customer', $customer_id);
+	$sth = dbQuery($sql, ':customer', $customer_id, ':domain_id',$auth_session->domain_id);
 	$invoice = $sth->fetch();
 
 	return $invoice['amount'];
@@ -215,10 +220,11 @@ function calc_customer_paid($customer_id) {
 **/
 function calc_invoice_tax($invoice_id) {
 	global $LANG;
+	global $auth_session;
 		
 	#invoice total tax
-	$sql ="SELECT SUM(tax_amount) AS total_tax FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :invoice_id";
-	$sth = dbQuery($sql, ':invoice_id', $invoice_id);
+	$sql ="SELECT SUM(tax_amount) AS total_tax FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :invoice_id AND domain_id = :domain_id";
+	$sth = dbQuery($sql, ':invoice_id', $invoice_id, ':domain_id',$auth_session->domain_id);
 
 	$tax = $sth->fetch();
 

@@ -38,7 +38,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 	/*SQL Limit - end*/
 
 	$where = "";
-	if ($query) $where = " AND $qtype LIKE '%$query%' ";
+	if ($query) $where .= " AND $qtype LIKE '%$query%' ";
 
 
 	/*Check that the sort field is OK*/
@@ -66,27 +66,26 @@ function sql($type='', $dir, $sort, $rp, $page )
 					pt.pt_description AS description,
 					ac_notes AS notes,
 					DATE_FORMAT(ac_date,'%Y-%m-%d') AS date
-			from 
+			FROM 
 				".TB_PREFIX."payment ap,
 				".TB_PREFIX."invoices iv,
 				".TB_PREFIX."customers c,
 				".TB_PREFIX."preferences p,
 				".TB_PREFIX."biller b ,
 				".TB_PREFIX."payment_types pt 
-			where 
-				ap.ac_inv_id = iv.id 
-				and 
-				iv.customer_id = c.id 
-				and 
-				iv.biller_id = b.id 
-				and
-				ap.ac_payment_type = pt.pt_id 
-				and 
+			WHERE 
 				ap.ac_inv_id = :invoice_id
-				and 
-				ap.domain_id = :domain_id
-				and 
-				iv.preference_id = p.pref_id
+			AND ap.domain_id = :domain_id
+			AND ap.ac_inv_id = iv.id 
+			AND iv.domain_id = ap.domain_id
+			AND iv.customer_id = c.id 
+			AND c.domain_id = iv.domain_id
+			AND iv.biller_id = b.id 
+			AND b.domain_id = iv.domain_id
+			AND iv.preference_id = p.pref_id
+			AND p.domain_id = ap.domain_id
+			AND ap.ac_payment_type = pt.pt_id 
+			AND pt.domain_id = ap.domain_id
 				$where
 			ORDER BY 
 				$sort $dir 
@@ -109,30 +108,31 @@ function sql($type='', $dir, $sort, $rp, $page )
 					pt.pt_description AS description,
 					ac_notes AS notes,
 					DATE_FORMAT(ac_date,'%Y-%m-%d') AS date
-				from 
-					".TB_PREFIX."payment ap, 
-					".TB_PREFIX."invoices iv, 
-					".TB_PREFIX."customers c, 
-					".TB_PREFIX."preferences p,
-					".TB_PREFIX."biller b  ,
-					".TB_PREFIX."payment_types pt 
-				where 
-					ap.ac_inv_id = iv.id 
-					and 
-					iv.customer_id = c.id 
-					and 
-					iv.biller_id = b.id 
-					and
-					ap.ac_payment_type = pt.pt_id 
-					and 
-					c.id = :id 
-					and 
-					iv.preference_id = p.pref_id
-				ORDER BY 
+			FROM 
+				".TB_PREFIX."payment ap, 
+				".TB_PREFIX."invoices iv, 
+				".TB_PREFIX."customers c, 
+				".TB_PREFIX."preferences p,
+				".TB_PREFIX."biller b  ,
+				".TB_PREFIX."payment_types pt 
+			WHERE 
+				c.id = :id 
+			AND ap.domain_id = :domain_id
+			AND ap.ac_inv_id = iv.id 
+			AND iv.domain_id = ap.domain_id
+			AND iv.customer_id = c.id 
+			AND c.domain_id = iv.domain_id
+			AND iv.biller_id = b.id 
+			AND b.domain_id = iv.domain_id
+			AND iv.preference_id = p.pref_id
+			AND p.domain_id = ap.domain_id
+			AND ap.ac_payment_type = pt.pt_id 
+			AND pt.domain_id = ap.domain_id
+			ORDER BY 
 				$sort $dir  
 				$limit";
 
-		$result = dbQuery($sql, ':id', $id) or die(htmlsafe(end($dbh->errorInfo())));
+		$result = dbQuery($sql, ':id', $id,':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 		
 	}
 	#if you want to show all invoices - no filters
@@ -147,30 +147,29 @@ function sql($type='', $dir, $sort, $rp, $page )
 					ac_notes AS notes,
 					(SELECT CONCAT(p.pref_inv_wording,' ',iv.index_id)) as index_name,
 					DATE_FORMAT(ac_date,'%Y-%m-%d') AS date
-				FROM 
-					".TB_PREFIX."payment ap, 
-					".TB_PREFIX."invoices iv, 
-					".TB_PREFIX."customers c, 
-					".TB_PREFIX."biller b ,
-					".TB_PREFIX."preferences p,
-					".TB_PREFIX."payment_types pt 
-				WHERE 
-					ap.ac_inv_id = iv.id 
-					AND 
-						iv.customer_id = c.id 
-					AND 
-						iv.biller_id = b.id 
-					AND
-						ap.ac_payment_type = pt.pt_id 
-					AND
-						ap.domain_id = :domain_id
-					and 
-					iv.preference_id = p.pref_id
-					$where
-				ORDER BY 
-					$sort $dir 
-				$limit
-					";
+			FROM 
+				".TB_PREFIX."payment ap, 
+				".TB_PREFIX."invoices iv, 
+				".TB_PREFIX."customers c, 
+				".TB_PREFIX."biller b ,
+				".TB_PREFIX."preferences p,
+				".TB_PREFIX."payment_types pt 
+			WHERE 
+				ap.domain_id = :domain_id
+			AND ap.ac_inv_id = iv.id 
+			AND iv.domain_id = ap.domain_id
+			AND iv.customer_id = c.id 
+			AND c.domain_id = iv.domain_id
+			AND iv.biller_id = b.id 
+			AND b.domain_id = iv.domain_id
+			AND iv.preference_id = p.pref_id
+			AND p.domain_id = ap.domain_id
+			AND ap.ac_payment_type = pt.pt_id 
+			AND pt.domain_id = ap.domain_id
+				$where
+			ORDER BY 
+				$sort $dir 
+				$limit";
 					
 		$result =  dbQuery($sql,':domain_id', $auth_session->domain_id) or die(end($dbh->errorInfo()));
 	}

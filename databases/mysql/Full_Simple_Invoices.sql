@@ -153,7 +153,8 @@ CREATE TABLE IF NOT EXISTS `si_invoice_item_tax` (
   `tax_type` varchar(1) NOT NULL,
   `tax_rate` decimal(25,6) NOT NULL,
   `tax_amount` decimal(25,6) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UnqInvTax` (`invoice_item_id`, `tax_id`)
 ) ENGINE=MyISAM;
 
 INSERT INTO `si_invoice_item_tax` (`id`, `invoice_item_id`, `tax_id`, `tax_type`, `tax_rate`, `tax_amount`) VALUES(1, 1, 3, '%', 10.000000, 12.500000);
@@ -165,6 +166,7 @@ INSERT INTO `si_invoice_item_tax` (`id`, `invoice_item_id`, `tax_id`, `tax_type`
 CREATE TABLE IF NOT EXISTS `si_invoice_items` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `invoice_id` int(10) NOT NULL DEFAULT '0',
+  `domain_id` int(11) NOT NULL DEFAULT '1',
   `quantity` decimal(25,6) NOT NULL DEFAULT '0.000000',
   `product_id` int(10) DEFAULT '0',
   `unit_price` decimal(25,6) DEFAULT '0.000000',
@@ -174,14 +176,15 @@ CREATE TABLE IF NOT EXISTS `si_invoice_items` (
   `total` decimal(25,6) DEFAULT '0.000000',
   `attribute` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `invoice_id` (`invoice_id`)
+  KEY `invoice_id` (`invoice_id`),
+  KEY `DomainInv` (`invoice_id`, `domain_id`)
 ) ENGINE=MyISAM;
 
-INSERT INTO `si_invoice_items` (`id`, `invoice_id`, `quantity`, `product_id`, `unit_price`, `tax_amount`, `gross_total`, `description`, `total`) VALUES(1, 1, 1.000000, 5, 125.000000, 12.500000, 125.000000, '', 137.500000);
-INSERT INTO `si_invoice_items` (`id`, `invoice_id`, `quantity`, `product_id`, `unit_price`, `tax_amount`, `gross_total`, `description`, `total`) VALUES(2, 1, 1.000000, 3, 125.000000, 12.500000, 125.000000, '', 137.500000);
-INSERT INTO `si_invoice_items` (`id`, `invoice_id`, `quantity`, `product_id`, `unit_price`, `tax_amount`, `gross_total`, `description`, `total`) VALUES(3, 1, 1.000000, 2, 140.000000, 0.000000, 140.000000, '', 140.000000);
-INSERT INTO `si_invoice_items` (`id`, `invoice_id`, `quantity`, `product_id`, `unit_price`, `tax_amount`, `gross_total`, `description`, `total`) VALUES(4, 1, 1.000000, 2, 140.000000, 14.000000, 140.000000, '', 154.000000);
-INSERT INTO `si_invoice_items` (`id`, `invoice_id`, `quantity`, `product_id`, `unit_price`, `tax_amount`, `gross_total`, `description`, `total`) VALUES(5, 1, 1.000000, 1, 150.000000, 0.000000, 150.000000, '', 150.000000);
+INSERT INTO `si_invoice_items` (`id`, `invoice_id`, `domain_id`, `quantity`, `product_id`, `unit_price`, `tax_amount`, `gross_total`, `description`, `total`) VALUES(1, 1, 1, 1.000000, 5, 125.000000, 12.500000, 125.000000, '', 137.500000);
+INSERT INTO `si_invoice_items` (`id`, `invoice_id`, `domain_id`, `quantity`, `product_id`, `unit_price`, `tax_amount`, `gross_total`, `description`, `total`) VALUES(2, 1, 1, 1.000000, 3, 125.000000, 12.500000, 125.000000, '', 137.500000);
+INSERT INTO `si_invoice_items` (`id`, `invoice_id`, `domain_id`, `quantity`, `product_id`, `unit_price`, `tax_amount`, `gross_total`, `description`, `total`) VALUES(3, 1, 1, 1.000000, 2, 140.000000, 0.000000, 140.000000, '', 140.000000);
+INSERT INTO `si_invoice_items` (`id`, `invoice_id`, `domain_id`, `quantity`, `product_id`, `unit_price`, `tax_amount`, `gross_total`, `description`, `total`) VALUES(4, 1, 1, 1.000000, 2, 140.000000, 14.000000, 140.000000, '', 154.000000);
+INSERT INTO `si_invoice_items` (`id`, `invoice_id`, `domain_id`, `quantity`, `product_id`, `unit_price`, `tax_amount`, `gross_total`, `description`, `total`) VALUES(5, 1, 1, 1.000000, 1, 150.000000, 0.000000, 150.000000, '', 150.000000);
 
 CREATE TABLE IF NOT EXISTS `si_invoice_type` (
   `inv_ty_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -331,19 +334,6 @@ CREATE TABLE IF NOT EXISTS `si_products_attributes` (
 INSERT INTO `si_products_attributes` VALUES
 ('1','Size',  '1','1','1'),
 ('2','Colour','1','1','1');
-
-CREATE TABLE IF NOT EXISTS `si_products_matrix` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `product_id` int(11) NOT NULL,
-  `product_attribute_number` int(11) NOT NULL,
-  `attribute_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
-
-INSERT INTO `si_products_matrix` VALUES
-('1','1','1','1'),
-('2','1','2','2'),
-('3','2','1','2');
 
 CREATE TABLE IF NOT EXISTS `si_products_values` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -645,6 +635,10 @@ INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_rele
 INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_release`,`sql_statement`) VALUES (274,273,'','','');
 INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_release`,`sql_statement`) VALUES (275,274,'','','');
 INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_release`,`sql_statement`) VALUES (276,275,'','','');
+INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_release`,`sql_statement`) VALUES (277,276,'','','');
+INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_release`,`sql_statement`) VALUES (278,277,'','','');
+INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_release`,`sql_statement`) VALUES (279,278,'','','');
+INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_release`,`sql_statement`) VALUES (280,279,'','','');
 
 CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
