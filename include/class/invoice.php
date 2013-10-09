@@ -57,7 +57,7 @@ class invoice {
 		$pref_group=getPreference($this->preference_id);
 
 		$sth= dbQuery($sql,
-			':index_id', index::next('invoice',$pref_group[index_group],$this->biller_id),
+			':index_id', index::next('invoice',$pref_group['index_group'],$this->biller_id),
 			':domain_id', $auth_session->domain_id,
 			':biller_id', $this->biller_id,
 			':customer_id', $this->customer_id,
@@ -83,9 +83,12 @@ class invoice {
 
 	public function insert_item()
 	{	
+		global $auth_session;
+
 		$sql = "INSERT INTO ".TB_PREFIX."invoice_items 
 				(
 					invoice_id, 
+					domain_id, 
 					quantity, 
 					product_id, 
 					unit_price, 
@@ -97,6 +100,7 @@ class invoice {
 				VALUES 
 				(
 					:invoice_id, 
+					:domain_id, 
 					:quantity, 
 					:product_id, 
 					:unit_price, 
@@ -109,6 +113,7 @@ class invoice {
 		//echo $sql;
 		dbQuery($sql,
 			':invoice_id', $this->invoice_id,
+			':domain_id', $auth_session->domain_id,
 			':quantity', $this->quantity,
 			':product_id', $this->product_id,
 			':unit_price', $this->unit_price,
@@ -130,6 +135,7 @@ class invoice {
 		global $logger;
 		global $db;
 	    global $auth_session;
+		$domain_id = $auth_session->domain_id;
 
 		$sql = "SELECT 
                     i.*,
@@ -146,7 +152,7 @@ class invoice {
                     i.preference_id = p.pref_id
                     and 
                     i.id = :id";
-		$sth = $db->query($sql, ':id', $id, ':domain_id', $auth_session->domain_id);
+		$sth = $db->query($sql, ':id', $id, ':domain_id', $domain_id);
 
         $invoice = $sth->fetch();
 
@@ -160,8 +166,8 @@ class invoice {
 	$invoice['invoice_items'] = invoice::getInvoiceItems($id);
 
 	#invoice total tax
-	$sql2 ="SELECT SUM(tax_amount) AS total_tax, SUM(total) AS total FROM ".TB_PREFIX."invoice_items WHERE invoice_id =  :id";
-	$sth2 = dbQuery($sql2, ':id', $id) or die(htmlsafe(end($dbh->errorInfo())));
+	$sql2 ="SELECT SUM(tax_amount) AS total_tax, SUM(total) AS total FROM ".TB_PREFIX."invoice_items WHERE invoice_id =  :id AND domain_id = :domain_id";
+	$sth2 = dbQuery($sql2, ':id', $id, ':domain_id', $domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 	$result2 = $sth2->fetch();
 	//$invoice['total'] = number_format($result['total'],2);
 	$invoice['total_tax'] = $result2['total_tax'];
@@ -235,9 +241,9 @@ class invoice {
         $qtype = $this->qtype;
 
         $where = " WHERE iv.domain_id = :domain_id ";
-        if ($query) $where = " WHERE iv.domain_id = :domain_id AND $qtype LIKE '%$query%' ";
-        if ($this->biller) $where .= " AND b.id = '$this->biller' ";
-        if ($this->customer) $where .= " AND c.id = '$this->customer' ";
+        if ($query)             $where .= " AND $qtype LIKE '%$query%' ";
+        if ($this->biller)      $where .= " AND b.id = '$this->biller' ";
+        if ($this->customer)    $where .= " AND c.id = '$this->customer' ";
         if ($this->where_field) $where .= " AND $this->where_field = '$this->where_value' ";
         /*SQL where - end*/
 	
@@ -339,11 +345,11 @@ class invoice {
                      p.pref_inv_wording AS invoice_wording
                 FROM
                      " . TB_PREFIX . "invoices iv
-                     LEFT JOIN " . TB_PREFIX . "payment ap ON ap.ac_inv_id = iv.id
+                     LEFT JOIN " . TB_PREFIX . "payment ap       ON ap.ac_inv_id = iv.id
                      LEFT JOIN " . TB_PREFIX . "invoice_items ii ON ii.invoice_id = iv.id
-                     LEFT JOIN " . TB_PREFIX . "biller b ON b.id = iv.biller_id
-                     LEFT JOIN " . TB_PREFIX . "customers c ON c.id = iv.customer_id
-                     LEFT JOIN " . TB_PREFIX . "preferences p ON p.pref_id = iv.preference_id
+                     LEFT JOIN " . TB_PREFIX . "biller b         ON b.id = iv.biller_id
+                     LEFT JOIN " . TB_PREFIX . "customers c      ON c.id = iv.customer_id
+                     LEFT JOIN " . TB_PREFIX . "preferences p    ON p.pref_id = iv.preference_id
                 $where
                 GROUP BY
                     iv.id, b.name, c.name, date, age, aging, type
@@ -363,9 +369,9 @@ class invoice {
 
 
                 $sql .="(SELECT coalesce(SUM(ii.total), 0) FROM " .
-                TB_PREFIX . "invoice_items ii WHERE ii.invoice_id = iv.id) AS invoice_total,
+                TB_PREFIX . "invoice_items ii WHERE ii.invoice_id = iv.id AND ii.domain_id = :domain_id) AS invoice_total,
                        (SELECT coalesce(SUM(ac_amount), 0) FROM " .
-                TB_PREFIX . "payment ap WHERE ap.ac_inv_id = iv.id) AS INV_PAID,
+                TB_PREFIX . "payment ap WHERE ap.ac_inv_id = iv.id AND ap.domain_id = :domain_id) AS INV_PAID,
                        (SELECT invoice_total - INV_PAID) As owing,
                        ";
 
@@ -391,9 +397,9 @@ class invoice {
                        pf.status AS status,
                        (SELECT CONCAT(pf.pref_inv_wording,' ',iv.index_id)) as index_name
                 FROM   " . TB_PREFIX . "invoices iv
-                               LEFT JOIN " . TB_PREFIX . "biller b ON b.id = iv.biller_id
-                               LEFT JOIN " . TB_PREFIX . "customers c ON c.id = iv.customer_id
-                               LEFT JOIN " . TB_PREFIX . "preferences pf ON pf.pref_id = iv.preference_id
+                               LEFT JOIN " . TB_PREFIX . "biller b       ON (b.id = iv.biller_id           AND b.domain_id  = iv.domain_id)
+                               LEFT JOIN " . TB_PREFIX . "customers c    ON (c.id = iv.customer_id         AND c.domain_id  = iv.domain_id)
+                               LEFT JOIN " . TB_PREFIX . "preferences pf ON (pf.pref_id = iv.preference_id AND pf.domain_id = iv.domain_id)
                 $where
                 GROUP BY
                     iv.id
@@ -417,7 +423,7 @@ class invoice {
             $where = "and date between '$this->start_date' and '$this->end_date'";
         }
 
-		$sql = "SELECT i.*, p.pref_description as preference FROM ".TB_PREFIX."invoices i,".TB_PREFIX."preferences p  WHERE i.domain_id = :domain_id and i.preference_id = p.pref_id  order by i.id";
+		$sql = "SELECT i.*, p.pref_description as preference FROM ".TB_PREFIX."invoices i LEFT JOIN ".TB_PREFIX."preferences p  ON (i.preference_id = p.pref_id AND i.domain_id = p.domain_id) WHERE i.domain_id = :domain_id ORDER BY i.id";
 		$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 
         return $sth->fetchAll();
@@ -427,18 +433,20 @@ class invoice {
 	public static function getInvoiceItems($id) {
 	
 		global $logger;
-		$sql = "SELECT * FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :id order by id";
-		$sth = dbQuery($sql, ':id', $id);
+		global $auth_session;
+		
+		$sql = "SELECT * FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :id AND domain_id = :domain_id ORDER BY id";
+		$sth = dbQuery($sql, ':id', $id, ':domain_id', $auth_session->domain_id);
 		
 		$invoiceItems = null;
 		
 		for($i=0;$invoiceItem = $sth->fetch();$i++) {
 		
-			$invoiceItem['quantity'] = $invoiceItem['quantity'];
-			$invoiceItem['unit_price'] = $invoiceItem['unit_price'];
-			$invoiceItem['tax_amount'] = $invoiceItem['tax_amount'];
-			$invoiceItem['gross_total'] = $invoiceItem['gross_total'];
-			$invoiceItem['total'] = $invoiceItem['total'];
+//			$invoiceItem['quantity'] = $invoiceItem['quantity'];
+//			$invoiceItem['unit_price'] = $invoiceItem['unit_price'];
+//			$invoiceItem['tax_amount'] = $invoiceItem['tax_amount'];
+//			$invoiceItem['gross_total'] = $invoiceItem['gross_total'];
+//			$invoiceItem['total'] = $invoiceItem['total'];
 			$invoiceItem['attribute_decode'] = json_decode($invoiceItem['attribute'],true);
 			foreach ($invoiceItem['attribute_decode'] as $key => $value)
 			{
@@ -448,8 +456,8 @@ class invoice {
 				$invoiceItem['attribute_json'][$key]['visible'] = product_attributes::getVisible($key);
 			}
 			
-			$sql = "SELECT * FROM ".TB_PREFIX."products WHERE id = :id";
-			$tth = dbQuery($sql, ':id', $invoiceItem['product_id']) or die(htmlsafe(end($dbh->errorInfo())));
+			$sql = "SELECT * FROM ".TB_PREFIX."products WHERE id = :id AND domain_id = :domain_id";
+			$tth = dbQuery($sql, ':id', $invoiceItem['product_id'], ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 			$invoiceItem['product'] = $tth->fetch();	
 
 			$tax = taxesGroupedForInvoiceItem($invoiceItem['id']);
@@ -489,9 +497,10 @@ class invoice {
     **/
     public static function getInvoiceGross($invoice_id) {
         global $LANG;
+		global $auth_session;
         
-        $sql ="SELECT SUM(gross_total) AS gross_total FROM ".TB_PREFIX."invoice_items WHERE invoice_id =  :invoice_id";
-        $sth = dbQuery($sql, ':invoice_id', $invoice_id);
+        $sql ="SELECT SUM(gross_total) AS gross_total FROM ".TB_PREFIX."invoice_items WHERE invoice_id =  :invoice_id AND domain_id = :domain_id";
+        $sth = dbQuery($sql, ':invoice_id', $invoice_id, ':domain_id', $auth_session->domain_id);
         $res = $sth->fetch();
         //echo "TOTAL".$res['total'];
         return $res['gross_total'];

@@ -206,6 +206,7 @@
             {
 				"id":"1",
 				"invoice_id":"1",
+				"domain_id":"1",
 				"quantity":"1",
 				"product_id":"5",
 				"unit_price":"125",
@@ -217,6 +218,7 @@
 			{
 				"id":"2",
 				"invoice_id":"1",
+				"domain_id":"1",
 				"quantity":"1",
 				"product_id":"3",
 				"unit_price":"125",
@@ -228,6 +230,7 @@
 			{
 				"id":"3",
 				"invoice_id":"1",
+				"domain_id":"1",
 				"quantity":"1",
 				"product_id":"2",
 				"unit_price":"140",
@@ -239,6 +242,7 @@
 			{
 				"id":"4",
 				"invoice_id":"1",
+				"domain_id":"1",
 				"quantity":"1",
 				"product_id":"2",
 				"unit_price":"140",
@@ -250,6 +254,7 @@
 			{
 				"id":"5",
 				"invoice_id":"1",
+				"domain_id":"1",
 				"quantity":"1",
 				"product_id":"1",
 				"unit_price":"150",
