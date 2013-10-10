@@ -14,11 +14,11 @@
 checkLogin();
 
 function firstOfMonth() {
-return date("Y-m-d", strtotime('01-'.date('m').'-'.date('Y').' 00:00:00'));
+	return date("Y-m-d", strtotime('01-'.date('m').'-'.date('Y').' 00:00:00'));
 }
 
 function lastOfMonth() {
-return date("Y-m-d", strtotime('-1 second',strtotime('+1 month',strtotime('01-'.date('m').'-'.date('Y').' 00:00:00'))));
+	return date("Y-m-d", strtotime('-1 second',strtotime('+1 month',strtotime('01-'.date('m').'-'.date('Y').' 00:00:00'))));
 }
 
 
@@ -39,8 +39,8 @@ foreach($invoices as $k=>$v)
 {
 
     //get list of all products
-    $sql = "select distinct(product_id) from ".TB_PREFIX."invoice_items where invoice_id = :id";
-    $sth = $db->query($sql, ':id',$v['id']);
+    $sql = "SELECT DISTINCT(product_id) FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :id AND domain_id = :domain_id";
+    $sth = $db->query($sql, ':id',$v['id'], ':domain_id', $auth_session->domain_id);
         
     $products = $sth->fetchAll();
     $invoice_total_cost = "0";
@@ -51,13 +51,13 @@ foreach($invoices as $k=>$v)
         $cost="";
         $product_total_cost="";
 
-        $sqlp="select sum(quantity) from ".TB_PREFIX."invoice_items where product_id = :product_id and invoice_id = :invoice_id";
-        $sthp = $db->query($sqlp, ':product_id',$pv['product_id'], ':invoice_id',$v['id']);
+        $sqlp="SELECT SUM(quantity) FROM ".TB_PREFIX."invoice_items WHERE product_id = :product_id and invoice_id = :invoice_id AND domain_id = :domain_id";
+        $sthp = $db->query($sqlp, ':product_id',$pv['product_id'], ':invoice_id',$v['id'], ':domain_id', $auth_session->domain_id);
         $quantity = $sthp->fetchColumn();
 
         #$sqlc="select (SELECT sum(cost) / sum(quantity)) as avg_cost  from si_inventory where product_id = :product_id";
-        $sqlc="select (SELECT (sum(cost * quantity) / sum(quantity)  )) as avg_cost  from ".TB_PREFIX."inventory where product_id = :product_id;";
-        $sthp = $db->query($sqlc, ':product_id',$pv['product_id']);
+        $sqlc="select (SELECT (SUM(cost * quantity) / SUM(quantity))) AS avg_cost FROM ".TB_PREFIX."inventory WHERE product_id = :product_id AND domain_id = :domain_id";
+        $sthp = $db->query($sqlc, ':product_id',$pv['product_id'], ':domain_id', $auth_session->domain_id);
         $cost = $sthp->fetchColumn();
 
         $product_total_cost = $quantity * $cost;

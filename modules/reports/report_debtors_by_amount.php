@@ -26,22 +26,34 @@ ORDER BY
 ";
    } else {
       $sql = "SELECT
-        i.id,
-        i.index_id AS index_id,
-        (select name from " . TB_PREFIX . "biller b where b.id = i.biller_id) as biller,
-        (select name from " . TB_PREFIX . "customers c where c.id = i.customer_id) as customer,
-        (select sum(coalesce(ii.total, 0)) from " . TB_PREFIX . "invoice_items ii WHERE ii.invoice_id = i.id) as inv_total,
-        (select sum(coalesce(ap.ac_amount, 0)) from " . TB_PREFIX . "payment ap where  ap.ac_inv_id = i.id ) as inv_paid,
-        (select coalesce(INV_TOTAL,0) - coalesce(INV_PAID,0)) as inv_owing ,
-        date
-FROM
-        " . TB_PREFIX . "invoices i
-ORDER BY
+      iv.id, 
+      iv.index_id,
+      b.name AS biller, 
+      c.name AS customer, 
+      SUM(COALESCE(ii.total, 0)) AS inv_total,
+      COALESCE(ap.inv_paid, 0) AS inv_paid,
+      SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0) AS inv_owing,
+      `date`
+	FROM
+        ".TB_PREFIX."invoices iv  
+        LEFT JOIN ".TB_PREFIX."invoice_items ii ON (ii.invoice_id    = iv.id      AND ii.domain_id = iv.domain_id)  
+        LEFT JOIN ".TB_PREFIX."biller b         ON (iv.biller_id     =  b.id      AND  b.domain_id = iv.domain_id)
+        LEFT JOIN ".TB_PREFIX."customers c      ON (iv.customer_id   =  c.id      AND  c.domain_id = iv.domain_id)
+        LEFT JOIN (
+	    SELECT ac_inv_id, domain_id, SUM(COALESCE(ac_amount, 0)) AS inv_paid 
+			FROM ".TB_PREFIX."payment 
+			GROUP BY ac_inv_id, domain_id
+	) ap ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
+	WHERE
+		iv.domain_id = :domain_id
+	GROUP BY
+		iv.id
+	ORDER BY
         inv_owing DESC;
 ";
    }
 
-  $invoice_results = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
+  $invoice_results = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 
   $total_owed = 0;
   $invoices = array();

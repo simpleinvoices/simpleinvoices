@@ -53,7 +53,7 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 	
 	
 	/*Check that the sort field is OK*/
-	$validFields = array('CID', 'name', 'customer_total','owing','enabled');
+	$validFields = array('CID', 'name', 'customer_total', 'paid', 'owing', 'enabled');
 	
 	if (in_array($sort, $validFields)) {
 		$sort = $sort;
@@ -63,30 +63,23 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 	
 		//$sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY $sort $dir LIMIT $start, $limit";
 		$sql = "SELECT 
-					c.id as CID, 
-					c.name as name, 
-					(SELECT (CASE  WHEN c.enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled,
-					(
-						SELECT
-				            coalesce(sum(ii.total),  0) AS total 
-				        FROM
-				            ".TB_PREFIX."invoice_items ii INNER JOIN
-				            ".TB_PREFIX."invoices iv ON (iv.id = ii.invoice_id iv.domain_id = ii.domain_id)
-				        WHERE  
-				            iv.customer_id  = CID AND iv.domain_id = c.domain_id ) as customer_total,
-	                (
-	                    SELECT 
-	                        coalesce(sum(ap.ac_amount), 0) AS amount 
-	                    FROM
-	                        ".TB_PREFIX."payment ap INNER JOIN
-	                        ".TB_PREFIX."invoices iv ON (iv.id = ap.ac_inv_id iv.domain_id = ap.domain_id)
-	                    WHERE 
-	                        iv.customer_id = CID AND iv.domain_id = c.domain_id ) AS paid,
-	                ( select customer_total - paid ) AS owing
-	
+					c.id as CID 
+					, c.name as name 
+					, (SELECT (CASE  WHEN c.enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
+					, SUM(COALESCE(ii.total,  0)) AS customer_total
+					, COALESCE(ap.amount,0) AS paid
+					, (SUM(COALESCE(ii.total,  0)) - COALESCE(ap.amount,0)) AS owing
 				FROM 
 					".TB_PREFIX."customers c  
+					LEFT JOIN ".TB_PREFIX."invoices iv ON (c.id = iv.customer_id AND iv.domain_id = c.domain_id)
+					LEFT JOIN ".TB_PREFIX."invoice_items ii ON (iv.id = ii.invoice_id AND iv.domain_id = ii.domain_id)
+					LEFT JOIN (SELECT iv3.customer_id, p.domain_id, SUM(COALESCE(p.ac_amount, 0)) AS amount 
+							FROM ".TB_PREFIX."payment p INNER JOIN si_invoices iv3 
+						ON (iv3.id = p.ac_inv_id AND iv3.domain_id = p.domain_id)
+							GROUP BY iv3.customer_id, p.domain_id
+						) ap ON (ap.customer_id = c.id AND ap.domain_id = c.domain_id)
 				$where
+				GROUP BY CID
 				ORDER BY 
 					$sort $dir 
 				$limit";
@@ -116,6 +109,7 @@ $count = $sth_count_rows->rowCount();
 		]]></cell>";		
 		$xml .= "<cell><![CDATA[".$row['name']."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['customer_total'])."]]></cell>";
+		$xml .= "<cell><![CDATA[".siLocal::number($row['paid'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['owing'])."]]></cell>";
 		if ($row['enabled']==$LANG['enabled']) {
 			$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
