@@ -1,12 +1,25 @@
 <?php
 
-	$sql  = "SELECT sum(ivt.total) as SUM_TOTAL, b.name as Biller, c.name as Customer ";
-	$sql .= "FROM ".TB_PREFIX."biller b, ".TB_PREFIX."customers c, ";
-	$sql .= 		 TB_PREFIX."invoice_items ivt, ".TB_PREFIX."invoices iv ";
-	$sql .= "WHERE iv.customer_id = c.id AND iv.biller_id = b.id AND iv.id = ivt.invoice_id ";
-	$sql .= "GROUP BY b.name, c.name";
+	$sql  = "SELECT 
+			SUM(ivt.total) AS SUM_TOTAL, 
+			b.name AS Biller, 
+			c.name AS Customer 
+		FROM 
+			".TB_PREFIX."biller b, 
+			".TB_PREFIX."customers c, 
+			".TB_PREFIX."invoice_items ivt, 
+			".TB_PREFIX."invoices iv 
+			WHERE iv.customer_id = c.id 
+			AND iv.biller_id = b.id 
+			AND iv.id = ivt.invoice_id 
+			AND iv.domain_id = c.domain_id
+			AND iv.domain_id = b.domain_id
+			AND iv.domain_id = ivt.domain_id
+			AND iv.domain_id = :domain_id
+			";
+	$sql .= " GROUP BY b.name, c.name";
 
-	$customer_result = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
+	$customer_result = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 
 	$billers = array();
 	$total_sales = 0;

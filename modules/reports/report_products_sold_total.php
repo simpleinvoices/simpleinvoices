@@ -1,12 +1,16 @@
 <?php 
 
-  $sql = "SELECT p.description, sum(ii.quantity) AS sum_quantity
-      FROM ".TB_PREFIX."invoice_items ii INNER JOIN
-      ".TB_PREFIX."invoices iv ON (ii.invoice_id = iv.id) INNER JOIN
-      ".TB_PREFIX."products p ON (p.id = ii.product_id)
-      WHERE p.visible GROUP BY p.description";
+  $sql = "SELECT 
+	  p.description
+	, SUM(ii.quantity) AS sum_quantity
+  FROM ".TB_PREFIX."invoice_items ii 
+       INNER JOIN ".TB_PREFIX."invoices iv ON (ii.invoice_id = iv.id AND iv.domain_id = ii.domain_id) 
+       INNER JOIN ".TB_PREFIX."products p  ON (p.id = ii.product_id  AND p.domain_id = ii.domain_id)
+  WHERE p.visible 
+    AND p.domain_id = :domain_id
+  GROUP BY p.description";
 
-  $product_sales = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
+  $product_sales = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 
   $total_quantity = 0;
   $products = array();

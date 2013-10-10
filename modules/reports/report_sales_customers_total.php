@@ -1,22 +1,17 @@
 <?php 
 
-  $sql = "SELECT c.name, sum(ii.total) as sum_total
-          FROM 
-                ".TB_PREFIX."customers c, 
-                ".TB_PREFIX."invoices i,
-                ".TB_PREFIX."invoice_items ii, 
-                ".TB_PREFIX."preferences p
-          where
-            i.customer_id = c.id
-            AND
-            ii.invoice_id = i.id
-            AND 
-            i.preference_id = p.pref_id
-            AND
-                p.status = '1'
-          GROUP BY c.name";
+  $sql = "SELECT c.name, SUM(ii.total) AS sum_total
+    FROM 
+        ".TB_PREFIX."customers c
+		INNER JOIN ".TB_PREFIX."invoices iv ON (c.id = iv.customer_id AND c.domain_id = iv.domain_id) 
+        INNER JOIN ".TB_PREFIX."invoice_items ii ON (iv.id = ii.invoice_id AND iv.domain_id = ii.domain_id) 
+        INNER JOIN ".TB_PREFIX."preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id) 
+    WHERE
+           pr.status = '1'
+       AND c.domain_id = :domain_id
+    GROUP BY c.name;";
 
-  $customer_sales = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
+  $customer_sales = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 
   $total_sales = 0;
   $customers = array();
