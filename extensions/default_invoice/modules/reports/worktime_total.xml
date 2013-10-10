@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <!DOCTYPE REPORT SYSTEM "PHPReport.dtd">
 <REPORT>
-	<TITLE>Gewerkte uren per klant</TITLE>
+	<TITLE>Hours worked per customer</TITLE>
    <BACKGROUND_COLOR>#FFFFFF</BACKGROUND_COLOR>
    <CSS>css/phpreports.css</CSS>  
    <PAGE BORDER="1" SIZE="2500" CELLSPACING="0" CELLPADDING="5" ALIGN="CENTER" WIDTH="500">
       <HEADER>
          <ROW>
-            <COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">Gewerkte uren per klant</COL>
+            <COL COLSPAN="5" CELLCLASS="PAGE_LAYER" TEXTCLASS="BOLD">Hours worked per customer</COL>
          </ROW>
       </HEADER>		
    </PAGE>
@@ -18,7 +18,7 @@
 			<COL COLSPAN="3"></COL>
 		</ROW>
 		<ROW>
-			<COL COLSPAN="3" TYPE="EXPRESSION" CELLCLASS="HEADER">"Klant: ".$this->getValue("customer_id")</COL>
+			<COL COLSPAN="3" TYPE="EXPRESSION" CELLCLASS="HEADER">"Customer: ".$this->getValue("customer_id")</COL>
 		</ROW>
 	</HEADER>
 		<FIELDS>
@@ -30,7 +30,7 @@
 		</FIELDS>
 	<FOOTER>
 		<ROW>
-			<COL ALIGN="RIGHT" COLSPAN="2" CELLCLASS="FOOTER" TYPE="EXPRESSION">"Totaal ".$this->getRowCount("tn")." tickets  voor ".$this->getValue("customer_id")</COL>
+			<COL ALIGN="RIGHT" COLSPAN="2" CELLCLASS="FOOTER" TYPE="EXPRESSION">"Total ".$this->getRowCount("tn")." tickets  for ".$this->getValue("customer_id")</COL>
 			<COL ALIGN="RIGHT" CELLCLASS="FOOTER" TYPE="EXPRESSION">$this->getSum("time_unit")." min"</COL>
 		</ROW>
 	</FOOTER>
