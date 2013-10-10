@@ -66,8 +66,8 @@ if (isset($_POST['submit']))
 	}
 }
 
-$sql = "select DISTINCT(custom_field3) from  " . TB_PREFIX . "invoices where custom_field3 != ''";
-$cf3 = $db->query($sql);
+$sql = "SELECT DISTINCT(custom_field3) FROM  " . TB_PREFIX . "invoices WHERE custom_field3 != '' AND domain_id = :domain_id";
+$cf3 = $db->query($sql, ':domain_id', $auth_session->domain_id);
 
 $biller_details = getBiller($biller_id);
 $customer_details = getCustomer($customer_id);
