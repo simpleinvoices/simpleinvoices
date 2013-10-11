@@ -2010,18 +2010,18 @@ function insertInvoice($type) {
 
 	$sth= dbQuery($sql,
 		#':index_id', index::next('invoice',$pref_group[index_group],$_POST[biller_id]),
-		':index_id',		index::next('invoice',$pref_group[index_group]),
+		':index_id',		index::next('invoice',$pref_group['index_group']),
 		':domain_id',		$auth_session->domain_id,
-		':biller_id',		$_POST[biller_id],
-		':customer_id', 	$_POST[customer_id],
+		':biller_id',		$_POST['biller_id'],
+		':customer_id', 	$_POST['customer_id'],
 		':type', 			$type,
-		':preference_id',	$_POST[preference_id],
+		':preference_id',	$_POST['preference_id'],
 		':date', 			$clean_date,
-		':note', 			trim($_POST[note]),
-		':customField1',	$_POST[customField1],
-		':customField2',	$_POST[customField2],
-		':customField3',	$_POST[customField3],
-		':customField4',	$_POST[customField4]
+		':note', 			trim($_POST['note']),
+		':customField1',	$_POST['customField1'],
+		':customField2',	$_POST['customField2'],
+		':customField3',	$_POST['customField3'],
+		':customField4',	$_POST['customField4']
 		);
 
     #index::increment('invoice',$pref_group[index_group],$_POST[biller_id]);

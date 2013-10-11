@@ -57,7 +57,8 @@ class invoice {
 		$pref_group=getPreference($this->preference_id);
 
 		$sth= dbQuery($sql,
-			':index_id', index::next('invoice',$pref_group['index_group'],$this->biller_id),
+			#':index_id', index::next('invoice',$pref_group['index_group'],$this->biller_id),
+			':index_id', index::next('invoice',$pref_group['index_group']),
 			':domain_id', $auth_session->domain_id,
 			':biller_id', $this->biller_id,
 			':customer_id', $this->customer_id,
@@ -71,7 +72,8 @@ class invoice {
 			':custom_field4', $this->custom_field4
 			);
 
-	    index::increment('invoice',$pref_group[index_group],$this->biller_id);
+	    #index::increment('invoice',$pref_group['index_group'],$this->biller_id);
+	    index::increment('invoice',$pref_group['index_group']);
 
 	    //return $sth;
 	    return lastInsertID();
@@ -483,7 +485,7 @@ class invoice {
     {
 	    global $auth_session;
 
-		$sql = "SELECT count(*) AS count FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id limit 2";
+		$sql = "SELECT count(*) AS count FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id";
 		$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 
         $count = $sth->fetch();
@@ -516,10 +518,10 @@ class invoice {
         $db=new db();
         if ( getNumberOfDonePatches() < '179')
         {
-            $sql ="SELECT max(id) as max FROM ".TB_PREFIX."invoices";
+            $sql ="SELECT max(id) AS max FROM ".TB_PREFIX."invoices";
 		    $sth = $db->query($sql);
         } else {
-            $sql ="SELECT max(id) as max FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id";
+            $sql ="SELECT max(id) AS max FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id";
 		    $sth = $db->query($sql, ':domain_id', $auth_session->domain_id);
         }
 

@@ -20,6 +20,9 @@
 				<a href="index.php?module=auth&amp;view=login">{$LANG.login}</a>
 			{else}
 				<a href="index.php?module=auth&amp;view=logout">{$LANG.logout}</a>
+				{if $smarty.session.Zend_Auth.domain_id <> 1}
+					| Domain: {$smarty.session.Zend_Auth.domain_id}
+				{/if}
 			{/if}
 		{/if}
 	
