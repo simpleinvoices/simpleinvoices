@@ -144,14 +144,14 @@ class invoice {
                     p.pref_inv_wording AS preference,
                     p.status
                 FROM 
-                    ".TB_PREFIX."invoices i, 
-                    ".TB_PREFIX."preferences p 
+                    ".TB_PREFIX."invoices i LEFT JOIN 
+					".TB_PREFIX."preferences p  
+						ON (i.preference_id = p.pref_id AND i.domain_id = p.domain_id)
                 WHERE 
                     i.domain_id = :domain_id 
-                    and
-                    i.preference_id = p.pref_id
-                    and 
-                    i.id = :id";
+                AND 
+					i.id = :id";
+
 		$sth = $db->query($sql, ':id', $id, ':domain_id', $domain_id);
 
         $invoice = $sth->fetch();
@@ -187,14 +187,14 @@ class invoice {
                     i.id as id,
                     (SELECT CONCAT(p.pref_inv_wording,' ',i.index_id)) as index_name
                 FROM 
-                    ".TB_PREFIX."invoices i, 
-                    ".TB_PREFIX."preferences p 
+                    ".TB_PREFIX."invoices i LEFT JOIN 
+					".TB_PREFIX."preferences p  
+						ON (i.preference_id = p.pref_id AND i.domain_id = p.domain_id)
                 WHERE 
-                    i.domain_id = :domain_id 
-                    and
-                    i.preference_id = p.pref_id
-                order by 
+                    i.domain_id = :domain_id                    
+                ORDER BY 
                     index_name";
+
 		$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 
         return $sth->fetchAll();
@@ -423,7 +423,7 @@ class invoice {
             $where = "and date between '$this->start_date' and '$this->end_date'";
         }
 
-		$sql = "SELECT i.*, p.pref_description as preference FROM ".TB_PREFIX."invoices i LEFT JOIN ".TB_PREFIX."preferences p  ON (i.preference_id = p.pref_id AND i.domain_id = p.domain_id) WHERE i.domain_id = :domain_id ORDER BY i.id";
+		$sql = "SELECT i.*, p.pref_description AS preference FROM ".TB_PREFIX."invoices i LEFT JOIN ".TB_PREFIX."preferences p  ON (i.preference_id = p.pref_id AND i.domain_id = p.domain_id) WHERE i.domain_id = :domain_id ORDER BY i.id";
 		$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 
         return $sth->fetchAll();
@@ -483,7 +483,7 @@ class invoice {
     {
 	    global $auth_session;
 
-		$sql = "SELECT count(*) as count FROM ".TB_PREFIX."invoices where domain_id = :domain_id limit 2";
+		$sql = "SELECT count(*) AS count FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id limit 2";
 		$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 
         $count = $sth->fetch();
@@ -499,7 +499,7 @@ class invoice {
         global $LANG;
 		global $auth_session;
         
-        $sql ="SELECT SUM(gross_total) AS gross_total FROM ".TB_PREFIX."invoice_items WHERE invoice_id =  :invoice_id AND domain_id = :domain_id";
+        $sql ="SELECT SUM(gross_total) AS gross_total FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :invoice_id AND domain_id = :domain_id";
         $sth = dbQuery($sql, ':invoice_id', $invoice_id, ':domain_id', $auth_session->domain_id);
         $res = $sth->fetch();
         //echo "TOTAL".$res['total'];
