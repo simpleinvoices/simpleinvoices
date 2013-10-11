@@ -62,18 +62,18 @@ CREATE TABLE IF NOT EXISTS `si_custom_fields` (
   `cf_custom_label` varchar(255) DEFAULT NULL,
   `cf_display` varchar(1) NOT NULL DEFAULT '1',
   `domain_id` int(11) NOT NULL,
-  PRIMARY KEY (`cf_id`)
+  PRIMARY KEY (`cf_id`, `domain_id`)
 ) ENGINE=MyISAM;
 
-INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`, `domain_id`) VALUES(1, 'biller_cf1', NULL, '0', 1);
-INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`, `domain_id`) VALUES(2, 'biller_cf2', NULL, '0', 1);
-INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`, `domain_id`) VALUES(3, 'biller_cf3', NULL, '0', 1);
-INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`, `domain_id`) VALUES(4, 'biller_cf4', NULL, '0', 1);
+INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`, `domain_id`) VALUES(1, 'biller_cf1',   NULL, '0', 1);
+INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`, `domain_id`) VALUES(2, 'biller_cf2',   NULL, '0', 1);
+INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`, `domain_id`) VALUES(3, 'biller_cf3',   NULL, '0', 1);
+INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`, `domain_id`) VALUES(4, 'biller_cf4',   NULL, '0', 1);
 INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`, `domain_id`) VALUES(5, 'customer_cf1', NULL, '0', 1);
 INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`, `domain_id`) VALUES(6, 'customer_cf2', NULL, '0', 1);
 INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`, `domain_id`) VALUES(7, 'customer_cf3', NULL, '0', 1);
 INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`, `domain_id`) VALUES(8, 'customer_cf4', NULL, '0', 1);
-INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`, `domain_id`) VALUES(9, 'product_cf1', NULL, '0', 1);
+INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`, `domain_id`) VALUES(9, 'product_cf1',  NULL, '0', 1);
 INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`, `domain_id`) VALUES(10, 'product_cf2', NULL, '0', 1);
 INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`, `domain_id`) VALUES(11, 'product_cf3', NULL, '0', 1);
 INSERT INTO `si_custom_fields` (`cf_id`, `cf_custom_field`, `cf_custom_label`, `cf_display`, `domain_id`) VALUES(12, 'product_cf4', NULL, '0', 1);
@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `si_extensions` (
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `enabled` varchar(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`, `domain_id`)
 ) ENGINE=MyISAM;
 
 INSERT INTO `si_extensions` (`id`, `domain_id`, `name`, `description`, `enabled`) VALUES(1, 0, 'core', 'Core part of Simple Invoices - always enabled', '1');
@@ -639,6 +639,8 @@ INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_rele
 INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_release`,`sql_statement`) VALUES (278,277,'','','');
 INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_release`,`sql_statement`) VALUES (279,278,'','','');
 INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_release`,`sql_statement`) VALUES (280,279,'','','');
+INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_release`,`sql_statement`) VALUES (271,280,'','','');
+INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_release`,`sql_statement`) VALUES (282,281,'','','');
 
 CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

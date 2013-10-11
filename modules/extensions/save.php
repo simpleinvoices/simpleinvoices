@@ -9,8 +9,8 @@ if ($_POST['action'] == "register") {
 
 } elseif ($_POST['action'] == "unregister") {
 
-  $sql = "DELETE FROM ".TB_PREFIX."extensions WHERE id = :id LIMIT 1; DELETE FROM ".TB_PREFIX."system_defaults WHERE extension_id = :id ;";
-  $sth = dbQuery($sql, ':id', $_POST['id']) or die(htmlsafe(end($dbh->errorInfo())));
+  $sql = "DELETE FROM ".TB_PREFIX."extensions WHERE id = :id AND domain_id = :domain_id; DELETE FROM ".TB_PREFIX."system_defaults WHERE extension_id = :id AND domain_id = :domain_id;";
+  $sth = dbQuery($sql, ':id', $_POST['id'],':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 
 } else {
 

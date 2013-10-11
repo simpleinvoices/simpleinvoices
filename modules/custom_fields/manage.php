@@ -14,8 +14,9 @@
 checkLogin();
 
 global $dbh;
-$sql = "SELECT * FROM ".TB_PREFIX."custom_fields ORDER BY cf_custom_field";
-$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+
+$sql = "SELECT * FROM ".TB_PREFIX."custom_fields WHERE domain_id = :domain_id ORDER BY cf_custom_field";
+$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(end($dbh->errorInfo()));
 
 $cfs = null;
 

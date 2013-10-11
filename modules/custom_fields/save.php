@@ -31,13 +31,14 @@ if (  $op === 'edit_custom_field' ) {
 
 	if (isset($_POST['save_custom_field'])) {
 		$sql = "UPDATE
-                                ".TB_PREFIX."custom_fields
-                        SET
-                                cf_custom_label = :label
-                        WHERE
-                                cf_id = :id";
+                ".TB_PREFIX."custom_fields
+            SET
+                cf_custom_label = :label
+            WHERE
+                cf_id = :id
+			AND domain_id = :domain_id";
 
-		if (dbQuery($sql, ':id', $_GET['id'], ':label', $_POST['cf_custom_label'])) {
+		if (dbQuery($sql, ':id', $_GET['id'], ':label', $_POST['cf_custom_label'], ':domain_id', $auth_session->domain_id)) {
 			$display_block =  $LANG['save_custom_field_success'];
 		} else {
 			$display_block =  $LANG['save_custom_field_success'];
