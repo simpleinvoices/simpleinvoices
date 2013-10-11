@@ -15,9 +15,15 @@ if ($db_server == 'mysql') {
 }
 */
 
-// Get LOGGING from system_defaults
-$can_log = (checklogin() && getDefaultLoggingStatus());
-define('LOGGING', $can_log);
+// Cannot redfine LOGGING (withour PHP PECL runkit extension) since already true in define.php
+// Ref: http://php.net/manual/en/function.runkit-method-redefine.php
+// Hence take from system_defaults into new variable
+// Initialise so that while it is being evaluated, it prevents logging
+$can_log = false;
+$can_chk_log = (LOGGING && (isset($auth_session->id) && $auth_session->id > 0) && getDefaultLoggingStatus());
+$can_log = $can_chk_log;
+unset($can_chk_log);
+
 
 function db_connector() {
 
@@ -140,9 +146,10 @@ function dbLogger($sqlQuery) {
 	global $log_dbh;
 	global $dbh;
 	global $auth_session;
+	global $can_log;
 	
 	$userid = $auth_session->id;
-	if(LOGGING
+	if($can_log
 		&& (preg_match('/^\s*select/iD',$sqlQuery) == 0) 
 		&& (preg_match('/^\s*show\s*tables\s*like/iD',$sqlQuery) == 0)
 	   ) {
@@ -985,7 +992,7 @@ function getDefaultLogging() {
 }
 
 function getDefaultLoggingStatus() {
-	return (getDefaultGeneric('logging', false) == '1');
+	return (getDefaultGeneric('logging', false) == 1);
 }
 
 function getDefaultInventory() {
