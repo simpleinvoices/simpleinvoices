@@ -220,11 +220,12 @@ INSERT INTO `si_invoices` (`id`, `index_id`, `domain_id`, `biller_id`, `customer
 
 CREATE TABLE IF NOT EXISTS `si_log` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `domain_id` int(11) NOT NULL DEFAULT '1',
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `userid` varchar(40) NOT NULL DEFAULT '0',
   `sqlquerie` text NOT NULL,
   `last_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`, `domain_id`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_payment` (
@@ -641,6 +642,7 @@ INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_rele
 INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_release`,`sql_statement`) VALUES (280,279,'','','');
 INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_release`,`sql_statement`) VALUES (271,280,'','','');
 INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_release`,`sql_statement`) VALUES (282,281,'','','');
+INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_release`,`sql_statement`) VALUES (283,282,'','','');
 
 CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
