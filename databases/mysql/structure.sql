@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `si_custom_fields` (
   `cf_custom_label` varchar(255) DEFAULT NULL,
   `cf_display` varchar(1) NOT NULL DEFAULT '1',
   `domain_id` int(11) NOT NULL,
-  PRIMARY KEY (`cf_id`)
+  PRIMARY KEY (`cf_id`, `domain_id`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_customers` (
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `si_extensions` (
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `enabled` varchar(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`, `domain_id`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_index` (
