@@ -15,6 +15,9 @@ if ($db_server == 'mysql') {
 }
 */
 
+// Get LOGGING from system_defaults
+$can_log = (checklogin() && getDefaultLoggingStatus());
+define('LOGGING', $can_log);
 
 function db_connector() {
 
@@ -120,6 +123,7 @@ function dbQuery($sqlQuery) {
 	*/
 	try {	
 		$sth->execute();
+		dbLogger($sqlQuery);
 	} catch(Exception $e){
 		echo $e->getMessage();
 		echo "dbQuery: Dude, what happened to your query?:<br /><br /> ".htmlsafe($sqlQuery)."<br />".htmlsafe(end($sth->errorInfo()));
@@ -131,17 +135,22 @@ function dbQuery($sqlQuery) {
 
 // Used for logging all queries
 function dbLogger($sqlQuery) {
+// For PDO it gives only the skeleton sql before merging with data
+
 	global $log_dbh;
 	global $dbh;
 	global $auth_session;
 	
 	$userid = $auth_session->id;
-	if(LOGGING && (preg_match('/^\s*select/iD',$sqlQuery) == 0)) {
+	if(LOGGING
+		&& (preg_match('/^\s*select/iD',$sqlQuery) == 0) 
+		&& (preg_match('/^\s*show\s*tables\s*like/iD',$sqlQuery) == 0)
+	   ) {
 		// Only log queries that could result in data/database  modification
 
 		$last = null;
 		$tth = null;
-		$sql = "INSERT INTO ".TB_PREFIX."log (timestamp, userid, sqlquerie, last_id) VALUES (CURRENT_TIMESTAMP , ?, ?, ?)";
+		$sql = "INSERT INTO ".TB_PREFIX."log (domain_id, timestamp, userid, sqlquerie, last_id) VALUES (?, CURRENT_TIMESTAMP , ?, ?, ?)";
 
 		/* SC: Check for the patch manager patch loader.  If a
 		 *     patch is being run, avoid $log_dbh due to the
@@ -160,8 +169,8 @@ function dbLogger($sqlQuery) {
 		} else {
 			$tth = $log_dbh->prepare($sql);
 		}
-		$tth->execute(array($userid, trim($sqlQuery), $last));
-		$tth = null;
+		$tth->execute(array($auth_session->domain_id, $userid, trim($sqlQuery), $last));
+		unset($tth);
 	}
 }
 
@@ -915,7 +924,7 @@ function getDefaultGeneric($param, $bool=true) {
 	global $dbh;
 	global $auth_session;
 
-	$sql = "SELECT value from ".TB_PREFIX."system_defaults s WHERE ( s.name = :param AND s.domain_id = :domain_id)";
+	$sql = "SELECT value FROM ".TB_PREFIX."system_defaults s WHERE ( s.name = :param AND s.domain_id = :domain_id)";
 	$sth = dbQuery($sql, ':param', $param, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 	$array = $sth->fetch();
 	$paramval = (($bool) ? ($array['value']==1?$LANG['enabled']:$LANG['disabled']) : $array['value']);
@@ -926,7 +935,7 @@ function getDefaultCustomer() {
 	global $dbh;
 	global $auth_session;
 	
-	$sql = "SELECT *,c.name AS name FROM ".TB_PREFIX."customers c, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'customer' AND c.id = s.value) AND c.domain_id = :domain_id";
+	$sql = "SELECT *,c.name AS name FROM ".TB_PREFIX."customers c, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'customer' AND c.id = s.value AND c.domain_id = s.domain_id AND s.domain_id = :domain_id)";
 	$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 	return $sth->fetch();
 }
@@ -935,7 +944,7 @@ function getDefaultPaymentType() {
 	global $dbh;
 	global $auth_session;
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."payment_types p, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'payment_type' AND p.pt_id = s.value) AND p.domain_id = :domain_id";
+	$sql = "SELECT * FROM ".TB_PREFIX."payment_types p, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'payment_type' AND p.pt_id = s.value AND p.domain_id = s.domain_id AND s.domain_id = :domain_id)";
 	$sth = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 	return $sth->fetch();
 }
@@ -944,7 +953,7 @@ function getDefaultPreference() {
 	global $dbh;
 	global $auth_session;
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."preferences p, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'preference' AND p.pref_id = s.value) AND p.domain_id = :domain_id";
+	$sql = "SELECT * FROM ".TB_PREFIX."preferences p, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'preference' AND p.pref_id = s.value AND p.domain_id = s.domain_id AND s.domain_id = :domain_id)";
 	$sth = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 	return $sth->fetch();
 }
@@ -953,7 +962,7 @@ function getDefaultBiller() {
 	global $dbh;
 	global $auth_session;
 	
-	$sql = "SELECT *,b.name AS name FROM ".TB_PREFIX."biller b, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'biller' AND b.id = s.value ) and b.domain_id = :domain_id";
+	$sql = "SELECT *,b.name AS name FROM ".TB_PREFIX."biller b, ".TB_PREFIX."system_defaults s WHERE ( s.name = 'biller' AND b.id = s.value AND b.domain_id = s.domain_id AND s.domain_id = :domain_id)";
 	$sth = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 	return $sth->fetch();
 }
@@ -962,7 +971,7 @@ function getDefaultTax() {
 	global $dbh;
 	global $auth_session;
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."tax t, ".TB_PREFIX."system_defaults s WHERE (s.name = 'tax' AND t.tax_id = s.value) AND t.domain_id = :domain_id";
+	$sql = "SELECT * FROM ".TB_PREFIX."tax t, ".TB_PREFIX."system_defaults s WHERE (s.name = 'tax' AND t.tax_id = s.value) AND t.domain_id = s.domain_id AND s.domain_id = :domain_id";
 	$sth = dbQuery($sql,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 	return $sth->fetch();
 }
@@ -973,6 +982,10 @@ function getDefaultDelete() {
 
 function getDefaultLogging() {
 	return getDefaultGeneric('logging');
+}
+
+function getDefaultLoggingStatus() {
+	return (getDefaultGeneric('logging', false) == '1');
 }
 
 function getDefaultInventory() {
@@ -3095,9 +3108,11 @@ function convertInitCustomFields() {
 // This function is exactly the same as convertCustomFields() in ./include/customFieldConversion.php but without the print_r and echo output while storing
 	/* check if any value set -> keeps all data for sure */
 	global $dbh;
+	global $auth_session;
+	
     $db = new db();
-	$sql = "SELECT * FROM ".TB_PREFIX."custom_fields";
-	$sth = $dbh->prepare($sql);
+	$sql = "SELECT * FROM ".TB_PREFIX."custom_fields WHERE domain_id = :domain_id";
+	$sth = $dbh->prepare($sql, ':domain_id', $auth_session->domain_id);
 	$sth->execute();
 	
 	while($custom = $sth->fetch()) {
@@ -3113,13 +3128,11 @@ function convertInitCustomFields() {
 			}
 			
 			$cf_field = "custom_field".$match[2];
+			$sql = "SELECT id, :field FROM :table WHERE domain_id = :domain_id";
+			$tablename = TB_PREFIX.$match[1];
+			// Only biller table is singular, products, invoices and customers tables are all plural
 			if($match[1] != "biller") {
-				$sql = "SELECT id, :field FROM :table";
-				$tablename = TB_PREFIX.$match[1]."s";
-			}
-			else {
-				$sql = "SELECT id, :field FROM :table";
-				$tablename = TB_PREFIX.$match[1];
+				$tablename .= "s";
 			}
 			
 			$store = false;
@@ -3135,6 +3148,7 @@ function convertInitCustomFields() {
 			$tth = $dbh->prepare($sql);
 			$tth->bindValue(':table', $tablename);
 			$tth->bindValue(':field', $cf_field);
+			$tth->bindValue(':domain_id', $auth_session->domain_id);
 			$tth->execute();
 
 			/*
@@ -3164,6 +3178,7 @@ function convertInitCustomFields() {
 				$uth = $dbh->prepare($sql);
 				$uth->bindValue(':table', $tablename);
 				$uth->bindValue(':field', $cf_field);
+				$uth->bindValue(':domain_id', $auth_session->domain_id);
 				$uth->execute();
 				while($res2 = $uth->fetch()) {
 					$plugin->saveInput($res2[$cf_field], $res2['id']);
