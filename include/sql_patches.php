@@ -1614,6 +1614,14 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['279']['patch'] = "DROP TABLE IF EXISTS `".TB_PREFIX."products_matrix`;";
     $patch['279']['date'] = "20131009";
 
+    $patch['280']['name']  = "Each domain has their own extension instances";
+    $patch['280']['patch'] = "ALTER TABLE `".TB_PREFIX."extensions` DROP PRIMARY KEY, ADD PRIMARY KEY (`id`, `domain_id`);";
+    $patch['280']['date']  = "20131011";
+
+    $patch['281']['name']  = "Each domain has their own custom_field id sets";
+    $patch['281']['patch'] = "ALTER TABLE `".TB_PREFIX."custom_fields` DROP PRIMARY KEY, ADD PRIMARY KEY (`cf_id`, `domain_id`);";
+    $patch['281']['date']  = "20131011";
+
 /*
 /*
 ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );

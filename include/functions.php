@@ -60,9 +60,10 @@ function getLogo($biller) {
 function get_custom_field_label($field)         {
 	global $LANG;
 	global $dbh;
+	global $auth_session;
 	
-    $sql =  "SELECT cf_custom_label FROM ".TB_PREFIX."custom_fields WHERE cf_custom_field = :field";
-    $sth = dbQuery($sql, ':field', $field) or die(end($dbh->errorInfo()));
+    $sql =  "SELECT cf_custom_label FROM ".TB_PREFIX."custom_fields WHERE cf_custom_field = :field AND domain_id = :domain_id";
+    $sth = dbQuery($sql, ':field', $field, ':domain_id', $auth_session->domain_id) or die(end($dbh->errorInfo()));
 
     $cf = $sth->fetch();
 
@@ -113,7 +114,7 @@ function getCustomFieldLabels($type) {
 
 function get_custom_field_name($field) {
 
-        global $LANG;
+    global $LANG;
 
 		//grab the first character of the field variable
         $get_cf_letter = $field[0];
@@ -269,6 +270,8 @@ function dropDown($choiceArray, $defVal) {
 
 function show_custom_field($custom_field,$custom_field_value,$permission,$css_class_tr,$css_class1,$css_class2,$td_col_span,$seperator) {
 	global $dbh;
+	global $auth_session;
+
 		/*
 	*get the last character of the $custom field - used to set the name of the field
 	*/
@@ -279,8 +282,8 @@ function show_custom_field($custom_field,$custom_field_value,$permission,$css_cl
 
 	$display_block = "";
 
-	$get_custom_label ="SELECT cf_custom_label FROM ".TB_PREFIX."custom_fields WHERE cf_custom_field = :field";
-	$sth = dbQuery($get_custom_label, ':field', $custom_field) or die(end($dbh->errorInfo()));
+	$get_custom_label ="SELECT cf_custom_label FROM ".TB_PREFIX."custom_fields WHERE cf_custom_field = :field AND domain_id = :domain_id";
+	$sth = dbQuery($get_custom_label, ':field', $custom_field, ':domain_id', $auth_session->domain_id) or die(end($dbh->errorInfo()));
 
 	while ($Array_cl = $sth->fetch()) {
                 $has_custom_label_value = $Array_cl['cf_custom_label'];
