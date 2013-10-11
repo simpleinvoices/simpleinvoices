@@ -16,10 +16,12 @@ $smarty -> assign('active_tab', '#home');
 	$sql = "SELECT l.*, u.email
 	FROM
 	".TB_PREFIX."log l INNER JOIN 
-	".TB_PREFIX."user u ON (u.id = l.userid)
-	WHERE l.timestamp BETWEEN :start AND :end ORDER BY l.timestamp";
+	".TB_PREFIX."user u ON (u.id = l.userid AND u.domain_id = l.domain_id)
+	WHERE l.domain_id = :domain_id 
+	  AND l.timestamp BETWEEN :start AND :end 
+	ORDER BY l.timestamp";
 	
-	$sth = dbQuery($sql, ':start', $startdate, ':end', $enddate);
+	$sth = dbQuery($sql, ':start', $startdate, ':end', $enddate, ':domain_id', $auth_session->domain_id);
 	$sqls = null;
 	$sqls = $sth->fetchAll();
 	
