@@ -1626,6 +1626,10 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['282']['patch'] = "ALTER TABLE `".TB_PREFIX."log` ADD COLUMN `domain_id` INT NOT NULL DEFAULT '1' AFTER `id`, DROP PRIMARY KEY, ADD PRIMARY KEY (`id`, `domain_id`);";
     $patch['282']['date']  = "20131011";
 
+    $patch['283']['name']  = "Match field type with foreign key field si_user.id";
+    $patch['283']['patch'] = "ALTER TABLE `".TB_PREFIX."log` CHANGE `userid` `userid` INT NOT NULL DEFAULT '1';";
+    $patch['283']['date']  = "20131012";
+
 /*
 /*
 ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );
