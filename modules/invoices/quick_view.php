@@ -57,7 +57,7 @@ for($i=1;$i<=4;$i++) {
 }
 
 
-$sql = "select * from ".TB_PREFIX."products_attributes";
+$sql = "SELECT * FROM ".TB_PREFIX."products_attributes";
 $sth =  dbQuery($sql);
 $attributes = $sth->fetchAll();
 $smarty -> assign("attributes", $attributes);
