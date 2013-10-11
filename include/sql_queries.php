@@ -2017,7 +2017,7 @@ function insertInvoice($type) {
 		':type', 			$type,
 		':preference_id',	$_POST['preference_id'],
 		':date', 			$clean_date,
-		':note', 			trim($_POST['note]'),
+		':note', 			trim($_POST['note']),
 		':customField1',	$_POST['customField1'],
 		':customField2',	$_POST['customField2'],
 		':customField3',	$_POST['customField3'],
