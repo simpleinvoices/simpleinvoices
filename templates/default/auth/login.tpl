@@ -16,7 +16,7 @@
       </form>
 {if $errorMessage }
 
-		<div class="si_error_line">{$errorMessage|outhtml}</div>
+		<div class="alert alert-danger">{$errorMessage|outhtml}</div>
 	
 {/if}
     </div> <!-- /container -->
