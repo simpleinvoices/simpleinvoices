@@ -9,9 +9,9 @@
 		
 		<input name="pass" size="25" type="password" title="password" value="" class="form-control" placeholder="{$LANG.password}"/>
 
-        <label class="checkbox">
+       <!-- <label class="checkbox">
           <input type="checkbox" value="remember-me"> Remember me
-        </label>
+        </label>-->
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
 {if $errorMessage }
