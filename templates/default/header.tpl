@@ -1,5 +1,8 @@
-<!DOCTYPE html>
-<html>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+		PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 {strip}
 	{include file='../custom/hooks.tpl'}
@@ -8,11 +11,9 @@
 	{$smarty.capture.hook_head_start}
 {/strip}
 	<title>{$tmp_lang_module} : {$tmp_lang_view} - {$LANG.simple_invoices} </title>
-    <meta charset="utf-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="Content-Script-Type" content="text/javascript" />
 	<meta http-equiv="Content-Style-Type" content="text/css" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="robots" content="noindex, nofollow" />
 	<link rel="shortcut icon" href="./images/common/favicon.ico" />
 
@@ -56,10 +57,6 @@
 {/literal}
 
 {$smarty.capture.hook_head_end}
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.6.2/html5shiv.js"></script>
-      <script src="../../docs-assets/js/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body class="body_si body_module_{$module} body_view_{$view}">
 {$smarty.capture.hook_body_start}
