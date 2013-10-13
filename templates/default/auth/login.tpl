@@ -1,26 +1,53 @@
 {* preload the headers (for faster browsing) *}
 
 {include file=$path|cat:'../header.tpl'}
-<div class="container">
-    
-<form class="form-signin" action="" method="post" id="frmLogin" name="frmLogin">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <input name="user" type="text" title="user" value="" class="form-control" placeholder="{$LANG.email}" autofocus/>
-		
-		<input name="pass" size="25" type="password" title="password" value="" class="form-control" placeholder="{$LANG.password}"/>
 
-       <!-- <label class="checkbox">
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>-->
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
+<div class="si_wrap">
+
+<form action="" method="post" id="frmLogin" name="frmLogin">
+	<input type="hidden" name="action" value="login" />	
+	
+	<div class="si_box">
+		<h1>{$LANG.simple_invoices}</h1>
+	
+		<div class="si_box_auth_pad">
+			<table>
+				<tr>
+					<th>{$LANG.email}</th>
+					<td>
+						<input name="user" size="25" type="text" title="user" value="" />
+					</td>
+				</tr>       
+				<tr>
+					<th>{$LANG.password}</th>
+					<td>
+						<input name="pass" size="25" type="password" title="password" value="" />
+					</td>
+				</tr>       
+				<tr>
+					<th></th>
+					<td class='td_error'>
+
+
 {if $errorMessage }
 
-		<div class="alert alert-danger">{$errorMessage|outhtml}</div>
+		<div class="si_error_line">{$errorMessage|outhtml}</div>
 	
 {/if}
-    </div> <!-- /container -->
 
+					</td>
+				</tr>       
+			</table>
+		
+			<div class="si_toolbar">
+					<button type="submit" value="login">Login</button>
+			</div>
+		</div>
+	</div>
+
+</form>
+
+</div>
 
 <div id="si_footer">
 	<div class="si_wrap">
