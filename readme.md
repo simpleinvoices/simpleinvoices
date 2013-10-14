@@ -24,15 +24,17 @@ When cloning the repository use the `--recursive` option to ensure that Zend is 
 ## Get Involved
 * Developer Discussion: [Simple Invoices Google+ Community](https://plus.google.com/communities/102476804981627142204)
 * Developer Mailing List: [Simple Invoices Google Groups](https://groups.google.com/forum/#!forum/simpleinvoices)
-Although the Developer Mailing List header states that it is no longer used, it is active as it affords more privacy than Google+ affords.
 
-We also have a mailing list for tracking commit activity. This is hosted on Google Groups (sigh). You can find it here: https://groups.google.com/forum/?fromgroups#!forum/simpleinvoices-trac
+We also have a mailing list for tracking commit activity. This is hosted on Google Groups. You can find it here: https://groups.google.com/forum/?fromgroups#!forum/simpleinvoices-trac
 
 
 ## Translations
 We are proud that SimpleInvoices is currently available in 25 different languages but we would love for that number to be even bigger!  
 
 If you would like to help translate SimpleInvoices into your language check out our [translation project](https://www.transifex.com/projects/p/SimpleInvoices/).
+
+For more information refer: [simpleinvoices.org/translate](http://www.simpleinvoices.org/translate)
+
 
 ## Reporting Bugs
 Please use the issue tracker on GitHub when reporting bugs.
