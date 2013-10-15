@@ -126,6 +126,7 @@ $LANG['description_short'] = "Description";//1
 $LANG['details'] = "Notes";//1
 $LANG['disabled'] = "Inactif";//1
 $LANG['displaying_inv'] = "Voir les factures";//1
+$LANG['domain'] = "Domain";//0
 $LANG['dont_forget_to'] = "Ne pas oublier";//1
 $LANG['draft'] = "Brouillon";//1
 $LANG['due'] = "D&uuml;";//1

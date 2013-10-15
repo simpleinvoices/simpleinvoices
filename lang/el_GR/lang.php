@@ -117,6 +117,7 @@ $LANG['description'] = "Περιγραφή";//1
 $LANG['description_short'] = "Desc";//0
 $LANG['details'] = "Στοιχεία";//1
 $LANG['disabled'] = "Ανενεργό";//1
+$LANG['domain'] = "Domain";//0
 $LANG['edit'] = "Αλλαγή";//1
 $LANG['edit_view_tooltip'] = "Εισαγωγή Στοιχείων";//1
 $LANG['email'] = "Ε-μαιλ";//1

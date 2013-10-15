@@ -133,6 +133,7 @@ $LANG['details'] = "Detaljer";//1
 $LANG['disabled'] = "Deaktivert";//1
 $LANG['displaying_inv'] = "Viser fakturaer";//1
 $LANG['displaying_items'] = "Viser {fra} til {til} av {totale} produkter";//1
+$LANG['domain'] = "Domain";//0
 $LANG['dont_forget_to'] = "Glem ikke å";//1
 $LANG['draft'] = "Kladd";//1
 $LANG['edit'] = "Rediger";//1

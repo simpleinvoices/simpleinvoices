@@ -117,6 +117,7 @@ $LANG['description'] = "Opis";//1
 $LANG['description_short'] = "Desc";//0
 $LANG['details'] = "Podrobnosti";//1
 $LANG['disabled'] = "Onemogočeno";
+$LANG['domain'] = "Domain";//0
 $LANG['edit'] = "Uredi";//1
 $LANG['edit_view_tooltip'] = "Uredi";//1
 $LANG['email'] = "E-pošta";//1
