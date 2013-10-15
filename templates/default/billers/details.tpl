@@ -217,7 +217,7 @@ n Script: details.tpl
 				class="cluetip"
 				href="#"
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-				title="{$LANG.Custom_Fields}"
+				title="{$LANG.custom_fields}"
 			> 
 			<img src="./images/common/help-small.png" alt="" />
 			</a>
@@ -230,7 +230,7 @@ n Script: details.tpl
 				class="cluetip"
 				href="#"
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-				title="{$LANG.Custom_Fields}"
+				title="{$LANG.custom_fields}"
 			> 
 			<img src="./images/common/help-small.png" alt="" />
 			</a>
@@ -243,7 +243,7 @@ n Script: details.tpl
 				class="cluetip"
 				href="#"
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-				title="{$LANG.Custom_Fields|htmlsafe}"
+				title="{$LANG.custom_fields|htmlsafe}"
 			> 
 			<img src="./images/common/help-small.png" alt="" />
 			</a>
@@ -256,7 +256,7 @@ n Script: details.tpl
 				class="cluetip"
 				href="#"
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-				title="{$LANG.Custom_Fields}"
+				title="{$LANG.custom_fields}"
 			> 
 			<img src="./images/common/help-small.png" alt="" />
 			</a>

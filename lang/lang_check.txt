@@ -3,7 +3,7 @@ Lang. Code | Lang. name                    | New strings | Strings in file | Tot
 ==========================================================================================================
 ca_ES      | Catala (Catalan)              | All Done    |             588 |              301 |   51.19% | 
 cs_CZ      | Cestina (Czech)               | 149         |             439 |              255 |   43.37% | 
-da_DK      | Dansk (Danish)                | 149         |             439 |              324 |   55.10% | 
+da_DK      | Dansk (Danish)                | All Done    |             588 |              327 |   55.61% | 
 de_CH      | Schwizerdütsch (Swiss German) | 149         |             439 |              254 |   43.20% | 
 de_DE      | Deutsch (German)              | 149         |             439 |              303 |   51.53% | 
 el_GR      | Greek (Greek)                 | 149         |             439 |              303 |   51.53% | 
