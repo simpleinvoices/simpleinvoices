@@ -19,10 +19,10 @@ nb_NO      | Norsk (Norwegian)             | 87          |             502 |    
 nl_NL      | Nederlands (Dutch)            | All Done    |             589 |              371 |   62.99% | 
 pt_PT      | Portugues (Portuguese)        | 148         |             441 |              314 |   53.31% | 
 ro_RO      | Romana (Romanian)             | 151         |             438 |              353 |   59.93% | 
-sk_SK      | Slovensky (Slovak)            | 18          |             571 |              472 |   80.14% | 
+sk_SK      | Slovensky (Slovak)            | All Done    |             589 |              473 |   80.31% | 
 sl_SI      | Sloven??ina (Slovenian)       | 149         |             440 |              287 |   48.73% | 
 sq_AL      | Shqip (Albanian)              | 149         |             440 |              303 |   51.44% | 
 sv_SE      | Svenska (Swedish)             | 105         |             484 |              460 |   78.10% | 
 tr_TR      | Türkçe (Turkish)              | 149         |             440 |              303 |   51.44% | 
-vi_VN      | Vietnam (Vietnam)             | 18          |             571 |              543 |   92.19% | 
+vi_VN      | Vietnam (Vietnam)             | All Done    |             589 |              544 |   92.36% | 
 ----------------------------------------------------------------------------------------------------------
