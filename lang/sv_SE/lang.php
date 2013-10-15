@@ -130,6 +130,7 @@ $LANG['description_short'] = "Beskr.";//1
 $LANG['details'] = "Detaljer";//1
 $LANG['disabled'] = "Deaktiverat";//1
 $LANG['displaying_inv'] = "Visar fakturorna";//1
+$LANG['domain'] = "Domain";//0
 $LANG['dont_forget_to'] = "Glöm inte att";//1
 $LANG['draft'] = "Utkast";//1
 $LANG['edit'] = "Redigera";//1

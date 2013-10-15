@@ -117,6 +117,7 @@ $LANG['description'] = "Açýklama";//1
 $LANG['description_short'] = "Desc";//0
 $LANG['details'] = "Detaylar";//1
 $LANG['disabled'] = "Pasif";//1
+$LANG['domain'] = "Domain";//0
 $LANG['edit'] = "Düzenle";//1
 $LANG['edit_view_tooltip'] = "Düzenle";//1
 $LANG['email'] = "Email";//1

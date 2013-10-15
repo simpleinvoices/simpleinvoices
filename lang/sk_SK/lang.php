@@ -146,6 +146,7 @@ $LANG['details'] = "Podrobnosti";//1
 $LANG['disabled'] = "Deaktivovaný";//1
 $LANG['displaying_inv'] = "Fakt. zobrazené";//1
 $LANG['displaying_items'] = "Položky zobrazené";//1
+$LANG['domain'] = "Domain";//0
 $LANG['dont_forget_to'] = "Nezabudnite na";//1
 $LANG['draft'] = "Koncepty";//1
 $LANG['due'] = "Nezaplatené";//1

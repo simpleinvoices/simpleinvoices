@@ -117,6 +117,7 @@ $LANG['description'] = "Pershkrimi";//1
 $LANG['description_short'] = "Desc";//0
 $LANG['details'] = "Detaje";//1
 $LANG['disabled'] = "Jo Aktiv";//1
+$LANG['domain'] = "Domain";//0
 $LANG['edit'] = "Ndrysho";//1
 $LANG['edit_view_tooltip'] = "Ndrysho";//1
 $LANG['email'] = "Email";//1

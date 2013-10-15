@@ -146,6 +146,7 @@ $LANG['disable'] = "Disable";//1
 $LANG['disabled'] = "Disabled";//1
 $LANG['displaying_inv'] = "Displaying invoices";//1
 $LANG['displaying_items'] = "Displaying {from} to {to} of {total} items";//1
+$LANG['domain'] = "Domain";//1
 $LANG['dont_forget_to'] = "Don't forget to";//1
 $LANG['draft'] = "Draft";//1
 $LANG['due'] = "Due";//1

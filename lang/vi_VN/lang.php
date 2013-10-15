@@ -143,6 +143,7 @@ $LANG['details'] = "Chi tiết";//1
 $LANG['disabled'] = "Bị ẩn";//1
 $LANG['displaying_inv'] = "Hiển thị những hóa đơn";//1
 $LANG['displaying_items'] = "Hiển thị {from} đến {to} cùa {total} dòng";//1
+$LANG['domain'] = "Domain";//0
 $LANG['dont_forget_to'] = "Không quên làm";//1
 $LANG['draft'] = "Nháp";//1
 $LANG['due'] = "Nợ";//1

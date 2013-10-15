@@ -149,6 +149,7 @@ $LANG['disable'] = "Disable";//0
 $LANG['disabled'] = "Uitgeschakeld";//1
 $LANG['displaying_inv'] = "Displaying invoices";//0
 $LANG['displaying_items'] = "Displaying {from} to {to} of {total} items";//0
+$LANG['domain'] = "Domain";//0
 $LANG['dont_forget_to'] = "Don't forget to";//0
 $LANG['draft'] = "Concept";//1
 $LANG['due'] = "Verschuldigd";//1

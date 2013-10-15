@@ -118,6 +118,7 @@ $LANG['description'] = "Beschreibung";//1
 $LANG['description_short'] = "Desc";//0
 $LANG['details'] = "Details";//1
 $LANG['disabled'] = "Deaktiviert";//1
+$LANG['domain'] = "Domain";//0
 $LANG['edit'] = "Bearbeiten";//1
 $LANG['edit_view_tooltip'] = "Bearbeiten";//1
 $LANG['email'] = "Email";//1
