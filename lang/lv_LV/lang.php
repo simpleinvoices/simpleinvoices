@@ -117,6 +117,7 @@ $LANG['description'] = "Paskaidrojums";//1
 $LANG['description_short'] = "Desc";//0
 $LANG['details'] = "Papildus info";//1
 $LANG['disabled'] = "Atslēgts";//1
+$LANG['domain'] = "Domain";//0
 $LANG['edit'] = "Labot";//1
 $LANG['edit_view_tooltip'] = "Labot";//1
 $LANG['email'] = "E-pasts";//1

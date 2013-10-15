@@ -155,6 +155,7 @@ $LANG['disable'] = "Disable";//0
 $LANG['disabled'] = "Deaktivert";
 $LANG['displaying_inv'] = "Displaying invoices";//0
 $LANG['displaying_items'] = "Displaying {from} to {to} of {total} items";//0
+$LANG['domain'] = "Domain";//0
 $LANG['dont_forget_to'] = "Don't forget to";//0
 $LANG['draft'] = "Draft";//0
 $LANG['due'] = "Due";//0
