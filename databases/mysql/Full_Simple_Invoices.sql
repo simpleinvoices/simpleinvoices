@@ -655,7 +655,8 @@ INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_rele
 ,(280,279,'','','')
 ,(281,280,'','','')
 ,(282,281,'','','')
-,(283,282,'','','');
+,(283,282,'','','')
+,(284,283,'','','');
 
 CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
