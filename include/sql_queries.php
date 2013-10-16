@@ -2263,8 +2263,8 @@ function invoice_item_tax($invoice_item_id,$line_item_tax_id,$unit_price,$quanti
 			$logger->log('ITEM :: tax rate: '.$tax['tax_percentage'], Zend_Log::INFO);
 
 			$tax_amount = lineItemTaxCalc($tax,$unit_price,$quantity);
-			//get Total tax for line item
-			$tax_total = $tax_total + $tax_amount;
+			//get Total tax for line item (unused here)
+			// $tax_total = $tax_total + $tax_amount;
 
 			$logger->log('ITEM :: Qty: '.$quantity.' Unit price: '.$unit_price, Zend_Log::INFO);
 			$logger->log('ITEM :: Tax rate: '.$tax[tax_percentage].' Tax type: '.$tax['type'].' Tax $: '.$tax_amount, Zend_Log::INFO);

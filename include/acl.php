@@ -40,7 +40,7 @@ $acl->add(new Zend_Acl_Resource('preferences'));
 $acl->add(new Zend_Acl_Resource('payment_types'));
 $acl->add(new Zend_Acl_Resource('statement'));
 
-//assign roels to resoruces
+//assign roles to resources
 
 /* alternatively, the above could be written:
 $acl->allow('guest', null, 'view');

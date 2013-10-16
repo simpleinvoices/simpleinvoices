@@ -73,7 +73,7 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 		Zend_Session::start();
 
 		/*
-		* grab user data  from the datbase
+		* grab user data  from the database
 		*/
 
 		//patch 147 adds user_role table - need to accomodate pre and post patch 147
