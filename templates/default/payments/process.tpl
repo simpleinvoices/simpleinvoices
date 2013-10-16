@@ -95,11 +95,9 @@
 		<a href="./index.php?module=payments&amp;view=manage" class="negative"><img src="./images/common/cross.png" alt="" />{$LANG.cancel}</a>
 	</div>
 
-
-	<input type="hidden" name="invoice_id" value="{$invoice.id|htmlsafe}" />
-	<input type="hidden" name="op" value="edit_preference" />
-
-</div>
+    {if $smarty.get.op == 'pay_selected_invoice'}
+        <input type="hidden" name="invoice_id" value="{$invoice.id|htmlsafe}" />
+    {/if} </div>
 
 </form>
 
