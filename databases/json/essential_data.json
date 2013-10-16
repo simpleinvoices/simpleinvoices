@@ -1156,6 +1156,9 @@
         },
         {
             "sql_patch_ref": "282"
+        },
+        {
+            "sql_patch_ref": "283"
         }
     ],
     "si_system_defaults": [

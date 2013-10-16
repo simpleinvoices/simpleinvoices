@@ -120,10 +120,10 @@ include_once('./config/define.php');
 /*
  * Include another config file if required
  */
-if( is_file('./config/custom.config.ini') ){
-     $config = new Zend_Config_Ini('./config/custom.config.ini', $environment,true);
+if( is_file('./config/custom.config.php') ){
+     $config = new Zend_Config_Ini('./config/custom.config.php', $environment,true);
 } else {
-    $config = new Zend_Config_Ini('./config/config.ini', $environment,true);	//added 'true' to allow modifications from db
+    $config = new Zend_Config_Ini('./config/config.php', $environment,true);	//added 'true' to allow modifications from db
 }
 
 //set up app with relevant php setting

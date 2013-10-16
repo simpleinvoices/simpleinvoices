@@ -1,3 +1,4 @@
+;<?php @header("location: ../index.php") and exit(0);?>
 ; Simple Invoices configuration file
 ; - refer http://www.simpleinvoices.org/config for all options
 
@@ -7,7 +8,7 @@ database.adapter        			= pdo_mysql
 database.utf8            			= true
 database.params.host     			= localhost
 database.params.username 			= root
-database.params.password 			= 
+database.params.password 			= ''
 database.params.dbname   			= simple_invoices
 database.params.port       			= 3306
 
@@ -39,7 +40,7 @@ encryption.default.key 				= this_is_the_encryption_key_change_it
 nonce.key                           = this_should_be_random_and_secret_so_change_it
 nonce.timelimit                     = 3600
 
-version.name				    	= 2013.1.beta.4
+version.name				    	= 2013.1.beta.5
  
 debug.level 				    	= All 
 debug.error_reporting				= E_ERROR
