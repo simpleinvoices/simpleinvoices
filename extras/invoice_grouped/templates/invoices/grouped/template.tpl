@@ -239,7 +239,7 @@
 							<tr>
 								<td class="tbl1-bottom col1"><b>{$LANG.quantity_short}</b></td>
 								<td class="tbl1-bottom col1" colspan="3"><b>{$LANG.item}</b></td>
-								<td class="tbl1-bottom col1" align="right"><b>{$LANG.Unit_Cost}</b></td>
+								<td class="tbl1-bottom col1" align="right"><b>{$LANG.unit_cost}</b></td>
 								<td class="tbl1-bottom col1" align="right"><b>{$LANG.Price}</b></td>
 							</tr>
 					{foreach from=$invoiceItems key=k item=invoiceItem}

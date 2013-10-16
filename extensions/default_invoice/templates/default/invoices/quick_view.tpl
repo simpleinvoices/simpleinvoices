@@ -275,7 +275,7 @@
 			<tr>
         		    <td><b>{$LANG.quantity_short}</b></td>
 					<td colspan="2"><b>{$LANG.item}</b></td>
-					<td style="text-align:right"><b>{$LANG.Unit_Cost}</b></td>
+					<td style="text-align:right"><b>{$LANG.unit_cost}</b></td>
 					<td style="text-align:right"><b>{$LANG.Price}</b></td>
 		    </tr>
 		    
@@ -293,7 +293,7 @@
 			<tr>
                	 	<td><b>{$LANG.quantity_short}</b></td>
 					<td colspan="2"><b>{$LANG.item}</b></td>
-					<td style="text-align:right"><b>{$LANG.Unit_Cost}</b></td>
+					<td style="text-align:right"><b>{$LANG.unit_cost}</b></td>
 					<td style="text-align:right"><b>{$LANG.Price}</b></td>
 	        </tr>
     {/if}

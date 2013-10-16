@@ -28,7 +28,7 @@
 	<table>
 		<tr>
 			<th>{$LANG.description} 
-				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field" title="{$LANG.Required_Field}"><img src="./images/common/required-small.png" alt="" /></a>
+				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field" title="{$LANG.required_field}"><img src="./images/common/required-small.png" alt="" /></a>
 			</th>
 			<td><input type="text" name="description" value="{$smarty.post.description|htmlsafe}" size="50" id="description"  class="validate[required]" /></td>
 		</tr>
