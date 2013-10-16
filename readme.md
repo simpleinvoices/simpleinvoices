@@ -19,7 +19,7 @@ When cloning the repository use the `--recursive` option to ensure that Zend is 
 ## Schema
 * The Entity Relationship Diagram for SI is available in the <b>databases/mysql folder</b>
 * [ERD Schema with Primary Keys only](https://raw.github.com/apmuthu/simpleinvoices/e98b20678d6b432d02fefb6a0d225e04a5b66eb3/databases/mysql/SI_Schema_2013.1.beta.5_PK.png)
-* [ERD Schema with primary and Foreign Keys](https://raw.github.com/apmuthu/simpleinvoices/e98b20678d6b432d02fefb6a0d225e04a5b66eb3/databases/mysql/SI_Schema_2013.1.beta.5_PKFK.png)
+* [ERD Schema with Primary and Foreign Keys](https://raw.github.com/apmuthu/simpleinvoices/e98b20678d6b432d02fefb6a0d225e04a5b66eb3/databases/mysql/SI_Schema_2013.1.beta.5_PKFK.png)
 
 ## About
 * Simple Invoices is released under the GPL v3 license - refer license.txt for details
@@ -34,7 +34,7 @@ We also have a mailing list for tracking commit activity. This is hosted on Goog
 
 
 ## Translations
-We are proud that SimpleInvoices is currently available in 25 different languages but we would love for that number to be even bigger!  
+We are proud that SimpleInvoices is currently available in 24 different languages but we would love for that number to be even bigger!  
 
 If you would like to help translate SimpleInvoices into your language check out our [translation project](https://www.transifex.com/projects/p/SimpleInvoices/).
 
