@@ -1419,11 +1419,23 @@
         },
         {
             "id": "2",
-            "name": "user"
+            "name": "domain_administrator"
         },
         {
             "id": "3",
+            "name": "user"
+        },
+        {
+            "id": "4",
             "name": "viewer"
+        },
+        {
+            "id": "5",
+            "name": "customer"
+        },
+        {
+            "id": "6",
+            "name": "biller"
         }
     ]
 }
