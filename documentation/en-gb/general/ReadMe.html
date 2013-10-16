@@ -74,7 +74,7 @@
 				<li>Note: SimpleInvoicesDatabase.sql works fine with MySQL 4.1 and above.
 			</ul>
 			<li>Now the database has data and files have been 'installed' in the webservers document root, SimpleInvoice just need to have its configuration file edited and then its fine to use
-			<ul><li>Open the Simple Invoices coniguration file (which is config.ini in the config/ folder) up in your favourite text editor
+			<ul><li>Open the Simple Invoices coniguration file (which is config.php in the config/ folder) up in your favourite text editor
 			<li>Edit the file so that 
 			<ul><li>$db_host equals the name of your database server (normally "localhost"), 
 			<li>$db_name to the name of the database (normally "simple_invoices"), 
@@ -167,7 +167,7 @@ memory_limit = 24M      ; Maximum amount of memory a script may consume (8MB)
 <ul>
 	<li>Simple Invoices has a login system which can allow you to protect your Simple Invoices with a username and password login system.  By default this is turned off.
 	<li>To turn on the login system in Simple Invoices all you have to do is
-	<li>Open the config/config.ini file and change the line $authentication.enabled = "false" to $authentication.enabled = "true"
+	<li>Open the config/config.php file and change the line $authentication.enabled = "false" to $authentication.enabled = "true"
 	<li>Done :), now just open up Simple Invoices and it should redirect you to a login page
 </ul>
 <a name="upgrading"><b>Ugrading Simple Invoices from one version to another</b></a>
