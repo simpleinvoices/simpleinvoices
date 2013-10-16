@@ -15,7 +15,7 @@ gl_ES      | Galego (Galician)             | 149         |             438 |    
 it_IT      | Italian (IT)                  | 149         |             438 |              303 |   51.62% | 
 lv_LV      | Latviesu (Latvian)            | 149         |             438 |              163 |   27.77% | 
 mt_MT      | Maltese (MT)                  | 149         |             438 |              303 |   51.62% | 
-nb_NO      | Norsk (Norwegian)             | 87          |             500 |              457 |   77.85% | 
+nb_NO      | Norsk (Norwegian)             | All Done    |             587 |              459 |   78.19% | 
 nl_NL      | Nederlands (Dutch)            | All Done    |             587 |              369 |   62.86% | 
 pt_PT      | Portugues (Portuguese)        | 148         |             439 |              312 |   53.15% | 
 ro_RO      | Romana (Romanian)             | 151         |             436 |              351 |   59.80% | 
