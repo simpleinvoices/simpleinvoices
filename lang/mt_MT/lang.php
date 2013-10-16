@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /*
 * Script: maltese_MT.inc.php

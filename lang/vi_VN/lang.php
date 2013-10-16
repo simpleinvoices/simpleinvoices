@@ -1,4 +1,4 @@
- <?php
+<?php
 
 /*
 * Script: lang.php
