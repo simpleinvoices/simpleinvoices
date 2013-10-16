@@ -220,7 +220,7 @@
 							<th class="si_quantity">{$LANG.quantity_short}</th>
 							<th colspan="2">{$LANG.item}</th>
 							<th class="si_right">{$LANG.unit_cost}</th>
-							<th class="si_right">{$LANG.Price}</th>
+							<th class="si_right">{$LANG.price}</th>
 					</tr>
 		
 		

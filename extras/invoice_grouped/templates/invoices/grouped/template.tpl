@@ -240,7 +240,7 @@
 								<td class="tbl1-bottom col1"><b>{$LANG.quantity_short}</b></td>
 								<td class="tbl1-bottom col1" colspan="3"><b>{$LANG.item}</b></td>
 								<td class="tbl1-bottom col1" align="right"><b>{$LANG.unit_cost}</b></td>
-								<td class="tbl1-bottom col1" align="right"><b>{$LANG.Price}</b></td>
+								<td class="tbl1-bottom col1" align="right"><b>{$LANG.price}</b></td>
 							</tr>
 					{foreach from=$invoiceItems key=k item=invoiceItem}
 						{if $invoiceItem.product.custom_field1 == $group.name}
