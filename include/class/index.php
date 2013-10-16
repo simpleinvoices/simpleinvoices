@@ -32,7 +32,7 @@ class index
 
         if ($sub_node !="") {
 
-			$sql .= " AND sub_node = ".$sub_node; 
+			$sql .= " AND sub_node = :sub_node"; 
 			$sth = $db->query($sql,':node',$node,':domain_id',$auth_session->domain_id, ':sub_node', $sub_node) 
 					or die(htmlsafe(end($dbh->errorInfo())));
 
