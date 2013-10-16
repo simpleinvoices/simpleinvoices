@@ -22,7 +22,7 @@ ro_RO      | Romana (Romanian)             | 151         |             436 |    
 sk_SK      | Slovensky (Slovak)            | All Done    |             587 |              471 |   80.24% | 
 sl_SI      | Sloven??ina (Slovenian)       | 149         |             438 |              287 |   48.89% | 
 sq_AL      | Shqip (Albanian)              | 149         |             438 |              303 |   51.62% | 
-sv_SE      | Svenska (Swedish)             | 105         |             482 |              458 |   78.02% | 
+sv_SE      | Svenska (Swedish)             | All Done    |             587 |              460 |   78.36% | 
 tr_TR      | Türkçe (Turkish)              | 149         |             438 |              303 |   51.62% | 
 vi_VN      | Vietnam (Vietnam)             | All Done    |             587 |              542 |   92.33% | 
 ----------------------------------------------------------------------------------------------------------
