@@ -131,14 +131,15 @@ INSERT INTO `si_extensions` (`id`, `domain_id`, `name`, `description`, `enabled`
 
 CREATE TABLE IF NOT EXISTS `si_index` (
   `id` int(11) NOT NULL,
-  `node` varchar(255) NOT NULL,
-  `sub_node` varchar(255) DEFAULT NULL,
-  `sub_node_2` varchar(255) DEFAULT NULL,
-  `domain_id` int(11) NOT NULL
+  `node` varchar(64) NOT NULL,
+  `sub_node` int(11) NOT NULL,
+  `sub_node_2` int(11) NOT NULL,
+  `domain_id` int(11) NOT NULL,
+  PRIMARY KEY (`node`, `sub_node`, `sub_node_2`, `domain_id`)
 ) ENGINE=MyISAM;
 
 INSERT INTO `si_index` (`id`, `node`, `sub_node`, `sub_node_2`, `domain_id`) VALUES
- (1, 'invoice', '1', '', 1);
+ (1, 'invoice', 1, 0, 1);
 
 CREATE TABLE IF NOT EXISTS `si_inventory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -221,7 +222,9 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
   PRIMARY KEY (`domain_id`,`id`),
   KEY `domain_id` (`domain_id`),
   KEY `biller_id` (`biller_id`),
-  KEY `customer_id` (`customer_id`)
+  KEY `customer_id` (`customer_id`),
+  KEY `UniqDIB` (`index_id`, `preference_id`, `biller_id`, `domain_id`), 
+  KEY `IdxDI` (`index_id`, `preference_id`, `domain_id`)
 ) ENGINE=MyISAM;
 
 INSERT INTO `si_invoices` (`id`, `index_id`, `domain_id`, `biller_id`, `customer_id`, `type_id`, `preference_id`, `date`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `note`) VALUES
@@ -656,7 +659,10 @@ INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_rele
 ,(281,280,'','','')
 ,(282,281,'','','')
 ,(283,282,'','','')
-,(284,283,'','','');
+,(284,283,'','','')
+,(285,284,'','','')
+,(286,285,'','','')
+,(287,286,'','','');
 
 CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -750,5 +756,6 @@ INSERT INTO `si_user_role` (`id`, `name`) VALUES
 ,(2, 'domain_administrator')
 ,(3,'user')
 ,(4,'viewer')
-,(5,'customer');
+,(5,'customer')
+,(6,'biller');
 

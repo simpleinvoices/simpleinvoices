@@ -1630,6 +1630,18 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['283']['patch'] = "ALTER TABLE `".TB_PREFIX."log` CHANGE `userid` `userid` INT NOT NULL DEFAULT '1';";
     $patch['283']['date']  = "20131012";
 
+    $patch['284']['name']  = "Make si_index sub_node and sub_node_2 fields as integer";
+    $patch['284']['patch'] = "ALTER TABLE `".TB_PREFIX."index` CHANGE `node` `node` VARCHAR(64) NOT NULL, CHANGE `sub_node` `sub_node` INT NOT NULL, CHANGE `sub_node_2` `sub_node_2` INT NOT NULL;";
+    $patch['284']['date']  = "20131016";
+
+    $patch['285']['name']  = "Fix compound Primary Key for si_index table";
+    $patch['285']['patch'] = "ALTER TABLE `".TB_PREFIX."index` ADD PRIMARY KEY (`node`, `sub_node`, `sub_node_2`, `domain_id`);";
+    $patch['285']['date']  = "20131016";
+
+    $patch['286']['name']  = "Speedup lookups from si_index table with indices in si_invoices table";
+    $patch['286']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD UNIQUE INDEX `UniqDIB` (`index_id`, `preference_id`, `biller_id`, `domain_id`), ADD INDEX `IdxDI` (`index_id`, `preference_id`, `domain_id`);";
+    $patch['286']['date']  = "20131016";
+
 /*
 /*
 ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );
