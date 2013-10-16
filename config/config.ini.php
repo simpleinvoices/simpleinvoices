@@ -1,4 +1,4 @@
-<?php exit();?>
+;<?php @header("location: ../index.php") and exit(0);?>
 ; Simple Invoices configuration file
 ; - refer http://www.simpleinvoices.org/config for all options
 
@@ -8,7 +8,7 @@ database.adapter        			= pdo_mysql
 database.utf8            			= true
 database.params.host     			= localhost
 database.params.username 			= root
-database.params.password 			= 
+database.params.password 			= ''
 database.params.dbname   			= simple_invoices
 database.params.port       			= 3306
 
