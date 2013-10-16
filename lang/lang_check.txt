@@ -2,7 +2,7 @@
 Lang. Code | Lang. name                    | New strings | Strings in file | Total translated |   % Done | 
 ==========================================================================================================
 ca_ES      | Catala (Catalan)              | All Done    |             587 |              301 |   51.28% | 
-cs_CZ      | Cestina (Czech)               | 149         |             438 |              255 |   43.44% | 
+cs_CZ      | Cestina (Czech)               | All Done    |             587 |              258 |   43.95% | 
 da_DK      | Dansk (Danish)                | All Done    |             587 |              326 |   55.54% | 
 de_CH      | Schwizerdütsch (Swiss German) | 149         |             438 |              254 |   43.27% | 
 de_DE      | Deutsch (German)              | All Done    |             587 |              316 |   53.83% | 
