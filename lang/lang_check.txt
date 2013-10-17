@@ -6,7 +6,7 @@ cs_CZ      | Cestina (Czech)               | All Done    |             587 |    
 da_DK      | Dansk (Danish)                | All Done    |             587 |              327 |   55.71% | 
 de_CH      | Schwizerdütsch (Swiss German) | All Done    |             587 |              255 |   43.44% | 
 de_DE      | Deutsch (German)              | All Done    |             587 |              316 |   53.83% | 
-el_GR      | Greek (Greek)                 | 149         |             438 |              303 |   51.62% | 
+el_GR      | Greek (Greek)                 | All Done    |             587 |              304 |   51.79% | 
 en_GB      | English (UK)                  | All Done    |             587 |              587 |  100.00% | 
 es_ES      | Castellano (Spanish)          | 149         |             438 |              357 |   60.82% | 
 fi_FI      | Suomi (Finnish)               | 149         |             438 |              320 |   54.51% | 
