@@ -10,7 +10,7 @@ el_GR      | Greek (Greek)                 | 149         |             438 |    
 en_GB      | English (UK)                  | All Done    |             587 |              587 |  100.00% | 
 es_ES      | Castellano (Spanish)          | 149         |             438 |              357 |   60.82% | 
 fi_FI      | Suomi (Finnish)               | 149         |             438 |              320 |   54.51% | 
-fr_FR      | Français (French)             | 108         |             479 |              394 |   67.12% | 
+fr_FR      | Français (French)             | All Done    |             587 |              400 |   68.14% | 
 gl_ES      | Galego (Galician)             | 149         |             438 |              201 |   34.24% | 
 it_IT      | Italian (IT)                  | 149         |             438 |              303 |   51.62% | 
 lv_LV      | Latviesu (Latvian)            | 149         |             438 |              163 |   27.77% | 
