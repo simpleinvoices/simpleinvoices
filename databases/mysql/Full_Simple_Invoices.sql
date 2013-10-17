@@ -129,18 +129,6 @@ CREATE TABLE IF NOT EXISTS `si_extensions` (
 INSERT INTO `si_extensions` (`id`, `domain_id`, `name`, `description`, `enabled`) VALUES
  (1, 0, 'core', 'Core part of Simple Invoices - always enabled', '1');
 
-CREATE TABLE IF NOT EXISTS `si_index` (
-  `id` int(11) NOT NULL,
-  `node` varchar(64) NOT NULL,
-  `sub_node` int(11) NOT NULL,
-  `sub_node_2` int(11) NOT NULL,
-  `domain_id` int(11) NOT NULL,
-  PRIMARY KEY (`node`, `sub_node`, `sub_node_2`, `domain_id`)
-) ENGINE=MyISAM;
-
-INSERT INTO `si_index` (`id`, `node`, `sub_node`, `sub_node_2`, `domain_id`) VALUES
- (1, 'invoice', 1, 0, 1);
-
 CREATE TABLE IF NOT EXISTS `si_inventory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL,
@@ -663,7 +651,8 @@ INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_rele
 ,(285,284,'','','')
 ,(286,285,'','','')
 ,(287,286,'','','')
-,(288,287,'','','');
+,(288,287,'','','')
+,(289,288,'','','');
 
 CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

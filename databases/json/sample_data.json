@@ -171,17 +171,6 @@
 			}
         ]
     ,
-	"si_index":
-        [
-            {
-				"id":"1",
-				"domain_id":"DOMAIN-ID",
-				"node":"invoice",
-				"sub_node":"1",
-				"sub_node_2":""
-			}
-        ]
-    ,
 	"si_invoices":
         [
             {
