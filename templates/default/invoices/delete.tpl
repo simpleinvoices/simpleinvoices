@@ -49,7 +49,7 @@
 	
 	        {if $invoicePaid != 0}
             <span class="welcome">
-				{$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe} {$LANG.delete_has_payments} {$preference.pref_currency_sign} {$invoicePaid|htmlsafe} 
+				{$preference.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe} {$LANG.delete_has_payments} {$preference.pref_currency_sign} {$invoicePaid|htmlsafe} 
     </span>
 				<br />
 				{* LANG_TODO: Add help section here!! *}
