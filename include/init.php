@@ -237,7 +237,6 @@ $early_exit[] = "documentation_view";
 //$early_exit[] = "install_index";
 
 
-$module = isset($_GET['module'])?$_GET['module']:null;
 switch ($module)
 {
 	case "export" :	
