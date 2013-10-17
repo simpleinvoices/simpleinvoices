@@ -1942,11 +1942,10 @@ function insertInvoice($type) {
 		$type, $_POST['preference_id'])) {
 		return null;
 	}
-	$sql = "INSERT 
-			INTO
+	$sql = "INSERT INTO
 		".TB_PREFIX."invoices (
 			id, 
-            		index_id,
+            index_id,
 			domain_id,
 			biller_id, 
 			customer_id, 
@@ -1977,8 +1976,7 @@ function insertInvoice($type) {
 			)";
 
 	if ($db_server == 'pgsql') {
-		$sql = "INSERT 
-				INTO
+		$sql = "INSERT INTO
 			".TB_PREFIX."invoices (
 				index_id,
 				domain_id,

@@ -662,7 +662,8 @@ INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_rele
 ,(284,283,'','','')
 ,(285,284,'','','')
 ,(286,285,'','','')
-,(287,286,'','','');
+,(287,286,'','','')
+,(288,287,'','','');
 
 CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -754,8 +755,8 @@ CREATE TABLE IF NOT EXISTS `si_user_role` (
 INSERT INTO `si_user_role` (`id`, `name`) VALUES
  (1, 'administrator')
 ,(2, 'domain_administrator')
-,(3,'user')
-,(4,'viewer')
-,(5,'customer')
-,(6,'biller');
+,(3, 'user')
+,(4, 'viewer')
+,(5, 'customer')
+,(6, 'biller');
 

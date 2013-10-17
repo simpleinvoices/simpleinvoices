@@ -1642,6 +1642,10 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['286']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD UNIQUE INDEX `UniqDIB` (`index_id`, `preference_id`, `biller_id`, `domain_id`), ADD INDEX `IdxDI` (`index_id`, `preference_id`, `domain_id`);";
     $patch['286']['date']  = "20131016";
 
+    $patch['287']['name']  = "Populate additional user roles like domain_administrator";
+    $patch['287']['patch'] = "INSERT IGNORE INTO `".TB_PREFIX."user_role` (`name`) VALUES ('domain_administrator'), ('customer'), ('biller');";
+    $patch['287']['date']  = "20131017";
+
 /*
 /*
 ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );
