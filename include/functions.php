@@ -351,12 +351,12 @@ function simpleInvoicesError($type,$info1 = "", $info2 = "")
             <br />
             Could not connect to the Simple Invoices database<br /><br />
             For information on how to fix this pease refer to the following database error: <br /> --> <b>$info1</b><br /><br />
-            If this is an Access denied error please enter the correct database connection details config/config.ini
+            If this is an Access denied error please enter the correct database connection details config/config.php
             <br />
             <br />
             <b>Note:</b> If you are installing Simple Invoices please follow the below steps: 
             <br />1. Create a blank MySQL database
-            <br />2. Enter the correct database connection details in the config/config.ini file
+            <br />2. Enter the correct database connection details in the config/config.php file
             <br />3. Refresh this page
         
             <br />
@@ -411,7 +411,7 @@ function simpleInvoicesError($type,$info1 = "", $info2 = "")
             Your Simple Invoices installation can't use the<br />
             database settings 'database.utf8'.<br /><br />  
 
-            To fix this please edit config/config.ini and<br />
+            To fix this please edit config/config.php and<br />
             set 'database.utf8' to 'false'<br />
             <br />
             ===========================================<br />

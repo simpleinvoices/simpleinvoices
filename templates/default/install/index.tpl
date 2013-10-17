@@ -7,7 +7,7 @@
 			<b>To install Simple Invoices please:</b>
 			<br />
 			<br />1. Create a blank MySQL database
-			<br />2. Enter the correct database connection details in the config/config.ini file
+			<br />2. Enter the correct database connection details in the config/config.php file
 			<br />3. Review the connection details below and if correct click the 'Install Database' button
 			<br />
 			<br />

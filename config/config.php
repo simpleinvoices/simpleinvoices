@@ -1,3 +1,4 @@
+;<?php @header("location: ../index.php"); exit(0);?>
 ; Simple Invoices configuration file
 ; - refer http://www.simpleinvoices.org/config for all options
 
