@@ -21,7 +21,7 @@
 
 	<br />
     	    {if $invoicePaid == 0}
-				{$LANG.confirm_delete} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}
+				{$LANG.confirm_delete} {$preference.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe}
             <br />
             <br />
         <form name="frmpost" action="index.php?module=invoices&amp;view=delete&amp;stage=2&amp;id={$smarty.get.id|urlencode}" method="post">
