@@ -50,7 +50,7 @@
 	
 	        {if $invoicePaid != 0}
             <span class="welcome">
-				{$preference.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe} {$LANG.delete_has_payments} {$preference.pref_currency_sign} {$invoicePaid|htmlsafe} 
+				{$preference.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe} {$LANG.delete_has_payments1} {$preference.pref_currency_sign} {$invoicePaid|siLocal_number} {$LANG.delete_has_payments2}
     </span>
 				<br />
 				{* LANG_TODO: Add help section here!! *}
