@@ -20,7 +20,7 @@ nl_NL      | Nederlands (Dutch)            | All Done    |             587 |    
 pt_PT      | Portugues (Portuguese)        | All Done    |             587 |              312 |   53.15% | 
 ro_RO      | Romana (Romanian)             | All Done    |             587 |              352 |   59.97% | 
 sk_SK      | Slovensky (Slovak)            | All Done    |             587 |              471 |   80.24% | 
-sl_SI      | Sloven??ina (Slovenian)       | 149         |             438 |              287 |   48.89% | 
+sl_SI      | Sloven??ina (Slovenian)       | All Done    |             587 |              291 |   49.57% | 
 sq_AL      | Shqip (Albanian)              | 149         |             438 |              303 |   51.62% | 
 sv_SE      | Svenska (Swedish)             | All Done    |             587 |              461 |   78.53% | 
 tr_TR      | Türkçe (Turkish)              | 149         |             438 |              303 |   51.62% | 
