@@ -8,7 +8,7 @@ de_CH      | Schwizerdütsch (Swiss German) | All Done    |             587 |    
 de_DE      | Deutsch (German)              | All Done    |             587 |              316 |   53.83% | 
 el_GR      | Greek (Greek)                 | All Done    |             587 |              304 |   51.79% | 
 en_GB      | English (UK)                  | All Done    |             587 |              587 |  100.00% | 
-es_ES      | Castellano (Spanish)          | 149         |             438 |              357 |   60.82% | 
+es_ES      | Castellano (Spanish)          | All Done    |             587 |              358 |   60.99% | 
 fi_FI      | Suomi (Finnish)               | 149         |             438 |              320 |   54.51% | 
 fr_FR      | Français (French)             | All Done    |             587 |              400 |   68.14% | 
 gl_ES      | Galego (Galician)             | 149         |             438 |              201 |   34.24% | 
