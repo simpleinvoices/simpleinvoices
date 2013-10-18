@@ -6,10 +6,10 @@
  */
 
 /**
- * Smarty {html_date} plugin
+ * Smarty {html_select_date} plugin
  *
  * Type:     function<br>
- * Name:     html_date<br>
+ * Name:     html_select_date<br>
  * Purpose:  Prints the dropdowns for date selection.
  *
  * ChangeLog:<br>
@@ -26,7 +26,7 @@
  *             dropdown to include given date unless explicitly set (Monte)
  *           - 1.3.4 fix behaviour of 0000-00-00 00:00:00 dates to match that
  *             of 0000-00-00 dates (cybot, boots)
- * @link http://smarty.php.net/manual/en/language.function.html.select.date.php {html_date}
+ * @link http://smarty.php.net/manual/en/language.function.html.select.date.php {html_select_date}
  *      (Smarty online manual)
  * @version 1.3.4
  * @author Andrei Zmievski
@@ -35,7 +35,7 @@
  * @param Smarty
  * @return string
  */
-function smarty_function_html_date($params, &$smarty)
+function smarty_function_html_select_date($params, &$smarty)
 {
     require_once $smarty->_get_plugin_filepath('shared','escape_special_chars');
     require_once $smarty->_get_plugin_filepath('shared','make_timestamp');
@@ -127,7 +127,7 @@ function smarty_function_html_date($params, &$smarty)
                 if(!is_array($_value)) {
                     $extra_attrs .= ' '.$_key.'="'.smarty_function_escape_special_chars($_value).'"';
                 } else {
-                    $smarty->trigger_error("html_date: extra attribute '$_key' cannot be an array", E_USER_NOTICE);
+                    $smarty->trigger_error("html_select_date: extra attribute '$_key' cannot be an array", E_USER_NOTICE);
                 }
                 break;
         }
