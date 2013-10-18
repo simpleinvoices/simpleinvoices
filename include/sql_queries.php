@@ -306,7 +306,9 @@ function getPreference($id) {
 function getSQLPatches() {
 	global $dbh;
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."sql_patchmanager ORDER BY sql_release";                  
+	$sql  = "SELECT * FROM ".TB_PREFIX."sql_patchmanager 
+	            WHERE NOT (sql_patch = '' AND sql_release='' AND sql_statement = '') 
+	            ORDER BY sql_release, sql_patch_ref";
 	$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
 	return $sth->fetchAll();
 }
