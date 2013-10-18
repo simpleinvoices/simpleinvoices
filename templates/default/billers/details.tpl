@@ -96,7 +96,12 @@ n Script: details.tpl
 		</tr>
 		<tr>
 			<th>{$LANG.logo_file}</th>
-			<td>{$biller.logo}</td>
+<!--			<td><a href="templates/invoices/logos/{$biller.logo}" target="new">{$biller.logo}</a></td> -->
+			<td>
+				{if $biller.logo != ''}
+					<img src="templates/invoices/logos/{$biller.logo}" alt="{$biller.logo}"><br>{$biller.logo}
+				{/if}
+			</td>
 		</tr>
 		<tr>
 			<th>{$LANG.invoice_footer}</th>
