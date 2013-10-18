@@ -13,7 +13,7 @@ fi_FI      | Suomi (Finnish)               | All Done    |             587 |    
 fr_FR      | Français (French)             | All Done    |             587 |              400 |   68.14% | 
 gl_ES      | Galego (Galician)             | All Done    |             587 |              201 |   34.24% | 
 it_IT      | Italian (IT)                  | All Done    |             587 |              306 |   52.13% | 
-lv_LV      | Latviesu (Latvian)            | 149         |             438 |              163 |   27.77% | 
+lv_LV      | Latviesu (Latvian)            | All Done    |             587 |              170 |   28.96% | 
 mt_MT      | Maltese (MT)                  | 149         |             438 |              303 |   51.62% | 
 nb_NO      | Norsk (Norwegian)             | All Done    |             587 |              459 |   78.19% | 
 nl_NL      | Nederlands (Dutch)            | All Done    |             587 |              369 |   62.86% | 
