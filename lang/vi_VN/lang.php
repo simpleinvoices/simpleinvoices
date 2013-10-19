@@ -5,7 +5,7 @@
 * 	Vietnamese translation file
 *
 * Last edited:
-*    2013-10-15
+*    2013-10-19
 *
 * License:
 *	 GPL v3 or above
@@ -78,7 +78,7 @@ $LANG['consulting'] = "Tư vấn";//1
 $LANG['consulting_style'] = "Kiểu tư vấn";//1
 $LANG['cost'] = "Trị giá";//1
 $LANG['country'] = "Quốc gia";//1
-$LANG['create_invoice'] ="Tạo Hóa đơn";//1
+$LANG['create_invoice'] = "Tạo Hóa đơn";//1
 $LANG['credit_card_details'] = "Chi tiết thẻ tín dụng";//1
 $LANG['credit_card_expiry_month'] = "Thẻ tín dụng hết hạn trong tháng";//1
 $LANG['credit_card_expiry_year'] = "Thẻ tín dụng hết hạn trong năm";//1
@@ -178,10 +178,10 @@ $LANG['export_xls'] = "Xuất ra .XLS";//1
 $LANG['export_xls_tooltip'] = "đến MS Excel như";//1
 $LANG['extensions'] = "Mở rộng";//1
 $LANG['faqs'] = "Câu hỏi thường gặp";//1
-$LANG['faqs_how'] ="Làm thế nào để tạo hóa đơn?";//1
-$LANG['faqs_need'] ="Cần làm gì khi tạo hóa đơn?";//1
-$LANG['faqs_type'] ="Những loại hóa đơn khác hau như thế nào?";//1
-$LANG['faqs_what'] ="PM In Hóa Đơn là gì?";//1
+$LANG['faqs_how'] = "Làm thế nào để tạo hóa đơn?";//1
+$LANG['faqs_need'] = "Cần làm gì khi tạo hóa đơn?";//1
+$LANG['faqs_type'] = "Những loại hóa đơn khác hau như thế nào?";//1
+$LANG['faqs_what'] = "PM In Hóa Đơn là gì?";//1
 $LANG['fax'] = "Fax";//1
 $LANG['filter_by_dates'] = "Lọc theo ngày";//1
 $LANG['filters'] = "Lọc theo cột";//1
@@ -193,7 +193,7 @@ $LANG['free'] = "Free";//0
 $LANG['from'] = "Từ";//1
 $LANG['fwrite_error'] = "Bạn đã gặp lỗi fwrite chưa?";//1
 $LANG['get_help'] = "Cần giúp đỡ";//1
-$LANG['getting_started'] ="Khởi đầu";//1
+$LANG['getting_started'] = "Khởi đầu";//1
 $LANG['gross_total'] = "Trước thuế";//1
 $LANG['hello'] = "Xin Chào";//1
 $LANG['help'] = "Trợ giúp";//1
@@ -310,8 +310,8 @@ $LANG['manage'] = "Danh Sách";//1
 $LANG['manage_billers'] = "Danh Sách NV Bán Hàng";//1
 $LANG['manage_custom_fields'] = "Danh Sách trường dữ liệu lựa chọn";//1
 $LANG['manage_customers'] = "Danh Sách Khách Hàng";//1
-$LANG['manage_data'] ="Danh Sách dữ liệ của bạn";//1
-$LANG['manage_existing_invoice'] ="Quản lý những hóa đơn tồn tại";//1
+$LANG['manage_data'] = "Danh Sách dữ liệ của bạn";//1
+$LANG['manage_existing_invoice'] = "Quản lý những hóa đơn tồn tại";//1
 $LANG['manage_invoice_preferences'] = "Quản lý loại Hóa Đơn";//1
 $LANG['manage_invoices'] = "Danh sách Hóa Đơn";//1
 $LANG['manage_payment_types'] = "Danh sách loại thanh toán";//1
@@ -503,7 +503,7 @@ $LANG['setup_add_taxrate'] = "AThêm Thuế, Nhấn ";//1
 $LANG['setup_as_biller'] = "Cài đặt riêng bạn như NV Bán Hàng, Nhấn ";//1
 $LANG['setup_create_invoices'] = "Đi đến Tạo Hóa Đơn, Nhấn ";//1
 $LANG['setup_customisation'] = "Nếu bạn cần chỉnh sửa cấu hình (ie. ngôn ngữ, mặt định, sản phẩm, vv..), Nhấn ";//1
-$LANG['shortcut'] =" Đường tắt";//1
+$LANG['shortcut'] = " Đường tắt";//1
 $LANG['show_details'] = "Hiển thị chi tiết";//1
 $LANG['show_only_unpaid_invoices'] = "Chỉ hiển thị Hóa đơn chưa Thanh Tóan";//1
 $LANG['simple_invoices'] = "Quản lý IN Hóa Đơn";//1
@@ -517,11 +517,11 @@ $LANG['statement_for_the_period'] = "Báo Cáo theo thời gian từ";//1
 $LANG['statement_of_invoices'] = "Báo Cáo của Hóa Đơn";//1
 $LANG['statement_summary'] = "Thông Tin Tóm Tắc";//1
 $LANG['statements'] = "Danh sách Báo Cáo";//1
-$LANG['stats'] =" Báo Cáo Nhanh";//1
-$LANG['stats_biller'] ="NV Bán Hàng Đứng đầu - trên tổng tiền trên Hóa Đơn";//1
-$LANG['stats_customer'] ="Khách Hàng Đứng đầu - trên tổng tiền trên Hóa Đơn";//1
-$LANG['stats_debtor'] ="Người nợ nhiều nhất";//1
-$LANG['status'] ="Trạng Thái";//1
+$LANG['stats'] = " Báo Cáo Nhanh";//1
+$LANG['stats_biller'] = "NV Bán Hàng Đứng đầu - trên tổng tiền trên Hóa Đơn";//1
+$LANG['stats_customer'] = "Khách Hàng Đứng đầu - trên tổng tiền trên Hóa Đơn";//1
+$LANG['stats_debtor'] = "Người nợ nhiều nhất";//1
+$LANG['status'] = "Trạng Thái";//1
 $LANG['street'] = "Địa chỉ";//1
 $LANG['street2'] = "Địa chỉ 2";//1
 $LANG['sub_total'] = "Tổng trước thuế";//1
@@ -586,23 +586,23 @@ $LANG['yes'] = "Đồng ý";//1
 $LANG['your_reports'] = "Báo cáo của bạn";//1
 $LANG['zip'] = "Mã Zip";//1
 
-$LANG['title_module_index']				="Trang Chính";//1
-$LANG['title_module_reports']			="Home / Reports";//0
-$LANG['title_module_invoices']			="Money / Invoices";//0
-$LANG['title_module_cron']				="Money / Recurence";//0
-$LANG['title_module_payments']			="Money / Payments";//0
-$LANG['title_module_billers']			="People / Billers";//0
-$LANG['title_module_customers']			="People / Customers";//0
-$LANG['title_module_user']				="People / Users";//0
-$LANG['title_module_products']			="Products";//0
-$LANG['title_module_product_attribute']	="Products / Product Attributes";//0
-$LANG['title_module_product_value']		="Products / Product Values";//0
-$LANG['title_module_options']			="Settings";//0
-$LANG['title_module_system_defaults']	="Settings / System Preferences";//0
-$LANG['title_module_custom_fields']		="Settings / Custom Fields";//0
-$LANG['title_module_tax_rates']			="Settings / Tax Rates";//0
-$LANG['title_module_preferences']		="Settings / Invoice Preferences";//0
-$LANG['title_module_payment_types']		="Settings / Payment Types";//0
-$LANG['title_view_index']				="Dashboard";//0
+$LANG['title_module_index']				= "Trang Chính";//1
+$LANG['title_module_reports']			= "Home / Reports";//0
+$LANG['title_module_invoices']			= "Money / Invoices";//0
+$LANG['title_module_cron']				= "Money / Recurence";//0
+$LANG['title_module_payments']			= "Money / Payments";//0
+$LANG['title_module_billers']			= "People / Billers";//0
+$LANG['title_module_customers']			= "People / Customers";//0
+$LANG['title_module_user']				= "People / Users";//0
+$LANG['title_module_products']			= "Products";//0
+$LANG['title_module_product_attribute']	= "Products / Product Attributes";//0
+$LANG['title_module_product_value']		= "Products / Product Values";//0
+$LANG['title_module_options']			= "Settings";//0
+$LANG['title_module_system_defaults']	= "Settings / System Preferences";//0
+$LANG['title_module_custom_fields']		= "Settings / Custom Fields";//0
+$LANG['title_module_tax_rates']			= "Settings / Tax Rates";//0
+$LANG['title_module_preferences']		= "Settings / Invoice Preferences";//0
+$LANG['title_module_payment_types']		= "Settings / Payment Types";//0
+$LANG['title_view_index']				= "Dashboard";//0
 
 ?>

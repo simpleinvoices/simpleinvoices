@@ -8,7 +8,7 @@
 *  Esteban Mat&iacute;as Vergara, Anton Meixome, Agustin Henze, Facundo Ameal
 *
 * Last edited:
-*    2013-10-18
+*    2013-10-19
 *
 * License:
 *    GPL v2 or above
@@ -81,7 +81,7 @@ $LANG['consulting'] = "Analizar";//1
 $LANG['consulting_style'] = "Estilo Anal&iacute;tico";//1
 $LANG['cost'] = "Cost";//0
 $LANG['country'] = "Pa&iacute;s";//1
-$LANG['create_invoice'] ="Crear una Factura";//1
+$LANG['create_invoice'] = "Crear una Factura";//1
 $LANG['credit_card_details'] = "Credit card details";//0
 $LANG['credit_card_expiry_month'] = "Credit card expiry month";//0
 $LANG['credit_card_expiry_year'] = "Credit card expiry year";//0
@@ -196,7 +196,7 @@ $LANG['free'] = "Free";//0
 $LANG['from'] = "De";//1
 $LANG['fwrite_error'] = "Did you get fwrite errors?";//0
 $LANG['get_help'] = "Obtener Ayuda";//1
-$LANG['getting_started'] ="Para empezar";//1
+$LANG['getting_started'] = "Para empezar";//1
 $LANG['gross_total'] = "Bruto Total";//1
 $LANG['hello'] = "Hello";//0
 $LANG['help'] = "Ayuda";//1
@@ -210,14 +210,14 @@ $LANG['help_currency_code'] = "Currency code is the 3 letter abbreviation for yo
 $LANG['help_custom_fields'] = "This field is a 'Custom Field'. This means that the label can be defined as whatever you want (ie. Barcode, Tax number, MSN, etc...). <br /><br />To edit or view existing 'Custom Fields' please select the Custom Fields option from the Options menu.";//0
 $LANG['help_customer_contact'] = "The 'Attn.' or Customer Contact field allow you to specify a contact within your customers business.<br /><br />This is usefull if you customer has many employees and you need to directly specify on the invoice who within your customers business this invoice is for.<br /><br /> ie. Within the customer 'Springfield Power Plant'  you may want to specify Mr Burns (or Smithers) as the customer contact as they are the person who gets the invoice.<br /><br />So an Invoice will look like <br /><br />Customer: Springfield Power Plant<br />Attn.: Mr Burns<br />";//0
 $LANG['help_database_patches'] = "<b>Database patches need to be applied</b><br />There are database patches that need to be applied, please select 'Database Upgrade Manager' from the Options menu and follow the instructions.<br /><br />The 'Database Upgrade Manager' is how Simple Invocies manages modification to the structure of the Simple Invoices database. With each new release there may be 'Database patches' that need to be applied. Database Upgrade Manage looks after these database patches.<br /><br />Database patches are individual modifications to the Simple Invoices database. With a new release there may be multiple patches that need to be applied.";//0
-$LANG['help_default_invoice_template_text'] = "<b>Note</b><br />The value you enter into the detault invoice template MUST be the actual folder name of the template you wish to select.  The invoice templates folders are located in (./templates/invoices/)<br /><br />";//0
+$LANG['help_default_invoice_template_text'] = "The value you enter into the detault invoice template MUST be the actual folder name of the template you wish to select.  The invoice templates folders are located in (./templates/invoices/)<br /><br />";//0
 $LANG['help_delete'] = "By enabling Delete, you will be able to delete any invoices you no longer want via the Quick View of that invoice.<br /><br />To delete an invoice, enable this option, then go to the Manage Invoice page and select the Quick View for the invoice you wish to delete.  In the Quick View screen there will now be a delete option in the actions menu.  Click this button and follow the prompts - Your invoice will now be deleted.<br /><br />Note: Currently only invoices can be deleted, but in the near future this will be extended to all the other sections (ie. billers, customers, etc..)";//0
 $LANG['help_email_bcc'] = "This field is not mandatory and gets the default value from the Billers email address.<br /><br />It's recommended that you BCC yourself onto this email so that you also get a copy of it.  This way you know for sure that the email has been correctly sent and you always have a backup copy of the email.<br /><br /><i>Note: You can add multiple email addresses here - just use eith , or ; to split the addresses</i>";//0
 $LANG['help_email_cc'] = "This field is not mandatory.  Here you can specify any email address you want to CC but cannot add more than 1 email address in this field<br /><br /><i>Note: You can add multiple email addresses here - just use eith , or ; to split the addresses</i>";//0
 $LANG['help_email_from'] = "This field is a mandatory field and gets the default value from the Billers email address.  You can change this email address as you require but cannot add more than 1 email address in this field<br /><br /><i>Note: There can be only 1 email address in this field</i>";//0
 $LANG['help_email_to'] = "This field is a mandatory field and gets the default value from the Customers email address.  You can change this email address as you require<br /><br /><i>Note: You can add multiple email addresses here - just use either , or ; to split the addresses</i>";//0
 $LANG['help_insert_biller_text'] = "To select no logo please select '_default_blank_logo.png' from the list.<br /><br />To add additional logos into Simple Invoices, copy the logo file into the logo directory in the Simple Invoices folder.";//0
-$LANG['help_inv_pref_currency_sign'] = "This is the curreny symbol that will be used through-out the invoice.";//0
+$LANG['help_inv_pref_currency_sign'] = "This is the curreny symbol that will be used through-out the invoice. <br /><br /><b>Note:</b> Euro, Pound etc.. please use the html code for you currency sign in this field.  Refer to the list of html codes on the following website for your non $ currency sign <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>.  <br /><br />This is required so that PDF can work correctly with non $ symbols<br /><br /> &#38;#163; is the html code for the Pound,<br /> &#38;#8364; for the Euro, etc..";//0
 $LANG['help_inv_pref_description'] = "This is the name of the set of preference - it's not used on the invoice itself, just in the creation of the invoice when you select from the drop down list which Invoice Preference you wish to use.";//0
 $LANG['help_inv_pref_invoice_detail_heading'] = "This is what will appear as the heading of the footer/details section of the invoice.";//0
 $LANG['help_inv_pref_invoice_detail_line'] = "This is the text that appear under the details/footer heading. Normally used to define payment termns etc.";//0
@@ -235,7 +235,7 @@ $LANG['help_inv_pref_status'] = "An invoice can have a status of 'Draft' or 'Rea
 $LANG['help_inv_pref_what_the'] = "Invoice Preferences allows you to define the wording of the invoice.  You can have as many different 'Invoice Preferences' defined in Simple Invoices as you want, but you can only select 1 'Invoice Preference' per invoice.<br /><br />ie. If you wanted the heading of the invoice to say 'Moes Tavern - Invoice' instead of the default 'Invoice', you can edit the 'Invoice heading' field in the relevant Invoice Preference to achieve this result";//0
 $LANG['help_invoice_create'] = "Creating invoices is easy.  Once a biller and customer have been entered into Simple Invoices all you need to do is select an invoice type from the 'Invoice +' menu, fill in the details and click 'Save Invoice'.";//0
 $LANG['help_invoice_custom_fields'] = "Need more fields in the invoice screen? Want your own fields like 'Purchase Order', 'Project name' etc..<br /><br />Simple Invoices allows you to add whatever fields you want into the invoices.  These are called 'custom fields', to edit or setup your own fields select Custom Fields from the Options menu.";//0
-$LANG['help_invoice_types'] = "In Simple Invoices there are 3 types of invoices available<br /><br />A <b>Total Invoice</b> is an invoice that - think an invoice from a plumber that lists the actions and then has one price and the tax associated.<br/ ><br />An <b>Itemised Invoice</b> is an invoice that list many different items in the same invoice - think a grocery store invoice.<br /><br />A <b>Consulting Invoice</b> is an invoice that is similar to the intemised style except that with each line item there is a detail description of the work performed/product sold - think accounting/legal firms invoices.";//0
+$LANG['help_invoice_types'] = "In Simple Invoices there are 2 types of invoices available.<br /><br />An <b>Itemised Invoice</b> is an invoice that list many different items in the same invoice, with optional notes area for each line item - think accounting/legal firms or a grocery store invoice.<br/ ><br />A <b>Total Invoice</b> is an invoice like that from a plumber that lists the actions and then has one price and the tax associated.";//0
 $LANG['help_logging'] = "To log actions performed in Simple Invoices enable this option. This creates a log in the database of what actions were performed.<br /><br />Note: At the moment the only way to view the log is in the database, soon we'll incorparte a nice log viewer into Simple Invoices.";//0
 $LANG['help_mailing_list'] = "Mailing List";//0
 $LANG['help_manage_custom_fields'] = "Custom Fields are special fields that you can label as whatever you need.<br /><br />This page allows you to define up to 4 custom fields for each of the following: products, customers, billers, and invoices.<br /><br />Once you define a label of one of the fields, this field will become available for use.  Ie. if you edit 'Invoice :: Custom field 1' and set the label as 'Project name', the next time you create an invoice there'll be a new field in the invoice screen called 'Project name'";//0
@@ -249,7 +249,7 @@ $LANG['help_required_field'] = "This is a mandatory field.  You have to enter a 
 $LANG['help_si_help'] = "Simple Invoices Help";//0
 $LANG['help_simple_invoices'] = "Simple Invoices is a basic invoicing system designed with simplicity and functionality in mind. Catering for the neds of small organisations and home users.<br /><br />For more information please refer to the Simple Invoices website:<a href='http://www.simpleinvoices.org' target='_blank'> <b>http://www.simpleinvoices.org</b></a>";//0
 $LANG['help_street2'] = "The field 'Street Address 2' is used when the street address for the biller or customer is either too long to fit one one line or contains multiple parts.<br /><br />ie. the street address 'Level 234, 325 South Malvern Road' can be seperated into <br /><br />Street: Level 234<br />Street Address 2: 325 South Malvern Road";//0
-$LANG['help_tax_rate_sign'] = "A tax can be either a percentage based (ie. Sales Tax 10%) or a flat money values (ie. $10 or £20).<br /><br />The $ in the drop down only indicates that this will be a flat money rate and it doesnt indicate the currency symbol. The 'invoice preference' that you use dictates what the currency symbol will be in your invoices.";//0
+$LANG['help_tax_rate_sign'] = "A tax can be either a percentage based (ie. Sales Tax 10%) or a flat money values (ie. $10 or Â£20).<br /><br />The $ in the drop down only indicates that this will be a flat money rate and it doesnt indicate the currency symbol. The 'invoice preference' that you use dictates what the currency symbol will be in your invoices.";//0
 $LANG['help_text'] = "<b>Warning</b><br /><br />Please backup your Simple Invoices database before running the database update, just incase anything bad happens.<br /><br />To backup the database, select 'Backup Database' from the Options menu, or use phpMyAdmin(if you have this installed) to back up the database.";//0
 $LANG['help_user_role'] = "There are 3 roles available <br /><br />Administrator:<br />which has access to all of Simple Invoices<br /><br />User:<br />which has read/write acess to all of Simple Invoices but with no access to the Settings menu <br /><br />Viewer:<br />which has read-only version of User.";//0
 $LANG['help_what_are_custom_fields'] = "Custom Fields are special fields in billers, products, customers, and invoices that you can label as whatever you want.<br /><br />Wish there was a Tax ID field in biller, just go to the Custom Fields page and define one of the blank Biller Custom Fields as Tax ID.<br /><br />Now when you go to edit a Biller there'll be a new field there called Tax ID or whatever you specified it as.";//0
@@ -313,8 +313,8 @@ $LANG['manage'] = "Gesti&oacute;n";//1
 $LANG['manage_billers'] = "Gestionar Facturadores";//1
 $LANG['manage_custom_fields'] = "Gestionar Campos Personalizables";//1
 $LANG['manage_customers'] = "Gestionar Clientes";//1
-$LANG['manage_data'] ="Gestionar sus Datos";//1
-$LANG['manage_existing_invoice'] ="Gestionar las facturas actuales";//1
+$LANG['manage_data'] = "Gestionar sus Datos";//1
+$LANG['manage_existing_invoice'] = "Gestionar las facturas actuales";//1
 $LANG['manage_invoice_preferences'] = "Gestionar Preferencias de Facturas";//1
 $LANG['manage_invoices'] = "Gestionar Facturas";//1
 $LANG['manage_payment_types'] = "Gestionar Tipos de Pago";//1
@@ -506,7 +506,7 @@ $LANG['setup_add_taxrate'] = "Add a tax rate, click ";//0
 $LANG['setup_as_biller'] = "Setup yourself as biller, click ";//0
 $LANG['setup_create_invoices'] = "Go nuts creating invoices, click ";//0
 $LANG['setup_customisation'] = "If you need to customise some of the settings (ie. language, default items, etc..), click ";//0
-$LANG['shortcut'] ="Men&uacute; de atajos";//1
+$LANG['shortcut'] = "Men&uacute; de atajos";//1
 $LANG['show_details'] = "Mostrar detalles";//1
 $LANG['show_only_unpaid_invoices'] = "Show only unpaid invoices";//0
 $LANG['simple_invoices'] = "Simple Invoices";//0
@@ -520,10 +520,10 @@ $LANG['statement_for_the_period'] = "Statement for the period";//0
 $LANG['statement_of_invoices'] = "Statement of Invoices";//0
 $LANG['statement_summary'] = "Statement summary";//0
 $LANG['statements'] = "Statements";//0
-$LANG['stats'] ="Informes r&aacute;pidos";//1
-$LANG['stats_biller'] ="Mayor Facturador - por cantidad facturada";//1
-$LANG['stats_customer'] ="Mayor Cliente - por cantidad facturada";//1
-$LANG['stats_debtor'] ="El mayor deudor";//1
+$LANG['stats'] = "Informes r&aacute;pidos";//1
+$LANG['stats_biller'] = "Mayor Facturador - por cantidad facturada";//1
+$LANG['stats_customer'] = "Mayor Cliente - por cantidad facturada";//1
+$LANG['stats_debtor'] = "El mayor deudor";//1
 $LANG['status'] = "Status";//0
 $LANG['street'] = "Calle";//1
 $LANG['street2'] = "Calle 2";//1

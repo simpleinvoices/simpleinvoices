@@ -8,7 +8,7 @@
 *	 Boštjan Jerko
 *
 * Last edited:
-* 	 2013-10-18
+* 	 2013-10-19
 *
 * License:
 *	 GPL v2 or above

@@ -4,14 +4,13 @@
 //			 and arrange the non title_* keys in alphabetical order
 //	Author : Ap.Muthu
 //	Release: 2013-10-18
+//	Updated: 2013-10-19
 //
 //	Usage  : http://si_domain.com/lang/lang_insert.php?l=vi_VN
 //			 The Source HTML would be the raw text for the lang.php file
 */
 
-$lang_cmp = (isset($_REQUEST['l']) ? trim($_REQUEST['l']) : false);
-
-if ($lang_cmp === false) die('No language given');
+$lang_cmp = (isset($_REQUEST['l']) ? trim($_REQUEST['l']) : (isset($argv[1]) ? trim($argv[1]) : false));
 
 // $lang_cmp = "nb_NO";
 

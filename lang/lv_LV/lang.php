@@ -8,7 +8,7 @@
 *	 Iveta N. Thetford
 *
 * Last edited:
-*    2013-10-18
+*    2013-10-19
 *
 * License:
 *	 GPL v2 or above
@@ -562,7 +562,7 @@ $LANG['total_paid'] = "Nomaksas kopsumma";//1
 $LANG['total_sales'] = "Total Sales";//0
 $LANG['total_sales_by_customer'] = "Total Sales by Customer";//0
 $LANG['total_style'] = "Total style";//0
-$LANG['total_taxes'] = "Total Taxes";//0
+$LANG['total_taxes'] = "Total taxes";//0
 $LANG['total_uppercase'] = "KOPSUMMA";//1
 $LANG['totals'] = "Kopsumma";//1
 $LANG['type'] = "Type";//0

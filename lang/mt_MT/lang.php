@@ -8,7 +8,7 @@
 *	 Michel Bugeja - http://oss.org.mt
 *
 * Last edited:
-*    2013-10-01
+*    2013-10-19
 *
 * License:
 *	 GPL v2 or above
@@ -506,7 +506,7 @@ $LANG['setup_add_taxrate'] = "Add a tax rate, click ";//0
 $LANG['setup_as_biller'] = "Setup yourself as biller, click ";//0
 $LANG['setup_create_invoices'] = "Go nuts creating invoices, click ";//0
 $LANG['setup_customisation'] = "If you need to customise some of the settings (ie. language, default items, etc..), click ";//0
-$LANG['shortcut'] =" Menu tax-Shortcuts";//0
+$LANG['shortcut'] = " Shortcut menu";//0
 $LANG['show_details'] = "Uri dettalji";//1
 $LANG['show_only_unpaid_invoices'] = "Show only unpaid invoices";//0
 $LANG['simple_invoices'] = "Simple Invoices";//0

@@ -8,7 +8,7 @@
 *	 Don Camillo
 *
 * Last edited:
-*    2013-10-18
+*    2013-10-19
 *
 * License:
 *	 GPL v3 or above

@@ -8,7 +8,7 @@
 *    Joakim Nyman
 *
 * Last edited:
-*    2013-10-01
+*    2013-10-19
 *
 * License:
 *    GPL v3 or above
@@ -226,7 +226,7 @@ $LANG['help_inv_pref_invoice_heading'] = "Detta är rubriken för fakturan och k
 $LANG['help_inv_pref_invoice_numbering_group'] = "En faktura kan ha olika numrering beroende på Faktura Mall. T.ex. kan du ha Offert 1 och Faktura 1.<br /><br />Detta fält indikerar vilken 'grupp' du vill att denna mall ska numreras som. Om du grupperar flera faktura mallar tillsammas så kommer alla fakturor osv.. skapade med dessa mallar att öka inom samma skala. Om du lämnar detta blankt kommer denna faktura mall att öka inom en egen skala.";//1
 $LANG['help_inv_pref_invoice_payment_method'] = "Detta är var du specificerar hur du vill att kunden betalar dig, t.ex. Check/kreditkort/bank överföring osv.";//1
 $LANG['help_inv_pref_invoice_wording'] = "Detta är vad texten för fakturan kommer vara - t.ex. om du anger Offert - i Hantera Fakturor vyn kommer det att stå Offert i faktura typ fältet och på den fakturan kommer det stå Offert istället för Faktura t.ex. Offert ID, Offert Datum, osv..";//1
-$LANG['help_inv_pref_locale'] = "Språk";//0 TODO
+$LANG['help_inv_pref_locale'] = "Språk";//1
 $LANG['help_inv_pref_payment_line1_name'] = "Här kan du specificera namnet för betalnings linje 1 t.ex. 'Konto namn'.";//1
 $LANG['help_inv_pref_payment_line1_value'] = "Här kan du specificera värdet för betalnings linje 1 t.ex. Namnet på ditt bank konto - 'H. & M. Simpson'.";//1
 $LANG['help_inv_pref_payment_line2_name'] = "Här kan du specificera namnet för betalnings linje 2 t.ex. 'Konto nummer'.";//1

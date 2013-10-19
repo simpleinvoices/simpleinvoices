@@ -5,7 +5,7 @@
 * 	Norwegian translation file
 *
 * Last edited:
-* 	 2013-10-16
+* 	 2013-10-19
 *
 * License:
 *	 GPL v3 or above
