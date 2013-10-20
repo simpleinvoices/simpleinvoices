@@ -59,4 +59,22 @@ class cronlog {
  	       return $sth->fetchColumn();
 	}
 
+	public function select()
+	{
+        	global $db;
+        	global $auth_session;
+
+		$domain_id = domain_id::get($this->domain_id);
+
+		$sql = "SELECT * FROM ".TB_PREFIX."cron_log 
+			WHERE domain_id = :domain_id
+			ORDER BY run_date DESC, id DESC;
+		";
+
+        	$sth  = $db->query($sql, ':domain_id',$domain_id)
+						or die(htmlsafe(end($dbh->errorInfo())));
+        
+ 	       return $sth;
+	}
+
 }
