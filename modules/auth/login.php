@@ -36,8 +36,22 @@ $dbAdapter = Zend_Db::factory($config->database->adapter, array(
     'dbname'   => $config->database->params->dbname)
 );
 */
+
 $errorMessage = '';
-if (!empty($_POST['user']) && !empty($_POST['pass'])) 
+$use_captcha = (USE_CAPTCHA && file_exists('library/securimage/securimage.php'));
+$captcha_failed = true;
+
+// check the user's entry for the captcha code
+if (isset($_POST['ct_captcha'])) {
+	$captcha = @$_POST['ct_captcha'];
+	require_once 'library/securimage/securimage.php';
+	$securimage = new Securimage();
+	$captcha_failed = ($securimage->check($captcha) == false);
+} elseif (! $use_captcha) {
+	$captcha_failed = false;
+}
+
+if (!empty($_POST['user']) && !empty($_POST['pass']) && !$captcha_failed) 
 {
 
 ////	require_once 'Zend/Auth/Adapter/DbTable.php';
@@ -81,7 +95,7 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 		{
 			$result = $zendDb->fetchRow("
 				SELECT 
-					u.user_id as id, u.user_email, u.user_name
+					u.user_id AS id, u.user_email, u.user_name
 				FROM 
 					".TB_PREFIX."users u
 				WHERE 
@@ -94,7 +108,7 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 		{
 			$result = $zendDb->fetchRow("
 				SELECT 
-					u.user_id as id, u.user_email, u.user_name, r.name as role_name, u.user_domain_id
+					u.user_id AS id, u.user_email, u.user_name, r.name AS role_name, u.user_domain_id
 				FROM 
 					".TB_PREFIX."user u,  ".TB_PREFIX."user_role r 
 				WHERE 
@@ -105,7 +119,7 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 		{
 			$result = $zendDb->fetchRow("
 				SELECT 
-					u.id, u.email, r.name as role_name, u.domain_id
+					u.id, u.email, r.name AS role_name, u.domain_id
 				FROM 
 					".TB_PREFIX."user u,  ".TB_PREFIX."user_role r 
 				WHERE 
@@ -125,17 +139,19 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 
 	} else {
 	
-        $errorMessage = 'Sorry, wrong user / password';
+        $errorMessage = 'Sorry, wrong user / password' . (($use_captcha) ? ' / CAPTCHA' : '');
 	
 	}
 
-} 
-
-if($_POST['action'] == 'login' && (empty($_POST['user']) OR empty($_POST['pass'])))
-{
-
-        $errorMessage = 'Username and password required';
 }
 
+if($_POST['action'] == 'login' && (empty($_POST['user']) OR empty($_POST['pass']) OR $captcha_failed))
+{
+
+        $errorMessage = 'Username and password' . (($use_captcha) ? ' and CAPTCHA' : '') . ' required';
+}
+
+// No translations for login since user's lang not known as yet
+$smarty->assign("use_captcha", $use_captcha);
 $smarty->assign("errorMessage",$errorMessage);
 ?>
