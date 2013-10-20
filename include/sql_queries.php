@@ -268,35 +268,41 @@ function _invoice_items_check_fk($invoice, $product, $tax, $update) {
 	return true;
 }
 
-function getCustomer($id) {
+function getCustomer($id, $domain_id='') {
 	global $db_server;
 	global $dbh;
 	global $auth_session;
 
+	if (empty($domain_id)) $domain_id = $auth_session->domain_id;
+
 	$print_customer = "SELECT * FROM ".TB_PREFIX."customers WHERE id = :id and domain_id = :domain_id";
-	$sth = dbQuery($print_customer, ':id', $id, ':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+	$sth = dbQuery($print_customer, ':id', $id, ':domain_id',$domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 	return $sth->fetch();
 }
 
-function getBiller($id) {
+function getBiller($id, $domain_id='') {
 	global $LANG;
 	global $dbh;
 	global $auth_session;
 
+	if (empty($domain_id)) $domain_id = $auth_session->domain_id;
+
 	$print_biller = "SELECT * FROM ".TB_PREFIX."biller WHERE id = :id and domain_id = :domain_id";
-	$sth = dbQuery($print_biller, ':id', $id, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+	$sth = dbQuery($print_biller, ':id', $id, ':domain_id', $domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 	$biller = $sth->fetch();
 	$biller['wording_for_enabled'] = $biller['enabled']==1?$LANG['enabled']:$LANG['disabled'];
 	return $biller;
 }
 
-function getPreference($id) {
+function getPreference($id, $domain_id='') {
 	global $LANG;
 	global $dbh;
 	global $auth_session;
+	
+	if (empty($domain_id)) $domain_id = $auth_session->domain_id;
 
 	$print_preferences = "SELECT * FROM ".TB_PREFIX."preferences WHERE pref_id = :id and domain_id = :domain_id";
-	$sth = dbQuery($print_preferences, ':id', $id,':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+	$sth = dbQuery($print_preferences, ':id', $id,':domain_id', $domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 	$preference = $sth->fetch();
 	$preference['status_wording'] = $preference['status']==1?$LANG['real']:$LANG['draft'];
 	$preference['enabled'] = $preference['pref_enabled']==1?$LANG['enabled']:$LANG['disabled'];
