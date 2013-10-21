@@ -676,8 +676,8 @@ CREATE TABLE IF NOT EXISTS `si_system_defaults` (
 ) ENGINE=MyISAM;
 
 INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES
- ('1','biller','4','1','1')
-,('2','customer','3','1','1')
+ ('1','biller','','1','1')
+,('2','customer','','1','1')
 ,('3','tax','1','1','1')
 ,('4','preference','1','1','1')
 ,('5','line_items','5','1','1')
