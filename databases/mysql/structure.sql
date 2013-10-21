@@ -171,7 +171,9 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
   PRIMARY KEY (`domain_id`,`id`),
   KEY `domain_id` (`domain_id`),
   KEY `biller_id` (`biller_id`),
-  KEY `customer_id` (`customer_id`)
+  KEY `customer_id` (`customer_id`),
+  KEY `UniqDIB` (`index_id`, `preference_id`, `biller_id`, `domain_id`), 
+  KEY `IdxDI` (`index_id`, `preference_id`, `domain_id`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_log` (

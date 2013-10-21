@@ -4,6 +4,7 @@ class cron {
 	
  	public $start_date;
  	public $domain_id;
+	public $id;
 
 	public function insert()
 	{
@@ -121,19 +122,17 @@ class cron {
 
 
 		$sql = "SELECT
-				cron.* ,
-                cron.id as cron_id,
-                (SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
+				cron.*
+                , cron.id as cron_id
+                , (SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
 			FROM 
-				".TB_PREFIX."cron cron,
-				".TB_PREFIX."invoices iv,
-				".TB_PREFIX."preferences pf
+				".TB_PREFIX."cron cron 
+				INNER JOIN ".TB_PREFIX."invoices iv 
+					ON (cron.invoice_id = iv.id AND cron.domain_id = iv.domain_id)
+				INNER JOIN ".TB_PREFIX."preferences pf 
+					ON (iv.preference_id = pf.pref_id AND iv.domain_id = pf.domain_id)
 			 WHERE 
 				cron.domain_id = :domain_id
-				and
-				cron.invoice_id = iv.id
-				and 
-				iv.preference_id = pf.pref_id 
 			GROUP BY
 			    cron.id
 			ORDER BY
@@ -155,20 +154,16 @@ class cron {
 		global $db;
 
 		$sql = "SELECT
-				cron.* ,
-                       		(SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
+				cron.*
+                , (SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
 			FROM 
-				".TB_PREFIX."cron cron,
-				".TB_PREFIX."invoices iv,
-				".TB_PREFIX."preferences pf
-			 WHERE 
-				cron.domain_id = :domain_id
-				and
-				cron.invoice_id = iv.id
-				and 
-				iv.preference_id = pf.pref_id 
-				and
-				cron.id = :id;";
+				".TB_PREFIX."cron cron 
+				INNER JOIN ".TB_PREFIX."invoices iv 
+					ON (cron.invoice_id = iv.id AND cron.domain_id = iv.domain_id)
+				INNER JOIN ".TB_PREFIX."preferences pf 
+					ON (iv.preference_id = pf.pref_id AND iv.domain_id = pf.domain_id)
+			WHERE cron.domain_id = :domain_id
+			  AND cron.id = :id;";
 		$sth = $db->query($sql,':domain_id',domain_id::get($this->domain_id), ':id',$this->id) or die(htmlsafe(end($dbh->errorInfo())));
 
 		return $sth->fetch();

@@ -14,7 +14,6 @@ define("consulting_invoice","3"); //
 #define("LOGGING",false);
 define("LOGGING",true);
 
-
 ####################
 /* Environment*/
 ####################

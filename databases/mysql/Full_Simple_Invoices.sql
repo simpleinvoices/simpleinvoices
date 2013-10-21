@@ -159,7 +159,6 @@ CREATE TABLE IF NOT EXISTS `si_invoice_item_tax` (
   `tax_rate` decimal(25,6) NOT NULL,
   `tax_amount` decimal(25,6) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `UnqInvTax` (`invoice_item_id`, `tax_id`)
 ) ENGINE=MyISAM;
 
 INSERT INTO `si_invoice_item_tax` (`id`, `invoice_item_id`, `tax_id`, `tax_type`, `tax_rate`, `tax_amount`) VALUES
@@ -221,7 +220,9 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
   PRIMARY KEY (`domain_id`,`id`),
   KEY `domain_id` (`domain_id`),
   KEY `biller_id` (`biller_id`),
-  KEY `customer_id` (`customer_id`)
+  KEY `customer_id` (`customer_id`),
+  KEY `UniqDIB` (`index_id`, `preference_id`, `biller_id`, `domain_id`), 
+  KEY `IdxDI` (`index_id`, `preference_id`, `domain_id`)
 ) ENGINE=MyISAM;
 
 INSERT INTO `si_invoices` (`id`, `index_id`, `domain_id`, `biller_id`, `customer_id`, `type_id`, `preference_id`, `date`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `note`) VALUES
@@ -656,7 +657,12 @@ INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_rele
 ,(281,280,'','','')
 ,(282,281,'','','')
 ,(283,282,'','','')
-,(284,283,'','','');
+,(284,283,'','','')
+,(285,284,'','','')
+,(286,285,'','','')
+,(287,286,'','','')
+,(288,287,'','','')
+,(289,288,'','','');
 
 CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -748,7 +754,8 @@ CREATE TABLE IF NOT EXISTS `si_user_role` (
 INSERT INTO `si_user_role` (`id`, `name`) VALUES
  (1, 'administrator')
 ,(2, 'domain_administrator')
-,(3,'user')
-,(4,'viewer')
-,(5,'customer');
+,(3, 'user')
+,(4, 'viewer')
+,(5, 'customer')
+,(6, 'biller');
 

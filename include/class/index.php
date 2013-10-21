@@ -9,90 +9,73 @@ Details:
 $node = this is the module in question - ie 'invoice', 'products' etc..
 $sub_node = the sub set of the node - ie. this is the 'invoice preference' if node = 'invoice'
 $sub_node_2 = 2nd sub set of the node - ir. this is the 'biller' if node = 'invoice'
-
 */
 
 class index
 {
 
-    public static function next($node, $sub_node="")
+    public static function next($node, $sub_node=0, $sub_node_2=0)
     {
 
         global $db;
         global $auth_session;
 
-        $sql = "SELECT 
-                    id 
-                FROM 
-                    ".TB_PREFIX."index 
-                WHERE
-                    domain_id = :domain_id
-                AND
-                    node = :node ";
+        $sql = "SELECT id 
+                FROM ".TB_PREFIX."index 
+                WHERE node = :node 
+                AND   sub_node = :sub_node 
+				AND   sub_node_2 = :sub_node_2
+                AND   domain_id = :domain_id
+				";
 
-        if ($sub_node !="") {
 
-			$sql .= " AND sub_node = :sub_node"; 
-			$sth = $db->query($sql,':node',$node,':domain_id',$auth_session->domain_id, ':sub_node', $sub_node) 
-					or die(htmlsafe(end($dbh->errorInfo())));
-
-		} else {
-
-			$sth = $db->query($sql,':node',$node,':domain_id',$auth_session->domain_id) 
-					or die(htmlsafe(end($dbh->errorInfo())));
-		}
+		$sth = $db->query($sql,
+				 ':node', $node,
+			 ':sub_node', $sub_node, 
+		   ':sub_node_2', $sub_node_2,
+		    ':domain_id', $auth_session->domain_id)
+			or die(htmlsafe(end($dbh->errorInfo())));
 
         $index = $sth->fetch();
 
-        if($index['id'] == "")
-        {
-            $id = "1";
-        
-        } else {
-            
-            $id = $index['id'] + 1;
-        }
+        if($index['id'] == "") $id = 1;
+        else $id = $index['id'] + 1;
         
         return $id;
 
     }
 
-    public static function increment($node,$sub_node="")
+    public static function increment($node, $sub_node=0, $sub_node_2=0)
     {
     
-        $next = index::next($node,$sub_node);
+        $next = index::next($node, $sub_node, $sub_node_2);
 
         global $db;
         global $auth_session;
         
-        /*
-        if ($sub_node !="") 
-        {
-            $subnode = "and sub_node = ".$sub_node; 
-        }
-        */
-
         if ($next == 1)
         {
 
-            $sql = "INSERT INTO ".TB_PREFIX."index (id, node, sub_node, domain_id) 
-					VALUES (:id, :node, :sub_node, :domain_id)";
+            $sql = "INSERT INTO ".TB_PREFIX."index (id, node, sub_node, sub_node_2, domain_id) 
+					VALUES (:id, :node, :sub_node, :sub_node_2, :domain_id)";
 
         } else {
 
-            $sql ="UPDATE
-                        ".TB_PREFIX."index 
-                    SET 
-                        id = :id 
-                    WHERE
-                        node = :node
-                    AND
-                        domain_id = :domain_id
-                    AND
-                        sub_node = :sub_node";
+            $sql ="UPDATE ".TB_PREFIX."index 
+                    SET   id = :id 
+                    WHERE node = :node
+					AND   sub_node = :sub_node
+                    AND   sub_node_2 = :sub_node_2
+                    AND   domain_id = :domain_id
+				  ";
         }
 
-        $sth = $db->query($sql,':id',$next,':node',$node,':sub_node', $sub_node,':domain_id',$auth_session->domain_id) 
+        $sth = $db->query($sql,
+				    ':id',$next,
+				  ':node',$node,
+			 ':sub_node', $sub_node,
+		   ':sub_node_2', $sub_node_2,
+			 ':domain_id',$auth_session->domain_id) 
 				or die(htmlsafe(end($dbh->errorInfo())));
 
         return $next;
@@ -100,31 +83,26 @@ class index
     }
 
 
-    public static function rewind($node,$sub_node="")
+    public static function rewind($node, $sub_node=0, $sub_node_2=0)
     {
 
         global $db;
         global $auth_session;
         
-        $sql = "UPDATE
-                    ".TB_PREFIX."index 
-                SET 
-                    id = (id - 1) 
-                WHERE
-                    node = :node
+        $sql = "UPDATE ".TB_PREFIX."index 
+                SET id = (id - 1) 
+                WHERE node = :node
+				AND sub_node = :sub_node
+				AND sub_node_2 = :sub_node_2
                 AND domain_id = :domain_id
 			";
 
-        if ($sub_node !="") {
-
-			$sql .= " AND sub_node = :sub_node";
-			$sth = $db->query($sql,':node',$node,':domain_id',$auth_session->domain_id, ':sub_node', $sub_node) 
-					or die(htmlsafe(end($dbh->errorInfo())));
-		} else {
-
-			$sth = $db->query($sql,':node',$node,':domain_id',$auth_session->domain_id) 
-					or die(htmlsafe(end($dbh->errorInfo())));
-		}
+		$sth = $db->query($sql,
+				 ':node', $node,
+			 ':sub_node', $sub_node, 
+		   ':sub_node_2', $sub_node_2,
+		    ':domain_id', $auth_session->domain_id) 
+				or die(htmlsafe(end($dbh->errorInfo())));
 
         return $sth;
 
@@ -378,5 +356,3 @@ class index
     }
 }
 */
-
-

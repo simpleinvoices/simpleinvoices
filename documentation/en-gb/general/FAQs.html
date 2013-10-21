@@ -5,11 +5,21 @@ Simple Invoices - Frequently Asked Questions
 </title>
 </head>
 
-<ul><li>The FAQs page is still a work in progress
-	<ul><li>
+<ul>
+	<li>The FAQs page is still a work in progress
+	<ul>
+		<li>To use cron to generate recurrent invoices, prepare a file <b>si_cron</b> and place it in the <b>/etc/cron.d</b> folder in linux with the following contents:
+<pre>
+# /etc/cron.d/si_cron: crontab fragment for simpleinvoices Recurrent Invoices Daily Cron
+#  This creates recurring invoices for simpleinvoices once a day
+
+#Simple Invoices recurrence - run each day at 1AM
+#0 1 * * * /usr/bin/wget -q "http://www.si_domain.tld/index.php?module=api&view=cron"
+0 1 * * * /usr/bin/wget -q "http://localhost/index.php?module=api&view=cron"
+</pre>
 		<li>
 		<li>  
-       </ul>
-       </ul>
+    </ul>
+</ul>
 </html>
 

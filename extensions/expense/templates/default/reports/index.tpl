@@ -180,7 +180,7 @@
 </table>
 <br />
 
-<h2>{$LANG.Other}</h2>
+<h2>{$LANG.other}</h2>
 <table class="buttons" >
     <tr>
         <td>
