@@ -91,7 +91,7 @@
 		</a>
 	</div>
 	
-	<h2>{$LANG.Other}</h2>
+	<h2>{$LANG.other}</h2>
 	<div class="si_toolbar">
 		<a href="index.php?module=reports&view=database_log" class="">
 			<img src="./images/famfam/database.png" alt="" />

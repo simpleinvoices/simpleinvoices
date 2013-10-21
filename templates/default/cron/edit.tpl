@@ -87,7 +87,7 @@
 <br />
 <table class="buttons" align="center">
 	<tr>
-		<td>
+		<td class="si_toolbar si_toolbar_form">
 			<button type="submit" class="positive" name="id" value="{$LANG.save}">
 			    <img class="button_img" src="./images/common/tick.png" alt="" /> 
 				{$LANG.save}

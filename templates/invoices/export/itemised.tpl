@@ -2,8 +2,8 @@
 			<tr>
 				<td class="tbl1 col1" ><b>{$LANG.quantity_short}</b></td>
 				<td colspan="3" class="tbl1 col1" ><b>{$LANG.item}</b></td>
-				<td class="tbl1 col1" ><b>{$LANG.Unit_Cost}</b></td>
-				<td class="tbl1 col1" align="right"><b>{$LANG.Price}</b></td>
+				<td class="tbl1 col1" ><b>{$LANG.unit_cost}</b></td>
+				<td class="tbl1 col1" align="right"><b>{$LANG.price}</b></td>
 			</tr>
 
 	

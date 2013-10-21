@@ -8,13 +8,17 @@ When cloning the repository use the `--recursive` option to ensure that Zend is 
 
 ## Downloads
 * Bleeding Edge Code: [SI Git Master](http://github.com/simpleinvoices/simpleinvoices/archive/master.zip) (.zip)
-* Latest Beta Release: [2013.1 beta 4](http://download.simpleinvoices.org/simpleinvoices/downloads/simpleinvoices.2013.1.beta.4.zip) (.zip)
+* Latest Beta Release: [2013.1 beta 5](http://download.simpleinvoices.org/simpleinvoices/downloads/simpleinvoices.2013.beta.5.zip) (.zip)
 * Latest Stable Release: [2011.1](http://download.simpleinvoices.org/simpleinvoices/downloads/simpleinvoices.2011.1.zip) (.zip)
 
 ## Documentation
 * Installation: http://simpleinvoices.org/install
 * Frequently Asked Questions: http://simpleinvoices.org/wiki/faqs
 * Help: http://simpleinvoices.org/help
+
+## Schema
+* The Entity Relationship Diagram for SI is available in the <b>databases/mysql folder</b>
+* [ERD Schema with Primary and Foreign Keys](https://github.com/apmuthu/simpleinvoices/raw/master/databases/mysql/SI_Schema_2013.1.beta.5.1_PKFK.png)
 
 ## About
 * Simple Invoices is released under the GPL v3 license - refer license.txt for details
@@ -29,7 +33,7 @@ We also have a mailing list for tracking commit activity. This is hosted on Goog
 
 
 ## Translations
-We are proud that SimpleInvoices is currently available in 25 different languages but we would love for that number to be even bigger!  
+We are proud that SimpleInvoices is currently available in 24 different languages but we would love for that number to be even bigger!  
 
 If you would like to help translate SimpleInvoices into your language check out our [translation project](https://www.transifex.com/projects/p/SimpleInvoices/).
 

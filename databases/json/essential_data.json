@@ -1159,6 +1159,21 @@
         },
         {
             "sql_patch_ref": "283"
+        },
+        {
+            "sql_patch_ref": "284"
+        },
+        {
+            "sql_patch_ref": "285"
+        },
+        {
+            "sql_patch_ref": "286"
+        },
+        {
+            "sql_patch_ref": "287"
+        },
+        {
+            "sql_patch_ref": "288"
         }
     ],
     "si_system_defaults": [
@@ -1410,11 +1425,23 @@
         },
         {
             "id": "2",
-            "name": "user"
+            "name": "domain_administrator"
         },
         {
             "id": "3",
+            "name": "user"
+        },
+        {
+            "id": "4",
             "name": "viewer"
+        },
+        {
+            "id": "5",
+            "name": "customer"
+        },
+        {
+            "id": "6",
+            "name": "biller"
         }
     ]
 }

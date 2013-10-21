@@ -45,7 +45,7 @@
 <br />
 <table class="buttons" align="center">
 	<tr>
-		<td>
+		<td class="si_toolbar si_toolbar_form">
 				<a href="./index.php?module=cron&amp;view=edit&amp;id={$cron.id|urlencode}" class="positive">
 					<img src="./images/famfam/report_edit.png" alt=""/>
 					{$LANG.edit}

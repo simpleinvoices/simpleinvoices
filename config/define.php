@@ -14,6 +14,12 @@ define("consulting_invoice","3"); //
 #define("LOGGING",false);
 define("LOGGING",true);
 
+// Securimage CAPTCHA is at http://www.phpcaptcha.org/
+// https://github.com/dapphp/securimage/archive/master.zip
+// extract to library/securimage folder in simpleinvoices
+// To turn on CAPTCHA set to true
+define("USE_CAPTCHA", false);
+
 
 ####################
 /* Environment*/

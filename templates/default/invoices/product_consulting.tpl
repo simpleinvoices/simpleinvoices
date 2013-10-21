@@ -25,7 +25,7 @@
 <tr>
 <td class="details_screen">{$LANG.quantity}</td>
 <td class="details_screen">{$LANG.description}</td>
-<td class="details_screen">{$LANG.Price}</td>
+<td class="details_screen">{$LANG.price}</td>
 
 </tr>
 

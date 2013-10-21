@@ -240,8 +240,8 @@
 			<tr class="tbl1-bottom col1">
 				<td class="tbl1-bottom "><b>{$LANG.quantity_short}</b></td>
 				<td colspan="3" class=" tbl1-bottom"><b>{$LANG.item}</b></td>
-				<td align="right" class=" tbl1-bottom"><b>{$LANG.Unit_Cost}</b></td>
-				<td align="right" class=" tbl1-bottom  "><b>{$LANG.Price}</b></td>
+				<td align="right" class=" tbl1-bottom"><b>{$LANG.unit_cost}</b></td>
+				<td align="right" class=" tbl1-bottom  "><b>{$LANG.price}</b></td>
 			</tr>
 		
 			{foreach from=$invoiceItems item=invoiceItem}

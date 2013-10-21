@@ -4,8 +4,11 @@
 checkLogin();
 
 
-$smarty -> assign("patches",getSQLPatches());
+$get_cronlog = new cronlog();
+$cronlogs = $get_cronlog->select();
 
-$smarty -> assign('pageActive', 'sqlpatch');
+$smarty -> assign("cronlogs",$cronlogs);
+
+$smarty -> assign('pageActive', 'options');
 $smarty -> assign('active_tab', '#setting');
 ?>

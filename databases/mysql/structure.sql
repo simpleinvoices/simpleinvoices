@@ -101,14 +101,6 @@ CREATE TABLE IF NOT EXISTS `si_extensions` (
   PRIMARY KEY (`id`, `domain_id`)
 ) ENGINE=MyISAM;
 
-CREATE TABLE IF NOT EXISTS `si_index` (
-  `id` int(11) NOT NULL,
-  `node` varchar(255) NOT NULL,
-  `sub_node` varchar(255) DEFAULT NULL,
-  `sub_node_2` varchar(255) DEFAULT NULL,
-  `domain_id` int(11) NOT NULL
-) ENGINE=MyISAM;
-
 CREATE TABLE IF NOT EXISTS `si_inventory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL,
@@ -171,7 +163,9 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
   PRIMARY KEY (`domain_id`,`id`),
   KEY `domain_id` (`domain_id`),
   KEY `biller_id` (`biller_id`),
-  KEY `customer_id` (`customer_id`)
+  KEY `customer_id` (`customer_id`),
+  KEY `UniqDIB` (`index_id`, `preference_id`, `biller_id`, `domain_id`), 
+  KEY `IdxDI` (`index_id`, `preference_id`, `domain_id`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_log` (
