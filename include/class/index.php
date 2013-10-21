@@ -9,21 +9,6 @@ Details:
 $node = this is the module in question - ie 'invoice', 'products' etc..
 $sub_node = the sub set of the node - ie. this is the 'invoice preference' if node = 'invoice'
 $sub_node_2 = 2nd sub set of the node - ir. this is the 'biller' if node = 'invoice'
-
-This class needs the si_index table:
-
-CREATE TABLE IF NOT EXISTS `si_index` (
-  `id` int(11) NOT NULL,
-  `node` varchar(64) NOT NULL,
-  `sub_node` int(11) NOT NULL,
-  `sub_node_2` int(11) NOT NULL,
-  `domain_id` int(11) NOT NULL,
-  PRIMARY KEY (`node`, `sub_node`, `sub_node_2`, `domain_id`)
-) ENGINE=MyISAM;
-
-INSERT INTO `si_index` (`id`, `node`, `sub_node`, `sub_node_2`, `domain_id`) VALUES
- (1, 'invoice', 1, 0, 1);
-
 */
 
 class index

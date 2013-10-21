@@ -129,6 +129,17 @@ CREATE TABLE IF NOT EXISTS `si_extensions` (
 INSERT INTO `si_extensions` (`id`, `domain_id`, `name`, `description`, `enabled`) VALUES
  (1, 0, 'core', 'Core part of Simple Invoices - always enabled', '1');
 
+CREATE TABLE IF NOT EXISTS `si_index` (
+  `id` int(11) NOT NULL,
+  `node` varchar(255) NOT NULL,
+  `sub_node` varchar(255) DEFAULT NULL,
+  `sub_node_2` varchar(255) DEFAULT NULL,
+  `domain_id` int(11) NOT NULL
+) ENGINE=MyISAM;
+
+INSERT INTO `si_index` (`id`, `node`, `sub_node`, `sub_node_2`, `domain_id`) VALUES
+ (1, 'invoice', '1', '', 1);
+
 CREATE TABLE IF NOT EXISTS `si_inventory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL,
