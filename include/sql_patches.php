@@ -1598,8 +1598,9 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['275']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `password` `password` VARCHAR(64) NULL, ADD UNIQUE INDEX `UnqEMailPwd` (`email`, `password`);";
     $patch['275']['date'] = "20131007";
 
-    $patch['276']['name'] = "Each Invoice Item can have only one instance of each tax";
-    $patch['276']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_item_tax` ADD UNIQUE INDEX `UnqInvTax` (`invoice_item_id`, `tax_id`);";
+    $patch['276']['name'] = "Removed - Each Invoice Item can have only one instance of each tax";
+    //$patch['276']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_item_tax` ADD UNIQUE INDEX `UnqInvTax` (`invoice_item_id`, `tax_id`);";
+    $patch['276']['patch'] = "select 1+1;";
     $patch['276']['date'] = "20131008";
 
     $patch['277']['name'] = "Each invoice Item must belong to a specific Invoice with a specific domain_id";
