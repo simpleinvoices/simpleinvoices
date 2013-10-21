@@ -1180,14 +1180,14 @@
         {
             "id": "1",
             "name": "biller",
-            "value": "4",
+            "value": "",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
             "id": "2",
             "name": "customer",
-            "value": "3",
+            "value": "",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
