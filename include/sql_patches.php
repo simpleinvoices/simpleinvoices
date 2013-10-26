@@ -1598,9 +1598,8 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['275']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `password` `password` VARCHAR(64) NULL, ADD UNIQUE INDEX `UnqEMailPwd` (`email`, `password`);";
     $patch['275']['date'] = "20131007";
 
-    $patch['276']['name'] = "Removed - Each Invoice Item can have only one instance of each tax";
-    //$patch['276']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_item_tax` ADD UNIQUE INDEX `UnqInvTax` (`invoice_item_id`, `tax_id`);";
-    $patch['276']['patch'] = "select 1+1;";
+    $patch['276']['name'] = "Each invoice Item must belong to a specific Invoice with a specific domain_id";
+    $patch['276']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` ADD COLUMN `domain_id` INT NOT NULL DEFAULT '1' AFTER `invoice_id`;";
     $patch['276']['date'] = "20131008";
 
     $patch['277']['name'] = "Add Index for Quick Invoice Item Search for a domain_id";
@@ -1608,7 +1607,8 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['277']['date'] = "20131008";
 
     $patch['278']['name'] = "Each Invoice Item can have only one instance of each tax";
-    $patch['278']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_item_tax` ADD UNIQUE INDEX `UnqInvTax` (`invoice_item_id`, `tax_id`);";
+    //$patch['278']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_item_tax` ADD UNIQUE INDEX `UnqInvTax` (`invoice_item_id`, `tax_id`);";
+    $patch['278']['patch'] = "SELECT 1+1;";
     $patch['278']['date'] = "20131008";
 
     $patch['279']['name'] = "Drop unused superceeded table si_product_matrix if present";
