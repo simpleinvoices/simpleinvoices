@@ -42,6 +42,10 @@
 	<script type="text/javascript" src="./include/jquery/jquery.plugins.js"></script>
 	<script type="text/javascript" src="./include/jquery/wysiwyg/wysiwyg.modified.packed.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.livequery.pack.js"></script>
+	
+	<script type="text/javascript" src="./extensions/Bootstrap_invoices/templates/default/js/bootstrap.js"></script>
+<script type="text/javascript" src="./extensions/Bootstrap_invoices/templates/default/js/holder.js"></script>
+<script type="text/javascript" src="./extensions/Bootstrap_invoices/templates/default/js/jquery.js"></script>
 {/literal}
     {$extension_jquery_files }
 	{include file='../include/jquery/jquery.functions.js.tpl'}
@@ -58,7 +62,9 @@
 {literal}
 	<script type="text/javascript" src="./include/jquery/jquery.validationEngine.js"></script>
 {/literal}
-
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<script type="text/javascript" src="./extensions/Bootstrap_invoices/templates/default/js/html5shiv.js"></script>
+<script type="text/javascript" src="./extensions/Bootstrap_invoices/templates/default/js/respond.min.js"></script>
 {$smarty.capture.hook_head_end}
 </head>
 <body class="body_si body_module_{$module} body_view_{$view}">
