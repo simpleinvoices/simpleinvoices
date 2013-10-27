@@ -1,24 +1,94 @@
-
-<div id="si_header">
-{$smarty.capture.hook_topmenu_start}
-
-	<div class="si_wrap">
-		{$LANG.hello} {$smarty.session.Zend_Auth.email|htmlsafe} | <a href="http://www.simpleinvoices.org/help" target="blank">{$LANG.help}</a>
-		{if $config->authentication->enabled == 1}
-			|
-			{if $smarty.session.Zend_Auth.id == null}
-				<a href="index.php?module=auth&amp;view=login">{$LANG.login}</a>
-			{else}
-				<a href="index.php?module=auth&amp;view=logout">{$LANG.logout}</a>
-				{if $smarty.session.Zend_Auth.domain_id <> 1}
-					| Domain: {$smarty.session.Zend_Auth.domain_id}
-				{/if}
-			{/if}
-		{/if}
-	</div>
-{$smarty.capture.hook_topmenu_end}
-</div>
-
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"> {$smarty.session.Zend_Auth.email|htmlsafe} </a>
+        </div>
+        
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+          
+          
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{$LANG.home} <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="index.php?module=index&amp;view=index">{$LANG.dashboard}</a></li>
+                <li><a href="index.php?module=reports&amp;view=index">{$LANG.all_reports}</a></li>
+              </ul>
+            </li>
+          
+          
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{$LANG.money} <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          
+          
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{$LANG.people} <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          
+          
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{$LANG.products} <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          
+          
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{$LANG.settings} <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+            
+            
+            
+            
+          </ul>
+        </div>
+      </div>
+    </div>
 
 
 
