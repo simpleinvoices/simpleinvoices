@@ -93,7 +93,7 @@ class index
                 AND domain_id = :domain_id
 			";
 
-		$sth = $db->query($sql,
+		$sth = dbQuery($sql,
 				 ':node', $node,
 			 ':sub_node', $sub_node, 
 		   ':sub_node_2', $sub_node_2,
