@@ -127,7 +127,7 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 
 	} else {
 	
-        $errorMessage = 'Sorry, wrong user / password');
+        $errorMessage = 'Sorry, wrong user / password';
 	
 	}
 
