@@ -32,6 +32,11 @@
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/main_ie.css" media="all" />
 <![endif]-->
 
+<script type="text/javascript" src="./extensions/Bootstrap_invoices/templates/default/js/jquery.js"></script>
+<script type="text/javascript">
+            var jQueryNew = jQuery.noConflict();
+        </script>
+
 	<script type="text/javascript" src="./include/jquery/jquery-1.2.6.min.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.init.js"></script>
 	<!-- jQuery Files -->
@@ -45,7 +50,6 @@
 	
 	<script type="text/javascript" src="./extensions/Bootstrap_invoices/templates/default/js/bootstrap.js"></script>
 <script type="text/javascript" src="./extensions/Bootstrap_invoices/templates/default/js/holder.js"></script>
-<script type="text/javascript" src="./extensions/Bootstrap_invoices/templates/default/js/jquery.js"></script>
 {/literal}
     {$extension_jquery_files }
 	{include file='../include/jquery/jquery.functions.js.tpl'}
