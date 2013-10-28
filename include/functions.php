@@ -57,13 +57,12 @@ function getLogo($biller) {
 * Arguments:
 * field		- The custom field in question
 **/
-function get_custom_field_label($field)         {
+function get_custom_field_label($field, $domain_id='')         {
 	global $LANG;
-	global $dbh;
-	global $auth_session;
+	$domain_id = domain_id::get($domain_id);
 	
     $sql =  "SELECT cf_custom_label FROM ".TB_PREFIX."custom_fields WHERE cf_custom_field = :field AND domain_id = :domain_id";
-    $sth = dbQuery($sql, ':field', $field, ':domain_id', $auth_session->domain_id) or die(end($dbh->errorInfo()));
+    $sth = dbQuery($sql, ':field', $field, ':domain_id', $domain_id);
 
     $cf = $sth->fetch();
 
@@ -151,14 +150,13 @@ function get_custom_field_name($field) {
     return $custom_field_name;
 }
 
-function calc_invoice_paid($inv_idField) {
+function calc_invoice_paid($inv_idField, $domain_id='') {
 	global $LANG;
-	global $dbh;
-	global $auth_session;
+	$domain_id = domain_id::get($domain_id);
 
 	#amount paid calc - start
 	$x1 = "SELECT COALESCE(SUM(ac_amount), 0) AS amount FROM ".TB_PREFIX."payment WHERE ac_inv_id = :inv_id AND domain_id = :domain_id";
-	$sth = dbQuery($x1, ':inv_id', $inv_idField, ':domain_id',$auth_session->domain_id) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($x1, ':inv_id', $inv_idField, ':domain_id',$domain_id);
 	while ($result_x1Array = $sth->fetch()) {
 		$invoice_paid_Field = $result_x1Array['amount'];
 		$invoice_paid_Field_format = number_format($result_x1Array['amount'],2);
@@ -168,10 +166,9 @@ function calc_invoice_paid($inv_idField) {
 }
 
 
-function calc_customer_total($customer_id) {
+function calc_customer_total($customer_id, $domain_id='') {
 	global $LANG;
-	global $dbh;
-	global $auth_session;
+	$domain_id = domain_id::get($domain_id);
 	
     $sql ="SELECT
 		COALESCE(SUM(ii.total),  0) AS total 
@@ -182,16 +179,16 @@ function calc_customer_total($customer_id) {
 		iv.customer_id  = :customer
 	AND ii.domain_id = :domain_id";
 	
-    $sth = dbQuery($sql, ':customer', $customer_id, ':domain_id',$auth_session->domain_id) or die(end($dbh->errorInfo()));
+    $sth = dbQuery($sql, ':customer', $customer_id, ':domain_id',$domain_id);
 	$invoice = $sth->fetch();
 
 	//return number_format($invoice['total'],"#########.##");
 	return $invoice['total'];
 }
 
-function calc_customer_paid($customer_id) {
+function calc_customer_paid($customer_id, $domain_id='') {
 	global $LANG;
-	global $auth_session;
+	$domain_id = domain_id::get($domain_id);
 		
 #amount paid calc - start
 	$sql = "
@@ -203,7 +200,7 @@ function calc_customer_paid($customer_id) {
 		iv.customer_id = :customer
 	AND ap.domain_id = :domain_id";
 	
-	$sth = dbQuery($sql, ':customer', $customer_id, ':domain_id',$auth_session->domain_id);
+	$sth = dbQuery($sql, ':customer', $customer_id, ':domain_id',$domain_id);
 	$invoice = $sth->fetch();
 
 	return $invoice['amount'];
@@ -219,13 +216,13 @@ function calc_customer_paid($customer_id) {
 * Arguments:
 * invoice_id		- The name of the field, ie. Custom Field 1, etc..
 **/
-function calc_invoice_tax($invoice_id) {
+function calc_invoice_tax($invoice_id, $domain_id='') {
 	global $LANG;
-	global $auth_session;
+	$domain_id = domain_id::get($domain_id);
 		
 	#invoice total tax
 	$sql ="SELECT SUM(tax_amount) AS total_tax FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :invoice_id AND domain_id = :domain_id";
-	$sth = dbQuery($sql, ':invoice_id', $invoice_id, ':domain_id',$auth_session->domain_id);
+	$sth = dbQuery($sql, ':invoice_id', $invoice_id, ':domain_id',$domain_id);
 
 	$tax = $sth->fetch();
 
@@ -269,8 +266,8 @@ function dropDown($choiceArray, $defVal) {
 **/
 
 function show_custom_field($custom_field,$custom_field_value,$permission,$css_class_tr,$css_class1,$css_class2,$td_col_span,$seperator) {
-	global $dbh;
-	global $auth_session;
+
+	$domain_id = domain_id::get();
 
 		/*
 	*get the last character of the $custom field - used to set the name of the field
@@ -283,7 +280,7 @@ function show_custom_field($custom_field,$custom_field_value,$permission,$css_cl
 	$display_block = "";
 
 	$get_custom_label ="SELECT cf_custom_label FROM ".TB_PREFIX."custom_fields WHERE cf_custom_field = :field AND domain_id = :domain_id";
-	$sth = dbQuery($get_custom_label, ':field', $custom_field, ':domain_id', $auth_session->domain_id) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($get_custom_label, ':field', $custom_field, ':domain_id', $domain_id);
 
 	while ($Array_cl = $sth->fetch()) {
                 $has_custom_label_value = $Array_cl['cf_custom_label'];
@@ -325,7 +322,7 @@ EOD;
 	return $display_block;
 }
 
-function simpleInvoicesError($type,$info1 = "", $info2 = "") 
+function simpleInvoicesError($type, $info1 = "", $info2 = "") 
 {
 
     switch ($type)
@@ -426,9 +423,10 @@ function simpleInvoicesError($type,$info1 = "", $info2 = "")
 
 function checkConnection() {
 	global $dbh;
+	global $db_server;
 	
 	if(!$dbh) {
-		simpleInvoiceError("dbConnection",$db_server,$dbh->errorInfo());
+		simpleInvoicesError("dbConnection",$db_server,$dbh->errorInfo());
 /*
 		die('<br />
 		===========================================<br />

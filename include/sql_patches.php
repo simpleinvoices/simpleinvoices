@@ -1423,8 +1423,13 @@ ADD `language` VARCHAR( 255 ) NULL ;";
     $patch['239']['date'] = "20100321";
 
     $patch['240']['name'] = "si_system_defaults - add composite primary key";
-    #$patch['240']['patch'] = "ALTER TABLE  `".TB_PREFIX."system_defaults` DROP INDEX `name`, DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
-    $patch['240']['patch'] = "select +1 from `".TB_PREFIX."system_defaults`";
+    $patch['240']['patch'] = "
+		ALTER TABLE  `".TB_PREFIX."system_defaults` ADD `new_id` INT( 11 ) NOT NULL FIRST; 
+		UPDATE `".TB_PREFIX."system_defaults` SET new_id = id; 
+		ALTER TABLE  `".TB_PREFIX."system_defaults` DROP  `id` ; 
+		ALTER TABLE  `".TB_PREFIX."system_defaults` DROP INDEX `name` ; 
+		ALTER TABLE  `".TB_PREFIX."system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; 
+		ALTER TABLE  `".TB_PREFIX."system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );";
     $patch['240']['date'] = "20100305";
 
     $patch['241']['name'] = "si_system_defaults - add composite primary key";
@@ -1598,9 +1603,8 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['275']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `password` `password` VARCHAR(64) NULL, ADD UNIQUE INDEX `UnqEMailPwd` (`email`, `password`);";
     $patch['275']['date'] = "20131007";
 
-    $patch['276']['name'] = "Removed - Each Invoice Item can have only one instance of each tax";
-    //$patch['276']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_item_tax` ADD UNIQUE INDEX `UnqInvTax` (`invoice_item_id`, `tax_id`);";
-    $patch['276']['patch'] = "select 1+1;";
+    $patch['276']['name'] = "Each invoice Item must belong to a specific Invoice with a specific domain_id";
+    $patch['276']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` ADD COLUMN `domain_id` INT NOT NULL DEFAULT '1' AFTER `invoice_id`;";
     $patch['276']['date'] = "20131008";
 
     $patch['277']['name'] = "Add Index for Quick Invoice Item Search for a domain_id";
@@ -1608,7 +1612,8 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['277']['date'] = "20131008";
 
     $patch['278']['name'] = "Each Invoice Item can have only one instance of each tax";
-    $patch['278']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_item_tax` ADD UNIQUE INDEX `UnqInvTax` (`invoice_item_id`, `tax_id`);";
+    //$patch['278']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_item_tax` ADD UNIQUE INDEX `UnqInvTax` (`invoice_item_id`, `tax_id`);";
+    $patch['278']['patch'] = "SELECT 1+1;";
     $patch['278']['date'] = "20131008";
 
     $patch['279']['name'] = "Drop unused superceeded table si_product_matrix if present";
@@ -1647,12 +1652,12 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['287']['patch'] = "INSERT IGNORE INTO `".TB_PREFIX."user_role` (`name`) VALUES ('domain_administrator'), ('customer'), ('biller');";
     $patch['287']['date']  = "20131017";
 
+/*
+
     $patch['288']['name']  = "Fully relational now - do away with the si_index table";
     $patch['288']['patch'] = "DROP TABLE IF EXISTS `".TB_PREFIX."index`;";
     $patch['288']['date']  = "20131017";
 
-/*
-/*
 ALTER TABLE  `si_system_defaults` ADD  `new_id` INT( 11 ) NOT NULL FIRST; UPDATE `si_system_defaults` SET new_id = id; ALTER TABLE  `si_system_defaults` DROP  `id` ; ALTER TABLE  `si_system_defaults` DROP INDEX `name` ; ALTER TABLE  `si_system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; ALTER TABLE  `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );
 
  */

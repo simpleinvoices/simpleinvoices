@@ -4,13 +4,13 @@ Lang. Code | Lang. name                    | New strings | Strings in file | Tot
 ca_ES      | Catala (Catalan)              | All Done    |             587 |              301 |   51.28% | 
 cs_CZ      | Cestina (Czech)               | All Done    |             587 |              257 |   43.78% | 
 da_DK      | Dansk (Danish)                | All Done    |             587 |              333 |   56.73% | 
-de_CH      | Schwizerdütsch (Swiss German) | All Done    |             587 |              255 |   43.44% | 
+de_CH      | SchwizerdÃ¼tsch (Swiss German) | All Done    |             587 |              255 |   43.44% | 
 de_DE      | Deutsch (German)              | All Done    |             587 |              316 |   53.83% | 
 el_GR      | Greek (Greek)                 | All Done    |             587 |              304 |   51.79% | 
 en_GB      | English (UK)                  | All Done    |             587 |              587 |  100.00% | 
 es_ES      | Castellano (Spanish)          | All Done    |             587 |              358 |   60.99% | 
 fi_FI      | Suomi (Finnish)               | All Done    |             587 |              322 |   54.86% | 
-fr_FR      | Français (French)             | All Done    |             587 |              401 |   68.31% | 
+fr_FR      | FranÃ§ais (French)             | All Done    |             587 |              401 |   68.31% | 
 gl_ES      | Galego (Galician)             | All Done    |             587 |              201 |   34.24% | 
 it_IT      | Italian (IT)                  | All Done    |             587 |              305 |   51.96% | 
 lv_LV      | Latviesu (Latvian)            | All Done    |             587 |              170 |   28.96% | 
@@ -19,10 +19,11 @@ nb_NO      | Norsk (Norwegian)             | All Done    |             587 |    
 nl_NL      | Nederlands (Dutch)            | All Done    |             587 |              369 |   62.86% | 
 pt_PT      | Portugues (Portuguese)        | All Done    |             587 |              312 |   53.15% | 
 ro_RO      | Romana (Romanian)             | All Done    |             587 |              352 |   59.97% | 
+ru_RU      | Russian (Russian)             | All Done    |             587 |              573 |   97.61% | 
 sk_SK      | Slovensky (Slovak)            | All Done    |             587 |              477 |   81.26% | 
 sl_SI      | Sloven??ina (Slovenian)       | All Done    |             587 |              291 |   49.57% | 
 sq_AL      | Shqip (Albanian)              | All Done    |             587 |              302 |   51.45% | 
 sv_SE      | Svenska (Swedish)             | All Done    |             587 |              462 |   78.71% | 
-tr_TR      | Türkçe (Turkish)              | All Done    |             587 |              305 |   51.96% | 
+tr_TR      | TÃ¼rkÃ§e (Turkish)              | All Done    |             587 |              305 |   51.96% | 
 vi_VN      | Vietnam (Vietnam)             | All Done    |             587 |              548 |   93.36% | 
 ----------------------------------------------------------------------------------------------------------

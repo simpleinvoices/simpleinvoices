@@ -38,20 +38,8 @@ $dbAdapter = Zend_Db::factory($config->database->adapter, array(
 */
 
 $errorMessage = '';
-$use_captcha = (USE_CAPTCHA && file_exists('library/securimage/securimage.php'));
-$captcha_failed = true;
 
-// check the user's entry for the captcha code
-if (isset($_POST['ct_captcha'])) {
-	$captcha = @$_POST['ct_captcha'];
-	require_once 'library/securimage/securimage.php';
-	$securimage = new Securimage();
-	$captcha_failed = ($securimage->check($captcha) == false);
-} elseif (! $use_captcha) {
-	$captcha_failed = false;
-}
-
-if (!empty($_POST['user']) && !empty($_POST['pass']) && !$captcha_failed) 
+if (!empty($_POST['user']) && !empty($_POST['pass'])) 
 {
 
 ////	require_once 'Zend/Auth/Adapter/DbTable.php';
@@ -139,19 +127,18 @@ if (!empty($_POST['user']) && !empty($_POST['pass']) && !$captcha_failed)
 
 	} else {
 	
-        $errorMessage = 'Sorry, wrong user / password' . (($use_captcha) ? ' / CAPTCHA' : '');
+        $errorMessage = 'Sorry, wrong user / password');
 	
 	}
 
 }
 
-if($_POST['action'] == 'login' && (empty($_POST['user']) OR empty($_POST['pass']) OR $captcha_failed))
+if($_POST['action'] == 'login' && (empty($_POST['user']) OR empty($_POST['pass'])))
 {
 
-        $errorMessage = 'Username and password' . (($use_captcha) ? ' and CAPTCHA' : '') . ' required';
+        $errorMessage = 'Username and password required';
 }
 
 // No translations for login since user's lang not known as yet
-$smarty->assign("use_captcha", $use_captcha);
 $smarty->assign("errorMessage",$errorMessage);
 ?>

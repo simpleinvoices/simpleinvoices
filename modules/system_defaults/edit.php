@@ -209,7 +209,6 @@ EOD;
 }
 else if ($_GET["submit"] == "def_payment_type") {
 
-	$defpay = getDefaultPaymentType();
 	$payments = getActivePaymentTypes();
 	
 

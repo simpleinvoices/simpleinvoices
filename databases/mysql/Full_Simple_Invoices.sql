@@ -671,8 +671,7 @@ CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `domain_id` int(5) NOT NULL DEFAULT '0',
   `extension_id` int(5) NOT NULL DEFAULT '0',
   PRIMARY KEY (`domain_id`,`id`),
-  UNIQUE KEY `UnqNameInDomain` (`domain_id`, `name`),
-  KEY `name` (`name`)
+  UNIQUE KEY `UnqNameInDomain` (`domain_id`, `name`)
 ) ENGINE=MyISAM;
 
 INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension_id`) VALUES

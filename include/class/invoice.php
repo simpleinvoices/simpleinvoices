@@ -11,14 +11,17 @@ class invoice {
     public $sort;
     public $where_field;
     public $where_value;
+    public $domain_id;
 
 	public function insert()
 	{
-		//insert in si)invoice
+		//insert in si_invoice
 
 		global $dbh;
 		global $db_server;
 		global $auth_session;
+		
+		$domain_id = domain_id::get($this->domain_id);
 		
 		$sql = "INSERT 
 				INTO
@@ -59,7 +62,7 @@ class invoice {
 		$sth= dbQuery($sql,
 			#':index_id', index::next('invoice',$pref_group['index_group'],$this->biller_id),
 			':index_id', index::next('invoice',$pref_group['index_group']),
-			':domain_id', $auth_session->domain_id,
+			':domain_id', $domain_id,
 			':biller_id', $this->biller_id,
 			':customer_id', $this->customer_id,
 			':type_id', $this->type_id,
@@ -86,6 +89,8 @@ class invoice {
 	public function insert_item()
 	{	
 		global $auth_session;
+
+		$domain_id = domain_id::get($this->domain_id);
 
 		$sql = "INSERT INTO ".TB_PREFIX."invoice_items 
 				(
@@ -115,7 +120,7 @@ class invoice {
 		//echo $sql;
 		dbQuery($sql,
 			':invoice_id', $this->invoice_id,
-			':domain_id', $auth_session->domain_id,
+			':domain_id', $domain_id,
 			':quantity', $this->quantity,
 			':product_id', $this->product_id,
 			':unit_price', $this->unit_price,
@@ -128,16 +133,17 @@ class invoice {
 			':total', $this->total
 
 			);
-
-		invoice_item_tax(lastInsertId(),$this->tax,$this->unit_price,$this->quantity,"insert");
+		$inv_item_id = lastInsertId();
+		invoice_item_tax($inv_item_id,$this->tax,$this->unit_price,$this->quantity,"insert");
+		return $inv_item_id;
 	}
 
-    public static function select($id)
+    public static function select($id, $domainid="")
     {
 		global $logger;
 		global $db;
-	    global $auth_session;
-		$domain_id = $auth_session->domain_id;
+
+		$domain_id = domain_id::get($domainid);
 
 		$sql = "SELECT 
                     i.*,
@@ -180,10 +186,12 @@ class invoice {
     
 	}
 
-    public static function get_all()
+    public static function get_all($domainid="")
     {
 		global $logger;
 	    global $auth_session;
+
+		$domain_id = domain_id::get($domainid);
 
 		$sql = "SELECT 
                     i.id as id,
@@ -197,25 +205,24 @@ class invoice {
                 ORDER BY 
                     index_name";
 
-		$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+		$sth = dbQuery($sql, ':domain_id', $domain_id);
 
         return $sth->fetchAll();
 
     }
 
-    public static function count()
+    public static function count($domainid="")
     {
 		global $logger;
 	    global $auth_session;
 
-		$sql = "SELECT 
-                    count(id) as count
-                FROM 
-                    ".TB_PREFIX."invoices 
-                WHERE 
-                    domain_id = :domain_id 
-                    ";
-		$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+		$domain_id = domain_id::get($domainid);
+
+		$sql = "SELECT count(id) AS count
+                FROM ".TB_PREFIX."invoices 
+                WHERE domain_id = :domain_id 
+        ";
+		$sth = dbQuery($sql, ':domain_id', $domain_id);
 
         return $sth;
 
@@ -224,6 +231,8 @@ class invoice {
     {
         global $config;
         global $auth_session;
+
+		$domain_id = domain_id::get($this->domain_id);
 
         if(empty($having))
         {
@@ -412,37 +421,40 @@ class invoice {
                 break;
         }
         
-        $result =  dbQuery($sql,':domain_id', $auth_session->domain_id) or die(end($dbh->errorInfo()));
+        $result =  dbQuery($sql,':domain_id', $domain_id) or die(end($dbh->errorInfo()));
         return $result;
     }
 
     public function select_all_where()
     {
 		global $logger;
-	    global $auth_session;
+
+		$domain_id = domain_id::get($this->domain_id);
+
         if($this->filter == "date")
         {
-            $where = "and date between '$this->start_date' and '$this->end_date'";
+            $where = "AND date BETWEEN '$this->start_date' AND '$this->end_date'";
         }
 
 		$sql = "SELECT i.*, p.pref_description AS preference FROM ".TB_PREFIX."invoices i LEFT JOIN ".TB_PREFIX."preferences p  ON (i.preference_id = p.pref_id AND i.domain_id = p.domain_id) WHERE i.domain_id = :domain_id ORDER BY i.id";
-		$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+		$sth = dbQuery($sql, ':domain_id', $domain_id);
 
         return $sth->fetchAll();
 
     }
 
-	public static function getInvoiceItems($id) {
+	public static function getInvoiceItems($id, $domainid="") {
 	
 		global $logger;
-		global $auth_session;
 		
+		$domain_id = domain_id::get($domainid);
+
 		$sql = "SELECT * FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :id AND domain_id = :domain_id ORDER BY id";
-		$sth = dbQuery($sql, ':id', $id, ':domain_id', $auth_session->domain_id);
+		$sth = dbQuery($sql, ':id', $id, ':domain_id', $domain_id);
 		
 		$invoiceItems = null;
 		
-		for($i=0;$invoiceItem = $sth->fetch();$i++) {
+		for ($i=0; $invoiceItem = $sth->fetch(); $i++) {
 		
 //			$invoiceItem['quantity'] = $invoiceItem['quantity'];
 //			$invoiceItem['unit_price'] = $invoiceItem['unit_price'];
@@ -459,7 +471,7 @@ class invoice {
 			}
 			
 			$sql = "SELECT * FROM ".TB_PREFIX."products WHERE id = :id AND domain_id = :domain_id";
-			$tth = dbQuery($sql, ':id', $invoiceItem['product_id'], ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+			$tth = dbQuery($sql, ':id', $invoiceItem['product_id'], ':domain_id', $domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 			$invoiceItem['product'] = $tth->fetch();	
 
 			$tax = taxesGroupedForInvoiceItem($invoiceItem['id']);
@@ -480,13 +492,15 @@ class invoice {
     * Function: are_there_any
     * 
     * Used to see if there are any invoices in the database for a given domain
+	* Called directly from index.php with invoice::are_there_any()
+	* and hence cannot use the $this property
     **/
-    public static function are_there_any()
+    public static function are_there_any($domainid="")
     {
-	    global $auth_session;
+		$domain_id = domain_id::get($domainid);
 
 		$sql = "SELECT count(*) AS count FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id";
-		$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+		$sth = dbQuery($sql, ':domain_id', $domain_id);
 
         $count = $sth->fetch();
         return $count['count'];
@@ -497,12 +511,13 @@ class invoice {
     * 
     * Used to get the gross total for a given invoice number
     **/
-    public static function getInvoiceGross($invoice_id) {
+    public static function getInvoiceGross($invoice_id, $domainid="") {
         global $LANG;
-		global $auth_session;
         
+		$domain_id = domain_id::get($domainid);
+
         $sql ="SELECT SUM(gross_total) AS gross_total FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :invoice_id AND domain_id = :domain_id";
-        $sth = dbQuery($sql, ':invoice_id', $invoice_id, ':domain_id', $auth_session->domain_id);
+        $sth = dbQuery($sql, ':invoice_id', $invoice_id, ':domain_id', $domain_id);
         $res = $sth->fetch();
         //echo "TOTAL".$res['total'];
         return $res['gross_total'];
@@ -511,10 +526,15 @@ class invoice {
     * Function invoice::max
     * 
     * Used to get the max invoice id
+	* is called directly from sql_patches.php with invoice::max()
+	* and hence $this->domain_id is not usable 
     **/
-    public static function max() {
-        global $auth_session;
+    public static function max($domainid="") {
+
         global $logger;
+
+		$domain_id = domain_id::get($domainid);
+
         $db=new db();
         if ( getNumberOfDonePatches() < '179')
         {
@@ -522,7 +542,7 @@ class invoice {
 		    $sth = $db->query($sql);
         } else {
             $sql ="SELECT max(id) AS max FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id";
-		    $sth = $db->query($sql, ':domain_id', $auth_session->domain_id);
+		    $sth = $db->query($sql, ':domain_id', $domain_id);
         }
 
         $count = $sth->fetch();
@@ -534,31 +554,35 @@ class invoice {
 	{
 		$invoice = invoice::select($this->id);
 		$ni = new invoice();
-		$ni->biller_id = $invoice['biller_id'];
-		$ni->customer_id = $invoice['customer_id'];
-		$ni->type_id = $invoice['type_id'];
+		$ni->domain_id     = $invoice['domain_id'];
+		$ni->biller_id     = $invoice['biller_id'];
+		$ni->customer_id   = $invoice['customer_id'];
+		$ni->type_id       = $invoice['type_id'];
 		$ni->preference_id = $invoice['preference_id'];
 		//$ni->date = $invoice['date_original'];
-		$ni->date = date('Y-m-d');
+		$ni->date          = date('Y-m-d');
 		$ni->custom_field1 = $invoice['custom_field1'];
 		$ni->custom_field2 = $invoice['custom_field2'];
 		$ni->custom_field3 = $invoice['custom_field3'];
 		$ni->custom_field4 = $invoice['custom_field4'];
-		$ni->note = $invoice['note'];
+		$ni->note          = $invoice['note'];
 		$ni_id = $ni->insert();
+
 		//insert each line item
-		foreach ($invoice['invoice_items'] as $key => $value)
+		$nii = new invoice();
+		$nii->invoice_id = $ni_id;
+		$nii->domain_id  = $ni->domain_id;
+
+		foreach ($invoice['invoice_items'] as $k => $v)
 		{
-			$nii = new invoice();
-			$nii->invoice_id=$ni_id;
-			$nii->quantity=$invoice['invoice_items'][$key]['quantity'];
-			$nii->product_id=$invoice['invoice_items'][$key]['product_id'];
-			$nii->unit_price=$invoice['invoice_items'][$key]['unit_price'];
-			$nii->tax_amount=$invoice['invoice_items'][$key]['tax_amount'];
-			$nii->gross_total=$invoice['invoice_items'][$key]['gross_total'];
-			$nii->description=$invoice['invoice_items'][$key]['description'];
-			$nii->total=$invoice['invoice_items'][$key]['total'];
-			$nii->tax=$invoice['invoice_items'][$key]['tax'];
+			$nii->quantity    = $v['quantity'];
+			$nii->product_id  = $v['product_id'];
+			$nii->unit_price  = $v['unit_price'];
+			$nii->tax_amount  = $v['tax_amount'];
+			$nii->gross_total = $v['gross_total'];
+			$nii->description = $v['description'];
+			$nii->total       = $v['total'];
+			$nii->tax         = $v['tax'];
 			$nii_id = $nii->insert_item();
 		}
 		
