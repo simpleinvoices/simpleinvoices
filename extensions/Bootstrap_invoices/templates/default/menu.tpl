@@ -77,4 +77,78 @@
 		</div>
 	</div>
 </div>
+<div class="col si_wrap" id="page_title">
+	<h1>
+		{ if $pageActive == "dashboard"}{$LANG.dashboard}{/if}
+		{ if $pageActive == "report"}{$LANG.all_reports}{/if}
+		{ if $pageActive == "invoice"}{$LANG.invoices}{/if}
+		{ if $subPageActive == "invoice_edit"}{$LANG.edit}{/if}
+		{ if $subPageActive == "invoice_view"}{$LANG.quick_view}{/if}
+		{ if $pageActive == "invoice_new"}{$LANG.new_invoice}{/if}
+		{ if $subPageActive == "invoice_new_itemised"}{$LANG.itemised}{/if}
+		{ if $subPageActive == "invoice_new_total"}{$LANG.total}{/if}
+		
+		{ if $pageActive == "cron"}{$LANG.recurrence}{/if}
+		{ if $subPageActive == "cron_add"}{$LANG.add}{/if}
+		{ if $subPageActive == "cron_edit"}{$LANG.edit}{/if}
+		{ if $subPageActive == "cron_view"}{$LANG.view}{/if}
+		{ if $pageActive == "payment"}{$LANG.payments}{/if}
+		{ if $subPageActive == "payment_process"}{$LANG.process}{/if}
+		{ if $subPageActive == "payment_eway"}{$LANG.eway}{/if}
+		{ if $subPageActive == "payment_filter_invoice"}{$LANG.payments_filtered}{$preference.pref_inv_wording|htmlsafe}{$smarty.get.id|htmlsafe}{/if}
+		{ if $subPageActive == "payment_filter_customer"}{$LANG.payments_filtered_customer} '{$customer.name}'{/if}
+		{ if $pageActive == "report_sale"}{$LANG.sales_report}{/if}
+		{ if $pageActive == "customer"}{$LANG.customers}{/if}
+		{ if $subPageActive == "customer_add"}{$LANG.add}{/if}
+		{ if $subPageActive == "customer_view"}{$LANG.view}{/if}
+		{ if $subPageActive == "customer_edit"}{$LANG.edit}{/if}
+		{ if $pageActive == "biller"}{$LANG.billers}{/if}
+		{ if $subPageActive == "biller_add"}{$LANG.add}{/if}
+		{ if $subPageActive == "biller_view"}{$LANG.view}{/if}
+		{ if $subPageActive == "biller_edit"}{$LANG.edit}{/if}
+		{ if $pageActive == "user"}{$LANG.users}{/if}
+		{ if $subPageActive == "user_add"}{$LANG.add}{/if}
+		{ if $subPageActive == "user_view"}{$LANG.view}{/if}
+		{ if $subPageActive == "user_edit"}{$LANG.edit}{/if}
+		{ if $pageActive == "product_manage"} {$LANG.manage_products}{/if}
+		{ if $subPageActive == "product_view"}{$LANG.view}{/if}
+		{ if $subPageActive == "product_edit"}{$LANG.edit}{/if}
+		{ if $pageActive == "product_add"}{$LANG.add_product} {/if}
+		{if $defaults.inventory == "1"}
+		{ if $pageActive == "inventory"}{$LANG.inventory}{/if} 
+		{ if $subPageActive == "inventory_view"}{$LANG.view}{/if}
+		{ if $subPageActive == "inventory_edit"}{$LANG.edit}{/if}
+		{ if $subPageActive == "inventory_add"}{$LANG.add}{/if}
+		{/if}
+		{if $defaults.product_attributes}
+		{ if $pageActive == "inventory"} {$LANG.product_attributes}{/if}
+		{ if $subPageActive == "inventory_view"}{$LANG.view}{/if}
+		{ if $subPageActive == "inventory_edit"}{$LANG.edit}{/if}
+		{ if $subPageActive == "inventory_add"}{$LANG.add}{/if}
+		{ if $pageActive == "inventory"}{$LANG.product_values}{/if}
+		{ if $subPageActive == "inventory_view"}{$LANG.view}{/if}
+		{ if $subPageActive == "inventory_edit"}{$LANG.edit}{/if}
+		{ if $subPageActive == "inventory_add"}{$LANG.add}{/if}
+		{/if}
+		{ if $pageActive == "setting"}{$LANG.settings}{/if}
+		{ if $subPageActive == "setting_extensions"}{$LANG.extensions}{/if}
+		{ if $pageActive == "system_default"}{$LANG.system_preferences}{/if}
+		{ if $pageActive == "custom_field"}{$LANG.custom_fields_upper}{/if}
+		{ if $subPageActive == "custom_fields_view"}{$LANG.view}{/if}
+		{ if $subPageActive == "custom_fields_edit"}{$LANG.edit}{/if}
+		{ if $pageActive == "tax_rate"}{$LANG.tax_rates}{/if}
+		{ if $subPageActive == "tax_rates_add"}{$LANG.add}{/if}
+		{ if $subPageActive == "tax_rates_view"}{$LANG.view}{/if}
+		{ if $subPageActive == "tax_rates_edit"}{$LANG.edit}{/if}
+		{ if $pageActive == "preference"}{$LANG.invoice_preferences}{/if}
+		{ if $subPageActive == "preferences_add"}{$LANG.add}{/if}
+		{ if $subPageActive == "preferences_view"}{$LANG.view}{/if}
+		{ if $subPageActive == "preferences_edit"}{$LANG.edit}{/if}
+		{ if $pageActive == "payment_type"}{$LANG.payment_types}{/if}
+		{ if $subPageActive == "payment_types_add"}{$LANG.add}{/if}
+		{ if $subPageActive == "payment_types_view"}{$LANG.view}{/if}
+		{ if $subPageActive == "payment_types_edit"}{$LANG.edit}{/if}
+		{ if $pageActive == "backup"}{$LANG.backup_database}{/if}
+	</h1>
+</div>
 
