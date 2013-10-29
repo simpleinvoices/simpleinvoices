@@ -24,7 +24,8 @@
 	<link rel="stylesheet" type="text/css" href="./include/jquery/rte/rte.css" />	
 	<link rel="stylesheet" type="text/css" href="./include/jquery/cluetip/jquery.cluetip.css" />
 
-	<link rel="stylesheet" type="text/css" href="./extensions/Bootstrap_invoices/templates/default/css/main.css" media="all"/>
+	<link rel="stylesheet" type="text/css" href="./templates/default/css/main.css" media="all"/>
+	<link rel="stylesheet" type="text/css" href="./extensions/Bootstrap_invoices/templates/default/css/somefix.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="./extensions/Bootstrap_invoices/templates/default/css/bootstrap.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="./extensions/Bootstrap_invoices/templates/default/css/bootstrap-theme.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="./templates/default/css/print.css" media="print" />
