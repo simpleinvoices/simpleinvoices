@@ -42,7 +42,10 @@ Bootstrap is a *"Sleek, intuitive, and powerful mobile first front-end framework
 - [x] themed login page
 - [x] display domain_id
 
-###beta1 (28oct2013)
+###beta1.0 (28oct2013)
+- [x] code optimization
+
+###alpha0.1 (20oct2013)
 - [x] Initial release
 
 ----------------------------------------------------------
