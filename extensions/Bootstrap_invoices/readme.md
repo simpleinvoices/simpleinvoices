@@ -7,6 +7,7 @@ Bootstrap is a `Sleek, intuitive, and powerful mobile first front-end framework 
 
 * Bootstrap is a Apache License Version 2.0
 * Bootstrap website : http://getbootstrap.com/
+
 ----------------------------------------------------------
 GitHub of this project : https://github.com/sad270/simpleinvoices/tree/bootstrap_invoices
 
