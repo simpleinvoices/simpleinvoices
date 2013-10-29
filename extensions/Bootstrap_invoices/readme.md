@@ -3,20 +3,17 @@
 ##Presentation
 
 This is an extension to enable bootstrap template on SimpleInvoices
-Bootstrap is a `Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.`
+Bootstrap is a *"Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development."*
 
 * Bootstrap is a Apache License Version 2.0
 * Bootstrap website : http://getbootstrap.com/
 
-----------------------------------------------------------
-GitHub of this project : https://github.com/sad270/simpleinvoices/tree/bootstrap_invoices
-
-##FEATURES :
+##Features :
 * based on bootstrap3  
 * Intuitive
 * ResponsiveWebDesign  
 
-##HOW TO INSTALL :
+##How to install :
 
 * Go to https://drive.google.com/folderview?id=0B_pgrZh6aCMsZ1d6clpwVmY4QW8&usp=sharing#list
 
@@ -33,17 +30,22 @@ GitHub of this project : https://github.com/sad270/simpleinvoices/tree/bootstrap
 * **That is ok !**
 
 
-##CHANGELOG
+##Changelog :
 
 ###In next release
-- [ ] more bootstrap item :)
+- [ ] more 'bootstrapped' item :)
 
-###BETA1.1 (29oct2013)
+###beta1.1 (29oct2013)
 - [x] fix search icone pagination icones and refresh icone
 - [x] add login/logout link
 - [x] add help link
 - [x] themed login page
 - [x] display domain_id
 
-###BETA1 (28oct2013)
+###beta1 (28oct2013)
 - [x] Initial release
+
+----------------------------------------------------------
+Thanks to : **justinkelly** (https://github.com/justinkelly) and **apmuthu** (https://github.com/apmuthu)
+ * GitHub of this project : https://github.com/sad270/simpleinvoices/tree/bootstrap_invoices
+ * GitHub of Bootstrap : https://github.com/twbs/bootstrap/
