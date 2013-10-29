@@ -4,3 +4,43 @@ Bootstrap is a Apache License Version 2.0
 Bootstrap website : http://getbootstrap.com/
 Bootstrap-theme demo : http://getbootstrap.com/examples/theme/
 Bootstrap sign-in : http://getbootstrap.com/examples/signin/
+
+
+Bootstrap is a _"Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development."_
+
+*FEATURES :*
+- based on bootstrap3  
+- Intuitive
+- ResponsiveWebDesign  
+
+*HOW TO INSTALL :*
+
+- Go to https://drive.google.com/folderview?id=0B_pgrZh6aCMsZ1d6clpwVmY4QW8&usp=sharing#list
+
+- *Click on* the "Bootstrap_invoices_BETA1.zip" and download it (download button is in the bottom-right)
+
+- *Extract* the archive in the extension folder of SI
+
+- Open Simple Invoices and go to *Settings>Settings>Extensions*
+
+- *Register* Bootstrap_invoices and *Save*
+
+- *Enable* Bootstrap_invoices and go to the dashboard 
+
+- *That is ok !*
+
+----------------------------------------------------------
+GitHub of this project : https://github.com/sad270/simpleinvoices/tree/bootstrap_invoices
+
+
+*CHANGELOG*
+
+*In next release*
+- fix search icone pagination icones and refresh icone
+- add login/logout link
+- add help link
+- themed login page
+- display domain_id
+
+*BETA1* _28oct2013_
+- Initial release
