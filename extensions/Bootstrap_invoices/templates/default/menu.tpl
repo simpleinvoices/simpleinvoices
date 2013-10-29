@@ -5,9 +5,25 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
-			</button>
-			{$smarty.capture.hook_tabmenu_start}
-			<a class="navbar-brand" href="#"> {$smarty.session.Zend_Auth.email|htmlsafe} </a>
+			</button>			
+			<div class="dropdown">
+				{$smarty.capture.hook_tabmenu_start}
+				<a class="navbar-brand dropdown-toggle" href="#" data-toggle="dropdown"> {$smarty.session.Zend_Auth.email|htmlsafe} <b class="caret"></b></a>
+				<ul class="dropdown-menu" style="top: 40px; /*fix*/">
+					
+					<li role="presentation"><a href="http://www.simpleinvoices.org/help" target="blank">{$LANG.help}</a></li>
+					{if $config->authentication->enabled == 1}
+					<li role="presentation">
+					{if $smarty.session.Zend_Auth.id == null}<a role="menuitem" tabindex="-1" href="index.php?module=auth&amp;view=login">{$LANG.login}</a>
+					{else}<a href="index.php?module=auth&amp;view=logout">{$LANG.logout}</a>
+						{if $smarty.session.Zend_Auth.domain_id <> 1}
+						</li><li role="presentation"> Domain: {$smarty.session.Zend_Auth.domain_id}
+						{/if}
+					{/if}
+					</li>
+					{/if}
+				</ul>
+			</div>
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
