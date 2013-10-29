@@ -36,6 +36,9 @@ GitHub of this project : https://github.com/sad270/simpleinvoices/tree/bootstrap
 ##CHANGELOG
 
 ###In next release
+- [ ] more bootstrap item :)
+
+###BETA1.1 (29oct2013)
 - [x] fix search icone pagination icones and refresh icone
 - [x] add login/logout link
 - [x] add help link
