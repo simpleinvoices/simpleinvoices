@@ -1508,7 +1508,7 @@ function updateCustomer() {
 			':id', $_GET['id']
 		);
 	} else {
-		return $dbQquery($sql,
+		return dbQuery($sql,
 			':domain_id', $domain_id,
 			':name', $_POST['name'],
 			':attention', $_POST['attention'],
