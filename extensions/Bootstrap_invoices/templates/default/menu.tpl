@@ -1,4 +1,4 @@
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -93,7 +93,7 @@
 		</div>
 	</div>
 </div>
-<div class="col si_wrap" id="page_title">
+<!-- <div class="col si_wrap" id="page_title">
 	<h1>
 		{ if $pageActive == "dashboard"}{$LANG.dashboard}{/if}
 		{ if $pageActive == "report"}{$LANG.all_reports}{/if}
@@ -167,4 +167,4 @@
 		{ if $pageActive == "backup"}{$LANG.backup_database}{/if}
 	</h1>
 </div>
-
+ -->

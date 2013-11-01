@@ -24,7 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="./include/jquery/rte/rte.css" />	
 	<link rel="stylesheet" type="text/css" href="./include/jquery/cluetip/jquery.cluetip.css" />
 
-	<link rel="stylesheet" type="text/css" href="./templates/default/css/main.css" media="all"/>
+	<!-- <link rel="stylesheet" type="text/css" href="./templates/default/css/main.css" media="all"/> -->
 	<link rel="stylesheet" type="text/css" href="./extensions/Bootstrap_invoices/templates/default/css/somefix.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="./extensions/Bootstrap_invoices/templates/default/css/bootstrap.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="./extensions/Bootstrap_invoices/templates/default/css/bootstrap-theme.css" media="all"/>
@@ -44,7 +44,8 @@
 	<script type="text/javascript" src="./include/jquery/jquery-ui-personalized-1.6rc2.packed.js"></script>	
 	<script type="text/javascript" src="./include/jquery/cluetip/jquery.hoverIntent.minified.js"></script>
 	<script type="text/javascript" src="./include/jquery/cluetip/jquery.cluetip.js"></script>
-	<script type="text/javascript" src="./include/jquery/jquery.flexigrid.1.0b3.pack.js"></script>
+<!-- <script type="text/javascript" src="./include/jquery/jquery.flexigrid.1.0b3.pack.js"></script>-->
+	<script type="text/javascript" src="./include/jquery/uncompressed/flexigrid.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.plugins.js"></script>
 	<script type="text/javascript" src="./include/jquery/wysiwyg/wysiwyg.modified.packed.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.livequery.pack.js"></script>
