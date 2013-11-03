@@ -33,7 +33,18 @@ Bootstrap is a *"Sleek, intuitive, and powerful mobile first front-end framework
 ##Changelog :
 
 ###In next release
+- [x] white navigation bar
+- [x] 'bootstrapped' body
+- [x] upgrade to bootstrap 3.0.1
+- [x] disable main.css style to get less style conflict
+- [ ] 'bootstrapped' all button
+- [ ] icone in navbar
+- [ ] user option in right of navbar
+- [ ] fix user dropdown
 - [ ] more 'bootstrapped' item :)
+
+###beta1.1 (31oct2013)
+- [x] fixed login page
 
 ###beta1.1 (29oct2013)
 - [x] fix search icone pagination icones and refresh icone
