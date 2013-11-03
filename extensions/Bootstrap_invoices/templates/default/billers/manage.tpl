@@ -8,7 +8,6 @@
 *	 GPL v3 or above
 */
 *}
-<div class="jombotron">
 	<h1 class="title">{$LANG.billers}
         <a class="btn btn-default" href="./index.php?module=billers&amp;view=add" >
         	<span class="glyphicon glyphicon-plus"></span>
@@ -26,4 +25,3 @@
 	{include file='../modules/billers/manage.js.php' LANG=$LANG}
 
 {/if}
-</div>

@@ -15,6 +15,36 @@ div#Container {
     color: #777777;
 
 }
+.title > a , .title > span{
+    color: #777777;
+}
+.title > a:hover{
+    color: black;
+    text-decoration: none;
+}
+
+.positive:hover{
+color: #fff!important;
+background-color: #5cb85c;
+border-color: #4cae4c;}
+
+
+.negative:hover{color: #fff!important;
+background-color: #d9534f;
+border-color: #d43f3a;}
+
+label .glyphicon{
+	color: #777777;
+}
+
+label .glyphicon:hover{
+	color: black;
+}
+
+
+
+
+
 /* @group Flexigrid
 ------------------------------------------------------------------- */
 
@@ -621,6 +651,7 @@ div.pGroup {
 	cursor: pointer;
 	overflow: hidden;
 	font-size: 1.5em;
+	color: #777777;
 }
 
 .flexigrid div.pDiv  div.pButton.pBtnOver {
@@ -631,7 +662,7 @@ div.pGroup {
 }
 
 .flexigrid div.pDiv  div.pButton:hover {
-	background-color: #ebebeb;
+	color: black;
 	cursor: pointer;
 }
 
