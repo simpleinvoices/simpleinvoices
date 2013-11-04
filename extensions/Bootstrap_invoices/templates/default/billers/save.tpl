@@ -13,11 +13,11 @@
 *	 GPL v2 or above
 */
 *}
-
+<h1 class="title"><a href="index.php?module=billers&amp;view=manage">{$LANG.billers}</a> <span>/</span>  {$LANG.save}</h1>
 {if $saved == true }
-	<div class="si_message_ok">{$LANG.save_biller_success}</div>
+	<div class="si_message_ok"><span class="glyphicon glyphicon-floppy-saved"></span> {$LANG.save_biller_success}</div>
 {else}
-	<div class="si_message_error">{$LANG.save_biller_failure}</div>
+	<div class="si_message_error"><span class="glyphicon glyphicon-floppy-remove"></span> {$LANG.save_biller_failure}</div>
 {/if}
 
 

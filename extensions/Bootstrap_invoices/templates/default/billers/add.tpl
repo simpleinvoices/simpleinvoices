@@ -19,10 +19,7 @@
 
 {* if no biller name was inserted *}
 <h1 class="title">
-	<a href="index.php?module=billers&amp;view=manage">{$LANG.billers}</a><span> / </span> 
-	{ if $subPageActive == "biller_add"}{$LANG.add}{/if}
-	{ if $subPageActive == "biller_view"}{$LANG.view}{/if}
-	{ if $subPageActive == "biller_edit"}{$LANG.edit}{/if}
+	<a href="index.php?module=billers&amp;view=manage">{$LANG.billers}</a> <span>/</span> {$LANG.add}
 </h1>
 <form class="form-horizontal" name="frmpost" action="index.php?module=billers&amp;view=add" method="post" id="frmpost">
 	<div class="si_form">

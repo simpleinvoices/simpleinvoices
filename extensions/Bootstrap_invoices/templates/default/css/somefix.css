@@ -7,7 +7,12 @@ div#Container {
 }
 
 #si_footer>.container>a{
-	color:black;
+	text-decoration: underline;
+	color: #777777;
+}
+#si_footer>.container>a:hover{
+	text-decoration: none;
+	color: black;
 }
 #si_footer>.container{
     text-align: center;
@@ -21,6 +26,10 @@ div#Container {
 .title > a:hover{
     color: black;
     text-decoration: none;
+}
+
+.title > a.btn{
+	color:black;
 }
 
 .positive:hover{
@@ -41,6 +50,10 @@ label .glyphicon:hover{
 	color: black;
 }
 
+.table-view th{
+	text-align: right;
+
+}
 
 
 
