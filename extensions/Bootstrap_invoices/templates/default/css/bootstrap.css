@@ -5257,28 +5257,52 @@ a.thumbnail.active {
   color: #333333;
 }
 
-.alert {
+.alert,
+.si_message,
+.si_message_ok,
+.si_message_warning,
+.si_message_error {
   padding: 15px;
   margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 4px;
 }
 
-.alert h4 {
+.alert h4,
+.si_message h4,
+.si_message_ok h4,
+.si_message_warning h4,
+.si_message_error h4 {
   margin-top: 0;
   color: inherit;
 }
 
-.alert .alert-link {
+.alert .alert-link,
+.si_message .alert-link,
+.si_message_ok .alert-link,
+.si_message_warning .alert-link,
+.si_message_error .alert-link {
   font-weight: bold;
 }
 
 .alert > p,
-.alert > ul {
+.alert > ul, 
+.si_message > p,
+.si_message > ul, 
+.si_message_ok > p,
+.si_message_ok > ul, 
+.si_message_warning > p,
+.si_message_warning > ul, 
+.si_message_error > p,
+.si_message_error > ul {
   margin-bottom: 0;
 }
 
-.alert > p + p {
+.alert > p + p, 
+.si_message > p + p,
+.si_message_ok > p + p, 
+.si_message_warning > p + p, 
+.si_message_error > p + p {
   margin-top: 5px;
 }
 
@@ -5293,59 +5317,71 @@ a.thumbnail.active {
   color: inherit;
 }
 
-.alert-success {
+.alert-success,
+.si_message_ok {
   color: #468847;
   background-color: #dff0d8;
   border-color: #d6e9c6;
 }
 
-.alert-success hr {
+.alert-success hr,
+.si_message_ok hr {
   border-top-color: #c9e2b3;
 }
 
-.alert-success .alert-link {
+.alert-success .alert-link,
+.si_message_ok .alert-link {
   color: #356635;
 }
 
-.alert-info {
+.alert-info,
+.si_message {
   color: #3a87ad;
   background-color: #d9edf7;
   border-color: #bce8f1;
 }
 
-.alert-info hr {
+.alert-info hr,
+.si_message hr{
   border-top-color: #a6e1ec;
 }
 
-.alert-info .alert-link {
+.alert-info .alert-link,
+.si_message .alert-link{
   color: #2d6987;
 }
 
-.alert-warning {
+.alert-warning,
+.si_message_warning {
   color: #c09853;
   background-color: #fcf8e3;
   border-color: #faebcc;
 }
 
-.alert-warning hr {
+.alert-warning hr,
+.si_message_warning hr {
   border-top-color: #f7e1b5;
 }
 
-.alert-warning .alert-link {
+.alert-warning .alert-link,
+.si_message_warning .alert-link {
   color: #a47e3c;
 }
 
-.alert-danger {
+.alert-danger,
+.si_message_error {
   color: #b94a48;
   background-color: #f2dede;
   border-color: #ebccd1;
 }
 
-.alert-danger hr {
+.alert-danger hr,
+.si_message_error hr {
   border-top-color: #e4b9c0;
 }
 
-.alert-danger .alert-link {
+.alert-danger .alert-link ,
+.si_message_error .alert-link{
   color: #953b39;
 }
 
