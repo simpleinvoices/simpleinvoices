@@ -18,10 +18,19 @@
 {else}
 
 {* if no biller name was inserted *}
-<h1 class="title">
-	<a href="index.php?module=billers&amp;view=manage">{$LANG.billers}</a> <span>/</span> {$LANG.add}
-</h1>
 <form class="form-horizontal" name="frmpost" action="index.php?module=billers&amp;view=add" method="post" id="frmpost">
+<h1 class="title">
+	<a href="index.php?module=billers&amp;view=manage">{$LANG.billers}</a> <span>/</span> {$LANG.add} 
+            <button type="submit" class="btn btn-default positive" name="submit" value="{$LANG.insert_biller}">
+                <span class="glyphicon glyphicon-ok"></span>
+                {$LANG.save}
+            </button> 
+        
+            <a href="./index.php?module=billers&amp;view=manage" class="btn btn-default negative">
+            <span class="glyphicon glyphicon-remove"></span>
+                {$LANG.cancel}
+            </a>
+</h1>
 	<div class="si_form">
 	  <div class="form-group">
 	    <label for="name" class="col-sm-2 control-label">{$LANG.biller_name} 
