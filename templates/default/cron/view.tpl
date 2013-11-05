@@ -28,15 +28,15 @@
 	<tr>
 		<td class="details_screen">{$LANG.email_biller_after_cron}</td>
 		<td>
-             {if $cron.email_biller == '1'}{$LANG.yes}{/if}</option>
-             {if $cron.email_biller == '0'}{$LANG.no}{/if}</option>
+             {if $cron.email_biller == '1'}{$LANG.yes}{/if}
+             {if $cron.email_biller == '0'}{$LANG.no}{/if}
          </td>
      </tr>
 	<tr>
 		<td class="details_screen">{$LANG.email_customer_after_cron}</td>
 		<td>
-             {if $cron.email_customer == '1'}{$LANG.yes}{/if}</option>
-             {if $cron.email_customer == '0'}{$LANG.no}{/if}</option>
+             {if $cron.email_customer == '1'}{$LANG.yes}{/if}
+             {if $cron.email_customer == '0'}{$LANG.no}{/if}
          </td>
      </tr>
 
