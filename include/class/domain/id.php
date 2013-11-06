@@ -6,7 +6,7 @@ class domain_id
 	{
 		global $auth_session;
 
-		// default value
+		// default when session value absent - fake auth, whether auth needed or not
 		$domain_id = "1";
 		
 		if( !empty($id) ) {
@@ -18,23 +18,10 @@ class domain_id
 
 			// no preset value available
 
-			if ( $auth_session->fake_auth == '1') {
-				// no auth needed
+			if (!empty($auth_session->domain_id)) {
 
-				if (!empty($auth_session->domain_id)) {
-
-					// take session value since available
-					$domain_id = $auth_session->domain_id;
-
-				} else {
-
-					// no session value available, retain default value, weird - not possible
-					// $domain_id = "1";
-
-				}
-			} else {
-
-				// user auth enabled
+				// take session value since available 
+				// whether fake_auth or not
 				$domain_id = $auth_session->domain_id;
 
 			}
