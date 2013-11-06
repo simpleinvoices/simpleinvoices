@@ -6,8 +6,6 @@ class inventory {
 
 	public function insert()
 	{
-        	global $db;
-        	global $auth_session;
 
 		$domain_id = domain_id::get($this->domain_id);
 
@@ -27,14 +25,14 @@ class inventory {
 				:date,
 				:note
 			)";
-        	$sth = $db->query($sql,
+        	$sth = dbQuery($sql,
 				':domain_id',$domain_id, 
 				':product_id',$this->product_id,
 				':quantity',$this->quantity,
 				':cost',$this->cost,
 				':date',$this->date,
 				':note',$this->note
-			) or die(htmlsafe(end($dbh->errorInfo())));
+			);
         
  	       return $sth;
 
@@ -42,7 +40,6 @@ class inventory {
 
 	public function update()
 	{
-        	global $db;
 
 		$domain_id = domain_id::get($this->domain_id);
         
@@ -59,7 +56,7 @@ class inventory {
 				AND 
 				domain_id = :domain_id
 			";
-        	$sth = $db->query($sql,
+        	$sth = dbQuery($sql,
 				':id',$this->id, 
 				':domain_id',$domain_id, 
 				':product_id',$this->product_id,
@@ -67,7 +64,7 @@ class inventory {
 				':cost',$this->cost,
 				':date',$this->date,
 				':note',$this->note
-			) or die(htmlsafe(end($dbh->errorInfo())));
+			);
         
  	       return $sth;
 	}
@@ -80,7 +77,7 @@ class inventory {
     public function select_all($type='', $dir='DESC', $rp='25', $page='1')
 	{
 		global $LANG;
-		global $db;
+
 		/*SQL Limit - start*/
 		$start = (($page-1) * $rp);
 		$limit = "LIMIT ".$start.", ".$rp;
@@ -131,7 +128,7 @@ class inventory {
 			$sort $dir
 			$limit";
 
-		$sth = $db->query($sql,':domain_id',domain_id::get($this->domain_id)) or die(htmlsafe(end($dbh->errorInfo())));
+		$sth = dbQuery($sql,':domain_id',domain_id::get($this->domain_id));
 		if($type =="count")
 		{
 			return $sth->rowCount();
@@ -143,7 +140,6 @@ class inventory {
 	public function select()
 	{
 		global $LANG;
-		global $db;
 
 		$sql = "SELECT
 				iv.*,
@@ -157,7 +153,7 @@ class inventory {
                 p.id = iv.product_id
 				and
                 iv.id = :id;";
-		$sth = $db->query($sql,':domain_id',domain_id::get($this->domain_id), ':id',$this->id) or die(htmlsafe(end($dbh->errorInfo())));
+		$sth = dbQuery($sql,':domain_id',domain_id::get($this->domain_id), ':id',$this->id);
 
 		return $sth->fetch();
 	}
@@ -173,7 +169,7 @@ class inventory {
 
         //sellect qty and reorder level
 
-        $inventory = new product();
+        $inventory = new inventory();
         $sth = $inventory->select_all('count');
 
         $inventory_all = $sth->fetchAll(PDO::FETCH_ASSOC);
