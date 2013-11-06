@@ -1,4 +1,3 @@
-
 {* if bill is updated or saved. *}
 
 {if $smarty.post.expense_account_id != "" && $smarty.post.id != null } 
@@ -18,10 +17,7 @@
 <table align="center">
 	<tr>
 		<td class="details_screen">{$LANG.amount}</td>
-		<td>
-		<input name="amount" class="validate[required]">
-		</input>
-		</td>
+		<td><input name="amount" class="validate[required]" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.expense_account}</td>
