@@ -50,20 +50,19 @@
                 <input type="text" class="date-picker" size="10" name="end_date" id="date" value='{$cron.end_date|htmlsafe}' />   
             </td>
     </tr>
-	<tr>
-		<td class="details_screen">{$LANG.recur_each}</td>
-		<td>
-		<input name="recurrence" size="10" class="validate[required]" value='{$cron.recurrence|htmlsafe}'>
-		</input>
-             <select name="recurrence_type" class="validate[required]">
-             <option value="day"  {if $cron.recurrence_type == 'day'}selected{/if}  >{$LANG.days}</option>
-             <option value="week" {if $cron.recurrence_type == 'week'}selected{/if} >{$LANG.weeks}</option>
-             <option value="month" {if $cron.recurrence_type == 'month'}selected{/if} >{$LANG.months}</option>
-             <option value="year" {if $cron.recurrence_type == 'year'}selected{/if} >{$LANG.years}</option>
-             </select>
-         </td>
-     </tr>
-	<tr>
+    <tr>
+        <td class="details_screen">{$LANG.recur_each}</td>
+        <td>
+            <input name="recurrence" size="10" class="validate[required]" value='{$cron.recurrence|htmlsafe}' />
+            <select name="recurrence_type" class="validate[required]">
+                <option value="day"  {if $cron.recurrence_type == 'day'}selected{/if}  >{$LANG.days}</option>
+                <option value="week" {if $cron.recurrence_type == 'week'}selected{/if} >{$LANG.weeks}</option>
+                <option value="month" {if $cron.recurrence_type == 'month'}selected{/if} >{$LANG.months}</option>
+                <option value="year" {if $cron.recurrence_type == 'year'}selected{/if} >{$LANG.years}</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
 		<td class="details_screen">{$LANG.email_biller_after_cron}</td>
 		<td>
              <select name="email_biller" class="validate[required]">
