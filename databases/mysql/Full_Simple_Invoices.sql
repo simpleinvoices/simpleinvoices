@@ -54,7 +54,8 @@ CREATE TABLE IF NOT EXISTS `si_cron_log` (
   `domain_id` int(11) NOT NULL,
   `cron_id` varchar(25) DEFAULT NULL,
   `run_date` date NOT NULL,
-  PRIMARY KEY (`domain_id`,`id`)
+  PRIMARY KEY (`domain_id`,`id`),
+  UNIQUE KEY `CronIdUnq` (`domain_id`, `cron_id`, `run_date`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_custom_fields` (
@@ -662,7 +663,8 @@ INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_rele
 ,(286,285,'','','')
 ,(287,286,'','','')
 ,(288,287,'','','')
-,(289,288,'','','');
+,(289,288,'','','')
+,(290,289,'','','');
 
 CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
