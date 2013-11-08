@@ -52,7 +52,8 @@ CREATE TABLE IF NOT EXISTS `si_cron_log` (
   `domain_id` int(11) NOT NULL,
   `cron_id` varchar(25) DEFAULT NULL,
   `run_date` date NOT NULL,
-  PRIMARY KEY (`domain_id`,`id`)
+  PRIMARY KEY (`domain_id`,`id`),
+  UNIQUE KEY `CronIdUnq` (`domain_id`, `cron_id`, `run_date`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_custom_fields` (
