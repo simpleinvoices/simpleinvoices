@@ -1651,12 +1651,12 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['287']['name']  = "Populate additional user roles like domain_administrator";
     $patch['287']['patch'] = "INSERT IGNORE INTO `".TB_PREFIX."user_role` (`name`) VALUES ('domain_administrator'), ('customer'), ('biller');";
     $patch['287']['date']  = "20131017";
-/*
 
     $patch['288']['name']  = "Fully relational now - do away with the si_index table";
-    $patch['288']['patch'] = "DROP TABLE IF EXISTS `".TB_PREFIX."index`;";
+// Omitted for now till all users check their relation data integrity
+//    $patch['288']['patch'] = "DROP TABLE IF EXISTS `".TB_PREFIX."index`;";
+    $patch['288']['patch'] = "SELECT 1+1;";
     $patch['288']['date']  = "20131017";
-*/
 
     $patch['289']['name']  = "Each cron_id can run a maximum of only once a day for each domain_id";
     $patch['289']['patch'] = "ALTER TABLE `".TB_PREFIX."cron_log` ADD UNIQUE INDEX `CronIdUnq` (`domain_id`, `cron_id`, `run_date`);";
