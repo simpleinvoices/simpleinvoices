@@ -1,4 +1,4 @@
-;<?php @header("location: ../index.php") and exit(0);?>
+;<?php @header("location: ../index.php"); exit(0);?>
 ; Simple Invoices configuration file
 ; - refer http://www.simpleinvoices.org/config for all options
 
@@ -40,7 +40,7 @@ encryption.default.key 				= this_is_the_encryption_key_change_it
 nonce.key                           = this_should_be_random_and_secret_so_change_it
 nonce.timelimit                     = 3600
 
-version.name				    	= 2013.1.beta.7
+version.name				    	= 2013.1.beta.8
  
 debug.level 				    	= All 
 debug.error_reporting				= E_ERROR

@@ -150,7 +150,8 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 				//If no invoices in db then show home page as default - else show Manage Invoices page
 				if ($module==null)
 				{
-					if ( invoice::are_there_any() > "0" )  
+					$invoiceobj = new invoice();
+					if ( $invoiceobj->are_there_any() > "0" )  
 					{
 					    $module = "invoices" ;
 						$view = "manage";
@@ -159,6 +160,7 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 					    $module = "index" ;
 						$view = "index";
 					}
+					unset($invoiceobj);
 				}
 			}
 		}

@@ -1286,13 +1286,15 @@ ADD `language` VARCHAR( 255 ) NULL ;";
     $patch['212']['patch'] = "update `".TB_PREFIX."invoices` set index_id = id;";
     $patch['212']['date'] = "20090902";
 
-    $max_invoice = invoice::max();
+	$invoiceobj = new invoice();
+    $max_invoice = $invoiceobj->max();
+	unset($invoiceobj);
     $patch['213']['name'] = "Update the index table with max invoice id - if required";
     if($max_invoice > "0")
     {
         $patch['213']['patch'] = "insert into `".TB_PREFIX."index` (id, node, sub_node, domain_id)  VALUES (".$max_invoice.", 'invoice', '".$defaults['preference']."','1');";
     } else {
-        $patch['213']['patch'] = "select 1 from `".TB_PREFIX."index`;";
+        $patch['213']['patch'] = "select 1+1;";
     }
     $patch['213']['date'] = "20090902";
 
@@ -1307,7 +1309,7 @@ ADD `language` VARCHAR( 255 ) NULL ;";
             $patch['215']['name'] = "si_invoices - add composite primary key - patch removed";
             #$patch['215']['patch'] = "ALTER TABLE  `".TB_PREFIX."index` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)";
             #$patch['215']['patch'] = "ALTER TABLE  `".TB_PREFIX."index` ADD PRIMARY KEY(`domain_id`, `id`)";
-            $patch['215']['patch'] = "select 1 from `".TB_PREFIX."index`;";
+            $patch['215']['patch'] = "select 1+1;";
             $patch['215']['date'] = "20090912";
 
             $patch['216']['name'] = "si_payment - add composite primary key";
@@ -1612,8 +1614,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['277']['date'] = "20131008";
 
     $patch['278']['name'] = "Each Invoice Item can have only one instance of each tax";
-    //$patch['278']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_item_tax` ADD UNIQUE INDEX `UnqInvTax` (`invoice_item_id`, `tax_id`);";
-    $patch['278']['patch'] = "SELECT 1+1;";
+    $patch['278']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_item_tax` ADD UNIQUE INDEX `UnqInvTax` (`invoice_item_id`, `tax_id`);";
     $patch['278']['date'] = "20131008";
 
     $patch['279']['name'] = "Drop unused superceeded table si_product_matrix if present";
@@ -1661,4 +1662,28 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['289']['name']  = "Each cron_id can run a maximum of only once a day for each domain_id";
     $patch['289']['patch'] = "ALTER TABLE `".TB_PREFIX."cron_log` ADD UNIQUE INDEX `CronIdUnq` (`domain_id`, `cron_id`, `run_date`);";
     $patch['289']['date']  = "20131108";
+
+    $patch['290']['name']  = "Set all Flag fields to tinyint(1) and other 1 byte fields to char";
+    $patch['290']['patch'] = "
+		ALTER TABLE `".TB_PREFIX."biller` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL;
+		ALTER TABLE `".TB_PREFIX."customers` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL;
+		ALTER TABLE `".TB_PREFIX."extensions` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 0 NOT NULL;
+		ALTER TABLE `".TB_PREFIX."payment_types` CHANGE `pt_enabled` `pt_enabled` TINYINT(1) DEFAULT 1 NOT NULL;
+		ALTER TABLE `".TB_PREFIX."preferences` CHANGE `pref_enabled` `pref_enabled` TINYINT(1) DEFAULT 1 NOT NULL,
+			CHANGE `status` `status` TINYINT(1) NOT NULL;
+		ALTER TABLE `".TB_PREFIX."products` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
+			CHANGE `notes_as_description` `notes_as_description` TINYINT(1) NULL,
+			CHANGE `show_description` `show_description` TINYINT(1) NULL;
+		ALTER TABLE `".TB_PREFIX."tax` CHANGE `tax_enabled` `tax_enabled` TINYINT(1) DEFAULT 1 NOT NULL;
+		ALTER TABLE `".TB_PREFIX."cron` CHANGE `email_biller` `email_biller` TINYINT(1) DEFAULT 0 NOT NULL,
+			CHANGE `email_customer` `email_customer` TINYINT(1) DEFAULT 0 NOT NULL;
+		ALTER TABLE `".TB_PREFIX."custom_fields` CHANGE `cf_display` `cf_display` TINYINT(1) DEFAULT 1 NOT NULL;
+		ALTER TABLE `".TB_PREFIX."invoice_item_tax` CHANGE `tax_type` `tax_type` CHAR(1) DEFAULT '%' NOT NULL;
+		ALTER TABLE `".TB_PREFIX."tax` CHANGE `type` `type` CHAR(1) DEFAULT '%' NOT NULL;
+		ALTER TABLE `".TB_PREFIX."products_attributes` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
+			CHANGE `visible` `visible` TINYINT(1) DEFAULT 1 NOT NULL;
+		ALTER TABLE `".TB_PREFIX."products_values` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL; 
+		ALTER TABLE `".TB_PREFIX."user` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL; 
+	";
+    $patch['290']['date']  = "20131109";
 
