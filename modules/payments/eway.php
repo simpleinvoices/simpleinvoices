@@ -2,10 +2,13 @@
 
 $saved = false;
 
+$invoiceobj = new invoice();
+$invoice_all = $invoiceobj->get_all();
+
 if ( ($_POST['op'] =='add') AND (!empty($_POST['invoice_id'])) )
 {
 
-    $invoice= invoice::select($_POST['invoice_id']);
+	$invoice = $invoiceobj->select($_POST['invoice_id']);
 
     $eway_check = new eway();
     $eway_check->invoice = $invoice;
@@ -22,8 +25,6 @@ if ( ($_POST['op'] =='add') AND (!empty($_POST['invoice_id'])) )
     }
     
 }      
-
-$invoice_all = invoice::get_all();
 
 $smarty -> assign('invoice_all',$invoice_all);
 $smarty -> assign('saved',$saved);
