@@ -54,11 +54,6 @@ $sth =  dbQuery($sql);
 $matrix = $sth->fetchAll();
 $smarty -> assign("matrix", $matrix);
 
-$sql_prod = "select product_id as PID, (select count(product_id) from ".TB_PREFIX."products_matrix where product_id = PID ) as count from ".TB_PREFIX."products_matrix ORDER BY count desc LIMIT 1;";
-$sth_prod =  dbQuery($sql_prod);
-$number_of_products = $sth_prod->fetchAll();
-
-$smarty -> assign("number_of_attributes", $number_of_products['0']['count']);
 $smarty -> assign("billers",$billers);
 $smarty -> assign("customers",$customers);
 $smarty -> assign("taxes",$taxes);
