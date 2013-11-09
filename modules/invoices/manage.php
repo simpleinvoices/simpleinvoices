@@ -14,7 +14,7 @@
 checkLogin();
 
 	$sql = "SELECT count(*) AS count FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id";
-	$sth = dbQuery($sql, ':domain_id',domain_id::get()) or die(htmlsafe(end($dbh->errorInfo())));
+	$sth = dbQuery($sql, ':domain_id',domain_id::get());
 	$number_of_invoices  = $sth->fetch(PDO::FETCH_ASSOC);
 
 //all funky xml - sql stuff done in xml.php

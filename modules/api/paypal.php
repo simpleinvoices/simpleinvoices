@@ -72,8 +72,9 @@ if ($p->validate_ipn()) {
 		$logger->log('Paypal - payment_type='.$payment->ac_payment_type, Zend_Log::INFO);
 		$payment->insert();
 
-		$invoice = invoice::select($p->ipn_data['invoice']);
-		#$invoice = invoice::select($_POST['invoice']);
+		$invoiceobj = new invoice();
+		$invoice = $invoiceobj->select($p->ipn_data['invoice']);
+
 		$biller = getBiller($invoice['biller_id']);
 
 		//send email

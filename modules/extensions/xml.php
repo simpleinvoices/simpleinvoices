@@ -5,8 +5,10 @@ header("Content-type: text/xml");
 $start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
 $dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC" ;
 $sort = "id" ;
-$limit = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
+$rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
 $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
+
+$domain_id = domain_id::get();
 
 $xml =""; 
 
@@ -29,12 +31,14 @@ foreach ($extension_entries as $entry) {
 if (intval($start) != $start) {
 	$start = 0;
 }
-if (intval($limit) != $limit) {
-		$limit = 25;
+if (intval($rp) != $rp) {
+		$rp = 25;
 }
 if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 	$dir = 'ASC';
 }
+
+$limit = " LIMIT $start, $rp";
 
 $query = (isset($_POST['query'])) ? $_POST['query'] : "" ; 
 $qtype = (isset($_POST['qtype'])) ? $_POST['qtype'] : "" ; 
@@ -43,13 +47,13 @@ $plugin[0] = " <img src='images/famfam/plugin_disabled.png' alt='".$LANG['plugin
 $plugin[1] = " <img src='images/famfam/plugin.png' alt='".$LANG['plugin_registered']."' />";
 $plugin[2] = " <img src='images/famfam/plugin_delete.png' alt='".$LANG['plugin_unregister']."' />";
 $plugin[3] = " <img src='images/famfam/plugin_add.png' alt='".$LANG['plugin_register']."' />";
-$light[0] = " <img src='images/famfam/lightbulb_off.png' alt='".$LANG['disabled']."' />";
-$light[1] = " <img src='images/famfam/lightbulb.png' alt='".$LANG['enabled']."' />";
-$light[2] = " <img src='images/common/lightswitch16x16.png' alt='".$LANG['toggle_status']."' />";
+$light[0]  = " <img src='images/famfam/lightbulb_off.png' alt='".$LANG['disabled']."' />";
+$light[1]  = " <img src='images/famfam/lightbulb.png' alt='".$LANG['enabled']."' />";
+$light[2]  = " <img src='images/common/lightswitch16x16.png' alt='".$LANG['toggle_status']."' />";
 
 
-$where = " WHERE domain_id = 0 OR domain_id = :domain_id";
-if ($query) $where = " WHERE (domain_id = 0 OR domain_id = :domain_id) AND $qtype LIKE '%$query%' ";
+$where = "";
+if ($query) $where .= " AND $qtype LIKE '%$query%' ";
 
 
 /*Check that the sort field is OK*/
@@ -63,13 +67,14 @@ $validFields = array('id', 'name','description','enabled');
 				enabled
 			FROM 
 				".TB_PREFIX."extensions
-			$where
+			WHERE  (domain_id = 0 
+			    OR domain_id = :domain_id)
+				$where
 			ORDER BY 
 				$sort $dir 
-			LIMIT 
-				$start, $limit";
+			$limit";
 
-	$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+	$sth = dbQuery($sql, ':domain_id', $domain_id);
 
 	$registered_extensions = $sth->fetchAll(PDO::FETCH_ASSOC);
 

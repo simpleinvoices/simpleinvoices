@@ -41,19 +41,14 @@ if ($_POST['action'] == "insert" ) {
     * 1 = Total Invoices
     */
 
-	if($type==total_invoice && $saved) {
+	if($type == total_invoice && $saved) {
 
 		$logger->log('Total style invoice created, ID: '.$id, Zend_Log::INFO);
 
 		insertProduct(0,0);
 		$product_id = lastInsertId();
 
-		if (insertInvoiceItem($id,1,$product_id,1,$_POST['tax_id'][0],$_POST['description'],$_POST['unit_price'])) {
-			//$saved = true;
-		}
-		else {
-			die(end($dbh->errorInfo()));
-		}
+		insertInvoiceItem($id, 1 , $product_id, 1, $_POST['tax_id'][0], $_POST['description'], $_POST['unit_price']);
 	}
 	elseif ($saved) {
 		
@@ -64,15 +59,7 @@ if ($_POST['action'] == "insert" ) {
 			$logger->log('qty='.$_POST["quantity$i"], Zend_Log::INFO);
 			if($_POST["quantity$i"] != null)
 			{
-				if (
-						insertInvoiceItem($id,$_POST["quantity$i"],$_POST["products$i"],$i,$_POST["tax_id"][$i],$_POST["description$i"], $_POST["unit_price$i"],$_POST["attribute"][$i] )
-					) 
-				{
-		//			insert_invoice_item_tax(lastInsertId(), )
-					//$saved = true;
-				} else {
-					die(end($dbh->errorInfo()));
-				}
+				insertInvoiceItem($id, $_POST["quantity$i"], $_POST["products$i"], $i, $_POST["tax_id"][$i], $_POST["description$i"], $_POST["unit_price$i"], $_POST["attribute"][$i]);
 			}
 			$i++;
 		}
@@ -129,13 +116,8 @@ if ($_POST['action'] == "insert" ) {
 				if($_POST["line_item$i"] != "")
 				{
 					updateInvoiceItem($_POST["line_item$i"],$_POST["quantity$i"],$_POST["products$i"],$i,$_POST['tax_id'][$i],$_POST["description$i"],$_POST["unit_price$i"],$_POST["attribute"][$i]);
-					$saved;
-					//$saved =  true;
-/*
-				}	
-				else {
-					die(end($dbh->errorInfo()));
-*/
+//					$saved;
+					// $saved =  true;
 				}
 			}
 		}
