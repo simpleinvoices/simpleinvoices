@@ -1,5 +1,7 @@
 <?php
 class email_body {
+
+	public $email_type;
 	
 	public function create()
 	{

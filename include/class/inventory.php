@@ -4,12 +4,13 @@ class inventory {
  	public $start_date;
  	public $domain_id;
 
+	public function __construct()
+	{
+		$this->domain_id = domain_id::get($this->domain_id);
+	}
+
 	public function insert()
 	{
-
-		$domain_id = domain_id::get($this->domain_id);
-
-        
 	        $sql = "INSERT INTO ".TB_PREFIX."inventory (
 				domain_id,
 				product_id,
@@ -26,7 +27,7 @@ class inventory {
 				:note
 			)";
         	$sth = dbQuery($sql,
-				':domain_id',$domain_id, 
+				':domain_id',$this->domain_id, 
 				':product_id',$this->product_id,
 				':quantity',$this->quantity,
 				':cost',$this->cost,
@@ -40,9 +41,6 @@ class inventory {
 
 	public function update()
 	{
-
-		$domain_id = domain_id::get($this->domain_id);
-        
 	        $sql = "UPDATE 
 				".TB_PREFIX."inventory
 			SET 
@@ -53,12 +51,11 @@ class inventory {
 				note = :note
 			WHERE 
 				id = :id 
-				AND 
-				domain_id = :domain_id
+			AND domain_id = :domain_id
 			";
         	$sth = dbQuery($sql,
 				':id',$this->id, 
-				':domain_id',$domain_id, 
+				':domain_id',$this->domain_id, 
 				':product_id',$this->product_id,
 				':quantity',$this->quantity,
 				':cost',$this->cost,
@@ -80,14 +77,16 @@ class inventory {
 
 		/*SQL Limit - start*/
 		$start = (($page-1) * $rp);
-		$limit = "LIMIT ".$start.", ".$rp;
+		$limit = " LIMIT $start, $rp";
 		/*SQL Limit - end*/
 
 		/*SQL where - start*/
+		$where = '';
+
 		$query = (isset($_POST['query'])) ? $_POST['query'] : "" ;
 		$qtype = (isset($_POST['qtype'])) ? $_POST['qtype'] : "" ;
 
-		$where = (isset($_POST['query'])) ? "  AND $qtype LIKE '%$query%' " : "";
+		if (isset($_POST['query'])) $where .= "  AND $qtype LIKE '%$query%' ";
 		/*SQL where - end*/
 		
 
@@ -100,35 +99,33 @@ class inventory {
 
 		if($type =="count")
 		{
-		    //unset($limit);
 		    $limit="";
 		}
 
 
 		$sql = "SELECT
-				iv.id as id,
-				iv.product_id ,
-				iv.date ,
-				iv.quantity ,
+				inv.id as id,
+				inv.product_id ,
+				inv.date ,
+				inv.quantity ,
                 p.description,
                 (select coalesce(p.reorder_level,0) as reorder_level),
-				iv.cost,
-				iv.quantity * iv.cost as total_cost
+				inv.cost,
+				inv.quantity * inv.cost as total_cost
 			FROM 
-				".TB_PREFIX."products p,
-				".TB_PREFIX."inventory iv
+				".TB_PREFIX."products p
+				LEFT JOIN ".TB_PREFIX."inventory inv
+					ON (p.id = inv.product_id AND p.domain_id = inv.domain_id)
 			 WHERE 
-				iv.domain_id = :domain_id
-				and
-                p.id = iv.product_id
-			$where
+				inv.domain_id = :domain_id
+				$where
 			GROUP BY
-			    iv.id
+			    inv.id
 			ORDER BY
 			$sort $dir
 			$limit";
 
-		$sth = dbQuery($sql,':domain_id',domain_id::get($this->domain_id));
+		$sth = $db->query($sql, ':domain_id', $this->domain_id);
 		if($type =="count")
 		{
 			return $sth->rowCount();
@@ -145,15 +142,13 @@ class inventory {
 				iv.*,
                 p.description
 			FROM 
-				".TB_PREFIX."products p,
-				".TB_PREFIX."inventory iv
-			 WHERE 
+				".TB_PREFIX."products p
+				LEFT JOIN ".TB_PREFIX."inventory iv 
+					ON (p.id = iv.product_id AND p.domain_id = iv.domain_id)
+			WHERE 
 				iv.domain_id = :domain_id
-				and
-                p.id = iv.product_id
-				and
-                iv.id = :id;";
-		$sth = dbQuery($sql,':domain_id',domain_id::get($this->domain_id), ':id',$this->id);
+			AND iv.id = :id;";
+		$sth = dbQuery($sql, ':domain_id', $this->domain_id, ':id',$this->id);
 
 		return $sth->fetch();
 	}
@@ -162,12 +157,7 @@ class inventory {
 
 	public function check_reorder_level()
 	{
-        global $db;
-        global $auth_session;
-
-        $domain_id = domain_id::get($this->domain_id);
-
-        //sellect qty and reorder level
+        //select qty and reorder level
 
         $inventory = new inventory();
         $sth = $inventory->select_all('count');
