@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS `si_expense`;
+
 CREATE TABLE  `si_expense` (
 `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `amount` DECIMAL(25,6) NOT NULL ,
@@ -9,15 +11,22 @@ CREATE TABLE  `si_expense` (
 `product_id` INT( 11 ) NOT NULL ,
 `date` DATE NOT NULL ,
 `note` TEXT NOT NULL
-) ENGINE = INNODB ;
+) ENGINE = InnoDB ;
+
+DROP TABLE IF EXISTS `si_expense_account`;
 
 CREATE TABLE  `si_expense_account` (
-`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`id` INT( 11 ) NOT NULL AUTO_INCREMENT ,
 `domain_id` INT( 11 ) NOT NULL ,
-`name` VARCHAR( 255 ) NOT NULL
-) ENGINE = INNODB;
+`name` VARCHAR( 255 ) NOT NULL ,
+PRIMARY KEY (`id`, `domain_id`)
+) ENGINE = InnoDB;
 
-INSERT INTO `si_expense_account` (`id`, `domain_id`, `name`) VALUES (NULL, '1', 'Car expense'), (NULL, '1', 'IT costs');
+INSERT INTO `si_expense_account` (`id`, `domain_id`, `name`) VALUES 
+  (NULL, '1', 'Car expense')
+, (NULL, '1', 'IT costs');
+
+DROP TABLE IF EXISTS `si_expense_item_tax`;
 
 CREATE TABLE `si_expense_item_tax` (
 `id` INT( 11 ) NOT NULL AUTO_INCREMENT ,

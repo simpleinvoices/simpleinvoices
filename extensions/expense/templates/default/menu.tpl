@@ -1,19 +1,9 @@
-<div class="top_menu">
-{*
-	<div class="txt_right" style="">
-		<table class="buttons" align="left">
-		<tr>
-		<td>
-			<a href="./index.php?module=billers&amp;view=add" class="positive">
-			<img src="./images/famfam/add.png" alt="" />
-			</a>
-		</td>
-		</tr>
-		</table>
-	</div>
-*}
-	<div class="txt_right">
-		Hello {$smarty.session.Zend_Auth.email} | <a href="">Help</a>
+
+<div id="si_header">
+{$smarty.capture.hook_topmenu_start}
+
+	<div class="si_wrap">
+		{$LANG.hello} {$smarty.session.Zend_Auth.email|htmlsafe} | <a href="http://www.simpleinvoices.org/help" target="blank">{$LANG.help}</a>
 		{if $config->authentication->enabled == 1}
 			|
 			{if $smarty.session.Zend_Auth.id == null}
@@ -25,17 +15,25 @@
 				{/if}
 			{/if}
 		{/if}
-	
 	</div>
+{$smarty.capture.hook_topmenu_end}
 </div>
 
-<div id="tabmenu" class="flora" >
+
+
+
+
+<div id="tabmenu" class="flora si_wrap" >
+{$smarty.capture.hook_tabmenu_start}
+
 	<ul>
+{$smarty.capture.hook_tabmenu_main_start}
 		<li><a href="#home"><span>{$LANG.home}</span></a></li>
 		<li><a href="#money"><span>{$LANG.money}</span></a></li>
 		<li><a href="#people"><span>{$LANG.people}</span></a></li>
 		<li><a href="#product"><span>{$LANG.products}</span></a></li>
-		<li style="float:right" class="menu_setting"><a href="#setting"><span>{$LANG.settings}</span></a></li>
+{$smarty.capture.hook_tabmenu_main_end}
+		<li id="si_tab_settings"><a href="#setting"><span>{$LANG.settings}</span></a></li>
 	</ul>
 
 	<div id="home">
@@ -66,9 +64,16 @@
                     { if $subPageActive == "view"} <li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
                     { if $subPageActive == "add"} <li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
                 { /if }
+
+			<li><a { if $pageActive == "cron"} class="active" {/if} href="index.php?module=cron&amp;view=manage">{$LANG.recurrence}</a></li> 
+				{ if $subPageActive == "cron_add"} <li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}				
+				{ if $subPageActive == "cron_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
+				{ if $subPageActive == "cron_view"} <li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
+
 			<li><a { if $pageActive == "payment"} class="active" {/if} href="index.php?module=payments&amp;view=manage">{$LANG.payments}</a></li>
 				{ if $subPageActive == "payment_process"} <li><a class="active active_subpage" href="#">{$LANG.process}</a></li>{/if}
-				{ if $subPageActive == "payment_filter_invoice"} <li><a class="active active_subpage" href="#">{$LANG.payments_filtered} {$preference.pref_inv_wording} {$smarty.get.id}</a></li>{/if}
+				{ if $subPageActive == "payment_eway"} <li><a class="active active_subpage" href="#">{$LANG.eway}</a></li>{/if}
+				{ if $subPageActive == "payment_filter_invoice"} <li><a class="active active_subpage" href="#">{$LANG.payments_filtered} {$preference.pref_inv_wording|htmlsafe} {$smarty.get.id|htmlsafe}</a></li>{/if}
 				{ if $subPageActive == "payment_filter_customer"} <li><a class="active active_subpage" href="#">{$LANG.payments_filtered_customer} '{$customer.name}'</a></li>{/if}
 			<li><a { if $pageActive == "report_sale"} class="active" {/if} href="index.php?module=reports&amp;view=report_sales_total">{$LANG.sales_report}</a></li>
 		</ul>
@@ -103,6 +108,16 @@
 		    		{ if $subPageActive == "inventory_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
 			    	{ if $subPageActive == "inventory_add"} <li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
             {/if}
+            {if $defaults.product_attributes}
+    			<li><a { if $pageActive == "inventory"} class="active"{/if} href="index.php?module=product_attribute&amp;view=manage">{$LANG.product_attributes}</a></li>
+	    			{ if $subPageActive == "inventory_view"} <li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
+		    		{ if $subPageActive == "inventory_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
+			    	{ if $subPageActive == "inventory_add"} <li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
+    			<li><a { if $pageActive == "inventory"} class="active"{/if} href="index.php?module=product_value&amp;view=manage">{$LANG.product_values}</a></li>
+	    			{ if $subPageActive == "inventory_view"} <li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
+		    		{ if $subPageActive == "inventory_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
+			    	{ if $subPageActive == "inventory_add"} <li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
+            {/if}
 		</ul>
 	</div>
 
@@ -129,5 +144,8 @@
 			<li><a { if $pageActive == "backup"} class="active"{/if} href="index.php?module=options&amp;view=backup_database">{$LANG.backup_database}</a></li>
 		</ul>
 	</div>
+{$smarty.capture.hook_tabmenu_end}
 </div>
+
+
 

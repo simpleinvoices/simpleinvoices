@@ -2,26 +2,24 @@
 
 header("Content-type: text/xml");
 
-//$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
-$dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC" ;
+$dir  = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC" ;
 $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "id" ;
-$rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
+$rp   = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
 $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 
 function sql($type='', $dir, $sort, $rp, $page )
 {
 	global $config;
 	global $LANG;
-	global $auth_session;
+	$domain_id = domain_id::get();
 	
 	//SC: Safety checking values that will be directly subbed in
-	if (intval($start) != $start) {
-		$start = 0;
+	if (intval($page) != $page) {
+		$page = 1;
 	}
-	$start = (($page-1) * $limit);
 	
-	if (intval($limit) != $limit) {
-		$limit = 25;
+	if (intval($rp) != $rp) {
+		$rp = 25;
 	}
 	/*SQL Limit - start*/
 	$start = (($page-1) * $rp);
@@ -29,7 +27,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 
 	if($type =="count")
 	{
-		unset($limit);
+		$limit = '';
 	}
 	/*SQL Limit - end*/	
 		
@@ -41,7 +39,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 	$qtype = $_POST['qtype'];
 	
 	$where = "";
-	if ($query) $where = " AND $qtype LIKE '%$query%' ";
+	if ($query) $where .= " AND $qtype LIKE '%$query%' ";
 	
 	
 	/*Check that the sort field is OK*/
@@ -66,7 +64,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 				$limit";
 	
 	
-	$result = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+	$result = dbQuery($sql, ':domain_id', $domain_id);
 
 	return $result;
 }

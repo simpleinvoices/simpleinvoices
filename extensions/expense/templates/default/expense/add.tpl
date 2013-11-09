@@ -1,3 +1,4 @@
+
 {* if bill is updated or saved. *}
 
 {if $smarty.post.expense_account_id != "" && $smarty.post.id != null } 

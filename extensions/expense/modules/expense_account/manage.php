@@ -3,7 +3,9 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$number_of_rows  = expenseaccount::count();
+$expenseaccountobj = new expenseaccount();
+
+$number_of_rows  = $expenseaccountobj->count();
 
 $smarty -> assign("number_of_rows",$number_of_rows);
 

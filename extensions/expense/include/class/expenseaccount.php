@@ -2,49 +2,45 @@
 
 class expenseaccount
 {
+	public $domain_id;
+    
+	public function __construct()
+	{
+		$this->domain_id = domain_id::get($this->domain_id);
+	}
 
-    public static function count()
+    public function count()
     {
 
-        global $dbh;
-        global $auth_session;
-        
         $sql = "SELECT count(id) as count FROM ".TB_PREFIX."expense_account WHERE domain_id = :domain_id ORDER BY id";
-        $sth  = dbQuery($sql,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+        $sth  = dbQuery($sql,':domain_id',$this->domain_id);
 
         return $sth->fetch();
     }
-    public static function get_all()
+
+    public function get_all()
     {
         
-        global $dbh;
-        global $auth_session;
-        
         $sql = "SELECT * FROM ".TB_PREFIX."expense_account WHERE domain_id = :domain_id ORDER BY id";
-        $sth  = dbQuery($sql,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+        $sth  = dbQuery($sql,':domain_id',$this->domain_id);
         
         return $sth->fetchAll();
     
     }
 
-    public static function select($id)
+    public function select($id)
     {
         
-        global $dbh;
-        global $auth_session;
-        
         $sql = "SELECT * FROM ".TB_PREFIX."expense_account WHERE domain_id = :domain_id and id = :id";
-        $sth  = dbQuery($sql,':domain_id',$auth_session->domain_id, ':id', $id) or die(htmlsafe(end($dbh->errorInfo())));
+        $sth  = dbQuery($sql,':domain_id',$this->domain_id, ':id', $id);
         
         return $sth->fetch();
     
     }
 
-    public static function insert()
+    public function insert()
     {
 
-        global $auth_session;
-        
         $sql = "INSERT into
             ".TB_PREFIX."expense_account
             (
@@ -58,17 +54,14 @@ class expenseaccount
             )";
 
         return dbQuery($sql,
-            ':domain_id',$auth_session->domain_id,	
+            ':domain_id',$this->domain_id,	
             ':name', $_POST['name']
             );
     }
 
-    public static function update()
+    public function update()
     {
 
-        global $db;
-        global $auth_session;
-        
         $sql = "UPDATE
             ".TB_PREFIX."expense_account
                 SET
@@ -79,9 +72,9 @@ class expenseaccount
                     domain_id = :domain_id
             ";
 
-        return $db->query($sql,
+        return dbQuery($sql,
             ':id',$_GET['id'],	
-            ':domain_id',$auth_session->domain_id,	
+            ':domain_id',$this->domain_id,	
             ':name', $_POST['name']
             );
 

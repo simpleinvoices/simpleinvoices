@@ -2,26 +2,23 @@
 
 header("Content-type: text/xml");
 
-//$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
-$dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "DESC" ;
-$sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "id" ;
-$rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
-$page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
+$dir  = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : 'DESC' ;
+$sort = (isset($_POST['sortname']))  ? $_POST['sortname']  : 'id'   ;
+$rp   = (isset($_POST['rp']))        ? $_POST['rp']        : '25'   ;
+$page = (isset($_POST['page']))      ? $_POST['page']      : '1'    ;
 
 function sql($type='', $dir, $sort, $rp, $page )
 {
 	global $config;
 	global $LANG;
-	global $auth_session;
+	$domain_id = domain_id::get();
 	
 	//SC: Safety checking values that will be directly subbed in
-	if (intval($start) != $start) {
-		$start = 0;
+	if (intval($page) != $page) {
+		$page = 1;
 	}
-	$start = (($page-1) * $limit);
-	
-	if (intval($limit) != $limit) {
-		$limit = 25;
+	if (intval($rp) != $rp) {
+		$rp = 25;
 	}
 	/*SQL Limit - start*/
 	$start = (($page-1) * $rp);
@@ -29,7 +26,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 
 	if($type =="count")
 	{
-		unset($limit);
+		$limit='';
 	}
 	/*SQL Limit - end*/	
 		
@@ -43,7 +40,7 @@ function sql($type='', $dir, $sort, $rp, $page )
     $qtype = $_REQUEST['qtype'];
 	
 	$where = "";
-	if ($query!="") $where = " AND $qtype LIKE '%$query%' ";
+	if ($query!="") $where .= " AND $qtype LIKE '%$query%' ";
 	
 	/*Check that the sort field is OK*/
 	$validFields = array('id', 'status', 'amount', 'expense_account_id','biller_id', 'customer_id', 'invoice_id','date','amount','note');
@@ -53,37 +50,32 @@ function sql($type='', $dir, $sort, $rp, $page )
 	} else {
 		$sort = "id";
 	}
-	
-                    #coalesce(sum(et.tax_amount),0) as ettax
-                    #LEFT OUTER JOIN ".TB_PREFIX."expense_item_tax et  
-                    #    ON (et.expense_id = e.id)
-		$sql = "SELECT
-                    e.id as EID,
-                    e.status as status,
-                    e.*,
-                    i.id as invoice,
-                    b.name as biller,
-                    ea.name as expense_account,
-                    c.name as customer,
-                    p.description as product,
-                    (select sum(tax_amount) from ".TB_PREFIX."expense_item_tax where expense_id = EID) as tax,
-                    (select tax + e.amount) as total,
-                    (CASE WHEN status = 1 THEN '".$LANG['paid']."'
-                          WHEN status = 0 THEN '".$LANG['not_paid']."'
-                    END) AS status_wording
-
-				FROM 
-					".TB_PREFIX."expense e
-                    LEFT OUTER JOIN ".TB_PREFIX."expense_account ea  
-                        ON (e.expense_account_id = ea.id)
-                    LEFT OUTER JOIN ".TB_PREFIX."biller b  
-                        ON (e.biller_id = b.id)
-                    LEFT OUTER JOIN ".TB_PREFIX."customers c  
-                        ON (e.customer_id = c.id)
-                    LEFT OUTER JOIN ".TB_PREFIX."products p  
-                        ON (e.product_id = p.id)
-                    LEFT OUTER JOIN ".TB_PREFIX."invoices i  
-                        ON (e.invoice_id = i.id)
+	$sql = "SELECT
+                e.id as EID,
+                e.status as status,
+                e.*,
+                i.id as invoice,
+                b.name as biller,
+                ea.name as expense_account,
+                c.name as customer,
+                p.description as product,
+                (select sum(tax_amount) from ".TB_PREFIX."expense_item_tax where expense_id = EID) as tax,
+                (select tax + e.amount) as total,
+                (CASE WHEN status = 1 THEN '".$LANG['paid']."'
+                      WHEN status = 0 THEN '".$LANG['not_paid']."'
+                      END) AS status_wording
+			FROM 
+				".TB_PREFIX."expense e
+                LEFT OUTER JOIN ".TB_PREFIX."expense_account ea  
+                    ON (e.expense_account_id = ea.id)
+                LEFT OUTER JOIN ".TB_PREFIX."biller b  
+                    ON (e.biller_id = b.id AND e.domain_id = b.domain_id)
+                LEFT OUTER JOIN ".TB_PREFIX."customers c  
+                    ON (e.customer_id = c.id AND e.domain_id = c.domain_id)
+                LEFT OUTER JOIN ".TB_PREFIX."products p  
+                    ON (e.product_id = p.id AND e.domain_id = p.domain_id)
+                LEFT OUTER JOIN ".TB_PREFIX."invoices i  
+                    ON (e.invoice_id = i.id AND e.domain_id = i.domain_id)
 				WHERE
                     e.domain_id = :domain_id
 					$where
@@ -92,7 +84,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 				$limit";
 	
 	
-	$result = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+	$result = dbQuery($sql, ':domain_id', $domain_id);
 
 	return $result;
 }

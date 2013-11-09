@@ -2,99 +2,97 @@
 
 class expense
 {
+	public $domain_id;
+    
+	public function __construct()
+	{
+		$this->domain_id = domain_id::get($this->domain_id);
+	}
 
-    public static function count()
+    public function count()
     {
 
-        global $db;
-        global $auth_session;
-        
         $sql = "SELECT count(id) as count FROM ".TB_PREFIX."expense WHERE domain_id = :domain_id ORDER BY id";
-        $sth = $db->query($sql,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+        $sth = dbQuery($sql, ':domain_id', $this->domain_id);
 
         return $sth->fetch();
     }
-    public static function get_all()
+    public function get_all()
     {
         
-        global $db;
-        global $auth_session;
-        
         $sql = "SELECT * FROM ".TB_PREFIX."expense WHERE domain_id = :domain_id ORDER BY id";
-        $sth  = $db->query($sql,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+        $sth  = dbQuery($sql,':domain_id',$this->domain_id);
         
         return $sth->fetchAll();
     
     }
 
-    public static function add()
+    public function add()
     {
-        //get customers
-        $add['expense_account_all'] = expenseaccount::get_all();
-        //get customers
-        $add['customer_all'] = customer::get_all();
-        //get billers
-        $add['biller_all'] = biller::get_all();
+        //get expenseaccount
+		$expenseaccountobj = new expenseaccount();
+        $add['expense_account_all'] = $expenseaccountobj->get_all();
+
+        //get customers with domain_id from session by constructor
+		$customerobj = new customer();
+        $add['customer_all'] = $customerobj->get_all();
+
+        //get billers with domain_id from session by constructor
+		$billerobj = new biller();
+        $add['biller_all'] = $billerobj->get_all();
+
         //get invoices
-        $add['invoice_all'] = invoice::get_all();
+		$invoiceobj = new invoice();
+        $add['invoice_all'] = $invoiceobj->get_all();
+
         //get products
-        $add['product_all'] = product::get_all();
+		$productobj = new product();
+        $add['product_all'] = $productobj->get_all();
 
         return $add;
 
     }
-    public static function get($id)
+
+    public function get($id)
     {
-        
-        global $db;
-        global $auth_session;
-        
+
         $sql = "SELECT * FROM ".TB_PREFIX."expense WHERE domain_id = :domain_id and id = :id";
-		/*$sql = "SELECT
-                    *
-				FROM 
-					".TB_PREFIX."expense e
-                    LEFT OUTER JOIN ".TB_PREFIX."expense_item_tax et  
-                        ON (e.id = et.expense_id)
-				WHERE
-                    e.domain_id = :domain_id
-					and e.id = :id
-				";*/
-
-        $sth  = $db->query($sql,':domain_id',$auth_session->domain_id ,':id',$id) or die(htmlsafe(end($dbh->errorInfo())));
-        
-	
-
+        $sth  = dbQuery($sql,':domain_id',$this->domain_id ,':id',$id);
 
         return $sth->fetch();
-    
+
     }
 
-    public static function detail()
+    public function detail()
     {
-        //get customers
-        $detail['expense_account_all'] = expenseaccount::get_all();
-        //get customers
-        $detail['customer'] = customer::get();
+        //get expenseaccount
+		$expenseaccountobj = new expenseaccount();
+        $detail['expense_account_all'] = $expenseaccountobj->get_all();
 
-        $detail['customer_all'] = customer::get_all();
-        //get billers
-        $detail['biller_all'] = biller::get_all();
+        //get customers with domain_id from session by constructor
+		$customerobj = new customer();
+        $detail['customer']     = $customerobj->get();
+        $detail['customer_all'] = $customerobj->get_all();
+
+        //get billers with domain_id from session by constructor
+		$billerobj = new biller();
+        $detail['biller_all'] = $billerobj->get_all();
+
         //get invoices
-        $detail['invoice_all'] = invoice::get_all();
+		$invoiceobj = new invoice();
+        $detail['invoice_all'] = $invoiceobj->get_all();
+
         //get products
-        $detail['product_all'] = product::get_all();
+		$productobj = new product();
+        $detail['product_all'] = $productobj->get_all();
 
         return $detail;
 
     }
 
-    public static function save()
+    public function save()
     {
-
-        global $auth_session;
         global $logger;
-        global $db;
         
         $sql = "INSERT into
             ".TB_PREFIX."expense
@@ -125,7 +123,7 @@ class expense
             )";
 
         dbQuery($sql,
-            ':domain_id',$auth_session->domain_id,	
+            ':domain_id',$this->domain_id,	
             ':amount', $_POST['amount'],
             ':expense_account_id', $_POST['expense_account_id'],
             ':biller_id', $_POST['biller_id'],
@@ -139,16 +137,14 @@ class expense
 	
 
         $logger->log("Exp ITEM tax- last insert ID-".lastInsertId(), Zend_Log::INFO);
-        expense::expense_item_tax(lastInsertId(),$_POST['tax_id'][0],$_POST['amount'],"1","insert");
+        $this->expense_item_tax(lastInsertId(),$_POST['tax_id'][0],$_POST['amount'],"1","insert");
 
         return true;
     }
 
-    public static function update()
+    public function update()
     {
 
-        global $db;
-        global $auth_session;
         
         $sql = "UPDATE
             ".TB_PREFIX."expense
@@ -168,9 +164,9 @@ class expense
                     domain_id = :domain_id
             ";
 
-        $db->query($sql,
+        dbQuery($sql,
             ':id',$_POST['id'],	
-            ':domain_id',$auth_session->domain_id,	
+            ':domain_id',$this->domain_id,	
             ':amount', $_POST['amount'],
             ':expense_account_id', $_POST['expense_account_id'],
             ':biller_id', $_POST['biller_id'],
@@ -182,7 +178,7 @@ class expense
             ':note', $_POST['note']
             );
 
-        expense::expense_item_tax($_POST['id'],$_POST['tax_id'][0],$_POST['amount'],"1","update");
+        $this->expense_item_tax($_POST['id'],$_POST['tax_id'][0],$_POST['amount'],"1","update");
 
         return true;
 
@@ -192,10 +188,9 @@ class expense
     Function: invoice_item_tax
     Purpose: insert/update the multiple taxes per line item into the si_invoice_item_tax table
     */
-    public static function expense_item_tax($expense_id,$line_item_tax_id,$unit_price,$quantity,$action="") {
+    public function expense_item_tax($expense_id,$line_item_tax_id,$unit_price,$quantity,$action="") {
         
         global $logger;
-        global $db;
         $logger->log("Exp ITEM :: Key: ".$key." Value: ".$value, Zend_Log::INFO);
 
         //if editing invoice delete all tax info then insert first then do insert again
@@ -209,7 +204,7 @@ class expense
                                 expense_id = :expense_id";
             $logger->log("Expense item: ".$expense_id." tax lines deleted", Zend_Log::INFO);
 
-            $db->query($sql_delete,':expense_id',$expense_id);
+            dbQuery($sql_delete,':expense_id',$expense_id);
 
 
         }
@@ -249,7 +244,7 @@ class expense
                             :tax_amount
                         )";
 
-                $db->query($sql,
+                dbQuery($sql,
                     ':expense_id', $expense_id,
                     ':tax_id', $tax[tax_id],
                     ':tax_type', $tax[type],
