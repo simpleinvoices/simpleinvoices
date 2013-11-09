@@ -1614,7 +1614,9 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['277']['date'] = "20131008";
 
     $patch['278']['name'] = "Each Invoice Item can have only one instance of each tax";
-    $patch['278']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_item_tax` ADD UNIQUE INDEX `UnqInvTax` (`invoice_item_id`, `tax_id`);";
+//    Patch disabled for old installs with inadequate database integrity
+//    $patch['278']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_item_tax` ADD UNIQUE INDEX `UnqInvTax` (`invoice_item_id`, `tax_id`);";
+    $patch['278']['patch'] = "SELECT 1+1;";
     $patch['278']['date'] = "20131008";
 
     $patch['279']['name'] = "Drop unused superceeded table si_product_matrix if present";
