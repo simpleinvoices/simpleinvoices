@@ -49,7 +49,7 @@
                 <input type="text" class="date-picker" size="10" name="end_date" id="date" value='' />   
             </td>
     </tr>
-    <tr>
+	<tr>
         <th>{$LANG.recur_each}</th>
         <td>
             <input name="recurrence" size="10" class="validate[required]" />
@@ -61,7 +61,7 @@
             </select>
         </td>
     </tr>
-    <tr>
+	<tr>
 		<th>{$LANG.email_biller_after_cron}</th>
 		<td>
              <select name="email_biller" class="validate[required]">

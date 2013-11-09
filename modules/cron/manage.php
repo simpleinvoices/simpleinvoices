@@ -14,14 +14,14 @@
 checkLogin();
 
 	$sql = "SELECT count(*) AS count FROM ".TB_PREFIX."cron WHERE domain_id = :domain_id";
-	$sth = dbQuery($sql, ':domain_id',domain_id::get()) or die(htmlsafe(end($dbh->errorInfo())));
+	$sth = dbQuery($sql, ':domain_id', domain_id::get());
 	$number_of_crons  = $sth->fetch(PDO::FETCH_ASSOC);
 
 //all funky xml - sql stuff done in xml.php
 
 
 //$smarty -> assign("invoices",$invoices);
-$smarty -> assign("number_of_crons",$number_of_crons);
+$smarty -> assign("number_of_crons", $number_of_crons);
 
 $smarty -> assign('pageActive', 'cron');
 $smarty -> assign('active_tab', '#money');

@@ -8,20 +8,22 @@ $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "id" ;
 $rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
 $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 
-//$sql = "SELECT * FROM ".TB_PREFIX."invoices LIMIT $start, $limit";
-$cron = new cron();
-$cron->sort=$sort;
-$crons = $cron->select_all('', $dir, $rp, $page);
-$sth_count_rows = $cron->select_all('count',$dir, $rp, $page);
+//$sql = "SELECT * FROM ".TB_PREFIX."cron LIMIT $start, $limit";
 
+$cron = new cron();
+$cron->sort = $sort;
+$crons = $cron->select_all('', $dir, $rp, $page);
+$sth_count_rows = $cron->select_all('count', $dir, $rp, $page);
+unset($cron);
+
+$count = $sth_count_rows;
 
 $xml ="";
-$count = $sth_count_rows;
 
 	$xml .= "<rows>";
 	$xml .= "<page>$page</page>";
 	$xml .= "<total>$count</total>";
-	
+
 	foreach ($crons as $row) {
 		$row['email_biller_nice'] = $row['email_biller']==1?$LANG['yes']:$LANG['no'];
 		$row['email_customer_nice'] = $row['email_customer']==1?$LANG['yes']:$LANG['no'];
@@ -41,6 +43,7 @@ $count = $sth_count_rows;
 		$xml .= "<cell><![CDATA[".$row['email_customer_nice']."]]></cell>";
 		$xml .= "</row>";		
 	}
+
 	$xml .= "</rows>";
 
 echo $xml;
