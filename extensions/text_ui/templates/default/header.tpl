@@ -22,7 +22,7 @@
 	<script type="text/javascript" src="./include/jquery/jquery.plugins.js"></script>
 	<script type="text/javascript" src="./include/jquery/rte/jquery.rte.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.conf.js"></script>
-	<link rel="stylesheet" type="text/css" href="./templates/default/css/flexigrid.css">
+	<link rel="stylesheet" type="text/css" href="./extensions/text_ui/templates/default/css/flexigrid.css">
 	<link rel="stylesheet" type="text/css" href="./include/jquery/jquery.plugins.css" title="default" media="screen" />
 		<link rel="stylesheet" type="text/css" href="./include/jquery/rte/rte.css" />
 {literal}

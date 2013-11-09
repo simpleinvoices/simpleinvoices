@@ -2,18 +2,19 @@
 
 header("Content-type: text/xml");
 
-//$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
 $dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "DESC" ;
 $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "id" ;
 $rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
 $page = (isset($_GET['page'])) ? $_GET['page'] : "1" ;
 
+$domain_id = domain_id::get();
+
 //SC: Safety checking values that will be directly subbed in
 if (intval($start) != $start) {
 	$start = 0;
 }
-if (intval($limit) != $limit) {
-	$limit = 25;
+if (intval($rp) != $rp) {
+	$rp = 25;
 }
 if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 	$dir = 'DESC';
@@ -28,7 +29,7 @@ $query = $_POST['query'];
 $qtype = $_POST['qtype'];
 
 $where = "";
-if ($query) $where = " WHERE $qtype LIKE '%$query%' ";
+if ($query) $where = " AND $qtype LIKE '%$query%' ";
 
 
 /*Check that the sort field is OK*/
@@ -64,12 +65,14 @@ if ($db_server == 'pgsql') {
 			 p.pref_description AS Type
 		FROM
 			 " . TB_PREFIX . "invoices iv
-			 LEFT JOIN " . TB_PREFIX . "payment ap ON ap.ac_inv_id = iv.id
-			 LEFT JOIN " . TB_PREFIX . "invoice_items ii ON ii.invoice_id = iv.id
-			 LEFT JOIN " . TB_PREFIX . "biller b ON b.id = iv.biller_id
-			 LEFT JOIN " . TB_PREFIX . "customers c ON c.id = iv.customer_id
-			 LEFT JOIN " . TB_PREFIX . "preferences p ON p.pref_id = iv.preference_id
-		$where
+			 LEFT JOIN " . TB_PREFIX . "payment ap ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
+			 LEFT JOIN " . TB_PREFIX . "invoice_items ii ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
+			 LEFT JOIN " . TB_PREFIX . "biller b ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
+			 LEFT JOIN " . TB_PREFIX . "customers c ON (c.id = iv.customer_id AND c.domain_id = iv.domain_id)
+			 LEFT JOIN " . TB_PREFIX . "preferences p ON (p.pref_id = iv.preference_id AND p.domain_id = iv.domain_id)
+		WHERE
+			iv.domain_id = :domain_id
+			$where
 		GROUP BY
 			iv.id, b.name, c.name, date, age, aging, type
 		ORDER BY
@@ -81,37 +84,39 @@ if ($db_server == 'pgsql') {
 		       b.name AS biller,
 		       c.name AS customer,
 		       (SELECT SUM(coalesce(ii.total,  0)) FROM " .
-		TB_PREFIX . "invoice_items ii WHERE ii.invoice_id = iv.id) AS invoice_total,
+		TB_PREFIX . "invoice_items ii WHERE ii.invoice_id = iv.id AND ii.domain_id = :domain_id) AS invoice_total,
 		       (SELECT SUM(coalesce(ac_amount, 0)) FROM " .
-		TB_PREFIX . "payment ap WHERE ap.ac_inv_id = iv.id) AS INV_PAID,
+		TB_PREFIX . "payment ap WHERE ap.ac_inv_id = iv.id AND ap.domain_id = :domain_id) AS INV_PAID,
 		       (SELECT (coalesce(invoice_total,0) - coalesce(INV_PAID,0))) As owing,
 		       DATE_FORMAT(date,'%Y-%m-%d') AS date,
 		       (SELECT IF((owing = 0), 0, DateDiff(now(), date))) AS Age,
-		       (SELECT (CASE   WHEN Age = 0 THEN ''
-		                                       WHEN Age <= 14 THEN '0-14'
-		                                       WHEN Age <= 30 THEN '15-30'
-		                                       WHEN Age <= 60 THEN '31-60'
-		                                      WHEN Age <= 90 THEN '61-90'
-		                                       ELSE '90+'  END)) AS aging,
+		       (SELECT (CASE WHEN Age = 0 THEN ''
+		                     WHEN Age <= 14 THEN '0-14'
+		                     WHEN Age <= 30 THEN '15-30'
+		                     WHEN Age <= 60 THEN '31-60'
+		                     WHEN Age <= 90 THEN '61-90'
+		                     ELSE '90+'  END)) AS aging,
 		       iv.type_id As type_id,
-		       pf.pref_description AS preference
+		       p.pref_description AS preference
 		FROM   " . TB_PREFIX . "invoices iv
-		               LEFT JOIN " . TB_PREFIX . "biller b ON b.id = iv.biller_id
-		               LEFT JOIN " . TB_PREFIX . "customers c ON c.id = iv.customer_id
-		               LEFT JOIN " . TB_PREFIX . "preferences pf ON pf.pref_id = iv.preference_id
-		$where
+		       LEFT JOIN " . TB_PREFIX . "biller b ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
+		       LEFT JOIN " . TB_PREFIX . "customers c ON (c.id = iv.customer_id AND c.domain_id = iv.domain_id)
+		       LEFT JOIN " . TB_PREFIX . "preferences p ON (p.pref_id = iv.preference_id AND p.domain_id = iv.domain_id)
+		WHERE
+			   iv.domain_id = :domain_id
+			   $where
 		ORDER BY
-		$sort $dir
+			$sort $dir
 		$limit";
 }
 
-$sth = dbQuery($sql) or die(end($dbh->errorInfo()));
+$sth = dbQuery($sql, ':domain_id', $domain_id);
 $invoices = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 global $dbh;
 
-$sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."invoices";
-$tth = dbQuery($sqlTotal) or die(end($dbh->errorInfo()));
+$sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id";
+$tth = dbQuery($sqlTotal, ':domain_id', $domain_id);
 $resultCount = $tth->fetch();
 $count = $resultCount[0];
 //echo sql2xml($invoices, $count);
