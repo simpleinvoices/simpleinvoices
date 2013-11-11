@@ -1689,3 +1689,10 @@ PRIMARY KEY ( `domain_id`, `id` )
 	";
     $patch['290']['date']  = "20131109";
 
+    $patch['291']['name']  = "Clipped size of zip_code and credit_card_number fields to realistic values";
+    $patch['291']['patch'] = "
+		ALTER TABLE `".TB_PREFIX."customers` CHANGE `zip_code` `zip_code` VARCHAR(20) NULL,
+		CHANGE `credit_card_number` `credit_card_number` VARCHAR(20) NULL;
+		ALTER TABLE `".TB_PREFIX."biller` CHANGE `zip_code` `zip_code` VARCHAR(20) NULL;
+	";
+    $patch['291']['date']  = "20131111";
