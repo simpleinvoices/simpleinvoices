@@ -15,7 +15,7 @@ $xml ="";
 $extension_dir = './extensions';
 $extension_entries = scandir($extension_dir);
 foreach ($extension_entries as $entry) {
-  	if (is_dir($extension_dir."/".$entry) and ! ereg("^\..*",$entry) ) {	//Skip entries starting with a dot
+  	if (is_dir($extension_dir."/".$entry) and ! preg_match("^/\..*/",$entry) ) {	//Skip entries starting with a dot
 		if (file_exists ($extension_dir."/".$entry."/DESCRIPTION"))
 		{
 			$description = file_get_contents($extension_dir."/".$entry."/DESCRIPTION") ;
