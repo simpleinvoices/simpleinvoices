@@ -126,7 +126,7 @@ class ewaylib {
 	function getVisitorIP(){
 		$ip = $_SERVER["REMOTE_ADDR"];
 		$proxy = $_SERVER["HTTP_X_FORWARDED_FOR"];
-		if(ereg("^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$",$proxy))
+		if(preg_match("^/[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/",$proxy))
 		        $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
 		return $ip;
 	}

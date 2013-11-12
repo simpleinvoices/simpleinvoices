@@ -45,7 +45,7 @@ function get_defined_langs() {
   if ($dh = opendir($dir)) {
   
     while (($lang_dir = readdir($dh)) !== false) {
-      if (! ereg("^[a-z]{2}$|^[a-z]{2}_[A-Z]{2}$", $lang_dir)) {
+      if (! preg_match("^/[a-z]{2}$|^[a-z]{2}_[A-Z]{2}$/", $lang_dir)) {
 		continue;
       }
       
