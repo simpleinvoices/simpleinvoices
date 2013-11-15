@@ -23,16 +23,9 @@ class export
 	function showData($data)
 	{
         
-        if($this->file_name =='')
+        if($this->file_name == '' && $this->module == 'payment')
         {
-            switch ($this->module)
-            {
-                case "payment":
-                {
-                    $this->file_name = 'payment'.$this->id;
-                    break;
-                }
-            }
+           $this->file_name = 'payment' . $this->id;
         }
 
 
