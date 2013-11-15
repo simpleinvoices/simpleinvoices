@@ -166,7 +166,6 @@ class export
 				$smarty -> assign('start_date', $this->start_date);
 				$smarty -> assign('end_date', $this->end_date);
 
-				$smarty -> assign('invoices',$invoices);
 				$smarty -> assign('statement',$statement);
 				$data = $smarty -> fetch(".".$templatePath);
 
