@@ -526,16 +526,16 @@ class invoice {
 
         global $logger;
 
-		if(!empty($domain_id)) $this->domain_id = $domain_id;
-
         $db=new db();
         if ( getNumberOfDonePatches() < '179')
         {
             $sql ="SELECT max(id) AS max FROM ".TB_PREFIX."invoices";
 		    $sth = $db->query($sql);
         } else {
+            if(!empty($domain_id)) $this->domain_id = $domain_id;
+            
             $sql ="SELECT MAX(id) AS max FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id";
-		    $sth = $db->query($sql, ':domain_id', $this->domain_id);
+		$sth = $db->query($sql, ':domain_id', $this->domain_id);
         }
 
         $count = $sth->fetch();
