@@ -23,16 +23,9 @@ class export
 	function showData($data)
 	{
         
-        if($this->file_name =='')
+        if($this->file_name == '' && $this->module == 'payment')
         {
-            switch ($this->module)
-            {
-                case "payment":
-                {
-                    $this->file_name = 'payment'.$this->id;
-                    break;
-                }
-            }
+            $this->file_name = 'payment'.$this->id;
         }
 
 
@@ -166,7 +159,6 @@ class export
 				$smarty -> assign('start_date', $this->start_date);
 				$smarty -> assign('end_date', $this->end_date);
 
-				$smarty -> assign('invoices',$invoices);
 				$smarty -> assign('statement',$statement);
 				$data = $smarty -> fetch(".".$templatePath);
 
